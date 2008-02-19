@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Package xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xmi:id="_svS_YK_DEdyHEor_AUEbZw" name="Package">
+  <packagedElement xmi:type="uml:Class" xmi:id="_wcfp4K_DEdyHEor_AUEbZw" name="MyClass">
+    <generalization xmi:id="_iVsR0K_EEdyHEor_AUEbZw" general="_BBa0wK_EEdyHEor_AUEbZw"/>
+    <ownedAttribute xmi:type="uml:Port" xmi:id="_oPiaEK_EEdyHEor_AUEbZw" name="port1" aggregation="composite"/>
+    <ownedAttribute xmi:type="uml:Port" xmi:id="_vP3CMK_EEdyHEor_AUEbZw" name="port2" aggregation="composite"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_BBa0wK_EEdyHEor_AUEbZw" name="Class">
+    <ownedAttribute xmi:type="uml:Port" xmi:id="_mDOTgK_EEdyHEor_AUEbZw" name="port" clientDependency="_rugbUK_EEdyHEor_AUEbZw" aggregation="composite"/>
+    <ownedOperation xmi:id="_VICkwK_EEdyHEor_AUEbZw" name="operation"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Dependency" xmi:id="_ELm40K_EEdyHEor_AUEbZw" name="dependency"/>
+  <packagedElement xmi:type="uml:Realization" xmi:id="_rugbUK_EEdyHEor_AUEbZw" name="test" supplier="_oPiaEK_EEdyHEor_AUEbZw" client="_mDOTgK_EEdyHEor_AUEbZw"/>
+</uml:Package>

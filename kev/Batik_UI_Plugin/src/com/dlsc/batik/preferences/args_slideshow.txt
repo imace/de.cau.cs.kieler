@@ -1,0 +1,17 @@
+C:\batik-1.5.1>java -jar batik-slideshow.jar
+Options:
+                                 -- : Remaining args are file names
+                         -fl <file>
+                 --file-list <file> : file contains list of images to
+                                      show one per line
+             -ws <width>[,<height>]
+    -window-size <width>[,<height>] : Set the size of slideshow window
+                                      defaults to full screen
+                          -ft <int>
+                 --frame-time <int> : Amount of time in millisecs to
+                                      show each frame.
+                                      Includes transition time.
+                          -tt <int>
+            --transition-time <int> : Amount of time in millisecs to
+                                      transition between frames.
+                             <file> : SVG file to display
