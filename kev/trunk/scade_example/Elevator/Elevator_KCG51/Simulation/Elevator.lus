@@ -1,0 +1,304 @@
+/*$*************** SCADE Translator KCG Version 5.1.0 (build i4)  ****************
+** Command :
+** s2L -model       U:\shared\modelgui\trunk\scade_example\Elevator\Elevator.saofdm
+**         -node Elevator
+**         -lus U:\shared\modelgui\trunk\scade_example\Elevator\Elevator_KCG51\Simulation/Elevator.lus
+** last modification date for U:\shared\modelgui\trunk\scade_example\Elevator\Elevator.saofdm (MM/DD/YYYY): 01/16/2007 14:25:25
+** last modification date for libdigital.saofdm (MM/DD/YYYY): 01/16/2007 14:25:25
+** last modification date for liblinear.saofdm (MM/DD/YYYY): 01/16/2007 14:25:25
+** last modification date for libmath.saofdm (MM/DD/YYYY): 01/16/2007 14:25:25
+** last modification date for libmathadvanced.saofdm (MM/DD/YYYY): 01/16/2007 14:25:25
+** last modification date for libpwlinear.saofdm (MM/DD/YYYY): 01/16/2007 14:25:25
+** last modification date for libverification.saofdm (MM/DD/YYYY): 01/16/2007 14:25:25
+** last modification date for libssm.saofdm (MM/DD/YYYY): 01/16/2007 14:25:25
+** date of generation (MM/DD/YYYY): 01/16/2007 14:24:13
+*****************************************************$*/
+
+type
+/*let type TypeBlock1*/
+    guiControlData = [button_up : bool , button_down : bool , button_alarm : bool] ; 
+    guiDisplayData = [motor_dir : int , alarm : bool , position : int , doorIsOpen : bool] ; 
+/*tel  ; */
+node ClockCounter(Reset : bool) 
+	returns (Count : int) ;
+
+var
+_L1_Elevator : int ;
+_L2_Elevator : int ;
+_L6_Elevator : int ;
+_L7_Elevator : int ;
+_L8_Elevator : int ;
+_L11_Elevator : int ;
+_L13_Elevator : bool ;
+_L16_Elevator : int ;
+let
+/*let equa eq_ClockCounter[ , ]*/
+
+_L2_Elevator = (if _L13_Elevator then (_L16_Elevator) else (_L7_Elevator)) ;
+
+Count = _L1_Elevator ;
+
+_L6_Elevator = pre (_L1_Elevator) ;
+
+_L7_Elevator = _L8_Elevator + _L6_Elevator ;
+
+_L8_Elevator = 1 ;
+
+_L1_Elevator = (_L11_Elevator) -> (_L2_Elevator) ;
+
+_L11_Elevator = 0 ;
+
+_L13_Elevator = Reset ;
+
+_L16_Elevator = 0 ;
+/*tel ;*/
+tel ;/* End of blocks of node :  ClockCounter*/
+
+
+node Controller(ButtonUp : bool ; ButtonDown : bool ; 
+	ButtonAlarm : bool ; Second : bool ; IsUp : bool ; 
+	IsDown : bool) 
+	returns (Move : int ; AlarmLamp : bool ; 
+	OpenDoor : bool) ;
+
+var
+_LE0_Elevator : bool ;
+_LE1_Elevator : bool ;
+_LE2_Elevator : bool ;
+_LE3_Elevator : bool ;
+_LE4_Elevator : bool ;
+_LE5_Elevator : bool ;
+_LE6_Elevator : bool ;
+_LE7_Elevator : bool ;
+_LE8_Elevator : bool ;
+_LE9_Elevator : bool ;
+_LE10_Elevator : bool ;
+_LE11_Elevator : bool ;
+_LE12_Elevator : bool ;
+_LE13_Elevator : bool ;
+_LE14_Elevator : bool ;
+_LE15_Elevator : bool ;
+_LE16_Elevator : bool ;
+_LE17_Elevator : bool ;
+_LE18_Elevator : bool ;
+_LE19_Elevator : bool ;
+_LE20_Elevator : bool ;
+_LE21_Elevator : bool ;
+_LE22_Elevator : bool ;
+_LE23_Elevator : bool ;
+_LE24_Elevator : bool ;
+_LE25_Elevator : bool ;
+_LE26_Elevator : bool ;
+_LE27_Elevator : bool ;
+_LE28_Elevator : bool ;
+_LVF0_Elevator : int ;
+_LE29_Elevator : bool ;
+_LVF2_Elevator : int ;
+_LVF3_Elevator : int ;
+_LVF4_Elevator : int ;
+_LVF5_Elevator : int ;
+_LVF6_Elevator : int ;
+let
+/*let equa Controller[ , ]*/
+
+_LE0_Elevator = ButtonUp ;
+
+_LE1_Elevator = ButtonDown ;
+
+_LE2_Elevator = ButtonAlarm ;
+
+_LE3_Elevator = Second ;
+
+_LE4_Elevator = IsUp ;
+
+_LE5_Elevator = IsDown ;
+
+Move = _LVF5_Elevator ;
+
+AlarmLamp = _LE6_Elevator ;
+
+OpenDoor = _LE7_Elevator ;
+
+_LE8_Elevator = false ;
+
+_LE9_Elevator = (true) -> (pre (_LE8_Elevator)) ;
+
+_LE10_Elevator =  not (_LE9_Elevator) and _LE15_Elevator and _LE3_Elevator ;
+
+_LE11_Elevator = _LE10_Elevator ;
+
+_LE12_Elevator = _LE10_Elevator and _LE29_Elevator ;
+
+_LE13_Elevator =  not (_LE9_Elevator) and _LE4_Elevator and _LE19_Elevator ;
+
+_LE14_Elevator = _LE13_Elevator or ( not (_LE9_Elevator) and _LE15_Elevator and  not (_LE12_Elevator)) ;
+
+_LE15_Elevator = (false) -> (pre (_LE14_Elevator)) ;
+
+_LE16_Elevator = _LE9_Elevator or _LE21_Elevator ;
+
+_LE17_Elevator = _LE0_Elevator and _LE16_Elevator ;
+
+_LE18_Elevator = _LE17_Elevator or ( not (_LE9_Elevator) and  not (_LE4_Elevator) and _LE19_Elevator) ;
+
+_LE19_Elevator = (false) -> (pre (_LE18_Elevator)) ;
+
+_LE20_Elevator =  not (_LE17_Elevator) and _LE16_Elevator ;
+
+_LE21_Elevator = (false) -> (pre (_LE20_Elevator)) ;
+
+_LE6_Elevator = _LE12_Elevator ;
+
+_LE22_Elevator = _LE9_Elevator ;
+
+_LE23_Elevator = _LE17_Elevator ;
+
+_LE24_Elevator = _LE13_Elevator ;
+
+_LE25_Elevator = _LE24_Elevator ;
+
+_LE26_Elevator = _LE13_Elevator ;
+
+_LE27_Elevator = _LE26_Elevator ;
+
+_LE28_Elevator = false ;
+
+_LE7_Elevator = _LE28_Elevator ;
+
+_LVF0_Elevator = (if _LE11_Elevator then ((((0) -> (pre (_LVF6_Elevator))) - 1)) else (((0) -> (pre (_LVF6_Elevator))))) ;
+
+_LE29_Elevator = (if _LE11_Elevator then ((_LVF0_Elevator <= 0)) else (false)) ;
+
+_LVF2_Elevator = (if _LE22_Elevator then (0) else (((0) -> (pre (_LVF5_Elevator))))) ;
+
+_LVF3_Elevator = (if _LE22_Elevator then (0) else (((0) -> (pre (_LVF3_Elevator))))) ;
+
+_LVF4_Elevator = (if _LE23_Elevator then (1) else (_LVF2_Elevator)) ;
+
+_LVF5_Elevator = (if _LE25_Elevator then (0) else (_LVF4_Elevator)) ;
+
+_LVF6_Elevator = (if _LE27_Elevator then (3) else (_LVF0_Elevator)) ;
+/*tel ;*/
+tel ;/* End of blocks of node :  Controller*/
+
+
+node Elevator(guiControlData : guiControlData) 
+	returns (guDisplayData : guiDisplayData) ;
+
+var
+_L5_Elevator : int ;
+_L9_Elevator : int ;
+_L15_Elevator : bool ;
+_L16_Elevator : bool ;
+_L17_Elevator : bool ;
+_L18_Elevator : int ;
+_L19_Elevator : int ;
+_L20_Elevator : bool ;
+_L22_Elevator : int ;
+_L23_Elevator : bool ;
+_L24_Elevator : bool ;
+_L25_Elevator : guiControlData ;
+_L28_Elevator : bool ;
+_L27_Elevator : bool ;
+_L26_Elevator : bool ;
+_L33_Elevator : guiDisplayData ;
+let
+/*let equa eq_Elevator_1[ , ]*/
+
+_L5_Elevator , _L20_Elevator , _L23_Elevator = Controller(_L26_Elevator , _L27_Elevator , _L28_Elevator , _L15_Elevator , _L16_Elevator , _L17_Elevator) /*! occ "1" */  ;
+
+_L9_Elevator = Position(_L5_Elevator) /*! occ "1" */  ;
+
+_L15_Elevator = Second() /*! occ "1" */  ;
+
+_L16_Elevator = _L19_Elevator = _L22_Elevator ;
+
+_L17_Elevator = _L18_Elevator = _L22_Elevator ;
+
+_L18_Elevator = 0 ;
+
+_L19_Elevator = 100 ;
+
+_L22_Elevator = pre (_L9_Elevator) ;
+
+_L24_Elevator = KeepDoorOpen(_L15_Elevator , _L23_Elevator , 30) /*! occ "1" */  ;
+
+guDisplayData = _L33_Elevator ;
+
+_L25_Elevator = guiControlData ;
+
+_L26_Elevator , _L27_Elevator , _L28_Elevator = _FROM_guiControlData(_L25_Elevator) /*! occ "1" */  ;
+
+_L33_Elevator = _TO_guiDisplayData(_L5_Elevator , _L20_Elevator , _L9_Elevator , _L24_Elevator) /*! occ "1" */  ;
+/*tel ;*/
+tel ;/* End of blocks of node :  Elevator*/
+
+
+node KeepDoorOpen(Second : bool ; OpenDoor : bool ; /*hidden */Delay : int) 
+	returns (DoorIsOpen : bool) ;
+
+var
+_L1_Elevator : bool ;
+_L2_Elevator : bool ;
+_L17_Elevator : bool ;
+let
+/*let equa eq_KeepDoorOpen_1[ , ]*/
+
+_L1_Elevator = Second ;
+
+_L2_Elevator = OpenDoor ;
+
+DoorIsOpen = _L17_Elevator ;
+
+_L17_Elevator = _L1_Elevator and _L2_Elevator ;
+/*tel ;*/
+tel ;/* End of blocks of node :  KeepDoorOpen*/
+
+
+node Position(Motor : int) 
+	returns (Position : int) ;
+
+var
+_L1_Elevator : int ;
+_L2_Elevator : int ;
+let
+/*let equa eq_Position_1[ , ]*/
+
+_L1_Elevator = Motor ;
+
+Position = _L2_Elevator ;
+
+_L2_Elevator = 50 ;
+/*tel ;*/
+tel ;/* End of blocks of node :  Position*/
+
+
+node Second() 
+	returns (Second : bool) ;
+
+var
+_L2_Elevator : int ;
+_L3_Elevator : bool ;
+_L4_Elevator : int ;
+_L5_Elevator : bool ;
+let
+/*let equa eq_Second_1[ , ]*/
+
+Second = _L3_Elevator ;
+
+_L2_Elevator = ClockCounter(_L5_Elevator) /*! occ "1" */  ;
+
+_L3_Elevator = _L2_Elevator = _L4_Elevator ;
+
+_L4_Elevator = 5 ;
+
+_L5_Elevator = pre (_L3_Elevator) ;
+/*tel ;*/
+tel ;/* End of blocks of node :  Second*/
+
+
+/*$*************** SCADE Translator KCG Version 5.1.0 (build i4)  ****************
+** End of file U:\shared\modelgui\trunk\scade_example\Elevator\Elevator_KCG51\Simulation/Elevator.lus
+** End of generation (MM/DD/YYYY): 01/16/2007 14:24:13
+*****************************************************$*/
+

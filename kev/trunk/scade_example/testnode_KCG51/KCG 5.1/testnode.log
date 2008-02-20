@@ -1,0 +1,15 @@
+------- Start (Thursday, 11 January 2007, 17:45:53)  ------
+-------- Command line ------
+"C:/Programme/Esterel Technologies/Scade51/bin/l4simKal51_bin.exe" -file scade_example.lus -node testnode -noexp @ALL@ -noassert -const -bitwise -split -no_copy_mem
+============ instance graph ==============
+root testnode (00379F60) (1 /= call(s))
+   6 local(s): boolean_val,float_val,integer_val,_L20_testnode,_L0_testnode,_L1_testnode
+   + [1] B<00E45ED8> <_C_1_Counter_0> unexp Counter_0 (00379B70) {_C_1_Counter_0}
+      3 local(s): _L45_testnode,_L0_testnode,_L1_testnode
+==========================
+0: guiControlData : guiControlData (scade_example.lus:46)
+1: guiDisplayData : guiDisplayData (scade_example.lus:47)
+2: Counter_0 1/Incr : _C_1_Counter_0.Incr (scade_example.lus:31)
+3: Counter_0 1/Reset : _C_1_Counter_0.Reset (scade_example.lus:31)
+4: Counter_0 1/Count : _C_1_Counter_0.Count (scade_example.lus:32)
+-------- End (Thursday, 11 January 2007, 17:46:02) ---------

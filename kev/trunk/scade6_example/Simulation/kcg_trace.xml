@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- $************* KCG Version 6.0.0 FCS a (build i3) *******************************
+** Command:  s2c  -target C -O 0 -debug -probes -node simulation::Simulation -target_dir U:/shared/modelgui/trunk/scade6_example/Simulation U:/shared/modelgui/trunk/scade6_example/Simulation/Simulation.scade
+** Generation date: 2007-09-21T13:34:21
+*************************************************************$ -->
+<Model date="2007-09-21T13:34:21" commandLine=" s2c  -target C -O 0 -debug -probes -node simulation::Simulation -target_dir U:/shared/modelgui/trunk/scade6_example/Simulation U:/shared/modelgui/trunk/scade6_example/Simulation/Simulation.scade">
+<StructType targetName="struct_2">
+  <Field scadeName="direction"  scadeType="int"  targetName="direction"  targetType="kcg_int"/>
+  <Field scadeName="alarm"  scadeType="bool"  targetName="alarm"  targetType="kcg_bool"/>
+  <Field scadeName="position"  scadeType="int"  targetName="position"  targetType="kcg_int"/>
+  <Field scadeName="doorClosed"  scadeType="bool"  targetName="doorClosed"  targetType="kcg_bool"/>
+</StructType>
+<StructType targetName="struct_1">
+  <Field scadeName="buttonUp"  scadeType="bool"  targetName="buttonUp"  targetType="kcg_bool"/>
+  <Field scadeName="buttonDown"  scadeType="bool"  targetName="buttonDown"  targetType="kcg_bool"/>
+  <Field scadeName="buttonAlarm"  scadeType="bool"  targetName="buttonAlarm"  targetType="kcg_bool"/>
+</StructType>
+<PredefType scadeName="char"  targetName="kcg_char"/>
+<PredefType scadeName="bool"  targetName="kcg_bool"/>
+<PredefType scadeName="real"  targetName="kcg_real"/>
+<PredefType scadeName="int"  targetName="kcg_int"/>
+<Package scadeName="elevator">
+  <NoExpNode scadeName="elevator"  targetCycleFct="elevator_elevator"  targetInitFct="elevator_reset_elevator"  headerFile="elevator_elevator.h">
+    <OutCtxType targetName="outC_elevator_elevator"/>
+    <StateVector targetName="elevator_SV_elevator"/>
+    <Input scadeName="controlData"  scadeType="elevator::ControlDataType"  targetName="controlData"  targetType="ControlDataType_elevator"/>
+    <Output scadeName="out_displayData"  scadeType="elevator::DisplayDataType"  targetName="out_displayData"  targetType="DisplayDataType_elevator"/>
+    <Local scadeName="_L40"  scadeType="bool"  targetName="_L40"  targetType="kcg_bool"  inCtx="true"/>
+    <Local scadeName="_L39"  scadeType="bool"  targetName="_L39"  targetType="kcg_bool"  inCtx="true"/>
+    <Local scadeName="_L34"  scadeType="int"  targetName="_L34"  targetType="kcg_int"  inCtx="true"/>
+    <Local scadeName="_L33"  scadeType="int"  targetName="_L33"  targetType="kcg_int"  inCtx="true"/>
+    <Local scadeName="_L32"  scadeType="int"  targetName="_L32"  targetType="kcg_int"  inCtx="true"/>
+    <Local scadeName="_L31"  scadeType="bool"  targetName="_L31"  targetType="kcg_bool"  inCtx="true"/>
+    <Local scadeName="_L30"  scadeType="bool"  targetName="_L30"  targetType="kcg_bool"  inCtx="true"/>
+    <Local scadeName="_L29"  scadeType="bool"  targetName="_L29"  targetType="kcg_bool"  inCtx="true"/>
+    <Local scadeName="_L28"  scadeType="bool"  targetName="_L28"  targetType="kcg_bool"  inCtx="true"/>
+    <Local scadeName="_L27"  scadeType="bool"  targetName="_L27"  targetType="kcg_bool"  inCtx="true"/>
+    <Local scadeName="_L22"  scadeType="bool"  targetName="_L22"  targetType="kcg_bool"  inCtx="true"/>
+    <Local scadeName="_L20"  scadeType="int"  targetName="_L20"  targetType="kcg_int"  inCtx="true"/>
+    <Local scadeName="_L19"  scadeType="int"  targetName="_L19"  targetType="kcg_int"  inCtx="true"/>
+    <Local scadeName="_L18"  scadeType="bool"  targetName="_L18"  targetType="kcg_bool"  inCtx="true"/>
+    <Local scadeName="_L17"  scadeType="bool"  targetName="_L17"  targetType="kcg_bool"  inCtx="true"/>
+    <Local scadeName="_L15"  scadeType="int"  targetName="_L15"  targetType="kcg_int"  inCtx="true"/>
+    <Local scadeName="_L14"  scadeType="int"  targetName="_L14"  targetType="kcg_int"  inCtx="true"/>
+    <Local scadeName="_L13"  scadeType="int"  targetName="_L13"  targetType="kcg_int"  inCtx="true"/>
+    <Local scadeName="_L12"  scadeType="int"  targetName="_L12"  targetType="kcg_int"  inCtx="true"/>
+    <Local scadeName="_L11"  scadeType="int"  targetName="_L11"  targetType="kcg_int"  inCtx="true"/>
+    <Local scadeName="_L10"  scadeType="int"  targetName="_L10"  targetType="kcg_int"  inCtx="true"/>
+    <Local scadeName="_L8"  scadeType="int"  targetName="_L8"  targetType="kcg_int"  inCtx="true"/>
+    <Local scadeName="_L7"  scadeType="int"  targetName="_L7"  targetType="kcg_int"  inCtx="true"/>
+    <Local scadeName="_L6"  scadeType="int"  targetName="_L6"  targetType="kcg_int"  inCtx="true"/>
+    <Local scadeName="_L4"  scadeType="bool"  targetName="_L4"  targetType="kcg_bool"  inCtx="true"/>
+    <Local scadeName="_L2"  scadeType="elevator::DisplayDataType"  targetName="_L2"  targetType="DisplayDataType_elevator"  inCtx="true"/>
+    <Local scadeName="_L1"  scadeType="elevator::ControlDataType"  targetName="_L1"  targetType="ControlDataType_elevator"  inCtx="true"/>
+    <Local scadeName="alarm"  scadeType="bool"  targetName="alarm"  targetType="kcg_bool"  inCtx="true"/>
+    <Local scadeName="direction"  scadeType="int"  targetName="direction"  targetType="kcg_int"  inCtx="true"/>
+    <Local scadeName="buttonDown"  scadeType="bool"  targetName="buttonDown"  targetType="kcg_bool"  inCtx="true"/>
+    <Local scadeName="buttonUp"  scadeType="bool"  targetName="buttonUp"  targetType="kcg_bool"  inCtx="true"/>
+    <Local scadeName="_L16"  scadeType="int"  targetName="_L16"  targetType="kcg_int"  inCtx="true"/>
+    <NodeInstance scadeName="pwlinear::Counter"  refName="Counter_int_pwlinear">
+      <OutCtxVar targetName="Context_Counter_int"/>
+    </NodeInstance>
+    <NodeInstance scadeName="digital::RisingEdgeRetrigger"  refName="RisingEdgeRetrigger_digital">
+      <OutCtxVar targetName="Context_RisingEdgeRetrigger"/>
+    </NodeInstance>
+  </NoExpNode>
+  <Constant scadeName="POSITION_UP"  scadeType="int"  targetName="POSITION_UP_elevator"  targetType="kcg_int"/>
+  <Constant scadeName="DIR_NONE"  scadeType="int"  targetName="DIR_NONE_elevator"  targetType="kcg_int"/>
+  <Constant scadeName="DIR_UP"  scadeType="int"  targetName="DIR_UP_elevator"  targetType="kcg_int"/>
+  <Constant scadeName="DIR_DOWN"  scadeType="int"  targetName="DIR_DOWN_elevator"  targetType="kcg_int"/>
+  <Constant scadeName="POSITION_DOWN"  scadeType="int"  targetName="POSITION_DOWN_elevator"  targetType="kcg_int"/>
+  <NamedType scadeName="DisplayDataType"  refType="struct_2"  targetName="DisplayDataType_elevator"/>
+  <NamedType scadeName="ControlDataType"  refType="struct_1"  targetName="ControlDataType_elevator"/>
+</Package>
+<Package scadeName="simulation">
+  <RootNode scadeName="Simulation"  targetCycleFct="Simulation_simulation"  targetInitFct="Simulation_reset_simulation"  headerFile="Simulation_simulation.h">
+    <InCtxType targetName="inC_Simulation_simulation"/>
+    <OutCtxType targetName="outC_Simulation_simulation"/>
+    <StateVector targetName="Simulation_SV_simulation"/>
+    <Input scadeName="controlData"  scadeType="elevator::ControlDataType"  targetName="controlData"  targetType="ControlDataType_elevator"/>
+    <Output scadeName="displayData"  scadeType="elevator::DisplayDataType"  targetName="displayData"  targetType="DisplayDataType_elevator"/>
+    <Local scadeName="_L3"  scadeType="elevator::DisplayDataType"  targetName="_L3"  targetType="DisplayDataType_elevator"  inCtx="true"/>
+    <Local scadeName="_L2"  scadeType="elevator::ControlDataType"  targetName="_L2"  targetType="ControlDataType_elevator"  inCtx="true"/>
+    <NodeInstance scadeName="elevator::elevator"  refName="elevator_elevator">
+      <OutCtxVar targetName="Context_elevator"/>
+    </NodeInstance>
+  </RootNode>
+</Package>
+<Package scadeName="pwlinear">
+  <NoExpNode scadeName="Counter"  targetCycleFct="Counter_int_pwlinear"  targetInitFct="Counter_int_reset_pwlinear"  headerFile="Counter_int_pwlinear.h">
+    <OutCtxType targetName="outC_Counter_int_pwlinear"/>
+    <StateVector targetName="Counter_int_SV_pwlinear"/>
+    <Input scadeName="Incr"  scadeType="int"  targetName="Incr"  targetType="kcg_int"/>
+    <Input scadeName="Reset"  scadeType="bool"  targetName="Reset"  targetType="kcg_bool"/>
+    <Output scadeName="Count"  scadeType="int"  targetName="Count"  targetType="kcg_int"/>
+    <Local scadeName="_L46"  scadeType="int"  targetName="_L46"  targetType="kcg_int"  inCtx="true"/>
+    <Local scadeName="_L18"  scadeType="int"  targetName="_L18"  targetType="kcg_int"  inCtx="true"/>
+    <Local scadeName="_L4"  scadeType="int"  targetName="_L4"  targetType="kcg_int"  inCtx="true"/>
+    <Local scadeName="_L3"  scadeType="bool"  targetName="_L3"  targetType="kcg_bool"  inCtx="true"/>
+    <Local scadeName="_L2"  scadeType="int"  targetName="_L2"  targetType="kcg_int"  inCtx="true"/>
+    <Local scadeName="_L9"  scadeType="int"  targetName="_L9"  targetType="kcg_int"  inCtx="true"/>
+  </NoExpNode>
+</Package>
+<Package scadeName="digital">
+  <NoExpNode scadeName="count_down"  targetCycleFct="count_down_digital"  targetInitFct="count_down_reset_digital"  headerFile="count_down_digital.h">
+    <OutCtxType targetName="outC_count_down_digital"/>
+    <StateVector targetName="count_down_SV_digital"/>
+    <Input scadeName="Reset"  scadeType="bool"  targetName="Reset"  targetType="kcg_bool"/>
+    <Input scadeName="N"  scadeType="int"  targetName="N"  targetType="kcg_int"/>
+    <Output scadeName="cpt"  scadeType="int"  targetName="cpt"  targetType="kcg_int"/>
+    <Local scadeName="_L13"  scadeType="int"  targetName="_L13"  targetType="kcg_int"  inCtx="true"/>
+    <Local scadeName="_L8"  scadeType="int"  targetName="_L8"  targetType="kcg_int"  inCtx="true"/>
+    <Local scadeName="_L7"  scadeType="int"  targetName="_L7"  targetType="kcg_int"  inCtx="true"/>
+    <Local scadeName="_L3"  scadeType="int"  targetName="_L3"  targetType="kcg_int"  inCtx="true"/>
+    <Local scadeName="_L2"  scadeType="int"  targetName="_L2"  targetType="kcg_int"  inCtx="true"/>
+    <Local scadeName="_L1"  scadeType="bool"  targetName="_L1"  targetType="kcg_bool"  inCtx="true"/>
+    <Local scadeName="_L4"  scadeType="int"  targetName="_L4"  targetType="kcg_int"  inCtx="true"/>
+  </NoExpNode>
+  <NoExpNode scadeName="RisingEdgeRetrigger"  targetCycleFct="RisingEdgeRetrigger_digital"  targetInitFct="RisingEdgeRetrigger_reset_digit"  headerFile="RisingEdgeRetrigger_digital.h">
+    <OutCtxType targetName="outC_RisingEdgeRetrigger_digita"/>
+    <StateVector targetName="RisingEdgeRetrigger_SV_digital"/>
+    <Input scadeName="RER_Input"  scadeType="bool"  targetName="RER_Input"  targetType="kcg_bool"/>
+    <Input scadeName="NumberOfCycle"  scadeType="int"  targetName="NumberOfCycle"  targetType="kcg_int"/>
+    <Output scadeName="RER_Output"  scadeType="bool"  targetName="RER_Output"  targetType="kcg_bool"/>
+    <Local scadeName="_L50"  scadeType="int"  targetName="_L50"  targetType="kcg_int"  inCtx="true"/>
+    <Local scadeName="_L47"  scadeType="bool"  targetName="_L47"  targetType="kcg_bool"  inCtx="true"/>
+    <Local scadeName="_L46"  scadeType="bool"  targetName="_L46"  targetType="kcg_bool"  inCtx="true"/>
+    <Local scadeName="_L35"  scadeType="bool"  targetName="_L35"  targetType="kcg_bool"  inCtx="true"/>
+    <Local scadeName="_L36"  scadeType="bool"  targetName="_L36"  targetType="kcg_bool"  inCtx="true"/>
+    <Local scadeName="_L38"  scadeType="bool"  targetName="_L38"  targetType="kcg_bool"  inCtx="true"/>
+    <Local scadeName="_L39"  scadeType="bool"  targetName="_L39"  targetType="kcg_bool"  inCtx="true"/>
+    <Local scadeName="_L41"  scadeType="int"  targetName="_L41"  targetType="kcg_int"  inCtx="true"/>
+    <Local scadeName="_L44"  scadeType="int"  targetName="_L44"  targetType="kcg_int"  inCtx="true"/>
+    <Local scadeName="_L16"  scadeType="bool"  targetName="_L16"  targetType="kcg_bool"  inCtx="true"/>
+    <Local scadeName="_L14"  scadeType="bool"  targetName="_L14"  targetType="kcg_bool"  inCtx="true"/>
+    <Local scadeName="_L13"  scadeType="bool"  targetName="_L13"  targetType="kcg_bool"  inCtx="true"/>
+    <Local scadeName="_L48"  scadeType="int"  targetName="_L48"  targetType="kcg_int"  inCtx="true"/>
+    <Local scadeName="_L43"  scadeType="bool"  targetName="_L43"  targetType="kcg_bool"  inCtx="true"/>
+    <Local scadeName="_L31"  scadeType="bool"  targetName="_L31"  targetType="kcg_bool"  inCtx="true"/>
+    <NodeInstance scadeName="digital::count_down"  refName="count_down_digital">
+      <OutCtxVar targetName="Context_count_down"/>
+    </NodeInstance>
+  </NoExpNode>
+</Package>
+</Model>
+<!-- $************* KCG Version 6.0.0 FCS a (build i3) *******************************
+** kcg_trace.xml
+** Generation date: 2007-09-21T13:34:21
+*************************************************************$ -->

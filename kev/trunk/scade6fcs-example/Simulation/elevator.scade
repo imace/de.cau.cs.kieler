@@ -1,0 +1,27 @@
+package example
+   type
+      input = {button_up : bool};
+      output = {position : int};
+
+node elevator(
+   input : example::input)
+returns (
+   output : example::output)
+var
+   _L1 : example::input;
+   _L2 : bool;
+   _L3 : example::output;
+   _L4 : int;
+   _L5 : int;
+let
+   _L1 = input;
+   output = _L3;
+   _L2 = (flatten example::input)(_L1);
+   _L3 = (make example::output)(_L5);
+   _L4 = 30;
+   _ = _L2;
+   _L5 = fby(_L4; 1; 30);
+tel
+
+   end;
+
