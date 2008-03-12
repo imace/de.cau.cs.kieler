@@ -24,11 +24,11 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
     }
 
     protected void makeActions(IWorkbenchWindow window) {
-    	registerAsGlobal(ActionFactory.NEW_WIZARD_DROP_DOWN.create(window));
-		registerAsGlobal(ActionFactory.SAVE.create(window));
-		registerAsGlobal(ActionFactory.SAVE_AS.create(window));
+ //   	registerAsGlobal(ActionFactory.NEW_WIZARD_DROP_DOWN.create(window));
+//		registerAsGlobal(ActionFactory.SAVE.create(window));
+//		registerAsGlobal(ActionFactory.SAVE_AS.create(window));
 		registerAsGlobal(ActionFactory.ABOUT.create(window));
-		registerAsGlobal(ActionFactory.SAVE_ALL.create(window));
+//		registerAsGlobal(ActionFactory.SAVE_ALL.create(window));
 		registerAsGlobal(ActionFactory.UNDO.create(window));
 		registerAsGlobal(ActionFactory.REDO.create(window));
 		registerAsGlobal(ActionFactory.CUT.create(window));
@@ -69,21 +69,14 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
 	 */
 	private MenuManager createFileMenu() {
 		MenuManager menu = new MenuManager("&File", IWorkbenchActionConstants.M_FILE);
-		menu.add(new GroupMarker(IWorkbenchActionConstants.FILE_START));
+//		menu.add(new GroupMarker(IWorkbenchActionConstants.FILE_START));
 		
-		menu.add(getAction(ActionFactory.NEW_WIZARD_DROP_DOWN.getId()));
-		menu.add(new GroupMarker(IWorkbenchActionConstants.NEW_EXT));
-//		menu.add(getAction(ActionFactory.CLOSE.getId()));
-//		menu.add(getAction(ActionFactory.CLOSE_ALL.getId()));
+//		menu.add(getAction(ActionFactory.NEW_WIZARD_DROP_DOWN.getId()));
+//		menu.add(new GroupMarker(IWorkbenchActionConstants.NEW_EXT));
 
 		menu.add(new GroupMarker(IWorkbenchActionConstants.CLOSE_EXT));
 		menu.add(new Separator());
-//		menu.add(getAction(ActionFactory.SAVE.getId()));
-//		menu.add(getAction(ActionFactory.SAVE_AS.getId()));
-//		menu.add(getAction(ActionFactory.SAVE_ALL.getId()));
 
-//		menu.add(getAction(ActionFactory.REVERT.getId()));
-//		menu.add(ContributionItemFactory.REOPEN_EDITORS.create(getActionBarConfigurer().getWindowConfigurer().getWindow()));
 		menu.add(new GroupMarker(IWorkbenchActionConstants.MRU));
 		menu.add(new Separator());
 		menu.add(getAction(ActionFactory.QUIT.getId()));

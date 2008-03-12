@@ -3,11 +3,13 @@ Bundle-ManifestVersion: 2
 Bundle-Name: KIEL Environment Visualization Application
 Bundle-SymbolicName: edu.unikiel.rtsys.kieler.kev.application; singleton:=true
 Bundle-Version: 1.0.0
-Bundle-Activator: edu.unikiel.rtsys.kieler.kev.application.Activator
+Bundle-Activator: edu.unikiel.rtsys.kieler.kev.application.KevApplicationPlugin
 Bundle-Vendor: Christian-Albrechts-Universität zu Kiel
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  edu.unikiel.rtsys.kieler.kev;bundle-version="1.0.0",
- edu.unikiel.rtsys.kieler.kev.extension.elevator;bundle-version="1.0.0"
+ edu.unikiel.rtsys.kieler.kev.extension.elevator;bundle-version="1.0.0",
+ edu.unikiel.rtsys.kieler.kev.extension.empty;bundle-version="1.0.0",
+ org.apache.batik.swing;bundle-version="1.6.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Eclipse-LazyStart: true
