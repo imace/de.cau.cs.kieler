@@ -12,12 +12,11 @@ import org.apache.batik.dom.svg.SVGOMTransform;
 import org.apache.batik.swing.JSVGCanvas;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import org.w3c.dom.svg.SVGGElement;
 import org.w3c.dom.svg.SVGMatrix;
 import org.w3c.dom.svg.SVGPathElement;
 import org.w3c.dom.svg.SVGPoint;
+import org.w3c.dom.svg.SVGRect;
 import org.w3c.dom.svg.SVGTransform;
-import org.w3c.dom.svg.SVGTransformList;
 
 import edu.unikiel.rtsys.kieler.kev.animation.mapping.Interval;
 import edu.unikiel.rtsys.kieler.kev.helpers.Tools;
@@ -74,7 +73,9 @@ public class MovePath extends Animation {
 		this.orientAngle = orientAngle;
 		//System.out.println("Start angle: " + (this.getAngle() - orientAngle));
 		lastAngle = this.getAngle() - orientAngle;
-		initialPosition = new SVGOMPoint(((SVGGraphicsElement)getElement()).getBBox().getX(), ((SVGGraphicsElement)getElement()).getBBox().getY());
+		SVGRect rect = ((SVGGraphicsElement)element).getBBox();
+		float x = rect.getX(); float y = rect.getY();
+		initialPosition = new SVGOMPoint(x,y);
 		try {
 			if (anchorPoint == null) {
 				// if no anchor-point attribute was parsed, just calculate

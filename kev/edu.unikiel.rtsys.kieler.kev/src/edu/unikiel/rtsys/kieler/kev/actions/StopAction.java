@@ -6,17 +6,14 @@ import edu.unikiel.rtsys.kieler.kev.animation.AnimationManager;
 
 public class StopAction extends Action {
 	
-	private AnimationManager animationManager;
-	
-	public StopAction(AnimationManager animationManager) {
+	public StopAction() {
 		this.setText("Stop");
 		this.setToolTipText("Stop animation run");
 		this.setImageDescriptor(edu.unikiel.rtsys.kieler.kev.Activator.getImageDescriptor("icons/media-playback-stop-32.png"));
-		this.animationManager = animationManager;
 	}
 	
 	@Override
 	public void run() {
-		animationManager.stop();
+		AnimationManager.getInstance().stop();
 	}
 }

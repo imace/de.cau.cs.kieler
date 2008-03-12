@@ -5,9 +5,10 @@ import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Panel;
 import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Locale;
 
 import javax.swing.JLabel;
@@ -24,6 +25,7 @@ import org.apache.batik.swing.gvt.GVTTreeRendererAdapter;
 import org.apache.batik.swing.gvt.GVTTreeRendererEvent;
 import org.apache.batik.swing.svg.GVTTreeBuilderAdapter;
 import org.apache.batik.swing.svg.GVTTreeBuilderEvent;
+import org.apache.batik.swing.svg.JSVGComponent;
 import org.apache.batik.swing.svg.SVGDocumentLoaderAdapter;
 import org.apache.batik.swing.svg.SVGDocumentLoaderEvent;
 import org.apache.batik.swing.svg.SVGUserAgent;
@@ -59,6 +61,8 @@ import com.dlsc.batik.viewer.BatikUIPlugin;
 import com.dlsc.batik.viewer.EclipseJSVGCanvas;
 import com.dlsc.batik.viewer.Messages;
 
+import edu.unikiel.rtsys.kieler.kev.helpers.Tools;
+
 public class EnvironmentComposite extends Composite implements ISelectionListener {
 
 	private JSVGCanvas svgCanvas = null;
@@ -67,6 +71,7 @@ public class EnvironmentComposite extends Composite implements ISelectionListene
 	private Shell shell;
 	private IFile svgFile;
 	private IProject svgProject;
+	private URI svgURI; // required if RCP does not support IFiles
 	
 	private SVGResourceChangeListener updater;
 	private JLabel statusLabel = new JLabel("Status");
@@ -84,7 +89,6 @@ public class EnvironmentComposite extends Composite implements ISelectionListene
 		shell = parent.getShell();
 		
 		parent.setLayout(new FillLayout());
-		
 		statusLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		statusLabel.setBackground(java.awt.Color.BLACK);
 		statusLabel.setForeground(java.awt.Color.WHITE);
@@ -109,6 +113,16 @@ public class EnvironmentComposite extends Composite implements ISelectionListene
 			userAgent = new MyUserAgent();
 			svgCanvas = new EclipseJSVGCanvas(userAgent, true, true);
 			svgCanvas.setLayout(new BorderLayout());
+			
+			// taken from original modelgui
+			svgCanvas.setDocumentState(JSVGComponent.ALWAYS_DYNAMIC);
+			svgCanvas.setDoubleBufferedRendering(false);
+			svgCanvas.setDisableInteractions(true);
+			// svgCanvas.enableInputMethods(false);
+			//this.canvas.setAnimationLimitingCPU(0.5f);
+			// svgCanvas.setDoubleBuffered(true);
+
+			
 			  
 			// Set the JSVGCanvas listeners.
 			svgCanvas.addSVGDocumentLoaderListener(new SVGDocumentLoaderAdapter() {
@@ -178,6 +192,7 @@ public class EnvironmentComposite extends Composite implements ISelectionListene
 	    try {
 	        URL url = path.toFile().toURL();
 	        setSVGFile(url);
+	        this.svgURI = path.toFile().toURI();
 	    } catch (MalformedURLException e) {
 	        e.printStackTrace();
 	    }
@@ -186,10 +201,16 @@ public class EnvironmentComposite extends Composite implements ISelectionListene
 	public void setSVGFile(IFile f) {
 		svgFile = f;
 		svgProject = f.getProject();
+		this.svgURI = f.getLocationURI();
 		paintSVGFile();
 	}
 	
 	public void setSVGFile(URL url) {
+		try {
+			this.svgURI = url.toURI();
+		} catch (URISyntaxException e) {
+			Tools.showDialog("Error converting URL "+url+" to URI when trying to load svg file.", e);
+		}
 		svgCanvas.loadSVGDocument(url.toExternalForm());
 	}
 	
@@ -198,12 +219,19 @@ public class EnvironmentComposite extends Composite implements ISelectionListene
 			if (svgFile != null) {
 				URL url = svgFile.getLocation().toFile().toURL();
 				svgCanvas.loadSVGDocument(url.toExternalForm());
+			}else if(svgURI != null){
+				svgCanvas.loadSVGDocument(svgURI.toURL().toExternalForm());
 			}
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
 	}
 	
+	/**
+	 * Callback of ISelectionListener that listens on selection of svg-files
+	 * in the file navigator/project explorer. Will load the svg file from the
+	 * selected IFile. 
+	 */
 	public void selectionChanged(IWorkbenchPart part, ISelection s) {
 		if (s instanceof IStructuredSelection) {
 			IStructuredSelection ss = (IStructuredSelection) s;
@@ -625,7 +653,9 @@ public class EnvironmentComposite extends Composite implements ISelectionListene
 		return svgCanvas;
 	}
 
-	public IFile getSvgFile() {
-		return svgFile;
+	public URI getSvgFile() throws URISyntaxException {
+		if(svgURI == null)
+			throw new URISyntaxException("null","No URI available: "+svgURI);
+		return svgURI;
 	}
 }

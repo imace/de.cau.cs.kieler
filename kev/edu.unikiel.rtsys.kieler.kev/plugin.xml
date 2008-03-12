@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.2"?>
 <plugin>
+   <extension-point id="edu.unikiel.rtsys.kieler.kev.data" name="Data Interface Controller" schema="schema/edu.unikiel.rtsys.kieler.kev.data.exsd"/>
+   <extension-point id="edu.unikiel.rtsys.kieler.kev.image" name="KEV predefined example image" schema="schema/edu.unikiel.rtsys.kieler.kev.image.exsd"/>
 
    <extension
          point="org.eclipse.ui.views">
@@ -33,6 +35,32 @@
       <contexts
             file="contexts.xml">
       </contexts>
+   </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            class="edu.unikiel.rtsys.kieler.kev.ui.KevPreferencePage"
+            id="edu.unikiel.rtsys.kieler.kev.PreferencePage"
+            name="KEV Setup">
+      </page>
+   </extension>
+   <extension
+         point="edu.unikiel.rtsys.kieler.kev.image">
+      <image
+            filename="examples/elevator.svg"
+            id="edu.unikiel.rtsys.kieler.kev.image1"
+            name="Elevator 2D">
+      </image>
+      <image
+            filename="examples/elevator2.svg"
+            id="edu.unikiel.rtsys.kieler.kev.image2"
+            name="Elevator 3D">
+      </image>
+      <image
+            filename="examples/railway-6b1.svg"
+            id="edu.unikiel.rtsys.kieler.kev.image3"
+            name="Model Railway">
+      </image>
    </extension>
 
 </plugin>

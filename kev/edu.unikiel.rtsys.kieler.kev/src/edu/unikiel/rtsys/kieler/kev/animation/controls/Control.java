@@ -5,8 +5,9 @@ import java.util.Observer;
 
 import org.apache.batik.dom.svg.SVGOMElement;
 
-import edu.unikiel.rtsys.kieler.kev.animation.JavaStringData;
 import edu.unikiel.rtsys.kieler.kev.animation.mapping.AnimationMapping;
+import edu.unikiel.rtsys.kieler.kev.extension.AnimationData;
+import edu.unikiel.rtsys.kieler.kev.extension.DataChangeEventSource;
 
 /**
  * This class helps to implement SVG user input controls. A {@link Control} is
@@ -21,12 +22,12 @@ import edu.unikiel.rtsys.kieler.kev.animation.mapping.AnimationMapping;
  * 
  * @author sja
  */
-public abstract class Control implements Observer {
+public abstract class Control extends DataChangeEventSource implements Observer {
 
 	private String id;
 	private int port;
 	private SVGOMElement element;
-	private static JavaStringData dataToSend;
+	private static AnimationData dataToSend;
 	private Object status;
 	private Boolean isPaused = false;
 	private boolean dataSent = true;
@@ -50,7 +51,7 @@ public abstract class Control implements Observer {
 	 *            states. Data type should be specified individually (e.g. for
 	 *            buttons, status is only boolean: true/false)
 	 */
-	public Control(int port, SVGOMElement element, JavaStringData dataToSend,
+	public Control(int port, SVGOMElement element, AnimationData dataToSend,
 			Object status) {
 		this.element = element;
 		this.id = element.getAttribute(AnimationMapping.ID_ATTR);
@@ -88,7 +89,7 @@ public abstract class Control implements Observer {
 		return id;
 	}
 
-	private JavaStringData getDataToSend() {
+	private AnimationData getDataToSend() {
 		return dataToSend;
 	}
 
@@ -115,6 +116,7 @@ public abstract class Control implements Observer {
 		if (hasChanged == true){
 			this.getDataToSend().setData(this.getPort(), this.getStatus());
 			hasChanged = false;
+			this.fireDataChangeEvent(this.dataToSend);
 		}
 	}
 	

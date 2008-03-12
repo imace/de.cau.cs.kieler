@@ -1,5 +1,6 @@
 package edu.unikiel.rtsys.kieler.kev;
 
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
@@ -21,6 +22,7 @@ public class Activator extends AbstractUIPlugin {
 	public Activator() {
 	}
 
+	
 	/*
 	 * (non-Javadoc)
 	 * @see org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.BundleContext)

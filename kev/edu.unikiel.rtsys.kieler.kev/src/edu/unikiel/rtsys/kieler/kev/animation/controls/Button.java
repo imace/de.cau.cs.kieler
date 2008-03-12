@@ -1,23 +1,18 @@
 package edu.unikiel.rtsys.kieler.kev.animation.controls;
 
-import java.util.Observer;
-
-import org.apache.batik.dom.svg.SVGGraphicsElement;
 import org.apache.batik.dom.svg.SVGOMElement;
-import org.w3c.dom.NamedNodeMap;
-import org.w3c.dom.css.CSSStyleDeclaration;
 import org.w3c.dom.events.Event;
 import org.w3c.dom.events.EventListener;
 
-import edu.unikiel.rtsys.kieler.kev.animation.JavaStringData;
 import edu.unikiel.rtsys.kieler.kev.animation.SimulationEvent;
 import edu.unikiel.rtsys.kieler.kev.animation.SimulationListener;
+import edu.unikiel.rtsys.kieler.kev.extension.AnimationData;
 
 /**
  * @author sja
  * 
  */
-public class Button extends Control implements SimulationListener {
+public class Button extends Control /*implements SimulationListener*/ {
 
 	private boolean buttonPressed = false;
 	
@@ -27,10 +22,11 @@ public class Button extends Control implements SimulationListener {
 	 * @param dataToSend
 	 * @param status
 	 */
-	public Button(int port, SVGOMElement element, JavaStringData dataToSend,
+	public Button(int port, SVGOMElement element, AnimationData dataToSend,
 			Boolean status) {
 		super(port, element, dataToSend, status);
-// TODO: repair		ScadeSlaveGateway3.getInstance().addSimulationListener(this);
+		// set default value
+		dataToSend.setData(port, new Boolean(false));
 		element.addEventListener("mousedown", new EventListener() {
 			public void handleEvent(Event evt) {
 				if (getStatus().equals(Boolean.valueOf(false))) {
@@ -38,6 +34,7 @@ public class Button extends Control implements SimulationListener {
 					setStatus(Boolean.valueOf(true));
 					buttonPressed = true;
 					getElement().setAttribute("opacity", "1");
+					System.out.println("Mouse pressed");
 				}
 			}
 		}, false);
@@ -45,7 +42,10 @@ public class Button extends Control implements SimulationListener {
 		element.addEventListener("mouseup", new EventListener() {
 			public void handleEvent(Event evt) {
 				if (getStatus().equals(Boolean.valueOf(true))) {
+					setChanged();
+					setStatus(Boolean.valueOf(false));
 					buttonPressed = false;
+					getElement().setAttribute("opacity", "0.7");
 				}				
 			}
 		}, false);
@@ -53,7 +53,10 @@ public class Button extends Control implements SimulationListener {
 		element.addEventListener("mouseout", new EventListener() {
 			public void handleEvent(Event evt) {
 				if (getStatus().equals(Boolean.valueOf(true))) {
+					setChanged();
+					setStatus(Boolean.valueOf(false));
 					buttonPressed = false;
+					getElement().setAttribute("opacity", "0.7");
 				}
 			}
 		}, false);
@@ -61,6 +64,17 @@ public class Button extends Control implements SimulationListener {
 		element.setAttribute("opacity", "0.7");
 
 	}
+
+	@Override
+	public void setDisabledLayout() {
+		getElement().setAttribute("opacity", "0.3");	
+	}
+
+	@Override
+	public void setEnabledLayout() {
+		getElement().setAttribute("opacity", "0.7");	
+	}
+
 	
 	/**
 	 * 
@@ -87,6 +101,8 @@ public class Button extends Control implements SimulationListener {
 		}
 	}*/
 
+	
+/* artifacts of old Modelgui by sja
 	public void simulationStepped(SimulationEvent e) {
 		if (!buttonPressed) {
 			setChanged();
@@ -94,16 +110,6 @@ public class Button extends Control implements SimulationListener {
 			getElement().setAttribute("opacity", "0.7");
 		}
 		
-	}
-
-	@Override
-	public void setDisabledLayout() {
-		getElement().setAttribute("opacity", "0.3");	
-	}
-
-	@Override
-	public void setEnabledLayout() {
-		getElement().setAttribute("opacity", "0.7");	
 	}
 
 	public void simulationPaused(SimulationEvent evt) {
@@ -120,4 +126,5 @@ public class Button extends Control implements SimulationListener {
 		// TODO Auto-generated method stub
 		
 	}
+*/
 }

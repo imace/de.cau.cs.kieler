@@ -19,11 +19,9 @@ import edu.unikiel.rtsys.kieler.kev.animation.AnimationManager;
 public class DelayTextField extends ControlContribution implements KeyListener{
 
 	Text textfield;
-	AnimationManager animationManager;
-	
-	public DelayTextField(AnimationManager animationManager) {
+		
+	public DelayTextField() {
 		super("KEV Delay Text Field");
-		this.animationManager = animationManager;
 	}
 
 	@Override
@@ -50,7 +48,7 @@ public class DelayTextField extends ControlContribution implements KeyListener{
 	private void updateDelay(){
 		try{
 			int delay = Integer.parseInt(textfield.getText().trim());
-			animationManager.setDelay(delay);			
+			AnimationManager.getInstance().setDelay(delay);			
 		}catch(NumberFormatException exc){
 			Status s = new Status(Status.ERROR,Activator.PLUGIN_ID,0,"Please enter only integer numbers!",exc);
 			ErrorDialog.openError(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(),"Error",exc.getMessage(),s,IStatus.ERROR);	

@@ -1,33 +1,38 @@
 package edu.unikiel.rtsys.kieler.kev.views;
 
 
-import java.awt.Panel;
+import java.net.MalformedURLException;
+import java.net.URL;
 
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IProject;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.ControlContribution;
 import org.eclipse.jface.action.IMenuManager;
-import org.eclipse.jface.action.IStatusLineManager;
 import org.eclipse.jface.action.IToolBarManager;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.part.ViewPart;
 
 import com.dlsc.batik.viewer.BatikUIPlugin;
 
+import edu.unikiel.rtsys.kieler.kev.Activator;
 import edu.unikiel.rtsys.kieler.kev.Messages;
 import edu.unikiel.rtsys.kieler.kev.actions.DelayTextField;
+import edu.unikiel.rtsys.kieler.kev.actions.OpenFileAction;
+import edu.unikiel.rtsys.kieler.kev.actions.OpenImageWizardAction;
 import edu.unikiel.rtsys.kieler.kev.actions.StartAction;
 import edu.unikiel.rtsys.kieler.kev.actions.StepAction;
 import edu.unikiel.rtsys.kieler.kev.actions.StopAction;
 import edu.unikiel.rtsys.kieler.kev.animation.AnimationManager;
+import edu.unikiel.rtsys.kieler.kev.helpers.Tools;
+import edu.unikiel.rtsys.kieler.kev.ui.OpenImageWizard;
 
 public class EnvironmentView extends ViewPart {
 	
+	private Action openWizardAction;
+	private Action openAction;
 	private Action refreshAction;
 	private Action startAction;
 	private Action stopAction;
@@ -37,14 +42,14 @@ public class EnvironmentView extends ViewPart {
 	private EnvironmentComposite svg;
 	private AnimationManager animationManager;
 	
-//	private PrintAction printAction;
+	public static final String ID = "edu.unikiel.rtsys.kieler.kev.views.EnvironmentView";
 	
 	/**
 	 * The constructor.
 	 */
 	public EnvironmentView() {
 	}
-
+	
 	/**
 	 * This is a callback that will allow us to create the viewer and
 	 * initialize it.
@@ -62,9 +67,20 @@ public class EnvironmentView extends ViewPart {
 		parent.layout();
 		makeActions();
 		contributeToActionBars();
+		
+		// load default image if available
+		IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
+		String defaultFile = preferenceStore.getString(OpenImageWizard.DEFAULT_IMAGE);
+		boolean load = preferenceStore.getBoolean(OpenImageWizard.LOAD_STARTUP);
+		if(defaultFile != null && !defaultFile.isEmpty() && load)
+			try {
+				svg.setSVGFile(new URL(defaultFile));
+			} catch (MalformedURLException e) {
+				Tools.showDialog("Could not load default image file: ", e);
+			}
 	}
 
-	
+/*	
 	private void setStatusText(String txt) {
 		setStatusText(txt,false);
 	}
@@ -91,6 +107,7 @@ public class EnvironmentView extends ViewPart {
 			});
 		}
 	}
+*/
 
 	private void contributeToActionBars() {
 		IActionBars bars = getViewSite().getActionBars();
@@ -99,6 +116,8 @@ public class EnvironmentView extends ViewPart {
 	}
 
 	private void fillLocalPullDown(IMenuManager manager) {
+		manager.add(openWizardAction);
+		manager.add(openAction);
 		manager.add(refreshAction);
 		manager.add(startAction);
 		manager.add(stopAction);
@@ -108,6 +127,8 @@ public class EnvironmentView extends ViewPart {
 	}
 
 	private void fillLocalToolBar(IToolBarManager manager) {
+		manager.add(openWizardAction);
+		manager.add(openAction);
 		manager.add(refreshAction);
 		manager.add(startAction);
 		manager.add(stopAction);
@@ -127,10 +148,12 @@ public class EnvironmentView extends ViewPart {
 		refreshAction.setToolTipText(Messages.ReloadSVGImage);
 		refreshAction.setImageDescriptor(BatikUIPlugin.getDefault().getImageDescriptor(BatikUIPlugin.IMG_REFRESH));
 
-		startAction = new StartAction(animationManager);
-		stopAction = new StopAction(animationManager);
-		stepAction = new StepAction(animationManager);
-		delayTextField = new DelayTextField(animationManager);
+		openWizardAction = new OpenImageWizardAction();
+		openAction = new OpenFileAction();
+		startAction = new StartAction();
+		stopAction = new StopAction();
+		stepAction = new StepAction();
+		delayTextField = new DelayTextField();
 		
 		
 //		printAction = new PrintAction(svg);
@@ -150,4 +173,5 @@ public class EnvironmentView extends ViewPart {
 	public EnvironmentComposite getComposite(){
 		return svg;
 	}
+		
 }

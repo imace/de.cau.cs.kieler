@@ -14,7 +14,7 @@ import org.w3c.dom.events.Event;
 import org.w3c.dom.events.EventListener;
 import org.w3c.dom.svg.SVGTextElement;
 
-import edu.unikiel.rtsys.kieler.kev.animation.JavaStringData;
+import edu.unikiel.rtsys.kieler.kev.extension.AnimationData;
 import edu.unikiel.rtsys.kieler.kev.helpers.Tools;
 
 /**
@@ -68,9 +68,12 @@ public class Textbox extends Control {
 	 * @param status
 	 * @param canvas
 	 */
-	public Textbox(int port, SVGOMElement element, JavaStringData dataToSend,
+	public Textbox(int port, SVGOMElement element, AnimationData dataToSend,
 			SVGOMDocument doc, String status, JSVGCanvas canvas) {
 		super(port, element, dataToSend, status);
+		// set default value
+		dataToSend.setData(port, "");
+		
 		this.document = doc;
 		this.canvas = canvas;
 		System.out.println("init textbox");

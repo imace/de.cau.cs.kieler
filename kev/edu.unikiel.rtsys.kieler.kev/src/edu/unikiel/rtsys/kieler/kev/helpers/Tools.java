@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -23,11 +24,8 @@ import org.apache.batik.swing.JSVGCanvas;
 import org.apache.batik.swing.svg.JSVGComponent;
 import org.apache.xml.serialize.OutputFormat;
 import org.apache.xml.serialize.XMLSerializer;
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jface.dialogs.ErrorDialog;
 import org.eclipse.ui.PlatformUI;
 import org.w3c.dom.Document;
@@ -111,18 +109,10 @@ public class Tools {
 	 * @param exc
 	 */
 	public static void showDialog(String msg, Exception exc) {
-		StackTraceElement[] stack = exc.getStackTrace();
-		Status[] statusArray = new Status[stack.length];
-		for(int i=0;i<stack.length;i++){
-			String stackString = stack[i].toString(); 
-			statusArray[i] = new Status(Status.ERROR,Activator.PLUGIN_ID,Status.ERROR,stackString,null);
-		}
-		MultiStatus s = new MultiStatus(Activator.PLUGIN_ID,Status.ERROR,statusArray,msg,exc);
-		
-		ErrorDialog.openError(null,"Error",msg,s);
+		PlatformUI.getWorkbench().getDisplay().syncExec(new DiagramRunnable(msg,exc));
 	}
 	
-	
+		
 
 	/**
 	 * Tries to parse the given String to a Java DataType. It first tries to
@@ -169,6 +159,23 @@ public class Tools {
 	 */
 	public static long tac() {
 		return System.currentTimeMillis() - time;
+	}
+	
+	/**
+	 * Takes a URI and exchanges the extension in the path segment with a new one.
+	 * @param uri
+	 * @param extension
+	 * @return
+	 * @throws URISyntaxException
+	 */
+	public static URI exchangeExtension(URI uri, String extension) throws URISyntaxException{
+		String path = uri.getPath();
+		int index = path.lastIndexOf('.');
+		String pathWithoutExtension = path.substring(0, index);
+		String newPath = pathWithoutExtension + '.' + extension;
+		// clone uri with adapted path segment
+		URI newUri = new URI(uri.getScheme(), uri.getUserInfo(), uri.getHost(), uri.getPort(), newPath, uri.getQuery(), uri.getFragment()); 
+		return newUri;
 	}
 
 	/** generating the mapping for the railway example */
@@ -355,4 +362,35 @@ public class Tools {
 		}
 	}
 
+}
+
+/**
+ * A simple runnable that will display an Error dialog with a 
+ * message and the stack-trace of the Exception in a details pane.
+ * This can be called by the current Display thread. Necessary because
+ * of SWT's multithreading principles.
+ * 
+ * e.g. call: PlatformUI.getWorkbench().getDisplay().syncExec(new DiagramRunnable(msg,exc));
+ * 
+ * @author haf
+ *
+ */
+class DiagramRunnable implements Runnable{
+	String msg;
+	Exception exc;
+	DiagramRunnable(String msg, Exception exc){
+		this.msg = msg;
+		this.exc = exc;
+	}
+	@Override
+	public void run() {
+		StackTraceElement[] stack = exc.getStackTrace();
+		Status[] statusArray = new Status[stack.length];
+		for(int i=0;i<stack.length;i++){
+			String stackString = stack[i].toString(); 
+			statusArray[i] = new Status(Status.ERROR,Activator.PLUGIN_ID,Status.ERROR,stackString,null);
+		}
+		MultiStatus s = new MultiStatus(Activator.PLUGIN_ID,Status.ERROR,statusArray,msg,exc);
+		ErrorDialog.openError(null,"Error",msg,s);
+	}
 }

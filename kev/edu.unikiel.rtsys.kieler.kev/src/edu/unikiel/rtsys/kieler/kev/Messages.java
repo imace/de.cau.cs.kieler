@@ -3,7 +3,8 @@ package edu.unikiel.rtsys.kieler.kev;
 import org.eclipse.osgi.util.NLS;
 
 public class Messages extends NLS {
-	private static final String BUNDLE_NAME = "edu.unikiel.rtsys.kieler.kev.views.messages"; //$NON-NLS-1$
+	private static final String BUNDLE_NAME = "edu.unikiel.rtsys.kieler.kev.messages"; //$NON-NLS-1$
+	public static String extensionPointID;
 	public static String Refresh;
 	public static String ReloadSVGImage;
 	public static String ViewTitle;

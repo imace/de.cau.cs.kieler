@@ -3,9 +3,11 @@ package edu.unikiel.rtsys.kieler.kev.animation.mapping;
 import java.awt.Point;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.StringTokenizer;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -15,7 +17,6 @@ import org.apache.batik.dom.svg.SVGOMDocument;
 import org.apache.batik.dom.svg.SVGOMElement;
 import org.apache.batik.dom.svg.SVGStylableElement;
 import org.apache.batik.swing.JSVGCanvas;
-import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
@@ -25,7 +26,6 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import edu.unikiel.rtsys.kieler.kev.Activator;
-import edu.unikiel.rtsys.kieler.kev.animation.JavaStringData;
 import edu.unikiel.rtsys.kieler.kev.animation.animations.Animation;
 import edu.unikiel.rtsys.kieler.kev.animation.animations.Colorize;
 import edu.unikiel.rtsys.kieler.kev.animation.animations.Move;
@@ -38,6 +38,8 @@ import edu.unikiel.rtsys.kieler.kev.animation.controls.Button;
 import edu.unikiel.rtsys.kieler.kev.animation.controls.Control;
 import edu.unikiel.rtsys.kieler.kev.animation.controls.Textbox;
 import edu.unikiel.rtsys.kieler.kev.exceptions.MappingException;
+import edu.unikiel.rtsys.kieler.kev.extension.AnimationData;
+import edu.unikiel.rtsys.kieler.kev.extension.AnimationDataController;
 import edu.unikiel.rtsys.kieler.kev.helpers.Tools;
 import edu.unikiel.rtsys.kieler.kev.views.EnvironmentView;
 
@@ -71,27 +73,27 @@ public class AnimationMapping {
 	public static final String AUTOORIENT_ATTR = "auto-orient";
 	public static final String ORIENTANGLE_ATTR = "direction-angle";
 
-	
 	private ArrayList<Animation> animationList;
 	private ArrayList<Control> controlList;
-	private JavaStringData dataToSend;
+	private AnimationData dataToSend;
 	
-	IPath mappingPath;
+	int displayPortSize=0, controlPortSize=0;
+	
+	URI mappingPath;
 	
 	public AnimationMapping(EnvironmentView view) {
 
-		dataToSend = new JavaStringData("");
+		dataToSend = new AnimationData();
 		// sja: very, VERY dirty work. Sorry to everyone, who must go
 		// through this...
 		try {
 			JSVGCanvas canvas = view.getComposite().getSvgCanvas();
-			IFile svgFile = view.getComposite().getSvgFile();
-			mappingPath = svgFile.getLocation(); 
-			mappingPath = mappingPath.removeFileExtension();
-			mappingPath = mappingPath.addFileExtension("map");
+			URI svgFile = view.getComposite().getSvgFile();
 			
-			if(!mappingPath.toFile().exists())
-				throw new MappingException("Error loading animation mapping file! No map file \""+mappingPath.toOSString()+"\" exists to the loaded svg file. No animations possible.");
+			mappingPath = Tools.exchangeExtension(svgFile, "map"); 
+									
+			//if(!mappingPath.toFile().exists())
+			//	throw new MappingException("Error loading animation mapping file! No map file \""+mappingPath.toOSString()+"\" exists to the loaded svg file. No animations possible.");
 			
 			NodeList displayNodes = null;
 			NodeList controlNodes = null;
@@ -112,9 +114,9 @@ public class AnimationMapping {
 			if (xmlValidationStatus == true) {
 				Path path = new Path("config/mapping.xsd");
 				URL xsd = FileLocator.find(Activator.getDefault().getBundle(),path,null);
-				Tools.isValidXml(mappingPath.toFile().toURI().toURL(), xsd);
+				Tools.isValidXml(mappingPath.toURL(), xsd);
 			}
-			MapParser parser = new MapParser(mappingPath.toFile().toURI().toURL());
+			MapParser parser = new MapParser(mappingPath.toURL());
 			displayNodes = parser.getDisplayNodes();
 			controlNodes = parser.getControlNodes();
 			// maybe we did not find display tags in mapping file,
@@ -124,6 +126,8 @@ public class AnimationMapping {
 				for (int i = 0; i < displayNodes.getLength(); i++) {
 					Node current = displayNodes.item(i);
 					int port = parser.getPort(current);
+					if(port > this.displayPortSize)
+						this.displayPortSize = port; // count number of available ports
 					// get the list of display actions like move,
 					// rotate, color, opacity, scale, ...
 					NodeList actions = current.getChildNodes();
@@ -452,6 +456,8 @@ public class AnimationMapping {
 				for (int i = 0; i < controlNodes.getLength(); i++) {
 					Node current = controlNodes.item(i);
 					int port = parser.getPort(current);
+					if(port > this.controlPortSize) // count number of available ports
+						this.controlPortSize = port;
 					NodeList actions = current.getChildNodes();
 					for (int j = 0; j < actions.getLength(); j++) {
 						Node currentAction = actions.item(j);
@@ -535,7 +541,7 @@ public class AnimationMapping {
 			// something failed during parsing of the mapping, e.g.
 			// a mapped object does
 			// not exist in the svg file
-			Tools.showDialog("Error while processing the animation mapping file "+mappingPath.toOSString(),me);
+			Tools.showDialog("Error while processing the animation mapping file "+mappingPath,me);
 		}
 		catch (MalformedURLException e2) {
 			Tools.showDialog("URL is not well formed!",e2);
@@ -544,7 +550,7 @@ public class AnimationMapping {
 			Tools.showDialog("An error occured during some read/write operations!",e2);
 		}
 		catch (SAXException e2) {
-			Tools.showDialog("Mapping file \""+mappingPath.toOSString()+"\" is not valid!",e2);
+			Tools.showDialog("Mapping file \""+mappingPath+"\" is not valid!",e2);
 		}
 		catch (ParserConfigurationException e2) {
 			Tools.showDialog("Could not parse file!",e2);
@@ -565,6 +571,37 @@ public class AnimationMapping {
 		//svgApp.addObserver(control);
 	}
 
+	/**
+	 * Returns the size of the output data (data controlled by human interaction)
+	 * 
+	 */
+	public int getControlPortsize(){
+		return controlPortSize;
+	}
+	/**
+	 * Returns the size of the input data (data to be displayed in the graphics) 
+	 */
+	public int getDisplayPortSize(){
+		return displayPortSize;
+	}
 	
+	public List<Animation> getAnimationList(){
+		return this.animationList;
+	}
+	public List<Control> getControlList(){
+		return this.controlList;
+	}
+
+	public void registerControlListeners(
+			AnimationDataController animationController) {
+		for (Control control : controlList) {
+			control.addDataChangeListener(animationController);
+		}		
+	}
 	
+	public void unregisterControlListeners(){
+		for (Control control : controlList) {
+			control.removeDataChangeListeners();
+		}
+	}
 }

@@ -12,7 +12,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Text;
 
-import edu.unikiel.rtsys.kieler.kev.animation.JavaStringData;
+import edu.unikiel.rtsys.kieler.kev.extension.AnimationData;
 
 /**
  * Abstract class used for object animation. The most important thing, which is
@@ -38,7 +38,7 @@ public abstract class Animation {
 	private Element text_element;
 	private JSVGCanvas canvas;
 
-	private JavaStringData dataObject;
+	private AnimationData dataObject;
 	private int countAnimations = 0;
 
 	/**
@@ -49,7 +49,6 @@ public abstract class Animation {
 	public Animation(int port, SVGStylableElement element, JSVGCanvas canvas) {
 		this.id = element.getId();
 		this.port = port;
-
 		if (element instanceof SVGGraphicsElement){
 			// if this is true, another animation made a copy of this element before
 			// so we have to find it first
@@ -75,6 +74,7 @@ public abstract class Animation {
 				element.setAttribute("visibility", "hidden");
 				this.element = clone;
 			}
+			//System.out.println("Bounding Box: "+((SVGGraphicsElement)element).getBBox());
 		} else {
 			this.element = element;
 		}
@@ -279,7 +279,7 @@ public abstract class Animation {
 		return result.toString();
 	}
 
-	public void doAnimation(JavaStringData dataObject) {
+	public void doAnimation(AnimationData dataObject) {
 		// do some stuff before DOM modification:
 		this.dataObject = dataObject;
 		if (this.dataObject.getData().size() - 1 < getPort())
