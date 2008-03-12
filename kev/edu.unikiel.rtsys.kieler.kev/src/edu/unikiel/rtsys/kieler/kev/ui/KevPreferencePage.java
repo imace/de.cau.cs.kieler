@@ -17,7 +17,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
-import edu.unikiel.rtsys.kieler.kev.Activator;
+import edu.unikiel.rtsys.kieler.kev.KevPlugin;
 import edu.unikiel.rtsys.kieler.kev.Messages;
 import edu.unikiel.rtsys.kieler.kev.extension.AnimationDataController;
 import edu.unikiel.rtsys.kieler.kev.helpers.Tools;
@@ -70,7 +70,7 @@ public class KevPreferencePage extends PreferencePage implements
 	@Override
 	public void init(IWorkbench workbench) {
 		// set the preference store
-		IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
+		IPreferenceStore preferenceStore = KevPlugin.getDefault().getPreferenceStore();
 		setPreferenceStore(preferenceStore);
 	}
 	

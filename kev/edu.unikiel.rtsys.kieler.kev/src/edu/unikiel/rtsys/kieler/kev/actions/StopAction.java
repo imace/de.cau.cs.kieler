@@ -9,7 +9,7 @@ public class StopAction extends Action {
 	public StopAction() {
 		this.setText("Stop");
 		this.setToolTipText("Stop animation run");
-		this.setImageDescriptor(edu.unikiel.rtsys.kieler.kev.Activator.getImageDescriptor("icons/media-playback-stop-32.png"));
+		this.setImageDescriptor(edu.unikiel.rtsys.kieler.kev.KevPlugin.getImageDescriptor("icons/media-playback-stop-32.png"));
 	}
 	
 	@Override

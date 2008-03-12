@@ -9,7 +9,7 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 
-import edu.unikiel.rtsys.kieler.kev.Activator;
+import edu.unikiel.rtsys.kieler.kev.KevPlugin;
 import edu.unikiel.rtsys.kieler.kev.Messages;
 import edu.unikiel.rtsys.kieler.kev.animation.mapping.AnimationMapping;
 import edu.unikiel.rtsys.kieler.kev.extension.AnimationData;
@@ -52,28 +52,12 @@ public class AnimationManager extends GVTTreeRendererAdapter implements DataChan
 		animationMapping = new AnimationMapping(view);
 		System.out.println("DisplayPortSize: "+animationMapping.getDisplayPortSize()+" ControlPortSize: "+animationMapping.getControlPortsize());
 		controlFlowEventSource = new ControlFlowEventSource();
-		String controllerString = Activator.getDefault().getPreferenceStore().getString(KevPreferencePage.CONTROLLER);
+		String controllerString = KevPlugin.getDefault().getPreferenceStore().getString(KevPreferencePage.CONTROLLER);
 		registerController(controllerString);
-		resizeWindow();
+		//resizeWindow();
 	}
 	
-	private void resizeWindow() {
-		try{
-			Dimension size = view.getComposite().getSvgCanvas().getSize();
-			PlatformUI.getWorkbench().getDisplay().syncExec(new Runnable(){
-				@Override
-				public void run() {
-					Dimension size = view.getComposite().getSvgCanvas().getPreferredSize();
-					Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
-					shell.setSize(size.width, size.height);
-				}
-			});
-
-		}catch(Exception e){
-			Tools.showDialog("Could not resize window to fit image: ",e);
-		}
-		
-	}
+	
 
 	public void start() {
 		init(); // reload preferences (might have been changed)

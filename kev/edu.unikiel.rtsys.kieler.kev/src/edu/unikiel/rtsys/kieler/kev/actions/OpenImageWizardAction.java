@@ -11,7 +11,7 @@ public class OpenImageWizardAction extends Action {
 	public OpenImageWizardAction() {
 		this.setText("Open Wizard");
 		this.setToolTipText("Load Image Wizard");
-		this.setImageDescriptor(edu.unikiel.rtsys.kieler.kev.Activator.getImageDescriptor("icons/fileopen.png"));	
+		this.setImageDescriptor(edu.unikiel.rtsys.kieler.kev.KevPlugin.getImageDescriptor("icons/fileopen.png"));	
 	}
 	
 	@Override

@@ -3,15 +3,22 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Kiel Environment Visualization
 Bundle-SymbolicName: edu.unikiel.rtsys.kieler.kev; singleton:=true
 Bundle-Version: 1.0.0
-Bundle-Activator: edu.unikiel.rtsys.kieler.kev.Activator
+Bundle-Activator: edu.unikiel.rtsys.kieler.kev.KevPlugin
 Bundle-Vendor: Christian-Albrechts University of Kiel
 Require-Bundle: org.eclipse.ui;bundle-version="3.4.0",
  org.eclipse.core.runtime;bundle-version="3.4.0",
  org.eclipse.core.resources;bundle-version="3.4.0",
- com.dlsc.batik.ui;bundle-version="4.2.0",
- com.dlsc.batik;bundle-version="4.2.0"
+ org.apache.batik.swing;bundle-version="1.6.0",
+ org.apache.batik.bridge;bundle-version="1.6.0",
+ org.apache.batik.util;bundle-version="1.6.0",
+ org.w3c.dom.svg;bundle-version="1.1.0",
+ org.apache.batik.dom;bundle-version="1.6.0",
+ org.apache.batik.dom.svg;bundle-version="1.6.0",
+ org.apache.batik.css;bundle-version="1.6.0",
+ org.apache.xerces;bundle-version="2.9.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Eclipse-LazyStart: true
 Export-Package: edu.unikiel.rtsys.kieler.kev.actions,
  edu.unikiel.rtsys.kieler.kev.extension;uses:="org.eclipse.core.runtime",
- edu.unikiel.rtsys.kieler.kev.helpers
+ edu.unikiel.rtsys.kieler.kev.helpers,
+ edu.unikiel.rtsys.kieler.kev.views

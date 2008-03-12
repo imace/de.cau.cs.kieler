@@ -25,7 +25,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import edu.unikiel.rtsys.kieler.kev.Activator;
+import edu.unikiel.rtsys.kieler.kev.KevPlugin;
 import edu.unikiel.rtsys.kieler.kev.animation.animations.Animation;
 import edu.unikiel.rtsys.kieler.kev.animation.animations.Colorize;
 import edu.unikiel.rtsys.kieler.kev.animation.animations.Move;
@@ -113,7 +113,7 @@ public class AnimationMapping {
 			boolean xmlValidationStatus = true;
 			if (xmlValidationStatus == true) {
 				Path path = new Path("config/mapping.xsd");
-				URL xsd = FileLocator.find(Activator.getDefault().getBundle(),path,null);
+				URL xsd = FileLocator.find(KevPlugin.getDefault().getBundle(),path,null);
 				Tools.isValidXml(mappingPath.toURL(), xsd);
 			}
 			MapParser parser = new MapParser(mappingPath.toURL());

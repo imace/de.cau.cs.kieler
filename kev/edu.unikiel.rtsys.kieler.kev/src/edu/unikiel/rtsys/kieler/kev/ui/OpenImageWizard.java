@@ -33,7 +33,7 @@ import org.eclipse.ui.IViewReference;
 import org.eclipse.ui.PlatformUI;
 import org.osgi.framework.Bundle;
 
-import edu.unikiel.rtsys.kieler.kev.Activator;
+import edu.unikiel.rtsys.kieler.kev.KevPlugin;
 import edu.unikiel.rtsys.kieler.kev.helpers.Tools;
 import edu.unikiel.rtsys.kieler.kev.views.EnvironmentView;
 
@@ -98,7 +98,7 @@ public class OpenImageWizard extends Wizard {
 	}
 
 	private void savePreferences(){
-		IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
+		IPreferenceStore preferenceStore = KevPlugin.getDefault().getPreferenceStore();
 		preferenceStore.setValue(this.DEFAULT_IMAGE, resourceNameField.getText());
 		preferenceStore.setValue(LOAD_STARTUP, rememberCheckbox.getSelection());
 	}
@@ -108,7 +108,7 @@ public class OpenImageWizard extends Wizard {
 			super(pageName);
 			this.setDescription("Select the SVG Image for animation");
 			//this.setErrorMessage("ErrorMessage");
-			this.setImageDescriptor(edu.unikiel.rtsys.kieler.kev.Activator.getImageDescriptor("icons/svg-logo.png"));
+			this.setImageDescriptor(edu.unikiel.rtsys.kieler.kev.KevPlugin.getImageDescriptor("icons/svg-logo.png"));
 			this.setMessage("Select the SVG Image for animation");
 			this.setTitle("Select Image");
 		}
@@ -154,7 +154,7 @@ public class OpenImageWizard extends Wizard {
 			GridData data2 = new GridData(GridData.HORIZONTAL_ALIGN_FILL | GridData.GRAB_HORIZONTAL);
 			resourceNameField.setLayoutData(data2);
 			// write last loaded filename
-			IPreferenceStore preferences = Activator.getDefault().getPreferenceStore();
+			IPreferenceStore preferences = KevPlugin.getDefault().getPreferenceStore();
 			String last = preferences.getString(DEFAULT_IMAGE);
 			if(last != null && !last.isEmpty())
 				resourceNameField.setText(last);

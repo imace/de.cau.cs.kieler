@@ -4,6 +4,7 @@ package edu.unikiel.rtsys.kieler.kev.views;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import org.apache.batik.swing.JSVGCanvas;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.ControlContribution;
 import org.eclipse.jface.action.IMenuManager;
@@ -15,9 +16,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.part.ViewPart;
 
-import com.dlsc.batik.viewer.BatikUIPlugin;
-
-import edu.unikiel.rtsys.kieler.kev.Activator;
+import edu.unikiel.rtsys.kieler.kev.KevPlugin;
 import edu.unikiel.rtsys.kieler.kev.Messages;
 import edu.unikiel.rtsys.kieler.kev.actions.DelayTextField;
 import edu.unikiel.rtsys.kieler.kev.actions.OpenFileAction;
@@ -69,7 +68,7 @@ public class EnvironmentView extends ViewPart {
 		contributeToActionBars();
 		
 		// load default image if available
-		IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
+		IPreferenceStore preferenceStore = KevPlugin.getDefault().getPreferenceStore();
 		String defaultFile = preferenceStore.getString(OpenImageWizard.DEFAULT_IMAGE);
 		boolean load = preferenceStore.getBoolean(OpenImageWizard.LOAD_STARTUP);
 		if(defaultFile != null && !defaultFile.isEmpty() && load)
@@ -146,7 +145,7 @@ public class EnvironmentView extends ViewPart {
 		};
 		refreshAction.setText(Messages.Refresh);
 		refreshAction.setToolTipText(Messages.ReloadSVGImage);
-		refreshAction.setImageDescriptor(BatikUIPlugin.getDefault().getImageDescriptor(BatikUIPlugin.IMG_REFRESH));
+		refreshAction.setImageDescriptor(KevPlugin.getDefault().getImageDescriptor("icons/refresh.gif"));
 
 		openWizardAction = new OpenImageWizardAction();
 		openAction = new OpenFileAction();
@@ -154,7 +153,6 @@ public class EnvironmentView extends ViewPart {
 		stopAction = new StopAction();
 		stepAction = new StepAction();
 		delayTextField = new DelayTextField();
-		
 		
 //		printAction = new PrintAction(svg);
 //		printAction.setImageDescriptor(BatikUIPlugin.getDefault().getImageDescriptor(BatikUIPlugin.IMG_PRINT));
@@ -172,6 +170,10 @@ public class EnvironmentView extends ViewPart {
 	
 	public EnvironmentComposite getComposite(){
 		return svg;
+	}
+	
+	public JSVGCanvas getSVGCanvas(){
+		return svg.getSvgCanvas();
 	}
 		
 }

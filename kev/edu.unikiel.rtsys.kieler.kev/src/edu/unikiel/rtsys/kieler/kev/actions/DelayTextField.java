@@ -13,7 +13,7 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.PlatformUI;
 
-import edu.unikiel.rtsys.kieler.kev.Activator;
+import edu.unikiel.rtsys.kieler.kev.KevPlugin;
 import edu.unikiel.rtsys.kieler.kev.animation.AnimationManager;
 
 public class DelayTextField extends ControlContribution implements KeyListener{
@@ -50,7 +50,7 @@ public class DelayTextField extends ControlContribution implements KeyListener{
 			int delay = Integer.parseInt(textfield.getText().trim());
 			AnimationManager.getInstance().setDelay(delay);			
 		}catch(NumberFormatException exc){
-			Status s = new Status(Status.ERROR,Activator.PLUGIN_ID,0,"Please enter only integer numbers!",exc);
+			Status s = new Status(Status.ERROR,KevPlugin.PLUGIN_ID,0,"Please enter only integer numbers!",exc);
 			ErrorDialog.openError(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(),"Error",exc.getMessage(),s,IStatus.ERROR);	
 		}
 	}

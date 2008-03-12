@@ -11,7 +11,7 @@ public class StepAction extends Action {
 	public StepAction() {
 		this.setText("Step");
 		this.setToolTipText("Step one cycle");
-		this.setImageDescriptor(edu.unikiel.rtsys.kieler.kev.Activator.getImageDescriptor("icons/media-skip-forward-32.png"));
+		this.setImageDescriptor(edu.unikiel.rtsys.kieler.kev.KevPlugin.getImageDescriptor("icons/media-skip-forward-32.png"));
 		this.isPaused = false;
 	}
 	

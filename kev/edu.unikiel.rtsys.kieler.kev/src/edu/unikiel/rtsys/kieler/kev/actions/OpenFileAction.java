@@ -18,7 +18,7 @@ public class OpenFileAction extends Action {
 	public OpenFileAction() {
 		this.setText("Open");
 		this.setToolTipText("Open SVG File");
-		this.setImageDescriptor(edu.unikiel.rtsys.kieler.kev.Activator.getImageDescriptor("icons/open.gif"));
+		this.setImageDescriptor(edu.unikiel.rtsys.kieler.kev.KevPlugin.getImageDescriptor("icons/open.gif"));
 	}
 	//~/shared/kieler/trunk/kev/edu.unikiel.rtsys.kieler.kev/examples/elevator.svg
 	@Override
@@ -34,7 +34,7 @@ public class OpenFileAction extends Action {
 				dialog.setFilterExtensions(extensions);
 				dialog.open();
 				String path = dialog.getFilterPath()+File.separator+dialog.getFileName();
-				if(path != null && !path.isEmpty()){
+				if(path != null && !path.isEmpty() && !path.equals("/")){
 					try {
 						File file = new File(path);
 						URL url = file.toURI().toURL();

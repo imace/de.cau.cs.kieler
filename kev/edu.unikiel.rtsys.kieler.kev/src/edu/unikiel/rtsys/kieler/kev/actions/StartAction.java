@@ -13,7 +13,7 @@ public class StartAction extends Action {
 	public StartAction() {
 		this.setText("Start");
 		this.setToolTipText("Start animation run");
-		this.setImageDescriptor(edu.unikiel.rtsys.kieler.kev.Activator.getImageDescriptor("icons/media-playback-start-32.png"));
+		this.setImageDescriptor(edu.unikiel.rtsys.kieler.kev.KevPlugin.getImageDescriptor("icons/media-playback-start-32.png"));
 	}
 	
 	@Override

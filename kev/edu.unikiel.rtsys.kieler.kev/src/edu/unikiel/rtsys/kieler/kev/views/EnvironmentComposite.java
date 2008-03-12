@@ -57,10 +57,8 @@ import org.eclipse.ui.ISelectionListener;
 import org.eclipse.ui.IWorkbenchPart;
 import org.w3c.dom.Element;
 
-import com.dlsc.batik.viewer.BatikUIPlugin;
-import com.dlsc.batik.viewer.EclipseJSVGCanvas;
-import com.dlsc.batik.viewer.Messages;
 
+import edu.unikiel.rtsys.kieler.kev.KevPlugin;
 import edu.unikiel.rtsys.kieler.kev.helpers.Tools;
 
 public class EnvironmentComposite extends Composite implements ISelectionListener {
@@ -211,7 +209,11 @@ public class EnvironmentComposite extends Composite implements ISelectionListene
 		} catch (URISyntaxException e) {
 			Tools.showDialog("Error converting URL "+url+" to URI when trying to load svg file.", e);
 		}
-		svgCanvas.loadSVGDocument(url.toExternalForm());
+		try{
+			svgCanvas.loadSVGDocument(url.toExternalForm());
+		}catch(Exception e){
+			Tools.showDialog("Failed to load svg image: "+url, e);
+		}
 	}
 	
 	public void paintSVGFile() {
@@ -296,7 +298,8 @@ public class EnvironmentComposite extends Composite implements ISelectionListene
 				try {
 					docDelta.accept(visitor);
 				} catch (CoreException e) {
-					BatikUIPlugin.getDefault().getLog().log(e.getStatus());
+					//BatikUIPlugin.getDefault().getLog().log(e.getStatus());
+					Tools.showDialog(e);
 					
 					//open error dialog with syncExec or print to plugin log file
 				}
@@ -305,6 +308,16 @@ public class EnvironmentComposite extends Composite implements ISelectionListene
 					return;
 			}
 		}
+	}
+
+	public JSVGCanvas getSvgCanvas() {
+		return svgCanvas;
+	}
+
+	public URI getSvgFile() throws URISyntaxException {
+		if(svgURI == null)
+			throw new URISyntaxException("null","No URI available: "+svgURI);
+		return svgURI;
 	}
 	
 	//
@@ -339,7 +352,7 @@ public class EnvironmentComposite extends Composite implements ISelectionListene
 				public void run() {
 					Exception ex = new Exception(fMessage);
 					ex.printStackTrace();
-					Status status = new Status(Status.ERROR,BatikUIPlugin.getDefault().getBundle().getSymbolicName(),Status.OK,fMessage, ex);;
+					Status status = new Status(Status.ERROR,KevPlugin.getDefault().getBundle().getSymbolicName(),Status.OK,fMessage, ex);;
 					ErrorDialog.openError(shell,"Error",fMessage,status);
 				}
 			});
@@ -359,7 +372,7 @@ public class EnvironmentComposite extends Composite implements ISelectionListene
 				    if (msg == null) {
 				        msg = "NO MESSAGE";
 				    }
-					Status status = new Status(Status.ERROR,BatikUIPlugin.getDefault().getBundle().getSymbolicName(),Status.OK,msg, fex);;
+					Status status = new Status(Status.ERROR,KevPlugin.getDefault().getBundle().getSymbolicName(),Status.OK,msg, fex);;
 					ErrorDialog.openError(shell,"Error",fex.getMessage(),status);
 				}
 			});
@@ -385,7 +398,8 @@ public class EnvironmentComposite extends Composite implements ISelectionListene
 			final String fMessage = message;
 			shell.getDisplay().syncExec(new Runnable() {
 				public void run() {
-					MessageDialog.openWarning(shell, Messages.getString("SVGView.40"), fMessage); //$NON-NLS-1$
+					Tools.showDialog(fMessage);
+					//MessageDialog.openWarning(shell, Messages.getString("SVGView.40"), fMessage); //$NON-NLS-1$
 				}
 			});
 		}
@@ -649,13 +663,5 @@ public class EnvironmentComposite extends Composite implements ISelectionListene
 	}
 	
 	
-	public JSVGCanvas getSvgCanvas() {
-		return svgCanvas;
-	}
 
-	public URI getSvgFile() throws URISyntaxException {
-		if(svgURI == null)
-			throw new URISyntaxException("null","No URI available: "+svgURI);
-		return svgURI;
-	}
 }
