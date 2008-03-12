@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="edu.unikiel.rtsys.kieler.kev.data">
+      <content
+            class="edu.unikiel.rtsys.kieler.kev.extension.elevator.TestController"
+            id="edu.unikiel.rtsys.kieler.kev.extension.test"
+            name="Internal Java Interface for Elevator">
+      </content>
+   </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            category="edu.unikiel.rtsys.kieler.kev.PreferencePage"
+            class="edu.unikiel.rtsys.kieler.kev.extension.elevator.WorkbenchPreferencePage"
+            id="edu.unikiel.rtsys.kieler.kev.extension.test.page1"
+            name="Java Elevator Controller">
+      </page>
+   </extension>
+
+</plugin>
