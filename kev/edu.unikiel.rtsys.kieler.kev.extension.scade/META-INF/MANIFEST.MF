@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: KEV SCADE Interface
+Bundle-SymbolicName: edu.unikiel.rtsys.kieler.kev.extension.scade
+Bundle-Version: 1.0.0
+Bundle-Activator: edu.unikiel.rtsys.kieler.kev.extension.scade.KevScadePlugin
+Bundle-Vendor: Christian-Albrechts-Universität zu Kiel
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Eclipse-LazyStart: true
