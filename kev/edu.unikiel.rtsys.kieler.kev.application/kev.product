@@ -3,13 +3,39 @@
 
 <product name="KIEL Environment Visualization" id="edu.unikiel.rtsys.kieler.kev.application.product" application="edu.unikiel.rtsys.kieler.kev.application.application" useFeatures="false">
 
-   <configIni use="default"/>
+   <aboutInfo>
+      <text>
+         KIELER - Kiel Integrated Environment for Layout for Eclipse Rich Client Platform
+KEV - KIEL Environment Visualization
+by the Research Group of Realtime Systems/Embedded Systems
+Department of Computer Science
+Christian-Albrechts-Universität zu Kiel
+http://www.informatik.uni-kiel.de/en/rtsys/
+      </text>
+   </aboutInfo>
+
+   <configIni use="default" path="plugin_customization.ini"/>
 
    <launcherArgs>
       <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts</vmArgsMac>
    </launcherArgs>
 
-   <windowImages i16="icons/alt_window_16.gif" i32="icons/alt_window_32.gif"/>
+   <windowImages i16="/edu.unikiel.rtsys.kieler.kev.application/icons/kev_logo_16.gif" i32="/edu.unikiel.rtsys.kieler.kev.application/icons/kev_logo_32.gif" i48="/edu.unikiel.rtsys.kieler.kev.application/icons/kev_logo_48.gif" i64="/edu.unikiel.rtsys.kieler.kev.application/icons/kev_logo_64.gif" i128="/edu.unikiel.rtsys.kieler.kev.application/icons/kev_logo_128.gif"/>
+
+   <splash
+      startupProgressRect="0,610,360,15"
+      startupMessageRect="0,600,360,20"
+      startupForegroundColor="000000" />
+   <launcher>
+      <solaris/>
+      <win useIco="false">
+         <bmp/>
+      </win>
+   </launcher>
+
+
+   <vm>
+   </vm>
 
    <plugins>
       <plugin id="com.ibm.icu"/>
@@ -49,11 +75,14 @@
       <plugin id="org.eclipse.help"/>
       <plugin id="org.eclipse.jface"/>
       <plugin id="org.eclipse.jface.databinding"/>
+      <plugin id="org.eclipse.jface.text"/>
       <plugin id="org.eclipse.osgi"/>
       <plugin id="org.eclipse.swt"/>
       <plugin id="org.eclipse.swt.gtk.linux.x86" fragment="true"/>
+      <plugin id="org.eclipse.text"/>
       <plugin id="org.eclipse.ui"/>
       <plugin id="org.eclipse.ui.workbench"/>
+      <plugin id="org.eclipse.ui.workbench.texteditor"/>
       <plugin id="org.w3c.css.sac"/>
       <plugin id="org.w3c.dom.smil"/>
       <plugin id="org.w3c.dom.svg"/>
