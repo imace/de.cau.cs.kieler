@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+
+   <extension
+         id="application"
+         point="org.eclipse.core.runtime.applications">
+      <application>
+         <run
+               class="edu.unikiel.rtsys.kieler.kev.application.Application">
+         </run>
+      </application>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            name="RCP Perspective"
+            class="edu.unikiel.rtsys.kieler.kev.application.Perspective"
+            id="edu.unikiel.rtsys.kieler.kev.application.perspective">
+      </perspective>
+   </extension>
+   <extension
+         id="product"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="edu.unikiel.rtsys.kieler.kev.application.application"
+            name="KIEL Environment Visualization">
+         <property
+               name="windowImages"
+               value="icons/alt_window_16.gif,icons/alt_window_32.gif">
+         </property>
+         <property
+               name="appName"
+               value="KIEL Environment Visualization">
+         </property>
+      </product>
+   </extension>
+   <extension
+         point="org.eclipse.ui.actionSets">
+      <actionSet
+            description="File Actions"
+            id="edu.unikiel.rtsys.kieler.kev.application.actionSets.file"
+            label="File Action Set"
+            visible="true">
+         <action
+               class="edu.unikiel.rtsys.kieler.kev.application.OpenFileAction"
+               icon="icons/open.gif"
+               id="edu.unikiel.rtsys.kieler.kev.application.open"
+               label="&amp;Open..."
+               menubarPath="file/new.ext"
+               state="false"
+               style="push"
+               toolbarPath="org.eclipse.ui.workbench.file/open.ext"
+               tooltip="Open a new Environment Image">
+         </action>
+      </actionSet>
+   </extension>
+
+</plugin>
