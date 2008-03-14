@@ -2,14 +2,17 @@ package com.dlsc.batik.viewer;
 
 import java.io.IOException;
 import java.io.InterruptedIOException;
+
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
+
 import org.apache.batik.dom.svg.SAXSVGDocumentFactory;
-import org.apache.xerces.jaxp.SAXParserFactoryImpl;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
+
+import com.sun.org.apache.xerces.internal.jaxp.SAXParserFactoryImpl;
 
 /**
  * This is a special version of the SAXSVGDocumentFactory class. It loads the XML

@@ -12,6 +12,14 @@ public class AnimationData {
 		data = new Vector<Object>();
 	}
 	
+	/**
+	 * Creates a clone of the passed data object.
+	 * @param data
+	 */
+	public AnimationData(AnimationData origData){
+		this.data = (Vector<Object>) origData.getData().clone();
+	}
+	
 	public void addInt(int i){
 		data.add(new Integer(i));
 	}

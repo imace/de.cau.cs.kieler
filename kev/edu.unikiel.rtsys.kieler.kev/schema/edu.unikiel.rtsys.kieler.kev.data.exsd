@@ -6,11 +6,16 @@
          <meta.schema plugin="edu.unikiel.rtsys.kieler.kev" id="edu.unikiel.rtsys.kieler.kev.data" name="Data Interface Controller"/>
       </appInfo>
       <documentation>
-         [Enter description of this extension point.]
+         Interface to share data between the KIEL Environment Visualization and the application controller. Listeners are hooked at both parts that inform each other about data changes (data to be displayed in the image and data from user interactions (buttons, etc.)) and control flow changes (start, stop, step, delay time...).
       </documentation>
    </annotation>
 
    <element name="extension">
+      <annotation>
+         <documentation>
+            Interface to share data between the KIEL Environment Visualization and the application controller. Listeners are hooked at both parts that inform each other about data changes (data to be displayed in the image and data from user interactions (buttons, etc.)) and control flow changes (start, stop, step, delay time...).
+         </documentation>
+      </annotation>
       <complexType>
          <sequence>
             <element ref="content"/>
@@ -43,6 +48,11 @@
    </element>
 
    <element name="content">
+      <annotation>
+         <documentation>
+            Element to specify the actual controller class.
+         </documentation>
+      </annotation>
       <complexType>
          <attribute name="id" type="string" use="required">
             <annotation>
@@ -54,14 +64,14 @@
          <attribute name="name" type="string" use="required">
             <annotation>
                <documentation>
-                  
+                  Descriptive name of the application controller. Will be visible in the properties dialog later on to choose between controllers.
                </documentation>
             </annotation>
          </attribute>
          <attribute name="class" type="string" use="required">
             <annotation>
                <documentation>
-                  
+                  The actual controller Class, that needs to extend the AnimationDataController class. It will be hooked as a listener to KEV to data change and control flow change events and vice versa KEV will listen to this controller for data change events.
                </documentation>
                <appInfo>
                   <meta.attribute kind="java" basedOn="edu.unikiel.rtsys.kieler.kev.extension.AnimationDataController:"/>
@@ -94,7 +104,7 @@
          <meta.section type="apiInfo"/>
       </appInfo>
       <documentation>
-         [Enter API information here.]
+         The controller Class needs to extend the edu.unikiel.rtsys.kieler.kev.extension.AnimationDataController. It itself serves as DataChangeEventSource, to inform KEV about data that has to be displayed. Additionally it implements ControlFlowChangeListener and DataChangeListener to be informed about events of KEV: control flow events (stop, start, step, delay time,...) and user input (buttons in the image, etc.).
       </documentation>
    </annotation>
 

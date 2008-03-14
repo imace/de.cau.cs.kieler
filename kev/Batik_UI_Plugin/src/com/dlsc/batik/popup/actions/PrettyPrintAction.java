@@ -2,7 +2,7 @@ package com.dlsc.batik.popup.actions;
 
 import java.util.LinkedList;
 
-import org.apache.batik.apps.svgpp.Main;
+//import org.apache.batik.apps.svgpp.Main;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
@@ -94,9 +94,9 @@ public class PrettyPrintAction implements IObjectActionDelegate {
 			args[argList.size()] = file[i].getRawLocation().toString();
 			args[argList.size() + 1] = file[i].getRawLocation().toString() + "tmp"; //$NON-NLS-1$
 			
-			Main main = new Main(args);
+//			Main main = new Main(args);
 			try {
-				main.run();
+//				main.run();
 
 				file[i].getParent().refreshLocal(1, null);
 				trace("Path: " + file[i].getProjectRelativePath().toString() + "tmp"); //$NON-NLS-1$ //$NON-NLS-2$

@@ -191,6 +191,7 @@ public class OpenImageWizard extends Wizard {
 					Path path = new Path(configElements[i].getAttribute("filename"));
 					URL url = FileLocator.find(bundle, path, null);
 					String name = configElements[i].getAttribute("name");
+					System.out.println("path:"+path+" url:"+url+" name:"+name);
 					if(name == null || name.isEmpty())
 						name = url.getFile();
 					int suffix = 2; // make sure there are no doubles
@@ -241,10 +242,11 @@ public class OpenImageWizard extends Wizard {
 					return;
 				}
 				for (int i = 0; i < list.getSelection().length; i++) {
-					System.out.println(list.getSelection()[i]);
+					URL url = imageUrlMap.get(list.getSelection()[i]);
+					String URLstring = url.toString();
 					// only one selected element makes sense
 					if(i == 0){
-						resourceNameField.setText(imageUrlMap.get(list.getSelection()[i]).toString());
+						resourceNameField.setText(URLstring);
 					}
 				}	
 			}else

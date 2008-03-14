@@ -6,11 +6,16 @@
          <meta.schema plugin="edu.unikiel.rtsys.kieler.kev" id="edu.unikiel.rtsys.kieler.kev.image" name="KEV predefined example image"/>
       </appInfo>
       <documentation>
-         [Enter description of this extension point.]
+         Adds an example svg image (together with an animation mapping file) to the predefined list of images. They will be bundled into the application and then be easily accessible by the open wizard.
       </documentation>
    </annotation>
 
    <element name="extension">
+      <annotation>
+         <documentation>
+            Adds an example svg image (together with an animation mapping file) to the predefined list of images. They will be bundled into the application and then be easily accessible by the open wizard.
+         </documentation>
+      </annotation>
       <complexType>
          <sequence minOccurs="1" maxOccurs="unbounded">
             <element ref="image"/>
@@ -43,6 +48,11 @@
    </element>
 
    <element name="image">
+      <annotation>
+         <documentation>
+            Image element to specify an svg image.
+         </documentation>
+      </annotation>
       <complexType>
          <attribute name="id" type="string" use="required">
             <annotation>
@@ -54,14 +64,14 @@
          <attribute name="name" type="string" use="required">
             <annotation>
                <documentation>
-                  
+                  Descriptive name of the Image, that will be visible in the OpenWizard later on to choose the picture.
                </documentation>
             </annotation>
          </attribute>
          <attribute name="filename" type="string" use="required">
             <annotation>
                <documentation>
-                  File name of an svg-image file (together with an available animation mapping file (*.map).
+                  File name of an svg-image file (*.svg). A corresponding animation mapping file (*.map) needs to be available in the same directory.
                </documentation>
                <appInfo>
                   <meta.attribute kind="resource"/>
@@ -85,7 +95,19 @@
          <meta.section type="examples"/>
       </appInfo>
       <documentation>
-         [Enter extension point usage example here.]
+         &lt;extension
+         point=&quot;edu.unikiel.rtsys.kieler.kev.image&quot;&gt;
+      &lt;image
+            filename=&quot;examples/railway-6b1.svg&quot;
+            id=&quot;edu.unikiel.rtsys.kieler.kev.image3&quot;
+            name=&quot;Model Railway&quot;&gt;
+      &lt;/image&gt;
+      &lt;image
+            filename=&quot;examples/flap.svg&quot;
+            id=&quot;edu.unikiel.rtsys.kieler.kev.image4&quot;
+            name=&quot;High-Lift Flap Panel&quot;&gt;
+      &lt;/image&gt;
+&lt;/extension&gt;
       </documentation>
    </annotation>
 

@@ -1,5 +1,6 @@
 package com.dlsc.batik.viewer;
 import java.util.Iterator;
+
 import org.apache.batik.swing.JSVGCanvas;
 import org.apache.batik.swing.svg.SVGDocumentLoader;
 import org.apache.batik.swing.svg.SVGDocumentLoaderListener;

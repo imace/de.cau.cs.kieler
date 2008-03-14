@@ -4,6 +4,7 @@
 <product name="KIEL Environment Visualization" id="edu.unikiel.rtsys.kieler.kev.application.product" application="edu.unikiel.rtsys.kieler.kev.application.application" useFeatures="false">
 
    <aboutInfo>
+      <image path="/edu.unikiel.rtsys.kieler.kev.application/icons/kev_about.png"/>
       <text>
          KIELER - Kiel Integrated Environment for Layout for Eclipse Rich Client Platform
 KEV - KIEL Environment Visualization
@@ -26,7 +27,7 @@ http://www.informatik.uni-kiel.de/en/rtsys/
       startupProgressRect="0,610,360,15"
       startupMessageRect="0,600,360,20"
       startupForegroundColor="000000" />
-   <launcher>
+   <launcher name="kev">
       <solaris/>
       <win useIco="false">
          <bmp/>
@@ -35,6 +36,7 @@ http://www.informatik.uni-kiel.de/en/rtsys/
 
 
    <vm>
+      <linux type="jre">jdk1.6.0</linux>
    </vm>
 
    <plugins>

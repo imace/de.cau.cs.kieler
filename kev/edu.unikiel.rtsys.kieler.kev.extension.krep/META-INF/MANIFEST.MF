@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: KEV KReP Interface
+Bundle-SymbolicName: edu.unikiel.rtsys.kieler.kev.extension.krep;singleton:=true
+Bundle-Version: 1.0.0
+Bundle-Activator: edu.unikiel.rtsys.kieler.kev.extension.krep.KevKrepPlugin
+Bundle-Vendor: Christian-Albrechts-Universität zu Kiel
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ krep.evalbench.base;bundle-version="1.0.0",
+ edu.unikiel.rtsys.kieler.kev;bundle-version="1.0.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Eclipse-LazyStart: true

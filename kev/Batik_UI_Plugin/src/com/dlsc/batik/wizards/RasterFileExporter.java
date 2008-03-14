@@ -13,7 +13,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.LinkedList;
 
-import org.apache.batik.apps.rasterizer.Main;
+// TODO: repair
+//import org.apache.batik.apps.rasterizer.Main;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
@@ -93,8 +94,8 @@ class RasterFileExporter {
 				trace(args[i]);
 			}
 			
-			Main main = new Main(args);
-			main.execute();
+//			Main main = new Main(args);
+//			main.execute();
 		} catch (Throwable t) {
 			t.printStackTrace();
 		}
