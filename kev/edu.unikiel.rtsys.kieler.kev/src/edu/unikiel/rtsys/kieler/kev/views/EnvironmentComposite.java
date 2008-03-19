@@ -171,8 +171,8 @@ public class EnvironmentComposite extends Composite implements ISelectionListene
 			updater = new SVGResourceChangeListener();
 			workspace.addResourceChangeListener(updater);
 		} catch (Throwable t) {
-			Status s = new Status(0,"",0,t.getMessage(),t);
-			ErrorDialog d = new ErrorDialog(this.getShell(),"Error",t.getMessage(),s,IStatus.ERROR);
+			//Status s = new Status(0,"",0,t.getMessage(),t);
+			//ErrorDialog d = new ErrorDialog(this.getShell(),"Error",t.getMessage(),s,IStatus.ERROR);
 		}
 	}
 	

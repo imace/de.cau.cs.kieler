@@ -44,8 +44,11 @@ public class AnimationData {
 		if(item instanceof Integer ||
 				item instanceof Boolean ||
 				item instanceof Double ||
-				item instanceof String)
+				item instanceof String){
+			if(data.size() < i+1) // add new elements, if not enough space
+				data.setSize(i+1);
 			data.set(i, item);
+		}
 		else
 			Tools.showDialog("Internal error: Data is of not supported format: "+item+". Supported Formats only: Integer, Boolean, Double, String", new NumberFormatException());
 	}

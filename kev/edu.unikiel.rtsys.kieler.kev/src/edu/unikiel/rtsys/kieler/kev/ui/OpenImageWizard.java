@@ -66,6 +66,7 @@ public class OpenImageWizard extends Wizard {
 		IViewReference[] views = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getViewReferences();
 		for (int i = 0; i < views.length; i++) {
 			IViewPart view = views[i].getView(false);
+			try{
 			if(view.getViewSite().getId().equals(EnvironmentView.ID)){
 				// now try to load the selected image resource
 				URL url;
@@ -77,8 +78,9 @@ public class OpenImageWizard extends Wizard {
 				} catch (MalformedURLException e) {
 					page.setErrorMessage("The selected file URL is not valid: "+e.getMessage());
 				}	
-			}
+			}} catch (Exception e){/*nothing, something wrong with actual view, so proceed with loop */}
 		}
+		page.setErrorMessage("Could not find KEV view...");
 		return false;
 	}
 	

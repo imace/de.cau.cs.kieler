@@ -7,6 +7,8 @@ import org.eclipse.core.runtime.jobs.Job;
 
 import edu.unikiel.rtsys.kieler.kev.extension.AnimationData;
 import edu.unikiel.rtsys.kieler.kev.extension.AnimationDataController;
+import edu.unikiel.rtsys.kieler.kev.extension.ControlFlowChangeEvent;
+import edu.unikiel.rtsys.kieler.kev.extension.DataChangeEvent;
 import edu.unikiel.rtsys.kieler.kev.helpers.Tools;
 
 /**
@@ -141,7 +143,7 @@ public class ElevatorJob extends Job {
 		// set actual position of elevator for KEV
 		displayData.setData(2, new Integer(position));
 		// tell controller to inform KEV of data change (i.e. one step has been finished)
-		controller.fireDataChangeEvent(displayData);
+		controller.fireDataChangeEvent(DataChangeEvent.ALL, displayData);
 		// reschedule for next step if not paused
 		if(paused == false)
 			this.schedule(delay);	

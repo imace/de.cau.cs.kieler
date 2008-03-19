@@ -25,8 +25,15 @@ public class DataChangeEventSource {
 		eventListeners.clear();
 	}
 	
-	public void fireDataChangeEvent(AnimationData data){
-		DataChangeEvent e = new DataChangeEvent(this, data);
+	/**
+	 * Notifies all data change listeners about a data change.
+	 * A port number can be passed to indicate which item of
+	 * the whole data has only been changed. 
+	 * @param port index of the changed data
+	 * @param data whole data object
+	 */
+	public void fireDataChangeEvent(int port, AnimationData data){
+		DataChangeEvent e = new DataChangeEvent(this, data, port);
 		for (DataChangeListener listener : eventListeners) {
 			listener.dataChanged(e);			
 		}

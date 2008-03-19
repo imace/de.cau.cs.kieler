@@ -11,15 +11,23 @@ import edu.unikiel.rtsys.kieler.kev.extension.ControlFlowChangeEvent;
 import edu.unikiel.rtsys.kieler.kev.extension.DataChangeEvent;
 import edu.unikiel.rtsys.kieler.kev.helpers.Tools;
 
-public class KrepAnimationDataController extends AnimationDataControllerAggregated implements ISignalListener {
+public class KrepAnimationDataController extends AnimationDataControllerAggregated{
 
+	/** implementing singleton pattern to be able to interface between KEV and KREP extension points */
+	public static KrepAnimationDataController INSTANCE;
+	
 	/** Data object to be displayed in the graphics */
     AnimationData kevAnimationData = new AnimationData();
 	
 	public KrepAnimationDataController() {
-		// TODO Auto-generated constructor stub
+		INSTANCE = this;
 	}
 
+	/** implementing singleton pattern to be able to interface between KEV and KREP extension points */
+	public static KrepAnimationDataController getInstace(){
+		return INSTANCE;
+	}
+	
 	/**
 	 * Listener Method called from KEV to indicate some control flow
 	 * has been changed by the KEV buttons (start, stop, step, delay time).
@@ -41,39 +49,5 @@ public class KrepAnimationDataController extends AnimationDataControllerAggregat
 		// TODO Auto-generated method stub
 	}
 
-	/**
-	 * KReP callback to tell the animation to perform one tick. Inputs
-	 * and outputs are mapped from the KEV interface.
-	 */
-	@Override
-	public void tickPerformed(LinkedList<Signal> inputs,
-			LinkedList<Signal> outputs) {
-		// receive a clone of the current control data
-		AnimationData kevControlData = this.getControlData();
-		// reset the current control data in order to start aggregating new events
-		this.resetControlData();
-		try{
-			// send data to KEV
-			for (Signal signal : outputs) {
-				if(signal.isValued())
-					kevAnimationData.setData(signal.getIndex(), signal.getValue());
-				else
-					kevAnimationData.setData(signal.getIndex(), new Boolean(signal.getPresent()));
-			}
-			this.fireDataChangeEvent(kevAnimationData);
-			
-			// send data to KReP
-			for (Signal signal : inputs) {
-				Object item = kevControlData.getData().get(signal.getIndex());
-				if(item instanceof Boolean)
-					signal.setPresent(((Boolean)item).booleanValue());
-				else
-					signal.setValue(item);
-			}
-			
-		}catch(Exception e){
-			Tools.showDialog("Problems at passing data between KEV and KReP Eval Bench. Maybe the two data signatures do not match.", e);
-		}
-	}
 
 }

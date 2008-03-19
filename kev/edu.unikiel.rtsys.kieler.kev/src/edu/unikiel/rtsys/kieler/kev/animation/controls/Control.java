@@ -7,6 +7,7 @@ import org.apache.batik.dom.svg.SVGOMElement;
 
 import edu.unikiel.rtsys.kieler.kev.animation.mapping.AnimationMapping;
 import edu.unikiel.rtsys.kieler.kev.extension.AnimationData;
+import edu.unikiel.rtsys.kieler.kev.extension.DataChangeEvent;
 import edu.unikiel.rtsys.kieler.kev.extension.DataChangeEventSource;
 
 /**
@@ -116,7 +117,7 @@ public abstract class Control extends DataChangeEventSource implements Observer 
 		if (hasChanged == true){
 			this.getDataToSend().setData(this.getPort(), this.getStatus());
 			hasChanged = false;
-			this.fireDataChangeEvent(this.dataToSend);
+			this.fireDataChangeEvent(this.getPort(), this.dataToSend);
 		}
 	}
 	
