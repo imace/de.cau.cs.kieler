@@ -18,6 +18,8 @@ public class KrepAnimationDataController extends AnimationDataControllerAggregat
 	
 	/** Data object to be displayed in the graphics */
     AnimationData kevAnimationData = new AnimationData();
+    
+    KrepTickControlJob tickJob;
 	
 	public KrepAnimationDataController() {
 		INSTANCE = this;
@@ -37,7 +39,23 @@ public class KrepAnimationDataController extends AnimationDataControllerAggregat
 	 */
 	@Override
 	public void controlFlowChanged(ControlFlowChangeEvent e) {
-		/*nothing*/
+		KrepTickManager tickManager = KrepTickManager.getInstance();
+		if(tickJob == null)
+			tickJob = new KrepTickControlJob("Krep/KEV Tick Job", tickManager);
+		switch (e.getType()) {
+		case DELAY:
+			try{tickJob.setDelay((Integer)e.getData());}catch(Exception exc){Tools.showDialog(exc);}
+			break;
+		case START:
+			tickJob.setPaused(false);
+			tickJob.schedule();
+			break;
+		case STEP:
+			tickJob.setPaused(true);
+			tickJob.schedule();
+		default:
+			tickJob.cancel();
+		}
 	}
 
 	/**
