@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ====================================================================== 
+     20.03.2008 21:05:08                                                        
+
+     KEPK    
+     Model Checking using Graphical Validation Rules
+                   
+     Steffen Jacobs                                                                
+     ====================================================================== -->
+<project name="KEPK" default="main" basedir="..">
+	<description>
+            Model Checking using Graphical Validation Rules
+    </description>
+
+	<dirname property="antfile.dir" file="${ant.file}"/>
+
+	<!-- Global properties -->
+	<property name="main.directory" location="${antfile.dir}"/>
+	<property name="output.directory" location="${main.directory}"/>
+	<property name="source.directory" value="src"/>
+	<property name="genJDKLevel" value="5.0"/>
+
+	<!-- ================================= 
+          target: main              
+         ================================= -->
+	<target name="main" description="--> Model Checking using Graphical Validation Rules">
+
+		<macrodef name="ecore2Java">
+			<attribute name="modelName" />
+			<element name="settings" />
+			<sequential>
+				<emf.Ecore2Java model="${main.directory}/model/@{modelName}.ecore" 
+								genModel="${output.directory}/model/@{modelName}.genmodel" 
+								modelProject="${output.directory}" 
+								modelProjectFragmentPath="${source.directory}"
+								modelPluginID="@{modelName}.model"
+								copyright="This is my code"
+								jdkLevel="${genJDKLevel}"
+								generateeditproject="true"
+								generatemodelproject="true"
+								validatemodel="true"
+								generateeditorproject="true">
+					<settings />
+				</emf.Ecore2Java>
+			</sequential>
+		</macrodef>
+
+		<ecore2Java modelName="epc">
+			<settings>
+				<arg line="-package http://informatik.uni-kiel.de/aiw/epcmodel"/>
+			</settings>
+		</ecore2Java>
+	</target>
+
+</project>
