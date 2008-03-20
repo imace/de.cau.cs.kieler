@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: EPCEditor Customizations
+Bundle-SymbolicName: edu.unikiel.informatik.aiw.epc.custom
+Bundle-Version: 1.0.0
+Bundle-Activator: edu.unikiel.informatik.aiw.epc.custom.Activator
+Bundle-Vendor: http://www.informatik.uni-kiel.de
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.gmf.runtime.draw2d.ui.render;visibility:=reexport,
+ org.eclipse.draw2d
+Eclipse-LazyStart: true
+Export-Package: edu.unikiel.informatik.aiw.epc.custom
