@@ -8,16 +8,16 @@
     <descriptors
         name="EPCFigure">
       <actualFigure
-          xsi:type="gmfgraph:RoundedRectangle"
-          name="OuterFigure"
-          cornerWidth="20"
-          cornerHeight="20">
-        <layout
-            xsi:type="gmfgraph:StackLayout"/>
-        <preferredSize
-            dx="85"
-            dy="49"/>
+          xsi:type="gmfgraph:Rectangle"
+          name="EPCFigure"
+          lineWidth="3">
+        <children
+            xsi:type="gmfgraph:Label"
+            name="EPCNameFigure"
+            text="&lt;...>"/>
       </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.0/@actualFigure/@children.0"/>
     </descriptors>
     <descriptors
         name="EventFigure">
@@ -292,13 +292,21 @@
   <labels
       name="EventName"
       figure="EventFigure"
+      elementIcon="false"
       accessor="//@figures.0/@descriptors.1/@accessors.0"/>
   <labels
       name="FunctionName"
       figure="FunctionFigure"
+      elementIcon="false"
       accessor="//@figures.0/@descriptors.2/@accessors.0"/>
   <labels
       name="InformationName"
       figure="InformationFigure"
+      elementIcon="false"
       accessor="//@figures.0/@descriptors.7/@accessors.0"/>
+  <labels
+      name="EPCName"
+      figure="EPCFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.0/@accessors.0"/>
 </gmfgraph:Canvas>

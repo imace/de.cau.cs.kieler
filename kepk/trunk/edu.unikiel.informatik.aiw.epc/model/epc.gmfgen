@@ -3,34 +3,6 @@
     xmlns:xmi="http://www.omg.org/XMI"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:gmfgen="http://www.eclipse.org/gmf/2006/GenModel">
-  <audits>
-    <categories
-        id="epcValidationRules"
-        name="EPC syntax validation rules"
-        description="Some validation audits"
-        path="//@audits/@categories.0"/>
-    <categories
-        id="commonRules"
-        name="Common"
-        description="Common validation rules to ensure model integrity"
-        path="//@audits/@categories.0 //@audits/@categories.1"
-        audits="//@audits/@rules.0"/>
-    <rules
-        name="No empty name properties."
-        description="Nodes (functions, operators, ...) should not have empty name properties."
-        id="common.rule1"
-        message="{0} should have a name."
-        severity="WARNING"
-        category="//@audits/@categories.1">
-      <rule
-          body="self.name.size() >= 1"/>
-      <target
-          xsi:type="gmfgen:GenDomainElementTarget">
-        <element
-            href="epc.genmodel#//epc/Node"/>
-      </target>
-    </rules>
-  </audits>
   <diagram
       visualID="79"
       editPartClassName="EPCEditPart"
@@ -49,74 +21,8 @@
         figureQualifiedClassName="org.eclipse.draw2d.FreeformLayer"/>
     <domainDiagramElement
         href="epc.genmodel#//epc/EPC"/>
-    <childNodes
-        visualID="2001"
-        editPartClassName="EPC3EditPart"
-        itemSemanticEditPolicyClassName="EPC3ItemSemanticEditPolicy"
-        notationViewFactoryClassName="EPC3ViewFactory"
-        canonicalEditPolicyClassName="EPC3CanonicalEditPolicy"
-        compartments="//@diagram/@compartments.1"
-        graphicalNodeEditPolicyClassName="EPC2GraphicalNodeEditPolicy"
-        createCommandClassName="EPC2CreateCommand"
-        containers="//@diagram/@compartments.1 //@diagram/@compartments.0">
-      <diagramRunTimeClass
-          href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
-      <elementType
-          xsi:type="gmfgen:SpecializationType"
-          metamodelType="//@diagram/@elementType"/>
-      <viewmap
-          xsi:type="gmfgen:InnerClassViewmap"
-          className="EPCFigure"
-          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class EPCFigure extends org.eclipse.draw2d.RoundedRectangle {&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public EPCFigure() {&#xA;&#x9;&#x9;&#xA;this.setLayoutManager(new org.eclipse.draw2d.StackLayout());&#xA;&#x9;&#x9;this.setCornerDimensions(new org.eclipse.draw2d.geometry.Dimension(getMapMode().DPtoLP(20)&#xA;, getMapMode().DPtoLP(20)&#xA;));&#xA;this.setPreferredSize(new org.eclipse.draw2d.geometry.Dimension(getMapMode().DPtoLP(85)&#xA;, getMapMode().DPtoLP(49)&#xA;));&#xA;&#x9;}&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private boolean myUseLocalCoordinates = false;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected boolean useLocalCoordinates() {&#xA;&#x9;&#x9;return myUseLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#xA;&#x9;&#x9;myUseLocalCoordinates = useLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;}&#xA;&#xA;">
-        <attributes
-            xsi:type="gmfgen:DefaultSizeAttributes"
-            width="85"
-            height="49"/>
-        <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
-      </viewmap>
-      <modelFacet>
-        <metaClass
-            href="epc.genmodel#//epc/EPC"/>
-        <containmentMetaFeature
-            href="epc.genmodel#//epc/EPC/objects"/>
-        <childMetaFeature
-            href="epc.genmodel#//epc/EPC/objects"/>
-      </modelFacet>
-    </childNodes>
     <topLevelNodes
         visualID="1001"
-        editPartClassName="XOREditPart"
-        itemSemanticEditPolicyClassName="XORItemSemanticEditPolicy"
-        notationViewFactoryClassName="XORViewFactory"
-        canonicalEditPolicyClassName="XORCanonicalEditPolicy"
-        graphicalNodeEditPolicyClassName="XORGraphicalNodeEditPolicy"
-        createCommandClassName="XORCreateCommand">
-      <diagramRunTimeClass
-          href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
-      <elementType
-          xsi:type="gmfgen:MetamodelType"
-          editHelperClassName="XOREditHelper"/>
-      <viewmap
-          xsi:type="gmfgen:InnerClassViewmap"
-          className="XORFigure"
-          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class XORFigure extends org.eclipse.draw2d.RectangleFigure {&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public XORFigure() {&#xA;&#x9;&#x9;&#xA;this.setLayoutManager(new org.eclipse.draw2d.StackLayout());&#xA;&#x9;&#x9;this.setFill(false);&#xA;this.setOutline(false);&#xA;this.setPreferredSize(new org.eclipse.draw2d.geometry.Dimension(getMapMode().DPtoLP(35)&#xA;, getMapMode().DPtoLP(35)&#xA;));&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;org.eclipse.draw2d.Ellipse elli0 = new org.eclipse.draw2d.Ellipse();&#xA;&#xA;elli0.setBorder(new org.eclipse.draw2d.MarginBorder(getMapMode().DPtoLP(10)&#xA;, getMapMode().DPtoLP(10)&#xA;, getMapMode().DPtoLP(10)&#xA;, getMapMode().DPtoLP(10)&#xA;));&#xA;&#xA;this.add(elli0);&#xA;&#xA;elli0.setLayoutManager(new org.eclipse.draw2d.StackLayout());&#xA;&#xA;&#xA;edu.unikiel.informatik.aiw.epc.custom.ScalableSVGImageFigure xORFigure1 = new edu.unikiel.informatik.aiw.epc.custom.ScalableSVGImageFigure();&#xA;&#xA;&#xA;&#xA;&#xA;xORFigure1.setRenderedImage(&#xA;&quot;XORFigure.svg&quot;);&#xA;&#xA;&#xA;&#xA;elli0.add(xORFigure1);&#xA;&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private boolean myUseLocalCoordinates = false;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected boolean useLocalCoordinates() {&#xA;&#x9;&#x9;return myUseLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#xA;&#x9;&#x9;myUseLocalCoordinates = useLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;}&#xA;&#xA;">
-        <attributes
-            xsi:type="gmfgen:DefaultSizeAttributes"
-            width="35"
-            height="35"/>
-        <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
-      </viewmap>
-      <modelFacet>
-        <metaClass
-            href="epc.genmodel#//epc/XOR"/>
-        <containmentMetaFeature
-            href="epc.genmodel#//epc/EPC/objects"/>
-        <childMetaFeature
-            href="epc.genmodel#//epc/EPC/objects"/>
-      </modelFacet>
-    </topLevelNodes>
-    <topLevelNodes
-        visualID="1002"
         editPartClassName="ANDEditPart"
         itemSemanticEditPolicyClassName="ANDItemSemanticEditPolicy"
         notationViewFactoryClassName="ANDViewFactory"
@@ -148,7 +54,7 @@
       </modelFacet>
     </topLevelNodes>
     <topLevelNodes
-        visualID="1003"
+        visualID="1002"
         editPartClassName="OREditPart"
         itemSemanticEditPolicyClassName="ORItemSemanticEditPolicy"
         notationViewFactoryClassName="ORViewFactory"
@@ -180,7 +86,84 @@
       </modelFacet>
     </topLevelNodes>
     <topLevelNodes
+        visualID="1003"
+        editPartClassName="InformationEditPart"
+        itemSemanticEditPolicyClassName="InformationItemSemanticEditPolicy"
+        notationViewFactoryClassName="InformationViewFactory"
+        canonicalEditPolicyClassName="InformationCanonicalEditPolicy"
+        graphicalNodeEditPolicyClassName="InformationGraphicalNodeEditPolicy"
+        createCommandClassName="InformationCreateCommand">
+      <diagramRunTimeClass
+          href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+      <elementType
+          xsi:type="gmfgen:MetamodelType"
+          editHelperClassName="InformationEditHelper"/>
+      <viewmap
+          xsi:type="gmfgen:InnerClassViewmap"
+          className="InformationFigure"
+          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class InformationFigure extends org.eclipse.draw2d.RectangleFigure {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel fFigureInformationNameFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public InformationFigure() {&#xA;&#x9;&#x9;&#x9;&#x9;&#xA;this.setBorder(new org.eclipse.draw2d.MarginBorder(getMapMode().DPtoLP(0)&#xA;, getMapMode().DPtoLP(10)&#xA;, getMapMode().DPtoLP(0)&#xA;, getMapMode().DPtoLP(10)&#xA;));&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;org.eclipse.draw2d.RectangleFigure containingLabelRect0 = new org.eclipse.draw2d.RectangleFigure();&#xA;&#xA;this.add(containingLabelRect0);&#xA;&#xA;containingLabelRect0.setLayoutManager(new org.eclipse.draw2d.StackLayout());&#xA;&#xA;&#xA;fFigureInformationNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel();&#xA;fFigureInformationNameFigure.setText(&quot;&lt;...>&quot;);&#xA;&#xA;containingLabelRect0.add(fFigureInformationNameFigure);&#xA;&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private boolean myUseLocalCoordinates = false;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected boolean useLocalCoordinates() {&#xA;&#x9;&#x9;return myUseLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#xA;&#x9;&#x9;myUseLocalCoordinates = useLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel getFigureInformationNameFigure() {&#xA;&#x9;&#x9;return fFigureInformationNameFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;">
+        <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
+      </viewmap>
+      <modelFacet>
+        <metaClass
+            href="epc.genmodel#//epc/Information"/>
+        <containmentMetaFeature
+            href="epc.genmodel#//epc/EPC/objects"/>
+        <childMetaFeature
+            href="epc.genmodel#//epc/EPC/objects"/>
+      </modelFacet>
+      <labels
+          visualID="4001"
+          editPartClassName="InformationNameEditPart"
+          itemSemanticEditPolicyClassName="InformationNameItemSemanticEditPolicy"
+          notationViewFactoryClassName="InformationNameViewFactory">
+        <diagramRunTimeClass
+            href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+        <viewmap
+            xsi:type="gmfgen:ParentAssignedViewmap"
+            getterName="getFigureInformationNameFigure"
+            figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel"/>
+        <modelFacet
+            xsi:type="gmfgen:FeatureLabelModelFacet">
+          <metaFeatures
+              href="epc.genmodel#//epc/Node/name"/>
+        </modelFacet>
+      </labels>
+    </topLevelNodes>
+    <topLevelNodes
         visualID="1004"
+        editPartClassName="XOREditPart"
+        itemSemanticEditPolicyClassName="XORItemSemanticEditPolicy"
+        notationViewFactoryClassName="XORViewFactory"
+        canonicalEditPolicyClassName="XORCanonicalEditPolicy"
+        graphicalNodeEditPolicyClassName="XORGraphicalNodeEditPolicy"
+        createCommandClassName="XORCreateCommand">
+      <diagramRunTimeClass
+          href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+      <elementType
+          xsi:type="gmfgen:MetamodelType"
+          editHelperClassName="XOREditHelper"/>
+      <viewmap
+          xsi:type="gmfgen:InnerClassViewmap"
+          className="XORFigure"
+          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class XORFigure extends org.eclipse.draw2d.RectangleFigure {&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public XORFigure() {&#xA;&#x9;&#x9;&#xA;this.setLayoutManager(new org.eclipse.draw2d.StackLayout());&#xA;&#x9;&#x9;this.setFill(false);&#xA;this.setOutline(false);&#xA;this.setPreferredSize(new org.eclipse.draw2d.geometry.Dimension(getMapMode().DPtoLP(35)&#xA;, getMapMode().DPtoLP(35)&#xA;));&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;org.eclipse.draw2d.Ellipse elli0 = new org.eclipse.draw2d.Ellipse();&#xA;&#xA;elli0.setBorder(new org.eclipse.draw2d.MarginBorder(getMapMode().DPtoLP(10)&#xA;, getMapMode().DPtoLP(10)&#xA;, getMapMode().DPtoLP(10)&#xA;, getMapMode().DPtoLP(10)&#xA;));&#xA;&#xA;this.add(elli0);&#xA;&#xA;elli0.setLayoutManager(new org.eclipse.draw2d.StackLayout());&#xA;&#xA;&#xA;edu.unikiel.informatik.aiw.epc.custom.ScalableSVGImageFigure xORFigure1 = new edu.unikiel.informatik.aiw.epc.custom.ScalableSVGImageFigure();&#xA;&#xA;&#xA;&#xA;&#xA;xORFigure1.setRenderedImage(&#xA;&quot;XORFigure.svg&quot;);&#xA;&#xA;&#xA;&#xA;elli0.add(xORFigure1);&#xA;&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private boolean myUseLocalCoordinates = false;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected boolean useLocalCoordinates() {&#xA;&#x9;&#x9;return myUseLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#xA;&#x9;&#x9;myUseLocalCoordinates = useLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;}&#xA;&#xA;">
+        <attributes
+            xsi:type="gmfgen:DefaultSizeAttributes"
+            width="35"
+            height="35"/>
+        <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
+      </viewmap>
+      <modelFacet>
+        <metaClass
+            href="epc.genmodel#//epc/XOR"/>
+        <containmentMetaFeature
+            href="epc.genmodel#//epc/EPC/objects"/>
+        <childMetaFeature
+            href="epc.genmodel#//epc/EPC/objects"/>
+      </modelFacet>
+    </topLevelNodes>
+    <topLevelNodes
+        visualID="1005"
         editPartClassName="EventEditPart"
         itemSemanticEditPolicyClassName="EventItemSemanticEditPolicy"
         notationViewFactoryClassName="EventViewFactory"
@@ -211,11 +194,10 @@
             href="epc.genmodel#//epc/EPC/objects"/>
       </modelFacet>
       <labels
-          visualID="4001"
+          visualID="4002"
           editPartClassName="EventNameEditPart"
           itemSemanticEditPolicyClassName="EventNameItemSemanticEditPolicy"
-          notationViewFactoryClassName="EventNameViewFactory"
-          elementIcon="true">
+          notationViewFactoryClassName="EventNameViewFactory">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap
@@ -230,7 +212,53 @@
       </labels>
     </topLevelNodes>
     <topLevelNodes
-        visualID="1005"
+        visualID="1006"
+        editPartClassName="EPC2EditPart"
+        itemSemanticEditPolicyClassName="EPC2ItemSemanticEditPolicy"
+        notationViewFactoryClassName="EPC2ViewFactory"
+        canonicalEditPolicyClassName="EPC2CanonicalEditPolicy"
+        graphicalNodeEditPolicyClassName="EPCGraphicalNodeEditPolicy"
+        createCommandClassName="EPCCreateCommand">
+      <diagramRunTimeClass
+          href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+      <elementType
+          xsi:type="gmfgen:SpecializationType"
+          metamodelType="//@diagram/@elementType"/>
+      <viewmap
+          xsi:type="gmfgen:InnerClassViewmap"
+          className="EPCFigure"
+          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class EPCFigure extends org.eclipse.draw2d.RectangleFigure {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel fFigureEPCNameFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public EPCFigure() {&#xA;&#x9;&#x9;&#x9;&#x9;this.setLineWidth(3);&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureEPCNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel();&#xA;fFigureEPCNameFigure.setText(&quot;&lt;...>&quot;);&#xA;&#xA;this.add(fFigureEPCNameFigure);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private boolean myUseLocalCoordinates = false;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected boolean useLocalCoordinates() {&#xA;&#x9;&#x9;return myUseLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#xA;&#x9;&#x9;myUseLocalCoordinates = useLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel getFigureEPCNameFigure() {&#xA;&#x9;&#x9;return fFigureEPCNameFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;">
+        <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
+      </viewmap>
+      <modelFacet>
+        <metaClass
+            href="epc.genmodel#//epc/EPC"/>
+        <containmentMetaFeature
+            href="epc.genmodel#//epc/EPC/objects"/>
+        <childMetaFeature
+            href="epc.genmodel#//epc/EPC/objects"/>
+      </modelFacet>
+      <labels
+          visualID="4003"
+          editPartClassName="EPCNameEditPart"
+          itemSemanticEditPolicyClassName="EPCNameItemSemanticEditPolicy"
+          notationViewFactoryClassName="EPCNameViewFactory">
+        <diagramRunTimeClass
+            href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+        <viewmap
+            xsi:type="gmfgen:ParentAssignedViewmap"
+            getterName="getFigureEPCNameFigure"
+            figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel"/>
+        <modelFacet
+            xsi:type="gmfgen:FeatureLabelModelFacet"
+            editPattern="">
+          <metaFeatures
+              href="epc.genmodel#//epc/Node/name"/>
+        </modelFacet>
+      </labels>
+    </topLevelNodes>
+    <topLevelNodes
+        visualID="1007"
         editPartClassName="FunctionEditPart"
         itemSemanticEditPolicyClassName="FunctionItemSemanticEditPolicy"
         notationViewFactoryClassName="FunctionViewFactory"
@@ -261,96 +289,15 @@
             href="epc.genmodel#//epc/EPC/objects"/>
       </modelFacet>
       <labels
-          visualID="4002"
+          visualID="4004"
           editPartClassName="FunctionNameEditPart"
           itemSemanticEditPolicyClassName="FunctionNameItemSemanticEditPolicy"
-          notationViewFactoryClassName="FunctionNameViewFactory"
-          elementIcon="true">
+          notationViewFactoryClassName="FunctionNameViewFactory">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap
             xsi:type="gmfgen:ParentAssignedViewmap"
             getterName="getFigureFunctionNameFigure"
-            figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel"/>
-        <modelFacet
-            xsi:type="gmfgen:FeatureLabelModelFacet"
-            editPattern="">
-          <metaFeatures
-              href="epc.genmodel#//epc/Node/name"/>
-        </modelFacet>
-      </labels>
-    </topLevelNodes>
-    <topLevelNodes
-        visualID="1006"
-        editPartClassName="EPC2EditPart"
-        itemSemanticEditPolicyClassName="EPC2ItemSemanticEditPolicy"
-        notationViewFactoryClassName="EPC2ViewFactory"
-        canonicalEditPolicyClassName="EPC2CanonicalEditPolicy"
-        compartments="//@diagram/@compartments.0"
-        graphicalNodeEditPolicyClassName="EPCGraphicalNodeEditPolicy"
-        createCommandClassName="EPCCreateCommand">
-      <diagramRunTimeClass
-          href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
-      <elementType
-          xsi:type="gmfgen:SpecializationType"
-          metamodelType="//@diagram/@elementType"/>
-      <viewmap
-          xsi:type="gmfgen:InnerClassViewmap"
-          className="EPCFigure"
-          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class EPCFigure extends org.eclipse.draw2d.RoundedRectangle {&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public EPCFigure() {&#xA;&#x9;&#x9;&#xA;this.setLayoutManager(new org.eclipse.draw2d.StackLayout());&#xA;&#x9;&#x9;this.setCornerDimensions(new org.eclipse.draw2d.geometry.Dimension(getMapMode().DPtoLP(20)&#xA;, getMapMode().DPtoLP(20)&#xA;));&#xA;this.setPreferredSize(new org.eclipse.draw2d.geometry.Dimension(getMapMode().DPtoLP(85)&#xA;, getMapMode().DPtoLP(49)&#xA;));&#xA;&#x9;}&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private boolean myUseLocalCoordinates = false;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected boolean useLocalCoordinates() {&#xA;&#x9;&#x9;return myUseLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#xA;&#x9;&#x9;myUseLocalCoordinates = useLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;}&#xA;&#xA;">
-        <attributes
-            xsi:type="gmfgen:DefaultSizeAttributes"
-            width="85"
-            height="49"/>
-        <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
-      </viewmap>
-      <modelFacet>
-        <metaClass
-            href="epc.genmodel#//epc/EPC"/>
-        <containmentMetaFeature
-            href="epc.genmodel#//epc/EPC/objects"/>
-        <childMetaFeature
-            href="epc.genmodel#//epc/EPC/objects"/>
-      </modelFacet>
-    </topLevelNodes>
-    <topLevelNodes
-        visualID="1007"
-        editPartClassName="InformationEditPart"
-        itemSemanticEditPolicyClassName="InformationItemSemanticEditPolicy"
-        notationViewFactoryClassName="InformationViewFactory"
-        canonicalEditPolicyClassName="InformationCanonicalEditPolicy"
-        graphicalNodeEditPolicyClassName="InformationGraphicalNodeEditPolicy"
-        createCommandClassName="InformationCreateCommand">
-      <diagramRunTimeClass
-          href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
-      <elementType
-          xsi:type="gmfgen:MetamodelType"
-          editHelperClassName="InformationEditHelper"/>
-      <viewmap
-          xsi:type="gmfgen:InnerClassViewmap"
-          className="InformationFigure"
-          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class InformationFigure extends org.eclipse.draw2d.RectangleFigure {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel fFigureInformationNameFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public InformationFigure() {&#xA;&#x9;&#x9;&#x9;&#x9;&#xA;this.setBorder(new org.eclipse.draw2d.MarginBorder(getMapMode().DPtoLP(0)&#xA;, getMapMode().DPtoLP(10)&#xA;, getMapMode().DPtoLP(0)&#xA;, getMapMode().DPtoLP(10)&#xA;));&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;org.eclipse.draw2d.RectangleFigure containingLabelRect0 = new org.eclipse.draw2d.RectangleFigure();&#xA;&#xA;this.add(containingLabelRect0);&#xA;&#xA;containingLabelRect0.setLayoutManager(new org.eclipse.draw2d.StackLayout());&#xA;&#xA;&#xA;fFigureInformationNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel();&#xA;fFigureInformationNameFigure.setText(&quot;&lt;...>&quot;);&#xA;&#xA;containingLabelRect0.add(fFigureInformationNameFigure);&#xA;&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private boolean myUseLocalCoordinates = false;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected boolean useLocalCoordinates() {&#xA;&#x9;&#x9;return myUseLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#xA;&#x9;&#x9;myUseLocalCoordinates = useLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel getFigureInformationNameFigure() {&#xA;&#x9;&#x9;return fFigureInformationNameFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;">
-        <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
-      </viewmap>
-      <modelFacet>
-        <metaClass
-            href="epc.genmodel#//epc/Information"/>
-        <containmentMetaFeature
-            href="epc.genmodel#//epc/EPC/objects"/>
-        <childMetaFeature
-            href="epc.genmodel#//epc/EPC/objects"/>
-      </modelFacet>
-      <labels
-          visualID="4003"
-          editPartClassName="InformationNameEditPart"
-          itemSemanticEditPolicyClassName="InformationNameItemSemanticEditPolicy"
-          notationViewFactoryClassName="InformationNameViewFactory"
-          elementIcon="true">
-        <diagramRunTimeClass
-            href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
-        <viewmap
-            xsi:type="gmfgen:ParentAssignedViewmap"
-            getterName="getFigureInformationNameFigure"
             figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrapLabel"/>
         <modelFacet
             xsi:type="gmfgen:FeatureLabelModelFacet">
@@ -361,34 +308,34 @@
     </topLevelNodes>
     <links
         visualID="3001"
-        editPartClassName="ActivatesFunctionEditPart"
-        itemSemanticEditPolicyClassName="ActivatesFunctionItemSemanticEditPolicy"
-        notationViewFactoryClassName="ActivatesFunctionViewFactory"
-        createCommandClassName="ActivatesFunctionCreateCommand"
-        reorientCommandClassName="ActivatesFunctionReorientCommand">
+        editPartClassName="TriggersEventEditPart"
+        itemSemanticEditPolicyClassName="TriggersEventItemSemanticEditPolicy"
+        notationViewFactoryClassName="TriggersEventViewFactory"
+        createCommandClassName="TriggersEventCreateCommand"
+        reorientCommandClassName="TriggersEventReorientCommand">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Edge"/>
       <elementType
           xsi:type="gmfgen:MetamodelType"
-          editHelperClassName="ActivatesFunctionEditHelper"/>
+          editHelperClassName="TriggersEventEditHelper"/>
       <viewmap
           xsi:type="gmfgen:InnerClassViewmap"
-          className="ActivatesFunctionFigure"
-          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class ActivatesFunctionFigure extends org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx {&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public ActivatesFunctionFigure() {&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;setTargetDecoration(createTargetDecoration());&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.draw2d.RotatableDecoration createTargetDecoration() {&#xA;&#x9;&#x9;org.eclipse.draw2d.PolygonDecoration df = new org.eclipse.draw2d.PolygonDecoration();&#xA;&#x9;&#x9;return df;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;}&#xA;&#xA;">
+          className="TriggersEventFigure"
+          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class TriggersEventFigure extends org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx {&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public TriggersEventFigure() {&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;setTargetDecoration(createTargetDecoration());&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.draw2d.RotatableDecoration createTargetDecoration() {&#xA;&#x9;&#x9;org.eclipse.draw2d.PolylineDecoration df = new org.eclipse.draw2d.PolylineDecoration();&#xA;&#x9;&#x9;return df;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;}&#xA;&#xA;">
         <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
       </viewmap>
       <modelFacet
           xsi:type="gmfgen:TypeLinkModelFacet">
         <metaClass
-            href="epc.genmodel#//epc/ActivatesFunction"/>
+            href="epc.genmodel#//epc/TriggersEvent"/>
         <containmentMetaFeature
             href="epc.genmodel#//epc/EPC/connectors"/>
         <childMetaFeature
             href="epc.genmodel#//epc/EPC/connectors"/>
         <sourceMetaFeature
-            href="epc.genmodel#//epc/ActivatesFunction/source"/>
+            href="epc.genmodel#//epc/TriggersEvent/source"/>
         <targetMetaFeature
-            href="epc.genmodel#//epc/ActivatesFunction/target"/>
+            href="epc.genmodel#//epc/TriggersEvent/target"/>
       </modelFacet>
     </links>
     <links
@@ -425,38 +372,6 @@
     </links>
     <links
         visualID="3003"
-        editPartClassName="TriggersEventEditPart"
-        itemSemanticEditPolicyClassName="TriggersEventItemSemanticEditPolicy"
-        notationViewFactoryClassName="TriggersEventViewFactory"
-        createCommandClassName="TriggersEventCreateCommand"
-        reorientCommandClassName="TriggersEventReorientCommand">
-      <diagramRunTimeClass
-          href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Edge"/>
-      <elementType
-          xsi:type="gmfgen:MetamodelType"
-          editHelperClassName="TriggersEventEditHelper"/>
-      <viewmap
-          xsi:type="gmfgen:InnerClassViewmap"
-          className="TriggersEventFigure"
-          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class TriggersEventFigure extends org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx {&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public TriggersEventFigure() {&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;setTargetDecoration(createTargetDecoration());&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.draw2d.RotatableDecoration createTargetDecoration() {&#xA;&#x9;&#x9;org.eclipse.draw2d.PolylineDecoration df = new org.eclipse.draw2d.PolylineDecoration();&#xA;&#x9;&#x9;return df;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;}&#xA;&#xA;">
-        <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
-      </viewmap>
-      <modelFacet
-          xsi:type="gmfgen:TypeLinkModelFacet">
-        <metaClass
-            href="epc.genmodel#//epc/TriggersEvent"/>
-        <containmentMetaFeature
-            href="epc.genmodel#//epc/EPC/connectors"/>
-        <childMetaFeature
-            href="epc.genmodel#//epc/EPC/connectors"/>
-        <sourceMetaFeature
-            href="epc.genmodel#//epc/TriggersEvent/source"/>
-        <targetMetaFeature
-            href="epc.genmodel#//epc/TriggersEvent/target"/>
-      </modelFacet>
-    </links>
-    <links
-        visualID="3004"
         editPartClassName="WritesDataToEditPart"
         itemSemanticEditPolicyClassName="WritesDataToItemSemanticEditPolicy"
         notationViewFactoryClassName="WritesDataToViewFactory"
@@ -487,48 +402,38 @@
             href="epc.genmodel#//epc/WritesDataTo/target"/>
       </modelFacet>
     </links>
-    <compartments
-        visualID="5001"
-        editPartClassName="EPCEPCCompartmentEditPart"
-        itemSemanticEditPolicyClassName="EPCEPCCompartmentItemSemanticEditPolicy"
-        notationViewFactoryClassName="EPCEPCCompartmentViewFactory"
-        canonicalEditPolicyClassName="EPCEPCCompartmentCanonicalEditPolicy"
-        childNodes="//@diagram/@childNodes.0"
-        title="EPCCompartment"
-        canCollapse="false"
-        needsTitle="false"
-        node="//@diagram/@topLevelNodes.5"
-        listLayout="false">
+    <links
+        visualID="3004"
+        editPartClassName="ActivatesFunctionEditPart"
+        itemSemanticEditPolicyClassName="ActivatesFunctionItemSemanticEditPolicy"
+        notationViewFactoryClassName="ActivatesFunctionViewFactory"
+        createCommandClassName="ActivatesFunctionCreateCommand"
+        reorientCommandClassName="ActivatesFunctionReorientCommand">
       <diagramRunTimeClass
-          href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+          href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Edge"/>
+      <elementType
+          xsi:type="gmfgen:MetamodelType"
+          editHelperClassName="ActivatesFunctionEditHelper"/>
       <viewmap
           xsi:type="gmfgen:InnerClassViewmap"
-          className="EPCCompartmentFigure"
-          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class EPCCompartmentFigure extends org.eclipse.draw2d.RectangleFigure {&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public EPCCompartmentFigure() {&#xA;&#x9;&#x9;&#xA;this.setLayoutManager(new org.eclipse.draw2d.XYLayout());&#xA;&#x9;&#x9;&#x9;}&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private boolean myUseLocalCoordinates = false;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected boolean useLocalCoordinates() {&#xA;&#x9;&#x9;return myUseLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#xA;&#x9;&#x9;myUseLocalCoordinates = useLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;}&#xA;&#xA;">
+          className="ActivatesFunctionFigure"
+          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class ActivatesFunctionFigure extends org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx {&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public ActivatesFunctionFigure() {&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;setTargetDecoration(createTargetDecoration());&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.draw2d.RotatableDecoration createTargetDecoration() {&#xA;&#x9;&#x9;org.eclipse.draw2d.PolygonDecoration df = new org.eclipse.draw2d.PolygonDecoration();&#xA;&#x9;&#x9;return df;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;}&#xA;&#xA;">
         <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
       </viewmap>
-    </compartments>
-    <compartments
-        visualID="5002"
-        editPartClassName="EPCEPCCompartment2EditPart"
-        itemSemanticEditPolicyClassName="EPCEPCCompartment2ItemSemanticEditPolicy"
-        notationViewFactoryClassName="EPCEPCCompartment2ViewFactory"
-        canonicalEditPolicyClassName="EPCEPCCompartment2CanonicalEditPolicy"
-        childNodes="//@diagram/@childNodes.0"
-        title="EPCCompartment"
-        canCollapse="false"
-        needsTitle="false"
-        node="//@diagram/@childNodes.0"
-        listLayout="false">
-      <diagramRunTimeClass
-          href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
-      <viewmap
-          xsi:type="gmfgen:InnerClassViewmap"
-          className="EPCCompartmentFigure"
-          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class EPCCompartmentFigure extends org.eclipse.draw2d.RectangleFigure {&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public EPCCompartmentFigure() {&#xA;&#x9;&#x9;&#xA;this.setLayoutManager(new org.eclipse.draw2d.XYLayout());&#xA;&#x9;&#x9;&#x9;}&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private boolean myUseLocalCoordinates = false;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected boolean useLocalCoordinates() {&#xA;&#x9;&#x9;return myUseLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#xA;&#x9;&#x9;myUseLocalCoordinates = useLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;}&#xA;&#xA;">
-        <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
-      </viewmap>
-    </compartments>
+      <modelFacet
+          xsi:type="gmfgen:TypeLinkModelFacet">
+        <metaClass
+            href="epc.genmodel#//epc/ActivatesFunction"/>
+        <containmentMetaFeature
+            href="epc.genmodel#//epc/EPC/connectors"/>
+        <childMetaFeature
+            href="epc.genmodel#//epc/EPC/connectors"/>
+        <sourceMetaFeature
+            href="epc.genmodel#//epc/ActivatesFunction/source"/>
+        <targetMetaFeature
+            href="epc.genmodel#//epc/ActivatesFunction/target"/>
+      </modelFacet>
+    </links>
     <palette>
       <groups
           title="epc">
@@ -536,37 +441,37 @@
             xsi:type="gmfgen:ToolEntry"
             title="EPC"
             description="Create new EPC"
-            genNodes="//@diagram/@topLevelNodes.5 //@diagram/@childNodes.0"/>
+            genNodes="//@diagram/@topLevelNodes.5"/>
         <entries
             xsi:type="gmfgen:ToolEntry"
             title="Event"
             description="Create new Event"
-            genNodes="//@diagram/@topLevelNodes.3"/>
+            genNodes="//@diagram/@topLevelNodes.4"/>
         <entries
             xsi:type="gmfgen:ToolEntry"
             title="Function"
             description="Create new Function"
-            genNodes="//@diagram/@topLevelNodes.4"/>
+            genNodes="//@diagram/@topLevelNodes.6"/>
         <entries
             xsi:type="gmfgen:ToolEntry"
             title="XOR"
             description="Create new XOR"
-            genNodes="//@diagram/@topLevelNodes.0"/>
+            genNodes="//@diagram/@topLevelNodes.3"/>
         <entries
             xsi:type="gmfgen:ToolEntry"
             title="OR"
             description="Create new OR"
-            genNodes="//@diagram/@topLevelNodes.2"/>
+            genNodes="//@diagram/@topLevelNodes.1"/>
         <entries
             xsi:type="gmfgen:ToolEntry"
             title="AND"
             description="Create new AND"
-            genNodes="//@diagram/@topLevelNodes.1"/>
+            genNodes="//@diagram/@topLevelNodes.0"/>
         <entries
             xsi:type="gmfgen:ToolEntry"
             title="Information"
             description="Create new Information"
-            genNodes="//@diagram/@topLevelNodes.6"/>
+            genNodes="//@diagram/@topLevelNodes.2"/>
         <entries
             xsi:type="gmfgen:ToolEntry"
             title="Connection"
@@ -626,12 +531,6 @@
         parent="//@diagram"
         child="//@diagram/@topLevelNodes.4"/>
     <childReferences
-        parent="//@diagram/@childNodes.0"
-        child="//@diagram/@childNodes.0"/>
-    <childReferences
-        parent="//@diagram/@topLevelNodes.5"
-        child="//@diagram/@childNodes.0"/>
-    <childReferences
         parent="//@diagram"
         child="//@diagram/@topLevelNodes.5"/>
     <childReferences
@@ -657,35 +556,23 @@
     <childReferences
         parent="//@diagram/@links.0"
         child="//@diagram/@topLevelNodes.5"
-        referenceType="out_target"
-        groupName="target"
-        groupIcon="icons/linkTargetNavigatorGroup.gif"/>
-    <childReferences
-        parent="//@diagram/@topLevelNodes.5"
-        child="//@diagram/@links.0"
-        referenceType="in_source"
-        groupName="incoming links"
-        groupIcon="icons/incomingLinksNavigatorGroup.gif"/>
-    <childReferences
-        parent="//@diagram/@links.0"
-        child="//@diagram/@childNodes.0"
-        referenceType="out_target"
-        groupName="target"
-        groupIcon="icons/linkTargetNavigatorGroup.gif"/>
-    <childReferences
-        parent="//@diagram/@childNodes.0"
-        child="//@diagram/@links.0"
-        referenceType="in_source"
-        groupName="incoming links"
-        groupIcon="icons/incomingLinksNavigatorGroup.gif"/>
-    <childReferences
-        parent="//@diagram/@links.0"
-        child="//@diagram/@topLevelNodes.3"
         referenceType="in_source"
         groupName="source"
         groupIcon="icons/linkSourceNavigatorGroup.gif"/>
     <childReferences
-        parent="//@diagram/@topLevelNodes.3"
+        parent="//@diagram/@topLevelNodes.5"
+        child="//@diagram/@links.0"
+        referenceType="out_target"
+        groupName="outgoing links"
+        groupIcon="icons/outgoingLinksNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@links.0"
+        child="//@diagram/@topLevelNodes.6"
+        referenceType="in_source"
+        groupName="source"
+        groupIcon="icons/linkSourceNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@topLevelNodes.6"
         child="//@diagram/@links.0"
         referenceType="out_target"
         groupName="outgoing links"
@@ -697,36 +584,12 @@
         groupIcon="icons/linksNavigatorGroup.gif"/>
     <childReferences
         parent="//@diagram/@links.1"
-        child="//@diagram/@topLevelNodes.4"
-        referenceType="out_target"
-        groupName="target"
-        groupIcon="icons/linkTargetNavigatorGroup.gif"/>
-    <childReferences
-        parent="//@diagram/@topLevelNodes.4"
-        child="//@diagram/@links.1"
-        referenceType="in_source"
-        groupName="incoming links"
-        groupIcon="icons/incomingLinksNavigatorGroup.gif"/>
-    <childReferences
-        parent="//@diagram/@links.1"
         child="//@diagram/@topLevelNodes.5"
         referenceType="out_target"
         groupName="target"
         groupIcon="icons/linkTargetNavigatorGroup.gif"/>
     <childReferences
         parent="//@diagram/@topLevelNodes.5"
-        child="//@diagram/@links.1"
-        referenceType="in_source"
-        groupName="incoming links"
-        groupIcon="icons/incomingLinksNavigatorGroup.gif"/>
-    <childReferences
-        parent="//@diagram/@links.1"
-        child="//@diagram/@childNodes.0"
-        referenceType="out_target"
-        groupName="target"
-        groupIcon="icons/linkTargetNavigatorGroup.gif"/>
-    <childReferences
-        parent="//@diagram/@childNodes.0"
         child="//@diagram/@links.1"
         referenceType="in_source"
         groupName="incoming links"
@@ -734,11 +597,23 @@
     <childReferences
         parent="//@diagram/@links.1"
         child="//@diagram/@topLevelNodes.6"
+        referenceType="out_target"
+        groupName="target"
+        groupIcon="icons/linkTargetNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@topLevelNodes.6"
+        child="//@diagram/@links.1"
+        referenceType="in_source"
+        groupName="incoming links"
+        groupIcon="icons/incomingLinksNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@links.1"
+        child="//@diagram/@topLevelNodes.2"
         referenceType="in_source"
         groupName="source"
         groupIcon="icons/linkSourceNavigatorGroup.gif"/>
     <childReferences
-        parent="//@diagram/@topLevelNodes.6"
+        parent="//@diagram/@topLevelNodes.2"
         child="//@diagram/@links.1"
         referenceType="out_target"
         groupName="outgoing links"
@@ -750,28 +625,16 @@
         groupIcon="icons/linksNavigatorGroup.gif"/>
     <childReferences
         parent="//@diagram/@links.2"
-        child="//@diagram/@topLevelNodes.3"
+        child="//@diagram/@topLevelNodes.2"
         referenceType="out_target"
         groupName="target"
         groupIcon="icons/linkTargetNavigatorGroup.gif"/>
     <childReferences
-        parent="//@diagram/@topLevelNodes.3"
+        parent="//@diagram/@topLevelNodes.2"
         child="//@diagram/@links.2"
         referenceType="in_source"
         groupName="incoming links"
         groupIcon="icons/incomingLinksNavigatorGroup.gif"/>
-    <childReferences
-        parent="//@diagram/@links.2"
-        child="//@diagram/@topLevelNodes.4"
-        referenceType="in_source"
-        groupName="source"
-        groupIcon="icons/linkSourceNavigatorGroup.gif"/>
-    <childReferences
-        parent="//@diagram/@topLevelNodes.4"
-        child="//@diagram/@links.2"
-        referenceType="out_target"
-        groupName="outgoing links"
-        groupIcon="icons/outgoingLinksNavigatorGroup.gif"/>
     <childReferences
         parent="//@diagram/@links.2"
         child="//@diagram/@topLevelNodes.5"
@@ -786,12 +649,12 @@
         groupIcon="icons/outgoingLinksNavigatorGroup.gif"/>
     <childReferences
         parent="//@diagram/@links.2"
-        child="//@diagram/@childNodes.0"
+        child="//@diagram/@topLevelNodes.6"
         referenceType="in_source"
         groupName="source"
         groupIcon="icons/linkSourceNavigatorGroup.gif"/>
     <childReferences
-        parent="//@diagram/@childNodes.0"
+        parent="//@diagram/@topLevelNodes.6"
         child="//@diagram/@links.2"
         referenceType="out_target"
         groupName="outgoing links"
@@ -801,6 +664,18 @@
         child="//@diagram/@links.3"
         groupName="links"
         groupIcon="icons/linksNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@links.3"
+        child="//@diagram/@topLevelNodes.5"
+        referenceType="out_target"
+        groupName="target"
+        groupIcon="icons/linkTargetNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@topLevelNodes.5"
+        child="//@diagram/@links.3"
+        referenceType="in_source"
+        groupName="incoming links"
+        groupIcon="icons/incomingLinksNavigatorGroup.gif"/>
     <childReferences
         parent="//@diagram/@links.3"
         child="//@diagram/@topLevelNodes.6"
@@ -821,30 +696,6 @@
         groupIcon="icons/linkSourceNavigatorGroup.gif"/>
     <childReferences
         parent="//@diagram/@topLevelNodes.4"
-        child="//@diagram/@links.3"
-        referenceType="out_target"
-        groupName="outgoing links"
-        groupIcon="icons/outgoingLinksNavigatorGroup.gif"/>
-    <childReferences
-        parent="//@diagram/@links.3"
-        child="//@diagram/@topLevelNodes.5"
-        referenceType="in_source"
-        groupName="source"
-        groupIcon="icons/linkSourceNavigatorGroup.gif"/>
-    <childReferences
-        parent="//@diagram/@topLevelNodes.5"
-        child="//@diagram/@links.3"
-        referenceType="out_target"
-        groupName="outgoing links"
-        groupIcon="icons/outgoingLinksNavigatorGroup.gif"/>
-    <childReferences
-        parent="//@diagram/@links.3"
-        child="//@diagram/@childNodes.0"
-        referenceType="in_source"
-        groupName="source"
-        groupIcon="icons/linkSourceNavigatorGroup.gif"/>
-    <childReferences
-        parent="//@diagram/@childNodes.0"
         child="//@diagram/@links.3"
         referenceType="out_target"
         groupName="outgoing links"
@@ -872,9 +723,4 @@
   </propertySheet>
   <domainGenModel
       href="epc.genmodel#/"/>
-  <expressionProviders>
-    <providers
-        xsi:type="gmfgen:GenExpressionInterpreter"
-        expressions="//@audits/@rules.0/@rule"/>
-  </expressionProviders>
 </gmfgen:GenEditorGenerator>

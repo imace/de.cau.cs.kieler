@@ -10,19 +10,6 @@
         href="epc.ecore#//EPC/objects"/>
     <ownedChild>
       <domainMetaElement
-          href="epc.ecore#//XOR"/>
-      <tool
-          xsi:type="gmftool:CreationTool"
-          href="epc.gmftool#//@palette/@tools.0/@tools.3"/>
-      <diagramNode
-          href="epc.gmfgraph#XOR"/>
-    </ownedChild>
-  </nodes>
-  <nodes>
-    <containmentFeature
-        href="epc.ecore#//EPC/objects"/>
-    <ownedChild>
-      <domainMetaElement
           href="epc.ecore#//AND"/>
       <tool
           xsi:type="gmftool:CreationTool"
@@ -42,6 +29,39 @@
           href="epc.gmftool#//@palette/@tools.0/@tools.4"/>
       <diagramNode
           href="epc.gmfgraph#OR"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
+        href="epc.ecore#//EPC/objects"/>
+    <ownedChild>
+      <domainMetaElement
+          href="epc.ecore#//Information"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="epc.gmfgraph#InformationName"/>
+        <features
+            href="epc.ecore#//Node/name"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="epc.gmftool#//@palette/@tools.0/@tools.6"/>
+      <diagramNode
+          href="epc.gmfgraph#Information"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
+        href="epc.ecore#//EPC/objects"/>
+    <ownedChild>
+      <domainMetaElement
+          href="epc.ecore#//XOR"/>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="epc.gmftool#//@palette/@tools.0/@tools.3"/>
+      <diagramNode
+          href="epc.gmfgraph#XOR"/>
     </ownedChild>
   </nodes>
   <nodes>
@@ -69,10 +89,30 @@
         href="epc.ecore#//EPC/objects"/>
     <ownedChild>
       <domainMetaElement
-          href="epc.ecore#//Function"/>
+          href="epc.ecore#//EPC"/>
       <labelMappings
           xsi:type="gmfmap:FeatureLabelMapping"
           editPattern="">
+        <diagramLabel
+            href="epc.gmfgraph#EPCName"/>
+        <features
+            href="epc.ecore#//Node/name"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="epc.gmftool#//@palette/@tools.0/@tools.0"/>
+      <diagramNode
+          href="epc.gmfgraph#EPC"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
+        href="epc.ecore#//EPC/objects"/>
+    <ownedChild>
+      <domainMetaElement
+          href="epc.ecore#//Function"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
         <diagramLabel
             href="epc.gmfgraph#FunctionName"/>
         <features
@@ -85,66 +125,22 @@
           href="epc.gmfgraph#Function"/>
     </ownedChild>
   </nodes>
-  <nodes>
-    <containmentFeature
-        href="epc.ecore#//EPC/objects"/>
-    <ownedChild>
-      <domainMetaElement
-          href="epc.ecore#//EPC"/>
-      <tool
-          xsi:type="gmftool:CreationTool"
-          href="epc.gmftool#//@palette/@tools.0/@tools.0"/>
-      <diagramNode
-          href="epc.gmfgraph#EPC"/>
-      <children
-          compartment="//@nodes.5/@ownedChild/@compartments.0"
-          referencedChild="//@nodes.5/@ownedChild">
-        <containmentFeature
-            href="epc.ecore#//EPC/objects"/>
-      </children>
-      <compartments
-          children="//@nodes.5/@ownedChild/@children.0">
-        <compartment
-            href="epc.gmfgraph#EPCCompartment"/>
-      </compartments>
-    </ownedChild>
-  </nodes>
-  <nodes>
-    <containmentFeature
-        href="epc.ecore#//EPC/objects"/>
-    <ownedChild>
-      <domainMetaElement
-          href="epc.ecore#//Information"/>
-      <labelMappings
-          xsi:type="gmfmap:FeatureLabelMapping">
-        <diagramLabel
-            href="epc.gmfgraph#InformationName"/>
-        <features
-            href="epc.ecore#//Node/name"/>
-      </labelMappings>
-      <tool
-          xsi:type="gmftool:CreationTool"
-          href="epc.gmftool#//@palette/@tools.0/@tools.6"/>
-      <diagramNode
-          href="epc.gmfgraph#Information"/>
-    </ownedChild>
-  </nodes>
   <links>
     <domainMetaElement
-        href="epc.ecore#//ActivatesFunction"/>
+        href="epc.ecore#//TriggersEvent"/>
     <containmentFeature
         href="epc.ecore#//EPC/connectors"/>
     <tool
         xsi:type="gmftool:CreationTool"
         href="epc.gmftool#//@palette/@tools.0/@tools.7"/>
     <diagramLink
-        href="epc.gmfgraph#ActivatesFunction"/>
+        href="epc.gmfgraph#TriggersEvent"/>
     <sourceMetaFeature
         xsi:type="ecore:EReference"
-        href="epc.ecore#//ActivatesFunction/source"/>
+        href="epc.ecore#//TriggersEvent/source"/>
     <linkMetaFeature
         xsi:type="ecore:EReference"
-        href="epc.ecore#//ActivatesFunction/target"/>
+        href="epc.ecore#//TriggersEvent/target"/>
   </links>
   <links>
     <domainMetaElement
@@ -165,23 +161,6 @@
   </links>
   <links>
     <domainMetaElement
-        href="epc.ecore#//TriggersEvent"/>
-    <containmentFeature
-        href="epc.ecore#//EPC/connectors"/>
-    <tool
-        xsi:type="gmftool:CreationTool"
-        href="epc.gmftool#//@palette/@tools.0/@tools.7"/>
-    <diagramLink
-        href="epc.gmfgraph#TriggersEvent"/>
-    <sourceMetaFeature
-        xsi:type="ecore:EReference"
-        href="epc.ecore#//TriggersEvent/source"/>
-    <linkMetaFeature
-        xsi:type="ecore:EReference"
-        href="epc.ecore#//TriggersEvent/target"/>
-  </links>
-  <links>
-    <domainMetaElement
         href="epc.ecore#//WritesDataTo"/>
     <containmentFeature
         href="epc.ecore#//EPC/connectors"/>
@@ -197,6 +176,23 @@
         xsi:type="ecore:EReference"
         href="epc.ecore#//WritesDataTo/target"/>
   </links>
+  <links>
+    <domainMetaElement
+        href="epc.ecore#//ActivatesFunction"/>
+    <containmentFeature
+        href="epc.ecore#//EPC/connectors"/>
+    <tool
+        xsi:type="gmftool:CreationTool"
+        href="epc.gmftool#//@palette/@tools.0/@tools.7"/>
+    <diagramLink
+        href="epc.gmfgraph#ActivatesFunction"/>
+    <sourceMetaFeature
+        xsi:type="ecore:EReference"
+        href="epc.ecore#//ActivatesFunction/source"/>
+    <linkMetaFeature
+        xsi:type="ecore:EReference"
+        href="epc.ecore#//ActivatesFunction/target"/>
+  </links>
   <diagram>
     <diagramCanvas
         href="epc.gmfgraph#epc"/>
@@ -207,28 +203,4 @@
     <palette
         href="epc.gmftool#//@palette"/>
   </diagram>
-  <audits
-      id="epcValidationRules"
-      name="EPC syntax validation rules"
-      description="Some validation audits">
-    <childContainers
-        id="commonRules"
-        name="Common"
-        description="Common validation rules to ensure model integrity">
-      <audits
-          name="No empty name properties."
-          description="Nodes (functions, operators, ...) should not have empty name properties."
-          id="common.rule1"
-          severity="WARNING"
-          message="{0} should have a name.">
-        <rule
-            body="self.name.size() >= 1"/>
-        <target
-            xsi:type="gmfmap:DomainElementTarget">
-          <element
-              href="epc.ecore#//Node"/>
-        </target>
-      </audits>
-    </childContainers>
-  </audits>
 </gmfmap:Mapping>
