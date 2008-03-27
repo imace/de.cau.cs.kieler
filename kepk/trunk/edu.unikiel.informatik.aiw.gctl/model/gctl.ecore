@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="gctl"
+    nsURI="http://www.informatik.uni-kiel.de/aiw/gctl" nsPrefix="gctl">
+  <eClassifiers xsi:type="ecore:EClass" name="GCTL">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="gctlNodes" upperBound="-1"
+        eType="#//GCTLNode" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="QuantifierType">
+    <eLiterals name="AX" value="1"/>
+    <eLiterals name="AG" value="2" literal="AG"/>
+    <eLiterals name="AF" value="3"/>
+    <eLiterals name="EX" value="4"/>
+    <eLiterals name="EG" value="5"/>
+    <eLiterals name="EF" value="6"/>
+    <eLiterals name="NONE"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GCTLNode">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="epcNode" eType="ecore:EClass ../../edu.unikiel.informatik.aiw.epc/model/epc.ecore#//Node"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="quantifier" eType="#//QuantifierType"
+        defaultValueLiteral=""/>
+  </eClassifiers>
+</ecore:EPackage>
