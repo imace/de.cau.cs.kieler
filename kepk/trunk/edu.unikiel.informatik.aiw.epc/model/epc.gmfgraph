@@ -8,9 +8,11 @@
     <descriptors
         name="EPCFigure">
       <actualFigure
-          xsi:type="gmfgraph:Rectangle"
+          xsi:type="gmfgraph:RoundedRectangle"
           name="EPCFigure"
-          lineWidth="3">
+          lineWidth="3"
+          cornerWidth="15"
+          cornerHeight="15">
         <children
             xsi:type="gmfgraph:Label"
             name="EPCNameFigure"
@@ -89,7 +91,7 @@
           name="TriggersEventFigure"
           targetDecoration="//@figures.0/@descriptors.3/@actualFigure/@children.0">
         <children
-            xsi:type="gmfgraph:PolylineDecoration"
+            xsi:type="gmfgraph:PolygonDecoration"
             name="TriggersEventTargetDecoration"/>
       </actualFigure>
     </descriptors>
@@ -101,18 +103,10 @@
           fill="false">
         <layout
             xsi:type="gmfgraph:StackLayout"/>
-        <preferredSize
-            dx="35"
-            dy="35"/>
         <children
             xsi:type="gmfgraph:Ellipse">
           <layout
               xsi:type="gmfgraph:StackLayout"/>
-          <insets
-              top="10"
-              left="10"
-              bottom="10"
-              right="10"/>
           <children
               xsi:type="gmfgraph:CustomFigure"
               name="XORFigure"
@@ -133,18 +127,10 @@
           fill="false">
         <layout
             xsi:type="gmfgraph:StackLayout"/>
-        <preferredSize
-            dx="35"
-            dy="35"/>
         <children
             xsi:type="gmfgraph:Ellipse">
           <layout
               xsi:type="gmfgraph:StackLayout"/>
-          <insets
-              top="10"
-              left="10"
-              bottom="10"
-              right="10"/>
           <children
               xsi:type="gmfgraph:CustomFigure"
               name="ORFigure"
@@ -165,18 +151,10 @@
           fill="false">
         <layout
             xsi:type="gmfgraph:StackLayout"/>
-        <preferredSize
-            dx="35"
-            dy="35"/>
         <children
             xsi:type="gmfgraph:Ellipse">
           <layout
               xsi:type="gmfgraph:StackLayout"/>
-          <insets
-              top="10"
-              left="10"
-              bottom="10"
-              right="10"/>
           <children
               xsi:type="gmfgraph:CustomFigure"
               name="ANDFigure"
@@ -285,6 +263,18 @@
   <connections
       name="WritesDataTo"
       figure="WritesDataToFigure"/>
+  <connections
+      name="FunctionToOperator"
+      figure="ActivatesFunctionFigure"/>
+  <connections
+      name="EventToOperator"
+      figure="ActivatesFunctionFigure"/>
+  <connections
+      name="OperatorToFunction"
+      figure="ActivatesFunctionFigure"/>
+  <connections
+      name="OperatorToEvent"
+      figure="ActivatesFunctionFigure"/>
   <compartments
       name="EPCCompartment"
       figure="EPCCompartmentFigure"

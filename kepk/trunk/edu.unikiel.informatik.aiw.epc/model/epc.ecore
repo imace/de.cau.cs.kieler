@@ -49,4 +49,24 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
         eType="#//Information"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FunctionToOperatorConnection" eSuperTypes="#//SuccessorOf">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="function" eType="#//Function"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operator" eType="#//LogicalOperator"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EventToOperatorConnection" eSuperTypes="#//SuccessorOf">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="event" eType="#//Event"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operator" eType="#//LogicalOperator"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OperatorToFunctionConnection" eSuperTypes="#//SuccessorOf">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="function" eType="#//Function"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operator" eType="#//LogicalOperator"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OperatorToEventConnection" eSuperTypes="#//SuccessorOf">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="event" eType="#//Event"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operator" eType="#//LogicalOperator"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GCTL">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nodes" eType="#//Node"
+        containment="true"/>
+  </eClassifiers>
 </ecore:EPackage>

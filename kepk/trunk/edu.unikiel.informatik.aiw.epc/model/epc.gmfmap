@@ -87,7 +87,8 @@
   <nodes>
     <containmentFeature
         href="epc.ecore#//EPC/objects"/>
-    <ownedChild>
+    <ownedChild
+        relatedDiagrams="//@diagram">
       <domainMetaElement
           href="epc.ecore#//EPC"/>
       <labelMappings
@@ -193,6 +194,74 @@
         xsi:type="ecore:EReference"
         href="epc.ecore#//ActivatesFunction/target"/>
   </links>
+  <links>
+    <domainMetaElement
+        href="epc.ecore#//EventToOperatorConnection"/>
+    <containmentFeature
+        href="epc.ecore#//EPC/connectors"/>
+    <tool
+        xsi:type="gmftool:CreationTool"
+        href="epc.gmftool#//@palette/@tools.0/@tools.7"/>
+    <diagramLink
+        href="epc.gmfgraph#EventToOperator"/>
+    <sourceMetaFeature
+        xsi:type="ecore:EReference"
+        href="epc.ecore#//EventToOperatorConnection/event"/>
+    <linkMetaFeature
+        xsi:type="ecore:EReference"
+        href="epc.ecore#//EventToOperatorConnection/operator"/>
+  </links>
+  <links>
+    <domainMetaElement
+        href="epc.ecore#//FunctionToOperatorConnection"/>
+    <containmentFeature
+        href="epc.ecore#//EPC/connectors"/>
+    <tool
+        xsi:type="gmftool:CreationTool"
+        href="epc.gmftool#//@palette/@tools.0/@tools.7"/>
+    <diagramLink
+        href="epc.gmfgraph#FunctionToOperator"/>
+    <sourceMetaFeature
+        xsi:type="ecore:EReference"
+        href="epc.ecore#//FunctionToOperatorConnection/function"/>
+    <linkMetaFeature
+        xsi:type="ecore:EReference"
+        href="epc.ecore#//FunctionToOperatorConnection/operator"/>
+  </links>
+  <links>
+    <domainMetaElement
+        href="epc.ecore#//OperatorToEventConnection"/>
+    <containmentFeature
+        href="epc.ecore#//EPC/connectors"/>
+    <tool
+        xsi:type="gmftool:CreationTool"
+        href="epc.gmftool#//@palette/@tools.0/@tools.7"/>
+    <diagramLink
+        href="epc.gmfgraph#OperatorToEvent"/>
+    <sourceMetaFeature
+        xsi:type="ecore:EReference"
+        href="epc.ecore#//OperatorToEventConnection/operator"/>
+    <linkMetaFeature
+        xsi:type="ecore:EReference"
+        href="epc.ecore#//OperatorToEventConnection/event"/>
+  </links>
+  <links>
+    <domainMetaElement
+        href="epc.ecore#//OperatorToFunctionConnection"/>
+    <containmentFeature
+        href="epc.ecore#//EPC/connectors"/>
+    <tool
+        xsi:type="gmftool:CreationTool"
+        href="epc.gmftool#//@palette/@tools.0/@tools.7"/>
+    <diagramLink
+        href="epc.gmfgraph#OperatorToFunction"/>
+    <sourceMetaFeature
+        xsi:type="ecore:EReference"
+        href="epc.ecore#//OperatorToFunctionConnection/operator"/>
+    <linkMetaFeature
+        xsi:type="ecore:EReference"
+        href="epc.ecore#//OperatorToFunctionConnection/function"/>
+  </links>
   <diagram>
     <diagramCanvas
         href="epc.gmfgraph#epc"/>
@@ -203,4 +272,23 @@
     <palette
         href="epc.gmftool#//@palette"/>
   </diagram>
+  <audits
+      id="commonAudits"
+      name="Common Audits"
+      description="Common Audits for validation">
+    <audits
+        name="Named nodes"
+        description="Nodes should have a name"
+        id="common.namedNodes"
+        severity="WARNING"
+        message="Nodes should have a name">
+      <rule
+          body="self.name.size() > 0"/>
+      <target
+          xsi:type="gmfmap:DomainElementTarget">
+        <element
+            href="epc.ecore#//Node"/>
+      </target>
+    </audits>
+  </audits>
 </gmfmap:Mapping>

@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <genmodel:GenModel xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
-    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/edu.unikiel.informatik.aiw.generated.epc/src/"
-    modelPluginID="edu.unikiel.informatik.aiw.generated.epc" modelName="Epc" editPluginClass="edu.unikiel.informatik.aiw.generated.epc.provider.EpcEditPlugin"
-    editorPluginClass="edu.unikiel.informatik.aiw.generated.epc.presentation.EpcEditorPlugin"
-    testSuiteClass="edu.unikiel.informatik.aiw.generated.epc.tests.EpcAllTests" importerID="org.eclipse.emf.importer.ecore"
-    copyrightFields="false" providerRootExtendsClass="">
-  <foreignModel>epc.ecore</foreignModel>
-  <genPackages prefix="Epc" basePackage="edu.unikiel.informatik.aiw.generated" disposableProviderFactory="true"
-      ecorePackage="epc.ecore#/">
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/edu.unikiel.informatik.aiw.generated.gctlepc/src"
+    creationCommands="false" editDirectory="/edu.unikiel.informatik.aiw.generated.gctlepc.edit/src"
+    editorDirectory="/edu.unikiel.informatik.aiw.generated.gctlepc.editor/src" modelPluginID="edu.unikiel.informatik.aiw.generated.gctlepc"
+    modelName="Gctlepc" testSuiteClass="edu.unikiel.informatik.aiw.generated.gctlepc.tests.GctlepcAllTests"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0" copyrightFields="false">
+  <foreignModel>gctl.ecore</foreignModel>
+  <genPackages prefix="Gctl" basePackage="edu.unikiel.informatik.aiw" disposableProviderFactory="true"
+      ecorePackage="gctl.ecore#/">
+    <genClasses ecoreClass="gctl.ecore#//GCTL">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference gctl.ecore#//GCTL/nodes"/>
+    </genClasses>
+  </genPackages>
+  <genPackages prefix="Epc" disposableProviderFactory="true" ecorePackage="epc.ecore#/">
     <genClasses ecoreClass="epc.ecore#//EPC">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference epc.ecore#//EPC/connectors"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference epc.ecore#//EPC/objects"/>
@@ -57,9 +62,6 @@
     <genClasses ecoreClass="epc.ecore#//OperatorToEventConnection">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference epc.ecore#//OperatorToEventConnection/event"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference epc.ecore#//OperatorToEventConnection/operator"/>
-    </genClasses>
-    <genClasses ecoreClass="epc.ecore#//GCTL">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference epc.ecore#//GCTL/nodes"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>
