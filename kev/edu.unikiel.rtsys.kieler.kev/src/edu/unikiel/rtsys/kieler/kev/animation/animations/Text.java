@@ -28,7 +28,8 @@ public class Text extends Animation {
 			String text[] = getData().toString().split(suffixDelimiters);
 			if (this.getElement() instanceof SVGTextElement) {
 				((SVGTextElement) this.getElement())
-						.setTextContent((text.length > 1 ? text[0] : text[0]));
+						.setNodeValue(text[0]);
+						//.setTextContent((text.length > 1 ? text[0] : text[0]));
 			}
 		}
 		catch (ArrayIndexOutOfBoundsException e) {

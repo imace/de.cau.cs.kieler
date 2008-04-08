@@ -1,41 +1,29 @@
 package edu.unikiel.rtsys.kieler.kev.helpers;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
 
 import javax.xml.XMLConstants;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
 
-import org.apache.batik.swing.JSVGCanvas;
-import org.apache.batik.swing.svg.JSVGComponent;
 import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.jface.action.IStatusLineManager;
 import org.eclipse.jface.dialogs.ErrorDialog;
+import org.eclipse.ui.IViewPart;
+import org.eclipse.ui.IViewReference;
 import org.eclipse.ui.PlatformUI;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.w3c.dom.svg.SVGDocument;
-import org.w3c.dom.svg.SVGPathElement;
 import org.xml.sax.SAXException;
 
-
 import edu.unikiel.rtsys.kieler.kev.KevPlugin;
+import edu.unikiel.rtsys.kieler.kev.views.EnvironmentView;
 
 //import com.sun.org.apache.xml.internal.serialize.OutputFormat;
 //import com.sun.org.apache.xml.internal.serialize.XMLSerializer;
@@ -111,7 +99,38 @@ public class Tools {
 		PlatformUI.getWorkbench().getDisplay().syncExec(new DiagramRunnable(msg,exc));
 	}
 	
+	/**
+	 * To write to the status line, you need to obtain the status line
+	 * manager from a view
+	 * @return
+	 */
+	private static IStatusLineManager getStatusLineManager(){
+			try{
+			IViewReference[] views = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getViewReferences();
+			for (int i = 0; i < views.length; i++) {
+				IViewPart view = views[i].getView(false);
+				if(view.getViewSite().getId().equals(EnvironmentView.ID)){
+					return view.getViewSite().getActionBars().getStatusLineManager();
+				}
+			}
+			} catch(Exception e){/* nothing */}
+			return null;
+		}
 		
+	static IStatusLineManager statusLineManager;
+	public static void setStatusLine(String message){
+			if(statusLineManager == null)
+				statusLineManager = getStatusLineManager();
+			if(statusLineManager != null){
+				final String msg = message;
+				PlatformUI.getWorkbench().getDisplay().syncExec(new Runnable(){
+					@Override
+					public void run() {
+						statusLineManager.setMessage(msg);
+					}
+				});
+			}
+		}
 
 	/**
 	 * Tries to parse the given String to a Java DataType. It first tries to

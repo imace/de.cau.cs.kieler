@@ -42,11 +42,13 @@ public class KevListener implements GVTTreeRendererListener {
 			PlatformUI.getWorkbench().getDisplay().syncExec(new Runnable(){
 				@Override
 				public void run() {
+					try{
 					Dimension size = canvas.getPreferredSize();
 					if(size != null && size.width > 0 && size.height > 0){
 						Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
 						shell.setSize(size.width, size.height);
 					}
+					}catch(Exception e){/*nothing*/}
 				}
 			});
 		}catch(Exception e){

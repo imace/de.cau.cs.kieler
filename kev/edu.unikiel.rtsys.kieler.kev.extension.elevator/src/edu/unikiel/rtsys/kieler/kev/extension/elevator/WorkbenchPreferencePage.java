@@ -16,10 +16,16 @@ import org.eclipse.ui.IWorkbenchPreferencePage;
 
 public class WorkbenchPreferencePage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage{
 
+	public static final String ELEVATOR = "elevator";
+	public static final String FLAP = "flap";
+	public static final String RAILWAY = "railway";
+	
+	public static final String CONTROLLERID = "ExampleChooseEditor";
+	
 	@Override
 	protected void createFieldEditors() {
-		String[][] namesAndIds = { {"name1", "id1"} , {"name2", "id2"} };
-		this.addField(new ComboFieldEditor("ComboExampleEditor","Combo Example", namesAndIds, getFieldEditorParent()));
+		String[][] namesAndIds = { {"Elevator", ELEVATOR} , {"High-Lift Flap or Watertank", FLAP} /*, {"Railway", RAILWAY}*/ };
+		this.addField(new ComboFieldEditor(CONTROLLERID,"Choose Example", namesAndIds, getFieldEditorParent()));
 	}
 
 	@Override

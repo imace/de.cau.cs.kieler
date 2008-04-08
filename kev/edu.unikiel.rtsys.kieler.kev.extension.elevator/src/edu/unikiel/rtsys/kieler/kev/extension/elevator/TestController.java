@@ -1,10 +1,14 @@
 package edu.unikiel.rtsys.kieler.kev.extension.elevator;
 
+import org.eclipse.jface.preference.IPreferenceStore;
+
 import edu.unikiel.rtsys.kieler.kev.extension.AnimationData;
 import edu.unikiel.rtsys.kieler.kev.extension.AnimationDataController;
 import edu.unikiel.rtsys.kieler.kev.extension.ControlFlowChangeEvent;
 import edu.unikiel.rtsys.kieler.kev.extension.DataChangeEvent;
+import edu.unikiel.rtsys.kieler.kev.extension.StepControlJob;
 import edu.unikiel.rtsys.kieler.kev.extension.ControlFlowChangeEvent.Type;
+import edu.unikiel.rtsys.kieler.kev.helpers.Tools;
 
 /**
  * <p> A simple Java internal test-controller for the KIEL Environment Visualization (KEV).
@@ -26,8 +30,9 @@ import edu.unikiel.rtsys.kieler.kev.extension.ControlFlowChangeEvent.Type;
 
 public class TestController extends AnimationDataController{
 	
-	ElevatorJob elevatorJob = new ElevatorJob(this);
-	
+	StepControlJob controlJob;
+	int delay;
+		
 	/*
 	 * (non-Javadoc)
 	 * @see edu.unikiel.rtsys.kieler.kev.extension.ControlFlowChangeListener#controlFlowChanged(edu.unikiel.rtsys.kieler.kev.extension.ControlFlowChangeEvent)
@@ -35,25 +40,57 @@ public class TestController extends AnimationDataController{
 	@Override
 	public void controlFlowChanged(ControlFlowChangeEvent e) {
 		System.out.println("Control Flow Changed: "+e.getType()+" "+e.getData());
+		if(controlJob == null)
+			checkJob();
 		switch (e.getType()) {
 		case START:
-			elevatorJob.start();
-			break;
-		case STOP:
-			elevatorJob.cancel();
-			elevatorJob = new ElevatorJob(this);
+			checkJob();
+			controlJob.setPaused(false);
+			controlJob.schedule();
 			break;
 		case STEP:
-			elevatorJob.step();
+			controlJob.setPaused(true);
+			controlJob.schedule();
 			break;
 		case DELAY:
-			elevatorJob.setDelay((Integer)e.getData());
+			try {
+				this.delay = (Integer)e.getData();
+				controlJob.setDelay(delay);
+			} catch (Exception e2) {
+				Tools.showDialog("Could not set delay.", e2);
+			}
 			break;
+		case STOP:
+			controlJob.cancel();
+			controlJob = getNewJob();
 		default:
 			break;
 		}
 	}
 
+	private void checkJob() {
+		StepControlJob newJob = getNewJob(); 
+		if(controlJob == null)
+			controlJob = newJob;
+		// check if there was set a different type of controller job in the preferences
+		if(controlJob.getClass() != newJob.getClass()){
+			controlJob.cancel();
+			controlJob = newJob;
+			controlJob.setDelay(delay);
+		}
+	}
+
+	private StepControlJob getNewJob(){
+		IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
+		String id = preferenceStore.getString(WorkbenchPreferencePage.CONTROLLERID);
+		if(id.equals(WorkbenchPreferencePage.ELEVATOR))
+			return new JobElevator(this);
+		else if(id.equals(WorkbenchPreferencePage.FLAP))
+			return new JobFlap(this);
+		else // default
+			return new JobFlap(this);
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * @see edu.unikiel.rtsys.kieler.kev.extension.DataChangeListener#dataChanged(edu.unikiel.rtsys.kieler.kev.extension.DataChangeEvent)
@@ -61,7 +98,7 @@ public class TestController extends AnimationDataController{
 	@Override
 	public void dataChanged(DataChangeEvent e) {
 		System.out.println("Control data Changed: "+e.getData());
-		elevatorJob.buttonPressed(e.getData());
+		controlJob.setControlData(e.getData());
 	}
 
 	/*

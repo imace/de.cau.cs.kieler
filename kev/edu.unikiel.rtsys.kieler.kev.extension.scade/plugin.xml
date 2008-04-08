@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="edu.unikiel.rtsys.kieler.kev.data">
+      <content
+            class="edu.unikiel.rtsys.kieler.kev.extension.scade.AnimationDataController"
+            id="edu.unikiel.rtsys.kieler.kev.extension.scade.content1"
+            name="SCADE Slave Simulator Controller (6.0d)">
+      </content>
+   </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            category="edu.unikiel.rtsys.kieler.kev.PreferencePage"
+            class="edu.unikiel.rtsys.kieler.kev.extension.scade.WorkbenchPreferencePage"
+            id="edu.unikiel.rtsys.kieler.kev.extension.scade.page1"
+            name="SCADE Slave Simulator Controller">
+      </page>
+   </extension>
+
+</plugin>

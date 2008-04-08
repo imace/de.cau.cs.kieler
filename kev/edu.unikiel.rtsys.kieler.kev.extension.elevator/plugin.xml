@@ -6,7 +6,7 @@
       <content
             class="edu.unikiel.rtsys.kieler.kev.extension.elevator.TestController"
             id="edu.unikiel.rtsys.kieler.kev.extension.test"
-            name="Internal Java Interface for Elevator">
+            name="Demo Controller (Internal Java)">
       </content>
    </extension>
    <extension
@@ -15,7 +15,7 @@
             category="edu.unikiel.rtsys.kieler.kev.PreferencePage"
             class="edu.unikiel.rtsys.kieler.kev.extension.elevator.WorkbenchPreferencePage"
             id="edu.unikiel.rtsys.kieler.kev.extension.test.page1"
-            name="Java Elevator Controller">
+            name="Demo Controller">
       </page>
    </extension>
 

@@ -3,6 +3,7 @@ package edu.unikiel.rtsys.kieler.kev.ui;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -191,7 +192,7 @@ public class OpenImageWizard extends Wizard {
 				try{
 					Bundle bundle = Platform.getBundle(configElements[i].getContributor().getName());
 					Path path = new Path(configElements[i].getAttribute("filename"));
-					URL url = FileLocator.find(bundle, path, null);
+					URL url = FileLocator.find(bundle, path, Collections.EMPTY_MAP);
 					String name = configElements[i].getAttribute("name");
 					System.out.println("path:"+path+" url:"+url+" name:"+name);
 					if(name == null || name.isEmpty())

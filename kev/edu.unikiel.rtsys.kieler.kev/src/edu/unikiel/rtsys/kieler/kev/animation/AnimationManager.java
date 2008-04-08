@@ -28,6 +28,10 @@ public class AnimationManager extends GVTTreeRendererAdapter implements DataChan
 	AnimationMapping animationMapping;
 	EnvironmentView view;
 	
+	// remember the current controller, so for next init you can check
+	// if it needs to be reset
+	AnimationDataController currentController;
+	
 	//DataChangeEventSource dataChangeEventSource;
 	ControlFlowEventSource controlFlowEventSource;
 	
@@ -51,7 +55,7 @@ public class AnimationManager extends GVTTreeRendererAdapter implements DataChan
 	public void init() {
 		animationMapping = new AnimationMapping(view);
 		System.out.println("DisplayPortSize: "+animationMapping.getDisplayPortSize()+" ControlPortSize: "+animationMapping.getControlPortsize());
-		controlFlowEventSource = new ControlFlowEventSource();
+		//controlFlowEventSource = new ControlFlowEventSource();
 		String controllerString = KevPlugin.getDefault().getPreferenceStore().getString(KevPreferencePage.CONTROLLER);
 		registerController(controllerString);
 		//resizeWindow();
@@ -110,9 +114,7 @@ public class AnimationManager extends GVTTreeRendererAdapter implements DataChan
 	}
 
 	public void registerController(String controllerName) {
-		this.controlFlowEventSource.removeControlFlowChangeListeners();
-		this.getAnimationMapping().unregisterControlListeners();
-		
+				
 		// get the available interfaces
 		IConfigurationElement[] configElements = Platform.getExtensionRegistry().getConfigurationElementsFor(Messages.extensionPointID);
 		for (int i = 0; i < configElements.length; i++) {
@@ -120,6 +122,15 @@ public class AnimationManager extends GVTTreeRendererAdapter implements DataChan
 				AnimationDataController animationController = (AnimationDataController)configElements[i].createExecutableExtension("class"); //$NON-NLS-1$
 				animationController.removeDataChangeListeners();
 				if(animationController.getName().equals(controllerName)){
+					// if we already have the right controller, do not create it again!
+					if(currentController != null && currentController.getClass() == animationController.getClass())
+						break; 
+					// now start actual creation of the new controller (which begins with stopping the old one)
+					this.stop(); 
+					currentController = animationController; // remember the new for next time
+					// deregister old controllers
+					this.controlFlowEventSource.removeControlFlowChangeListeners();
+					this.getAnimationMapping().unregisterControlListeners();
 					// now add listeners to selected controller
 					animationController.addDataChangeListener(this);
 					this.getAnimationMapping().registerControlListeners(animationController);

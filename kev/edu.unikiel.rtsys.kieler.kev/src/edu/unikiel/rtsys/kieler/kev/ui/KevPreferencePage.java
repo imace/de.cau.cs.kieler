@@ -56,13 +56,16 @@ public class KevPreferencePage extends PreferencePage implements
 		controllerCombo = new Combo(composite, SWT.DROP_DOWN | SWT.READ_ONLY);
 		
 		int index=0;
+		boolean indexSet = false;
 		for (AnimationDataController controller : getControllers()) {
 			controllerCombo.add(controller.getName());
-			if(getPreferenceStore().getString(CONTROLLER).equals(controller.getName()))
+			if(getPreferenceStore().getString(CONTROLLER).equals(controller.getName())){
 				controllerCombo.select(index);
+				indexSet = true;
+			}
 			index++;
 		}
-		if(index >= getControllers().size())
+		if(!indexSet)
 			controllerCombo.select(0);
 		return container;
 	}
