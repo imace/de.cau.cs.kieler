@@ -26,7 +26,6 @@
 		<arg line="up"/>
         </exec>
 
-
 	<target name="clean">
 		<delete dir="target" />
 	</target>
