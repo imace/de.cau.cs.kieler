@@ -22,12 +22,13 @@ cp -R * buildDirectory/plugins/
 cp -R buildDirectory/features/* ./
 
 echo "running PDE build..."
-ARGS="org.eclipse.core.launcher.Main"
+ARGS=" -cp $ECLIPSE/plugins/org.eclipse.equinox.launcher_1.0.100.v20080205.jar"
+ARGS=$ARGS" org.eclipse.core.launcher.Main"
 ARGS=$ARGS" -application org.eclipse.ant.core.antRunner"
 ARGS=$ARGS" -DbaseLocation=$ECLIPSE"
 ARGS=$ARGS" -Dbuildfile $ECLIPSE/plugins/org.eclipse.pde.buildorg.eclipse.pde.build_3.4.0.v20080206/scripts/build.xml"
 ARGS=$ARGS" -DbuildDirectory=$CURRENTDIR/kev-build"
 ARGS=$ARGS" -Dbuilder=$CURRENTDIR/checkout/kev/edu.unikiel.rtsys.kieler.kev.build"
-echo "java -cp $ECLIPSE/startup.jar $ARGS"
+java $ARGS
 
 cd $CURRENTDIR
