@@ -2,7 +2,7 @@
 
 CURRENTDIR=`pwd`
 cd checkout/kev
-svn up
+svn up --user tomcat5 --password edcvgz
 rm -rf buildDirectory
 mkdir buildDirectory
 mkdir buildDirectory/features
