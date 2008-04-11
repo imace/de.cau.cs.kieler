@@ -33,13 +33,13 @@
 		<mkdir dir="buildDirectory/plugins"/>
 		<copy overwrite="false" todir="buildDirectory/features">
 			<fileset dir=".">
-		        <includes name="*.feature/**"/>
-				<excludes name="buildDirectory"/>
+		        <include name="*.feature/**"/>
+				<exclude name="buildDirectory"/>
 			</fileset>
 		</copy>
 		<copy overwrite="false" todir="buildDirectory/plugins">
 			<fileset dir=".">
-				<excludes name="buildDirectory, *.feature"/>
+				<exclude name="buildDirectory, *.feature"/>
 			</fileset>
 		</copy>
 	</target>
