@@ -31,16 +31,17 @@
     	</exec>
 		<mkdir dir="buildDirectory/features"/>
 		<mkdir dir="buildDirectory/plugins"/>
-		<move todir="buildDirectory/features">
-			<fileset dir="*.feature">
-		        <exclude name="buildDirectory"/>
+		<copy overwrite="false" todir="buildDirectory/features">
+			<fileset dir=".">
+		        <includes name="*.feature/**"/>
+				<excludes name="buildDirectory"/>
 			</fileset>
-		</move>
-		<move todir="buildDirectory/plugins">
-			<fileset dir="*">
-				<exclude name="buildDirectory"/>
+		</copy>
+		<copy overwrite="false" todir="buildDirectory/plugins">
+			<fileset dir=".">
+				<excludes name="buildDirectory, *.feature"/>
 			</fileset>
-		</move>
+		</copy>
 	</target>
 
 	<target name="clean">
