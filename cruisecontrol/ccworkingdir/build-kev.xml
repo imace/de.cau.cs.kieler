@@ -7,7 +7,9 @@
 
 	<property name="version" value="0.0.1" />
 	<property name="project.name" value="KIEL Environment Visualization" />
-
+	
+	<property name="eclipse" value="/home/java/eclipse_3.4" /> 
+	
 	<path id="classpath">
 		<fileset id="javaLibFiles" dir="/home/java/jdk1.6.0_03/">
 			<include name="**/**/*.jar"/>
@@ -50,10 +52,22 @@
 	</target>
 
 	<target name="compile">
-	        <delete dir="target/classes" />
+		<java fork="true" 
+			  classpath="${eclipse}/plugins/org.eclipse.equinox.launcher_1.0.100.v20080205.jar"
+			 >	
+			<arg value="org.eclipse.core.launcher.Main"/>
+			<arg value="-application org.eclipse.ant.core.antRunner"/>
+			<arg value="-DbaseLocation=${eclipse}"/>
+			<arg value="-Dbuildfile ${eclipse}/plugins/org.eclipse.pde.buildorg.eclipse.pde.build_3.4.0.v20080206/scripts/build.xml"/>
+			<arg value="-DbuildDirectory=${basedir}/kev-build"/>
+			<arg value="-Dbuilder=${basedir}/kev/edu.unikiel.rtsys.kieler.kev.build"/>
+		
+		</java>
+		
+<!--		    <delete dir="target/classes" />
 	        <mkdir dir="target/classes" />
 
-		<!-- Call the target that does everything -->
+
 	        <ant antfile="build.xml" target="clean"/>
 	        <ant antfile="build.xml" target="build.sources"/>
 	        <ant antfile="build.xml" target="build.jars"/>
@@ -62,7 +76,7 @@
         	<copy todir="target/classes/">
         	        <fileset dir="${basedir}/@dot" />
 	        </copy>
-
+-->
 	</target>
 
 	<target name="metrics" depends="clean">
