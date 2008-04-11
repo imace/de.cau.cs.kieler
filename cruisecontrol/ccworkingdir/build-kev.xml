@@ -55,14 +55,13 @@
 	<property name="arg2" value="-DbaseLocation=${eclipse}" />
 	<property name="arg3" value="-buildfile ${eclipse}/plugins/org.eclipse.pde.build_3.4.0.v20080206/scripts/build.xml" />
 	<property name="arg4" value="-DbuildDirectory=${basedir}/kev-build"/>
-	<property name="arg5" value="-Dbuilder=${basedir}/checkout/kev/edu.unikiel.rtsys.kieler.kev.build"/>
-	<property name="arg6" value="-DeclipseBaseURL=file://${eclipse}" />
-	
+	<property name="arg5" value="-Dbuilder=${basedir}/edu.unikiel.rtsys.kieler.kev.build"/>
+		
 	<target name="compile">
 		<java fork="true" 
 			  classpath="${eclipse}/plugins/org.eclipse.equinox.launcher_1.0.100.v20080205.jar"
 			  classname="org.eclipse.core.launcher.Main"
-			  args="${arg1} ${arg2} ${arg3} ${arg4} ${arg5} ${arg6}">
+			  args="${arg1} ${arg2} ${arg3} ${arg4} ${arg5}">
 		</java>
 		
 <!--		    <delete dir="target/classes" />
