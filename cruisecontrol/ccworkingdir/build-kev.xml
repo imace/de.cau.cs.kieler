@@ -62,7 +62,7 @@
 		<java fork="true" 
 			  classpath="${eclipse}/plugins/org.eclipse.equinox.launcher_1.0.100.v20080205.jar"
 			  classname="org.eclipse.core.launcher.Main"
-			  args="${arg1} ${arg2} ${arg3} ${arg4} ${arg5} $arg6">
+			  args="${arg1} ${arg2} ${arg3} ${arg4} ${arg5} ${arg6}">
 		</java>
 		
 <!--		    <delete dir="target/classes" />
