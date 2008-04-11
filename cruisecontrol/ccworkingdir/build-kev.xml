@@ -8,7 +8,7 @@
 	<property name="version" value="0.0.1" />
 	<property name="project.name" value="KIEL Environment Visualization" />
 	
-	<property name="eclipse" value="/home/java/eclipse_3.4M6a" /> 
+	<property name="eclipse" value="/home/java/eclipse_3.4M5" /> 
 	
 	<path id="classpath">
 		<fileset id="javaLibFiles" dir="/home/java/jdk1.6.0_03/">
@@ -16,7 +16,7 @@
 			<include name="**/*.jar"/>
 			<include name="*.jar"/>
 		</fileset>
-		<fileset id="eclipseLibFiles" dir="/home/java/eclipse_3.4M6a/plugins/">
+		<fileset id="eclipseLibFiles" dir="/home/java/eclipse_3.4M5/plugins/">
 			<include name="**/**/*.jar"/>
 			<include name="**/*.jar"/>
 			<include name="*.jar"/>
@@ -54,13 +54,13 @@
 	<property name="arg1" value="-application org.eclipse.ant.core.antRunner" />
 	<property name="arg2" value="-DbaseLocation=${eclipse}" />
 <!--	 <property name="arg3" value="-buildfile ${eclipse}/plugins/org.eclipse.pde.build_3.4.0.v20080206/scripts/build.xml" /> -->
-	<property name="arg3" value="-buildfile ${eclipse}/plugins/org.eclipse.pde.build_3.4.0.v20080323/scripts/productBuild/productBuild.xml" />
+	<property name="arg3" value="-buildfile ${eclipse}/plugins/org.eclipse.pde.build_3.4.0.v20080206/scripts/productBuild/productBuild.xml" />
 	<property name="arg4" value="-DbuildDirectory=${basedir}/buildDirectory"/>
 	<property name="arg5" value="-Dbuilder=${basedir}/buildDirectory/plugins/edu.unikiel.rtsys.kieler.kev.build"/>
 		
 	<target name="compile">
 		<java fork="true" 
-			  classpath="${eclipse}/plugins/org.eclipse.equinox.launcher_1.0.100.v20080303.jar"
+			  classpath="${eclipse}/plugins/org.eclipse.equinox.launcher_1.0.100.v20080205.jar"
 			  classname="org.eclipse.core.launcher.Main"
 			  args="${arg1} ${arg2} ${arg3} ${arg4} ${arg5}">
 		</java>
