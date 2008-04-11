@@ -51,12 +51,12 @@
 		<delete dir="target" />
 	</target>
 
-	<property name="arg1" value="-application org.eclipse.ant.core.antRunner -debug -consoleLog" />
+	<property name="arg1" value="-application org.eclipse.ant.core.antRunner" />
 	<property name="arg2" value="-DbaseLocation=${eclipse}" />
 <!--	 <property name="arg3" value="-buildfile ${eclipse}/plugins/org.eclipse.pde.build_3.4.0.v20080206/scripts/build.xml" /> -->
 	<property name="arg3" value="-buildfile ${eclipse}/plugins/org.eclipse.pde.build_3.4.0.v20080206/scripts/productBuild/productBuild.xml" />
 	<property name="arg4" value="-DbuildDirectory=${basedir}/buildDirectory"/>
-	<property name="arg5" value="-Dbuilder=${basedir}/edu.unikiel.rtsys.kieler.kev.build"/>
+	<property name="arg5" value="-Dbuilder=${basedir}/buildDirectory/plugins/edu.unikiel.rtsys.kieler.kev.build"/>
 		
 	<target name="compile">
 		<java fork="true" 
