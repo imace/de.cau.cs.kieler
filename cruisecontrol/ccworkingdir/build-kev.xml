@@ -39,7 +39,7 @@
 		</copy>
 		<copy overwrite="false" todir="buildDirectory/plugins">
 			<fileset dir=".">
-				<exclude name="buildDirectory, *.feature"/>
+				<excludes name="buildDirectory, *.feature"/>
 			</fileset>
 		</copy>
 	</target>
