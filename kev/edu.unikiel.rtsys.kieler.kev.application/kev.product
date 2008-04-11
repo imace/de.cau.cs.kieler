@@ -36,8 +36,8 @@ http://www.informatik.uni-kiel.de/en/rtsys/
    </launcher>
 
    <vm>
-      <linux type="jre">jdk1.6.0</linux>
-      <windows type="jre">jdk1.6.0</windows>
+      <linux>org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre1.6.0_03</linux>
+      <windows>org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre1.6.0_03</windows>
    </vm>
 
    <plugins>
@@ -46,6 +46,7 @@ http://www.informatik.uni-kiel.de/en/rtsys/
       <plugin id="edu.unikiel.rtsys.kieler.kev.application"/>
       <plugin id="edu.unikiel.rtsys.kieler.kev.extension.elevator"/>
       <plugin id="edu.unikiel.rtsys.kieler.kev.extension.scade"/>
+      <plugin id="javax.servlet"/>
       <plugin id="javax.xml"/>
       <plugin id="org.apache.batik.bridge"/>
       <plugin id="org.apache.batik.css"/>
@@ -60,6 +61,7 @@ http://www.informatik.uni-kiel.de/en/rtsys/
       <plugin id="org.apache.xerces"/>
       <plugin id="org.apache.xml.resolver"/>
       <plugin id="org.apache.xml.serializer"/>
+      <plugin id="org.eclipse.ant.core"/>
       <plugin id="org.eclipse.core.commands"/>
       <plugin id="org.eclipse.core.contenttype"/>
       <plugin id="org.eclipse.core.databinding"/>
@@ -77,7 +79,9 @@ http://www.informatik.uni-kiel.de/en/rtsys/
       <plugin id="org.eclipse.core.resources.compatibility" fragment="true"/>
       <plugin id="org.eclipse.core.resources.win32.x86" fragment="true"/>
       <plugin id="org.eclipse.core.runtime"/>
+      <plugin id="org.eclipse.core.runtime.compatibility.auth"/>
       <plugin id="org.eclipse.core.runtime.compatibility.registry" fragment="true"/>
+      <plugin id="org.eclipse.core.variables"/>
       <plugin id="org.eclipse.equinox.app"/>
       <plugin id="org.eclipse.equinox.common"/>
       <plugin id="org.eclipse.equinox.preferences"/>
@@ -85,8 +89,8 @@ http://www.informatik.uni-kiel.de/en/rtsys/
       <plugin id="org.eclipse.help"/>
       <plugin id="org.eclipse.jface"/>
       <plugin id="org.eclipse.jface.databinding"/>
-      <plugin id="org.eclipse.jface.text"/>
       <plugin id="org.eclipse.osgi"/>
+      <plugin id="org.eclipse.osgi.services"/>
       <plugin id="org.eclipse.swt"/>
       <plugin id="org.eclipse.swt.carbon.macosx" fragment="true"/>
       <plugin id="org.eclipse.swt.gtk.linux.ppc" fragment="true"/>
@@ -98,11 +102,9 @@ http://www.informatik.uni-kiel.de/en/rtsys/
       <plugin id="org.eclipse.swt.win32.win32.x86" fragment="true"/>
       <plugin id="org.eclipse.swt.win32.win32.x86_64" fragment="true"/>
       <plugin id="org.eclipse.swt.wpf.win32.x86" fragment="true"/>
-      <plugin id="org.eclipse.text"/>
       <plugin id="org.eclipse.ui"/>
       <plugin id="org.eclipse.ui.carbon" fragment="true"/>
       <plugin id="org.eclipse.ui.workbench"/>
-      <plugin id="org.eclipse.ui.workbench.texteditor"/>
       <plugin id="org.w3c.css.sac"/>
       <plugin id="org.w3c.dom.smil"/>
       <plugin id="org.w3c.dom.svg"/>
