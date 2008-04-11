@@ -161,20 +161,23 @@
 			     height="96"/>
 	</target>
 
-	<copy file="/home/local/cruisecontrol/ccworkingdir/html/index.htm" todir="target">
-		<filterset>
+	<target name="index">
+		<copy file="/home/local/cruisecontrol/ccworkingdir/html/index.htm" todir="target">
+			<filterset>
       			<filter token="project.name" value="${project.name}"/>
     		</filterset>
-	</copy>
+		</copy>
+	</target>
 
+	<target name="clean.sources">
         <!-- clean up src.zip -->
         <delete dir="target/src" />
         <mkdir dir="target/src" /> 
-	<copy todir="target/src">
-		<fileset dir="${basedir}">
-			<include name="*.zip"/>
-		</fileset>
-	</copy>
+		<copy todir="target/src">
+			<fileset dir="${basedir}">
+				<include name="*.zip"/>
+			</fileset>
+		</copy>
         <delete>
                 <fileset dir="${basedir}">
                         <include name="*.zip"/>
@@ -198,9 +201,11 @@
         <!-- clean up javadocs -->
         <delete dir="target/docs/api" />
         <mkdir dir="target/docs/api" />
-
+	</target>
+		
         <!-- generate javadoc -->
-        <javadoc sourcepath="src"
+    <target name="javadoc" depends="clean.sources">
+		<javadoc sourcepath="src"
                 destdir="target/docs/api"
                 classpathref="classpath"
                 windowtitle="UML Modeling 2007"
@@ -224,6 +229,6 @@
                         <![CDATA[<i>Copyright &#169; 2008 - Real-Time and Embedded Systems Group at Christian-Albrechts-University of Kiel - All Rights Reserved.</i>]]>
                 </bottom>
         </javadoc>
-
+	</target>
 
 </project>
