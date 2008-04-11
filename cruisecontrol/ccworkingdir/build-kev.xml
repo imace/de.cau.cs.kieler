@@ -20,11 +20,16 @@
 			<include name="*.jar"/>
 		</fileset>
 	</path>
-
+	
+	<echo message="staring..."/>
+	
 	<!-- Get the latest from SVN -->
 	<target name="update">
+		<echo message="updating"/>
 		<exec executable="svn">
-			<arg line="up"/>
+			<arg value="up"/>
+			<arg value="--username tomcat5"/>
+			<arg value="--password edcvgz"/>
     	</exec>
 		<mkdir dir="buildDirectory/features"/>
 		<mkdir dir="buildDirectory/plugins"/>
