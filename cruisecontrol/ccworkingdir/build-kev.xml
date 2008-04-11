@@ -27,9 +27,7 @@
 	<target name="update">
 		<echo message="updating"/>
 		<exec executable="svn">
-			<arg value="up"/>
-			<arg value="--username tomcat5"/>
-			<arg value="--password edcvgz"/>
+			<arg line="up --username tomcat5 --password edcvgz"/>
     	</exec>
 		<mkdir dir="buildDirectory/features"/>
 		<mkdir dir="buildDirectory/plugins"/>
