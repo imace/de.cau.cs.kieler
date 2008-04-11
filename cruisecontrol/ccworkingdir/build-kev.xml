@@ -32,14 +32,12 @@
 		<mkdir dir="buildDirectory/features"/>
 		<mkdir dir="buildDirectory/plugins"/>
 		<move todir="buildDirectory/features">
-			<fileset dir=".">
-    			<include name="*.feature"/>
+			<fileset dir="*.feature">
 		        <exclude name="buildDirectory"/>
 			</fileset>
 		</move>
 		<move todir="buildDirectory/plugins">
-			<fileset dir=".">
-				<include name="*"/>
+			<fileset dir="*">
 				<exclude name="buildDirectory"/>
 			</fileset>
 		</move>
