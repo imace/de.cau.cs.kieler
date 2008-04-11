@@ -54,8 +54,8 @@
 	<target name="compile">
 		<java fork="true" 
 			  classpath="${eclipse}/plugins/org.eclipse.equinox.launcher_1.0.100.v20080205.jar"
+			  classname="org.eclipse.core.launcher.Main"
 			 >	
-			<arg value="org.eclipse.core.launcher.Main"/>
 			<arg value="-application org.eclipse.ant.core.antRunner"/>
 			<arg value="-DbaseLocation=${eclipse}"/>
 			<arg value="-Dbuildfile ${eclipse}/plugins/org.eclipse.pde.buildorg.eclipse.pde.build_3.4.0.v20080206/scripts/build.xml"/>
