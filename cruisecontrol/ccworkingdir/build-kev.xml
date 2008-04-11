@@ -3,10 +3,10 @@
 
 <project name="build-kev" basedir="checkout/kev" default="metrics">
 
-	<import file="panopticode/panopticode-imports.xml" />
+<!--	<import file="panopticode/panopticode-imports.xml" /> -->
 
 	<property name="version" value="0.0.1" />
-	<property name="project.name" value="helloworld" />
+	<property name="project.name" value="KIEL Environment Visualization" />
 
 	<path id="classpath">
 		<fileset id="javaLibFiles" dir="/home/java/jdk1.6.0_03/">
