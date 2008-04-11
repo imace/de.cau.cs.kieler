@@ -51,7 +51,7 @@
 		<delete dir="target" />
 	</target>
 
-	<property name="arg1" value="-application org.eclipse.ant.core.antRunner" />
+	<property name="arg1" value="-application org.eclipse.ant.core.antRunner -debug -consoleLog" />
 	<property name="arg2" value="-DbaseLocation=${eclipse}" />
 <!--	 <property name="arg3" value="-buildfile ${eclipse}/plugins/org.eclipse.pde.build_3.4.0.v20080206/scripts/build.xml" /> -->
 	<property name="arg3" value="-buildfile ${eclipse}/plugins/org.eclipse.pde.build_3.4.0.v20080206/scripts/productBuild/productBuild.xml" />
