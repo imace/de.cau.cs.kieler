@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mapping xmlns="http://rtsys.informatik.uni-kiel.de/modelgui" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <!--
     <control port="0">
        <textbox id="textbox"/>
     </control>
-    -->
     
     <display port="303">
         <opaque id="R0_KH_LN_0" 
@@ -166,6 +164,15 @@
         <opaque id="G0_KIO_LN_1" 
 	   input="simulation::S_OFF, simulation::S_RED, simulation::S_YELLOW, simulation::S_GREEN, simulation::S_YELLOW_RED, simulation::S_GREEN_RED, simulation::S_GREEN_YELLOW, simulation::S_GREEN_YELLOW_RED"
 	   opacity="0.3, 0.3, 0.3, 1, 0.3, 1, 1, 1"/>
+    </display>
+
+    <display port="336">
+        <opaque id="R0_KH_X" 
+	   input="simulation::S_OFF, simulation::S_RED,    simulation::S_YELLOW, simulation::S_GREEN, simulation::S_YELLOW_RED, simulation::S_GREEN_RED, simulation::S_GREEN_YELLOW, simulation::S_GREEN_YELLOW_RED"
+	   opacity="0.3, 1, 0.3, 0.3, 1, 1, 0.3, 1"/>
+        <opaque id="Y0_KH_X" 
+	   input="simulation::S_OFF, simulation::S_RED,    simulation::S_YELLOW, simulation::S_GREEN, simulation::S_YELLOW_RED, simulation::S_GREEN_RED, simulation::S_GREEN_YELLOW, simulation::S_GREEN_YELLOW_RED"
+	   opacity="0.3, 0.3, 1, 0.3, 1, 0.3, 1, 1"/>
     </display>
 
     <display port="338">
@@ -558,38 +565,36 @@
 	   opacity="0.3, 0.3, 0.3, 1, 0.3, 1, 1, 1"/>
     </display>
 
-    
     <display port="385">
-        <opaque id="R0_KH_X" 
-	   input="simulation::S_RED, simulation::S_YELLOW, simulation::S_GREEN" opacity="1,  1, 0.3"/>
-        <opaque id="Y0_KH_X" 
-	   input="simulation::S_OFF, simulation::S_RED,    simulation::S_YELLOW, simulation::S_GREEN, simulation::S_YELLOW_RED, simulation::S_GREEN_RED, simulation::S_GREEN_YELLOW, simulation::S_GREEN_YELLOW_RED"
-	   opacity="0.3, 0.3, 1, 0.3, 1, 0.3, 1, 1"/>
         <opaque id="R1_KH_X" 
-	   input="simulation::S_RED, simulation::S_YELLOW, simulation::S_GREEN" opacity="1,  1, 0.3"/>
+	   input="simulation::S_OFF, simulation::S_RED,    simulation::S_YELLOW, simulation::S_GREEN, simulation::S_YELLOW_RED, simulation::S_GREEN_RED, simulation::S_GREEN_YELLOW, simulation::S_GREEN_YELLOW_RED"
+	   opacity="0.3, 1, 0.3, 0.3, 1, 1, 0.3, 1"/>
         <opaque id="Y1_KH_X" 
 	   input="simulation::S_OFF, simulation::S_RED,    simulation::S_YELLOW, simulation::S_GREEN, simulation::S_YELLOW_RED, simulation::S_GREEN_RED, simulation::S_GREEN_YELLOW, simulation::S_GREEN_YELLOW_RED"
 	   opacity="0.3, 0.3, 1, 0.3, 1, 0.3, 1, 1"/>
-
-        <opaque id="bar1" 
-	   input="simulation::S_RED, simulation::S_YELLOW, simulation::S_GREEN" opacity="1,  1, 0.2"/>
-        <opaque id="bar2" 
-	   input="simulation::S_RED, simulation::S_YELLOW, simulation::S_GREEN" opacity="1,  1, 0.2"/>
-        <opaque id="bar3" 
-	   input="simulation::S_RED, simulation::S_YELLOW, simulation::S_GREEN" opacity="1,  1, 0.2"/>
-        <opaque id="bar4" 
-	   input="simulation::S_RED, simulation::S_YELLOW, simulation::S_GREEN" opacity="1,  1, 0.2"/>
-        <opaque id="bar5" 
-	   input="simulation::S_RED, simulation::S_YELLOW, simulation::S_GREEN" opacity="1,  1, 0.2"/>
-        <opaque id="bar6" 
-	   input="simulation::S_RED, simulation::S_YELLOW, simulation::S_GREEN" opacity="1,  1, 0.2"/>
-        <opaque id="bar7" 
-	   input="simulation::S_RED, simulation::S_YELLOW, simulation::S_GREEN" opacity="1,  1, 0.2"/>
-        <opaque id="bar8" 
-	   input="simulation::S_RED, simulation::S_YELLOW, simulation::S_GREEN" opacity="1,  1, 0.2"/>
     </display>
 
-    
+    <display port="222">	<!-- Gate0 is connected to point 30 -->
+        <opaque id="bar1" 
+            input="simulation::P_STRAIGHT, simulation::P_TURN" opacity="0.3, 1"/>
+        <opaque id="bar2" 
+            input="simulation::P_STRAIGHT, simulation::P_TURN" opacity="0.3, 1"/>
+        <opaque id="bar3" 
+            input="simulation::P_STRAIGHT, simulation::P_TURN" opacity="0.3, 1"/>
+        <opaque id="bar4" 
+            input="simulation::P_STRAIGHT, simulation::P_TURN" opacity="0.3, 1"/>
+    </display>
+    <display port="223">	<!-- Gate1 is connected to point 31 -->
+        <opaque id="bar5" 
+            input="simulation::P_STRAIGHT, simulation::P_TURN" opacity="0.3, 1"/>
+        <opaque id="bar6" 
+            input="simulation::P_STRAIGHT, simulation::P_TURN" opacity="0.3, 1"/>
+        <opaque id="bar7" 
+            input="simulation::P_STRAIGHT, simulation::P_TURN" opacity="0.3, 1"/>
+        <opaque id="bar8" 
+            input="simulation::P_STRAIGHT, simulation::P_TURN" opacity="0.3, 1"/>
+    </display>
+
     <display port="0">
         <move-path id="engine" input="1..100" path="IC_JCT_0"/>
     </display>

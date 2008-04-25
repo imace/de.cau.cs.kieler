@@ -10,14 +10,15 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    id="svg1"
-   sodipodi:docname="railway-6b1_fullsim.svg"
+   sodipodi:docname="railway-6d_i5_fullsim.svg"
    width="1024px"
    sodipodi:version="0.32"
-   inkscape:version="0.45.1"
+   inkscape:version="0.45"
    height="796px"
    viewBox="0 0 1040 800"
-   sodipodi:docbase="D:\Studium2007\SS07\ModellBahn\Milestone1"
-   inkscape:output_extension="org.inkscape.output.svg.inkscape">
+   sodipodi:docbase="E:\Studium\ModellbahnPraktikum\common\modelgui"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape"
+   sodipodi:modified="true">
   <defs
      id="defs3">
     <linearGradient
@@ -177,10 +178,10 @@
      gridtolerance="2.5000000mm"
      id="base"
      inkscape:current-layer="svg1"
-     inkscape:window-y="-4"
-     inkscape:cy="402.56516"
-     inkscape:window-x="-4"
-     inkscape:cx="510.29033"
+     inkscape:window-y="20"
+     inkscape:cy="91.687694"
+     inkscape:window-x="0"
+     inkscape:cx="922.60914"
      showgrid="false"
      gridspacingx="2.5000000mm"
      gridspacingy="2.5000000mm"
@@ -4367,8 +4368,9 @@
      style="fill:#ff0000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.74807196pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
      rx="4.6749001"
      ry="5.1767049"
-     id="R1_KH_X"
-     height="9.3931665" />
+     id="R0_KH_X"
+     height="9.3931665"
+     inkscape:label="#R0_KH_X" />
   <rect
      x="966.46198"
      y="670.75403"
@@ -4376,8 +4378,9 @@
      style="fill:#ffff00;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.74807196pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
      rx="4.6749001"
      ry="5.1767049"
-     id="Y1_KH_X"
-     height="9.3931665" />
+     id="Y0_KH_X"
+     height="9.3931665"
+     inkscape:label="#Y0_KH_X" />
   <rect
      x="966.80365"
      y="701.73724"
@@ -4385,8 +4388,9 @@
      style="fill:#ff0000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.74807196pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
      rx="4.6749001"
      ry="5.1767049"
-     id="R0_KH_X"
-     height="9.3931665" />
+     id="R1_KH_X"
+     height="9.3931665"
+     inkscape:label="#R1_KH_X" />
   <rect
      x="966.80365"
      y="710.73395"
@@ -4394,8 +4398,9 @@
      style="fill:#ffff00;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.74807196pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
      rx="4.6749001"
      ry="5.1767049"
-     id="Y0_KH_X"
-     height="9.3931665" />
+     id="Y1_KH_X"
+     height="9.3931665"
+     inkscape:label="#Y1_KH_X" />
   <g
      id="textbox"
      inkscape:label="#g4040"
