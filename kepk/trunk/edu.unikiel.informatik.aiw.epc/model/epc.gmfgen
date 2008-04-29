@@ -667,7 +667,9 @@
   </diagram>
   <plugin
       iD="edu.unikiel.informatik.aiw.generated.epc.diagram"
-      printingEnabled="true"/>
+      printingEnabled="true">
+    <requiredPlugins>edu.unikiel.informatik.aiw.epc.custom</requiredPlugins>
+  </plugin>
   <editor/>
   <navigator>
     <childReferences
