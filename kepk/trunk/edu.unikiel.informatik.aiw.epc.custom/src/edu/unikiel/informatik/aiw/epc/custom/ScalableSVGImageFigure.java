@@ -14,6 +14,7 @@ public class ScalableSVGImageFigure extends ScalableImageFigure {
 	
 	public ScalableSVGImageFigure(){
 		super(null, true,true,true);
+		this.setMaintainAspectRatio(false);
 		
 	}
 	
