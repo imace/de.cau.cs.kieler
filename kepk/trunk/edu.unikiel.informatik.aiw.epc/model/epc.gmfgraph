@@ -230,6 +230,20 @@
       </actualFigure>
     </descriptors>
   </figures>
+  <figures
+      name="GCTLGallery">
+    <descriptors
+        name="GCTLConnectorFigure">
+      <actualFigure
+          xsi:type="gmfgraph:PolylineConnection"
+          name="GCTLConnectorFigure"
+          targetDecoration="//@figures.1/@descriptors.0/@actualFigure/@children.0">
+        <children
+            xsi:type="gmfgraph:PolygonDecoration"
+            name="GCTLConnectorDecoration"/>
+      </actualFigure>
+    </descriptors>
+  </figures>
   <nodes
       name="EPC"
       figure="EPCFigure"/>
@@ -275,6 +289,9 @@
   <connections
       name="OperatorToEvent"
       figure="ActivatesFunctionFigure"/>
+  <connections
+      name="GCTLConnector"
+      figure="GCTLConnectorFigure"/>
   <compartments
       name="EPCCompartment"
       figure="EPCCompartmentFigure"

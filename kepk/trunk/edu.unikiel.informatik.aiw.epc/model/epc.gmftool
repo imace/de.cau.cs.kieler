@@ -81,5 +81,18 @@
             xsi:type="gmftool:DefaultImage"/>
       </tools>
     </tools>
+    <tools
+        xsi:type="gmftool:ToolGroup"
+        title="gctl">
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="GCTLConnector"
+          description="Create new GCTLConnector">
+        <smallIcon
+            xsi:type="gmftool:DefaultImage"/>
+        <largeIcon
+            xsi:type="gmftool:DefaultImage"/>
+      </tools>
+    </tools>
   </palette>
 </gmftool:ToolRegistry>

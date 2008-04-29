@@ -3,7 +3,7 @@
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="epc"
     nsURI="http://informatik.uni-kiel.de/aiw/epcmodel" nsPrefix="epc">
-  <eClassifiers xsi:type="ecore:EClass" name="EPC" eSuperTypes="#//Function">
+  <eClassifiers xsi:type="ecore:EClass" name="EPC" eSuperTypes="#//Function #//DocumentRoot">
     <eStructuralFeatures xsi:type="ecore:EReference" name="connectors" upperBound="-1"
         eType="#//Relationship" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="objects" upperBound="-1"
@@ -25,7 +25,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="Information" eSuperTypes="#//Node"/>
   <eClassifiers xsi:type="ecore:EClass" name="Node" abstract="true" interface="true"
       eSuperTypes="#//EPCObject">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        iD="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EPCObject" abstract="true" interface="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="Relationship" abstract="true" interface="true"/>
@@ -65,8 +66,16 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="event" eType="#//Event"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="operator" eType="#//LogicalOperator"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="GCTL">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="nodes" eType="#//Node"
-        containment="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="GCTL" eSuperTypes="#//DocumentRoot">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nodes" upperBound="-1"
+        eType="#//Node" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connections" upperBound="-1"
+        eType="#//GCTLRelationship" containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GCTLRelationship" abstract="true" interface="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="GCTLconnector" eSuperTypes="#//GCTLRelationship">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="#//Node"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//Node"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DocumentRoot" abstract="true" interface="true"/>
 </ecore:EPackage>

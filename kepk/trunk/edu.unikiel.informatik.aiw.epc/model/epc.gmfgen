@@ -46,6 +46,7 @@
     <viewmap
         xsi:type="gmfgen:FigureViewmap"
         figureQualifiedClassName="org.eclipse.draw2d.FreeformLayer"/>
+    <shortcutsProvidedFor>Gctl</shortcutsProvidedFor>
     <domainDiagramElement
         href="epc.genmodel#//epc/EPC"/>
     <topLevelNodes
@@ -624,6 +625,13 @@
             title="Connection"
             description="Create new Connection"
             genLinks="//@diagram/@links.0 //@diagram/@links.1 //@diagram/@links.2 //@diagram/@links.3 //@diagram/@links.4 //@diagram/@links.5 //@diagram/@links.6 //@diagram/@links.7"/>
+      </groups>
+      <groups
+          title="gctl">
+        <entries
+            xsi:type="gmfgen:ToolEntry"
+            title="GCTLConnector"
+            description="Create new GCTLConnector"/>
       </groups>
     </palette>
     <preferencePages
