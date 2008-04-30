@@ -211,14 +211,16 @@ public class Textbox extends Control {
 	 */
 	public void setText(String text) {
 		this.text = text;
-		textElement.setTextContent(text);
+		//textElement.setTextContent(text);
+		textElement.setNodeValue(text);
 	}
 
 	/**
 	 * @return
 	 */
 	public String getText() {
-		this.text = textElement.getTextContent();
+		//this.text = textElement.getTextContent();
+		this.text = textElement.getNodeValue();
 		return text;
 	}
 

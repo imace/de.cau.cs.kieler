@@ -105,18 +105,17 @@ public class ScadeSlaveGateway {
 	 * Standard Constructor. Creates new uninitialized Gateway object.
 	 *
 	 */
-	public ScadeSlaveGateway(String outputPath, String inputPath) {
+	public ScadeSlaveGateway() {
 		super();
 		logger = Logger.getLogger("scade.log");
 		socket = new Socket();
 		host = null;
 		port = -1;
 		me = this;
-		this.outputPath = outputPath;
-		this.inputPath = inputPath;
+		this.outputPath = "";
+		this.inputPath = "";
 	}
 	
-
 	
 	/**
 	 * Initialize the Gateway object by connecting to the corresponding host and
@@ -393,12 +392,17 @@ public class ScadeSlaveGateway {
 		return requestAcknowledgeResponse(prefix + getoutputvalue + delim + pathToScadeVariable + terminator, true, shortto);
 	}
 
-/*	public void setInputValue(String pathToScadeVariable, String inputVector)
+	public void setInputValue(String pathToScadeVariable, String inputVector)
 			throws ClientException {
 		checkConnection();
 		requestAcknowledge(prefix + setinputvalue + delim + pathToScadeVariable + delim + terminator + inputVector , false, shortto);
 	}
-*/
+
+	public void setInputValue(String inputVector)
+			throws ClientException {
+		checkConnection();
+		requestAcknowledge(prefix + setinputvalue + delim + this.inputPath + delim + terminator + inputVector , false, shortto);
+	}
 	
 	public void sendMessage(String inputVector) throws ClientException{
 		checkConnection();
@@ -712,6 +716,18 @@ public class ScadeSlaveGateway {
 			/* do nothing, hence if parsing fails errorNumber is a UNKNOWN_RESPONSE */
 		}
 		return errorNumber;
+	}
+
+
+
+	public void setOutputPath(String outputPath) {
+		this.outputPath = outputPath;
+	}
+
+
+
+	public void setInputPath(String inputPath) {
+		this.inputPath = inputPath;
 	}
 
 	/*public static void main(String[] args) {

@@ -1,5 +1,6 @@
 package edu.unikiel.rtsys.kieler.kev.extension.scade;
 
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
@@ -27,6 +28,15 @@ public class KevScadePlugin extends AbstractUIPlugin {
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		plugin = this;
+		
+		// set the default values of preferences
+		IPreferenceStore preferenceStore = KevScadePlugin.getDefault().getPreferenceStore();
+		preferenceStore.setDefault(WorkbenchPreferencePage.HOST_EDITOR, "127.0.0.1");
+		preferenceStore.setDefault(WorkbenchPreferencePage.PORT_EDITOR, 12345);
+		preferenceStore.setDefault(WorkbenchPreferencePage.PROFILE_EDITOR, "Simulation");
+		preferenceStore.setDefault(WorkbenchPreferencePage.ROOT_EDITOR, "simulation::Simulation");
+		preferenceStore.setDefault(WorkbenchPreferencePage.OUTPUTPATH_EDITOR, "simulation::Simulation/displayData");
+		preferenceStore.setDefault(WorkbenchPreferencePage.INPUTPATH_EDITOR, "simulation::Simulation/controlData");
 	}
 
 	/*

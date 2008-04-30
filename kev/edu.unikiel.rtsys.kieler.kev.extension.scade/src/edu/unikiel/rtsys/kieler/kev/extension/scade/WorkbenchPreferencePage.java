@@ -22,6 +22,7 @@ public class WorkbenchPreferencePage extends FieldEditorPreferencePage implement
 	public static final String PROFILE_EDITOR = "scade_profile";
 	public static final String ROOT_EDITOR = "scade_root";
 	public static final String OUTPUTPATH_EDITOR = "scade_output";
+	public static final String INPUTPATH_EDITOR = "scade_input";
 	
 	@Override
 	protected void createFieldEditors() {
@@ -33,6 +34,7 @@ public class WorkbenchPreferencePage extends FieldEditorPreferencePage implement
 		this.addField(new StringFieldEditor(PROFILE_EDITOR, "CodeGen Profile",StringFieldEditor.UNLIMITED,StringFieldEditor.VALIDATE_ON_KEY_STROKE, getFieldEditorParent()));
 		this.addField(new StringFieldEditor(ROOT_EDITOR, "Root Operator",StringFieldEditor.UNLIMITED,StringFieldEditor.VALIDATE_ON_KEY_STROKE, getFieldEditorParent()));
 		this.addField(new StringFieldEditor(OUTPUTPATH_EDITOR, "Output Path",StringFieldEditor.UNLIMITED,StringFieldEditor.VALIDATE_ON_KEY_STROKE, getFieldEditorParent()));
+		this.addField(new StringFieldEditor(INPUTPATH_EDITOR, "Output Path",StringFieldEditor.UNLIMITED,StringFieldEditor.VALIDATE_ON_KEY_STROKE, getFieldEditorParent()));
 //		StringFieldEditor fe = new StringFieldEditor(OUTPUTPATH_EDITOR, "Output Path",StringFieldEditor.UNLIMITED,StringFieldEditor.VALIDATE_ON_KEY_STROKE, getFieldEditorParent());
 				
 	}
@@ -42,11 +44,6 @@ public class WorkbenchPreferencePage extends FieldEditorPreferencePage implement
 		// set the preference store
 		IPreferenceStore preferenceStore = KevScadePlugin.getDefault().getPreferenceStore();
 		setPreferenceStore(preferenceStore);
-		preferenceStore.setDefault(HOST_EDITOR, "127.0.0.1");
-		preferenceStore.setDefault(PORT_EDITOR, 12345);
-		preferenceStore.setDefault(PROFILE_EDITOR, "Simulation");
-		preferenceStore.setDefault(ROOT_EDITOR, "simulation::Simulation");
-		preferenceStore.setDefault(OUTPUTPATH_EDITOR, "simulation::Simulation/displayData");
 	}
 
 }

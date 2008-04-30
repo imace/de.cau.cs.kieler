@@ -26,6 +26,7 @@ public abstract class StepControlJob extends Job {
 	AnimationDataController dataController;
 	
 	boolean paused = false;
+	boolean old_paused = false;
 	int delay = 0;
 	long time;
 	
@@ -48,13 +49,14 @@ public abstract class StepControlJob extends Job {
 	
 	/**
 	 * Set or unset the Job to paused mode. If it is set to paused the
-	 * Job won't be rescheduled automatically after ony cycle.
+	 * Job won't be rescheduled automatically after one cycle.
 	 * @param isPaused
 	 */
 	public void setPaused(boolean isPaused){
+		old_paused = paused; // save the old value
 		paused = isPaused;
 	}
-
+	
 	/**
 	 * Abstract run-method that must be implemented by clients with whatever
 	 * behavior the controller shall have in one cycle. This is called by the
@@ -64,18 +66,22 @@ public abstract class StepControlJob extends Job {
 	
 	@Override
 	protected IStatus run(IProgressMonitor monitor) {
+		time = System.currentTimeMillis();
+
+		// call the client custom run method 
 		myRun();
 		
+		// calc the execution time ot the client method to get the proper delay
 		long passedTime = System.currentTimeMillis() - time;
-		time = System.currentTimeMillis();
 		long currentDelay = delay;
 		if(passedTime > delay)
 			currentDelay = 0;
 		else
 			currentDelay = delay - passedTime;
+		if(paused == false){ // in play modus reschedule a next step with the required delay
+			this.schedule(currentDelay);
+		}
 		
-		if(paused == false)
-			this.schedule(currentDelay);	
 		return Status.OK_STATUS;
 	}
 	

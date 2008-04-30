@@ -2,6 +2,8 @@ package edu.unikiel.rtsys.kieler.kev.helpers;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -13,16 +15,22 @@ import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
 
-import org.eclipse.core.runtime.MultiStatus;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.action.IStatusLineManager;
-import org.eclipse.jface.dialogs.ErrorDialog;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IViewPart;
 import org.eclipse.ui.IViewReference;
+import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 import org.xml.sax.SAXException;
 
 import edu.unikiel.rtsys.kieler.kev.KevPlugin;
+import edu.unikiel.rtsys.kieler.kev.ui.AbortErrorDialog;
 import edu.unikiel.rtsys.kieler.kev.views.EnvironmentView;
 
 //import com.sun.org.apache.xml.internal.serialize.OutputFormat;
@@ -84,10 +92,10 @@ public class Tools {
 	 */
 	public static void showDialog(String msg) {
 		Exception exc = new Exception(msg);
-		showDialog(msg, exc);
+		showDialog(msg, null);
 	}
 	public static void showDialog(Exception exc) {
-		showDialog(exc.getMessage(), exc);
+		showDialog(null, exc);
 	}
 	/**
 	 * Error Dialog displaying a message and a details field. In the
@@ -106,7 +114,10 @@ public class Tools {
 	 */
 	private static IStatusLineManager getStatusLineManager(){
 			try{
-			IViewReference[] views = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getViewReferences();
+			IWorkbench wb = PlatformUI.getWorkbench();
+			IWorkbenchWindow wbw = wb.getActiveWorkbenchWindow();
+			IWorkbenchPage wbp = wbw.getActivePage();
+			IViewReference[] views = wbp.getViewReferences();
 			for (int i = 0; i < views.length; i++) {
 				IViewPart view = views[i].getView(false);
 				if(view.getViewSite().getId().equals(EnvironmentView.ID)){
@@ -119,18 +130,21 @@ public class Tools {
 		
 	static IStatusLineManager statusLineManager;
 	public static void setStatusLine(String message){
-			if(statusLineManager == null)
-				statusLineManager = getStatusLineManager();
-			if(statusLineManager != null){
 				final String msg = message;
-				PlatformUI.getWorkbench().getDisplay().syncExec(new Runnable(){
+				PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable(){
 					@Override
 					public void run() {
-						statusLineManager.setMessage(msg);
+						if(statusLineManager == null)
+							statusLineManager = getStatusLineManager();
+						if(statusLineManager != null){
+							statusLineManager.setMessage(msg);
+							//System.out.println("Message: "+msg);
+						}
+							
 					}
 				});
-			}
-		}
+	}
+		
 
 	/**
 	 * Tries to parse the given String to a Java DataType. It first tries to
@@ -195,8 +209,34 @@ public class Tools {
 		URI newUri = new URI(uri.getScheme(), uri.getUserInfo(), uri.getHost(), uri.getPort(), newPath, uri.getQuery(), uri.getFragment()); 
 		return newUri;
 	}
+	
+	/** Write a Throwable's StackTrace to a String */
+	public static String getStackTrace(Throwable t){
+		StringWriter sw = new StringWriter();
+		t.printStackTrace(new PrintWriter(sw));
+		return sw.toString();
+	}
+	
+	public static void main(String[] args) {
+		Display display = new Display();
+		Shell shell = new Shell(display);
+		shell.setLayout(new GridLayout(1, false));
 
-	/** generating the mapping for the railway example */
+		String msg = "Message";
+		Exception exc = new Exception("Message3");
+		Exception exc2 = new Exception(getStackTrace(exc));
+		Status s = new Status(IStatus.ERROR, "pluginId", "Message2", exc2);
+		AbortErrorDialog.openError(msg,s, true);
+
+		shell.pack();
+		shell.open();
+		while (!shell.isDisposed()) {
+			if (!display.readAndDispatch())
+				display.sleep();
+		}
+		display.dispose();
+	}
+		/** generating the mapping for the railway example */
 
 //	public static void main(String[] args) {
 //		try {
@@ -399,17 +439,18 @@ class DiagramRunnable implements Runnable{
 	Exception exc;
 	DiagramRunnable(String msg, Exception exc){
 		this.msg = msg;
+		if(this.msg == null)
+			this.msg = "An Exception was thrown.";
 		this.exc = exc;
+		if(this.exc == null){
+			this.exc = new Exception("not specified");
+		}
 	}
 	@Override
 	public void run() {
-		StackTraceElement[] stack = exc.getStackTrace();
-		Status[] statusArray = new Status[stack.length];
-		for(int i=0;i<stack.length;i++){
-			String stackString = stack[i].toString(); 
-			statusArray[i] = new Status(Status.ERROR,KevPlugin.PLUGIN_ID,Status.ERROR,stackString,null);
-		}
-		MultiStatus s = new MultiStatus(KevPlugin.PLUGIN_ID,Status.ERROR,statusArray,msg,exc);
-		ErrorDialog.openError(null,"Error",msg,s);
+		Exception alibiException = new Exception(Tools.getStackTrace(exc));
+		Status s = new Status(IStatus.ERROR, KevPlugin.PLUGIN_ID, exc.getMessage(),alibiException);
+		//ErrorDialog.openError(null,"Error",msg,s);
+		AbortErrorDialog.openError(msg,s,true);
 	}
 }

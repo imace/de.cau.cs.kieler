@@ -1,5 +1,7 @@
 package edu.unikiel.rtsys.kieler.kev.extension.scade;
 
+import org.eclipse.core.runtime.jobs.Job;
+
 import edu.unikiel.rtsys.kieler.kev.extension.ControlFlowChangeEvent;
 import edu.unikiel.rtsys.kieler.kev.extension.DataChangeEvent;
 import edu.unikiel.rtsys.kieler.kev.helpers.Tools;
@@ -21,7 +23,9 @@ public class AnimationDataController extends
 		case START:
 			if(controlJob.isConnected()){
 				controlJob.setPaused(false);
-				controlJob.schedule();
+				if(controlJob.getState() != Job.RUNNING 
+						&& controlJob.getState() != Job.SLEEPING)
+					controlJob.schedule();
 			}
 			else{
 				controlJob.init();
@@ -38,7 +42,13 @@ public class AnimationDataController extends
 				Tools.showDialog("Could not set the specified delay.", e2);
 			}
 			break;
+		case ERROR:
+			// in error case a dialog will likely be shown to the user
+			// then the system pauses in order for the user to take coresponding actions
+			controlJob.setPaused(true);
+			break;
 		default:
+			controlJob.setPaused(true);
 			controlJob.cancel();
 			controlJob.stop();
 			break;
@@ -48,7 +58,8 @@ public class AnimationDataController extends
 
 	@Override
 	public void dataChanged(DataChangeEvent e) {
-		
+		System.out.println("Control Data changed."+e.getPort());
+		controlJob.setControlData(e);
 	}
 
 	@Override

@@ -4,7 +4,7 @@ import java.util.EventObject;
 
 public class ControlFlowChangeEvent extends EventObject {
 
-	public static enum Type {START, STOP, STEP, DELAY}; 
+	public static enum Type {START, STOP, STEP, DELAY, ERROR}; 
 	
 	Type type;
 	Object data;

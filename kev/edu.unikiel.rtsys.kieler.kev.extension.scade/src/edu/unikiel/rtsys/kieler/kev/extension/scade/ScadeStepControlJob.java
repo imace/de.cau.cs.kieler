@@ -18,14 +18,14 @@ public class ScadeStepControlJob extends StepControlJob {
 
 	ScadeSlaveGateway scadeGateway;
 	AnimationData animationData;
-	IPreferenceStore preferenceStore;
+	int step = 0;
 	
 	public ScadeStepControlJob(AnimationDataController controller) {
 		super("SCADE Step Control Job",controller);
 		// TODO: fix hardcoded stuff
-		preferenceStore = KevScadePlugin.getDefault().getPreferenceStore();
-		String outputpath = preferenceStore.getString(WorkbenchPreferencePage.OUTPUTPATH_EDITOR);
-		scadeGateway = new ScadeSlaveGateway(outputpath,"");
+		//preferenceStore = KevScadePlugin.getDefault().getPreferenceStore();
+		
+		scadeGateway = new ScadeSlaveGateway();
 	}
 	
 	/**
@@ -43,6 +43,7 @@ public class ScadeStepControlJob extends StepControlJob {
 				animationData = new StringAnimationData(scadeResponse);
 				// notify KEV of data change
 				this.getDataController().fireDataChangeEvent(DataChangeEvent.ALL, animationData);
+				Tools.setStatusLine(""+ ++step);
 			} catch (ClientException e) {
 				Tools.showDialog(e);
 			}
@@ -54,25 +55,43 @@ public class ScadeStepControlJob extends StepControlJob {
 	
 	public void init(){
 		try {
+			Tools.setStatusLine("Loading SCADE preferences...");
+			IPreferenceStore preferenceStore = KevScadePlugin.getDefault().getPreferenceStore();
 			String host = preferenceStore.getString(WorkbenchPreferencePage.HOST_EDITOR);
 			int port = preferenceStore.getInt(WorkbenchPreferencePage.PORT_EDITOR);
 			String profile = preferenceStore.getString(WorkbenchPreferencePage.PROFILE_EDITOR);
 			String rootNode = preferenceStore.getString(WorkbenchPreferencePage.ROOT_EDITOR);
+			String outputpath = preferenceStore.getString(WorkbenchPreferencePage.OUTPUTPATH_EDITOR);
+			String inputpath = preferenceStore.getString(WorkbenchPreferencePage.INPUTPATH_EDITOR);
 			
+			Tools.setStatusLine("Init SCADE gateway...");
+			step = 0;
 			scadeGateway.init(host,port);
+			Tools.setStatusLine("Start SCADE slave simulation...");
 			scadeGateway.startSimulation(profile,rootNode);
+			scadeGateway.setOutputPath(outputpath);
+			scadeGateway.setInputPath(inputpath);			
+			Tools.setStatusLine("SCADE simulation ready. press play or step.");
 		} catch (ClientException e) {
 			Tools.showDialog(e);
+			try { scadeGateway.stopSimulation(); } catch (Exception e1) { /* nothing */}
+			scadeGateway.close();
+			Tools.setStatusLine("Connection to SCADE failed.");
 		}	
 	}
 	
 	public void stop(){
 		try {
-			scadeGateway.stopSimulation();
+			Tools.setStatusLine("Stop SCADE simulation.");
+			step = 0;
+			if(scadeGateway.isConnected()){
+				scadeGateway.stopSimulation();
+			}
 		} catch (Exception e) {
 			Tools.showDialog(e);
 		} 
 		scadeGateway.close();
+		Tools.setStatusLine("SCADE connection closed.");
 	}
 
 	@Override
@@ -80,4 +99,12 @@ public class ScadeStepControlJob extends StepControlJob {
 		// TODO Auto-generated method stub
 	}
 
+	public void setControlData(DataChangeEvent e) {
+		AnimationData controlData = e.getData();
+		try{
+			scadeGateway.setInputValue(controlData.toString());		
+		}catch(Exception exc){
+			Tools.showDialog("Could not send data to SCADE", exc);
+		}
+	}
 }

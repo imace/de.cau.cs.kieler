@@ -1,13 +1,13 @@
 package edu.unikiel.rtsys.kieler.kev.animation;
 
-import java.awt.Dimension;
-
 import org.apache.batik.swing.gvt.GVTTreeRendererAdapter;
 import org.apache.batik.swing.gvt.GVTTreeRendererEvent;
 import org.eclipse.core.runtime.IConfigurationElement;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Platform;
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.ui.PlatformUI;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
 
 import edu.unikiel.rtsys.kieler.kev.KevPlugin;
 import edu.unikiel.rtsys.kieler.kev.Messages;
@@ -36,6 +36,8 @@ public class AnimationManager extends GVTTreeRendererAdapter implements DataChan
 	ControlFlowEventSource controlFlowEventSource;
 	
 	int delay = 0;
+	// true if it is already initialized, false if not
+	boolean initialized = false;
 	
 	/** Implementing singleton pattern */
 	private static AnimationManager instance;
@@ -53,30 +55,48 @@ public class AnimationManager extends GVTTreeRendererAdapter implements DataChan
 	}
 	
 	public void init() {
+		initialized = false;
 		animationMapping = new AnimationMapping(view);
-		System.out.println("DisplayPortSize: "+animationMapping.getDisplayPortSize()+" ControlPortSize: "+animationMapping.getControlPortsize());
+		//System.out.println("DisplayPortSize: "+animationMapping.getDisplayPortSize()+" ControlPortSize: "+animationMapping.getControlPortsize());
 		//controlFlowEventSource = new ControlFlowEventSource();
 		String controllerString = KevPlugin.getDefault().getPreferenceStore().getString(KevPreferencePage.CONTROLLER);
 		registerController(controllerString);
-		//resizeWindow();
+		initialized = true;
+		Tools.setStatusLine("Ready.");
 	}
 	
-	
-
-	public void start() {
-		init(); // reload preferences (might have been changed)
-		controlFlowEventSource.fireControlFlowChangeEvent(ControlFlowChangeEvent.Type.START, null);
+    public void start() {
+		Tools.setStatusLine("Init animation manager...");
+    	init(); // reload preferences (might have been changed)
+    	if(initialized){
+    		Tools.setStatusLine("play.");
+			controlFlowEventSource.fireControlFlowChangeEvent(ControlFlowChangeEvent.Type.START, null);
+    	}
 	}
 	public void stop() {
-		controlFlowEventSource.fireControlFlowChangeEvent(ControlFlowChangeEvent.Type.STOP, null);
+		if(initialized){
+			Tools.setStatusLine("stop.");
+			controlFlowEventSource.fireControlFlowChangeEvent(ControlFlowChangeEvent.Type.STOP, null);
+		}
 	}
 	public void step(){
-		controlFlowEventSource.fireControlFlowChangeEvent(ControlFlowChangeEvent.Type.STEP, null);
+		if(initialized){
+			Tools.setStatusLine("step.");
+			controlFlowEventSource.fireControlFlowChangeEvent(ControlFlowChangeEvent.Type.STEP, null);
+		}
 	}
 
 	public void setDelay(int delay){
 		this.delay = delay; // need to store the state of the delay, because Job might be instantiated later
+		// this shall also be done during initialization
 		controlFlowEventSource.fireControlFlowChangeEvent(ControlFlowChangeEvent.Type.DELAY, new Integer(delay));
+	}
+	
+	public void error(){
+		if(initialized){
+			Tools.setStatusLine("paused.");
+			controlFlowEventSource.fireControlFlowChangeEvent(ControlFlowChangeEvent.Type.ERROR, null);
+		}
 	}
 
 	/**
@@ -85,8 +105,16 @@ public class AnimationManager extends GVTTreeRendererAdapter implements DataChan
 	 */
 	public void gvtRenderingCompleted(GVTTreeRendererEvent e) {
 		// when a new image was loaded, reinit the animation manager
-		System.out.println("Rendering finished"); //$NON-NLS-1$
-		this.init();
+		// done in extra job to get better visible status information
+		final AnimationManager am = this;
+		Job delayedJob = new Job("Init animation manager"){
+			@Override
+			protected IStatus run(IProgressMonitor monitor) {
+				am.init();
+				return Status.OK_STATUS;
+			}
+		};
+		delayedJob.schedule();
 	}
 
 	/**
@@ -113,6 +141,12 @@ public class AnimationManager extends GVTTreeRendererAdapter implements DataChan
 		return animationMapping;
 	}
 
+	/**
+	 * registers a new controller from the list of available controllers in the
+	 * plugin registry by a controllerName. Old controllers will be unregistered and
+	 * the new one if it matches the controllerName will be registered.
+	 * @param controllerName
+	 */
 	public void registerController(String controllerName) {
 				
 		// get the available interfaces

@@ -1,5 +1,6 @@
 package edu.unikiel.rtsys.kieler.kev.extension;
 
+import java.util.Iterator;
 import java.util.Vector;
 
 import edu.unikiel.rtsys.kieler.kev.helpers.Tools;
@@ -54,6 +55,20 @@ public class AnimationData {
 	}
 	
 	public String toString(){
-		return data.toString();
+		Iterator i = data.iterator();
+		if (! i.hasNext())
+		    return "()";
+
+		StringBuilder sb = new StringBuilder();
+		sb.append('(');
+		for (;;) {
+		    Object e = i.next();
+		    sb.append(e);
+		    if (! i.hasNext())
+			return sb.append(')').toString();
+		    sb.append(", ");
+		}
+	    
+		
 	}
 }

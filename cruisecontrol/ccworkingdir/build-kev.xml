@@ -23,7 +23,7 @@
 		</fileset>
 	</path>
 	
-	<echo message="staring..."/>
+	<echo message="starting..."/>
 	
 	<!-- Get the latest from SVN -->
 	<target name="update">

@@ -210,6 +210,7 @@ public class EnvironmentComposite extends Composite implements ISelectionListene
 			Tools.showDialog("Error converting URL "+url+" to URI when trying to load svg file.", e);
 		}
 		try{
+			//Tools.setStatusLine("loading image...");
 			svgCanvas.loadSVGDocument(url.toExternalForm());
 		}catch(Exception e){
 			Tools.showDialog("Failed to load svg image: "+url, e);
@@ -222,6 +223,7 @@ public class EnvironmentComposite extends Composite implements ISelectionListene
 				URL url = svgFile.getLocation().toFile().toURL();
 				svgCanvas.loadSVGDocument(url.toExternalForm());
 			}else if(svgURI != null){
+				//Tools.setStatusLine("loading image...");
 				svgCanvas.loadSVGDocument(svgURI.toURL().toExternalForm());
 			}
 		} catch (MalformedURLException e) {
