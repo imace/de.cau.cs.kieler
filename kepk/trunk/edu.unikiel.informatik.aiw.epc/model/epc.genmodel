@@ -27,7 +27,9 @@
     <genClasses image="false" ecoreClass="epc.ecore#//Node">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute epc.ecore#//Node/name"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="epc.ecore#//EPCObject"/>
+    <genClasses image="false" ecoreClass="epc.ecore#//EPCObject">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute epc.ecore#//EPCObject/showInEPCEditor"/>
+    </genClasses>
     <genClasses image="false" ecoreClass="epc.ecore#//Relationship"/>
     <genClasses ecoreClass="epc.ecore#//ActivatesFunction">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference epc.ecore#//ActivatesFunction/source"/>
@@ -58,15 +60,9 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference epc.ecore#//OperatorToEventConnection/event"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference epc.ecore#//OperatorToEventConnection/operator"/>
     </genClasses>
-    <genClasses ecoreClass="epc.ecore#//GCTL">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference epc.ecore#//GCTL/nodes"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference epc.ecore#//GCTL/connections"/>
-    </genClasses>
-    <genClasses image="false" ecoreClass="epc.ecore#//GCTLRelationship"/>
     <genClasses ecoreClass="epc.ecore#//GCTLconnector">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference epc.ecore#//GCTLconnector/source"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference epc.ecore#//GCTLconnector/target"/>
     </genClasses>
-    <genClasses ecoreClass="epc.ecore#//DocumentRoot"/>
   </genPackages>
 </genmodel:GenModel>

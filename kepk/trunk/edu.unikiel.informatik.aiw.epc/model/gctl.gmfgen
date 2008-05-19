@@ -4,9 +4,8 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:gmfgen="http://www.eclipse.org/gmf/2006/GenModel" packageNamePrefix="edu.unikiel.informatik.aiw.generated.gctl.diagram"
     modelID="Gctl"
-    sameFileForDiagramAndModel="true"
-    diagramFileExtension="gctl"
-    domainFileExtension="gctl"
+    diagramFileExtension="gctl_diagram"
+    domainFileExtension="epc"
     templateDirectory="">
   <diagram
       visualID="79"
@@ -18,7 +17,8 @@
       validationProviderPriority="Low"
       validationEnabled="true"
       validationDecorators="true"
-      liveValidationUIFeedback="true">
+      liveValidationUIFeedback="true"
+      synchronized="false">
     <diagramRunTimeClass
         href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Diagram"/>
     <elementType
@@ -29,7 +29,7 @@
         figureQualifiedClassName="org.eclipse.draw2d.FreeformLayer"/>
     <containsShortcutsTo>epc</containsShortcutsTo>
     <domainDiagramElement
-        href="epc.genmodel#//epc/GCTL"/>
+        href="epc.genmodel#//epc/EPC"/>
     <topLevelNodes
         visualID="1001"
         editPartClassName="FunctionEditPart"
@@ -57,9 +57,9 @@
         <metaClass
             href="epc.genmodel#//epc/Function"/>
         <containmentMetaFeature
-            href="epc.genmodel#//epc/GCTL/nodes"/>
+            href="epc.genmodel#//epc/EPC/objects"/>
         <childMetaFeature
-            href="epc.genmodel#//epc/GCTL/nodes"/>
+            href="epc.genmodel#//epc/EPC/objects"/>
       </modelFacet>
       <labels
           visualID="4001"
@@ -107,9 +107,9 @@
         <metaClass
             href="epc.genmodel#//epc/Event"/>
         <containmentMetaFeature
-            href="epc.genmodel#//epc/GCTL/nodes"/>
+            href="epc.genmodel#//epc/EPC/objects"/>
         <childMetaFeature
-            href="epc.genmodel#//epc/GCTL/nodes"/>
+            href="epc.genmodel#//epc/EPC/objects"/>
       </modelFacet>
       <labels
           visualID="4002"
@@ -152,9 +152,9 @@
         <metaClass
             href="epc.genmodel#//epc/Information"/>
         <containmentMetaFeature
-            href="epc.genmodel#//epc/GCTL/nodes"/>
+            href="epc.genmodel#//epc/EPC/objects"/>
         <childMetaFeature
-            href="epc.genmodel#//epc/GCTL/nodes"/>
+            href="epc.genmodel#//epc/EPC/objects"/>
       </modelFacet>
       <labels
           visualID="4003"
@@ -185,8 +185,8 @@
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <elementType
-          xsi:type="gmfgen:MetamodelType"
-          editHelperClassName="EPCEditHelper"/>
+          xsi:type="gmfgen:SpecializationType"
+          metamodelType="//@diagram/@elementType"/>
       <viewmap
           xsi:type="gmfgen:InnerClassViewmap"
           className="EPCFigure"
@@ -197,9 +197,9 @@
         <metaClass
             href="epc.genmodel#//epc/EPC"/>
         <containmentMetaFeature
-            href="epc.genmodel#//epc/GCTL/nodes"/>
+            href="epc.genmodel#//epc/EPC/objects"/>
         <childMetaFeature
-            href="epc.genmodel#//epc/GCTL/nodes"/>
+            href="epc.genmodel#//epc/EPC/objects"/>
       </modelFacet>
       <labels
           visualID="4004"
@@ -242,9 +242,9 @@
         <metaClass
             href="epc.genmodel#//epc/GCTLconnector"/>
         <containmentMetaFeature
-            href="epc.genmodel#//epc/GCTL/connections"/>
+            href="epc.genmodel#//epc/EPC/connectors"/>
         <childMetaFeature
-            href="epc.genmodel#//epc/GCTL/connections"/>
+            href="epc.genmodel#//epc/EPC/connectors"/>
         <sourceMetaFeature
             href="epc.genmodel#//epc/GCTLconnector/source"/>
         <targetMetaFeature
@@ -303,7 +303,7 @@
     <preferencePages
         xsi:type="gmfgen:GenStandardPreferencePage"
         iD="edu.unikiel.informatik.aiw.generated.epc.diagram.general"
-        name="Epc Diagram">
+        name="GCTL Diagram">
       <children
           xsi:type="gmfgen:GenStandardPreferencePage"
           iD="edu.unikiel.informatik.aiw.generated.epc.diagram.appearance"

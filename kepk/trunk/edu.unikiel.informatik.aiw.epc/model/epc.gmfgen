@@ -2,8 +2,8 @@
 <gmfgen:GenEditorGenerator xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:gmfgen="http://www.eclipse.org/gmf/2006/GenModel" sameFileForDiagramAndModel="true"
-    diagramFileExtension="epc">
+    xmlns:gmfgen="http://www.eclipse.org/gmf/2006/GenModel" diagramFileExtension="epc_diagram"
+    templateDirectory="">
   <audits>
     <categories
         id="commonAudits"
@@ -46,7 +46,7 @@
     <viewmap
         xsi:type="gmfgen:FigureViewmap"
         figureQualifiedClassName="org.eclipse.draw2d.FreeformLayer"/>
-    <shortcutsProvidedFor>Gctl</shortcutsProvidedFor>
+    <shortcutsProvidedFor>Epc</shortcutsProvidedFor>
     <domainDiagramElement
         href="epc.genmodel#//epc/EPC"/>
     <topLevelNodes
@@ -667,9 +667,7 @@
   </diagram>
   <plugin
       iD="edu.unikiel.informatik.aiw.generated.epc.diagram"
-      printingEnabled="true">
-    <requiredPlugins>edu.unikiel.informatik.aiw.epc.custom</requiredPlugins>
-  </plugin>
+      printingEnabled="true"/>
   <editor/>
   <navigator>
     <childReferences

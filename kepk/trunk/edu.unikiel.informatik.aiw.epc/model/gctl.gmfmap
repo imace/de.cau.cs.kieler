@@ -7,7 +7,7 @@
     xmlns:gmftool="http://www.eclipse.org/gmf/2005/ToolDefinition">
   <nodes>
     <containmentFeature
-        href="epc.ecore#//GCTL/nodes"/>
+        href="epc.ecore#//EPC/objects"/>
     <ownedChild>
       <domainMetaElement
           href="epc.ecore#//Function"/>
@@ -28,7 +28,7 @@
   </nodes>
   <nodes>
     <containmentFeature
-        href="epc.ecore#//GCTL/nodes"/>
+        href="epc.ecore#//EPC/objects"/>
     <ownedChild>
       <domainMetaElement
           href="epc.ecore#//Event"/>
@@ -48,7 +48,7 @@
   </nodes>
   <nodes>
     <containmentFeature
-        href="epc.ecore#//GCTL/nodes"/>
+        href="epc.ecore#//EPC/objects"/>
     <ownedChild>
       <domainMetaElement
           href="epc.ecore#//Information"/>
@@ -68,7 +68,7 @@
   </nodes>
   <nodes>
     <containmentFeature
-        href="epc.ecore#//GCTL/nodes"/>
+        href="epc.ecore#//EPC/objects"/>
     <ownedChild>
       <domainMetaElement
           href="epc.ecore#//EPC"/>
@@ -90,7 +90,7 @@
     <domainMetaElement
         href="epc.ecore#//GCTLconnector"/>
     <containmentFeature
-        href="epc.ecore#//GCTL/connections"/>
+        href="epc.ecore#//EPC/connectors"/>
     <tool
         xsi:type="gmftool:CreationTool"
         href="epc.gmftool#//@palette/@tools.1/@tools.0"/>
@@ -109,7 +109,7 @@
     <domainModel
         href="epc.ecore#/"/>
     <domainMetaElement
-        href="epc.ecore#//GCTL"/>
+        href="epc.ecore#//EPC"/>
     <palette
         href="epc.gmftool#//@palette"/>
   </diagram>
