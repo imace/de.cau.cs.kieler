@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Core Plug-in
+Bundle-SymbolicName: edu.unikiel.rtsys.kieler.core
+Bundle-Version: 1.0.0
+Bundle-Activator: edu.unikiel.rtsys.kieler.core.CorePlugin
+Bundle-Vendor: Christian-Albrechts-Universität zu Kiel
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Export-Package: edu.unikiel.rtsys.kieler.core.preferences
