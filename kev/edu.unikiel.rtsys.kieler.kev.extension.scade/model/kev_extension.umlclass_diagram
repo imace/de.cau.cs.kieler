@@ -562,6 +562,28 @@
     <element xmi:type="uml:Class" href="kev_extension.uml#_gFYtMBteEd2Ox9wc3MnorQ"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_gFkTYhteEd2Ox9wc3MnorQ" x="228" y="72"/>
   </children>
+  <children xmi:type="notation:Node" xmi:id="_1MO8YBtkEd2Ox9wc3MnorQ" type="Note">
+    <children xmi:type="notation:Node" xmi:id="_1MQKgBtkEd2Ox9wc3MnorQ" type="DiagramName">
+      <element xsi:nil="true"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_1MQKgRtkEd2Ox9wc3MnorQ" type="Description">
+      <element xsi:nil="true"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_1MPjcBtkEd2Ox9wc3MnorQ" fontName="Sans" description="data send to KEV (Display Data)" fillColor="13369343" lineColor="6737151"/>
+    <element xsi:nil="true"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_1MPjcRtkEd2Ox9wc3MnorQ" x="336" y="696" width="144"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_VsBPMBtqEd2Ox9wc3MnorQ" type="Note">
+    <children xmi:type="notation:Node" xmi:id="_VsB2QBtqEd2Ox9wc3MnorQ" type="DiagramName">
+      <element xsi:nil="true"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_VsB2QRtqEd2Ox9wc3MnorQ" type="Description">
+      <element xsi:nil="true"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_VsBPMRtqEd2Ox9wc3MnorQ" fontName="Sans" description="Data received from KEV (Control Data)" fillColor="13369343" lineColor="6737151"/>
+    <element xsi:nil="true"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_VsBPMhtqEd2Ox9wc3MnorQ" x="888" y="672" width="204"/>
+  </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_MChIsRtGEd2KiICfAw-9VA"/>
   <styles xmi:type="notation:FilteringStyle" xmi:id="_MChIshtGEd2KiICfAw-9VA"/>
   <element xmi:type="uml:Package" href="kev_extension.uml#_L6AF4BtGEd2KiICfAw-9VA"/>
@@ -811,5 +833,17 @@
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_oVGgoxteEd2Ox9wc3MnorQ" points="[0, 0, -93, -60]$[93, 60, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_oVHuwBteEd2Ox9wc3MnorQ" id="(0.49836066,1.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_VM7gcBtfEd2Ox9wc3MnorQ" id="(0.49779737,0.0)"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_ZwS88BtqEd2Ox9wc3MnorQ" type="NoteAttachment" source="_VsBPMBtqEd2Ox9wc3MnorQ" target="_z1sscBtSEd2-FPYTO_DsrA">
+    <styles xmi:type="notation:ConnectorStyle" xmi:id="_ZwS88RtqEd2Ox9wc3MnorQ"/>
+    <element xsi:nil="true"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ZwS88htqEd2Ox9wc3MnorQ" points="[-2, -21, 8, 105]$[28, -147, 38, -21]"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ZwTkABtqEd2Ox9wc3MnorQ" id="(0.76106197,0.23140496)"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_aW64EBtqEd2Ox9wc3MnorQ" type="NoteAttachment" source="_1MO8YBtkEd2Ox9wc3MnorQ" target="_kuekwBtJEd2pnLVzPOMalg">
+    <styles xmi:type="notation:ConnectorStyle" xmi:id="_aW64ERtqEd2Ox9wc3MnorQ"/>
+    <element xsi:nil="true"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_aW64EhtqEd2Ox9wc3MnorQ" points="[3, -13, -54, 73]$[-58, -110, -115, -24]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_aW8GMBtqEd2Ox9wc3MnorQ" id="(0.79452056,0.32142857)"/>
   </edges>
 </notation:Diagram>
