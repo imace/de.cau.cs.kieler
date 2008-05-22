@@ -27,13 +27,18 @@
           name="EdgeFigure"
           lineWidth="2"
           targetDecoration="//@figures.0/@descriptors.1/@actualFigure/@children.1">
+        <layout
+            xsi:type="gmfgraph:XYLayout"/>
         <foregroundColor
             xsi:type="gmfgraph:ConstantColor"
             value="darkGray"/>
         <children
             xsi:type="gmfgraph:Label"
             name="EdgeLabelFigure"
-            text="[] / []"/>
+            text="[] / []">
+          <layout
+              xsi:type="gmfgraph:XYLayout"/>
+        </children>
         <children
             xsi:type="gmfgraph:PolylineDecoration"
             name="EdgeArrowDecoration"/>
@@ -41,19 +46,38 @@
       <accessors
           figure="//@figures.0/@descriptors.1/@actualFigure/@children.0"/>
     </descriptors>
+    <descriptors
+        name="EdgeSplineFigure">
+      <actualFigure
+          xsi:type="gmfgraph:CustomConnection"
+          name="SplineCurveConnection"
+          qualifiedClassName="edu.unikiel.rtsys.layouter.gef.SplineCurveConnection">
+        <children
+            xsi:type="gmfgraph:Label"
+            name="EdgeSplineLabelFigure"
+            text="[] / []"/>
+        <children
+            xsi:type="gmfgraph:PolylineDecoration"
+            name="EdgeSplineArrowDecoration"/>
+      </actualFigure>
+      <accessors
+          accessor="getFigureEdgeSplineLabelFigure"
+          figure="//@figures.0/@descriptors.2/@actualFigure/@children.0"/>
+    </descriptors>
   </figures>
   <nodes
       name="Node"
       figure="NodeFigure"/>
   <connections
       name="Edge"
-      figure="EdgeFigure"/>
+      figure="EdgeSplineFigure"/>
   <labels
       name="NodeName"
       figure="NodeFigure"
       accessor="//@figures.0/@descriptors.0/@accessors.0"/>
   <labels
       name="EdgeLabel"
-      figure="EdgeFigure"
-      accessor="//@figures.0/@descriptors.1/@accessors.0"/>
+      figure="EdgeSplineFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.2/@accessors.0"/>
 </gmfgraph:Canvas>
