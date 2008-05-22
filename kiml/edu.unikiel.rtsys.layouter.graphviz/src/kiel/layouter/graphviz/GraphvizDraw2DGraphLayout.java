@@ -108,7 +108,7 @@ public class GraphvizDraw2DGraphLayout {
 //			System.out.print("T:"+edge.getTarget().getPosition().getX()+","+edge.getTarget().getPosition().getY()+"\n");
 			int edgePointer = mapEdge2Pointer.get(edge);
 			String posString = GraphvizAPI.getAttribute(edgePointer, GraphvizAPI.ATTR_POS);
-//			System.out.println(posString);
+			System.out.println("Graphviz Bendpoints: "+posString);
 			List<Integer> intList = string2Ints(posString);
 			try{
 				// unsafe because list size might be odd (not good, because list of point coordinates)
@@ -131,14 +131,15 @@ public class GraphvizDraw2DGraphLayout {
 			if(edge.getEdgeLabel() != null){
 				Coordinates coords = GraphFactory.eINSTANCE.createCoordinates();
 				String labelLoc = GraphvizAPI.getAttribute(edgePointer, GraphvizAPI.ATTR_LP);
+				System.out.println("LabelGraphViz: "+labelLoc+" size: "+edge.getEdgeLabel().getSize());
 				List<Integer> ints = string2Ints(labelLoc);
 				if(ints.size() == 2){
 					// in Graphviz position is the center of the node
 					// in draw2D it's the upper left corner
 					// TODO: what if size not available?
 					// TODO: optimize exact location (sometimes start is within connection)
-					coords.setX(ints.get(0).intValue() - (edge.getEdgeLabel().getSize().getWidth()/2));
-					coords.setY(ints.get(1).intValue() - (edge.getEdgeLabel().getSize().getHeight()/2));
+					coords.setX(ints.get(0).intValue());// - (edge.getEdgeLabel().getSize().getWidth()/2));
+					coords.setY(ints.get(1).intValue());// - (edge.getEdgeLabel().getSize().getHeight()/2));
 					coords = graphviz2Draw2D(coords,edge.getEdgeLabel().getSize());
 				}
 				else{ // got strange String from Graphviz
@@ -161,7 +162,8 @@ public class GraphvizDraw2DGraphLayout {
 	private String widthToString(int points){
 		int sizeOfLetter = 12; // TODO: remove magic number
 		int amount = (points / sizeOfLetter);
-		char letters[] = new char[amount];
+		int offset = 4; // TODO: check magic offset number (due to icon in front of label)
+		char letters[] = new char[amount+offset];
 		for (int i = 0;i<letters.length;i++){
 			letters[i] = 'T'; // TODO: check magic letter
 		}

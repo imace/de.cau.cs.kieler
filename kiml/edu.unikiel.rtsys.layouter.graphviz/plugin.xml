@@ -8,7 +8,7 @@
       <layoutProvider
             class="kiel.layouter.graphviz.GraphvizLayoutProvider">
          <Priority
-               name="Highest">
+               name="Lowest">
          </Priority>
       </layoutProvider>
    </extension>
@@ -41,6 +41,15 @@
                toolbarPath="org.eclipse.ui.workbench.navigate">
          </action>
       </actionSet>
+   </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            category="edu.unikiel.rtsys.kieler.kiml.ui.PreferencePage"
+            class="edu.unikiel.rtsys.layouter.ui.WorkbenchPreferencePage"
+            id="edu.unikiel.rtsys.layouter.graphviz.page2"
+            name="Layouter">
+      </page>
    </extension>
 
 </plugin>
