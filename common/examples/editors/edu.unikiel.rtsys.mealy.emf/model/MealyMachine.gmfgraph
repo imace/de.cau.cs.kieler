@@ -64,6 +64,12 @@
           accessor="getFigureEdgeSplineLabelFigure"
           figure="//@figures.0/@descriptors.2/@actualFigure/@children.0"/>
     </descriptors>
+    <descriptors
+        name="CompartmentFigure">
+      <actualFigure
+          xsi:type="gmfgraph:RoundedRectangle"
+          name="CompartmentFigure"/>
+    </descriptors>
   </figures>
   <nodes
       name="Node"
@@ -71,6 +77,10 @@
   <connections
       name="Edge"
       figure="EdgeSplineFigure"/>
+  <compartments
+      name="SubStatesCompartment"
+      figure="CompartmentFigure"
+      collapsible="true"/>
   <labels
       name="NodeName"
       figure="NodeFigure"
