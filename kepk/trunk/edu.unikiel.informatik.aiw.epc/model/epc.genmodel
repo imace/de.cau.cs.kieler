@@ -64,5 +64,6 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference epc.ecore#//GCTLconnector/source"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference epc.ecore#//GCTLconnector/target"/>
     </genClasses>
+    <genClasses ecoreClass="epc.ecore#//Implication"/>
   </genPackages>
 </genmodel:GenModel>

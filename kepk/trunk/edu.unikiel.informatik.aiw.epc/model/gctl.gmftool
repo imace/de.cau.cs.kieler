@@ -7,13 +7,26 @@
       title="gctlPalette">
     <tools
         xsi:type="gmftool:ToolGroup"
-        title="epc">
+        title="gctl">
       <tools
           xsi:type="gmftool:CreationTool"
           title="GCTLconnector"
           description="Create new GCTLconnector">
         <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/GCTLConnectorIcon.png"
+            bundle="edu.unikiel.informatik.aiw.epc.custom"/>
+        <largeIcon
             xsi:type="gmftool:DefaultImage"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="Implication"
+          description="Create new Implication">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/ImplicationIcon.png"
+            bundle="edu.unikiel.informatik.aiw.epc.custom"/>
         <largeIcon
             xsi:type="gmftool:DefaultImage"/>
       </tools>

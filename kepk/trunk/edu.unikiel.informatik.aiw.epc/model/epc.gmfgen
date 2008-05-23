@@ -599,39 +599,38 @@
             xsi:type="gmfgen:ToolEntry"
             title="Function"
             description="Create new Function"
+            smallIconPath="/edu.unikiel.informatik.aiw.epc.custom/icons/FunctionIcon.png"
             genNodes="//@diagram/@topLevelNodes.6"/>
         <entries
             xsi:type="gmfgen:ToolEntry"
             title="XOR"
             description="Create new XOR"
+            smallIconPath="/edu.unikiel.informatik.aiw.epc.custom/icons/XORIcon.png"
             genNodes="//@diagram/@topLevelNodes.3"/>
         <entries
             xsi:type="gmfgen:ToolEntry"
             title="OR"
             description="Create new OR"
+            smallIconPath="/edu.unikiel.informatik.aiw.epc.custom/icons/ORIcon.png"
             genNodes="//@diagram/@topLevelNodes.1"/>
         <entries
             xsi:type="gmfgen:ToolEntry"
             title="AND"
             description="Create new AND"
+            smallIconPath="/edu.unikiel.informatik.aiw.epc.custom/icons/ANDIcon.png"
             genNodes="//@diagram/@topLevelNodes.0"/>
         <entries
             xsi:type="gmfgen:ToolEntry"
             title="Information"
             description="Create new Information"
+            smallIconPath="/edu.unikiel.informatik.aiw.epc.custom/icons/InformationIcon.png"
             genNodes="//@diagram/@topLevelNodes.2"/>
         <entries
             xsi:type="gmfgen:ToolEntry"
             title="Connection"
             description="Create new Connection"
+            smallIconPath="/edu.unikiel.informatik.aiw.epc.custom/icons/ConnectionIcon.png"
             genLinks="//@diagram/@links.0 //@diagram/@links.1 //@diagram/@links.2 //@diagram/@links.3 //@diagram/@links.4 //@diagram/@links.5 //@diagram/@links.6 //@diagram/@links.7"/>
-      </groups>
-      <groups
-          title="gctl">
-        <entries
-            xsi:type="gmfgen:ToolEntry"
-            title="GCTLConnector"
-            description="Create new GCTLConnector"/>
       </groups>
     </palette>
     <preferencePages

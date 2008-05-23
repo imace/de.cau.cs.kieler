@@ -86,6 +86,21 @@
           href="epc.gmfgraph#EPC"/>
     </ownedChild>
   </nodes>
+  <nodes>
+    <containmentFeature
+        href="epc.ecore#//EPC/objects"/>
+    <childrenFeature
+        href="epc.ecore#//EPC/objects"/>
+    <ownedChild>
+      <domainMetaElement
+          href="epc.ecore#//Implication"/>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="gctl.gmftool#//@palette/@tools.0/@tools.1"/>
+      <diagramNode
+          href="epc.gmfgraph#Implication"/>
+    </ownedChild>
+  </nodes>
   <links>
     <domainMetaElement
         href="epc.ecore#//GCTLconnector"/>
@@ -93,7 +108,7 @@
         href="epc.ecore#//EPC/connectors"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="epc.gmftool#//@palette/@tools.1/@tools.0"/>
+        href="gctl.gmftool#//@palette/@tools.0/@tools.0"/>
     <diagramLink
         href="epc.gmfgraph#GCTLConnector"/>
     <sourceMetaFeature
@@ -111,6 +126,6 @@
     <domainMetaElement
         href="epc.ecore#//EPC"/>
     <palette
-        href="epc.gmftool#//@palette"/>
+        href="gctl.gmftool#//@palette"/>
   </diagram>
 </gmfmap:Mapping>

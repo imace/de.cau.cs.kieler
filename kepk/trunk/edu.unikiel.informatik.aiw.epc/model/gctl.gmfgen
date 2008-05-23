@@ -219,6 +219,34 @@
         </modelFacet>
       </labels>
     </topLevelNodes>
+    <topLevelNodes
+        visualID="1005"
+        editPartClassName="ImplicationEditPart"
+        itemSemanticEditPolicyClassName="ImplicationItemSemanticEditPolicy"
+        notationViewFactoryClassName="ImplicationViewFactory"
+        canonicalEditPolicyClassName="ImplicationCanonicalEditPolicy"
+        graphicalNodeEditPolicyClassName="ImplicationGraphicalNodeEditPolicy"
+        createCommandClassName="ImplicationCreateCommand">
+      <diagramRunTimeClass
+          href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+      <elementType
+          xsi:type="gmfgen:MetamodelType"
+          editHelperClassName="ImplicationEditHelper"/>
+      <viewmap
+          xsi:type="gmfgen:InnerClassViewmap"
+          className="ImplicationFigure"
+          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class ImplicationFigure extends org.eclipse.draw2d.RectangleFigure {&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public ImplicationFigure() {&#xA;&#x9;&#x9;&#xA;this.setLayoutManager(new org.eclipse.draw2d.StackLayout());&#xA;&#x9;&#x9;this.setFill(false);&#xA;this.setOutline(false);&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;org.eclipse.draw2d.Ellipse elli0 = new org.eclipse.draw2d.Ellipse();&#xA;&#xA;this.add(elli0);&#xA;&#xA;elli0.setLayoutManager(new org.eclipse.draw2d.StackLayout());&#xA;&#xA;&#xA;edu.unikiel.informatik.aiw.epc.custom.ScalableSVGImageFigure implicationFigure1 = new edu.unikiel.informatik.aiw.epc.custom.ScalableSVGImageFigure();&#xA;&#xA;&#xA;&#xA;&#xA;implicationFigure1.setRenderedImage(&#xA;&quot;ImplicationFigure.svg&quot;);&#xA;&#xA;&#xA;&#xA;elli0.add(implicationFigure1);&#xA;&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private boolean myUseLocalCoordinates = false;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected boolean useLocalCoordinates() {&#xA;&#x9;&#x9;return myUseLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#xA;&#x9;&#x9;myUseLocalCoordinates = useLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;}&#xA;&#xA;">
+        <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
+      </viewmap>
+      <modelFacet>
+        <metaClass
+            href="epc.genmodel#//epc/Implication"/>
+        <containmentMetaFeature
+            href="epc.genmodel#//epc/EPC/objects"/>
+        <childMetaFeature
+            href="epc.genmodel#//epc/EPC/objects"/>
+      </modelFacet>
+    </topLevelNodes>
     <links
         visualID="3001"
         editPartClassName="GCTLconnectorEditPart"
@@ -253,17 +281,23 @@
     </links>
     <palette>
       <groups
-          title="epc">
+          title="gctl">
         <entries
             xsi:type="gmfgen:ToolEntry"
-            title="EPC"
-            description="Create new EPC"
-            genNodes="//@diagram/@topLevelNodes.3"/>
+            title="GCTLconnector"
+            description="Create new GCTLconnector"
+            smallIconPath="/edu.unikiel.informatik.aiw.epc.custom/icons/GCTLConnectorIcon.png"
+            genLinks="//@diagram/@links.0"/>
         <entries
             xsi:type="gmfgen:ToolEntry"
-            title="Event"
-            description="Create new Event"
-            genNodes="//@diagram/@topLevelNodes.1"/>
+            title="Implication"
+            description="Create new Implication"
+            smallIconPath="/edu.unikiel.informatik.aiw.epc.custom/icons/ImplicationIcon.png"
+            genNodes="//@diagram/@topLevelNodes.4"/>
+      </groups>
+      <groups
+          title="-- Mis-referenced tools --"
+          description="Mapping element referenced tools from palette other than one specified in Mapping instance">
         <entries
             xsi:type="gmfgen:ToolEntry"
             title="Function"
@@ -271,16 +305,9 @@
             genNodes="//@diagram/@topLevelNodes.0"/>
         <entries
             xsi:type="gmfgen:ToolEntry"
-            title="XOR"
-            description="Create new XOR"/>
-        <entries
-            xsi:type="gmfgen:ToolEntry"
-            title="OR"
-            description="Create new OR"/>
-        <entries
-            xsi:type="gmfgen:ToolEntry"
-            title="AND"
-            description="Create new AND"/>
+            title="Event"
+            description="Create new Event"
+            genNodes="//@diagram/@topLevelNodes.1"/>
         <entries
             xsi:type="gmfgen:ToolEntry"
             title="Information"
@@ -288,22 +315,15 @@
             genNodes="//@diagram/@topLevelNodes.2"/>
         <entries
             xsi:type="gmfgen:ToolEntry"
-            title="Connection"
-            description="Create new Connection"/>
-      </groups>
-      <groups
-          title="gctl">
-        <entries
-            xsi:type="gmfgen:ToolEntry"
-            title="GCTLConnector"
-            description="Create new GCTLConnector"
-            genLinks="//@diagram/@links.0"/>
+            title="EPC"
+            description="Create new EPC"
+            genNodes="//@diagram/@topLevelNodes.3"/>
       </groups>
     </palette>
     <preferencePages
         xsi:type="gmfgen:GenStandardPreferencePage"
         iD="edu.unikiel.informatik.aiw.generated.epc.diagram.general"
-        name="GCTL Diagram">
+        name="Epc Diagram">
       <children
           xsi:type="gmfgen:GenStandardPreferencePage"
           iD="edu.unikiel.informatik.aiw.generated.epc.diagram.appearance"
@@ -352,6 +372,9 @@
     <childReferences
         parent="//@diagram"
         child="//@diagram/@topLevelNodes.3"/>
+    <childReferences
+        parent="//@diagram"
+        child="//@diagram/@topLevelNodes.4"/>
     <childReferences
         parent="//@diagram"
         child="//@diagram/@links.0"
@@ -407,6 +430,18 @@
         groupIcon="icons/incomingLinksNavigatorGroup.gif"/>
     <childReferences
         parent="//@diagram/@links.0"
+        child="//@diagram/@topLevelNodes.4"
+        referenceType="out_target"
+        groupName="target"
+        groupIcon="icons/linkTargetNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@topLevelNodes.4"
+        child="//@diagram/@links.0"
+        referenceType="in_source"
+        groupName="incoming links"
+        groupIcon="icons/incomingLinksNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@links.0"
         child="//@diagram/@topLevelNodes.0"
         referenceType="in_source"
         groupName="source"
@@ -449,6 +484,18 @@
         groupIcon="icons/linkSourceNavigatorGroup.gif"/>
     <childReferences
         parent="//@diagram/@topLevelNodes.3"
+        child="//@diagram/@links.0"
+        referenceType="out_target"
+        groupName="outgoing links"
+        groupIcon="icons/outgoingLinksNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@links.0"
+        child="//@diagram/@topLevelNodes.4"
+        referenceType="in_source"
+        groupName="source"
+        groupIcon="icons/linkSourceNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@topLevelNodes.4"
         child="//@diagram/@links.0"
         referenceType="out_target"
         groupName="outgoing links"

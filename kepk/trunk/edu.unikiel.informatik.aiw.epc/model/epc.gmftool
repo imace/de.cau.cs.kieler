@@ -31,7 +31,9 @@
           title="Function"
           description="Create new Function">
         <smallIcon
-            xsi:type="gmftool:DefaultImage"/>
+            xsi:type="gmftool:BundleImage"
+            path="icons/FunctionIcon.png"
+            bundle="edu.unikiel.informatik.aiw.epc.custom"/>
         <largeIcon
             xsi:type="gmftool:DefaultImage"/>
       </tools>
@@ -40,7 +42,9 @@
           title="XOR"
           description="Create new XOR">
         <smallIcon
-            xsi:type="gmftool:DefaultImage"/>
+            xsi:type="gmftool:BundleImage"
+            path="icons/XORIcon.png"
+            bundle="edu.unikiel.informatik.aiw.epc.custom"/>
         <largeIcon
             xsi:type="gmftool:DefaultImage"/>
       </tools>
@@ -49,7 +53,9 @@
           title="OR"
           description="Create new OR">
         <smallIcon
-            xsi:type="gmftool:DefaultImage"/>
+            xsi:type="gmftool:BundleImage"
+            path="icons/ORIcon.png"
+            bundle="edu.unikiel.informatik.aiw.epc.custom"/>
         <largeIcon
             xsi:type="gmftool:DefaultImage"/>
       </tools>
@@ -58,7 +64,9 @@
           title="AND"
           description="Create new AND">
         <smallIcon
-            xsi:type="gmftool:DefaultImage"/>
+            xsi:type="gmftool:BundleImage"
+            path="icons/ANDIcon.png"
+            bundle="edu.unikiel.informatik.aiw.epc.custom"/>
         <largeIcon
             xsi:type="gmftool:DefaultImage"/>
       </tools>
@@ -67,7 +75,9 @@
           title="Information"
           description="Create new Information">
         <smallIcon
-            xsi:type="gmftool:DefaultImage"/>
+            xsi:type="gmftool:BundleImage"
+            path="icons/InformationIcon.png"
+            bundle="edu.unikiel.informatik.aiw.epc.custom"/>
         <largeIcon
             xsi:type="gmftool:DefaultImage"/>
       </tools>
@@ -76,20 +86,9 @@
           title="Connection"
           description="Create new Connection">
         <smallIcon
-            xsi:type="gmftool:DefaultImage"/>
-        <largeIcon
-            xsi:type="gmftool:DefaultImage"/>
-      </tools>
-    </tools>
-    <tools
-        xsi:type="gmftool:ToolGroup"
-        title="gctl">
-      <tools
-          xsi:type="gmftool:CreationTool"
-          title="GCTLConnector"
-          description="Create new GCTLConnector">
-        <smallIcon
-            xsi:type="gmftool:DefaultImage"/>
+            xsi:type="gmftool:BundleImage"
+            path="icons/ConnectionIcon.png"
+            bundle="edu.unikiel.informatik.aiw.epc.custom"/>
         <largeIcon
             xsi:type="gmftool:DefaultImage"/>
       </tools>

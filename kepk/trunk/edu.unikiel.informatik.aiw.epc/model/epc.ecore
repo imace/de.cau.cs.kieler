@@ -25,8 +25,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="Information" eSuperTypes="#//Node"/>
   <eClassifiers xsi:type="ecore:EClass" name="Node" abstract="true" interface="true"
       eSuperTypes="#//EPCObject">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
-        iD="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EPCObject" abstract="true" interface="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="showInEPCEditor" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
@@ -72,4 +71,5 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="#//Node"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//Node"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Implication" eSuperTypes="#//Node"/>
 </ecore:EPackage>

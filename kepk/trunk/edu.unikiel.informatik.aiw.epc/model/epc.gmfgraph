@@ -243,6 +243,29 @@
             name="GCTLConnectorDecoration"/>
       </actualFigure>
     </descriptors>
+    <descriptors
+        name="ImplicationFigure">
+      <actualFigure
+          xsi:type="gmfgraph:Rectangle"
+          outline="false"
+          fill="false">
+        <layout
+            xsi:type="gmfgraph:StackLayout"/>
+        <children
+            xsi:type="gmfgraph:Ellipse">
+          <layout
+              xsi:type="gmfgraph:StackLayout"/>
+          <children
+              xsi:type="gmfgraph:CustomFigure"
+              name="ImplicationFigure"
+              qualifiedClassName="edu.unikiel.informatik.aiw.epc.custom.ScalableSVGImageFigure">
+            <attributes
+                name="renderedImage"
+                value="&quot;ImplicationFigure.svg&quot;"/>
+          </children>
+        </children>
+      </actualFigure>
+    </descriptors>
   </figures>
   <nodes
       name="EPC"
@@ -265,6 +288,9 @@
   <nodes
       name="Information"
       figure="InformationFigure"/>
+  <nodes
+      name="Implication"
+      figure="ImplicationFigure"/>
   <connections
       name="TriggersEvent"
       figure="TriggersEventFigure"/>
