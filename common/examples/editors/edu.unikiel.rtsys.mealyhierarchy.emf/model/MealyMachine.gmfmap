@@ -27,11 +27,17 @@
           compartment="//@nodes.0/@ownedChild/@compartments.0">
         <containmentFeature
             href="MealyMachine.ecore#//CompositeState/nodes"/>
-        <childrenFeature
-            href="MealyMachine.ecore#//CompositeState/nodes"/>
         <ownedChild>
           <domainMetaElement
               href="MealyMachine.ecore#//State"/>
+          <labelMappings
+              xsi:type="gmfmap:FeatureLabelMapping"
+              viewPattern="">
+            <diagramLabel
+                href="MealyMachine.gmfgraph#NodeName"/>
+            <features
+                href="MealyMachine.ecore#//State/name"/>
+          </labelMappings>
           <tool
               xsi:type="gmftool:CreationTool"
               href="MealyMachine.gmftool#//@palette/@tools.0/@tools.3"/>

@@ -4,7 +4,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:gmfgen="http://www.eclipse.org/gmf/2008/GenModel">
   <diagram
-      visualID="79"
+      visualID="1000"
       editPartClassName="HierarchyMealyMachineEditPart"
       itemSemanticEditPolicyClassName="HierarchyMealyMachineItemSemanticEditPolicy"
       notationViewFactoryClassName="HierarchyMealyMachineViewFactory"
@@ -22,7 +22,7 @@
     <domainDiagramElement
         href="MealyMachine.genmodel#//hierarchymealy/HierarchyMealyMachine"/>
     <childNodes
-        visualID="2001"
+        visualID="3001"
         editPartClassName="StateEditPart"
         itemSemanticEditPolicyClassName="StateItemSemanticEditPolicy"
         notationViewFactoryClassName="StateViewFactory"
@@ -34,12 +34,16 @@
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <elementType
           xsi:type="gmfgen:MetamodelType"
-          editHelperClassName="State2EditHelper"/>
+          editHelperClassName="StateEditHelper"/>
       <viewmap
           xsi:type="gmfgen:InnerClassViewmap"
-          layoutType="FLOW_LAYOUT"
           className="NodeFigure"
-          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class NodeFigure extends org.eclipse.draw2d.RectangleFigure {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureNodeNameFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public NodeFigure() {&#xA;&#x9;&#x9;&#xA;&#xA;&#x9;org.eclipse.draw2d.FlowLayout layoutThis = new org.eclipse.draw2d.FlowLayout();&#xA;&#x9;layoutThis.setStretchMinorAxis(false);&#xA;&#x9;layoutThis.setMinorAlignment(org.eclipse.draw2d.FlowLayout.ALIGN_LEFTTOP&#xA;);&#xA;&#xA;&#x9;layoutThis.setMajorAlignment(org.eclipse.draw2d.FlowLayout.ALIGN_LEFTTOP&#xA;);&#xA;&#x9;layoutThis.setMajorSpacing(5);&#xA;&#x9;layoutThis.setMinorSpacing(5);&#xA;&#x9;layoutThis.setHorizontal(true);&#xA;&#xA;&#x9;this.setLayoutManager(layoutThis);&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureNodeNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureNodeNameFigure.setText(&quot;&lt;...>&quot;);&#xA;&#xA;this.add(fFigureNodeNameFigure);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private boolean myUseLocalCoordinates = false;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected boolean useLocalCoordinates() {&#xA;&#x9;&#x9;return myUseLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#xA;&#x9;&#x9;myUseLocalCoordinates = useLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureNodeNameFigure() {&#xA;&#x9;&#x9;return fFigureNodeNameFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;">
+          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class NodeFigure extends org.eclipse.draw2d.RectangleFigure {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureNodeNameFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public NodeFigure() {&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureNodeNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureNodeNameFigure.setText(&quot;&lt;...>&quot;);&#xA;&#xA;this.add(fFigureNodeNameFigure);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private boolean myUseLocalCoordinates = false;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected boolean useLocalCoordinates() {&#xA;&#x9;&#x9;return myUseLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#xA;&#x9;&#x9;myUseLocalCoordinates = useLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureNodeNameFigure() {&#xA;&#x9;&#x9;return fFigureNodeNameFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;">
+        <attributes
+            xsi:type="gmfgen:DefaultSizeAttributes"
+            width="20"
+            height="20"/>
+        <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
         <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
       </viewmap>
       <modelFacet>
@@ -50,26 +54,52 @@
         <childMetaFeature
             href="MealyMachine.genmodel#//hierarchymealy/CompositeState/nodes"/>
       </modelFacet>
+      <labels
+          visualID="5002"
+          editPartClassName="StateNameEditPart"
+          itemSemanticEditPolicyClassName="StateNameItemSemanticEditPolicy"
+          notationViewFactoryClassName="StateNameViewFactory"
+          elementIcon="true">
+        <diagramRunTimeClass
+            href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+        <viewmap
+            xsi:type="gmfgen:ParentAssignedViewmap"
+            getterName="getFigureNodeNameFigure"
+            figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel"/>
+        <modelFacet
+            xsi:type="gmfgen:FeatureLabelModelFacet"
+            viewPattern="">
+          <metaFeatures
+              href="MealyMachine.genmodel#//hierarchymealy/State/name"/>
+        </modelFacet>
+      </labels>
     </childNodes>
     <topLevelNodes
-        visualID="1001"
-        editPartClassName="HierarchyMealyMachine2EditPart"
-        itemSemanticEditPolicyClassName="HierarchyMealyMachine2ItemSemanticEditPolicy"
-        notationViewFactoryClassName="HierarchyMealyMachine2ViewFactory"
-        canonicalEditPolicyClassName="HierarchyMealyMachine2CanonicalEditPolicy"
+        visualID="2001"
+        editPartClassName="CompositeStateEditPart"
+        itemSemanticEditPolicyClassName="CompositeStateItemSemanticEditPolicy"
+        notationViewFactoryClassName="CompositeStateViewFactory"
+        canonicalEditPolicyClassName="CompositeStateCanonicalEditPolicy"
         compartments="//@diagram/@compartments.0"
-        graphicalNodeEditPolicyClassName="HierarchyMealyMachineGraphicalNodeEditPolicy"
-        createCommandClassName="HierarchyMealyMachineCreateCommand">
+        graphicalNodeEditPolicyClassName="CompositeStateGraphicalNodeEditPolicy"
+        createCommandClassName="CompositeStateCreateCommand">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <elementType
           xsi:type="gmfgen:MetamodelType"
-          editHelperClassName="StateEditHelper"/>
+          editHelperClassName="CompositeStateEditHelper"/>
       <viewmap
           xsi:type="gmfgen:InnerClassViewmap"
-          layoutType="XY_LAYOUT"
           className="CompositeStateFigure"
-          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class CompositeStateFigure extends org.eclipse.draw2d.RoundedRectangle {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.draw2d.RectangleFigure fFigureSubStatesRectangle; &#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureNodeNameFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public CompositeStateFigure() {&#xA;&#x9;&#x9;&#xA;this.setLayoutManager(new org.eclipse.draw2d.XYLayout());&#xA;&#x9;&#x9;this.setCornerDimensions(new org.eclipse.draw2d.geometry.Dimension(getMapMode().DPtoLP(8)&#xA;, getMapMode().DPtoLP(8)&#xA;));&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureNodeNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureNodeNameFigure.setText(&quot;CompState&quot;);&#xA;&#xA;this.add(fFigureNodeNameFigure);&#xA;&#xA;&#xA;&#xA;fFigureSubStatesRectangle = new org.eclipse.draw2d.RectangleFigure();&#xA;&#xA;this.add(fFigureSubStatesRectangle);&#xA;&#xA;fFigureSubStatesRectangle.setLayoutManager(new org.eclipse.draw2d.XYLayout());&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private boolean myUseLocalCoordinates = false;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected boolean useLocalCoordinates() {&#xA;&#x9;&#x9;return myUseLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#xA;&#x9;&#x9;myUseLocalCoordinates = useLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.draw2d.RectangleFigure getFigureSubStatesRectangle() {&#xA;&#x9;&#x9;return fFigureSubStatesRectangle;&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureNodeNameFigure() {&#xA;&#x9;&#x9;return fFigureNodeNameFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;">
+          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class CompositeStateFigure extends org.eclipse.draw2d.RoundedRectangle {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureNodeNameFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public CompositeStateFigure() {&#xA;&#x9;&#x9;&#x9;&#x9;this.setCornerDimensions(new org.eclipse.draw2d.geometry.Dimension(getMapMode().DPtoLP(8)&#xA;, getMapMode().DPtoLP(8)&#xA;));&#xA;&#x9;this.setBackgroundColor(THIS_BACK&#xA;);&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureNodeNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureNodeNameFigure.setText(&quot;CompState&quot;);&#xA;&#xA;this.add(fFigureNodeNameFigure);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private boolean myUseLocalCoordinates = false;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected boolean useLocalCoordinates() {&#xA;&#x9;&#x9;return myUseLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#xA;&#x9;&#x9;myUseLocalCoordinates = useLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureNodeNameFigure() {&#xA;&#x9;&#x9;return fFigureNodeNameFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;/**&#xA; * @generated&#xA; */&#xA;static final org.eclipse.swt.graphics.Color THIS_BACK = new org.eclipse.swt.graphics.Color(null, 127, 127, 255);&#xA;&#xA;">
+        <attributes
+            xsi:type="gmfgen:StyleAttributes"
+            fixedBackground="true"/>
+        <attributes
+            xsi:type="gmfgen:DefaultSizeAttributes"
+            width="20"
+            height="20"/>
+        <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
         <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
       </viewmap>
       <modelFacet>
@@ -81,10 +111,10 @@
             href="MealyMachine.genmodel#//hierarchymealy/HierarchyMealyMachine/compStates"/>
       </modelFacet>
       <labels
-          visualID="4001"
-          editPartClassName="HierarchyMealyMachineNameEditPart"
-          itemSemanticEditPolicyClassName="HierarchyMealyMachineNameItemSemanticEditPolicy"
-          notationViewFactoryClassName="HierarchyMealyMachineNameViewFactory"
+          visualID="5001"
+          editPartClassName="CompositeStateNameEditPart"
+          itemSemanticEditPolicyClassName="CompositeStateNameItemSemanticEditPolicy"
+          notationViewFactoryClassName="CompositeStateNameViewFactory"
           elementIcon="true">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
@@ -100,7 +130,7 @@
       </labels>
     </topLevelNodes>
     <links
-        visualID="3001"
+        visualID="4001"
         editPartClassName="EdgeEditPart"
         itemSemanticEditPolicyClassName="EdgeItemSemanticEditPolicy"
         notationViewFactoryClassName="EdgeViewFactory"
@@ -118,6 +148,7 @@
         <attributes
             xsi:type="gmfgen:StyleAttributes"
             fixedForeground="true"/>
+        <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
         <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
       </viewmap>
       <modelFacet
@@ -134,7 +165,7 @@
             href="MealyMachine.genmodel#//hierarchymealy/Edge/targetNode"/>
       </modelFacet>
       <labels
-          visualID="4002"
+          visualID="6001"
           editPartClassName="EdgeTriggerActionEditPart"
           itemSemanticEditPolicyClassName="EdgeTriggerActionItemSemanticEditPolicy"
           notationViewFactoryClassName="EdgeTriggerActionViewFactory">
@@ -160,11 +191,11 @@
       </labels>
     </links>
     <compartments
-        visualID="5001"
-        editPartClassName="CompositeStateSubStateCompartmentEditPart"
-        itemSemanticEditPolicyClassName="CompositeStateSubStateCompartmentItemSemanticEditPolicy"
-        notationViewFactoryClassName="CompositeStateSubStateCompartmentViewFactory"
-        canonicalEditPolicyClassName="CompositeStateSubStateCompartmentCanonicalEditPolicy"
+        visualID="7001"
+        editPartClassName="CompositeStateCompositeStateCompartmentEditPart"
+        itemSemanticEditPolicyClassName="CompositeStateCompositeStateCompartmentItemSemanticEditPolicy"
+        notationViewFactoryClassName="CompositeStateCompositeStateCompartmentViewFactory"
+        canonicalEditPolicyClassName="CompositeStateCompositeStateCompartmentCanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.0"
         title="CompositeStateCompartment"
         needsTitle="false"
@@ -174,7 +205,11 @@
       <viewmap
           xsi:type="gmfgen:InnerClassViewmap"
           className="CompositeStateFigure"
-          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class CompositeStateFigure extends org.eclipse.draw2d.RoundedRectangle {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.draw2d.RectangleFigure fFigureSubStatesRectangle; &#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureNodeNameFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public CompositeStateFigure() {&#xA;&#x9;&#x9;&#xA;this.setLayoutManager(new org.eclipse.draw2d.XYLayout());&#xA;&#x9;&#x9;this.setCornerDimensions(new org.eclipse.draw2d.geometry.Dimension(getMapMode().DPtoLP(8)&#xA;, getMapMode().DPtoLP(8)&#xA;));&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureNodeNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureNodeNameFigure.setText(&quot;CompState&quot;);&#xA;&#xA;this.add(fFigureNodeNameFigure);&#xA;&#xA;&#xA;&#xA;fFigureSubStatesRectangle = new org.eclipse.draw2d.RectangleFigure();&#xA;&#xA;this.add(fFigureSubStatesRectangle);&#xA;&#xA;fFigureSubStatesRectangle.setLayoutManager(new org.eclipse.draw2d.XYLayout());&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private boolean myUseLocalCoordinates = false;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected boolean useLocalCoordinates() {&#xA;&#x9;&#x9;return myUseLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#xA;&#x9;&#x9;myUseLocalCoordinates = useLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.draw2d.RectangleFigure getFigureSubStatesRectangle() {&#xA;&#x9;&#x9;return fFigureSubStatesRectangle;&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureNodeNameFigure() {&#xA;&#x9;&#x9;return fFigureNodeNameFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;">
+          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class CompositeStateFigure extends org.eclipse.draw2d.RoundedRectangle {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureNodeNameFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public CompositeStateFigure() {&#xA;&#x9;&#x9;&#x9;&#x9;this.setCornerDimensions(new org.eclipse.draw2d.geometry.Dimension(getMapMode().DPtoLP(8)&#xA;, getMapMode().DPtoLP(8)&#xA;));&#xA;&#x9;this.setBackgroundColor(THIS_BACK&#xA;);&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureNodeNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureNodeNameFigure.setText(&quot;CompState&quot;);&#xA;&#xA;this.add(fFigureNodeNameFigure);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private boolean myUseLocalCoordinates = false;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected boolean useLocalCoordinates() {&#xA;&#x9;&#x9;return myUseLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#xA;&#x9;&#x9;myUseLocalCoordinates = useLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureNodeNameFigure() {&#xA;&#x9;&#x9;return fFigureNodeNameFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;/**&#xA; * @generated&#xA; */&#xA;static final org.eclipse.swt.graphics.Color THIS_BACK = new org.eclipse.swt.graphics.Color(null, 127, 127, 255);&#xA;&#xA;">
+        <attributes
+            xsi:type="gmfgen:StyleAttributes"
+            fixedBackground="true"/>
+        <requiredPluginIDs>org.eclipse.draw2d</requiredPluginIDs>
         <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
       </viewmap>
     </compartments>

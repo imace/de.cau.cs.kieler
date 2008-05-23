@@ -5,13 +5,33 @@
     xmlns:gmfgraph="http://www.eclipse.org/gmf/2006/GraphicalDefinition" name="mealy">
   <figures
       name="Default">
+    <figures
+        xsi:type="gmfgraph:PolylineConnection"
+        name="EdgeFigure"
+        lineWidth="2"
+        targetDecoration="//@figures.0/@figures.0/@children.1">
+      <layout
+          xsi:type="gmfgraph:XYLayout"/>
+      <foregroundColor
+          xsi:type="gmfgraph:ConstantColor"
+          value="darkGray"/>
+      <children
+          xsi:type="gmfgraph:Label"
+          name="EdgeLabelFigure"
+          text="[] / []">
+        <layout
+            xsi:type="gmfgraph:XYLayout"/>
+      </children>
+      <children
+          xsi:type="gmfgraph:PolylineDecoration"
+          name="EdgeArrowDecoration"
+          lineWidth="2"/>
+    </figures>
     <descriptors
         name="NodeFigure">
       <actualFigure
           xsi:type="gmfgraph:Rectangle"
           name="NodeFigure">
-        <layout
-            xsi:type="gmfgraph:FlowLayout"/>
         <children
             xsi:type="gmfgraph:Label"
             name="NodeNameFigure"
@@ -22,29 +42,8 @@
     </descriptors>
     <descriptors
         name="EdgeFigure">
-      <actualFigure
-          xsi:type="gmfgraph:PolylineConnection"
-          name="EdgeFigure"
-          lineWidth="2"
-          targetDecoration="//@figures.0/@descriptors.1/@actualFigure/@children.1">
-        <layout
-            xsi:type="gmfgraph:XYLayout"/>
-        <foregroundColor
-            xsi:type="gmfgraph:ConstantColor"
-            value="darkGray"/>
-        <children
-            xsi:type="gmfgraph:Label"
-            name="EdgeLabelFigure"
-            text="[] / []">
-          <layout
-              xsi:type="gmfgraph:XYLayout"/>
-        </children>
-        <children
-            xsi:type="gmfgraph:PolylineDecoration"
-            name="EdgeArrowDecoration"/>
-      </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.1/@actualFigure/@children.0"/>
+          figure="//@figures.0/@figures.0/@children.0"/>
     </descriptors>
     <descriptors
         name="EdgeSplineFigure">
@@ -72,21 +71,16 @@
       <actualFigure
           xsi:type="gmfgraph:RoundedRectangle"
           name="CompositeStateRectangle">
-        <layout
-            xsi:type="gmfgraph:XYLayout"/>
+        <backgroundColor
+            xsi:type="gmfgraph:RGBColor"
+            red="127"
+            green="127"
+            blue="255"/>
         <children
             xsi:type="gmfgraph:Label"
             name="CompositeStateNameFigure"
             text="CompState"/>
-        <children
-            xsi:type="gmfgraph:Rectangle"
-            name="SubStatesRectangle">
-          <layout
-              xsi:type="gmfgraph:XYLayout"/>
-        </children>
       </actualFigure>
-      <accessors
-          figure="//@figures.0/@descriptors.3/@actualFigure/@children.1"/>
       <accessors
           accessor="getFigureNodeNameFigure"
           figure="//@figures.0/@descriptors.3/@actualFigure/@children.0"/>
