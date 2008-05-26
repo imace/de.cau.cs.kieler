@@ -72,11 +72,11 @@
       </tools>
       <tools
           xsi:type="gmftool:CreationTool"
-          title="Information"
-          description="Create new Information">
+          title="Application"
+          description="Create new Application">
         <smallIcon
             xsi:type="gmftool:BundleImage"
-            path="icons/InformationIcon.png"
+            path="icons/ApplicationIcon.png"
             bundle="edu.unikiel.informatik.aiw.epc.custom"/>
         <largeIcon
             xsi:type="gmftool:DefaultImage"/>

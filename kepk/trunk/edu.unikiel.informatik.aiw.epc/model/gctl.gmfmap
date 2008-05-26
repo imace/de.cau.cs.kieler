@@ -51,11 +51,12 @@
         href="epc.ecore#//EPC/objects"/>
     <ownedChild>
       <domainMetaElement
-          href="epc.ecore#//Information"/>
+          href="epc.ecore#//Application"/>
       <labelMappings
-          xsi:type="gmfmap:FeatureLabelMapping">
+          xsi:type="gmfmap:FeatureLabelMapping"
+          editPattern="">
         <diagramLabel
-            href="epc.gmfgraph#InformationName"/>
+            href="epc.gmfgraph#ApplicationName"/>
         <features
             href="epc.ecore#//Node/name"/>
       </labelMappings>
@@ -63,7 +64,7 @@
           xsi:type="gmftool:CreationTool"
           href="epc.gmftool#//@palette/@tools.0/@tools.6"/>
       <diagramNode
-          href="epc.gmfgraph#Information"/>
+          href="epc.gmfgraph#Application"/>
     </ownedChild>
   </nodes>
   <nodes>

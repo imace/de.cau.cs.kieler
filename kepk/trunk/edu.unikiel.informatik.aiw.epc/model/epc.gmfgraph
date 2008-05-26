@@ -13,6 +13,12 @@
           lineWidth="3"
           cornerWidth="15"
           cornerHeight="15">
+        <foregroundColor
+            xsi:type="gmfgraph:ConstantColor"
+            value="black"/>
+        <preferredSize
+            dx="85"
+            dy="49"/>
         <children
             xsi:type="gmfgraph:Label"
             name="EPCNameFigure"
@@ -30,6 +36,9 @@
           fill="false">
         <layout
             xsi:type="gmfgraph:StackLayout"/>
+        <foregroundColor
+            xsi:type="gmfgraph:ConstantColor"
+            value="black"/>
         <preferredSize
             dx="85"
             dy="49"/>
@@ -73,6 +82,14 @@
           cornerHeight="15">
         <layout
             xsi:type="gmfgraph:StackLayout"/>
+        <foregroundColor
+            xsi:type="gmfgraph:ConstantColor"
+            value="black"/>
+        <backgroundColor
+            xsi:type="gmfgraph:RGBColor"
+            red="127"
+            green="231"
+            blue="179"/>
         <preferredSize
             dx="85"
             dy="49"/>
@@ -90,9 +107,16 @@
           xsi:type="gmfgraph:PolylineConnection"
           name="TriggersEventFigure"
           targetDecoration="//@figures.0/@descriptors.3/@actualFigure/@children.0">
+        <foregroundColor
+            xsi:type="gmfgraph:ConstantColor"
+            value="black"/>
         <children
             xsi:type="gmfgraph:PolygonDecoration"
-            name="TriggersEventTargetDecoration"/>
+            name="TriggersEventTargetDecoration">
+          <foregroundColor
+              xsi:type="gmfgraph:ConstantColor"
+              value="black"/>
+        </children>
       </actualFigure>
     </descriptors>
     <descriptors
@@ -167,10 +191,18 @@
       </actualFigure>
     </descriptors>
     <descriptors
-        name="InformationFigure">
+        name="ApplicationFigure">
       <actualFigure
           xsi:type="gmfgraph:Rectangle"
-          name="InformationFigure">
+          name="ApplicationFigure">
+        <foregroundColor
+            xsi:type="gmfgraph:ConstantColor"
+            value="black"/>
+        <backgroundColor
+            xsi:type="gmfgraph:RGBColor"
+            red="127"
+            green="194"
+            blue="231"/>
         <insets
             left="10"
             right="10"/>
@@ -179,9 +211,17 @@
             name="containingLabelRect">
           <layout
               xsi:type="gmfgraph:StackLayout"/>
+          <foregroundColor
+              xsi:type="gmfgraph:ConstantColor"
+              value="black"/>
+          <backgroundColor
+              xsi:type="gmfgraph:RGBColor"
+              red="127"
+              green="194"
+              blue="231"/>
           <children
               xsi:type="gmfgraph:Label"
-              name="InformationNameFigure"
+              name="ApplicationNameFigure"
               text="&lt;...>"/>
         </children>
       </actualFigure>
@@ -194,9 +234,16 @@
           xsi:type="gmfgraph:PolylineConnection"
           name="ActivatesFunctionFigure"
           targetDecoration="//@figures.0/@descriptors.8/@actualFigure/@children.0">
+        <foregroundColor
+            xsi:type="gmfgraph:ConstantColor"
+            value="black"/>
         <children
             xsi:type="gmfgraph:PolygonDecoration"
-            name="ActivatesFunctionDecoration"/>
+            name="ActivatesFunctionDecoration">
+          <foregroundColor
+              xsi:type="gmfgraph:ConstantColor"
+              value="black"/>
+        </children>
       </actualFigure>
     </descriptors>
     <descriptors
@@ -205,9 +252,16 @@
           xsi:type="gmfgraph:PolylineConnection"
           name="ProvidesDataToFigure"
           targetDecoration="//@figures.0/@descriptors.9/@actualFigure/@children.0">
+        <foregroundColor
+            xsi:type="gmfgraph:ConstantColor"
+            value="black"/>
         <children
             xsi:type="gmfgraph:PolylineDecoration"
-            name="ProvidesDataTargetDecoration"/>
+            name="ProvidesDataTargetDecoration">
+          <foregroundColor
+              xsi:type="gmfgraph:ConstantColor"
+              value="black"/>
+        </children>
       </actualFigure>
     </descriptors>
     <descriptors
@@ -216,9 +270,16 @@
           xsi:type="gmfgraph:PolylineConnection"
           name="WritesDataToFigure"
           targetDecoration="//@figures.0/@descriptors.10/@actualFigure/@children.0">
+        <foregroundColor
+            xsi:type="gmfgraph:ConstantColor"
+            value="black"/>
         <children
             xsi:type="gmfgraph:PolylineDecoration"
-            name="WritesDataTargetDecoration"/>
+            name="WritesDataTargetDecoration">
+          <foregroundColor
+              xsi:type="gmfgraph:ConstantColor"
+              value="black"/>
+        </children>
       </actualFigure>
     </descriptors>
     <descriptors
@@ -227,6 +288,9 @@
           xsi:type="gmfgraph:Rectangle">
         <layout
             xsi:type="gmfgraph:XYLayout"/>
+        <foregroundColor
+            xsi:type="gmfgraph:ConstantColor"
+            value="black"/>
       </actualFigure>
     </descriptors>
   </figures>
@@ -238,9 +302,16 @@
           xsi:type="gmfgraph:PolylineConnection"
           name="GCTLConnectorFigure"
           targetDecoration="//@figures.1/@descriptors.0/@actualFigure/@children.0">
+        <foregroundColor
+            xsi:type="gmfgraph:ConstantColor"
+            value="black"/>
         <children
             xsi:type="gmfgraph:PolygonDecoration"
-            name="GCTLConnectorDecoration"/>
+            name="GCTLConnectorDecoration">
+          <foregroundColor
+              xsi:type="gmfgraph:ConstantColor"
+              value="black"/>
+        </children>
       </actualFigure>
     </descriptors>
     <descriptors
@@ -284,7 +355,7 @@
               qualifiedClassName="edu.unikiel.informatik.aiw.epc.custom.ScalableSVGImageFigure">
             <attributes
                 name="renderedImage"
-                value="&quot;ImplicationFigure.svg&quot;"/>
+                value="&quot;EquivalenceFigure.svg&quot;"/>
           </children>
         </children>
       </actualFigure>
@@ -309,8 +380,8 @@
       name="AND"
       figure="ANDFigure"/>
   <nodes
-      name="Information"
-      figure="InformationFigure"/>
+      name="Application"
+      figure="ApplicationFigure"/>
   <nodes
       name="Implication"
       figure="ImplicationFigure"/>
@@ -359,8 +430,8 @@
       elementIcon="false"
       accessor="//@figures.0/@descriptors.2/@accessors.0"/>
   <labels
-      name="InformationName"
-      figure="InformationFigure"
+      name="ApplicationName"
+      figure="ApplicationFigure"
       elementIcon="false"
       accessor="//@figures.0/@descriptors.7/@accessors.0"/>
   <labels

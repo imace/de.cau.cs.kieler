@@ -23,7 +23,7 @@
     <genClasses ecoreClass="epc.ecore#//XOR"/>
     <genClasses ecoreClass="epc.ecore#//OR"/>
     <genClasses ecoreClass="epc.ecore#//AND"/>
-    <genClasses ecoreClass="epc.ecore#//Information"/>
+    <genClasses ecoreClass="epc.ecore#//Application"/>
     <genClasses image="false" ecoreClass="epc.ecore#//Node">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute epc.ecore#//Node/name"/>
     </genClasses>
@@ -66,5 +66,6 @@
     </genClasses>
     <genClasses ecoreClass="epc.ecore#//Implication"/>
     <genClasses ecoreClass="epc.ecore#//Equivalence"/>
+    <genClasses ecoreClass="epc.ecore#//Organisation"/>
   </genPackages>
 </genmodel:GenModel>

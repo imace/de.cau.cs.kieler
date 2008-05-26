@@ -22,7 +22,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="XOR" eSuperTypes="#//LogicalOperator"/>
   <eClassifiers xsi:type="ecore:EClass" name="OR" eSuperTypes="#//LogicalOperator"/>
   <eClassifiers xsi:type="ecore:EClass" name="AND" eSuperTypes="#//LogicalOperator"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Information" eSuperTypes="#//Node"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Application" eSuperTypes="#//Node"/>
   <eClassifiers xsi:type="ecore:EClass" name="Node" abstract="true" interface="true"
       eSuperTypes="#//EPCObject">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -41,7 +41,7 @@
       eSuperTypes="#//Relationship"/>
   <eClassifiers xsi:type="ecore:EClass" name="ProvidesDataTo" eSuperTypes="#//Relationship">
     <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
-        eType="#//Information"/>
+        eType="#//Application"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
         eType="#//Function"/>
   </eClassifiers>
@@ -49,7 +49,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
         eType="#//Function"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
-        eType="#//Information"/>
+        eType="#//Application"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FunctionToOperatorConnection" eSuperTypes="#//SuccessorOf">
     <eStructuralFeatures xsi:type="ecore:EReference" name="function" eType="#//Function"/>
@@ -73,4 +73,5 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Implication" eSuperTypes="#//Node"/>
   <eClassifiers xsi:type="ecore:EClass" name="Equivalence" eSuperTypes="#//Node"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Organisation" eSuperTypes="#//Node"/>
 </ecore:EPackage>
