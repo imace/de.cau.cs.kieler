@@ -13,8 +13,8 @@
    id="svg2"
    sodipodi:version="0.32"
    inkscape:version="0.45.1"
-   sodipodi:docbase="C:\Dokumente und Einstellungen\Steffen Jacobs\hiwi\edu.unikiel.informatik.aiw.epc.custom\figures"
-   sodipodi:docname="ANDFigure.svg"
+   sodipodi:docbase="C:\Dokumente und Einstellungen\Steffen Jacobs\kepk\trunk\edu.unikiel.informatik.aiw.epc.custom\figures"
+   sodipodi:docname="ORFigure.svg"
    inkscape:output_extension="org.inkscape.output.svg.inkscape"
    version="1.0">
   <defs
@@ -51,29 +51,26 @@
      inkscape:groupmode="layer"
      id="layer1"
      transform="translate(-318.24279,-249.65895)">
-    <g
-       id="g4152">
-      <path
-         transform="matrix(0.2410706,0,0,0.2410706,226.21028,184.58325)"
-         d="M 464.72906 311.42621 A 41.481621 41.481621 0 1 1  381.76582,311.42621 A 41.481621 41.481621 0 1 1  464.72906 311.42621 z"
-         sodipodi:ry="41.481621"
-         sodipodi:rx="41.481621"
-         sodipodi:cy="311.42621"
-         sodipodi:cx="423.24744"
-         id="path2160"
-         style="opacity:1;fill:#a76fa9;fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         sodipodi:type="arc" />
-      <text
-         transform="scale(1.7505722,0.5712418)"
-         id="text3179"
-         y="465.05847"
+    <path
+       sodipodi:type="arc"
+       style="fill:none;fill-opacity:1;stroke:#646464;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path2160"
+       sodipodi:cx="423.24744"
+       sodipodi:cy="311.42621"
+       sodipodi:rx="41.481621"
+       sodipodi:ry="41.481621"
+       d="M 464.72906 311.42621 A 41.481621 41.481621 0 1 1  381.76582,311.42621 A 41.481621 41.481621 0 1 1  464.72906 311.42621 z"
+       transform="matrix(0.2330582,0,0,0.2330582,229.60149,187.0785)" />
+    <text
+       xml:space="preserve"
+       style="font-size:23.16103172px;font-style:normal;font-weight:normal;fill:#646464;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Agency FB"
+       x="182.93286"
+       y="465.05847"
+       id="text3179"
+       transform="scale(1.7505722,0.5712418)"><tspan
+         sodipodi:role="line"
+         id="tspan3181"
          x="182.93286"
-         style="font-size:23.16103172px;font-style:normal;font-weight:normal;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Agency FB"
-         xml:space="preserve"><tspan
-           y="465.05847"
-           x="182.93286"
-           id="tspan3181"
-           sodipodi:role="line">V</tspan></text>
-    </g>
+         y="465.05847">V</tspan></text>
   </g>
 </svg>
