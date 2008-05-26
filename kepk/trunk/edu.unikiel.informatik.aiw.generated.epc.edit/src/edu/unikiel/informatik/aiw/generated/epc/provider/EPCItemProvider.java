@@ -231,6 +231,11 @@ public class EPCItemProvider
 			(createChildParameter
 				(EpcPackage.Literals.EPC__OBJECTS,
 				 EpcFactory.eINSTANCE.createImplication()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(EpcPackage.Literals.EPC__OBJECTS,
+				 EpcFactory.eINSTANCE.createEquivalence()));
 	}
 
 	/**

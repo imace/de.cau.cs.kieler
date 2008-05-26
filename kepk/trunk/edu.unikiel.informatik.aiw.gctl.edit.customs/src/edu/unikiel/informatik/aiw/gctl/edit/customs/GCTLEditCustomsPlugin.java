@@ -6,10 +6,10 @@ import org.eclipse.ui.IStartup;
 
 public class GCTLEditCustomsPlugin implements IStartup{
 
-	ForeignModelLoader loader;
+
 	
 	@Override
 	public void earlyStartup() {
-		new ForeignModelLoader();
+		
 	}
 }

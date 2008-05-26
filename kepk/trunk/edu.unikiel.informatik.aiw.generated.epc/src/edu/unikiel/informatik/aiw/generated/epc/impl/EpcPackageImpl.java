@@ -10,6 +10,7 @@ import edu.unikiel.informatik.aiw.generated.epc.ActivatesFunction;
 import edu.unikiel.informatik.aiw.generated.epc.EPCObject;
 import edu.unikiel.informatik.aiw.generated.epc.EpcFactory;
 import edu.unikiel.informatik.aiw.generated.epc.EpcPackage;
+import edu.unikiel.informatik.aiw.generated.epc.Equivalence;
 import edu.unikiel.informatik.aiw.generated.epc.Event;
 import edu.unikiel.informatik.aiw.generated.epc.EventToOperatorConnection;
 import edu.unikiel.informatik.aiw.generated.epc.Function;
@@ -194,6 +195,13 @@ public class EpcPackageImpl extends EPackageImpl implements EpcPackage {
 	 * @generated
 	 */
 	private EClass implicationEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass equivalenceEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -664,6 +672,15 @@ public class EpcPackageImpl extends EPackageImpl implements EpcPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getEquivalence() {
+		return equivalenceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EpcFactory getEpcFactory() {
 		return (EpcFactory)getEFactoryInstance();
 	}
@@ -752,6 +769,8 @@ public class EpcPackageImpl extends EPackageImpl implements EpcPackage {
 		createEReference(gctLconnectorEClass, GCT_LCONNECTOR__TARGET);
 
 		implicationEClass = createEClass(IMPLICATION);
+
+		equivalenceEClass = createEClass(EQUIVALENCE);
 	}
 
 	/**
@@ -798,6 +817,7 @@ public class EpcPackageImpl extends EPackageImpl implements EpcPackage {
 		operatorToEventConnectionEClass.getESuperTypes().add(this.getSuccessorOf());
 		gctLconnectorEClass.getESuperTypes().add(this.getRelationship());
 		implicationEClass.getESuperTypes().add(this.getNode());
+		equivalenceEClass.getESuperTypes().add(this.getNode());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(epcEClass, edu.unikiel.informatik.aiw.generated.epc.EPC.class, "EPC", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -865,6 +885,8 @@ public class EpcPackageImpl extends EPackageImpl implements EpcPackage {
 		initEReference(getGCTLconnector_Target(), this.getNode(), null, "target", null, 0, 1, GCTLconnector.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(implicationEClass, Implication.class, "Implication", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(equivalenceEClass, Equivalence.class, "Equivalence", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

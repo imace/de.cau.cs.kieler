@@ -28,12 +28,13 @@
     </rules>
   </audits>
   <diagram
-      visualID="79"
+      visualID="1000"
       editPartClassName="EPCEditPart"
       itemSemanticEditPolicyClassName="EPCItemSemanticEditPolicy"
       notationViewFactoryClassName="EPCViewFactory"
       canonicalEditPolicyClassName="EPCCanonicalEditPolicy"
       iconProviderPriority="Low"
+      editingDomainID="SharedEditingDomain"
       validationProviderPriority="Low"
       validationEnabled="true"
       validationDecorators="true"
@@ -50,7 +51,7 @@
     <domainDiagramElement
         href="epc.genmodel#//epc/EPC"/>
     <topLevelNodes
-        visualID="1001"
+        visualID="2001"
         editPartClassName="ANDEditPart"
         itemSemanticEditPolicyClassName="ANDItemSemanticEditPolicy"
         notationViewFactoryClassName="ANDViewFactory"
@@ -78,7 +79,7 @@
       </modelFacet>
     </topLevelNodes>
     <topLevelNodes
-        visualID="1002"
+        visualID="2002"
         editPartClassName="OREditPart"
         itemSemanticEditPolicyClassName="ORItemSemanticEditPolicy"
         notationViewFactoryClassName="ORViewFactory"
@@ -106,7 +107,7 @@
       </modelFacet>
     </topLevelNodes>
     <topLevelNodes
-        visualID="1003"
+        visualID="2003"
         editPartClassName="InformationEditPart"
         itemSemanticEditPolicyClassName="InformationItemSemanticEditPolicy"
         notationViewFactoryClassName="InformationViewFactory"
@@ -133,7 +134,7 @@
             href="epc.genmodel#//epc/EPC/objects"/>
       </modelFacet>
       <labels
-          visualID="4001"
+          visualID="5001"
           editPartClassName="InformationNameEditPart"
           itemSemanticEditPolicyClassName="InformationNameItemSemanticEditPolicy"
           notationViewFactoryClassName="InformationNameViewFactory">
@@ -151,7 +152,7 @@
       </labels>
     </topLevelNodes>
     <topLevelNodes
-        visualID="1004"
+        visualID="2004"
         editPartClassName="XOREditPart"
         itemSemanticEditPolicyClassName="XORItemSemanticEditPolicy"
         notationViewFactoryClassName="XORViewFactory"
@@ -179,7 +180,7 @@
       </modelFacet>
     </topLevelNodes>
     <topLevelNodes
-        visualID="1005"
+        visualID="2005"
         editPartClassName="EventEditPart"
         itemSemanticEditPolicyClassName="EventItemSemanticEditPolicy"
         notationViewFactoryClassName="EventViewFactory"
@@ -210,7 +211,7 @@
             href="epc.genmodel#//epc/EPC/objects"/>
       </modelFacet>
       <labels
-          visualID="4002"
+          visualID="5002"
           editPartClassName="EventNameEditPart"
           itemSemanticEditPolicyClassName="EventNameItemSemanticEditPolicy"
           notationViewFactoryClassName="EventNameViewFactory">
@@ -228,7 +229,7 @@
       </labels>
     </topLevelNodes>
     <topLevelNodes
-        visualID="1006"
+        visualID="2006"
         editPartClassName="EPC2EditPart"
         itemSemanticEditPolicyClassName="EPC2ItemSemanticEditPolicy"
         notationViewFactoryClassName="EPC2ViewFactory"
@@ -239,8 +240,7 @@
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <elementType
           xsi:type="gmfgen:SpecializationType"
-          metamodelType="//@diagram/@elementType"
-          editHelperAdviceClassName=""/>
+          metamodelType="//@diagram/@elementType"/>
       <viewmap
           xsi:type="gmfgen:InnerClassViewmap"
           className="EPCFigure"
@@ -248,8 +248,7 @@
         <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
       </viewmap>
       <behaviour
-          xsi:type="gmfgen:OpenDiagramBehaviour"
-          diagramKind=""/>
+          xsi:type="gmfgen:OpenDiagramBehaviour"/>
       <modelFacet>
         <metaClass
             href="epc.genmodel#//epc/EPC"/>
@@ -259,7 +258,7 @@
             href="epc.genmodel#//epc/EPC/objects"/>
       </modelFacet>
       <labels
-          visualID="4003"
+          visualID="5003"
           editPartClassName="EPCNameEditPart"
           itemSemanticEditPolicyClassName="EPCNameItemSemanticEditPolicy"
           notationViewFactoryClassName="EPCNameViewFactory">
@@ -278,7 +277,7 @@
       </labels>
     </topLevelNodes>
     <topLevelNodes
-        visualID="1007"
+        visualID="2007"
         editPartClassName="FunctionEditPart"
         itemSemanticEditPolicyClassName="FunctionItemSemanticEditPolicy"
         notationViewFactoryClassName="FunctionViewFactory"
@@ -309,7 +308,7 @@
             href="epc.genmodel#//epc/EPC/objects"/>
       </modelFacet>
       <labels
-          visualID="4004"
+          visualID="5004"
           editPartClassName="FunctionNameEditPart"
           itemSemanticEditPolicyClassName="FunctionNameItemSemanticEditPolicy"
           notationViewFactoryClassName="FunctionNameViewFactory">
@@ -327,7 +326,7 @@
       </labels>
     </topLevelNodes>
     <links
-        visualID="3001"
+        visualID="4001"
         editPartClassName="TriggersEventEditPart"
         itemSemanticEditPolicyClassName="TriggersEventItemSemanticEditPolicy"
         notationViewFactoryClassName="TriggersEventViewFactory"
@@ -359,7 +358,7 @@
       </modelFacet>
     </links>
     <links
-        visualID="3002"
+        visualID="4002"
         editPartClassName="ProvidesDataToEditPart"
         itemSemanticEditPolicyClassName="ProvidesDataToItemSemanticEditPolicy"
         notationViewFactoryClassName="ProvidesDataToViewFactory"
@@ -391,7 +390,7 @@
       </modelFacet>
     </links>
     <links
-        visualID="3003"
+        visualID="4003"
         editPartClassName="WritesDataToEditPart"
         itemSemanticEditPolicyClassName="WritesDataToItemSemanticEditPolicy"
         notationViewFactoryClassName="WritesDataToViewFactory"
@@ -423,7 +422,7 @@
       </modelFacet>
     </links>
     <links
-        visualID="3004"
+        visualID="4004"
         editPartClassName="ActivatesFunctionEditPart"
         itemSemanticEditPolicyClassName="ActivatesFunctionItemSemanticEditPolicy"
         notationViewFactoryClassName="ActivatesFunctionViewFactory"
@@ -455,7 +454,7 @@
       </modelFacet>
     </links>
     <links
-        visualID="3005"
+        visualID="4005"
         editPartClassName="EventToOperatorConnectionEditPart"
         itemSemanticEditPolicyClassName="EventToOperatorConnectionItemSemanticEditPolicy"
         notationViewFactoryClassName="EventToOperatorConnectionViewFactory"
@@ -487,7 +486,7 @@
       </modelFacet>
     </links>
     <links
-        visualID="3006"
+        visualID="4006"
         editPartClassName="FunctionToOperatorConnectionEditPart"
         itemSemanticEditPolicyClassName="FunctionToOperatorConnectionItemSemanticEditPolicy"
         notationViewFactoryClassName="FunctionToOperatorConnectionViewFactory"
@@ -519,7 +518,7 @@
       </modelFacet>
     </links>
     <links
-        visualID="3007"
+        visualID="4007"
         editPartClassName="OperatorToEventConnectionEditPart"
         itemSemanticEditPolicyClassName="OperatorToEventConnectionItemSemanticEditPolicy"
         notationViewFactoryClassName="OperatorToEventConnectionViewFactory"
@@ -551,7 +550,7 @@
       </modelFacet>
     </links>
     <links
-        visualID="3008"
+        visualID="4008"
         editPartClassName="OperatorToFunctionConnectionEditPart"
         itemSemanticEditPolicyClassName="OperatorToFunctionConnectionItemSemanticEditPolicy"
         notationViewFactoryClassName="OperatorToFunctionConnectionViewFactory"

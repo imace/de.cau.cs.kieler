@@ -266,6 +266,29 @@
         </children>
       </actualFigure>
     </descriptors>
+    <descriptors
+        name="EquivalenceFigure">
+      <actualFigure
+          xsi:type="gmfgraph:Rectangle"
+          outline="false"
+          fill="false">
+        <layout
+            xsi:type="gmfgraph:StackLayout"/>
+        <children
+            xsi:type="gmfgraph:Ellipse">
+          <layout
+              xsi:type="gmfgraph:StackLayout"/>
+          <children
+              xsi:type="gmfgraph:CustomFigure"
+              name="EquivalenceFigure"
+              qualifiedClassName="edu.unikiel.informatik.aiw.epc.custom.ScalableSVGImageFigure">
+            <attributes
+                name="renderedImage"
+                value="&quot;ImplicationFigure.svg&quot;"/>
+          </children>
+        </children>
+      </actualFigure>
+    </descriptors>
   </figures>
   <nodes
       name="EPC"
@@ -291,6 +314,9 @@
   <nodes
       name="Implication"
       figure="ImplicationFigure"/>
+  <nodes
+      name="Equivalence"
+      figure="EquivalenceFigure"/>
   <connections
       name="TriggersEvent"
       figure="TriggersEventFigure"/>

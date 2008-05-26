@@ -136,6 +136,9 @@ public class EpcAdapterFactory extends AdapterFactoryImpl {
 			public Object caseImplication(Implication object) {
 				return createImplicationAdapter();
 			}
+			public Object caseEquivalence(Equivalence object) {
+				return createEquivalenceAdapter();
+			}
 			public Object defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -459,6 +462,20 @@ public class EpcAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createImplicationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link edu.unikiel.informatik.aiw.generated.epc.Equivalence <em>Equivalence</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see edu.unikiel.informatik.aiw.generated.epc.Equivalence
+	 * @generated
+	 */
+	public Adapter createEquivalenceAdapter() {
 		return null;
 	}
 

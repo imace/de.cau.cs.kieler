@@ -179,6 +179,15 @@ public interface EpcFactory extends EFactory {
 	Implication createImplication();
 
 	/**
+	 * Returns a new object of class '<em>Equivalence</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Equivalence</em>'.
+	 * @generated
+	 */
+	Equivalence createEquivalence();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

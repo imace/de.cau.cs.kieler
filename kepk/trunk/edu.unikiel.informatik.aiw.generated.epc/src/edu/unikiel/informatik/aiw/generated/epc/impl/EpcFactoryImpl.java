@@ -76,6 +76,7 @@ public class EpcFactoryImpl extends EFactoryImpl implements EpcFactory {
 			case EpcPackage.OPERATOR_TO_EVENT_CONNECTION: return createOperatorToEventConnection();
 			case EpcPackage.GCT_LCONNECTOR: return createGCTLconnector();
 			case EpcPackage.IMPLICATION: return createImplication();
+			case EpcPackage.EQUIVALENCE: return createEquivalence();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -249,6 +250,16 @@ public class EpcFactoryImpl extends EFactoryImpl implements EpcFactory {
 	public Implication createImplication() {
 		ImplicationImpl implication = new ImplicationImpl();
 		return implication;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Equivalence createEquivalence() {
+		EquivalenceImpl equivalence = new EquivalenceImpl();
+		return equivalence;
 	}
 
 	/**

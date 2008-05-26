@@ -30,6 +30,17 @@
         <largeIcon
             xsi:type="gmftool:DefaultImage"/>
       </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="Equivalence"
+          description="Create new Equivalence">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/ImplicationIcon.png"
+            bundle="edu.unikiel.informatik.aiw.epc.custom"/>
+        <largeIcon
+            xsi:type="gmftool:DefaultImage"/>
+      </tools>
     </tools>
   </palette>
 </gmftool:ToolRegistry>

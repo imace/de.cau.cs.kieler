@@ -813,6 +813,44 @@ public interface EpcPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link edu.unikiel.informatik.aiw.generated.epc.impl.EquivalenceImpl <em>Equivalence</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see edu.unikiel.informatik.aiw.generated.epc.impl.EquivalenceImpl
+	 * @see edu.unikiel.informatik.aiw.generated.epc.impl.EpcPackageImpl#getEquivalence()
+	 * @generated
+	 */
+	int EQUIVALENCE = 22;
+
+	/**
+	 * The feature id for the '<em><b>Show In EPC Editor</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EQUIVALENCE__SHOW_IN_EPC_EDITOR = NODE__SHOW_IN_EPC_EDITOR;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EQUIVALENCE__NAME = NODE__NAME;
+
+	/**
+	 * The number of structural features of the '<em>Equivalence</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EQUIVALENCE_FEATURE_COUNT = NODE_FEATURE_COUNT + 0;
+
+
+	/**
 	 * Returns the meta object for class '{@link edu.unikiel.informatik.aiw.generated.epc.EPC <em>EPC</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1275,6 +1313,16 @@ public interface EpcPackage extends EPackage {
 	EClass getImplication();
 
 	/**
+	 * Returns the meta object for class '{@link edu.unikiel.informatik.aiw.generated.epc.Equivalence <em>Equivalence</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Equivalence</em>'.
+	 * @see edu.unikiel.informatik.aiw.generated.epc.Equivalence
+	 * @generated
+	 */
+	EClass getEquivalence();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1691,6 +1739,16 @@ public interface EpcPackage extends EPackage {
 		 * @generated
 		 */
 		EClass IMPLICATION = eINSTANCE.getImplication();
+
+		/**
+		 * The meta object literal for the '{@link edu.unikiel.informatik.aiw.generated.epc.impl.EquivalenceImpl <em>Equivalence</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see edu.unikiel.informatik.aiw.generated.epc.impl.EquivalenceImpl
+		 * @see edu.unikiel.informatik.aiw.generated.epc.impl.EpcPackageImpl#getEquivalence()
+		 * @generated
+		 */
+		EClass EQUIVALENCE = eINSTANCE.getEquivalence();
 
 	}
 

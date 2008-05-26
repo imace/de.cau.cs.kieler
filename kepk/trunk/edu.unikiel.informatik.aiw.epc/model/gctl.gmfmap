@@ -101,6 +101,19 @@
           href="epc.gmfgraph#Implication"/>
     </ownedChild>
   </nodes>
+  <nodes>
+    <containmentFeature
+        href="epc.ecore#//EPC/objects"/>
+    <ownedChild>
+      <domainMetaElement
+          href="epc.ecore#//Equivalence"/>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="gctl.gmftool#//@palette/@tools.0/@tools.2"/>
+      <diagramNode
+          href="epc.gmfgraph#Equivalence"/>
+    </ownedChild>
+  </nodes>
   <links>
     <domainMetaElement
         href="epc.ecore#//GCTLconnector"/>

@@ -72,4 +72,5 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//Node"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Implication" eSuperTypes="#//Node"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Equivalence" eSuperTypes="#//Node"/>
 </ecore:EPackage>

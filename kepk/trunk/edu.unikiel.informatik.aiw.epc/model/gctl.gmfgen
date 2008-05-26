@@ -8,12 +8,13 @@
     domainFileExtension="epc"
     templateDirectory="">
   <diagram
-      visualID="79"
+      visualID="1001"
       editPartClassName="GCTLEditPart"
       itemSemanticEditPolicyClassName="GCTLItemSemanticEditPolicy"
       notationViewFactoryClassName="GCTLViewFactory"
       canonicalEditPolicyClassName="GCTLCanonicalEditPolicy"
       iconProviderPriority="Low"
+      editingDomainID="SharedEditingDomain"
       validationProviderPriority="Low"
       validationEnabled="true"
       validationDecorators="true"
@@ -31,7 +32,7 @@
     <domainDiagramElement
         href="epc.genmodel#//epc/EPC"/>
     <topLevelNodes
-        visualID="1001"
+        visualID="2011"
         editPartClassName="FunctionEditPart"
         itemSemanticEditPolicyClassName="FunctionItemSemanticEditPolicy"
         notationViewFactoryClassName="FunctionViewFactory"
@@ -62,7 +63,7 @@
             href="epc.genmodel#//epc/EPC/objects"/>
       </modelFacet>
       <labels
-          visualID="4001"
+          visualID="5011"
           editPartClassName="FunctionNameEditPart"
           itemSemanticEditPolicyClassName="FunctionNameItemSemanticEditPolicy"
           notationViewFactoryClassName="FunctionNameViewFactory">
@@ -81,7 +82,7 @@
       </labels>
     </topLevelNodes>
     <topLevelNodes
-        visualID="1002"
+        visualID="2012"
         editPartClassName="EventEditPart"
         itemSemanticEditPolicyClassName="EventItemSemanticEditPolicy"
         notationViewFactoryClassName="EventViewFactory"
@@ -112,7 +113,7 @@
             href="epc.genmodel#//epc/EPC/objects"/>
       </modelFacet>
       <labels
-          visualID="4002"
+          visualID="5012"
           editPartClassName="EventNameEditPart"
           itemSemanticEditPolicyClassName="EventNameItemSemanticEditPolicy"
           notationViewFactoryClassName="EventNameViewFactory">
@@ -130,7 +131,7 @@
       </labels>
     </topLevelNodes>
     <topLevelNodes
-        visualID="1003"
+        visualID="2013"
         editPartClassName="InformationEditPart"
         itemSemanticEditPolicyClassName="InformationItemSemanticEditPolicy"
         notationViewFactoryClassName="InformationViewFactory"
@@ -157,7 +158,7 @@
             href="epc.genmodel#//epc/EPC/objects"/>
       </modelFacet>
       <labels
-          visualID="4003"
+          visualID="5013"
           editPartClassName="InformationNameEditPart"
           itemSemanticEditPolicyClassName="InformationNameItemSemanticEditPolicy"
           notationViewFactoryClassName="InformationNameViewFactory">
@@ -175,7 +176,7 @@
       </labels>
     </topLevelNodes>
     <topLevelNodes
-        visualID="1004"
+        visualID="2014"
         editPartClassName="EPCEditPart"
         itemSemanticEditPolicyClassName="EPCItemSemanticEditPolicy"
         notationViewFactoryClassName="EPCViewFactory"
@@ -202,7 +203,7 @@
             href="epc.genmodel#//epc/EPC/objects"/>
       </modelFacet>
       <labels
-          visualID="4004"
+          visualID="5014"
           editPartClassName="EPCNameEditPart"
           itemSemanticEditPolicyClassName="EPCNameItemSemanticEditPolicy"
           notationViewFactoryClassName="EPCNameViewFactory">
@@ -220,7 +221,7 @@
       </labels>
     </topLevelNodes>
     <topLevelNodes
-        visualID="1005"
+        visualID="2015"
         editPartClassName="ImplicationEditPart"
         itemSemanticEditPolicyClassName="ImplicationItemSemanticEditPolicy"
         notationViewFactoryClassName="ImplicationViewFactory"
@@ -247,8 +248,36 @@
             href="epc.genmodel#//epc/EPC/objects"/>
       </modelFacet>
     </topLevelNodes>
+    <topLevelNodes
+        visualID="2016"
+        editPartClassName="EquivalenceEditPart"
+        itemSemanticEditPolicyClassName="EquivalenceItemSemanticEditPolicy"
+        notationViewFactoryClassName="EquivalenceViewFactory"
+        canonicalEditPolicyClassName="EquivalenceCanonicalEditPolicy"
+        graphicalNodeEditPolicyClassName="EquivalenceGraphicalNodeEditPolicy"
+        createCommandClassName="EquivalenceCreateCommand">
+      <diagramRunTimeClass
+          href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+      <elementType
+          xsi:type="gmfgen:MetamodelType"
+          editHelperClassName="EquivalenceEditHelper"/>
+      <viewmap
+          xsi:type="gmfgen:InnerClassViewmap"
+          className="EquivalenceFigure"
+          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class EquivalenceFigure extends org.eclipse.draw2d.RectangleFigure {&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public EquivalenceFigure() {&#xA;&#x9;&#x9;&#xA;this.setLayoutManager(new org.eclipse.draw2d.StackLayout());&#xA;&#x9;&#x9;this.setFill(false);&#xA;this.setOutline(false);&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;org.eclipse.draw2d.Ellipse elli0 = new org.eclipse.draw2d.Ellipse();&#xA;&#xA;this.add(elli0);&#xA;&#xA;elli0.setLayoutManager(new org.eclipse.draw2d.StackLayout());&#xA;&#xA;&#xA;edu.unikiel.informatik.aiw.epc.custom.ScalableSVGImageFigure equivalenceFigure1 = new edu.unikiel.informatik.aiw.epc.custom.ScalableSVGImageFigure();&#xA;&#xA;&#xA;&#xA;&#xA;equivalenceFigure1.setRenderedImage(&#xA;&quot;ImplicationFigure.svg&quot;);&#xA;&#xA;&#xA;&#xA;elli0.add(equivalenceFigure1);&#xA;&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private boolean myUseLocalCoordinates = false;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected boolean useLocalCoordinates() {&#xA;&#x9;&#x9;return myUseLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#xA;&#x9;&#x9;myUseLocalCoordinates = useLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;}&#xA;&#xA;">
+        <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
+      </viewmap>
+      <modelFacet>
+        <metaClass
+            href="epc.genmodel#//epc/Equivalence"/>
+        <containmentMetaFeature
+            href="epc.genmodel#//epc/EPC/objects"/>
+        <childMetaFeature
+            href="epc.genmodel#//epc/EPC/objects"/>
+      </modelFacet>
+    </topLevelNodes>
     <links
-        visualID="3001"
+        visualID="4011"
         editPartClassName="GCTLconnectorEditPart"
         itemSemanticEditPolicyClassName="GCTLconnectorItemSemanticEditPolicy"
         notationViewFactoryClassName="GCTLconnectorViewFactory"
@@ -294,6 +323,12 @@
             description="Create new Implication"
             smallIconPath="/edu.unikiel.informatik.aiw.epc.custom/icons/ImplicationIcon.png"
             genNodes="//@diagram/@topLevelNodes.4"/>
+        <entries
+            xsi:type="gmfgen:ToolEntry"
+            title="Equivalence"
+            description="Create new Equivalence"
+            smallIconPath="/edu.unikiel.informatik.aiw.epc.custom/icons/ImplicationIcon.png"
+            genNodes="//@diagram/@topLevelNodes.5"/>
       </groups>
       <groups
           title="-- Mis-referenced tools --"
@@ -302,6 +337,7 @@
             xsi:type="gmfgen:ToolEntry"
             title="Function"
             description="Create new Function"
+            smallIconPath="/edu.unikiel.informatik.aiw.epc.custom/icons/FunctionIcon.png"
             genNodes="//@diagram/@topLevelNodes.0"/>
         <entries
             xsi:type="gmfgen:ToolEntry"
@@ -312,6 +348,7 @@
             xsi:type="gmfgen:ToolEntry"
             title="Information"
             description="Create new Information"
+            smallIconPath="/edu.unikiel.informatik.aiw.epc.custom/icons/InformationIcon.png"
             genNodes="//@diagram/@topLevelNodes.2"/>
         <entries
             xsi:type="gmfgen:ToolEntry"
@@ -356,7 +393,9 @@
       name="GCTL Plugin"
       printingEnabled="true"
       activatorClassName="GctlDiagramEditorPlugin"/>
-  <editor/>
+  <editor
+      className="GctlDiagramEditor"
+      iD="edu.unikiel.informatik.aiw.generated.gctl.diagram.part.GctlDiagramEditorID"/>
   <navigator>
     <childReferences
         child="//@diagram"/>
@@ -375,6 +414,9 @@
     <childReferences
         parent="//@diagram"
         child="//@diagram/@topLevelNodes.4"/>
+    <childReferences
+        parent="//@diagram"
+        child="//@diagram/@topLevelNodes.5"/>
     <childReferences
         parent="//@diagram"
         child="//@diagram/@links.0"
@@ -442,6 +484,18 @@
         groupIcon="icons/incomingLinksNavigatorGroup.gif"/>
     <childReferences
         parent="//@diagram/@links.0"
+        child="//@diagram/@topLevelNodes.5"
+        referenceType="out_target"
+        groupName="target"
+        groupIcon="icons/linkTargetNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@topLevelNodes.5"
+        child="//@diagram/@links.0"
+        referenceType="in_source"
+        groupName="incoming links"
+        groupIcon="icons/incomingLinksNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@links.0"
         child="//@diagram/@topLevelNodes.0"
         referenceType="in_source"
         groupName="source"
@@ -496,6 +550,18 @@
         groupIcon="icons/linkSourceNavigatorGroup.gif"/>
     <childReferences
         parent="//@diagram/@topLevelNodes.4"
+        child="//@diagram/@links.0"
+        referenceType="out_target"
+        groupName="outgoing links"
+        groupIcon="icons/outgoingLinksNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@links.0"
+        child="//@diagram/@topLevelNodes.5"
+        referenceType="in_source"
+        groupName="source"
+        groupIcon="icons/linkSourceNavigatorGroup.gif"/>
+    <childReferences
+        parent="//@diagram/@topLevelNodes.5"
         child="//@diagram/@links.0"
         referenceType="out_target"
         groupName="outgoing links"

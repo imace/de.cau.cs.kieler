@@ -450,6 +450,28 @@ public class EpcItemProviderAdapterFactory extends EpcAdapterFactory implements 
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link edu.unikiel.informatik.aiw.generated.epc.Equivalence} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected EquivalenceItemProvider equivalenceItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link edu.unikiel.informatik.aiw.generated.epc.Equivalence}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Adapter createEquivalenceAdapter() {
+		if (equivalenceItemProvider == null) {
+			equivalenceItemProvider = new EquivalenceItemProvider(this);
+		}
+
+		return equivalenceItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -562,6 +584,7 @@ public class EpcItemProviderAdapterFactory extends EpcAdapterFactory implements 
 		if (operatorToEventConnectionItemProvider != null) operatorToEventConnectionItemProvider.dispose();
 		if (gctLconnectorItemProvider != null) gctLconnectorItemProvider.dispose();
 		if (implicationItemProvider != null) implicationItemProvider.dispose();
+		if (equivalenceItemProvider != null) equivalenceItemProvider.dispose();
 	}
 
 }
