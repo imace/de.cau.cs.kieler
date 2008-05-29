@@ -5,28 +5,6 @@
     xmlns:gmfgraph="http://www.eclipse.org/gmf/2006/GraphicalDefinition" name="mealy">
   <figures
       name="Default">
-    <figures
-        xsi:type="gmfgraph:PolylineConnection"
-        name="EdgeFigure"
-        lineWidth="2"
-        targetDecoration="//@figures.0/@figures.0/@children.1">
-      <layout
-          xsi:type="gmfgraph:XYLayout"/>
-      <foregroundColor
-          xsi:type="gmfgraph:ConstantColor"
-          value="darkGray"/>
-      <children
-          xsi:type="gmfgraph:Label"
-          name="EdgeLabelFigure"
-          text="[] / []">
-        <layout
-            xsi:type="gmfgraph:XYLayout"/>
-      </children>
-      <children
-          xsi:type="gmfgraph:PolylineDecoration"
-          name="EdgeArrowDecoration"
-          lineWidth="2"/>
-    </figures>
     <descriptors
         name="NodeFigure">
       <actualFigure
@@ -42,15 +20,32 @@
     </descriptors>
     <descriptors
         name="EdgeFigure">
+      <actualFigure
+          xsi:type="gmfgraph:PolylineConnection"
+          name="EdgeFigure"
+          lineWidth="2"
+          targetDecoration="//@figures.0/@descriptors.1/@actualFigure/@children.1">
+        <foregroundColor
+            xsi:type="gmfgraph:ConstantColor"
+            value="darkGray"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="EdgeLabelFigure"
+            text="[] / []"/>
+        <children
+            xsi:type="gmfgraph:PolylineDecoration"
+            name="EdgeArrowDecoration"
+            lineWidth="2"/>
+      </actualFigure>
       <accessors
-          figure="//@figures.0/@figures.0/@children.0"/>
+          figure="//@figures.0/@descriptors.1/@actualFigure/@children.0"/>
     </descriptors>
     <descriptors
         name="EdgeSplineFigure">
       <actualFigure
           xsi:type="gmfgraph:CustomConnection"
           name="SplineCurveConnection"
-          qualifiedClassName="edu.unikiel.rtsys.layouter.gef.SplineCurveConnection">
+          qualifiedClassName="hierarchymealy.custom.TransitionSplineCurve">
         <foregroundColor
             xsi:type="gmfgraph:ConstantColor"
             value="darkBlue"/>
@@ -73,9 +68,9 @@
           name="CompositeStateRectangle">
         <backgroundColor
             xsi:type="gmfgraph:RGBColor"
-            red="127"
-            green="127"
-            blue="255"/>
+            red="240"
+            green="240"
+            blue="240"/>
         <children
             xsi:type="gmfgraph:Label"
             name="CompositeStateNameFigure"
