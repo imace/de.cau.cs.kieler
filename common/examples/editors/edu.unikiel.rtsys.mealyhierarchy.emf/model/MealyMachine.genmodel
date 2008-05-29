@@ -8,7 +8,6 @@
   <genPackages prefix="Mealy" disposableProviderFactory="true" ecorePackage="MealyMachine.ecore#/">
     <genClasses ecoreClass="MealyMachine.ecore#//HierarchyMealyMachine">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MealyMachine.ecore#//HierarchyMealyMachine/machineName"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MealyMachine.ecore#//HierarchyMealyMachine/compStates"/>
     </genClasses>
     <genClasses ecoreClass="MealyMachine.ecore#//State">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference MealyMachine.ecore#//State/outgoingEdges"/>
@@ -24,7 +23,7 @@
     <genClasses ecoreClass="MealyMachine.ecore#//CompositeState">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MealyMachine.ecore#//CompositeState/nodes"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MealyMachine.ecore#//CompositeState/edges"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MealyMachine.ecore#//CompositeState/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MealyMachine.ecore#//CompositeState/compositeNodes"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

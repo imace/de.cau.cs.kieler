@@ -7,7 +7,7 @@
     xmlns:gmftool="http://www.eclipse.org/gmf/2005/ToolDefinition">
   <nodes>
     <containmentFeature
-        href="MealyMachine.ecore#//HierarchyMealyMachine/compStates"/>
+        href="MealyMachine.ecore#//CompositeState/compositeNodes"/>
     <ownedChild>
       <domainMetaElement
           href="MealyMachine.ecore#//CompositeState"/>
@@ -16,7 +16,7 @@
         <diagramLabel
             href="MealyMachine.gmfgraph#NodeName"/>
         <features
-            href="MealyMachine.ecore#//CompositeState/name"/>
+            href="MealyMachine.ecore#//State/name"/>
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
@@ -40,16 +40,59 @@
           </labelMappings>
           <tool
               xsi:type="gmftool:CreationTool"
-              href="MealyMachine.gmftool#//@palette/@tools.0/@tools.3"/>
+              href="MealyMachine.gmftool#//@palette/@tools.0/@tools.0"/>
           <diagramNode
               href="MealyMachine.gmfgraph#Node"/>
         </ownedChild>
       </children>
+      <children
+          compartment="//@nodes.0/@ownedChild/@compartments.0">
+        <containmentFeature
+            href="MealyMachine.ecore#//CompositeState/compositeNodes"/>
+        <ownedChild>
+          <domainMetaElement
+              href="MealyMachine.ecore#//CompositeState"/>
+          <labelMappings
+              xsi:type="gmfmap:FeatureLabelMapping"
+              editorPattern="">
+            <diagramLabel
+                href="MealyMachine.gmfgraph#NodeName"/>
+            <features
+                href="MealyMachine.ecore#//State/name"/>
+          </labelMappings>
+          <tool
+              xsi:type="gmftool:CreationTool"
+              href="MealyMachine.gmftool#//@palette/@tools.0/@tools.1"/>
+          <diagramNode
+              href="MealyMachine.gmfgraph#CompositeState"/>
+        </ownedChild>
+      </children>
       <compartments
-          children="//@nodes.0/@ownedChild/@children.0">
+          children="//@nodes.0/@ownedChild/@children.0 //@nodes.0/@ownedChild/@children.1">
         <compartment
             href="MealyMachine.gmfgraph#CompositeStateCompartment"/>
       </compartments>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
+        href="MealyMachine.ecore#//CompositeState/nodes"/>
+    <ownedChild>
+      <domainMetaElement
+          href="MealyMachine.ecore#//State"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping"
+          editorPattern="">
+        <diagramLabel
+            href="MealyMachine.gmfgraph#NodeName"/>
+        <features
+            href="MealyMachine.ecore#//State/name"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="MealyMachine.gmftool#//@palette/@tools.0/@tools.0"/>
+      <diagramNode
+          href="MealyMachine.gmfgraph#Node"/>
     </ownedChild>
   </nodes>
   <links>

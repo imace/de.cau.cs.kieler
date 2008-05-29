@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.1/notation" xmi:id="_1ch-II66EdymLPZwcIggQw" type="Ecore" name="MealyMachine.ecore_diagram" measurementUnit="Pixel">
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.1/notation" xmi:id="_1ch-II66EdymLPZwcIggQw" type="Ecore" name="MealyMachine.ecore_diagram" measurementUnit="Pixel">
   <children xmi:type="notation:Node" xmi:id="_2nTIII66EdymLPZwcIggQw" type="2001">
     <children xmi:type="notation:Node" xmi:id="_2nTvMI66EdymLPZwcIggQw" type="5001"/>
     <children xmi:type="notation:Node" xmi:id="_2nUWQI66EdymLPZwcIggQw" type="7001">
@@ -82,10 +82,6 @@
   <children xmi:type="notation:Node" xmi:id="_r_pyMCjEEd2pDYj32NuUrw" type="2001">
     <children xmi:type="notation:Node" xmi:id="_r_rAUCjEEd2pDYj32NuUrw" type="5001"/>
     <children xmi:type="notation:Node" xmi:id="_r_rnYCjEEd2pDYj32NuUrw" type="7001">
-      <children xmi:type="notation:Node" xmi:id="_OgjqYCjZEd2pDYj32NuUrw" type="3001">
-        <element xmi:type="ecore:EAttribute" href="MealyMachine.ecore#//CompositeState/name"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_OgjqYSjZEd2pDYj32NuUrw"/>
-      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_r_rnYSjEEd2pDYj32NuUrw"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_r_rnYijEEd2pDYj32NuUrw"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_r_rnYyjEEd2pDYj32NuUrw"/>
@@ -188,16 +184,32 @@
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_YJfFYI67EdymLPZwcIggQw" id="(0.0,0.65753424)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_YJfFYY67EdymLPZwcIggQw" id="(0.8076923,0.69491524)"/>
   </edges>
-  <edges xmi:type="notation:Edge" xmi:id="_ZyfRoCjZEd2pDYj32NuUrw" type="4003" source="_2nTIII66EdymLPZwcIggQw" target="_r_pyMCjEEd2pDYj32NuUrw">
-    <children xmi:type="notation:Node" xmi:id="_ZyfRpCjZEd2pDYj32NuUrw" type="6002">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_ZyfRpSjZEd2pDYj32NuUrw" y="40"/>
+  <edges xmi:type="notation:Edge" xmi:id="_LlpIIC1dEd29asZFV-M-rQ" type="4004" source="_2nTIII66EdymLPZwcIggQw" target="_r_pyMCjEEd2pDYj32NuUrw">
+    <styles xmi:type="notation:ConnectorStyle" xmi:id="_LlpIIS1dEd29asZFV-M-rQ"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_LlpIIi1dEd29asZFV-M-rQ" fontName="Sans"/>
+    <element xsi:nil="true"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_LlpIIy1dEd29asZFV-M-rQ" points="[3, 31, 4, -64]$[59, 97, 60, 2]"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_O15_AC1dEd29asZFV-M-rQ" type="4004" source="_r_pyMCjEEd2pDYj32NuUrw" target="_4-XGII66EdymLPZwcIggQw">
+    <styles xmi:type="notation:ConnectorStyle" xmi:id="_O15_AS1dEd29asZFV-M-rQ"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_O15_Ai1dEd29asZFV-M-rQ" fontName="Sans"/>
+    <element xsi:nil="true"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_O15_Ay1dEd29asZFV-M-rQ" points="[-8, 0, 50, -111]$[-58, 0, 0, -111]$[-58, 97, 0, -14]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_O17NIC1dEd29asZFV-M-rQ" id="(0.067226894,0.40677965)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_O17NIS1dEd29asZFV-M-rQ" id="(0.43589744,0.16470589)"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_nkteQC1hEd29asZFV-M-rQ" type="4003" source="_r_pyMCjEEd2pDYj32NuUrw" target="_r_pyMCjEEd2pDYj32NuUrw">
+    <children xmi:type="notation:Node" xmi:id="_nkteRC1hEd29asZFV-M-rQ" type="6002">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_nkteRS1hEd29asZFV-M-rQ" x="-9" y="-63"/>
     </children>
-    <children xmi:type="notation:Node" xmi:id="_ZyfRpijZEd2pDYj32NuUrw" type="6004">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_ZyfRpyjZEd2pDYj32NuUrw" y="60"/>
+    <children xmi:type="notation:Node" xmi:id="_nkteRi1hEd29asZFV-M-rQ" type="6004">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_nkteRy1hEd29asZFV-M-rQ" x="10" y="21"/>
     </children>
-    <styles xmi:type="notation:ConnectorStyle" xmi:id="_ZyfRoSjZEd2pDYj32NuUrw"/>
-    <styles xmi:type="notation:FontStyle" xmi:id="_ZyfRoijZEd2pDYj32NuUrw" fontName="Sans"/>
-    <element xmi:type="ecore:EReference" href="MealyMachine.ecore#//HierarchyMealyMachine/compStates"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ZyfRoyjZEd2pDYj32NuUrw" points="[1, 31, 2, -64]$[1, 66, 2, -29]"/>
+    <styles xmi:type="notation:ConnectorStyle" xmi:id="_nkteQS1hEd29asZFV-M-rQ"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_nkteQi1hEd29asZFV-M-rQ" fontName="Sans"/>
+    <element xmi:type="ecore:EReference" href="MealyMachine.ecore#//CompositeState/compositeNodes"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_nkteQy1hEd29asZFV-M-rQ" points="[7, -8, 23, -26]$[32, -37, 48, -55]$[68, -37, 84, -55]$[68, -13, 84, -31]$[56, 35, 72, 17]$[7, 23, 23, 5]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_nkvTcC1hEd29asZFV-M-rQ" id="(0.9411765,0.42372882)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_nkvTcS1hEd29asZFV-M-rQ" id="(0.8067227,0.7288136)"/>
   </edges>
 </notation:Diagram>
