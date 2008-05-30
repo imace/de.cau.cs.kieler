@@ -53,9 +53,6 @@
             xsi:type="gmfgraph:Label"
             name="EdgeSplineLabelFigure"
             text="[] / []"/>
-        <children
-            xsi:type="gmfgraph:PolylineDecoration"
-            name="EdgeSplineArrowDecoration"/>
       </actualFigure>
       <accessors
           accessor="getFigureEdgeSplineLabelFigure"
