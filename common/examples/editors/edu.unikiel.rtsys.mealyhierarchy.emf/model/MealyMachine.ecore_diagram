@@ -198,18 +198,4 @@
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_O17NIC1dEd29asZFV-M-rQ" id="(0.067226894,0.40677965)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_O17NIS1dEd29asZFV-M-rQ" id="(0.43589744,0.16470589)"/>
   </edges>
-  <edges xmi:type="notation:Edge" xmi:id="_nkteQC1hEd29asZFV-M-rQ" type="4003" source="_r_pyMCjEEd2pDYj32NuUrw" target="_r_pyMCjEEd2pDYj32NuUrw">
-    <children xmi:type="notation:Node" xmi:id="_nkteRC1hEd29asZFV-M-rQ" type="6002">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_nkteRS1hEd29asZFV-M-rQ" x="-9" y="-63"/>
-    </children>
-    <children xmi:type="notation:Node" xmi:id="_nkteRi1hEd29asZFV-M-rQ" type="6004">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_nkteRy1hEd29asZFV-M-rQ" x="10" y="21"/>
-    </children>
-    <styles xmi:type="notation:ConnectorStyle" xmi:id="_nkteQS1hEd29asZFV-M-rQ"/>
-    <styles xmi:type="notation:FontStyle" xmi:id="_nkteQi1hEd29asZFV-M-rQ" fontName="Sans"/>
-    <element xmi:type="ecore:EReference" href="MealyMachine.ecore#//CompositeState/compositeNodes"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_nkteQy1hEd29asZFV-M-rQ" points="[7, -8, 23, -26]$[32, -37, 48, -55]$[68, -37, 84, -55]$[68, -13, 84, -31]$[56, 35, 72, 17]$[7, 23, 23, 5]"/>
-    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_nkvTcC1hEd29asZFV-M-rQ" id="(0.9411765,0.42372882)"/>
-    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_nkvTcS1hEd29asZFV-M-rQ" id="(0.8067227,0.7288136)"/>
-  </edges>
 </notation:Diagram>

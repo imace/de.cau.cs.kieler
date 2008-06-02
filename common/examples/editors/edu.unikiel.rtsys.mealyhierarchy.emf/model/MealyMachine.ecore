@@ -26,7 +26,5 @@
         eType="#//State" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="edges" upperBound="-1"
         eType="#//Edge" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="compositeNodes" upperBound="-1"
-        eType="#//CompositeState" containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

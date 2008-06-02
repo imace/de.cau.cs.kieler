@@ -7,7 +7,7 @@
     xmlns:gmftool="http://www.eclipse.org/gmf/2005/ToolDefinition">
   <nodes>
     <containmentFeature
-        href="MealyMachine.ecore#//CompositeState/compositeNodes"/>
+        href="MealyMachine.ecore#//CompositeState/nodes"/>
     <ownedChild>
       <domainMetaElement
           href="MealyMachine.ecore#//CompositeState"/>
@@ -48,7 +48,7 @@
       <children
           compartment="//@nodes.0/@ownedChild/@compartments.0">
         <containmentFeature
-            href="MealyMachine.ecore#//CompositeState/compositeNodes"/>
+            href="MealyMachine.ecore#//CompositeState/nodes"/>
         <ownedChild>
           <domainMetaElement
               href="MealyMachine.ecore#//CompositeState"/>

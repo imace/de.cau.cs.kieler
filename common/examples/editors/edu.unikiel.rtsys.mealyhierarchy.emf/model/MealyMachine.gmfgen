@@ -74,7 +74,7 @@
       </labels>
     </childNodes>
     <childNodes
-        visualID="3002"
+        visualID="3003"
         editPartClassName="CompositeState2EditPart"
         itemSemanticEditPolicyClassName="CompositeState2ItemSemanticEditPolicy"
         notationViewFactoryClassName="CompositeState2ViewFactory"
@@ -100,12 +100,12 @@
         <metaClass
             href="MealyMachine.genmodel#//hierarchymealy/CompositeState"/>
         <containmentMetaFeature
-            href="MealyMachine.genmodel#//hierarchymealy/CompositeState/compositeNodes"/>
+            href="MealyMachine.genmodel#//hierarchymealy/CompositeState/nodes"/>
         <childMetaFeature
-            href="MealyMachine.genmodel#//hierarchymealy/CompositeState/compositeNodes"/>
+            href="MealyMachine.genmodel#//hierarchymealy/CompositeState/nodes"/>
       </modelFacet>
       <labels
-          visualID="5003"
+          visualID="5006"
           editPartClassName="CompositeStateName2EditPart"
           itemSemanticEditPolicyClassName="CompositeStateName2ItemSemanticEditPolicy"
           notationViewFactoryClassName="CompositeStateName2ViewFactory"
@@ -125,7 +125,7 @@
       </labels>
     </childNodes>
     <topLevelNodes
-        visualID="2002"
+        visualID="2004"
         editPartClassName="CompositeStateEditPart"
         itemSemanticEditPolicyClassName="CompositeStateItemSemanticEditPolicy"
         notationViewFactoryClassName="CompositeStateViewFactory"
@@ -151,12 +151,12 @@
         <metaClass
             href="MealyMachine.genmodel#//hierarchymealy/CompositeState"/>
         <containmentMetaFeature
-            href="MealyMachine.genmodel#//hierarchymealy/CompositeState/compositeNodes"/>
+            href="MealyMachine.genmodel#//hierarchymealy/CompositeState/nodes"/>
         <childMetaFeature
-            href="MealyMachine.genmodel#//hierarchymealy/CompositeState/compositeNodes"/>
+            href="MealyMachine.genmodel#//hierarchymealy/CompositeState/nodes"/>
       </modelFacet>
       <labels
-          visualID="5004"
+          visualID="5007"
           editPartClassName="CompositeStateNameEditPart"
           itemSemanticEditPolicyClassName="CompositeStateNameItemSemanticEditPolicy"
           notationViewFactoryClassName="CompositeStateNameViewFactory"
@@ -282,7 +282,7 @@
       </labels>
     </links>
     <compartments
-        visualID="7002"
+        visualID="7003"
         editPartClassName="CompositeStateCompositeStateCompartmentEditPart"
         itemSemanticEditPolicyClassName="CompositeStateCompositeStateCompartmentItemSemanticEditPolicy"
         notationViewFactoryClassName="CompositeStateCompositeStateCompartmentViewFactory"
