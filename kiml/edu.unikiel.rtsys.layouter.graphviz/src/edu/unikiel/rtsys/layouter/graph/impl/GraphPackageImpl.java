@@ -6,6 +6,7 @@
  */
 package edu.unikiel.rtsys.layouter.graph.impl;
 
+import edu.unikiel.rtsys.layouter.graph.CompositeNode;
 import edu.unikiel.rtsys.layouter.graph.Coordinates;
 import edu.unikiel.rtsys.layouter.graph.Edge;
 import edu.unikiel.rtsys.layouter.graph.Graph;
@@ -70,6 +71,13 @@ public class GraphPackageImpl extends EPackageImpl implements GraphPackage {
 	 * @generated
 	 */
 	private EClass labelEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass compositeNodeEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -153,24 +161,6 @@ public class GraphPackageImpl extends EPackageImpl implements GraphPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getGraph_Nodes() {
-		return (EReference)graphEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getGraph_Edges() {
-		return (EReference)graphEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getNode() {
 		return nodeEClass;
 	}
@@ -227,6 +217,15 @@ public class GraphPackageImpl extends EPackageImpl implements GraphPackage {
 	 */
 	public EAttribute getNode_Data() {
 		return (EAttribute)nodeEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getNode_ParentNode() {
+		return (EReference)nodeEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -308,6 +307,15 @@ public class GraphPackageImpl extends EPackageImpl implements GraphPackage {
 	 */
 	public EReference getEdge_TailLabel() {
 		return (EReference)edgeEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getEdge_ParentNode() {
+		return (EReference)edgeEClass.getEStructuralFeatures().get(8);
 	}
 
 	/**
@@ -414,6 +422,33 @@ public class GraphPackageImpl extends EPackageImpl implements GraphPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getCompositeNode() {
+		return compositeNodeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCompositeNode_Nodes() {
+		return (EReference)compositeNodeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCompositeNode_Edges() {
+		return (EReference)compositeNodeEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public GraphFactory getGraphFactory() {
 		return (GraphFactory)getEFactoryInstance();
 	}
@@ -438,8 +473,6 @@ public class GraphPackageImpl extends EPackageImpl implements GraphPackage {
 
 		// Create classes and their features
 		graphEClass = createEClass(GRAPH);
-		createEReference(graphEClass, GRAPH__NODES);
-		createEReference(graphEClass, GRAPH__EDGES);
 
 		nodeEClass = createEClass(NODE);
 		createEReference(nodeEClass, NODE__PARENT_GRAPH);
@@ -448,6 +481,7 @@ public class GraphPackageImpl extends EPackageImpl implements GraphPackage {
 		createEReference(nodeEClass, NODE__SIZE);
 		createEReference(nodeEClass, NODE__POSITION);
 		createEAttribute(nodeEClass, NODE__DATA);
+		createEReference(nodeEClass, NODE__PARENT_NODE);
 
 		edgeEClass = createEClass(EDGE);
 		createEReference(edgeEClass, EDGE__PARENT_GRAPH);
@@ -458,6 +492,7 @@ public class GraphPackageImpl extends EPackageImpl implements GraphPackage {
 		createEReference(edgeEClass, EDGE__EDGE_LABEL);
 		createEReference(edgeEClass, EDGE__HEAD_LABEL);
 		createEReference(edgeEClass, EDGE__TAIL_LABEL);
+		createEReference(edgeEClass, EDGE__PARENT_NODE);
 
 		sizeEClass = createEClass(SIZE);
 		createEAttribute(sizeEClass, SIZE__WIDTH);
@@ -472,6 +507,10 @@ public class GraphPackageImpl extends EPackageImpl implements GraphPackage {
 		createEAttribute(labelEClass, LABEL__DATA);
 		createEAttribute(labelEClass, LABEL__TEXT);
 		createEReference(labelEClass, LABEL__SIZE);
+
+		compositeNodeEClass = createEClass(COMPOSITE_NODE);
+		createEReference(compositeNodeEClass, COMPOSITE_NODE__NODES);
+		createEReference(compositeNodeEClass, COMPOSITE_NODE__EDGES);
 	}
 
 	/**
@@ -502,22 +541,23 @@ public class GraphPackageImpl extends EPackageImpl implements GraphPackage {
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
+		graphEClass.getESuperTypes().add(this.getCompositeNode());
+		compositeNodeEClass.getESuperTypes().add(this.getNode());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(graphEClass, Graph.class, "Graph", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getGraph_Nodes(), this.getNode(), this.getNode_ParentGraph(), "nodes", null, 0, -1, Graph.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getGraph_Edges(), this.getEdge(), this.getEdge_ParentGraph(), "edges", null, 0, -1, Graph.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(nodeEClass, Node.class, "Node", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getNode_ParentGraph(), this.getGraph(), this.getGraph_Nodes(), "parentGraph", null, 1, 1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getNode_ParentGraph(), this.getGraph(), null, "parentGraph", null, 1, 1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getNode_OutgoingEdges(), this.getEdge(), this.getEdge_Source(), "outgoingEdges", null, 0, -1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getNode_IncomingEdges(), this.getEdge(), this.getEdge_Target(), "incomingEdges", null, 0, -1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getNode_Size(), this.getSize(), null, "size", null, 1, 1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getNode_Position(), this.getCoordinates(), null, "position", null, 1, 1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getNode_Data(), ecorePackage.getEJavaObject(), "data", null, 0, 1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getNode_ParentNode(), this.getCompositeNode(), this.getCompositeNode_Nodes(), "parentNode", null, 1, 1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(edgeEClass, Edge.class, "Edge", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getEdge_ParentGraph(), this.getGraph(), this.getGraph_Edges(), "parentGraph", null, 1, 1, Edge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getEdge_ParentGraph(), this.getGraph(), null, "parentGraph", null, 1, 1, Edge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEdge_Target(), this.getNode(), this.getNode_IncomingEdges(), "target", null, 1, 1, Edge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEdge_Source(), this.getNode(), this.getNode_OutgoingEdges(), "source", null, 1, 1, Edge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEdge_Bendpoints(), this.getCoordinates(), null, "bendpoints", null, 0, -1, Edge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -525,6 +565,7 @@ public class GraphPackageImpl extends EPackageImpl implements GraphPackage {
 		initEReference(getEdge_EdgeLabel(), this.getLabel(), null, "edgeLabel", null, 0, 1, Edge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEdge_HeadLabel(), this.getLabel(), null, "headLabel", null, 0, 1, Edge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEdge_TailLabel(), this.getLabel(), null, "tailLabel", null, 0, 1, Edge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getEdge_ParentNode(), this.getCompositeNode(), this.getCompositeNode_Edges(), "parentNode", null, 1, 1, Edge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(sizeEClass, Size.class, "Size", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getSize_Width(), ecorePackage.getEInt(), "width", "0", 1, 1, Size.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -539,6 +580,10 @@ public class GraphPackageImpl extends EPackageImpl implements GraphPackage {
 		initEAttribute(getLabel_Data(), ecorePackage.getEJavaObject(), "data", null, 0, 1, Label.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getLabel_Text(), ecorePackage.getEString(), "text", "\"\"", 1, 1, Label.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getLabel_Size(), this.getSize(), null, "size", null, 0, 1, Label.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(compositeNodeEClass, CompositeNode.class, "CompositeNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getCompositeNode_Nodes(), this.getNode(), this.getNode_ParentNode(), "nodes", null, 0, -1, CompositeNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCompositeNode_Edges(), this.getEdge(), this.getEdge_ParentNode(), "edges", null, 0, -1, CompositeNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

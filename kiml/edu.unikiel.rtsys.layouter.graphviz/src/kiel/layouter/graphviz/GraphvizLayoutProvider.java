@@ -28,6 +28,7 @@ import org.eclipse.gef.requests.ChangeBoundsRequest;
 import org.eclipse.gef.requests.ReconnectRequest;
 import org.eclipse.gmf.runtime.common.core.service.IOperation;
 import org.eclipse.gmf.runtime.common.core.util.Trace;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.CompartmentEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.LabelEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeEditPart;
@@ -46,7 +47,7 @@ import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.swt.graphics.Color;
 
 import edu.unikiel.rtsys.layouter.LayoutType;
-import edu.unikiel.rtsys.layouter.gef.BezierCurve;
+import edu.unikiel.rtsys.layouter.graph.CompositeNode;
 import edu.unikiel.rtsys.layouter.graph.Coordinates;
 import edu.unikiel.rtsys.layouter.graph.Edge;
 import edu.unikiel.rtsys.layouter.graph.Graph;
@@ -54,6 +55,7 @@ import edu.unikiel.rtsys.layouter.graph.GraphFactory;
 import edu.unikiel.rtsys.layouter.graph.Label;
 import edu.unikiel.rtsys.layouter.graph.Node;
 import edu.unikiel.rtsys.layouter.graph.Size;
+import edu.unikiel.rtsys.layouter.graph.custom.GraphTools;
 import edu.unikiel.rtsys.layouter.ui.WorkbenchPreferencePage;
 
 
@@ -113,41 +115,21 @@ public class GraphvizLayoutProvider extends DefaultProvider {
 		GraphFactory factory = GraphFactory.eINSTANCE;
 		Graph graph = factory.createGraph();
 
-		// create nodes for selected EditParts
-		ListIterator li = selectedEditParts.listIterator();
-		ArrayList connections = new ArrayList();
-		while (li.hasNext()) {
-			IGraphicalEditPart gep = (IGraphicalEditPart) li.next();
-			if (gep instanceof ShapeEditPart) {
-				ShapeEditPart shapeEP = (ShapeEditPart) gep;
-				Point position = shapeEP.getLocation();
-				Node node = factory.createNode();
-				// store the EditPart in the node to get the mapping later
-				node.setData(shapeEP); 
-				editPart2Node.put(shapeEP, node);
-				Size size = factory.createSize();
-				size.setWidth(shapeEP.getSize().width);
-				size.setHeight(shapeEP.getSize().height);
-				node.setSize(size);
-				graph.getNodes().add(node);
-				System.out.println("Node: "+node);
-			}
-			// crumble the relevant connections from the selected EditParts
-			connections.addAll(gep.getSourceConnections());
-			
-			/* TODO: find connections not directly connected to the edit part but to its
-			 * border... 
-			if (gep instanceof IBorderedShapeEditPart) {
-				// search the BorderItemEditParts
-				for (Object child : gep.getChildren()) {
-					if( child instanceof IBorderItemEditPart)
-						connections.addAll(((IGraphicalEditPart)child).getSourceConnections());
-				}
-			}
-			*/
-		}
+		buildNodes(selectedEditParts, editPart2Node, graph);
 		
-		// create edges for selected connections
+		System.out.println(GraphTools.graph2String(graph));
+		return graph;
+	}
+
+	/** Creates edges for a list of connections and fills the given
+	 * Graph object.
+	 * @param editPart2Node map of editParts to nodes
+	 * @param parentNode the composite node to fill
+	 * @param connections list of connections to create graph edges for
+	 */
+	private void buildConnections(Map<EditPart, Node> editPart2Node,
+			CompositeNode parentNode, ArrayList connections) {
+		GraphFactory factory = GraphFactory.eINSTANCE;
 		for (Object object : connections) {
 			if (object instanceof ConnectionEditPart) {
 				ConnectionEditPart con = (ConnectionEditPart) object;
@@ -159,9 +141,8 @@ public class GraphvizLayoutProvider extends DefaultProvider {
 					Edge edge = factory.createEdge();
 					edge.setSource(source);
 					edge.setTarget(target);
-					graph.getEdges().add(edge);
+					parentNode.getEdges().add(edge);
 					edge.setData(con); // save EP in edge for later
-					System.out.println("Edge: "+edge);
 					
 					// create Labels
 					for (Object child : con.getChildren()) {
@@ -183,7 +164,62 @@ public class GraphvizLayoutProvider extends DefaultProvider {
 				}
 			}
 		}
-		return graph;
+	}
+
+	/**
+	 * Create nodes for selected EditParts and fills the given parentNode of the graph.
+	 * Returns a list of connections between the nodes.
+	 * @param selectedEditParts which editParts are relevant
+	 * @param editPart2Node maps editParts to Nodes
+	 * @param parentNode to fill
+	 * @return
+	 */
+	private ArrayList buildNodes(List selectedEditParts,
+			Map<EditPart, Node> editPart2Node, CompositeNode parentNode) {
+		GraphFactory factory = GraphFactory.eINSTANCE;
+		ListIterator li = selectedEditParts.listIterator();
+		ArrayList connections = new ArrayList();
+		while (li.hasNext()) {
+			IGraphicalEditPart gep = (IGraphicalEditPart) li.next();
+			if (gep instanceof ShapeEditPart) {
+				ShapeEditPart shapeEP = (ShapeEditPart) gep;
+				Point position = shapeEP.getLocation();
+				// TODO: create Composite only if it really contains compartment, normal Node else
+				CompositeNode node = factory.createCompositeNode();
+				// store the EditPart in the node to get the mapping later
+				node.setData(shapeEP); 
+				editPart2Node.put(shapeEP, node);
+				Size size = factory.createSize();
+				size.setWidth(shapeEP.getSize().width);
+				size.setHeight(shapeEP.getSize().height);
+				node.setSize(size);
+				parentNode.getNodes().add(node);
+				// recursive call to check for hierarchy
+				buildNodes(gep.getChildren(),editPart2Node,node);
+			}
+			if(gep instanceof CompartmentEditPart){
+				// recursive call to check for hierarchy
+				// here add children to the parent node of this compartment
+				buildNodes(gep.getChildren(),editPart2Node,parentNode);
+			}
+			
+			// crumble the relevant connections from the selected EditParts
+			connections.addAll(gep.getSourceConnections());
+			
+			/* TODO: find connections not directly connected to the edit part but to its
+			 * border... 
+			if (gep instanceof IBorderedShapeEditPart) {
+				// search the BorderItemEditParts
+				for (Object child : gep.getChildren()) {
+					if( child instanceof IBorderItemEditPart)
+						connections.addAll(((IGraphicalEditPart)child).getSourceConnections());
+				}
+			}
+			*/
+		}
+		// add connections to the current composite node
+		buildConnections(editPart2Node, parentNode, connections);
+		return connections;
 	}
 	
 /*
@@ -231,7 +267,7 @@ public class GraphvizLayoutProvider extends DefaultProvider {
 				Point oldPosition = gep.getFigure().getBounds().getLocation();
 				Point newPosition = new Point(node.getPosition().getX(),node.getPosition().getY());
 				Point delta = new Point(newPosition.x-oldPosition.x, newPosition.y-oldPosition.y);
-				System.out.println("Node pos, old: "+oldPosition+ " new: "+newPosition+" delta: "+delta);
+				//System.out.println("Node pos, old: "+oldPosition+ " new: "+newPosition+" delta: "+delta);
 				
 				Dimension oldSize = new Dimension(gep.getFigure().getBounds().width, gep.getFigure().getBounds().height);
 				Dimension newSize = new Dimension(node.getSize().getWidth(), node.getSize().getHeight());
@@ -266,18 +302,18 @@ public class GraphvizLayoutProvider extends DefaultProvider {
 						PolylineConnection poly = (PolylineConnection)con.getFigure();
 						
 						// handling connection router
-						System.out.println("Router: "+poly.getConnectionRouter());
+						//System.out.println("Router: "+poly.getConnectionRouter());
 						poly.setConnectionRouter(null);
 						
 						
 						PointList temps = poly.getPoints();
-						System.out.print("Bendpoints1: ");
+						//System.out.print("Bendpoints1: ");
 						for(int i = 0;i<temps.size();i++){
 							Point p = temps.getPoint(i);
-							System.out.print(p.x+" "+p.y+" ");
+							//System.out.print(p.x+" "+p.y+" ");
 							addDebugPoint(p, ColorConstants.blue); // add something visible
 						}
-						System.out.println();
+						//System.out.println();
 						// end debug
 						
 						List<Coordinates> bendpoints = edge.getBendpoints();
@@ -289,13 +325,13 @@ public class GraphvizLayoutProvider extends DefaultProvider {
 						Point ptSourceReference = new Point(edge.getSource().getPosition().getX()+(edge.getSource().getSize().getWidth()/2),edge.getSource().getPosition().getY()+(edge.getSource().getSize().getHeight()/2));
 						Point ptTargetReference = new Point(edge.getTarget().getPosition().getX()+(edge.getTarget().getSize().getWidth()/2),edge.getTarget().getPosition().getY()+(edge.getTarget().getSize().getHeight()/2));
 						if(bendpoints != null && !bendpoints.isEmpty()){
-							System.out.print("Bendpoints2: ");
+							//System.out.print("Bendpoints2: ");
 							int pointnumber = 0;
 							for (Coordinates coordinates : bendpoints) {
 								pointList.addPoint(coordinates.getX(), coordinates.getY());
 								// debug stuff, show the points
 								addDebugPoint(new Point(coordinates.getX(), coordinates.getY()));
-								System.out.print(coordinates.getX()+","+coordinates.getY()+" ");
+								//System.out.print(coordinates.getX()+","+coordinates.getY()+" ");
 								// set start & end ref point to first and last bendpoint.
 								if(pointnumber == 0)
 									ptSourceReference = new Point(coordinates.getX(), coordinates.getY());
@@ -303,7 +339,7 @@ public class GraphvizLayoutProvider extends DefaultProvider {
 									ptTargetReference = new Point(coordinates.getX(), coordinates.getY());
 								pointnumber++;
 							}
-							System.out.println("\n");
+							//System.out.println("\n");
 							
 /*							// different tries for different reference points
 							// all do not work...
@@ -551,7 +587,7 @@ public class GraphvizLayoutProvider extends DefaultProvider {
 	 * @see org.eclipse.gmf.runtime.common.core.service.IProvider#provides(org.eclipse.gmf.runtime.common.core.service.IOperation)
 	 */
 	public boolean provides(IOperation operation) {
-		System.out.println("GraphViz Provider provides: " + operation);
+		//System.out.println("GraphViz Provider provides: " + operation);
 		if (operation == null)
 			return false;
 		

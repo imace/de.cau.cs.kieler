@@ -90,6 +90,8 @@ public class GraphSwitch<T> {
 			case GraphPackage.GRAPH: {
 				Graph graph = (Graph)theEObject;
 				T result = caseGraph(graph);
+				if (result == null) result = caseCompositeNode(graph);
+				if (result == null) result = caseNode(graph);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -120,6 +122,13 @@ public class GraphSwitch<T> {
 			case GraphPackage.LABEL: {
 				Label label = (Label)theEObject;
 				T result = caseLabel(label);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case GraphPackage.COMPOSITE_NODE: {
+				CompositeNode compositeNode = (CompositeNode)theEObject;
+				T result = caseCompositeNode(compositeNode);
+				if (result == null) result = caseNode(compositeNode);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -214,6 +223,21 @@ public class GraphSwitch<T> {
 	 * @generated
 	 */
 	public T caseLabel(Label object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Composite Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Composite Node</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCompositeNode(CompositeNode object) {
 		return null;
 	}
 

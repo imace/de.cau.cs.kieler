@@ -64,7 +64,7 @@ public class GraphAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * The switch the delegates to the <code>createXXX</code> methods.
+	 * The switch that delegates to the <code>createXXX</code> methods.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -94,6 +94,10 @@ public class GraphAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseLabel(Label object) {
 				return createLabelAdapter();
+			}
+			@Override
+			public Adapter caseCompositeNode(CompositeNode object) {
+				return createCompositeNodeAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -196,6 +200,20 @@ public class GraphAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createLabelAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link edu.unikiel.rtsys.layouter.graph.CompositeNode <em>Composite Node</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see edu.unikiel.rtsys.layouter.graph.CompositeNode
+	 * @generated
+	 */
+	public Adapter createCompositeNodeAdapter() {
 		return null;
 	}
 

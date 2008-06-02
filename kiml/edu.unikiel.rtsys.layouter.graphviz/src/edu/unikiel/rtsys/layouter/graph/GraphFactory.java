@@ -80,6 +80,15 @@ public interface GraphFactory extends EFactory {
 	Label createLabel();
 
 	/**
+	 * Returns a new object of class '<em>Composite Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Composite Node</em>'.
+	 * @generated
+	 */
+	CompositeNode createCompositeNode();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

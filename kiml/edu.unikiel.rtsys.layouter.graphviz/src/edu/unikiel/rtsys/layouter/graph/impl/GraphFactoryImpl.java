@@ -66,6 +66,7 @@ public class GraphFactoryImpl extends EFactoryImpl implements GraphFactory {
 			case GraphPackage.SIZE: return createSize();
 			case GraphPackage.COORDINATES: return createCoordinates();
 			case GraphPackage.LABEL: return createLabel();
+			case GraphPackage.COMPOSITE_NODE: return createCompositeNode();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -129,6 +130,16 @@ public class GraphFactoryImpl extends EFactoryImpl implements GraphFactory {
 	public Label createLabel() {
 		LabelImpl label = new LabelImpl();
 		return label;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CompositeNode createCompositeNode() {
+		CompositeNodeImpl compositeNode = new CompositeNodeImpl();
+		return compositeNode;
 	}
 
 	/**

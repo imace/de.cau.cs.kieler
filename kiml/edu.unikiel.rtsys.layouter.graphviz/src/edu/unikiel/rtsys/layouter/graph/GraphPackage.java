@@ -70,33 +70,6 @@ public interface GraphPackage extends EPackage {
 	int GRAPH = 0;
 
 	/**
-	 * The feature id for the '<em><b>Nodes</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int GRAPH__NODES = 0;
-
-	/**
-	 * The feature id for the '<em><b>Edges</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int GRAPH__EDGES = 1;
-
-	/**
-	 * The number of structural features of the '<em>Graph</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int GRAPH_FEATURE_COUNT = 2;
-
-	/**
 	 * The meta object id for the '{@link edu.unikiel.rtsys.layouter.graph.impl.NodeImpl <em>Node</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -107,7 +80,7 @@ public interface GraphPackage extends EPackage {
 	int NODE = 1;
 
 	/**
-	 * The feature id for the '<em><b>Parent Graph</b></em>' container reference.
+	 * The feature id for the '<em><b>Parent Graph</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -161,13 +134,212 @@ public interface GraphPackage extends EPackage {
 	int NODE__DATA = 5;
 
 	/**
+	 * The feature id for the '<em><b>Parent Node</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NODE__PARENT_NODE = 6;
+
+	/**
 	 * The number of structural features of the '<em>Node</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NODE_FEATURE_COUNT = 6;
+	int NODE_FEATURE_COUNT = 7;
+
+	/**
+	 * The meta object id for the '{@link edu.unikiel.rtsys.layouter.graph.impl.CompositeNodeImpl <em>Composite Node</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see edu.unikiel.rtsys.layouter.graph.impl.CompositeNodeImpl
+	 * @see edu.unikiel.rtsys.layouter.graph.impl.GraphPackageImpl#getCompositeNode()
+	 * @generated
+	 */
+	int COMPOSITE_NODE = 6;
+
+	/**
+	 * The feature id for the '<em><b>Parent Graph</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_NODE__PARENT_GRAPH = NODE__PARENT_GRAPH;
+
+	/**
+	 * The feature id for the '<em><b>Outgoing Edges</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_NODE__OUTGOING_EDGES = NODE__OUTGOING_EDGES;
+
+	/**
+	 * The feature id for the '<em><b>Incoming Edges</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_NODE__INCOMING_EDGES = NODE__INCOMING_EDGES;
+
+	/**
+	 * The feature id for the '<em><b>Size</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_NODE__SIZE = NODE__SIZE;
+
+	/**
+	 * The feature id for the '<em><b>Position</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_NODE__POSITION = NODE__POSITION;
+
+	/**
+	 * The feature id for the '<em><b>Data</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_NODE__DATA = NODE__DATA;
+
+	/**
+	 * The feature id for the '<em><b>Parent Node</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_NODE__PARENT_NODE = NODE__PARENT_NODE;
+
+	/**
+	 * The feature id for the '<em><b>Nodes</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_NODE__NODES = NODE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_NODE__EDGES = NODE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Composite Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_NODE_FEATURE_COUNT = NODE_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Parent Graph</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GRAPH__PARENT_GRAPH = COMPOSITE_NODE__PARENT_GRAPH;
+
+	/**
+	 * The feature id for the '<em><b>Outgoing Edges</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GRAPH__OUTGOING_EDGES = COMPOSITE_NODE__OUTGOING_EDGES;
+
+	/**
+	 * The feature id for the '<em><b>Incoming Edges</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GRAPH__INCOMING_EDGES = COMPOSITE_NODE__INCOMING_EDGES;
+
+	/**
+	 * The feature id for the '<em><b>Size</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GRAPH__SIZE = COMPOSITE_NODE__SIZE;
+
+	/**
+	 * The feature id for the '<em><b>Position</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GRAPH__POSITION = COMPOSITE_NODE__POSITION;
+
+	/**
+	 * The feature id for the '<em><b>Data</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GRAPH__DATA = COMPOSITE_NODE__DATA;
+
+	/**
+	 * The feature id for the '<em><b>Parent Node</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GRAPH__PARENT_NODE = COMPOSITE_NODE__PARENT_NODE;
+
+	/**
+	 * The feature id for the '<em><b>Nodes</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GRAPH__NODES = COMPOSITE_NODE__NODES;
+
+	/**
+	 * The feature id for the '<em><b>Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GRAPH__EDGES = COMPOSITE_NODE__EDGES;
+
+	/**
+	 * The number of structural features of the '<em>Graph</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GRAPH_FEATURE_COUNT = COMPOSITE_NODE_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link edu.unikiel.rtsys.layouter.graph.impl.EdgeImpl <em>Edge</em>}' class.
@@ -180,7 +352,7 @@ public interface GraphPackage extends EPackage {
 	int EDGE = 2;
 
 	/**
-	 * The feature id for the '<em><b>Parent Graph</b></em>' container reference.
+	 * The feature id for the '<em><b>Parent Graph</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -252,13 +424,22 @@ public interface GraphPackage extends EPackage {
 	int EDGE__TAIL_LABEL = 7;
 
 	/**
+	 * The feature id for the '<em><b>Parent Node</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EDGE__PARENT_NODE = 8;
+
+	/**
 	 * The number of structural features of the '<em>Edge</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EDGE_FEATURE_COUNT = 8;
+	int EDGE_FEATURE_COUNT = 9;
 
 	/**
 	 * The meta object id for the '{@link edu.unikiel.rtsys.layouter.graph.impl.SizeImpl <em>Size</em>}' class.
@@ -402,28 +583,6 @@ public interface GraphPackage extends EPackage {
 	EClass getGraph();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link edu.unikiel.rtsys.layouter.graph.Graph#getNodes <em>Nodes</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Nodes</em>'.
-	 * @see edu.unikiel.rtsys.layouter.graph.Graph#getNodes()
-	 * @see #getGraph()
-	 * @generated
-	 */
-	EReference getGraph_Nodes();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link edu.unikiel.rtsys.layouter.graph.Graph#getEdges <em>Edges</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Edges</em>'.
-	 * @see edu.unikiel.rtsys.layouter.graph.Graph#getEdges()
-	 * @see #getGraph()
-	 * @generated
-	 */
-	EReference getGraph_Edges();
-
-	/**
 	 * Returns the meta object for class '{@link edu.unikiel.rtsys.layouter.graph.Node <em>Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -434,10 +593,10 @@ public interface GraphPackage extends EPackage {
 	EClass getNode();
 
 	/**
-	 * Returns the meta object for the container reference '{@link edu.unikiel.rtsys.layouter.graph.Node#getParentGraph <em>Parent Graph</em>}'.
+	 * Returns the meta object for the reference '{@link edu.unikiel.rtsys.layouter.graph.Node#getParentGraph <em>Parent Graph</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Parent Graph</em>'.
+	 * @return the meta object for the reference '<em>Parent Graph</em>'.
 	 * @see edu.unikiel.rtsys.layouter.graph.Node#getParentGraph()
 	 * @see #getNode()
 	 * @generated
@@ -500,6 +659,17 @@ public interface GraphPackage extends EPackage {
 	EAttribute getNode_Data();
 
 	/**
+	 * Returns the meta object for the container reference '{@link edu.unikiel.rtsys.layouter.graph.Node#getParentNode <em>Parent Node</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Parent Node</em>'.
+	 * @see edu.unikiel.rtsys.layouter.graph.Node#getParentNode()
+	 * @see #getNode()
+	 * @generated
+	 */
+	EReference getNode_ParentNode();
+
+	/**
 	 * Returns the meta object for class '{@link edu.unikiel.rtsys.layouter.graph.Edge <em>Edge</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -510,10 +680,10 @@ public interface GraphPackage extends EPackage {
 	EClass getEdge();
 
 	/**
-	 * Returns the meta object for the container reference '{@link edu.unikiel.rtsys.layouter.graph.Edge#getParentGraph <em>Parent Graph</em>}'.
+	 * Returns the meta object for the reference '{@link edu.unikiel.rtsys.layouter.graph.Edge#getParentGraph <em>Parent Graph</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Parent Graph</em>'.
+	 * @return the meta object for the reference '<em>Parent Graph</em>'.
 	 * @see edu.unikiel.rtsys.layouter.graph.Edge#getParentGraph()
 	 * @see #getEdge()
 	 * @generated
@@ -596,6 +766,17 @@ public interface GraphPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getEdge_TailLabel();
+
+	/**
+	 * Returns the meta object for the container reference '{@link edu.unikiel.rtsys.layouter.graph.Edge#getParentNode <em>Parent Node</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Parent Node</em>'.
+	 * @see edu.unikiel.rtsys.layouter.graph.Edge#getParentNode()
+	 * @see #getEdge()
+	 * @generated
+	 */
+	EReference getEdge_ParentNode();
 
 	/**
 	 * Returns the meta object for class '{@link edu.unikiel.rtsys.layouter.graph.Size <em>Size</em>}'.
@@ -716,6 +897,38 @@ public interface GraphPackage extends EPackage {
 	EReference getLabel_Size();
 
 	/**
+	 * Returns the meta object for class '{@link edu.unikiel.rtsys.layouter.graph.CompositeNode <em>Composite Node</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Composite Node</em>'.
+	 * @see edu.unikiel.rtsys.layouter.graph.CompositeNode
+	 * @generated
+	 */
+	EClass getCompositeNode();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link edu.unikiel.rtsys.layouter.graph.CompositeNode#getNodes <em>Nodes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Nodes</em>'.
+	 * @see edu.unikiel.rtsys.layouter.graph.CompositeNode#getNodes()
+	 * @see #getCompositeNode()
+	 * @generated
+	 */
+	EReference getCompositeNode_Nodes();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link edu.unikiel.rtsys.layouter.graph.CompositeNode#getEdges <em>Edges</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Edges</em>'.
+	 * @see edu.unikiel.rtsys.layouter.graph.CompositeNode#getEdges()
+	 * @see #getCompositeNode()
+	 * @generated
+	 */
+	EReference getCompositeNode_Edges();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -748,22 +961,6 @@ public interface GraphPackage extends EPackage {
 		EClass GRAPH = eINSTANCE.getGraph();
 
 		/**
-		 * The meta object literal for the '<em><b>Nodes</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference GRAPH__NODES = eINSTANCE.getGraph_Nodes();
-
-		/**
-		 * The meta object literal for the '<em><b>Edges</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference GRAPH__EDGES = eINSTANCE.getGraph_Edges();
-
-		/**
 		 * The meta object literal for the '{@link edu.unikiel.rtsys.layouter.graph.impl.NodeImpl <em>Node</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -774,7 +971,7 @@ public interface GraphPackage extends EPackage {
 		EClass NODE = eINSTANCE.getNode();
 
 		/**
-		 * The meta object literal for the '<em><b>Parent Graph</b></em>' container reference feature.
+		 * The meta object literal for the '<em><b>Parent Graph</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -822,6 +1019,14 @@ public interface GraphPackage extends EPackage {
 		EAttribute NODE__DATA = eINSTANCE.getNode_Data();
 
 		/**
+		 * The meta object literal for the '<em><b>Parent Node</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference NODE__PARENT_NODE = eINSTANCE.getNode_ParentNode();
+
+		/**
 		 * The meta object literal for the '{@link edu.unikiel.rtsys.layouter.graph.impl.EdgeImpl <em>Edge</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -832,7 +1037,7 @@ public interface GraphPackage extends EPackage {
 		EClass EDGE = eINSTANCE.getEdge();
 
 		/**
-		 * The meta object literal for the '<em><b>Parent Graph</b></em>' container reference feature.
+		 * The meta object literal for the '<em><b>Parent Graph</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -894,6 +1099,14 @@ public interface GraphPackage extends EPackage {
 		 * @generated
 		 */
 		EReference EDGE__TAIL_LABEL = eINSTANCE.getEdge_TailLabel();
+
+		/**
+		 * The meta object literal for the '<em><b>Parent Node</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EDGE__PARENT_NODE = eINSTANCE.getEdge_ParentNode();
 
 		/**
 		 * The meta object literal for the '{@link edu.unikiel.rtsys.layouter.graph.impl.SizeImpl <em>Size</em>}' class.
@@ -988,6 +1201,32 @@ public interface GraphPackage extends EPackage {
 		 * @generated
 		 */
 		EReference LABEL__SIZE = eINSTANCE.getLabel_Size();
+
+		/**
+		 * The meta object literal for the '{@link edu.unikiel.rtsys.layouter.graph.impl.CompositeNodeImpl <em>Composite Node</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see edu.unikiel.rtsys.layouter.graph.impl.CompositeNodeImpl
+		 * @see edu.unikiel.rtsys.layouter.graph.impl.GraphPackageImpl#getCompositeNode()
+		 * @generated
+		 */
+		EClass COMPOSITE_NODE = eINSTANCE.getCompositeNode();
+
+		/**
+		 * The meta object literal for the '<em><b>Nodes</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference COMPOSITE_NODE__NODES = eINSTANCE.getCompositeNode_Nodes();
+
+		/**
+		 * The meta object literal for the '<em><b>Edges</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference COMPOSITE_NODE__EDGES = eINSTANCE.getCompositeNode_Edges();
 
 	}
 

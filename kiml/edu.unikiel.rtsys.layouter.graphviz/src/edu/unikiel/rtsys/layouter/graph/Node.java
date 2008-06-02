@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link edu.unikiel.rtsys.layouter.graph.Node#getSize <em>Size</em>}</li>
  *   <li>{@link edu.unikiel.rtsys.layouter.graph.Node#getPosition <em>Position</em>}</li>
  *   <li>{@link edu.unikiel.rtsys.layouter.graph.Node#getData <em>Data</em>}</li>
+ *   <li>{@link edu.unikiel.rtsys.layouter.graph.Node#getParentNode <em>Parent Node</em>}</li>
  * </ul>
  * </p>
  *
@@ -33,28 +34,26 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface Node extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Parent Graph</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link edu.unikiel.rtsys.layouter.graph.Graph#getNodes <em>Nodes</em>}'.
+	 * Returns the value of the '<em><b>Parent Graph</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Parent Graph</em>' container reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Parent Graph</em>' container reference.
+	 * @return the value of the '<em>Parent Graph</em>' reference.
 	 * @see #setParentGraph(Graph)
 	 * @see edu.unikiel.rtsys.layouter.graph.GraphPackage#getNode_ParentGraph()
-	 * @see edu.unikiel.rtsys.layouter.graph.Graph#getNodes
-	 * @model opposite="nodes" required="true" transient="false"
+	 * @model required="true"
 	 * @generated
 	 */
 	Graph getParentGraph();
 
 	/**
-	 * Sets the value of the '{@link edu.unikiel.rtsys.layouter.graph.Node#getParentGraph <em>Parent Graph</em>}' container reference.
+	 * Sets the value of the '{@link edu.unikiel.rtsys.layouter.graph.Node#getParentGraph <em>Parent Graph</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Parent Graph</em>' container reference.
+	 * @param value the new value of the '<em>Parent Graph</em>' reference.
 	 * @see #getParentGraph()
 	 * @generated
 	 */
@@ -173,5 +172,33 @@ public interface Node extends EObject {
 	 * @generated
 	 */
 	void setData(Object value);
+
+	/**
+	 * Returns the value of the '<em><b>Parent Node</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link edu.unikiel.rtsys.layouter.graph.CompositeNode#getNodes <em>Nodes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Parent Node</em>' container reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Parent Node</em>' container reference.
+	 * @see #setParentNode(CompositeNode)
+	 * @see edu.unikiel.rtsys.layouter.graph.GraphPackage#getNode_ParentNode()
+	 * @see edu.unikiel.rtsys.layouter.graph.CompositeNode#getNodes
+	 * @model opposite="nodes" required="true" transient="false"
+	 * @generated
+	 */
+	CompositeNode getParentNode();
+
+	/**
+	 * Sets the value of the '{@link edu.unikiel.rtsys.layouter.graph.Node#getParentNode <em>Parent Node</em>}' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Parent Node</em>' container reference.
+	 * @see #getParentNode()
+	 * @generated
+	 */
+	void setParentNode(CompositeNode value);
 
 } // Node

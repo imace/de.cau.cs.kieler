@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link edu.unikiel.rtsys.layouter.graph.Edge#getEdgeLabel <em>Edge Label</em>}</li>
  *   <li>{@link edu.unikiel.rtsys.layouter.graph.Edge#getHeadLabel <em>Head Label</em>}</li>
  *   <li>{@link edu.unikiel.rtsys.layouter.graph.Edge#getTailLabel <em>Tail Label</em>}</li>
+ *   <li>{@link edu.unikiel.rtsys.layouter.graph.Edge#getParentNode <em>Parent Node</em>}</li>
  * </ul>
  * </p>
  *
@@ -35,28 +36,26 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface Edge extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Parent Graph</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link edu.unikiel.rtsys.layouter.graph.Graph#getEdges <em>Edges</em>}'.
+	 * Returns the value of the '<em><b>Parent Graph</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Parent Graph</em>' container reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Parent Graph</em>' container reference.
+	 * @return the value of the '<em>Parent Graph</em>' reference.
 	 * @see #setParentGraph(Graph)
 	 * @see edu.unikiel.rtsys.layouter.graph.GraphPackage#getEdge_ParentGraph()
-	 * @see edu.unikiel.rtsys.layouter.graph.Graph#getEdges
-	 * @model opposite="edges" required="true" transient="false"
+	 * @model required="true"
 	 * @generated
 	 */
 	Graph getParentGraph();
 
 	/**
-	 * Sets the value of the '{@link edu.unikiel.rtsys.layouter.graph.Edge#getParentGraph <em>Parent Graph</em>}' container reference.
+	 * Sets the value of the '{@link edu.unikiel.rtsys.layouter.graph.Edge#getParentGraph <em>Parent Graph</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Parent Graph</em>' container reference.
+	 * @param value the new value of the '<em>Parent Graph</em>' reference.
 	 * @see #getParentGraph()
 	 * @generated
 	 */
@@ -237,5 +236,33 @@ public interface Edge extends EObject {
 	 * @generated
 	 */
 	void setTailLabel(Label value);
+
+	/**
+	 * Returns the value of the '<em><b>Parent Node</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link edu.unikiel.rtsys.layouter.graph.CompositeNode#getEdges <em>Edges</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Parent Node</em>' container reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Parent Node</em>' container reference.
+	 * @see #setParentNode(CompositeNode)
+	 * @see edu.unikiel.rtsys.layouter.graph.GraphPackage#getEdge_ParentNode()
+	 * @see edu.unikiel.rtsys.layouter.graph.CompositeNode#getEdges
+	 * @model opposite="edges" required="true" transient="false"
+	 * @generated
+	 */
+	CompositeNode getParentNode();
+
+	/**
+	 * Sets the value of the '{@link edu.unikiel.rtsys.layouter.graph.Edge#getParentNode <em>Parent Node</em>}' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Parent Node</em>' container reference.
+	 * @see #getParentNode()
+	 * @generated
+	 */
+	void setParentNode(CompositeNode value);
 
 } // Edge

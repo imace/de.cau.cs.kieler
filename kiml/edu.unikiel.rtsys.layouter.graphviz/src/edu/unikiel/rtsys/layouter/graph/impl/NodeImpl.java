@@ -6,6 +6,7 @@
  */
 package edu.unikiel.rtsys.layouter.graph.impl;
 
+import edu.unikiel.rtsys.layouter.graph.CompositeNode;
 import edu.unikiel.rtsys.layouter.graph.Coordinates;
 import edu.unikiel.rtsys.layouter.graph.Edge;
 import edu.unikiel.rtsys.layouter.graph.Graph;
@@ -43,12 +44,23 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link edu.unikiel.rtsys.layouter.graph.impl.NodeImpl#getSize <em>Size</em>}</li>
  *   <li>{@link edu.unikiel.rtsys.layouter.graph.impl.NodeImpl#getPosition <em>Position</em>}</li>
  *   <li>{@link edu.unikiel.rtsys.layouter.graph.impl.NodeImpl#getData <em>Data</em>}</li>
+ *   <li>{@link edu.unikiel.rtsys.layouter.graph.impl.NodeImpl#getParentNode <em>Parent Node</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
 public class NodeImpl extends EObjectImpl implements Node {
+	/**
+	 * The cached value of the '{@link #getParentGraph() <em>Parent Graph</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getParentGraph()
+	 * @generated
+	 * @ordered
+	 */
+	protected Graph parentGraph;
+
 	/**
 	 * The cached value of the '{@link #getOutgoingEdges() <em>Outgoing Edges</em>}' reference list.
 	 * <!-- begin-user-doc -->
@@ -134,8 +146,15 @@ public class NodeImpl extends EObjectImpl implements Node {
 	 * @generated
 	 */
 	public Graph getParentGraph() {
-		if (eContainerFeatureID != GraphPackage.NODE__PARENT_GRAPH) return null;
-		return (Graph)eContainer();
+		if (parentGraph != null && parentGraph.eIsProxy()) {
+			InternalEObject oldParentGraph = (InternalEObject)parentGraph;
+			parentGraph = (Graph)eResolveProxy(oldParentGraph);
+			if (parentGraph != oldParentGraph) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, GraphPackage.NODE__PARENT_GRAPH, oldParentGraph, parentGraph));
+			}
+		}
+		return parentGraph;
 	}
 
 	/**
@@ -143,9 +162,8 @@ public class NodeImpl extends EObjectImpl implements Node {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetParentGraph(Graph newParentGraph, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newParentGraph, GraphPackage.NODE__PARENT_GRAPH, msgs);
-		return msgs;
+	public Graph basicGetParentGraph() {
+		return parentGraph;
 	}
 
 	/**
@@ -154,19 +172,10 @@ public class NodeImpl extends EObjectImpl implements Node {
 	 * @generated
 	 */
 	public void setParentGraph(Graph newParentGraph) {
-		if (newParentGraph != eInternalContainer() || (eContainerFeatureID != GraphPackage.NODE__PARENT_GRAPH && newParentGraph != null)) {
-			if (EcoreUtil.isAncestor(this, newParentGraph))
-				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
-			NotificationChain msgs = null;
-			if (eInternalContainer() != null)
-				msgs = eBasicRemoveFromContainer(msgs);
-			if (newParentGraph != null)
-				msgs = ((InternalEObject)newParentGraph).eInverseAdd(this, GraphPackage.GRAPH__NODES, Graph.class, msgs);
-			msgs = basicSetParentGraph(newParentGraph, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, GraphPackage.NODE__PARENT_GRAPH, newParentGraph, newParentGraph));
+		Graph oldParentGraph = parentGraph;
+		parentGraph = newParentGraph;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, GraphPackage.NODE__PARENT_GRAPH, oldParentGraph, parentGraph));
 	}
 
 	/**
@@ -305,18 +314,59 @@ public class NodeImpl extends EObjectImpl implements Node {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public CompositeNode getParentNode() {
+		if (eContainerFeatureID != GraphPackage.NODE__PARENT_NODE) return null;
+		return (CompositeNode)eContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetParentNode(CompositeNode newParentNode, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newParentNode, GraphPackage.NODE__PARENT_NODE, msgs);
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setParentNode(CompositeNode newParentNode) {
+		if (newParentNode != eInternalContainer() || (eContainerFeatureID != GraphPackage.NODE__PARENT_NODE && newParentNode != null)) {
+			if (EcoreUtil.isAncestor(this, newParentNode))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newParentNode != null)
+				msgs = ((InternalEObject)newParentNode).eInverseAdd(this, GraphPackage.COMPOSITE_NODE__NODES, CompositeNode.class, msgs);
+			msgs = basicSetParentNode(newParentNode, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, GraphPackage.NODE__PARENT_NODE, newParentNode, newParentNode));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case GraphPackage.NODE__PARENT_GRAPH:
-				if (eInternalContainer() != null)
-					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetParentGraph((Graph)otherEnd, msgs);
 			case GraphPackage.NODE__OUTGOING_EDGES:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOutgoingEdges()).basicAdd(otherEnd, msgs);
 			case GraphPackage.NODE__INCOMING_EDGES:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getIncomingEdges()).basicAdd(otherEnd, msgs);
+			case GraphPackage.NODE__PARENT_NODE:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetParentNode((CompositeNode)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -329,8 +379,6 @@ public class NodeImpl extends EObjectImpl implements Node {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case GraphPackage.NODE__PARENT_GRAPH:
-				return basicSetParentGraph(null, msgs);
 			case GraphPackage.NODE__OUTGOING_EDGES:
 				return ((InternalEList<?>)getOutgoingEdges()).basicRemove(otherEnd, msgs);
 			case GraphPackage.NODE__INCOMING_EDGES:
@@ -339,6 +387,8 @@ public class NodeImpl extends EObjectImpl implements Node {
 				return basicSetSize(null, msgs);
 			case GraphPackage.NODE__POSITION:
 				return basicSetPosition(null, msgs);
+			case GraphPackage.NODE__PARENT_NODE:
+				return basicSetParentNode(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -351,8 +401,8 @@ public class NodeImpl extends EObjectImpl implements Node {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID) {
-			case GraphPackage.NODE__PARENT_GRAPH:
-				return eInternalContainer().eInverseRemove(this, GraphPackage.GRAPH__NODES, Graph.class, msgs);
+			case GraphPackage.NODE__PARENT_NODE:
+				return eInternalContainer().eInverseRemove(this, GraphPackage.COMPOSITE_NODE__NODES, CompositeNode.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -366,7 +416,8 @@ public class NodeImpl extends EObjectImpl implements Node {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case GraphPackage.NODE__PARENT_GRAPH:
-				return getParentGraph();
+				if (resolve) return getParentGraph();
+				return basicGetParentGraph();
 			case GraphPackage.NODE__OUTGOING_EDGES:
 				return getOutgoingEdges();
 			case GraphPackage.NODE__INCOMING_EDGES:
@@ -377,6 +428,8 @@ public class NodeImpl extends EObjectImpl implements Node {
 				return getPosition();
 			case GraphPackage.NODE__DATA:
 				return getData();
+			case GraphPackage.NODE__PARENT_NODE:
+				return getParentNode();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -410,6 +463,9 @@ public class NodeImpl extends EObjectImpl implements Node {
 			case GraphPackage.NODE__DATA:
 				setData(newValue);
 				return;
+			case GraphPackage.NODE__PARENT_NODE:
+				setParentNode((CompositeNode)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -440,6 +496,9 @@ public class NodeImpl extends EObjectImpl implements Node {
 			case GraphPackage.NODE__DATA:
 				setData(DATA_EDEFAULT);
 				return;
+			case GraphPackage.NODE__PARENT_NODE:
+				setParentNode((CompositeNode)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -453,7 +512,7 @@ public class NodeImpl extends EObjectImpl implements Node {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case GraphPackage.NODE__PARENT_GRAPH:
-				return getParentGraph() != null;
+				return parentGraph != null;
 			case GraphPackage.NODE__OUTGOING_EDGES:
 				return outgoingEdges != null && !outgoingEdges.isEmpty();
 			case GraphPackage.NODE__INCOMING_EDGES:
@@ -464,6 +523,8 @@ public class NodeImpl extends EObjectImpl implements Node {
 				return position != null;
 			case GraphPackage.NODE__DATA:
 				return DATA_EDEFAULT == null ? data != null : !DATA_EDEFAULT.equals(data);
+			case GraphPackage.NODE__PARENT_NODE:
+				return getParentNode() != null;
 		}
 		return super.eIsSet(featureID);
 	}
