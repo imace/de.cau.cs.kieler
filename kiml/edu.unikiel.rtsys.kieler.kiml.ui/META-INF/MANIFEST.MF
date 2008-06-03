@@ -14,7 +14,8 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.gef;bundle-version="3.4.0",
  org.eclipse.gmf.runtime.diagram.ui;bundle-version="1.1.0",
  edu.unikiel.rtsys.layouter.graphviz;bundle-version="1.0.0",
- edu.unikiel.rtsys.layouter.graphviz.editor;bundle-version="1.0.0",
- edu.unikiel.rtsys.kieler.core;bundle-version="1.0.0"
+ edu.unikiel.rtsys.kieler.core;bundle-version="1.0.0",
+ edu.unikiel.rtsys.layouter.graphviz.edit;bundle-version="1.0.0",
+ org.eclipse.emf.edit.ui;bundle-version="2.4.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy

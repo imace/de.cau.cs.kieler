@@ -351,12 +351,10 @@ public class GraphvizLayoutProvider extends DefaultProvider{
 				Point newPosition2 = new Point(newPosition.x+newSize.width, newPosition.y+newSize.height);
 				debugFigureHandler.addDebugPoint((GraphicalEditPart)gep.getParent(),newPosition2, ColorConstants.cyan);
 				
+				// draw some debug stuff
 				for(int i = 0; i<100; i++)
 					for(int ii = 0; ii < 100; ii++)
-						debugFigureHandler.addDebugPoint((GraphicalEditPart)gep.getParent(), new Point(i,ii),ColorConstants.darkGreen);
-				
-				
-				
+						; //debugFigureHandler.addDebugPoint((GraphicalEditPart)gep.getParent(), new Point(i,ii),ColorConstants.darkGreen);
 				debugFigureHandler.addDebugPoint((GraphicalEditPart)gep.getParent(), new Point(23,101),ColorConstants.darkGreen);
 				debugFigureHandler.addDebugPoint((GraphicalEditPart)gep.getParent(), new Point(23,31),ColorConstants.darkGreen);
 				
