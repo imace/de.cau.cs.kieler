@@ -11,6 +11,10 @@ Bundle-ClassPath: .,
  libdotneato.so.0
 Export-Package: edu.unikiel.rtsys.layouter,
  edu.unikiel.rtsys.layouter.gef,
+ edu.unikiel.rtsys.layouter.graph,
+ edu.unikiel.rtsys.layouter.graph.custom,
+ edu.unikiel.rtsys.layouter.graph.impl,
+ edu.unikiel.rtsys.layouter.graph.util,
  kiel.layouter.graphviz
 Require-Bundle: org.eclipse.gmf.codegen.edit,
  org.eclipse.gmf.graphdef.edit,

@@ -15,6 +15,7 @@ public class LayouterPlugin extends AbstractUIPlugin {
 
 	// The shared instance
 	private static LayouterPlugin plugin;
+	private CommonLayer commonLayer;
 	
 	/**
 	 * The constructor
@@ -30,6 +31,7 @@ public class LayouterPlugin extends AbstractUIPlugin {
 		super.start(context);
 		plugin = this;
 		WorkbenchPreferencePage.setDefaultValues();
+		commonLayer = new CommonLayer();
 	}
 
 	/*
@@ -48,6 +50,10 @@ public class LayouterPlugin extends AbstractUIPlugin {
 	 */
 	public static LayouterPlugin getDefault() {
 		return plugin;
+	}
+	
+	public CommonLayer getCommonLayer(){
+		return plugin.commonLayer;
 	}
 
 }

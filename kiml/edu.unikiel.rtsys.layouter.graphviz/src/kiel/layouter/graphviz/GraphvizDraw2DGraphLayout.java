@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 
+import edu.unikiel.rtsys.layouter.graph.CompositeNode;
 import edu.unikiel.rtsys.layouter.graph.Coordinates;
 import edu.unikiel.rtsys.layouter.graph.Edge;
 import edu.unikiel.rtsys.layouter.graph.Graph;
@@ -30,22 +31,41 @@ public class GraphvizDraw2DGraphLayout {
 	private final float scaleY = 1.33f;
 	
 	public GraphvizDraw2DGraphLayout() {
+		init();
+	}
+	
+	private void init(){
 		GraphvizAPI.initialize();
 		graphvizGraph = GraphvizAPI.createGraph("");
 		//GraphvizAPI.setGraphAttribute(graphvizGraph, GraphvizAPI.ATTR_DPI, ""+dpi);
 		// TODO: set correct shape for node corresponding to actual Draw2D shape
 		GraphvizAPI.setGlobalNodeAttribute(graphvizGraph, GraphvizAPI.ATTR_SHAPE, "box");
+		
 	}
 	
 	public void visit(Graph graph) {
-		mapGraph2Graphviz(graph);
+		visitRecursively(graph);
+/*		mapGraph2Graphviz(graph);
 		GraphvizAPI.doDotLayout(graphvizGraph);
 		GraphvizAPI.attachAttributes(graphvizGraph);
 		//System.out.println("dpi: "+GraphvizAPI.getAttribute(graphvizGraph, GraphvizAPI.ATTR_DPI));
 		mapGraphviz2Graph(graph);
+*/		
 	}
 	
-	private void mapGraph2Graphviz(Graph graph){
+	public void visitRecursively(CompositeNode node){
+		for (Node child : node.getNodes()) {
+			if(child instanceof CompositeNode)
+				visitRecursively((CompositeNode)child);
+		}
+		this.init();
+		mapGraph2Graphviz(node);
+		GraphvizAPI.doDotLayout(graphvizGraph);
+		GraphvizAPI.attachAttributes(graphvizGraph);
+		mapGraphviz2Graph(node);
+	}
+	
+	private void mapGraph2Graphviz(CompositeNode graph){
 		int i=0;
 		// process all nodes in the Graph datastructure
 		for(Iterator iter = graph.getNodes().iterator(); iter.hasNext();){
@@ -73,7 +93,7 @@ public class GraphvizDraw2DGraphLayout {
 		}		
 	}
 	
-	private void mapGraphviz2Graph(Graph graph){
+	private void mapGraphviz2Graph(CompositeNode graph){
 		GraphvizAPI.writeDOT(graphvizGraph, "/home/haf/test.dot");
 		// iterate over all nodes in the graphviz graph and copy their attributes to the Graph datastructure 
 		for(Iterator iter = mapNode2Pointer.keySet().iterator(); iter.hasNext();){
