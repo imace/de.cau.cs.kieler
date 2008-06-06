@@ -23,6 +23,7 @@ import org.eclipse.gef.requests.ChangeBoundsRequest;
 import org.eclipse.gef.requests.ReconnectRequest;
 import org.eclipse.gmf.runtime.common.core.service.IOperation;
 import org.eclipse.gmf.runtime.common.core.util.Trace;
+import org.eclipse.gmf.runtime.diagram.ui.commands.ICommandProxy;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.CompartmentEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.LabelEditPart;
@@ -38,6 +39,7 @@ import org.eclipse.jface.preference.IPreferenceStore;
 
 import edu.unikiel.rtsys.layouter.LayoutType;
 import edu.unikiel.rtsys.layouter.gef.DebugFigureHandler;
+import edu.unikiel.rtsys.layouter.gef.SetLayoutCommand;
 import edu.unikiel.rtsys.layouter.graph.CompositeNode;
 import edu.unikiel.rtsys.layouter.graph.Coordinates;
 import edu.unikiel.rtsys.layouter.graph.Edge;
@@ -81,6 +83,31 @@ public class GraphvizLayoutProvider extends DefaultProvider{
 			throw ipe;
 		}
 
+		String layoutType = (String) layoutHint.getAdapter(String.class);
+
+		if(LayoutType.GRAPHVIZ_DOT.equals(layoutType))
+			return getGraphvizLayoutCommand(containerEditPart);
+		else
+		if(LayoutType.DEBUG.equals(layoutType)){
+			return getDebugCommand(containerEditPart);
+		}
+		else
+			return null;
+	}
+
+	private Command getDebugCommand(GraphicalEditPart containerEditPart){
+		Command cmd = new CompoundCommand();
+		for (Object child : containerEditPart.getChildren()) {
+			if(child instanceof GraphicalEditPart){
+				List cons = ((GraphicalEditPart)child).getSourceConnections();
+				if(!cons.isEmpty())
+					cmd = new ICommandProxy(new SetLayoutCommand((IGraphicalEditPart)cons.get(0), "SetLayoutCommand"));
+			}
+		}
+		return cmd;
+	}
+	
+	private Command getGraphvizLayoutCommand(GraphicalEditPart containerEditPart){
 		// create abstract graph
 		Graph layoutGraph = buildGraph(containerEditPart.getChildren());
 		layoutGraph.setData(containerEditPart);
@@ -95,11 +122,10 @@ public class GraphvizLayoutProvider extends DefaultProvider{
 		LayouterPlugin.getDefault().getCommonLayer().setLayoutGraph(layoutGraph);
 		
 		// update Diagram with methods from original eclipse layouter
-		Command cmd = updateDiagram(containerEditPart, layoutGraph, true);
-		
+		Command cmd = updateDiagram(containerEditPart, layoutGraph, true);		
 		return cmd;
 	}
-
+	
 	/**
 	 * Fills a <code>Graph</code> datastructure from EditParts.
 	 * 
@@ -350,13 +376,12 @@ public class GraphvizLayoutProvider extends DefaultProvider{
 				debugFigureHandler.addDebugPoint((GraphicalEditPart)gep.getParent(),newPosition, ColorConstants.green);
 				Point newPosition2 = new Point(newPosition.x+newSize.width, newPosition.y+newSize.height);
 				debugFigureHandler.addDebugPoint((GraphicalEditPart)gep.getParent(),newPosition2, ColorConstants.cyan);
-				
+
+// DEBUG //////////////////////////////////////////////				
 				// draw some debug stuff
-				for(int i = 0; i<100; i++)
-					for(int ii = 0; ii < 100; ii++)
-						; //debugFigureHandler.addDebugPoint((GraphicalEditPart)gep.getParent(), new Point(i,ii),ColorConstants.darkGreen);
-				debugFigureHandler.addDebugPoint((GraphicalEditPart)gep.getParent(), new Point(23,101),ColorConstants.darkGreen);
-				debugFigureHandler.addDebugPoint((GraphicalEditPart)gep.getParent(), new Point(23,31),ColorConstants.darkGreen);
+				debugFigureHandler.addDebugRectangle((GraphicalEditPart)((GraphicalEditPart)gep.getParent()).getRoot(), ((GraphicalEditPart)gep.getParent()).getFigure().getBounds(), ColorConstants.red);
+				System.out.println(((GraphicalEditPart)gep.getParent()).getFigure().getBounds());
+// End DEBUG //////////////////////////////////////////////
 				
 				//request.setSizeDelta(deltaSize);
 				request.setMoveDelta(delta);
@@ -439,7 +464,8 @@ public class GraphvizLayoutProvider extends DefaultProvider{
 				.getLayoutHint();
 		String layoutType = (String) layoutHint.getAdapter(String.class);
 		// this layouter supports only the GraphViz Dot Layout
-		return LayoutType.GRAPHVIZ_DOT.equals(layoutType);
+		return (LayoutType.GRAPHVIZ_DOT.equals(layoutType)
+				|| LayoutType.DEBUG.equals(layoutType));
 	}
 
 	@Override

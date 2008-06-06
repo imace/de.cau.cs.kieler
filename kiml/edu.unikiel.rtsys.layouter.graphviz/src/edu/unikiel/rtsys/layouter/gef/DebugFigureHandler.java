@@ -9,11 +9,20 @@ import kiel.layouter.graphviz.CrossFigure;
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.Figure;
 import org.eclipse.draw2d.IFigure;
+import org.eclipse.draw2d.Polyline;
+import org.eclipse.draw2d.RectangleFigure;
 import org.eclipse.draw2d.geometry.Point;
+import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.GraphicalEditPart;
 import org.eclipse.swt.graphics.Color;
 
+/**
+ * Helper class to add debug figures to some EditPart. The debug Figures can
+ * display debug information. Debug Figures can be refreshed in order to avoid
+ * explicit remove of debug items between multiple successive debug steps.
+ * @author haf
+ */
 public class DebugFigureHandler {
 	
 	HashMap<EditPart, DebugFigure> editPart2debugFigure = new HashMap<EditPart, DebugFigure>();
@@ -65,6 +74,10 @@ public class DebugFigureHandler {
 		df.addDebugPoint(p,c);
 	}
 	
+	public void addDebugRectangle(GraphicalEditPart containerEditPart, Rectangle bounds, Color c){
+		DebugFigure df = getDebugGraphics(containerEditPart);
+		df.addDebugRectangle(bounds, c);
+	}
 	
 	
 
@@ -72,6 +85,7 @@ public class DebugFigure extends Figure {
 
 	List<Point> debugPoints;
 	List<Color> debugColors;
+	List<Figure> debugRectangles;
 
 	public void refresh(boolean debug){
 		// remove all old stuff from the debug layer
@@ -86,9 +100,15 @@ public class DebugFigure extends Figure {
 					cross.setForegroundColor(c);
 					this.add(cross);
 				}
+				this.debugPoints.clear();
+				this.debugColors.clear();
 			}
-			this.debugPoints.clear();
-			this.debugColors.clear();
+			if(debugRectangles != null){
+				for (int i = 0; i<debugRectangles.size();i++) {
+					this.add(debugRectangles.get(i));
+				}
+				this.debugRectangles.clear();
+			}
 		}
 	}
 	
@@ -111,6 +131,27 @@ public class DebugFigure extends Figure {
 		}
 		debugPoints.add(p);
 		debugColors.add(c);
+	}
+	
+	private void addDebugRectangle(Rectangle b, Color c){
+		if(debugRectangles == null){
+			debugRectangles = new ArrayList<Figure>();
+		}
+		// use polyline instead of real rectangle, because a 
+		// RectangleFigure would always overlap most other Figures 
+		Polyline p = new Polyline();
+		// make everything 1 point smaller so it's visible in the parent
+		int offset = 1;
+		p.addPoint(new Point(b.x+offset,b.y+offset));
+		p.addPoint(new Point(b.x+b.width-offset,b.y+offset));
+		p.addPoint(new Point(b.x+b.width-offset,b.y+b.height-offset));
+		p.addPoint(new Point(b.x+offset,b.y+b.height-offset));
+		p.addPoint(new Point(b.x+offset,b.y+offset));
+/*		RectangleFigure r = new RectangleFigure();
+		r.setBounds(b);
+*/		p.setForegroundColor(c);
+		p.setLineWidth(5);
+		debugRectangles.add(p);
 	}
 }
 

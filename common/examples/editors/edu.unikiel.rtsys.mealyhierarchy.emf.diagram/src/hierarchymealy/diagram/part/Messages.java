@@ -283,6 +283,11 @@ public class Messages extends NLS {
 	/**
 	 * @generated
 	 */
+	public static String CompositeStateCompositeStateCompartment2EditPart_title;
+
+	/**
+	 * @generated
+	 */
 	public static String CommandName_OpenDiagram;
 
 	/**
@@ -293,22 +298,22 @@ public class Messages extends NLS {
 	/**
 	 * @generated
 	 */
-	public static String NavigatorGroupName_CompositeState_2004_incominglinks;
+	public static String NavigatorGroupName_CompositeState_2001_incominglinks;
 
 	/**
 	 * @generated
 	 */
-	public static String NavigatorGroupName_CompositeState_2004_outgoinglinks;
+	public static String NavigatorGroupName_CompositeState_2001_outgoinglinks;
 
 	/**
 	 * @generated
 	 */
-	public static String NavigatorGroupName_State_2003_incominglinks;
+	public static String NavigatorGroupName_State_2002_incominglinks;
 
 	/**
 	 * @generated
 	 */
-	public static String NavigatorGroupName_State_2003_outgoinglinks;
+	public static String NavigatorGroupName_State_2002_outgoinglinks;
 
 	/**
 	 * @generated
@@ -323,12 +328,12 @@ public class Messages extends NLS {
 	/**
 	 * @generated
 	 */
-	public static String NavigatorGroupName_CompositeState_3003_incominglinks;
+	public static String NavigatorGroupName_CompositeState_3002_incominglinks;
 
 	/**
 	 * @generated
 	 */
-	public static String NavigatorGroupName_CompositeState_3003_outgoinglinks;
+	public static String NavigatorGroupName_CompositeState_3002_outgoinglinks;
 
 	/**
 	 * @generated

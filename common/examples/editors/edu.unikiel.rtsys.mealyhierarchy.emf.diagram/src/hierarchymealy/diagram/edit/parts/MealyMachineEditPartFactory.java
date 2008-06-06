@@ -38,17 +38,17 @@ public class MealyMachineEditPartFactory implements EditPartFactory {
 			case CompositeStateNameEditPart.VISUAL_ID:
 				return new CompositeStateNameEditPart(view);
 
-			case State2EditPart.VISUAL_ID:
-				return new State2EditPart(view);
-
-			case StateName2EditPart.VISUAL_ID:
-				return new StateName2EditPart(view);
-
 			case StateEditPart.VISUAL_ID:
 				return new StateEditPart(view);
 
 			case StateNameEditPart.VISUAL_ID:
 				return new StateNameEditPart(view);
+
+			case State2EditPart.VISUAL_ID:
+				return new State2EditPart(view);
+
+			case StateName2EditPart.VISUAL_ID:
+				return new StateName2EditPart(view);
 
 			case CompositeState2EditPart.VISUAL_ID:
 				return new CompositeState2EditPart(view);
@@ -58,6 +58,10 @@ public class MealyMachineEditPartFactory implements EditPartFactory {
 
 			case CompositeStateCompositeStateCompartmentEditPart.VISUAL_ID:
 				return new CompositeStateCompositeStateCompartmentEditPart(view);
+
+			case CompositeStateCompositeStateCompartment2EditPart.VISUAL_ID:
+				return new CompositeStateCompositeStateCompartment2EditPart(
+						view);
 
 			case EdgeEditPart.VISUAL_ID:
 				return new EdgeEditPart(view);

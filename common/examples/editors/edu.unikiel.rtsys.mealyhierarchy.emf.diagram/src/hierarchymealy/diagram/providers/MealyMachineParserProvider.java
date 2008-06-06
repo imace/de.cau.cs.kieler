@@ -30,22 +30,22 @@ public class MealyMachineParserProvider extends AbstractProvider implements
 	/**
 	 * @generated
 	 */
-	private IParser compositeStateName_5007Parser;
+	private IParser compositeStateName_5003Parser;
 
 	/**
 	 * @generated
 	 */
-	private IParser getCompositeStateName_5007Parser() {
-		if (compositeStateName_5007Parser == null) {
-			compositeStateName_5007Parser = createCompositeStateName_5007Parser();
+	private IParser getCompositeStateName_5003Parser() {
+		if (compositeStateName_5003Parser == null) {
+			compositeStateName_5003Parser = createCompositeStateName_5003Parser();
 		}
-		return compositeStateName_5007Parser;
+		return compositeStateName_5003Parser;
 	}
 
 	/**
 	 * @generated
 	 */
-	protected IParser createCompositeStateName_5007Parser() {
+	protected IParser createCompositeStateName_5003Parser() {
 		EAttribute[] features = new EAttribute[] { MealyPackage.eINSTANCE
 				.getState_Name(), };
 		MessageFormatParser parser = new MessageFormatParser(features);
@@ -55,22 +55,22 @@ public class MealyMachineParserProvider extends AbstractProvider implements
 	/**
 	 * @generated
 	 */
-	private IParser stateName_5005Parser;
+	private IParser stateName_5004Parser;
 
 	/**
 	 * @generated
 	 */
-	private IParser getStateName_5005Parser() {
-		if (stateName_5005Parser == null) {
-			stateName_5005Parser = createStateName_5005Parser();
+	private IParser getStateName_5004Parser() {
+		if (stateName_5004Parser == null) {
+			stateName_5004Parser = createStateName_5004Parser();
 		}
-		return stateName_5005Parser;
+		return stateName_5004Parser;
 	}
 
 	/**
 	 * @generated
 	 */
-	protected IParser createStateName_5005Parser() {
+	protected IParser createStateName_5004Parser() {
 		EAttribute[] features = new EAttribute[] { MealyPackage.eINSTANCE
 				.getState_Name(), };
 		MessageFormatParser parser = new MessageFormatParser(features);
@@ -80,22 +80,22 @@ public class MealyMachineParserProvider extends AbstractProvider implements
 	/**
 	 * @generated
 	 */
-	private IParser stateName_5002Parser;
+	private IParser stateName_5001Parser;
 
 	/**
 	 * @generated
 	 */
-	private IParser getStateName_5002Parser() {
-		if (stateName_5002Parser == null) {
-			stateName_5002Parser = createStateName_5002Parser();
+	private IParser getStateName_5001Parser() {
+		if (stateName_5001Parser == null) {
+			stateName_5001Parser = createStateName_5001Parser();
 		}
-		return stateName_5002Parser;
+		return stateName_5001Parser;
 	}
 
 	/**
 	 * @generated
 	 */
-	protected IParser createStateName_5002Parser() {
+	protected IParser createStateName_5001Parser() {
 		EAttribute[] features = new EAttribute[] { MealyPackage.eINSTANCE
 				.getState_Name(), };
 		MessageFormatParser parser = new MessageFormatParser(features);
@@ -105,22 +105,22 @@ public class MealyMachineParserProvider extends AbstractProvider implements
 	/**
 	 * @generated
 	 */
-	private IParser compositeStateName_5006Parser;
+	private IParser compositeStateName_5002Parser;
 
 	/**
 	 * @generated
 	 */
-	private IParser getCompositeStateName_5006Parser() {
-		if (compositeStateName_5006Parser == null) {
-			compositeStateName_5006Parser = createCompositeStateName_5006Parser();
+	private IParser getCompositeStateName_5002Parser() {
+		if (compositeStateName_5002Parser == null) {
+			compositeStateName_5002Parser = createCompositeStateName_5002Parser();
 		}
-		return compositeStateName_5006Parser;
+		return compositeStateName_5002Parser;
 	}
 
 	/**
 	 * @generated
 	 */
-	protected IParser createCompositeStateName_5006Parser() {
+	protected IParser createCompositeStateName_5002Parser() {
 		EAttribute[] features = new EAttribute[] { MealyPackage.eINSTANCE
 				.getState_Name(), };
 		MessageFormatParser parser = new MessageFormatParser(features);
@@ -162,13 +162,13 @@ public class MealyMachineParserProvider extends AbstractProvider implements
 	protected IParser getParser(int visualID) {
 		switch (visualID) {
 		case CompositeStateNameEditPart.VISUAL_ID:
-			return getCompositeStateName_5007Parser();
-		case StateName2EditPart.VISUAL_ID:
-			return getStateName_5005Parser();
+			return getCompositeStateName_5003Parser();
 		case StateNameEditPart.VISUAL_ID:
-			return getStateName_5002Parser();
+			return getStateName_5004Parser();
+		case StateName2EditPart.VISUAL_ID:
+			return getStateName_5001Parser();
 		case CompositeStateName2EditPart.VISUAL_ID:
-			return getCompositeStateName_5006Parser();
+			return getCompositeStateName_5002Parser();
 		case EdgeTriggerActionEditPart.VISUAL_ID:
 			return getEdgeTriggerAction_6001Parser();
 		}

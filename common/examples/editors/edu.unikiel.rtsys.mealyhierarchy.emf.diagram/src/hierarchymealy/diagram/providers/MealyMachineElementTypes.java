@@ -52,11 +52,13 @@ public class MealyMachineElementTypes extends ElementInitializers {
 	/**
 	 * @generated
 	 */
-	public static final IElementType CompositeState_2004 = getElementType("edu.unikiel.rtsys.mealyhierarchy.emf.diagram.CompositeState_2004"); //$NON-NLS-1$
+	public static final IElementType CompositeState_2001 = getElementType("edu.unikiel.rtsys.mealyhierarchy.emf.diagram.CompositeState_2001"); //$NON-NLS-1$
+
 	/**
 	 * @generated
 	 */
-	public static final IElementType State_2003 = getElementType("edu.unikiel.rtsys.mealyhierarchy.emf.diagram.State_2003"); //$NON-NLS-1$
+	public static final IElementType State_2002 = getElementType("edu.unikiel.rtsys.mealyhierarchy.emf.diagram.State_2002"); //$NON-NLS-1$
+
 	/**
 	 * @generated
 	 */
@@ -64,7 +66,8 @@ public class MealyMachineElementTypes extends ElementInitializers {
 	/**
 	 * @generated
 	 */
-	public static final IElementType CompositeState_3003 = getElementType("edu.unikiel.rtsys.mealyhierarchy.emf.diagram.CompositeState_3003"); //$NON-NLS-1$
+	public static final IElementType CompositeState_3002 = getElementType("edu.unikiel.rtsys.mealyhierarchy.emf.diagram.CompositeState_3002"); //$NON-NLS-1$
+
 	/**
 	 * @generated
 	 */
@@ -184,14 +187,14 @@ public class MealyMachineElementTypes extends ElementInitializers {
 			elements.put(HierarchyMealyMachine_1000, MealyPackage.eINSTANCE
 					.getHierarchyMealyMachine());
 
-			elements.put(CompositeState_2004, MealyPackage.eINSTANCE
+			elements.put(CompositeState_2001, MealyPackage.eINSTANCE
 					.getCompositeState());
 
-			elements.put(State_2003, MealyPackage.eINSTANCE.getState());
+			elements.put(State_2002, MealyPackage.eINSTANCE.getState());
 
 			elements.put(State_3001, MealyPackage.eINSTANCE.getState());
 
-			elements.put(CompositeState_3003, MealyPackage.eINSTANCE
+			elements.put(CompositeState_3002, MealyPackage.eINSTANCE
 					.getCompositeState());
 
 			elements.put(Edge_4001, MealyPackage.eINSTANCE.getEdge());
@@ -213,10 +216,10 @@ public class MealyMachineElementTypes extends ElementInitializers {
 		if (KNOWN_ELEMENT_TYPES == null) {
 			KNOWN_ELEMENT_TYPES = new HashSet();
 			KNOWN_ELEMENT_TYPES.add(HierarchyMealyMachine_1000);
-			KNOWN_ELEMENT_TYPES.add(CompositeState_2004);
-			KNOWN_ELEMENT_TYPES.add(State_2003);
+			KNOWN_ELEMENT_TYPES.add(CompositeState_2001);
+			KNOWN_ELEMENT_TYPES.add(State_2002);
 			KNOWN_ELEMENT_TYPES.add(State_3001);
-			KNOWN_ELEMENT_TYPES.add(CompositeState_3003);
+			KNOWN_ELEMENT_TYPES.add(CompositeState_3002);
 			KNOWN_ELEMENT_TYPES.add(Edge_4001);
 		}
 		return KNOWN_ELEMENT_TYPES.contains(elementType);

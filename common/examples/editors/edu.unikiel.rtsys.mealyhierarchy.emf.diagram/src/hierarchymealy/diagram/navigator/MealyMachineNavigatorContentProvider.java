@@ -1,6 +1,7 @@
 package hierarchymealy.diagram.navigator;
 
 import hierarchymealy.diagram.edit.parts.CompositeState2EditPart;
+import hierarchymealy.diagram.edit.parts.CompositeStateCompositeStateCompartment2EditPart;
 import hierarchymealy.diagram.edit.parts.CompositeStateCompositeStateCompartmentEditPart;
 import hierarchymealy.diagram.edit.parts.CompositeStateEditPart;
 import hierarchymealy.diagram.edit.parts.EdgeEditPart;
@@ -228,7 +229,7 @@ public class MealyMachineNavigatorContentProvider implements
 			result.addAll(createNavigatorItems(connectedViews, parentElement,
 					false));
 			connectedViews = getChildrenByType(Collections.singleton(view),
-					State2EditPart.VISUAL_ID);
+					StateEditPart.VISUAL_ID);
 			result.addAll(createNavigatorItems(connectedViews, parentElement,
 					false));
 			connectedViews = getDiagramLinksByType(Collections.singleton(view),
@@ -245,16 +246,16 @@ public class MealyMachineNavigatorContentProvider implements
 		case CompositeStateEditPart.VISUAL_ID: {
 			Collection result = new ArrayList();
 			MealyMachineNavigatorGroup incominglinks = new MealyMachineNavigatorGroup(
-					Messages.NavigatorGroupName_CompositeState_2004_incominglinks,
+					Messages.NavigatorGroupName_CompositeState_2001_incominglinks,
 					"icons/incomingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
 			MealyMachineNavigatorGroup outgoinglinks = new MealyMachineNavigatorGroup(
-					Messages.NavigatorGroupName_CompositeState_2004_outgoinglinks,
+					Messages.NavigatorGroupName_CompositeState_2001_outgoinglinks,
 					"icons/outgoingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
 			Collection connectedViews = getChildrenByType(Collections
 					.singleton(view),
 					CompositeStateCompositeStateCompartmentEditPart.VISUAL_ID);
 			connectedViews = getChildrenByType(connectedViews,
-					StateEditPart.VISUAL_ID);
+					State2EditPart.VISUAL_ID);
 			result.addAll(createNavigatorItems(connectedViews, parentElement,
 					false));
 			connectedViews = getChildrenByType(Collections.singleton(view),
@@ -280,13 +281,13 @@ public class MealyMachineNavigatorContentProvider implements
 			return result.toArray();
 		}
 
-		case State2EditPart.VISUAL_ID: {
+		case StateEditPart.VISUAL_ID: {
 			Collection result = new ArrayList();
 			MealyMachineNavigatorGroup incominglinks = new MealyMachineNavigatorGroup(
-					Messages.NavigatorGroupName_State_2003_incominglinks,
+					Messages.NavigatorGroupName_State_2002_incominglinks,
 					"icons/incomingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
 			MealyMachineNavigatorGroup outgoinglinks = new MealyMachineNavigatorGroup(
-					Messages.NavigatorGroupName_State_2003_outgoinglinks,
+					Messages.NavigatorGroupName_State_2002_outgoinglinks,
 					"icons/outgoingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
 			Collection connectedViews = getIncomingLinksByType(Collections
 					.singleton(view), EdgeEditPart.VISUAL_ID);
@@ -305,7 +306,7 @@ public class MealyMachineNavigatorContentProvider implements
 			return result.toArray();
 		}
 
-		case StateEditPart.VISUAL_ID: {
+		case State2EditPart.VISUAL_ID: {
 			Collection result = new ArrayList();
 			MealyMachineNavigatorGroup incominglinks = new MealyMachineNavigatorGroup(
 					Messages.NavigatorGroupName_State_3001_incominglinks,
@@ -333,13 +334,26 @@ public class MealyMachineNavigatorContentProvider implements
 		case CompositeState2EditPart.VISUAL_ID: {
 			Collection result = new ArrayList();
 			MealyMachineNavigatorGroup incominglinks = new MealyMachineNavigatorGroup(
-					Messages.NavigatorGroupName_CompositeState_3003_incominglinks,
+					Messages.NavigatorGroupName_CompositeState_3002_incominglinks,
 					"icons/incomingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
 			MealyMachineNavigatorGroup outgoinglinks = new MealyMachineNavigatorGroup(
-					Messages.NavigatorGroupName_CompositeState_3003_outgoinglinks,
+					Messages.NavigatorGroupName_CompositeState_3002_outgoinglinks,
 					"icons/outgoingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
-			Collection connectedViews = getIncomingLinksByType(Collections
-					.singleton(view), EdgeEditPart.VISUAL_ID);
+			Collection connectedViews = getChildrenByType(Collections
+					.singleton(view),
+					CompositeStateCompositeStateCompartment2EditPart.VISUAL_ID);
+			connectedViews = getChildrenByType(connectedViews,
+					State2EditPart.VISUAL_ID);
+			result.addAll(createNavigatorItems(connectedViews, parentElement,
+					false));
+			connectedViews = getChildrenByType(Collections.singleton(view),
+					CompositeStateCompositeStateCompartment2EditPart.VISUAL_ID);
+			connectedViews = getChildrenByType(connectedViews,
+					CompositeState2EditPart.VISUAL_ID);
+			result.addAll(createNavigatorItems(connectedViews, parentElement,
+					false));
+			connectedViews = getIncomingLinksByType(
+					Collections.singleton(view), EdgeEditPart.VISUAL_ID);
 			incominglinks.addChildren(createNavigatorItems(connectedViews,
 					incominglinks, true));
 			connectedViews = getOutgoingLinksByType(
@@ -368,11 +382,11 @@ public class MealyMachineNavigatorContentProvider implements
 			target.addChildren(createNavigatorItems(connectedViews, target,
 					true));
 			connectedViews = getLinksTargetByType(Collections.singleton(view),
-					State2EditPart.VISUAL_ID);
+					StateEditPart.VISUAL_ID);
 			target.addChildren(createNavigatorItems(connectedViews, target,
 					true));
 			connectedViews = getLinksTargetByType(Collections.singleton(view),
-					StateEditPart.VISUAL_ID);
+					State2EditPart.VISUAL_ID);
 			target.addChildren(createNavigatorItems(connectedViews, target,
 					true));
 			connectedViews = getLinksTargetByType(Collections.singleton(view),
@@ -384,11 +398,11 @@ public class MealyMachineNavigatorContentProvider implements
 			source.addChildren(createNavigatorItems(connectedViews, source,
 					true));
 			connectedViews = getLinksSourceByType(Collections.singleton(view),
-					State2EditPart.VISUAL_ID);
+					StateEditPart.VISUAL_ID);
 			source.addChildren(createNavigatorItems(connectedViews, source,
 					true));
 			connectedViews = getLinksSourceByType(Collections.singleton(view),
-					StateEditPart.VISUAL_ID);
+					State2EditPart.VISUAL_ID);
 			source.addChildren(createNavigatorItems(connectedViews, source,
 					true));
 			connectedViews = getLinksSourceByType(Collections.singleton(view),

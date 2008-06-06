@@ -7,7 +7,7 @@ Bundle-ClassPath: .
 Bundle-Activator: hierarchymealy.diagram.part.MealyMachineDiagramEditorPlugin
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Export-Package: hierarchymealy.diagram.edit.parts, 
+Export-Package: hierarchymealy.diagram.edit.parts,
  hierarchymealy.diagram.part,
  hierarchymealy.diagram.providers
 Require-Bundle: org.eclipse.core.runtime,
@@ -35,5 +35,6 @@ Require-Bundle: org.eclipse.core.runtime,
  edu.unikiel.rtsys.mealyhierarchy.emf.edit;visibility:=reexport,
  org.eclipse.gmf.runtime.draw2d.ui;visibility:=reexport,
  org.eclipse.gef;visibility:=reexport,
- edu.unikiel.rtsys.layouter.graphviz;bundle-version="1.0.0"
+ edu.unikiel.rtsys.layouter.graphviz;bundle-version="1.0.0",
+ org.eclipse.ocl.ecore;visibility:=reexport
 Eclipse-LazyStart: true

@@ -2,6 +2,7 @@ package hierarchymealy.diagram.edit.policies;
 
 import hierarchymealy.MealyPackage;
 import hierarchymealy.diagram.edit.parts.CompositeState2EditPart;
+import hierarchymealy.diagram.edit.parts.State2EditPart;
 import hierarchymealy.diagram.edit.parts.StateEditPart;
 import hierarchymealy.diagram.part.MealyMachineDiagramUpdater;
 import hierarchymealy.diagram.part.MealyMachineNodeDescriptor;
@@ -35,7 +36,7 @@ public class CompositeStateCompositeStateCompartmentCanonicalEditPolicy extends
 		View viewObject = (View) getHost().getModel();
 		List result = new LinkedList();
 		for (Iterator it = MealyMachineDiagramUpdater
-				.getCompositeStateCompositeStateCompartment_7003SemanticChildren(
+				.getCompositeStateCompositeStateCompartment_7001SemanticChildren(
 						viewObject).iterator(); it.hasNext();) {
 			result.add(((MealyMachineNodeDescriptor) it.next())
 					.getModelElement());
@@ -49,7 +50,7 @@ public class CompositeStateCompositeStateCompartmentCanonicalEditPolicy extends
 	protected boolean isOrphaned(Collection semanticChildren, final View view) {
 		int visualID = MealyMachineVisualIDRegistry.getVisualID(view);
 		switch (visualID) {
-		case StateEditPart.VISUAL_ID:
+		case State2EditPart.VISUAL_ID:
 		case CompositeState2EditPart.VISUAL_ID:
 			return !semanticChildren.contains(view.getElement())
 					|| visualID != MealyMachineVisualIDRegistry

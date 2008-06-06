@@ -73,6 +73,11 @@
                   menubarPath="/diagramMenu/arrangeMenu/arrangeGroup"
                   toolbarPath="/arrangeMenu">
             </partAction>
+            <partAction
+                  id="edu.unikiel.rtsys.kieler.kiml.ui.testAction01"
+                  menubarPath="/diagramMenu/arrangeMenu/arrangeGroup"
+                  toolbarPath="/arrangeMenu">
+            </partAction>
          </partContribution>
       </contributionItemProvider>
    </extension>

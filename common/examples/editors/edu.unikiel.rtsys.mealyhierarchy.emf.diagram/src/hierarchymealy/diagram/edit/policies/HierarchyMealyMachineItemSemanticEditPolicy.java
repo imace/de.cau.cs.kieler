@@ -3,6 +3,7 @@ package hierarchymealy.diagram.edit.policies;
 import hierarchymealy.MealyPackage;
 import hierarchymealy.diagram.edit.commands.CompositeStateCreateCommand;
 import hierarchymealy.diagram.edit.commands.State2CreateCommand;
+import hierarchymealy.diagram.edit.commands.StateCreateCommand;
 import hierarchymealy.diagram.providers.MealyMachineElementTypes;
 
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
@@ -22,7 +23,7 @@ public class HierarchyMealyMachineItemSemanticEditPolicy extends
 	 * @generated
 	 */
 	protected Command getCreateCommand(CreateElementRequest req) {
-		if (MealyMachineElementTypes.CompositeState_2004 == req
+		if (MealyMachineElementTypes.CompositeState_2001 == req
 				.getElementType()) {
 			if (req.getContainmentFeature() == null) {
 				req.setContainmentFeature(MealyPackage.eINSTANCE
@@ -30,12 +31,12 @@ public class HierarchyMealyMachineItemSemanticEditPolicy extends
 			}
 			return getGEFWrapper(new CompositeStateCreateCommand(req));
 		}
-		if (MealyMachineElementTypes.State_2003 == req.getElementType()) {
+		if (MealyMachineElementTypes.State_2002 == req.getElementType()) {
 			if (req.getContainmentFeature() == null) {
 				req.setContainmentFeature(MealyPackage.eINSTANCE
 						.getCompositeState_Nodes());
 			}
-			return getGEFWrapper(new State2CreateCommand(req));
+			return getGEFWrapper(new StateCreateCommand(req));
 		}
 		return super.getCreateCommand(req);
 	}

@@ -3,6 +3,7 @@ package hierarchymealy.diagram.view.factories;
 import hierarchymealy.diagram.edit.parts.HierarchyMealyMachineEditPart;
 import hierarchymealy.diagram.edit.parts.State2EditPart;
 import hierarchymealy.diagram.edit.parts.StateName2EditPart;
+import hierarchymealy.diagram.edit.parts.StateNameEditPart;
 import hierarchymealy.diagram.part.MealyMachineVisualIDRegistry;
 
 import java.util.ArrayList;
@@ -45,15 +46,6 @@ public class State2ViewFactory extends AbstractShapeViewFactory {
 		}
 		super.decorateView(containerView, view, semanticAdapter, semanticHint,
 				index, persisted);
-		if (!HierarchyMealyMachineEditPart.MODEL_ID
-				.equals(MealyMachineVisualIDRegistry.getModelID(containerView))) {
-			EAnnotation shortcutAnnotation = EcoreFactory.eINSTANCE
-					.createEAnnotation();
-			shortcutAnnotation.setSource("Shortcut"); //$NON-NLS-1$
-			shortcutAnnotation.getDetails().put(
-					"modelID", HierarchyMealyMachineEditPart.MODEL_ID); //$NON-NLS-1$
-			view.getEAnnotations().add(shortcutAnnotation);
-		}
 		IAdaptable eObjectAdapter = null;
 		EObject eObject = (EObject) semanticAdapter.getAdapter(EObject.class);
 		if (eObject != null) {

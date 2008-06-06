@@ -2,7 +2,9 @@ package hierarchymealy.diagram.part;
 
 import hierarchymealy.HierarchyMealyMachine;
 import hierarchymealy.MealyPackage;
+import hierarchymealy.State;
 import hierarchymealy.diagram.edit.parts.CompositeState2EditPart;
+import hierarchymealy.diagram.edit.parts.CompositeStateCompositeStateCompartment2EditPart;
 import hierarchymealy.diagram.edit.parts.CompositeStateCompositeStateCompartmentEditPart;
 import hierarchymealy.diagram.edit.parts.CompositeStateEditPart;
 import hierarchymealy.diagram.edit.parts.CompositeStateName2EditPart;
@@ -15,6 +17,8 @@ import hierarchymealy.diagram.edit.parts.StateEditPart;
 import hierarchymealy.diagram.edit.parts.StateName2EditPart;
 import hierarchymealy.diagram.edit.parts.StateNameEditPart;
 
+import hierarchymealy.diagram.expressions.MealyMachineAbstractExpression;
+import hierarchymealy.diagram.expressions.MealyMachineOCLFactory;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EObject;
@@ -34,6 +38,15 @@ public class MealyMachineVisualIDRegistry {
 	 * @generated
 	 */
 	private static final String DEBUG_KEY = "edu.unikiel.rtsys.mealyhierarchy.emf.diagram/debug/visualID"; //$NON-NLS-1$
+
+	/**
+	 * @generated
+	 */
+	private static MealyMachineAbstractExpression State_2002_Constraint;
+	/**
+	 * @generated
+	 */
+	private static MealyMachineAbstractExpression State_3001_Constraint;
 
 	/**
 	 * @generated
@@ -130,8 +143,20 @@ public class MealyMachineVisualIDRegistry {
 		switch (containerVisualID) {
 		case CompositeStateCompositeStateCompartmentEditPart.VISUAL_ID:
 			if (MealyPackage.eINSTANCE.getState().isSuperTypeOf(
+					domainElement.eClass())
+					&& isState_3001((State) domainElement)) {
+				return State2EditPart.VISUAL_ID;
+			}
+			if (MealyPackage.eINSTANCE.getCompositeState().isSuperTypeOf(
 					domainElement.eClass())) {
-				return StateEditPart.VISUAL_ID;
+				return CompositeState2EditPart.VISUAL_ID;
+			}
+			break;
+		case CompositeStateCompositeStateCompartment2EditPart.VISUAL_ID:
+			if (MealyPackage.eINSTANCE.getState().isSuperTypeOf(
+					domainElement.eClass())
+					&& isState_3001((State) domainElement)) {
+				return State2EditPart.VISUAL_ID;
 			}
 			if (MealyPackage.eINSTANCE.getCompositeState().isSuperTypeOf(
 					domainElement.eClass())) {
@@ -144,8 +169,9 @@ public class MealyMachineVisualIDRegistry {
 				return CompositeStateEditPart.VISUAL_ID;
 			}
 			if (MealyPackage.eINSTANCE.getState().isSuperTypeOf(
-					domainElement.eClass())) {
-				return State2EditPart.VISUAL_ID;
+					domainElement.eClass())
+					&& isState_2002((State) domainElement)) {
+				return StateEditPart.VISUAL_ID;
 			}
 			break;
 		}
@@ -181,13 +207,13 @@ public class MealyMachineVisualIDRegistry {
 				return true;
 			}
 			break;
-		case State2EditPart.VISUAL_ID:
-			if (StateName2EditPart.VISUAL_ID == nodeVisualID) {
+		case StateEditPart.VISUAL_ID:
+			if (StateNameEditPart.VISUAL_ID == nodeVisualID) {
 				return true;
 			}
 			break;
-		case StateEditPart.VISUAL_ID:
-			if (StateNameEditPart.VISUAL_ID == nodeVisualID) {
+		case State2EditPart.VISUAL_ID:
+			if (StateName2EditPart.VISUAL_ID == nodeVisualID) {
 				return true;
 			}
 			break;
@@ -195,9 +221,20 @@ public class MealyMachineVisualIDRegistry {
 			if (CompositeStateName2EditPart.VISUAL_ID == nodeVisualID) {
 				return true;
 			}
+			if (CompositeStateCompositeStateCompartment2EditPart.VISUAL_ID == nodeVisualID) {
+				return true;
+			}
 			break;
 		case CompositeStateCompositeStateCompartmentEditPart.VISUAL_ID:
-			if (StateEditPart.VISUAL_ID == nodeVisualID) {
+			if (State2EditPart.VISUAL_ID == nodeVisualID) {
+				return true;
+			}
+			if (CompositeState2EditPart.VISUAL_ID == nodeVisualID) {
+				return true;
+			}
+			break;
+		case CompositeStateCompositeStateCompartment2EditPart.VISUAL_ID:
+			if (State2EditPart.VISUAL_ID == nodeVisualID) {
 				return true;
 			}
 			if (CompositeState2EditPart.VISUAL_ID == nodeVisualID) {
@@ -208,7 +245,7 @@ public class MealyMachineVisualIDRegistry {
 			if (CompositeStateEditPart.VISUAL_ID == nodeVisualID) {
 				return true;
 			}
-			if (State2EditPart.VISUAL_ID == nodeVisualID) {
+			if (StateEditPart.VISUAL_ID == nodeVisualID) {
 				return true;
 			}
 			break;
@@ -243,6 +280,32 @@ public class MealyMachineVisualIDRegistry {
 	 */
 	private static boolean isDiagram(HierarchyMealyMachine element) {
 		return true;
+	}
+
+	/**
+	 * @generated
+	 */
+	private static boolean isState_2002(State domainElement) {
+		if (State_2002_Constraint == null) { // lazy initialization
+			State_2002_Constraint = MealyMachineOCLFactory
+					.getExpression(
+							"not self.oclIsTypeOf(CompartmentState)", MealyPackage.eINSTANCE.getState()); //$NON-NLS-1$
+		}
+		Object result = State_2002_Constraint.evaluate(domainElement);
+		return result instanceof Boolean && ((Boolean) result).booleanValue();
+	}
+
+	/**
+	 * @generated
+	 */
+	private static boolean isState_3001(State domainElement) {
+		if (State_3001_Constraint == null) { // lazy initialization
+			State_3001_Constraint = MealyMachineOCLFactory
+					.getExpression(
+							"not self.oclIsTypeOf(CompartmentState)", MealyPackage.eINSTANCE.getState()); //$NON-NLS-1$
+		}
+		Object result = State_3001_Constraint.evaluate(domainElement);
+		return result instanceof Boolean && ((Boolean) result).booleanValue();
 	}
 
 }

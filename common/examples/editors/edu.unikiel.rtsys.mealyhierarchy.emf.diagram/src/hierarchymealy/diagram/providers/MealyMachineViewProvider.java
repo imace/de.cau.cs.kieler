@@ -1,6 +1,7 @@
 package hierarchymealy.diagram.providers;
 
 import hierarchymealy.diagram.edit.parts.CompositeState2EditPart;
+import hierarchymealy.diagram.edit.parts.CompositeStateCompositeStateCompartment2EditPart;
 import hierarchymealy.diagram.edit.parts.CompositeStateCompositeStateCompartmentEditPart;
 import hierarchymealy.diagram.edit.parts.CompositeStateEditPart;
 import hierarchymealy.diagram.edit.parts.CompositeStateName2EditPart;
@@ -14,6 +15,7 @@ import hierarchymealy.diagram.edit.parts.StateName2EditPart;
 import hierarchymealy.diagram.edit.parts.StateNameEditPart;
 import hierarchymealy.diagram.part.MealyMachineVisualIDRegistry;
 import hierarchymealy.diagram.view.factories.CompositeState2ViewFactory;
+import hierarchymealy.diagram.view.factories.CompositeStateCompositeStateCompartment2ViewFactory;
 import hierarchymealy.diagram.view.factories.CompositeStateCompositeStateCompartmentViewFactory;
 import hierarchymealy.diagram.view.factories.CompositeStateName2ViewFactory;
 import hierarchymealy.diagram.view.factories.CompositeStateNameViewFactory;
@@ -105,8 +107,8 @@ public class MealyMachineViewProvider extends AbstractViewProvider {
 				}
 				switch (visualID) {
 				case CompositeStateEditPart.VISUAL_ID:
-				case StateEditPart.VISUAL_ID:
 				case State2EditPart.VISUAL_ID:
+				case StateEditPart.VISUAL_ID:
 				case CompositeState2EditPart.VISUAL_ID:
 					if (domainElement == null
 							|| visualID != MealyMachineVisualIDRegistry
@@ -123,13 +125,6 @@ public class MealyMachineViewProvider extends AbstractViewProvider {
 						return null; // wrong container
 					}
 					break;
-				case StateName2EditPart.VISUAL_ID:
-					if (State2EditPart.VISUAL_ID != MealyMachineVisualIDRegistry
-							.getVisualID(containerView)
-							|| containerView.getElement() != domainElement) {
-						return null; // wrong container
-					}
-					break;
 				case StateNameEditPart.VISUAL_ID:
 					if (StateEditPart.VISUAL_ID != MealyMachineVisualIDRegistry
 							.getVisualID(containerView)
@@ -137,7 +132,15 @@ public class MealyMachineViewProvider extends AbstractViewProvider {
 						return null; // wrong container
 					}
 					break;
+				case StateName2EditPart.VISUAL_ID:
+					if (State2EditPart.VISUAL_ID != MealyMachineVisualIDRegistry
+							.getVisualID(containerView)
+							|| containerView.getElement() != domainElement) {
+						return null; // wrong container
+					}
+					break;
 				case CompositeStateName2EditPart.VISUAL_ID:
+				case CompositeStateCompositeStateCompartment2EditPart.VISUAL_ID:
 					if (CompositeState2EditPart.VISUAL_ID != MealyMachineVisualIDRegistry
 							.getVisualID(containerView)
 							|| containerView.getElement() != domainElement) {
@@ -173,20 +176,22 @@ public class MealyMachineViewProvider extends AbstractViewProvider {
 			return CompositeStateViewFactory.class;
 		case CompositeStateNameEditPart.VISUAL_ID:
 			return CompositeStateNameViewFactory.class;
-		case State2EditPart.VISUAL_ID:
-			return State2ViewFactory.class;
-		case StateName2EditPart.VISUAL_ID:
-			return StateName2ViewFactory.class;
 		case StateEditPart.VISUAL_ID:
 			return StateViewFactory.class;
 		case StateNameEditPart.VISUAL_ID:
 			return StateNameViewFactory.class;
+		case State2EditPart.VISUAL_ID:
+			return State2ViewFactory.class;
+		case StateName2EditPart.VISUAL_ID:
+			return StateName2ViewFactory.class;
 		case CompositeState2EditPart.VISUAL_ID:
 			return CompositeState2ViewFactory.class;
 		case CompositeStateName2EditPart.VISUAL_ID:
 			return CompositeStateName2ViewFactory.class;
 		case CompositeStateCompositeStateCompartmentEditPart.VISUAL_ID:
 			return CompositeStateCompositeStateCompartmentViewFactory.class;
+		case CompositeStateCompositeStateCompartment2EditPart.VISUAL_ID:
+			return CompositeStateCompositeStateCompartment2ViewFactory.class;
 		case EdgeTriggerActionEditPart.VISUAL_ID:
 			return EdgeTriggerActionViewFactory.class;
 		}

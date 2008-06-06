@@ -13,6 +13,7 @@ final public class LayoutType {
 	 * The dot layout from the GraphViz library.
 	 */
 	public static final String GRAPHVIZ_DOT = "GRAPHVIZ_DOT";
+	public static final String DEBUG = "DEBUG";
 	
 	
 }

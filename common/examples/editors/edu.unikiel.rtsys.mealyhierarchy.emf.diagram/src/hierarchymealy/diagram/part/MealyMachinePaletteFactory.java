@@ -44,7 +44,7 @@ public class MealyMachinePaletteFactory {
 	private ToolEntry createState1CreationTool() {
 		List/*<IElementType>*/types = new ArrayList/*<IElementType>*/(2);
 		types.add(MealyMachineElementTypes.State_3001);
-		types.add(MealyMachineElementTypes.State_2003);
+		types.add(MealyMachineElementTypes.State_2002);
 		NodeToolEntry entry = new NodeToolEntry(
 				Messages.State1CreationTool_title,
 				Messages.State1CreationTool_desc, types);
@@ -59,14 +59,14 @@ public class MealyMachinePaletteFactory {
 	 */
 	private ToolEntry createCompositeState2CreationTool() {
 		List/*<IElementType>*/types = new ArrayList/*<IElementType>*/(2);
-		types.add(MealyMachineElementTypes.CompositeState_2004);
-		types.add(MealyMachineElementTypes.CompositeState_3003);
+		types.add(MealyMachineElementTypes.CompositeState_2001);
+		types.add(MealyMachineElementTypes.CompositeState_3002);
 		NodeToolEntry entry = new NodeToolEntry(
 				Messages.CompositeState2CreationTool_title,
 				Messages.CompositeState2CreationTool_desc, types);
 		entry
 				.setSmallIcon(MealyMachineElementTypes
-						.getImageDescriptor(MealyMachineElementTypes.CompositeState_2004));
+						.getImageDescriptor(MealyMachineElementTypes.CompositeState_2001));
 		entry.setLargeIcon(entry.getSmallIcon());
 		return entry;
 	}

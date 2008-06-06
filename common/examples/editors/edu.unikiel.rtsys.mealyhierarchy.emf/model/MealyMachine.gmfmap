@@ -24,48 +24,16 @@
       <diagramNode
           href="MealyMachine.gmfgraph#CompositeState"/>
       <children
-          compartment="//@nodes.0/@ownedChild/@compartments.0">
+          compartment="//@nodes.0/@ownedChild/@compartments.0"
+          referencedChild="//@nodes.1/@ownedChild">
         <containmentFeature
             href="MealyMachine.ecore#//CompositeState/nodes"/>
-        <ownedChild>
-          <domainMetaElement
-              href="MealyMachine.ecore#//State"/>
-          <labelMappings
-              xsi:type="gmfmap:FeatureLabelMapping"
-              viewPattern="">
-            <diagramLabel
-                href="MealyMachine.gmfgraph#NodeName"/>
-            <features
-                href="MealyMachine.ecore#//State/name"/>
-          </labelMappings>
-          <tool
-              xsi:type="gmftool:CreationTool"
-              href="MealyMachine.gmftool#//@palette/@tools.0/@tools.0"/>
-          <diagramNode
-              href="MealyMachine.gmfgraph#Node"/>
-        </ownedChild>
       </children>
       <children
-          compartment="//@nodes.0/@ownedChild/@compartments.0">
+          compartment="//@nodes.0/@ownedChild/@compartments.0"
+          referencedChild="//@nodes.0/@ownedChild">
         <containmentFeature
             href="MealyMachine.ecore#//CompositeState/nodes"/>
-        <ownedChild>
-          <domainMetaElement
-              href="MealyMachine.ecore#//CompositeState"/>
-          <labelMappings
-              xsi:type="gmfmap:FeatureLabelMapping"
-              editorPattern="">
-            <diagramLabel
-                href="MealyMachine.gmfgraph#NodeName"/>
-            <features
-                href="MealyMachine.ecore#//State/name"/>
-          </labelMappings>
-          <tool
-              xsi:type="gmftool:CreationTool"
-              href="MealyMachine.gmftool#//@palette/@tools.0/@tools.1"/>
-          <diagramNode
-              href="MealyMachine.gmfgraph#CompositeState"/>
-        </ownedChild>
       </children>
       <compartments
           children="//@nodes.0/@ownedChild/@children.0 //@nodes.0/@ownedChild/@children.1">
@@ -80,6 +48,8 @@
     <ownedChild>
       <domainMetaElement
           href="MealyMachine.ecore#//State"/>
+      <domainSpecialization
+          body="not self.oclIsTypeOf(CompartmentState)"/>
       <labelMappings
           xsi:type="gmfmap:FeatureLabelMapping"
           editorPattern="">

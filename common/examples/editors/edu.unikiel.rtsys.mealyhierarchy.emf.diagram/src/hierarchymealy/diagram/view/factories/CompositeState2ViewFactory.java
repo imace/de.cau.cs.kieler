@@ -1,6 +1,7 @@
 package hierarchymealy.diagram.view.factories;
 
 import hierarchymealy.diagram.edit.parts.CompositeState2EditPart;
+import hierarchymealy.diagram.edit.parts.CompositeStateCompositeStateCompartment2EditPart;
 import hierarchymealy.diagram.edit.parts.CompositeStateName2EditPart;
 import hierarchymealy.diagram.part.MealyMachineVisualIDRegistry;
 
@@ -53,5 +54,12 @@ public class CompositeState2ViewFactory extends AbstractShapeViewFactory {
 				MealyMachineVisualIDRegistry
 						.getType(CompositeStateName2EditPart.VISUAL_ID),
 				ViewUtil.APPEND, true, getPreferencesHint());
+		getViewService()
+				.createNode(
+						eObjectAdapter,
+						view,
+						MealyMachineVisualIDRegistry
+								.getType(CompositeStateCompositeStateCompartment2EditPart.VISUAL_ID),
+						ViewUtil.APPEND, true, getPreferencesHint());
 	}
 }

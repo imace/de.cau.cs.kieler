@@ -12,6 +12,9 @@ public class KimlContributionItemProvider extends DiagramContributionItemProvide
 		if (KimlArrangeAction.ACTION_ID.equals(actionId)) {
 			return new KimlArrangeAction(partDescriptor.getPartPage());
 		}
+		if (KimlCommandTestAction.ACTION_ID.equals(actionId)) {
+			return new KimlCommandTestAction(partDescriptor.getPartPage());
+		}
 		return super.createAction(actionId, partDescriptor);
 	}
 }

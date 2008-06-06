@@ -1,6 +1,8 @@
 package hierarchymealy.diagram.providers;
 
+import hierarchymealy.diagram.edit.parts.CompositeStateCompositeStateCompartment2EditPart;
 import hierarchymealy.diagram.edit.parts.CompositeStateCompositeStateCompartmentEditPart;
+import hierarchymealy.diagram.edit.parts.CompositeStateEditPart;
 import hierarchymealy.diagram.edit.parts.HierarchyMealyMachineEditPart;
 import hierarchymealy.diagram.edit.parts.State2EditPart;
 import hierarchymealy.diagram.edit.parts.StateEditPart;
@@ -43,13 +45,19 @@ public class MealyMachineModelingAssistantProvider extends
 		if (editPart instanceof CompositeStateCompositeStateCompartmentEditPart) {
 			List types = new ArrayList();
 			types.add(MealyMachineElementTypes.State_3001);
-			types.add(MealyMachineElementTypes.CompositeState_3003);
+			types.add(MealyMachineElementTypes.CompositeState_3002);
+			return types;
+		}
+		if (editPart instanceof CompositeStateCompositeStateCompartment2EditPart) {
+			List types = new ArrayList();
+			types.add(MealyMachineElementTypes.State_3001);
+			types.add(MealyMachineElementTypes.CompositeState_3002);
 			return types;
 		}
 		if (editPart instanceof HierarchyMealyMachineEditPart) {
 			List types = new ArrayList();
-			types.add(MealyMachineElementTypes.CompositeState_2004);
-			types.add(MealyMachineElementTypes.State_2003);
+			types.add(MealyMachineElementTypes.CompositeState_2001);
+			types.add(MealyMachineElementTypes.State_2002);
 			return types;
 		}
 		return Collections.EMPTY_LIST;
@@ -61,12 +69,12 @@ public class MealyMachineModelingAssistantProvider extends
 	public List getRelTypesOnSource(IAdaptable source) {
 		IGraphicalEditPart sourceEditPart = (IGraphicalEditPart) source
 				.getAdapter(IGraphicalEditPart.class);
-		if (sourceEditPart instanceof State2EditPart) {
+		if (sourceEditPart instanceof StateEditPart) {
 			List types = new ArrayList();
 			types.add(MealyMachineElementTypes.Edge_4001);
 			return types;
 		}
-		if (sourceEditPart instanceof StateEditPart) {
+		if (sourceEditPart instanceof State2EditPart) {
 			List types = new ArrayList();
 			types.add(MealyMachineElementTypes.Edge_4001);
 			return types;
@@ -80,12 +88,12 @@ public class MealyMachineModelingAssistantProvider extends
 	public List getRelTypesOnTarget(IAdaptable target) {
 		IGraphicalEditPart targetEditPart = (IGraphicalEditPart) target
 				.getAdapter(IGraphicalEditPart.class);
-		if (targetEditPart instanceof State2EditPart) {
+		if (targetEditPart instanceof StateEditPart) {
 			List types = new ArrayList();
 			types.add(MealyMachineElementTypes.Edge_4001);
 			return types;
 		}
-		if (targetEditPart instanceof StateEditPart) {
+		if (targetEditPart instanceof State2EditPart) {
 			List types = new ArrayList();
 			types.add(MealyMachineElementTypes.Edge_4001);
 			return types;
@@ -102,22 +110,22 @@ public class MealyMachineModelingAssistantProvider extends
 				.getAdapter(IGraphicalEditPart.class);
 		IGraphicalEditPart targetEditPart = (IGraphicalEditPart) target
 				.getAdapter(IGraphicalEditPart.class);
-		if (sourceEditPart instanceof State2EditPart) {
+		if (sourceEditPart instanceof StateEditPart) {
 			List types = new ArrayList();
-			if (targetEditPart instanceof State2EditPart) {
+			if (targetEditPart instanceof StateEditPart) {
 				types.add(MealyMachineElementTypes.Edge_4001);
 			}
-			if (targetEditPart instanceof StateEditPart) {
+			if (targetEditPart instanceof State2EditPart) {
 				types.add(MealyMachineElementTypes.Edge_4001);
 			}
 			return types;
 		}
-		if (sourceEditPart instanceof StateEditPart) {
+		if (sourceEditPart instanceof State2EditPart) {
 			List types = new ArrayList();
-			if (targetEditPart instanceof State2EditPart) {
+			if (targetEditPart instanceof StateEditPart) {
 				types.add(MealyMachineElementTypes.Edge_4001);
 			}
-			if (targetEditPart instanceof StateEditPart) {
+			if (targetEditPart instanceof State2EditPart) {
 				types.add(MealyMachineElementTypes.Edge_4001);
 			}
 			return types;
@@ -132,20 +140,20 @@ public class MealyMachineModelingAssistantProvider extends
 			IElementType relationshipType) {
 		IGraphicalEditPart targetEditPart = (IGraphicalEditPart) target
 				.getAdapter(IGraphicalEditPart.class);
-		if (targetEditPart instanceof State2EditPart) {
+		if (targetEditPart instanceof StateEditPart) {
 			List types = new ArrayList();
 			if (relationshipType == MealyMachineElementTypes.Edge_4001) {
-				types.add(MealyMachineElementTypes.State_2003);
+				types.add(MealyMachineElementTypes.State_2002);
 			}
 			if (relationshipType == MealyMachineElementTypes.Edge_4001) {
 				types.add(MealyMachineElementTypes.State_3001);
 			}
 			return types;
 		}
-		if (targetEditPart instanceof StateEditPart) {
+		if (targetEditPart instanceof State2EditPart) {
 			List types = new ArrayList();
 			if (relationshipType == MealyMachineElementTypes.Edge_4001) {
-				types.add(MealyMachineElementTypes.State_2003);
+				types.add(MealyMachineElementTypes.State_2002);
 			}
 			if (relationshipType == MealyMachineElementTypes.Edge_4001) {
 				types.add(MealyMachineElementTypes.State_3001);
@@ -162,20 +170,20 @@ public class MealyMachineModelingAssistantProvider extends
 			IElementType relationshipType) {
 		IGraphicalEditPart sourceEditPart = (IGraphicalEditPart) source
 				.getAdapter(IGraphicalEditPart.class);
-		if (sourceEditPart instanceof State2EditPart) {
+		if (sourceEditPart instanceof StateEditPart) {
 			List types = new ArrayList();
 			if (relationshipType == MealyMachineElementTypes.Edge_4001) {
-				types.add(MealyMachineElementTypes.State_2003);
+				types.add(MealyMachineElementTypes.State_2002);
 			}
 			if (relationshipType == MealyMachineElementTypes.Edge_4001) {
 				types.add(MealyMachineElementTypes.State_3001);
 			}
 			return types;
 		}
-		if (sourceEditPart instanceof StateEditPart) {
+		if (sourceEditPart instanceof State2EditPart) {
 			List types = new ArrayList();
 			if (relationshipType == MealyMachineElementTypes.Edge_4001) {
-				types.add(MealyMachineElementTypes.State_2003);
+				types.add(MealyMachineElementTypes.State_2002);
 			}
 			if (relationshipType == MealyMachineElementTypes.Edge_4001) {
 				types.add(MealyMachineElementTypes.State_3001);

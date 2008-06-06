@@ -5,6 +5,7 @@ import hierarchymealy.diagram.edit.commands.EdgeReorientCommand;
 import hierarchymealy.diagram.edit.parts.CompositeState2EditPart;
 import hierarchymealy.diagram.edit.parts.CompositeStateCompositeStateCompartmentEditPart;
 import hierarchymealy.diagram.edit.parts.EdgeEditPart;
+import hierarchymealy.diagram.edit.parts.State2EditPart;
 import hierarchymealy.diagram.edit.parts.StateEditPart;
 import hierarchymealy.diagram.part.MealyMachineVisualIDRegistry;
 import hierarchymealy.diagram.providers.MealyMachineElementTypes;
@@ -59,7 +60,7 @@ public class CompositeStateItemSemanticEditPolicy extends
 						.hasNext();) {
 					Node cnode = (Node) cit.next();
 					switch (MealyMachineVisualIDRegistry.getVisualID(cnode)) {
-					case StateEditPart.VISUAL_ID:
+					case State2EditPart.VISUAL_ID:
 						cmd.add(getDestroyElementCommand(cnode));
 						break;
 					case CompositeState2EditPart.VISUAL_ID:

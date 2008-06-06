@@ -77,7 +77,7 @@ public class HierarchyMealyMachineCanonicalEditPolicy extends
 		int visualID = MealyMachineVisualIDRegistry.getVisualID(view);
 		switch (visualID) {
 		case CompositeStateEditPart.VISUAL_ID:
-		case State2EditPart.VISUAL_ID:
+		case StateEditPart.VISUAL_ID:
 			return !semanticChildren.contains(view.getElement())
 					|| visualID != MealyMachineVisualIDRegistry
 							.getNodeVisualID((View) getHost().getModel(), view
@@ -228,18 +228,7 @@ public class HierarchyMealyMachineCanonicalEditPolicy extends
 		case CompositeStateEditPart.VISUAL_ID: {
 			if (!domain2NotationMap.containsKey(view.getElement())) {
 				result.addAll(MealyMachineDiagramUpdater
-						.getCompositeState_2004ContainedLinks(view));
-			}
-			if (!domain2NotationMap.containsKey(view.getElement())
-					|| view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
-				domain2NotationMap.put(view.getElement(), view);
-			}
-			break;
-		}
-		case State2EditPart.VISUAL_ID: {
-			if (!domain2NotationMap.containsKey(view.getElement())) {
-				result.addAll(MealyMachineDiagramUpdater
-						.getState_2003ContainedLinks(view));
+						.getCompositeState_2001ContainedLinks(view));
 			}
 			if (!domain2NotationMap.containsKey(view.getElement())
 					|| view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
@@ -248,6 +237,17 @@ public class HierarchyMealyMachineCanonicalEditPolicy extends
 			break;
 		}
 		case StateEditPart.VISUAL_ID: {
+			if (!domain2NotationMap.containsKey(view.getElement())) {
+				result.addAll(MealyMachineDiagramUpdater
+						.getState_2002ContainedLinks(view));
+			}
+			if (!domain2NotationMap.containsKey(view.getElement())
+					|| view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
+				domain2NotationMap.put(view.getElement(), view);
+			}
+			break;
+		}
+		case State2EditPart.VISUAL_ID: {
 			if (!domain2NotationMap.containsKey(view.getElement())) {
 				result.addAll(MealyMachineDiagramUpdater
 						.getState_3001ContainedLinks(view));
@@ -261,7 +261,7 @@ public class HierarchyMealyMachineCanonicalEditPolicy extends
 		case CompositeState2EditPart.VISUAL_ID: {
 			if (!domain2NotationMap.containsKey(view.getElement())) {
 				result.addAll(MealyMachineDiagramUpdater
-						.getCompositeState_3003ContainedLinks(view));
+						.getCompositeState_3002ContainedLinks(view));
 			}
 			if (!domain2NotationMap.containsKey(view.getElement())
 					|| view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$

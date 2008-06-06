@@ -347,6 +347,11 @@ public class MealyMachineBaseItemSemanticEditPolicy extends SemanticEditPolicy {
 		/**
 		 * @generated
 		 */
+		private static final String OPPOSITE_END_VAR = "oppositeEnd"; //$NON-NLS-1$
+
+		/**
+		 * @generated
+		 */
 		public static boolean canCreateEdge_4001(CompositeState container,
 				State source, State target) {
 			return canExistEdge_4001(container, source, target);

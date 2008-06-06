@@ -6,6 +6,7 @@ import hierarchymealy.HierarchyMealyMachine;
 import hierarchymealy.MealyPackage;
 import hierarchymealy.State;
 import hierarchymealy.diagram.edit.parts.CompositeState2EditPart;
+import hierarchymealy.diagram.edit.parts.CompositeStateCompositeStateCompartment2EditPart;
 import hierarchymealy.diagram.edit.parts.CompositeStateCompositeStateCompartmentEditPart;
 import hierarchymealy.diagram.edit.parts.CompositeStateEditPart;
 import hierarchymealy.diagram.edit.parts.EdgeEditPart;
@@ -37,7 +38,9 @@ public class MealyMachineDiagramUpdater {
 	public static List getSemanticChildren(View view) {
 		switch (MealyMachineVisualIDRegistry.getVisualID(view)) {
 		case CompositeStateCompositeStateCompartmentEditPart.VISUAL_ID:
-			return getCompositeStateCompositeStateCompartment_7003SemanticChildren(view);
+			return getCompositeStateCompositeStateCompartment_7001SemanticChildren(view);
+		case CompositeStateCompositeStateCompartment2EditPart.VISUAL_ID:
+			return getCompositeStateCompositeStateCompartment_7002SemanticChildren(view);
 		case HierarchyMealyMachineEditPart.VISUAL_ID:
 			return getHierarchyMealyMachine_1000SemanticChildren(view);
 		}
@@ -47,7 +50,7 @@ public class MealyMachineDiagramUpdater {
 	/**
 	 * @generated
 	 */
-	public static List getCompositeStateCompositeStateCompartment_7003SemanticChildren(
+	public static List getCompositeStateCompositeStateCompartment_7001SemanticChildren(
 			View view) {
 		if (false == view.eContainer() instanceof View) {
 			return Collections.EMPTY_LIST;
@@ -63,7 +66,40 @@ public class MealyMachineDiagramUpdater {
 			State childElement = (State) it.next();
 			int visualID = MealyMachineVisualIDRegistry.getNodeVisualID(view,
 					childElement);
-			if (visualID == StateEditPart.VISUAL_ID) {
+			if (visualID == State2EditPart.VISUAL_ID) {
+				result.add(new MealyMachineNodeDescriptor(childElement,
+						visualID));
+				continue;
+			}
+			if (visualID == CompositeState2EditPart.VISUAL_ID) {
+				result.add(new MealyMachineNodeDescriptor(childElement,
+						visualID));
+				continue;
+			}
+		}
+		return result;
+	}
+
+	/**
+	 * @generated
+	 */
+	public static List getCompositeStateCompositeStateCompartment_7002SemanticChildren(
+			View view) {
+		if (false == view.eContainer() instanceof View) {
+			return Collections.EMPTY_LIST;
+		}
+		View containerView = (View) view.eContainer();
+		if (!containerView.isSetElement()) {
+			return Collections.EMPTY_LIST;
+		}
+		CompositeState modelElement = (CompositeState) containerView
+				.getElement();
+		List result = new LinkedList();
+		for (Iterator it = modelElement.getNodes().iterator(); it.hasNext();) {
+			State childElement = (State) it.next();
+			int visualID = MealyMachineVisualIDRegistry.getNodeVisualID(view,
+					childElement);
+			if (visualID == State2EditPart.VISUAL_ID) {
 				result.add(new MealyMachineNodeDescriptor(childElement,
 						visualID));
 				continue;
@@ -96,7 +132,7 @@ public class MealyMachineDiagramUpdater {
 						visualID));
 				continue;
 			}
-			if (visualID == State2EditPart.VISUAL_ID) {
+			if (visualID == StateEditPart.VISUAL_ID) {
 				result.add(new MealyMachineNodeDescriptor(childElement,
 						visualID));
 				continue;
@@ -113,13 +149,13 @@ public class MealyMachineDiagramUpdater {
 		case HierarchyMealyMachineEditPart.VISUAL_ID:
 			return getHierarchyMealyMachine_1000ContainedLinks(view);
 		case CompositeStateEditPart.VISUAL_ID:
-			return getCompositeState_2004ContainedLinks(view);
-		case State2EditPart.VISUAL_ID:
-			return getState_2003ContainedLinks(view);
+			return getCompositeState_2001ContainedLinks(view);
 		case StateEditPart.VISUAL_ID:
+			return getState_2002ContainedLinks(view);
+		case State2EditPart.VISUAL_ID:
 			return getState_3001ContainedLinks(view);
 		case CompositeState2EditPart.VISUAL_ID:
-			return getCompositeState_3003ContainedLinks(view);
+			return getCompositeState_3002ContainedLinks(view);
 		case EdgeEditPart.VISUAL_ID:
 			return getEdge_4001ContainedLinks(view);
 		}
@@ -132,13 +168,13 @@ public class MealyMachineDiagramUpdater {
 	public static List getIncomingLinks(View view) {
 		switch (MealyMachineVisualIDRegistry.getVisualID(view)) {
 		case CompositeStateEditPart.VISUAL_ID:
-			return getCompositeState_2004IncomingLinks(view);
-		case State2EditPart.VISUAL_ID:
-			return getState_2003IncomingLinks(view);
+			return getCompositeState_2001IncomingLinks(view);
 		case StateEditPart.VISUAL_ID:
+			return getState_2002IncomingLinks(view);
+		case State2EditPart.VISUAL_ID:
 			return getState_3001IncomingLinks(view);
 		case CompositeState2EditPart.VISUAL_ID:
-			return getCompositeState_3003IncomingLinks(view);
+			return getCompositeState_3002IncomingLinks(view);
 		case EdgeEditPart.VISUAL_ID:
 			return getEdge_4001IncomingLinks(view);
 		}
@@ -151,13 +187,13 @@ public class MealyMachineDiagramUpdater {
 	public static List getOutgoingLinks(View view) {
 		switch (MealyMachineVisualIDRegistry.getVisualID(view)) {
 		case CompositeStateEditPart.VISUAL_ID:
-			return getCompositeState_2004OutgoingLinks(view);
-		case State2EditPart.VISUAL_ID:
-			return getState_2003OutgoingLinks(view);
+			return getCompositeState_2001OutgoingLinks(view);
 		case StateEditPart.VISUAL_ID:
+			return getState_2002OutgoingLinks(view);
+		case State2EditPart.VISUAL_ID:
 			return getState_3001OutgoingLinks(view);
 		case CompositeState2EditPart.VISUAL_ID:
-			return getCompositeState_3003OutgoingLinks(view);
+			return getCompositeState_3002OutgoingLinks(view);
 		case EdgeEditPart.VISUAL_ID:
 			return getEdge_4001OutgoingLinks(view);
 		}
@@ -178,7 +214,7 @@ public class MealyMachineDiagramUpdater {
 	/**
 	 * @generated
 	 */
-	public static List getCompositeState_2004ContainedLinks(View view) {
+	public static List getCompositeState_2001ContainedLinks(View view) {
 		CompositeState modelElement = (CompositeState) view.getElement();
 		List result = new LinkedList();
 		result.addAll(getContainedTypeModelFacetLinks_Edge_4001(modelElement));
@@ -188,7 +224,7 @@ public class MealyMachineDiagramUpdater {
 	/**
 	 * @generated
 	 */
-	public static List getState_2003ContainedLinks(View view) {
+	public static List getState_2002ContainedLinks(View view) {
 		return Collections.EMPTY_LIST;
 	}
 
@@ -202,7 +238,7 @@ public class MealyMachineDiagramUpdater {
 	/**
 	 * @generated
 	 */
-	public static List getCompositeState_3003ContainedLinks(View view) {
+	public static List getCompositeState_3002ContainedLinks(View view) {
 		CompositeState modelElement = (CompositeState) view.getElement();
 		List result = new LinkedList();
 		result.addAll(getContainedTypeModelFacetLinks_Edge_4001(modelElement));
@@ -219,7 +255,7 @@ public class MealyMachineDiagramUpdater {
 	/**
 	 * @generated
 	 */
-	public static List getCompositeState_2004IncomingLinks(View view) {
+	public static List getCompositeState_2001IncomingLinks(View view) {
 		CompositeState modelElement = (CompositeState) view.getElement();
 		Map crossReferences = EcoreUtil.CrossReferencer.find(view.eResource()
 				.getResourceSet().getResources());
@@ -232,7 +268,7 @@ public class MealyMachineDiagramUpdater {
 	/**
 	 * @generated
 	 */
-	public static List getState_2003IncomingLinks(View view) {
+	public static List getState_2002IncomingLinks(View view) {
 		State modelElement = (State) view.getElement();
 		Map crossReferences = EcoreUtil.CrossReferencer.find(view.eResource()
 				.getResourceSet().getResources());
@@ -258,7 +294,7 @@ public class MealyMachineDiagramUpdater {
 	/**
 	 * @generated
 	 */
-	public static List getCompositeState_3003IncomingLinks(View view) {
+	public static List getCompositeState_3002IncomingLinks(View view) {
 		CompositeState modelElement = (CompositeState) view.getElement();
 		Map crossReferences = EcoreUtil.CrossReferencer.find(view.eResource()
 				.getResourceSet().getResources());
@@ -278,7 +314,7 @@ public class MealyMachineDiagramUpdater {
 	/**
 	 * @generated
 	 */
-	public static List getCompositeState_2004OutgoingLinks(View view) {
+	public static List getCompositeState_2001OutgoingLinks(View view) {
 		CompositeState modelElement = (CompositeState) view.getElement();
 		List result = new LinkedList();
 		result.addAll(getOutgoingTypeModelFacetLinks_Edge_4001(modelElement));
@@ -288,7 +324,7 @@ public class MealyMachineDiagramUpdater {
 	/**
 	 * @generated
 	 */
-	public static List getState_2003OutgoingLinks(View view) {
+	public static List getState_2002OutgoingLinks(View view) {
 		State modelElement = (State) view.getElement();
 		List result = new LinkedList();
 		result.addAll(getOutgoingTypeModelFacetLinks_Edge_4001(modelElement));
@@ -308,7 +344,7 @@ public class MealyMachineDiagramUpdater {
 	/**
 	 * @generated
 	 */
-	public static List getCompositeState_3003OutgoingLinks(View view) {
+	public static List getCompositeState_3002OutgoingLinks(View view) {
 		CompositeState modelElement = (CompositeState) view.getElement();
 		List result = new LinkedList();
 		result.addAll(getOutgoingTypeModelFacetLinks_Edge_4001(modelElement));

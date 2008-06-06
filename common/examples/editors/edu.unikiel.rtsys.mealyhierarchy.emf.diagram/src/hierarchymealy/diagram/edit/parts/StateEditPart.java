@@ -29,7 +29,7 @@ public class StateEditPart extends ShapeNodeEditPart {
 	/**
 	 * @generated
 	 */
-	public static final int VISUAL_ID = 3001;
+	public static final int VISUAL_ID = 2002;
 
 	/**
 	 * @generated
@@ -154,7 +154,7 @@ public class StateEditPart extends ShapeNodeEditPart {
 	 */
 	protected org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure createNodePlate() {
 		DefaultSizeNodeFigure result = new DefaultSizeNodeFigure(getMapMode()
-				.DPtoLP(20), getMapMode().DPtoLP(20));
+				.DPtoLP(40), getMapMode().DPtoLP(40));
 		return result;
 	}
 
