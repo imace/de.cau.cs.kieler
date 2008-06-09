@@ -44,20 +44,20 @@ public class MealyMachineModelingAssistantProvider extends
 				.getAdapter(IGraphicalEditPart.class);
 		if (editPart instanceof CompositeStateCompositeStateCompartmentEditPart) {
 			List types = new ArrayList();
-			types.add(MealyMachineElementTypes.State_3001);
-			types.add(MealyMachineElementTypes.CompositeState_3002);
+			types.add(MealyMachineElementTypes.State_2001);
+			types.add(MealyMachineElementTypes.CompositeState_2002);
 			return types;
 		}
 		if (editPart instanceof CompositeStateCompositeStateCompartment2EditPart) {
 			List types = new ArrayList();
-			types.add(MealyMachineElementTypes.State_3001);
-			types.add(MealyMachineElementTypes.CompositeState_3002);
+			types.add(MealyMachineElementTypes.State_2001);
+			types.add(MealyMachineElementTypes.CompositeState_2002);
 			return types;
 		}
 		if (editPart instanceof HierarchyMealyMachineEditPart) {
 			List types = new ArrayList();
-			types.add(MealyMachineElementTypes.CompositeState_2001);
-			types.add(MealyMachineElementTypes.State_2002);
+			types.add(MealyMachineElementTypes.CompositeState_1001);
+			types.add(MealyMachineElementTypes.State_1002);
 			return types;
 		}
 		return Collections.EMPTY_LIST;
@@ -71,12 +71,12 @@ public class MealyMachineModelingAssistantProvider extends
 				.getAdapter(IGraphicalEditPart.class);
 		if (sourceEditPart instanceof StateEditPart) {
 			List types = new ArrayList();
-			types.add(MealyMachineElementTypes.Edge_4001);
+			types.add(MealyMachineElementTypes.Edge_3001);
 			return types;
 		}
 		if (sourceEditPart instanceof State2EditPart) {
 			List types = new ArrayList();
-			types.add(MealyMachineElementTypes.Edge_4001);
+			types.add(MealyMachineElementTypes.Edge_3001);
 			return types;
 		}
 		return Collections.EMPTY_LIST;
@@ -90,12 +90,12 @@ public class MealyMachineModelingAssistantProvider extends
 				.getAdapter(IGraphicalEditPart.class);
 		if (targetEditPart instanceof StateEditPart) {
 			List types = new ArrayList();
-			types.add(MealyMachineElementTypes.Edge_4001);
+			types.add(MealyMachineElementTypes.Edge_3001);
 			return types;
 		}
 		if (targetEditPart instanceof State2EditPart) {
 			List types = new ArrayList();
-			types.add(MealyMachineElementTypes.Edge_4001);
+			types.add(MealyMachineElementTypes.Edge_3001);
 			return types;
 		}
 		return Collections.EMPTY_LIST;
@@ -113,20 +113,20 @@ public class MealyMachineModelingAssistantProvider extends
 		if (sourceEditPart instanceof StateEditPart) {
 			List types = new ArrayList();
 			if (targetEditPart instanceof StateEditPart) {
-				types.add(MealyMachineElementTypes.Edge_4001);
+				types.add(MealyMachineElementTypes.Edge_3001);
 			}
 			if (targetEditPart instanceof State2EditPart) {
-				types.add(MealyMachineElementTypes.Edge_4001);
+				types.add(MealyMachineElementTypes.Edge_3001);
 			}
 			return types;
 		}
 		if (sourceEditPart instanceof State2EditPart) {
 			List types = new ArrayList();
 			if (targetEditPart instanceof StateEditPart) {
-				types.add(MealyMachineElementTypes.Edge_4001);
+				types.add(MealyMachineElementTypes.Edge_3001);
 			}
 			if (targetEditPart instanceof State2EditPart) {
-				types.add(MealyMachineElementTypes.Edge_4001);
+				types.add(MealyMachineElementTypes.Edge_3001);
 			}
 			return types;
 		}
@@ -142,21 +142,21 @@ public class MealyMachineModelingAssistantProvider extends
 				.getAdapter(IGraphicalEditPart.class);
 		if (targetEditPart instanceof StateEditPart) {
 			List types = new ArrayList();
-			if (relationshipType == MealyMachineElementTypes.Edge_4001) {
-				types.add(MealyMachineElementTypes.State_2002);
+			if (relationshipType == MealyMachineElementTypes.Edge_3001) {
+				types.add(MealyMachineElementTypes.State_1002);
 			}
-			if (relationshipType == MealyMachineElementTypes.Edge_4001) {
-				types.add(MealyMachineElementTypes.State_3001);
+			if (relationshipType == MealyMachineElementTypes.Edge_3001) {
+				types.add(MealyMachineElementTypes.State_2001);
 			}
 			return types;
 		}
 		if (targetEditPart instanceof State2EditPart) {
 			List types = new ArrayList();
-			if (relationshipType == MealyMachineElementTypes.Edge_4001) {
-				types.add(MealyMachineElementTypes.State_2002);
+			if (relationshipType == MealyMachineElementTypes.Edge_3001) {
+				types.add(MealyMachineElementTypes.State_1002);
 			}
-			if (relationshipType == MealyMachineElementTypes.Edge_4001) {
-				types.add(MealyMachineElementTypes.State_3001);
+			if (relationshipType == MealyMachineElementTypes.Edge_3001) {
+				types.add(MealyMachineElementTypes.State_2001);
 			}
 			return types;
 		}
@@ -172,21 +172,21 @@ public class MealyMachineModelingAssistantProvider extends
 				.getAdapter(IGraphicalEditPart.class);
 		if (sourceEditPart instanceof StateEditPart) {
 			List types = new ArrayList();
-			if (relationshipType == MealyMachineElementTypes.Edge_4001) {
-				types.add(MealyMachineElementTypes.State_2002);
+			if (relationshipType == MealyMachineElementTypes.Edge_3001) {
+				types.add(MealyMachineElementTypes.State_1002);
 			}
-			if (relationshipType == MealyMachineElementTypes.Edge_4001) {
-				types.add(MealyMachineElementTypes.State_3001);
+			if (relationshipType == MealyMachineElementTypes.Edge_3001) {
+				types.add(MealyMachineElementTypes.State_2001);
 			}
 			return types;
 		}
 		if (sourceEditPart instanceof State2EditPart) {
 			List types = new ArrayList();
-			if (relationshipType == MealyMachineElementTypes.Edge_4001) {
-				types.add(MealyMachineElementTypes.State_2002);
+			if (relationshipType == MealyMachineElementTypes.Edge_3001) {
+				types.add(MealyMachineElementTypes.State_1002);
 			}
-			if (relationshipType == MealyMachineElementTypes.Edge_4001) {
-				types.add(MealyMachineElementTypes.State_3001);
+			if (relationshipType == MealyMachineElementTypes.Edge_3001) {
+				types.add(MealyMachineElementTypes.State_2001);
 			}
 			return types;
 		}

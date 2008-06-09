@@ -49,7 +49,7 @@
       <domainMetaElement
           href="MealyMachine.ecore#//State"/>
       <domainSpecialization
-          body="not self.oclIsTypeOf(CompartmentState)"/>
+          body="not self.oclIsTypeOf(hierarchymealy::CompositeState)"/>
       <labelMappings
           xsi:type="gmfmap:FeatureLabelMapping"
           editorPattern="">

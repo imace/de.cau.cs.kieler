@@ -23,7 +23,7 @@ public class HierarchyMealyMachineItemSemanticEditPolicy extends
 	 * @generated
 	 */
 	protected Command getCreateCommand(CreateElementRequest req) {
-		if (MealyMachineElementTypes.CompositeState_2001 == req
+		if (MealyMachineElementTypes.CompositeState_1001 == req
 				.getElementType()) {
 			if (req.getContainmentFeature() == null) {
 				req.setContainmentFeature(MealyPackage.eINSTANCE
@@ -31,7 +31,7 @@ public class HierarchyMealyMachineItemSemanticEditPolicy extends
 			}
 			return getGEFWrapper(new CompositeStateCreateCommand(req));
 		}
-		if (MealyMachineElementTypes.State_2002 == req.getElementType()) {
+		if (MealyMachineElementTypes.State_1002 == req.getElementType()) {
 			if (req.getContainmentFeature() == null) {
 				req.setContainmentFeature(MealyPackage.eINSTANCE
 						.getCompositeState_Nodes());

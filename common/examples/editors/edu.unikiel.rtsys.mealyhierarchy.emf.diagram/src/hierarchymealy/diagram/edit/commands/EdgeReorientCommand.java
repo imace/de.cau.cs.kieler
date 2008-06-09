@@ -72,7 +72,7 @@ public class EdgeReorientCommand extends EditElementCommand {
 		}
 		CompositeState container = (CompositeState) getLink().eContainer();
 		return MealyMachineBaseItemSemanticEditPolicy.LinkConstraints
-				.canExistEdge_4001(container, getNewSource(), target);
+				.canExistEdge_3001(container, getNewSource(), target);
 	}
 
 	/**
@@ -88,7 +88,7 @@ public class EdgeReorientCommand extends EditElementCommand {
 		}
 		CompositeState container = (CompositeState) getLink().eContainer();
 		return MealyMachineBaseItemSemanticEditPolicy.LinkConstraints
-				.canExistEdge_4001(container, source, getNewTarget());
+				.canExistEdge_3001(container, source, getNewTarget());
 	}
 
 	/**

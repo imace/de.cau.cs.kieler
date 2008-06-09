@@ -36,7 +36,7 @@ public class CompositeStateCompositeStateCompartmentCanonicalEditPolicy extends
 		View viewObject = (View) getHost().getModel();
 		List result = new LinkedList();
 		for (Iterator it = MealyMachineDiagramUpdater
-				.getCompositeStateCompositeStateCompartment_7001SemanticChildren(
+				.getCompositeStateCompositeStateCompartment_5001SemanticChildren(
 						viewObject).iterator(); it.hasNext();) {
 			result.add(((MealyMachineNodeDescriptor) it.next())
 					.getModelElement());

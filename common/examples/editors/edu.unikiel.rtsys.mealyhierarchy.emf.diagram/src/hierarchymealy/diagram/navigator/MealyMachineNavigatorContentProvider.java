@@ -222,7 +222,7 @@ public class MealyMachineNavigatorContentProvider implements
 		case HierarchyMealyMachineEditPart.VISUAL_ID: {
 			Collection result = new ArrayList();
 			MealyMachineNavigatorGroup links = new MealyMachineNavigatorGroup(
-					Messages.NavigatorGroupName_HierarchyMealyMachine_1000_links,
+					Messages.NavigatorGroupName_HierarchyMealyMachine_79_links,
 					"icons/linksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
 			Collection connectedViews = getChildrenByType(Collections
 					.singleton(view), CompositeStateEditPart.VISUAL_ID);
@@ -246,10 +246,10 @@ public class MealyMachineNavigatorContentProvider implements
 		case CompositeStateEditPart.VISUAL_ID: {
 			Collection result = new ArrayList();
 			MealyMachineNavigatorGroup incominglinks = new MealyMachineNavigatorGroup(
-					Messages.NavigatorGroupName_CompositeState_2001_incominglinks,
+					Messages.NavigatorGroupName_CompositeState_1001_incominglinks,
 					"icons/incomingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
 			MealyMachineNavigatorGroup outgoinglinks = new MealyMachineNavigatorGroup(
-					Messages.NavigatorGroupName_CompositeState_2001_outgoinglinks,
+					Messages.NavigatorGroupName_CompositeState_1001_outgoinglinks,
 					"icons/outgoingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
 			Collection connectedViews = getChildrenByType(Collections
 					.singleton(view),
@@ -284,10 +284,10 @@ public class MealyMachineNavigatorContentProvider implements
 		case StateEditPart.VISUAL_ID: {
 			Collection result = new ArrayList();
 			MealyMachineNavigatorGroup incominglinks = new MealyMachineNavigatorGroup(
-					Messages.NavigatorGroupName_State_2002_incominglinks,
+					Messages.NavigatorGroupName_State_1002_incominglinks,
 					"icons/incomingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
 			MealyMachineNavigatorGroup outgoinglinks = new MealyMachineNavigatorGroup(
-					Messages.NavigatorGroupName_State_2002_outgoinglinks,
+					Messages.NavigatorGroupName_State_1002_outgoinglinks,
 					"icons/outgoingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
 			Collection connectedViews = getIncomingLinksByType(Collections
 					.singleton(view), EdgeEditPart.VISUAL_ID);
@@ -309,10 +309,10 @@ public class MealyMachineNavigatorContentProvider implements
 		case State2EditPart.VISUAL_ID: {
 			Collection result = new ArrayList();
 			MealyMachineNavigatorGroup incominglinks = new MealyMachineNavigatorGroup(
-					Messages.NavigatorGroupName_State_3001_incominglinks,
+					Messages.NavigatorGroupName_State_2001_incominglinks,
 					"icons/incomingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
 			MealyMachineNavigatorGroup outgoinglinks = new MealyMachineNavigatorGroup(
-					Messages.NavigatorGroupName_State_3001_outgoinglinks,
+					Messages.NavigatorGroupName_State_2001_outgoinglinks,
 					"icons/outgoingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
 			Collection connectedViews = getIncomingLinksByType(Collections
 					.singleton(view), EdgeEditPart.VISUAL_ID);
@@ -334,10 +334,10 @@ public class MealyMachineNavigatorContentProvider implements
 		case CompositeState2EditPart.VISUAL_ID: {
 			Collection result = new ArrayList();
 			MealyMachineNavigatorGroup incominglinks = new MealyMachineNavigatorGroup(
-					Messages.NavigatorGroupName_CompositeState_3002_incominglinks,
+					Messages.NavigatorGroupName_CompositeState_2002_incominglinks,
 					"icons/incomingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
 			MealyMachineNavigatorGroup outgoinglinks = new MealyMachineNavigatorGroup(
-					Messages.NavigatorGroupName_CompositeState_3002_outgoinglinks,
+					Messages.NavigatorGroupName_CompositeState_2002_outgoinglinks,
 					"icons/outgoingLinksNavigatorGroup.gif", parentElement); //$NON-NLS-1$
 			Collection connectedViews = getChildrenByType(Collections
 					.singleton(view),
@@ -372,10 +372,10 @@ public class MealyMachineNavigatorContentProvider implements
 		case EdgeEditPart.VISUAL_ID: {
 			Collection result = new ArrayList();
 			MealyMachineNavigatorGroup target = new MealyMachineNavigatorGroup(
-					Messages.NavigatorGroupName_Edge_4001_target,
+					Messages.NavigatorGroupName_Edge_3001_target,
 					"icons/linkTargetNavigatorGroup.gif", parentElement); //$NON-NLS-1$
 			MealyMachineNavigatorGroup source = new MealyMachineNavigatorGroup(
-					Messages.NavigatorGroupName_Edge_4001_source,
+					Messages.NavigatorGroupName_Edge_3001_source,
 					"icons/linkSourceNavigatorGroup.gif", parentElement); //$NON-NLS-1$
 			Collection connectedViews = getLinksTargetByType(Collections
 					.singleton(view), CompositeStateEditPart.VISUAL_ID);

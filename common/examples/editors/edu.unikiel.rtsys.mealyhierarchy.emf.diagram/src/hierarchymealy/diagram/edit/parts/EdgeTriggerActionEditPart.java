@@ -56,7 +56,7 @@ public class EdgeTriggerActionEditPart extends LabelEditPart implements
 	/**
 	 * @generated
 	 */
-	public static final int VISUAL_ID = 6001;
+	public static final int VISUAL_ID = 4005;
 
 	/**
 	 * @generated
@@ -300,7 +300,7 @@ public class EdgeTriggerActionEditPart extends LabelEditPart implements
 		if (parser == null) {
 			String parserHint = ((View) getModel()).getType();
 			IAdaptable hintAdapter = new MealyMachineParserProvider.HintAdapter(
-					MealyMachineElementTypes.Edge_4001, getParserElement(),
+					MealyMachineElementTypes.Edge_3001, getParserElement(),
 					parserHint);
 			parser = ParserService.getInstance().getParser(hintAdapter);
 		}

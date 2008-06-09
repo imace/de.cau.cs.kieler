@@ -12,7 +12,7 @@ public class MealyMachineNavigatorSorter extends ViewerSorter {
 	/**
 	 * @generated
 	 */
-	private static final int GROUP_CATEGORY = 7004;
+	private static final int GROUP_CATEGORY = 5004;
 
 	/**
 	 * @generated

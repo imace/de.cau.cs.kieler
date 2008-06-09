@@ -59,7 +59,7 @@ public class CompositeStateNameEditPart extends CompartmentEditPart implements
 	/**
 	 * @generated
 	 */
-	public static final int VISUAL_ID = 5003;
+	public static final int VISUAL_ID = 4003;
 
 	/**
 	 * @generated
@@ -308,7 +308,7 @@ public class CompositeStateNameEditPart extends CompartmentEditPart implements
 		if (parser == null) {
 			String parserHint = ((View) getModel()).getType();
 			IAdaptable hintAdapter = new MealyMachineParserProvider.HintAdapter(
-					MealyMachineElementTypes.CompositeState_2001,
+					MealyMachineElementTypes.CompositeState_1001,
 					getParserElement(), parserHint);
 			parser = ParserService.getInstance().getParser(hintAdapter);
 		}

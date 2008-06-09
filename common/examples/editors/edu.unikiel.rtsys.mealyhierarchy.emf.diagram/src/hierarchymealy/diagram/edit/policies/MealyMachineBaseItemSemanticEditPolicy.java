@@ -352,15 +352,15 @@ public class MealyMachineBaseItemSemanticEditPolicy extends SemanticEditPolicy {
 		/**
 		 * @generated
 		 */
-		public static boolean canCreateEdge_4001(CompositeState container,
+		public static boolean canCreateEdge_3001(CompositeState container,
 				State source, State target) {
-			return canExistEdge_4001(container, source, target);
+			return canExistEdge_3001(container, source, target);
 		}
 
 		/**
 		 * @generated
 		 */
-		public static boolean canExistEdge_4001(CompositeState container,
+		public static boolean canExistEdge_3001(CompositeState container,
 				State source, State target) {
 
 			return true;

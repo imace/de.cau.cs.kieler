@@ -29,7 +29,7 @@ public class State2EditPart extends ShapeNodeEditPart {
 	/**
 	 * @generated
 	 */
-	public static final int VISUAL_ID = 3001;
+	public static final int VISUAL_ID = 2001;
 
 	/**
 	 * @generated

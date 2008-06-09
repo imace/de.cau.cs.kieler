@@ -48,30 +48,32 @@ public class MealyMachineElementTypes extends ElementInitializers {
 	/**
 	 * @generated
 	 */
-	public static final IElementType HierarchyMealyMachine_1000 = getElementType("edu.unikiel.rtsys.mealyhierarchy.emf.diagram.HierarchyMealyMachine_1000"); //$NON-NLS-1$
-	/**
-	 * @generated
-	 */
-	public static final IElementType CompositeState_2001 = getElementType("edu.unikiel.rtsys.mealyhierarchy.emf.diagram.CompositeState_2001"); //$NON-NLS-1$
+	public static final IElementType HierarchyMealyMachine_79 = getElementType("edu.unikiel.rtsys.mealyhierarchy.emf.diagram.HierarchyMealyMachine_79"); //$NON-NLS-1$
 
 	/**
 	 * @generated
 	 */
-	public static final IElementType State_2002 = getElementType("edu.unikiel.rtsys.mealyhierarchy.emf.diagram.State_2002"); //$NON-NLS-1$
+	public static final IElementType CompositeState_1001 = getElementType("edu.unikiel.rtsys.mealyhierarchy.emf.diagram.CompositeState_1001"); //$NON-NLS-1$
 
 	/**
 	 * @generated
 	 */
-	public static final IElementType State_3001 = getElementType("edu.unikiel.rtsys.mealyhierarchy.emf.diagram.State_3001"); //$NON-NLS-1$
-	/**
-	 * @generated
-	 */
-	public static final IElementType CompositeState_3002 = getElementType("edu.unikiel.rtsys.mealyhierarchy.emf.diagram.CompositeState_3002"); //$NON-NLS-1$
+	public static final IElementType State_1002 = getElementType("edu.unikiel.rtsys.mealyhierarchy.emf.diagram.State_1002"); //$NON-NLS-1$
 
 	/**
 	 * @generated
 	 */
-	public static final IElementType Edge_4001 = getElementType("edu.unikiel.rtsys.mealyhierarchy.emf.diagram.Edge_4001"); //$NON-NLS-1$
+	public static final IElementType State_2001 = getElementType("edu.unikiel.rtsys.mealyhierarchy.emf.diagram.State_2001"); //$NON-NLS-1$
+
+	/**
+	 * @generated
+	 */
+	public static final IElementType CompositeState_2002 = getElementType("edu.unikiel.rtsys.mealyhierarchy.emf.diagram.CompositeState_2002"); //$NON-NLS-1$
+
+	/**
+	 * @generated
+	 */
+	public static final IElementType Edge_3001 = getElementType("edu.unikiel.rtsys.mealyhierarchy.emf.diagram.Edge_3001"); //$NON-NLS-1$
 
 	/**
 	 * @generated
@@ -184,20 +186,20 @@ public class MealyMachineElementTypes extends ElementInitializers {
 		if (elements == null) {
 			elements = new IdentityHashMap();
 
-			elements.put(HierarchyMealyMachine_1000, MealyPackage.eINSTANCE
+			elements.put(HierarchyMealyMachine_79, MealyPackage.eINSTANCE
 					.getHierarchyMealyMachine());
 
-			elements.put(CompositeState_2001, MealyPackage.eINSTANCE
+			elements.put(CompositeState_1001, MealyPackage.eINSTANCE
 					.getCompositeState());
 
-			elements.put(State_2002, MealyPackage.eINSTANCE.getState());
+			elements.put(State_1002, MealyPackage.eINSTANCE.getState());
 
-			elements.put(State_3001, MealyPackage.eINSTANCE.getState());
+			elements.put(State_2001, MealyPackage.eINSTANCE.getState());
 
-			elements.put(CompositeState_3002, MealyPackage.eINSTANCE
+			elements.put(CompositeState_2002, MealyPackage.eINSTANCE
 					.getCompositeState());
 
-			elements.put(Edge_4001, MealyPackage.eINSTANCE.getEdge());
+			elements.put(Edge_3001, MealyPackage.eINSTANCE.getEdge());
 		}
 		return (ENamedElement) elements.get(type);
 	}
@@ -215,12 +217,12 @@ public class MealyMachineElementTypes extends ElementInitializers {
 	public static boolean isKnownElementType(IElementType elementType) {
 		if (KNOWN_ELEMENT_TYPES == null) {
 			KNOWN_ELEMENT_TYPES = new HashSet();
-			KNOWN_ELEMENT_TYPES.add(HierarchyMealyMachine_1000);
-			KNOWN_ELEMENT_TYPES.add(CompositeState_2001);
-			KNOWN_ELEMENT_TYPES.add(State_2002);
-			KNOWN_ELEMENT_TYPES.add(State_3001);
-			KNOWN_ELEMENT_TYPES.add(CompositeState_3002);
-			KNOWN_ELEMENT_TYPES.add(Edge_4001);
+			KNOWN_ELEMENT_TYPES.add(HierarchyMealyMachine_79);
+			KNOWN_ELEMENT_TYPES.add(CompositeState_1001);
+			KNOWN_ELEMENT_TYPES.add(State_1002);
+			KNOWN_ELEMENT_TYPES.add(State_2001);
+			KNOWN_ELEMENT_TYPES.add(CompositeState_2002);
+			KNOWN_ELEMENT_TYPES.add(Edge_3001);
 		}
 		return KNOWN_ELEMENT_TYPES.contains(elementType);
 	}

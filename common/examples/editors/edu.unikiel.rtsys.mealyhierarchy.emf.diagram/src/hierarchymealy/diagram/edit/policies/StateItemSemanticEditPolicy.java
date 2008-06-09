@@ -48,7 +48,7 @@ public class StateItemSemanticEditPolicy extends
 	 */
 	protected Command getStartCreateRelationshipCommand(
 			CreateRelationshipRequest req) {
-		if (MealyMachineElementTypes.Edge_4001 == req.getElementType()) {
+		if (MealyMachineElementTypes.Edge_3001 == req.getElementType()) {
 			return getGEFWrapper(new EdgeCreateCommand(req, req.getSource(),
 					req.getTarget()));
 		}
@@ -60,7 +60,7 @@ public class StateItemSemanticEditPolicy extends
 	 */
 	protected Command getCompleteCreateRelationshipCommand(
 			CreateRelationshipRequest req) {
-		if (MealyMachineElementTypes.Edge_4001 == req.getElementType()) {
+		if (MealyMachineElementTypes.Edge_3001 == req.getElementType()) {
 			return getGEFWrapper(new EdgeCreateCommand(req, req.getSource(),
 					req.getTarget()));
 		}

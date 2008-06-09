@@ -42,11 +42,12 @@ public class MealyMachineVisualIDRegistry {
 	/**
 	 * @generated
 	 */
-	private static MealyMachineAbstractExpression State_2002_Constraint;
+	private static MealyMachineAbstractExpression State_1002_Constraint;
+
 	/**
 	 * @generated
 	 */
-	private static MealyMachineAbstractExpression State_3001_Constraint;
+	private static MealyMachineAbstractExpression State_2001_Constraint;
 
 	/**
 	 * @generated
@@ -144,7 +145,7 @@ public class MealyMachineVisualIDRegistry {
 		case CompositeStateCompositeStateCompartmentEditPart.VISUAL_ID:
 			if (MealyPackage.eINSTANCE.getState().isSuperTypeOf(
 					domainElement.eClass())
-					&& isState_3001((State) domainElement)) {
+					&& isState_2001((State) domainElement)) {
 				return State2EditPart.VISUAL_ID;
 			}
 			if (MealyPackage.eINSTANCE.getCompositeState().isSuperTypeOf(
@@ -155,7 +156,7 @@ public class MealyMachineVisualIDRegistry {
 		case CompositeStateCompositeStateCompartment2EditPart.VISUAL_ID:
 			if (MealyPackage.eINSTANCE.getState().isSuperTypeOf(
 					domainElement.eClass())
-					&& isState_3001((State) domainElement)) {
+					&& isState_2001((State) domainElement)) {
 				return State2EditPart.VISUAL_ID;
 			}
 			if (MealyPackage.eINSTANCE.getCompositeState().isSuperTypeOf(
@@ -170,7 +171,7 @@ public class MealyMachineVisualIDRegistry {
 			}
 			if (MealyPackage.eINSTANCE.getState().isSuperTypeOf(
 					domainElement.eClass())
-					&& isState_2002((State) domainElement)) {
+					&& isState_1002((State) domainElement)) {
 				return StateEditPart.VISUAL_ID;
 			}
 			break;
@@ -285,26 +286,26 @@ public class MealyMachineVisualIDRegistry {
 	/**
 	 * @generated
 	 */
-	private static boolean isState_2002(State domainElement) {
-		if (State_2002_Constraint == null) { // lazy initialization
-			State_2002_Constraint = MealyMachineOCLFactory
+	private static boolean isState_1002(State domainElement) {
+		if (State_1002_Constraint == null) { // lazy initialization
+			State_1002_Constraint = MealyMachineOCLFactory
 					.getExpression(
-							"not self.oclIsTypeOf(CompartmentState)", MealyPackage.eINSTANCE.getState()); //$NON-NLS-1$
+							"not self.oclIsTypeOf(hierarchymealy::CompositeState)", MealyPackage.eINSTANCE.getState()); //$NON-NLS-1$
 		}
-		Object result = State_2002_Constraint.evaluate(domainElement);
+		Object result = State_1002_Constraint.evaluate(domainElement);
 		return result instanceof Boolean && ((Boolean) result).booleanValue();
 	}
 
 	/**
 	 * @generated
 	 */
-	private static boolean isState_3001(State domainElement) {
-		if (State_3001_Constraint == null) { // lazy initialization
-			State_3001_Constraint = MealyMachineOCLFactory
+	private static boolean isState_2001(State domainElement) {
+		if (State_2001_Constraint == null) { // lazy initialization
+			State_2001_Constraint = MealyMachineOCLFactory
 					.getExpression(
-							"not self.oclIsTypeOf(CompartmentState)", MealyPackage.eINSTANCE.getState()); //$NON-NLS-1$
+							"not self.oclIsTypeOf(hierarchymealy::CompositeState)", MealyPackage.eINSTANCE.getState()); //$NON-NLS-1$
 		}
-		Object result = State_3001_Constraint.evaluate(domainElement);
+		Object result = State_2001_Constraint.evaluate(domainElement);
 		return result instanceof Boolean && ((Boolean) result).booleanValue();
 	}
 

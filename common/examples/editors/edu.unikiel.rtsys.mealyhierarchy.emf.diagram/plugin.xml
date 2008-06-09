@@ -288,60 +288,60 @@
       <?gmfgen generated="true"?>
       <metamodel nsURI="http://www.informatik.uni-kiel.de/rtsys/hmealy">
          <metamodelType
-               id="edu.unikiel.rtsys.mealyhierarchy.emf.diagram.HierarchyMealyMachine_1000"
-               name="%metatype.name.HierarchyMealyMachine_1000"
+               id="edu.unikiel.rtsys.mealyhierarchy.emf.diagram.HierarchyMealyMachine_79"
+               name="%metatype.name.HierarchyMealyMachine_79"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="HierarchyMealyMachine"
                edithelper="hierarchymealy.diagram.edit.helpers.HierarchyMealyMachineEditHelper">
-            <param name="semanticHint" value="1000"/>
+            <param name="semanticHint" value="79"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://www.informatik.uni-kiel.de/rtsys/hmealy">
          <metamodelType
-               id="edu.unikiel.rtsys.mealyhierarchy.emf.diagram.CompositeState_2001"
-               name="%metatype.name.CompositeState_2001"
+               id="edu.unikiel.rtsys.mealyhierarchy.emf.diagram.CompositeState_1001"
+               name="%metatype.name.CompositeState_1001"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="CompositeState"
                edithelper="hierarchymealy.diagram.edit.helpers.CompositeStateEditHelper">
+            <param name="semanticHint" value="1001"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.informatik.uni-kiel.de/rtsys/hmealy">
+         <specializationType
+               id="edu.unikiel.rtsys.mealyhierarchy.emf.diagram.State_1002"
+               name="%metatype.name.State_1002"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="edu.unikiel.rtsys.mealyhierarchy.emf.diagram.State_2001"/>
+            <param name="semanticHint" value="1002"/>
+         </specializationType>
+      </metamodel>
+      <metamodel nsURI="http://www.informatik.uni-kiel.de/rtsys/hmealy">
+         <metamodelType
+               id="edu.unikiel.rtsys.mealyhierarchy.emf.diagram.State_2001"
+               name="%metatype.name.State_2001"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="State"
+               edithelper="hierarchymealy.diagram.edit.helpers.StateEditHelper">
             <param name="semanticHint" value="2001"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://www.informatik.uni-kiel.de/rtsys/hmealy">
          <specializationType
-               id="edu.unikiel.rtsys.mealyhierarchy.emf.diagram.State_2002"
-               name="%metatype.name.State_2002"
+               id="edu.unikiel.rtsys.mealyhierarchy.emf.diagram.CompositeState_2002"
+               name="%metatype.name.CompositeState_2002"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
-            <specializes id="edu.unikiel.rtsys.mealyhierarchy.emf.diagram.State_3001"/>
+            <specializes id="edu.unikiel.rtsys.mealyhierarchy.emf.diagram.CompositeState_1001"/>
             <param name="semanticHint" value="2002"/>
          </specializationType>
       </metamodel>
       <metamodel nsURI="http://www.informatik.uni-kiel.de/rtsys/hmealy">
          <metamodelType
-               id="edu.unikiel.rtsys.mealyhierarchy.emf.diagram.State_3001"
-               name="%metatype.name.State_3001"
-               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="State"
-               edithelper="hierarchymealy.diagram.edit.helpers.StateEditHelper">
-            <param name="semanticHint" value="3001"/>
-         </metamodelType>
-      </metamodel>
-      <metamodel nsURI="http://www.informatik.uni-kiel.de/rtsys/hmealy">
-         <specializationType
-               id="edu.unikiel.rtsys.mealyhierarchy.emf.diagram.CompositeState_3002"
-               name="%metatype.name.CompositeState_3002"
-               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
-            <specializes id="edu.unikiel.rtsys.mealyhierarchy.emf.diagram.CompositeState_2001"/>
-            <param name="semanticHint" value="3002"/>
-         </specializationType>
-      </metamodel>
-      <metamodel nsURI="http://www.informatik.uni-kiel.de/rtsys/hmealy">
-         <metamodelType
-               id="edu.unikiel.rtsys.mealyhierarchy.emf.diagram.Edge_4001"
-               name="%metatype.name.Edge_4001"
+               id="edu.unikiel.rtsys.mealyhierarchy.emf.diagram.Edge_3001"
+               name="%metatype.name.Edge_3001"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="Edge"
                edithelper="hierarchymealy.diagram.edit.helpers.EdgeEditHelper">
-            <param name="semanticHint" value="4001"/>
+            <param name="semanticHint" value="3001"/>
          </metamodelType>
       </metamodel>
    </extension>
@@ -356,12 +356,12 @@
          </enablement>
       </clientContext> 
       <binding context="MealyMachineClientContext">
-         <elementType ref="edu.unikiel.rtsys.mealyhierarchy.emf.diagram.HierarchyMealyMachine_1000"/>
-         <elementType ref="edu.unikiel.rtsys.mealyhierarchy.emf.diagram.CompositeState_2001"/>
-         <elementType ref="edu.unikiel.rtsys.mealyhierarchy.emf.diagram.State_2002"/>
-         <elementType ref="edu.unikiel.rtsys.mealyhierarchy.emf.diagram.State_3001"/>
-         <elementType ref="edu.unikiel.rtsys.mealyhierarchy.emf.diagram.CompositeState_3002"/>
-         <elementType ref="edu.unikiel.rtsys.mealyhierarchy.emf.diagram.Edge_4001"/>
+         <elementType ref="edu.unikiel.rtsys.mealyhierarchy.emf.diagram.HierarchyMealyMachine_79"/>
+         <elementType ref="edu.unikiel.rtsys.mealyhierarchy.emf.diagram.CompositeState_1001"/>
+         <elementType ref="edu.unikiel.rtsys.mealyhierarchy.emf.diagram.State_1002"/>
+         <elementType ref="edu.unikiel.rtsys.mealyhierarchy.emf.diagram.State_2001"/>
+         <elementType ref="edu.unikiel.rtsys.mealyhierarchy.emf.diagram.CompositeState_2002"/>
+         <elementType ref="edu.unikiel.rtsys.mealyhierarchy.emf.diagram.Edge_3001"/>
          <advice ref="org.eclipse.gmf.runtime.diagram.core.advice.notationDepdendents"/>
       </binding>
    </extension>

@@ -19,14 +19,14 @@ public class CompositeStateCompositeStateCompartmentItemSemanticEditPolicy
 	 * @generated
 	 */
 	protected Command getCreateCommand(CreateElementRequest req) {
-		if (MealyMachineElementTypes.State_3001 == req.getElementType()) {
+		if (MealyMachineElementTypes.State_2001 == req.getElementType()) {
 			if (req.getContainmentFeature() == null) {
 				req.setContainmentFeature(MealyPackage.eINSTANCE
 						.getCompositeState_Nodes());
 			}
 			return getGEFWrapper(new State2CreateCommand(req));
 		}
-		if (MealyMachineElementTypes.CompositeState_3002 == req
+		if (MealyMachineElementTypes.CompositeState_2002 == req
 				.getElementType()) {
 			if (req.getContainmentFeature() == null) {
 				req.setContainmentFeature(MealyPackage.eINSTANCE

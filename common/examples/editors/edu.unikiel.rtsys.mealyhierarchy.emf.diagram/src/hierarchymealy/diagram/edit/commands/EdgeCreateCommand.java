@@ -84,7 +84,7 @@ public class EdgeCreateCommand extends CreateElementCommand {
 			return false;
 		}
 		return MealyMachineBaseItemSemanticEditPolicy.LinkConstraints
-				.canCreateEdge_4001(getContainer(), getSource(), getTarget());
+				.canCreateEdge_3001(getContainer(), getSource(), getTarget());
 	}
 
 	/**

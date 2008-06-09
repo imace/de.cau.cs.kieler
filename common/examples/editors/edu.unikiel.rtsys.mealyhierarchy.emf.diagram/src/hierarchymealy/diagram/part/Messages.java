@@ -293,57 +293,57 @@ public class Messages extends NLS {
 	/**
 	 * @generated
 	 */
-	public static String NavigatorGroupName_HierarchyMealyMachine_1000_links;
+	public static String NavigatorGroupName_HierarchyMealyMachine_79_links;
 
 	/**
 	 * @generated
 	 */
-	public static String NavigatorGroupName_CompositeState_2001_incominglinks;
+	public static String NavigatorGroupName_CompositeState_1001_incominglinks;
 
 	/**
 	 * @generated
 	 */
-	public static String NavigatorGroupName_CompositeState_2001_outgoinglinks;
+	public static String NavigatorGroupName_CompositeState_1001_outgoinglinks;
 
 	/**
 	 * @generated
 	 */
-	public static String NavigatorGroupName_State_2002_incominglinks;
+	public static String NavigatorGroupName_State_1002_incominglinks;
 
 	/**
 	 * @generated
 	 */
-	public static String NavigatorGroupName_State_2002_outgoinglinks;
+	public static String NavigatorGroupName_State_1002_outgoinglinks;
 
 	/**
 	 * @generated
 	 */
-	public static String NavigatorGroupName_State_3001_incominglinks;
+	public static String NavigatorGroupName_State_2001_incominglinks;
 
 	/**
 	 * @generated
 	 */
-	public static String NavigatorGroupName_State_3001_outgoinglinks;
+	public static String NavigatorGroupName_State_2001_outgoinglinks;
 
 	/**
 	 * @generated
 	 */
-	public static String NavigatorGroupName_CompositeState_3002_incominglinks;
+	public static String NavigatorGroupName_CompositeState_2002_incominglinks;
 
 	/**
 	 * @generated
 	 */
-	public static String NavigatorGroupName_CompositeState_3002_outgoinglinks;
+	public static String NavigatorGroupName_CompositeState_2002_outgoinglinks;
 
 	/**
 	 * @generated
 	 */
-	public static String NavigatorGroupName_Edge_4001_target;
+	public static String NavigatorGroupName_Edge_3001_target;
 
 	/**
 	 * @generated
 	 */
-	public static String NavigatorGroupName_Edge_4001_source;
+	public static String NavigatorGroupName_Edge_3001_source;
 
 	/**
 	 * @generated

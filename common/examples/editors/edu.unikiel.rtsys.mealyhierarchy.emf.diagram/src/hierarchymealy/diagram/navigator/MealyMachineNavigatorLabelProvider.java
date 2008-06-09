@@ -97,22 +97,22 @@ public class MealyMachineNavigatorLabelProvider extends LabelProvider implements
 		switch (MealyMachineVisualIDRegistry.getVisualID(view)) {
 		case HierarchyMealyMachineEditPart.VISUAL_ID:
 			return getImage(
-					"Navigator?Diagram?http://www.informatik.uni-kiel.de/rtsys/hmealy?HierarchyMealyMachine", MealyMachineElementTypes.HierarchyMealyMachine_1000); //$NON-NLS-1$
+					"Navigator?Diagram?http://www.informatik.uni-kiel.de/rtsys/hmealy?HierarchyMealyMachine", MealyMachineElementTypes.HierarchyMealyMachine_79); //$NON-NLS-1$
 		case CompositeStateEditPart.VISUAL_ID:
 			return getImage(
-					"Navigator?TopLevelNode?http://www.informatik.uni-kiel.de/rtsys/hmealy?CompositeState", MealyMachineElementTypes.CompositeState_2001); //$NON-NLS-1$
+					"Navigator?TopLevelNode?http://www.informatik.uni-kiel.de/rtsys/hmealy?CompositeState", MealyMachineElementTypes.CompositeState_1001); //$NON-NLS-1$
 		case StateEditPart.VISUAL_ID:
 			return getImage(
-					"Navigator?TopLevelNode?http://www.informatik.uni-kiel.de/rtsys/hmealy?State", MealyMachineElementTypes.State_2002); //$NON-NLS-1$
+					"Navigator?TopLevelNode?http://www.informatik.uni-kiel.de/rtsys/hmealy?State", MealyMachineElementTypes.State_1002); //$NON-NLS-1$
 		case State2EditPart.VISUAL_ID:
 			return getImage(
-					"Navigator?Node?http://www.informatik.uni-kiel.de/rtsys/hmealy?State", MealyMachineElementTypes.State_3001); //$NON-NLS-1$
+					"Navigator?Node?http://www.informatik.uni-kiel.de/rtsys/hmealy?State", MealyMachineElementTypes.State_2001); //$NON-NLS-1$
 		case CompositeState2EditPart.VISUAL_ID:
 			return getImage(
-					"Navigator?Node?http://www.informatik.uni-kiel.de/rtsys/hmealy?CompositeState", MealyMachineElementTypes.CompositeState_3002); //$NON-NLS-1$
+					"Navigator?Node?http://www.informatik.uni-kiel.de/rtsys/hmealy?CompositeState", MealyMachineElementTypes.CompositeState_2002); //$NON-NLS-1$
 		case EdgeEditPart.VISUAL_ID:
 			return getImage(
-					"Navigator?Link?http://www.informatik.uni-kiel.de/rtsys/hmealy?Edge", MealyMachineElementTypes.Edge_4001); //$NON-NLS-1$
+					"Navigator?Link?http://www.informatik.uni-kiel.de/rtsys/hmealy?Edge", MealyMachineElementTypes.Edge_3001); //$NON-NLS-1$
 		}
 		return getImage("Navigator?UnknownElement", null); //$NON-NLS-1$
 	}
@@ -166,17 +166,17 @@ public class MealyMachineNavigatorLabelProvider extends LabelProvider implements
 		}
 		switch (MealyMachineVisualIDRegistry.getVisualID(view)) {
 		case HierarchyMealyMachineEditPart.VISUAL_ID:
-			return getHierarchyMealyMachine_1000Text(view);
+			return getHierarchyMealyMachine_79Text(view);
 		case CompositeStateEditPart.VISUAL_ID:
-			return getCompositeState_2001Text(view);
+			return getCompositeState_1001Text(view);
 		case StateEditPart.VISUAL_ID:
-			return getState_2002Text(view);
+			return getState_1002Text(view);
 		case State2EditPart.VISUAL_ID:
-			return getState_3001Text(view);
+			return getState_2001Text(view);
 		case CompositeState2EditPart.VISUAL_ID:
-			return getCompositeState_3002Text(view);
+			return getCompositeState_2002Text(view);
 		case EdgeEditPart.VISUAL_ID:
-			return getEdge_4001Text(view);
+			return getEdge_3001Text(view);
 		}
 		return getUnknownElementText(view);
 	}
@@ -184,14 +184,14 @@ public class MealyMachineNavigatorLabelProvider extends LabelProvider implements
 	/**
 	 * @generated
 	 */
-	private String getHierarchyMealyMachine_1000Text(View view) {
+	private String getHierarchyMealyMachine_79Text(View view) {
 		HierarchyMealyMachine domainModelElement = (HierarchyMealyMachine) view
 				.getElement();
 		if (domainModelElement != null) {
 			return domainModelElement.getName();
 		} else {
 			MealyMachineDiagramEditorPlugin.getInstance().logError(
-					"No domain element for view with visualID = " + 1000); //$NON-NLS-1$
+					"No domain element for view with visualID = " + 79); //$NON-NLS-1$
 			return ""; //$NON-NLS-1$
 		}
 	}
@@ -199,9 +199,9 @@ public class MealyMachineNavigatorLabelProvider extends LabelProvider implements
 	/**
 	 * @generated
 	 */
-	private String getCompositeState_2001Text(View view) {
+	private String getCompositeState_1001Text(View view) {
 		IAdaptable hintAdapter = new MealyMachineParserProvider.HintAdapter(
-				MealyMachineElementTypes.CompositeState_2001, (view
+				MealyMachineElementTypes.CompositeState_1001, (view
 						.getElement() != null ? view.getElement() : view),
 				MealyMachineVisualIDRegistry
 						.getType(CompositeStateNameEditPart.VISUAL_ID));
@@ -212,7 +212,7 @@ public class MealyMachineNavigatorLabelProvider extends LabelProvider implements
 					.intValue());
 		} else {
 			MealyMachineDiagramEditorPlugin.getInstance().logError(
-					"Parser was not found for label " + 5003); //$NON-NLS-1$
+					"Parser was not found for label " + 4003); //$NON-NLS-1$
 			return ""; //$NON-NLS-1$
 		}
 
@@ -221,9 +221,9 @@ public class MealyMachineNavigatorLabelProvider extends LabelProvider implements
 	/**
 	 * @generated
 	 */
-	private String getState_2002Text(View view) {
+	private String getState_1002Text(View view) {
 		IAdaptable hintAdapter = new MealyMachineParserProvider.HintAdapter(
-				MealyMachineElementTypes.State_2002,
+				MealyMachineElementTypes.State_1002,
 				(view.getElement() != null ? view.getElement() : view),
 				MealyMachineVisualIDRegistry
 						.getType(StateNameEditPart.VISUAL_ID));
@@ -234,7 +234,7 @@ public class MealyMachineNavigatorLabelProvider extends LabelProvider implements
 					.intValue());
 		} else {
 			MealyMachineDiagramEditorPlugin.getInstance().logError(
-					"Parser was not found for label " + 5004); //$NON-NLS-1$
+					"Parser was not found for label " + 4004); //$NON-NLS-1$
 			return ""; //$NON-NLS-1$
 		}
 
@@ -243,9 +243,9 @@ public class MealyMachineNavigatorLabelProvider extends LabelProvider implements
 	/**
 	 * @generated
 	 */
-	private String getState_3001Text(View view) {
+	private String getState_2001Text(View view) {
 		IAdaptable hintAdapter = new MealyMachineParserProvider.HintAdapter(
-				MealyMachineElementTypes.State_3001,
+				MealyMachineElementTypes.State_2001,
 				(view.getElement() != null ? view.getElement() : view),
 				MealyMachineVisualIDRegistry
 						.getType(StateName2EditPart.VISUAL_ID));
@@ -256,7 +256,7 @@ public class MealyMachineNavigatorLabelProvider extends LabelProvider implements
 					.intValue());
 		} else {
 			MealyMachineDiagramEditorPlugin.getInstance().logError(
-					"Parser was not found for label " + 5001); //$NON-NLS-1$
+					"Parser was not found for label " + 4001); //$NON-NLS-1$
 			return ""; //$NON-NLS-1$
 		}
 
@@ -265,9 +265,9 @@ public class MealyMachineNavigatorLabelProvider extends LabelProvider implements
 	/**
 	 * @generated
 	 */
-	private String getCompositeState_3002Text(View view) {
+	private String getCompositeState_2002Text(View view) {
 		IAdaptable hintAdapter = new MealyMachineParserProvider.HintAdapter(
-				MealyMachineElementTypes.CompositeState_3002, (view
+				MealyMachineElementTypes.CompositeState_2002, (view
 						.getElement() != null ? view.getElement() : view),
 				MealyMachineVisualIDRegistry
 						.getType(CompositeStateName2EditPart.VISUAL_ID));
@@ -278,7 +278,7 @@ public class MealyMachineNavigatorLabelProvider extends LabelProvider implements
 					.intValue());
 		} else {
 			MealyMachineDiagramEditorPlugin.getInstance().logError(
-					"Parser was not found for label " + 5002); //$NON-NLS-1$
+					"Parser was not found for label " + 4002); //$NON-NLS-1$
 			return ""; //$NON-NLS-1$
 		}
 
@@ -287,9 +287,9 @@ public class MealyMachineNavigatorLabelProvider extends LabelProvider implements
 	/**
 	 * @generated
 	 */
-	private String getEdge_4001Text(View view) {
+	private String getEdge_3001Text(View view) {
 		IAdaptable hintAdapter = new MealyMachineParserProvider.HintAdapter(
-				MealyMachineElementTypes.Edge_4001,
+				MealyMachineElementTypes.Edge_3001,
 				(view.getElement() != null ? view.getElement() : view),
 				MealyMachineVisualIDRegistry
 						.getType(EdgeTriggerActionEditPart.VISUAL_ID));
@@ -300,7 +300,7 @@ public class MealyMachineNavigatorLabelProvider extends LabelProvider implements
 					.intValue());
 		} else {
 			MealyMachineDiagramEditorPlugin.getInstance().logError(
-					"Parser was not found for label " + 6001); //$NON-NLS-1$
+					"Parser was not found for label " + 4005); //$NON-NLS-1$
 			return ""; //$NON-NLS-1$
 		}
 

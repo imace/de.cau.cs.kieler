@@ -43,13 +43,13 @@ public class MealyMachinePaletteFactory {
 	 */
 	private ToolEntry createState1CreationTool() {
 		List/*<IElementType>*/types = new ArrayList/*<IElementType>*/(2);
-		types.add(MealyMachineElementTypes.State_3001);
-		types.add(MealyMachineElementTypes.State_2002);
+		types.add(MealyMachineElementTypes.State_2001);
+		types.add(MealyMachineElementTypes.State_1002);
 		NodeToolEntry entry = new NodeToolEntry(
 				Messages.State1CreationTool_title,
 				Messages.State1CreationTool_desc, types);
 		entry.setSmallIcon(MealyMachineElementTypes
-				.getImageDescriptor(MealyMachineElementTypes.State_3001));
+				.getImageDescriptor(MealyMachineElementTypes.State_2001));
 		entry.setLargeIcon(entry.getSmallIcon());
 		return entry;
 	}
@@ -59,14 +59,14 @@ public class MealyMachinePaletteFactory {
 	 */
 	private ToolEntry createCompositeState2CreationTool() {
 		List/*<IElementType>*/types = new ArrayList/*<IElementType>*/(2);
-		types.add(MealyMachineElementTypes.CompositeState_2001);
-		types.add(MealyMachineElementTypes.CompositeState_3002);
+		types.add(MealyMachineElementTypes.CompositeState_1001);
+		types.add(MealyMachineElementTypes.CompositeState_2002);
 		NodeToolEntry entry = new NodeToolEntry(
 				Messages.CompositeState2CreationTool_title,
 				Messages.CompositeState2CreationTool_desc, types);
 		entry
 				.setSmallIcon(MealyMachineElementTypes
-						.getImageDescriptor(MealyMachineElementTypes.CompositeState_2001));
+						.getImageDescriptor(MealyMachineElementTypes.CompositeState_1001));
 		entry.setLargeIcon(entry.getSmallIcon());
 		return entry;
 	}
@@ -76,12 +76,12 @@ public class MealyMachinePaletteFactory {
 	 */
 	private ToolEntry createEdge3CreationTool() {
 		List/*<IElementType>*/types = new ArrayList/*<IElementType>*/(1);
-		types.add(MealyMachineElementTypes.Edge_4001);
+		types.add(MealyMachineElementTypes.Edge_3001);
 		LinkToolEntry entry = new LinkToolEntry(
 				Messages.Edge3CreationTool_title,
 				Messages.Edge3CreationTool_desc, types);
 		entry.setSmallIcon(MealyMachineElementTypes
-				.getImageDescriptor(MealyMachineElementTypes.Edge_4001));
+				.getImageDescriptor(MealyMachineElementTypes.Edge_3001));
 		entry.setLargeIcon(entry.getSmallIcon());
 		return entry;
 	}

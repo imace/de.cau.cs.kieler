@@ -55,7 +55,7 @@ public class HierarchyMealyMachineCanonicalEditPolicy extends
 		View viewObject = (View) getHost().getModel();
 		List result = new LinkedList();
 		for (Iterator it = MealyMachineDiagramUpdater
-				.getHierarchyMealyMachine_1000SemanticChildren(viewObject)
+				.getHierarchyMealyMachine_79SemanticChildren(viewObject)
 				.iterator(); it.hasNext();) {
 			result.add(((MealyMachineNodeDescriptor) it.next())
 					.getModelElement());
@@ -217,7 +217,7 @@ public class HierarchyMealyMachineCanonicalEditPolicy extends
 		case HierarchyMealyMachineEditPart.VISUAL_ID: {
 			if (!domain2NotationMap.containsKey(view.getElement())) {
 				result.addAll(MealyMachineDiagramUpdater
-						.getHierarchyMealyMachine_1000ContainedLinks(view));
+						.getHierarchyMealyMachine_79ContainedLinks(view));
 			}
 			if (!domain2NotationMap.containsKey(view.getElement())
 					|| view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
@@ -228,7 +228,7 @@ public class HierarchyMealyMachineCanonicalEditPolicy extends
 		case CompositeStateEditPart.VISUAL_ID: {
 			if (!domain2NotationMap.containsKey(view.getElement())) {
 				result.addAll(MealyMachineDiagramUpdater
-						.getCompositeState_2001ContainedLinks(view));
+						.getCompositeState_1001ContainedLinks(view));
 			}
 			if (!domain2NotationMap.containsKey(view.getElement())
 					|| view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
@@ -239,7 +239,7 @@ public class HierarchyMealyMachineCanonicalEditPolicy extends
 		case StateEditPart.VISUAL_ID: {
 			if (!domain2NotationMap.containsKey(view.getElement())) {
 				result.addAll(MealyMachineDiagramUpdater
-						.getState_2002ContainedLinks(view));
+						.getState_1002ContainedLinks(view));
 			}
 			if (!domain2NotationMap.containsKey(view.getElement())
 					|| view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
@@ -250,7 +250,7 @@ public class HierarchyMealyMachineCanonicalEditPolicy extends
 		case State2EditPart.VISUAL_ID: {
 			if (!domain2NotationMap.containsKey(view.getElement())) {
 				result.addAll(MealyMachineDiagramUpdater
-						.getState_3001ContainedLinks(view));
+						.getState_2001ContainedLinks(view));
 			}
 			if (!domain2NotationMap.containsKey(view.getElement())
 					|| view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
@@ -261,7 +261,7 @@ public class HierarchyMealyMachineCanonicalEditPolicy extends
 		case CompositeState2EditPart.VISUAL_ID: {
 			if (!domain2NotationMap.containsKey(view.getElement())) {
 				result.addAll(MealyMachineDiagramUpdater
-						.getCompositeState_3002ContainedLinks(view));
+						.getCompositeState_2002ContainedLinks(view));
 			}
 			if (!domain2NotationMap.containsKey(view.getElement())
 					|| view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
@@ -272,7 +272,7 @@ public class HierarchyMealyMachineCanonicalEditPolicy extends
 		case EdgeEditPart.VISUAL_ID: {
 			if (!domain2NotationMap.containsKey(view.getElement())) {
 				result.addAll(MealyMachineDiagramUpdater
-						.getEdge_4001ContainedLinks(view));
+						.getEdge_3001ContainedLinks(view));
 			}
 			if (!domain2NotationMap.containsKey(view.getElement())
 					|| view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
