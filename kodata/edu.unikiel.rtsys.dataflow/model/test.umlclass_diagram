@@ -13,7 +13,7 @@
   </children>
   <children xmi:type="notation:Node" xmi:id="_wdzRcK_DEdyHEor_AUEbZw" type="2001">
     <children xmi:type="notation:Node" xmi:id="_wdz4gK_DEdyHEor_AUEbZw" type="5003">
-      <styles xmi:type="notation:FontStyle" xmi:id="_werbMK_DEdyHEor_AUEbZw"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_werbMK_DEdyHEor_AUEbZw" bold="true"/>
     </children>
     <children xmi:type="notation:Node" xmi:id="_wd0fkK_DEdyHEor_AUEbZw" type="5019"/>
     <children xmi:type="notation:Node" xmi:id="_wd2UwK_DEdyHEor_AUEbZw" type="7001">
@@ -36,11 +36,11 @@
     </children>
     <children xmi:type="notation:Node" xmi:id="_oPk2UK_EEdyHEor_AUEbZw" type="3025">
       <children xmi:type="notation:Node" xmi:id="_oPk2U6_EEdyHEor_AUEbZw" type="5013">
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_oPk2VK_EEdyHEor_AUEbZw" x="35" y="20"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_oPk2VK_EEdyHEor_AUEbZw" x="35" y="-20"/>
       </children>
       <styles xmi:type="notation:ShapeStyle" xmi:id="_oPk2Ua_EEdyHEor_AUEbZw" fontName="Sans"/>
       <element xmi:type="uml:Port" href="test.uml#_oPiaEK_EEdyHEor_AUEbZw"/>
-      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_oPk2Uq_EEdyHEor_AUEbZw" x="99" y="48"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_oPk2Uq_EEdyHEor_AUEbZw" x="99" y="70"/>
     </children>
     <children xmi:type="notation:Node" xmi:id="_vQWxcK_EEdyHEor_AUEbZw" type="3025">
       <children xmi:type="notation:Node" xmi:id="_vQWxc6_EEdyHEor_AUEbZw" type="5013">
@@ -48,7 +48,7 @@
       </children>
       <styles xmi:type="notation:ShapeStyle" xmi:id="_vQWxca_EEdyHEor_AUEbZw" fontName="Sans"/>
       <element xmi:type="uml:Port" href="test.uml#_vP3CMK_EEdyHEor_AUEbZw"/>
-      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_vQWxcq_EEdyHEor_AUEbZw" x="99" y="12"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_vQWxcq_EEdyHEor_AUEbZw" x="99" y="10"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_wdzRca_DEdyHEor_AUEbZw" fontName="Sans"/>
     <element xmi:type="uml:Class" href="test.uml#_wcfp4K_DEdyHEor_AUEbZw"/>
@@ -56,7 +56,7 @@
   </children>
   <children xmi:type="notation:Node" xmi:id="_BBnCAK_EEdyHEor_AUEbZw" type="2001">
     <children xmi:type="notation:Node" xmi:id="_BBnpEK_EEdyHEor_AUEbZw" type="5003">
-      <styles xmi:type="notation:FontStyle" xmi:id="_BBqFUK_EEdyHEor_AUEbZw"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_BBqFUK_EEdyHEor_AUEbZw" bold="true"/>
     </children>
     <children xmi:type="notation:Node" xmi:id="_BBnpEa_EEdyHEor_AUEbZw" type="5019"/>
     <children xmi:type="notation:Node" xmi:id="_BBoQIK_EEdyHEor_AUEbZw" type="7001">
@@ -110,6 +110,6 @@
     <styles xmi:type="notation:RoutingStyle" xmi:id="_rukswa_EEdyHEor_AUEbZw"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_rukswq_EEdyHEor_AUEbZw" fontName="Sans"/>
     <element xmi:type="uml:Realization" href="test.uml#_rugbUK_EEdyHEor_AUEbZw"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ruksw6_EEdyHEor_AUEbZw" points="[8, 0, 8, -158]$[65, 0, 65, -158]$[144, 69, 144, -89]$[73, 158, 73, 0]$[8, 158, 8, 0]"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ruksw6_EEdyHEor_AUEbZw" points="[8, 0, 8, -158]$[183, 0, 183, -158]$[183, 158, 183, 0]$[183, 158, 183, 0]$[8, 158, 8, 0]"/>
   </edges>
 </notation:Diagram>

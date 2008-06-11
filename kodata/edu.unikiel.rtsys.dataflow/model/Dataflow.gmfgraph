@@ -16,24 +16,9 @@
             xsi:type="gmfgraph:Label"
             name="BoxNameFigure"
             text="&lt;...>"/>
-        <children
-            xsi:type="gmfgraph:Rectangle"
-            name="PortFigure"
-            xorFill="true">
-          <layout
-              xsi:type="gmfgraph:FlowLayout"/>
-          <children
-              xsi:type="gmfgraph:Label"
-              name="PortNameFigure"
-              text="port"/>
-        </children>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.0/@actualFigure/@children.1/@children.0"/>
-      <accessors
           figure="//@figures.0/@descriptors.0/@actualFigure/@children.0"/>
-      <accessors
-          figure="//@figures.0/@descriptors.0/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="ConnectionFigure">
@@ -49,7 +34,14 @@
         name="PortFigure">
       <actualFigure
           xsi:type="gmfgraph:Rectangle"
-          name="PortFigure"/>
+          name="PortFigure">
+        <children
+            xsi:type="gmfgraph:Label"
+            name="PortNameFigure"
+            text="port"/>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.2/@actualFigure/@children.0"/>
     </descriptors>
   </figures>
   <nodes
@@ -68,9 +60,9 @@
   <labels
       name="BoxName"
       figure="BoxFigure"
-      accessor="//@figures.0/@descriptors.0/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.0/@accessors.0"/>
   <labels
       name="PortName"
       figure="PortFigure"
-      accessor="//@figures.0/@descriptors.0/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.2/@accessors.0"/>
 </gmfgraph:Canvas>
