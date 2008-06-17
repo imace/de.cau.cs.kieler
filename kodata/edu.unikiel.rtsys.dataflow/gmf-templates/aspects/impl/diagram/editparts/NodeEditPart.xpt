@@ -1,7 +1,5 @@
 «REM» 
-Defining a fix for bug 181760 
-@author Hauke Fuhrmann <haf@informatik.uni-kiel.de>
-@date 2008-06-17
+Defining some customizations for Nodes
 «ENDREM»
 
 «IMPORT "http://www.eclipse.org/gmf/2008/GenModel"»
@@ -9,6 +7,11 @@ Defining a fix for bug 181760
 «EXTENSION xpt::diagram::ViewmapAttributesUtils»
 «EXTENSION xpt::diagram::editparts::Utils»
 
+«REM» 
+Defining a fix for bug 181760 
+@author Hauke Fuhrmann <haf@informatik.uni-kiel.de>
+@date 2008-06-17
+«ENDREM»
 «DEFINE getContentPaneFor FOR gmfgen::GenNode-»
 	«IF hasFixedChildren()-»
 		«EXPAND xpt::Common::generatedMemberComment»
@@ -34,6 +37,29 @@ Defining a fix for bug 181760
 			«ELSE»
 			return super.getContentPaneFor(editPart);
 			«ENDIF» 
+		}
+	«ENDIF-»
+«ENDDEFINE»
+
+«REM» 
+Smaller border offsets 
+@author Hauke Fuhrmann <haf@informatik.uni-kiel.de>
+@date 2008-06-17
+«ENDREM»
+«DEFINE addBorderItem FOR gmfgen::GenNode-»
+	«IF getExternalLabels().size() > 0-»
+		«EXPAND xpt::Common::generatedMemberComment»
+		protected void addBorderItem(org.eclipse.draw2d.IFigure borderItemContainer, org.eclipse.gmf.runtime.diagram.ui.editparts.IBorderItemEditPart borderItemEditPart) {
+			if («FOREACH getExternalLabels() AS label SEPARATOR ' || '»borderItemEditPart instanceof «label.getEditPartQualifiedClassName()»«ENDFOREACH») {
+				//org.eclipse.gmf.runtime.diagram.ui.figures.BorderItemLocator locator = new org.eclipse.gmf.runtime.diagram.ui.figures.BorderItemLocator(getMainFigure(), org.eclipse.draw2d.PositionConstants.SOUTH);
+				
+				dataflow.custom.diagram.CustomBorderItemLocator locator = new dataflow.custom.diagram.CustomBorderItemLocator(getMainFigure(), org.eclipse.draw2d.PositionConstants.SOUTH);
+				«REM»original: (-20, -20)«ENDREM»
+				locator.setBorderItemOffset(new org.eclipse.draw2d.geometry.Dimension(-1, -1));
+				borderItemContainer.add(borderItemEditPart.getFigure(), locator);
+			} else {
+				super.addBorderItem(borderItemContainer, borderItemEditPart);
+			}
 		}
 	«ENDIF-»
 «ENDDEFINE»

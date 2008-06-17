@@ -16,9 +16,9 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Connection">
     <eStructuralFeatures xsi:type="ecore:EReference" name="sourcePort" lowerBound="1"
-        eType="#//OutputPort"/>
+        eType="#//Port"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="targetPort" lowerBound="1"
-        eType="#//InputPort"/>
+        eType="#//Port"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DataflowModel" eSuperTypes="#//Box"/>
   <eClassifiers xsi:type="ecore:EClass" name="Port">

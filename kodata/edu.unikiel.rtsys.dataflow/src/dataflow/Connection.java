@@ -35,12 +35,12 @@ public interface Connection extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Source Port</em>' reference.
-	 * @see #setSourcePort(OutputPort)
+	 * @see #setSourcePort(Port)
 	 * @see dataflow.DataflowPackage#getConnection_SourcePort()
 	 * @model required="true"
 	 * @generated
 	 */
-	OutputPort getSourcePort();
+	Port getSourcePort();
 
 	/**
 	 * Sets the value of the '{@link dataflow.Connection#getSourcePort <em>Source Port</em>}' reference.
@@ -50,7 +50,7 @@ public interface Connection extends EObject {
 	 * @see #getSourcePort()
 	 * @generated
 	 */
-	void setSourcePort(OutputPort value);
+	void setSourcePort(Port value);
 
 	/**
 	 * Returns the value of the '<em><b>Target Port</b></em>' reference.
@@ -61,12 +61,12 @@ public interface Connection extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Target Port</em>' reference.
-	 * @see #setTargetPort(InputPort)
+	 * @see #setTargetPort(Port)
 	 * @see dataflow.DataflowPackage#getConnection_TargetPort()
 	 * @model required="true"
 	 * @generated
 	 */
-	InputPort getTargetPort();
+	Port getTargetPort();
 
 	/**
 	 * Sets the value of the '{@link dataflow.Connection#getTargetPort <em>Target Port</em>}' reference.
@@ -76,6 +76,6 @@ public interface Connection extends EObject {
 	 * @see #getTargetPort()
 	 * @generated
 	 */
-	void setTargetPort(InputPort value);
+	void setTargetPort(Port value);
 
 } // Connection

@@ -8,6 +8,7 @@ package dataflow.impl;
 
 import dataflow.Connection;
 import dataflow.DataflowPackage;
+import dataflow.Port;
 import dataflow.InputPort;
 import dataflow.OutputPort;
 
@@ -42,7 +43,7 @@ public class ConnectionImpl extends EObjectImpl implements Connection {
 	 * @generated
 	 * @ordered
 	 */
-	protected OutputPort sourcePort;
+	protected Port sourcePort;
 
 	/**
 	 * The cached value of the '{@link #getTargetPort() <em>Target Port</em>}' reference.
@@ -52,7 +53,7 @@ public class ConnectionImpl extends EObjectImpl implements Connection {
 	 * @generated
 	 * @ordered
 	 */
-	protected InputPort targetPort;
+	protected Port targetPort;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -78,10 +79,10 @@ public class ConnectionImpl extends EObjectImpl implements Connection {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OutputPort getSourcePort() {
+	public Port getSourcePort() {
 		if (sourcePort != null && sourcePort.eIsProxy()) {
 			InternalEObject oldSourcePort = (InternalEObject)sourcePort;
-			sourcePort = (OutputPort)eResolveProxy(oldSourcePort);
+			sourcePort = (Port)eResolveProxy(oldSourcePort);
 			if (sourcePort != oldSourcePort) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DataflowPackage.CONNECTION__SOURCE_PORT, oldSourcePort, sourcePort));
@@ -95,7 +96,7 @@ public class ConnectionImpl extends EObjectImpl implements Connection {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OutputPort basicGetSourcePort() {
+	public Port basicGetSourcePort() {
 		return sourcePort;
 	}
 
@@ -104,8 +105,8 @@ public class ConnectionImpl extends EObjectImpl implements Connection {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setSourcePort(OutputPort newSourcePort) {
-		OutputPort oldSourcePort = sourcePort;
+	public void setSourcePort(Port newSourcePort) {
+		Port oldSourcePort = sourcePort;
 		sourcePort = newSourcePort;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DataflowPackage.CONNECTION__SOURCE_PORT, oldSourcePort, sourcePort));
@@ -116,10 +117,10 @@ public class ConnectionImpl extends EObjectImpl implements Connection {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public InputPort getTargetPort() {
+	public Port getTargetPort() {
 		if (targetPort != null && targetPort.eIsProxy()) {
 			InternalEObject oldTargetPort = (InternalEObject)targetPort;
-			targetPort = (InputPort)eResolveProxy(oldTargetPort);
+			targetPort = (Port)eResolveProxy(oldTargetPort);
 			if (targetPort != oldTargetPort) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DataflowPackage.CONNECTION__TARGET_PORT, oldTargetPort, targetPort));
@@ -133,7 +134,7 @@ public class ConnectionImpl extends EObjectImpl implements Connection {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public InputPort basicGetTargetPort() {
+	public Port basicGetTargetPort() {
 		return targetPort;
 	}
 
@@ -142,8 +143,8 @@ public class ConnectionImpl extends EObjectImpl implements Connection {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setTargetPort(InputPort newTargetPort) {
-		InputPort oldTargetPort = targetPort;
+	public void setTargetPort(Port newTargetPort) {
+		Port oldTargetPort = targetPort;
 		targetPort = newTargetPort;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DataflowPackage.CONNECTION__TARGET_PORT, oldTargetPort, targetPort));
@@ -176,10 +177,10 @@ public class ConnectionImpl extends EObjectImpl implements Connection {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case DataflowPackage.CONNECTION__SOURCE_PORT:
-				setSourcePort((OutputPort)newValue);
+				setSourcePort((Port)newValue);
 				return;
 			case DataflowPackage.CONNECTION__TARGET_PORT:
-				setTargetPort((InputPort)newValue);
+				setTargetPort((Port)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -194,10 +195,10 @@ public class ConnectionImpl extends EObjectImpl implements Connection {
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case DataflowPackage.CONNECTION__SOURCE_PORT:
-				setSourcePort((OutputPort)null);
+				setSourcePort((Port)null);
 				return;
 			case DataflowPackage.CONNECTION__TARGET_PORT:
-				setTargetPort((InputPort)null);
+				setTargetPort((Port)null);
 				return;
 		}
 		super.eUnset(featureID);
