@@ -1,3 +1,6 @@
+@author Hauke Fuhrmann, <haf@informatik.uni-kiel.de>
+@date 2008-06-17
+
 This is a template folder for GMF templates to alter the standard GMF code generation.
 
 Put a copy (same filename AND directory structure) of the Template to alter into the "aspects"

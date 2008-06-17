@@ -1,4 +1,8 @@
-
+«REM» 
+Defining a fix for bug 181760 
+@author Hauke Fuhrmann <haf@informatik.uni-kiel.de>
+@date 2008-06-17
+«ENDREM»
 
 «IMPORT "http://www.eclipse.org/gmf/2008/GenModel"»
 «IMPORT "http://www.eclipse.org/emf/2002/Ecore"»
@@ -22,6 +26,8 @@
 					return getBorderedFigure().getBorderItemContainer();
 				}
 			«ENDFOREACH-»
+			«REM»Here Bugfix where a compartment takes all place so you cannot
+				add side affixed children«ENDREM»
 			«IF getSideAffixedChildren().size() > 0-»
 			// FIXME: return getContentPane() instead of super.getContentPaneFor(editPart)
 			return getContentPane();
