@@ -15,6 +15,14 @@
             red="250"
             green="250"
             blue="250"/>
+        <border
+            xsi:type="gmfgraph:MarginBorder">
+          <insets
+              top="5"
+              left="5"
+              bottom="5"
+              right="5"/>
+        </border>
         <children
             xsi:type="gmfgraph:Label"
             name="BoxNameFigure"
@@ -24,11 +32,24 @@
           figure="//@figures.0/@descriptors.0/@actualFigure/@children.0"/>
     </descriptors>
     <descriptors
+        name="BoxCompartmentFigure">
+      <actualFigure
+          xsi:type="gmfgraph:Rectangle"
+          name="">
+        <backgroundColor
+            xsi:type="gmfgraph:ConstantColor"
+            value="lightGreen"/>
+        <maximumSize
+            dx="50"
+            dy="50"/>
+      </actualFigure>
+    </descriptors>
+    <descriptors
         name="ConnectionFigure">
       <actualFigure
           xsi:type="gmfgraph:PolylineConnection"
           name="ConnectionFigure"
-          targetDecoration="//@figures.0/@descriptors.1/@actualFigure/@children.0">
+          targetDecoration="//@figures.0/@descriptors.2/@actualFigure/@children.0">
         <foregroundColor
             xsi:type="gmfgraph:ConstantColor"
             value="blue"/>
@@ -50,7 +71,7 @@
             dy="5"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.3/@actualFigure"/>
+          figure="//@figures.0/@descriptors.4/@actualFigure"/>
     </descriptors>
     <descriptors
         name="PortNameFigure">
@@ -83,7 +104,7 @@
       figure="ConnectionFigure"/>
   <compartments
       name="BoxCompartment"
-      figure="BoxFigure"/>
+      figure="BoxCompartmentFigure"/>
   <labels
       name="BoxName"
       figure="BoxFigure"

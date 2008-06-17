@@ -102,6 +102,7 @@ public class DataflowSwitch<T> {
 			case DataflowPackage.DATAFLOW_MODEL: {
 				DataflowModel dataflowModel = (DataflowModel)theEObject;
 				T result = caseDataflowModel(dataflowModel);
+				if (result == null) result = caseBox(dataflowModel);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

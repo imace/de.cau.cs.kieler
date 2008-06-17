@@ -97,13 +97,31 @@ public interface DataflowPackage extends EPackage {
 	int BOX__OUTPUTS = 2;
 
 	/**
+	 * The feature id for the '<em><b>Boxes</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOX__BOXES = 3;
+
+	/**
+	 * The feature id for the '<em><b>Connections</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOX__CONNECTIONS = 4;
+
+	/**
 	 * The number of structural features of the '<em>Box</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BOX_FEATURE_COUNT = 3;
+	int BOX_FEATURE_COUNT = 5;
 
 	/**
 	 * The meta object id for the '{@link dataflow.impl.ConnectionImpl <em>Connection</em>}' class.
@@ -159,7 +177,25 @@ public interface DataflowPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DATAFLOW_MODEL__NAME = 0;
+	int DATAFLOW_MODEL__NAME = BOX__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Inputs</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATAFLOW_MODEL__INPUTS = BOX__INPUTS;
+
+	/**
+	 * The feature id for the '<em><b>Outputs</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATAFLOW_MODEL__OUTPUTS = BOX__OUTPUTS;
 
 	/**
 	 * The feature id for the '<em><b>Boxes</b></em>' containment reference list.
@@ -168,7 +204,7 @@ public interface DataflowPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DATAFLOW_MODEL__BOXES = 1;
+	int DATAFLOW_MODEL__BOXES = BOX__BOXES;
 
 	/**
 	 * The feature id for the '<em><b>Connections</b></em>' containment reference list.
@@ -177,7 +213,7 @@ public interface DataflowPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DATAFLOW_MODEL__CONNECTIONS = 2;
+	int DATAFLOW_MODEL__CONNECTIONS = BOX__CONNECTIONS;
 
 	/**
 	 * The number of structural features of the '<em>Model</em>' class.
@@ -186,7 +222,7 @@ public interface DataflowPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DATAFLOW_MODEL_FEATURE_COUNT = 3;
+	int DATAFLOW_MODEL_FEATURE_COUNT = BOX_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link dataflow.impl.PortImpl <em>Port</em>}' class.
@@ -335,6 +371,28 @@ public interface DataflowPackage extends EPackage {
 	EReference getBox_Outputs();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link dataflow.Box#getBoxes <em>Boxes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Boxes</em>'.
+	 * @see dataflow.Box#getBoxes()
+	 * @see #getBox()
+	 * @generated
+	 */
+	EReference getBox_Boxes();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link dataflow.Box#getConnections <em>Connections</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Connections</em>'.
+	 * @see dataflow.Box#getConnections()
+	 * @see #getBox()
+	 * @generated
+	 */
+	EReference getBox_Connections();
+
+	/**
 	 * Returns the meta object for class '{@link dataflow.Connection <em>Connection</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -375,39 +433,6 @@ public interface DataflowPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getDataflowModel();
-
-	/**
-	 * Returns the meta object for the attribute '{@link dataflow.DataflowModel#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see dataflow.DataflowModel#getName()
-	 * @see #getDataflowModel()
-	 * @generated
-	 */
-	EAttribute getDataflowModel_Name();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link dataflow.DataflowModel#getBoxes <em>Boxes</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Boxes</em>'.
-	 * @see dataflow.DataflowModel#getBoxes()
-	 * @see #getDataflowModel()
-	 * @generated
-	 */
-	EReference getDataflowModel_Boxes();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link dataflow.DataflowModel#getConnections <em>Connections</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Connections</em>'.
-	 * @see dataflow.DataflowModel#getConnections()
-	 * @see #getDataflowModel()
-	 * @generated
-	 */
-	EReference getDataflowModel_Connections();
 
 	/**
 	 * Returns the meta object for class '{@link dataflow.Port <em>Port</em>}'.
@@ -529,6 +554,22 @@ public interface DataflowPackage extends EPackage {
 		EReference BOX__OUTPUTS = eINSTANCE.getBox_Outputs();
 
 		/**
+		 * The meta object literal for the '<em><b>Boxes</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BOX__BOXES = eINSTANCE.getBox_Boxes();
+
+		/**
+		 * The meta object literal for the '<em><b>Connections</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BOX__CONNECTIONS = eINSTANCE.getBox_Connections();
+
+		/**
 		 * The meta object literal for the '{@link dataflow.impl.ConnectionImpl <em>Connection</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -563,30 +604,6 @@ public interface DataflowPackage extends EPackage {
 		 * @generated
 		 */
 		EClass DATAFLOW_MODEL = eINSTANCE.getDataflowModel();
-
-		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute DATAFLOW_MODEL__NAME = eINSTANCE.getDataflowModel_Name();
-
-		/**
-		 * The meta object literal for the '<em><b>Boxes</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference DATAFLOW_MODEL__BOXES = eINSTANCE.getDataflowModel_Boxes();
-
-		/**
-		 * The meta object literal for the '<em><b>Connections</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference DATAFLOW_MODEL__CONNECTIONS = eINSTANCE.getDataflowModel_Connections();
 
 		/**
 		 * The meta object literal for the '{@link dataflow.impl.PortImpl <em>Port</em>}' class.

@@ -7,7 +7,9 @@
     xmlns:gmftool="http://www.eclipse.org/gmf/2005/ToolDefinition">
   <nodes>
     <containmentFeature
-        href="Dataflow.ecore#//DataflowModel/boxes"/>
+        href="Dataflow.ecore#//Box/boxes"/>
+    <childrenFeature
+        href="Dataflow.ecore#//Box/boxes"/>
     <ownedChild>
       <domainMetaElement
           href="Dataflow.ecore#//Box"/>
@@ -79,13 +81,26 @@
               href="Dataflow.gmfgraph#OutputPort"/>
         </ownedChild>
       </children>
+      <children
+          compartment="//@nodes.0/@ownedChild/@compartments.0"
+          referencedChild="//@nodes.0/@ownedChild">
+        <containmentFeature
+            href="Dataflow.ecore#//Box/boxes"/>
+        <childrenFeature
+            href="Dataflow.ecore#//Box/boxes"/>
+      </children>
+      <compartments
+          children="//@nodes.0/@ownedChild/@children.2">
+        <compartment
+            href="Dataflow.gmfgraph#BoxCompartment"/>
+      </compartments>
     </ownedChild>
   </nodes>
   <links>
     <domainMetaElement
         href="Dataflow.ecore#//Connection"/>
     <containmentFeature
-        href="Dataflow.ecore#//DataflowModel/connections"/>
+        href="Dataflow.ecore#//Box/connections"/>
     <tool
         xsi:type="gmftool:CreationTool"
         href="Dataflow.gmftool#//@palette/@tools.0/@tools.1"/>

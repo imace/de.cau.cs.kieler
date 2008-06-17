@@ -7,6 +7,7 @@
 package dataflow.impl;
 
 import dataflow.Box;
+import dataflow.Connection;
 import dataflow.DataflowPackage;
 import dataflow.InputPort;
 import dataflow.OutputPort;
@@ -24,6 +25,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -37,6 +39,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link dataflow.impl.BoxImpl#getName <em>Name</em>}</li>
  *   <li>{@link dataflow.impl.BoxImpl#getInputs <em>Inputs</em>}</li>
  *   <li>{@link dataflow.impl.BoxImpl#getOutputs <em>Outputs</em>}</li>
+ *   <li>{@link dataflow.impl.BoxImpl#getBoxes <em>Boxes</em>}</li>
+ *   <li>{@link dataflow.impl.BoxImpl#getConnections <em>Connections</em>}</li>
  * </ul>
  * </p>
  *
@@ -82,6 +86,26 @@ public class BoxImpl extends EObjectImpl implements Box {
 	 * @ordered
 	 */
 	protected EList<OutputPort> outputs;
+
+	/**
+	 * The cached value of the '{@link #getBoxes() <em>Boxes</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getBoxes()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Box> boxes;
+
+	/**
+	 * The cached value of the '{@link #getConnections() <em>Connections</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getConnections()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Connection> connections;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -152,6 +176,30 @@ public class BoxImpl extends EObjectImpl implements Box {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Box> getBoxes() {
+		if (boxes == null) {
+			boxes = new EObjectContainmentEList<Box>(Box.class, this, DataflowPackage.BOX__BOXES);
+		}
+		return boxes;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Connection> getConnections() {
+		if (connections == null) {
+			connections = new EObjectContainmentEList<Connection>(Connection.class, this, DataflowPackage.BOX__CONNECTIONS);
+		}
+		return connections;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -176,6 +224,10 @@ public class BoxImpl extends EObjectImpl implements Box {
 				return ((InternalEList<?>)getInputs()).basicRemove(otherEnd, msgs);
 			case DataflowPackage.BOX__OUTPUTS:
 				return ((InternalEList<?>)getOutputs()).basicRemove(otherEnd, msgs);
+			case DataflowPackage.BOX__BOXES:
+				return ((InternalEList<?>)getBoxes()).basicRemove(otherEnd, msgs);
+			case DataflowPackage.BOX__CONNECTIONS:
+				return ((InternalEList<?>)getConnections()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -194,6 +246,10 @@ public class BoxImpl extends EObjectImpl implements Box {
 				return getInputs();
 			case DataflowPackage.BOX__OUTPUTS:
 				return getOutputs();
+			case DataflowPackage.BOX__BOXES:
+				return getBoxes();
+			case DataflowPackage.BOX__CONNECTIONS:
+				return getConnections();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -218,6 +274,14 @@ public class BoxImpl extends EObjectImpl implements Box {
 				getOutputs().clear();
 				getOutputs().addAll((Collection<? extends OutputPort>)newValue);
 				return;
+			case DataflowPackage.BOX__BOXES:
+				getBoxes().clear();
+				getBoxes().addAll((Collection<? extends Box>)newValue);
+				return;
+			case DataflowPackage.BOX__CONNECTIONS:
+				getConnections().clear();
+				getConnections().addAll((Collection<? extends Connection>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -239,6 +303,12 @@ public class BoxImpl extends EObjectImpl implements Box {
 			case DataflowPackage.BOX__OUTPUTS:
 				getOutputs().clear();
 				return;
+			case DataflowPackage.BOX__BOXES:
+				getBoxes().clear();
+				return;
+			case DataflowPackage.BOX__CONNECTIONS:
+				getConnections().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -257,6 +327,10 @@ public class BoxImpl extends EObjectImpl implements Box {
 				return inputs != null && !inputs.isEmpty();
 			case DataflowPackage.BOX__OUTPUTS:
 				return outputs != null && !outputs.isEmpty();
+			case DataflowPackage.BOX__BOXES:
+				return boxes != null && !boxes.isEmpty();
+			case DataflowPackage.BOX__CONNECTIONS:
+				return connections != null && !connections.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
