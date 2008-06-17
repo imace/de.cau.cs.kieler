@@ -10,8 +10,11 @@
       <actualFigure
           xsi:type="gmfgraph:Rectangle"
           name="BoxFigure">
-        <layout
-            xsi:type="gmfgraph:FlowLayout"/>
+        <backgroundColor
+            xsi:type="gmfgraph:RGBColor"
+            red="250"
+            green="250"
+            blue="250"/>
         <children
             xsi:type="gmfgraph:Label"
             name="BoxNameFigure"
@@ -26,6 +29,9 @@
           xsi:type="gmfgraph:PolylineConnection"
           name="ConnectionFigure"
           targetDecoration="//@figures.0/@descriptors.1/@actualFigure/@children.0">
+        <foregroundColor
+            xsi:type="gmfgraph:ConstantColor"
+            value="blue"/>
         <children
             xsi:type="gmfgraph:PolygonDecoration"/>
       </actualFigure>
@@ -33,24 +39,45 @@
     <descriptors
         name="PortFigure">
       <actualFigure
-          xsi:type="gmfgraph:Rectangle"
-          name="PortFigure">
-        <children
-            xsi:type="gmfgraph:Label"
-            name="PortNameFigure"
-            text="port"/>
+          xsi:type="gmfgraph:Rectangle">
+        <backgroundColor
+            xsi:type="gmfgraph:RGBColor"
+            red="200"
+            green="200"
+            blue="200"/>
+        <preferredSize
+            dx="50"
+            dy="5"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.2/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.3/@actualFigure"/>
+    </descriptors>
+    <descriptors
+        name="PortNameFigure">
+      <actualFigure
+          xsi:type="gmfgraph:Label"
+          name="PortNameLabelFigure"
+          text="port">
+        <font
+            xsi:type="gmfgraph:BasicFont"
+            faceName="Times"
+            height="8"/>
+      </actualFigure>
     </descriptors>
   </figures>
   <nodes
       name="Box"
       figure="BoxFigure"/>
   <nodes
-      name="Port"
+      name="InputPort"
       figure="PortFigure"
-      resizeConstraint="NONE"/>
+      resizeConstraint="NONE"
+      affixedParentSide="WEST"/>
+  <nodes
+      name="OutputPort"
+      figure="PortFigure"
+      resizeConstraint="NONE"
+      affixedParentSide="EAST"/>
   <connections
       name="Connection"
       figure="ConnectionFigure"/>
@@ -60,9 +87,20 @@
   <labels
       name="BoxName"
       figure="BoxFigure"
+      affixedParentSide="SOUTH"
+      elementIcon="false"
       accessor="//@figures.0/@descriptors.0/@accessors.0"/>
   <labels
       name="PortName"
-      figure="PortFigure"
-      accessor="//@figures.0/@descriptors.2/@accessors.0"/>
+      figure="PortNameFigure"
+      resizeConstraint="NONE"
+      affixedParentSide="SOUTH"
+      elementIcon="false">
+    <facets
+        xsi:type="gmfgraph:AlignmentFacet"
+        alignment="END"/>
+    <facets
+        xsi:type="gmfgraph:LabelOffsetFacet"
+        y="-20"/>
+  </labels>
 </gmfgraph:Canvas>

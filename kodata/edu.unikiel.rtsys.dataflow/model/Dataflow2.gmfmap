@@ -38,48 +38,47 @@
       <diagramNode
           href="Dataflow.gmfgraph#Box"/>
       <children
-          compartment="//@nodes.0/@ownedChild/@compartments.0"
           referencedChild="//@nodes.0/@ownedChild/@children.0/@ownedChild">
         <containmentFeature
             href="Dataflow.ecore#//Box/inputs"/>
         <ownedChild>
           <domainMetaElement
               href="Dataflow.ecore#//InputPort"/>
-          <labelMappings>
+          <labelMappings
+              xsi:type="gmfmap:FeatureLabelMapping">
             <diagramLabel
                 href="Dataflow.gmfgraph#PortName"/>
+            <features
+                href="Dataflow.ecore#//Port/name"/>
           </labelMappings>
           <tool
               xsi:type="gmftool:CreationTool"
               href="Dataflow.gmftool#//@palette/@tools.0/@tools.2"/>
           <diagramNode
-              href="Dataflow.gmfgraph#Port"/>
+              href="Dataflow.gmfgraph#InputPort"/>
         </ownedChild>
       </children>
       <children
-          compartment="//@nodes.0/@ownedChild/@compartments.0"
           referencedChild="//@nodes.0/@ownedChild/@children.1/@ownedChild">
         <containmentFeature
             href="Dataflow.ecore#//Box/outputs"/>
         <ownedChild>
           <domainMetaElement
               href="Dataflow.ecore#//OutputPort"/>
-          <labelMappings>
+          <labelMappings
+              xsi:type="gmfmap:FeatureLabelMapping">
             <diagramLabel
                 href="Dataflow.gmfgraph#PortName"/>
+            <features
+                href="Dataflow.ecore#//Port/name"/>
           </labelMappings>
           <tool
               xsi:type="gmftool:CreationTool"
               href="Dataflow.gmftool#//@palette/@tools.0/@tools.2"/>
           <diagramNode
-              href="Dataflow.gmfgraph#Port"/>
+              href="Dataflow.gmfgraph#OutputPort"/>
         </ownedChild>
       </children>
-      <compartments
-          children="//@nodes.0/@ownedChild/@children.0 //@nodes.0/@ownedChild/@children.1">
-        <compartment
-            href="Dataflow.gmfgraph#BoxCompartment"/>
-      </compartments>
     </ownedChild>
   </nodes>
   <links>
