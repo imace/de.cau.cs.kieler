@@ -296,6 +296,8 @@
             fixedForeground="true"/>
         <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
       </viewmap>
+      <styles
+          href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/RoutingStyle"/>
       <modelFacet
           xsi:type="gmfgen:TypeLinkModelFacet">
         <metaClass

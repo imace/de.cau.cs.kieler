@@ -94,12 +94,12 @@
       name="InputPort"
       figure="PortFigure"
       resizeConstraint="NONE"
-      affixedParentSide="SOUTH_WEST"/>
+      affixedParentSide="WEST"/>
   <nodes
       name="OutputPort"
       figure="PortFigure"
       resizeConstraint="NONE"
-      affixedParentSide="SOUTH_EAST"/>
+      affixedParentSide="EAST"/>
   <connections
       name="Connection"
       figure="ConnectionFigure"/>
@@ -116,6 +116,6 @@
       name="PortName"
       figure="PortNameFigure"
       resizeConstraint="NONE"
-      affixedParentSide="SOUTH"
+      affixedParentSide="SOUTH_WEST"
       elementIcon="false"/>
 </gmfgraph:Canvas>
