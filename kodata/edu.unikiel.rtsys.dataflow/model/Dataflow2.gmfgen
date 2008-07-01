@@ -10,6 +10,7 @@
       itemSemanticEditPolicyClassName="DataflowModelItemSemanticEditPolicy"
       notationViewFactoryClassName="DataflowModelViewFactory"
       canonicalEditPolicyClassName="DataflowModelCanonicalEditPolicy"
+      editPartProviderPriority="Highest"
       iconProviderPriority="Low"
       validationProviderPriority="Low">
     <diagramRunTimeClass
