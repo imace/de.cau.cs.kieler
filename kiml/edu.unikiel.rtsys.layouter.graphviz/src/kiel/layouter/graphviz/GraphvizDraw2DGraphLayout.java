@@ -1,5 +1,6 @@
 package kiel.layouter.graphviz;
 
+import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -27,8 +28,12 @@ public class GraphvizDraw2DGraphLayout {
 	private final float dpi = 96.0f;
 	
 	// magic scaling factors to translate between GraphViz and other coordinate systems
+	// difference between point and pica?
 	private final float scaleX = 1.33f;
 	private final float scaleY = 1.33f;
+	
+	// padding from the borders. pad attribute of graphviz has no effect
+	private final int pad = 10;
 	
 	public GraphvizDraw2DGraphLayout() {
 		init();
@@ -38,21 +43,27 @@ public class GraphvizDraw2DGraphLayout {
 		GraphvizAPI.initialize();
 		graphvizGraph = GraphvizAPI.createGraph("");
 		//GraphvizAPI.setGraphAttribute(graphvizGraph, GraphvizAPI.ATTR_DPI, ""+dpi);
+		GraphvizAPI.setGraphAttribute(graphvizGraph, "rankdir", "LR");
+		GraphvizAPI.setGraphAttribute(graphvizGraph, "pad", ""+1);
 		// TODO: set correct shape for node corresponding to actual Draw2D shape
 		GraphvizAPI.setGlobalNodeAttribute(graphvizGraph, GraphvizAPI.ATTR_SHAPE, "box");
 		
 	}
 	
+	/**
+	 * Main method to visit a Graph and to add layout information to it.
+	 * @param graph the Graph object to visit
+	 */
 	public void visit(Graph graph) {
 		visitRecursively(graph);
-/*		mapGraph2Graphviz(graph);
-		GraphvizAPI.doDotLayout(graphvizGraph);
-		GraphvizAPI.attachAttributes(graphvizGraph);
-		//System.out.println("dpi: "+GraphvizAPI.getAttribute(graphvizGraph, GraphvizAPI.ATTR_DPI));
-		mapGraphviz2Graph(graph);
-*/		
 	}
 	
+	/**
+	 * Recursive visit function that visits the given node as a parent node. First it
+	 * calls itself recursively for the children in order to address the hierarchy.
+	 * Then it adds the layout stuff to its children 
+	 * @param node parent Node to visit (maybe a Graph or a CompositeNode)
+	 */
 	public void visitRecursively(CompositeNode node){
 		for (Node child : node.getNodes()) {
 			if(child instanceof CompositeNode)
@@ -65,6 +76,11 @@ public class GraphvizDraw2DGraphLayout {
 		mapGraphviz2Graph(node);
 	}
 	
+	/**
+	 * Map a Graph object to the internal GraphvizAPI datastructure. This is stored
+	 * in the GraphvizAPI internally.
+	 * @param graph
+	 */
 	private void mapGraph2Graphviz(CompositeNode graph){
 		int i=0;
 		// process all nodes in the Graph datastructure
@@ -93,8 +109,20 @@ public class GraphvizDraw2DGraphLayout {
 		}		
 	}
 	
+	/**
+	 * Read the internal Graphviz datastructure that was filled by the Graphviz library and
+	 * write the required parameters back to the Graph object. Hence the Graph object
+	 * is the interface between layouter and parties who need layouted stuff.
+	 * @param graph Graph object to fill with the layout information
+	 */
 	private void mapGraphviz2Graph(CompositeNode graph){
 		GraphvizAPI.writeDOT(graphvizGraph, "/home/haf/test.dot");
+		mapGraphvizNodes2Graph();
+		mapGraphvizEdges2Graph();
+		setNodeSize(graph);
+	}
+
+	private void mapGraphvizNodes2Graph() {
 		// iterate over all nodes in the graphviz graph and copy their attributes to the Graph datastructure 
 		for(Iterator iter = mapNode2Pointer.keySet().iterator(); iter.hasNext();){
 			Node node = (Node)iter.next();
@@ -115,25 +143,39 @@ public class GraphvizDraw2DGraphLayout {
 				e.printStackTrace();
 			}
 			node.setPosition(coords);
-			System.out.println("Node: "+node+" "+nodePointer+" "+posString+" "+node.getPosition().getX()+" "+node.getPosition().getY() );
 		}
+	}
+
+	private void mapGraphvizEdges2Graph() {
 		// iterate over all edges in the graphviz graph and copy their attributes to the Graph datastructure
 		for(Iterator iter = mapEdge2Pointer.keySet().iterator(); iter.hasNext();){
 			Edge edge = (Edge)iter.next();
-//			System.out.print("Edge: "+edge);
-//			System.out.print("EdgeS: "+edge.getSource());
-//			System.out.print("EdgeSP: "+edge.getSource().getPosition());
-//			System.out.print("EdgeSPX: "+edge.getSource().getPosition().getX());
-//			System.out.print("S:"+edge.getSource().getPosition().getX()+","+edge.getSource().getPosition().getY()+" ");
-//			System.out.print("T:"+edge.getTarget().getPosition().getX()+","+edge.getTarget().getPosition().getY()+"\n");
 			int edgePointer = mapEdge2Pointer.get(edge);
 			String posString = GraphvizAPI.getAttribute(edgePointer, GraphvizAPI.ATTR_POS);
-			System.out.println("Graphviz Bendpoints: "+posString);
 			List<Integer> intList = string2Ints(posString);
 			try{
-				// unsafe because list size might be odd (not good, because list of point coordinates)
-				for(int i=2; i<intList.size()-1; i+=2){
-					// ignore first point pair					
+				/* haf, 2008-06-10
+				 * Graphviz uses piecewise cubic beziercurves. Each part consists of: 
+				 * Start point, bezier control point 1, bezier control point 2, End point.
+				 * Start point of the next section is the same as the end point of the last.
+				 * The control points are likely to be not part of the path but specify the
+				 * bend of the curve.
+				 * 
+				 * Eclipse does not support bezier curves (yet). Standard thing are Polylines
+				 * with only explicit bendpoints. I've implemented some cubic spline connection
+				 * on top of that. But there all bendpoints are part of the curve.
+				 * 
+				 * First approximation: only use the start and end points of Graphviz' bezier
+				 * parts as bendpoints for the eclipse splines.
+				 * 
+				 * TODO: Add proper bezier path handling when this is supported by Eclipse!
+				 *       @see Eclipse bug: 234808 and 168307
+				 */
+				
+				// unsafe because list size might be not a multiple of 6
+				for(int i=2; i<intList.size()-1; i+=6){ 
+					// i=2: ignore first point pair
+					// i+=6: ignore bezier control points
 					Coordinates point = GraphFactory.eINSTANCE.createCoordinates();
 					point.setX(intList.get(i));
 					point.setY(intList.get(i+1)); 
@@ -141,6 +183,7 @@ public class GraphvizDraw2DGraphLayout {
 					edge.getBendpoints().add(point);
 					// System.out.println("bendpoint: "+point.getX()+" "+point.getY());
 				}
+				// first point in the Graphviz list is the end point
 				Coordinates endPoint = GraphFactory.eINSTANCE.createCoordinates();
 				endPoint.setX(intList.get(0));
 				endPoint.setY(intList.get(1));
@@ -151,7 +194,6 @@ public class GraphvizDraw2DGraphLayout {
 			if(edge.getEdgeLabel() != null){
 				Coordinates coords = GraphFactory.eINSTANCE.createCoordinates();
 				String labelLoc = GraphvizAPI.getAttribute(edgePointer, GraphvizAPI.ATTR_LP);
-				System.out.println("LabelGraphViz: "+labelLoc+" size: "+edge.getEdgeLabel().getSize());
 				List<Integer> ints = string2Ints(labelLoc);
 				if(ints.size() == 2){
 					// in Graphviz position is the center of the node
@@ -167,9 +209,27 @@ public class GraphvizDraw2DGraphLayout {
 					coords.setY(0);
 				}
 				edge.getEdgeLabel().setPosition(coords);
-			}
+			}//if edgeLabel
 			
-		}		
+		}// for edges	
+	}
+	
+	/** Sets the required size of the node (i.e. a CompositeNode or a Graph) by
+	 * obtaining the bounding box of the Graphviz Graph. Will leave the old sizes
+	 * for simple Nodes and empty CompositeNodes.
+	 * @param node
+	 */
+	private void setNodeSize(Node node){
+		if(node instanceof CompositeNode){
+			CompositeNode cnode = (CompositeNode)node;
+			if(! cnode.getNodes().isEmpty()){
+				Dimension bb = GraphvizAPI.getBoundingBox(graphvizGraph);
+				Size size = GraphFactory.eINSTANCE.createSize();
+				size.setWidth(bb.width);
+				size.setHeight(bb.height);
+				node.setSize(size);
+			}
+		}
 	}
 	
 	/**
@@ -202,29 +262,29 @@ public class GraphvizDraw2DGraphLayout {
 	
 	private Coordinates graphviz2Draw2D(Coordinates coords, Size size){
 		Coordinates newCoords = GraphFactory.eINSTANCE.createCoordinates();
-		newCoords.setX((int)(coords.getX()*scaleX) - (size.getWidth()/2));
-		newCoords.setY((int)(coords.getY()*scaleY) - (size.getHeight()/2));
+		newCoords.setX((int)(coords.getX()*scaleX) - (size.getWidth()/2)  + pad);
+		newCoords.setY((int)(coords.getY()*scaleY) - (size.getHeight()/2) + pad);
 		return newCoords;
 	}
 	
 	private Coordinates draw2D2Graphviz(Coordinates coords, Size size){
 		Coordinates newCoords = GraphFactory.eINSTANCE.createCoordinates();
-		newCoords.setX((int)(coords.getX()/scaleX) + (size.getWidth()/2));
-		newCoords.setY((int)(coords.getY()/scaleY) + (size.getHeight()/2));
+		newCoords.setX((int)(coords.getX()/scaleX) + (size.getWidth()/2)  - pad);
+		newCoords.setY((int)(coords.getY()/scaleY) + (size.getHeight()/2) - pad);
 		return newCoords;
 	}
 	
 	private Coordinates graphviz2Draw2D(Coordinates coords){
 		Coordinates newCoords = GraphFactory.eINSTANCE.createCoordinates();
-		newCoords.setX((int)(coords.getX()*scaleX));
-		newCoords.setY((int)(coords.getY()*scaleY));
+		newCoords.setX((int)(coords.getX()*scaleX) + pad);
+		newCoords.setY((int)(coords.getY()*scaleY) + pad);
 		return newCoords;
 	}
 	
 	private Coordinates draw2D2Graphviz(Coordinates coords){
 		Coordinates newCoords = GraphFactory.eINSTANCE.createCoordinates();
-		newCoords.setX((int)(coords.getX()/scaleX));
-		newCoords.setY((int)(coords.getY()/scaleY));
+		newCoords.setX((int)(coords.getX()/scaleX) - pad);
+		newCoords.setY((int)(coords.getY()/scaleY) - pad);
 		return newCoords;
 	}
 	

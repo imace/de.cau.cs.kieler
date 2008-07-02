@@ -8,6 +8,7 @@ import java.util.ListIterator;
 import java.util.Map;
 
 import org.eclipse.core.runtime.IAdaptable;
+import org.eclipse.draw2d.Animation;
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.PolylineConnection;
 import org.eclipse.draw2d.geometry.Dimension;
@@ -24,9 +25,11 @@ import org.eclipse.gef.requests.ReconnectRequest;
 import org.eclipse.gmf.runtime.common.core.service.IOperation;
 import org.eclipse.gmf.runtime.common.core.util.Trace;
 import org.eclipse.gmf.runtime.diagram.ui.commands.ICommandProxy;
-import org.eclipse.gmf.runtime.diagram.ui.editparts.CompartmentEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.IBorderItemEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.IBorderedShapeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.LabelEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeCompartmentEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.internal.services.layout.LayoutNodesOperation;
 import org.eclipse.gmf.runtime.diagram.ui.providers.internal.DefaultProvider;
@@ -64,6 +67,11 @@ public class GraphvizLayoutProvider extends DefaultProvider{
 	public static final String ID = "edu.unikiel.rtsys.layouter.layoutprovider";
 	
 	private DebugFigureHandler debugFigureHandler = new DebugFigureHandler();
+	
+	/** True iff edges should be layed out. False if only nodes should be placed and
+	 * edges get routed by some other mechanism (e.g. GMF's ConnectionRouter)
+	 */
+	private boolean layoutEdges = true;
 	
 	/**
 	 * @see org.eclipse.gmf.runtime.diagram.ui.services.layout.AbstractLayoutEditPartProvider#layoutEditParts(org.eclipse.gef.GraphicalEditPart,
@@ -123,6 +131,7 @@ public class GraphvizLayoutProvider extends DefaultProvider{
 		
 		// update Diagram with methods from original eclipse layouter
 		Command cmd = updateDiagram(containerEditPart, layoutGraph, true);		
+//		CompoundCommand cc = new CompoundCommand(); // dummy command to return nothing for debugging
 		return cmd;
 	}
 	
@@ -156,8 +165,8 @@ public class GraphvizLayoutProvider extends DefaultProvider{
 		for (Object object : connections) {
 			if (object instanceof ConnectionEditPart) {
 				ConnectionEditPart con = (ConnectionEditPart) object;
-				Node source = editPart2Node.get(con.getSource());
-				Node target = editPart2Node.get(con.getTarget());
+				Node source = editPart2Node.get(getBaseEditPart(con.getSource()));
+				Node target = editPart2Node.get(getBaseEditPart(con.getTarget()));
 				// connection might be to not selected component
 				if(source != null && target != null)
 				{
@@ -204,7 +213,8 @@ public class GraphvizLayoutProvider extends DefaultProvider{
 		ArrayList connections = new ArrayList();
 		while (li.hasNext()) {
 			IGraphicalEditPart gep = (IGraphicalEditPart) li.next();
-			if (gep instanceof ShapeEditPart) {
+			// make sure the child is a shape (instead of a connection) and not a border item ("port") 
+			if (gep instanceof ShapeEditPart && !(gep instanceof IBorderItemEditPart)) {
 				ShapeEditPart shapeEP = (ShapeEditPart) gep;
 				Point position = shapeEP.getLocation();
 				// TODO: create Composite only if it really contains compartment, normal Node else
@@ -212,40 +222,68 @@ public class GraphvizLayoutProvider extends DefaultProvider{
 				// store the EditPart in the node to get the mapping later
 				node.setData(shapeEP); 
 				editPart2Node.put(shapeEP, node);
+				// store current dimension of EP in graph model
 				Size size = factory.createSize();
 				size.setWidth(shapeEP.getSize().width);
 				size.setHeight(shapeEP.getSize().height);
 				node.setSize(size);
 				parentNode.getNodes().add(node);
+				// get the connections from this EP
+				connections.addAll(getConnections(gep));
+				
 				// recursive call to check for hierarchy
 				buildNodes(gep.getChildren(),editPart2Node,node);
 			}
-			if(gep instanceof CompartmentEditPart){
+			/* check if the child was just a shape compartment. That's no node itself but it can
+			   contain other children nodes. Note that a simple CompartmentEditPart can also be 
+			   the compartment holding the label only and would not contain interesting children...*/
+			if(gep instanceof ShapeCompartmentEditPart){
 				// recursive call to check for hierarchy
 				// here add children to the parent node of this compartment
 				buildNodes(gep.getChildren(),editPart2Node,parentNode);
 			}
-			
-			// crumble the relevant connections from the selected EditParts
-			connections.addAll(gep.getSourceConnections());
-			
-			/* TODO: find connections not directly connected to the edit part but to its
-			 * border... 
-			if (gep instanceof IBorderedShapeEditPart) {
-				// search the BorderItemEditParts
-				for (Object child : gep.getChildren()) {
-					if( child instanceof IBorderItemEditPart)
-						connections.addAll(((IGraphicalEditPart)child).getSourceConnections());
-				}
-			}
-			*/
 		}
 		// add connections to the current composite node
 		buildConnections(editPart2Node, parentNode, connections);
 		return connections;
 	}
 	
+	/**
+	 * Returns the connections going out of the given edit part. Returns not only the
+	 * direct connections but also connection connecting to border items of the edit part.
+	 * @param gep
+	 * @return list of connections of the edit part (direct or to border items)
+	 */
+	private List getConnections(GraphicalEditPart gep){
+		ArrayList connections = new ArrayList();
+		connections.addAll(gep.getSourceConnections());
+		/* find connections not directly connected to the edit part but to its
+		 * border items */
+		if (gep instanceof IBorderedShapeEditPart) {
+			// search the BorderItemEditParts
+			for (Object child : gep.getChildren()) {
+				if( child instanceof IBorderItemEditPart)
+					connections.addAll(((IGraphicalEditPart)child).getSourceConnections());
+			}
+		}
+		return connections;
+	}
 
+	/**
+	 * Returns the EditPart either itself or its parent if it is a BorderItem.
+	 * Hence this method returns only the basic EditParts and not its BorderItem children.
+	 * @param gep
+	 * @return
+	 */
+	private EditPart getBaseEditPart(EditPart ep){
+		if(ep instanceof IBorderItemEditPart){
+			return ep.getParent();
+		}
+		return ep;
+	}
+	
+	
+	
     /**
 	 * Reads a <code>Graph</code> datastructure containing layout information
 	 * and generates a compound command to change the corresponding layout
@@ -276,6 +314,8 @@ public class GraphvizLayoutProvider extends DefaultProvider{
 	 *  
 	 */
 	private void updateDiagramEdges(CompositeNode parentNode, CompoundCommand cc) {
+		// first check if edges should be layouted at all (might get disabled in prefs)
+		if(layoutEdges){
 		for (final Edge edge : parentNode.getEdges()){
 /*			// reconnect nodes, dunno what it does... has no effect but copied from eclipsecon slides
 			Command cmd1 = reconnect(edge.getSource(), edge.getData(), RequestConstants.REQ_RECONNECT_SOURCE);
@@ -350,46 +390,55 @@ public class GraphvizLayoutProvider extends DefaultProvider{
 						cc.add(cmd);
 				} 
 			}
+		}
 	}
 
 	/**
 	 * Get change commands for new node positions
-	 * @param g
-	 * @param cc
+	 * @param parentNode the parentNode
+	 * @param cc adds the change commands to this compound command
 	 */
 	private void updateDiagramNodes(CompositeNode parentNode, CompoundCommand cc) {
-		for (Node node : parentNode.getNodes()) {
-			if (node.getData() instanceof IGraphicalEditPart) {
+		for (Node node : parentNode.getNodes()) { // get all child nodes to move
+			if (node.getData() instanceof IGraphicalEditPart) { // check if node is a Graphical EditPart
 				IGraphicalEditPart gep = (IGraphicalEditPart) node.getData();
-				ChangeBoundsRequest request = new ChangeBoundsRequest(RequestConstants.REQ_MOVE);
-				request.setEditParts(gep);
+				ChangeBoundsRequest moveRequest = new ChangeBoundsRequest(RequestConstants.REQ_MOVE);
+				moveRequest.setEditParts(gep);
+				ChangeBoundsRequest sizeRequest = new ChangeBoundsRequest(RequestConstants.REQ_RESIZE);
+				sizeRequest.setEditParts(gep);
+				
 				// calculate the Move Delta (required by movement request)
 				Point oldPosition = gep.getFigure().getBounds().getLocation();
 				Point newPosition = new Point(node.getPosition().getX(),node.getPosition().getY());
 				Point delta = new Point(newPosition.x-oldPosition.x, newPosition.y-oldPosition.y);
 				//System.out.println("Node pos, old: "+oldPosition+ " new: "+newPosition+" delta: "+delta);
 				
+				// calculate the size delta (for size request)
 				Dimension oldSize = new Dimension(gep.getFigure().getBounds().width, gep.getFigure().getBounds().height);
 				Dimension newSize = new Dimension(node.getSize().getWidth(), node.getSize().getHeight());
-				Dimension deltaSize = new Dimension(oldSize.width-newSize.width, oldSize.height-newSize.height);
-				
-				debugFigureHandler.addDebugPoint((GraphicalEditPart)gep.getParent(),newPosition, ColorConstants.green);
-				Point newPosition2 = new Point(newPosition.x+newSize.width, newPosition.y+newSize.height);
-				debugFigureHandler.addDebugPoint((GraphicalEditPart)gep.getParent(),newPosition2, ColorConstants.cyan);
+				Dimension deltaSize = new Dimension(newSize.width-oldSize.width, newSize.height-oldSize.height);
 
-// DEBUG //////////////////////////////////////////////				
-				// draw some debug stuff
-				debugFigureHandler.addDebugRectangle((GraphicalEditPart)((GraphicalEditPart)gep.getParent()).getRoot(), ((GraphicalEditPart)gep.getParent()).getFigure().getBounds(), ColorConstants.red);
-				System.out.println(((GraphicalEditPart)gep.getParent()).getFigure().getBounds());
+// DEBUG //////////////////////////////////////////////
+//				debugFigureHandler.addDebugPoint((GraphicalEditPart)gep.getParent(),newPosition, ColorConstants.green);
+//				Point newPosition2 = new Point(newPosition.x+newSize.width, newPosition.y+newSize.height);
+//				debugFigureHandler.addDebugPoint((GraphicalEditPart)gep.getParent(),newPosition2, ColorConstants.cyan);
+//				
+//				// draw some debug stuff
+//				debugFigureHandler.addDebugRectangle((GraphicalEditPart)((GraphicalEditPart)gep.getParent()).getRoot(), ((GraphicalEditPart)gep.getParent()).getFigure().getBounds(), ColorConstants.red);
+//				System.out.println(((GraphicalEditPart)gep.getParent()).getFigure().getBounds());
 // End DEBUG //////////////////////////////////////////////
 				
-				//request.setSizeDelta(deltaSize);
-				request.setMoveDelta(delta);
-				request.setLocation(newPosition);
+				moveRequest.setMoveDelta(delta);
+				moveRequest.setLocation(newPosition);
 				// get the actual command for the request from EP itself
-				Command cmd = gep.getCommand(request);
-				if ( cmd!=null && cmd.canExecute() )
-					cc.add(cmd);
+				Command moveCmd = gep.getCommand(moveRequest);
+				if ( moveCmd!=null && moveCmd.canExecute() )
+					cc.add(moveCmd);
+//				
+//				sizeRequest.setSizeDelta(deltaSize);
+//				Command sizeCmd = gep.getCommand(sizeRequest);
+//				if ( sizeCmd!=null && sizeCmd.canExecute() )
+//					cc.add(sizeCmd);
 				
 				// recursive call to cover hierarchy
 				if(node instanceof CompositeNode){
@@ -404,11 +453,12 @@ public class GraphvizLayoutProvider extends DefaultProvider{
 	
 	
 	/*
-	 * Read preferences and set internal vars accoridngly.
-	 */
+	 * Read preferences and set internal vars accordingly.
+	 */ 
 	private void retrievePreferences(){
 		IPreferenceStore prefs = LayouterPlugin.getDefault().getPreferenceStore();
-		debugFigureHandler.setDebug(prefs.getBoolean(WorkbenchPreferencePage.PREF_DEBUG_LAYOUTER));
+		debugFigureHandler.setDebug(prefs.getBoolean(WorkbenchPreferencePage.PREF_LAYOUTER_DEBUG));
+		this.layoutEdges = prefs.getBoolean(WorkbenchPreferencePage.PREF_LAYOUTER_CONNECTION);
 	}
 	
 	/**

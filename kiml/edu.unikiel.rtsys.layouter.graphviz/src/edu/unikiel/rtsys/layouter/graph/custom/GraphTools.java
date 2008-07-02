@@ -7,6 +7,8 @@ import edu.unikiel.rtsys.layouter.graph.Node;
 
 public class GraphTools {
 
+	private static String indent = "";
+	
 	/** 
 	 * Iterates over a given graph and returns some String representation
 	 * for debugging.

@@ -137,6 +137,11 @@ public final class GraphvizAPI {
      */
     protected static final String ATTR_WIDTH         = "width";
 
+    /**
+     * This is a graphviz attribute.
+     */    
+    protected static final String ATTR_ROTATE        = "rotate";
+    
     static {
     	System.loadLibrary("GraphvizAPI");
     }

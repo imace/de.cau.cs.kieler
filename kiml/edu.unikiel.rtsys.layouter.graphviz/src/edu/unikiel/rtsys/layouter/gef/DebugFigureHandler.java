@@ -44,14 +44,13 @@ public class DebugFigureHandler {
 			IFigure fig = containerEditPart.getContentPane();
 			// if necessary create new debug layer and add it to the root part
 			DebugFigure debugFigure = editPart2debugFigure.get(containerEditPart);
-			if( debugFigure == null || !fig.getChildren().contains(debugFigure)){
+			if( (debugFigure == null || !fig.getChildren().contains(debugFigure)) && debug){
 				debugFigure = new DebugFigure();
 				debugFigure.setBounds(fig.getBounds());
 				fig.add(debugFigure);
 				editPart2debugFigure.put(containerEditPart, debugFigure);
 			}
 			return debugFigure;
-		
 	}
 	
 	/**
@@ -60,23 +59,27 @@ public class DebugFigureHandler {
 	public void refresh(){
 		for(EditPart container : editPart2debugFigure.keySet()){
 			DebugFigure debugFigure = editPart2debugFigure.get(container);
-			debugFigure.refresh(debug);
+			if(debugFigure != null)
+				debugFigure.refresh(debug);
 		}
 	}
 
 	public void addDebugPoint(GraphicalEditPart containerEditPart, Point p){
 		DebugFigure df = getDebugGraphics(containerEditPart);
-		df.addDebugPoint(p);
+		if(df != null)
+			df.addDebugPoint(p);
 	}
 	
 	public void addDebugPoint(GraphicalEditPart containerEditPart, Point p, Color c){
 		DebugFigure df = getDebugGraphics(containerEditPart);
-		df.addDebugPoint(p,c);
+		if(df != null)
+			df.addDebugPoint(p,c);
 	}
 	
 	public void addDebugRectangle(GraphicalEditPart containerEditPart, Rectangle bounds, Color c){
 		DebugFigure df = getDebugGraphics(containerEditPart);
-		df.addDebugRectangle(bounds, c);
+		if(df != null)
+			df.addDebugRectangle(bounds, c);
 	}
 	
 	
