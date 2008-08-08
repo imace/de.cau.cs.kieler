@@ -1,4 +1,4 @@
-package kiel.layouter.graphviz;
+package edu.unikiel.rtsys.layouter.gef;
 
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.Figure;

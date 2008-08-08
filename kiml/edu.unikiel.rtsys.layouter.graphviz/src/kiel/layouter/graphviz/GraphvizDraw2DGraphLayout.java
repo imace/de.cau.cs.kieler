@@ -16,15 +16,33 @@ import edu.unikiel.rtsys.layouter.graph.GraphFactory;
 import edu.unikiel.rtsys.layouter.graph.Node;
 import edu.unikiel.rtsys.layouter.graph.Size;
 
+/**
+ * Basic Layout Algorithm employing the Graphviz library (dot layout) to do a graphical
+ * layout on a passed Graph datastructure. The basic principle is simple: (1) read the
+ * graph datastructure and use the GraphvizAPI to fill a Graphviz internal (native) datastructure. 
+ * (2) call a Graphviz layout engine (e.g. the dot layouter) on the Graphviz datastructure. The
+ * datastructure will get augmented by positioning attributes. (3) Read the position attributes
+ * from the Graphviz datastructure and write them back to the KIELER Graph datastructure.
+ * 
+ * Hierarchy is prepared (by visiting the graph recursively) but not tested yet.
+ * @author haf
+ *
+ */
 public class GraphvizDraw2DGraphLayout {
 
+	/** Store the Graphviz internal C-Pointers of our nodes and edges*/
 	private HashMap<Node, Integer> mapNode2Pointer = new HashMap<Node, Integer>();
 	private HashMap<Edge, Integer> mapEdge2Pointer = new HashMap<Edge, Integer>();
 	
-	private HashMap<EObject, Integer> mapObject2Pointer = new HashMap<EObject, Integer>();
+	//private HashMap<EObject, Integer> mapObject2Pointer = new HashMap<EObject, Integer>();
 	
+	/** C-pointer to the root GraphvizGraph datastructure */
 	private int graphvizGraph;
 	
+	/** dots per inch specification. Graphviz uses inch for some internal sizes (e.g. width, height)
+	 * but not for all. Hence finding the right dpi is crucial for the layout. Setting the
+	 * dpi attribute for a graph within Graphviz seems to have no effect.
+	 */
 	private final float dpi = 96.0f;
 	
 	// magic scaling factors to translate between GraphViz and other coordinate systems
@@ -39,15 +57,20 @@ public class GraphvizDraw2DGraphLayout {
 		init();
 	}
 	
+	/**
+	 * Initializes the GraphvizAPI. Creates a fresh graph and sets global attributes.
+	 * Needs to be called before every layouting. Graphviz might crash otherwise...
+	 */
 	private void init(){
 		GraphvizAPI.initialize();
 		graphvizGraph = GraphvizAPI.createGraph("");
 		//GraphvizAPI.setGraphAttribute(graphvizGraph, GraphvizAPI.ATTR_DPI, ""+dpi);
+		// set layout direction (up/down vs. left/right)
 		GraphvizAPI.setGraphAttribute(graphvizGraph, "rankdir", "LR");
+		// set padding of the layout. seems to have no effect...
 		GraphvizAPI.setGraphAttribute(graphvizGraph, "pad", ""+1);
 		// TODO: set correct shape for node corresponding to actual Draw2D shape
 		GraphvizAPI.setGlobalNodeAttribute(graphvizGraph, GraphvizAPI.ATTR_SHAPE, "box");
-		
 	}
 	
 	/**
@@ -62,6 +85,9 @@ public class GraphvizDraw2DGraphLayout {
 	 * Recursive visit function that visits the given node as a parent node. First it
 	 * calls itself recursively for the children in order to address the hierarchy.
 	 * Then it adds the layout stuff to its children 
+	 * 
+	 * TODO: recursive feature highly experimental and not yet tested!
+	 * 
 	 * @param node parent Node to visit (maybe a Graph or a CompositeNode)
 	 */
 	public void visitRecursively(CompositeNode node){
@@ -122,6 +148,7 @@ public class GraphvizDraw2DGraphLayout {
 		setNodeSize(graph);
 	}
 
+	/** Write all Node related information from Graphviz into the Graph datastructure */
 	private void mapGraphvizNodes2Graph() {
 		// iterate over all nodes in the graphviz graph and copy their attributes to the Graph datastructure 
 		for(Iterator iter = mapNode2Pointer.keySet().iterator(); iter.hasNext();){
@@ -145,7 +172,8 @@ public class GraphvizDraw2DGraphLayout {
 			node.setPosition(coords);
 		}
 	}
-
+	
+	/** Write all Edge related information from Graphviz into the Graph datastructure */
 	private void mapGraphvizEdges2Graph() {
 		// iterate over all edges in the graphviz graph and copy their attributes to the Graph datastructure
 		for(Iterator iter = mapEdge2Pointer.keySet().iterator(); iter.hasNext();){
@@ -235,7 +263,9 @@ public class GraphvizDraw2DGraphLayout {
 	/**
 	 * Given a size (width) in points, a String is returned, that tries to fill this
 	 * size with some text. As default font size Times Roman in 14 point size is assumed
-	 * (default of graphiz label text size).
+	 * (default of graphiz label text size). Rationale: Eclipse uses an actual size (width+height)
+	 * for labels, Graphviz knows only a specific text of a label and calculates its size
+	 * internally.
 	 * @param points
 	 * @return
 	 */
@@ -250,16 +280,34 @@ public class GraphvizDraw2DGraphLayout {
 		return new String(letters);
 	}
 	
+	/** 
+	 * Tranforms dots into inches, using the internal dpi factor. 
+	 * @param dots
+	 * @return inches
+	 */
 	private float dot2Inch(int dots){
 		float inches = (dots/(float)dpi);
 		//// System.out.println("dpi: "+dots+" "+inches);
 		return inches;
 	}
 	
+	/** 
+	 * Tranforms inches into dots, using the internal dpi factor. 
+	 * @param iches
+	 * @return dots
+	*/
 	private int Inch2Dot(float inch){
 		return (int)(inch*dpi);
 	}
 	
+	/** Transforms GraphvizCoordinates to Draw2D (KIELER) coordinates of any sized object (e.g. nodes).
+	 * There are some
+	 * scaling factors between those twoo coordinate systems. Padding is also used.
+	 * @param coords Graphviz Coordinates
+	 * @param size Size of the item. Required because Graphviz coordinates are at the 
+	 *             center of any item and Draw2D coordinates are at the upper left corner.
+	 * @return Draw2D coordinates
+	 */
 	private Coordinates graphviz2Draw2D(Coordinates coords, Size size){
 		Coordinates newCoords = GraphFactory.eINSTANCE.createCoordinates();
 		newCoords.setX((int)(coords.getX()*scaleX) - (size.getWidth()/2)  + pad);
@@ -267,6 +315,14 @@ public class GraphvizDraw2DGraphLayout {
 		return newCoords;
 	}
 	
+	/** Transforms Draw2D (KIELER) coordinates to Graphviz Coordinates of any sized object (e.g. nodes).
+	 * There are some
+	 * scaling factors between those twoo coordinate systems. Padding is also used.
+	 * @param coords Draw2D Coordinates
+	 * @param size Size of the item. Required because Graphviz coordinates are at the 
+	 *             center of any item and Draw2D coordinates are at the upper left corner.
+	 * @return Graphviz coordinates
+	 */
 	private Coordinates draw2D2Graphviz(Coordinates coords, Size size){
 		Coordinates newCoords = GraphFactory.eINSTANCE.createCoordinates();
 		newCoords.setX((int)(coords.getX()/scaleX) + (size.getWidth()/2)  - pad);
@@ -274,13 +330,25 @@ public class GraphvizDraw2DGraphLayout {
 		return newCoords;
 	}
 	
+	/** Transforms GraphvizCoordinates to Draw2D (KIELER) coordinates only for unsized objects (points).
+	 * There are some
+	 * scaling factors between those two coordinate systems. Padding is also used.
+	 * @param coords Graphviz Coordinates
+	 * @return Draw2D coordinates
+	 */
 	private Coordinates graphviz2Draw2D(Coordinates coords){
 		Coordinates newCoords = GraphFactory.eINSTANCE.createCoordinates();
 		newCoords.setX((int)(coords.getX()*scaleX) + pad);
 		newCoords.setY((int)(coords.getY()*scaleY) + pad);
 		return newCoords;
 	}
-	
+
+	/** Transforms Draw2D (KIELER) coordinates to Graphviz Coordinates only for unsized objects (points).
+	 * There are some
+	 * scaling factors between those twoo coordinate systems. Padding is also used.
+	 * @param coords Draw2D Coordinates
+	 * @return Graphviz coordinates
+	 */
 	private Coordinates draw2D2Graphviz(Coordinates coords){
 		Coordinates newCoords = GraphFactory.eINSTANCE.createCoordinates();
 		newCoords.setX((int)(coords.getX()/scaleX) - pad);
@@ -288,6 +356,13 @@ public class GraphvizDraw2DGraphLayout {
 		return newCoords;
 	}
 	
+	/**
+	 * Converts a String containing a list of integers into a List of Integer objects.
+	 * Used for converting Graphviz position Strings (e.g. list of bendpoints) into 
+	 * a real list.
+	 * @param text
+	 * @return
+	 */
 	private List<Integer> string2Ints(String text){
 		ArrayList intList = new ArrayList();
 		if(text != null){

@@ -13,36 +13,6 @@
       </layoutProvider>
    </extension>
    <extension
-         point="org.eclipse.ui.editorActions">
-      <editorContribution
-            id="editorContribution1"
-            targetID="edu.unikiel.rtsys.mealy.diagram.part.MealyMachineDiagramEditorID">
-         <action
-               class="edu.unikiel.rtsys.layouter.gef.DisplayCoordinates"
-               definitionId="edu.unikiel.rtsys.mealy.diagram.part.MealyMachineDiagramEditorID"
-               id="edu.unikiel.rtsys.layouter.graphviz.action1"
-               label="coords"
-               menubarPath="diagramMenu/arrangeMenu/arrangeGroup"
-               style="push">
-         </action>
-      </editorContribution>
-   </extension>
-   <extension
-         point="org.eclipse.ui.actionSets">
-      <actionSet
-            id="edu.unikiel.rtsys.layouter.graphviz.actionSet1"
-            label="coords"
-            visible="true">
-         <action
-               class="edu.unikiel.rtsys.layouter.gef.DisplayCoordinates"
-               id="edu.unikiel.rtsys.layouter.graphviz.action1"
-               label="coords"
-               style="push"
-               toolbarPath="org.eclipse.ui.workbench.navigate">
-         </action>
-      </actionSet>
-   </extension>
-   <extension
          point="org.eclipse.ui.preferencePages">
       <page
             category="edu.unikiel.rtsys.kieler.kiml.ui.PreferencePage"

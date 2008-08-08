@@ -10,7 +10,12 @@ import org.eclipse.draw2d.graph.Edge;
 import org.eclipse.draw2d.graph.EdgeList;
 import org.eclipse.draw2d.graph.Node;
 import org.eclipse.draw2d.graph.NodeList;
-
+/**
+ * Simple JUnit Test to test the graphviz API with a preconstructed graph.
+ * For this test here is the draw2d graph implementation used. 
+ * @author haf
+ * @deprecated Use better a new test case using the KIELER graph datastructure
+ */
 public class GraphvizTestCase extends TestCase {
 
 	DirectedGraph graph;

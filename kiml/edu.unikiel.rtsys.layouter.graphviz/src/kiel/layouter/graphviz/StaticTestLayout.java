@@ -7,6 +7,11 @@ import edu.unikiel.rtsys.layouter.graph.GraphFactory;
 import edu.unikiel.rtsys.layouter.graph.Node;
 import edu.unikiel.rtsys.layouter.graph.Size;
 
+/**
+ * Very simple static test layout, that sets coordinates of nodes
+ * and the bendpoints of edges to static hard-coded values. This is used
+ * to test the handover of layout information from KIML to gef.
+ */
 public class StaticTestLayout {
 
 	public void visit(Graph graph) {

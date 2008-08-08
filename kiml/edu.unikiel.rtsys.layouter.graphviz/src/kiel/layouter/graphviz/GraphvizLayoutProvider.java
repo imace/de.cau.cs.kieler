@@ -74,6 +74,9 @@ public class GraphvizLayoutProvider extends DefaultProvider{
 	private boolean layoutEdges = true;
 	
 	/**
+	 * Lays out all EditParts within the container Edit Part. Uses the passed layoutHint 
+	 * (String hidden in an IAdaptable) to specify the layout algorithm. So far only a 
+	 * few layout algorithms are supported.
 	 * @see org.eclipse.gmf.runtime.diagram.ui.services.layout.AbstractLayoutEditPartProvider#layoutEditParts(org.eclipse.gef.GraphicalEditPart,
 	 *      org.eclipse.core.runtime.IAdaptable)
 	 */
@@ -103,6 +106,12 @@ public class GraphvizLayoutProvider extends DefaultProvider{
 			return null;
 	}
 
+	/**
+	 * Layouts the EditParts in the containerEditPart using some debug layouter to test some
+	 * layout stuff.
+	 * @param containerEditPart
+	 * @return
+	 */
 	private Command getDebugCommand(GraphicalEditPart containerEditPart){
 		Command cmd = new CompoundCommand();
 		for (Object child : containerEditPart.getChildren()) {
@@ -115,6 +124,12 @@ public class GraphvizLayoutProvider extends DefaultProvider{
 		return cmd;
 	}
 	
+	/**
+	 * Returns a Command that layouts all EditParts in the container and moves all Nodes,
+	 * Edges, Labels accordingly. This method uses the GraphViz dot Layouter.
+	 * @param containerEditPart
+	 * @return Command executed asynchronously by Eclipse
+	 */
 	private Command getGraphvizLayoutCommand(GraphicalEditPart containerEditPart){
 		// create abstract graph
 		Graph layoutGraph = buildGraph(containerEditPart.getChildren());
@@ -123,9 +138,10 @@ public class GraphvizLayoutProvider extends DefaultProvider{
 		// do GraphvizLayout
 		GraphvizDraw2DGraphLayout layout = new GraphvizDraw2DGraphLayout();
 
-		// do manual layout for test
+		// uncomment this line to do manual layout for test
 //		StaticTestLayout layout = new StaticTestLayout();
 		layout.visit(layoutGraph);
+		
 		// share the graph data with other objects, e.g. the Layout Graph View
 		LayouterPlugin.getDefault().getCommonLayer().setLayoutGraph(layoutGraph);
 		
@@ -149,6 +165,7 @@ public class GraphvizLayoutProvider extends DefaultProvider{
 		Graph graph = factory.createGraph();
 		buildNodes(selectedEditParts, editPart2Node, graph);
 		
+		// show some String representation of the graph for debugging
 		System.out.println(GraphTools.graph2String(graph));
 		return graph;
 	}
@@ -165,6 +182,7 @@ public class GraphvizLayoutProvider extends DefaultProvider{
 		for (Object object : connections) {
 			if (object instanceof ConnectionEditPart) {
 				ConnectionEditPart con = (ConnectionEditPart) object;
+				// get the graph nodes of the source and target of the EditPart connection
 				Node source = editPart2Node.get(getBaseEditPart(con.getSource()));
 				Node target = editPart2Node.get(getBaseEditPart(con.getTarget()));
 				// connection might be to not selected component
@@ -332,6 +350,9 @@ public class GraphvizLayoutProvider extends DefaultProvider{
 						
 						// handling connection router
 						//System.out.println("Router: "+poly.getConnectionRouter());
+						// stting connection router does not work through API...
+						// it will always overwrite this setting...
+						// TODO: find the correct way to disable connection router. 
 						poly.setConnectionRouter(null);
 						
 						
@@ -419,6 +440,8 @@ public class GraphvizLayoutProvider extends DefaultProvider{
 				Dimension deltaSize = new Dimension(newSize.width-oldSize.width, newSize.height-oldSize.height);
 
 // DEBUG //////////////////////////////////////////////
+// had some problems, drawing figures to specific positions in hierarchical compartments
+// here's some debug stuff to test some of it
 //				debugFigureHandler.addDebugPoint((GraphicalEditPart)gep.getParent(),newPosition, ColorConstants.green);
 //				Point newPosition2 = new Point(newPosition.x+newSize.width, newPosition.y+newSize.height);
 //				debugFigureHandler.addDebugPoint((GraphicalEditPart)gep.getParent(),newPosition2, ColorConstants.cyan);
