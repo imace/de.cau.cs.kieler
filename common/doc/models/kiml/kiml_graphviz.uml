@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Package xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xmi:id="_H3SuEGU3Ed2C-7LNLQa2uw" name="kiel.layouter.graphviz">
+  <elementImport xmi:id="_H4BG0GU3Ed2C-7LNLQa2uw">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+  </elementImport>
+  <elementImport xmi:id="_H4BG0WU3Ed2C-7LNLQa2uw">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+  </elementImport>
+  <elementImport xmi:id="_H4BG0mU3Ed2C-7LNLQa2uw">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#UnlimitedNatural"/>
+  </elementImport>
+  <elementImport xmi:id="_H4BG02U3Ed2C-7LNLQa2uw">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+  </elementImport>
+  <packagedElement xmi:type="uml:Class" xmi:id="_MZAlwGU3Ed2C-7LNLQa2uw" name="GraphvizLayoutProvider">
+    <generalization xmi:id="_DJWbcGU7Ed2C-7LNLQa2uw" general="_VHTyoGU3Ed2C-7LNLQa2uw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_VHTyoGU3Ed2C-7LNLQa2uw" name="DefaultProvider">
+    <generalization xmi:id="_dh7HIGU6Ed2C-7LNLQa2uw" general="_UE-WcGU4Ed2C-7LNLQa2uw"/>
+    <ownedOperation xmi:id="_tuMo0GU3Ed2C-7LNLQa2uw" name="provides">
+      <ownedParameter xmi:id="_6AIUgGU3Ed2C-7LNLQa2uw" direction="return"/>
+      <ownedParameter xmi:id="_6AI7kGU3Ed2C-7LNLQa2uw" name="IOperation"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_BhZtkGU4Ed2C-7LNLQa2uw" name="layoutEditParts">
+      <ownedParameter xmi:id="_HCuBEGU4Ed2C-7LNLQa2uw" direction="return"/>
+      <ownedParameter xmi:id="_HCuBEWU4Ed2C-7LNLQa2uw" name="GraphicalEditPart"/>
+      <ownedParameter xmi:id="_HCuBEmU4Ed2C-7LNLQa2uw" name="IAdaptable"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_M-ElMGU4Ed2C-7LNLQa2uw" name="layoutEditPart">
+      <ownedParameter xmi:id="_P3d0MGU4Ed2C-7LNLQa2uw" direction="return"/>
+      <ownedParameter xmi:id="_P3d0MWU4Ed2C-7LNLQa2uw" name="List"/>
+      <ownedParameter xmi:id="_P3d0MmU4Ed2C-7LNLQa2uw" name="IAdaptable"/>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Package" xmi:id="_hfnzIGU3Ed2C-7LNLQa2uw" name="org.eclipse.gmf.runtime.diagram.ui.providers.internal"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_UE-WcGU4Ed2C-7LNLQa2uw" name="AbstractLayoutEditPartProvider" isAbstract="true">
+    <generalization xmi:id="_kH5VkGU6Ed2C-7LNLQa2uw" general="_77ne4GU5Ed2C-7LNLQa2uw"/>
+    <ownedOperation xmi:id="_aTDz4GU5Ed2C-7LNLQa2uw" name="layoutLayoutNodes">
+      <ownedParameter xmi:id="_eA4wgGU5Ed2C-7LNLQa2uw" direction="return"/>
+      <ownedParameter xmi:id="_eA5XkGU5Ed2C-7LNLQa2uw" name="List"/>
+      <ownedParameter xmi:id="_eA5XkWU5Ed2C-7LNLQa2uw" name="boolean"/>
+      <ownedParameter xmi:id="_eA5XkmU5Ed2C-7LNLQa2uw" name="IAdaptable"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_mHj8sGU5Ed2C-7LNLQa2uw" name="layoutEditParts" isAbstract="true">
+      <ownedParameter xmi:id="_ocBSoGU5Ed2C-7LNLQa2uw" direction="return"/>
+      <ownedParameter xmi:id="_ocBSoWU5Ed2C-7LNLQa2uw" name="GraphicalEditPart"/>
+      <ownedParameter xmi:id="_ocBSomU5Ed2C-7LNLQa2uw" name="IAdaptable"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_o2-JQGU5Ed2C-7LNLQa2uw" name="layoutEditPart" isAbstract="true">
+      <ownedParameter xmi:id="_qokCsGU5Ed2C-7LNLQa2uw" direction="return"/>
+      <ownedParameter xmi:id="_qokCsWU5Ed2C-7LNLQa2uw" name="List"/>
+      <ownedParameter xmi:id="_qokCsmU5Ed2C-7LNLQa2uw" name="IAdaptable"/>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Interface" xmi:id="_3AI40GU4Ed2C-7LNLQa2uw" name="ILayoutNodeProvider">
+    <ownedOperation xmi:id="_9rYBwGU4Ed2C-7LNLQa2uw" name="layoutLayoutNodes">
+      <ownedParameter xmi:id="_EHE54GU5Ed2C-7LNLQa2uw" direction="return"/>
+      <ownedParameter xmi:id="_EHFg8GU5Ed2C-7LNLQa2uw" name="List"/>
+      <ownedParameter xmi:id="_EHFg8WU5Ed2C-7LNLQa2uw" name="boolean"/>
+      <ownedParameter xmi:id="_EHFg8mU5Ed2C-7LNLQa2uw" name="IAdaptable"/>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_77ne4GU5Ed2C-7LNLQa2uw" name="AbstractLayoutNodeProvider" isAbstract="true">
+    <generalization xmi:id="_keYi8GU6Ed2C-7LNLQa2uw" general="_3AI40GU4Ed2C-7LNLQa2uw"/>
+    <ownedOperation xmi:id="_Ao4fQGU6Ed2C-7LNLQa2uw" name="getContainer">
+      <ownedParameter xmi:id="_EtsYgGU6Ed2C-7LNLQa2uw" direction="return"/>
+      <ownedParameter xmi:id="_EtsYgWU6Ed2C-7LNLQa2uw" name="IOperation"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_V1VO4GU6Ed2C-7LNLQa2uw" name="getNodeToSizeMap">
+      <ownedParameter xmi:id="_Zgi8YGU6Ed2C-7LNLQa2uw" direction="return"/>
+      <ownedParameter xmi:id="_Zgi8YWU6Ed2C-7LNLQa2uw" name="ILayoutNodeOperation"/>
+    </ownedOperation>
+  </packagedElement>
+</uml:Package>
