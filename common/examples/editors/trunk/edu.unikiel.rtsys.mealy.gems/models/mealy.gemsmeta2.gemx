@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="ASCII"?>
+<metamodel:Metamodel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:metamodel="http://www.sf.net/projects/gems/metamodel2" Name="MealyMachine" Id="a060016_86" DSMLID="http://www.informatik.uni-kiel.de/rtsys/gems/mealy" FileExtensions="gemsmealy" Category="Kieler">
+  <Connection Name="Transition" Id="a060016_175" X="478" Y="206" Width="140" Height="96" ExpandedWidth="0" ExpandedHeight="0" Expanded="true">
+    <Attribute Name="Action" Id="a060016_407"/>
+    <Attribute Name="Condition" Id="a060016_408"/>
+    <ConnectionTarget href="mealy.gemsmeta2#//@ConnectionTargetConnection.0"/>
+    <ConnectionSource href="mealy.gemsmeta2#//@ConnectionSourceConnection.0"/>
+  </Connection>
+  <Entity Name="MealyMachine" Id="a060016_173" X="38" Y="54" Width="98" Height="76" IsRoot="true">
+    <ChildEntities href="mealy.gemsmeta2#//@ContainmentConnectionConnection.0"/>
+  </Entity>
+  <Entity Name="State" Id="a060016_174" X="135" Y="227" Width="73" Height="76" ExpandedWidth="0" ExpandedHeight="0" Expanded="true">
+    <Attribute Name="StateName" Id="a060016_406"/>
+    <ParentEntity href="mealy.gemsmeta2#//@ContainmentConnectionConnection.0"/>
+    <SourceConnectionDeclarations href="mealy.gemsmeta2#//@ConnectionSourceConnection.0"/>
+    <ConnectionTargets href="mealy.gemsmeta2#//@ConnectionTargetConnection.0"/>
+  </Entity>
+</metamodel:Metamodel>

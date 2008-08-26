@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="ASCII"?>
+<metamodel:Root xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:metamodel="http://www.sf.net/projects/gems/metamodel2">
+  <RealRoot Name="MealyMachine" Id="a060016_86" DSMLID="http://www.informatik.uni-kiel.de/rtsys/gems/mealy" FileExtensions="gemsmealy" Category="Kieler">
+    <Connection Name="Transition" Id="a060016_175" X="478" Y="206" Width="140" Height="96" ExpandedWidth="0" ExpandedHeight="0" Expanded="true" ConnectionTarget="//@ConnectionTargetConnection.0" ConnectionSource="//@ConnectionSourceConnection.0">
+      <Attribute Name="Action" Id="a060016_407"/>
+      <Attribute Name="Condition" Id="a060016_408"/>
+    </Connection>
+    <Entity Name="MealyMachine" Id="a060016_173" X="38" Y="54" Width="98" Height="76" IsRoot="true" ChildEntities="//@ContainmentConnectionConnection.0"/>
+    <Entity Name="State" Id="a060016_174" X="135" Y="227" Width="73" Height="76" ExpandedWidth="0" ExpandedHeight="0" Expanded="true" ParentEntity="//@ContainmentConnectionConnection.0" SourceConnectionDeclarations="//@ConnectionSourceConnection.0" ConnectionTargets="//@ConnectionTargetConnection.0">
+      <Attribute Name="StateName" Id="a060016_406"/>
+    </Entity>
+  </RealRoot>
+  <ConnectionSourceConnection Source="//@RealRoot/@Entity.1" Target="//@RealRoot/@Connection.0" SourceRole="OutgoingTransitions"/>
+  <ConnectionTargetConnection Source="//@RealRoot/@Connection.0" Target="//@RealRoot/@Entity.1" TargetRole="IncomingTransitions"/>
+  <ContainmentConnectionConnection Source="//@RealRoot/@Entity.1" Target="//@RealRoot/@Entity.0" RoleOfChild="ParentMachine" RoleOfParent="States"/>
+</metamodel:Root>

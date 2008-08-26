@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin> 
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            default="true"
+            name="Generic Eclipse Modeling System"
+            extensions="gemsmealy"
+            icon="MealyMachine.gif"
+            class="edu.unikiel.rtsys.gems.mealy.mealymachine.DSMLEditor"
+            contributorClass="org.eclipse.gmt.gems.actions.LogicActionBarContributor"
+            id="edu.unikiel.rtsys.gems.mealy.mealymachine.editor">
+      </editor>
+   </extension>
+  
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <category
+            name="Kieler"
+            id="edu.unikiel.rtsys.gems.mealy.mealymachine">
+      </category>
+      <wizard
+            name="MealyMachine Model"
+            icon="MealyMachine.gif"
+            category="edu.unikiel.rtsys.gems.mealy.mealymachine"
+            class="edu.unikiel.rtsys.gems.mealy.mealymachine.GemsCreationWizard"
+            id="edu.unikiel.rtsys.gems.mealy.mealymachine.NewWizard">
+      </wizard>
+   </extension>
+      <extension
+         point="org.eclipse.gmt.gems.dsml.serializer">
+      <serializer
+            class="edu.unikiel.rtsys.gems.mealy.mealymachine.Serializer"
+            models="readers,http://www.informatik.uni-kiel.de/rtsys/gems/mealy"/>
+   </extension>
+
+</plugin>

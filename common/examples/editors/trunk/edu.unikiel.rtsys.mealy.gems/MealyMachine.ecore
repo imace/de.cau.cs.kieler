@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="mealymachine" nsURI="http://www.informatik.uni-kiel.de/rtsys/gems/mealy" nsPrefix="mealymachine">
+  
+   <eClassifiers xsi:type="ecore:EClass" name="MementoValue">
+     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="0"/>
+     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="0"/>
+   </eClassifiers>
+   <eClassifiers xsi:type="ecore:EClass" name="Memento">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="0"/>
+  		 <eStructuralFeatures xsi:type="ecore:EReference" name="data" upperBound="2000"
+        eType="#//MementoValue" containment="true"/>
+   </eClassifiers>
+   <eClassifiers xsi:type="ecore:EClass" name="Subtype">
+   	 <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="AnonymousSubtype"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base" upperBound="1"
+        eType="#//ModelObject"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="instances" upperBound="2000"
+        eType="#//ModelObject"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="links" upperBound="20000"
+        eType="#//SubtypeLink" containment="true"/>
+   </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="SubtypeLink">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="base" upperBound="1"
+        eType="#//ModelObject"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="instance" upperBound="1"
+        eType="#//ModelObject"/>
+   </eClassifiers>
+   <eClassifiers xsi:type="ecore:EClass" name="ModelObject">
+     <eStructuralFeatures xsi:type="ecore:EAttribute" name="Name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="0"/>
+     <eStructuralFeatures xsi:type="ecore:EAttribute" name="Id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="0"/>
+     <eStructuralFeatures xsi:type="ecore:EAttribute" name="X" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="0"/>
+     <eStructuralFeatures xsi:type="ecore:EAttribute" name="Y" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="0"/>
+     <eStructuralFeatures xsi:type="ecore:EAttribute" name="Width" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="100"/>
+     <eStructuralFeatures xsi:type="ecore:EAttribute" name="Height" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="100"/>
+     <eStructuralFeatures xsi:type="ecore:EAttribute" name="ExpandedWidth" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="200"/>
+     <eStructuralFeatures xsi:type="ecore:EAttribute" name="ExpandedHeight" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="200"/>
+     <eStructuralFeatures xsi:type="ecore:EAttribute" name="Expanded" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
+     <eStructuralFeatures xsi:type="ecore:EAttribute" name="Subtype" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
+     <eStructuralFeatures xsi:type="ecore:EAttribute" name="Visible" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="true"/>
+     <eStructuralFeatures xsi:type="ecore:EAttribute" name="ModelLinkTarget" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral=""/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="Annotation" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral=""/>
+  </eClassifiers>
+     
+ <eClassifiers xsi:type="ecore:EClass" name="MealyMachine" eSuperTypes="#//ModelObject">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="States" upperBound="2000"
+        eType="#//State" containment="true"/>
+  </eClassifiers>
+
+     
+ <eClassifiers xsi:type="ecore:EClass" name="State" eSuperTypes="#//ModelObject">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="StateName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="0"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ParentMachine" upperBound="1"
+        eType="#//MealyMachine" containment="false"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="OutgoingTransitions" lowerBound="0" upperBound="2147483647"
+        eType="#//TransitionConnection" />
+      <eStructuralFeatures xsi:type="ecore:EReference" name="IncomingTransitions" lowerBound="0" upperBound="2147483647"
+        eType="#//TransitionConnection" />
+  </eClassifiers>
+
+     
+ <eClassifiers xsi:type="ecore:EClass" name="TransitionConnection">
+ 	 <eStructuralFeatures xsi:type="ecore:EReference" name="Source" eType="#//State"/>
+     <eStructuralFeatures xsi:type="ecore:EReference" name="Target" eType="#//State"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Action" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Condition" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="0"/>
+  </eClassifiers>
+
+  <eClassifiers xsi:type="ecore:EClass" name="Root">
+  	<eStructuralFeatures xsi:type="ecore:EReference" name="mementos" upperBound="2000"
+        eType="#//Memento" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subtypes" upperBound="2000"
+        eType="#//Subtype" containment="true"/>
+   <eStructuralFeatures xsi:type="ecore:EReference" name="RealRoot" upperBound="1"
+        eType="#//MealyMachine" containment="true"/>
+   
+     <eStructuralFeatures xsi:type="ecore:EReference" name="MealyMachine" upperBound="2000"
+        eType="#//MealyMachine" containment="true"/>
+     <eStructuralFeatures xsi:type="ecore:EReference" name="State" upperBound="2000"
+        eType="#//State" containment="true"/>
+     <eStructuralFeatures xsi:type="ecore:EReference" name="TransitionConnection" upperBound="2000"
+        eType="#//TransitionConnection" containment="true"/>
+      
+  </eClassifiers>
+
+</ecore:EPackage>

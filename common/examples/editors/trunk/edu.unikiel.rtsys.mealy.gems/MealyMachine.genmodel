@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/edu.unikiel.rtsys.mealy.gems/src"
+    modelName="MealyMachine" copyrightFields="false">
+  <foreignModel>/home/haf/shared/kieler/trunk/common/examples/editors/edu.unikiel.rtsys.mealy.gems/MealyMachine.ecore</foreignModel>
+  <genPackages prefix="MealyMachine" basePackage="edu.unikiel.rtsys.gems.mealy.emf"
+      disposableProviderFactory="true" ecorePackage="MealyMachine.ecore#/">
+    <genClasses ecoreClass="MealyMachine.ecore#//MementoValue">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MealyMachine.ecore#//MementoValue/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MealyMachine.ecore#//MementoValue/value"/>
+    </genClasses>
+    <genClasses ecoreClass="MealyMachine.ecore#//Memento">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MealyMachine.ecore#//Memento/id"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MealyMachine.ecore#//Memento/data"/>
+    </genClasses>
+    <genClasses ecoreClass="MealyMachine.ecore#//Subtype">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MealyMachine.ecore#//Subtype/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference MealyMachine.ecore#//Subtype/base"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference MealyMachine.ecore#//Subtype/instances"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MealyMachine.ecore#//Subtype/links"/>
+    </genClasses>
+    <genClasses ecoreClass="MealyMachine.ecore#//SubtypeLink">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference MealyMachine.ecore#//SubtypeLink/base"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference MealyMachine.ecore#//SubtypeLink/instance"/>
+    </genClasses>
+    <genClasses ecoreClass="MealyMachine.ecore#//ModelObject">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MealyMachine.ecore#//ModelObject/Name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MealyMachine.ecore#//ModelObject/Id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MealyMachine.ecore#//ModelObject/X"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MealyMachine.ecore#//ModelObject/Y"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MealyMachine.ecore#//ModelObject/Width"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MealyMachine.ecore#//ModelObject/Height"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MealyMachine.ecore#//ModelObject/ExpandedWidth"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MealyMachine.ecore#//ModelObject/ExpandedHeight"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MealyMachine.ecore#//ModelObject/Expanded"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MealyMachine.ecore#//ModelObject/Subtype"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MealyMachine.ecore#//ModelObject/Visible"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MealyMachine.ecore#//ModelObject/ModelLinkTarget"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MealyMachine.ecore#//ModelObject/Annotation"/>
+    </genClasses>
+    <genClasses ecoreClass="MealyMachine.ecore#//MealyMachine">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MealyMachine.ecore#//MealyMachine/States"/>
+    </genClasses>
+    <genClasses ecoreClass="MealyMachine.ecore#//State">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MealyMachine.ecore#//State/StateName"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference MealyMachine.ecore#//State/ParentMachine"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference MealyMachine.ecore#//State/OutgoingTransitions"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference MealyMachine.ecore#//State/IncomingTransitions"/>
+    </genClasses>
+    <genClasses ecoreClass="MealyMachine.ecore#//TransitionConnection">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference MealyMachine.ecore#//TransitionConnection/Source"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference MealyMachine.ecore#//TransitionConnection/Target"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MealyMachine.ecore#//TransitionConnection/Action"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MealyMachine.ecore#//TransitionConnection/Condition"/>
+    </genClasses>
+    <genClasses ecoreClass="MealyMachine.ecore#//Root">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MealyMachine.ecore#//Root/mementos"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MealyMachine.ecore#//Root/subtypes"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MealyMachine.ecore#//Root/RealRoot"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MealyMachine.ecore#//Root/MealyMachine"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MealyMachine.ecore#//Root/State"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MealyMachine.ecore#//Root/TransitionConnection"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
