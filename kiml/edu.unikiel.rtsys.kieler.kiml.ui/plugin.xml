@@ -58,12 +58,13 @@
             visible="true">
          <action
                class="edu.unikiel.rtsys.kieler.kiml.ui.KimlArrangeActionGenericGef"
+               icon="icons/kieler-arrange.png"
                id="KimlArrangeActionGEFGeneric"
                label="KimlArrangeActionGef"
                pulldown="false"
                style="push"
                toolbarPath="Normal/kieler"
-               tooltip="KimlArrangeActionGef">
+               tooltip="KIML automatic layout for GEF editor">
          </action>
       </actionSet>
    </extension>
