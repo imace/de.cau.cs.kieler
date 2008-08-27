@@ -49,6 +49,8 @@ public class KimlLayoutGraphView extends ViewPart implements GenericEventListene
 	private TreeViewer viewer;
 	private DrillDownAdapter drillDownAdapter;
 	
+	public static final String ID = "edu.unikiel.rtsys.kieler.kiml.ui.views.KimlLayoutGraphView";
+	
 	/*
 	 * The content provider class is responsible for
 	 * providing objects to the view. It can wrap

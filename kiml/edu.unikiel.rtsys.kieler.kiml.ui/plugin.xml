@@ -53,7 +53,7 @@
          point="org.eclipse.ui.actionSets">
       <actionSet
             description="KimlArrangeActionGEFGeneric"
-            id="edu.unikiel.rtsys.kieler.kiml.ui.actionSet1"
+            id="edu.unikiel.rtsys.kieler.kiml.ui.KimlActionSet"
             label="KimlArrangeActionGEFGeneric"
             visible="true">
          <action
@@ -66,6 +66,15 @@
                tooltip="KimlArrangeActionGef">
          </action>
       </actionSet>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            class="edu.unikiel.rtsys.kieler.kiml.ui.KimlPerspectiveFactory"
+            fixed="false"
+            id="edu.unikiel.rtsys.kieler.kiml.ui.perspective1"
+            name="KIELER">
+      </perspective>
    </extension>
 
 </plugin>
