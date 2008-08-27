@@ -47,5 +47,25 @@
             name="KIML Layout Graph View">
       </view>
    </extension>
+   <extension
+         id="edu.unikiel.rtsys.kieler.kiml.ui.actionSet1"
+         name="KimlArrangeActionGEFGeneric"
+         point="org.eclipse.ui.actionSets">
+      <actionSet
+            description="KimlArrangeActionGEFGeneric"
+            id="edu.unikiel.rtsys.kieler.kiml.ui.actionSet1"
+            label="KimlArrangeActionGEFGeneric"
+            visible="true">
+         <action
+               class="edu.unikiel.rtsys.kieler.kiml.ui.KimlArrangeActionGenericGef"
+               id="KimlArrangeActionGEFGeneric"
+               label="KimlArrangeActionGef"
+               pulldown="false"
+               style="push"
+               toolbarPath="Normal/kieler"
+               tooltip="KimlArrangeActionGef">
+         </action>
+      </actionSet>
+   </extension>
 
 </plugin>
