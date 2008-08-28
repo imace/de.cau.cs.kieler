@@ -46,6 +46,14 @@
             id="edu.unikiel.rtsys.kieler.kiml.ui.views.KimlLayoutGraphView"
             name="KIML Layout Graph View">
       </view>
+      <view
+            category="edu.unikiel.rtsys.kieler.kiml.ui"
+            class="edu.unikiel.rtsys.kieler.kiml.ui.views.KimlLayoutHintView"
+            icon="icons/sample.gif"
+            id="edu.unikiel.rtsys.kieler.kiml.ui.view.KimlLayoutHintsView"
+            name="KIML Layout Hints"
+            restorable="true">
+      </view>
    </extension>
    <extension
          id="edu.unikiel.rtsys.kieler.kiml.ui.actionSet1"
@@ -67,6 +75,96 @@
                tooltip="KIML automatic layout for GEF editor">
          </action>
       </actionSet>
+   </extension>
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            id="edu.unikiel.rtsys.kieler.kiml.ui.contribution1"
+            objectClass="org.eclipse.gef.editparts.AbstractGraphicalEditPart">
+         <menu
+               id="edu.unikiel.rtsys.kieler.kiml.ui.menu.KIML"
+               label="&amp;KIML"
+               path="additions">
+            <separator
+                  name="groupAs">
+            </separator>
+            <separator
+                  name="functions">
+            </separator>
+         </menu>
+         <action
+               class="edu.unikiel.rtsys.kieler.kiml.ui.popup.actions.GroupAsCircle"
+               enablesFor="multiple"
+               icon="icons/sample.gif"
+               id="edu.unikiel.rtsys.kieler.kiml.ui.newAction"
+               label="Group As Circle"
+               menubarPath="edu.unikiel.rtsys.kieler.kiml.ui.menu.KIML/groupAs">
+         </action>
+         <action
+               class="edu.unikiel.rtsys.kieler.kiml.ui.popup.actions.GroupAsCustom"
+               enablesFor="multiple"
+               icon="icons/sample.gif"
+               id="edu.unikiel.rtsys.kieler.kiml.ui.newAction"
+               label="Group As Custom"
+               menubarPath="edu.unikiel.rtsys.kieler.kiml.ui.menu.KIML/groupAs">
+         </action>
+         <action
+               class="edu.unikiel.rtsys.kieler.kiml.ui.popup.actions.GroupAsDot"
+               enablesFor="multiple"
+               icon="icons/sample.gif"
+               id="edu.unikiel.rtsys.kieler.kiml.ui.newAction"
+               label="Group As Dot"
+               menubarPath="edu.unikiel.rtsys.kieler.kiml.ui.menu.KIML/groupAs">
+         </action>
+         <action
+               class="edu.unikiel.rtsys.kieler.kiml.ui.popup.actions.GroupAsHorizontal"
+               enablesFor="multiple"
+               icon="icons/sample.gif"
+               id="edu.unikiel.rtsys.kieler.kiml.ui.newAction"
+               label="Group As Horizontal"
+               menubarPath="edu.unikiel.rtsys.kieler.kiml.ui.menu.KIML/groupAs">
+         </action>
+         <action
+               class="edu.unikiel.rtsys.kieler.kiml.ui.popup.actions.GroupAsNone"
+               enablesFor="multiple"
+               icon="icons/sample.gif"
+               id="edu.unikiel.rtsys.kieler.kiml.ui.newAction"
+               label="Group As None"
+               menubarPath="edu.unikiel.rtsys.kieler.kiml.ui.menu.KIML/groupAs">
+         </action>
+         <action
+               class="edu.unikiel.rtsys.kieler.kiml.ui.popup.actions.GroupAsVertical"
+               enablesFor="multiple"
+               icon="icons/sample.gif"
+               id="edu.unikiel.rtsys.kieler.kiml.ui.newAction"
+               label="Group As Vertical"
+               menubarPath="edu.unikiel.rtsys.kieler.kiml.ui.menu.KIML/groupAs">
+         </action>
+         <action
+               class="edu.unikiel.rtsys.kieler.kiml.ui.popup.actions.FunctionHighlightGroupMembers"
+               enablesFor="1"
+               icon="icons/sample.gif"
+               id="edu.unikiel.rtsys.kieler.kiml.ui.popup.actions.function.highlight"
+               label="Hightlight layout group members"
+               menubarPath="edu.unikiel.rtsys.kieler.kiml.ui.menu.KIML/functions">
+         </action>
+         <action
+               class="edu.unikiel.rtsys.kieler.kiml.ui.popup.actions.FunctionSelectGroupMembers"
+               enablesFor="1"
+               icon="icons/sample.gif"
+               id="edu.unikiel.rtsys.kieler.kiml.ui.popup.actions.function.select"
+               label="Select layout group members"
+               menubarPath="edu.unikiel.rtsys.kieler.kiml.ui.menu.KIML/functions">
+         </action>
+         <action
+               class="edu.unikiel.rtsys.kieler.kiml.ui.popup.actions.FunctionUngroup"
+               enablesFor="*"
+               icon="icons/sample.gif"
+               id="edu.unikiel.rtsys.kieler.kiml.ui.popup.actions.function.ungroup"
+               label="Ungroup element(s)"
+               menubarPath="edu.unikiel.rtsys.kieler.kiml.ui.menu.KIML/functions">
+         </action>
+      </objectContribution>
    </extension>
    <extension
          point="org.eclipse.ui.perspectives">
