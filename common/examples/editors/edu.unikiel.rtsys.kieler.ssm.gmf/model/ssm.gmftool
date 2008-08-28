@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gmftool:ToolRegistry xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:gmftool="http://www.eclipse.org/gmf/2005/ToolDefinition">
+  <palette
+      title="SafeStateMachinePalette"
+      description="The tools for the Safe State Machine">
+    <tools
+        xsi:type="gmftool:ToolGroup"
+        title="States"
+        collapsible="true">
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="Region"
+          description="Create new Region">
+        <smallIcon
+            xsi:type="gmftool:DefaultImage"/>
+        <largeIcon
+            xsi:type="gmftool:DefaultImage"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="InitialState"
+          description="Create new InitialState">
+        <smallIcon
+            xsi:type="gmftool:DefaultImage"/>
+        <largeIcon
+            xsi:type="gmftool:DefaultImage"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="CompositeState"
+          description="Create new CompositeState">
+        <smallIcon
+            xsi:type="gmftool:DefaultImage"/>
+        <largeIcon
+            xsi:type="gmftool:DefaultImage"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="SimpleState"
+          description="Create new SimpleState">
+        <smallIcon
+            xsi:type="gmftool:DefaultImage"/>
+        <largeIcon
+            xsi:type="gmftool:DefaultImage"/>
+      </tools>
+    </tools>
+    <tools
+        xsi:type="gmftool:ToolGroup"
+        title="Transitions"
+        collapsible="true">
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="NormalTermination"
+          description="Create new NormalTermination">
+        <smallIcon
+            xsi:type="gmftool:DefaultImage"/>
+        <largeIcon
+            xsi:type="gmftool:DefaultImage"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="StrongAbortion"
+          description="Create new StrongAbortion">
+        <smallIcon
+            xsi:type="gmftool:DefaultImage"/>
+        <largeIcon
+            xsi:type="gmftool:DefaultImage"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="WeakAbortion"
+          description="Create new WeakAbortion">
+        <smallIcon
+            xsi:type="gmftool:DefaultImage"/>
+        <largeIcon
+            xsi:type="gmftool:DefaultImage"/>
+      </tools>
+    </tools>
+  </palette>
+</gmftool:ToolRegistry>
