@@ -3,7 +3,6 @@ package hierarchymealy.diagram.edit.policies;
 import hierarchymealy.MealyPackage;
 import hierarchymealy.diagram.edit.parts.CompositeState2EditPart;
 import hierarchymealy.diagram.edit.parts.State2EditPart;
-import hierarchymealy.diagram.edit.parts.StateEditPart;
 import hierarchymealy.diagram.part.MealyMachineDiagramUpdater;
 import hierarchymealy.diagram.part.MealyMachineNodeDescriptor;
 import hierarchymealy.diagram.part.MealyMachineVisualIDRegistry;
@@ -21,7 +20,7 @@ import org.eclipse.gmf.runtime.notation.View;
 /**
  * @generated
  */
-public class CompositeStateCompositeStateCompartmentCanonicalEditPolicy extends
+public class CompositeStateCompositeStateCompartment2CanonicalEditPolicy extends
 		CanonicalEditPolicy {
 
 	/**
@@ -36,7 +35,7 @@ public class CompositeStateCompositeStateCompartmentCanonicalEditPolicy extends
 		View viewObject = (View) getHost().getModel();
 		List result = new LinkedList();
 		for (Iterator it = MealyMachineDiagramUpdater
-				.getCompositeStateCompositeStateCompartment_5001SemanticChildren(
+				.getCompositeStateCompositeStateCompartment_5002SemanticChildren(
 						viewObject).iterator(); it.hasNext();) {
 			result.add(((MealyMachineNodeDescriptor) it.next())
 					.getModelElement());

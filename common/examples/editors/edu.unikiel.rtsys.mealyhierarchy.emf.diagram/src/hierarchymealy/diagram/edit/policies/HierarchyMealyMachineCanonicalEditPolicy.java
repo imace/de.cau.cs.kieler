@@ -78,10 +78,9 @@ public class HierarchyMealyMachineCanonicalEditPolicy extends
 		switch (visualID) {
 		case CompositeStateEditPart.VISUAL_ID:
 		case StateEditPart.VISUAL_ID:
-			return !semanticChildren.contains(view.getElement())
-					|| visualID != MealyMachineVisualIDRegistry
-							.getNodeVisualID((View) getHost().getModel(), view
-									.getElement());
+			if (!semanticChildren.contains(view.getElement())) {
+				return true;
+			}
 		}
 		return false;
 	}
