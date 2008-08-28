@@ -1,0 +1,579 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin>
+
+   <extension point="org.eclipse.team.core.fileTypes">
+      <?gmfgen generated="true"?>
+      <fileTypes
+         type="text"
+         extension="ssm_diagram">
+      </fileTypes>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.extension_parser">
+      <?gmfgen generated="true"?>
+      <parser
+         type="ssm_diagram"
+         class="org.eclipse.gmf.runtime.emf.core.resources.GMFResourceFactory">
+      </parser>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <?gmfgen generated="true"?>
+      <editor
+         id="edu.unikiel.rtsys.kieler.ssm.diagram.part.SafeStateMachineDiagramEditorID"
+         name="%editorName"
+         icon="icons/obj16/ssmDiagramFile.gif"
+         extensions="ssm_diagram"
+         default="true"
+         class="edu.unikiel.rtsys.kieler.ssm.diagram.part.SafeStateMachineDiagramEditor"
+         matchingStrategy="edu.unikiel.rtsys.kieler.ssm.diagram.part.SafeStateMachineMatchingStrategy"
+         contributorClass="edu.unikiel.rtsys.kieler.ssm.diagram.part.SafeStateMachineDiagramActionBarContributor">
+      </editor>
+   </extension>
+   
+   <extension point="org.eclipse.ui.contexts">
+      <?gmfgen generated="true"?>
+      <context
+         description="%context.description"
+         id="edu.unikiel.rtsys.kieler.ssm.diagram.ui.diagramContext"
+         name="%context.name"
+         parentId="org.eclipse.gmf.runtime.diagram.ui.diagramContext">
+      </context>
+   </extension>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <?gmfgen generated="true"?>
+  	  <wizard
+  	     name="%newWizardName"
+  	     icon="icons/obj16/ssmDiagramFile.gif"
+  	     category="org.eclipse.ui.Examples"
+  	     class="edu.unikiel.rtsys.kieler.ssm.diagram.part.SafeStateMachineCreationWizard"
+  	     id="edu.unikiel.rtsys.kieler.ssm.diagram.part.SafeStateMachineCreationWizardID">
+  	  	 <description>%newWizardDesc</description>  
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.popupMenus">
+      <?gmfgen generated="true"?>
+      <objectContribution
+            adaptable="false"
+            id="edu.unikiel.rtsys.kieler.ssm.gmf.diagram.LoadResource"
+            objectClass="edu.unikiel.rtsys.kieler.ssm.diagram.edit.parts.SafeStateMachineEditPart">
+         <action
+               class="edu.unikiel.rtsys.kieler.ssm.diagram.part.SafeStateMachineLoadResourceAction"
+               enablesFor="1"
+               id="edu.unikiel.rtsys.kieler.ssm.gmf.diagram.LoadResourceAction"
+               label="%loadResourceActionLabel"
+               menubarPath="additions">
+         </action>
+      </objectContribution>           
+   </extension>
+
+   <extension point="org.eclipse.ui.popupMenus">
+      <?gmfgen generated="true"?>
+      <objectContribution
+            id="edu.unikiel.rtsys.kieler.ssm.gmf.diagram.InitDiagram"
+            nameFilter="*.ssm"
+            objectClass="org.eclipse.core.resources.IFile">
+         <action
+               label="%initDiagramActionLabel"
+               class="edu.unikiel.rtsys.kieler.ssm.diagram.part.SafeStateMachineInitDiagramFileAction"
+               menubarPath="additions"
+               enablesFor="1"
+               id="edu.unikiel.rtsys.kieler.ssm.gmf.diagram.InitDiagramAction">
+         </action>
+      </objectContribution>
+   </extension>
+	
+   <extension point="org.eclipse.gmf.runtime.common.ui.services.action.globalActionHandlerProviders">
+      <?gmfgen generated="true"?>
+      <GlobalActionHandlerProvider
+         class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramGlobalActionHandlerProvider"
+         id="Safe State MachinePresentation">
+         <Priority name="Lowest"/>
+         <ViewId id="edu.unikiel.rtsys.kieler.ssm.diagram.part.SafeStateMachineDiagramEditorID">
+            <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
+               <GlobalActionId actionId="delete"/>
+            </ElementType>
+            <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart">
+               <GlobalActionId actionId="save"/>
+            </ElementType>
+         </ViewId>
+      </GlobalActionHandlerProvider>
+      <GlobalActionHandlerProvider
+         class="org.eclipse.gmf.runtime.diagram.ui.providers.ide.providers.DiagramIDEGlobalActionHandlerProvider"
+         id="Safe State MachinePresentationIDE">
+         <Priority name="Lowest"/>
+         <ViewId id="edu.unikiel.rtsys.kieler.ssm.diagram.part.SafeStateMachineDiagramEditorID">
+            <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
+               <GlobalActionId actionId="bookmark"/>
+            </ElementType>
+         </ViewId>
+      </GlobalActionHandlerProvider>
+      <GlobalActionHandlerProvider
+            class="org.eclipse.gmf.runtime.diagram.ui.render.providers.DiagramUIRenderGlobalActionHandlerProvider"
+            id="Safe State MachineRender">
+         <Priority name="Lowest"/>
+         <ViewId id="edu.unikiel.rtsys.kieler.ssm.diagram.part.SafeStateMachineDiagramEditorID">
+            <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
+               <GlobalActionId actionId="cut"/>
+               <GlobalActionId actionId="copy"/>
+               <GlobalActionId actionId="paste"/>
+            </ElementType>
+         </ViewId>
+      </GlobalActionHandlerProvider>
+   </extension>
+
+
+   <extension point="org.eclipse.core.runtime.preferences">
+      <?gmfgen generated="true"?>
+      <initializer class="edu.unikiel.rtsys.kieler.ssm.diagram.preferences.DiagramPreferenceInitializer"/>
+   </extension>
+
+   <extension point="org.eclipse.ui.preferencePages">
+      <?gmfgen generated="true"?>
+      <page
+            id="edu.unikiel.rtsys.kieler.ssm.emf.diagram.general"
+            name="%preference.page.title.edu.unikiel.rtsys.kieler.ssm.emf.diagram.general"
+            class="edu.unikiel.rtsys.kieler.ssm.diagram.preferences.DiagramGeneralPreferencePage">
+      </page>
+      <page
+            id="edu.unikiel.rtsys.kieler.ssm.emf.diagram.appearance"
+            name="%preference.page.title.edu.unikiel.rtsys.kieler.ssm.emf.diagram.appearance"
+            category="edu.unikiel.rtsys.kieler.ssm.emf.diagram.general"
+            class="edu.unikiel.rtsys.kieler.ssm.diagram.preferences.DiagramAppearancePreferencePage">
+      </page>
+      <page
+            id="edu.unikiel.rtsys.kieler.ssm.emf.diagram.connections"
+            name="%preference.page.title.edu.unikiel.rtsys.kieler.ssm.emf.diagram.connections"
+            category="edu.unikiel.rtsys.kieler.ssm.emf.diagram.general"
+            class="edu.unikiel.rtsys.kieler.ssm.diagram.preferences.DiagramConnectionsPreferencePage">
+      </page>
+      <page
+            id="edu.unikiel.rtsys.kieler.ssm.emf.diagram.printing"
+            name="%preference.page.title.edu.unikiel.rtsys.kieler.ssm.emf.diagram.printing"
+            category="edu.unikiel.rtsys.kieler.ssm.emf.diagram.general"
+            class="edu.unikiel.rtsys.kieler.ssm.diagram.preferences.DiagramPrintingPreferencePage">
+      </page>
+      <page
+            id="edu.unikiel.rtsys.kieler.ssm.emf.diagram.rulersAndGrid"
+            name="%preference.page.title.edu.unikiel.rtsys.kieler.ssm.emf.diagram.rulersAndGrid"
+            category="edu.unikiel.rtsys.kieler.ssm.emf.diagram.general"
+            class="edu.unikiel.rtsys.kieler.ssm.diagram.preferences.DiagramRulersAndGridPreferencePage">
+      </page>
+      <page
+            id="edu.unikiel.rtsys.kieler.ssm.emf.diagram.pathmaps"
+            name="%preference.page.title.edu.unikiel.rtsys.kieler.ssm.emf.diagram.pathmaps"
+            category="edu.unikiel.rtsys.kieler.ssm.emf.diagram.general"
+            class="org.eclipse.gmf.runtime.emf.ui.preferences.PathmapsPreferencePage">
+      </page>
+   </extension>
+
+
+
+
+   <extension point="org.eclipse.gmf.runtime.diagram.core.viewProviders">
+      <?gmfgen generated="true"?>
+      <viewProvider class="edu.unikiel.rtsys.kieler.ssm.diagram.providers.SafeStateMachineViewProvider">
+         <Priority name="Lowest"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Diagram" semanticHints="Safe State Machine"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints=""/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Edge" semanticHints=""/>
+      </viewProvider>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.diagram.ui.editpartProviders">
+      <?gmfgen generated="true"?>
+      <editpartProvider class="edu.unikiel.rtsys.kieler.ssm.diagram.providers.SafeStateMachineEditPartProvider">
+         <Priority name="Lowest"/>
+      </editpartProvider>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.emf.ui.modelingAssistantProviders">
+      <?gmfgen generated="true"?>
+      <modelingAssistantProvider class="edu.unikiel.rtsys.kieler.ssm.diagram.providers.SafeStateMachineModelingAssistantProvider">
+         <Priority name="Lowest"/>
+      </modelingAssistantProvider>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.common.ui.services.iconProviders">
+      <?gmfgen generated="true"?>
+      <IconProvider class="edu.unikiel.rtsys.kieler.ssm.diagram.providers.SafeStateMachineIconProvider">
+         <Priority name="Low"/>
+      </IconProvider>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.common.ui.services.parserProviders">
+      <?gmfgen generated="true"?>
+      <ParserProvider class="edu.unikiel.rtsys.kieler.ssm.diagram.providers.SafeStateMachineParserProvider">
+         <Priority name="Lowest"/>
+      </ParserProvider>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.emf.type.core.elementTypes">
+      <?gmfgen generated="true"?>
+      <metamodel nsURI="http://www.informatik.uni-kiel.de/rtsys/ssm">
+         <metamodelType
+               id="edu.unikiel.rtsys.kieler.ssm.gmf.diagram.SafeStateMachine_1000"
+               name="%metatype.name.SafeStateMachine_1000"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="SafeStateMachine"
+               edithelper="edu.unikiel.rtsys.kieler.ssm.diagram.edit.helpers.SafeStateMachineEditHelper">
+            <param name="semanticHint" value="1000"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.informatik.uni-kiel.de/rtsys/ssm">
+         <metamodelType
+               id="edu.unikiel.rtsys.kieler.ssm.gmf.diagram.CompositeState_2005"
+               name="%metatype.name.CompositeState_2005"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="CompositeState"
+               edithelper="edu.unikiel.rtsys.kieler.ssm.diagram.edit.helpers.CompositeStateEditHelper">
+            <param name="semanticHint" value="2005"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.informatik.uni-kiel.de/rtsys/ssm">
+         <metamodelType
+               id="edu.unikiel.rtsys.kieler.ssm.gmf.diagram.Region_3005"
+               name="%metatype.name.Region_3005"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Region"
+               edithelper="edu.unikiel.rtsys.kieler.ssm.diagram.edit.helpers.RegionEditHelper">
+            <param name="semanticHint" value="3005"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.informatik.uni-kiel.de/rtsys/ssm">
+         <specializationType
+               id="edu.unikiel.rtsys.kieler.ssm.gmf.diagram.CompositeState_3004"
+               name="%metatype.name.CompositeState_3004"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="edu.unikiel.rtsys.kieler.ssm.gmf.diagram.CompositeState_2005"/>
+            <param name="semanticHint" value="3004"/>
+         </specializationType>
+      </metamodel>
+      <metamodel nsURI="http://www.informatik.uni-kiel.de/rtsys/ssm">
+         <metamodelType
+               id="edu.unikiel.rtsys.kieler.ssm.gmf.diagram.SimpleState_3006"
+               name="%metatype.name.SimpleState_3006"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="SimpleState"
+               edithelper="edu.unikiel.rtsys.kieler.ssm.diagram.edit.helpers.SimpleStateEditHelper">
+            <param name="semanticHint" value="3006"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.informatik.uni-kiel.de/rtsys/ssm">
+         <metamodelType
+               id="edu.unikiel.rtsys.kieler.ssm.gmf.diagram.InitialState_3007"
+               name="%metatype.name.InitialState_3007"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="InitialState"
+               edithelper="edu.unikiel.rtsys.kieler.ssm.diagram.edit.helpers.InitialStateEditHelper">
+            <param name="semanticHint" value="3007"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.informatik.uni-kiel.de/rtsys/ssm">
+         <metamodelType
+               id="edu.unikiel.rtsys.kieler.ssm.gmf.diagram.StrongAbortion_4002"
+               name="%metatype.name.StrongAbortion_4002"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="StrongAbortion"
+               edithelper="edu.unikiel.rtsys.kieler.ssm.diagram.edit.helpers.StrongAbortionEditHelper">
+            <param name="semanticHint" value="4002"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.informatik.uni-kiel.de/rtsys/ssm">
+         <metamodelType
+               id="edu.unikiel.rtsys.kieler.ssm.gmf.diagram.NormalTermination_4003"
+               name="%metatype.name.NormalTermination_4003"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="NormalTermination"
+               edithelper="edu.unikiel.rtsys.kieler.ssm.diagram.edit.helpers.NormalTerminationEditHelper">
+            <param name="semanticHint" value="4003"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.informatik.uni-kiel.de/rtsys/ssm">
+         <metamodelType
+               id="edu.unikiel.rtsys.kieler.ssm.gmf.diagram.WeakAbortion_4004"
+               name="%metatype.name.WeakAbortion_4004"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="WeakAbortion"
+               edithelper="edu.unikiel.rtsys.kieler.ssm.diagram.edit.helpers.WeakAbortionEditHelper">
+            <param name="semanticHint" value="4004"/>
+         </metamodelType>
+      </metamodel>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.emf.type.core.elementTypeBindings">
+      <?gmfgen generated="true"?>
+      <clientContext id="Safe State MachineClientContext">
+         <enablement>
+            <test
+               property="org.eclipse.gmf.runtime.emf.core.editingDomain"
+               value="edu.unikiel.rtsys.kieler.ssm.gmf.diagram.EditingDomain"/>
+         </enablement>
+      </clientContext> 
+      <binding context="Safe State MachineClientContext">
+         <elementType ref="edu.unikiel.rtsys.kieler.ssm.gmf.diagram.SafeStateMachine_1000"/>
+         <elementType ref="edu.unikiel.rtsys.kieler.ssm.gmf.diagram.CompositeState_2005"/>
+         <elementType ref="edu.unikiel.rtsys.kieler.ssm.gmf.diagram.Region_3005"/>
+         <elementType ref="edu.unikiel.rtsys.kieler.ssm.gmf.diagram.CompositeState_3004"/>
+         <elementType ref="edu.unikiel.rtsys.kieler.ssm.gmf.diagram.SimpleState_3006"/>
+         <elementType ref="edu.unikiel.rtsys.kieler.ssm.gmf.diagram.InitialState_3007"/>
+         <elementType ref="edu.unikiel.rtsys.kieler.ssm.gmf.diagram.StrongAbortion_4002"/>
+         <elementType ref="edu.unikiel.rtsys.kieler.ssm.gmf.diagram.NormalTermination_4003"/>
+         <elementType ref="edu.unikiel.rtsys.kieler.ssm.gmf.diagram.WeakAbortion_4004"/>
+         <advice ref="org.eclipse.gmf.runtime.diagram.core.advice.notationDepdendents"/>
+      </binding>
+   </extension>
+	   <extension point="org.eclipse.core.expressions.propertyTesters">
+      <?gmfgen generated="true"?>
+       <propertyTester
+           id="edu.unikiel.rtsys.kieler.ssm.gmf.diagram.URIEditorInputPropertyTester"
+           type="org.eclipse.emf.common.ui.URIEditorInput"
+           namespace="edu.unikiel.rtsys.kieler.ssm.gmf.diagram"
+           properties="isURIEditorInput"
+           class="edu.unikiel.rtsys.kieler.ssm.diagram.part.SafeStateMachineUriEditorInputTester">
+       </propertyTester>
+   </extension>
+
+	   <extension point="org.eclipse.core.expressions.propertyTesters">
+      <?gmfgen generated="true"?>
+       <propertyTester
+           id="edu.unikiel.rtsys.kieler.ssm.gmf.diagram.DomainModelElementPropertyTester"
+           type="org.eclipse.emf.ecore.EObject"
+           namespace="edu.unikiel.rtsys.kieler.ssm.gmf.diagram"
+           properties="isDomainModelElement"
+           class="edu.unikiel.rtsys.kieler.ssm.diagram.part.SafeStateMachineDomainModelElementTester">
+       </propertyTester>
+   </extension>
+
+	   <extension point="org.eclipse.ui.navigator.viewer">
+      <?gmfgen generated="true"?>
+      <viewerContentBinding viewerId="org.eclipse.ui.navigator.ProjectExplorer">
+         <includes>
+            <contentExtension pattern="edu.unikiel.rtsys.kieler.ssm.gmf.diagram.resourceContent"/>
+			<contentExtension pattern="edu.unikiel.rtsys.kieler.ssm.gmf.diagram.domainResourceContent"/>
+            <contentExtension pattern="edu.unikiel.rtsys.kieler.ssm.gmf.diagram.navigatorLinkHelper"/>
+         </includes>
+      </viewerContentBinding>
+      <viewerActionBinding viewerId="org.eclipse.ui.navigator.ProjectExplorer">
+         <includes>
+            <actionExtension pattern="edu.unikiel.rtsys.kieler.ssm.gmf.diagram.navigatorActionProvider"/>
+         </includes>
+      </viewerActionBinding>
+   </extension>
+
+   <extension point="org.eclipse.ui.navigator.navigatorContent">
+      <?gmfgen generated="true"?>
+      <navigatorContent
+            id="edu.unikiel.rtsys.kieler.ssm.gmf.diagram.resourceContent" 
+            name="%navigatorContentName" 
+            priority="normal" 
+            contentProvider="edu.unikiel.rtsys.kieler.ssm.diagram.navigator.SafeStateMachineNavigatorContentProvider" 
+            labelProvider="edu.unikiel.rtsys.kieler.ssm.diagram.navigator.SafeStateMachineNavigatorLabelProvider"
+            icon="icons/obj16/ssmDiagramFile.gif"
+            activeByDefault="true">
+         <triggerPoints>
+            <or>
+	           <and>
+    	          <instanceof value="org.eclipse.core.resources.IFile"/>
+        	      <test property="org.eclipse.core.resources.extension" value="ssm_diagram"/>
+               </and>
+               <instanceof value="edu.unikiel.rtsys.kieler.ssm.diagram.navigator.SafeStateMachineAbstractNavigatorItem"/>
+            </or>
+         </triggerPoints>
+         <possibleChildren>
+            <or>
+         	   <instanceof value="edu.unikiel.rtsys.kieler.ssm.diagram.navigator.SafeStateMachineAbstractNavigatorItem"/>
+            </or>
+         </possibleChildren>
+         <commonSorter 
+               id="edu.unikiel.rtsys.kieler.ssm.gmf.diagram.navigatorSorter" 
+               class="edu.unikiel.rtsys.kieler.ssm.diagram.navigator.SafeStateMachineNavigatorSorter">
+            <parentExpression>
+               <or>
+	              <and>
+    	             <instanceof value="org.eclipse.core.resources.IFile"/>
+        	         <test property="org.eclipse.core.resources.extension" value="ssm_diagram"/>
+                  </and>
+                  <instanceof value="edu.unikiel.rtsys.kieler.ssm.diagram.navigator.SafeStateMachineAbstractNavigatorItem"/>
+               </or>
+            </parentExpression>
+         </commonSorter>
+      </navigatorContent>
+      <navigatorContent
+            id="edu.unikiel.rtsys.kieler.ssm.gmf.diagram.domainResourceContent" 
+            name="%domainNavigatorContentName" 
+            priority="normal" 
+            contentProvider="edu.unikiel.rtsys.kieler.ssm.diagram.navigator.SafeStateMachineDomainNavigatorContentProvider" 
+            labelProvider="edu.unikiel.rtsys.kieler.ssm.diagram.navigator.SafeStateMachineDomainNavigatorLabelProvider"
+            icon="icons/obj16/ssmDiagramFile.gif"
+            activeByDefault="true">
+         <triggerPoints>
+            <or>
+	           <and>
+    	          <instanceof value="org.eclipse.core.resources.IFile"/>
+        	      <test property="org.eclipse.core.resources.extension" value="ssm"/>
+               </and>
+               <and>
+                  <instanceof value="org.eclipse.emf.ecore.EObject"/>
+                  <test property="edu.unikiel.rtsys.kieler.ssm.gmf.diagram.isDomainModelElement"/>
+               </and>
+            </or>
+         </triggerPoints>
+         <possibleChildren>
+            <and>
+       	       <instanceof value="org.eclipse.emf.ecore.EObject"/>
+       	       <test property="edu.unikiel.rtsys.kieler.ssm.gmf.diagram.isDomainModelElement"/>
+       	    </and>
+         </possibleChildren>
+      </navigatorContent>
+      <actionProvider
+            id="edu.unikiel.rtsys.kieler.ssm.gmf.diagram.navigatorActionProvider"
+            class="edu.unikiel.rtsys.kieler.ssm.diagram.navigator.SafeStateMachineNavigatorActionProvider">
+         <enablement>
+            <or>
+               <instanceof value="edu.unikiel.rtsys.kieler.ssm.diagram.navigator.SafeStateMachineAbstractNavigatorItem"/>
+            </or>
+         </enablement>
+      </actionProvider>
+   </extension>
+   
+	   <extension point="org.eclipse.ui.navigator.linkHelper">
+      <?gmfgen generated="true"?>
+      <linkHelper
+            id="edu.unikiel.rtsys.kieler.ssm.gmf.diagram.navigatorLinkHelper"
+            class="edu.unikiel.rtsys.kieler.ssm.diagram.navigator.SafeStateMachineNavigatorLinkHelper">
+         <editorInputEnablement>
+            <and>
+               <instanceof value="org.eclipse.emf.common.ui.URIEditorInput"/>
+               <test property="edu.unikiel.rtsys.kieler.ssm.gmf.diagram.isURIEditorInput"/>
+            </and>
+         </editorInputEnablement>
+         <selectionEnablement>
+            <instanceof value="edu.unikiel.rtsys.kieler.ssm.diagram.navigator.SafeStateMachineAbstractNavigatorItem"/>
+         </selectionEnablement>
+      </linkHelper>
+   </extension>
+   <extension point="org.eclipse.ui.commands">
+      <?gmfgen generated="true"?>
+      <command
+         categoryId="org.eclipse.ui.category.edit"
+         defaultHandler="edu.unikiel.rtsys.kieler.ssm.diagram.part.SafeStateMachineDiagramUpdateCommand"
+         description="%update.diagram.description"
+         id="edu.unikiel.rtsys.kieler.ssm.diagram.updateDiagram"
+         name="%update.diagram.name"/>
+   </extension>
+   
+   <extension point="org.eclipse.ui.bindings">
+      <?gmfgen generated="true"?>
+      <key 
+         commandId="edu.unikiel.rtsys.kieler.ssm.diagram.updateDiagram"
+         contextId="edu.unikiel.rtsys.kieler.ssm.diagram.ui.diagramContext"
+         schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+         sequence="F5"/>
+   </extension>
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            adaptable="false"
+            id="edu.unikiel.rtsys.kieler.ssm.diagram.contributionCreate"
+            nameFilter="*"
+            objectClass="org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart">
+         <menu
+               id="SSM"
+               label="&amp;SSM"
+               path="additions">
+            <separator
+                  name="group1">
+            </separator>
+         </menu>
+         <action
+               class="edu.unikiel.rtsys.kieler.ssm.diagram.popup.actions.CreateSimpleState"
+               enablesFor="1"
+               id="edu.unikiel.rtsys.kieler.ssm.diagram.contributionCreate.simpleState"
+               label="&amp;Create Simple State"
+               menubarPath="SSM/group1">
+            <enablement>
+               <objectClass
+                     name="edu.unikiel.rtsys.kieler.ssm.diagram.edit.parts.RegionEditPart">
+               </objectClass>
+            </enablement>
+         </action>
+      </objectContribution>
+   </extension><extension point="org.eclipse.ui.views.properties.tabbed.propertyContributor">
+      <?gmfgen generated="true"?>
+      <propertyContributor
+            contributorId="edu.unikiel.rtsys.kieler.ssm.gmf.diagram"
+            labelProvider="edu.unikiel.rtsys.kieler.ssm.diagram.sheet.SafeStateMachineSheetLabelProvider">
+         <propertyCategory category="domain"/>
+         <propertyCategory category="visual"/>
+         <propertyCategory category="extra"/>
+      </propertyContributor>
+   </extension>
+<extension point="org.eclipse.ui.views.properties.tabbed.propertyTabs">
+      <?gmfgen generated="true"?>   
+      <propertyTabs contributorId="edu.unikiel.rtsys.kieler.ssm.gmf.diagram">
+         <propertyTab
+             category="visual"
+             id="property.tab.AppearancePropertySection"
+             label="%tab.appearance"/>
+          <propertyTab
+             category="visual"
+             id="property.tab.DiagramPropertySection"
+             label="%tab.diagram"/>
+          <propertyTab
+             category="domain"
+             id="property.tab.domain"
+             label="%tab.domain"/>
+      </propertyTabs>
+   </extension>
+<extension point="org.eclipse.ui.views.properties.tabbed.propertySections">
+      <?gmfgen generated="true"?>   
+      <propertySections contributorId="edu.unikiel.rtsys.kieler.ssm.gmf.diagram">
+         <propertySection id="property.section.ConnectorAppearancePropertySection" 
+            filter="org.eclipse.gmf.runtime.diagram.ui.properties.filters.ConnectionEditPartPropertySectionFilter" 
+            class="org.eclipse.gmf.runtime.diagram.ui.properties.sections.appearance.ConnectionAppearancePropertySection" 
+            tab="property.tab.AppearancePropertySection">
+         </propertySection>
+         <propertySection id="property.section.ShapeColorAndFontPropertySection" 
+            filter="org.eclipse.gmf.runtime.diagram.ui.properties.filters.ShapeEditPartPropertySectionFilter" 
+            class="org.eclipse.gmf.runtime.diagram.ui.properties.sections.appearance.ShapeColorsAndFontsPropertySection" 
+            tab="property.tab.AppearancePropertySection">
+         </propertySection> 
+         <propertySection id="property.section.DiagramColorsAndFontsPropertySection" 
+            filter="org.eclipse.gmf.runtime.diagram.ui.properties.filters.DiagramEditPartPropertySectionFilter" 
+            class="org.eclipse.gmf.runtime.diagram.ui.properties.sections.appearance.DiagramColorsAndFontsPropertySection" 
+            tab="property.tab.AppearancePropertySection">
+         </propertySection>     
+         <propertySection id="property.section.RulerGridPropertySection" 
+            filter="org.eclipse.gmf.runtime.diagram.ui.properties.filters.DiagramEditPartPropertySectionFilter" 
+            class="org.eclipse.gmf.runtime.diagram.ui.properties.sections.grid.RulerGridPropertySection" 
+            tab="property.tab.DiagramPropertySection">
+         </propertySection>     
+         <propertySection
+            id="property.section.domain" 
+            tab="property.tab.domain"
+            class="edu.unikiel.rtsys.kieler.ssm.diagram.sheet.SafeStateMachinePropertySection">
+            <input type="org.eclipse.gmf.runtime.notation.View"/>
+            <input type="org.eclipse.gef.EditPart"/>
+            <input type="edu.unikiel.rtsys.kieler.ssm.diagram.navigator.SafeStateMachineAbstractNavigatorItem"/>
+         </propertySection>
+      </propertySections>
+   </extension>
+
+
+    <extension
+         point="org.eclipse.core.runtime.adapters">
+      <factory
+            adaptableType="org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart"
+            class="edu.unikiel.rtsys.kieler.ssm.diagram.util.SafeStateMachineIAdapterFactory">
+         <adapter
+               type="java.lang.String">
+         </adapter>
+      </factory>
+   </extension>
+
+
+</plugin>
