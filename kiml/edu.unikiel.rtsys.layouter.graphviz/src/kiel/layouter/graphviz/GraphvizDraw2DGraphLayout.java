@@ -142,7 +142,7 @@ public class GraphvizDraw2DGraphLayout {
 	 * @param graph Graph object to fill with the layout information
 	 */
 	private void mapGraphviz2Graph(CompositeNode graph){
-		GraphvizAPI.writeDOT(graphvizGraph, "/home/haf/test.dot");
+		GraphvizAPI.writeDOT(graphvizGraph, System.getProperty("user.home") + "/test.dot");
 		mapGraphvizNodes2Graph();
 		mapGraphvizEdges2Graph();
 		setNodeSize(graph);
