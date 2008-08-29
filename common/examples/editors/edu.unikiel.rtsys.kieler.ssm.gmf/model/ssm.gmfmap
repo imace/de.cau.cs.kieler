@@ -80,11 +80,6 @@
                   href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.ecore#//InitialState"/>
               <domainSpecialization
                   body="not self.oclIsTypeOf(ssm::CompositeState)"/>
-              <labelMappings
-                  readOnly="true">
-                <diagramLabel
-                    href="ssm.gmfgraph#InitialStateLabel"/>
-              </labelMappings>
               <tool
                   xsi:type="gmftool:CreationTool"
                   href="ssm.gmftool#//@palette/@tools.0/@tools.1"/>

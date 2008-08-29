@@ -22,7 +22,7 @@
     <domainDiagramElement
         href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.genmodel#//ssm/SafeStateMachine"/>
     <childNodes
-        visualID="3005"
+        visualID="3001"
         editPartClassName="RegionEditPart"
         itemSemanticEditPolicyClassName="RegionItemSemanticEditPolicy"
         notationViewFactoryClassName="RegionViewFactory"
@@ -52,14 +52,14 @@
       </modelFacet>
     </childNodes>
     <childNodes
-        visualID="3004"
-        editPartClassName="CompositeState2EditPart"
-        itemSemanticEditPolicyClassName="CompositeState2ItemSemanticEditPolicy"
-        notationViewFactoryClassName="CompositeState2ViewFactory"
-        canonicalEditPolicyClassName="CompositeState2CanonicalEditPolicy"
+        visualID="3002"
+        editPartClassName="CompositeState3EditPart"
+        itemSemanticEditPolicyClassName="CompositeState3ItemSemanticEditPolicy"
+        notationViewFactoryClassName="CompositeState3ViewFactory"
+        canonicalEditPolicyClassName="CompositeState3CanonicalEditPolicy"
         compartments="//@diagram/@compartments.2"
-        graphicalNodeEditPolicyClassName="CompositeState2GraphicalNodeEditPolicy"
-        createCommandClassName="CompositeState2CreateCommand"
+        graphicalNodeEditPolicyClassName="CompositeState3GraphicalNodeEditPolicy"
+        createCommandClassName="CompositeState3CreateCommand"
         containers="//@diagram/@compartments.1">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
@@ -91,7 +91,7 @@
             href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.genmodel#//ssm/Region/states"/>
       </modelFacet>
       <labels
-          visualID="5004"
+          visualID="5001"
           editPartClassName="CompositeStateName2EditPart"
           itemSemanticEditPolicyClassName="CompositeStateName2ItemSemanticEditPolicy"
           notationViewFactoryClassName="CompositeStateName2ViewFactory"
@@ -110,7 +110,7 @@
       </labels>
     </childNodes>
     <childNodes
-        visualID="3006"
+        visualID="3003"
         editPartClassName="SimpleStateEditPart"
         itemSemanticEditPolicyClassName="SimpleStateItemSemanticEditPolicy"
         notationViewFactoryClassName="SimpleStateViewFactory"
@@ -145,7 +145,7 @@
             href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.genmodel#//ssm/Region/states"/>
       </modelFacet>
       <labels
-          visualID="5003"
+          visualID="5002"
           editPartClassName="SimpleStateNameEditPart"
           itemSemanticEditPolicyClassName="SimpleStateNameItemSemanticEditPolicy"
           notationViewFactoryClassName="SimpleStateNameViewFactory">
@@ -166,13 +166,13 @@
       </labels>
     </childNodes>
     <childNodes
-        visualID="3007"
-        editPartClassName="InitialStateEditPart"
-        itemSemanticEditPolicyClassName="InitialStateItemSemanticEditPolicy"
-        notationViewFactoryClassName="InitialStateViewFactory"
-        canonicalEditPolicyClassName="InitialStateCanonicalEditPolicy"
-        graphicalNodeEditPolicyClassName="InitialStateGraphicalNodeEditPolicy"
-        createCommandClassName="InitialStateCreateCommand"
+        visualID="3004"
+        editPartClassName="CompositeState2EditPart"
+        itemSemanticEditPolicyClassName="CompositeState2ItemSemanticEditPolicy"
+        notationViewFactoryClassName="CompositeState2ViewFactory"
+        canonicalEditPolicyClassName="CompositeState2CanonicalEditPolicy"
+        graphicalNodeEditPolicyClassName="CompositeState2GraphicalNodeEditPolicy"
+        createCommandClassName="CompositeState2CreateCommand"
         containers="//@diagram/@compartments.1">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
@@ -202,26 +202,9 @@
         <childMetaFeature
             href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.genmodel#//ssm/Region/states"/>
       </modelFacet>
-      <labels
-          xsi:type="gmfgen:GenExternalNodeLabel"
-          visualID="5006"
-          editPartClassName="Region2EditPart"
-          itemSemanticEditPolicyClassName="Region2ItemSemanticEditPolicy"
-          notationViewFactoryClassName="Region2ViewFactory"
-          readOnly="true"
-          elementIcon="true">
-        <diagramRunTimeClass
-            href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
-        <viewmap
-            xsi:type="gmfgen:InnerClassViewmap"
-            className="RegionFigure"
-            classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class RegionFigure extends org.eclipse.draw2d.RectangleFigure {&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public RegionFigure() {&#xA;&#x9;&#x9;&#x9;&#x9;this.setLineWidth(2);&#xA;this.setLineStyle(org.eclipse.draw2d.Graphics.LINE_DASH);&#xA;&#x9;}&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private boolean myUseLocalCoordinates = false;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected boolean useLocalCoordinates() {&#xA;&#x9;&#x9;return myUseLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#xA;&#x9;&#x9;myUseLocalCoordinates = useLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;}&#xA;&#xA;">
-          <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
-        </viewmap>
-      </labels>
     </childNodes>
     <topLevelNodes
-        visualID="2005"
+        visualID="2001"
         editPartClassName="CompositeStateEditPart"
         itemSemanticEditPolicyClassName="CompositeStateItemSemanticEditPolicy"
         notationViewFactoryClassName="CompositeStateViewFactory"
@@ -259,7 +242,7 @@
             href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.genmodel#//ssm/SafeStateMachine/top"/>
       </modelFacet>
       <labels
-          visualID="5005"
+          visualID="5003"
           editPartClassName="CompositeStateNameEditPart"
           itemSemanticEditPolicyClassName="CompositeStateNameItemSemanticEditPolicy"
           notationViewFactoryClassName="CompositeStateNameViewFactory"
@@ -278,17 +261,17 @@
       </labels>
     </topLevelNodes>
     <links
-        visualID="4002"
-        editPartClassName="StrongAbortionEditPart"
-        itemSemanticEditPolicyClassName="StrongAbortionItemSemanticEditPolicy"
-        notationViewFactoryClassName="StrongAbortionViewFactory"
-        createCommandClassName="StrongAbortionCreateCommand"
-        reorientCommandClassName="StrongAbortionReorientCommand">
+        visualID="4001"
+        editPartClassName="StrongAbortion2EditPart"
+        itemSemanticEditPolicyClassName="StrongAbortion2ItemSemanticEditPolicy"
+        notationViewFactoryClassName="StrongAbortion2ViewFactory"
+        createCommandClassName="StrongAbortion2CreateCommand"
+        reorientCommandClassName="StrongAbortion2ReorientCommand">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Edge"/>
       <elementType
           xsi:type="gmfgen:MetamodelType"
-          editHelperClassName="StrongAbortionEditHelper"/>
+          editHelperClassName="StrongAbortion2EditHelper"/>
       <viewmap
           xsi:type="gmfgen:InnerClassViewmap"
           className="StrongAbortionFigure"
@@ -310,10 +293,10 @@
             href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.genmodel#//ssm/Transition/target"/>
       </modelFacet>
       <labels
-          visualID="6003"
-          editPartClassName="StrongAbortionPriorityEditPart"
-          itemSemanticEditPolicyClassName="StrongAbortionPriorityItemSemanticEditPolicy"
-          notationViewFactoryClassName="StrongAbortionPriorityViewFactory">
+          visualID="6001"
+          editPartClassName="StrongAbortionPriority2EditPart"
+          itemSemanticEditPolicyClassName="StrongAbortionPriority2ItemSemanticEditPolicy"
+          notationViewFactoryClassName="StrongAbortionPriority2ViewFactory">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap
@@ -334,10 +317,10 @@
         </modelFacet>
       </labels>
       <labels
-          visualID="6004"
-          editPartClassName="StrongAbortionIsImmediateStringTriggeEditPart"
-          itemSemanticEditPolicyClassName="StrongAbortionIsImmediateStringTriggeItemSemanticEditPolicy"
-          notationViewFactoryClassName="StrongAbortionIsImmediateStringTriggeViewFactory">
+          visualID="6002"
+          editPartClassName="StrongAbortionIsImmediateStringTrigge2EditPart"
+          itemSemanticEditPolicyClassName="StrongAbortionIsImmediateStringTrigge2ItemSemanticEditPolicy"
+          notationViewFactoryClassName="StrongAbortionIsImmediateStringTrigge2ViewFactory">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap
@@ -363,17 +346,17 @@
       </labels>
     </links>
     <links
-        visualID="4003"
-        editPartClassName="NormalTerminationEditPart"
-        itemSemanticEditPolicyClassName="NormalTerminationItemSemanticEditPolicy"
-        notationViewFactoryClassName="NormalTerminationViewFactory"
-        createCommandClassName="NormalTerminationCreateCommand"
-        reorientCommandClassName="NormalTerminationReorientCommand">
+        visualID="4002"
+        editPartClassName="StrongAbortionEditPart"
+        itemSemanticEditPolicyClassName="StrongAbortionItemSemanticEditPolicy"
+        notationViewFactoryClassName="StrongAbortionViewFactory"
+        createCommandClassName="StrongAbortionCreateCommand"
+        reorientCommandClassName="StrongAbortionReorientCommand">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Edge"/>
       <elementType
           xsi:type="gmfgen:MetamodelType"
-          editHelperClassName="NormalTerminationEditHelper"/>
+          editHelperClassName="StrongAbortionEditHelper"/>
       <viewmap
           xsi:type="gmfgen:InnerClassViewmap"
           className="NormalTerminationFigure"
@@ -395,10 +378,10 @@
             href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.genmodel#//ssm/Transition/target"/>
       </modelFacet>
       <labels
-          visualID="6005"
-          editPartClassName="NormalTerminationPriorityEditPart"
-          itemSemanticEditPolicyClassName="NormalTerminationPriorityItemSemanticEditPolicy"
-          notationViewFactoryClassName="NormalTerminationPriorityViewFactory">
+          visualID="6003"
+          editPartClassName="StrongAbortionPriorityEditPart"
+          itemSemanticEditPolicyClassName="StrongAbortionPriorityItemSemanticEditPolicy"
+          notationViewFactoryClassName="StrongAbortionPriorityViewFactory">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap
@@ -419,10 +402,10 @@
         </modelFacet>
       </labels>
       <labels
-          visualID="6006"
-          editPartClassName="NormalTerminationEffectStringEditPart"
-          itemSemanticEditPolicyClassName="NormalTerminationEffectStringItemSemanticEditPolicy"
-          notationViewFactoryClassName="NormalTerminationEffectStringViewFactory">
+          visualID="6004"
+          editPartClassName="StrongAbortionIsImmediateStringTriggeEditPart"
+          itemSemanticEditPolicyClassName="StrongAbortionIsImmediateStringTriggeItemSemanticEditPolicy"
+          notationViewFactoryClassName="StrongAbortionIsImmediateStringTriggeViewFactory">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap
@@ -444,17 +427,17 @@
       </labels>
     </links>
     <links
-        visualID="4004"
-        editPartClassName="WeakAbortionEditPart"
-        itemSemanticEditPolicyClassName="WeakAbortionItemSemanticEditPolicy"
-        notationViewFactoryClassName="WeakAbortionViewFactory"
-        createCommandClassName="WeakAbortionCreateCommand"
-        reorientCommandClassName="WeakAbortionReorientCommand">
+        visualID="4003"
+        editPartClassName="NormalTerminationEditPart"
+        itemSemanticEditPolicyClassName="NormalTerminationItemSemanticEditPolicy"
+        notationViewFactoryClassName="NormalTerminationViewFactory"
+        createCommandClassName="NormalTerminationCreateCommand"
+        reorientCommandClassName="NormalTerminationReorientCommand">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Edge"/>
       <elementType
           xsi:type="gmfgen:MetamodelType"
-          editHelperClassName="WeakAbortionEditHelper"/>
+          editHelperClassName="NormalTerminationEditHelper"/>
       <viewmap
           xsi:type="gmfgen:InnerClassViewmap"
           className="WeakAbortionFigure"
@@ -476,10 +459,10 @@
             href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.genmodel#//ssm/Transition/target"/>
       </modelFacet>
       <labels
-          visualID="6001"
-          editPartClassName="WeakAbortionPriorityEditPart"
-          itemSemanticEditPolicyClassName="WeakAbortionPriorityItemSemanticEditPolicy"
-          notationViewFactoryClassName="WeakAbortionPriorityViewFactory">
+          visualID="6005"
+          editPartClassName="NormalTerminationPriorityEditPart"
+          itemSemanticEditPolicyClassName="NormalTerminationPriorityItemSemanticEditPolicy"
+          notationViewFactoryClassName="NormalTerminationPriorityViewFactory">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap
@@ -500,10 +483,10 @@
         </modelFacet>
       </labels>
       <labels
-          visualID="6002"
-          editPartClassName="WeakAbortionIsImmediateStringTriggeEditPart"
-          itemSemanticEditPolicyClassName="WeakAbortionIsImmediateStringTriggeItemSemanticEditPolicy"
-          notationViewFactoryClassName="WeakAbortionIsImmediateStringTriggeViewFactory">
+          visualID="6006"
+          editPartClassName="NormalTerminationEffectStringEditPart"
+          itemSemanticEditPolicyClassName="NormalTerminationEffectStringItemSemanticEditPolicy"
+          notationViewFactoryClassName="NormalTerminationEffectStringViewFactory">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap
@@ -529,7 +512,7 @@
       </labels>
     </links>
     <compartments
-        visualID="7009"
+        visualID="7001"
         editPartClassName="CompositeStateCompositeStateCompartmentEditPart"
         itemSemanticEditPolicyClassName="CompositeStateCompositeStateCompartmentItemSemanticEditPolicy"
         notationViewFactoryClassName="CompositeStateCompositeStateCompartmentViewFactory"
@@ -553,7 +536,7 @@
       </viewmap>
     </compartments>
     <compartments
-        visualID="7006"
+        visualID="7002"
         editPartClassName="RegionRegionCompartmentEditPart"
         itemSemanticEditPolicyClassName="RegionRegionCompartmentItemSemanticEditPolicy"
         notationViewFactoryClassName="RegionRegionCompartmentViewFactory"
@@ -573,7 +556,7 @@
       </viewmap>
     </compartments>
     <compartments
-        visualID="7005"
+        visualID="7003"
         editPartClassName="CompositeStateCompositeStateCompartment2EditPart"
         itemSemanticEditPolicyClassName="CompositeStateCompositeStateCompartment2ItemSemanticEditPolicy"
         notationViewFactoryClassName="CompositeStateCompositeStateCompartment2ViewFactory"
