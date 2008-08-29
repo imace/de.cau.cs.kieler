@@ -75,6 +75,8 @@ import edu.unikiel.rtsys.kieler.kiml.ui.custom.KimlLayoutHintHelper;
 public class KimlLayoutHintView extends ViewPart implements ISelectionListener,
 		IPartListener, ResourceSetListener {
 
+	public static final String ID = "edu.unikiel.rtsys.kieler.kiml.ui.views.KimlLayoutHintView";
+
 	private IEditorPart activeEditor = null;
 	private TableViewer tableViewer;
 	private Table table;
@@ -421,9 +423,13 @@ public class KimlLayoutHintView extends ViewPart implements ISelectionListener,
 				 * more functions for the KIML Layout Hints View at the moment.
 				 */
 				if (newEditor instanceof DiagramDocumentEditor) {
-					((DiagramDocumentEditor) activeEditor).getEditingDomain()
-							.removeResourceSetListener(this);
-
+					if (activeEditor instanceof DiagramDocumentEditor
+							&& ((DiagramDocumentEditor) activeEditor)
+									.getEditingDomain() != null) {
+						((DiagramDocumentEditor) activeEditor)
+								.getEditingDomain().removeResourceSetListener(
+										this);
+					}
 					((DiagramDocumentEditor) newEditor).getEditingDomain()
 							.addResourceSetListener(this);
 					activeEditor = newEditor;
