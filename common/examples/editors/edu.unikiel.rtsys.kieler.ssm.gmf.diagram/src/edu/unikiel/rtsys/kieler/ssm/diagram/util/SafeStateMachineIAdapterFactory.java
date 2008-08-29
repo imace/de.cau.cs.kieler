@@ -1,16 +1,13 @@
 package edu.unikiel.rtsys.kieler.ssm.diagram.util;
 
 import org.eclipse.core.runtime.IAdapterFactory;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 
 import edu.unikiel.rtsys.kieler.ssm.CompositeState;
 import edu.unikiel.rtsys.kieler.ssm.InitialState;
 import edu.unikiel.rtsys.kieler.ssm.Region;
 import edu.unikiel.rtsys.kieler.ssm.SimpleState;
-import edu.unikiel.rtsys.kieler.ssm.diagram.edit.parts.CompositeState2EditPart;
-import edu.unikiel.rtsys.kieler.ssm.diagram.edit.parts.CompositeStateEditPart;
-import edu.unikiel.rtsys.kieler.ssm.diagram.edit.parts.InitialStateEditPart;
-import edu.unikiel.rtsys.kieler.ssm.diagram.edit.parts.RegionEditPart;
-import edu.unikiel.rtsys.kieler.ssm.diagram.edit.parts.SimpleStateEditPart;
 
 public class SafeStateMachineIAdapterFactory implements IAdapterFactory {
 
@@ -18,47 +15,47 @@ public class SafeStateMachineIAdapterFactory implements IAdapterFactory {
 
 	@Override
 	public Object getAdapter(Object adaptableObject, Class adapterType) {
-		if (adapterType == String.class) {
+		if (adapterType == String.class
+				&& adaptableObject instanceof ShapeNodeEditPart) {
 			/*
-			 * CompositeState is easy, this is for the _TOP_ CompositeState
+			 * First cast to ShapeNodeEditPart to be able to access the model
 			 */
-			if (adaptableObject instanceof CompositeStateEditPart) {
-				return ((CompositeState) ((CompositeStateEditPart) adaptableObject)
-						.getNotationView().getElement()).getName();
-			}
+			EObject modelElement = ((ShapeNodeEditPart) adaptableObject)
+					.getNotationView().getElement();
+
 			/*
-			 * CompositeState is easy, this is for the _NORMAL_ CompositeStates
+			 * CompositeState is easy, this is for the CompositeState
 			 */
-			else if (adaptableObject instanceof CompositeState2EditPart) {
-				return ((CompositeState) ((CompositeState2EditPart) adaptableObject)
-						.getNotationView().getElement()).getName();
+			if (modelElement instanceof CompositeState) {
+				return ((CompositeState) modelElement).getName();
 			}
 			/*
 			 * SimpleState is easy, too
 			 */
-			else if (adaptableObject instanceof SimpleStateEditPart) {
-				return ((SimpleState) ((SimpleStateEditPart) adaptableObject)
-						.getNotationView().getElement()).getName();
+			else if (modelElement instanceof SimpleState) {
+				return ((SimpleState) modelElement).getName();
 			}
 			/*
-			 * That's more complicated for a InitialState. An InitialState has
+			 * That's more complicated for an InitialState. An InitialState has
 			 * no name, so Emma wants to build a String stating that the
 			 * InitialState lies in a Region in a named CompositeState. Emma
-			 * walks through the state hierachy in the EMF-Model. No pain with
+			 * walks through the state hierarchy in the EMF-Model. No pain with
 			 * the 2 different Types of CompositeStates, as Emma walks through
 			 * the EMF-Model
 			 */
-			else if (adaptableObject instanceof InitialStateEditPart) {
-				InitialState initialState = (InitialState) ((InitialStateEditPart) adaptableObject)
-						.getNotationView().getElement();
+			else if (modelElement instanceof InitialState) {
+				InitialState initialState = (InitialState) modelElement;
 				Region region = (Region) initialState.eContainer();
 				CompositeState compositeState = (CompositeState) region
 						.eContainer();
 				return "Initial State of a Region in "
 						+ compositeState.getName();
-			} else if (adaptableObject instanceof RegionEditPart) {
-				Region region = (Region) ((RegionEditPart) adaptableObject)
-						.getNotationView().getElement();
+			}
+			/*
+			 * Similar for a region
+			 */
+			else if (modelElement instanceof Region) {
+				Region region = (Region) modelElement;
 				CompositeState compositeState = (CompositeState) region
 						.eContainer();
 				return "Region in " + compositeState.getName();
