@@ -6,38 +6,42 @@ import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.IHandler;
-import org.eclipse.core.commands.common.NotDefinedException;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.ui.IWorkbenchWindowActionDelegate;
 import org.eclipse.ui.handlers.HandlerUtil;
 
 import edu.unikiel.rtsys.kieler.kiml.ui.KimlLayoutHintConstants;
 import edu.unikiel.rtsys.kieler.kiml.ui.custom.KimlLayoutHintHelper;
 
 /**
+ * The handler which is responsible for the functions to group the selected
+ * elements. At the moment, this covers the following functions:
+ * <ul>
+ * <li>Group as NONE</li>
+ * <li>Group as CUSTOM</li>
+ * <li>Group as CIRCLE</li>
+ * <li>Group as DOT</li>
+ * <li>Group as HORIZONTAL</li>
+ * <li>Group as VERTICAL</li>
+ * </ul>
+ * 
  * @author ars
  * 
  */
 public class GroupAsHandler extends AbstractHandler implements IHandler {
-	
+
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
+
+		/*
+		 * As this handler is activated from a menu, we need to get the active
+		 * menu selection. Just calling selection does not work when calling
+		 * from within a view, for example.
+		 */
 		ISelection selection = HandlerUtil.getActiveMenuSelection(event);
-		//getActiveWorkbenchWindow(event).getSelectionService().getSelection();
-//		.getActivePage().getSelection();
-		//ISelection selection = HandlerUtil.getCurrentSelection(event);
-		System.out.println(event);
-		System.out.println(event.getCommand());
-		try {
-			System.out.println(event.getCommand().getParameters());
-		} catch (NotDefinedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+
 		/*
 		 * Filter out ShapeNodeEditParts. According to the menu.extension in
 		 * plugin.xml it should just be ShapeNodeEditParts selected anyway, but
@@ -57,26 +61,32 @@ public class GroupAsHandler extends AbstractHandler implements IHandler {
 		 */
 		if (selectedNodeElements.size() >= 2) {
 			String layoutType = KimlLayoutHintConstants.NONE;
-			String commandID = event.getCommand().getId(); 
-			if (commandID.equals("edu.unikiel.rtsys.kieler.kiml.ui.command.groupAsNone")){
+			String commandID = event.getCommand().getId();
+			if (commandID
+					.equals("edu.unikiel.rtsys.kieler.kiml.ui.command.groupAsNone")) {
 				layoutType = KimlLayoutHintConstants.NONE;
 			}
-			if (commandID.equals("edu.unikiel.rtsys.kieler.kiml.ui.command.groupAsCustom")){
+			if (commandID
+					.equals("edu.unikiel.rtsys.kieler.kiml.ui.command.groupAsCustom")) {
 				layoutType = KimlLayoutHintConstants.CUSTOM;
 			}
-			if (commandID.equals("edu.unikiel.rtsys.kieler.kiml.ui.command.groupAsCircle")){
+			if (commandID
+					.equals("edu.unikiel.rtsys.kieler.kiml.ui.command.groupAsCircle")) {
 				layoutType = KimlLayoutHintConstants.CIRCLE;
 			}
-			if (commandID.equals("edu.unikiel.rtsys.kieler.kiml.ui.command.groupAsDot")){
+			if (commandID
+					.equals("edu.unikiel.rtsys.kieler.kiml.ui.command.groupAsDot")) {
 				layoutType = KimlLayoutHintConstants.DOT;
 			}
-			if (commandID.equals("edu.unikiel.rtsys.kieler.kiml.ui.command.groupAsHorizontal")){
+			if (commandID
+					.equals("edu.unikiel.rtsys.kieler.kiml.ui.command.groupAsHorizontal")) {
 				layoutType = KimlLayoutHintConstants.HORIZONTAL;
 			}
-			if (commandID.equals("edu.unikiel.rtsys.kieler.kiml.ui.command.groupAsVertical")){
+			if (commandID
+					.equals("edu.unikiel.rtsys.kieler.kiml.ui.command.groupAsVertical")) {
 				layoutType = KimlLayoutHintConstants.VERTICAL;
 			}
-			
+
 			String groupID = KimlLayoutHintHelper
 					.generateLayoutGroupID(selectedNodeElements);
 			KimlLayoutHintHelper.setLayoutHint(selectedNodeElements, groupID,

@@ -16,13 +16,26 @@ import edu.unikiel.rtsys.kieler.kiml.ui.custom.KimlColorHelper;
 import edu.unikiel.rtsys.kieler.kiml.ui.custom.KimlLayoutHintHelper;
 
 /**
- * @author ars
+ * The handler which is responsible for the functions applicable to layout
+ * groups. At the moment, this covers the following functions:
+ * <ul>
+ * <li>Select all group members of one element</li>
+ * <li>Highlight all group members of one element</li>
+ * <li>Remove one or more elements from a group</li>
+ * </ul>
  * 
+ * @author ars
  */
 public class GroupFunctionHandler extends AbstractHandler implements IHandler {
 
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
+
+		/*
+		 * As this handler is activated from a menu, we need to get the active
+		 * menu selection. Just calling selection does not work when calling
+		 * from within a view, for example.
+		 */
 		ISelection selection = HandlerUtil.getActiveMenuSelection(event);
 		/*
 		 * Filter out ShapeNodeEditParts. According to the menu.extension in
@@ -38,19 +51,23 @@ public class GroupFunctionHandler extends AbstractHandler implements IHandler {
 			}
 		}
 
-		String commandID = event.getCommand().getId(); 
-		
-		
-		if (commandID.equals("edu.unikiel.rtsys.kieler.kiml.ui.command.selectGroupMembers")){
+		String commandID = event.getCommand().getId();
+
+		/*
+		 * The code to mark all group members as selected.
+		 */
+		if (commandID
+				.equals("edu.unikiel.rtsys.kieler.kiml.ui.command.selectGroupMembers")) {
 			if (selectedNodeElements.size() == 1) {
-				ShapeNodeEditPart shapeNodeEditPart = selectedNodeElements.get(0);
+				ShapeNodeEditPart shapeNodeEditPart = selectedNodeElements
+						.get(0);
 				ArrayList<ShapeNodeEditPart> inSameGroup = KimlLayoutHintHelper
 						.getGroupMembersByElement(shapeNodeEditPart);
-		
+
 				// there are some nodes in the same group
 				if (inSameGroup.size() != 0) {
 
-					// deselect all ShapeNodeEditParts
+					// unselect all ShapeNodeEditParts
 					shapeNodeEditPart.getViewer().deselectAll();
 					// select group members
 					for (ShapeNodeEditPart editpart : inSameGroup) {
@@ -59,18 +76,23 @@ public class GroupFunctionHandler extends AbstractHandler implements IHandler {
 
 					// this node is not grouped
 				} else {
-					MessageDialog.openInformation(HandlerUtil.getActiveShell(event),
+					MessageDialog.openInformation(HandlerUtil
+							.getActiveShell(event),
 							"KIEL Infrastructure for Meta Layout UI Plug-in",
 							"This element is not grouped.");
 				}
 			}
 		}
-		
-		
-		if (commandID.equals("edu.unikiel.rtsys.kieler.kiml.ui.command.highlightGroupMembers")){
+
+		/*
+		 * The code to highlight the group members.
+		 */
+		if (commandID
+				.equals("edu.unikiel.rtsys.kieler.kiml.ui.command.highlightGroupMembers")) {
 			if (selectedNodeElements.size() == 1) {
 				KimlColorHelper colorHelper = new KimlColorHelper();
-				ShapeNodeEditPart shapeNodeEditPart = selectedNodeElements.get(0);
+				ShapeNodeEditPart shapeNodeEditPart = selectedNodeElements
+						.get(0);
 				ArrayList<ShapeNodeEditPart> inSameGroup = KimlLayoutHintHelper
 						.getGroupMembersByElement(shapeNodeEditPart);
 
@@ -83,40 +105,41 @@ public class GroupFunctionHandler extends AbstractHandler implements IHandler {
 					colorHelper.highlightBackgrounds(inSameGroup);
 
 					// inform the user with a message dialog
-					MessageDialog
-							.openInformation(
-									HandlerUtil.getActiveShell(event),
-									"KIEL Infrastructure for Meta Layout UI Plug-in",
-									"The highlighted elements belong to the group "
-											+ KimlLayoutHintHelper
-													.getLayoutGroup(shapeNodeEditPart)
-											+ " and have the layout hint "
-											+ KimlLayoutHintHelper
-													.getLayoutType(shapeNodeEditPart)
-											+ ".");
+					MessageDialog.openInformation(HandlerUtil
+							.getActiveShell(event),
+							"KIEL Infrastructure for Meta Layout UI Plug-in",
+							"The highlighted elements belong to the group "
+									+ KimlLayoutHintHelper
+											.getLayoutGroup(shapeNodeEditPart)
+									+ " and have the layout hint "
+									+ KimlLayoutHintHelper
+											.getLayoutType(shapeNodeEditPart)
+									+ ".");
 
 					// after closing the dialog set color back
 					colorHelper.restoreAllBackgrounds();
 
 					// this node is not grouped
 				} else {
-					MessageDialog.openInformation(HandlerUtil.getActiveShell(event),
+					MessageDialog.openInformation(HandlerUtil
+							.getActiveShell(event),
 							"KIEL Infrastructure for Meta Layout UI Plug-in",
 							"This element is not grouped.");
 				}
 			}
 		}
-		
-		
-		
-		if (commandID.equals("edu.unikiel.rtsys.kieler.kiml.ui.command.ungroupElements")){
+
+		/*
+		 * The code to ungroup the selected elements.
+		 */
+		if (commandID
+				.equals("edu.unikiel.rtsys.kieler.kiml.ui.command.ungroupElements")) {
 			KimlLayoutHintHelper.unsetLayoutHint(selectedNodeElements);
 			MessageDialog.openInformation(HandlerUtil.getActiveShell(event),
 					"KIEL Infrastructure for Meta Layout UI Plug-in",
 					"Layout hints removed for an element/a group of elements.");
 		}
-		
-		
+
 		return null;
 	}
 

@@ -3,6 +3,8 @@ package edu.unikiel.rtsys.kieler.kiml.ui.custom;
 import java.util.ArrayList;
 
 import org.eclipse.emf.transaction.RecordingCommand;
+import org.eclipse.gef.EditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.CompartmentEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.notation.NotationFactory;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
@@ -10,6 +12,14 @@ import org.eclipse.gmf.runtime.notation.StringValueStyle;
 
 import edu.unikiel.rtsys.kieler.kiml.ui.KimlLayoutHintConstants;
 
+/**
+ * Holds various static function useful when working with layout hints. A
+ * <b>layout hint</b> for an element comprises the <b>layout type</b> (e.g.
+ * horizontal) and the <b>layout group</b> (a String).
+ * 
+ * @author Arne Schipper <a href="mailto:ars@informatik.uni-kiel.de">
+ * 
+ */
 public class KimlLayoutHintHelper {
 
 	/**
@@ -374,8 +384,12 @@ public class KimlLayoutHintHelper {
 				.getNotationView().getNamedStyle(NotationPackage.eINSTANCE
 				.getStringValueStyle(), KimlLayoutHintConstants.LAYOUT_TYPE));
 
-		// assuming each ShapeNodeEditParts has at most one of each of those
-		// styles
+		String groupID = layoutGroupStyle.getStringValue();
+
+		/*
+		 * assuming each ShapeNodeEditParts has at most one of each of those
+		 * styles
+		 */
 		shapeNodeEditPart.getEditingDomain().getCommandStack().execute(
 				new RecordingCommand(shapeNodeEditPart.getEditingDomain()) {
 					protected void doExecute() {
@@ -385,6 +399,26 @@ public class KimlLayoutHintHelper {
 								layoutTypeStyle);
 					}
 				});
+
+		/*
+		 * Iterate through the list of saved groupID to perform the actual
+		 * orphaned check. Emma need to get the container edit part to iterate
+		 * through the children of this. Check also, if there is such a
+		 * container element.
+		 */
+		EditPart parent = shapeNodeEditPart.getParent();
+		if (parent != null && parent instanceof CompartmentEditPart) {
+			CompartmentEditPart compartmentEditPart = (CompartmentEditPart) parent;
+			// fetch all remaining elements of the group
+			ArrayList<ShapeNodeEditPart> groupedParts = KimlLayoutHintHelper
+					.getGroupMembersByGroupID(compartmentEditPart, groupID);
+			// if just 1 element left, remove all grouping information
+			if (groupedParts.size() == 1) {
+				// call this function recursively, but this will just happen to
+				// a depth of 1
+				unsetLayoutHint(groupedParts.get(0));
+			}
+		}
 	}
 
 	/**
@@ -427,8 +461,8 @@ public class KimlLayoutHintHelper {
 	/**
 	 * Returns all the ShapeNodeEditParts which belong to the specified group
 	 * 
-	 * @param shapeNodeEditPart
-	 *            the container ShapeNodeEditPart in which the
+	 * @param compartmentEditPart
+	 *            the container CompartmentEditPart in which the
 	 *            ShapeNodeEditParts belonging to a group should be retrieved
 	 * @param groupID
 	 *            ShapeNodeEditPart of which the layout group members should be
@@ -436,10 +470,10 @@ public class KimlLayoutHintHelper {
 	 * @return an ArrayList of the ShapeNodeEditParts belonging to this group
 	 */
 	public static ArrayList<ShapeNodeEditPart> getGroupMembersByGroupID(
-			ShapeNodeEditPart shapeNodeEditPart, String groupID) {
+			CompartmentEditPart compartmentEditPart, String groupID) {
 		ArrayList<ShapeNodeEditPart> groupMembers = new ArrayList<ShapeNodeEditPart>();
 
-		for (Object element : shapeNodeEditPart.getChildren()) {
+		for (Object element : compartmentEditPart.getChildren()) {
 			if (element != null
 					&& element instanceof ShapeNodeEditPart
 					&& KimlLayoutHintHelper.getLayoutGroup(
