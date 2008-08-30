@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
-import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.IStructuredContentProvider;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.LabelProvider;
@@ -47,8 +46,6 @@ import edu.unikiel.rtsys.layouter.graph.provider.GraphItemProviderAdapterFactory
 
 public class KimlLayoutGraphView extends ViewPart implements GenericEventListener{
 	private TreeViewer viewer;
-	private DrillDownAdapter drillDownAdapter;
-	
 	public static final String ID = "edu.unikiel.rtsys.kieler.kiml.ui.views.KimlLayoutGraphView";
 	
 	/*
@@ -192,7 +189,7 @@ public class KimlLayoutGraphView extends ViewPart implements GenericEventListene
 	 */
 	public void createPartControl(Composite parent) {
 		viewer = new TreeViewer(parent, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL);
-		drillDownAdapter = new DrillDownAdapter(viewer);
+		new DrillDownAdapter(viewer);
 		
 		//viewer.setContentProvider(new ViewContentProvider());
 		//viewer.setLabelProvider(new ViewLabelProvider());
@@ -208,13 +205,6 @@ public class KimlLayoutGraphView extends ViewPart implements GenericEventListene
 		KimlArrangeAction.getEventSource().addGenericEventListener(this);
 	}
 	
-	private void showMessage(String message) {
-		MessageDialog.openInformation(
-			viewer.getControl().getShell(),
-			"KIML Layout Graph View",
-			message);
-	}
-
 	/**
 	 * Passing the focus request to the viewer's control.
 	 */

@@ -1,10 +1,10 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: KIEL Infrastructure for Meta Layout UI Plug-in
+Bundle-Name: %Bundle-Name.1
 Bundle-SymbolicName: edu.unikiel.rtsys.kieler.kiml.ui;singleton:=true
 Bundle-Version: 1.0.0
 Bundle-Activator: edu.unikiel.rtsys.kieler.kiml.ui.KimlUiPlugin
-Bundle-Vendor: Christian-Albrechts-Universität zu Kiel
+Bundle-Vendor: %Bundle-Vendor.1
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.gmf.runtime.common.ui.services;bundle-version="1.0.100",
@@ -22,3 +22,4 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.gmf.runtime.diagram.ui.resources.editor.ide
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
+Bundle-Localization: plugin
