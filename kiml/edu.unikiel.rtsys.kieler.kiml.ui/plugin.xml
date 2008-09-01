@@ -56,27 +56,6 @@
       </view>
    </extension>
    <extension
-         id="edu.unikiel.rtsys.kieler.kiml.ui.actionSet1"
-         name="KimlArrangeActionGEFGeneric"
-         point="org.eclipse.ui.actionSets">
-      <actionSet
-            description="%actionSet.description.0"
-            id="edu.unikiel.rtsys.kieler.kiml.ui.KimlActionSet"
-            label="%actionSet.label.0"
-            visible="true">
-         <action
-               class="edu.unikiel.rtsys.kieler.kiml.ui.KimlArrangeActionGenericGef"
-               icon="icons/kieler-arrange.png"
-               id="KimlArrangeActionGEFGeneric"
-               label="%action.label.0"
-               pulldown="false"
-               style="push"
-               toolbarPath="Normal/kieler"
-               tooltip="%action.tooltip.0">
-         </action>
-      </actionSet>
-   </extension>
-   <extension
          point="org.eclipse.ui.perspectives">
       <perspective
             class="edu.unikiel.rtsys.kieler.kiml.ui.KimlPerspectiveFactory"
@@ -91,7 +70,7 @@ point="org.eclipse.ui.menus">
 <menuContribution
   locationURI="menu:org.eclipse.ui.main.menu?after=additions">
 <menu
-    id="com.rcpcompany.demo.menus33.menus.sampleMenu"
+    id="edu.unikiel.rtsys.kieler.kiml.ui.menu.kiml"
     label="%menu.label.1"
     mnemonic="%menu.mnemonic.0">
    <menu
@@ -210,6 +189,18 @@ point="org.eclipse.ui.menus">
       </visibleWhen>
    </menu>
 </menuContribution>
+<menuContribution
+      locationURI="toolbar:org.eclipse.ui.main.toolbar?after=additions">
+   <toolbar
+         id="edu.unikiel.rtsys.kieler.kiml.ui.toolbar.main">
+      <command
+            commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.layoutGEF"
+            icon="icons/kieler-arrange.png"
+            label="KIML GEF Layout"
+            style="push">
+      </command>
+   </toolbar>
+</menuContribution>
 </extension>
    <extension
          point="org.eclipse.ui.commands">
@@ -258,6 +249,10 @@ point="org.eclipse.ui.menus">
             id="edu.unikiel.rtsys.kieler.kiml.ui.command.ungroupElements"
             name="%command.name.8">
       </command>
+      <command
+            id="edu.unikiel.rtsys.kieler.kiml.ui.command.layoutGEF"
+            name="KIML GEF Layout">
+      </command>
    </extension>
    <extension
          point="org.eclipse.ui.handlers">
@@ -266,7 +261,7 @@ point="org.eclipse.ui.menus">
             commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.groupAsCircle">
          <enabledWhen>
             <reference
-                  definitionId="KIML.activeMenuSelectionIs2OrMoreShapeNodeEditParts">
+                  definitionId="KIML.selectionIs2OrMoreShapeNodeEditParts">
             </reference>
          </enabledWhen>
       </handler>
@@ -275,7 +270,7 @@ point="org.eclipse.ui.menus">
             commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.groupAsCustom">
          <enabledWhen>
             <reference
-                  definitionId="KIML.activeMenuSelectionIs2OrMoreShapeNodeEditParts">
+                  definitionId="KIML.generalSelectionIs2OrMoreShapeNodeEditParts">
             </reference>
          </enabledWhen>
       </handler>
@@ -284,7 +279,7 @@ point="org.eclipse.ui.menus">
             commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.groupAsDot">
          <enabledWhen>
             <reference
-                  definitionId="KIML.activeMenuSelectionIs2OrMoreShapeNodeEditParts">
+                  definitionId="KIML.generalSelectionIs2OrMoreShapeNodeEditParts">
             </reference>
          </enabledWhen>
       </handler>
@@ -293,7 +288,7 @@ point="org.eclipse.ui.menus">
             commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.groupAsHorizontal">
          <enabledWhen>
             <reference
-                  definitionId="KIML.activeMenuSelectionIs2OrMoreShapeNodeEditParts">
+                  definitionId="KIML.generalSelectionIs2OrMoreShapeNodeEditParts">
             </reference>
          </enabledWhen>
       </handler>
@@ -302,7 +297,7 @@ point="org.eclipse.ui.menus">
             commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.groupAsNone">
          <enabledWhen>
             <reference
-                  definitionId="KIML.activeMenuSelectionIs2OrMoreShapeNodeEditParts">
+                  definitionId="KIML.generalSelectionIs2OrMoreShapeNodeEditParts">
             </reference>
          </enabledWhen>
       </handler>
@@ -311,7 +306,7 @@ point="org.eclipse.ui.menus">
             commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.groupAsVertical">
          <enabledWhen>
             <reference
-                  definitionId="KIML.activeMenuSelectionIs2OrMoreShapeNodeEditParts">
+                  definitionId="KIML.generalSelectionIs2OrMoreShapeNodeEditParts">
             </reference>
          </enabledWhen>
       </handler>
@@ -320,7 +315,7 @@ point="org.eclipse.ui.menus">
             commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.selectGroupMembers">
          <enabledWhen>
             <reference
-                  definitionId="KIML.activeMenuSelectionIs1">
+                  definitionId="KIML.generalSelectionIs1ShapeNodeEditParts">
             </reference>
          </enabledWhen>
       </handler>
@@ -329,7 +324,7 @@ point="org.eclipse.ui.menus">
             commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.highlightGroupMembers">
          <enabledWhen>
             <reference
-                  definitionId="KIML.activeMenuSelectionIs1">
+                  definitionId="KIML.generalSelectionIs1ShapeNodeEditParts">
             </reference>
          </enabledWhen>
       </handler>
@@ -338,9 +333,13 @@ point="org.eclipse.ui.menus">
             commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.ungroupElements">
          <enabledWhen>
             <reference
-                  definitionId="KIML.activeMenuSelectionIs1OrMore">
+                  definitionId="KIML.generalSelectionIs1OrMoreShapeNodeEditParts">
             </reference>
          </enabledWhen>
+      </handler>
+      <handler
+            class="edu.unikiel.rtsys.kieler.kiml.ui.handlers.LayoutGEFHandler"
+            commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.layoutGEF">
       </handler>
    </extension>
    <extension
@@ -365,6 +364,23 @@ point="org.eclipse.ui.menus">
             <count
                   value="1">
             </count>
+         </with>
+      </definition>
+      <definition
+            id="KIML.activeMenuSelectionIs1OrMoreShapeNodeEditParts">
+         <with
+               variable="activeMenuSelection">
+            <and>
+               <iterate
+                     operator="or">
+                  <adapt
+                        type="org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart">
+                  </adapt>
+               </iterate>
+               <count
+                     value="+">
+               </count>
+            </and>
          </with>
       </definition>
       <definition
@@ -401,6 +417,122 @@ point="org.eclipse.ui.menus">
                </reference>
             </and>
          </with>
+      </definition>
+      <definition
+            id="KIML.selectionIs1">
+         <with
+               variable="selection">
+            <count
+                  value="1">
+            </count>
+         </with>
+      </definition>
+      <definition
+            id="KIML.selectionIs1OrMore">
+         <with
+               variable="selection">
+            <count
+                  value="+">
+            </count>
+         </with>
+      </definition>
+      <definition
+            id="KIML.selectionIs1OrMoreShapeNodeEditParts">
+         <with
+               variable="selection">
+            <and>
+               <iterate
+                     operator="or">
+                  <adapt
+                        type="org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart">
+                  </adapt>
+               </iterate>
+               <count
+                     value="+">
+               </count>
+            </and>
+         </with>
+      </definition>
+      <definition
+            id="KIML.selectionIs2OrMore">
+         <with
+               variable="selection">
+            <reference
+                  definitionId="KIML.2OrMore">
+            </reference>
+         </with>
+      </definition>
+      <definition
+            id="KIML.selectionIs2OrMoreShapeNodeEditParts">
+         <with
+               variable="selection">
+            <and>
+               <iterate
+                     operator="or">
+                  <adapt
+                        type="org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart">
+                  </adapt>
+               </iterate>
+               <reference
+                     definitionId="KIML.2OrMore">
+               </reference>
+            </and>
+         </with>
+      </definition>
+      <definition
+            id="KIML.generalSelectionIs1">
+         <or>
+            <reference
+                  definitionId="KIML.selectionIs1">
+            </reference>
+            <reference
+                  definitionId="KIML.activeMenuSelectionIs1">
+            </reference>
+         </or>
+      </definition>
+      <definition
+            id="KIML.generalSelectionIs1OrMore">
+         <or>
+            <reference
+                  definitionId="KIML.activeMenuSelectionIs1OrMore">
+            </reference>
+            <reference
+                  definitionId="KIML.selectionIs1OrMore">
+            </reference>
+         </or>
+      </definition>
+      <definition
+            id="KIML.generalSelectionIs1OrMoreShapeNodeEditParts">
+         <or>
+            <reference
+                  definitionId="KIML.activeMenuSelectionIs1OrMoreShapeNodeEditParts">
+            </reference>
+            <reference
+                  definitionId="KIML.selectionIs1OrMoreShapeNodeEditParts">
+            </reference>
+         </or>
+      </definition>
+      <definition
+            id="KIML.generalSelectionIs2OrMore">
+         <or>
+            <reference
+                  definitionId="KIML.activeMenuSelectionIs2OrMore">
+            </reference>
+            <reference
+                  definitionId="KIML.selectionIs2OrMore">
+            </reference>
+         </or>
+      </definition>
+      <definition
+            id="KIML.generalSelectionIs2OrMoreShapeNodeEditParts">
+         <or>
+            <reference
+                  definitionId="KIML.activeMenuSelectionIs2OrMoreShapeNodeEditParts">
+            </reference>
+            <reference
+                  definitionId="KIML.selectionIs2OrMoreShapeNodeEditParts">
+            </reference>
+         </or>
       </definition>
    </extension>
 
