@@ -106,19 +106,9 @@
         href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.ecore#//StrongAbortion"/>
     <labelMappings
         xsi:type="gmfmap:FeatureLabelMapping"
-        viewPattern=""
+        viewPattern="{0}{1}/{2}"
         editorPattern=""
-        editPattern="">
-      <diagramLabel
-          href="ssm.gmfgraph#StrongAbortionPriority"/>
-      <features
-          href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.ecore#//Transition/priority"/>
-    </labelMappings>
-    <labelMappings
-        xsi:type="gmfmap:FeatureLabelMapping"
-        viewPattern="{0} {1}/{2}"
-        editorPattern=""
-        editPattern="{0} {1}/{2}">
+        editPattern="{0}{1}/{2}">
       <diagramLabel
           href="ssm.gmfgraph#StrongAbortionLabel"/>
       <features
@@ -127,6 +117,16 @@
           href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.ecore#//TransitionTriggerable/triggerString"/>
       <features
           href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.ecore#//Transition/effectString"/>
+    </labelMappings>
+    <labelMappings
+        xsi:type="gmfmap:FeatureLabelMapping"
+        viewPattern=""
+        editorPattern=""
+        editPattern="">
+      <diagramLabel
+          href="ssm.gmfgraph#StrongAbortionPriority"/>
+      <features
+          href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.ecore#//Transition/priority"/>
     </labelMappings>
     <containmentFeature
         href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.ecore#//Region/transitions"/>
@@ -147,16 +147,6 @@
         href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.ecore#//NormalTermination"/>
     <labelMappings
         xsi:type="gmfmap:FeatureLabelMapping"
-        viewPattern=""
-        editorPattern=""
-        editPattern="">
-      <diagramLabel
-          href="ssm.gmfgraph#NormalTerminationPriority"/>
-      <features
-          href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.ecore#//Transition/priority"/>
-    </labelMappings>
-    <labelMappings
-        xsi:type="gmfmap:FeatureLabelMapping"
         viewPattern="/{0}"
         editorPattern=""
         editPattern="/{0}">
@@ -164,6 +154,16 @@
           href="ssm.gmfgraph#NormalTerminationLabel"/>
       <features
           href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.ecore#//Transition/effectString"/>
+    </labelMappings>
+    <labelMappings
+        xsi:type="gmfmap:FeatureLabelMapping"
+        viewPattern=""
+        editorPattern=""
+        editPattern="">
+      <diagramLabel
+          href="ssm.gmfgraph#NormalTerminationPriority"/>
+      <features
+          href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.ecore#//Transition/priority"/>
     </labelMappings>
     <containmentFeature
         href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.ecore#//Region/transitions"/>
@@ -184,19 +184,9 @@
         href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.ecore#//WeakAbortion"/>
     <labelMappings
         xsi:type="gmfmap:FeatureLabelMapping"
-        viewPattern=""
+        viewPattern="{0}{1}/{2}"
         editorPattern=""
-        editPattern="">
-      <diagramLabel
-          href="ssm.gmfgraph#WeakAbortionPriority"/>
-      <features
-          href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.ecore#//Transition/priority"/>
-    </labelMappings>
-    <labelMappings
-        xsi:type="gmfmap:FeatureLabelMapping"
-        viewPattern="{0} {1}/{2}"
-        editorPattern=""
-        editPattern="{0} {1}/{2}">
+        editPattern="{0}{1}/{2}">
       <diagramLabel
           href="ssm.gmfgraph#WeakAbortionLabel"/>
       <features
@@ -205,6 +195,16 @@
           href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.ecore#//TransitionTriggerable/triggerString"/>
       <features
           href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.ecore#//Transition/effectString"/>
+    </labelMappings>
+    <labelMappings
+        xsi:type="gmfmap:FeatureLabelMapping"
+        viewPattern=""
+        editorPattern=""
+        editPattern="">
+      <diagramLabel
+          href="ssm.gmfgraph#WeakAbortionPriority"/>
+      <features
+          href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.ecore#//Transition/priority"/>
     </labelMappings>
     <containmentFeature
         href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.ecore#//Region/transitions"/>

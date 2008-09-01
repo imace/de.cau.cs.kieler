@@ -93,13 +93,37 @@
         name="StrongAbortionFigure">
       <actualFigure
           xsi:type="gmfgraph:PolylineConnection"
-          name="TransitionPolylineConnection">
+          name="StrongAbortionPolylineConnection"
+          sourceDecoration="//@figures.1/@descriptors.0/@actualFigure/@children.2"
+          targetDecoration="//@figures.1/@figures.0">
         <children
             xsi:type="gmfgraph:Label"
             name="StrongAbortionLabelLabel"/>
         <children
             xsi:type="gmfgraph:Label"
             name="StrongAbortionPriorityLabel"/>
+        <children
+            xsi:type="gmfgraph:PolygonDecoration"
+            name="StrongAbortionDecoration"
+            outline="false">
+          <foregroundColor
+              xsi:type="gmfgraph:ConstantColor"
+              value="red"/>
+          <backgroundColor
+              xsi:type="gmfgraph:ConstantColor"
+              value="red"/>
+          <template/>
+          <template
+              y="-1"/>
+          <template
+              x="-1"
+              y="-1"/>
+          <template
+              x="-1"
+              y="1"/>
+          <template
+              y="1"/>
+        </children>
       </actualFigure>
       <accessors
           figure="//@figures.1/@descriptors.0/@actualFigure/@children.0"/>
@@ -111,33 +135,9 @@
       <actualFigure
           xsi:type="gmfgraph:PolylineConnection"
           name="WeakAbortionFigure"
-          lineWidth="2"
           xorFill="true"
           xorOutline="true"
-          sourceDecoration="//@figures.1/@descriptors.1/@actualFigure/@children.0"
           targetDecoration="//@figures.1/@figures.0">
-        <children
-            xsi:type="gmfgraph:PolylineDecoration"
-            name="WeakAbortionSourceDecoration"
-            outline="false"
-            fill="false"
-            xorFill="true"
-            xorOutline="true">
-          <foregroundColor
-              xsi:type="gmfgraph:RGBColor"
-              green="255"/>
-          <backgroundColor
-              xsi:type="gmfgraph:RGBColor"
-              green="127"/>
-          <template/>
-          <template
-              y="2"/>
-          <template
-              x="-3"/>
-          <template
-              y="-2"/>
-          <template/>
-        </children>
         <children
             xsi:type="gmfgraph:Label"
             name="WeakAbortionLabelLabel"
@@ -148,24 +148,17 @@
             text=""/>
       </actualFigure>
       <accessors
-          figure="//@figures.1/@descriptors.1/@actualFigure/@children.1"/>
+          figure="//@figures.1/@descriptors.1/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.1/@descriptors.1/@actualFigure/@children.2"/>
+          figure="//@figures.1/@descriptors.1/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="NormalTerminationFigure">
       <actualFigure
           xsi:type="gmfgraph:PolylineConnection"
           name="NormalTerminationFigure"
-          sourceDecoration="//@figures.1/@descriptors.2/@actualFigure/@children.0"
+          sourceDecoration="//@figures.1/@descriptors.2/@actualFigure/@children.2"
           targetDecoration="//@figures.1/@figures.0">
-        <children
-            xsi:type="gmfgraph:PolylineDecoration"
-            name="NormalTerminationSourceDecoration">
-          <foregroundColor
-              xsi:type="gmfgraph:RGBColor"
-              green="255"/>
-        </children>
         <children
             xsi:type="gmfgraph:Label"
             name="NormalTerminationLabelLabel"
@@ -173,11 +166,27 @@
         <children
             xsi:type="gmfgraph:Label"
             name="NormalTerminationPriorityLabel"/>
+        <children
+            xsi:type="gmfgraph:PolygonDecoration"
+            name="NormalterminationSourceDecoration">
+          <foregroundColor
+              xsi:type="gmfgraph:ConstantColor"
+              value="green"/>
+          <backgroundColor
+              xsi:type="gmfgraph:ConstantColor"
+              value="green"/>
+          <template
+              y="-1"/>
+          <template
+              x="-1"/>
+          <template
+              y="1"/>
+        </children>
       </actualFigure>
       <accessors
-          figure="//@figures.1/@descriptors.2/@actualFigure/@children.1"/>
+          figure="//@figures.1/@descriptors.2/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.1/@descriptors.2/@actualFigure/@children.2"/>
+          figure="//@figures.1/@descriptors.2/@actualFigure/@children.1"/>
     </descriptors>
   </figures>
   <nodes
