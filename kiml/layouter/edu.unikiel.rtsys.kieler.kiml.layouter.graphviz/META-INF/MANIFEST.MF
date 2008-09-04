@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Graphviz Plug-in
+Bundle-SymbolicName: edu.unikiel.rtsys.kieler.kiml.layouter.graphviz; singleton:=true
+Bundle-Version: 1.0.0
+Bundle-Activator: edu.unikiel.rtsys.kieler.kiml.layouter.graphviz.Activator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6

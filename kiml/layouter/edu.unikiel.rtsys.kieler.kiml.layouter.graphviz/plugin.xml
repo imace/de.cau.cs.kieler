@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            name="Graphviz"
+            class="edu.unikiel.rtsys.kieler.kiml.layouter.graphviz.preferences.GraphvizPreferencePage"
+            id="edu.unikiel.rtsys.kieler.kiml.layouter.graphviz.preferences.GraphvizPreferencePage">
+      </page>
+   </extension>
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer
+            class="edu.unikiel.rtsys.kieler.kiml.layouter.graphviz.preferences.PreferenceInitializer">
+      </initializer>
+   </extension>
+
+</plugin>
