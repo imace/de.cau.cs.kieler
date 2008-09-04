@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+
+
+
+
+   <extension
+         point="org.eclipse.help.toc">
+      <toc
+            file="toc.xml">
+      </toc>
+      <toc
+            file="testToc.xml"
+            primary="true">
+      </toc>
+   </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            category="edu.unikiel.rtsys.kieler.kiml.ui.PreferencePage"
+            class="edu.unikiel.rtsys.kieler.kivik.preferences.KivikPreferencePage"
+            id="edu.unikiel.rtsys.kieler.kivik.preferences.KivikPreferencePage"
+            name="KiViK">
+      </page>
+   </extension>
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer
+            class="edu.unikiel.rtsys.kieler.kivik.preferences.PreferenceInitializer">
+      </initializer>
+   </extension>
+   <extension
+         point="org.eclipse.ui.propertyPages">
+      <page
+            objectClass="org.eclipse.core.resources.IFile"
+            name="KiViK"
+            nameFilter="*.*"
+            class="edu.unikiel.rtsys.kieler.kivik.properties.KivikPropertyPage"
+            id="edu.unikiel.rtsys.kieler.kivik.properties.samplePropertyPage">
+      </page>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <category
+            id="edu.unikiel.rtsys.kieler.kivik"
+            name="KiViK"
+            parentCategory="edu.unikiel.rtsys.kieler.kiml.ui">
+      </category>
+      <view
+            name="KiViK View"
+            icon="icons/sample.gif"
+            category="edu.unikiel.rtsys.kieler.kivik"
+            class="edu.unikiel.rtsys.kieler.kivik.views.KivikView"
+            id="edu.unikiel.rtsys.kieler.kivik.views.KivikView">
+      </view>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="org.eclipse.jdt.ui.JavaPerspective">
+         <view
+               ratio="0.5"
+               relative="org.eclipse.ui.views.TaskList"
+               relationship="right"
+               id="edu.unikiel.rtsys.kieler.kivik.views.KivikView">
+         </view>
+      </perspectiveExtension>
+   </extension>
+   <extension
+         point="org.eclipse.help.contexts">
+      <contexts
+            file="contexts.xml">
+      </contexts>
+   </extension>
+   <extension
+         point="org.eclipse.compare.contentMergeViewers">
+      <viewer
+            class="edu.unikiel.rtsys.kieler.kivik.viewer.DiagramContentMergeViewerCreator"
+            extensions="*"
+            id="edu.unikiel.rtsys.kieler.kivik.views.ContentMergeViewer">
+      </viewer>
+      <contentTypeBinding
+            contentMergeViewerId="edu.unikiel.rtsys.kieler.kivik.views.ContentMergeViewer"
+            contentTypeId="edu.unikiel.rtsys.kieler.kivik.CompareContentType"
+            structureMergeViewerId="edu.unikiel.rtsys.kieler.kivik.viewer.TreeMergeViewer">
+      </contentTypeBinding>
+   </extension>
+   <extension
+         point="org.eclipse.compare.structureMergeViewers">
+      <viewer
+            class="edu.unikiel.rtsys.kieler.kivik.viewer.DiagramStructureMergeViewerCreator"
+            extensions="*"
+            id="edu.unikiel.rtsys.kieler.kivik.viewer.StructuredMergeViewer">
+      </viewer>
+      <contentTypeBinding
+            contentTypeId="edu.unikiel.rtsys.kieler.kivik.CompareContentType"
+            structureMergeViewerId="edu.unikiel.rtsys.kieler.kivik.viewer.StructuredMergeViewer">
+      </contentTypeBinding>
+   </extension>
+   <extension
+         point="org.eclipse.core.runtime.contentTypes">
+      <content-type
+            file-extensions="ssm"
+            id="edu.unikiel.rtsys.kieler.kivik.CompareContentType"
+            name="KiViK - KIELER Visual Kompare"
+            priority="normal">
+      </content-type>
+   </extension>
+
+</plugin>
