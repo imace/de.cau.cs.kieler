@@ -1,8 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ecore:EPackage xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="LayoutGraph"
-    nsURI="http://www.informatik.uni-kiel.de/rtsys/layoutgraph" nsPrefix="layoutgraph">
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="KimlLayoutGraph"
+    nsURI="http://www.informatik.uni-kiel.de/rtsys/kimllayoutgraph" nsPrefix="kimllayoutgraph">
+  <eClassifiers xsi:type="ecore:EClass" name="kPoint">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="x" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EFloat"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="y" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EFloat"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="kDimension">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="height" lowerBound="1"
+        eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EFloat"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="width" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EFloat"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="kInsets">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bottom" lowerBound="1"
+        eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EFloat"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="left" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EFloat"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="right" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EFloat"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="top" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EFloat"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="kEdge">
     <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
         eType="#//kNodeGroup" eOpposite="#//kNodeGroup/outgoingEdges"/>
@@ -13,23 +29,15 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="edgeLabel" upperBound="-1"
         eType="#//kEdgeLabel"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="kGraph">
+  <eClassifiers xsi:type="ecore:EClass" name="kLayoutGraph">
     <eStructuralFeatures xsi:type="ecore:EReference" name="topGroup" lowerBound="1"
         eType="#//kNodeGroup"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="kPoint">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="x" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EFloat"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="y" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EFloat"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="kDimension">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="height" lowerBound="1"
-        eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EFloat"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="width" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EFloat"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="kShapeLayout">
     <eStructuralFeatures xsi:type="ecore:EReference" name="location" lowerBound="1"
         eType="#//kPoint"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="size" lowerBound="1" eType="#//kDimension"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="insets" eType="#//kInsets"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="kEdgeLayout">
     <eStructuralFeatures xsi:type="ecore:EReference" name="sourcePoint" lowerBound="1"
@@ -59,6 +67,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="kNodeGroupLayout" eSuperTypes="#//kShapeLayout">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="layoutType" eType="#//LAYOUT_TYPES"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="layoutOptions" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EInt"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="kEdgeLabelLayout" eSuperTypes="#//kShapeLayout">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="edgeLabelPlacement" eType="#//EDGE_LABEL_PLACEMENT"/>
@@ -81,7 +90,8 @@
     <eLiterals name="DOT"/>
     <eLiterals name="CIRCO" value="1"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="kBorderDecoration">
-    <eStructuralFeatures xsi:type="ecore:EAttribute"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="LAYOUT_OPTIONS">
+    <eLiterals name="DEFAULT"/>
+    <eLiterals name="PRESERVE_MENTAL_MAP"/>
   </eClassifiers>
 </ecore:EPackage>

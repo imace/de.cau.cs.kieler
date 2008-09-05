@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/edu.unikiel.rtsys.kieler.kiml.layout/src"
+    modelPluginID="edu.unikiel.rtsys.kieler.kiml.layout" modelName="KimlLayoutGraph"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0" copyrightFields="false"
+    usedGenPackages="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
+  <foreignModel>KimlLayoutGraph.ecore</foreignModel>
+  <genPackages prefix="KimlLayoutGraph" basePackage="edu.unikiel.rtsys.kieler.kiml.layout"
+      disposableProviderFactory="true" ecorePackage="KimlLayoutGraph.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="KimlLayoutGraph.ecore#//EDGE_TYPES">
+      <genEnumLiterals ecoreEnumLiteral="KimlLayoutGraph.ecore#//EDGE_TYPES/NONE"/>
+      <genEnumLiterals ecoreEnumLiteral="KimlLayoutGraph.ecore#//EDGE_TYPES/DIRECT"/>
+      <genEnumLiterals ecoreEnumLiteral="KimlLayoutGraph.ecore#//EDGE_TYPES/SPLINE"/>
+      <genEnumLiterals ecoreEnumLiteral="KimlLayoutGraph.ecore#//EDGE_TYPES/BEZIER"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="KimlLayoutGraph.ecore#//EDGE_LABEL_PLACEMENT">
+      <genEnumLiterals ecoreEnumLiteral="KimlLayoutGraph.ecore#//EDGE_LABEL_PLACEMENT/ANYWHERE"/>
+      <genEnumLiterals ecoreEnumLiteral="KimlLayoutGraph.ecore#//EDGE_LABEL_PLACEMENT/CENTER"/>
+      <genEnumLiterals ecoreEnumLiteral="KimlLayoutGraph.ecore#//EDGE_LABEL_PLACEMENT/HEAD"/>
+      <genEnumLiterals ecoreEnumLiteral="KimlLayoutGraph.ecore#//EDGE_LABEL_PLACEMENT/TAIL"/>
+      <genEnumLiterals ecoreEnumLiteral="KimlLayoutGraph.ecore#//EDGE_LABEL_PLACEMENT/LEFT"/>
+      <genEnumLiterals ecoreEnumLiteral="KimlLayoutGraph.ecore#//EDGE_LABEL_PLACEMENT/RIGHT"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="KimlLayoutGraph.ecore#//LAYOUT_TYPES">
+      <genEnumLiterals ecoreEnumLiteral="KimlLayoutGraph.ecore#//LAYOUT_TYPES/DOT"/>
+      <genEnumLiterals ecoreEnumLiteral="KimlLayoutGraph.ecore#//LAYOUT_TYPES/CIRCO"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="KimlLayoutGraph.ecore#//LAYOUT_OPTIONS">
+      <genEnumLiterals ecoreEnumLiteral="KimlLayoutGraph.ecore#//LAYOUT_OPTIONS/DEFAULT"/>
+      <genEnumLiterals ecoreEnumLiteral="KimlLayoutGraph.ecore#//LAYOUT_OPTIONS/PRESERVE_MENTAL_MAP"/>
+    </genEnums>
+    <genClasses ecoreClass="KimlLayoutGraph.ecore#//kPoint">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KimlLayoutGraph.ecore#//kPoint/x"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KimlLayoutGraph.ecore#//kPoint/y"/>
+    </genClasses>
+    <genClasses ecoreClass="KimlLayoutGraph.ecore#//kDimension">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KimlLayoutGraph.ecore#//kDimension/height"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KimlLayoutGraph.ecore#//kDimension/width"/>
+    </genClasses>
+    <genClasses ecoreClass="KimlLayoutGraph.ecore#//kInsets">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KimlLayoutGraph.ecore#//kInsets/bottom"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KimlLayoutGraph.ecore#//kInsets/left"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KimlLayoutGraph.ecore#//kInsets/right"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KimlLayoutGraph.ecore#//kInsets/top"/>
+    </genClasses>
+    <genClasses ecoreClass="KimlLayoutGraph.ecore#//kEdge">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference KimlLayoutGraph.ecore#//kEdge/source"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference KimlLayoutGraph.ecore#//kEdge/target"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference KimlLayoutGraph.ecore#//kEdge/edgeLayout"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference KimlLayoutGraph.ecore#//kEdge/edgeLabel"/>
+    </genClasses>
+    <genClasses ecoreClass="KimlLayoutGraph.ecore#//kLayoutGraph">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference KimlLayoutGraph.ecore#//kLayoutGraph/topGroup"/>
+    </genClasses>
+    <genClasses ecoreClass="KimlLayoutGraph.ecore#//kShapeLayout">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference KimlLayoutGraph.ecore#//kShapeLayout/location"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference KimlLayoutGraph.ecore#//kShapeLayout/size"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference KimlLayoutGraph.ecore#//kShapeLayout/insets"/>
+    </genClasses>
+    <genClasses ecoreClass="KimlLayoutGraph.ecore#//kEdgeLayout">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference KimlLayoutGraph.ecore#//kEdgeLayout/sourcePoint"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference KimlLayoutGraph.ecore#//kEdgeLayout/targetPoint"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference KimlLayoutGraph.ecore#//kEdgeLayout/gridPoints"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KimlLayoutGraph.ecore#//kEdgeLayout/edgeType"/>
+    </genClasses>
+    <genClasses ecoreClass="KimlLayoutGraph.ecore#//kNodeGroup">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference KimlLayoutGraph.ecore#//kNodeGroup/subNodeGroups"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference KimlLayoutGraph.ecore#//kNodeGroup/outgoingEdges"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference KimlLayoutGraph.ecore#//kNodeGroup/incomingEdges"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference KimlLayoutGraph.ecore#//kNodeGroup/parentGroup"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference KimlLayoutGraph.ecore#//kNodeGroup/nodeGroupLayout"/>
+    </genClasses>
+    <genClasses ecoreClass="KimlLayoutGraph.ecore#//kEdgeLabel">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KimlLayoutGraph.ecore#//kEdgeLabel/text"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference KimlLayoutGraph.ecore#//kEdgeLabel/edgeLabelLayout"/>
+    </genClasses>
+    <genClasses ecoreClass="KimlLayoutGraph.ecore#//kNodeGroupLayout">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KimlLayoutGraph.ecore#//kNodeGroupLayout/layoutType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KimlLayoutGraph.ecore#//kNodeGroupLayout/layoutOptions"/>
+    </genClasses>
+    <genClasses ecoreClass="KimlLayoutGraph.ecore#//kEdgeLabelLayout">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KimlLayoutGraph.ecore#//kEdgeLabelLayout/edgeLabelPlacement"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

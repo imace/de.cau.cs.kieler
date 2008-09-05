@@ -1,5 +1,7 @@
 package edu.unikiel.rtsys.kieler.kiml.layout.services;
 
+import org.eclipse.core.runtime.IAdaptable;
+
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.kLayoutGraph;
 
 public interface IKimlLayouter {
@@ -11,9 +13,14 @@ public interface IKimlLayouter {
 	public static final String ATTRIBUTE_ICON = "icon";
 
 	/**
-	 * Layout providers must implement this method to contribute the layouting.
+	 * Layout providers must implement this method to perform the actual layout process.
 	 * 
 	 * @param layoutGraph
 	 */
 	public void doLayout(kLayoutGraph layoutGraph);
+	
+	public boolean canLayout(kLayoutGraph layoutGraph);
+	
+	public boolean providesLayout(IAdaptable layoutType);
+	
 }

@@ -32,7 +32,6 @@ public class KimlLayoutProvider {
 			try {
 				layoutProvider = (IKimlLayouter) element
 						.createExecutableExtension(IKimlLayouter.ATTRIBUTE_CLASS);
-				layoutProvider.doLayout(null);
 			} catch (CoreException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
