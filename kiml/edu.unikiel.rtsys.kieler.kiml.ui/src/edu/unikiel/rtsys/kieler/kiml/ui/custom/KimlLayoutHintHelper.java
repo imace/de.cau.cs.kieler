@@ -13,11 +13,11 @@ import org.eclipse.gmf.runtime.notation.StringValueStyle;
 import edu.unikiel.rtsys.kieler.kiml.ui.KimlLayoutHintConstants;
 
 /**
- * Holds various static function useful when working with layout hints. A
+ * Holds various static functions useful when working with layout hints. A
  * <b>layout hint</b> for an element comprises the <b>layout type</b> (e.g.
  * horizontal) and the <b>layout group</b> (a String).
  * 
- * @author Arne Schipper <a href="mailto:ars@informatik.uni-kiel.de">
+ * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
  * 
  */
 public class KimlLayoutHintHelper {
@@ -39,10 +39,10 @@ public class KimlLayoutHintHelper {
 				.getStringValueStyle(), KimlLayoutHintConstants.LAYOUT_TYPE));
 
 		// if property not available, return default value (NOT_GROUPED)
-		if (layoutTypeStyle == null)
+		if (layoutTypeStyle == null){
 			return KimlLayoutHintConstants.NONE;
 		// return stored model/notation value
-		else {
+		}else {
 			// see if the value is equal to one of the constants
 			int i = KimlLayoutHintConstants.layoutTypes.length - 1;
 			while (!layoutTypeStyle.getStringValue().equals(

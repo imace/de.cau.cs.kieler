@@ -199,6 +199,12 @@ point="org.eclipse.ui.menus">
             label="KIML GEF Layout"
             style="push">
       </command>
+      <command
+            commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.kimlLayout"
+            icon="icons/kieler-arrange.png"
+            label="KIML Layout"
+            style="push">
+      </command>
    </toolbar>
 </menuContribution>
 </extension>
@@ -252,6 +258,10 @@ point="org.eclipse.ui.menus">
       <command
             id="edu.unikiel.rtsys.kieler.kiml.ui.command.layoutGEF"
             name="KIML GEF Layout">
+      </command>
+      <command
+            id="edu.unikiel.rtsys.kieler.kiml.ui.command.kimlLayout"
+            name="KIML Layout">
       </command>
    </extension>
    <extension
@@ -340,6 +350,10 @@ point="org.eclipse.ui.menus">
       <handler
             class="edu.unikiel.rtsys.kieler.kiml.ui.handlers.LayoutGEFHandler"
             commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.layoutGEF">
+      </handler>
+      <handler
+            class="edu.unikiel.rtsys.kieler.kiml.ui.handlers.KimlLayoutHandler"
+            commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.kimlLayout">
       </handler>
    </extension>
    <extension
