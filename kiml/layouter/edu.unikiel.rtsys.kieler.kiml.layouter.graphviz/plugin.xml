@@ -16,5 +16,13 @@
             class="edu.unikiel.rtsys.kieler.kiml.layouter.graphviz.preferences.PreferenceInitializer">
       </initializer>
    </extension>
+   <extension
+         point="edu.unikiel.rtsys.kieler.kiml.layout.kimlLayoutProvider">
+      <kimlLayoutProvider
+            class="edu.unikiel.rtsys.kieler.kiml.layouter.graphviz.GraphvizLayoutProvider">
+         <Priority
+               name="Low"></Priority>
+      </kimlLayoutProvider>
+   </extension>
 
 </plugin>
