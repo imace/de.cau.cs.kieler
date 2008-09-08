@@ -81,7 +81,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="Trigger">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="counter" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="event" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="condition" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="condition" eType="#//Condition"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Action">
     <eStructuralFeatures xsi:type="ecore:EReference" name="signals" upperBound="-1"
@@ -103,4 +103,26 @@
   <eClassifiers xsi:type="ecore:EClass" name="IntegerSignal" eSuperTypes="#//Signal">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="integerValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Condition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subConditions" upperBound="-1"
+        eType="#//Condition"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="combinationOperator" lowerBound="1"
+        eType="#//CombinationOperator"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="literals" upperBound="-1"
+        eType="#//AnyType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="CombinationOperator">
+    <eLiterals name="PURESIGNALAND"/>
+    <eLiterals name="PURESIGNALOR" value="1"/>
+    <eLiterals name="PURESIGNALNOT" value="2"/>
+    <eLiterals name="INTSIGNALADD" value="3"/>
+    <eLiterals name="INTSIGNALMUL" value="4"/>
+    <eLiterals name="INTSIGNALGT" value="5"/>
+    <eLiterals name="INTSIGNALLT" value="6"/>
+    <eLiterals name="STRINGSIGNALCONCAT" value="7"/>
+    <eLiterals name="INTSIGNALEQ" value="8"/>
+    <eLiterals name="STRINGSIGNALEQ" value="9"/>
+    <eLiterals name="PURESIGNALEQ" value="10"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="AnyType" instanceTypeName="Object"/>
 </ecore:EPackage>
