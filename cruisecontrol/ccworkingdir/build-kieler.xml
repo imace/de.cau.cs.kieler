@@ -28,7 +28,7 @@
 	<target name="checkout">
 		<echo message="checking out for the first time"/>
 		<exec executable="svn">
-			<arg line="co --username tomcat5 --password edcvgz http://rtsys/svn/kieler/trunk/common/examples/editors/edu.unikiel.rtsys/kieler/ssm/emf />
+			<arg line="co --username tomcat5 --password edcvgz http://rtsys/svn/kieler/trunk/common/examples/editors/edu.unikiel.rtsys/kieler/ssm/emf" />
 		</exec>
 	</target>
 	
