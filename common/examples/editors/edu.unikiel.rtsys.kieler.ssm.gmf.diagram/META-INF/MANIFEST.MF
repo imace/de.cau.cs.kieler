@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: edu.unikiel.rtsys.kieler.ssm.gmf.diagram; singleton:=true
-Bundle-Version: 1.0.0.qualifier
+Bundle-Version: 0.1.0
 Bundle-ClassPath: .
 Bundle-Activator: edu.unikiel.rtsys.kieler.ssm.diagram.part.SafeStateMachineDiagramEditorPlugin
 Bundle-Vendor: %providerName
@@ -36,5 +36,6 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.ocl.ecore;visibility:=reexport,
  org.eclipse.gmf.runtime.draw2d.ui;visibility:=reexport,
  org.eclipse.gef;visibility:=reexport,
- org.eclipse.emf.transaction.ui;bundle-version="1.2.0"
+ org.eclipse.emf.transaction.ui;bundle-version="1.2.0",
+ org.eclipse.gmf.runtime.draw2d.ui.render;bundle-version="1.1.0"
 Eclipse-LazyStart: true
