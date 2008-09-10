@@ -1,48 +1,83 @@
 package edu.unikiel.rtsys.kieler.kiml.layouter.graphviz;
 
-import org.eclipse.core.runtime.IAdaptable;
+import java.util.Arrays;
 
-import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.kLayoutGraph;
-import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.kNodeGroup;
-import edu.unikiel.rtsys.kieler.kiml.layout.services.IKimlLayouter;
+import kiel.layouter.graphviz.GraphvizLayouter;
 
-public class GraphvizLayoutProvider implements IKimlLayouter {
+import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup;
+import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_OPTION;
+import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_TYPE;
+import edu.unikiel.rtsys.kieler.kiml.layout.services.IKimlLayoutProvider;
 
-	public static final String GRAPHVIZ_DOT = "GRAPHVIZ_DOT";
-	public static final String GRAPHVIZ_CIRCO = "GRAPHVIZ_CIRCO";
-	public static final String GRAPHVIZ_NEATO = "GRAPHVIZ_NEATO";
+public class GraphvizLayoutProvider implements IKimlLayoutProvider {
 
-	public void doLayout(kLayoutGraph layoutGraph) {
-		// do something with the provided graph, i.e. layout it
-		System.out.println("doLayout was called: " + layoutGraph);
-		printLayoutGraph(layoutGraph);
+	public static final String GRAPHVIZ_DOT = "GraphViz DOT";
+	public static final String GRAPHVIZ_TWOPI = "GraphViz TWOPI";
+	public static final String GRAPHVIZ_CIRCO = "GraphViz CIRCO";
+	public static final String GRAPHVIZ_NEATO = "GraphViz NEATO";
+
+	/*
+	 * The default layout options if none are set
+	 */
+	public void doLayout(KNodeGroup nodeGroup) {
+		doLayout(nodeGroup, LAYOUT_TYPE.HIERARCHICAL, GRAPHVIZ_DOT);
 	}
 
-	private void printLayoutGraph(kLayoutGraph layoutGraph) {
-		System.out.println(layoutGraph);
-		recursivelyPrintLayoutGraph(layoutGraph.getTopGroup(), "");
+	public void doLayout(KNodeGroup nodeGroup, LAYOUT_TYPE layoutType,
+			String layouterName) {
+		
+		//recursivelyPrintNodeGroup(nodeGroup,"");
+		GraphvizLayouter gl = new GraphvizLayouter();
+		String correctLayouterName = getCorrectLayouterName(layoutType,
+				layouterName);
+		gl.setLayouterName(correctLayouterName);
+		gl.visit(nodeGroup);
 	}
 
-	private void recursivelyPrintLayoutGraph(kNodeGroup nodeGroup, String ident) {
-		System.out.println(ident + nodeGroup.getNodeGroupLayout().getLocation());
-		for (kNodeGroup subGroup : nodeGroup.getSubNodeGroups()) {
-			recursivelyPrintLayoutGraph(subGroup, ident + "  ");
+	private String getCorrectLayouterName(LAYOUT_TYPE layoutType,
+			String layouterName) {
+		if (Arrays.asList(providesLayouters()).contains(layouterName))
+			return layouterName;
+		else if (layoutType.equals(LAYOUT_TYPE.CIRCLE))
+			return GRAPHVIZ_CIRCO;
+		else if (layoutType.equals(LAYOUT_TYPE.RADIAL))
+			return GRAPHVIZ_TWOPI;
+		else if (layoutType.equals(LAYOUT_TYPE.SPRING_MODEL))
+			return GRAPHVIZ_NEATO;
+		else // if default or nothing use dot
+			return GRAPHVIZ_DOT;
+	}
+
+	private void recursivelyPrintNodeGroup(KNodeGroup nodeGroup, String ident) {
+		System.out.println(ident
+				+ "LType: " + nodeGroup.getLayout().getLayoutType().getName() + ", "
+				+ "LName: " + nodeGroup.getLayout().getLayouterName() + ", "
+				+ "Name:  " + nodeGroup.getLabel().getText());
+		for (KNodeGroup subGroup : nodeGroup.getSubNodeGroups()) {
+			recursivelyPrintNodeGroup(subGroup, ident + "  ");
 		}
 	}
 
 	@Override
-	public boolean canLayout(kLayoutGraph layoutGraph) {
+	public boolean canLayout(KNodeGroup nodeGroup) {
 		return true;
 	}
 
 	@Override
-	public boolean providesLayout(IAdaptable layoutType) {
-		String layoutTypeString = (String) layoutType.getAdapter(String.class);
-		if (layoutTypeString.equals(GRAPHVIZ_CIRCO)
-				|| layoutTypeString.equals(GRAPHVIZ_DOT)
-				|| layoutTypeString.equals(GRAPHVIZ_NEATO))
-			return true;
-		else
-			return false;
+	public String[] providesLayouters() {
+		return new String[] { GRAPHVIZ_CIRCO, GRAPHVIZ_DOT, GRAPHVIZ_TWOPI,
+				GRAPHVIZ_NEATO };
 	}
+
+	@Override
+	public LAYOUT_OPTION[] providesLayoutOptions() {
+		return new LAYOUT_OPTION[] { LAYOUT_OPTION.DEFAULT };
+	}
+
+	@Override
+	public LAYOUT_TYPE[] providesLayoutTypes() {
+		return new LAYOUT_TYPE[] { LAYOUT_TYPE.HIERARCHICAL,
+				LAYOUT_TYPE.CIRCLE, LAYOUT_TYPE.RADIAL };
+	}
+
 }
