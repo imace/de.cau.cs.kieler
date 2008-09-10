@@ -1,5 +1,8 @@
 package edu.unikiel.rtsys.kieler.ssm.diagram.util;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.eclipse.core.runtime.IAdapterFactory;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
@@ -11,11 +14,13 @@ import edu.unikiel.rtsys.kieler.ssm.SimpleState;
 
 public class SafeStateMachineIAdapterFactory implements IAdapterFactory {
 
-	private static final Class[] types = { String.class };
+	private static final Class[] types = { Map.class };
 
 	public Object getAdapter(Object adaptableObject, Class adapterType) {
-		if (adapterType == String.class
+
+		if (adapterType == Map.class
 				&& adaptableObject instanceof ShapeNodeEditPart) {
+			Map<String, String> kimlLabel = new HashMap<String, String>();
 			/*
 			 * First cast to ShapeNodeEditPart to be able to access the model
 			 */
@@ -26,13 +31,21 @@ public class SafeStateMachineIAdapterFactory implements IAdapterFactory {
 			 * CompositeState is easy, this is for the CompositeState
 			 */
 			if (modelElement instanceof CompositeState) {
-				return ((CompositeState) modelElement).getName();
+				kimlLabel.put("SHORT_LABEL", ((CompositeState) modelElement)
+						.getName());
+				kimlLabel.put("LONG_LABEL", ((CompositeState) modelElement)
+						.getName());
+				return kimlLabel;
 			}
 			/*
 			 * SimpleState is easy, too
 			 */
 			else if (modelElement instanceof SimpleState) {
-				return ((SimpleState) modelElement).getName();
+				kimlLabel.put("SHORT_LABEL", ((SimpleState) modelElement)
+						.getName());
+				kimlLabel.put("LONG_LABEL", ((SimpleState) modelElement)
+						.getName());
+				return kimlLabel;
 			}
 			/*
 			 * That's more complicated for an InitialState. An InitialState has
@@ -47,8 +60,10 @@ public class SafeStateMachineIAdapterFactory implements IAdapterFactory {
 				Region region = (Region) initialState.eContainer();
 				CompositeState compositeState = (CompositeState) region
 						.eContainer();
-				return "Initial State of a Region in "
-						+ compositeState.getName();
+				kimlLabel.put("SHORT_LABEL", "");
+				kimlLabel.put("LONG_LABEL", "Initial State of a Region in "
+						+ compositeState.getName());
+				return kimlLabel;
 			}
 			/*
 			 * Similar for a region
@@ -57,10 +72,11 @@ public class SafeStateMachineIAdapterFactory implements IAdapterFactory {
 				Region region = (Region) modelElement;
 				CompositeState compositeState = (CompositeState) region
 						.eContainer();
-				return "Region in " + compositeState.getName();
+				kimlLabel.put("SHORT_LABEL", "");
+				kimlLabel.put("LONG_LABEL", "Region in " + compositeState.getName());
+				return kimlLabel;
 			}
 		}
-		// return null if falling through
 		return null;
 	}
 
