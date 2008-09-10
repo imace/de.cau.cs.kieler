@@ -12,8 +12,9 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.handlers.HandlerUtil;
 
-import edu.unikiel.rtsys.kieler.kiml.ui.custom.KimlColorHelper;
-import edu.unikiel.rtsys.kieler.kiml.ui.custom.KimlLayoutHintHelper;
+import edu.unikiel.rtsys.kieler.kiml.ui.helpers.KimlGMFColorHelper;
+import edu.unikiel.rtsys.kieler.kiml.ui.helpers.KimlGMFLayoutHintHelper;
+
 
 /**
  * The handler which is responsible for the functions applicable to layout
@@ -66,7 +67,7 @@ public class GroupFunctionHandler extends AbstractHandler implements IHandler {
 			if (selectedNodeElements.size() == 1) {
 				ShapeNodeEditPart shapeNodeEditPart = selectedNodeElements
 						.get(0);
-				ArrayList<ShapeNodeEditPart> inSameGroup = KimlLayoutHintHelper
+				ArrayList<ShapeNodeEditPart> inSameGroup = KimlGMFLayoutHintHelper
 						.getGroupMembersByElement(shapeNodeEditPart);
 
 				// there are some nodes in the same group
@@ -95,10 +96,10 @@ public class GroupFunctionHandler extends AbstractHandler implements IHandler {
 		if (commandID
 				.equals("edu.unikiel.rtsys.kieler.kiml.ui.command.highlightGroupMembers")) {
 			if (selectedNodeElements.size() == 1) {
-				KimlColorHelper colorHelper = new KimlColorHelper();
+				KimlGMFColorHelper colorHelper = new KimlGMFColorHelper();
 				ShapeNodeEditPart shapeNodeEditPart = selectedNodeElements
 						.get(0);
-				ArrayList<ShapeNodeEditPart> inSameGroup = KimlLayoutHintHelper
+				ArrayList<ShapeNodeEditPart> inSameGroup = KimlGMFLayoutHintHelper
 						.getGroupMembersByElement(shapeNodeEditPart);
 
 				// there are some nodes in the same group
@@ -114,10 +115,10 @@ public class GroupFunctionHandler extends AbstractHandler implements IHandler {
 							.getActiveShell(event),
 							"KIEL Infrastructure for Meta Layout UI Plug-in",
 							"The highlighted elements belong to the group "
-									+ KimlLayoutHintHelper
+									+ KimlGMFLayoutHintHelper
 											.getLayoutGroup(shapeNodeEditPart)
 									+ " and have the layout hint "
-									+ KimlLayoutHintHelper
+									+ KimlGMFLayoutHintHelper
 											.getLayoutType(shapeNodeEditPart)
 									+ ".");
 
@@ -139,7 +140,7 @@ public class GroupFunctionHandler extends AbstractHandler implements IHandler {
 		 */
 		if (commandID
 				.equals("edu.unikiel.rtsys.kieler.kiml.ui.command.ungroupElements")) {
-			KimlLayoutHintHelper.unsetLayoutHint(selectedNodeElements);
+			KimlGMFLayoutHintHelper.unsetLayoutHint(selectedNodeElements);
 			MessageDialog.openInformation(HandlerUtil.getActiveShell(event),
 					"KIEL Infrastructure for Meta Layout UI Plug-in",
 					"Layout hints removed for an element/a group of elements.");

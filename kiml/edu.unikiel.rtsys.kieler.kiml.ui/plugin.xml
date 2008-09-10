@@ -194,15 +194,15 @@ point="org.eclipse.ui.menus">
    <toolbar
          id="edu.unikiel.rtsys.kieler.kiml.ui.toolbar.main">
       <command
-            commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.layoutGEF"
+            commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.kimlGEFLayout"
             icon="icons/kieler-arrange.png"
             label="KIML GEF Layout"
             style="push">
       </command>
       <command
-            commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.kimlLayout"
+            commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.kimlGMFLayout"
             icon="icons/kieler-arrange.png"
-            label="KIML Layout"
+            label="KIML GMF Layout"
             style="push">
       </command>
    </toolbar>
@@ -256,12 +256,12 @@ point="org.eclipse.ui.menus">
             name="%command.name.8">
       </command>
       <command
-            id="edu.unikiel.rtsys.kieler.kiml.ui.command.layoutGEF"
+            id="edu.unikiel.rtsys.kieler.kiml.ui.command.kimlGEFLayout"
             name="KIML GEF Layout">
       </command>
       <command
-            id="edu.unikiel.rtsys.kieler.kiml.ui.command.kimlLayout"
-            name="KIML Layout">
+            id="edu.unikiel.rtsys.kieler.kiml.ui.command.kimlGMFLayout"
+            name="KIML GMF Layout">
       </command>
    </extension>
    <extension
@@ -271,7 +271,7 @@ point="org.eclipse.ui.menus">
             commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.groupAsCircle">
          <enabledWhen>
             <reference
-                  definitionId="KIML.selectionIs2OrMoreShapeNodeEditParts">
+                  definitionId="KIML.generalSelectionIs2OrMoreShapeNodeEditParts">
             </reference>
          </enabledWhen>
       </handler>
@@ -348,12 +348,12 @@ point="org.eclipse.ui.menus">
          </enabledWhen>
       </handler>
       <handler
-            class="edu.unikiel.rtsys.kieler.kiml.ui.handlers.LayoutGEFHandler"
-            commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.layoutGEF">
+            class="edu.unikiel.rtsys.kieler.kiml.ui.handlers.KimlGEFLayoutHandler"
+            commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.kimlGEFLayout">
       </handler>
       <handler
-            class="edu.unikiel.rtsys.kieler.kiml.ui.handlers.KimlLayoutHandler"
-            commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.kimlLayout">
+            class="edu.unikiel.rtsys.kieler.kiml.ui.handlers.KimlGMFLayoutHandler"
+            commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.kimlGMFLayout">
       </handler>
    </extension>
    <extension

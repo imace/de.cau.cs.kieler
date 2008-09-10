@@ -1,6 +1,7 @@
 package edu.unikiel.rtsys.kieler.kiml.ui.views;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.draw2d.ColorConstants;
@@ -45,9 +46,8 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.ViewPart;
 
-import edu.unikiel.rtsys.kieler.kiml.ui.KimlLayoutHintConstants;
-import edu.unikiel.rtsys.kieler.kiml.ui.custom.KimlColorHelper;
-import edu.unikiel.rtsys.kieler.kiml.ui.custom.KimlLayoutHintHelper;
+import edu.unikiel.rtsys.kieler.kiml.ui.helpers.KimlGMFColorHelper;
+import edu.unikiel.rtsys.kieler.kiml.ui.helpers.KimlGMFLayoutHintHelper;
 
 /**
  * The KIML Layout Hints View.
@@ -80,17 +80,18 @@ public class KimlLayoutHintView extends ViewPart implements ISelectionListener,
 	private IEditorPart activeEditor = null;
 	private TableViewer tableViewer;
 	private Table table;
-	private KimlColorHelper savedEditPartColors;
+	private KimlGMFColorHelper savedEditPartColors;
 
 	// TODO: externalize strings
 	// Set the table column property names
-	private final String NODE_COLUMN = "node";
-	private final String LAYOUTGROUP_COLUMN = "layoutGroup";
-	private final String LAYOUTTYPE_COLUMN = "layoutType";
+	private final String NODE_COLUMN = "Node name";
+	private final String LAYOUTGROUP_COLUMN = "Layout group";
+	private final String LAYOUTTYPE_COLUMN = "Layout type";
+	private final String LAYOUTERNAME_COLUMN = "Layouter name";
 
 	// Set column names
 	private String[] columnNames = new String[] { NODE_COLUMN,
-			LAYOUTGROUP_COLUMN, LAYOUTTYPE_COLUMN };
+			LAYOUTGROUP_COLUMN, LAYOUTTYPE_COLUMN, LAYOUTERNAME_COLUMN };
 
 	public class GroupSorter extends ViewerSorter {
 
@@ -105,9 +106,9 @@ public class KimlLayoutHintView extends ViewPart implements ISelectionListener,
 		 * (non-Javadoc) Method declared on ViewerSorter.
 		 */
 		public int compare(Viewer viewer, Object o1, Object o2) {
-			String layoutGroup1 = KimlLayoutHintHelper
+			String layoutGroup1 = KimlGMFLayoutHintHelper
 					.getLayoutGroup((ShapeNodeEditPart) o1);
-			String layoutGroup2 = KimlLayoutHintHelper
+			String layoutGroup2 = KimlGMFLayoutHintHelper
 					.getLayoutGroup((ShapeNodeEditPart) o2);
 			return layoutGroup1.compareTo(layoutGroup2);
 		}
@@ -150,16 +151,14 @@ public class KimlLayoutHintView extends ViewPart implements ISelectionListener,
 		 * course returned if the other columns are asked for the color or if
 		 * the element is not grouped.
 		 */
-		@Override
 		public Color getBackground(Object element, int columnIndex) {
 			if (columnIndex == 1 && element instanceof ShapeNodeEditPart) {
-				return KimlColorHelper
+				return KimlGMFColorHelper
 						.generateGroupColor((ShapeNodeEditPart) element);
 			} else
 				return null;
 		}
 
-		@Override
 		public Color getForeground(Object element, int columnIndex) {
 			return ColorConstants.black;
 		}
@@ -177,8 +176,9 @@ public class KimlLayoutHintView extends ViewPart implements ISelectionListener,
 					 * If no such adapter is present, the simple class name is
 					 * returned. This works for all editors.
 					 */
-				String nodeName = (String) Platform.getAdapterManager()
-						.getAdapter(obj, String.class);
+				String nodeName = ((Map<String, String>) Platform
+						.getAdapterManager().getAdapter(obj, Map.class))
+						.get("LONG_LABEL");
 				if (nodeName != null) {
 					return nodeName;
 				} else {
@@ -191,12 +191,15 @@ public class KimlLayoutHintView extends ViewPart implements ISelectionListener,
 					 * 
 					 * TODO: This works just for GMF, GMF-Notation above.
 					 */
-				return KimlLayoutHintHelper.getLayoutGroup(snep).equals(
-						KimlLayoutHintConstants.NOT_GROUPED) ? KimlLayoutHintConstants.NOT_GROUPED
+				return KimlGMFLayoutHintHelper.getLayoutGroup(snep).equals(
+						KimlGMFLayoutHintHelper.NOT_GROUPED) ? KimlGMFLayoutHintHelper.NOT_GROUPED
 						: "";
 
 			case 2: // returns the layout type for this object
-				return KimlLayoutHintHelper.getLayoutType(snep);
+				return KimlGMFLayoutHintHelper.getLayoutType(snep).getLiteral();
+
+			case 3: // returns the layouter name for this object
+				return KimlGMFLayoutHintHelper.getLayouterName(snep);
 
 			default: // Mister play-it-safe was afraid to fly ...
 				return "";
@@ -231,7 +234,7 @@ public class KimlLayoutHintView extends ViewPart implements ISelectionListener,
 	 */
 	public void createPartControl(Composite parent) {
 
-		savedEditPartColors = new KimlColorHelper();
+		savedEditPartColors = new KimlGMFColorHelper();
 
 		createTable(parent);
 
@@ -259,17 +262,22 @@ public class KimlLayoutHintView extends ViewPart implements ISelectionListener,
 
 		// 1st column
 		TableColumn column = new TableColumn(table, SWT.LEFT, 0);
-		column.setText("Node name");
+		column.setText(NODE_COLUMN);
 		column.setWidth(400);
 
 		// 2nd column
 		column = new TableColumn(table, SWT.LEFT, 1);
-		column.setText("Layout group");
+		column.setText(LAYOUTGROUP_COLUMN);
 		column.setWidth(100);
 
 		// 3rd column
 		column = new TableColumn(table, SWT.LEFT, 2);
-		column.setText("Layout type");
+		column.setText(LAYOUTTYPE_COLUMN);
+		column.setWidth(100);
+
+		// 4th column
+		column = new TableColumn(table, SWT.LEFT, 3);
+		column.setText(LAYOUTERNAME_COLUMN);
 		column.setWidth(100);
 	}
 
@@ -288,14 +296,12 @@ public class KimlLayoutHintView extends ViewPart implements ISelectionListener,
 		tableViewer.setInput(getViewSite());
 	}
 
-	@Override
 	public void init(IViewSite site) throws PartInitException {
 		super.init(site);
 		site.getPage().addSelectionListener(this);
 		site.getPage().addPartListener(this);
 	}
 
-	@Override
 	public void dispose() {
 		super.dispose();
 		getSite().getPage().removeSelectionListener(this);
@@ -371,7 +377,6 @@ public class KimlLayoutHintView extends ViewPart implements ISelectionListener,
 	 * This method will be called when the selection in the Diagram view is
 	 * changed
 	 */
-	@Override
 	public void selectionChanged(IWorkbenchPart part, ISelection selection) {
 		tableViewer.setInput(selection);
 	}
@@ -383,7 +388,6 @@ public class KimlLayoutHintView extends ViewPart implements ISelectionListener,
 	 * removes the listener prior to that and adds the listener to the new
 	 * editor. TODO: What about non GMF Editors?
 	 */
-	@Override
 	public void partActivated(IWorkbenchPart part) {
 		/*
 		 * Emma clicked on the KIML Layout Hints View. I most cases, some
@@ -453,7 +457,6 @@ public class KimlLayoutHintView extends ViewPart implements ISelectionListener,
 	 * When loosing the focus of the KIML Layout Hints View, Emma wants to reset
 	 * all the colorings made before to the diagram elements.
 	 */
-	@Override
 	public void partDeactivated(IWorkbenchPart part) {
 		if (part.equals(this)) {
 			savedEditPartColors.restoreAllForegrounds();
@@ -461,15 +464,12 @@ public class KimlLayoutHintView extends ViewPart implements ISelectionListener,
 		}
 	}
 
-	@Override
 	public void partOpened(IWorkbenchPart part) {
 	}
 
-	@Override
 	public void partBroughtToTop(IWorkbenchPart part) {
 	}
 
-	@Override
 	public void partClosed(IWorkbenchPart part) {
 	}
 
@@ -481,32 +481,26 @@ public class KimlLayoutHintView extends ViewPart implements ISelectionListener,
 	 * order to check if some Elements of the diagram were grouped by a context
 	 * menu action.
 	 */
-	@Override
 	public void resourceSetChanged(ResourceSetChangeEvent arg0) {
 		tableViewer.refresh();
 	}
 
-	@Override
 	public NotificationFilter getFilter() {
 		return null;
 	}
 
-	@Override
 	public boolean isAggregatePrecommitListener() {
 		return false;
 	}
 
-	@Override
 	public boolean isPostcommitOnly() {
 		return false;
 	}
 
-	@Override
 	public boolean isPrecommitOnly() {
 		return false;
 	}
 
-	@Override
 	public Command transactionAboutToCommit(ResourceSetChangeEvent arg0)
 			throws RollbackException {
 		return null;

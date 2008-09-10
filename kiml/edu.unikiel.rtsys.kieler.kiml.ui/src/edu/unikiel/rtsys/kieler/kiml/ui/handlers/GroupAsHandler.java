@@ -12,19 +12,15 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.handlers.HandlerUtil;
 
-import edu.unikiel.rtsys.kieler.kiml.ui.KimlLayoutHintConstants;
-import edu.unikiel.rtsys.kieler.kiml.ui.custom.KimlLayoutHintHelper;
+import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_TYPE;
+import edu.unikiel.rtsys.kieler.kiml.ui.helpers.KimlGMFLayoutHintHelper;
+
 
 /**
  * The handler which is responsible for the functions to group the selected
  * elements. At the moment, this covers the following functions:
  * <ul>
- * <li>Group as NONE</li>
- * <li>Group as CUSTOM</li>
- * <li>Group as CIRCLE</li>
- * <li>Group as DOT</li>
- * <li>Group as HORIZONTAL</li>
- * <li>Group as VERTICAL</li>
+ * <li>...</li>
  * </ul>
  * 
  * @author ars
@@ -64,41 +60,41 @@ public class GroupAsHandler extends AbstractHandler implements IHandler {
 		 * Another plausibility check, should also be covered once in plugin.xml
 		 */
 		if (selectedNodeElements.size() >= 2) {
-			String layoutType = KimlLayoutHintConstants.NONE;
+			LAYOUT_TYPE layoutType = LAYOUT_TYPE.DEFAULT;
 			String commandID = event.getCommand().getId();
 			if (commandID
-					.equals("edu.unikiel.rtsys.kieler.kiml.ui.command.groupAsNone")) {
-				layoutType = KimlLayoutHintConstants.NONE;
+					.equals("edu.unikiel.rtsys.kieler.kiml.ui.command.groupAsDefault")) {
+				layoutType = LAYOUT_TYPE.DEFAULT;
 			}
 			if (commandID
-					.equals("edu.unikiel.rtsys.kieler.kiml.ui.command.groupAsCustom")) {
-				layoutType = KimlLayoutHintConstants.CUSTOM;
+					.equals("edu.unikiel.rtsys.kieler.kiml.ui.command.groupAsOther")) {
+				layoutType = LAYOUT_TYPE.OTHER;
 			}
 			if (commandID
 					.equals("edu.unikiel.rtsys.kieler.kiml.ui.command.groupAsCircle")) {
-				layoutType = KimlLayoutHintConstants.CIRCLE;
+				layoutType = LAYOUT_TYPE.CIRCLE;
 			}
 			if (commandID
 					.equals("edu.unikiel.rtsys.kieler.kiml.ui.command.groupAsDot")) {
-				layoutType = KimlLayoutHintConstants.DOT;
+				layoutType = LAYOUT_TYPE.HIERARCHICAL;
 			}
 			if (commandID
-					.equals("edu.unikiel.rtsys.kieler.kiml.ui.command.groupAsHorizontal")) {
-				layoutType = KimlLayoutHintConstants.HORIZONTAL;
+					.equals("edu.unikiel.rtsys.kieler.kiml.ui.command.groupAsRadial")) {
+				layoutType = LAYOUT_TYPE.RADIAL;
 			}
 			if (commandID
-					.equals("edu.unikiel.rtsys.kieler.kiml.ui.command.groupAsVertical")) {
-				layoutType = KimlLayoutHintConstants.VERTICAL;
+					.equals("edu.unikiel.rtsys.kieler.kiml.ui.command.groupAsSpringModel")) {
+				layoutType = LAYOUT_TYPE.SPRING_MODEL;
 			}
 
-			String groupID = KimlLayoutHintHelper
+			String groupID = KimlGMFLayoutHintHelper
 					.generateLayoutGroupID(selectedNodeElements);
-			KimlLayoutHintHelper.setLayoutHint(selectedNodeElements, groupID,
+			KimlGMFLayoutHintHelper.setLayoutHint(selectedNodeElements, groupID,
 					layoutType);
 
 			MessageDialog.openInformation(HandlerUtil.getActiveShell(event),
 					"KIEL Infrastructure for Meta Layout UI Plug-in",
-					KimlLayoutHintHelper.buildGroupAsMessage(layoutType,
+					KimlGMFLayoutHintHelper.buildGroupAsMessage(layoutType.getLiteral(),
 							groupID, selectedNodeElements.size()));
 		}
 		return null;

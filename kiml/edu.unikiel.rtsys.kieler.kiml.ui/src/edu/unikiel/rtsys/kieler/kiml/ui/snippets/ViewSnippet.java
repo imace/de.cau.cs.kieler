@@ -43,8 +43,7 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.ViewPart;
 
-import edu.unikiel.rtsys.kieler.kiml.ui.KimlLayoutHintConstants;
-import edu.unikiel.rtsys.kieler.kiml.ui.custom.KimlLayoutHintHelper;
+import edu.unikiel.rtsys.kieler.kiml.ui.helpers.KimlGMFLayoutHintHelper;
 
 /**
  * TODO doc, TODO add a listener to refresh if updated via context menu, i.e.
@@ -72,17 +71,17 @@ public class ViewSnippet extends ViewPart implements ISelectionListener {
 	/**
 	 * This class implements an ICellModifier An ICellModifier is called when
 	 * the user modifies a cell in the tableViewer
-	 */
+	 *//*
 	public class ViewCellModifier implements ICellModifier {
 
 		public ViewCellModifier() {
 			super();
 		}
 
-		/**
+		*//**
 		 * @see org.eclipse.jface.viewers.ICellModifier#canModify(java.lang.Object,
 		 *      java.lang.String)
-		 */
+		 *//*
 		public boolean canModify(Object element, String property) {
 			// Find the index of the column
 			int columnIndex = Arrays.asList(columnNames).indexOf(property);
@@ -93,10 +92,10 @@ public class ViewSnippet extends ViewPart implements ISelectionListener {
 				return false;
 		}
 
-		/**
+		*//**
 		 * @see org.eclipse.jface.viewers.ICellModifier#getValue(java.lang.Object,
 		 *      java.lang.String)
-		 */
+		 *//*
 		public Object getValue(Object element, String property) {
 			// Find the index of the column
 			int columnIndex = Arrays.asList(columnNames).indexOf(property);
@@ -106,13 +105,13 @@ public class ViewSnippet extends ViewPart implements ISelectionListener {
 				return snep.getClass().toString();
 
 			case 1: // LAYOUTGROUP_COLUMN
-				return KimlLayoutHintHelper.getLayoutGroup(snep);
+				return KimlGMFLayoutHintHelper.getLayoutGroup(snep);
 
 			case 2: // LAYOUTTYPE_COLUMN
 				// translate the result to Integers for the ComboBox
 				String[] choices = ((ComboBoxCellEditor) (tableViewer
 						.getCellEditors())[2]).getItems();
-				String layoutHint = KimlLayoutHintHelper.getLayoutType(snep);
+				String layoutHint = KimlGMFLayoutHintHelper.getLayoutType(snep);
 				int i = choices.length - 1;
 				while (!layoutHint.equals(choices[i]) && i > 0)
 					--i;
@@ -123,10 +122,10 @@ public class ViewSnippet extends ViewPart implements ISelectionListener {
 			}
 		}
 
-		/**
+		*//**
 		 * @see org.eclipse.jface.viewers.ICellModifier#modify(java.lang.Object,
 		 *      java.lang.String, java.lang.Object)
-		 */
+		 *//*
 		public void modify(Object element, String property, Object value) {
 			// Find the index of the column
 			int columnIndex = Arrays.asList(columnNames).indexOf(property);
@@ -143,7 +142,7 @@ public class ViewSnippet extends ViewPart implements ISelectionListener {
 			case 1: // LAYOTGROUP_COLUMN
 				if (value instanceof String) {
 					final String groupID = (String) value;
-					KimlLayoutHintHelper.setLayoutGroup(snep, groupID);
+					KimlGMFLayoutHintHelper.setLayoutGroup(snep, groupID);
 				}
 				break;
 
@@ -156,7 +155,7 @@ public class ViewSnippet extends ViewPart implements ISelectionListener {
 					final String layoutType = choices[((Integer) value)
 							.intValue()];
 					// do it
-					KimlLayoutHintHelper.setLayoutType(snep, layoutType);
+					KimlGMFLayoutHintHelper.setLayoutType(snep, layoutType);
 				}
 				break;
 			default:
@@ -166,9 +165,9 @@ public class ViewSnippet extends ViewPart implements ISelectionListener {
 		}
 	}
 
-	/*
+	
 	 * The content provider class
-	 */
+	 
 	class ViewContentProvider implements IStructuredContentProvider {
 		ArrayList<ShapeNodeEditPart> selectedNodeElements = new ArrayList<ShapeNodeEditPart>();
 
@@ -191,9 +190,9 @@ public class ViewSnippet extends ViewPart implements ISelectionListener {
 		}
 	}
 
-	/*
+	
 	 * The label provider class
-	 */
+	 
 	class ViewLabelProvider extends LabelProvider implements
 			ITableLabelProvider {
 
@@ -204,10 +203,10 @@ public class ViewSnippet extends ViewPart implements ISelectionListener {
 				return snep.getClass().toString();
 
 			case 1: // returns layout group identifier
-				return KimlLayoutHintHelper.getLayoutGroup(snep);
+				return KimlGMFLayoutHintHelper.getLayoutGroup(snep);
 
 			case 2: // returns the layout hint for this object
-				return KimlLayoutHintHelper.getLayoutType(snep);
+				return KimlGMFLayoutHintHelper.getLayoutType(snep);
 
 			default: // This will not happen, but you never know ...
 				return "";
@@ -229,22 +228,22 @@ public class ViewSnippet extends ViewPart implements ISelectionListener {
 		}
 	}
 
-	/*
+	
 	 * The name sorter class
-	 */
+	 
 	class NameSorter extends ViewerSorter {
 	}
 
-	/**
+	*//**
 	 * The constructor.
-	 */
+	 *//*
 	public ViewSnippet() {
 	}
 
-	/**
+	*//**
 	 * This is a callback that will allow us to create the viewer and initialize
 	 * it.
-	 */
+	 *//*
 	public void createPartControl(Composite parent) {
 
 		createTable(parent);
@@ -266,9 +265,9 @@ public class ViewSnippet extends ViewPart implements ISelectionListener {
 		contributeToActionBars();
 	}
 
-	/**
+	*//**
 	 * Create the Table
-	 */
+	 *//*
 	private void createTable(Composite parent) {
 		int style = SWT.MULTI | SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL
 				| SWT.FULL_SELECTION | SWT.HIDE_SELECTION;
@@ -293,9 +292,9 @@ public class ViewSnippet extends ViewPart implements ISelectionListener {
 		column.setWidth(100);
 	}
 
-	/**
+	*//**
 	 * Create the TableViewer
-	 */
+	 *//*
 	private void createTableViewer() {
 
 		tableViewer = new TableViewer(table);
@@ -377,7 +376,7 @@ public class ViewSnippet extends ViewPart implements ISelectionListener {
 		manager.add(high);
 		manager.add(action2);
 	}
-
+*/
 	private void makeActions() {
 		high = new Action() {
 			public void run() {
@@ -432,6 +431,12 @@ public class ViewSnippet extends ViewPart implements ISelectionListener {
 	@Override
 	public void selectionChanged(IWorkbenchPart part, ISelection selection) {
 		tableViewer.setInput(selection);
+	}
+
+	@Override
+	public void createPartControl(Composite parent) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
