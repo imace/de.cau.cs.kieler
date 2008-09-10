@@ -87,6 +87,9 @@
 						<include name="*.zip"/>	
 			</fileset>
 		</unzip>
+		<move todir="${sitepath}" >
+			<fileset dir="${siteproject}"/>
+		</move>
     </target>
 	
 	<target name="clean">
