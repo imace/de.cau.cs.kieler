@@ -489,18 +489,6 @@
                   name="group1">
             </separator>
          </menu>
-         <action
-               class="edu.unikiel.rtsys.kieler.ssm.diagram.popup.actions.CreateSimpleState"
-               enablesFor="1"
-               id="edu.unikiel.rtsys.kieler.ssm.diagram.contributionCreate.simpleState"
-               label="&amp;Create Simple State"
-               menubarPath="SSM/group1">
-            <enablement>
-               <objectClass
-                     name="edu.unikiel.rtsys.kieler.ssm.diagram.edit.parts.RegionEditPart">
-               </objectClass>
-            </enablement>
-         </action>
       </objectContribution>
    </extension><extension point="org.eclipse.ui.views.properties.tabbed.propertyContributor">
       <?gmfgen generated="true"?>
