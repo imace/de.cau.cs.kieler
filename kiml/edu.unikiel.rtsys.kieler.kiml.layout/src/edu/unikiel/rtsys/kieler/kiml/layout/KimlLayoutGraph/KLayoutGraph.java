@@ -10,21 +10,21 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>kLayout Graph</b></em>'.
+ * A representation of the model object '<em><b>KLayout Graph</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.kLayoutGraph#getTopGroup <em>Top Group</em>}</li>
+ *   <li>{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KLayoutGraph#getTopGroup <em>Top Group</em>}</li>
  * </ul>
  * </p>
  *
- * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getkLayoutGraph()
+ * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKLayoutGraph()
  * @model
  * @generated
  */
-public interface kLayoutGraph extends EObject {
+public interface KLayoutGraph extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Top Group</b></em>' reference.
 	 * <!-- begin-user-doc -->
@@ -34,21 +34,21 @@ public interface kLayoutGraph extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Top Group</em>' reference.
-	 * @see #setTopGroup(kNodeGroup)
-	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getkLayoutGraph_TopGroup()
+	 * @see #setTopGroup(KNodeGroup)
+	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKLayoutGraph_TopGroup()
 	 * @model required="true"
 	 * @generated
 	 */
-	kNodeGroup getTopGroup();
+	KNodeGroup getTopGroup();
 
 	/**
-	 * Sets the value of the '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.kLayoutGraph#getTopGroup <em>Top Group</em>}' reference.
+	 * Sets the value of the '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KLayoutGraph#getTopGroup <em>Top Group</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Top Group</em>' reference.
 	 * @see #getTopGroup()
 	 * @generated
 	 */
-	void setTopGroup(kNodeGroup value);
+	void setTopGroup(KNodeGroup value);
 
-} // kLayoutGraph
+} // KLayoutGraph

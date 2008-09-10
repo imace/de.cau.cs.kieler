@@ -10,24 +10,24 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>kInsets</b></em>'.
+ * A representation of the model object '<em><b>KInsets</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.kInsets#getBottom <em>Bottom</em>}</li>
- *   <li>{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.kInsets#getLeft <em>Left</em>}</li>
- *   <li>{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.kInsets#getRight <em>Right</em>}</li>
- *   <li>{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.kInsets#getTop <em>Top</em>}</li>
+ *   <li>{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KInsets#getBottom <em>Bottom</em>}</li>
+ *   <li>{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KInsets#getLeft <em>Left</em>}</li>
+ *   <li>{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KInsets#getRight <em>Right</em>}</li>
+ *   <li>{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KInsets#getTop <em>Top</em>}</li>
  * </ul>
  * </p>
  *
- * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getkInsets()
+ * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKInsets()
  * @model
  * @generated
  */
-public interface kInsets extends EObject {
+public interface KInsets extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Bottom</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -38,14 +38,14 @@ public interface kInsets extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Bottom</em>' attribute.
 	 * @see #setBottom(float)
-	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getkInsets_Bottom()
+	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKInsets_Bottom()
 	 * @model required="true"
 	 * @generated
 	 */
 	float getBottom();
 
 	/**
-	 * Sets the value of the '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.kInsets#getBottom <em>Bottom</em>}' attribute.
+	 * Sets the value of the '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KInsets#getBottom <em>Bottom</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Bottom</em>' attribute.
@@ -64,14 +64,14 @@ public interface kInsets extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Left</em>' attribute.
 	 * @see #setLeft(float)
-	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getkInsets_Left()
+	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKInsets_Left()
 	 * @model required="true"
 	 * @generated
 	 */
 	float getLeft();
 
 	/**
-	 * Sets the value of the '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.kInsets#getLeft <em>Left</em>}' attribute.
+	 * Sets the value of the '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KInsets#getLeft <em>Left</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Left</em>' attribute.
@@ -90,14 +90,14 @@ public interface kInsets extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Right</em>' attribute.
 	 * @see #setRight(float)
-	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getkInsets_Right()
+	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKInsets_Right()
 	 * @model required="true"
 	 * @generated
 	 */
 	float getRight();
 
 	/**
-	 * Sets the value of the '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.kInsets#getRight <em>Right</em>}' attribute.
+	 * Sets the value of the '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KInsets#getRight <em>Right</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Right</em>' attribute.
@@ -116,14 +116,14 @@ public interface kInsets extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Top</em>' attribute.
 	 * @see #setTop(float)
-	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getkInsets_Top()
+	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKInsets_Top()
 	 * @model required="true"
 	 * @generated
 	 */
 	float getTop();
 
 	/**
-	 * Sets the value of the '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.kInsets#getTop <em>Top</em>}' attribute.
+	 * Sets the value of the '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KInsets#getTop <em>Top</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Top</em>' attribute.
@@ -132,4 +132,4 @@ public interface kInsets extends EObject {
 	 */
 	void setTop(float value);
 
-} // kInsets
+} // KInsets

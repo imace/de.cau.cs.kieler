@@ -5,33 +5,33 @@ import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.Platform;
 
-import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.kLayoutGraph;
+import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KLayoutGraph;
 
 /**
  * @author ars
  * 
  */
-public class KimlLayoutProvider {
-	IKimlLayouter layoutProvider = null;
+public class KimlLayouterEngine implements IKimlLayouterEngine {
+	IKimlLayoutProvider layoutProvider = null;
 
 	/**
 	 * Root layouter class. Chooses the layouter from the contributed ones via
 	 * the extension points.
 	 */
-	public void doLayout(kLayoutGraph layoutGraph) {
+	public void layout(KLayoutGraph layoutGraph) {
 		loadLayouter(null);
-		layoutProvider.doLayout(layoutGraph);
+		layoutProvider.doLayout(layoutGraph.getTopGroup());
 	}
 
 	private void loadLayouter(String type) {
 		IExtensionRegistry reg = Platform.getExtensionRegistry();
 		IConfigurationElement[] extensions = reg
-				.getConfigurationElementsFor(IKimlLayouter.EXTENSION_POINT_ID);
+				.getConfigurationElementsFor(IKimlLayoutProvider.EXTENSION_POINT_ID);
 		for (IConfigurationElement element : extensions) {
 			System.out.println("extension: " + element.getName());
 			try {
-				layoutProvider = (IKimlLayouter) element
-						.createExecutableExtension(IKimlLayouter.ATTRIBUTE_CLASS);
+				layoutProvider = (IKimlLayoutProvider) element
+						.createExecutableExtension(IKimlLayoutProvider.ATTRIBUTE_CLASS);
 			} catch (CoreException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

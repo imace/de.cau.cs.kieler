@@ -14,23 +14,23 @@ import org.eclipse.emf.common.util.Enumerator;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the literals of the enumeration '<em><b>EDGE TYPES</b></em>',
+ * A representation of the literals of the enumeration '<em><b>EDGE TYPE</b></em>',
  * and utility methods for working with them.
  * <!-- end-user-doc -->
- * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getEDGE_TYPES()
+ * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getEDGE_TYPE()
  * @model
  * @generated
  */
-public enum EDGE_TYPES implements Enumerator {
+public enum EDGE_TYPE implements Enumerator {
 	/**
-	 * The '<em><b>NONE</b></em>' literal object.
+	 * The '<em><b>DEFAULT</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #NONE_VALUE
+	 * @see #DEFAULT_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	NONE(0, "NONE", "NONE"),
+	DEFAULT(0, "DEFAULT", "Default"),
 
 	/**
 	 * The '<em><b>DIRECT</b></em>' literal object.
@@ -40,7 +40,7 @@ public enum EDGE_TYPES implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	DIRECT(1, "DIRECT", "DIRECT"),
+	DIRECT(1, "DIRECT", "Direct"),
 
 	/**
 	 * The '<em><b>SPLINE</b></em>' literal object.
@@ -50,7 +50,7 @@ public enum EDGE_TYPES implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	SPLINE(2, "SPLINE", "SPLINE"),
+	SPLINE(2, "SPLINE", "Spline"),
 
 	/**
 	 * The '<em><b>BEZIER</b></em>' literal object.
@@ -60,22 +60,22 @@ public enum EDGE_TYPES implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	BEZIER(3, "BEZIER", "BEZIER");
+	BEZIER(3, "BEZIER", "Bezier");
 
 	/**
-	 * The '<em><b>NONE</b></em>' literal value.
+	 * The '<em><b>DEFAULT</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>NONE</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>DEFAULT</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #NONE
-	 * @model
+	 * @see #DEFAULT
+	 * @model literal="Default"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int NONE_VALUE = 0;
+	public static final int DEFAULT_VALUE = 0;
 
 	/**
 	 * The '<em><b>DIRECT</b></em>' literal value.
@@ -86,7 +86,7 @@ public enum EDGE_TYPES implements Enumerator {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #DIRECT
-	 * @model
+	 * @model literal="Direct"
 	 * @generated
 	 * @ordered
 	 */
@@ -101,7 +101,7 @@ public enum EDGE_TYPES implements Enumerator {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #SPLINE
-	 * @model
+	 * @model literal="Spline"
 	 * @generated
 	 * @ordered
 	 */
@@ -116,43 +116,43 @@ public enum EDGE_TYPES implements Enumerator {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #BEZIER
-	 * @model
+	 * @model literal="Bezier"
 	 * @generated
 	 * @ordered
 	 */
 	public static final int BEZIER_VALUE = 3;
 
 	/**
-	 * An array of all the '<em><b>EDGE TYPES</b></em>' enumerators.
+	 * An array of all the '<em><b>EDGE TYPE</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static final EDGE_TYPES[] VALUES_ARRAY =
-		new EDGE_TYPES[] {
-			NONE,
+	private static final EDGE_TYPE[] VALUES_ARRAY =
+		new EDGE_TYPE[] {
+			DEFAULT,
 			DIRECT,
 			SPLINE,
 			BEZIER,
 		};
 
 	/**
-	 * A public read-only list of all the '<em><b>EDGE TYPES</b></em>' enumerators.
+	 * A public read-only list of all the '<em><b>EDGE TYPE</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final List<EDGE_TYPES> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
+	public static final List<EDGE_TYPE> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
 	/**
-	 * Returns the '<em><b>EDGE TYPES</b></em>' literal with the specified literal value.
+	 * Returns the '<em><b>EDGE TYPE</b></em>' literal with the specified literal value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static EDGE_TYPES get(String literal) {
+	public static EDGE_TYPE get(String literal) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			EDGE_TYPES result = VALUES_ARRAY[i];
+			EDGE_TYPE result = VALUES_ARRAY[i];
 			if (result.toString().equals(literal)) {
 				return result;
 			}
@@ -161,14 +161,14 @@ public enum EDGE_TYPES implements Enumerator {
 	}
 
 	/**
-	 * Returns the '<em><b>EDGE TYPES</b></em>' literal with the specified name.
+	 * Returns the '<em><b>EDGE TYPE</b></em>' literal with the specified name.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static EDGE_TYPES getByName(String name) {
+	public static EDGE_TYPE getByName(String name) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			EDGE_TYPES result = VALUES_ARRAY[i];
+			EDGE_TYPE result = VALUES_ARRAY[i];
 			if (result.getName().equals(name)) {
 				return result;
 			}
@@ -177,14 +177,14 @@ public enum EDGE_TYPES implements Enumerator {
 	}
 
 	/**
-	 * Returns the '<em><b>EDGE TYPES</b></em>' literal with the specified integer value.
+	 * Returns the '<em><b>EDGE TYPE</b></em>' literal with the specified integer value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static EDGE_TYPES get(int value) {
+	public static EDGE_TYPE get(int value) {
 		switch (value) {
-			case NONE_VALUE: return NONE;
+			case DEFAULT_VALUE: return DEFAULT;
 			case DIRECT_VALUE: return DIRECT;
 			case SPLINE_VALUE: return SPLINE;
 			case BEZIER_VALUE: return BEZIER;
@@ -219,7 +219,7 @@ public enum EDGE_TYPES implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EDGE_TYPES(int value, String name, String literal) {
+	private EDGE_TYPE(int value, String name, String literal) {
 		this.value = value;
 		this.name = name;
 		this.literal = literal;
@@ -263,4 +263,4 @@ public enum EDGE_TYPES implements Enumerator {
 		return literal;
 	}
 	
-} //EDGE_TYPES
+} //EDGE_TYPE

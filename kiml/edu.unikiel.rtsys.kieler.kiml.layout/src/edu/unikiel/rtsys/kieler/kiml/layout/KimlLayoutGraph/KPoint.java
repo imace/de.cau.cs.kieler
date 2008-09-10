@@ -10,22 +10,22 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>kPoint</b></em>'.
+ * A representation of the model object '<em><b>KPoint</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.kPoint#getX <em>X</em>}</li>
- *   <li>{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.kPoint#getY <em>Y</em>}</li>
+ *   <li>{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPoint#getX <em>X</em>}</li>
+ *   <li>{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPoint#getY <em>Y</em>}</li>
  * </ul>
  * </p>
  *
- * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getkPoint()
+ * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKPoint()
  * @model
  * @generated
  */
-public interface kPoint extends EObject {
+public interface KPoint extends EObject {
 	/**
 	 * Returns the value of the '<em><b>X</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -36,14 +36,14 @@ public interface kPoint extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>X</em>' attribute.
 	 * @see #setX(float)
-	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getkPoint_X()
+	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKPoint_X()
 	 * @model required="true"
 	 * @generated
 	 */
 	float getX();
 
 	/**
-	 * Sets the value of the '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.kPoint#getX <em>X</em>}' attribute.
+	 * Sets the value of the '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPoint#getX <em>X</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>X</em>' attribute.
@@ -62,14 +62,14 @@ public interface kPoint extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Y</em>' attribute.
 	 * @see #setY(float)
-	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getkPoint_Y()
+	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKPoint_Y()
 	 * @model required="true"
 	 * @generated
 	 */
 	float getY();
 
 	/**
-	 * Sets the value of the '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.kPoint#getY <em>Y</em>}' attribute.
+	 * Sets the value of the '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPoint#getY <em>Y</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Y</em>' attribute.
@@ -78,4 +78,4 @@ public interface kPoint extends EObject {
 	 */
 	void setY(float value);
 
-} // kPoint
+} // KPoint

@@ -26,103 +26,112 @@ public interface KimlLayoutGraphFactory extends EFactory {
 	KimlLayoutGraphFactory eINSTANCE = edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>kPoint</em>'.
+	 * Returns a new object of class '<em>KPoint</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>kPoint</em>'.
+	 * @return a new object of class '<em>KPoint</em>'.
 	 * @generated
 	 */
-	kPoint createkPoint();
+	KPoint createKPoint();
 
 	/**
-	 * Returns a new object of class '<em>kDimension</em>'.
+	 * Returns a new object of class '<em>KDimension</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>kDimension</em>'.
+	 * @return a new object of class '<em>KDimension</em>'.
 	 * @generated
 	 */
-	kDimension createkDimension();
+	KDimension createKDimension();
 
 	/**
-	 * Returns a new object of class '<em>kInsets</em>'.
+	 * Returns a new object of class '<em>KInsets</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>kInsets</em>'.
+	 * @return a new object of class '<em>KInsets</em>'.
 	 * @generated
 	 */
-	kInsets createkInsets();
+	KInsets createKInsets();
 
 	/**
-	 * Returns a new object of class '<em>kEdge</em>'.
+	 * Returns a new object of class '<em>KLayout Graph</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>kEdge</em>'.
+	 * @return a new object of class '<em>KLayout Graph</em>'.
 	 * @generated
 	 */
-	kEdge createkEdge();
+	KLayoutGraph createKLayoutGraph();
 
 	/**
-	 * Returns a new object of class '<em>kLayout Graph</em>'.
+	 * Returns a new object of class '<em>KEdge</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>kLayout Graph</em>'.
+	 * @return a new object of class '<em>KEdge</em>'.
 	 * @generated
 	 */
-	kLayoutGraph createkLayoutGraph();
+	KEdge createKEdge();
 
 	/**
-	 * Returns a new object of class '<em>kShape Layout</em>'.
+	 * Returns a new object of class '<em>KEdge Layout</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>kShape Layout</em>'.
+	 * @return a new object of class '<em>KEdge Layout</em>'.
 	 * @generated
 	 */
-	kShapeLayout createkShapeLayout();
+	KEdgeLayout createKEdgeLayout();
 
 	/**
-	 * Returns a new object of class '<em>kEdge Layout</em>'.
+	 * Returns a new object of class '<em>KNode Group</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>kEdge Layout</em>'.
+	 * @return a new object of class '<em>KNode Group</em>'.
 	 * @generated
 	 */
-	kEdgeLayout createkEdgeLayout();
+	KNodeGroup createKNodeGroup();
 
 	/**
-	 * Returns a new object of class '<em>kNode Group</em>'.
+	 * Returns a new object of class '<em>KNode Group Layout</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>kNode Group</em>'.
+	 * @return a new object of class '<em>KNode Group Layout</em>'.
 	 * @generated
 	 */
-	kNodeGroup createkNodeGroup();
+	KNodeGroupLayout createKNodeGroupLayout();
 
 	/**
-	 * Returns a new object of class '<em>kEdge Label</em>'.
+	 * Returns a new object of class '<em>KEdge Label</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>kEdge Label</em>'.
+	 * @return a new object of class '<em>KEdge Label</em>'.
 	 * @generated
 	 */
-	kEdgeLabel createkEdgeLabel();
+	KEdgeLabel createKEdgeLabel();
 
 	/**
-	 * Returns a new object of class '<em>kNode Group Layout</em>'.
+	 * Returns a new object of class '<em>KEdge Label Layout</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>kNode Group Layout</em>'.
+	 * @return a new object of class '<em>KEdge Label Layout</em>'.
 	 * @generated
 	 */
-	kNodeGroupLayout createkNodeGroupLayout();
+	KEdgeLabelLayout createKEdgeLabelLayout();
 
 	/**
-	 * Returns a new object of class '<em>kEdge Label Layout</em>'.
+	 * Returns a new object of class '<em>KNode Group Label</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>kEdge Label Layout</em>'.
+	 * @return a new object of class '<em>KNode Group Label</em>'.
 	 * @generated
 	 */
-	kEdgeLabelLayout createkEdgeLabelLayout();
+	KNodeGroupLabel createKNodeGroupLabel();
+
+	/**
+	 * Returns a new object of class '<em>KNode Group Label Layout</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>KNode Group Label Layout</em>'.
+	 * @generated
+	 */
+	KNodeGroupLabelLayout createKNodeGroupLabelLayout();
 
 	/**
 	 * Returns the package supported by this factory.

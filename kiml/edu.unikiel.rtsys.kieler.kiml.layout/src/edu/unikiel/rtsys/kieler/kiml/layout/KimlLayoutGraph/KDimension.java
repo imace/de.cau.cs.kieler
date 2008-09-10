@@ -10,22 +10,22 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>kDimension</b></em>'.
+ * A representation of the model object '<em><b>KDimension</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.kDimension#getHeight <em>Height</em>}</li>
- *   <li>{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.kDimension#getWidth <em>Width</em>}</li>
+ *   <li>{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KDimension#getHeight <em>Height</em>}</li>
+ *   <li>{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KDimension#getWidth <em>Width</em>}</li>
  * </ul>
  * </p>
  *
- * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getkDimension()
+ * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKDimension()
  * @model
  * @generated
  */
-public interface kDimension extends EObject {
+public interface KDimension extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Height</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -36,14 +36,14 @@ public interface kDimension extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Height</em>' attribute.
 	 * @see #setHeight(float)
-	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getkDimension_Height()
+	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKDimension_Height()
 	 * @model required="true"
 	 * @generated
 	 */
 	float getHeight();
 
 	/**
-	 * Sets the value of the '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.kDimension#getHeight <em>Height</em>}' attribute.
+	 * Sets the value of the '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KDimension#getHeight <em>Height</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Height</em>' attribute.
@@ -62,14 +62,14 @@ public interface kDimension extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Width</em>' attribute.
 	 * @see #setWidth(float)
-	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getkDimension_Width()
+	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKDimension_Width()
 	 * @model required="true"
 	 * @generated
 	 */
 	float getWidth();
 
 	/**
-	 * Sets the value of the '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.kDimension#getWidth <em>Width</em>}' attribute.
+	 * Sets the value of the '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KDimension#getWidth <em>Width</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Width</em>' attribute.
@@ -78,4 +78,4 @@ public interface kDimension extends EObject {
 	 */
 	void setWidth(float value);
 
-} // kDimension
+} // KDimension

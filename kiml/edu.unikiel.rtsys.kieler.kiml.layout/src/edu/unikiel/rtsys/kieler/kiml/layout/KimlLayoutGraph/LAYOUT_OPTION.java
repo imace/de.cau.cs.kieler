@@ -14,93 +14,93 @@ import org.eclipse.emf.common.util.Enumerator;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the literals of the enumeration '<em><b>LAYOUT TYPES</b></em>',
+ * A representation of the literals of the enumeration '<em><b>LAYOUT OPTION</b></em>',
  * and utility methods for working with them.
  * <!-- end-user-doc -->
- * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getLAYOUT_TYPES()
+ * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getLAYOUT_OPTION()
  * @model
  * @generated
  */
-public enum LAYOUT_TYPES implements Enumerator {
+public enum LAYOUT_OPTION implements Enumerator {
 	/**
-	 * The '<em><b>DOT</b></em>' literal object.
+	 * The '<em><b>DEFAULT</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #DOT_VALUE
+	 * @see #DEFAULT_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	DOT(0, "DOT", "DOT"),
+	DEFAULT(0, "DEFAULT", "DEFAULT"),
 
 	/**
-	 * The '<em><b>CIRCO</b></em>' literal object.
+	 * The '<em><b>PRESERVE MENTAL MAP</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #CIRCO_VALUE
+	 * @see #PRESERVE_MENTAL_MAP_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	CIRCO(1, "CIRCO", "CIRCO");
+	PRESERVE_MENTAL_MAP(1, "PRESERVE_MENTAL_MAP", "PRESERVE_MENTAL_MAP");
 
 	/**
-	 * The '<em><b>DOT</b></em>' literal value.
+	 * The '<em><b>DEFAULT</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>DOT</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>DEFAULT</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #DOT
+	 * @see #DEFAULT
 	 * @model
 	 * @generated
 	 * @ordered
 	 */
-	public static final int DOT_VALUE = 0;
+	public static final int DEFAULT_VALUE = 0;
 
 	/**
-	 * The '<em><b>CIRCO</b></em>' literal value.
+	 * The '<em><b>PRESERVE MENTAL MAP</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>CIRCO</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>PRESERVE MENTAL MAP</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #CIRCO
+	 * @see #PRESERVE_MENTAL_MAP
 	 * @model
 	 * @generated
 	 * @ordered
 	 */
-	public static final int CIRCO_VALUE = 1;
+	public static final int PRESERVE_MENTAL_MAP_VALUE = 1;
 
 	/**
-	 * An array of all the '<em><b>LAYOUT TYPES</b></em>' enumerators.
+	 * An array of all the '<em><b>LAYOUT OPTION</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static final LAYOUT_TYPES[] VALUES_ARRAY =
-		new LAYOUT_TYPES[] {
-			DOT,
-			CIRCO,
+	private static final LAYOUT_OPTION[] VALUES_ARRAY =
+		new LAYOUT_OPTION[] {
+			DEFAULT,
+			PRESERVE_MENTAL_MAP,
 		};
 
 	/**
-	 * A public read-only list of all the '<em><b>LAYOUT TYPES</b></em>' enumerators.
+	 * A public read-only list of all the '<em><b>LAYOUT OPTION</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final List<LAYOUT_TYPES> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
+	public static final List<LAYOUT_OPTION> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
 	/**
-	 * Returns the '<em><b>LAYOUT TYPES</b></em>' literal with the specified literal value.
+	 * Returns the '<em><b>LAYOUT OPTION</b></em>' literal with the specified literal value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static LAYOUT_TYPES get(String literal) {
+	public static LAYOUT_OPTION get(String literal) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			LAYOUT_TYPES result = VALUES_ARRAY[i];
+			LAYOUT_OPTION result = VALUES_ARRAY[i];
 			if (result.toString().equals(literal)) {
 				return result;
 			}
@@ -109,14 +109,14 @@ public enum LAYOUT_TYPES implements Enumerator {
 	}
 
 	/**
-	 * Returns the '<em><b>LAYOUT TYPES</b></em>' literal with the specified name.
+	 * Returns the '<em><b>LAYOUT OPTION</b></em>' literal with the specified name.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static LAYOUT_TYPES getByName(String name) {
+	public static LAYOUT_OPTION getByName(String name) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			LAYOUT_TYPES result = VALUES_ARRAY[i];
+			LAYOUT_OPTION result = VALUES_ARRAY[i];
 			if (result.getName().equals(name)) {
 				return result;
 			}
@@ -125,15 +125,15 @@ public enum LAYOUT_TYPES implements Enumerator {
 	}
 
 	/**
-	 * Returns the '<em><b>LAYOUT TYPES</b></em>' literal with the specified integer value.
+	 * Returns the '<em><b>LAYOUT OPTION</b></em>' literal with the specified integer value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static LAYOUT_TYPES get(int value) {
+	public static LAYOUT_OPTION get(int value) {
 		switch (value) {
-			case DOT_VALUE: return DOT;
-			case CIRCO_VALUE: return CIRCO;
+			case DEFAULT_VALUE: return DEFAULT;
+			case PRESERVE_MENTAL_MAP_VALUE: return PRESERVE_MENTAL_MAP;
 		}
 		return null;
 	}
@@ -165,7 +165,7 @@ public enum LAYOUT_TYPES implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private LAYOUT_TYPES(int value, String name, String literal) {
+	private LAYOUT_OPTION(int value, String name, String literal) {
 		this.value = value;
 		this.name = name;
 		this.literal = literal;
@@ -209,4 +209,4 @@ public enum LAYOUT_TYPES implements Enumerator {
 		return literal;
 	}
 	
-} //LAYOUT_TYPES
+} //LAYOUT_OPTION

@@ -14,14 +14,14 @@ import org.eclipse.emf.common.util.Enumerator;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the literals of the enumeration '<em><b>EDGE LABEL PLACEMENT</b></em>',
+ * A representation of the literals of the enumeration '<em><b>LAYOUT TYPE</b></em>',
  * and utility methods for working with them.
  * <!-- end-user-doc -->
- * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getEDGE_LABEL_PLACEMENT()
+ * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getLAYOUT_TYPE()
  * @model
  * @generated
  */
-public enum EDGE_LABEL_PLACEMENT implements Enumerator {
+public enum LAYOUT_TYPE implements Enumerator {
 	/**
 	 * The '<em><b>DEFAULT</b></em>' literal object.
 	 * <!-- begin-user-doc -->
@@ -30,57 +30,67 @@ public enum EDGE_LABEL_PLACEMENT implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	DEFAULT(0, "DEFAULT", "DEFAULT"),
+	DEFAULT(0, "DEFAULT", "Default"),
 
 	/**
-	 * The '<em><b>CENTER</b></em>' literal object.
+	 * The '<em><b>PATTERN RECOGNITION</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #CENTER_VALUE
+	 * @see #PATTERN_RECOGNITION_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	CENTER(1, "CENTER", "CENTER"),
+	PATTERN_RECOGNITION(1, "PATTERN_RECOGNITION", "Pattern recognition"),
 
 	/**
-	 * The '<em><b>HEAD</b></em>' literal object.
+	 * The '<em><b>HIERARCHICAL</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #HEAD_VALUE
+	 * @see #HIERARCHICAL_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	HEAD(2, "HEAD", "HEAD"),
+	HIERARCHICAL(2, "HIERARCHICAL", "Hierarchical"),
 
 	/**
-	 * The '<em><b>TAIL</b></em>' literal object.
+	 * The '<em><b>CIRCLE</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #TAIL_VALUE
+	 * @see #CIRCLE_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	TAIL(4, "TAIL", "TAIL"),
+	CIRCLE(3, "CIRCLE", "Circle"),
 
 	/**
-	 * The '<em><b>LEFT</b></em>' literal object.
+	 * The '<em><b>RADIAL</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #LEFT_VALUE
+	 * @see #RADIAL_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	LEFT(8, "LEFT", "LEFT"),
+	RADIAL(4, "RADIAL", "Radial"),
 
 	/**
-	 * The '<em><b>RIGHT</b></em>' literal object.
+	 * The '<em><b>SPRING MODEL</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #RIGHT_VALUE
+	 * @see #SPRING_MODEL_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	RIGHT(16, "RIGHT", "RIGHT");
+	SPRING_MODEL(5, "SPRING_MODEL", "Spring model"),
+
+	/**
+	 * The '<em><b>OTHER</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #OTHER_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	OTHER(6, "OTHER", "Other");
 
 	/**
 	 * The '<em><b>DEFAULT</b></em>' literal value.
@@ -91,120 +101,136 @@ public enum EDGE_LABEL_PLACEMENT implements Enumerator {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #DEFAULT
-	 * @model
+	 * @model literal="Default"
 	 * @generated
 	 * @ordered
 	 */
 	public static final int DEFAULT_VALUE = 0;
 
 	/**
-	 * The '<em><b>CENTER</b></em>' literal value.
+	 * The '<em><b>PATTERN RECOGNITION</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>CENTER</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>PATTERN RECOGNITION</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #CENTER
-	 * @model
+	 * @see #PATTERN_RECOGNITION
+	 * @model literal="Pattern recognition"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int CENTER_VALUE = 1;
+	public static final int PATTERN_RECOGNITION_VALUE = 1;
 
 	/**
-	 * The '<em><b>HEAD</b></em>' literal value.
+	 * The '<em><b>HIERARCHICAL</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>HEAD</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>HIERARCHICAL</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #HEAD
-	 * @model
+	 * @see #HIERARCHICAL
+	 * @model literal="Hierarchical"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int HEAD_VALUE = 2;
+	public static final int HIERARCHICAL_VALUE = 2;
 
 	/**
-	 * The '<em><b>TAIL</b></em>' literal value.
+	 * The '<em><b>CIRCLE</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>TAIL</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>CIRCLE</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #TAIL
-	 * @model
+	 * @see #CIRCLE
+	 * @model literal="Circle"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int TAIL_VALUE = 4;
+	public static final int CIRCLE_VALUE = 3;
 
 	/**
-	 * The '<em><b>LEFT</b></em>' literal value.
+	 * The '<em><b>RADIAL</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>LEFT</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>RADIAL</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #LEFT
-	 * @model
+	 * @see #RADIAL
+	 * @model literal="Radial"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int LEFT_VALUE = 8;
+	public static final int RADIAL_VALUE = 4;
 
 	/**
-	 * The '<em><b>RIGHT</b></em>' literal value.
+	 * The '<em><b>SPRING MODEL</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>RIGHT</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>SPRING MODEL</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #RIGHT
-	 * @model
+	 * @see #SPRING_MODEL
+	 * @model literal="Spring model"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int RIGHT_VALUE = 16;
+	public static final int SPRING_MODEL_VALUE = 5;
 
 	/**
-	 * An array of all the '<em><b>EDGE LABEL PLACEMENT</b></em>' enumerators.
+	 * The '<em><b>OTHER</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>OTHER</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #OTHER
+	 * @model literal="Other"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int OTHER_VALUE = 6;
+
+	/**
+	 * An array of all the '<em><b>LAYOUT TYPE</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static final EDGE_LABEL_PLACEMENT[] VALUES_ARRAY =
-		new EDGE_LABEL_PLACEMENT[] {
+	private static final LAYOUT_TYPE[] VALUES_ARRAY =
+		new LAYOUT_TYPE[] {
 			DEFAULT,
-			CENTER,
-			HEAD,
-			TAIL,
-			LEFT,
-			RIGHT,
+			PATTERN_RECOGNITION,
+			HIERARCHICAL,
+			CIRCLE,
+			RADIAL,
+			SPRING_MODEL,
+			OTHER,
 		};
 
 	/**
-	 * A public read-only list of all the '<em><b>EDGE LABEL PLACEMENT</b></em>' enumerators.
+	 * A public read-only list of all the '<em><b>LAYOUT TYPE</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final List<EDGE_LABEL_PLACEMENT> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
+	public static final List<LAYOUT_TYPE> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
 	/**
-	 * Returns the '<em><b>EDGE LABEL PLACEMENT</b></em>' literal with the specified literal value.
+	 * Returns the '<em><b>LAYOUT TYPE</b></em>' literal with the specified literal value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static EDGE_LABEL_PLACEMENT get(String literal) {
+	public static LAYOUT_TYPE get(String literal) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			EDGE_LABEL_PLACEMENT result = VALUES_ARRAY[i];
+			LAYOUT_TYPE result = VALUES_ARRAY[i];
 			if (result.toString().equals(literal)) {
 				return result;
 			}
@@ -213,14 +239,14 @@ public enum EDGE_LABEL_PLACEMENT implements Enumerator {
 	}
 
 	/**
-	 * Returns the '<em><b>EDGE LABEL PLACEMENT</b></em>' literal with the specified name.
+	 * Returns the '<em><b>LAYOUT TYPE</b></em>' literal with the specified name.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static EDGE_LABEL_PLACEMENT getByName(String name) {
+	public static LAYOUT_TYPE getByName(String name) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			EDGE_LABEL_PLACEMENT result = VALUES_ARRAY[i];
+			LAYOUT_TYPE result = VALUES_ARRAY[i];
 			if (result.getName().equals(name)) {
 				return result;
 			}
@@ -229,19 +255,20 @@ public enum EDGE_LABEL_PLACEMENT implements Enumerator {
 	}
 
 	/**
-	 * Returns the '<em><b>EDGE LABEL PLACEMENT</b></em>' literal with the specified integer value.
+	 * Returns the '<em><b>LAYOUT TYPE</b></em>' literal with the specified integer value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static EDGE_LABEL_PLACEMENT get(int value) {
+	public static LAYOUT_TYPE get(int value) {
 		switch (value) {
 			case DEFAULT_VALUE: return DEFAULT;
-			case CENTER_VALUE: return CENTER;
-			case HEAD_VALUE: return HEAD;
-			case TAIL_VALUE: return TAIL;
-			case LEFT_VALUE: return LEFT;
-			case RIGHT_VALUE: return RIGHT;
+			case PATTERN_RECOGNITION_VALUE: return PATTERN_RECOGNITION;
+			case HIERARCHICAL_VALUE: return HIERARCHICAL;
+			case CIRCLE_VALUE: return CIRCLE;
+			case RADIAL_VALUE: return RADIAL;
+			case SPRING_MODEL_VALUE: return SPRING_MODEL;
+			case OTHER_VALUE: return OTHER;
 		}
 		return null;
 	}
@@ -273,7 +300,7 @@ public enum EDGE_LABEL_PLACEMENT implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EDGE_LABEL_PLACEMENT(int value, String name, String literal) {
+	private LAYOUT_TYPE(int value, String name, String literal) {
 		this.value = value;
 		this.name = name;
 		this.literal = literal;
@@ -317,4 +344,4 @@ public enum EDGE_LABEL_PLACEMENT implements Enumerator {
 		return literal;
 	}
 	
-} //EDGE_LABEL_PLACEMENT
+} //LAYOUT_TYPE
