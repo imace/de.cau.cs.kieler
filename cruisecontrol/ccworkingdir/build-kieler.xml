@@ -27,12 +27,8 @@
 	<echo message="starting..."/>
 	
 	<!-- specify plugins to be checked out -->
-	<property name="plugin1"
-	value="http://rtsys/svn/kieler/trunk/common/examples/editors/edu.unikiel.rtsys.kieler.ssm.emf"
-	/>
-	<property name="plugin2"
-	value="http://rtsys/svn/kieler/trunk/common/examples/editors/edu.unikiel.rtsys.kieler.ssm.feature"
-	/>
+	<property name="plugin1" value="http://rtsys/svn/kieler/trunk/common/examples/editors/edu.unikiel.rtsys.kieler.ssm.emf"/>
+	<property name="plugin2" value="http://rtsys/svn/kieler/trunk/common/examples/editors/edu.unikiel.rtsys.kieler.ssm.feature"/>
 
 	<property name="svnuser"   value="tomcat5" />
 	<property name="svnpasswd" value="edcvgz"  />
@@ -69,18 +65,47 @@
 		</copy>
 	</target>
 
+	
+	<!-- ================================= 
+          target: updatesite              
+         ================================= -->
+	<property name="siteproject" value="edu.unikiel.rtsys.kieler.updatesite"/>
+	<property name="siteprojecturl" value="http://rtsys/svn/kieler/trunk/cruisecontrol/"/>
+	<property name="sitepath" value="/home/haf/public_html/kielerupdatesite"/>
+	<target 
+		name="updatesite" 
+		depends="compile" 
+		description="Create proper Update Site for the plugins.">
+		<!-- checkout updatesite project -->
+		<exec executable="svn">
+			<arg line="co --username tomcat5 --password edcvgz ${siteprojecturl}${siteproject}"/>
+		</exec> 
+		<!-- unpack generated jars to update site project -->
+		<unzip dest="${siteproject}">
+			<fileset dir="buildDirectory/build">
+						<include name="*.zip"/>	
+			</fileset>
+		</unzip>
+    </target>
+	
 	<target name="clean">
 		<delete dir="target" />
 	</target>
 
+	<!-- ================================= 
+          target: compile              
+         ================================= -->
 	<property name="arg1" value="-application org.eclipse.ant.core.antRunner" />
 	<property name="arg2" value="-DbaseLocation=${eclipse}" />
-<!--	 <property name="arg3" value="-buildfile ${eclipse}/plugins/org.eclipse.pde.build_3.4.0.v20080206/scripts/build.xml" /> -->
 	<property name="arg3" value="-buildfile ${eclipse}/plugins/org.eclipse.pde.build_3.4.0.v20080604/scripts/build.xml" />
 	<property name="arg4" value="-DbuildDirectory=${basedir}/buildDirectory"/>
 	<property name="arg5" value="-Dbuilder=${basedir}/buildDirectory/features/edu.unikiel.rtsys.kieler.ssm.feature"/>
-		
-	<target name="compile">
+	<target 
+		name="compile" 
+		depends="update" 
+		description="Do the actual compile step. This is done by the Eclipse
+        internal AntRunner, because it includes the support of special
+        targets required for eclipse features.">
 		<java fork="true" 
 			  failonerror="true"
 			  classpath="${eclipse}/plugins/org.eclipse.equinox.launcher_1.0.100.v20080509-1800.jar"
@@ -88,24 +113,6 @@
 			  args="${arg1} ${arg2} ${arg3} ${arg4} ${arg5}">
 		</java>
 		
-<!--		    <delete dir="target/classes" />
-	        <mkdir dir="target/classes" />
-
-classname="org.eclipse.core.launcher.Main"
-	        <ant antfile="build.xml" target="clean"/>
-	        <ant antfile="build.xml" target="build.sources"/>
-	        <ant antfile="build.xml" target="build.jars"/>
-	        <ant antfile="build.xml" target="build.update.jar"/>
-
-        	<copy todir="target/classes/">
-        	        <fileset dir="${basedir}/@dot" />
-	        </copy>
--->
-	</target>
-
-	<target name="updatesite">
-	   
-	
 	</target>
 
 	<target name="metrics" depends="clean">
