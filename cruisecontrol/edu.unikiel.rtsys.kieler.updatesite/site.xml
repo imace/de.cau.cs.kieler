@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/edu.unikiel.rtsys.kieler.ssm.feature_0.1.0.jar" id="edu.unikiel.rtsys.kieler.ssm.feature" version="0.1.0">
+      <category name="KIELER"/>
+   </feature>
+   <category-def name="KIELER" label="KIELER">
+      <description>
+         Kiel Integrated Environment for Layout for the Eclipse RichClientPlatform
+      </description>
+   </category-def>
+</site>
