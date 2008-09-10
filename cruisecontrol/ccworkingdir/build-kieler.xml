@@ -23,21 +23,36 @@
 		</fileset>
 	</path>
 	
+
 	<echo message="starting..."/>
 	
+	<!-- specify plugins to be checked out -->
+	<property name="plugin1"
+	value="http://rtsys/svn/kieler/trunk/common/examples/editors/edu.unikiel.rtsys.kieler.ssm.emf"
+	/>
+	<property name="plugin2"
+	value="http://rtsys/svn/kieler/trunk/common/examples/editors/edu.unikiel.rtsys.kieler.ssm.feature"
+	/>
+
+	<property name="svnuser"   value="tomcat5" />
+	<property name="svnpasswd" value="edcvgz"  />
 	<target name="checkout">
 		<echo message="checking out for the first time"/>
 		<exec executable="svn">
-			<arg line="co --username tomcat5 --password edcvgz http://rtsys/svn/kieler/trunk/common/examples/editors/edu.unikiel.rtsys/kieler/ssm/emf" />
+			<arg line="co --username ${svnuser} --password ${svnpasswd} ${plugin1}" />
+		</exec>
+		<exec executable="svn">
+			<arg line="co --username ${svnuser} --password ${svnpasswd} ${plugin2}" />
 		</exec>
 	</target>
 	
 	<!-- Get the latest from SVN -->
-	<target name="update">
+	<target name="update" depends="checkout">
 		<echo message="updating"/>
+		<!-- problem: path is missing... -->
 		<exec executable="svn">
 			<arg line="up --username tomcat5 --password edcvgz"/>
-    	</exec>
+		</exec>
 		<mkdir dir="buildDirectory/features"/>
 		<mkdir dir="buildDirectory/plugins"/>
 		<copy overwrite="false" todir="buildDirectory/features">
@@ -63,20 +78,20 @@
 <!--	 <property name="arg3" value="-buildfile ${eclipse}/plugins/org.eclipse.pde.build_3.4.0.v20080206/scripts/build.xml" /> -->
 	<property name="arg3" value="-buildfile ${eclipse}/plugins/org.eclipse.pde.build_3.4.0.v20080604/scripts/build.xml" />
 	<property name="arg4" value="-DbuildDirectory=${basedir}/buildDirectory"/>
-	<property name="arg5" value="-Dbuilder=${basedir}/buildDirectory/plugins/edu.unikiel.rtsys.kieler.kev.build"/>
+	<property name="arg5" value="-Dbuilder=${basedir}/buildDirectory/features/edu.unikiel.rtsys.kieler.ssm.feature"/>
 		
 	<target name="compile">
 		<java fork="true" 
 			  failonerror="true"
-			  classpath="${eclipse}/plugins/org.eclipse.equinox.launcher_1.0.100.v20080509.jar"
-			  classname="org.eclipse.core.launcher.Main"
+			  classpath="${eclipse}/plugins/org.eclipse.equinox.launcher_1.0.100.v20080509-1800.jar"
+			  jar="${eclipse}/plugins/org.eclipse.equinox.launcher_1.0.100.v20080509-1800.jar"
 			  args="${arg1} ${arg2} ${arg3} ${arg4} ${arg5}">
 		</java>
 		
 <!--		    <delete dir="target/classes" />
 	        <mkdir dir="target/classes" />
 
-
+classname="org.eclipse.core.launcher.Main"
 	        <ant antfile="build.xml" target="clean"/>
 	        <ant antfile="build.xml" target="build.sources"/>
 	        <ant antfile="build.xml" target="build.jars"/>
@@ -86,6 +101,11 @@
         	        <fileset dir="${basedir}/@dot" />
 	        </copy>
 -->
+	</target>
+
+	<target name="updatesite">
+	   
+	
 	</target>
 
 	<target name="metrics" depends="clean">
