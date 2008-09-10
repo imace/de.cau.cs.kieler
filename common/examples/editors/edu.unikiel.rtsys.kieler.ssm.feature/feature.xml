@@ -17,8 +17,27 @@
       [Enter License Description here.]
    </license>
 
+   <requires>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.emf.ecore"/>
+   </requires>
+
    <plugin
          id="edu.unikiel.rtsys.kieler.ssm.emf"
+         download-size="0"
+         install-size="0"
+         version="0.1.0"
+         unpack="false"/>
+
+   <plugin
+         id="edu.unikiel.rtsys.kieler.ssm.emf.edit"
+         download-size="0"
+         install-size="0"
+         version="0.1.0"
+         unpack="false"/>
+
+   <plugin
+         id="edu.unikiel.rtsys.kieler.ssm.gmf.diagram"
          download-size="0"
          install-size="0"
          version="0.1.0"
