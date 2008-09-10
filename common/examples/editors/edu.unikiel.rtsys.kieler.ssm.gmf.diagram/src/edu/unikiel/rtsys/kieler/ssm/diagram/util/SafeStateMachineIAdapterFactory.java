@@ -13,7 +13,6 @@ public class SafeStateMachineIAdapterFactory implements IAdapterFactory {
 
 	private static final Class[] types = { String.class };
 
-	@Override
 	public Object getAdapter(Object adaptableObject, Class adapterType) {
 		if (adapterType == String.class
 				&& adaptableObject instanceof ShapeNodeEditPart) {
@@ -65,7 +64,6 @@ public class SafeStateMachineIAdapterFactory implements IAdapterFactory {
 		return null;
 	}
 
-	@Override
 	public Class[] getAdapterList() {
 		return types;
 	}
