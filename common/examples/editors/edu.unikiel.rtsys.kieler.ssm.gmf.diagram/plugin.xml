@@ -570,7 +570,7 @@
             adaptableType="org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart"
             class="edu.unikiel.rtsys.kieler.ssm.diagram.util.SafeStateMachineIAdapterFactory">
          <adapter
-               type="java.lang.String">
+               type="java.util.Map">
          </adapter>
       </factory>
    </extension>
