@@ -21,6 +21,9 @@ public class SafeStateMachineIAdapterFactory implements IAdapterFactory {
 		if (adapterType == Map.class
 				&& adaptableObject instanceof ShapeNodeEditPart) {
 			Map<String, String> kimlLabel = new HashMap<String, String>();
+			kimlLabel.put("SHORT_LABEL", "");
+			kimlLabel.put("LONG_LABEL", "");
+
 			/*
 			 * First cast to ShapeNodeEditPart to be able to access the model
 			 */
@@ -73,9 +76,11 @@ public class SafeStateMachineIAdapterFactory implements IAdapterFactory {
 				CompositeState compositeState = (CompositeState) region
 						.eContainer();
 				kimlLabel.put("SHORT_LABEL", "");
-				kimlLabel.put("LONG_LABEL", "Region in " + compositeState.getName());
+				kimlLabel.put("LONG_LABEL", "Region in "
+						+ compositeState.getName());
 				return kimlLabel;
 			}
+			return kimlLabel;
 		}
 		return null;
 	}
