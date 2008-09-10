@@ -29,6 +29,8 @@
 	<!-- specify plugins to be checked out -->
 	<property name="plugin1" value="http://rtsys/svn/kieler/trunk/common/examples/editors/edu.unikiel.rtsys.kieler.ssm.emf"/>
 	<property name="plugin2" value="http://rtsys/svn/kieler/trunk/common/examples/editors/edu.unikiel.rtsys.kieler.ssm.feature"/>
+	<property name="plugin3" value="http://rtsys/svn/kieler/trunk/common/examples/editors/edu.unikiel.rtsys.kieler.ssm.emf.edit"/>
+	<property name="plugin4" value="http://rtsys/svn/kieler/trunk/common/examples/editors/edu.unikiel.rtsys.kieler.ssm.gmf.diagram"/>
 
 	<property name="svnuser"   value="tomcat5" />
 	<property name="svnpasswd" value="edcvgz"  />
@@ -39,6 +41,12 @@
 		</exec>
 		<exec executable="svn">
 			<arg line="co --username ${svnuser} --password ${svnpasswd} ${plugin2}" />
+		</exec>
+		<exec executable="svn">
+			<arg line="co --username ${svnuser} --password ${svnpasswd} ${plugin3}" />
+		</exec>
+		<exec executable="svn">
+			<arg line="co --username ${svnuser} --password ${svnpasswd} ${plugin4}" />
 		</exec>
 	</target>
 	
@@ -87,6 +95,7 @@
 						<include name="*.zip"/>	
 			</fileset>
 		</unzip>
+		<!-- move complete update site to target dir that is accessible via web -->
 		<move todir="${sitepath}" >
 			<fileset dir="${siteproject}"/>
 		</move>
