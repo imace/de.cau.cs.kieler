@@ -80,8 +80,9 @@
 		<exec executable="svn">
 			<arg line="co --username tomcat5 --password edcvgz ${siteprojecturl}${siteproject}"/>
 		</exec> 
-		<!-- unpack generated jars to update site project -->
-		<unzip dest="${siteproject}">
+		<!-- unpack generated jars to update site project
+		     set archivePrefix already in the build-properties to the updatesite project name -->
+		<unzip dest=".">
 			<fileset dir="buildDirectory/build">
 						<include name="*.zip"/>	
 			</fileset>
