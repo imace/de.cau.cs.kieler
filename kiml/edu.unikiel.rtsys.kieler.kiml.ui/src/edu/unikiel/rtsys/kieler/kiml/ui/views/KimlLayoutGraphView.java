@@ -21,9 +21,9 @@ import org.eclipse.ui.part.ViewPart;
 
 import edu.unikiel.rtsys.kieler.core.services.GenericEvent;
 import edu.unikiel.rtsys.kieler.core.services.GenericEventListener;
-import edu.unikiel.rtsys.kieler.kiml.ui.KimlArrangeAction;
-import edu.unikiel.rtsys.layouter.graph.Graph;
-import edu.unikiel.rtsys.layouter.graph.provider.GraphItemProviderAdapterFactory;
+//import edu.unikiel.rtsys.kieler.kiml.ui.KimlArrangeAction;
+//import edu.unikiel.rtsys.layouter.graph.Graph;
+//import edu.unikiel.rtsys.layouter.graph.provider.GraphItemProviderAdapterFactory;
 
 
 /**
@@ -196,13 +196,13 @@ public class KimlLayoutGraphView extends ViewPart implements GenericEventListene
 		//viewer.setSorter(new NameSorter());
 		//viewer.setInput(getViewSite());
 
-		GraphItemProviderAdapterFactory factory = new GraphItemProviderAdapterFactory();
-		
-		viewer.setContentProvider(new AdapterFactoryContentProvider(factory));
-		viewer.setLabelProvider(new AdapterFactoryLabelProvider(factory));
-		viewer.setSorter(new NameSorter());
-		
-		KimlArrangeAction.getEventSource().addGenericEventListener(this);
+//		GraphItemProviderAdapterFactory factory = new GraphItemProviderAdapterFactory();
+//		
+//		viewer.setContentProvider(new AdapterFactoryContentProvider(factory));
+//		viewer.setLabelProvider(new AdapterFactoryLabelProvider(factory));
+//		viewer.setSorter(new NameSorter());
+//		
+//		KimlArrangeAction.getEventSource().addGenericEventListener(this);
 	}
 	
 	/**
@@ -220,9 +220,9 @@ public class KimlLayoutGraphView extends ViewPart implements GenericEventListene
 	@Override
 	public void handleEvent(GenericEvent e) {
 		// make the viewer display the new Graph
-		if(e.getData() instanceof Graph){
-			this.viewer.setInput(e.getData());
-		}
+//		if(e.getData() instanceof Graph){
+//			this.viewer.setInput(e.getData());
+//		}
 	}
 
 }

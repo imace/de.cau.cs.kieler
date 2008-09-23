@@ -202,6 +202,7 @@ public class KimlGEFLayouter extends KimlAbstractLayouter {
 			ScalableFreeformRootEditPart sfrep = (ScalableFreeformRootEditPart) ((GraphicalEditPart) root)
 					.getRoot();
 			zoomLevel = sfrep.getZoomManager().getZoom();
+			// FIXME: put this in decent logging facilities
 			System.out.println(zoomLevel);
 		}
 	}

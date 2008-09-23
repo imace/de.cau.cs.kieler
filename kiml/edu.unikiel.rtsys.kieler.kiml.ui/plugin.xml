@@ -3,29 +3,6 @@
 <plugin>
 
    <extension
-         point="org.eclipse.gmf.runtime.common.ui.services.action.contributionItemProviders">
-      <contributionItemProvider
-            checkPluginLoaded="false"
-            class="edu.unikiel.rtsys.kieler.kiml.ui.KimlContributionItemProvider">
-         <Priority
-               name="Low">
-         </Priority>
-         <partContribution
-               class="org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramWorkbenchPart">
-            <partAction
-                  id="edu.unikiel.rtsys.kieler.kiml.ui.layoutAction01"
-                  menubarPath="/diagramMenu/arrangeMenu/arrangeGroup"
-                  toolbarPath="/arrangeMenu">
-            </partAction>
-            <partAction
-                  id="edu.unikiel.rtsys.kieler.kiml.ui.testAction01"
-                  menubarPath="/diagramMenu/arrangeMenu/arrangeGroup"
-                  toolbarPath="/arrangeMenu">
-            </partAction>
-         </partContribution>
-      </contributionItemProvider>
-   </extension>
-   <extension
          point="org.eclipse.ui.preferencePages">
       <page
             class="edu.unikiel.rtsys.kieler.kiml.ui.WorkbenchPreferencePage"
@@ -39,13 +16,6 @@
             id="edu.unikiel.rtsys.kieler.kiml.ui"
             name="%category.name.0">
       </category>
-      <view
-            category="edu.unikiel.rtsys.kieler.kiml.ui"
-            class="edu.unikiel.rtsys.kieler.kiml.ui.views.KimlLayoutGraphView"
-            icon="icons/sample.gif"
-            id="edu.unikiel.rtsys.kieler.kiml.ui.views.KimlLayoutGraphView"
-            name="%view.name.0">
-      </view>
       <view
             category="edu.unikiel.rtsys.kieler.kiml.ui"
             class="edu.unikiel.rtsys.kieler.kiml.ui.views.KimlLayoutHintView"
