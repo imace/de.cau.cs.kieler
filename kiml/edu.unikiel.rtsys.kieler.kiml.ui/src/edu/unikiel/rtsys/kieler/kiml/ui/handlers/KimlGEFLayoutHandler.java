@@ -9,7 +9,6 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.handlers.HandlerUtil;
 
-import edu.unikiel.rtsys.kieler.kiml.layout.services.KimlRecursiveGroupLayouterEngine;
 import edu.unikiel.rtsys.kieler.kiml.ui.layouter.KimlGEFLayouter;
 
 public class KimlGEFLayoutHandler extends AbstractHandler implements IHandler {
@@ -18,7 +17,6 @@ public class KimlGEFLayoutHandler extends AbstractHandler implements IHandler {
 		super();
 	}
 
-	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		/*
 		 * As this handler is activated from a menu, Emma needs to get the
@@ -31,12 +29,9 @@ public class KimlGEFLayoutHandler extends AbstractHandler implements IHandler {
 		if (selection == null)
 			selection = HandlerUtil.getCurrentSelection(event);
 		if (selection != null && selection instanceof IStructuredSelection) {
-			System.out.println("UI: KimlGEFLayoutHandler.");
 			GraphicalEditPart root = (GraphicalEditPart) ((IStructuredSelection)selection).toList().get(0);
 			KimlGEFLayouter kimlGEFLayouter = new KimlGEFLayouter();
 			kimlGEFLayouter.setRoot(root);
-			kimlGEFLayouter.setEditor(HandlerUtil.getActiveEditor(event));
-			kimlGEFLayouter.setLayouter(new KimlRecursiveGroupLayouterEngine());
 			kimlGEFLayouter.layout();
 		}
 		return null;

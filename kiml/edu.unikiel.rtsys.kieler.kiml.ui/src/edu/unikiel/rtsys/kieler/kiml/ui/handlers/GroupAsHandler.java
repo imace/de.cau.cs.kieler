@@ -6,15 +6,18 @@ import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.IHandler;
+import org.eclipse.core.commands.common.NotDefinedException;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.handlers.HandlerUtil;
 
+import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_TYPE;
+import edu.unikiel.rtsys.kieler.kiml.layout.services.LayoutProviders;
+import edu.unikiel.rtsys.kieler.kiml.ui.ContributionItemGroupAs;
 import edu.unikiel.rtsys.kieler.kiml.ui.helpers.KimlGMFLayoutHintHelper;
-
 
 /**
  * The handler which is responsible for the functions to group the selected
@@ -28,7 +31,6 @@ import edu.unikiel.rtsys.kieler.kiml.ui.helpers.KimlGMFLayoutHintHelper;
  */
 public class GroupAsHandler extends AbstractHandler implements IHandler {
 
-	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 
 		/*
@@ -41,7 +43,7 @@ public class GroupAsHandler extends AbstractHandler implements IHandler {
 		ISelection selection = HandlerUtil.getActiveMenuSelection(event);
 		if (selection == null)
 			selection = HandlerUtil.getCurrentSelection(event);
-		
+
 		/*
 		 * Filter out ShapeNodeEditParts. According to the menu.extension in
 		 * plugin.xml it should just be ShapeNodeEditParts selected anyway, but
@@ -57,45 +59,35 @@ public class GroupAsHandler extends AbstractHandler implements IHandler {
 		}
 
 		/*
-		 * Another plausibility check, should also be covered once in plugin.xml
+		 * Another plausibility check, is also covered in plugin.xml
 		 */
 		if (selectedNodeElements.size() >= 2) {
-			LAYOUT_TYPE layoutType = LAYOUT_TYPE.DEFAULT;
 			String commandID = event.getCommand().getId();
+			
+			// the parameter provided holds the layouterName
+			String layouterName = event
+					.getParameter(ContributionItemGroupAs.PARAM_LAYOUTER_NAME);
+			LAYOUTER_INFO layouterInfo = LayoutProviders.getInstance()
+					.getLayouterInfoForLayouterName(layouterName);
+			LAYOUT_TYPE layoutType = LAYOUT_TYPE.DEFAULT;
+			layoutType = layouterInfo.getLayoutType();
+			
+			// just another sanity check if the right commandID
 			if (commandID
-					.equals("edu.unikiel.rtsys.kieler.kiml.ui.command.groupAsDefault")) {
-				layoutType = LAYOUT_TYPE.DEFAULT;
-			}
-			if (commandID
-					.equals("edu.unikiel.rtsys.kieler.kiml.ui.command.groupAsOther")) {
-				layoutType = LAYOUT_TYPE.OTHER;
-			}
-			if (commandID
-					.equals("edu.unikiel.rtsys.kieler.kiml.ui.command.groupAsCircle")) {
-				layoutType = LAYOUT_TYPE.CIRCLE;
-			}
-			if (commandID
-					.equals("edu.unikiel.rtsys.kieler.kiml.ui.command.groupAsDot")) {
-				layoutType = LAYOUT_TYPE.HIERARCHICAL;
-			}
-			if (commandID
-					.equals("edu.unikiel.rtsys.kieler.kiml.ui.command.groupAsRadial")) {
-				layoutType = LAYOUT_TYPE.RADIAL;
-			}
-			if (commandID
-					.equals("edu.unikiel.rtsys.kieler.kiml.ui.command.groupAsSpringModel")) {
-				layoutType = LAYOUT_TYPE.SPRING_MODEL;
-			}
+					.equals("edu.unikiel.rtsys.kieler.kiml.ui.command.groupAs")) {
 
-			String groupID = KimlGMFLayoutHintHelper
-					.generateLayoutGroupID(selectedNodeElements);
-			KimlGMFLayoutHintHelper.setLayoutHint(selectedNodeElements, groupID,
-					layoutType);
+				String groupID = KimlGMFLayoutHintHelper
+						.generateLayoutGroupID(selectedNodeElements);
+				KimlGMFLayoutHintHelper.setLayoutHint(selectedNodeElements,
+						groupID, layoutType, layouterName);
 
-			MessageDialog.openInformation(HandlerUtil.getActiveShell(event),
-					"KIEL Infrastructure for Meta Layout UI Plug-in",
-					KimlGMFLayoutHintHelper.buildGroupAsMessage(layoutType.getLiteral(),
-							groupID, selectedNodeElements.size()));
+				MessageDialog.openInformation(
+						HandlerUtil.getActiveShell(event),
+						"KIEL Infrastructure for Meta Layout UI Plug-in",
+						KimlGMFLayoutHintHelper.buildGroupAsMessage(layoutType
+								.getLiteral(), layouterName, groupID,
+								selectedNodeElements.size()));
+			}
 		}
 		return null;
 	}
