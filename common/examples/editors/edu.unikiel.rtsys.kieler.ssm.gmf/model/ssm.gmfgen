@@ -53,13 +53,13 @@
     </childNodes>
     <childNodes
         visualID="3002"
-        editPartClassName="CompositeState3EditPart"
-        itemSemanticEditPolicyClassName="CompositeState3ItemSemanticEditPolicy"
-        notationViewFactoryClassName="CompositeState3ViewFactory"
-        canonicalEditPolicyClassName="CompositeState3CanonicalEditPolicy"
+        editPartClassName="CompositeState2EditPart"
+        itemSemanticEditPolicyClassName="CompositeState2ItemSemanticEditPolicy"
+        notationViewFactoryClassName="CompositeState2ViewFactory"
+        canonicalEditPolicyClassName="CompositeState2CanonicalEditPolicy"
         compartments="//@diagram/@compartments.2"
-        graphicalNodeEditPolicyClassName="CompositeState3GraphicalNodeEditPolicy"
-        createCommandClassName="CompositeState3CreateCommand"
+        graphicalNodeEditPolicyClassName="CompositeState2GraphicalNodeEditPolicy"
+        createCommandClassName="CompositeState2CreateCommand"
         containers="//@diagram/@compartments.1">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
@@ -167,12 +167,12 @@
     </childNodes>
     <childNodes
         visualID="3004"
-        editPartClassName="CompositeState2EditPart"
-        itemSemanticEditPolicyClassName="CompositeState2ItemSemanticEditPolicy"
-        notationViewFactoryClassName="CompositeState2ViewFactory"
-        canonicalEditPolicyClassName="CompositeState2CanonicalEditPolicy"
-        graphicalNodeEditPolicyClassName="CompositeState2GraphicalNodeEditPolicy"
-        createCommandClassName="CompositeState2CreateCommand"
+        editPartClassName="InitialStateEditPart"
+        itemSemanticEditPolicyClassName="InitialStateItemSemanticEditPolicy"
+        notationViewFactoryClassName="InitialStateViewFactory"
+        canonicalEditPolicyClassName="InitialStateCanonicalEditPolicy"
+        graphicalNodeEditPolicyClassName="InitialStateGraphicalNodeEditPolicy"
+        createCommandClassName="InitialStateCreateCommand"
         containers="//@diagram/@compartments.1">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
@@ -262,16 +262,16 @@
     </topLevelNodes>
     <links
         visualID="4001"
-        editPartClassName="StrongAbortion2EditPart"
-        itemSemanticEditPolicyClassName="StrongAbortion2ItemSemanticEditPolicy"
-        notationViewFactoryClassName="StrongAbortion2ViewFactory"
-        createCommandClassName="StrongAbortion2CreateCommand"
-        reorientCommandClassName="StrongAbortion2ReorientCommand">
+        editPartClassName="StrongAbortionEditPart"
+        itemSemanticEditPolicyClassName="StrongAbortionItemSemanticEditPolicy"
+        notationViewFactoryClassName="StrongAbortionViewFactory"
+        createCommandClassName="StrongAbortionCreateCommand"
+        reorientCommandClassName="StrongAbortionReorientCommand">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Edge"/>
       <elementType
           xsi:type="gmfgen:MetamodelType"
-          editHelperClassName="StrongAbortion2EditHelper"/>
+          editHelperClassName="StrongAbortionEditHelper"/>
       <viewmap
           xsi:type="gmfgen:InnerClassViewmap"
           className="StrongAbortionFigure"
@@ -294,9 +294,38 @@
       </modelFacet>
       <labels
           visualID="6001"
-          editPartClassName="StrongAbortionPriority2EditPart"
-          itemSemanticEditPolicyClassName="StrongAbortionPriority2ItemSemanticEditPolicy"
-          notationViewFactoryClassName="StrongAbortionPriority2ViewFactory">
+          editPartClassName="StrongAbortionIsImmediateStringTriggeEditPart"
+          itemSemanticEditPolicyClassName="StrongAbortionIsImmediateStringTriggeItemSemanticEditPolicy"
+          notationViewFactoryClassName="StrongAbortionIsImmediateStringTriggeViewFactory">
+        <diagramRunTimeClass
+            href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+        <viewmap
+            xsi:type="gmfgen:ParentAssignedViewmap"
+            getterName="getFigureStrongAbortionLabelLabel"
+            figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel">
+          <attributes
+              xsi:type="gmfgen:LabelOffsetAttributes"
+              y="40"/>
+        </viewmap>
+        <modelFacet
+            xsi:type="gmfgen:FeatureLabelModelFacet"
+            viewPattern="{0}{1}/{2}"
+            editorPattern=""
+            editPattern="{0}{1}/{2}">
+          <metaFeatures
+              href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.genmodel#//ssm/TransitionImmediateable/isImmediateString"/>
+          <metaFeatures
+              href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.genmodel#//ssm/TransitionTriggerable/triggerString"/>
+          <metaFeatures
+              href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.genmodel#//ssm/Transition/effectString"/>
+        </modelFacet>
+      </labels>
+      <labels
+          visualID="6002"
+          editPartClassName="StrongAbortionPriorityEditPart"
+          itemSemanticEditPolicyClassName="StrongAbortionPriorityItemSemanticEditPolicy"
+          notationViewFactoryClassName="StrongAbortionPriorityViewFactory"
+          alignment="TARGET">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap
@@ -305,7 +334,7 @@
             figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel">
           <attributes
               xsi:type="gmfgen:LabelOffsetAttributes"
-              y="40"/>
+              y="60"/>
         </viewmap>
         <modelFacet
             xsi:type="gmfgen:FeatureLabelModelFacet"
@@ -316,47 +345,19 @@
               href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.genmodel#//ssm/Transition/priority"/>
         </modelFacet>
       </labels>
-      <labels
-          visualID="6002"
-          editPartClassName="StrongAbortionIsImmediateStringTrigge2EditPart"
-          itemSemanticEditPolicyClassName="StrongAbortionIsImmediateStringTrigge2ItemSemanticEditPolicy"
-          notationViewFactoryClassName="StrongAbortionIsImmediateStringTrigge2ViewFactory">
-        <diagramRunTimeClass
-            href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
-        <viewmap
-            xsi:type="gmfgen:ParentAssignedViewmap"
-            getterName="getFigureStrongAbortionLabelLabel"
-            figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel">
-          <attributes
-              xsi:type="gmfgen:LabelOffsetAttributes"
-              y="60"/>
-        </viewmap>
-        <modelFacet
-            xsi:type="gmfgen:FeatureLabelModelFacet"
-            viewPattern="{0} {1}/{2}"
-            editorPattern=""
-            editPattern="{0} {1}/{2}">
-          <metaFeatures
-              href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.genmodel#//ssm/TransitionImmediateable/isImmediateString"/>
-          <metaFeatures
-              href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.genmodel#//ssm/TransitionTriggerable/triggerString"/>
-          <metaFeatures
-              href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.genmodel#//ssm/Transition/effectString"/>
-        </modelFacet>
-      </labels>
     </links>
     <links
         visualID="4002"
-        editPartClassName="StrongAbortionEditPart"
-        itemSemanticEditPolicyClassName="StrongAbortionItemSemanticEditPolicy"
-        notationViewFactoryClassName="StrongAbortionViewFactory"
-        createCommandClassName="StrongAbortionCreateCommand"
-        reorientCommandClassName="StrongAbortionReorientCommand">
+        editPartClassName="NormalTerminationEditPart"
+        itemSemanticEditPolicyClassName="NormalTerminationItemSemanticEditPolicy"
+        notationViewFactoryClassName="NormalTerminationViewFactory"
+        createCommandClassName="NormalTerminationCreateCommand"
+        reorientCommandClassName="NormalTerminationReorientCommand">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Edge"/>
       <elementType
           xsi:type="gmfgen:MetamodelType"
-          editHelperClassName="StrongAbortionEditHelper"/>
+          editHelperClassName="NormalTerminationEditHelper"/>
       <viewmap
           xsi:type="gmfgen:InnerClassViewmap"
           className="NormalTerminationFigure"
@@ -379,33 +380,9 @@
       </modelFacet>
       <labels
           visualID="6003"
-          editPartClassName="StrongAbortionPriorityEditPart"
-          itemSemanticEditPolicyClassName="StrongAbortionPriorityItemSemanticEditPolicy"
-          notationViewFactoryClassName="StrongAbortionPriorityViewFactory">
-        <diagramRunTimeClass
-            href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
-        <viewmap
-            xsi:type="gmfgen:ParentAssignedViewmap"
-            getterName="getFigureNormalTerminationPriorityLabel"
-            figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel">
-          <attributes
-              xsi:type="gmfgen:LabelOffsetAttributes"
-              y="40"/>
-        </viewmap>
-        <modelFacet
-            xsi:type="gmfgen:FeatureLabelModelFacet"
-            viewPattern=""
-            editorPattern=""
-            editPattern="">
-          <metaFeatures
-              href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.genmodel#//ssm/Transition/priority"/>
-        </modelFacet>
-      </labels>
-      <labels
-          visualID="6004"
-          editPartClassName="StrongAbortionIsImmediateStringTriggeEditPart"
-          itemSemanticEditPolicyClassName="StrongAbortionIsImmediateStringTriggeItemSemanticEditPolicy"
-          notationViewFactoryClassName="StrongAbortionIsImmediateStringTriggeViewFactory">
+          editPartClassName="NormalTerminationEffectStringEditPart"
+          itemSemanticEditPolicyClassName="NormalTerminationEffectStringItemSemanticEditPolicy"
+          notationViewFactoryClassName="NormalTerminationEffectStringViewFactory">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap
@@ -414,7 +391,7 @@
             figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel">
           <attributes
               xsi:type="gmfgen:LabelOffsetAttributes"
-              y="60"/>
+              y="40"/>
         </viewmap>
         <modelFacet
             xsi:type="gmfgen:FeatureLabelModelFacet"
@@ -425,19 +402,44 @@
               href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.genmodel#//ssm/Transition/effectString"/>
         </modelFacet>
       </labels>
+      <labels
+          visualID="6004"
+          editPartClassName="NormalTerminationPriorityEditPart"
+          itemSemanticEditPolicyClassName="NormalTerminationPriorityItemSemanticEditPolicy"
+          notationViewFactoryClassName="NormalTerminationPriorityViewFactory"
+          alignment="TARGET">
+        <diagramRunTimeClass
+            href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+        <viewmap
+            xsi:type="gmfgen:ParentAssignedViewmap"
+            getterName="getFigureNormalTerminationPriorityLabel"
+            figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel">
+          <attributes
+              xsi:type="gmfgen:LabelOffsetAttributes"
+              y="60"/>
+        </viewmap>
+        <modelFacet
+            xsi:type="gmfgen:FeatureLabelModelFacet"
+            viewPattern=""
+            editorPattern=""
+            editPattern="">
+          <metaFeatures
+              href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.genmodel#//ssm/Transition/priority"/>
+        </modelFacet>
+      </labels>
     </links>
     <links
         visualID="4003"
-        editPartClassName="NormalTerminationEditPart"
-        itemSemanticEditPolicyClassName="NormalTerminationItemSemanticEditPolicy"
-        notationViewFactoryClassName="NormalTerminationViewFactory"
-        createCommandClassName="NormalTerminationCreateCommand"
-        reorientCommandClassName="NormalTerminationReorientCommand">
+        editPartClassName="WeakAbortionEditPart"
+        itemSemanticEditPolicyClassName="WeakAbortionItemSemanticEditPolicy"
+        notationViewFactoryClassName="WeakAbortionViewFactory"
+        createCommandClassName="WeakAbortionCreateCommand"
+        reorientCommandClassName="WeakAbortionReorientCommand">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Edge"/>
       <elementType
           xsi:type="gmfgen:MetamodelType"
-          editHelperClassName="NormalTerminationEditHelper"/>
+          editHelperClassName="WeakAbortionEditHelper"/>
       <viewmap
           xsi:type="gmfgen:InnerClassViewmap"
           className="WeakAbortionFigure"
@@ -460,33 +462,9 @@
       </modelFacet>
       <labels
           visualID="6005"
-          editPartClassName="NormalTerminationPriorityEditPart"
-          itemSemanticEditPolicyClassName="NormalTerminationPriorityItemSemanticEditPolicy"
-          notationViewFactoryClassName="NormalTerminationPriorityViewFactory">
-        <diagramRunTimeClass
-            href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
-        <viewmap
-            xsi:type="gmfgen:ParentAssignedViewmap"
-            getterName="getFigureWeakAbortionPriorityLabel"
-            figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel">
-          <attributes
-              xsi:type="gmfgen:LabelOffsetAttributes"
-              y="40"/>
-        </viewmap>
-        <modelFacet
-            xsi:type="gmfgen:FeatureLabelModelFacet"
-            viewPattern=""
-            editorPattern=""
-            editPattern="">
-          <metaFeatures
-              href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.genmodel#//ssm/Transition/priority"/>
-        </modelFacet>
-      </labels>
-      <labels
-          visualID="6006"
-          editPartClassName="NormalTerminationEffectStringEditPart"
-          itemSemanticEditPolicyClassName="NormalTerminationEffectStringItemSemanticEditPolicy"
-          notationViewFactoryClassName="NormalTerminationEffectStringViewFactory">
+          editPartClassName="WeakAbortionIsImmediateStringTriggeEditPart"
+          itemSemanticEditPolicyClassName="WeakAbortionIsImmediateStringTriggeItemSemanticEditPolicy"
+          notationViewFactoryClassName="WeakAbortionIsImmediateStringTriggeViewFactory">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap
@@ -495,19 +473,44 @@
             figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel">
           <attributes
               xsi:type="gmfgen:LabelOffsetAttributes"
-              y="60"/>
+              y="40"/>
         </viewmap>
         <modelFacet
             xsi:type="gmfgen:FeatureLabelModelFacet"
-            viewPattern="{0} {1}/{2}"
+            viewPattern="{0}{1}/{2}"
             editorPattern=""
-            editPattern="{0} {1}/{2}">
+            editPattern="{0}{1}/{2}">
           <metaFeatures
               href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.genmodel#//ssm/TransitionImmediateable/isImmediateString"/>
           <metaFeatures
               href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.genmodel#//ssm/TransitionTriggerable/triggerString"/>
           <metaFeatures
               href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.genmodel#//ssm/Transition/effectString"/>
+        </modelFacet>
+      </labels>
+      <labels
+          visualID="6006"
+          editPartClassName="WeakAbortionPriorityEditPart"
+          itemSemanticEditPolicyClassName="WeakAbortionPriorityItemSemanticEditPolicy"
+          notationViewFactoryClassName="WeakAbortionPriorityViewFactory"
+          alignment="TARGET">
+        <diagramRunTimeClass
+            href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+        <viewmap
+            xsi:type="gmfgen:ParentAssignedViewmap"
+            getterName="getFigureWeakAbortionPriorityLabel"
+            figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel">
+          <attributes
+              xsi:type="gmfgen:LabelOffsetAttributes"
+              y="60"/>
+        </viewmap>
+        <modelFacet
+            xsi:type="gmfgen:FeatureLabelModelFacet"
+            viewPattern=""
+            editorPattern=""
+            editPattern="">
+          <metaFeatures
+              href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.genmodel#//ssm/Transition/priority"/>
         </modelFacet>
       </labels>
     </links>
@@ -520,7 +523,8 @@
         childNodes="//@diagram/@childNodes.0"
         title="CompositeStateCompartment"
         needsTitle="false"
-        node="//@diagram/@topLevelNodes.0">
+        node="//@diagram/@topLevelNodes.0"
+        listLayout="false">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <viewmap
@@ -563,7 +567,8 @@
         childNodes="//@diagram/@childNodes.0"
         title="CompositeStateCompartment"
         needsTitle="false"
-        node="//@diagram/@childNodes.1">
+        node="//@diagram/@childNodes.1"
+        listLayout="false">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <viewmap
