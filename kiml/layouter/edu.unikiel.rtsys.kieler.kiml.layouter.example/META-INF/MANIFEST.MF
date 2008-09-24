@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Exemplary layouter implementation
+Bundle-SymbolicName: edu.unikiel.rtsys.kieler.kiml.layouter.example; singleton:=true
+Bundle-Version: 1.0.0
+Bundle-Activator: edu.unikiel.rtsys.kieler.kiml.layouter.example.Activator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ edu.unikiel.rtsys.kieler.kiml.layout;bundle-version="1.0.0",
+ org.eclipse.emf.ecore;bundle-version="2.4.0"
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
