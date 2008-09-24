@@ -18,7 +18,6 @@
    <extension
          point="org.eclipse.ui.preferencePages">
       <page
-            category="edu.unikiel.rtsys.kieler.kiml.ui.PreferencePage"
             class="edu.unikiel.rtsys.kieler.kivik.preferences.KivikPreferencePage"
             id="edu.unikiel.rtsys.kieler.kivik.preferences.KivikPreferencePage"
             name="KiViK">

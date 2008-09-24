@@ -48,6 +48,7 @@ import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.ui.PlatformUI;
 
+import edu.unikiel.rtsys.kieler.kiml.ui.layouter.KimlGMFLayouter;
 import edu.unikiel.rtsys.kieler.kivik.Constants;
 
 /**
@@ -92,9 +93,11 @@ public final class KivikComparator {
 	 */
 	private boolean rightIsRemote;
 
+	private KimlGMFLayouter gmfLayouter = new KimlGMFLayouter();
+	
 	/** Resource of the right model used in this comparison. */
 	private Resource rightResource;
-
+	
 	static {
 		parseExtensionMetaData();
 	}
@@ -225,7 +228,7 @@ public final class KivikComparator {
 								}
 								final DiffModel diff = DiffService.doDiff(
 										match, getAncestorResource() != null);
-
+								
 								comparisonResult.setDate(Calendar.getInstance()
 										.getTime());
 								comparisonResult.setDiff(diff);
@@ -292,6 +295,7 @@ public final class KivikComparator {
 			System.out.println("KivikComparator: Left used comparisonHandler");
 			return comparisonHandler.getLeftResource();
 		}
+		System.out.println(leftResource.getURI());
 		return leftResource;
 	}
 
@@ -404,6 +408,10 @@ public final class KivikComparator {
 	public Diagram getLeftViewModel() {
 		if (getLeftResource().getContents().get(0) instanceof Diagram) {
 			System.out.println("KivikComparator: LeftViewModel NOT null");
+			Diagram left_diag = (Diagram) getLeftResource().getContents().get(0);
+			System.out.println("ääääääääääääääää" + left_diag.getChildren().get(0));
+			gmfLayouter.setRoot(getLeftBusinessModel());
+			gmfLayouter.layout();
 			return (Diagram) getLeftResource().getContents().get(0);
 		} else {
 			System.out.println("KivikComparator: LeftViewModel is null");
@@ -437,19 +445,20 @@ public final class KivikComparator {
 			System.out.println("KivikComparator: MergedViewModel NOT null");
 			
 			// make copies of left semantic an notation model
-			Copier semanticCopier = new Copier();
-			Copier notationCopier = new Copier();
-			EObject rightSemanticStaticModel = semanticCopier.copy(getRightBusinessModel());
-			semanticCopier.copyReferences();
-			Diagram rightNotationStaticModel = (Diagram)notationCopier.copy(getRightViewModel());
-			notationCopier.copyReferences();
-			// add copies to the resourceset
-			GMFResource res = new GMFResource(URI.createGenericURI("null", "null", ""));
-			res.getContents().add(rightNotationStaticModel);
-			res.getContents().add(rightSemanticStaticModel);
-			getRightViewModel().eResource().getResourceSet().getResources().add(res);
-			rightNotationStaticModel.setElement(rightSemanticStaticModel);
-			return rightNotationStaticModel;
+//			Copier semanticCopier = new Copier();
+//			Copier notationCopier = new Copier();
+//			EObject rightSemanticStaticModel = semanticCopier.copy(getRightBusinessModel());
+//			semanticCopier.copyReferences();
+//			Diagram rightNotationStaticModel = (Diagram)notationCopier.copy(getRightViewModel());
+//			notationCopier.copyReferences();
+//			// add copies to the resourceset
+//			GMFResource res = new GMFResource(URI.createGenericURI("null", "null", ""));
+//			res.getContents().add(rightNotationStaticModel);
+//			res.getContents().add(rightSemanticStaticModel);
+//			getRightViewModel().eResource().getResourceSet().getResources().add(res);
+//			rightNotationStaticModel.setElement(rightSemanticStaticModel);
+			//return rightNotationStaticModel;
+			return (Diagram)getLeftResource().getContents().get(0);
 		} else {
 			System.out.println("KivikComparator: MergedViewModel is null");
 			return null;
@@ -587,6 +596,7 @@ public final class KivikComparator {
 				rightResource = EclipseModelUtils.load(
 						((ResourceNode) left).getResource().getFullPath(),
 						new ResourceSetImpl()).eResource();
+				
 			} else {
 				rightResource = ModelUtils
 						.createResource(URI.createPlatformResourceURI(

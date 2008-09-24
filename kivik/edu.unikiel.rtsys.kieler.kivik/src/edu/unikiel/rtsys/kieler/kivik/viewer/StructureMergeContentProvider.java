@@ -136,7 +136,7 @@ public class StructureMergeContentProvider implements ITreeContentProvider {
 			snapshot = comparator.getComparisonResult();
 		} else if (oldInput != newInput && newInput instanceof ICompareInput) {
 			comparator.loadResources((ICompareInput)newInput);
-			snapshot = comparator.compareBusinessModel(configuration);
+			snapshot = comparator.compareViewModel(configuration);
 		}
 		diffInput = snapshot.getDiff();
 	}

@@ -16,6 +16,7 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.emf.compare.ui,
  org.eclipse.team.ui,
  org.eclipse.emf.edit.ui,
- edu.unikiel.rtsys.layouter.graphviz;bundle-version="1.0.0"
+ edu.unikiel.rtsys.kieler.kiml.layout;bundle-version="1.0.0",
+ edu.unikiel.rtsys.kieler.kiml.ui;bundle-version="1.0.0"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6

@@ -22,6 +22,7 @@ import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 
+import edu.unikiel.rtsys.kieler.kiml.ui.layouter.KimlGMFLayouter;
 import edu.unikiel.rtsys.kieler.kivik.Constants;
 import edu.unikiel.rtsys.kieler.kivik.internal.KivikComparator;
 import edu.unikiel.rtsys.kieler.kivik.internal.KivikCompareInput;
@@ -51,41 +52,48 @@ public class DiagramContentMergeViewer extends ContentMergeViewer {
 
 	private IPropertyChangeListener structureSelectionListener;
 
+	private KimlGMFLayouter gmfLayouter = new KimlGMFLayouter();
 
-	
-	protected DiagramContentMergeViewer(Composite parent, CompareConfiguration cc) {
+	protected DiagramContentMergeViewer(Composite parent,
+			CompareConfiguration cc) {
 		super(SWT.NONE, null, cc);
 		compareConfiguration = cc;
 		buildControl(parent);
 		structureSelectionListener = new IPropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent event) {
-				if (event.getProperty().equals(EMFCompareConstants.PROPERTY_STRUCTURE_SELECTION)) {
-					SelectionChangedEvent selectionChangedEvent = (SelectionChangedEvent) event.getNewValue();
-					if (selectionChangedEvent.getSelection() instanceof StructuredSelection){
-						StructuredSelection structuredSelection = (StructuredSelection) selectionChangedEvent.getSelection();
-						System.out.println("DCMV: Element:  " + structuredSelection.getFirstElement());
-						//TODO
-						// mark the selected elements in the left and right diagram 
+				if (event.getProperty().equals(
+						EMFCompareConstants.PROPERTY_STRUCTURE_SELECTION)) {
+					SelectionChangedEvent selectionChangedEvent = (SelectionChangedEvent) event
+							.getNewValue();
+					if (selectionChangedEvent.getSelection() instanceof StructuredSelection) {
+						StructuredSelection structuredSelection = (StructuredSelection) selectionChangedEvent
+								.getSelection();
+						System.out.println("DCMV: Element:  "
+								+ structuredSelection.getFirstElement());
+						// TODO
+						// mark the selected elements in the left and right
+						// diagram
 					}
 				}
 			}
 		};
-		compareConfiguration.addPropertyChangeListener(structureSelectionListener);
+		compareConfiguration
+				.addPropertyChangeListener(structureSelectionListener);
 	}
 
-	@Override
 	protected void copy(boolean leftToRight) {
 		// TODO Auto-generated method stub
 	}
 
-	@Override
 	protected void createControls(Composite composite) {
 		viewer_left = new DiagramGraphicalViewer();
 		viewer_left.createControl(composite);
 		viewer_left.getControl().setBackground(ColorConstants.listBackground);
+		// viewer_left.setRouteEventsToEditDomain(true);
 		viewer_right = new DiagramGraphicalViewer();
 		viewer_right.createControl(composite);
 		viewer_right.getControl().setBackground(ColorConstants.listBackground);
+		// viewer_right.setRouteEventsToEditDomain(true);
 	}
 
 	/**
@@ -104,13 +112,11 @@ public class DiagramContentMergeViewer extends ContentMergeViewer {
 	 * org.eclipse.compare.contentmergeviewer.ContentMergeViewer#getContents
 	 * (boolean)
 	 */
-	@Override
 	protected byte[] getContents(boolean left) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
 	protected void handleResizeAncestor(int x, int y, int width, int height) {
 		if (viewer_anc != null) {
 			if (width > 0) {
@@ -122,9 +128,9 @@ public class DiagramContentMergeViewer extends ContentMergeViewer {
 		}
 	}
 
-	@Override
 	protected void handleResizeLeftRight(int x, int y, int leftWidth,
 			int centerWidth, int rightWidth, int height) {
+
 		viewer_left.getControl().setBounds(x, y, leftWidth, height);
 		viewer_right.getControl().setBounds(x + leftWidth + centerWidth, y,
 				rightWidth, height);
@@ -194,30 +200,37 @@ public class DiagramContentMergeViewer extends ContentMergeViewer {
 	 * (java.lang.Object, java.lang.Object, java.lang.Object)
 	 */
 	protected void updateContent(Object ancestor, Object left, Object right) {
-		
+
 		if (left instanceof KivikTypedElementWrapper
 				&& ((KivikTypedElementWrapper) left).getViewModel() != null) {
 			diagram_left = ((KivikTypedElementWrapper) left).getViewModel();
-			DiagramEditingDomainFactory.getInstance().createEditingDomain(
-					diagram_left.eResource().getResourceSet());
+			// DiagramEditingDomainFactory.getInstance().createEditingDomain(
+			// diagram_left.eResource().getResourceSet());
 			viewer_left.setEditDomain(new DefaultEditDomain(null));
 			viewer_left.setEditPartFactory(EditPartService.getInstance());
 			viewer_left.setRootEditPart(new DiagramRootEditPart(diagram_left
 					.getMeasurementUnit()));
 			viewer_left.setContents(diagram_left);
+//			gmfLayouter.setRoot(viewer_left.getRootEditPart().getContents()
+//					.getChildren().get(0));
+//			gmfLayouter.layout();
+
 		}
 		if (right instanceof KivikTypedElementWrapper
 				&& ((KivikTypedElementWrapper) right).getViewModel() != null) {
 			diagram_right = ((KivikTypedElementWrapper) right).getViewModel();
 			DiagramEditingDomainFactory.getInstance().createEditingDomain(
-					diagram_right.eResource().getResourceSet());
+			diagram_right.eResource().getResourceSet());
 			viewer_right.setEditDomain(new DefaultEditDomain(null));
 			viewer_right.setEditPartFactory(EditPartService.getInstance());
 			viewer_right.setRootEditPart(new DiagramRootEditPart(diagram_right
 					.getMeasurementUnit()));
 			viewer_right.setContents(diagram_right);
+			gmfLayouter.setRoot(viewer_left.getRootEditPart().getContents()
+					.getChildren().get(0));
+			//gmfLayouter.layout();
 		}
-		
+
 	}
 
 }

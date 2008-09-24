@@ -1,9 +1,10 @@
 package edu.unikiel.rtsys.kieler.kivik.preferences;
 
-import org.eclipse.emf.compare.ui.EMFCompareUIMessages;
 import org.eclipse.jface.preference.*;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Group;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.dialogs.PreferenceLinkArea;
@@ -42,23 +43,27 @@ public class KivikPreferencePage extends FieldEditorPreferencePage implements
 				"org.eclipse.ui.preferencePages.ContentTypes", //$NON-NLS-1$
 				"See <a>{0}</a> to define model types", //$NON-NLS-1$
 				(IWorkbenchPreferenceContainer)getContainer(), null);
-		GridData gd = new GridData();
-		gd.horizontalSpan = 3;
-		gd.grabExcessHorizontalSpace = true;
-		gd.horizontalAlignment = GridData.FILL;
-		link.getControl().setLayoutData(gd);
-		
-		addField(new DirectoryFieldEditor(PreferenceConstants.P_PATH,
-				"&Directory preference:", getFieldEditorParent()));
-		addField(new BooleanFieldEditor(PreferenceConstants.P_BOOLEAN,
-				"&An example of a boolean preference", getFieldEditorParent()));
+		// define gl as GridLayout globally
+		GridLayout gl = null;
 
-		addField(new RadioGroupFieldEditor(PreferenceConstants.P_CHOICE,
-				"An example of a multiple-choice preference", 1,
-				new String[][] { { "&Choice 1", "choice1" },
-						{ "C&hoice 2", "choice2" } }, getFieldEditorParent()));
-		addField(new StringFieldEditor(PreferenceConstants.P_STRING,
-				"A &text preference:", getFieldEditorParent()));
+		// options group
+		Group options = new Group(this.getFieldEditorParent(), SWT.NONE);
+		options.setText("Options:");
+
+		StringFieldEditor sfe = new StringFieldEditor(
+				PreferenceConstants.P_STRING,
+				"Padding X:", options);
+		
+		options.setLayoutData(new GridData(GridData.FILL, GridData.FILL, true,
+				false, 2, 1));
+		gl = new GridLayout(2, true);
+		gl.marginWidth = 15;
+		gl.marginHeight = 10;
+		options.setLayout(gl);
+
+				// now add all the stuff
+		addField(sfe);
+
 	}
 
 	/*
