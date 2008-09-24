@@ -150,7 +150,6 @@ public class KimlGMFLayouter extends KimlAbstractLayouter {
 				childKNodeGroup.getLayout().getSize().setWidth(
 						childBounds.width);
 
-				System.out.println("------------------" + childBounds);
 				// set label and ID
 				childKNodeGroup.getLabel().setText(
 						KimlCommonHelper.getShortLabel(childNodeEditPart));
