@@ -27,4 +27,5 @@ Export-Package: edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph;uses:="org.
    org.eclipse.ui,
    edu.unikiel.rtsys.kieler.kiml.layout.util,
    edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph,
-   org.eclipse.gef"
+   org.eclipse.gef",
+ edu.unikiel.rtsys.kieler.kiml.layout.util

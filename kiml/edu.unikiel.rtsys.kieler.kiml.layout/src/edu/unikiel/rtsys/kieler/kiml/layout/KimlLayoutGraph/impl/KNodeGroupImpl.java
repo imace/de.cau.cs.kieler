@@ -42,6 +42,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.KNodeGroupImpl#getParentGroup <em>Parent Group</em>}</li>
  *   <li>{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.KNodeGroupImpl#getLayout <em>Layout</em>}</li>
  *   <li>{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.KNodeGroupImpl#getLabel <em>Label</em>}</li>
+ *   <li>{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.KNodeGroupImpl#getIdString <em>Id String</em>}</li>
  * </ul>
  * </p>
  *
@@ -109,6 +110,26 @@ public class KNodeGroupImpl extends EObjectImpl implements KNodeGroup {
 	protected KNodeGroupLabel label;
 
 	/**
+	 * The default value of the '{@link #getIdString() <em>Id String</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIdString()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String ID_STRING_EDEFAULT = "\"\"";
+
+	/**
+	 * The cached value of the '{@link #getIdString() <em>Id String</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIdString()
+	 * @generated
+	 * @ordered
+	 */
+	protected String idString = ID_STRING_EDEFAULT;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -134,7 +155,7 @@ public class KNodeGroupImpl extends EObjectImpl implements KNodeGroup {
 	 */
 	public EList<KNodeGroup> getSubNodeGroups() {
 		if (subNodeGroups == null) {
-			subNodeGroups = new EObjectResolvingEList<KNodeGroup>(KNodeGroup.class, this, KimlLayoutGraphPackage.KNODE_GROUP__SUB_NODE_GROUPS);
+			subNodeGroups = new EObjectWithInverseResolvingEList<KNodeGroup>(KNodeGroup.class, this, KimlLayoutGraphPackage.KNODE_GROUP__SUB_NODE_GROUPS, KimlLayoutGraphPackage.KNODE_GROUP__PARENT_GROUP);
 		}
 		return subNodeGroups;
 	}
@@ -194,11 +215,33 @@ public class KNodeGroupImpl extends EObjectImpl implements KNodeGroup {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setParentGroup(KNodeGroup newParentGroup) {
+	public NotificationChain basicSetParentGroup(KNodeGroup newParentGroup, NotificationChain msgs) {
 		KNodeGroup oldParentGroup = parentGroup;
 		parentGroup = newParentGroup;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KNODE_GROUP__PARENT_GROUP, oldParentGroup, parentGroup));
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KNODE_GROUP__PARENT_GROUP, oldParentGroup, newParentGroup);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setParentGroup(KNodeGroup newParentGroup) {
+		if (newParentGroup != parentGroup) {
+			NotificationChain msgs = null;
+			if (parentGroup != null)
+				msgs = ((InternalEObject)parentGroup).eInverseRemove(this, KimlLayoutGraphPackage.KNODE_GROUP__SUB_NODE_GROUPS, KNodeGroup.class, msgs);
+			if (newParentGroup != null)
+				msgs = ((InternalEObject)newParentGroup).eInverseAdd(this, KimlLayoutGraphPackage.KNODE_GROUP__SUB_NODE_GROUPS, KNodeGroup.class, msgs);
+			msgs = basicSetParentGroup(newParentGroup, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KNODE_GROUP__PARENT_GROUP, newParentGroup, newParentGroup));
 	}
 
 	/**
@@ -282,14 +325,41 @@ public class KNodeGroupImpl extends EObjectImpl implements KNodeGroup {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getIdString() {
+		return idString;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setIdString(String newIdString) {
+		String oldIdString = idString;
+		idString = newIdString;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KNODE_GROUP__ID_STRING, oldIdString, idString));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case KimlLayoutGraphPackage.KNODE_GROUP__SUB_NODE_GROUPS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getSubNodeGroups()).basicAdd(otherEnd, msgs);
 			case KimlLayoutGraphPackage.KNODE_GROUP__OUTGOING_EDGES:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOutgoingEdges()).basicAdd(otherEnd, msgs);
 			case KimlLayoutGraphPackage.KNODE_GROUP__INCOMING_EDGES:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getIncomingEdges()).basicAdd(otherEnd, msgs);
+			case KimlLayoutGraphPackage.KNODE_GROUP__PARENT_GROUP:
+				if (parentGroup != null)
+					msgs = ((InternalEObject)parentGroup).eInverseRemove(this, KimlLayoutGraphPackage.KNODE_GROUP__SUB_NODE_GROUPS, KNodeGroup.class, msgs);
+				return basicSetParentGroup((KNodeGroup)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -302,10 +372,14 @@ public class KNodeGroupImpl extends EObjectImpl implements KNodeGroup {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case KimlLayoutGraphPackage.KNODE_GROUP__SUB_NODE_GROUPS:
+				return ((InternalEList<?>)getSubNodeGroups()).basicRemove(otherEnd, msgs);
 			case KimlLayoutGraphPackage.KNODE_GROUP__OUTGOING_EDGES:
 				return ((InternalEList<?>)getOutgoingEdges()).basicRemove(otherEnd, msgs);
 			case KimlLayoutGraphPackage.KNODE_GROUP__INCOMING_EDGES:
 				return ((InternalEList<?>)getIncomingEdges()).basicRemove(otherEnd, msgs);
+			case KimlLayoutGraphPackage.KNODE_GROUP__PARENT_GROUP:
+				return basicSetParentGroup(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -333,6 +407,8 @@ public class KNodeGroupImpl extends EObjectImpl implements KNodeGroup {
 			case KimlLayoutGraphPackage.KNODE_GROUP__LABEL:
 				if (resolve) return getLabel();
 				return basicGetLabel();
+			case KimlLayoutGraphPackage.KNODE_GROUP__ID_STRING:
+				return getIdString();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -367,6 +443,9 @@ public class KNodeGroupImpl extends EObjectImpl implements KNodeGroup {
 			case KimlLayoutGraphPackage.KNODE_GROUP__LABEL:
 				setLabel((KNodeGroupLabel)newValue);
 				return;
+			case KimlLayoutGraphPackage.KNODE_GROUP__ID_STRING:
+				setIdString((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -397,6 +476,9 @@ public class KNodeGroupImpl extends EObjectImpl implements KNodeGroup {
 			case KimlLayoutGraphPackage.KNODE_GROUP__LABEL:
 				setLabel((KNodeGroupLabel)null);
 				return;
+			case KimlLayoutGraphPackage.KNODE_GROUP__ID_STRING:
+				setIdString(ID_STRING_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -421,8 +503,26 @@ public class KNodeGroupImpl extends EObjectImpl implements KNodeGroup {
 				return layout != null;
 			case KimlLayoutGraphPackage.KNODE_GROUP__LABEL:
 				return label != null;
+			case KimlLayoutGraphPackage.KNODE_GROUP__ID_STRING:
+				return ID_STRING_EDEFAULT == null ? idString != null : !ID_STRING_EDEFAULT.equals(idString);
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (idString: ");
+		result.append(idString);
+		result.append(')');
+		return result.toString();
 	}
 
 } //KNodeGroupImpl

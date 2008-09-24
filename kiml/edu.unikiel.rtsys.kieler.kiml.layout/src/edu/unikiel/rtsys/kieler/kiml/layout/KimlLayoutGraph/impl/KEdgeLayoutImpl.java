@@ -36,6 +36,7 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
  *   <li>{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.KEdgeLayoutImpl#getTargetPoint <em>Target Point</em>}</li>
  *   <li>{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.KEdgeLayoutImpl#getGridPoints <em>Grid Points</em>}</li>
  *   <li>{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.KEdgeLayoutImpl#getEdgeType <em>Edge Type</em>}</li>
+ *   <li>{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.KEdgeLayoutImpl#isUseLayout <em>Use Layout</em>}</li>
  * </ul>
  * </p>
  *
@@ -91,6 +92,26 @@ public class KEdgeLayoutImpl extends EObjectImpl implements KEdgeLayout {
 	 * @ordered
 	 */
 	protected EDGE_TYPE edgeType = EDGE_TYPE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isUseLayout() <em>Use Layout</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isUseLayout()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean USE_LAYOUT_EDEFAULT = true;
+
+	/**
+	 * The cached value of the '{@link #isUseLayout() <em>Use Layout</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isUseLayout()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean useLayout = USE_LAYOUT_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -225,6 +246,27 @@ public class KEdgeLayoutImpl extends EObjectImpl implements KEdgeLayout {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isUseLayout() {
+		return useLayout;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setUseLayout(boolean newUseLayout) {
+		boolean oldUseLayout = useLayout;
+		useLayout = newUseLayout;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KEDGE_LAYOUT__USE_LAYOUT, oldUseLayout, useLayout));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -238,6 +280,8 @@ public class KEdgeLayoutImpl extends EObjectImpl implements KEdgeLayout {
 				return getGridPoints();
 			case KimlLayoutGraphPackage.KEDGE_LAYOUT__EDGE_TYPE:
 				return getEdgeType();
+			case KimlLayoutGraphPackage.KEDGE_LAYOUT__USE_LAYOUT:
+				return isUseLayout() ? Boolean.TRUE : Boolean.FALSE;
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -264,6 +308,9 @@ public class KEdgeLayoutImpl extends EObjectImpl implements KEdgeLayout {
 			case KimlLayoutGraphPackage.KEDGE_LAYOUT__EDGE_TYPE:
 				setEdgeType((EDGE_TYPE)newValue);
 				return;
+			case KimlLayoutGraphPackage.KEDGE_LAYOUT__USE_LAYOUT:
+				setUseLayout(((Boolean)newValue).booleanValue());
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -288,6 +335,9 @@ public class KEdgeLayoutImpl extends EObjectImpl implements KEdgeLayout {
 			case KimlLayoutGraphPackage.KEDGE_LAYOUT__EDGE_TYPE:
 				setEdgeType(EDGE_TYPE_EDEFAULT);
 				return;
+			case KimlLayoutGraphPackage.KEDGE_LAYOUT__USE_LAYOUT:
+				setUseLayout(USE_LAYOUT_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -308,6 +358,8 @@ public class KEdgeLayoutImpl extends EObjectImpl implements KEdgeLayout {
 				return gridPoints != null && !gridPoints.isEmpty();
 			case KimlLayoutGraphPackage.KEDGE_LAYOUT__EDGE_TYPE:
 				return edgeType != EDGE_TYPE_EDEFAULT;
+			case KimlLayoutGraphPackage.KEDGE_LAYOUT__USE_LAYOUT:
+				return useLayout != USE_LAYOUT_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -324,6 +376,8 @@ public class KEdgeLayoutImpl extends EObjectImpl implements KEdgeLayout {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (edgeType: ");
 		result.append(edgeType);
+		result.append(", useLayout: ");
+		result.append(useLayout);
 		result.append(')');
 		return result.toString();
 	}

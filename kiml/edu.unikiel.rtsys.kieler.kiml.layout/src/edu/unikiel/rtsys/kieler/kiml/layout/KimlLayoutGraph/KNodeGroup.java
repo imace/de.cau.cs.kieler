@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup#getParentGroup <em>Parent Group</em>}</li>
  *   <li>{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup#getLayout <em>Layout</em>}</li>
  *   <li>{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup#getLabel <em>Label</em>}</li>
+ *   <li>{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup#getIdString <em>Id String</em>}</li>
  * </ul>
  * </p>
  *
@@ -35,6 +36,7 @@ public interface KNodeGroup extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Sub Node Groups</b></em>' reference list.
 	 * The list contents are of type {@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup}.
+	 * It is bidirectional and its opposite is '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup#getParentGroup <em>Parent Group</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Sub Node Groups</em>' reference list isn't clear,
@@ -43,7 +45,8 @@ public interface KNodeGroup extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Sub Node Groups</em>' reference list.
 	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKNodeGroup_SubNodeGroups()
-	 * @model
+	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup#getParentGroup
+	 * @model opposite="parentGroup"
 	 * @generated
 	 */
 	EList<KNodeGroup> getSubNodeGroups();
@@ -86,6 +89,7 @@ public interface KNodeGroup extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Parent Group</b></em>' reference.
+	 * It is bidirectional and its opposite is '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup#getSubNodeGroups <em>Sub Node Groups</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Parent Group</em>' reference isn't clear,
@@ -95,7 +99,8 @@ public interface KNodeGroup extends EObject {
 	 * @return the value of the '<em>Parent Group</em>' reference.
 	 * @see #setParentGroup(KNodeGroup)
 	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKNodeGroup_ParentGroup()
-	 * @model required="true"
+	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup#getSubNodeGroups
+	 * @model opposite="subNodeGroups" required="true"
 	 * @generated
 	 */
 	KNodeGroup getParentGroup();
@@ -161,5 +166,32 @@ public interface KNodeGroup extends EObject {
 	 * @generated
 	 */
 	void setLabel(KNodeGroupLabel value);
+
+	/**
+	 * Returns the value of the '<em><b>Id String</b></em>' attribute.
+	 * The default value is <code>"\"\""</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Id String</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Id String</em>' attribute.
+	 * @see #setIdString(String)
+	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKNodeGroup_IdString()
+	 * @model default="\"\"" required="true"
+	 * @generated
+	 */
+	String getIdString();
+
+	/**
+	 * Sets the value of the '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup#getIdString <em>Id String</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Id String</em>' attribute.
+	 * @see #getIdString()
+	 * @generated
+	 */
+	void setIdString(String value);
 
 } // KNodeGroup

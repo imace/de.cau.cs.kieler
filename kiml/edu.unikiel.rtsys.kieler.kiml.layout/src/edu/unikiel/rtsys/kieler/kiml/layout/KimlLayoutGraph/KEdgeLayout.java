@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KEdgeLayout#getTargetPoint <em>Target Point</em>}</li>
  *   <li>{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KEdgeLayout#getGridPoints <em>Grid Points</em>}</li>
  *   <li>{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KEdgeLayout#getEdgeType <em>Edge Type</em>}</li>
+ *   <li>{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KEdgeLayout#isUseLayout <em>Use Layout</em>}</li>
  * </ul>
  * </p>
  *
@@ -126,5 +127,32 @@ public interface KEdgeLayout extends EObject {
 	 * @generated
 	 */
 	void setEdgeType(EDGE_TYPE value);
+
+	/**
+	 * Returns the value of the '<em><b>Use Layout</b></em>' attribute.
+	 * The default value is <code>"true"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Use Layout</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Use Layout</em>' attribute.
+	 * @see #setUseLayout(boolean)
+	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKEdgeLayout_UseLayout()
+	 * @model default="true" required="true"
+	 * @generated
+	 */
+	boolean isUseLayout();
+
+	/**
+	 * Sets the value of the '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KEdgeLayout#isUseLayout <em>Use Layout</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Use Layout</em>' attribute.
+	 * @see #isUseLayout()
+	 * @generated
+	 */
+	void setUseLayout(boolean value);
 
 } // KEdgeLayout

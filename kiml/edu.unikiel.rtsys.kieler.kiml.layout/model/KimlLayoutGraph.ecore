@@ -27,6 +27,9 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="location" lowerBound="1"
         eType="#//KPoint"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="size" lowerBound="1" eType="#//KDimension"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="useLayout" lowerBound="1"
+        eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EBoolean"
+        defaultValueLiteral="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="KEdge">
     <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
@@ -47,19 +50,25 @@
         eType="#//KPoint"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="edgeType" lowerBound="1"
         eType="#//EDGE_TYPE"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="useLayout" lowerBound="1"
+        eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EBoolean"
+        defaultValueLiteral="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="KNodeGroup">
     <eStructuralFeatures xsi:type="ecore:EReference" name="subNodeGroups" upperBound="-1"
-        eType="#//KNodeGroup"/>
+        eType="#//KNodeGroup" eOpposite="#//KNodeGroup/parentGroup"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="outgoingEdges" upperBound="-1"
         eType="#//KEdge" eOpposite="#//KEdge/source"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="incomingEdges" upperBound="-1"
         eType="#//KEdge" eOpposite="#//KEdge/target"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parentGroup" lowerBound="1"
-        eType="#//KNodeGroup"/>
+        eType="#//KNodeGroup" eOpposite="#//KNodeGroup/subNodeGroups"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="layout" lowerBound="1"
         eType="#//KNodeGroupLayout"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="label" lowerBound="1" eType="#//KNodeGroupLabel"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="idString" lowerBound="1"
+        eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"
+        defaultValueLiteral="&quot;&quot;"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="KNodeGroupLayout" eSuperTypes="#//KShapeLayout">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="layoutType" lowerBound="1"
@@ -67,7 +76,8 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="layoutOptions" lowerBound="1"
         eType="#//LAYOUT_OPTION"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="layouterName" lowerBound="1"
-        eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+        eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"
+        defaultValueLiteral="&quot;&quot;"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="insets" lowerBound="1"
         eType="#//KInsets"/>
   </eClassifiers>
@@ -127,5 +137,15 @@
     <eLiterals name="OUTSIDE_SOUTH" value="6" literal="OUTSIDE_SOUTH"/>
     <eLiterals name="OUTSIDE_WEST" value="7"/>
     <eLiterals name="OUTSIDE_EAST" value="8"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LAYOUTER_INFO">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="layouterName" lowerBound="1"
+        eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="layoutType" lowerBound="1"
+        eType="#//LAYOUT_TYPE"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="layoutOption" lowerBound="1"
+        eType="#//LAYOUT_OPTION"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="layoutProviderID" lowerBound="1"
+        eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>

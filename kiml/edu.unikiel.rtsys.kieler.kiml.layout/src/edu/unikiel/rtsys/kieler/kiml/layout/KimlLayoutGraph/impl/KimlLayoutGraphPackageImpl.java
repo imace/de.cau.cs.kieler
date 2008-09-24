@@ -142,6 +142,13 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass layouteR_INFOEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EEnum edgE_TYPEEEnum = null;
 
 	/**
@@ -392,6 +399,15 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getKShapeLayout_UseLayout() {
+		return (EAttribute)kShapeLayoutEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getKEdge() {
 		return kEdgeEClass;
 	}
@@ -482,6 +498,15 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getKEdgeLayout_UseLayout() {
+		return (EAttribute)kEdgeLayoutEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getKNodeGroup() {
 		return kNodeGroupEClass;
 	}
@@ -538,6 +563,15 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 	 */
 	public EReference getKNodeGroup_Label() {
 		return (EReference)kNodeGroupEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getKNodeGroup_IdString() {
+		return (EAttribute)kNodeGroupEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -680,6 +714,51 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getLAYOUTER_INFO() {
+		return layouteR_INFOEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getLAYOUTER_INFO_LayouterName() {
+		return (EAttribute)layouteR_INFOEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getLAYOUTER_INFO_LayoutType() {
+		return (EAttribute)layouteR_INFOEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getLAYOUTER_INFO_LayoutOption() {
+		return (EAttribute)layouteR_INFOEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getLAYOUTER_INFO_LayoutProviderID() {
+		return (EAttribute)layouteR_INFOEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getEDGE_TYPE() {
 		return edgE_TYPEEEnum;
 	}
@@ -768,6 +847,7 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 		kShapeLayoutEClass = createEClass(KSHAPE_LAYOUT);
 		createEReference(kShapeLayoutEClass, KSHAPE_LAYOUT__LOCATION);
 		createEReference(kShapeLayoutEClass, KSHAPE_LAYOUT__SIZE);
+		createEAttribute(kShapeLayoutEClass, KSHAPE_LAYOUT__USE_LAYOUT);
 
 		kEdgeEClass = createEClass(KEDGE);
 		createEReference(kEdgeEClass, KEDGE__SOURCE);
@@ -780,6 +860,7 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 		createEReference(kEdgeLayoutEClass, KEDGE_LAYOUT__TARGET_POINT);
 		createEReference(kEdgeLayoutEClass, KEDGE_LAYOUT__GRID_POINTS);
 		createEAttribute(kEdgeLayoutEClass, KEDGE_LAYOUT__EDGE_TYPE);
+		createEAttribute(kEdgeLayoutEClass, KEDGE_LAYOUT__USE_LAYOUT);
 
 		kNodeGroupEClass = createEClass(KNODE_GROUP);
 		createEReference(kNodeGroupEClass, KNODE_GROUP__SUB_NODE_GROUPS);
@@ -788,6 +869,7 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 		createEReference(kNodeGroupEClass, KNODE_GROUP__PARENT_GROUP);
 		createEReference(kNodeGroupEClass, KNODE_GROUP__LAYOUT);
 		createEReference(kNodeGroupEClass, KNODE_GROUP__LABEL);
+		createEAttribute(kNodeGroupEClass, KNODE_GROUP__ID_STRING);
 
 		kNodeGroupLayoutEClass = createEClass(KNODE_GROUP_LAYOUT);
 		createEAttribute(kNodeGroupLayoutEClass, KNODE_GROUP_LAYOUT__LAYOUT_TYPE);
@@ -809,6 +891,12 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 
 		kNodeGroupLabelLayoutEClass = createEClass(KNODE_GROUP_LABEL_LAYOUT);
 		createEAttribute(kNodeGroupLabelLayoutEClass, KNODE_GROUP_LABEL_LAYOUT__LABEL_PLACEMENT);
+
+		layouteR_INFOEClass = createEClass(LAYOUTER_INFO);
+		createEAttribute(layouteR_INFOEClass, LAYOUTER_INFO__LAYOUTER_NAME);
+		createEAttribute(layouteR_INFOEClass, LAYOUTER_INFO__LAYOUT_TYPE);
+		createEAttribute(layouteR_INFOEClass, LAYOUTER_INFO__LAYOUT_OPTION);
+		createEAttribute(layouteR_INFOEClass, LAYOUTER_INFO__LAYOUT_PROVIDER_ID);
 
 		// Create enums
 		edgE_TYPEEEnum = createEEnum(EDGE_TYPE);
@@ -876,6 +964,7 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 		initEClass(kShapeLayoutEClass, KShapeLayout.class, "KShapeLayout", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getKShapeLayout_Location(), this.getKPoint(), null, "location", null, 1, 1, KShapeLayout.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getKShapeLayout_Size(), this.getKDimension(), null, "size", null, 1, 1, KShapeLayout.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getKShapeLayout_UseLayout(), theEcorePackage.getEBoolean(), "useLayout", "true", 1, 1, KShapeLayout.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(kEdgeEClass, KEdge.class, "KEdge", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getKEdge_Source(), this.getKNodeGroup(), this.getKNodeGroup_OutgoingEdges(), "source", null, 1, 1, KEdge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -888,19 +977,21 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 		initEReference(getKEdgeLayout_TargetPoint(), this.getKPoint(), null, "targetPoint", null, 1, 1, KEdgeLayout.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getKEdgeLayout_GridPoints(), this.getKPoint(), null, "gridPoints", null, 0, -1, KEdgeLayout.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getKEdgeLayout_EdgeType(), this.getEDGE_TYPE(), "edgeType", null, 1, 1, KEdgeLayout.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getKEdgeLayout_UseLayout(), theEcorePackage.getEBoolean(), "useLayout", "true", 1, 1, KEdgeLayout.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(kNodeGroupEClass, KNodeGroup.class, "KNodeGroup", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getKNodeGroup_SubNodeGroups(), this.getKNodeGroup(), null, "subNodeGroups", null, 0, -1, KNodeGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getKNodeGroup_SubNodeGroups(), this.getKNodeGroup(), this.getKNodeGroup_ParentGroup(), "subNodeGroups", null, 0, -1, KNodeGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getKNodeGroup_OutgoingEdges(), this.getKEdge(), this.getKEdge_Source(), "outgoingEdges", null, 0, -1, KNodeGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getKNodeGroup_IncomingEdges(), this.getKEdge(), this.getKEdge_Target(), "incomingEdges", null, 0, -1, KNodeGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getKNodeGroup_ParentGroup(), this.getKNodeGroup(), null, "parentGroup", null, 1, 1, KNodeGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getKNodeGroup_ParentGroup(), this.getKNodeGroup(), this.getKNodeGroup_SubNodeGroups(), "parentGroup", null, 1, 1, KNodeGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getKNodeGroup_Layout(), this.getKNodeGroupLayout(), null, "layout", null, 1, 1, KNodeGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getKNodeGroup_Label(), this.getKNodeGroupLabel(), null, "label", null, 1, 1, KNodeGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getKNodeGroup_IdString(), theEcorePackage.getEString(), "idString", "\"\"", 1, 1, KNodeGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(kNodeGroupLayoutEClass, KNodeGroupLayout.class, "KNodeGroupLayout", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getKNodeGroupLayout_LayoutType(), this.getLAYOUT_TYPE(), "layoutType", "", 1, 1, KNodeGroupLayout.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getKNodeGroupLayout_LayoutOptions(), this.getLAYOUT_OPTION(), "layoutOptions", null, 1, 1, KNodeGroupLayout.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getKNodeGroupLayout_LayouterName(), theEcorePackage.getEString(), "layouterName", null, 1, 1, KNodeGroupLayout.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getKNodeGroupLayout_LayouterName(), theEcorePackage.getEString(), "layouterName", "\"\"", 1, 1, KNodeGroupLayout.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getKNodeGroupLayout_Insets(), this.getKInsets(), null, "insets", null, 1, 1, KNodeGroupLayout.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(kLabelEClass, KLabel.class, "KLabel", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -917,6 +1008,12 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 
 		initEClass(kNodeGroupLabelLayoutEClass, KNodeGroupLabelLayout.class, "KNodeGroupLabelLayout", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getKNodeGroupLabelLayout_LabelPlacement(), this.getNODE_LABEL_PLACEMENT(), "labelPlacement", null, 1, 1, KNodeGroupLabelLayout.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(layouteR_INFOEClass, edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO.class, "LAYOUTER_INFO", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getLAYOUTER_INFO_LayouterName(), theEcorePackage.getEString(), "layouterName", null, 1, 1, edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getLAYOUTER_INFO_LayoutType(), this.getLAYOUT_TYPE(), "layoutType", null, 1, 1, edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getLAYOUTER_INFO_LayoutOption(), this.getLAYOUT_OPTION(), "layoutOption", null, 1, 1, edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getLAYOUTER_INFO_LayoutProviderID(), theEcorePackage.getEString(), "layoutProviderID", null, 1, 1, edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(edgE_TYPEEEnum, edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.EDGE_TYPE.class, "EDGE_TYPE");

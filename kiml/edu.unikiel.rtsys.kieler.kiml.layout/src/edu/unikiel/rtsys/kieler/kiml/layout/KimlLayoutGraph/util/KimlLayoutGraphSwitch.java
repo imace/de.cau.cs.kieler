@@ -176,6 +176,12 @@ public class KimlLayoutGraphSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case KimlLayoutGraphPackage.LAYOUTER_INFO: {
+				LAYOUTER_INFO layouteR_INFO = (LAYOUTER_INFO)theEObject;
+				T result = caseLAYOUTER_INFO(layouteR_INFO);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -387,6 +393,21 @@ public class KimlLayoutGraphSwitch<T> {
 	 * @generated
 	 */
 	public T caseKNodeGroupLabelLayout(KNodeGroupLabelLayout object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>LAYOUTER INFO</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>LAYOUTER INFO</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseLAYOUTER_INFO(LAYOUTER_INFO object) {
 		return null;
 	}
 

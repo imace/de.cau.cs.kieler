@@ -88,6 +88,7 @@ public interface KNodeGroupLayout extends KShapeLayout {
 
 	/**
 	 * Returns the value of the '<em><b>Layouter Name</b></em>' attribute.
+	 * The default value is <code>"\"\""</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Layouter Name</em>' attribute isn't clear,
@@ -97,7 +98,7 @@ public interface KNodeGroupLayout extends KShapeLayout {
 	 * @return the value of the '<em>Layouter Name</em>' attribute.
 	 * @see #setLayouterName(String)
 	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKNodeGroupLayout_LayouterName()
-	 * @model required="true"
+	 * @model default="\"\"" required="true"
 	 * @generated
 	 */
 	String getLayouterName();

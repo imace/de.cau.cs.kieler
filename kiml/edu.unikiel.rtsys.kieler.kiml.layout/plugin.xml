@@ -6,9 +6,10 @@
    <extension
          point="org.eclipse.ui.preferencePages">
       <page
-            name="Layout Preferences"
+            category="edu.unikiel.rtsys.kieler.kiml.ui.PreferencePage"
             class="edu.unikiel.rtsys.kieler.kiml.layout.preferences.LayoutPreferencePage"
-            id="edu.unikiel.rtsys.kieler.kiml.layout.preferences.LayoutPreferencePage">
+            id="edu.unikiel.rtsys.kieler.kiml.layout.preferences.LayoutPreferencePage"
+            name="Layout Engine">
       </page>
    </extension>
    <extension
@@ -26,6 +27,13 @@
             class="edu.unikiel.rtsys.kieler.kiml.layout.properties.LayoutPropertyPage"
             id="edu.unikiel.rtsys.kieler.kiml.layout.properties.samplePropertyPage">
       </page>
+   </extension>
+   <extension
+         point="edu.unikiel.rtsys.kieler.kiml.layout.kimlLayoutProvider">
+      <kimlLayoutProvider
+            class="edu.unikiel.rtsys.kieler.kiml.layout.services.KimlNullLayoutProvider">
+         <Priority></Priority>
+      </kimlLayoutProvider>
    </extension>
 
 </plugin>

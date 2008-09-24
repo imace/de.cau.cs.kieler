@@ -134,6 +134,15 @@ public interface KimlLayoutGraphFactory extends EFactory {
 	KNodeGroupLabelLayout createKNodeGroupLabelLayout();
 
 	/**
+	 * Returns a new object of class '<em>LAYOUTER INFO</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>LAYOUTER INFO</em>'.
+	 * @generated
+	 */
+	LAYOUTER_INFO createLAYOUTER_INFO();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

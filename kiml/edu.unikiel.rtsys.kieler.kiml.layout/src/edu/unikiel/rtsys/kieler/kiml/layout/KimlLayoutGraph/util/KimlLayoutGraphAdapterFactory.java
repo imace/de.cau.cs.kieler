@@ -128,6 +128,10 @@ public class KimlLayoutGraphAdapterFactory extends AdapterFactoryImpl {
 				return createKNodeGroupLabelLayoutAdapter();
 			}
 			@Override
+			public Adapter caseLAYOUTER_INFO(LAYOUTER_INFO object) {
+				return createLAYOUTER_INFOAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -340,6 +344,20 @@ public class KimlLayoutGraphAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createKNodeGroupLabelLayoutAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO <em>LAYOUTER INFO</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO
+	 * @generated
+	 */
+	public Adapter createLAYOUTER_INFOAdapter() {
 		return null;
 	}
 

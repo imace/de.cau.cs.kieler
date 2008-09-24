@@ -73,6 +73,7 @@ public class KimlLayoutGraphFactoryImpl extends EFactoryImpl implements KimlLayo
 			case KimlLayoutGraphPackage.KEDGE_LABEL_LAYOUT: return createKEdgeLabelLayout();
 			case KimlLayoutGraphPackage.KNODE_GROUP_LABEL: return createKNodeGroupLabel();
 			case KimlLayoutGraphPackage.KNODE_GROUP_LABEL_LAYOUT: return createKNodeGroupLabelLayout();
+			case KimlLayoutGraphPackage.LAYOUTER_INFO: return createLAYOUTER_INFO();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -242,6 +243,16 @@ public class KimlLayoutGraphFactoryImpl extends EFactoryImpl implements KimlLayo
 	public KNodeGroupLabelLayout createKNodeGroupLabelLayout() {
 		KNodeGroupLabelLayoutImpl kNodeGroupLabelLayout = new KNodeGroupLabelLayoutImpl();
 		return kNodeGroupLabelLayout;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public LAYOUTER_INFO createLAYOUTER_INFO() {
+		LAYOUTER_INFOImpl layouteR_INFO = new LAYOUTER_INFOImpl();
+		return layouteR_INFO;
 	}
 
 	/**

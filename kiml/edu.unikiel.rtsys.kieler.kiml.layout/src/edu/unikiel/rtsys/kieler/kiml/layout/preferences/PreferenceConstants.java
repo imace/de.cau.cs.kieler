@@ -5,12 +5,7 @@ package edu.unikiel.rtsys.kieler.kiml.layout.preferences;
  */
 public class PreferenceConstants {
 
-	public static final String P_PATH = "pathPreference";
+	public static final String PREF_LAYOUT_LAYOUT_CONNECTION_LABELS = "pref.layout.layout.connection.labels";
+	public static final String PREF_LAYOUT_DEFAULT_LAYOUTER = "pref.layout.default.layouter";
 
-	public static final String P_BOOLEAN = "booleanPreference";
-
-	public static final String P_CHOICE = "choicePreference";
-
-	public static final String P_STRING = "stringPreference";
-	
 }

@@ -58,7 +58,7 @@
                   
                </documentation>
                <appinfo>
-                  <meta.attribute kind="java" basedOn="edu.unikiel.rtsys.kieler.kiml.layout.services.KimlLayoutProvider:"/>
+                  <meta.attribute kind="java" basedOn="edu.unikiel.rtsys.kieler.kiml.layout.services.KimlAbstractLayoutProvider:"/>
                </appinfo>
             </annotation>
          </attribute>

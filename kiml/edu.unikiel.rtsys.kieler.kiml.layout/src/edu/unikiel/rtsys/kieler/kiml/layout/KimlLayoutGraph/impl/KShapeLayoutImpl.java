@@ -28,6 +28,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  * <ul>
  *   <li>{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.KShapeLayoutImpl#getLocation <em>Location</em>}</li>
  *   <li>{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.KShapeLayoutImpl#getSize <em>Size</em>}</li>
+ *   <li>{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.KShapeLayoutImpl#isUseLayout <em>Use Layout</em>}</li>
  * </ul>
  * </p>
  *
@@ -53,6 +54,26 @@ public abstract class KShapeLayoutImpl extends EObjectImpl implements KShapeLayo
 	 * @ordered
 	 */
 	protected KDimension size;
+
+	/**
+	 * The default value of the '{@link #isUseLayout() <em>Use Layout</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isUseLayout()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean USE_LAYOUT_EDEFAULT = true;
+
+	/**
+	 * The cached value of the '{@link #isUseLayout() <em>Use Layout</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isUseLayout()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean useLayout = USE_LAYOUT_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -154,6 +175,27 @@ public abstract class KShapeLayoutImpl extends EObjectImpl implements KShapeLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isUseLayout() {
+		return useLayout;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setUseLayout(boolean newUseLayout) {
+		boolean oldUseLayout = useLayout;
+		useLayout = newUseLayout;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KSHAPE_LAYOUT__USE_LAYOUT, oldUseLayout, useLayout));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -163,6 +205,8 @@ public abstract class KShapeLayoutImpl extends EObjectImpl implements KShapeLayo
 			case KimlLayoutGraphPackage.KSHAPE_LAYOUT__SIZE:
 				if (resolve) return getSize();
 				return basicGetSize();
+			case KimlLayoutGraphPackage.KSHAPE_LAYOUT__USE_LAYOUT:
+				return isUseLayout() ? Boolean.TRUE : Boolean.FALSE;
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -180,6 +224,9 @@ public abstract class KShapeLayoutImpl extends EObjectImpl implements KShapeLayo
 				return;
 			case KimlLayoutGraphPackage.KSHAPE_LAYOUT__SIZE:
 				setSize((KDimension)newValue);
+				return;
+			case KimlLayoutGraphPackage.KSHAPE_LAYOUT__USE_LAYOUT:
+				setUseLayout(((Boolean)newValue).booleanValue());
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -199,6 +246,9 @@ public abstract class KShapeLayoutImpl extends EObjectImpl implements KShapeLayo
 			case KimlLayoutGraphPackage.KSHAPE_LAYOUT__SIZE:
 				setSize((KDimension)null);
 				return;
+			case KimlLayoutGraphPackage.KSHAPE_LAYOUT__USE_LAYOUT:
+				setUseLayout(USE_LAYOUT_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -215,8 +265,26 @@ public abstract class KShapeLayoutImpl extends EObjectImpl implements KShapeLayo
 				return location != null;
 			case KimlLayoutGraphPackage.KSHAPE_LAYOUT__SIZE:
 				return size != null;
+			case KimlLayoutGraphPackage.KSHAPE_LAYOUT__USE_LAYOUT:
+				return useLayout != USE_LAYOUT_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (useLayout: ");
+		result.append(useLayout);
+		result.append(')');
+		return result.toString();
 	}
 
 } //KShapeLayoutImpl

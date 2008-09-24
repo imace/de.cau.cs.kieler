@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KShapeLayout#getLocation <em>Location</em>}</li>
  *   <li>{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KShapeLayout#getSize <em>Size</em>}</li>
+ *   <li>{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KShapeLayout#isUseLayout <em>Use Layout</em>}</li>
  * </ul>
  * </p>
  *
@@ -77,5 +78,32 @@ public interface KShapeLayout extends EObject {
 	 * @generated
 	 */
 	void setSize(KDimension value);
+
+	/**
+	 * Returns the value of the '<em><b>Use Layout</b></em>' attribute.
+	 * The default value is <code>"true"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Use Layout</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Use Layout</em>' attribute.
+	 * @see #setUseLayout(boolean)
+	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKShapeLayout_UseLayout()
+	 * @model default="true" required="true"
+	 * @generated
+	 */
+	boolean isUseLayout();
+
+	/**
+	 * Sets the value of the '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KShapeLayout#isUseLayout <em>Use Layout</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Use Layout</em>' attribute.
+	 * @see #isUseLayout()
+	 * @generated
+	 */
+	void setUseLayout(boolean value);
 
 } // KShapeLayout

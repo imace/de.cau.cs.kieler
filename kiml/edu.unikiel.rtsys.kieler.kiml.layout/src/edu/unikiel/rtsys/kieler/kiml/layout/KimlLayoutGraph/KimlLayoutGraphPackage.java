@@ -246,13 +246,22 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	int KSHAPE_LAYOUT__SIZE = 1;
 
 	/**
+	 * The feature id for the '<em><b>Use Layout</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KSHAPE_LAYOUT__USE_LAYOUT = 2;
+
+	/**
 	 * The number of structural features of the '<em>KShape Layout</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int KSHAPE_LAYOUT_FEATURE_COUNT = 2;
+	int KSHAPE_LAYOUT_FEATURE_COUNT = 3;
 
 	/**
 	 * The meta object id for the '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.KEdgeImpl <em>KEdge</em>}' class.
@@ -356,13 +365,22 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	int KEDGE_LAYOUT__EDGE_TYPE = 3;
 
 	/**
+	 * The feature id for the '<em><b>Use Layout</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KEDGE_LAYOUT__USE_LAYOUT = 4;
+
+	/**
 	 * The number of structural features of the '<em>KEdge Layout</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int KEDGE_LAYOUT_FEATURE_COUNT = 4;
+	int KEDGE_LAYOUT_FEATURE_COUNT = 5;
 
 	/**
 	 * The meta object id for the '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.KNodeGroupImpl <em>KNode Group</em>}' class.
@@ -429,13 +447,22 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	int KNODE_GROUP__LABEL = 5;
 
 	/**
+	 * The feature id for the '<em><b>Id String</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KNODE_GROUP__ID_STRING = 6;
+
+	/**
 	 * The number of structural features of the '<em>KNode Group</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int KNODE_GROUP_FEATURE_COUNT = 6;
+	int KNODE_GROUP_FEATURE_COUNT = 7;
 
 	/**
 	 * The meta object id for the '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.KNodeGroupLayoutImpl <em>KNode Group Layout</em>}' class.
@@ -464,6 +491,15 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	 * @ordered
 	 */
 	int KNODE_GROUP_LAYOUT__SIZE = KSHAPE_LAYOUT__SIZE;
+
+	/**
+	 * The feature id for the '<em><b>Use Layout</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KNODE_GROUP_LAYOUT__USE_LAYOUT = KSHAPE_LAYOUT__USE_LAYOUT;
 
 	/**
 	 * The feature id for the '<em><b>Layout Type</b></em>' attribute.
@@ -604,6 +640,15 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	int KEDGE_LABEL_LAYOUT__SIZE = KSHAPE_LAYOUT__SIZE;
 
 	/**
+	 * The feature id for the '<em><b>Use Layout</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KEDGE_LABEL_LAYOUT__USE_LAYOUT = KSHAPE_LAYOUT__USE_LAYOUT;
+
+	/**
 	 * The feature id for the '<em><b>Label Placement</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -687,6 +732,15 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	int KNODE_GROUP_LABEL_LAYOUT__SIZE = KSHAPE_LAYOUT__SIZE;
 
 	/**
+	 * The feature id for the '<em><b>Use Layout</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KNODE_GROUP_LABEL_LAYOUT__USE_LAYOUT = KSHAPE_LAYOUT__USE_LAYOUT;
+
+	/**
 	 * The feature id for the '<em><b>Label Placement</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -705,6 +759,61 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	int KNODE_GROUP_LABEL_LAYOUT_FEATURE_COUNT = KSHAPE_LAYOUT_FEATURE_COUNT + 1;
 
 	/**
+	 * The meta object id for the '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.LAYOUTER_INFOImpl <em>LAYOUTER INFO</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.LAYOUTER_INFOImpl
+	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getLAYOUTER_INFO()
+	 * @generated
+	 */
+	int LAYOUTER_INFO = 14;
+
+	/**
+	 * The feature id for the '<em><b>Layouter Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LAYOUTER_INFO__LAYOUTER_NAME = 0;
+
+	/**
+	 * The feature id for the '<em><b>Layout Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LAYOUTER_INFO__LAYOUT_TYPE = 1;
+
+	/**
+	 * The feature id for the '<em><b>Layout Option</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LAYOUTER_INFO__LAYOUT_OPTION = 2;
+
+	/**
+	 * The feature id for the '<em><b>Layout Provider ID</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LAYOUTER_INFO__LAYOUT_PROVIDER_ID = 3;
+
+	/**
+	 * The number of structural features of the '<em>LAYOUTER INFO</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LAYOUTER_INFO_FEATURE_COUNT = 4;
+
+	/**
 	 * The meta object id for the '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.EDGE_TYPE <em>EDGE TYPE</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -712,7 +821,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getEDGE_TYPE()
 	 * @generated
 	 */
-	int EDGE_TYPE = 14;
+	int EDGE_TYPE = 15;
 
 	/**
 	 * The meta object id for the '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_TYPE <em>LAYOUT TYPE</em>}' enum.
@@ -722,7 +831,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getLAYOUT_TYPE()
 	 * @generated
 	 */
-	int LAYOUT_TYPE = 15;
+	int LAYOUT_TYPE = 16;
 
 	/**
 	 * The meta object id for the '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_OPTION <em>LAYOUT OPTION</em>}' enum.
@@ -732,7 +841,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getLAYOUT_OPTION()
 	 * @generated
 	 */
-	int LAYOUT_OPTION = 16;
+	int LAYOUT_OPTION = 17;
 
 	/**
 	 * The meta object id for the '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.EDGE_LABEL_PLACEMENT <em>EDGE LABEL PLACEMENT</em>}' enum.
@@ -742,7 +851,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getEDGE_LABEL_PLACEMENT()
 	 * @generated
 	 */
-	int EDGE_LABEL_PLACEMENT = 17;
+	int EDGE_LABEL_PLACEMENT = 18;
 
 	/**
 	 * The meta object id for the '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.NODE_LABEL_PLACEMENT <em>NODE LABEL PLACEMENT</em>}' enum.
@@ -752,7 +861,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getNODE_LABEL_PLACEMENT()
 	 * @generated
 	 */
-	int NODE_LABEL_PLACEMENT = 18;
+	int NODE_LABEL_PLACEMENT = 19;
 
 
 	/**
@@ -927,6 +1036,17 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	EReference getKShapeLayout_Size();
 
 	/**
+	 * Returns the meta object for the attribute '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KShapeLayout#isUseLayout <em>Use Layout</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Use Layout</em>'.
+	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KShapeLayout#isUseLayout()
+	 * @see #getKShapeLayout()
+	 * @generated
+	 */
+	EAttribute getKShapeLayout_UseLayout();
+
+	/**
 	 * Returns the meta object for class '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KEdge <em>KEdge</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1035,6 +1155,17 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	EAttribute getKEdgeLayout_EdgeType();
 
 	/**
+	 * Returns the meta object for the attribute '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KEdgeLayout#isUseLayout <em>Use Layout</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Use Layout</em>'.
+	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KEdgeLayout#isUseLayout()
+	 * @see #getKEdgeLayout()
+	 * @generated
+	 */
+	EAttribute getKEdgeLayout_UseLayout();
+
+	/**
 	 * Returns the meta object for class '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup <em>KNode Group</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1109,6 +1240,17 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getKNodeGroup_Label();
+
+	/**
+	 * Returns the meta object for the attribute '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup#getIdString <em>Id String</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Id String</em>'.
+	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup#getIdString()
+	 * @see #getKNodeGroup()
+	 * @generated
+	 */
+	EAttribute getKNodeGroup_IdString();
 
 	/**
 	 * Returns the meta object for class '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroupLayout <em>KNode Group Layout</em>}'.
@@ -1268,6 +1410,60 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getKNodeGroupLabelLayout_LabelPlacement();
+
+	/**
+	 * Returns the meta object for class '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO <em>LAYOUTER INFO</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>LAYOUTER INFO</em>'.
+	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO
+	 * @generated
+	 */
+	EClass getLAYOUTER_INFO();
+
+	/**
+	 * Returns the meta object for the attribute '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO#getLayouterName <em>Layouter Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Layouter Name</em>'.
+	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO#getLayouterName()
+	 * @see #getLAYOUTER_INFO()
+	 * @generated
+	 */
+	EAttribute getLAYOUTER_INFO_LayouterName();
+
+	/**
+	 * Returns the meta object for the attribute '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO#getLayoutType <em>Layout Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Layout Type</em>'.
+	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO#getLayoutType()
+	 * @see #getLAYOUTER_INFO()
+	 * @generated
+	 */
+	EAttribute getLAYOUTER_INFO_LayoutType();
+
+	/**
+	 * Returns the meta object for the attribute '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO#getLayoutOption <em>Layout Option</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Layout Option</em>'.
+	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO#getLayoutOption()
+	 * @see #getLAYOUTER_INFO()
+	 * @generated
+	 */
+	EAttribute getLAYOUTER_INFO_LayoutOption();
+
+	/**
+	 * Returns the meta object for the attribute '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO#getLayoutProviderID <em>Layout Provider ID</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Layout Provider ID</em>'.
+	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO#getLayoutProviderID()
+	 * @see #getLAYOUTER_INFO()
+	 * @generated
+	 */
+	EAttribute getLAYOUTER_INFO_LayoutProviderID();
 
 	/**
 	 * Returns the meta object for enum '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.EDGE_TYPE <em>EDGE TYPE</em>}'.
@@ -1480,6 +1676,14 @@ public interface KimlLayoutGraphPackage extends EPackage {
 		EReference KSHAPE_LAYOUT__SIZE = eINSTANCE.getKShapeLayout_Size();
 
 		/**
+		 * The meta object literal for the '<em><b>Use Layout</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute KSHAPE_LAYOUT__USE_LAYOUT = eINSTANCE.getKShapeLayout_UseLayout();
+
+		/**
 		 * The meta object literal for the '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.KEdgeImpl <em>KEdge</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1564,6 +1768,14 @@ public interface KimlLayoutGraphPackage extends EPackage {
 		EAttribute KEDGE_LAYOUT__EDGE_TYPE = eINSTANCE.getKEdgeLayout_EdgeType();
 
 		/**
+		 * The meta object literal for the '<em><b>Use Layout</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute KEDGE_LAYOUT__USE_LAYOUT = eINSTANCE.getKEdgeLayout_UseLayout();
+
+		/**
 		 * The meta object literal for the '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.KNodeGroupImpl <em>KNode Group</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1620,6 +1832,14 @@ public interface KimlLayoutGraphPackage extends EPackage {
 		 * @generated
 		 */
 		EReference KNODE_GROUP__LABEL = eINSTANCE.getKNodeGroup_Label();
+
+		/**
+		 * The meta object literal for the '<em><b>Id String</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute KNODE_GROUP__ID_STRING = eINSTANCE.getKNodeGroup_IdString();
 
 		/**
 		 * The meta object literal for the '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.KNodeGroupLayoutImpl <em>KNode Group Layout</em>}' class.
@@ -1752,6 +1972,48 @@ public interface KimlLayoutGraphPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute KNODE_GROUP_LABEL_LAYOUT__LABEL_PLACEMENT = eINSTANCE.getKNodeGroupLabelLayout_LabelPlacement();
+
+		/**
+		 * The meta object literal for the '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.LAYOUTER_INFOImpl <em>LAYOUTER INFO</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.LAYOUTER_INFOImpl
+		 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getLAYOUTER_INFO()
+		 * @generated
+		 */
+		EClass LAYOUTER_INFO = eINSTANCE.getLAYOUTER_INFO();
+
+		/**
+		 * The meta object literal for the '<em><b>Layouter Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute LAYOUTER_INFO__LAYOUTER_NAME = eINSTANCE.getLAYOUTER_INFO_LayouterName();
+
+		/**
+		 * The meta object literal for the '<em><b>Layout Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute LAYOUTER_INFO__LAYOUT_TYPE = eINSTANCE.getLAYOUTER_INFO_LayoutType();
+
+		/**
+		 * The meta object literal for the '<em><b>Layout Option</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute LAYOUTER_INFO__LAYOUT_OPTION = eINSTANCE.getLAYOUTER_INFO_LayoutOption();
+
+		/**
+		 * The meta object literal for the '<em><b>Layout Provider ID</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute LAYOUTER_INFO__LAYOUT_PROVIDER_ID = eINSTANCE.getLAYOUTER_INFO_LayoutProviderID();
 
 		/**
 		 * The meta object literal for the '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.EDGE_TYPE <em>EDGE TYPE</em>}' enum.

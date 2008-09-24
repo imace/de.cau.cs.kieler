@@ -84,7 +84,7 @@ public class KNodeGroupLayoutImpl extends KShapeLayoutImpl implements KNodeGroup
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String LAYOUTER_NAME_EDEFAULT = null;
+	protected static final String LAYOUTER_NAME_EDEFAULT = "\"\"";
 
 	/**
 	 * The cached value of the '{@link #getLayouterName() <em>Layouter Name</em>}' attribute.
