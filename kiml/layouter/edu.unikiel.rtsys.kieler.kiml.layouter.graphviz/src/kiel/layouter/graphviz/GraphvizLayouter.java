@@ -5,18 +5,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.naming.Name;
+import org.eclipse.jface.preference.IPreferenceStore;
 
-import org.eclipse.draw2d.Label;
-import org.eclipse.gef.EditPart;
-import org.eclipse.ui.internal.util.Descriptors;
-
+import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.EDGE_LABEL_PLACEMENT;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KDimension;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KEdge;
+import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KEdgeLabel;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPoint;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphFactory;
-import edu.unikiel.rtsys.kieler.kiml.layouter.graphviz.GraphvizLayoutProvider;
+import edu.unikiel.rtsys.kieler.kiml.layouter.graphviz.Activator;
+import edu.unikiel.rtsys.kieler.kiml.layouter.graphviz.preferences.PreferenceConstants;
 
 /**
  * Basic Layout Algorithm employing the Graphviz library (dot layout) to do a
@@ -39,9 +38,6 @@ public class GraphvizLayouter {
 	private HashMap<KNodeGroup, Integer> mapNode2Pointer = new HashMap<KNodeGroup, Integer>();
 	private HashMap<KEdge, Integer> mapEdge2Pointer = new HashMap<KEdge, Integer>();
 
-	// private HashMap<EObject, Integer> mapObject2Pointer = new
-	// HashMap<EObject, Integer>();
-
 	/** C-pointer to the root GraphvizGraph datastructure */
 	private int graphvizGraph;
 
@@ -51,51 +47,43 @@ public class GraphvizLayouter {
 	 * crucial for the layout. Setting the dpi attribute for a graph within
 	 * GraphViz seems to have no effect.
 	 */
-	private final float dpi = 96.0f;
-
-	// magic scaling factors to translate between GraphViz and other coordinate
-	// systems, difference between point and pica?
-	private final float scaleX = 4f / 3f;
-	private final float scaleY = 4f / 3f;
+	private final float dpi = 72.0f;
 
 	// padding from the borders. pad attribute of GraphViz has no effect
-	private final int pad = 10;
+	private int padX = 15;
+	private int padY = 15;
+
 	private String layouterName;
 
 	public GraphvizLayouter() {
+		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
+		padX = store.getInt(PreferenceConstants.PREF_GRAPHVIZ_PADDING_X);
+		padY = store.getInt(PreferenceConstants.PREF_GRAPHVIZ_PADDING_Y);
 		init();
 	}
 
 	/**
 	 * Initializes the GraphvizAPI. Creates a fresh graph and sets global
-	 * attributes. Needs to be called before every layouting. GraphViz might
+	 * attributes. Needs to be called before every layout operation. GraphViz might
 	 * crash otherwise...
 	 */
 	private void init() {
 		GraphvizAPI.initialize();
 		graphvizGraph = GraphvizAPI.createGraph("");
-		// GraphvizAPI.setGraphAttribute(graphvizGraph, GraphvizAPI.ATTR_DPI,
-		// ""+dpi);
-		// set layout direction (up/down vs. left/right)
 		GraphvizAPI.setGraphAttribute(graphvizGraph, "rankdir", "LR");
-		// set padding of the layout. seems to have no effect...
-		GraphvizAPI.setGraphAttribute(graphvizGraph, "pad", "1");
-		// TODO: set correct shape for node corresponding to actual Draw2D shape
 		GraphvizAPI.setGlobalNodeAttribute(graphvizGraph,
 				GraphvizAPI.ATTR_SHAPE, "box");
 	}
 
 	/**
-	 * Recursive visit function that visits the given node as a parent node.
-	 * First it calls itself recursively for the children in order to address
-	 * the hierarchy. Then it adds the layout stuff to its children
-	 * 
-	 * TODO: recursive feature highly experimental and not yet tested!
-	 * 
-	 * @param node
-	 *            parent Node to visit (maybe a Graph or a CompositeNode)
+	 * TODO: Doc.
 	 */
 	public void visit(KNodeGroup nodeGroup) {
+		// return if there is nothing in this group
+		if (nodeGroup.getSubNodeGroups().size() == 0) {
+			return;
+		}
+
 		this.init();
 		mapNodeGroup2Graphviz(nodeGroup);
 
@@ -103,9 +91,10 @@ public class GraphvizLayouter {
 			GraphvizAPI.doCircoLayout(graphvizGraph);
 		else if (layouterName.equals(GraphvizLayoutProvider.GRAPHVIZ_NEATO))
 			GraphvizAPI.doNeatoLayout(graphvizGraph);
-		else if (layouterName.equals(GraphvizLayoutProvider.GRAPHVIZ_TWOPI))
+		else if (layouterName.equals(GraphvizLayoutProvider.GRAPHVIZ_TWOPI)) {
+			GraphvizAPI.setGraphAttribute(graphvizGraph, "splines", "true");
 			GraphvizAPI.doTwopiLayout(graphvizGraph);
-		else
+		} else
 			GraphvizAPI.doDotLayout(graphvizGraph);
 
 		GraphvizAPI.attachAttributes(graphvizGraph);
@@ -113,16 +102,16 @@ public class GraphvizLayouter {
 	}
 
 	/**
-	 * Map a Graph object to the internal GraphvizAPI datastructure. This is
-	 * stored in the GraphvizAPI internally.
+	 * Map a KNodeGroup object to the internal GraphvizAPI data structure. This
+	 * is stored in the GraphvizAPI internally.
 	 * 
 	 * @param graph
 	 */
 	private void mapNodeGroup2Graphviz(KNodeGroup nodeGroup) {
 		int i = 0;
 		/*
-		 * First process all node to have the pointers for them when creating
-		 * the edges
+		 * First process all nodes to have the pointers for them when creating
+		 * the edges.
 		 */
 		for (KNodeGroup subNodeGroup : nodeGroup.getSubNodeGroups()) {
 			int pointer = GraphvizAPI.createNode(graphvizGraph, String
@@ -131,9 +120,9 @@ public class GraphvizLayouter {
 			String label = subNodeGroup.getLabel().getText();
 			if (label == null)
 				label = "";
-			String height = String.valueOf(dot2Inch((int) subNodeGroup
+			String height = String.valueOf(dots2Inches((int) subNodeGroup
 					.getLayout().getSize().getHeight()));
-			String width = String.valueOf(dot2Inch((int) subNodeGroup
+			String width = String.valueOf(dots2Inches((int) subNodeGroup
 					.getLayout().getSize().getWidth()));
 			GraphvizAPI.setLocalNodeAttribute(graphvizGraph, pointer, "label",
 					label);
@@ -150,19 +139,53 @@ public class GraphvizLayouter {
 		for (KNodeGroup subNodeGroup : nodeGroup.getSubNodeGroups()) {
 			for (KEdge outgoingEdge : subNodeGroup.getOutgoingEdges()) {
 				if (mapNode2Pointer.get(outgoingEdge.getTarget()) != null) {
+
+					// create actual edge
 					int pointer = GraphvizAPI.createEdge(graphvizGraph,
 							mapNode2Pointer.get(subNodeGroup), mapNode2Pointer
 									.get(outgoingEdge.getTarget()));
-					mapEdge2Pointer.put(subNodeGroup.getOutgoingEdges().get(0),
-							new Integer(pointer));
-					// process label of edge
-					if (outgoingEdge.getLabel().size() != 0) {
-						// TODO: add calculation from text if size not available
-						String labelString = widthToString((int) outgoingEdge
-								.getLabel().get(0).getLabelLayout().getSize()
-								.getWidth());
-						GraphvizAPI.setLocalEdgeAttribute(graphvizGraph,
-								pointer, GraphvizAPI.ATTR_LABEL, labelString);
+
+					// store edge in map
+					mapEdge2Pointer.put(outgoingEdge, new Integer(pointer));
+
+					// process labels of edge
+					for (KEdgeLabel label : outgoingEdge.getLabel()) {
+
+						/*
+						 * As graphViz just handles three labels properly (well,
+						 * actually just two, the mid and tail label), hard code
+						 * it here. First 'normal' label.
+						 */
+						if (label.getLabelLayout().getLabelPlacement().equals(
+								EDGE_LABEL_PLACEMENT.CENTER)) {
+							String labelString = label.getText();
+
+							GraphvizAPI.setLocalEdgeAttribute(graphvizGraph,
+									pointer, GraphvizAPI.ATTR_LABEL,
+									labelString);
+						}
+						/*
+						 * Give a try for head label.
+						 */
+						if (label.getLabelLayout().getLabelPlacement().equals(
+								EDGE_LABEL_PLACEMENT.HEAD)) {
+							String labelString = label.getText();
+
+							GraphvizAPI.setLocalEdgeAttribute(graphvizGraph,
+									pointer, GraphvizAPI.ATTR_HEADLABEL,
+									labelString);
+						}
+						/*
+						 * Give a try for tail label.
+						 */
+						if (label.getLabelLayout().getLabelPlacement().equals(
+								EDGE_LABEL_PLACEMENT.TAIL)) {
+							String labelString = label.getText();
+
+							GraphvizAPI.setLocalEdgeAttribute(graphvizGraph,
+									pointer, GraphvizAPI.ATTR_TAILLABEL,
+									labelString);
+						}
 					}
 				}
 			}
@@ -180,9 +203,9 @@ public class GraphvizLayouter {
 	 */
 	private void mapGraphviz2NodeGroup(KNodeGroup nodeGroup) {
 		GraphvizAPI.writeDOT(graphvizGraph, System.getProperty("user.home")
-				+ "/test.dot");
-		mapGraphvizNodes2Graph();
-		mapGraphvizEdges2Graph();
+				+ "/" + nodeGroup.getIdString() + ".dot");
+		mapGraphvizNodes2KNodes();
+		mapGraphvizEdges2KEdges();
 		setNodeSize(nodeGroup);
 	}
 
@@ -190,7 +213,7 @@ public class GraphvizLayouter {
 	 * Write all Node related information from GraphViz into the Graph
 	 * datastructure
 	 */
-	private void mapGraphvizNodes2Graph() {
+	private void mapGraphvizNodes2KNodes() {
 		// iterate over all nodes in the GraphViz graph and copy their
 		// attributes to the Graph datastructure
 		for (KNodeGroup nodeGroup : mapNode2Pointer.keySet()) {
@@ -211,8 +234,8 @@ public class GraphvizLayouter {
 				// in draw2D it's the upper left corner
 				location = graphviz2Draw2D(position.get(0).intValue(), position
 						.get(1).intValue(), nodeGroup.getLayout().getSize());
-				size.setHeight(Inch2Dot(Float.parseFloat(heightString)));
-				size.setWidth(Inch2Dot(Float.parseFloat(width)));
+				size.setHeight(inches2Dots(Float.parseFloat(heightString)));
+				size.setWidth(inches2Dots(Float.parseFloat(width)));
 			} catch (Exception e) {
 				/* nothing, might have been invalid String */
 				System.out.println(e.getMessage() + " " + posString);
@@ -227,91 +250,119 @@ public class GraphvizLayouter {
 	 * Write all Edge related information from GraphViz into the Graph
 	 * datastructure
 	 */
-	private void mapGraphvizEdges2Graph() {
+	private void mapGraphvizEdges2KEdges() {
 		// iterate over all edges in the GraphViz graph and copy their
 		// attributes to the Graph datastructure
-		// for (Iterator iter = mapEdge2Pointer.keySet().iterator(); iter
-		// .hasNext();) {
-		// Edge edge = (Edge) iter.next();
-		// int edgePointer = mapEdge2Pointer.get(edge);
-		// String posString = GraphvizAPI.getAttribute(edgePointer,
-		// GraphvizAPI.ATTR_POS);
-		// List<Integer> intList = string2Ints(posString);
-		// try {
-		// /*
-		// * haf, 2008-06-10 GraphViz uses piecewise cubic beziercurves.
-		// * Each part consists of: Start point, bezier control point 1,
-		// * bezier control point 2, End point. Start point of the next
-		// * section is the same as the end point of the last. The control
-		// * points are likely to be not part of the path but specify the
-		// * bend of the curve.
-		// *
-		// * Eclipse does not support bezier curves (yet). Standard thing
-		// * are Polylines with only explicit bendpoints. I've implemented
-		// * some cubic spline connection on top of that. But there all
-		// * bendpoints are part of the curve.
-		// *
-		// * First approximation: only use the start and end points of
-		// * GraphViz' bezier parts as bendpoints for the eclipse splines.
-		// *
-		// * TODO: Add proper bezier path handling when this is supported
-		// * by Eclipse!
-		// *
-		// * @see Eclipse bug: 234808 and 168307
-		// */
-		//
-		// // unsafe because list size might be not a multiple of 6
-		// for (int i = 2; i < intList.size() - 1; i += 6) {
-		// // i=2: ignore first point pair
-		// // i+=6: ignore bezier control points
-		// Coordinates point = GraphFactory.eINSTANCE
-		// .createCoordinates();
-		// point.setX(intList.get(i));
-		// point.setY(intList.get(i + 1));
-		// point = graphviz2Draw2D(point);
-		// edge.getBendpoints().add(point);
-		// // System.out.println("bendpoint: "+point.getX()+" "+point.
-		// // getY());
-		// }
-		// // first point in the GraphViz list is the end point
-		// Coordinates endPoint = GraphFactory.eINSTANCE
-		// .createCoordinates();
-		// endPoint.setX(intList.get(0));
-		// endPoint.setY(intList.get(1));
-		// endPoint = graphviz2Draw2D(endPoint);
-		// edge.getBendpoints().add(endPoint);
-		// } catch (Exception e) {/* in any failure, leave list empty */
-		// }
-		// // process label
-		// if (edge.getEdgeLabel() != null) {
-		// Coordinates coords = GraphFactory.eINSTANCE.createCoordinates();
-		// String labelLoc = GraphvizAPI.getAttribute(edgePointer,
-		// GraphvizAPI.ATTR_LP);
-		// List<Integer> ints = string2Ints(labelLoc);
-		// if (ints.size() == 2) {
-		// // in GraphViz position is the center of the node
-		// // in draw2D it's the upper left corner
-		// // TODO: what if size not available?
-		// // TODO: optimize exact location (sometimes start is within
-		// // connection)
-		// coords.setX(ints.get(0).intValue());// -
-		// // (edge.getEdgeLabel()
-		// // .getSize
-		// // ().getWidth()/2));
-		// coords.setY(ints.get(1).intValue());// -
-		// // (edge.getEdgeLabel()
-		// // .getSize
-		// // ().getHeight()/2));
-		// coords = graphviz2Draw2D(coords, edge.getEdgeLabel()
-		// .getSize());
-		// } else { // got strange String from GraphViz
-		// coords.setX(0);
-		// coords.setY(0);
-		// }
-		// edge.getEdgeLabel().setPosition(coords);
-		// }// if edgeLabel
-		//
-		// }// for edges
+		for (KEdge edge : mapEdge2Pointer.keySet()) {
+
+			int edgePointer = mapEdge2Pointer.get(edge);
+			String posString = GraphvizAPI.getAttribute(edgePointer,
+					GraphvizAPI.ATTR_POS);
+			List<Integer> intList = string2Ints(posString);
+			try {
+				/*
+				 * haf, 2008-06-10 GraphViz uses piecewise cubic beziercurves.
+				 * Each part consists of: Start point, bezier control point 1,
+				 * bezier control point 2, End point. Start point of the next
+				 * section is the same as the end point of the last. The control
+				 * points are likely to be not part of the path but specify the
+				 * bend of the curve.
+				 * 
+				 * Eclipse does not support bezier curves (yet). Standard thing
+				 * are Polylines with only explicit bendpoints. I've implemented
+				 * some cubic spline connection on top of that. But there all
+				 * bendpoints are part of the curve.
+				 * 
+				 * First approximation: only use the start and end points of
+				 * GraphViz' bezier parts as bendpoints for the eclipse splines.
+				 * 
+				 * TODO: Add proper bezier path handling when this is supported
+				 * by Eclipse!
+				 * 
+				 * @see Eclipse bug: 234808 and 168307
+				 */
+
+				// second point in list is the start point
+				KPoint startPoint = KimlLayoutGraphFactory.eINSTANCE
+						.createKPoint();
+				startPoint.setX(intList.get(2));
+				startPoint.setY(intList.get(3));
+				edge.getLayout().setSourcePoint(graphviz2Draw2D(startPoint));
+
+				// unsafe because list size might be not a multiple of 6
+				for (int i = 8; i < intList.size() - 1; i += 6) {
+					// i=2: ignore first point pair
+					// i+=6: ignore bezier control points
+					KPoint point = KimlLayoutGraphFactory.eINSTANCE
+							.createKPoint();
+					point.setX(intList.get(i));
+					point.setY(intList.get(i + 1));
+					if (startPoint.getY() != point.getY()) {
+						edge.getLayout().getGridPoints().add(
+								graphviz2Draw2D(point));
+					}
+				}
+				// first point in the GraphViz list is the end point
+				KPoint endPoint = KimlLayoutGraphFactory.eINSTANCE
+						.createKPoint();
+				endPoint.setX(intList.get(0));
+				endPoint.setY(intList.get(1));
+				edge.getLayout().setTargetPoint(graphviz2Draw2D(endPoint));
+
+			} catch (Exception e) {/* in any failure, leave list empty */
+				System.out.println("Some fault:--------------------- "
+						+ e.toString());
+			}
+			/*
+			 * Process labels, there is a maximum of three that can be handled
+			 * by GraphViz. Well, actually two with locations.
+			 */
+			for (KEdgeLabel label : edge.getLabel()) {
+
+				// head label
+				if (label.getLabelLayout().getLabelPlacement().equals(
+						EDGE_LABEL_PLACEMENT.HEAD)) {
+					;// not possible to get the head label placement with
+					// GraphViz.
+
+				}
+
+				// mid label
+				if (label.getLabelLayout().getLabelPlacement().equals(
+						EDGE_LABEL_PLACEMENT.CENTER)) {
+					String midLoc = GraphvizAPI.getAttribute(edgePointer,
+							GraphvizAPI.ATTR_LP);
+					List<Integer> midInts = string2Ints(midLoc);
+					KPoint midLocation = KimlLayoutGraphFactory.eINSTANCE
+							.createKPoint();
+					if (midInts.size() == 2) {
+						midLocation = graphviz2Draw2D(
+								midInts.get(0).intValue(), midInts.get(1)
+										.intValue(), label.getLabelLayout()
+										.getSize());
+					}
+					label.getLabelLayout().setLocation(midLocation);
+				}
+
+				// tail label
+				if (label.getLabelLayout().getLabelPlacement().equals(
+						EDGE_LABEL_PLACEMENT.TAIL)) {
+					String tailLoc = GraphvizAPI.getAttribute(edgePointer,
+							GraphvizAPI.ATTR_TAILLP);
+					List<Integer> tailInts = string2Ints(tailLoc);
+					KPoint tailLocation = KimlLayoutGraphFactory.eINSTANCE
+							.createKPoint();
+					if (tailInts.size() == 2) {
+						tailLocation = graphviz2Draw2D(tailInts.get(0)
+								.intValue(), tailInts.get(1).intValue(), label
+								.getLabelLayout().getSize());
+					}
+					label.getLabelLayout().setLocation(tailLocation);
+				}
+
+			}
+
+		}
 	}
 
 	/**
@@ -333,31 +384,9 @@ public class GraphvizLayouter {
 		} catch (Exception e) {
 			// no insets available
 		}
-		size.setWidth(((bb.width + 2 * pad) * scaleX) + left + right);
-		size.setHeight(((bb.height + 2 * pad) * scaleY) + top + bottom);
+		size.setWidth((bb.width + 2 * padX) + left + right);
+		size.setHeight((bb.height + 2 * padY) + top + bottom);
 		nodeGroup.getLayout().setSize(size);
-	}
-
-	/**
-	 * Given a size (width) in points, a String is returned, that tries to fill
-	 * this size with some text. As default font size Times Roman in 14 point
-	 * size is assumed (default of GraphViz label text size). Rationale: Eclipse
-	 * uses an actual size (width+height) for labels, GraphViz knows only a
-	 * specific text of a label and calculates its size internally.
-	 * 
-	 * @param points
-	 * @return
-	 */
-	private String widthToString(int points) {
-		int sizeOfLetter = 9; // TODO: remove magic number
-		int amount = (points / sizeOfLetter);
-		int offset = 4; // TODO: check magic offset number (due to icon in front
-		// of label)
-		char letters[] = new char[amount + offset];
-		for (int i = 0; i < letters.length; i++) {
-			letters[i] = 'T'; // TODO: check magic letter
-		}
-		return new String(letters);
 	}
 
 	/**
@@ -366,9 +395,8 @@ public class GraphvizLayouter {
 	 * @param dots
 	 * @return inches
 	 */
-	private float dot2Inch(int dots) {
+	private float dots2Inches(int dots) {
 		float inches = (dots / (float) dpi);
-		// // System.out.println("dpi: "+dots+" "+inches);
 		return inches;
 	}
 
@@ -378,8 +406,8 @@ public class GraphvizLayouter {
 	 * @param iches
 	 * @return dots
 	 */
-	private int Inch2Dot(float inch) {
-		return (int) (inch * dpi);
+	private int inches2Dots(float inches) {
+		return (int) (inches * dpi);
 	}
 
 	/**
@@ -397,30 +425,8 @@ public class GraphvizLayouter {
 	 */
 	private KPoint graphviz2Draw2D(int x, int y, KDimension size) {
 		KPoint newLocation = KimlLayoutGraphFactory.eINSTANCE.createKPoint();
-		newLocation.setX((x * scaleX) - (size.getWidth() / 2) + pad);
-		newLocation.setY((y * scaleY) - (size.getHeight() / 2) + pad);
-		return newLocation;
-	}
-
-	/**
-	 * Transforms Draw2D (KIELER) coordinates to GraphViz Coordinates of any
-	 * sized object (e.g. nodes). There are some scaling factors between those
-	 * two coordinate systems. Padding is also used.
-	 * 
-	 * @param coords
-	 *            Draw2D Coordinates
-	 * @param size
-	 *            Size of the item. Required because GraphViz coordinates are at
-	 *            the center of any item and Draw2D coordinates are at the upper
-	 *            left corner.
-	 * @return GraphViz coordinates
-	 */
-	private KPoint draw2D2Graphviz(KPoint location, KDimension size) {
-		KPoint newLocation = KimlLayoutGraphFactory.eINSTANCE.createKPoint();
-		newLocation.setX((int) (location.getX() / scaleX)
-				+ (size.getWidth() / 2) - pad);
-		newLocation.setY((int) (location.getY() / scaleY)
-				+ (size.getHeight() / 2) - pad);
+		newLocation.setX(x - (size.getWidth() / 2) + padX);
+		newLocation.setY(y - (size.getHeight() / 2) + padY);
 		return newLocation;
 	}
 
@@ -433,26 +439,10 @@ public class GraphvizLayouter {
 	 *            GraphViz Coordinates
 	 * @return Draw2D coordinates
 	 */
-	private KPoint graphviz2Draw2D(KPoint coords) {
+	private KPoint graphviz2Draw2D(KPoint location) {
 		KPoint newLocation = KimlLayoutGraphFactory.eINSTANCE.createKPoint();
-		newLocation.setX((int) (coords.getX() * scaleX) + pad);
-		newLocation.setY((int) (coords.getY() * scaleY) + pad);
-		return newLocation;
-	}
-
-	/**
-	 * Transforms Draw2D (KIELER) coordinates to GraphViz Coordinates only for
-	 * unsized objects (points). There are some scaling factors between those
-	 * twoo coordinate systems. Padding is also used.
-	 * 
-	 * @param coords
-	 *            () Draw2D Coordinates
-	 * @return GraphViz coordinates
-	 */
-	private KPoint draw2D2Graphviz(KPoint coords) {
-		KPoint newLocation = KimlLayoutGraphFactory.eINSTANCE.createKPoint();
-		newLocation.setX((int) (coords.getX() / scaleX) - pad);
-		newLocation.setY((int) (coords.getY() / scaleY) - pad);
+		newLocation.setX((int) location.getX() + padX);
+		newLocation.setY((int) location.getY() + padY);
 		return newLocation;
 	}
 
@@ -465,7 +455,7 @@ public class GraphvizLayouter {
 	 * @return
 	 */
 	private List<Integer> string2Ints(String text) {
-		ArrayList intList = new ArrayList();
+		ArrayList<Integer> intList = new ArrayList<Integer>();
 		if (text != null) {
 			String[] tokens = text.split(",|\\s"); // \s = any whitespace char
 			for (int i = 0; i < tokens.length; i++) {
@@ -478,7 +468,7 @@ public class GraphvizLayouter {
 		return intList;
 	}
 
-	public void setLayouterName(String layouterName) {
+	public void setGraphvizLayouterName(String layouterName) {
 		this.layouterName = layouterName;
 	}
 }

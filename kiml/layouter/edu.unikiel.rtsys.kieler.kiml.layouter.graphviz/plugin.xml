@@ -5,9 +5,10 @@
    <extension
          point="org.eclipse.ui.preferencePages">
       <page
-            name="Graphviz"
+            category="edu.unikiel.rtsys.kieler.kiml.layout.preferences.LayoutPreferencePage"
             class="edu.unikiel.rtsys.kieler.kiml.layouter.graphviz.preferences.GraphvizPreferencePage"
-            id="edu.unikiel.rtsys.kieler.kiml.layouter.graphviz.preferences.GraphvizPreferencePage">
+            id="edu.unikiel.rtsys.kieler.kiml.layouter.graphviz.preferences.GraphvizPreferencePage"
+            name="GraphViz">
       </page>
    </extension>
    <extension
@@ -19,7 +20,7 @@
    <extension
          point="edu.unikiel.rtsys.kieler.kiml.layout.kimlLayoutProvider">
       <kimlLayoutProvider
-            class="edu.unikiel.rtsys.kieler.kiml.layouter.graphviz.GraphvizLayoutProvider">
+            class="kiel.layouter.graphviz.GraphvizLayoutProvider">
          <Priority
                name="Low"></Priority>
       </kimlLayoutProvider>
