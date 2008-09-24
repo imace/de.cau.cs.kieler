@@ -5,9 +5,15 @@
    <extension
          point="org.eclipse.ui.preferencePages">
       <page
-            class="edu.unikiel.rtsys.kieler.kiml.ui.WorkbenchPreferencePage"
+            class="edu.unikiel.rtsys.kieler.kiml.ui.preferences.MainPreferencePage"
             id="edu.unikiel.rtsys.kieler.kiml.ui.PreferencePage"
             name="%page.name.0">
+      </page>
+      <page
+            category="edu.unikiel.rtsys.kieler.kiml.ui.PreferencePage"
+            class="edu.unikiel.rtsys.kieler.kiml.ui.preferences.UILayoutPreferencePage"
+            id="edu.unikiel.rtsys.kieler.kiml.ui.page1"
+            name="Layout UI">
       </page>
    </extension>
    <extension
@@ -16,6 +22,13 @@
             id="edu.unikiel.rtsys.kieler.kiml.ui"
             name="%category.name.0">
       </category>
+      <view
+            category="edu.unikiel.rtsys.kieler.kiml.ui"
+            class="edu.unikiel.rtsys.kieler.kiml.ui.views.KimlLayoutGraphView"
+            icon="icons/sample.gif"
+            id="edu.unikiel.rtsys.kieler.kiml.ui.views.KimlLayoutGraphView"
+            name="%view.name.0">
+      </view>
       <view
             category="edu.unikiel.rtsys.kieler.kiml.ui"
             class="edu.unikiel.rtsys.kieler.kiml.ui.views.KimlLayoutHintView"
@@ -45,36 +58,10 @@ point="org.eclipse.ui.menus">
     mnemonic="%menu.mnemonic.0">
    <menu
          label="%menu.label.2">
-      <command
-            commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.groupAsVertical"
-            label="%command.label.1"
-            style="push">
-      </command>
-      <command
-            commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.groupAsNone"
-            label="%command.label.2"
-            style="push">
-      </command>
-      <command
-            commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.groupAsHorizontal"
-            label="%command.label.3"
-            style="push">
-      </command>
-      <command
-            commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.groupAsDot"
-            label="%command.label.4"
-            style="push">
-      </command>
-      <command
-            commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.groupAsCustom"
-            label="%command.label.5"
-            style="push">
-      </command>
-      <command
-            commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.groupAsCircle"
-            label="%command.label.6"
-            style="push">
-      </command>
+      <dynamic
+            class="edu.unikiel.rtsys.kieler.kiml.ui.ContributionItemGroupAs"
+            id="edu.unikiel.rtsys.kieler.kiml.ui.dynamic.groupAs">
+      </dynamic>
    </menu>
    <menu
          label="%menu.label.3">
@@ -101,40 +88,26 @@ point="org.eclipse.ui.menus">
    <menu
          icon="icons/sample.gif"
          label="%menu.label.4">
+      <command
+            commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.kimlGMFLayout"
+            icon="icons/kieler-arrange.png"
+            label="GMF Layout this"
+            style="push">
+      </command>
+      <command
+            commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.kimlGMFLayoutAll"
+            icon="icons/kieler-arrange.png"
+            label="GMF Layout all"
+            style="push">
+      </command>
       <separator
             name="edu.unikiel.rtsys.kieler.kiml.ui.separator.groupAs"
             visible="true">
       </separator>
-      <command
-            commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.groupAsNone"
-            label="%command.label.10"
-            style="push">
-      </command>
-      <command
-            commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.groupAsCustom"
-            label="%command.label.11"
-            style="push">
-      </command>
-      <command
-            commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.groupAsDot"
-            label="%command.label.12"
-            style="push">
-      </command>
-      <command
-            commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.groupAsHorizontal"
-            label="%command.label.13"
-            style="push">
-      </command>
-      <command
-            commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.groupAsCircle"
-            label="%command.label.14"
-            style="push">
-      </command>
-      <command
-            commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.groupAsVertical"
-            label="%command.label.15"
-            style="push">
-      </command>
+      <dynamic
+            class="edu.unikiel.rtsys.kieler.kiml.ui.ContributionItemGroupAs"
+            id="edu.unikiel.rtsys.kieler.kiml.ui.dynamic.groupAs">
+      </dynamic>
       <separator
             name="edu.unikiel.rtsys.kieler.kiml.ui.separator.functions"
             visible="true">
@@ -154,9 +127,6 @@ point="org.eclipse.ui.menus">
             label="%command.label.18"
             style="push">
       </command>
-      <visibleWhen
-            checkEnabled="true">
-      </visibleWhen>
    </menu>
 </menuContribution>
 <menuContribution
@@ -181,34 +151,13 @@ point="org.eclipse.ui.menus">
    <extension
          point="org.eclipse.ui.commands">
       <command
-            description="%command.description.0"
-            id="edu.unikiel.rtsys.kieler.kiml.ui.command.groupAsCircle"
-            name="%command.name.0">
-      </command>
-      <command
-            description="%command.description.1"
-            id="edu.unikiel.rtsys.kieler.kiml.ui.command.groupAsCustom"
-            name="%command.name.1">
-      </command>
-      <command
-            description="%command.description.2"
-            id="edu.unikiel.rtsys.kieler.kiml.ui.command.groupAsDot"
-            name="%command.name.2">
-      </command>
-      <command
-            description="%command.description.3"
-            id="edu.unikiel.rtsys.kieler.kiml.ui.command.groupAsHorizontal"
-            name="%command.name.3">
-      </command>
-      <command
-            description="%command.description.4"
-            id="edu.unikiel.rtsys.kieler.kiml.ui.command.groupAsNone"
-            name="%command.name.4">
-      </command>
-      <command
-            description="%command.description.5"
-            id="edu.unikiel.rtsys.kieler.kiml.ui.command.groupAsVertical"
-            name="%command.name.5">
+            id="edu.unikiel.rtsys.kieler.kiml.ui.command.groupAs"
+            name="Group As">
+         <commandParameter
+               id="edu.unikiel.rtsys.kieler.kiml.ui.command.groupAs.parameter.layouterName"
+               name="layouterName"
+               optional="true">
+         </commandParameter>
       </command>
       <command
             description="%command.description.6"
@@ -233,57 +182,20 @@ point="org.eclipse.ui.menus">
             id="edu.unikiel.rtsys.kieler.kiml.ui.command.kimlGMFLayout"
             name="KIML GMF Layout">
       </command>
+      <command
+            id="edu.unikiel.rtsys.kieler.kiml.ui.command.kimlGMFLayoutAll"
+            name="KIML GMF Layout All">
+      </command>
+      <commandParameterType
+            id="edu.unikiel.rtsys.kieler.kiml.ui.commandParameterType.String"
+            type="java.lang.String">
+      </commandParameterType>
    </extension>
    <extension
          point="org.eclipse.ui.handlers">
       <handler
             class="edu.unikiel.rtsys.kieler.kiml.ui.handlers.GroupAsHandler"
-            commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.groupAsCircle">
-         <enabledWhen>
-            <reference
-                  definitionId="KIML.generalSelectionIs2OrMoreShapeNodeEditParts">
-            </reference>
-         </enabledWhen>
-      </handler>
-      <handler
-            class="edu.unikiel.rtsys.kieler.kiml.ui.handlers.GroupAsHandler"
-            commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.groupAsCustom">
-         <enabledWhen>
-            <reference
-                  definitionId="KIML.generalSelectionIs2OrMoreShapeNodeEditParts">
-            </reference>
-         </enabledWhen>
-      </handler>
-      <handler
-            class="edu.unikiel.rtsys.kieler.kiml.ui.handlers.GroupAsHandler"
-            commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.groupAsDot">
-         <enabledWhen>
-            <reference
-                  definitionId="KIML.generalSelectionIs2OrMoreShapeNodeEditParts">
-            </reference>
-         </enabledWhen>
-      </handler>
-      <handler
-            class="edu.unikiel.rtsys.kieler.kiml.ui.handlers.GroupAsHandler"
-            commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.groupAsHorizontal">
-         <enabledWhen>
-            <reference
-                  definitionId="KIML.generalSelectionIs2OrMoreShapeNodeEditParts">
-            </reference>
-         </enabledWhen>
-      </handler>
-      <handler
-            class="edu.unikiel.rtsys.kieler.kiml.ui.handlers.GroupAsHandler"
-            commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.groupAsNone">
-         <enabledWhen>
-            <reference
-                  definitionId="KIML.generalSelectionIs2OrMoreShapeNodeEditParts">
-            </reference>
-         </enabledWhen>
-      </handler>
-      <handler
-            class="edu.unikiel.rtsys.kieler.kiml.ui.handlers.GroupAsHandler"
-            commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.groupAsVertical">
+            commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.groupAs">
          <enabledWhen>
             <reference
                   definitionId="KIML.generalSelectionIs2OrMoreShapeNodeEditParts">
@@ -295,7 +207,7 @@ point="org.eclipse.ui.menus">
             commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.selectGroupMembers">
          <enabledWhen>
             <reference
-                  definitionId="KIML.generalSelectionIs1ShapeNodeEditParts">
+                  definitionId="KIML.generalSelectionIs1ShapeNodeEditPart">
             </reference>
          </enabledWhen>
       </handler>
@@ -304,7 +216,7 @@ point="org.eclipse.ui.menus">
             commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.highlightGroupMembers">
          <enabledWhen>
             <reference
-                  definitionId="KIML.generalSelectionIs1ShapeNodeEditParts">
+                  definitionId="KIML.generalSelectionIs1ShapeNodeEditPart">
             </reference>
          </enabledWhen>
       </handler>
@@ -324,6 +236,10 @@ point="org.eclipse.ui.menus">
       <handler
             class="edu.unikiel.rtsys.kieler.kiml.ui.handlers.KimlGMFLayoutHandler"
             commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.kimlGMFLayout">
+      </handler>
+      <handler
+            class="edu.unikiel.rtsys.kieler.kiml.ui.handlers.KimlGMFLayoutHandler"
+            commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.kimlGMFLayoutAll">
       </handler>
    </extension>
    <extension
@@ -348,6 +264,23 @@ point="org.eclipse.ui.menus">
             <count
                   value="1">
             </count>
+         </with>
+      </definition>
+      <definition
+            id="KIML.activeMenuSelectionIs1ShapeNodeEditPart">
+         <with
+               variable="activeMenuSelection">
+            <and>
+               <iterate
+                     operator="and">
+                  <adapt
+                        type="org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart">
+                  </adapt>
+               </iterate>
+               <count
+                     value="1">
+               </count>
+            </and>
          </with>
       </definition>
       <definition
@@ -409,6 +342,23 @@ point="org.eclipse.ui.menus">
             <count
                   value="1">
             </count>
+         </with>
+      </definition>
+      <definition
+            id="KIML.selectionIs1ShapeNodeEditPart">
+         <with
+               variable="selection">
+            <and>
+               <iterate
+                     operator="and">
+                  <adapt
+                        type="org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart">
+                  </adapt>
+               </iterate>
+               <count
+                     value="1">
+               </count>
+            </and>
          </with>
       </definition>
       <definition
@@ -482,6 +432,17 @@ point="org.eclipse.ui.menus">
             </reference>
             <reference
                   definitionId="KIML.selectionIs1OrMore">
+            </reference>
+         </or>
+      </definition>
+      <definition
+            id="KIML.generalSelectionIs1ShapeNodeEditPart">
+         <or>
+            <reference
+                  definitionId="KIML.activeMenuSelectionIs1ShapeNodeEditPart">
+            </reference>
+            <reference
+                  definitionId="KIML.selectionIs1ShapeNodeEditPart">
             </reference>
          </or>
       </definition>
