@@ -278,7 +278,7 @@
                name="%metatype.name.StrongAbortion_4001"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="StrongAbortion"
-               edithelper="edu.unikiel.rtsys.kieler.ssm.diagram.edit.helpers.StrongAbortion2EditHelper">
+               edithelper="edu.unikiel.rtsys.kieler.ssm.diagram.edit.helpers.StrongAbortionEditHelper">
             <param name="semanticHint" value="4001"/>
          </metamodelType>
       </metamodel>
@@ -288,7 +288,7 @@
                name="%metatype.name.NormalTermination_4002"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="NormalTermination"
-               edithelper="edu.unikiel.rtsys.kieler.ssm.diagram.edit.helpers.StrongAbortionEditHelper">
+               edithelper="edu.unikiel.rtsys.kieler.ssm.diagram.edit.helpers.NormalTerminationEditHelper">
             <param name="semanticHint" value="4002"/>
          </metamodelType>
       </metamodel>
@@ -298,7 +298,7 @@
                name="%metatype.name.WeakAbortion_4003"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="WeakAbortion"
-               edithelper="edu.unikiel.rtsys.kieler.ssm.diagram.edit.helpers.NormalTerminationEditHelper">
+               edithelper="edu.unikiel.rtsys.kieler.ssm.diagram.edit.helpers.WeakAbortionEditHelper">
             <param name="semanticHint" value="4003"/>
          </metamodelType>
       </metamodel>
@@ -556,6 +556,13 @@
          point="org.eclipse.core.runtime.adapters">
       <factory
             adaptableType="org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart"
+            class="edu.unikiel.rtsys.kieler.ssm.diagram.util.SafeStateMachineIAdapterFactory">
+         <adapter
+               type="java.util.Map">
+         </adapter>
+      </factory>
+      <factory
+            adaptableType="org.eclipse.gmf.runtime.diagram.ui.editparts.ConnectionEditPart"
             class="edu.unikiel.rtsys.kieler.ssm.diagram.util.SafeStateMachineIAdapterFactory">
          <adapter
                type="java.util.Map">
