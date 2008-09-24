@@ -14,7 +14,6 @@ import org.eclipse.gef.commands.CommandStack;
 import org.eclipse.gef.commands.CompoundCommand;
 import org.eclipse.gef.editparts.ScalableFreeformRootEditPart;
 import org.eclipse.gef.requests.ChangeBoundsRequest;
-import org.eclipse.ui.IEditorPart;
 
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KDimension;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KEdge;
@@ -34,13 +33,13 @@ public class KimlGEFLayouter extends KimlAbstractLayouter {
 
 	private double zoomLevel = 1.0;
 	private Map<GraphicalEditPart, KNodeGroup> editPart2Node = new HashMap<GraphicalEditPart, KNodeGroup>();
-	private IEditorPart editor;
-	
+	private CommandStack commandStack = null;
+
 	/**
 	 * Translates the actual model representaion in the editor to the
 	 * KLayoutGraph structure which is passed to the layouters.
 	 */
-	public void buildLayoutGraph() {
+	public boolean buildLayoutGraph() {
 		if (root instanceof GraphicalEditPart) {
 			GraphicalEditPart rootEditPart = (GraphicalEditPart) root;
 			KNodeGroup topNodeGroup = KimlLayoutGraphFactory.eINSTANCE
@@ -70,7 +69,9 @@ public class KimlGEFLayouter extends KimlAbstractLayouter {
 			layoutGraph.setTopGroup(topNodeGroup);
 			editPart2Node.put(rootEditPart, topNodeGroup);
 			buildLayoutGraphRecursive(rootEditPart, topNodeGroup);
-		}
+			return true;
+		} else
+			return false;
 	}
 
 	/**
@@ -146,11 +147,9 @@ public class KimlGEFLayouter extends KimlAbstractLayouter {
 	 * Performs the retranslation from the now layouted KLayoutGraph to Commands
 	 * that the GEF layouter will understand.
 	 */
-	public void applyLayout() {
+	public boolean applyLayout() {
 		CompoundCommand compoundCommand = new CompoundCommand();
 		compoundCommand.setLabel("Layout");
-		CommandStack commandStack = (CommandStack) editor
-				.getAdapter(CommandStack.class);
 
 		for (GraphicalEditPart gep : editPart2Node.keySet()) {
 			Rectangle oldBounds = gep.getFigure().getBounds();
@@ -187,27 +186,22 @@ public class KimlGEFLayouter extends KimlAbstractLayouter {
 			}
 		}
 		commandStack.execute(compoundCommand);
-
+		return true;
 	}
 
-	@Override
-	public void chooseLayouter(String layouterHint) {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public void setupOptions() {
+	public boolean init() {
+		// get zooming level
 		if (root instanceof GraphicalEditPart
 				&& ((GraphicalEditPart) root).getRoot() instanceof ScalableFreeformRootEditPart) {
-			ScalableFreeformRootEditPart sfrep = (ScalableFreeformRootEditPart) ((GraphicalEditPart) root)
+			GraphicalEditPart gep = (GraphicalEditPart) root;
+			commandStack = gep.getViewer().getEditDomain().getCommandStack();
+			ScalableFreeformRootEditPart sfrep = (ScalableFreeformRootEditPart) gep
 					.getRoot();
 			zoomLevel = sfrep.getZoomManager().getZoom();
-			// FIXME: put this in decent logging facilities
-			System.out.println(zoomLevel);
 		}
+		if (commandStack == null)
+			return false;
+		return true;
 	}
 
-	public void setEditor(IEditorPart activeEditor) {
-		this.editor = activeEditor;
-	}
 }
