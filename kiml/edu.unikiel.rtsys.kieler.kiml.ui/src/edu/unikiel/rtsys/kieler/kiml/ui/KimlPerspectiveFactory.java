@@ -5,6 +5,7 @@ import org.eclipse.ui.IPageLayout;
 import org.eclipse.ui.IPerspectiveFactory;
 
 import edu.unikiel.rtsys.kieler.kiml.ui.views.KimlLayoutGraphView;
+import edu.unikiel.rtsys.kieler.kiml.ui.views.KimlLayoutHintView;
 
 public class KimlPerspectiveFactory implements IPerspectiveFactory {
 
@@ -24,6 +25,7 @@ public class KimlPerspectiveFactory implements IPerspectiveFactory {
 		// Bottom: Property and KIELER views
 		IFolderLayout bottom = layout.createFolder("bottom", IPageLayout.BOTTOM, 0.75f, editorArea);
 		bottom.addView(IPageLayout.ID_PROP_SHEET);
+		bottom.addView(KimlLayoutHintView.ID);
 		bottom.addView(KimlLayoutGraphView.ID);
 		
 		layout.addActionSet("edu.unikiel.rtsys.kieler.kiml.ui.KimlActionSet");
