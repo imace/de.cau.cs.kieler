@@ -63,10 +63,10 @@ public class KimlGMFLayoutHintHelper {
 	 *            the name of a layouter which should render these EditParts
 	 * @see KimlGMFLayoutHintHelper#setLayoutHint(ShapeNodeEditPart, String)
 	 */
-	public static void setLayoutType(
+	public static void setLayouterName(
 			ArrayList<ShapeNodeEditPart> shapeNodeEditParts, String layouterName) {
 		for (ShapeNodeEditPart snep : shapeNodeEditParts) {
-			setLayoutType(snep, layouterName);
+			setLayouterName(snep, layouterName);
 		}
 	}
 
@@ -80,10 +80,10 @@ public class KimlGMFLayoutHintHelper {
 	 *            the name of a layouter which should render these EditParts
 	 * @see KimlGMFLayoutHintHelper#setlayoutType(ShapeNodeEditPart, String)
 	 */
-	public static void setLayoutType(ShapeNodeEditPart[] shapeNodeEditParts,
+	public static void setLayouterName(ShapeNodeEditPart[] shapeNodeEditParts,
 			String layouterName) {
 		for (ShapeNodeEditPart snep : shapeNodeEditParts) {
-			setLayoutType(snep, layouterName);
+			setLayouterName(snep, layouterName);
 		}
 	}
 
@@ -99,8 +99,8 @@ public class KimlGMFLayoutHintHelper {
 	 *            he name of a layouter which should render these EditParts
 	 * @see KimlGMFLayoutHintHelper#setLayoutGroup(ShapeNodeEditPart, String)
 	 */
-	public static void setLayoutType(final ShapeNodeEditPart shapeNodeEditPart,
-			final String layouterName) {
+	public static void setLayouterName(
+			final ShapeNodeEditPart shapeNodeEditPart, final String layouterName) {
 
 		// see if there is already an layouterNameStyle
 		final StringValueStyle layoutTypeStyle = (StringValueStyle) (shapeNodeEditPart
@@ -362,6 +362,23 @@ public class KimlGMFLayoutHintHelper {
 		}
 	}
 
+	public static void setLayoutHint(
+			final ShapeNodeEditPart[] shapeNodeEditParts, final String groupID,
+			final LAYOUT_TYPE layoutType, final String layouterName) {
+		setLayoutGroup(shapeNodeEditParts, groupID);
+		setLayoutType(shapeNodeEditParts, layoutType);
+		setLayouterName(shapeNodeEditParts, layouterName);
+	}
+
+	public static void setLayoutHint(
+			final ArrayList<ShapeNodeEditPart> shapeNodeEditParts,
+			final String groupID, final LAYOUT_TYPE layoutType,
+			final String layouterName) {
+		setLayoutGroup(shapeNodeEditParts, groupID);
+		setLayoutType(shapeNodeEditParts, layoutType);
+		setLayouterName(shapeNodeEditParts, layouterName);
+	}
+
 	/**
 	 * Wrapper function to set the layout <b>hint</b> of a an array of
 	 * ShapeNodeEditParts. The layout hint is composed of the layout group and
@@ -480,43 +497,52 @@ public class KimlGMFLayoutHintHelper {
 				.getNotationView().getNamedStyle(NotationPackage.eINSTANCE
 				.getStringValueStyle(), LAYOUT_GROUP_STYLE));
 
+		final StringValueStyle layouterNameStyle = (StringValueStyle) (shapeNodeEditPart
+				.getNotationView().getNamedStyle(NotationPackage.eINSTANCE
+				.getStringValueStyle(), LAYOUTER_NAME_STYLE));
+
 		final StringValueStyle layoutTypeStyle = (StringValueStyle) (shapeNodeEditPart
 				.getNotationView().getNamedStyle(NotationPackage.eINSTANCE
 				.getStringValueStyle(), LAYOUT_TYPE_STYLE));
 
-		String groupID = layoutGroupStyle.getStringValue();
+		if (layoutGroupStyle != null) {
+			String groupID = layoutGroupStyle.getStringValue();
 
-		/*
-		 * assuming each ShapeNodeEditParts has at most one of each of those
-		 * styles
-		 */
-		shapeNodeEditPart.getEditingDomain().getCommandStack().execute(
-				new RecordingCommand(shapeNodeEditPart.getEditingDomain()) {
-					protected void doExecute() {
-						shapeNodeEditPart.getNotationView().getStyles().remove(
-								layoutGroupStyle);
-						shapeNodeEditPart.getNotationView().getStyles().remove(
-								layoutTypeStyle);
-					}
-				});
+			/*
+			 * assuming each ShapeNodeEditParts has at most one of each of those
+			 * styles
+			 */
+			shapeNodeEditPart.getEditingDomain().getCommandStack().execute(
+					new RecordingCommand(shapeNodeEditPart.getEditingDomain()) {
+						protected void doExecute() {
+							shapeNodeEditPart.getNotationView().getStyles()
+									.remove(layoutGroupStyle);
+							shapeNodeEditPart.getNotationView().getStyles()
+									.remove(layouterNameStyle);
+							shapeNodeEditPart.getNotationView().getStyles()
+									.remove(layoutTypeStyle);
+						}
+					});
 
-		/*
-		 * Iterate through the list of saved groupID to perform the actual
-		 * orphaned check. Emma need to get the container edit part to iterate
-		 * through the children of this. Check also, if there is such a
-		 * container element.
-		 */
-		EditPart parent = shapeNodeEditPart.getParent();
-		if (parent != null && parent instanceof CompartmentEditPart) {
-			CompartmentEditPart compartmentEditPart = (CompartmentEditPart) parent;
-			// fetch all remaining elements of the group
-			ArrayList<ShapeNodeEditPart> groupedParts = KimlGMFLayoutHintHelper
-					.getGroupMembersByGroupID(compartmentEditPart, groupID);
-			// if just 1 element left, remove all grouping information
-			if (groupedParts.size() == 1) {
-				// call this function recursively, but this will just happen to
-				// a depth of 1
-				unsetLayoutHint(groupedParts.get(0));
+			/*
+			 * Iterate through the list of saved groupID to perform the actual
+			 * orphaned check. Emma need to get the container edit part to
+			 * iterate through the children of this. Check also, if there is
+			 * such a container element.
+			 */
+			EditPart parent = shapeNodeEditPart.getParent();
+			if (parent != null && parent instanceof CompartmentEditPart) {
+				CompartmentEditPart compartmentEditPart = (CompartmentEditPart) parent;
+				// fetch all remaining elements of the group
+				ArrayList<ShapeNodeEditPart> groupedParts = KimlGMFLayoutHintHelper
+						.getGroupMembersByGroupID(compartmentEditPart, groupID);
+				// if just 1 element left, remove all grouping information
+				if (groupedParts.size() == 1) {
+					// call this function recursively, but this will just happen
+					// to
+					// a depth of 1
+					unsetLayoutHint(groupedParts.get(0));
+				}
 			}
 		}
 	}
@@ -622,10 +648,11 @@ public class KimlGMFLayoutHintHelper {
 			return suggestion;
 	}
 
-	public static String buildGroupAsMessage(String layoutType, String groupID,
-			int numbersGrouped) {
-		return "Group as " + layoutType + " was executed:\n" + numbersGrouped
-				+ " Nodes have been grouped with the type " + layoutType
-				+ " and with the groupId " + groupID + ".";
+	public static String buildGroupAsMessage(String layoutType,
+			String layouterName, String groupID, int numbersGrouped) {
+		return "Group as " + layouterName + " was executed:\n" + numbersGrouped
+				+ " Nodes have been grouped with the layouter " + layouterName
+				+ "(type: " + layoutType + ") and with the groupId " + groupID
+				+ ".";
 	}
 }
