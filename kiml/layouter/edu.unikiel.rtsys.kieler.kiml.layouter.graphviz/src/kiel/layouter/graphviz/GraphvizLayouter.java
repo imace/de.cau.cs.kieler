@@ -2,6 +2,7 @@ package kiel.layouter.graphviz;
 
 import java.awt.Dimension;
 import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -65,8 +66,8 @@ public class GraphvizLayouter {
 
 	/**
 	 * Initializes the GraphvizAPI. Creates a fresh graph and sets global
-	 * attributes. Needs to be called before every layout operation. GraphViz might
-	 * crash otherwise...
+	 * attributes. Needs to be called before every layout operation. GraphViz
+	 * might crash otherwise...
 	 */
 	private void init() {
 		GraphvizAPI.initialize();
@@ -122,13 +123,15 @@ public class GraphvizLayouter {
 			if (label == null)
 				label = "";
 			/*
-			 * Use NumberFormat to format the number into a String to
-			 * workaround different possible locales of machines on that
-			 * Graphviz could run (could result in different number formats, 
-			 * e.g. 0.33 on english local, 0,33 on german)
+			 * Use NumberFormat to format the number into a String to workaround
+			 * different possible locales of machines on that Graphviz could run
+			 * (could result in different number formats, e.g. 0.33 on english
+			 * local, 0,33 on german)
 			 */
-			String height = NumberFormat.getInstance().format(dots2Inches((int) subNodeGroup.getLayout().getSize().getHeight()));
-			String width = NumberFormat.getInstance().format(dots2Inches((int) subNodeGroup.getLayout().getSize().getWidth()));
+			String height = pixel2GraphVizInches((int) subNodeGroup.getLayout()
+					.getSize().getHeight());
+			String width = pixel2GraphVizInches((int) subNodeGroup.getLayout()
+					.getSize().getWidth());
 			GraphvizAPI.setLocalNodeAttribute(graphvizGraph, pointer, "label",
 					label);
 			GraphvizAPI.setLocalNodeAttribute(graphvizGraph, pointer, "height",
@@ -228,7 +231,7 @@ public class GraphvizLayouter {
 					GraphvizAPI.ATTR_POS);
 			String heightString = GraphvizAPI.getAttribute(nodePointer,
 					GraphvizAPI.ATTR_HEIGHT);
-			String width = GraphvizAPI.getAttribute(nodePointer,
+			String widthString = GraphvizAPI.getAttribute(nodePointer,
 					GraphvizAPI.ATTR_WIDTH);
 			KPoint location = KimlLayoutGraphFactory.eINSTANCE.createKPoint();
 			KDimension size = KimlLayoutGraphFactory.eINSTANCE
@@ -239,15 +242,16 @@ public class GraphvizLayouter {
 				// in draw2D it's the upper left corner
 				location = graphviz2Draw2D(position.get(0).intValue(), position
 						.get(1).intValue(), nodeGroup.getLayout().getSize());
-				// use NumberFormat for parsing, to fix different locales under which Graphviz could run
-				size.setHeight(inches2Dots((NumberFormat.getInstance().parse(heightString)).floatValue()));
-				size.setWidth(inches2Dots((NumberFormat.getInstance().parse(width)).floatValue()));
-				
-				
+				// use NumberFormat for parsing, see respective methods below
+				size.setHeight(graphVizInches2Pixel(heightString));
+				size.setWidth(graphVizInches2Pixel(widthString));
+
 			} catch (Exception e) {
 				/* nothing, might have been invalid String */
-				/* FIXME: Better graphical Error Message! This can actually happen as we have seen 
-				 *        (different locales)*/
+				/*
+				 * FIXME: Better graphical Error Message! This can actually
+				 * happen as we have seen (different locales)
+				 */
 				System.out.println(e.getMessage() + " " + posString);
 				e.printStackTrace();
 			}
@@ -400,24 +404,29 @@ public class GraphvizLayouter {
 	}
 
 	/**
-	 * Tranforms dots into inches, using the internal dpi factor.
+	 * Transforms pixel into a GraphViz inch string, taking care of the
+	 * platform's current locale settings. Under different locales, the height
+	 * and width values of GraphViz use dots, respective periods.
 	 * 
-	 * @param dots
-	 * @return inches
+	 * @param pixel
+	 * @return localized inch string
 	 */
-	private float dots2Inches(int dots) {
-		float inches = (dots / (float) dpi);
-		return inches;
+	private String pixel2GraphVizInches(int pixel) {
+		return NumberFormat.getInstance().format(pixel / (float) dpi);
 	}
 
 	/**
-	 * Tranforms inches into dots, using the internal dpi factor.
+	 * Transforms GraphViz written inches into pixel, using the internal dpi
+	 * factor and taking care of the platform's current locale settings. Under
+	 * different locales, the height and width values of GraphViz use dots,
+	 * respective periods.
 	 * 
-	 * @param iches
-	 * @return dots
+	 * @param graphViz
+	 *            inches
+	 * @return pixel
 	 */
-	private int inches2Dots(float inches) {
-		return (int) (inches * dpi);
+	private int graphVizInches2Pixel(String dotInches) throws ParseException {
+		return (int) (NumberFormat.getInstance().parse(dotInches).floatValue() * dpi);
 	}
 
 	/**
