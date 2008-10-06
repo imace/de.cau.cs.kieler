@@ -1,6 +1,7 @@
 package kiel.layouter.graphviz;
 
 import java.awt.Dimension;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -120,10 +121,14 @@ public class GraphvizLayouter {
 			String label = subNodeGroup.getLabel().getText();
 			if (label == null)
 				label = "";
-			String height = String.valueOf(dots2Inches((int) subNodeGroup
-					.getLayout().getSize().getHeight()));
-			String width = String.valueOf(dots2Inches((int) subNodeGroup
-					.getLayout().getSize().getWidth()));
+			/*
+			 * Use NumberFormat to format the number into a String to
+			 * workaround different possible locales of machines on that
+			 * Graphviz could run (could result in different number formats, 
+			 * e.g. 0.33 on english local, 0,33 on german)
+			 */
+			String height = NumberFormat.getInstance().format(dots2Inches((int) subNodeGroup.getLayout().getSize().getHeight()));
+			String width = NumberFormat.getInstance().format(dots2Inches((int) subNodeGroup.getLayout().getSize().getWidth()));
 			GraphvizAPI.setLocalNodeAttribute(graphvizGraph, pointer, "label",
 					label);
 			GraphvizAPI.setLocalNodeAttribute(graphvizGraph, pointer, "height",
@@ -234,10 +239,15 @@ public class GraphvizLayouter {
 				// in draw2D it's the upper left corner
 				location = graphviz2Draw2D(position.get(0).intValue(), position
 						.get(1).intValue(), nodeGroup.getLayout().getSize());
-				size.setHeight(inches2Dots(Float.parseFloat(heightString)));
-				size.setWidth(inches2Dots(Float.parseFloat(width)));
+				// use NumberFormat for parsing, to fix different locales under which Graphviz could run
+				size.setHeight(inches2Dots((NumberFormat.getInstance().parse(heightString)).floatValue()));
+				size.setWidth(inches2Dots((NumberFormat.getInstance().parse(width)).floatValue()));
+				
+				
 			} catch (Exception e) {
 				/* nothing, might have been invalid String */
+				/* FIXME: Better graphical Error Message! This can actually happen as we have seen 
+				 *        (different locales)*/
 				System.out.println(e.getMessage() + " " + posString);
 				e.printStackTrace();
 			}
