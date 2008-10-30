@@ -24,11 +24,11 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="outgoingTransitions" upperBound="-1"
         eType="#//Transition" eOpposite="#//Transition/source"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="onEntryAction" eType="#//OnAction"
-        transient="true"/>
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="onInsideAction" eType="#//OnAction"
-        transient="true"/>
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="onExitAction" eType="#//OnAction"
-        transient="true"/>
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SimpleState" eSuperTypes="#//AbstractState #//Named">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="stateFlag" unique="false"
@@ -43,11 +43,11 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="regions" lowerBound="1"
         upperBound="-1" eType="#//Region" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="localSignals" upperBound="-1"
-        eType="#//Signal" transient="true" containment="true"/>
+        eType="#//Signal" unsettable="true" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="inputSignals" upperBound="-1"
-        eType="#//Signal" transient="true" containment="true"/>
+        eType="#//Signal" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="outputSignals" upperBound="-1"
-        eType="#//Signal" transient="true" containment="true"/>
+        eType="#//Signal" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Transition">
     <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
@@ -56,7 +56,7 @@
         eType="#//AbstractState" eOpposite="#//AbstractState/outgoingTransitions"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="priority" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="effect" upperBound="-1"
-        eType="#//Action"/>
+        eType="#//Action" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="effectString" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TransitionTriggerable">
@@ -90,9 +90,10 @@
         eType="#//Signal"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OnAction">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="trigger" eType="#//Trigger"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="effect" upperBound="-1"
-        eType="#//Action"/>
+        eType="#//Action" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="trigger" eType="#//Trigger"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="StateFlag">
     <eLiterals name="NORMAL" literal="NORMAL"/>
@@ -123,5 +124,18 @@
     <eLiterals name="INTSIGNALLT" value="6"/>
     <eLiterals name="INTSIGNALEQ" value="8"/>
     <eLiterals name="PURESIGNALEQ" value="10"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BlackBox" abstract="true" interface="true"
+      eSuperTypes="#//AbstractState">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxPriority" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="content" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="WCRT" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataDependency" eSuperTypes="#//Transition">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Not for use in Model editors. This is for visualizing dependencies calculated from the SSM.&#xA;"/>
+    </eAnnotations>
   </eClassifiers>
 </ecore:EPackage>
