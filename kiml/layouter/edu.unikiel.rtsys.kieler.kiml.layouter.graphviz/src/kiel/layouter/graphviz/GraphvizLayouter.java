@@ -238,13 +238,13 @@ public class GraphvizLayouter {
 					.createKDimension();
 			try {
 				List<Integer> position = string2Ints(posString);
-				// in GraphViz position is the center of the node
-				// in draw2D it's the upper left corner
-				location = graphviz2Draw2D(position.get(0).intValue(), position
-						.get(1).intValue(), nodeGroup.getLayout().getSize());
 				// use NumberFormat for parsing, see respective methods below
 				size.setHeight(graphVizInches2Pixel(heightString));
 				size.setWidth(graphVizInches2Pixel(widthString));
+				// in GraphViz position is the center of the node
+				// in draw2D it's the upper left corner
+				location = graphviz2Draw2D(position.get(0).intValue(), position
+						.get(1).intValue(), size);
 
 			} catch (Exception e) {
 				/* nothing, might have been invalid String */
