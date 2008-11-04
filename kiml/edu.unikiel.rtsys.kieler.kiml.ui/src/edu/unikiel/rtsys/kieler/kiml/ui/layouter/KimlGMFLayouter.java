@@ -20,8 +20,11 @@ import org.eclipse.gef.requests.ChangeBoundsRequest;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.LabelEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeCompartmentEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.figures.ShapeCompartmentFigure;
+import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramCommandStack;
 import org.eclipse.gmf.runtime.diagram.ui.requests.RequestConstants;
 import org.eclipse.gmf.runtime.diagram.ui.requests.SetAllBendpointRequest;
+import org.eclipse.gmf.runtime.draw2d.ui.internal.figures.AnimatableScrollPane;
 
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.EDGE_LABEL_PLACEMENT;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KDimension;
@@ -49,7 +52,9 @@ public class KimlGMFLayouter extends KimlAbstractLayouter {
 
 	private boolean useGMFLabelLocation = true;
 	private double zoomLevel = 1.0;
-
+	private float widthCollapsed = 80f;
+	private float heightCollapsed = 40f;
+	
 	private Map<NodeEditPart, KNodeGroup> nodeEditPart2NodeGroup = new HashMap<NodeEditPart, KNodeGroup>();
 	private Map<KNodeGroup, GraphicalEditPart> nodeGroup2NodeEditPart = new HashMap<KNodeGroup, GraphicalEditPart>();
 	private Map<KEdge, ConnectionEditPart> edge2ConnectionEditPart = new HashMap<KEdge, ConnectionEditPart>();
@@ -104,92 +109,123 @@ public class KimlGMFLayouter extends KimlAbstractLayouter {
 		ArrayList<ConnectionEditPart> connections = new ArrayList<ConnectionEditPart>();
 		Map<String, ArrayList<KNodeGroup>> nodes2Groups = new HashMap<String, ArrayList<KNodeGroup>>();
 
+		boolean isExpanded = true;
+
 		// Hack, at the moment for SSMs to take care of the 'header' of an
 		// CompositeState.
 		if (current instanceof ShapeCompartmentEditPart) {
+			ShapeCompartmentEditPart currentSCEP = (ShapeCompartmentEditPart) current;
 			// Insets, if Compartment has "header", for example
-			float insetsTop = (((GraphicalEditPart) current.getParent())
-					.getFigure().getBounds().getSize().height - current
+			float insetsLeft;
+			float insetsTop = (((GraphicalEditPart) currentSCEP.getParent())
+					.getFigure().getBounds().getSize().height - currentSCEP
 					.getContentPane().getBounds().height);
 			// TODO: dirty hack to keep the header in CompositeState constant at
 			// 33 pixel after layout.
 			insetsTop = 33f;
+			insetsLeft = 15f;
+			
+			// check if compartment is collapsed
+			ShapeCompartmentFigure scf = (ShapeCompartmentFigure) currentSCEP
+					.getFigure();
+			AnimatableScrollPane asp = (AnimatableScrollPane) scf
+					.getScrollPane();
+			isExpanded = asp.isExpanded();
 			try {
 				nodeEditPart2NodeGroup.get(current.getParent()).getLayout()
 						.getInsets().setTop(insetsTop);
+				nodeEditPart2NodeGroup.get(current.getParent()).getLayout()
+				.getInsets().setLeft(insetsLeft);
+				if (!isExpanded) {
+					// setting the size to default values
+					nodeEditPart2NodeGroup.get(current.getParent()).getLayout()
+							.getSize().setHeight(heightCollapsed);
+					nodeEditPart2NodeGroup.get(current.getParent()).getLayout()
+							.getSize().setWidth(widthCollapsed);
+					// extend the label string to handle the node label of a composite state correctly
+					String text = nodeEditPart2NodeGroup.get(current.getParent()).getLabel().getText();
+					nodeEditPart2NodeGroup.get(current.getParent()).getLabel().setText(text.concat("XX"));
+				}
 			} catch (Exception e) {
 				;
 			}
 		}
 
-		// Process each child.
-		for (Object obj : current.getChildren()) {
+		if (isExpanded) {
+			// Process each child.
+			for (Object obj : current.getChildren()) {
 
-			// if true, Emma has a real EditPart with contents.
-			if (obj instanceof NodeEditPart) {
-				NodeEditPart childNodeEditPart = (NodeEditPart) obj;
-				KNodeGroup childKNodeGroup = KimlLayoutUtil
-						.createInitializedNodeGroup();
-				Rectangle childBounds = childNodeEditPart.getFigure()
-						.getBounds();
+				// if true, Emma has a real EditPart with contents.
+				if (obj instanceof NodeEditPart) {
+					NodeEditPart childNodeEditPart = (NodeEditPart) obj;
+					KNodeGroup childKNodeGroup = KimlLayoutUtil
+							.createInitializedNodeGroup();
+					Rectangle childBounds = childNodeEditPart.getFigure()
+							.getBounds();
 
-				// store all the connections to process them later
-				for (Object conn : childNodeEditPart.getTargetConnections()) {
-					if (conn instanceof ConnectionEditPart) {
-						connections.add((ConnectionEditPart) conn);
+					// store all the connections to process them later
+					for (Object conn : childNodeEditPart.getTargetConnections()) {
+						if (conn instanceof ConnectionEditPart) {
+							connections.add((ConnectionEditPart) conn);
+						}
 					}
+					// set location
+					childKNodeGroup.getLayout().getLocation().setX(
+							childBounds.x);
+					childKNodeGroup.getLayout().getLocation().setY(
+							childBounds.y);
+
+					// set size
+					childKNodeGroup.getLayout().getSize().setHeight(
+							childBounds.height);
+					childKNodeGroup.getLayout().getSize().setWidth(
+							childBounds.width);
+
+					// set label and ID
+					childKNodeGroup.getLabel().setText(
+							KimlCommonHelper.getShortLabel(childNodeEditPart));
+					childKNodeGroup.setIdString(KimlCommonHelper
+							.getLongLabel(childNodeEditPart));
+
+					// now process the layout groups correctly, as there may be
+					// more than one in each editPart itself
+					addNode2Group(nodes2Groups, childNodeEditPart,
+							childKNodeGroup);
+
+					// keep track of mapping between elements
+					nodeEditPart2NodeGroup.put(childNodeEditPart,
+							childKNodeGroup);
+					nodeGroup2NodeEditPart.put(childKNodeGroup,
+							childNodeEditPart);
+
+					// and process the child as new current
+					buildLayoutGraphRecursively(childNodeEditPart,
+							childKNodeGroup);
 				}
 
-				// set location
-				childKNodeGroup.getLayout().getLocation().setX(childBounds.x);
-				childKNodeGroup.getLayout().getLocation().setY(childBounds.y);
-
-				// set size
-				childKNodeGroup.getLayout().getSize().setHeight(
-						childBounds.height);
-				childKNodeGroup.getLayout().getSize().setWidth(
-						childBounds.width);
-
-				// set label and ID
-				childKNodeGroup.getLabel().setText(
-						KimlCommonHelper.getShortLabel(childNodeEditPart));
-				childKNodeGroup.setIdString(KimlCommonHelper
-						.getLongLabel(childNodeEditPart));
-
-				// now process the layout groups correctly, as there may be
-				// more than one in each editPart itself
-				addNode2Group(nodes2Groups, childNodeEditPart, childKNodeGroup);
-
-				// keep track of mapping between elements
-				nodeEditPart2NodeGroup.put(childNodeEditPart, childKNodeGroup);
-				nodeGroup2NodeEditPart.put(childKNodeGroup, childNodeEditPart);
-
-				// and process the child as new current
-				buildLayoutGraphRecursively(childNodeEditPart, childKNodeGroup);
+				// If it is just a graphical edit part, it may be the
+				// compartment
+				// inside a composite edit part or other esoteric stuff, as Emma
+				// loves reality, she does not need this, as she already
+				// has the parent of it, but needs the direct children.
+				else if (obj instanceof GraphicalEditPart) {
+					GraphicalEditPart childPart = (GraphicalEditPart) obj;
+					buildLayoutGraphRecursively(childPart, currentNodeGroup);
+				}
 			}
 
-			// If it is just a graphical edit part, it may be the compartment
-			// inside a composite edit part or other esoteric stuff, as Emma
-			// loves reality, she does not need this, as she already
-			// has the parent of it, but needs the direct children.
-			else if (obj instanceof GraphicalEditPart) {
-				GraphicalEditPart childPart = (GraphicalEditPart) obj;
-				buildLayoutGraphRecursively(childPart, currentNodeGroup);
-			}
+			/*
+			 * Now process the children correctly to add them to newly created
+			 * groups which are added as K-subgroups to the parent node group.
+			 */
+			processNodeGroups(nodes2Groups, currentNodeGroup);
+
+			/*
+			 * Finally process all the connections, as Emma has build all the
+			 * needed KNodeGroups which act as source and target.
+			 */
+			processConnections(connections);
 		}
-
-		/*
-		 * Now process the children correctly to add them to newly created
-		 * groups which are added as K-subgroups to the parent node group.
-		 */
-		processNodeGroups(nodes2Groups, currentNodeGroup);
-
-		/*
-		 * Finally process all the connections, as Emma has build all the needed
-		 * KNodeGroups which act as source and target.
-		 */
-		processConnections(connections);
-
 	}
 
 	/**
@@ -444,7 +480,9 @@ public class KimlGMFLayouter extends KimlAbstractLayouter {
 
 		applyNodeLayoutRecursively(layoutGraph.getTopGroup(), compoundCommand,
 				offset);
+
 		commandStack.execute(compoundCommand);
+
 		return true;
 	}
 
@@ -645,13 +683,15 @@ public class KimlGMFLayouter extends KimlAbstractLayouter {
 		if (root instanceof GraphicalEditPart
 				&& ((GraphicalEditPart) root).getRoot() instanceof ScalableFreeformRootEditPart) {
 			GraphicalEditPart gep = (GraphicalEditPart) root;
-			commandStack = gep.getViewer().getEditDomain().getCommandStack();
+			// commandStack = gep.getViewer().getEditDomain().getCommandStack();
+			commandStack = new DiagramCommandStack(null);
 			ScalableFreeformRootEditPart sfrep = (ScalableFreeformRootEditPart) gep
 					.getRoot();
 			zoomLevel = sfrep.getZoomManager().getZoom();
 		} else {
 			System.out
-					.println("KimlGMFLayouter: Error: not instanceof GraphicalEditPart: " + root.getClass());
+					.println("KimlGMFLayouter: Error: not instanceof GraphicalEditPart: "
+							+ root.getClass());
 			return false;
 		}
 		if (commandStack == null) {
