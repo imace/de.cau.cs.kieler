@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MappingFile>
+	 	<operatorMappings>
+		<OperatorMapping name="System::SystemSimul" oid="!ed/1BFF7/7BD2/DC/46A46BEE/1F70">
+			<mappingItems>
+				<MappingItem>
+					<output>
+						<Variable name="CruiseSpeed" type="real" oid="!ed/1C055/7BD2/DC/46A46C1D/48E2" instancepath="System::SystemSimul/"/>
+					</output>
+					<inputs>
+						<Plug name="F_CruiseSpeed" type="real" pathname="..\CruiseControlDisplay\CruiseControlSdy.sgf" layer="CruiseControl"/>
+					</inputs>
+				</MappingItem>
+				<MappingItem>
+					<output>
+						<Variable name="CruiseState" type="enum {OFF, INT, STDBY, ON}" oid="!ed/1C069/7BD2/DC/46A46C1D/1519" instancepath="System::SystemSimul/"/>
+					</output>
+					<inputs>
+						<Plug name="I_CruiseState" type="integer" pathname="..\CruiseControlDisplay\CruiseControlSdy.sgf" layer="CruiseControl"/>
+					</inputs>
+				</MappingItem>
+				<MappingItem>
+					<output>
+						<Variable name="CarSpeed" type="real" oid="!ed/1C0B0/7BD2/DC/46A46DE9/45E8" instancepath="System::SystemSimul/"/>
+					</output>
+					<inputs>
+						<Plug name="F_Speed" type="real" pathname="..\CruiseControlDisplay\CruiseControlSdy.sgf" layer="CruiseControl"/>
+					</inputs>
+				</MappingItem>
+			</mappingItems>
+		</OperatorMapping>
+	</operatorMappings>
+</MappingFile>
