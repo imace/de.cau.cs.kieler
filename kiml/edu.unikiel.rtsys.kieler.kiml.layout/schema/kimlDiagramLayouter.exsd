@@ -3,10 +3,10 @@
 <schema targetNamespace="edu.unikiel.rtsys.kieler.kiml.layout" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
       <appinfo>
-         <meta.schema plugin="edu.unikiel.rtsys.kieler.kiml.layout" id="kimlLayoutProvider" name="KIML Layout Provider"/>
+         <meta.schema plugin="edu.unikiel.rtsys.kieler.kiml.layout" id="kimlDiagramLayouter" name="KIML Diagram Layouter"/>
       </appinfo>
       <documentation>
-         Extension point for layout algorithms to be used with KIML.
+         Extension point for implementations of the translation of diagram elements to a KIML Layout Graph.
       </documentation>
    </annotation>
 
@@ -18,7 +18,7 @@
       </annotation>
       <complexType>
          <sequence>
-            <element ref="kimlLayoutProvider"/>
+            <element ref="kimlDiagramLayouter"/>
          </sequence>
          <attribute name="point" type="string" use="required">
             <annotation>
@@ -47,46 +47,24 @@
       </complexType>
    </element>
 
-   <element name="kimlLayoutProvider">
+   <element name="kimlDiagramLayouter">
       <complexType>
-         <sequence>
-            <element ref="Priority"/>
-         </sequence>
-         <attribute name="class" type="string">
+         <attribute name="class" type="string" use="required">
             <annotation>
                <documentation>
-                  
+                  Implementing class of the diagram layouter
                </documentation>
                <appinfo>
-                  <meta.attribute kind="java" basedOn="edu.unikiel.rtsys.kieler.kiml.layout.services.KimlAbstractLayoutProvider:"/>
+                  <meta.attribute kind="java" basedOn="edu.unikiel.rtsys.kieler.kiml.layout.services.KimlAbstractLayouter:"/>
                </appinfo>
             </annotation>
          </attribute>
-      </complexType>
-   </element>
-
-   <element name="Priority">
-      <complexType>
-         <attribute name="name">
+         <attribute name="editor_id" type="string" use="required">
             <annotation>
                <documentation>
-                  
+                  ID of the diagram editor for which this diagram layouter shall be used
                </documentation>
             </annotation>
-            <simpleType>
-               <restriction base="string">
-                  <enumeration value="Lowest">
-                  </enumeration>
-                  <enumeration value="Low">
-                  </enumeration>
-                  <enumeration value="Medium">
-                  </enumeration>
-                  <enumeration value="High">
-                  </enumeration>
-                  <enumeration value="Highest">
-                  </enumeration>
-               </restriction>
-            </simpleType>
          </attribute>
       </complexType>
    </element>

@@ -45,6 +45,7 @@ public final class LayoutProviders {
 					}
 				}
 			} catch (CoreException e) {
+				// TODO error handling
 				System.out
 						.println("===================================================");
 				System.out.println("Error creating layout providers.");

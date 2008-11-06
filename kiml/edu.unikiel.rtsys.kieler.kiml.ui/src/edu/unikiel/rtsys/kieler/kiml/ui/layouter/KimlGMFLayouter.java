@@ -15,6 +15,7 @@ import org.eclipse.gef.GraphicalEditPart;
 import org.eclipse.gef.NodeEditPart;
 import org.eclipse.gef.commands.CommandStack;
 import org.eclipse.gef.commands.CompoundCommand;
+import org.eclipse.gef.editparts.AbstractEditPart;
 import org.eclipse.gef.editparts.ScalableFreeformRootEditPart;
 import org.eclipse.gef.requests.ChangeBoundsRequest;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.LabelEditPart;
@@ -25,6 +26,7 @@ import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramCommandStack;
 import org.eclipse.gmf.runtime.diagram.ui.requests.RequestConstants;
 import org.eclipse.gmf.runtime.diagram.ui.requests.SetAllBendpointRequest;
 import org.eclipse.gmf.runtime.draw2d.ui.internal.figures.AnimatableScrollPane;
+import org.eclipse.jface.viewers.IStructuredSelection;
 
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.EDGE_LABEL_PLACEMENT;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KDimension;
@@ -32,9 +34,11 @@ import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KEdge;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KEdgeLabel;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KEdgeLayout;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KLabel;
+import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KLayoutGraph;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPoint;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_TYPE;
+import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphFactory;
 import edu.unikiel.rtsys.kieler.kiml.layout.services.KimlAbstractLayouter;
 import edu.unikiel.rtsys.kieler.kiml.layout.util.KimlLayoutUtil;
 import edu.unikiel.rtsys.kieler.kiml.ui.KimlUiPlugin;
@@ -60,21 +64,73 @@ public class KimlGMFLayouter extends KimlAbstractLayouter {
 	private Map<KEdge, ConnectionEditPart> edge2ConnectionEditPart = new HashMap<KEdge, ConnectionEditPart>();
 	private Map<KLabel, LabelEditPart> label2LabelEditPart = new HashMap<KLabel, LabelEditPart>();
 	private CommandStack commandStack = null;
+	
+	private GraphicalEditPart rootPart;
+	private KLayoutGraph layoutGraph;
 
+	private GraphicalEditPart getRootPart(IStructuredSelection selection, String commandId)
+	{
+		GraphicalEditPart root = null;
+
+		// no matter how much was selected, get the first element
+		Object selectedObject = selection.getFirstElement();
+		// if just one element was selected, use this, if NodeEditPart
+		if (selection.size() == 1) {
+			if (selectedObject instanceof NodeEditPart) {
+				root = (NodeEditPart) selectedObject;
+			} else {
+				root = findParentNode(selectedObject);
+			}
+		}
+		// more selected, find parent thereof
+		else {
+			root = findParentNode(selectedObject);
+		}
+
+		/*
+		 * Check if Emma wants to layout just the selected element(s), or
+		 * the entire diagram in the editor.
+		 * WARNING: probably this doesn't work for dataflow diagrams
+		 */
+		if (commandId.equals("edu.unikiel.rtsys.kieler.kiml.ui.command.kimlGMFLayoutAll")) {
+			if (root.getViewer().getRootEditPart().getContents()
+					.getChildren().get(0) instanceof NodeEditPart) {
+				root = (NodeEditPart) root.getViewer().getRootEditPart()
+						.getContents().getChildren().get(0);
+			}
+		}
+		
+		return root;
+	}
+	
+	/*
+	 * Recursive helper function to get a NodeEditPart parent for an object.
+	 */
+	private NodeEditPart findParentNode(Object current) {
+		if (current instanceof AbstractEditPart) {
+			AbstractEditPart aep = (AbstractEditPart) current;
+			if (aep.getParent() instanceof NodeEditPart)
+				return (NodeEditPart) aep.getParent();
+			else
+				return findParentNode(aep.getParent());
+		} else
+			return null;
+	}
+	
 	/**
 	 * Translates the actual model representation in the editor to the
 	 * KLayoutGraph structure which is passed to the layout engine.
 	 */
-	public boolean buildLayoutGraph() {
+	protected KLayoutGraph buildLayoutGraph() {
+		layoutGraph = KimlLayoutGraphFactory.eINSTANCE.createKLayoutGraph();
 
-		// set at least this to have a top node in the layout graph which is not
-		// null
+		// set at least this to have a top node in the layout graph which is not null
 		KNodeGroup topNodeGroup = KimlLayoutUtil.createInitializedNodeGroup();
 		layoutGraph.setTopGroup(topNodeGroup);
-
+		
 		// But if Emma has a NodeEditPart, then do more.
-		if (root instanceof NodeEditPart) {
-			NodeEditPart rootEditPart = (NodeEditPart) root;
+		if (rootPart instanceof NodeEditPart) {
+			NodeEditPart rootEditPart = (NodeEditPart)rootPart;
 
 			// set label and ID
 			topNodeGroup.getLabel().setText(
@@ -86,9 +142,9 @@ public class KimlGMFLayouter extends KimlAbstractLayouter {
 			nodeGroup2NodeEditPart.put(topNodeGroup, rootEditPart);
 
 			buildLayoutGraphRecursively(rootEditPart, topNodeGroup);
-			return true;
+			return layoutGraph;
 		} else {
-			return false;
+			return null;
 		}
 	}
 
@@ -444,11 +500,11 @@ public class KimlGMFLayouter extends KimlAbstractLayouter {
 	 * Performs the re-translation from the now laid out KLayoutGraph to
 	 * Commands that the GEF editor will understand.
 	 */
-	public boolean applyLayout() {
+	protected void applyLayout() {
 
 		if (commandStack == null) {
+			// TODO error handling
 			System.out.println("KimlGMFLayouter: Error: commandStack == null");
-			return false;
 		}
 
 		CompoundCommand compoundCommand = new CompoundCommand();
@@ -482,8 +538,6 @@ public class KimlGMFLayouter extends KimlAbstractLayouter {
 				offset);
 
 		commandStack.execute(compoundCommand);
-
-		return true;
 	}
 
 	/**
@@ -674,15 +728,16 @@ public class KimlGMFLayouter extends KimlAbstractLayouter {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @seeedu.unikiel.rtsys.kieler.kiml.layout.services.KimlAbstractLayouter#
-	 * init()
+	 * @see edu.unikiel.rtsys.kieler.kiml.layout.services.KimlAbstractLayouter#init(org.eclipse.jface.viewers.IStructuredSelection, java.lang.String)
 	 */
-	public boolean init() {
+	protected boolean init(IStructuredSelection selection, String commandId) {
+		// get root part of the selection
+		rootPart = getRootPart(selection, commandId);
+		
 		// get zooming level
-		if (root instanceof GraphicalEditPart
-				&& ((GraphicalEditPart) root).getRoot() instanceof ScalableFreeformRootEditPart) {
-			GraphicalEditPart gep = (GraphicalEditPart) root;
+		if (rootPart instanceof GraphicalEditPart
+				&& ((GraphicalEditPart) rootPart).getRoot() instanceof ScalableFreeformRootEditPart) {
+			GraphicalEditPart gep = (GraphicalEditPart) rootPart;
 			// commandStack = gep.getViewer().getEditDomain().getCommandStack();
 			commandStack = new DiagramCommandStack(null);
 			ScalableFreeformRootEditPart sfrep = (ScalableFreeformRootEditPart) gep
@@ -691,7 +746,7 @@ public class KimlGMFLayouter extends KimlAbstractLayouter {
 		} else {
 			System.out
 					.println("KimlGMFLayouter: Error: not instanceof GraphicalEditPart: "
-							+ root.getClass());
+							+ rootPart.getClass());
 			return false;
 		}
 		if (commandStack == null) {

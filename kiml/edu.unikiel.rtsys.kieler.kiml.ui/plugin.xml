@@ -134,15 +134,9 @@ point="org.eclipse.ui.menus">
    <toolbar
          id="edu.unikiel.rtsys.kieler.kiml.ui.toolbar.main">
       <command
-            commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.kimlGEFLayout"
+            commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.kimlLayout"
             icon="icons/kieler-arrange.png"
-            label="KIML GEF Layout"
-            style="push">
-      </command>
-      <command
-            commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.kimlGMFLayout"
-            icon="icons/kieler-arrange.png"
-            label="KIML GMF Layout"
+            label="KIML Layout"
             style="push">
       </command>
    </toolbar>
@@ -230,16 +224,12 @@ point="org.eclipse.ui.menus">
          </enabledWhen>
       </handler>
       <handler
-            class="edu.unikiel.rtsys.kieler.kiml.ui.handlers.KimlGEFLayoutHandler"
-            commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.kimlGEFLayout">
+            class="edu.unikiel.rtsys.kieler.kiml.ui.handlers.KimlLayoutHandler"
+            commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.kimlLayout">
       </handler>
       <handler
-            class="edu.unikiel.rtsys.kieler.kiml.ui.handlers.KimlGMFLayoutHandler"
-            commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.kimlGMFLayout">
-      </handler>
-      <handler
-            class="edu.unikiel.rtsys.kieler.kiml.ui.handlers.KimlGMFLayoutHandler"
-            commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.kimlGMFLayoutAll">
+            class="edu.unikiel.rtsys.kieler.kiml.ui.handlers.KimlLayoutHandler"
+            commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.kimlLayoutAll">
       </handler>
    </extension>
    <extension
