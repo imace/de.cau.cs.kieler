@@ -190,11 +190,6 @@ point="org.eclipse.ui.menus">
       <handler
             class="edu.unikiel.rtsys.kieler.kiml.ui.handlers.GroupAsHandler"
             commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.groupAs">
-         <enabledWhen>
-            <reference
-                  definitionId="KIML.generalSelectionIs2OrMoreShapeNodeEditParts">
-            </reference>
-         </enabledWhen>
       </handler>
       <handler
             class="edu.unikiel.rtsys.kieler.kiml.ui.handlers.GroupFunctionHandler"
