@@ -24,7 +24,8 @@ public class HelpersStartup implements IStartup {
 		final IWorkbench workbench = PlatformUI.getWorkbench();
 		workbench.getDisplay().asyncExec(new Runnable() {
 			   public void run() {
-				   workbench.getDisplay().addFilter(SWT.MouseMove, new MousePositionListener());
+				   // TODO: remove this stuff entirely
+				   //workbench.getDisplay().addFilter(SWT.MouseMove, new MousePositionListener());
 			   }
 			 });
 		
