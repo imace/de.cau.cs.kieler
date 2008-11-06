@@ -12,12 +12,15 @@ import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPacka
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_OPTION;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_TYPE;
 
+import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -57,24 +60,14 @@ public class KNodeGroupLayoutImpl extends KShapeLayoutImpl implements KNodeGroup
 	protected LAYOUT_TYPE layoutType = LAYOUT_TYPE_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getLayoutOptions() <em>Layout Options</em>}' attribute.
+	 * The cached value of the '{@link #getLayoutOptions() <em>Layout Options</em>}' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getLayoutOptions()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final LAYOUT_OPTION LAYOUT_OPTIONS_EDEFAULT = LAYOUT_OPTION.DEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getLayoutOptions() <em>Layout Options</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getLayoutOptions()
-	 * @generated
-	 * @ordered
-	 */
-	protected LAYOUT_OPTION layoutOptions = LAYOUT_OPTIONS_EDEFAULT;
+	protected EList<LAYOUT_OPTION> layoutOptions;
 
 	/**
 	 * The default value of the '{@link #getLayouterName() <em>Layouter Name</em>}' attribute.
@@ -151,20 +144,11 @@ public class KNodeGroupLayoutImpl extends KShapeLayoutImpl implements KNodeGroup
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public LAYOUT_OPTION getLayoutOptions() {
+	public EList<LAYOUT_OPTION> getLayoutOptions() {
+		if (layoutOptions == null) {
+			layoutOptions = new EDataTypeUniqueEList<LAYOUT_OPTION>(LAYOUT_OPTION.class, this, KimlLayoutGraphPackage.KNODE_GROUP_LAYOUT__LAYOUT_OPTIONS);
+		}
 		return layoutOptions;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setLayoutOptions(LAYOUT_OPTION newLayoutOptions) {
-		LAYOUT_OPTION oldLayoutOptions = layoutOptions;
-		layoutOptions = newLayoutOptions == null ? LAYOUT_OPTIONS_EDEFAULT : newLayoutOptions;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KNODE_GROUP_LAYOUT__LAYOUT_OPTIONS, oldLayoutOptions, layoutOptions));
 	}
 
 	/**
@@ -252,6 +236,7 @@ public class KNodeGroupLayoutImpl extends KShapeLayoutImpl implements KNodeGroup
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -259,7 +244,8 @@ public class KNodeGroupLayoutImpl extends KShapeLayoutImpl implements KNodeGroup
 				setLayoutType((LAYOUT_TYPE)newValue);
 				return;
 			case KimlLayoutGraphPackage.KNODE_GROUP_LAYOUT__LAYOUT_OPTIONS:
-				setLayoutOptions((LAYOUT_OPTION)newValue);
+				getLayoutOptions().clear();
+				getLayoutOptions().addAll((Collection<? extends LAYOUT_OPTION>)newValue);
 				return;
 			case KimlLayoutGraphPackage.KNODE_GROUP_LAYOUT__LAYOUTER_NAME:
 				setLayouterName((String)newValue);
@@ -283,7 +269,7 @@ public class KNodeGroupLayoutImpl extends KShapeLayoutImpl implements KNodeGroup
 				setLayoutType(LAYOUT_TYPE_EDEFAULT);
 				return;
 			case KimlLayoutGraphPackage.KNODE_GROUP_LAYOUT__LAYOUT_OPTIONS:
-				setLayoutOptions(LAYOUT_OPTIONS_EDEFAULT);
+				getLayoutOptions().clear();
 				return;
 			case KimlLayoutGraphPackage.KNODE_GROUP_LAYOUT__LAYOUTER_NAME:
 				setLayouterName(LAYOUTER_NAME_EDEFAULT);
@@ -306,7 +292,7 @@ public class KNodeGroupLayoutImpl extends KShapeLayoutImpl implements KNodeGroup
 			case KimlLayoutGraphPackage.KNODE_GROUP_LAYOUT__LAYOUT_TYPE:
 				return layoutType != LAYOUT_TYPE_EDEFAULT;
 			case KimlLayoutGraphPackage.KNODE_GROUP_LAYOUT__LAYOUT_OPTIONS:
-				return layoutOptions != LAYOUT_OPTIONS_EDEFAULT;
+				return layoutOptions != null && !layoutOptions.isEmpty();
 			case KimlLayoutGraphPackage.KNODE_GROUP_LAYOUT__LAYOUTER_NAME:
 				return LAYOUTER_NAME_EDEFAULT == null ? layouterName != null : !LAYOUTER_NAME_EDEFAULT.equals(layouterName);
 			case KimlLayoutGraphPackage.KNODE_GROUP_LAYOUT__INSETS:

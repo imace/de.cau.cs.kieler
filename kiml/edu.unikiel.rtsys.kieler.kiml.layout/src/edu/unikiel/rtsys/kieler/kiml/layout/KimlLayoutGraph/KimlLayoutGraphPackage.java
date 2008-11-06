@@ -511,7 +511,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	int KNODE_GROUP_LAYOUT__LAYOUT_TYPE = KSHAPE_LAYOUT_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Layout Options</b></em>' attribute.
+	 * The feature id for the '<em><b>Layout Options</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1274,10 +1274,10 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	EAttribute getKNodeGroupLayout_LayoutType();
 
 	/**
-	 * Returns the meta object for the attribute '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroupLayout#getLayoutOptions <em>Layout Options</em>}'.
+	 * Returns the meta object for the attribute list '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroupLayout#getLayoutOptions <em>Layout Options</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Layout Options</em>'.
+	 * @return the meta object for the attribute list '<em>Layout Options</em>'.
 	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroupLayout#getLayoutOptions()
 	 * @see #getKNodeGroupLayout()
 	 * @generated
@@ -1860,7 +1860,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 		EAttribute KNODE_GROUP_LAYOUT__LAYOUT_TYPE = eINSTANCE.getKNodeGroupLayout_LayoutType();
 
 		/**
-		 * The meta object literal for the '<em><b>Layout Options</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Layout Options</b></em>' attribute list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated

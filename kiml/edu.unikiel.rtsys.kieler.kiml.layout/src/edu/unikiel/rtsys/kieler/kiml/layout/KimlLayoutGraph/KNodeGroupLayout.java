@@ -6,6 +6,8 @@
  */
 package edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph;
 
+import org.eclipse.emf.common.util.EList;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -58,7 +60,8 @@ public interface KNodeGroupLayout extends KShapeLayout {
 	void setLayoutType(LAYOUT_TYPE value);
 
 	/**
-	 * Returns the value of the '<em><b>Layout Options</b></em>' attribute.
+	 * Returns the value of the '<em><b>Layout Options</b></em>' attribute list.
+	 * The list contents are of type {@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_OPTION}.
 	 * The literals are from the enumeration {@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_OPTION}.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -66,25 +69,13 @@ public interface KNodeGroupLayout extends KShapeLayout {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Layout Options</em>' attribute.
+	 * @return the value of the '<em>Layout Options</em>' attribute list.
 	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_OPTION
-	 * @see #setLayoutOptions(LAYOUT_OPTION)
 	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKNodeGroupLayout_LayoutOptions()
-	 * @model required="true"
+	 * @model default="" ordered="false"
 	 * @generated
 	 */
-	LAYOUT_OPTION getLayoutOptions();
-
-	/**
-	 * Sets the value of the '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroupLayout#getLayoutOptions <em>Layout Options</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Layout Options</em>' attribute.
-	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_OPTION
-	 * @see #getLayoutOptions()
-	 * @generated
-	 */
-	void setLayoutOptions(LAYOUT_OPTION value);
+	EList<LAYOUT_OPTION> getLayoutOptions();
 
 	/**
 	 * Returns the value of the '<em><b>Layouter Name</b></em>' attribute.
