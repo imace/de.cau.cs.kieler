@@ -4,6 +4,7 @@ import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.IHandler;
+import org.eclipse.draw2d.Animation;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.handlers.HandlerUtil;
@@ -47,12 +48,16 @@ public class KimlLayoutHandler extends AbstractHandler implements IHandler {
 			if (selection == null || commandId.equals(COMMAND_ID_LAYOUT_ALL))
 			{
 				// start layout process with editor part
+				Animation.markBegin();
 				diagramLayouter.layout(editorPart);
+				Animation.run(700);
 			}
 			else
 			{
 				// start layout process with selection
+				Animation.markBegin();
 				diagramLayouter.layout(selection);
+				Animation.run(700);
 			}
 		}
 		else
