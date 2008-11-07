@@ -13,6 +13,7 @@ import org.eclipse.emf.transaction.RollbackException;
 import org.eclipse.gef.GraphicalViewer;
 import org.eclipse.gef.editparts.AbstractGraphicalEditPart;
 import org.eclipse.gef.ui.parts.GraphicalEditor;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
 import org.eclipse.jface.action.MenuManager;
@@ -354,9 +355,9 @@ public class KimlLayoutHintView extends ViewPart implements ISelectionListener,
 						ISelection selection = event.getSelection();
 						for (Object obj : ((IStructuredSelection) selection)
 								.toArray()) {
-							if (obj instanceof AbstractGraphicalEditPart) {
+							if (obj instanceof GraphicalEditPart) {
 								savedEditPartColors
-										.saveForegroundColor((AbstractGraphicalEditPart) obj);
+										.saveForegroundColor((GraphicalEditPart) obj);
 								((AbstractGraphicalEditPart) obj)
 										.getContentPane().setForegroundColor(
 												ColorConstants.red);
