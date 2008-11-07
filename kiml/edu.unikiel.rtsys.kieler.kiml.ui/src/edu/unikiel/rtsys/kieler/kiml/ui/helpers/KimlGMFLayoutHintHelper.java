@@ -3,8 +3,8 @@ package edu.unikiel.rtsys.kieler.kiml.ui.helpers;
 import java.util.ArrayList;
 
 import org.eclipse.emf.transaction.RecordingCommand;
-import org.eclipse.gef.EditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.CompartmentEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.notation.NotationFactory;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
@@ -38,7 +38,7 @@ public class KimlGMFLayoutHintHelper {
 	 *            the ShapeNodeEditPart to retrieve the layout type for
 	 * @return the layouter name
 	 */
-	public static String getLayouterName(ShapeNodeEditPart shapeNodeEditPart) {
+	public static String getLayouterName(GraphicalEditPart shapeNodeEditPart) {
 
 		StringValueStyle layouterNameStyle = (StringValueStyle) (shapeNodeEditPart
 				.getNotationView().getNamedStyle(NotationPackage.eINSTANCE
@@ -64,46 +64,46 @@ public class KimlGMFLayoutHintHelper {
 	 * @see KimlGMFLayoutHintHelper#setLayoutHint(ShapeNodeEditPart, String)
 	 */
 	public static void setLayouterName(
-			ArrayList<ShapeNodeEditPart> shapeNodeEditParts, String layouterName) {
-		for (ShapeNodeEditPart snep : shapeNodeEditParts) {
+			ArrayList<? extends GraphicalEditPart> GraphicalEditParts, String layouterName) {
+		for (GraphicalEditPart snep : GraphicalEditParts) {
 			setLayouterName(snep, layouterName);
 		}
 	}
 
 	/**
 	 * Convenient function to set the layouter name for a group of
-	 * ShapeNodeEditParts.
+	 * GraphicalEditParts.
 	 * 
-	 * @param shapeNodeEditParts
+	 * @param GraphicalEditParts
 	 *            the ShapeNodeEditsParts as a simple array
 	 * @param layouterName
 	 *            the name of a layouter which should render these EditParts
-	 * @see KimlGMFLayoutHintHelper#setlayoutType(ShapeNodeEditPart, String)
+	 * @see KimlGMFLayoutHintHelper#setlayoutType(GraphicalEditPart, String)
 	 */
-	public static void setLayouterName(ShapeNodeEditPart[] shapeNodeEditParts,
+	public static void setLayouterName(GraphicalEditPart[] GraphicalEditParts,
 			String layouterName) {
-		for (ShapeNodeEditPart snep : shapeNodeEditParts) {
+		for (GraphicalEditPart snep : GraphicalEditParts) {
 			setLayouterName(snep, layouterName);
 		}
 	}
 
 	/**
-	 * Wrapper function to set the layouter name of a ShapeNodeEditPart. This
+	 * Wrapper function to set the layouter name of a graphicalEditPart. This
 	 * function should always be called together with
 	 * <code>setLayoutGroup</code> and <code>setLayoutType</code> to keep the
 	 * information consistent.
 	 * 
-	 * @param shapeNodeEditPart
-	 *            the ShapeNodeEditPart to set the layout type for
+	 * @param GraphicalEditPart
+	 *            the GraphicalEditPart to set the layout type for
 	 * @param layouterName
 	 *            he name of a layouter which should render these EditParts
-	 * @see KimlGMFLayoutHintHelper#setLayoutGroup(ShapeNodeEditPart, String)
+	 * @see KimlGMFLayoutHintHelper#setLayoutGroup(GraphicalEditPart, String)
 	 */
 	public static void setLayouterName(
-			final ShapeNodeEditPart shapeNodeEditPart, final String layouterName) {
+			final GraphicalEditPart graphicalEditPart, final String layouterName) {
 
 		// see if there is already an layouterNameStyle
-		final StringValueStyle layoutTypeStyle = (StringValueStyle) (shapeNodeEditPart
+		final StringValueStyle layoutTypeStyle = (StringValueStyle) (graphicalEditPart
 				.getNotationView().getNamedStyle(NotationPackage.eINSTANCE
 				.getStringValueStyle(), LAYOUTER_NAME_STYLE));
 
@@ -113,20 +113,20 @@ public class KimlGMFLayoutHintHelper {
 					.createStringValueStyle();
 			newlayouterNameStyle.setName(LAYOUTER_NAME_STYLE);
 			newlayouterNameStyle.setStringValue(layouterName);
-			shapeNodeEditPart.getEditingDomain().getCommandStack().execute(
-					new RecordingCommand(shapeNodeEditPart.getEditingDomain()) {
+			graphicalEditPart.getEditingDomain().getCommandStack().execute(
+					new RecordingCommand(graphicalEditPart.getEditingDomain()) {
 						protected void doExecute() {
-							shapeNodeEditPart.getNotationView().getStyles()
+							graphicalEditPart.getNotationView().getStyles()
 									.add(newlayouterNameStyle);
 						}
 					});
 
 			// yes: -> save the new value
 		} else {
-			shapeNodeEditPart.getEditingDomain().getCommandStack().execute(
-					new RecordingCommand(shapeNodeEditPart.getEditingDomain()) {
+			graphicalEditPart.getEditingDomain().getCommandStack().execute(
+					new RecordingCommand(graphicalEditPart.getEditingDomain()) {
 						protected void doExecute() {
-							((StringValueStyle) (shapeNodeEditPart
+							((StringValueStyle) (graphicalEditPart
 									.getNotationView().getNamedStyle(
 									NotationPackage.eINSTANCE
 											.getStringValueStyle(),
@@ -138,19 +138,19 @@ public class KimlGMFLayoutHintHelper {
 	}
 
 	/**
-	 * Returns the name of the layout hint for this ShapeNodeEditPart, is a
+	 * Returns the name of the layout hint for this GraphicalEditPart, is a
 	 * constant declared in KimlLayoutHintConstants, and will be
-	 * <code>KimlLayoutHintConstants.NONE</code>, if this ShapeNodeEditPart does
+	 * <code>KimlLayoutHintConstants.NONE</code>, if this GraphicalEditPart does
 	 * not have a hint yet or if the hint was invalid
 	 * 
-	 * @param shapeNodeEditPart
-	 *            the ShapeNodeEditPart to retrieve the layout type for
+	 * @param GraphicalEditPart
+	 *            the GraphicalEditPart to retrieve the layout type for
 	 * @return the layoutType if available, or
 	 *         <code>KimlLayoutHintConstants.NONE</code> if not
 	 */
-	public static LAYOUT_TYPE getLayoutType(ShapeNodeEditPart shapeNodeEditPart) {
+	public static LAYOUT_TYPE getLayoutType(GraphicalEditPart graphicalEditPart) {
 
-		StringValueStyle layoutTypeStyle = (StringValueStyle) (shapeNodeEditPart
+		StringValueStyle layoutTypeStyle = (StringValueStyle) (graphicalEditPart
 				.getNotationView().getNamedStyle(NotationPackage.eINSTANCE
 				.getStringValueStyle(), LAYOUT_TYPE_STYLE));
 
@@ -168,61 +168,61 @@ public class KimlGMFLayoutHintHelper {
 
 	/**
 	 * Convenient function to set the layout hint of a group of
-	 * ShapeNodeEditParts
+	 * GraphicalEditParts
 	 * 
-	 * @param shapeNodeEditParts
+	 * @param GraphicalEditParts
 	 *            the ShapeNodeEditsParts as a typed ArrayList
 	 * @param hintID
 	 *            the string value of the hint, must be a constant declared in
 	 *            KimlLayoutHintConstants.layoutTypes
-	 * @see KimlGMFLayoutHintHelper#setLayoutHint(ShapeNodeEditPart, String)
+	 * @see KimlGMFLayoutHintHelper#setLayoutHint(GraphicalEditPart, String)
 	 * @see KimlLayoutHintConstants#layoutTypes
 	 */
 	public static void setLayoutType(
-			ArrayList<ShapeNodeEditPart> shapeNodeEditParts,
+			ArrayList<? extends GraphicalEditPart> GraphicalEditParts,
 			LAYOUT_TYPE layoutType) {
-		for (ShapeNodeEditPart snep : shapeNodeEditParts) {
+		for (GraphicalEditPart snep : GraphicalEditParts) {
 			setLayoutType(snep, layoutType);
 		}
 	}
 
 	/**
 	 * Convenient function to set the layout type of a group of
-	 * ShapeNodeEditParts.
+	 * GraphicalEditParts.
 	 * 
-	 * @param shapeNodeEditParts
+	 * @param GraphicalEditParts
 	 *            the ShapeNodeEditsParts as a simple array
 	 * @param layoutType
 	 *            the string value of the type, must be a constant declared in
 	 *            KimlLayoutHintConstants.layoutTypes
-	 * @see KimlGMFLayoutHintHelper#setlayoutType(ShapeNodeEditPart, String)
+	 * @see KimlGMFLayoutHintHelper#setlayoutType(GraphicalEditPart, String)
 	 * @see KimlLayoutHintConstants#layoutTypes
 	 */
-	public static void setLayoutType(ShapeNodeEditPart[] shapeNodeEditParts,
+	public static void setLayoutType(GraphicalEditPart[] GraphicalEditParts,
 			LAYOUT_TYPE layoutType) {
-		for (ShapeNodeEditPart snep : shapeNodeEditParts) {
+		for (GraphicalEditPart snep : GraphicalEditParts) {
 			setLayoutType(snep, layoutType);
 		}
 	}
 
 	/**
-	 * Wrapper function to set the layout type of a ShapeNodeEditPart. This
+	 * Wrapper function to set the layout type of a graphicalEditPart. This
 	 * function should always be called together with
 	 * <code>setLayoutGroup</code> to keep the information consistent.
 	 * 
-	 * @param shapeNodeEditPart
-	 *            the ShapeNodeEditPart to set the layout type for
+	 * @param GraphicalEditPart
+	 *            the GraphicalEditPart to set the layout type for
 	 * @param layoutType
 	 *            a string identifying the constant of the layout type for this
-	 *            ShapeNodeEditPart
-	 * @see KimlGMFLayoutHintHelper#setLayoutGroup(ShapeNodeEditPart, String)
+	 *            GraphicalEditPart
+	 * @see KimlGMFLayoutHintHelper#setLayoutGroup(GraphicalEditPart, String)
 	 * @see KimlLayoutHintConstants#layoutTypes
 	 */
-	public static void setLayoutType(final ShapeNodeEditPart shapeNodeEditPart,
+	public static void setLayoutType(final GraphicalEditPart graphicalEditPart,
 			final LAYOUT_TYPE layoutType) {
 
 		// see if there is already an layoutTypeStyle
-		final StringValueStyle layoutTypeStyle = (StringValueStyle) (shapeNodeEditPart
+		final StringValueStyle layoutTypeStyle = (StringValueStyle) (graphicalEditPart
 				.getNotationView().getNamedStyle(NotationPackage.eINSTANCE
 				.getStringValueStyle(), LAYOUT_TYPE_STYLE));
 
@@ -232,20 +232,20 @@ public class KimlGMFLayoutHintHelper {
 					.createStringValueStyle();
 			newlayoutTypeStyle.setName(LAYOUT_TYPE_STYLE);
 			newlayoutTypeStyle.setStringValue(layoutType.getName());
-			shapeNodeEditPart.getEditingDomain().getCommandStack().execute(
-					new RecordingCommand(shapeNodeEditPart.getEditingDomain()) {
+			graphicalEditPart.getEditingDomain().getCommandStack().execute(
+					new RecordingCommand(graphicalEditPart.getEditingDomain()) {
 						protected void doExecute() {
-							shapeNodeEditPart.getNotationView().getStyles()
+							graphicalEditPart.getNotationView().getStyles()
 									.add(newlayoutTypeStyle);
 						}
 					});
 
 			// yes: -> save the new value
 		} else {
-			shapeNodeEditPart.getEditingDomain().getCommandStack().execute(
-					new RecordingCommand(shapeNodeEditPart.getEditingDomain()) {
+			graphicalEditPart.getEditingDomain().getCommandStack().execute(
+					new RecordingCommand(graphicalEditPart.getEditingDomain()) {
 						protected void doExecute() {
-							((StringValueStyle) (shapeNodeEditPart
+							((StringValueStyle) (graphicalEditPart
 									.getNotationView().getNamedStyle(
 									NotationPackage.eINSTANCE
 											.getStringValueStyle(),
@@ -257,19 +257,19 @@ public class KimlGMFLayoutHintHelper {
 	}
 
 	/**
-	 * Returns the layout group for this ShapeNodeEditPart. If this
-	 * ShapeNodeEditPart is not grouped, the Constant
+	 * Returns the layout group for this graphicalEditPart. If this
+	 * GraphicalEditPart is not grouped, the Constant
 	 * <code>KimlLayoutHintConstants.NOT_GROUPED</code> will be returned
 	 * 
-	 * @param shapeNodeEditPart
-	 *            the ShapeNodeEditPart to retrieve the layout group for
+	 * @param GraphicalEditPart
+	 *            the GraphicalEditPart to retrieve the layout group for
 	 * @return the name of the layout group, if the element is grouped, the
 	 *         Constant KimlLayoutHintConstants.NOT_GROUPED else
 	 * @see KimlLayoutHintConstants#NOT_GROUPED
 	 */
 	public static String getLayoutGroup(
-			final ShapeNodeEditPart shapeNodeEditPart) {
-		StringValueStyle layoutGroupStyle = (StringValueStyle) (shapeNodeEditPart
+			final GraphicalEditPart graphicalEditPart) {
+		StringValueStyle layoutGroupStyle = (StringValueStyle) (graphicalEditPart
 				.getNotationView().getNamedStyle(NotationPackage.eINSTANCE
 				.getStringValueStyle(), LAYOUT_GROUP_STYLE));
 		if (layoutGroupStyle == null)
@@ -280,55 +280,55 @@ public class KimlGMFLayoutHintHelper {
 
 	/**
 	 * Convenient function to set the layout group of a group of
-	 * ShapeNodeEditParts.
+	 * GraphicalEditParts.
 	 * 
-	 * @param shapeNodeEditParts
-	 *            the ShapeNodeEditParts to set the layout group for
+	 * @param GraphicalEditParts
+	 *            the GraphicalEditParts to set the layout group for
 	 * @param groupID
-	 *            a unique groupID for the ShapeNodeEditParts
-	 * @see KimlGMFLayoutHintHelper#setLayoutGroup(ShapeNodeEditPart, String)
+	 *            a unique groupID for the GraphicalEditParts
+	 * @see KimlGMFLayoutHintHelper#setLayoutGroup(GraphicalEditPart, String)
 	 */
 	public static void setLayoutGroup(
-			ArrayList<ShapeNodeEditPart> shapeNodeEditParts, String groupID) {
-		for (ShapeNodeEditPart snep : shapeNodeEditParts) {
+			ArrayList<? extends GraphicalEditPart> GraphicalEditParts, String groupID) {
+		for (GraphicalEditPart snep : GraphicalEditParts) {
 			setLayoutGroup(snep, groupID);
 		}
 	}
 
 	/**
 	 * Convenient function to set the layout group of a group of
-	 * ShapeNodeEditParts.
+	 * GraphicalEditParts.
 	 * 
-	 * @param shapeNodeEditParts
-	 *            the ShapeNodeEditParts to set the layout group for
+	 * @param GraphicalEditParts
+	 *            the GraphicalEditParts to set the layout group for
 	 * @param groupID
-	 *            a unique groupID for the ShapeNodeEditParts
-	 * @see KimlGMFLayoutHintHelper#setLayoutGroup(ShapeNodeEditPart, String)
+	 *            a unique groupID for the GraphicalEditParts
+	 * @see KimlGMFLayoutHintHelper#setLayoutGroup(GraphicalEditPart, String)
 	 */
-	public static void setLayoutGroup(ShapeNodeEditPart[] shapeNodeEditParts,
+	public static void setLayoutGroup(GraphicalEditPart[] GraphicalEditParts,
 			String groupID) {
-		for (ShapeNodeEditPart snep : shapeNodeEditParts) {
+		for (GraphicalEditPart snep : GraphicalEditParts) {
 			setLayoutGroup(snep, groupID);
 		}
 	}
 
 	/**
-	 * Wrapper function to set the layout group of a ShapeNodeEditPart. This
+	 * Wrapper function to set the layout group of a graphicalEditPart. This
 	 * function should always be called together with <code>setlayoutType</code>
 	 * to keep the information consistent.
 	 * 
-	 * @param shapeNodeEditPart
-	 *            the ShapeNodeEditPart to set the layout group for
+	 * @param GraphicalEditPart
+	 *            the GraphicalEditPart to set the layout group for
 	 * @param groupID
 	 *            a string identifying the name of the group this
-	 *            ShapeNodeEditPart belongs to
-	 * @see KimlGMFLayoutHintHelper#setlayoutType(ShapeNodeEditPart, String)
+	 *            GraphicalEditPart belongs to
+	 * @see KimlGMFLayoutHintHelper#setlayoutType(GraphicalEditPart, String)
 	 * @see KimlLayoutHintConstants#layoutTypes
 	 */
 	public static void setLayoutGroup(
-			final ShapeNodeEditPart shapeNodeEditPart, final String groupID) {
+			final GraphicalEditPart graphicalEditPart, final String groupID) {
 
-		final StringValueStyle oldLayoutGroupStyle = (StringValueStyle) (shapeNodeEditPart
+		final StringValueStyle oldLayoutGroupStyle = (StringValueStyle) (graphicalEditPart
 				.getNotationView().getNamedStyle(NotationPackage.eINSTANCE
 				.getStringValueStyle(), LAYOUT_GROUP_STYLE));
 
@@ -338,20 +338,20 @@ public class KimlGMFLayoutHintHelper {
 					.createStringValueStyle();
 			newLayoutGroupStyle.setName(LAYOUT_GROUP_STYLE);
 			newLayoutGroupStyle.setStringValue(groupID);
-			shapeNodeEditPart.getEditingDomain().getCommandStack().execute(
-					new RecordingCommand(shapeNodeEditPart.getEditingDomain()) {
+			graphicalEditPart.getEditingDomain().getCommandStack().execute(
+					new RecordingCommand(graphicalEditPart.getEditingDomain()) {
 						protected void doExecute() {
-							shapeNodeEditPart.getNotationView().getStyles()
+							graphicalEditPart.getNotationView().getStyles()
 									.add(newLayoutGroupStyle);
 						}
 					});
 
 			// yes: -> save the new value
 		} else {
-			shapeNodeEditPart.getEditingDomain().getCommandStack().execute(
-					new RecordingCommand(shapeNodeEditPart.getEditingDomain()) {
+			graphicalEditPart.getEditingDomain().getCommandStack().execute(
+					new RecordingCommand(graphicalEditPart.getEditingDomain()) {
 						protected void doExecute() {
-							((StringValueStyle) (shapeNodeEditPart
+							((StringValueStyle) (graphicalEditPart
 									.getNotationView().getNamedStyle(
 									NotationPackage.eINSTANCE
 											.getStringValueStyle(),
@@ -363,145 +363,164 @@ public class KimlGMFLayoutHintHelper {
 	}
 
 	public static void setLayoutHint(
-			final ShapeNodeEditPart[] shapeNodeEditParts, final String groupID,
+			final GraphicalEditPart[] GraphicalEditParts, final String groupID,
 			final LAYOUT_TYPE layoutType, final String layouterName) {
-		setLayoutGroup(shapeNodeEditParts, groupID);
-		setLayoutType(shapeNodeEditParts, layoutType);
-		setLayouterName(shapeNodeEditParts, layouterName);
+		setLayoutGroup(GraphicalEditParts, groupID);
+		setLayoutType(GraphicalEditParts, layoutType);
+		setLayouterName(GraphicalEditParts, layouterName);
 	}
 
 	public static void setLayoutHint(
-			final ArrayList<ShapeNodeEditPart> shapeNodeEditParts,
+			final ArrayList<? extends GraphicalEditPart> GraphicalEditParts,
 			final String groupID, final LAYOUT_TYPE layoutType,
 			final String layouterName) {
-		setLayoutGroup(shapeNodeEditParts, groupID);
-		setLayoutType(shapeNodeEditParts, layoutType);
-		setLayouterName(shapeNodeEditParts, layouterName);
+		setLayoutGroup(GraphicalEditParts, groupID);
+		setLayoutType(GraphicalEditParts, layoutType);
+		setLayouterName(GraphicalEditParts, layouterName);
+	}
+
+	public static void setChildrenLayoutHint(
+			final GraphicalEditPart graphicalEditPart, final String groupID,
+			final LAYOUT_TYPE layoutType, final String layouterName) {
+
+		if (graphicalEditPart.getChildren().size() > 0
+				&& graphicalEditPart.getChildren().get(0) instanceof CompartmentEditPart) {
+
+			for (Object obj : ((CompartmentEditPart) graphicalEditPart
+					.getChildren().get(0)).getChildren()) {
+				if (obj instanceof GraphicalEditPart) {
+					GraphicalEditPart childEditPart = (GraphicalEditPart) obj;
+					setLayoutGroup(childEditPart, groupID);
+					setLayoutType(childEditPart, layoutType);
+					setLayouterName(childEditPart, layouterName);
+				}
+			}
+		}
 	}
 
 	/**
 	 * Wrapper function to set the layout <b>hint</b> of a an array of
-	 * ShapeNodeEditParts. The layout hint is composed of the layout group and
+	 * GraphicalEditParts. The layout hint is composed of the layout group and
 	 * the layout type for this group
 	 * 
-	 * @param shapeNodeEditParts
-	 *            the array of ShapeNodeEditParts to set the layout type for
+	 * @param GraphicalEditParts
+	 *            the array of GraphicalEditParts to set the layout type for
 	 * @param groupID
 	 *            a string identifying the name of the group this
-	 *            ShapeNodeEditPart belongs to
+	 *            GraphicalEditPart belongs to
 	 * @param layoutType
 	 *            a string identifying the constant of the layout type for this
-	 *            ShapeNodeEditPart
-	 * @see KimlGMFLayoutHintHelper#setLayoutGroup(ShapeNodeEditPart, String)
-	 * @see KimlGMFLayoutHintHelper#setLayoutType(ShapeNodeEditPart, String)
+	 *            GraphicalEditPart
+	 * @see KimlGMFLayoutHintHelper#setLayoutGroup(GraphicalEditPart, String)
+	 * @see KimlGMFLayoutHintHelper#setLayoutType(GraphicalEditPart, String)
 	 * @see KimlLayoutHintConstants#layoutTypes
 	 */
 	public static void setLayoutHint(
-			final ShapeNodeEditPart[] shapeNodeEditParts, final String groupID,
+			final GraphicalEditPart[] GraphicalEditParts, final String groupID,
 			final LAYOUT_TYPE layoutType) {
-		setLayoutGroup(shapeNodeEditParts, groupID);
-		setLayoutType(shapeNodeEditParts, layoutType);
+		setLayoutGroup(GraphicalEditParts, groupID);
+		setLayoutType(GraphicalEditParts, layoutType);
 	}
 
 	/**
 	 * Wrapper function to set the layout <b>hint</b> of a an typed ArrayList of
-	 * ShapeNodeEditParts. The layout hint is composed of the layout group and
+	 * GraphicalEditParts. The layout hint is composed of the layout group and
 	 * the layout type for this group
 	 * 
-	 * @param shapeNodeEditParts
-	 *            the ArrayList of ShapeNodeEditParts to set the layout type for
+	 * @param GraphicalEditParts
+	 *            the ArrayList of GraphicalEditParts to set the layout type for
 	 * @param groupID
 	 *            a string identifying the name of the group this
-	 *            ShapeNodeEditPart belongs to
+	 *            GraphicalEditPart belongs to
 	 * @param layoutType
 	 *            a string identifying the constant of the layout type for this
-	 *            ShapeNodeEditPart
-	 * @see KimlGMFLayoutHintHelper#setLayoutGroup(ShapeNodeEditPart, String)
-	 * @see KimlGMFLayoutHintHelper#setLayoutType(ShapeNodeEditPart, String)
+	 *            GraphicalEditPart
+	 * @see KimlGMFLayoutHintHelper#setLayoutGroup(GraphicalEditPart, String)
+	 * @see KimlGMFLayoutHintHelper#setLayoutType(GraphicalEditPart, String)
 	 * @see KimlLayoutHintConstants#layoutTypes
 	 */
 	public static void setLayoutHint(
-			final ArrayList<ShapeNodeEditPart> shapeNodeEditParts,
+			final ArrayList<? extends GraphicalEditPart> GraphicalEditParts,
 			final String groupID, final LAYOUT_TYPE layoutType) {
-		setLayoutGroup(shapeNodeEditParts, groupID);
-		setLayoutType(shapeNodeEditParts, layoutType);
+		setLayoutGroup(GraphicalEditParts, groupID);
+		setLayoutType(GraphicalEditParts, layoutType);
 	}
 
 	/**
-	 * Wrapper function to set the layout <b>hint</b> of a ShapeNodeEditPart.
+	 * Wrapper function to set the layout <b>hint</b> of a graphicalEditPart.
 	 * The layout hint is composed of the layout group and the layout type for
 	 * this group
 	 * 
-	 * @param shapeNodeEditPart
-	 *            the ShapeNodeEditPart to set the layout type for
+	 * @param GraphicalEditPart
+	 *            the GraphicalEditPart to set the layout type for
 	 * @param groupID
 	 *            a string identifying the name of the group this
-	 *            ShapeNodeEditPart belongs to
+	 *            GraphicalEditPart belongs to
 	 * @param layoutType
 	 *            a string identifying the constant of the layout type for this
-	 *            ShapeNodeEditPart
-	 * @see KimlGMFLayoutHintHelper#setLayoutGroup(ShapeNodeEditPart, String)
-	 * @see KimlGMFLayoutHintHelper#setLayoutType(ShapeNodeEditPart, String)
+	 *            GraphicalEditPart
+	 * @see KimlGMFLayoutHintHelper#setLayoutGroup(GraphicalEditPart, String)
+	 * @see KimlGMFLayoutHintHelper#setLayoutType(GraphicalEditPart, String)
 	 * @see KimlLayoutHintConstants#layoutTypes
 	 */
-	public static void setLayoutHint(final ShapeNodeEditPart shapeNodeEditPart,
+	public static void setLayoutHint(final GraphicalEditPart graphicalEditPart,
 			final String groupID, final LAYOUT_TYPE layoutType) {
-		setLayoutGroup(shapeNodeEditPart, groupID);
-		setLayoutType(shapeNodeEditPart, layoutType);
+		setLayoutGroup(graphicalEditPart, groupID);
+		setLayoutType(graphicalEditPart, layoutType);
 	}
 
 	/**
 	 * Wrapper function to unset the layout <b>hint</b> of a an array of
-	 * ShapeNodeEditParts.
+	 * GraphicalEditParts.
 	 * 
-	 * @param shapeNodeEditParts
-	 *            the array of ShapeNodeEditParts to unset the layout type for
-	 * @see KimlGMFLayoutHintHelper#unsetLayouthint(ShapeNodeEditPart)
+	 * @param GraphicalEditParts
+	 *            the array of GraphicalEditParts to unset the layout type for
+	 * @see KimlGMFLayoutHintHelper#unsetLayouthint(GraphicalEditPart)
 	 */
 	public static void unsetLayoutHint(
-			final ShapeNodeEditPart[] shapeNodeEditParts) {
-		for (ShapeNodeEditPart snep : shapeNodeEditParts) {
+			final GraphicalEditPart[] GraphicalEditParts) {
+		for (GraphicalEditPart snep : GraphicalEditParts) {
 			unsetLayoutHint(snep);
 		}
 	}
 
 	/**
 	 * Wrapper function to unset the layout <b>hint</b> of a an typed ArrayList
-	 * of ShapeNodeEditParts.
+	 * of GraphicalEditParts.
 	 * 
 	 * TODO: If, after removing the selected element from a group, there is just
 	 * one element left, also remove the grouping information thereof.
 	 * 
-	 * @param shapeNodeEditParts
-	 *            the ArrayList of ShapeNodeEditParts to unset the layout type
+	 * @param GraphicalEditParts
+	 *            the ArrayList of GraphicalEditParts to unset the layout type
 	 *            for
 	 * 
-	 * @see KimlGMFLayoutHintHelper#unsetLayouthint(ShapeNodeEditPart)
+	 * @see KimlGMFLayoutHintHelper#unsetLayouthint(GraphicalEditPart)
 	 */
 	public static void unsetLayoutHint(
-			final ArrayList<ShapeNodeEditPart> shapeNodeEditParts) {
-		for (ShapeNodeEditPart snep : shapeNodeEditParts) {
+			final ArrayList<? extends GraphicalEditPart> GraphicalEditParts) {
+		for (GraphicalEditPart snep : GraphicalEditParts) {
 			unsetLayoutHint(snep);
 		}
 	}
 
 	/**
-	 * Wrapper function to unset the layout <b>hint</b> of a ShapeNodeEditPart.
+	 * Wrapper function to unset the layout <b>hint</b> of a graphicalEditPart.
 	 * 
-	 * @param shapeNodeEditPart
-	 *            the ShapeNodeEditPart to unset the layout type for
+	 * @param GraphicalEditPart
+	 *            the GraphicalEditPart to unset the layout type for
 	 */
-	public static void unsetLayoutHint(final ShapeNodeEditPart shapeNodeEditPart) {
+	public static void unsetLayoutHint(final GraphicalEditPart graphicalEditPart) {
 
-		final StringValueStyle layoutGroupStyle = (StringValueStyle) (shapeNodeEditPart
+		final StringValueStyle layoutGroupStyle = (StringValueStyle) (graphicalEditPart
 				.getNotationView().getNamedStyle(NotationPackage.eINSTANCE
 				.getStringValueStyle(), LAYOUT_GROUP_STYLE));
 
-		final StringValueStyle layouterNameStyle = (StringValueStyle) (shapeNodeEditPart
+		final StringValueStyle layouterNameStyle = (StringValueStyle) (graphicalEditPart
 				.getNotationView().getNamedStyle(NotationPackage.eINSTANCE
 				.getStringValueStyle(), LAYOUTER_NAME_STYLE));
 
-		final StringValueStyle layoutTypeStyle = (StringValueStyle) (shapeNodeEditPart
+		final StringValueStyle layoutTypeStyle = (StringValueStyle) (graphicalEditPart
 				.getNotationView().getNamedStyle(NotationPackage.eINSTANCE
 				.getStringValueStyle(), LAYOUT_TYPE_STYLE));
 
@@ -509,17 +528,17 @@ public class KimlGMFLayoutHintHelper {
 			String groupID = layoutGroupStyle.getStringValue();
 
 			/*
-			 * assuming each ShapeNodeEditParts has at most one of each of those
+			 * assuming each GraphicalEditParts has at most one of each of those
 			 * styles
 			 */
-			shapeNodeEditPart.getEditingDomain().getCommandStack().execute(
-					new RecordingCommand(shapeNodeEditPart.getEditingDomain()) {
+			graphicalEditPart.getEditingDomain().getCommandStack().execute(
+					new RecordingCommand(graphicalEditPart.getEditingDomain()) {
 						protected void doExecute() {
-							shapeNodeEditPart.getNotationView().getStyles()
+							graphicalEditPart.getNotationView().getStyles()
 									.remove(layoutGroupStyle);
-							shapeNodeEditPart.getNotationView().getStyles()
+							graphicalEditPart.getNotationView().getStyles()
 									.remove(layouterNameStyle);
-							shapeNodeEditPart.getNotationView().getStyles()
+							graphicalEditPart.getNotationView().getStyles()
 									.remove(layoutTypeStyle);
 						}
 					});
@@ -530,11 +549,11 @@ public class KimlGMFLayoutHintHelper {
 			 * iterate through the children of this. Check also, if there is
 			 * such a container element.
 			 */
-			EditPart parent = shapeNodeEditPart.getParent();
+			Object parent = graphicalEditPart.getParent();
 			if (parent != null && parent instanceof CompartmentEditPart) {
 				CompartmentEditPart compartmentEditPart = (CompartmentEditPart) parent;
 				// fetch all remaining elements of the group
-				ArrayList<ShapeNodeEditPart> groupedParts = KimlGMFLayoutHintHelper
+				ArrayList<? extends GraphicalEditPart> groupedParts = KimlGMFLayoutHintHelper
 						.getGroupMembersByGroupID(compartmentEditPart, groupID);
 				// if just 1 element left, remove all grouping information
 				if (groupedParts.size() == 1) {
@@ -548,36 +567,37 @@ public class KimlGMFLayoutHintHelper {
 	}
 
 	/**
-	 * Returns all the ShapeNodeEditParts which belong to the same group as the
-	 * argument. If there are no other ShapeNodeEditParts, or the argument
+	 * Returns all the GraphicalEditParts which belong to the same group as the
+	 * argument. If there are no other GraphicalEditParts, or the argument
 	 * itself does not belong to any group, the ArrayList will be empty, but
 	 * nevertheless initialized. The argument itself will <B>be</b> included in
 	 * the returned list, <b>if</b> the element is grouped.
 	 * 
-	 * @param shapeNodeEditPart
-	 *            the ShapeNodeEditPart of which the layout group members should
+	 * @param GraphicalEditPart
+	 *            the GraphicalEditPart of which the layout group members should
 	 *            be returned
-	 * @return an ArrayList of the ShapeNodeEditParts belonging to this group,
+	 * @return an ArrayList of the GraphicalEditParts belonging to this group,
 	 *         the argument itself will <b>be</b>in this group, empty list if
 	 *         not grouped
 	 */
-	public static ArrayList<ShapeNodeEditPart> getGroupMembersByElement(
-			ShapeNodeEditPart shapeNodeEditPart) {
-		ArrayList<ShapeNodeEditPart> groupMembers = new ArrayList<ShapeNodeEditPart>();
+	public static ArrayList<GraphicalEditPart> getGroupMembersByElement(
+			GraphicalEditPart graphicalEditPart) {
+		
+		ArrayList<GraphicalEditPart> groupMembers = new ArrayList<GraphicalEditPart>();
 
 		String layoutGroupToFind = KimlGMFLayoutHintHelper
-				.getLayoutGroup(shapeNodeEditPart);
+				.getLayoutGroup(graphicalEditPart);
 
 		if (layoutGroupToFind == NOT_GROUPED) {
 			return groupMembers;
 		} else {
-			for (Object element : shapeNodeEditPart.getParent().getChildren()) {
+			for (Object element : graphicalEditPart.getParent().getChildren()) {
 				if (element != null
-						&& element instanceof ShapeNodeEditPart
+						&& element instanceof GraphicalEditPart
 						&& KimlGMFLayoutHintHelper.getLayoutGroup(
-								(ShapeNodeEditPart) element).equals(
+								(GraphicalEditPart) element).equals(
 								layoutGroupToFind)) {
-					groupMembers.add((ShapeNodeEditPart) element);
+					groupMembers.add((GraphicalEditPart) element);
 				}
 			}
 			return groupMembers;
@@ -585,26 +605,27 @@ public class KimlGMFLayoutHintHelper {
 	}
 
 	/**
-	 * Returns all the ShapeNodeEditParts which belong to the specified group
+	 * Returns all the GraphicalEditParts which belong to the specified group
 	 * 
 	 * @param compartmentEditPart
 	 *            the container CompartmentEditPart in which the
-	 *            ShapeNodeEditParts belonging to a group should be retrieved
+	 *            GraphicalEditParts belonging to a group should be retrieved
 	 * @param groupID
-	 *            ShapeNodeEditPart of which the layout group members should be
+	 *            GraphicalEditPart of which the layout group members should be
 	 *            returned
-	 * @return an ArrayList of the ShapeNodeEditParts belonging to this group
+	 * @return an ArrayList of the GraphicalEditParts belonging to this group
 	 */
-	public static ArrayList<ShapeNodeEditPart> getGroupMembersByGroupID(
+	public static ArrayList<GraphicalEditPart> getGroupMembersByGroupID(
 			CompartmentEditPart compartmentEditPart, String groupID) {
-		ArrayList<ShapeNodeEditPart> groupMembers = new ArrayList<ShapeNodeEditPart>();
+		
+		ArrayList<GraphicalEditPart> groupMembers = new ArrayList<GraphicalEditPart>();
 
 		for (Object element : compartmentEditPart.getChildren()) {
 			if (element != null
-					&& element instanceof ShapeNodeEditPart
+					&& element instanceof GraphicalEditPart
 					&& KimlGMFLayoutHintHelper.getLayoutGroup(
-							(ShapeNodeEditPart) element).equals(groupID)) {
-				groupMembers.add((ShapeNodeEditPart) element);
+							(GraphicalEditPart) element).equals(groupID)) {
+				groupMembers.add((GraphicalEditPart) element);
 			}
 		}
 		return groupMembers;
@@ -615,44 +636,37 @@ public class KimlGMFLayoutHintHelper {
 	 * Generates and returns a unique ID which should be used as an identifier
 	 * for a layout group
 	 * 
-	 * @param shapeNodeEditParts
-	 *            an ArrayList of ShapeNodeEditParts
+	 * @param GraphicalEditParts
+	 *            an ArrayList of GraphicalEditParts
 	 * @return a unique id serving as a group identifier for the selected
-	 *         ShapeNodeEditParts
+	 *         GraphicalEditParts
 	 * @see KimlGMFLayoutHintHelper#generateLayoutGroupID(ArrayList, String)
 	 */
 	public static String generateLayoutGroupID(
-			ArrayList<ShapeNodeEditPart> shapeNodeEditParts) {
-		return generateLayoutGroupID(shapeNodeEditParts, "");
+			ArrayList<? extends GraphicalEditPart> graphicalEditParts) {
+		return generateLayoutGroupID(graphicalEditParts, "");
 	}
 
 	/**
 	 * Generates and returns a unique ID which should be used as an identifier
 	 * for a layout group
 	 * 
-	 * @param shapeNodeEditParts
-	 *            an ArrayList of ShapeNodeEditParts
+	 * @param GraphicalEditParts
+	 *            an ArrayList of GraphicalEditParts
 	 * @param suggestion
 	 *            a String which can be used to generate a more readable groupID
 	 * @return a unique id serving as a group identifier for the selected
-	 *         ShapeNodeEditParts, will be <code>suggestion</code> if it was
+	 *         GraphicalEditParts, will be <code>suggestion</code> if it was
 	 *         unique, a generated ID else
 	 */
 	public static String generateLayoutGroupID(
-			ArrayList<ShapeNodeEditPart> shapeNodeEditParts, String suggestion) {
+			ArrayList<? extends GraphicalEditPart> graphicalEditParts, String suggestion) {
 		if (suggestion == null || suggestion == "") {
-			return Integer.toString(shapeNodeEditParts.hashCode());
+			return Integer.toString(graphicalEditParts.hashCode());
 		}
 		// TODO: check if suggestion is unique within notation model
 		else
 			return suggestion;
 	}
 
-	public static String buildGroupAsMessage(String layoutType,
-			String layouterName, String groupID, int numbersGrouped) {
-		return "Group as " + layouterName + " was executed:\n" + numbersGrouped
-				+ " Nodes have been grouped with the layouter " + layouterName
-				+ "(type: " + layoutType + ") and with the groupId " + groupID
-				+ ".";
-	}
 }

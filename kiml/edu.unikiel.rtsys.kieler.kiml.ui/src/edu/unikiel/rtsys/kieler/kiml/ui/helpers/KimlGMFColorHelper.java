@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.eclipse.draw2d.ColorConstants;
-import org.eclipse.gef.editparts.AbstractGraphicalEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.RGB;
@@ -19,12 +19,12 @@ public class KimlGMFColorHelper {
 
 	private Color highlightBackgroundColor;
 	private Color highlightForegroundColor;
-	private HashMap<AbstractGraphicalEditPart, Color> savedForegroundColors;
-	private HashMap<AbstractGraphicalEditPart, Color> savedBackgroundColors;
+	private HashMap<GraphicalEditPart, Color> savedForegroundColors;
+	private HashMap<GraphicalEditPart, Color> savedBackgroundColors;
 
 	public KimlGMFColorHelper() {
-		savedForegroundColors = new HashMap<AbstractGraphicalEditPart, Color>();
-		savedBackgroundColors = new HashMap<AbstractGraphicalEditPart, Color>();
+		savedForegroundColors = new HashMap<GraphicalEditPart, Color>();
+		savedBackgroundColors = new HashMap<GraphicalEditPart, Color>();
 		highlightForegroundColor = DEFAULT_HIGHLIGHT_FG_COLOR;
 		highlightBackgroundColor = DEFAULT_HIGHLIGHT_BG_COLOR;
 	}
@@ -37,23 +37,23 @@ public class KimlGMFColorHelper {
 		this.highlightBackgroundColor = bgColor;
 	}
 
-	public void highlightForegrounds(ArrayList<ShapeNodeEditPart> editParts) {
-		for (AbstractGraphicalEditPart editPart : editParts)
+	public void highlightForegrounds(ArrayList<GraphicalEditPart> editParts) {
+		for (GraphicalEditPart editPart : editParts)
 			highlightForeground(editPart);
 	}
 
-	public void highlightBackgrounds(ArrayList<ShapeNodeEditPart> editParts) {
-		for (AbstractGraphicalEditPart editPart : editParts)
+	public void highlightBackgrounds(ArrayList<GraphicalEditPart> editParts) {
+		for (GraphicalEditPart editPart : editParts)
 			highlightBackground(editPart);
 	}
 
-	public void highlightForeground(AbstractGraphicalEditPart editPart) {
+	public void highlightForeground(GraphicalEditPart editPart) {
 		saveForegroundColor(editPart);
 		editPart.getContentPane().setForegroundColor(
 				this.highlightForegroundColor);
 	}
 
-	public void highlightBackground(AbstractGraphicalEditPart editPart) {
+	public void highlightBackground(GraphicalEditPart editPart) {
 		saveBackgroundColor(editPart);
 		if (editPart instanceof ShapeNodeEditPart) {
 			editPart.getContentPane().setBackgroundColor(
@@ -65,35 +65,35 @@ public class KimlGMFColorHelper {
 
 	}
 
-	public void saveForegroundColor(AbstractGraphicalEditPart editPart) {
+	public void saveForegroundColor(GraphicalEditPart editPart) {
 		savedForegroundColors.put(editPart, editPart.getContentPane()
 				.getForegroundColor());
 	}
 
-	public void restoreForeground(AbstractGraphicalEditPart editPart) {
+	public void restoreForeground(GraphicalEditPart editPart) {
 		editPart.getContentPane().setForegroundColor(
 				savedForegroundColors.get(editPart));
 	}
 
 	public void restoreAllForegrounds() {
-		for (AbstractGraphicalEditPart editPart : savedForegroundColors
+		for (GraphicalEditPart editPart : savedForegroundColors
 				.keySet()) {
 			restoreForeground(editPart);
 		}
 	}
 
-	public void saveBackgroundColor(AbstractGraphicalEditPart editPart) {
+	public void saveBackgroundColor(GraphicalEditPart editPart) {
 		savedBackgroundColors.put(editPart, editPart.getContentPane()
 				.getBackgroundColor());
 	}
 
-	public void restoreBackground(AbstractGraphicalEditPart editPart) {
+	public void restoreBackground(GraphicalEditPart editPart) {
 		editPart.getContentPane().setBackgroundColor(
 				savedBackgroundColors.get(editPart));
 	}
 
 	public void restoreAllBackgrounds() {
-		for (AbstractGraphicalEditPart editPart : savedBackgroundColors
+		for (GraphicalEditPart editPart : savedBackgroundColors
 				.keySet()) {
 			restoreBackground(editPart);
 		}
