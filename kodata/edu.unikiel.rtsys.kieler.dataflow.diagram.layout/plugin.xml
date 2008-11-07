@@ -3,7 +3,9 @@
 <plugin>
    <extension
          point="edu.unikiel.rtsys.kieler.kiml.layout.kimlDiagramLayouter">
-      <kimlDiagramLayouter></kimlDiagramLayouter>
+      <kimlDiagramLayouter
+            class="dataflow.diagram.services.DataflowDiagramLayouter"
+            editor_id="dataflow.diagram.part.DataflowDiagramEditorID"></kimlDiagramLayouter>
    </extension>
 
 </plugin>
