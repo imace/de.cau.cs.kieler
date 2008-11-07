@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xmi:id="_xjUsIKW1Ed2wg--YdqVqPw" name="">
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_xjUsIaW1Ed2wg--YdqVqPw" name="boolean"/>
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_xjUsIqW1Ed2wg--YdqVqPw" name="byte"/>
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_xjUsI6W1Ed2wg--YdqVqPw" name="char"/>
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_xjUsJKW1Ed2wg--YdqVqPw" name="double"/>
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_xjUsJaW1Ed2wg--YdqVqPw" name="float"/>
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_xjUsJqW1Ed2wg--YdqVqPw" name="int"/>
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_xjVTMKW1Ed2wg--YdqVqPw" name="long"/>
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_xjVTMaW1Ed2wg--YdqVqPw" name="short"/>
+  <packagedElement xmi:type="uml:Package" xmi:id="_xjV6QKW1Ed2wg--YdqVqPw" name="edu">
+    <packagedElement xmi:type="uml:Package" xmi:id="_xjV6QaW1Ed2wg--YdqVqPw" name="unikiel">
+      <packagedElement xmi:type="uml:Package" xmi:id="_xjV6QqW1Ed2wg--YdqVqPw" name="rtsys">
+        <packagedElement xmi:type="uml:Package" xmi:id="_xjV6Q6W1Ed2wg--YdqVqPw" name="kieler">
+          <packagedElement xmi:type="uml:Package" xmi:id="_xjV6RKW1Ed2wg--YdqVqPw" name="kiml">
+            <packagedElement xmi:type="uml:Package" xmi:id="_xjV6RaW1Ed2wg--YdqVqPw" name="layouter">
+              <packagedElement xmi:type="uml:Package" xmi:id="_xjV6RqW1Ed2wg--YdqVqPw" name="graphviz">
+                <packagedElement xmi:type="uml:Class" xmi:id="_xjcA4KW1Ed2wg--YdqVqPw" name="Activator">
+                  <generalization xmi:id="_xkZDIaW1Ed2wg--YdqVqPw" general="_xkZDIKW1Ed2wg--YdqVqPw"/>
+                  <ownedAttribute xmi:id="_xkZDI6W1Ed2wg--YdqVqPw" name="PLUGIN_ID" visibility="public" type="_xkZDIqW1Ed2wg--YdqVqPw"/>
+                  <ownedAttribute xmi:id="_xkZDJKW1Ed2wg--YdqVqPw" name="plugin" visibility="private" type="_xjcA4KW1Ed2wg--YdqVqPw" association="_xk29MqW1Ed2wg--YdqVqPw"/>
+                  <ownedOperation xmi:id="_xkZqMKW1Ed2wg--YdqVqPw" name="start" visibility="public">
+                    <ownedParameter xmi:id="_xkZqMaW1Ed2wg--YdqVqPw" name="context" type="_xkZDJaW1Ed2wg--YdqVqPw"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:id="_xkZqMqW1Ed2wg--YdqVqPw" name="stop" visibility="public">
+                    <ownedParameter xmi:id="_xkZqM6W1Ed2wg--YdqVqPw" name="context" type="_xkZDJaW1Ed2wg--YdqVqPw"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:id="_xkZqNKW1Ed2wg--YdqVqPw" name="getDefault" visibility="public" isStatic="true">
+                    <ownedParameter xmi:id="_xkZqNaW1Ed2wg--YdqVqPw" name="return" type="_xjcA4KW1Ed2wg--YdqVqPw" direction="return"/>
+                  </ownedOperation>
+                  <ownedOperation xmi:id="_xkZqN6W1Ed2wg--YdqVqPw" name="getImageDescriptor" visibility="public" isStatic="true">
+                    <ownedParameter xmi:id="_xkZqOKW1Ed2wg--YdqVqPw" name="path" type="_xkZDIqW1Ed2wg--YdqVqPw"/>
+                    <ownedParameter xmi:id="_xkZqOaW1Ed2wg--YdqVqPw" name="return" type="_xkZqNqW1Ed2wg--YdqVqPw" direction="return"/>
+                  </ownedOperation>
+                </packagedElement>
+                <packagedElement xmi:type="uml:Package" xmi:id="_xjcA4aW1Ed2wg--YdqVqPw" name="preferences">
+                  <packagedElement xmi:type="uml:Class" xmi:id="_xjxYEKW1Ed2wg--YdqVqPw" name="GraphvizPreferencePage">
+                    <generalization xmi:id="_xkaRQaW1Ed2wg--YdqVqPw" general="_xkaRQKW1Ed2wg--YdqVqPw"/>
+                    <ownedOperation xmi:id="_xkaRQqW1Ed2wg--YdqVqPw" name="createFieldEditors" visibility="public"/>
+                    <ownedOperation xmi:id="_xkaRRKW1Ed2wg--YdqVqPw" name="init" visibility="public">
+                      <ownedParameter xmi:id="_xkaRRaW1Ed2wg--YdqVqPw" name="workbench" type="_xkaRQ6W1Ed2wg--YdqVqPw"/>
+                    </ownedOperation>
+                  </packagedElement>
+                  <packagedElement xmi:type="uml:Class" xmi:id="_xjymMKW1Ed2wg--YdqVqPw" name="PreferenceInitializer">
+                    <generalization xmi:id="_xklQYaW1Ed2wg--YdqVqPw" general="_xklQYKW1Ed2wg--YdqVqPw"/>
+                    <ownedOperation xmi:id="_xklQYqW1Ed2wg--YdqVqPw" name="initializeDefaultPreferences" visibility="public"/>
+                  </packagedElement>
+                  <packagedElement xmi:type="uml:Class" xmi:id="_xjz0UKW1Ed2wg--YdqVqPw" name="PreferenceConstants">
+                    <ownedAttribute xmi:id="_xklQY6W1Ed2wg--YdqVqPw" name="PREF_GRAPHVIZ_PADDING_X" visibility="public" type="_xkZDIqW1Ed2wg--YdqVqPw"/>
+                    <ownedAttribute xmi:id="_xkl3cKW1Ed2wg--YdqVqPw" name="PREF_GRAPHVIZ_PADDING_Y" visibility="public" type="_xkZDIqW1Ed2wg--YdqVqPw"/>
+                  </packagedElement>
+                  <packagedElement xmi:type="uml:DataType" xmi:id="_xkaRQKW1Ed2wg--YdqVqPw" name="FieldEditorPreferencePage"/>
+                  <packagedElement xmi:type="uml:DataType" xmi:id="_xkaRQ6W1Ed2wg--YdqVqPw" name="IWorkbench"/>
+                  <packagedElement xmi:type="uml:DataType" xmi:id="_xklQYKW1Ed2wg--YdqVqPw" name="AbstractPreferenceInitializer"/>
+                </packagedElement>
+                <packagedElement xmi:type="uml:DataType" xmi:id="_xkZDIKW1Ed2wg--YdqVqPw" name="AbstractUIPlugin"/>
+                <packagedElement xmi:type="uml:DataType" xmi:id="_xkZDIqW1Ed2wg--YdqVqPw" name="String"/>
+                <packagedElement xmi:type="uml:DataType" xmi:id="_xkZDJaW1Ed2wg--YdqVqPw" name="BundleContext"/>
+                <packagedElement xmi:type="uml:DataType" xmi:id="_xkZqNqW1Ed2wg--YdqVqPw" name="ImageDescriptor"/>
+                <packagedElement xmi:type="uml:Association" xmi:id="_xk29MqW1Ed2wg--YdqVqPw" memberEnd="_xkZDJKW1Ed2wg--YdqVqPw _xk29M6W1Ed2wg--YdqVqPw">
+                  <ownedEnd xmi:id="_xk29M6W1Ed2wg--YdqVqPw" name="target" type="_xjcA4KW1Ed2wg--YdqVqPw" association="_xk29MqW1Ed2wg--YdqVqPw"/>
+                </packagedElement>
+              </packagedElement>
+            </packagedElement>
+          </packagedElement>
+        </packagedElement>
+      </packagedElement>
+    </packagedElement>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Package" xmi:id="_xjz0UaW1Ed2wg--YdqVqPw" name="kiel">
+    <packagedElement xmi:type="uml:Package" xmi:id="_xjz0UqW1Ed2wg--YdqVqPw" name="layouter">
+      <packagedElement xmi:type="uml:Package" xmi:id="_xjz0U6W1Ed2wg--YdqVqPw" name="graphviz">
+        <packagedElement xmi:type="uml:Class" xmi:id="_xkOEAKW1Ed2wg--YdqVqPw" name="GraphvizAPI">
+          <ownedAttribute xmi:id="_xkl3caW1Ed2wg--YdqVqPw" name="ATTR_BOUNDINGBOX" visibility="protected" type="_xkZDIqW1Ed2wg--YdqVqPw"/>
+          <ownedAttribute xmi:id="_xkl3cqW1Ed2wg--YdqVqPw" name="ATTR_DPI" visibility="protected" type="_xkZDIqW1Ed2wg--YdqVqPw"/>
+          <ownedAttribute xmi:id="_xkl3c6W1Ed2wg--YdqVqPw" name="ATTR_FIXEDSIZE" visibility="protected" type="_xkZDIqW1Ed2wg--YdqVqPw"/>
+          <ownedAttribute xmi:id="_xkl3dKW1Ed2wg--YdqVqPw" name="ATTR_FONTNAME" visibility="protected" type="_xkZDIqW1Ed2wg--YdqVqPw"/>
+          <ownedAttribute xmi:id="_xkl3daW1Ed2wg--YdqVqPw" name="ATTR_FONTSIZE" visibility="protected" type="_xkZDIqW1Ed2wg--YdqVqPw"/>
+          <ownedAttribute xmi:id="_xkl3dqW1Ed2wg--YdqVqPw" name="ATTR_HEADLABEL" visibility="protected" type="_xkZDIqW1Ed2wg--YdqVqPw"/>
+          <ownedAttribute xmi:id="_xkl3d6W1Ed2wg--YdqVqPw" name="ATTR_HEIGHT" visibility="protected" type="_xkZDIqW1Ed2wg--YdqVqPw"/>
+          <ownedAttribute xmi:id="_xkmegKW1Ed2wg--YdqVqPw" name="ATTR_LABEL" visibility="protected" type="_xkZDIqW1Ed2wg--YdqVqPw"/>
+          <ownedAttribute xmi:id="_xkmegaW1Ed2wg--YdqVqPw" name="ATTR_LABELANGLE" visibility="protected" type="_xkZDIqW1Ed2wg--YdqVqPw"/>
+          <ownedAttribute xmi:id="_xkmegqW1Ed2wg--YdqVqPw" name="ATTR_LABELDISTANCE" visibility="protected" type="_xkZDIqW1Ed2wg--YdqVqPw"/>
+          <ownedAttribute xmi:id="_xkmeg6W1Ed2wg--YdqVqPw" name="ATTR_LABELFONTNAME" visibility="protected" type="_xkZDIqW1Ed2wg--YdqVqPw"/>
+          <ownedAttribute xmi:id="_xkmehKW1Ed2wg--YdqVqPw" name="ATTR_LABELFONTSIZE" visibility="protected" type="_xkZDIqW1Ed2wg--YdqVqPw"/>
+          <ownedAttribute xmi:id="_xknFkKW1Ed2wg--YdqVqPw" name="ATTR_LABELJUST" visibility="protected" type="_xkZDIqW1Ed2wg--YdqVqPw"/>
+          <ownedAttribute xmi:id="_xknFkaW1Ed2wg--YdqVqPw" name="ATTR_LABELLOC" visibility="protected" type="_xkZDIqW1Ed2wg--YdqVqPw"/>
+          <ownedAttribute xmi:id="_xknFkqW1Ed2wg--YdqVqPw" name="ATTR_LP" visibility="protected" type="_xkZDIqW1Ed2wg--YdqVqPw"/>
+          <ownedAttribute xmi:id="_xknFk6W1Ed2wg--YdqVqPw" name="ATTR_POS" visibility="protected" type="_xkZDIqW1Ed2wg--YdqVqPw"/>
+          <ownedAttribute xmi:id="_xknFlKW1Ed2wg--YdqVqPw" name="ATTR_RANKDIR" visibility="protected" type="_xkZDIqW1Ed2wg--YdqVqPw"/>
+          <ownedAttribute xmi:id="_xknFlaW1Ed2wg--YdqVqPw" name="ATTR_SHAPE" visibility="protected" type="_xkZDIqW1Ed2wg--YdqVqPw"/>
+          <ownedAttribute xmi:id="_xknsoKW1Ed2wg--YdqVqPw" name="ATTR_TAILLABEL" visibility="protected" type="_xkZDIqW1Ed2wg--YdqVqPw"/>
+          <ownedAttribute xmi:id="_xknsoaW1Ed2wg--YdqVqPw" name="ATTR_TAILLP" visibility="protected" type="_xkZDIqW1Ed2wg--YdqVqPw"/>
+          <ownedAttribute xmi:id="_xknsoqW1Ed2wg--YdqVqPw" name="ATTR_WEIGHT" visibility="protected" type="_xkZDIqW1Ed2wg--YdqVqPw"/>
+          <ownedAttribute xmi:id="_xknso6W1Ed2wg--YdqVqPw" name="ATTR_WIDTH" visibility="protected" type="_xkZDIqW1Ed2wg--YdqVqPw"/>
+          <ownedAttribute xmi:id="_xknspKW1Ed2wg--YdqVqPw" name="ATTR_ROTATE" visibility="protected" type="_xkZDIqW1Ed2wg--YdqVqPw"/>
+          <ownedOperation xmi:id="_xkoTsKW1Ed2wg--YdqVqPw" name="attachAttributes" visibility="protected" isStatic="true">
+            <ownedParameter xmi:id="_xkoTsaW1Ed2wg--YdqVqPw" name="graph" type="_xjUsJqW1Ed2wg--YdqVqPw"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_xkoTsqW1Ed2wg--YdqVqPw" name="circoCleanup" visibility="protected" isStatic="true">
+            <ownedParameter xmi:id="_xkoTs6W1Ed2wg--YdqVqPw" name="graph" type="_xjUsJqW1Ed2wg--YdqVqPw"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_xkoTtKW1Ed2wg--YdqVqPw" name="closeGraph" visibility="protected" isStatic="true">
+            <ownedParameter xmi:id="_xkoTtaW1Ed2wg--YdqVqPw" name="graph" type="_xjUsJqW1Ed2wg--YdqVqPw"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_xko6wKW1Ed2wg--YdqVqPw" name="createEdge" visibility="protected" isStatic="true">
+            <ownedParameter xmi:id="_xko6waW1Ed2wg--YdqVqPw" name="graph" type="_xjUsJqW1Ed2wg--YdqVqPw"/>
+            <ownedParameter xmi:id="_xko6wqW1Ed2wg--YdqVqPw" name="source" type="_xjUsJqW1Ed2wg--YdqVqPw"/>
+            <ownedParameter xmi:id="_xko6w6W1Ed2wg--YdqVqPw" name="target" type="_xjUsJqW1Ed2wg--YdqVqPw"/>
+            <ownedParameter xmi:id="_xko6xKW1Ed2wg--YdqVqPw" name="return" type="_xjUsJqW1Ed2wg--YdqVqPw" direction="return"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_xko6xaW1Ed2wg--YdqVqPw" name="createGraph" visibility="protected" isStatic="true">
+            <ownedParameter xmi:id="_xko6xqW1Ed2wg--YdqVqPw" name="name" type="_xkZDIqW1Ed2wg--YdqVqPw"/>
+            <ownedParameter xmi:id="_xko6x6W1Ed2wg--YdqVqPw" name="return" type="_xjUsJqW1Ed2wg--YdqVqPw" direction="return"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_xkph0KW1Ed2wg--YdqVqPw" name="createNode" visibility="protected" isStatic="true">
+            <ownedParameter xmi:id="_xkph0aW1Ed2wg--YdqVqPw" name="graph" type="_xjUsJqW1Ed2wg--YdqVqPw"/>
+            <ownedParameter xmi:id="_xkph0qW1Ed2wg--YdqVqPw" name="name" type="_xkZDIqW1Ed2wg--YdqVqPw"/>
+            <ownedParameter xmi:id="_xkph06W1Ed2wg--YdqVqPw" name="return" type="_xjUsJqW1Ed2wg--YdqVqPw" direction="return"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_xkph1KW1Ed2wg--YdqVqPw" name="doCircoLayout" visibility="protected" isStatic="true">
+            <ownedParameter xmi:id="_xkph1aW1Ed2wg--YdqVqPw" name="graph" type="_xjUsJqW1Ed2wg--YdqVqPw"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_xkqv8KW1Ed2wg--YdqVqPw" name="doDotLayout" visibility="protected" isStatic="true">
+            <ownedParameter xmi:id="_xkqv8aW1Ed2wg--YdqVqPw" name="graph" type="_xjUsJqW1Ed2wg--YdqVqPw"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_xkqv8qW1Ed2wg--YdqVqPw" name="doNeatoLayout" visibility="protected" isStatic="true">
+            <ownedParameter xmi:id="_xkqv86W1Ed2wg--YdqVqPw" name="graph" type="_xjUsJqW1Ed2wg--YdqVqPw"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_xkqv9KW1Ed2wg--YdqVqPw" name="dotCleanup" visibility="protected" isStatic="true">
+            <ownedParameter xmi:id="_xkqv9aW1Ed2wg--YdqVqPw" name="graph" type="_xjUsJqW1Ed2wg--YdqVqPw"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_xkrXAKW1Ed2wg--YdqVqPw" name="doTwopiLayout" visibility="protected" isStatic="true">
+            <ownedParameter xmi:id="_xkrXAaW1Ed2wg--YdqVqPw" name="graph" type="_xjUsJqW1Ed2wg--YdqVqPw"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_xkr-EKW1Ed2wg--YdqVqPw" name="getAttribute" visibility="protected" isStatic="true">
+            <ownedParameter xmi:id="_xkr-EaW1Ed2wg--YdqVqPw" name="elem" type="_xjUsJqW1Ed2wg--YdqVqPw"/>
+            <ownedParameter xmi:id="_xkr-EqW1Ed2wg--YdqVqPw" name="attr" type="_xkZDIqW1Ed2wg--YdqVqPw"/>
+            <ownedParameter xmi:id="_xkr-E6W1Ed2wg--YdqVqPw" name="return" type="_xkZDIqW1Ed2wg--YdqVqPw" direction="return"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_xkr-FaW1Ed2wg--YdqVqPw" name="getBoundingBox" visibility="protected" isStatic="true">
+            <ownedParameter xmi:id="_xkr-FqW1Ed2wg--YdqVqPw" name="graph" type="_xjUsJqW1Ed2wg--YdqVqPw"/>
+            <ownedParameter xmi:id="_xkr-F6W1Ed2wg--YdqVqPw" name="return" type="_xkr-FKW1Ed2wg--YdqVqPw" direction="return"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_xkslIKW1Ed2wg--YdqVqPw" name="getLabelString" visibility="protected" isStatic="true">
+            <ownedParameter xmi:id="_xkslIaW1Ed2wg--YdqVqPw" name="elem" type="_xjUsJqW1Ed2wg--YdqVqPw"/>
+            <ownedParameter xmi:id="_xkslIqW1Ed2wg--YdqVqPw" name="return" type="_xkZDIqW1Ed2wg--YdqVqPw" direction="return"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_xkslI6W1Ed2wg--YdqVqPw" name="getTailLabelString" visibility="protected" isStatic="true">
+            <ownedParameter xmi:id="_xkslJKW1Ed2wg--YdqVqPw" name="edge" type="_xjUsJqW1Ed2wg--YdqVqPw"/>
+            <ownedParameter xmi:id="_xkslJaW1Ed2wg--YdqVqPw" name="return" type="_xkZDIqW1Ed2wg--YdqVqPw" direction="return"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_xktMMKW1Ed2wg--YdqVqPw" name="getVersionString" visibility="protected" isStatic="true">
+            <ownedParameter xmi:id="_xktMMaW1Ed2wg--YdqVqPw" name="return" type="_xkZDIqW1Ed2wg--YdqVqPw" direction="return"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_xktMMqW1Ed2wg--YdqVqPw" name="initialize" visibility="protected" isStatic="true"/>
+          <ownedOperation xmi:id="_xktMM6W1Ed2wg--YdqVqPw" name="neatoCleanup" visibility="protected" isStatic="true">
+            <ownedParameter xmi:id="_xktMNKW1Ed2wg--YdqVqPw" name="graph" type="_xjUsJqW1Ed2wg--YdqVqPw"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_xktzQKW1Ed2wg--YdqVqPw" name="setGlobalEdgeAttribute" visibility="protected" isStatic="true">
+            <ownedParameter xmi:id="_xktzQaW1Ed2wg--YdqVqPw" name="graph" type="_xjUsJqW1Ed2wg--YdqVqPw"/>
+            <ownedParameter xmi:id="_xktzQqW1Ed2wg--YdqVqPw" name="attr" type="_xkZDIqW1Ed2wg--YdqVqPw"/>
+            <ownedParameter xmi:id="_xktzQ6W1Ed2wg--YdqVqPw" name="value" type="_xkZDIqW1Ed2wg--YdqVqPw"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_xkuaUKW1Ed2wg--YdqVqPw" name="setGlobalNodeAttribute" visibility="protected" isStatic="true">
+            <ownedParameter xmi:id="_xkuaUaW1Ed2wg--YdqVqPw" name="graph" type="_xjUsJqW1Ed2wg--YdqVqPw"/>
+            <ownedParameter xmi:id="_xkuaUqW1Ed2wg--YdqVqPw" name="attr" type="_xkZDIqW1Ed2wg--YdqVqPw"/>
+            <ownedParameter xmi:id="_xkuaU6W1Ed2wg--YdqVqPw" name="value" type="_xkZDIqW1Ed2wg--YdqVqPw"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_xkvBYKW1Ed2wg--YdqVqPw" name="setGraphAttribute" visibility="protected" isStatic="true">
+            <ownedParameter xmi:id="_xkvBYaW1Ed2wg--YdqVqPw" name="graph" type="_xjUsJqW1Ed2wg--YdqVqPw"/>
+            <ownedParameter xmi:id="_xkvBYqW1Ed2wg--YdqVqPw" name="attr" type="_xkZDIqW1Ed2wg--YdqVqPw"/>
+            <ownedParameter xmi:id="_xkvBY6W1Ed2wg--YdqVqPw" name="value" type="_xkZDIqW1Ed2wg--YdqVqPw"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_xkwPgKW1Ed2wg--YdqVqPw" name="setLocalEdgeAttribute" visibility="protected" isStatic="true">
+            <ownedParameter xmi:id="_xkwPgaW1Ed2wg--YdqVqPw" name="graph" type="_xjUsJqW1Ed2wg--YdqVqPw"/>
+            <ownedParameter xmi:id="_xkwPgqW1Ed2wg--YdqVqPw" name="edge" type="_xjUsJqW1Ed2wg--YdqVqPw"/>
+            <ownedParameter xmi:id="_xkwPg6W1Ed2wg--YdqVqPw" name="attr" type="_xkZDIqW1Ed2wg--YdqVqPw"/>
+            <ownedParameter xmi:id="_xkwPhKW1Ed2wg--YdqVqPw" name="value" type="_xkZDIqW1Ed2wg--YdqVqPw"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_xkw2kKW1Ed2wg--YdqVqPw" name="setLocalNodeAttribute" visibility="protected" isStatic="true">
+            <ownedParameter xmi:id="_xkw2kaW1Ed2wg--YdqVqPw" name="graph" type="_xjUsJqW1Ed2wg--YdqVqPw"/>
+            <ownedParameter xmi:id="_xkw2kqW1Ed2wg--YdqVqPw" name="node" type="_xjUsJqW1Ed2wg--YdqVqPw"/>
+            <ownedParameter xmi:id="_xkw2k6W1Ed2wg--YdqVqPw" name="attr" type="_xkZDIqW1Ed2wg--YdqVqPw"/>
+            <ownedParameter xmi:id="_xkw2lKW1Ed2wg--YdqVqPw" name="value" type="_xkZDIqW1Ed2wg--YdqVqPw"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_xkxdoKW1Ed2wg--YdqVqPw" name="twopiCleanup" visibility="protected" isStatic="true">
+            <ownedParameter xmi:id="_xkxdoaW1Ed2wg--YdqVqPw" name="graph" type="_xjUsJqW1Ed2wg--YdqVqPw"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_xkyEsKW1Ed2wg--YdqVqPw" name="writeDOT" visibility="protected" isStatic="true">
+            <ownedParameter xmi:id="_xkyEsaW1Ed2wg--YdqVqPw" name="graph" type="_xjUsJqW1Ed2wg--YdqVqPw"/>
+            <ownedParameter xmi:id="_xkyEsqW1Ed2wg--YdqVqPw" name="filename" type="_xkZDIqW1Ed2wg--YdqVqPw"/>
+          </ownedOperation>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_xkUxsKW1Ed2wg--YdqVqPw" name="GraphvizLayoutProvider">
+          <generalization xmi:id="_xkyEtKW1Ed2wg--YdqVqPw" general="_xkyEs6W1Ed2wg--YdqVqPw"/>
+          <ownedAttribute xmi:id="_xkyrwKW1Ed2wg--YdqVqPw" name="LAYOUT_PROVIDER_ID" visibility="package" type="_xkZDIqW1Ed2wg--YdqVqPw"/>
+          <ownedAttribute xmi:id="_xkyrwaW1Ed2wg--YdqVqPw" name="GRAPHVIZ_DOT" visibility="package" type="_xkZDIqW1Ed2wg--YdqVqPw"/>
+          <ownedAttribute xmi:id="_xkyrwqW1Ed2wg--YdqVqPw" name="GRAPHVIZ_CIRCO" visibility="package" type="_xkZDIqW1Ed2wg--YdqVqPw"/>
+          <ownedAttribute xmi:id="_xkyrw6W1Ed2wg--YdqVqPw" name="GRAPHVIZ_TWOPI" visibility="package" type="_xkZDIqW1Ed2wg--YdqVqPw"/>
+          <ownedAttribute xmi:id="_xkyrxKW1Ed2wg--YdqVqPw" name="GRAPHVIZ_NEATO" visibility="package" type="_xkZDIqW1Ed2wg--YdqVqPw"/>
+          <ownedOperation xmi:id="_xkyrxqW1Ed2wg--YdqVqPw" name="doLayout" visibility="public">
+            <ownedParameter xmi:id="_xkyrx6W1Ed2wg--YdqVqPw" name="nodeGroup" type="_xkyrxaW1Ed2wg--YdqVqPw"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_xkzS0aW1Ed2wg--YdqVqPw" name="getCorrectLayouterName" visibility="private">
+            <ownedParameter xmi:id="_xkzS0qW1Ed2wg--YdqVqPw" name="layoutType" type="_xkzS0KW1Ed2wg--YdqVqPw"/>
+            <ownedParameter xmi:id="_xkzS06W1Ed2wg--YdqVqPw" name="layouterName" type="_xkZDIqW1Ed2wg--YdqVqPw"/>
+            <ownedParameter xmi:id="_xkzS1KW1Ed2wg--YdqVqPw" name="return" type="_xkZDIqW1Ed2wg--YdqVqPw" direction="return"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_xkzS1qW1Ed2wg--YdqVqPw" name="getLayouterInfos" visibility="public">
+            <ownedParameter xmi:id="_xkzS16W1Ed2wg--YdqVqPw" name="return" type="_xkzS1aW1Ed2wg--YdqVqPw" direction="return"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_xkzS2KW1Ed2wg--YdqVqPw" name="getLayoutProviderID" visibility="public">
+            <ownedParameter xmi:id="_xkzS2aW1Ed2wg--YdqVqPw" name="return" type="_xkZDIqW1Ed2wg--YdqVqPw" direction="return"/>
+          </ownedOperation>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_xkYcEKW1Ed2wg--YdqVqPw" name="GraphvizLayouter">
+          <ownedAttribute xmi:id="_xkz54aW1Ed2wg--YdqVqPw" name="mapNode2Pointer" visibility="private" type="_xkz54KW1Ed2wg--YdqVqPw"/>
+          <ownedAttribute xmi:id="_xkz54qW1Ed2wg--YdqVqPw" name="mapEdge2Pointer" visibility="private" type="_xkz54KW1Ed2wg--YdqVqPw"/>
+          <ownedAttribute xmi:id="_xkz546W1Ed2wg--YdqVqPw" name="graphvizGraph" visibility="private" type="_xjUsJqW1Ed2wg--YdqVqPw"/>
+          <ownedAttribute xmi:id="_xkz55KW1Ed2wg--YdqVqPw" name="dpi" visibility="private" type="_xjUsJaW1Ed2wg--YdqVqPw"/>
+          <ownedAttribute xmi:id="_xkz55aW1Ed2wg--YdqVqPw" name="padX" visibility="private" type="_xjUsJqW1Ed2wg--YdqVqPw"/>
+          <ownedAttribute xmi:id="_xkz55qW1Ed2wg--YdqVqPw" name="padY" visibility="private" type="_xjUsJqW1Ed2wg--YdqVqPw"/>
+          <ownedAttribute xmi:id="_xkz556W1Ed2wg--YdqVqPw" name="layouterName" visibility="private" type="_xkZDIqW1Ed2wg--YdqVqPw"/>
+          <ownedOperation xmi:id="_xkz56KW1Ed2wg--YdqVqPw" name="init" visibility="private"/>
+          <ownedOperation xmi:id="_xkz56aW1Ed2wg--YdqVqPw" name="visit" visibility="public">
+            <ownedParameter xmi:id="_xkz56qW1Ed2wg--YdqVqPw" name="nodeGroup" type="_xkyrxaW1Ed2wg--YdqVqPw"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_xk0g8KW1Ed2wg--YdqVqPw" name="mapNodeGroup2Graphviz" visibility="private">
+            <ownedParameter xmi:id="_xk0g8aW1Ed2wg--YdqVqPw" name="nodeGroup" type="_xkyrxaW1Ed2wg--YdqVqPw"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_xk0g8qW1Ed2wg--YdqVqPw" name="mapGraphviz2NodeGroup" visibility="private">
+            <ownedParameter xmi:id="_xk0g86W1Ed2wg--YdqVqPw" name="nodeGroup" type="_xkyrxaW1Ed2wg--YdqVqPw"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_xk0g9KW1Ed2wg--YdqVqPw" name="mapGraphvizNodes2KNodes" visibility="private"/>
+          <ownedOperation xmi:id="_xk0g9aW1Ed2wg--YdqVqPw" name="mapGraphvizEdges2KEdges" visibility="private"/>
+          <ownedOperation xmi:id="_xk1IAKW1Ed2wg--YdqVqPw" name="setNodeSize" visibility="private">
+            <ownedParameter xmi:id="_xk1IAaW1Ed2wg--YdqVqPw" name="nodeGroup" type="_xkyrxaW1Ed2wg--YdqVqPw"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_xk1IAqW1Ed2wg--YdqVqPw" name="pixel2GraphVizInches" visibility="private">
+            <ownedParameter xmi:id="_xk1IA6W1Ed2wg--YdqVqPw" name="pixel" type="_xjUsJqW1Ed2wg--YdqVqPw"/>
+            <ownedParameter xmi:id="_xk1IBKW1Ed2wg--YdqVqPw" name="return" type="_xkZDIqW1Ed2wg--YdqVqPw" direction="return"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_xk1vEKW1Ed2wg--YdqVqPw" name="graphVizInches2Pixel" visibility="private">
+            <ownedParameter xmi:id="_xk1vEaW1Ed2wg--YdqVqPw" name="dotInches" type="_xkZDIqW1Ed2wg--YdqVqPw"/>
+            <ownedParameter xmi:id="_xk1vEqW1Ed2wg--YdqVqPw" name="return" type="_xjUsJqW1Ed2wg--YdqVqPw" direction="return"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_xk1vFaW1Ed2wg--YdqVqPw" name="graphviz2Draw2D" visibility="private">
+            <ownedParameter xmi:id="_xk1vFqW1Ed2wg--YdqVqPw" name="x" type="_xjUsJqW1Ed2wg--YdqVqPw"/>
+            <ownedParameter xmi:id="_xk1vF6W1Ed2wg--YdqVqPw" name="y" type="_xjUsJqW1Ed2wg--YdqVqPw"/>
+            <ownedParameter xmi:id="_xk1vGKW1Ed2wg--YdqVqPw" name="size" type="_xk1vE6W1Ed2wg--YdqVqPw"/>
+            <ownedParameter xmi:id="_xk1vGaW1Ed2wg--YdqVqPw" name="return" type="_xk1vFKW1Ed2wg--YdqVqPw" direction="return"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_xk2WIKW1Ed2wg--YdqVqPw" name="graphviz2Draw2D" visibility="private">
+            <ownedParameter xmi:id="_xk2WIaW1Ed2wg--YdqVqPw" name="location" type="_xk1vFKW1Ed2wg--YdqVqPw"/>
+            <ownedParameter xmi:id="_xk2WIqW1Ed2wg--YdqVqPw" name="return" type="_xk1vFKW1Ed2wg--YdqVqPw" direction="return"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_xk2WJKW1Ed2wg--YdqVqPw" name="string2Ints" visibility="private">
+            <ownedParameter xmi:id="_xk2WJaW1Ed2wg--YdqVqPw" name="text" type="_xkZDIqW1Ed2wg--YdqVqPw"/>
+            <ownedParameter xmi:id="_xk2WJqW1Ed2wg--YdqVqPw" name="return" type="_xk2WI6W1Ed2wg--YdqVqPw" direction="return"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_xk29MKW1Ed2wg--YdqVqPw" name="setGraphvizLayouterName" visibility="public">
+            <ownedParameter xmi:id="_xk29MaW1Ed2wg--YdqVqPw" name="layouterName" type="_xkZDIqW1Ed2wg--YdqVqPw"/>
+          </ownedOperation>
+        </packagedElement>
+        <packagedElement xmi:type="uml:DataType" xmi:id="_xkr-FKW1Ed2wg--YdqVqPw" name="Dimension"/>
+        <packagedElement xmi:type="uml:DataType" xmi:id="_xkyEs6W1Ed2wg--YdqVqPw" name="KimlAbstractLayoutProvider"/>
+        <packagedElement xmi:type="uml:DataType" xmi:id="_xkyrxaW1Ed2wg--YdqVqPw" name="KNodeGroup"/>
+        <packagedElement xmi:type="uml:DataType" xmi:id="_xkzS0KW1Ed2wg--YdqVqPw" name="LAYOUT_TYPE"/>
+        <packagedElement xmi:type="uml:DataType" xmi:id="_xkzS1aW1Ed2wg--YdqVqPw" name="ArrayList"/>
+        <packagedElement xmi:type="uml:DataType" xmi:id="_xkz54KW1Ed2wg--YdqVqPw" name="HashMap"/>
+        <packagedElement xmi:type="uml:DataType" xmi:id="_xk1vE6W1Ed2wg--YdqVqPw" name="KDimension"/>
+        <packagedElement xmi:type="uml:DataType" xmi:id="_xk1vFKW1Ed2wg--YdqVqPw" name="KPoint"/>
+        <packagedElement xmi:type="uml:DataType" xmi:id="_xk2WI6W1Ed2wg--YdqVqPw" name="List"/>
+      </packagedElement>
+    </packagedElement>
+  </packagedElement>
+</uml:Model>
