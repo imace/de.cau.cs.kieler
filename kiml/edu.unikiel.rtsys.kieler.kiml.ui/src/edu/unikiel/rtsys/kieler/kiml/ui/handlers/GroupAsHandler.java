@@ -6,9 +6,9 @@ import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.IHandler;
-import org.eclipse.core.commands.common.NotDefinedException;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.CompartmentEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
-import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.handlers.HandlerUtil;
@@ -45,48 +45,59 @@ public class GroupAsHandler extends AbstractHandler implements IHandler {
 			selection = HandlerUtil.getCurrentSelection(event);
 
 		/*
-		 * Filter out ShapeNodeEditParts. According to the menu.extension in
-		 * plugin.xml it should just be ShapeNodeEditParts selected anyway, but
-		 * right know Emma doesn't know how to do this properly. And later it
-		 * should by possible for all kinds of (Node)EditParts.
+		 * Filter out The correct GraphicalEditParts
 		 */
-		ArrayList<ShapeNodeEditPart> selectedNodeElements = new ArrayList<ShapeNodeEditPart>();
+		ArrayList<GraphicalEditPart> selectedShapeNodeEditParts = new ArrayList<GraphicalEditPart>();
+		GraphicalEditPart selectedCompartmentEditPart = null;
 		if (selection != null && selection instanceof IStructuredSelection) {
 			for (Object element : ((IStructuredSelection) selection).toList()) {
 				if (element instanceof ShapeNodeEditPart)
-					selectedNodeElements.add((ShapeNodeEditPart) element);
+					selectedShapeNodeEditParts.add((ShapeNodeEditPart) element);
+				else if (element instanceof CompartmentEditPart) {
+					selectedCompartmentEditPart = (CompartmentEditPart) element;
+					break;
+				}
 			}
 		}
 
-		/*
-		 * Another plausibility check, is also covered in plugin.xml
-		 */
-		if (selectedNodeElements.size() >= 2) {
-			String commandID = event.getCommand().getId();
-			
-			// the parameter provided holds the layouterName
-			String layouterName = event
-					.getParameter(ContributionItemGroupAs.PARAM_LAYOUTER_NAME);
-			LAYOUTER_INFO layouterInfo = LayoutProviders.getInstance()
-					.getLayouterInfoForLayouterName(layouterName);
-			LAYOUT_TYPE layoutType = LAYOUT_TYPE.DEFAULT;
-			layoutType = layouterInfo.getLayoutType();
-			
-			// just another sanity check if the right commandID
-			if (commandID
-					.equals("edu.unikiel.rtsys.kieler.kiml.ui.command.groupAs")) {
+		/* if CompartmentEditPart, fetch parent */
+		if (selectedCompartmentEditPart != null) {
+			GraphicalEditPart gep = (GraphicalEditPart) selectedCompartmentEditPart
+					.getParent();
+			selectedShapeNodeEditParts.clear();
+			selectedShapeNodeEditParts.add(gep);
+		}
 
-				String groupID = KimlGMFLayoutHintHelper
-						.generateLayoutGroupID(selectedNodeElements);
-				KimlGMFLayoutHintHelper.setLayoutHint(selectedNodeElements,
+		String commandID = event.getCommand().getId();
+		// the parameter provided holds the layouterName
+		String layouterName = event
+				.getParameter(ContributionItemGroupAs.PARAM_LAYOUTER_NAME);
+		LAYOUTER_INFO layouterInfo = LayoutProviders.getInstance()
+				.getLayouterInfoForLayouterName(layouterName);
+		LAYOUT_TYPE layoutType = LAYOUT_TYPE.DEFAULT;
+		layoutType = layouterInfo.getLayoutType();
+		String groupID = "";
+
+		// just another sanity check if the right commandID
+		if (commandID
+				.equals("edu.unikiel.rtsys.kieler.kiml.ui.command.groupAs")) {
+			groupID = KimlGMFLayoutHintHelper
+			.generateLayoutGroupID(selectedShapeNodeEditParts);
+			/*
+			 * if just one selected, assume it was some kind of compartment and
+			 * apply grouping on sub elements
+			 */
+			if (selectedShapeNodeEditParts.size() == 1) {
+				
+				KimlGMFLayoutHintHelper.setChildrenLayoutHint(
+						(ShapeNodeEditPart) selectedShapeNodeEditParts.get(0),
 						groupID, layoutType, layouterName);
-
-				MessageDialog.openInformation(
-						HandlerUtil.getActiveShell(event),
-						"KIEL Infrastructure for Meta Layout UI Plug-in",
-						KimlGMFLayoutHintHelper.buildGroupAsMessage(layoutType
-								.getLiteral(), layouterName, groupID,
-								selectedNodeElements.size()));
+			}
+			/* more selected, apply grouping information to selected elements */
+			else if (selectedShapeNodeEditParts.size() > 1) {
+				
+				KimlGMFLayoutHintHelper.setLayoutHint(selectedShapeNodeEditParts, groupID,
+						layoutType, layouterName);
 			}
 		}
 		return null;

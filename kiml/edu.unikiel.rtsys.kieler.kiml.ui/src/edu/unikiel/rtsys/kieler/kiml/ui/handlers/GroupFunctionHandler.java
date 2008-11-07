@@ -6,6 +6,7 @@ import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.IHandler;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
@@ -67,7 +68,7 @@ public class GroupFunctionHandler extends AbstractHandler implements IHandler {
 			if (selectedNodeElements.size() == 1) {
 				ShapeNodeEditPart shapeNodeEditPart = selectedNodeElements
 						.get(0);
-				ArrayList<ShapeNodeEditPart> inSameGroup = KimlGMFLayoutHintHelper
+				ArrayList<GraphicalEditPart> inSameGroup = (ArrayList<GraphicalEditPart>) KimlGMFLayoutHintHelper
 						.getGroupMembersByElement(shapeNodeEditPart);
 
 				// there are some nodes in the same group
@@ -76,7 +77,7 @@ public class GroupFunctionHandler extends AbstractHandler implements IHandler {
 					// unselect all ShapeNodeEditParts
 					shapeNodeEditPart.getViewer().deselectAll();
 					// select group members
-					for (ShapeNodeEditPart editpart : inSameGroup) {
+					for (GraphicalEditPart editpart : inSameGroup) {
 						shapeNodeEditPart.getViewer().appendSelection(editpart);
 					}
 
@@ -99,7 +100,7 @@ public class GroupFunctionHandler extends AbstractHandler implements IHandler {
 				KimlGMFColorHelper colorHelper = new KimlGMFColorHelper();
 				ShapeNodeEditPart shapeNodeEditPart = selectedNodeElements
 						.get(0);
-				ArrayList<ShapeNodeEditPart> inSameGroup = KimlGMFLayoutHintHelper
+				ArrayList<GraphicalEditPart> inSameGroup = KimlGMFLayoutHintHelper
 						.getGroupMembersByElement(shapeNodeEditPart);
 
 				// there are some nodes in the same group
