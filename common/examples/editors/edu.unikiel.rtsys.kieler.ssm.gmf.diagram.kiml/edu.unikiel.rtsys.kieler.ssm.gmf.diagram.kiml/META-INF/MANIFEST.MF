@@ -1,5 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
+Bundle-ClassPath: .
 Bundle-Name: Test Plug-in
 Bundle-SymbolicName: edu.unikiel.rtsys.kieler.ssm.gmf.diagram.kiml;singleton:=true
 Bundle-Version: 1.0.0

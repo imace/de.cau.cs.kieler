@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.eclipse.draw2d.Animation;
 import org.eclipse.draw2d.ConnectionLocator;
 import org.eclipse.draw2d.PositionConstants;
 import org.eclipse.draw2d.geometry.Dimension;
@@ -17,16 +18,22 @@ import org.eclipse.gef.commands.CommandStack;
 import org.eclipse.gef.commands.CompoundCommand;
 import org.eclipse.gef.editparts.ScalableFreeformRootEditPart;
 import org.eclipse.gef.requests.ChangeBoundsRequest;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramRootEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.LabelEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeCompartmentEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.figures.ShapeCompartmentFigure;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramCommandStack;
+import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramGraphicalViewer;
 import org.eclipse.gmf.runtime.diagram.ui.requests.RequestConstants;
 import org.eclipse.gmf.runtime.diagram.ui.requests.SetAllBendpointRequest;
 import org.eclipse.gmf.runtime.draw2d.ui.internal.figures.AnimatableScrollPane;
+import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.swt.widgets.Display;
 
+import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutPlugin;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.EDGE_LABEL_PLACEMENT;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KDimension;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KEdge;
@@ -39,6 +46,7 @@ import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPoint;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphFactory;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_TYPE;
 import edu.unikiel.rtsys.kieler.kiml.layout.services.KimlAbstractLayouter;
+import edu.unikiel.rtsys.kieler.kiml.layout.util.KimlLayoutPreferenceConstants;
 import edu.unikiel.rtsys.kieler.kiml.layout.util.KimlLayoutUtil;
 import edu.unikiel.rtsys.kieler.kiml.ui.helpers.KimlCommonHelper;
 import edu.unikiel.rtsys.kieler.kiml.ui.helpers.KimlGMFLayoutHintHelper;
@@ -49,67 +57,20 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 	private double zoomLevel = 1.0;
 	private float widthCollapsed = 80f;
 	private float heightCollapsed = 40f;
-	
+
 	private Map<NodeEditPart, KNodeGroup> nodeEditPart2NodeGroup = new HashMap<NodeEditPart, KNodeGroup>();
 	private Map<KNodeGroup, GraphicalEditPart> nodeGroup2NodeEditPart = new HashMap<KNodeGroup, GraphicalEditPart>();
 	private Map<KEdge, ConnectionEditPart> edge2ConnectionEditPart = new HashMap<KEdge, ConnectionEditPart>();
 	private Map<KLabel, LabelEditPart> label2LabelEditPart = new HashMap<KLabel, LabelEditPart>();
 	private CommandStack commandStack = null;
-	
+
 	private GraphicalEditPart rootPart;
 	private KLayoutGraph layoutGraph;
-	
-	
-	private GraphicalEditPart getRootPart(IStructuredSelection selection, String commandId)
-	{
-		GraphicalEditPart root = null;
 
-		// no matter how much was selected, get the first element
-		Object selectedObject = selection.getFirstElement();
-		// if just one element was selected, use this, if NodeEditPart
-		if (selection.size() == 1) {
-			if (selectedObject instanceof NodeEditPart) {
-				root = (NodeEditPart) selectedObject;
-			} else {
-				root = findParentNode(selectedObject);
-			}
-		}
-		// more selected, find parent thereof
-		else {
-			root = findParentNode(selectedObject);
-		}
+	/*------------------------------------------------------------------------------*/
+	/*-----------------------------APPLICATION OF LAYOUT----------------------------*/
+	/*------------------------------------------------------------------------------*/
 
-		/*
-		 * Check if Emma wants to layout just the selected element(s), or
-		 * the entire diagram in the editor.
-		 * WARNING: probably this doesn't work for dataflow diagrams
-		 */
-		if (commandId.equals("edu.unikiel.rtsys.kieler.kiml.ui.command.kimlGMFLayoutAll")) {
-			if (root.getViewer().getRootEditPart().getContents()
-					.getChildren().get(0) instanceof NodeEditPart) {
-				root = (NodeEditPart) root.getViewer().getRootEditPart()
-						.getContents().getChildren().get(0);
-			}
-		}
-		
-		return root;
-	}
-	
-	/*
-	 * Recursive helper function to get a NodeEditPart parent for an object.
-	 */
-	private NodeEditPart findParentNode(Object current) {
-		if (current instanceof GraphicalEditPart) {
-			GraphicalEditPart aep = (GraphicalEditPart) current;
-			if (aep.getParent() instanceof NodeEditPart)
-				return (NodeEditPart) aep.getParent();
-			else
-				return findParentNode(aep.getParent());
-		} else
-			return null;
-	}
-	
-	
 	@Override
 	protected void applyLayout() {
 		if (commandStack == null) {
@@ -118,7 +79,7 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 		}
 
 		CompoundCommand compoundCommand = new CompoundCommand();
-		compoundCommand.setLabel("GMF Layout");
+		compoundCommand.setLabel("SSM Diagram Layout");
 
 		Point offset = new Point();
 		GraphicalEditPart gep = nodeGroup2NodeEditPart.get(layoutGraph
@@ -335,66 +296,33 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 		}
 
 	}
-	
+
+	/*------------------------------------------------------------------------------*/
+	/*------------------------BUILDING OF LAYOUT GRAPH------------------------------*/
+	/*------------------------------------------------------------------------------*/
+
 	@Override
 	protected KLayoutGraph buildLayoutGraph() {
 		layoutGraph = KimlLayoutGraphFactory.eINSTANCE.createKLayoutGraph();
 
-		// set at least this to have a top node in the layout graph which is not null
+		// set at least this to have a top node in the layout graph which is not
+		// null
 		KNodeGroup topNodeGroup = KimlLayoutUtil.createInitializedNodeGroup();
 		layoutGraph.setTopGroup(topNodeGroup);
-		
-		// But if Emma has a NodeEditPart, then do more.
-		if (rootPart instanceof NodeEditPart) {
-			NodeEditPart rootEditPart = (NodeEditPart)rootPart;
 
-			// set label and ID
-			topNodeGroup.getLabel().setText(
-					KimlCommonHelper.getShortLabel(rootEditPart));
-			topNodeGroup.setIdString(KimlCommonHelper
-					.getLongLabel(rootEditPart));
+		// init took care that rootPart is instance of NodeEditPart
+		NodeEditPart rootEditPart = (NodeEditPart) rootPart;
 
-			nodeEditPart2NodeGroup.put(rootEditPart, topNodeGroup);
-			nodeGroup2NodeEditPart.put(topNodeGroup, rootEditPart);
+		// set label and ID
+		topNodeGroup.getLabel().setText(
+				KimlCommonHelper.getShortLabel(rootEditPart));
+		topNodeGroup.setIdString(KimlCommonHelper.getLongLabel(rootEditPart));
 
-			buildLayoutGraphRecursively(rootEditPart, topNodeGroup);
-			return layoutGraph;
-		} else {
-			return null;
-		}
-	}
+		nodeEditPart2NodeGroup.put(rootEditPart, topNodeGroup);
+		nodeGroup2NodeEditPart.put(topNodeGroup, rootEditPart);
 
-	@Override
-	protected boolean init(IStructuredSelection selection, String commandId) {
-		// get root part of the selection
-		rootPart = getRootPart(selection, commandId);
-		
-		// get zooming level
-		if (rootPart instanceof GraphicalEditPart
-				&& ((GraphicalEditPart) rootPart).getRoot() instanceof ScalableFreeformRootEditPart) {
-			GraphicalEditPart gep = (GraphicalEditPart) rootPart;
-			// commandStack = gep.getViewer().getEditDomain().getCommandStack();
-			commandStack = new DiagramCommandStack(null);
-			ScalableFreeformRootEditPart sfrep = (ScalableFreeformRootEditPart) gep
-					.getRoot();
-			zoomLevel = sfrep.getZoomManager().getZoom();
-		} else {
-			System.out
-					.println("KimlGMFLayouter: Error: not instanceof GraphicalEditPart: "
-							+ rootPart.getClass());
-			return false;
-		}
-		if (commandStack == null) {
-			System.out.println("KimlGMFLayouter: Error: commandStack == null");
-			return false;
-		}
-		// handle edge label placement
-		useGMFLabelLocation = true;/*KimlUiPlugin
-				.getDefault()
-				.getPreferenceStore()
-				.getBoolean(
-						PreferenceConstants.PREF_UI_DO_NOT_LAYOUT_CONNECTION_LABELS);*/
-		return true;
+		buildLayoutGraphRecursively(rootEditPart, topNodeGroup);
+		return layoutGraph;
 	}
 
 	/**
@@ -429,7 +357,7 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 			// 33 pixel after layout.
 			insetsTop = 33f;
 			insetsLeft = 15f;
-			
+
 			// check if compartment is collapsed
 			ShapeCompartmentFigure scf = (ShapeCompartmentFigure) currentSCEP
 					.getFigure();
@@ -440,16 +368,19 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 				nodeEditPart2NodeGroup.get(current.getParent()).getLayout()
 						.getInsets().setTop(insetsTop);
 				nodeEditPart2NodeGroup.get(current.getParent()).getLayout()
-				.getInsets().setLeft(insetsLeft);
+						.getInsets().setLeft(insetsLeft);
 				if (!isExpanded) {
 					// setting the size to default values
 					nodeEditPart2NodeGroup.get(current.getParent()).getLayout()
 							.getSize().setHeight(heightCollapsed);
 					nodeEditPart2NodeGroup.get(current.getParent()).getLayout()
 							.getSize().setWidth(widthCollapsed);
-					// extend the label string to handle the node label of a composite state correctly
-					String text = nodeEditPart2NodeGroup.get(current.getParent()).getLabel().getText();
-					nodeEditPart2NodeGroup.get(current.getParent()).getLabel().setText(text.concat("XX"));
+					// extend the label string to handle the node label of a
+					// composite state correctly
+					String text = nodeEditPart2NodeGroup.get(
+							current.getParent()).getLabel().getText();
+					nodeEditPart2NodeGroup.get(current.getParent()).getLabel()
+							.setText(text.concat("XX"));
 				}
 			} catch (Exception e) {
 				;
@@ -744,6 +675,98 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 			nodes2Groups.put(groupID, nodesInGroup);
 		}
 	}
-	
-	
+
+	/*------------------------------------------------------------------------------*/
+	/*------------------------------INIT FUNCTION-----------------------------------*/
+	/*------------------------------------------------------------------------------*/
+
+	@Override
+	protected boolean init(Object object) {
+		// get root part provided object
+		rootPart = getRootPart(object);
+
+		// get zooming level
+		if (rootPart instanceof GraphicalEditPart
+				&& ((GraphicalEditPart) rootPart).getRoot() instanceof ScalableFreeformRootEditPart) {
+			GraphicalEditPart gep = (GraphicalEditPart) rootPart;
+			// commandStack = gep.getViewer().getEditDomain().getCommandStack();
+			commandStack = new DiagramCommandStack(null);
+			ScalableFreeformRootEditPart sfrep = (ScalableFreeformRootEditPart) gep
+					.getRoot();
+			zoomLevel = sfrep.getZoomManager().getZoom();
+		} else {
+			System.out
+					.println("KimlGMFLayouter: Error: not instanceof GraphicalEditPart: "
+							+ rootPart.getClass());
+			return false;
+		}
+		if (commandStack == null) {
+			System.out.println("KimlGMFLayouter: Error: commandStack == null");
+			return false;
+		}
+		// handle edge label placement
+		useGMFLabelLocation = KimlLayoutPlugin
+				.getDefault()
+				.getPreferenceStore()
+				.getBoolean(
+						KimlLayoutPreferenceConstants.PREF_DIAGRAMLAYOUTERS_DO_NOT_LAYOUT_CONNECTION_LABELS);
+
+		return true;
+	}
+
+	/*------------------------------------------------------------------------------*/
+	/*----------------------------HELPER FUNCTIONS----------------------------------*/
+	/*------------------------------------------------------------------------------*/
+
+	private GraphicalEditPart getRootPart(Object object) {
+		GraphicalEditPart root = null;
+
+		// no matter how much was selected, get the first element
+		if (object instanceof IStructuredSelection) {
+			IStructuredSelection selection = (IStructuredSelection) object;
+
+			Object selectedObject = selection.getFirstElement();
+			// if just one element was selected, use this, if NodeEditPart
+			if (selection.size() == 1) {
+				if (selectedObject instanceof NodeEditPart) {
+					root = (NodeEditPart) selectedObject;
+				} else if (selectedObject instanceof DiagramEditPart) {
+					root = (GraphicalEditPart) ((DiagramEditPart) selectedObject)
+							.getChildren().get(0);
+				}
+			}
+			// more selected, find parent thereof
+			else {
+				root = findParentNode(selectedObject);
+			}
+
+		}
+		if (object instanceof DiagramGraphicalViewer) {
+			DiagramGraphicalViewer viewer = (DiagramGraphicalViewer) object;
+			root = (GraphicalEditPart) viewer.getRootEditPart().getChildren()
+					.get(0);
+		}
+		if (object instanceof DiagramRootEditPart) {
+			DiagramRootEditPart drep = (DiagramRootEditPart) object;
+			root = (GraphicalEditPart) drep.getChildren().get(0);
+		}
+		if (object instanceof GraphicalEditPart) {
+			root = (GraphicalEditPart) root;
+		}
+		return root;
+	}
+
+	/*
+	 * Recursive helper function to get a NodeEditPart parent for an object.
+	 */
+	private NodeEditPart findParentNode(Object current) {
+		if (current instanceof GraphicalEditPart) {
+			GraphicalEditPart aep = (GraphicalEditPart) current;
+			if (aep.getParent() instanceof NodeEditPart)
+				return (NodeEditPart) aep.getParent();
+			else
+				return findParentNode(aep.getParent());
+		} else
+			return null;
+	}
 }
