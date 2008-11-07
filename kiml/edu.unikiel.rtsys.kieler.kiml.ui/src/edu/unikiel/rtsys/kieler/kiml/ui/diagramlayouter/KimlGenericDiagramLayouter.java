@@ -34,7 +34,8 @@ public class KimlGenericDiagramLayouter extends KimlAbstractLayouter {
 	protected void applyLayout() {
 		if (commandStack == null) {
 			// TODO error handling
-			System.out.println(getClass().getSimpleName()+": Error: commandStack == null");
+			System.out.println(getClass().getSimpleName()
+					+ ": Error: commandStack == null");
 			return;
 		}
 		CompoundCommand compoundCommand = new CompoundCommand();
@@ -45,7 +46,8 @@ public class KimlGenericDiagramLayouter extends KimlAbstractLayouter {
 
 	@Override
 	protected KLayoutGraph buildLayoutGraph() {
-		// init() took care that rootPart is not null and instance of NodeEditPart
+		// init() took care that rootPart is not null and instance of
+		// NodeEditPart
 		NodeEditPart rootEditPart = (NodeEditPart) rootPart;
 
 		layoutGraph = KimlLayoutGraphFactory.eINSTANCE.createKLayoutGraph();
@@ -54,16 +56,17 @@ public class KimlGenericDiagramLayouter extends KimlAbstractLayouter {
 
 	@Override
 	protected boolean init(Object target) {
-		
+
 		// get root part of provided object
 		rootPart = getRootPart(target);
 
-		if (rootPart == null || !(rootPart instanceof NodeEditPart)) {
+		if (!(rootPart instanceof NodeEditPart)) {
 			return false;
 		}
 		commandStack = new DiagramCommandStack(null);
 		if (commandStack == null) {
-			System.out.println(getClass().getSimpleName()+": Error: commandStack == null");
+			System.out.println(getClass().getSimpleName()
+					+ ": Error: commandStack == null");
 			return false;
 		}
 
