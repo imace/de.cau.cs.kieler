@@ -180,6 +180,14 @@ point="org.eclipse.ui.menus">
             id="edu.unikiel.rtsys.kieler.kiml.ui.commandParameterType.String"
             type="java.lang.String">
       </commandParameterType>
+      <command
+            id="edu.unikiel.rtsys.kieler.kiml.ui.command.kimlLayout"
+            name="KIML Layout">
+      </command>
+      <command
+            id="edu.unikiel.rtsys.kieler.kiml.ui.command.kimlLayoutAll"
+            name="KIML Layout All">
+      </command>
    </extension>
    <extension
          point="org.eclipse.ui.handlers">
