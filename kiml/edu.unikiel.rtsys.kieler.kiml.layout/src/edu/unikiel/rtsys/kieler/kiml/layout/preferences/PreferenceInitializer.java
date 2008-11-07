@@ -21,10 +21,12 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
 		store
 				.setDefault(
-						PreferenceConstants.PREF_LAYOUT_LAYOUT_CONNECTION_LABELS,
+						PreferenceConstants.PREF_LAYOUTPROVIDERS_LAYOUT_CONNECTION_LABELS,
 						false);
-		store.setDefault(PreferenceConstants.PREF_LAYOUT_DEFAULT_LAYOUTER,
+		store.setDefault(PreferenceConstants.PREF_LAYOUTPROVIDERS_DEFAULT_LAYOUTER,
 				KimlNullLayoutProvider.NULL_LAYOUT);
+		store.setDefault(PreferenceConstants.PREF_DIAGRAMLAYOUTERS_DO_NOT_LAYOUT_CONNECTION_LABELS,
+				true);
 	}
 
 }

@@ -24,10 +24,10 @@ import edu.unikiel.rtsys.kieler.kiml.layout.services.LayoutProviders;
  * preferences can be accessed directly via the preference store.
  */
 
-public class LayoutPreferencePage extends FieldEditorPreferencePage implements
+public class LayoutProvidersPreferencePage extends FieldEditorPreferencePage implements
 		IWorkbenchPreferencePage {
 
-	public LayoutPreferencePage() {
+	public LayoutProvidersPreferencePage() {
 		super(GRID);
 		setPreferenceStore(Activator.getDefault().getPreferenceStore());
 		setDescription("Set here the general layout options that do not apply to a specific layout engine");
@@ -47,7 +47,7 @@ public class LayoutPreferencePage extends FieldEditorPreferencePage implements
 		defaultLayouter.setText("Default Layouter");
 		String[][] options = getAvailableLayouterNames();
 		addField(new RadioGroupFieldEditor(
-				PreferenceConstants.PREF_LAYOUT_DEFAULT_LAYOUTER, "Choose the default layouter:",
+				PreferenceConstants.PREF_LAYOUTPROVIDERS_DEFAULT_LAYOUTER, "Choose the default layouter:",
 				2, options, defaultLayouter));
 
 		gl = new GridLayout(1, true);

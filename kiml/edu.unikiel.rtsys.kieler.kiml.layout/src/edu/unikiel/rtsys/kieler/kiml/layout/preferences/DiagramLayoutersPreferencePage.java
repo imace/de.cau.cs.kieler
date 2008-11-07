@@ -21,11 +21,11 @@ import edu.unikiel.rtsys.kieler.kiml.layout.Activator;
  * be accessed directly via the preference store.
  */
 
-public class DiagramLayouterPreferencePage
+public class DiagramLayoutersPreferencePage
 	extends FieldEditorPreferencePage
 	implements IWorkbenchPreferencePage {
 
-	public DiagramLayouterPreferencePage() {
+	public DiagramLayoutersPreferencePage() {
 		super(GRID);
 		setPreferenceStore(Activator.getDefault().getPreferenceStore());
 		setDescription("Set the options for the KIML Diagram Layouters");
