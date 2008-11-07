@@ -8,5 +8,14 @@
             editor_id="edu.unikiel.rtsys.kieler.ssm.diagram.part.SafeStateMachineDiagramEditorID">
       </kimlDiagramLayouter>
    </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            category="edu.unikiel.rtsys.kieler.kiml.layout.preferences.DiagramLayoutersPreferencePage"
+            class="edu.unikiel.rtsys.kieler.ssm.gmf.diagram.layouter.preferences.PreferencePage"
+            id="edu.unikiel.rtsys.kieler.ssm.gmf.diagram.layouter.page1"
+            name="SSM Diagram Layouter">
+      </page>
+   </extension>
 
 </plugin>
