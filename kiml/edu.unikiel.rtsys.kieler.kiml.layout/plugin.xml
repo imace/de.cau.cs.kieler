@@ -8,9 +8,15 @@
          point="org.eclipse.ui.preferencePages">
       <page
             category="edu.unikiel.rtsys.kieler.kiml.ui.PreferencePage"
-            class="edu.unikiel.rtsys.kieler.kiml.layout.preferences.LayoutPreferencePage"
-            id="edu.unikiel.rtsys.kieler.kiml.layout.preferences.LayoutPreferencePage"
-            name="Layout Engine">
+            class="edu.unikiel.rtsys.kieler.kiml.layout.preferences.LayoutProvidersPreferencePage"
+            id="edu.unikiel.rtsys.kieler.kiml.layout.preferences.LayoutProvidersPreferencePage"
+            name="Layout Providers">
+      </page>
+      <page
+            category="edu.unikiel.rtsys.kieler.kiml.ui.PreferencePage"
+            class="edu.unikiel.rtsys.kieler.kiml.layout.preferences.DiagramLayoutersPreferencePage"
+            id="edu.unikiel.rtsys.kieler.kiml.layout.preferences.DiagramLayoutersPreferencePage"
+            name="Diagram Layouters">
       </page>
    </extension>
    <extension

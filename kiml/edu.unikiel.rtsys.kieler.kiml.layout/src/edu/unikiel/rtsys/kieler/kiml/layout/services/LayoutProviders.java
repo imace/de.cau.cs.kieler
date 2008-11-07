@@ -79,7 +79,7 @@ public final class LayoutProviders {
 		// least always be the null layout provider
 		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
 		String defaultLayoutProvider = store
-				.getString(PreferenceConstants.PREF_LAYOUT_DEFAULT_LAYOUTER);
+				.getString(PreferenceConstants.PREF_LAYOUTPROVIDERS_DEFAULT_LAYOUTER);
 		return layoutProviderMap.get(defaultLayoutProvider);
 	}
 
