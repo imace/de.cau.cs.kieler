@@ -12,6 +12,7 @@ import org.eclipse.ui.IWorkbenchPreferencePage;
 
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutPlugin;
 import edu.unikiel.rtsys.kieler.kiml.layout.services.LayoutProviders;
+import edu.unikiel.rtsys.kieler.kiml.layout.util.KimlLayoutPreferenceConstants;
 
 /**
  * This class represents a preference page that is contributed to the
@@ -47,7 +48,7 @@ public class LayoutProvidersPreferencePage extends FieldEditorPreferencePage imp
 		defaultLayouter.setText("Default Layouter");
 		String[][] options = getAvailableLayouterNames();
 		addField(new RadioGroupFieldEditor(
-				PreferenceConstants.PREF_LAYOUTPROVIDERS_DEFAULT_LAYOUTER, "Choose the default layouter:",
+				KimlLayoutPreferenceConstants.PREF_LAYOUTPROVIDERS_DEFAULT_LAYOUTER, "Choose the default layouter:",
 				2, options, defaultLayouter));
 
 		gl = new GridLayout(1, true);

@@ -13,7 +13,7 @@ import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutPlugin;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_TYPE;
-import edu.unikiel.rtsys.kieler.kiml.layout.preferences.PreferenceConstants;
+import edu.unikiel.rtsys.kieler.kiml.layout.util.KimlLayoutPreferenceConstants;
 
 public final class LayoutProviders {
 
@@ -81,7 +81,7 @@ public final class LayoutProviders {
 		// if still no success, use default layout provider ...
 		IPreferenceStore store = KimlLayoutPlugin.getDefault().getPreferenceStore();
 		String defaultLayoutProvider = store
-				.getString(PreferenceConstants.PREF_LAYOUTPROVIDERS_DEFAULT_LAYOUTER);
+				.getString(KimlLayoutPreferenceConstants.PREF_LAYOUTPROVIDERS_DEFAULT_LAYOUTER);
 		layoutProvider = layoutProviderMap.get(defaultLayoutProvider);
 
 		// ... and if found return it

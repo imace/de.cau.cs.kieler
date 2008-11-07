@@ -5,6 +5,7 @@ import org.eclipse.jface.preference.IPreferenceStore;
 
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutPlugin;
 import edu.unikiel.rtsys.kieler.kiml.layout.services.KimlNullLayoutProvider;
+import edu.unikiel.rtsys.kieler.kiml.layout.util.KimlLayoutPreferenceConstants;
 
 /**
  * Class used to initialize default preference values.
@@ -21,11 +22,11 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		IPreferenceStore store = KimlLayoutPlugin.getDefault().getPreferenceStore();
 		store
 				.setDefault(
-						PreferenceConstants.PREF_LAYOUTPROVIDERS_LAYOUT_CONNECTION_LABELS,
+						KimlLayoutPreferenceConstants.PREF_LAYOUTPROVIDERS_LAYOUT_CONNECTION_LABELS,
 						false);
-		store.setDefault(PreferenceConstants.PREF_LAYOUTPROVIDERS_DEFAULT_LAYOUTER,
+		store.setDefault(KimlLayoutPreferenceConstants.PREF_LAYOUTPROVIDERS_DEFAULT_LAYOUTER,
 				KimlNullLayoutProvider.NULL_LAYOUT);
-		store.setDefault(PreferenceConstants.PREF_DIAGRAMLAYOUTERS_DO_NOT_LAYOUT_CONNECTION_LABELS,
+		store.setDefault(KimlLayoutPreferenceConstants.PREF_DIAGRAMLAYOUTERS_DO_NOT_LAYOUT_CONNECTION_LABELS,
 				true);
 	}
 

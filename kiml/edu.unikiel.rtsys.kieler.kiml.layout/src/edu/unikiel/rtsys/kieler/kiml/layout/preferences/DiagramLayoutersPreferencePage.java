@@ -6,6 +6,7 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutPlugin;
+import edu.unikiel.rtsys.kieler.kiml.layout.util.KimlLayoutPreferenceConstants;
 
 /**
  * This class represents a preference page that
@@ -40,7 +41,7 @@ public class DiagramLayoutersPreferencePage
 	public void createFieldEditors() {
 		addField(
 			new BooleanFieldEditor(
-					PreferenceConstants.PREF_DIAGRAMLAYOUTERS_DO_NOT_LAYOUT_CONNECTION_LABELS,
+					KimlLayoutPreferenceConstants.PREF_DIAGRAMLAYOUTERS_DO_NOT_LAYOUT_CONNECTION_LABELS,
 					"&If checked do not use the layout information provided by \n" +
 					"the layout engine to layout the labels. Use the internal \n" +
 					"functions of the graphical editor, if it has any. Might \n" +
