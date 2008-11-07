@@ -18,20 +18,19 @@ import org.eclipse.gef.commands.CommandStack;
 import org.eclipse.gef.commands.CompoundCommand;
 import org.eclipse.gef.editparts.ScalableFreeformRootEditPart;
 import org.eclipse.gef.requests.ChangeBoundsRequest;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.CompartmentEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
-import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramRootEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.LabelEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeCompartmentEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.figures.ShapeCompartmentFigure;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramCommandStack;
+import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditor;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramGraphicalViewer;
 import org.eclipse.gmf.runtime.diagram.ui.requests.RequestConstants;
 import org.eclipse.gmf.runtime.diagram.ui.requests.SetAllBendpointRequest;
 import org.eclipse.gmf.runtime.draw2d.ui.internal.figures.AnimatableScrollPane;
-import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.swt.widgets.Display;
 
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutPlugin;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.EDGE_LABEL_PLACEMENT;
@@ -66,6 +65,21 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 
 	private GraphicalEditPart rootPart;
 	private KLayoutGraph layoutGraph;
+
+	/*------------------------------------------------------------------------------*/
+	/*-----------------------HACK DUE TO EDGES AND LABEL §$$/&%?--------------------*/
+	/*------------------------------------------------------------------------------*/
+	public void layout(Object target) {
+		/* first run to set positions of nodes */
+		super.layout(target);
+		rootPart.getFigure().validate();
+		/* second run to set positions of edges */
+		super.layout(target);
+		rootPart.getFigure().validate();
+		/* third run to set positions of edge labels */
+		super.layout(target);
+		rootPart.getFigure().validate();
+	}
 
 	/*------------------------------------------------------------------------------*/
 	/*-----------------------------APPLICATION OF LAYOUT----------------------------*/
@@ -107,8 +121,9 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 
 		applyNodeLayoutRecursively(layoutGraph.getTopGroup(), compoundCommand,
 				offset);
-
+		
 		commandStack.execute(compoundCommand);
+	
 	}
 
 	/**
@@ -695,13 +710,13 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 					.getRoot();
 			zoomLevel = sfrep.getZoomManager().getZoom();
 		} else {
-			System.out
-					.println("KimlGMFLayouter: Error: not instanceof GraphicalEditPart: "
-							+ rootPart.getClass());
+			System.err.println("KimlSSMDiagramLayouter: Error: '" + rootPart
+					+ "' is no an instance of GraphicalEditPart: ");
 			return false;
 		}
 		if (commandStack == null) {
-			System.out.println("KimlGMFLayouter: Error: commandStack == null");
+			System.err
+					.println("KimlSSMDiagramLayouter: Error: commandStack == null");
 			return false;
 		}
 		// handle edge label placement
@@ -733,6 +748,9 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 				} else if (selectedObject instanceof DiagramEditPart) {
 					root = (GraphicalEditPart) ((DiagramEditPart) selectedObject)
 							.getChildren().get(0);
+				} else if (selectedObject instanceof CompartmentEditPart) {
+					root = (GraphicalEditPart) ((CompartmentEditPart) selectedObject)
+							.getParent();
 				}
 			}
 			// more selected, find parent thereof
@@ -746,9 +764,14 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 			root = (GraphicalEditPart) viewer.getRootEditPart().getChildren()
 					.get(0);
 		}
-		if (object instanceof DiagramRootEditPart) {
-			DiagramRootEditPart drep = (DiagramRootEditPart) object;
-			root = (GraphicalEditPart) drep.getChildren().get(0);
+		if (object instanceof DiagramEditor) {
+			DiagramEditor editor = (DiagramEditor) object;
+			root = (GraphicalEditPart) editor.getDiagramEditPart()
+					.getChildren().get(0);
+		}
+		if (object instanceof DiagramEditPart) {
+			DiagramEditPart dep = (DiagramEditPart) object;
+			root = (GraphicalEditPart) dep.getChildren().get(0);
 		}
 		if (object instanceof GraphicalEditPart) {
 			root = (GraphicalEditPart) root;
