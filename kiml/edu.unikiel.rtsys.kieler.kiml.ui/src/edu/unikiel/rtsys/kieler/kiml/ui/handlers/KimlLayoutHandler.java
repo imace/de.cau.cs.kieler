@@ -4,9 +4,7 @@ import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.IHandler;
-import org.eclipse.gef.NodeEditPart;
 import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.handlers.HandlerUtil;
 
@@ -14,6 +12,8 @@ import edu.unikiel.rtsys.kieler.kiml.layout.services.DiagramLayouters;
 import edu.unikiel.rtsys.kieler.kiml.layout.services.KimlAbstractLayouter;
 
 public class KimlLayoutHandler extends AbstractHandler implements IHandler {
+	
+	private static final String COMMAND_ID_LAYOUT_ALL = "edu.unikiel.rtsys.kieler.kiml.ui.command.kimlLayoutAll";
 
 	public KimlLayoutHandler() {
 		super();
@@ -44,7 +44,8 @@ public class KimlLayoutHandler extends AbstractHandler implements IHandler {
 			ISelection selection = HandlerUtil.getActiveMenuSelection(event);
 			if (selection == null)
 				selection = HandlerUtil.getCurrentSelection(event);
-			if (selection == null || commandId.equals("edu.unikiel.rtsys.kieler.kiml.ui.command.kimlGMFLayoutAll")) {
+			if (selection == null || commandId.equals(COMMAND_ID_LAYOUT_ALL))
+			{
 				// start layout process with editor part
 				diagramLayouter.layout(editorPart);
 			}
