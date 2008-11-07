@@ -49,44 +49,15 @@
 
    <element name="kimlLayoutProvider">
       <complexType>
-         <sequence>
-            <element ref="Priority"/>
-         </sequence>
-         <attribute name="class" type="string">
+         <attribute name="class" type="string" use="required">
             <annotation>
                <documentation>
-                  
+                  Implementing class of the layout provider
                </documentation>
                <appinfo>
                   <meta.attribute kind="java" basedOn="edu.unikiel.rtsys.kieler.kiml.layout.services.KimlAbstractLayoutProvider:"/>
                </appinfo>
             </annotation>
-         </attribute>
-      </complexType>
-   </element>
-
-   <element name="Priority">
-      <complexType>
-         <attribute name="name">
-            <annotation>
-               <documentation>
-                  
-               </documentation>
-            </annotation>
-            <simpleType>
-               <restriction base="string">
-                  <enumeration value="Lowest">
-                  </enumeration>
-                  <enumeration value="Low">
-                  </enumeration>
-                  <enumeration value="Medium">
-                  </enumeration>
-                  <enumeration value="High">
-                  </enumeration>
-                  <enumeration value="Highest">
-                  </enumeration>
-               </restriction>
-            </simpleType>
          </attribute>
       </complexType>
    </element>

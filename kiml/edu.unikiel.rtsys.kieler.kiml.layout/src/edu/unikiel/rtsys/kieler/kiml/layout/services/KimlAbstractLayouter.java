@@ -20,6 +20,9 @@ public abstract class KimlAbstractLayouter {
 	public static final String EXTENSION_POINT_ID = "edu.unikiel.rtsys.kieler.kiml.layout.kimlDiagramLayouter";
 	public static final String ATTRIBUTE_CLASS = "class";
 	public static final String ATTRIBUTE_EDITOR_ID = "editor_id";
+	public static final String ATTRIBUTE_ID = "id";
+	public static final String ATTRIBUTE_NAME = "name";
+	public static final String ATTRIBUTE_ICON = "icon";
 	
 	/**
 	 * Method which should be called to do the actual layout. Layouters calling
