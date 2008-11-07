@@ -16,22 +16,23 @@ import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KEdgeLabel;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPoint;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphFactory;
+import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_OPTION;
 import edu.unikiel.rtsys.kieler.kiml.layouter.graphviz.Activator;
 import edu.unikiel.rtsys.kieler.kiml.layouter.graphviz.preferences.PreferenceConstants;
 
 /**
- * Basic Layout Algorithm employing the Graphviz library (dot layout) to do a
+ * Basic Layout Algorithm employing the GraphViz library (e.g. dot layout) to do a
  * graphical layout on a passed Graph datastructure. The basic principle is
  * simple: (1) read the graph datastructure and use the GraphvizAPI to fill a
- * Graphviz internal (native) datastructure. (2) call a Graphviz layout engine
- * (e.g. the dot layouter) on the Graphviz datastructure. The datastructure will
+ * GraphViz internal (native) datastructure. (2) call a GraphViz layout engine
+ * (e.g. the dot layouter) on the GraphViz datastructure. The datastructure will
  * get augmented by positioning attributes. (3) Read the position attributes
- * from the Graphviz datastructure and write them back to the KIELER Graph
+ * from the GraphViz datastructure and write them back to the KIELER Graph
  * datastructure.
  * 
  * Hierarchy is prepared (by visiting the graph recursively) but not tested yet.
  * 
- * @author haf
+ * @author haf, ars
  * 
  */
 public class GraphvizLayouter {
@@ -72,7 +73,6 @@ public class GraphvizLayouter {
 	private void init() {
 		GraphvizAPI.initialize();
 		graphvizGraph = GraphvizAPI.createGraph("");
-		GraphvizAPI.setGraphAttribute(graphvizGraph, "rankdir", "LR");
 		GraphvizAPI.setGlobalNodeAttribute(graphvizGraph,
 				GraphvizAPI.ATTR_SHAPE, "box");
 	}
@@ -88,7 +88,13 @@ public class GraphvizLayouter {
 
 		this.init();
 		mapNodeGroup2Graphviz(nodeGroup);
-
+		if (nodeGroup.getLayout().getLayoutOptions().contains(LAYOUT_OPTION.VERTICAL)){
+			GraphvizAPI.setGraphAttribute(graphvizGraph, "rankdir", "BT");
+		}else{
+			GraphvizAPI.setGraphAttribute(graphvizGraph, "rankdir", "LR");
+		}
+			
+		
 		if (layouterName.equals(GraphvizLayoutProvider.GRAPHVIZ_CIRCO))
 			GraphvizAPI.doCircoLayout(graphvizGraph);
 		else if (layouterName.equals(GraphvizLayoutProvider.GRAPHVIZ_NEATO))
