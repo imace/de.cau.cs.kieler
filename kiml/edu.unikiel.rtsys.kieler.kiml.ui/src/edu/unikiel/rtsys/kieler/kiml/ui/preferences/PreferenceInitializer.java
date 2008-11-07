@@ -1,9 +1,6 @@
 package edu.unikiel.rtsys.kieler.kiml.ui.preferences;
 
 import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
-import org.eclipse.jface.preference.IPreferenceStore;
-
-import edu.unikiel.rtsys.kieler.kiml.ui.KimlUiPlugin;
 
 
 /**
@@ -18,9 +15,6 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 	 * initializeDefaultPreferences()
 	 */
 	public void initializeDefaultPreferences() {
-		IPreferenceStore store = KimlUiPlugin.getDefault().getPreferenceStore();
-		store.setDefault(PreferenceConstants.PREF_UI_DO_NOT_LAYOUT_CONNECTION_LABELS,
-				false);
 	}
 
 }
