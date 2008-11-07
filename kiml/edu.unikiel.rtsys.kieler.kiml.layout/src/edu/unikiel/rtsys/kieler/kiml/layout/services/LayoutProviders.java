@@ -57,11 +57,13 @@ public final class LayoutProviders {
 	}
 
 	public KimlAbstractLayoutProvider getLayoutProvider(KNodeGroup nodeGroup) {
+		KimlAbstractLayoutProvider layoutProvider = null;
 
 		// if layouter name is fitting, use it
 		String layouterName = nodeGroup.getLayout().getLayouterName();
 		if (layoutProviderMap.containsKey(layouterName)) {
-			return layoutProviderMap.get(layouterName);
+			layoutProvider = layoutProviderMap.get(layouterName);
+			return layoutProvider;
 		}
 
 		// if no proper name, try same layout type
@@ -69,18 +71,28 @@ public final class LayoutProviders {
 			for (LAYOUTER_INFO layouterInfo : getAvailableLayouterInfos()) {
 				if (layouterInfo.getLayoutType().equals(
 						nodeGroup.getLayout().getLayoutType())) {
-					return layoutProviderMap
-							.get(layouterInfo.getLayouterName());
+					layoutProvider = layoutProviderMap.get(layouterInfo
+							.getLayouterName());
+					return layoutProvider;
 				}
 			}
 		}
 
-		// if still no success, use default layout provider, there should at
-		// least always be the null layout provider
+		// if still no success, use default layout provider ...
 		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
 		String defaultLayoutProvider = store
 				.getString(PreferenceConstants.PREF_LAYOUTPROVIDERS_DEFAULT_LAYOUTER);
-		return layoutProviderMap.get(defaultLayoutProvider);
+		layoutProvider = layoutProviderMap.get(defaultLayoutProvider);
+
+		// ... and if found return it
+		if (layoutProvider != null) {
+			return layoutProvider;
+		}
+		// if still no layout provider found, return dummy null layout provider,
+		// so that no null pointer exception arises in other plugins.
+		else {
+			return new KimlNullLayoutProvider();
+		}
 	}
 
 	public ArrayList<String> getAvailableLayouterNames() {

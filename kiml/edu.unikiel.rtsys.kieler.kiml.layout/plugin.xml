@@ -35,12 +35,5 @@
             id="edu.unikiel.rtsys.kieler.kiml.layout.properties.samplePropertyPage">
       </page>
    </extension>
-   <extension
-         point="edu.unikiel.rtsys.kieler.kiml.layout.kimlLayoutProvider">
-      <kimlLayoutProvider
-            class="edu.unikiel.rtsys.kieler.kiml.layout.services.KimlNullLayoutProvider">
-         <Priority></Priority>
-      </kimlLayoutProvider>
-   </extension>
 
 </plugin>

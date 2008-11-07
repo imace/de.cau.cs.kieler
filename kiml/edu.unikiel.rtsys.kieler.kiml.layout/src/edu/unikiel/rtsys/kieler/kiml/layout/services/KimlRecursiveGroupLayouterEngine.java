@@ -7,10 +7,12 @@ import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup;
  * @author ars
  * 
  */
-public class KimlRecursiveGroupLayouterEngine extends KimlAbstractLayouterEngine {
+public class KimlRecursiveGroupLayouterEngine extends
+		KimlAbstractLayouterEngine {
 
 	public void layout(KLayoutGraph layoutGraph) {
-		layoutRecursively(layoutGraph.getTopGroup());
+		if (layoutGraph.getTopGroup() != null)
+			layoutRecursively(layoutGraph.getTopGroup());
 	}
 
 	private void layoutRecursively(KNodeGroup nodeGroup) {
