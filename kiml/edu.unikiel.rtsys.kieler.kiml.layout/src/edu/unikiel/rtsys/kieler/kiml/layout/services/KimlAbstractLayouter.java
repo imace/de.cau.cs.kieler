@@ -1,7 +1,5 @@
 package edu.unikiel.rtsys.kieler.kiml.layout.services;
 
-import org.eclipse.jface.viewers.IStructuredSelection;
-
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KLayoutGraph;
 
 /**
@@ -30,11 +28,12 @@ public abstract class KimlAbstractLayouter {
 	 * buildLayoutGraph method and must have an implementation of the
 	 * applyLayout methods to actually apply the layout information back to the
 	 * diagram.
+	 * @param target object specifying what is to be layouted
 	 */
-	public void layout(IStructuredSelection selection, String commandId) {
+	public void layout(Object target) {
 		// Setup the options and perform the three stages of the
 		// layout, two of them have to be implemented by the extending classes.
-		if (!init(selection, commandId)) {
+		if (!init(target)) {
 			// TODO error handling
 			System.out.println(getClass().getSimpleName() + ": Error in init()");
 			return;
@@ -57,11 +56,10 @@ public abstract class KimlAbstractLayouter {
 	/**
 	 * Initializes the layouter for a new given selection of a diagram. Chooses
 	 * the right diagram elements for layouting and prepares all needed structures.
-	 * @param selection selection of elements from a diagram editor
-	 * @param commandId command associated with the layouting process
+	 * @param target object specifying what is to be layouted
 	 * @return true if successful
 	 */
-	protected abstract boolean init(IStructuredSelection selection, String commandId);
+	protected abstract boolean init(Object target);
 
 	/**
 	 * Creates the layout graph that corresponds to the diagram elements to be
