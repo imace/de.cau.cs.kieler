@@ -3,7 +3,7 @@ package edu.unikiel.rtsys.kieler.kiml.layout.preferences;
 import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
 import org.eclipse.jface.preference.IPreferenceStore;
 
-import edu.unikiel.rtsys.kieler.kiml.layout.Activator;
+import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutPlugin;
 import edu.unikiel.rtsys.kieler.kiml.layout.services.KimlNullLayoutProvider;
 
 /**
@@ -18,7 +18,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 	 * initializeDefaultPreferences()
 	 */
 	public void initializeDefaultPreferences() {
-		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
+		IPreferenceStore store = KimlLayoutPlugin.getDefault().getPreferenceStore();
 		store
 				.setDefault(
 						PreferenceConstants.PREF_LAYOUTPROVIDERS_LAYOUT_CONNECTION_LABELS,

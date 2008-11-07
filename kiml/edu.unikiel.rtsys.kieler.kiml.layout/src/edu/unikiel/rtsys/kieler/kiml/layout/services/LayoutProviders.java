@@ -9,7 +9,7 @@ import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.preference.IPreferenceStore;
 
-import edu.unikiel.rtsys.kieler.kiml.layout.Activator;
+import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutPlugin;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_TYPE;
@@ -79,7 +79,7 @@ public final class LayoutProviders {
 		}
 
 		// if still no success, use default layout provider ...
-		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
+		IPreferenceStore store = KimlLayoutPlugin.getDefault().getPreferenceStore();
 		String defaultLayoutProvider = store
 				.getString(PreferenceConstants.PREF_LAYOUTPROVIDERS_DEFAULT_LAYOUTER);
 		layoutProvider = layoutProviderMap.get(defaultLayoutProvider);

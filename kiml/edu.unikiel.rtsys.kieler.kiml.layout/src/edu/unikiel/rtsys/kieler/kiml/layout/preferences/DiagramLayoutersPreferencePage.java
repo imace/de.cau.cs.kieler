@@ -5,7 +5,7 @@ import org.eclipse.jface.preference.FieldEditorPreferencePage;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
-import edu.unikiel.rtsys.kieler.kiml.layout.Activator;
+import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutPlugin;
 
 /**
  * This class represents a preference page that
@@ -27,7 +27,7 @@ public class DiagramLayoutersPreferencePage
 
 	public DiagramLayoutersPreferencePage() {
 		super(GRID);
-		setPreferenceStore(Activator.getDefault().getPreferenceStore());
+		setPreferenceStore(KimlLayoutPlugin.getDefault().getPreferenceStore());
 		setDescription("Set the options for the KIML Diagram Layouters");
 	}
 	

@@ -10,7 +10,7 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
-import edu.unikiel.rtsys.kieler.kiml.layout.Activator;
+import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutPlugin;
 import edu.unikiel.rtsys.kieler.kiml.layout.services.LayoutProviders;
 
 /**
@@ -29,7 +29,7 @@ public class LayoutProvidersPreferencePage extends FieldEditorPreferencePage imp
 
 	public LayoutProvidersPreferencePage() {
 		super(GRID);
-		setPreferenceStore(Activator.getDefault().getPreferenceStore());
+		setPreferenceStore(KimlLayoutPlugin.getDefault().getPreferenceStore());
 		setDescription("Set here the general layout options that do not apply to a specific layout engine");
 	}
 
