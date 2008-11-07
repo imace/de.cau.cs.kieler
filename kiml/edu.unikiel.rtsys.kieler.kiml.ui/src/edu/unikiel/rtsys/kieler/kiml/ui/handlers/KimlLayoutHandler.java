@@ -63,7 +63,7 @@ public class KimlLayoutHandler extends AbstractHandler implements IHandler {
 		else
 		{
 			// TODO error handling
-			System.err.println("KimlLayoutHandler: No diagram layouter found for the given editor.");
+			System.err.println(getClass().getSimpleName() + ": No diagram layouter found for the given editor.");
 		}
 		return null;
 	}

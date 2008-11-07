@@ -463,5 +463,12 @@ point="org.eclipse.ui.menus">
          </or>
       </definition>
    </extension>
+   <extension
+         point="edu.unikiel.rtsys.kieler.kiml.layout.kimlDiagramLayouter">
+      <kimlDiagramLayouter
+            class="edu.unikiel.rtsys.kieler.kiml.ui.diagramlayouter.KimlGenericDiagramLayouter"
+            editor_id="*">
+      </kimlDiagramLayouter>
+   </extension>
 
 </plugin>
