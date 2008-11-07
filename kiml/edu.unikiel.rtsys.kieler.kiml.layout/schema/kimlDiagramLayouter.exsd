@@ -49,7 +49,7 @@
 
    <element name="kimlDiagramLayouter">
       <complexType>
-         <attribute name="class" type="string" use="required">
+         <attribute name="class" type="string">
             <annotation>
                <documentation>
                   Implementing class of the diagram layouter
@@ -59,7 +59,7 @@
                </appinfo>
             </annotation>
          </attribute>
-         <attribute name="editor_id" type="string" use="required">
+         <attribute name="editor_id" type="string">
             <annotation>
                <documentation>
                   ID of the diagram editor for which this diagram layouter shall be used

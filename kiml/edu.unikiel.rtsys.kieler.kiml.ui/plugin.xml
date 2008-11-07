@@ -89,15 +89,15 @@ point="org.eclipse.ui.menus">
          icon="icons/sample.gif"
          label="%menu.label.4">
       <command
-            commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.kimlGMFLayout"
+            commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.kimlLayout"
             icon="icons/kieler-arrange.png"
-            label="GMF Layout this"
+            label="Layout this"
             style="push">
       </command>
       <command
-            commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.kimlGMFLayoutAll"
+            commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.kimlLayoutAll"
             icon="icons/kieler-arrange.png"
-            label="GMF Layout all"
+            label="Layout all"
             style="push">
       </command>
       <separator
@@ -169,16 +169,12 @@ point="org.eclipse.ui.menus">
             name="%command.name.8">
       </command>
       <command
-            id="edu.unikiel.rtsys.kieler.kiml.ui.command.kimlGEFLayout"
-            name="KIML GEF Layout">
+            id="edu.unikiel.rtsys.kieler.kiml.ui.command.kimlLayout"
+            name="KIML Layout">
       </command>
       <command
-            id="edu.unikiel.rtsys.kieler.kiml.ui.command.kimlGMFLayout"
-            name="KIML GMF Layout">
-      </command>
-      <command
-            id="edu.unikiel.rtsys.kieler.kiml.ui.command.kimlGMFLayoutAll"
-            name="KIML GMF Layout All">
+            id="edu.unikiel.rtsys.kieler.kiml.ui.command.kimlLayoutAll"
+            name="KIML Layout All">
       </command>
       <commandParameterType
             id="edu.unikiel.rtsys.kieler.kiml.ui.commandParameterType.String"
