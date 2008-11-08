@@ -21,8 +21,8 @@ import edu.unikiel.rtsys.kieler.kiml.layouter.graphviz.Activator;
 import edu.unikiel.rtsys.kieler.kiml.layouter.graphviz.preferences.PreferenceConstants;
 
 /**
- * Basic Layout Algorithm employing the GraphViz library (e.g. dot layout) to do a
- * graphical layout on a passed Graph datastructure. The basic principle is
+ * Basic Layout Algorithm employing the GraphViz library (e.g. dot layout) to do
+ * a graphical layout on a passed Graph datastructure. The basic principle is
  * simple: (1) read the graph datastructure and use the GraphvizAPI to fill a
  * GraphViz internal (native) datastructure. (2) call a GraphViz layout engine
  * (e.g. the dot layouter) on the GraphViz datastructure. The datastructure will
@@ -88,13 +88,13 @@ public class GraphvizLayouter {
 
 		this.init();
 		mapNodeGroup2Graphviz(nodeGroup);
-		if (nodeGroup.getLayout().getLayoutOptions().contains(LAYOUT_OPTION.VERTICAL)){
+		if (nodeGroup.getLayout().getLayoutOptions().contains(
+				LAYOUT_OPTION.VERTICAL)) {
 			GraphvizAPI.setGraphAttribute(graphvizGraph, "rankdir", "BT");
-		}else{
+		} else {
 			GraphvizAPI.setGraphAttribute(graphvizGraph, "rankdir", "LR");
 		}
-			
-		
+
 		if (layouterName.equals(GraphvizLayoutProvider.GRAPHVIZ_CIRCO))
 			GraphvizAPI.doCircoLayout(graphvizGraph);
 		else if (layouterName.equals(GraphvizLayoutProvider.GRAPHVIZ_NEATO))
@@ -356,10 +356,13 @@ public class GraphvizLayouter {
 					KPoint midLocation = KimlLayoutGraphFactory.eINSTANCE
 							.createKPoint();
 					if (midInts.size() == 2) {
+						KDimension labelSize = KimlLayoutGraphFactory.eINSTANCE
+								.createKDimension();
+						labelSize = label.getLabelLayout().getSize();
+						labelSize.setHeight(10);
 						midLocation = graphviz2Draw2D(
 								midInts.get(0).intValue(), midInts.get(1)
-										.intValue(), label.getLabelLayout()
-										.getSize());
+										.intValue(), labelSize);
 					}
 					label.getLabelLayout().setLocation(midLocation);
 				}
@@ -373,9 +376,13 @@ public class GraphvizLayouter {
 					KPoint tailLocation = KimlLayoutGraphFactory.eINSTANCE
 							.createKPoint();
 					if (tailInts.size() == 2) {
+						KDimension labelSize = KimlLayoutGraphFactory.eINSTANCE
+								.createKDimension();
+						labelSize = label.getLabelLayout().getSize();
+						labelSize.setHeight(-6);
 						tailLocation = graphviz2Draw2D(tailInts.get(0)
-								.intValue(), tailInts.get(1).intValue(), label
-								.getLabelLayout().getSize());
+								.intValue(), tailInts.get(1).intValue(),
+								labelSize);
 					}
 					label.getLabelLayout().setLocation(tailLocation);
 				}
