@@ -61,7 +61,6 @@ import edu.unikiel.rtsys.kieler.kiml.layout.util.KimlLayoutPreferenceConstants;
 import edu.unikiel.rtsys.kieler.kiml.layout.util.KimlLayoutUtil;
 import edu.unikiel.rtsys.kieler.kiml.ui.helpers.KimlCommonHelper;
 import edu.unikiel.rtsys.kieler.kiml.ui.helpers.KimlGMFLayoutHintHelper;
-import edu.unikiel.rtsys.kieler.ssm.diagram.edit.parts.NormalTerminationEditPart.NormalTerminationFigure;
 
 public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 
