@@ -5,8 +5,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.draw2d.Animation;
+import org.eclipse.draw2d.Bendpoint;
+import org.eclipse.draw2d.BendpointLocator;
+import org.eclipse.draw2d.ConnectionAnchor;
 import org.eclipse.draw2d.ConnectionLocator;
+import org.eclipse.draw2d.IFigure;
+import org.eclipse.draw2d.PolylineConnection;
 import org.eclipse.draw2d.PositionConstants;
+import org.eclipse.draw2d.Viewport;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.PointList;
@@ -14,22 +20,28 @@ import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.gef.ConnectionEditPart;
 import org.eclipse.gef.GraphicalEditPart;
 import org.eclipse.gef.NodeEditPart;
+import org.eclipse.gef.Request;
 import org.eclipse.gef.commands.CommandStack;
 import org.eclipse.gef.commands.CompoundCommand;
 import org.eclipse.gef.editparts.ScalableFreeformRootEditPart;
+import org.eclipse.gef.editpolicies.BendpointEditPolicy;
 import org.eclipse.gef.requests.ChangeBoundsRequest;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.CompartmentEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramRootEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.LabelEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeCompartmentEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.figures.BorderItemsAwareFreeFormLayer;
 import org.eclipse.gmf.runtime.diagram.ui.figures.ShapeCompartmentFigure;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramCommandStack;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditor;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramGraphicalViewer;
 import org.eclipse.gmf.runtime.diagram.ui.requests.RequestConstants;
 import org.eclipse.gmf.runtime.diagram.ui.requests.SetAllBendpointRequest;
+import org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx;
 import org.eclipse.gmf.runtime.draw2d.ui.internal.figures.AnimatableScrollPane;
+import org.eclipse.gmf.runtime.gef.ui.figures.SlidableAnchor;
 import org.eclipse.jface.viewers.IStructuredSelection;
 
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutPlugin;
@@ -49,6 +61,7 @@ import edu.unikiel.rtsys.kieler.kiml.layout.util.KimlLayoutPreferenceConstants;
 import edu.unikiel.rtsys.kieler.kiml.layout.util.KimlLayoutUtil;
 import edu.unikiel.rtsys.kieler.kiml.ui.helpers.KimlCommonHelper;
 import edu.unikiel.rtsys.kieler.kiml.ui.helpers.KimlGMFLayoutHintHelper;
+import edu.unikiel.rtsys.kieler.ssm.diagram.edit.parts.NormalTerminationEditPart.NormalTerminationFigure;
 
 public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 
@@ -65,6 +78,8 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 
 	private GraphicalEditPart rootPart;
 	private KLayoutGraph layoutGraph;
+	private BorderItemsAwareFreeFormLayer primaryLayer = null;
+	private Viewport viewport;
 
 	/*------------------------------------------------------------------------------*/
 	/*-----------------------HACK DUE TO EDGES AND LABEL §$$/&%?--------------------*/
@@ -121,9 +136,9 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 
 		applyNodeLayoutRecursively(layoutGraph.getTopGroup(), compoundCommand,
 				offset);
-		
+
 		commandStack.execute(compoundCommand);
-	
+
 	}
 
 	/**
@@ -222,25 +237,50 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 	private void applyEdgeLayout(KNodeGroup childGroup,
 			CompoundCommand compoundCommand, Point offset) {
 
+		GraphicalEditPart sourceEditPart = nodeGroup2NodeEditPart
+				.get(childGroup);
 		for (KEdge edge : childGroup.getOutgoingEdges()) {
 			ConnectionEditPart connection = edge2ConnectionEditPart.get(edge);
 			KEdgeLayout edgeLayout = edge.getLayout();
 			PointList pointList = new PointList();
 
 			// set start point, mind the offset
-			pointList.addPoint(KimlCommonHelper.kPoint2Point(
-					edgeLayout.getSourcePoint()).translate(offset));
+			Point startPoint = KimlCommonHelper.kPoint2Point(
+					edgeLayout.getSourcePoint()).translate(offset);
+			Point translatedStartPoint = translateFromTo(KimlCommonHelper
+					.kPoint2Point(edgeLayout.getSourcePoint())
+					.translate(offset), sourceEditPart.getFigure(),
+					primaryLayer);
+			pointList.addPoint(startPoint);
 
 			// set grid points, mind the offset (GraphViz: Bezier)
 			for (KPoint gridPoint : edgeLayout.getGridPoints()) {
-				pointList.addPoint(KimlCommonHelper.kPoint2Point(gridPoint)
-						.translate(offset));
+				Point point = KimlCommonHelper.kPoint2Point(gridPoint)
+						.translate(offset);
+				Point translatedPoint = translateFromTo(KimlCommonHelper
+						.kPoint2Point(gridPoint).translate(offset),
+						((GraphicalEditPart) sourceEditPart.getParent())
+								.getFigure(), primaryLayer);
+				pointList.addPoint(point);
 			}
 
 			// set end point, mind the offset
-			pointList.addPoint(KimlCommonHelper.kPoint2Point(
-					edgeLayout.getTargetPoint()).translate(offset));
+			Point endPoint = KimlCommonHelper.kPoint2Point(
+					edgeLayout.getTargetPoint()).translate(offset);
+			Point translatedEndPoint = translateFromTo(KimlCommonHelper
+					.kPoint2Point(edgeLayout.getTargetPoint())
+					.translate(offset), sourceEditPart.getFigure(),
+					primaryLayer);
+			pointList.addPoint(endPoint);
 
+			/* little try if setting the endpoints works, result: not really ;( */
+			if (connection.getFigure() instanceof PolylineConnectionEx) {
+				PolylineConnectionEx connFig = (PolylineConnectionEx) connection.getFigure();
+				connFig.setStart(translatedStartPoint);
+				connFig.setEnd(translatedEndPoint);
+				connFig.validate();
+			}
+			
 			// create request and add it
 			SetAllBendpointRequest request = new SetAllBendpointRequest(
 					RequestConstants.REQ_SET_ALL_BENDPOINT, pointList);
@@ -267,32 +307,33 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 	private void applyEdgeLabelLayout(KEdge edge,
 			CompoundCommand compoundCommand, Point offset) {
 
+		KNodeGroup sourceNode = edge.getSource();
+		GraphicalEditPart sourceEditPart = nodeGroup2NodeEditPart
+				.get(sourceNode);
+
 		for (KEdgeLabel edgeLabel : edge.getLabel()) {
 
 			LabelEditPart labelEditPart = label2LabelEditPart.get(edgeLabel);
-
 			// some sanity checks can not be bad
 			if (labelEditPart != null) {
 
 				Point oldLocation = labelEditPart.getFigure().getBounds()
 						.getLocation();
+
 				Point newLocation = new Point();
 
 				// TODO: fix it
-				if (useGMFLabelLocation) {
+				if (useGMFLabelLocation
+						|| (oldLocation.x == 0 && oldLocation.y == 0)) {
 					newLocation = labelEditPart.getReferencePoint();
 				} else {
+					oldLocation = translateFromTo(labelEditPart.getFigure(),
+							sourceEditPart.getFigure());
 					newLocation = KimlCommonHelper.kPoint2Point(edgeLabel
 							.getLabelLayout().getLocation());
 					newLocation.translate(offset);
 				}
-				// XXX: syso
-				// System.out.println(
-				// "-------------------------------------------");
-				// System.out.println("NEWG: " +
-				// labelEditPart.getReferencePoint());
-				// System.out.println("NEWL: " + newLocation);
-				// System.out.println("OLD:  " + oldLocation);
+
 				Point moveDelta = newLocation.getTranslated(oldLocation
 						.negate());
 
@@ -708,6 +749,9 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 			commandStack = new DiagramCommandStack(null);
 			ScalableFreeformRootEditPart sfrep = (ScalableFreeformRootEditPart) gep
 					.getRoot();
+			primaryLayer = (BorderItemsAwareFreeFormLayer) sfrep
+					.getLayer(DiagramRootEditPart.PRIMARY_LAYER);
+			viewport = sfrep.getZoomManager().getViewport();
 			zoomLevel = sfrep.getZoomManager().getZoom();
 		} else {
 			System.err.println("KimlSSMDiagramLayouter: Error: '" + rootPart
@@ -791,5 +835,18 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 				return findParentNode(aep.getParent());
 		} else
 			return null;
+	}
+
+	private Point translateFromTo(IFigure from, IFigure to) {
+		Rectangle newBounds = from.getBounds().getCopy();
+		from.translateToAbsolute(newBounds);
+		to.translateToRelative(newBounds);
+		return newBounds.getLocation();
+	}
+
+	private Point translateFromTo(Point point, IFigure from, IFigure to) {
+		from.translateToAbsolute(point);
+		to.translateToRelative(point);
+		return point;
 	}
 }
