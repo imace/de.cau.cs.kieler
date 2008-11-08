@@ -8,6 +8,7 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.emf.compare;bundle-version="0.8.0",
  org.eclipse.emf.compare.diff;bundle-version="0.8.0",
+ org.eclipse.emf.compare.diff.edit;bundle-version="0.8.1",
  org.eclipse.emf.compare.match;bundle-version="0.8.0",
  org.eclipse.compare;bundle-version="3.4.0",
  org.eclipse.gmf.runtime.diagram.core,
@@ -17,6 +18,16 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.team.ui,
  org.eclipse.emf.edit.ui,
  edu.unikiel.rtsys.kieler.kiml.layout;bundle-version="1.0.0",
- edu.unikiel.rtsys.kieler.kiml.ui;bundle-version="1.0.0"
+ edu.unikiel.rtsys.kieler.kiml.ui;bundle-version="1.0.0",
+ edu.unikiel.rtsys.kieler.ssm.emf;bundle-version="0.1.0",
+ edu.unikiel.rtsys.kieler.ssm.emf.edit;bundle-version="1.0.0",
+ edu.unikiel.rtsys.kieler.ssm.emf.editor;bundle-version="1.0.0",
+ edu.unikiel.rtsys.kieler.ssm.gmf.diagram;bundle-version="1.0.0",
+ org.eclipse.emf.ecoretools.diagram;bundle-version="0.8.0",
+ org.eclipse.gmf.runtime.diagram.ui.resources.editor;bundle-version="1.1.1",
+ org.eclipse.gmf.runtime.diagram.ui.resources.editor.ide;bundle-version="1.1.0",
+ org.eclipse.gmf.runtime.diagram.ui.render
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: edu.unikiel.rtsys.kieler.kivik,
+ edu.unikiel.rtsys.kieler.kivik.util

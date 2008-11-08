@@ -24,7 +24,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.swt.graphics.Image;
 
-
 public class KivikCompareInput implements ICompareInput {
 	/** Resource containing the ancestor object of this comparison. */
 	private Resource ancestorResource;
@@ -35,27 +34,30 @@ public class KivikCompareInput implements ICompareInput {
 	/** Keeps a list of all the differences (without DiffGroup) detected. */
 	private List<DiffElement> diffList;
 
-	/** Memorizes all listeners registered for this {@link ICompareInput compare input}. */
+	/**
+	 * Memorizes all listeners registered for this {@link ICompareInput compare
+	 * input}.
+	 */
 	private final List<ICompareInputChangeListener> inputChangeListeners = new ArrayList<ICompareInputChangeListener>();
 
 	/** Resource containing the left compared object. */
 	private Resource leftResource;
-	
+
 	/** Diagram containing the right compared object. */
 	private Diagram ancestorViewModel;
-	
+
 	/** Diagram containing the left compared object. */
 	private Diagram leftViewModel;
-	
+
 	/** Diagram containing the right compared object. */
 	private Diagram rightViewModel;
-	
+
 	/** EObject containing the left compared object. */
 	private EObject ancestorBusinessModel;
-	
+
 	/** EObject containing the left compared object. */
 	private EObject leftBusinessModel;
-	
+
 	/** EObject containing the right compared object. */
 	private EObject rightBusinessModel;
 
@@ -68,12 +70,15 @@ public class KivikCompareInput implements ICompareInput {
 	/**
 	 * Creates a CompareInput given the resulting
 	 * {@link org.eclipse.emf.compare.match.diff.match.MatchModel match} and
-	 * {@link org.eclipse.emf.compare.match.diff.diff.DiffModel diff} of the comparison.
+	 * {@link org.eclipse.emf.compare.match.diff.diff.DiffModel diff} of the
+	 * comparison.
 	 * 
 	 * @param matchModel
-	 *            {@link org.eclipse.emf.compare.match.diff.match.MatchModel match} of the comparison.
+	 *            {@link org.eclipse.emf.compare.match.diff.match.MatchModel
+	 *            match} of the comparison.
 	 * @param diffModel
-	 *            {@link org.eclipse.emf.compare.match.diff.diff.DiffModel diff} of the comparison.
+	 *            {@link org.eclipse.emf.compare.match.diff.diff.DiffModel diff}
+	 *            of the comparison.
 	 */
 	public KivikCompareInput(MatchModel matchModel, DiffModel diffModel) {
 		match = matchModel;
@@ -83,26 +88,31 @@ public class KivikCompareInput implements ICompareInput {
 	/**
 	 * Creates a CompareInput given the resulting
 	 * {@link org.eclipse.emf.compare.match.diff.match.MatchModel match} and
-	 * {@link org.eclipse.emf.compare.match.diff.diff.DiffModel diff} of the comparison.
+	 * {@link org.eclipse.emf.compare.match.diff.diff.DiffModel diff} of the
+	 * comparison.
 	 * 
 	 * @param matchModel
-	 *            {@link org.eclipse.emf.compare.match.diff.match.MatchModel match} of the comparison.
+	 *            {@link org.eclipse.emf.compare.match.diff.match.MatchModel
+	 *            match} of the comparison.
 	 * @param diffModel
-	 *            {@link org.eclipse.emf.compare.match.diff.diff.DiffModel diff} of the comparison.
+	 *            {@link org.eclipse.emf.compare.match.diff.diff.DiffModel diff}
+	 *            of the comparison.
 	 * @param comparator
 	 *            The comparator which has been used for this comparison.
 	 */
-	public KivikCompareInput(MatchModel matchModel, DiffModel diffModel, KivikComparator comparator) {
+	public KivikCompareInput(MatchModel matchModel, DiffModel diffModel,
+			KivikComparator comparator) {
 		this(matchModel, diffModel);
-		leftResource = comparator.getLeftResource();
-		rightResource = comparator.getRightResource();
-		ancestorResource = comparator.getAncestorResource();
-		leftViewModel = comparator.getLeftViewModel();
-		rightViewModel = comparator.getRightViewModel();
-		ancestorViewModel = comparator.getAncestorViewModel();
-		leftBusinessModel = comparator.getLeftBusinessModel();
-		rightBusinessModel = comparator.getRightBusinessModel();
-		ancestorBusinessModel = comparator.getAncestorBusinessModel();
+//		leftResource = comparator.getLeftNotationModel().eResource();
+//		rightResource = comparator.getRightNotationModel().eResource();
+//		ancestorResource = (comparator.getAncestorNotationModel() == null) ? null
+//				: comparator.getAncestorNotationModel().eResource();
+//		leftViewModel = comparator.getLeftNotationModel();
+//		rightViewModel = comparator.getRightNotationModel();
+//		ancestorViewModel = comparator.getAncestorNotationModel();
+//		leftBusinessModel = comparator.getLeftDomainModel();
+//		rightBusinessModel = comparator.getRightDomainModel();
+//		ancestorBusinessModel = comparator.getAncestorDomainModel();
 	}
 
 	/**
@@ -110,7 +120,8 @@ public class KivikCompareInput implements ICompareInput {
 	 * 
 	 * @see ICompareInput#addCompareInputChangeListener(ICompareInputChangeListener)
 	 */
-	public void addCompareInputChangeListener(ICompareInputChangeListener listener) {
+	public void addCompareInputChangeListener(
+			ICompareInputChangeListener listener) {
 		inputChangeListeners.add(listener);
 	}
 
@@ -120,13 +131,15 @@ public class KivikCompareInput implements ICompareInput {
 	 * @see ICompareInput#copy(boolean)
 	 */
 	public void copy(boolean leftToRight) {
-		final List<DiffElement> differences = new ArrayList<DiffElement>(diff.getOwnedElements());
+		final List<DiffElement> differences = new ArrayList<DiffElement>(diff
+				.getOwnedElements());
 		doCopy(differences, leftToRight);
 		fireCompareInputChanged();
 	}
 
 	/**
-	 * Copies a single {@link DiffElement} or a {@link DiffGroup} in the given direction.
+	 * Copies a single {@link DiffElement} or a {@link DiffGroup} in the given
+	 * direction.
 	 * 
 	 * @param element
 	 *            {@link DiffElement Element} to copy.
@@ -139,7 +152,8 @@ public class KivikCompareInput implements ICompareInput {
 	}
 
 	/**
-	 * Copies a list of {@link DiffElement}s or {@link DiffGroup}s in the given direction.
+	 * Copies a list of {@link DiffElement}s or {@link DiffGroup}s in the given
+	 * direction.
 	 * 
 	 * @param elements
 	 *            {@link DiffElement Element}s to copy.
@@ -160,9 +174,10 @@ public class KivikCompareInput implements ICompareInput {
 		KivikTypedElementWrapper ancestor = null;
 		if (ancestorResource != null) {
 			if (ancestorResource.getContents().size() > 0)
-				ancestor = new KivikTypedElementWrapper(ancestorResource.getContents().get(0));
-				ancestor.setBusinessModel(ancestorBusinessModel);
-				ancestor.setViewModel(ancestorViewModel);
+				ancestor = new KivikTypedElementWrapper(ancestorResource
+						.getContents().get(0));
+			ancestor.setBusinessModel(ancestorBusinessModel);
+			ancestor.setViewModel(ancestorViewModel);
 		} else {
 			// Seeks a resource from the MatchModel
 			// Assumes that some elements have been matched
@@ -171,7 +186,8 @@ public class KivikCompareInput implements ICompareInput {
 			while (matchIterator.hasNext()) {
 				final EObject matchElement = matchIterator.next();
 				if (matchElement instanceof Match3Element) {
-					root = ((Match3Element)matchElement).getOriginElement().eResource().getContents().get(0);
+					root = ((Match3Element) matchElement).getOriginElement()
+							.eResource().getContents().get(0);
 					break;
 				}
 			}
@@ -190,28 +206,30 @@ public class KivikCompareInput implements ICompareInput {
 	}
 
 	/**
-	 * Returns the {@link DiffElement} of the input {@link DiffModel} as a list. Doesn't take
-	 * {@link DiffGroup}s into account.
+	 * Returns the {@link DiffElement} of the input {@link DiffModel} as a list.
+	 * Doesn't take {@link DiffGroup}s into account.
 	 * 
 	 * @return The {@link DiffElement} of the input {@link DiffModel} as a list.
 	 */
 	public List<DiffElement> getDiffAsList() {
 		if (diffList == null) {
 			diffList = new ArrayList<DiffElement>();
-			// ordering is needed in order to merge modelElement diffs before references change
-			// We'll order the diffs by class (modelElementChange, attributechange then referenceChange)
+			// ordering is needed in order to merge modelElement diffs before
+			// references change
+			// We'll order the diffs by class (modelElementChange,
+			// attributechange then referenceChange)
 			final List<ModelElementChange> modelElementDiffs = new ArrayList<ModelElementChange>();
 			final List<AttributeChange> attributeChangeDiffs = new ArrayList<AttributeChange>();
 			final List<ReferenceChange> referenceChangeDiffs = new ArrayList<ReferenceChange>();
 			final TreeIterator<EObject> iterator = getDiff().eAllContents();
 			while (iterator.hasNext()) {
-				final DiffElement aDiff = (DiffElement)iterator.next();
+				final DiffElement aDiff = (DiffElement) iterator.next();
 				if (aDiff instanceof ModelElementChange)
-					modelElementDiffs.add((ModelElementChange)aDiff);
+					modelElementDiffs.add((ModelElementChange) aDiff);
 				else if (aDiff instanceof AttributeChange)
-					attributeChangeDiffs.add((AttributeChange)aDiff);
+					attributeChangeDiffs.add((AttributeChange) aDiff);
 				else if (aDiff instanceof ReferenceChange)
-					referenceChangeDiffs.add((ReferenceChange)aDiff);
+					referenceChangeDiffs.add((ReferenceChange) aDiff);
 				// fallthrough
 				else if (!(aDiff instanceof DiffGroup))
 					diffList.add(aDiff);
@@ -263,9 +281,10 @@ public class KivikCompareInput implements ICompareInput {
 		KivikTypedElementWrapper left = null;
 		if (leftResource != null) {
 			if (leftResource.getContents().size() > 0)
-				left = new KivikTypedElementWrapper(leftResource.getContents().get(0));
-				left.setBusinessModel(leftBusinessModel);
-				left.setViewModel(leftViewModel);
+				left = new KivikTypedElementWrapper(leftResource.getContents()
+						.get(0));
+			left.setBusinessModel(leftBusinessModel);
+			left.setViewModel(leftViewModel);
 		} else {
 			// Seeks a resource from the MatchModel
 			// Assumes that some elements have been matched
@@ -274,7 +293,8 @@ public class KivikCompareInput implements ICompareInput {
 			while (matchIterator.hasNext()) {
 				final EObject matchElement = matchIterator.next();
 				if (matchElement instanceof Match2Elements) {
-					root = ((Match2Elements)matchElement).getLeftElement().eResource().getContents().get(0);
+					root = ((Match2Elements) matchElement).getLeftElement()
+							.eResource().getContents().get(0);
 					break;
 				}
 			}
@@ -317,9 +337,10 @@ public class KivikCompareInput implements ICompareInput {
 		KivikTypedElementWrapper right = null;
 		if (rightResource != null) {
 			if (rightResource.getContents().size() > 0)
-				right = new KivikTypedElementWrapper(rightResource.getContents().get(0));
-				right.setBusinessModel(rightBusinessModel);
-				right.setViewModel(rightViewModel);
+				right = new KivikTypedElementWrapper(rightResource
+						.getContents().get(0));
+			right.setBusinessModel(rightBusinessModel);
+			right.setViewModel(rightViewModel);
 		} else {
 			// Seeks a resource from the MatchModel
 			// Assumes that some elements have been matched
@@ -328,7 +349,8 @@ public class KivikCompareInput implements ICompareInput {
 			while (matchIterator.hasNext()) {
 				final EObject matchElement = matchIterator.next();
 				if (matchElement instanceof Match2Elements) {
-					root = ((Match2Elements)matchElement).getRightElement().eResource().getContents().get(0);
+					root = ((Match2Elements) matchElement).getRightElement()
+							.eResource().getContents().get(0);
 					break;
 				}
 			}
@@ -342,41 +364,42 @@ public class KivikCompareInput implements ICompareInput {
 	 * 
 	 * @see ICompareInput#removeCompareInputChangeListener(ICompareInputChangeListener)
 	 */
-	public void removeCompareInputChangeListener(ICompareInputChangeListener listener) {
+	public void removeCompareInputChangeListener(
+			ICompareInputChangeListener listener) {
 		inputChangeListeners.remove(listener);
 	}
 
 	/**
-	 * Applies the changes implied by a given {@link DiffElement} in the direction specified by
-	 * <code>leftToRight</code>.
+	 * Applies the changes implied by a given {@link DiffElement} in the
+	 * direction specified by <code>leftToRight</code>.
 	 * 
 	 * @param element
 	 *            {@link DiffElement} containing the copy information.
 	 * @param leftToRight
-	 *            <code>True</code> if the changes must be applied from the left to the right model,
-	 *            <code>False</code> otherwise.
+	 *            <code>True</code> if the changes must be applied from the left
+	 *            to the right model, <code>False</code> otherwise.
 	 */
 	protected void doCopy(DiffElement element, boolean leftToRight) {
 		MergeService.merge(element, leftToRight);
 	}
 
 	/**
-	 * Applies the changes implied by a list of {@link DiffElement} in the direction specified by
-	 * <code>leftToRight</code>.
+	 * Applies the changes implied by a list of {@link DiffElement} in the
+	 * direction specified by <code>leftToRight</code>.
 	 * 
 	 * @param elements
 	 *            {@link DiffElement}s containing the copy information.
 	 * @param leftToRight
-	 *            <code>True</code> if the changes must be applied from the left to the right model,
-	 *            <code>False</code> otherwise.
+	 *            <code>True</code> if the changes must be applied from the left
+	 *            to the right model, <code>False</code> otherwise.
 	 */
 	protected void doCopy(List<DiffElement> elements, boolean leftToRight) {
 		MergeService.merge(elements, leftToRight);
 	}
 
 	/**
-	 * Notifies all {@link ICompareInputChangeListener listeners} registered for this
-	 * {@link KivikCompareInput input} that a change occured.
+	 * Notifies all {@link ICompareInputChangeListener listeners} registered for
+	 * this {@link KivikCompareInput input} that a change occured.
 	 */
 	protected void fireCompareInputChanged() {
 		diffList.clear();

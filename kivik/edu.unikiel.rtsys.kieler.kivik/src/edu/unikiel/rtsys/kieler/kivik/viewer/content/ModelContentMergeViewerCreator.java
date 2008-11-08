@@ -8,7 +8,7 @@
  * Contributors:
  *     Obeo - initial API and implementation
  *******************************************************************************/
-package edu.unikiel.rtsys.kieler.kivik.viewer;
+package edu.unikiel.rtsys.kieler.kivik.viewer.content;
 
 import org.eclipse.compare.CompareConfiguration;
 import org.eclipse.compare.IViewerCreator;
@@ -16,16 +16,15 @@ import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.widgets.Composite;
 
 /**
- * Required when creating a {@link TreeStructureMergeViewer} from a plugin.xml file.
+ * Required when creating a {@link ModelContentMergeViewerCreator} from a plugin.xml file.
  * 
  * @author <a href="mailto:laurent.goubet@obeo.fr">Laurent Goubet</a>
  */
-public class TreeStructureMergeViewerCreator implements IViewerCreator {
+public class ModelContentMergeViewerCreator implements IViewerCreator {
 	/**
 	 * {@inheritDoc}
 	 */
 	public Viewer createViewer(Composite parent, CompareConfiguration config) {
-		System.out.println("New TreeStructuredMergeViewer created.\n");
-		return new TreeStructureMergeViewer(parent, config);
+		return new ModelContentMergeViewer(parent, config);
 	}
 }

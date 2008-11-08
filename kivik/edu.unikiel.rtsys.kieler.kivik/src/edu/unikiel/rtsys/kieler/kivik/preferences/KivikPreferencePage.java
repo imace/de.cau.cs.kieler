@@ -11,6 +11,7 @@ import org.eclipse.ui.dialogs.PreferenceLinkArea;
 import org.eclipse.ui.preferences.IWorkbenchPreferenceContainer;
 
 import edu.unikiel.rtsys.kieler.kivik.Activator;
+import edu.unikiel.rtsys.kieler.kivik.KivikUIMessages;
 
 /**
  * This class represents a preference page that is contributed to the
@@ -29,7 +30,7 @@ public class KivikPreferencePage extends FieldEditorPreferencePage implements
 	public KivikPreferencePage() {
 		super(GRID);
 		setPreferenceStore(Activator.getDefault().getPreferenceStore());
-		setDescription("Set KiViK Preferences here");
+		setDescription(KivikUIMessages.getString("KivikPreferencePage.setKivikPreferencesHere")); //$NON-NLS-1$
 	}
 
 	/**
@@ -48,11 +49,11 @@ public class KivikPreferencePage extends FieldEditorPreferencePage implements
 
 		// options group
 		Group options = new Group(this.getFieldEditorParent(), SWT.NONE);
-		options.setText("Options:");
+		options.setText(KivikUIMessages.getString("KivikPreferencePage.options")); //$NON-NLS-1$
 
 		StringFieldEditor sfe = new StringFieldEditor(
 				PreferenceConstants.P_STRING,
-				"Padding X:", options);
+				KivikUIMessages.getString("KivikPreferencePage.paddingX"), options); //$NON-NLS-1$
 		
 		options.setLayoutData(new GridData(GridData.FILL, GridData.FILL, true,
 				false, 2, 1));

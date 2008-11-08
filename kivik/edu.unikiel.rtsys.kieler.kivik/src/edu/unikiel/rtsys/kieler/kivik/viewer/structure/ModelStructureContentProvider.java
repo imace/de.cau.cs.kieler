@@ -1,4 +1,14 @@
-package edu.unikiel.rtsys.kieler.kivik.viewer;
+/*******************************************************************************
+ * Copyright (c) 2006, 2007, 2008 Obeo.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ *     Obeo - initial API and implementation
+ *******************************************************************************/
+package edu.unikiel.rtsys.kieler.kivik.viewer.structure;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -12,17 +22,14 @@ import org.eclipse.emf.compare.diff.metamodel.util.DiffAdapterFactory;
 import org.eclipse.emf.compare.ui.EMFCompareUIMessages;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.viewers.ITreeContentProvider;
+import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
 
 import edu.unikiel.rtsys.kieler.kivik.internal.KivikComparator;
 
 /**
- * Structure viewer used by the
- * Assumes that its input is a {@link DiffModel}.
- * 
- * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
  */
-public class StructureMergeContentProvider implements ITreeContentProvider {
+public class ModelStructureContentProvider implements ITreeContentProvider {
 	/** Keeps track of the comparison result. */
 	/* package */ModelInputSnapshot snapshot;
 
@@ -44,7 +51,7 @@ public class StructureMergeContentProvider implements ITreeContentProvider {
 	 * @param compareConfiguration
 	 *            {@link CompareConfiguration} used for this comparison.
 	 */
-	public StructureMergeContentProvider(CompareConfiguration compareConfiguration) {
+	public ModelStructureContentProvider(CompareConfiguration compareConfiguration) {
 		configuration = compareConfiguration;
 	}
 
@@ -54,7 +61,7 @@ public class StructureMergeContentProvider implements ITreeContentProvider {
 	 * @see org.eclipse.jface.viewers.IContentProvider#dispose()
 	 */
 	public void dispose() {
-		KivikComparator.removeComparator(configuration);
+		KivikComparator.removeKivikComparator(configuration);
 		diffInput = null;
 		snapshot = null;
 	}
@@ -129,14 +136,16 @@ public class StructureMergeContentProvider implements ITreeContentProvider {
 	 * @see org.eclipse.jface.viewers.IContentProvider#inputChanged(Viewer, Object, Object)
 	 */
 	public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
-		final KivikComparator comparator = KivikComparator.getComparator(configuration);
+		((TreeViewer)viewer).getTree().clearAll(true);
+		final KivikComparator kivikComparator = KivikComparator
+		.getKivikComparator(configuration);
 		if (newInput instanceof ModelInputSnapshot) {
 			snapshot = (ModelInputSnapshot)newInput;
-		} else if (comparator.getComparisonResult() != null) {
-			snapshot = comparator.getComparisonResult();
+		} else if (kivikComparator.getDomainComparisonResult() != null) {
+			snapshot = kivikComparator.getDomainComparisonResult();
 		} else if (oldInput != newInput && newInput instanceof ICompareInput) {
-			comparator.loadResources((ICompareInput)newInput);
-			snapshot = comparator.compareViewModel(configuration);
+			kivikComparator.loadResources((ICompareInput)newInput);			
+			snapshot = kivikComparator.compareDomainModel();
 		}
 		diffInput = snapshot.getDiff();
 	}
