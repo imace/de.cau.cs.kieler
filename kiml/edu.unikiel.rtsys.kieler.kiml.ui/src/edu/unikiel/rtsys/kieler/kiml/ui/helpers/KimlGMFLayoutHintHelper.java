@@ -64,7 +64,8 @@ public class KimlGMFLayoutHintHelper {
 	 * @see KimlGMFLayoutHintHelper#setLayoutHint(ShapeNodeEditPart, String)
 	 */
 	public static void setLayouterName(
-			ArrayList<? extends GraphicalEditPart> GraphicalEditParts, String layouterName) {
+			ArrayList<? extends GraphicalEditPart> GraphicalEditParts,
+			String layouterName) {
 		for (GraphicalEditPart snep : GraphicalEditParts) {
 			setLayouterName(snep, layouterName);
 		}
@@ -289,7 +290,8 @@ public class KimlGMFLayoutHintHelper {
 	 * @see KimlGMFLayoutHintHelper#setLayoutGroup(GraphicalEditPart, String)
 	 */
 	public static void setLayoutGroup(
-			ArrayList<? extends GraphicalEditPart> GraphicalEditParts, String groupID) {
+			ArrayList<? extends GraphicalEditPart> GraphicalEditParts,
+			String groupID) {
 		for (GraphicalEditPart snep : GraphicalEditParts) {
 			setLayoutGroup(snep, groupID);
 		}
@@ -383,16 +385,16 @@ public class KimlGMFLayoutHintHelper {
 			final GraphicalEditPart graphicalEditPart, final String groupID,
 			final LAYOUT_TYPE layoutType, final String layouterName) {
 
-		if (graphicalEditPart.getChildren().size() > 0
-				&& graphicalEditPart.getChildren().get(0) instanceof CompartmentEditPart) {
-
-			for (Object obj : ((CompartmentEditPart) graphicalEditPart
-					.getChildren().get(0)).getChildren()) {
-				if (obj instanceof GraphicalEditPart) {
-					GraphicalEditPart childEditPart = (GraphicalEditPart) obj;
-					setLayoutGroup(childEditPart, groupID);
-					setLayoutType(childEditPart, layoutType);
-					setLayouterName(childEditPart, layouterName);
+		for (Object level1 : graphicalEditPart.getChildren()) {
+			if (level1 instanceof CompartmentEditPart) {
+				for (Object level2 : ((CompartmentEditPart) level1)
+						.getChildren()) {
+					if (level2 instanceof GraphicalEditPart) {
+						GraphicalEditPart childEditPart = (GraphicalEditPart) level2;
+						setLayoutGroup(childEditPart, groupID);
+						setLayoutType(childEditPart, layoutType);
+						setLayouterName(childEditPart, layouterName);
+					}
 				}
 			}
 		}
@@ -582,7 +584,7 @@ public class KimlGMFLayoutHintHelper {
 	 */
 	public static ArrayList<GraphicalEditPart> getGroupMembersByElement(
 			GraphicalEditPart graphicalEditPart) {
-		
+
 		ArrayList<GraphicalEditPart> groupMembers = new ArrayList<GraphicalEditPart>();
 
 		String layoutGroupToFind = KimlGMFLayoutHintHelper
@@ -617,7 +619,7 @@ public class KimlGMFLayoutHintHelper {
 	 */
 	public static ArrayList<GraphicalEditPart> getGroupMembersByGroupID(
 			CompartmentEditPart compartmentEditPart, String groupID) {
-		
+
 		ArrayList<GraphicalEditPart> groupMembers = new ArrayList<GraphicalEditPart>();
 
 		for (Object element : compartmentEditPart.getChildren()) {
@@ -660,7 +662,8 @@ public class KimlGMFLayoutHintHelper {
 	 *         unique, a generated ID else
 	 */
 	public static String generateLayoutGroupID(
-			ArrayList<? extends GraphicalEditPart> graphicalEditParts, String suggestion) {
+			ArrayList<? extends GraphicalEditPart> graphicalEditParts,
+			String suggestion) {
 		if (suggestion == null || suggestion == "") {
 			return Integer.toString(graphicalEditParts.hashCode());
 		}

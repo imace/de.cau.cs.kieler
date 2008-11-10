@@ -45,8 +45,12 @@ import org.eclipse.ui.IViewSite;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.ui.part.ViewPart;
 
+import edu.unikiel.rtsys.kieler.kiml.layout.services.DiagramLayouters;
+import edu.unikiel.rtsys.kieler.kiml.layout.services.KimlAbstractLayouter;
+import edu.unikiel.rtsys.kieler.kiml.layout.util.KimlLayoutConstants;
 import edu.unikiel.rtsys.kieler.kiml.ui.helpers.KimlGMFColorHelper;
 import edu.unikiel.rtsys.kieler.kiml.ui.helpers.KimlGMFLayoutHintHelper;
 
@@ -234,9 +238,11 @@ public class KimlLayoutHintView extends ViewPart implements ISelectionListener,
 	 * it.
 	 */
 	public void createPartControl(Composite parent) {
-
+		activeEditor = getSite().getPage().getActiveEditor();
+		KimlAbstractLayouter diagramLayouter = DiagramLayouters.getInstance().getDiagramLayouter(activeEditor.getEditorSite().getId());
+		System.out.println(diagramLayouter.getSettings().get(KimlLayoutConstants.SETTINGS_GROUP_EVERY_SINGLE_ELEMENT));
 		savedEditPartColors = new KimlGMFColorHelper();
-
+		
 		createTable(parent);
 
 		createTableViewer();
@@ -395,6 +401,7 @@ public class KimlLayoutHintView extends ViewPart implements ISelectionListener,
 		 * Elements in the Editor have been selected before, but Emma wants them
 		 * to be unselected.
 		 */
+		
 		if (part.equals(this)) {
 			if (activeEditor != null) {
 				// This is GEF Code, so everything is fine
