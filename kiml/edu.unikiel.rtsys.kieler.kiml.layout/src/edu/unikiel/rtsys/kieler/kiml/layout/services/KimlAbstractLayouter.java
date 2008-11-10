@@ -1,5 +1,6 @@
 package edu.unikiel.rtsys.kieler.kiml.layout.services;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KLayoutGraph;
@@ -60,6 +61,17 @@ public abstract class KimlAbstractLayouter {
 	}
 
 	/**
+	 * Returns the settings currently active in the diagram layouter. These are
+	 * the settings the actual layouter owns, and which are adjustable through
+	 * means of the layouter, e.g. a preference page.
+	 * 
+	 * @return a String-to-String map of the settings of the diagram layouter.
+	 */
+	public Map<String, String> getSettings() {
+		return new HashMap<String, String>();
+	}
+
+	/**
 	 * Initializes the layouter for a new given selection of a diagram. Chooses
 	 * the right diagram elements for laying out and prepares all needed
 	 * structures.
@@ -79,18 +91,9 @@ public abstract class KimlAbstractLayouter {
 	protected abstract KLayoutGraph buildLayoutGraph();
 
 	/**
-	 * Applies all layout properties after the layout algorithm has executed
-	 * on the layout graph.
+	 * Applies all layout properties after the layout algorithm has executed on
+	 * the layout graph.
 	 */
 	protected abstract void applyLayout();
-
-	/**
-	 * Returns the settings currently active in the diagram layouter. These are
-	 * the settings the actual layouter owns, and which are adjustable through
-	 * means of the layouter, e.g. a preference page.
-	 * 
-	 * @return a String-to-String map of the settings of the diagram layouter.
-	 */
-	public abstract Map<String, String> getSettings();
 
 }
