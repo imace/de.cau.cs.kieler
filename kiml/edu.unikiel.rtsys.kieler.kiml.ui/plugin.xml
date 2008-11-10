@@ -94,33 +94,14 @@ point="org.eclipse.ui.menus">
             label="Layout all"
             style="push">
       </command>
-      <separator
-            name="edu.unikiel.rtsys.kieler.kiml.ui.separator.groupAs"
-            visible="true">
-      </separator>
       <dynamic
             class="edu.unikiel.rtsys.kieler.kiml.ui.ContributionItemGroupAs"
             id="edu.unikiel.rtsys.kieler.kiml.ui.dynamic.groupAs">
       </dynamic>
-      <separator
-            name="edu.unikiel.rtsys.kieler.kiml.ui.separator.functions"
-            visible="true">
-      </separator>
-      <command
-            commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.highlightGroupMembers"
-            label="%command.label.16"
-            style="push">
-      </command>
-      <command
-            commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.selectGroupMembers"
-            label="%command.label.17"
-            style="push">
-      </command>
-      <command
-            commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.ungroupElements"
-            label="%command.label.18"
-            style="push">
-      </command>
+      <dynamic
+            class="edu.unikiel.rtsys.kieler.kiml.ui.ContributionItemGroupFunctions"
+            id="edu.unikiel.rtsys.kieler.kiml.ui.dynamic.groupFunctions">
+      </dynamic>
    </menu>
 </menuContribution>
 <menuContribution

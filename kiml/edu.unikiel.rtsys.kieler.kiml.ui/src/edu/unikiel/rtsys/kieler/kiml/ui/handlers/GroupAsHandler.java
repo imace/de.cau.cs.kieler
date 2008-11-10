@@ -21,6 +21,7 @@ import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_TYPE;
 import edu.unikiel.rtsys.kieler.kiml.layout.services.DiagramLayouters;
 import edu.unikiel.rtsys.kieler.kiml.layout.services.KimlAbstractLayouter;
 import edu.unikiel.rtsys.kieler.kiml.layout.services.LayoutProviders;
+import edu.unikiel.rtsys.kieler.kiml.layout.util.KimlLayoutConstants;
 import edu.unikiel.rtsys.kieler.kiml.ui.ContributionItemGroupAs;
 import edu.unikiel.rtsys.kieler.kiml.ui.helpers.KimlGMFLayoutHintHelper;
 
@@ -65,7 +66,13 @@ public class GroupAsHandler extends AbstractHandler implements IHandler {
 			}
 		}
 
-		/* if CompartmentEditPart, fetch parent */
+		/*
+		 * if CompartmentEditPart, fetch parent. This must be done if clicking
+		 * on an EditPart which may contain other EditParts. If selected such an
+		 * EditPart, the actual selection in just the therein contained
+		 * CompartmentEditPart. But the semantic equivalent is the parent
+		 * thereof, so fetch this.
+		 */
 		if (selectedCompartmentEditPart != null) {
 			GraphicalEditPart gep = (GraphicalEditPart) selectedCompartmentEditPart
 					.getParent();
@@ -74,7 +81,7 @@ public class GroupAsHandler extends AbstractHandler implements IHandler {
 		}
 
 		String commandID = event.getCommand().getId();
-		// the parameter provided holds the layouterName
+		/* the parameter provided holds the layouterName */
 		String layouterName = event
 				.getParameter(ContributionItemGroupAs.PARAM_LAYOUTER_NAME);
 		LAYOUTER_INFO layouterInfo = LayoutProviders.getInstance()
@@ -83,39 +90,60 @@ public class GroupAsHandler extends AbstractHandler implements IHandler {
 		layoutType = layouterInfo.getLayoutType();
 		String groupID = "";
 
-		// just another sanity check if the right commandID
+		/* just another sanity check if the right commandID */
 		if (commandID
 				.equals("edu.unikiel.rtsys.kieler.kiml.ui.command.groupAs")) {
-
-			groupID = KimlGMFLayoutHintHelper
-					.generateLayoutGroupID(selectedShapeNodeEditParts);
-			/*
-			 * if just one selected, assume it was some kind of compartment and
-			 * apply grouping on sub elements
-			 */
-			if (selectedShapeNodeEditParts.size() == 1) {
-
-				KimlGMFLayoutHintHelper.setChildrenLayoutHint(
-						(ShapeNodeEditPart) selectedShapeNodeEditParts.get(0),
-						groupID, layoutType, layouterName);
-			}
-			/* more selected, apply grouping information to selected elements */
-			else if (selectedShapeNodeEditParts.size() > 1) {
-
-				KimlGMFLayoutHintHelper.setLayoutHint(
-						selectedShapeNodeEditParts, groupID, layoutType,
-						layouterName);
-			}
 
 			IEditorPart editorPart = HandlerUtil.getActiveEditor(event);
 			String editorId = editorPart.getEditorSite().getId();
 			KimlAbstractLayouter diagramLayouter = DiagramLayouters
 					.getInstance().getDiagramLayouter(editorId);
+
+			/*
+			 * Check if Emma wants to layout every single element, or if she
+			 * wants to apply the layout to sub (or contained elements) of the
+			 * one selected. This is an option of the DiagramLayouter, as this
+			 * Class is responsible for the translation into the KLayoutGraph.
+			 */
+			if (Boolean.parseBoolean(diagramLayouter.getSettings().get(
+					KimlLayoutConstants.SETTINGS_GROUP_EVERY_SINGLE_ELEMENT))) {
+
+				/* group every single element */
+				groupID = KimlGMFLayoutHintHelper
+						.generateLayoutGroupID(selectedShapeNodeEditParts);
+
+				/* take care of the selection, .. */
+				if (selectedShapeNodeEditParts.size() == 1) {
+					/*
+					 * just 1 selected, assume that Emma wants to select
+					 * subelements
+					 */
+					KimlGMFLayoutHintHelper.setChildrenLayoutHint(
+							(ShapeNodeEditPart) selectedShapeNodeEditParts
+									.get(0), groupID, layoutType, layouterName);
+				} else {
+					/* more selected, group single elements */
+					KimlGMFLayoutHintHelper.setLayoutHint(
+							selectedShapeNodeEditParts, groupID, layoutType,
+							layouterName);
+				}
+
+			} else {
+
+				/* group all elements contained in selected one */
+				KimlGMFLayoutHintHelper.setContainedElementsLayoutHint(
+						(ShapeNodeEditPart) selectedShapeNodeEditParts.get(0),
+						layoutType, layouterName);
+			}
+
+			/*
+			 * now use the new grouping/layout information and re-layout the
+			 * whole diagram
+			 */
 			Animation.markBegin();
 			diagramLayouter.layout(editorPart);
 			Animation.run(700);
 		}
 		return null;
 	}
-
 }

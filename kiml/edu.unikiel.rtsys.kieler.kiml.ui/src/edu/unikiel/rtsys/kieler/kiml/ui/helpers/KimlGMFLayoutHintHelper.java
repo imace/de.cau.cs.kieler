@@ -30,7 +30,12 @@ public class KimlGMFLayoutHintHelper {
 	public static final String LAYOUT_TYPE_STYLE = "layoutType";
 	public static final String LAYOUT_GROUP_STYLE = "layoutGroup";
 	public static final String LAYOUTER_NAME_STYLE = "layouterName";
+	public static final String CONTAINED_ELEMENTS_LAYOUT_TYPE_STYLE = "containedElementsLayoutType";
+	public static final String CONTAINED_ELEMENTS_LAYOUTER_NAME_STYLE = "containedElementsLayouterName";
 
+	// =======================================================================//
+	// ================ GROUP EVERY SINGLE ELEMENT ===========================//
+	// =======================================================================//
 	/**
 	 * Returns the layouter name for this ShapeNodeEditPart, is a plain String.
 	 * 
@@ -672,4 +677,199 @@ public class KimlGMFLayoutHintHelper {
 			return suggestion;
 	}
 
+	// =======================================================================//
+	// ================ GROUP CONTAINED ELEMENTS =============================//
+	// =======================================================================//
+
+	/**
+	 * Returns the layouter name for this ShapeNodeEditPart, is a plain String.
+	 * 
+	 * @param shapeNodeEditPart
+	 *            the ShapeNodeEditPart to retrieve the layout type for
+	 * @return the layouter name
+	 */
+	public static String getContainedElementsLayouterName(
+			GraphicalEditPart shapeNodeEditPart) {
+
+		StringValueStyle subElementsLayouterNameStyle = (StringValueStyle) (shapeNodeEditPart
+				.getNotationView().getNamedStyle(NotationPackage.eINSTANCE
+				.getStringValueStyle(), CONTAINED_ELEMENTS_LAYOUTER_NAME_STYLE));
+
+		// if property not available, return empty string
+		if (subElementsLayouterNameStyle == null) {
+			return "";
+			// return stored model/notation value
+		} else {
+			return subElementsLayouterNameStyle.getStringValue();
+		}
+	}
+
+	/**
+	 * Wrapper function to set the layouter name of a graphicalEditPart. This
+	 * function should always be called together with
+	 * <code>setLayoutGroup</code> and <code>setLayoutType</code> to keep the
+	 * information consistent.
+	 * 
+	 * @param GraphicalEditPart
+	 *            the GraphicalEditPart to set the layout type for
+	 * @param layouterName
+	 *            he name of a layouter which should render these EditParts
+	 * @see KimlGMFLayoutHintHelper#setLayoutGroup(GraphicalEditPart, String)
+	 */
+	public static void setContainedElementsLayouterName(
+			final GraphicalEditPart graphicalEditPart, final String layouterName) {
+
+		// see if there is already an layouterNameStyle
+		final StringValueStyle layoutTypeStyle = (StringValueStyle) (graphicalEditPart
+				.getNotationView().getNamedStyle(NotationPackage.eINSTANCE
+				.getStringValueStyle(), CONTAINED_ELEMENTS_LAYOUTER_NAME_STYLE));
+
+		// no: -> create a new one and save it
+		if (layoutTypeStyle == null) {
+			final StringValueStyle newlayouterNameStyle = NotationFactory.eINSTANCE
+					.createStringValueStyle();
+			newlayouterNameStyle
+					.setName(CONTAINED_ELEMENTS_LAYOUTER_NAME_STYLE);
+			newlayouterNameStyle.setStringValue(layouterName);
+			graphicalEditPart.getEditingDomain().getCommandStack().execute(
+					new RecordingCommand(graphicalEditPart.getEditingDomain()) {
+						protected void doExecute() {
+							graphicalEditPart.getNotationView().getStyles()
+									.add(newlayouterNameStyle);
+						}
+					});
+
+			// yes: -> save the new value
+		} else {
+			graphicalEditPart.getEditingDomain().getCommandStack().execute(
+					new RecordingCommand(graphicalEditPart.getEditingDomain()) {
+						protected void doExecute() {
+							((StringValueStyle) (graphicalEditPart
+									.getNotationView().getNamedStyle(
+									NotationPackage.eINSTANCE
+											.getStringValueStyle(),
+									CONTAINED_ELEMENTS_LAYOUTER_NAME_STYLE)))
+									.setStringValue(layouterName);
+						}
+					});
+		}
+	}
+
+	/**
+	 * Returns the name of the layout hint for this GraphicalEditPart, is a
+	 * constant declared in KimlLayoutHintConstants, and will be
+	 * <code>KimlLayoutHintConstants.NONE</code>, if this GraphicalEditPart does
+	 * not have a hint yet or if the hint was invalid
+	 * 
+	 * @param GraphicalEditPart
+	 *            the GraphicalEditPart to retrieve the layout type for
+	 * @return the layoutType if available, or
+	 *         <code>KimlLayoutHintConstants.NONE</code> if not
+	 */
+	public static LAYOUT_TYPE getContainedElementsLayoutType(
+			GraphicalEditPart graphicalEditPart) {
+
+		StringValueStyle layoutTypeStyle = (StringValueStyle) (graphicalEditPart
+				.getNotationView().getNamedStyle(NotationPackage.eINSTANCE
+				.getStringValueStyle(), CONTAINED_ELEMENTS_LAYOUT_TYPE_STYLE));
+
+		// if property not available, return default value
+		if (layoutTypeStyle == null) {
+			return LAYOUT_TYPE.DEFAULT;
+			// return stored model/notation value
+		} else {
+			if (LAYOUT_TYPE.getByName(layoutTypeStyle.getStringValue()) != null)
+				return LAYOUT_TYPE.getByName(layoutTypeStyle.getStringValue());
+			else
+				return LAYOUT_TYPE.DEFAULT;
+		}
+	}
+
+	/**
+	 * Wrapper function to set the layout type of a graphicalEditPart. This
+	 * function should always be called together with
+	 * <code>setLayoutGroup</code> to keep the information consistent.
+	 * 
+	 * @param GraphicalEditPart
+	 *            the GraphicalEditPart to set the layout type for
+	 * @param layoutType
+	 *            a string identifying the constant of the layout type for this
+	 *            GraphicalEditPart
+	 * @see KimlGMFLayoutHintHelper#setLayoutGroup(GraphicalEditPart, String)
+	 * @see KimlLayoutHintConstants#layoutTypes
+	 */
+	public static void setContainedElementsLayoutType(
+			final GraphicalEditPart graphicalEditPart,
+			final LAYOUT_TYPE layoutType) {
+
+		// see if there is already an layoutTypeStyle
+		final StringValueStyle layoutTypeStyle = (StringValueStyle) (graphicalEditPart
+				.getNotationView().getNamedStyle(NotationPackage.eINSTANCE
+				.getStringValueStyle(), CONTAINED_ELEMENTS_LAYOUT_TYPE_STYLE));
+
+		// no: -> create a new one and save it
+		if (layoutTypeStyle == null) {
+			final StringValueStyle newlayoutTypeStyle = NotationFactory.eINSTANCE
+					.createStringValueStyle();
+			newlayoutTypeStyle.setName(CONTAINED_ELEMENTS_LAYOUT_TYPE_STYLE);
+			newlayoutTypeStyle.setStringValue(layoutType.getName());
+			graphicalEditPart.getEditingDomain().getCommandStack().execute(
+					new RecordingCommand(graphicalEditPart.getEditingDomain()) {
+						protected void doExecute() {
+							graphicalEditPart.getNotationView().getStyles()
+									.add(newlayoutTypeStyle);
+						}
+					});
+
+			// yes: -> save the new value
+		} else {
+			graphicalEditPart.getEditingDomain().getCommandStack().execute(
+					new RecordingCommand(graphicalEditPart.getEditingDomain()) {
+						protected void doExecute() {
+							((StringValueStyle) (graphicalEditPart
+									.getNotationView().getNamedStyle(
+									NotationPackage.eINSTANCE
+											.getStringValueStyle(),
+									CONTAINED_ELEMENTS_LAYOUT_TYPE_STYLE)))
+									.setStringValue(layoutType.getName());
+						}
+					});
+		}
+	}
+
+	public static void setContainedElementsLayoutHint(
+			final GraphicalEditPart graphicalEditPart,
+			final LAYOUT_TYPE layoutType, final String layouterName) {
+		setContainedElementsLayoutType(graphicalEditPart, layoutType);
+		setContainedElementsLayouterName(graphicalEditPart, layouterName);
+	}
+
+	/**
+	 * Wrapper function to unset the layout <b>hint</b> of a graphicalEditPart.
+	 * 
+	 * @param GraphicalEditPart
+	 *            the GraphicalEditPart to unset the layout type for
+	 */
+	public static void unsetContainedElementsLayoutHint(final GraphicalEditPart graphicalEditPart) {
+
+		final StringValueStyle layouterNameStyle = (StringValueStyle) (graphicalEditPart
+				.getNotationView().getNamedStyle(NotationPackage.eINSTANCE
+				.getStringValueStyle(), CONTAINED_ELEMENTS_LAYOUTER_NAME_STYLE));
+
+		final StringValueStyle layoutTypeStyle = (StringValueStyle) (graphicalEditPart
+				.getNotationView().getNamedStyle(NotationPackage.eINSTANCE
+				.getStringValueStyle(), CONTAINED_ELEMENTS_LAYOUT_TYPE_STYLE));
+
+		if (layoutTypeStyle != null) {
+			graphicalEditPart.getEditingDomain().getCommandStack().execute(
+					new RecordingCommand(graphicalEditPart.getEditingDomain()) {
+						protected void doExecute() {
+							graphicalEditPart.getNotationView().getStyles()
+									.remove(layouterNameStyle);
+							graphicalEditPart.getNotationView().getStyles()
+									.remove(layoutTypeStyle);
+						}
+					});
+		}
+	}
 }

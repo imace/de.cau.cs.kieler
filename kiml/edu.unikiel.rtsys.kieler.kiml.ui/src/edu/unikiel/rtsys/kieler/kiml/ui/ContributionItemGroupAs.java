@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.jface.action.IContributionItem;
+import org.eclipse.jface.action.Separator;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.CompoundContributionItem;
 import org.eclipse.ui.menus.CommandContributionItem;
@@ -23,6 +24,9 @@ public class ContributionItemGroupAs extends CompoundContributionItem {
 		ArrayList<IContributionItem> contribItems = new ArrayList<IContributionItem>();
 		Map<String, String> parameters = new HashMap<String, String>();
 
+		/* separator */
+		contribItems.add(new Separator());
+		
 		for (String layouterName : LayoutProviders.getInstance()
 				.getAvailableLayouterNames()) {
 			parameters.clear();
@@ -33,7 +37,7 @@ public class ContributionItemGroupAs extends CompoundContributionItem {
 							+ layouterName, GROUP_AS_COMMAND,
 					CommandContributionItem.STYLE_PUSH);
 			ccip.parameters = parameters;
-			ccip.label = "Group As " + layouterName;
+			ccip.label = "Layout As " + layouterName;
 
 			IContributionItem cci = new CommandContributionItem(ccip);
 			contribItems.add(cci);

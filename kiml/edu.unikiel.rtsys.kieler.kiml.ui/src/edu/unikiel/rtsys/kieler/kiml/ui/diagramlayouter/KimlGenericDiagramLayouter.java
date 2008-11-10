@@ -111,9 +111,4 @@ public class KimlGenericDiagramLayouter extends KimlAbstractLayouter {
 			return null;
 	}
 
-	@Override
-	public Map<String, String> getSettings() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

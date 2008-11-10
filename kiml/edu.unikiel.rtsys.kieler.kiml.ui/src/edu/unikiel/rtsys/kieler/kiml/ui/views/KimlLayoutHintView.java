@@ -86,6 +86,7 @@ public class KimlLayoutHintView extends ViewPart implements ISelectionListener,
 	private TableViewer tableViewer;
 	private Table table;
 	private KimlGMFColorHelper savedEditPartColors;
+	private boolean groupSingleElement = false;
 
 	// TODO: externalize strings
 	// Set the table column property names
@@ -238,11 +239,9 @@ public class KimlLayoutHintView extends ViewPart implements ISelectionListener,
 	 * it.
 	 */
 	public void createPartControl(Composite parent) {
-		activeEditor = getSite().getPage().getActiveEditor();
-		KimlAbstractLayouter diagramLayouter = DiagramLayouters.getInstance().getDiagramLayouter(activeEditor.getEditorSite().getId());
-		System.out.println(diagramLayouter.getSettings().get(KimlLayoutConstants.SETTINGS_GROUP_EVERY_SINGLE_ELEMENT));
+
 		savedEditPartColors = new KimlGMFColorHelper();
-		
+
 		createTable(parent);
 
 		createTableViewer();
@@ -401,7 +400,7 @@ public class KimlLayoutHintView extends ViewPart implements ISelectionListener,
 		 * Elements in the Editor have been selected before, but Emma wants them
 		 * to be unselected.
 		 */
-		
+
 		if (part.equals(this)) {
 			if (activeEditor != null) {
 				// This is GEF Code, so everything is fine
@@ -445,6 +444,14 @@ public class KimlLayoutHintView extends ViewPart implements ISelectionListener,
 					((DiagramDocumentEditor) newEditor).getEditingDomain()
 							.addResourceSetListener(this);
 					activeEditor = newEditor;
+					KimlAbstractLayouter diagramLayouter = DiagramLayouters
+							.getInstance().getDiagramLayouter(
+									activeEditor.getEditorSite().getId());
+					groupSingleElement = Boolean
+							.parseBoolean(diagramLayouter
+									.getSettings()
+									.get(
+											KimlLayoutConstants.SETTINGS_GROUP_EVERY_SINGLE_ELEMENT));
 				}
 				/*
 				 * This is for GEF Editors.
@@ -473,6 +480,7 @@ public class KimlLayoutHintView extends ViewPart implements ISelectionListener,
 	}
 
 	public void partOpened(IWorkbenchPart part) {
+		;
 	}
 
 	public void partBroughtToTop(IWorkbenchPart part) {
