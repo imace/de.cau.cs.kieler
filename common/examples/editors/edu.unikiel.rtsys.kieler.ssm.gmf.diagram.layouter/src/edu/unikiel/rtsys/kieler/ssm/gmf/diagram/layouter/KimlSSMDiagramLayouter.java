@@ -94,10 +94,6 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 
 	@Override
 	protected void applyLayout() {
-		if (commandStack == null) {
-			// TODO error handling
-			System.out.println("KimlGMFLayouter: Error: commandStack == null");
-		}
 
 		CompoundCommand compoundCommand = new CompoundCommand();
 		compoundCommand.setLabel("SSM Diagram Layout");
