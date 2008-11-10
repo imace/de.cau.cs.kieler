@@ -1,8 +1,6 @@
 package edu.unikiel.rtsys.kieler.kiml.ui;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.eclipse.jface.action.IContributionItem;
 import org.eclipse.jface.action.Separator;
@@ -11,9 +9,7 @@ import org.eclipse.ui.actions.CompoundContributionItem;
 import org.eclipse.ui.menus.CommandContributionItem;
 import org.eclipse.ui.menus.CommandContributionItemParameter;
 
-import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutPlugin;
 import edu.unikiel.rtsys.kieler.kiml.layout.services.DiagramLayouters;
-import edu.unikiel.rtsys.kieler.kiml.layout.services.LayoutProviders;
 import edu.unikiel.rtsys.kieler.kiml.layout.util.KimlLayoutConstants;
 
 public class ContributionItemGroupFunctions extends CompoundContributionItem {
@@ -27,11 +23,11 @@ public class ContributionItemGroupFunctions extends CompoundContributionItem {
 
 		ArrayList<IContributionItem> contribItems = new ArrayList<IContributionItem>();
 
-		String editorID = PlatformUI.getWorkbench().getActiveWorkbenchWindow()
+		String editorId = PlatformUI.getWorkbench().getActiveWorkbenchWindow()
 				.getActivePage().getActiveEditor().getEditorSite().getId();
-		if (DiagramLayouters.getInstance().getDiagramLayouter(editorID)
-				.getSettings()
-				.get(KimlLayoutConstants.SETTINGS_GROUP_EVERY_SINGLE_ELEMENT) != null) {
+		if (Boolean.parseBoolean(DiagramLayouters.getInstance()
+				.getDiagramLayouter(editorId).getSettings()
+				.get(KimlLayoutConstants.SETTINGS_GROUP_EVERY_SINGLE_ELEMENT))) {
 
 			/* separator */
 			contribItems.add(new Separator());
