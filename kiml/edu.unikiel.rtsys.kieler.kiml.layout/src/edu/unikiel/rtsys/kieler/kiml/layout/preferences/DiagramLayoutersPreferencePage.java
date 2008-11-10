@@ -2,6 +2,7 @@ package edu.unikiel.rtsys.kieler.kiml.layout.preferences;
 
 import org.eclipse.jface.preference.BooleanFieldEditor;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
@@ -38,12 +39,9 @@ public class DiagramLayoutersPreferencePage extends FieldEditorPreferencePage
 		addField(new BooleanFieldEditor(
 				KimlLayoutPreferenceConstants.PREF_DIAGRAMLAYOUTERS_DO_NOT_LAYOUT_CONNECTION_LABELS,
 				"Use GMF to layout connection lables", getFieldEditorParent()));
-		Label description = new Label(getFieldEditorParent(), 0);
+		Label description = new Label(getFieldEditorParent(), SWT.WRAP);
 		description
-				.setText("If checked do not use the layout information provided by \n"
-						+ "the layout engine to layout the labels. Use the internal \n"
-						+ "functions of the graphical editor, if it has any. Might \n"
-						+ "lead to a better placement.");
+				.setText("If checked do not use the layout information provided by the layout engine to layout the labels. Use the internal functions of the graphical editor, if it has any. Might lead to a better placement.");
 
 	}
 
