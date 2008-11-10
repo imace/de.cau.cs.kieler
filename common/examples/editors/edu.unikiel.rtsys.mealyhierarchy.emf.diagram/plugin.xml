@@ -336,14 +336,14 @@
 
    <extension point="org.eclipse.gmf.runtime.emf.type.core.elementTypeBindings">
       <?gmfgen generated="true"?>
-      <clientContext id="MealyMachineClientContext">
+      <clientContext id="edu.unikiel.rtsys.mealyhierarchy.emf.diagram.TypeContext">
          <enablement>
             <test
                property="org.eclipse.gmf.runtime.emf.core.editingDomain"
                value="edu.unikiel.rtsys.mealyhierarchy.emf.diagram.EditingDomain"/>
          </enablement>
       </clientContext> 
-      <binding context="MealyMachineClientContext">
+      <binding context="edu.unikiel.rtsys.mealyhierarchy.emf.diagram.TypeContext">
          <elementType ref="edu.unikiel.rtsys.mealyhierarchy.emf.diagram.HierarchyMealyMachine_79"/>
          <elementType ref="edu.unikiel.rtsys.mealyhierarchy.emf.diagram.CompositeState_1001"/>
          <elementType ref="edu.unikiel.rtsys.mealyhierarchy.emf.diagram.State_1002"/>

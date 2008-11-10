@@ -111,14 +111,16 @@ public class MealyMachineBaseItemSemanticEditPolicy extends SemanticEditPolicy {
 			elementType = null;
 		}
 		Command semanticCommand = getSemanticCommandSwitch(completedRequest);
-		if (semanticCommand != null) {
-			ICommand command = semanticCommand instanceof ICommandProxy ? ((ICommandProxy) semanticCommand)
-					.getICommand()
-					: new CommandProxy(semanticCommand);
-			completedRequest.setParameter(
-					MealyMachineBaseEditHelper.EDIT_POLICY_COMMAND, command);
-		}
 		if (elementType != null) {
+			if (semanticCommand != null) {
+				ICommand command = semanticCommand instanceof ICommandProxy ? ((ICommandProxy) semanticCommand)
+						.getICommand()
+						: new CommandProxy(semanticCommand);
+				completedRequest
+						.setParameter(
+								MealyMachineBaseEditHelper.EDIT_POLICY_COMMAND,
+								command);
+			}
 			ICommand command = elementType.getEditCommand(completedRequest);
 			if (command != null) {
 				if (!(command instanceof CompositeTransactionalCommand)) {
