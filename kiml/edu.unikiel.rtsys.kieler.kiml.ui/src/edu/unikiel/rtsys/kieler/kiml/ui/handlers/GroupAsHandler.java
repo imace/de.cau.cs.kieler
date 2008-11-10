@@ -8,6 +8,7 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.IHandler;
 import org.eclipse.draw2d.Animation;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.CompartmentEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.notation.Diagram;
@@ -59,7 +60,11 @@ public class GroupAsHandler extends AbstractHandler implements IHandler {
 			for (Object element : ((IStructuredSelection) selection).toList()) {
 				if (element instanceof ShapeNodeEditPart)
 					selectedShapeNodeEditParts.add((ShapeNodeEditPart) element);
-				else if (element instanceof CompartmentEditPart) {
+				else if (element instanceof DiagramEditPart) {
+					selectedShapeNodeEditParts
+							.add((ShapeNodeEditPart) ((DiagramEditPart) element)
+									.getChildren().get(0));
+				} else if (element instanceof CompartmentEditPart) {
 					selectedCompartmentEditPart = (CompartmentEditPart) element;
 					break;
 				}
@@ -131,9 +136,10 @@ public class GroupAsHandler extends AbstractHandler implements IHandler {
 			} else {
 
 				/* group all elements contained in selected one */
-				KimlGMFLayoutHintHelper.setContainedElementsLayoutHint(
-						(ShapeNodeEditPart) selectedShapeNodeEditParts.get(0),
-						layoutType, layouterName);
+				if (selectedShapeNodeEditParts.size() > 0)
+					KimlGMFLayoutHintHelper.setContainedElementsLayoutHint(
+							(ShapeNodeEditPart) selectedShapeNodeEditParts
+									.get(0), layoutType, layouterName);
 			}
 
 			/*

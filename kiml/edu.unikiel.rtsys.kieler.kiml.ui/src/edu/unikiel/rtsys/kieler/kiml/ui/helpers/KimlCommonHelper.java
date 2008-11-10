@@ -3,12 +3,14 @@ package edu.unikiel.rtsys.kieler.kiml.ui.helpers;
 import java.util.Map;
 
 import org.eclipse.draw2d.geometry.Dimension;
+import org.eclipse.draw2d.geometry.Insets;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.gef.GraphicalEditPart;
 import org.eclipse.gef.NodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ConnectionEditPart;
 
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KDimension;
+import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KInsets;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPoint;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphFactory;
 
@@ -108,4 +110,17 @@ public class KimlCommonHelper {
 		return kDimension;
 	}
 
+	public static Insets kInsets2Insets(KInsets kInsets) {
+		return new Insets((int) kInsets.getTop(), (int) kInsets.getLeft(),
+				(int) kInsets.getBottom(), (int) kInsets.getRight());
+	}
+
+	public static KInsets insets2KInsets(Insets insets) {
+		KInsets kInsets = KimlLayoutGraphFactory.eINSTANCE.createKInsets();
+		kInsets.setTop(insets.top);
+		kInsets.setLeft(insets.left);
+		kInsets.setBottom(insets.bottom);
+		kInsets.setRight(insets.right);
+		return kInsets;
+	}
 }
