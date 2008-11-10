@@ -94,7 +94,14 @@
   <labels
       name="NodeName"
       figure="NodeFigure"
-      accessor="//@figures.0/@descriptors.0/@accessors.0"/>
+      resizeConstraint="NONE"
+      accessor="//@figures.0/@descriptors.0/@accessors.0">
+    <facets
+        xsi:type="gmfgraph:DefaultSizeFacet">
+      <defaultSize
+          dy="33"/>
+    </facets>
+  </labels>
   <labels
       name="EdgeLabel"
       figure="EdgeSplineFigure"
