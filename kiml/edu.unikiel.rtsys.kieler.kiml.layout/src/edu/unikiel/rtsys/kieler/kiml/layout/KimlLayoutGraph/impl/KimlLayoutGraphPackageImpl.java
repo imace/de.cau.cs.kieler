@@ -19,6 +19,10 @@ import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroupLabel;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroupLabelLayout;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroupLayout;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPoint;
+import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPort;
+import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPortLabel;
+import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPortLabelLayout;
+import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPortLayout;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KShapeLayout;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphFactory;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage;
@@ -149,6 +153,34 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass kPortEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass kPortLayoutEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass kPortLabelEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass kPortLabelLayoutEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EEnum edgE_TYPEEEnum = null;
 
 	/**
@@ -178,6 +210,20 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 	 * @generated
 	 */
 	private EEnum nodE_LABEL_PLACEMENTEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum porT_TYPEEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum porT_PLACEMENTEEnum = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -453,6 +499,24 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getKEdge_SourcePort() {
+		return (EReference)kEdgeEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getKEdge_TargetPort() {
+		return (EReference)kEdgeEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getKEdgeLayout() {
 		return kEdgeLayoutEClass;
 	}
@@ -572,6 +636,15 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 	 */
 	public EAttribute getKNodeGroup_IdString() {
 		return (EAttribute)kNodeGroupEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getKNodeGroup_Ports() {
+		return (EReference)kNodeGroupEClass.getEStructuralFeatures().get(7);
 	}
 
 	/**
@@ -759,6 +832,114 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getKPort() {
+		return kPortEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getKPort_Layout() {
+		return (EReference)kPortEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getKPort_Label() {
+		return (EReference)kPortEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getKPort_NodeGroup() {
+		return (EReference)kPortEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getKPort_Type() {
+		return (EAttribute)kPortEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getKPort_Edges() {
+		return (EReference)kPortEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getKPortLayout() {
+		return kPortLayoutEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getKPortLayout_Placement() {
+		return (EAttribute)kPortLayoutEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getKPortLayout_Rank() {
+		return (EAttribute)kPortLayoutEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getKPortLabel() {
+		return kPortLabelEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getKPortLabel_LabelLayout() {
+		return (EReference)kPortLabelEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getKPortLabelLayout() {
+		return kPortLabelLayoutEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getEDGE_TYPE() {
 		return edgE_TYPEEEnum;
 	}
@@ -797,6 +978,24 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 	 */
 	public EEnum getNODE_LABEL_PLACEMENT() {
 		return nodE_LABEL_PLACEMENTEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getPORT_TYPE() {
+		return porT_TYPEEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getPORT_PLACEMENT() {
+		return porT_PLACEMENTEEnum;
 	}
 
 	/**
@@ -854,6 +1053,8 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 		createEReference(kEdgeEClass, KEDGE__TARGET);
 		createEReference(kEdgeEClass, KEDGE__LAYOUT);
 		createEReference(kEdgeEClass, KEDGE__LABEL);
+		createEReference(kEdgeEClass, KEDGE__SOURCE_PORT);
+		createEReference(kEdgeEClass, KEDGE__TARGET_PORT);
 
 		kEdgeLayoutEClass = createEClass(KEDGE_LAYOUT);
 		createEReference(kEdgeLayoutEClass, KEDGE_LAYOUT__SOURCE_POINT);
@@ -870,6 +1071,7 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 		createEReference(kNodeGroupEClass, KNODE_GROUP__LAYOUT);
 		createEReference(kNodeGroupEClass, KNODE_GROUP__LABEL);
 		createEAttribute(kNodeGroupEClass, KNODE_GROUP__ID_STRING);
+		createEReference(kNodeGroupEClass, KNODE_GROUP__PORTS);
 
 		kNodeGroupLayoutEClass = createEClass(KNODE_GROUP_LAYOUT);
 		createEAttribute(kNodeGroupLayoutEClass, KNODE_GROUP_LAYOUT__LAYOUT_TYPE);
@@ -898,12 +1100,30 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 		createEAttribute(layouteR_INFOEClass, LAYOUTER_INFO__LAYOUT_OPTION);
 		createEAttribute(layouteR_INFOEClass, LAYOUTER_INFO__LAYOUT_PROVIDER_ID);
 
+		kPortEClass = createEClass(KPORT);
+		createEReference(kPortEClass, KPORT__LAYOUT);
+		createEReference(kPortEClass, KPORT__LABEL);
+		createEReference(kPortEClass, KPORT__NODE_GROUP);
+		createEAttribute(kPortEClass, KPORT__TYPE);
+		createEReference(kPortEClass, KPORT__EDGES);
+
+		kPortLayoutEClass = createEClass(KPORT_LAYOUT);
+		createEAttribute(kPortLayoutEClass, KPORT_LAYOUT__PLACEMENT);
+		createEAttribute(kPortLayoutEClass, KPORT_LAYOUT__RANK);
+
+		kPortLabelEClass = createEClass(KPORT_LABEL);
+		createEReference(kPortLabelEClass, KPORT_LABEL__LABEL_LAYOUT);
+
+		kPortLabelLayoutEClass = createEClass(KPORT_LABEL_LAYOUT);
+
 		// Create enums
 		edgE_TYPEEEnum = createEEnum(EDGE_TYPE);
 		layouT_TYPEEEnum = createEEnum(LAYOUT_TYPE);
 		layouT_OPTIONEEnum = createEEnum(LAYOUT_OPTION);
 		edgE_LABEL_PLACEMENTEEnum = createEEnum(EDGE_LABEL_PLACEMENT);
 		nodE_LABEL_PLACEMENTEEnum = createEEnum(NODE_LABEL_PLACEMENT);
+		porT_TYPEEEnum = createEEnum(PORT_TYPE);
+		porT_PLACEMENTEEnum = createEEnum(PORT_PLACEMENT);
 	}
 
 	/**
@@ -942,6 +1162,9 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 		kEdgeLabelLayoutEClass.getESuperTypes().add(this.getKShapeLayout());
 		kNodeGroupLabelEClass.getESuperTypes().add(this.getKLabel());
 		kNodeGroupLabelLayoutEClass.getESuperTypes().add(this.getKShapeLayout());
+		kPortLayoutEClass.getESuperTypes().add(this.getKShapeLayout());
+		kPortLabelEClass.getESuperTypes().add(this.getKLabel());
+		kPortLabelLayoutEClass.getESuperTypes().add(this.getKShapeLayout());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(kPointEClass, KPoint.class, "KPoint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -971,6 +1194,8 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 		initEReference(getKEdge_Target(), this.getKNodeGroup(), this.getKNodeGroup_IncomingEdges(), "target", null, 1, 1, KEdge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getKEdge_Layout(), this.getKEdgeLayout(), null, "layout", null, 1, 1, KEdge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getKEdge_Label(), this.getKEdgeLabel(), null, "label", null, 0, -1, KEdge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getKEdge_SourcePort(), this.getKPort(), null, "sourcePort", null, 0, 1, KEdge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getKEdge_TargetPort(), this.getKPort(), null, "targetPort", null, 0, 1, KEdge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(kEdgeLayoutEClass, KEdgeLayout.class, "KEdgeLayout", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getKEdgeLayout_SourcePoint(), this.getKPoint(), null, "sourcePoint", null, 1, 1, KEdgeLayout.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -987,6 +1212,7 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 		initEReference(getKNodeGroup_Layout(), this.getKNodeGroupLayout(), null, "layout", null, 1, 1, KNodeGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getKNodeGroup_Label(), this.getKNodeGroupLabel(), null, "label", null, 1, 1, KNodeGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getKNodeGroup_IdString(), theEcorePackage.getEString(), "idString", "\"\"", 1, 1, KNodeGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getKNodeGroup_Ports(), this.getKPort(), null, "ports", null, 0, -1, KNodeGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(kNodeGroupLayoutEClass, KNodeGroupLayout.class, "KNodeGroupLayout", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getKNodeGroupLayout_LayoutType(), this.getLAYOUT_TYPE(), "layoutType", "", 1, 1, KNodeGroupLayout.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1014,6 +1240,22 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 		initEAttribute(getLAYOUTER_INFO_LayoutType(), this.getLAYOUT_TYPE(), "layoutType", null, 1, 1, edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getLAYOUTER_INFO_LayoutOption(), this.getLAYOUT_OPTION(), "layoutOption", null, 1, 1, edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getLAYOUTER_INFO_LayoutProviderID(), theEcorePackage.getEString(), "layoutProviderID", null, 1, 1, edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(kPortEClass, KPort.class, "KPort", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getKPort_Layout(), this.getKPortLayout(), null, "layout", null, 1, 1, KPort.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getKPort_Label(), this.getKPortLabel(), null, "label", null, 0, 1, KPort.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getKPort_NodeGroup(), this.getKNodeGroup(), null, "nodeGroup", null, 1, 1, KPort.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getKPort_Type(), this.getPORT_TYPE(), "type", "0", 1, 1, KPort.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getKPort_Edges(), this.getKEdge(), null, "edges", null, 0, -1, KPort.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(kPortLayoutEClass, KPortLayout.class, "KPortLayout", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getKPortLayout_Placement(), this.getPORT_PLACEMENT(), "placement", "0", 0, 1, KPortLayout.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getKPortLayout_Rank(), theEcorePackage.getEInt(), "rank", "0", 0, 1, KPortLayout.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(kPortLabelEClass, KPortLabel.class, "KPortLabel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getKPortLabel_LabelLayout(), this.getKPortLabelLayout(), null, "labelLayout", null, 0, 1, KPortLabel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(kPortLabelLayoutEClass, KPortLabelLayout.class, "KPortLabelLayout", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Initialize enums and add enum literals
 		initEEnum(edgE_TYPEEEnum, edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.EDGE_TYPE.class, "EDGE_TYPE");
@@ -1055,6 +1297,18 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 		addEEnumLiteral(nodE_LABEL_PLACEMENTEEnum, edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.NODE_LABEL_PLACEMENT.OUTSIDE_SOUTH);
 		addEEnumLiteral(nodE_LABEL_PLACEMENTEEnum, edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.NODE_LABEL_PLACEMENT.OUTSIDE_WEST);
 		addEEnumLiteral(nodE_LABEL_PLACEMENTEEnum, edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.NODE_LABEL_PLACEMENT.OUTSIDE_EAST);
+
+		initEEnum(porT_TYPEEEnum, edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.PORT_TYPE.class, "PORT_TYPE");
+		addEEnumLiteral(porT_TYPEEEnum, edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.PORT_TYPE.DEFAULT);
+		addEEnumLiteral(porT_TYPEEEnum, edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.PORT_TYPE.INPUT);
+		addEEnumLiteral(porT_TYPEEEnum, edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.PORT_TYPE.OUTPUT);
+
+		initEEnum(porT_PLACEMENTEEnum, edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.PORT_PLACEMENT.class, "PORT_PLACEMENT");
+		addEEnumLiteral(porT_PLACEMENTEEnum, edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.PORT_PLACEMENT.DEFAULT);
+		addEEnumLiteral(porT_PLACEMENTEEnum, edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.PORT_PLACEMENT.NORTH);
+		addEEnumLiteral(porT_PLACEMENTEEnum, edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.PORT_PLACEMENT.EAST);
+		addEEnumLiteral(porT_PLACEMENTEEnum, edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.PORT_PLACEMENT.SOUTH);
+		addEEnumLiteral(porT_PLACEMENTEEnum, edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.PORT_PLACEMENT.WEST);
 
 		// Create resource
 		createResource(eNS_URI);

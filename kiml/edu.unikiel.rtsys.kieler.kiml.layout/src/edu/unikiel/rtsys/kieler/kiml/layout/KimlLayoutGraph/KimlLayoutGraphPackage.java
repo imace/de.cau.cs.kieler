@@ -310,13 +310,31 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	int KEDGE__LABEL = 3;
 
 	/**
+	 * The feature id for the '<em><b>Source Port</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KEDGE__SOURCE_PORT = 4;
+
+	/**
+	 * The feature id for the '<em><b>Target Port</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KEDGE__TARGET_PORT = 5;
+
+	/**
 	 * The number of structural features of the '<em>KEdge</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int KEDGE_FEATURE_COUNT = 4;
+	int KEDGE_FEATURE_COUNT = 6;
 
 	/**
 	 * The meta object id for the '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.KEdgeLayoutImpl <em>KEdge Layout</em>}' class.
@@ -456,13 +474,22 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	int KNODE_GROUP__ID_STRING = 6;
 
 	/**
+	 * The feature id for the '<em><b>Ports</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KNODE_GROUP__PORTS = 7;
+
+	/**
 	 * The number of structural features of the '<em>KNode Group</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int KNODE_GROUP_FEATURE_COUNT = 7;
+	int KNODE_GROUP_FEATURE_COUNT = 8;
 
 	/**
 	 * The meta object id for the '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.KNodeGroupLayoutImpl <em>KNode Group Layout</em>}' class.
@@ -814,6 +841,217 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	int LAYOUTER_INFO_FEATURE_COUNT = 4;
 
 	/**
+	 * The meta object id for the '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.KPortImpl <em>KPort</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.KPortImpl
+	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getKPort()
+	 * @generated
+	 */
+	int KPORT = 15;
+
+	/**
+	 * The feature id for the '<em><b>Layout</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KPORT__LAYOUT = 0;
+
+	/**
+	 * The feature id for the '<em><b>Label</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KPORT__LABEL = 1;
+
+	/**
+	 * The feature id for the '<em><b>Node Group</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KPORT__NODE_GROUP = 2;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KPORT__TYPE = 3;
+
+	/**
+	 * The feature id for the '<em><b>Edges</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KPORT__EDGES = 4;
+
+	/**
+	 * The number of structural features of the '<em>KPort</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KPORT_FEATURE_COUNT = 5;
+
+	/**
+	 * The meta object id for the '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.KPortLayoutImpl <em>KPort Layout</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.KPortLayoutImpl
+	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getKPortLayout()
+	 * @generated
+	 */
+	int KPORT_LAYOUT = 16;
+
+	/**
+	 * The feature id for the '<em><b>Location</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KPORT_LAYOUT__LOCATION = KSHAPE_LAYOUT__LOCATION;
+
+	/**
+	 * The feature id for the '<em><b>Size</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KPORT_LAYOUT__SIZE = KSHAPE_LAYOUT__SIZE;
+
+	/**
+	 * The feature id for the '<em><b>Use Layout</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KPORT_LAYOUT__USE_LAYOUT = KSHAPE_LAYOUT__USE_LAYOUT;
+
+	/**
+	 * The feature id for the '<em><b>Placement</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KPORT_LAYOUT__PLACEMENT = KSHAPE_LAYOUT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Rank</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KPORT_LAYOUT__RANK = KSHAPE_LAYOUT_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>KPort Layout</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KPORT_LAYOUT_FEATURE_COUNT = KSHAPE_LAYOUT_FEATURE_COUNT + 2;
+
+	/**
+	 * The meta object id for the '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.KPortLabelImpl <em>KPort Label</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.KPortLabelImpl
+	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getKPortLabel()
+	 * @generated
+	 */
+	int KPORT_LABEL = 17;
+
+	/**
+	 * The feature id for the '<em><b>Text</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KPORT_LABEL__TEXT = KLABEL__TEXT;
+
+	/**
+	 * The feature id for the '<em><b>Label Layout</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KPORT_LABEL__LABEL_LAYOUT = KLABEL_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>KPort Label</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KPORT_LABEL_FEATURE_COUNT = KLABEL_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.KPortLabelLayoutImpl <em>KPort Label Layout</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.KPortLabelLayoutImpl
+	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getKPortLabelLayout()
+	 * @generated
+	 */
+	int KPORT_LABEL_LAYOUT = 18;
+
+	/**
+	 * The feature id for the '<em><b>Location</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KPORT_LABEL_LAYOUT__LOCATION = KSHAPE_LAYOUT__LOCATION;
+
+	/**
+	 * The feature id for the '<em><b>Size</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KPORT_LABEL_LAYOUT__SIZE = KSHAPE_LAYOUT__SIZE;
+
+	/**
+	 * The feature id for the '<em><b>Use Layout</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KPORT_LABEL_LAYOUT__USE_LAYOUT = KSHAPE_LAYOUT__USE_LAYOUT;
+
+	/**
+	 * The number of structural features of the '<em>KPort Label Layout</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KPORT_LABEL_LAYOUT_FEATURE_COUNT = KSHAPE_LAYOUT_FEATURE_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.EDGE_TYPE <em>EDGE TYPE</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -821,7 +1059,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getEDGE_TYPE()
 	 * @generated
 	 */
-	int EDGE_TYPE = 15;
+	int EDGE_TYPE = 19;
 
 	/**
 	 * The meta object id for the '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_TYPE <em>LAYOUT TYPE</em>}' enum.
@@ -831,7 +1069,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getLAYOUT_TYPE()
 	 * @generated
 	 */
-	int LAYOUT_TYPE = 16;
+	int LAYOUT_TYPE = 20;
 
 	/**
 	 * The meta object id for the '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_OPTION <em>LAYOUT OPTION</em>}' enum.
@@ -841,7 +1079,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getLAYOUT_OPTION()
 	 * @generated
 	 */
-	int LAYOUT_OPTION = 17;
+	int LAYOUT_OPTION = 21;
 
 	/**
 	 * The meta object id for the '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.EDGE_LABEL_PLACEMENT <em>EDGE LABEL PLACEMENT</em>}' enum.
@@ -851,7 +1089,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getEDGE_LABEL_PLACEMENT()
 	 * @generated
 	 */
-	int EDGE_LABEL_PLACEMENT = 18;
+	int EDGE_LABEL_PLACEMENT = 22;
 
 	/**
 	 * The meta object id for the '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.NODE_LABEL_PLACEMENT <em>NODE LABEL PLACEMENT</em>}' enum.
@@ -861,7 +1099,28 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getNODE_LABEL_PLACEMENT()
 	 * @generated
 	 */
-	int NODE_LABEL_PLACEMENT = 19;
+	int NODE_LABEL_PLACEMENT = 23;
+
+
+	/**
+	 * The meta object id for the '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.PORT_TYPE <em>PORT TYPE</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.PORT_TYPE
+	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getPORT_TYPE()
+	 * @generated
+	 */
+	int PORT_TYPE = 24;
+
+	/**
+	 * The meta object id for the '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.PORT_PLACEMENT <em>PORT PLACEMENT</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.PORT_PLACEMENT
+	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getPORT_PLACEMENT()
+	 * @generated
+	 */
+	int PORT_PLACEMENT = 25;
 
 
 	/**
@@ -1101,6 +1360,28 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	EReference getKEdge_Label();
 
 	/**
+	 * Returns the meta object for the reference '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KEdge#getSourcePort <em>Source Port</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Source Port</em>'.
+	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KEdge#getSourcePort()
+	 * @see #getKEdge()
+	 * @generated
+	 */
+	EReference getKEdge_SourcePort();
+
+	/**
+	 * Returns the meta object for the reference '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KEdge#getTargetPort <em>Target Port</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Target Port</em>'.
+	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KEdge#getTargetPort()
+	 * @see #getKEdge()
+	 * @generated
+	 */
+	EReference getKEdge_TargetPort();
+
+	/**
 	 * Returns the meta object for class '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KEdgeLayout <em>KEdge Layout</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1251,6 +1532,17 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getKNodeGroup_IdString();
+
+	/**
+	 * Returns the meta object for the reference list '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup#getPorts <em>Ports</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Ports</em>'.
+	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup#getPorts()
+	 * @see #getKNodeGroup()
+	 * @generated
+	 */
+	EReference getKNodeGroup_Ports();
 
 	/**
 	 * Returns the meta object for class '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroupLayout <em>KNode Group Layout</em>}'.
@@ -1466,6 +1758,134 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	EAttribute getLAYOUTER_INFO_LayoutProviderID();
 
 	/**
+	 * Returns the meta object for class '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPort <em>KPort</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>KPort</em>'.
+	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPort
+	 * @generated
+	 */
+	EClass getKPort();
+
+	/**
+	 * Returns the meta object for the reference '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPort#getLayout <em>Layout</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Layout</em>'.
+	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPort#getLayout()
+	 * @see #getKPort()
+	 * @generated
+	 */
+	EReference getKPort_Layout();
+
+	/**
+	 * Returns the meta object for the reference '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPort#getLabel <em>Label</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Label</em>'.
+	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPort#getLabel()
+	 * @see #getKPort()
+	 * @generated
+	 */
+	EReference getKPort_Label();
+
+	/**
+	 * Returns the meta object for the reference '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPort#getNodeGroup <em>Node Group</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Node Group</em>'.
+	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPort#getNodeGroup()
+	 * @see #getKPort()
+	 * @generated
+	 */
+	EReference getKPort_NodeGroup();
+
+	/**
+	 * Returns the meta object for the attribute '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPort#getType <em>Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Type</em>'.
+	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPort#getType()
+	 * @see #getKPort()
+	 * @generated
+	 */
+	EAttribute getKPort_Type();
+
+	/**
+	 * Returns the meta object for the reference list '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPort#getEdges <em>Edges</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Edges</em>'.
+	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPort#getEdges()
+	 * @see #getKPort()
+	 * @generated
+	 */
+	EReference getKPort_Edges();
+
+	/**
+	 * Returns the meta object for class '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPortLayout <em>KPort Layout</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>KPort Layout</em>'.
+	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPortLayout
+	 * @generated
+	 */
+	EClass getKPortLayout();
+
+	/**
+	 * Returns the meta object for the attribute '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPortLayout#getPlacement <em>Placement</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Placement</em>'.
+	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPortLayout#getPlacement()
+	 * @see #getKPortLayout()
+	 * @generated
+	 */
+	EAttribute getKPortLayout_Placement();
+
+	/**
+	 * Returns the meta object for the attribute '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPortLayout#getRank <em>Rank</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Rank</em>'.
+	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPortLayout#getRank()
+	 * @see #getKPortLayout()
+	 * @generated
+	 */
+	EAttribute getKPortLayout_Rank();
+
+	/**
+	 * Returns the meta object for class '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPortLabel <em>KPort Label</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>KPort Label</em>'.
+	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPortLabel
+	 * @generated
+	 */
+	EClass getKPortLabel();
+
+	/**
+	 * Returns the meta object for the reference '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPortLabel#getLabelLayout <em>Label Layout</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Label Layout</em>'.
+	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPortLabel#getLabelLayout()
+	 * @see #getKPortLabel()
+	 * @generated
+	 */
+	EReference getKPortLabel_LabelLayout();
+
+	/**
+	 * Returns the meta object for class '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPortLabelLayout <em>KPort Label Layout</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>KPort Label Layout</em>'.
+	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPortLabelLayout
+	 * @generated
+	 */
+	EClass getKPortLabelLayout();
+
+	/**
 	 * Returns the meta object for enum '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.EDGE_TYPE <em>EDGE TYPE</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1514,6 +1934,26 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	 * @generated
 	 */
 	EEnum getNODE_LABEL_PLACEMENT();
+
+	/**
+	 * Returns the meta object for enum '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.PORT_TYPE <em>PORT TYPE</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>PORT TYPE</em>'.
+	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.PORT_TYPE
+	 * @generated
+	 */
+	EEnum getPORT_TYPE();
+
+	/**
+	 * Returns the meta object for enum '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.PORT_PLACEMENT <em>PORT PLACEMENT</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>PORT PLACEMENT</em>'.
+	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.PORT_PLACEMENT
+	 * @generated
+	 */
+	EEnum getPORT_PLACEMENT();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -1726,6 +2166,22 @@ public interface KimlLayoutGraphPackage extends EPackage {
 		EReference KEDGE__LABEL = eINSTANCE.getKEdge_Label();
 
 		/**
+		 * The meta object literal for the '<em><b>Source Port</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference KEDGE__SOURCE_PORT = eINSTANCE.getKEdge_SourcePort();
+
+		/**
+		 * The meta object literal for the '<em><b>Target Port</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference KEDGE__TARGET_PORT = eINSTANCE.getKEdge_TargetPort();
+
+		/**
 		 * The meta object literal for the '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.KEdgeLayoutImpl <em>KEdge Layout</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1840,6 +2296,14 @@ public interface KimlLayoutGraphPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute KNODE_GROUP__ID_STRING = eINSTANCE.getKNodeGroup_IdString();
+
+		/**
+		 * The meta object literal for the '<em><b>Ports</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference KNODE_GROUP__PORTS = eINSTANCE.getKNodeGroup_Ports();
 
 		/**
 		 * The meta object literal for the '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.KNodeGroupLayoutImpl <em>KNode Group Layout</em>}' class.
@@ -2016,6 +2480,110 @@ public interface KimlLayoutGraphPackage extends EPackage {
 		EAttribute LAYOUTER_INFO__LAYOUT_PROVIDER_ID = eINSTANCE.getLAYOUTER_INFO_LayoutProviderID();
 
 		/**
+		 * The meta object literal for the '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.KPortImpl <em>KPort</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.KPortImpl
+		 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getKPort()
+		 * @generated
+		 */
+		EClass KPORT = eINSTANCE.getKPort();
+
+		/**
+		 * The meta object literal for the '<em><b>Layout</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference KPORT__LAYOUT = eINSTANCE.getKPort_Layout();
+
+		/**
+		 * The meta object literal for the '<em><b>Label</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference KPORT__LABEL = eINSTANCE.getKPort_Label();
+
+		/**
+		 * The meta object literal for the '<em><b>Node Group</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference KPORT__NODE_GROUP = eINSTANCE.getKPort_NodeGroup();
+
+		/**
+		 * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute KPORT__TYPE = eINSTANCE.getKPort_Type();
+
+		/**
+		 * The meta object literal for the '<em><b>Edges</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference KPORT__EDGES = eINSTANCE.getKPort_Edges();
+
+		/**
+		 * The meta object literal for the '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.KPortLayoutImpl <em>KPort Layout</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.KPortLayoutImpl
+		 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getKPortLayout()
+		 * @generated
+		 */
+		EClass KPORT_LAYOUT = eINSTANCE.getKPortLayout();
+
+		/**
+		 * The meta object literal for the '<em><b>Placement</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute KPORT_LAYOUT__PLACEMENT = eINSTANCE.getKPortLayout_Placement();
+
+		/**
+		 * The meta object literal for the '<em><b>Rank</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute KPORT_LAYOUT__RANK = eINSTANCE.getKPortLayout_Rank();
+
+		/**
+		 * The meta object literal for the '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.KPortLabelImpl <em>KPort Label</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.KPortLabelImpl
+		 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getKPortLabel()
+		 * @generated
+		 */
+		EClass KPORT_LABEL = eINSTANCE.getKPortLabel();
+
+		/**
+		 * The meta object literal for the '<em><b>Label Layout</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference KPORT_LABEL__LABEL_LAYOUT = eINSTANCE.getKPortLabel_LabelLayout();
+
+		/**
+		 * The meta object literal for the '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.KPortLabelLayoutImpl <em>KPort Label Layout</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.KPortLabelLayoutImpl
+		 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getKPortLabelLayout()
+		 * @generated
+		 */
+		EClass KPORT_LABEL_LAYOUT = eINSTANCE.getKPortLabelLayout();
+
+		/**
 		 * The meta object literal for the '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.EDGE_TYPE <em>EDGE TYPE</em>}' enum.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2064,6 +2632,26 @@ public interface KimlLayoutGraphPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum NODE_LABEL_PLACEMENT = eINSTANCE.getNODE_LABEL_PLACEMENT();
+
+		/**
+		 * The meta object literal for the '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.PORT_TYPE <em>PORT TYPE</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.PORT_TYPE
+		 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getPORT_TYPE()
+		 * @generated
+		 */
+		EEnum PORT_TYPE = eINSTANCE.getPORT_TYPE();
+
+		/**
+		 * The meta object literal for the '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.PORT_PLACEMENT <em>PORT PLACEMENT</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.PORT_PLACEMENT
+		 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getPORT_PLACEMENT()
+		 * @generated
+		 */
+		EEnum PORT_PLACEMENT = eINSTANCE.getPORT_PLACEMENT();
 
 	}
 

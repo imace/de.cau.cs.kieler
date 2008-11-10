@@ -182,6 +182,33 @@ public class KimlLayoutGraphSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case KimlLayoutGraphPackage.KPORT: {
+				KPort kPort = (KPort)theEObject;
+				T result = caseKPort(kPort);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case KimlLayoutGraphPackage.KPORT_LAYOUT: {
+				KPortLayout kPortLayout = (KPortLayout)theEObject;
+				T result = caseKPortLayout(kPortLayout);
+				if (result == null) result = caseKShapeLayout(kPortLayout);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case KimlLayoutGraphPackage.KPORT_LABEL: {
+				KPortLabel kPortLabel = (KPortLabel)theEObject;
+				T result = caseKPortLabel(kPortLabel);
+				if (result == null) result = caseKLabel(kPortLabel);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case KimlLayoutGraphPackage.KPORT_LABEL_LAYOUT: {
+				KPortLabelLayout kPortLabelLayout = (KPortLabelLayout)theEObject;
+				T result = caseKPortLabelLayout(kPortLabelLayout);
+				if (result == null) result = caseKShapeLayout(kPortLabelLayout);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -408,6 +435,66 @@ public class KimlLayoutGraphSwitch<T> {
 	 * @generated
 	 */
 	public T caseLAYOUTER_INFO(LAYOUTER_INFO object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>KPort</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>KPort</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseKPort(KPort object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>KPort Layout</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>KPort Layout</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseKPortLayout(KPortLayout object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>KPort Label</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>KPort Label</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseKPortLabel(KPortLabel object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>KPort Label Layout</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>KPort Label Layout</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseKPortLabelLayout(KPortLabelLayout object) {
 		return null;
 	}
 

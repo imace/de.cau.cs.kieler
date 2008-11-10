@@ -143,6 +143,42 @@ public interface KimlLayoutGraphFactory extends EFactory {
 	LAYOUTER_INFO createLAYOUTER_INFO();
 
 	/**
+	 * Returns a new object of class '<em>KPort</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>KPort</em>'.
+	 * @generated
+	 */
+	KPort createKPort();
+
+	/**
+	 * Returns a new object of class '<em>KPort Layout</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>KPort Layout</em>'.
+	 * @generated
+	 */
+	KPortLayout createKPortLayout();
+
+	/**
+	 * Returns a new object of class '<em>KPort Label</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>KPort Label</em>'.
+	 * @generated
+	 */
+	KPortLabel createKPortLabel();
+
+	/**
+	 * Returns a new object of class '<em>KPort Label Layout</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>KPort Label Layout</em>'.
+	 * @generated
+	 */
+	KPortLabelLayout createKPortLabelLayout();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

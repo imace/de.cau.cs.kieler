@@ -10,6 +10,7 @@ import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KEdge;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroupLabel;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroupLayout;
+import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPort;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage;
 
 import java.util.Collection;
@@ -43,6 +44,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.KNodeGroupImpl#getLayout <em>Layout</em>}</li>
  *   <li>{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.KNodeGroupImpl#getLabel <em>Label</em>}</li>
  *   <li>{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.KNodeGroupImpl#getIdString <em>Id String</em>}</li>
+ *   <li>{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.KNodeGroupImpl#getPorts <em>Ports</em>}</li>
  * </ul>
  * </p>
  *
@@ -128,6 +130,16 @@ public class KNodeGroupImpl extends EObjectImpl implements KNodeGroup {
 	 * @ordered
 	 */
 	protected String idString = ID_STRING_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getPorts() <em>Ports</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPorts()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<KPort> ports;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -346,6 +358,18 @@ public class KNodeGroupImpl extends EObjectImpl implements KNodeGroup {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<KPort> getPorts() {
+		if (ports == null) {
+			ports = new EObjectResolvingEList<KPort>(KPort.class, this, KimlLayoutGraphPackage.KNODE_GROUP__PORTS);
+		}
+		return ports;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -409,6 +433,8 @@ public class KNodeGroupImpl extends EObjectImpl implements KNodeGroup {
 				return basicGetLabel();
 			case KimlLayoutGraphPackage.KNODE_GROUP__ID_STRING:
 				return getIdString();
+			case KimlLayoutGraphPackage.KNODE_GROUP__PORTS:
+				return getPorts();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -446,6 +472,10 @@ public class KNodeGroupImpl extends EObjectImpl implements KNodeGroup {
 			case KimlLayoutGraphPackage.KNODE_GROUP__ID_STRING:
 				setIdString((String)newValue);
 				return;
+			case KimlLayoutGraphPackage.KNODE_GROUP__PORTS:
+				getPorts().clear();
+				getPorts().addAll((Collection<? extends KPort>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -479,6 +509,9 @@ public class KNodeGroupImpl extends EObjectImpl implements KNodeGroup {
 			case KimlLayoutGraphPackage.KNODE_GROUP__ID_STRING:
 				setIdString(ID_STRING_EDEFAULT);
 				return;
+			case KimlLayoutGraphPackage.KNODE_GROUP__PORTS:
+				getPorts().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -505,6 +538,8 @@ public class KNodeGroupImpl extends EObjectImpl implements KNodeGroup {
 				return label != null;
 			case KimlLayoutGraphPackage.KNODE_GROUP__ID_STRING:
 				return ID_STRING_EDEFAULT == null ? idString != null : !ID_STRING_EDEFAULT.equals(idString);
+			case KimlLayoutGraphPackage.KNODE_GROUP__PORTS:
+				return ports != null && !ports.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

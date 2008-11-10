@@ -10,6 +10,7 @@ import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KEdge;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KEdgeLabel;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KEdgeLayout;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup;
+import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPort;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage;
 
 import java.util.Collection;
@@ -38,6 +39,8 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
  *   <li>{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.KEdgeImpl#getTarget <em>Target</em>}</li>
  *   <li>{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.KEdgeImpl#getLayout <em>Layout</em>}</li>
  *   <li>{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.KEdgeImpl#getLabel <em>Label</em>}</li>
+ *   <li>{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.KEdgeImpl#getSourcePort <em>Source Port</em>}</li>
+ *   <li>{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.KEdgeImpl#getTargetPort <em>Target Port</em>}</li>
  * </ul>
  * </p>
  *
@@ -83,6 +86,26 @@ public class KEdgeImpl extends EObjectImpl implements KEdge {
 	 * @ordered
 	 */
 	protected EList<KEdgeLabel> label;
+
+	/**
+	 * The cached value of the '{@link #getSourcePort() <em>Source Port</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSourcePort()
+	 * @generated
+	 * @ordered
+	 */
+	protected KPort sourcePort;
+
+	/**
+	 * The cached value of the '{@link #getTargetPort() <em>Target Port</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTargetPort()
+	 * @generated
+	 * @ordered
+	 */
+	protected KPort targetPort;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -278,6 +301,82 @@ public class KEdgeImpl extends EObjectImpl implements KEdge {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public KPort getSourcePort() {
+		if (sourcePort != null && sourcePort.eIsProxy()) {
+			InternalEObject oldSourcePort = (InternalEObject)sourcePort;
+			sourcePort = (KPort)eResolveProxy(oldSourcePort);
+			if (sourcePort != oldSourcePort) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, KimlLayoutGraphPackage.KEDGE__SOURCE_PORT, oldSourcePort, sourcePort));
+			}
+		}
+		return sourcePort;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public KPort basicGetSourcePort() {
+		return sourcePort;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setSourcePort(KPort newSourcePort) {
+		KPort oldSourcePort = sourcePort;
+		sourcePort = newSourcePort;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KEDGE__SOURCE_PORT, oldSourcePort, sourcePort));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public KPort getTargetPort() {
+		if (targetPort != null && targetPort.eIsProxy()) {
+			InternalEObject oldTargetPort = (InternalEObject)targetPort;
+			targetPort = (KPort)eResolveProxy(oldTargetPort);
+			if (targetPort != oldTargetPort) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, KimlLayoutGraphPackage.KEDGE__TARGET_PORT, oldTargetPort, targetPort));
+			}
+		}
+		return targetPort;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public KPort basicGetTargetPort() {
+		return targetPort;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTargetPort(KPort newTargetPort) {
+		KPort oldTargetPort = targetPort;
+		targetPort = newTargetPort;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KEDGE__TARGET_PORT, oldTargetPort, targetPort));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -328,6 +427,12 @@ public class KEdgeImpl extends EObjectImpl implements KEdge {
 				return basicGetLayout();
 			case KimlLayoutGraphPackage.KEDGE__LABEL:
 				return getLabel();
+			case KimlLayoutGraphPackage.KEDGE__SOURCE_PORT:
+				if (resolve) return getSourcePort();
+				return basicGetSourcePort();
+			case KimlLayoutGraphPackage.KEDGE__TARGET_PORT:
+				if (resolve) return getTargetPort();
+				return basicGetTargetPort();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -354,6 +459,12 @@ public class KEdgeImpl extends EObjectImpl implements KEdge {
 				getLabel().clear();
 				getLabel().addAll((Collection<? extends KEdgeLabel>)newValue);
 				return;
+			case KimlLayoutGraphPackage.KEDGE__SOURCE_PORT:
+				setSourcePort((KPort)newValue);
+				return;
+			case KimlLayoutGraphPackage.KEDGE__TARGET_PORT:
+				setTargetPort((KPort)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -378,6 +489,12 @@ public class KEdgeImpl extends EObjectImpl implements KEdge {
 			case KimlLayoutGraphPackage.KEDGE__LABEL:
 				getLabel().clear();
 				return;
+			case KimlLayoutGraphPackage.KEDGE__SOURCE_PORT:
+				setSourcePort((KPort)null);
+				return;
+			case KimlLayoutGraphPackage.KEDGE__TARGET_PORT:
+				setTargetPort((KPort)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -398,6 +515,10 @@ public class KEdgeImpl extends EObjectImpl implements KEdge {
 				return layout != null;
 			case KimlLayoutGraphPackage.KEDGE__LABEL:
 				return label != null && !label.isEmpty();
+			case KimlLayoutGraphPackage.KEDGE__SOURCE_PORT:
+				return sourcePort != null;
+			case KimlLayoutGraphPackage.KEDGE__TARGET_PORT:
+				return targetPort != null;
 		}
 		return super.eIsSet(featureID);
 	}

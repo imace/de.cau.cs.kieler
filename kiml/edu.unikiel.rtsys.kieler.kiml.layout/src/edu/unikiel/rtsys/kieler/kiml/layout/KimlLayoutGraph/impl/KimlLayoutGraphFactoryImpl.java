@@ -74,6 +74,10 @@ public class KimlLayoutGraphFactoryImpl extends EFactoryImpl implements KimlLayo
 			case KimlLayoutGraphPackage.KNODE_GROUP_LABEL: return createKNodeGroupLabel();
 			case KimlLayoutGraphPackage.KNODE_GROUP_LABEL_LAYOUT: return createKNodeGroupLabelLayout();
 			case KimlLayoutGraphPackage.LAYOUTER_INFO: return createLAYOUTER_INFO();
+			case KimlLayoutGraphPackage.KPORT: return createKPort();
+			case KimlLayoutGraphPackage.KPORT_LAYOUT: return createKPortLayout();
+			case KimlLayoutGraphPackage.KPORT_LABEL: return createKPortLabel();
+			case KimlLayoutGraphPackage.KPORT_LABEL_LAYOUT: return createKPortLabelLayout();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -97,6 +101,10 @@ public class KimlLayoutGraphFactoryImpl extends EFactoryImpl implements KimlLayo
 				return createEDGE_LABEL_PLACEMENTFromString(eDataType, initialValue);
 			case KimlLayoutGraphPackage.NODE_LABEL_PLACEMENT:
 				return createNODE_LABEL_PLACEMENTFromString(eDataType, initialValue);
+			case KimlLayoutGraphPackage.PORT_TYPE:
+				return createPORT_TYPEFromString(eDataType, initialValue);
+			case KimlLayoutGraphPackage.PORT_PLACEMENT:
+				return createPORT_PLACEMENTFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -120,6 +128,10 @@ public class KimlLayoutGraphFactoryImpl extends EFactoryImpl implements KimlLayo
 				return convertEDGE_LABEL_PLACEMENTToString(eDataType, instanceValue);
 			case KimlLayoutGraphPackage.NODE_LABEL_PLACEMENT:
 				return convertNODE_LABEL_PLACEMENTToString(eDataType, instanceValue);
+			case KimlLayoutGraphPackage.PORT_TYPE:
+				return convertPORT_TYPEToString(eDataType, instanceValue);
+			case KimlLayoutGraphPackage.PORT_PLACEMENT:
+				return convertPORT_PLACEMENTToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -260,6 +272,46 @@ public class KimlLayoutGraphFactoryImpl extends EFactoryImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public KPort createKPort() {
+		KPortImpl kPort = new KPortImpl();
+		return kPort;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public KPortLayout createKPortLayout() {
+		KPortLayoutImpl kPortLayout = new KPortLayoutImpl();
+		return kPortLayout;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public KPortLabel createKPortLabel() {
+		KPortLabelImpl kPortLabel = new KPortLabelImpl();
+		return kPortLabel;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public KPortLabelLayout createKPortLabelLayout() {
+		KPortLabelLayoutImpl kPortLabelLayout = new KPortLabelLayoutImpl();
+		return kPortLabelLayout;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EDGE_TYPE createEDGE_TYPEFromString(EDataType eDataType, String initialValue) {
 		EDGE_TYPE result = EDGE_TYPE.get(initialValue);
 		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
@@ -352,6 +404,46 @@ public class KimlLayoutGraphFactoryImpl extends EFactoryImpl implements KimlLayo
 	 * @generated
 	 */
 	public String convertNODE_LABEL_PLACEMENTToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public PORT_TYPE createPORT_TYPEFromString(EDataType eDataType, String initialValue) {
+		PORT_TYPE result = PORT_TYPE.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertPORT_TYPEToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public PORT_PLACEMENT createPORT_PLACEMENTFromString(EDataType eDataType, String initialValue) {
+		PORT_PLACEMENT result = PORT_PLACEMENT.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertPORT_PLACEMENTToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

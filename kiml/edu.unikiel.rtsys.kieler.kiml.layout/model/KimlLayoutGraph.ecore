@@ -40,6 +40,8 @@
         eType="#//KEdgeLayout"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="label" upperBound="-1"
         eType="#//KEdgeLabel"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sourcePort" eType="#//KPort"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="targetPort" eType="#//KPort"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="KEdgeLayout">
     <eStructuralFeatures xsi:type="ecore:EReference" name="sourcePoint" lowerBound="1"
@@ -69,9 +71,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="idString" lowerBound="1"
         eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"
         defaultValueLiteral="&quot;&quot;"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="inputPorts" upperBound="-1"
-        eType="#//KPort"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="outputPorts" upperBound="-1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ports" upperBound="-1"
         eType="#//KPort"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="KNodeGroupLayout" eSuperTypes="#//KShapeLayout">
@@ -160,10 +160,31 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="label" eType="#//KPortLabel"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="nodeGroup" lowerBound="1"
         eType="#//KNodeGroup"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1" eType="#//PORT_TYPE"
+        defaultValueLiteral="0"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="edges" upperBound="-1"
+        eType="#//KEdge"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="KPortLayout" eSuperTypes="#//KShapeLayout"/>
+  <eClassifiers xsi:type="ecore:EClass" name="KPortLayout" eSuperTypes="#//KShapeLayout">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="placement" eType="#//PORT_PLACEMENT"
+        defaultValueLiteral="0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rank" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EInt"
+        defaultValueLiteral="0"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="KPortLabel" eSuperTypes="#//KLabel">
     <eStructuralFeatures xsi:type="ecore:EReference" name="labelLayout" eType="#//KPortLabelLayout"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="KPortLabelLayout" eSuperTypes="#//KShapeLayout"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="PORT_TYPE">
+    <eLiterals name="DEFAULT" literal="Default"/>
+    <eLiterals name="INPUT" value="1" literal="Input"/>
+    <eLiterals name="OUTPUT" value="2" literal="Output"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="PORT_PLACEMENT">
+    <eLiterals name="DEFAULT" literal="Default"/>
+    <eLiterals name="NORTH" value="1" literal="North"/>
+    <eLiterals name="EAST" value="2" literal="East"/>
+    <eLiterals name="SOUTH" value="3" literal="South"/>
+    <eLiterals name="WEST" value="4" literal="West"/>
+  </eClassifiers>
 </ecore:EPackage>

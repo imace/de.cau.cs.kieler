@@ -22,6 +22,8 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KEdge#getTarget <em>Target</em>}</li>
  *   <li>{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KEdge#getLayout <em>Layout</em>}</li>
  *   <li>{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KEdge#getLabel <em>Label</em>}</li>
+ *   <li>{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KEdge#getSourcePort <em>Source Port</em>}</li>
+ *   <li>{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KEdge#getTargetPort <em>Target Port</em>}</li>
  * </ul>
  * </p>
  *
@@ -127,5 +129,57 @@ public interface KEdge extends EObject {
 	 * @generated
 	 */
 	EList<KEdgeLabel> getLabel();
+
+	/**
+	 * Returns the value of the '<em><b>Source Port</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Source Port</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Source Port</em>' reference.
+	 * @see #setSourcePort(KPort)
+	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKEdge_SourcePort()
+	 * @model
+	 * @generated
+	 */
+	KPort getSourcePort();
+
+	/**
+	 * Sets the value of the '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KEdge#getSourcePort <em>Source Port</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Source Port</em>' reference.
+	 * @see #getSourcePort()
+	 * @generated
+	 */
+	void setSourcePort(KPort value);
+
+	/**
+	 * Returns the value of the '<em><b>Target Port</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Target Port</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Target Port</em>' reference.
+	 * @see #setTargetPort(KPort)
+	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKEdge_TargetPort()
+	 * @model
+	 * @generated
+	 */
+	KPort getTargetPort();
+
+	/**
+	 * Sets the value of the '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KEdge#getTargetPort <em>Target Port</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Target Port</em>' reference.
+	 * @see #getTargetPort()
+	 * @generated
+	 */
+	void setTargetPort(KPort value);
 
 } // KEdge

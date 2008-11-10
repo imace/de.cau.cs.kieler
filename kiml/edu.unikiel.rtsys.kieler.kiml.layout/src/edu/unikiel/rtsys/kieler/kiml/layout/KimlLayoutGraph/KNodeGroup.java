@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup#getLayout <em>Layout</em>}</li>
  *   <li>{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup#getLabel <em>Label</em>}</li>
  *   <li>{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup#getIdString <em>Id String</em>}</li>
+ *   <li>{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup#getPorts <em>Ports</em>}</li>
  * </ul>
  * </p>
  *
@@ -193,5 +194,21 @@ public interface KNodeGroup extends EObject {
 	 * @generated
 	 */
 	void setIdString(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Ports</b></em>' reference list.
+	 * The list contents are of type {@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPort}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Ports</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Ports</em>' reference list.
+	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKNodeGroup_Ports()
+	 * @model
+	 * @generated
+	 */
+	EList<KPort> getPorts();
 
 } // KNodeGroup

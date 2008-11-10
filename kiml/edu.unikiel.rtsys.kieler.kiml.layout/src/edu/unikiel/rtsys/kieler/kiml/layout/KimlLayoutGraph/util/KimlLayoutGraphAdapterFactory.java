@@ -132,6 +132,22 @@ public class KimlLayoutGraphAdapterFactory extends AdapterFactoryImpl {
 				return createLAYOUTER_INFOAdapter();
 			}
 			@Override
+			public Adapter caseKPort(KPort object) {
+				return createKPortAdapter();
+			}
+			@Override
+			public Adapter caseKPortLayout(KPortLayout object) {
+				return createKPortLayoutAdapter();
+			}
+			@Override
+			public Adapter caseKPortLabel(KPortLabel object) {
+				return createKPortLabelAdapter();
+			}
+			@Override
+			public Adapter caseKPortLabelLayout(KPortLabelLayout object) {
+				return createKPortLabelLayoutAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -358,6 +374,62 @@ public class KimlLayoutGraphAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createLAYOUTER_INFOAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPort <em>KPort</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPort
+	 * @generated
+	 */
+	public Adapter createKPortAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPortLayout <em>KPort Layout</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPortLayout
+	 * @generated
+	 */
+	public Adapter createKPortLayoutAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPortLabel <em>KPort Label</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPortLabel
+	 * @generated
+	 */
+	public Adapter createKPortLabelAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPortLabelLayout <em>KPort Label Layout</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPortLabelLayout
+	 * @generated
+	 */
+	public Adapter createKPortLabelLayoutAdapter() {
 		return null;
 	}
 
