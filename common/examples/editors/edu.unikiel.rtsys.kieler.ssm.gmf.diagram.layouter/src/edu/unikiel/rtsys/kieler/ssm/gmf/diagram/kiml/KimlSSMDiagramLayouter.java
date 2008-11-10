@@ -57,6 +57,7 @@ import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPoint;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphFactory;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_TYPE;
 import edu.unikiel.rtsys.kieler.kiml.layout.services.KimlAbstractLayouter;
+import edu.unikiel.rtsys.kieler.kiml.layout.util.KimlLayoutConstants;
 import edu.unikiel.rtsys.kieler.kiml.layout.util.KimlLayoutPreferenceConstants;
 import edu.unikiel.rtsys.kieler.kiml.layout.util.KimlLayoutUtil;
 import edu.unikiel.rtsys.kieler.kiml.ui.helpers.KimlCommonHelper;
@@ -847,5 +848,12 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 		from.translateToAbsolute(point);
 		to.translateToRelative(point);
 		return point;
+	}
+
+	@Override
+	public Map<String, String> getSettings() {
+		HashMap<String,String> settings = new HashMap<String,String>();
+		settings.put(KimlLayoutConstants.SETTINGS_GROUP_EVERY_SINGLE_ELEMENT, "true");
+		return settings;
 	}
 }
