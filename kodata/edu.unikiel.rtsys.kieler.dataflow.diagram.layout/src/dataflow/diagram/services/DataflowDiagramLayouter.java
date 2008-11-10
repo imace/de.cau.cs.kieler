@@ -1,5 +1,7 @@
 package dataflow.diagram.services;
 
+import java.util.Map;
+
 import org.eclipse.gef.editparts.AbstractGraphicalEditPart;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.IEditorPart;
@@ -56,6 +58,15 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 	protected void applyLayout() {
 		// TODO Auto-generated method stub
 
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see edu.unikiel.rtsys.kieler.kiml.layout.services.KimlAbstractLayouter#getSettings()
+	 */
+	public Map getSettings() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
