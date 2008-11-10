@@ -216,8 +216,10 @@ public class GraphvizLayouter {
 	 *            Graph object to fill with the layout information
 	 */
 	private void mapGraphviz2NodeGroup(KNodeGroup nodeGroup) {
+		String outputName = nodeGroup.getIdString() != "" ? nodeGroup
+				.getIdString() : "output";
 		GraphvizAPI.writeDOT(graphvizGraph, System.getProperty("user.home")
-				+ "/" + nodeGroup.getIdString() + ".dot");
+				+ "/" + outputName + ".dot");
 		mapGraphvizNodes2KNodes();
 		mapGraphvizEdges2KEdges();
 		setNodeSize(nodeGroup);
