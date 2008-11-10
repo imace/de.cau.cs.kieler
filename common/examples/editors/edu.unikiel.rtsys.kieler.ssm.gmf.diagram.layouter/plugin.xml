@@ -4,7 +4,7 @@
    <extension
          point="edu.unikiel.rtsys.kieler.kiml.layout.kimlDiagramLayouter">
       <kimlDiagramLayouter
-            class="edu.unikiel.rtsys.kieler.ssm.gmf.diagram.kiml.KimlSSMDiagramLayouter"
+            class="edu.unikiel.rtsys.kieler.ssm.gmf.diagram.layouter.KimlSSMDiagramLayouter"
             editor_id="edu.unikiel.rtsys.kieler.ssm.diagram.part.SafeStateMachineDiagramEditorID">
       </kimlDiagramLayouter>
    </extension>

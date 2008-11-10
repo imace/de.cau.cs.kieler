@@ -1,16 +1,11 @@
-package edu.unikiel.rtsys.kieler.ssm.gmf.diagram.kiml;
+package edu.unikiel.rtsys.kieler.ssm.gmf.diagram.layouter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.eclipse.draw2d.Animation;
-import org.eclipse.draw2d.Bendpoint;
-import org.eclipse.draw2d.BendpointLocator;
-import org.eclipse.draw2d.ConnectionAnchor;
 import org.eclipse.draw2d.ConnectionLocator;
 import org.eclipse.draw2d.IFigure;
-import org.eclipse.draw2d.PolylineConnection;
 import org.eclipse.draw2d.PositionConstants;
 import org.eclipse.draw2d.Viewport;
 import org.eclipse.draw2d.geometry.Dimension;
@@ -20,11 +15,9 @@ import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.gef.ConnectionEditPart;
 import org.eclipse.gef.GraphicalEditPart;
 import org.eclipse.gef.NodeEditPart;
-import org.eclipse.gef.Request;
 import org.eclipse.gef.commands.CommandStack;
 import org.eclipse.gef.commands.CompoundCommand;
 import org.eclipse.gef.editparts.ScalableFreeformRootEditPart;
-import org.eclipse.gef.editpolicies.BendpointEditPolicy;
 import org.eclipse.gef.requests.ChangeBoundsRequest;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.CompartmentEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
@@ -41,7 +34,6 @@ import org.eclipse.gmf.runtime.diagram.ui.requests.RequestConstants;
 import org.eclipse.gmf.runtime.diagram.ui.requests.SetAllBendpointRequest;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx;
 import org.eclipse.gmf.runtime.draw2d.ui.internal.figures.AnimatableScrollPane;
-import org.eclipse.gmf.runtime.gef.ui.figures.SlidableAnchor;
 import org.eclipse.jface.viewers.IStructuredSelection;
 
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutPlugin;
@@ -275,12 +267,13 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 
 			/* little try if setting the endpoints works, result: not really ;( */
 			if (connection.getFigure() instanceof PolylineConnectionEx) {
-				PolylineConnectionEx connFig = (PolylineConnectionEx) connection.getFigure();
+				PolylineConnectionEx connFig = (PolylineConnectionEx) connection
+						.getFigure();
 				connFig.setStart(translatedStartPoint);
 				connFig.setEnd(translatedEndPoint);
 				connFig.validate();
 			}
-			
+
 			// create request and add it
 			SetAllBendpointRequest request = new SetAllBendpointRequest(
 					RequestConstants.REQ_SET_ALL_BENDPOINT, pointList);
@@ -852,8 +845,14 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 
 	@Override
 	public Map<String, String> getSettings() {
-		HashMap<String,String> settings = new HashMap<String,String>();
-		settings.put(KimlLayoutConstants.SETTINGS_GROUP_EVERY_SINGLE_ELEMENT, "true");
+		HashMap<String, String> settings = new HashMap<String, String>();
+		boolean groupEverySingleElement = KimlSSMDiagramLayouterPlugin
+				.getDefault()
+				.getPreferenceStore()
+				.getBoolean(
+						KimlLayoutConstants.SETTINGS_GROUP_EVERY_SINGLE_ELEMENT);
+		settings.put(KimlLayoutConstants.SETTINGS_GROUP_EVERY_SINGLE_ELEMENT,
+				Boolean.toString(groupEverySingleElement));
 		return settings;
 	}
 }
