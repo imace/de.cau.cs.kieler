@@ -3,6 +3,9 @@ package edu.unikiel.rtsys.kieler.kiml.layout.services;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.eclipse.jface.viewers.ILabelProvider;
+import org.eclipse.jface.viewers.LabelProvider;
+
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KLayoutGraph;
 
 /**
@@ -67,8 +70,20 @@ public abstract class KimlAbstractLayouter {
 	 * 
 	 * @return a String-to-String map of the settings of the diagram layouter.
 	 */
-	public Map<String, String> getSettings() {
+	public Map<String, String> getSettings()
+	{
 		return new HashMap<String, String>();
+	}
+	
+	/**
+	 * Returns a label provider that is capable of getting labels for
+	 * concrete diagram edit parts such as nodes.
+	 * 
+	 * @return a label provider that is compatible with the related diagram
+	 */
+	public ILabelProvider getLabelProvider()
+	{
+		return new LabelProvider();
 	}
 
 	/**

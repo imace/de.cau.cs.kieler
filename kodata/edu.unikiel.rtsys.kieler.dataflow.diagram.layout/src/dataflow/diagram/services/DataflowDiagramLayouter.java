@@ -15,6 +15,7 @@ import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeCompartmentEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramCommandStack;
 import org.eclipse.gmf.runtime.diagram.ui.requests.RequestConstants;
 import org.eclipse.gmf.runtime.diagram.ui.requests.SetAllBendpointRequest;
+import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.PositionConstants;
@@ -45,6 +46,17 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 	private Map<KEdge, ConnectionEditPart> edge2ConnectionMapping = new HashMap<KEdge, ConnectionEditPart>();
 	private Map<KPort, BorderedBorderItemEditPart> port2BorderItemMapping = new HashMap<KPort, BorderedBorderItemEditPart>();
 	private Map<BorderedBorderItemEditPart, KPort> borderItem2PortMapping = new HashMap<BorderedBorderItemEditPart, KPort>();
+	
+	private ILabelProvider dataflowLabelProvider = new DataflowLabelProvider();
+	
+	/*
+	 * (non-Javadoc)
+	 * @see edu.unikiel.rtsys.kieler.kiml.layout.services.KimlAbstractLayouter#getLabelProvider()
+	 */
+	public ILabelProvider getLabelProvider()
+	{
+		return dataflowLabelProvider;
+	}
 	
 	/*
 	 * (non-Javadoc)
@@ -327,6 +339,8 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 									targetPort.getNodeGroup().getIncomingEdges().add(edge);
 									// set the edge's layout
 									KEdgeLayout edgeLayout = KimlLayoutGraphFactory.eINSTANCE.createKEdgeLayout();
+									edgeLayout.setSourcePoint(KimlLayoutGraphFactory.eINSTANCE.createKPoint());
+									edgeLayout.setTargetPoint(KimlLayoutGraphFactory.eINSTANCE.createKPoint());
 									edge.setLayout(edgeLayout);
 								}
 							}

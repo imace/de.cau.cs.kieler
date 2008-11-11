@@ -171,6 +171,7 @@ public class KimlLayoutHintView extends ViewPart implements ISelectionListener,
 
 		/**
 		 * Limited functionality due to <b>GMF-Notation</b>.
+		 * TODO find a more generic implementation
 		 */
 		public String getColumnText(Object obj, int index) {
 			ShapeNodeEditPart snep = (ShapeNodeEditPart) obj;
@@ -182,14 +183,33 @@ public class KimlLayoutHintView extends ViewPart implements ISelectionListener,
 					 * If no such adapter is present, the simple class name is
 					 * returned. This works for all editors.
 					 */
-				String nodeName = ((Map<String, String>) Platform
-						.getAdapterManager().getAdapter(obj, Map.class))
-						.get("LONG_LABEL");
-				if (nodeName != null) {
-					return nodeName;
-				} else {
+				Map<String, String> labelMap = (Map<String, String>) Platform
+						.getAdapterManager().getAdapter(obj, Map.class);
+				if (labelMap != null)
+				{
+					String nodeName = labelMap.get("LONG_LABEL");
+					if (nodeName != null) {
+						return nodeName;
+					}
+				}
+				
+				try
+				{
+					/* Fetching of a label mapping failed; get a label provider
+					 * from the diagram layouter.
+					 */
+					String editorId = PlatformUI.getWorkbench().getActiveWorkbenchWindow()
+							.getActivePage().getActiveEditor().getEditorSite().getId();
+					return DiagramLayouters.getInstance().getDiagramLayouter(editorId)
+							.getLabelProvider().getText(obj);
+				} catch (Exception e)
+				{
+					/* Fetching of a label provider failed; display the simple
+					 * class name.
+					 */
 					return obj.getClass().getSimpleName();
 				}
+				
 			case 1: /*
 					 * Returns the string nor grouped, if the element is not
 					 * grouped, and nothing, if the element is grouped, as we
