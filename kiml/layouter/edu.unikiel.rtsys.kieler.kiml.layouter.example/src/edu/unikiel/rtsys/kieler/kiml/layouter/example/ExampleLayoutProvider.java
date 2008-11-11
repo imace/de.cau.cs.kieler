@@ -9,12 +9,11 @@ import edu.unikiel.rtsys.kieler.kiml.layout.services.KimlAbstractLayoutProvider;
 
 public class ExampleLayoutProvider extends KimlAbstractLayoutProvider {
 
-	public final static String LAYOUT_PROVIDER_NAME = "Example layouter";
-	public final static LAYOUT_TYPE LAYOUT_PROVIDER_LAYOUT_TYPE = LAYOUT_TYPE.OTHER;
-	public final static LAYOUT_OPTION LAYOUT_PROVIDER_LAYOUT_OPTION = LAYOUT_OPTION.DEFAULT;
+	private final static String LAYOUT_PROVIDER_NAME = "Example layouter";
+	private final static LAYOUT_TYPE LAYOUT_PROVIDER_LAYOUT_TYPE = LAYOUT_TYPE.OTHER;
+	private final static LAYOUT_OPTION LAYOUT_PROVIDER_LAYOUT_OPTION = LAYOUT_OPTION.DEFAULT;
 
 	public void doLayout(KNodeGroup nodeGroup) {
-
 		ExampleLayouter el = new ExampleLayouter();
 		el.visit(nodeGroup);
 	}
@@ -26,6 +25,7 @@ public class ExampleLayoutProvider extends KimlAbstractLayoutProvider {
 		info.setLayouterName(LAYOUT_PROVIDER_NAME);
 		info.setLayoutType(LAYOUT_PROVIDER_LAYOUT_TYPE);
 		info.setLayoutOption(LAYOUT_PROVIDER_LAYOUT_OPTION);
+		info.setLayouterCollectionID(Activator.LAYOUT_PROVIDER_COLLECTION_ID);
 		return info;
 	}
 

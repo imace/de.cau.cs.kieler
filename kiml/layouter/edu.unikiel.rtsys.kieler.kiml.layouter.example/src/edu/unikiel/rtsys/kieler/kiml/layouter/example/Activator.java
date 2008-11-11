@@ -11,7 +11,8 @@ public class Activator extends AbstractUIPlugin {
 
 	// The plug-in ID
 	public static final String PLUGIN_ID = "edu.unikiel.rtsys.kieler.kiml.layouter.example";
-
+	public final static String LAYOUT_PROVIDER_COLLECTION_ID = "Example Layouter Suite";
+	
 	// The shared instance
 	private static Activator plugin;
 	

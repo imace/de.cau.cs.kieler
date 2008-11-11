@@ -1,20 +1,22 @@
 package edu.unikiel.rtsys.kieler.kiml.layouter.example.preferences;
 
+import java.util.ArrayList;
+
 import org.eclipse.jface.preference.BooleanFieldEditor;
+import org.eclipse.jface.preference.FieldEditor;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
 import org.eclipse.jface.preference.IntegerFieldEditor;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Group;
-import org.eclipse.swt.widgets.Table;
-import org.eclipse.swt.widgets.TableColumn;
-import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
+import edu.unikiel.rtsys.kieler.kiml.layout.services.KimlAbstractLayoutProvider;
+import edu.unikiel.rtsys.kieler.kiml.layout.services.LayoutProviders;
+import edu.unikiel.rtsys.kieler.kiml.layout.util.KimlLayoutUtilPreferencePage;
 import edu.unikiel.rtsys.kieler.kiml.layouter.example.Activator;
-import edu.unikiel.rtsys.kieler.kiml.layouter.example.ExampleLayoutProvider;
 
 /**
  * This class represents a preference page that is contributed to the
@@ -65,43 +67,33 @@ public class ExampleLayouterPreferencePage extends FieldEditorPreferencePage
 		gl.marginHeight = 10;
 		options.setLayout(gl);
 
+		ArrayList<KimlAbstractLayoutProvider> exampleLayoutProviders = LayoutProviders
+				.getInstance().getLayoutProvidersOfCollection(Activator.LAYOUT_PROVIDER_COLLECTION_ID);
 		// layouters group
-		Group availableLayouters = new Group(this.getFieldEditorParent(),
-				SWT.NONE);
-		availableLayouters.setText("Available Layouters");
-
-		Table layouterTable = new Table(availableLayouters, SWT.BORDER);
-		layouterTable.setLinesVisible(true);
-		layouterTable.setHeaderVisible(true);
-		// layouterTable.setEnabled(false);
-
-		TableColumn layouterName = new TableColumn(layouterTable, SWT.NONE);
-		layouterName.setText("Layouter name");
-		TableColumn layoutType = new TableColumn(layouterTable, SWT.NONE);
-		layoutType.setText("Layout type");
-		TableColumn layoutOptions = new TableColumn(layouterTable, SWT.NONE);
-		layoutOptions.setText("Layout options");
-		/* TWOPI */
-		TableItem twopi = new TableItem(layouterTable, SWT.NONE);
-		twopi.setText(0, ExampleLayoutProvider.LAYOUT_PROVIDER_NAME);
-		twopi.setText(1, ExampleLayoutProvider.LAYOUT_PROVIDER_LAYOUT_TYPE.getLiteral());
-		twopi.setText(2, ExampleLayoutProvider.LAYOUT_PROVIDER_LAYOUT_OPTION.getLiteral());
-
-		layouterName.pack();
-		layoutType.pack();
-		
-		availableLayouters.setLayoutData(new GridData(GridData.FILL,
-				GridData.FILL, true, false, 2, 1));
-		gl = new GridLayout();
-		gl.marginWidth = 15;
-		gl.marginHeight = 10;
-		availableLayouters.setLayout(gl);
+		ArrayList<FieldEditor> editorsToAdd = KimlLayoutUtilPreferencePage
+				.createLayouterTable(this.getFieldEditorParent(),
+						exampleLayoutProviders);
 
 		// now add all the stuff
 		addField(padx);
 		addField(pady);
 		addField(direction);
 
+		for (FieldEditor editorToAdd : editorsToAdd) {
+			addField(editorToAdd);
+		}
+	}
+
+	@Override
+	public boolean performOk() {
+		boolean retVal = super.performOk();
+		for (KimlAbstractLayoutProvider exampleLayoutProvider : LayoutProviders
+				.getInstance().getLayoutProvidersOfCollection(Activator.LAYOUT_PROVIDER_COLLECTION_ID)) {
+			boolean state = getPreferenceStore().getBoolean(
+					exampleLayoutProvider.getLayouterInfo().getLayouterName());
+			exampleLayoutProvider.setEnabled(state);
+		}
+		return retVal;
 	}
 
 	/*
