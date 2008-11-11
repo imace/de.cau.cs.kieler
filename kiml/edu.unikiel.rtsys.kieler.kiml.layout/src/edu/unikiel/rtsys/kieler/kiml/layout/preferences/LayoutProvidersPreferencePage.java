@@ -45,10 +45,10 @@ public class LayoutProvidersPreferencePage extends FieldEditorPreferencePage imp
 
 		// default layouter group
 		Group defaultLayouter = new Group(this.getFieldEditorParent(), SWT.NONE);
-		defaultLayouter.setText("Default Layouter");
+		defaultLayouter.setText("Default Layout Provider");
 		String[][] options = getAvailableLayouterNames();
 		addField(new RadioGroupFieldEditor(
-				KimlLayoutPreferenceConstants.PREF_LAYOUTPROVIDERS_DEFAULT_LAYOUTER, "Choose the default layouter:",
+				KimlLayoutPreferenceConstants.PREF_LAYOUTPROVIDERS_DEFAULT_LAYOUT_PROVIDER, "Choose the default layout provider:",
 				2, options, defaultLayouter));
 
 		gl = new GridLayout(1, true);
@@ -65,7 +65,7 @@ public class LayoutProvidersPreferencePage extends FieldEditorPreferencePage imp
 	 */
 	public void init(IWorkbench workbench) {
 	}
-
+	
 	private String[][] getAvailableLayouterNames() {
 		ArrayList<String> names = LayoutProviders.getInstance()
 				.getAvailableLayouterNames();

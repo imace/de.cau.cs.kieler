@@ -24,8 +24,8 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 				.setDefault(
 						KimlLayoutPreferenceConstants.PREF_LAYOUTPROVIDERS_LAYOUT_CONNECTION_LABELS,
 						false);
-		store.setDefault(KimlLayoutPreferenceConstants.PREF_LAYOUTPROVIDERS_DEFAULT_LAYOUTER,
-				KimlNullLayoutProvider.NULL_LAYOUT);
+		store.setDefault(KimlLayoutPreferenceConstants.PREF_LAYOUTPROVIDERS_DEFAULT_LAYOUT_PROVIDER,
+				KimlNullLayoutProvider.LAYOUT_PROVIDER_NAME);
 		store.setDefault(KimlLayoutPreferenceConstants.PREF_DIAGRAMLAYOUTERS_DO_NOT_LAYOUT_CONNECTION_LABELS,
 				true);
 	}

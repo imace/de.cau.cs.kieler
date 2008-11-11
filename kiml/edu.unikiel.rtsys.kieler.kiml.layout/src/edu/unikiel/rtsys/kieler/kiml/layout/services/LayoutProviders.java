@@ -38,11 +38,8 @@ public final class LayoutProviders {
 				KimlAbstractLayoutProvider layoutProvider = (KimlAbstractLayoutProvider) element
 						.createExecutableExtension(KimlAbstractLayoutProvider.ATTRIBUTE_CLASS);
 				if (layoutProvider != null) {
-					for (LAYOUTER_INFO layouterInfo : layoutProvider
-							.getLayouterInfos()) {
-						layoutProviderMap.put(layouterInfo.getLayouterName(),
-								layoutProvider);
-					}
+					layoutProviderMap.put(layoutProvider.getLayouterInfo()
+							.getLayouterName(), layoutProvider);
 				}
 			} catch (CoreException e) {
 				// TODO error handling
@@ -79,9 +76,10 @@ public final class LayoutProviders {
 		}
 
 		// if still no success, use default layout provider ...
-		IPreferenceStore store = KimlLayoutPlugin.getDefault().getPreferenceStore();
+		IPreferenceStore store = KimlLayoutPlugin.getDefault()
+				.getPreferenceStore();
 		String defaultLayoutProvider = store
-				.getString(KimlLayoutPreferenceConstants.PREF_LAYOUTPROVIDERS_DEFAULT_LAYOUTER);
+				.getString(KimlLayoutPreferenceConstants.PREF_LAYOUTPROVIDERS_DEFAULT_LAYOUT_PROVIDER);
 		layoutProvider = layoutProviderMap.get(defaultLayoutProvider);
 
 		// ... and if found return it
@@ -111,12 +109,12 @@ public final class LayoutProviders {
 
 		for (KimlAbstractLayoutProvider layoutProvider : layoutProviderMap
 				.values()) {
-			for (LAYOUT_TYPE type : layoutProvider.getLayoutTypes()) {
-				if (!availableLayoutTypes.contains(type)) {
-					availableLayoutTypes.add(type);
-				}
+			LAYOUT_TYPE type = layoutProvider.getLayouterInfo().getLayoutType();
+			if (!availableLayoutTypes.contains(type)) {
+				availableLayoutTypes.add(type);
 			}
 		}
+
 		return availableLayoutTypes;
 	}
 
@@ -126,10 +124,10 @@ public final class LayoutProviders {
 
 		for (KimlAbstractLayoutProvider layoutProvider : layoutProviderMap
 				.values()) {
-			for (LAYOUTER_INFO info : layoutProvider.getLayouterInfos()) {
-				if (!availableLayouterInfos.contains(info)) {
-					availableLayouterInfos.add(info);
-				}
+			LAYOUTER_INFO info = layoutProvider.getLayouterInfo();
+			if (!availableLayouterInfos.contains(info)) {
+				availableLayouterInfos.add(info);
+
 			}
 		}
 		return availableLayouterInfos;
@@ -143,5 +141,14 @@ public final class LayoutProviders {
 			}
 		}
 		return null;
+	}
+
+	public ArrayList<String> getAvailableLayoutProviderNames() {
+		ArrayList<String> layoutProviderNames = new ArrayList<String>();
+		for (KimlAbstractLayoutProvider layoutProvider : layoutProviderMap
+				.values()) {
+			layoutProviderNames.add(layoutProvider.getLayouterInfo().getLayouterName());
+		}
+		return layoutProviderNames;
 	}
 }

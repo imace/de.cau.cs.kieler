@@ -4,9 +4,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
-import org.eclipse.swt.widgets.TableItem;
 
-import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO;
 import edu.unikiel.rtsys.kieler.kiml.layout.services.KimlAbstractLayoutProvider;
 
 public class KimlLayoutUtilPreferencePage {
@@ -35,12 +33,12 @@ public class KimlLayoutUtilPreferencePage {
 		TableColumn layoutOptions = new TableColumn(layouterTable, SWT.NONE);
 		layoutOptions.setText("Layout options");
 
-		for (LAYOUTER_INFO layouterInfo : layoutProvider.getLayouterInfos()) {
-			TableItem item = new TableItem(layouterTable, SWT.NONE);
-			item.setText(0, layouterInfo.getLayouterName());
-			item.setText(1, layouterInfo.getLayoutType().getLiteral());
-			item.setText(2, layouterInfo.getLayoutOption().getLiteral());
-		}
+//		for (LAYOUTER_INFO layouterInfo : layoutProvider.getLayouterInfos()) {
+//			TableItem item = new TableItem(layouterTable, SWT.NONE);
+//			item.setText(0, layouterInfo.getLayouterName());
+//			item.setText(1, layouterInfo.getLayoutType().getLiteral());
+//			item.setText(2, layouterInfo.getLayoutOption().getLiteral());
+//		}
 
 		layouterName.pack();
 		layoutType.pack();

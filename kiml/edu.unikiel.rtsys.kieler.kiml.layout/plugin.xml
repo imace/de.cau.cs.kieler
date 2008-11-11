@@ -25,15 +25,5 @@
             class="edu.unikiel.rtsys.kieler.kiml.layout.preferences.PreferenceInitializer">
       </initializer>
    </extension>
-   <extension
-         point="org.eclipse.ui.propertyPages">
-      <page
-            objectClass="org.eclipse.core.resources.IFile"
-            name="Layout"
-            nameFilter="*.*"
-            class="edu.unikiel.rtsys.kieler.kiml.layout.properties.LayoutPropertyPage"
-            id="edu.unikiel.rtsys.kieler.kiml.layout.properties.samplePropertyPage">
-      </page>
-   </extension>
 
 </plugin>
