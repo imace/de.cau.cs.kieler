@@ -59,9 +59,12 @@ public class GraphvizLayouter {
 	private String layouterName;
 
 	public GraphvizLayouter() {
-		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
-		padX = store.getInt(PreferenceConstants.PREF_GRAPHVIZ_PADDING_X);
-		padY = store.getInt(PreferenceConstants.PREF_GRAPHVIZ_PADDING_Y);
+		layouterName=GraphvizLayoutProviderNames.GRAPHVIZ_DOT;
+		init();
+	}
+
+	public GraphvizLayouter(String layoutProviderName) {
+		layouterName = layoutProviderName;	
 		init();
 	}
 
@@ -71,10 +74,10 @@ public class GraphvizLayouter {
 	 * might crash otherwise...
 	 */
 	private void init() {
+		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
+		padX = store.getInt(PreferenceConstants.PREF_GRAPHVIZ_PADDING_X);
+		padY = store.getInt(PreferenceConstants.PREF_GRAPHVIZ_PADDING_Y);
 		GraphvizAPI.initialize();
-		graphvizGraph = GraphvizAPI.createGraph("");
-		GraphvizAPI.setGlobalNodeAttribute(graphvizGraph,
-				GraphvizAPI.ATTR_SHAPE, "box");
 	}
 
 	/**
@@ -85,8 +88,10 @@ public class GraphvizLayouter {
 		if (nodeGroup.getSubNodeGroups().size() == 0) {
 			return;
 		}
-
-		this.init();
+		graphvizGraph = GraphvizAPI.createGraph("");
+		GraphvizAPI.setGlobalNodeAttribute(graphvizGraph,
+				GraphvizAPI.ATTR_SHAPE, "box");
+		
 		mapNodeGroup2Graphviz(nodeGroup);
 		if (nodeGroup.getLayout().getLayoutOptions().contains(
 				LAYOUT_OPTION.VERTICAL)) {
@@ -95,16 +100,21 @@ public class GraphvizLayouter {
 			GraphvizAPI.setGraphAttribute(graphvizGraph, "rankdir", "LR");
 		}
 
-		if (layouterName.equals(GraphvizLayoutProviderNames.GRAPHVIZ_CIRCO))
+		if (layouterName.equals(GraphvizLayoutProviderNames.GRAPHVIZ_CIRCO)) {
+			// GraphvizAPI.circoCleanup(graphvizGraph);
 			GraphvizAPI.doCircoLayout(graphvizGraph);
-		else if (layouterName.equals(GraphvizLayoutProviderNames.GRAPHVIZ_NEATO))
+		} else if (layouterName
+				.equals(GraphvizLayoutProviderNames.GRAPHVIZ_NEATO)) {// GraphvizAPI.neatoCleanup(graphvizGraph);
 			GraphvizAPI.doNeatoLayout(graphvizGraph);
-		else if (layouterName.equals(GraphvizLayoutProviderNames.GRAPHVIZ_TWOPI)) {
-			GraphvizAPI.setGraphAttribute(graphvizGraph, "splines", "true");
+		} else if (layouterName
+				.equals(GraphvizLayoutProviderNames.GRAPHVIZ_TWOPI)) {
+			// GraphvizAPI.twopiCleanup(graphvizGraph);
+			// GraphvizAPI.setGraphAttribute(graphvizGraph, "splines", "true");
 			GraphvizAPI.doTwopiLayout(graphvizGraph);
-		} else
+		} else {
+			// GraphvizAPI.dotCleanup(graphvizGraph);
 			GraphvizAPI.doDotLayout(graphvizGraph);
-
+		}
 		GraphvizAPI.attachAttributes(graphvizGraph);
 		mapGraphviz2NodeGroup(nodeGroup);
 
@@ -512,9 +522,5 @@ public class GraphvizLayouter {
 			}
 		}
 		return intList;
-	}
-
-	public void setGraphvizLayouterName(String layouterName) {
-		this.layouterName = layouterName;
 	}
 }
