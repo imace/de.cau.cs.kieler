@@ -9,9 +9,10 @@ import edu.unikiel.rtsys.kieler.kiml.layout.services.KimlAbstractLayoutProvider;
 
 public class NeatoLayoutProvider extends KimlAbstractLayoutProvider {
 
-	public final static String LAYOUT_PROVIDER_NAME = GraphvizLayoutProviderNames.GRAPHVIZ_NEATO;
-	public final static LAYOUT_TYPE LAYOUT_PROVIDER_LAYOUT_TYPE = LAYOUT_TYPE.RADIAL;
-	public final static LAYOUT_OPTION LAYOUT_PROVIDER_LAYOUT_OPTION = LAYOUT_OPTION.DEFAULT;
+	private final static String LAYOUT_PROVIDER_NAME = GraphvizLayoutProviderNames.GRAPHVIZ_NEATO;
+	private final static LAYOUT_TYPE LAYOUT_PROVIDER_LAYOUT_TYPE = LAYOUT_TYPE.RADIAL;
+	private final static LAYOUT_OPTION LAYOUT_PROVIDER_LAYOUT_OPTION = LAYOUT_OPTION.DEFAULT;
+
 	private GraphvizLayouter graphvizLayouter = null;
 
 	public void doLayout(KNodeGroup nodeGroup) {
@@ -21,12 +22,12 @@ public class NeatoLayoutProvider extends KimlAbstractLayoutProvider {
 	}
 
 	public final LAYOUTER_INFO getLayouterInfo() {
-
 		LAYOUTER_INFO info = KimlLayoutGraphFactory.eINSTANCE
 				.createLAYOUTER_INFO();
 		info.setLayouterName(LAYOUT_PROVIDER_NAME);
 		info.setLayoutType(LAYOUT_PROVIDER_LAYOUT_TYPE);
 		info.setLayoutOption(LAYOUT_PROVIDER_LAYOUT_OPTION);
+		info.setLayouterCollectionID(GraphvizLayoutProviderNames.LAYOUT_PROVIDER_COLLECTION_ID);
 		return info;
 	}
 
