@@ -21,8 +21,6 @@
          point="edu.unikiel.rtsys.kieler.kiml.layout.kimlLayoutProvider">
       <kimlLayoutProvider
             class="edu.unikiel.rtsys.kieler.kiml.layouter.example.ExampleLayoutProvider">
-         <Priority
-               name="Low"></Priority>
       </kimlLayoutProvider>
    </extension>
 </plugin>

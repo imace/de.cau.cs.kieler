@@ -7,10 +7,12 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Group;
+import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.widgets.TableColumn;
+import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
-import edu.unikiel.rtsys.kieler.kiml.layout.util.KimlLayoutUtilPreferencePage;
 import edu.unikiel.rtsys.kieler.kiml.layouter.example.Activator;
 import edu.unikiel.rtsys.kieler.kiml.layouter.example.ExampleLayoutProvider;
 
@@ -68,8 +70,26 @@ public class ExampleLayouterPreferencePage extends FieldEditorPreferencePage
 				SWT.NONE);
 		availableLayouters.setText("Available Layouters");
 
-		KimlLayoutUtilPreferencePage.createLayouterTable(availableLayouters,
-				new ExampleLayoutProvider());
+		Table layouterTable = new Table(availableLayouters, SWT.BORDER);
+		layouterTable.setLinesVisible(true);
+		layouterTable.setHeaderVisible(true);
+		// layouterTable.setEnabled(false);
+
+		TableColumn layouterName = new TableColumn(layouterTable, SWT.NONE);
+		layouterName.setText("Layouter name");
+		TableColumn layoutType = new TableColumn(layouterTable, SWT.NONE);
+		layoutType.setText("Layout type");
+		TableColumn layoutOptions = new TableColumn(layouterTable, SWT.NONE);
+		layoutOptions.setText("Layout options");
+		/* TWOPI */
+		TableItem twopi = new TableItem(layouterTable, SWT.NONE);
+		twopi.setText(0, ExampleLayoutProvider.LAYOUT_PROVIDER_NAME);
+		twopi.setText(1, ExampleLayoutProvider.LAYOUT_PROVIDER_LAYOUT_TYPE.getLiteral());
+		twopi.setText(2, ExampleLayoutProvider.LAYOUT_PROVIDER_LAYOUT_OPTION.getLiteral());
+
+		layouterName.pack();
+		layoutType.pack();
+		
 		availableLayouters.setLayoutData(new GridData(GridData.FILL,
 				GridData.FILL, true, false, 2, 1));
 		gl = new GridLayout();
