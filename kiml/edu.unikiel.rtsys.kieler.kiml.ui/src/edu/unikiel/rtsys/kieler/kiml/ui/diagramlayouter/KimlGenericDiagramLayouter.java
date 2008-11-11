@@ -8,7 +8,6 @@ import org.eclipse.draw2d.ConnectionLocator;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.PositionConstants;
 import org.eclipse.draw2d.geometry.Dimension;
-import org.eclipse.draw2d.geometry.Insets;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.PointList;
 import org.eclipse.draw2d.geometry.Rectangle;
@@ -75,11 +74,11 @@ public class KimlGenericDiagramLayouter extends KimlAbstractLayouter {
 		super.layout(target);
 		rootPart.getFigure().validate();
 		/* second run to set positions of edges */
-		//super.layout(target);
-		//rootPart.getFigure().validate();
+		super.layout(target);
+		rootPart.getFigure().validate();
 		/* third run to set positions of edge labels */
-		//super.layout(target);
-		//rootPart.getFigure().validate();
+		super.layout(target);
+		rootPart.getFigure().validate();
 	}
 
 	@Override
@@ -132,33 +131,10 @@ public class KimlGenericDiagramLayouter extends KimlAbstractLayouter {
 		changeBoundsRequest.setEditParts(gep);
 
 		Dimension oldSize = gep.getFigure().getBounds().getSize();
-		Insets insets = KimlCommonHelper.kInsets2Insets(currentGroup
-				.getLayout().getInsets());
 		Dimension newSize = KimlCommonHelper.kDimension2Dimension(currentGroup
 				.getLayout().getSize());
 
-		if (insets.top != 0) {
-			ChangeBoundsRequest changeCompartmentBoundsRequest = new ChangeBoundsRequest(
-					RequestConstants.REQ_RESIZE);
-			changeBoundsRequest.setEditParts(gep);
-			KNodeGroup firstChild = currentGroup.getSubNodeGroups().get(0);
-			GraphicalEditPart childEditPart = nodeGroup2NodeEditPart
-					.get(firstChild);
-			GraphicalEditPart compartment = (GraphicalEditPart) childEditPart
-					.getParent();
-			Dimension compartmentOldSize = compartment.getFigure().getBounds()
-					.getSize();
-			Dimension compartmentNewSize = KimlCommonHelper
-					.kDimension2Dimension(currentGroup.getLayout().getSize());
-			compartmentNewSize.expand(-insets.left, -insets.top);
-			Dimension sizeDelta = compartmentNewSize
-					.getExpanded(compartmentOldSize.negate());
-			changeCompartmentBoundsRequest
-					.setResizeDirection(PositionConstants.CENTER);
-			changeCompartmentBoundsRequest.setSizeDelta(sizeDelta
-					.scale(zoomLevel));
-
-		}
+		
 		if (newSize != null && newSize.height != 0 && newSize.width != 0) {
 			Dimension sizeDelta = newSize.getExpanded(oldSize.negate());
 			changeBoundsRequest.setResizeDirection(PositionConstants.CENTER);
@@ -248,7 +224,6 @@ public class KimlGenericDiagramLayouter extends KimlAbstractLayouter {
 
 				Point newLocation = new Point();
 
-				// TODO: fix it
 				if (useGMFLabelLocation
 						|| (oldLocation.x == 0 && oldLocation.y == 0)) {
 					newLocation = labelEditPart.getReferencePoint();
