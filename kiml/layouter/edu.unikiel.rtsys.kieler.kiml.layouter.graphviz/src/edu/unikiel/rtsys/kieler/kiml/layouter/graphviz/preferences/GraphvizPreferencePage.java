@@ -2,15 +2,19 @@ package edu.unikiel.rtsys.kieler.kiml.layouter.graphviz.preferences;
 
 import kiel.layouter.graphviz.GraphvizLayoutProvider;
 
+import org.eclipse.jface.preference.BooleanFieldEditor;
+import org.eclipse.jface.preference.DirectoryFieldEditor;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
 import org.eclipse.jface.preference.IntegerFieldEditor;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Group;
+import org.eclipse.swt.widgets.Label;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
+import edu.unikiel.rtsys.kieler.kiml.layout.util.KimlLayoutConstants;
 import edu.unikiel.rtsys.kieler.kiml.layout.util.KimlLayoutUtilPreferencePage;
 import edu.unikiel.rtsys.kieler.kiml.layouter.graphviz.Activator;
 
@@ -55,8 +59,8 @@ public class GraphvizPreferencePage extends FieldEditorPreferencePage implements
 				PreferenceConstants.PREF_GRAPHVIZ_PADDING_Y, "Padding Y:",
 				padding, 2);
 		padding.setLayoutData(new GridData(GridData.FILL, GridData.FILL, true,
-				false, 2, 1));
-		gl = new GridLayout(2, true);
+				false, 3, 1));
+		gl = new GridLayout(3, true);
 		gl.marginWidth = 15;
 		gl.marginHeight = 10;
 		padding.setLayout(gl);
@@ -68,15 +72,38 @@ public class GraphvizPreferencePage extends FieldEditorPreferencePage implements
 		KimlLayoutUtilPreferencePage.createLayouterTable(availableLayouters,
 				new GraphvizLayoutProvider());
 		availableLayouters.setLayoutData(new GridData(GridData.FILL,
-				GridData.FILL, true, false, 2, 1));
+				GridData.FILL, true, false, 3, 1));
 		gl = new GridLayout();
 		gl.marginWidth = 15;
 		gl.marginHeight = 10;
 		availableLayouters.setLayout(gl);
 
+		// debug group
+		Group debug = new Group(this.getFieldEditorParent(), SWT.NONE);
+		debug.setText("Debug:");
+
+		BooleanFieldEditor enableDebug = new BooleanFieldEditor(
+				PreferenceConstants.PREF_GRAPHVIZ_ENABLE_DEBUG_OUTPUT,
+				"Enable debug output (*.dot)", debug);
+		DirectoryFieldEditor debugDir = new DirectoryFieldEditor(
+				PreferenceConstants.PREF_GRAPHVIZ_DEBUG_DIR, "Debug directory:",debug);
+		Label description = new Label(debug, SWT.WRAP);
+		description
+				.setText("If a directory is chosen, debug output of GraphViz (the *.dot files) go there. Otherwise the user home directory is chosen.");		
+		description.setLayoutData(new GridData(GridData.FILL,GridData.FILL,true,true,2,1));
+		debug.setLayoutData(new GridData(GridData.FILL, GridData.FILL, true,
+				false, 3, 2));
+		gl = new GridLayout(3,false);
+		gl.marginWidth = 15;
+		gl.marginHeight = 10;
+		debug.setLayout(gl);
+		
 		// now add all the stuff
 		addField(padx);
 		addField(pady);
+		
+		addField(enableDebug);
+		addField(debugDir);
 	}
 
 	/*

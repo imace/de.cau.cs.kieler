@@ -107,6 +107,22 @@ public class GraphvizLayouter {
 
 		GraphvizAPI.attachAttributes(graphvizGraph);
 		mapGraphviz2NodeGroup(nodeGroup);
+
+		/* should Emma debug? */
+		if (Activator.getDefault().getPreferenceStore().getBoolean(
+				PreferenceConstants.PREF_GRAPHVIZ_ENABLE_DEBUG_OUTPUT)) {
+
+			String outputName = nodeGroup.getIdString() != "" ? nodeGroup
+					.getIdString() : "output";
+			String outputDir = Activator.getDefault().getPreferenceStore()
+					.getString(PreferenceConstants.PREF_GRAPHVIZ_DEBUG_DIR);
+			if (outputDir.equals("")) {
+				outputDir = System.getProperty("user.home");
+
+			}
+			GraphvizAPI.writeDOT(graphvizGraph, outputDir + "/" + outputName
+					+ ".dot");
+		}
 	}
 
 	/**
@@ -216,10 +232,6 @@ public class GraphvizLayouter {
 	 *            Graph object to fill with the layout information
 	 */
 	private void mapGraphviz2NodeGroup(KNodeGroup nodeGroup) {
-		String outputName = nodeGroup.getIdString() != "" ? nodeGroup
-				.getIdString() : "output";
-		GraphvizAPI.writeDOT(graphvizGraph, System.getProperty("user.home")
-				+ "/" + outputName + ".dot");
 		mapGraphvizNodes2KNodes();
 		mapGraphvizEdges2KEdges();
 		setNodeSize(nodeGroup);
