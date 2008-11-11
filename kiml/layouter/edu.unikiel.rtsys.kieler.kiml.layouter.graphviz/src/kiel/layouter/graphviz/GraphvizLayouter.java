@@ -95,11 +95,11 @@ public class GraphvizLayouter {
 			GraphvizAPI.setGraphAttribute(graphvizGraph, "rankdir", "LR");
 		}
 
-		if (layouterName.equals(GraphvizLayoutProvider.GRAPHVIZ_CIRCO))
+		if (layouterName.equals(GraphvizLayoutProviderNames.GRAPHVIZ_CIRCO))
 			GraphvizAPI.doCircoLayout(graphvizGraph);
-		else if (layouterName.equals(GraphvizLayoutProvider.GRAPHVIZ_NEATO))
+		else if (layouterName.equals(GraphvizLayoutProviderNames.GRAPHVIZ_NEATO))
 			GraphvizAPI.doNeatoLayout(graphvizGraph);
-		else if (layouterName.equals(GraphvizLayoutProvider.GRAPHVIZ_TWOPI)) {
+		else if (layouterName.equals(GraphvizLayoutProviderNames.GRAPHVIZ_TWOPI)) {
 			GraphvizAPI.setGraphAttribute(graphvizGraph, "splines", "true");
 			GraphvizAPI.doTwopiLayout(graphvizGraph);
 		} else

@@ -20,9 +20,16 @@
    <extension
          point="edu.unikiel.rtsys.kieler.kiml.layout.kimlLayoutProvider">
       <kimlLayoutProvider
-            class="kiel.layouter.graphviz.GraphvizLayoutProvider">
-         <Priority
-               name="Low"></Priority>
+            class="kiel.layouter.graphviz.CircoLayoutProvider">
+      </kimlLayoutProvider>
+      <kimlLayoutProvider
+            class="kiel.layouter.graphviz.DotLayoutProvider">
+      </kimlLayoutProvider>
+      <kimlLayoutProvider
+            class="kiel.layouter.graphviz.NeatoLayoutProvider">
+      </kimlLayoutProvider>
+      <kimlLayoutProvider
+            class="kiel.layouter.graphviz.TwopiLayoutProvider">
       </kimlLayoutProvider>
    </extension>
 

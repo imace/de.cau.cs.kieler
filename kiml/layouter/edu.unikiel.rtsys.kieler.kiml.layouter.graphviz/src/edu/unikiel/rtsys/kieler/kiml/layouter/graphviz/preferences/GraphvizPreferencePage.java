@@ -1,6 +1,9 @@
 package edu.unikiel.rtsys.kieler.kiml.layouter.graphviz.preferences;
 
-import kiel.layouter.graphviz.GraphvizLayoutProvider;
+import kiel.layouter.graphviz.CircoLayoutProvider;
+import kiel.layouter.graphviz.DotLayoutProvider;
+import kiel.layouter.graphviz.NeatoLayoutProvider;
+import kiel.layouter.graphviz.TwopiLayoutProvider;
 
 import org.eclipse.jface.preference.BooleanFieldEditor;
 import org.eclipse.jface.preference.DirectoryFieldEditor;
@@ -11,11 +14,12 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.widgets.TableColumn;
+import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
-import edu.unikiel.rtsys.kieler.kiml.layout.util.KimlLayoutConstants;
-import edu.unikiel.rtsys.kieler.kiml.layout.util.KimlLayoutUtilPreferencePage;
 import edu.unikiel.rtsys.kieler.kiml.layouter.graphviz.Activator;
 
 /**
@@ -69,8 +73,46 @@ public class GraphvizPreferencePage extends FieldEditorPreferencePage implements
 		Group availableLayouters = new Group(this.getFieldEditorParent(),
 				SWT.NONE);
 		availableLayouters.setText("Available Layouters");
-		KimlLayoutUtilPreferencePage.createLayouterTable(availableLayouters,
-				new GraphvizLayoutProvider());
+		// KimlLayoutUtilPreferencePage.createLayouterTable(availableLayouters,
+		// new GraphvizLayoutProvider());
+		Table layouterTable = new Table(availableLayouters, SWT.BORDER);
+		layouterTable.setLinesVisible(true);
+		layouterTable.setHeaderVisible(true);
+		// layouterTable.setEnabled(false);
+
+		TableColumn layouterName = new TableColumn(layouterTable, SWT.NONE);
+		layouterName.setText("Layouter name");
+		TableColumn layoutType = new TableColumn(layouterTable, SWT.NONE);
+		layoutType.setText("Layout type");
+		TableColumn layoutOptions = new TableColumn(layouterTable, SWT.NONE);
+		layoutOptions.setText("Layout options");
+
+		/* CIRCO */
+		TableItem circo = new TableItem(layouterTable, SWT.NONE);
+		circo.setText(0, CircoLayoutProvider.LAYOUT_PROVIDER_NAME);
+		circo.setText(1, CircoLayoutProvider.LAYOUT_PROVIDER_LAYOUT_TYPE.getLiteral());
+		circo.setText(2, CircoLayoutProvider.LAYOUT_PROVIDER_LAYOUT_OPTION.getLiteral());
+		
+		/* DOT */
+		TableItem dot = new TableItem(layouterTable, SWT.NONE);
+		dot.setText(0, DotLayoutProvider.LAYOUT_PROVIDER_NAME);
+		dot.setText(1, DotLayoutProvider.LAYOUT_PROVIDER_LAYOUT_TYPE.getLiteral());
+		dot.setText(2, DotLayoutProvider.LAYOUT_PROVIDER_LAYOUT_OPTION.getLiteral());
+		
+		/* NEATO */
+		TableItem neato = new TableItem(layouterTable, SWT.NONE);
+		neato.setText(0, NeatoLayoutProvider.LAYOUT_PROVIDER_NAME);
+		neato.setText(1, NeatoLayoutProvider.LAYOUT_PROVIDER_LAYOUT_TYPE.getLiteral());
+		neato.setText(2, NeatoLayoutProvider.LAYOUT_PROVIDER_LAYOUT_OPTION.getLiteral());
+
+		/* TWOPI */
+		TableItem twopi = new TableItem(layouterTable, SWT.NONE);
+		twopi.setText(0, TwopiLayoutProvider.LAYOUT_PROVIDER_NAME);
+		twopi.setText(1, TwopiLayoutProvider.LAYOUT_PROVIDER_LAYOUT_TYPE.getLiteral());
+		twopi.setText(2, TwopiLayoutProvider.LAYOUT_PROVIDER_LAYOUT_OPTION.getLiteral());
+
+		layouterName.pack();
+		layoutType.pack();
 		availableLayouters.setLayoutData(new GridData(GridData.FILL,
 				GridData.FILL, true, false, 3, 1));
 		gl = new GridLayout();
@@ -86,22 +128,24 @@ public class GraphvizPreferencePage extends FieldEditorPreferencePage implements
 				PreferenceConstants.PREF_GRAPHVIZ_ENABLE_DEBUG_OUTPUT,
 				"Enable debug output (*.dot)", debug);
 		DirectoryFieldEditor debugDir = new DirectoryFieldEditor(
-				PreferenceConstants.PREF_GRAPHVIZ_DEBUG_DIR, "Debug directory:",debug);
+				PreferenceConstants.PREF_GRAPHVIZ_DEBUG_DIR,
+				"Debug directory:", debug);
 		Label description = new Label(debug, SWT.WRAP);
 		description
-				.setText("If a directory is chosen, debug output of GraphViz (the *.dot files) go there. Otherwise the user home directory is chosen.");		
-		description.setLayoutData(new GridData(GridData.FILL,GridData.FILL,true,true,2,1));
+				.setText("If a directory is chosen, debug output of GraphViz (the *.dot files) go there. Otherwise the user home directory is chosen.");
+		description.setLayoutData(new GridData(GridData.FILL, GridData.FILL,
+				true, true, 2, 1));
 		debug.setLayoutData(new GridData(GridData.FILL, GridData.FILL, true,
 				false, 3, 2));
-		gl = new GridLayout(3,false);
+		gl = new GridLayout(3, false);
 		gl.marginWidth = 15;
 		gl.marginHeight = 10;
 		debug.setLayout(gl);
-		
+
 		// now add all the stuff
 		addField(padx);
 		addField(pady);
-		
+
 		addField(enableDebug);
 		addField(debugDir);
 	}
