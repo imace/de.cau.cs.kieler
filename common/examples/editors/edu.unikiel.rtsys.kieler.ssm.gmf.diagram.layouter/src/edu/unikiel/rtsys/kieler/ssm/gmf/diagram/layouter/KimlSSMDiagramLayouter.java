@@ -45,6 +45,7 @@ import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KEdgeLayout;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KLabel;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KLayoutGraph;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup;
+import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroupLayout;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPoint;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphFactory;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_TYPE;
@@ -72,6 +73,7 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 	private KLayoutGraph layoutGraph;
 	private BorderItemsAwareFreeFormLayer primaryLayer = null;
 	private Viewport viewport;
+	private boolean groupEverySingleElement;
 
 	/*------------------------------------------------------------------------------*/
 	/*-----------------------HACK DUE TO EDGES AND LABEL §$$/&%?--------------------*/
@@ -79,13 +81,16 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 	public void layout(Object target) {
 		/* first run to set positions of nodes */
 		super.layout(target);
-		rootPart.getFigure().validate();
+		if (rootPart != null)
+			rootPart.getFigure().validate();
 		/* second run to set positions of edges */
 		super.layout(target);
-		rootPart.getFigure().validate();
+		if (rootPart != null)
+			rootPart.getFigure().validate();
 		/* third run to set positions of edge labels */
 		super.layout(target);
-		rootPart.getFigure().validate();
+		if (rootPart != null)
+			rootPart.getFigure().validate();
 	}
 
 	/*------------------------------------------------------------------------------*/
@@ -362,6 +367,21 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 		topNodeGroup.getLabel().setText(
 				KimlCommonHelper.getShortLabel(rootEditPart));
 		topNodeGroup.setIdString(KimlCommonHelper.getLongLabel(rootEditPart));
+		if (!groupEverySingleElement) {
+			topNodeGroup.setIdString(KimlCommonHelper
+					.getLongLabel(rootEditPart));
+			topNodeGroup
+					.getLayout()
+					.setLayouterName(
+							KimlGMFLayoutHintHelper
+									.getContainedElementsLayouterName((ShapeNodeEditPart) rootEditPart));
+			topNodeGroup
+					.getLayout()
+					.setLayoutType(
+							KimlGMFLayoutHintHelper
+									.getContainedElementsLayoutType((ShapeNodeEditPart) rootEditPart));
+
+		}
 
 		nodeEditPart2NodeGroup.put(rootEditPart, topNodeGroup);
 		nodeGroup2NodeEditPart.put(topNodeGroup, rootEditPart);
@@ -441,6 +461,8 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 					NodeEditPart childNodeEditPart = (NodeEditPart) obj;
 					KNodeGroup childKNodeGroup = KimlLayoutUtil
 							.createInitializedNodeGroup();
+					KNodeGroupLayout kLayout = childKNodeGroup.getLayout();
+
 					Rectangle childBounds = childNodeEditPart.getFigure()
 							.getBounds();
 
@@ -451,16 +473,12 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 						}
 					}
 					// set location
-					childKNodeGroup.getLayout().getLocation().setX(
-							childBounds.x);
-					childKNodeGroup.getLayout().getLocation().setY(
-							childBounds.y);
+					kLayout.getLocation().setX(childBounds.x);
+					kLayout.getLocation().setY(childBounds.y);
 
 					// set size
-					childKNodeGroup.getLayout().getSize().setHeight(
-							childBounds.height);
-					childKNodeGroup.getLayout().getSize().setWidth(
-							childBounds.width);
+					kLayout.getSize().setHeight(childBounds.height);
+					kLayout.getSize().setWidth(childBounds.width);
 
 					// set label and ID
 					childKNodeGroup.getLabel().setText(
@@ -470,9 +488,21 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 
 					// now process the layout groups correctly, as there may be
 					// more than one in each editPart itself
-					addNode2Group(nodes2Groups, childNodeEditPart,
-							childKNodeGroup);
-
+					if (groupEverySingleElement) {
+						addNode2Group(nodes2Groups, childNodeEditPart,
+								childKNodeGroup);
+					} else {
+						kLayout
+								.setLayouterName(KimlGMFLayoutHintHelper
+										.getContainedElementsLayouterName((ShapeNodeEditPart) childNodeEditPart));
+						kLayout
+								.setLayoutType(KimlGMFLayoutHintHelper
+										.getContainedElementsLayoutType((ShapeNodeEditPart) childNodeEditPart));
+						childKNodeGroup.setIdString(KimlCommonHelper
+								.getLongLabel(childNodeEditPart));
+						currentNodeGroup.getSubNodeGroups()
+								.add(childKNodeGroup);
+					}
 					// keep track of mapping between elements
 					nodeEditPart2NodeGroup.put(childNodeEditPart,
 							childKNodeGroup);
@@ -526,6 +556,7 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 	private void processNodeGroups(
 			Map<String, ArrayList<KNodeGroup>> nodes2Groups,
 			KNodeGroup currentNodeGroup) {
+
 		/*
 		 * If there is just one group, Emma does not need to create a new
 		 * intermediate group, just store this group and its layout information
@@ -593,7 +624,8 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 								+ KimlCommonHelper
 										.getLongLabel((ShapeNodeEditPart) nodeGroup2NodeEditPart
 												.get(currentNodeGroup)));
-				// set the layout type of the current node group, i.e. the type
+				// set the layout type of the current node group, i.e. the
+				// type
 				// how the child intermediate node groups, to which no
 				// corresponding element an an editor exists, should be laid
 				// out.
@@ -759,6 +791,12 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 				.getBoolean(
 						KimlLayoutPreferenceConstants.PREF_DIAGRAMLAYOUTERS_DO_NOT_LAYOUT_CONNECTION_LABELS);
 
+		groupEverySingleElement = KimlSSMDiagramLayouterPlugin
+				.getDefault()
+				.getPreferenceStore()
+				.getBoolean(
+						KimlLayoutConstants.SETTINGS_GROUP_EVERY_SINGLE_ELEMENT);
+
 		return true;
 	}
 
@@ -778,7 +816,10 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 			if (selection.size() == 1) {
 				if (selectedObject instanceof NodeEditPart) {
 					root = (NodeEditPart) selectedObject;
-				} else if (selectedObject instanceof DiagramEditPart) {
+				} else if (selectedObject instanceof DiagramEditPart
+						&& ((DiagramEditPart) selectedObject).getChildren() != null
+						&& ((DiagramEditPart) selectedObject).getChildren()
+								.size() > 0) {
 					root = (GraphicalEditPart) ((DiagramEditPart) selectedObject)
 							.getChildren().get(0);
 				} else if (selectedObject instanceof CompartmentEditPart) {
