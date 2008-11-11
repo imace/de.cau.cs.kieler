@@ -9,6 +9,12 @@
             id="edu.unikiel.rtsys.kieler.kiml.ui.PreferencePage"
             name="%page.name.0">
       </page>
+   <page
+   			category="edu.unikiel.rtsys.kieler.kiml.layout.preferences.DiagramLayoutersPreferencePage"
+            class="edu.unikiel.rtsys.kieler.kiml.ui.preferences.GenericDiagramLayouterPreferencePage"
+            id="edu.unikiel.rtsys.kieler.kiml.ui.preferences.GenericDiagramLayouterPreferencePage"
+            name="Generic Diagram Layouter">
+      </page>
    </extension>
    <extension
          point="org.eclipse.ui.views">
@@ -450,6 +456,12 @@ point="org.eclipse.ui.menus">
             class="edu.unikiel.rtsys.kieler.kiml.ui.diagramlayouter.KimlGenericDiagramLayouter"
             editor_id="*">
       </kimlDiagramLayouter>
+   </extension>
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer
+            class="edu.unikiel.rtsys.kieler.kiml.ui.preferences.PreferenceInitializer">
+      </initializer>
    </extension>
 
 </plugin>

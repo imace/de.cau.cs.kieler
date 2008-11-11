@@ -29,6 +29,8 @@ import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditor;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramGraphicalViewer;
 import org.eclipse.gmf.runtime.diagram.ui.requests.RequestConstants;
 import org.eclipse.gmf.runtime.diagram.ui.requests.SetAllBendpointRequest;
+import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.viewers.IStructuredSelection;
 
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutPlugin;
@@ -37,6 +39,7 @@ import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KDimension;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KEdge;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KEdgeLabel;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KEdgeLayout;
+import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KInsets;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KLabel;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KLayoutGraph;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup;
@@ -46,8 +49,10 @@ import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_TYPE;
 import edu.unikiel.rtsys.kieler.kiml.layout.services.KimlAbstractLayouter;
 import edu.unikiel.rtsys.kieler.kiml.layout.util.KimlLayoutPreferenceConstants;
 import edu.unikiel.rtsys.kieler.kiml.layout.util.KimlLayoutUtil;
+import edu.unikiel.rtsys.kieler.kiml.ui.KimlUiPlugin;
 import edu.unikiel.rtsys.kieler.kiml.ui.helpers.KimlCommonHelper;
 import edu.unikiel.rtsys.kieler.kiml.ui.helpers.KimlGMFLayoutHintHelper;
+import edu.unikiel.rtsys.kieler.kiml.ui.preferences.PreferenceConstants;
 
 public class KimlGenericDiagramLayouter extends KimlAbstractLayouter {
 
@@ -70,11 +75,11 @@ public class KimlGenericDiagramLayouter extends KimlAbstractLayouter {
 		super.layout(target);
 		rootPart.getFigure().validate();
 		/* second run to set positions of edges */
-		super.layout(target);
-		rootPart.getFigure().validate();
+		//super.layout(target);
+		//rootPart.getFigure().validate();
 		/* third run to set positions of edge labels */
-		super.layout(target);
-		rootPart.getFigure().validate();
+		//super.layout(target);
+		//rootPart.getFigure().validate();
 	}
 
 	@Override
@@ -132,7 +137,7 @@ public class KimlGenericDiagramLayouter extends KimlAbstractLayouter {
 		Dimension newSize = KimlCommonHelper.kDimension2Dimension(currentGroup
 				.getLayout().getSize());
 
-		if (insets.top == -1) {
+		if (insets.top != 0) {
 			ChangeBoundsRequest changeCompartmentBoundsRequest = new ChangeBoundsRequest(
 					RequestConstants.REQ_RESIZE);
 			changeBoundsRequest.setEditParts(gep);
@@ -146,14 +151,12 @@ public class KimlGenericDiagramLayouter extends KimlAbstractLayouter {
 			Dimension compartmentNewSize = KimlCommonHelper
 					.kDimension2Dimension(currentGroup.getLayout().getSize());
 			compartmentNewSize.expand(-insets.left, -insets.top);
-			compartmentNewSize.expand(0,-5);
 			Dimension sizeDelta = compartmentNewSize
 					.getExpanded(compartmentOldSize.negate());
 			changeCompartmentBoundsRequest
 					.setResizeDirection(PositionConstants.CENTER);
 			changeCompartmentBoundsRequest.setSizeDelta(sizeDelta
 					.scale(zoomLevel));
-			
 
 		}
 		if (newSize != null && newSize.height != 0 && newSize.width != 0) {
@@ -326,29 +329,6 @@ public class KimlGenericDiagramLayouter extends KimlAbstractLayouter {
 		// and populated each recursive call.
 		ArrayList<ConnectionEditPart> connections = new ArrayList<ConnectionEditPart>();
 
-		if (current instanceof ShapeCompartmentEditPart
-				&& current.getChildren().size() != 0) {
-			ShapeCompartmentEditPart currentSCEP = (ShapeCompartmentEditPart) current;
-			// Insets, if Compartment has "header", for example
-			float insetsTop = (((GraphicalEditPart) currentSCEP.getParent())
-					.getFigure().getBounds().getSize().height - currentSCEP
-					.getFigure().getBounds().height);
-			// TODO: dirty hack to keep the header in compartment constant at
-			// 33 pixel after layout.
-			// insetsTop = 33f;
-
-			try {
-				nodeEditPart2NodeGroup.get(current.getParent()).getLayout()
-						.getInsets().setTop(insetsTop);
-
-				String text = nodeEditPart2NodeGroup.get(current.getParent())
-						.getLabel().getText();
-				nodeEditPart2NodeGroup.get(current.getParent()).getLabel()
-						.setText(text.concat("XX"));
-			} catch (Exception e) {
-				;
-			}
-		}
 		// Process each child.
 		for (Object obj : current.getChildren()) {
 
@@ -406,14 +386,72 @@ public class KimlGenericDiagramLayouter extends KimlAbstractLayouter {
 				buildLayoutGraphRecursively(childNodeEditPart, childKNodeGroup);
 			}
 
-			// If it is just a graphical edit part, it may be the
-			// compartment
-			// inside a composite edit part or other esoteric stuff, as Emma
-			// loves reality, she does not need this, as she already
-			// has the parent of it, but needs the direct children.
-			else if (obj instanceof GraphicalEditPart) {
-				GraphicalEditPart childPart = (GraphicalEditPart) obj;
-				buildLayoutGraphRecursively(childPart, currentNodeGroup);
+			/*
+			 * If it is ShapeCompartmentEditPart, Emma needs the children of it
+			 * to add to new KNodeGroups. But Emma handles possible insets,
+			 * which may result from labels and other stuff.
+			 */
+			if (obj instanceof ShapeCompartmentEditPart
+					&& ((ShapeCompartmentEditPart) obj).getChildren().size() != 0) {
+
+				/* use variable sizes */
+				/*
+				 * ShapeCompartmentEditPart currentSCEP =
+				 * (ShapeCompartmentEditPart) current; ShapeCompartmentFigure
+				 * containedFigure = (ShapeCompartmentFigure) currentSCEP
+				 * .getFigure(); IFigure containerFigure = ((GraphicalEditPart)
+				 * currentSCEP .getParent()).getFigure(); float insetsTop =
+				 * containedFigure.getBounds().getTop().y -
+				 * containerFigure.getBounds().getTop().y; float insetsLeft =
+				 * containedFigure.getBounds().getLeft().x -
+				 * containerFigure.getBounds().getLeft().x; float insetsBottom =
+				 * containerFigure.getBounds().getBottom().y -
+				 * containedFigure.getBounds().getBottom().y; float insetsRight
+				 * = containerFigure.getBounds().getRight().x -
+				 * containedFigure.getBounds().getRight().x;
+				 */
+				/* use fix sizes */
+				IPreferenceStore kimlUiPreferenceStore = KimlUiPlugin
+						.getDefault().getPreferenceStore();
+				float insetsTop = kimlUiPreferenceStore
+						.getInt(PreferenceConstants.PREF_GENERIC_DIAGRAM_LAYOUTER_INSET_TOP);
+				float insetsLeft = kimlUiPreferenceStore
+						.getInt(PreferenceConstants.PREF_GENERIC_DIAGRAM_LAYOUTER_INSET_LEFT);
+				float insetsBottom = kimlUiPreferenceStore
+						.getInt(PreferenceConstants.PREF_GENERIC_DIAGRAM_LAYOUTER_INSET_BOTTOM);
+				float insetsRight = kimlUiPreferenceStore
+						.getInt(PreferenceConstants.PREF_GENERIC_DIAGRAM_LAYOUTER_INSET_RIGHT);
+
+				KInsets parentInsets = nodeEditPart2NodeGroup.get(
+						((GraphicalEditPart) obj).getParent()).getLayout().getInsets();
+				parentInsets.setTop(insetsTop);
+				parentInsets.setLeft(insetsLeft);
+				parentInsets.setBottom(insetsBottom);
+				parentInsets.setRight(insetsRight);
+
+				buildLayoutGraphRecursively((GraphicalEditPart) obj,
+						currentNodeGroup);
+
+			}
+			/* label handling */
+			if (obj instanceof GraphicalEditPart) {
+
+				GraphicalEditPart graphicalEditPart = (GraphicalEditPart) obj;
+				IFigure labelFigure = graphicalEditPart.getFigure();
+				if (labelFigure instanceof WrappingLabel) {
+
+					/*
+					 * handling of the label, in most cases a small symbol is
+					 * drawn left to the label. Emma must enlarge the
+					 * label(text), to let the layout provider set the size
+					 * properly.
+					 */
+					String text = ((WrappingLabel) labelFigure).getText();
+					
+					nodeEditPart2NodeGroup.get(graphicalEditPart.getParent()).getLabel()
+							.setText(text.concat("XX"));
+					nodeEditPart2NodeGroup.get(graphicalEditPart.getParent()).setIdString(text);
+				}
 			}
 		}
 		/*
