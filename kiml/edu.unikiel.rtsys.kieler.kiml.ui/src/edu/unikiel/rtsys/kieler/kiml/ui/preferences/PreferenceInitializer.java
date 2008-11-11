@@ -3,9 +3,6 @@ package edu.unikiel.rtsys.kieler.kiml.ui.preferences;
 import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
 import org.eclipse.jface.preference.IPreferenceStore;
 
-import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutPlugin;
-import edu.unikiel.rtsys.kieler.kiml.layout.services.KimlNullLayoutProvider;
-import edu.unikiel.rtsys.kieler.kiml.layout.util.KimlLayoutPreferenceConstants;
 import edu.unikiel.rtsys.kieler.kiml.ui.KimlUiPlugin;
 
 /**
