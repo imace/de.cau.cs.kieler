@@ -823,13 +823,13 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	int LAYOUTER_INFO__LAYOUT_OPTION = 2;
 
 	/**
-	 * The feature id for the '<em><b>Layout Provider ID</b></em>' attribute.
+	 * The feature id for the '<em><b>Layouter Collection ID</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LAYOUTER_INFO__LAYOUT_PROVIDER_ID = 3;
+	int LAYOUTER_INFO__LAYOUTER_COLLECTION_ID = 3;
 
 	/**
 	 * The number of structural features of the '<em>LAYOUTER INFO</em>' class.
@@ -1747,15 +1747,15 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	EAttribute getLAYOUTER_INFO_LayoutOption();
 
 	/**
-	 * Returns the meta object for the attribute '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO#getLayoutProviderID <em>Layout Provider ID</em>}'.
+	 * Returns the meta object for the attribute '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO#getLayouterCollectionID <em>Layouter Collection ID</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Layout Provider ID</em>'.
-	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO#getLayoutProviderID()
+	 * @return the meta object for the attribute '<em>Layouter Collection ID</em>'.
+	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO#getLayouterCollectionID()
 	 * @see #getLAYOUTER_INFO()
 	 * @generated
 	 */
-	EAttribute getLAYOUTER_INFO_LayoutProviderID();
+	EAttribute getLAYOUTER_INFO_LayouterCollectionID();
 
 	/**
 	 * Returns the meta object for class '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPort <em>KPort</em>}'.
@@ -2472,12 +2472,12 @@ public interface KimlLayoutGraphPackage extends EPackage {
 		EAttribute LAYOUTER_INFO__LAYOUT_OPTION = eINSTANCE.getLAYOUTER_INFO_LayoutOption();
 
 		/**
-		 * The meta object literal for the '<em><b>Layout Provider ID</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Layouter Collection ID</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute LAYOUTER_INFO__LAYOUT_PROVIDER_ID = eINSTANCE.getLAYOUTER_INFO_LayoutProviderID();
+		EAttribute LAYOUTER_INFO__LAYOUTER_COLLECTION_ID = eINSTANCE.getLAYOUTER_INFO_LayouterCollectionID();
 
 		/**
 		 * The meta object literal for the '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.KPortImpl <em>KPort</em>}' class.

@@ -151,7 +151,7 @@
         eType="#//LAYOUT_TYPE"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="layoutOption" lowerBound="1"
         eType="#//LAYOUT_OPTION"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="layoutProviderID" lowerBound="1"
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="layouterCollectionID" lowerBound="1"
         eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="KPort">

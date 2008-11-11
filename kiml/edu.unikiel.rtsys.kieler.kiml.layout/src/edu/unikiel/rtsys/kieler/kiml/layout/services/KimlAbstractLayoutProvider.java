@@ -9,7 +9,8 @@ public abstract class KimlAbstractLayoutProvider {
 	public static final String ATTRIBUTE_ID = "id";
 	public static final String ATTRIBUTE_CLASS = "class";
 	public static final String ATTRIBUTE_NAME = "name";
-	public static final String ATTRIBUTE_ICON = "icon";	
+	public static final String ATTRIBUTE_ICON = "icon";
+	private boolean enabled = true;	
 	
 	/**
 	 * Layout providers must implement this methods to perform the actual layout
@@ -30,4 +31,12 @@ public abstract class KimlAbstractLayoutProvider {
 	 */
 	public abstract LAYOUTER_INFO getLayouterInfo();
 
+	public void setEnabled(boolean state){
+		enabled = state;
+	}
+	
+	
+	public boolean isEnabled(){
+		return enabled;
+	}
 }

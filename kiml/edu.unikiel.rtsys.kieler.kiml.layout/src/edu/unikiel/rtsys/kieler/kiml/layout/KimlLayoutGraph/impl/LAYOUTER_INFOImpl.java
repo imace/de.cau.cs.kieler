@@ -28,7 +28,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  *   <li>{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.LAYOUTER_INFOImpl#getLayouterName <em>Layouter Name</em>}</li>
  *   <li>{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.LAYOUTER_INFOImpl#getLayoutType <em>Layout Type</em>}</li>
  *   <li>{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.LAYOUTER_INFOImpl#getLayoutOption <em>Layout Option</em>}</li>
- *   <li>{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.LAYOUTER_INFOImpl#getLayoutProviderID <em>Layout Provider ID</em>}</li>
+ *   <li>{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.LAYOUTER_INFOImpl#getLayouterCollectionID <em>Layouter Collection ID</em>}</li>
  * </ul>
  * </p>
  *
@@ -96,24 +96,24 @@ public class LAYOUTER_INFOImpl extends EObjectImpl implements LAYOUTER_INFO {
 	protected LAYOUT_OPTION layoutOption = LAYOUT_OPTION_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getLayoutProviderID() <em>Layout Provider ID</em>}' attribute.
+	 * The default value of the '{@link #getLayouterCollectionID() <em>Layouter Collection ID</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getLayoutProviderID()
+	 * @see #getLayouterCollectionID()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String LAYOUT_PROVIDER_ID_EDEFAULT = null;
+	protected static final String LAYOUTER_COLLECTION_ID_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getLayoutProviderID() <em>Layout Provider ID</em>}' attribute.
+	 * The cached value of the '{@link #getLayouterCollectionID() <em>Layouter Collection ID</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getLayoutProviderID()
+	 * @see #getLayouterCollectionID()
 	 * @generated
 	 * @ordered
 	 */
-	protected String layoutProviderID = LAYOUT_PROVIDER_ID_EDEFAULT;
+	protected String layouterCollectionID = LAYOUTER_COLLECTION_ID_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -202,8 +202,8 @@ public class LAYOUTER_INFOImpl extends EObjectImpl implements LAYOUTER_INFO {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getLayoutProviderID() {
-		return layoutProviderID;
+	public String getLayouterCollectionID() {
+		return layouterCollectionID;
 	}
 
 	/**
@@ -211,11 +211,11 @@ public class LAYOUTER_INFOImpl extends EObjectImpl implements LAYOUTER_INFO {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setLayoutProviderID(String newLayoutProviderID) {
-		String oldLayoutProviderID = layoutProviderID;
-		layoutProviderID = newLayoutProviderID;
+	public void setLayouterCollectionID(String newLayouterCollectionID) {
+		String oldLayouterCollectionID = layouterCollectionID;
+		layouterCollectionID = newLayouterCollectionID;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.LAYOUTER_INFO__LAYOUT_PROVIDER_ID, oldLayoutProviderID, layoutProviderID));
+			eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.LAYOUTER_INFO__LAYOUTER_COLLECTION_ID, oldLayouterCollectionID, layouterCollectionID));
 	}
 
 	/**
@@ -232,8 +232,8 @@ public class LAYOUTER_INFOImpl extends EObjectImpl implements LAYOUTER_INFO {
 				return getLayoutType();
 			case KimlLayoutGraphPackage.LAYOUTER_INFO__LAYOUT_OPTION:
 				return getLayoutOption();
-			case KimlLayoutGraphPackage.LAYOUTER_INFO__LAYOUT_PROVIDER_ID:
-				return getLayoutProviderID();
+			case KimlLayoutGraphPackage.LAYOUTER_INFO__LAYOUTER_COLLECTION_ID:
+				return getLayouterCollectionID();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -255,8 +255,8 @@ public class LAYOUTER_INFOImpl extends EObjectImpl implements LAYOUTER_INFO {
 			case KimlLayoutGraphPackage.LAYOUTER_INFO__LAYOUT_OPTION:
 				setLayoutOption((LAYOUT_OPTION)newValue);
 				return;
-			case KimlLayoutGraphPackage.LAYOUTER_INFO__LAYOUT_PROVIDER_ID:
-				setLayoutProviderID((String)newValue);
+			case KimlLayoutGraphPackage.LAYOUTER_INFO__LAYOUTER_COLLECTION_ID:
+				setLayouterCollectionID((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -279,8 +279,8 @@ public class LAYOUTER_INFOImpl extends EObjectImpl implements LAYOUTER_INFO {
 			case KimlLayoutGraphPackage.LAYOUTER_INFO__LAYOUT_OPTION:
 				setLayoutOption(LAYOUT_OPTION_EDEFAULT);
 				return;
-			case KimlLayoutGraphPackage.LAYOUTER_INFO__LAYOUT_PROVIDER_ID:
-				setLayoutProviderID(LAYOUT_PROVIDER_ID_EDEFAULT);
+			case KimlLayoutGraphPackage.LAYOUTER_INFO__LAYOUTER_COLLECTION_ID:
+				setLayouterCollectionID(LAYOUTER_COLLECTION_ID_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -300,8 +300,8 @@ public class LAYOUTER_INFOImpl extends EObjectImpl implements LAYOUTER_INFO {
 				return layoutType != LAYOUT_TYPE_EDEFAULT;
 			case KimlLayoutGraphPackage.LAYOUTER_INFO__LAYOUT_OPTION:
 				return layoutOption != LAYOUT_OPTION_EDEFAULT;
-			case KimlLayoutGraphPackage.LAYOUTER_INFO__LAYOUT_PROVIDER_ID:
-				return LAYOUT_PROVIDER_ID_EDEFAULT == null ? layoutProviderID != null : !LAYOUT_PROVIDER_ID_EDEFAULT.equals(layoutProviderID);
+			case KimlLayoutGraphPackage.LAYOUTER_INFO__LAYOUTER_COLLECTION_ID:
+				return LAYOUTER_COLLECTION_ID_EDEFAULT == null ? layouterCollectionID != null : !LAYOUTER_COLLECTION_ID_EDEFAULT.equals(layouterCollectionID);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -322,8 +322,8 @@ public class LAYOUTER_INFOImpl extends EObjectImpl implements LAYOUTER_INFO {
 		result.append(layoutType);
 		result.append(", layoutOption: ");
 		result.append(layoutOption);
-		result.append(", layoutProviderID: ");
-		result.append(layoutProviderID);
+		result.append(", layouterCollectionID: ");
+		result.append(layouterCollectionID);
 		result.append(')');
 		return result.toString();
 	}

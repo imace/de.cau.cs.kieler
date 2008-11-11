@@ -19,7 +19,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO#getLayouterName <em>Layouter Name</em>}</li>
  *   <li>{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO#getLayoutType <em>Layout Type</em>}</li>
  *   <li>{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO#getLayoutOption <em>Layout Option</em>}</li>
- *   <li>{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO#getLayoutProviderID <em>Layout Provider ID</em>}</li>
+ *   <li>{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO#getLayouterCollectionID <em>Layouter Collection ID</em>}</li>
  * </ul>
  * </p>
  *
@@ -113,29 +113,29 @@ public interface LAYOUTER_INFO extends EObject {
 	void setLayoutOption(LAYOUT_OPTION value);
 
 	/**
-	 * Returns the value of the '<em><b>Layout Provider ID</b></em>' attribute.
+	 * Returns the value of the '<em><b>Layouter Collection ID</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Layout Provider ID</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Layouter Collection ID</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Layout Provider ID</em>' attribute.
-	 * @see #setLayoutProviderID(String)
-	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getLAYOUTER_INFO_LayoutProviderID()
+	 * @return the value of the '<em>Layouter Collection ID</em>' attribute.
+	 * @see #setLayouterCollectionID(String)
+	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getLAYOUTER_INFO_LayouterCollectionID()
 	 * @model required="true"
 	 * @generated
 	 */
-	String getLayoutProviderID();
+	String getLayouterCollectionID();
 
 	/**
-	 * Sets the value of the '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO#getLayoutProviderID <em>Layout Provider ID</em>}' attribute.
+	 * Sets the value of the '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO#getLayouterCollectionID <em>Layouter Collection ID</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Layout Provider ID</em>' attribute.
-	 * @see #getLayoutProviderID()
+	 * @param value the new value of the '<em>Layouter Collection ID</em>' attribute.
+	 * @see #getLayouterCollectionID()
 	 * @generated
 	 */
-	void setLayoutProviderID(String value);
+	void setLayouterCollectionID(String value);
 
 } // LAYOUTER_INFO

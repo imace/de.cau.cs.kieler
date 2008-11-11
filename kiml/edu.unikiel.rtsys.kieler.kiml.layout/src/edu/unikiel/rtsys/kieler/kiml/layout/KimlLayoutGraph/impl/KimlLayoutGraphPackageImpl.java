@@ -823,7 +823,7 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getLAYOUTER_INFO_LayoutProviderID() {
+	public EAttribute getLAYOUTER_INFO_LayouterCollectionID() {
 		return (EAttribute)layouteR_INFOEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -1098,7 +1098,7 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 		createEAttribute(layouteR_INFOEClass, LAYOUTER_INFO__LAYOUTER_NAME);
 		createEAttribute(layouteR_INFOEClass, LAYOUTER_INFO__LAYOUT_TYPE);
 		createEAttribute(layouteR_INFOEClass, LAYOUTER_INFO__LAYOUT_OPTION);
-		createEAttribute(layouteR_INFOEClass, LAYOUTER_INFO__LAYOUT_PROVIDER_ID);
+		createEAttribute(layouteR_INFOEClass, LAYOUTER_INFO__LAYOUTER_COLLECTION_ID);
 
 		kPortEClass = createEClass(KPORT);
 		createEReference(kPortEClass, KPORT__LAYOUT);
@@ -1239,7 +1239,7 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 		initEAttribute(getLAYOUTER_INFO_LayouterName(), theEcorePackage.getEString(), "layouterName", null, 1, 1, edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getLAYOUTER_INFO_LayoutType(), this.getLAYOUT_TYPE(), "layoutType", null, 1, 1, edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getLAYOUTER_INFO_LayoutOption(), this.getLAYOUT_OPTION(), "layoutOption", null, 1, 1, edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getLAYOUTER_INFO_LayoutProviderID(), theEcorePackage.getEString(), "layoutProviderID", null, 1, 1, edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getLAYOUTER_INFO_LayouterCollectionID(), theEcorePackage.getEString(), "layouterCollectionID", null, 1, 1, edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(kPortEClass, KPort.class, "KPort", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getKPort_Layout(), this.getKPortLayout(), null, "layout", null, 1, 1, KPort.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
