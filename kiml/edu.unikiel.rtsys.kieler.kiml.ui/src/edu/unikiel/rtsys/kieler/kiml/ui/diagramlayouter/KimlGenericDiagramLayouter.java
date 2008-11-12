@@ -72,13 +72,16 @@ public class KimlGenericDiagramLayouter extends KimlAbstractLayouter {
 	public void layout(Object target) {
 		/* first run to set positions of nodes */
 		super.layout(target);
-		rootPart.getFigure().validate();
+		if (rootPart != null)
+			rootPart.getFigure().validate();
 		/* second run to set positions of edges */
 		super.layout(target);
-		rootPart.getFigure().validate();
+		if (rootPart != null)
+			rootPart.getFigure().validate();
 		/* third run to set positions of edge labels */
 		super.layout(target);
-		rootPart.getFigure().validate();
+		if (rootPart != null)
+			rootPart.getFigure().validate();
 	}
 
 	@Override
@@ -134,7 +137,6 @@ public class KimlGenericDiagramLayouter extends KimlAbstractLayouter {
 		Dimension newSize = KimlCommonHelper.kDimension2Dimension(currentGroup
 				.getLayout().getSize());
 
-		
 		if (newSize != null && newSize.height != 0 && newSize.width != 0) {
 			Dimension sizeDelta = newSize.getExpanded(oldSize.negate());
 			changeBoundsRequest.setResizeDirection(PositionConstants.CENTER);
@@ -398,7 +400,8 @@ public class KimlGenericDiagramLayouter extends KimlAbstractLayouter {
 						.getInt(PreferenceConstants.PREF_GENERIC_DIAGRAM_LAYOUTER_INSET_RIGHT);
 
 				KInsets parentInsets = nodeEditPart2NodeGroup.get(
-						((GraphicalEditPart) obj).getParent()).getLayout().getInsets();
+						((GraphicalEditPart) obj).getParent()).getLayout()
+						.getInsets();
 				parentInsets.setTop(insetsTop);
 				parentInsets.setLeft(insetsLeft);
 				parentInsets.setBottom(insetsBottom);
@@ -422,10 +425,11 @@ public class KimlGenericDiagramLayouter extends KimlAbstractLayouter {
 					 * properly.
 					 */
 					String text = ((WrappingLabel) labelFigure).getText();
-					
-					nodeEditPart2NodeGroup.get(graphicalEditPart.getParent()).getLabel()
-							.setText(text.concat("XX"));
-					nodeEditPart2NodeGroup.get(graphicalEditPart.getParent()).setIdString(text);
+
+					nodeEditPart2NodeGroup.get(graphicalEditPart.getParent())
+							.getLabel().setText(text.concat("XX"));
+					nodeEditPart2NodeGroup.get(graphicalEditPart.getParent())
+							.setIdString(text);
 				}
 			}
 		}
