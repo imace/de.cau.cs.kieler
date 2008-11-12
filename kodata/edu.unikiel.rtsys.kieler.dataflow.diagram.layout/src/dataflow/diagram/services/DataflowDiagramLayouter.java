@@ -18,6 +18,7 @@ import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeCompartmentEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramCommandStack;
 import org.eclipse.gmf.runtime.diagram.ui.requests.RequestConstants;
 import org.eclipse.gmf.runtime.diagram.ui.requests.SetAllBendpointRequest;
+import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.draw2d.IFigure;
@@ -88,6 +89,11 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 		{
 			DiagramRootEditPart editor = (DiagramRootEditPart)target;
 			layoutRootPart = editor.getContents();
+		}
+		else if (target instanceof DiagramDocumentEditor)
+		{
+			DiagramDocumentEditor documentEditor = (DiagramDocumentEditor)target;
+			layoutRootPart = documentEditor.getDiagramEditPart();
 		}
 		else if (target instanceof IStructuredSelection)
 		{
@@ -410,8 +416,8 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 		insets.setTop(2*BORDER_INSET);
 		insets.setBottom(BORDER_INSET);
 		nodeGroupLayout.setInsets(insets);
-		nodeGroupLayout.setLayouterName(KimlGMFLayoutHintHelper.getLayouterName(boxEditPart));
-		nodeGroupLayout.setLayoutType(KimlGMFLayoutHintHelper.getLayoutType(boxEditPart));
+		nodeGroupLayout.setLayouterName(KimlGMFLayoutHintHelper.getContainedElementsLayouterName(boxEditPart));
+		nodeGroupLayout.setLayoutType(KimlGMFLayoutHintHelper.getContainedElementsLayoutType(boxEditPart));
 		childNode.setLayout(nodeGroupLayout);
 		// set the input and output ports
 		List subChildren = null;
