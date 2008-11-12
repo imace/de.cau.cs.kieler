@@ -30,6 +30,7 @@ import dataflow.diagram.edit.parts.*;
 
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.*;
 import edu.unikiel.rtsys.kieler.kiml.layout.services.KimlAbstractLayouter;
+import edu.unikiel.rtsys.kieler.kiml.ui.helpers.KimlGMFLayoutHintHelper;
 
 /**
  * This layouter for dataflow diagrams performs the needed transformation
@@ -140,7 +141,12 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 			KNodeGroupLayout topGroupLayout = KimlLayoutGraphFactory.eINSTANCE.createKNodeGroupLayout();
 			createLayout(topGroupLayout, modelPart.getFigure());
 			topGroupLayout.setInsets(KimlLayoutGraphFactory.eINSTANCE.createKInsets());
+			topGroupLayout.setLayouterName(KimlGMFLayoutHintHelper.getLayouterName(modelPart));
+			topGroupLayout.setLayoutType(KimlGMFLayoutHintHelper.getLayoutType(modelPart));
 			topNode.setLayout(topGroupLayout);
+			KNodeGroupLabel topGroupLabel = KimlLayoutGraphFactory.eINSTANCE.createKNodeGroupLabel();
+			topGroupLabel.setText(modelPart.getDiagramView().getName());
+			topNode.setLabel(topGroupLabel);
 			// build the whole graph structure
 			buildLayoutGraphRecursively(modelPart.getChildren(), topNode);
 		}
@@ -364,7 +370,8 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 				{
 					AbstractBorderedShapeEditPart boxEditPart = (AbstractBorderedShapeEditPart)child;
 					KNodeGroup childNode = buildNode(boxEditPart);
-					parentGroup.getSubNodeGroups().add(childNode);
+					// set the parent group; this automatically adds the node
+					// to the parent's list of children
 					childNode.setParentGroup(parentGroup);
 				}
 			}
@@ -375,7 +382,7 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 				if (child instanceof AbstractBorderedShapeEditPart)
 				{
 					AbstractBorderedShapeEditPart boxEditPart = (AbstractBorderedShapeEditPart)child;
-					buildNodeEdges(boxEditPart, true);					
+					buildNodeEdges(boxEditPart, true);
 				}
 			}
 		}
@@ -403,6 +410,8 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 		insets.setTop(2*BORDER_INSET);
 		insets.setBottom(BORDER_INSET);
 		nodeGroupLayout.setInsets(insets);
+		nodeGroupLayout.setLayouterName(KimlGMFLayoutHintHelper.getLayouterName(boxEditPart));
+		nodeGroupLayout.setLayoutType(KimlGMFLayoutHintHelper.getLayoutType(boxEditPart));
 		childNode.setLayout(nodeGroupLayout);
 		// set the input and output ports
 		List subChildren = null;
@@ -420,7 +429,6 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 				port2BorderItemMapping.put(port, borderItem);
 				borderItem2PortMapping.put(borderItem, port);
 				port.setType(borderItem instanceof InputPortEditPart ? PORT_TYPE.INPUT : PORT_TYPE.OUTPUT);
-				childNode.getPorts().add(port);
 				port.setNodeGroup(childNode);
 				// set the port's layout
 				KPortLayout portLayout = KimlLayoutGraphFactory.eINSTANCE.createKPortLayout();
@@ -526,20 +534,22 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 	{
 		KEdge edge = KimlLayoutGraphFactory.eINSTANCE.createKEdge();
 		edge2ConnectionMapping.put(edge, connectionEditPart);
-		edge.setSource(sourcePort.getNodeGroup());
-		edge.setSourcePort(sourcePort);
-		edge.setTarget(targetPort.getNodeGroup());
-		edge.setTargetPort(targetPort);
-		sourcePort.getEdges().add(edge);
 		if (edgeType != EdgeHierarchyType.INPUT_TO_OP)
 		{
-			sourcePort.getNodeGroup().getOutgoingEdges().add(edge);
+			// set the source node; this automatically adds the edge
+			// to the source's list of outgoing edges
+			edge.setSource(sourcePort.getNodeGroup());
 		}
-		targetPort.getEdges().add(edge);
+		edge.setSourcePort(sourcePort);
 		if (edgeType != EdgeHierarchyType.OP_TO_OUTPUT)
 		{
-			targetPort.getNodeGroup().getIncomingEdges().add(edge);
+			// set the target node; this automatically adds the edge to
+			// the target's list of incoming edges
+			edge.setTarget(targetPort.getNodeGroup());
 		}
+		edge.setTargetPort(targetPort);
+		sourcePort.getEdges().add(edge);
+		targetPort.getEdges().add(edge);
 		// set the edge's layout
 		KEdgeLayout edgeLayout = KimlLayoutGraphFactory.eINSTANCE.createKEdgeLayout();
 		edgeLayout.setSourcePoint(KimlLayoutGraphFactory.eINSTANCE.createKPoint());

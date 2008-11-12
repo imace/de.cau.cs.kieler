@@ -198,6 +198,7 @@ public interface KNodeGroup extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Ports</b></em>' reference list.
 	 * The list contents are of type {@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPort}.
+	 * It is bidirectional and its opposite is '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPort#getNodeGroup <em>Node Group</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Ports</em>' reference list isn't clear,
@@ -206,7 +207,8 @@ public interface KNodeGroup extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Ports</em>' reference list.
 	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKNodeGroup_Ports()
-	 * @model
+	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPort#getNodeGroup
+	 * @model opposite="nodeGroup"
 	 * @generated
 	 */
 	EList<KPort> getPorts();

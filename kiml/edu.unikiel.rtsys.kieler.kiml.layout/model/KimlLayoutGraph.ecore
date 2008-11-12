@@ -72,7 +72,7 @@
         eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"
         defaultValueLiteral="&quot;&quot;"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ports" upperBound="-1"
-        eType="#//KPort"/>
+        eType="#//KPort" eOpposite="#//KPort/nodeGroup"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="KNodeGroupLayout" eSuperTypes="#//KShapeLayout">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="layoutType" lowerBound="1"
@@ -159,7 +159,7 @@
         eType="#//KPortLayout"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="label" eType="#//KPortLabel"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="nodeGroup" lowerBound="1"
-        eType="#//KNodeGroup"/>
+        eType="#//KNodeGroup" eOpposite="#//KNodeGroup/ports"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1" eType="#//PORT_TYPE"
         defaultValueLiteral="0"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="edges" upperBound="-1"

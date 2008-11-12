@@ -18,6 +18,7 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
@@ -232,11 +233,33 @@ public class KPortImpl extends EObjectImpl implements KPort {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setNodeGroup(KNodeGroup newNodeGroup) {
+	public NotificationChain basicSetNodeGroup(KNodeGroup newNodeGroup, NotificationChain msgs) {
 		KNodeGroup oldNodeGroup = nodeGroup;
 		nodeGroup = newNodeGroup;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KPORT__NODE_GROUP, oldNodeGroup, nodeGroup));
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KPORT__NODE_GROUP, oldNodeGroup, newNodeGroup);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setNodeGroup(KNodeGroup newNodeGroup) {
+		if (newNodeGroup != nodeGroup) {
+			NotificationChain msgs = null;
+			if (nodeGroup != null)
+				msgs = ((InternalEObject)nodeGroup).eInverseRemove(this, KimlLayoutGraphPackage.KNODE_GROUP__PORTS, KNodeGroup.class, msgs);
+			if (newNodeGroup != null)
+				msgs = ((InternalEObject)newNodeGroup).eInverseAdd(this, KimlLayoutGraphPackage.KNODE_GROUP__PORTS, KNodeGroup.class, msgs);
+			msgs = basicSetNodeGroup(newNodeGroup, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KPORT__NODE_GROUP, newNodeGroup, newNodeGroup));
 	}
 
 	/**
@@ -270,6 +293,36 @@ public class KPortImpl extends EObjectImpl implements KPort {
 			edges = new EObjectResolvingEList<KEdge>(KEdge.class, this, KimlLayoutGraphPackage.KPORT__EDGES);
 		}
 		return edges;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case KimlLayoutGraphPackage.KPORT__NODE_GROUP:
+				if (nodeGroup != null)
+					msgs = ((InternalEObject)nodeGroup).eInverseRemove(this, KimlLayoutGraphPackage.KNODE_GROUP__PORTS, KNodeGroup.class, msgs);
+				return basicSetNodeGroup((KNodeGroup)otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case KimlLayoutGraphPackage.KPORT__NODE_GROUP:
+				return basicSetNodeGroup(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**

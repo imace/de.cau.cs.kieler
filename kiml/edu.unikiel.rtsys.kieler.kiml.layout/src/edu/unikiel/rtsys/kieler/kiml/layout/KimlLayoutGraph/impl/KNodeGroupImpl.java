@@ -360,7 +360,7 @@ public class KNodeGroupImpl extends EObjectImpl implements KNodeGroup {
 	 */
 	public EList<KPort> getPorts() {
 		if (ports == null) {
-			ports = new EObjectResolvingEList<KPort>(KPort.class, this, KimlLayoutGraphPackage.KNODE_GROUP__PORTS);
+			ports = new EObjectWithInverseResolvingEList<KPort>(KPort.class, this, KimlLayoutGraphPackage.KNODE_GROUP__PORTS, KimlLayoutGraphPackage.KPORT__NODE_GROUP);
 		}
 		return ports;
 	}
@@ -384,6 +384,8 @@ public class KNodeGroupImpl extends EObjectImpl implements KNodeGroup {
 				if (parentGroup != null)
 					msgs = ((InternalEObject)parentGroup).eInverseRemove(this, KimlLayoutGraphPackage.KNODE_GROUP__SUB_NODE_GROUPS, KNodeGroup.class, msgs);
 				return basicSetParentGroup((KNodeGroup)otherEnd, msgs);
+			case KimlLayoutGraphPackage.KNODE_GROUP__PORTS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getPorts()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -404,6 +406,8 @@ public class KNodeGroupImpl extends EObjectImpl implements KNodeGroup {
 				return ((InternalEList<?>)getIncomingEdges()).basicRemove(otherEnd, msgs);
 			case KimlLayoutGraphPackage.KNODE_GROUP__PARENT_GROUP:
 				return basicSetParentGroup(null, msgs);
+			case KimlLayoutGraphPackage.KNODE_GROUP__PORTS:
+				return ((InternalEList<?>)getPorts()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}

@@ -122,8 +122,8 @@ public class GraphvizLayouter {
 		if (Activator.getDefault().getPreferenceStore().getBoolean(
 				PreferenceConstants.PREF_GRAPHVIZ_ENABLE_DEBUG_OUTPUT)) {
 
-			String outputName = nodeGroup.getIdString() != "" ? nodeGroup
-					.getIdString() : "output";
+			String outputName = nodeGroup.getIdString().length() != 0 ?
+					nodeGroup.getIdString() : "output";
 			String outputDir = Activator.getDefault().getPreferenceStore()
 					.getString(PreferenceConstants.PREF_GRAPHVIZ_DEBUG_DIR);
 			if (outputDir.equals("")) {
