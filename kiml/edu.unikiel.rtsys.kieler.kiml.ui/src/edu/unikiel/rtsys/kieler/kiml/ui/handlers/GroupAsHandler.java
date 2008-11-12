@@ -134,11 +134,12 @@ public class GroupAsHandler extends AbstractHandler implements IHandler {
 
 			} else {
 
-				/* group all elements contained in selected one */
-				if (selectedShapeNodeEditParts.size() > 0)
+				/* group all elements contained in selected ones */
+				for (Object shapeNodeEditPart : selectedShapeNodeEditParts)
+				{
 					KimlGMFLayoutHintHelper.setContainedElementsLayoutHint(
-							(ShapeNodeEditPart) selectedShapeNodeEditParts
-									.get(0), layoutType, layouterName);
+							(ShapeNodeEditPart)shapeNodeEditPart, layoutType, layouterName);
+				}
 			}
 
 			/*
