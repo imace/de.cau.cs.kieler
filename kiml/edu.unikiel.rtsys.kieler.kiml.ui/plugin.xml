@@ -37,6 +37,13 @@
             name="%view.name.1"
             restorable="true">
       </view>
+      <view
+            category="edu.unikiel.rtsys.kieler.kiml.ui"
+            class="edu.unikiel.rtsys.kieler.kiml.ui.views.SampleView"
+            id="edu.unikiel.rtsys.kieler.kiml.ui.views.SampleView"
+            name="Sample View"
+            restorable="true">
+      </view>
    </extension>
    <extension
          point="org.eclipse.ui.perspectives">

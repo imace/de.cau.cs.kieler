@@ -47,6 +47,9 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.ui.part.ViewPart;
+import org.eclipse.ui.views.properties.IPropertySheetPage;
+import org.eclipse.ui.views.properties.tabbed.ITabbedPropertySheetPageContributor;
+import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 
 import edu.unikiel.rtsys.kieler.kiml.layout.services.DiagramLayouters;
 import edu.unikiel.rtsys.kieler.kiml.layout.services.KimlAbstractLayouter;
@@ -78,7 +81,7 @@ import edu.unikiel.rtsys.kieler.kiml.ui.helpers.KimlGMFLayoutHintHelper;
  * for, GEF-Editors.
  */
 public class KimlLayoutHintView extends ViewPart implements ISelectionListener,
-		IPartListener, ResourceSetListener {
+		IPartListener, ResourceSetListener,ITabbedPropertySheetPageContributor {
 
 	public static final String ID = "edu.unikiel.rtsys.kieler.kiml.ui.views.KimlLayoutHintView";
 
@@ -542,4 +545,14 @@ public class KimlLayoutHintView extends ViewPart implements ISelectionListener,
 		return null;
 	}
 
+	@Override
+	public String getContributorId() {
+		return getSite().getId();
+	}
+	
+	public Object getAdapter(Class adapter) {
+        if (adapter == IPropertySheetPage.class)
+            return new TabbedPropertySheetPage(this);
+        return super.getAdapter(adapter);
+    }
 }

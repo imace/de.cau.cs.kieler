@@ -28,7 +28,7 @@ public class ContributionItemGroupAs extends CompoundContributionItem {
 		contribItems.add(new Separator());
 		
 		for (String layouterName : LayoutProviders.getInstance()
-				.getAvailableLayouterNames()) {
+				.getEnabledLayouterNames()) {
 			parameters.clear();
 			parameters.put(PARAM_LAYOUTER_NAME, layouterName);
 			CommandContributionItemParameter ccip = new CommandContributionItemParameter(
