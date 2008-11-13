@@ -5,12 +5,10 @@ package edu.unikiel.rtsys.kieler.kivik.preferences;
  */
 public class PreferenceConstants {
 
-	public static final String P_PATH = "pathPreference";
-
-	public static final String P_BOOLEAN = "booleanPreference";
-
-	public static final String P_CHOICE = "choicePreference";
-
-	public static final String P_STRING = "stringPreference";
+	public static final String PREF_KIVIK_ENABLE_SELECTING_IN_DIAGRAM = "enable.selection.in.diagram";
+	public static final String PREF_KIVIK_ENABLE_AUTO_LAYOUT = "enable.auto.layout";
+	public static final String PREF_KIVIK_ENABLE_COLLAPSING_OF_UNCHANGED_ELEMENTS = "enable.hinding.of.unchanged.elements";
+	public static final String PREF_KIVIK_ENABLE_ZOOMING_TO_CHANGED_ELEMENTS = "enable.zooming.to.changed.elements";
+	public static final String PREF_KIVIK_ENABLE_SCROLLING_ANIMATION = "enable.scrolling.animation";
 	
 }

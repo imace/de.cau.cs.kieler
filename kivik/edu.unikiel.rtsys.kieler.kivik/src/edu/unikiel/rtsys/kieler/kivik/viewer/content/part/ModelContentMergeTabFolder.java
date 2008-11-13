@@ -25,7 +25,7 @@ import org.eclipse.emf.compare.match.metamodel.Match2Elements;
 import org.eclipse.emf.compare.match.metamodel.Match3Element;
 import org.eclipse.emf.compare.match.metamodel.MatchModel;
 import org.eclipse.emf.compare.match.metamodel.UnMatchElement;
-import org.eclipse.emf.compare.ui.EMFCompareUIMessages;
+import org.eclipse.emf.compare.ui.EMFCompareUIPlugin;
 import org.eclipse.emf.compare.ui.ICompareEditorPartListener;
 import org.eclipse.emf.compare.ui.ModelCompareInput;
 import org.eclipse.emf.compare.ui.util.EMFCompareConstants;
@@ -67,7 +67,7 @@ import edu.unikiel.rtsys.kieler.kivik.viewer.content.part.property.ModelContentM
  */
 public class ModelContentMergeTabFolder {
 	/** This keeps track of the parent viewer of this tab folder. */
-	protected final ModelContentMergeViewer parentViewer;
+	/* protected */final ModelContentMergeViewer parentViewer;
 
 	/**
 	 * This <code>int</code> represents the side of this viewer part. Must be
@@ -299,7 +299,11 @@ public class ModelContentMergeTabFolder {
 					.getAncestorElement(findMatchFromElement(EMFCompareEObjectUtils
 							.getLeftElement(diff)));
 
-		tabs.get(tabFolder.getSelectionIndex()).showElements(diffs);
+		final IModelContentMergeViewerTab currentTab = tabs.get(tabFolder
+				.getSelectionIndex());
+
+		currentTab.showElements(diffs);
+
 		properties.setReflectiveInput(findMatchFromElement(target));
 
 		parentViewer.getConfiguration().setProperty(
@@ -364,7 +368,6 @@ public class ModelContentMergeTabFolder {
 			currentTab
 					.setReflectiveInput(findMatchFromElement((EObject) input));
 		else {
-			// tabs.get(tabFolder.getSelectionIndex()).setReflectiveInput(input);
 			diagram.setReflectiveInput(input);
 			tree.setReflectiveInput(input);
 		}
@@ -377,7 +380,22 @@ public class ModelContentMergeTabFolder {
 	 *            New tab to set selected.
 	 */
 	public void setSelectedTab(int index) {
+
 		tabFolder.setSelection(index);
+
+		final IModelContentMergeViewerTab currentTab = tabs.get(tabFolder
+				.getSelectionIndex());
+		if (partSide == EMFCompareConstants.LEFT) {
+			if (currentTab == diagram) {
+				parentViewer.drawDiffMarkers = false;
+			} else {
+				boolean draw = EMFCompareUIPlugin
+				.getDefault()
+				.getPluginPreferences().getBoolean(
+						EMFCompareConstants.PREFERENCES_KEY_DRAW_DIFFERENCES);
+				parentViewer.drawDiffMarkers = draw;
+			}
+		}
 		resizeBounds();
 	}
 
@@ -390,6 +408,10 @@ public class ModelContentMergeTabFolder {
 	protected void createContents(Composite composite) {
 		tabFolder = new CTabFolder(composite, SWT.BOTTOM);
 
+		final CTabItem diagramTab = new CTabItem(tabFolder, SWT.NONE);
+		diagramTab.setText(KivikUIMessages
+				.getString("ModelContentMergeTabFolder.diagram")); //$NON-NLS-1$
+
 		final CTabItem treeTab = new CTabItem(tabFolder, SWT.NONE);
 		treeTab.setText(KivikUIMessages
 				.getString("ModelContentMergeTabFolder.differences")); //$NON-NLS-1$
@@ -398,10 +420,7 @@ public class ModelContentMergeTabFolder {
 		propertiesTab.setText(KivikUIMessages
 				.getString("ModelContentMergeTabFolder.properties")); //$NON-NLS-1$
 
-		final CTabItem diagramTab = new CTabItem(tabFolder, SWT.NONE);
-		diagramTab.setText(KivikUIMessages
-				.getString("ModelContentMergeTabFolder.diagram")); //$NON-NLS-1$
-
+		
 		final Composite treePanel = new Composite(tabFolder, SWT.NONE);
 		treePanel.setLayout(new GridLayout());
 		treePanel.setLayoutData(new GridData(GridData.FILL_BOTH));
@@ -423,9 +442,10 @@ public class ModelContentMergeTabFolder {
 		diagram = createDiagramPart(diagramPanel);
 		diagramTab.setControl(diagramPanel);
 
+		tabs.add(diagram);
 		tabs.add(tree);
 		tabs.add(properties);
-		tabs.add(diagram);
+		
 
 		tabFolder.addSelectionListener(new SelectionListener() {
 			public void widgetDefaultSelected(SelectionEvent e) {
@@ -437,8 +457,8 @@ public class ModelContentMergeTabFolder {
 				fireSelectedtabChanged();
 			}
 		});
+		
 		tabFolder.setSelection(diagramTab);
-		tabFolder.setSelection(treeTab);
 	}
 
 	/**
@@ -681,24 +701,24 @@ public class ModelContentMergeTabFolder {
 						IStructuredSelection selection = (IStructuredSelection) event
 								.getSelection();
 						DiffElement newSelection = null;
-						
+
 						AbstractGraphicalEditPart selectedEditPart = (AbstractGraphicalEditPart) selection
 								.getFirstElement();
-						
+
 						boolean found = false;
 
 						Iterator<ModelContentMergeTabObject> it = diagramPart
 								.getVisibleElements().iterator();
 						Object actualObject;
-						while (it.hasNext()){
+						while (it.hasNext()) {
 							actualObject = it.next().getActualObject();
-							if (actualObject.equals(selectedEditPart)){
+							if (actualObject.equals(selectedEditPart)) {
 								found = true;
 								break;
 							}
 						}
 						if (!found)
-							return;						
+							return;
 
 						final TreeIterator<EObject> diffIterator = getDiffModel()
 								.eAllContents();

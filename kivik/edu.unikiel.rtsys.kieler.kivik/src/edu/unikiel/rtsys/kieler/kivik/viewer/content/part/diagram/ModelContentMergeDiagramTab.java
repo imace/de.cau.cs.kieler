@@ -1,12 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2007, 2008 Obeo.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- * 
- * Contributors:
- *     Obeo - initial API and implementation
+ *
  *******************************************************************************/
 package edu.unikiel.rtsys.kieler.kivik.viewer.content.part.diagram;
 
@@ -22,13 +15,12 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.draw2d.FreeformLayer;
 import org.eclipse.draw2d.IFigure;
+import org.eclipse.draw2d.Label;
+import org.eclipse.draw2d.MarginBorder;
+import org.eclipse.draw2d.PositionConstants;
 import org.eclipse.draw2d.RoundedRectangle;
 import org.eclipse.draw2d.Viewport;
-import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
-import org.eclipse.draw2d.text.FlowPage;
-import org.eclipse.draw2d.text.PageFlowLayout;
-import org.eclipse.draw2d.text.TextFlow;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.compare.diff.metamodel.AbstractDiffExtension;
 import org.eclipse.emf.compare.diff.metamodel.ConflictingDiffElement;
@@ -64,13 +56,18 @@ import org.eclipse.gmf.runtime.draw2d.ui.internal.figures.AnimatableScrollPane;
 import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.gmf.runtime.notation.MeasurementUnit;
 import org.eclipse.gmf.runtime.notation.View;
+import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.jface.util.IPropertyChangeListener;
+import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.swt.graphics.Color;
-import org.eclipse.swt.graphics.Font;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Composite;
 
 import edu.unikiel.rtsys.kieler.kiml.layout.services.DiagramLayouters;
 import edu.unikiel.rtsys.kieler.kiml.layout.services.KimlAbstractLayouter;
 import edu.unikiel.rtsys.kieler.kivik.Constants;
+import edu.unikiel.rtsys.kieler.kivik.KivikPlugin;
+import edu.unikiel.rtsys.kieler.kivik.preferences.PreferenceConstants;
 import edu.unikiel.rtsys.kieler.kivik.viewer.content.ModelContentMergeViewer;
 import edu.unikiel.rtsys.kieler.kivik.viewer.content.part.IModelContentMergeViewerTab;
 import edu.unikiel.rtsys.kieler.kivik.viewer.content.part.ModelContentMergeTabFolder;
@@ -79,13 +76,10 @@ import edu.unikiel.rtsys.kieler.ssm.diagram.edit.parts.SafeStateMachineEditPartF
 import edu.unikiel.rtsys.kieler.ssm.diagram.part.SafeStateMachineDiagramEditor;
 
 /**
- * Represents the tree view under a {@link ModelContentMergeTabFolder}'s diff
- * tab.
- * 
- * @author <a href="mailto:laurent.goubet@obeo.fr">Laurent Goubet</a>
+ *
  */
 public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
-		implements IModelContentMergeViewerTab {
+		implements IModelContentMergeViewerTab, IPropertyChangeListener {
 
 	protected float zoom = 0.7f;// 1.0f;
 	/** <code>int</code> representing this viewer part side. */
@@ -109,6 +103,12 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 	private AdapterFactoryLabelProvider adapterLabelProvider = new AdapterFactoryLabelProvider(
 			AdapterUtils.getAdapterFactory());
 
+	private boolean prefZoomToElement;
+	private boolean prefRelayoutDiagram;
+	private boolean prefCollapseUnchanged;
+	private boolean prefEnableSelection;
+	private boolean prefEnableScrolling;
+
 	/**
 	 * Creates a tree viewer under the given parent control.
 	 * 
@@ -124,9 +124,14 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 
 		/* standards */
 		super();
+		updatePreferences();
 		createControl(parentComposite);
 		partSide = side;
 		parent = parentFolder;
+
+		/* read in preferences every time the change */
+		KivikPlugin.getDefault().getPreferenceStore()
+				.addPropertyChangeListener(this);
 
 		/* initialize the DiagramGraphicalViewer */
 		setEditDomain(new DiagramEditDomain(null));
@@ -138,7 +143,8 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 
 		/* fetch some often needed objects */
 		rootEditPart = (RenderedDiagramRootEditPart) getRootEditPart();
-		zoomManager = rootEditPart.getZoomManager();
+
+		zoomManager = (ZoomManager) rootEditPart.getZoomManager();
 		viewport = zoomManager.getViewport();
 		feedbackLayer = (FreeformLayer) rootEditPart
 				.getLayer(DiagramRootEditPart.FEEDBACK_LAYER);
@@ -146,10 +152,11 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 				.getLayer(DiagramRootEditPart.PRIMARY_LAYER);
 
 		/* set some initial values and options */
-		zoomManager.setZoomAnimationStyle(ZoomManager.ANIMATE_NEVER);
-		zoomManager.setZoom(zoom);
-
-		// rootEditPart.deactivate();
+		if (prefEnableScrolling) {
+			zoomManager.setZoomAnimationStyle(ZoomManager.ANIMATE_ZOOM_IN_OUT);
+		} else {
+			zoomManager.setZoomAnimationStyle(ZoomManager.ANIMATE_NEVER);
+		}
 	}
 
 	/**
@@ -157,6 +164,8 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 	public void dispose() {
 		dataToDiff.clear();
 		diffToTabObject.clear();
+		KivikPlugin.getDefault().getPreferenceStore()
+				.removePropertyChangeListener(this);
 	}
 
 	/**
@@ -189,17 +198,23 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 		mapDiffGroups();
 		mapDiffToTabObjects();
 
-		collapseUnchanged(diagram);
+		if (prefCollapseUnchanged) {
+			collapseUnchanged(diagram);
+		}
+		if (prefRelayoutDiagram || prefCollapseUnchanged) {
+			KimlAbstractLayouter diagramLayouter = DiagramLayouters
+					.getInstance().getDiagramLayouter(
+							SafeStateMachineDiagramEditor.ID);
+			diagramLayouter.layout(getEditPartRegistry().get(diagram));
+		}
+		viewport.validate();
+		primaryLayer.validate();
+		zoomManager.zoomTo(((GraphicalEditPart)getEditPartRegistry().get(diagram)).getContentPane().getBounds());
 
-		KimlAbstractLayouter SSMLayouter = DiagramLayouters.getInstance().getDiagramLayouter(SafeStateMachineDiagramEditor.ID);
-		// rootEditPart.activate();
-
-		SSMLayouter.layout(getEditPartRegistry().get(diagram));
-		
+		if (!prefEnableSelection) {
+			primaryLayer.setEnabled(false);
+		}
 		colorizeEditParts();
-
-		// TODO: find better method
-		// rootEditPart.deactivate();
 
 	}
 
@@ -271,13 +286,12 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 					ShapeCompartmentEditPart scep = (ShapeCompartmentEditPart) changedEditPart
 							.getChildren().get(0);
 					scep.getFigure().setToolTip(
-							getToolTip(changedEditPart));
+							getToolTip(changedEditPart, highlightColor));
 				} else {
 					changedEditPart.getContentPane().setToolTip(
-							getToolTip(changedEditPart));
+							getToolTip(changedEditPart, highlightColor));
 				}
 
-				System.out.println("dummy");
 			}
 		}
 	}
@@ -533,7 +547,7 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 
 	@Override
 	public void showElements(List<DiffElement> diffElements) {
-
+		deselectAll();
 		final List<AbstractGraphicalEditPart> newSelection = new ArrayList<AbstractGraphicalEditPart>();
 		AbstractGraphicalEditPart editPart = null;
 
@@ -565,10 +579,9 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 
 			}
 		}
-		// deselectAll();
-		markEditParts(newSelection);
-		// setSelection(new StructuredSelection(newSelection));
 
+		markEditParts(newSelection);
+		
 	}
 
 	private void markEditParts(List<AbstractGraphicalEditPart> editParts) {
@@ -576,8 +589,25 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 		viewport.invalidate();
 		feedbackLayer.invalidate();
 
-		for (AbstractGraphicalEditPart editPart : editParts) {
+		if (editParts.size() > 0) {
+			AbstractGraphicalEditPart editPart = editParts.get(0);
+
+			/* scrolling and zoom */
 			IFigure fig = editPart.getFigure();
+			Rectangle figBounds = translateFromTo(fig, viewport);
+
+			Rectangle newZoomLocation = new Rectangle();
+			newZoomLocation.setSize(viewport.getSize());
+			newZoomLocation.setLocation(figBounds.getCenter().translate(
+					viewport.getBounds().getCenter().negate()));
+
+			if (prefZoomToElement) {
+				zoomManager.zoomTo(figBounds.expand(50, 50));
+			} else {
+				zoomManager.zoomTo(newZoomLocation);
+			}
+
+			// IFigure fig = editPart.getFigure();
 
 			if (editPart.getParent() != null
 					&& editPart.getParent() instanceof AbstractGraphicalEditPart) {
@@ -607,19 +637,7 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 			markerFigure.setLineWidth(5);
 			markerFigure.setForegroundColor(highlightColor);
 			markerFigure.setFill(false);
-		}
-		if (editParts.size() > 0) {
 
-			IFigure fig = editParts.get(0).getFigure();
-			Rectangle figBounds = translateFromTo(fig, feedbackLayer);
-
-			Rectangle newZoomLocation = new Rectangle();
-			newZoomLocation.setSize(viewport.getSize());
-			newZoomLocation.setLocation(figBounds.getCenter().translate(
-					viewport.getBounds().getCenter().negate()));
-
-			zoomManager.setViewLocation(new Point(0, 0));
-			zoomManager.zoomTo(newZoomLocation);
 		}
 	}
 
@@ -732,13 +750,17 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 		return newBounds;
 	}
 
-	private IFigure getToolTip(AbstractGraphicalEditPart changedEditPart) {
+	private IFigure getToolTip(AbstractGraphicalEditPart changedEditPart,
+			Color highlightColor) {
+
 		DiffElement diffElement = dataToRecursivelyDiff
 				.get(((View) changedEditPart.getModel()).getElement());
+
 		if (diffElement != null) {
 			/* get the nicely formatted text */
 
 			String text = null;
+			Image image = null;
 			if (diffElement instanceof AbstractDiffExtension) {
 				text = ((AbstractDiffExtension) diffElement).getText();
 			} else {
@@ -746,28 +768,17 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 					text = ((IFile) diffElement).getName();
 				} else {
 					text = adapterLabelProvider.getText(diffElement);
+					image = adapterLabelProvider.getImage(diffElement);
 				}
 			}
 
-			RoundedRectangle toolTip = new RoundedRectangle();
-
-			toolTip.setSize(200, 200);
-			toolTip.setLineWidth(2);
-			toolTip.setFill(false);
-
-			TextFlow textFlow = new TextFlow(text);
-			textFlow.setFont(new Font(null, java.awt.Font.SANS_SERIF, 10,
-					java.awt.Font.ITALIC));
-			FlowPage page = new FlowPage();
-			page.setLayoutManager(new PageFlowLayout(page));
-			page.setFont(new Font(null, java.awt.Font.SANS_SERIF, 10,
-					java.awt.Font.ITALIC));
-			page.add(textFlow);
-			page.setSize(200, 200);
-			page.validate();
-			toolTip.add(page);
-			toolTip.setVisible(true);
-			return toolTip;
+			Label smallToolTip = new Label(text);
+			smallToolTip.setBorder(new MarginBorder(8));
+			smallToolTip.setBackgroundColor(highlightColor);
+			smallToolTip.setIcon(image);
+			smallToolTip.setIconAlignment(PositionConstants.LEFT);
+			smallToolTip.setIconTextGap(5);
+			return smallToolTip;
 		} else {
 			return null;
 		}
@@ -791,5 +802,26 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 			// TODO: use correct color
 		}
 		return new Color(null, ModelContentMergeViewer.getColor(curveColor));
+	}
+
+	@Override
+	public void propertyChange(PropertyChangeEvent event) {
+		updatePreferences();
+	}
+
+	private void updatePreferences() {
+		IPreferenceStore prefs = KivikPlugin.getDefault().getPreferenceStore();
+		prefRelayoutDiagram = prefs
+				.getBoolean(PreferenceConstants.PREF_KIVIK_ENABLE_AUTO_LAYOUT);
+		prefCollapseUnchanged = prefs
+				.getBoolean(PreferenceConstants.PREF_KIVIK_ENABLE_COLLAPSING_OF_UNCHANGED_ELEMENTS);
+		prefEnableSelection = prefs
+				.getBoolean(PreferenceConstants.PREF_KIVIK_ENABLE_SELECTING_IN_DIAGRAM);
+		prefZoomToElement = prefs
+				.getBoolean(PreferenceConstants.PREF_KIVIK_ENABLE_ZOOMING_TO_CHANGED_ELEMENTS);
+		prefEnableScrolling = prefs
+				.getBoolean(PreferenceConstants.PREF_KIVIK_ENABLE_SCROLLING_ANIMATION);
+		if (primaryLayer != null)
+			primaryLayer.setEnabled(prefEnableSelection);
 	}
 }

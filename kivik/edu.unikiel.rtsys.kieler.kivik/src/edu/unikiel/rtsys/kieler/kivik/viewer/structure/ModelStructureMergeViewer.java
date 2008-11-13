@@ -107,13 +107,13 @@ public class ModelStructureMergeViewer extends TreeViewer {
 	 * {@link CompareViewerPane} toolbar.
 	 */
 	protected void createToolItems() {
-		final ToolBarManager tbm = CompareViewerPane
-				.getToolBarManager(getControl().getParent());
-		if (exportMenu == null)
-			// exportMenu = new ExportMenu(tbm.getControl(), this);
-			tbm.add(new Separator("IO")); //$NON-NLS-1$
+		//final ToolBarManager tbm = CompareViewerPane
+		//		.getToolBarManager(getControl().getParent());
+		//if (exportMenu == null)
+		//	 exportMenu = new ExportMenu(tbm.getControl(), this);
+		//	tbm.add(new Separator("IO")); //$NON-NLS-1$
 		//		tbm.appendToGroup("IO", exportMenu); //$NON-NLS-1$
-		tbm.update(true);
+		//tbm.update(true);
 	}
 
 	/**

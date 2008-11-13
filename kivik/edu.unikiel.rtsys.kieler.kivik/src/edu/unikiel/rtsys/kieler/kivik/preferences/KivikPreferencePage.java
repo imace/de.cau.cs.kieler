@@ -1,17 +1,18 @@
 package edu.unikiel.rtsys.kieler.kivik.preferences;
 
-import org.eclipse.jface.preference.*;
+import org.eclipse.jface.preference.BooleanFieldEditor;
+import org.eclipse.jface.preference.FieldEditorPreferencePage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Group;
-import org.eclipse.ui.IWorkbenchPreferencePage;
+import org.eclipse.swt.widgets.Label;
 import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.IWorkbenchPreferencePage;
 import org.eclipse.ui.dialogs.PreferenceLinkArea;
 import org.eclipse.ui.preferences.IWorkbenchPreferenceContainer;
 
-import edu.unikiel.rtsys.kieler.kivik.Activator;
-import edu.unikiel.rtsys.kieler.kivik.KivikUIMessages;
+import edu.unikiel.rtsys.kieler.kivik.KivikPlugin;
 
 /**
  * This class represents a preference page that is contributed to the
@@ -29,8 +30,8 @@ public class KivikPreferencePage extends FieldEditorPreferencePage implements
 
 	public KivikPreferencePage() {
 		super(GRID);
-		setPreferenceStore(Activator.getDefault().getPreferenceStore());
-		setDescription(KivikUIMessages.getString("KivikPreferencePage.setKivikPreferencesHere")); //$NON-NLS-1$
+		setPreferenceStore(KivikPlugin.getDefault().getPreferenceStore());
+		setDescription("Set options for the KiViK Plugin:"); //$NON-NLS-1$
 	}
 
 	/**
@@ -39,31 +40,85 @@ public class KivikPreferencePage extends FieldEditorPreferencePage implements
 	 * editor knows how to save and restore itself.
 	 */
 	public void createFieldEditors() {
-		// Link to the content types page
-		final PreferenceLinkArea link = new PreferenceLinkArea(getFieldEditorParent(), SWT.NONE,
-				"org.eclipse.ui.preferencePages.ContentTypes", //$NON-NLS-1$
-				"See <a>{0}</a> to define model types", //$NON-NLS-1$
-				(IWorkbenchPreferenceContainer)getContainer(), null);
+
 		// define gl as GridLayout globally
 		GridLayout gl = null;
 
-		// options group
-		Group options = new Group(this.getFieldEditorParent(), SWT.NONE);
-		options.setText(KivikUIMessages.getString("KivikPreferencePage.options")); //$NON-NLS-1$
+		// Link to the content types page
+		Group contentTypes = new Group(this.getFieldEditorParent(), SWT.NONE);
+		contentTypes.setText("Content types");
+		new PreferenceLinkArea(contentTypes,
+				SWT.NONE,
+				"org.eclipse.ui.preferencePages.ContentTypes", //$NON-NLS-1$
+				"See <a>{0}</a> to define model types",
+				(IWorkbenchPreferenceContainer) getContainer(), null);
+		Label contentTypesDescription = new Label(contentTypes, SWT.WRAP);
+		contentTypesDescription
+				.setText("You have to register the content types of the models you want to compare graphically. This is done globally.");
+		contentTypes.setLayoutData(new GridData(GridData.FILL, GridData.FILL,
+				true, false, 1, 1));
+		gl = new GridLayout(1, true);
+		gl.marginWidth = 15;
+		gl.marginHeight = 10;
+		contentTypes.setLayout(gl);
 
-		StringFieldEditor sfe = new StringFieldEditor(
-				PreferenceConstants.P_STRING,
-				KivikUIMessages.getString("KivikPreferencePage.paddingX"), options); //$NON-NLS-1$
-		
+		/* ========= options group ======= */
+		Group options = new Group(this.getFieldEditorParent(), SWT.NONE);
+		options.setText("Options");
+
+		/* selection */
+		BooleanFieldEditor selectable = new BooleanFieldEditor(
+				PreferenceConstants.PREF_KIVIK_ENABLE_SELECTING_IN_DIAGRAM,
+				"Enable selection in diagram", options);
+		Label selectableDescription = new Label(options, SWT.WRAP);
+		selectableDescription
+				.setText("If enabled, it is possible to click on elements in one of the diagrams and to get the corresponding highlighted in the other diagram.");
+
+		/* scrolling animation */
+		BooleanFieldEditor scollingAnimation = new BooleanFieldEditor(
+				PreferenceConstants.PREF_KIVIK_ENABLE_SCROLLING_ANIMATION,
+				"Animate scrolling", options);
+		Label scollingAnimationDescription = new Label(options, SWT.WRAP);
+		scollingAnimationDescription
+				.setText("If enabled, the scrolling to the corresponding changed elements is animated, mainting the mental map of the user.");
+
+		/* zooming */
+		BooleanFieldEditor zooming = new BooleanFieldEditor(
+				PreferenceConstants.PREF_KIVIK_ENABLE_ZOOMING_TO_CHANGED_ELEMENTS,
+				"Zoom to differences", options);
+		Label zoomingDescription = new Label(options, SWT.WRAP);
+		zoomingDescription
+				.setText("If enabled, the viewer will zoom to the selected changed elements.");
+
+		/* layout */
+		BooleanFieldEditor layout = new BooleanFieldEditor(
+				PreferenceConstants.PREF_KIVIK_ENABLE_AUTO_LAYOUT,
+				"Layout diagrams", options);
+		Label layoutDescription = new Label(options, SWT.WRAP);
+		layoutDescription
+				.setText("If enabled, it the two diagrams to compare are laid out newly from scratch.");
+
+		/* collapsing */
+		BooleanFieldEditor collapsing = new BooleanFieldEditor(
+				PreferenceConstants.PREF_KIVIK_ENABLE_COLLAPSING_OF_UNCHANGED_ELEMENTS,
+				"Collapse unchanged elements", options);
+		Label collapsingDescription = new Label(options, SWT.WRAP);
+		collapsingDescription
+				.setText("If enabled, contained elements that are not changed are collapsed and hidden to the user. This forces relayout.");
+	
 		options.setLayoutData(new GridData(GridData.FILL, GridData.FILL, true,
-				false, 2, 1));
-		gl = new GridLayout(2, true);
+				false, 1, 1));
+		gl = new GridLayout(1, true);
 		gl.marginWidth = 15;
 		gl.marginHeight = 10;
 		options.setLayout(gl);
 
-				// now add all the stuff
-		addField(sfe);
+		// now add all the stuff
+		addField(selectable);
+		addField(scollingAnimation);
+		addField(zooming);
+		addField(layout);
+		addField(collapsing);
 
 	}
 

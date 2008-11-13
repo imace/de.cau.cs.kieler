@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Kivik Plug-in
 Bundle-SymbolicName: edu.unikiel.rtsys.kieler.kivik; singleton:=true
 Bundle-Version: 1.0.0
-Bundle-Activator: edu.unikiel.rtsys.kieler.kivik.Activator
+Bundle-Activator: edu.unikiel.rtsys.kieler.kivik.KivikPlugin
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.emf.compare;bundle-version="0.8.0",

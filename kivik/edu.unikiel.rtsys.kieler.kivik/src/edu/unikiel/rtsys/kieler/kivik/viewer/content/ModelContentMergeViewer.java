@@ -15,12 +15,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.ResourceBundle;
 
 import org.eclipse.compare.CompareConfiguration;
 import org.eclipse.compare.CompareViewerPane;
 import org.eclipse.compare.HistoryItem;
 import org.eclipse.compare.contentmergeviewer.ContentMergeViewer;
 import org.eclipse.compare.contentmergeviewer.IMergeViewerContentProvider;
+import org.eclipse.compare.internal.Utilities;
 import org.eclipse.compare.structuremergeviewer.ICompareInput;
 import org.eclipse.emf.compare.EMFComparePlugin;
 import org.eclipse.emf.compare.diff.metamodel.DiffElement;
@@ -28,6 +30,7 @@ import org.eclipse.emf.compare.diff.metamodel.DiffFactory;
 import org.eclipse.emf.compare.diff.metamodel.DiffGroup;
 import org.eclipse.emf.compare.diff.metamodel.ModelInputSnapshot;
 import org.eclipse.emf.compare.diff.metamodel.util.DiffAdapterFactory;
+import org.eclipse.emf.compare.ui.AbstractCompareAction;
 import org.eclipse.emf.compare.ui.EMFCompareUIMessages;
 import org.eclipse.emf.compare.ui.EMFCompareUIPlugin;
 import org.eclipse.emf.compare.ui.ICompareEditorPartListener;
@@ -38,6 +41,7 @@ import org.eclipse.emf.compare.ui.util.EMFCompareConstants;
 import org.eclipse.emf.compare.util.EMFCompareMap;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.action.Action;
+import org.eclipse.jface.action.ActionContributionItem;
 import org.eclipse.jface.action.ToolBarManager;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.preference.PreferenceConverter;
@@ -82,7 +86,7 @@ public class ModelContentMergeViewer extends ContentMergeViewer {
 	 * Indicates that the diff markers should be drawn. This allows defining a
 	 * threshold to avoid too long drawing times.
 	 */
-	private static boolean drawDiffMarkers;
+	public static boolean drawDiffMarkers;
 
 	/** Keeps track of the currently selected tab for this viewer part. */
 	protected int activeTabIndex;
@@ -494,64 +498,64 @@ public class ModelContentMergeViewer extends ContentMergeViewer {
 	 */
 	@Override
 	protected void createToolItems(ToolBarManager tbm) {
-		// COPY DIFF LEFT TO RIGHT
-		// if (getCompareConfiguration().isRightEditable()) {
-		// copyDiffLeftToRight = new
-		// AbstractCompareAction(ResourceBundle.getBundle(BUNDLE_NAME),
-		//					"action.CopyDiffLeftToRight.") { //$NON-NLS-1$
-		// @Override
-		// public void run() {
-		// copyDiffLeftToRight();
-		// }
-		// };
-		// final ActionContributionItem copyLeftToRightContribution = new
-		// ActionContributionItem(
-		// copyDiffLeftToRight);
-		// copyLeftToRightContribution.setVisible(true);
-		//			tbm.appendToGroup("merge", copyLeftToRightContribution); //$NON-NLS-1$
-		// }
-		// // COPY DIFF RIGHT TO LEFT
-		// if (getCompareConfiguration().isLeftEditable()) {
-		// copyDiffRightToLeft = new
-		// AbstractCompareAction(ResourceBundle.getBundle(BUNDLE_NAME),
-		//					"action.CopyDiffRightToLeft.") { //$NON-NLS-1$
-		// @Override
-		// public void run() {
-		// copyDiffRightToLeft();
-		// }
-		// };
-		// final ActionContributionItem copyRightToLeftContribution = new
-		// ActionContributionItem(
-		// copyDiffRightToLeft);
-		// copyRightToLeftContribution.setVisible(true);
-		//			tbm.appendToGroup("merge", copyRightToLeftContribution); //$NON-NLS-1$
-		// }
-		// // NEXT DIFF
-		// final Action nextDiff = new
-		// AbstractCompareAction(ResourceBundle.getBundle(BUNDLE_NAME),
-		//				"action.NextDiff.") { //$NON-NLS-1$
-		// @Override
-		// public void run() {
-		// navigate(true);
-		// }
-		// };
-		// final ActionContributionItem nextDiffContribution = new
-		// ActionContributionItem(nextDiff);
-		// nextDiffContribution.setVisible(true);
-		//		tbm.appendToGroup("navigation", nextDiffContribution); //$NON-NLS-1$
-		// // PREVIOUS DIFF
-		// final Action previousDiff = new
-		// AbstractCompareAction(ResourceBundle.getBundle(BUNDLE_NAME),
-		//				"action.PrevDiff.") { //$NON-NLS-1$
-		// @Override
-		// public void run() {
-		// navigate(false);
-		// }
-		// };
-		// final ActionContributionItem previousDiffContribution = new
-		// ActionContributionItem(previousDiff);
-		// previousDiffContribution.setVisible(true);
-		//		tbm.appendToGroup("navigation", previousDiffContribution); //$NON-NLS-1$
+		// hack
+		tbm.removeAll();
+		
+//		// COPY DIFF LEFT TO RIGHT
+//		if (getCompareConfiguration().isRightEditable()) {
+//			copyDiffLeftToRight = new AbstractCompareAction(ResourceBundle
+//					.getBundle(BUNDLE_NAME), "action.CopyDiffLeftToRight.") { //$NON-NLS-1$
+//				@Override
+//				public void run() {
+//					copyDiffLeftToRight();
+//				}
+//			};
+//			final ActionContributionItem copyLeftToRightContribution = new ActionContributionItem(
+//					copyDiffLeftToRight);
+//			copyLeftToRightContribution.setVisible(false);
+//			tbm.appendToGroup("merge", copyLeftToRightContribution); //$NON-NLS-1$
+//		}
+//		
+//		// COPY DIFF RIGHT TO LEFT
+//		if (getCompareConfiguration().isLeftEditable()) {
+//			copyDiffRightToLeft = new AbstractCompareAction(ResourceBundle
+//					.getBundle(BUNDLE_NAME), "action.CopyDiffRightToLeft.") { //$NON-NLS-1$
+//				@Override
+//				public void run() {
+//					copyDiffRightToLeft();
+//				}
+//			};
+//			final ActionContributionItem copyRightToLeftContribution = new ActionContributionItem(
+//					copyDiffRightToLeft);
+//			copyRightToLeftContribution.setVisible(false);
+//			tbm.appendToGroup("merge", copyRightToLeftContribution); //$NON-NLS-1$
+//		}
+//		
+//		// NEXT DIFF
+//		final Action nextDiff = new AbstractCompareAction(ResourceBundle
+//				.getBundle(BUNDLE_NAME), "action.NextDiff.") { //$NON-NLS-1$
+//			@Override
+//			public void run() {
+//				navigate(true);
+//			}
+//		};
+//		final ActionContributionItem nextDiffContribution = new ActionContributionItem(
+//				nextDiff);
+//		nextDiffContribution.setVisible(false);
+//		tbm.appendToGroup("navigation", nextDiffContribution); //$NON-NLS-1$
+//		
+//		// PREVIOUS DIFF
+//		final Action previousDiff = new AbstractCompareAction(ResourceBundle
+//				.getBundle(BUNDLE_NAME), "action.PrevDiff.") { //$NON-NLS-1$
+//			@Override
+//			public void run() {
+//				navigate(false);
+//			}
+//		};
+//		final ActionContributionItem previousDiffContribution = new ActionContributionItem(
+//				previousDiff);
+//		previousDiffContribution.setVisible(false);
+//		tbm.appendToGroup("navigation", previousDiffContribution); //$NON-NLS-1$
 	}
 
 	/**
@@ -979,7 +983,9 @@ public class ModelContentMergeViewer extends ContentMergeViewer {
 		colors.put(EMFCompareConstants.PREFERENCES_KEY_REMOVED_COLOR,
 				removedColor);
 	}
-
+	public String getTitle(){
+		return "Visualization of Diagram Differences";
+	}
 	/**
 	 * Updates the value of the boolean indicating that we should ignore diff
 	 * markers as it is changed on the preference page.
