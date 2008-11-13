@@ -1,10 +1,6 @@
 package edu.unikiel.rtsys.kieler.kiml.layouter.example.preferences;
 
-import java.util.ArrayList;
-
 import org.eclipse.jface.preference.BooleanFieldEditor;
-import org.eclipse.jface.preference.FieldEditor;
-import org.eclipse.jface.preference.FieldEditorPreferencePage;
 import org.eclipse.jface.preference.IntegerFieldEditor;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
@@ -13,10 +9,8 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
-import edu.unikiel.rtsys.kieler.kiml.layout.services.KimlAbstractLayoutProvider;
-import edu.unikiel.rtsys.kieler.kiml.layout.services.LayoutProviders;
-import edu.unikiel.rtsys.kieler.kiml.layout.util.KimlLayoutUtilPreferencePage;
 import edu.unikiel.rtsys.kieler.kiml.layouter.example.Activator;
+import edu.unikiel.rtsys.kieler.kiml.ui.AbstractKimlLayoutProviderPreferencePage;
 
 /**
  * This class represents a preference page that is contributed to the
@@ -29,13 +23,15 @@ import edu.unikiel.rtsys.kieler.kiml.layouter.example.Activator;
  * preferences can be accessed directly via the preference store.
  */
 
-public class ExampleLayouterPreferencePage extends FieldEditorPreferencePage
+public class ExampleLayouterPreferencePage extends AbstractKimlLayoutProviderPreferencePage
 		implements IWorkbenchPreferencePage {
 
+	private final static String LAYOUT_PROVIDER_COLLECTION_ID = Activator.LAYOUT_PROVIDER_COLLECTION_ID;
+
 	public ExampleLayouterPreferencePage() {
-		super(GRID);
+		super(LAYOUT_PROVIDER_COLLECTION_ID,GRID);
 		setPreferenceStore(Activator.getDefault().getPreferenceStore());
-		setDescription("Set the options for the Example Layout engine");
+		setDescription("Set the options for the Example Layout engine:");
 	}
 
 	/**
@@ -44,6 +40,7 @@ public class ExampleLayouterPreferencePage extends FieldEditorPreferencePage
 	 * editor knows how to save and restore itself.
 	 */
 	public void createFieldEditors() {
+		super.createFieldEditors();
 		// define gl as GridLayout globally
 		GridLayout gl = null;
 
@@ -67,33 +64,11 @@ public class ExampleLayouterPreferencePage extends FieldEditorPreferencePage
 		gl.marginHeight = 10;
 		options.setLayout(gl);
 
-		ArrayList<KimlAbstractLayoutProvider> exampleLayoutProviders = LayoutProviders
-				.getInstance().getLayoutProvidersOfCollection(Activator.LAYOUT_PROVIDER_COLLECTION_ID);
-		// layouters group
-		ArrayList<FieldEditor> editorsToAdd = KimlLayoutUtilPreferencePage
-				.createLayouterTable(this.getFieldEditorParent(),
-						exampleLayoutProviders);
-
 		// now add all the stuff
 		addField(padx);
 		addField(pady);
 		addField(direction);
 
-		for (FieldEditor editorToAdd : editorsToAdd) {
-			addField(editorToAdd);
-		}
-	}
-
-	@Override
-	public boolean performOk() {
-		boolean retVal = super.performOk();
-		for (KimlAbstractLayoutProvider exampleLayoutProvider : LayoutProviders
-				.getInstance().getLayoutProvidersOfCollection(Activator.LAYOUT_PROVIDER_COLLECTION_ID)) {
-			boolean state = getPreferenceStore().getBoolean(
-					exampleLayoutProvider.getLayouterInfo().getLayouterName());
-			exampleLayoutProvider.setEnabled(state);
-		}
-		return retVal;
 	}
 
 	/*
