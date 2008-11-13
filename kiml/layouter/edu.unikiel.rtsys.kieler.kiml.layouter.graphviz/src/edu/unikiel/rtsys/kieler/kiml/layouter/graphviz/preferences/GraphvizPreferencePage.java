@@ -1,13 +1,9 @@
 package edu.unikiel.rtsys.kieler.kiml.layouter.graphviz.preferences;
 
-import java.util.ArrayList;
-
 import kiel.layouter.graphviz.GraphvizLayoutProviderNames;
 
 import org.eclipse.jface.preference.BooleanFieldEditor;
 import org.eclipse.jface.preference.DirectoryFieldEditor;
-import org.eclipse.jface.preference.FieldEditor;
-import org.eclipse.jface.preference.FieldEditorPreferencePage;
 import org.eclipse.jface.preference.IntegerFieldEditor;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
@@ -17,10 +13,8 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
-import edu.unikiel.rtsys.kieler.kiml.layout.services.KimlAbstractLayoutProvider;
-import edu.unikiel.rtsys.kieler.kiml.layout.services.LayoutProviders;
-import edu.unikiel.rtsys.kieler.kiml.layout.util.KimlLayoutUtilPreferencePage;
 import edu.unikiel.rtsys.kieler.kiml.layouter.graphviz.Activator;
+import edu.unikiel.rtsys.kieler.kiml.ui.AbstractKimlLayoutProviderPreferencePage;
 
 /**
  * This class represents a preference page that is contributed to the
@@ -33,13 +27,16 @@ import edu.unikiel.rtsys.kieler.kiml.layouter.graphviz.Activator;
  * preferences can be accessed directly via the preference store.
  */
 
-public class GraphvizPreferencePage extends FieldEditorPreferencePage implements
+public class GraphvizPreferencePage extends
+		AbstractKimlLayoutProviderPreferencePage implements
 		IWorkbenchPreferencePage {
 
+	private final static String LAYOUT_PROVIDER_COLLECTION_ID = GraphvizLayoutProviderNames.LAYOUT_PROVIDER_COLLECTION_ID;
+
 	public GraphvizPreferencePage() {
-		super(GRID);
+		super(LAYOUT_PROVIDER_COLLECTION_ID, GRID);
 		setPreferenceStore(Activator.getDefault().getPreferenceStore());
-		setDescription("Set the options for the GraphViz layout engine");
+		setDescription("Set the options for the GraphViz layout engine:");
 	}
 
 	/**
@@ -48,6 +45,8 @@ public class GraphvizPreferencePage extends FieldEditorPreferencePage implements
 	 * editor knows how to save and restore itself.
 	 */
 	public void createFieldEditors() {
+		super.createFieldEditors();
+		
 		// define gl as GridLayout globally
 		GridLayout gl = null;
 
@@ -68,11 +67,6 @@ public class GraphvizPreferencePage extends FieldEditorPreferencePage implements
 		gl.marginWidth = 15;
 		gl.marginHeight = 10;
 		padding.setLayout(gl);
-
-		// layouters group
-		ArrayList<FieldEditor> editorsToAdd = KimlLayoutUtilPreferencePage.createLayouterTable(this.getFieldEditorParent(),
-				LayoutProviders.getInstance().getLayoutProvidersOfCollection(
-						"GraphViz Collection"));
 
 		// debug group
 		Group debug = new Group(this.getFieldEditorParent(), SWT.NONE);
@@ -100,27 +94,10 @@ public class GraphvizPreferencePage extends FieldEditorPreferencePage implements
 		addField(padx);
 		addField(pady);
 
-		for (FieldEditor editorToAdd : editorsToAdd){
-			addField(editorToAdd);
-		}
 		addField(enableDebug);
 		addField(debugDir);
 	}
 
-	@Override
-	public boolean performOk() {
-		boolean retVal = super.performOk();
-		for (KimlAbstractLayoutProvider exampleLayoutProvider : LayoutProviders
-				.getInstance()
-				.getLayoutProvidersOfCollection(
-						GraphvizLayoutProviderNames.LAYOUT_PROVIDER_COLLECTION_ID)) {
-			boolean state = getPreferenceStore().getBoolean(
-					exampleLayoutProvider.getLayouterInfo().getLayouterName());
-			exampleLayoutProvider.setEnabled(state);
-		}
-		return retVal;
-	}
-	
 	/*
 	 * (non-Javadoc)
 	 * 
