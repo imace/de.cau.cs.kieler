@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
 import org.eclipse.jface.preference.RadioGroupFieldEditor;
+import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Group;
@@ -31,6 +32,7 @@ public class LayoutProvidersPreferencePage extends FieldEditorPreferencePage imp
 	public LayoutProvidersPreferencePage() {
 		super(GRID);
 		setPreferenceStore(KimlLayoutPlugin.getDefault().getPreferenceStore());
+		getPreferenceStore().addPropertyChangeListener(this);
 		setDescription("Set here the general layout options that do not apply to a specific layout engine");
 	}
 
@@ -47,14 +49,16 @@ public class LayoutProvidersPreferencePage extends FieldEditorPreferencePage imp
 		Group defaultLayouter = new Group(this.getFieldEditorParent(), SWT.NONE);
 		defaultLayouter.setText("Default Layout Provider");
 		String[][] options = getAvailableLayouterNames();
-		addField(new RadioGroupFieldEditor(
+		RadioGroupFieldEditor radioGroupDefaultLayouter=new RadioGroupFieldEditor(
 				KimlLayoutPreferenceConstants.PREF_LAYOUTPROVIDERS_DEFAULT_LAYOUT_PROVIDER, "Choose the default layout provider:",
-				2, options, defaultLayouter));
-
+				2, options, defaultLayouter);
+		
+		addField(radioGroupDefaultLayouter);
 		gl = new GridLayout(1, true);
 		gl.marginWidth = 15;
 		gl.marginHeight = 10;
 		defaultLayouter.setLayout(gl);
+		
 	}
 
 	/*
@@ -64,11 +68,13 @@ public class LayoutProvidersPreferencePage extends FieldEditorPreferencePage imp
 	 * org.eclipse.ui.IWorkbenchPreferencePage#init(org.eclipse.ui.IWorkbench)
 	 */
 	public void init(IWorkbench workbench) {
+		System.out.println("init");
 	}
 	
+
 	private String[][] getAvailableLayouterNames() {
 		ArrayList<String> names = LayoutProviders.getInstance()
-				.getAvailableLayouterNames();
+				.getEnabledLayouterNames();
 		String[][] options = new String[names.size()][2];
 
 		for (int i = 0; i < options.length; i++) {
@@ -77,4 +83,12 @@ public class LayoutProvidersPreferencePage extends FieldEditorPreferencePage imp
 		}
 		return options;
 	}
+
+	
+	@Override
+	public void propertyChange(PropertyChangeEvent event) {
+		super.propertyChange(event);
+	}
+	
+
 }
