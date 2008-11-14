@@ -192,8 +192,12 @@ public final class LayoutProviders implements IPropertyChangeListener {
 	@Override
 	public void propertyChange(PropertyChangeEvent event) {
 		String layouterName = event.getProperty();
-		boolean state = Boolean.parseBoolean((String) event.getNewValue());
-		if (layoutProviderMap.containsKey(layouterName))
-			layoutProviderMap.get(layouterName).setEnabled(state);
+		try {
+			boolean state = Boolean.parseBoolean((String) event.getNewValue());
+			if (layoutProviderMap.containsKey(layouterName))
+				layoutProviderMap.get(layouterName).setEnabled(state);
+		} catch (Exception e) {
+			;
+		}
 	}
 }
