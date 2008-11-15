@@ -16,9 +16,12 @@ import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.draw2d.FreeformLayer;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.Label;
+import org.eclipse.draw2d.LayoutListener;
 import org.eclipse.draw2d.MarginBorder;
 import org.eclipse.draw2d.PositionConstants;
+import org.eclipse.draw2d.RangeModel;
 import org.eclipse.draw2d.RoundedRectangle;
+import org.eclipse.draw2d.ScalableFreeformLayeredPane;
 import org.eclipse.draw2d.Viewport;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -39,7 +42,12 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.gef.ConnectionEditPart;
+import org.eclipse.gef.EditPart;
+import org.eclipse.gef.EditPartListener;
+import org.eclipse.gef.MouseWheelHandler;
+import org.eclipse.gef.MouseWheelZoomHandler;
 import org.eclipse.gef.editparts.AbstractGraphicalEditPart;
+import org.eclipse.gef.editparts.ZoomListener;
 import org.eclipse.gef.editparts.ZoomManager;
 import org.eclipse.gmf.runtime.diagram.core.DiagramEditingDomainFactory;
 import org.eclipse.gmf.runtime.diagram.core.util.ViewUtil;
@@ -59,6 +67,7 @@ import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.util.IPropertyChangeListener;
 import org.eclipse.jface.util.PropertyChangeEvent;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Composite;
@@ -145,18 +154,28 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 		rootEditPart = (RenderedDiagramRootEditPart) getRootEditPart();
 
 		zoomManager = (ZoomManager) rootEditPart.getZoomManager();
+		
+		feedbackLayer = new FreeformLayer();
+		feedbackLayer.setEnabled(false);
+		ScalableFreeformLayeredPane scalableLayers = (ScalableFreeformLayeredPane)rootEditPart.getLayer(DiagramRootEditPart.SCALABLE_LAYERS);
+		
+		scalableLayers.add(feedbackLayer, DiagramRootEditPart.SCALED_FEEDBACK_LAYER);
 		viewport = zoomManager.getViewport();
-		feedbackLayer = (FreeformLayer) rootEditPart
-				.getLayer(DiagramRootEditPart.FEEDBACK_LAYER);
+	
 		primaryLayer = (BorderItemsAwareFreeFormLayer) rootEditPart
 				.getLayer(DiagramRootEditPart.PRIMARY_LAYER);
-
+		
+		zoomManager.setZoom(1.0f);
 		/* set some initial values and options */
 		if (prefEnableScrolling) {
 			zoomManager.setZoomAnimationStyle(ZoomManager.ANIMATE_ZOOM_IN_OUT);
 		} else {
 			zoomManager.setZoomAnimationStyle(ZoomManager.ANIMATE_NEVER);
 		}
+		zoomManager.addZoomListener(new KivikZoomListener());
+//System.out.println(viewport.getVerticalRangeModel());
+
+		//toolBarManager.add(new ZoomComboContributionItem(getPage()));
 	}
 
 	/**
@@ -208,14 +227,23 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 			diagramLayouter.layout(getEditPartRegistry().get(diagram));
 		}
 		viewport.validate();
+		
 		primaryLayer.validate();
-		zoomManager.zoomTo(((GraphicalEditPart)getEditPartRegistry().get(diagram)).getContentPane().getBounds());
-
+		
 		if (!prefEnableSelection) {
 			primaryLayer.setEnabled(false);
 		}
 		colorizeEditParts();
 
+		setProperty(MouseWheelHandler.KeyGenerator.getKey(SWT.MOD1), MouseWheelZoomHandler.SINGLETON);
+		
+		//IFigure rect = ((GraphicalEditPart) getEditPartRegistry().get(
+			//	getDiagram())).getContentPane();
+		//rootEditPart.zoomTo(rect.getBounds());
+		//viewport.getContents().validate();
+		//viewport.setVerticalRangeModel(new RangeModel());
+		//zoomManager.zoomTo(new Rectangle(0,0, 1200,1200));
+		//zoomManager.setZoomAsText(ZoomManager.FIT_ALL);
 	}
 
 	private void collapseUnchanged(Diagram diagram) {
@@ -581,7 +609,7 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 		}
 
 		markEditParts(newSelection);
-		
+
 	}
 
 	private void markEditParts(List<AbstractGraphicalEditPart> editParts) {
@@ -597,16 +625,16 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 			Rectangle figBounds = translateFromTo(fig, viewport);
 
 			Rectangle newZoomLocation = new Rectangle();
-			newZoomLocation.setSize(viewport.getSize());
-			newZoomLocation.setLocation(figBounds.getCenter().translate(
-					viewport.getBounds().getCenter().negate()));
+//			newZoomLocation.setSize(viewport.getSize());
+//			newZoomLocation.setLocation(figBounds.getCenter().translate(
+//					viewport.getBounds().getCenter().negate()));
 
 			if (prefZoomToElement) {
 				zoomManager.zoomTo(figBounds.expand(50, 50));
 			} else {
 				zoomManager.zoomTo(newZoomLocation);
 			}
-
+			
 			// IFigure fig = editPart.getFigure();
 
 			if (editPart.getParent() != null
@@ -641,9 +669,6 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 		}
 	}
 
-	@Override
-	public void redraw() {
-	}
 
 	private AbstractGraphicalEditPart findAbstractGraphicalEditPart(
 			EObject target) {
@@ -806,6 +831,10 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 
 	@Override
 	public void propertyChange(PropertyChangeEvent event) {
+		//if (event.getProperty().equals(Constants.TRIGGER_FIT_ALL))
+		//{
+			zoomManager.setZoomAsText(ZoomManager.FIT_ALL);
+		//}
 		updatePreferences();
 	}
 
@@ -823,5 +852,20 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 				.getBoolean(PreferenceConstants.PREF_KIVIK_ENABLE_SCROLLING_ANIMATION);
 		if (primaryLayer != null)
 			primaryLayer.setEnabled(prefEnableSelection);
+	}
+
+	@Override
+	public void redraw() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	public class KivikZoomListener implements ZoomListener {
+
+		@Override
+		public void zoomChanged(double zoom) {
+			//zoomManager.setZoomAsText(ZoomManager.FIT_ALL);
+		}
+
 	}
 }

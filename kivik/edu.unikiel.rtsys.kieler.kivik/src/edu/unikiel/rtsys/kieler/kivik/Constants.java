@@ -32,5 +32,7 @@ public interface Constants {
 	public final static int BUSINESS_MODEL = 1002;
 	
 	public final static String DO_NOT_COLORIZE = "do.not.colorize"; //$NON-NLS-1$
+	
+	public final static String TRIGGER_FIT_ALL = "trigger.fit.all";
 
 }

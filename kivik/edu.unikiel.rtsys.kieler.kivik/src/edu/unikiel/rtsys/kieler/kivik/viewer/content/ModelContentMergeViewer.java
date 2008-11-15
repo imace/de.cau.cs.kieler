@@ -40,6 +40,7 @@ import org.eclipse.emf.compare.ui.internal.ModelComparator;
 import org.eclipse.emf.compare.ui.util.EMFCompareConstants;
 import org.eclipse.emf.compare.util.EMFCompareMap;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.gef.ui.actions.ZoomComboContributionItem;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.ActionContributionItem;
 import org.eclipse.jface.action.ToolBarManager;
@@ -60,6 +61,8 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.ScrollBar;
 import org.eclipse.swt.widgets.Scrollable;
 
+import edu.unikiel.rtsys.kieler.kivik.Constants;
+import edu.unikiel.rtsys.kieler.kivik.KivikPlugin;
 import edu.unikiel.rtsys.kieler.kivik.internal.KivikComparator;
 import edu.unikiel.rtsys.kieler.kivik.viewer.content.part.AbstractCenterPart;
 import edu.unikiel.rtsys.kieler.kivik.viewer.content.part.IModelContentMergeViewerTab;
@@ -178,8 +181,10 @@ public class ModelContentMergeViewer extends ContentMergeViewer {
 		// super(SWT.NONE, ResourceBundle.getBundle(BUNDLE_NAME), config); TODO
 		super(SWT.NONE, null, config);
 		configuration = config;
+		drawDiffMarkers=false;
 		buildControl(parent);
 		updatePreferences();
+		drawDiffMarkers=false;
 		setContentProvider(new ModelContentMergeContentProvider(config));
 
 		// disables diff copy from either side
@@ -500,7 +505,8 @@ public class ModelContentMergeViewer extends ContentMergeViewer {
 	protected void createToolItems(ToolBarManager tbm) {
 		// hack
 		tbm.removeAll();
-		
+
+		//tbm.add(new ZoomComboContributionItem(leftPart.getDiagramPart()));
 //		// COPY DIFF LEFT TO RIGHT
 //		if (getCompareConfiguration().isRightEditable()) {
 //			copyDiffLeftToRight = new AbstractCompareAction(ResourceBundle

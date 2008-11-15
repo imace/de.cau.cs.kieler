@@ -54,6 +54,8 @@ import org.eclipse.swt.widgets.Scrollable;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
 
+import edu.unikiel.rtsys.kieler.kivik.Constants;
+import edu.unikiel.rtsys.kieler.kivik.KivikPlugin;
 import edu.unikiel.rtsys.kieler.kivik.KivikUIMessages;
 import edu.unikiel.rtsys.kieler.kivik.viewer.content.ModelContentMergeViewer;
 import edu.unikiel.rtsys.kieler.kivik.viewer.content.part.diagram.ModelContentMergeDiagramTab;
@@ -67,7 +69,7 @@ import edu.unikiel.rtsys.kieler.kivik.viewer.content.part.property.ModelContentM
  */
 public class ModelContentMergeTabFolder {
 	/** This keeps track of the parent viewer of this tab folder. */
-	/* protected */final ModelContentMergeViewer parentViewer;
+	/* protected */ final ModelContentMergeViewer parentViewer;
 
 	/**
 	 * This <code>int</code> represents the side of this viewer part. Must be
@@ -808,5 +810,10 @@ public class ModelContentMergeTabFolder {
 				});
 
 		return diagramPart;
+	}
+
+	public String getTitle() {
+		return "Test";
+
 	}
 }
