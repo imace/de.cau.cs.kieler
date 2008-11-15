@@ -37,11 +37,17 @@ public class DiagramLayoutersPreferencePage extends FieldEditorPreferencePage
 	 */
 	public void createFieldEditors() {
 		addField(new BooleanFieldEditor(
-				KimlLayoutPreferenceConstants.PREF_DIAGRAMLAYOUTERS_DO_NOT_LAYOUT_CONNECTION_LABELS,
+				KimlLayoutPreferenceConstants.PREF_DIAGRAMLAYOUTERS_USE_GMF_TO_LAYOUT_CONNECTION_LABELS,
 				"Use GMF to layout connection lables", getFieldEditorParent()));
-		Label description = new Label(getFieldEditorParent(), SWT.WRAP);
-		description
+		Label descriptionGMF = new Label(getFieldEditorParent(), SWT.WRAP);
+		descriptionGMF
 				.setText("If checked do not use the layout information provided by the layout engine to layout the labels. Use the internal functions of the graphical editor, if it has any. Might lead to a better placement.");
+		addField(new BooleanFieldEditor(
+				KimlLayoutPreferenceConstants.PREF_DIAGRAMLAYOUTERS_SMOOTHEN_EDGES,
+				"Smoothen edges", getFieldEditorParent()));
+		Label descriptionSmooth = new Label(getFieldEditorParent(), SWT.WRAP);
+		descriptionSmooth
+				.setText("If checked, smoothen the edges.");
 
 	}
 

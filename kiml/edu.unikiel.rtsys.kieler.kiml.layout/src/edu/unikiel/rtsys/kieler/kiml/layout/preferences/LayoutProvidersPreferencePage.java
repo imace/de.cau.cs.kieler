@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
 import org.eclipse.jface.preference.RadioGroupFieldEditor;
-import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Group;
@@ -83,12 +82,4 @@ public class LayoutProvidersPreferencePage extends FieldEditorPreferencePage imp
 		}
 		return options;
 	}
-
-	
-	@Override
-	public void propertyChange(PropertyChangeEvent event) {
-		super.propertyChange(event);
-	}
-	
-
 }

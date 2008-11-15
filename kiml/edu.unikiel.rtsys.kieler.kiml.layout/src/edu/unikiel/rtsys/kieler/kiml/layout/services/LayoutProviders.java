@@ -28,8 +28,6 @@ public final class LayoutProviders implements IPropertyChangeListener {
 	}
 
 	private LayoutProviders() {
-		KimlLayoutPlugin.getDefault().getPreferenceStore()
-				.addPropertyChangeListener(this);
 		loadAvailableLayouters();
 	};
 
