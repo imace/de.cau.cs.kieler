@@ -57,7 +57,7 @@ import edu.unikiel.rtsys.kieler.kiml.ui.helpers.KimlCommonHelper;
 import edu.unikiel.rtsys.kieler.kiml.ui.helpers.KimlGMFLayoutHintHelper;
 
 
-public class SSMDiagramGroupingLayouter extends KimlAbstractLayouter {
+public class KimlSSMDiagramGroupingLayouter extends KimlAbstractLayouter {
 
 	private boolean useGMFLabelLocation = true;
 	private double zoomLevel = 1.0;

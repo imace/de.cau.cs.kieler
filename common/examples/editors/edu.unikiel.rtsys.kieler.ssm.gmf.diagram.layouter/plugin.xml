@@ -17,5 +17,42 @@
             name="SSM Diagram Layouter">
       </page>
    </extension>
+   <extension
+         point="org.eclipse.ui.views.properties.tabbed.propertyTabs">
+      <propertyTabs
+            contributorId="edu.unikiel.rtsys.kieler.ssm.gmf.diagram">
+         <propertyTab
+               category="visual"
+               id="property.tab.LayoutPropertySection"
+               label="Kiml Layout">
+         </propertyTab>
+      </propertyTabs>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views.properties.tabbed.propertySections">
+      <propertySections
+            contributorId="edu.unikiel.rtsys.kieler.ssm.gmf.diagram">
+         <propertySection
+               class="edu.unikiel.rtsys.kieler.ssm.gmf.diagram.layouter.properties.sections.KimlLayoutTypePropertySection"
+               id="edu.unikiel.rtsys.kieler.ssm.gmf.diagram.layouter.kimlLayoutSection"
+               tab="property.tab.LayoutPropertySection">
+            <input
+                  type="edu.unikiel.rtsys.kieler.ssm.diagram.edit.parts.CompositeState2EditPart">
+            </input>
+            <input
+                  type="edu.unikiel.rtsys.kieler.ssm.diagram.edit.parts.RegionEditPart">
+            </input>
+            <input
+                  type="edu.unikiel.rtsys.kieler.ssm.diagram.edit.parts.SafeStateMachineEditPart">
+            </input>
+            <input
+                  type="edu.unikiel.rtsys.kieler.ssm.gmf.diagram.layouter.Input7">
+            </input>
+            <input
+                  type="edu.unikiel.rtsys.kieler.ssm.diagram.edit.parts.CompositeStateEditPart">
+            </input>
+         </propertySection>
+      </propertySections>
+   </extension>
 
 </plugin>
