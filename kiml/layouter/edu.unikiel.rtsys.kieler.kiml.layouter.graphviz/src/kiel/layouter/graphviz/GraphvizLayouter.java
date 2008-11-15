@@ -59,21 +59,15 @@ public class GraphvizLayouter {
 	private String layouterName;
 
 	public GraphvizLayouter() {
-		layouterName=GraphvizLayoutProviderNames.GRAPHVIZ_DOT;
-		init();
+		layouterName = GraphvizLayoutProviderNames.GRAPHVIZ_DOT;
+		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
+		padX = store.getInt(PreferenceConstants.PREF_GRAPHVIZ_PADDING_X);
+		padY = store.getInt(PreferenceConstants.PREF_GRAPHVIZ_PADDING_Y);
+		GraphvizAPI.initialize();
 	}
 
 	public GraphvizLayouter(String layoutProviderName) {
-		layouterName = layoutProviderName;	
-		init();
-	}
-
-	/**
-	 * Initializes the GraphvizAPI. Creates a fresh graph and sets global
-	 * attributes. Needs to be called before every layout operation. GraphViz
-	 * might crash otherwise...
-	 */
-	private void init() {
+		layouterName = layoutProviderName;
 		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
 		padX = store.getInt(PreferenceConstants.PREF_GRAPHVIZ_PADDING_X);
 		padY = store.getInt(PreferenceConstants.PREF_GRAPHVIZ_PADDING_Y);
@@ -88,10 +82,11 @@ public class GraphvizLayouter {
 		if (nodeGroup.getSubNodeGroups().size() == 0) {
 			return;
 		}
+		
 		graphvizGraph = GraphvizAPI.createGraph("");
 		GraphvizAPI.setGlobalNodeAttribute(graphvizGraph,
 				GraphvizAPI.ATTR_SHAPE, "box");
-		
+
 		mapNodeGroup2Graphviz(nodeGroup);
 		if (nodeGroup.getLayout().getLayoutOptions().contains(
 				LAYOUT_OPTION.VERTICAL)) {
@@ -101,23 +96,30 @@ public class GraphvizLayouter {
 		}
 
 		if (layouterName.equals(GraphvizLayoutProviderNames.GRAPHVIZ_CIRCO)) {
-			// GraphvizAPI.circoCleanup(graphvizGraph);
 			GraphvizAPI.doCircoLayout(graphvizGraph);
+			GraphvizAPI.attachAttributes(graphvizGraph);
+			mapGraphviz2NodeGroup(nodeGroup);
+			GraphvizAPI.circoCleanup(graphvizGraph);
 		} else if (layouterName
-				.equals(GraphvizLayoutProviderNames.GRAPHVIZ_NEATO)) {// GraphvizAPI.neatoCleanup(graphvizGraph);
+				.equals(GraphvizLayoutProviderNames.GRAPHVIZ_NEATO)) {
 			GraphvizAPI.doNeatoLayout(graphvizGraph);
+			GraphvizAPI.attachAttributes(graphvizGraph);
+			mapGraphviz2NodeGroup(nodeGroup);
+			GraphvizAPI.neatoCleanup(graphvizGraph);			
 		} else if (layouterName
 				.equals(GraphvizLayoutProviderNames.GRAPHVIZ_TWOPI)) {
-			// GraphvizAPI.twopiCleanup(graphvizGraph);
-			// GraphvizAPI.setGraphAttribute(graphvizGraph, "splines", "true");
 			GraphvizAPI.doTwopiLayout(graphvizGraph);
+			GraphvizAPI.attachAttributes(graphvizGraph);
+			mapGraphviz2NodeGroup(nodeGroup);
+			GraphvizAPI.twopiCleanup(graphvizGraph);
 		} else {
-			// GraphvizAPI.dotCleanup(graphvizGraph);
 			GraphvizAPI.doDotLayout(graphvizGraph);
+			GraphvizAPI.attachAttributes(graphvizGraph);
+			mapGraphviz2NodeGroup(nodeGroup);
+			GraphvizAPI.dotCleanup(graphvizGraph);
 		}
-		GraphvizAPI.attachAttributes(graphvizGraph);
-		mapGraphviz2NodeGroup(nodeGroup);
 
+		
 		/* should Emma debug? */
 		if (Activator.getDefault().getPreferenceStore().getBoolean(
 				PreferenceConstants.PREF_GRAPHVIZ_ENABLE_DEBUG_OUTPUT)) {
@@ -133,6 +135,12 @@ public class GraphvizLayouter {
 			GraphvizAPI.writeDOT(graphvizGraph, outputDir + "/" + outputName
 					+ ".dot");
 		}
+		cleanup();
+	}
+
+	private void cleanup() {
+		mapNode2Pointer.clear();
+		mapEdge2Pointer.clear();
 	}
 
 	/**
@@ -184,7 +192,10 @@ public class GraphvizLayouter {
 					int pointer = GraphvizAPI.createEdge(graphvizGraph,
 							mapNode2Pointer.get(subNodeGroup), mapNode2Pointer
 									.get(outgoingEdge.getTarget()));
-
+					GraphvizAPI.setLocalEdgeAttribute(graphvizGraph, pointer,
+							"arrowhead", "none");
+					GraphvizAPI.setLocalEdgeAttribute(graphvizGraph, pointer,
+							"arrowtail", "none");
 					// store edge in map
 					mapEdge2Pointer.put(outgoingEdge, new Integer(pointer));
 
@@ -305,12 +316,14 @@ public class GraphvizLayouter {
 			List<Integer> intList = string2Ints(posString);
 			try {
 				/*
-				 * haf, 2008-06-10 GraphViz uses piecewise cubic beziercurves.
-				 * Each part consists of: Start point, bezier control point 1,
-				 * bezier control point 2, End point. Start point of the next
-				 * section is the same as the end point of the last. The control
-				 * points are likely to be not part of the path but specify the
-				 * bend of the curve.
+				 * ars, 2008-11-15: when setting arrowhead to 'none' than there
+				 * is no seperate end coordinate for the edge given, as assumed
+				 * before. haf, 2008-06-10 GraphViz uses piecewise cubic
+				 * beziercurves. Each part consists of: Start point, bezier
+				 * control point 1, bezier control point 2, End point. Start
+				 * point of the next section is the same as the end point of the
+				 * last. The control points are likely to be not part of the
+				 * path but specify the bend of the curve.
 				 * 
 				 * Eclipse does not support bezier curves (yet). Standard thing
 				 * are Polylines with only explicit bendpoints. I've implemented
@@ -326,31 +339,30 @@ public class GraphvizLayouter {
 				 * @see Eclipse bug: 234808 and 168307
 				 */
 
-				// second point in list is the start point
+				// first point in list is the start point
 				KPoint startPoint = KimlLayoutGraphFactory.eINSTANCE
 						.createKPoint();
-				startPoint.setX(intList.get(2));
-				startPoint.setY(intList.get(3));
+				startPoint.setX(intList.get(0));
+				startPoint.setY(intList.get(1));
 				edge.getLayout().setSourcePoint(graphviz2Draw2D(startPoint));
 
+				int i = 6;
 				// unsafe because list size might be not a multiple of 6
-				for (int i = 8; i < intList.size() - 1; i += 6) {
-					// i=2: ignore first point pair
+				for (; i < intList.size() - 3; i += 6) {
 					// i+=6: ignore bezier control points
 					KPoint point = KimlLayoutGraphFactory.eINSTANCE
 							.createKPoint();
 					point.setX(intList.get(i));
 					point.setY(intList.get(i + 1));
-					if (startPoint.getY() != point.getY()) {
-						edge.getLayout().getGridPoints().add(
-								graphviz2Draw2D(point));
-					}
+					edge.getLayout().getGridPoints()
+							.add(graphviz2Draw2D(point));
+
 				}
 				// first point in the GraphViz list is the end point
 				KPoint endPoint = KimlLayoutGraphFactory.eINSTANCE
 						.createKPoint();
-				endPoint.setX(intList.get(0));
-				endPoint.setY(intList.get(1));
+				endPoint.setX(intList.get(intList.size() - 2));
+				endPoint.setY(intList.get(intList.size() - 1));
 				edge.getLayout().setTargetPoint(graphviz2Draw2D(endPoint));
 
 			} catch (Exception e) {/* in any failure, leave list empty */
@@ -383,7 +395,6 @@ public class GraphvizLayouter {
 						KDimension labelSize = KimlLayoutGraphFactory.eINSTANCE
 								.createKDimension();
 						labelSize = label.getLabelLayout().getSize();
-						labelSize.setHeight(10);
 						midLocation = graphviz2Draw2D(
 								midInts.get(0).intValue(), midInts.get(1)
 										.intValue(), labelSize);
@@ -403,7 +414,8 @@ public class GraphvizLayouter {
 						KDimension labelSize = KimlLayoutGraphFactory.eINSTANCE
 								.createKDimension();
 						labelSize = label.getLabelLayout().getSize();
-						labelSize.setHeight(-6);
+						/* small adjust of size, and therefore of position */
+						labelSize.setHeight(labelSize.getHeight() + 7);
 						tailLocation = graphviz2Draw2D(tailInts.get(0)
 								.intValue(), tailInts.get(1).intValue(),
 								labelSize);
