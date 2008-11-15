@@ -558,7 +558,7 @@ public class KimlGenericDiagramLayouter extends KimlAbstractLayouter {
 				.getDefault()
 				.getPreferenceStore()
 				.getBoolean(
-						KimlLayoutPreferenceConstants.PREF_DIAGRAMLAYOUTERS_DO_NOT_LAYOUT_CONNECTION_LABELS);
+						KimlLayoutPreferenceConstants.PREF_DIAGRAMLAYOUTERS_USE_GMF_TO_LAYOUT_CONNECTION_LABELS);
 		return true;
 	}
 
