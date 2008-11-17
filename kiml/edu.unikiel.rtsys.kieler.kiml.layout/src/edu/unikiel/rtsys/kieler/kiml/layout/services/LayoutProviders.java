@@ -59,7 +59,7 @@ public final class LayoutProviders implements IPropertyChangeListener {
 					IEclipsePreferences pref = new InstanceScope()
 							.getNode(pluginName);
 					boolean state = pref.getBoolean(layoutProvider
-							.getLayouterInfo().getLayouterName(), false);
+							.getLayouterInfo().getLayouterName(), true);
 					layoutProvider.setEnabled(state);
 					layoutProviderMap.put(layoutProvider.getLayouterInfo()
 							.getLayouterName(), layoutProvider);
