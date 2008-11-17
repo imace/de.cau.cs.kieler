@@ -53,8 +53,9 @@ public abstract class AbstractKimlLayoutProviderPreferencePage extends
 			for (KimlAbstractLayoutProvider layoutProvider : layoutProviders) {
 				String label = layoutProvider.getLayouterInfo()
 						.getLayouterName()
-						+ ", "
-						+ layoutProvider.getLayouterInfo().getLayoutType();
+						+ " ("
+						+ layoutProvider.getLayouterInfo().getLayoutType()
+						+ ")";
 				BooleanFieldEditor enable = new BooleanFieldEditor(
 						layoutProvider.getLayouterInfo().getLayouterName(),
 						label, availableLayouters);
