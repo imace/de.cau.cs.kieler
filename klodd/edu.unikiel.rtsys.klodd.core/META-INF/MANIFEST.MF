@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: KLoDD Project Core
+Bundle-SymbolicName: edu.unikiel.rtsys.klodd.core
+Bundle-Version: 1.0.0
+Require-Bundle: edu.unikiel.rtsys.kieler.kiml.layout;bundle-version="1.0.0"
+Export-Package: edu.unikiel.rtsys.klodd.core.algorithms
