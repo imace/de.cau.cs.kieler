@@ -528,7 +528,9 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 	}
 	
 	/**
-	 * Adds an edge to the KLayoutGraph.
+	 * Adds an edge to the KLayoutGraph. If the edge goes to an sub-node,
+	 * it is not added to the incoming or outgoing edges of the parent
+	 * node, but only to those of the sub-node.
 	 * 
 	 * @param sourcePort source port of the edge
 	 * @param targetPort target port of the edge

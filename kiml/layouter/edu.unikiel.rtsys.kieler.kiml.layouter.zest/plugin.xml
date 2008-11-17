@@ -2,9 +2,30 @@
 <?eclipse version="3.2"?>
 <plugin>
    <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            category="edu.unikiel.rtsys.kieler.kiml.layout.preferences.LayoutProvidersPreferencePage"
+            class="edu.unikiel.rtsys.kieler.kiml.layouter.zest.preferences.ZestLayouterPreferencePage"
+            id="edu.unikiel.rtsys.kieler.kiml.layouter.zest.preferences"
+            name="Zest">
+      </page>
+   </extension>
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer
+            class="edu.unikiel.rtsys.kieler.kiml.layouter.zest.preferences.PreferenceInitializer">
+      </initializer>
+   </extension>
+   <extension
          point="edu.unikiel.rtsys.kieler.kiml.layout.kimlLayoutProvider">
       <kimlLayoutProvider
             class="edu.unikiel.rtsys.kieler.kiml.layouter.zest.ZestSpringLayoutProvider">
+      </kimlLayoutProvider>
+      <kimlLayoutProvider
+            class="edu.unikiel.rtsys.kieler.kiml.layouter.zest.ZestDirectedLayoutProvider">
+      </kimlLayoutProvider>
+      <kimlLayoutProvider
+            class="edu.unikiel.rtsys.kieler.kiml.layouter.zest.ZestGridLayoutProvider">
       </kimlLayoutProvider>
    </extension>
 

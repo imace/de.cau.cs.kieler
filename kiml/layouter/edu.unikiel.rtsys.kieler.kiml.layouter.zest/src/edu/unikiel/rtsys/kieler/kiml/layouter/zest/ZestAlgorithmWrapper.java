@@ -1,15 +1,16 @@
 package edu.unikiel.rtsys.kieler.kiml.layouter.zest;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
 
 import org.eclipse.zest.layouts.*;
 import org.eclipse.zest.layouts.constraints.BasicEntityConstraint;
-import org.eclipse.zest.layouts.exampleStructures.SimpleGraph;
-import org.eclipse.zest.layouts.exampleStructures.SimpleNode;
-import org.eclipse.zest.layouts.exampleStructures.SimpleRelationship;
+import org.eclipse.zest.layouts.dataStructures.DisplayIndependentDimension;
 
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.*;
+import edu.unikiel.rtsys.kieler.kiml.layouter.zest.graph.*;
+import edu.unikiel.rtsys.kieler.kiml.layouter.zest.preferences.ZestLayouterPreferencePage;
 
 /**
  * Wrapper class that translates KIML layout graphs into the Zest graph
@@ -23,9 +24,10 @@ public class ZestAlgorithmWrapper {
 	public static final String COLLECTION_NAME = "Zest Layout Algorithms";
 	
 	private LayoutAlgorithm layoutAlgorithm;
-	private LayoutGraph layoutGraph; 
 	
 	private Map<KNodeGroup, LayoutEntity> nodeGroup2EntityMap = new HashMap<KNodeGroup, LayoutEntity>();
+	private float totalWidth = 0.0f;
+	private float totalHeight = 0.0f;
 	
 	/**
 	 * Creates a wrapper for a given Zest layout algorithm.
@@ -43,12 +45,13 @@ public class ZestAlgorithmWrapper {
 	 * @param nodeGroup node group to be layouted
 	 */
 	public void doLayout(KNodeGroup nodeGroup) {
-		layoutGraph = new SimpleGraph();
 		LayoutEntity[] entities = buildEntities(nodeGroup);
 		LayoutRelationship[] relationships = buildRelationships(nodeGroup);
+		DisplayIndependentDimension parentSize = determineTopGroupSize(nodeGroup);
 		try
 		{
-			layoutAlgorithm.applyLayout(entities, relationships, 0, 0, 1000, 1000, false, false);
+			layoutAlgorithm.applyLayout(entities, relationships, 0, 0,
+					parentSize.width, parentSize.height, false, false);
 		}
 		catch (Exception exception)
 		{
@@ -65,7 +68,6 @@ public class ZestAlgorithmWrapper {
 	 * @param parentGroup parent node group
 	 * @return entities in that node group
 	 */
-	@SuppressWarnings("unchecked")
 	private LayoutEntity[] buildEntities(KNodeGroup parentGroup)
 	{
 		for (KNodeGroup child : parentGroup.getSubNodeGroups())
@@ -74,7 +76,9 @@ public class ZestAlgorithmWrapper {
 			float y = child.getLayout().getLocation().getY();
 			float width = child.getLayout().getSize().getWidth();
 			float height = child.getLayout().getSize().getHeight();
-			SimpleNode entity = new SimpleNode(child, x, y, width, height);
+			AdvancedEntity entity = new AdvancedEntity(child, x, y, width, height);
+			totalWidth += width;
+			totalHeight += height;
 			BasicEntityConstraint entityConstraint = new BasicEntityConstraint();
 			entityConstraint.preferredWidth = width; 
 			entityConstraint.preferredHeight = height;
@@ -82,9 +86,8 @@ public class ZestAlgorithmWrapper {
 			entityConstraint.hasPreferredLocation = false;
 			entity.populateLayoutConstraint(entityConstraint);
 			nodeGroup2EntityMap.put(child, entity);
-			layoutGraph.addEntity(entity);
 		}
-		return (LayoutEntity[])layoutGraph.getEntities().toArray(new LayoutEntity[0]);
+		return nodeGroup2EntityMap.values().toArray(new LayoutEntity[0]);
 	}
 	
 	/**
@@ -93,9 +96,9 @@ public class ZestAlgorithmWrapper {
 	 * @param parentGroup parent node group
 	 * @return relationships in that node group
 	 */
-	@SuppressWarnings("unchecked")
 	private LayoutRelationship[] buildRelationships(KNodeGroup parentGroup)
 	{
+		LinkedList<LayoutRelationship> edgeList = new LinkedList<LayoutRelationship>();
 		for (KNodeGroup sourceGroup : parentGroup.getSubNodeGroups())
 		{
 			for (KEdge edge : sourceGroup.getOutgoingEdges())
@@ -105,14 +108,12 @@ public class ZestAlgorithmWrapper {
 				{
 					LayoutEntity sourceEntity = nodeGroup2EntityMap.get(sourceGroup);
 					LayoutEntity targetEntity = nodeGroup2EntityMap.get(targetGroup);
-					LayoutRelationship relationship = new SimpleRelationship(sourceEntity, targetEntity, false);
-					relationship.setGraphData(edge);
-					layoutGraph.addRelationship(relationship);
+					LayoutRelationship relationship = new AdvancedRelationship(edge, sourceEntity, targetEntity);
+					edgeList.add(relationship);
 				}
 			}
 		}
-		return (LayoutRelationship[])layoutGraph.getRelationships().toArray(
-				new LayoutRelationship[0]);
+		return edgeList.toArray(new LayoutRelationship[0]);
 	}
 	
 	/**
@@ -126,23 +127,47 @@ public class ZestAlgorithmWrapper {
 		// transfer entities layouts
 		for (LayoutEntity entity : entities)
 		{
-			KNodeGroup nodeGroup = (KNodeGroup)entity.getGraphData();
-			nodeGroup.getLayout().getLocation().setX((float)entity.getXInLayout());
-			nodeGroup.getLayout().getLocation().setY((float)entity.getYInLayout());
+			KNodeGroup nodeGroup = (KNodeGroup)((AdvancedEntity)entity).getRealObject();
+			float x = (float)entity.getXInLayout();
+			float y = (float)entity.getYInLayout();
+			nodeGroup.getLayout().getLocation().setX(x);
+			nodeGroup.getLayout().getLocation().setY(y);
 		}
+		
 		// transfer relationships layouts
 		for (LayoutRelationship relationship : relationships)
 		{
-			KEdge edge = (KEdge)relationship.getGraphData();
+			KEdge edge = (KEdge)((AdvancedRelationship)relationship).getRealObject();
 			edge.getLayout().getGridPoints().clear();
-			for (LayoutBendPoint bendPoint : ((SimpleRelationship)relationship).getBendPoints())
+			for (LayoutBendPoint bendPoint : ((AdvancedRelationship)relationship).getBendPoints())
 			{
 				KPoint point = KimlLayoutGraphFactory.eINSTANCE.createKPoint();
-				point.setX((float)bendPoint.getX());
-				point.setY((float)bendPoint.getY());
+				float x = (float)bendPoint.getX();
+				float y = (float)bendPoint.getY();
+				point.setX(x);
+				point.setY(y);
 				edge.getLayout().getGridPoints().add(point);
 			}
 		}
+	}
+	
+	/**
+	 * Calculates the size of the parent group by the summed width and
+	 * height of all child nodes.
+	 * 
+	 * @param parentGroup parent node group
+	 * @return height and width of the total graph
+	 */
+	private DisplayIndependentDimension determineTopGroupSize(KNodeGroup parentGroup)
+	{
+		float scaleBase = Activator.getDefault().getPreferenceStore()
+				.getFloat(ZestLayouterPreferencePage.SCALE_BASE);
+		float width = (float)Math.sqrt(totalWidth) * scaleBase;
+		float height = (float)Math.sqrt(totalHeight) * scaleBase;
+		KInsets insets = parentGroup.getLayout().getInsets();
+		parentGroup.getLayout().getSize().setWidth(width + insets.getLeft() + insets.getRight());
+		parentGroup.getLayout().getSize().setHeight(height + insets.getTop() + insets.getBottom());
+		return new DisplayIndependentDimension(width, height);
 	}
 
 }
