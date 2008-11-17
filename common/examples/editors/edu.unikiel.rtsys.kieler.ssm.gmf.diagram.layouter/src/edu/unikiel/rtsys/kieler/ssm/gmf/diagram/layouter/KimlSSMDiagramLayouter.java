@@ -22,14 +22,17 @@ import org.eclipse.gmf.runtime.diagram.ui.editparts.CompartmentEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramRootEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.LabelEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeCompartmentEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.figures.BorderItemsAwareFreeFormLayer;
+import org.eclipse.gmf.runtime.diagram.ui.figures.ShapeCompartmentFigure;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramCommandStack;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditor;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramGraphicalViewer;
 import org.eclipse.gmf.runtime.diagram.ui.requests.RequestConstants;
 import org.eclipse.gmf.runtime.diagram.ui.requests.SetAllBendpointRequest;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx;
+import org.eclipse.gmf.runtime.draw2d.ui.internal.figures.AnimatableScrollPane;
 import org.eclipse.jface.viewers.IStructuredSelection;
 
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutPlugin;
@@ -50,9 +53,12 @@ import edu.unikiel.rtsys.kieler.kiml.layout.util.KimlLayoutUtil;
 import edu.unikiel.rtsys.kieler.kiml.ui.helpers.KimlCommonHelper;
 import edu.unikiel.rtsys.kieler.kiml.ui.helpers.KimlGMFLayoutHintHelper;
 import edu.unikiel.rtsys.kieler.ssm.diagram.edit.parts.CompositeState2EditPart;
+import edu.unikiel.rtsys.kieler.ssm.diagram.edit.parts.CompositeStateCompositeStateCompartment2EditPart;
+import edu.unikiel.rtsys.kieler.ssm.diagram.edit.parts.CompositeStateCompositeStateCompartmentEditPart;
 import edu.unikiel.rtsys.kieler.ssm.diagram.edit.parts.CompositeStateEditPart;
 import edu.unikiel.rtsys.kieler.ssm.diagram.edit.parts.InitialStateEditPart;
 import edu.unikiel.rtsys.kieler.ssm.diagram.edit.parts.RegionEditPart;
+import edu.unikiel.rtsys.kieler.ssm.diagram.edit.parts.RegionRegionCompartmentEditPart;
 import edu.unikiel.rtsys.kieler.ssm.diagram.edit.parts.SafeStateMachineEditPart;
 import edu.unikiel.rtsys.kieler.ssm.diagram.edit.parts.SimpleStateEditPart;
 
@@ -71,6 +77,8 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 	private boolean prefSmoothTransitions = false;
 	private BorderItemsAwareFreeFormLayer primaryLayer;
 	private boolean toggleVisible;
+	private float widthCollapsed = 80f;
+	private float heightCollapsed = 60f;
 
 	public void layout(Object target) {
 		super.layout(target);
@@ -109,16 +117,15 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 						.setResizeDirection(PositionConstants.CENTER);
 				changeBoundsRequest.setSizeDelta(sizeDelta.scale(zoomLevel));
 			}
-			
+
 			Point oldLocation = gep.getFigure().getBounds().getLocation();
-			Point newLocation = KimlCommonHelper.kPoint2Point(layoutGraph.getTopGroup()
-					.getLayout().getLocation());
+			Point newLocation = KimlCommonHelper.kPoint2Point(layoutGraph
+					.getTopGroup().getLayout().getLocation());
 
 			if (newLocation != null) {
 				Point moveDelta = newLocation.getTranslated(oldLocation
 						.negate());
-				changeBoundsRequest
-						.setMoveDelta(moveDelta.scale(zoomLevel));
+				changeBoundsRequest.setMoveDelta(moveDelta.scale(zoomLevel));
 			}
 			compoundCommand.add(gep.getCommand(changeBoundsRequest));
 		}
@@ -347,8 +354,9 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 			processCommon(rootPart, topNodeGroup,
 					new ArrayList<ConnectionEditPart>());
 			processLayoutHints(rootPart, topNodeGroup);
-			if (rootPart.getClass().equals(CompositeStateEditPart.class)){
-				KPoint location = KimlLayoutGraphFactory.eINSTANCE.createKPoint();
+			if (rootPart.getClass().equals(CompositeStateEditPart.class)) {
+				KPoint location = KimlLayoutGraphFactory.eINSTANCE
+						.createKPoint();
 				location.setX(10);
 				location.setY(10);
 				topNodeGroup.getLayout().setLocation(location);
@@ -417,8 +425,36 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 						childNodeGroup);
 			} else {
 				/* compartment EditPart, fetch the children */
-				buildLayoutGraphRecursively((GraphicalEditPart) childEditPart,
-						currentNodeGroup);
+				if (childEditPart.getClass().equals(
+						RegionRegionCompartmentEditPart.class)
+						|| childEditPart
+								.getClass()
+								.equals(
+										CompositeStateCompositeStateCompartment2EditPart.class)
+						|| childEditPart
+								.getClass()
+								.equals(
+										CompositeStateCompositeStateCompartmentEditPart.class)) {
+					ShapeCompartmentFigure scf = (ShapeCompartmentFigure) ((GraphicalEditPart) childEditPart)
+							.getFigure();
+					AnimatableScrollPane asp = (AnimatableScrollPane) scf
+							.getScrollPane();
+					if (asp.isExpanded()) {
+						buildLayoutGraphRecursively(
+								(GraphicalEditPart) childEditPart,
+								currentNodeGroup);
+					} else {
+						// setting the size to default values
+						currentNodeGroup.getLayout().getSize().setHeight(
+								heightCollapsed);
+						currentNodeGroup.getLayout().getSize().setWidth(
+								widthCollapsed);
+						// extend the label string to handle the node label of a
+						// composite state correctly
+						String text = currentNodeGroup.getLabel().getText();
+						currentNodeGroup.getLabel().setText(text.concat("XX"));
+					}
+				}
 			}
 		}
 
