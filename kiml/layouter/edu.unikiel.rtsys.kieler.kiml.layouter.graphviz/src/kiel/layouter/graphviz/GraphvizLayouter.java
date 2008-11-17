@@ -53,24 +53,24 @@ public class GraphvizLayouter {
 	private final float dpi = 72.0f;
 
 	// padding from the borders. pad attribute of GraphViz has no effect
-	private int padX = 15;
-	private int padY = 15;
-
+	private int prefPadX = 15;
+	private int prefPadY = 15;
+	
 	private String layouterName;
 
 	public GraphvizLayouter() {
 		layouterName = GraphvizLayoutProviderNames.GRAPHVIZ_DOT;
 		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
-		padX = store.getInt(PreferenceConstants.PREF_GRAPHVIZ_PADDING_X);
-		padY = store.getInt(PreferenceConstants.PREF_GRAPHVIZ_PADDING_Y);
+		prefPadX = store.getInt(PreferenceConstants.PREF_GRAPHVIZ_PADDING_X);
+		prefPadY = store.getInt(PreferenceConstants.PREF_GRAPHVIZ_PADDING_Y);
 		GraphvizAPI.initialize();
 	}
 
 	public GraphvizLayouter(String layoutProviderName) {
 		layouterName = layoutProviderName;
 		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
-		padX = store.getInt(PreferenceConstants.PREF_GRAPHVIZ_PADDING_X);
-		padY = store.getInt(PreferenceConstants.PREF_GRAPHVIZ_PADDING_Y);
+		prefPadX = store.getInt(PreferenceConstants.PREF_GRAPHVIZ_PADDING_X);
+		prefPadY = store.getInt(PreferenceConstants.PREF_GRAPHVIZ_PADDING_Y);
 		GraphvizAPI.initialize();
 	}
 
@@ -255,7 +255,7 @@ public class GraphvizLayouter {
 	private void mapGraphviz2NodeGroup(KNodeGroup nodeGroup) {
 		mapGraphvizNodes2KNodes();
 		mapGraphvizEdges2KEdges();
-		setNodeSize(nodeGroup);
+		setTopNodeAttributes(nodeGroup);
 	}
 
 	/**
@@ -435,7 +435,7 @@ public class GraphvizLayouter {
 	 * 
 	 * @param node
 	 */
-	private void setNodeSize(KNodeGroup nodeGroup) {
+	private void setTopNodeAttributes(KNodeGroup nodeGroup) {
 		Dimension bb = GraphvizAPI.getBoundingBox(graphvizGraph);
 		KDimension size = KimlLayoutGraphFactory.eINSTANCE.createKDimension();
 		float left = 0, right = 0, bottom = 0, top = 0;
@@ -447,8 +447,8 @@ public class GraphvizLayouter {
 		} catch (Exception e) {
 			// no insets available
 		}
-		size.setWidth((bb.width + 2 * padX) + left + right);
-		size.setHeight((bb.height + 2 * padY) + top + bottom);
+		size.setWidth((bb.width + 2 * prefPadX) + left + right);
+		size.setHeight((bb.height + 2 * prefPadY) + top + bottom);
 		nodeGroup.getLayout().setSize(size);
 	}
 
@@ -493,8 +493,8 @@ public class GraphvizLayouter {
 	 */
 	private KPoint graphviz2Draw2D(int x, int y, KDimension size) {
 		KPoint newLocation = KimlLayoutGraphFactory.eINSTANCE.createKPoint();
-		newLocation.setX(x - (size.getWidth() / 2) + padX);
-		newLocation.setY(y - (size.getHeight() / 2) + padY);
+		newLocation.setX(x - (size.getWidth() / 2) + prefPadX);
+		newLocation.setY(y - (size.getHeight() / 2) + prefPadY);
 		return newLocation;
 	}
 
@@ -509,8 +509,8 @@ public class GraphvizLayouter {
 	 */
 	private KPoint graphviz2Draw2D(KPoint location) {
 		KPoint newLocation = KimlLayoutGraphFactory.eINSTANCE.createKPoint();
-		newLocation.setX((int) location.getX() + padX);
-		newLocation.setY((int) location.getY() + padY);
+		newLocation.setX((int) location.getX() + prefPadX);
+		newLocation.setY((int) location.getY() + prefPadY);
 		return newLocation;
 	}
 
