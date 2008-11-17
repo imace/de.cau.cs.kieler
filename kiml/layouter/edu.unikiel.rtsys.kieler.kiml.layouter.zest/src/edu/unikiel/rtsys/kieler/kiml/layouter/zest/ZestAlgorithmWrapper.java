@@ -6,7 +6,6 @@ import java.util.Map;
 
 import org.eclipse.zest.layouts.*;
 import org.eclipse.zest.layouts.constraints.BasicEntityConstraint;
-import org.eclipse.zest.layouts.dataStructures.DisplayIndependentDimension;
 
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.*;
 import edu.unikiel.rtsys.kieler.kiml.layouter.zest.graph.*;
@@ -23,10 +22,17 @@ public class ZestAlgorithmWrapper {
 	/** Name of the Zest layout algorithms collection */
 	public static final String COLLECTION_NAME = "Zest Layout Algorithms";
 	
+	// value added to the size of each parent node
+	private static final float SIZE_ADDITION = 15.0f;
+	
+	// layout algorithm used internally
 	private LayoutAlgorithm layoutAlgorithm;
 	
+	// mapping of node groups to layout entities
 	private Map<KNodeGroup, LayoutEntity> nodeGroup2EntityMap = new HashMap<KNodeGroup, LayoutEntity>();
+	// sum of the widths of all nodes
 	private float totalWidth = 0.0f;
+	// sum of the heights of all nodes
 	private float totalHeight = 0.0f;
 	
 	/**
@@ -45,13 +51,21 @@ public class ZestAlgorithmWrapper {
 	 * @param nodeGroup node group to be layouted
 	 */
 	public void doLayout(KNodeGroup nodeGroup) {
+		// build layout entities and relationships
 		LayoutEntity[] entities = buildEntities(nodeGroup);
 		LayoutRelationship[] relationships = buildRelationships(nodeGroup);
-		DisplayIndependentDimension parentSize = determineTopGroupSize(nodeGroup);
+		
+		// compute preferred height and width of the graph
+		float scaleBase = Activator.getDefault().getPreferenceStore()
+				.getFloat(ZestLayouterPreferencePage.SCALE_BASE);
+		float width = (float)Math.sqrt(totalWidth / entities.length) * scaleBase;
+		float height = (float)Math.sqrt(totalHeight / entities.length) * scaleBase;
+		
+		// executes the layout algorithm
 		try
 		{
 			layoutAlgorithm.applyLayout(entities, relationships, 0, 0,
-					parentSize.width, parentSize.height, false, false);
+					width, height, false, false);
 		}
 		catch (Exception exception)
 		{
@@ -59,7 +73,8 @@ public class ZestAlgorithmWrapper {
 			exception.printStackTrace();
 		}
 		
-		transferLayoutResult(entities, relationships);
+		// transfer layout results to the original graph
+		transferLayoutResult(nodeGroup, entities, relationships);
 	}
 	
 	/**
@@ -122,14 +137,21 @@ public class ZestAlgorithmWrapper {
 	 * @param entities list of layouted entities
 	 * @param relationships list of layouted relationships
 	 */
-	private void transferLayoutResult(LayoutEntity[] entities, LayoutRelationship[] relationships)
+	private void transferLayoutResult(KNodeGroup parentGroup,
+			LayoutEntity[] entities, LayoutRelationship[] relationships)
 	{
+		float maxX = 0.0f, maxY = 0.0f;
+		
 		// transfer entities layouts
 		for (LayoutEntity entity : entities)
 		{
 			KNodeGroup nodeGroup = (KNodeGroup)((AdvancedEntity)entity).getRealObject();
 			float x = (float)entity.getXInLayout();
 			float y = (float)entity.getYInLayout();
+			float width = nodeGroup.getLayout().getSize().getWidth();
+			float height = nodeGroup.getLayout().getSize().getHeight();
+			if (x + width > maxX) maxX = x + width;
+			if (y + height > maxY) maxY = y + height;
 			nodeGroup.getLayout().getLocation().setX(x);
 			nodeGroup.getLayout().getLocation().setY(y);
 		}
@@ -144,30 +166,20 @@ public class ZestAlgorithmWrapper {
 				KPoint point = KimlLayoutGraphFactory.eINSTANCE.createKPoint();
 				float x = (float)bendPoint.getX();
 				float y = (float)bendPoint.getY();
+				if (x > maxX) maxX = x;
+				if (y > maxY) maxY = y;
 				point.setX(x);
 				point.setY(y);
 				edge.getLayout().getGridPoints().add(point);
 			}
 		}
-	}
-	
-	/**
-	 * Calculates the size of the parent group by the summed width and
-	 * height of all child nodes.
-	 * 
-	 * @param parentGroup parent node group
-	 * @return height and width of the total graph
-	 */
-	private DisplayIndependentDimension determineTopGroupSize(KNodeGroup parentGroup)
-	{
-		float scaleBase = Activator.getDefault().getPreferenceStore()
-				.getFloat(ZestLayouterPreferencePage.SCALE_BASE);
-		float width = (float)Math.sqrt(totalWidth) * scaleBase;
-		float height = (float)Math.sqrt(totalHeight) * scaleBase;
+		
+		// determine size of the parent group
 		KInsets insets = parentGroup.getLayout().getInsets();
-		parentGroup.getLayout().getSize().setWidth(width + insets.getLeft() + insets.getRight());
-		parentGroup.getLayout().getSize().setHeight(height + insets.getTop() + insets.getBottom());
-		return new DisplayIndependentDimension(width, height);
+		parentGroup.getLayout().getSize().setWidth(maxX + insets.getLeft()
+				+ insets.getRight() + SIZE_ADDITION);
+		parentGroup.getLayout().getSize().setHeight(maxY + insets.getTop()
+				+ insets.getBottom() + SIZE_ADDITION);
 	}
 
 }

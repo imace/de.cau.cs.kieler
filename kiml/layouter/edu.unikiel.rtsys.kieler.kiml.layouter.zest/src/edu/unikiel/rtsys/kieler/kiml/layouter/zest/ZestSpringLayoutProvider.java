@@ -22,8 +22,9 @@ public class ZestSpringLayoutProvider extends KimlAbstractLayoutProvider {
 	 * @see edu.unikiel.rtsys.kieler.kiml.layout.services.KimlAbstractLayoutProvider#doLayout(edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup)
 	 */
 	public void doLayout(KNodeGroup nodeGroup) {
-		ZestAlgorithmWrapper wrapper = new ZestAlgorithmWrapper(
-				new SpringLayoutAlgorithm());
+		SpringLayoutAlgorithm springAlgo = new SpringLayoutAlgorithm();
+		springAlgo.setRandom(false);
+		ZestAlgorithmWrapper wrapper = new ZestAlgorithmWrapper(springAlgo);
 		wrapper.doLayout(nodeGroup);
 	}
 
