@@ -72,6 +72,13 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 	private BorderItemsAwareFreeFormLayer primaryLayer;
 	private boolean toggleVisible;
 
+	public void layout(Object target) {
+		super.layout(target);
+		primaryLayer.revalidate();
+		rootPart.refresh();
+		super.layout(target);
+
+	}
 
 	/*------------------------------------------------------------------------------*/
 	/*-----------------------------APPLICATION OF LAYOUT----------------------------*/
@@ -102,14 +109,23 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 						.setResizeDirection(PositionConstants.CENTER);
 				changeBoundsRequest.setSizeDelta(sizeDelta.scale(zoomLevel));
 			}
+			
+			Point oldLocation = gep.getFigure().getBounds().getLocation();
+			Point newLocation = KimlCommonHelper.kPoint2Point(layoutGraph.getTopGroup()
+					.getLayout().getLocation());
 
+			if (newLocation != null) {
+				Point moveDelta = newLocation.getTranslated(oldLocation
+						.negate());
+				changeBoundsRequest
+						.setMoveDelta(moveDelta.scale(zoomLevel));
+			}
 			compoundCommand.add(gep.getCommand(changeBoundsRequest));
 		}
 
 		applyNodeLayoutRecursively(layoutGraph.getTopGroup(), compoundCommand);
 
 		commandStack.execute(compoundCommand);
-
 	}
 
 	/**
@@ -331,7 +347,12 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 			processCommon(rootPart, topNodeGroup,
 					new ArrayList<ConnectionEditPart>());
 			processLayoutHints(rootPart, topNodeGroup);
-
+			if (rootPart.getClass().equals(CompositeStateEditPart.class)){
+				KPoint location = KimlLayoutGraphFactory.eINSTANCE.createKPoint();
+				location.setX(10);
+				location.setY(10);
+				topNodeGroup.getLayout().setLocation(location);
+			}
 			nodeEditPart2NodeGroup.put(rootPart, topNodeGroup);
 			nodeGroup2NodeEditPart.put(topNodeGroup, rootPart);
 
@@ -637,6 +658,7 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 		if (object instanceof GraphicalEditPart) {
 			root = (GraphicalEditPart) root;
 		}
+
 		return root;
 	}
 
