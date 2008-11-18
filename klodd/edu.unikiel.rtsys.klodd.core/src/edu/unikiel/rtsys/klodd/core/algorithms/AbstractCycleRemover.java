@@ -18,15 +18,6 @@ public abstract class AbstractCycleRemover extends AbstractAlgorithm
 
 	/*
 	 * (non-Javadoc)
-	 * @see edu.unikiel.rtsys.klodd.core.algorithms.ICycleRemover#restoreGraph()
-	 */
-	public void restoreGraph() {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	/*
-	 * (non-Javadoc)
 	 * @see edu.unikiel.rtsys.klodd.core.algorithms.AbstractAlgorithm#reset()
 	 */
 	public void reset()
@@ -34,21 +25,46 @@ public abstract class AbstractCycleRemover extends AbstractAlgorithm
 		reversedEdges.clear();
 	}
 	
-	protected void reverseEdge(KEdge edge)
-	{
-		
+	/*
+	 * (non-Javadoc)
+	 * @see edu.unikiel.rtsys.klodd.core.algorithms.ICycleRemover#restoreGraph()
+	 */
+	public void restoreGraph() {
+		for (KEdge edge : reversedEdges)
+		{
+			doReverseEdge(edge);
+		}
 	}
 	
+	/**
+	 * Switches the source and target of an edge and stores the edge
+	 * for later restoration.
+	 * 
+	 * @param edge edge to be reversed
+	 */
+	protected void reverseEdge(KEdge edge)
+	{
+		doReverseEdge(edge);
+		reversedEdges.add(edge);
+	}
+	
+	/**
+	 * Switches the source and target of an edge.
+	 * 
+	 * @param edge edge to be reversed
+	 */
 	private void doReverseEdge(KEdge edge)
 	{
+		// reverse source and target node group
 		KNodeGroup source = edge.getSource();
 		KNodeGroup target = edge.getTarget();
 		edge.setSource(target);
 		edge.setTarget(source);
-		if (edge.getSourcePort() != null)
-		{
-			
-		}
+		// reverse source and target port
+		KPort sourcePort = edge.getSourcePort();
+		KPort targetPort = edge.getTargetPort();
+		edge.setSourcePort(targetPort);
+		edge.setTargetPort(sourcePort);
 	}
 	
 }
