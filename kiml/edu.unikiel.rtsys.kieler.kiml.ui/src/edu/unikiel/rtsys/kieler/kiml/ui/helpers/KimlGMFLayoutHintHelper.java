@@ -3,6 +3,7 @@ package edu.unikiel.rtsys.kieler.kiml.ui.helpers;
 import java.util.ArrayList;
 
 import org.eclipse.emf.transaction.RecordingCommand;
+import org.eclipse.gef.GraphicalViewer;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.CompartmentEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
@@ -677,9 +678,12 @@ public class KimlGMFLayoutHintHelper {
 			return suggestion;
 	}
 
-	// =======================================================================//
-	// ================ GROUP CONTAINED ELEMENTS =============================//
-	// =======================================================================//
+	// =======================================================================
+	// //
+	// ================ GROUP CONTAINED ELEMENTS =============================
+	// //
+	// =======================================================================
+	// //
 
 	/**
 	 * Returns the layouter name for this ShapeNodeEditPart, is a plain String.
@@ -850,7 +854,8 @@ public class KimlGMFLayoutHintHelper {
 	 * @param GraphicalEditPart
 	 *            the GraphicalEditPart to unset the layout type for
 	 */
-	public static void unsetContainedElementsLayoutHint(final GraphicalEditPart graphicalEditPart) {
+	public static void unsetContainedElementsLayoutHint(
+			final GraphicalEditPart graphicalEditPart) {
 
 		final StringValueStyle layouterNameStyle = (StringValueStyle) (graphicalEditPart
 				.getNotationView().getNamedStyle(NotationPackage.eINSTANCE
@@ -872,4 +877,31 @@ public class KimlGMFLayoutHintHelper {
 					});
 		}
 	}
+
+	public static void unsetAllContainedElementsLayoutHints(
+			final GraphicalEditPart graphicalEditPart) {
+		GraphicalViewer viewer = (GraphicalViewer) graphicalEditPart
+				.getViewer();
+
+		for (Object shapeNodeEditPart : viewer.getEditPartRegistry().values()) {
+			if (shapeNodeEditPart instanceof ShapeNodeEditPart) {
+				unsetContainedElementsLayoutHint((ShapeNodeEditPart) shapeNodeEditPart);
+			}
+		}
+	}
+
+	public static void setAllContainedElementsLayoutHints(
+			final GraphicalEditPart graphicalEditPart,
+			final LAYOUT_TYPE layoutType, final String layouterName) {
+		
+		GraphicalViewer viewer = (GraphicalViewer) graphicalEditPart
+				.getViewer();
+
+		for (Object shapeNodeEditPart : viewer.getEditPartRegistry().values()) {
+			if (shapeNodeEditPart instanceof ShapeNodeEditPart) {
+				setContainedElementsLayoutHint((ShapeNodeEditPart) shapeNodeEditPart, layoutType, layouterName);
+			}
+		}
+	}
+
 }

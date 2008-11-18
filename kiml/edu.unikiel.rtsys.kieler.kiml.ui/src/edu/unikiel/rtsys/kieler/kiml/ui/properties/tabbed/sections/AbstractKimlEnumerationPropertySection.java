@@ -39,7 +39,7 @@ public abstract class AbstractKimlEnumerationPropertySection extends
 		data = new FormData();
 		data.left = new FormAttachment(0, getStandardLabelWidth(composite,
 			new String[] {getLabelText()}));
-		data.right = new FormAttachment(100, 0);
+		data.right = new FormAttachment(50, 0);
 		data.top = new FormAttachment(0, ITabbedPropertyConstants.VSPACE);
 		combo.setLayoutData(data);
 
