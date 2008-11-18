@@ -23,7 +23,7 @@ public class ZestAlgorithmWrapper {
 	public static final String COLLECTION_NAME = "Zest Layout Algorithms";
 	
 	// value added to the size of each parent node
-	private static final float SIZE_ADDITION = 15.0f;
+	private static final float SIZE_ADDITION = 20.0f;
 	
 	// layout algorithm used internally
 	private LayoutAlgorithm layoutAlgorithm;
@@ -64,8 +64,8 @@ public class ZestAlgorithmWrapper {
 		// executes the layout algorithm
 		try
 		{
-			layoutAlgorithm.applyLayout(entities, relationships, 0, 0,
-					width, height, false, false);
+			layoutAlgorithm.applyLayout(entities, relationships,
+					SIZE_ADDITION, SIZE_ADDITION, width, height, false, false);
 		}
 		catch (Exception exception)
 		{
