@@ -24,7 +24,6 @@ import org.eclipse.compare.contentmergeviewer.IMergeViewerContentProvider;
 import org.eclipse.compare.structuremergeviewer.ICompareInput;
 import org.eclipse.emf.compare.EMFComparePlugin;
 import org.eclipse.emf.compare.diff.metamodel.DiffElement;
-import org.eclipse.emf.compare.diff.metamodel.DiffFactory;
 import org.eclipse.emf.compare.diff.metamodel.DiffGroup;
 import org.eclipse.emf.compare.diff.metamodel.ModelInputSnapshot;
 import org.eclipse.emf.compare.diff.metamodel.util.DiffAdapterFactory;
@@ -33,11 +32,9 @@ import org.eclipse.emf.compare.ui.EMFCompareUIPlugin;
 import org.eclipse.emf.compare.ui.ICompareEditorPartListener;
 import org.eclipse.emf.compare.ui.ModelCompareInput;
 import org.eclipse.emf.compare.ui.TypedElementWrapper;
-import org.eclipse.emf.compare.ui.internal.ModelComparator;
 import org.eclipse.emf.compare.ui.util.EMFCompareConstants;
 import org.eclipse.emf.compare.util.EMFCompareMap;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.ToolBarManager;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.preference.PreferenceConverter;
@@ -111,17 +108,7 @@ public class ModelContentMergeViewer extends ContentMergeViewer {
 	 */
 	private final CompareConfiguration configuration;
 
-	/**
-	 * This is the action we instantiate to handle the {@link DiffElement}s
-	 * merge from the left model to the right model.
-	 */
-	private Action copyDiffLeftToRight;
-
-	/**
-	 * This is the action we instantiate to handle the {@link DiffElement}s
-	 * merge from the right model to the left model.
-	 */
-	private Action copyDiffRightToLeft;
+	
 
 	/** Indicates that this is a three-way comparison. */
 	private boolean isThreeWay;
@@ -131,12 +118,6 @@ public class ModelContentMergeViewer extends ContentMergeViewer {
 	 * of the last {@link HistoryItem} we compared.
 	 */
 	private long lastHistoryItemDate;
-
-	/**
-	 * Indicates that the left model has been modified since opening. Will allow
-	 * us to prompt the user to save this model.
-	 */
-	private boolean leftDirty;
 
 	/**
 	 * This listener will be registered for notifications against all tab
@@ -149,12 +130,6 @@ public class ModelContentMergeViewer extends ContentMergeViewer {
 	 * {@link PreferenceStore} to update the GUI colors as needed.
 	 */
 	private final IPropertyChangeListener preferenceListener;
-
-	/**
-	 * Indicates that the right model has been modified since opening. Will
-	 * allow us to prompt the user to save this model.
-	 */
-	private boolean rightDirty;
 
 	/**
 	 * This will listen for changes of the {@link CompareConfiguration}
@@ -171,15 +146,11 @@ public class ModelContentMergeViewer extends ContentMergeViewer {
 	 *            The configuration object.
 	 */
 	public ModelContentMergeViewer(Composite parent, CompareConfiguration config) {
-		// super(SWT.NONE, ResourceBundle.getBundle(BUNDLE_NAME), config); TODO
 		super(SWT.NONE, null, config);
 		configuration = config;
 		buildControl(parent);
 		updatePreferences();
 		setContentProvider(new ModelContentMergeContentProvider(config));
-
-		// disables diff copy from either side
-		switchCopyState(false);
 
 		structureSelectionListener = new IPropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent event) {
@@ -357,7 +328,6 @@ public class ModelContentMergeViewer extends ContentMergeViewer {
 				rightPart.navigateToDiff(diffs);
 			if (isThreeWay)
 				ancestorPart.navigateToDiff(diffs.get(0));
-			switchCopyState(true);
 		}
 	}
 
@@ -381,86 +351,6 @@ public class ModelContentMergeViewer extends ContentMergeViewer {
 			getCenterPart().redraw();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 * 
-	 * @see ContentMergeViewer#copy(boolean)
-	 */
-	@Override
-	protected void copy(boolean leftToRight) {
-		if (((ModelCompareInput) getInput()).getDiffAsList().size() > 0) {
-			// Avoids warnings "resource has changed ..."
-			setRightDirty(false);
-			setLeftDirty(false);
-
-			((ModelCompareInput) getInput()).copy(leftToRight);
-			final ModelInputSnapshot snap = DiffFactory.eINSTANCE
-					.createModelInputSnapshot();
-			snap.setDiff(((ModelCompareInput) getInput()).getDiff());
-			snap.setMatch(((ModelCompareInput) getInput()).getMatch());
-			configuration.setProperty(
-					EMFCompareConstants.PROPERTY_CONTENT_INPUT_CHANGED, snap);
-			leftDirty |= !leftToRight;
-			rightDirty |= leftToRight;
-			setLeftDirty(leftDirty);
-			setRightDirty(rightDirty);
-			update();
-		}
-	}
-
-	/**
-	 * Copies a list of {@link DiffElement}s or {@link DiffGroup}s in the given
-	 * direction, then updates the toolbar items states as well as the dirty
-	 * state of both the left and the right models.
-	 * 
-	 * @param diffs
-	 *            {@link DiffElement Element}s to copy.
-	 * @param leftToRight
-	 *            Direction of the copy.
-	 * @see ModelCompareInput#copy(List, boolean)
-	 */
-	protected void copy(List<DiffElement> diffs, boolean leftToRight) {
-		if (diffs.size() > 0) {
-			// Avoids warnings "resource has changed ..."
-			setRightDirty(false);
-			setLeftDirty(false);
-
-			((ModelCompareInput) getInput()).copy(diffs, leftToRight);
-			final ModelInputSnapshot snap = DiffFactory.eINSTANCE
-					.createModelInputSnapshot();
-			snap.setDiff(((ModelCompareInput) getInput()).getDiff());
-			snap.setMatch(((ModelCompareInput) getInput()).getMatch());
-			configuration.setProperty(
-					EMFCompareConstants.PROPERTY_CONTENT_INPUT_CHANGED, snap);
-			leftDirty |= !leftToRight && configuration.isLeftEditable();
-			rightDirty |= leftToRight && configuration.isRightEditable();
-			setLeftDirty(leftDirty);
-			setRightDirty(rightDirty);
-			update();
-		}
-	}
-
-	/**
-	 * Undoes the changes implied by the currently selected {@link DiffElement
-	 * diff}.
-	 */
-	protected void copyDiffLeftToRight() {
-		if (currentSelection != null)
-			copy(currentSelection, true);
-		currentSelection.clear();
-		switchCopyState(false);
-	}
-
-	/**
-	 * Applies the changes implied by the currently selected {@link DiffElement
-	 * diff}.
-	 */
-	protected void copyDiffRightToLeft() {
-		if (currentSelection != null)
-			copy(currentSelection, false);
-		currentSelection.clear();
-		switchCopyState(false);
-	}
 
 	/**
 	 * {@inheritDoc}
@@ -483,8 +373,6 @@ public class ModelContentMergeViewer extends ContentMergeViewer {
 
 		createPropertiesSyncHandlers(leftPart, rightPart, ancestorPart);
 		createTreeSyncHandlers(leftPart, rightPart, ancestorPart);
-		// createDiagramSyncHandlers(leftPart, rightPart, ancestorPart);
-
 	}
 
 	/**
@@ -494,65 +382,7 @@ public class ModelContentMergeViewer extends ContentMergeViewer {
 	 */
 	@Override
 	protected void createToolItems(ToolBarManager tbm) {
-		// hack
 		tbm.removeAll();
-
-		//tbm.add(new ZoomComboContributionItem(leftPart.getDiagramPart()));
-//		// COPY DIFF LEFT TO RIGHT
-//		if (getCompareConfiguration().isRightEditable()) {
-//			copyDiffLeftToRight = new AbstractCompareAction(ResourceBundle
-//					.getBundle(BUNDLE_NAME), "action.CopyDiffLeftToRight.") { //$NON-NLS-1$
-//				@Override
-//				public void run() {
-//					copyDiffLeftToRight();
-//				}
-//			};
-//			final ActionContributionItem copyLeftToRightContribution = new ActionContributionItem(
-//					copyDiffLeftToRight);
-//			copyLeftToRightContribution.setVisible(false);
-//			tbm.appendToGroup("merge", copyLeftToRightContribution); //$NON-NLS-1$
-//		}
-//		
-//		// COPY DIFF RIGHT TO LEFT
-//		if (getCompareConfiguration().isLeftEditable()) {
-//			copyDiffRightToLeft = new AbstractCompareAction(ResourceBundle
-//					.getBundle(BUNDLE_NAME), "action.CopyDiffRightToLeft.") { //$NON-NLS-1$
-//				@Override
-//				public void run() {
-//					copyDiffRightToLeft();
-//				}
-//			};
-//			final ActionContributionItem copyRightToLeftContribution = new ActionContributionItem(
-//					copyDiffRightToLeft);
-//			copyRightToLeftContribution.setVisible(false);
-//			tbm.appendToGroup("merge", copyRightToLeftContribution); //$NON-NLS-1$
-//		}
-//		
-//		// NEXT DIFF
-//		final Action nextDiff = new AbstractCompareAction(ResourceBundle
-//				.getBundle(BUNDLE_NAME), "action.NextDiff.") { //$NON-NLS-1$
-//			@Override
-//			public void run() {
-//				navigate(true);
-//			}
-//		};
-//		final ActionContributionItem nextDiffContribution = new ActionContributionItem(
-//				nextDiff);
-//		nextDiffContribution.setVisible(false);
-//		tbm.appendToGroup("navigation", nextDiffContribution); //$NON-NLS-1$
-//		
-//		// PREVIOUS DIFF
-//		final Action previousDiff = new AbstractCompareAction(ResourceBundle
-//				.getBundle(BUNDLE_NAME), "action.PrevDiff.") { //$NON-NLS-1$
-//			@Override
-//			public void run() {
-//				navigate(false);
-//			}
-//		};
-//		final ActionContributionItem previousDiffContribution = new ActionContributionItem(
-//				previousDiff);
-//		previousDiffContribution.setVisible(false);
-//		tbm.appendToGroup("navigation", previousDiffContribution); //$NON-NLS-1$
 	}
 
 	/**
@@ -713,29 +543,6 @@ public class ModelContentMergeViewer extends ContentMergeViewer {
 	}
 
 	/**
-	 * This will enable or disable the toolbar's copy actions according to the
-	 * given <code>boolean</code>. The "copy diff left to right" action will be
-	 * enabled if <code>enable</code> is <code>True</code>, but the
-	 * "copy diff right to left" action will only be activated if
-	 * <code>enable</code> is <code>True</code> AND the left model isn't a
-	 * remote model.
-	 * 
-	 * @param enabled
-	 *            <code>True</code> if we seek to enable the actions,
-	 *            <code>False</code> otherwise.
-	 */
-	protected void switchCopyState(boolean enabled) {
-		final boolean leftIsRemote = ModelComparator.getComparator(
-				configuration).isLeftRemote();
-		final boolean rightIsRemote = ModelComparator.getComparator(
-				configuration).isRightRemote();
-		if (copyDiffLeftToRight != null)
-			copyDiffLeftToRight.setEnabled(!rightIsRemote && enabled);
-		if (copyDiffRightToLeft != null)
-			copyDiffRightToLeft.setEnabled(!leftIsRemote && enabled);
-	}
-
-	/**
 	 * {@inheritDoc}
 	 * 
 	 * @see ContentMergeViewer#updateContent(Object, Object, Object)
@@ -768,7 +575,6 @@ public class ModelContentMergeViewer extends ContentMergeViewer {
 		final IPreferenceStore comparePreferences = EMFCompareUIPlugin
 				.getDefault().getPreferenceStore();
 		updateColors(comparePreferences);
-		updateDrawDiffMarkers(comparePreferences);
 	}
 
 	/**
@@ -830,34 +636,6 @@ public class ModelContentMergeViewer extends ContentMergeViewer {
 				ancestorPart.getTreePart());
 		handleHSync(ancestorPart.getTreePart(), rightPart.getTreePart(),
 				leftPart.getTreePart());
-	}
-
-	/**
-	 * Takes care of the creation of the synchronization handlers for the tree
-	 * tab of our viewer parts.
-	 * 
-	 * @param parts
-	 *            The other parts to synchronize with.
-	 */
-	private void createDiagramSyncHandlers(ModelContentMergeTabFolder... parts) {
-		if (parts.length < 2)
-			throw new IllegalArgumentException(EMFCompareUIMessages
-					.getString("ModelContentMergeViewer.illegalSync")); //$NON-NLS-1$
-
-		// horizontal
-		handleHSync(leftPart.getDiagramPart(), rightPart.getDiagramPart(),
-				ancestorPart.getDiagramPart());
-		handleHSync(rightPart.getDiagramPart(), leftPart.getDiagramPart(),
-				ancestorPart.getDiagramPart());
-		handleHSync(ancestorPart.getDiagramPart(), rightPart.getDiagramPart(),
-				leftPart.getDiagramPart());
-		// vertical
-		handleVSync(leftPart.getDiagramPart(), rightPart.getDiagramPart(),
-				ancestorPart.getDiagramPart());
-		handleVSync(rightPart.getDiagramPart(), leftPart.getDiagramPart(),
-				ancestorPart.getDiagramPart());
-		handleVSync(ancestorPart.getDiagramPart(), rightPart.getDiagramPart(),
-				leftPart.getDiagramPart());
 	}
 
 	/**
@@ -980,20 +758,11 @@ public class ModelContentMergeViewer extends ContentMergeViewer {
 		colors.put(EMFCompareConstants.PREFERENCES_KEY_REMOVED_COLOR,
 				removedColor);
 	}
+	
 	public String getTitle(){
 		return "Visualization of Diagram Differences";
 	}
-	/**
-	 * Updates the value of the boolean indicating that we should ignore diff
-	 * markers as it is changed on the preference page.
-	 * 
-	 * @param comparePreferences
-	 *            Preference store where to retrieve our values.
-	 */
-	private void updateDrawDiffMarkers(IPreferenceStore comparePreferences) {
-		drawDiffMarkers = comparePreferences
-				.getBoolean(EMFCompareConstants.PREFERENCES_KEY_DRAW_DIFFERENCES);
-	}
+	
 
 	/**
 	 * Basic implementation of an {@link ICompareEditorPartListener}.
@@ -1042,5 +811,11 @@ public class ModelContentMergeViewer extends ContentMergeViewer {
 		public void updateCenter() {
 			ModelContentMergeViewer.this.updateCenter();
 		}
+	}
+
+
+	@Override
+	protected void copy(boolean leftToRight) {
+		;// nothing implemented yet
 	}
 }
