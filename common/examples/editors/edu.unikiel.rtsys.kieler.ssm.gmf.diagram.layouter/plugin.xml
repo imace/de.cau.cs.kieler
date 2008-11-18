@@ -33,7 +33,7 @@
       <propertySections
             contributorId="edu.unikiel.rtsys.kieler.ssm.gmf.diagram">
          <propertySection
-               class="edu.unikiel.rtsys.kieler.ssm.gmf.diagram.layouter.properties.sections.KimlLayoutTypePropertySection"
+               class="edu.unikiel.rtsys.kieler.kiml.ui.properties.tabbed.sections.KimlLayoutTypePropertySection"
                id="edu.unikiel.rtsys.kieler.ssm.gmf.diagram.layouter.kimlLayoutSection"
                tab="property.tab.LayoutPropertySection">
             <input
