@@ -7,5 +7,41 @@
             class="dataflow.diagram.services.DataflowDiagramLayouter"
             editor_id="dataflow.diagram.part.DataflowDiagramEditorID"></kimlDiagramLayouter>
    </extension>
-
+ <extension
+         point="org.eclipse.ui.views.properties.tabbed.propertyTabs">
+      <propertyTabs
+            contributorId="edu.unikiel.rtsys.kieler.dataflow.diagram">
+         <propertyTab
+               category="visual"
+               id="property.tab.LayoutPropertySection"
+               label="Kiml Layout">
+         </propertyTab>
+      </propertyTabs>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views.properties.tabbed.propertySections">
+      <propertySections
+            contributorId="edu.unikiel.rtsys.kieler.dataflow.diagram">
+         <propertySection
+               class="edu.unikiel.rtsys.kieler.kiml.ui.properties.tabbed.sections.KimlLayoutTypePropertySection"
+               id="edu.unikiel.rtsys.kieler.kiml.ui.properties.tabbed.sections.KimlLayoutTypePropertySection"
+               tab="property.tab.LayoutPropertySection">
+            <input
+                  type="dataflow.diagram.edit.parts.Box2EditPart">
+            </input>
+            <input
+                  type="dataflow.diagram.edit.parts.BoxEditPart">
+            </input>
+            <input
+                  type="dataflow.diagram.edit.parts.BoxBoxCompartment2EditPart">
+            </input>
+            <input
+                  type="dataflow.diagram.edit.parts.BoxBoxCompartmentEditPart">
+            </input>
+            <input
+                  type="dataflow.diagram.edit.parts.DataflowModelEditPart">
+            </input>
+         </propertySection>
+      </propertySections>
+   </extension>
 </plugin>
