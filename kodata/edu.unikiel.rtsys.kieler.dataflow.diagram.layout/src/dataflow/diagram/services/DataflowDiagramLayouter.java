@@ -95,6 +95,11 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 			DiagramDocumentEditor documentEditor = (DiagramDocumentEditor)target;
 			layoutRootPart = documentEditor.getDiagramEditPart();
 		}
+		else if (target instanceof DataflowModelEditPart){
+			DataflowModelEditPart editPart = (DataflowModelEditPart)target;
+			DiagramRootEditPart editor = (DiagramRootEditPart) editPart.getRoot();
+			layoutRootPart = editor.getContents();
+		}
 		else if (target instanceof IStructuredSelection)
 		{
 			IStructuredSelection selection = (IStructuredSelection)target;
