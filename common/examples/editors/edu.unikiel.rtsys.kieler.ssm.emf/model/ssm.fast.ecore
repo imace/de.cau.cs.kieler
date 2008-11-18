@@ -57,7 +57,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="effect" upperBound="-1"
         eType="#//Action" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//TransitionType"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isImmediate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="immediate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TransitionTriggerable" eSuperTypes="#//Transition">
     <eStructuralFeatures xsi:type="ecore:EReference" name="trigger" lowerBound="1"
