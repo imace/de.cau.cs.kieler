@@ -147,11 +147,6 @@ public final class KivikComparator {
 								options.put(
 										MatchOptions.OPTION_PROGRESS_MONITOR,
 										monitor);
-								// options
-								// .put(MatchOptions.OPTION_IGNORE_ID,
-								// true);
-								// options.put(MatchOptions.OPTION_IGNORE_XMI_ID,
-								// true);
 
 								final MatchModel match;
 								if (getAncestorDomainEObject() == null)

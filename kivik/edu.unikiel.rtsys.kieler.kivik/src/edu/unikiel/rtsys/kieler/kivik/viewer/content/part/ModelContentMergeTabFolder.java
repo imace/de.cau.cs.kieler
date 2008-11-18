@@ -32,6 +32,7 @@ import org.eclipse.emf.compare.ui.util.EMFCompareConstants;
 import org.eclipse.emf.compare.ui.util.EMFCompareEObjectUtils;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gef.editparts.AbstractGraphicalEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramGraphicalViewer;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -54,8 +55,6 @@ import org.eclipse.swt.widgets.Scrollable;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
 
-import edu.unikiel.rtsys.kieler.kivik.Constants;
-import edu.unikiel.rtsys.kieler.kivik.KivikPlugin;
 import edu.unikiel.rtsys.kieler.kivik.KivikUIMessages;
 import edu.unikiel.rtsys.kieler.kivik.viewer.content.ModelContentMergeViewer;
 import edu.unikiel.rtsys.kieler.kivik.viewer.content.part.diagram.ModelContentMergeDiagramTab;
@@ -69,7 +68,7 @@ import edu.unikiel.rtsys.kieler.kivik.viewer.content.part.property.ModelContentM
  */
 public class ModelContentMergeTabFolder {
 	/** This keeps track of the parent viewer of this tab folder. */
-	/* protected */ final ModelContentMergeViewer parentViewer;
+	/* protected */final ModelContentMergeViewer parentViewer;
 
 	/**
 	 * This <code>int</code> represents the side of this viewer part. Must be
@@ -389,13 +388,14 @@ public class ModelContentMergeTabFolder {
 				.getSelectionIndex());
 		if (partSide == EMFCompareConstants.LEFT) {
 			if (currentTab == diagram) {
-				parentViewer.drawDiffMarkers = false;
+				ModelContentMergeViewer.drawDiffMarkers = false;
 			} else {
 				boolean draw = EMFCompareUIPlugin
-				.getDefault()
-				.getPluginPreferences().getBoolean(
-						EMFCompareConstants.PREFERENCES_KEY_DRAW_DIFFERENCES);
-				parentViewer.drawDiffMarkers = draw;
+						.getDefault()
+						.getPluginPreferences()
+						.getBoolean(
+								EMFCompareConstants.PREFERENCES_KEY_DRAW_DIFFERENCES);
+				ModelContentMergeViewer.drawDiffMarkers = draw;
 			}
 		}
 		resizeBounds();
@@ -422,7 +422,6 @@ public class ModelContentMergeTabFolder {
 		propertiesTab.setText(KivikUIMessages
 				.getString("ModelContentMergeTabFolder.properties")); //$NON-NLS-1$
 
-		
 		final Composite treePanel = new Composite(tabFolder, SWT.NONE);
 		treePanel.setLayout(new GridLayout());
 		treePanel.setLayoutData(new GridData(GridData.FILL_BOTH));
@@ -447,7 +446,6 @@ public class ModelContentMergeTabFolder {
 		tabs.add(diagram);
 		tabs.add(tree);
 		tabs.add(properties);
-		
 
 		tabFolder.addSelectionListener(new SelectionListener() {
 			public void widgetDefaultSelected(SelectionEvent e) {
@@ -459,7 +457,7 @@ public class ModelContentMergeTabFolder {
 				fireSelectedtabChanged();
 			}
 		});
-		
+
 		tabFolder.setSelection(diagramTab);
 	}
 
@@ -686,15 +684,19 @@ public class ModelContentMergeTabFolder {
 
 					public void selectionChanged(SelectionChangedEvent event) {
 						// do this check to prevent listener loops
-						// if (((StructuredSelection) event.getSelection())
-						// .equals(oldSelection))
-						// return;
-						// else {
-						oldSelection = (IStructuredSelection) event
-								.getSelection();
-						fireSelectionChanged(event);
-						graphicalEditPartsSelected(event);
-						// }
+						if (((StructuredSelection) event.getSelection())
+								.equals(oldSelection)
+								|| ((DiagramGraphicalViewer) diagramPart)
+										.getContents().equals(
+												((StructuredSelection) event
+														.getSelection()).getFirstElement()))
+							return;
+						else {
+							oldSelection = (IStructuredSelection) event
+									.getSelection();
+							fireSelectionChanged(event);
+							graphicalEditPartsSelected(event);
+						}
 
 					}
 

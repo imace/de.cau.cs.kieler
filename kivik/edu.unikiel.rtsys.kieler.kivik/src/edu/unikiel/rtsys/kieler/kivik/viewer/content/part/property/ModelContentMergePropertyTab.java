@@ -195,6 +195,8 @@ public final class ModelContentMergePropertyTab extends TableViewer implements
 	/**
 	 */
 	public ModelContentMergeTabObject getUIElement(EObject data) {
+		if (getInput() == null)
+			return null;
 		final EObject element;
 		if (getInput() instanceof UnMatchElement)
 			element = ((UnMatchElement) getInput()).getElement();

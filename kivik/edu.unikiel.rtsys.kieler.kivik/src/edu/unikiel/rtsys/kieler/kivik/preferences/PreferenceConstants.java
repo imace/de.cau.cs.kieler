@@ -10,5 +10,6 @@ public class PreferenceConstants {
 	public static final String PREF_KIVIK_ENABLE_COLLAPSING_OF_UNCHANGED_ELEMENTS = "enable.hinding.of.unchanged.elements";
 	public static final String PREF_KIVIK_ENABLE_ZOOMING_TO_CHANGED_ELEMENTS = "enable.zooming.to.changed.elements";
 	public static final String PREF_KIVIK_ENABLE_SCROLLING_ANIMATION = "enable.scrolling.animation";
-	
+	public static final String PREF_KIVIK_INITIAL_ZOOM_FACTOR = "initial.zoom.factor";
+
 }

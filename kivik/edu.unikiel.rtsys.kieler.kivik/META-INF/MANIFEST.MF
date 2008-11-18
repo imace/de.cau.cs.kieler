@@ -28,5 +28,4 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.gmf.runtime.diagram.ui.render
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: edu.unikiel.rtsys.kieler.kivik,
- edu.unikiel.rtsys.kieler.kivik.util
+Export-Package: edu.unikiel.rtsys.kieler.kivik

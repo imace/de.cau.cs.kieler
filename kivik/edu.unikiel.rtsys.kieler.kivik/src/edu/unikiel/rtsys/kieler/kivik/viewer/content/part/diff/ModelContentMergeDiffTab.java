@@ -141,7 +141,8 @@ public class ModelContentMergeDiffTab extends TreeViewer implements
 			return result;
 
 		final ModelContentMergeTabObject item = dataToItem.get(diff);
-
+		if (item == null)
+			return null;
 		// This is a match, we'll search the first visible element in its tree
 		// path
 		Item treeItem = null;
@@ -267,9 +268,10 @@ public class ModelContentMergeDiffTab extends TreeViewer implements
 		final AdapterFactory adapterFactory = AdapterUtils.getAdapterFactory();
 		setLabelProvider(new AdapterFactoryLabelProvider(adapterFactory));
 		if (object instanceof DiagramImpl)
-			setInput(((DiagramImpl) object).getElement().eResource().getContents().get(0));
+			setInput(((DiagramImpl) object).getElement().eResource()
+					.getContents().get(0));
 		else if (object instanceof EObject)
-			setInput(((EObject) object));//.eResource());
+			setInput(((EObject) object));// .eResource());
 		else {
 			assert object instanceof Resource;
 			setInput(object);
@@ -569,7 +571,11 @@ public class ModelContentMergeDiffTab extends TreeViewer implements
 				// TODO for now, we're using the first item's data, we should
 				// look for the matchedElement
 				data = (EObject) getTree().getItems()[0].getData();
-			final Item actualItem = (Item) findItem(data);
+			Object foundItem = findItem(data);
+			Item actualItem = null;
+			if (foundItem instanceof Item) {
+				actualItem = (Item) foundItem;
+			}
 			if (actualItem == null)
 				return;
 

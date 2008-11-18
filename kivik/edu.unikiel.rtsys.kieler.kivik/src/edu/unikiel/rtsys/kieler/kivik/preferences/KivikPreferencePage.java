@@ -2,6 +2,7 @@ package edu.unikiel.rtsys.kieler.kivik.preferences;
 
 import org.eclipse.jface.preference.BooleanFieldEditor;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
+import org.eclipse.jface.preference.IntegerFieldEditor;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -105,10 +106,20 @@ public class KivikPreferencePage extends FieldEditorPreferencePage implements
 		Label collapsingDescription = new Label(options, SWT.WRAP);
 		collapsingDescription
 				.setText("If enabled, contained elements that are not changed are collapsed and hidden to the user. This forces relayout.");
-	
+
+		/* zoom factor */
+		IntegerFieldEditor initialZoom = new IntegerFieldEditor(
+				PreferenceConstants.PREF_KIVIK_INITIAL_ZOOM_FACTOR,
+				"Initial zoom factor in %", options, 3);
+		initialZoom.setValidRange(10, 400);
+
+		Label initialZoomDescription = new Label(options, SWT.WRAP);
+		initialZoomDescription
+				.setText("Set here the zoom factor in % to which the diagrams should be scaled initially.");
+
 		options.setLayoutData(new GridData(GridData.FILL, GridData.FILL, true,
-				false, 1, 1));
-		gl = new GridLayout(1, true);
+				false, 2, 1));
+		gl = new GridLayout(3, false);
 		gl.marginWidth = 15;
 		gl.marginHeight = 10;
 		options.setLayout(gl);
@@ -119,6 +130,7 @@ public class KivikPreferencePage extends FieldEditorPreferencePage implements
 		addField(zooming);
 		addField(layout);
 		addField(collapsing);
+		addField(initialZoom);
 
 	}
 

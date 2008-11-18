@@ -15,14 +15,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.ResourceBundle;
 
 import org.eclipse.compare.CompareConfiguration;
 import org.eclipse.compare.CompareViewerPane;
 import org.eclipse.compare.HistoryItem;
 import org.eclipse.compare.contentmergeviewer.ContentMergeViewer;
 import org.eclipse.compare.contentmergeviewer.IMergeViewerContentProvider;
-import org.eclipse.compare.internal.Utilities;
 import org.eclipse.compare.structuremergeviewer.ICompareInput;
 import org.eclipse.emf.compare.EMFComparePlugin;
 import org.eclipse.emf.compare.diff.metamodel.DiffElement;
@@ -30,7 +28,6 @@ import org.eclipse.emf.compare.diff.metamodel.DiffFactory;
 import org.eclipse.emf.compare.diff.metamodel.DiffGroup;
 import org.eclipse.emf.compare.diff.metamodel.ModelInputSnapshot;
 import org.eclipse.emf.compare.diff.metamodel.util.DiffAdapterFactory;
-import org.eclipse.emf.compare.ui.AbstractCompareAction;
 import org.eclipse.emf.compare.ui.EMFCompareUIMessages;
 import org.eclipse.emf.compare.ui.EMFCompareUIPlugin;
 import org.eclipse.emf.compare.ui.ICompareEditorPartListener;
@@ -40,9 +37,7 @@ import org.eclipse.emf.compare.ui.internal.ModelComparator;
 import org.eclipse.emf.compare.ui.util.EMFCompareConstants;
 import org.eclipse.emf.compare.util.EMFCompareMap;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.gef.ui.actions.ZoomComboContributionItem;
 import org.eclipse.jface.action.Action;
-import org.eclipse.jface.action.ActionContributionItem;
 import org.eclipse.jface.action.ToolBarManager;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.preference.PreferenceConverter;
@@ -61,8 +56,6 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.ScrollBar;
 import org.eclipse.swt.widgets.Scrollable;
 
-import edu.unikiel.rtsys.kieler.kivik.Constants;
-import edu.unikiel.rtsys.kieler.kivik.KivikPlugin;
 import edu.unikiel.rtsys.kieler.kivik.internal.KivikComparator;
 import edu.unikiel.rtsys.kieler.kivik.viewer.content.part.AbstractCenterPart;
 import edu.unikiel.rtsys.kieler.kivik.viewer.content.part.IModelContentMergeViewerTab;
@@ -181,10 +174,8 @@ public class ModelContentMergeViewer extends ContentMergeViewer {
 		// super(SWT.NONE, ResourceBundle.getBundle(BUNDLE_NAME), config); TODO
 		super(SWT.NONE, null, config);
 		configuration = config;
-		drawDiffMarkers=false;
 		buildControl(parent);
 		updatePreferences();
-		drawDiffMarkers=false;
 		setContentProvider(new ModelContentMergeContentProvider(config));
 
 		// disables diff copy from either side
