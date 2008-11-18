@@ -164,7 +164,6 @@ public class KimlLayoutTypePropertySection extends
 						.get(eObject));
 				KimlGMFLayoutHintHelper.setContainedElementsLayoutType(e2Gep
 						.get(eObject), (LAYOUT_TYPE.get(stringValue)));
-				System.out.println(index);
 			}
 
 			Animation.markBegin();
