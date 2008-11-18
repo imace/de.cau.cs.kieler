@@ -38,6 +38,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.gef.ConnectionEditPart;
+import org.eclipse.gef.EditDomain;
 import org.eclipse.gef.MouseWheelHandler;
 import org.eclipse.gef.MouseWheelZoomHandler;
 import org.eclipse.gef.editparts.AbstractGraphicalEditPart;
@@ -50,9 +51,9 @@ import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeCompartmentEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.figures.BorderItemsAwareFreeFormLayer;
 import org.eclipse.gmf.runtime.diagram.ui.figures.ResizableCompartmentFigure;
 import org.eclipse.gmf.runtime.diagram.ui.figures.ShapeCompartmentFigure;
-import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditDomain;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramGraphicalViewer;
 import org.eclipse.gmf.runtime.diagram.ui.render.editparts.RenderedDiagramRootEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.services.editpart.EditPartService;
 import org.eclipse.gmf.runtime.draw2d.ui.internal.figures.AnimatableScrollPane;
 import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.gmf.runtime.notation.MeasurementUnit;
@@ -64,6 +65,9 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.ui.IEditorDescriptor;
+import org.eclipse.ui.IEditorRegistry;
+import org.eclipse.ui.PlatformUI;
 
 import edu.unikiel.rtsys.kieler.kiml.layout.services.DiagramLayouters;
 import edu.unikiel.rtsys.kieler.kiml.layout.services.KimlAbstractLayouter;
@@ -74,8 +78,6 @@ import edu.unikiel.rtsys.kieler.kivik.viewer.content.ModelContentMergeViewer;
 import edu.unikiel.rtsys.kieler.kivik.viewer.content.part.IModelContentMergeViewerTab;
 import edu.unikiel.rtsys.kieler.kivik.viewer.content.part.ModelContentMergeTabFolder;
 import edu.unikiel.rtsys.kieler.kivik.viewer.content.part.ModelContentMergeTabObject;
-import edu.unikiel.rtsys.kieler.ssm.diagram.edit.parts.SafeStateMachineEditPartFactory;
-import edu.unikiel.rtsys.kieler.ssm.diagram.part.SafeStateMachineDiagramEditor;
 
 /**
  *
@@ -136,10 +138,8 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 				.addPropertyChangeListener(this);
 
 		/* initialize the DiagramGraphicalViewer */
-		setEditDomain(new DiagramEditDomain(null));
-		setEditPartFactory(new SafeStateMachineEditPartFactory());
-		// setEditPartFactory(new MealyMachineEditPartFactory());
-
+		setEditDomain(new EditDomain());
+		setEditPartFactory(EditPartService.getInstance());
 		setRootEditPart(new RenderedDiagramRootEditPart(
 				MeasurementUnit.PIXEL_LITERAL));
 
@@ -214,11 +214,14 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 		if (prefCollapseUnchanged) {
 			collapseUnchanged(diagram);
 		}
+
 		if (prefRelayoutDiagram || prefCollapseUnchanged) {
 			primaryLayer.validate();
+			IEditorRegistry reg = PlatformUI.getWorkbench().getEditorRegistry();
+			String filename = diagram.eResource().getURI().toString();
+			IEditorDescriptor editorDescriptor = reg.getDefaultEditor(filename);
 			KimlAbstractLayouter diagramLayouter = DiagramLayouters
-					.getInstance().getDiagramLayouter(
-							SafeStateMachineDiagramEditor.ID);
+					.getInstance().getDiagramLayouter(editorDescriptor.getId());
 			diagramLayouter.layout(getEditPartRegistry().get(diagram));
 		}
 
@@ -563,7 +566,7 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 	@Override
 	public void showElements(List<DiffElement> diffElements) {
 		deselectAll();
-		
+
 		final List<AbstractGraphicalEditPart> newSelection = new ArrayList<AbstractGraphicalEditPart>();
 		AbstractGraphicalEditPart editPart = null;
 
@@ -604,12 +607,16 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 
 		if (editParts.size() > 0) {
 			AbstractGraphicalEditPart editPart = editParts.get(0);
-			
-			/* hack to zoom not to the diagram, but to the top edit part inside it */
-			if (editPart.equals(getContents())){
-				editPart = (AbstractGraphicalEditPart) getContents().getChildren().get(0);
+
+			/*
+			 * hack to zoom not to the diagram, but to the top edit part inside
+			 * it
+			 */
+			if (editPart.equals(getContents())) {
+				editPart = (AbstractGraphicalEditPart) getContents()
+						.getChildren().get(0);
 			}
-			
+
 			/* scrolling and zoom */
 			IFigure fig = editPart.getFigure();
 			Rectangle figBounds = translateFromTo(fig, viewport);
@@ -636,20 +643,20 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 					}
 				}
 			}
-			
+
 			Color highlightColor = new Color(
 					null,
 					ModelContentMergeViewer
 							.getColor(EMFCompareConstants.PREFERENCES_KEY_HIGHLIGHT_COLOR));
 
 			Rectangle newBounds = translateFromTo(fig, feedbackLayer);
-			
+
 			RoundedRectangle markerFigure = new RoundedRectangle();
 			markerFigure.setBounds(newBounds.expand(8, 8));
 			markerFigure.setLineWidth(5);
 			markerFigure.setForegroundColor(highlightColor);
 			markerFigure.setFill(false);
-			
+
 			feedbackLayer.add(markerFigure);
 		}
 	}
@@ -777,7 +784,6 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 			return null;
 		}
 	}
-
 
 	@Override
 	public void propertyChange(PropertyChangeEvent event) {
