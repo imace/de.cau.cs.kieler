@@ -45,7 +45,7 @@ public class KivikPreferencePage extends FieldEditorPreferencePage implements
 		// define gl as GridLayout globally
 		GridLayout gl = null;
 
-		// Link to the content types page
+		/* ========= Link to the content types page ======= */
 		Group contentTypes = new Group(this.getFieldEditorParent(), SWT.NONE);
 		contentTypes.setText("Content types");
 		new PreferenceLinkArea(contentTypes,
@@ -57,11 +57,29 @@ public class KivikPreferencePage extends FieldEditorPreferencePage implements
 		contentTypesDescription
 				.setText("You have to register the content types of the models you want to compare graphically. This is done globally.");
 		contentTypes.setLayoutData(new GridData(GridData.FILL, GridData.FILL,
-				true, false, 1, 1));
+				true, false, 2, 1));
 		gl = new GridLayout(1, true);
 		gl.marginWidth = 15;
 		gl.marginHeight = 10;
 		contentTypes.setLayout(gl);
+
+		/* ========= link to EMF Compare page ======= */
+		Group emfCompare = new Group(this.getFieldEditorParent(), SWT.NONE);
+		emfCompare.setText("EMF Compare");
+		new PreferenceLinkArea(emfCompare,
+				SWT.NONE,
+				"org.eclipse.emf.compare.ui.preferences.EMFComparePreferencesPage", //$NON-NLS-1$
+				"See <a>{0}</a> to set EMF Compare options",
+				(IWorkbenchPreferenceContainer) getContainer(), null);
+		Label emfCompareDescription = new Label(emfCompare, SWT.WRAP);
+		emfCompareDescription
+				.setText("Some common options for model comparison are taken from the EMF Compare settings. You have to adjust them there.");
+		emfCompare.setLayoutData(new GridData(GridData.FILL, GridData.FILL,
+				true, false, 2, 1));
+		gl = new GridLayout(1, true);
+		gl.marginWidth = 15;
+		gl.marginHeight = 10;
+		emfCompare.setLayout(gl);
 
 		/* ========= options group ======= */
 		Group options = new Group(this.getFieldEditorParent(), SWT.NONE);
