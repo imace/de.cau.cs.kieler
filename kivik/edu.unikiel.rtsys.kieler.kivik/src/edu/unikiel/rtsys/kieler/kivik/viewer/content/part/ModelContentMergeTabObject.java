@@ -12,8 +12,10 @@ package edu.unikiel.rtsys.kieler.kivik.viewer.content.part;
 
 import org.eclipse.emf.compare.ui.util.EMFCompareConstants;
 import org.eclipse.swt.widgets.Item;
+import org.eclipse.swt.widgets.TableItem;
+import org.eclipse.swt.widgets.TreeItem;
 
-import edu.unikiel.rtsys.kieler.kivik.Constants;
+import edu.unikiel.rtsys.kieler.kivik.viewer.content.ModelContentMergeViewer;
 
 /**
  * This class will be used to wrap {@link Item} subclasses such as
@@ -97,7 +99,6 @@ public final class ModelContentMergeTabObject {
 		actualObject = actual;
 		visibleObject = visible;
 		if (drawingColor == null) {
-//			curveColorID = Constants.DO_NOT_COLORIZE;
 			curveColorID = EMFCompareConstants.PREFERENCES_KEY_CHANGED_COLOR;
 		} else
 			curveColorID = drawingColor;

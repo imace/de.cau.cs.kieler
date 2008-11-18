@@ -30,43 +30,6 @@
       </initializer>
    </extension>
    <extension
-         point="org.eclipse.ui.propertyPages">
-      <page
-            objectClass="org.eclipse.core.resources.IFile"
-            name="KiViK"
-            nameFilter="*.*"
-            class="edu.unikiel.rtsys.kieler.kivik.properties.KivikPropertyPage"
-            id="edu.unikiel.rtsys.kieler.kivik.properties.samplePropertyPage">
-      </page>
-   </extension>
-   <extension
-         point="org.eclipse.ui.views">
-      <category
-            id="edu.unikiel.rtsys.kieler.kivik"
-            name="KiViK"
-            parentCategory="edu.unikiel.rtsys.kieler.kiml.ui">
-      </category>
-      <view
-            name="KiViK View"
-            icon="icons/sample.gif"
-            category="edu.unikiel.rtsys.kieler.kivik"
-            class="edu.unikiel.rtsys.kieler.kivik.views.KivikView"
-            id="edu.unikiel.rtsys.kieler.kivik.views.KivikView">
-      </view>
-   </extension>
-   <extension
-         point="org.eclipse.ui.perspectiveExtensions">
-      <perspectiveExtension
-            targetID="org.eclipse.jdt.ui.JavaPerspective">
-         <view
-               ratio="0.5"
-               relative="org.eclipse.ui.views.TaskList"
-               relationship="right"
-               id="edu.unikiel.rtsys.kieler.kivik.views.KivikView">
-         </view>
-      </perspectiveExtension>
-   </extension>
-   <extension
          point="org.eclipse.help.contexts">
       <contexts
             file="contexts.xml">
