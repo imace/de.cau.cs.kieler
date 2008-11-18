@@ -67,7 +67,6 @@ public class LayoutProvidersPreferencePage extends FieldEditorPreferencePage imp
 	 * org.eclipse.ui.IWorkbenchPreferencePage#init(org.eclipse.ui.IWorkbench)
 	 */
 	public void init(IWorkbench workbench) {
-		System.out.println("init");
 	}
 	
 
