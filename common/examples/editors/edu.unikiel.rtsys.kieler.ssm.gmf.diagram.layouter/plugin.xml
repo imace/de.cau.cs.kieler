@@ -34,7 +34,7 @@
             contributorId="edu.unikiel.rtsys.kieler.ssm.gmf.diagram">
          <propertySection
                class="edu.unikiel.rtsys.kieler.kiml.ui.properties.tabbed.sections.KimlLayoutTypePropertySection"
-               id="edu.unikiel.rtsys.kieler.ssm.gmf.diagram.layouter.kimlLayoutSection"
+               id="edu.unikiel.rtsys.kieler.kiml.ui.properties.tabbed.sections.KimlLayoutTypePropertySection"
                tab="property.tab.LayoutPropertySection">
             <input
                   type="edu.unikiel.rtsys.kieler.ssm.diagram.edit.parts.CompositeState2EditPart">
