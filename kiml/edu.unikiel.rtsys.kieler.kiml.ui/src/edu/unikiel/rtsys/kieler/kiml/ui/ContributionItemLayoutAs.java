@@ -13,6 +13,7 @@ import org.eclipse.ui.menus.CommandContributionItem;
 import org.eclipse.ui.menus.CommandContributionItemParameter;
 
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO;
+import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_TYPE;
 import edu.unikiel.rtsys.kieler.kiml.layout.services.LayoutProviders;
 
 public class ContributionItemLayoutAs extends CompoundContributionItem {
@@ -25,7 +26,7 @@ public class ContributionItemLayoutAs extends CompoundContributionItem {
 
 		Map<String, String> parameters = new HashMap<String, String>();
 		ArrayList<IContributionItem> finalItems = new ArrayList<IContributionItem>();
-
+		Map<LAYOUT_TYPE, MenuManager> managers = new HashMap<LAYOUT_TYPE, MenuManager>();
 		/*
 		 * first, get all layout providers, build up the menu entry and order
 		 * the menu items according to the layout type, the layouter provides
@@ -44,10 +45,15 @@ public class ContributionItemLayoutAs extends CompoundContributionItem {
 			ccip.label = layoutProviderInfo.getLayouterName();
 
 			IContributionItem cci = new CommandContributionItem(ccip);
-			MenuManager mm = new MenuManager(layoutProviderInfo.getLayoutType()
-					.getLiteral());
-			mm.add(cci);
-			finalItems.add(mm);
+
+			if (!managers.containsKey(layoutProviderInfo.getLayoutType())) {
+				MenuManager mm = new MenuManager(layoutProviderInfo
+						.getLayoutType().getLiteral());
+				managers.put(layoutProviderInfo.getLayoutType(), mm);
+				finalItems.add(mm);
+			}
+
+			managers.get(layoutProviderInfo.getLayoutType()).add(cci);
 		}
 
 		if (finalItems.size() > 0)
