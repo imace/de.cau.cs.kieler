@@ -35,7 +35,7 @@ import edu.unikiel.rtsys.kieler.kiml.ui.helpers.KimlGMFLayoutHintHelper;
  * @author ars
  * 
  */
-public class GroupAsHandler extends AbstractHandler implements IHandler {
+public class LayoutAsHandler extends AbstractHandler implements IHandler {
 
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 
@@ -96,7 +96,7 @@ public class GroupAsHandler extends AbstractHandler implements IHandler {
 
 		/* just another sanity check if the right commandID */
 		if (commandID
-				.equals("edu.unikiel.rtsys.kieler.kiml.ui.command.groupAs")) {
+				.equals("edu.unikiel.rtsys.kieler.kiml.ui.command.layoutAs")) {
 
 			IEditorPart editorPart = HandlerUtil.getActiveEditor(event);
 			String editorId = editorPart.getEditorSite().getId();
