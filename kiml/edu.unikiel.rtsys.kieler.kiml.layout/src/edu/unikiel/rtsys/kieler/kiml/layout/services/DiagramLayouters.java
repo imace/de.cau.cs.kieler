@@ -5,6 +5,7 @@
  *
  *
  * Author: Arne Schipper, ars@informatik.uni-kiel.de 
+ *	       Miro Spönemann, msp@informatik.uni-kiel.de
  *
  *******************************************************************************/
 package edu.unikiel.rtsys.kieler.kiml.layout.services;
@@ -17,13 +18,30 @@ import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.Platform;
 
 /**
- * Controls existing extensions for the KIML Diagram Layouter extension point.
+ * Controls all the diagram layouters; which are loaded at startup. Realized as
+ * a singleton to allow easy access from anywhere and a fast processing.
+ * <p/>
+ * Collects the diagram layouters that extend {@link KimlAbstractLayouter} and
+ * register themselves at the <code>kimlDiagramLayouter</code> extension point.
+ * <p/>
+ * Provides a function to get a concrete diagram layouter for a given
+ * model/editor provider.
+ * <p/>
+ * There is still no proper error handling, but that is a KIELER-wide issue.
  * 
- * @author msp
+ * @author <a href="mailto:msp@informatik.uni-kiel.de">Miro Spönemann</a>
+ * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
+ * @see KimlAbstractLayouter
  */
 public final class DiagramLayouters {
 
+	/* singleton holder */
 	private static final DiagramLayouters INSTANCE = new DiagramLayouters();
+
+	/*
+	 * maps the name of a diagram layouter to the instantiated diagram layouter
+	 * object
+	 */
 	private HashMap<String, KimlAbstractLayouter> diagramLayouterMap = new HashMap<String, KimlAbstractLayouter>();
 
 	/**
@@ -40,8 +58,11 @@ public final class DiagramLayouters {
 		loadAvailableLayouters();
 	};
 
-	/**
-	 * Loads available extensions and puts them into a local map.
+	/*
+	 * does the actual loading of the diagram layouters, which need to register
+	 * themselves through the kimlDiagramLayouter extension point.
+	 * 
+	 * TODO: Proper error handling, KIELER-wide
 	 */
 	private void loadAvailableLayouters() {
 		IExtensionRegistry reg = Platform.getExtensionRegistry();

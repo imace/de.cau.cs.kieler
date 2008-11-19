@@ -18,18 +18,37 @@ import org.eclipse.jface.viewers.LabelProvider;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KLayoutGraph;
 
 /**
- * Abstract class every concrete layout handler has to extend. The layout engine
- * itself, the editor and the rootEditPart where the layout should start from
- * have to be set before the actual layout can be performed. The concrete
- * instances are responsible for the translation of the editor input model to
- * the KLayoutGraph the actual layout engine is working with, and the appliance
- * of the changes made to the KLayoutGraph back to the model in the editor.
+ * Abstract class every concrete diagram layouter has to extend. Performs the
+ * mapping from the diagram/model to the KLayoutGraph, and further on all the
+ * downstream steps to achieve a proper layout.
+ * <p/>
+ * The concrete instances are responsible for the translation of the editor
+ * input model to the KLayoutGraph the actual layout engine is working with, and
+ * for the appliance of the changes made to the KLayoutGraph back to the model
+ * in the editor.
+ * <p/>
+ * Concrete DiagramLayouters for a model/editor must register themselves through
+ * the <code>kimlDiagramLayouter</code> extension point. All DiagramLayouters
+ * published to Eclipse this way are collected with the {@link DiagramLayouters}
+ * singleton.
+ * <p/>
+ * Once you have obtained a concrete DiagramLayouter for your model/editor, you
+ * just have to call <code>layout</code> with the object you want to be laid
+ * out. That is all.
+ * <p/>
+ * There is still no proper error handling. This must be addressed on a KIELER
+ * basis.
  * 
- * @author ars
- * 
+ * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
+ * @see KimlAbstractLayouter#layout(Object) layout(Object)
+ * @see DiagramLayouters
  */
 public abstract class KimlAbstractLayouter {
 
+	/*
+	 * some strings used when creating the concrete layouters via the extension
+	 * point mechanism
+	 */
 	public static final String EXTENSION_POINT_ID = "edu.unikiel.rtsys.kieler.kiml.layout.kimlDiagramLayouter";
 	public static final String ATTRIBUTE_CLASS = "class";
 	public static final String ATTRIBUTE_EDITOR_ID = "editor_id";
@@ -38,11 +57,30 @@ public abstract class KimlAbstractLayouter {
 	public static final String ATTRIBUTE_ICON = "icon";
 
 	/**
-	 * Method which should be called to do the actual layout. Layouters calling
-	 * this methods must have build up the KLayoutGraph appropriately using the
-	 * buildLayoutGraph method and must have an implementation of the
-	 * applyLayout methods to actually apply the layout information back to the
-	 * diagram.
+	 * Method which should be called to do the actual layout. Several steps are
+	 * performed in this method:
+	 * <ol>
+	 * <li>The concrete implementation of
+	 * {@link KimlAbstractLayouter#init(Object target) init} is called. The
+	 * implementing class should initialize itself to be able to perform the
+	 * further steps. That is, for example, to extract the rootPart for the
+	 * layout correctly from the provided object in the <code>layout</code>
+	 * method, which will be used later be <code>buildLayoutGraph</code>, and
+	 * for example to be aware of an eventual zoom of the editor.</li>
+	 * <li>The KLayoutGraph is build up using the method
+	 * {@link KimlAbstractLayouter#buildLayoutGraph() buildLayoutGraph}, which
+	 * must also be implemented by the subclass.</li>
+	 * <li>A layout engine is chosen. At the moment, there is just the
+	 * {@link KimlRecursiveGroupLayouterEngine}, which spawns a new layout
+	 * provider for each hierarchy level. This can be changed in later
+	 * implementations.</li>
+	 * <li>Finally, {@link KimlAbstractLayouter#applyLayout() applyLayout} of
+	 * the implementing class is called to write the information which is now in
+	 * the processed KLayoutGraph back to the diagram in the viewer or editor.</li>
+	 * </ol>
+	 * <p/>
+	 * There is still no proper error handling. This must be addressed on a
+	 * KIELER basis.
 	 * 
 	 * @param target
 	 *            object specifying what is to be layouted
@@ -79,44 +117,48 @@ public abstract class KimlAbstractLayouter {
 	 * 
 	 * @return a String-to-String map of the settings of the diagram layouter.
 	 */
-	public Map<String, String> getSettings()
-	{
+	public Map<String, String> getSettings() {
 		return new HashMap<String, String>();
 	}
-	
+
 	/**
-	 * Returns a label provider that is capable of getting labels for
-	 * concrete diagram edit parts such as nodes.
+	 * Returns a label provider that is capable of getting labels for concrete
+	 * diagram edit parts such as nodes.
 	 * 
 	 * @return a label provider that is compatible with the related diagram
 	 */
-	public ILabelProvider getLabelProvider()
-	{
+	public ILabelProvider getLabelProvider() {
 		return new LabelProvider();
 	}
 
 	/**
-	 * Initializes the layouter for a new given selection of a diagram. Chooses
-	 * the right diagram elements for laying out and prepares all needed
+	 * Is called first during the layout process. Implementations should
+	 * initialize the layouter for a new given selection of a diagram, should
+	 * choose the right diagram elements for laying out and prepare all needed
 	 * structures.
 	 * 
 	 * @param target
-	 *            object specifying what is to be laid out
+	 *            Object specifying what is to be laid out. The translation in
+	 *            {@link buildLayoutGraph} should be able to process this
+	 *            object, or there should be a mechanism in this method to
+	 *            extract a fitting rootPart for the layout.
 	 * @return true if successful
 	 */
 	protected abstract boolean init(Object target);
 
 	/**
-	 * Creates the layout graph that corresponds to the diagram elements to be
+	 * Is called second during the layout process. Implementing methods should
+	 * creates the layout graph that corresponds to the diagram elements to be
 	 * laid out.
 	 * 
-	 * @return a layout graph
+	 * @return A KLayoutGraph
 	 */
 	protected abstract KLayoutGraph buildLayoutGraph();
 
 	/**
-	 * Applies all layout properties after the layout algorithm has executed on
-	 * the layout graph.
+	 * Is called last during the layout process. Implementing methods should
+	 * apply all layout information generated in the previous step to the
+	 * diagram in the editor or viewer.
 	 */
 	protected abstract void applyLayout();
 
