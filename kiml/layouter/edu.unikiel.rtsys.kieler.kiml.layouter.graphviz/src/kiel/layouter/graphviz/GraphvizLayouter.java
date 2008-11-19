@@ -115,10 +115,12 @@ public class GraphvizLayouter {
 
 	/**
 	 * Performs the actual work of the layout process. Translates the
-	 * {@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KLayoutGraph
-	 * KLayoutGraph} into a structure GraphViz understands, calls the desired
+	 * {@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup
+	 * KNodeGroup} into a structure GraphViz understands, calls the desired
 	 * GraphViz layouter and annotates the KLayoutGraph with the position and
 	 * size information provided by GraphViz.
+	 *
+	 * @param nodeGroup The KNodeGroup to process
 	 */
 	public void visit(KNodeGroup nodeGroup) {
 

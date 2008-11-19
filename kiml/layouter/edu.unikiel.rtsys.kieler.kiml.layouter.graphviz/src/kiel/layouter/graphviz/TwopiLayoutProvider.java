@@ -59,7 +59,7 @@ public class TwopiLayoutProvider extends KimlAbstractLayoutProvider {
 	 * edu.unikiel.rtsys.kieler.kiml.layout.services.KimlAbstractLayoutProvider
 	 * #getLayouterInfo()
 	 */
-	public LAYOUTER_INFO getLayouterInfo() {
+	public final LAYOUTER_INFO getLayouterInfo() {
 		LAYOUTER_INFO info = KimlLayoutGraphFactory.eINSTANCE
 				.createLAYOUTER_INFO();
 		info.setLayouterName(LAYOUT_PROVIDER_NAME);

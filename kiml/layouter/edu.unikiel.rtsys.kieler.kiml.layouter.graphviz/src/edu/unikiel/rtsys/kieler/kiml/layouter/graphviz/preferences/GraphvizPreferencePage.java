@@ -27,9 +27,9 @@ import edu.unikiel.rtsys.kieler.kiml.ui.AbstractKimlLayoutProviderPreferencePage
 
 /**
  * The GraphViz preference page. This page extends the
- * {@link edu.unikiel.rtsys.kieler.kiml.ui.AbstractKimlLayoutProviderPreferencePage}
- * to draw the group for enabling and disabling all the available GraphViz
- * layouters.
+ * {@link edu.unikiel.rtsys.kieler.kiml.ui.AbstractKimlLayoutProviderPreferencePage
+ * AbstractKimlLayoutProviderPreferencePage} to draw the group for enabling and
+ * disabling all the available GraphViz layouters.
  * 
  * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
  */
@@ -40,9 +40,8 @@ public class GraphvizPreferencePage extends
 	/**
 	 * The constructor for the preference page, uses
 	 * {@link edu.unikiel.rtsys.kieler.kiml.ui.AbstractKimlLayoutProviderPreferencePage
-	 * }
-	 * to generate the fields for enabling and disabling the layouters of the
-	 * GraphViz suite.
+	 * AbstractKimlLayoutProviderPreferencePage} to generate the fields for
+	 * enabling and disabling the layouters of the GraphViz suite.
 	 */
 	public GraphvizPreferencePage() {
 		super(GraphvizLayoutProviderNames.LAYOUT_PROVIDER_COLLECTION_ID, GRID);
