@@ -28,6 +28,7 @@ import org.eclipse.emf.compare.diff.metamodel.DiffGroup;
 import org.eclipse.emf.compare.diff.metamodel.DifferenceKind;
 import org.eclipse.emf.compare.diff.metamodel.ModelElementChangeLeftTarget;
 import org.eclipse.emf.compare.diff.metamodel.ModelElementChangeRightTarget;
+import org.eclipse.emf.compare.diff.metamodel.ReferenceChange;
 import org.eclipse.emf.compare.diff.metamodel.util.DiffAdapterFactory;
 import org.eclipse.emf.compare.match.metamodel.Match2Elements;
 import org.eclipse.emf.compare.ui.util.EMFCompareConstants;
@@ -243,9 +244,16 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 				View theView = (View) next;
 				DiffElement theChange = dataToRecursivelyDiff.get(theView
 						.getElement());
-				if (theChange != null) {
-					; // System.out.println(theChange);
-				} else {
+				boolean forceCollapse = false;
+				if (theChange instanceof DiffGroup) {
+					DiffGroup diffGroup = (DiffGroup) theChange;
+					forceCollapse = true;
+					for (DiffElement element : diffGroup.getSubDiffElements()) {
+						if (!(element instanceof ReferenceChange))
+							forceCollapse = false;
+					}
+				}
+				if (theChange == null || forceCollapse) {
 					Object editPart = getEditPartRegistry().get(theView);
 					if (editPart instanceof ShapeCompartmentEditPart) {
 						ShapeCompartmentFigure scf = ((ShapeCompartmentEditPart) editPart)
