@@ -14,8 +14,7 @@ public class FixedArrayList<E> extends AbstractList<E> {
 	/**
 	 * Types of a fixed array list.
 	 */
-	public enum Type
-	{
+	public enum Type {
 		/** the first element is always at position 0 */
 		ALIGN_FRONT,
 		/** the last element is always at the greatest position */
@@ -37,8 +36,7 @@ public class FixedArrayList<E> extends AbstractList<E> {
 	 * @param capacity maximal number of objects that can be put into the list
 	 * @param type type of fixed array list
 	 */
-	public FixedArrayList(int capacity, Type type)
-	{
+	public FixedArrayList(int capacity, Type type) {
 		super();
         if (capacity < 0)
             throw new IllegalArgumentException("Illegal Capacity: " + capacity);
@@ -71,19 +69,15 @@ public class FixedArrayList<E> extends AbstractList<E> {
 	 * (non-Javadoc)
 	 * @see java.util.AbstractList#add(java.lang.Object)
 	 */
-	public boolean add(E element)
-	{
+	public boolean add(E element) {
 		if (size == array.length)
 			throw new UnsupportedOperationException("Capacity exhausted: " + array.length);
 		
-		if (type == Type.ALIGN_FRONT)
-		{
+		if (type == Type.ALIGN_FRONT) {
 			array[size] = element;
 		}
-		else
-		{
-			for (int i = start; i < array.length; i++)
-			{
+		else {
+			for (int i = start; i < array.length; i++) {
 				array[i - 1] = array[i];
 			}
 			start--;
@@ -97,24 +91,19 @@ public class FixedArrayList<E> extends AbstractList<E> {
 	 * (non-Javadoc)
 	 * @see java.util.AbstractList#add(int, java.lang.Object)
 	 */
-	public void add(int index, E element)
-	{
+	public void add(int index, E element) {
 		if (index < 0)
 			throw new IndexOutOfBoundsException("Index out of bounds: " + index);
 		if (index >= array.length)
 			throw new UnsupportedOperationException("Capacity exhausted: " + array.length);
 		
-		if (type == Type.ALIGN_FRONT)
-		{
-			for (int i = size - 1; i >= index; i--)
-			{
+		if (type == Type.ALIGN_FRONT) {
+			for (int i = size - 1; i >= index; i--) {
 				array[i + 1] = array[i];
 			}
 		}
-		else
-		{
-			for (int i = start; i < index; i++)
-			{
+		else {
+			for (int i = start; i < index; i++) {
 				array[i - 1] = array[i];
 			}
 			start--;
@@ -127,20 +116,15 @@ public class FixedArrayList<E> extends AbstractList<E> {
 	 * (non-Javadoc)
 	 * @see java.util.AbstractList#remove(int)
 	 */
-	public E remove(int index)
-	{
+	public E remove(int index) {
 		E previous = get(index);
-		if (type == Type.ALIGN_FRONT)
-		{
-			for (int i = index; i < size - 1; i++)
-			{
+		if (type == Type.ALIGN_FRONT) {
+			for (int i = index; i < size - 1; i++) {
 				array[i] = array[i + 1];
 			}
 		}
-		else
-		{
-			for (int i = start + index; i > start; i--)
-			{
+		else {
+			for (int i = start + index; i > start; i--) {
 				array[i] = array[i - 1];
 			}
 			start++;
@@ -153,8 +137,7 @@ public class FixedArrayList<E> extends AbstractList<E> {
 	 * (non-Javadoc)
 	 * @see java.util.AbstractList#set(int, java.lang.Object)
 	 */
-	public E set(int index, E element)
-	{
+	public E set(int index, E element) {
 		E previous = get(index);
 		array[start + index] = element;
 		return previous;

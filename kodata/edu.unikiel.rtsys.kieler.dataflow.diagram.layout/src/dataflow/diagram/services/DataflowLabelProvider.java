@@ -14,15 +14,11 @@ public class DataflowLabelProvider extends LabelProvider {
 	 * (non-Javadoc)
 	 * @see org.eclipse.jface.viewers.LabelProvider#getText(java.lang.Object)
 	 */
-	public String getText(Object element)
-	{
-		if (element instanceof AbstractBorderedShapeEditPart)
-		{
+	public String getText(Object element) {
+		if (element instanceof AbstractBorderedShapeEditPart) {
 			AbstractBorderedShapeEditPart boxEditPart = (AbstractBorderedShapeEditPart)element;
-			for (Object child : boxEditPart.getChildren())
-			{
-				if (child instanceof ITextAwareEditPart)
-				{
+			for (Object child : boxEditPart.getChildren()) {
+				if (child instanceof ITextAwareEditPart) {
 					ITextAwareEditPart nameEditPart = (ITextAwareEditPart)child;
 					return nameEditPart.getEditText();
 				}

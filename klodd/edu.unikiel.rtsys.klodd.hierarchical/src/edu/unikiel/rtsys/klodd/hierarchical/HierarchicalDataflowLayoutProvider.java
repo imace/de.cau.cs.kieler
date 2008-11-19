@@ -58,8 +58,7 @@ public class HierarchicalDataflowLayoutProvider extends
 	/**
 	 * Sets the internally used algorithm modules to the current configuration.
 	 */
-	private void updateModules()
-	{
+	private void updateModules() {
 		cycleRemover = new DFSCycleRemover();
 		layerAssigner = new LongestPathLayerAssigner();
 	}

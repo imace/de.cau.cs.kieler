@@ -48,8 +48,7 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 	/**
 	 * Definition of possible edge types in a dataflow diagram with operators.
 	 */
-	private enum EdgeHierarchyType
-	{
+	private enum EdgeHierarchyType {
 		INPUT_TO_OP,
 		OP_TO_OP,
 		OP_TO_OUTPUT
@@ -69,8 +68,7 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 	 * (non-Javadoc)
 	 * @see edu.unikiel.rtsys.kieler.kiml.layout.services.KimlAbstractLayouter#getLabelProvider()
 	 */
-	public ILabelProvider getLabelProvider()
-	{
+	public ILabelProvider getLabelProvider() {
 		return dataflowLabelProvider;
 	}
 	
@@ -85,47 +83,40 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 		borderItem2PortMapping.clear();
 		
 		// find the dataflow model edit part depending on the type of input
-		if (target instanceof DiagramRootEditPart)
-		{
+		if (target instanceof DiagramRootEditPart) {
 			DiagramRootEditPart editor = (DiagramRootEditPart)target;
 			layoutRootPart = editor.getContents();
 		}
-		else if (target instanceof DiagramDocumentEditor)
-		{
+		else if (target instanceof DiagramDocumentEditor) {
 			DiagramDocumentEditor documentEditor = (DiagramDocumentEditor)target;
 			layoutRootPart = documentEditor.getDiagramEditPart();
 		}
-		else if (target instanceof DataflowModelEditPart){
+		else if (target instanceof DataflowModelEditPart) {
 			DataflowModelEditPart editPart = (DataflowModelEditPart)target;
 			DiagramRootEditPart editor = (DiagramRootEditPart) editPart.getRoot();
 			layoutRootPart = editor.getContents();
 		}
-		else if (target instanceof IStructuredSelection)
-		{
+		else if (target instanceof IStructuredSelection) {
 			IStructuredSelection selection = (IStructuredSelection)target;
 			layoutRootPart = findRootPart(selection.toList());
 			// check for special cases
 			if (layoutRootPart instanceof CompartmentEditPart
-					|| layoutRootPart instanceof BorderedBorderItemEditPart)
-			{
+					|| layoutRootPart instanceof BorderedBorderItemEditPart) {
 				// BoxBoxCompartmentEditPart, BoxNameEditPart
 				layoutRootPart = layoutRootPart.getParent();
 			}
-			else if (layoutRootPart instanceof LabelEditPart)
-			{
+			else if (layoutRootPart instanceof LabelEditPart) {
 				// InputPortNameEditPart, OutputPortNameEditPart
 				layoutRootPart = layoutRootPart.getParent().getParent();
 			}
-			else if (layoutRootPart instanceof DiagramRootEditPart)
-			{
+			else if (layoutRootPart instanceof DiagramRootEditPart) {
 				// RenderedDiagramRootEditPart
 				layoutRootPart = ((DiagramRootEditPart)layoutRootPart).getContents();
 			}
 			
 			// check for unexpected case
 			if (!(layoutRootPart instanceof AbstractBorderedShapeEditPart)
-					&& !(layoutRootPart instanceof DataflowModelEditPart))
-			{
+					&& !(layoutRootPart instanceof DataflowModelEditPart)) {
 				// TODO remove debug message
 				System.out.println("DataflowDiagramLayouter: Unexpected layout root part: "
 						+ layoutRootPart.getClass().getSimpleName());
@@ -141,8 +132,7 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 	 */
 	protected KLayoutGraph buildLayoutGraph() {
 		layoutGraph = KimlLayoutGraphFactory.eINSTANCE.createKLayoutGraph();
-		if (layoutRootPart instanceof DataflowModelEditPart)
-		{
+		if (layoutRootPart instanceof DataflowModelEditPart) {
 			DataflowModelEditPart modelPart = (DataflowModelEditPart)layoutRootPart;
 			// the layout graph always has a top node
 			KNodeGroup topNode = KimlLayoutGraphFactory.eINSTANCE.createKNodeGroup();
@@ -161,8 +151,7 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 			// build the whole graph structure
 			buildLayoutGraphRecursively(modelPart.getChildren(), topNode);
 		}
-		else if (layoutRootPart instanceof AbstractBorderedShapeEditPart)
-		{
+		else if (layoutRootPart instanceof AbstractBorderedShapeEditPart) {
 			AbstractBorderedShapeEditPart boxEditPart = (AbstractBorderedShapeEditPart)layoutRootPart;
 			// build just the selected node
 			layoutGraph.setTopGroup(buildNode(boxEditPart));
@@ -185,8 +174,7 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 		double zoomLevel = rootEditPart.getZoomManager().getZoom();
 		
 		// apply node layouts
-		for (KNodeGroup nodeGroup : nodeGroup2BoxMapping.keySet())
-		{
+		for (KNodeGroup nodeGroup : nodeGroup2BoxMapping.keySet()) {
 			AbstractBorderedShapeEditPart boxEditPart = nodeGroup2BoxMapping.get(nodeGroup);
 			ChangeBoundsRequest changeBoundsRequest = new ChangeBoundsRequest(RequestConstants.REQ_MOVE);
 			changeBoundsRequest.setEditParts(boxEditPart);
@@ -208,8 +196,7 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 		}
 		
 		// apply port layouts
-		for (KPort port : port2BorderItemMapping.keySet())
-		{
+		for (KPort port : port2BorderItemMapping.keySet()) {
 			BorderedBorderItemEditPart borderItem = port2BorderItemMapping.get(port);
 			ChangeBoundsRequest changeBoundsRequest = new ChangeBoundsRequest(RequestConstants.REQ_MOVE);
 			changeBoundsRequest.setEditParts(borderItem);
@@ -224,8 +211,7 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 		}
 		
 		// apply edge layouts
-		for (KEdge edge : edge2ConnectionMapping.keySet())
-		{
+		for (KEdge edge : edge2ConnectionMapping.keySet()) {
 			ConnectionEditPart connection = edge2ConnectionMapping.get(edge);
 			KEdgeLayout edgeLayout = edge.getLayout();
 			PointList pointList = new PointList();
@@ -260,8 +246,7 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 	 * @return the root part
 	 */
 	@SuppressWarnings("unchecked")
-	private static EditPart findRootPart(List selectedParts)
-	{
+	private static EditPart findRootPart(List selectedParts) {
 		Map<EditPart, Integer> mark = new HashMap<EditPart, Integer>();
 		EditPart[] current = new EditPart[selectedParts.size()];
 		EditPart rootPart = null;
@@ -269,49 +254,39 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 		
 		// initialize 'current' array
 		int j = 0;
-		for (Object obj : selectedParts)
-		{
-			if (obj instanceof ConnectionEditPart)
-			{
+		for (Object obj : selectedParts) {
+			if (obj instanceof ConnectionEditPart) {
 				current[j] = ((ConnectionEditPart)obj).getSource();
 				activeParts++;
 			}
-			else if (obj instanceof EditPart)
-			{
+			else if (obj instanceof EditPart) {
 				current[j] = (EditPart)obj;
 				activeParts++;
 			}
-			else
-			{
+			else {
 				current[j] = null;
 			}
 			j++;
 		}
 		
-		do
-		{
-			for (int i = 0; i < current.length; i++)
-			{
-				if (current[i] != null)
-				{
+		do {
+			for (int i = 0; i < current.length; i++) {
+				if (current[i] != null) {
 					int newMark = 1;
 					// get the mark status of the current part
 					Integer markValue = mark.get(current[i]);
-					if (markValue != null)
-					{
+					if (markValue != null) {
 						newMark = markValue.intValue() + 1;
 					}
 					mark.put(current[i], new Integer(newMark));
-					if (newMark > maxMark)
-					{
+					if (newMark > maxMark) {
 						rootPart = current[i];
 						maxMark = newMark;
 					}
 					// get the parent of the current part
 					EditPart parent = current[i].getParent();
 					current[i] = parent;
-					if (parent == null)
-					{
+					if (parent == null) {
 						activeParts--;
 					}
 				}
@@ -326,8 +301,7 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 	 * @param shapeLayout layout object to be changed
 	 * @param figure source object with layout information
 	 */
-	private static void createLayout(KShapeLayout shapeLayout, IFigure figure)
-	{
+	private static void createLayout(KShapeLayout shapeLayout, IFigure figure) {
 		KPoint kPoint = KimlLayoutGraphFactory.eINSTANCE.createKPoint();
 		kPoint.setX(figure.getBounds().x);
 		kPoint.setY(figure.getBounds().y);
@@ -343,8 +317,7 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 	 * @param kDimension KLayoutGraph dimension
 	 * @return Draw2D dimension
 	 */
-	private static Dimension kDimension2Dimension(KDimension kDimension)
-	{
+	private static Dimension kDimension2Dimension(KDimension kDimension) {
 		Dimension dimension = new Dimension();
 		dimension.height = (int)kDimension.getHeight();
 		dimension.width = (int)kDimension.getWidth();
@@ -356,8 +329,7 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 	 * @param kPoint KLayoutGraph point
 	 * @return Draw2D point
 	 */
-	private static Point kPoint2Point(KPoint kPoint)
-	{
+	private static Point kPoint2Point(KPoint kPoint) {
 		Point point = new Point();
 		point.x = (int)kPoint.getX();
 		point.y = (int)kPoint.getY();
@@ -370,15 +342,12 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 	 * @param parentGroup parent node group
 	 */
 	@SuppressWarnings("unchecked")
-	private void buildLayoutGraphRecursively(List children, KNodeGroup parentGroup)
-	{
+	private void buildLayoutGraphRecursively(List children, KNodeGroup parentGroup) {
 		if (children != null)
 		{
 			// build node groups
-			for (Object child : children)
-			{
-				if (child instanceof AbstractBorderedShapeEditPart)
-				{
+			for (Object child : children) {
+				if (child instanceof AbstractBorderedShapeEditPart) {
 					AbstractBorderedShapeEditPart boxEditPart = (AbstractBorderedShapeEditPart)child;
 					KNodeGroup childNode = buildNode(boxEditPart);
 					// set the parent group; this automatically adds the node
@@ -388,10 +357,8 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 			}
 			
 			// build edges
-			for (Object child : children)
-			{
-				if (child instanceof AbstractBorderedShapeEditPart)
-				{
+			for (Object child : children) {
+				if (child instanceof AbstractBorderedShapeEditPart) {
 					AbstractBorderedShapeEditPart boxEditPart = (AbstractBorderedShapeEditPart)child;
 					buildNodeEdges(boxEditPart, true);
 				}
@@ -406,8 +373,7 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 	 * @return the created node group
 	 */
 	@SuppressWarnings("unchecked")
-	private KNodeGroup buildNode(AbstractBorderedShapeEditPart boxEditPart)
-	{
+	private KNodeGroup buildNode(AbstractBorderedShapeEditPart boxEditPart) {
 		// add the new child node
 		KNodeGroup childNode = KimlLayoutGraphFactory.eINSTANCE.createKNodeGroup();
 		nodeGroup2BoxMapping.put(childNode, boxEditPart);
@@ -426,14 +392,11 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 		childNode.setLayout(nodeGroupLayout);
 		// set the input and output ports
 		List subChildren = null;
-		for (Object nodeElement : boxEditPart.getChildren())
-		{
-			if (nodeElement instanceof ShapeCompartmentEditPart)
-			{
+		for (Object nodeElement : boxEditPart.getChildren()) {
+			if (nodeElement instanceof ShapeCompartmentEditPart) {
 				subChildren = ((ShapeCompartmentEditPart)nodeElement).getChildren();
 			}
-			else if (nodeElement instanceof BorderedBorderItemEditPart)
-			{
+			else if (nodeElement instanceof BorderedBorderItemEditPart) {
 				BorderedBorderItemEditPart borderItem = (BorderedBorderItemEditPart)nodeElement;
 				// add the new port
 				KPort port = KimlLayoutGraphFactory.eINSTANCE.createKPort();
@@ -446,10 +409,8 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 				createLayout(portLayout, borderItem.getFigure());
 				port.setLayout(portLayout);
 				// set the port label
-				for (Object portChild : borderItem.getChildren())
-				{
-					if (portChild instanceof ITextAwareEditPart)
-					{
+				for (Object portChild : borderItem.getChildren()) {
+					if (portChild instanceof ITextAwareEditPart) {
 						ITextAwareEditPart portNameEditPart = (ITextAwareEditPart)portChild;
 						KPortLabel portLabel = KimlLayoutGraphFactory.eINSTANCE.createKPortLabel();
 						portLabel.setText(portNameEditPart.getEditText());
@@ -461,8 +422,7 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 					}
 				}
 			}
-			else if (nodeElement instanceof ITextAwareEditPart)
-			{
+			else if (nodeElement instanceof ITextAwareEditPart) {
 				ITextAwareEditPart boxNameEditPart = (ITextAwareEditPart)nodeElement;
 				// add node group label
 				KNodeGroupLabel nodeGroupLabel = KimlLayoutGraphFactory.eINSTANCE.createKNodeGroupLabel();
@@ -487,41 +447,32 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 	 * @param processExternal indicates whether edges to nodes of the same or
 	 *     higher hierarchy level should be processed
 	 */
-	private void buildNodeEdges(AbstractBorderedShapeEditPart boxEditPart, boolean processExternal)
-	{
-		for (Object nodeElement : boxEditPart.getChildren())
-		{
-			if (nodeElement instanceof BorderedBorderItemEditPart)
-			{
+	private void buildNodeEdges(AbstractBorderedShapeEditPart boxEditPart,
+			boolean processExternal) {
+		for (Object nodeElement : boxEditPart.getChildren()) {
+			if (nodeElement instanceof BorderedBorderItemEditPart) {
 				BorderedBorderItemEditPart portEditPart = (BorderedBorderItemEditPart)nodeElement;
 				KPort port1 = borderItem2PortMapping.get(portEditPart);
-				for (Object portElement : portEditPart.getSourceConnections())
-				{
-					if (portElement instanceof ConnectionEditPart)
-					{
+				for (Object portElement : portEditPart.getSourceConnections()) {
+					if (portElement instanceof ConnectionEditPart) {
 						ConnectionEditPart connectionEditPart = (ConnectionEditPart)portElement;
 						KPort port2 = borderItem2PortMapping.get(connectionEditPart.getTarget());
-						if (port2 != null)
-						{
+						if (port2 != null) {
 							// add the new edge according to its type
-							if (port1.getType() == PORT_TYPE.OUTPUT && port2.getType() == PORT_TYPE.INPUT)
-							{
-								if (processExternal && port1.getNodeGroup().getParentGroup() == port2.getNodeGroup().getParentGroup())
-								{
+							if (port1.getType() == PORT_TYPE.OUTPUT && port2.getType() == PORT_TYPE.INPUT) {
+								if (processExternal && port1.getNodeGroup().getParentGroup()
+										== port2.getNodeGroup().getParentGroup()) {
 									addEdge(port1, port2, connectionEditPart, EdgeHierarchyType.OP_TO_OP);
 								}
 							}
-							else if (port1.getType() == PORT_TYPE.INPUT && port2.getType() == PORT_TYPE.INPUT)
-							{
-								if (port1.getNodeGroup() == port2.getNodeGroup().getParentGroup())
-								{
+							else if (port1.getType() == PORT_TYPE.INPUT && port2.getType() == PORT_TYPE.INPUT) {
+								if (port1.getNodeGroup() == port2.getNodeGroup().getParentGroup()) {
 									addEdge(port1, port2, connectionEditPart, EdgeHierarchyType.INPUT_TO_OP);
 								}
 							}
-							else if (port1.getType() == PORT_TYPE.OUTPUT && port2.getType() == PORT_TYPE.OUTPUT)
-							{
-								if (processExternal && port1.getNodeGroup().getParentGroup() == port2.getNodeGroup())
-								{
+							else if (port1.getType() == PORT_TYPE.OUTPUT && port2.getType() == PORT_TYPE.OUTPUT) {
+								if (processExternal && port1.getNodeGroup().getParentGroup()
+										== port2.getNodeGroup()) {
 									addEdge(port1, port2, connectionEditPart, EdgeHierarchyType.OP_TO_OUTPUT);
 								}
 							}
@@ -543,19 +494,16 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 	 * @param edgeType hierarchy type of the edge
 	 */
 	private void addEdge(KPort sourcePort, KPort targetPort,
-			ConnectionEditPart connectionEditPart, EdgeHierarchyType edgeType)
-	{
+			ConnectionEditPart connectionEditPart, EdgeHierarchyType edgeType) {
 		KEdge edge = KimlLayoutGraphFactory.eINSTANCE.createKEdge();
 		edge2ConnectionMapping.put(edge, connectionEditPart);
-		if (edgeType != EdgeHierarchyType.INPUT_TO_OP)
-		{
+		if (edgeType != EdgeHierarchyType.INPUT_TO_OP) {
 			// set the source node; this automatically adds the edge
 			// to the source's list of outgoing edges
 			edge.setSource(sourcePort.getNodeGroup());
 		}
 		edge.setSourcePort(sourcePort);
-		if (edgeType != EdgeHierarchyType.OP_TO_OUTPUT)
-		{
+		if (edgeType != EdgeHierarchyType.OP_TO_OUTPUT) {
 			// set the target node; this automatically adds the edge to
 			// the target's list of incoming edges
 			edge.setTarget(targetPort.getNodeGroup());

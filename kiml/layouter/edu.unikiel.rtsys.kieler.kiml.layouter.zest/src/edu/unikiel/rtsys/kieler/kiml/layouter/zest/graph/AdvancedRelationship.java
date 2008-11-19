@@ -30,8 +30,7 @@ public class AdvancedRelationship extends SimpleRelationship {
 	 * 
 	 * @return edge from the layout graph
 	 */
-	public Object getRealObject()
-	{
+	public Object getRealObject() {
 		return realObject;
 	}
 

@@ -33,25 +33,20 @@ public class LongestPathLayerAssigner extends AbstractAlgorithm implements
 		layeredGraph = new LayeredGraph(LayeredGraph.Type.BUILD_BACK, parentGroup);
 		
 		// process output ports
-		for (KPort port : parentGroup.getPorts())
-		{
-			if (port.getType() == PORT_TYPE.OUTPUT)
-			{
+		for (KPort port : parentGroup.getPorts()) {
+			if (port.getType() == PORT_TYPE.OUTPUT) {
 				layeredGraph.putBack(port, 0);
 			}
 		}
 		
 		// process child nodes
-		for (KNodeGroup node : parentGroup.getSubNodeGroups())
-		{
+		for (KNodeGroup node : parentGroup.getSubNodeGroups()) {
 			visit(node);
 		}
 		
 		// process input ports
-		for (KPort port : parentGroup.getPorts())
-		{
-			if (port.getType() == PORT_TYPE.INPUT)
-			{
+		for (KPort port : parentGroup.getPorts()) {
+			if (port.getType() == PORT_TYPE.INPUT) {
 				layeredGraph.putFront(port, 0);
 			}
 		}
@@ -66,22 +61,18 @@ public class LongestPathLayerAssigner extends AbstractAlgorithm implements
 	 * @param node node to visit
 	 * @return height of the given node in the layered graph
 	 */
-	private int visit(KNodeGroup node)
-	{
+	private int visit(KNodeGroup node) {
 		Layer layer = layeredGraph.getLayer(node);
-		if (layer != null)
-		{
+		if (layer != null) {
 			// the node was already visited
 			return layer.height;
 		}
 		else
 		{
 			int maxHeight = 1;
-			for (KEdge edge : node.getOutgoingEdges())
-			{
+			for (KEdge edge : node.getOutgoingEdges()) {
 				KNodeGroup targetNode = edge.getTarget();
-				if (targetNode != null)
-				{
+				if (targetNode != null) {
 					int height = visit(targetNode) + 1;
 					maxHeight = Math.max(height, maxHeight);
 				}

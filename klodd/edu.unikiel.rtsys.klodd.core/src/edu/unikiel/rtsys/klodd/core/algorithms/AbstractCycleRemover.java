@@ -11,8 +11,7 @@ import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.*;
  * @author msp
  */
 public abstract class AbstractCycleRemover extends AbstractAlgorithm
-		implements ICycleRemover
-{
+		implements ICycleRemover {
 	
 	private LinkedList<KEdge> reversedEdges = new LinkedList<KEdge>();
 
@@ -20,8 +19,7 @@ public abstract class AbstractCycleRemover extends AbstractAlgorithm
 	 * (non-Javadoc)
 	 * @see edu.unikiel.rtsys.klodd.core.algorithms.AbstractAlgorithm#reset()
 	 */
-	public void reset()
-	{
+	public void reset() {
 		reversedEdges.clear();
 	}
 	
@@ -30,8 +28,7 @@ public abstract class AbstractCycleRemover extends AbstractAlgorithm
 	 * @see edu.unikiel.rtsys.klodd.core.algorithms.ICycleRemover#restoreGraph()
 	 */
 	public void restoreGraph() {
-		for (KEdge edge : reversedEdges)
-		{
+		for (KEdge edge : reversedEdges) {
 			doReverseEdge(edge);
 		}
 	}
@@ -42,8 +39,7 @@ public abstract class AbstractCycleRemover extends AbstractAlgorithm
 	 * 
 	 * @param edge edge to be reversed
 	 */
-	protected void reverseEdge(KEdge edge)
-	{
+	protected void reverseEdge(KEdge edge) {
 		doReverseEdge(edge);
 		reversedEdges.add(edge);
 	}
@@ -53,8 +49,7 @@ public abstract class AbstractCycleRemover extends AbstractAlgorithm
 	 * 
 	 * @param edge edge to be reversed
 	 */
-	private void doReverseEdge(KEdge edge)
-	{
+	private void doReverseEdge(KEdge edge) {
 		// reverse source and target node group
 		KNodeGroup source = edge.getSource();
 		KNodeGroup target = edge.getTarget();

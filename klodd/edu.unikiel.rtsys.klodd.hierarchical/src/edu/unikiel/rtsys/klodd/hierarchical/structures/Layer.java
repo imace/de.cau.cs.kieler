@@ -29,8 +29,7 @@ public class Layer {
 	 * @param rank the rank, may be UNDEF_RANK
 	 * @param height the height, may be UNDEF_HEIGHT
 	 */
-	public Layer(int rank, int height)
-	{
+	public Layer(int rank, int height) {
 		this.rank = rank;
 		this.height = height;
 	}
@@ -41,8 +40,7 @@ public class Layer {
 	 * @param obj the element object
 	 * @return the new layer element
 	 */
-	public LayerElement put(Object obj)
-	{
+	public LayerElement put(Object obj) {
 		LayerElement element = new LayerElement(obj, this);
 		elements.add(element);
 		return element;
@@ -53,8 +51,7 @@ public class Layer {
 	 * 
 	 * @return the layer elements
 	 */
-	public List<LayerElement> getElements()
-	{
+	public List<LayerElement> getElements() {
 		return elements;
 	}
 	

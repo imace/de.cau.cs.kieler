@@ -29,21 +29,17 @@ public class LayerElement {
 	 * @param obj the element object
 	 * @param layer the containing layer
 	 */
-	public LayerElement(Object obj, Layer layer)
-	{
+	public LayerElement(Object obj, Layer layer) {
 		this.elemObj = obj;
 		this.layer = layer;
 		
-		if (obj instanceof KNodeGroup)
-		{
+		if (obj instanceof KNodeGroup) {
 			// the layer element is a node group
 		}
-		else if (obj instanceof KPort)
-		{
+		else if (obj instanceof KPort) {
 			// the layer element is a port
 		}
-		else if (obj instanceof KEdge)
-		{
+		else if (obj instanceof KEdge) {
 			// the layer element is a long edge
 		}
 		else
@@ -55,8 +51,7 @@ public class LayerElement {
 	 * 
 	 * @return the element object
 	 */
-	//public Object getObject()
-	//{
+	//public Object getObject() {
 	//	return elemObj;
 	//} TODO needed?
 	
@@ -65,8 +60,7 @@ public class LayerElement {
 	 * 
 	 * @return the layer
 	 */
-	public Layer getLayer()
-	{
+	public Layer getLayer() {
 		return layer;
 	}
 	
@@ -75,8 +69,7 @@ public class LayerElement {
 	 * 
 	 * @return the source elements
 	 */
-	//public List<LayerElement> getSourceElements()
-	//{
+	//public List<LayerElement> getSourceElements() {
 	//	return sources;
 	//} TODO needed?
 	
@@ -85,8 +78,7 @@ public class LayerElement {
 	 * 
 	 * @return the target elements
 	 */
-	//public List<LayerElement> getTargetElements()
-	//{
+	//public List<LayerElement> getTargetElements() {
 	//	return targets;
 	//} TODO needed?
 	
@@ -95,18 +87,14 @@ public class LayerElement {
 	 * 
 	 * @return the list of outgoing edges, or null if the object is an edge
 	 */
-	public List<KEdge> getOutgoingEdges()
-	{
-		if (elemObj instanceof KNodeGroup)
-		{
+	public List<KEdge> getOutgoingEdges() {
+		if (elemObj instanceof KNodeGroup) {
 			return ((KNodeGroup)elemObj).getOutgoingEdges();
 		}
-		else if (elemObj instanceof KPort)
-		{
+		else if (elemObj instanceof KPort) {
 			KPort port = (KPort)elemObj;
 			LinkedList<KEdge> internalEdges = new LinkedList<KEdge>();
-			for (KEdge edge : port.getEdges())
-			{
+			for (KEdge edge : port.getEdges()) {
 				if (edge.getTarget() == port.getNodeGroup())
 					internalEdges.add(edge);
 			}
@@ -121,8 +109,7 @@ public class LayerElement {
 	 * 
 	 * @param target target layer element
 	 */
-	public void setTarget(LayerElement target)
-	{
+	public void setTarget(LayerElement target) {
 		targets.add(target);
 		target.sources.add(this);
 	}

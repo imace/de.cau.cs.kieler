@@ -18,8 +18,7 @@ import edu.unikiel.rtsys.kieler.kiml.ui.AbstractKimlLayoutProviderPreferencePage
  * @author msp
  */
 public class ZestLayouterPreferencePage extends AbstractKimlLayoutProviderPreferencePage
-		implements IWorkbenchPreferencePage
-{
+		implements IWorkbenchPreferencePage {
 
 	/** scale factor to use for the size of each parent node */
 	public static final String SCALE_BASE = "edu.unikiel.rtsys.kieler.kiml.layouter.zest.preferences.scale_base";
