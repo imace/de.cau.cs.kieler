@@ -1,3 +1,12 @@
+/*******************************************************************************
+ * Copyright (c) 2008 Real-Time and Embedded Systems group
+ *
+ * INSERT LICENCE HERE
+ *
+ *
+ * Author: Arne Schipper, ars@informatik.uni-kiel.de 
+ *
+ *******************************************************************************/
 package edu.unikiel.rtsys.kieler.kiml.layouter.example.preferences;
 
 import org.eclipse.jface.preference.BooleanFieldEditor;
@@ -13,23 +22,26 @@ import edu.unikiel.rtsys.kieler.kiml.layouter.example.Activator;
 import edu.unikiel.rtsys.kieler.kiml.ui.AbstractKimlLayoutProviderPreferencePage;
 
 /**
- * This class represents a preference page that is contributed to the
- * Preferences dialog. By subclassing <samp>FieldEditorPreferencePage</samp>, we
- * can use the field support built into JFace that allows us to create a page
- * that is small and knows how to save, restore and apply itself.
- * <p>
- * This page is used to modify preferences only. They are stored in the
- * preference store that belongs to the main plug-in class. That way,
- * preferences can be accessed directly via the preference store.
+ * The Example Layouter preference page. This page extends the
+ * {@link edu.unikiel.rtsys.kieler.kiml.ui.AbstractKimlLayoutProviderPreferencePage
+ * AbstractKimlLayoutProviderPreferencePage} to draw the group for enabling and
+ * disabling all the available Example layouters.
+ * 
+ * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
  */
+public class ExampleLayouterPreferencePage extends
+		AbstractKimlLayoutProviderPreferencePage implements
+		IWorkbenchPreferencePage {
 
-public class ExampleLayouterPreferencePage extends AbstractKimlLayoutProviderPreferencePage
-		implements IWorkbenchPreferencePage {
-
-	private final static String LAYOUT_PROVIDER_COLLECTION_ID = Activator.LAYOUT_PROVIDER_COLLECTION_ID;
-
+	/**
+	 * The constructor for the preference page, uses
+	 * {@link edu.unikiel.rtsys.kieler.kiml.ui.AbstractKimlLayoutProviderPreferencePage
+	 * AbstractKimlLayoutProviderPreferencePage} to generate the fields for
+	 * enabling and disabling the layouters of the Example Layouters suite
+	 * (currently just one).
+	 */
 	public ExampleLayouterPreferencePage() {
-		super(LAYOUT_PROVIDER_COLLECTION_ID,GRID);
+		super(Activator.LAYOUT_PROVIDER_COLLECTION_ID, GRID);
 		setPreferenceStore(Activator.getDefault().getPreferenceStore());
 		setDescription("Set the options for the Example Layout engine:");
 	}

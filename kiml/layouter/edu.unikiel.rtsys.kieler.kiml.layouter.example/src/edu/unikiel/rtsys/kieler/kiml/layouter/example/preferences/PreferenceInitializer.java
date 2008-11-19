@@ -1,13 +1,24 @@
+/*******************************************************************************
+ * Copyright (c) 2008 Real-Time and Embedded Systems group
+ *
+ * INSERT LICENCE HERE
+ *
+ *
+ * Author: Arne Schipper, ars@informatik.uni-kiel.de 
+ *
+ *******************************************************************************/
 package edu.unikiel.rtsys.kieler.kiml.layouter.example.preferences;
 
 import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
 import org.eclipse.jface.preference.IPreferenceStore;
 
 import edu.unikiel.rtsys.kieler.kiml.layouter.example.Activator;
-import edu.unikiel.rtsys.kieler.kiml.layouter.example.ExampleLayoutProvider;
 
 /**
- * Class used to initialize default preference values.
+ * Class used to initialize default preference values for the Example layouter
+ * plug-in.
+ * 
+ * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
  */
 public class PreferenceInitializer extends AbstractPreferenceInitializer {
 
@@ -21,7 +32,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
 		
 		/* initialize the layout providers */
-		store.setDefault(ExampleLayoutProvider.LAYOUT_PROVIDER_NAME, true);
+		store.setDefault(Activator.LAYOUT_PROVIDER_NAME, true);
 		
 		/* set default options */
 		store.setDefault(PreferenceConstants.PREF_LAYOUTER_EXAMPLE_HORIZONTAL,
