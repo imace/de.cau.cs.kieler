@@ -1,5 +1,8 @@
 package edu.unikiel.rtsys.klodd.hierarchical.structures;
 
+import java.util.List;
+import java.util.LinkedList;
+
 /**
  * A single Layer used in a layered graph.
  * 
@@ -17,6 +20,9 @@ public class Layer {
 	/** the height of this layer */
 	public int height;
 	
+	// list of elements in this layer
+	private List<LayerElement> elements = new LinkedList<LayerElement>(); 
+	
 	/**
 	 * Creates a new layer with given rank and height.
 	 * 
@@ -29,9 +35,27 @@ public class Layer {
 		this.height = height;
 	}
 	
-	public void put(Object obj)
+	/**
+	 * Puts an object into this layer.
+	 * 
+	 * @param obj the element object
+	 * @return the new layer element
+	 */
+	public LayerElement put(Object obj)
 	{
-		
+		LayerElement element = new LayerElement(obj, this);
+		elements.add(element);
+		return element;
+	}
+	
+	/**
+	 * Gets the elements of this layer.
+	 * 
+	 * @return the layer elements
+	 */
+	public List<LayerElement> getElements()
+	{
+		return elements;
 	}
 	
 }
