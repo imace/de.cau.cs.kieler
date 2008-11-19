@@ -10,7 +10,9 @@
 package edu.unikiel.rtsys.kieler.kiml.layout.util;
 
 /**
- * Constant definitions for plug-in preferences
+ * Constant definitions for the KimlLayout plug-in preferences.
+ * 
+ * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
  */
 public class KimlLayoutPreferenceConstants {
 

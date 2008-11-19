@@ -9,6 +9,10 @@
  *******************************************************************************/
 package edu.unikiel.rtsys.kieler.kiml.layout.util;
 
+/**
+ * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
+ *
+ */
 public class KimlLayoutConstants {
 
 	/* constants for diagram layouter part */

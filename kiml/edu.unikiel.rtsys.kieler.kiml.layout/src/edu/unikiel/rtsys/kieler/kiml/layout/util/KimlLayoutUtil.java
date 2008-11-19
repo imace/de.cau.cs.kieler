@@ -15,6 +15,7 @@ import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KEdgeLabel;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KEdgeLabelLayout;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KEdgeLayout;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KInsets;
+import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KLayoutGraph;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroupLabel;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroupLayout;
@@ -22,8 +23,38 @@ import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPoint;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphFactory;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_TYPE;
 
+/**
+ * Helper class with static convenience functions to create initialized
+ * KLayoutGraph elements.
+ * 
+ * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
+ * @see KLayoutGraph
+ * @see KNodeGroup
+ * @see KEdge
+ * @see KEdgeLabel
+ */
 public class KimlLayoutUtil {
 
+	/**
+	 * Creates a KNodeGroup, initializes some defaults and returns it.
+	 * Initialized values are:
+	 * <ul>
+	 * <li>IdString: ""</li>
+	 * <li>Layout:
+	 * <ul>
+	 * <li>Location: Default KPoint object (0,0)</li>
+	 * <li>Size: Default KDimension object (0,0)</li>
+	 * <li>Insets: Default KInsets object (0,0,0,0)</li>
+	 * <li>LayouterName: ""</li>
+	 * <li>LayoutType: LAYOUT_TYPE.DEFAULT</li>
+	 * </ul>
+	 * </li>
+	 * <li>Label: Default KNodeGroupLabel object</li>
+	 * </ul>
+	 * 
+	 * @return An initialized KNodeGroup
+	 * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
+	 */
 	public static KNodeGroup createInitializedNodeGroup() {
 		KNodeGroup nodeGroup = KimlLayoutGraphFactory.eINSTANCE
 				.createKNodeGroup();
@@ -45,6 +76,21 @@ public class KimlLayoutUtil {
 		return nodeGroup;
 	}
 
+	/**
+	 * Creates a KEdge, initializes some defaults and returns it. Initialized
+	 * values are:
+	 * <ul>
+	 * <li>Layout:
+	 * <ul>
+	 * <li>SourcePoint: Default KPoint object (0,0)</li>
+	 * <li>TargetPoint: Default KPoint object (0,0)</li>
+	 * </ul>
+	 * </li>
+	 * </ul>
+	 * 
+	 * @return An initialized KEdge
+	 * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
+	 */
 	public static KEdge createInitializedEdge() {
 		KEdge edge = KimlLayoutGraphFactory.eINSTANCE.createKEdge();
 		KEdgeLayout edgeLayout = KimlLayoutGraphFactory.eINSTANCE
@@ -60,6 +106,22 @@ public class KimlLayoutUtil {
 		return edge;
 	}
 
+	/**
+	 * Creates a KEdgeLabel, initializes some defaults and returns it.
+	 * Initialized values are:
+	 * <ul>
+	 * <li>Text: ""</li>
+	 * <li>LabelLayout:
+	 * <ul>
+	 * <li>SourcePoint: Default KPoint object (0,0)</li>
+	 * <li>TargetPoint: Default KPoint object (0,0)</li>
+	 * </ul>
+	 * </li>
+	 * </ul>
+	 * 
+	 * @return An initialized KEdgeLabel
+	 * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
+	 */
 	public static KEdgeLabel createInitializedEdgeLabel() {
 		KEdgeLabel edgeLabel = KimlLayoutGraphFactory.eINSTANCE
 				.createKEdgeLabel();
@@ -77,21 +139,4 @@ public class KimlLayoutUtil {
 		return edgeLabel;
 	}
 
-	public static void printNodeGroupRecursively(KNodeGroup nodeGroup,
-			String ident) {
-		System.out.println(ident + "LType: "
-				+ nodeGroup.getLayout().getLayoutType().getName() + ", "
-				+ "LName: " + nodeGroup.getLayout().getLayouterName() + ", "
-				+ "ID: " + nodeGroup.getIdString() + ", " + "Label:  "
-				+ nodeGroup.getLabel().getText() + ", X: "
-				+ nodeGroup.getLayout().getLocation().getX() + ", Y: "
-				+ nodeGroup.getLayout().getLocation().getY() + ", W: "
-				+ nodeGroup.getLayout().getSize().getWidth() + ", H: "
-				+ nodeGroup.getLayout().getSize().getHeight());
-		for (KNodeGroup subGroup : nodeGroup.getSubNodeGroups()) {
-			printNodeGroupRecursively(subGroup, ident + "  ");
-		}
-	}
-
-	
 }

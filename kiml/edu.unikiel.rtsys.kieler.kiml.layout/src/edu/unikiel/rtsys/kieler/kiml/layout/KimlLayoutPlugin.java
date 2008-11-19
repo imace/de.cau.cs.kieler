@@ -14,7 +14,9 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
 /**
- * The activator class controls the plug-in life cycle
+ * This activator class controls the life cycle of the KimlLayoutPlugin.
+ * 
+ * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
  */
 public class KimlLayoutPlugin extends AbstractUIPlugin {
 

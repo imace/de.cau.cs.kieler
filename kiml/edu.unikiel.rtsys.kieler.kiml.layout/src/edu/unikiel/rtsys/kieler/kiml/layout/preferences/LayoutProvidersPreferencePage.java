@@ -24,24 +24,28 @@ import edu.unikiel.rtsys.kieler.kiml.layout.services.LayoutProviders;
 import edu.unikiel.rtsys.kieler.kiml.layout.util.KimlLayoutPreferenceConstants;
 
 /**
- * This class represents a preference page that is contributed to the
- * Preferences dialog. By subclassing <samp>FieldEditorPreferencePage</samp>, we
- * can use the field support built into JFace that allows us to create a page
- * that is small and knows how to save, restore and apply itself.
- * <p>
- * This page is used to modify preferences only. They are stored in the
- * preference store that belongs to the main plug-in class. That way,
- * preferences can be accessed directly via the preference store.
+ * The LayouterProviders preference page. This places a page into the KIML
+ * preferences with options for all LayouterProviders. Specific LayoutProviders
+ * should place their own preference page below this one. Settings for this can
+ * be made in the respective plugin.xml file.
+ * 
+ * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
+ * @see edu.unikiel.rtsys.kieler.kiml.layout.services.LayoutProviders
+ *      LayoutProviders
+ * @see edu.unikiel.rtsys.kieler.kiml.layout.services.KimlAbstractLayoutProvider
+ *      KimlAbstractLayoutProvider
  */
+public class LayoutProvidersPreferencePage extends FieldEditorPreferencePage
+		implements IWorkbenchPreferencePage {
 
-public class LayoutProvidersPreferencePage extends FieldEditorPreferencePage implements
-		IWorkbenchPreferencePage {
-
+	/**
+	 * Creates a new preference page for the layout providers.
+	 */
 	public LayoutProvidersPreferencePage() {
 		super(GRID);
 		setPreferenceStore(KimlLayoutPlugin.getDefault().getPreferenceStore());
 		getPreferenceStore().addPropertyChangeListener(this);
-		setDescription("Set here the general layout options that do not apply to a specific layout engine");
+		setDescription("Set here the general layout options that do not apply to a specific layout provider");
 	}
 
 	/**
@@ -50,23 +54,24 @@ public class LayoutProvidersPreferencePage extends FieldEditorPreferencePage imp
 	 * editor knows how to save and restore itself.
 	 */
 	public void createFieldEditors() {
-		// define gl as GridLayout globally
+		/* define gl as GridLayout globally */
 		GridLayout gl = null;
 
-		// default layouter group
+		/* default layouter group */
 		Group defaultLayouter = new Group(this.getFieldEditorParent(), SWT.NONE);
 		defaultLayouter.setText("Default Layout Provider");
 		String[][] options = getAvailableLayouterNames();
-		RadioGroupFieldEditor radioGroupDefaultLayouter=new RadioGroupFieldEditor(
-				KimlLayoutPreferenceConstants.PREF_LAYOUTPROVIDERS_DEFAULT_LAYOUT_PROVIDER, "Choose the default layout provider:",
-				2, options, defaultLayouter);
-		
+		RadioGroupFieldEditor radioGroupDefaultLayouter = new RadioGroupFieldEditor(
+				KimlLayoutPreferenceConstants.PREF_LAYOUTPROVIDERS_DEFAULT_LAYOUT_PROVIDER,
+				"Choose the default layout provider:", 2, options,
+				defaultLayouter);
+
 		addField(radioGroupDefaultLayouter);
 		gl = new GridLayout(1, true);
 		gl.marginWidth = 15;
 		gl.marginHeight = 10;
 		defaultLayouter.setLayout(gl);
-		
+
 	}
 
 	/*
@@ -77,8 +82,11 @@ public class LayoutProvidersPreferencePage extends FieldEditorPreferencePage imp
 	 */
 	public void init(IWorkbench workbench) {
 	}
-	
 
+	/*
+	 * returns a string matrix as needed from a RadioGroupFieldEditor with the
+	 * currently enabled layout provider
+	 */
 	private String[][] getAvailableLayouterNames() {
 		ArrayList<String> names = LayoutProviders.getInstance()
 				.getEnabledLayouterNames();

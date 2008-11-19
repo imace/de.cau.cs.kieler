@@ -20,19 +20,23 @@ import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutPlugin;
 import edu.unikiel.rtsys.kieler.kiml.layout.util.KimlLayoutPreferenceConstants;
 
 /**
- * This class represents a preference page that is contributed to the
- * Preferences dialog. By subclassing <samp>FieldEditorPreferencePage</samp>, we
- * can use the field support built into JFace that allows us to create a page
- * that is small and knows how to save, restore and apply itself.
- * <p>
- * This page is used to modify preferences only. They are stored in the
- * preference store that belongs to the main plug-in class. That way,
- * preferences can be accessed directly via the preference store.
+ * The Diagram Layouters preference page. This places a page into the
+ * preferences with options for all DiagramLayouters. Specific DiagramLayouters
+ * should place their own preference page below this one. Settings for this can
+ * be made in the respective plugin.xml file.
+ * 
+ * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
+ * @see edu.unikiel.rtsys.kieler.kiml.layout.services.DiagramLayouters
+ *      DiagramLayouters
+ * @see edu.unikiel.rtsys.kieler.kiml.layout.services.KimlAbstractLayouter
+ *      KimlAbstractLayouter
  */
-
 public class DiagramLayoutersPreferencePage extends FieldEditorPreferencePage
 		implements IWorkbenchPreferencePage {
 
+	/**
+	 * Creates a new preference page for the diagram layouters.
+	 */
 	public DiagramLayoutersPreferencePage() {
 		super(GRID);
 		setPreferenceStore(KimlLayoutPlugin.getDefault().getPreferenceStore());
@@ -40,9 +44,7 @@ public class DiagramLayoutersPreferencePage extends FieldEditorPreferencePage
 	}
 
 	/**
-	 * Creates the field editors. Field editors are abstractions of the common
-	 * GUI blocks needed to manipulate various types of preferences. Each field
-	 * editor knows how to save and restore itself.
+	 * Creates the field editors for the various options.
 	 */
 	public void createFieldEditors() {
 		addField(new BooleanFieldEditor(
@@ -55,8 +57,7 @@ public class DiagramLayoutersPreferencePage extends FieldEditorPreferencePage
 				KimlLayoutPreferenceConstants.PREF_DIAGRAMLAYOUTERS_SMOOTHEN_EDGES,
 				"Smoothen edges", getFieldEditorParent()));
 		Label descriptionSmooth = new Label(getFieldEditorParent(), SWT.WRAP);
-		descriptionSmooth
-				.setText("If checked, smoothen the edges.");
+		descriptionSmooth.setText("If checked, smoothen the edges.");
 
 	}
 
