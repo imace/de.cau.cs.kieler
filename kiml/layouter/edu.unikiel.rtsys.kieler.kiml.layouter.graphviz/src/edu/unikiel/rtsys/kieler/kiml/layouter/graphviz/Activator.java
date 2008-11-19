@@ -1,3 +1,12 @@
+/*******************************************************************************
+ * Copyright (c) 2008 Real-Time and Embedded Systems group
+ *
+ * INSERT LICENCE HERE
+ *
+ *
+ * Author: Arne Schipper, ars@informatik.uni-kiel.de 
+ *
+ *******************************************************************************/
 package edu.unikiel.rtsys.kieler.kiml.layouter.graphviz;
 
 import org.eclipse.jface.resource.ImageDescriptor;
@@ -9,10 +18,10 @@ import org.osgi.framework.BundleContext;
  */
 public class Activator extends AbstractUIPlugin {
 
-	// The plug-in ID
+	/* The plug-in ID */
 	public static final String PLUGIN_ID = "edu.unikiel.rtsys.kieler.kiml.layouter.graphviz";
 
-	// The shared instance
+	/* The shared instance */
 	private static Activator plugin;
 	
 	/**

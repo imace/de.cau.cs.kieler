@@ -1,15 +1,16 @@
+/*******************************************************************************
+ * Copyright (c) 2008 Real-Time and Embedded Systems group
+ *
+ * INSERT LICENCE HERE
+ *
+ *
+ * Author: Tobias Kloss, tkl@informatik.uni-kiel.de 
+ *
+ *******************************************************************************/
 package kiel.layouter.graphviz;
-
 
 import java.awt.Dimension;
 import java.util.StringTokenizer;
-
-/*
-import kiel.graphicalInformations.CurvetoPath;
-import kiel.graphicalInformations.LinetoPath;
-import kiel.graphicalInformations.MovetoPath;
-import kiel.graphicalInformations.Point;
-*/
 
 /**
  * <p>

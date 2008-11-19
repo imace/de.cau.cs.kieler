@@ -1,7 +1,18 @@
+/*******************************************************************************
+ * Copyright (c) 2008 Real-Time and Embedded Systems group
+ *
+ * INSERT LICENCE HERE
+ *
+ *
+ * Author: Arne Schipper, ars@informatik.uni-kiel.de 
+ *
+ *******************************************************************************/
 package edu.unikiel.rtsys.kieler.kiml.layouter.graphviz.preferences;
 
 /**
- * Constant definitions for plug-in preferences
+ * Constant definitions for the GraphViz-Plugin preferences
+ * 
+ * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
  */
 public class PreferenceConstants {
 

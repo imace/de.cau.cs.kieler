@@ -1,3 +1,12 @@
+/*******************************************************************************
+ * Copyright (c) 2008 Real-Time and Embedded Systems group
+ *
+ * INSERT LICENCE HERE
+ *
+ *
+ * Author: Arne Schipper, ars@informatik.uni-kiel.de 
+ *
+ *******************************************************************************/
 package kiel.layouter.graphviz;
 
 import java.awt.Dimension;
@@ -21,43 +30,65 @@ import edu.unikiel.rtsys.kieler.kiml.layouter.graphviz.Activator;
 import edu.unikiel.rtsys.kieler.kiml.layouter.graphviz.preferences.PreferenceConstants;
 
 /**
- * Basic Layout Algorithm employing the GraphViz library (e.g. dot layout) to do
- * a graphical layout on a passed Graph datastructure. The basic principle is
- * simple: (1) read the graph datastructure and use the GraphvizAPI to fill a
- * GraphViz internal (native) datastructure. (2) call a GraphViz layout engine
- * (e.g. the dot layouter) on the GraphViz datastructure. The datastructure will
- * get augmented by positioning attributes. (3) Read the position attributes
- * from the GraphViz datastructure and write them back to the KIELER Graph
- * datastructure.
+ * Basic layout algorithm employing the GraphViz library (e.g. dot layout) to do
+ * a graphical layout on the passed
+ * {@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KLayoutGraph
+ * KLayoutGraph} data structure. The basic principle is simple:
+ * <ol>
+ * <li>Read the KLayoutGraph data structure and use the {@link GraphvizAPI} to
+ * fill a GraphViz internal (native) data structure.</li>
+ * <li>Call a GraphViz layout engine (e.g. the dot layouter) on the GraphViz
+ * data structure. The data structure will get augmented by positioning
+ * attributes.</li>
+ * <li>Read the position attributes from the GraphViz datastructure and write
+ * them back to the KIELER Graph data structure.</li>
+ * </ol>
+ * <p/>
+ * Supported features are node sizes and positions, tail and mid label
+ * positions. Edges in GraphViz are described as bezier curves. As at the moment
+ * the concrete application for the KIML layouters, GEF/GMF, does not understand
+ * bezier curves, the two helper/grid point are just left out, resulting in some
+ * kind of spline/polyline.
+ * <p/>
+ * No hierarchy is supported by this implementation. Rather, some preprocessing
+ * should take care hierarchy handling. One possibility is to send every
+ * hierarchy level separately to a new GraphViz layouter, using the size
+ * information gained in a previuos step as the size of the nodes in the current
+ * step.
  * 
- * Hierarchy is prepared (by visiting the graph recursively) but not tested yet.
- * 
- * @author haf, ars
+ * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
+ * @author <a href="mailto:haf@informatik.uni-kiel.de">Hauke Fuhrmann</a>
  * 
  */
 public class GraphvizLayouter {
 
-	/** Store the Graphviz internal C-Pointers of our nodes and edges */
+	/* Store the GraphViz internal C-Pointers of our nodes and edges */
 	private HashMap<KNodeGroup, Integer> mapNode2Pointer = new HashMap<KNodeGroup, Integer>();
 	private HashMap<KEdge, Integer> mapEdge2Pointer = new HashMap<KEdge, Integer>();
 
-	/** C-pointer to the root GraphvizGraph datastructure */
+	/* C-pointer to the root GraphvizGraph data structure */
 	private int graphvizGraph;
 
-	/**
-	 * dots per inch specification. GraphViz uses inch for some internal sizes
-	 * (e.g. width, height) but not for all. Hence finding the right dpi is
-	 * crucial for the layout. Setting the dpi attribute for a graph within
+	/*
+	 * Dots per inch specification. GraphViz uses inch for some internal sizes
+	 * (e.g. width, height) but not for all. Hence finding the right DPI is
+	 * crucial for the layout. Setting the DPI attribute for a graph within
 	 * GraphViz seems to have no effect.
 	 */
 	private final float dpi = 72.0f;
 
-	// padding from the borders. pad attribute of GraphViz has no effect
+	/* padding from the borders. pad attribute of GraphViz has no effect */
 	private int prefPadX = 15;
 	private int prefPadY = 15;
-	
+
+	/* holds the String denoting the desired layouter of the GraphViz suite */
 	private String layouterName;
 
+	/**
+	 * Creates a new KIML GraphViz layouter using the dot layout engine. Loads
+	 * the preference values.
+	 * 
+	 */
 	public GraphvizLayouter() {
 		layouterName = GraphvizLayoutProviderNames.GRAPHVIZ_DOT;
 		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
@@ -66,6 +97,14 @@ public class GraphvizLayouter {
 		GraphvizAPI.initialize();
 	}
 
+	/**
+	 * Creates a new KIML GraphViz layouter with the specified concrete GraphViz
+	 * layouter (e.g. GraphViz Circo). Loads the preference values.
+	 * 
+	 * @param layoutProviderName
+	 *            A String denoting the layouter. Must be one of those declared
+	 *            in {@link GraphvizLayoutProviderNames}.
+	 */
 	public GraphvizLayouter(String layoutProviderName) {
 		layouterName = layoutProviderName;
 		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
@@ -75,19 +114,28 @@ public class GraphvizLayouter {
 	}
 
 	/**
-	 * TODO: Doc.
+	 * Performs the actual work of the layout process. Translates the
+	 * {@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KLayoutGraph
+	 * KLayoutGraph} into a structure GraphViz understands, calls the desired
+	 * GraphViz layouter and annotates the KLayoutGraph with the position and
+	 * size information provided by GraphViz.
 	 */
 	public void visit(KNodeGroup nodeGroup) {
-		// return if there is nothing in this group
+
+		/* return if there is nothing in this group */
 		if (nodeGroup.getSubNodeGroups().size() == 0) {
 			return;
 		}
-		
+
+		/* create fresh internal GraphViz graph */
 		graphvizGraph = GraphvizAPI.createGraph("");
 		GraphvizAPI.setGlobalNodeAttribute(graphvizGraph,
 				GraphvizAPI.ATTR_SHAPE, "box");
 
+		/* translate the KLayoutGraph to GraphViz */
 		mapNodeGroup2Graphviz(nodeGroup);
+
+		/* check if Emma wants to layout horizontal */
 		if (nodeGroup.getLayout().getLayoutOptions().contains(
 				LAYOUT_OPTION.VERTICAL)) {
 			GraphvizAPI.setGraphAttribute(graphvizGraph, "rankdir", "BT");
@@ -95,6 +143,7 @@ public class GraphvizLayouter {
 			GraphvizAPI.setGraphAttribute(graphvizGraph, "rankdir", "LR");
 		}
 
+		/* pick up desired layouter */
 		if (layouterName.equals(GraphvizLayoutProviderNames.GRAPHVIZ_CIRCO)) {
 			GraphvizAPI.doCircoLayout(graphvizGraph);
 			GraphvizAPI.attachAttributes(graphvizGraph);
@@ -105,7 +154,7 @@ public class GraphvizLayouter {
 			GraphvizAPI.doNeatoLayout(graphvizGraph);
 			GraphvizAPI.attachAttributes(graphvizGraph);
 			mapGraphviz2NodeGroup(nodeGroup);
-			GraphvizAPI.neatoCleanup(graphvizGraph);			
+			GraphvizAPI.neatoCleanup(graphvizGraph);
 		} else if (layouterName
 				.equals(GraphvizLayoutProviderNames.GRAPHVIZ_TWOPI)) {
 			GraphvizAPI.doTwopiLayout(graphvizGraph);
@@ -119,13 +168,13 @@ public class GraphvizLayouter {
 			GraphvizAPI.dotCleanup(graphvizGraph);
 		}
 
-		
 		/* should Emma debug? */
 		if (Activator.getDefault().getPreferenceStore().getBoolean(
 				PreferenceConstants.PREF_GRAPHVIZ_ENABLE_DEBUG_OUTPUT)) {
 
-			String outputName = nodeGroup.getIdString().length() != 0 ?
-					nodeGroup.getIdString() : "output";
+			String outputName = nodeGroup.getIdString().length() != 0 ? nodeGroup
+					.getIdString()
+					: "output";
 			String outputDir = Activator.getDefault().getPreferenceStore()
 					.getString(PreferenceConstants.PREF_GRAPHVIZ_DEBUG_DIR);
 			if (outputDir.equals("")) {
@@ -135,19 +184,21 @@ public class GraphvizLayouter {
 			GraphvizAPI.writeDOT(graphvizGraph, outputDir + "/" + outputName
 					+ ".dot");
 		}
-		cleanup();
-	}
 
-	private void cleanup() {
+		/* cleanup */
 		mapNode2Pointer.clear();
 		mapEdge2Pointer.clear();
 	}
 
 	/**
-	 * Map a KNodeGroup object to the internal GraphvizAPI data structure. This
-	 * is stored in the GraphvizAPI internally.
+	 * Maps a
+	 * {@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup
+	 * KNodeGroup} to the internal GraphvizAPI data structure. This is stored in
+	 * the GraphvizAPI internally.
 	 * 
-	 * @param graph
+	 * @param nodeGroup
+	 *            A KNodeGroup with the graph to lay out, the actual nodes of
+	 *            the graph are stored as subgroups of the nodeGroup.
 	 */
 	private void mapNodeGroup2Graphviz(KNodeGroup nodeGroup) {
 		int i = 0;
@@ -164,13 +215,13 @@ public class GraphvizLayouter {
 				label = "";
 			/*
 			 * Use NumberFormat to format the number into a String to workaround
-			 * different possible locales of machines on that Graphviz could run
-			 * (could result in different number formats, e.g. 0.33 on english
-			 * local, 0,33 on german)
+			 * different possible locales of machines on that GraphViz could run
+			 * (could result in different number formats, e.g. 0.33 on English
+			 * local, 0,33 on German)
 			 */
-			String height = pixel2GraphVizInches((int) subNodeGroup.getLayout()
-					.getSize().getHeight());
-			String width = pixel2GraphVizInches((int) subNodeGroup.getLayout()
+			String height = pixels2GraphVizInches((int) subNodeGroup
+					.getLayout().getSize().getHeight());
+			String width = pixels2GraphVizInches((int) subNodeGroup.getLayout()
 					.getSize().getWidth());
 			GraphvizAPI.setLocalNodeAttribute(graphvizGraph, pointer, "label",
 					label);
@@ -244,13 +295,13 @@ public class GraphvizLayouter {
 	}
 
 	/**
-	 * Read the internal GraphViz datastructure that was filled by the GraphViz
-	 * library and write the required parameters back to the Graph object. Hence
-	 * the Graph object is the interface between layouter and parties who need
-	 * layouted stuff.
+	 * Reads the internal GraphViz data structure that was filled by the
+	 * GraphViz library and writes the required parameters back to the
+	 * {@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup
+	 * KNodeGroup}.
 	 * 
-	 * @param graph
-	 *            Graph object to fill with the layout information
+	 * @param nodeGroup
+	 *            The KNodeGroup to be filled with the layout information
 	 */
 	private void mapGraphviz2NodeGroup(KNodeGroup nodeGroup) {
 		mapGraphvizNodes2KNodes();
@@ -259,12 +310,14 @@ public class GraphvizLayouter {
 	}
 
 	/**
-	 * Write all Node related information from GraphViz into the Graph
-	 * datastructure
+	 * Writes all node related information from GraphViz into the KNodeGroup.
+	 * Uses HashMaps for the mapping.
 	 */
 	private void mapGraphvizNodes2KNodes() {
-		// iterate over all nodes in the GraphViz graph and copy their
-		// attributes to the Graph datastructure
+		/*
+		 * iterate over all nodes in the GraphViz graph and copy their
+		 * attributes to the Graph data structure
+		 */
 		for (KNodeGroup nodeGroup : mapNode2Pointer.keySet()) {
 
 			int nodePointer = mapNode2Pointer.get(nodeGroup);
@@ -280,11 +333,11 @@ public class GraphvizLayouter {
 			try {
 				List<Integer> position = string2Ints(posString);
 				// use NumberFormat for parsing, see respective methods below
-				size.setHeight(graphVizInches2Pixel(heightString));
-				size.setWidth(graphVizInches2Pixel(widthString));
+				size.setHeight(graphVizInches2Pixels(heightString));
+				size.setWidth(graphVizInches2Pixels(widthString));
 				// in GraphViz position is the center of the node
 				// in draw2D it's the upper left corner
-				location = graphviz2Draw2D(position.get(0).intValue(), position
+				location = graphviz2KPoint(position.get(0).intValue(), position
 						.get(1).intValue(), size);
 
 			} catch (Exception e) {
@@ -302,12 +355,14 @@ public class GraphvizLayouter {
 	}
 
 	/**
-	 * Write all Edge related information from GraphViz into the Graph
-	 * datastructure
+	 * Writes all edge related information from GraphViz into the the
+	 * KNodeGroup. Uses HashMaps for the mapping.
 	 */
 	private void mapGraphvizEdges2KEdges() {
-		// iterate over all edges in the GraphViz graph and copy their
-		// attributes to the Graph datastructure
+		/*
+		 * iterate over all edges in the GraphViz graph and copy their
+		 * attributes to the Graph data structure
+		 */
 		for (KEdge edge : mapEdge2Pointer.keySet()) {
 
 			int edgePointer = mapEdge2Pointer.get(edge);
@@ -339,33 +394,27 @@ public class GraphvizLayouter {
 				 * @see Eclipse bug: 234808 and 168307
 				 */
 
-				// first point in list is the start point
-				KPoint startPoint = KimlLayoutGraphFactory.eINSTANCE
-						.createKPoint();
-				startPoint.setX(intList.get(0));
-				startPoint.setY(intList.get(1));
-				edge.getLayout().setSourcePoint(graphviz2Draw2D(startPoint));
+				/* first two points in list denote the start point */
+				edge.getLayout().setSourcePoint(
+						graphviz2KPoint(intList.get(0), intList.get(1)));
 
 				int i = 6;
-				// unsafe because list size might be not a multiple of 6
 				for (; i < intList.size() - 3; i += 6) {
-					// i+=6: ignore bezier control points
-					KPoint point = KimlLayoutGraphFactory.eINSTANCE
-							.createKPoint();
-					point.setX(intList.get(i));
-					point.setY(intList.get(i + 1));
+					/* i+=6: ignore bezier control points */
 					edge.getLayout().getGridPoints()
-							.add(graphviz2Draw2D(point));
+							.add(
+									graphviz2KPoint(intList.get(i), intList
+											.get(i + 1)));
 
 				}
-				// first point in the GraphViz list is the end point
-				KPoint endPoint = KimlLayoutGraphFactory.eINSTANCE
-						.createKPoint();
-				endPoint.setX(intList.get(intList.size() - 2));
-				endPoint.setY(intList.get(intList.size() - 1));
-				edge.getLayout().setTargetPoint(graphviz2Draw2D(endPoint));
+				/* last two points in the GraphViz list denote the end point */
+				edge.getLayout().setTargetPoint(
+						graphviz2KPoint(intList.get(intList.size() - 2),
+								intList.get(intList.size() - 1)));
 
-			} catch (Exception e) {/* in any failure, leave list empty */
+			} catch (Exception e) {
+				/* in any failure, leave list empty */
+				/* FIXME: Graphical or at least better error handling */
 				System.out.println("Some fault:--------------------- "
 						+ e.toString());
 			}
@@ -378,12 +427,13 @@ public class GraphvizLayouter {
 				// head label
 				if (label.getLabelLayout().getLabelPlacement().equals(
 						EDGE_LABEL_PLACEMENT.HEAD)) {
-					;// not possible to get the head label placement with
-					// GraphViz.
-
+					;/*
+					 * not possible to get the head label (placement) with
+					 * GraphViz
+					 */
 				}
 
-				// mid label
+				/* mid label */
 				if (label.getLabelLayout().getLabelPlacement().equals(
 						EDGE_LABEL_PLACEMENT.CENTER)) {
 					String midLoc = GraphvizAPI.getAttribute(edgePointer,
@@ -395,14 +445,14 @@ public class GraphvizLayouter {
 						KDimension labelSize = KimlLayoutGraphFactory.eINSTANCE
 								.createKDimension();
 						labelSize = label.getLabelLayout().getSize();
-						midLocation = graphviz2Draw2D(
+						midLocation = graphviz2KPoint(
 								midInts.get(0).intValue(), midInts.get(1)
 										.intValue(), labelSize);
 					}
 					label.getLabelLayout().setLocation(midLocation);
 				}
 
-				// tail label
+				/* tail label */
 				if (label.getLabelLayout().getLabelPlacement().equals(
 						EDGE_LABEL_PLACEMENT.TAIL)) {
 					String tailLoc = GraphvizAPI.getAttribute(edgePointer,
@@ -416,24 +466,28 @@ public class GraphvizLayouter {
 						labelSize = label.getLabelLayout().getSize();
 						/* small adjust of size, and therefore of position */
 						labelSize.setHeight(labelSize.getHeight() + 7);
-						tailLocation = graphviz2Draw2D(tailInts.get(0)
+						tailLocation = graphviz2KPoint(tailInts.get(0)
 								.intValue(), tailInts.get(1).intValue(),
 								labelSize);
 					}
 					label.getLabelLayout().setLocation(tailLocation);
 				}
-
 			}
-
 		}
 	}
 
 	/**
-	 * Sets the required size of the node (i.e. a CompositeNode or a Graph) by
-	 * obtaining the bounding box of the GraphViz Graph. Will leave the old
-	 * sizes for simple Nodes and empty CompositeNodes.
+	 * Sets the required size of the top KNodeGroup by obtaining the bounding
+	 * box of the GraphViz Graph, resulting from the positions of the contained
+	 * sub nodes. If insets are given in the top KNodeGroup, they are added to
+	 * the size. Insets denote the difference between the resulting size of the
+	 * area the contained elements cover after the layout process and the real
+	 * size the composite node should have. An example is a compartment with a
+	 * header. The size (height) of the header has to be added to the desired
+	 * resulting size of the top KNodeGroup.
 	 * 
-	 * @param node
+	 * @param nodeGroup
+	 *            The top KNodeGroup to set the size of
 	 */
 	private void setTopNodeAttributes(KNodeGroup nodeGroup) {
 		Dimension bb = GraphvizAPI.getBoundingBox(graphvizGraph);
@@ -445,7 +499,7 @@ public class GraphvizLayouter {
 			left = nodeGroup.getLayout().getInsets().getLeft();
 			right = nodeGroup.getLayout().getInsets().getRight();
 		} catch (Exception e) {
-			// no insets available
+			/* no insets available, stay silent */
 		}
 		size.setWidth((bb.width + 2 * prefPadX) + left + right);
 		size.setHeight((bb.height + 2 * prefPadY) + top + bottom);
@@ -457,11 +511,12 @@ public class GraphvizLayouter {
 	 * platform's current locale settings. Under different locales, the height
 	 * and width values of GraphViz use dots, respective periods.
 	 * 
-	 * @param pixel
-	 * @return localized inch string
+	 * @param pixels
+	 *            the pixels to transform
+	 * @return a localized inch string
 	 */
-	private String pixel2GraphVizInches(int pixel) {
-		return NumberFormat.getInstance().format(pixel / (float) dpi);
+	private String pixels2GraphVizInches(int pixels) {
+		return NumberFormat.getInstance().format(pixels / (float) dpi);
 	}
 
 	/**
@@ -470,28 +525,31 @@ public class GraphvizLayouter {
 	 * different locales, the height and width values of GraphViz use dots,
 	 * respective periods.
 	 * 
-	 * @param graphViz
-	 *            inches
-	 * @return pixel
+	 * @param dotInches
+	 *            localized inches to transform into pixels
+	 * @return pixel corresponding to the provided inches
 	 */
-	private int graphVizInches2Pixel(String dotInches) throws ParseException {
+	private int graphVizInches2Pixels(String dotInches) throws ParseException {
 		return (int) (NumberFormat.getInstance().parse(dotInches).floatValue() * dpi);
 	}
 
 	/**
-	 * Transforms GraphvizCoordinates to Draw2D (KIELER) coordinates of any
-	 * sized object (e.g. nodes). There are some scaling factors between those
-	 * two coordinate systems. Padding is also used.
+	 * Transforms GraphvizCoordinates to
+	 * {@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPoint
+	 * KPoint} (KLayoutGraph) coordinates. The size of the provided item is used
+	 * to adjust the resulting location. Padding is also used.
 	 * 
-	 * @param coords
-	 *            GraphViz Coordinates
+	 * @param x
+	 *            GraphViz x coordinate
+	 * @param y
+	 *            GraphViz y coordinate
 	 * @param size
 	 *            Size of the item. Required because GraphViz coordinates are at
-	 *            the center of any item and Draw2D coordinates are at the upper
+	 *            the center of any item and KPoint coordinates are at the upper
 	 *            left corner.
-	 * @return Draw2D coordinates
+	 * @return KPoint the location of the item in terms of the upper left corner
 	 */
-	private KPoint graphviz2Draw2D(int x, int y, KDimension size) {
+	private KPoint graphviz2KPoint(int x, int y, KDimension size) {
 		KPoint newLocation = KimlLayoutGraphFactory.eINSTANCE.createKPoint();
 		newLocation.setX(x - (size.getWidth() / 2) + prefPadX);
 		newLocation.setY(y - (size.getHeight() / 2) + prefPadY);
@@ -499,37 +557,40 @@ public class GraphvizLayouter {
 	}
 
 	/**
-	 * Transforms GraphvizCoordinates to Draw2D (KIELER) coordinates only for
-	 * unsized objects (points). There are some scaling factors between those
-	 * two coordinate systems. Padding is also used.
+	 * Transforms GraphvizCoordinates to
+	 * {@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPoint
+	 * KPoint} (KLayoutGraph) coordinates. Padding is also used.
 	 * 
-	 * @param coords
+	 * @param location
 	 *            GraphViz Coordinates
 	 * @return Draw2D coordinates
 	 */
-	private KPoint graphviz2Draw2D(KPoint location) {
+	private KPoint graphviz2KPoint(int x, int y) {
 		KPoint newLocation = KimlLayoutGraphFactory.eINSTANCE.createKPoint();
-		newLocation.setX((int) location.getX() + prefPadX);
-		newLocation.setY((int) location.getY() + prefPadY);
+		newLocation.setX(x + prefPadX);
+		newLocation.setY(y + prefPadY);
 		return newLocation;
 	}
 
 	/**
-	 * Converts a String containing a list of integers into a List of Integer
+	 * Converts a string containing a list of integers into a List of Integer
 	 * objects. Used for converting GraphViz position Strings (e.g. list of
 	 * bendpoints) into a real list.
 	 * 
-	 * @param text
-	 * @return
+	 * @param integerStringList
+	 *            A comma separated string with integers
+	 * @return A list holding all the provided Integers of the string
 	 */
-	private List<Integer> string2Ints(String text) {
+	private List<Integer> string2Ints(String integerStringList) {
 		ArrayList<Integer> intList = new ArrayList<Integer>();
-		if (text != null) {
-			String[] tokens = text.split(",|\\s"); // \s = any whitespace char
+		if (integerStringList != null) {
+			/* \s = any whitespace char */
+			String[] tokens = integerStringList.split(",|\\s");
 			for (int i = 0; i < tokens.length; i++) {
 				try {
 					intList.add(new Integer(tokens[i]));
-				} catch (Exception e) {/* nothing */
+				} catch (Exception e) {
+					/* nothing */
 				}
 			}
 		}
