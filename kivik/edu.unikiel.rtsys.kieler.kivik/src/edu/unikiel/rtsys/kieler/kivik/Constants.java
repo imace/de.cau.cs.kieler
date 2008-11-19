@@ -1,11 +1,12 @@
 /*******************************************************************************
- * Copyright (c) 2008 Arne Schipper.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
+ * Copyright (c) 2008 Real-Time and Embedded Systems group
+ *
+ * INSERT LICENCE HERE
+ *
+ *
+ * Author: Arne Schipper, ars@informatik.uni-kiel.de 
+ *
  *******************************************************************************/
-
 package edu.unikiel.rtsys.kieler.kivik;
 
 /**

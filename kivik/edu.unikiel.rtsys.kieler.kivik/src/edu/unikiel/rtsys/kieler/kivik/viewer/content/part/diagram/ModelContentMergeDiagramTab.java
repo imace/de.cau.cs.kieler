@@ -1,4 +1,10 @@
 /*******************************************************************************
+ * Copyright (c) 2008 Real-Time and Embedded Systems group
+ *
+ * INSERT LICENCE HERE
+ *
+ *
+ * Author: Arne Schipper, ars@informatik.uni-kiel.de 
  *
  *******************************************************************************/
 package edu.unikiel.rtsys.kieler.kivik.viewer.content.part.diagram;

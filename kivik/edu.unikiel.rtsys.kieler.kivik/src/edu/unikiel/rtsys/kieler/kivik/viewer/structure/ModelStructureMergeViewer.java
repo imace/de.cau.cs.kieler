@@ -1,12 +1,12 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2007, 2008 Obeo.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- * 
- * Contributors:
- *     Obeo - initial API and implementation
+ * Copyright (c) 2008 Real-Time and Embedded Systems group
+ *
+ * INSERT LICENCE HERE
+ *
+ *
+ * Author: Arne Schipper, ars@informatik.uni-kiel.de 
+ * Contributors: Obeo - initial API and implementation
+ *
  *******************************************************************************/
 package edu.unikiel.rtsys.kieler.kivik.viewer.structure;
 
@@ -24,8 +24,6 @@ import org.eclipse.emf.compare.ui.EMFCompareUIMessages;
 import org.eclipse.emf.compare.ui.util.EMFCompareConstants;
 import org.eclipse.emf.compare.util.AdapterUtils;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
-import org.eclipse.jface.action.Separator;
-import org.eclipse.jface.action.ToolBarManager;
 import org.eclipse.jface.util.IPropertyChangeListener;
 import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.jface.viewers.LabelProvider;
@@ -46,7 +44,6 @@ import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.PlatformUI;
 
 import edu.unikiel.rtsys.kieler.kivik.internal.KivikComparator;
-import edu.unikiel.rtsys.kieler.kivik.viewer.export.ExportMenu;
 
 /**
  * Compare and merge viewer with an area showing diffs as a structured tree.
@@ -56,9 +53,6 @@ import edu.unikiel.rtsys.kieler.kivik.viewer.export.ExportMenu;
 public class ModelStructureMergeViewer extends TreeViewer {
 	/** Configuration element of the underlying comparison. */
 	protected CompareConfiguration configuration;
-
-	/** This is the action displaying the "export diff as..." menu. */
-	protected ExportMenu exportMenu;
 
 	/**
 	 * Allows us to ignore a selection event in the content viewer if it is one
