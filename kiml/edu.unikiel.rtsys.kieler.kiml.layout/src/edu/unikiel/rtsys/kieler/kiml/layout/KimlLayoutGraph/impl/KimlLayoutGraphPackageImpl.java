@@ -1278,6 +1278,7 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 		addEEnumLiteral(layouT_OPTIONEEnum, edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_OPTION.PRESERVE_MENTAL_MAP);
 		addEEnumLiteral(layouT_OPTIONEEnum, edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_OPTION.VERTICAL);
 		addEEnumLiteral(layouT_OPTIONEEnum, edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_OPTION.HORIZONTAL);
+		addEEnumLiteral(layouT_OPTIONEEnum, edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_OPTION.FIXED_PORTS);
 
 		initEEnum(edgE_LABEL_PLACEMENTEEnum, edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.EDGE_LABEL_PLACEMENT.class, "EDGE_LABEL_PLACEMENT");
 		addEEnumLiteral(edgE_LABEL_PLACEMENTEEnum, edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.EDGE_LABEL_PLACEMENT.DEFAULT);

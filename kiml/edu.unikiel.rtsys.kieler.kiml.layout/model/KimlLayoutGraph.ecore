@@ -120,10 +120,11 @@
     <eLiterals name="OTHER" value="6" literal="Other"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="LAYOUT_OPTION">
-    <eLiterals name="DEFAULT" value="1" literal="Default"/>
-    <eLiterals name="PRESERVE_MENTAL_MAP" value="2" literal="Preserve mental map"/>
-    <eLiterals name="VERTICAL" value="4" literal="Vertical"/>
-    <eLiterals name="HORIZONTAL" value="8" literal="Horizontal"/>
+    <eLiterals name="DEFAULT" literal="Default"/>
+    <eLiterals name="PRESERVE_MENTAL_MAP" value="1" literal="Preserve mental map"/>
+    <eLiterals name="VERTICAL" value="2" literal="Vertical"/>
+    <eLiterals name="HORIZONTAL" value="3" literal="Horizontal"/>
+    <eLiterals name="FIXED_PORTS" value="4" literal="Fixed ports"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="EDGE_LABEL_PLACEMENT">
     <eLiterals name="DEFAULT" literal="DEFAULT"/>

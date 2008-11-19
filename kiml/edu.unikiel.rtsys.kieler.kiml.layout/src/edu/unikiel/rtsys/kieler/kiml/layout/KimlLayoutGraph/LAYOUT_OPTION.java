@@ -30,7 +30,7 @@ public enum LAYOUT_OPTION implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	DEFAULT(1, "DEFAULT", "Default"),
+	DEFAULT(0, "DEFAULT", "Default"),
 
 	/**
 	 * The '<em><b>PRESERVE MENTAL MAP</b></em>' literal object.
@@ -40,7 +40,7 @@ public enum LAYOUT_OPTION implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	PRESERVE_MENTAL_MAP(2, "PRESERVE_MENTAL_MAP", "Preserve mental map"), /**
+	PRESERVE_MENTAL_MAP(1, "PRESERVE_MENTAL_MAP", "Preserve mental map"), /**
 	 * The '<em><b>VERTICAL</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -48,7 +48,7 @@ public enum LAYOUT_OPTION implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	VERTICAL(4, "VERTICAL", "Vertical"), /**
+	VERTICAL(2, "VERTICAL", "Vertical"), /**
 	 * The '<em><b>HORIZONTAL</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -56,7 +56,15 @@ public enum LAYOUT_OPTION implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	HORIZONTAL(8, "HORIZONTAL", "Horizontal");
+	HORIZONTAL(3, "HORIZONTAL", "Horizontal"), /**
+	 * The '<em><b>FIXED PORTS</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #FIXED_PORTS_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	FIXED_PORTS(4, "FIXED_PORTS", "Fixed ports");
 
 	/**
 	 * The '<em><b>DEFAULT</b></em>' literal value.
@@ -71,7 +79,7 @@ public enum LAYOUT_OPTION implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int DEFAULT_VALUE = 1;
+	public static final int DEFAULT_VALUE = 0;
 
 	/**
 	 * The '<em><b>PRESERVE MENTAL MAP</b></em>' literal value.
@@ -86,7 +94,7 @@ public enum LAYOUT_OPTION implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int PRESERVE_MENTAL_MAP_VALUE = 2;
+	public static final int PRESERVE_MENTAL_MAP_VALUE = 1;
 
 	/**
 	 * The '<em><b>VERTICAL</b></em>' literal value.
@@ -101,7 +109,7 @@ public enum LAYOUT_OPTION implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int VERTICAL_VALUE = 4;
+	public static final int VERTICAL_VALUE = 2;
 
 	/**
 	 * The '<em><b>HORIZONTAL</b></em>' literal value.
@@ -116,7 +124,22 @@ public enum LAYOUT_OPTION implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int HORIZONTAL_VALUE = 8;
+	public static final int HORIZONTAL_VALUE = 3;
+
+	/**
+	 * The '<em><b>FIXED PORTS</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>FIXED PORTS</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #FIXED_PORTS
+	 * @model literal="Fixed ports"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int FIXED_PORTS_VALUE = 4;
 
 	/**
 	 * An array of all the '<em><b>LAYOUT OPTION</b></em>' enumerators.
@@ -130,6 +153,7 @@ public enum LAYOUT_OPTION implements Enumerator {
 			PRESERVE_MENTAL_MAP,
 			VERTICAL,
 			HORIZONTAL,
+			FIXED_PORTS,
 		};
 
 	/**
@@ -184,6 +208,7 @@ public enum LAYOUT_OPTION implements Enumerator {
 			case PRESERVE_MENTAL_MAP_VALUE: return PRESERVE_MENTAL_MAP;
 			case VERTICAL_VALUE: return VERTICAL;
 			case HORIZONTAL_VALUE: return HORIZONTAL;
+			case FIXED_PORTS_VALUE: return FIXED_PORTS;
 		}
 		return null;
 	}
