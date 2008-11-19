@@ -608,25 +608,21 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 		if (editParts.size() > 0) {
 			AbstractGraphicalEditPart editPart = editParts.get(0);
 
-			/*
-			 * hack to zoom not to the diagram, but to the top edit part inside
-			 * it
-			 */
-			if (editPart.equals(getContents())) {
-				editPart = (AbstractGraphicalEditPart) getContents()
-						.getChildren().get(0);
-			}
-
 			/* scrolling and zoom */
 			IFigure fig = editPart.getFigure();
 			Rectangle figBounds = translateFromTo(fig, viewport);
 
-			Rectangle newZoomLocation = new Rectangle();
-
 			if (prefZoomToElement) {
-				zoomManager.zoomTo(figBounds.expand(50, 50));
+				if (editPart.equals(getContents())) {
+					zoomManager.setZoomAsText(ZoomManager.FIT_ALL);
+				} else {
+					zoomManager.zoomTo(figBounds.expand(50, 50));
+				}
 			} else {
 				/* this is SCROLLING */
+				Rectangle newZoomLocation = new Rectangle(figBounds.getCenter()
+						.translate(viewport.getSize().scale(-0.5)), viewport
+						.getBounds().getSize());
 				zoomManager.zoomTo(newZoomLocation);
 			}
 
