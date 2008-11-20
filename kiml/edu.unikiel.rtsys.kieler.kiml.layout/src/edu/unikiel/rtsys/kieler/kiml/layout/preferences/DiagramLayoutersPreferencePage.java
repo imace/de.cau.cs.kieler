@@ -17,6 +17,7 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutPlugin;
+import edu.unikiel.rtsys.kieler.kiml.layout.util.KimlLayoutPreferenceConstants;
 
 /**
  * The Diagram Layouters preference page. This places a page into the
