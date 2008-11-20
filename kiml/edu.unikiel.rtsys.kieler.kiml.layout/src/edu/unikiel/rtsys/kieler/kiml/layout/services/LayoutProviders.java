@@ -24,7 +24,7 @@ import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphFactory;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_TYPE;
-import edu.unikiel.rtsys.kieler.kiml.layout.util.KimlLayoutPreferenceConstants;
+import edu.unikiel.rtsys.kieler.kiml.layout.preferences.KimlLayoutPreferenceConstants;
 
 /**
  * Controls all the layout providers, which are loaded at startup. Realized as a

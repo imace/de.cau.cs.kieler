@@ -7,7 +7,7 @@
  * Author: Arne Schipper, ars@informatik.uni-kiel.de 
  *
  *******************************************************************************/
-package edu.unikiel.rtsys.kieler.kiml.layout.util;
+package edu.unikiel.rtsys.kieler.kiml.layout.preferences;
 
 /**
  * Constant definitions for the KimlLayout plug-in preferences.

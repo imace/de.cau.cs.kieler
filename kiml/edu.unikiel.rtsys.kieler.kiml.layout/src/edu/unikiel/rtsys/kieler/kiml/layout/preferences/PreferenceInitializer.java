@@ -13,7 +13,6 @@ import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
 import org.eclipse.jface.preference.IPreferenceStore;
 
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutPlugin;
-import edu.unikiel.rtsys.kieler.kiml.layout.util.KimlLayoutPreferenceConstants;
 
 /**
  * Class used to initialize default preference values for the KimlLayout
