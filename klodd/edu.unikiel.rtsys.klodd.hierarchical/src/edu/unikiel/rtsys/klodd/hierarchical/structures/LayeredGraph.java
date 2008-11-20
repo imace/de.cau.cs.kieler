@@ -29,6 +29,8 @@ public class LayeredGraph {
 	
 	/** list of layers in this layered graph */
 	private List<Layer> layers;
+	/** parent node group associated with this layered graph */
+	KNodeGroup parentGroup;
 	/** map of objects to their corresponding layer */
 	private Map<Object, LayerElement> obj2LayerElemMap = new HashMap<Object, LayerElement>();
 	/** layout direction for this layered graph: HORIZONTAL or VERTICAL */
@@ -51,6 +53,7 @@ public class LayeredGraph {
 						: FixedArrayList.Type.ALIGN_BACK);
 		
 		// get layout options from the parent group
+		this.parentGroup = parentGroup;
 		List<LAYOUT_OPTION> parentOptions = parentGroup.getLayout().getLayoutOptions();
 		layoutDirection = parentOptions.contains(LAYOUT_OPTION.VERTICAL) ?
 				LAYOUT_OPTION.VERTICAL : LAYOUT_OPTION.HORIZONTAL;
@@ -127,6 +130,24 @@ public class LayeredGraph {
 		return obj2LayerElemMap.get(obj).getLayer();
 	}
 	
+	/**
+	 * Gets the list of layers.
+	 * 
+	 * @return the layers
+	 */
+	public List<Layer> getLayers() {
+		return layers;
+	}
+
+	/**
+	 * Gets the parent node group.
+	 * 
+	 * @return the parentGroup
+	 */
+	public KNodeGroup getParentGroup() {
+		return parentGroup;
+	}
+
 	/**
 	 * Fills rank and height information for all layers, creates connections
 	 * between layer elements and creates long edges. This method should be

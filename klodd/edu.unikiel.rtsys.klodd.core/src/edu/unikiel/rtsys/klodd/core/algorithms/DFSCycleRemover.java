@@ -14,8 +14,7 @@ import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup;
  * 
  * @author msp
  */
-public class DFSCycleRemover extends AbstractCycleRemover
-		implements ICycleRemover {
+public class DFSCycleRemover extends AbstractCycleRemover {
 
 	/** map of marked vertices */
 	private Map<KNodeGroup, Integer> markedMap = new HashMap<KNodeGroup, Integer>();

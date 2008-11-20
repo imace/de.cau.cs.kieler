@@ -3,16 +3,16 @@ package edu.unikiel.rtsys.klodd.hierarchical.structures;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KEdge;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup;
-import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPoint;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPort;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_OPTION;
-import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.PORT_PLACEMENT;
+import edu.unikiel.rtsys.klodd.core.util.LayoutGraphs;
 
 /**
  * A layer element representing a node or a long edge in the layered graph.
@@ -168,56 +168,52 @@ public class LayerElement {
 	}
 	
 	/**
-	 * Gets an array of combined element and port ranks for all incoming
+	 * Gets a list of combined element and port ranks for all incoming
 	 * or for all outgoing connections.
 	 * 
 	 * @param forward if true, only incoming connections are considered,
 	 *     else only outgoing connections are considered
-	 * @return array of ranks for the specified connections
+	 * @return list of ranks for the specified connections
 	 */
-	public int[] getConnectionRanks(boolean forward) {
+	public List<Integer> getConnectionRanks(boolean forward) {
+		List<Integer> connectionRanks = new LinkedList<Integer>();
 		if (forward) {
-			int[] connectionRanks = new int[incoming.size()];
-			int i = 0;
 			for (LayerConnection connection : incoming) {
 				if (connection.getSourcePort() != null) {
 					// the source is a node or a port
-					connectionRanks[i] = connection.getSourceElement()
+					connectionRanks.add(new Integer(connection.getSourceElement()
 						.getPortRank(connection.getSourcePort(), forward)
-						+ connection.getSourceElement().rank;
+						+ connection.getSourceElement().rank));
 				}
 				else {
 					// the source is an edge
-					connectionRanks[i] = connection.getSourceElement().rank;
+					connectionRanks.add(new Integer(connection.getSourceElement().rank));
 				}
-				i++;
 			}
-			return connectionRanks;
 		}
 		else {
-			int[] connectionRanks = new int[outgoing.size()];
-			int i = 0;
 			for (LayerConnection connection : outgoing) {
 				if (connection.getTargetPort() != null) {
 					// the target is a node or a port
-					connectionRanks[i] = connection.getTargetElement()
+					connectionRanks.add(new Integer(connection.getTargetElement()
 						.getPortRank(connection.getTargetPort(), forward)
-						+ connection.getTargetElement().rank;
+						+ connection.getTargetElement().rank));
 				}
 				else {
 					// the target is an edge
-					connectionRanks[i] = connection.getTargetElement().rank;
+					connectionRanks.add(new Integer(connection.getTargetElement().rank));
 				}
-				i++;
 			}
-			return connectionRanks;
 		}
+		return connectionRanks;
 	}
 	
 	/**
 	 * Gets a list of combined element and port ranks of connections
 	 * sorted by the port to which the connection is attached. This only
-	 * works if the element object is a node group.
+	 * works if the element object is a node group. The method is expected
+	 * to give at least an empty list for each port in the contained node
+	 * group.
 	 * 
 	 * @param forward if true, only incoming connections are considered,
 	 *     else only outgoing connections are considered
@@ -227,7 +223,7 @@ public class LayerElement {
 	public Map<KPort, List<Integer>> getConnectionRanksByPort(boolean forward) {
 		if (elemObj instanceof KNodeGroup) {
 			KNodeGroup node = (KNodeGroup)elemObj;
-			Map<KPort, List<Integer>> connectionRankMap = new HashMap<KPort, List<Integer>>();
+			Map<KPort, List<Integer>> connectionRankMap = new LinkedHashMap<KPort, List<Integer>>();
 			for (KPort port : node.getPorts()) {
 				connectionRankMap.put(port, new LinkedList<Integer>());
 			}
@@ -267,6 +263,43 @@ public class LayerElement {
 		}
 		else return null;
 	}
+	
+	/**
+	 * Sorts the ports by their abstract ranks and updates the port
+	 * positions. This method may only be used if this layer element
+	 * contains a node group.
+	 * 
+	 * @param abstractPortRanks abstract ranks used to sort
+	 * @param forward if true, ports are put clockwise on the node's border,
+	 *     else counter-clockwise; only valid if not symmetric
+	 * @param symmetric if true, ports are put on the node's border depending
+	 *     on the layout direction
+	 * @throws ClassCastException when the contained object is not a node group
+	 */
+	public void sortPorts(final Map<KPort, Double> abstractPortRanks,
+			boolean forward, boolean symmetric) {
+		KNodeGroup node = (KNodeGroup)elemObj;
+		KPort[] ports = node.getPorts().toArray(new KPort[0]);
+		
+		Arrays.sort(ports, new Comparator<KPort>() {
+			public int compare(KPort port1, KPort port2) {
+				Double d1 = abstractPortRanks.get(port1);
+				Double d2 = abstractPortRanks.get(port2);
+				if (d1 == null && d2 == null)
+					return 0;
+				if (d1 == null && d2 != null)
+					return 1;
+				if (d1 != null && d2 == null)
+					return -1;
+				else
+					return d1.compareTo(d2);
+			}
+		});
+		
+		LAYOUT_OPTION layoutDirection = layer.getLayeredGraph().getLayoutDirection();
+		LayoutGraphs.positionPortsByOrder(ports, node.getLayout().getSize(),
+				layoutDirection, forward, symmetric);
+	}
 
 	/**
 	 * Determines the rank of each port of a node group.
@@ -284,184 +317,18 @@ public class LayerElement {
 		if (elemObj instanceof KNodeGroup) {
 			// sort all ports by their relative position
 			List<KPort> ports = ((KNodeGroup)elemObj).getPorts();
-			KPort[] portArray = ports.toArray(new KPort[0]);
+			KPort[] portArray = LayoutGraphs.sortPortsByPosition(ports,
+					layoutDirection, forward);
+			// set the ranks in the newly sorted list
 			if (forward) {
-				if (layoutDirection == LAYOUT_OPTION.VERTICAL) {
-					// sort for forward vertical layout
-					Arrays.sort(portArray, new Comparator<KPort>() {
-						public int compare(KPort port1, KPort port2) {
-							PORT_PLACEMENT port1Place = port1.getLayout().getPlacement();
-							PORT_PLACEMENT port2Place = port2.getLayout().getPlacement();
-							KPoint port1Loc = port1.getLayout().getLocation();
-							KPoint port2Loc = port2.getLayout().getLocation();
-							
-							switch (port1Place) {
-							case WEST:
-								if (port2Place == PORT_PLACEMENT.WEST)
-									return Float.compare(port1Loc.getY(), port2Loc.getY());
-								else return -1;
-							case SOUTH:
-								if (port2Place == PORT_PLACEMENT.WEST)
-									return 1;
-								if (port2Place == PORT_PLACEMENT.SOUTH)
-									return Float.compare(port1Loc.getX(), port2Loc.getX());
-								else return -1;
-							case EAST:
-								if (port2Place == PORT_PLACEMENT.WEST
-									|| port2Place == PORT_PLACEMENT.SOUTH)
-									return 1;
-								if (port2Place == PORT_PLACEMENT.EAST)
-									return Float.compare(port2Loc.getY(), port1Loc.getY());
-								else return -1;
-							case NORTH:
-								if (port2Place == PORT_PLACEMENT.WEST
-									|| port2Place == PORT_PLACEMENT.SOUTH
-									|| port2Place == PORT_PLACEMENT.EAST)
-									return 1;
-								if (port2Place == PORT_PLACEMENT.NORTH)
-									return Float.compare(port2Loc.getX(), port1Loc.getX());
-								else return -1;
-							default:
-								return -1;
-							}
-						}
-					});
-				}
-				else {
-					// sort for forward horizontal layout
-					Arrays.sort(portArray, new Comparator<KPort>() {
-						public int compare(KPort port1, KPort port2) {
-							PORT_PLACEMENT port1Place = port1.getLayout().getPlacement();
-							PORT_PLACEMENT port2Place = port2.getLayout().getPlacement();
-							KPoint port1Loc = port1.getLayout().getLocation();
-							KPoint port2Loc = port2.getLayout().getLocation();
-							
-							switch (port1Place) {
-							case NORTH:
-								if (port2Place == PORT_PLACEMENT.NORTH)
-									return Float.compare(port1Loc.getX(), port2Loc.getX());
-								else return -1;
-							case EAST:
-								if (port2Place == PORT_PLACEMENT.NORTH)
-									return 1;
-								if (port2Place == PORT_PLACEMENT.EAST)
-									return Float.compare(port1Loc.getY(), port2Loc.getY());
-								else return -1;
-							case SOUTH:
-								if (port2Place == PORT_PLACEMENT.NORTH
-									|| port2Place == PORT_PLACEMENT.EAST)
-									return 1;
-								if (port2Place == PORT_PLACEMENT.SOUTH)
-									return Float.compare(port2Loc.getX(), port1Loc.getX());
-								else return -1;
-							case WEST:
-								if (port2Place == PORT_PLACEMENT.NORTH
-									|| port2Place == PORT_PLACEMENT.EAST
-									|| port2Place == PORT_PLACEMENT.SOUTH)
-									return 1;
-								if (port2Place == PORT_PLACEMENT.WEST)
-									return Float.compare(port2Loc.getY(), port1Loc.getY());
-								else return -1;
-							default:
-								return -1;
-							}
-						}
-					});
-				}
-			
-				// set the ranks in the newly sorted list
 				for (int i = 0; i < portArray.length; i++) {
 					forwardPortRanks.put(portArray[i], new Integer(i));
 				}
 			}
 			else {
-				if (layoutDirection == LAYOUT_OPTION.VERTICAL) {
-					// sort for backwards vertical layout
-					Arrays.sort(portArray, new Comparator<KPort>() {
-						public int compare(KPort port1, KPort port2) {
-							PORT_PLACEMENT port1Place = port1.getLayout().getPlacement();
-							PORT_PLACEMENT port2Place = port2.getLayout().getPlacement();
-							KPoint port1Loc = port1.getLayout().getLocation();
-							KPoint port2Loc = port2.getLayout().getLocation();
-							
-							switch (port1Place) {
-							case WEST:
-								if (port2Place == PORT_PLACEMENT.WEST)
-									return Float.compare(port2Loc.getY(), port1Loc.getY());
-								else return -1;
-							case NORTH:
-								if (port2Place == PORT_PLACEMENT.WEST)
-									return 1;
-								if (port2Place == PORT_PLACEMENT.NORTH)
-									return Float.compare(port1Loc.getX(), port2Loc.getX());
-								else return -1;
-							case EAST:
-								if (port2Place == PORT_PLACEMENT.WEST
-									|| port2Place == PORT_PLACEMENT.NORTH)
-									return 1;
-								if (port2Place == PORT_PLACEMENT.EAST)
-									return Float.compare(port1Loc.getY(), port2Loc.getY());
-								else return -1;
-							case SOUTH:
-								if (port2Place == PORT_PLACEMENT.WEST
-									|| port2Place == PORT_PLACEMENT.NORTH
-									|| port2Place == PORT_PLACEMENT.EAST)
-									return 1;
-								if (port2Place == PORT_PLACEMENT.SOUTH)
-									return Float.compare(port2Loc.getX(), port1Loc.getX());
-								else return -1;
-							default:
-								return -1;
-							}
-						}
-					});
-				}
-				else {
-					// sort for backwards horizontal layout
-					Arrays.sort(portArray, new Comparator<KPort>() {
-						public int compare(KPort port1, KPort port2) {
-							PORT_PLACEMENT port1Place = port1.getLayout().getPlacement();
-							PORT_PLACEMENT port2Place = port2.getLayout().getPlacement();
-							KPoint port1Loc = port1.getLayout().getLocation();
-							KPoint port2Loc = port2.getLayout().getLocation();
-							
-							switch (port1Place) {
-							case NORTH:
-								if (port2Place == PORT_PLACEMENT.NORTH)
-									return Float.compare(port2Loc.getX(), port1Loc.getX());
-								else return -1;
-							case WEST:
-								if (port2Place == PORT_PLACEMENT.NORTH)
-									return 1;
-								if (port2Place == PORT_PLACEMENT.WEST)
-									return Float.compare(port1Loc.getY(), port2Loc.getY());
-								else return -1;
-							case SOUTH:
-								if (port2Place == PORT_PLACEMENT.NORTH
-									|| port2Place == PORT_PLACEMENT.WEST)
-									return 1;
-								if (port2Place == PORT_PLACEMENT.SOUTH)
-									return Float.compare(port1Loc.getX(), port2Loc.getX());
-								else return -1;
-							case EAST:
-								if (port2Place == PORT_PLACEMENT.NORTH
-									|| port2Place == PORT_PLACEMENT.WEST
-									|| port2Place == PORT_PLACEMENT.SOUTH)
-									return 1;
-								if (port2Place == PORT_PLACEMENT.EAST)
-									return Float.compare(port2Loc.getY(), port1Loc.getY());
-								else return -1;
-							default:
-								return -1;
-							}
-						}
-					});
-				}
-			
-				// set the ranks in the newly sorted list
 				for (int i = 0; i < portArray.length; i++) {
 					backwardsPortRanks.put(portArray[i], new Integer(i));
-				}				
+				}	
 			}
 		}
 		else if (elemObj instanceof KPort) {

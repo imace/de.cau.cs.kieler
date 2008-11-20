@@ -5,11 +5,14 @@ package edu.unikiel.rtsys.klodd.core.algorithms;
  * 
  * @author msp
  */
-public abstract class AbstractAlgorithm {
+public abstract class AbstractAlgorithm implements IAlgorithm {
 
 	/**
-	 * Reset the internal state of the algorithm.
+	 * This implementation of the reset method does nothing. It should
+	 * be overridden by subclasses that need to do some work to reset their
+	 * internal state.  
 	 */
-	public abstract void reset();
+	public void reset() {
+	}
 	
 }

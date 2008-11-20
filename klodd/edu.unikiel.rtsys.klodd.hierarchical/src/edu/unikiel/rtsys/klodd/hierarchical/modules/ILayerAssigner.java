@@ -1,6 +1,7 @@
 package edu.unikiel.rtsys.klodd.hierarchical.modules;
 
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup;
+import edu.unikiel.rtsys.klodd.core.algorithms.IAlgorithm;
 import edu.unikiel.rtsys.klodd.hierarchical.structures.LayeredGraph;
 
 /**
@@ -8,7 +9,7 @@ import edu.unikiel.rtsys.klodd.hierarchical.structures.LayeredGraph;
  * 
  * @author msp
  */
-public interface ILayerAssigner {
+public interface ILayerAssigner extends IAlgorithm {
 	
 	/**
 	 * Create a layered graph and assign layers to each node.

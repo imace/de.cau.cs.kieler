@@ -7,7 +7,7 @@ import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup;
  * 
  * @author msp
  */
-public interface ICycleRemover {
+public interface ICycleRemover extends IAlgorithm {
 
 	/**
 	 * Remove cycles in a given graph.

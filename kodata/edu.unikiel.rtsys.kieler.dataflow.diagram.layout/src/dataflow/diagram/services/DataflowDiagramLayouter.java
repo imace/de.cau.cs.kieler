@@ -202,7 +202,8 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 			changeBoundsRequest.setEditParts(borderItem);
 			
 			Point oldLocation = borderItem.getFigure().getBounds().getLocation();
-			Point newLocation = kPoint2Point(port.getLayout().getLocation());
+			Point newLocation = kPoint2Point(port.getLayout().getLocation())
+					.translate(kPoint2Point(port.getNodeGroup().getLayout().getLocation()));
 
 			Point moveDelta = newLocation.getTranslated(oldLocation.negate());
 			changeBoundsRequest.setMoveDelta(moveDelta.scale(zoomLevel));
@@ -298,6 +299,7 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 	
 	/**
 	 * Sets the location and size properties of a shape layout.
+	 * 
 	 * @param shapeLayout layout object to be changed
 	 * @param figure source object with layout information
 	 */
@@ -313,7 +315,28 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 	}
 	
 	/**
+	 * Sets the location and size properties of a shape layout and subtracts
+	 * an offset value from its size.
+	 * 
+	 * @param shapeLayout layout object to be changed
+	 * @param figure source object with layout information
+	 * @param offset by which the given figure is translated
+	 */
+	private static void createRelativeLayout(KShapeLayout shapeLayout,
+			IFigure figure, KPoint offset) {
+		KPoint kPoint = KimlLayoutGraphFactory.eINSTANCE.createKPoint();
+		kPoint.setX(figure.getBounds().x - offset.getX());
+		kPoint.setY(figure.getBounds().y - offset.getY());
+		shapeLayout.setLocation(kPoint);
+		KDimension kDimension = KimlLayoutGraphFactory.eINSTANCE.createKDimension();
+		kDimension.setHeight(figure.getBounds().height);
+		kDimension.setWidth(figure.getBounds().width);
+		shapeLayout.setSize(kDimension);
+	}
+	
+	/**
 	 * Converts a dimension from the KLayoutGraph into a Draw2D dimension.
+	 * 
 	 * @param kDimension KLayoutGraph dimension
 	 * @return Draw2D dimension
 	 */
@@ -326,6 +349,7 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 	
 	/**
 	 * Converts a point from the KLayoutGraph into a Draw2D point.
+	 * 
 	 * @param kPoint KLayoutGraph point
 	 * @return Draw2D point
 	 */
@@ -338,6 +362,7 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 	
 	/**
 	 * Processes the elements and all sub-elements of a node by recursive call.
+	 * 
 	 * @param children list of child elements of a node
 	 * @param parentGroup parent node group
 	 */
@@ -407,7 +432,8 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 				port.setNodeGroup(childNode);
 				// set the port's layout
 				KPortLayout portLayout = KimlLayoutGraphFactory.eINSTANCE.createKPortLayout();
-				createLayout(portLayout, borderItem.getFigure());
+				createRelativeLayout(portLayout, borderItem.getFigure(),
+						childNode.getLayout().getLocation());
 				portLayout.setPlacement(getPortPlacement(nodeGroupLayout,
 						portLayout, port.getType()));
 				port.setLayout(portLayout);
@@ -540,9 +566,9 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 		float nodeWidth = nodeLayout.getSize().getWidth();
 		float nodeHeight = nodeLayout.getSize().getHeight();
 		float relx = (portLayout.getLocation().getX() + portLayout.getSize().getWidth() / 2)
-			- (nodeLayout.getLocation().getX() + nodeWidth / 2);
+			- (nodeWidth / 2);
 		float rely = (portLayout.getLocation().getY() + portLayout.getSize().getHeight() / 2)
-			- (nodeLayout.getLocation().getY() + nodeHeight / 2);
+			- (nodeHeight / 2);
 		
 		if (relx > nodeWidth / 4 && rely > -nodeHeight / 2 + 3
 				&& rely < nodeHeight / 2 - 3)

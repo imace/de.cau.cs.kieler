@@ -36,11 +36,18 @@ public class HierarchicalDataflowLayoutProvider extends
 		// get the currently configured modules
 		updateModules();
 		
+		long startTime = System.nanoTime();
+		
 		cycleRemover.removeCycles(nodeGroup);
 		LayeredGraph layeredGraph = layerAssigner.assignLayers(nodeGroup);
-		layeredGraph.postProcess();
-		// TODO remaining modules
+		if (!layeredGraph.getLayers().isEmpty()) {
+			layeredGraph.postProcess();
+			// TODO remaining modules
+		}
 		cycleRemover.restoreGraph();
+		
+		double executionTime = (double)(System.nanoTime() - startTime) / 10e9;
+		System.out.println("Execution time: " + executionTime + " s");
 	}
 
 	/* (non-Javadoc)

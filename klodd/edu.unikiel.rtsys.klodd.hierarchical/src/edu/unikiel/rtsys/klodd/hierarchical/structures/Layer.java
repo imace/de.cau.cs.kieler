@@ -87,9 +87,10 @@ public class Layer {
 	
 	/**
 	 * Calculates the element rank of each element in this layer. The rank
-	 * is mainly influenced by the order of elements in the internal list.
+	 * is induced by the order of elements in the internal list and the
+	 * rank width of each element.
 	 */
-	private void calcElemRanks() {
+	public void calcElemRanks() {
 		int rank = 0;
 		for (LayerElement element : elements) {
 			element.rank = rank;
