@@ -24,7 +24,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * The following features are implemented:
  * <ul>
  *   <li>{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.KPortLayoutImpl#getPlacement <em>Placement</em>}</li>
- *   <li>{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.KPortLayoutImpl#getRank <em>Rank</em>}</li>
  * </ul>
  * </p>
  *
@@ -50,26 +49,6 @@ public class KPortLayoutImpl extends KShapeLayoutImpl implements KPortLayout {
 	 * @ordered
 	 */
 	protected PORT_PLACEMENT placement = PLACEMENT_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getRank() <em>Rank</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getRank()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final int RANK_EDEFAULT = 0;
-
-	/**
-	 * The cached value of the '{@link #getRank() <em>Rank</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getRank()
-	 * @generated
-	 * @ordered
-	 */
-	protected int rank = RANK_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -116,34 +95,11 @@ public class KPortLayoutImpl extends KShapeLayoutImpl implements KPortLayout {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public int getRank() {
-		return rank;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setRank(int newRank) {
-		int oldRank = rank;
-		rank = newRank;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KPORT_LAYOUT__RANK, oldRank, rank));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case KimlLayoutGraphPackage.KPORT_LAYOUT__PLACEMENT:
 				return getPlacement();
-			case KimlLayoutGraphPackage.KPORT_LAYOUT__RANK:
-				return new Integer(getRank());
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -158,9 +114,6 @@ public class KPortLayoutImpl extends KShapeLayoutImpl implements KPortLayout {
 		switch (featureID) {
 			case KimlLayoutGraphPackage.KPORT_LAYOUT__PLACEMENT:
 				setPlacement((PORT_PLACEMENT)newValue);
-				return;
-			case KimlLayoutGraphPackage.KPORT_LAYOUT__RANK:
-				setRank(((Integer)newValue).intValue());
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -177,9 +130,6 @@ public class KPortLayoutImpl extends KShapeLayoutImpl implements KPortLayout {
 			case KimlLayoutGraphPackage.KPORT_LAYOUT__PLACEMENT:
 				setPlacement(PLACEMENT_EDEFAULT);
 				return;
-			case KimlLayoutGraphPackage.KPORT_LAYOUT__RANK:
-				setRank(RANK_EDEFAULT);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -194,8 +144,6 @@ public class KPortLayoutImpl extends KShapeLayoutImpl implements KPortLayout {
 		switch (featureID) {
 			case KimlLayoutGraphPackage.KPORT_LAYOUT__PLACEMENT:
 				return placement != PLACEMENT_EDEFAULT;
-			case KimlLayoutGraphPackage.KPORT_LAYOUT__RANK:
-				return rank != RANK_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -212,8 +160,6 @@ public class KPortLayoutImpl extends KShapeLayoutImpl implements KPortLayout {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (placement: ");
 		result.append(placement);
-		result.append(", rank: ");
-		result.append(rank);
 		result.append(')');
 		return result.toString();
 	}

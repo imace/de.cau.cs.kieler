@@ -16,7 +16,7 @@ import edu.unikiel.rtsys.klodd.hierarchical.structures.*;
 public class LongestPathLayerAssigner extends AbstractAlgorithm implements
 		ILayerAssigner {
 	
-	// the layered graph that is created by the layer assigner
+	/** the layered graph that is created by the layer assigner */
 	private LayeredGraph layeredGraph = null;
 
 	/* (non-Javadoc)

@@ -904,15 +904,6 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getKPortLayout_Rank() {
-		return (EAttribute)kPortLayoutEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getKPortLabel() {
 		return kPortLabelEClass;
 	}
@@ -1109,7 +1100,6 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 
 		kPortLayoutEClass = createEClass(KPORT_LAYOUT);
 		createEAttribute(kPortLayoutEClass, KPORT_LAYOUT__PLACEMENT);
-		createEAttribute(kPortLayoutEClass, KPORT_LAYOUT__RANK);
 
 		kPortLabelEClass = createEClass(KPORT_LABEL);
 		createEReference(kPortLabelEClass, KPORT_LABEL__LABEL_LAYOUT);
@@ -1250,7 +1240,6 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 
 		initEClass(kPortLayoutEClass, KPortLayout.class, "KPortLayout", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getKPortLayout_Placement(), this.getPORT_PLACEMENT(), "placement", "0", 0, 1, KPortLayout.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getKPortLayout_Rank(), theEcorePackage.getEInt(), "rank", "0", 0, 1, KPortLayout.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(kPortLabelEClass, KPortLabel.class, "KPortLabel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getKPortLabel_LabelLayout(), this.getKPortLabelLayout(), null, "labelLayout", null, 0, 1, KPortLabel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

@@ -21,13 +21,13 @@ public class FixedArrayList<E> extends AbstractList<E> {
 		ALIGN_BACK
 	}
 	
-	// the type of array list
+	/** the type of array list */
 	private Type type;
-	// the array containing element data
+	/** the array containing element data */
 	private Object[] array;
-	// the number of elements in the array
+	/** the number of elements in the array */
 	private int size = 0;
-	// the starting index of the element data
+	/** the starting index of the element data */
 	private int start = -1;
 	
 	/**

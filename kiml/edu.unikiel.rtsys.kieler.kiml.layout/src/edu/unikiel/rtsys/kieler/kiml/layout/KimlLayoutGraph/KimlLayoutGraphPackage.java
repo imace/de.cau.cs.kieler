@@ -951,22 +951,13 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	int KPORT_LAYOUT__PLACEMENT = KSHAPE_LAYOUT_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Rank</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int KPORT_LAYOUT__RANK = KSHAPE_LAYOUT_FEATURE_COUNT + 1;
-
-	/**
 	 * The number of structural features of the '<em>KPort Layout</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int KPORT_LAYOUT_FEATURE_COUNT = KSHAPE_LAYOUT_FEATURE_COUNT + 2;
+	int KPORT_LAYOUT_FEATURE_COUNT = KSHAPE_LAYOUT_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.KPortLabelImpl <em>KPort Label</em>}' class.
@@ -1844,17 +1835,6 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	EAttribute getKPortLayout_Placement();
 
 	/**
-	 * Returns the meta object for the attribute '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPortLayout#getRank <em>Rank</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Rank</em>'.
-	 * @see edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPortLayout#getRank()
-	 * @see #getKPortLayout()
-	 * @generated
-	 */
-	EAttribute getKPortLayout_Rank();
-
-	/**
 	 * Returns the meta object for class '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPortLabel <em>KPort Label</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2546,14 +2526,6 @@ public interface KimlLayoutGraphPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute KPORT_LAYOUT__PLACEMENT = eINSTANCE.getKPortLayout_Placement();
-
-		/**
-		 * The meta object literal for the '<em><b>Rank</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute KPORT_LAYOUT__RANK = eINSTANCE.getKPortLayout_Rank();
 
 		/**
 		 * The meta object literal for the '{@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.impl.KPortLabelImpl <em>KPort Label</em>}' class.

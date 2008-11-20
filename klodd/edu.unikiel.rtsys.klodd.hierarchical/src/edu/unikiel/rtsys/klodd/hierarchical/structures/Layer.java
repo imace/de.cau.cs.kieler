@@ -1,7 +1,10 @@
 package edu.unikiel.rtsys.klodd.hierarchical.structures;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.LinkedList;
+import java.util.Map;
 
 /**
  * A single Layer used in a layered graph.
@@ -20,7 +23,9 @@ public class Layer {
 	/** the height of this layer */
 	public int height;
 	
-	// list of elements in this layer
+	/** the containing layered graph */
+	private LayeredGraph layeredGraph;
+	/** list of elements in this layer */
 	private List<LayerElement> elements = new LinkedList<LayerElement>(); 
 	
 	/**
@@ -29,9 +34,10 @@ public class Layer {
 	 * @param rank the rank, may be UNDEF_RANK
 	 * @param height the height, may be UNDEF_HEIGHT
 	 */
-	public Layer(int rank, int height) {
+	public Layer(int rank, int height, LayeredGraph layeredGraph) {
 		this.rank = rank;
 		this.height = height;
+		this.layeredGraph = layeredGraph;
 	}
 	
 	/**
@@ -53,6 +59,42 @@ public class Layer {
 	 */
 	public List<LayerElement> getElements() {
 		return elements;
+	}
+	
+	/**
+	 * Gets the layered graph.
+	 * 
+	 * @return the layeredGraph
+	 */
+	public LayeredGraph getLayeredGraph() {
+		return layeredGraph;
+	}
+	
+	/**
+	 * Sorts the elements in this layer and assigns them new rank values.
+	 * 
+	 * @param abstractRanks map of abstract ranks used as base for sorting
+	 */
+	public void sort(final Map<LayerElement, Double> abstractRanks) {
+		Collections.sort(elements, new Comparator<LayerElement>() {
+			public int compare(LayerElement elem1, LayerElement elem2) {
+				return abstractRanks.get(elem1).compareTo(abstractRanks.get(elem2));
+			}
+		});
+		
+		calcElemRanks();
+	}
+	
+	/**
+	 * Calculates the element rank of each element in this layer. The rank
+	 * is mainly influenced by the order of elements in the internal list.
+	 */
+	private void calcElemRanks() {
+		int rank = 0;
+		for (LayerElement element : elements) {
+			element.rank = rank;
+			rank += element.getRankWidth();
+		}
 	}
 	
 }

@@ -6,6 +6,8 @@ import java.util.Map;
 
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KEdge;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup;
+import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPort;
+import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_OPTION;
 import edu.unikiel.rtsys.klodd.core.util.FixedArrayList;
 
 /**
@@ -25,10 +27,14 @@ public class LayeredGraph {
 		BUILD_BACK
 	}
 	
-	// list of layers in this layered graph
+	/** list of layers in this layered graph */
 	private List<Layer> layers;
-	// map of objects to their corresponding layer
+	/** map of objects to their corresponding layer */
 	private Map<Object, LayerElement> obj2LayerElemMap = new HashMap<Object, LayerElement>();
+	/** layout direction for this layered graph: HORIZONTAL or VERTICAL */
+	private LAYOUT_OPTION layoutDirection;
+	/** are the external ports of this layered graph fixed? */
+	private boolean fixedExternalPorts;
 	
 	/**
 	 * Creates a new layered graph. Choosing the right type can be important
@@ -43,6 +49,12 @@ public class LayeredGraph {
 		layers = new FixedArrayList<Layer>(parentGroup.getSubNodeGroups().size() + 2,
 				type == Type.BUILD_FRONT ? FixedArrayList.Type.ALIGN_FRONT
 						: FixedArrayList.Type.ALIGN_BACK);
+		
+		// get layout options from the parent group
+		List<LAYOUT_OPTION> parentOptions = parentGroup.getLayout().getLayoutOptions();
+		layoutDirection = parentOptions.contains(LAYOUT_OPTION.VERTICAL) ?
+				LAYOUT_OPTION.VERTICAL : LAYOUT_OPTION.HORIZONTAL;
+		fixedExternalPorts = parentOptions.contains(LAYOUT_OPTION.FIXED_PORTS);
 	}
 	
 	/**
@@ -57,7 +69,7 @@ public class LayeredGraph {
 			int currentRank = layers.get(i).rank;
 			if (currentRank < 0 || currentRank > rank) {
 				// insert a new layer into the list
-				Layer newLayer = new Layer(rank, Layer.UNDEF_HEIGHT);
+				Layer newLayer = new Layer(rank, Layer.UNDEF_HEIGHT, this);
 				doPut(obj, newLayer);
 				layers.add(i, newLayer);
 				return;
@@ -70,7 +82,7 @@ public class LayeredGraph {
 		}
 		
 		// add a new layer at the end of the list
-		Layer newLayer = new Layer(rank, Layer.UNDEF_HEIGHT);
+		Layer newLayer = new Layer(rank, Layer.UNDEF_HEIGHT, this);
 		doPut(obj, newLayer);
 		layers.add(newLayer);
 	}
@@ -87,7 +99,7 @@ public class LayeredGraph {
 			int currentHeight = layers.get(i).height;
 			if (currentHeight < 0 || currentHeight > height) {
 				// insert a new layer into the list
-				Layer newLayer = new Layer(Layer.UNDEF_RANK, height);
+				Layer newLayer = new Layer(Layer.UNDEF_RANK, height, this);
 				doPut(obj, newLayer);
 				layers.add(i, newLayer);
 				return;
@@ -100,7 +112,7 @@ public class LayeredGraph {
 		}
 		
 		// add a new layer at the start of the list
-		Layer newLayer = new Layer(Layer.UNDEF_RANK, height);
+		Layer newLayer = new Layer(Layer.UNDEF_RANK, height, this);
 		doPut(obj, newLayer);
 		layers.add(0, newLayer);
 	}
@@ -141,11 +153,15 @@ public class LayeredGraph {
 				List<KEdge> outgoingEdges = element.getOutgoingEdges();
 				for (KEdge edge : outgoingEdges) {
 					KNodeGroup targetGroup = edge.getTarget();
+					KPort sourcePort = edge.getSourcePort();
+					KPort targetPort = edge.getTargetPort();
 					if (targetGroup != null) {
-						createConnection(element, obj2LayerElemMap.get(targetGroup), edge);
+						createConnection(element, obj2LayerElemMap.get(targetGroup),
+								edge, sourcePort, targetPort);
 					}
-					else if (edge.getTargetPort() != null) {
-						createConnection(element, obj2LayerElemMap.get(edge.getTargetPort()), edge);
+					else if (targetPort != null) {
+						createConnection(element, obj2LayerElemMap.get(targetPort),
+								edge, sourcePort, targetPort);
 					}
 				}
 			}
@@ -170,29 +186,52 @@ public class LayeredGraph {
 	 * @param source source element
 	 * @param target target element
 	 * @param edge the edge object connecting both elements
+	 * @param sourcePort the source port
+	 * @param targetPort the target port
 	 */
 	private void createConnection(LayerElement source,
-			LayerElement target, KEdge edge) {
+			LayerElement target, KEdge edge, KPort sourcePort,
+			KPort targetPort) {
 		Layer sourceLayer = source.getLayer();
 		Layer targetLayer = target.getLayer();
 		if (targetLayer.rank - sourceLayer.rank == 1) {
-			source.setTarget(target);
+			source.addOutgoing(target, sourcePort, targetPort);
 		}
 		else {
-			// determine the index of the source layer
-			int layerIndex = sourceLayer.rank;
+			// determine the index of the first layer after the source layer
+			int layerIndex = sourceLayer.rank + 1;
 			if (layers.get(0).rank > 0)
 				layerIndex--;
 			// create a long edge as linear segment
-			LayerElement currentElement = source;
-			for (int i = sourceLayer.rank; i < targetLayer.rank - 1; i++) {
+			LayerElement newElement = layers.get(layerIndex).put(edge);
+			source.addOutgoing(newElement, sourcePort, null);
+			LayerElement currentElement = newElement;
+			for (int i = sourceLayer.rank + 1; i < targetLayer.rank - 1; i++) {
 				layerIndex++;
-				LayerElement newElement = layers.get(layerIndex).put(edge);
-				currentElement.setTarget(newElement);
+				newElement = layers.get(layerIndex).put(edge);
+				currentElement.addOutgoing(newElement);
 				currentElement = newElement;
 			}
-			currentElement.setTarget(target);
+			currentElement.addOutgoing(target, null, targetPort);
 		}
+	}
+
+	/**
+	 * Gets the layout direction: HORIZONTAL or VERTICAL.
+	 * 
+	 * @return the layoutDirection
+	 */
+	public LAYOUT_OPTION getLayoutDirection() {
+		return layoutDirection;
+	}
+
+	/**
+	 * Are the external ports of this layered graph fixed?
+	 * 
+	 * @return the fixedExternalPorts
+	 */
+	public boolean areExternalPortsFixed() {
+		return fixedExternalPorts;
 	}
 	
 }
