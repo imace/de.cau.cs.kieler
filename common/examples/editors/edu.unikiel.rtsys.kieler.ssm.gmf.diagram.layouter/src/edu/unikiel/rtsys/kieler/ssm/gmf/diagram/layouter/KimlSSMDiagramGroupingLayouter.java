@@ -1,3 +1,12 @@
+/*******************************************************************************
+ * Copyright (c) 2008 Real-Time and Embedded Systems group
+ *
+ * INSERT LICENCE HERE
+ *
+ *
+ * Author: Arne Schipper, ars@informatik.uni-kiel.de 
+ *
+ *******************************************************************************/
 package edu.unikiel.rtsys.kieler.ssm.gmf.diagram.layouter;
 
 import java.util.ArrayList;
@@ -55,7 +64,28 @@ import edu.unikiel.rtsys.kieler.kiml.layout.util.KimlLayoutUtil;
 import edu.unikiel.rtsys.kieler.kiml.ui.helpers.KimlCommonHelper;
 import edu.unikiel.rtsys.kieler.kiml.ui.helpers.KimlGMFLayoutHintHelper;
 
-
+/**
+ * The layouter for SafeStateMachines as defined and used by the
+ * {@link SafeStateMachineDiagramEditor}. This class implements the methods of
+ * the {@link KimlAbstractLayouter} to perform the translation of a
+ * SafeStateMachine diagram, or parts thereof, to the {@link KLayoutGraph} and
+ * back, as well as some setup functions.
+ * <p/>
+ * The transformation is able to identify collapsed Regions and CompositeStates
+ * and will treat them as such in the further layout process.
+ * <p/>
+ * This version is a advanced, as it can layout groups of elements within
+ * Regions and Composite States. Therefore offsets had to be introduced. It is
+ * quite hard to understand and remains here just for the proof of concept. The
+ * documentation of the source is brief.
+ * <p/>
+ * For the simplified, non grouping, standard and well documented version have a
+ * look at the {@link KimlSSMDiagramLayouter}.
+ * 
+ * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
+ * @see KimlAbstractLayouter
+ * @see KimlSSMDiagramLayouter
+ */
 public class KimlSSMDiagramGroupingLayouter extends KimlAbstractLayouter {
 
 	private boolean useGMFLabelLocation = true;
@@ -88,16 +118,17 @@ public class KimlSSMDiagramGroupingLayouter extends KimlAbstractLayouter {
 		if (rootPart != null)
 			rootPart.getFigure().validate();
 		/* second run to set positions of edges */
-	//	super.layout(target);
-	//	if (rootPart != null)
-	//		rootPart.getFigure().validate();
+		// super.layout(target);
+		// if (rootPart != null)
+		// rootPart.getFigure().validate();
 		/* third run to set positions of edge labels */
 		super.layout(target);
 		if (rootPart != null)
 			rootPart.getFigure().validate();
 		zstNachher = System.currentTimeMillis();
 		System.out.println("SSM Diagram Layouter");
-		System.out.println("Time for layout: " + (zstNachher - zstVorher) + " msec");
+		System.out.println("Time for layout: " + (zstNachher - zstVorher)
+				+ " msec");
 	}
 
 	/*------------------------------------------------------------------------------*/
@@ -895,9 +926,9 @@ public class KimlSSMDiagramGroupingLayouter extends KimlAbstractLayouter {
 				.getPreferenceStore()
 				.getBoolean(
 						KimlLayoutPreferenceConstants.PREF_GROUP_EVERY_SINGLE_ELEMENT);
-		settings.put(KimlLayoutPreferenceConstants.PREF_GROUP_EVERY_SINGLE_ELEMENT,
+		settings.put(
+				KimlLayoutPreferenceConstants.PREF_GROUP_EVERY_SINGLE_ELEMENT,
 				Boolean.toString(groupEverySingleElement));
 		return settings;
 	}
 }
-
