@@ -10,8 +10,11 @@
 package edu.unikiel.rtsys.kieler.kiml.layout.util;
 
 /**
+ * Constants concerning global layout settings. These constants can be used by
+ * other plug-ins.
+ * 
  * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
- *
+ * 
  */
 public class KimlLayoutConstants {
 
