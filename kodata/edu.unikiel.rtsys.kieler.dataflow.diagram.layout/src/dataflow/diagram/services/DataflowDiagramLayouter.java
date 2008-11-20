@@ -1,6 +1,10 @@
 package dataflow.diagram.services;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -389,8 +393,10 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 		nodeGroupLayout.setInsets(insets);
 		nodeGroupLayout.setLayouterName(KimlGMFLayoutHintHelper.getContainedElementsLayouterName(boxEditPart));
 		nodeGroupLayout.setLayoutType(KimlGMFLayoutHintHelper.getContainedElementsLayoutType(boxEditPart));
+		nodeGroupLayout.getLayoutOptions().add(LAYOUT_OPTION.HORIZONTAL);
 		childNode.setLayout(nodeGroupLayout);
-		// set the input and output ports
+		// set the input and output ports and node label
+		List<KPort> ports = new LinkedList<KPort>();
 		List subChildren = null;
 		for (Object nodeElement : boxEditPart.getChildren()) {
 			if (nodeElement instanceof ShapeCompartmentEditPart) {
@@ -407,6 +413,9 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 				// set the port's layout
 				KPortLayout portLayout = KimlLayoutGraphFactory.eINSTANCE.createKPortLayout();
 				createLayout(portLayout, borderItem.getFigure());
+				portLayout.setPlacement(getPortPlacement(nodeGroupLayout,
+						portLayout, port.getType()));
+				ports.add(port);
 				port.setLayout(portLayout);
 				// set the port label
 				for (Object portChild : borderItem.getChildren()) {
@@ -434,6 +443,14 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 				nodeGroupLabel.setLabelLayout(labelLayout);
 			}
 		}
+		
+		// process port ranks
+		if (subChildren == null || subChildren.isEmpty())
+		{
+			nodeGroupLayout.getLayoutOptions().add(LAYOUT_OPTION.FIXED_PORTS);
+			setPortRanks(ports);
+		}
+		
 		// process next hierarchy level
 		buildLayoutGraphRecursively(subChildren, childNode);
 		
@@ -516,6 +533,95 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 		edgeLayout.setSourcePoint(KimlLayoutGraphFactory.eINSTANCE.createKPoint());
 		edgeLayout.setTargetPoint(KimlLayoutGraphFactory.eINSTANCE.createKPoint());
 		edge.setLayout(edgeLayout);
+	}
+	
+	/**
+	 * Determines the port placement from a given node and port layout.
+	 * 
+	 * @param nodeLayout layout object of the corresponding node
+	 * @param portLayout layout object of the corresponding port
+	 * @param portType port type
+	 * @return port placement
+	 */
+	private PORT_PLACEMENT getPortPlacement(KNodeGroupLayout nodeLayout,
+			KPortLayout portLayout, PORT_TYPE portType) {
+		float nodeWidth = nodeLayout.getSize().getWidth();
+		float nodeHeight = nodeLayout.getSize().getHeight();
+		float relx = (portLayout.getLocation().getX() + portLayout.getSize().getWidth() / 2)
+			- (nodeLayout.getLocation().getX() + nodeWidth / 2);
+		float rely = (portLayout.getLocation().getY() + portLayout.getSize().getHeight() / 2)
+			- (nodeLayout.getLocation().getY() + nodeHeight / 2);
+		
+		if (relx > nodeWidth / 4 && rely > -nodeHeight / 2 + 3
+				&& rely < nodeHeight / 2 - 3)
+			return PORT_PLACEMENT.EAST;
+		if (relx < -nodeWidth / 4 && rely > -nodeHeight / 2 + 3
+				&& rely < nodeHeight / 2 - 3)
+			return PORT_PLACEMENT.WEST;
+		if (rely > nodeHeight / 4 && relx > -nodeWidth / 2 + 3
+				&& relx < nodeWidth / 2 - 3)
+			return PORT_PLACEMENT.SOUTH;
+		if (rely < -nodeHeight / 4 && relx > -nodeWidth / 2 + 3
+				&& relx < nodeWidth / 2 - 3)
+			return PORT_PLACEMENT.NORTH;
+		if (portType == PORT_TYPE.INPUT)
+			return PORT_PLACEMENT.WEST;
+		else
+			return PORT_PLACEMENT.EAST;
+	}
+	
+	/**
+	 * Determines the rank of each port of a node group. The port
+	 * placement should be already put into the port layouts.
+	 * 
+	 * @param ports list of ports to process
+	 */
+	private void setPortRanks(List<KPort> ports) {
+		// sort all ports by their relative position
+		Collections.sort(ports, new Comparator<KPort>() {
+			public int compare(KPort port1, KPort port2) {
+				PORT_PLACEMENT port1Place = port1.getLayout().getPlacement();
+				PORT_PLACEMENT port2Place = port2.getLayout().getPlacement();
+				KPoint port1Loc = port1.getLayout().getLocation();
+				KPoint port2Loc = port2.getLayout().getLocation();
+				
+				switch (port1Place) {
+				case NORTH:
+					if (port2Place == PORT_PLACEMENT.NORTH)
+						return Float.compare(port1Loc.getX(), port2Loc.getX());
+					else return -1;
+				case EAST:
+					if (port2Place == PORT_PLACEMENT.NORTH)
+						return 1;
+					if (port2Place == PORT_PLACEMENT.EAST)
+						return Float.compare(port1Loc.getY(), port2Loc.getY());
+					else return -1;
+				case SOUTH:
+					if (port2Place == PORT_PLACEMENT.NORTH
+						|| port2Place == PORT_PLACEMENT.EAST)
+						return 1;
+					if (port2Place == PORT_PLACEMENT.SOUTH)
+						return Float.compare(port2Loc.getX(), port1Loc.getX());
+					else return -1;
+				case WEST:
+					if (port2Place == PORT_PLACEMENT.NORTH
+						|| port2Place == PORT_PLACEMENT.EAST
+						|| port2Place == PORT_PLACEMENT.SOUTH)
+						return 1;
+					if (port2Place == PORT_PLACEMENT.WEST)
+						return Float.compare(port2Loc.getY(), port1Loc.getY());
+					else return -1;
+				default:
+					return -1;
+				}
+			}
+		});
+		
+		// set the ranks in the newly sorted list
+		Iterator<KPort> portIter = ports.iterator();
+		for (int i = 0; i < ports.size(); i++) {
+			portIter.next().getLayout().setRank(i);
+		}
 	}
 
 }
