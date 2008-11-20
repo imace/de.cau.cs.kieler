@@ -1,3 +1,12 @@
+/*******************************************************************************
+ * Copyright (c) 2008 Real-Time and Embedded Systems group
+ *
+ * INSERT LICENCE HERE
+ *
+ *
+ * Author: Arne Schipper, ars@informatik.uni-kiel.de 
+ *
+ *******************************************************************************/
 package edu.unikiel.rtsys.kieler.kiml.ui.views;
 
 import java.util.ArrayList;
@@ -45,7 +54,6 @@ import org.eclipse.ui.IViewSite;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.ui.part.ViewPart;
 import org.eclipse.ui.views.properties.IPropertySheetPage;
 import org.eclipse.ui.views.properties.tabbed.ITabbedPropertySheetPageContributor;
@@ -53,7 +61,7 @@ import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 
 import edu.unikiel.rtsys.kieler.kiml.layout.services.DiagramLayouters;
 import edu.unikiel.rtsys.kieler.kiml.layout.services.KimlAbstractLayouter;
-import edu.unikiel.rtsys.kieler.kiml.layout.util.KimlLayoutConstants;
+import edu.unikiel.rtsys.kieler.kiml.layout.util.KimlLayoutPreferenceConstants;
 import edu.unikiel.rtsys.kieler.kiml.ui.helpers.KimlGMFColorHelper;
 import edu.unikiel.rtsys.kieler.kiml.ui.helpers.KimlGMFLayoutHintHelper;
 
@@ -81,7 +89,7 @@ import edu.unikiel.rtsys.kieler.kiml.ui.helpers.KimlGMFLayoutHintHelper;
  * for, GEF-Editors.
  */
 public class KimlLayoutHintView extends ViewPart implements ISelectionListener,
-		IPartListener, ResourceSetListener,ITabbedPropertySheetPageContributor {
+		IPartListener, ResourceSetListener, ITabbedPropertySheetPageContributor {
 
 	public static final String ID = "edu.unikiel.rtsys.kieler.kiml.ui.views.KimlLayoutHintView";
 
@@ -173,8 +181,8 @@ public class KimlLayoutHintView extends ViewPart implements ISelectionListener,
 		}
 
 		/**
-		 * Limited functionality due to <b>GMF-Notation</b>.
-		 * TODO find a more generic implementation
+		 * Limited functionality due to <b>GMF-Notation</b>. TODO find a more
+		 * generic implementation
 		 */
 		public String getColumnText(Object obj, int index) {
 			ShapeNodeEditPart snep = (ShapeNodeEditPart) obj;
@@ -188,31 +196,31 @@ public class KimlLayoutHintView extends ViewPart implements ISelectionListener,
 					 */
 				Map<String, String> labelMap = (Map<String, String>) Platform
 						.getAdapterManager().getAdapter(obj, Map.class);
-				if (labelMap != null)
-				{
+				if (labelMap != null) {
 					String nodeName = labelMap.get("LONG_LABEL");
 					if (nodeName != null) {
 						return nodeName;
 					}
 				}
-				
-				try
-				{
-					/* Fetching of a label mapping failed; get a label provider
+
+				try {
+					/*
+					 * Fetching of a label mapping failed; get a label provider
 					 * from the diagram layouter.
 					 */
-					String editorId = PlatformUI.getWorkbench().getActiveWorkbenchWindow()
-							.getActivePage().getActiveEditor().getEditorSite().getId();
-					return DiagramLayouters.getInstance().getDiagramLayouter(editorId)
-							.getLabelProvider().getText(obj);
-				} catch (Exception e)
-				{
-					/* Fetching of a label provider failed; display the simple
+					String editorId = PlatformUI.getWorkbench()
+							.getActiveWorkbenchWindow().getActivePage()
+							.getActiveEditor().getEditorSite().getId();
+					return DiagramLayouters.getInstance().getDiagramLayouter(
+							editorId).getLabelProvider().getText(obj);
+				} catch (Exception e) {
+					/*
+					 * Fetching of a label provider failed; display the simple
 					 * class name.
 					 */
 					return obj.getClass().getSimpleName();
 				}
-				
+
 			case 1: /*
 					 * Returns the string nor grouped, if the element is not
 					 * grouped, and nothing, if the element is grouped, as we
@@ -474,7 +482,7 @@ public class KimlLayoutHintView extends ViewPart implements ISelectionListener,
 							.parseBoolean(diagramLayouter
 									.getSettings()
 									.get(
-											KimlLayoutConstants.SETTINGS_GROUP_EVERY_SINGLE_ELEMENT));
+											KimlLayoutPreferenceConstants.PREF_GROUP_EVERY_SINGLE_ELEMENT));
 				}
 				/*
 				 * This is for GEF Editors.
@@ -549,10 +557,10 @@ public class KimlLayoutHintView extends ViewPart implements ISelectionListener,
 	public String getContributorId() {
 		return getSite().getId();
 	}
-	
+
 	public Object getAdapter(Class adapter) {
-        if (adapter == IPropertySheetPage.class)
-            return new TabbedPropertySheetPage(this);
-        return super.getAdapter(adapter);
-    }
+		if (adapter == IPropertySheetPage.class)
+			return new TabbedPropertySheetPage(this);
+		return super.getAdapter(adapter);
+	}
 }

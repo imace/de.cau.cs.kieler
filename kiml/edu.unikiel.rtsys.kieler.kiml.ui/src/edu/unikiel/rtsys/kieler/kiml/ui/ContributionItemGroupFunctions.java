@@ -1,3 +1,12 @@
+/*******************************************************************************
+ * Copyright (c) 2008 Real-Time and Embedded Systems group
+ *
+ * INSERT LICENCE HERE
+ *
+ *
+ * Author: Arne Schipper, ars@informatik.uni-kiel.de 
+ *
+ *******************************************************************************/
 package edu.unikiel.rtsys.kieler.kiml.ui;
 
 import java.util.ArrayList;
@@ -10,7 +19,7 @@ import org.eclipse.ui.menus.CommandContributionItem;
 import org.eclipse.ui.menus.CommandContributionItemParameter;
 
 import edu.unikiel.rtsys.kieler.kiml.layout.services.DiagramLayouters;
-import edu.unikiel.rtsys.kieler.kiml.layout.util.KimlLayoutConstants;
+import edu.unikiel.rtsys.kieler.kiml.layout.util.KimlLayoutPreferenceConstants;
 
 public class ContributionItemGroupFunctions extends CompoundContributionItem {
 
@@ -27,7 +36,8 @@ public class ContributionItemGroupFunctions extends CompoundContributionItem {
 				.getActivePage().getActiveEditor().getEditorSite().getId();
 		if (Boolean.parseBoolean(DiagramLayouters.getInstance()
 				.getDiagramLayouter(editorId).getSettings()
-				.get(KimlLayoutConstants.SETTINGS_GROUP_EVERY_SINGLE_ELEMENT))) {
+				.get(
+								KimlLayoutPreferenceConstants.PREF_GROUP_EVERY_SINGLE_ELEMENT))) {
 
 			/* separator */
 			contribItems.add(new Separator());

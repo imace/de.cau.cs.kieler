@@ -1,3 +1,12 @@
+/*******************************************************************************
+ * Copyright (c) 2008 Real-Time and Embedded Systems group
+ *
+ * INSERT LICENCE HERE
+ *
+ *
+ * Author: Arne Schipper, ars@informatik.uni-kiel.de 
+ *
+ *******************************************************************************/
 package edu.unikiel.rtsys.kieler.kiml.ui.handlers;
 
 import java.util.ArrayList;
@@ -21,7 +30,7 @@ import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_TYPE;
 import edu.unikiel.rtsys.kieler.kiml.layout.services.DiagramLayouters;
 import edu.unikiel.rtsys.kieler.kiml.layout.services.KimlAbstractLayouter;
 import edu.unikiel.rtsys.kieler.kiml.layout.services.LayoutProviders;
-import edu.unikiel.rtsys.kieler.kiml.layout.util.KimlLayoutConstants;
+import edu.unikiel.rtsys.kieler.kiml.layout.util.KimlLayoutPreferenceConstants;
 import edu.unikiel.rtsys.kieler.kiml.ui.ContributionItemLayoutAs;
 import edu.unikiel.rtsys.kieler.kiml.ui.helpers.KimlGMFLayoutHintHelper;
 
@@ -32,7 +41,7 @@ import edu.unikiel.rtsys.kieler.kiml.ui.helpers.KimlGMFLayoutHintHelper;
  * <li>...</li>
  * </ul>
  * 
- * @author ars
+ * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
  * 
  */
 public class GroupAsHandler extends AbstractHandler implements IHandler {
@@ -90,8 +99,7 @@ public class GroupAsHandler extends AbstractHandler implements IHandler {
 				.getParameter(ContributionItemLayoutAs.PARAM_LAYOUTER_NAME);
 		LAYOUTER_INFO layouterInfo = LayoutProviders.getInstance()
 				.getLayouterInfoForLayouterName(layouterName);
-		LAYOUT_TYPE layoutType = LAYOUT_TYPE.DEFAULT;
-		layoutType = layouterInfo.getLayoutType();
+		LAYOUT_TYPE layoutType = layouterInfo.getLayoutType();
 		String groupID = "";
 
 		/* just another sanity check if the right commandID */
@@ -110,7 +118,7 @@ public class GroupAsHandler extends AbstractHandler implements IHandler {
 			 * Class is responsible for the translation into the KLayoutGraph.
 			 */
 			if (Boolean.parseBoolean(diagramLayouter.getSettings().get(
-					KimlLayoutConstants.SETTINGS_GROUP_EVERY_SINGLE_ELEMENT))) {
+					KimlLayoutPreferenceConstants.PREF_GROUP_EVERY_SINGLE_ELEMENT))) {
 
 				/* group every single element */
 				groupID = KimlGMFLayoutHintHelper
