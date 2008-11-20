@@ -11,7 +11,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
-import edu.unikiel.rtsys.kieler.kiml.layout.util.KimlLayoutConstants;
+import edu.unikiel.rtsys.kieler.kiml.layout.util.KimlLayoutPreferenceConstants;
 import edu.unikiel.rtsys.kieler.ssm.gmf.diagram.layouter.KimlSSMDiagramLayouterPlugin;
 
 public class PreferencePage extends FieldEditorPreferencePage implements
@@ -30,7 +30,7 @@ public class PreferencePage extends FieldEditorPreferencePage implements
 		Group options = new Group(this.getFieldEditorParent(), SWT.NONE);
 		options.setText("General Options:");
 		addField(new BooleanFieldEditor(
-				KimlLayoutConstants.SETTINGS_GROUP_EVERY_SINGLE_ELEMENT,
+				KimlLayoutPreferenceConstants.PREF_GROUP_EVERY_SINGLE_ELEMENT,
 				"Enable grouping for every single element", options));
 		Label description = new Label(options, SWT.WRAP);
 		description

@@ -50,7 +50,6 @@ import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPoint;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphFactory;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_TYPE;
 import edu.unikiel.rtsys.kieler.kiml.layout.services.KimlAbstractLayouter;
-import edu.unikiel.rtsys.kieler.kiml.layout.util.KimlLayoutConstants;
 import edu.unikiel.rtsys.kieler.kiml.layout.util.KimlLayoutPreferenceConstants;
 import edu.unikiel.rtsys.kieler.kiml.layout.util.KimlLayoutUtil;
 import edu.unikiel.rtsys.kieler.kiml.ui.helpers.KimlCommonHelper;
@@ -803,7 +802,7 @@ public class KimlSSMDiagramGroupingLayouter extends KimlAbstractLayouter {
 				.getDefault()
 				.getPreferenceStore()
 				.getBoolean(
-						KimlLayoutConstants.SETTINGS_GROUP_EVERY_SINGLE_ELEMENT);
+						KimlLayoutPreferenceConstants.PREF_GROUP_EVERY_SINGLE_ELEMENT);
 
 		return true;
 	}
@@ -895,8 +894,8 @@ public class KimlSSMDiagramGroupingLayouter extends KimlAbstractLayouter {
 				.getDefault()
 				.getPreferenceStore()
 				.getBoolean(
-						KimlLayoutConstants.SETTINGS_GROUP_EVERY_SINGLE_ELEMENT);
-		settings.put(KimlLayoutConstants.SETTINGS_GROUP_EVERY_SINGLE_ELEMENT,
+						KimlLayoutPreferenceConstants.PREF_GROUP_EVERY_SINGLE_ELEMENT);
+		settings.put(KimlLayoutPreferenceConstants.PREF_GROUP_EVERY_SINGLE_ELEMENT,
 				Boolean.toString(groupEverySingleElement));
 		return settings;
 	}
