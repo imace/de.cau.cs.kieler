@@ -124,7 +124,7 @@ public class LayeredGraph {
 	 * Gets the layer element that holds the given object.
 	 * 
 	 * @param obj the object
-	 * @return the corresponding layer element
+	 * @return the corresponding layer element, or null if none exists
 	 */
 	public LayerElement getLayerElement(Object obj) {
 		return obj2LayerElemMap.get(obj);
@@ -163,7 +163,7 @@ public class LayeredGraph {
 		// fill height information for all layers
 		int height = layers.get(layerCount - 1).height;
 		if (height == Layer.UNDEF_HEIGHT) height = 1;
-		for (int i = layerCount - 1; i >= 0; i++)
+		for (int i = layerCount - 1; i >= 0; i--)
 			layers.get(i).height = height++;
 		
 		// create connections between layer elements

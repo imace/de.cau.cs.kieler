@@ -10,7 +10,8 @@ import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup;
 public interface ICycleRemover extends IAlgorithm {
 
 	/**
-	 * Remove cycles in a given graph.
+	 * Remove cycles in a given graph. Loops on a single node are
+	 * ignored and have to be processed properly in later steps.
 	 * 
 	 * @param parentGroup set of nodes to be processed
 	 */

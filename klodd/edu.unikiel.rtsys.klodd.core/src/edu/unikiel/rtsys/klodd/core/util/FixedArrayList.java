@@ -43,6 +43,10 @@ public class FixedArrayList<E> extends AbstractList<E> {
         
         this.type = type;
 		this.array = new Object[capacity];
+		if (type == Type.ALIGN_FRONT)
+			this.start = 0;
+		else if (type == Type.ALIGN_BACK)
+			this.start = capacity;
 	}
 	
 	/*

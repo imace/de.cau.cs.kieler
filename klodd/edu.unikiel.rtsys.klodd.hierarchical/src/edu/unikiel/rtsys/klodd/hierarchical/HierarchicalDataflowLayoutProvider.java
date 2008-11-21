@@ -28,6 +28,8 @@ public class HierarchicalDataflowLayoutProvider extends
 	private ICycleRemover cycleRemover = null;
 	// the layer assigner module
 	private ILayerAssigner layerAssigner = null;
+	// the crossing reducer module
+	private ICrossingReducer crossingReducer = null;
 	
 	/* (non-Javadoc)
 	 * @see edu.unikiel.rtsys.kieler.kiml.layout.services.KimlAbstractLayoutProvider#doLayout(edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup)
@@ -42,12 +44,13 @@ public class HierarchicalDataflowLayoutProvider extends
 		LayeredGraph layeredGraph = layerAssigner.assignLayers(nodeGroup);
 		if (!layeredGraph.getLayers().isEmpty()) {
 			layeredGraph.postProcess();
+			crossingReducer.reduceCrossings(layeredGraph);
 			// TODO remaining modules
 		}
 		cycleRemover.restoreGraph();
 		
-		double executionTime = (double)(System.nanoTime() - startTime) / 10e9;
-		System.out.println("Execution time: " + executionTime + " s");
+		double executionTime = (double)(System.nanoTime() - startTime) * 1e-9;
+		System.out.println("Execution time (" + nodeGroup.getSubNodeGroups().size() + " nodes): " + executionTime + " s");
 	}
 
 	/* (non-Javadoc)
@@ -68,6 +71,7 @@ public class HierarchicalDataflowLayoutProvider extends
 	private void updateModules() {
 		cycleRemover = new DFSCycleRemover();
 		layerAssigner = new LongestPathLayerAssigner();
+		crossingReducer = new LayerSweepCrossingReducer(new BarycenterCrossingReducer());
 	}
 
 }

@@ -24,6 +24,14 @@ public class LayerSweepCrossingReducer extends AbstractAlgorithm implements
 	/** the algorithm used to reduce crossings between two or three layers */
 	private ISingleLayerCrossingReducer layerReducer;
 	
+	/*
+	 * (non-Javadoc)
+	 * @see edu.unikiel.rtsys.klodd.core.algorithms.AbstractAlgorithm#reset()
+	 */
+	public void reset() {
+		layerReducer.reset();
+	}
+	
 	/**
 	 * Creates a layer-by-layer sweep crossing reducer with given single
 	 * layer crossing reducer.

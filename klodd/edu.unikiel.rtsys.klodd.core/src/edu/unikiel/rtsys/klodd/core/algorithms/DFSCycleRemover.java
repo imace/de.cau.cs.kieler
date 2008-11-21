@@ -53,16 +53,20 @@ public class DFSCycleRemover extends AbstractCycleRemover {
 	 */
 	private void dfsVisit(KNodeGroup node) {
 		// put DFS mark on the new node
-		markedMap.put(node, new Integer(nextDfs++));
+		int myDfs = nextDfs++;
+		markedMap.put(node, new Integer(myDfs));
 		
 		// process all outgoing edges
 		List<KEdge> edgesToRemove = new LinkedList<KEdge>();
 		for (KEdge edge : node.getOutgoingEdges()) {
 			KNodeGroup targetNode = edge.getTarget();
 			if (targetNode != null) {
-				if (markedMap.get(targetNode) != null) {
-					// a cycle was found, break it
-					edgesToRemove.add(edge);
+				Integer targetDfs = markedMap.get(targetNode);
+				if (targetDfs != null) {
+					if (targetDfs.intValue() != -1 && targetNode != node) {
+						// a cycle was found, break it
+						edgesToRemove.add(edge);
+					}
 				}
 				else {
 					// target node was not visited yet
@@ -74,6 +78,8 @@ public class DFSCycleRemover extends AbstractCycleRemover {
 		for (KEdge edge : edgesToRemove) {
 			reverseEdge(edge);
 		}
+		// backtracking: set this node's number to -1
+		markedMap.put(node, new Integer(-1));
 	}
 
 }

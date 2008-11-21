@@ -90,13 +90,21 @@ public class LayerElement {
 	 */
 	public List<KEdge> getOutgoingEdges() {
 		if (elemObj instanceof KNodeGroup) {
-			return ((KNodeGroup)elemObj).getOutgoingEdges();
+			KNodeGroup node = (KNodeGroup)elemObj;
+			LinkedList<KEdge> nonLoopEdges = new LinkedList<KEdge>();
+			for (KEdge edge : node.getOutgoingEdges()) {
+				// ignore loops over a single node
+				if (edge.getSource() != edge.getTarget())
+					nonLoopEdges.add(edge);
+			}
+			return nonLoopEdges;
 		}
 		else if (elemObj instanceof KPort) {
 			KPort port = (KPort)elemObj;
 			LinkedList<KEdge> internalEdges = new LinkedList<KEdge>();
 			for (KEdge edge : port.getEdges()) {
-				if (edge.getTarget() == port.getNodeGroup())
+				// edges going from a parent node group to a child have null source
+				if (edge.getSource() == null)
 					internalEdges.add(edge);
 			}
 			return internalEdges;
