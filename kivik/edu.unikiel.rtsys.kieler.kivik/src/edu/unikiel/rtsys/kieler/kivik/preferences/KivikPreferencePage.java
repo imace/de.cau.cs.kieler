@@ -25,19 +25,20 @@ import org.eclipse.ui.preferences.IWorkbenchPreferenceContainer;
 import edu.unikiel.rtsys.kieler.kivik.KivikPlugin;
 
 /**
- * This class represents a preference page that is contributed to the
- * Preferences dialog. By subclassing <samp>FieldEditorPreferencePage</samp>, we
- * can use the field support built into JFace that allows us to create a page
- * that is small and knows how to save, restore and apply itself.
+ * The preference page for the KiViK plug-in.
  * <p>
- * This page is used to modify preferences only. They are stored in the
- * preference store that belongs to the main plug-in class. That way,
- * preferences can be accessed directly via the preference store.
+ * At the moment there exists explanations and links to <i>Content types</i> and
+ * <i>EMF Compare</i> where some global settings can and have to be done. There
+ * are furthermore options concerning the initial zoom and other UI settings.
+ * 
+ * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
  */
-
 public class KivikPreferencePage extends FieldEditorPreferencePage implements
 		IWorkbenchPreferencePage {
 
+	/**
+	 * Default constructor for the KiViK preference page
+	 */
 	public KivikPreferencePage() {
 		super(GRID);
 		setPreferenceStore(KivikPlugin.getDefault().getPreferenceStore());
@@ -45,9 +46,7 @@ public class KivikPreferencePage extends FieldEditorPreferencePage implements
 	}
 
 	/**
-	 * Creates the field editors. Field editors are abstractions of the common
-	 * GUI blocks needed to manipulate various types of preferences. Each field
-	 * editor knows how to save and restore itself.
+	 * Creates the field editors.
 	 */
 	public void createFieldEditors() {
 
@@ -75,7 +74,8 @@ public class KivikPreferencePage extends FieldEditorPreferencePage implements
 		/* ========= link to EMF Compare page ======= */
 		Group emfCompare = new Group(this.getFieldEditorParent(), SWT.NONE);
 		emfCompare.setText("EMF Compare");
-		new PreferenceLinkArea(emfCompare,
+		new PreferenceLinkArea(
+				emfCompare,
 				SWT.NONE,
 				"org.eclipse.emf.compare.ui.preferences.EMFComparePreferencesPage", //$NON-NLS-1$
 				"See <a>{0}</a> to set EMF Compare options",

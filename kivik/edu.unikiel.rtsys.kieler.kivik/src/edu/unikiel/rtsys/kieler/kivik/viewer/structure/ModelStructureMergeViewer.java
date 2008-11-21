@@ -1,12 +1,12 @@
 /*******************************************************************************
- * Copyright (c) 2008 Real-Time and Embedded Systems group
- *
- * INSERT LICENCE HERE
- *
- *
- * Author: Arne Schipper, ars@informatik.uni-kiel.de 
- * Contributors: Obeo - initial API and implementation
- *
+ * Copyright (c) 2006, 2007, 2008 Obeo.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ *     Obeo - initial API and implementation
  *******************************************************************************/
 package edu.unikiel.rtsys.kieler.kivik.viewer.structure;
 
@@ -47,6 +47,9 @@ import edu.unikiel.rtsys.kieler.kivik.internal.KivikComparator;
 
 /**
  * Compare and merge viewer with an area showing diffs as a structured tree.
+ * <p/>
+ * For the use in KiViK just some tool items are switched of, the rest remained
+ * the same.
  * 
  * @author <a href="mailto:laurent.goubet@obeo.fr">Laurent Goubet</a>
  */
@@ -101,13 +104,13 @@ public class ModelStructureMergeViewer extends TreeViewer {
 	 * {@link CompareViewerPane} toolbar.
 	 */
 	protected void createToolItems() {
-		//final ToolBarManager tbm = CompareViewerPane
-		//		.getToolBarManager(getControl().getParent());
-		//if (exportMenu == null)
-		//	 exportMenu = new ExportMenu(tbm.getControl(), this);
+		// final ToolBarManager tbm = CompareViewerPane
+		// .getToolBarManager(getControl().getParent());
+		// if (exportMenu == null)
+		// exportMenu = new ExportMenu(tbm.getControl(), this);
 		//	tbm.add(new Separator("IO")); //$NON-NLS-1$
 		//		tbm.appendToGroup("IO", exportMenu); //$NON-NLS-1$
-		//tbm.update(true);
+		// tbm.update(true);
 	}
 
 	/**

@@ -1,14 +1,3 @@
-/*******************************************************************************
- * Copyright (c) 2008 Real-Time and Embedded Systems group
- *
- * INSERT LICENCE HERE
- *
- *
- * Author: Arne Schipper, ars@informatik.uni-kiel.de 
- *         inspired by EMF Compare (Copyright (c) 2006, 2007, 2008 Obeo)
- *
- *
- *******************************************************************************/
 package edu.unikiel.rtsys.kieler.kivik.viewer.content;
 
 import org.eclipse.compare.CompareConfiguration;

@@ -87,9 +87,22 @@ import edu.unikiel.rtsys.kieler.kivik.viewer.content.ModelContentMergeViewer;
 import edu.unikiel.rtsys.kieler.kivik.viewer.content.part.IModelContentMergeViewerTab;
 import edu.unikiel.rtsys.kieler.kivik.viewer.content.part.ModelContentMergeTabFolder;
 import edu.unikiel.rtsys.kieler.kivik.viewer.content.part.ModelContentMergeTabObject;
+import edu.unikiel.rtsys.kieler.kivik.viewer.structure.ModelStructureMergeViewer;
 
 /**
- *
+ * Displays differences in two diagrams graphically.
+ * <p/>
+ * Integrates as a new tab ContentMerge viewer. Provides functionality to
+ * navigate easily to the differences in the two diagrams via clicking in the
+ * diagram or by selecting an entry in the separate StructureMergeViewer.
+ * Zooming and scrolling is done automatically, but the behavior can be adjusted
+ * through the preference page.
+ * <p/>
+ * No means to merge diagrams yet, but should be possible as the diagrams are
+ * GMF diagrams and EMF can merge those models.
+ * 
+ * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
+ * @see ModelStructureMergeViewer
  */
 public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 		implements IModelContentMergeViewerTab, IPropertyChangeListener {
@@ -107,6 +120,7 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 	/** Keeps a reference to the containing tab folder. */
 	private final ModelContentMergeTabFolder parent;
 
+	/* often used objects */
 	private RenderedDiagramRootEditPart rootEditPart = null;
 	private FreeformLayer feedbackLayer = null;
 	private Viewport viewport = null;
@@ -115,6 +129,7 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 	private AdapterFactoryLabelProvider adapterLabelProvider = new AdapterFactoryLabelProvider(
 			AdapterUtils.getAdapterFactory());
 
+	/* caching of settings read from the preference store */
 	private double prefInitialZoom;
 	private boolean prefZoomToElement;
 	private boolean prefRelayoutDiagram;
@@ -123,10 +138,11 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 	private boolean prefEnableScrolling;
 
 	/**
-	 * Creates a tree viewer under the given parent control.
+	 * Creates a new Diagram meger tab extending a DiagramGraphicalViewer under
+	 * the given parent control.
 	 * 
 	 * @param parentComposite
-	 *            The parent {@link Composite} for this tree viewer.
+	 *            The parent {@link Composite} for this diagram viewer.
 	 * @param side
 	 *            Side of this viewer part.
 	 * @param parentFolder
@@ -154,14 +170,16 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 
 		/* fetch some often needed objects */
 		rootEditPart = (RenderedDiagramRootEditPart) getRootEditPart();
-
 		zoomManager = (ZoomManager) rootEditPart.getZoomManager();
 
+		/*
+		 * create and add a new scalable feedback layer to the viewer to display
+		 * the highlighting
+		 */
 		feedbackLayer = new FreeformLayer();
 		feedbackLayer.setEnabled(false);
 		ScalableFreeformLayeredPane scalableLayers = (ScalableFreeformLayeredPane) rootEditPart
 				.getLayer(DiagramRootEditPart.SCALABLE_LAYERS);
-
 		scalableLayers.add(feedbackLayer,
 				DiagramRootEditPart.SCALED_FEEDBACK_LAYER);
 		viewport = zoomManager.getViewport();
@@ -169,14 +187,15 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 		primaryLayer = (BorderItemsAwareFreeFormLayer) rootEditPart
 				.getLayer(DiagramRootEditPart.PRIMARY_LAYER);
 
-		zoomManager.setZoom(prefInitialZoom);
 		/* set some initial values and options */
+		zoomManager.setZoom(prefInitialZoom);
 		if (prefEnableScrolling) {
 			zoomManager.setZoomAnimationStyle(ZoomManager.ANIMATE_ZOOM_IN_OUT);
 		} else {
 			zoomManager.setZoomAnimationStyle(ZoomManager.ANIMATE_NEVER);
 		}
 
+		/* add mouse zoom handler */
 		setProperty(MouseWheelHandler.KeyGenerator.getKey(SWT.MOD1),
 				MouseWheelZoomHandler.SINGLETON);
 	}
@@ -191,7 +210,13 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 	}
 
 	/**
+	 * Sets the input for the Diagram viewer and marks the differences from this
+	 * input in contrast to the input in the opposite viewer.
 	 * 
+	 * @param object
+	 *            The object which should be displayed, Diagram or EObject with
+	 *            a resource containing a diagram
+	 * @see edu.unikiel.rtsys.kieler.kivik.viewer.content.part.IModelContentMergeViewerTab#setReflectiveInput(java.lang.Object)
 	 */
 	public void setReflectiveInput(Object object) {
 		// We *need* to invalidate the cache here since setInput() would try to
@@ -211,19 +236,24 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 			diagram = (Diagram) resource.getContents().get(1);
 		}
 
+		/* create editing domain for the diagram and ... */
 		DiagramEditingDomainFactory.getInstance().createEditingDomain(
 				diagram.eResource().getResourceSet());
 
+		/* ... set diagram as content of this viewer */
 		setContents(diagram);
 
+		/* map all the differences provided by EMF Compare */
 		mapDifferences();
 		mapDiffGroups();
 		mapDiffToTabObjects();
 
+		/* collapse unchanged compartments if desired */
 		if (prefCollapseUnchanged) {
 			collapseUnchanged(diagram);
 		}
 
+		/* if collapsing is desired, or if re-layout is switched on, do it */
 		if (prefRelayoutDiagram || prefCollapseUnchanged) {
 			primaryLayer.validate();
 			IEditorRegistry reg = PlatformUI.getWorkbench().getEditorRegistry();
@@ -231,6 +261,11 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 			IEditorDescriptor editorDescriptor = reg.getDefaultEditor(filename);
 			KimlAbstractLayouter diagramLayouter = DiagramLayouters
 					.getInstance().getDiagramLayouter(editorDescriptor.getId());
+			/*
+			 * force the diagram layouter to perform several layout steps, as
+			 * otherwise the connections and labels are not drawn properly. see:
+			 * KimlGenericDiagramLayouter.layout() for this issue.
+			 */
 			boolean oldPrefSetting = KimlLayoutPlugin
 					.getDefault()
 					.getPreferenceStore()
@@ -251,15 +286,27 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 							oldPrefSetting);
 		}
 
-		primaryLayer.validate();
-
+		/* check if user wants to be able to click on changed Elements */
 		if (!prefEnableSelection) {
 			primaryLayer.setEnabled(false);
 		}
+
+		/* colorize the changed EditParts in the respective color */
 		colorizeEditParts();
 
 	}
 
+	/**
+	 * Takes a diagram as input and closes all the unchanged compartments. The
+	 * changes are read out of the global map of changes which must be built up
+	 * before.
+	 * <p/>
+	 * Collapsing is done by by setting the AnimateableScrollPane of the
+	 * compartments to collapsed.
+	 * 
+	 * @param diagram
+	 *            The Diagram to collapse
+	 */
 	private void collapseUnchanged(Diagram diagram) {
 		TreeIterator<EObject> allContents = diagram.eAllContents();
 
@@ -290,6 +337,13 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 		}
 	}
 
+	/**
+	 * Colorizes all the changed EditParts in the Diagram with the respective
+	 * color.
+	 * <p/>
+	 * Changes are read out with another function which relies on the global
+	 * registry of the changes, so that must be done first.
+	 */
 	private void colorizeEditParts() {
 		for (ModelContentMergeTabObject object : getVisibleElements()) {
 			if (object.getActualObject() instanceof AbstractGraphicalEditPart) {
@@ -346,7 +400,8 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 	}
 
 	/**
-	 * Maps the input's differences if any.
+	 * Maps the input's differences if any. That is map a DiffElement to an
+	 * EditPart.
 	 */
 	private void mapDifferences() {
 
@@ -382,6 +437,12 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 		}
 	}
 
+	/**
+	 * Maps also the DiffGroups to EditParts. That are then EditParts with
+	 * content. Is done to mark also EditParts whose contained EditParts have
+	 * changed as changed. But they are put in another HashMap as they should
+	 * not be colorized or merged (maybe in a later implementation).
+	 */
 	private void mapDiffGroups() {
 		dataToRecursivelyDiff.clear();
 		final TreeIterator<EObject> diffGroupIterator = parent.getDiffModel()
@@ -390,7 +451,6 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 			EObject next = diffGroupIterator.next();
 			if (next instanceof DiffGroup) {
 				DiffGroup diffGroup = (DiffGroup) next;
-				// diffGroup.
 				EObject data = EMFCompareEObjectUtils.getLeftElement(diffGroup);
 
 				if (data != null) {
@@ -431,10 +491,13 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 	}
 
 	/**
-	 * This will map all the TreeItems in this TreeViewer that need be taken
-	 * into account when drawing diff markers to a corresponding
-	 * ModelContentMergeTabItem. This will allow us to browse everything once
+	 * This will map all the EditParts in this DiagramGraphicalViewer that need
+	 * be taken into account when drawing diff markers to a corresponding
+	 * ModelContentMergeTabObject. This will allow us to browse everything once
 	 * and for all.
+	 * <p/>
+	 * The markers are not drawn in the Diagram compare view, as in the case
+	 * when having the Differences or Properties tab enabled.
 	 */
 	private void mapDiffToTabObjects() {
 		diffToTabObject.clear();
@@ -557,10 +620,12 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 		}
 	}
 
-	private Diagram getDiagram() {
-		return (Diagram) getRootEditPart().getContents().getModel();
-	}
-
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @seeedu.unikiel.rtsys.kieler.kivik.viewer.content.part.
+	 * IModelContentMergeViewerTab#getSelectedElements()
+	 */
 	@Override
 	public List<? extends AbstractGraphicalEditPart> getSelectedElements() {
 		List<AbstractGraphicalEditPart> selectedEditParts = new ArrayList<AbstractGraphicalEditPart>();
@@ -571,11 +636,18 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 		return selectedEditParts;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @seeedu.unikiel.rtsys.kieler.kivik.viewer.content.part.
+	 * IModelContentMergeViewerTab#getUIElement(org.eclipse.emf.ecore.EObject)
+	 */
 	@Override
 	public ModelContentMergeTabObject getUIElement(EObject data) {
-		// If the diff is hidden by another (diff extension), the item won't be
-		// returned
-		// Same goes for diffs that couldn't be matched
+		/*
+		 * If the diff is hidden by another (diff extension), the item won't be
+		 * returned Same goes for diffs that couldn't be matched
+		 */
 		final DiffElement diff = dataToDiff.get(data);
 		if (diff != null && DiffAdapterFactory.shouldBeHidden(diff))
 			return null;
@@ -583,19 +655,31 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 		return diffToTabObject.get(diff);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @seeedu.unikiel.rtsys.kieler.kivik.viewer.content.part.
+	 * IModelContentMergeViewerTab#getVisibleElements()
+	 */
 	@Override
 	public List<ModelContentMergeTabObject> getVisibleElements() {
 		final List<ModelContentMergeTabObject> result = new ArrayList<ModelContentMergeTabObject>();
 		// This will happen if the user has "merged all"
 		if (parent.getDiffAsList().size() == 0)
 			return result;
-		// At the moment return all TODO: fix
+		// At the moment return all
 		for (ModelContentMergeTabObject tabObject : diffToTabObject.values()) {
 			result.add(tabObject);
 		}
 		return result;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @seeedu.unikiel.rtsys.kieler.kivik.viewer.content.part.
+	 * IModelContentMergeViewerTab#showElements(java.util.List)
+	 */
 	@Override
 	public void showElements(List<DiffElement> diffElements) {
 		deselectAll();
@@ -631,65 +715,81 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 			}
 		}
 
-		markEditParts(newSelection);
+		/* scrolls to, zooms to and highlights the selected element */
+		if (newSelection.size() == 1)
+			markEditParts(newSelection.get(0));
 
 	}
 
-	private void markEditParts(List<AbstractGraphicalEditPart> editParts) {
+	/**
+	 * Scrolls to, zooms to and highlights the selected element. The marker
+	 * figure is drawn on the scalable feedback layer.
+	 * 
+	 * @param editPart
+	 *            The EditPart under inspection
+	 */
+	private void markEditParts(AbstractGraphicalEditPart editPart) {
 		feedbackLayer.removeAll();
 
-		if (editParts.size() > 0) {
-			AbstractGraphicalEditPart editPart = editParts.get(0);
+		/* scrolling and zoom */
+		IFigure fig = editPart.getFigure();
+		Rectangle figBounds = translateFromTo(fig, viewport);
 
-			/* scrolling and zoom */
-			IFigure fig = editPart.getFigure();
-			Rectangle figBounds = translateFromTo(fig, viewport);
-
-			if (prefZoomToElement) {
-				if (editPart.equals(getContents())) {
-					zoomManager.setZoomAsText(ZoomManager.FIT_ALL);
-				} else {
-					zoomManager.zoomTo(figBounds.expand(50, 50));
-				}
+		if (prefZoomToElement) {
+			/* this is ZOOMING and SCROLLING */
+			if (editPart.equals(getContents())) {
+				/*
+				 * if DiagramEditPart selected, zoom to fit all and not to the
+				 * bounds
+				 */
+				zoomManager.setZoomAsText(ZoomManager.FIT_ALL);
 			} else {
-				/* this is SCROLLING */
-				Rectangle newZoomLocation = new Rectangle(figBounds.getCenter()
-						.translate(viewport.getSize().scale(-0.5)), viewport
-						.getBounds().getSize());
-				zoomManager.zoomTo(newZoomLocation);
+				zoomManager.zoomTo(figBounds.expand(50, 50));
 			}
+		} else {
+			/* this is SCROLLING */
+			Rectangle newZoomLocation = new Rectangle(figBounds.getCenter()
+					.translate(viewport.getSize().scale(-0.5)), viewport
+					.getBounds().getSize());
+			zoomManager.zoomTo(newZoomLocation);
+		}
 
-			if (editPart.getParent() != null
-					&& editPart.getParent() instanceof AbstractGraphicalEditPart) {
-				if (((AbstractGraphicalEditPart) editPart.getParent())
-						.getFigure() instanceof ResizableCompartmentFigure) {
-					ResizableCompartmentFigure parentFigure = (ResizableCompartmentFigure) ((AbstractGraphicalEditPart) editPart
-							.getParent()).getFigure();
-					AnimatableScrollPane asp = (AnimatableScrollPane) parentFigure
-							.getScrollPane();
-					if (!asp.isExpanded()) {
-						fig = parentFigure.getParent();
-					}
+		/* mark the right element if compartment is collapsed */
+		if (editPart.getParent() != null
+				&& editPart.getParent() instanceof AbstractGraphicalEditPart) {
+			if (((AbstractGraphicalEditPart) editPart.getParent()).getFigure() instanceof ResizableCompartmentFigure) {
+				ResizableCompartmentFigure parentFigure = (ResizableCompartmentFigure) ((AbstractGraphicalEditPart) editPart
+						.getParent()).getFigure();
+				AnimatableScrollPane asp = (AnimatableScrollPane) parentFigure
+						.getScrollPane();
+				if (!asp.isExpanded()) {
+					fig = parentFigure.getParent();
 				}
 			}
-
-			Color highlightColor = new Color(
-					null,
-					ModelContentMergeViewer
-							.getColor(EMFCompareConstants.PREFERENCES_KEY_HIGHLIGHT_COLOR));
-
-			Rectangle newBounds = translateFromTo(fig, feedbackLayer);
-
-			RoundedRectangle markerFigure = new RoundedRectangle();
-			markerFigure.setBounds(newBounds.expand(8, 8));
-			markerFigure.setLineWidth(5);
-			markerFigure.setForegroundColor(highlightColor);
-			markerFigure.setFill(false);
-
-			feedbackLayer.add(markerFigure);
 		}
+
+		Color highlightColor = new Color(null, ModelContentMergeViewer
+				.getColor(EMFCompareConstants.PREFERENCES_KEY_HIGHLIGHT_COLOR));
+
+		/* constructs the marker figure with the right size and position */
+		Rectangle newBounds = translateFromTo(fig, feedbackLayer);
+		RoundedRectangle markerFigure = new RoundedRectangle();
+		markerFigure.setBounds(newBounds.expand(8, 8));
+		markerFigure.setLineWidth(5);
+		markerFigure.setForegroundColor(highlightColor);
+		markerFigure.setFill(false);
+
+		feedbackLayer.add(markerFigure);
 	}
 
+	/**
+	 * Returns an EditPart to a given EObject.
+	 * 
+	 * @param target
+	 *            The EObject to which the corresponding EditPart should be
+	 *            found
+	 * @return The EditPart for the provided EObject
+	 */
 	private AbstractGraphicalEditPart findAbstractGraphicalEditPart(
 			EObject target) {
 
@@ -709,7 +809,10 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 		return foundEditPart;
 	}
 
-	/* Finds an EditPart given a starting EditPart and an EObject */
+	/*
+	 * Recursive helper function. Finds an ConnectionEditPart given a starting
+	 * EditPart and an EObject
+	 */
 	private AbstractGraphicalEditPart findConnectionEditPart(
 			AbstractGraphicalEditPart epBegin, EObject theElement) {
 		if (theElement == null || epBegin == null) {
@@ -773,6 +876,20 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 		return null;
 	}
 
+	/**
+	 * Helper function used when translating the location for a Figure to
+	 * another Figure layer. Needed as the feedback layer uses absolute
+	 * coordinates in contrast to the relative coordinates of every element's
+	 * hierearchy.
+	 * 
+	 * @param from
+	 *            The Figure which should be translated
+	 * @param to
+	 *            The Figure with the coordinate system to which the given
+	 *            Figure should be translated
+	 * @return The translated Bounds of the <i>from</i> Figure now in the
+	 *         coordinate system of the <b>to</b> Figure
+	 */
 	private Rectangle translateFromTo(IFigure from, IFigure to) {
 		Rectangle newBounds = from.getBounds().getCopy();
 		from.translateToAbsolute(newBounds);
@@ -780,6 +897,17 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 		return newBounds;
 	}
 
+	/**
+	 * Generates a Figure which should act as a ToolTip for the provided
+	 * EditPart, indicating the changes of the EditPart.
+	 * 
+	 * @param changedEditPart
+	 *            The EditPart for which the ToolTip should be created
+	 * @param highlightColor
+	 *            The color that should be used for the ToolTip, indicating the
+	 *            type of change
+	 * @return A ToolTip Figure with a String of changes a label
+	 */
 	private IFigure getToolTip(AbstractGraphicalEditPart changedEditPart,
 			Color highlightColor) {
 
@@ -814,11 +942,22 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 		}
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.jface.util.IPropertyChangeListener#propertyChange(org.eclipse
+	 * .jface.util.PropertyChangeEvent)
+	 */
 	@Override
 	public void propertyChange(PropertyChangeEvent event) {
 		updatePreferences();
 	}
 
+	/**
+	 * Updates the preferences as they are set in the plug-in's preference
+	 * store.
+	 */
 	private void updatePreferences() {
 		IPreferenceStore prefs = KivikPlugin.getDefault().getPreferenceStore();
 		prefRelayoutDiagram = prefs
@@ -836,6 +975,15 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 
 		if (primaryLayer != null)
 			primaryLayer.setEnabled(prefEnableSelection);
+	}
+
+	/**
+	 * Convenient function which returns the Diagram of this viewer
+	 * 
+	 * @return The Diagram of this viewer
+	 */
+	private Diagram getDiagram() {
+		return (Diagram) getRootEditPart().getContents().getModel();
 	}
 
 	@Override

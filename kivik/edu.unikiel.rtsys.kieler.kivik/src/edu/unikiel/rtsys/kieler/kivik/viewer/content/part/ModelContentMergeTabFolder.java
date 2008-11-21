@@ -63,8 +63,13 @@ import edu.unikiel.rtsys.kieler.kivik.viewer.content.part.property.ModelContentM
 
 /**
  * Describes a part of a {@link ModelContentMergeViewer}.
+ * <p/>
+ * Initial implementation by <a href="mailto:laurent.goubet@obeo.fr">Laurent
+ * Goubet</a>. Adjustments by Arne Schipper to support, in contrast to EMF
+ * Compare, a third panel which displays a diagram.
  * 
  * @author <a href="mailto:laurent.goubet@obeo.fr">Laurent Goubet</a>
+ * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
  */
 public class ModelContentMergeTabFolder {
 	/** This keeps track of the parent viewer of this tab folder. */
@@ -195,9 +200,9 @@ public class ModelContentMergeTabFolder {
 	}
 
 	/**
-	 * Returns the tree tab of this tab folder.
+	 * Returns the diagram tab of this tab folder.
 	 * 
-	 * @return The tree tab of this tab folder.
+	 * @return The diagram tab of this tab folder.
 	 */
 	public IModelContentMergeViewerTab getDiagramPart() {
 		return diagram;
@@ -208,7 +213,7 @@ public class ModelContentMergeTabFolder {
 	 * 
 	 * @param element
 	 *            The DiffElement which we need UI variables for.
-	 * @return The item corresponding to the given DiffElement, wrapped along
+	 * @return The object corresponding to the given DiffElement, wrapped along
 	 *         with UI information.
 	 */
 	public ModelContentMergeTabObject getUIItem(DiffElement element) {
@@ -402,7 +407,9 @@ public class ModelContentMergeTabFolder {
 	}
 
 	/**
-	 * Creates the contents of this viewer part given its parent composite.
+	 * Creates the contents of this viewer part given its parent composite. The
+	 * content is one tab for the diagram, one for the structural compare and
+	 * one for the properties.
 	 * 
 	 * @param composite
 	 *            Parent composite of this viewer parts's widgets.
@@ -661,6 +668,15 @@ public class ModelContentMergeTabFolder {
 		return treePart;
 	}
 
+	/**
+	 * Handles the creation of the diagram tab of this viewer part given the
+	 * parent {@link Composite} under which to create it. Attaches several
+	 * listeners to notify the left and top part of the whole compare view.
+	 * 
+	 * @param composite
+	 *            Parent {@link Composite} of the tree to create.
+	 * @return The diagram part displayed by this viewer part's diagram tab.
+	 */
 	private IModelContentMergeViewerTab createDiagramPart(Composite composite) {
 
 		final IModelContentMergeViewerTab diagramPart = new ModelContentMergeDiagramTab(
@@ -689,7 +705,8 @@ public class ModelContentMergeTabFolder {
 								|| ((DiagramGraphicalViewer) diagramPart)
 										.getContents().equals(
 												((StructuredSelection) event
-														.getSelection()).getFirstElement()))
+														.getSelection())
+														.getFirstElement()))
 							return;
 						else {
 							oldSelection = (IStructuredSelection) event
@@ -777,34 +794,6 @@ public class ModelContentMergeTabFolder {
 							}
 						}
 
-						// for (DiffElement diff : ((ModelCompareInput)
-						// parentViewer
-						// .getInput()).getDiffAsList()) {
-						//
-						// if (!(diff instanceof DiffGroup)
-						// && partSide == EMFCompareConstants.LEFT) {
-						// if (((View) selectedEditPart.getModel())
-						// .getElement().equals(
-						// EMFCompareEObjectUtils
-						// .getLeftElement(diff))) {
-						// // found 1, that's enough
-						// newSelection = diff;
-						// break;
-						// }
-						//
-						// } else if (!(diff instanceof DiffGroup)
-						// && partSide == EMFCompareConstants.RIGHT) {
-						// if (((View) selectedEditPart.getModel())
-						// .getElement().equals(
-						// EMFCompareEObjectUtils
-						// .getRightElement(diff))) {
-						// // found one, that's enough
-						// newSelection = diff;
-						// break;
-						// }
-						// }
-						// }
-
 						// set the selection in the parent viewer
 						parentViewer.setSelection(newSelection);
 
@@ -812,10 +801,5 @@ public class ModelContentMergeTabFolder {
 				});
 
 		return diagramPart;
-	}
-
-	public String getTitle() {
-		return "Test";
-
 	}
 }

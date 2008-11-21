@@ -1,12 +1,14 @@
 /*******************************************************************************
- * Copyright (c) 2008 Real-Time and Embedded Systems group
- *
- * INSERT LICENCE HERE
- *
- *
- * Author: Arne Schipper, ars@informatik.uni-kiel.de 
- * Contributors: Obeo - initial API and implementation
- *
+ * Copyright (c) 2006, 2007, 2008 Obeo.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ *     Obeo - initial API and implementation
+ *     Arne Schipper - change from item to object to comply with the changed 
+ *                interface, which was changed to handle diagrams
  *******************************************************************************/
 package edu.unikiel.rtsys.kieler.kivik.viewer.content.part.diff;
 
@@ -25,15 +27,10 @@ import org.eclipse.emf.compare.diff.metamodel.ModelElementChangeRightTarget;
 import org.eclipse.emf.compare.diff.metamodel.util.DiffAdapterFactory;
 import org.eclipse.emf.compare.ui.util.EMFCompareConstants;
 import org.eclipse.emf.compare.ui.util.EMFCompareEObjectUtils;
-
-import edu.unikiel.rtsys.kieler.kivik.viewer.content.ModelContentMergeViewer;
-import edu.unikiel.rtsys.kieler.kivik.viewer.content.part.IModelContentMergeViewerTab;
-import edu.unikiel.rtsys.kieler.kivik.viewer.content.part.ModelContentMergeTabFolder;
-import edu.unikiel.rtsys.kieler.kivik.viewer.content.part.ModelContentMergeTabObject;
-
 import org.eclipse.emf.compare.util.AdapterUtils;
 import org.eclipse.emf.compare.util.EMFCompareMap;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.change.FeatureMapEntry;
 import org.eclipse.emf.ecore.impl.EStructuralFeatureImpl.ContainmentUpdatingFeatureMapEntry;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.edit.provider.DelegatingWrapperItemProvider;
@@ -42,6 +39,7 @@ import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.gmf.runtime.notation.impl.DiagramImpl;
 import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.jface.viewers.StructuredViewer;
 import org.eclipse.jface.viewers.TreePath;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.SWT;
@@ -57,14 +55,28 @@ import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.swt.widgets.Widget;
 
+import edu.unikiel.rtsys.kieler.kivik.viewer.content.ModelContentMergeViewer;
+import edu.unikiel.rtsys.kieler.kivik.viewer.content.part.IModelContentMergeViewerTab;
+import edu.unikiel.rtsys.kieler.kivik.viewer.content.part.ModelContentMergeTabFolder;
+import edu.unikiel.rtsys.kieler.kivik.viewer.content.part.ModelContentMergeTabObject;
+import edu.unikiel.rtsys.kieler.kivik.viewer.content.part.diagram.ModelContentMergeDiagramTab;
+
 /**
  * Represents the tree view under a {@link ModelContentMergeTabFolder}'s diff
  * tab.
+ * <p/>
+ * Initial implementation by <a href="mailto:laurent.goubet@obeo.fr">Laurent
+ * Goubet</a>, small changes from item to object to comply with the changed
+ * interface, which was changed to handle diagrams.
+ * 
+ * @see ModelContentMergeDiagramTab
  * 
  * @author <a href="mailto:laurent.goubet@obeo.fr">Laurent Goubet</a>
+ * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
  */
 public class ModelContentMergeDiffTab extends TreeViewer implements
 		IModelContentMergeViewerTab {
+	
 	/** <code>int</code> representing this viewer part side. */
 	protected final int partSide;
 
@@ -256,7 +268,9 @@ public class ModelContentMergeDiffTab extends TreeViewer implements
 		mapTreeItemsToUI();
 	}
 
-	/**
+	
+	/* (non-Javadoc)
+	 * @see edu.unikiel.rtsys.kieler.kivik.viewer.content.part.IModelContentMergeViewerTab#setReflectiveInput(java.lang.Object)
 	 */
 	public void setReflectiveInput(Object object) {
 		// We *need* to invalidate the cache here since setInput() would try to

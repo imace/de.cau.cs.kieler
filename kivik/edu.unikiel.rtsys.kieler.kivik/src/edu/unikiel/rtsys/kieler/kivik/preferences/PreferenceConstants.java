@@ -10,7 +10,9 @@
 package edu.unikiel.rtsys.kieler.kivik.preferences;
 
 /**
- * Constant definitions for plug-in preferences
+ * Preference constant definitions for the KiViK plug-in.
+ * 
+ * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
  */
 public class PreferenceConstants {
 

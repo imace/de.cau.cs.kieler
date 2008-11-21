@@ -1,13 +1,3 @@
-/*******************************************************************************
- * Copyright (c) 2008 Real-Time and Embedded Systems group
- *
- * INSERT LICENCE HERE
- *
- *
- * Author: Arne Schipper, ars@informatik.uni-kiel.de 
- * Contributors: Obeo - initial API and implementation
- *
- *******************************************************************************/
 package edu.unikiel.rtsys.kieler.kivik.viewer.content.part;
 
 import java.util.ArrayList;

@@ -12,6 +12,13 @@ package edu.unikiel.rtsys.kieler.kivik;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
+/**
+ * 
+ * Fetches the translated strings to display according to the selected language.
+ * 
+ * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
+ * 
+ */
 public class KivikUIMessages {
 	private static final String BUNDLE_NAME = "edu.unikiel.rtsys.kieler.kivik.viewer.content.part.messages"; //$NON-NLS-1$
 

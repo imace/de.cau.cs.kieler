@@ -11,24 +11,27 @@
 package edu.unikiel.rtsys.kieler.kivik.viewer.content.part;
 
 import org.eclipse.emf.compare.ui.util.EMFCompareConstants;
-import org.eclipse.swt.widgets.Item;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.TreeItem;
 
 import edu.unikiel.rtsys.kieler.kivik.viewer.content.ModelContentMergeViewer;
 
 /**
- * This class will be used to wrap {@link Item} subclasses such as
+ * This class will be used to wrap {@link Object} subclasses such as
  * {@link TreeItem} and {@link TableItem} to allow us to call methods such as
  * <tt>getBounds</tt> without explicitely casting each time we do so.
  * <p>
  * This wrapper will also hold UI information about the way connectors should be
  * drawn between tabs.
  * </p>
+ * Initial implementation by <a href="mailto:laurent.goubet@obeo.fr">Laurent
+ * Goubet</a> in EMF Compare, changed to support Objects instead of Items by <a
+ * href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>.
  * 
  * @author <a href="mailto:laurent.goubet@obeo.fr">Laurent Goubet</a>
  */
 public final class ModelContentMergeTabObject {
+	
 	/** The item this instance has actually been created for. */
 	private final Object actualObject;
 
@@ -53,11 +56,11 @@ public final class ModelContentMergeTabObject {
 	private final Object visibleObject;
 
 	/**
-	 * Constructs a wrapper around the given item. This constructor specifies
-	 * the color to use when drawing UI components with this item.
+	 * Constructs a wrapper around the given object. This constructor specifies
+	 * the color to use when drawing UI components with this object.
 	 * 
 	 * @param actual
-	 *            The effective item this instance describes.
+	 *            The effective object this instance describes.
 	 * @param visible
 	 *            The visible item this instance holds UI information for.
 	 *            Defaults as <tt>actual</tt> if <code>null</code>.
@@ -82,17 +85,17 @@ public final class ModelContentMergeTabObject {
 	 * Y coordinate and size of the center curve connected to this item.
 	 * 
 	 * @param actual
-	 *            The effective item this instance describes.
+	 *            The effective object this instance describes.
 	 * @param visible
-	 *            The visible item this instance holds UI information for.
+	 *            The visible object this instance holds UI information for.
 	 *            Defaults as <tt>actual</tt> if <code>null</code>.
 	 * @param drawingColor
 	 *            Key of the color to use when drawing UI components for this
-	 *            item.
+	 *            object.
 	 * @param curveExpectedY
-	 *            Y coordinate of the center curve for this item.
+	 *            Y coordinate of the center curve for this object.
 	 * @param curveExpectedSize
-	 *            Size of the center curve for this item.
+	 *            Size of the center curve for this object.
 	 */
 	public ModelContentMergeTabObject(Object actual, Object visible,
 			String drawingColor, int curveExpectedY, int curveExpectedSize) {
@@ -107,23 +110,23 @@ public final class ModelContentMergeTabObject {
 	}
 
 	/**
-	 * Constructs a wrapper around the given item. This constructor specifies
-	 * the color to use when drawing UI components with this item.
+	 * Constructs a wrapper around the given object. This constructor specifies
+	 * the color to use when drawing UI components with this object.
 	 * 
 	 * @param actual
-	 *            The effective item this instance describes.
+	 *            The effective object this instance describes.
 	 * @param drawingColor
 	 *            Key of the color to use when drawing UI components for this
-	 *            item.
+	 *            object.
 	 */
 	public ModelContentMergeTabObject(Object actual, String drawingColor) {
 		this(actual, actual, drawingColor, -1, -1);
 	}
 
 	/**
-	 * Returns the actual item this instance has been created for.
+	 * Returns the actual object this instance has been created for.
 	 * 
-	 * @return The actual item this instance has been created for.
+	 * @return The actual object this instance has been created for.
 	 */
 	public Object getActualObject() {
 		return actualObject;
@@ -131,9 +134,9 @@ public final class ModelContentMergeTabObject {
 
 	/**
 	 * Returns the color which should be used when drawing the center curve and
-	 * other UI colored components using this item.
+	 * other UI colored components using this object.
 	 * <p>
-	 * If no colors are specified for this item,
+	 * If no colors are specified for this object,
 	 * {@link ModelContentMergeViewer#getChangedColor()} will be used as
 	 * default.
 	 * </p>
@@ -158,41 +161,41 @@ public final class ModelContentMergeTabObject {
 
 	/**
 	 * Returns the Y coordinate at which the center connecting curve should be
-	 * drawn on this item.
+	 * drawn on this object.
 	 * <p>
 	 * If it is not specified or is negative, no curve will be drawn.
 	 * </p>
 	 * 
-	 * @return The Y coordinate of the center curve connected to this item.
+	 * @return The Y coordinate of the center curve connected to this object.
 	 */
 	public int getCurveY() {
 		return curveY;
 	}
 
-	public String getBackgroundColor(){
+	public String getBackgroundColor() {
 		return backgroundColorID;
 	}
-	
+
 	/**
-	 * Returns the height of the item's control header.
+	 * Returns the height of the object's control header.
 	 * 
-	 * @return The height of the item's control header.
+	 * @return The height of the object's control header.
 	 */
 	public int getHeaderHeight() {
 		return headerHeight;
 	}
 
 	/**
-	 * Returns the visible item on which UI marquees should be drawn.
+	 * Returns the visible object on which UI marquees should be drawn.
 	 * 
-	 * @return The visible item on which UI marquees should be drawn.
+	 * @return The visible object on which UI marquees should be drawn.
 	 */
 	public Object getVisibleObject() {
 		return visibleObject;
 	}
 
 	/**
-	 * Sets a new value for this item's center curve size.
+	 * Sets a new value for this object's center curve size.
 	 * 
 	 * @param newCurveSize
 	 *            New size to affect to the curve.
@@ -202,7 +205,7 @@ public final class ModelContentMergeTabObject {
 	}
 
 	/**
-	 * Sets a new value for this item's center curve Y ccordinate.
+	 * Sets a new value for this object's center curve Y ccordinate.
 	 * 
 	 * @param newCurveY
 	 *            New Y coordinate of the center curve for this point.
@@ -212,10 +215,10 @@ public final class ModelContentMergeTabObject {
 	}
 
 	/**
-	 * Returns the value of the item's control header height.
+	 * Returns the value of the object's control header height.
 	 * 
 	 * @param newHeaderHeight
-	 *            The value of the item's control header height.
+	 *            The value of the object's control header height.
 	 */
 	public void setHeaderHeight(int newHeaderHeight) {
 		headerHeight = newHeaderHeight;

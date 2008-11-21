@@ -1,12 +1,14 @@
 /*******************************************************************************
- * Copyright (c) 2008 Real-Time and Embedded Systems group
- *
- * INSERT LICENCE HERE
- *
- *
- * Author: Arne Schipper, ars@informatik.uni-kiel.de 
- * Contributors: Obeo - initial API and implementation
- *
+ * Copyright (c) 2006, 2007, 2008 Obeo.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ *     Obeo - initial API and implementation
+ *     Arne Schipper - change from item to object to comply with the changed 
+ *                interface, which was changed to handle diagrams
  *******************************************************************************/
 package edu.unikiel.rtsys.kieler.kivik.viewer.content.part.property;
 
@@ -29,6 +31,7 @@ import edu.unikiel.rtsys.kieler.kivik.viewer.content.ModelContentMergeViewer;
 import edu.unikiel.rtsys.kieler.kivik.viewer.content.part.IModelContentMergeViewerTab;
 import edu.unikiel.rtsys.kieler.kivik.viewer.content.part.ModelContentMergeTabFolder;
 import edu.unikiel.rtsys.kieler.kivik.viewer.content.part.ModelContentMergeTabObject;
+import edu.unikiel.rtsys.kieler.kivik.viewer.content.part.diagram.ModelContentMergeDiagramTab;
 
 import org.eclipse.emf.compare.util.AdapterUtils;
 import org.eclipse.emf.compare.util.EMFCompareMap;
@@ -55,11 +58,19 @@ import org.eclipse.swt.widgets.Widget;
 /**
  * Represents the property view under a {@link ModelContentMergeTabFolder}'s
  * property tab.
+ * <p/>
+ * Initial implementation by <a href="mailto:laurent.goubet@obeo.fr">Laurent
+ * Goubet</a>, small changes from item to object to comply with the changed
+ * interface, which was changed to handle diagrams.
+ * 
+ * @see ModelContentMergeDiagramTab
  * 
  * @author <a href="mailto:laurent.goubet@obeo.fr">Laurent Goubet</a>
+ * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
  */
 public final class ModelContentMergePropertyTab extends TableViewer implements
 		IModelContentMergeViewerTab {
+	
 	/** <code>int</code> representing this viewer part side. */
 	protected final int partSide;
 
@@ -441,8 +452,7 @@ public final class ModelContentMergePropertyTab extends TableViewer implements
 		 * @param obj
 		 *            Item we want connected to the center part.
 		 */
-		private void drawLine(PaintEvent event,
-				ModelContentMergeTabObject obj) {
+		private void drawLine(PaintEvent event, ModelContentMergeTabObject obj) {
 			final Rectangle tableBounds = getTable().getBounds();
 
 			if (obj.getActualObject() instanceof TableItem) {
@@ -454,15 +464,12 @@ public final class ModelContentMergePropertyTab extends TableViewer implements
 										.getColor(EMFCompareConstants.PREFERENCES_KEY_HIGHLIGHT_COLOR)));
 
 				event.gc.setLineWidth(2);
-				event.gc.setForeground(new Color(((Item) obj
-						.getActualObject()).getDisplay(),
-						ModelContentMergeViewer
-								.getColor(obj.getCurveColor())));
+				event.gc.setForeground(new Color(((Item) obj.getActualObject())
+						.getDisplay(), ModelContentMergeViewer.getColor(obj
+						.getCurveColor())));
 				if (partSide == EMFCompareConstants.LEFT)
-					event.gc
-							.drawLine(getTotalColumnsWidth(), obj
-									.getCurveY(), tableBounds.width, obj
-									.getCurveY());
+					event.gc.drawLine(getTotalColumnsWidth(), obj.getCurveY(),
+							tableBounds.width, obj.getCurveY());
 			}
 		}
 	}

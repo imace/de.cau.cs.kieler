@@ -19,8 +19,12 @@ import org.eclipse.swt.widgets.Control;
 
 /**
  * Represents a tab that will be placed in a {@link ModelContentMergeTabFolder}.
+ * <p/>
+ * Initial implementation by <a href="mailto:laurent.goubet@obeo.fr">Laurent
+ * Goubet</a>, small adjustments to handle any kind of objects by Arne Schipper.
  * 
  * @author <a href="mailto:laurent.goubet@obeo.fr">Laurent Goubet</a>
+ * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
  */
 public interface IModelContentMergeViewerTab {
 	/**
@@ -44,9 +48,9 @@ public interface IModelContentMergeViewerTab {
 	Control getControl();
 
 	/**
-	 * Returns the tab's selection as a list of Items.
+	 * Returns the tab's selection as a list of Objects.
 	 * 
-	 * @return The tab's selection as a list of Items.
+	 * @return The tab's selection as a list of Objects.
 	 */
 	List<? extends Object> getSelectedElements();
 
@@ -55,14 +59,16 @@ public interface IModelContentMergeViewerTab {
 	 * 
 	 * @param data
 	 *            The data for which we need UI variables for.
-	 * @return List of items corresponding to the given data, wrapped along with UI information.
+	 * @return List of items corresponding to the given data, wrapped along with
+	 *         UI information.
 	 */
 	ModelContentMergeTabObject getUIElement(EObject data);
 
 	/**
-	 * Returns the tab's visible elements as a list of Items.
+	 * Returns the tab's visible elements as a list of Objects.
 	 * <p>
-	 * Elements are deemed visible if they are currently in the client area of the tab's Control.
+	 * Elements are deemed visible if they are currently in the client area of
+	 * the tab's Control.
 	 * </p>
 	 * 
 	 * @return List of the tab's visible elements.
@@ -77,7 +83,8 @@ public interface IModelContentMergeViewerTab {
 	/**
 	 * Sets the input of the tab.
 	 * <p>
-	 * This is often implemented by redirecting to the tab's "setInput(Object)" method.
+	 * This is often implemented by redirecting to the tab's "setInput(Object)"
+	 * method.
 	 * </p>
 	 * 
 	 * @param input
@@ -86,10 +93,11 @@ public interface IModelContentMergeViewerTab {
 	void setReflectiveInput(Object input);
 
 	/**
-	 * Ensures the given List of items is made visible in the tab's Control client area.
+	 * Ensures the given List of Objects is made visible in the tab's Control
+	 * client area.
 	 * 
-	 * @param items
-	 *            List of the items ot make visible.
+	 * @param elements
+	 *            List of the Objects to make visible.
 	 */
 	void showElements(List<DiffElement> elements);
 }
