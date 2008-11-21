@@ -22,6 +22,7 @@ import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.PointList;
 import org.eclipse.draw2d.geometry.Rectangle;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.gef.ConnectionEditPart;
 import org.eclipse.gef.GraphicalEditPart;
 import org.eclipse.gef.NodeEditPart;
@@ -124,7 +125,6 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 	private CommandStack commandStack = null;
 	private double zoomLevel = 1.0;
 	private ConnectionLayer connectionLayer = null;
-	private boolean layoutDirectionHorizontal;
 
 	/*------------------------------------------------------------------------------*/
 	/*-----------------------------APPLICATION OF LAYOUT----------------------------*/
@@ -320,7 +320,6 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 				polyline.setTargetAnchor(new ChopboxAnchor(
 						((GraphicalEditPart) connection.getTarget())
 								.getFigure()));
-
 			}
 
 			/* create request and add it */
@@ -670,13 +669,21 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 		/* enable alternating layout of regions */
 		if (currentEditPart.getClass().equals(RegionEditPart.class)
 				&& prefAlternatingHVLayout) {
-			if (layoutDirectionHorizontal)
+
+			if (currentNodeGroup.getParentGroup() != null
+					&& currentNodeGroup.getParentGroup().getParentGroup() != null) {
+				EList<LAYOUT_OPTION> layoutOptions = currentNodeGroup
+						.getParentGroup().getParentGroup().getLayout()
+						.getLayoutOptions();
+				if (layoutOptions.contains(LAYOUT_OPTION.HORIZONTAL))
+					currentNodeGroup.getLayout().getLayoutOptions().add(
+							LAYOUT_OPTION.VERTICAL);
+				else
+					currentNodeGroup.getLayout().getLayoutOptions().add(
+							LAYOUT_OPTION.HORIZONTAL);
+			} else
 				currentNodeGroup.getLayout().getLayoutOptions().add(
 						LAYOUT_OPTION.HORIZONTAL);
-			else
-				currentNodeGroup.getLayout().getLayoutOptions().add(
-						LAYOUT_OPTION.VERTICAL);
-			layoutDirectionHorizontal = !layoutDirectionHorizontal;
 		}
 	}
 
@@ -816,7 +823,6 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 			connectionLayer = (ConnectionLayer) sfrep
 					.getLayer(DiagramRootEditPart.CONNECTION_LAYER);
 			connectionLayer.setAntialias(SWT.ON);
-			layoutDirectionHorizontal = true;
 		} else {
 			System.err.println("KimlSSMDiagramLayouter: Error: '" + rootPart
 					+ "' is no an instance of GraphicalEditPart: ");
