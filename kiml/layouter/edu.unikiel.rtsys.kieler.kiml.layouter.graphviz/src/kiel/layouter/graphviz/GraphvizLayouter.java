@@ -19,6 +19,7 @@ import java.util.List;
 import org.eclipse.jface.preference.IPreferenceStore;
 
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.EDGE_LABEL_PLACEMENT;
+import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.EDGE_TYPE;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KDimension;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KEdge;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KEdgeLabel;
@@ -413,10 +414,14 @@ public class GraphvizLayouter {
 											.get(i + 1)));
 
 				}
+				
 				/* last two points in the GraphViz list denote the end point */
 				edge.getLayout().setTargetPoint(
 						graphviz2KPoint(intList.get(intList.size() - 2),
 								intList.get(intList.size() - 1)));
+				
+				/* tell all users that GraphViz produces bezier curves */
+				edge.getLayout().setEdgeType(EDGE_TYPE.BEZIER);
 
 			} catch (Exception e) {
 				/* in any failure, leave list empty */
