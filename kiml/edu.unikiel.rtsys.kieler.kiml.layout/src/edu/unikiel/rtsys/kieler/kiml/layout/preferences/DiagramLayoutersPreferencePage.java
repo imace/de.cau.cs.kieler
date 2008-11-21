@@ -47,17 +47,30 @@ public class DiagramLayoutersPreferencePage extends FieldEditorPreferencePage
 	 * Creates the field editors for the various options.
 	 */
 	public void createFieldEditors() {
+
+		/* use GMF for Connection lables */
 		addField(new BooleanFieldEditor(
 				KimlLayoutPreferenceConstants.PREF_DIAGRAMLAYOUTERS_USE_GMF_TO_LAYOUT_CONNECTION_LABELS,
 				"Use GMF to layout connection lables", getFieldEditorParent()));
 		Label descriptionGMF = new Label(getFieldEditorParent(), SWT.WRAP);
 		descriptionGMF
 				.setText("If checked do not use the layout information provided by the layout engine to layout the labels. Use the internal functions of the graphical editor, if it has any. Might lead to a better placement.");
+
+		/* smoothen edges (simulates bezier curves) */
 		addField(new BooleanFieldEditor(
 				KimlLayoutPreferenceConstants.PREF_DIAGRAMLAYOUTERS_SMOOTHEN_EDGES,
 				"Smoothen edges", getFieldEditorParent()));
 		Label descriptionSmooth = new Label(getFieldEditorParent(), SWT.WRAP);
 		descriptionSmooth.setText("If checked, smoothen the edges.");
+
+		/* multiple layout runs */
+		addField(new BooleanFieldEditor(
+				KimlLayoutPreferenceConstants.PREF_DIAGRAMLAYOUTERS_MULTIPLE_LAYOUT_RUNS,
+				"Mutliple layout runs", getFieldEditorParent()));
+		Label descriptionMultipleRuns = new Label(getFieldEditorParent(),
+				SWT.WRAP);
+		descriptionMultipleRuns
+				.setText("If checked, two or three runs of the layout process are performed to get a sound layout directly. A workaround for the problem with the edges and labels due to their relative positions. Note that this affects the animation.");
 
 	}
 

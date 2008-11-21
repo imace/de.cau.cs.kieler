@@ -148,7 +148,7 @@ public abstract class KimlAbstractLayouter {
 
 	/**
 	 * Is called second during the layout process. Implementing methods should
-	 * creates the layout graph that corresponds to the diagram elements to be
+	 * create the layout graph that corresponds to the diagram elements to be
 	 * laid out.
 	 * 
 	 * @return A KLayoutGraph
