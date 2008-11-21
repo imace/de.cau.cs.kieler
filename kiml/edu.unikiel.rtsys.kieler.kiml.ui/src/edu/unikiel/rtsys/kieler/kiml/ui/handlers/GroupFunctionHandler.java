@@ -22,23 +22,46 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.handlers.HandlerUtil;
 
+import edu.unikiel.rtsys.kieler.kiml.ui.ContributionItemGroupFunctions;
 import edu.unikiel.rtsys.kieler.kiml.ui.helpers.KimlGMFColorHelper;
 import edu.unikiel.rtsys.kieler.kiml.ui.helpers.KimlGMFLayoutHintHelper;
-
+import edu.unikiel.rtsys.kieler.kiml.ui.views.KimlLayoutHintView;
 
 /**
  * The handler which is responsible for the functions applicable to layout
- * groups. At the moment, this covers the following functions:
+ * groups. Handler is called when executing a command. This is set in the
+ * plugin.xml file. The commands can only be issued through a menu, when the
+ * grouping of single elements is enabled. At the moment, this covers the
+ * following functions:
  * <ul>
  * <li>Select all group members of one element</li>
  * <li>Highlight all group members of one element</li>
  * <li>Remove one or more elements from a group</li>
  * </ul>
  * 
- * @author ars
+ * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
+ * @see LayoutAsHandler
+ * @see GroupAsHandler
+ * @see ContributionItemGroupFunctions
+ * @see KimlLayoutHintView
+ * @deprecated This method was introduced to support grouping of single elements
+ *             within one compartment. It should be moved/changed to a somehow
+ *             better place and name and the implementation is about to change.
+ *             Full support for laying out (and grouping) is given in
+ *             {@link LayoutAsHandler}. Though this just works with <b>all</b>
+ *             elements of a compartment as a whole, this is in most cases what
+ *             you want.
+ * 
  */
 public class GroupFunctionHandler extends AbstractHandler implements IHandler {
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.core.commands.AbstractHandler#execute(org.eclipse.core.commands
+	 * .ExecutionEvent)
+	 */
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 
@@ -52,7 +75,7 @@ public class GroupFunctionHandler extends AbstractHandler implements IHandler {
 		ISelection selection = HandlerUtil.getActiveMenuSelection(event);
 		if (selection == null)
 			selection = HandlerUtil.getCurrentSelection(event);
-		
+
 		/*
 		 * Filter out ShapeNodeEditParts. According to the menu.extension in
 		 * plugin.xml it should just be ShapeNodeEditParts selected anyway, but

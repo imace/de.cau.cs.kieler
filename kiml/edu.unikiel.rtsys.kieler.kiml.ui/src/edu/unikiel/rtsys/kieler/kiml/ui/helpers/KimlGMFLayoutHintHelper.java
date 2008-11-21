@@ -23,19 +23,37 @@ import org.eclipse.gmf.runtime.notation.StringValueStyle;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_TYPE;
 
 /**
- * Holds various static functions useful when working with layout hints. A
- * <b>layout hint</b> for an element comprises the <b>layout type</b> (e.g.
- * horizontal) and the <b>layout group</b> (a String).
+ * Holds various static functions useful when working with layout hints.
+ * <p/>
+ * There are two types of layout hints, one when all elements of a compartment
+ * should be laid out as one group. This is the common case. Another possibility
+ * is to lay out elements arbitrarily. Then each element must know to which
+ * group it belongs. This is reflected in the two types of hints.
+ * <p/>
+ * All elements in a compartment are in the same group. The information on how
+ * to lay out this group, that is actually how to lay out the children, is saved
+ * as a StringValueStyle in the Notation Model of the compartment element:
+ * <ul>
+ * <li>the <b>layout type</b> (e.g. hierarchical)</li>
+ * <li>the <b>layouter name</b> (e.g. GraphViz Dot)</li>
+ * </ul>
+ * <p/>
+ * When also single element grouping should be enabled then the information must
+ * be saved in each element itself. However, this is also done through a
+ * StringValueStyle in the NotationModel:
+ * <ul>
+ * <li>the <b>layout type</b> (e.g. hierarchical)</li>
+ * <li>the <b>layouter name</b> (e.g. GraphViz Dot)</li>
+ * <li>the <b>layout group</b> (a String)</li>
+ * </ul>
+ * <p>
+ * There are special functions addressing each of the cases.
  * 
  * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
- * 
  */
 public class KimlGMFLayoutHintHelper {
 
-	/**
-	 * Constant for layout group, used to indicate that a ShapeNodeEdit part
-	 * does not belong to any group
-	 */
+	/* Constants for the StringValueStyle treatment */
 	public static final String NOT_GROUPED = "Not grouped";
 	public static final String LAYOUT_TYPE_STYLE = "layoutType";
 	public static final String LAYOUT_GROUP_STYLE = "layoutGroup";
@@ -46,37 +64,38 @@ public class KimlGMFLayoutHintHelper {
 	// =======================================================================//
 	// ================ GROUP EVERY SINGLE ELEMENT ===========================//
 	// =======================================================================//
+
 	/**
-	 * Returns the layouter name for this ShapeNodeEditPart, is a plain String.
+	 * Returns the layouter name for this GraphicalEditPart, is a plain String.
 	 * 
-	 * @param shapeNodeEditPart
-	 *            the ShapeNodeEditPart to retrieve the layout type for
+	 * @param graphicalEditPart
+	 *            the GraphicalEditPart to retrieve the layout type for
 	 * @return the layouter name
 	 */
-	public static String getLayouterName(GraphicalEditPart shapeNodeEditPart) {
+	public static String getLayouterName(GraphicalEditPart graphicalEditPart) {
 
-		StringValueStyle layouterNameStyle = (StringValueStyle) (shapeNodeEditPart
+		StringValueStyle layouterNameStyle = (StringValueStyle) (graphicalEditPart
 				.getNotationView().getNamedStyle(NotationPackage.eINSTANCE
 				.getStringValueStyle(), LAYOUTER_NAME_STYLE));
 
-		// if property not available, return empty string
+		/* if property not available, return empty string */
 		if (layouterNameStyle == null) {
 			return "";
-			// return stored model/notation value
-		} else {
+		}
+		/* return stored model/notation value */
+		else {
 			return layouterNameStyle.getStringValue();
 		}
 	}
 
 	/**
-	 * Convenient function to set the layouter name for group of
-	 * ShapeNodeEditParts
+	 * Convenient function to set the layouter name for ArrayList of
+	 * GraphicalEditParts
 	 * 
-	 * @param shapeNodeEditParts
-	 *            the ShapeNodeEditsParts as a typed ArrayList
+	 * @param graphicalEditParts
+	 *            the GraphicalEditParts as a typed ArrayList
 	 * @param layouterName
 	 *            the name of a layouter which should render these EditParts
-	 * @see KimlGMFLayoutHintHelper#setLayoutHint(ShapeNodeEditPart, String)
 	 */
 	public static void setLayouterName(
 			ArrayList<? extends GraphicalEditPart> GraphicalEditParts,
@@ -87,14 +106,13 @@ public class KimlGMFLayoutHintHelper {
 	}
 
 	/**
-	 * Convenient function to set the layouter name for a group of
+	 * Convenient function to set the layouter name for an Array of
 	 * GraphicalEditParts.
 	 * 
-	 * @param GraphicalEditParts
-	 *            the ShapeNodeEditsParts as a simple array
+	 * @param graphicalEditParts
+	 *            the GraphicalEditParts as a simple array
 	 * @param layouterName
 	 *            the name of a layouter which should render these EditParts
-	 * @see KimlGMFLayoutHintHelper#setlayoutType(GraphicalEditPart, String)
 	 */
 	public static void setLayouterName(GraphicalEditPart[] GraphicalEditParts,
 			String layouterName) {
@@ -104,7 +122,7 @@ public class KimlGMFLayoutHintHelper {
 	}
 
 	/**
-	 * Wrapper function to set the layouter name of a graphicalEditPart. This
+	 * Wrapper function to set the layouter name for a graphicalEditPart. This
 	 * function should always be called together with
 	 * <code>setLayoutGroup</code> and <code>setLayoutType</code> to keep the
 	 * information consistent.
@@ -113,7 +131,6 @@ public class KimlGMFLayoutHintHelper {
 	 *            the GraphicalEditPart to set the layout type for
 	 * @param layouterName
 	 *            he name of a layouter which should render these EditParts
-	 * @see KimlGMFLayoutHintHelper#setLayoutGroup(GraphicalEditPart, String)
 	 */
 	public static void setLayouterName(
 			final GraphicalEditPart graphicalEditPart, final String layouterName) {
@@ -154,15 +171,11 @@ public class KimlGMFLayoutHintHelper {
 	}
 
 	/**
-	 * Returns the name of the layout hint for this GraphicalEditPart, is a
-	 * constant declared in KimlLayoutHintConstants, and will be
-	 * <code>KimlLayoutHintConstants.NONE</code>, if this GraphicalEditPart does
-	 * not have a hint yet or if the hint was invalid
+	 * Returns the name of the layout hint for this GraphicalEditPart.
 	 * 
 	 * @param GraphicalEditPart
 	 *            the GraphicalEditPart to retrieve the layout type for
-	 * @return the layoutType if available, or
-	 *         <code>KimlLayoutHintConstants.NONE</code> if not
+	 * @return the layoutType
 	 */
 	public static LAYOUT_TYPE getLayoutType(GraphicalEditPart graphicalEditPart) {
 
@@ -183,16 +196,13 @@ public class KimlGMFLayoutHintHelper {
 	}
 
 	/**
-	 * Convenient function to set the layout hint of a group of
+	 * Convenient function to set the layout type of a ArrayList of
 	 * GraphicalEditParts
 	 * 
-	 * @param GraphicalEditParts
-	 *            the ShapeNodeEditsParts as a typed ArrayList
-	 * @param hintID
-	 *            the string value of the hint, must be a constant declared in
-	 *            KimlLayoutHintConstants.layoutTypes
-	 * @see KimlGMFLayoutHintHelper#setLayoutHint(GraphicalEditPart, String)
-	 * @see KimlLayoutHintConstants#layoutTypes
+	 * @param graphicalEditParts
+	 *            the GraphicalEditParts as a typed ArrayList
+	 * @param layoutType
+	 *            The layoutType
 	 */
 	public static void setLayoutType(
 			ArrayList<? extends GraphicalEditPart> GraphicalEditParts,
@@ -203,16 +213,13 @@ public class KimlGMFLayoutHintHelper {
 	}
 
 	/**
-	 * Convenient function to set the layout type of a group of
+	 * Convenient function to set the layout type of a array of
 	 * GraphicalEditParts.
 	 * 
-	 * @param GraphicalEditParts
-	 *            the ShapeNodeEditsParts as a simple array
+	 * @param graphicalEditParts
+	 *            the GraphicalEditParts as a simple array
 	 * @param layoutType
-	 *            the string value of the type, must be a constant declared in
-	 *            KimlLayoutHintConstants.layoutTypes
-	 * @see KimlGMFLayoutHintHelper#setlayoutType(GraphicalEditPart, String)
-	 * @see KimlLayoutHintConstants#layoutTypes
+	 *            The layoutType
 	 */
 	public static void setLayoutType(GraphicalEditPart[] GraphicalEditParts,
 			LAYOUT_TYPE layoutType) {
@@ -222,17 +229,14 @@ public class KimlGMFLayoutHintHelper {
 	}
 
 	/**
-	 * Wrapper function to set the layout type of a graphicalEditPart. This
+	 * Wrapper function to set the layout type of a GraphicalEditPart. This
 	 * function should always be called together with
 	 * <code>setLayoutGroup</code> to keep the information consistent.
 	 * 
-	 * @param GraphicalEditPart
+	 * @param graphicalEditPart
 	 *            the GraphicalEditPart to set the layout type for
 	 * @param layoutType
-	 *            a string identifying the constant of the layout type for this
-	 *            GraphicalEditPart
-	 * @see KimlGMFLayoutHintHelper#setLayoutGroup(GraphicalEditPart, String)
-	 * @see KimlLayoutHintConstants#layoutTypes
+	 *            The layoutType
 	 */
 	public static void setLayoutType(final GraphicalEditPart graphicalEditPart,
 			final LAYOUT_TYPE layoutType) {
@@ -273,14 +277,14 @@ public class KimlGMFLayoutHintHelper {
 	}
 
 	/**
-	 * Returns the layout group for this graphicalEditPart. If this
+	 * Returns the layout group for this GraphicalEditPart. If this
 	 * GraphicalEditPart is not grouped, the Constant
 	 * <code>KimlLayoutHintConstants.NOT_GROUPED</code> will be returned
 	 * 
-	 * @param GraphicalEditPart
+	 * @param graphicalEditPart
 	 *            the GraphicalEditPart to retrieve the layout group for
 	 * @return the name of the layout group, if the element is grouped, the
-	 *         Constant KimlLayoutHintConstants.NOT_GROUPED else
+	 *         constant KimlLayoutHintConstants.NOT_GROUPED else
 	 * @see KimlLayoutHintConstants#NOT_GROUPED
 	 */
 	public static String getLayoutGroup(
@@ -295,7 +299,7 @@ public class KimlGMFLayoutHintHelper {
 	}
 
 	/**
-	 * Convenient function to set the layout group of a group of
+	 * Convenient function to set the layout group of an ArrayList of
 	 * GraphicalEditParts.
 	 * 
 	 * @param GraphicalEditParts
@@ -313,14 +317,13 @@ public class KimlGMFLayoutHintHelper {
 	}
 
 	/**
-	 * Convenient function to set the layout group of a group of
+	 * Convenient function to set the layout group of an array of
 	 * GraphicalEditParts.
 	 * 
-	 * @param GraphicalEditParts
+	 * @param graphicalEditParts
 	 *            the GraphicalEditParts to set the layout group for
 	 * @param groupID
 	 *            a unique groupID for the GraphicalEditParts
-	 * @see KimlGMFLayoutHintHelper#setLayoutGroup(GraphicalEditPart, String)
 	 */
 	public static void setLayoutGroup(GraphicalEditPart[] GraphicalEditParts,
 			String groupID) {
@@ -330,17 +333,15 @@ public class KimlGMFLayoutHintHelper {
 	}
 
 	/**
-	 * Wrapper function to set the layout group of a graphicalEditPart. This
+	 * Wrapper function to set the layout group of a GraphicalEditPart. This
 	 * function should always be called together with <code>setlayoutType</code>
 	 * to keep the information consistent.
 	 * 
-	 * @param GraphicalEditPart
+	 * @param graphicalEditPart
 	 *            the GraphicalEditPart to set the layout group for
 	 * @param groupID
 	 *            a string identifying the name of the group this
 	 *            GraphicalEditPart belongs to
-	 * @see KimlGMFLayoutHintHelper#setlayoutType(GraphicalEditPart, String)
-	 * @see KimlLayoutHintConstants#layoutTypes
 	 */
 	public static void setLayoutGroup(
 			final GraphicalEditPart graphicalEditPart, final String groupID) {
@@ -379,6 +380,19 @@ public class KimlGMFLayoutHintHelper {
 		}
 	}
 
+	/**
+	 * Wrapper function to set the layout hint for an array of
+	 * GraphicalEditParts.
+	 * 
+	 * @param graphicalEditParts
+	 *            Array of GraphicalEditParts to set layout hints for
+	 * @param groupID
+	 *            The unique groupID for the array of GraphicalEditParts
+	 * @param layoutType
+	 *            The layout type for the array of GraphicalEditParts
+	 * @param layouterName
+	 *            The layouter name for the array of GraphicalEditParts
+	 */
 	public static void setLayoutHint(
 			final GraphicalEditPart[] GraphicalEditParts, final String groupID,
 			final LAYOUT_TYPE layoutType, final String layouterName) {
@@ -387,6 +401,19 @@ public class KimlGMFLayoutHintHelper {
 		setLayouterName(GraphicalEditParts, layouterName);
 	}
 
+	/**
+	 * Wrapper function to set the layout hint for an ArrayList of
+	 * GraphicalEditParts.
+	 * 
+	 * @param graphicalEditParts
+	 *            ArrayList of GraphicalEditParts to set layout hints for
+	 * @param groupID
+	 *            The unique groupID for the array of GraphicalEditParts
+	 * @param layoutType
+	 *            The layout type for the array of GraphicalEditParts
+	 * @param layouterName
+	 *            The layouter name for the array of GraphicalEditParts
+	 */
 	public static void setLayoutHint(
 			final ArrayList<? extends GraphicalEditPart> GraphicalEditParts,
 			final String groupID, final LAYOUT_TYPE layoutType,
@@ -396,6 +423,20 @@ public class KimlGMFLayoutHintHelper {
 		setLayouterName(GraphicalEditParts, layouterName);
 	}
 
+	/**
+	 * Wrapper function to set the layout hint for all the children of a
+	 * GraphicalEditPart.
+	 * 
+	 * @param graphicalEditPart
+	 *            The GraphicalEditParts whose children should all be grouped
+	 *            together in the single grouping semantics
+	 * @param groupID
+	 *            The unique groupID for the children
+	 * @param layoutType
+	 *            The layout type for the children
+	 * @param layouterName
+	 *            The layouter name for the children
+	 */
 	public static void setChildrenLayoutHint(
 			final GraphicalEditPart graphicalEditPart, final String groupID,
 			final LAYOUT_TYPE layoutType, final String layouterName) {
@@ -418,9 +459,9 @@ public class KimlGMFLayoutHintHelper {
 	/**
 	 * Wrapper function to set the layout <b>hint</b> of a an array of
 	 * GraphicalEditParts. The layout hint is composed of the layout group and
-	 * the layout type for this group
+	 * the layout type for this group.
 	 * 
-	 * @param GraphicalEditParts
+	 * @param graphicalEditParts
 	 *            the array of GraphicalEditParts to set the layout type for
 	 * @param groupID
 	 *            a string identifying the name of the group this
@@ -428,9 +469,6 @@ public class KimlGMFLayoutHintHelper {
 	 * @param layoutType
 	 *            a string identifying the constant of the layout type for this
 	 *            GraphicalEditPart
-	 * @see KimlGMFLayoutHintHelper#setLayoutGroup(GraphicalEditPart, String)
-	 * @see KimlGMFLayoutHintHelper#setLayoutType(GraphicalEditPart, String)
-	 * @see KimlLayoutHintConstants#layoutTypes
 	 */
 	public static void setLayoutHint(
 			final GraphicalEditPart[] GraphicalEditParts, final String groupID,
@@ -444,7 +482,7 @@ public class KimlGMFLayoutHintHelper {
 	 * GraphicalEditParts. The layout hint is composed of the layout group and
 	 * the layout type for this group
 	 * 
-	 * @param GraphicalEditParts
+	 * @param graphicalEditParts
 	 *            the ArrayList of GraphicalEditParts to set the layout type for
 	 * @param groupID
 	 *            a string identifying the name of the group this
@@ -452,9 +490,6 @@ public class KimlGMFLayoutHintHelper {
 	 * @param layoutType
 	 *            a string identifying the constant of the layout type for this
 	 *            GraphicalEditPart
-	 * @see KimlGMFLayoutHintHelper#setLayoutGroup(GraphicalEditPart, String)
-	 * @see KimlGMFLayoutHintHelper#setLayoutType(GraphicalEditPart, String)
-	 * @see KimlLayoutHintConstants#layoutTypes
 	 */
 	public static void setLayoutHint(
 			final ArrayList<? extends GraphicalEditPart> GraphicalEditParts,
@@ -468,7 +503,7 @@ public class KimlGMFLayoutHintHelper {
 	 * The layout hint is composed of the layout group and the layout type for
 	 * this group
 	 * 
-	 * @param GraphicalEditPart
+	 * @param graphicalEditPart
 	 *            the GraphicalEditPart to set the layout type for
 	 * @param groupID
 	 *            a string identifying the name of the group this
@@ -476,9 +511,6 @@ public class KimlGMFLayoutHintHelper {
 	 * @param layoutType
 	 *            a string identifying the constant of the layout type for this
 	 *            GraphicalEditPart
-	 * @see KimlGMFLayoutHintHelper#setLayoutGroup(GraphicalEditPart, String)
-	 * @see KimlGMFLayoutHintHelper#setLayoutType(GraphicalEditPart, String)
-	 * @see KimlLayoutHintConstants#layoutTypes
 	 */
 	public static void setLayoutHint(final GraphicalEditPart graphicalEditPart,
 			final String groupID, final LAYOUT_TYPE layoutType) {
@@ -496,8 +528,8 @@ public class KimlGMFLayoutHintHelper {
 	 */
 	public static void unsetLayoutHint(
 			final GraphicalEditPart[] GraphicalEditParts) {
-		for (GraphicalEditPart snep : GraphicalEditParts) {
-			unsetLayoutHint(snep);
+		for (GraphicalEditPart editPart : GraphicalEditParts) {
+			unsetLayoutHint(editPart);
 		}
 	}
 
@@ -511,21 +543,19 @@ public class KimlGMFLayoutHintHelper {
 	 * @param GraphicalEditParts
 	 *            the ArrayList of GraphicalEditParts to unset the layout type
 	 *            for
-	 * 
-	 * @see KimlGMFLayoutHintHelper#unsetLayouthint(GraphicalEditPart)
 	 */
 	public static void unsetLayoutHint(
 			final ArrayList<? extends GraphicalEditPart> GraphicalEditParts) {
-		for (GraphicalEditPart snep : GraphicalEditParts) {
-			unsetLayoutHint(snep);
+		for (GraphicalEditPart editPart : GraphicalEditParts) {
+			unsetLayoutHint(editPart);
 		}
 	}
 
 	/**
-	 * Wrapper function to unset the layout <b>hint</b> of a graphicalEditPart.
+	 * Wrapper function to unset the layout <b>hint</b> of a GraphicalEditPart.
 	 * 
-	 * @param GraphicalEditPart
-	 *            the GraphicalEditPart to unset the layout type for
+	 * @param graphicalEditPart
+	 *            the GraphicalEditPart to unset the layout hint for
 	 */
 	public static void unsetLayoutHint(final GraphicalEditPart graphicalEditPart) {
 
@@ -590,11 +620,11 @@ public class KimlGMFLayoutHintHelper {
 	 * nevertheless initialized. The argument itself will <B>be</b> included in
 	 * the returned list, <b>if</b> the element is grouped.
 	 * 
-	 * @param GraphicalEditPart
+	 * @param graphicalEditPart
 	 *            the GraphicalEditPart of which the layout group members should
 	 *            be returned
 	 * @return an ArrayList of the GraphicalEditParts belonging to this group,
-	 *         the argument itself will <b>be</b>in this group, empty list if
+	 *         the argument itself will <b>be</b> in this group, empty list if
 	 *         not grouped
 	 */
 	public static ArrayList<GraphicalEditPart> getGroupMembersByElement(
@@ -630,7 +660,8 @@ public class KimlGMFLayoutHintHelper {
 	 * @param groupID
 	 *            GraphicalEditPart of which the layout group members should be
 	 *            returned
-	 * @return an ArrayList of the GraphicalEditParts belonging to this group
+	 * @return A possibly empty ArrayList of the GraphicalEditParts belonging to
+	 *         this group
 	 */
 	public static ArrayList<GraphicalEditPart> getGroupMembersByGroupID(
 			CompartmentEditPart compartmentEditPart, String groupID) {
@@ -657,7 +688,6 @@ public class KimlGMFLayoutHintHelper {
 	 *            an ArrayList of GraphicalEditParts
 	 * @return a unique id serving as a group identifier for the selected
 	 *         GraphicalEditParts
-	 * @see KimlGMFLayoutHintHelper#generateLayoutGroupID(ArrayList, String)
 	 */
 	public static String generateLayoutGroupID(
 			ArrayList<? extends GraphicalEditPart> graphicalEditParts) {
@@ -668,7 +698,7 @@ public class KimlGMFLayoutHintHelper {
 	 * Generates and returns a unique ID which should be used as an identifier
 	 * for a layout group
 	 * 
-	 * @param GraphicalEditParts
+	 * @param graphicalEditParts
 	 *            an ArrayList of GraphicalEditParts
 	 * @param suggestion
 	 *            a String which can be used to generate a more readable groupID
@@ -687,47 +717,42 @@ public class KimlGMFLayoutHintHelper {
 			return suggestion;
 	}
 
-	// =======================================================================
-	// //
-	// ================ GROUP CONTAINED ELEMENTS =============================
-	// //
-	// =======================================================================
-	// //
+	// ===================================================================== //
+	// ================ GROUP CONTAINED ELEMENTS =========================== //
+	// ===================================================================== //
 
 	/**
-	 * Returns the layouter name for this ShapeNodeEditPart, is a plain String.
+	 * Returns the layouter name for this GraphicalEditPart, is a plain String.
 	 * 
-	 * @param shapeNodeEditPart
-	 *            the ShapeNodeEditPart to retrieve the layout type for
+	 * @param graphicalEditPart
+	 *            the GraphicalEditPart to retrieve the layout type for
 	 * @return the layouter name
 	 */
 	public static String getContainedElementsLayouterName(
-			GraphicalEditPart shapeNodeEditPart) {
+			GraphicalEditPart graphicalEditPart) {
 
-		StringValueStyle subElementsLayouterNameStyle = (StringValueStyle) (shapeNodeEditPart
+		StringValueStyle subElementsLayouterNameStyle = (StringValueStyle) (graphicalEditPart
 				.getNotationView().getNamedStyle(NotationPackage.eINSTANCE
 				.getStringValueStyle(), CONTAINED_ELEMENTS_LAYOUTER_NAME_STYLE));
 
-		// if property not available, return empty string
+		/* if property not available, return empty string */
 		if (subElementsLayouterNameStyle == null) {
 			return "";
-			// return stored model/notation value
-		} else {
+		}
+		/* return stored model/notation value */
+		else {
 			return subElementsLayouterNameStyle.getStringValue();
 		}
 	}
 
 	/**
-	 * Wrapper function to set the layouter name of a graphicalEditPart. This
-	 * function should always be called together with
-	 * <code>setLayoutGroup</code> and <code>setLayoutType</code> to keep the
-	 * information consistent.
+	 * Wrapper function to set the layouter name of a GraphicalEditPart.
 	 * 
 	 * @param GraphicalEditPart
-	 *            the GraphicalEditPart to set the layout type for
+	 *            The GraphicalEditPart to set the layout type for
 	 * @param layouterName
-	 *            he name of a layouter which should render these EditParts
-	 * @see KimlGMFLayoutHintHelper#setLayoutGroup(GraphicalEditPart, String)
+	 *            The name of a layouter which should render the sub elements of
+	 *            this EditPart
 	 */
 	public static void setContainedElementsLayouterName(
 			final GraphicalEditPart graphicalEditPart, final String layouterName) {
@@ -769,15 +794,11 @@ public class KimlGMFLayoutHintHelper {
 	}
 
 	/**
-	 * Returns the name of the layout hint for this GraphicalEditPart, is a
-	 * constant declared in KimlLayoutHintConstants, and will be
-	 * <code>KimlLayoutHintConstants.NONE</code>, if this GraphicalEditPart does
-	 * not have a hint yet or if the hint was invalid
+	 * Returns the layout type for this GraphicalEditPart.
 	 * 
-	 * @param GraphicalEditPart
-	 *            the GraphicalEditPart to retrieve the layout type for
-	 * @return the layoutType if available, or
-	 *         <code>KimlLayoutHintConstants.NONE</code> if not
+	 * @param graphicalEditPart
+	 *            The GraphicalEditPart to retrieve the layout type for
+	 * @return The layoutType
 	 */
 	public static LAYOUT_TYPE getContainedElementsLayoutType(
 			GraphicalEditPart graphicalEditPart) {
@@ -799,17 +820,12 @@ public class KimlGMFLayoutHintHelper {
 	}
 
 	/**
-	 * Wrapper function to set the layout type of a graphicalEditPart. This
-	 * function should always be called together with
-	 * <code>setLayoutGroup</code> to keep the information consistent.
+	 * Wrapper function to set the layout type of a GraphicalEditPart.
 	 * 
-	 * @param GraphicalEditPart
+	 * @param graphicalEditPart
 	 *            the GraphicalEditPart to set the layout type for
 	 * @param layoutType
-	 *            a string identifying the constant of the layout type for this
-	 *            GraphicalEditPart
-	 * @see KimlGMFLayoutHintHelper#setLayoutGroup(GraphicalEditPart, String)
-	 * @see KimlLayoutHintConstants#layoutTypes
+	 *            The layoutType
 	 */
 	public static void setContainedElementsLayoutType(
 			final GraphicalEditPart graphicalEditPart,
@@ -850,6 +866,17 @@ public class KimlGMFLayoutHintHelper {
 		}
 	}
 
+	/**
+	 * Wrapper function to set the layout <b>hint</b> of a GraphicalEditPart,
+	 * respective its subelements.
+	 * 
+	 * @param graphicalEditPart
+	 *            The GraphicalEditPart to set the layout hint for
+	 * @param layoutType
+	 *            The layoutType
+	 * @param layouterName
+	 *            The layouter name
+	 */
 	public static void setContainedElementsLayoutHint(
 			final GraphicalEditPart graphicalEditPart,
 			final LAYOUT_TYPE layoutType, final String layouterName) {
@@ -858,10 +885,10 @@ public class KimlGMFLayoutHintHelper {
 	}
 
 	/**
-	 * Wrapper function to unset the layout <b>hint</b> of a graphicalEditPart.
+	 * Wrapper function to unset the layout <b>hint</b> of a GraphicalEditPart.
 	 * 
 	 * @param GraphicalEditPart
-	 *            the GraphicalEditPart to unset the layout type for
+	 *            The GraphicalEditPart to unset the layout type for
 	 */
 	public static void unsetContainedElementsLayoutHint(
 			final GraphicalEditPart graphicalEditPart) {
@@ -887,6 +914,12 @@ public class KimlGMFLayoutHintHelper {
 		}
 	}
 
+	/**
+	 * Convenience function to remove all layout hints from a model.
+	 * 
+	 * @param graphicalEditPart
+	 *            Any GraphicalEditPart of the diagram to clean
+	 */
 	public static void unsetAllContainedElementsLayoutHints(
 			final GraphicalEditPart graphicalEditPart) {
 		GraphicalViewer viewer = (GraphicalViewer) graphicalEditPart
@@ -899,17 +932,31 @@ public class KimlGMFLayoutHintHelper {
 		}
 	}
 
+	/**
+	 * Convenience function to set layout hints to all elements of a
+	 * model/diagram.
+	 * 
+	 * @param graphicalEditPart
+	 *            Any GraphicalEditPart of the diagram to process
+	 * @param layoutType
+	 *            The layoutType
+	 * @param layouterName
+	 *            The layouter to use
+	 */
 	public static void setAllContainedElementsLayoutHints(
 			final GraphicalEditPart graphicalEditPart,
 			final LAYOUT_TYPE layoutType, final String layouterName) {
-		
+
 		GraphicalViewer viewer = (GraphicalViewer) graphicalEditPart
 				.getViewer();
 
-		setContainedElementsLayoutHint(graphicalEditPart, layoutType, layouterName);
+		setContainedElementsLayoutHint(graphicalEditPart, layoutType,
+				layouterName);
 		for (Object shapeNodeEditPart : viewer.getEditPartRegistry().values()) {
 			if (shapeNodeEditPart instanceof ShapeNodeEditPart) {
-				setContainedElementsLayoutHint((ShapeNodeEditPart) shapeNodeEditPart, layoutType, layouterName);
+				setContainedElementsLayoutHint(
+						(ShapeNodeEditPart) shapeNodeEditPart, layoutType,
+						layouterName);
 			}
 		}
 	}

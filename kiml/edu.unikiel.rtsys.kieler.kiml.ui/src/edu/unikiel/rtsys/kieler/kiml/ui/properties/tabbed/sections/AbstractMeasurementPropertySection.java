@@ -1,14 +1,4 @@
 /*******************************************************************************
- * Copyright (c) 2008 Real-Time and Embedded Systems group
- *
- * INSERT LICENCE HERE
- *
- *
- * Author: Arne Schipper, ars@informatik.uni-kiel.de 
- *
- *******************************************************************************/
-package edu.unikiel.rtsys.kieler.kiml.ui.properties.tabbed.sections;
-/*******************************************************************************
  * Copyright (c) 2006 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -18,6 +8,7 @@ package edu.unikiel.rtsys.kieler.kiml.ui.properties.tabbed.sections;
  * Contributors:
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
+package edu.unikiel.rtsys.kieler.kiml.ui.properties.tabbed.sections;
 
 import java.util.Iterator;
 
@@ -43,8 +34,8 @@ import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
  * 
  * @author Anthony Hunter
  */
-public abstract class AbstractMeasurementPropertySection
-	extends AbstractIntegerPropertySection {
+public abstract class AbstractMeasurementPropertySection extends
+		AbstractIntegerPropertySection {
 
 	/**
 	 * the left radio button for the section.
@@ -64,22 +55,22 @@ public abstract class AbstractMeasurementPropertySection
 			TabbedPropertySheetPage aTabbedPropertySheetPage) {
 		super.createControls(parent, aTabbedPropertySheetPage);
 		Composite composite = getWidgetFactory()
-			.createFlatFormComposite(parent);
+				.createFlatFormComposite(parent);
 
 		String[] labels = getEnumerationLabels();
 
 		radioLeft = getWidgetFactory().createButton(composite, labels[0],
-			SWT.RADIO);
+				SWT.RADIO);
 		FormData data = new FormData();
 		data.left = new FormAttachment(0, 0);
 		data.top = new FormAttachment(0, ITabbedPropertyConstants.VSPACE);
 		radioLeft.setLayoutData(data);
 
 		radioRight = getWidgetFactory().createButton(composite, labels[1],
-			SWT.RADIO);
+				SWT.RADIO);
 		data = new FormData();
 		data.left = new FormAttachment(radioLeft,
-			ITabbedPropertyConstants.HSPACE);
+				ITabbedPropertyConstants.HSPACE);
 		data.right = new FormAttachment(100, 0);
 		data.top = new FormAttachment(0, ITabbedPropertyConstants.VSPACE);
 		radioRight.setLayoutData(data);
@@ -118,15 +109,15 @@ public abstract class AbstractMeasurementPropertySection
 			if (eObjectList.size() == 1) {
 				/* apply the property change to single selected object */
 				editingDomain.getCommandStack().execute(
-					SetCommand.create(editingDomain, eObject,
-						getEnumerationFeature(), value));
+						SetCommand.create(editingDomain, eObject,
+								getEnumerationFeature(), value));
 			} else {
 				CompoundCommand compoundCommand = new CompoundCommand();
 				/* apply the property change to all selected elements */
-				for (Iterator i = eObjectList.iterator(); i.hasNext();) {
-					EObject nextObject = (EObject) i.next();
+				for (Iterator<EObject> i = eObjectList.iterator(); i.hasNext();) {
+					EObject nextObject = i.next();
 					compoundCommand.append(SetCommand.create(editingDomain,
-						nextObject, getEnumerationFeature(), value));
+							nextObject, getEnumerationFeature(), value));
 				}
 				editingDomain.getCommandStack().execute(compoundCommand);
 			}
@@ -154,8 +145,8 @@ public abstract class AbstractMeasurementPropertySection
 	 * 
 	 * @param index
 	 *            the new index in the enumeration.
-	 * @return <code>true</code> if the new index value is equal to the
-	 *         current property setting.
+	 * @return <code>true</code> if the new index value is equal to the current
+	 *         property setting.
 	 */
 	protected abstract boolean isEnumerationEqual(int index);
 

@@ -1,14 +1,4 @@
 /*******************************************************************************
- * Copyright (c) 2008 Real-Time and Embedded Systems group
- *
- * INSERT LICENCE HERE
- *
- *
- * Author: Arne Schipper, ars@informatik.uni-kiel.de 
- *
- *******************************************************************************/
-package edu.unikiel.rtsys.kieler.kiml.ui.properties.tabbed.sections;
-/*******************************************************************************
  * Copyright (c) 2006 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -18,6 +8,7 @@ package edu.unikiel.rtsys.kieler.kiml.ui.properties.tabbed.sections;
  * Contributors:
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
+package edu.unikiel.rtsys.kieler.kiml.ui.properties.tabbed.sections;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Control;

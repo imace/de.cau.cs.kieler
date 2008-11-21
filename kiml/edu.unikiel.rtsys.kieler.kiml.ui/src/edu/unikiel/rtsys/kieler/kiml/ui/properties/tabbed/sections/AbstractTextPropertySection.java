@@ -1,14 +1,4 @@
 /*******************************************************************************
- * Copyright (c) 2008 Real-Time and Embedded Systems group
- *
- * INSERT LICENCE HERE
- *
- *
- * Author: Arne Schipper, ars@informatik.uni-kiel.de 
- *
- *******************************************************************************/
-package edu.unikiel.rtsys.kieler.kiml.ui.properties.tabbed.sections;
-/*******************************************************************************
  * Copyright (c) 2006 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -18,6 +8,7 @@ package edu.unikiel.rtsys.kieler.kiml.ui.properties.tabbed.sections;
  * Contributors:
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
+package edu.unikiel.rtsys.kieler.kiml.ui.properties.tabbed.sections;
 
 import java.util.Iterator;
 
@@ -41,8 +32,8 @@ import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
  * 
  * @author Anthony Hunter
  */
-public abstract class AbstractTextPropertySection
-	extends AbstractKimlPropertySection {
+public abstract class AbstractTextPropertySection extends
+		AbstractKimlPropertySection {
 
 	/**
 	 * the text control for the section.
@@ -63,19 +54,19 @@ public abstract class AbstractTextPropertySection
 			TabbedPropertySheetPage tabbedPropertySheetPage) {
 		super.createControls(parent, tabbedPropertySheetPage);
 		Composite composite = getWidgetFactory()
-			.createFlatFormComposite(parent);
+				.createFlatFormComposite(parent);
 		FormData data;
 
 		text = getWidgetFactory().createText(composite, ""); //$NON-NLS-1$
 		data = new FormData();
 		data.left = new FormAttachment(0, getStandardLabelWidth(composite,
-			new String[] {getLabelText()}));
+				new String[] { getLabelText() }));
 		data.right = new FormAttachment(100, 0);
 		data.top = new FormAttachment(0, ITabbedPropertyConstants.VSPACE);
 		text.setLayoutData(data);
 
 		CLabel nameLabel = getWidgetFactory().createCLabel(composite,
-			getLabelText());
+				getLabelText());
 		data = new FormData();
 		data.left = new FormAttachment(0, 0);
 		data.right = new FormAttachment(text, -ITabbedPropertyConstants.HSPACE);
@@ -104,15 +95,15 @@ public abstract class AbstractTextPropertySection
 			if (eObjectList.size() == 1) {
 				/* apply the property change to single selected object */
 				editingDomain.getCommandStack().execute(
-					SetCommand.create(editingDomain, eObject, getFeature(),
-						value));
+						SetCommand.create(editingDomain, eObject, getFeature(),
+								value));
 			} else {
 				CompoundCommand compoundCommand = new CompoundCommand();
 				/* apply the property change to all selected elements */
-				for (Iterator i = eObjectList.iterator(); i.hasNext();) {
-					EObject nextObject = (EObject) i.next();
+				for (Iterator<EObject> i = eObjectList.iterator(); i.hasNext();) {
+					EObject nextObject = i.next();
 					compoundCommand.append(SetCommand.create(editingDomain,
-						nextObject, getFeature(), value));
+							nextObject, getFeature(), value));
 				}
 				editingDomain.getCommandStack().execute(compoundCommand);
 			}
@@ -120,7 +111,9 @@ public abstract class AbstractTextPropertySection
 	}
 
 	/*
-	 * @see org.eclipse.ui.views.properties.tabbed.view.ITabbedPropertySection#refresh()
+	 * @see
+	 * org.eclipse.ui.views.properties.tabbed.view.ITabbedPropertySection#refresh
+	 * ()
 	 */
 	public void refresh() {
 		text.setText(getFeatureAsText());
@@ -132,8 +125,8 @@ public abstract class AbstractTextPropertySection
 	 * 
 	 * @param newText
 	 *            the new string value.
-	 * @return <code>true</code> if the new string value is equal to the
-	 *         current property setting.
+	 * @return <code>true</code> if the new string value is equal to the current
+	 *         property setting.
 	 */
 	protected abstract boolean isEqual(String newText);
 

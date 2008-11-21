@@ -70,7 +70,9 @@ import edu.unikiel.rtsys.kieler.kiml.ui.preferences.PreferenceConstants;
 /**
  * The diagram layouter for all general types of GMF Diagrams for which no
  * special layouter was registered through the <code>kimlDiagramLayouter</code>
- * extension point. This class implements the methods of the
+ * extension point. 
+ * <p/>
+ * This class implements the methods of the
  * {@link KimlAbstractLayouter} to perform the translation of a GMF diagram, or
  * parts thereof, to the {@link KLayoutGraph} and back, as well as some setup
  * functions.
@@ -329,6 +331,10 @@ public class KimlGenericDiagramLayouter extends KimlAbstractLayouter {
 							.kPoint2Point(edgeLabel.getLabelLayout()
 									.getLocation()),
 							sourceEditPart.getFigure(), connectionLayer);
+					/* let GMF handle label if no new location provided */
+					if (newLocation.equals(new Point())){
+						newLocation = labelEditPart.getReferencePoint();
+					}
 				}
 
 				/* create move request */

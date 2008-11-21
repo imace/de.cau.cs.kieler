@@ -16,6 +16,8 @@ import edu.unikiel.rtsys.kieler.kiml.ui.KimlUiPlugin;
 
 /**
  * Class used to initialize default preference values.
+ * 
+ * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
  */
 public class PreferenceInitializer extends AbstractPreferenceInitializer {
 

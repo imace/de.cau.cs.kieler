@@ -21,22 +21,44 @@ import org.eclipse.ui.menus.CommandContributionItemParameter;
 import edu.unikiel.rtsys.kieler.kiml.layout.services.DiagramLayouters;
 import edu.unikiel.rtsys.kieler.kiml.layout.util.KimlLayoutPreferenceConstants;
 
+
+/**
+ * Contributes to context and other menus. Returns just menu entries when the
+ * grouping functionality of the respective diagram layouter is desired.
+ * 
+ * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
+ * @see DiagramLayouters
+ */
 public class ContributionItemGroupFunctions extends CompoundContributionItem {
 
-	// must be the same String as defined in the plugin.xml under the command
+	/* must be the same String as defined in the plugin.xml under the command */
 	public static final String HIGHLIGHT_GROUP_MEMBERS = "edu.unikiel.rtsys.kieler.kiml.ui.command.highlightGroupMembers";
 	public static final String SELECT_GROUP_MEMBERS = "edu.unikiel.rtsys.kieler.kiml.ui.command.selectGroupMembers";
 	public static final String UNGROUP_ELEMENTS = "edu.unikiel.rtsys.kieler.kiml.ui.command.ungroupElements";
 
+	/**
+	 * Returns all the items to display in the respective context menu. Should be
+	 * bound to a certain menu in the plugin.xml file.
+	 * 
+	 * @see org.eclipse.ui.actions.CompoundContributionItem#getContributionItems()
+	 */
 	protected IContributionItem[] getContributionItems() {
 
 		ArrayList<IContributionItem> contribItems = new ArrayList<IContributionItem>();
 
 		String editorId = PlatformUI.getWorkbench().getActiveWorkbenchWindow()
 				.getActivePage().getActiveEditor().getEditorSite().getId();
-		if (Boolean.parseBoolean(DiagramLayouters.getInstance()
-				.getDiagramLayouter(editorId).getSettings()
-				.get(
+
+		/*
+		 * show the grouping functions only if the diagram layouter can handle groups
+		 * other than complete compartments
+		 */
+		if (Boolean
+				.parseBoolean(DiagramLayouters
+						.getInstance()
+						.getDiagramLayouter(editorId)
+						.getSettings()
+						.get(
 								KimlLayoutPreferenceConstants.PREF_GROUP_EVERY_SINGLE_ELEMENT))) {
 
 			/* separator */
@@ -71,12 +93,4 @@ public class ContributionItemGroupFunctions extends CompoundContributionItem {
 		}
 		return contribItems.toArray(new IContributionItem[] {});
 	}
-
-	public ContributionItemGroupFunctions() {
-	}
-
-	public ContributionItemGroupFunctions(String id) {
-		super(id);
-	}
-
 }

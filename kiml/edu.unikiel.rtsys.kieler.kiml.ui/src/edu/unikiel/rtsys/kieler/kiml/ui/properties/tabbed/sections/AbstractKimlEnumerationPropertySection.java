@@ -1,13 +1,17 @@
 /*******************************************************************************
- * Copyright (c) 2008 Real-Time and Embedded Systems group
- *
- * INSERT LICENCE HERE
- *
- *
- * Author: Arne Schipper, ars@informatik.uni-kiel.de 
- *
+ * Copyright (c) 2006 IBM Corporation and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ *     IBM Corporation - initial API and implementation
+ *     Real-Time and Embedded Systems group, CAU Kiel, Arne Schipper 
+ *                     - adjustments
  *******************************************************************************/
 package edu.unikiel.rtsys.kieler.kiml.ui.properties.tabbed.sections;
+
 import java.util.Iterator;
 
 import org.eclipse.emf.common.command.CompoundCommand;
@@ -26,6 +30,13 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.views.properties.tabbed.ITabbedPropertyConstants;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 
+/**
+ * The Kiml adaption of an abstract implementation of a section with an
+ * enumeration.
+ * 
+ * @author Anthony Hunter
+ * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
+ */
 public abstract class AbstractKimlEnumerationPropertySection extends
 		AbstractKimlPropertySection {
 	/**
@@ -41,19 +52,19 @@ public abstract class AbstractKimlEnumerationPropertySection extends
 			TabbedPropertySheetPage aTabbedPropertySheetPage) {
 		super.createControls(parent, aTabbedPropertySheetPage);
 		Composite composite = getWidgetFactory()
-			.createFlatFormComposite(parent);
+				.createFlatFormComposite(parent);
 		FormData data;
 
-		combo = getWidgetFactory().createCCombo(composite); 
+		combo = getWidgetFactory().createCCombo(composite);
 		data = new FormData();
 		data.left = new FormAttachment(0, getStandardLabelWidth(composite,
-			new String[] {getLabelText()}));
+				new String[] { getLabelText() }));
 		data.right = new FormAttachment(50, 0);
 		data.top = new FormAttachment(0, ITabbedPropertyConstants.VSPACE);
 		combo.setLayoutData(data);
 
 		CLabel nameLabel = getWidgetFactory().createCLabel(composite,
-			getLabelText());
+				getLabelText());
 		data = new FormData();
 		data.left = new FormAttachment(0, 0);
 		data.right = new FormAttachment(combo, -ITabbedPropertyConstants.HSPACE);
@@ -81,15 +92,15 @@ public abstract class AbstractKimlEnumerationPropertySection extends
 			if (eObjectList.size() == 1) {
 				/* apply the property change to single selected object */
 				editingDomain.getCommandStack().execute(
-					SetCommand.create(editingDomain, eObject, getFeature(),
-						value));
+						SetCommand.create(editingDomain, eObject, getFeature(),
+								value));
 			} else {
 				CompoundCommand compoundCommand = new CompoundCommand();
 				/* apply the property change to all selected elements */
 				for (Iterator<EObject> i = eObjectList.iterator(); i.hasNext();) {
 					EObject nextObject = i.next();
 					compoundCommand.append(SetCommand.create(editingDomain,
-						nextObject, getFeature(), value));
+							nextObject, getFeature(), value));
 				}
 				editingDomain.getCommandStack().execute(compoundCommand);
 			}
@@ -110,8 +121,8 @@ public abstract class AbstractKimlEnumerationPropertySection extends
 	 * 
 	 * @param index
 	 *            the new index in the enumeration.
-	 * @return <code>true</code> if the new index value is equal to the
-	 *         current property setting.
+	 * @return <code>true</code> if the new index value is equal to the current
+	 *         property setting.
 	 */
 	protected abstract boolean isEqual(int index);
 

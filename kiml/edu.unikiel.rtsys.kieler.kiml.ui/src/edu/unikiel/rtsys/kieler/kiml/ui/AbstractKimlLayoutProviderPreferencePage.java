@@ -24,17 +24,43 @@ import org.eclipse.swt.widgets.Label;
 import edu.unikiel.rtsys.kieler.kiml.layout.services.KimlAbstractLayoutProvider;
 import edu.unikiel.rtsys.kieler.kiml.layout.services.LayoutProviders;
 
+/**
+ * Provides means to build up easily a preference page for each layout provider
+ * collection someone wants to contribute. Adds checkboxes for every single
+ * layout provider of a layout provider collection to enable and disable them.
+ * The respective status is then passed to the LayoutProvider singleton, which
+ * makes it then available to the whole system.
+ * 
+ * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
+ * @see LayoutProviders
+ */
 public abstract class AbstractKimlLayoutProviderPreferencePage extends
 		FieldEditorPreferencePage {
 
 	private String LAYOUT_PROVIDER_COLLECTION_ID = null;
 
+	/**
+	 * Constructor which should be called with the Collection ID to be able to
+	 * fetch the correct layout providers later on
+	 */
 	public AbstractKimlLayoutProviderPreferencePage(String collectionID,
 			int grid) {
 		super(grid);
 		LAYOUT_PROVIDER_COLLECTION_ID = collectionID;
 	}
 
+	/**
+	 * Creates add adds the status FieldEditor for every layout provider this
+	 * layout provider collection provides. The concrete layout providers of
+	 * this collection are read out from the {@link LayoutProviders} singleton.
+	 * Implementing classes should call this method first via
+	 * <code>super.createFiedEditors</code> in their own implementation of
+	 * <code>createFiedEditors</code>
+	 * 
+	 * @see org.eclipse.jface.preference.FieldEditorPreferencePage#createFieldEditors
+	 *      ()
+	 * @see LayoutProviders
+	 */
 	protected void createFieldEditors() {
 		ArrayList<FieldEditor> editorsToAdd = createLayouterTable(this
 				.getFieldEditorParent(), LayoutProviders.getInstance()
@@ -44,6 +70,16 @@ public abstract class AbstractKimlLayoutProviderPreferencePage extends
 		}
 	}
 
+	/**
+	 * Creates the checkboxes for every layouter this layout provider passed.
+	 * 
+	 * @param parent
+	 *            The parent composite where to add the controls.
+	 * @param layoutProviders
+	 *            A list of layout providers
+	 * @return A list of field editors which must be added to a preference page
+	 *         afterwards
+	 */
 	protected ArrayList<FieldEditor> createLayouterTable(Composite parent,
 			ArrayList<KimlAbstractLayoutProvider> layoutProviders) {
 		ArrayList<FieldEditor> createdFieldEditors = new ArrayList<FieldEditor>();
@@ -81,6 +117,16 @@ public abstract class AbstractKimlLayoutProviderPreferencePage extends
 		return createdFieldEditors;
 	}
 
+	/**
+	 * Override the <code>performOk</code> method of the superclass. The
+	 * <code>performOk</code> method is called when clicking on <i>Apply</i>
+	 * or<i>OK</i> in the preference page window. This function intercepts the
+	 * call to do some additional processing; that is to inform the
+	 * {@link LayoutProviders} singleton about the changes of the respective
+	 * layout provider status.
+	 * 
+	 * @see org.eclipse.jface.preference.FieldEditorPreferencePage#performOk()
+	 */
 	@Override
 	public boolean performOk() {
 		boolean retVal = super.performOk();

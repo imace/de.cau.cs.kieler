@@ -37,13 +37,27 @@ import edu.unikiel.rtsys.kieler.kiml.layout.services.DiagramLayouters;
 import edu.unikiel.rtsys.kieler.kiml.layout.services.LayoutProviders;
 import edu.unikiel.rtsys.kieler.kiml.ui.helpers.KimlGMFLayoutHintHelper;
 
+/**
+ * The section displaying the Kiml Layout Hints in a tab in the properties view.
+ * Information about the currently selected object is available and layout
+ * functions can be triggered on this object.
+ * 
+ * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
+ */
 public class KimlLayoutTypePropertySection extends
 		AbstractKimlEnumerationPropertySection {
 
+	/* the three buttons */
 	Button apply;
 	Button removeAllHints;
 	Button applyToAll;
 
+	/**
+	 * Creates the actual property section.
+	 * 
+	 * @see edu.unikiel.rtsys.kieler.kiml.ui.properties.tabbed.sections.AbstractKimlEnumerationPropertySection#createControls(org.eclipse.swt.widgets.Composite,
+	 *      org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage)
+	 */
 	public void createControls(Composite parent,
 			TabbedPropertySheetPage aTabbedPropertySheetPage) {
 
@@ -104,6 +118,9 @@ public class KimlLayoutTypePropertySection extends
 
 	}
 
+	/**
+	 * Handles the removal of layout hints.
+	 */
 	private void handleRemoveAllHints() {
 		if (eObjectList.size() == 1) {
 			KimlGMFLayoutHintHelper.unsetAllContainedElementsLayoutHints(e2Gep
@@ -113,6 +130,10 @@ public class KimlLayoutTypePropertySection extends
 		}
 	}
 
+	/**
+	 * Handles the application of the selected layout hint to all elements in
+	 * the diagram.
+	 */
 	private void handleApplyToAll() {
 		int index = combo.getSelectionIndex();
 
@@ -143,6 +164,9 @@ public class KimlLayoutTypePropertySection extends
 		}
 	}
 
+	/**
+	 * Handles the application of the layout hint to the selected element.
+	 */
 	private void handleApply() {
 		int index = combo.getSelectionIndex();
 
@@ -174,6 +198,9 @@ public class KimlLayoutTypePropertySection extends
 		}
 	}
 
+	/**
+	 * Is called when the layout hint was changed and performs a new layout.
+	 */
 	private void performLayout() {
 		String editorID = PlatformUI.getWorkbench().getActiveWorkbenchWindow()
 				.getActivePage().getActiveEditor().getEditorSite().getId();
@@ -255,6 +282,8 @@ public class KimlLayoutTypePropertySection extends
 	}
 
 	/**
+	 * Fetches the values (Strings) to display in the Combobox.
+	 * 
 	 * @see org.eclipse.ui.examples.views.properties.tabbed.hockeyleague.ui.properties.sections.AbstractEnumerationPropertySection#getEnumerationFeatureValues()
 	 */
 	protected String[] getEnumerationFeatureValues() {

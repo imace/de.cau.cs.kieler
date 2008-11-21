@@ -35,17 +35,30 @@ import edu.unikiel.rtsys.kieler.kiml.ui.ContributionItemLayoutAs;
 import edu.unikiel.rtsys.kieler.kiml.ui.helpers.KimlGMFLayoutHintHelper;
 
 /**
- * The handler which is responsible for the functions to group the selected
- * elements. At the moment, this covers the following functions:
- * <ul>
- * <li>...</li>
- * </ul>
+ * The handler which is responsible for the functions that concern grouping of
+ * single elements within a compartment. Handler is called when executing
+ * a command. This is set in the plugin.xml file. The commands can only be
+ * issued through a menu, when the grouping of single elements is enabled. 
  * 
  * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
+ * @see LayoutAsHandler
+ * @see ContributionItemGroupFunctions
+ * @see GroupFunctionHandler
+ * @see KimlLayoutHintView
+ * @deprecated This method was introduced to support grouping of single elements
+ *             within one compartment. It should be moved/changed to a somehow
+ *             better place and name and the implementation is about to change.
+ *             Full support for laying out (and grouping) is given in
+ *             {@link LayoutAsHandler}. Though this just works with <b>all</b>
+ *             elements of a compartment as a whole, this is in most cases what
+ *             you want.
  * 
  */
 public class GroupAsHandler extends AbstractHandler implements IHandler {
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.core.commands.AbstractHandler#execute(org.eclipse.core.commands.ExecutionEvent)
+	 */
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 
 		/*
@@ -117,8 +130,11 @@ public class GroupAsHandler extends AbstractHandler implements IHandler {
 			 * one selected. This is an option of the DiagramLayouter, as this
 			 * Class is responsible for the translation into the KLayoutGraph.
 			 */
-			if (Boolean.parseBoolean(diagramLayouter.getSettings().get(
-					KimlLayoutPreferenceConstants.PREF_GROUP_EVERY_SINGLE_ELEMENT))) {
+			if (Boolean
+					.parseBoolean(diagramLayouter
+							.getSettings()
+							.get(
+									KimlLayoutPreferenceConstants.PREF_GROUP_EVERY_SINGLE_ELEMENT))) {
 
 				/* group every single element */
 				groupID = KimlGMFLayoutHintHelper
@@ -143,10 +159,10 @@ public class GroupAsHandler extends AbstractHandler implements IHandler {
 			} else {
 
 				/* group all elements contained in selected ones */
-				for (Object shapeNodeEditPart : selectedShapeNodeEditParts)
-				{
+				for (Object shapeNodeEditPart : selectedShapeNodeEditParts) {
 					KimlGMFLayoutHintHelper.setContainedElementsLayoutHint(
-							(ShapeNodeEditPart)shapeNodeEditPart, layoutType, layouterName);
+							(ShapeNodeEditPart) shapeNodeEditPart, layoutType,
+							layouterName);
 				}
 			}
 

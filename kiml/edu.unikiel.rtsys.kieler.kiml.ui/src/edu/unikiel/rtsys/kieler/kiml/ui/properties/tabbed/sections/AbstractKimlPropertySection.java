@@ -33,12 +33,21 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.views.properties.IPropertySource;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 
+/**
+ * An abstract implementation of a section in the properties view. The currently
+ * selected object is processed and available in a field as the EObject as well
+ * as a GraphicalEditPart. When selecting more, the respective values are saved
+ * in a HashMap.
+ * 
+ * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
+ */
 public class AbstractKimlPropertySection extends AbstractModelerPropertySection {
 
+	/* fields holding the selected objects. To be used by implementations */
 	protected ArrayList<EObject> eObjectList = new ArrayList<EObject>();
 	protected GraphicalEditPart graphicalEditPart;
-	protected HashMap<EObject,GraphicalEditPart> e2Gep = new HashMap<EObject, GraphicalEditPart>();
-	
+	protected HashMap<EObject, GraphicalEditPart> e2Gep = new HashMap<EObject, GraphicalEditPart>();
+
 	/**
 	 * @see org.eclipse.ui.views.properties.tabbed.ISection#createControls(org.eclipse.swt.widgets.Composite,
 	 *      org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage)
@@ -49,30 +58,30 @@ public class AbstractKimlPropertySection extends AbstractModelerPropertySection 
 	}
 
 	/**
-	 * @generated
+	 * Takes care of the processing of the selected element(s).
 	 */
 	public void setInput(IWorkbenchPart part, ISelection selection) {
 		eObject = null;
 		eObjectList.clear();
 		graphicalEditPart = null;
 		e2Gep.clear();
-		
+
 		if (selection.isEmpty()
 				|| false == selection instanceof StructuredSelection) {
 			super.setInput(part, selection);
 			return;
 		}
 		final StructuredSelection structuredSelection = ((StructuredSelection) selection);
-		ArrayList<Object> transformedSelection = new ArrayList<Object>(structuredSelection
-				.size());
+		ArrayList<Object> transformedSelection = new ArrayList<Object>(
+				structuredSelection.size());
 		for (Iterator it = structuredSelection.iterator(); it.hasNext();) {
 			Object next = it.next();
 			Object r = transformSelection(next);
 			if (r != null) {
 				transformedSelection.add(r);
-				if (r instanceof EObject && next instanceof GraphicalEditPart){
-					eObjectList.add((EObject)r);
-					e2Gep.put((EObject)r, (GraphicalEditPart)next);
+				if (r instanceof EObject && next instanceof GraphicalEditPart) {
+					eObjectList.add((EObject) r);
+					e2Gep.put((EObject) r, (GraphicalEditPart) next);
 				}
 			}
 		}
@@ -85,7 +94,6 @@ public class AbstractKimlPropertySection extends AbstractModelerPropertySection 
 	/**
 	 * Modify/unwrap selection.
 	 * 
-	 * @generated
 	 */
 	protected Object transformSelection(Object selected) {
 
@@ -105,6 +113,7 @@ public class AbstractKimlPropertySection extends AbstractModelerPropertySection 
 		return selected;
 	}
 
+	
 	/**
 	 * @generated
 	 */

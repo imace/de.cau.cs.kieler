@@ -13,9 +13,13 @@ import org.eclipse.ui.IFolderLayout;
 import org.eclipse.ui.IPageLayout;
 import org.eclipse.ui.IPerspectiveFactory;
 
-import edu.unikiel.rtsys.kieler.kiml.ui.views.KimlLayoutGraphView;
 import edu.unikiel.rtsys.kieler.kiml.ui.views.KimlLayoutHintView;
 
+/**
+ * Build up the special KIELER view in Eclipse.
+ *  
+ * @author <a href="mailto:haf@informatik.uni-kiel.de">Hauke Fuhrmann</a>
+ */
 public class KimlPerspectiveFactory implements IPerspectiveFactory {
 
 	@Override
@@ -35,7 +39,6 @@ public class KimlPerspectiveFactory implements IPerspectiveFactory {
 		IFolderLayout bottom = layout.createFolder("bottom", IPageLayout.BOTTOM, 0.75f, editorArea);
 		bottom.addView(IPageLayout.ID_PROP_SHEET);
 		bottom.addView(KimlLayoutHintView.ID);
-		bottom.addView(KimlLayoutGraphView.ID);
 		
 		layout.addActionSet("edu.unikiel.rtsys.kieler.kiml.ui.KimlActionSet");
 	}

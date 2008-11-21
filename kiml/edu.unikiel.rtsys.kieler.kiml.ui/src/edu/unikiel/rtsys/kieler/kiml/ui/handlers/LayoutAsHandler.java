@@ -32,20 +32,37 @@ import edu.unikiel.rtsys.kieler.kiml.layout.services.KimlAbstractLayouter;
 import edu.unikiel.rtsys.kieler.kiml.layout.services.LayoutProviders;
 import edu.unikiel.rtsys.kieler.kiml.layout.util.KimlLayoutPreferenceConstants;
 import edu.unikiel.rtsys.kieler.kiml.ui.ContributionItemLayoutAs;
+import edu.unikiel.rtsys.kieler.kiml.ui.diagramlayouter.KimlGenericDiagramLayouter;
 import edu.unikiel.rtsys.kieler.kiml.ui.helpers.KimlGMFLayoutHintHelper;
 
 /**
- * The handler which is responsible for the functions to group the selected
- * elements. At the moment, this covers the following functions:
- * <ul>
- * <li>...</li>
- * </ul>
+ * The handler which is responsible to annotate the selected element with the
+ * information how to lay out its sub elements and to trigger this.
+ * <p/>
+ * The layout process itself is also triggered to reflect the changes in the
+ * diagram. Handler is called when executing a command, which is set in the
+ * plugin.xml file. Animation is enabled.
+ * <p/>
+ * Due to the semantics of compartments, which are EditParts inside their
+ * parents and act just as an intermediate layer to hold children, special
+ * processing must be done when selecting those EditParts.
+ * <p>
+ * So if a compartment was selecting during the call to this handler, the
+ * parent of the compartment is fetched and the layout information is attached
+ * to the parent. This complies with the semantics expected by the
+ * {@link KimlAbstractLayouter}s, as for example the
+ * {@link KimlGenericDiagramLayouter}.
  * 
  * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
- * 
+ * @author <a href="mailto:msp@informatik.uni-kiel.de">Miro Spönemann</a>
+ * @see LayoutAsHandler
+ * @see ContributionItemLayoutAs
  */
 public class LayoutAsHandler extends AbstractHandler implements IHandler {
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.core.commands.AbstractHandler#execute(org.eclipse.core.commands.ExecutionEvent)
+	 */
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 
 		/*
@@ -67,10 +84,9 @@ public class LayoutAsHandler extends AbstractHandler implements IHandler {
 		if (selection != null && selection instanceof IStructuredSelection) {
 			for (Object element : ((IStructuredSelection) selection).toList()) {
 				if (element instanceof ShapeNodeEditPart)
-					selectedGraphicalEditParts.add((ShapeNodeEditPart)element);
+					selectedGraphicalEditParts.add((ShapeNodeEditPart) element);
 				else if (element instanceof DiagramEditPart) {
-					selectedGraphicalEditParts
-							.add((DiagramEditPart) element);
+					selectedGraphicalEditParts.add((DiagramEditPart) element);
 				} else if (element instanceof CompartmentEditPart) {
 					selectedCompartmentEditPart = (CompartmentEditPart) element;
 					break;
@@ -86,7 +102,8 @@ public class LayoutAsHandler extends AbstractHandler implements IHandler {
 		 * thereof, an EditPart, so fetch this.
 		 */
 		if (selectedCompartmentEditPart != null) {
-			GraphicalEditPart gep = (GraphicalEditPart) selectedCompartmentEditPart.getParent();
+			GraphicalEditPart gep = (GraphicalEditPart) selectedCompartmentEditPart
+					.getParent();
 			selectedGraphicalEditParts.clear();
 			selectedGraphicalEditParts.add(gep);
 		}
@@ -110,13 +127,16 @@ public class LayoutAsHandler extends AbstractHandler implements IHandler {
 					.getInstance().getDiagramLayouter(editorId);
 
 			/*
-			 * Check if Emma wants to layout every single element, or if she
+			 * Check if Emma wants to lay out every single element, or if she
 			 * wants to apply the layout to sub (or contained elements) of the
 			 * one selected. This is an option of the DiagramLayouter, as this
-			 * Class is responsible for the translation into the KLayoutGraph.
+			 * class is responsible for the translation into the KLayoutGraph.
 			 */
-			if (Boolean.parseBoolean(diagramLayouter.getSettings().get(
-					KimlLayoutPreferenceConstants.PREF_GROUP_EVERY_SINGLE_ELEMENT))) {
+			if (Boolean
+					.parseBoolean(diagramLayouter
+							.getSettings()
+							.get(
+									KimlLayoutPreferenceConstants.PREF_GROUP_EVERY_SINGLE_ELEMENT))) {
 
 				/* group every single element */
 				groupID = KimlGMFLayoutHintHelper
@@ -141,10 +161,10 @@ public class LayoutAsHandler extends AbstractHandler implements IHandler {
 			} else {
 
 				/* group all elements contained in selected ones */
-				for (Object shapeNodeEditPart : selectedGraphicalEditParts)
-				{
+				for (Object shapeNodeEditPart : selectedGraphicalEditParts) {
 					KimlGMFLayoutHintHelper.setContainedElementsLayoutHint(
-							(GraphicalEditPart)shapeNodeEditPart, layoutType, layouterName);
+							(GraphicalEditPart) shapeNodeEditPart, layoutType,
+							layouterName);
 				}
 			}
 

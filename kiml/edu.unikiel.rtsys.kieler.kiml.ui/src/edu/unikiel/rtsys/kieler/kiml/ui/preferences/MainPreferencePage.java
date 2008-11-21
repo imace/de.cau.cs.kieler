@@ -4,7 +4,7 @@
  * INSERT LICENCE HERE
  *
  *
- * Author: Arne Schipper, ars@informatik.uni-kiel.de 
+ * Author: Hauke Fuhrmann, haf@informatik.uni-kiel.de 
  *
  *******************************************************************************/
 package edu.unikiel.rtsys.kieler.kiml.ui.preferences;

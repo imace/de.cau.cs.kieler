@@ -19,16 +19,33 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
 import edu.unikiel.rtsys.kieler.kiml.ui.KimlUiPlugin;
+import edu.unikiel.rtsys.kieler.kiml.ui.diagramlayouter.KimlGenericDiagramLayouter;
 
-
+/**
+ * Preference Page for the GenericDiagramLayouter. May be useful to adjust some
+ * settings to get a smoother layout on a greater variety of Diagrams.
+ * 
+ * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
+ * @see KimlGenericDiagramLayouter
+ */
 public class GenericDiagramLayouterPreferencePage extends
 		FieldEditorPreferencePage implements IWorkbenchPreferencePage {
 
+	/**
+	 * Default constructor for the preference page.
+	 */
 	public GenericDiagramLayouterPreferencePage() {
 		super(GRID);
 		setPreferenceStore(KimlUiPlugin.getDefault().getPreferenceStore());
 		setDescription("Set the options for the Generic Diagram Layouter");
 	}
+
+	/**
+	 * Creates the FieldEditors for this preference page. At the moment that are
+	 * 4 fields to asjust the insets of elements.
+	 * 
+	 * @see org.eclipse.jface.preference.FieldEditorPreferencePage#createFieldEditors()
+	 */
 	@Override
 	protected void createFieldEditors() {
 		// define gl as GridLayout globally
@@ -66,8 +83,6 @@ public class GenericDiagramLayouterPreferencePage extends
 
 	@Override
 	public void init(IWorkbench arg0) {
-		// TODO Auto-generated method stub
-
 	}
 
 }

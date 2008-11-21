@@ -21,9 +21,22 @@ import org.eclipse.ui.handlers.HandlerUtil;
 
 import edu.unikiel.rtsys.kieler.kiml.layout.services.DiagramLayouters;
 import edu.unikiel.rtsys.kieler.kiml.layout.services.KimlAbstractLayouter;
+import edu.unikiel.rtsys.kieler.kiml.ui.ContributionItemLayoutAs;
 
+/**
+ * The handler which is responsible to lay out the diagram or parts thereof.
+ * <p/>
+ * According to the command provided, the handler lays out the whole diagram or
+ * just the selected part of it. Handler is called when executing a command,
+ * which is set in the plugin.xml file. Animation is enabled.
+ * 
+ * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
+ * @see LayoutAsHandler
+ * @see ContributionItemLayoutAs
+ */
 public class KimlLayoutHandler extends AbstractHandler implements IHandler {
 
+	/* must be the same String as defined in the plugin.xml under the command */
 	private static final String COMMAND_ID_LAYOUT_ALL = "edu.unikiel.rtsys.kieler.kiml.ui.command.kimlLayoutAll";
 
 	/*
@@ -55,6 +68,8 @@ public class KimlLayoutHandler extends AbstractHandler implements IHandler {
 			ISelection selection = HandlerUtil.getActiveMenuSelection(event);
 			if (selection == null)
 				selection = HandlerUtil.getCurrentSelection(event);
+
+			/* see what Emma wants to do */
 			if (selection == null
 					|| (selection instanceof IStructuredSelection && ((IStructuredSelection) selection)
 							.size() == 0)
@@ -70,7 +85,10 @@ public class KimlLayoutHandler extends AbstractHandler implements IHandler {
 				Animation.run(1000);
 			}
 		} else {
-			// TODO error handling
+			/*
+			 * TODO: error handling, actually that should not happen, as there is
+			 * the GenericDiagramLayouter
+			 */
 			System.err.println(getClass().getSimpleName()
 					+ ": No diagram layouter found for the given editor.");
 		}
