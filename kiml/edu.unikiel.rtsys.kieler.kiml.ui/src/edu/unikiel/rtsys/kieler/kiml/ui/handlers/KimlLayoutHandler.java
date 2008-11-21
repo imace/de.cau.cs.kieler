@@ -26,10 +26,6 @@ public class KimlLayoutHandler extends AbstractHandler implements IHandler {
 
 	private static final String COMMAND_ID_LAYOUT_ALL = "edu.unikiel.rtsys.kieler.kiml.ui.command.kimlLayoutAll";
 
-	public KimlLayoutHandler() {
-		super();
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * 

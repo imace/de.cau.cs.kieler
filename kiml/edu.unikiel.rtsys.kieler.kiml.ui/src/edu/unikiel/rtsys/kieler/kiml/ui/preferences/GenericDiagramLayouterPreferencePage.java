@@ -46,7 +46,7 @@ public class GenericDiagramLayouterPreferencePage extends
 				"Inset left:", insets, 3);
 		IntegerFieldEditor right = new IntegerFieldEditor(
 				PreferenceConstants.PREF_GENERIC_DIAGRAM_LAYOUTER_INSET_BOTTOM,
-				"Inset bottm:", insets, 3);
+				"Inset bottom:", insets, 3);
 		IntegerFieldEditor bottom = new IntegerFieldEditor(
 				PreferenceConstants.PREF_GENERIC_DIAGRAM_LAYOUTER_INSET_RIGHT,
 				"Inset right:", insets, 3);

@@ -62,16 +62,15 @@ public class LayoutAsHandler extends AbstractHandler implements IHandler {
 		/*
 		 * Filter out The correct GraphicalEditParts
 		 */
-		ArrayList<GraphicalEditPart> selectedShapeNodeEditParts = new ArrayList<GraphicalEditPart>();
+		ArrayList<GraphicalEditPart> selectedGraphicalEditParts = new ArrayList<GraphicalEditPart>();
 		GraphicalEditPart selectedCompartmentEditPart = null;
 		if (selection != null && selection instanceof IStructuredSelection) {
 			for (Object element : ((IStructuredSelection) selection).toList()) {
 				if (element instanceof ShapeNodeEditPart)
-					selectedShapeNodeEditParts.add((ShapeNodeEditPart) element);
+					selectedGraphicalEditParts.add((ShapeNodeEditPart)element);
 				else if (element instanceof DiagramEditPart) {
-					selectedShapeNodeEditParts
-							.add((ShapeNodeEditPart) ((DiagramEditPart) element)
-									.getChildren().get(0));
+					selectedGraphicalEditParts
+							.add((DiagramEditPart) element);
 				} else if (element instanceof CompartmentEditPart) {
 					selectedCompartmentEditPart = (CompartmentEditPart) element;
 					break;
@@ -80,17 +79,16 @@ public class LayoutAsHandler extends AbstractHandler implements IHandler {
 		}
 
 		/*
-		 * if CompartmentEditPart, fetch parent. This must be done if clicking
+		 * If CompartmentEditPart, fetch parent. This must be done if clicking
 		 * on an EditPart which may contain other EditParts. If selected such an
 		 * EditPart, the actual selection in just the therein contained
 		 * CompartmentEditPart. But the semantic equivalent is the parent
-		 * thereof, so fetch this.
+		 * thereof, an EditPart, so fetch this.
 		 */
 		if (selectedCompartmentEditPart != null) {
-			GraphicalEditPart gep = (GraphicalEditPart) selectedCompartmentEditPart
-					.getParent();
-			selectedShapeNodeEditParts.clear();
-			selectedShapeNodeEditParts.add(gep);
+			GraphicalEditPart gep = (GraphicalEditPart) selectedCompartmentEditPart.getParent();
+			selectedGraphicalEditParts.clear();
+			selectedGraphicalEditParts.add(gep);
 		}
 
 		String commandID = event.getCommand().getId();
@@ -122,31 +120,31 @@ public class LayoutAsHandler extends AbstractHandler implements IHandler {
 
 				/* group every single element */
 				groupID = KimlGMFLayoutHintHelper
-						.generateLayoutGroupID(selectedShapeNodeEditParts);
+						.generateLayoutGroupID(selectedGraphicalEditParts);
 
 				/* take care of the selection, .. */
-				if (selectedShapeNodeEditParts.size() == 1) {
+				if (selectedGraphicalEditParts.size() == 1) {
 					/*
 					 * just 1 selected, assume that Emma wants to select
 					 * subelements
 					 */
 					KimlGMFLayoutHintHelper.setChildrenLayoutHint(
-							(ShapeNodeEditPart) selectedShapeNodeEditParts
+							(ShapeNodeEditPart) selectedGraphicalEditParts
 									.get(0), groupID, layoutType, layouterName);
 				} else {
 					/* more selected, group single elements */
 					KimlGMFLayoutHintHelper.setLayoutHint(
-							selectedShapeNodeEditParts, groupID, layoutType,
+							selectedGraphicalEditParts, groupID, layoutType,
 							layouterName);
 				}
 
 			} else {
 
 				/* group all elements contained in selected ones */
-				for (Object shapeNodeEditPart : selectedShapeNodeEditParts)
+				for (Object shapeNodeEditPart : selectedGraphicalEditParts)
 				{
 					KimlGMFLayoutHintHelper.setContainedElementsLayoutHint(
-							(ShapeNodeEditPart)shapeNodeEditPart, layoutType, layouterName);
+							(GraphicalEditPart)shapeNodeEditPart, layoutType, layouterName);
 				}
 			}
 

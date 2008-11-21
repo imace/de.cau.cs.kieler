@@ -14,6 +14,9 @@ import java.util.List;
 
 import org.eclipse.draw2d.Animation;
 import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.gef.EditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.CompartmentEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
@@ -121,18 +124,19 @@ public class KimlLayoutTypePropertySection extends
 			 * directly with the type literal
 			 */
 			String stringValue = (String) value;
+			GraphicalEditPart editPart = getSemanticEditPart();
 			/* here Emma has a concrete layout provider */
 			if (stringValue.substring(0, 2).equals("  ")) {
 				LAYOUTER_INFO layouterInfo = LayoutProviders.getInstance()
 						.getLayouterInfoForLayouterName(stringValue.trim());
 				KimlGMFLayoutHintHelper.setAllContainedElementsLayoutHints(
-						e2Gep.get(eObject), layouterInfo.getLayoutType(),
-						layouterInfo.getLayouterName());
+						editPart, layouterInfo.getLayoutType(), layouterInfo
+								.getLayouterName());
 			}
 			/* she has just a layout type */
 			else {
 				KimlGMFLayoutHintHelper.setAllContainedElementsLayoutHints(
-						e2Gep.get(eObject), (LAYOUT_TYPE.get(stringValue)), "");
+						editPart, (LAYOUT_TYPE.get(stringValue)), "");
 			}
 
 			performLayout();
@@ -150,20 +154,21 @@ public class KimlLayoutTypePropertySection extends
 			 * directly with the type literal
 			 */
 			String stringValue = (String) value;
+			GraphicalEditPart editPart = getSemanticEditPart();
 			/* here Emma has a concrete layout provider */
 			if (stringValue.substring(0, 2).equals("  ")) {
 				LAYOUTER_INFO layouterInfo = LayoutProviders.getInstance()
 						.getLayouterInfoForLayouterName(stringValue.trim());
-				KimlGMFLayoutHintHelper.setContainedElementsLayoutHint(e2Gep
-						.get(eObject), layouterInfo.getLayoutType(),
-						layouterInfo.getLayouterName());
+				KimlGMFLayoutHintHelper.setContainedElementsLayoutHint(
+						editPart, layouterInfo.getLayoutType(), layouterInfo
+								.getLayouterName());
 			}
 			/* she has just a layout type */
 			else {
-				KimlGMFLayoutHintHelper.unsetContainedElementsLayoutHint(e2Gep
-						.get(eObject));
-				KimlGMFLayoutHintHelper.setContainedElementsLayoutType(e2Gep
-						.get(eObject), (LAYOUT_TYPE.get(stringValue)));
+				KimlGMFLayoutHintHelper
+						.unsetContainedElementsLayoutHint(editPart);
+				KimlGMFLayoutHintHelper.setContainedElementsLayoutType(
+						editPart, (LAYOUT_TYPE.get(stringValue)));
 			}
 			performLayout();
 		}
@@ -174,8 +179,25 @@ public class KimlLayoutTypePropertySection extends
 				.getActivePage().getActiveEditor().getEditorSite().getId();
 		Animation.markBegin();
 		DiagramLayouters.getInstance().getDiagramLayouter(editorID).layout(
-				e2Gep.get(eObject).getRoot().getViewer().getContents());
+				getSemanticEditPart().getRoot().getViewer().getContents());
 		Animation.run(1000);
+	}
+
+	/**
+	 * Helper function to get the <i>real</i> EditPart if just a compartment of
+	 * a composite EditPart was selected
+	 * 
+	 * @return The <i>real</i> parent EditPart if a compartment is selected, the
+	 *         selected EditPart else.
+	 */
+	private GraphicalEditPart getSemanticEditPart() {
+		EditPart parent;
+		if (e2Gep.get(eObject) instanceof CompartmentEditPart
+				&& (parent = ((CompartmentEditPart) e2Gep.get(eObject))
+						.getParent()) instanceof GraphicalEditPart)
+			return (GraphicalEditPart) parent;
+		else
+			return e2Gep.get(eObject);
 	}
 
 	/**
