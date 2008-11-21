@@ -13,11 +13,11 @@ package edu.unikiel.rtsys.kieler.ssm.gmf.diagram.layouter.preferences;
  * Constant definitions for the SSM Diagram Layouter preferences.
  * 
  * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
- *
+ * 
  */
 public class PreferenceConstants {
-
-	public static final String PREF_OFFSET_TOP = "pref.offset.top";
-	public static final String PREF_OFFSET_LEFT = "pref.offset.left";
-
+	
+	public static final String PREF_ALTERNATING_HV_LAYOUT = "alternating.hv.layout";
+	public static final String PREF_HEIGHT_COLLAPSED = "height.collapsed";
+	public static final String PREF_WIDTH_COLLAPSED = "width.collapsed";
 }

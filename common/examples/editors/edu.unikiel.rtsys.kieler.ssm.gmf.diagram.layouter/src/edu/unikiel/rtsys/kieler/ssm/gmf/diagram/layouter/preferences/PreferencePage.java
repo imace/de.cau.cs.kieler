@@ -39,7 +39,6 @@ public class PreferencePage extends FieldEditorPreferencePage implements
 		super(GRID);
 		setPreferenceStore(KimlSSMDiagramLayouterPlugin.getDefault()
 				.getPreferenceStore());
-		// setDescription("Options for the SSM Diagram Layouter:");
 	}
 
 	/**
@@ -54,12 +53,21 @@ public class PreferencePage extends FieldEditorPreferencePage implements
 		/* options group */
 		Group options = new Group(this.getFieldEditorParent(), SWT.NONE);
 		options.setText("General Options:");
+
 		addField(new BooleanFieldEditor(
 				KimlLayoutPreferenceConstants.PREF_GROUP_EVERY_SINGLE_ELEMENT,
 				"Enable grouping for every single element", options));
-		Label description = new Label(options, SWT.WRAP);
-		description
+		Label descriptionGroupSingle = new Label(options, SWT.WRAP);
+		descriptionGroupSingle
 				.setText("If checked, then it is possible to apply grouping and layout information to every single element. Note that this is then the only way to do this. Select several elemets and set grouping/layout information to them.");
+
+		addField(new BooleanFieldEditor(
+				PreferenceConstants.PREF_ALTERNATING_HV_LAYOUT,
+				"Alternating HV layout", options));
+		Label descriptionAHV = new Label(options, SWT.WRAP);
+		descriptionAHV
+				.setText("If checked, then the alternating HV layout is enabled.");
+
 		options.setLayoutData(new GridData(GridData.FILL, GridData.FILL, true,
 				false, 2, 1));
 		gl = new GridLayout(2, true);
@@ -67,26 +75,29 @@ public class PreferencePage extends FieldEditorPreferencePage implements
 		gl.marginHeight = 10;
 		options.setLayout(gl);
 
-		/* offsets group */
-		Group offsets = new Group(this.getFieldEditorParent(), SWT.NONE);
-		offsets.setText("Offset:");
+		/* collapsed sizes group */
+		Group collapsedSizes = new Group(this.getFieldEditorParent(), SWT.NONE);
+		collapsedSizes.setText("Collapsed sizes:");
 
-		IntegerFieldEditor top = new IntegerFieldEditor(
-				PreferenceConstants.PREF_OFFSET_TOP, "Diagram offset top:",
-				offsets, 3);
-		IntegerFieldEditor left = new IntegerFieldEditor(
-				PreferenceConstants.PREF_OFFSET_LEFT, "Diagram offset left:",
-				offsets, 3);
-		offsets.setLayoutData(new GridData(GridData.FILL, GridData.FILL, true,
-				false, 2, 1));
+		IntegerFieldEditor width = new IntegerFieldEditor(
+				PreferenceConstants.PREF_WIDTH_COLLAPSED,
+				"Collapsed element's width:", collapsedSizes, 3);
+		width.setValidRange(20, 100);
+		IntegerFieldEditor height = new IntegerFieldEditor(
+				PreferenceConstants.PREF_HEIGHT_COLLAPSED,
+				"Collapsed element's heigt:", collapsedSizes, 3);
+		height.setValidRange(20, 100);
+
+		collapsedSizes.setLayoutData(new GridData(GridData.FILL, GridData.FILL,
+				true, false, 2, 1));
 		gl = new GridLayout(2, true);
 		gl.marginWidth = 15;
 		gl.marginHeight = 10;
-		offsets.setLayout(gl);
+		collapsedSizes.setLayout(gl);
 
 		/* now add all the stuff */
-		addField(top);
-		addField(left);
+		addField(width);
+		addField(height);
 	}
 
 	/*

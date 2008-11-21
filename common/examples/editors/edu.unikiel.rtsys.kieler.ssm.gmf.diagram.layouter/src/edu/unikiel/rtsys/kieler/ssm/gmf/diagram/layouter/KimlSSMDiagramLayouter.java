@@ -55,6 +55,7 @@ import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KLayoutGraph;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPoint;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphFactory;
+import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_OPTION;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_TYPE;
 import edu.unikiel.rtsys.kieler.kiml.layout.services.KimlAbstractLayouter;
 import edu.unikiel.rtsys.kieler.kiml.layout.util.KimlLayoutPreferenceConstants;
@@ -71,6 +72,7 @@ import edu.unikiel.rtsys.kieler.ssm.diagram.edit.parts.RegionRegionCompartmentEd
 import edu.unikiel.rtsys.kieler.ssm.diagram.edit.parts.SafeStateMachineEditPart;
 import edu.unikiel.rtsys.kieler.ssm.diagram.edit.parts.SimpleStateEditPart;
 import edu.unikiel.rtsys.kieler.ssm.diagram.part.SafeStateMachineDiagramEditor;
+import edu.unikiel.rtsys.kieler.ssm.gmf.diagram.layouter.preferences.PreferenceConstants;
 
 /**
  * The layouter for SafeStateMachines as defined and used by the
@@ -104,22 +106,25 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 	private Map<KLabel, LabelEditPart> label2LabelEditPart = new HashMap<KLabel, LabelEditPart>();
 
 	/* preference settings */
-	private boolean prefUseGMFLabelLocation;
+	private boolean prefUseGMFLabelLocation = false;
 	private boolean prefSmoothTransitions = false;
+	private boolean prefMultipleLayoutRuns = false;
+	private boolean prefAlternatingHVLayout = false;
+	private float prefWidthCollapsed = 80f;
+	private float prefHeightCollapsed = 40f;
 
 	/* corresponding root parts */
 	private GraphicalEditPart rootPart;
 	private KLayoutGraph layoutGraph;
 
-	/* defaults when collapsing composite states */
-	private float widthCollapsed = 80f;
-	private float heightCollapsed = 60f;
+	/* height of header/title of Composite State */
+	private int insetTop = 20;
 
 	/* some useful other objects */
 	private CommandStack commandStack = null;
 	private double zoomLevel = 1.0;
 	private ConnectionLayer connectionLayer = null;
-	private boolean prefMultipleLayoutRuns = false;
+	private boolean layoutDirectionHorizontal;
 
 	/*------------------------------------------------------------------------------*/
 	/*-----------------------------APPLICATION OF LAYOUT----------------------------*/
@@ -414,6 +419,15 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 		layoutGraph.setTopGroup(topNodeGroup);
 
 		/*
+		 * if the rootPart was a complete SSM, that is when clicked into the
+		 * empty diagram background space, start with its first and only child,
+		 * the Top CompositeState.
+		 */
+		if (rootPart.getClass().equals(SafeStateMachineEditPart.class)) {
+			rootPart = (GraphicalEditPart) rootPart.getChildren().get(0);
+		}
+
+		/*
 		 * process the provided root according to its type. A
 		 * CompositeState2EditPart corresponds to a normal CompositeState, a
 		 * CompositeStateEditPart corresponds to the one Top CompositeState of a
@@ -448,15 +462,6 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 			nodeGroup2GraphicalEditPart.put(topNodeGroup, rootPart);
 
 			/* do the same for all children */
-			buildLayoutGraphRecursively(rootPart, topNodeGroup);
-		}
-		/*
-		 * if the rootPart was a complete SSM, that is when clicked into the
-		 * empty diagram background space, start with its children.
-		 */
-		else if (rootPart.getClass().equals(SafeStateMachineEditPart.class)) {
-			graphicalEditPart2NodeGroup.put(rootPart, topNodeGroup);
-			nodeGroup2GraphicalEditPart.put(topNodeGroup, rootPart);
 			buildLayoutGraphRecursively(rootPart, topNodeGroup);
 		}
 
@@ -511,7 +516,7 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 					|| childEditPart.getClass().equals(
 							CompositeState2EditPart.class)
 					|| childEditPart.getClass().equals(
-							CompositeState2EditPart.class)) {
+							CompositeStateEditPart.class)) {
 
 				KNodeGroup childNodeGroup = processGetNewSubNode(currentNodeGroup);
 				processCommon((GraphicalEditPart) childEditPart,
@@ -552,9 +557,9 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 				 */
 				else {
 					currentNodeGroup.getLayout().getSize().setHeight(
-							heightCollapsed);
+							prefHeightCollapsed);
 					currentNodeGroup.getLayout().getSize().setWidth(
-							widthCollapsed);
+							prefWidthCollapsed);
 					/*
 					 * extend the label string to handle the node label of a
 					 * composite state correctly
@@ -660,7 +665,18 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 		if (currentEditPart.getClass().equals(CompositeState2EditPart.class)
 				|| currentEditPart.getClass().equals(
 						CompositeStateEditPart.class)) {
-			currentNodeGroup.getLayout().getInsets().setTop(20f);
+			currentNodeGroup.getLayout().getInsets().setTop(insetTop);
+		}
+		/* enable alternating layout of regions */
+		if (currentEditPart.getClass().equals(RegionEditPart.class)
+				&& prefAlternatingHVLayout) {
+			if (layoutDirectionHorizontal)
+				currentNodeGroup.getLayout().getLayoutOptions().add(
+						LAYOUT_OPTION.HORIZONTAL);
+			else
+				currentNodeGroup.getLayout().getLayoutOptions().add(
+						LAYOUT_OPTION.VERTICAL);
+			layoutDirectionHorizontal = !layoutDirectionHorizontal;
 		}
 	}
 
@@ -683,8 +699,10 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 			 * EOppositeReference of EMF.
 			 */
 			KEdge edge = KimlLayoutUtil.createInitializedEdge();
-			edge.setSource(graphicalEditPart2NodeGroup.get(connection.getSource()));
-			edge.setTarget(graphicalEditPart2NodeGroup.get(connection.getTarget()));
+			edge.setSource(graphicalEditPart2NodeGroup.get(connection
+					.getSource()));
+			edge.setTarget(graphicalEditPart2NodeGroup.get(connection
+					.getTarget()));
 
 			/* keep track of the mapping */
 			edge2ConnectionEditPart.put(edge, connection);
@@ -798,6 +816,7 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 			connectionLayer = (ConnectionLayer) sfrep
 					.getLayer(DiagramRootEditPart.CONNECTION_LAYER);
 			connectionLayer.setAntialias(SWT.ON);
+			layoutDirectionHorizontal = true;
 		} else {
 			System.err.println("KimlSSMDiagramLayouter: Error: '" + rootPart
 					+ "' is no an instance of GraphicalEditPart: ");
@@ -819,11 +838,15 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 				.getPreferenceStore()
 				.getBoolean(
 						KimlLayoutPreferenceConstants.PREF_DIAGRAMLAYOUTERS_MULTIPLE_LAYOUT_RUNS);
-		prefSmoothTransitions = KimlLayoutPlugin
-				.getDefault()
-				.getPreferenceStore()
-				.getBoolean(
-						KimlLayoutPreferenceConstants.PREF_DIAGRAMLAYOUTERS_SMOOTHEN_EDGES);
+		prefAlternatingHVLayout = KimlSSMDiagramLayouterPlugin.getDefault()
+				.getPreferenceStore().getBoolean(
+						PreferenceConstants.PREF_ALTERNATING_HV_LAYOUT);
+		prefHeightCollapsed = KimlSSMDiagramLayouterPlugin.getDefault()
+				.getPreferenceStore().getInt(
+						PreferenceConstants.PREF_HEIGHT_COLLAPSED);
+		prefWidthCollapsed = KimlSSMDiagramLayouterPlugin.getDefault()
+				.getPreferenceStore().getInt(
+						PreferenceConstants.PREF_WIDTH_COLLAPSED);
 		return true;
 	}
 
@@ -867,6 +890,7 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 			}
 
 		}
+
 		if (target instanceof DiagramGraphicalViewer) {
 			DiagramGraphicalViewer viewer = (DiagramGraphicalViewer) target;
 			root = (GraphicalEditPart) viewer.getRootEditPart().getChildren()
@@ -884,7 +908,10 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 		if (target instanceof GraphicalEditPart) {
 			root = (GraphicalEditPart) root;
 		}
-
+		/* if alternating layout selected force layout of whole diagram */
+		if (prefAlternatingHVLayout) {
+			root = (GraphicalEditPart) root.getRoot().getContents();
+		}
 		return root;
 	}
 
