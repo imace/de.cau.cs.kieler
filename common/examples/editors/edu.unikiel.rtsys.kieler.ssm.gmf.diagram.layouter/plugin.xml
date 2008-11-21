@@ -37,16 +37,25 @@
                id="edu.unikiel.rtsys.kieler.kiml.ui.properties.tabbed.sections.KimlLayoutTypePropertySection"
                tab="property.tab.LayoutPropertySection">
             <input
+                  type="edu.unikiel.rtsys.kieler.ssm.diagram.edit.parts.CompositeStateCompositeStateCompartmentEditPart">
+            </input>
+            <input
+                  type="edu.unikiel.rtsys.kieler.ssm.diagram.edit.parts.CompositeStateEditPart">
+            </input>
+            <input
+                  type="edu.unikiel.rtsys.kieler.ssm.diagram.edit.parts.CompositeStateCompositeStateCompartment2EditPart">
+            </input>
+            <input
                   type="edu.unikiel.rtsys.kieler.ssm.diagram.edit.parts.CompositeState2EditPart">
+            </input>
+            <input
+                  type="edu.unikiel.rtsys.kieler.ssm.diagram.edit.parts.RegionRegionCompartmentEditPart">
             </input>
             <input
                   type="edu.unikiel.rtsys.kieler.ssm.diagram.edit.parts.RegionEditPart">
             </input>
             <input
                   type="edu.unikiel.rtsys.kieler.ssm.diagram.edit.parts.SafeStateMachineEditPart">
-            </input>
-            <input
-                  type="edu.unikiel.rtsys.kieler.ssm.diagram.edit.parts.CompositeStateEditPart">
             </input>
          </propertySection>
       </propertySections>
