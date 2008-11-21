@@ -71,18 +71,34 @@ public class Layer {
 	}
 	
 	/**
-	 * Sorts the elements in this layer and assigns them new rank values.
+	 * Sorts the elements in this layer and assigns them new rank values
+	 * based on a map of abstract ranks.
 	 * 
 	 * @param abstractRanks map of abstract ranks used as base for sorting
 	 */
-	public void sort(final Map<LayerElement, Double> abstractRanks) {
+	public void sortAbstract(final Map<LayerElement, Double> abstractRanks) {
 		Collections.sort(elements, new Comparator<LayerElement>() {
 			public int compare(LayerElement elem1, LayerElement elem2) {
 				return abstractRanks.get(elem1).compareTo(abstractRanks.get(elem2));
 			}
 		});
 		
+		// calculate concrete rank values
 		calcElemRanks();
+	}
+
+	/**
+	 * Sorts the elements in this layer by concrete rank values that are
+	 * already assigned to each element.
+	 */
+	public void sortConcrete() {
+		Collections.sort(elements, new Comparator<LayerElement>() {
+			public int compare(LayerElement elem1, LayerElement elem2) {
+				return elem1.rank == elem2.rank ? 0
+						: (elem1.rank > elem2.rank ? 1
+						: -1);
+			}
+		});
 	}
 	
 	/**

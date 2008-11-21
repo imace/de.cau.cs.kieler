@@ -12,7 +12,9 @@ import edu.unikiel.rtsys.klodd.hierarchical.structures.LayeredGraph;
 public interface ILayerAssigner extends IAlgorithm {
 	
 	/**
-	 * Create a layered graph and assign layers to each node.
+	 * Create a layered graph and assign layers to each node. The input
+	 * ports must be put into the first layer (rank == 0), the output
+	 * ports into the last layer (height == 0).
 	 * 
 	 * @param parentGroup
 	 * @return

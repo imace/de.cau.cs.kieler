@@ -62,7 +62,7 @@ public class LongestPathLayerAssigner extends AbstractAlgorithm implements
 	 * @return height of the given node in the layered graph
 	 */
 	private int visit(KNodeGroup node) {
-		Layer layer = layeredGraph.getLayer(node);
+		Layer layer = layeredGraph.getLayerElement(node).getLayer();
 		if (layer != null) {
 			// the node was already visited
 			return layer.height;

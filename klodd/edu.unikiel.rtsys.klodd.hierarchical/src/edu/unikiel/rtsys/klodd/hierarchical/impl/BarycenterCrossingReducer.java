@@ -61,7 +61,7 @@ public class BarycenterCrossingReducer extends AbstractAlgorithm implements
 				}
 			}
 		}
-		layer.sort(abstractRanks);
+		layer.sortAbstract(abstractRanks);
 	}
 
 	/* (non-Javadoc)
@@ -106,7 +106,7 @@ public class BarycenterCrossingReducer extends AbstractAlgorithm implements
 				}
 			}
 		}
-		layer.sort(abstractRanks);
+		layer.sortAbstract(abstractRanks);
 	}
 
 	/**

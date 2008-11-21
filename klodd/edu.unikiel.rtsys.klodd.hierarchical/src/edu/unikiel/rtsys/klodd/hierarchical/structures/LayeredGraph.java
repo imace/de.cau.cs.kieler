@@ -121,13 +121,13 @@ public class LayeredGraph {
 	}
 	
 	/**
-	 * Gets the layer that holds the given object.
+	 * Gets the layer element that holds the given object.
 	 * 
 	 * @param obj the object
-	 * @return the corresponding layer
+	 * @return the corresponding layer element
 	 */
-	public Layer getLayer(Object obj) {
-		return obj2LayerElemMap.get(obj).getLayer();
+	public LayerElement getLayerElement(Object obj) {
+		return obj2LayerElemMap.get(obj);
 	}
 	
 	/**
