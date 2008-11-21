@@ -19,6 +19,10 @@ import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramCommandStack;
 import org.eclipse.gmf.runtime.diagram.ui.requests.RequestConstants;
 import org.eclipse.gmf.runtime.diagram.ui.requests.SetAllBendpointRequest;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
+import org.eclipse.gmf.runtime.notation.NotationPackage;
+import org.eclipse.gmf.runtime.notation.Routing;
+import org.eclipse.gmf.runtime.notation.RoutingStyle;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.draw2d.IFigure;
@@ -28,6 +32,8 @@ import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.PointList;
 
 import dataflow.diagram.edit.parts.*;
+import dataflow.diagram.DataflowDiagramLayoutPlugin;
+import dataflow.diagram.preferences.DiagramLayoutPreferencePage;
 
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.*;
 import edu.unikiel.rtsys.kieler.kiml.layout.services.KimlAbstractLayouter;
@@ -54,14 +60,24 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 		OP_TO_OUTPUT
 	}
 	
-	private EditPart layoutRootPart = null;
-	private KLayoutGraph layoutGraph = null;
+	/** preference store with layout options */
+	private IPreferenceStore preferenceStore;
 	
+	/** root edit part used for layout */
+	private EditPart layoutRootPart = null;
+	/** generated layout graph */
+	private KLayoutGraph layoutGraph = null;
+
+	/** mapping used for back transformation */
 	private Map<KNodeGroup, AbstractBorderedShapeEditPart> nodeGroup2BoxMapping = new HashMap<KNodeGroup, AbstractBorderedShapeEditPart>();
+	/** mapping used for back transformation */
 	private Map<KEdge, ConnectionEditPart> edge2ConnectionMapping = new HashMap<KEdge, ConnectionEditPart>();
+	/** mapping used for back transformation */
 	private Map<KPort, BorderedBorderItemEditPart> port2BorderItemMapping = new HashMap<KPort, BorderedBorderItemEditPart>();
+	/** mapping used for creation of the layout graph */
 	private Map<BorderedBorderItemEditPart, KPort> borderItem2PortMapping = new HashMap<BorderedBorderItemEditPart, KPort>();
 	
+	/** label provider for the elements of dataflow diagrams */
 	private ILabelProvider dataflowLabelProvider = new DataflowLabelProvider();
 	
 	/*
@@ -77,6 +93,7 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 	 * @see edu.unikiel.rtsys.kieler.kiml.layout.services.KimlAbstractLayouter#init(java.lang.Object)
 	 */
 	protected boolean init(Object target) {
+		preferenceStore = DataflowDiagramLayoutPlugin.getDefault().getPreferenceStore();
 		nodeGroup2BoxMapping.clear();
 		edge2ConnectionMapping.clear();
 		port2BorderItemMapping.clear();
@@ -216,6 +233,11 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 			ConnectionEditPart connection = edge2ConnectionMapping.get(edge);
 			KEdgeLayout edgeLayout = edge.getLayout();
 			PointList pointList = new PointList();
+			
+			// set rectilinear routing style
+			RoutingStyle routingStyle =  (RoutingStyle)connection.getNotationView()
+					.getStyle(NotationPackage.eINSTANCE.getRoutingStyle());
+			routingStyle.setRouting(Routing.RECTILINEAR_LITERAL);
 
 			// set start point
 			Point startPoint = kPoint2Point(edgeLayout.getSourcePoint());
@@ -465,8 +487,15 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 		}
 		
 		// set fixed ports option
-		if (subChildren == null || subChildren.isEmpty()) {
-			nodeGroupLayout.getLayoutOptions().add(LAYOUT_OPTION.FIXED_PORTS);
+		if (subChildren != null && !subChildren.isEmpty()) {
+			if (preferenceStore.getBoolean(DiagramLayoutPreferencePage.FIXED_OUTER_PORTS))
+				nodeGroupLayout.getLayoutOptions().add(LAYOUT_OPTION.FIXED_PORTS);
+		}
+		else {
+			if (preferenceStore.getBoolean(DiagramLayoutPreferencePage.FIXED_INNER_PORTS))
+				nodeGroupLayout.getLayoutOptions().add(LAYOUT_OPTION.FIXED_PORTS);
+			if (preferenceStore.getBoolean(DiagramLayoutPreferencePage.FIXED_NODE_SIZE))
+				nodeGroupLayout.getLayoutOptions().add(LAYOUT_OPTION.FIXED_SIZE);
 		}
 		
 		// process next hierarchy level
@@ -563,25 +592,29 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 	 */
 	private PORT_PLACEMENT getPortPlacement(KNodeGroupLayout nodeLayout,
 			KPortLayout portLayout, PORT_TYPE portType) {
-		float nodeWidth = nodeLayout.getSize().getWidth();
-		float nodeHeight = nodeLayout.getSize().getHeight();
-		float relx = (portLayout.getLocation().getX() + portLayout.getSize().getWidth() / 2)
-			- (nodeWidth / 2);
-		float rely = (portLayout.getLocation().getY() + portLayout.getSize().getHeight() / 2)
-			- (nodeHeight / 2);
-		
-		if (relx > nodeWidth / 4 && rely > -nodeHeight / 2 + 3
-				&& rely < nodeHeight / 2 - 3)
-			return PORT_PLACEMENT.EAST;
-		if (relx < -nodeWidth / 4 && rely > -nodeHeight / 2 + 3
-				&& rely < nodeHeight / 2 - 3)
-			return PORT_PLACEMENT.WEST;
-		if (rely > nodeHeight / 4 && relx > -nodeWidth / 2 + 3
-				&& relx < nodeWidth / 2 - 3)
-			return PORT_PLACEMENT.SOUTH;
-		if (rely < -nodeHeight / 4 && relx > -nodeWidth / 2 + 3
-				&& relx < nodeWidth / 2 - 3)
-			return PORT_PLACEMENT.NORTH;
+		if (!preferenceStore.getBoolean(DiagramLayoutPreferencePage.STRICT_PORT_SIDE)) {
+			// determine port placement from port position
+			float nodeWidth = nodeLayout.getSize().getWidth();
+			float nodeHeight = nodeLayout.getSize().getHeight();
+			float relx = (portLayout.getLocation().getX() + portLayout.getSize().getWidth() / 2)
+				- (nodeWidth / 2);
+			float rely = (portLayout.getLocation().getY() + portLayout.getSize().getHeight() / 2)
+				- (nodeHeight / 2);
+			
+			if (relx > nodeWidth / 4 && rely > -nodeHeight / 2 + 3
+					&& rely < nodeHeight / 2 - 3)
+				return PORT_PLACEMENT.EAST;
+			if (relx < -nodeWidth / 4 && rely > -nodeHeight / 2 + 3
+					&& rely < nodeHeight / 2 - 3)
+				return PORT_PLACEMENT.WEST;
+			if (rely > nodeHeight / 4 && relx > -nodeWidth / 2 + 3
+					&& relx < nodeWidth / 2 - 3)
+				return PORT_PLACEMENT.SOUTH;
+			if (rely < -nodeHeight / 4 && relx > -nodeWidth / 2 + 3
+					&& relx < nodeWidth / 2 - 3)
+				return PORT_PLACEMENT.NORTH;
+		}
+		// determine port placement from port type
 		if (portType == PORT_TYPE.INPUT)
 			return PORT_PLACEMENT.WEST;
 		else

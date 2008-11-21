@@ -5,6 +5,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KDimension;
+import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPoint;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPort;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_OPTION;
@@ -17,6 +18,9 @@ import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.PORT_PLACEMENT;
  * @author msp
  */
 public class LayoutGraphs {
+	
+	/** minimal distance of two ports on each side of a node */
+	public static final float MIN_PORT_DISTANCE = 16.0f;
 	
 	/**
 	 * Sorts a given list of ports and returns the result as an array.
@@ -313,6 +317,23 @@ public class LayoutGraphs {
 				break;
 			}
 		}
+	}
+	
+	/**
+	 * Sets the size of a given node, depending on the number of ports
+	 * on each side, the insets and the label.
+	 * 
+	 * @param node
+	 */
+	public static void resizeNode(KNodeGroup node) {
+		float minWidth = node.getLabel().getLabelLayout().getSize().getWidth()
+				+ node.getLayout().getInsets().getLeft()
+				+ node.getLayout().getInsets().getRight();
+		float minHeight = node.getLabel().getLabelLayout().getSize().getHeight()
+			+ node.getLayout().getInsets().getTop()
+			+ node.getLayout().getInsets().getBottom();
+		
+		// TODO calc port sizes
 	}
 
 }

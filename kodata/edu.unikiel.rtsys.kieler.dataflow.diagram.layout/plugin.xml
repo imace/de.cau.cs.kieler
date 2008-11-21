@@ -44,4 +44,19 @@
          </propertySection>
       </propertySections>
    </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            category="edu.unikiel.rtsys.dataflow.diagram.general"
+            class="dataflow.diagram.preferences.DiagramLayoutPreferencePage"
+            id="edu.unikiel.rtsys.kieler.dataflow.diagram.layout.preferences"
+            name="Layout">
+      </page>
+   </extension>
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer
+            class="dataflow.diagram.preferences.LayoutPreferenceInitializer">
+      </initializer>
+   </extension>
 </plugin>

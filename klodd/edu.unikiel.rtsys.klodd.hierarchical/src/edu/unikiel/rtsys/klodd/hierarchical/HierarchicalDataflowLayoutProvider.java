@@ -7,6 +7,7 @@ import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_OPTION;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_TYPE;
 import edu.unikiel.rtsys.kieler.kiml.layout.services.KimlAbstractLayoutProvider;
 import edu.unikiel.rtsys.klodd.core.algorithms.*;
+import edu.unikiel.rtsys.klodd.core.util.LayoutGraphs;
 import edu.unikiel.rtsys.klodd.hierarchical.impl.*;
 import edu.unikiel.rtsys.klodd.hierarchical.modules.*;
 import edu.unikiel.rtsys.klodd.hierarchical.structures.LayeredGraph;
@@ -37,20 +38,25 @@ public class HierarchicalDataflowLayoutProvider extends
 	public void doLayout(KNodeGroup nodeGroup) {
 		// get the currently configured modules
 		updateModules();
+		// set the size of each non-empty node
+		setNodeSizes(nodeGroup);
 		
 		long startTime = System.nanoTime();
 		
 		cycleRemover.removeCycles(nodeGroup);
 		LayeredGraph layeredGraph = layerAssigner.assignLayers(nodeGroup);
 		if (!layeredGraph.getLayers().isEmpty()) {
-			layeredGraph.postProcess();
+			layeredGraph.createConnections();
 			crossingReducer.reduceCrossings(layeredGraph);
 			// TODO remaining modules
 		}
 		cycleRemover.restoreGraph();
 		
 		double executionTime = (double)(System.nanoTime() - startTime) * 1e-9;
-		System.out.println("Execution time (" + nodeGroup.getSubNodeGroups().size() + " nodes): " + executionTime + " s");
+		if (executionTime > 1.0)
+			System.out.println("Execution time (" + nodeGroup.getSubNodeGroups().size() + " nodes): " + executionTime + " s");
+		else
+			System.out.println("Execution time (" + nodeGroup.getSubNodeGroups().size() + " nodes): " + executionTime * 1000 + " ms");
 	}
 
 	/* (non-Javadoc)
@@ -72,6 +78,20 @@ public class HierarchicalDataflowLayoutProvider extends
 		cycleRemover = new DFSCycleRemover();
 		layerAssigner = new LongestPathLayerAssigner();
 		crossingReducer = new LayerSweepCrossingReducer(new BarycenterCrossingReducer());
+	}
+	
+	/**
+	 * Sets the size of each non-empty node, depending on its layout options.
+	 * 
+	 * @param parentGroup parent node group
+	 */
+	private void setNodeSizes(KNodeGroup parentGroup) {
+		for (KNodeGroup node : parentGroup.getSubNodeGroups()) {
+			if (!node.getLayout().getLayoutOptions().contains(LAYOUT_OPTION.FIXED_SIZE)
+					&& node.getSubNodeGroups().isEmpty()) {
+				LayoutGraphs.resizeNode(node);
+			}
+		}
 	}
 
 }

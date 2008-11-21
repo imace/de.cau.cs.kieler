@@ -60,7 +60,15 @@ public enum EDGE_TYPE implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	BEZIER(3, "BEZIER", "Bezier");
+	BEZIER(3, "BEZIER", "Bezier"), /**
+	 * The '<em><b>RECTILINEAR</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #RECTILINEAR_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	RECTILINEAR(4, "RECTILINEAR", "Rectilinear");
 
 	/**
 	 * The '<em><b>DEFAULT</b></em>' literal value.
@@ -123,6 +131,21 @@ public enum EDGE_TYPE implements Enumerator {
 	public static final int BEZIER_VALUE = 3;
 
 	/**
+	 * The '<em><b>RECTILINEAR</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>RECTILINEAR</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #RECTILINEAR
+	 * @model literal="Rectilinear"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int RECTILINEAR_VALUE = 4;
+
+	/**
 	 * An array of all the '<em><b>EDGE TYPE</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -134,6 +157,7 @@ public enum EDGE_TYPE implements Enumerator {
 			DIRECT,
 			SPLINE,
 			BEZIER,
+			RECTILINEAR,
 		};
 
 	/**
@@ -188,6 +212,7 @@ public enum EDGE_TYPE implements Enumerator {
 			case DIRECT_VALUE: return DIRECT;
 			case SPLINE_VALUE: return SPLINE;
 			case BEZIER_VALUE: return BEZIER;
+			case RECTILINEAR_VALUE: return RECTILINEAR;
 		}
 		return null;
 	}

@@ -64,7 +64,15 @@ public enum LAYOUT_OPTION implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	FIXED_PORTS(4, "FIXED_PORTS", "Fixed ports");
+	FIXED_PORTS(4, "FIXED_PORTS", "Fixed ports"), /**
+	 * The '<em><b>FIXED SIZE</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #FIXED_SIZE_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	FIXED_SIZE(5, "FIXED_SIZE", "Fixed size");
 
 	/**
 	 * The '<em><b>DEFAULT</b></em>' literal value.
@@ -142,6 +150,21 @@ public enum LAYOUT_OPTION implements Enumerator {
 	public static final int FIXED_PORTS_VALUE = 4;
 
 	/**
+	 * The '<em><b>FIXED SIZE</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>FIXED SIZE</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #FIXED_SIZE
+	 * @model literal="Fixed size"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int FIXED_SIZE_VALUE = 5;
+
+	/**
 	 * An array of all the '<em><b>LAYOUT OPTION</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -154,6 +177,7 @@ public enum LAYOUT_OPTION implements Enumerator {
 			VERTICAL,
 			HORIZONTAL,
 			FIXED_PORTS,
+			FIXED_SIZE,
 		};
 
 	/**
@@ -209,6 +233,7 @@ public enum LAYOUT_OPTION implements Enumerator {
 			case VERTICAL_VALUE: return VERTICAL;
 			case HORIZONTAL_VALUE: return HORIZONTAL;
 			case FIXED_PORTS_VALUE: return FIXED_PORTS;
+			case FIXED_SIZE_VALUE: return FIXED_SIZE;
 		}
 		return null;
 	}

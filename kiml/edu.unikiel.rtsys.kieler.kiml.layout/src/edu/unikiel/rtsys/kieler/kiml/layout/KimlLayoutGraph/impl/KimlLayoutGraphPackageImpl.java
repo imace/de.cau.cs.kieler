@@ -1252,6 +1252,7 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 		addEEnumLiteral(edgE_TYPEEEnum, edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.EDGE_TYPE.DIRECT);
 		addEEnumLiteral(edgE_TYPEEEnum, edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.EDGE_TYPE.SPLINE);
 		addEEnumLiteral(edgE_TYPEEEnum, edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.EDGE_TYPE.BEZIER);
+		addEEnumLiteral(edgE_TYPEEEnum, edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.EDGE_TYPE.RECTILINEAR);
 
 		initEEnum(layouT_TYPEEEnum, edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_TYPE.class, "LAYOUT_TYPE");
 		addEEnumLiteral(layouT_TYPEEEnum, edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_TYPE.DEFAULT);
@@ -1268,6 +1269,7 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 		addEEnumLiteral(layouT_OPTIONEEnum, edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_OPTION.VERTICAL);
 		addEEnumLiteral(layouT_OPTIONEEnum, edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_OPTION.HORIZONTAL);
 		addEEnumLiteral(layouT_OPTIONEEnum, edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_OPTION.FIXED_PORTS);
+		addEEnumLiteral(layouT_OPTIONEEnum, edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_OPTION.FIXED_SIZE);
 
 		initEEnum(edgE_LABEL_PLACEMENTEEnum, edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.EDGE_LABEL_PLACEMENT.class, "EDGE_LABEL_PLACEMENT");
 		addEEnumLiteral(edgE_LABEL_PLACEMENTEEnum, edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.EDGE_LABEL_PLACEMENT.DEFAULT);

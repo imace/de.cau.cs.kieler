@@ -21,7 +21,7 @@ public class ZestLayouterPreferencePage extends AbstractKimlLayoutProviderPrefer
 		implements IWorkbenchPreferencePage {
 
 	/** scale factor to use for the size of each parent node */
-	public static final String SCALE_BASE = "edu.unikiel.rtsys.kieler.kiml.layouter.zest.preferences.scale_base";
+	public static final String SCALE_BASE = "zest.scale_base";
 
 	/**
 	 * Creates the zest layouter preference page.

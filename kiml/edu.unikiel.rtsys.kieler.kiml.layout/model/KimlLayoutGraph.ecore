@@ -109,6 +109,7 @@
     <eLiterals name="DIRECT" value="1" literal="Direct"/>
     <eLiterals name="SPLINE" value="2" literal="Spline"/>
     <eLiterals name="BEZIER" value="3" literal="Bezier"/>
+    <eLiterals name="RECTILINEAR" value="4" literal="Rectilinear"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="LAYOUT_TYPE">
     <eLiterals name="DEFAULT" literal="Default"/>
@@ -125,6 +126,7 @@
     <eLiterals name="VERTICAL" value="2" literal="Vertical"/>
     <eLiterals name="HORIZONTAL" value="3" literal="Horizontal"/>
     <eLiterals name="FIXED_PORTS" value="4" literal="Fixed ports"/>
+    <eLiterals name="FIXED_SIZE" value="5" literal="Fixed size"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="EDGE_LABEL_PLACEMENT">
     <eLiterals name="DEFAULT" literal="DEFAULT"/>

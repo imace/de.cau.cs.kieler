@@ -153,7 +153,7 @@ public class LayeredGraph {
 	 * between layer elements and creates long edges. This method should be
 	 * called after all nodes and ports have been put into the layered graph.
 	 */
-	public void postProcess() {
+	public void createConnections() {
 		int layerCount = layers.size();
 		// fill rank information for all layers
 		int rank = layers.get(0).rank;
