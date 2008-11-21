@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.eclipse.draw2d.ChopboxAnchor;
 import org.eclipse.draw2d.ConnectionLayer;
 import org.eclipse.draw2d.ConnectionLocator;
 import org.eclipse.draw2d.IFigure;
@@ -32,7 +33,6 @@ import org.eclipse.gmf.runtime.diagram.ui.editparts.CompartmentEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramRootEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.LabelEditPart;
-import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.figures.ShapeCompartmentFigure;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramCommandStack;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditor;
@@ -42,6 +42,7 @@ import org.eclipse.gmf.runtime.diagram.ui.requests.SetAllBendpointRequest;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx;
 import org.eclipse.gmf.runtime.draw2d.ui.internal.figures.AnimatableScrollPane;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.swt.SWT;
 
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutPlugin;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.EDGE_LABEL_PLACEMENT;
@@ -97,8 +98,8 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 	 * HashMaps to keep track of the various mappings of EditParts to
 	 * KLayoutGraph objects and vice versa
 	 */
-	private Map<GraphicalEditPart, KNodeGroup> nodeEditPart2NodeGroup = new HashMap<GraphicalEditPart, KNodeGroup>();
-	private Map<KNodeGroup, GraphicalEditPart> nodeGroup2NodeEditPart = new HashMap<KNodeGroup, GraphicalEditPart>();
+	private Map<GraphicalEditPart, KNodeGroup> graphicalEditPart2NodeGroup = new HashMap<GraphicalEditPart, KNodeGroup>();
+	private Map<KNodeGroup, GraphicalEditPart> nodeGroup2GraphicalEditPart = new HashMap<KNodeGroup, GraphicalEditPart>();
 	private Map<KEdge, ConnectionEditPart> edge2ConnectionEditPart = new HashMap<KEdge, ConnectionEditPart>();
 	private Map<KLabel, LabelEditPart> label2LabelEditPart = new HashMap<KLabel, LabelEditPart>();
 
@@ -114,25 +115,11 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 	private float widthCollapsed = 80f;
 	private float heightCollapsed = 60f;
 
-	/* some used objects */
+	/* some useful other objects */
 	private CommandStack commandStack = null;
 	private double zoomLevel = 1.0;
 	private ConnectionLayer connectionLayer = null;
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * edu.unikiel.rtsys.kieler.kiml.layout.services.KimlAbstractLayouter#layout
-	 * (java.lang.Object)
-	 */
-	public void layout(Object target) {
-		super.layout(target);
-		connectionLayer.revalidate();
-		rootPart.refresh();
-		super.layout(target);
-
-	}
+	private boolean prefMultipleLayoutRuns = false;
 
 	/*------------------------------------------------------------------------------*/
 	/*-----------------------------APPLICATION OF LAYOUT----------------------------*/
@@ -154,7 +141,7 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 		compoundCommand.setLabel("SSM Diagram Layout");
 
 		/* start with the top KNodeGroup */
-		GraphicalEditPart gep = nodeGroup2NodeEditPart.get(layoutGraph
+		GraphicalEditPart gep = nodeGroup2GraphicalEditPart.get(layoutGraph
 				.getTopGroup());
 
 		if (gep != null) {
@@ -215,7 +202,7 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 
 		/* process all the children */
 		for (KNodeGroup childGroup : currentGroup.getSubNodeGroups()) {
-			GraphicalEditPart gep = nodeGroup2NodeEditPart.get(childGroup);
+			GraphicalEditPart gep = nodeGroup2GraphicalEditPart.get(childGroup);
 
 			/*
 			 * There is a GraphicalEditPart for this NodeGroup. Apply the
@@ -279,21 +266,6 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 			/* fetch corresponding EditPart for the KEdge */
 			ConnectionEditPart connection = edge2ConnectionEditPart.get(edge);
 
-			/*
-			 * if this EditPart is a polyline connection, see if it should be
-			 * routed smoothly. This is an attribute of a polyline connection.
-			 */
-			if (connection.getFigure() instanceof PolylineConnectionEx) {
-				PolylineConnectionEx polyline = ((PolylineConnectionEx) connection
-						.getFigure());
-				if (prefSmoothTransitions) {
-					polyline.setSmoothness(PolylineConnectionEx.SMOOTH_NORMAL);
-				} else {
-					polyline.setSmoothness(PolylineConnectionEx.SMOOTH_NONE);
-				}
-				polyline.validate();
-			}
-
 			/* fetch layout information of the current KEdge */
 			KEdgeLayout edgeLayout = edge.getLayout();
 
@@ -324,56 +296,31 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 			pointList.addPoint(endPoint);
 
 			/*
-			 * If Emma does not want the GMF internals to set the label
-			 * position, but wants to use the label positions provided by the
-			 * layout provider, some work and tricks are needed. If laying out a
-			 * diagram from scratch, the edges/transitions may change
-			 * considerably. The labels for the edges are connected to them and
-			 * are moved together from the GMF framework when rearranging the
-			 * edges. But this is done in one step when this translation
-			 * algorithm has finished. Labels can, as all other parts, not be
-			 * moved absolutely to a certain position, but must be moved
-			 * relatively to their actual position to the new position through a
-			 * delta. As said before, the position of the edge changes, affects
-			 * the position of the label, and the delta of the label move is
-			 * invalid. The workaround is to set the positions of the start and
-			 * end point of the transition with 'brute force'. This moves the
-			 * label beforehand to a reasonable position and yields relatively
-			 * satisfying results.
+			 * if this EditPart is a polyline connection, see if it should be
+			 * routed smoothly. This is an attribute of a polyline connection.
+			 * Also set the ChopBoxAnchors.
 			 */
-			if (!prefUseGMFLabelLocation) {
-				/*
-				 * The connections are positioned, in contrast to States, which
-				 * can be nested, absolutely on the connection layer, no matter
-				 * to which sub state they belong. So they relative positions,
-				 * relative to the current sub state, have to be translated to
-				 * the primary layer.
-				 */
-				GraphicalEditPart sourceEditPart = nodeGroup2NodeEditPart
-						.get(currentGroup);
-				Point translatedStartPoint = translateFromTo(KimlCommonHelper
-						.kPoint2Point(edgeLayout.getSourcePoint()),
-						sourceEditPart.getFigure(), connectionLayer);
-				Point translatedEndPoint = translateFromTo(KimlCommonHelper
-						.kPoint2Point(edgeLayout.getTargetPoint()),
-						sourceEditPart.getFigure(), connectionLayer);
-				/*
-				 * Now set the end points with 'brute force' and perform a
-				 * validation of the positions now
-				 */
-				if (connection.getFigure() instanceof PolylineConnectionEx) {
-					PolylineConnectionEx connFig = (PolylineConnectionEx) connection
-							.getFigure();
-					connFig.setStart(translatedStartPoint);
-					connFig.setEnd(translatedEndPoint);
-					connFig.revalidate();
+			if (connection.getFigure() instanceof PolylineConnectionEx) {
+				PolylineConnectionEx polyline = ((PolylineConnectionEx) connection
+						.getFigure());
+				if (prefSmoothTransitions) {
+					polyline.setSmoothness(PolylineConnectionEx.SMOOTH_NORMAL);
+				} else {
+					polyline.setSmoothness(PolylineConnectionEx.SMOOTH_NONE);
 				}
+
+				polyline.setSourceAnchor(new ChopboxAnchor(
+						((GraphicalEditPart) connection.getSource())
+								.getFigure()));
+				polyline.setTargetAnchor(new ChopboxAnchor(
+						((GraphicalEditPart) connection.getTarget())
+								.getFigure()));
+
 			}
 
 			/* create request and add it */
 			SetAllBendpointRequest request = new SetAllBendpointRequest(
-					RequestConstants.REQ_SET_ALL_BENDPOINT, pointList,
-					startPoint, endPoint);
+					RequestConstants.REQ_SET_ALL_BENDPOINT, pointList);
 			compoundCommand.add(connection.getCommand(request));
 
 			/* take also care of the labels */
@@ -421,10 +368,8 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 				 */
 				else {
 					KNodeGroup sourceNode = edge.getSource();
-					GraphicalEditPart sourceEditPart = nodeGroup2NodeEditPart
+					GraphicalEditPart sourceEditPart = nodeGroup2GraphicalEditPart
 							.get(sourceNode);
-					oldLocation = labelEditPart.getFigure().getBounds()
-							.getLocation();
 					newLocation = translateFromTo(KimlCommonHelper
 							.kPoint2Point(edgeLabel.getLabelLayout()
 									.getLocation()),
@@ -440,7 +385,6 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 				Point moveDelta = newLocation.getTranslated(oldLocation
 						.negate());
 				changeBoundsRequest.setMoveDelta(moveDelta.scale(zoomLevel));
-
 				/* add move command */
 				compoundCommand.add(labelEditPart
 						.getCommand(changeBoundsRequest));
@@ -479,16 +423,13 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 				|| rootPart.getClass().equals(CompositeStateEditPart.class)
 				|| rootPart.getClass().equals(RegionEditPart.class)) {
 
-			/* do the common translation, that is position, size and label, ... */
+			/*
+			 * do the common translation, that is position, size and label,
+			 * layout hints, ...
+			 */
 			processCommon(rootPart, topNodeGroup,
 					new ArrayList<ConnectionEditPart>());
-
-			/*
-			 * fetch the layout hints for this element, that are, for example,
-			 * user settings concerning the desired layout provider
-			 */
-			processLayoutHints(rootPart, topNodeGroup);
-
+			processLayoutHints((GraphicalEditPart) rootPart, topNodeGroup);
 			/*
 			 * If Emma wants to lay out the Top Composite State, that is also
 			 * the top figure of the StateMachine, move the upper left corner to
@@ -503,17 +444,19 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 			}
 
 			/* maintain the mapping of elements for the applyLayout function */
-			nodeEditPart2NodeGroup.put(rootPart, topNodeGroup);
-			nodeGroup2NodeEditPart.put(topNodeGroup, rootPart);
+			graphicalEditPart2NodeGroup.put(rootPart, topNodeGroup);
+			nodeGroup2GraphicalEditPart.put(topNodeGroup, rootPart);
 
 			/* do the same for all children */
 			buildLayoutGraphRecursively(rootPart, topNodeGroup);
 		}
 		/*
 		 * if the rootPart was a complete SSM, that is when clicked into the
-		 * empty diagram background space, start with its children
+		 * empty diagram background space, start with its children.
 		 */
 		else if (rootPart.getClass().equals(SafeStateMachineEditPart.class)) {
+			graphicalEditPart2NodeGroup.put(rootPart, topNodeGroup);
+			nodeGroup2GraphicalEditPart.put(topNodeGroup, rootPart);
 			buildLayoutGraphRecursively(rootPart, topNodeGroup);
 		}
 
@@ -534,9 +477,9 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 			KNodeGroup currentNodeGroup) {
 
 		/*
-		 * List to save the information about the connection. Connection can
-		 * only be added, when source AND target state is in the KLayoutGraph,
-		 * so process the connection when all sub states of a region have been
+		 * List to save the information about the connections. Connections can
+		 * only be added, when source AND target state are in the KLayoutGraph,
+		 * so process the connections when all sub states of a region have been
 		 * added.
 		 */
 		ArrayList<ConnectionEditPart> connections = new ArrayList<ConnectionEditPart>();
@@ -547,35 +490,29 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 		 */
 		for (Object childEditPart : currentEditPart.getChildren()) {
 
-			/* Simple State */
-			if (childEditPart.getClass().equals(SimpleStateEditPart.class)) {
+			/*
+			 * Simple State and Initial State have just a position, size and
+			 * connection: -> processCommon
+			 */
+			if (childEditPart.getClass().equals(SimpleStateEditPart.class)
+					|| childEditPart.getClass().equals(
+							InitialStateEditPart.class)) {
+
 				KNodeGroup childNodeGroup = processGetNewSubNode(currentNodeGroup);
 				processCommon((GraphicalEditPart) childEditPart,
 						childNodeGroup, connections);
 			}
 
-			/* Initial State */
-			else if (childEditPart.getClass()
-					.equals(InitialStateEditPart.class)) {
-				KNodeGroup childNodeGroup = processGetNewSubNode(currentNodeGroup);
-				processCommon((GraphicalEditPart) childEditPart,
-						childNodeGroup, connections);
-			}
+			/*
+			 * Composite State and Region have further children, address them,
+			 * too.
+			 */
+			else if (childEditPart.getClass().equals(RegionEditPart.class)
+					|| childEditPart.getClass().equals(
+							CompositeState2EditPart.class)
+					|| childEditPart.getClass().equals(
+							CompositeState2EditPart.class)) {
 
-			/* Composite State */
-			else if (childEditPart.getClass().equals(
-					CompositeState2EditPart.class)) {
-				KNodeGroup childNodeGroup = processGetNewSubNode(currentNodeGroup);
-				processCommon((GraphicalEditPart) childEditPart,
-						childNodeGroup, connections);
-				processLayoutHints((GraphicalEditPart) childEditPart,
-						childNodeGroup);
-				buildLayoutGraphRecursively((GraphicalEditPart) childEditPart,
-						childNodeGroup);
-			}
-
-			/* Region */
-			else if (childEditPart.getClass().equals(RegionEditPart.class)) {
 				KNodeGroup childNodeGroup = processGetNewSubNode(currentNodeGroup);
 				processCommon((GraphicalEditPart) childEditPart,
 						childNodeGroup, connections);
@@ -591,25 +528,29 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 					|| childEditPart
 							.getClass()
 							.equals(
-									CompositeStateCompositeStateCompartment2EditPart.class)
+									CompositeStateCompositeStateCompartmentEditPart.class)
 					|| childEditPart
 							.getClass()
 							.equals(
-									CompositeStateCompositeStateCompartmentEditPart.class)) {
+									CompositeStateCompositeStateCompartment2EditPart.class)) {
+
 				/* check if Compartment is expanded */
 				ShapeCompartmentFigure scf = (ShapeCompartmentFigure) ((GraphicalEditPart) childEditPart)
 						.getFigure();
 				AnimatableScrollPane asp = (AnimatableScrollPane) scf
 						.getScrollPane();
 				if (asp.isExpanded()) {
-					/* if expanded, do also process the children */
+					/*
+					 * if expanded, do also process the children
+					 */
 					buildLayoutGraphRecursively(
 							(GraphicalEditPart) childEditPart, currentNodeGroup);
-				} else {
-					/*
-					 * if collapsed, force the compartment to be layouted with
-					 * the size to default values and omit all the cildren
-					 */
+				}
+				/*
+				 * if collapsed, force the compartment to be laid out with the
+				 * size to default values and omit all the children.
+				 */
+				else {
 					currentNodeGroup.getLayout().getSize().setHeight(
 							heightCollapsed);
 					currentNodeGroup.getLayout().getSize().setWidth(
@@ -686,8 +627,8 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 				.getLongLabel(currentEditPart));
 
 		// keep track of mapping between elements
-		nodeEditPart2NodeGroup.put(currentEditPart, currenNodegroup);
-		nodeGroup2NodeEditPart.put(currenNodegroup, currentEditPart);
+		graphicalEditPart2NodeGroup.put(currentEditPart, currenNodegroup);
+		nodeGroup2GraphicalEditPart.put(currenNodegroup, currentEditPart);
 
 		return;
 	}
@@ -709,15 +650,17 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 		LAYOUT_TYPE layoutType = LAYOUT_TYPE.DEFAULT;
 		String layouterName = "";
 		layoutType = KimlGMFLayoutHintHelper
-				.getContainedElementsLayoutType((ShapeNodeEditPart) currentEditPart);
+				.getContainedElementsLayoutType((org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart) currentEditPart);
 		layouterName = KimlGMFLayoutHintHelper
-				.getContainedElementsLayouterName((ShapeNodeEditPart) currentEditPart);
+				.getContainedElementsLayouterName((org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart) currentEditPart);
 		currentNodeGroup.getLayout().setLayoutType(layoutType);
 		currentNodeGroup.getLayout().setLayouterName(layouterName);
+
+		/* attach top inset to compensate the label of a CompositeState */
 		if (currentEditPart.getClass().equals(CompositeState2EditPart.class)
 				|| currentEditPart.getClass().equals(
 						CompositeStateEditPart.class)) {
-			currentNodeGroup.getLayout().getInsets().setTop(25f);
+			currentNodeGroup.getLayout().getInsets().setTop(20f);
 		}
 	}
 
@@ -735,13 +678,13 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 		for (ConnectionEditPart connection : connections) {
 
 			/*
-			 * create the KEdge. The KEdge does not need to be added explicitely
+			 * create the KEdge. The KEdge does not need to be added explicitly
 			 * to the KLayoutGraph, but exists in it through the
 			 * EOppositeReference of EMF.
 			 */
 			KEdge edge = KimlLayoutUtil.createInitializedEdge();
-			edge.setSource(nodeEditPart2NodeGroup.get(connection.getSource()));
-			edge.setTarget(nodeEditPart2NodeGroup.get(connection.getTarget()));
+			edge.setSource(graphicalEditPart2NodeGroup.get(connection.getSource()));
+			edge.setTarget(graphicalEditPart2NodeGroup.get(connection.getTarget()));
 
 			/* keep track of the mapping */
 			edge2ConnectionEditPart.put(edge, connection);
@@ -834,6 +777,12 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 	@Override
 	protected boolean init(Object target) {
 
+		/* first clean up all HashMaps */
+		graphicalEditPart2NodeGroup.clear();
+		nodeGroup2GraphicalEditPart.clear();
+		edge2ConnectionEditPart.clear();
+		label2LabelEditPart.clear();
+
 		// get root part provided object
 		rootPart = getRootPart(target);
 
@@ -848,6 +797,7 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 			zoomLevel = sfrep.getZoomManager().getZoom();
 			connectionLayer = (ConnectionLayer) sfrep
 					.getLayer(DiagramRootEditPart.CONNECTION_LAYER);
+			connectionLayer.setAntialias(SWT.ON);
 		} else {
 			System.err.println("KimlSSMDiagramLayouter: Error: '" + rootPart
 					+ "' is no an instance of GraphicalEditPart: ");
@@ -864,6 +814,11 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 				.getPreferenceStore()
 				.getBoolean(
 						KimlLayoutPreferenceConstants.PREF_DIAGRAMLAYOUTERS_USE_GMF_TO_LAYOUT_CONNECTION_LABELS);
+		prefMultipleLayoutRuns = KimlLayoutPlugin
+				.getDefault()
+				.getPreferenceStore()
+				.getBoolean(
+						KimlLayoutPreferenceConstants.PREF_DIAGRAMLAYOUTERS_MULTIPLE_LAYOUT_RUNS);
 		prefSmoothTransitions = KimlLayoutPlugin
 				.getDefault()
 				.getPreferenceStore()
@@ -979,5 +934,28 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 		from.translateToAbsolute(point);
 		to.translateToRelative(point);
 		return point;
+	}
+
+	/**
+	 * If something strange happens during the layout which may result from the
+	 * order the move and resize instructions are executed through the
+	 * CommandStack, it may be an option to override the parent class' layout
+	 * method to do the layout twice or thrice with a revalidation of the viewer
+	 * in between.
+	 * 
+	 * @see edu.unikiel.rtsys.kieler.kiml.layout.services.KimlAbstractLayouter#layout
+	 *      (java.lang.Object) KimlAbstractLayouter.layout(java.lang.Object)
+	 */
+	public void layout(Object target) {
+		super.layout(target);
+
+		if (prefMultipleLayoutRuns) {
+			rootPart.getViewer().flush();
+			applyLayout();
+			if (!prefUseGMFLabelLocation) {
+				rootPart.getViewer().flush();
+				applyLayout();
+			}
+		}
 	}
 }
