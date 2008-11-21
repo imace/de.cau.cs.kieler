@@ -142,8 +142,8 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 			KNodeGroupLayout topGroupLayout = KimlLayoutGraphFactory.eINSTANCE.createKNodeGroupLayout();
 			createLayout(topGroupLayout, modelPart.getFigure());
 			topGroupLayout.setInsets(KimlLayoutGraphFactory.eINSTANCE.createKInsets());
-			topGroupLayout.setLayouterName(KimlGMFLayoutHintHelper.getLayouterName(modelPart));
-			topGroupLayout.setLayoutType(KimlGMFLayoutHintHelper.getLayoutType(modelPart));
+			topGroupLayout.setLayouterName(KimlGMFLayoutHintHelper.getContainedElementsLayouterName(modelPart));
+			topGroupLayout.setLayoutType(KimlGMFLayoutHintHelper.getContainedElementsLayoutType(modelPart));
 			topNode.setLayout(topGroupLayout);
 			KNodeGroupLabel topGroupLabel = KimlLayoutGraphFactory.eINSTANCE.createKNodeGroupLabel();
 			topGroupLabel.setText(modelPart.getDiagramView().getName());
