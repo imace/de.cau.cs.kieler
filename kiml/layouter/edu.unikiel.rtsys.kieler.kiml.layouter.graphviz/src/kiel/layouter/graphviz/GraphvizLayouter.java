@@ -46,15 +46,16 @@ import edu.unikiel.rtsys.kieler.kiml.layouter.graphviz.preferences.PreferenceCon
  * </ol>
  * <p/>
  * Supported features are node sizes and positions, tail and mid label
- * positions. Edges in GraphViz are described as bezier curves. As at the moment
- * the concrete application for the KIML layouters, GEF/GMF, does not understand
- * bezier curves, the two helper/grid point are just left out, resulting in some
- * kind of spline/polyline.
+ * positions. Edges in GraphViz are described as B-splines curves, confusingly
+ * also called Bezier splines. It seems that the control points are ordinary
+ * splines, as they all lie on the edge themselves. When working with an GEF/GMF
+ * editor, all these point are directly fed into the PolylineConnection of
+ * GEF/GMF, which is a spline.
  * <p/>
  * No hierarchy is supported by this implementation. Rather, some preprocessing
  * should take care hierarchy handling. One possibility is to send every
  * hierarchy level separately to a new GraphViz layouter, using the size
- * information gained in a previuos step as the size of the nodes in the current
+ * information gained in a previous step as the size of the nodes in the current
  * step.
  * 
  * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
@@ -109,26 +110,28 @@ public class GraphvizLayouter {
 	}
 
 	/**
-	 * Updates the preferences for the GraphViz layouter. Is called from visit at the beginning.
+	 * Updates the preferences for the GraphViz layouter. Is called from visit
+	 * at the beginning.
 	 */
-	private void updatePreferences(){
+	private void updatePreferences() {
 		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
 		prefPadX = store.getInt(PreferenceConstants.PREF_GRAPHVIZ_PADDING_X);
 		prefPadY = store.getInt(PreferenceConstants.PREF_GRAPHVIZ_PADDING_Y);
 	}
-	
+
 	/**
 	 * Performs the actual work of the layout process. Translates the
 	 * {@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup
 	 * KNodeGroup} into a structure GraphViz understands, calls the desired
 	 * GraphViz layouter and annotates the KLayoutGraph with the position and
 	 * size information provided by GraphViz.
-	 *
-	 * @param nodeGroup The KNodeGroup to process
+	 * 
+	 * @param nodeGroup
+	 *            The KNodeGroup to process
 	 */
 	public void visit(KNodeGroup nodeGroup) {
 		updatePreferences();
-		
+
 		/* return if there is nothing in this group */
 		if (nodeGroup.getSubNodeGroups().size() == 0) {
 			return;
@@ -380,23 +383,14 @@ public class GraphvizLayouter {
 				/*
 				 * ars, 2008-11-15: when setting arrowhead to 'none' than there
 				 * is no seperate end coordinate for the edge given, as assumed
-				 * before. haf, 2008-06-10 GraphViz uses piecewise cubic
-				 * beziercurves. Each part consists of: Start point, bezier
-				 * control point 1, bezier control point 2, End point. Start
-				 * point of the next section is the same as the end point of the
-				 * last. The control points are likely to be not part of the
-				 * path but specify the bend of the curve.
+				 * before.
 				 * 
-				 * Eclipse does not support bezier curves (yet). Standard thing
-				 * are Polylines with only explicit bendpoints. I've implemented
-				 * some cubic spline connection on top of that. But there all
-				 * bendpoints are part of the curve.
+				 * ars, 2008-11-21, it seems that GraphViz uses B-Splines, some
+				 * generalisation of Bezier Curves. All the control points of
+				 * these splines rest on the spline itself, so this complies
+				 * with eclipse polylines.
 				 * 
-				 * First approximation: only use the start and end points of
-				 * GraphViz' bezier parts as bendpoints for the eclipse splines.
-				 * 
-				 * TODO: Add proper bezier path handling when this is supported
-				 * by Eclipse!
+				 * Addressing bezier curves in eclipse:
 				 * 
 				 * @see Eclipse bug: 234808 and 168307
 				 */
@@ -407,21 +401,20 @@ public class GraphvizLayouter {
 
 				int i = 6;
 				for (; i < intList.size() - 3; i += 2) {
-					/* i+=6: ignore bezier control points */
 					edge.getLayout().getGridPoints()
 							.add(
 									graphviz2KPoint(intList.get(i), intList
 											.get(i + 1)));
 
 				}
-				
+
 				/* last two points in the GraphViz list denote the end point */
 				edge.getLayout().setTargetPoint(
 						graphviz2KPoint(intList.get(intList.size() - 2),
 								intList.get(intList.size() - 1)));
-				
-				/* tell all users that GraphViz produces bezier curves */
-				edge.getLayout().setEdgeType(EDGE_TYPE.BEZIER);
+
+				/* tell all users that GraphViz produces some sort of spline */
+				edge.getLayout().setEdgeType(EDGE_TYPE.SPLINE);
 
 			} catch (Exception e) {
 				/* in any failure, leave list empty */
@@ -457,7 +450,7 @@ public class GraphvizLayouter {
 								.createKDimension();
 						labelSize = label.getLabelLayout().getSize();
 						midLocation = graphviz2KPoint(
-								midInts.get(0).intValue(), midInts.get(1)
+								midInts.get(0).intValue() + 2, midInts.get(1)
 										.intValue(), labelSize);
 					}
 					label.getLabelLayout().setLocation(midLocation);
