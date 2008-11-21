@@ -906,6 +906,7 @@ public class KimlGMFLayoutHintHelper {
 		GraphicalViewer viewer = (GraphicalViewer) graphicalEditPart
 				.getViewer();
 
+		setContainedElementsLayoutHint(graphicalEditPart, layoutType, layouterName);
 		for (Object shapeNodeEditPart : viewer.getEditPartRegistry().values()) {
 			if (shapeNodeEditPart instanceof ShapeNodeEditPart) {
 				setContainedElementsLayoutHint((ShapeNodeEditPart) shapeNodeEditPart, layoutType, layouterName);
