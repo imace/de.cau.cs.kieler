@@ -91,9 +91,6 @@ public class GraphvizLayouter {
 	 */
 	public GraphvizLayouter() {
 		layouterName = GraphvizLayoutProviderNames.GRAPHVIZ_DOT;
-		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
-		prefPadX = store.getInt(PreferenceConstants.PREF_GRAPHVIZ_PADDING_X);
-		prefPadY = store.getInt(PreferenceConstants.PREF_GRAPHVIZ_PADDING_Y);
 		GraphvizAPI.initialize();
 	}
 
@@ -107,12 +104,18 @@ public class GraphvizLayouter {
 	 */
 	public GraphvizLayouter(String layoutProviderName) {
 		layouterName = layoutProviderName;
-		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
-		prefPadX = store.getInt(PreferenceConstants.PREF_GRAPHVIZ_PADDING_X);
-		prefPadY = store.getInt(PreferenceConstants.PREF_GRAPHVIZ_PADDING_Y);
 		GraphvizAPI.initialize();
 	}
 
+	/**
+	 * Updates the preferences for the GraphViz layouter. Is called from visit at the beginning.
+	 */
+	private void updatePreferences(){
+		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
+		prefPadX = store.getInt(PreferenceConstants.PREF_GRAPHVIZ_PADDING_X);
+		prefPadY = store.getInt(PreferenceConstants.PREF_GRAPHVIZ_PADDING_Y);
+	}
+	
 	/**
 	 * Performs the actual work of the layout process. Translates the
 	 * {@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup
@@ -123,7 +126,8 @@ public class GraphvizLayouter {
 	 * @param nodeGroup The KNodeGroup to process
 	 */
 	public void visit(KNodeGroup nodeGroup) {
-
+		updatePreferences();
+		
 		/* return if there is nothing in this group */
 		if (nodeGroup.getSubNodeGroups().size() == 0) {
 			return;
@@ -401,7 +405,7 @@ public class GraphvizLayouter {
 						graphviz2KPoint(intList.get(0), intList.get(1)));
 
 				int i = 6;
-				for (; i < intList.size() - 3; i += 6) {
+				for (; i < intList.size() - 3; i += 2) {
 					/* i+=6: ignore bezier control points */
 					edge.getLayout().getGridPoints()
 							.add(
