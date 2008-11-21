@@ -76,8 +76,10 @@ import org.eclipse.ui.IEditorDescriptor;
 import org.eclipse.ui.IEditorRegistry;
 import org.eclipse.ui.PlatformUI;
 
+import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutPlugin;
 import edu.unikiel.rtsys.kieler.kiml.layout.services.DiagramLayouters;
 import edu.unikiel.rtsys.kieler.kiml.layout.services.KimlAbstractLayouter;
+import edu.unikiel.rtsys.kieler.kiml.layout.util.KimlLayoutPreferenceConstants;
 import edu.unikiel.rtsys.kieler.kivik.Constants;
 import edu.unikiel.rtsys.kieler.kivik.KivikPlugin;
 import edu.unikiel.rtsys.kieler.kivik.preferences.PreferenceConstants;
@@ -229,7 +231,24 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 			IEditorDescriptor editorDescriptor = reg.getDefaultEditor(filename);
 			KimlAbstractLayouter diagramLayouter = DiagramLayouters
 					.getInstance().getDiagramLayouter(editorDescriptor.getId());
+			boolean oldPrefSetting = KimlLayoutPlugin
+					.getDefault()
+					.getPreferenceStore()
+					.getBoolean(
+							KimlLayoutPreferenceConstants.PREF_DIAGRAMLAYOUTERS_MULTIPLE_LAYOUT_RUNS);
+			KimlLayoutPlugin
+					.getDefault()
+					.getPreferenceStore()
+					.setValue(
+							KimlLayoutPreferenceConstants.PREF_DIAGRAMLAYOUTERS_MULTIPLE_LAYOUT_RUNS,
+							true);
 			diagramLayouter.layout(getEditPartRegistry().get(diagram));
+			KimlLayoutPlugin
+					.getDefault()
+					.getPreferenceStore()
+					.setValue(
+							KimlLayoutPreferenceConstants.PREF_DIAGRAMLAYOUTERS_MULTIPLE_LAYOUT_RUNS,
+							oldPrefSetting);
 		}
 
 		primaryLayer.validate();
