@@ -6,6 +6,8 @@ import java.util.List;
 
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KDimension;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup;
+import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroupLabelLayout;
+import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroupLayout;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPoint;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPort;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_OPTION;
@@ -20,7 +22,7 @@ import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.PORT_PLACEMENT;
 public class LayoutGraphs {
 	
 	/** minimal distance of two ports on each side of a node */
-	public static final float MIN_PORT_DISTANCE = 16.0f;
+	private static final float MIN_PORT_DISTANCE = 16.0f;
 	
 	/**
 	 * Sorts a given list of ports and returns the result as an array.
@@ -326,14 +328,36 @@ public class LayoutGraphs {
 	 * @param node
 	 */
 	public static void resizeNode(KNodeGroup node) {
-		float minWidth = node.getLabel().getLabelLayout().getSize().getWidth()
-				+ node.getLayout().getInsets().getLeft()
-				+ node.getLayout().getInsets().getRight();
-		float minHeight = node.getLabel().getLabelLayout().getSize().getHeight()
-			+ node.getLayout().getInsets().getTop()
-			+ node.getLayout().getInsets().getBottom();
+		KNodeGroupLayout nodeLayout = node.getLayout();
+		KNodeGroupLabelLayout labelLayout = node.getLabel().getLabelLayout();
+		float minWidth = labelLayout.getSize().getWidth()
+			+ nodeLayout.getInsets().getLeft() + nodeLayout.getInsets().getRight();
+		float minHeight = labelLayout.getSize().getHeight()
+			+ nodeLayout.getInsets().getTop() + nodeLayout.getInsets().getBottom();
 		
-		// TODO calc port sizes
+		float minNorth = MIN_PORT_DISTANCE, minEast = MIN_PORT_DISTANCE,
+			minSouth = MIN_PORT_DISTANCE, minWest = MIN_PORT_DISTANCE;
+		for (KPort port : node.getPorts()) {
+			switch (port.getLayout().getPlacement()) {
+			case NORTH:
+				minNorth += MIN_PORT_DISTANCE;
+				break;
+			case EAST:
+				minEast += MIN_PORT_DISTANCE;
+				break;
+			case SOUTH:
+				minSouth += MIN_PORT_DISTANCE;
+				break;
+			case WEST:
+				minWest += MIN_PORT_DISTANCE;
+				break;
+			}
+		}
+		
+		nodeLayout.getSize().setWidth(Math.max(minWidth,
+				Math.max(minNorth, minSouth)));
+		nodeLayout.getSize().setHeight(Math.max(minHeight,
+				Math.max(minEast, minWest)));
 	}
 
 }

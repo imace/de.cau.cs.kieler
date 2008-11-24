@@ -1,6 +1,7 @@
 package edu.unikiel.rtsys.klodd.hierarchical.structures;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -33,6 +34,8 @@ public class LayeredGraph {
 	KNodeGroup parentGroup;
 	/** map of objects to their corresponding layer */
 	private Map<Object, LayerElement> obj2LayerElemMap = new HashMap<Object, LayerElement>();
+	/** list of linear segments in this layered graph */
+	private List<LinearSegment> linearSegments = new LinkedList<LinearSegment>();
 	/** layout direction for this layered graph: HORIZONTAL or VERTICAL */
 	private LAYOUT_OPTION layoutDirection;
 	/** are the external ports of this layered graph fixed? */
@@ -171,22 +174,56 @@ public class LayeredGraph {
 			Layer layer = layers.get(i);
 			List<LayerElement> elements = layer.getElements();
 			for (LayerElement element : elements) {
+				if (element.linearSegment == null) {
+					// create new linear segment
+					createLinearSegment(element);
+				}
 				List<KEdge> outgoingEdges = element.getOutgoingEdges();
-				for (KEdge edge : outgoingEdges) {
-					KNodeGroup targetGroup = edge.getTarget();
-					KPort sourcePort = edge.getSourcePort();
-					KPort targetPort = edge.getTargetPort();
-					if (targetGroup != null) {
-						createConnection(element, obj2LayerElemMap.get(targetGroup),
-								edge, sourcePort, targetPort);
-					}
-					else if (targetPort != null) {
-						createConnection(element, obj2LayerElemMap.get(targetPort),
-								edge, sourcePort, targetPort);
+				if (outgoingEdges != null) {
+					for (KEdge edge : outgoingEdges) {
+						KNodeGroup targetGroup = edge.getTarget();
+						KPort sourcePort = edge.getSourcePort();
+						KPort targetPort = edge.getTargetPort();
+						if (targetGroup != null) {
+							createConnection(element, obj2LayerElemMap.get(targetGroup),
+									edge, sourcePort, targetPort);
+						}
+						else if (targetPort != null) {
+							createConnection(element, obj2LayerElemMap.get(targetPort),
+									edge, sourcePort, targetPort);
+						}
 					}
 				}
 			}
 		}
+	}
+
+	/**
+	 * Gets the layout direction: HORIZONTAL or VERTICAL.
+	 * 
+	 * @return the layout direction
+	 */
+	public LAYOUT_OPTION getLayoutDirection() {
+		return layoutDirection;
+	}
+
+	/**
+	 * Are the external ports of this layered graph fixed?
+	 * 
+	 * @return true if external ports are fixed
+	 */
+	public boolean areExternalPortsFixed() {
+		return fixedExternalPorts;
+	}
+	
+	/**
+	 * Gets the list of linear segments of this layered graph. Each
+	 * node is assigned a unique linear segment of size 1.
+	 * 
+	 * @return list of linear segments
+	 */
+	public List<LinearSegment> getLinearSegments() {
+		return linearSegments;
 	}
 	
 	/**
@@ -225,34 +262,32 @@ public class LayeredGraph {
 				layerIndex--;
 			// create a long edge as linear segment
 			LayerElement newElement = layers.get(layerIndex).put(edge);
+			LinearSegment linearSegment = createLinearSegment(newElement);
 			source.addOutgoing(newElement, sourcePort, null);
 			LayerElement currentElement = newElement;
 			for (int i = sourceLayer.rank + 1; i < targetLayer.rank - 1; i++) {
 				layerIndex++;
 				newElement = layers.get(layerIndex).put(edge);
+				linearSegment.elements.add(newElement);
+				newElement.linearSegment = linearSegment;
 				currentElement.addOutgoing(newElement);
 				currentElement = newElement;
 			}
 			currentElement.addOutgoing(target, null, targetPort);
 		}
 	}
-
+	
 	/**
-	 * Gets the layout direction: HORIZONTAL or VERTICAL.
+	 * Creates a new linear segment that contains the given element.
 	 * 
-	 * @return the layoutDirection
+	 * @param element layer element that is put into the new linear segment
 	 */
-	public LAYOUT_OPTION getLayoutDirection() {
-		return layoutDirection;
-	}
-
-	/**
-	 * Are the external ports of this layered graph fixed?
-	 * 
-	 * @return the fixedExternalPorts
-	 */
-	public boolean areExternalPortsFixed() {
-		return fixedExternalPorts;
+	private LinearSegment createLinearSegment(LayerElement element) {
+		LinearSegment linearSegment = new LinearSegment();
+		linearSegment.elements.add(element);
+		element.linearSegment = linearSegment;
+		linearSegments.add(linearSegment);
+		return linearSegment;
 	}
 	
 }

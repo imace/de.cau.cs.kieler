@@ -22,6 +22,10 @@ public class Layer {
 	public int rank;
 	/** the height of this layer */
 	public int height;
+	/** crosswise dimension of this layer */
+	public float crosswiseDim = 0.0f;
+	/** lengthwise dimension of this layer */
+	public float lengthwiseDim = 0.0f;
 	
 	/** the containing layered graph */
 	private LayeredGraph layeredGraph;

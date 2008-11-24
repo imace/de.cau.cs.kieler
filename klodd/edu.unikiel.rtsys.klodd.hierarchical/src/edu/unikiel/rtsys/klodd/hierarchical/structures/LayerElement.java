@@ -8,10 +8,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KEdge;
-import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup;
-import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPort;
-import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_OPTION;
+import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.*;
 import edu.unikiel.rtsys.klodd.core.util.LayoutGraphs;
 
 /**
@@ -26,6 +23,8 @@ public class LayerElement {
 	
 	/** rank of this element inside the containing layer */
 	public int rank = UNDEF_RANK;
+	/** linear segment containing this layer element */
+	public LinearSegment linearSegment = null;
 	
 	/** the element object */
 	private Object elemObj;
@@ -35,6 +34,8 @@ public class LayerElement {
 	private boolean fixedPorts;
 	/** number of rank numbers consumed by this layer element */
 	private int rankWidth;
+	/** the new position that is determined for this layer element */
+	private KPoint position;
 	/** the list of incoming layer connections */
 	private List<LayerConnection> incoming = new LinkedList<LayerConnection>();
 	/** the list of outgoing layer connections */
@@ -53,6 +54,7 @@ public class LayerElement {
 	public LayerElement(Object obj, Layer layer) {
 		this.elemObj = obj;
 		this.layer = layer;
+		this.position = KimlLayoutGraphFactory.eINSTANCE.createKPoint();
 		
 		if (obj instanceof KNodeGroup) {
 			// the layer element is a node group
@@ -152,6 +154,54 @@ public class LayerElement {
 	 */
 	public int getRankWidth() {
 		return rankWidth;
+	}
+	
+	/**
+	 * Determines the dimension of this layer element.
+	 * 
+	 * @return the dimension
+	 */
+	public KDimension getRealDim() {
+		if (elemObj instanceof KNodeGroup) {
+			KNodeGroup node = (KNodeGroup)elemObj;
+			return node.getLayout().getSize();
+		}
+		else if (elemObj instanceof KPort) {
+			KPort port = (KPort)elemObj;
+			return port.getLayout().getSize();
+		}
+		else {
+			KDimension zeroDim = KimlLayoutGraphFactory.eINSTANCE.createKDimension();
+			zeroDim.setWidth(0.0f);
+			zeroDim.setHeight(0.0f);
+			return zeroDim;
+		}
+	}
+	
+	/**
+	 * Sets the crosswise position for this layer element.
+	 * 
+	 * @param pos new crosswise position
+	 * @param layoutDirection layout direction: HORIZONTAL or VERTICAL
+	 */
+	public void setCrosswisePos(float pos, LAYOUT_OPTION layoutDirection) {
+		if (layoutDirection == LAYOUT_OPTION.VERTICAL)
+			position.setX(pos);
+		else
+			position.setY(pos);
+	}
+	
+	/**
+	 * Sets the lengthwise position for this layer element.
+	 * 
+	 * @param pos new lengthwise position
+	 * @param layoutDirection layout direction: HORIZONTAL or VERTICAL
+	 */
+	public void setLengthwisePos(float pos, LAYOUT_OPTION layoutDirection) {
+		if (layoutDirection == LAYOUT_OPTION.VERTICAL)
+			position.setY(pos);
+		else
+			position.setX(pos);
 	}
 	
 	/**

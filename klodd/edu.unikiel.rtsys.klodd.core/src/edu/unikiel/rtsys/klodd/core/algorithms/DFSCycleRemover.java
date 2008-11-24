@@ -2,8 +2,6 @@ package edu.unikiel.rtsys.klodd.core.algorithms;
 
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KEdge;
@@ -43,6 +41,8 @@ public class DFSCycleRemover extends AbstractCycleRemover {
 				dfsVisit(node);
 			}
 		}
+		// reverse all marked edges
+		reverseEdges();
 	}
 	
 	/**
@@ -57,7 +57,6 @@ public class DFSCycleRemover extends AbstractCycleRemover {
 		markedMap.put(node, new Integer(myDfs));
 		
 		// process all outgoing edges
-		List<KEdge> edgesToRemove = new LinkedList<KEdge>();
 		for (KEdge edge : node.getOutgoingEdges()) {
 			KNodeGroup targetNode = edge.getTarget();
 			if (targetNode != null) {
@@ -65,7 +64,7 @@ public class DFSCycleRemover extends AbstractCycleRemover {
 				if (targetDfs != null) {
 					if (targetDfs.intValue() != -1 && targetNode != node) {
 						// a cycle was found, break it
-						edgesToRemove.add(edge);
+						reversedEdges.add(edge);
 					}
 				}
 				else {
@@ -73,10 +72,6 @@ public class DFSCycleRemover extends AbstractCycleRemover {
 					dfsVisit(targetNode);
 				}
 			}
-		}
-		// reverse all marked edges to break cycles
-		for (KEdge edge : edgesToRemove) {
-			reverseEdge(edge);
 		}
 		// backtracking: set this node's number to -1
 		markedMap.put(node, new Integer(-1));

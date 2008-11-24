@@ -19,9 +19,7 @@ import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramCommandStack;
 import org.eclipse.gmf.runtime.diagram.ui.requests.RequestConstants;
 import org.eclipse.gmf.runtime.diagram.ui.requests.SetAllBendpointRequest;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
-import org.eclipse.gmf.runtime.notation.NotationPackage;
-import org.eclipse.gmf.runtime.notation.Routing;
-import org.eclipse.gmf.runtime.notation.RoutingStyle;
+import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -193,7 +191,7 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 		// apply node layouts
 		for (KNodeGroup nodeGroup : nodeGroup2BoxMapping.keySet()) {
 			AbstractBorderedShapeEditPart boxEditPart = nodeGroup2BoxMapping.get(nodeGroup);
-			ChangeBoundsRequest changeBoundsRequest = new ChangeBoundsRequest(RequestConstants.REQ_MOVE);
+			ChangeBoundsRequest changeBoundsRequest = new ChangeBoundsRequest(RequestConstants.REQ_RESIZE);
 			changeBoundsRequest.setEditParts(boxEditPart);
 			
 			Dimension oldSize = boxEditPart.getFigure().getBounds().getSize();
@@ -233,11 +231,6 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 			ConnectionEditPart connection = edge2ConnectionMapping.get(edge);
 			KEdgeLayout edgeLayout = edge.getLayout();
 			PointList pointList = new PointList();
-			
-			// set rectilinear routing style
-			RoutingStyle routingStyle =  (RoutingStyle)connection.getNotationView()
-					.getStyle(NotationPackage.eINSTANCE.getRoutingStyle());
-			routingStyle.setRouting(Routing.RECTILINEAR_LITERAL);
 
 			// set start point
 			Point startPoint = kPoint2Point(edgeLayout.getSourcePoint());
@@ -481,7 +474,7 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 				childNode.setLabel(nodeGroupLabel);
 				// set the node group label's layout
 				KNodeGroupLabelLayout labelLayout = KimlLayoutGraphFactory.eINSTANCE.createKNodeGroupLabelLayout();
-				createLayout(labelLayout, boxNameEditPart.getFigure());
+				createLayout(labelLayout, ((WrappingLabel)boxNameEditPart.getFigure()).getTextFigure());
 				nodeGroupLabel.setLabelLayout(labelLayout);
 			}
 		}

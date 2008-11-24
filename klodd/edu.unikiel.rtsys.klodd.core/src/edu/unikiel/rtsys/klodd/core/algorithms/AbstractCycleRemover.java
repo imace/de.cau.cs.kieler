@@ -13,7 +13,8 @@ import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.*;
 public abstract class AbstractCycleRemover extends AbstractAlgorithm
 		implements ICycleRemover {
 	
-	private LinkedList<KEdge> reversedEdges = new LinkedList<KEdge>();
+	/**	list of edges that are reversed and later restored */
+	protected LinkedList<KEdge> reversedEdges = new LinkedList<KEdge>();
 
 	/*
 	 * (non-Javadoc)
@@ -28,38 +29,26 @@ public abstract class AbstractCycleRemover extends AbstractAlgorithm
 	 * @see edu.unikiel.rtsys.klodd.core.algorithms.ICycleRemover#restoreGraph()
 	 */
 	public void restoreGraph() {
+		reverseEdges();
+	}
+	
+	/**
+	 * Switches the source and target of all edges marked in the
+	 * <code>reversedEdges</code> list.
+	 */
+	protected void reverseEdges() {
 		for (KEdge edge : reversedEdges) {
-			doReverseEdge(edge);
+			// reverse source and target node group
+			KNodeGroup source = edge.getSource();
+			KNodeGroup target = edge.getTarget();
+			edge.setSource(target);
+			edge.setTarget(source);
+			// reverse source and target port
+			KPort sourcePort = edge.getSourcePort();
+			KPort targetPort = edge.getTargetPort();
+			edge.setSourcePort(targetPort);
+			edge.setTargetPort(sourcePort);
 		}
-	}
-	
-	/**
-	 * Switches the source and target of an edge and stores the edge
-	 * for later restoration.
-	 * 
-	 * @param edge edge to be reversed
-	 */
-	protected void reverseEdge(KEdge edge) {
-		doReverseEdge(edge);
-		reversedEdges.add(edge);
-	}
-	
-	/**
-	 * Switches the source and target of an edge.
-	 * 
-	 * @param edge edge to be reversed
-	 */
-	private void doReverseEdge(KEdge edge) {
-		// reverse source and target node group
-		KNodeGroup source = edge.getSource();
-		KNodeGroup target = edge.getTarget();
-		edge.setSource(target);
-		edge.setTarget(source);
-		// reverse source and target port
-		KPort sourcePort = edge.getSourcePort();
-		KPort targetPort = edge.getTargetPort();
-		edge.setSourcePort(targetPort);
-		edge.setTargetPort(sourcePort);
 	}
 	
 }

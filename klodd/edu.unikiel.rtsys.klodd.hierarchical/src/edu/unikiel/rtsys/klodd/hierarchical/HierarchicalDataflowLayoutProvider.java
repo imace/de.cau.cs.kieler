@@ -38,15 +38,18 @@ public class HierarchicalDataflowLayoutProvider extends
 	public void doLayout(KNodeGroup nodeGroup) {
 		// get the currently configured modules
 		updateModules();
+	
+		long startTime = System.nanoTime();
+
 		// set the size of each non-empty node
 		setNodeSizes(nodeGroup);
-		
-		long startTime = System.nanoTime();
-		
+		// remove cycles in the input graph
 		cycleRemover.removeCycles(nodeGroup);
+		// put each node into a layer and get a layered graph
 		LayeredGraph layeredGraph = layerAssigner.assignLayers(nodeGroup);
 		if (!layeredGraph.getLayers().isEmpty()) {
 			layeredGraph.createConnections();
+			// optimize the order of nodes in each layer
 			crossingReducer.reduceCrossings(layeredGraph);
 			// TODO remaining modules
 		}
