@@ -36,6 +36,12 @@ public class LayerElement {
 	private int rankWidth;
 	/** the new position that is determined for this layer element */
 	private KPoint position;
+	/** the total crosswise dimension */
+	private float totalCrosswiseDim = -1.0f;
+	/** the number of edges that are routed before this element */
+	private int edgesBefore = 0;
+	/** the number of edges that are routed after this element */
+	private int edgesAfter = 0;
 	/** the list of incoming layer connections */
 	private List<LayerConnection> incoming = new LinkedList<LayerConnection>();
 	/** the list of outgoing layer connections */
@@ -157,6 +163,24 @@ public class LayerElement {
 	}
 	
 	/**
+	 * Gets the list of incoming layer connections.
+	 * 
+	 * @return the incoming connections
+	 */
+	public List<LayerConnection> getIncomingConnections() {
+		return incoming;
+	}
+
+	/**
+	 * Gets the list of outgoing connections.
+	 * 
+	 * @return the outgoing connections
+	 */
+	public List<LayerConnection> getOutgoingConnections() {
+		return outgoing;
+	}
+
+	/**
 	 * Determines the dimension of this layer element.
 	 * 
 	 * @return the dimension
@@ -179,29 +203,36 @@ public class LayerElement {
 	}
 	
 	/**
-	 * Sets the crosswise position for this layer element.
+	 * Sets the crosswise position for this layer element, considering
+	 * all edges that are routed to non-default sides.
 	 * 
 	 * @param pos new crosswise position
-	 * @param layoutDirection layout direction: HORIZONTAL or VERTICAL
+	 * @param minDist minimal distance for routed edges
+	 * @return total crosswise dimension of the layer element with
+	 *     routed edges
 	 */
-	public void setCrosswisePos(float pos, LAYOUT_OPTION layoutDirection) {
+	public float setCrosswisePos(float pos, float minDist) {
+		LAYOUT_OPTION layoutDirection = layer.getLayeredGraph().getLayoutDirection();
+		if (totalCrosswiseDim < 0.0f) {
+			calcEdgeRouting();
+			totalCrosswiseDim = (edgesBefore + edgesAfter) * minDist
+					+ (layoutDirection == LAYOUT_OPTION.VERTICAL
+					? getRealDim().getWidth() : getRealDim().getHeight());
+		}
 		if (layoutDirection == LAYOUT_OPTION.VERTICAL)
-			position.setX(pos);
+			position.setX(pos + edgesBefore * minDist);
 		else
-			position.setY(pos);
+			position.setY(pos + edgesBefore * minDist);
+		return totalCrosswiseDim;
 	}
 	
 	/**
-	 * Sets the lengthwise position for this layer element.
+	 * Gets the current position of this layer element.
 	 * 
-	 * @param pos new lengthwise position
-	 * @param layoutDirection layout direction: HORIZONTAL or VERTICAL
+	 * @return the currently set position
 	 */
-	public void setLengthwisePos(float pos, LAYOUT_OPTION layoutDirection) {
-		if (layoutDirection == LAYOUT_OPTION.VERTICAL)
-			position.setY(pos);
-		else
-			position.setX(pos);
+	public KPoint getPosition() {
+		return position;
 	}
 	
 	/**
@@ -215,12 +246,12 @@ public class LayerElement {
 	public int getPortRank(KPort port, boolean forward) {
 		if (forward) {
 			if (forwardPortRanks == null)
-				calcPortRanks(layer.getLayeredGraph().getLayoutDirection(), true);
+				calcPortRanks(true);
 			return forwardPortRanks.get(port).intValue();
 		}
 		else {
 			if (backwardsPortRanks == null)
-				calcPortRanks(layer.getLayeredGraph().getLayoutDirection(), false);
+				calcPortRanks(false);
 			return backwardsPortRanks.get(port).intValue();
 		}
 	}
@@ -240,7 +271,7 @@ public class LayerElement {
 				if (connection.getSourcePort() != null) {
 					// the source is a node or a port
 					connectionRanks.add(new Integer(connection.getSourceElement()
-						.getPortRank(connection.getSourcePort(), forward)
+						.getPortRank(connection.getSourcePort(), true)
 						+ connection.getSourceElement().rank));
 				}
 				else {
@@ -254,7 +285,7 @@ public class LayerElement {
 				if (connection.getTargetPort() != null) {
 					// the target is a node or a port
 					connectionRanks.add(new Integer(connection.getTargetElement()
-						.getPortRank(connection.getTargetPort(), forward)
+						.getPortRank(connection.getTargetPort(), false)
 						+ connection.getTargetElement().rank));
 				}
 				else {
@@ -362,11 +393,11 @@ public class LayerElement {
 	/**
 	 * Determines the rank of each port of a node group.
 	 * 
-	 * @param layoutDirection direction of graph layout: HORIZONTAL or VERTICAL
 	 * @param forward if true, ranks are determined for a forward layer sweep,
 	 *     else for a backwards layer sweep
 	 */
-	private void calcPortRanks(LAYOUT_OPTION layoutDirection, boolean forward) {
+	private void calcPortRanks(boolean forward) {
+		LAYOUT_OPTION layoutDirection = layer.getLayeredGraph().getLayoutDirection();
 		if (forward)
 			forwardPortRanks = new HashMap<KPort, Integer>();
 		else
@@ -395,6 +426,128 @@ public class LayerElement {
 			else
 				backwardsPortRanks.put((KPort)elemObj, new Integer(0));
 		}
+	}
+	
+	/**
+	 * Calculates the needed number of edge routing slots and assigns an
+	 * appropriate slot to each connection.
+	 */
+	private void calcEdgeRouting() {
+		LAYOUT_OPTION layoutDirection = layer.getLayeredGraph().getLayoutDirection();
+		if (elemObj instanceof KNodeGroup) {
+			KNodeGroup node = (KNodeGroup)elemObj;
+			int[] routingSlots = new int[node.getPorts().size()];
+			
+			// determine for each port whether it needs a routing slot
+			if (layoutDirection == LAYOUT_OPTION.VERTICAL) {
+				for (KPort port : node.getPorts()) {
+					switch (port.getLayout().getPlacement()) {
+					case NORTH:
+						if (hasOutgoing(port))
+							routingSlots[getPortRank(port, true)] = 1;
+						else
+							routingSlots[getPortRank(port, true)] = 0;
+						break;
+					case EAST:
+						routingSlots[getPortRank(port, true)] = 1;
+						break;
+					case SOUTH:
+						if (hasIncoming(port))
+							routingSlots[getPortRank(port, true)] = 1;
+						else
+							routingSlots[getPortRank(port, true)] = 0;
+						break;
+					case WEST:
+						routingSlots[getPortRank(port, true)] = -1;
+						break;
+					}
+				}				
+			}
+			else {
+				for (KPort port : node.getPorts()) {
+					switch (port.getLayout().getPlacement()) {
+					case NORTH:
+						routingSlots[getPortRank(port, true)] = -1;
+						break;
+					case EAST:
+						if (hasIncoming(port))
+							routingSlots[getPortRank(port, true)] = 1;
+						else
+							routingSlots[getPortRank(port, true)] = 0;
+						break;
+					case SOUTH:
+						routingSlots[getPortRank(port, true)] = 1;
+						break;
+					case WEST:
+						if (hasOutgoing(port))
+							routingSlots[getPortRank(port, true)] = 1;
+						else
+							routingSlots[getPortRank(port, true)] = 0;
+						break;
+					}
+				}
+			}
+			
+			// determine the number of slots for this node
+			for (int i = 0; i < node.getPorts().size(); i++) {
+				if (routingSlots[i] < 0) {
+					edgesBefore++;
+					routingSlots[i] = -edgesBefore;
+				}
+				else if (routingSlots[i] > 0) {
+					edgesAfter++;
+					routingSlots[i] = edgesAfter;
+				}
+			}
+			
+			// assign the right routing slot to each connection
+			for (LayerConnection connection : incoming) {
+				connection.targetRoutePos = routingSlots[getPortRank(connection.getTargetPort(), true)];
+			}
+			for (LayerConnection connection : outgoing) {
+				connection.sourceRoutePos = routingSlots[getPortRank(connection.getSourcePort(), true)];
+			}
+		}
+		else if (elemObj instanceof KPort) {
+			KPort port = (KPort)elemObj;
+			if (layoutDirection == LAYOUT_OPTION.VERTICAL)
+				totalCrosswiseDim = port.getLayout().getSize().getWidth();
+			else
+				totalCrosswiseDim = port.getLayout().getSize().getHeight();
+		}
+		else {
+			totalCrosswiseDim = 0.0f;
+		}
+	}
+	
+	/**
+	 * Determines whether the given port has an outgoing connection.
+	 * 
+	 * @param port port to check
+	 * @return true if the given port has an outgoing connection
+	 */
+	private boolean hasOutgoing(KPort port) {
+		for (LayerConnection connection : outgoing) {
+			if (connection.getSourcePort() == port) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	/**
+	 * Determines whether the given port has an incoming connection.
+	 * 
+	 * @param port port to check
+	 * @return true if the given port has an incoming connection
+	 */
+	private boolean hasIncoming(KPort port) {
+		for (LayerConnection connection : incoming) {
+			if (connection.getTargetPort() == port) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 }

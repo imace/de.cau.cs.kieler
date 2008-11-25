@@ -15,8 +15,8 @@ import edu.unikiel.rtsys.klodd.hierarchical.structures.LayeredGraph;
 import edu.unikiel.rtsys.klodd.hierarchical.structures.LinearSegment;
 
 /**
- * Node placing algorithm that orders all linear segments and balances
- * the result.
+ * Node placing algorithm that orders all linear segments and creates an
+ * unbalanced placement
  * 
  * @author msp
  */
@@ -39,8 +39,13 @@ public class BasicNodePlacer extends AbstractAlgorithm implements INodePlacer {
 		LinearSegment[] sortedSegments = sortLinearSegments(layeredGraph);
 		// create an unbalanced placement from the sorted segments
 		createUnbalancedPlacement(sortedSegments);
-		
-		// TODO balanced placing?
+		// set the proper crosswise dimension for the whole graph
+		float maxWidth = 0.0f;
+		for (Layer layer : layeredGraph.getLayers()) {
+			layer.crosswiseDim += minDist;
+			maxWidth = Math.max(maxWidth, layer.crosswiseDim); 
+		}
+		layeredGraph.crosswiseDim = maxWidth;
 	}
 	
 	/**
@@ -119,13 +124,13 @@ public class BasicNodePlacer extends AbstractAlgorithm implements INodePlacer {
 			for (LayerElement element : segment.elements) {
 				Layer layer = element.getLayer();
 				KDimension elemDim = element.getRealDim();
-				element.setCrosswisePos(newPos, layoutDirection);
+				float totalCrosswiseDim = element.setCrosswisePos(newPos, minDist);
 				if (layoutDirection == LAYOUT_OPTION.VERTICAL) {
-					layer.crosswiseDim = newPos + elemDim.getWidth();
+					layer.crosswiseDim = newPos + totalCrosswiseDim;
 					layer.lengthwiseDim = Math.max(layer.lengthwiseDim, elemDim.getHeight());
 				}
 				else {
-					layer.crosswiseDim = newPos + elemDim.getHeight();
+					layer.crosswiseDim = newPos + totalCrosswiseDim;
 					layer.lengthwiseDim = Math.max(layer.lengthwiseDim, elemDim.getWidth());
 				}
 			}

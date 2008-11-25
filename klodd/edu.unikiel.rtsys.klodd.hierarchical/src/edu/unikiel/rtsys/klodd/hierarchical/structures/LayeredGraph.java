@@ -28,6 +28,11 @@ public class LayeredGraph {
 		BUILD_BACK
 	}
 	
+	/** crosswise dimension of this layered graph */
+	public float crosswiseDim = 0.0f;
+	/** lengthwise dimension of this layered graph */
+	public float lengthwiseDim = 0.0f;
+	
 	/** list of layers in this layered graph */
 	private List<Layer> layers;
 	/** parent node group associated with this layered graph */

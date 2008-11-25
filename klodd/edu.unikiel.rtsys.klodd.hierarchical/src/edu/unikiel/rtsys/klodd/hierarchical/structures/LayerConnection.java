@@ -9,13 +9,18 @@ import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPort;
  */
 public class LayerConnection {
 	
-	// the source element
+	/** routing position at the source of this connection */
+	public int sourceRoutePos = 0;
+	/** routing position at the target of this connection */
+	public int targetRoutePos = 0;
+	
+	/** the source element */
 	private LayerElement sourceElement;
-	// the source port
+	/** the source port */
 	private KPort sourcePort;
-	// the target element
+	/** the target element */
 	private LayerElement targetElement;
-	// the target port
+	/** the target port */
 	private KPort targetPort;
 
 	/**
