@@ -14,7 +14,15 @@ public class LinearSegment implements Comparable<LinearSegment> {
 	/** list of layer elements contained in this linear segment */
 	public List<LayerElement> elements = new LinkedList<LayerElement>();
 	/** current rank of the linear segment */
-	public int rank = 0;
+	public int rank = -1;
+	
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	public String toString() {
+		return elements.toString();
+	}
 	
 	/*
 	 * (non-Javadoc)

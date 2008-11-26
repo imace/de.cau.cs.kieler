@@ -79,7 +79,41 @@ public class LayerElement {
 			rankWidth = 1;
 		}
 		else
-			throw new ClassCastException("Unknown object type received.");
+			throw new IllegalArgumentException("Unknown object type received.");
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	public String toString() {
+		if (elemObj instanceof KNodeGroup) {
+			KNodeGroup node = (KNodeGroup)elemObj;
+			return node.getLabel().getText();
+		}
+		else if (elemObj instanceof KPort) {
+			KPort port = (KPort)elemObj;
+			return port.getLabel().getText();
+		}
+		else if (elemObj instanceof KEdge) {
+			KEdge edge = (KEdge)elemObj;
+			KNodeGroup source = edge.getSource();
+			KNodeGroup target = edge.getTarget();
+			if (source != null && target != null)
+				return "(" + source.getLabel().getText() + ") > ("
+					+ target.getLabel().getText() + ")";
+			else if (target != null)
+				return "(" + edge.getSourcePort().getLabel().getText()
+					+ ") > (" + target.getLabel().getText() + ")";
+			else if (source != null)
+				return "(" + source.getLabel().getText() + ") > ("
+					+ edge.getTargetPort().getLabel().getText() + ")";
+			else
+				return "(" + edge.getSourcePort().getLabel().getText()
+					+ ") > (" + edge.getTargetPort().getLabel().getText() + ")";
+		}
+		else
+			return "";
 	}
 	
 	/**
@@ -204,25 +238,33 @@ public class LayerElement {
 	
 	/**
 	 * Sets the crosswise position for this layer element, considering
-	 * all edges that are routed to non-default sides.
+	 * all edges that are routed before this element.
 	 * 
 	 * @param pos new crosswise position
 	 * @param minDist minimal distance for routed edges
-	 * @return total crosswise dimension of the layer element with
-	 *     routed edges
 	 */
-	public float setCrosswisePos(float pos, float minDist) {
+	public void setCrosswisePos(float pos, float minDist) {
 		LAYOUT_OPTION layoutDirection = layer.getLayeredGraph().getLayoutDirection();
-		if (totalCrosswiseDim < 0.0f) {
-			calcEdgeRouting();
-			totalCrosswiseDim = (edgesBefore + edgesAfter) * minDist
-					+ (layoutDirection == LAYOUT_OPTION.VERTICAL
-					? getRealDim().getWidth() : getRealDim().getHeight());
-		}
 		if (layoutDirection == LAYOUT_OPTION.VERTICAL)
 			position.setX(pos + edgesBefore * minDist);
 		else
 			position.setY(pos + edgesBefore * minDist);
+	}
+	
+	/**
+	 * Gets the total crosswise dimension of this layer element with
+	 * routed edges.
+	 * 
+	 * @param minDist minimal distance for routed edges
+	 * @return total crosswise dimension with routed edges
+	 */
+	public float getTotalCrosswiseDim(float minDist) {
+		if (totalCrosswiseDim < 0.0f) {
+			LAYOUT_OPTION layoutDirection = layer.getLayeredGraph().getLayoutDirection();
+			totalCrosswiseDim = (edgesBefore + edgesAfter) * minDist
+					+ (layoutDirection == LAYOUT_OPTION.VERTICAL
+					? getRealDim().getWidth() : getRealDim().getHeight());
+		}
 		return totalCrosswiseDim;
 	}
 	
@@ -233,6 +275,16 @@ public class LayerElement {
 	 */
 	public KPoint getPosition() {
 		return position;
+	}
+	
+	/**
+	 * Takes the position of the contained port object as the current
+	 * layout position.
+	 */
+	public void takePortPos() {
+		KPort port = (KPort)elemObj;
+		position.setX(port.getLayout().getLocation().getX());
+		position.setY(port.getLayout().getLocation().getY());
 	}
 	
 	/**
@@ -389,50 +441,12 @@ public class LayerElement {
 		LayoutGraphs.positionPortsByOrder(ports, node.getLayout().getSize(),
 				layoutDirection, forward, symmetric);
 	}
-
-	/**
-	 * Determines the rank of each port of a node group.
-	 * 
-	 * @param forward if true, ranks are determined for a forward layer sweep,
-	 *     else for a backwards layer sweep
-	 */
-	private void calcPortRanks(boolean forward) {
-		LAYOUT_OPTION layoutDirection = layer.getLayeredGraph().getLayoutDirection();
-		if (forward)
-			forwardPortRanks = new HashMap<KPort, Integer>();
-		else
-			backwardsPortRanks = new HashMap<KPort, Integer>();
-		
-		if (elemObj instanceof KNodeGroup) {
-			// sort all ports by their relative position
-			List<KPort> ports = ((KNodeGroup)elemObj).getPorts();
-			KPort[] portArray = LayoutGraphs.sortPortsByPosition(ports,
-					layoutDirection, forward);
-			// set the ranks in the newly sorted list
-			if (forward) {
-				for (int i = 0; i < portArray.length; i++) {
-					forwardPortRanks.put(portArray[i], new Integer(i));
-				}
-			}
-			else {
-				for (int i = 0; i < portArray.length; i++) {
-					backwardsPortRanks.put(portArray[i], new Integer(i));
-				}	
-			}
-		}
-		else if (elemObj instanceof KPort) {
-			if (forward)
-				forwardPortRanks.put((KPort)elemObj, new Integer(0));
-			else
-				backwardsPortRanks.put((KPort)elemObj, new Integer(0));
-		}
-	}
 	
 	/**
 	 * Calculates the needed number of edge routing slots and assigns an
 	 * appropriate slot to each connection.
 	 */
-	private void calcEdgeRouting() {
+	public void calcEdgeRouting() {
 		LAYOUT_OPTION layoutDirection = layer.getLayeredGraph().getLayoutDirection();
 		if (elemObj instanceof KNodeGroup) {
 			KNodeGroup node = (KNodeGroup)elemObj;
@@ -520,6 +534,44 @@ public class LayerElement {
 		}
 	}
 	
+	/**
+	 * Determines the rank of each port of a node group.
+	 * 
+	 * @param forward if true, ranks are determined for a forward layer sweep,
+	 *     else for a backwards layer sweep
+	 */
+	private void calcPortRanks(boolean forward) {
+		LAYOUT_OPTION layoutDirection = layer.getLayeredGraph().getLayoutDirection();
+		if (forward)
+			forwardPortRanks = new HashMap<KPort, Integer>();
+		else
+			backwardsPortRanks = new HashMap<KPort, Integer>();
+		
+		if (elemObj instanceof KNodeGroup) {
+			// sort all ports by their relative position
+			List<KPort> ports = ((KNodeGroup)elemObj).getPorts();
+			KPort[] portArray = LayoutGraphs.sortPortsByPosition(ports,
+					layoutDirection, forward);
+			// set the ranks in the newly sorted list
+			if (forward) {
+				for (int i = 0; i < portArray.length; i++) {
+					forwardPortRanks.put(portArray[i], new Integer(i));
+				}
+			}
+			else {
+				for (int i = 0; i < portArray.length; i++) {
+					backwardsPortRanks.put(portArray[i], new Integer(i));
+				}	
+			}
+		}
+		else if (elemObj instanceof KPort) {
+			if (forward)
+				forwardPortRanks.put((KPort)elemObj, new Integer(0));
+			else
+				backwardsPortRanks.put((KPort)elemObj, new Integer(0));
+		}
+	}
+
 	/**
 	 * Determines whether the given port has an outgoing connection.
 	 * 

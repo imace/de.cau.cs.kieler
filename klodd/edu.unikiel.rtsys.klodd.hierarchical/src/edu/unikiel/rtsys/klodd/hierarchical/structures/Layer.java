@@ -44,6 +44,14 @@ public class Layer {
 		this.layeredGraph = layeredGraph;
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	public String toString() {
+		return elements.toString();
+	}
+	
 	/**
 	 * Puts an object into this layer.
 	 * 

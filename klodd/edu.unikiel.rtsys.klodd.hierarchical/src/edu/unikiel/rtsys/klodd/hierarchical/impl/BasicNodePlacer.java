@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KDimension;
+import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPoint;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_OPTION;
 import edu.unikiel.rtsys.klodd.core.algorithms.AbstractAlgorithm;
 import edu.unikiel.rtsys.klodd.hierarchical.modules.INodePlacer;
@@ -26,6 +27,8 @@ public class BasicNodePlacer extends AbstractAlgorithm implements INodePlacer {
 	private float minDist;
 	/** layout direction for this algorithm instance */
 	private LAYOUT_OPTION layoutDirection;
+	/** array of sorted segments */
+	private LinearSegment[] sortedSegments;
 	
 	/*
 	 * (non-Javadoc)
@@ -36,16 +39,54 @@ public class BasicNodePlacer extends AbstractAlgorithm implements INodePlacer {
 		this.layoutDirection = layeredGraph.getLayoutDirection();
 		
 		// sort the linear segments of the layered graph
-		LinearSegment[] sortedSegments = sortLinearSegments(layeredGraph);
+		sortedSegments = sortLinearSegments(layeredGraph);
 		// create an unbalanced placement from the sorted segments
 		createUnbalancedPlacement(sortedSegments);
+		
+		// process fixed external ports
+		if (layeredGraph.areExternalPortsFixed()) {
+			Layer layer = layeredGraph.getLayers().get(0);
+			if (layer.rank == 0) {
+				for (LayerElement element : layer.getElements()) {
+					element.takePortPos();
+					KPoint position = element.getPosition();
+					KDimension size = element.getRealDim();
+					if (layoutDirection == LAYOUT_OPTION.VERTICAL) {
+						layer.crosswiseDim = Math.max(layer.crosswiseDim,
+								position.getX() + size.getWidth());
+						layer.lengthwiseDim = Math.max(layer.lengthwiseDim,
+								size.getHeight());
+						layeredGraph.lengthwiseDim = Math.max(layeredGraph.lengthwiseDim,
+								position.getY());
+					}
+					else {
+						layer.crosswiseDim = Math.max(layer.crosswiseDim,
+								position.getY() + size.getHeight());
+						layer.lengthwiseDim = Math.max(layer.lengthwiseDim,
+								size.getWidth());
+						layeredGraph.lengthwiseDim = Math.max(layeredGraph.lengthwiseDim,
+								position.getX());
+					}
+				}
+			}
+		}
+		
 		// set the proper crosswise dimension for the whole graph
-		float maxWidth = 0.0f;
 		for (Layer layer : layeredGraph.getLayers()) {
 			layer.crosswiseDim += minDist;
-			maxWidth = Math.max(maxWidth, layer.crosswiseDim); 
+			layeredGraph.crosswiseDim = Math.max(layeredGraph.crosswiseDim,
+					layer.crosswiseDim); 
 		}
-		layeredGraph.crosswiseDim = maxWidth;
+	}
+	
+	/**
+	 * Gets the array of movable linear segments. This excludes the external
+	 * ports if their position is to be held fixed.
+	 * 
+	 * @return movable linear segments
+	 */
+	public LinearSegment[] getMovableSegments() {
+		return sortedSegments;
 	}
 	
 	/**
@@ -58,7 +99,22 @@ public class BasicNodePlacer extends AbstractAlgorithm implements INodePlacer {
 	@SuppressWarnings("unchecked")
 	private LinearSegment[] sortLinearSegments(LayeredGraph layeredGraph) {
 		// create and initialize segment ordering graph
-		LinearSegment[] linearSegments = layeredGraph.getLinearSegments().toArray(new LinearSegment[0]);
+		LinearSegment[] linearSegments;
+		if (layeredGraph.areExternalPortsFixed()) {
+			List<LinearSegment> filteredSegments = new LinkedList<LinearSegment>();
+			for (LinearSegment segment : layeredGraph.getLinearSegments()) {
+				if (segment.elements.size() == 1) {
+					Layer layer = segment.elements.get(0).getLayer();
+					if (layer.rank != 0 && layer.height != 0)
+						filteredSegments.add(segment);
+				}
+				else
+					filteredSegments.add(segment);
+			}
+			linearSegments = filteredSegments.toArray(new LinearSegment[0]);
+		}
+		else
+			linearSegments = layeredGraph.getLinearSegments().toArray(new LinearSegment[0]);
 		List<LinearSegment>[] outgoing = new List[linearSegments.length];
 		int[] incomingCount = new int[linearSegments.length];
 		int[] newRanks = new int[linearSegments.length];
@@ -124,7 +180,8 @@ public class BasicNodePlacer extends AbstractAlgorithm implements INodePlacer {
 			for (LayerElement element : segment.elements) {
 				Layer layer = element.getLayer();
 				KDimension elemDim = element.getRealDim();
-				float totalCrosswiseDim = element.setCrosswisePos(newPos, minDist);
+				element.setCrosswisePos(newPos, minDist);
+				float totalCrosswiseDim = element.getTotalCrosswiseDim(minDist);
 				if (layoutDirection == LAYOUT_OPTION.VERTICAL) {
 					layer.crosswiseDim = newPos + totalCrosswiseDim;
 					layer.lengthwiseDim = Math.max(layer.lengthwiseDim, elemDim.getHeight());

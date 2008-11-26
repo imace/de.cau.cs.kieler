@@ -51,6 +51,15 @@ public class LayerConnection {
 		this.targetElement = targetElem;
 		this.targetPort = null;
 	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	public String toString() {
+		return "[" + sourceElement.toString() + "] > ["
+			+ targetElement.toString() + "]";
+	}
 
 	/**
 	 * Gets the source element.

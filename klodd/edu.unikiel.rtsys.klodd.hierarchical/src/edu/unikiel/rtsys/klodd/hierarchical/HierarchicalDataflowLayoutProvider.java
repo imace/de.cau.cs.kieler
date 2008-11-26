@@ -20,17 +20,22 @@ import edu.unikiel.rtsys.klodd.hierarchical.structures.LayeredGraph;
 public class HierarchicalDataflowLayoutProvider extends
 		KimlAbstractLayoutProvider {
 	
-	/** Displayed name of this layout provider */
+	/** displayed name of this layout provider */
 	public static final String LAYOUTER_NAME = "KLoDD Hierarchical";
-	/** Name of the KLoDD layouters collection */
+	/** name of the KLoDD layouters collection */
 	public static final String COLLECTION_NAME = "KLoDD Layouters";
 	
-	// the cycle remover module
+	/** the minimal distance between two nodes */
+	private static final float MIN_NODE_DIST = 10.0f;
+	
+	/** the cycle remover module */
 	private ICycleRemover cycleRemover = null;
-	// the layer assigner module
+	/** the layer assigner module */
 	private ILayerAssigner layerAssigner = null;
-	// the crossing reducer module
+	/** the crossing reducer module */
 	private ICrossingReducer crossingReducer = null;
+	/** the node placer module */
+	private INodePlacer nodePlacer = null;
 	
 	/* (non-Javadoc)
 	 * @see edu.unikiel.rtsys.kieler.kiml.layout.services.KimlAbstractLayoutProvider#doLayout(edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup)
@@ -51,12 +56,14 @@ public class HierarchicalDataflowLayoutProvider extends
 			layeredGraph.createConnections();
 			// optimize the order of nodes in each layer
 			crossingReducer.reduceCrossings(layeredGraph);
+			// determine a crosswise placement for each node
+			nodePlacer.placeNodes(layeredGraph, MIN_NODE_DIST);
 			// TODO remaining modules
 		}
 		cycleRemover.restoreGraph();
 		
 		double executionTime = (double)(System.nanoTime() - startTime) * 1e-9;
-		if (executionTime > 1.0)
+		if (executionTime >= 1.0)
 			System.out.println("Execution time (" + nodeGroup.getSubNodeGroups().size() + " nodes): " + executionTime + " s");
 		else
 			System.out.println("Execution time (" + nodeGroup.getSubNodeGroups().size() + " nodes): " + executionTime * 1000 + " ms");
@@ -81,6 +88,7 @@ public class HierarchicalDataflowLayoutProvider extends
 		cycleRemover = new DFSCycleRemover();
 		layerAssigner = new LongestPathLayerAssigner();
 		crossingReducer = new LayerSweepCrossingReducer(new BarycenterCrossingReducer());
+		nodePlacer = new BalancingNodePlacer(new BasicNodePlacer());
 	}
 	
 	/**

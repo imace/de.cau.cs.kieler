@@ -68,6 +68,14 @@ public class LayeredGraph {
 		fixedExternalPorts = parentOptions.contains(LAYOUT_OPTION.FIXED_PORTS);
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	public String toString() {
+		return parentGroup.getLabel().getText();
+	}
+	
 	/**
 	 * Put the given object into a layer with specified rank. The search
 	 * for the right layer begins at the front of the internal list.
@@ -199,6 +207,17 @@ public class LayeredGraph {
 						}
 					}
 				}
+			}
+		}
+		// create linear segments for the last layer
+		for (LayerElement element : layers.get(layerCount - 1).getElements()) {
+			createLinearSegment(element);
+		}
+		
+		// calculate the connection routing for each layer element
+		for (Layer layer : layers) {
+			for (LayerElement element : layer.getElements()) {
+				element.calcEdgeRouting();
 			}
 		}
 	}
