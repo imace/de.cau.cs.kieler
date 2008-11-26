@@ -28,7 +28,15 @@ public class BasicNodePlacer extends AbstractAlgorithm implements INodePlacer {
 	/** layout direction for this algorithm instance */
 	private LAYOUT_OPTION layoutDirection;
 	/** array of sorted segments */
-	private LinearSegment[] sortedSegments;
+	private LinearSegment[] sortedSegments = null;
+	
+	/*
+	 * (non-Javadoc)
+	 * @see edu.unikiel.rtsys.klodd.core.algorithms.AbstractAlgorithm#reset()
+	 */
+	public void reset() {
+		sortedSegments = null;
+	}
 	
 	/*
 	 * (non-Javadoc)

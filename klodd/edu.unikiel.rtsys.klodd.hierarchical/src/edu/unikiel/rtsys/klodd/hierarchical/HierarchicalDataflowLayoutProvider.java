@@ -25,8 +25,8 @@ public class HierarchicalDataflowLayoutProvider extends
 	/** name of the KLoDD layouters collection */
 	public static final String COLLECTION_NAME = "KLoDD Layouters";
 	
-	/** the minimal distance between two nodes */
-	private static final float MIN_NODE_DIST = 10.0f;
+	/** the minimal distance between two nodes or edges */
+	private static final float MIN_DIST = 10.0f;
 	
 	/** the cycle remover module */
 	private ICycleRemover cycleRemover = null;
@@ -57,7 +57,7 @@ public class HierarchicalDataflowLayoutProvider extends
 			// optimize the order of nodes in each layer
 			crossingReducer.reduceCrossings(layeredGraph);
 			// determine a crosswise placement for each node
-			nodePlacer.placeNodes(layeredGraph, MIN_NODE_DIST);
+			nodePlacer.placeNodes(layeredGraph, MIN_DIST);
 			// TODO remaining modules
 		}
 		cycleRemover.restoreGraph();
