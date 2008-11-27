@@ -18,6 +18,12 @@
       </page>
    </extension>
    <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer
+            class="edu.unikiel.rtsys.kieler.ssm.gmf.diagram.layouter.preferences.PreferenceInitializer">
+      </initializer>
+   </extension>
+   <extension
          point="org.eclipse.ui.views.properties.tabbed.propertyTabs">
       <propertyTabs
             contributorId="edu.unikiel.rtsys.kieler.ssm.gmf.diagram">
