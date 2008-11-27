@@ -56,8 +56,6 @@ import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.swt.widgets.Widget;
 import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.handlers.HandlerUtil;
-
 import edu.unikiel.rtsys.kieler.kivik.viewer.content.ModelContentMergeViewer;
 import edu.unikiel.rtsys.kieler.kivik.viewer.content.part.IModelContentMergeViewerTab;
 import edu.unikiel.rtsys.kieler.kivik.viewer.content.part.ModelContentMergeTabFolder;
