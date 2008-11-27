@@ -38,6 +38,7 @@ import org.eclipse.emf.edit.provider.FeatureMapEntryWrapperItemProvider;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.gmf.runtime.notation.impl.DiagramImpl;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.StructuredViewer;
 import org.eclipse.jface.viewers.TreePath;
@@ -54,6 +55,8 @@ import org.eclipse.swt.widgets.Item;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.swt.widgets.Widget;
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.handlers.HandlerUtil;
 
 import edu.unikiel.rtsys.kieler.kivik.viewer.content.ModelContentMergeViewer;
 import edu.unikiel.rtsys.kieler.kivik.viewer.content.part.IModelContentMergeViewerTab;
@@ -76,7 +79,7 @@ import edu.unikiel.rtsys.kieler.kivik.viewer.content.part.diagram.ModelContentMe
  */
 public class ModelContentMergeDiffTab extends TreeViewer implements
 		IModelContentMergeViewerTab {
-	
+
 	/** <code>int</code> representing this viewer part side. */
 	protected final int partSide;
 
@@ -268,9 +271,11 @@ public class ModelContentMergeDiffTab extends TreeViewer implements
 		mapTreeItemsToUI();
 	}
 
-	
-	/* (non-Javadoc)
-	 * @see edu.unikiel.rtsys.kieler.kivik.viewer.content.part.IModelContentMergeViewerTab#setReflectiveInput(java.lang.Object)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @seeedu.unikiel.rtsys.kieler.kivik.viewer.content.part.
+	 * IModelContentMergeViewerTab#setReflectiveInput(java.lang.Object)
 	 */
 	public void setReflectiveInput(Object object) {
 		// We *need* to invalidate the cache here since setInput() would try to
@@ -281,12 +286,22 @@ public class ModelContentMergeDiffTab extends TreeViewer implements
 
 		final AdapterFactory adapterFactory = AdapterUtils.getAdapterFactory();
 		setLabelProvider(new AdapterFactoryLabelProvider(adapterFactory));
-		if (object instanceof DiagramImpl)
-			setInput(((DiagramImpl) object).getElement().eResource()
-					.getContents().get(0));
-		else if (object instanceof EObject)
+		if (object instanceof DiagramImpl) {
+			if (((DiagramImpl) object).getElement().eResource() != null)
+				setInput(((DiagramImpl) object).getElement().eResource()
+						.getContents().get(0));
+			else {
+				setInput(null);
+				MessageDialog
+						.openInformation(
+								PlatformUI.getWorkbench()
+										.getActiveWorkbenchWindow().getShell(),
+								"KIELER KiViK Plug-in",
+								"Not able to get domain history version for provided object. Try using an editor which saves domain and notation model in one file.");
+			}
+		} else if (object instanceof EObject) {
 			setInput(((EObject) object));// .eResource());
-		else {
+		} else {
 			assert object instanceof Resource;
 			setInput(object);
 		}

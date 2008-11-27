@@ -115,7 +115,8 @@ public final class KivikComparator {
 				modelResource.load(null);
 				return modelResource.getContents().get(0);
 			} catch (IOException e) {
-				e.printStackTrace();
+				System.out.println("Not able to obtain history domain model for selected notation model.");
+				System.out.println(e.toString());
 				return null;
 			}
 
