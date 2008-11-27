@@ -44,8 +44,7 @@
       </viewer>
       <contentTypeBinding
             contentMergeViewerId="edu.unikiel.rtsys.kieler.kivik.views.ContentMergeViewer"
-            contentTypeId="edu.unikiel.rtsys.kieler.kivik.CompareContentType"
-            structureMergeViewerId="edu.unikiel.rtsys.kieler.kivik.viewer.TreeMergeViewer">
+            contentTypeId="edu.unikiel.rtsys.kieler.kivik.CompareContentType">
       </contentTypeBinding>
    </extension>
    <extension
