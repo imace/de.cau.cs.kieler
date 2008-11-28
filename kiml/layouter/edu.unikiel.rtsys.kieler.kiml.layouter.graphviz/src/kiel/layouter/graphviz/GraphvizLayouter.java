@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.jface.preference.IPreferenceStore;
 
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.EDGE_LABEL_PLACEMENT;
@@ -23,6 +24,7 @@ import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.EDGE_TYPE;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KDimension;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KEdge;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KEdgeLabel;
+import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KEdgeLayout;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPoint;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphFactory;
@@ -46,11 +48,9 @@ import edu.unikiel.rtsys.kieler.kiml.layouter.graphviz.preferences.PreferenceCon
  * </ol>
  * <p/>
  * Supported features are node sizes and positions, tail and mid label
- * positions. Edges in GraphViz are described as B-splines curves, confusingly
- * also called Bezier splines. It seems that the control points are ordinary
- * splines, as they all lie on the edge themselves. When working with an GEF/GMF
- * editor, all these point are directly fed into the PolylineConnection of
- * GEF/GMF, which is a spline.
+ * positions. Edges in GraphViz are described as B-splines curves. The bezier
+ * curves are converted here to polyline to be able to work with an GEF/GMF
+ * editor.
  * <p/>
  * No hierarchy is supported by this implementation. Rather, some preprocessing
  * should take care hierarchy handling. One possibility is to send every
@@ -385,10 +385,9 @@ public class GraphvizLayouter {
 				 * is no seperate end coordinate for the edge given, as assumed
 				 * before.
 				 * 
-				 * ars, 2008-11-21, it seems that GraphViz uses B-Splines, some
-				 * generalisation of Bezier Curves. All the control points of
-				 * these splines rest on the spline itself, so this complies
-				 * with eclipse polylines.
+				 * ars, 2008-11-21, GraphViz uses cubic B-Splines, some
+				 * generalisation of Bezier Curves. The B-Splines are converted
+				 * here to a polyline that Eclipse understands
 				 * 
 				 * Addressing bezier curves in eclipse:
 				 * 
@@ -399,21 +398,27 @@ public class GraphvizLayouter {
 				edge.getLayout().setSourcePoint(
 						graphviz2KPoint(intList.get(0), intList.get(1)));
 
-				int i = 6;
-				for (; i < intList.size() - 3; i += 2) {
-					edge.getLayout().getGridPoints()
-							.add(
-									graphviz2KPoint(intList.get(i), intList
-											.get(i + 1)));
-
+				for (int i = 0; i < intList.size() - 7; i += 6) {
+					/* convert the bezier representation to a poly line */
+					bezierToPolyline(edge.getLayout(), new Point(intList
+							.get(i + 0), intList.get(i + 1)), new Point(intList
+							.get(i + 2), intList.get(i + 3)), new Point(intList
+							.get(i + 4), intList.get(i + 5)), new Point(intList
+							.get(i + 6), intList.get(i + 7)));
 				}
+				/*
+				 * need to remove the last grid point, as this is the same as
+				 * the target point below
+				 */
+				edge.getLayout().getGridPoints().remove(
+						edge.getLayout().getGridPoints().size() - 1);
 
 				/* last two points in the GraphViz list denote the end point */
 				edge.getLayout().setTargetPoint(
 						graphviz2KPoint(intList.get(intList.size() - 2),
 								intList.get(intList.size() - 1)));
 
-				/* tell all users that GraphViz produces some sort of spline */
+				/* tell all users that we produced some sort of spline */
 				edge.getLayout().setEdgeType(EDGE_TYPE.SPLINE);
 
 			} catch (Exception e) {
@@ -574,6 +579,41 @@ public class GraphvizLayouter {
 		newLocation.setX(x + prefPadX);
 		newLocation.setY(y + prefPadY);
 		return newLocation;
+	}
+
+	private void bezierToPolyline(KEdgeLayout layout, Point p0, Point p1,
+			Point p2, Point p3) {
+
+		/*
+		 * as the start point is not added below, that means the number of
+		 * points added to the polyline are the integer below -1
+		 */
+		int numberOfPoints = 4;
+		float dt;
+		int i;
+
+		dt = (float) (1.0 / (numberOfPoints - 1));
+		float ax, bx, cx;
+		float ay, by, cy;
+		float tSquared, tCubed;
+
+		cx = (float) (3.0 * (p1.x - p0.x));
+		bx = (float) (3.0 * (p2.x - p1.x) - cx);
+		ax = p3.x - p0.x - cx - bx;
+
+		cy = (float) (3.0 * (p1.y - p0.y));
+		by = (float) (3.0 * (p2.y - p1.y) - cy);
+		ay = p3.y - p0.y - cy - by;
+
+		for (i = 1; i < numberOfPoints; i++) {
+			float t = i * dt;
+
+			tSquared = t * t;
+			tCubed = tSquared * t;
+			int x = (int) (((ax * tCubed) + (bx * tSquared) + (cx * t)) + p0.x);
+			int y = (int) (((ay * tCubed) + (by * tSquared) + (cy * t)) + p0.y);
+			layout.getGridPoints().add(graphviz2KPoint(x, y));
+		}
 	}
 
 	/**
