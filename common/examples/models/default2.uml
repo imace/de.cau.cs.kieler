@@ -12,7 +12,9 @@
       <region xmi:id="_MK2rILcfEd2EBJfj4tdppg" name="Region">
         <subvertex xmi:type="uml:Pseudostate" xmi:id="_Oi7VwLcfEd2EBJfj4tdppg"/>
         <subvertex xmi:type="uml:State" xmi:id="_Tm93YLcfEd2EBJfj4tdppg" name="State"/>
+        <subvertex xmi:type="uml:FinalState" xmi:id="_qSQO8L0yEd2iNJ1yY0CfmA"/>
         <transition xmi:id="_UFPu0LcfEd2EBJfj4tdppg" target="_Tm93YLcfEd2EBJfj4tdppg" source="_Oi7VwLcfEd2EBJfj4tdppg"/>
+        <transition xmi:id="_rW6w8L0yEd2iNJ1yY0CfmA" target="_qSQO8L0yEd2iNJ1yY0CfmA" source="_Tm93YLcfEd2EBJfj4tdppg"/>
       </region>
     </subvertex>
     <subvertex xmi:type="uml:State" xmi:id="_C-NfULd1Ed2noIxrlWFVhQ" name="State6"/>
