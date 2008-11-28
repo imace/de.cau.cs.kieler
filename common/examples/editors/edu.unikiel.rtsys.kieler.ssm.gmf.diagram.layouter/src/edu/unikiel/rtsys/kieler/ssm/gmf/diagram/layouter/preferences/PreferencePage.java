@@ -68,6 +68,13 @@ public class PreferencePage extends FieldEditorPreferencePage implements
 		descriptionAHV
 				.setText("If checked, then the alternating HV layout is enabled.");
 
+		addField(new BooleanFieldEditor(
+				PreferenceConstants.PREF_AUTOSIZE_EMPTY_ELEMENTS,
+				"Autosize empty elements", options));
+		Label descriptionAEE = new Label(options, SWT.WRAP);
+		descriptionAEE
+				.setText("If checked, all SimpleStates and empty CompositeStates will be resized to a default value.");
+		
 		options.setLayoutData(new GridData(GridData.FILL, GridData.FILL, true,
 				false, 2, 1));
 		gl = new GridLayout(2, true);

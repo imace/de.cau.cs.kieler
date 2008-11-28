@@ -111,6 +111,7 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 	private boolean prefSmoothTransitions = false;
 	private boolean prefMultipleLayoutRuns = false;
 	private boolean prefAlternatingHVLayout = false;
+	private boolean prefAutosizeEmptyElements = true;
 	private float prefWidthCollapsed = 80f;
 	private float prefHeightCollapsed = 40f;
 
@@ -118,8 +119,12 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 	private GraphicalEditPart rootPart;
 	private KLayoutGraph layoutGraph;
 
-	/* height of header/title of Composite State */
+	/* height of header/title of Composite State and other defaults */
 	private int insetTop = 20;
+	private int defaultHeightSimple = 30;
+	private int defaultWidthSimple = 40;
+	private int defaultHeightComposite = 40;
+	private int defaultWidthComposite = 50;
 
 	/* some useful other objects */
 	private CommandStack commandStack = null;
@@ -538,11 +543,19 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 							.equals(
 									CompositeStateCompositeStateCompartment2EditPart.class)) {
 
+				/*
+				 * extend the label string to handle the node label of a
+				 * composite state correctly
+				 */
+				String text = currentNodeGroup.getLabel().getText();
+				currentNodeGroup.getLabel().setText(text.concat("XX"));
+
 				/* check if Compartment is expanded */
 				ShapeCompartmentFigure scf = (ShapeCompartmentFigure) ((GraphicalEditPart) childEditPart)
 						.getFigure();
 				AnimatableScrollPane asp = (AnimatableScrollPane) scf
 						.getScrollPane();
+
 				if (asp.isExpanded()) {
 					/*
 					 * if expanded, do also process the children
@@ -559,12 +572,6 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 							prefHeightCollapsed);
 					currentNodeGroup.getLayout().getSize().setWidth(
 							prefWidthCollapsed);
-					/*
-					 * extend the label string to handle the node label of a
-					 * composite state correctly
-					 */
-					String text = currentNodeGroup.getLabel().getText();
-					currentNodeGroup.getLabel().setText(text.concat("XX"));
 				}
 			}
 		}
@@ -623,6 +630,23 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 		// set size
 		currenNodegroup.getLayout().getSize().setHeight(currentBounds.height);
 		currenNodegroup.getLayout().getSize().setWidth(currentBounds.width);
+
+		// special treatment if Emma wants auto sizing
+		if (prefAutosizeEmptyElements) {
+			if (currentEditPart.getClass()
+					.equals(CompositeState2EditPart.class)) {
+				currenNodegroup.getLayout().getSize().setHeight(
+						defaultHeightComposite);
+				currenNodegroup.getLayout().getSize().setWidth(
+						defaultWidthComposite);
+			} else if (currentEditPart.getClass().equals(
+					SimpleStateEditPart.class)) {
+				currenNodegroup.getLayout().getSize().setHeight(
+						defaultHeightSimple);
+				currenNodegroup.getLayout().getSize().setWidth(
+						defaultWidthSimple);
+			}
+		}
 
 		// set label and ID
 		currenNodegroup.getLabel().setText(
@@ -853,6 +877,9 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 		prefWidthCollapsed = KimlSSMDiagramLayouterPlugin.getDefault()
 				.getPreferenceStore().getInt(
 						PreferenceConstants.PREF_WIDTH_COLLAPSED);
+		prefAutosizeEmptyElements = KimlSSMDiagramLayouterPlugin.getDefault()
+				.getPreferenceStore().getBoolean(
+						PreferenceConstants.PREF_AUTOSIZE_EMPTY_ELEMENTS);
 		return true;
 	}
 

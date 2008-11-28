@@ -20,4 +20,5 @@ public class PreferenceConstants {
 	public static final String PREF_ALTERNATING_HV_LAYOUT = "alternating.hv.layout";
 	public static final String PREF_HEIGHT_COLLAPSED = "height.collapsed";
 	public static final String PREF_WIDTH_COLLAPSED = "width.collapsed";
+	public static final String PREF_AUTOSIZE_EMPTY_ELEMENTS = "autosize.empty.elements";
 }
