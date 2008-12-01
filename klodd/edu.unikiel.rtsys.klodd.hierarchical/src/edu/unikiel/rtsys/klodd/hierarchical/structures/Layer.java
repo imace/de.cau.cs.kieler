@@ -22,6 +22,8 @@ public class Layer {
 	public int rank;
 	/** the height of this layer */
 	public int height;
+	/** lengthwise position of this layer */
+	public float lengthwisePos = 0.0f;
 	/** crosswise dimension of this layer */
 	public float crosswiseDim = 0.0f;
 	/** lengthwise dimension of this layer */

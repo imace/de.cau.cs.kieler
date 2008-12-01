@@ -38,10 +38,14 @@ public class LayerElement {
 	private KPoint position;
 	/** the total crosswise dimension */
 	private float totalCrosswiseDim = -1.0f;
-	/** the number of edges that are routed before this element */
+	/** the number of edges that are routed before this element (crosswise) */
 	private int edgesBefore = 0;
-	/** the number of edges that are routed after this element */
+	/** the number of edges that are routed after this element (crosswise) */
 	private int edgesAfter = 0;
+	/** the number of edges that are routed in front of this element */
+	private int edgesFront = 0;
+	/** the number of edges that are routed in the back of this element */
+	private int edgesBack = 0;
 	/** the list of incoming layer connections */
 	private List<LayerConnection> incoming = new LinkedList<LayerConnection>();
 	/** the list of outgoing layer connections */
@@ -288,6 +292,24 @@ public class LayerElement {
 	}
 	
 	/**
+	 * Gets the number of edges that are routed in front of this element.
+	 * 
+	 * @return number of edges in front
+	 */
+	public int getEdgesFront() {
+		return edgesFront;
+	}
+
+	/**
+	 * Gets the number of edges that are routed in the back of this element.
+	 * 
+	 * @return number of edges in the back
+	 */
+	public int getEdgesBack() {
+		return edgesBack;
+	}
+
+	/**
 	 * Gets the port rank for a given port.
 	 * 
 	 * @param port port for which the rank shall be obtained
@@ -450,76 +472,105 @@ public class LayerElement {
 		LAYOUT_OPTION layoutDirection = layer.getLayeredGraph().getLayoutDirection();
 		if (elemObj instanceof KNodeGroup) {
 			KNodeGroup node = (KNodeGroup)elemObj;
-			int[] routingSlots = new int[node.getPorts().size()];
+			int size = node.getPorts().size();
+			int[] sideRouting = new int[size];
+			int[] frontIncoming = new int[size];
+			int[] backOutgoing = new int[size];
+			for (int i = 0; i < size; i++) {
+				frontIncoming[i] = 0;
+				backOutgoing[i] = 0;
+			}
 			
 			// determine for each port whether it needs a routing slot
 			if (layoutDirection == LAYOUT_OPTION.VERTICAL) {
 				for (KPort port : node.getPorts()) {
+					int rank = getPortRank(port, true);
 					switch (port.getLayout().getPlacement()) {
 					case NORTH:
-						if (hasOutgoing(port))
-							routingSlots[getPortRank(port, true)] = 1;
+						if (hasOutgoing(port)) {
+							sideRouting[rank] = 1;
+							backOutgoing[rank] = 1;
+						}
 						else
-							routingSlots[getPortRank(port, true)] = 0;
+							sideRouting[rank] = 0;
 						break;
 					case EAST:
-						routingSlots[getPortRank(port, true)] = 1;
+						sideRouting[rank] = 1;
 						break;
 					case SOUTH:
-						if (hasIncoming(port))
-							routingSlots[getPortRank(port, true)] = 1;
+						if (hasIncoming(port)) {
+							sideRouting[rank] = 1;
+							frontIncoming[rank] = 1;
+						}
 						else
-							routingSlots[getPortRank(port, true)] = 0;
+							sideRouting[rank] = 0;
 						break;
 					case WEST:
-						routingSlots[getPortRank(port, true)] = -1;
+						sideRouting[rank] = -1;
 						break;
 					}
 				}				
 			}
 			else {
 				for (KPort port : node.getPorts()) {
+					int rank = getPortRank(port, true);
 					switch (port.getLayout().getPlacement()) {
 					case NORTH:
-						routingSlots[getPortRank(port, true)] = -1;
+						sideRouting[rank] = -1;
 						break;
 					case EAST:
-						if (hasIncoming(port))
-							routingSlots[getPortRank(port, true)] = 1;
+						if (hasIncoming(port)) {
+							sideRouting[rank] = 1;
+							frontIncoming[rank] = 1;
+						}
 						else
-							routingSlots[getPortRank(port, true)] = 0;
+							sideRouting[rank] = 0;
 						break;
 					case SOUTH:
-						routingSlots[getPortRank(port, true)] = 1;
+						sideRouting[rank] = 1;
 						break;
 					case WEST:
-						if (hasOutgoing(port))
-							routingSlots[getPortRank(port, true)] = 1;
+						if (hasOutgoing(port)) {
+							sideRouting[rank] = 1;
+							backOutgoing[rank] = 1;
+						}
 						else
-							routingSlots[getPortRank(port, true)] = 0;
+							sideRouting[rank] = 0;
 						break;
 					}
 				}
 			}
 			
 			// determine the number of slots for this node
-			for (int i = 0; i < node.getPorts().size(); i++) {
-				if (routingSlots[i] < 0) {
+			for (int i = 0; i < size; i++) {
+				if (sideRouting[i] < 0) {
 					edgesBefore++;
-					routingSlots[i] = -edgesBefore;
+					sideRouting[i] = -edgesBefore;
 				}
-				else if (routingSlots[i] > 0) {
+				else if (sideRouting[i] > 0) {
 					edgesAfter++;
-					routingSlots[i] = edgesAfter;
+					sideRouting[i] = edgesAfter;
+				}
+				if (frontIncoming[i] > 0) {
+					edgesFront++;
+					frontIncoming[i] = edgesFront;
+				}
+				if (backOutgoing[i] > 0) {
+					edgesBack++;
+					backOutgoing[i] = edgesBack;
 				}
 			}
 			
 			// assign the right routing slot to each connection
 			for (LayerConnection connection : incoming) {
-				connection.targetRoutePos = routingSlots[getPortRank(connection.getTargetPort(), true)];
+				int rank = getPortRank(connection.getTargetPort(), true);
+				connection.targetSidePos = sideRouting[rank];
+				connection.targetFrontPos = frontIncoming[rank];
 			}
 			for (LayerConnection connection : outgoing) {
-				connection.sourceRoutePos = routingSlots[getPortRank(connection.getSourcePort(), true)];
+				int rank = getPortRank(connection.getSourcePort(), true);
+				connection.sourceSidePos = sideRouting[rank];
+				connection.sourceBackPos = backOutgoing[rank];
 			}
 		}
 		else if (elemObj instanceof KPort) {

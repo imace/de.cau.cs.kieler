@@ -3,8 +3,6 @@ package edu.unikiel.rtsys.klodd.hierarchical.impl;
 import java.util.ListIterator;
 
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPoint;
-import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPort;
-import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPortLayout;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_OPTION;
 import edu.unikiel.rtsys.klodd.core.algorithms.AbstractAlgorithm;
 import edu.unikiel.rtsys.klodd.hierarchical.modules.INodePlacer;
@@ -29,8 +27,6 @@ public class BalancingNodePlacer extends AbstractAlgorithm implements
 	private float minDist;
 	/** maximal crosswise dimension of the layered graph */
 	private float maxWidth;
-	/** the layered graph that is currenlty processed */
-	private LayeredGraph layeredGraph;
 	/** layout direction for this algorithm instance */
 	private LAYOUT_OPTION layoutDirection;
 	/** array of move requests for the linear segments */
@@ -62,7 +58,6 @@ public class BalancingNodePlacer extends AbstractAlgorithm implements
 	 */
 	public void placeNodes(LayeredGraph layeredGraph, float minDist) {
 		this.minDist = minDist;
-		this.layeredGraph = layeredGraph;
 		this.layoutDirection = layeredGraph.getLayoutDirection();
 		// apply the basic node placement
 		basicNodePlacer.placeNodes(layeredGraph, minDist);
@@ -197,61 +192,8 @@ public class BalancingNodePlacer extends AbstractAlgorithm implements
 	 * @return position difference
 	 */
 	private float calcPosDelta(LayerConnection connection, boolean forward) {
-		// determine source position of this connection
-		float sourcePos = layoutDirection == LAYOUT_OPTION.VERTICAL
-				? connection.getSourceElement().getPosition().getX()
-				: connection.getSourceElement().getPosition().getY();
-		if (connection.sourceRoutePos == 0) {
-			KPort sourcePort = connection.getSourcePort();
-			if (sourcePort != null) {
-				KPortLayout portLayout = sourcePort.getLayout();
-				sourcePos += layoutDirection == LAYOUT_OPTION.VERTICAL
-						? portLayout.getSize().getWidth() / 2
-						: portLayout.getSize().getHeight() / 2;
-				if (sourcePort.getNodeGroup() != layeredGraph.getParentGroup()) {
-					sourcePos += layoutDirection == LAYOUT_OPTION.VERTICAL
-							? portLayout.getLocation().getX()
-							: portLayout.getLocation().getY();
-				}
-			}
-		}
-		else if (connection.sourceRoutePos > 0) {
-			sourcePos += (layoutDirection == LAYOUT_OPTION.VERTICAL
-					? connection.getSourceElement().getRealDim().getWidth()
-					: connection.getSourceElement().getRealDim().getHeight())
-					+ connection.sourceRoutePos * minDist;
-		}
-		else if (connection.sourceRoutePos < 0) {
-			sourcePos += connection.sourceRoutePos * minDist;
-		}
-		
-		// determine target position of this connection
-		float targetPos = layoutDirection == LAYOUT_OPTION.VERTICAL
-				? connection.getTargetElement().getPosition().getX()
-				: connection.getTargetElement().getPosition().getY();
-		if (connection.targetRoutePos == 0) {
-			KPort targetPort = connection.getTargetPort();
-			if (targetPort != null) {
-				KPortLayout portLayout = targetPort.getLayout();
-				targetPos += layoutDirection == LAYOUT_OPTION.VERTICAL
-						? portLayout.getSize().getWidth() / 2
-						: portLayout.getSize().getHeight() / 2;
-				if (targetPort.getNodeGroup() != layeredGraph.getParentGroup()) {
-					targetPos += layoutDirection == LAYOUT_OPTION.VERTICAL
-							? portLayout.getLocation().getX()
-							: portLayout.getLocation().getY();
-				}
-			}
-		}
-		else if (connection.targetRoutePos > 0) {
-			targetPos += (layoutDirection == LAYOUT_OPTION.VERTICAL
-					? connection.getTargetElement().getRealDim().getWidth()
-					: connection.getTargetElement().getRealDim().getHeight())
-					+ connection.targetRoutePos * minDist;
-		}
-		else if (connection.targetRoutePos < 0) {
-			targetPos += connection.targetRoutePos * minDist;
-		}
+		float sourcePos = connection.calcSourcePos(minDist);
+		float targetPos = connection.calcTargetPos(minDist);
 		
 		// determine position delta, considering previous move requests
 		if (forward) {

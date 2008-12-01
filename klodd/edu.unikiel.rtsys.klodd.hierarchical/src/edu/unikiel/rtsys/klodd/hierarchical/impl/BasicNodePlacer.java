@@ -51,32 +51,14 @@ public class BasicNodePlacer extends AbstractAlgorithm implements INodePlacer {
 		// create an unbalanced placement from the sorted segments
 		createUnbalancedPlacement(sortedSegments);
 		
-		// process fixed external ports
-		if (layeredGraph.areExternalPortsFixed()) {
-			Layer layer = layeredGraph.getLayers().get(0);
-			if (layer.rank == 0) {
-				for (LayerElement element : layer.getElements()) {
-					element.takePortPos();
-					KPoint position = element.getPosition();
-					KDimension size = element.getRealDim();
-					if (layoutDirection == LAYOUT_OPTION.VERTICAL) {
-						layer.crosswiseDim = Math.max(layer.crosswiseDim,
-								position.getX() + size.getWidth());
-						layer.lengthwiseDim = Math.max(layer.lengthwiseDim,
-								size.getHeight());
-						layeredGraph.lengthwiseDim = Math.max(layeredGraph.lengthwiseDim,
-								position.getY());
-					}
-					else {
-						layer.crosswiseDim = Math.max(layer.crosswiseDim,
-								position.getY() + size.getHeight());
-						layer.lengthwiseDim = Math.max(layer.lengthwiseDim,
-								size.getWidth());
-						layeredGraph.lengthwiseDim = Math.max(layeredGraph.lengthwiseDim,
-								position.getX());
-					}
-				}
-			}
+		// process external ports
+		Layer externalLayer = layeredGraph.getLayers().get(0);
+		if (externalLayer.rank == 0) {
+			processExternalLayer(externalLayer);
+		}
+		externalLayer = layeredGraph.getLayers().get(layeredGraph.getLayers().size() - 1);
+		if (externalLayer.height == 0) {
+			processExternalLayer(externalLayer);
 		}
 		
 		// set the proper crosswise dimension for the whole graph
@@ -197,6 +179,40 @@ public class BasicNodePlacer extends AbstractAlgorithm implements INodePlacer {
 				else {
 					layer.crosswiseDim = newPos + totalCrosswiseDim;
 					layer.lengthwiseDim = Math.max(layer.lengthwiseDim, elemDim.getWidth());
+				}
+			}
+		}
+	}
+	
+	/**
+	 * Adjusts the size properties of a layer that contains only
+	 * external ports.
+	 * 
+	 * @param layer layer with external ports
+	 */
+	private void processExternalLayer(Layer layer) {
+		LayeredGraph layeredGraph = layer.getLayeredGraph();
+		if (layeredGraph.areExternalPortsFixed()) {
+			// process fixed external layer
+			for (LayerElement element : layer.getElements()) {
+				element.takePortPos();
+				KPoint position = element.getPosition();
+				KDimension size = element.getRealDim();
+				if (layoutDirection == LAYOUT_OPTION.VERTICAL) {
+					layer.crosswiseDim = Math.max(layer.crosswiseDim,
+							position.getX() + size.getWidth());
+					layer.lengthwiseDim = Math.max(layer.lengthwiseDim,
+							size.getHeight());
+					layeredGraph.lengthwiseDim = Math.max(layeredGraph.lengthwiseDim,
+							position.getY());
+				}
+				else {
+					layer.crosswiseDim = Math.max(layer.crosswiseDim,
+							position.getY() + size.getHeight());
+					layer.lengthwiseDim = Math.max(layer.lengthwiseDim,
+							size.getWidth());
+					layeredGraph.lengthwiseDim = Math.max(layeredGraph.lengthwiseDim,
+							position.getX());
 				}
 			}
 		}
