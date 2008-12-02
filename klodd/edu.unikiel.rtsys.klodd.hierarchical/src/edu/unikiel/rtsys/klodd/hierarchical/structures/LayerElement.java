@@ -161,10 +161,11 @@ public class LayerElement {
 	/**
 	 * Adds a new cross-layer connection with given target.
 	 * 
+	 * @param edge the edge between the two node groups
 	 * @param target target layer element
 	 */
-	public void addOutgoing(LayerElement target) {
-		LayerConnection connection = new LayerConnection(this, target);
+	public void addOutgoing(KEdge edge, LayerElement target) {
+		LayerConnection connection = new LayerConnection(edge, this, target);
 		this.outgoing.add(connection);
 		target.incoming.add(connection);
 	}
@@ -172,14 +173,41 @@ public class LayerElement {
 	/**
 	 * Adds a new cross-layer connection with given target.
 	 * 
+	 * @param edge the edge between the two node groups
 	 * @param target target layer element
 	 * @param sourcePort the source port
 	 * @param targetPort the target port
 	 */
-	public void addOutgoing(LayerElement target, KPort sourcePort, KPort targetPort) {
-		LayerConnection connection = new LayerConnection(this, sourcePort, target, targetPort);
+	public void addOutgoing(KEdge edge, LayerElement target,
+			KPort sourcePort, KPort targetPort) {
+		LayerConnection connection = new LayerConnection(edge, this,
+				sourcePort, target, targetPort);
 		this.outgoing.add(connection);
 		target.incoming.add(connection);
+	}
+	
+	/**
+	 * Applies the layout of this layer element to the contained object.
+	 * 
+	 * @param offset offset to be added to this element's position
+	 */
+	public void applyLayout(KPoint offset) {
+		if (elemObj instanceof KNodeGroup) {
+			KNodeGroup node = (KNodeGroup)elemObj;
+			node.getLayout().getLocation().setX(position.getX() + offset.getX());
+			node.getLayout().getLocation().setY(position.getY() + offset.getY());
+		}
+		else if (elemObj instanceof KPort) {
+			KPort port = (KPort)elemObj;
+			if (layer.getLayeredGraph().areExternalPortsFixed()) {
+				port.getLayout().getLocation().setX(position.getX());
+				port.getLayout().getLocation().setY(position.getY());
+			}
+			else {
+				port.getLayout().getLocation().setX(position.getX() + offset.getX());
+				port.getLayout().getLocation().setY(position.getY() + offset.getY());
+			}
+		}
 	}
 
 	/**

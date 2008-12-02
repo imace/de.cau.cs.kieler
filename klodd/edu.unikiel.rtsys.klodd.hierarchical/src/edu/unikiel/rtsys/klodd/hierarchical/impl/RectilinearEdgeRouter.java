@@ -59,13 +59,20 @@ public class RectilinearEdgeRouter extends AbstractAlgorithm implements
 		this.layerPos = 0.0f; 
 		this.maxCrosswisePos = layeredGraph.crosswiseDim;
 		this.maxLengthwiseAddPos = 0.0f;
+
+		// add a left border if there are no input ports
+		if (layeredGraph.getLayers().get(0).rank != 0)
+			layerPos = minDist;
 		
 		// process all outgoing connections from each layer
 		ListIterator<Layer> layerIter = layeredGraph.getLayers().listIterator();
 		while (layerIter.hasNext()) {
 			Layer layer = layerIter.next();
+			// layout all movable elements of the current layer
+			float frontPadding = layer.layoutElements(layerPos, minDist);
 			if (layerIter.hasNext()) {
-				processLayer(layer);
+				// layout all outgoing connections of the current layer 
+				processLayer(layer, frontPadding);
 			}
 		}
 		if (layeredGraph.getLayoutDirection() == LAYOUT_OPTION.VERTICAL) {
@@ -89,13 +96,12 @@ public class RectilinearEdgeRouter extends AbstractAlgorithm implements
 	 * Processes connections from a given layer to the subsequent one.
 	 * 
 	 * @param layer layer to be processed
+	 * @param frontPadding amount of space to leave in front of the layer
 	 */
-	private void processLayer(Layer layer) {
+	private void processLayer(Layer layer, float frontPadding) {
 		LAYOUT_OPTION layoutDirection = layer.getLayeredGraph().getLayoutDirection();
-		// determine number of outgoing connections for each port and padding values
+		// determine number of outgoing connections for each port
 		Map<KPort, Integer> outgoing = new HashMap<KPort, Integer>();
-		float backPadding = 0.0f;
-		float frontPadding = 0.0f;
 		for (LayerElement element : layer.getElements()) {
 			// count outgoing connections
 			for (LayerConnection connection : element.getOutgoingConnections()) {
@@ -110,32 +116,12 @@ public class RectilinearEdgeRouter extends AbstractAlgorithm implements
 					}
 				}
 			}
-			// determine padding values
-			float sideSpace = (layer.lengthwiseDim - (layoutDirection == LAYOUT_OPTION.VERTICAL
-					? element.getRealDim().getHeight() : element.getRealDim().getWidth())) / 2;
-			backPadding = Math.max(backPadding,
-					element.getEdgesBack() * minDist - sideSpace);
-			frontPadding = Math.max(frontPadding,
-					element.getEdgesFront() * minDist - sideSpace);
 		}
 		
-		// create routing slots for each port and set node positions
+		// create routing slots for each port
 		Map<KPort, RoutingSlot> slotMap = new LinkedHashMap<KPort, RoutingSlot>();
 		Map<LayerConnection, ExternalRouting> routingMap = new HashMap<LayerConnection, ExternalRouting>();
-		layer.lengthwisePos = layerPos + backPadding;
-		for (LayerElement element : layer.getElements()) {
-			if (layer.rank > 0) {
-				// set the lengthwise position of each node
-				if (layoutDirection == LAYOUT_OPTION.VERTICAL) {
-					float sideSpace = (layer.lengthwiseDim - element.getRealDim().getHeight()) / 2;
-					element.getPosition().setY(layer.lengthwisePos + sideSpace);
-				}
-				else {
-					float sideSpace = (layer.lengthwiseDim - element.getRealDim().getWidth()) / 2;
-					element.getPosition().setX(layer.lengthwisePos + sideSpace);
-				}
-			}
-			
+		for (LayerElement element : layer.getElements()) {		
 			for (LayerConnection connection : element.getOutgoingConnections()) {
 				// choose source or target port for routing
 				Integer sourceValue = outgoing.get(connection.getSourcePort());

@@ -26,7 +26,7 @@ public class HierarchicalDataflowLayoutProvider extends
 	public static final String COLLECTION_NAME = "KLoDD Layouters";
 	
 	/** the minimal distance between two nodes or edges */
-	private static final float MIN_DIST = 10.0f;
+	private static final float MIN_DIST = 15.0f;
 	
 	/** the cycle remover module */
 	private ICycleRemover cycleRemover = null;

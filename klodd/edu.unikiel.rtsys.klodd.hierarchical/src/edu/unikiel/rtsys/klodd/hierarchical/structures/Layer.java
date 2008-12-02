@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.LinkedList;
 import java.util.Map;
 
+import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_OPTION;
+
 /**
  * A single Layer used in a layered graph.
  * 
@@ -64,6 +66,46 @@ public class Layer {
 		LayerElement element = new LayerElement(obj, this);
 		elements.add(element);
 		return element;
+	}
+	
+	/**
+	 * Sets the lengthwise position of this layer and all layer elements.
+	 * 
+	 * @param layerPos starting lengthwise position of this layer
+	 * @param minDist minimal distance between nodes and connections
+	 * @return amount of space to leave in front of this layer
+	 */
+	public float layoutElements(float layerPos, float minDist) {
+		LAYOUT_OPTION layoutDirection = layeredGraph.getLayoutDirection();
+		float backPadding = 0.0f;
+		float frontPadding = 0.0f;
+		
+		// determine padding values
+		for (LayerElement element : elements) {
+			float sideSpace = (lengthwiseDim - (layoutDirection == LAYOUT_OPTION.VERTICAL
+					? element.getRealDim().getHeight() : element.getRealDim().getWidth())) / 2;
+			backPadding = Math.max(backPadding,
+					element.getEdgesBack() * minDist - sideSpace);
+			frontPadding = Math.max(frontPadding,
+					element.getEdgesFront() * minDist - sideSpace);
+		}
+		lengthwisePos = layerPos + backPadding;
+		
+		// set the lengthwise position of each node
+		for (LayerElement element : elements) {
+			if (rank > 0 && height > 0) {
+				if (layoutDirection == LAYOUT_OPTION.VERTICAL) {
+					float sideSpace = (lengthwiseDim - element.getRealDim().getHeight()) / 2;
+					element.getPosition().setY(lengthwisePos + sideSpace);
+				}
+				else {
+					float sideSpace = (lengthwiseDim - element.getRealDim().getWidth()) / 2;
+					element.getPosition().setX(lengthwisePos + sideSpace);
+				}
+			}
+		}
+		
+		return frontPadding;
 	}
 	
 	/**

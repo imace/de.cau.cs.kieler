@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KEdge;
+import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KInsets;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPoint;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPort;
@@ -233,7 +234,40 @@ public class LayeredGraph {
 	 * Applies the layout of this layered graph to the contained layout graph.
 	 */
 	public void applyLayout() {
+		KPoint offset = KimlLayoutGraphFactory.eINSTANCE.createKPoint();
+		KInsets insets = parentGroup.getLayout().getInsets();
+		offset.setX(position.getX() + insets.getLeft());
+		offset.setY(position.getY() + insets.getTop());
+		// apply the new layout to the contained elements
+		for (Layer layer : layers) {
+			for (LayerElement element : layer.getElements()) {
+				element.applyLayout(offset);
+				for (LayerConnection connection : element.getOutgoingConnections()) {
+					connection.applyLayout(offset);
+				}
+			}
+		}
 		
+		// update the size of the parent node group
+		float width = insets.getLeft() + insets.getRight();
+		float height = insets.getTop() + insets.getBottom();
+		if (layoutDirection == LAYOUT_OPTION.VERTICAL) {
+			width += crosswiseDim;
+			height += lengthwiseDim;
+		}
+		else {
+			width += lengthwiseDim;
+			height += crosswiseDim;
+		}
+		parentGroup.getLayout().getSize().setWidth(width);
+		parentGroup.getLayout().getSize().setHeight(height);
+		
+		// update layout options of the parent node group
+		List<LAYOUT_OPTION> layoutOptions = parentGroup.getLayout().getLayoutOptions();
+		if (!layoutOptions.contains(LAYOUT_OPTION.FIXED_SIZE))
+			layoutOptions.add(LAYOUT_OPTION.FIXED_SIZE);
+		if (!layoutOptions.contains(LAYOUT_OPTION.FIXED_PORTS))
+			layoutOptions.add(LAYOUT_OPTION.FIXED_PORTS);
 	}
 
 	/**
@@ -300,7 +334,7 @@ public class LayeredGraph {
 		Layer sourceLayer = source.getLayer();
 		Layer targetLayer = target.getLayer();
 		if (targetLayer.rank - sourceLayer.rank == 1) {
-			source.addOutgoing(target, sourcePort, targetPort);
+			source.addOutgoing(edge, target, sourcePort, targetPort);
 		}
 		else {
 			// determine the index of the first layer after the source layer
@@ -310,17 +344,17 @@ public class LayeredGraph {
 			// create a long edge as linear segment
 			LayerElement newElement = layers.get(layerIndex).put(edge);
 			LinearSegment linearSegment = createLinearSegment(newElement);
-			source.addOutgoing(newElement, sourcePort, null);
+			source.addOutgoing(edge, newElement, sourcePort, null);
 			LayerElement currentElement = newElement;
 			for (int i = sourceLayer.rank + 1; i < targetLayer.rank - 1; i++) {
 				layerIndex++;
 				newElement = layers.get(layerIndex).put(edge);
 				linearSegment.elements.add(newElement);
 				newElement.linearSegment = linearSegment;
-				currentElement.addOutgoing(newElement);
+				currentElement.addOutgoing(edge, newElement);
 				currentElement = newElement;
 			}
-			currentElement.addOutgoing(target, null, targetPort);
+			currentElement.addOutgoing(edge, target, null, targetPort);
 		}
 	}
 	

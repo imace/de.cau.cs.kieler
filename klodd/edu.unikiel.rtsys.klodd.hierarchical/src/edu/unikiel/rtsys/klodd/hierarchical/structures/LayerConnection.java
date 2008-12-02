@@ -3,10 +3,12 @@ package edu.unikiel.rtsys.klodd.hierarchical.structures;
 import java.util.LinkedList;
 import java.util.List;
 
+import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KEdge;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPoint;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPort;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPortLayout;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_OPTION;
+import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.PORT_PLACEMENT;
 
 /**
  * Connection between two layer elements in a layered graph.
@@ -30,6 +32,8 @@ public class LayerConnection {
 	/** list of bend points of this connection */
 	public List<KPoint> bendPoints = new LinkedList<KPoint>();
 	
+	/** the contained edge object */
+	private KEdge edge;
 	/** the source element */
 	private LayerElement sourceElement;
 	/** the source port */
@@ -42,13 +46,15 @@ public class LayerConnection {
 	/**
 	 * Creates a layer connection with given source and target.
 	 * 
+	 * @param edge the edge that is to be contained in this layer connection
 	 * @param sourceElem the source element
 	 * @param sourcePort the source port
 	 * @param targetElem the target element
 	 * @param targetPort the target port
 	 */
-	public LayerConnection(LayerElement sourceElem, KPort sourcePort,
+	public LayerConnection(KEdge edge, LayerElement sourceElem, KPort sourcePort,
 			LayerElement targetElem, KPort targetPort) {
+		this.edge = edge;
 		this.sourceElement = sourceElem;
 		this.sourcePort = sourcePort;
 		this.targetElement = targetElem;
@@ -58,14 +64,12 @@ public class LayerConnection {
 	/**
 	 * Creates a layer connection with given source and target.
 	 * 
+	 * @param edge the edge that is to be contained in this layer connection
 	 * @param sourceElem the source element
 	 * @param targetElem the target element
 	 */
-	public LayerConnection(LayerElement sourceElem, LayerElement targetElem) {
-		this.sourceElement = sourceElem;
-		this.sourcePort = null;
-		this.targetElement = targetElem;
-		this.targetPort = null;
+	public LayerConnection(KEdge edge, LayerElement sourceElem, LayerElement targetElem) {
+		this(edge, sourceElem, null, targetElem, null);
 	}
 	
 	/*
@@ -75,6 +79,47 @@ public class LayerConnection {
 	public String toString() {
 		return "[" + sourceElement.toString() + "] > ["
 			+ targetElement.toString() + "]";
+	}
+	
+	/**
+	 * Applies the layout of this layer connection to the contained edge.
+	 * 
+	 * @param offset offset to be added to each bend point
+	 */
+	public void applyLayout(KPoint offset) {
+		LayeredGraph layeredGraph = sourceElement.getLayer().getLayeredGraph();
+		edge.getLayout().getGridPoints().clear();
+		int omitXOffset = -1, omitYOffset = -1;
+		if (sourcePort != null && sourcePort.getNodeGroup() == layeredGraph.getParentGroup()
+				&& layeredGraph.areExternalPortsFixed()) {
+			if (sourcePort.getLayout().getPlacement() == PORT_PLACEMENT.NORTH
+					|| sourcePort.getLayout().getPlacement() == PORT_PLACEMENT.SOUTH) {
+				omitXOffset = 0;
+			}
+			else {
+				omitYOffset = 0;
+			}
+		}
+		else if (targetPort != null && targetPort.getNodeGroup() == layeredGraph.getParentGroup()
+				&& layeredGraph.areExternalPortsFixed()) {
+			if (sourcePort.getLayout().getPlacement() == PORT_PLACEMENT.NORTH
+					|| sourcePort.getLayout().getPlacement() == PORT_PLACEMENT.SOUTH) {
+				omitXOffset = edge.getLayout().getGridPoints().size()-1;
+			}
+			else {
+				omitYOffset = edge.getLayout().getGridPoints().size()-1;
+			}
+		}
+		
+		int i = 0;
+		for (KPoint point : bendPoints) {
+			if (i != omitXOffset)
+				point.setX(point.getX() + offset.getX());
+			if (i != omitYOffset)
+				point.setY(point.getY() + offset.getY());
+			edge.getLayout().getGridPoints().add(point);
+			i++;
+		}
 	}
 
 	/**
