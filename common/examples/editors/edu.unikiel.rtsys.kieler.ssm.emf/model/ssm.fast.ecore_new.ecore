@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="ssm"
+    nsURI="http://www.informatik.uni-kiel.de/rtsys/ssm" nsPrefix="ssm">
+  <eClassifiers xsi:type="ecore:EClass" name="State">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="stateKind" lowerBound="1"
+        eType="#//StateKind"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="stateFlag" lowerBound="1"
+        eType="#//StateFlag"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inputSignals" upperBound="-1"
+        eType="#//Signal" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="innerStates" upperBound="-1"
+        eType="#//State" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="onEntryAction" upperBound="-1"
+        eType="#//Emission" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="onInnerAction" upperBound="-1"
+        eType="#//Emission" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="onExitAction" upperBound="-1"
+        eType="#//Emission" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="localSignals" upperBound="-1"
+        eType="#//Signal" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outputSignals" upperBound="-1"
+        eType="#//Signal" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="signalRenaming" upperBound="-1"
+        eType="#//SignalRenaming" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="suspensionTrigger" eType="#//Trigger"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="StateKind">
+    <eLiterals name="NORMAL"/>
+    <eLiterals name="PSEUDO" value="1"/>
+    <eLiterals name="REFERENCE"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="StateFlag">
+    <eLiterals name="NORMAL"/>
+    <eLiterals name="INITIAL" value="1"/>
+    <eLiterals name="FINAL" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Signal">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//Value"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Value">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Emission">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="newValue" eType="#//Value"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="signal" eType="#//Signal"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Transition">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="delay" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="immediate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="priority" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="transitionKind" eType="#//TransitionKind"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="action" upperBound="-1"
+        eType="#//Emission" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sourceState" lowerBound="1"
+        eType="#//State"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="targetState" lowerBound="1"
+        eType="#//State"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="trigger" eType="#//Trigger"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="TransitionKind">
+    <eLiterals name="STRONGABORT"/>
+    <eLiterals name="WEAKABORT" value="1" literal="WEAKABORT"/>
+    <eLiterals name="NORMALTERMINATION" value="3" literal="NORMALTERMINATION"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Trigger">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subTrigger" upperBound="-1"
+        eType="#//Trigger" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="signal" eType="#//Signal"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operator" eType="#//Operator"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SignalRenaming">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="oldSignal" lowerBound="1"
+        eType="#//Signal"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="newSignal" lowerBound="1"
+        eType="#//Signal"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Operator">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operatorKind" eType="#//OperatorKind"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="OperatorKind">
+    <eLiterals name="NOT" literal=""/>
+    <eLiterals name="=" value="1"/>
+    <eLiterals name=">" value="2"/>
+    <eLiterals name="&lt;" value="3"/>
+    <eLiterals name="AND" value="4"/>
+    <eLiterals name="OR" value="5"/>
+    <eLiterals name="+" value="6"/>
+    <eLiterals name="-" value="7"/>
+    <eLiterals name="*" value="8"/>
+    <eLiterals name="/" value="9"/>
+  </eClassifiers>
+</ecore:EPackage>
