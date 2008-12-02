@@ -322,6 +322,45 @@ public class LayoutGraphs {
 	}
 	
 	/**
+	 * Determines positions of a sorted set of points by placing them
+	 * with equal distances.
+	 * 
+	 * @param points list of points
+	 * @param minPos minimal position for placing
+	 * @param maxPos maximal position for placing
+	 * @param offset offset to be added to positions
+	 * @param vertical if true, the vertical position is processed, else
+	 *     the horizontal position is processed
+	 * @param forward if true, ports are placed from the minimum to the
+	 *     maximum position
+	 */
+	public static void placePoints(List<KPoint> points, float minPos, float maxPos,
+			float offset, boolean vertical, boolean forward) {
+		float dist = (maxPos - minPos) / (points.size() + 1);
+		float pos;
+		if (forward) {
+			pos = minPos + offset;
+		}
+		else {
+			pos = maxPos + offset;
+			dist = -dist;
+		}
+		
+		if (vertical) {
+			for (KPoint point : points) {
+				pos += dist;
+				point.setY(pos);
+			}
+		}
+		else {
+			for (KPoint point : points) {
+				pos += dist;
+				point.setX(pos);
+			}
+		}
+	}
+	
+	/**
 	 * Sets the size of a given node, depending on the number of ports
 	 * on each side, the insets and the label.
 	 * 

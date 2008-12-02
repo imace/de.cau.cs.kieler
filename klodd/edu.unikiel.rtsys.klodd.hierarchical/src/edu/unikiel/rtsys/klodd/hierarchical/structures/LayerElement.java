@@ -282,15 +282,14 @@ public class LayerElement {
 	}
 	
 	/**
-	 * Takes the position of the contained port object as the current
-	 * layout position.
+	 * Gets the object contained in this layer element.
+	 * 
+	 * @return the element object
 	 */
-	public void takePortPos() {
-		KPort port = (KPort)elemObj;
-		position.setX(port.getLayout().getLocation().getX());
-		position.setY(port.getLayout().getLocation().getY());
+	public Object getElemObj() {
+		return elemObj;
 	}
-	
+
 	/**
 	 * Gets the number of edges that are routed in front of this element.
 	 * 

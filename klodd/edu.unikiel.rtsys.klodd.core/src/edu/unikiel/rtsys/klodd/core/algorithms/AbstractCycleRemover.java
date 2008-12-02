@@ -1,6 +1,7 @@
 package edu.unikiel.rtsys.klodd.core.algorithms;
 
 import java.util.LinkedList;
+import java.util.List;
 
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.*;
 
@@ -48,6 +49,15 @@ public abstract class AbstractCycleRemover extends AbstractAlgorithm
 			KPort targetPort = edge.getTargetPort();
 			edge.setSourcePort(targetPort);
 			edge.setTargetPort(sourcePort);
+			// reverse bend points
+			List<KPoint> bendPoints = new LinkedList<KPoint>();
+			for (KPoint point : edge.getLayout().getGridPoints()) {
+				bendPoints.add(0, point);
+			}
+			edge.getLayout().getGridPoints().clear();
+			for (KPoint point : bendPoints) {
+				edge.getLayout().getGridPoints().add(point);
+			}
 		}
 	}
 	

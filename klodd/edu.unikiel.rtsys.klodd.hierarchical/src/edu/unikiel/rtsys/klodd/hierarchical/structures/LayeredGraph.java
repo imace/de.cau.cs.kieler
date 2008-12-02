@@ -7,7 +7,9 @@ import java.util.Map;
 
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KEdge;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup;
+import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPoint;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPort;
+import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphFactory;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_OPTION;
 import edu.unikiel.rtsys.klodd.core.util.FixedArrayList;
 
@@ -45,6 +47,8 @@ public class LayeredGraph {
 	private LAYOUT_OPTION layoutDirection;
 	/** are the external ports of this layered graph fixed? */
 	private boolean fixedExternalPorts;
+	/** position of this layered graph */
+	private KPoint position;
 	
 	/**
 	 * Creates a new layered graph. Choosing the right type can be important
@@ -59,6 +63,9 @@ public class LayeredGraph {
 		layers = new FixedArrayList<Layer>(parentGroup.getSubNodeGroups().size() + 2,
 				type == Type.BUILD_FRONT ? FixedArrayList.Type.ALIGN_FRONT
 						: FixedArrayList.Type.ALIGN_BACK);
+		position = KimlLayoutGraphFactory.eINSTANCE.createKPoint();
+		position.setX(0.0f);
+		position.setY(0.0f);
 		
 		// get layout options from the parent group
 		this.parentGroup = parentGroup;
@@ -221,6 +228,13 @@ public class LayeredGraph {
 			}
 		}
 	}
+	
+	/**
+	 * Applies the layout of this layered graph to the contained layout graph.
+	 */
+	public void applyLayout() {
+		
+	}
 
 	/**
 	 * Gets the layout direction: HORIZONTAL or VERTICAL.
@@ -250,6 +264,15 @@ public class LayeredGraph {
 		return linearSegments;
 	}
 	
+	/**
+	 * Gets the current layout position of this layered graph.
+	 * 
+	 * @return the position
+	 */
+	public KPoint getPosition() {
+		return position;
+	}
+
 	/**
 	 * Puts an object into a given layer.
 	 * 

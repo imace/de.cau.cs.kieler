@@ -7,6 +7,7 @@ import java.util.List;
 
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KDimension;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPoint;
+import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPort;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_OPTION;
 import edu.unikiel.rtsys.klodd.core.algorithms.AbstractAlgorithm;
 import edu.unikiel.rtsys.klodd.hierarchical.modules.INodePlacer;
@@ -195,8 +196,10 @@ public class BasicNodePlacer extends AbstractAlgorithm implements INodePlacer {
 		if (layeredGraph.areExternalPortsFixed()) {
 			// process fixed external layer
 			for (LayerElement element : layer.getElements()) {
-				element.takePortPos();
+				KPort port = (KPort)element.getElemObj();
 				KPoint position = element.getPosition();
+				position.setX(port.getLayout().getLocation().getX());
+				position.setY(port.getLayout().getLocation().getY());
 				KDimension size = element.getRealDim();
 				if (layoutDirection == LAYOUT_OPTION.VERTICAL) {
 					layer.crosswiseDim = Math.max(layer.crosswiseDim,

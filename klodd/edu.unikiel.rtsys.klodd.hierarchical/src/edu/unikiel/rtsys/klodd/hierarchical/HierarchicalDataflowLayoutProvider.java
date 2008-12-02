@@ -36,6 +36,8 @@ public class HierarchicalDataflowLayoutProvider extends
 	private ICrossingReducer crossingReducer = null;
 	/** the node placer module */
 	private INodePlacer nodePlacer = null;
+	/** the edge router module */
+	private IEdgeRouter edgeRouter = null;
 	
 	/* (non-Javadoc)
 	 * @see edu.unikiel.rtsys.kieler.kiml.layout.services.KimlAbstractLayoutProvider#doLayout(edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup)
@@ -58,8 +60,10 @@ public class HierarchicalDataflowLayoutProvider extends
 			crossingReducer.reduceCrossings(layeredGraph);
 			// determine a crosswise placement for each node
 			nodePlacer.placeNodes(layeredGraph, MIN_DIST);
-			// TODO remaining modules
+			// route edges between nodes
+			edgeRouter.routeEdges(layeredGraph, MIN_DIST);
 		}
+		layeredGraph.applyLayout();
 		cycleRemover.restoreGraph();
 		
 		double executionTime = (double)(System.nanoTime() - startTime) * 1e-9;
@@ -89,6 +93,7 @@ public class HierarchicalDataflowLayoutProvider extends
 		layerAssigner = new LongestPathLayerAssigner();
 		crossingReducer = new LayerSweepCrossingReducer(new BarycenterCrossingReducer());
 		nodePlacer = new BalancingNodePlacer(new BasicNodePlacer());
+		edgeRouter = new RectilinearEdgeRouter();
 	}
 	
 	/**
@@ -104,5 +109,5 @@ public class HierarchicalDataflowLayoutProvider extends
 			}
 		}
 	}
-
+	
 }
