@@ -563,24 +563,40 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 			ConnectionEditPart connectionEditPart, EdgeHierarchyType edgeType) {
 		KEdge edge = KimlLayoutGraphFactory.eINSTANCE.createKEdge();
 		edge2ConnectionMapping.put(edge, connectionEditPart);
+		float sourceNodeX = 0.0f, sourceNodeY = 0.0f,
+			targetNodeX = 0.0f, targetNodeY = 0.0f;
 		if (edgeType != EdgeHierarchyType.INPUT_TO_OP) {
 			// set the source node; this automatically adds the edge
 			// to the source's list of outgoing edges
 			edge.setSource(sourcePort.getNodeGroup());
+			sourceNodeX = sourcePort.getNodeGroup().getLayout().getLocation().getX();
+			sourceNodeY = sourcePort.getNodeGroup().getLayout().getLocation().getY();
 		}
 		edge.setSourcePort(sourcePort);
 		if (edgeType != EdgeHierarchyType.OP_TO_OUTPUT) {
 			// set the target node; this automatically adds the edge to
 			// the target's list of incoming edges
 			edge.setTarget(targetPort.getNodeGroup());
+			targetNodeX = targetPort.getNodeGroup().getLayout().getLocation().getX();
+			targetNodeY = targetPort.getNodeGroup().getLayout().getLocation().getY();
 		}
 		edge.setTargetPort(targetPort);
 		sourcePort.getEdges().add(edge);
 		targetPort.getEdges().add(edge);
 		// set the edge's layout
 		KEdgeLayout edgeLayout = KimlLayoutGraphFactory.eINSTANCE.createKEdgeLayout();
-		edgeLayout.setSourcePoint(KimlLayoutGraphFactory.eINSTANCE.createKPoint());
-		edgeLayout.setTargetPoint(KimlLayoutGraphFactory.eINSTANCE.createKPoint());
+		KPoint sourcePoint = KimlLayoutGraphFactory.eINSTANCE.createKPoint();
+		sourcePoint.setX(sourcePort.getLayout().getLocation().getX()
+				+ sourcePort.getLayout().getSize().getWidth() / 2 + sourceNodeX);
+		sourcePoint.setY(sourcePort.getLayout().getLocation().getY()
+				+ sourcePort.getLayout().getSize().getHeight() / 2 + sourceNodeY);
+		edgeLayout.setSourcePoint(sourcePoint);
+		KPoint targetPoint = KimlLayoutGraphFactory.eINSTANCE.createKPoint();
+		targetPoint.setX(targetPort.getLayout().getLocation().getX()
+				+ targetPort.getLayout().getSize().getWidth() / 2 + targetNodeX);
+		targetPoint.setY(targetPort.getLayout().getLocation().getY()
+				+ targetPort.getLayout().getSize().getHeight() / 2 + targetNodeY);
+		edgeLayout.setTargetPoint(targetPoint);
 		edge.setLayout(edgeLayout);
 	}
 	
