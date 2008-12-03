@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            allowMultiple="false"
+            category="edu.unikiel.rtsys.kieler.kiml.ui"
+            class="edu.unikiel.rtsys.kieler.kiml.viewer.views.LayoutGraphView"
+            id="edu.unikiel.rtsys.kieler.kiml.viewer.layoutGraphView"
+            name="Layout Graph"
+            restorable="true">
+      </view>
+   </extension>
+   <extension
+         point="edu.unikiel.rtsys.kieler.kiml.layout.kimlLayoutListener">
+      <kimlLayoutListener
+            class="edu.unikiel.rtsys.kieler.kiml.viewer.ViewLayoutListener">
+      </kimlLayoutListener>
+   </extension>
+
+</plugin>

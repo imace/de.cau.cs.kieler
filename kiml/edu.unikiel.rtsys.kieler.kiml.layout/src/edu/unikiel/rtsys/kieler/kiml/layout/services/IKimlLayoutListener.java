@@ -11,9 +11,12 @@ public interface IKimlLayoutListener {
 
 	/** the extension point identifier */
 	public static final String EXTENSION_POINT_ID = "edu.unikiel.rtsys.kieler.kiml.layout.kimlLayoutListener";
+	/** the class attribute of the extension point */
+	public static final String ATTRIBUTE_CLASS = "class";
 	
 	/**
 	 * Called when layout is requested for the given layout graph.
+	 * The given layout graph must not be modified by this method.
 	 * 
 	 * @param layoutGraph layout graph that will be processed after
 	 *     this method returns
@@ -22,6 +25,7 @@ public interface IKimlLayoutListener {
 	
 	/**
 	 * Called after layout was performed for the given layout graph.
+	 * The given layout graph must not be modified by this method.
 	 * 
 	 * @param layoutGraph layout graph that was layouted
 	 */

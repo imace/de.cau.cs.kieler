@@ -102,10 +102,14 @@ public abstract class KimlAbstractLayouter {
 					+ ": Error in buildLayoutGraph()");
 			return;
 		}
+		// notify layout listeners about the layout request
+		LayoutListeners.getInstance().layoutRequested(layoutGraph);
 		// choose the default layout engine
 		KimlAbstractLayouterEngine layoutEngine = new KimlRecursiveGroupLayouterEngine();
 		// now do the layout
 		layoutEngine.layout(layoutGraph);
+		// notify layout listeners about the performed layout
+		LayoutListeners.getInstance().layoutPerformed(layoutGraph);
 		// and apply layout to model
 		applyLayout();
 	}
