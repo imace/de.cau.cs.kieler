@@ -1,6 +1,7 @@
 package dataflow.diagram.services;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -67,11 +68,11 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 	private KLayoutGraph layoutGraph = null;
 
 	/** mapping used for back transformation */
-	private Map<KNodeGroup, AbstractBorderedShapeEditPart> nodeGroup2BoxMapping = new HashMap<KNodeGroup, AbstractBorderedShapeEditPart>();
+	private Map<KNodeGroup, AbstractBorderedShapeEditPart> nodeGroup2BoxMapping = new LinkedHashMap<KNodeGroup, AbstractBorderedShapeEditPart>();
 	/** mapping used for back transformation */
-	private Map<KEdge, ConnectionEditPart> edge2ConnectionMapping = new HashMap<KEdge, ConnectionEditPart>();
+	private Map<KEdge, ConnectionEditPart> edge2ConnectionMapping = new LinkedHashMap<KEdge, ConnectionEditPart>();
 	/** mapping used for back transformation */
-	private Map<KPort, BorderedBorderItemEditPart> port2BorderItemMapping = new HashMap<KPort, BorderedBorderItemEditPart>();
+	private Map<KPort, BorderedBorderItemEditPart> port2BorderItemMapping = new LinkedHashMap<KPort, BorderedBorderItemEditPart>();
 	/** mapping used for creation of the layout graph */
 	private Map<BorderedBorderItemEditPart, KPort> borderItem2PortMapping = new HashMap<BorderedBorderItemEditPart, KPort>();
 	
@@ -236,19 +237,22 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 			ConnectionEditPart connection = edge2ConnectionMapping.get(edge);
 			KEdgeLayout edgeLayout = edge.getLayout();
 			PointList pointList = new PointList();
+			Point offset = getConnectionOffset(edge);
 
 			// set start point
-			Point startPoint = kPoint2Point(edgeLayout.getSourcePoint());
+			Point startPoint = kPoint2Point(edgeLayout.getSourcePoint())
+					.translate(offset);
 			pointList.addPoint(startPoint);
 
 			// set grid points
 			for (KPoint gridPoint : edgeLayout.getGridPoints()) {
-				Point point = kPoint2Point(gridPoint);
+				Point point = kPoint2Point(gridPoint).translate(offset);
 				pointList.addPoint(point);
 			}
 
 			// set end point
-			Point endPoint = kPoint2Point(edgeLayout.getTargetPoint());
+			Point endPoint = kPoint2Point(edgeLayout.getTargetPoint())
+					.translate(offset);
 			pointList.addPoint(endPoint);
 
 			// create request and add it
@@ -617,6 +621,30 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 			return PORT_PLACEMENT.WEST;
 		else
 			return PORT_PLACEMENT.EAST;
+	}
+	
+	/**
+	 * Determines the offset to apply to a given edge, depending on the
+	 * position of all parent node groups.
+	 * 
+	 * @param edge edge for which the offset shall be determined 
+	 * @return offset
+	 */
+	private Point getConnectionOffset(KEdge edge) {
+		Point point = new Point(0, 0);
+		KNodeGroup parent = edge.getSource();
+		if (parent == null)
+			parent = edge.getTarget().getParentGroup();
+		else
+			parent = parent.getParentGroup();
+		
+		while (parent.getParentGroup() != null) {
+			point.x += (int)parent.getLayout().getLocation().getX();
+			point.y += (int)parent.getLayout().getLocation().getY();
+			parent = parent.getParentGroup();
+		}
+		
+		return point;
 	}
 
 }

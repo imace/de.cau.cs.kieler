@@ -7,6 +7,7 @@ import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KEdge;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPoint;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPort;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPortLayout;
+import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphFactory;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_OPTION;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.PORT_PLACEMENT;
 
@@ -89,7 +90,10 @@ public class LayerConnection {
 	public void applyLayout(KPoint offset) {
 		LayeredGraph layeredGraph = sourceElement.getLayer().getLayeredGraph();
 		edge.getLayout().getGridPoints().clear();
+		
+		// don't add offset values to bend points near fixed external ports
 		int omitXOffset = -1, omitYOffset = -1;
+		boolean fixedSourcePort = false, fixedTargetPort = false;
 		if (sourcePort != null && sourcePort.getNodeGroup() == layeredGraph.getParentGroup()
 				&& layeredGraph.areExternalPortsFixed()) {
 			if (sourcePort.getLayout().getPlacement() == PORT_PLACEMENT.NORTH
@@ -99,6 +103,7 @@ public class LayerConnection {
 			else {
 				omitYOffset = 0;
 			}
+			fixedSourcePort = true;
 		}
 		else if (targetPort != null && targetPort.getNodeGroup() == layeredGraph.getParentGroup()
 				&& layeredGraph.areExternalPortsFixed()) {
@@ -109,8 +114,10 @@ public class LayerConnection {
 			else {
 				omitYOffset = edge.getLayout().getGridPoints().size()-1;
 			}
+			fixedTargetPort = true;
 		}
 		
+		// set bend points
 		int i = 0;
 		for (KPoint point : bendPoints) {
 			if (i != omitXOffset)
@@ -119,6 +126,52 @@ public class LayerConnection {
 				point.setY(point.getY() + offset.getY());
 			edge.getLayout().getGridPoints().add(point);
 			i++;
+		}
+		
+		// set start and end points
+		if (sourcePort != null) {
+			KPoint point = KimlLayoutGraphFactory.eINSTANCE.createKPoint();
+			if (sourcePort.getNodeGroup() == layeredGraph.parentGroup) {
+				point.setX(sourceElement.getPosition().getX()
+						+ sourcePort.getLayout().getSize().getWidth() / 2);
+				point.setY(sourceElement.getPosition().getY()
+						+ sourcePort.getLayout().getSize().getHeight() / 2);
+			}
+			else {
+				point.setX(sourcePort.getLayout().getLocation().getX()
+						+ sourcePort.getLayout().getSize().getWidth() / 2
+						+ sourceElement.getPosition().getX());
+				point.setY(sourcePort.getLayout().getLocation().getY()
+						+ sourcePort.getLayout().getSize().getHeight() / 2
+						+ sourceElement.getPosition().getY());
+			}
+			if (!fixedSourcePort) {
+				point.setX(point.getX() + offset.getX());
+				point.setY(point.getY() + offset.getY());
+			}
+			edge.getLayout().setSourcePoint(point);
+		}
+		if (targetPort != null) {
+			KPoint point = KimlLayoutGraphFactory.eINSTANCE.createKPoint();
+			if (targetPort.getNodeGroup() == layeredGraph.parentGroup) {
+				point.setX(targetElement.getPosition().getX()
+						+ targetPort.getLayout().getSize().getWidth() / 2);
+				point.setY(targetElement.getPosition().getY()
+						+ targetPort.getLayout().getSize().getHeight() / 2);
+			}
+			else {
+				point.setX(targetPort.getLayout().getLocation().getX()
+						+ targetPort.getLayout().getSize().getWidth() / 2
+						+ targetElement.getPosition().getX());
+				point.setY(targetPort.getLayout().getLocation().getY()
+						+ targetPort.getLayout().getSize().getHeight() / 2
+						+ targetElement.getPosition().getY());
+			}
+			if (!fixedTargetPort) {
+				point.setX(point.getX() + offset.getX());
+				point.setY(point.getY() + offset.getY());
+			}
+			edge.getLayout().setTargetPoint(point);
 		}
 	}
 
@@ -200,7 +253,7 @@ public class LayerConnection {
 	 * Determines the target position of this edge from the current layout
 	 * position.
 	 * 
-	 * @param minDist minimal distance betweeen elements
+	 * @param minDist minimal distance between elements
 	 * @return position
 	 */
 	public float calcTargetPos(float minDist) {

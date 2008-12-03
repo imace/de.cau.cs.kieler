@@ -7,7 +7,8 @@
             allowMultiple="false"
             category="edu.unikiel.rtsys.kieler.kiml.ui"
             class="edu.unikiel.rtsys.kieler.kiml.viewer.views.LayoutGraphView"
-            id="edu.unikiel.rtsys.kieler.kiml.viewer.layoutGraphView"
+            icon="icons/graph.gif"
+            id="edu.unikiel.rtsys.kieler.kiml.viewer.layoutGraph"
             name="Layout Graph"
             restorable="true">
       </view>
