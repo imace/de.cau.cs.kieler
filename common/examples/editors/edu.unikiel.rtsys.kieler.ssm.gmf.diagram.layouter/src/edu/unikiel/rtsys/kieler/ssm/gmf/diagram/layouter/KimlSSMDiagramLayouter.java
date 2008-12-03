@@ -313,18 +313,18 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 			if (connection.getFigure() instanceof PolylineConnectionEx) {
 				PolylineConnectionEx polyline = ((PolylineConnectionEx) connection
 						.getFigure());
-				if (prefSmoothTransitions) {
-					polyline.setSmoothness(PolylineConnectionEx.SMOOTH_NORMAL);
-				} else {
-					polyline.setSmoothness(PolylineConnectionEx.SMOOTH_NONE);
-				}
-
+				
 				polyline.setSourceAnchor(new ChopboxAnchor(
 						((GraphicalEditPart) connection.getSource())
 								.getFigure()));
 				polyline.setTargetAnchor(new ChopboxAnchor(
 						((GraphicalEditPart) connection.getTarget())
 								.getFigure()));
+				if (prefSmoothTransitions) {
+					polyline.setSmoothness(PolylineConnectionEx.SMOOTH_NORMAL);
+				} else {
+					polyline.setSmoothness(PolylineConnectionEx.SMOOTH_NONE);
+				}
 			}
 
 			/* create request and add it */
@@ -868,6 +868,11 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 				.getPreferenceStore()
 				.getBoolean(
 						KimlLayoutPreferenceConstants.PREF_DIAGRAMLAYOUTERS_MULTIPLE_LAYOUT_RUNS);
+		prefSmoothTransitions = KimlLayoutPlugin
+				.getDefault()
+				.getPreferenceStore()
+				.getBoolean(
+						KimlLayoutPreferenceConstants.PREF_DIAGRAMLAYOUTERS_SMOOTHEN_EDGES);
 		prefAlternatingHVLayout = KimlSSMDiagramLayouterPlugin.getDefault()
 				.getPreferenceStore().getBoolean(
 						PreferenceConstants.PREF_ALTERNATING_HV_LAYOUT);
