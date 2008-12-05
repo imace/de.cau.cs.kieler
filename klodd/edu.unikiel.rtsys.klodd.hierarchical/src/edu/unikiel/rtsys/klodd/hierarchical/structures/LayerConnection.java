@@ -89,7 +89,6 @@ public class LayerConnection {
 	 */
 	public void applyLayout(KPoint offset) {
 		LayeredGraph layeredGraph = sourceElement.getLayer().getLayeredGraph();
-		edge.getLayout().getGridPoints().clear();
 		
 		// don't add offset values to bend points near fixed external ports
 		int omitXOffset = -1, omitYOffset = -1;

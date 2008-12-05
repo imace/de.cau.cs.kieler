@@ -75,6 +75,10 @@ public class RectilinearEdgeRouter extends AbstractAlgorithm implements
 				processLayer(layer, frontPadding);
 			}
 		}
+		
+		// update dimension of the whole graph
+		Layer lastLayer = layeredGraph.getLayers().get(layeredGraph.getLayers().size() - 1);
+		layerPos = lastLayer.lengthwisePos + lastLayer.lengthwiseDim + minDist;
 		if (layeredGraph.getLayoutDirection() == LAYOUT_OPTION.VERTICAL) {
 			layeredGraph.crosswiseDim = maxCrosswisePos
 				+ layeredGraph.getPosition().getX();

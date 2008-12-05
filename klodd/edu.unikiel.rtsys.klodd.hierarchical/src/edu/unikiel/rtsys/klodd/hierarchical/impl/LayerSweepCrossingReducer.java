@@ -110,15 +110,16 @@ public class LayerSweepCrossingReducer extends AbstractAlgorithm implements
 			Layer firstLayer = layeredGraph.getLayers().get(0);
 			firstLayer.calcElemRanks();
 			
-			// process the other layers normally
+			// process the other layers in forward direction
 			ListIterator<Layer> layerIter = layeredGraph.getLayers().listIterator(1);
 			while (layerIter.hasNext()) {
 				layerReducer.reduceCrossings(layerIter.next(), true);
 			}
 			
-			// reorder the first layer
-			if (layeredGraph.getLayers().size() > 1) {
-				layerReducer.reduceCrossings(firstLayer, false);
+			// process all layers again in backwards direction
+			layerIter.previous();
+			while (layerIter.hasPrevious()) {
+				layerReducer.reduceCrossings(layerIter.previous(), false);
 			}
 		}
 	}
