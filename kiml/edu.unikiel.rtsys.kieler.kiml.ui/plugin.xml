@@ -24,24 +24,10 @@
       </category>
       <view
             category="edu.unikiel.rtsys.kieler.kiml.ui"
-            class="edu.unikiel.rtsys.kieler.kiml.ui.views.TestView"
-            icon="icons/sample.gif"
-            id="edu.unikiel.rtsys.kieler.kiml.ui.views.KimlLayoutGraphView"
-            name="%view.name.0">
-      </view>
-      <view
-            category="edu.unikiel.rtsys.kieler.kiml.ui"
             class="edu.unikiel.rtsys.kieler.kiml.ui.views.KimlLayoutHintView"
-            icon="icons/sample.gif"
+            icon="icons/layout_hint.gif"
             id="edu.unikiel.rtsys.kieler.kiml.ui.views.KimlLayoutHintView"
             name="%view.name.1"
-            restorable="true">
-      </view>
-      <view
-            category="edu.unikiel.rtsys.kieler.kiml.ui"
-            class="edu.unikiel.rtsys.kieler.kiml.ui.views.SampleView"
-            id="edu.unikiel.rtsys.kieler.kiml.ui.views.SampleView"
-            name="Sample View"
             restorable="true">
       </view>
    </extension>
