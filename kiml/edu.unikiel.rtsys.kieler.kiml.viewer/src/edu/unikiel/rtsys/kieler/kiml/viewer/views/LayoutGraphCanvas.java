@@ -30,7 +30,7 @@ public class LayoutGraphCanvas extends Canvas implements PaintListener {
 	/** color used for node fills */
 	private static final Color NODE_FILL_COLOR = new Color(Display.getDefault(), 208, 214, 244);
 	/** alpha value for nodes */
-	private static final int NODE_ALPHA = 200;
+	private static final int NODE_ALPHA = 120;
 	/** color used for port borders and labels */
 	private static final Color PORT_BORDER_COLOR = new Color(Display.getDefault(), 14, 54, 24);
 	/** color used for port fills */
@@ -80,8 +80,8 @@ public class LayoutGraphCanvas extends Canvas implements PaintListener {
 		PaintRectangle(KShapeLayout shapeLayout, KPoint offset) {
 			this.x = Math.round(shapeLayout.getLocation().getX() + offset.getX());
 			this.y = Math.round(shapeLayout.getLocation().getY() + offset.getY());
-			this.width = Math.round(shapeLayout.getSize().getWidth());
-			this.height = Math.round(shapeLayout.getSize().getHeight());
+			this.width = Math.max(Math.round(shapeLayout.getSize().getWidth()), 3);
+			this.height = Math.max(Math.round(shapeLayout.getSize().getHeight()), 3);
 		}
 		
 		/**
@@ -117,8 +117,12 @@ public class LayoutGraphCanvas extends Canvas implements PaintListener {
 		 * @return true if the other rectangle intersects with this one
 		 */
 		public boolean intersects (PaintRectangle other) {
-			return (other.x < this.x + this.width) && (other.y < this.y + this.height)
-				&& (other.x + other.width > this.x) && (other.y + other.height > this.y);
+			float otherX = other.x - 2;
+			float otherY = other.y - 2;
+			float otherWidth = other.width + 4;
+			float otherHeight = other.height + 4;
+			return (otherX < this.x + this.width) && (otherY < this.y + this.height)
+				&& (otherX + otherWidth > this.x) && (otherY + otherHeight > this.y);
 		}
 	}
 	
@@ -220,10 +224,10 @@ public class LayoutGraphCanvas extends Canvas implements PaintListener {
 		}
 		
 		// paint sub node groups
-		graphics.setForeground(NODE_BORDER_COLOR);
-		graphics.setBackground(NODE_FILL_COLOR);
-		graphics.setAlpha(NODE_ALPHA);
 		for (KNodeGroup child : nodeGroup.getSubNodeGroups()) {
+			graphics.setForeground(NODE_BORDER_COLOR);
+			graphics.setBackground(NODE_FILL_COLOR);
+			graphics.setAlpha(NODE_ALPHA);
 			PaintRectangle rect = boundsMap.get(child);
 			if (rect == null) {
 				rect = new PaintRectangle(child.getLayout(), offset);
@@ -232,11 +236,11 @@ public class LayoutGraphCanvas extends Canvas implements PaintListener {
 			if (!rect.painted && rect.intersects(area)) {
 				graphics.fillRectangle(rect.x, rect.y, rect.width, rect.height);
 				graphics.drawRectangle(rect.x, rect.y, rect.width, rect.height);
-				KPoint childOffset = KimlLayoutGraphFactory.eINSTANCE.createKPoint();
-				childOffset.setX(offset.getX() + rect.x);
-				childOffset.setY(offset.getY() + rect.y);
-				paintNodeGroup(child, graphics, area, childOffset);
 				rect.painted = true;
+				KPoint childOffset = KimlLayoutGraphFactory.eINSTANCE.createKPoint();
+				childOffset.setX(rect.x);
+				childOffset.setY(rect.y);
+				paintNodeGroup(child, graphics, area, childOffset);
 			}
 			if (paintLabels) {
 				rect = boundsMap.get(child.getLabel());
@@ -250,17 +254,17 @@ public class LayoutGraphCanvas extends Canvas implements PaintListener {
 					rect.painted = true;
 				}
 			}
-		}
-		
-		// paint edges
-		graphics.setForeground(EDGE_COLOR);
-		graphics.setBackground(EDGE_COLOR);
-		graphics.setAlpha(EDGE_ALPHA);
-		for (KEdge edge : nodeGroup.getIncomingEdges()) {
-			paintEdge(edge, graphics, area, offset);
-		}
-		for (KEdge edge : nodeGroup.getOutgoingEdges()) {
-			paintEdge(edge, graphics, area, offset);
+			
+			// paint edges
+			graphics.setForeground(EDGE_COLOR);
+			graphics.setBackground(EDGE_COLOR);
+			graphics.setAlpha(EDGE_ALPHA);
+			for (KEdge edge : child.getIncomingEdges()) {
+				paintEdge(edge, graphics, area, offset);
+			}
+			for (KEdge edge : child.getOutgoingEdges()) {
+				paintEdge(edge, graphics, area, offset);
+			}
 		}
 	}
 	
@@ -323,8 +327,8 @@ public class LayoutGraphCanvas extends Canvas implements PaintListener {
 	 */
 	private int[] makeArrow(KPoint point1, KPoint point2, KPoint offset) {
 		int[] arrow = new int[6];
-		arrow[0] = Math.round(point2.getX());
-		arrow[1] = Math.round(point2.getY());
+		arrow[0] = Math.round(point2.getX() + offset.getX());
+		arrow[1] = Math.round(point2.getY() + offset.getY());
 		
 		float vectX = point1.getX() - point2.getX();
 		float vectY = point1.getY() - point2.getY();
@@ -336,10 +340,10 @@ public class LayoutGraphCanvas extends Canvas implements PaintListener {
 		float orthX = normY * ARROW_WIDTH / 2;
 		float orthY = -normX * ARROW_WIDTH / 2;
 		
-		arrow[2] = Math.round(neckX + orthX);
-		arrow[3] = Math.round(neckY + orthY);
-		arrow[4] = Math.round(neckX - orthX);
-		arrow[5] = Math.round(neckY - orthY);
+		arrow[2] = Math.round(neckX + orthX + offset.getX());
+		arrow[3] = Math.round(neckY + orthY + offset.getY());
+		arrow[4] = Math.round(neckX - orthX + offset.getX());
+		arrow[5] = Math.round(neckY - orthY + offset.getY());
 		return arrow;
 	}
 	
