@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.ui.statushandlers.StatusManager;
 import org.eclipse.zest.layouts.*;
 import org.eclipse.zest.layouts.constraints.BasicEntityConstraint;
 
@@ -65,9 +68,10 @@ public class ZestAlgorithmWrapper {
 			layoutAlgorithm.applyLayout(entities, relationships,
 					SIZE_ADDITION, SIZE_ADDITION, width, height, false, false);
 		}
-		catch (Exception exception) {
-			// TODO error handling
-			exception.printStackTrace();
+		catch (InvalidLayoutConfiguration exception) {
+			Status status = new Status(IStatus.ERROR, Activator.PLUGIN_ID,
+					"Failed to execute Zest layout algorithm.", exception);
+			StatusManager.getManager().handle(status, StatusManager.SHOW);
 		}
 		
 		// transfer layout results to the original graph

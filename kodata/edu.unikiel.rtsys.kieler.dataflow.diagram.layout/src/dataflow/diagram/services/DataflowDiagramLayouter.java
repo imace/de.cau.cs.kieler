@@ -91,7 +91,7 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 	 * (non-Javadoc)
 	 * @see edu.unikiel.rtsys.kieler.kiml.layout.services.KimlAbstractLayouter#init(java.lang.Object)
 	 */
-	protected boolean init(Object target) {
+	protected void init(Object target) {
 		preferenceStore = DataflowDiagramLayoutPlugin.getDefault().getPreferenceStore();
 		nodeGroup2BoxMapping.clear();
 		edge2ConnectionMapping.clear();
@@ -129,17 +129,9 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 				// RenderedDiagramRootEditPart
 				layoutRootPart = ((DiagramRootEditPart)layoutRootPart).getContents();
 			}
-			
-			// check for unexpected case
-			if (!(layoutRootPart instanceof AbstractBorderedShapeEditPart)
-					&& !(layoutRootPart instanceof DataflowModelEditPart)) {
-				// TODO remove debug message
-				System.out.println("DataflowDiagramLayouter: Unexpected layout root part: "
-						+ layoutRootPart.getClass().getSimpleName());
-			}
 		}
-		else return false;
-		return true;
+		else throw new IllegalArgumentException("Unsupported layout target: "
+				+ target.getClass().getSimpleName());
 	}
 
 	/*

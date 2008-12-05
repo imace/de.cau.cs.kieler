@@ -12,12 +12,14 @@ package edu.unikiel.rtsys.kieler.kiml.layout.services;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.preferences.IEclipsePreferences;
 import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.ui.statushandlers.StatusManager;
 
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutPlugin;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup;
@@ -37,8 +39,6 @@ import edu.unikiel.rtsys.kieler.kiml.layout.util.KimlLayoutPreferenceConstants;
  * Provides a function to get a concrete layout provider, which is used in
  * {@link KimlRecursiveGroupLayouterEngine}, for example, and some convenience
  * functions to query the status.
- * <p/>
- * There is still no proper error handling, but that is a KIELER-wide issue.
  * 
  * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
  * @see KimlAbstractLayoutProvider
@@ -67,8 +67,6 @@ public final class LayoutProviders {
 	/**
 	 * Singleton constructor which loads all the layout providers once at
 	 * startup.
-	 * <p>
-	 * TODO: Proper error handling, KIELER-wide.
 	 */
 	private LayoutProviders() {
 		loadAvailableLayouters();
@@ -77,8 +75,6 @@ public final class LayoutProviders {
 	/*
 	 * does the actual loading of the layout providers, which need to register
 	 * themselves through the kimlLayoutProvider extension point.
-	 * 
-	 * TODO: Proper error handling, KIELER-wide
 	 */
 	private void loadAvailableLayouters() {
 
@@ -113,14 +109,8 @@ public final class LayoutProviders {
 					layoutProviderMap.put(layoutProvider.getLayouterInfo()
 							.getLayouterName(), layoutProvider);
 				}
-			} catch (Exception e) {
-				// TODO error handling
-				System.out
-						.println("===================================================");
-				System.out.println("Error creating layout providers.");
-				e.printStackTrace();
-				System.out
-						.println("===================================================");
+			} catch (CoreException exception) {
+				StatusManager.getManager().handle(exception, KimlLayoutPlugin.PLUGIN_ID);
 			}
 		}
 	}

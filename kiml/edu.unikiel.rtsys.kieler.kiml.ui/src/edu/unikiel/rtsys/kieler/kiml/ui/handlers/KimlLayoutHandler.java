@@ -13,15 +13,19 @@ import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.IHandler;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.draw2d.Animation;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.handlers.HandlerUtil;
+import org.eclipse.ui.statushandlers.StatusManager;
 
 import edu.unikiel.rtsys.kieler.kiml.layout.services.DiagramLayouters;
 import edu.unikiel.rtsys.kieler.kiml.layout.services.KimlAbstractLayouter;
 import edu.unikiel.rtsys.kieler.kiml.ui.ContributionItemLayoutAs;
+import edu.unikiel.rtsys.kieler.kiml.ui.KimlUiPlugin;
 
 /**
  * The handler which is responsible to lay out the diagram or parts thereof.
@@ -85,12 +89,12 @@ public class KimlLayoutHandler extends AbstractHandler implements IHandler {
 				Animation.run(1000);
 			}
 		} else {
-			/*
-			 * TODO: error handling, actually that should not happen, as there is
+			/* actually this should not happen, as there is
 			 * the GenericDiagramLayouter
 			 */
-			System.err.println(getClass().getSimpleName()
-					+ ": No diagram layouter found for the given editor.");
+			Status status = new Status(IStatus.ERROR, KimlUiPlugin.PLUGIN_ID,
+					"No diagram layouter found for the given editor.", null);
+			StatusManager.getManager().handle(status, StatusManager.SHOW);
 		}
 		return null;
 	}

@@ -693,7 +693,7 @@ public class KimlGenericDiagramLayouter extends KimlAbstractLayouter {
 	 * @see edu.unikiel.rtsys.kieler.kiml.layout.services.KimlAbstractLayouter#init(java.lang.Object)
 	 */
 	@Override
-	protected boolean init(Object target) {
+	protected void init(Object target) {
 
 		/* get root part of provided object */
 		rootPart = getRootPart(target);
@@ -710,9 +710,8 @@ public class KimlGenericDiagramLayouter extends KimlAbstractLayouter {
 					.getLayer(DiagramRootEditPart.CONNECTION_LAYER);
 		}
 		if (commandStack == null) {
-			System.out.println(getClass().getSimpleName()
-					+ ": Error: commandStack == null");
-			return false;
+			throw new IllegalArgumentException("Unsupported layout target: "
+				+ target.getClass().getSimpleName());
 		}
 
 		/* get preference values */
@@ -741,7 +740,6 @@ public class KimlGenericDiagramLayouter extends KimlAbstractLayouter {
 				.getInt(PreferenceConstants.PREF_GENERIC_DIAGRAM_LAYOUTER_INSET_BOTTOM);
 		prefInsetsRight = kimlUiPreferenceStore
 				.getInt(PreferenceConstants.PREF_GENERIC_DIAGRAM_LAYOUTER_INSET_RIGHT);
-		return true;
 	}
 
 	/*------------------------------------------------------------------------------*/

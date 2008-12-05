@@ -16,8 +16,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.ui.statushandlers.StatusManager;
 
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.EDGE_LABEL_PLACEMENT;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.EDGE_TYPE;
@@ -350,14 +353,11 @@ public class GraphvizLayouter {
 				location = graphviz2KPoint(position.get(0).intValue(), position
 						.get(1).intValue(), size);
 
-			} catch (Exception e) {
+			} catch (Exception exception) {
 				/* nothing, might have been invalid String */
-				/*
-				 * FIXME: Better graphical Error Message! This can actually
-				 * happen as we have seen (different locales)
-				 */
-				System.out.println(e.getMessage() + " " + posString);
-				e.printStackTrace();
+				Status status = new Status(IStatus.ERROR, Activator.PLUGIN_ID,
+						"Error while mapping nodes (" + posString + ")", exception);
+				StatusManager.getManager().handle(status, StatusManager.SHOW);
 			}
 			nodeGroup.getLayout().setLocation(location);
 			nodeGroup.getLayout().setSize(size);
@@ -421,11 +421,11 @@ public class GraphvizLayouter {
 				/* tell all users that we produced some sort of spline */
 				edge.getLayout().setEdgeType(EDGE_TYPE.SPLINE);
 
-			} catch (Exception e) {
+			} catch (Exception exception) {
 				/* in any failure, leave list empty */
-				/* FIXME: Graphical or at least better error handling */
-				System.out.println("Some fault:--------------------- "
-						+ e.toString());
+				Status status = new Status(IStatus.ERROR, Activator.PLUGIN_ID,
+						"Error while mapping edges (" + posString + ")", exception);
+				StatusManager.getManager().handle(status, StatusManager.SHOW);
 			}
 			/*
 			 * Process labels, there is a maximum of three that can be handled

@@ -824,7 +824,7 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 	 * @see edu.unikiel.rtsys.kieler.kiml.layout.services.KimlAbstractLayouter#init(java.lang.Object)
 	 */
 	@Override
-	protected boolean init(Object target) {
+	protected void init(Object target) {
 
 		/* first clean up all HashMaps */
 		graphicalEditPart2NodeGroup.clear();
@@ -848,14 +848,11 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 					.getLayer(DiagramRootEditPart.CONNECTION_LAYER);
 			connectionLayer.setAntialias(SWT.ON);
 		} else {
-			System.err.println("KimlSSMDiagramLayouter: Error: '" + rootPart
-					+ "' is no an instance of GraphicalEditPart: ");
-			return false;
+			throw new IllegalArgumentException(rootPart
+					+ "' is not an instance of GraphicalEditPart: ");
 		}
 		if (commandStack == null) {
-			System.err
-					.println("KimlSSMDiagramLayouter: Error: commandStack == null");
-			return false;
+			throw new IllegalArgumentException("commandStack == null");
 		}
 		// handle edge label placement
 		prefUseGMFLabelLocation = KimlLayoutPlugin
@@ -885,7 +882,6 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 		prefAutosizeEmptyElements = KimlSSMDiagramLayouterPlugin.getDefault()
 				.getPreferenceStore().getBoolean(
 						PreferenceConstants.PREF_AUTOSIZE_EMPTY_ELEMENTS);
-		return true;
 	}
 
 	/*------------------------------------------------------------------------------*/

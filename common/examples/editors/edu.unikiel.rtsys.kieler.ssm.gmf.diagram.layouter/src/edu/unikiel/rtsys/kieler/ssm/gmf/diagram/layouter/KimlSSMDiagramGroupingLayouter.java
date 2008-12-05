@@ -796,7 +796,7 @@ public class KimlSSMDiagramGroupingLayouter extends KimlAbstractLayouter {
 	/*------------------------------------------------------------------------------*/
 
 	@Override
-	protected boolean init(Object object) {
+	protected void init(Object object) {
 		// get root part provided object
 		rootPart = getRootPart(object);
 
@@ -813,14 +813,11 @@ public class KimlSSMDiagramGroupingLayouter extends KimlAbstractLayouter {
 			viewport = sfrep.getZoomManager().getViewport();
 			zoomLevel = sfrep.getZoomManager().getZoom();
 		} else {
-			System.err.println("KimlSSMDiagramLayouter: Error: '" + rootPart
-					+ "' is no an instance of GraphicalEditPart: ");
-			return false;
+			throw new IllegalArgumentException(rootPart
+					+ "' is not an instance of GraphicalEditPart: ");
 		}
 		if (commandStack == null) {
-			System.err
-					.println("KimlSSMDiagramLayouter: Error: commandStack == null");
-			return false;
+			throw new IllegalArgumentException("commandStack == null");
 		}
 		// handle edge label placement
 		useGMFLabelLocation = KimlLayoutPlugin
@@ -834,8 +831,6 @@ public class KimlSSMDiagramGroupingLayouter extends KimlAbstractLayouter {
 				.getPreferenceStore()
 				.getBoolean(
 						KimlLayoutPreferenceConstants.PREF_GROUP_EVERY_SINGLE_ELEMENT);
-
-		return true;
 	}
 
 	/*------------------------------------------------------------------------------*/

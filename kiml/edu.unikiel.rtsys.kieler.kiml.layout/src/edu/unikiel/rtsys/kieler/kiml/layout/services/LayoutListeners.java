@@ -7,7 +7,9 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.ui.statushandlers.StatusManager;
 
+import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutPlugin;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KLayoutGraph;
 
 /**
@@ -40,8 +42,6 @@ public class LayoutListeners implements IKimlLayoutListener {
 	/**
 	 * Does the actual loading of the layout listeners, which need to register
 	 * themselves through the kimlLayoutListener extension point.
-	 * 
-	 * TODO: Proper error handling, KIELER-wide
 	 */
 	private void loadAvailableListeners() {
 		IExtensionRegistry reg = Platform.getExtensionRegistry();
@@ -55,14 +55,8 @@ public class LayoutListeners implements IKimlLayoutListener {
 				if (layoutListener != null) {
 					listeners.add(layoutListener);
 				}
-			} catch (CoreException e) {
-				// TODO error handling
-				System.out
-						.println("===================================================");
-				System.out.println("Error creating layout listeners.");
-				e.printStackTrace();
-				System.out
-						.println("===================================================");
+			} catch (CoreException exception) {
+				StatusManager.getManager().handle(exception, KimlLayoutPlugin.PLUGIN_ID);
 			}
 		}
 	}

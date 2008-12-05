@@ -16,6 +16,9 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.ui.statushandlers.StatusManager;
+
+import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutPlugin;
 
 /**
  * Controls all the diagram layouters; which are loaded at startup. Realized as
@@ -26,8 +29,6 @@ import org.eclipse.core.runtime.Platform;
  * <p/>
  * Provides a function to get a concrete diagram layouter for a given
  * model/editor provider.
- * <p/>
- * There is still no proper error handling, but that is a KIELER-wide issue.
  * 
  * @author <a href="mailto:msp@informatik.uni-kiel.de">Miro Spönemann</a>
  * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
@@ -58,11 +59,9 @@ public final class DiagramLayouters {
 		loadAvailableLayouters();
 	};
 
-	/*
+	/**
 	 * does the actual loading of the diagram layouters, which need to register
 	 * themselves through the kimlDiagramLayouter extension point.
-	 * 
-	 * TODO: Proper error handling, KIELER-wide
 	 */
 	private void loadAvailableLayouters() {
 		IExtensionRegistry reg = Platform.getExtensionRegistry();
@@ -78,14 +77,8 @@ public final class DiagramLayouters {
 				if (diagramLayouter != null && editorId != null) {
 					diagramLayouterMap.put(editorId, diagramLayouter);
 				}
-			} catch (CoreException e) {
-				// TODO error handling
-				System.out
-						.println("===================================================");
-				System.out.println("Error creating diagram layouters.");
-				e.printStackTrace();
-				System.out
-						.println("===================================================");
+			} catch (CoreException exception) {
+				StatusManager.getManager().handle(exception, KimlLayoutPlugin.PLUGIN_ID);
 			}
 		}
 	}

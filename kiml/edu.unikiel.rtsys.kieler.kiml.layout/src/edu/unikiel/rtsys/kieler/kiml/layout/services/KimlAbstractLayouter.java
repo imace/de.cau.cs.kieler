@@ -12,9 +12,13 @@ package edu.unikiel.rtsys.kieler.kiml.layout.services;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.LabelProvider;
+import org.eclipse.ui.statushandlers.StatusManager;
 
+import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutPlugin;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KLayoutGraph;
 
 /**
@@ -86,32 +90,27 @@ public abstract class KimlAbstractLayouter {
 	 *            object specifying what is to be layouted
 	 */
 	public void layout(Object target) {
-		// Setup the options and perform the three stages of the
-		// layout, two of them have to be implemented by the extending classes.
-		if (!init(target)) {
-			// TODO error handling
-			System.out
-					.println(getClass().getSimpleName() + ": Error in init()");
-			return;
+		try {
+			// initialize the layouter depending on the layout target
+			init(target);
+			// build the layout graph
+			KLayoutGraph layoutGraph = buildLayoutGraph();
+			// notify layout listeners about the layout request
+			LayoutListeners.getInstance().layoutRequested(layoutGraph);
+			// choose the default layout engine
+			KimlAbstractLayouterEngine layoutEngine = new KimlRecursiveGroupLayouterEngine();
+			// now do the layout
+			layoutEngine.layout(layoutGraph);
+			// notify layout listeners about the performed layout
+			LayoutListeners.getInstance().layoutPerformed(layoutGraph);
+			// and apply layout to model
+			applyLayout();
 		}
-		// return silently if there is nothing to lay out.
-		KLayoutGraph layoutGraph = buildLayoutGraph();
-		if (layoutGraph == null) {
-			// TODO error handling
-			System.out.println(getClass().getSimpleName()
-					+ ": Error in buildLayoutGraph()");
-			return;
+		catch (Exception exception) {
+			Status status = new Status(IStatus.ERROR, KimlLayoutPlugin.PLUGIN_ID,
+					"Failed to perform diagram layout.", exception);
+			StatusManager.getManager().handle(status, StatusManager.SHOW);
 		}
-		// notify layout listeners about the layout request
-		LayoutListeners.getInstance().layoutRequested(layoutGraph);
-		// choose the default layout engine
-		KimlAbstractLayouterEngine layoutEngine = new KimlRecursiveGroupLayouterEngine();
-		// now do the layout
-		layoutEngine.layout(layoutGraph);
-		// notify layout listeners about the performed layout
-		LayoutListeners.getInstance().layoutPerformed(layoutGraph);
-		// and apply layout to model
-		applyLayout();
 	}
 
 	/**
@@ -146,9 +145,10 @@ public abstract class KimlAbstractLayouter {
 	 *            {@link buildLayoutGraph} should be able to process this
 	 *            object, or there should be a mechanism in this method to
 	 *            extract a fitting rootPart for the layout.
-	 * @return true if successful
+	 * @throws IllegalArgumentException when the target object is not
+	 *            supported
 	 */
-	protected abstract boolean init(Object target);
+	protected abstract void init(Object target) throws IllegalArgumentException;
 
 	/**
 	 * Is called second during the layout process. Implementing methods should
