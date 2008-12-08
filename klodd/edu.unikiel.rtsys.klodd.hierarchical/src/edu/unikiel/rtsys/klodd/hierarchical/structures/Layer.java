@@ -30,11 +30,13 @@ public class Layer {
 	public float crosswiseDim = 0.0f;
 	/** lengthwise dimension of this layer */
 	public float lengthwiseDim = 0.0f;
+	/** next layer in the layered graph */
+	public Layer next;
 	
 	/** the containing layered graph */
 	private LayeredGraph layeredGraph;
 	/** list of elements in this layer */
-	private List<LayerElement> elements = new LinkedList<LayerElement>(); 
+	private List<LayerElement> elements = new LinkedList<LayerElement>();
 	
 	/**
 	 * Creates a new layer with given rank and height.
@@ -73,9 +75,8 @@ public class Layer {
 	 * 
 	 * @param layerPos starting lengthwise position of this layer
 	 * @param minDist minimal distance between nodes and connections
-	 * @return amount of space to leave in front of this layer
 	 */
-	public float layoutElements(float layerPos, float minDist) {
+	public void layoutElements(float layerPos, float minDist) {
 		LAYOUT_OPTION layoutDirection = layeredGraph.getLayoutDirection();
 		float backPadding = 0.0f;
 		float frontPadding = 0.0f;
@@ -105,7 +106,7 @@ public class Layer {
 			}
 		}
 		
-		return frontPadding;
+		lengthwiseDim += frontPadding;
 	}
 	
 	/**

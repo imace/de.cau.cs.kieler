@@ -187,26 +187,50 @@ public class LayerElement {
 	}
 	
 	/**
-	 * Applies the layout of this layer element to the contained object.
+	 * Applies the layout of this layer element to the contained object
+	 * and updates position information according to given offset values.
 	 * 
 	 * @param offset offset to be added to this element's position
+	 * @param insets insets of the containing parent node group
 	 */
-	public void applyLayout(KPoint offset) {
+	public void applyLayout(KPoint offset, KInsets insets) {
 		if (elemObj instanceof KNodeGroup) {
 			KNodeGroup node = (KNodeGroup)elemObj;
-			node.getLayout().getLocation().setX(position.getX() + offset.getX());
-			node.getLayout().getLocation().setY(position.getY() + offset.getY());
+			position.setX(position.getX() + offset.getX() + insets.getLeft());
+			position.setY(position.getY() + offset.getY() + insets.getTop());
+			node.getLayout().getLocation().setX(position.getX());
+			node.getLayout().getLocation().setY(position.getY());
 		}
 		else if (elemObj instanceof KPort) {
 			KPort port = (KPort)elemObj;
-			if (layer.getLayeredGraph().areExternalPortsFixed()) {
-				port.getLayout().getLocation().setX(position.getX());
-				port.getLayout().getLocation().setY(position.getY());
+			switch (port.getLayout().getPlacement()) {
+			case NORTH:
+				if (!layer.getLayeredGraph().areExternalPortsFixed())
+					position.setX(position.getX() + offset.getX()
+							+ insets.getLeft());
+				break;
+			case EAST:
+				position.setX(position.getX() + offset.getX()
+						+ insets.getLeft() + insets.getRight());
+				if (!layer.getLayeredGraph().areExternalPortsFixed())
+					position.setY(position.getY() + offset.getY()
+							+ insets.getTop());
+				break;
+			case SOUTH:
+				if (!layer.getLayeredGraph().areExternalPortsFixed())
+					position.setX(position.getX() + offset.getX()
+							+ insets.getLeft());
+				position.setY(position.getY() + offset.getY()
+						+ insets.getTop() + insets.getBottom());
+				break;
+			case WEST:
+				if (!layer.getLayeredGraph().areExternalPortsFixed())
+					position.setY(position.getY() + offset.getY()
+							+ insets.getTop());
+				break;
 			}
-			else {
-				port.getLayout().getLocation().setX(position.getX() + offset.getX());
-				port.getLayout().getLocation().setY(position.getY() + offset.getY());
-			}
+			port.getLayout().getLocation().setX(position.getX());
+			port.getLayout().getLocation().setY(position.getY());
 		}
 	}
 

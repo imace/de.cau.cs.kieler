@@ -43,9 +43,9 @@ public class LayoutGraphCanvas extends Canvas implements PaintListener {
 	private static final int EDGE_ALPHA = 220;
 	
 	/** length of edge arrows */
-	private static final float ARROW_LENGTH = 4.0f;
+	private static final float ARROW_LENGTH = 7.0f;
 	/** width of edge arrows */
-	private static final float ARROW_WIDTH = 3.0f;
+	private static final float ARROW_WIDTH = 5.0f;
 	
 	/**
 	 * Rectangle class used to mark painted objects.

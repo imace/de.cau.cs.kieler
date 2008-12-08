@@ -182,8 +182,11 @@ public class LayeredGraph {
 		// fill rank information for all layers
 		int rank = layers.get(0).rank;
 		if (rank == Layer.UNDEF_RANK) rank = 1;
-		for (int i = 0; i < layerCount; i++)
+		for (int i = 0; i < layerCount; i++) {
 			layers.get(i).rank = rank++;
+			if (i + 1 < layerCount)
+				layers.get(i).next = layers.get(i + 1);
+		}
 		// fill height information for all layers
 		int height = layers.get(layerCount - 1).height;
 		if (height == Layer.UNDEF_HEIGHT) height = 1;
@@ -234,16 +237,13 @@ public class LayeredGraph {
 	 * Applies the layout of this layered graph to the contained layout graph.
 	 */
 	public void applyLayout() {
-		KPoint offset = KimlLayoutGraphFactory.eINSTANCE.createKPoint();
 		KInsets insets = parentGroup.getLayout().getInsets();
-		offset.setX(position.getX() + insets.getLeft());
-		offset.setY(position.getY() + insets.getTop());
 		// apply the new layout to the contained elements
 		for (Layer layer : layers) {
 			for (LayerElement element : layer.getElements()) {
-				element.applyLayout(offset);
-				for (LayerConnection connection : element.getOutgoingConnections()) {
-					connection.applyLayout(offset);
+				element.applyLayout(position, insets);
+				for (LayerConnection connection : element.getIncomingConnections()) {
+					connection.applyLayout(position, insets);
 				}
 			}
 		}

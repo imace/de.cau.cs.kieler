@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KEdge;
+import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KInsets;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPoint;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPort;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPortLayout;
@@ -86,13 +87,13 @@ public class LayerConnection {
 	 * Applies the layout of this layer connection to the contained edge.
 	 * 
 	 * @param offset offset to be added to each bend point
+	 * @param insets insets of the containing parent node group
 	 */
-	public void applyLayout(KPoint offset) {
+	public void applyLayout(KPoint offset, KInsets insets) {
 		LayeredGraph layeredGraph = sourceElement.getLayer().getLayeredGraph();
 		
 		// don't add offset values to bend points near fixed external ports
 		int omitXOffset = -1, omitYOffset = -1;
-		boolean fixedSourcePort = false, fixedTargetPort = false;
 		if (sourcePort != null && sourcePort.getNodeGroup() == layeredGraph.getParentGroup()
 				&& layeredGraph.areExternalPortsFixed()) {
 			if (sourcePort.getLayout().getPlacement() == PORT_PLACEMENT.NORTH
@@ -102,7 +103,6 @@ public class LayerConnection {
 			else {
 				omitYOffset = 0;
 			}
-			fixedSourcePort = true;
 		}
 		else if (targetPort != null && targetPort.getNodeGroup() == layeredGraph.getParentGroup()
 				&& layeredGraph.areExternalPortsFixed()) {
@@ -113,16 +113,15 @@ public class LayerConnection {
 			else {
 				omitYOffset = edge.getLayout().getGridPoints().size()-1;
 			}
-			fixedTargetPort = true;
 		}
 		
 		// set bend points
 		int i = 0;
 		for (KPoint point : bendPoints) {
 			if (i != omitXOffset)
-				point.setX(point.getX() + offset.getX());
+				point.setX(point.getX() + offset.getX() + insets.getLeft());
 			if (i != omitYOffset)
-				point.setY(point.getY() + offset.getY());
+				point.setY(point.getY() + offset.getY() + insets.getTop());
 			edge.getLayout().getGridPoints().add(point);
 			i++;
 		}
@@ -144,10 +143,6 @@ public class LayerConnection {
 						+ sourcePort.getLayout().getSize().getHeight() / 2
 						+ sourceElement.getPosition().getY());
 			}
-			if (!fixedSourcePort) {
-				point.setX(point.getX() + offset.getX());
-				point.setY(point.getY() + offset.getY());
-			}
 			edge.getLayout().setSourcePoint(point);
 		}
 		if (targetPort != null) {
@@ -165,10 +160,6 @@ public class LayerConnection {
 				point.setY(targetPort.getLayout().getLocation().getY()
 						+ targetPort.getLayout().getSize().getHeight() / 2
 						+ targetElement.getPosition().getY());
-			}
-			if (!fixedTargetPort) {
-				point.setX(point.getX() + offset.getX());
-				point.setY(point.getY() + offset.getY());
 			}
 			edge.getLayout().setTargetPoint(point);
 		}
