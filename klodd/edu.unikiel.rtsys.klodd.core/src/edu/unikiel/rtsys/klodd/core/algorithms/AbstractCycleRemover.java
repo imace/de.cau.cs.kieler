@@ -58,6 +58,10 @@ public abstract class AbstractCycleRemover extends AbstractAlgorithm
 			for (KPoint point : bendPoints) {
 				edge.getLayout().getGridPoints().add(point);
 			}
+			// reverse source and target point
+			KPoint sourcePoint = edge.getLayout().getSourcePoint();
+			edge.getLayout().setSourcePoint(edge.getLayout().getTargetPoint());
+			edge.getLayout().setTargetPoint(sourcePoint);
 		}
 	}
 	
