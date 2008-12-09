@@ -52,6 +52,14 @@ public class ElementLoop {
 		this.targetPort = targetPort;
 		edge.getLayout().getGridPoints().clear();
 	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	public String toString() {
+		return "[" + element.toString() + "] > [" + element.toString() + "]";
+	}
 
 	/**
 	 * Gets the source port of this element loop.

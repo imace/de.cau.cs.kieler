@@ -3,6 +3,7 @@ package edu.unikiel.rtsys.klodd.hierarchical.structures;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
 
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KEdge;
@@ -42,6 +43,8 @@ public class LayeredGraph {
 	KNodeGroup parentGroup;
 	/** map of objects to their corresponding layer */
 	private Map<Object, LayerElement> obj2LayerElemMap = new HashMap<Object, LayerElement>();
+	/** map of ports to connected long edges */
+	private Map<KPort, LinearSegment> longEdgesMap = new HashMap<KPort, LinearSegment>();
 	/** list of linear segments in this layered graph */
 	private List<LinearSegment> linearSegments = new LinkedList<LinearSegment>();
 	/** layout direction for this layered graph: HORIZONTAL or VERTICAL */
@@ -206,15 +209,12 @@ public class LayeredGraph {
 				if (outgoingEdges != null) {
 					for (KEdge edge : outgoingEdges) {
 						KNodeGroup targetGroup = edge.getTarget();
-						KPort sourcePort = edge.getSourcePort();
 						KPort targetPort = edge.getTargetPort();
 						if (targetGroup != null) {
-							createConnection(element, obj2LayerElemMap.get(targetGroup),
-									edge, sourcePort, targetPort);
+							createConnection(element, obj2LayerElemMap.get(targetGroup), edge);
 						}
 						else if (targetPort != null) {
-							createConnection(element, obj2LayerElemMap.get(targetPort),
-									edge, sourcePort, targetPort);
+							createConnection(element, obj2LayerElemMap.get(targetPort), edge);
 						}
 					}
 				}
@@ -335,36 +335,45 @@ public class LayeredGraph {
 	 * @param source source element
 	 * @param target target element
 	 * @param edge the edge object connecting both elements
-	 * @param sourcePort the source port
-	 * @param targetPort the target port
 	 */
 	private void createConnection(LayerElement source,
-			LayerElement target, KEdge edge, KPort sourcePort,
-			KPort targetPort) {
+			LayerElement target, KEdge edge) {
 		Layer sourceLayer = source.getLayer();
 		Layer targetLayer = target.getLayer();
 		if (targetLayer.rank - sourceLayer.rank == 1) {
-			source.addOutgoing(edge, target, sourcePort, targetPort);
+			source.addOutgoing(edge, target, edge.getSourcePort(),
+					edge.getTargetPort());
 		}
 		else {
-			// determine the index of the first layer after the source layer
-			int layerIndex = sourceLayer.rank + 1;
-			if (layers.get(0).rank > 0)
-				layerIndex--;
-			// create a long edge as linear segment
-			LayerElement newElement = layers.get(layerIndex).put(edge);
-			LinearSegment linearSegment = createLinearSegment(newElement);
-			source.addOutgoing(edge, newElement, sourcePort, null);
-			LayerElement currentElement = newElement;
-			for (int i = sourceLayer.rank + 1; i < targetLayer.rank - 1; i++) {
-				layerIndex++;
-				newElement = layers.get(layerIndex).put(edge);
+			LayerElement currentElement = null;
+			// process existing long edges for the source or target port
+			LinearSegment linearSegment = longEdgesMap.get(edge.getSourcePort());
+			if (linearSegment == null)
+				linearSegment = longEdgesMap.get(edge.getTargetPort());
+			if (linearSegment != null) {
+				ListIterator<LayerElement> elemIter = linearSegment.elements.listIterator();
+				while (elemIter.hasNext()
+						&& (currentElement = elemIter.next()).getLayer().rank
+						< targetLayer.rank - 1);
+				source.addOutgoing(edge, linearSegment.elements.get(0),
+						edge.getSourcePort(), null);
+			}
+			else {
+				currentElement = sourceLayer.next.put(edge);
+				linearSegment = createLinearSegment(currentElement);
+				source.addOutgoing(edge, currentElement, edge.getSourcePort(), null);
+			}
+			// add new layer elements to the linear segment if needed
+			while (currentElement.getLayer().rank < targetLayer.rank - 1) {
+				LayerElement newElement = currentElement.getLayer().next.put(edge);
 				linearSegment.elements.add(newElement);
 				newElement.linearSegment = linearSegment;
 				currentElement.addOutgoing(edge, newElement);
 				currentElement = newElement;
 			}
-			currentElement.addOutgoing(edge, target, null, targetPort);
+			currentElement.addOutgoing(edge, target, null, edge.getTargetPort());
+			longEdgesMap.put(edge.getSourcePort(), linearSegment);
+			longEdgesMap.put(edge.getTargetPort(), linearSegment);
 		}
 	}
 	

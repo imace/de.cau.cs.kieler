@@ -178,9 +178,7 @@ public class LayerElement {
 	 * @param target target layer element
 	 */
 	public void addOutgoing(KEdge edge, LayerElement target) {
-		LayerConnection connection = new LayerConnection(edge, this, target);
-		this.outgoing.add(connection);
-		target.incoming.add(connection);
+		addOutgoing(edge, target, null, null);
 	}
 	
 	/**

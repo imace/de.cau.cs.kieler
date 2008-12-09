@@ -110,35 +110,38 @@ public class RectilinearEdgeRouter extends AbstractAlgorithm implements
 	private void processOutgoing(Layer layer) {
 		LAYOUT_OPTION layoutDirection = layer.getLayeredGraph().getLayoutDirection();
 		// determine number of outgoing connections for each port
-		Map<KPort, Integer> outgoing = new HashMap<KPort, Integer>();
+		Map<Object, Integer> outgoing = new HashMap<Object, Integer>();
 		for (LayerElement element : layer.getElements()) {
 			// count outgoing connections
 			for (LayerConnection connection : element.getOutgoingConnections()) {
-				KPort sourcePort = connection.getSourcePort();
-				if (sourcePort != null) {
-					Integer value = outgoing.get(sourcePort);
-					if (value == null) {
-						outgoing.put(sourcePort, Integer.valueOf(1));
-					}
-					else {
-						outgoing.put(sourcePort, Integer.valueOf(value.intValue() + 1));
-					}
+				Object key = connection.getSourcePort();
+				if (key == null)
+					key = element;
+				Integer value = outgoing.get(key);
+				if (value == null) {
+					outgoing.put(key, Integer.valueOf(1));
+				}
+				else {
+					outgoing.put(key, Integer.valueOf(value.intValue() + 1));
 				}
 			}
 		}
 		
 		// create routing slots for each port
-		Map<KPort, RoutingSlot> slotMap = new LinkedHashMap<KPort, RoutingSlot>();
+		Map<Object, RoutingSlot> slotMap = new LinkedHashMap<Object, RoutingSlot>();
 		Map<LayerConnection, ExternalRouting> routingMap = new HashMap<LayerConnection, ExternalRouting>();
-		for (LayerElement element : layer.getElements()) {		
+		for (LayerElement element : layer.getElements()) {
 			for (LayerConnection connection : element.getOutgoingConnections()) {
 				// choose source or target port for routing
-				Integer sourceValue = outgoing.get(connection.getSourcePort());
-				KPort port;
-				if (sourceValue == null || sourceValue.intValue() <= 1)
-					port = connection.getTargetPort();
-				else
-					port = connection.getSourcePort();
+				Object key = connection.getSourcePort();
+				if (key == null)
+					key = element;
+				Integer sourceValue = outgoing.get(key);
+				if (sourceValue == null || sourceValue.intValue() <= 1) {
+					key = connection.getTargetPort();
+					if (key == null)
+						key = connection.getTargetElement();
+				}
 				
 				// determine source and target positions
 				float sourcePos = connection.calcSourcePos(minDist);
@@ -211,7 +214,7 @@ public class RectilinearEdgeRouter extends AbstractAlgorithm implements
 				
 				// get routing slot and insert connection area
 				routingMap.put(connection, externalRouting);
-				RoutingSlot slot = slotMap.get(port);
+				RoutingSlot slot = slotMap.get(key);
 				if (slot == null) {
 					slot = new RoutingSlot();
 					if (targetPos <= sourcePos)
@@ -220,7 +223,7 @@ public class RectilinearEdgeRouter extends AbstractAlgorithm implements
 						slot.outgoingAtEnd = true;
 					slot.start = startPos;
 					slot.end = endPos;
-					slotMap.put(port, slot);
+					slotMap.put(key, slot);
 				}
 				else {
 					if (startPos < slot.start) {
@@ -352,9 +355,15 @@ public class RectilinearEdgeRouter extends AbstractAlgorithm implements
 					connection.bendPoints.add(point);
 				}
 				
-				RoutingSlot slot = slotMap.get(connection.getSourcePort());
+				Object key = connection.getSourcePort();
+				if (key == null)
+					key = element;
+				RoutingSlot slot = slotMap.get(key);
 				if (slot == null) {
-					slot = slotMap.get(connection.getTargetPort());
+					key = connection.getTargetPort();
+					if (key == null)
+						key = connection.getTargetElement();
+					slot = slotMap.get(key);
 				}
 				ExternalRouting externalRouting = routingMap.get(connection);
 				if (externalRouting == ExternalRouting.FIRST

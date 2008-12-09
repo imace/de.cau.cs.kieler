@@ -63,17 +63,6 @@ public class LayerConnection {
 		this.targetPort = targetPort;
 		edge.getLayout().getGridPoints().clear();
 	}
-
-	/**
-	 * Creates a layer connection with given source and target.
-	 * 
-	 * @param edge the edge that is to be contained in this layer connection
-	 * @param sourceElem the source element
-	 * @param targetElem the target element
-	 */
-	public LayerConnection(KEdge edge, LayerElement sourceElem, LayerElement targetElem) {
-		this(edge, sourceElem, null, targetElem, null);
-	}
 	
 	/*
 	 * (non-Javadoc)
