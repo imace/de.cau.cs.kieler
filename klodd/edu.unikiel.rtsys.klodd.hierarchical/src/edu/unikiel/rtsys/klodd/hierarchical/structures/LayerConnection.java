@@ -61,6 +61,7 @@ public class LayerConnection {
 		this.sourcePort = sourcePort;
 		this.targetElement = targetElem;
 		this.targetPort = targetPort;
+		edge.getLayout().getGridPoints().clear();
 	}
 
 	/**

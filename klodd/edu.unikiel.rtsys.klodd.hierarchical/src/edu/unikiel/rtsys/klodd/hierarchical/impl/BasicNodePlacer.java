@@ -24,6 +24,9 @@ import edu.unikiel.rtsys.klodd.hierarchical.structures.LinearSegment;
  */
 public class BasicNodePlacer extends AbstractAlgorithm implements INodePlacer {
 
+	/** factor for the actual distance between nodes */
+	private static final float DIST_FACTOR = 1.7f;
+	
 	/** minimal distance between two nodes or edges in each layer */
 	private float minDist;
 	/** layout direction for this algorithm instance */
@@ -167,7 +170,7 @@ public class BasicNodePlacer extends AbstractAlgorithm implements INodePlacer {
 						element.getLayer().crosswiseDim);
 			}
 			// apply the leftmost / uppermost placement to all elements
-			float newPos = leftmostPlace + minDist;
+			float newPos = leftmostPlace + DIST_FACTOR * minDist;
 			for (LayerElement element : segment.elements) {
 				Layer layer = element.getLayer();
 				KDimension elemDim = element.getRealDim();

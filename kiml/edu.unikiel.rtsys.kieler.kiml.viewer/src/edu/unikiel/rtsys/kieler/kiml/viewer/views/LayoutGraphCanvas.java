@@ -299,7 +299,10 @@ public class LayoutGraphCanvas extends Canvas implements PaintListener {
 					Math.round(lastPoint.getY() + offset.getY()),
 					Math.round(targetPoint.getX() + offset.getX()),
 					Math.round(targetPoint.getY() + offset.getY()));
-			graphics.fillPolygon(makeArrow(lastPoint, targetPoint, offset));
+			// draw an arrow at the last segment of the connection
+			int[] arrowPoly = makeArrow(lastPoint, targetPoint, offset);
+			if (arrowPoly != null)
+				graphics.fillPolygon(arrowPoly);
 			rect.painted = true;
 		}
 		if (paintLabels) {
@@ -323,28 +326,32 @@ public class LayoutGraphCanvas extends Canvas implements PaintListener {
 	 * @param point1 source point
 	 * @param point2 target point
 	 * @param offset offset value to be added to coordinates
-	 * @return array of coordinates for the arrow polygon
+	 * @return array of coordinates for the arrow polygon, or null if the
+	 *     given source and target points are equal
 	 */
 	private int[] makeArrow(KPoint point1, KPoint point2, KPoint offset) {
-		int[] arrow = new int[6];
-		arrow[0] = Math.round(point2.getX() + offset.getX());
-		arrow[1] = Math.round(point2.getY() + offset.getY());
-		
-		float vectX = point1.getX() - point2.getX();
-		float vectY = point1.getY() - point2.getY();
-		float length = (float)Math.sqrt(vectX * vectX + vectY * vectY);
-		float normX = vectX / length;
-		float normY = vectY / length;
-		float neckX = point2.getX() + ARROW_LENGTH * normX;
-		float neckY = point2.getY() + ARROW_LENGTH * normY;
-		float orthX = normY * ARROW_WIDTH / 2;
-		float orthY = -normX * ARROW_WIDTH / 2;
-		
-		arrow[2] = Math.round(neckX + orthX + offset.getX());
-		arrow[3] = Math.round(neckY + orthY + offset.getY());
-		arrow[4] = Math.round(neckX - orthX + offset.getX());
-		arrow[5] = Math.round(neckY - orthY + offset.getY());
-		return arrow;
+		if (!(point1.getX() == point2.getX() && point1.getY() == point2.getY())) {
+			int[] arrow = new int[6];
+			arrow[0] = Math.round(point2.getX() + offset.getX());
+			arrow[1] = Math.round(point2.getY() + offset.getY());
+			
+			float vectX = point1.getX() - point2.getX();
+			float vectY = point1.getY() - point2.getY();
+			float length = (float)Math.sqrt(vectX * vectX + vectY * vectY);
+			float normX = vectX / length;
+			float normY = vectY / length;
+			float neckX = point2.getX() + ARROW_LENGTH * normX;
+			float neckY = point2.getY() + ARROW_LENGTH * normY;
+			float orthX = normY * ARROW_WIDTH / 2;
+			float orthY = -normX * ARROW_WIDTH / 2;
+			
+			arrow[2] = Math.round(neckX + orthX + offset.getX());
+			arrow[3] = Math.round(neckY + orthY + offset.getY());
+			arrow[4] = Math.round(neckX - orthX + offset.getX());
+			arrow[5] = Math.round(neckY - orthY + offset.getY());
+			return arrow;
+		}
+		else return null;
 	}
 	
 }

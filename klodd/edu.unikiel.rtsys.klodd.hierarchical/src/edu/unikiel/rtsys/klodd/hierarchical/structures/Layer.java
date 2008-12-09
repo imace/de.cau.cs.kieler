@@ -90,7 +90,7 @@ public class Layer {
 			frontPadding = Math.max(frontPadding,
 					element.getEdgesFront() * minDist - sideSpace);
 		}
-		lengthwisePos = layerPos + backPadding;
+		lengthwisePos = layerPos + frontPadding;
 		
 		// set the lengthwise position of each node
 		for (LayerElement element : elements) {
@@ -106,7 +106,7 @@ public class Layer {
 			}
 		}
 		
-		lengthwiseDim += frontPadding;
+		lengthwiseDim += backPadding;
 	}
 	
 	/**

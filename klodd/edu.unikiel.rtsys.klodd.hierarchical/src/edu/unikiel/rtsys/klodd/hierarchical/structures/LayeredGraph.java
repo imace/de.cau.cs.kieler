@@ -224,7 +224,14 @@ public class LayeredGraph {
 		for (LayerElement element : layers.get(layerCount - 1).getElements()) {
 			createLinearSegment(element);
 		}
-		
+	}
+	
+	/**
+	 * Calculates connection routing for all layer elements. This should be
+	 * done after port positions have been determined in the crossing
+	 * reduction step.
+	 */
+	public void calcConnectionRouting() {
 		// calculate the connection routing for each layer element
 		for (Layer layer : layers) {
 			for (LayerElement element : layer.getElements()) {
@@ -244,6 +251,9 @@ public class LayeredGraph {
 				element.applyLayout(position, insets);
 				for (LayerConnection connection : element.getIncomingConnections()) {
 					connection.applyLayout(position, insets);
+				}
+				for (ElementLoop loop : element.getLoops()) {
+					loop.applyLayout(position, insets);
 				}
 			}
 		}

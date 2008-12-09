@@ -298,23 +298,23 @@ public class LayoutGraphs {
 			KDimension portSize = port.getLayout().getSize();
 			switch (port.getLayout().getPlacement()) {
 			case NORTH:
-				portLocation.setX(northCur - portSize.getWidth());
+				portLocation.setX(northCur);
 				portLocation.setY(-portSize.getHeight());
 				northCur += northDist;
 				break;
 			case EAST:
-				portLocation.setX(nodeWidth - portSize.getWidth());
-				portLocation.setY(eastCur - portSize.getHeight());
+				portLocation.setX(nodeWidth);
+				portLocation.setY(eastCur);
 				eastCur += eastDist;
 				break;
 			case SOUTH:
-				portLocation.setX(southCur - portSize.getWidth());
-				portLocation.setY(nodeHeight - portSize.getHeight());
+				portLocation.setX(southCur);
+				portLocation.setY(nodeHeight);
 				southCur += southDist;
 				break;
 			case WEST:
 				portLocation.setX(-portSize.getWidth());
-				portLocation.setY(westCur - portSize.getHeight());
+				portLocation.setY(westCur);
 				westCur += westDist;
 				break;
 			}
@@ -368,11 +368,13 @@ public class LayoutGraphs {
 	 */
 	public static void resizeNode(KNodeGroup node) {
 		KNodeGroupLayout nodeLayout = node.getLayout();
+		float minWidth = nodeLayout.getInsets().getLeft() + nodeLayout.getInsets().getRight();
+		float minHeight = nodeLayout.getInsets().getTop() + nodeLayout.getInsets().getBottom();
 		KNodeGroupLabelLayout labelLayout = node.getLabel().getLabelLayout();
-		float minWidth = labelLayout.getSize().getWidth()
-			+ nodeLayout.getInsets().getLeft() + nodeLayout.getInsets().getRight();
-		float minHeight = labelLayout.getSize().getHeight()
-			+ nodeLayout.getInsets().getTop() + nodeLayout.getInsets().getBottom();
+		if (labelLayout != null) {
+			minWidth += labelLayout.getSize().getWidth();
+			minHeight += labelLayout.getSize().getHeight();
+		}
 		
 		float minNorth = MIN_PORT_DISTANCE, minEast = MIN_PORT_DISTANCE,
 			minSouth = MIN_PORT_DISTANCE, minWest = MIN_PORT_DISTANCE;

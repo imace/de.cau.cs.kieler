@@ -58,6 +58,7 @@ public class HierarchicalDataflowLayoutProvider extends
 			layeredGraph.createConnections();
 			// optimize the order of nodes in each layer
 			crossingReducer.reduceCrossings(layeredGraph);
+			layeredGraph.calcConnectionRouting();
 			// determine a crosswise placement for each node
 			nodePlacer.placeNodes(layeredGraph, MIN_DIST);
 			// route edges between nodes

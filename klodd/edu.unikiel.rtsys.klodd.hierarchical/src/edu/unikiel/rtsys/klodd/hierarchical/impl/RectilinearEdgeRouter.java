@@ -1,5 +1,7 @@
 package edu.unikiel.rtsys.klodd.hierarchical.impl;
 
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
@@ -36,6 +38,7 @@ public class RectilinearEdgeRouter extends AbstractAlgorithm implements
 	private class RoutingSlot {
 		int rank;
 		float start, end;
+		boolean outgoingAtStart = false, outgoingAtEnd = false;
 	}
 	
 	/** minimal distance of two edges to make them feasible in the same
@@ -73,8 +76,10 @@ public class RectilinearEdgeRouter extends AbstractAlgorithm implements
 			Layer layer = layerIter.next();
 			if (layerIter.hasNext()) {
 				// layout all outgoing connections of the current layer 
-				processLayer(layer);
+				processOutgoing(layer);
 			}
+			// layout element loops of the current layer
+			processLoops(layer);
 		}
 		
 		// update dimension of the whole graph
@@ -102,7 +107,7 @@ public class RectilinearEdgeRouter extends AbstractAlgorithm implements
 	 * 
 	 * @param layer layer to be processed
 	 */
-	private void processLayer(Layer layer) {
+	private void processOutgoing(Layer layer) {
 		LAYOUT_OPTION layoutDirection = layer.getLayeredGraph().getLayoutDirection();
 		// determine number of outgoing connections for each port
 		Map<KPort, Integer> outgoing = new HashMap<KPort, Integer>();
@@ -209,21 +214,61 @@ public class RectilinearEdgeRouter extends AbstractAlgorithm implements
 				RoutingSlot slot = slotMap.get(port);
 				if (slot == null) {
 					slot = new RoutingSlot();
+					if (targetPos <= sourcePos)
+						slot.outgoingAtStart = true;
+					if (targetPos >= sourcePos)
+						slot.outgoingAtEnd = true;
 					slot.start = startPos;
 					slot.end = endPos;
 					slotMap.put(port, slot);
 				}
 				else {
+					if (startPos < slot.start) {
+						if (targetPos <= sourcePos)
+							slot.outgoingAtStart = true;
+						else
+							slot.outgoingAtStart = false;
+					}
+					if (endPos > slot.end) {
+						if (targetPos >= sourcePos)
+							slot.outgoingAtEnd = true;
+						else
+							slot.outgoingAtEnd = false;
+					}
 					slot.start = Math.min(slot.start, startPos);
 					slot.end = Math.max(slot.end, endPos);
 				}
 			}
 		}
 		
+		// sort all routing slots by their start value
+		List<List<RoutingSlot>> routingLayers = new LinkedList<List<RoutingSlot>>();
+		RoutingSlot[] sortedSlots = slotMap.values().toArray(new RoutingSlot[0]);
+		Arrays.sort(sortedSlots, new Comparator<RoutingSlot>() {
+			public int compare(RoutingSlot slot1, RoutingSlot slot2) {
+				if (slot1.outgoingAtStart && slot1.start > slot2.start)
+					return 1;
+				else if (slot2.outgoingAtStart && slot2.start > slot1.start)
+					return -1;
+				else if (slot1.outgoingAtEnd && slot1.end < slot2.end)
+					return 1;
+				else if (slot2.outgoingAtEnd && slot2.end < slot1.end)
+					return -1;
+				else if (!slot1.outgoingAtStart && slot1.start > slot2.start)
+					return -1;
+				else if (!slot2.outgoingAtStart && slot2.start > slot1.start)
+					return 1;
+				else if (!slot1.outgoingAtEnd && slot1.end < slot2.end)
+					return -1;
+				else if (!slot2.outgoingAtEnd && slot2.end < slot1.end)
+					return 1;
+				else
+					return 0;
+			}
+		});
 		// assign ranks to each routing slot
 		int slotRanks = 0;
-		List<List<RoutingSlot>> routingLayers = new LinkedList<List<RoutingSlot>>();
-		for (RoutingSlot slot : slotMap.values()) {
+		for (RoutingSlot slot : sortedSlots) {
 			boolean foundPlace = false;
 			int rank = 0;
 			for (List<RoutingSlot> routingLayer : routingLayers) {
@@ -267,7 +312,7 @@ public class RectilinearEdgeRouter extends AbstractAlgorithm implements
 					KPoint point2 = KimlLayoutGraphFactory.eINSTANCE.createKPoint();
 					KPortLayout portLayout = connection.getSourcePort().getLayout();
 					if (layoutDirection == LAYOUT_OPTION.VERTICAL) {
-						point1.setX(element.getPosition().getX()
+						point1.setX(sourcePos.getX()
 								+ portLayout.getLocation().getX()
 								+ portLayout.getSize().getWidth() / 2);
 						point1.setY(sourcePos.getY()
@@ -276,7 +321,7 @@ public class RectilinearEdgeRouter extends AbstractAlgorithm implements
 						point2.setY(point1.getY());
 					}
 					else {
-						point1.setY(element.getPosition().getY()
+						point1.setY(sourcePos.getY()
 								+ portLayout.getLocation().getY()
 								+ portLayout.getSize().getHeight() / 2);
 						point1.setX(sourcePos.getX()
@@ -294,13 +339,13 @@ public class RectilinearEdgeRouter extends AbstractAlgorithm implements
 					KPortLayout portLayout = connection.getSourcePort().getLayout();
 					if (layoutDirection == LAYOUT_OPTION.VERTICAL) {
 						point.setX(connection.sourceAnchorPos);
-						point.setY(element.getPosition().getY()
+						point.setY(sourcePos.getY()
 								+ portLayout.getLocation().getY()
 								+ portLayout.getSize().getHeight() / 2);
 					}
 					else {
 						point.setY(connection.sourceAnchorPos);
-						point.setX(element.getPosition().getX()
+						point.setX(sourcePos.getX()
 								+ portLayout.getLocation().getX()
 								+ portLayout.getSize().getWidth() / 2);
 					}
@@ -494,6 +539,58 @@ public class RectilinearEdgeRouter extends AbstractAlgorithm implements
 					}
 					connection.bendPoints.add(point);
 				}
+			}			
+		}
+	}
+	
+	/**
+	 * Routes element loops in a given layer.
+	 * 
+	 * @param layer layer to process
+	 */
+	private void processLoops(Layer layer) {
+		for (LayerElement element : layer.getElements()) {
+			for (ElementLoop loop : element.getLoops()) {
+				KPoint point1 = createPointFor(loop.getSourcePort(), element, loop);
+				KPoint point4 = createPointFor(loop.getTargetPort(), element, loop);
+				loop.bendPoints.add(point1);
+				
+				PORT_PLACEMENT placement1 = loop.getSourcePort().getLayout().getPlacement();
+				PORT_PLACEMENT placement2 = loop.getTargetPort().getLayout().getPlacement();
+				if (placement1 != placement2) {
+					KPoint point2 = KimlLayoutGraphFactory.eINSTANCE.createKPoint();
+					KPoint point3 = KimlLayoutGraphFactory.eINSTANCE.createKPoint();
+					if (placement1 == PORT_PLACEMENT.NORTH && placement2 == PORT_PLACEMENT.SOUTH
+							|| placement1 == PORT_PLACEMENT.SOUTH && placement2 == PORT_PLACEMENT.NORTH) {
+						point2.setX(element.getPosition().getX()
+								+ element.getRealDim().getWidth()
+								+ loop.eastRoutePos * minDist);
+						point2.setY(point1.getY());
+						point3.setX(point2.getX());
+						point3.setY(point4.getY());
+						loop.bendPoints.add(point2);
+					}
+					else if (placement1 == PORT_PLACEMENT.EAST && placement2 == PORT_PLACEMENT.WEST
+							|| placement1 == PORT_PLACEMENT.WEST && placement2 == PORT_PLACEMENT.EAST) {
+						point2.setX(point1.getX());
+						point2.setY(element.getPosition().getY()
+								+ element.getRealDim().getHeight()
+								+ loop.southRoutePos * minDist);
+						point3.setX(point4.getX());
+						point3.setY(point2.getY());
+						loop.bendPoints.add(point2);
+					}
+					else if (placement1 == PORT_PLACEMENT.NORTH || placement1 == PORT_PLACEMENT.SOUTH) {
+						point3.setX(point4.getX());
+						point3.setY(point1.getY());
+					}
+					else {
+						point3.setX(point1.getX());
+						point3.setY(point4.getY());
+					}
+					loop.bendPoints.add(point3);
+				}
+				loop.bendPoints.add(point4);
 			}
 		}
 	}
@@ -751,6 +848,50 @@ public class RectilinearEdgeRouter extends AbstractAlgorithm implements
 				}
 			}
 		}
+	}
+	
+	/**
+	 * Creates a point for routing of an element loop.
+	 * 
+	 * @param port port where a point shall be created
+	 * @param element the layer element
+	 * @param loop element loop to be routed
+	 * @return a point for edges starting or ending at the specified port
+	 */
+	private KPoint createPointFor(KPort port, LayerElement element,
+			ElementLoop loop) {
+		KPoint elemPos = element.getPosition();
+		KDimension elemDim = element.getRealDim();
+		KPoint point = KimlLayoutGraphFactory.eINSTANCE.createKPoint();
+		switch (port.getLayout().getPlacement()) {
+		case NORTH:
+			point.setX(elemPos.getX()
+					+ port.getLayout().getLocation().getX()
+					+ port.getLayout().getSize().getWidth() / 2);
+			point.setY(elemPos.getY() - loop.northRoutePos * minDist);
+			break;
+		case EAST:
+			point.setX(elemPos.getX() + elemDim.getWidth()
+					+ loop.eastRoutePos * minDist);
+			point.setY(elemPos.getY()
+					+ port.getLayout().getLocation().getY()
+					+ port.getLayout().getSize().getHeight() / 2);
+			break;
+		case SOUTH:
+			point.setX(elemPos.getX()
+					+ port.getLayout().getLocation().getX()
+					+ port.getLayout().getSize().getWidth() / 2);
+			point.setY(elemPos.getY() + elemDim.getHeight()
+					+ loop.southRoutePos * minDist);
+			break;
+		case WEST:
+			point.setX(elemPos.getX() - loop.westRoutePos * minDist);
+			point.setY(elemPos.getY()
+					+ port.getLayout().getLocation().getY()
+					+ port.getLayout().getSize().getHeight() / 2);
+			break;
+		}
+		return point;
 	}
 	
 }
