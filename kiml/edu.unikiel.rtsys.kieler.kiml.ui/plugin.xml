@@ -433,4 +433,17 @@ point="org.eclipse.ui.menus">
       </initializer>
    </extension>
 
+ <extension point="org.eclipse.gmf.runtime.common.ui.services.action.contributionItemProviders">
+      <contributionItemProvider
+            checkPluginLoaded="false"
+            class="edu.unikiel.rtsys.kieler.kiml.ui.caaa.ContributionItemProvider">
+         <Priority name="Low">
+         </Priority>
+         <partContribution class="org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramWorkbenchPart">
+             <partAction toolbarPath="/arrangeMenu" menubarPath="/diagramMenu/arrangeMenu/arrangeGroup" id="caaa">
+            </partAction>
+         </partContribution>
+      </contributionItemProvider>
+   </extension>
+   
 </plugin>
