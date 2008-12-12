@@ -250,7 +250,7 @@ class AutoArrangeListener extends ResourceSetListenerImpl implements Runnable {
 				.getDiagramLayouter(editorId);
 		Animation.markBegin();
 		diagramLayouter.layout(listenedEditor);
-		Animation.run();
+		Animation.run(1000);
 		// arranging completed, allow next one
 		aboutToArrange = false;
 	}
