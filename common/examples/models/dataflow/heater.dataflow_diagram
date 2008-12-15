@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:dataflow="http://www.informatik.uni-kiel.de/rtsys/" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.1/notation" xmi:id="_mWEOUTxeEd2umKVD2Pqb7A" type="Dataflow" name="heater.dataflow_diagram" measurementUnit="Pixel">
+  <children xmi:type="notation:Node" xmi:id="_EX02IDx9Ed2og6ULvGcdtw" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_EX5HkDx9Ed2og6ULvGcdtw" type="4004"/>
+    <children xmi:type="notation:Node" xmi:id="_EX7j0Dx9Ed2og6ULvGcdtw" type="5001">
+      <children xmi:type="notation:Node" xmi:id="_fr_x8Dx9Ed2og6ULvGcdtw" type="2003">
+        <children xmi:type="notation:Node" xmi:id="_fsBAEDx9Ed2og6ULvGcdtw" type="4003"/>
+        <children xmi:type="notation:Node" xmi:id="_fsBnIDx9Ed2og6ULvGcdtw" type="5002">
+          <styles xmi:type="notation:SortingStyle" xmi:id="_fsBnITx9Ed2og6ULvGcdtw"/>
+          <styles xmi:type="notation:FilteringStyle" xmi:id="_fsBnIjx9Ed2og6ULvGcdtw"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_191cUDx9Ed2og6ULvGcdtw" type="2001">
+          <children xmi:type="notation:Node" xmi:id="_192DYDx9Ed2og6ULvGcdtw" type="4001">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_192DYTx9Ed2og6ULvGcdtw" x="-9" y="-5"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_191cUTx9Ed2og6ULvGcdtw" fontName="Sans"/>
+          <element xmi:type="dataflow:InputPort" href="heater.dataflow#//@boxes.0/@boxes.0/@inputs.0"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_191cUjx9Ed2og6ULvGcdtw"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_3AX3YDx9Ed2og6ULvGcdtw" type="2002">
+          <children xmi:type="notation:Node" xmi:id="_3AX3Yzx9Ed2og6ULvGcdtw" type="4002">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_3AX3ZDx9Ed2og6ULvGcdtw" y="5"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_3AX3YTx9Ed2og6ULvGcdtw" fontName="Sans"/>
+          <element xmi:type="dataflow:OutputPort" href="heater.dataflow#//@boxes.0/@boxes.0/@outputs.0"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_3AX3Yjx9Ed2og6ULvGcdtw"/>
+        </children>
+        <styles xmi:type="notation:ShapeStyle" xmi:id="_fr_x8Tx9Ed2og6ULvGcdtw" fontName="Sans"/>
+        <element xmi:type="dataflow:Box" href="heater.dataflow#//@boxes.0/@boxes.0"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_fr_x8jx9Ed2og6ULvGcdtw" x="39" y="39"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_kz6G8Dx9Ed2og6ULvGcdtw" type="2003">
+        <children xmi:type="notation:Node" xmi:id="_kz6G8zx9Ed2og6ULvGcdtw" type="4003"/>
+        <children xmi:type="notation:Node" xmi:id="_kz6uADx9Ed2og6ULvGcdtw" type="5002">
+          <styles xmi:type="notation:SortingStyle" xmi:id="_kz6uATx9Ed2og6ULvGcdtw"/>
+          <styles xmi:type="notation:FilteringStyle" xmi:id="_kz6uAjx9Ed2og6ULvGcdtw"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_5j4V8Dx9Ed2og6ULvGcdtw" type="2002">
+          <children xmi:type="notation:Node" xmi:id="_5j4V8zx9Ed2og6ULvGcdtw" type="4002">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_5j4V9Dx9Ed2og6ULvGcdtw" x="-1" y="6"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_5j4V8Tx9Ed2og6ULvGcdtw" fontName="Sans"/>
+          <element xmi:type="dataflow:OutputPort" href="heater.dataflow#//@boxes.0/@boxes.1/@outputs.0"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_5j4V8jx9Ed2og6ULvGcdtw"/>
+        </children>
+        <styles xmi:type="notation:ShapeStyle" xmi:id="_kz6G8Tx9Ed2og6ULvGcdtw" fontName="Sans"/>
+        <element xmi:type="dataflow:Box" href="heater.dataflow#//@boxes.0/@boxes.1"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_kz6G8jx9Ed2og6ULvGcdtw" x="99" y="9"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_lkeBMDx9Ed2og6ULvGcdtw" type="2003">
+        <children xmi:type="notation:Node" xmi:id="_lkeBMzx9Ed2og6ULvGcdtw" type="4003"/>
+        <children xmi:type="notation:Node" xmi:id="_lkeBNDx9Ed2og6ULvGcdtw" type="5002">
+          <styles xmi:type="notation:SortingStyle" xmi:id="_lkeBNTx9Ed2og6ULvGcdtw"/>
+          <styles xmi:type="notation:FilteringStyle" xmi:id="_lkeBNjx9Ed2og6ULvGcdtw"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_4WLzwDx9Ed2og6ULvGcdtw" type="2002">
+          <children xmi:type="notation:Node" xmi:id="_4WLzwzx9Ed2og6ULvGcdtw" type="4002">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_4WLzxDx9Ed2og6ULvGcdtw" x="-1" y="6"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_4WLzwTx9Ed2og6ULvGcdtw" fontName="Sans"/>
+          <element xmi:type="dataflow:OutputPort" href="heater.dataflow#//@boxes.0/@boxes.2/@outputs.0"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_4WLzwjx9Ed2og6ULvGcdtw"/>
+        </children>
+        <styles xmi:type="notation:ShapeStyle" xmi:id="_lkeBMTx9Ed2og6ULvGcdtw" fontName="Sans"/>
+        <element xmi:type="dataflow:Box" href="heater.dataflow#//@boxes.0/@boxes.2"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_lkeBMjx9Ed2og6ULvGcdtw" x="89" y="84"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_mlRW4Dx9Ed2og6ULvGcdtw" type="2003">
+        <children xmi:type="notation:Node" xmi:id="_mlR98Dx9Ed2og6ULvGcdtw" type="4003"/>
+        <children xmi:type="notation:Node" xmi:id="_mlR98Tx9Ed2og6ULvGcdtw" type="5002">
+          <styles xmi:type="notation:SortingStyle" xmi:id="_mlR98jx9Ed2og6ULvGcdtw"/>
+          <styles xmi:type="notation:FilteringStyle" xmi:id="_mlR98zx9Ed2og6ULvGcdtw"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_9_0VwDx9Ed2og6ULvGcdtw" type="2001">
+          <children xmi:type="notation:Node" xmi:id="_9_080Dx9Ed2og6ULvGcdtw" type="4001">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_9_080Tx9Ed2og6ULvGcdtw"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_9_0VwTx9Ed2og6ULvGcdtw" fontName="Sans"/>
+          <element xmi:type="dataflow:InputPort" href="heater.dataflow#//@boxes.0/@boxes.3/@inputs.0"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_9_0Vwjx9Ed2og6ULvGcdtw" x="-2" y="27"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="__vVyoDx9Ed2og6ULvGcdtw" type="2001">
+          <children xmi:type="notation:Node" xmi:id="__vWZsDx9Ed2og6ULvGcdtw" type="4001">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="__vWZsTx9Ed2og6ULvGcdtw" x="-1" y="6"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="__vVyoTx9Ed2og6ULvGcdtw" fontName="Sans"/>
+          <element xmi:type="dataflow:InputPort" href="heater.dataflow#//@boxes.0/@boxes.3/@inputs.1"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="__vVyojx9Ed2og6ULvGcdtw" x="-2" y="7"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_CfdJ0Dx-Ed2og6ULvGcdtw" type="2001">
+          <children xmi:type="notation:Node" xmi:id="_CfdJ0zx-Ed2og6ULvGcdtw" type="4001">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_CfdJ1Dx-Ed2og6ULvGcdtw" x="-1" y="6"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_CfdJ0Tx-Ed2og6ULvGcdtw" fontName="Sans"/>
+          <element xmi:type="dataflow:InputPort" href="heater.dataflow#//@boxes.0/@boxes.3/@inputs.2"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_CfdJ0jx-Ed2og6ULvGcdtw" x="-4" y="37"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_Dq2l8Dx-Ed2og6ULvGcdtw" type="2002">
+          <children xmi:type="notation:Node" xmi:id="_Dq2l8zx-Ed2og6ULvGcdtw" type="4002">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_Dq2l9Dx-Ed2og6ULvGcdtw" x="-8" y="6"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_Dq2l8Tx-Ed2og6ULvGcdtw" fontName="Sans"/>
+          <element xmi:type="dataflow:OutputPort" href="heater.dataflow#//@boxes.0/@boxes.3/@outputs.0"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Dq2l8jx-Ed2og6ULvGcdtw"/>
+        </children>
+        <styles xmi:type="notation:ShapeStyle" xmi:id="_mlRW4Tx9Ed2og6ULvGcdtw" fontName="Sans"/>
+        <element xmi:type="dataflow:Box" href="heater.dataflow#//@boxes.0/@boxes.3"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_mlRW4jx9Ed2og6ULvGcdtw" x="194" y="34"/>
+      </children>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_EX7j0Tx9Ed2og6ULvGcdtw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_EX7j0jx9Ed2og6ULvGcdtw"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_tfcTsDx9Ed2og6ULvGcdtw" type="2001">
+      <children xmi:type="notation:Node" xmi:id="_tff-EDx9Ed2og6ULvGcdtw" type="4001">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_tff-ETx9Ed2og6ULvGcdtw" x="-51" y="-5"/>
+      </children>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_tfcTsTx9Ed2og6ULvGcdtw" fontName="Sans"/>
+      <element xmi:type="dataflow:InputPort" href="heater.dataflow#//@boxes.0/@inputs.0"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_tfcTsjx9Ed2og6ULvGcdtw"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_z4CNcDx9Ed2og6ULvGcdtw" type="2002">
+      <children xmi:type="notation:Node" xmi:id="_z4DbkDx9Ed2og6ULvGcdtw" type="4002">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_z4DbkTx9Ed2og6ULvGcdtw" x="6" y="-5"/>
+      </children>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_z4CNcTx9Ed2og6ULvGcdtw" fontName="Sans"/>
+      <element xmi:type="dataflow:OutputPort" href="heater.dataflow#//@boxes.0/@outputs.0"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_z4CNcjx9Ed2og6ULvGcdtw"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_EX02ITx9Ed2og6ULvGcdtw" fontName="Sans"/>
+    <element xmi:type="dataflow:Box" href="heater.dataflow#//@boxes.0"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_EX02Ijx9Ed2og6ULvGcdtw" x="96" y="60"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_ITbwEDx9Ed2og6ULvGcdtw" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_ITbwEzx9Ed2og6ULvGcdtw" type="4004"/>
+    <children xmi:type="notation:Node" xmi:id="_ITcXIDx9Ed2og6ULvGcdtw" type="5001">
+      <children xmi:type="notation:Node" xmi:id="_yDkCUDyBEd2wnevysTjx-A" type="2003">
+        <children xmi:type="notation:Node" xmi:id="_yDl3gDyBEd2wnevysTjx-A" type="4003"/>
+        <children xmi:type="notation:Node" xmi:id="_yDmekDyBEd2wnevysTjx-A" type="5002">
+          <styles xmi:type="notation:SortingStyle" xmi:id="_yDmekTyBEd2wnevysTjx-A"/>
+          <styles xmi:type="notation:FilteringStyle" xmi:id="_yDmekjyBEd2wnevysTjx-A"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_F_LcMDyCEd2wnevysTjx-A" type="2002">
+          <children xmi:type="notation:Node" xmi:id="_F_LcMzyCEd2wnevysTjx-A" type="4002">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_F_LcNDyCEd2wnevysTjx-A" x="-1" y="6"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_F_LcMTyCEd2wnevysTjx-A" fontName="Sans"/>
+          <element xmi:type="dataflow:OutputPort" href="heater.dataflow#//@boxes.1/@boxes.0/@outputs.0"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_F_LcMjyCEd2wnevysTjx-A"/>
+        </children>
+        <styles xmi:type="notation:ShapeStyle" xmi:id="_yDkCUTyBEd2wnevysTjx-A" fontName="Sans"/>
+        <element xmi:type="dataflow:Box" href="heater.dataflow#//@boxes.1/@boxes.0"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_yDkCUjyBEd2wnevysTjx-A" x="18" y="1"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_ycanMDyBEd2wnevysTjx-A" type="2003">
+        <children xmi:type="notation:Node" xmi:id="_ycanMzyBEd2wnevysTjx-A" type="4003"/>
+        <children xmi:type="notation:Node" xmi:id="_ycanNDyBEd2wnevysTjx-A" type="5002">
+          <styles xmi:type="notation:SortingStyle" xmi:id="_ycanNTyBEd2wnevysTjx-A"/>
+          <styles xmi:type="notation:FilteringStyle" xmi:id="_ycanNjyBEd2wnevysTjx-A"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_GoF2UDyCEd2wnevysTjx-A" type="2002">
+          <children xmi:type="notation:Node" xmi:id="_GoF2UzyCEd2wnevysTjx-A" type="4002">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_GoF2VDyCEd2wnevysTjx-A" x="-1" y="6"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_GoF2UTyCEd2wnevysTjx-A" fontName="Sans"/>
+          <element xmi:type="dataflow:OutputPort" href="heater.dataflow#//@boxes.1/@boxes.1/@outputs.0"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_GoF2UjyCEd2wnevysTjx-A"/>
+        </children>
+        <styles xmi:type="notation:ShapeStyle" xmi:id="_ycanMTyBEd2wnevysTjx-A" fontName="Sans"/>
+        <element xmi:type="dataflow:Box" href="heater.dataflow#//@boxes.1/@boxes.1"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ycanMjyBEd2wnevysTjx-A" x="15" y="79"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_5gNaEDyBEd2wnevysTjx-A" type="2003">
+        <children xmi:type="notation:Node" xmi:id="_5gNaEzyBEd2wnevysTjx-A" type="4003"/>
+        <children xmi:type="notation:Node" xmi:id="_5gNaFDyBEd2wnevysTjx-A" type="5002">
+          <styles xmi:type="notation:SortingStyle" xmi:id="_5gNaFTyBEd2wnevysTjx-A"/>
+          <styles xmi:type="notation:FilteringStyle" xmi:id="_5gNaFjyBEd2wnevysTjx-A"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_HVwNkDyCEd2wnevysTjx-A" type="2001">
+          <children xmi:type="notation:Node" xmi:id="_HVw0oDyCEd2wnevysTjx-A" type="4001">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_HVw0oTyCEd2wnevysTjx-A" x="-20" y="-5"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_HVwNkTyCEd2wnevysTjx-A" fontName="Sans"/>
+          <element xmi:type="dataflow:InputPort" href="heater.dataflow#//@boxes.1/@boxes.2/@inputs.0"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_HVwNkjyCEd2wnevysTjx-A"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_JdeIADyCEd2wnevysTjx-A" type="2001">
+          <children xmi:type="notation:Node" xmi:id="_JdevEDyCEd2wnevysTjx-A" type="4001">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_JdevETyCEd2wnevysTjx-A"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_JdeIATyCEd2wnevysTjx-A" fontName="Sans"/>
+          <element xmi:type="dataflow:InputPort" href="heater.dataflow#//@boxes.1/@boxes.2/@inputs.1"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_JdeIAjyCEd2wnevysTjx-A"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_T31OEDyCEd2wnevysTjx-A" type="2001">
+          <children xmi:type="notation:Node" xmi:id="_T31OEzyCEd2wnevysTjx-A" type="4001">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_T31OFDyCEd2wnevysTjx-A"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_T31OETyCEd2wnevysTjx-A" fontName="Sans"/>
+          <element xmi:type="dataflow:InputPort" href="heater.dataflow#//@boxes.1/@boxes.2/@inputs.2"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_T31OEjyCEd2wnevysTjx-A" x="-4" y="5"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_oTOUMDyCEd2wnevysTjx-A" type="2002">
+          <children xmi:type="notation:Node" xmi:id="_oTO7QDyCEd2wnevysTjx-A" type="4002">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_oTO7QTyCEd2wnevysTjx-A" y="5"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_oTOUMTyCEd2wnevysTjx-A" fontName="Sans"/>
+          <element xmi:type="dataflow:OutputPort" href="heater.dataflow#//@boxes.1/@boxes.2/@outputs.0"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_oTOUMjyCEd2wnevysTjx-A"/>
+        </children>
+        <styles xmi:type="notation:ShapeStyle" xmi:id="_5gNaETyBEd2wnevysTjx-A" fontName="Sans"/>
+        <element xmi:type="dataflow:Box" href="heater.dataflow#//@boxes.1/@boxes.2"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_5gNaEjyBEd2wnevysTjx-A" x="90" y="39"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_6yx1MDyBEd2wnevysTjx-A" type="2003">
+        <children xmi:type="notation:Node" xmi:id="_6yycQDyBEd2wnevysTjx-A" type="4003"/>
+        <children xmi:type="notation:Node" xmi:id="_6yycQTyBEd2wnevysTjx-A" type="5002">
+          <styles xmi:type="notation:SortingStyle" xmi:id="_6yycQjyBEd2wnevysTjx-A"/>
+          <styles xmi:type="notation:FilteringStyle" xmi:id="_6yycQzyBEd2wnevysTjx-A"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_KlijUDyCEd2wnevysTjx-A" type="2001">
+          <children xmi:type="notation:Node" xmi:id="_KlijUzyCEd2wnevysTjx-A" type="4001">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_KlijVDyCEd2wnevysTjx-A" x="-1" y="6"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_KlijUTyCEd2wnevysTjx-A" fontName="Sans"/>
+          <element xmi:type="dataflow:InputPort" href="heater.dataflow#//@boxes.1/@boxes.3/@inputs.0"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_KlijUjyCEd2wnevysTjx-A" x="-7" y="10"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_LLskYDyCEd2wnevysTjx-A" type="2001">
+          <children xmi:type="notation:Node" xmi:id="_LLtLcDyCEd2wnevysTjx-A" type="4001">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_LLtLcTyCEd2wnevysTjx-A" y="5"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_LLskYTyCEd2wnevysTjx-A" fontName="Sans"/>
+          <element xmi:type="dataflow:InputPort" href="heater.dataflow#//@boxes.1/@boxes.3/@inputs.1"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_LLskYjyCEd2wnevysTjx-A" x="-7" y="30"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_NsXKUDyCEd2wnevysTjx-A" type="2002">
+          <children xmi:type="notation:Node" xmi:id="_NsXxYjyCEd2wnevysTjx-A" type="4002">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_NsXxYzyCEd2wnevysTjx-A" x="-8" y="6"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_NsXxYDyCEd2wnevysTjx-A" fontName="Sans"/>
+          <element xmi:type="dataflow:OutputPort" href="heater.dataflow#//@boxes.1/@boxes.3/@outputs.0"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_NsXxYTyCEd2wnevysTjx-A"/>
+        </children>
+        <styles xmi:type="notation:ShapeStyle" xmi:id="_6yx1MTyBEd2wnevysTjx-A" fontName="Sans"/>
+        <element xmi:type="dataflow:Box" href="heater.dataflow#//@boxes.1/@boxes.3"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_6yx1MjyBEd2wnevysTjx-A" x="180" y="49"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_7-0KgDyBEd2wnevysTjx-A" type="2003">
+        <children xmi:type="notation:Node" xmi:id="_7-0KgzyBEd2wnevysTjx-A" type="4003"/>
+        <children xmi:type="notation:Node" xmi:id="_7-0xkDyBEd2wnevysTjx-A" type="5002">
+          <styles xmi:type="notation:SortingStyle" xmi:id="_7-0xkTyBEd2wnevysTjx-A"/>
+          <styles xmi:type="notation:FilteringStyle" xmi:id="_7-0xkjyBEd2wnevysTjx-A"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_L9PWEDyCEd2wnevysTjx-A" type="2001">
+          <children xmi:type="notation:Node" xmi:id="_L9PWEzyCEd2wnevysTjx-A" type="4001">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_L9PWFDyCEd2wnevysTjx-A" x="-1" y="6"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_L9PWETyCEd2wnevysTjx-A" fontName="Sans"/>
+          <element xmi:type="dataflow:InputPort" href="heater.dataflow#//@boxes.1/@boxes.4/@inputs.0"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_L9PWEjyCEd2wnevysTjx-A"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_OViqMDyCEd2wnevysTjx-A" type="2002">
+          <children xmi:type="notation:Node" xmi:id="_OViqMzyCEd2wnevysTjx-A" type="4002">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_OViqNDyCEd2wnevysTjx-A" x="-1" y="6"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_OViqMTyCEd2wnevysTjx-A" fontName="Sans"/>
+          <element xmi:type="dataflow:OutputPort" href="heater.dataflow#//@boxes.1/@boxes.4/@outputs.0"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_OViqMjyCEd2wnevysTjx-A"/>
+        </children>
+        <styles xmi:type="notation:ShapeStyle" xmi:id="_7-0KgTyBEd2wnevysTjx-A" fontName="Sans"/>
+        <element xmi:type="dataflow:Box" href="heater.dataflow#//@boxes.1/@boxes.4"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_7-0KgjyBEd2wnevysTjx-A" x="255" y="54"/>
+      </children>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_ITcXITx9Ed2og6ULvGcdtw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_ITcXIjx9Ed2og6ULvGcdtw"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_BYIYkDyCEd2wnevysTjx-A" type="2001">
+      <children xmi:type="notation:Node" xmi:id="_BYMqADyCEd2wnevysTjx-A" type="4001">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_BYMqATyCEd2wnevysTjx-A" x="-1" y="6"/>
+      </children>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_BYIYkTyCEd2wnevysTjx-A" fontName="Sans"/>
+      <element xmi:type="dataflow:InputPort" href="heater.dataflow#//@boxes.1/@inputs.0"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_BYIYkjyCEd2wnevysTjx-A"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_DXtDoDyCEd2wnevysTjx-A" type="2002">
+      <children xmi:type="notation:Node" xmi:id="_DXuRwDyCEd2wnevysTjx-A" type="4002">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_DXuRwTyCEd2wnevysTjx-A" x="6" y="-5"/>
+      </children>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_DXtDoTyCEd2wnevysTjx-A" fontName="Sans"/>
+      <element xmi:type="dataflow:OutputPort" href="heater.dataflow#//@boxes.1/@outputs.0"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_DXtDojyCEd2wnevysTjx-A"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_ITbwETx9Ed2og6ULvGcdtw" fontName="Sans"/>
+    <element xmi:type="dataflow:Box" href="heater.dataflow#//@boxes.1"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ITbwEjx9Ed2og6ULvGcdtw" x="515" y="60"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_mWEOUjxeEd2umKVD2Pqb7A"/>
+  <element xmi:type="dataflow:DataflowModel" href="heater.dataflow#/"/>
+  <edges xmi:type="notation:Edge" xmi:id="_hd7FwDyBEd2wnevysTjx-A" type="3001" source="_Dq2l8Dx-Ed2og6ULvGcdtw" target="_z4CNcDx9Ed2og6ULvGcdtw">
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_hd7FwTyBEd2wnevysTjx-A"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_hd7FwjyBEd2wnevysTjx-A" fontName="Sans"/>
+    <element xmi:type="dataflow:Connection" href="heater.dataflow#//@boxes.0/@boxes.3/@connections.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_hd7FwzyBEd2wnevysTjx-A" points="[4, -1, -79, 12]$[79, -13, -4, 0]"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_15aAQD3mEd2Qtt9_-LbXTA" type="3001" source="_z4CNcDx9Ed2og6ULvGcdtw" target="_BYIYkDyCEd2wnevysTjx-A">
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_15aAQT3mEd2Qtt9_-LbXTA" routing="Rectilinear"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_15aAQj3mEd2Qtt9_-LbXTA" fontName="Sans"/>
+    <element xmi:type="dataflow:Connection" href="heater.dataflow#//@boxes.0/@connections.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_15aAQz3mEd2Qtt9_-LbXTA" points="[2, 0, -165, 0]$[165, -2, -2, -2]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_15ccgD3mEd2Qtt9_-LbXTA" id="(0.8,0.0)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_15ccgT3mEd2Qtt9_-LbXTA" id="(0.2,0.4)"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_4SmFMD3mEd2Qtt9_-LbXTA" type="3001" source="_5j4V8Dx9Ed2og6ULvGcdtw" target="__vVyoDx9Ed2og6ULvGcdtw">
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_4SmFMT3mEd2Qtt9_-LbXTA" routing="Rectilinear"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_4SmFMj3mEd2Qtt9_-LbXTA" fontName="Sans"/>
+    <element xmi:type="dataflow:Connection" href="heater.dataflow#//@boxes.0/@boxes.1/@connections.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_4SmFMz3mEd2Qtt9_-LbXTA" points="[1, 1, -60, -13]$[62, 12, 1, -2]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_4SnTUD3mEd2Qtt9_-LbXTA" id="(0.8,0.4)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_4SnTUT3mEd2Qtt9_-LbXTA" id="(0.2,0.4)"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_5WyGED3mEd2Qtt9_-LbXTA" type="3001" source="_4WLzwDx9Ed2og6ULvGcdtw" target="_CfdJ0Dx-Ed2og6ULvGcdtw">
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_5WyGET3mEd2Qtt9_-LbXTA" routing="Rectilinear"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_5WyGEj3mEd2Qtt9_-LbXTA" fontName="Sans"/>
+    <element xmi:type="dataflow:Connection" href="heater.dataflow#//@boxes.0/@boxes.2/@connections.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_5WyGEz3mEd2Qtt9_-LbXTA" points="[3, 1, -63, 31]$[24, 1, -42, 31]$[24, -28, -42, 2]$[65, -28, -1, 2]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_5WzUMD3mEd2Qtt9_-LbXTA" id="(0.4,0.2)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_5WzUMT3mEd2Qtt9_-LbXTA" id="(0.2,0.0)"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_6fy8kD3mEd2Qtt9_-LbXTA" type="3001" source="_3AX3YDx9Ed2og6ULvGcdtw" target="_9_0VwDx9Ed2og6ULvGcdtw">
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_6fy8kT3mEd2Qtt9_-LbXTA" routing="Rectilinear"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_6fy8kj3mEd2Qtt9_-LbXTA" fontName="Sans"/>
+    <element xmi:type="dataflow:Connection" href="heater.dataflow#//@boxes.0/@boxes.0/@connections.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_6fy8kz3mEd2Qtt9_-LbXTA" points="[5, 0, -134, 5]$[140, -6, 1, -1]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_6f0KsD3mEd2Qtt9_-LbXTA" id="(0.2,0.2)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_6f0KsT3mEd2Qtt9_-LbXTA" id="(0.0,0.2)"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_-Bs9ED3mEd2Qtt9_-LbXTA" type="3001" source="_tfcTsDx9Ed2og6ULvGcdtw" target="_191cUDx9Ed2og6ULvGcdtw">
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_-Bs9ET3mEd2Qtt9_-LbXTA" routing="Rectilinear"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_-Bs9Ej3mEd2Qtt9_-LbXTA" fontName="Sans"/>
+    <element xmi:type="dataflow:Connection" href="heater.dataflow#//@boxes.0/@connections.1"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_-Bs9Ez3mEd2Qtt9_-LbXTA" points="[5, 0, -57, -10]$[63, 8, 1, -2]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_-BuLMD3mEd2Qtt9_-LbXTA" id="(0.2,0.0)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_-BuLMT3mEd2Qtt9_-LbXTA" id="(0.4,0.2)"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_Ae7NcD3nEd2Qtt9_-LbXTA" type="3001" source="_BYIYkDyCEd2wnevysTjx-A" target="_HVwNkDyCEd2wnevysTjx-A">
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_Ae7NcT3nEd2Qtt9_-LbXTA" routing="Rectilinear"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_Ae7Ncj3nEd2Qtt9_-LbXTA" fontName="Sans"/>
+    <element xmi:type="dataflow:Connection" href="heater.dataflow#//@boxes.1/@connections.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_Ae7Ncz3nEd2Qtt9_-LbXTA" points="[2, 0, -120, -12]$[122, 10, 0, -2]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_Ae8bkD3nEd2Qtt9_-LbXTA" id="(0.8,0.2)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_Ae8bkT3nEd2Qtt9_-LbXTA" id="(0.2,0.2)"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_BeOuUD3nEd2Qtt9_-LbXTA" type="3001" source="_GoF2UDyCEd2wnevysTjx-A" target="_JdeIADyCEd2wnevysTjx-A">
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_BeOuUT3nEd2Qtt9_-LbXTA" routing="Rectilinear"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_BeOuUj3nEd2Qtt9_-LbXTA" fontName="Sans"/>
+    <element xmi:type="dataflow:Connection" href="heater.dataflow#//@boxes.1/@boxes.1/@connections.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_BeOuUz3nEd2Qtt9_-LbXTA" points="[1, -2, -38, 31]$[39, -35, 0, -2]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_BeQjgD3nEd2Qtt9_-LbXTA" id="(0.4,0.2)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_BeQjgT3nEd2Qtt9_-LbXTA" id="(0.2,0.4)"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_ECsPID3nEd2Qtt9_-LbXTA" type="3001" source="_F_LcMDyCEd2wnevysTjx-A" target="_T31OEDyCEd2wnevysTjx-A">
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_ECsPIT3nEd2Qtt9_-LbXTA" routing="Rectilinear"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_ECsPIj3nEd2Qtt9_-LbXTA" fontName="Sans"/>
+    <element xmi:type="dataflow:Connection" href="heater.dataflow#//@boxes.1/@boxes.0/@connections.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ECsPIz3nEd2Qtt9_-LbXTA" points="[3, 2, -32, -25]$[36, 31, 1, 4]"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ECtdQD3nEd2Qtt9_-LbXTA" id="(0.2,0.4)"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_El3NoD3nEd2Qtt9_-LbXTA" type="3001" source="_oTOUMDyCEd2wnevysTjx-A" target="_KlijUDyCEd2wnevysTjx-A">
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_El3NoT3nEd2Qtt9_-LbXTA" routing="Rectilinear"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_El3Noj3nEd2Qtt9_-LbXTA" fontName="Sans"/>
+    <element xmi:type="dataflow:Connection" href="heater.dataflow#//@boxes.1/@boxes.2/@connections.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_El3Noz3nEd2Qtt9_-LbXTA" points="[3, 0, -41, 4]$[45, -4, 1, 0]"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_El4bwD3nEd2Qtt9_-LbXTA" id="(0.2,0.0)"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_F7PsMD3nEd2Qtt9_-LbXTA" type="3001" source="_NsXKUDyCEd2wnevysTjx-A" target="_L9PWEDyCEd2wnevysTjx-A">
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_F7PsMT3nEd2Qtt9_-LbXTA" routing="Rectilinear"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_F7PsMj3nEd2Qtt9_-LbXTA" fontName="Sans"/>
+    <element xmi:type="dataflow:Connection" href="heater.dataflow#//@boxes.1/@boxes.3/@connections.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_F7PsMz3nEd2Qtt9_-LbXTA" points="[3, 0, -37, -6]$[41, 9, 1, 3]"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_GjKn0D3nEd2Qtt9_-LbXTA" type="3001" source="_OViqMDyCEd2wnevysTjx-A" target="_DXtDoDyCEd2wnevysTjx-A">
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_GjKn0T3nEd2Qtt9_-LbXTA" routing="Rectilinear"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_GjKn0j3nEd2Qtt9_-LbXTA" fontName="Sans"/>
+    <element xmi:type="dataflow:Connection" href="heater.dataflow#//@boxes.1/@boxes.4/@connections.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_GjLO4D3nEd2Qtt9_-LbXTA" points="[3, 2, -21, 24]$[15, 2, -9, 24]$[15, -22, -9, 0]$[24, -22, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_GjL18D3nEd2Qtt9_-LbXTA" id="(0.4,0.0)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_GjL18T3nEd2Qtt9_-LbXTA" id="(0.0,0.4)"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_KTTRkD3nEd2Qtt9_-LbXTA" type="3001" source="_OViqMDyCEd2wnevysTjx-A" target="_LLskYDyCEd2wnevysTjx-A">
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_KTTRkT3nEd2Qtt9_-LbXTA" routing="Rectilinear"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_KTTRkj3nEd2Qtt9_-LbXTA" fontName="Sans"/>
+    <element xmi:type="dataflow:Connection" href="heater.dataflow#//@boxes.1/@boxes.4/@connections.1"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_KTTRkz3nEd2Qtt9_-LbXTA" points="[4, -2, 125, -5]$[10, -2, 131, -5]$[10, 31, 131, 28]$[-140, 31, -19, 28]$[-140, 1, -19, -2]$[-123, 1, -2, -2]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_KTUfsD3nEd2Qtt9_-LbXTA" id="(0.2,0.6)"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_P6N2wD3nEd2Qtt9_-LbXTA" type="3001" source="_DXtDoDyCEd2wnevysTjx-A" target="_tfcTsDx9Ed2og6ULvGcdtw">
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_P6N2wT3nEd2Qtt9_-LbXTA" routing="Rectilinear"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_P6N2wj3nEd2Qtt9_-LbXTA" fontName="Sans"/>
+    <element xmi:type="dataflow:Connection" href="heater.dataflow#//@boxes.1/@connections.1"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_P6N2wz3nEd2Qtt9_-LbXTA" points="[1, 0, 761, -2]$[20, 0, 780, -2]$[20, 136, 780, 134]$[-815, 136, -55, 134]$[-815, 3, -55, 1]$[-761, 3, -1, 1]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_P6PE4D3nEd2Qtt9_-LbXTA" id="(0.8,0.2)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_P6PE4T3nEd2Qtt9_-LbXTA" id="(0.2,0.2)"/>
+  </edges>
+</notation:Diagram>
