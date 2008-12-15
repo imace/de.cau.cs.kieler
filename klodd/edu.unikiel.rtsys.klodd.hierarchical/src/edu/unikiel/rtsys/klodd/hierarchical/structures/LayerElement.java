@@ -163,7 +163,8 @@ public class LayerElement {
 			LinkedList<KEdge> internalEdges = new LinkedList<KEdge>();
 			for (KEdge edge : port.getEdges()) {
 				// edges going from a parent node group to a child have null source
-				if (edge.getSource() == null)
+				if (edge.getSource() == null
+						&& edge.getSourcePort().getNodeGroup() == layer.getLayeredGraph().getParentGroup())
 					internalEdges.add(edge);
 			}
 			return internalEdges;
