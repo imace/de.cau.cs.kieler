@@ -98,19 +98,23 @@ public class LayerConnection {
 				&& layeredGraph.areExternalPortsFixed()) {
 			if (sourcePort.getLayout().getPlacement() == PORT_PLACEMENT.NORTH
 					|| sourcePort.getLayout().getPlacement() == PORT_PLACEMENT.SOUTH) {
-				omitXOffset = edge.getLayout().getGridPoints().size()-1;
+				omitXOffset = bendPoints.size()-1;
 			}
 			else {
-				omitYOffset = edge.getLayout().getGridPoints().size()-1;
+				omitYOffset = bendPoints.size()-1;
 			}
 		}
 		
 		// set bend points
 		int i = 0;
 		for (KPoint point : bendPoints) {
-			if (i != omitXOffset)
+			if (i == omitXOffset)
+				point.setX(point.getX() + offset.getX());
+			else
 				point.setX(point.getX() + offset.getX() + insets.getLeft());
-			if (i != omitYOffset)
+			if (i == omitYOffset)
+				point.setY(point.getY() + offset.getY());
+			else
 				point.setY(point.getY() + offset.getY() + insets.getTop());
 			edge.getLayout().getGridPoints().add(point);
 			i++;

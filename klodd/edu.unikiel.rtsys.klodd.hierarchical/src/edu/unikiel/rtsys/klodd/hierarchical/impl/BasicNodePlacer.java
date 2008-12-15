@@ -9,6 +9,7 @@ import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KDimension;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPoint;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPort;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_OPTION;
+import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.PORT_PLACEMENT;
 import edu.unikiel.rtsys.klodd.core.algorithms.AbstractAlgorithm;
 import edu.unikiel.rtsys.klodd.hierarchical.modules.INodePlacer;
 import edu.unikiel.rtsys.klodd.hierarchical.structures.Layer;
@@ -25,7 +26,7 @@ import edu.unikiel.rtsys.klodd.hierarchical.structures.LinearSegment;
 public class BasicNodePlacer extends AbstractAlgorithm implements INodePlacer {
 
 	/** factor for the actual distance between nodes */
-	private static final float DIST_FACTOR = 1.7f;
+	private static final float DIST_FACTOR = 1.37f;
 	
 	/** minimal distance between two nodes or edges in each layer */
 	private float minDist;
@@ -120,13 +121,16 @@ public class BasicNodePlacer extends AbstractAlgorithm implements INodePlacer {
 		
 		// create edges in the segment ordering graph
 		for (Layer layer : layeredGraph.getLayers()) {
-			Iterator<LayerElement> elemIter = layer.getElements().iterator();
-			LayerElement elem1 = elemIter.next();
-			while (elemIter.hasNext()) {
-				LayerElement elem2 = elemIter.next();
-				outgoing[elem1.linearSegment.rank].add(elem2.linearSegment);
-				incomingCount[elem2.linearSegment.rank]++;
-				elem1 = elem2;
+			if (!(layeredGraph.areExternalPortsFixed()
+					&& (layer.rank == 0 || layer.height == 0))) {
+				Iterator<LayerElement> elemIter = layer.getElements().iterator();
+				LayerElement elem1 = elemIter.next();
+				while (elemIter.hasNext()) {
+					LayerElement elem2 = elemIter.next();
+					outgoing[elem1.linearSegment.rank].add(elem2.linearSegment);
+					incomingCount[elem2.linearSegment.rank]++;
+					elem1 = elem2;
+				}
 			}
 		}
 		
@@ -200,25 +204,34 @@ public class BasicNodePlacer extends AbstractAlgorithm implements INodePlacer {
 			// process fixed external layer
 			for (LayerElement element : layer.getElements()) {
 				KPort port = (KPort)element.getElemObj();
+				PORT_PLACEMENT placement = port.getLayout().getPlacement();
 				KPoint position = element.getPosition();
 				position.setX(port.getLayout().getLocation().getX());
 				position.setY(port.getLayout().getLocation().getY());
 				KDimension size = element.getRealDim();
 				if (layoutDirection == LAYOUT_OPTION.VERTICAL) {
-					layer.crosswiseDim = Math.max(layer.crosswiseDim,
-							position.getX() + size.getWidth());
 					layer.lengthwiseDim = Math.max(layer.lengthwiseDim,
 							size.getHeight());
-					layeredGraph.lengthwiseDim = Math.max(layeredGraph.lengthwiseDim,
-							position.getY());
+					if (placement != PORT_PLACEMENT.EAST
+							&& placement != PORT_PLACEMENT.WEST)
+						layer.crosswiseDim = Math.max(layer.crosswiseDim,
+								position.getX() + size.getWidth());
+					if (placement != PORT_PLACEMENT.NORTH
+							&& placement != PORT_PLACEMENT.SOUTH)
+						layeredGraph.lengthwiseDim = Math.max(layeredGraph.lengthwiseDim,
+								position.getY());
 				}
 				else {
-					layer.crosswiseDim = Math.max(layer.crosswiseDim,
-							position.getY() + size.getHeight());
 					layer.lengthwiseDim = Math.max(layer.lengthwiseDim,
 							size.getWidth());
-					layeredGraph.lengthwiseDim = Math.max(layeredGraph.lengthwiseDim,
-							position.getX());
+					if (placement != PORT_PLACEMENT.NORTH
+							&& placement != PORT_PLACEMENT.SOUTH)
+						layer.crosswiseDim = Math.max(layer.crosswiseDim,
+								position.getY() + size.getHeight());
+					if (placement != PORT_PLACEMENT.EAST
+							&& placement != PORT_PLACEMENT.WEST)
+						layeredGraph.lengthwiseDim = Math.max(layeredGraph.lengthwiseDim,
+								position.getX());
 				}
 			}
 		}
