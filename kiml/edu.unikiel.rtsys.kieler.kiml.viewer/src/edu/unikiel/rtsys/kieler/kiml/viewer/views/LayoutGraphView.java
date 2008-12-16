@@ -41,6 +41,11 @@ public class LayoutGraphView extends ViewPart {
 	 * @see org.eclipse.ui.part.WorkbenchPart#createPartControl(org.eclipse.swt.widgets.Composite)
 	 */
 	public void createPartControl(Composite parent) {
+		// create actions in the view toolbar
+		getViewSite().getActionBars().getToolBarManager()
+				.add(new ImageExportAction(this));
+		
+		// create tab folder for pre- and post-layout
 		tabFolder = new TabFolder(parent, SWT.BOTTOM);
 		
 		// create canvas for pre-layout
@@ -84,6 +89,20 @@ public class LayoutGraphView extends ViewPart {
 			postCanvas.setLayoutGraph(layoutGraph);
 		else
 			preCanvas.setLayoutGraph(layoutGraph);
+	}
+	
+	/**
+	 * Retrieves the currently active layout graph canvas.
+	 * 
+	 * @return the active layout graph canvas
+	 */
+	public LayoutGraphCanvas getActiveCanvas() {
+		int tabIndex = tabFolder.getSelectionIndex();
+		if (tabIndex >= 0) {
+			return (LayoutGraphCanvas)((ScrolledComposite)tabFolder
+					.getItem(tabIndex).getControl()).getContent();
+		}
+		else return null;
 	}
 	
 }

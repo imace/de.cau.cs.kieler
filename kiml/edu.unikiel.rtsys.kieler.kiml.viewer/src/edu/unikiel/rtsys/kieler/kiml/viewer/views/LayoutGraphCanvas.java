@@ -18,7 +18,6 @@ import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.ui.PlatformUI;
 
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.*;
 
@@ -62,7 +61,7 @@ public class LayoutGraphCanvas extends Canvas implements PaintListener {
 	/**
 	 * Rectangle class used to mark painted objects.
 	 */
-	private class PaintRectangle {
+	public class PaintRectangle {
 		int x, y, width, height;
 		boolean painted = false;
 		
@@ -237,7 +236,7 @@ public class LayoutGraphCanvas extends Canvas implements PaintListener {
 		super(parent, SWT.NONE);
 		addPaintListener(this);
 		setBackground(BACKGROUND_COLOR);
-		Display display = PlatformUI.getWorkbench().getDisplay();
+		Display display = this.getDisplay();
 		nodeFont = new Font(display, "sans", NODE_FONT_SIZE, SWT.NORMAL);
 		portFont = new Font(display, "sans", PORT_FONT_SIZE, SWT.NORMAL);
 		edgeFont = new Font(display, "sans", EDGE_FONT_SIZE, SWT.NORMAL);
@@ -291,6 +290,26 @@ public class LayoutGraphCanvas extends Canvas implements PaintListener {
 			PaintRectangle area = new PaintRectangle(event.x - 5, event.y - 5,
 					event.width + 10, event.height + 10, offset);
 			paintNodeGroup(layoutGraph.getTopGroup(), event.gc, area, offset);
+		}
+	}
+	
+	/**
+	 * Paints the contained layout graph onto the given graphics object.
+	 * 
+	 * @param graphics the graphics context used to paint
+	 */
+	public void paintLayoutGraph(GC graphics) {
+		if (layoutGraph != null) {
+			// reset paint information
+			for (PaintRectangle rectangle : boundsMap.values()) {
+				rectangle.painted = false;
+			}
+			
+			// paint the top node group with its children
+			KPoint offset = KimlLayoutGraphFactory.eINSTANCE.createKPoint();
+			PaintRectangle area = new PaintRectangle(0, 0,
+					getSize().x, getSize().y, offset);
+			paintNodeGroup(layoutGraph.getTopGroup(), graphics, area, offset);
 		}
 	}
 	
