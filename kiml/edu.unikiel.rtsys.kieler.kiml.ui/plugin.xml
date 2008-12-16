@@ -88,6 +88,12 @@ point="org.eclipse.ui.menus">
             label="KIML Layout"
             style="push">
       </command>
+      <command
+            commandId="edu.unikiel.rtsys.kieler.kiml.ui.arbitrarytest"
+            label="Test"
+            style="push"
+            tooltip="Arbitrary Test">
+      </command>
    </toolbar>
 </menuContribution>
 </extension>
@@ -138,6 +144,11 @@ point="org.eclipse.ui.menus">
             id="edu.unikiel.rtsys.kieler.kiml.ui.commandParameterType.String"
             type="java.lang.String">
       </commandParameterType>
+      <command
+            description="Arbitrary Test Command to trigger anything from the UI"
+            id="edu.unikiel.rtsys.kieler.kiml.ui.arbitrarytest"
+            name="Arbitrary Test">
+      </command>
    </extension>
    <extension
          point="org.eclipse.ui.handlers">
@@ -179,6 +190,10 @@ point="org.eclipse.ui.menus">
       <handler
             class="edu.unikiel.rtsys.kieler.kiml.ui.handlers.KimlLayoutHandler"
             commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.kimlLayoutAll">
+      </handler>
+      <handler
+            class="edu.unikiel.rtsys.kieler.kiml.ui.handlers.ArbitraryTestHandler"
+            commandId="edu.unikiel.rtsys.kieler.kiml.ui.arbitrarytest">
       </handler>
    </extension>
    <extension
@@ -445,5 +460,48 @@ point="org.eclipse.ui.menus">
          </partContribution>
       </contributionItemProvider>
    </extension>
+ <extension
+       point="org.eclipse.ui.statusHandlers">
+    <statusHandler
+          class="edu.unikiel.rtsys.kieler.kiml.ui.handlers.DebugErrorHandler"
+          id="edu.unikiel.rtsys.kieler.kiml.ui.statusHandler">
+    </statusHandler>
+    <statusHandlerProductBinding
+          handlerId="edu.unikiel.rtsys.kieler.kiml.ui.statusHandler"
+          productId="edu.unikiel.rtsys.kieler.kiml.ui.product">
+    </statusHandlerProductBinding>
+ </extension>
+ <extension
+       id="product"
+       point="org.eclipse.core.runtime.products">
+    <product
+          application="org.eclipse.ui.ide.workbench"
+          name="%productName">
+       <property
+             name="windowImages"
+             value="eclipse.gif,eclipse32.gif,eclipse48.gif,eclipse.png,eclipse32.png">
+       </property>
+       <property
+             name="aboutText"
+             value="%productBlurb">
+       </property>
+       <property
+             name="aboutImage"
+             value="eclipse_lg.gif">
+       </property>
+       <property
+             name="startupForegroundColor"
+             value="C8D5EA">
+       </property>
+       <property
+             name="startupProgressRect"
+             value="0,280,455,15">
+       </property>
+       <property
+             name="startupMessageRect"
+             value="7,220,441,20">
+       </property>
+    </product>
+ </extension>
    
 </plugin>
