@@ -13,11 +13,11 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="innerStates" upperBound="-1"
         eType="#//State" containment="true" eOpposite="#//State/parentState"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="entryActions" upperBound="-1"
-        eType="#//Emission" containment="true" eOpposite="#//Emission/parentStateEntryAction"/>
+        eType="#//Action" containment="true" eOpposite="#//Action/parentStateEntryAction"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="innerActions" upperBound="-1"
-        eType="#//Emission" containment="true" eOpposite="#//Emission/parentStateInnerAction"/>
+        eType="#//Action" containment="true" eOpposite="#//Action/parentStateInnerAction"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="exitActions" upperBound="-1"
-        eType="#//Emission" containment="true" eOpposite="#//Emission/parentStateExitAction"/>
+        eType="#//Action" containment="true" eOpposite="#//Action/parentStateExitAction"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="signalRenamings" upperBound="-1"
         eType="#//SignalRenaming" containment="true" eOpposite="#//SignalRenaming/parentState"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="suspensionTrigger" eType="#//Trigger"
@@ -45,7 +45,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="parentState" lowerBound="1"
         eType="#//State" eOpposite="#//State/signals"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isLocal" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral=""/>
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isInput" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isOutput" lowerBound="1"
@@ -63,28 +63,18 @@
         eType="#//Value" containment="true" eOpposite="#//Value/parentEmisson"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="signal" lowerBound="1"
         eType="#//Signal"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="parentTransition" eType="#//Transition"
-        eOpposite="#//Transition/effects"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="parentStateEntryAction"
-        eType="#//State" eOpposite="#//State/entryActions"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="parentStateInnerAction"
-        eType="#//State" eOpposite="#//State/innerActions"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="parentStateExitAction"
-        eType="#//State" eOpposite="#//State/exitActions"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentAction" lowerBound="1"
+        eType="#//Action" eOpposite="#//Action/effects"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Transition">
+  <eClassifiers xsi:type="ecore:EClass" name="Transition" eSuperTypes="#//Action">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="delay" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="immediate" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="priority" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="transitionKind" lowerBound="1"
         eType="#//TransitionKind"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="effects" upperBound="-1"
-        eType="#//Emission" containment="true" eOpposite="#//Emission/parentTransition"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="targetState" lowerBound="1"
         eType="#//State"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="trigger" eType="#//Trigger"
-        containment="true" eOpposite="#//Trigger/parentTransition"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="sourceState" lowerBound="1"
         eType="#//State" eOpposite="#//State/outgoingTransitions"/>
   </eClassifiers>
@@ -102,8 +92,8 @@
         containment="true" eOpposite="#//Operator/parentTrigger"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parentTrigger" eType="#//Trigger"
         eOpposite="#//Trigger/subTriggers"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="parentTransition" eType="#//Transition"
-        eOpposite="#//Transition/trigger"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentAction" eType="#//Action"
+        eOpposite="#//Action/trigger"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parentState" eType="#//State"
         eOpposite="#//State/suspensionTrigger"/>
   </eClassifiers>
@@ -132,5 +122,17 @@
     <eLiterals name="SUB" value="7"/>
     <eLiterals name="MULT" value="8"/>
     <eLiterals name="DIV" value="9"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Action">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="effects" lowerBound="1"
+        eType="#//Emission" containment="true" eOpposite="#//Emission/parentAction"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="trigger" eType="#//Trigger"
+        containment="true" eOpposite="#//Trigger/parentAction"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentStateEntryAction"
+        eType="#//State" eOpposite="#//State/entryActions"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentStateInnerAction"
+        eType="#//State" eOpposite="#//State/innerActions"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentStateExitAction"
+        eType="#//State" eOpposite="#//State/exitActions"/>
   </eClassifiers>
 </ecore:EPackage>
