@@ -1,8 +1,13 @@
 package edu.unikiel.rtsys.kieler.kiml.viewer.views;
 
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.SWTException;
 import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.ImageData;
@@ -57,15 +62,36 @@ public class ImageExportAction extends Action {
 			Point size = canvas.getSize();
 			Image image = new Image(canvas.getDisplay(), size.x, size.y);
 			canvas.paintLayoutGraph(new GC(image));
-			ImageLoader imageLoader = new ImageLoader();
-			ImageData[] imageData = new ImageData[1];
-			imageData[0] = image.getImageData();
+			final ImageLoader imageLoader = new ImageLoader();
+			ImageData[] imageData = new ImageData[] { image.getImageData() };
 			imageLoader.data = imageData;
 			
 			// save the image into the selected file
-			String fileName = getFileName(canvas.getDisplay());
-			if (fileName != null)
-				imageLoader.save(fileName, SWT.IMAGE_PNG);
+			final String fileName = getFileName(canvas.getDisplay());
+			if (fileName != null) {
+				Job saveJob = new Job(Messages.getString("kiml.viewer.6")) {
+					protected IStatus run(IProgressMonitor monitor) {
+						try {
+							monitor.beginTask(Messages.getString("kiml.viewer.6"),
+									IProgressMonitor.UNKNOWN);
+							imageLoader.save(fileName, SWT.IMAGE_PNG);
+							return new Status(IStatus.INFO, Activator.PLUGIN_ID,
+									0, "OK", null);
+						} catch (SWTException exception) {
+							return new Status(IStatus.ERROR, Activator.PLUGIN_ID, exception.code,
+									Messages.getString("kiml.viewer.7"), exception);
+						}
+						finally {
+							monitor.done();
+						}
+					}
+				};
+				IProgressMonitor monitor = Job.getJobManager().createProgressGroup();
+				saveJob.setProgressGroup(monitor, IProgressMonitor.UNKNOWN);
+				saveJob.setPriority(Job.SHORT);
+				saveJob.setUser(true);
+				saveJob.schedule();
+			}
 		}
 	}
 	
@@ -81,11 +107,9 @@ public class ImageExportAction extends Action {
 		
 		// create and configure file dialog
 		FileDialog fileDialog = new FileDialog(display.getActiveShell(), SWT.SAVE);
-		String[] extensions = new String[1];
-		extensions[0] = "*.png";
+		String[] extensions = new String[] { "*.png" };
 		fileDialog.setFilterExtensions(extensions);
-		String[] names = new String[1];
-		names[0] = Messages.getString("kiml.viewer.5");
+		String[] names = new String[] { Messages.getString("kiml.viewer.5") };
 		fileDialog.setFilterNames(names);
 		fileDialog.setOverwrite(true);
 		fileDialog.setText(Messages.getString("kiml.viewer.4"));
