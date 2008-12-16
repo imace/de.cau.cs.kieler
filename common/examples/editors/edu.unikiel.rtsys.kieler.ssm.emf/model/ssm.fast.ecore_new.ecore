@@ -20,8 +20,8 @@
         eType="#//Action" containment="true" eOpposite="#//Action/parentStateExitAction"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="signalRenamings" upperBound="-1"
         eType="#//SignalRenaming" containment="true" eOpposite="#//SignalRenaming/parentState"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="suspensionTrigger" eType="#//Trigger"
-        containment="true" eOpposite="#//Trigger/parentState"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="suspensionTrigger" eType="#//SuspensionTrigger"
+        containment="true" eOpposite="#//SuspensionTrigger/parentState"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="outgoingTransitions" upperBound="-1"
         eType="#//Transition" containment="true" eOpposite="#//Transition/sourceState"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -94,8 +94,6 @@
         eOpposite="#//Trigger/subTriggers"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parentAction" eType="#//Action"
         eOpposite="#//Action/trigger"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="parentState" eType="#//State"
-        eOpposite="#//State/suspensionTrigger"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SignalRenaming">
     <eStructuralFeatures xsi:type="ecore:EReference" name="oldSignal" lowerBound="1"
@@ -134,5 +132,10 @@
         eType="#//State" eOpposite="#//State/innerActions"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parentStateExitAction"
         eType="#//State" eOpposite="#//State/exitActions"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SuspensionTrigger" eSuperTypes="#//Trigger">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentState" lowerBound="1"
+        eType="#//State" eOpposite="#//State/suspensionTrigger"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="immediate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
 </ecore:EPackage>
