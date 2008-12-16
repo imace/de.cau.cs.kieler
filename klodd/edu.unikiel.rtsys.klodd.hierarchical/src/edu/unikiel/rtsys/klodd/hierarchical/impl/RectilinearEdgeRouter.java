@@ -285,9 +285,11 @@ public class RectilinearEdgeRouter extends AbstractAlgorithm implements
 		// assign ranks to each routing slot
 		int slotRanks = 0;
 		for (RoutingSlot slot : sortedSlots) {
-			boolean foundPlace = false;
-			int rank = 0;
-			for (List<RoutingSlot> routingLayer : routingLayers) {
+			int rank = routingLayers.size();
+			ListIterator<List<RoutingSlot>> routingLayerIter = routingLayers.listIterator(routingLayers.size());
+			List<RoutingSlot> lastLayer = null;
+			while (routingLayerIter.hasPrevious()) {
+				List<RoutingSlot> routingLayer = routingLayerIter.previous();
 				boolean feasible = true;
 				for (RoutingSlot layerSlot : routingLayer) {
 					if (slot.start < layerSlot.end && slot.end > layerSlot.start) {
@@ -295,16 +297,17 @@ public class RectilinearEdgeRouter extends AbstractAlgorithm implements
 						break;
 					}
 				}
-				if (feasible) {
-					slot.rank = rank;
-					routingLayer.add(slot);
-					foundPlace = true;
+				if (!feasible)
 					break;
-				}
-				rank++;
+				lastLayer = routingLayer;
+				rank--;
 			}
-			if (!foundPlace) {
+			if (lastLayer != null) {
 				slot.rank = rank;
+				lastLayer.add(slot);
+			}
+			else {
+				slot.rank = routingLayers.size();
 				List<RoutingSlot> routingLayer = new LinkedList<RoutingSlot>();
 				routingLayer.add(slot);
 				routingLayers.add(routingLayer);
