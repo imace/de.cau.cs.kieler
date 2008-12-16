@@ -262,7 +262,19 @@ public class RectilinearEdgeRouter extends AbstractAlgorithm implements
 		RoutingSlot[] sortedSlots = slotMap.values().toArray(new RoutingSlot[0]);
 		Arrays.sort(sortedSlots, new Comparator<RoutingSlot>() {
 			public int compare(RoutingSlot slot1, RoutingSlot slot2) {
-				if (slot1.outgoingAtStart && slot1.start > slot2.start)
+				if (slot1.outgoingAtStart && !slot2.outgoingAtStart
+						&& slot1.start == slot2.start)
+					return 1;
+				else if (slot2.outgoingAtStart && !slot1.outgoingAtStart
+						&& slot1.start == slot2.start)
+					return -1;
+				else if (slot1.outgoingAtEnd && !slot2.outgoingAtEnd
+						&& slot1.end == slot2.end)
+					return 1;
+				else if (slot2.outgoingAtEnd && !slot1.outgoingAtEnd
+						&& slot1.end == slot2.end)
+					return -1;
+				else if (slot1.outgoingAtStart && slot1.start > slot2.start)
 					return 1;
 				else if (slot2.outgoingAtStart && slot2.start > slot1.start)
 					return -1;
