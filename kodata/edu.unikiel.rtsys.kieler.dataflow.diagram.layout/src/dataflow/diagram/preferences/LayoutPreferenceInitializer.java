@@ -21,6 +21,7 @@ public class LayoutPreferenceInitializer extends AbstractPreferenceInitializer {
 		preferenceStore.setDefault(DiagramLayoutPreferencePage.FIXED_OUTER_PORTS, false);
 		preferenceStore.setDefault(DiagramLayoutPreferencePage.FIXED_NODE_SIZE, true);
 		preferenceStore.setDefault(DiagramLayoutPreferencePage.STRICT_PORT_SIDE, false);
+		preferenceStore.setDefault(DiagramLayoutPreferencePage.LAYOUT_DIRECTION, "horizontal");
 	}
 
 }

@@ -32,6 +32,7 @@ import org.eclipse.draw2d.geometry.PointList;
 
 import dataflow.diagram.edit.parts.*;
 import dataflow.diagram.DataflowDiagramLayoutPlugin;
+import dataflow.diagram.Messages;
 import dataflow.diagram.preferences.DiagramLayoutPreferencePage;
 
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.*;
@@ -59,9 +60,6 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 		OP_TO_OUTPUT
 	}
 	
-	/** preference store with layout options */
-	private IPreferenceStore preferenceStore;
-	
 	/** root edit part used for layout */
 	private EditPart layoutRootPart = null;
 	/** generated layout graph */
@@ -79,6 +77,17 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 	/** label provider for the elements of dataflow diagrams */
 	private ILabelProvider dataflowLabelProvider = new DataflowLabelProvider();
 	
+	/** preference: preserve port positions for empty boxes */
+	private boolean fixedOuterPortsPref;
+	/** preference: preserve port positions for non-empty boxes */
+	private boolean fixedInnerPortsPref;
+	/** preference: preserve box size for empty boxes */
+	private boolean fixedNodeSizePref;
+	/** preference: strict port side: left for input ports, right for output ports */
+	private boolean strictPortSide;
+	/** preference: layout direction: horizontal or vertical */
+	private LAYOUT_OPTION layoutDirection;
+	
 	/*
 	 * (non-Javadoc)
 	 * @see edu.unikiel.rtsys.kieler.kiml.layout.services.KimlAbstractLayouter#getLabelProvider()
@@ -92,11 +101,20 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 	 * @see edu.unikiel.rtsys.kieler.kiml.layout.services.KimlAbstractLayouter#init(java.lang.Object)
 	 */
 	protected void init(Object target) {
-		preferenceStore = DataflowDiagramLayoutPlugin.getDefault().getPreferenceStore();
 		nodeGroup2BoxMapping.clear();
 		edge2ConnectionMapping.clear();
 		port2BorderItemMapping.clear();
 		borderItem2PortMapping.clear();
+		
+		// load layout preferences
+		IPreferenceStore preferenceStore = DataflowDiagramLayoutPlugin
+				.getDefault().getPreferenceStore();
+		fixedOuterPortsPref = preferenceStore.getBoolean(DiagramLayoutPreferencePage.FIXED_OUTER_PORTS);
+		fixedInnerPortsPref = preferenceStore.getBoolean(DiagramLayoutPreferencePage.FIXED_INNER_PORTS);
+		fixedNodeSizePref = preferenceStore.getBoolean(DiagramLayoutPreferencePage.FIXED_NODE_SIZE);
+		strictPortSide = preferenceStore.getBoolean(DiagramLayoutPreferencePage.STRICT_PORT_SIDE);
+		layoutDirection = preferenceStore.getString(DiagramLayoutPreferencePage.LAYOUT_DIRECTION).equals("vertical") //$NON-NLS-1$
+				? LAYOUT_OPTION.VERTICAL : LAYOUT_OPTION.HORIZONTAL;
 		
 		// find the dataflow model edit part depending on the type of input
 		if (target instanceof DiagramRootEditPart) {
@@ -130,7 +148,7 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 				layoutRootPart = ((DiagramRootEditPart)layoutRootPart).getContents();
 			}
 		}
-		else throw new IllegalArgumentException("Unsupported layout target: "
+		else throw new IllegalArgumentException(Messages.getString("dataflow.layout.1") //$NON-NLS-1$
 				+ target.getClass().getSimpleName());
 	}
 
@@ -157,6 +175,7 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 			topGroupLayout.setInsets(insets);
 			topGroupLayout.setLayouterName(KimlGMFLayoutHintHelper.getContainedElementsLayouterName(modelPart));
 			topGroupLayout.setLayoutType(KimlGMFLayoutHintHelper.getContainedElementsLayoutType(modelPart));
+			topGroupLayout.getLayoutOptions().add(layoutDirection);
 			topNode.setLayout(topGroupLayout);
 			KNodeGroupLabel topGroupLabel = KimlLayoutGraphFactory.eINSTANCE.createKNodeGroupLabel();
 			topGroupLabel.setText(modelPart.getDiagramView().getName());
@@ -182,7 +201,7 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 		// prepare changes to GMF diagram
 		DiagramCommandStack commandStack = new DiagramCommandStack(null);
 		CompoundCommand compoundCommand = new CompoundCommand();
-		compoundCommand.setLabel("Dataflow Diagram Layout");
+		compoundCommand.setLabel(Messages.getString("dataflow.layout.2")); //$NON-NLS-1$
 		ScalableFreeformRootEditPart rootEditPart = (ScalableFreeformRootEditPart)layoutRootPart.getRoot();
 		double zoomLevel = rootEditPart.getZoomManager().getZoom();
 		
@@ -430,7 +449,7 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 		nodeGroupLayout.setInsets(insets);
 		nodeGroupLayout.setLayouterName(KimlGMFLayoutHintHelper.getContainedElementsLayouterName(boxEditPart));
 		nodeGroupLayout.setLayoutType(KimlGMFLayoutHintHelper.getContainedElementsLayoutType(boxEditPart));
-		nodeGroupLayout.getLayoutOptions().add(LAYOUT_OPTION.HORIZONTAL);
+		nodeGroupLayout.getLayoutOptions().add(layoutDirection);
 		childNode.setLayout(nodeGroupLayout);
 		// set the input and output ports and node label
 		List subChildren = null;
@@ -488,13 +507,13 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 		
 		// set fixed ports option
 		if (subChildren != null && !subChildren.isEmpty()) {
-			if (preferenceStore.getBoolean(DiagramLayoutPreferencePage.FIXED_OUTER_PORTS))
+			if (fixedOuterPortsPref)
 				nodeGroupLayout.getLayoutOptions().add(LAYOUT_OPTION.FIXED_PORTS);
 		}
 		else {
-			if (preferenceStore.getBoolean(DiagramLayoutPreferencePage.FIXED_INNER_PORTS))
+			if (fixedInnerPortsPref)
 				nodeGroupLayout.getLayoutOptions().add(LAYOUT_OPTION.FIXED_PORTS);
-			if (preferenceStore.getBoolean(DiagramLayoutPreferencePage.FIXED_NODE_SIZE))
+			if (fixedNodeSizePref)
 				nodeGroupLayout.getLayoutOptions().add(LAYOUT_OPTION.FIXED_SIZE);
 		}
 		
@@ -608,7 +627,7 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 	 */
 	private PORT_PLACEMENT getPortPlacement(KNodeGroupLayout nodeLayout,
 			KPortLayout portLayout, PORT_TYPE portType) {
-		if (!preferenceStore.getBoolean(DiagramLayoutPreferencePage.STRICT_PORT_SIDE)) {
+		if (!strictPortSide) {
 			// determine port placement from port position
 			float nodeWidth = nodeLayout.getSize().getWidth();
 			float nodeHeight = nodeLayout.getSize().getHeight();
@@ -631,10 +650,18 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 				return PORT_PLACEMENT.NORTH;
 		}
 		// determine port placement from port type
-		if (portType == PORT_TYPE.INPUT)
-			return PORT_PLACEMENT.WEST;
-		else
-			return PORT_PLACEMENT.EAST;
+		if (layoutDirection == LAYOUT_OPTION.VERTICAL) {
+			if (portType == PORT_TYPE.INPUT)
+				return PORT_PLACEMENT.NORTH;
+			else
+				return PORT_PLACEMENT.SOUTH;
+		}
+		else {
+			if (portType == PORT_TYPE.INPUT)
+				return PORT_PLACEMENT.WEST;
+			else
+				return PORT_PLACEMENT.EAST;
+		}
 	}
 	
 	/**
