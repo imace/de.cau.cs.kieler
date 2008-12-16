@@ -46,347 +46,347 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public abstract class AbstractStateImpl extends EObjectImpl implements AbstractState {
     /**
-     * The cached value of the '{@link #getIncomingTransitions() <em>Incoming Transitions</em>}' reference list.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getIncomingTransitions() <em>Incoming Transitions</em>}' reference list.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getIncomingTransitions()
-     * @generated
-     * @ordered
-     */
+	 * @see #getIncomingTransitions()
+	 * @generated
+	 * @ordered
+	 */
     protected EList<Transition> incomingTransitions;
 
     /**
-     * The cached value of the '{@link #getOutgoingTransitions() <em>Outgoing Transitions</em>}' reference list.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getOutgoingTransitions() <em>Outgoing Transitions</em>}' reference list.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getOutgoingTransitions()
-     * @generated
-     * @ordered
-     */
+	 * @see #getOutgoingTransitions()
+	 * @generated
+	 * @ordered
+	 */
     protected EList<Transition> outgoingTransitions;
 
     /**
-     * The cached value of the '{@link #getOnEntryAction() <em>On Entry Action</em>}' reference.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getOnEntryAction() <em>On Entry Action</em>}' reference.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getOnEntryAction()
-     * @generated
-     * @ordered
-     */
+	 * @see #getOnEntryAction()
+	 * @generated
+	 * @ordered
+	 */
     protected OnAction onEntryAction;
 
     /**
-     * The cached value of the '{@link #getOnInsideAction() <em>On Inside Action</em>}' reference.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getOnInsideAction() <em>On Inside Action</em>}' reference.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getOnInsideAction()
-     * @generated
-     * @ordered
-     */
+	 * @see #getOnInsideAction()
+	 * @generated
+	 * @ordered
+	 */
     protected OnAction onInsideAction;
 
     /**
-     * The cached value of the '{@link #getOnExitAction() <em>On Exit Action</em>}' reference.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getOnExitAction() <em>On Exit Action</em>}' reference.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getOnExitAction()
-     * @generated
-     * @ordered
-     */
+	 * @see #getOnExitAction()
+	 * @generated
+	 * @ordered
+	 */
     protected OnAction onExitAction;
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     protected AbstractStateImpl() {
-        super();
-    }
+		super();
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     protected EClass eStaticClass() {
-        return ssmPackage.Literals.ABSTRACT_STATE;
-    }
+		return ssmPackage.Literals.ABSTRACT_STATE;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public EList<Transition> getIncomingTransitions() {
-        if (incomingTransitions == null) {
-            incomingTransitions = new EObjectWithInverseResolvingEList<Transition>(Transition.class, this, ssmPackage.ABSTRACT_STATE__INCOMING_TRANSITIONS, ssmPackage.TRANSITION__TARGET);
-        }
-        return incomingTransitions;
-    }
+		if (incomingTransitions == null) {
+			incomingTransitions = new EObjectWithInverseResolvingEList<Transition>(Transition.class, this, ssmPackage.ABSTRACT_STATE__INCOMING_TRANSITIONS, ssmPackage.TRANSITION__TARGET);
+		}
+		return incomingTransitions;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public EList<Transition> getOutgoingTransitions() {
-        if (outgoingTransitions == null) {
-            outgoingTransitions = new EObjectWithInverseResolvingEList<Transition>(Transition.class, this, ssmPackage.ABSTRACT_STATE__OUTGOING_TRANSITIONS, ssmPackage.TRANSITION__SOURCE);
-        }
-        return outgoingTransitions;
-    }
+		if (outgoingTransitions == null) {
+			outgoingTransitions = new EObjectWithInverseResolvingEList<Transition>(Transition.class, this, ssmPackage.ABSTRACT_STATE__OUTGOING_TRANSITIONS, ssmPackage.TRANSITION__SOURCE);
+		}
+		return outgoingTransitions;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public OnAction getOnEntryAction() {
-        if (onEntryAction != null && onEntryAction.eIsProxy()) {
-            InternalEObject oldOnEntryAction = (InternalEObject)onEntryAction;
-            onEntryAction = (OnAction)eResolveProxy(oldOnEntryAction);
-            if (onEntryAction != oldOnEntryAction) {
-                if (eNotificationRequired())
-                    eNotify(new ENotificationImpl(this, Notification.RESOLVE, ssmPackage.ABSTRACT_STATE__ON_ENTRY_ACTION, oldOnEntryAction, onEntryAction));
-            }
-        }
-        return onEntryAction;
-    }
+		if (onEntryAction != null && onEntryAction.eIsProxy()) {
+			InternalEObject oldOnEntryAction = (InternalEObject)onEntryAction;
+			onEntryAction = (OnAction)eResolveProxy(oldOnEntryAction);
+			if (onEntryAction != oldOnEntryAction) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ssmPackage.ABSTRACT_STATE__ON_ENTRY_ACTION, oldOnEntryAction, onEntryAction));
+			}
+		}
+		return onEntryAction;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public OnAction basicGetOnEntryAction() {
-        return onEntryAction;
-    }
+		return onEntryAction;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public void setOnEntryAction(OnAction newOnEntryAction) {
-        OnAction oldOnEntryAction = onEntryAction;
-        onEntryAction = newOnEntryAction;
-        if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, ssmPackage.ABSTRACT_STATE__ON_ENTRY_ACTION, oldOnEntryAction, onEntryAction));
-    }
+		OnAction oldOnEntryAction = onEntryAction;
+		onEntryAction = newOnEntryAction;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ssmPackage.ABSTRACT_STATE__ON_ENTRY_ACTION, oldOnEntryAction, onEntryAction));
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public OnAction getOnInsideAction() {
-        if (onInsideAction != null && onInsideAction.eIsProxy()) {
-            InternalEObject oldOnInsideAction = (InternalEObject)onInsideAction;
-            onInsideAction = (OnAction)eResolveProxy(oldOnInsideAction);
-            if (onInsideAction != oldOnInsideAction) {
-                if (eNotificationRequired())
-                    eNotify(new ENotificationImpl(this, Notification.RESOLVE, ssmPackage.ABSTRACT_STATE__ON_INSIDE_ACTION, oldOnInsideAction, onInsideAction));
-            }
-        }
-        return onInsideAction;
-    }
+		if (onInsideAction != null && onInsideAction.eIsProxy()) {
+			InternalEObject oldOnInsideAction = (InternalEObject)onInsideAction;
+			onInsideAction = (OnAction)eResolveProxy(oldOnInsideAction);
+			if (onInsideAction != oldOnInsideAction) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ssmPackage.ABSTRACT_STATE__ON_INSIDE_ACTION, oldOnInsideAction, onInsideAction));
+			}
+		}
+		return onInsideAction;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public OnAction basicGetOnInsideAction() {
-        return onInsideAction;
-    }
+		return onInsideAction;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public void setOnInsideAction(OnAction newOnInsideAction) {
-        OnAction oldOnInsideAction = onInsideAction;
-        onInsideAction = newOnInsideAction;
-        if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, ssmPackage.ABSTRACT_STATE__ON_INSIDE_ACTION, oldOnInsideAction, onInsideAction));
-    }
+		OnAction oldOnInsideAction = onInsideAction;
+		onInsideAction = newOnInsideAction;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ssmPackage.ABSTRACT_STATE__ON_INSIDE_ACTION, oldOnInsideAction, onInsideAction));
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public OnAction getOnExitAction() {
-        if (onExitAction != null && onExitAction.eIsProxy()) {
-            InternalEObject oldOnExitAction = (InternalEObject)onExitAction;
-            onExitAction = (OnAction)eResolveProxy(oldOnExitAction);
-            if (onExitAction != oldOnExitAction) {
-                if (eNotificationRequired())
-                    eNotify(new ENotificationImpl(this, Notification.RESOLVE, ssmPackage.ABSTRACT_STATE__ON_EXIT_ACTION, oldOnExitAction, onExitAction));
-            }
-        }
-        return onExitAction;
-    }
+		if (onExitAction != null && onExitAction.eIsProxy()) {
+			InternalEObject oldOnExitAction = (InternalEObject)onExitAction;
+			onExitAction = (OnAction)eResolveProxy(oldOnExitAction);
+			if (onExitAction != oldOnExitAction) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ssmPackage.ABSTRACT_STATE__ON_EXIT_ACTION, oldOnExitAction, onExitAction));
+			}
+		}
+		return onExitAction;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public OnAction basicGetOnExitAction() {
-        return onExitAction;
-    }
+		return onExitAction;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public void setOnExitAction(OnAction newOnExitAction) {
-        OnAction oldOnExitAction = onExitAction;
-        onExitAction = newOnExitAction;
-        if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, ssmPackage.ABSTRACT_STATE__ON_EXIT_ACTION, oldOnExitAction, onExitAction));
-    }
+		OnAction oldOnExitAction = onExitAction;
+		onExitAction = newOnExitAction;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ssmPackage.ABSTRACT_STATE__ON_EXIT_ACTION, oldOnExitAction, onExitAction));
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @SuppressWarnings("unchecked")
     @Override
     public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-        switch (featureID) {
-            case ssmPackage.ABSTRACT_STATE__INCOMING_TRANSITIONS:
-                return ((InternalEList<InternalEObject>)(InternalEList<?>)getIncomingTransitions()).basicAdd(otherEnd, msgs);
-            case ssmPackage.ABSTRACT_STATE__OUTGOING_TRANSITIONS:
-                return ((InternalEList<InternalEObject>)(InternalEList<?>)getOutgoingTransitions()).basicAdd(otherEnd, msgs);
-        }
-        return super.eInverseAdd(otherEnd, featureID, msgs);
-    }
+		switch (featureID) {
+			case ssmPackage.ABSTRACT_STATE__INCOMING_TRANSITIONS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getIncomingTransitions()).basicAdd(otherEnd, msgs);
+			case ssmPackage.ABSTRACT_STATE__OUTGOING_TRANSITIONS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOutgoingTransitions()).basicAdd(otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-        switch (featureID) {
-            case ssmPackage.ABSTRACT_STATE__INCOMING_TRANSITIONS:
-                return ((InternalEList<?>)getIncomingTransitions()).basicRemove(otherEnd, msgs);
-            case ssmPackage.ABSTRACT_STATE__OUTGOING_TRANSITIONS:
-                return ((InternalEList<?>)getOutgoingTransitions()).basicRemove(otherEnd, msgs);
-        }
-        return super.eInverseRemove(otherEnd, featureID, msgs);
-    }
+		switch (featureID) {
+			case ssmPackage.ABSTRACT_STATE__INCOMING_TRANSITIONS:
+				return ((InternalEList<?>)getIncomingTransitions()).basicRemove(otherEnd, msgs);
+			case ssmPackage.ABSTRACT_STATE__OUTGOING_TRANSITIONS:
+				return ((InternalEList<?>)getOutgoingTransitions()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
-        switch (featureID) {
-            case ssmPackage.ABSTRACT_STATE__INCOMING_TRANSITIONS:
-                return getIncomingTransitions();
-            case ssmPackage.ABSTRACT_STATE__OUTGOING_TRANSITIONS:
-                return getOutgoingTransitions();
-            case ssmPackage.ABSTRACT_STATE__ON_ENTRY_ACTION:
-                if (resolve) return getOnEntryAction();
-                return basicGetOnEntryAction();
-            case ssmPackage.ABSTRACT_STATE__ON_INSIDE_ACTION:
-                if (resolve) return getOnInsideAction();
-                return basicGetOnInsideAction();
-            case ssmPackage.ABSTRACT_STATE__ON_EXIT_ACTION:
-                if (resolve) return getOnExitAction();
-                return basicGetOnExitAction();
-        }
-        return super.eGet(featureID, resolve, coreType);
-    }
+		switch (featureID) {
+			case ssmPackage.ABSTRACT_STATE__INCOMING_TRANSITIONS:
+				return getIncomingTransitions();
+			case ssmPackage.ABSTRACT_STATE__OUTGOING_TRANSITIONS:
+				return getOutgoingTransitions();
+			case ssmPackage.ABSTRACT_STATE__ON_ENTRY_ACTION:
+				if (resolve) return getOnEntryAction();
+				return basicGetOnEntryAction();
+			case ssmPackage.ABSTRACT_STATE__ON_INSIDE_ACTION:
+				if (resolve) return getOnInsideAction();
+				return basicGetOnInsideAction();
+			case ssmPackage.ABSTRACT_STATE__ON_EXIT_ACTION:
+				if (resolve) return getOnExitAction();
+				return basicGetOnExitAction();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @SuppressWarnings("unchecked")
     @Override
     public void eSet(int featureID, Object newValue) {
-        switch (featureID) {
-            case ssmPackage.ABSTRACT_STATE__INCOMING_TRANSITIONS:
-                getIncomingTransitions().clear();
-                getIncomingTransitions().addAll((Collection<? extends Transition>)newValue);
-                return;
-            case ssmPackage.ABSTRACT_STATE__OUTGOING_TRANSITIONS:
-                getOutgoingTransitions().clear();
-                getOutgoingTransitions().addAll((Collection<? extends Transition>)newValue);
-                return;
-            case ssmPackage.ABSTRACT_STATE__ON_ENTRY_ACTION:
-                setOnEntryAction((OnAction)newValue);
-                return;
-            case ssmPackage.ABSTRACT_STATE__ON_INSIDE_ACTION:
-                setOnInsideAction((OnAction)newValue);
-                return;
-            case ssmPackage.ABSTRACT_STATE__ON_EXIT_ACTION:
-                setOnExitAction((OnAction)newValue);
-                return;
-        }
-        super.eSet(featureID, newValue);
-    }
+		switch (featureID) {
+			case ssmPackage.ABSTRACT_STATE__INCOMING_TRANSITIONS:
+				getIncomingTransitions().clear();
+				getIncomingTransitions().addAll((Collection<? extends Transition>)newValue);
+				return;
+			case ssmPackage.ABSTRACT_STATE__OUTGOING_TRANSITIONS:
+				getOutgoingTransitions().clear();
+				getOutgoingTransitions().addAll((Collection<? extends Transition>)newValue);
+				return;
+			case ssmPackage.ABSTRACT_STATE__ON_ENTRY_ACTION:
+				setOnEntryAction((OnAction)newValue);
+				return;
+			case ssmPackage.ABSTRACT_STATE__ON_INSIDE_ACTION:
+				setOnInsideAction((OnAction)newValue);
+				return;
+			case ssmPackage.ABSTRACT_STATE__ON_EXIT_ACTION:
+				setOnExitAction((OnAction)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     public void eUnset(int featureID) {
-        switch (featureID) {
-            case ssmPackage.ABSTRACT_STATE__INCOMING_TRANSITIONS:
-                getIncomingTransitions().clear();
-                return;
-            case ssmPackage.ABSTRACT_STATE__OUTGOING_TRANSITIONS:
-                getOutgoingTransitions().clear();
-                return;
-            case ssmPackage.ABSTRACT_STATE__ON_ENTRY_ACTION:
-                setOnEntryAction((OnAction)null);
-                return;
-            case ssmPackage.ABSTRACT_STATE__ON_INSIDE_ACTION:
-                setOnInsideAction((OnAction)null);
-                return;
-            case ssmPackage.ABSTRACT_STATE__ON_EXIT_ACTION:
-                setOnExitAction((OnAction)null);
-                return;
-        }
-        super.eUnset(featureID);
-    }
+		switch (featureID) {
+			case ssmPackage.ABSTRACT_STATE__INCOMING_TRANSITIONS:
+				getIncomingTransitions().clear();
+				return;
+			case ssmPackage.ABSTRACT_STATE__OUTGOING_TRANSITIONS:
+				getOutgoingTransitions().clear();
+				return;
+			case ssmPackage.ABSTRACT_STATE__ON_ENTRY_ACTION:
+				setOnEntryAction((OnAction)null);
+				return;
+			case ssmPackage.ABSTRACT_STATE__ON_INSIDE_ACTION:
+				setOnInsideAction((OnAction)null);
+				return;
+			case ssmPackage.ABSTRACT_STATE__ON_EXIT_ACTION:
+				setOnExitAction((OnAction)null);
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     public boolean eIsSet(int featureID) {
-        switch (featureID) {
-            case ssmPackage.ABSTRACT_STATE__INCOMING_TRANSITIONS:
-                return incomingTransitions != null && !incomingTransitions.isEmpty();
-            case ssmPackage.ABSTRACT_STATE__OUTGOING_TRANSITIONS:
-                return outgoingTransitions != null && !outgoingTransitions.isEmpty();
-            case ssmPackage.ABSTRACT_STATE__ON_ENTRY_ACTION:
-                return onEntryAction != null;
-            case ssmPackage.ABSTRACT_STATE__ON_INSIDE_ACTION:
-                return onInsideAction != null;
-            case ssmPackage.ABSTRACT_STATE__ON_EXIT_ACTION:
-                return onExitAction != null;
-        }
-        return super.eIsSet(featureID);
-    }
+		switch (featureID) {
+			case ssmPackage.ABSTRACT_STATE__INCOMING_TRANSITIONS:
+				return incomingTransitions != null && !incomingTransitions.isEmpty();
+			case ssmPackage.ABSTRACT_STATE__OUTGOING_TRANSITIONS:
+				return outgoingTransitions != null && !outgoingTransitions.isEmpty();
+			case ssmPackage.ABSTRACT_STATE__ON_ENTRY_ACTION:
+				return onEntryAction != null;
+			case ssmPackage.ABSTRACT_STATE__ON_INSIDE_ACTION:
+				return onInsideAction != null;
+			case ssmPackage.ABSTRACT_STATE__ON_EXIT_ACTION:
+				return onExitAction != null;
+		}
+		return super.eIsSet(featureID);
+	}
 
 } //AbstractStateImpl

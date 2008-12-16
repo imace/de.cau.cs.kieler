@@ -26,29 +26,29 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface Signal extends EObject {
     /**
-     * Returns the value of the '<em><b>Signal Name</b></em>' attribute.
-     * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Signal Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Signal Name</em>' attribute isn't clear,
      * there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
-     * @return the value of the '<em>Signal Name</em>' attribute.
-     * @see #setSignalName(String)
-     * @see edu.unikiel.rtsys.kieler.ssm.ssmPackage#getSignal_SignalName()
-     * @model
-     * @generated
-     */
+	 * @return the value of the '<em>Signal Name</em>' attribute.
+	 * @see #setSignalName(String)
+	 * @see edu.unikiel.rtsys.kieler.ssm.ssmPackage#getSignal_SignalName()
+	 * @model
+	 * @generated
+	 */
     String getSignalName();
 
     /**
-     * Sets the value of the '{@link edu.unikiel.rtsys.kieler.ssm.Signal#getSignalName <em>Signal Name</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link edu.unikiel.rtsys.kieler.ssm.Signal#getSignalName <em>Signal Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @param value the new value of the '<em>Signal Name</em>' attribute.
-     * @see #getSignalName()
-     * @generated
-     */
+	 * @param value the new value of the '<em>Signal Name</em>' attribute.
+	 * @see #getSignalName()
+	 * @generated
+	 */
     void setSignalName(String value);
 
 } // Signal

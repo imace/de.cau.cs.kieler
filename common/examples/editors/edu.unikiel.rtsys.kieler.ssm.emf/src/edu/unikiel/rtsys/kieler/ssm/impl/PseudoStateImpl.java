@@ -22,22 +22,22 @@ import org.eclipse.emf.ecore.EClass;
  */
 public class PseudoStateImpl extends AbstractStateImpl implements PseudoState {
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     protected PseudoStateImpl() {
-        super();
-    }
+		super();
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     protected EClass eStaticClass() {
-        return ssmPackage.Literals.PSEUDO_STATE;
-    }
+		return ssmPackage.Literals.PSEUDO_STATE;
+	}
 
 } //PseudoStateImpl

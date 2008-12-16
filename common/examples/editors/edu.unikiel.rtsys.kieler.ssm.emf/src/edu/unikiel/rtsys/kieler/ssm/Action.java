@@ -28,19 +28,19 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface Action extends EObject {
     /**
-     * Returns the value of the '<em><b>Signals</b></em>' reference list.
-     * The list contents are of type {@link edu.unikiel.rtsys.kieler.ssm.Signal}.
-     * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Signals</b></em>' reference list.
+	 * The list contents are of type {@link edu.unikiel.rtsys.kieler.ssm.Signal}.
+	 * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Signals</em>' reference list isn't clear,
      * there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
-     * @return the value of the '<em>Signals</em>' reference list.
-     * @see edu.unikiel.rtsys.kieler.ssm.ssmPackage#getAction_Signals()
-     * @model
-     * @generated
-     */
+	 * @return the value of the '<em>Signals</em>' reference list.
+	 * @see edu.unikiel.rtsys.kieler.ssm.ssmPackage#getAction_Signals()
+	 * @model
+	 * @generated
+	 */
     EList<Signal> getSignals();
 
 } // Action

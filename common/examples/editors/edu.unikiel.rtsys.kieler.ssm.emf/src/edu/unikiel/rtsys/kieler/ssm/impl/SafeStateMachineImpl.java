@@ -33,147 +33,147 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  */
 public class SafeStateMachineImpl extends NamedImpl implements SafeStateMachine {
     /**
-     * The cached value of the '{@link #getTop() <em>Top</em>}' containment reference.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getTop() <em>Top</em>}' containment reference.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getTop()
-     * @generated
-     * @ordered
-     */
+	 * @see #getTop()
+	 * @generated
+	 * @ordered
+	 */
     protected CompositeState top;
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     protected SafeStateMachineImpl() {
-        super();
-    }
+		super();
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     protected EClass eStaticClass() {
-        return ssmPackage.Literals.SAFE_STATE_MACHINE;
-    }
+		return ssmPackage.Literals.SAFE_STATE_MACHINE;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public CompositeState getTop() {
-        return top;
-    }
+		return top;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public NotificationChain basicSetTop(CompositeState newTop, NotificationChain msgs) {
-        CompositeState oldTop = top;
-        top = newTop;
-        if (eNotificationRequired()) {
-            ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ssmPackage.SAFE_STATE_MACHINE__TOP, oldTop, newTop);
-            if (msgs == null) msgs = notification; else msgs.add(notification);
-        }
-        return msgs;
-    }
+		CompositeState oldTop = top;
+		top = newTop;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ssmPackage.SAFE_STATE_MACHINE__TOP, oldTop, newTop);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public void setTop(CompositeState newTop) {
-        if (newTop != top) {
-            NotificationChain msgs = null;
-            if (top != null)
-                msgs = ((InternalEObject)top).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ssmPackage.SAFE_STATE_MACHINE__TOP, null, msgs);
-            if (newTop != null)
-                msgs = ((InternalEObject)newTop).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ssmPackage.SAFE_STATE_MACHINE__TOP, null, msgs);
-            msgs = basicSetTop(newTop, msgs);
-            if (msgs != null) msgs.dispatch();
-        }
-        else if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, ssmPackage.SAFE_STATE_MACHINE__TOP, newTop, newTop));
-    }
+		if (newTop != top) {
+			NotificationChain msgs = null;
+			if (top != null)
+				msgs = ((InternalEObject)top).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ssmPackage.SAFE_STATE_MACHINE__TOP, null, msgs);
+			if (newTop != null)
+				msgs = ((InternalEObject)newTop).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ssmPackage.SAFE_STATE_MACHINE__TOP, null, msgs);
+			msgs = basicSetTop(newTop, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ssmPackage.SAFE_STATE_MACHINE__TOP, newTop, newTop));
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-        switch (featureID) {
-            case ssmPackage.SAFE_STATE_MACHINE__TOP:
-                return basicSetTop(null, msgs);
-        }
-        return super.eInverseRemove(otherEnd, featureID, msgs);
-    }
+		switch (featureID) {
+			case ssmPackage.SAFE_STATE_MACHINE__TOP:
+				return basicSetTop(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
-        switch (featureID) {
-            case ssmPackage.SAFE_STATE_MACHINE__TOP:
-                return getTop();
-        }
-        return super.eGet(featureID, resolve, coreType);
-    }
+		switch (featureID) {
+			case ssmPackage.SAFE_STATE_MACHINE__TOP:
+				return getTop();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     public void eSet(int featureID, Object newValue) {
-        switch (featureID) {
-            case ssmPackage.SAFE_STATE_MACHINE__TOP:
-                setTop((CompositeState)newValue);
-                return;
-        }
-        super.eSet(featureID, newValue);
-    }
+		switch (featureID) {
+			case ssmPackage.SAFE_STATE_MACHINE__TOP:
+				setTop((CompositeState)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     public void eUnset(int featureID) {
-        switch (featureID) {
-            case ssmPackage.SAFE_STATE_MACHINE__TOP:
-                setTop((CompositeState)null);
-                return;
-        }
-        super.eUnset(featureID);
-    }
+		switch (featureID) {
+			case ssmPackage.SAFE_STATE_MACHINE__TOP:
+				setTop((CompositeState)null);
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     public boolean eIsSet(int featureID) {
-        switch (featureID) {
-            case ssmPackage.SAFE_STATE_MACHINE__TOP:
-                return top != null;
-        }
-        return super.eIsSet(featureID);
-    }
+		switch (featureID) {
+			case ssmPackage.SAFE_STATE_MACHINE__TOP:
+				return top != null;
+		}
+		return super.eIsSet(featureID);
+	}
 
 } //SafeStateMachineImpl

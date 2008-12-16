@@ -29,35 +29,35 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface Region extends EObject {
     /**
-     * Returns the value of the '<em><b>States</b></em>' containment reference list.
-     * The list contents are of type {@link edu.unikiel.rtsys.kieler.ssm.AbstractState}.
-     * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>States</b></em>' containment reference list.
+	 * The list contents are of type {@link edu.unikiel.rtsys.kieler.ssm.AbstractState}.
+	 * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>States</em>' containment reference list isn't clear,
      * there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
-     * @return the value of the '<em>States</em>' containment reference list.
-     * @see edu.unikiel.rtsys.kieler.ssm.ssmPackage#getRegion_States()
-     * @model containment="true" required="true"
-     * @generated
-     */
+	 * @return the value of the '<em>States</em>' containment reference list.
+	 * @see edu.unikiel.rtsys.kieler.ssm.ssmPackage#getRegion_States()
+	 * @model containment="true" required="true"
+	 * @generated
+	 */
     EList<AbstractState> getStates();
 
     /**
-     * Returns the value of the '<em><b>Transitions</b></em>' containment reference list.
-     * The list contents are of type {@link edu.unikiel.rtsys.kieler.ssm.Transition}.
-     * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Transitions</b></em>' containment reference list.
+	 * The list contents are of type {@link edu.unikiel.rtsys.kieler.ssm.Transition}.
+	 * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Transitions</em>' containment reference list isn't clear,
      * there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
-     * @return the value of the '<em>Transitions</em>' containment reference list.
-     * @see edu.unikiel.rtsys.kieler.ssm.ssmPackage#getRegion_Transitions()
-     * @model containment="true"
-     * @generated
-     */
+	 * @return the value of the '<em>Transitions</em>' containment reference list.
+	 * @see edu.unikiel.rtsys.kieler.ssm.ssmPackage#getRegion_Transitions()
+	 * @model containment="true"
+	 * @generated
+	 */
     EList<Transition> getTransitions();
 
 } // Region

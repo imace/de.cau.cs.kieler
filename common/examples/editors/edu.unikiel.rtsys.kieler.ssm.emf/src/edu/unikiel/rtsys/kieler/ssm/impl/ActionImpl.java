@@ -35,104 +35,104 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
  */
 public class ActionImpl extends EObjectImpl implements Action {
     /**
-     * The cached value of the '{@link #getSignals() <em>Signals</em>}' reference list.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getSignals() <em>Signals</em>}' reference list.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getSignals()
-     * @generated
-     * @ordered
-     */
+	 * @see #getSignals()
+	 * @generated
+	 * @ordered
+	 */
     protected EList<Signal> signals;
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     protected ActionImpl() {
-        super();
-    }
+		super();
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     protected EClass eStaticClass() {
-        return ssmPackage.Literals.ACTION;
-    }
+		return ssmPackage.Literals.ACTION;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public EList<Signal> getSignals() {
-        if (signals == null) {
-            signals = new EObjectResolvingEList<Signal>(Signal.class, this, ssmPackage.ACTION__SIGNALS);
-        }
-        return signals;
-    }
+		if (signals == null) {
+			signals = new EObjectResolvingEList<Signal>(Signal.class, this, ssmPackage.ACTION__SIGNALS);
+		}
+		return signals;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
-        switch (featureID) {
-            case ssmPackage.ACTION__SIGNALS:
-                return getSignals();
-        }
-        return super.eGet(featureID, resolve, coreType);
-    }
+		switch (featureID) {
+			case ssmPackage.ACTION__SIGNALS:
+				return getSignals();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @SuppressWarnings("unchecked")
     @Override
     public void eSet(int featureID, Object newValue) {
-        switch (featureID) {
-            case ssmPackage.ACTION__SIGNALS:
-                getSignals().clear();
-                getSignals().addAll((Collection<? extends Signal>)newValue);
-                return;
-        }
-        super.eSet(featureID, newValue);
-    }
+		switch (featureID) {
+			case ssmPackage.ACTION__SIGNALS:
+				getSignals().clear();
+				getSignals().addAll((Collection<? extends Signal>)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     public void eUnset(int featureID) {
-        switch (featureID) {
-            case ssmPackage.ACTION__SIGNALS:
-                getSignals().clear();
-                return;
-        }
-        super.eUnset(featureID);
-    }
+		switch (featureID) {
+			case ssmPackage.ACTION__SIGNALS:
+				getSignals().clear();
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     public boolean eIsSet(int featureID) {
-        switch (featureID) {
-            case ssmPackage.ACTION__SIGNALS:
-                return signals != null && !signals.isEmpty();
-        }
-        return super.eIsSet(featureID);
-    }
+		switch (featureID) {
+			case ssmPackage.ACTION__SIGNALS:
+				return signals != null && !signals.isEmpty();
+		}
+		return super.eIsSet(featureID);
+	}
 
 } //ActionImpl

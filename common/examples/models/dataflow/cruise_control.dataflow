@@ -15,11 +15,84 @@
     <outputs name="Regul_ON"/>
     <outputs name="Regul_OFF"/>
     <outputs name="Regul_STDBY"/>
+    <boxes name="DetectPedalsPressed">
+      <inputs name="Brake"/>
+      <inputs name="Accelerator"/>
+      <outputs name="AcceleratorPressed"/>
+      <outputs name="BrakePressed"/>
+      <connections sourcePort="//@boxes.0/@boxes.0/@outputs.1" targetPort="//@boxes.0/@boxes.2/@inputs.0"/>
+      <connections sourcePort="//@boxes.0/@boxes.0/@outputs.0" targetPort="//@boxes.0/@boxes.2/@inputs.1"/>
+    </boxes>
+    <boxes name="DetectSpeedLimits">
+      <inputs name="Speed"/>
+      <outputs name="SpeedOutOfLimits"/>
+      <connections sourcePort="//@boxes.0/@boxes.1/@outputs.0" targetPort="//@boxes.0/@boxes.2/@inputs.5"/>
+    </boxes>
+    <boxes name="CruiseStateMgt">
+      <inputs name="BrakePressed"/>
+      <inputs name="AcceleratorPressed"/>
+      <inputs name="Resume"/>
+      <inputs name="On"/>
+      <inputs name="Off"/>
+      <inputs name="SpeedOutOfLimits"/>
+      <outputs name="Regul_STDBY"/>
+      <outputs name="Regul_OFF"/>
+      <outputs name="Regul_ON"/>
+      <connections sourcePort="//@boxes.0/@boxes.2/@outputs.2" targetPort="//@boxes.0/@outputs.2"/>
+      <connections sourcePort="//@boxes.0/@boxes.2/@outputs.1" targetPort="//@boxes.0/@outputs.3"/>
+      <connections sourcePort="//@boxes.0/@boxes.2/@outputs.0" targetPort="//@boxes.0/@outputs.4"/>
+      <connections sourcePort="//@boxes.0/@boxes.2/@outputs.0" targetPort="//@boxes.0/@boxes.3/@inputs.1"/>
+      <connections sourcePort="//@boxes.0/@boxes.2/@outputs.2" targetPort="//@boxes.0/@boxes.3/@inputs.0"/>
+      <connections sourcePort="//@boxes.0/@boxes.2/@outputs.2" targetPort="//@boxes.0/@boxes.5/@inputs.0"/>
+    </boxes>
+    <boxes name="or">
+      <inputs/>
+      <inputs/>
+      <outputs/>
+      <connections sourcePort="//@boxes.0/@boxes.3/@outputs.0" targetPort="//@boxes.0/@boxes.4/@inputs.5"/>
+    </boxes>
+    <boxes name="CruiseSpeedMgt">
+      <inputs name="On"/>
+      <inputs name="Set"/>
+      <inputs name="QuickAccel"/>
+      <inputs name="QuickDecel"/>
+      <inputs name="Speed"/>
+      <inputs/>
+      <inputs/>
+      <outputs name="CruiseSpeed"/>
+      <connections sourcePort="//@boxes.0/@boxes.4/@outputs.0" targetPort="//@boxes.0/@boxes.5/@inputs.1"/>
+      <connections sourcePort="//@boxes.0/@boxes.4/@outputs.0" targetPort="//@boxes.0/@outputs.0"/>
+    </boxes>
+    <boxes name="ThrottleCmd">
+      <inputs name="Regul_ON"/>
+      <inputs name="CruiseSpeed"/>
+      <inputs name="VehicleSpeed"/>
+      <inputs name="Accelerator"/>
+      <outputs name="Throttle"/>
+      <connections sourcePort="//@boxes.0/@boxes.5/@outputs.0" targetPort="//@boxes.0/@outputs.1"/>
+    </boxes>
+    <boxes name="ZeroSpeed">
+      <outputs/>
+      <connections sourcePort="//@boxes.0/@boxes.6/@outputs.0" targetPort="//@boxes.0/@boxes.4/@inputs.6"/>
+    </boxes>
     <connections sourcePort="//@boxes.0/@outputs.4" targetPort="//@boxes.12/@inputs.0"/>
     <connections sourcePort="//@boxes.0/@outputs.3" targetPort="//@boxes.11/@inputs.0"/>
     <connections sourcePort="//@boxes.0/@outputs.2" targetPort="//@boxes.10/@inputs.0"/>
     <connections sourcePort="//@boxes.0/@outputs.0" targetPort="//@boxes.14/@inputs.0"/>
     <connections sourcePort="//@boxes.0/@outputs.1" targetPort="//@boxes.1/@inputs.0"/>
+    <connections sourcePort="//@boxes.0/@inputs.7" targetPort="//@boxes.0/@boxes.0/@inputs.0"/>
+    <connections sourcePort="//@boxes.0/@inputs.6" targetPort="//@boxes.0/@boxes.0/@inputs.1"/>
+    <connections sourcePort="//@boxes.0/@inputs.8" targetPort="//@boxes.0/@boxes.1/@inputs.0"/>
+    <connections sourcePort="//@boxes.0/@inputs.2" targetPort="//@boxes.0/@boxes.2/@inputs.2"/>
+    <connections sourcePort="//@boxes.0/@inputs.0" targetPort="//@boxes.0/@boxes.2/@inputs.3"/>
+    <connections sourcePort="//@boxes.0/@inputs.1" targetPort="//@boxes.0/@boxes.2/@inputs.4"/>
+    <connections sourcePort="//@boxes.0/@inputs.0" targetPort="//@boxes.0/@boxes.4/@inputs.0"/>
+    <connections sourcePort="//@boxes.0/@inputs.3" targetPort="//@boxes.0/@boxes.4/@inputs.1"/>
+    <connections sourcePort="//@boxes.0/@inputs.4" targetPort="//@boxes.0/@boxes.4/@inputs.2"/>
+    <connections sourcePort="//@boxes.0/@inputs.5" targetPort="//@boxes.0/@boxes.4/@inputs.3"/>
+    <connections sourcePort="//@boxes.0/@inputs.8" targetPort="//@boxes.0/@boxes.4/@inputs.4"/>
+    <connections sourcePort="//@boxes.0/@inputs.8" targetPort="//@boxes.0/@boxes.5/@inputs.2"/>
+    <connections sourcePort="//@boxes.0/@inputs.6" targetPort="//@boxes.0/@boxes.5/@inputs.3"/>
   </boxes>
   <boxes name="CarSimple">
     <inputs name="Throttle"/>

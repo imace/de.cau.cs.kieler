@@ -25,29 +25,29 @@ package edu.unikiel.rtsys.kieler.ssm;
  */
 public interface SafeStateMachine extends Named {
     /**
-     * Returns the value of the '<em><b>Top</b></em>' containment reference.
-     * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Top</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Top</em>' containment reference isn't clear,
      * there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
-     * @return the value of the '<em>Top</em>' containment reference.
-     * @see #setTop(CompositeState)
-     * @see edu.unikiel.rtsys.kieler.ssm.ssmPackage#getSafeStateMachine_Top()
-     * @model containment="true" required="true"
-     * @generated
-     */
+	 * @return the value of the '<em>Top</em>' containment reference.
+	 * @see #setTop(CompositeState)
+	 * @see edu.unikiel.rtsys.kieler.ssm.ssmPackage#getSafeStateMachine_Top()
+	 * @model containment="true" required="true"
+	 * @generated
+	 */
     CompositeState getTop();
 
     /**
-     * Sets the value of the '{@link edu.unikiel.rtsys.kieler.ssm.SafeStateMachine#getTop <em>Top</em>}' containment reference.
-     * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link edu.unikiel.rtsys.kieler.ssm.SafeStateMachine#getTop <em>Top</em>}' containment reference.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @param value the new value of the '<em>Top</em>' containment reference.
-     * @see #getTop()
-     * @generated
-     */
+	 * @param value the new value of the '<em>Top</em>' containment reference.
+	 * @see #getTop()
+	 * @generated
+	 */
     void setTop(CompositeState value);
 
 } // SafeStateMachine

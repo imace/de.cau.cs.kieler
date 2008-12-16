@@ -22,22 +22,22 @@ import org.eclipse.emf.ecore.EClass;
  */
 public class NormalTerminationImpl extends TransitionImpl implements NormalTermination {
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     protected NormalTerminationImpl() {
-        super();
-    }
+		super();
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     protected EClass eStaticClass() {
-        return ssmPackage.Literals.NORMAL_TERMINATION;
-    }
+		return ssmPackage.Literals.NORMAL_TERMINATION;
+	}
 
 } //NormalTerminationImpl

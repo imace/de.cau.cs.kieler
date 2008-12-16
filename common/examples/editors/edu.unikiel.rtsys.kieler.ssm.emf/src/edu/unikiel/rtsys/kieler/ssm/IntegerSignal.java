@@ -25,29 +25,29 @@ package edu.unikiel.rtsys.kieler.ssm;
  */
 public interface IntegerSignal extends Signal {
     /**
-     * Returns the value of the '<em><b>Integer Value</b></em>' attribute.
-     * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Integer Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Integer Value</em>' attribute isn't clear,
      * there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
-     * @return the value of the '<em>Integer Value</em>' attribute.
-     * @see #setIntegerValue(int)
-     * @see edu.unikiel.rtsys.kieler.ssm.ssmPackage#getIntegerSignal_IntegerValue()
-     * @model
-     * @generated
-     */
+	 * @return the value of the '<em>Integer Value</em>' attribute.
+	 * @see #setIntegerValue(int)
+	 * @see edu.unikiel.rtsys.kieler.ssm.ssmPackage#getIntegerSignal_IntegerValue()
+	 * @model
+	 * @generated
+	 */
     int getIntegerValue();
 
     /**
-     * Sets the value of the '{@link edu.unikiel.rtsys.kieler.ssm.IntegerSignal#getIntegerValue <em>Integer Value</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link edu.unikiel.rtsys.kieler.ssm.IntegerSignal#getIntegerValue <em>Integer Value</em>}' attribute.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @param value the new value of the '<em>Integer Value</em>' attribute.
-     * @see #getIntegerValue()
-     * @generated
-     */
+	 * @param value the new value of the '<em>Integer Value</em>' attribute.
+	 * @see #getIntegerValue()
+	 * @generated
+	 */
     void setIntegerValue(int value);
 
 } // IntegerSignal

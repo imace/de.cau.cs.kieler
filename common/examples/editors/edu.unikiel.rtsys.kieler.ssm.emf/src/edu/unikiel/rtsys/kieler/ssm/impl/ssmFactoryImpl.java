@@ -25,335 +25,392 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin;
  */
 public class ssmFactoryImpl extends EFactoryImpl implements ssmFactory {
     /**
-     * Creates the default factory implementation.
-     * <!-- begin-user-doc -->
+	 * Creates the default factory implementation.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public static ssmFactory init() {
-        try {
-            ssmFactory thessmFactory = (ssmFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.informatik.uni-kiel.de/rtsys/ssm"); 
-            if (thessmFactory != null) {
-                return thessmFactory;
-            }
-        }
-        catch (Exception exception) {
-            EcorePlugin.INSTANCE.log(exception);
-        }
-        return new ssmFactoryImpl();
-    }
+		try {
+			ssmFactory thessmFactory = (ssmFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.informatik.uni-kiel.de/rtsys/ssm"); 
+			if (thessmFactory != null) {
+				return thessmFactory;
+			}
+		}
+		catch (Exception exception) {
+			EcorePlugin.INSTANCE.log(exception);
+		}
+		return new ssmFactoryImpl();
+	}
 
     /**
-     * Creates an instance of the factory.
-     * <!-- begin-user-doc -->
+	 * Creates an instance of the factory.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public ssmFactoryImpl() {
-        super();
-    }
+		super();
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     public EObject create(EClass eClass) {
-        switch (eClass.getClassifierID()) {
-            case ssmPackage.NAMED: return createNamed();
-            case ssmPackage.REGION: return createRegion();
-            case ssmPackage.SIMPLE_STATE: return createSimpleState();
-            case ssmPackage.PSEUDO_STATE: return createPseudoState();
-            case ssmPackage.INITIAL_STATE: return createInitialState();
-            case ssmPackage.COMPOSITE_STATE: return createCompositeState();
-            case ssmPackage.TRANSITION: return createTransition();
-            case ssmPackage.TRANSITION_TRIGGERABLE: return createTransitionTriggerable();
-            case ssmPackage.TRANSITION_IMMEDIATEABLE: return createTransitionImmediateable();
-            case ssmPackage.INITIAL_ARC: return createInitialArc();
-            case ssmPackage.CONDITIONAL_TRANSITION: return createConditionalTransition();
-            case ssmPackage.NORMAL_TERMINATION: return createNormalTermination();
-            case ssmPackage.STRONG_ABORTION: return createStrongAbortion();
-            case ssmPackage.WEAK_ABORTION: return createWeakAbortion();
-            case ssmPackage.SAFE_STATE_MACHINE: return createSafeStateMachine();
-            case ssmPackage.TRIGGER: return createTrigger();
-            case ssmPackage.ACTION: return createAction();
-            case ssmPackage.ON_ACTION: return createOnAction();
-            case ssmPackage.SIGNAL: return createSignal();
-            case ssmPackage.INTEGER_SIGNAL: return createIntegerSignal();
-            default:
-                throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
-        }
-    }
+		switch (eClass.getClassifierID()) {
+			case ssmPackage.NAMED: return createNamed();
+			case ssmPackage.REGION: return createRegion();
+			case ssmPackage.SIMPLE_STATE: return createSimpleState();
+			case ssmPackage.PSEUDO_STATE: return createPseudoState();
+			case ssmPackage.INITIAL_STATE: return createInitialState();
+			case ssmPackage.COMPOSITE_STATE: return createCompositeState();
+			case ssmPackage.TRANSITION: return createTransition();
+			case ssmPackage.TRANSITION_TRIGGERABLE: return createTransitionTriggerable();
+			case ssmPackage.TRANSITION_IMMEDIATEABLE: return createTransitionImmediateable();
+			case ssmPackage.INITIAL_ARC: return createInitialArc();
+			case ssmPackage.CONDITIONAL_TRANSITION: return createConditionalTransition();
+			case ssmPackage.NORMAL_TERMINATION: return createNormalTermination();
+			case ssmPackage.STRONG_ABORTION: return createStrongAbortion();
+			case ssmPackage.WEAK_ABORTION: return createWeakAbortion();
+			case ssmPackage.SAFE_STATE_MACHINE: return createSafeStateMachine();
+			case ssmPackage.TRIGGER: return createTrigger();
+			case ssmPackage.ACTION: return createAction();
+			case ssmPackage.ON_ACTION: return createOnAction();
+			case ssmPackage.SIGNAL: return createSignal();
+			case ssmPackage.INTEGER_SIGNAL: return createIntegerSignal();
+			case ssmPackage.CONDITION: return createCondition();
+			default:
+				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+		}
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     public Object createFromString(EDataType eDataType, String initialValue) {
-        switch (eDataType.getClassifierID()) {
-            case ssmPackage.STATE_FLAG:
-                return createStateFlagFromString(eDataType, initialValue);
-            default:
-                throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
-        }
-    }
+		switch (eDataType.getClassifierID()) {
+			case ssmPackage.STATE_FLAG:
+				return createStateFlagFromString(eDataType, initialValue);
+			case ssmPackage.COMBINATION_OPERATOR:
+				return createCombinationOperatorFromString(eDataType, initialValue);
+			case ssmPackage.ANY_TYPE:
+				return createAnyTypeFromString(eDataType, initialValue);
+			default:
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+		}
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     public String convertToString(EDataType eDataType, Object instanceValue) {
-        switch (eDataType.getClassifierID()) {
-            case ssmPackage.STATE_FLAG:
-                return convertStateFlagToString(eDataType, instanceValue);
-            default:
-                throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
-        }
-    }
+		switch (eDataType.getClassifierID()) {
+			case ssmPackage.STATE_FLAG:
+				return convertStateFlagToString(eDataType, instanceValue);
+			case ssmPackage.COMBINATION_OPERATOR:
+				return convertCombinationOperatorToString(eDataType, instanceValue);
+			case ssmPackage.ANY_TYPE:
+				return convertAnyTypeToString(eDataType, instanceValue);
+			default:
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+		}
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public Named createNamed() {
-        NamedImpl named = new NamedImpl();
-        return named;
-    }
+		NamedImpl named = new NamedImpl();
+		return named;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public Region createRegion() {
-        RegionImpl region = new RegionImpl();
-        return region;
-    }
+		RegionImpl region = new RegionImpl();
+		return region;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public SimpleState createSimpleState() {
-        SimpleStateImpl simpleState = new SimpleStateImpl();
-        return simpleState;
-    }
+		SimpleStateImpl simpleState = new SimpleStateImpl();
+		return simpleState;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public PseudoState createPseudoState() {
-        PseudoStateImpl pseudoState = new PseudoStateImpl();
-        return pseudoState;
-    }
+		PseudoStateImpl pseudoState = new PseudoStateImpl();
+		return pseudoState;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public InitialState createInitialState() {
-        InitialStateImpl initialState = new InitialStateImpl();
-        return initialState;
-    }
+		InitialStateImpl initialState = new InitialStateImpl();
+		return initialState;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public CompositeState createCompositeState() {
-        CompositeStateImpl compositeState = new CompositeStateImpl();
-        return compositeState;
-    }
+		CompositeStateImpl compositeState = new CompositeStateImpl();
+		return compositeState;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public Transition createTransition() {
-        TransitionImpl transition = new TransitionImpl();
-        return transition;
-    }
+		TransitionImpl transition = new TransitionImpl();
+		return transition;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public TransitionTriggerable createTransitionTriggerable() {
-        TransitionTriggerableImpl transitionTriggerable = new TransitionTriggerableImpl();
-        return transitionTriggerable;
-    }
+		TransitionTriggerableImpl transitionTriggerable = new TransitionTriggerableImpl();
+		return transitionTriggerable;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public TransitionImmediateable createTransitionImmediateable() {
-        TransitionImmediateableImpl transitionImmediateable = new TransitionImmediateableImpl();
-        return transitionImmediateable;
-    }
+		TransitionImmediateableImpl transitionImmediateable = new TransitionImmediateableImpl();
+		return transitionImmediateable;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public InitialArc createInitialArc() {
-        InitialArcImpl initialArc = new InitialArcImpl();
-        return initialArc;
-    }
+		InitialArcImpl initialArc = new InitialArcImpl();
+		return initialArc;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public ConditionalTransition createConditionalTransition() {
-        ConditionalTransitionImpl conditionalTransition = new ConditionalTransitionImpl();
-        return conditionalTransition;
-    }
+		ConditionalTransitionImpl conditionalTransition = new ConditionalTransitionImpl();
+		return conditionalTransition;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public NormalTermination createNormalTermination() {
-        NormalTerminationImpl normalTermination = new NormalTerminationImpl();
-        return normalTermination;
-    }
+		NormalTerminationImpl normalTermination = new NormalTerminationImpl();
+		return normalTermination;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public StrongAbortion createStrongAbortion() {
-        StrongAbortionImpl strongAbortion = new StrongAbortionImpl();
-        return strongAbortion;
-    }
+		StrongAbortionImpl strongAbortion = new StrongAbortionImpl();
+		return strongAbortion;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public WeakAbortion createWeakAbortion() {
-        WeakAbortionImpl weakAbortion = new WeakAbortionImpl();
-        return weakAbortion;
-    }
+		WeakAbortionImpl weakAbortion = new WeakAbortionImpl();
+		return weakAbortion;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public SafeStateMachine createSafeStateMachine() {
-        SafeStateMachineImpl safeStateMachine = new SafeStateMachineImpl();
-        return safeStateMachine;
-    }
+		SafeStateMachineImpl safeStateMachine = new SafeStateMachineImpl();
+		return safeStateMachine;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public Trigger createTrigger() {
-        TriggerImpl trigger = new TriggerImpl();
-        return trigger;
-    }
+		TriggerImpl trigger = new TriggerImpl();
+		return trigger;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public Action createAction() {
-        ActionImpl action = new ActionImpl();
-        return action;
-    }
+		ActionImpl action = new ActionImpl();
+		return action;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public OnAction createOnAction() {
-        OnActionImpl onAction = new OnActionImpl();
-        return onAction;
-    }
+		OnActionImpl onAction = new OnActionImpl();
+		return onAction;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public Signal createSignal() {
-        SignalImpl signal = new SignalImpl();
-        return signal;
-    }
+		SignalImpl signal = new SignalImpl();
+		return signal;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public IntegerSignal createIntegerSignal() {
-        IntegerSignalImpl integerSignal = new IntegerSignalImpl();
-        return integerSignal;
-    }
+		IntegerSignalImpl integerSignal = new IntegerSignalImpl();
+		return integerSignal;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Condition createCondition() {
+		ConditionImpl condition = new ConditionImpl();
+		return condition;
+	}
+
+				/**
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public StateFlag createStateFlagFromString(EDataType eDataType, String initialValue) {
-        StateFlag result = StateFlag.get(initialValue);
-        if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-        return result;
-    }
+		StateFlag result = StateFlag.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public String convertStateFlagToString(EDataType eDataType, Object instanceValue) {
-        return instanceValue == null ? null : instanceValue.toString();
-    }
+		return instanceValue == null ? null : instanceValue.toString();
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CombinationOperator createCombinationOperatorFromString(EDataType eDataType, String initialValue) {
+		CombinationOperator result = CombinationOperator.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+				/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertCombinationOperatorToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+				/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Object createAnyTypeFromString(EDataType eDataType, String initialValue) {
+		return super.createFromString(eDataType, initialValue);
+	}
+
+				/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertAnyTypeToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
+	}
+
+				/**
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public ssmPackage getssmPackage() {
-        return (ssmPackage)getEPackage();
-    }
+		return (ssmPackage)getEPackage();
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @deprecated
-     * @generated
-     */
+	 * @deprecated
+	 * @generated
+	 */
     @Deprecated
     public static ssmPackage getPackage() {
-        return ssmPackage.eINSTANCE;
-    }
+		return ssmPackage.eINSTANCE;
+	}
 
 } //ssmFactoryImpl

@@ -33,222 +33,222 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  */
 public class SimpleStateImpl extends AbstractStateImpl implements SimpleState {
     /**
-     * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getName()
-     * @generated
-     * @ordered
-     */
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
     protected static final String NAME_EDEFAULT = null;
 
     /**
-     * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getName()
-     * @generated
-     * @ordered
-     */
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
     protected String name = NAME_EDEFAULT;
 
     /**
-     * The default value of the '{@link #getStateFlag() <em>State Flag</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * The default value of the '{@link #getStateFlag() <em>State Flag</em>}' attribute.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getStateFlag()
-     * @generated
-     * @ordered
-     */
+	 * @see #getStateFlag()
+	 * @generated
+	 * @ordered
+	 */
     protected static final StateFlag STATE_FLAG_EDEFAULT = StateFlag.NORMAL;
 
     /**
-     * The cached value of the '{@link #getStateFlag() <em>State Flag</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getStateFlag() <em>State Flag</em>}' attribute.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getStateFlag()
-     * @generated
-     * @ordered
-     */
+	 * @see #getStateFlag()
+	 * @generated
+	 * @ordered
+	 */
     protected StateFlag stateFlag = STATE_FLAG_EDEFAULT;
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     protected SimpleStateImpl() {
-        super();
-    }
+		super();
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     protected EClass eStaticClass() {
-        return ssmPackage.Literals.SIMPLE_STATE;
-    }
+		return ssmPackage.Literals.SIMPLE_STATE;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public String getName() {
-        return name;
-    }
+		return name;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public void setName(String newName) {
-        String oldName = name;
-        name = newName;
-        if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, ssmPackage.SIMPLE_STATE__NAME, oldName, name));
-    }
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ssmPackage.SIMPLE_STATE__NAME, oldName, name));
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public StateFlag getStateFlag() {
-        return stateFlag;
-    }
+		return stateFlag;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public void setStateFlag(StateFlag newStateFlag) {
-        StateFlag oldStateFlag = stateFlag;
-        stateFlag = newStateFlag == null ? STATE_FLAG_EDEFAULT : newStateFlag;
-        if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, ssmPackage.SIMPLE_STATE__STATE_FLAG, oldStateFlag, stateFlag));
-    }
+		StateFlag oldStateFlag = stateFlag;
+		stateFlag = newStateFlag == null ? STATE_FLAG_EDEFAULT : newStateFlag;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ssmPackage.SIMPLE_STATE__STATE_FLAG, oldStateFlag, stateFlag));
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
-        switch (featureID) {
-            case ssmPackage.SIMPLE_STATE__NAME:
-                return getName();
-            case ssmPackage.SIMPLE_STATE__STATE_FLAG:
-                return getStateFlag();
-        }
-        return super.eGet(featureID, resolve, coreType);
-    }
+		switch (featureID) {
+			case ssmPackage.SIMPLE_STATE__NAME:
+				return getName();
+			case ssmPackage.SIMPLE_STATE__STATE_FLAG:
+				return getStateFlag();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     public void eSet(int featureID, Object newValue) {
-        switch (featureID) {
-            case ssmPackage.SIMPLE_STATE__NAME:
-                setName((String)newValue);
-                return;
-            case ssmPackage.SIMPLE_STATE__STATE_FLAG:
-                setStateFlag((StateFlag)newValue);
-                return;
-        }
-        super.eSet(featureID, newValue);
-    }
+		switch (featureID) {
+			case ssmPackage.SIMPLE_STATE__NAME:
+				setName((String)newValue);
+				return;
+			case ssmPackage.SIMPLE_STATE__STATE_FLAG:
+				setStateFlag((StateFlag)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     public void eUnset(int featureID) {
-        switch (featureID) {
-            case ssmPackage.SIMPLE_STATE__NAME:
-                setName(NAME_EDEFAULT);
-                return;
-            case ssmPackage.SIMPLE_STATE__STATE_FLAG:
-                setStateFlag(STATE_FLAG_EDEFAULT);
-                return;
-        }
-        super.eUnset(featureID);
-    }
+		switch (featureID) {
+			case ssmPackage.SIMPLE_STATE__NAME:
+				setName(NAME_EDEFAULT);
+				return;
+			case ssmPackage.SIMPLE_STATE__STATE_FLAG:
+				setStateFlag(STATE_FLAG_EDEFAULT);
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     public boolean eIsSet(int featureID) {
-        switch (featureID) {
-            case ssmPackage.SIMPLE_STATE__NAME:
-                return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-            case ssmPackage.SIMPLE_STATE__STATE_FLAG:
-                return stateFlag != STATE_FLAG_EDEFAULT;
-        }
-        return super.eIsSet(featureID);
-    }
+		switch (featureID) {
+			case ssmPackage.SIMPLE_STATE__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case ssmPackage.SIMPLE_STATE__STATE_FLAG:
+				return stateFlag != STATE_FLAG_EDEFAULT;
+		}
+		return super.eIsSet(featureID);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-        if (baseClass == Named.class) {
-            switch (derivedFeatureID) {
-                case ssmPackage.SIMPLE_STATE__NAME: return ssmPackage.NAMED__NAME;
-                default: return -1;
-            }
-        }
-        return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
-    }
+		if (baseClass == Named.class) {
+			switch (derivedFeatureID) {
+				case ssmPackage.SIMPLE_STATE__NAME: return ssmPackage.NAMED__NAME;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-        if (baseClass == Named.class) {
-            switch (baseFeatureID) {
-                case ssmPackage.NAMED__NAME: return ssmPackage.SIMPLE_STATE__NAME;
-                default: return -1;
-            }
-        }
-        return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
-    }
+		if (baseClass == Named.class) {
+			switch (baseFeatureID) {
+				case ssmPackage.NAMED__NAME: return ssmPackage.SIMPLE_STATE__NAME;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     public String toString() {
-        if (eIsProxy()) return super.toString();
+		if (eIsProxy()) return super.toString();
 
-        StringBuffer result = new StringBuffer(super.toString());
-        result.append(" (name: ");
-        result.append(name);
-        result.append(", stateFlag: ");
-        result.append(stateFlag);
-        result.append(')');
-        return result.toString();
-    }
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (name: ");
+		result.append(name);
+		result.append(", stateFlag: ");
+		result.append(stateFlag);
+		result.append(')');
+		return result.toString();
+	}
 
 } //SimpleStateImpl

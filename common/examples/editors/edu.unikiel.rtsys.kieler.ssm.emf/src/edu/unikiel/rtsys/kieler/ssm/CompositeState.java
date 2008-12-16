@@ -29,67 +29,67 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface CompositeState extends SimpleState {
     /**
-     * Returns the value of the '<em><b>Regions</b></em>' containment reference list.
-     * The list contents are of type {@link edu.unikiel.rtsys.kieler.ssm.Region}.
-     * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Regions</b></em>' containment reference list.
+	 * The list contents are of type {@link edu.unikiel.rtsys.kieler.ssm.Region}.
+	 * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Regions</em>' containment reference list isn't clear,
      * there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
-     * @return the value of the '<em>Regions</em>' containment reference list.
-     * @see edu.unikiel.rtsys.kieler.ssm.ssmPackage#getCompositeState_Regions()
-     * @model containment="true" required="true"
-     * @generated
-     */
+	 * @return the value of the '<em>Regions</em>' containment reference list.
+	 * @see edu.unikiel.rtsys.kieler.ssm.ssmPackage#getCompositeState_Regions()
+	 * @model containment="true" required="true"
+	 * @generated
+	 */
     EList<Region> getRegions();
 
     /**
-     * Returns the value of the '<em><b>Local Signals</b></em>' containment reference list.
-     * The list contents are of type {@link edu.unikiel.rtsys.kieler.ssm.Signal}.
-     * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Local Signals</b></em>' containment reference list.
+	 * The list contents are of type {@link edu.unikiel.rtsys.kieler.ssm.Signal}.
+	 * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Local Signals</em>' containment reference list isn't clear,
      * there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
-     * @return the value of the '<em>Local Signals</em>' containment reference list.
-     * @see edu.unikiel.rtsys.kieler.ssm.ssmPackage#getCompositeState_LocalSignals()
-     * @model containment="true" transient="true"
-     * @generated
-     */
+	 * @return the value of the '<em>Local Signals</em>' containment reference list.
+	 * @see edu.unikiel.rtsys.kieler.ssm.ssmPackage#getCompositeState_LocalSignals()
+	 * @model containment="true" transient="true"
+	 * @generated
+	 */
     EList<Signal> getLocalSignals();
 
     /**
-     * Returns the value of the '<em><b>Input Signals</b></em>' containment reference list.
-     * The list contents are of type {@link edu.unikiel.rtsys.kieler.ssm.Signal}.
-     * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Input Signals</b></em>' containment reference list.
+	 * The list contents are of type {@link edu.unikiel.rtsys.kieler.ssm.Signal}.
+	 * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Input Signals</em>' containment reference list isn't clear,
      * there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
-     * @return the value of the '<em>Input Signals</em>' containment reference list.
-     * @see edu.unikiel.rtsys.kieler.ssm.ssmPackage#getCompositeState_InputSignals()
-     * @model containment="true" transient="true"
-     * @generated
-     */
+	 * @return the value of the '<em>Input Signals</em>' containment reference list.
+	 * @see edu.unikiel.rtsys.kieler.ssm.ssmPackage#getCompositeState_InputSignals()
+	 * @model containment="true" transient="true"
+	 * @generated
+	 */
     EList<Signal> getInputSignals();
 
     /**
-     * Returns the value of the '<em><b>Output Signals</b></em>' containment reference list.
-     * The list contents are of type {@link edu.unikiel.rtsys.kieler.ssm.Signal}.
-     * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Output Signals</b></em>' containment reference list.
+	 * The list contents are of type {@link edu.unikiel.rtsys.kieler.ssm.Signal}.
+	 * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Output Signals</em>' containment reference list isn't clear,
      * there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
-     * @return the value of the '<em>Output Signals</em>' containment reference list.
-     * @see edu.unikiel.rtsys.kieler.ssm.ssmPackage#getCompositeState_OutputSignals()
-     * @model containment="true" transient="true"
-     * @generated
-     */
+	 * @return the value of the '<em>Output Signals</em>' containment reference list.
+	 * @see edu.unikiel.rtsys.kieler.ssm.ssmPackage#getCompositeState_OutputSignals()
+	 * @model containment="true" transient="true"
+	 * @generated
+	 */
     EList<Signal> getOutputSignals();
 
 } // CompositeState
