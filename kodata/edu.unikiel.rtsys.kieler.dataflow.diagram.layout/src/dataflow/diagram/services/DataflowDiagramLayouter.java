@@ -449,7 +449,7 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 				// set the port's layout
 				KPortLayout portLayout = KimlLayoutGraphFactory.eINSTANCE.createKPortLayout();
 				createRelativeLayout(portLayout, borderItem.getFigure(),
-						childNode.getLayout().getLocation());
+						nodeGroupLayout.getLocation());
 				portLayout.setPlacement(getPortPlacement(nodeGroupLayout,
 						portLayout, port.getType()));
 				port.setLayout(portLayout);
@@ -462,7 +462,12 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 						port.setLabel(portLabel);
 						// set the port label's layout
 						KPortLabelLayout labelLayout = KimlLayoutGraphFactory.eINSTANCE.createKPortLabelLayout();
-						createLayout(labelLayout, portNameEditPart.getFigure());
+						KPoint offset = KimlLayoutGraphFactory.eINSTANCE.createKPoint();
+						offset.setX(nodeGroupLayout.getLocation().getX()
+								+ portLayout.getLocation().getX());
+						offset.setY(nodeGroupLayout.getLocation().getY()
+								+ portLayout.getLocation().getY());
+						createRelativeLayout(labelLayout, portNameEditPart.getFigure(), offset);
 						portLabel.setLabelLayout(labelLayout);
 					}
 				}
@@ -475,7 +480,8 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 				childNode.setLabel(nodeGroupLabel);
 				// set the node group label's layout
 				KNodeGroupLabelLayout labelLayout = KimlLayoutGraphFactory.eINSTANCE.createKNodeGroupLabelLayout();
-				createLayout(labelLayout, ((WrappingLabel)boxNameEditPart.getFigure()).getTextFigure());
+				createRelativeLayout(labelLayout, ((WrappingLabel)boxNameEditPart.getFigure()).getTextFigure(),
+						nodeGroupLayout.getLocation());
 				nodeGroupLabel.setLabelLayout(labelLayout);
 			}
 		}
