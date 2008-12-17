@@ -108,7 +108,7 @@ public class KivikPreferencePage extends FieldEditorPreferencePage implements
 				"Animate scrolling", options);
 		Label scollingAnimationDescription = new Label(options, SWT.WRAP);
 		scollingAnimationDescription
-				.setText("If enabled, the scrolling to the corresponding changed elements is animated, mainting the mental map of the user.");
+				.setText("If enabled, the scrolling to the corresponding changed elements is animated, maintaining the mental map of the user.");
 
 		/* zooming */
 		BooleanFieldEditor zooming = new BooleanFieldEditor(
@@ -124,7 +124,7 @@ public class KivikPreferencePage extends FieldEditorPreferencePage implements
 				"Layout diagrams", options);
 		Label layoutDescription = new Label(options, SWT.WRAP);
 		layoutDescription
-				.setText("If enabled, it the two diagrams to compare are laid out newly from scratch.");
+				.setText("If enabled, the two diagrams to compare are laid out newly from scratch.");
 
 		/* collapsing */
 		BooleanFieldEditor collapsing = new BooleanFieldEditor(

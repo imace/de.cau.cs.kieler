@@ -219,13 +219,15 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 	 * @see edu.unikiel.rtsys.kieler.kivik.viewer.content.part.IModelContentMergeViewerTab#setReflectiveInput(java.lang.Object)
 	 */
 	public void setReflectiveInput(Object object) {
+		boolean collapsedElements = false;
+		Diagram diagram = null;
+		
 		// We *need* to invalidate the cache here since setInput() would try to
 		// use it otherwise
 		dataToDiff.clear();
 		dataToRecursivelyDiff.clear();
 		diffToTabObject.clear();
 
-		Diagram diagram = null;
 		if (object instanceof Diagram) {
 			diagram = (Diagram) object;
 
@@ -250,11 +252,11 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 
 		/* collapse unchanged compartments if desired */
 		if (prefCollapseUnchanged) {
-			collapseUnchanged(diagram);
+			collapsedElements = collapseUnchanged(diagram);
 		}
 
 		/* if collapsing is desired, or if re-layout is switched on, do it */
-		if (prefRelayoutDiagram || prefCollapseUnchanged) {
+		if (prefRelayoutDiagram || collapsedElements) {
 			primaryLayer.validate();
 			IEditorRegistry reg = PlatformUI.getWorkbench().getEditorRegistry();
 			String filename = diagram.eResource().getURI().toString();
@@ -307,9 +309,10 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 	 * @param diagram
 	 *            The Diagram to collapse
 	 */
-	private void collapseUnchanged(Diagram diagram) {
+	private boolean collapseUnchanged(Diagram diagram) {
 		TreeIterator<EObject> allContents = diagram.eAllContents();
-
+		boolean collapsedElements = false;
+		
 		while (allContents.hasNext()) {
 			EObject next = allContents.next();
 			if (next instanceof View) {
@@ -331,10 +334,12 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 						ShapeCompartmentFigure scf = ((ShapeCompartmentEditPart) editPart)
 								.getShapeCompartmentFigure();
 						((AnimatableScrollPane) scf.getScrollPane()).collapse();
+						collapsedElements = true;
 					}
 				}
 			}
 		}
+		return collapsedElements;
 	}
 
 	/**
