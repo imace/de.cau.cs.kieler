@@ -414,17 +414,17 @@
   </edges>
   <edges xmi:type="notation:Edge" xmi:id="_2w_q4MCQEd22ncKoP1QzEA" type="4002" source="_9W8sMMCFEd22ncKoP1QzEA" target="_FyOrsMBgEd2QF45Bw9yc9w">
     <children xmi:type="notation:Node" xmi:id="_2w_q5MCQEd22ncKoP1QzEA" type="6001">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_2w_q5cCQEd22ncKoP1QzEA" x="-1" y="-23"/>
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_2w_q5cCQEd22ncKoP1QzEA" x="-11" y="-21"/>
     </children>
     <children xmi:type="notation:Node" xmi:id="_2w_q5sCQEd22ncKoP1QzEA" type="6003">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_2w_q58CQEd22ncKoP1QzEA" x="-34" y="-20"/>
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_2w_q58CQEd22ncKoP1QzEA" x="-37" y="-18"/>
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_2w_q4cCQEd22ncKoP1QzEA"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_2w_q4sCQEd22ncKoP1QzEA"/>
     <element xmi:type="ecore:EReference" href="ssm.fast.ecore_new.ecore#//Emission/signal"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_2w_q48CQEd22ncKoP1QzEA" points="[0, 0, 9, -153]$[-9, 0, 0, -153]$[-9, 120, 0, -33]"/>
-    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_2xI00MCQEd22ncKoP1QzEA" id="(0.0,0.8032787)"/>
-    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_2xI00cCQEd22ncKoP1QzEA" id="(0.0068965517,0.3119266)"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_2w_q48CQEd22ncKoP1QzEA" points="[1, 3, -6, -110]$[7, 110, 0, -3]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_2xI00MCQEd22ncKoP1QzEA" id="(0.25688073,0.9672131)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_2xI00cCQEd22ncKoP1QzEA" id="(0.26206896,0.0)"/>
   </edges>
   <edges xmi:type="notation:Edge" xmi:id="_Uw2w4MCREd22ncKoP1QzEA" type="4002" source="_LktKYMCREd22ncKoP1QzEA" target="_FyOrsMBgEd2QF45Bw9yc9w">
     <children xmi:type="notation:Node" xmi:id="_Uw2w5MCREd22ncKoP1QzEA" type="6001">
