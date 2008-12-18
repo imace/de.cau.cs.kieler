@@ -109,7 +109,7 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_UkJn4cBgEd2QF45Bw9yc9w"/>
     <element xmi:type="ecore:EClass" href="ssm.fast.ecore_new.ecore#//Value"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_UkJn4sBgEd2QF45Bw9yc9w" x="804" y="216" width="109" height="61"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_UkJn4sBgEd2QF45Bw9yc9w" x="816" y="216" width="109" height="61"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_9W8sMMCFEd22ncKoP1QzEA" type="2001">
     <children xmi:type="notation:Node" xmi:id="_9XGdMMCFEd22ncKoP1QzEA" type="5001"/>
@@ -338,7 +338,7 @@
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_oUCTEcCFEd22ncKoP1QzEA"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_oUCTEsCFEd22ncKoP1QzEA"/>
     <element xmi:type="ecore:EReference" href="ssm.fast.ecore_new.ecore#//Signal/value"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_oUCTE8CFEd22ncKoP1QzEA" points="[2, 0, -75, 156]$[77, 0, 0, 156]$[77, -153, 0, 3]"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_oUCTE8CFEd22ncKoP1QzEA" points="[2, 0, -87, 156]$[89, 0, 0, 156]$[89, -153, 0, 3]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_oUCTGMCFEd22ncKoP1QzEA" id="(0.99310344,0.42201835)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_dM1tcMCLEd22ncKoP1QzEA" id="(0.5045872,0.9672131)"/>
   </edges>
@@ -400,10 +400,10 @@
   </edges>
   <edges xmi:type="notation:Edge" xmi:id="_zFtE4MCQEd22ncKoP1QzEA" type="4003" source="_9W8sMMCFEd22ncKoP1QzEA" target="_UkJn4MBgEd2QF45Bw9yc9w">
     <children xmi:type="notation:Node" xmi:id="_zFtE5MCQEd22ncKoP1QzEA" type="6002">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_zFtE5cCQEd22ncKoP1QzEA" x="3" y="10"/>
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_zFtE5cCQEd22ncKoP1QzEA" x="3" y="-14"/>
     </children>
     <children xmi:type="notation:Node" xmi:id="_zFtE5sCQEd22ncKoP1QzEA" type="6004">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_zFtE58CQEd22ncKoP1QzEA" x="-30" y="22"/>
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_zFtE58CQEd22ncKoP1QzEA" x="-18" y="10"/>
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_zFtE4cCQEd22ncKoP1QzEA"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_zFtE4sCQEd22ncKoP1QzEA"/>
