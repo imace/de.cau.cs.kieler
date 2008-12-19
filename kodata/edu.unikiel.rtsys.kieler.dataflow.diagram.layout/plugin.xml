@@ -59,4 +59,24 @@
             class="dataflow.diagram.preferences.LayoutPreferenceInitializer">
       </initializer>
    </extension>
+   <extension
+         point="org.eclipse.gmf.runtime.diagram.ui.editpolicyProviders">
+      <editpolicyProvider
+            class="dataflow.diagram.services.DataflowLayoutEditPolicyProvider">
+         <Priority
+               name="Lowest">
+         </Priority>
+         <object
+               class="dataflow.diagram.edit.parts.InputPortEditPart(edu.unikiel.rtsys.kieler.dataflow.diagram)"
+               id="dataflow.diagram.layout.inputPortObject">
+         </object>
+         <object
+               class="dataflow.diagram.edit.parts.OutputPortEditPart(edu.unikiel.rtsys.kieler.dataflow.diagram)"
+               id="dataflow.diagram.layout.outputPortObject">
+         </object>
+         <context
+               editparts="dataflow.diagram.layout.inputPortObject,dataflow.diagram.layout.outputPortObject">
+         </context>
+      </editpolicyProvider>
+   </extension>
 </plugin>

@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.gef.EditPart;
+import org.eclipse.gef.commands.CommandStack;
 import org.eclipse.gef.commands.CompoundCommand;
 import org.eclipse.gef.editparts.ScalableFreeformRootEditPart;
 import org.eclipse.gef.requests.ChangeBoundsRequest;
@@ -24,15 +25,19 @@ import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.PositionConstants;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.PointList;
+import org.eclipse.draw2d.geometry.PrecisionDimension;
+import org.eclipse.draw2d.geometry.PrecisionPoint;
 
 import dataflow.diagram.edit.parts.*;
 import dataflow.diagram.DataflowDiagramLayoutPlugin;
 import dataflow.diagram.Messages;
+import dataflow.diagram.part.DataflowDiagramEditor;
 import dataflow.diagram.preferences.DiagramLayoutPreferencePage;
 
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.*;
@@ -198,53 +203,72 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 	 * @see edu.unikiel.rtsys.kieler.kiml.layout.services.KimlAbstractLayouter#applyLayout()
 	 */
 	protected void applyLayout() {
-		// prepare changes to GMF diagram
-		DiagramCommandStack commandStack = new DiagramCommandStack(null);
-		CompoundCommand compoundCommand = new CompoundCommand();
-		compoundCommand.setLabel(Messages.getString("dataflow.layout.2")); //$NON-NLS-1$
 		ScalableFreeformRootEditPart rootEditPart = (ScalableFreeformRootEditPart)layoutRootPart.getRoot();
 		double zoomLevel = rootEditPart.getZoomManager().getZoom();
 		
 		// apply node layouts
+		CompoundCommand nodesCC = new CompoundCommand();
 		for (KNodeGroup nodeGroup : nodeGroup2BoxMapping.keySet()) {
 			AbstractBorderedShapeEditPart boxEditPart = nodeGroup2BoxMapping.get(nodeGroup);
+			KNodeGroupLayout nodeLayout = nodeGroup.getLayout();
 			ChangeBoundsRequest changeBoundsRequest = new ChangeBoundsRequest(RequestConstants.REQ_RESIZE);
 			changeBoundsRequest.setEditParts(boxEditPart);
 			
 			Dimension oldSize = boxEditPart.getFigure().getBounds().getSize();
-			Dimension newSize = kDimension2Dimension(nodeGroup.getLayout().getSize());
+			PrecisionDimension newSize = new PrecisionDimension(nodeLayout.getSize().getWidth(),
+					nodeLayout.getSize().getHeight());
 
-			Dimension sizeDelta = newSize.getExpanded(oldSize.negate());
+			Dimension sizeDelta = new PrecisionDimension(newSize.preciseWidth - oldSize.width,
+					newSize.preciseHeight - oldSize.height);
 			changeBoundsRequest.setResizeDirection(PositionConstants.CENTER);
 			changeBoundsRequest.setSizeDelta(sizeDelta.scale(zoomLevel));
 
 			Point oldLocation = boxEditPart.getFigure().getBounds().getLocation();
-			Point newLocation = kPoint2Point(nodeGroup.getLayout().getLocation());
+			PrecisionPoint newLocation = new PrecisionPoint(nodeLayout.getLocation().getX(),
+					nodeLayout.getLocation().getY());
 
-			Point moveDelta = newLocation.getTranslated(oldLocation.negate());
+			Point moveDelta = new PrecisionPoint(newLocation.preciseX - oldLocation.x,
+					newLocation.preciseY - oldLocation.y);
 			changeBoundsRequest.setMoveDelta(moveDelta.scale(zoomLevel));
+			changeBoundsRequest.setLocation(newLocation);
 			
-			compoundCommand.add(boxEditPart.getCommand(changeBoundsRequest));
+			nodesCC.add(boxEditPart.getCommand(changeBoundsRequest));
 		}
 		
 		// apply port layouts
+		CompoundCommand portsCC = new CompoundCommand();
 		for (KPort port : port2BorderItemMapping.keySet()) {
 			BorderedBorderItemEditPart borderItem = port2BorderItemMapping.get(port);
+			KPoint portLocation = port.getLayout().getLocation();
+			Point nodeLocation = nodeGroup2BoxMapping.get(port.getNodeGroup())
+					.getFigure().getBounds().getLocation();
 			ChangeBoundsRequest changeBoundsRequest = new ChangeBoundsRequest(RequestConstants.REQ_MOVE);
 			changeBoundsRequest.setEditParts(borderItem);
 			
 			Point oldLocation = borderItem.getFigure().getBounds().getLocation();
-			Point newLocation = kPoint2Point(port.getLayout().getLocation())
-					.translate(kPoint2Point(port.getNodeGroup().getLayout().getLocation()));
+			PrecisionPoint newLocation = new PrecisionPoint(portLocation.getX()
+					+ nodeLocation.x, portLocation.getY() + nodeLocation.y);
 
-			Point moveDelta = newLocation.getTranslated(oldLocation.negate());
+			Point moveDelta = new PrecisionPoint(newLocation.preciseX - oldLocation.x,
+					newLocation.preciseY - oldLocation.y);
 			changeBoundsRequest.setMoveDelta(moveDelta.scale(zoomLevel));
+			changeBoundsRequest.setLocation(newLocation);
 			
-			compoundCommand.add(borderItem.getCommand(changeBoundsRequest));
+			portsCC.add(borderItem.getCommand(changeBoundsRequest));
+		}
+		
+		Object adapter = getEditor().getAdapter(CommandStack.class);
+		if (adapter instanceof DiagramCommandStack) {
+			DiagramCommandStack commandStack = (DiagramCommandStack)adapter;
+			CompoundCommand compoundCommand = new CompoundCommand();
+			compoundCommand.setLabel(Messages.getString("dataflow.layout.2")); //$NON-NLS-1$
+			compoundCommand.add(nodesCC);
+			compoundCommand.add(portsCC);
+			commandStack.execute(compoundCommand);
 		}
 		
 		// apply edge layouts
-		for (KEdge edge : edge2ConnectionMapping.keySet()) {
+		/*for (KEdge edge : edge2ConnectionMapping.keySet()) {
 			ConnectionEditPart connection = edge2ConnectionMapping.get(edge);
 			KEdgeLayout edgeLayout = edge.getLayout();
 			PointList pointList = new PointList();
@@ -269,9 +293,7 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 			// create request and add it
 			SetAllBendpointRequest request = new SetAllBendpointRequest(RequestConstants.REQ_SET_ALL_BENDPOINT, pointList);
 			compoundCommand.add(connection.getCommand(request));
-		}
-		
-		commandStack.execute(compoundCommand);
+		}*/
 	}
 	
 	/**
@@ -367,32 +389,6 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 		kDimension.setHeight(figure.getBounds().height);
 		kDimension.setWidth(figure.getBounds().width);
 		shapeLayout.setSize(kDimension);
-	}
-	
-	/**
-	 * Converts a dimension from the KLayoutGraph into a Draw2D dimension.
-	 * 
-	 * @param kDimension KLayoutGraph dimension
-	 * @return Draw2D dimension
-	 */
-	private static Dimension kDimension2Dimension(KDimension kDimension) {
-		Dimension dimension = new Dimension();
-		dimension.height = (int)kDimension.getHeight();
-		dimension.width = (int)kDimension.getWidth();
-		return dimension;
-	}
-	
-	/**
-	 * Converts a point from the KLayoutGraph into a Draw2D point.
-	 * 
-	 * @param kPoint KLayoutGraph point
-	 * @return Draw2D point
-	 */
-	private static Point kPoint2Point(KPoint kPoint) {
-		Point point = new Point();
-		point.x = (int)kPoint.getX();
-		point.y = (int)kPoint.getY();
-		return point;
 	}
 	
 	/**
@@ -686,6 +682,17 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 		}
 		
 		return point;
+	}
+	
+	/**
+	 * Retrieves the currently active editor from the platform UI.
+	 * TODO find a way to dispense with PlatformUI
+	 * 
+	 * @return the active dataflow diagram editor
+	 */
+	private DataflowDiagramEditor getEditor() {
+		return (DataflowDiagramEditor)PlatformUI.getWorkbench()
+				.getActiveWorkbenchWindow().getActivePage().getActiveEditor();
 	}
 
 }

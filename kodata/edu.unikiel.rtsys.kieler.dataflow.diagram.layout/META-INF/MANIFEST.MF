@@ -6,6 +6,7 @@ Bundle-Version: 1.0.0
 Require-Bundle: org.eclipse.core.runtime;bundle-version="3.4.0",
  org.eclipse.jface;bundle-version="3.4.1",
  org.eclipse.ui;bundle-version="3.4.1",
+ org.eclipse.ui.ide;bundle-version="3.4.1",
  org.eclipse.gmf.runtime.diagram.ui;bundle-version="1.1.2",
  org.eclipse.gmf.runtime.diagram.ui.resources.editor;bundle-version="1.1.1",
  edu.unikiel.rtsys.kieler.dataflow.diagram;bundle-version="1.0.0",
@@ -13,3 +14,10 @@ Require-Bundle: org.eclipse.core.runtime;bundle-version="3.4.0",
  edu.unikiel.rtsys.kieler.kiml.ui;bundle-version="1.0.0"
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: dataflow.diagram.DataflowDiagramLayoutPlugin
+Export-Package: dataflow.diagram.services;
+  uses:="org.eclipse.gmf.runtime.diagram.ui.services.editpolicy,
+   org.eclipse.jface.viewers,
+   edu.unikiel.rtsys.kieler.kiml.layout.services,
+   edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph,
+   org.eclipse.gmf.runtime.common.core.service,
+   org.eclipse.gef"

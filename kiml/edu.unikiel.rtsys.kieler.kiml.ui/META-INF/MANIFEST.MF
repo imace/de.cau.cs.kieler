@@ -6,7 +6,10 @@ Bundle-Version: 1.0.0
 Bundle-Activator: edu.unikiel.rtsys.kieler.kiml.ui.KimlUiPlugin
 Bundle-Vendor: %Bundle-Vendor.1
 Bundle-Localization: plugin
-Export-Package: edu.unikiel.rtsys.kieler.kiml.ui,edu.unikiel.rtsys.kieler.kiml.ui.helpers,edu.unikiel.rtsys.kieler.kiml.ui.properties.tabbed.sections
+Export-Package: edu.unikiel.rtsys.kieler.kiml.ui,
+ edu.unikiel.rtsys.kieler.kiml.ui.helpers,
+ edu.unikiel.rtsys.kieler.kiml.ui.policies,
+ edu.unikiel.rtsys.kieler.kiml.ui.properties.tabbed.sections
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.gmf.runtime.common.ui.services,
