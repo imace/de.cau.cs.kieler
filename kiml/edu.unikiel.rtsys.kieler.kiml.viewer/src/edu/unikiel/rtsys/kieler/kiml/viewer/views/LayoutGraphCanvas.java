@@ -356,6 +356,12 @@ public class LayoutGraphCanvas extends Canvas implements PaintListener {
 			}
 		}
 		
+		// add insets to offset value
+		KInsets insets = nodeGroup.getLayout().getInsets();
+		KPoint subOffset = KimlLayoutGraphFactory.eINSTANCE.createKPoint();
+		subOffset.setX(offset.getX() + insets.getLeft());
+		subOffset.setY(offset.getY() + insets.getTop());
+		
 		// paint sub node groups
 		for (KNodeGroup child : nodeGroup.getSubNodeGroups()) {
 			graphics.setForeground(NODE_BORDER_COLOR);
@@ -363,7 +369,7 @@ public class LayoutGraphCanvas extends Canvas implements PaintListener {
 			graphics.setAlpha(NODE_ALPHA);
 			PaintRectangle rect = boundsMap.get(child);
 			if (rect == null) {
-				rect = new PaintRectangle(child.getLayout(), offset);
+				rect = new PaintRectangle(child.getLayout(), subOffset);
 				boundsMap.put(child, rect);
 			}
 			KPoint childOffset = KimlLayoutGraphFactory.eINSTANCE.createKPoint();
@@ -395,10 +401,10 @@ public class LayoutGraphCanvas extends Canvas implements PaintListener {
 			graphics.setAlpha(EDGE_ALPHA);
 			graphics.setFont(edgeFont);
 			for (KEdge edge : child.getIncomingEdges()) {
-				paintEdge(edge, graphics, area, offset);
+				paintEdge(edge, graphics, area, subOffset);
 			}
 			for (KEdge edge : child.getOutgoingEdges()) {
-				paintEdge(edge, graphics, area, offset);
+				paintEdge(edge, graphics, area, subOffset);
 			}
 		}
 	}

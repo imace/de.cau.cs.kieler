@@ -3,6 +3,7 @@ package edu.unikiel.rtsys.klodd.hierarchical.structures;
 import java.util.LinkedList;
 import java.util.List;
 
+import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KDimension;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KEdge;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KInsets;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPoint;
@@ -82,80 +83,125 @@ public class LayerConnection {
 	public void applyLayout(KPoint offset, KInsets insets) {
 		LayeredGraph layeredGraph = sourceElement.getLayer().getLayeredGraph();
 		
-		// don't add offset values to bend points near fixed external ports
-		int omitXOffset = -1, omitYOffset = -1;
-		if (sourcePort != null && sourcePort.getNodeGroup() == layeredGraph.getParentGroup()
-				&& layeredGraph.areExternalPortsFixed()) {
-			if (sourcePort.getLayout().getPlacement() == PORT_PLACEMENT.NORTH
-					|| sourcePort.getLayout().getPlacement() == PORT_PLACEMENT.SOUTH) {
-				omitXOffset = 0;
+		// subtract insets values from bend points near fixed external ports
+		boolean subSourceXInset = false, subSourceYInset = false,
+			subTargetXInset = false, subTargetYInset = false;
+		if (layeredGraph.areExternalPortsFixed()) {
+			if (sourcePort != null && sourcePort.getNodeGroup() == layeredGraph.getParentGroup()) {
+				if (sourcePort.getLayout().getPlacement() == PORT_PLACEMENT.NORTH
+						|| sourcePort.getLayout().getPlacement() == PORT_PLACEMENT.SOUTH) {
+					subSourceXInset = true;
+				}
+				else {
+					subSourceYInset = true;
+				}
 			}
-			else {
-				omitYOffset = 0;
-			}
-		}
-		else if (targetPort != null && targetPort.getNodeGroup() == layeredGraph.getParentGroup()
-				&& layeredGraph.areExternalPortsFixed()) {
-			if (sourcePort.getLayout().getPlacement() == PORT_PLACEMENT.NORTH
-					|| sourcePort.getLayout().getPlacement() == PORT_PLACEMENT.SOUTH) {
-				omitXOffset = bendPoints.size()-1;
-			}
-			else {
-				omitYOffset = bendPoints.size()-1;
+			if (targetPort != null && targetPort.getNodeGroup() == layeredGraph.getParentGroup()) {
+				if (targetPort.getLayout().getPlacement() == PORT_PLACEMENT.NORTH
+						|| targetPort.getLayout().getPlacement() == PORT_PLACEMENT.SOUTH) {
+					subTargetXInset = true;
+				}
+				else {
+					subTargetYInset = true;
+				}
 			}
 		}
 		
 		// set bend points
-		int i = 0;
 		for (KPoint point : bendPoints) {
-			if (i == omitXOffset)
-				point.setX(point.getX() + offset.getX());
-			else
-				point.setX(point.getX() + offset.getX() + insets.getLeft());
-			if (i == omitYOffset)
-				point.setY(point.getY() + offset.getY());
-			else
-				point.setY(point.getY() + offset.getY() + insets.getTop());
+			point.setX(point.getX() + offset.getX());
+			point.setY(point.getY() + offset.getY());
 			edge.getLayout().getGridPoints().add(point);
-			i++;
 		}
 		
-		// set start and end points
+		// calculate position of source point
+		KPoint sourcePoint = KimlLayoutGraphFactory.eINSTANCE.createKPoint();
 		if (sourcePort != null) {
-			KPoint point = KimlLayoutGraphFactory.eINSTANCE.createKPoint();
 			if (sourcePort.getNodeGroup() == layeredGraph.parentGroup) {
-				point.setX(sourceElement.getPosition().getX()
+				sourcePoint.setX(sourceElement.getPosition().getX()
 						+ sourcePort.getLayout().getSize().getWidth() / 2);
-				point.setY(sourceElement.getPosition().getY()
+				if (subSourceXInset) {
+					sourcePoint.setX(sourcePoint.getX() - insets.getLeft());
+					if (!bendPoints.isEmpty()) {
+						KPoint bendPoint = bendPoints.get(0);
+						bendPoint.setX(bendPoint.getX() - insets.getLeft());
+					}
+				}
+				sourcePoint.setY(sourceElement.getPosition().getY()
 						+ sourcePort.getLayout().getSize().getHeight() / 2);
+				if (subSourceYInset) {
+					sourcePoint.setY(sourcePoint.getY() - insets.getTop());
+					if (!bendPoints.isEmpty()) {
+						KPoint bendPoint = bendPoints.get(0);
+						bendPoint.setY(bendPoint.getY() - insets.getTop());
+					}
+				}
+				toExternalEndpoint(sourcePoint, sourcePort, insets);
 			}
 			else {
-				point.setX(sourcePort.getLayout().getLocation().getX()
+				sourcePoint.setX(sourcePort.getLayout().getLocation().getX()
 						+ sourcePort.getLayout().getSize().getWidth() / 2
 						+ sourceElement.getPosition().getX());
-				point.setY(sourcePort.getLayout().getLocation().getY()
+				sourcePoint.setY(sourcePort.getLayout().getLocation().getY()
 						+ sourcePort.getLayout().getSize().getHeight() / 2
 						+ sourceElement.getPosition().getY());
 			}
-			edge.getLayout().setSourcePoint(point);
 		}
+		else {
+			sourcePoint.setX(sourceElement.getPosition().getX());
+			sourcePoint.setY(sourceElement.getPosition().getY());
+		}
+		
+		// calculate position of target point
+		KPoint targetPoint = KimlLayoutGraphFactory.eINSTANCE.createKPoint();
 		if (targetPort != null) {
-			KPoint point = KimlLayoutGraphFactory.eINSTANCE.createKPoint();
 			if (targetPort.getNodeGroup() == layeredGraph.parentGroup) {
-				point.setX(targetElement.getPosition().getX()
+				targetPoint.setX(targetElement.getPosition().getX()
 						+ targetPort.getLayout().getSize().getWidth() / 2);
-				point.setY(targetElement.getPosition().getY()
+				if (subTargetXInset) {
+					targetPoint.setX(targetPoint.getX() - insets.getLeft());
+					if (!bendPoints.isEmpty()) {
+						KPoint bendPoint = bendPoints.get(bendPoints.size()-1);
+						bendPoint.setX(bendPoint.getX() - insets.getLeft());
+					}
+				}
+				targetPoint.setY(targetElement.getPosition().getY()
 						+ targetPort.getLayout().getSize().getHeight() / 2);
+				if (subTargetYInset) {
+					targetPoint.setY(targetPoint.getY() - insets.getTop());
+					if (!bendPoints.isEmpty()) {
+						KPoint bendPoint = bendPoints.get(bendPoints.size()-1);
+						bendPoint.setY(bendPoint.getY() - insets.getTop());
+					}
+				}
+				toExternalEndpoint(targetPoint, targetPort, insets);
 			}
 			else {
-				point.setX(targetPort.getLayout().getLocation().getX()
+				targetPoint.setX(targetPort.getLayout().getLocation().getX()
 						+ targetPort.getLayout().getSize().getWidth() / 2
 						+ targetElement.getPosition().getX());
-				point.setY(targetPort.getLayout().getLocation().getY()
+				targetPoint.setY(targetPort.getLayout().getLocation().getY()
 						+ targetPort.getLayout().getSize().getHeight() / 2
 						+ targetElement.getPosition().getY());
 			}
-			edge.getLayout().setTargetPoint(point);
+		}
+		else {
+			targetPoint.setX(targetElement.getPosition().getX());
+			targetPoint.setY(targetElement.getPosition().getY());
+		}
+		
+		if (sourcePort != null) {
+			alignEndpoint(sourcePoint, bendPoints.isEmpty()
+					? targetPoint : bendPoints.get(0),
+					sourcePort.getLayout().getSize());
+			edge.getLayout().setSourcePoint(sourcePoint);
+		}
+		
+		if (targetPort != null) {
+			alignEndpoint(targetPoint, bendPoints.isEmpty()
+					? sourcePoint : bendPoints.get(bendPoints.size()-1),
+					targetPort.getLayout().getSize());
+			edge.getLayout().setTargetPoint(targetPoint);
 		}
 	}
 
@@ -269,6 +315,49 @@ public class LayerConnection {
 			targetAnchorPos += targetSidePos * minDist;
 		}
 		return targetAnchorPos;
+	}
+	
+	/**
+	 * Sets the proper position of an endpoint that goes to an external port.
+	 * 
+	 * @param endpoint endpoint to align
+	 * @param port external port used as endpoint
+	 * @param insets insets of the parent node group
+	 */
+	private void toExternalEndpoint(KPoint endpoint, KPort port, KInsets insets) {
+		switch (port.getLayout().getPlacement()) {
+		case NORTH:
+			endpoint.setY(endpoint.getY() - insets.getTop());
+			break;
+		case EAST:
+			endpoint.setX(endpoint.getX() + insets.getRight());
+			break;
+		case SOUTH:
+			endpoint.setY(endpoint.getY() + insets.getBottom());
+			break;
+		case WEST:
+			endpoint.setX(endpoint.getX() - insets.getLeft());
+			break;
+		}
+	}
+	
+	/**
+	 * Adds or subtracts the width or height of the given endpoint size,
+	 * depending on the relative position of the next point.
+	 * 
+	 * @param endpoint endpoint to align
+	 * @param next next point on the edge
+	 * @param size size of the endpoint object
+	 */
+	private void alignEndpoint(KPoint endpoint, KPoint next, KDimension size) {
+		if (next.getX() > endpoint.getX())
+			endpoint.setX(endpoint.getX() + size.getWidth() / 2);
+		else if (next.getY() > endpoint.getY())
+			endpoint.setY(endpoint.getY() + size.getHeight() / 2);
+		else if (next.getX() < endpoint.getX())
+			endpoint.setX(endpoint.getX() - size.getWidth() / 2);
+		else if (next.getY() < endpoint.getY())
+			endpoint.setY(endpoint.getY() - size.getHeight() / 2);
 	}
 	
 }

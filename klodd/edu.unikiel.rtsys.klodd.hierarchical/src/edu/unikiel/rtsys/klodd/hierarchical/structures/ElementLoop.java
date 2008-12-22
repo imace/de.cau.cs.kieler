@@ -83,13 +83,12 @@ public class ElementLoop {
 	 * Applies the layout of this element loop to the contained edge.
 	 * 
 	 * @param offset offset to be added to each bend point
-	 * @param insets insets of the containing parent node group
 	 */
-	public void applyLayout(KPoint offset, KInsets insets) {
+	public void applyLayout(KPoint offset) {
 		// set bend points
 		for (KPoint point : bendPoints) {
-			point.setX(point.getX() + offset.getX() + insets.getLeft());
-			point.setY(point.getY() + offset.getY() + insets.getTop());
+			point.setX(point.getX() + offset.getX());
+			point.setY(point.getY() + offset.getY());
 			edge.getLayout().getGridPoints().add(point);
 		}
 		

@@ -54,8 +54,14 @@ import edu.unikiel.rtsys.kieler.kiml.ui.policies.LayoutEditPolicy;
  */
 public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 
-	/** Inset value to be used for each node */
-	private static final float BORDER_INSET = 10.0f;
+	/** inset value to be used for the top side of each node */
+	private static final float INSET_TOP = 25.0f;
+	/** inset value to be used for the bottom side of each node */
+	private static final float INSET_BOTTOM = 5.0f;
+	/** inset value to be used for the left side of each node */
+	private static final float INSET_LEFT = 5.0f;
+	/** inset value to be used for the right side of each node */
+	private static final float INSET_RIGHT = 5.0f;
 	
 	/**
 	 * Definition of possible edge types in a dataflow diagram with operators.
@@ -174,10 +180,6 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 			KNodeGroupLayout topGroupLayout = KimlLayoutGraphFactory.eINSTANCE.createKNodeGroupLayout();
 			createLayout(topGroupLayout, modelPart.getFigure());
 			KInsets insets = KimlLayoutGraphFactory.eINSTANCE.createKInsets();
-			insets.setLeft(BORDER_INSET);
-			insets.setRight(BORDER_INSET);
-			insets.setTop(BORDER_INSET);
-			insets.setBottom(BORDER_INSET);
 			topGroupLayout.setInsets(insets);
 			topGroupLayout.setLayouterName(KimlGMFLayoutHintHelper.getContainedElementsLayouterName(modelPart));
 			topGroupLayout.setLayoutType(KimlGMFLayoutHintHelper.getContainedElementsLayoutType(modelPart));
@@ -446,10 +448,10 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 		KNodeGroupLayout nodeGroupLayout = KimlLayoutGraphFactory.eINSTANCE.createKNodeGroupLayout();
 		createLayout(nodeGroupLayout, boxEditPart.getFigure());
 		KInsets insets = KimlLayoutGraphFactory.eINSTANCE.createKInsets();
-		insets.setLeft(BORDER_INSET);
-		insets.setRight(BORDER_INSET);
-		insets.setTop(2*BORDER_INSET);
-		insets.setBottom(BORDER_INSET);
+		insets.setLeft(INSET_LEFT);
+		insets.setRight(INSET_RIGHT);
+		insets.setTop(INSET_TOP);
+		insets.setBottom(INSET_BOTTOM);
 		nodeGroupLayout.setInsets(insets);
 		nodeGroupLayout.setLayouterName(KimlGMFLayoutHintHelper.getContainedElementsLayouterName(boxEditPart));
 		nodeGroupLayout.setLayoutType(KimlGMFLayoutHintHelper.getContainedElementsLayoutType(boxEditPart));
@@ -676,7 +678,7 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 	 * @return offset
 	 */
 	private Point getConnectionOffset(KEdge edge) {
-		Point point = new Point(0, 0);
+		PrecisionPoint point = new PrecisionPoint(0, 0);
 		KNodeGroup parent = edge.getSource();
 		if (parent == null)
 			parent = edge.getTarget().getParentGroup();
@@ -684,9 +686,11 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 			parent = parent.getParentGroup();
 		
 		while (parent.getParentGroup() != null) {
-			point.x += (int)parent.getLayout().getLocation().getX();
-			point.y += (int)parent.getLayout().getLocation().getY();
+			point.preciseX += parent.getLayout().getLocation().getX();
+			point.preciseY += parent.getLayout().getLocation().getY();
 			parent = parent.getParentGroup();
+			point.preciseX += parent.getLayout().getInsets().getLeft();
+			point.preciseY += parent.getLayout().getInsets().getTop();
 		}
 		
 		return point;

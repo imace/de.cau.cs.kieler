@@ -253,7 +253,7 @@ public class LayeredGraph {
 					connection.applyLayout(position, insets);
 				}
 				for (ElementLoop loop : element.getLoops()) {
-					loop.applyLayout(position, insets);
+					loop.applyLayout(position);
 				}
 			}
 		}

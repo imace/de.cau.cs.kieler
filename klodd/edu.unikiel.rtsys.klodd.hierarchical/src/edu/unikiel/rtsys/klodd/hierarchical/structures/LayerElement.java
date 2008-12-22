@@ -206,53 +206,46 @@ public class LayerElement {
 	 * @param insets insets of the containing parent node group
 	 */
 	public void applyLayout(KPoint offset, KInsets insets) {
+		position.setX(position.getX() + offset.getX());
+		position.setY(position.getY() + offset.getY());
 		if (elemObj instanceof KNodeGroup) {
-			KNodeGroup node = (KNodeGroup)elemObj;
-			position.setX(position.getX() + offset.getX() + insets.getLeft());
-			position.setY(position.getY() + offset.getY() + insets.getTop());
-			node.getLayout().getLocation().setX(position.getX());
-			node.getLayout().getLocation().setY(position.getY());
+			KPoint nodeLoc = ((KNodeGroup)elemObj).getLayout().getLocation();
+			nodeLoc.setX(position.getX());
+			nodeLoc.setY(position.getY());
 		}
 		else if (elemObj instanceof KPort) {
 			KPort port = (KPort)elemObj;
+			KPoint portLoc = port.getLayout().getLocation();
 			switch (port.getLayout().getPlacement()) {
 			case NORTH:
-				position.setY(position.getY() + offset.getY());
 				if (layer.getLayeredGraph().areExternalPortsFixed())
-					position.setX(position.getX() + offset.getX());
+					portLoc.setX(position.getX());
 				else
-					position.setX(position.getX() + offset.getX()
-							+ insets.getLeft());
+					portLoc.setX(position.getX() + insets.getLeft());
+				portLoc.setY(position.getY());
 				break;
 			case EAST:
-				position.setX(position.getX() + offset.getX()
-						+ insets.getLeft() + insets.getRight());
+				portLoc.setX(position.getX() + insets.getLeft() + insets.getRight());
 				if (layer.getLayeredGraph().areExternalPortsFixed())
-					position.setY(position.getY() + offset.getY());
+					portLoc.setY(position.getY());
 				else
-					position.setY(position.getY() + offset.getY()
-							+ insets.getTop());
+					portLoc.setY(position.getY() + insets.getTop());
 				break;
 			case SOUTH:
 				if (layer.getLayeredGraph().areExternalPortsFixed())
-					position.setX(position.getX() + offset.getX());
+					portLoc.setX(position.getX());
 				else
-					position.setX(position.getX() + offset.getX()
-							+ insets.getLeft());
-				position.setY(position.getY() + offset.getY()
-						+ insets.getTop() + insets.getBottom());
+					portLoc.setX(position.getX() + insets.getLeft());
+				portLoc.setY(position.getY() + insets.getTop() + insets.getBottom());
 				break;
 			case WEST:
-				position.setX(position.getX() + offset.getX());
+				portLoc.setX(position.getX());
 				if (layer.getLayeredGraph().areExternalPortsFixed())
-					position.setY(position.getY() + offset.getY());
+					portLoc.setY(position.getY());
 				else
-					position.setY(position.getY() + offset.getY()
-							+ insets.getTop());
+					portLoc.setY(position.getY() + insets.getTop());
 				break;
 			}
-			port.getLayout().getLocation().setX(position.getX());
-			port.getLayout().getLocation().setY(position.getY());
 		}
 	}
 
