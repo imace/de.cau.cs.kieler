@@ -43,6 +43,7 @@ import dataflow.diagram.preferences.DiagramLayoutPreferencePage;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.*;
 import edu.unikiel.rtsys.kieler.kiml.layout.services.KimlAbstractLayouter;
 import edu.unikiel.rtsys.kieler.kiml.ui.helpers.KimlGMFLayoutHintHelper;
+import edu.unikiel.rtsys.kieler.kiml.ui.policies.LayoutEditPolicy;
 
 /**
  * This layouter for dataflow diagrams performs the needed transformation
@@ -202,6 +203,7 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 	 * (non-Javadoc)
 	 * @see edu.unikiel.rtsys.kieler.kiml.layout.services.KimlAbstractLayouter#applyLayout()
 	 */
+	@SuppressWarnings("unchecked")
 	protected void applyLayout() {
 		ScalableFreeformRootEditPart rootEditPart = (ScalableFreeformRootEditPart)layoutRootPart.getRoot();
 		double zoomLevel = rootEditPart.getZoomManager().getZoom();
@@ -254,26 +256,19 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 			changeBoundsRequest.setMoveDelta(moveDelta.scale(zoomLevel));
 			changeBoundsRequest.setLocation(newLocation);
 			
+			// set the automatic layout option in the extended data
+			changeBoundsRequest.getExtendedData().put(LayoutEditPolicy.AUTO_LAYOUT_KEY, Boolean.TRUE);
 			portsCC.add(borderItem.getCommand(changeBoundsRequest));
 		}
-		
-		Object adapter = getEditor().getAdapter(CommandStack.class);
-		if (adapter instanceof DiagramCommandStack) {
-			DiagramCommandStack commandStack = (DiagramCommandStack)adapter;
-			CompoundCommand compoundCommand = new CompoundCommand();
-			compoundCommand.setLabel(Messages.getString("dataflow.layout.2")); //$NON-NLS-1$
-			compoundCommand.add(nodesCC);
-			compoundCommand.add(portsCC);
-			commandStack.execute(compoundCommand);
-		}
-		
+
 		// apply edge layouts
-		/*for (KEdge edge : edge2ConnectionMapping.keySet()) {
+		final CompoundCommand edgesCC = new CompoundCommand();
+		for (KEdge edge : edge2ConnectionMapping.keySet()) {
 			ConnectionEditPart connection = edge2ConnectionMapping.get(edge);
 			KEdgeLayout edgeLayout = edge.getLayout();
 			PointList pointList = new PointList();
 			Point offset = getConnectionOffset(edge);
-
+			
 			// set start point
 			Point startPoint = kPoint2Point(edgeLayout.getSourcePoint())
 					.translate(offset);
@@ -291,9 +286,22 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 			pointList.addPoint(endPoint);
 
 			// create request and add it
-			SetAllBendpointRequest request = new SetAllBendpointRequest(RequestConstants.REQ_SET_ALL_BENDPOINT, pointList);
-			compoundCommand.add(connection.getCommand(request));
-		}*/
+			SetAllBendpointRequest request = new SetAllBendpointRequest(
+					RequestConstants.REQ_SET_ALL_BENDPOINT,	pointList,
+					startPoint, endPoint);
+			edgesCC.add(connection.getCommand(request));
+		}
+		
+		Object adapter = getEditor().getAdapter(CommandStack.class);
+		if (adapter instanceof DiagramCommandStack) {
+			final DiagramCommandStack commandStack = (DiagramCommandStack)adapter;
+			CompoundCommand compoundCommand = new CompoundCommand();
+			compoundCommand.setLabel(Messages.getString("dataflow.layout.2")); //$NON-NLS-1$
+			compoundCommand.add(nodesCC);
+			compoundCommand.add(portsCC);
+			compoundCommand.add(edgesCC);
+			commandStack.execute(compoundCommand);
+		}
 	}
 	
 	/**
@@ -682,6 +690,16 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 		}
 		
 		return point;
+	}
+
+	/**
+	 * Converts a KIML Layout Graph point to a Draw2D point.
+	 * 
+	 * @param kpoint layout graph point
+	 * @return Draw2D point
+	 */
+	private Point kPoint2Point(KPoint kpoint) {
+		return new Point(kpoint.getX(), kpoint.getY());
 	}
 	
 	/**
