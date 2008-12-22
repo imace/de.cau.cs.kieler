@@ -24,6 +24,9 @@ import org.eclipse.gmf.runtime.notation.View;
  */
 public class LayoutEditPolicy extends GraphicalEditPolicy {
 
+	/** key used for the automatic layout option of the extended data map */
+	public static final String AUTO_LAYOUT_KEY = "auto_layout";
+	
 	/**
 	 * Checks whether the given request is supported by this policy.
 	 */
@@ -33,13 +36,17 @@ public class LayoutEditPolicy extends GraphicalEditPolicy {
 	
 	/**
 	 * Creates a command for a given request, or null if the request
-	 * is not supported.
+	 * is not supported. Only requests with the automatic layout option
+	 * set in the extended data map are supported.
 	 */
 	public Command getCommand(Request request) {
-		if (RequestConstants.REQ_MOVE.equals(request.getType()))
-			return getMoveCommand((ChangeBoundsRequest)request);
-		else
-			return null;
+		if (request.getExtendedData().containsKey(AUTO_LAYOUT_KEY)) {
+			if (RequestConstants.REQ_MOVE.equals(request.getType()))
+				return getMoveCommand((ChangeBoundsRequest)request);
+			else
+				return null;
+		}
+		else return null;
 	}
 
 	/**
