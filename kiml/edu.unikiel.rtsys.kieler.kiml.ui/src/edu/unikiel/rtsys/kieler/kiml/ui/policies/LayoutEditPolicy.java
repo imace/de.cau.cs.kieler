@@ -31,7 +31,8 @@ public class LayoutEditPolicy extends GraphicalEditPolicy {
 	 * Checks whether the given request is supported by this policy.
 	 */
 	public boolean understandsRequest(Request req) {
-		return RequestConstants.REQ_MOVE.equals(req.getType());
+		return req.getExtendedData().containsKey(AUTO_LAYOUT_KEY)
+				&& RequestConstants.REQ_MOVE.equals(req.getType());
 	}
 	
 	/**
