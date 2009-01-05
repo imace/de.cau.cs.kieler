@@ -20,6 +20,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.ui.IWorkbench;
 
 import edu.unikiel.rtsys.kieler.kiml.layout.services.KimlAbstractLayoutProvider;
 import edu.unikiel.rtsys.kieler.kiml.layout.services.LayoutProviders;
@@ -141,4 +142,10 @@ public abstract class AbstractKimlLayoutProviderPreferencePage extends
 		}
 		return retVal;
 	}
+	
+	/* (non-Javadoc)
+	 * @see org.eclipse.ui.IWorkbenchPreferencePage#init(org.eclipse.ui.IWorkbench)
+	 */
+	public void init(IWorkbench workbench) {}
+	
 }

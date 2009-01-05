@@ -6,7 +6,9 @@ import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_OPTION;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_TYPE;
 import edu.unikiel.rtsys.kieler.kiml.layout.services.KimlAbstractLayoutProvider;
+import edu.unikiel.rtsys.klodd.core.KloddCorePlugin;
 import edu.unikiel.rtsys.klodd.core.algorithms.*;
+import edu.unikiel.rtsys.klodd.core.preferences.KloddLayoutPreferences;
 import edu.unikiel.rtsys.klodd.core.util.LayoutGraphs;
 import edu.unikiel.rtsys.klodd.hierarchical.impl.*;
 import edu.unikiel.rtsys.klodd.hierarchical.modules.*;
@@ -22,11 +24,9 @@ public class HierarchicalDataflowLayoutProvider extends
 	
 	/** displayed name of this layout provider */
 	public static final String LAYOUTER_NAME = "KLoDD Hierarchical";
-	/** name of the KLoDD layouters collection */
-	public static final String COLLECTION_NAME = "KLoDD Layouters";
 	
 	/** the minimal distance between two nodes or edges */
-	private static final float MIN_DIST = 15.0f;
+	private float minDist;
 	
 	/** the cycle remover module */
 	private ICycleRemover cycleRemover = null;
@@ -60,9 +60,9 @@ public class HierarchicalDataflowLayoutProvider extends
 			crossingReducer.reduceCrossings(layeredGraph);
 			layeredGraph.calcConnectionRouting();
 			// determine a crosswise placement for each node
-			nodePlacer.placeNodes(layeredGraph, MIN_DIST);
+			nodePlacer.placeNodes(layeredGraph, minDist);
 			// route edges between nodes
-			edgeRouter.routeEdges(layeredGraph, MIN_DIST);
+			edgeRouter.routeEdges(layeredGraph, minDist);
 		}
 		layeredGraph.applyLayout();
 		cycleRemover.restoreGraph();
@@ -82,7 +82,7 @@ public class HierarchicalDataflowLayoutProvider extends
 		info.setLayouterName(LAYOUTER_NAME);
 		info.setLayoutType(LAYOUT_TYPE.HIERARCHICAL);
 		info.setLayoutOption(LAYOUT_OPTION.DEFAULT);
-		info.setLayouterCollectionID(COLLECTION_NAME);
+		info.setLayouterCollectionID(KloddCorePlugin.COLLECTION_NAME);
 		return info;
 	}
 	
@@ -90,11 +90,15 @@ public class HierarchicalDataflowLayoutProvider extends
 	 * Sets the internally used algorithm modules to the current configuration.
 	 */
 	private void updateModules() {
+		KloddLayoutPreferences pref = KloddCorePlugin.getLayoutPreferences();
+		
 		cycleRemover = new DFSCycleRemover();
 		layerAssigner = new LongestPathLayerAssigner();
 		crossingReducer = new LayerSweepCrossingReducer(new BarycenterCrossingReducer());
 		nodePlacer = new BalancingNodePlacer(new BasicNodePlacer());
 		edgeRouter = new RectilinearEdgeRouter();
+		
+		minDist = ((Float)pref.get(KloddLayoutPreferences.MIN_DIST)).floatValue();
 	}
 	
 	/**
