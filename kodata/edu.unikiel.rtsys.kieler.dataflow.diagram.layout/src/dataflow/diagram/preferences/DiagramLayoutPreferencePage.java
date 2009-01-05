@@ -57,7 +57,8 @@ public class DiagramLayoutPreferencePage extends FieldEditorPreferencePage
 		FieldEditor layoutDirectionEditor = new RadioGroupFieldEditor(LAYOUT_DIRECTION,
 				Messages.getString("dataflow.layout.10"), 1, new String[][] { //$NON-NLS-1$
 					{ Messages.getString("dataflow.layout.11"), "horizontal" }, //$NON-NLS-1$ //$NON-NLS-2$
-					{ Messages.getString("dataflow.layout.13"), "vertical" } //$NON-NLS-1$ //$NON-NLS-2$
+					{ Messages.getString("dataflow.layout.13"), "vertical" }, //$NON-NLS-1$ //$NON-NLS-2$
+					{ Messages.getString("dataflow.layout.14"), "hv" } //$NON-NLS-1$ //$NON-NLS-2$
 				}, composite, true);
 		
 		addField(fixedInnerPortsEditor);

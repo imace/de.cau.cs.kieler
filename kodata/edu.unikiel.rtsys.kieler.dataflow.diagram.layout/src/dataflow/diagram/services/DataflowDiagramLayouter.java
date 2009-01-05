@@ -97,8 +97,8 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 	private boolean fixedNodeSizePref;
 	/** preference: strict port side: left for input ports, right for output ports */
 	private boolean strictPortSide;
-	/** preference: layout direction: horizontal or vertical */
-	private LAYOUT_OPTION layoutDirection;
+	/** preference: alternating layout direction */
+	private boolean alternateHV;
 	
 	/*
 	 * (non-Javadoc)
@@ -125,8 +125,7 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 		fixedInnerPortsPref = preferenceStore.getBoolean(DiagramLayoutPreferencePage.FIXED_INNER_PORTS);
 		fixedNodeSizePref = preferenceStore.getBoolean(DiagramLayoutPreferencePage.FIXED_NODE_SIZE);
 		strictPortSide = preferenceStore.getBoolean(DiagramLayoutPreferencePage.STRICT_PORT_SIDE);
-		layoutDirection = preferenceStore.getString(DiagramLayoutPreferencePage.LAYOUT_DIRECTION).equals("vertical") //$NON-NLS-1$
-				? LAYOUT_OPTION.VERTICAL : LAYOUT_OPTION.HORIZONTAL;
+		alternateHV = preferenceStore.getString(DiagramLayoutPreferencePage.LAYOUT_DIRECTION).equals("hv"); 
 		
 		// find the dataflow model edit part depending on the type of input
 		if (target instanceof DiagramRootEditPart) {
@@ -169,6 +168,10 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 	 * @see edu.unikiel.rtsys.kieler.kiml.layout.services.KimlAbstractLayouter#buildLayoutGraph()
 	 */
 	protected KLayoutGraph buildLayoutGraph() {
+		IPreferenceStore preferenceStore = DataflowDiagramLayoutPlugin
+				.getDefault().getPreferenceStore();
+		LAYOUT_OPTION layoutDirection = preferenceStore.getString(DiagramLayoutPreferencePage.LAYOUT_DIRECTION).equals("vertical") //$NON-NLS-1$
+				? LAYOUT_OPTION.VERTICAL : LAYOUT_OPTION.HORIZONTAL;
 		layoutGraph = KimlLayoutGraphFactory.eINSTANCE.createKLayoutGraph();
 		if (layoutRootPart instanceof DataflowModelEditPart) {
 			DataflowModelEditPart modelPart = (DataflowModelEditPart)layoutRootPart;
@@ -189,12 +192,14 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 			topGroupLabel.setText(modelPart.getDiagramView().getName());
 			topNode.setLabel(topGroupLabel);
 			// build the whole graph structure
-			buildLayoutGraphRecursively(modelPart.getChildren(), topNode);
+			if (alternateHV)
+				layoutDirection = LAYOUT_OPTION.VERTICAL;
+			buildLayoutGraphRecursively(modelPart.getChildren(), topNode, layoutDirection);
 		}
 		else if (layoutRootPart instanceof AbstractBorderedShapeEditPart) {
 			AbstractBorderedShapeEditPart boxEditPart = (AbstractBorderedShapeEditPart)layoutRootPart;
 			// build just the selected node
-			layoutGraph.setTopGroup(buildNode(boxEditPart));
+			layoutGraph.setTopGroup(buildNode(boxEditPart, layoutDirection));
 			buildNodeEdges(boxEditPart, false);
 		}
 		
@@ -406,16 +411,18 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 	 * 
 	 * @param children list of child elements of a node
 	 * @param parentGroup parent node group
+	 * @param layoutDirection layout direction
 	 */
 	@SuppressWarnings("unchecked")
-	private void buildLayoutGraphRecursively(List children, KNodeGroup parentGroup) {
+	private void buildLayoutGraphRecursively(List children, KNodeGroup parentGroup,
+			LAYOUT_OPTION layoutDirection) {
 		if (children != null)
 		{
 			// build node groups
 			for (Object child : children) {
 				if (child instanceof AbstractBorderedShapeEditPart) {
 					AbstractBorderedShapeEditPart boxEditPart = (AbstractBorderedShapeEditPart)child;
-					KNodeGroup childNode = buildNode(boxEditPart);
+					KNodeGroup childNode = buildNode(boxEditPart, layoutDirection);
 					// set the parent group; this automatically adds the node
 					// to the parent's list of children
 					childNode.setParentGroup(parentGroup);
@@ -436,10 +443,12 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 	 * Builds the layout graph for a given node edit part.
 	 * 
 	 * @param boxEditPart edit part for which the layout graph shall be built
+	 * @param layoutDirection layout direction
 	 * @return the created node group
 	 */
 	@SuppressWarnings("unchecked")
-	private KNodeGroup buildNode(AbstractBorderedShapeEditPart boxEditPart) {
+	private KNodeGroup buildNode(AbstractBorderedShapeEditPart boxEditPart,
+			LAYOUT_OPTION layoutDirection) {
 		// add the new child node
 		KNodeGroup childNode = KimlLayoutGraphFactory.eINSTANCE.createKNodeGroup();
 		nodeGroup2BoxMapping.put(childNode, boxEditPart);
@@ -457,6 +466,13 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 		nodeGroupLayout.setLayoutType(KimlGMFLayoutHintHelper.getContainedElementsLayoutType(boxEditPart));
 		nodeGroupLayout.getLayoutOptions().add(layoutDirection);
 		childNode.setLayout(nodeGroupLayout);
+		// switch layout direction if needed
+		if (alternateHV) {
+			if (layoutDirection == LAYOUT_OPTION.VERTICAL)
+				layoutDirection = LAYOUT_OPTION.HORIZONTAL;
+			else
+				layoutDirection = LAYOUT_OPTION.VERTICAL;
+		}
 		// set the input and output ports and node label
 		List subChildren = null;
 		for (Object nodeElement : boxEditPart.getChildren()) {
@@ -476,7 +492,7 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 				createRelativeLayout(portLayout, borderItem.getFigure(),
 						nodeGroupLayout.getLocation());
 				portLayout.setPlacement(getPortPlacement(nodeGroupLayout,
-						portLayout, port.getType()));
+						portLayout, port.getType(), layoutDirection));
 				port.setLayout(portLayout);
 				// set the port label
 				for (Object portChild : borderItem.getChildren()) {
@@ -524,7 +540,7 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 		}
 		
 		// process next hierarchy level
-		buildLayoutGraphRecursively(subChildren, childNode);
+		buildLayoutGraphRecursively(subChildren, childNode, layoutDirection);
 		
 		return childNode;
 	}
@@ -629,10 +645,12 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 	 * @param nodeLayout layout object of the corresponding node
 	 * @param portLayout layout object of the corresponding port
 	 * @param portType port type
+	 * @param layoutDirection layout direction
 	 * @return port placement
 	 */
 	private PORT_PLACEMENT getPortPlacement(KNodeGroupLayout nodeLayout,
-			KPortLayout portLayout, PORT_TYPE portType) {
+			KPortLayout portLayout, PORT_TYPE portType,
+			LAYOUT_OPTION layoutDirection) {
 		if (!strictPortSide) {
 			// determine port placement from port position
 			float nodeWidth = nodeLayout.getSize().getWidth();
