@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Lpsolve for Linux Fragment
+Bundle-SymbolicName: net.sourceforge.lpsolve.lib.linux
+Bundle-Version: 5.5.0
+Fragment-Host: net.sourceforge.lpsolve;bundle-version="1.0.0"
+Eclipse-PlatformFilter: (& (osgi.ws=gtk) (osgi.os=linux) (osgi.arch=x86))
+Bundle-NativeCode: /lib/liblpsolve55j.so; /lib/liblpsolve55.so; osname=linux; processor=x86
