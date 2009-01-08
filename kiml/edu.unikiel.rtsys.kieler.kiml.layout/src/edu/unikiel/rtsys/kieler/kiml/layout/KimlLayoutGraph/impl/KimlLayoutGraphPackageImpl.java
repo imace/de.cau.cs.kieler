@@ -1256,7 +1256,7 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 
 		initEEnum(layouT_TYPEEEnum, edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_TYPE.class, "LAYOUT_TYPE");
 		addEEnumLiteral(layouT_TYPEEEnum, edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_TYPE.DEFAULT);
-		addEEnumLiteral(layouT_TYPEEEnum, edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_TYPE.PATTERN_RECOGNITION);
+		addEEnumLiteral(layouT_TYPEEEnum, edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_TYPE.ORTHOGONAL);
 		addEEnumLiteral(layouT_TYPEEEnum, edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_TYPE.HIERARCHICAL);
 		addEEnumLiteral(layouT_TYPEEEnum, edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_TYPE.CIRCLE);
 		addEEnumLiteral(layouT_TYPEEEnum, edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_TYPE.RADIAL);

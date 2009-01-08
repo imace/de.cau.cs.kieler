@@ -106,7 +106,7 @@ public abstract class KimlAbstractLayouter {
 			// and apply layout to model
 			applyLayout();
 		}
-		catch (Exception exception) {
+		catch (Throwable exception) {
 			Status status = new Status(IStatus.ERROR, KimlLayoutPlugin.PLUGIN_ID,
 					"Failed to perform diagram layout.", exception);
 			StatusManager.getManager().handle(status, StatusManager.SHOW);

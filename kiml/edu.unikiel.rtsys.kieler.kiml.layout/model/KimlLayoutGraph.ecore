@@ -113,7 +113,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="LAYOUT_TYPE">
     <eLiterals name="DEFAULT" literal="Default"/>
-    <eLiterals name="PATTERN_RECOGNITION" value="1" literal="Pattern recognition"/>
+    <eLiterals name="ORTHOGONAL" value="1" literal="Orthogonal"/>
     <eLiterals name="HIERARCHICAL" value="2" literal="Hierarchical"/>
     <eLiterals name="CIRCLE" value="3" literal="Circle"/>
     <eLiterals name="RADIAL" value="4" literal="Radial"/>

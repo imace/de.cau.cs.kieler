@@ -33,16 +33,14 @@ public enum LAYOUT_TYPE implements Enumerator {
 	DEFAULT(0, "DEFAULT", "Default"),
 
 	/**
-	 * The '<em><b>PATTERN RECOGNITION</b></em>' literal object.
+	 * The '<em><b>ORTHOGONAL</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #PATTERN_RECOGNITION_VALUE
+	 * @see #ORTHOGONAL_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	PATTERN_RECOGNITION(1, "PATTERN_RECOGNITION", "Pattern recognition"),
-
-	/**
+	ORTHOGONAL(1, "ORTHOGONAL", "Orthogonal"), /**
 	 * The '<em><b>HIERARCHICAL</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -108,19 +106,19 @@ public enum LAYOUT_TYPE implements Enumerator {
 	public static final int DEFAULT_VALUE = 0;
 
 	/**
-	 * The '<em><b>PATTERN RECOGNITION</b></em>' literal value.
+	 * The '<em><b>ORTHOGONAL</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>PATTERN RECOGNITION</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>ORTHOGONAL</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #PATTERN_RECOGNITION
-	 * @model literal="Pattern recognition"
+	 * @see #ORTHOGONAL
+	 * @model literal="Orthogonal"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int PATTERN_RECOGNITION_VALUE = 1;
+	public static final int ORTHOGONAL_VALUE = 1;
 
 	/**
 	 * The '<em><b>HIERARCHICAL</b></em>' literal value.
@@ -206,7 +204,7 @@ public enum LAYOUT_TYPE implements Enumerator {
 	private static final LAYOUT_TYPE[] VALUES_ARRAY =
 		new LAYOUT_TYPE[] {
 			DEFAULT,
-			PATTERN_RECOGNITION,
+			ORTHOGONAL,
 			HIERARCHICAL,
 			CIRCLE,
 			RADIAL,
@@ -263,7 +261,7 @@ public enum LAYOUT_TYPE implements Enumerator {
 	public static LAYOUT_TYPE get(int value) {
 		switch (value) {
 			case DEFAULT_VALUE: return DEFAULT;
-			case PATTERN_RECOGNITION_VALUE: return PATTERN_RECOGNITION;
+			case ORTHOGONAL_VALUE: return ORTHOGONAL;
 			case HIERARCHICAL_VALUE: return HIERARCHICAL;
 			case CIRCLE_VALUE: return CIRCLE;
 			case RADIAL_VALUE: return RADIAL;
