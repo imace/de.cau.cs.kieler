@@ -4,7 +4,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KEdge;
-import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KInsets;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPoint;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPort;
 import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphFactory;

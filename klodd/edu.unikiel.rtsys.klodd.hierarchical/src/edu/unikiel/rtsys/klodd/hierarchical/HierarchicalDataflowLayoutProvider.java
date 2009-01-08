@@ -15,7 +15,7 @@ import edu.unikiel.rtsys.klodd.hierarchical.modules.*;
 import edu.unikiel.rtsys.klodd.hierarchical.structures.LayeredGraph;
 
 /**
- * Layout provider for the KIELER hierarchical dataflow diagram layouter.
+ * Layout provider for the KLoDD hierarchical dataflow diagram layouter.
  * 
  * @author msp
  */
