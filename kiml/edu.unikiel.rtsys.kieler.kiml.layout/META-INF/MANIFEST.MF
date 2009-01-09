@@ -6,7 +6,6 @@ Bundle-Version: 1.0.0
 Bundle-Activator: edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutPlugin
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
- org.eclipse.core.resources,
  org.eclipse.emf.ecore;bundle-version="2.4.0"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
