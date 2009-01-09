@@ -18,7 +18,6 @@ public class MousePositionListener implements Listener {
 	}
 	
 	/** handles SWT.MouseMove events */
-	@Override
 	public void handleEvent(Event event) {
 		// get the current mouse position at the whole display
 		Point position = Display.getCurrent().getCursorLocation();

@@ -36,7 +36,6 @@ public class MainPreferencePage extends FieldEditorPreferencePage implements IWo
 //		this.addField(new IntegerFieldEditor(PORT_EDITOR, "Port Number", getFieldEditorParent()));
 	}
 
-	@Override
 	public void init(IWorkbench workbench) {
 		// set the preference store
 		IPreferenceStore preferenceStore = KimlUiPlugin.getDefault().getPreferenceStore();

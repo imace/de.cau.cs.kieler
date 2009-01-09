@@ -19,7 +19,6 @@ public class HelpersStartup implements IStartup {
 	/**
 	 * Called by Eclipse at startup. Used to init this helpers plugin.
 	 */
-	@Override
 	public void earlyStartup() {
 		final IWorkbench workbench = PlatformUI.getWorkbench();
 		workbench.getDisplay().asyncExec(new Runnable() {

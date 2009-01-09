@@ -18,7 +18,6 @@ import edu.unikiel.rtsys.kieler.kiml.ui.KimlUiPlugin;
  */
 public class ArbitraryTestHandler extends AbstractHandler implements IHandler {
 
-	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		// test to display an Error dialog with a message and an exception
 		NumberFormatException exc = new NumberFormatException("My little Exception message");

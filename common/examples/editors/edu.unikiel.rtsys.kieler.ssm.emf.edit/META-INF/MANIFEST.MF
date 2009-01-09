@@ -7,7 +7,7 @@ Bundle-ClassPath: .
 Bundle-Activator: edu.unikiel.rtsys.kieler.ssm.provider.SafeStateMachineEditPlugin$Implementation
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: edu.unikiel.rtsys.kieler.ssm.provider
 Require-Bundle: org.eclipse.core.runtime,
  edu.unikiel.rtsys.kieler.ssm.emf;visibility:=reexport,

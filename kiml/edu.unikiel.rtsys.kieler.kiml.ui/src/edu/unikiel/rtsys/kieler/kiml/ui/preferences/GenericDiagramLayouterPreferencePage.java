@@ -81,7 +81,6 @@ public class GenericDiagramLayouterPreferencePage extends
 		addField(bottom);
 	}
 
-	@Override
 	public void init(IWorkbench arg0) {
 	}
 

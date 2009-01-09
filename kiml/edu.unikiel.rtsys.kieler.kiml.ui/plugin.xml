@@ -476,7 +476,7 @@ point="org.eclipse.ui.menus">
        point="org.eclipse.core.runtime.products">
     <product
           application="org.eclipse.ui.ide.workbench"
-          name="%productName">
+          name="KIELER - Kiel Integrated Environment for Layout for the Eclipse RCP">
        <property
              name="windowImages"
              value="eclipse.gif,eclipse32.gif,eclipse48.gif,eclipse.png,eclipse32.png">
@@ -500,6 +500,14 @@ point="org.eclipse.ui.menus">
        <property
              name="startupMessageRect"
              value="7,220,441,20">
+       </property>
+       <property
+             name="appName"
+             value="KIELER - Kiel Integrated Environment for Layout for the Eclipse RCP">
+       </property>
+       <property
+             name="preferenceCustomization"
+             value="plugin_customization.ini">
        </property>
     </product>
  </extension>

@@ -11,19 +11,16 @@ import org.eclipse.ui.PlatformUI;
 public class MousePositionListenerAdderAction implements
 		IWorkbenchWindowActionDelegate {
 
-	@Override
 	public void dispose() {
 		// TODO Auto-generated method stub
 
 	}
 
-	@Override
 	public void init(IWorkbenchWindow window) {
 		// TODO Auto-generated method stub
 
 	}
 
-	@Override
 	public void run(IAction action) {
 		// TODO Auto-generated method stub
 		final IWorkbench workbench = PlatformUI.getWorkbench();
@@ -34,7 +31,6 @@ public class MousePositionListenerAdderAction implements
 			 });
 	}
 
-	@Override
 	public void selectionChanged(IAction action, ISelection selection) {
 		// TODO Auto-generated method stub
 

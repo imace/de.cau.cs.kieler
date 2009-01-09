@@ -7,7 +7,7 @@ Bundle-Activator: edu.unikiel.rtsys.kieler.core.CorePlugin
 Bundle-Vendor: Christian-Albrechts-Universität zu Kiel
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Export-Package: edu.unikiel.rtsys.kieler.core.preferences,
  edu.unikiel.rtsys.kieler.core.services,

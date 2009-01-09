@@ -22,7 +22,6 @@ import edu.unikiel.rtsys.kieler.kiml.ui.views.KimlLayoutHintView;
  */
 public class KimlPerspectiveFactory implements IPerspectiveFactory {
 
-	@Override
 	public void createInitialLayout(IPageLayout layout) {
 		// Get editor area
 		String editorArea = layout.getEditorArea();

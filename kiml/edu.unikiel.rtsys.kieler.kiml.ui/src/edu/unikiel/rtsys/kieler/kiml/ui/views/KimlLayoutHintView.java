@@ -553,7 +553,6 @@ public class KimlLayoutHintView extends ViewPart implements ISelectionListener,
 		return null;
 	}
 
-	@Override
 	public String getContributorId() {
 		return getSite().getId();
 	}
