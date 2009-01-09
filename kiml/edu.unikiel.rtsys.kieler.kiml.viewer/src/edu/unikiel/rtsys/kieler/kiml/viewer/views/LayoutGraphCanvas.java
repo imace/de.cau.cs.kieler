@@ -297,8 +297,9 @@ public class LayoutGraphCanvas extends Canvas implements PaintListener {
 	 * Paints the contained layout graph onto the given graphics object.
 	 * 
 	 * @param graphics the graphics context used to paint
+	 * @param size of the paintable area
 	 */
-	public void paintLayoutGraph(GC graphics) {
+	public void paintLayoutGraph(GC graphics, Point size) {
 		if (layoutGraph != null) {
 			// reset paint information
 			for (PaintRectangle rectangle : boundsMap.values()) {
@@ -308,7 +309,7 @@ public class LayoutGraphCanvas extends Canvas implements PaintListener {
 			// paint the top node group with its children
 			KPoint offset = KimlLayoutGraphFactory.eINSTANCE.createKPoint();
 			PaintRectangle area = new PaintRectangle(0, 0,
-					getSize().x, getSize().y, offset);
+					size.x, size.y, offset);
 			paintNodeGroup(layoutGraph.getTopGroup(), graphics, area, offset);
 		}
 	}

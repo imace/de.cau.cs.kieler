@@ -56,25 +56,35 @@ public class ImageExportAction extends Action {
 	 * @see org.eclipse.jface.action.Action#run()
 	 */
 	public void run() {
-		LayoutGraphCanvas canvas = view.getActiveCanvas();
+		final LayoutGraphCanvas canvas = view.getActiveCanvas();
 		if (canvas != null) {
-			// create an image and paint the layout graph
-			Point size = canvas.getSize();
-			Image image = new Image(canvas.getDisplay(), size.x, size.y);
-			canvas.paintLayoutGraph(new GC(image));
-			final ImageLoader imageLoader = new ImageLoader();
-			ImageData[] imageData = new ImageData[] { image.getImageData() };
-			imageLoader.data = imageData;
-			
-			// save the image into the selected file
+			// let the user select an output file
 			final String fileName = getFileName(canvas.getDisplay());
+			
 			if (fileName != null) {
+				final Point size = canvas.getSize();
+				final Image image = new Image(canvas.getDisplay(), size.x, size.y);
+				
+				// create a job for painting and exporting the image
 				Job saveJob = new Job(Messages.getString("kiml.viewer.6")) {
 					protected IStatus run(IProgressMonitor monitor) {
 						try {
-							monitor.beginTask(Messages.getString("kiml.viewer.6"),
-									IProgressMonitor.UNKNOWN);
+							monitor.beginTask(Messages.getString("kiml.viewer.6"), 100);
+							
+							// paint the layout graph
+							canvas.paintLayoutGraph(new GC(image), size);
+							monitor.worked(50);
+							if (monitor.isCanceled())
+								return new Status(IStatus.INFO, Activator.PLUGIN_ID,
+										0, "Aborted", null);
+							
+							// save the image into the selected file
+							ImageLoader imageLoader = new ImageLoader();
+							ImageData[] imageData = new ImageData[] { image.getImageData() };
+							imageLoader.data = imageData;
 							imageLoader.save(fileName, SWT.IMAGE_PNG);
+							monitor.worked(50);
+							
 							return new Status(IStatus.INFO, Activator.PLUGIN_ID,
 									0, "OK", null);
 						} catch (SWTException exception) {
@@ -86,8 +96,10 @@ public class ImageExportAction extends Action {
 						}
 					}
 				};
+				
+				// process the image export job
 				IProgressMonitor monitor = Job.getJobManager().createProgressGroup();
-				saveJob.setProgressGroup(monitor, IProgressMonitor.UNKNOWN);
+				saveJob.setProgressGroup(monitor, 100);
 				saveJob.setPriority(Job.SHORT);
 				saveJob.setUser(true);
 				saveJob.schedule();
