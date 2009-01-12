@@ -227,20 +227,6 @@ public class LayeredGraph {
 	}
 	
 	/**
-	 * Calculates connection routing for all layer elements. This should be
-	 * done after port positions have been determined in the crossing
-	 * reduction step.
-	 */
-	public void calcConnectionRouting() {
-		// calculate the connection routing for each layer element
-		for (Layer layer : layers) {
-			for (LayerElement element : layer.getElements()) {
-				element.calcEdgeRouting();
-			}
-		}
-	}
-	
-	/**
 	 * Applies the layout of this layered graph to the contained layout graph.
 	 */
 	public void applyLayout() {

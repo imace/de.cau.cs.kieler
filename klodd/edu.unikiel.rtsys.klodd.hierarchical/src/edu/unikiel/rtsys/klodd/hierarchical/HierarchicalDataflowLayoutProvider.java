@@ -34,6 +34,8 @@ public class HierarchicalDataflowLayoutProvider extends
 	private ILayerAssigner layerAssigner = null;
 	/** the crossing reducer module */
 	private ICrossingReducer crossingReducer = null;
+	/** the nodewise edge placer module */
+	private INodewiseEdgePlacer nodewiseEdgePlacer = null;
 	/** the node placer module */
 	private INodePlacer nodePlacer = null;
 	/** the edge router module */
@@ -58,7 +60,8 @@ public class HierarchicalDataflowLayoutProvider extends
 			layeredGraph.createConnections();
 			// optimize the order of nodes in each layer
 			crossingReducer.reduceCrossings(layeredGraph);
-			layeredGraph.calcConnectionRouting();
+			// determine a placement for all edge endpoints
+			nodewiseEdgePlacer.placeEdges(layeredGraph);
 			// determine a crosswise placement for each node
 			nodePlacer.placeNodes(layeredGraph, minDist);
 			// route edges between nodes
@@ -95,8 +98,9 @@ public class HierarchicalDataflowLayoutProvider extends
 		cycleRemover = new DFSCycleRemover();
 		layerAssigner = new LongestPathLayerAssigner();
 		crossingReducer = new LayerSweepCrossingReducer(new BarycenterCrossingReducer());
+		nodewiseEdgePlacer = new SortingNodewiseEdgePlacer();
 		nodePlacer = new BalancingNodePlacer(new BasicNodePlacer());
-		edgeRouter = new RectilinearEdgeRouter();
+		edgeRouter = new RectilinearEdgeRouter(new SortingLayerwiseEdgePlacer());
 		
 		minDist = ((Float)pref.get(KloddLayoutPreferences.MIN_DIST)).floatValue();
 	}

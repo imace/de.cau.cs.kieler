@@ -1,9 +1,6 @@
 package edu.unikiel.rtsys.klodd.hierarchical.impl;
 
-import java.util.Arrays;
-import java.util.Comparator;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
@@ -13,6 +10,7 @@ import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.*;
 import edu.unikiel.rtsys.klodd.core.algorithms.AbstractAlgorithm;
 import edu.unikiel.rtsys.klodd.core.util.LayoutGraphs;
 import edu.unikiel.rtsys.klodd.hierarchical.modules.IEdgeRouter;
+import edu.unikiel.rtsys.klodd.hierarchical.modules.ILayerwiseEdgePlacer;
 import edu.unikiel.rtsys.klodd.hierarchical.structures.*;
 
 /**
@@ -30,21 +28,9 @@ public class RectilinearEdgeRouter extends AbstractAlgorithm implements
 	private enum ExternalRouting {
 		NORMAL, FIRST, LAST, AROUND
 	}
-	
-	/**
-	 * This inner type is used to define the starting and ending position
-	 * of a lengthwise routing slot. 
-	 */
-	private class RoutingSlot {
-		int rank;
-		float start, end;
-		boolean outgoingAtStart = false, outgoingAtEnd = false;
-	}
-	
-	/** minimal distance of two edges to make them feasible in the same
-	 *  routing layer */
-	private static final float EDGE_DIST = 2.0f;
 
+	/** layerwise edge placer used to route layer connections */
+	private ILayerwiseEdgePlacer layerwiseEdgePlacer;
 	/** minimal distance between elements of the layered graph */
 	private float minDist;
 	/** lengthwise position of the currently processed layer */
@@ -53,6 +39,15 @@ public class RectilinearEdgeRouter extends AbstractAlgorithm implements
 	private float maxCrosswisePos;
 	/** maximal lengthwise layout position to be added to the total size */
 	private float maxLengthwiseAddPos;
+	
+	/**
+	 * Creates a rectilinear edge router using a layerwise edge placer.
+	 * 
+	 * @param layerwiseEdgePlacer layerwise edge placer used to route layer connections
+	 */
+	public RectilinearEdgeRouter(ILayerwiseEdgePlacer layerwiseEdgePlacer) {
+		this.layerwiseEdgePlacer = layerwiseEdgePlacer;
+	}
 
 	/* (non-Javadoc)
 	 * @see edu.unikiel.rtsys.klodd.hierarchical.modules.IEdgeRouter#routeEdges(edu.unikiel.rtsys.klodd.hierarchical.structures.LayeredGraph, float)
@@ -109,77 +104,40 @@ public class RectilinearEdgeRouter extends AbstractAlgorithm implements
 	 */
 	private void processOutgoing(Layer layer) {
 		LAYOUT_OPTION layoutDirection = layer.getLayeredGraph().getLayoutDirection();
-		// determine number of outgoing connections for each port
-		Map<Object, Integer> outgoing = new HashMap<Object, Integer>();
-		for (LayerElement element : layer.getElements()) {
-			// count outgoing connections
-			for (LayerConnection connection : element.getOutgoingConnections()) {
-				Object key = connection.getSourcePort();
-				if (key == null)
-					key = element;
-				Integer value = outgoing.get(key);
-				if (value == null) {
-					outgoing.put(key, Integer.valueOf(1));
-				}
-				else {
-					outgoing.put(key, Integer.valueOf(value.intValue() + 1));
-				}
-			}
-		}
-		
-		// create routing slots for each port
-		Map<Object, RoutingSlot> slotMap = new LinkedHashMap<Object, RoutingSlot>();
+
+		// determine external routing options
 		Map<LayerConnection, ExternalRouting> routingMap = new HashMap<LayerConnection, ExternalRouting>();
 		int firstExtEdges = 0, lastExtEdges = 0, aroundExtEdges = 0;
 		for (LayerElement element : layer.getElements()) {
 			for (LayerConnection connection : element.getOutgoingConnections()) {
-				// choose source or target port for routing
-				Object key = connection.getSourcePort();
-				if (key == null)
-					key = element;
-				Integer sourceValue = outgoing.get(key);
-				if (sourceValue == null || sourceValue.intValue() <= 1) {
-					key = connection.getTargetPort();
-					if (key == null)
-						key = connection.getTargetElement();
-				}
-				
 				// determine source and target positions
-				float sourcePos = connection.calcSourcePos(minDist);
-				float targetPos = connection.calcTargetPos(minDist);
 				ExternalRouting externalRouting = ExternalRouting.NORMAL;
 				if (layer.rank == 0) {
 					PORT_PLACEMENT placement = connection.getSourcePort().getLayout().getPlacement();
 					if (layoutDirection == LAYOUT_OPTION.VERTICAL) {
 						if (placement == PORT_PLACEMENT.WEST) {
-							sourcePos = 0.0f;
 							externalRouting = ExternalRouting.FIRST;
 							firstExtEdges++;
 						}
 						else if (placement == PORT_PLACEMENT.EAST) {
-							sourcePos = layer.crosswiseDim;
 							externalRouting = ExternalRouting.LAST;
 							lastExtEdges++;
 						}
 						else if (placement == PORT_PLACEMENT.SOUTH) {
-							sourcePos = layer.crosswiseDim;
 							externalRouting = ExternalRouting.AROUND;
 							aroundExtEdges++;
 						}
 					}
 					else {
 						if (placement == PORT_PLACEMENT.NORTH) {
-							sourcePos = 0.0f;
 							externalRouting = ExternalRouting.FIRST;
 							firstExtEdges++;
 						}
 						else if (placement == PORT_PLACEMENT.SOUTH) {
-							sourcePos = layer.crosswiseDim;
 							externalRouting = ExternalRouting.LAST;
 							lastExtEdges++;
 						}
 						else if (placement == PORT_PLACEMENT.EAST) {
-							sourcePos = layer.crosswiseDim;
 							externalRouting = ExternalRouting.AROUND;
 							aroundExtEdges++;
 						}
@@ -189,143 +147,41 @@ public class RectilinearEdgeRouter extends AbstractAlgorithm implements
 					PORT_PLACEMENT placement = connection.getTargetPort().getLayout().getPlacement();
 					if (layoutDirection == LAYOUT_OPTION.VERTICAL) {
 						if (placement == PORT_PLACEMENT.WEST) {
-							targetPos = 0.0f;
 							externalRouting = ExternalRouting.FIRST;
 							firstExtEdges++;
 						}
 						else if (placement == PORT_PLACEMENT.EAST) {
-							targetPos = layer.crosswiseDim;
 							externalRouting = ExternalRouting.LAST;
 							lastExtEdges++;
 						}
 						else if (placement == PORT_PLACEMENT.NORTH) {
-							targetPos = layer.crosswiseDim;
 							externalRouting = ExternalRouting.AROUND;
 							aroundExtEdges++;
 						}
 					}
 					else {
 						if (placement == PORT_PLACEMENT.NORTH) {
-							targetPos = 0.0f;
 							externalRouting = ExternalRouting.FIRST;
 							firstExtEdges++;
 						}
 						else if (placement == PORT_PLACEMENT.SOUTH) {
-							targetPos = layer.crosswiseDim;
 							externalRouting = ExternalRouting.LAST;
 							lastExtEdges++;
 						}
 						else if (placement == PORT_PLACEMENT.WEST) {
-							targetPos = layer.crosswiseDim;
 							externalRouting = ExternalRouting.AROUND;
 							aroundExtEdges++;
 						}
 					}
 				}
-				float startPos = Math.min(sourcePos, targetPos) - EDGE_DIST;
-				float endPos  = Math.max(sourcePos, targetPos) + EDGE_DIST;
-				
-				// get routing slot and insert connection area
 				routingMap.put(connection, externalRouting);
-				RoutingSlot slot = slotMap.get(key);
-				if (slot == null) {
-					slot = new RoutingSlot();
-					if (targetPos <= sourcePos)
-						slot.outgoingAtStart = true;
-					if (targetPos >= sourcePos)
-						slot.outgoingAtEnd = true;
-					slot.start = startPos;
-					slot.end = endPos;
-					slotMap.put(key, slot);
-				}
-				else {
-					if (startPos < slot.start) {
-						if (targetPos <= sourcePos)
-							slot.outgoingAtStart = true;
-						else
-							slot.outgoingAtStart = false;
-					}
-					if (endPos > slot.end) {
-						if (targetPos >= sourcePos)
-							slot.outgoingAtEnd = true;
-						else
-							slot.outgoingAtEnd = false;
-					}
-					slot.start = Math.min(slot.start, startPos);
-					slot.end = Math.max(slot.end, endPos);
-				}
 			}
 		}
 		
-		// sort all routing slots
-		List<List<RoutingSlot>> routingLayers = new LinkedList<List<RoutingSlot>>();
-		RoutingSlot[] sortedSlots = slotMap.values().toArray(new RoutingSlot[0]);
-		Arrays.sort(sortedSlots, new Comparator<RoutingSlot>() {
-			public int compare(RoutingSlot slot1, RoutingSlot slot2) {
-				if (slot1.outgoingAtStart && !slot2.outgoingAtStart
-						&& slot1.start == slot2.start)
-					return 1;
-				else if (slot2.outgoingAtStart && !slot1.outgoingAtStart
-						&& slot1.start == slot2.start)
-					return -1;
-				else if (slot1.outgoingAtEnd && !slot2.outgoingAtEnd
-						&& slot1.end == slot2.end)
-					return 1;
-				else if (slot2.outgoingAtEnd && !slot1.outgoingAtEnd
-						&& slot1.end == slot2.end)
-					return -1;
-				else if (slot1.outgoingAtStart && slot1.start > slot2.start)
-					return 1;
-				else if (slot2.outgoingAtStart && slot2.start > slot1.start)
-					return -1;
-				else if (slot1.outgoingAtEnd && slot1.end < slot2.end)
-					return 1;
-				else if (slot2.outgoingAtEnd && slot2.end < slot1.end)
-					return -1;
-				else if (!slot1.outgoingAtStart && slot1.start > slot2.start)
-					return -1;
-				else if (!slot2.outgoingAtStart && slot2.start > slot1.start)
-					return 1;
-				else if (!slot1.outgoingAtEnd && slot1.end < slot2.end)
-					return -1;
-				else if (!slot2.outgoingAtEnd && slot2.end < slot1.end)
-					return 1;
-				else
-					return 0;
-			}
-		});
-		// assign ranks to each routing slot
-		int slotRanks = 0;
-		for (RoutingSlot slot : sortedSlots) {
-			int rank = routingLayers.size();
-			ListIterator<List<RoutingSlot>> routingLayerIter = routingLayers.listIterator(routingLayers.size());
-			List<RoutingSlot> lastLayer = null;
-			while (routingLayerIter.hasPrevious()) {
-				List<RoutingSlot> routingLayer = routingLayerIter.previous();
-				boolean feasible = true;
-				for (RoutingSlot layerSlot : routingLayer) {
-					if (slot.start < layerSlot.end && slot.end > layerSlot.start) {
-						feasible = false;
-						break;
-					}
-				}
-				if (!feasible)
-					break;
-				lastLayer = routingLayer;
-				rank--;
-			}
-			if (lastLayer != null) {
-				slot.rank = rank;
-				lastLayer.add(slot);
-			}
-			else {
-				slot.rank = routingLayers.size();
-				List<RoutingSlot> routingLayer = new LinkedList<RoutingSlot>();
-				routingLayer.add(slot);
-				routingLayers.add(routingLayer);
-				slotRanks++;
-			}
-		}
+		// determine placement for all layer connections
+		layerwiseEdgePlacer.reset();
+		int slotRanks = layerwiseEdgePlacer.placeEdges(layer, minDist);
+		Map<Object, RoutingSlot> slotMap = layerwiseEdgePlacer.getSlotMap();
 		
 		// layout all movable elements of the next layer
 		KPoint layeredGraphPos = layer.getLayeredGraph().getPosition();
