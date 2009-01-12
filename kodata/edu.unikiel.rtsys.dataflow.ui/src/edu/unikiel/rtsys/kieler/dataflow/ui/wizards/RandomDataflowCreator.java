@@ -16,8 +16,8 @@ public class RandomDataflowCreator {
 	 */
 	float hierarchyProb = 0.1f;
 
-	DataflowModel createModel(int nodes, int connections) {
-		int counter = 0;
+	DataflowModel createModel(int nodes, int connections, float hierarchyProb) {
+		this.hierarchyProb = hierarchyProb;
 		DataflowModel dm = df.createDataflowModel();
 
 		createBoxes(dm, nodes, connections);

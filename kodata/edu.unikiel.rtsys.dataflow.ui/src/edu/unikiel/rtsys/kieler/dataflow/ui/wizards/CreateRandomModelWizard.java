@@ -136,7 +136,7 @@ public class CreateRandomModelWizard extends Wizard implements INewWizard {
 		ResourceSet resourceSet = new ResourceSetImpl();
 		Resource emfResource = resourceSet.createResource(URI.createURI(file.getLocationURI().toString()));
 		RandomDataflowCreator modelCreator = new RandomDataflowCreator();
-		DataflowModel df = modelCreator.createModel(page.getNodes(), page.getConnections());
+		DataflowModel df = modelCreator.createModel(page.getNodes(), page.getConnections(), page.getHierarchyProb());
 		emfResource.getContents().add(df);
 		try{
 			emfResource.save(Collections.EMPTY_MAP);

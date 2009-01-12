@@ -33,14 +33,19 @@ public class CreateRandomModelWizardPage extends WizardPage {
 	
 	private Text nodeText;
 	private Text connectionText;
+	private Text hierarchyText;
 
 	private int nodeDefault = 10;
 	private int connectionDefault = 2;
+	private float hierarchyDefault = 0.1f;
 	
 	private int nodes = nodeDefault;
 	private int connections = connectionDefault;
+	private float hierarchyProb = hierarchyDefault;
 	
 	private ISelection selection;
+
+	
 
 	/**
 	 * Constructor for SampleNewWizardPage.
@@ -119,6 +124,21 @@ public class CreateRandomModelWizardPage extends WizardPage {
 		gd = new GridData(GridData.FILL_HORIZONTAL);
 		connectionText.setLayoutData(gd);
 		connectionText.addModifyListener(new ModifyListener() {
+			public void modifyText(ModifyEvent e) {
+				dialogChanged();
+			}
+		});
+		
+		// Specify probability of hierarchy level introduction
+		label = new Label(container, SWT.NULL); // empty label to fill grid
+		label = new Label(container, SWT.NULL);
+		label.setText("&Probability of introducing new hierarchy levels:");
+
+		hierarchyText = new Text(container, SWT.BORDER | SWT.SINGLE);
+		hierarchyText.setText(""+hierarchyDefault);
+		gd = new GridData(GridData.FILL_HORIZONTAL);
+		hierarchyText.setLayoutData(gd);
+		hierarchyText.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent e) {
 				dialogChanged();
 			}
@@ -209,12 +229,29 @@ public class CreateRandomModelWizardPage extends WizardPage {
 		}
 		try{
 			nodes = Integer.parseInt(nodeText.getText());
-		    connections = Integer.parseInt(connectionText.getText());getNodes();
 		}
 		catch( NumberFormatException exc ){
-			updateStatus("Amount of Nodes and Connections must be an integer number!");
+			updateStatus("Amount of Nodes must be an integer number!");
 			return;
 		}
+		try{
+		    connections = Integer.parseInt(connectionText.getText());
+		}
+		catch( NumberFormatException exc ){
+			updateStatus("Amount of Connections must be an integer number!");
+			return;
+		}
+		try{
+		    float temp = Float.parseFloat(hierarchyText.getText());
+			if(temp >= 0 && temp <= 1)
+				hierarchyProb = temp;
+			else throw new NumberFormatException("must be within 0 and 1");
+		}
+		catch( NumberFormatException exc ){
+			updateStatus("Hierarchy Probability must be a float number in the range from 0.0 to 1.0");
+			return;
+		}
+		
 		updateStatus(null);
 	}
 
@@ -236,5 +273,9 @@ public class CreateRandomModelWizardPage extends WizardPage {
 	}
 	public int getConnections(){
 		return connections;
+	}
+
+	public float getHierarchyProb() {
+		return hierarchyProb;
 	}
 }
