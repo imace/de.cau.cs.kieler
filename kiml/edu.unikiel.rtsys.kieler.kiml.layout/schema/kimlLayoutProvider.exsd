@@ -6,7 +6,7 @@
          <meta.schema plugin="edu.unikiel.rtsys.kieler.kiml.layout" id="kimlLayoutProvider" name="KIML Layout Provider"/>
       </appinfo>
       <documentation>
-         Extension point for layout algorithms to be used with KIML.
+         The KIML Layout Provider extension point allows plug-ins to add new layout providers (algorithms) to be used within the KIML framework.
       </documentation>
    </annotation>
 
@@ -48,11 +48,16 @@
    </element>
 
    <element name="kimlLayoutProvider">
+      <annotation>
+         <documentation>
+            Element describing the plug-in&apos;s class implementing the layout provider.
+         </documentation>
+      </annotation>
       <complexType>
          <attribute name="class" type="string" use="required">
             <annotation>
                <documentation>
-                  Implementing class of the layout provider
+                  Implementing class of the layout provider, must extend &lt;samp&gt;edu.unikiel.rtsys.kieler.kiml.layout.servicesKimlAbstractLayoutProvider&lt;/samp&gt;
                </documentation>
                <appinfo>
                   <meta.attribute kind="java" basedOn="edu.unikiel.rtsys.kieler.kiml.layout.services.KimlAbstractLayoutProvider:"/>
@@ -67,7 +72,7 @@
          <meta.section type="since"/>
       </appinfo>
       <documentation>
-         [Enter the first release in which this extension point appears.]
+         1.0.0
       </documentation>
    </annotation>
 
@@ -76,7 +81,26 @@
          <meta.section type="examples"/>
       </appinfo>
       <documentation>
-         [Enter extension point usage example here.]
+         The following is an example for the KIML Layout Provider extension point:
+&lt;p&gt;
+   &lt;pre&gt;
+   &lt;extension
+         point=&quot;edu.unikiel.rtsys.kieler.kiml.layout.kimlLayoutProvider&quot;&gt;
+      &lt;kimlLayoutProvider
+            class=&quot;kiel.layouter.graphviz.CircoLayoutProvider&quot;&gt;
+      &lt;/kimlLayoutProvider&gt;
+      &lt;kimlLayoutProvider
+            class=&quot;kiel.layouter.graphviz.DotLayoutProvider&quot;&gt;
+      &lt;/kimlLayoutProvider&gt;
+      &lt;kimlLayoutProvider
+            class=&quot;kiel.layouter.graphviz.NeatoLayoutProvider&quot;&gt;
+      &lt;/kimlLayoutProvider&gt;
+      &lt;kimlLayoutProvider
+            class=&quot;kiel.layouter.graphviz.TwopiLayoutProvider&quot;&gt;
+      &lt;/kimlLayoutProvider&gt;
+   &lt;/extension&gt;
+   &lt;/pre&gt;
+&lt;/p&gt;
       </documentation>
    </annotation>
 
@@ -85,18 +109,20 @@
          <meta.section type="apiinfo"/>
       </appinfo>
       <documentation>
-         [Enter API information here.]
+         The value of the attribute class must represent a fully qualified name of the class that implements
+&lt;samp&gt;edu.unikiel.rtsys.kieler.kiml.layout.servicesKimlAbstractLayoutProvider&lt;/samp&gt;.
       </documentation>
    </annotation>
+
 
    <annotation>
       <appinfo>
-         <meta.section type="implementation"/>
+         <meta.section type="copyright"/>
       </appinfo>
       <documentation>
-         [Enter information about supplied implementation of this extension point.]
+         Copyright (c) 2008, 2009 Real-Time and Embedded Systems group
+Author: Arne Schipper, ars@informatik.uni-kiel.de
       </documentation>
    </annotation>
-
 
 </schema>

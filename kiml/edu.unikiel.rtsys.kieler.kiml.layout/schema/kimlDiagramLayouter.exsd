@@ -52,7 +52,7 @@
          <attribute name="class" type="string">
             <annotation>
                <documentation>
-                  Implementing class of the diagram layouter
+                  Implementing class of the diagram layouter, must extend &lt;samp&gt;edu.unikiel.rtsys.kieler.kiml.layout.services.KimlAbstractLayouter&lt;/samp&gt;.
                </documentation>
                <appinfo>
                   <meta.attribute kind="java" basedOn="edu.unikiel.rtsys.kieler.kiml.layout.services.KimlAbstractLayouter:"/>
@@ -62,7 +62,7 @@
          <attribute name="editor_id" type="string">
             <annotation>
                <documentation>
-                  ID of the diagram editor for which this diagram layouter shall be used
+                  ID of the diagram editor for which this diagram layouter shall be used.
                </documentation>
             </annotation>
          </attribute>
@@ -74,7 +74,7 @@
          <meta.section type="since"/>
       </appinfo>
       <documentation>
-         [Enter the first release in which this extension point appears.]
+         1.0.0
       </documentation>
    </annotation>
 
@@ -83,7 +83,18 @@
          <meta.section type="examples"/>
       </appinfo>
       <documentation>
-         [Enter extension point usage example here.]
+         The following is an example for the KIML Layout Provider extension point:
+&lt;p&gt;
+   &lt;pre&gt;
+     &lt;extension
+         point=&quot;edu.unikiel.rtsys.kieler.kiml.layout.kimlDiagramLayouter&quot;&gt;
+      &lt;kimlDiagramLayouter
+            class=&quot;edu.unikiel.rtsys.kieler.ssm.gmf.diagram.layouter.KimlSSMDiagramLayouter&quot;
+            editor_id=&quot;edu.unikiel.rtsys.kieler.ssm.diagram.part.SafeStateMachineDiagramEditorID&quot;&gt;
+      &lt;/kimlDiagramLayouter&gt;
+     &lt;/extension&gt;
+   &lt;/pre&gt;
+&lt;/p&gt;
       </documentation>
    </annotation>
 
@@ -92,7 +103,8 @@
          <meta.section type="apiinfo"/>
       </appinfo>
       <documentation>
-         [Enter API information here.]
+         The value of the attribute class must represent a fully qualified name of the class that implements
+&lt;samp&gt;edu.unikiel.rtsys.kieler.kiml.layout.servicesKimlAbstractLayoutProvider&lt;/samp&gt;.
       </documentation>
    </annotation>
 
@@ -105,5 +117,14 @@
       </documentation>
    </annotation>
 
+   <annotation>
+      <appinfo>
+         <meta.section type="copyright"/>
+      </appinfo>
+      <documentation>
+         Copyright (c) 2008, 2009 Real-Time and Embedded Systems group
+Author: Arne Schipper, ars@informatik.uni-kiel.de
+      </documentation>
+   </annotation>
 
 </schema>
