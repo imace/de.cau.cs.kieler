@@ -16,6 +16,9 @@ public class TSMGraph {
 	/** list of nodes in this TSM graph */
 	public List<TSMNode> nodes = new LinkedList<TSMNode>();
 
+	/** next available creation number */
+	int nextNodeNr = 0;
+	
 	/** parent node group from which this TSM graph was created */
 	private KNodeGroup parentGroup;
 	

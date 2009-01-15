@@ -9,12 +9,16 @@ import java.util.List;
  * 
  * @author msp
  */
-public class TSMNode {
+public class TSMNode implements Comparable<TSMNode> {
 
 	/** list of incident edges */
 	public List<TSMEdge> edges = new LinkedList<TSMEdge>();
 	/** object contained in this node, or null if there is none */
 	public Object object;
+	/** creation number of this node, determined at creation time */
+	public int nr;
+	/** rank of this node, used by various algorithms */
+	public int rank = 0;
 	
 	/**
 	 * Creates a node containing the given object.
@@ -25,6 +29,7 @@ public class TSMNode {
 	public TSMNode(TSMGraph graph, Object obj) {
 		graph.nodes.add(this);
 		this.object = obj;
+		this.nr = graph.nextNodeNr++;
 	}
 	
 	/**
@@ -35,6 +40,16 @@ public class TSMNode {
 	public TSMNode(TSMGraph graph) {
 		graph.nodes.add(this);
 		this.object = null;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Comparable#compareTo(java.lang.Object)
+	 */
+	public int compareTo(TSMNode other) {
+		return this.nr > other.nr ? 1
+				: (this.nr < other.nr ? -1
+				: 0);
 	}
 	
 }
