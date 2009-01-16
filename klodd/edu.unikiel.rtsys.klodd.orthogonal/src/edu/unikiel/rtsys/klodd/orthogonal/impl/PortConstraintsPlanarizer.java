@@ -12,6 +12,7 @@ import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_OPTION;
 import edu.unikiel.rtsys.klodd.core.algorithms.AbstractAlgorithm;
 import edu.unikiel.rtsys.klodd.core.util.LayoutGraphs;
 import edu.unikiel.rtsys.klodd.orthogonal.impl.ec.*;
+import edu.unikiel.rtsys.klodd.orthogonal.modules.IECPlanarizer;
 import edu.unikiel.rtsys.klodd.orthogonal.modules.IPlanarizer;
 import edu.unikiel.rtsys.klodd.orthogonal.structures.TSMGraph;
 
@@ -20,9 +21,31 @@ import edu.unikiel.rtsys.klodd.orthogonal.structures.TSMGraph;
  * 
  * @author msp
  */
-public class ECEmbeddingPlanarizer extends AbstractAlgorithm implements
+public class PortConstraintsPlanarizer extends AbstractAlgorithm implements
 		IPlanarizer {
 
+	/** the embedding constraints planarizer */
+	private IECPlanarizer ecPlanarizer;
+	
+	/*
+	 * (non-Javadoc)
+	 * @see edu.unikiel.rtsys.klodd.core.algorithms.AbstractAlgorithm#reset()
+	 */
+	public void reset() {
+		super.reset();
+		ecPlanarizer.reset();
+	}
+	
+	/**
+	 * Creates a port constraints planarizer with a given embedding
+	 * constraints planarizer.
+	 * 
+	 * @param ecPlanarizer
+	 */
+	public PortConstraintsPlanarizer(IECPlanarizer ecPlanarizer) {
+		this.ecPlanarizer = ecPlanarizer;
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * @see edu.unikiel.rtsys.klodd.orthogonal.modules.IPlanarizer#planarize(edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup)
@@ -30,10 +53,10 @@ public class ECEmbeddingPlanarizer extends AbstractAlgorithm implements
 	public TSMGraph planarize(KNodeGroup nodeGroup) {
 		// create constraints for the input graph
 		Map<KNodeGroup, EmbeddingConstraint> constraintsMap = createConstraints(nodeGroup);
-		// create expanded TSM graph
-		ConstraintExpander constraintExpander = new ConstraintExpander();
-		TSMGraph graph = constraintExpander.expand(nodeGroup, constraintsMap);
+		ecPlanarizer.setConstraints(constraintsMap);
 		
+		// planarize the input graph with embedding constraints
+		TSMGraph graph = ecPlanarizer.planarize(nodeGroup);
 		return graph;
 	}
 	

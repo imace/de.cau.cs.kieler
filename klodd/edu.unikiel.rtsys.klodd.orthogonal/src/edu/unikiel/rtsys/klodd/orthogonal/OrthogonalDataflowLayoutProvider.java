@@ -8,6 +8,7 @@ import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_TYPE;
 import edu.unikiel.rtsys.kieler.kiml.layout.services.KimlAbstractLayoutProvider;
 import edu.unikiel.rtsys.klodd.core.KloddCorePlugin;
 import edu.unikiel.rtsys.klodd.orthogonal.impl.*;
+import edu.unikiel.rtsys.klodd.orthogonal.impl.ec.EdgeInsertionECPlanarizer;
 import edu.unikiel.rtsys.klodd.orthogonal.modules.*;
 import edu.unikiel.rtsys.klodd.orthogonal.structures.TSMGraph;
 
@@ -62,7 +63,7 @@ public class OrthogonalDataflowLayoutProvider extends
 	 * Sets the internally used algorithm modules to the current configuration.
 	 */
 	private void updateModules() {
-		planarizer = new ECEmbeddingPlanarizer();
+		planarizer = new PortConstraintsPlanarizer(new EdgeInsertionECPlanarizer());
 		orthogonalizer = new KandinskyLPOrthogonalizer();
 		compacter = null;
 	}
