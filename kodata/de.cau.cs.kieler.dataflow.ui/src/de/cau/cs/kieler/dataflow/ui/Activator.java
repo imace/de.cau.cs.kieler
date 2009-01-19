@@ -1,4 +1,4 @@
-package edu.unikiel.rtsys.kieler.dataflow.ui;
+package de.cau.cs.kieler.dataflow.ui;
 
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
@@ -10,7 +10,7 @@ import org.osgi.framework.BundleContext;
 public class Activator extends AbstractUIPlugin {
 
 	// The plug-in ID
-	public static final String PLUGIN_ID = "edu.unikiel.rtsys.kieler.dataflow.ui";
+	public static final String PLUGIN_ID = "de.cau.cs.kieler.dataflow.ui";
 
 	// The shared instance
 	private static Activator plugin;

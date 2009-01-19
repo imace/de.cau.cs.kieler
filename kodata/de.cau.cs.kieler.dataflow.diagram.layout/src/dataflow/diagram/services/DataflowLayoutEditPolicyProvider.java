@@ -9,7 +9,7 @@ import org.eclipse.gmf.runtime.diagram.ui.services.editpolicy.IEditPolicyProvide
 
 import dataflow.diagram.edit.parts.InputPortEditPart;
 import dataflow.diagram.edit.parts.OutputPortEditPart;
-import edu.unikiel.rtsys.kieler.kiml.ui.policies.LayoutEditPolicy;
+import de.cau.cs.kieler.kiml.ui.policies.LayoutEditPolicy;
 
 /**
  * Edit policy provider implementation used for the layout of dataflow

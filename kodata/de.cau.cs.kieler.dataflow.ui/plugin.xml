@@ -8,7 +8,7 @@
             name="Create Random Dataflow Model"
             icon="icons/sample.gif"
             category="edu.unikiel.rtsys.kieler.kiml.ui.kieler"
-            class="edu.unikiel.rtsys.kieler.dataflow.ui.wizards.CreateRandomModelWizard"
+            class="de.cau.cs.kieler.dataflow.ui.wizards.CreateRandomModelWizard"
             id="edu.unikiel.rtsys.kieler.dataflow.ui.wizards.CreateRandomModelWizard">
       </wizard>
    </extension>

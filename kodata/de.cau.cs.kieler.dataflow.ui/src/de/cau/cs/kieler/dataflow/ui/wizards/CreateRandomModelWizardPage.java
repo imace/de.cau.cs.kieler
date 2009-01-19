@@ -1,4 +1,4 @@
-package edu.unikiel.rtsys.kieler.dataflow.ui.wizards;
+package de.cau.cs.kieler.dataflow.ui.wizards;
 
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IResource;

@@ -2,7 +2,7 @@
 <?eclipse version="3.2"?>
 <plugin>
    <extension
-         point="edu.unikiel.rtsys.kieler.kiml.layout.kimlDiagramLayouter">
+         point="de.cau.cs.kieler.kiml.layout.kimlDiagramLayouter">
       <kimlDiagramLayouter
             class="dataflow.diagram.services.DataflowDiagramLayouter"
             editor_id="dataflow.diagram.part.DataflowDiagramEditorID"></kimlDiagramLayouter>
@@ -23,8 +23,8 @@
       <propertySections
             contributorId="edu.unikiel.rtsys.kieler.dataflow.diagram">
          <propertySection
-               class="edu.unikiel.rtsys.kieler.kiml.ui.properties.tabbed.sections.KimlLayoutTypePropertySection"
-               id="edu.unikiel.rtsys.kieler.kiml.ui.properties.tabbed.sections.KimlLayoutTypePropertySection"
+               class="de.cau.cs.kieler.kiml.ui.properties.tabbed.sections.KimlLayoutTypePropertySection"
+               id="de.cau.cs.kieler.kiml.ui.properties.tabbed.sections.KimlLayoutTypePropertySection"
                tab="property.tab.LayoutPropertySection">
             <input
                   type="dataflow.diagram.edit.parts.Box2EditPart">

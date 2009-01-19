@@ -1,4 +1,4 @@
-package edu.unikiel.rtsys.kieler.dataflow.ui.wizards;
+package de.cau.cs.kieler.dataflow.ui.wizards;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;

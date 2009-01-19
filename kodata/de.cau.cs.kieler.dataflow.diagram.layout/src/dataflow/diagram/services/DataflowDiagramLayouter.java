@@ -39,11 +39,11 @@ import dataflow.diagram.DataflowDiagramLayoutPlugin;
 import dataflow.diagram.Messages;
 import dataflow.diagram.part.DataflowDiagramEditor;
 import dataflow.diagram.preferences.DiagramLayoutPreferencePage;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.*;
+import de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayouter;
+import de.cau.cs.kieler.kiml.ui.helpers.KimlGMFLayoutHintHelper;
+import de.cau.cs.kieler.kiml.ui.policies.LayoutEditPolicy;
 
-import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.*;
-import edu.unikiel.rtsys.kieler.kiml.layout.services.KimlAbstractLayouter;
-import edu.unikiel.rtsys.kieler.kiml.ui.helpers.KimlGMFLayoutHintHelper;
-import edu.unikiel.rtsys.kieler.kiml.ui.policies.LayoutEditPolicy;
 
 /**
  * This layouter for dataflow diagrams performs the needed transformation
@@ -102,7 +102,7 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 	
 	/*
 	 * (non-Javadoc)
-	 * @see edu.unikiel.rtsys.kieler.kiml.layout.services.KimlAbstractLayouter#getLabelProvider()
+	 * @see de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayouter#getLabelProvider()
 	 */
 	public ILabelProvider getLabelProvider() {
 		return dataflowLabelProvider;
@@ -110,7 +110,7 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 	
 	/*
 	 * (non-Javadoc)
-	 * @see edu.unikiel.rtsys.kieler.kiml.layout.services.KimlAbstractLayouter#init(java.lang.Object)
+	 * @see de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayouter#init(java.lang.Object)
 	 */
 	protected void init(Object target) {
 		nodeGroup2BoxMapping.clear();
@@ -165,7 +165,7 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 
 	/*
 	 * (non-Javadoc)
-	 * @see edu.unikiel.rtsys.kieler.kiml.layout.services.KimlAbstractLayouter#buildLayoutGraph()
+	 * @see de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayouter#buildLayoutGraph()
 	 */
 	protected KLayoutGraph buildLayoutGraph() {
 		IPreferenceStore preferenceStore = DataflowDiagramLayoutPlugin
@@ -208,7 +208,7 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 
 	/*
 	 * (non-Javadoc)
-	 * @see edu.unikiel.rtsys.kieler.kiml.layout.services.KimlAbstractLayouter#applyLayout()
+	 * @see de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayouter#applyLayout()
 	 */
 	@SuppressWarnings("unchecked")
 	protected void applyLayout() {
