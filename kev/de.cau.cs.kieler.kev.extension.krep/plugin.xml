@@ -2,18 +2,18 @@
 <?eclipse version="3.2"?>
 <plugin>
    <extension
-         point="edu.unikiel.rtsys.kieler.kev.data">
+         point="de.cau.cs.kieler.kev.data">
       <content
-            class="edu.unikiel.rtsys.kieler.kev.extension.krep.KrepAnimationDataController"
-            id="edu.unikiel.rtsys.kieler.kev.extension.krep.content1"
-            name="edu.unikiel.rtsys.kieler.kev.extension.krep.content1">
+            class="de.cau.cs.kieler.kev.extension.krep.KrepAnimationDataController"
+            id="de.cau.cs.kieler.kev.extension.krep.content1"
+            name="de.cau.cs.kieler.kev.extension.krep.content1">
       </content>
    </extension>
    <extension
          point="krep.evalbench.tickManager">
       <manager
-            class="edu.unikiel.rtsys.kieler.kev.extension.krep.KrepTickManager"
-            id="edu.unikiel.rtsys.kieler.kev.extension.krep.manager1">
+            class="de.cau.cs.kieler.kev.extension.krep.KrepTickManager"
+            id="de.cau.cs.kieler.kev.extension.krep.manager1">
       </manager>
    </extension>
 

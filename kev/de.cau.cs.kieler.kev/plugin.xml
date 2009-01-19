@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.2"?>
 <plugin>
-   <extension-point id="edu.unikiel.rtsys.kieler.kev.data" name="Data Interface Controller" schema="schema/edu.unikiel.rtsys.kieler.kev.data.exsd"/>
-   <extension-point id="edu.unikiel.rtsys.kieler.kev.image" name="KEV predefined example image" schema="schema/edu.unikiel.rtsys.kieler.kev.image.exsd"/>
+   <extension-point id="data" name="Data Interface Controller" schema="schema/edu.unikiel.rtsys.kieler.kev.data.exsd"/>
+   <extension-point id="image" name="KEV predefined example image" schema="schema/edu.unikiel.rtsys.kieler.kev.image.exsd"/>
 
    <extension
          point="org.eclipse.ui.views">
@@ -14,7 +14,7 @@
             name="Kiel Environment View"
             icon="icons/sample.gif"
             category="edu.unikiel.rtsys.kieler.kev"
-            class="edu.unikiel.rtsys.kieler.kev.views.EnvironmentView"
+            class="de.cau.cs.kieler.kev.views.EnvironmentView"
             id="edu.unikiel.rtsys.kieler.kev.views.EnvironmentView">
       </view>
    </extension>
@@ -39,13 +39,13 @@
    <extension
          point="org.eclipse.ui.preferencePages">
       <page
-            class="edu.unikiel.rtsys.kieler.kev.ui.KevPreferencePage"
+            class="de.cau.cs.kieler.kev.ui.KevPreferencePage"
             id="edu.unikiel.rtsys.kieler.kev.PreferencePage"
             name="KEV Setup">
       </page>
    </extension>
    <extension
-         point="edu.unikiel.rtsys.kieler.kev.image">
+         point="de.cau.cs.kieler.kev.image">
       <image
             filename="examples/elevator.svg"
             id="edu.unikiel.rtsys.kieler.kev.image1"

@@ -1,5 +1,5 @@
-#ADAPTER#ACCESS#edu.unikiel.rtsys.kieler.kev/bin/[+edu/unikiel/rtsys/kieler/kev/actions/*:+edu/unikiel/rtsys/kieler/kev/extension/*:+edu/unikiel/rtsys/kieler/kev/helpers/*:+edu/unikiel/rtsys/kieler/kev/views/*:?**/*]
-#ADAPTER#ACCESS#edu.unikiel.rtsys.kieler.kev/@dot[+edu/unikiel/rtsys/kieler/kev/actions/*:+edu/unikiel/rtsys/kieler/kev/extension/*:+edu/unikiel/rtsys/kieler/kev/helpers/*:+edu/unikiel/rtsys/kieler/kev/views/*:?**/*]
+#ADAPTER#ACCESS#de.cau.cs.kieler.kev/bin/[+edu/unikiel/rtsys/kieler/kev/actions/*:+edu/unikiel/rtsys/kieler/kev/extension/*:+edu/unikiel/rtsys/kieler/kev/helpers/*:+edu/unikiel/rtsys/kieler/kev/views/*:?**/*]
+#ADAPTER#ACCESS#de.cau.cs.kieler.kev/@dot[+edu/unikiel/rtsys/kieler/kev/actions/*:+edu/unikiel/rtsys/kieler/kev/extension/*:+edu/unikiel/rtsys/kieler/kev/helpers/*:+edu/unikiel/rtsys/kieler/kev/views/*:?**/*]
 #ADAPTER#ACCESS#java/eclipse_3.4/plugins/org.eclipse.ui_3.4.0.I20080207-1300.jar[~org/eclipse/ui/internal/*:+org/eclipse/ui/carbon/*:?**/*]
 #ADAPTER#ACCESS#java/eclipse_3.4/plugins/org.eclipse.ui.carbon_3.2.100.I20071210-0800.jar[?**/*]
 #ADAPTER#ACCESS#java/eclipse_3.4/plugins/org.eclipse.core.runtime_3.4.0.v20080201.jar[~org/eclipse/core/internal/preferences/legacy/*:~org/eclipse/core/internal/runtime/*:+org/eclipse/core/runtime/*:?**/*]

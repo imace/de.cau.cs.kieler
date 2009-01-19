@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.1"?>
 
-<product name="KIEL Environment Visualization" id="edu.unikiel.rtsys.kieler.kev.application.product" application="edu.unikiel.rtsys.kieler.kev.application.application" useFeatures="false">
+<product name="KIEL Environment Visualization" id="de.cau.cs.kieler.kev.application.product" application="de.cau.cs.kieler.kev.application.application" useFeatures="false">
 
    <aboutInfo>
-      <image path="/edu.unikiel.rtsys.kieler.kev.application/icons/kev_about.png"/>
+      <image path="/de.cau.cs.kieler.kev.application/icons/kev_about.png"/>
       <text>
          KIELER - Kiel Integrated Environment for Layout for Eclipse Rich Client Platform
 KEV - KIEL Environment Visualization
@@ -21,10 +21,10 @@ http://www.informatik.uni-kiel.de/en/rtsys/
       <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts</vmArgsMac>
    </launcherArgs>
 
-   <windowImages i16="/edu.unikiel.rtsys.kieler.kev.application/icons/kev_logo_16.gif" i32="/edu.unikiel.rtsys.kieler.kev.application/icons/kev_logo_32.gif" i48="/edu.unikiel.rtsys.kieler.kev.application/icons/kev_logo_48.gif" i64="/edu.unikiel.rtsys.kieler.kev.application/icons/kev_logo_64.gif" i128="/edu.unikiel.rtsys.kieler.kev.application/icons/kev_logo_128.gif"/>
+   <windowImages i16="/de.cau.cs.kieler.kev.application/icons/kev_logo_16.gif" i32="/de.cau.cs.kieler.kev.application/icons/kev_logo_32.gif" i48="/de.cau.cs.kieler.kev.application/icons/kev_logo_48.gif" i64="/de.cau.cs.kieler.kev.application/icons/kev_logo_64.gif" i128="/de.cau.cs.kieler.kev.application/icons/kev_logo_128.gif"/>
 
    <splash
-      location="edu.unikiel.rtsys.kieler.kev.application"
+      location="de.cau.cs.kieler.kev.application"
       startupProgressRect="0,610,360,15"
       startupMessageRect="0,600,360,20"
       startupForegroundColor="000000" />
@@ -43,10 +43,10 @@ http://www.informatik.uni-kiel.de/en/rtsys/
 
    <plugins>
       <plugin id="com.ibm.icu"/>
-      <plugin id="edu.unikiel.rtsys.kieler.kev"/>
-      <plugin id="edu.unikiel.rtsys.kieler.kev.application"/>
-      <plugin id="edu.unikiel.rtsys.kieler.kev.extension.elevator"/>
-      <plugin id="edu.unikiel.rtsys.kieler.kev.extension.scade"/>
+      <plugin id="de.cau.cs.kieler.kev"/>
+      <plugin id="de.cau.cs.kieler.kev.application"/>
+      <plugin id="de.cau.cs.kieler.kev.extension.elevator"/>
+      <plugin id="de.cau.cs.kieler.kev.extension.scade"/>
       <plugin id="javax.servlet"/>
       <plugin id="javax.xml"/>
       <plugin id="org.apache.batik.bridge"/>

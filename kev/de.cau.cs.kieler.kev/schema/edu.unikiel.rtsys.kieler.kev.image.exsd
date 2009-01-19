@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!-- Schema file written by PDE -->
-<schema targetNamespace="edu.unikiel.rtsys.kieler.kev">
+<schema targetNamespace="de.cau.cs.kieler.kev">
 <annotation>
       <appInfo>
-         <meta.schema plugin="edu.unikiel.rtsys.kieler.kev" id="edu.unikiel.rtsys.kieler.kev.image" name="KEV predefined example image"/>
+         <meta.schema plugin="de.cau.cs.kieler.kev" id="de.cau.cs.kieler.kev.image" name="KEV predefined example image"/>
       </appInfo>
       <documentation>
          Adds an example svg image (together with an animation mapping file) to the predefined list of images. They will be bundled into the application and then be easily accessible by the open wizard.
@@ -96,15 +96,15 @@
       </appInfo>
       <documentation>
          &lt;extension
-         point=&quot;edu.unikiel.rtsys.kieler.kev.image&quot;&gt;
+         point=&quot;de.cau.cs.kieler.kev.image&quot;&gt;
       &lt;image
             filename=&quot;examples/railway-6b1.svg&quot;
-            id=&quot;edu.unikiel.rtsys.kieler.kev.image3&quot;
+            id=&quot;de.cau.cs.kieler.kev.image3&quot;
             name=&quot;Model Railway&quot;&gt;
       &lt;/image&gt;
       &lt;image
             filename=&quot;examples/flap.svg&quot;
-            id=&quot;edu.unikiel.rtsys.kieler.kev.image4&quot;
+            id=&quot;de.cau.cs.kieler.kev.image4&quot;
             name=&quot;High-Lift Flap Panel&quot;&gt;
       &lt;/image&gt;
 &lt;/extension&gt;

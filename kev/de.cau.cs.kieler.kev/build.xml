@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="edu.unikiel.rtsys.kieler.kev" default="build.jars" basedir=".">
+<project name="de.cau.cs.kieler.kev" default="build.jars" basedir=".">
 
 	<property name="basews" value="${ws}"/>
 	<property name="baseos" value="${os}"/>
 	<property name="basearch" value="${arch}"/>
 	<property name="basenl" value="${nl}"/>
-	<property name="bundleId" value="edu.unikiel.rtsys.kieler.kev"/>
+	<property name="bundleId" value="de.cau.cs.kieler.kev"/>
 	<property name="bundleVersion" value="1.0.0"/>
 
 	<!-- Compiler settings. -->
@@ -57,7 +57,7 @@
 
 	</target>
 
-	<target name="build.update.jar" depends="init" description="Build the plug-in: edu.unikiel.rtsys.kieler.kev for an update site.">
+	<target name="build.update.jar" depends="init" description="Build the plug-in: de.cau.cs.kieler.kev for an update site.">
 		<delete dir="${temp.folder}"/>
 		<mkdir dir="${temp.folder}"/>
 		<antcall target="build.jars"/>
@@ -68,7 +68,7 @@
 		<delete dir="${temp.folder}"/>
 	</target>
 
-	<target name="@dot" depends="init" unless="@dot" description="Create jar: edu.unikiel.rtsys.kieler.kev @dot.">
+	<target name="@dot" depends="init" unless="@dot" description="Create jar: de.cau.cs.kieler.kev @dot.">
 		<delete dir="${temp.folder}/@dot.bin"/>
 		<mkdir dir="${temp.folder}/@dot.bin"/>
 		<path id="@dot.classpath">
@@ -187,7 +187,7 @@
 		</copy>
 	</target>
 
-	<target name="build.jars" depends="init" description="Compile classes and build nested jars for the plug-in: edu.unikiel.rtsys.kieler.kev.">
+	<target name="build.jars" depends="init" description="Compile classes and build nested jars for the plug-in: de.cau.cs.kieler.kev.">
 		<available property="@dot" file="${build.result.folder}/@dot"/>
 		<antcall target="@dot"/>
 	</target>
@@ -248,7 +248,7 @@
 		</copy>
 	</target>
 
-	<target name="clean" depends="init" description="Clean the plug-in: edu.unikiel.rtsys.kieler.kev of all the zips, jars and logs created.">
+	<target name="clean" depends="init" description="Clean the plug-in: de.cau.cs.kieler.kev of all the zips, jars and logs created.">
 		<delete dir="${build.result.folder}/@dot"/>
 		<delete file="${build.result.folder}/src.zip"/>
 		<delete file="${plugin.destination}/edu.unikiel.rtsys.kieler.kev_1.0.0.jar"/>
@@ -257,11 +257,11 @@
 	</target>
 
 	<target name="refresh" depends="init" if="eclipse.running" description="Refresh this folder.">
-		<eclipse.convertPath fileSystemPath="/home/haf/shared/kieler/trunk/kev/edu.unikiel.rtsys.kieler.kev" property="resourcePath"/>
+		<eclipse.convertPath fileSystemPath="/home/haf/shared/kieler/trunk/kev/de.cau.cs.kieler.kev" property="resourcePath"/>
 		<eclipse.refreshLocal resource="${resourcePath}" depth="infinite"/>
 	</target>
 
-	<target name="zip.plugin" depends="init" description="Create a zip containing all the elements for the plug-in: edu.unikiel.rtsys.kieler.kev.">
+	<target name="zip.plugin" depends="init" description="Create a zip containing all the elements for the plug-in: de.cau.cs.kieler.kev.">
 		<delete dir="${temp.folder}"/>
 		<mkdir dir="${temp.folder}"/>
 		<antcall target="build.jars"/>
