@@ -1,4 +1,4 @@
-package edu.unikiel.rtsys.kieler.core.services;
+package de.cau.cs.kieler.core.services;
 
 import java.util.EventObject;
 

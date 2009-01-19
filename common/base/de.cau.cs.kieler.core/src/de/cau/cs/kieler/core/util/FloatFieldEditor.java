@@ -1,4 +1,4 @@
-package edu.unikiel.rtsys.kieler.core.util;
+package de.cau.cs.kieler.core.util;
 
 import org.eclipse.jface.preference.StringFieldEditor;
 import org.eclipse.swt.widgets.Composite;

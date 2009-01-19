@@ -1,4 +1,4 @@
-package edu.unikiel.rtsys.kieler.core;
+package de.cau.cs.kieler.core;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
@@ -9,7 +9,7 @@ import org.osgi.framework.BundleContext;
 public class CorePlugin extends AbstractUIPlugin {
 
 	// The plug-in ID
-	public static final String PLUGIN_ID = "edu.unikiel.rtsys.kieler.core";
+	public static final String PLUGIN_ID = "de.cau.cs.kieler.core";
 
 	// The shared instance
 	private static CorePlugin plugin;
