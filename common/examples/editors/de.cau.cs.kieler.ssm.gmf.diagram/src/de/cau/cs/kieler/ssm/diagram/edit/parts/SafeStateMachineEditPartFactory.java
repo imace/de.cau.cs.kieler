@@ -16,7 +16,6 @@ import org.eclipse.swt.widgets.Text;
 
 import de.cau.cs.kieler.ssm.diagram.part.SafeStateMachineVisualIDRegistry;
 
-
 /**
  * @generated
  */

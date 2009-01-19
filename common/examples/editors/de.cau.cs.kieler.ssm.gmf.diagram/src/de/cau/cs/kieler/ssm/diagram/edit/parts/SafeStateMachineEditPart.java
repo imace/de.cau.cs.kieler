@@ -7,7 +7,6 @@ import org.eclipse.gmf.runtime.notation.View;
 import de.cau.cs.kieler.ssm.diagram.edit.policies.SafeStateMachineCanonicalEditPolicy;
 import de.cau.cs.kieler.ssm.diagram.edit.policies.SafeStateMachineItemSemanticEditPolicy;
 
-
 /**
  * @generated
  */

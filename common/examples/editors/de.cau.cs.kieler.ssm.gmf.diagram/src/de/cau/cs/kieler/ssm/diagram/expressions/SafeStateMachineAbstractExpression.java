@@ -15,7 +15,6 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import de.cau.cs.kieler.ssm.diagram.part.SafeStateMachineDiagramEditorPlugin;
 
-
 /**
  * @generated
  */

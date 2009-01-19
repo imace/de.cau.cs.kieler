@@ -42,8 +42,8 @@ import org.eclipse.gmf.runtime.notation.View;
 import de.cau.cs.kieler.ssm.diagram.edit.helpers.SafeStateMachineBaseEditHelper;
 import de.cau.cs.kieler.ssm.diagram.part.SafeStateMachineVisualIDRegistry;
 
-import edu.unikiel.rtsys.kieler.ssm.AbstractState;
-import edu.unikiel.rtsys.kieler.ssm.Region;
+import de.cau.cs.kieler.ssm.AbstractState;
+import de.cau.cs.kieler.ssm.Region;
 
 /**
  * @generated
@@ -355,32 +355,40 @@ public class SafeStateMachineBaseItemSemanticEditPolicy extends
 		/**
 		 * @generated
 		 */
-		public static boolean canCreateStrongAbortion_4001(Region container,
-				AbstractState source, AbstractState target) {
+		public static boolean canCreateStrongAbortion_4001(
+				de.cau.cs.kieler.ssm.Region container,
+				de.cau.cs.kieler.ssm.AbstractState source,
+				de.cau.cs.kieler.ssm.AbstractState target) {
 			return canExistStrongAbortion_4001(container, source, target);
 		}
 
 		/**
 		 * @generated
 		 */
-		public static boolean canCreateNormalTermination_4002(Region container,
-				AbstractState source, AbstractState target) {
+		public static boolean canCreateNormalTermination_4002(
+				de.cau.cs.kieler.ssm.Region container,
+				de.cau.cs.kieler.ssm.AbstractState source,
+				de.cau.cs.kieler.ssm.AbstractState target) {
 			return canExistNormalTermination_4002(container, source, target);
 		}
 
 		/**
 		 * @generated
 		 */
-		public static boolean canCreateWeakAbortion_4003(Region container,
-				AbstractState source, AbstractState target) {
+		public static boolean canCreateWeakAbortion_4003(
+				de.cau.cs.kieler.ssm.Region container,
+				de.cau.cs.kieler.ssm.AbstractState source,
+				de.cau.cs.kieler.ssm.AbstractState target) {
 			return canExistWeakAbortion_4003(container, source, target);
 		}
 
 		/**
 		 * @generated
 		 */
-		public static boolean canExistStrongAbortion_4001(Region container,
-				AbstractState source, AbstractState target) {
+		public static boolean canExistStrongAbortion_4001(
+				de.cau.cs.kieler.ssm.Region container,
+				de.cau.cs.kieler.ssm.AbstractState source,
+				de.cau.cs.kieler.ssm.AbstractState target) {
 
 			return true;
 		}
@@ -388,8 +396,10 @@ public class SafeStateMachineBaseItemSemanticEditPolicy extends
 		/**
 		 * @generated
 		 */
-		public static boolean canExistNormalTermination_4002(Region container,
-				AbstractState source, AbstractState target) {
+		public static boolean canExistNormalTermination_4002(
+				de.cau.cs.kieler.ssm.Region container,
+				de.cau.cs.kieler.ssm.AbstractState source,
+				de.cau.cs.kieler.ssm.AbstractState target) {
 
 			return true;
 		}
@@ -397,8 +407,10 @@ public class SafeStateMachineBaseItemSemanticEditPolicy extends
 		/**
 		 * @generated
 		 */
-		public static boolean canExistWeakAbortion_4003(Region container,
-				AbstractState source, AbstractState target) {
+		public static boolean canExistWeakAbortion_4003(
+				de.cau.cs.kieler.ssm.Region container,
+				de.cau.cs.kieler.ssm.AbstractState source,
+				de.cau.cs.kieler.ssm.AbstractState target) {
 
 			return true;
 		}

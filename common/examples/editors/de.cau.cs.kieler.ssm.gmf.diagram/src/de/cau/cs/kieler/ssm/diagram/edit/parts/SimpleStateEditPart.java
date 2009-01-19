@@ -25,7 +25,6 @@ import org.eclipse.swt.graphics.Color;
 import de.cau.cs.kieler.ssm.diagram.edit.policies.SimpleStateItemSemanticEditPolicy;
 import de.cau.cs.kieler.ssm.diagram.part.SafeStateMachineVisualIDRegistry;
 
-
 /**
  * @generated
  */

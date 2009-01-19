@@ -20,7 +20,6 @@ import org.eclipse.swt.graphics.Color;
 
 import de.cau.cs.kieler.ssm.diagram.edit.policies.InitialStateItemSemanticEditPolicy;
 
-
 /**
  * @generated
  */

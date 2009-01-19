@@ -31,7 +31,6 @@ import org.eclipse.ui.dialogs.WizardNewFileCreationPage;
 
 import de.cau.cs.kieler.ssm.diagram.edit.parts.SafeStateMachineEditPart;
 
-
 /**
  * @generated
  */

@@ -21,7 +21,6 @@ import org.eclipse.ui.navigator.ICommonContentProvider;
 
 import de.cau.cs.kieler.ssm.diagram.part.SafeStateMachineDiagramEditorPlugin;
 
-
 /**
  * @generated
  */

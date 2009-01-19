@@ -9,7 +9,6 @@ import org.eclipse.ui.navigator.ICommonLabelProvider;
 
 import de.cau.cs.kieler.ssm.diagram.part.SafeStateMachineDiagramEditorPlugin;
 
-
 /**
  * @generated
  */

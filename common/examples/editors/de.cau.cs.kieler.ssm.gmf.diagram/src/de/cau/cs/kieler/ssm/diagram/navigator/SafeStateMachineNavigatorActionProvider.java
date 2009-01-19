@@ -29,7 +29,6 @@ import de.cau.cs.kieler.ssm.diagram.part.SafeStateMachineDiagramEditor;
 import de.cau.cs.kieler.ssm.diagram.part.SafeStateMachineDiagramEditorPlugin;
 import de.cau.cs.kieler.ssm.diagram.part.SafeStateMachineVisualIDRegistry;
 
-
 /**
  * @generated
  */

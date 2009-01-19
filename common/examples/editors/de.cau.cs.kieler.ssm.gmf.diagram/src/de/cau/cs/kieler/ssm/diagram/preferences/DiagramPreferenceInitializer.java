@@ -5,7 +5,6 @@ import org.eclipse.jface.preference.IPreferenceStore;
 
 import de.cau.cs.kieler.ssm.diagram.part.SafeStateMachineDiagramEditorPlugin;
 
-
 /**
  * @generated
  */

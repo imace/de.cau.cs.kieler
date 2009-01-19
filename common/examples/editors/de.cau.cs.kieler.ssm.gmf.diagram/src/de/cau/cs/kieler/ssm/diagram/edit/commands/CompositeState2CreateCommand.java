@@ -34,7 +34,7 @@ public class CompositeState2CreateCommand extends CreateElementCommand {
 	 * @generated
 	 */
 	protected EClass getEClassToEdit() {
-		return edu.unikiel.rtsys.kieler.ssm.ssmPackage.eINSTANCE.getRegion();
+		return de.cau.cs.kieler.ssm.ssmPackage.eINSTANCE.getRegion();
 	}
 
 }

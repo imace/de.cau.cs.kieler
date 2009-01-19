@@ -26,7 +26,6 @@ import org.eclipse.ui.part.FileEditorInput;
 
 import de.cau.cs.kieler.ssm.diagram.part.SafeStateMachineDiagramEditorPlugin;
 
-
 /**
  * @generated
  */

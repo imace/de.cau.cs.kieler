@@ -15,7 +15,6 @@ import de.cau.cs.kieler.ssm.diagram.part.SafeStateMachineDiagramUpdater;
 import de.cau.cs.kieler.ssm.diagram.part.SafeStateMachineNodeDescriptor;
 import de.cau.cs.kieler.ssm.diagram.part.SafeStateMachineVisualIDRegistry;
 
-
 /**
  * @generated
  */
@@ -70,7 +69,7 @@ public class CompositeStateCompositeStateCompartmentCanonicalEditPolicy extends
 		if (myFeaturesToSynchronize == null) {
 			myFeaturesToSynchronize = new HashSet();
 			myFeaturesToSynchronize
-					.add(edu.unikiel.rtsys.kieler.ssm.ssmPackage.eINSTANCE
+					.add(de.cau.cs.kieler.ssm.ssmPackage.eINSTANCE
 							.getCompositeState_Regions());
 		}
 		return myFeaturesToSynchronize;

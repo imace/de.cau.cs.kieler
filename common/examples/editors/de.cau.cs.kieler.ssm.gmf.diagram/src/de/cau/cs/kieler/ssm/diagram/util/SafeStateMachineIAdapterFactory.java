@@ -8,13 +8,13 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ConnectionEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 
-import edu.unikiel.rtsys.kieler.ssm.CompositeState;
-import edu.unikiel.rtsys.kieler.ssm.InitialState;
-import edu.unikiel.rtsys.kieler.ssm.NormalTermination;
-import edu.unikiel.rtsys.kieler.ssm.Region;
-import edu.unikiel.rtsys.kieler.ssm.SimpleState;
-import edu.unikiel.rtsys.kieler.ssm.StrongAbortion;
-import edu.unikiel.rtsys.kieler.ssm.WeakAbortion;
+import de.cau.cs.kieler.ssm.CompositeState;
+import de.cau.cs.kieler.ssm.InitialState;
+import de.cau.cs.kieler.ssm.NormalTermination;
+import de.cau.cs.kieler.ssm.Region;
+import de.cau.cs.kieler.ssm.SimpleState;
+import de.cau.cs.kieler.ssm.StrongAbortion;
+import de.cau.cs.kieler.ssm.WeakAbortion;
 
 public class SafeStateMachineIAdapterFactory implements IAdapterFactory {
 

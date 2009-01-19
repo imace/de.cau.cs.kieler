@@ -15,7 +15,6 @@ import de.cau.cs.kieler.ssm.diagram.edit.policies.RegionRegionCompartmentCanonic
 import de.cau.cs.kieler.ssm.diagram.edit.policies.RegionRegionCompartmentItemSemanticEditPolicy;
 import de.cau.cs.kieler.ssm.diagram.part.Messages;
 
-
 /**
  * @generated
  */

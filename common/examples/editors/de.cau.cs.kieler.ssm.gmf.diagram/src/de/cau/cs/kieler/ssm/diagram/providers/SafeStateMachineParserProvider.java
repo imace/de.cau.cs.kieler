@@ -24,7 +24,6 @@ import de.cau.cs.kieler.ssm.diagram.edit.parts.WeakAbortionPriorityEditPart;
 import de.cau.cs.kieler.ssm.diagram.parsers.MessageFormatParser;
 import de.cau.cs.kieler.ssm.diagram.part.SafeStateMachineVisualIDRegistry;
 
-
 /**
  * @generated
  */
@@ -50,7 +49,7 @@ public class SafeStateMachineParserProvider extends AbstractProvider implements
 	 * @generated
 	 */
 	protected IParser createCompositeStateName_5003Parser() {
-		EAttribute[] features = new EAttribute[] { edu.unikiel.rtsys.kieler.ssm.ssmPackage.eINSTANCE
+		EAttribute[] features = new EAttribute[] { de.cau.cs.kieler.ssm.ssmPackage.eINSTANCE
 				.getNamed_Name(), };
 		MessageFormatParser parser = new MessageFormatParser(features);
 		return parser;
@@ -75,7 +74,7 @@ public class SafeStateMachineParserProvider extends AbstractProvider implements
 	 * @generated
 	 */
 	protected IParser createCompositeStateName_5001Parser() {
-		EAttribute[] features = new EAttribute[] { edu.unikiel.rtsys.kieler.ssm.ssmPackage.eINSTANCE
+		EAttribute[] features = new EAttribute[] { de.cau.cs.kieler.ssm.ssmPackage.eINSTANCE
 				.getNamed_Name(), };
 		MessageFormatParser parser = new MessageFormatParser(features);
 		return parser;
@@ -100,7 +99,7 @@ public class SafeStateMachineParserProvider extends AbstractProvider implements
 	 * @generated
 	 */
 	protected IParser createSimpleStateName_5002Parser() {
-		EAttribute[] features = new EAttribute[] { edu.unikiel.rtsys.kieler.ssm.ssmPackage.eINSTANCE
+		EAttribute[] features = new EAttribute[] { de.cau.cs.kieler.ssm.ssmPackage.eINSTANCE
 				.getNamed_Name(), };
 		MessageFormatParser parser = new MessageFormatParser(features);
 		return parser;
@@ -126,11 +125,11 @@ public class SafeStateMachineParserProvider extends AbstractProvider implements
 	 */
 	protected IParser createStrongAbortionIsImmediateStringTriggerStringEffectString_6001Parser() {
 		EAttribute[] features = new EAttribute[] {
-				edu.unikiel.rtsys.kieler.ssm.ssmPackage.eINSTANCE
+				de.cau.cs.kieler.ssm.ssmPackage.eINSTANCE
 						.getTransitionImmediateable_IsImmediateString(),
-				edu.unikiel.rtsys.kieler.ssm.ssmPackage.eINSTANCE
+				de.cau.cs.kieler.ssm.ssmPackage.eINSTANCE
 						.getTransitionTriggerable_TriggerString(),
-				edu.unikiel.rtsys.kieler.ssm.ssmPackage.eINSTANCE
+				de.cau.cs.kieler.ssm.ssmPackage.eINSTANCE
 						.getTransition_EffectString(), };
 		MessageFormatParser parser = new MessageFormatParser(features);
 		parser.setViewPattern("{0}{1}/{2}");
@@ -158,7 +157,7 @@ public class SafeStateMachineParserProvider extends AbstractProvider implements
 	 * @generated
 	 */
 	protected IParser createStrongAbortionPriority_6002Parser() {
-		EAttribute[] features = new EAttribute[] { edu.unikiel.rtsys.kieler.ssm.ssmPackage.eINSTANCE
+		EAttribute[] features = new EAttribute[] { de.cau.cs.kieler.ssm.ssmPackage.eINSTANCE
 				.getTransition_Priority(), };
 		MessageFormatParser parser = new MessageFormatParser(features);
 		return parser;
@@ -183,7 +182,7 @@ public class SafeStateMachineParserProvider extends AbstractProvider implements
 	 * @generated
 	 */
 	protected IParser createNormalTerminationEffectString_6003Parser() {
-		EAttribute[] features = new EAttribute[] { edu.unikiel.rtsys.kieler.ssm.ssmPackage.eINSTANCE
+		EAttribute[] features = new EAttribute[] { de.cau.cs.kieler.ssm.ssmPackage.eINSTANCE
 				.getTransition_EffectString(), };
 		MessageFormatParser parser = new MessageFormatParser(features);
 		parser.setViewPattern("/{0}");
@@ -211,7 +210,7 @@ public class SafeStateMachineParserProvider extends AbstractProvider implements
 	 * @generated
 	 */
 	protected IParser createNormalTerminationPriority_6004Parser() {
-		EAttribute[] features = new EAttribute[] { edu.unikiel.rtsys.kieler.ssm.ssmPackage.eINSTANCE
+		EAttribute[] features = new EAttribute[] { de.cau.cs.kieler.ssm.ssmPackage.eINSTANCE
 				.getTransition_Priority(), };
 		MessageFormatParser parser = new MessageFormatParser(features);
 		return parser;
@@ -237,11 +236,11 @@ public class SafeStateMachineParserProvider extends AbstractProvider implements
 	 */
 	protected IParser createWeakAbortionIsImmediateStringTriggerStringEffectString_6005Parser() {
 		EAttribute[] features = new EAttribute[] {
-				edu.unikiel.rtsys.kieler.ssm.ssmPackage.eINSTANCE
+				de.cau.cs.kieler.ssm.ssmPackage.eINSTANCE
 						.getTransitionImmediateable_IsImmediateString(),
-				edu.unikiel.rtsys.kieler.ssm.ssmPackage.eINSTANCE
+				de.cau.cs.kieler.ssm.ssmPackage.eINSTANCE
 						.getTransitionTriggerable_TriggerString(),
-				edu.unikiel.rtsys.kieler.ssm.ssmPackage.eINSTANCE
+				de.cau.cs.kieler.ssm.ssmPackage.eINSTANCE
 						.getTransition_EffectString(), };
 		MessageFormatParser parser = new MessageFormatParser(features);
 		parser.setViewPattern("{0}{1}/{2}");
@@ -269,7 +268,7 @@ public class SafeStateMachineParserProvider extends AbstractProvider implements
 	 * @generated
 	 */
 	protected IParser createWeakAbortionPriority_6006Parser() {
-		EAttribute[] features = new EAttribute[] { edu.unikiel.rtsys.kieler.ssm.ssmPackage.eINSTANCE
+		EAttribute[] features = new EAttribute[] { de.cau.cs.kieler.ssm.ssmPackage.eINSTANCE
 				.getTransition_Priority(), };
 		MessageFormatParser parser = new MessageFormatParser(features);
 		return parser;

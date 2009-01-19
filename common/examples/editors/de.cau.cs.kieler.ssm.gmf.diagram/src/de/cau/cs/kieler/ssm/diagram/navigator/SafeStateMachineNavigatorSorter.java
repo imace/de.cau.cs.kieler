@@ -4,7 +4,6 @@ import org.eclipse.jface.viewers.ViewerSorter;
 
 import de.cau.cs.kieler.ssm.diagram.part.SafeStateMachineVisualIDRegistry;
 
-
 /**
  * @generated
  */

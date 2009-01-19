@@ -19,92 +19,83 @@ public class SafeStateMachineDomainModelElementTester extends PropertyTester {
 		}
 		EObject eObject = (EObject) receiver;
 		EClass eClass = eObject.eClass();
-		if (eClass == edu.unikiel.rtsys.kieler.ssm.ssmPackage.eINSTANCE
-				.getNamed()) {
+		if (eClass == de.cau.cs.kieler.ssm.ssmPackage.eINSTANCE.getNamed()) {
 			return true;
 		}
-		if (eClass == edu.unikiel.rtsys.kieler.ssm.ssmPackage.eINSTANCE
-				.getRegion()) {
+		if (eClass == de.cau.cs.kieler.ssm.ssmPackage.eINSTANCE.getRegion()) {
 			return true;
 		}
-		if (eClass == edu.unikiel.rtsys.kieler.ssm.ssmPackage.eINSTANCE
+		if (eClass == de.cau.cs.kieler.ssm.ssmPackage.eINSTANCE
 				.getAbstractState()) {
 			return true;
 		}
-		if (eClass == edu.unikiel.rtsys.kieler.ssm.ssmPackage.eINSTANCE
+		if (eClass == de.cau.cs.kieler.ssm.ssmPackage.eINSTANCE
 				.getSimpleState()) {
 			return true;
 		}
-		if (eClass == edu.unikiel.rtsys.kieler.ssm.ssmPackage.eINSTANCE
+		if (eClass == de.cau.cs.kieler.ssm.ssmPackage.eINSTANCE
 				.getPseudoState()) {
 			return true;
 		}
-		if (eClass == edu.unikiel.rtsys.kieler.ssm.ssmPackage.eINSTANCE
+		if (eClass == de.cau.cs.kieler.ssm.ssmPackage.eINSTANCE
 				.getInitialState()) {
 			return true;
 		}
-		if (eClass == edu.unikiel.rtsys.kieler.ssm.ssmPackage.eINSTANCE
+		if (eClass == de.cau.cs.kieler.ssm.ssmPackage.eINSTANCE
 				.getCompositeState()) {
 			return true;
 		}
-		if (eClass == edu.unikiel.rtsys.kieler.ssm.ssmPackage.eINSTANCE
-				.getTransition()) {
+		if (eClass == de.cau.cs.kieler.ssm.ssmPackage.eINSTANCE.getTransition()) {
 			return true;
 		}
-		if (eClass == edu.unikiel.rtsys.kieler.ssm.ssmPackage.eINSTANCE
+		if (eClass == de.cau.cs.kieler.ssm.ssmPackage.eINSTANCE
 				.getTransitionTriggerable()) {
 			return true;
 		}
-		if (eClass == edu.unikiel.rtsys.kieler.ssm.ssmPackage.eINSTANCE
+		if (eClass == de.cau.cs.kieler.ssm.ssmPackage.eINSTANCE
 				.getTransitionImmediateable()) {
 			return true;
 		}
-		if (eClass == edu.unikiel.rtsys.kieler.ssm.ssmPackage.eINSTANCE
-				.getInitialArc()) {
+		if (eClass == de.cau.cs.kieler.ssm.ssmPackage.eINSTANCE.getInitialArc()) {
 			return true;
 		}
-		if (eClass == edu.unikiel.rtsys.kieler.ssm.ssmPackage.eINSTANCE
+		if (eClass == de.cau.cs.kieler.ssm.ssmPackage.eINSTANCE
 				.getConditionalTransition()) {
 			return true;
 		}
-		if (eClass == edu.unikiel.rtsys.kieler.ssm.ssmPackage.eINSTANCE
+		if (eClass == de.cau.cs.kieler.ssm.ssmPackage.eINSTANCE
 				.getNormalTermination()) {
 			return true;
 		}
-		if (eClass == edu.unikiel.rtsys.kieler.ssm.ssmPackage.eINSTANCE
+		if (eClass == de.cau.cs.kieler.ssm.ssmPackage.eINSTANCE
 				.getStrongAbortion()) {
 			return true;
 		}
-		if (eClass == edu.unikiel.rtsys.kieler.ssm.ssmPackage.eINSTANCE
+		if (eClass == de.cau.cs.kieler.ssm.ssmPackage.eINSTANCE
 				.getWeakAbortion()) {
 			return true;
 		}
-		if (eClass == edu.unikiel.rtsys.kieler.ssm.ssmPackage.eINSTANCE
+		if (eClass == de.cau.cs.kieler.ssm.ssmPackage.eINSTANCE
 				.getSafeStateMachine()) {
 			return true;
 		}
-		if (eClass == edu.unikiel.rtsys.kieler.ssm.ssmPackage.eINSTANCE
-				.getTrigger()) {
+		if (eClass == de.cau.cs.kieler.ssm.ssmPackage.eINSTANCE.getTrigger()) {
 			return true;
 		}
-		if (eClass == edu.unikiel.rtsys.kieler.ssm.ssmPackage.eINSTANCE
-				.getAction()) {
+		if (eClass == de.cau.cs.kieler.ssm.ssmPackage.eINSTANCE.getAction()) {
 			return true;
 		}
-		if (eClass == edu.unikiel.rtsys.kieler.ssm.ssmPackage.eINSTANCE
-				.getOnAction()) {
+		if (eClass == de.cau.cs.kieler.ssm.ssmPackage.eINSTANCE.getOnAction()) {
 			return true;
 		}
-		if (eClass == edu.unikiel.rtsys.kieler.ssm.ssmPackage.eINSTANCE
-				.getSignal()) {
+		if (eClass == de.cau.cs.kieler.ssm.ssmPackage.eINSTANCE.getSignal()) {
 			return true;
 		}
-		if (eClass == edu.unikiel.rtsys.kieler.ssm.ssmPackage.eINSTANCE
+		if (eClass == de.cau.cs.kieler.ssm.ssmPackage.eINSTANCE
 				.getIntegerSignal()) {
 			return true;
 		}
-		if (eClass == edu.unikiel.rtsys.kieler.ssm.ssmPackage.eINSTANCE
-				.getCondition()) {
+		if (eClass == de.cau.cs.kieler.ssm.ssmPackage.eINSTANCE.getCondition()) {
 			return true;
 		}
 		return false;

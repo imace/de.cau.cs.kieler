@@ -28,7 +28,7 @@ public class SafeStateMachineDiagramEditorPlugin extends AbstractUIPlugin {
 	/**
 	 * @generated
 	 */
-	public static final String ID = "edu.unikiel.rtsys.kieler.ssm.gmf.diagram"; //$NON-NLS-1$
+	public static final String ID = "de.cau.cs.kieler.ssm.gmf.diagram"; //$NON-NLS-1$
 
 	/**
 	 * @generated

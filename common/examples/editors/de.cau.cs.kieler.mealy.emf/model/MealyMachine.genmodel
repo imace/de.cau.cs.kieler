@@ -5,7 +5,7 @@
     modelPluginID="de.cau.cs.kieler.mealy.emf" modelName="MealyMachine" importerID="org.eclipse.emf.importer.ecore"
     complianceLevel="6.0" copyrightFields="false">
   <foreignModel>MealyMachine.ecore</foreignModel>
-  <genPackages prefix="Mealy" basePackage="edu.unikiel.rtsys" disposableProviderFactory="true"
+  <genPackages prefix="Mealy" basePackage="de.cau.cs.kieler" disposableProviderFactory="true"
       ecorePackage="MealyMachine.ecore#/">
     <genClasses ecoreClass="MealyMachine.ecore#//MealyMachine">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MealyMachine.ecore#//MealyMachine/nodes"/>

@@ -162,8 +162,7 @@ public class SafeStateMachineDocumentProvider extends AbstractDocumentProvider
 	private TransactionalEditingDomain createEditingDomain() {
 		TransactionalEditingDomain editingDomain = DiagramEditingDomainFactory
 				.getInstance().createEditingDomain();
-		editingDomain
-				.setID("edu.unikiel.rtsys.kieler.ssm.gmf.diagram.EditingDomain"); //$NON-NLS-1$
+		editingDomain.setID("de.cau.cs.kieler.ssm.gmf.diagram.EditingDomain"); //$NON-NLS-1$
 		final NotificationFilter diagramResourceModifiedFilter = NotificationFilter
 				.createNotifierFilter(editingDomain.getResourceSet()).and(
 						NotificationFilter

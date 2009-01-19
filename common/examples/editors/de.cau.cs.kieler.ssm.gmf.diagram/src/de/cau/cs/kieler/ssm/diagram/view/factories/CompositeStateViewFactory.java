@@ -20,7 +20,6 @@ import de.cau.cs.kieler.ssm.diagram.edit.parts.CompositeStateNameEditPart;
 import de.cau.cs.kieler.ssm.diagram.edit.parts.SafeStateMachineEditPart;
 import de.cau.cs.kieler.ssm.diagram.part.SafeStateMachineVisualIDRegistry;
 
-
 /**
  * @generated
  */

@@ -8,7 +8,6 @@ import de.cau.cs.kieler.ssm.diagram.edit.commands.InitialStateCreateCommand;
 import de.cau.cs.kieler.ssm.diagram.edit.commands.SimpleStateCreateCommand;
 import de.cau.cs.kieler.ssm.diagram.providers.SafeStateMachineElementTypes;
 
-
 /**
  * @generated
  */
@@ -23,7 +22,7 @@ public class RegionRegionCompartmentItemSemanticEditPolicy extends
 				.getElementType()) {
 			if (req.getContainmentFeature() == null) {
 				req
-						.setContainmentFeature(edu.unikiel.rtsys.kieler.ssm.ssmPackage.eINSTANCE
+						.setContainmentFeature(de.cau.cs.kieler.ssm.ssmPackage.eINSTANCE
 								.getRegion_States());
 			}
 			return getGEFWrapper(new CompositeState2CreateCommand(req));
@@ -32,7 +31,7 @@ public class RegionRegionCompartmentItemSemanticEditPolicy extends
 				.getElementType()) {
 			if (req.getContainmentFeature() == null) {
 				req
-						.setContainmentFeature(edu.unikiel.rtsys.kieler.ssm.ssmPackage.eINSTANCE
+						.setContainmentFeature(de.cau.cs.kieler.ssm.ssmPackage.eINSTANCE
 								.getRegion_States());
 			}
 			return getGEFWrapper(new SimpleStateCreateCommand(req));
@@ -41,7 +40,7 @@ public class RegionRegionCompartmentItemSemanticEditPolicy extends
 				.getElementType()) {
 			if (req.getContainmentFeature() == null) {
 				req
-						.setContainmentFeature(edu.unikiel.rtsys.kieler.ssm.ssmPackage.eINSTANCE
+						.setContainmentFeature(de.cau.cs.kieler.ssm.ssmPackage.eINSTANCE
 								.getRegion_States());
 			}
 			return getGEFWrapper(new InitialStateCreateCommand(req));

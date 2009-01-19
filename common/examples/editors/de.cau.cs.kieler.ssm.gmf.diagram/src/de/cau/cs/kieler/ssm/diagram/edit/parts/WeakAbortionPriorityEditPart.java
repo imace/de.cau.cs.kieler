@@ -47,7 +47,6 @@ import de.cau.cs.kieler.ssm.diagram.part.SafeStateMachineVisualIDRegistry;
 import de.cau.cs.kieler.ssm.diagram.providers.SafeStateMachineElementTypes;
 import de.cau.cs.kieler.ssm.diagram.providers.SafeStateMachineParserProvider;
 
-
 /**
  * @generated
  */

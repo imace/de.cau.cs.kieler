@@ -13,7 +13,6 @@ import org.eclipse.gmf.runtime.diagram.ui.tools.UnspecifiedTypeCreationTool;
 
 import de.cau.cs.kieler.ssm.diagram.providers.SafeStateMachineElementTypes;
 
-
 /**
  * @generated
  */

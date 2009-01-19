@@ -26,7 +26,6 @@ import org.eclipse.osgi.util.NLS;
 import de.cau.cs.kieler.ssm.diagram.part.Messages;
 import de.cau.cs.kieler.ssm.diagram.part.SafeStateMachineDiagramEditorPlugin;
 
-
 /**
  * @generated
  */

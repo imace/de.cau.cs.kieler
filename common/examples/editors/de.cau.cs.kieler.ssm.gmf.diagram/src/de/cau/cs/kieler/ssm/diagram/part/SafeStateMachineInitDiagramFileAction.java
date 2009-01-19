@@ -20,7 +20,6 @@ import org.eclipse.ui.IWorkbenchPart;
 
 import de.cau.cs.kieler.ssm.diagram.edit.parts.SafeStateMachineEditPart;
 
-
 /**
  * @generated
  */

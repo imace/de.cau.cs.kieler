@@ -18,7 +18,6 @@ import de.cau.cs.kieler.ssm.diagram.edit.parts.StrongAbortionEditPart;
 import de.cau.cs.kieler.ssm.diagram.edit.parts.WeakAbortionEditPart;
 import de.cau.cs.kieler.ssm.diagram.providers.SafeStateMachineElementTypes;
 
-
 /**
  * @generated
  */

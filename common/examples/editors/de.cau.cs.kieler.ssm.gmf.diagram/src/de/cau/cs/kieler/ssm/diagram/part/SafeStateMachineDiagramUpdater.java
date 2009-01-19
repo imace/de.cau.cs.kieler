@@ -26,15 +26,15 @@ import de.cau.cs.kieler.ssm.diagram.edit.parts.StrongAbortionEditPart;
 import de.cau.cs.kieler.ssm.diagram.edit.parts.WeakAbortionEditPart;
 import de.cau.cs.kieler.ssm.diagram.providers.SafeStateMachineElementTypes;
 
-import edu.unikiel.rtsys.kieler.ssm.AbstractState;
-import edu.unikiel.rtsys.kieler.ssm.CompositeState;
-import edu.unikiel.rtsys.kieler.ssm.InitialState;
-import edu.unikiel.rtsys.kieler.ssm.NormalTermination;
-import edu.unikiel.rtsys.kieler.ssm.Region;
-import edu.unikiel.rtsys.kieler.ssm.SafeStateMachine;
-import edu.unikiel.rtsys.kieler.ssm.SimpleState;
-import edu.unikiel.rtsys.kieler.ssm.StrongAbortion;
-import edu.unikiel.rtsys.kieler.ssm.WeakAbortion;
+import de.cau.cs.kieler.ssm.AbstractState;
+import de.cau.cs.kieler.ssm.CompositeState;
+import de.cau.cs.kieler.ssm.InitialState;
+import de.cau.cs.kieler.ssm.NormalTermination;
+import de.cau.cs.kieler.ssm.Region;
+import de.cau.cs.kieler.ssm.SafeStateMachine;
+import de.cau.cs.kieler.ssm.SimpleState;
+import de.cau.cs.kieler.ssm.StrongAbortion;
+import de.cau.cs.kieler.ssm.WeakAbortion;
 
 /**
  * @generated
@@ -70,11 +70,12 @@ public class SafeStateMachineDiagramUpdater {
 		if (!containerView.isSetElement()) {
 			return Collections.EMPTY_LIST;
 		}
-		CompositeState modelElement = (CompositeState) containerView
+		de.cau.cs.kieler.ssm.CompositeState modelElement = (de.cau.cs.kieler.ssm.CompositeState) containerView
 				.getElement();
 		List result = new LinkedList();
 		for (Iterator it = modelElement.getRegions().iterator(); it.hasNext();) {
-			Region childElement = (Region) it.next();
+			de.cau.cs.kieler.ssm.Region childElement = (de.cau.cs.kieler.ssm.Region) it
+					.next();
 			int visualID = SafeStateMachineVisualIDRegistry.getNodeVisualID(
 					view, childElement);
 			if (visualID == RegionEditPart.VISUAL_ID) {
@@ -97,10 +98,12 @@ public class SafeStateMachineDiagramUpdater {
 		if (!containerView.isSetElement()) {
 			return Collections.EMPTY_LIST;
 		}
-		Region modelElement = (Region) containerView.getElement();
+		de.cau.cs.kieler.ssm.Region modelElement = (de.cau.cs.kieler.ssm.Region) containerView
+				.getElement();
 		List result = new LinkedList();
 		for (Iterator it = modelElement.getStates().iterator(); it.hasNext();) {
-			AbstractState childElement = (AbstractState) it.next();
+			de.cau.cs.kieler.ssm.AbstractState childElement = (de.cau.cs.kieler.ssm.AbstractState) it
+					.next();
 			int visualID = SafeStateMachineVisualIDRegistry.getNodeVisualID(
 					view, childElement);
 			if (visualID == CompositeState2EditPart.VISUAL_ID) {
@@ -134,11 +137,12 @@ public class SafeStateMachineDiagramUpdater {
 		if (!containerView.isSetElement()) {
 			return Collections.EMPTY_LIST;
 		}
-		CompositeState modelElement = (CompositeState) containerView
+		de.cau.cs.kieler.ssm.CompositeState modelElement = (de.cau.cs.kieler.ssm.CompositeState) containerView
 				.getElement();
 		List result = new LinkedList();
 		for (Iterator it = modelElement.getRegions().iterator(); it.hasNext();) {
-			Region childElement = (Region) it.next();
+			de.cau.cs.kieler.ssm.Region childElement = (de.cau.cs.kieler.ssm.Region) it
+					.next();
 			int visualID = SafeStateMachineVisualIDRegistry.getNodeVisualID(
 					view, childElement);
 			if (visualID == RegionEditPart.VISUAL_ID) {
@@ -157,10 +161,12 @@ public class SafeStateMachineDiagramUpdater {
 		if (!view.isSetElement()) {
 			return Collections.EMPTY_LIST;
 		}
-		SafeStateMachine modelElement = (SafeStateMachine) view.getElement();
+		de.cau.cs.kieler.ssm.SafeStateMachine modelElement = (de.cau.cs.kieler.ssm.SafeStateMachine) view
+				.getElement();
 		List result = new LinkedList();
 		{
-			CompositeState childElement = modelElement.getTop();
+			de.cau.cs.kieler.ssm.CompositeState childElement = modelElement
+					.getTop();
 			int visualID = SafeStateMachineVisualIDRegistry.getNodeVisualID(
 					view, childElement);
 			if (visualID == CompositeStateEditPart.VISUAL_ID) {
@@ -266,7 +272,8 @@ public class SafeStateMachineDiagramUpdater {
 	 * @generated
 	 */
 	public static List getRegion_3001ContainedLinks(View view) {
-		Region modelElement = (Region) view.getElement();
+		de.cau.cs.kieler.ssm.Region modelElement = (de.cau.cs.kieler.ssm.Region) view
+				.getElement();
 		List result = new LinkedList();
 		result
 				.addAll(getContainedTypeModelFacetLinks_StrongAbortion_4001(modelElement));
@@ -323,7 +330,8 @@ public class SafeStateMachineDiagramUpdater {
 	 * @generated
 	 */
 	public static List getCompositeState_2001IncomingLinks(View view) {
-		CompositeState modelElement = (CompositeState) view.getElement();
+		de.cau.cs.kieler.ssm.CompositeState modelElement = (de.cau.cs.kieler.ssm.CompositeState) view
+				.getElement();
 		Map crossReferences = EcoreUtil.CrossReferencer.find(view.eResource()
 				.getResourceSet().getResources());
 		List result = new LinkedList();
@@ -347,7 +355,8 @@ public class SafeStateMachineDiagramUpdater {
 	 * @generated
 	 */
 	public static List getCompositeState_3002IncomingLinks(View view) {
-		CompositeState modelElement = (CompositeState) view.getElement();
+		de.cau.cs.kieler.ssm.CompositeState modelElement = (de.cau.cs.kieler.ssm.CompositeState) view
+				.getElement();
 		Map crossReferences = EcoreUtil.CrossReferencer.find(view.eResource()
 				.getResourceSet().getResources());
 		List result = new LinkedList();
@@ -364,7 +373,8 @@ public class SafeStateMachineDiagramUpdater {
 	 * @generated
 	 */
 	public static List getSimpleState_3003IncomingLinks(View view) {
-		SimpleState modelElement = (SimpleState) view.getElement();
+		de.cau.cs.kieler.ssm.SimpleState modelElement = (de.cau.cs.kieler.ssm.SimpleState) view
+				.getElement();
 		Map crossReferences = EcoreUtil.CrossReferencer.find(view.eResource()
 				.getResourceSet().getResources());
 		List result = new LinkedList();
@@ -381,7 +391,8 @@ public class SafeStateMachineDiagramUpdater {
 	 * @generated
 	 */
 	public static List getInitialState_3004IncomingLinks(View view) {
-		InitialState modelElement = (InitialState) view.getElement();
+		de.cau.cs.kieler.ssm.InitialState modelElement = (de.cau.cs.kieler.ssm.InitialState) view
+				.getElement();
 		Map crossReferences = EcoreUtil.CrossReferencer.find(view.eResource()
 				.getResourceSet().getResources());
 		List result = new LinkedList();
@@ -419,7 +430,8 @@ public class SafeStateMachineDiagramUpdater {
 	 * @generated
 	 */
 	public static List getCompositeState_2001OutgoingLinks(View view) {
-		CompositeState modelElement = (CompositeState) view.getElement();
+		de.cau.cs.kieler.ssm.CompositeState modelElement = (de.cau.cs.kieler.ssm.CompositeState) view
+				.getElement();
 		List result = new LinkedList();
 		result
 				.addAll(getOutgoingTypeModelFacetLinks_StrongAbortion_4001(modelElement));
@@ -441,7 +453,8 @@ public class SafeStateMachineDiagramUpdater {
 	 * @generated
 	 */
 	public static List getCompositeState_3002OutgoingLinks(View view) {
-		CompositeState modelElement = (CompositeState) view.getElement();
+		de.cau.cs.kieler.ssm.CompositeState modelElement = (de.cau.cs.kieler.ssm.CompositeState) view
+				.getElement();
 		List result = new LinkedList();
 		result
 				.addAll(getOutgoingTypeModelFacetLinks_StrongAbortion_4001(modelElement));
@@ -456,7 +469,8 @@ public class SafeStateMachineDiagramUpdater {
 	 * @generated
 	 */
 	public static List getSimpleState_3003OutgoingLinks(View view) {
-		SimpleState modelElement = (SimpleState) view.getElement();
+		de.cau.cs.kieler.ssm.SimpleState modelElement = (de.cau.cs.kieler.ssm.SimpleState) view
+				.getElement();
 		List result = new LinkedList();
 		result
 				.addAll(getOutgoingTypeModelFacetLinks_StrongAbortion_4001(modelElement));
@@ -471,7 +485,8 @@ public class SafeStateMachineDiagramUpdater {
 	 * @generated
 	 */
 	public static List getInitialState_3004OutgoingLinks(View view) {
-		InitialState modelElement = (InitialState) view.getElement();
+		de.cau.cs.kieler.ssm.InitialState modelElement = (de.cau.cs.kieler.ssm.InitialState) view
+				.getElement();
 		List result = new LinkedList();
 		result
 				.addAll(getOutgoingTypeModelFacetLinks_StrongAbortion_4001(modelElement));
@@ -507,21 +522,21 @@ public class SafeStateMachineDiagramUpdater {
 	 * @generated
 	 */
 	private static Collection getContainedTypeModelFacetLinks_StrongAbortion_4001(
-			Region container) {
+			de.cau.cs.kieler.ssm.Region container) {
 		Collection result = new LinkedList();
 		for (Iterator links = container.getTransitions().iterator(); links
 				.hasNext();) {
 			EObject linkObject = (EObject) links.next();
-			if (false == linkObject instanceof StrongAbortion) {
+			if (false == linkObject instanceof de.cau.cs.kieler.ssm.StrongAbortion) {
 				continue;
 			}
-			StrongAbortion link = (StrongAbortion) linkObject;
+			de.cau.cs.kieler.ssm.StrongAbortion link = (de.cau.cs.kieler.ssm.StrongAbortion) linkObject;
 			if (StrongAbortionEditPart.VISUAL_ID != SafeStateMachineVisualIDRegistry
 					.getLinkWithClassVisualID(link)) {
 				continue;
 			}
-			AbstractState dst = link.getTarget();
-			AbstractState src = link.getSource();
+			de.cau.cs.kieler.ssm.AbstractState dst = link.getTarget();
+			de.cau.cs.kieler.ssm.AbstractState src = link.getSource();
 			result.add(new SafeStateMachineLinkDescriptor(src, dst, link,
 					SafeStateMachineElementTypes.StrongAbortion_4001,
 					StrongAbortionEditPart.VISUAL_ID));
@@ -533,21 +548,21 @@ public class SafeStateMachineDiagramUpdater {
 	 * @generated
 	 */
 	private static Collection getContainedTypeModelFacetLinks_NormalTermination_4002(
-			Region container) {
+			de.cau.cs.kieler.ssm.Region container) {
 		Collection result = new LinkedList();
 		for (Iterator links = container.getTransitions().iterator(); links
 				.hasNext();) {
 			EObject linkObject = (EObject) links.next();
-			if (false == linkObject instanceof NormalTermination) {
+			if (false == linkObject instanceof de.cau.cs.kieler.ssm.NormalTermination) {
 				continue;
 			}
-			NormalTermination link = (NormalTermination) linkObject;
+			de.cau.cs.kieler.ssm.NormalTermination link = (de.cau.cs.kieler.ssm.NormalTermination) linkObject;
 			if (NormalTerminationEditPart.VISUAL_ID != SafeStateMachineVisualIDRegistry
 					.getLinkWithClassVisualID(link)) {
 				continue;
 			}
-			AbstractState dst = link.getTarget();
-			AbstractState src = link.getSource();
+			de.cau.cs.kieler.ssm.AbstractState dst = link.getTarget();
+			de.cau.cs.kieler.ssm.AbstractState src = link.getSource();
 			result.add(new SafeStateMachineLinkDescriptor(src, dst, link,
 					SafeStateMachineElementTypes.NormalTermination_4002,
 					NormalTerminationEditPart.VISUAL_ID));
@@ -559,21 +574,21 @@ public class SafeStateMachineDiagramUpdater {
 	 * @generated
 	 */
 	private static Collection getContainedTypeModelFacetLinks_WeakAbortion_4003(
-			Region container) {
+			de.cau.cs.kieler.ssm.Region container) {
 		Collection result = new LinkedList();
 		for (Iterator links = container.getTransitions().iterator(); links
 				.hasNext();) {
 			EObject linkObject = (EObject) links.next();
-			if (false == linkObject instanceof WeakAbortion) {
+			if (false == linkObject instanceof de.cau.cs.kieler.ssm.WeakAbortion) {
 				continue;
 			}
-			WeakAbortion link = (WeakAbortion) linkObject;
+			de.cau.cs.kieler.ssm.WeakAbortion link = (de.cau.cs.kieler.ssm.WeakAbortion) linkObject;
 			if (WeakAbortionEditPart.VISUAL_ID != SafeStateMachineVisualIDRegistry
 					.getLinkWithClassVisualID(link)) {
 				continue;
 			}
-			AbstractState dst = link.getTarget();
-			AbstractState src = link.getSource();
+			de.cau.cs.kieler.ssm.AbstractState dst = link.getTarget();
+			de.cau.cs.kieler.ssm.AbstractState src = link.getSource();
 			result.add(new SafeStateMachineLinkDescriptor(src, dst, link,
 					SafeStateMachineElementTypes.WeakAbortion_4003,
 					WeakAbortionEditPart.VISUAL_ID));
@@ -585,23 +600,24 @@ public class SafeStateMachineDiagramUpdater {
 	 * @generated
 	 */
 	private static Collection getIncomingTypeModelFacetLinks_StrongAbortion_4001(
-			AbstractState target, Map crossReferences) {
+			de.cau.cs.kieler.ssm.AbstractState target, Map crossReferences) {
 		Collection result = new LinkedList();
 		Collection settings = (Collection) crossReferences.get(target);
 		for (Iterator it = settings.iterator(); it.hasNext();) {
 			EStructuralFeature.Setting setting = (EStructuralFeature.Setting) it
 					.next();
-			if (setting.getEStructuralFeature() != edu.unikiel.rtsys.kieler.ssm.ssmPackage.eINSTANCE
+			if (setting.getEStructuralFeature() != de.cau.cs.kieler.ssm.ssmPackage.eINSTANCE
 					.getTransition_Target()
-					|| false == setting.getEObject() instanceof StrongAbortion) {
+					|| false == setting.getEObject() instanceof de.cau.cs.kieler.ssm.StrongAbortion) {
 				continue;
 			}
-			StrongAbortion link = (StrongAbortion) setting.getEObject();
+			de.cau.cs.kieler.ssm.StrongAbortion link = (de.cau.cs.kieler.ssm.StrongAbortion) setting
+					.getEObject();
 			if (StrongAbortionEditPart.VISUAL_ID != SafeStateMachineVisualIDRegistry
 					.getLinkWithClassVisualID(link)) {
 				continue;
 			}
-			AbstractState src = link.getSource();
+			de.cau.cs.kieler.ssm.AbstractState src = link.getSource();
 			result.add(new SafeStateMachineLinkDescriptor(src, target, link,
 					SafeStateMachineElementTypes.StrongAbortion_4001,
 					StrongAbortionEditPart.VISUAL_ID));
@@ -613,23 +629,24 @@ public class SafeStateMachineDiagramUpdater {
 	 * @generated
 	 */
 	private static Collection getIncomingTypeModelFacetLinks_NormalTermination_4002(
-			AbstractState target, Map crossReferences) {
+			de.cau.cs.kieler.ssm.AbstractState target, Map crossReferences) {
 		Collection result = new LinkedList();
 		Collection settings = (Collection) crossReferences.get(target);
 		for (Iterator it = settings.iterator(); it.hasNext();) {
 			EStructuralFeature.Setting setting = (EStructuralFeature.Setting) it
 					.next();
-			if (setting.getEStructuralFeature() != edu.unikiel.rtsys.kieler.ssm.ssmPackage.eINSTANCE
+			if (setting.getEStructuralFeature() != de.cau.cs.kieler.ssm.ssmPackage.eINSTANCE
 					.getTransition_Target()
-					|| false == setting.getEObject() instanceof NormalTermination) {
+					|| false == setting.getEObject() instanceof de.cau.cs.kieler.ssm.NormalTermination) {
 				continue;
 			}
-			NormalTermination link = (NormalTermination) setting.getEObject();
+			de.cau.cs.kieler.ssm.NormalTermination link = (de.cau.cs.kieler.ssm.NormalTermination) setting
+					.getEObject();
 			if (NormalTerminationEditPart.VISUAL_ID != SafeStateMachineVisualIDRegistry
 					.getLinkWithClassVisualID(link)) {
 				continue;
 			}
-			AbstractState src = link.getSource();
+			de.cau.cs.kieler.ssm.AbstractState src = link.getSource();
 			result.add(new SafeStateMachineLinkDescriptor(src, target, link,
 					SafeStateMachineElementTypes.NormalTermination_4002,
 					NormalTerminationEditPart.VISUAL_ID));
@@ -641,23 +658,24 @@ public class SafeStateMachineDiagramUpdater {
 	 * @generated
 	 */
 	private static Collection getIncomingTypeModelFacetLinks_WeakAbortion_4003(
-			AbstractState target, Map crossReferences) {
+			de.cau.cs.kieler.ssm.AbstractState target, Map crossReferences) {
 		Collection result = new LinkedList();
 		Collection settings = (Collection) crossReferences.get(target);
 		for (Iterator it = settings.iterator(); it.hasNext();) {
 			EStructuralFeature.Setting setting = (EStructuralFeature.Setting) it
 					.next();
-			if (setting.getEStructuralFeature() != edu.unikiel.rtsys.kieler.ssm.ssmPackage.eINSTANCE
+			if (setting.getEStructuralFeature() != de.cau.cs.kieler.ssm.ssmPackage.eINSTANCE
 					.getTransition_Target()
-					|| false == setting.getEObject() instanceof WeakAbortion) {
+					|| false == setting.getEObject() instanceof de.cau.cs.kieler.ssm.WeakAbortion) {
 				continue;
 			}
-			WeakAbortion link = (WeakAbortion) setting.getEObject();
+			de.cau.cs.kieler.ssm.WeakAbortion link = (de.cau.cs.kieler.ssm.WeakAbortion) setting
+					.getEObject();
 			if (WeakAbortionEditPart.VISUAL_ID != SafeStateMachineVisualIDRegistry
 					.getLinkWithClassVisualID(link)) {
 				continue;
 			}
-			AbstractState src = link.getSource();
+			de.cau.cs.kieler.ssm.AbstractState src = link.getSource();
 			result.add(new SafeStateMachineLinkDescriptor(src, target, link,
 					SafeStateMachineElementTypes.WeakAbortion_4003,
 					WeakAbortionEditPart.VISUAL_ID));
@@ -669,15 +687,15 @@ public class SafeStateMachineDiagramUpdater {
 	 * @generated
 	 */
 	private static Collection getOutgoingTypeModelFacetLinks_StrongAbortion_4001(
-			AbstractState source) {
-		Region container = null;
+			de.cau.cs.kieler.ssm.AbstractState source) {
+		de.cau.cs.kieler.ssm.Region container = null;
 		// Find container element for the link.
 		// Climb up by containment hierarchy starting from the source
 		// and return the first element that is instance of the container class.
 		for (EObject element = source; element != null && container == null; element = element
 				.eContainer()) {
-			if (element instanceof Region) {
-				container = (Region) element;
+			if (element instanceof de.cau.cs.kieler.ssm.Region) {
+				container = (de.cau.cs.kieler.ssm.Region) element;
 			}
 		}
 		if (container == null) {
@@ -687,16 +705,16 @@ public class SafeStateMachineDiagramUpdater {
 		for (Iterator links = container.getTransitions().iterator(); links
 				.hasNext();) {
 			EObject linkObject = (EObject) links.next();
-			if (false == linkObject instanceof StrongAbortion) {
+			if (false == linkObject instanceof de.cau.cs.kieler.ssm.StrongAbortion) {
 				continue;
 			}
-			StrongAbortion link = (StrongAbortion) linkObject;
+			de.cau.cs.kieler.ssm.StrongAbortion link = (de.cau.cs.kieler.ssm.StrongAbortion) linkObject;
 			if (StrongAbortionEditPart.VISUAL_ID != SafeStateMachineVisualIDRegistry
 					.getLinkWithClassVisualID(link)) {
 				continue;
 			}
-			AbstractState dst = link.getTarget();
-			AbstractState src = link.getSource();
+			de.cau.cs.kieler.ssm.AbstractState dst = link.getTarget();
+			de.cau.cs.kieler.ssm.AbstractState src = link.getSource();
 			if (src != source) {
 				continue;
 			}
@@ -711,15 +729,15 @@ public class SafeStateMachineDiagramUpdater {
 	 * @generated
 	 */
 	private static Collection getOutgoingTypeModelFacetLinks_NormalTermination_4002(
-			AbstractState source) {
-		Region container = null;
+			de.cau.cs.kieler.ssm.AbstractState source) {
+		de.cau.cs.kieler.ssm.Region container = null;
 		// Find container element for the link.
 		// Climb up by containment hierarchy starting from the source
 		// and return the first element that is instance of the container class.
 		for (EObject element = source; element != null && container == null; element = element
 				.eContainer()) {
-			if (element instanceof Region) {
-				container = (Region) element;
+			if (element instanceof de.cau.cs.kieler.ssm.Region) {
+				container = (de.cau.cs.kieler.ssm.Region) element;
 			}
 		}
 		if (container == null) {
@@ -729,16 +747,16 @@ public class SafeStateMachineDiagramUpdater {
 		for (Iterator links = container.getTransitions().iterator(); links
 				.hasNext();) {
 			EObject linkObject = (EObject) links.next();
-			if (false == linkObject instanceof NormalTermination) {
+			if (false == linkObject instanceof de.cau.cs.kieler.ssm.NormalTermination) {
 				continue;
 			}
-			NormalTermination link = (NormalTermination) linkObject;
+			de.cau.cs.kieler.ssm.NormalTermination link = (de.cau.cs.kieler.ssm.NormalTermination) linkObject;
 			if (NormalTerminationEditPart.VISUAL_ID != SafeStateMachineVisualIDRegistry
 					.getLinkWithClassVisualID(link)) {
 				continue;
 			}
-			AbstractState dst = link.getTarget();
-			AbstractState src = link.getSource();
+			de.cau.cs.kieler.ssm.AbstractState dst = link.getTarget();
+			de.cau.cs.kieler.ssm.AbstractState src = link.getSource();
 			if (src != source) {
 				continue;
 			}
@@ -753,15 +771,15 @@ public class SafeStateMachineDiagramUpdater {
 	 * @generated
 	 */
 	private static Collection getOutgoingTypeModelFacetLinks_WeakAbortion_4003(
-			AbstractState source) {
-		Region container = null;
+			de.cau.cs.kieler.ssm.AbstractState source) {
+		de.cau.cs.kieler.ssm.Region container = null;
 		// Find container element for the link.
 		// Climb up by containment hierarchy starting from the source
 		// and return the first element that is instance of the container class.
 		for (EObject element = source; element != null && container == null; element = element
 				.eContainer()) {
-			if (element instanceof Region) {
-				container = (Region) element;
+			if (element instanceof de.cau.cs.kieler.ssm.Region) {
+				container = (de.cau.cs.kieler.ssm.Region) element;
 			}
 		}
 		if (container == null) {
@@ -771,16 +789,16 @@ public class SafeStateMachineDiagramUpdater {
 		for (Iterator links = container.getTransitions().iterator(); links
 				.hasNext();) {
 			EObject linkObject = (EObject) links.next();
-			if (false == linkObject instanceof WeakAbortion) {
+			if (false == linkObject instanceof de.cau.cs.kieler.ssm.WeakAbortion) {
 				continue;
 			}
-			WeakAbortion link = (WeakAbortion) linkObject;
+			de.cau.cs.kieler.ssm.WeakAbortion link = (de.cau.cs.kieler.ssm.WeakAbortion) linkObject;
 			if (WeakAbortionEditPart.VISUAL_ID != SafeStateMachineVisualIDRegistry
 					.getLinkWithClassVisualID(link)) {
 				continue;
 			}
-			AbstractState dst = link.getTarget();
-			AbstractState src = link.getSource();
+			de.cau.cs.kieler.ssm.AbstractState dst = link.getTarget();
+			de.cau.cs.kieler.ssm.AbstractState src = link.getSource();
 			if (src != source) {
 				continue;
 			}

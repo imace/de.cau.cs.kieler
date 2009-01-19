@@ -17,7 +17,6 @@ import de.cau.cs.kieler.ssm.diagram.edit.parts.CompositeStateCompositeStateCompa
 import de.cau.cs.kieler.ssm.diagram.edit.parts.CompositeStateName2EditPart;
 import de.cau.cs.kieler.ssm.diagram.part.SafeStateMachineVisualIDRegistry;
 
-
 /**
  * @generated
  */

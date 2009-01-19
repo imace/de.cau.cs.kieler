@@ -51,7 +51,6 @@ import de.cau.cs.kieler.ssm.diagram.view.factories.WeakAbortionIsImmediateString
 import de.cau.cs.kieler.ssm.diagram.view.factories.WeakAbortionPriorityViewFactory;
 import de.cau.cs.kieler.ssm.diagram.view.factories.WeakAbortionViewFactory;
 
-
 /**
  * @generated
  */

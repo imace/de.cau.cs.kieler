@@ -43,7 +43,6 @@ import org.eclipse.ui.part.ShowInContext;
 
 import de.cau.cs.kieler.ssm.diagram.navigator.SafeStateMachineNavigatorItem;
 
-
 /**
  * @generated
  */
@@ -58,7 +57,7 @@ public class SafeStateMachineDiagramEditor extends DiagramDocumentEditor
 	/**
 	 * @generated
 	 */
-	public static final String CONTEXT_ID = "edu.unikiel.rtsys.kieler.ssm.diagram.ui.diagramContext"; //$NON-NLS-1$
+	public static final String CONTEXT_ID = "de.cau.cs.kieler.ssm.diagram.ui.diagramContext"; //$NON-NLS-1$
 
 	/**
 	 * @generated

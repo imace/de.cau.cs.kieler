@@ -20,7 +20,7 @@
         xsi:type="gmfgen:FigureViewmap"
         figureQualifiedClassName="org.eclipse.draw2d.FreeformLayer"/>
     <domainDiagramElement
-        href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.genmodel#//ssm/SafeStateMachine"/>
+        href="../../de.cau.cs.kieler.ssm.emf/model/ssm.genmodel#//ssm/SafeStateMachine"/>
     <childNodes
         visualID="3001"
         editPartClassName="RegionEditPart"
@@ -44,11 +44,11 @@
       </viewmap>
       <modelFacet>
         <metaClass
-            href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.genmodel#//ssm/Region"/>
+            href="../../de.cau.cs.kieler.ssm.emf/model/ssm.genmodel#//ssm/Region"/>
         <containmentMetaFeature
-            href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.genmodel#//ssm/CompositeState/regions"/>
+            href="../../de.cau.cs.kieler.ssm.emf/model/ssm.genmodel#//ssm/CompositeState/regions"/>
         <childMetaFeature
-            href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.genmodel#//ssm/CompositeState/regions"/>
+            href="../../de.cau.cs.kieler.ssm.emf/model/ssm.genmodel#//ssm/CompositeState/regions"/>
       </modelFacet>
     </childNodes>
     <childNodes
@@ -84,11 +84,11 @@
           xsi:type="gmfgen:OpenDiagramBehaviour"/>
       <modelFacet>
         <metaClass
-            href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.genmodel#//ssm/CompositeState"/>
+            href="../../de.cau.cs.kieler.ssm.emf/model/ssm.genmodel#//ssm/CompositeState"/>
         <containmentMetaFeature
-            href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.genmodel#//ssm/Region/states"/>
+            href="../../de.cau.cs.kieler.ssm.emf/model/ssm.genmodel#//ssm/Region/states"/>
         <childMetaFeature
-            href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.genmodel#//ssm/Region/states"/>
+            href="../../de.cau.cs.kieler.ssm.emf/model/ssm.genmodel#//ssm/Region/states"/>
       </modelFacet>
       <labels
           visualID="5001"
@@ -105,7 +105,7 @@
         <modelFacet
             xsi:type="gmfgen:FeatureLabelModelFacet">
           <metaFeatures
-              href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.genmodel#//ssm/Named/name"/>
+              href="../../de.cau.cs.kieler.ssm.emf/model/ssm.genmodel#//ssm/Named/name"/>
         </modelFacet>
       </labels>
     </childNodes>
@@ -138,11 +138,11 @@
       <modelFacet
           modelElementSelector="//@expressionProviders/@providers.0/@expressions.0">
         <metaClass
-            href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.genmodel#//ssm/SimpleState"/>
+            href="../../de.cau.cs.kieler.ssm.emf/model/ssm.genmodel#//ssm/SimpleState"/>
         <containmentMetaFeature
-            href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.genmodel#//ssm/Region/states"/>
+            href="../../de.cau.cs.kieler.ssm.emf/model/ssm.genmodel#//ssm/Region/states"/>
         <childMetaFeature
-            href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.genmodel#//ssm/Region/states"/>
+            href="../../de.cau.cs.kieler.ssm.emf/model/ssm.genmodel#//ssm/Region/states"/>
       </modelFacet>
       <labels
           visualID="5002"
@@ -161,7 +161,7 @@
             editorPattern=""
             editPattern="">
           <metaFeatures
-              href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.genmodel#//ssm/Named/name"/>
+              href="../../de.cau.cs.kieler.ssm.emf/model/ssm.genmodel#//ssm/Named/name"/>
         </modelFacet>
       </labels>
     </childNodes>
@@ -196,11 +196,11 @@
       <modelFacet
           modelElementSelector="//@expressionProviders/@providers.0/@expressions.1">
         <metaClass
-            href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.genmodel#//ssm/InitialState"/>
+            href="../../de.cau.cs.kieler.ssm.emf/model/ssm.genmodel#//ssm/InitialState"/>
         <containmentMetaFeature
-            href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.genmodel#//ssm/Region/states"/>
+            href="../../de.cau.cs.kieler.ssm.emf/model/ssm.genmodel#//ssm/Region/states"/>
         <childMetaFeature
-            href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.genmodel#//ssm/Region/states"/>
+            href="../../de.cau.cs.kieler.ssm.emf/model/ssm.genmodel#//ssm/Region/states"/>
       </modelFacet>
     </childNodes>
     <topLevelNodes
@@ -235,11 +235,11 @@
           xsi:type="gmfgen:OpenDiagramBehaviour"/>
       <modelFacet>
         <metaClass
-            href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.genmodel#//ssm/CompositeState"/>
+            href="../../de.cau.cs.kieler.ssm.emf/model/ssm.genmodel#//ssm/CompositeState"/>
         <containmentMetaFeature
-            href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.genmodel#//ssm/SafeStateMachine/top"/>
+            href="../../de.cau.cs.kieler.ssm.emf/model/ssm.genmodel#//ssm/SafeStateMachine/top"/>
         <childMetaFeature
-            href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.genmodel#//ssm/SafeStateMachine/top"/>
+            href="../../de.cau.cs.kieler.ssm.emf/model/ssm.genmodel#//ssm/SafeStateMachine/top"/>
       </modelFacet>
       <labels
           visualID="5003"
@@ -256,7 +256,7 @@
         <modelFacet
             xsi:type="gmfgen:FeatureLabelModelFacet">
           <metaFeatures
-              href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.genmodel#//ssm/Named/name"/>
+              href="../../de.cau.cs.kieler.ssm.emf/model/ssm.genmodel#//ssm/Named/name"/>
         </modelFacet>
       </labels>
     </topLevelNodes>
@@ -282,15 +282,15 @@
       <modelFacet
           xsi:type="gmfgen:TypeLinkModelFacet">
         <metaClass
-            href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.genmodel#//ssm/StrongAbortion"/>
+            href="../../de.cau.cs.kieler.ssm.emf/model/ssm.genmodel#//ssm/StrongAbortion"/>
         <containmentMetaFeature
-            href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.genmodel#//ssm/Region/transitions"/>
+            href="../../de.cau.cs.kieler.ssm.emf/model/ssm.genmodel#//ssm/Region/transitions"/>
         <childMetaFeature
-            href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.genmodel#//ssm/Region/transitions"/>
+            href="../../de.cau.cs.kieler.ssm.emf/model/ssm.genmodel#//ssm/Region/transitions"/>
         <sourceMetaFeature
-            href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.genmodel#//ssm/Transition/source"/>
+            href="../../de.cau.cs.kieler.ssm.emf/model/ssm.genmodel#//ssm/Transition/source"/>
         <targetMetaFeature
-            href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.genmodel#//ssm/Transition/target"/>
+            href="../../de.cau.cs.kieler.ssm.emf/model/ssm.genmodel#//ssm/Transition/target"/>
       </modelFacet>
       <labels
           visualID="6001"
@@ -313,11 +313,11 @@
             editorPattern=""
             editPattern="{0}{1}/{2}">
           <metaFeatures
-              href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.genmodel#//ssm/TransitionImmediateable/isImmediateString"/>
+              href="../../de.cau.cs.kieler.ssm.emf/model/ssm.genmodel#//ssm/TransitionImmediateable/isImmediateString"/>
           <metaFeatures
-              href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.genmodel#//ssm/TransitionTriggerable/triggerString"/>
+              href="../../de.cau.cs.kieler.ssm.emf/model/ssm.genmodel#//ssm/TransitionTriggerable/triggerString"/>
           <metaFeatures
-              href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.genmodel#//ssm/Transition/effectString"/>
+              href="../../de.cau.cs.kieler.ssm.emf/model/ssm.genmodel#//ssm/Transition/effectString"/>
         </modelFacet>
       </labels>
       <labels
@@ -342,7 +342,7 @@
             editorPattern=""
             editPattern="">
           <metaFeatures
-              href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.genmodel#//ssm/Transition/priority"/>
+              href="../../de.cau.cs.kieler.ssm.emf/model/ssm.genmodel#//ssm/Transition/priority"/>
         </modelFacet>
       </labels>
     </links>
@@ -368,15 +368,15 @@
       <modelFacet
           xsi:type="gmfgen:TypeLinkModelFacet">
         <metaClass
-            href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.genmodel#//ssm/NormalTermination"/>
+            href="../../de.cau.cs.kieler.ssm.emf/model/ssm.genmodel#//ssm/NormalTermination"/>
         <containmentMetaFeature
-            href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.genmodel#//ssm/Region/transitions"/>
+            href="../../de.cau.cs.kieler.ssm.emf/model/ssm.genmodel#//ssm/Region/transitions"/>
         <childMetaFeature
-            href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.genmodel#//ssm/Region/transitions"/>
+            href="../../de.cau.cs.kieler.ssm.emf/model/ssm.genmodel#//ssm/Region/transitions"/>
         <sourceMetaFeature
-            href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.genmodel#//ssm/Transition/source"/>
+            href="../../de.cau.cs.kieler.ssm.emf/model/ssm.genmodel#//ssm/Transition/source"/>
         <targetMetaFeature
-            href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.genmodel#//ssm/Transition/target"/>
+            href="../../de.cau.cs.kieler.ssm.emf/model/ssm.genmodel#//ssm/Transition/target"/>
       </modelFacet>
       <labels
           visualID="6003"
@@ -399,7 +399,7 @@
             editorPattern=""
             editPattern="/{0}">
           <metaFeatures
-              href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.genmodel#//ssm/Transition/effectString"/>
+              href="../../de.cau.cs.kieler.ssm.emf/model/ssm.genmodel#//ssm/Transition/effectString"/>
         </modelFacet>
       </labels>
       <labels
@@ -424,7 +424,7 @@
             editorPattern=""
             editPattern="">
           <metaFeatures
-              href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.genmodel#//ssm/Transition/priority"/>
+              href="../../de.cau.cs.kieler.ssm.emf/model/ssm.genmodel#//ssm/Transition/priority"/>
         </modelFacet>
       </labels>
     </links>
@@ -450,15 +450,15 @@
       <modelFacet
           xsi:type="gmfgen:TypeLinkModelFacet">
         <metaClass
-            href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.genmodel#//ssm/WeakAbortion"/>
+            href="../../de.cau.cs.kieler.ssm.emf/model/ssm.genmodel#//ssm/WeakAbortion"/>
         <containmentMetaFeature
-            href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.genmodel#//ssm/Region/transitions"/>
+            href="../../de.cau.cs.kieler.ssm.emf/model/ssm.genmodel#//ssm/Region/transitions"/>
         <childMetaFeature
-            href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.genmodel#//ssm/Region/transitions"/>
+            href="../../de.cau.cs.kieler.ssm.emf/model/ssm.genmodel#//ssm/Region/transitions"/>
         <sourceMetaFeature
-            href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.genmodel#//ssm/Transition/source"/>
+            href="../../de.cau.cs.kieler.ssm.emf/model/ssm.genmodel#//ssm/Transition/source"/>
         <targetMetaFeature
-            href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.genmodel#//ssm/Transition/target"/>
+            href="../../de.cau.cs.kieler.ssm.emf/model/ssm.genmodel#//ssm/Transition/target"/>
       </modelFacet>
       <labels
           visualID="6005"
@@ -481,11 +481,11 @@
             editorPattern=""
             editPattern="{0}{1}/{2}">
           <metaFeatures
-              href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.genmodel#//ssm/TransitionImmediateable/isImmediateString"/>
+              href="../../de.cau.cs.kieler.ssm.emf/model/ssm.genmodel#//ssm/TransitionImmediateable/isImmediateString"/>
           <metaFeatures
-              href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.genmodel#//ssm/TransitionTriggerable/triggerString"/>
+              href="../../de.cau.cs.kieler.ssm.emf/model/ssm.genmodel#//ssm/TransitionTriggerable/triggerString"/>
           <metaFeatures
-              href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.genmodel#//ssm/Transition/effectString"/>
+              href="../../de.cau.cs.kieler.ssm.emf/model/ssm.genmodel#//ssm/Transition/effectString"/>
         </modelFacet>
       </labels>
       <labels
@@ -510,7 +510,7 @@
             editorPattern=""
             editPattern="">
           <metaFeatures
-              href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.genmodel#//ssm/Transition/priority"/>
+              href="../../de.cau.cs.kieler.ssm.emf/model/ssm.genmodel#//ssm/Transition/priority"/>
         </modelFacet>
       </labels>
     </links>
@@ -627,37 +627,37 @@
     </palette>
     <preferencePages
         xsi:type="gmfgen:GenStandardPreferencePage"
-        iD="edu.unikiel.rtsys.kieler.ssm.emf.diagram.general"
+        iD="de.cau.cs.kieler.ssm.emf.diagram.general"
         name="Safe State Machine Diagram">
       <children
           xsi:type="gmfgen:GenStandardPreferencePage"
-          iD="edu.unikiel.rtsys.kieler.ssm.emf.diagram.appearance"
+          iD="de.cau.cs.kieler.ssm.emf.diagram.appearance"
           name="Appearance"
           kind="Appearance"/>
       <children
           xsi:type="gmfgen:GenStandardPreferencePage"
-          iD="edu.unikiel.rtsys.kieler.ssm.emf.diagram.connections"
+          iD="de.cau.cs.kieler.ssm.emf.diagram.connections"
           name="Connections"
           kind="Connections"/>
       <children
           xsi:type="gmfgen:GenStandardPreferencePage"
-          iD="edu.unikiel.rtsys.kieler.ssm.emf.diagram.printing"
+          iD="de.cau.cs.kieler.ssm.emf.diagram.printing"
           name="Printing"
           kind="Printing"/>
       <children
           xsi:type="gmfgen:GenStandardPreferencePage"
-          iD="edu.unikiel.rtsys.kieler.ssm.emf.diagram.rulersAndGrid"
+          iD="de.cau.cs.kieler.ssm.emf.diagram.rulersAndGrid"
           name="Rulers And Grid"
           kind="RulersAndGrid"/>
       <children
           xsi:type="gmfgen:GenStandardPreferencePage"
-          iD="edu.unikiel.rtsys.kieler.ssm.emf.diagram.pathmaps"
+          iD="de.cau.cs.kieler.ssm.emf.diagram.pathmaps"
           name="Pathmaps"
           kind="Pathmaps"/>
     </preferencePages>
   </diagram>
   <plugin
-      iD="edu.unikiel.rtsys.kieler.ssm.gmf.diagram"/>
+      iD="de.cau.cs.kieler.ssm.gmf.diagram"/>
   <editor/>
   <navigator>
     <childReferences
@@ -1005,7 +1005,7 @@
     </tabs>
   </propertySheet>
   <domainGenModel
-      href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.genmodel#/"/>
+      href="../../de.cau.cs.kieler.ssm.emf/model/ssm.genmodel#/"/>
   <expressionProviders>
     <providers
         xsi:type="gmfgen:GenExpressionInterpreter">

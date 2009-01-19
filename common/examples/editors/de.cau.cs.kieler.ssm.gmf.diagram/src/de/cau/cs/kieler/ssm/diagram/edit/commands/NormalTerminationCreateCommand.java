@@ -12,9 +12,9 @@ import org.eclipse.gmf.runtime.emf.type.core.requests.CreateRelationshipRequest;
 
 import de.cau.cs.kieler.ssm.diagram.edit.policies.SafeStateMachineBaseItemSemanticEditPolicy;
 
-import edu.unikiel.rtsys.kieler.ssm.AbstractState;
-import edu.unikiel.rtsys.kieler.ssm.NormalTermination;
-import edu.unikiel.rtsys.kieler.ssm.Region;
+import de.cau.cs.kieler.ssm.AbstractState;
+import de.cau.cs.kieler.ssm.NormalTermination;
+import de.cau.cs.kieler.ssm.Region;
 
 /**
  * @generated
@@ -34,7 +34,7 @@ public class NormalTerminationCreateCommand extends CreateElementCommand {
 	/**
 	 * @generated
 	 */
-	private Region container;
+	private de.cau.cs.kieler.ssm.Region container;
 
 	/**
 	 * @generated
@@ -45,7 +45,7 @@ public class NormalTerminationCreateCommand extends CreateElementCommand {
 		this.source = source;
 		this.target = target;
 		if (request.getContainmentFeature() == null) {
-			setContainmentFeature(edu.unikiel.rtsys.kieler.ssm.ssmPackage.eINSTANCE
+			setContainmentFeature(de.cau.cs.kieler.ssm.ssmPackage.eINSTANCE
 					.getRegion_Transitions());
 		}
 
@@ -54,8 +54,8 @@ public class NormalTerminationCreateCommand extends CreateElementCommand {
 		// and return the first element that is instance of the container class.
 		for (EObject element = source; element != null; element = element
 				.eContainer()) {
-			if (element instanceof Region) {
-				container = (Region) element;
+			if (element instanceof de.cau.cs.kieler.ssm.Region) {
+				container = (de.cau.cs.kieler.ssm.Region) element;
 				super.setElementToEdit(container);
 				break;
 			}
@@ -69,10 +69,12 @@ public class NormalTerminationCreateCommand extends CreateElementCommand {
 		if (source == null && target == null) {
 			return false;
 		}
-		if (source != null && false == source instanceof AbstractState) {
+		if (source != null
+				&& false == source instanceof de.cau.cs.kieler.ssm.AbstractState) {
 			return false;
 		}
-		if (target != null && false == target instanceof AbstractState) {
+		if (target != null
+				&& false == target instanceof de.cau.cs.kieler.ssm.AbstractState) {
 			return false;
 		}
 		if (getSource() == null) {
@@ -91,7 +93,7 @@ public class NormalTerminationCreateCommand extends CreateElementCommand {
 	 * @generated
 	 */
 	protected EObject doDefaultElementCreation() {
-		NormalTermination newElement = edu.unikiel.rtsys.kieler.ssm.ssmFactory.eINSTANCE
+		de.cau.cs.kieler.ssm.NormalTermination newElement = de.cau.cs.kieler.ssm.ssmFactory.eINSTANCE
 				.createNormalTermination();
 		getContainer().getTransitions().add(newElement);
 		newElement.setSource(getSource());
@@ -103,7 +105,7 @@ public class NormalTerminationCreateCommand extends CreateElementCommand {
 	 * @generated
 	 */
 	protected EClass getEClassToEdit() {
-		return edu.unikiel.rtsys.kieler.ssm.ssmPackage.eINSTANCE.getRegion();
+		return de.cau.cs.kieler.ssm.ssmPackage.eINSTANCE.getRegion();
 	}
 
 	/**
@@ -138,21 +140,21 @@ public class NormalTerminationCreateCommand extends CreateElementCommand {
 	/**
 	 * @generated
 	 */
-	protected AbstractState getSource() {
-		return (AbstractState) source;
+	protected de.cau.cs.kieler.ssm.AbstractState getSource() {
+		return (de.cau.cs.kieler.ssm.AbstractState) source;
 	}
 
 	/**
 	 * @generated
 	 */
-	protected AbstractState getTarget() {
-		return (AbstractState) target;
+	protected de.cau.cs.kieler.ssm.AbstractState getTarget() {
+		return (de.cau.cs.kieler.ssm.AbstractState) target;
 	}
 
 	/**
 	 * @generated
 	 */
-	public Region getContainer() {
+	public de.cau.cs.kieler.ssm.Region getContainer() {
 		return container;
 	}
 }

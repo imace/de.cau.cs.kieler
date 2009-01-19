@@ -37,7 +37,7 @@ import de.cau.cs.kieler.ssm.diagram.part.SafeStateMachineVisualIDRegistry;
 import de.cau.cs.kieler.ssm.diagram.providers.SafeStateMachineElementTypes;
 import de.cau.cs.kieler.ssm.diagram.providers.SafeStateMachineParserProvider;
 
-import edu.unikiel.rtsys.kieler.ssm.SafeStateMachine;
+import de.cau.cs.kieler.ssm.SafeStateMachine;
 
 /**
  * @generated
@@ -206,7 +206,7 @@ public class SafeStateMachineNavigatorLabelProvider extends LabelProvider
 	 * @generated
 	 */
 	private String getSafeStateMachine_1000Text(View view) {
-		SafeStateMachine domainModelElement = (SafeStateMachine) view
+		de.cau.cs.kieler.ssm.SafeStateMachine domainModelElement = (de.cau.cs.kieler.ssm.SafeStateMachine) view
 				.getElement();
 		if (domainModelElement != null) {
 			return domainModelElement.getName();

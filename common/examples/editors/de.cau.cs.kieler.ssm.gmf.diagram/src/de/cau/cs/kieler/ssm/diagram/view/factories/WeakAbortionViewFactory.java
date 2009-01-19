@@ -16,7 +16,6 @@ import de.cau.cs.kieler.ssm.diagram.edit.parts.WeakAbortionIsImmediateStringTrig
 import de.cau.cs.kieler.ssm.diagram.edit.parts.WeakAbortionPriorityEditPart;
 import de.cau.cs.kieler.ssm.diagram.part.SafeStateMachineVisualIDRegistry;
 
-
 /**
  * @generated
  */

@@ -16,7 +16,6 @@ import de.cau.cs.kieler.ssm.diagram.edit.parts.NormalTerminationEffectStringEdit
 import de.cau.cs.kieler.ssm.diagram.edit.parts.NormalTerminationPriorityEditPart;
 import de.cau.cs.kieler.ssm.diagram.part.SafeStateMachineVisualIDRegistry;
 
-
 /**
  * @generated
  */

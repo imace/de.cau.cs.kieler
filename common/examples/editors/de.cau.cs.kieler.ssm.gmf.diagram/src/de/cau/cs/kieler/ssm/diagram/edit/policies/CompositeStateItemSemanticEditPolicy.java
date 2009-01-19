@@ -26,7 +26,6 @@ import de.cau.cs.kieler.ssm.diagram.edit.parts.WeakAbortionEditPart;
 import de.cau.cs.kieler.ssm.diagram.part.SafeStateMachineVisualIDRegistry;
 import de.cau.cs.kieler.ssm.diagram.providers.SafeStateMachineElementTypes;
 
-
 /**
  * @generated
  */

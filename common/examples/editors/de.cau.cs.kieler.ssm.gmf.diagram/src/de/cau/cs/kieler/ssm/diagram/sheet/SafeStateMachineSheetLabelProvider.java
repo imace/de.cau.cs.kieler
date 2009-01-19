@@ -11,7 +11,6 @@ import org.eclipse.swt.graphics.Image;
 import de.cau.cs.kieler.ssm.diagram.navigator.SafeStateMachineNavigatorGroup;
 import de.cau.cs.kieler.ssm.diagram.part.SafeStateMachineDiagramEditorPlugin;
 
-
 /**
  * @generated
  */

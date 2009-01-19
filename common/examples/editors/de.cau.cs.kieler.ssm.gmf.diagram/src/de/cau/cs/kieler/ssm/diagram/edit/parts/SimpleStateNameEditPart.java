@@ -50,7 +50,6 @@ import de.cau.cs.kieler.ssm.diagram.edit.policies.SafeStateMachineTextSelectionE
 import de.cau.cs.kieler.ssm.diagram.providers.SafeStateMachineElementTypes;
 import de.cau.cs.kieler.ssm.diagram.providers.SafeStateMachineParserProvider;
 
-
 /**
  * @generated
  */

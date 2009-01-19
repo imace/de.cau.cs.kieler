@@ -10,7 +10,6 @@ import org.eclipse.gmf.runtime.emf.type.core.requests.DuplicateElementsRequest;
 import de.cau.cs.kieler.ssm.diagram.edit.commands.CompositeStateCreateCommand;
 import de.cau.cs.kieler.ssm.diagram.providers.SafeStateMachineElementTypes;
 
-
 /**
  * @generated
  */
@@ -25,7 +24,7 @@ public class SafeStateMachineItemSemanticEditPolicy extends
 				.getElementType()) {
 			if (req.getContainmentFeature() == null) {
 				req
-						.setContainmentFeature(edu.unikiel.rtsys.kieler.ssm.ssmPackage.eINSTANCE
+						.setContainmentFeature(de.cau.cs.kieler.ssm.ssmPackage.eINSTANCE
 								.getSafeStateMachine_Top());
 			}
 			return getGEFWrapper(new CompositeStateCreateCommand(req));

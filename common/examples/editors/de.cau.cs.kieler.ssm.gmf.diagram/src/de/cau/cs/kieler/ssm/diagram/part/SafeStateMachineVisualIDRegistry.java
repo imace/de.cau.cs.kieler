@@ -30,9 +30,9 @@ import de.cau.cs.kieler.ssm.diagram.edit.parts.WeakAbortionPriorityEditPart;
 import de.cau.cs.kieler.ssm.diagram.expressions.SafeStateMachineAbstractExpression;
 import de.cau.cs.kieler.ssm.diagram.expressions.SafeStateMachineOCLFactory;
 
-import edu.unikiel.rtsys.kieler.ssm.InitialState;
-import edu.unikiel.rtsys.kieler.ssm.SafeStateMachine;
-import edu.unikiel.rtsys.kieler.ssm.SimpleState;
+import de.cau.cs.kieler.ssm.InitialState;
+import de.cau.cs.kieler.ssm.SafeStateMachine;
+import de.cau.cs.kieler.ssm.SimpleState;
 
 /**
  * This registry is used to determine which type of visual object should be
@@ -46,7 +46,7 @@ public class SafeStateMachineVisualIDRegistry {
 	/**
 	 * @generated
 	 */
-	private static final String DEBUG_KEY = "edu.unikiel.rtsys.kieler.ssm.gmf.diagram/debug/visualID"; //$NON-NLS-1$
+	private static final String DEBUG_KEY = "de.cau.cs.kieler.ssm.gmf.diagram/debug/visualID"; //$NON-NLS-1$
 
 	/**
 	 * @generated
@@ -119,9 +119,9 @@ public class SafeStateMachineVisualIDRegistry {
 		if (domainElement == null) {
 			return -1;
 		}
-		if (edu.unikiel.rtsys.kieler.ssm.ssmPackage.eINSTANCE
-				.getSafeStateMachine().isSuperTypeOf(domainElement.eClass())
-				&& isDiagram((SafeStateMachine) domainElement)) {
+		if (de.cau.cs.kieler.ssm.ssmPackage.eINSTANCE.getSafeStateMachine()
+				.isSuperTypeOf(domainElement.eClass())
+				&& isDiagram((de.cau.cs.kieler.ssm.SafeStateMachine) domainElement)) {
 			return SafeStateMachineEditPart.VISUAL_ID;
 		}
 		return -1;
@@ -152,36 +152,36 @@ public class SafeStateMachineVisualIDRegistry {
 		}
 		switch (containerVisualID) {
 		case CompositeStateCompositeStateCompartmentEditPart.VISUAL_ID:
-			if (edu.unikiel.rtsys.kieler.ssm.ssmPackage.eINSTANCE.getRegion()
+			if (de.cau.cs.kieler.ssm.ssmPackage.eINSTANCE.getRegion()
 					.isSuperTypeOf(domainElement.eClass())) {
 				return RegionEditPart.VISUAL_ID;
 			}
 			break;
 		case RegionRegionCompartmentEditPart.VISUAL_ID:
-			if (edu.unikiel.rtsys.kieler.ssm.ssmPackage.eINSTANCE
-					.getCompositeState().isSuperTypeOf(domainElement.eClass())) {
+			if (de.cau.cs.kieler.ssm.ssmPackage.eINSTANCE.getCompositeState()
+					.isSuperTypeOf(domainElement.eClass())) {
 				return CompositeState2EditPart.VISUAL_ID;
 			}
-			if (edu.unikiel.rtsys.kieler.ssm.ssmPackage.eINSTANCE
-					.getSimpleState().isSuperTypeOf(domainElement.eClass())
-					&& isSimpleState_3003((SimpleState) domainElement)) {
+			if (de.cau.cs.kieler.ssm.ssmPackage.eINSTANCE.getSimpleState()
+					.isSuperTypeOf(domainElement.eClass())
+					&& isSimpleState_3003((de.cau.cs.kieler.ssm.SimpleState) domainElement)) {
 				return SimpleStateEditPart.VISUAL_ID;
 			}
-			if (edu.unikiel.rtsys.kieler.ssm.ssmPackage.eINSTANCE
-					.getInitialState().isSuperTypeOf(domainElement.eClass())
-					&& isInitialState_3004((InitialState) domainElement)) {
+			if (de.cau.cs.kieler.ssm.ssmPackage.eINSTANCE.getInitialState()
+					.isSuperTypeOf(domainElement.eClass())
+					&& isInitialState_3004((de.cau.cs.kieler.ssm.InitialState) domainElement)) {
 				return InitialStateEditPart.VISUAL_ID;
 			}
 			break;
 		case CompositeStateCompositeStateCompartment2EditPart.VISUAL_ID:
-			if (edu.unikiel.rtsys.kieler.ssm.ssmPackage.eINSTANCE.getRegion()
+			if (de.cau.cs.kieler.ssm.ssmPackage.eINSTANCE.getRegion()
 					.isSuperTypeOf(domainElement.eClass())) {
 				return RegionEditPart.VISUAL_ID;
 			}
 			break;
 		case SafeStateMachineEditPart.VISUAL_ID:
-			if (edu.unikiel.rtsys.kieler.ssm.ssmPackage.eINSTANCE
-					.getCompositeState().isSuperTypeOf(domainElement.eClass())) {
+			if (de.cau.cs.kieler.ssm.ssmPackage.eINSTANCE.getCompositeState()
+					.isSuperTypeOf(domainElement.eClass())) {
 				return CompositeStateEditPart.VISUAL_ID;
 			}
 			break;
@@ -297,15 +297,15 @@ public class SafeStateMachineVisualIDRegistry {
 		if (domainElement == null) {
 			return -1;
 		}
-		if (edu.unikiel.rtsys.kieler.ssm.ssmPackage.eINSTANCE
-				.getStrongAbortion().isSuperTypeOf(domainElement.eClass())) {
+		if (de.cau.cs.kieler.ssm.ssmPackage.eINSTANCE.getStrongAbortion()
+				.isSuperTypeOf(domainElement.eClass())) {
 			return StrongAbortionEditPart.VISUAL_ID;
 		}
-		if (edu.unikiel.rtsys.kieler.ssm.ssmPackage.eINSTANCE
-				.getNormalTermination().isSuperTypeOf(domainElement.eClass())) {
+		if (de.cau.cs.kieler.ssm.ssmPackage.eINSTANCE.getNormalTermination()
+				.isSuperTypeOf(domainElement.eClass())) {
 			return NormalTerminationEditPart.VISUAL_ID;
 		}
-		if (edu.unikiel.rtsys.kieler.ssm.ssmPackage.eINSTANCE.getWeakAbortion()
+		if (de.cau.cs.kieler.ssm.ssmPackage.eINSTANCE.getWeakAbortion()
 				.isSuperTypeOf(domainElement.eClass())) {
 			return WeakAbortionEditPart.VISUAL_ID;
 		}
@@ -318,18 +318,20 @@ public class SafeStateMachineVisualIDRegistry {
 	 * 
 	 * @generated
 	 */
-	private static boolean isDiagram(SafeStateMachine element) {
+	private static boolean isDiagram(
+			de.cau.cs.kieler.ssm.SafeStateMachine element) {
 		return true;
 	}
 
 	/**
 	 * @generated
 	 */
-	private static boolean isSimpleState_3003(SimpleState domainElement) {
+	private static boolean isSimpleState_3003(
+			de.cau.cs.kieler.ssm.SimpleState domainElement) {
 		if (SimpleState_3003_Constraint == null) { // lazy initialization
 			SimpleState_3003_Constraint = SafeStateMachineOCLFactory
 					.getExpression(
-							"not self.oclIsTypeOf(ssm::CompositeState)", edu.unikiel.rtsys.kieler.ssm.ssmPackage.eINSTANCE.getSimpleState()); //$NON-NLS-1$
+							"not self.oclIsTypeOf(ssm::CompositeState)", de.cau.cs.kieler.ssm.ssmPackage.eINSTANCE.getSimpleState()); //$NON-NLS-1$
 		}
 		Object result = SimpleState_3003_Constraint.evaluate(domainElement);
 		return result instanceof Boolean && ((Boolean) result).booleanValue();
@@ -338,11 +340,12 @@ public class SafeStateMachineVisualIDRegistry {
 	/**
 	 * @generated
 	 */
-	private static boolean isInitialState_3004(InitialState domainElement) {
+	private static boolean isInitialState_3004(
+			de.cau.cs.kieler.ssm.InitialState domainElement) {
 		if (InitialState_3004_Constraint == null) { // lazy initialization
 			InitialState_3004_Constraint = SafeStateMachineOCLFactory
 					.getExpression(
-							"not self.oclIsTypeOf(ssm::CompositeState)", edu.unikiel.rtsys.kieler.ssm.ssmPackage.eINSTANCE.getInitialState()); //$NON-NLS-1$
+							"not self.oclIsTypeOf(ssm::CompositeState)", de.cau.cs.kieler.ssm.ssmPackage.eINSTANCE.getInitialState()); //$NON-NLS-1$
 		}
 		Object result = InitialState_3004_Constraint.evaluate(domainElement);
 		return result instanceof Boolean && ((Boolean) result).booleanValue();

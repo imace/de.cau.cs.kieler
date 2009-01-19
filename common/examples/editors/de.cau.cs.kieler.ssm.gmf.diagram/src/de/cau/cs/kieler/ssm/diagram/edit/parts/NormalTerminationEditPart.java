@@ -16,7 +16,6 @@ import org.eclipse.gmf.runtime.notation.View;
 
 import de.cau.cs.kieler.ssm.diagram.edit.policies.NormalTerminationItemSemanticEditPolicy;
 
-
 /**
  * @generated
  */

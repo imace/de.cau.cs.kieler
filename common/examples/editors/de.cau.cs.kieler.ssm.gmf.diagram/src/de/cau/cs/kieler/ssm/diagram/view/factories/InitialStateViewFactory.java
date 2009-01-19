@@ -11,7 +11,6 @@ import org.eclipse.gmf.runtime.notation.View;
 import de.cau.cs.kieler.ssm.diagram.edit.parts.InitialStateEditPart;
 import de.cau.cs.kieler.ssm.diagram.part.SafeStateMachineVisualIDRegistry;
 
-
 /**
  * @generated
  */

@@ -18,7 +18,6 @@ import org.eclipse.swt.graphics.Image;
 
 import de.cau.cs.kieler.ssm.diagram.part.SafeStateMachineDiagramEditorPlugin;
 
-
 /**
  * @generated
  */
@@ -48,39 +47,39 @@ public class SafeStateMachineElementTypes extends ElementInitializers {
 	/**
 	 * @generated
 	 */
-	public static final IElementType SafeStateMachine_1000 = getElementType("edu.unikiel.rtsys.kieler.ssm.gmf.diagram.SafeStateMachine_1000"); //$NON-NLS-1$
+	public static final IElementType SafeStateMachine_1000 = getElementType("de.cau.cs.kieler.ssm.gmf.diagram.SafeStateMachine_1000"); //$NON-NLS-1$
 	/**
 	 * @generated
 	 */
-	public static final IElementType CompositeState_2001 = getElementType("edu.unikiel.rtsys.kieler.ssm.gmf.diagram.CompositeState_2001"); //$NON-NLS-1$
+	public static final IElementType CompositeState_2001 = getElementType("de.cau.cs.kieler.ssm.gmf.diagram.CompositeState_2001"); //$NON-NLS-1$
 	/**
 	 * @generated
 	 */
-	public static final IElementType Region_3001 = getElementType("edu.unikiel.rtsys.kieler.ssm.gmf.diagram.Region_3001"); //$NON-NLS-1$
+	public static final IElementType Region_3001 = getElementType("de.cau.cs.kieler.ssm.gmf.diagram.Region_3001"); //$NON-NLS-1$
 	/**
 	 * @generated
 	 */
-	public static final IElementType CompositeState_3002 = getElementType("edu.unikiel.rtsys.kieler.ssm.gmf.diagram.CompositeState_3002"); //$NON-NLS-1$
+	public static final IElementType CompositeState_3002 = getElementType("de.cau.cs.kieler.ssm.gmf.diagram.CompositeState_3002"); //$NON-NLS-1$
 	/**
 	 * @generated
 	 */
-	public static final IElementType SimpleState_3003 = getElementType("edu.unikiel.rtsys.kieler.ssm.gmf.diagram.SimpleState_3003"); //$NON-NLS-1$
+	public static final IElementType SimpleState_3003 = getElementType("de.cau.cs.kieler.ssm.gmf.diagram.SimpleState_3003"); //$NON-NLS-1$
 	/**
 	 * @generated
 	 */
-	public static final IElementType InitialState_3004 = getElementType("edu.unikiel.rtsys.kieler.ssm.gmf.diagram.InitialState_3004"); //$NON-NLS-1$
+	public static final IElementType InitialState_3004 = getElementType("de.cau.cs.kieler.ssm.gmf.diagram.InitialState_3004"); //$NON-NLS-1$
 	/**
 	 * @generated
 	 */
-	public static final IElementType StrongAbortion_4001 = getElementType("edu.unikiel.rtsys.kieler.ssm.gmf.diagram.StrongAbortion_4001"); //$NON-NLS-1$
+	public static final IElementType StrongAbortion_4001 = getElementType("de.cau.cs.kieler.ssm.gmf.diagram.StrongAbortion_4001"); //$NON-NLS-1$
 	/**
 	 * @generated
 	 */
-	public static final IElementType NormalTermination_4002 = getElementType("edu.unikiel.rtsys.kieler.ssm.gmf.diagram.NormalTermination_4002"); //$NON-NLS-1$
+	public static final IElementType NormalTermination_4002 = getElementType("de.cau.cs.kieler.ssm.gmf.diagram.NormalTermination_4002"); //$NON-NLS-1$
 	/**
 	 * @generated
 	 */
-	public static final IElementType WeakAbortion_4003 = getElementType("edu.unikiel.rtsys.kieler.ssm.gmf.diagram.WeakAbortion_4003"); //$NON-NLS-1$
+	public static final IElementType WeakAbortion_4003 = getElementType("de.cau.cs.kieler.ssm.gmf.diagram.WeakAbortion_4003"); //$NON-NLS-1$
 
 	/**
 	 * @generated
@@ -194,40 +193,40 @@ public class SafeStateMachineElementTypes extends ElementInitializers {
 			elements = new IdentityHashMap();
 
 			elements.put(SafeStateMachine_1000,
-					edu.unikiel.rtsys.kieler.ssm.ssmPackage.eINSTANCE
+					de.cau.cs.kieler.ssm.ssmPackage.eINSTANCE
 							.getSafeStateMachine());
 
 			elements.put(CompositeState_2001,
-					edu.unikiel.rtsys.kieler.ssm.ssmPackage.eINSTANCE
+					de.cau.cs.kieler.ssm.ssmPackage.eINSTANCE
 							.getCompositeState());
 
-			elements.put(Region_3001,
-					edu.unikiel.rtsys.kieler.ssm.ssmPackage.eINSTANCE
-							.getRegion());
+			elements.put(Region_3001, de.cau.cs.kieler.ssm.ssmPackage.eINSTANCE
+					.getRegion());
 
 			elements.put(CompositeState_3002,
-					edu.unikiel.rtsys.kieler.ssm.ssmPackage.eINSTANCE
+					de.cau.cs.kieler.ssm.ssmPackage.eINSTANCE
 							.getCompositeState());
 
 			elements.put(SimpleState_3003,
-					edu.unikiel.rtsys.kieler.ssm.ssmPackage.eINSTANCE
-							.getSimpleState());
+					de.cau.cs.kieler.ssm.ssmPackage.eINSTANCE.getSimpleState());
 
-			elements.put(InitialState_3004,
-					edu.unikiel.rtsys.kieler.ssm.ssmPackage.eINSTANCE
-							.getInitialState());
+			elements
+					.put(InitialState_3004,
+							de.cau.cs.kieler.ssm.ssmPackage.eINSTANCE
+									.getInitialState());
 
 			elements.put(StrongAbortion_4001,
-					edu.unikiel.rtsys.kieler.ssm.ssmPackage.eINSTANCE
+					de.cau.cs.kieler.ssm.ssmPackage.eINSTANCE
 							.getStrongAbortion());
 
 			elements.put(NormalTermination_4002,
-					edu.unikiel.rtsys.kieler.ssm.ssmPackage.eINSTANCE
+					de.cau.cs.kieler.ssm.ssmPackage.eINSTANCE
 							.getNormalTermination());
 
-			elements.put(WeakAbortion_4003,
-					edu.unikiel.rtsys.kieler.ssm.ssmPackage.eINSTANCE
-							.getWeakAbortion());
+			elements
+					.put(WeakAbortion_4003,
+							de.cau.cs.kieler.ssm.ssmPackage.eINSTANCE
+									.getWeakAbortion());
 		}
 		return (ENamedElement) elements.get(type);
 	}

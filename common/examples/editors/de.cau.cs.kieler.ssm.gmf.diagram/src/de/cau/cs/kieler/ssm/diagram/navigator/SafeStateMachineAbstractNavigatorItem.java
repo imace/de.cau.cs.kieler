@@ -18,7 +18,7 @@ public abstract class SafeStateMachineAbstractNavigatorItem extends
 		final Class[] supportedTypes = new Class[] { ITabbedPropertySheetPageContributor.class };
 		final ITabbedPropertySheetPageContributor propertySheetPageContributor = new ITabbedPropertySheetPageContributor() {
 			public String getContributorId() {
-				return "edu.unikiel.rtsys.kieler.ssm.gmf.diagram"; //$NON-NLS-1$
+				return "de.cau.cs.kieler.ssm.gmf.diagram"; //$NON-NLS-1$
 			}
 		};
 		Platform.getAdapterManager().registerAdapters(

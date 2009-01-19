@@ -6,7 +6,7 @@ import org.eclipse.gmf.runtime.emf.type.core.commands.CreateElementCommand;
 import org.eclipse.gmf.runtime.emf.type.core.requests.CreateElementRequest;
 import org.eclipse.gmf.runtime.notation.View;
 
-import edu.unikiel.rtsys.kieler.ssm.SafeStateMachine;
+import de.cau.cs.kieler.ssm.SafeStateMachine;
 
 /**
  * @generated
@@ -36,7 +36,7 @@ public class CompositeStateCreateCommand extends CreateElementCommand {
 	 * @generated
 	 */
 	public boolean canExecute() {
-		SafeStateMachine container = (SafeStateMachine) getElementToEdit();
+		de.cau.cs.kieler.ssm.SafeStateMachine container = (de.cau.cs.kieler.ssm.SafeStateMachine) getElementToEdit();
 		if (container.getTop() != null) {
 			return false;
 		}
@@ -47,8 +47,7 @@ public class CompositeStateCreateCommand extends CreateElementCommand {
 	 * @generated
 	 */
 	protected EClass getEClassToEdit() {
-		return edu.unikiel.rtsys.kieler.ssm.ssmPackage.eINSTANCE
-				.getSafeStateMachine();
+		return de.cau.cs.kieler.ssm.ssmPackage.eINSTANCE.getSafeStateMachine();
 	}
 
 }

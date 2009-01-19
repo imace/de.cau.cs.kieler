@@ -6,7 +6,6 @@ import org.eclipse.gmf.runtime.emf.type.core.requests.CreateElementRequest;
 import de.cau.cs.kieler.ssm.diagram.edit.commands.RegionCreateCommand;
 import de.cau.cs.kieler.ssm.diagram.providers.SafeStateMachineElementTypes;
 
-
 /**
  * @generated
  */
@@ -20,7 +19,7 @@ public class CompositeStateCompositeStateCompartmentItemSemanticEditPolicy
 		if (SafeStateMachineElementTypes.Region_3001 == req.getElementType()) {
 			if (req.getContainmentFeature() == null) {
 				req
-						.setContainmentFeature(edu.unikiel.rtsys.kieler.ssm.ssmPackage.eINSTANCE
+						.setContainmentFeature(de.cau.cs.kieler.ssm.ssmPackage.eINSTANCE
 								.getCompositeState_Regions());
 			}
 			return getGEFWrapper(new RegionCreateCommand(req));

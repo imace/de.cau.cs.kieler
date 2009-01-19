@@ -39,7 +39,6 @@ import de.cau.cs.kieler.ssm.diagram.part.SafeStateMachineLinkDescriptor;
 import de.cau.cs.kieler.ssm.diagram.part.SafeStateMachineNodeDescriptor;
 import de.cau.cs.kieler.ssm.diagram.part.SafeStateMachineVisualIDRegistry;
 
-
 /**
  * @generated
  */
@@ -101,7 +100,7 @@ public class SafeStateMachineCanonicalEditPolicy extends
 		if (myFeaturesToSynchronize == null) {
 			myFeaturesToSynchronize = new HashSet();
 			myFeaturesToSynchronize
-					.add(edu.unikiel.rtsys.kieler.ssm.ssmPackage.eINSTANCE
+					.add(de.cau.cs.kieler.ssm.ssmPackage.eINSTANCE
 							.getSafeStateMachine_Top());
 		}
 		return myFeaturesToSynchronize;

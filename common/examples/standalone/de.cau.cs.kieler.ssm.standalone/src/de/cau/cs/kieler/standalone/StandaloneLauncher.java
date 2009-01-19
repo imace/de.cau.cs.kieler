@@ -11,12 +11,12 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
-import edu.unikiel.rtsys.kieler.ssm.AbstractState;
-import edu.unikiel.rtsys.kieler.ssm.CompositeState;
-import edu.unikiel.rtsys.kieler.ssm.Region;
-import edu.unikiel.rtsys.kieler.ssm.SafeStateMachine;
-import edu.unikiel.rtsys.kieler.ssm.SimpleState;
-import edu.unikiel.rtsys.kieler.ssm.ssmPackage;
+import de.cau.cs.kieler.ssm.AbstractState;
+import de.cau.cs.kieler.ssm.CompositeState;
+import de.cau.cs.kieler.ssm.Region;
+import de.cau.cs.kieler.ssm.SafeStateMachine;
+import de.cau.cs.kieler.ssm.SimpleState;
+import de.cau.cs.kieler.ssm.ssmPackage;
 
 public class StandaloneLauncher {
 
