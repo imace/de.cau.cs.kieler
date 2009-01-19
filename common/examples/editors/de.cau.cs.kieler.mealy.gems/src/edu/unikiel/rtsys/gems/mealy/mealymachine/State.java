@@ -33,37 +33,38 @@ import org.eclipse.gmt.gems.model.props.CustomProperty;
 import org.eclipse.gmt.gems.model.props.CustomPropertyEx;
 import org.eclipse.gmt.gems.model.props.PropertyRepository;
 import org.eclipse.emf.ecore.EObject;
-import edu.unikiel.rtsys.gems.mealy.emf.mealymachine.*;
+
+import de.cau.cs.kieler.gems.mealy.emf.mealymachine.*;
 
 public class State extends org.eclipse.gmt.gems.model.LinkedModel  implements Adapter, EMFModelObject, org.eclipse.gmt.gems.model.EMFModelElement{
 
-	private edu.unikiel.rtsys.gems.mealy.emf.mealymachine.State model_;
+	private de.cau.cs.kieler.gems.mealy.emf.mealymachine.State model_;
 	private Notifier target_;
 	
 	public State(){		
 	}
 	
-	public State(edu.unikiel.rtsys.gems.mealy.emf.mealymachine.State model){
+	public State(de.cau.cs.kieler.gems.mealy.emf.mealymachine.State model){
 		model_ = model;
 		super.setName(model_.getName());
 		super.setID(model_.getId());
     	model_.eAdapters().add(this);
 	}
 	
-	public edu.unikiel.rtsys.gems.mealy.emf.mealymachine.State getModel(){
+	public de.cau.cs.kieler.gems.mealy.emf.mealymachine.State getModel(){
 		if(model_ == null){
-			model_ = edu.unikiel.rtsys.gems.mealy.emf.mealymachine.impl.MealyMachineFactoryImpl.eINSTANCE.createState();
+			model_ = de.cau.cs.kieler.gems.mealy.emf.mealymachine.impl.MealyMachineFactoryImpl.eINSTANCE.createState();
 			super.setName(model_.getName());
 			model_.eAdapters().add(this);
 		}
 		return model_;
 	}
 	
-	public edu.unikiel.rtsys.gems.mealy.emf.mealymachine.State getExtendedModel(){
+	public de.cau.cs.kieler.gems.mealy.emf.mealymachine.State getExtendedModel(){
 		return getModel();
 	}
 	
-	public edu.unikiel.rtsys.gems.mealy.emf.mealymachine.State getEMFObject(){
+	public de.cau.cs.kieler.gems.mealy.emf.mealymachine.State getEMFObject(){
 		return getModel();
 	}
 	

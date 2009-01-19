@@ -1,15 +1,15 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
-Bundle-SymbolicName: edu.unikiel.rtsys.kieler.ssm.emf;singleton:=true
+Bundle-SymbolicName: de.cau.cs.kieler.ssm.emf;singleton:=true
 Bundle-Version: 0.1.0
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Export-Package: edu.unikiel.rtsys.kieler.ssm,
- edu.unikiel.rtsys.kieler.ssm.impl,
- edu.unikiel.rtsys.kieler.ssm.util
+Export-Package: de.cau.cs.kieler.ssm,
+ de.cau.cs.kieler.ssm.impl,
+ de.cau.cs.kieler.ssm.util
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport
 Bundle-ActivationPolicy: lazy 

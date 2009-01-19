@@ -2,7 +2,8 @@ package hierarchymealy.custom;
 
 import org.eclipse.draw2d.PolygonDecoration;
 
-import edu.unikiel.rtsys.layouter.gef.SplineCurveConnectionWithPrefs;
+import de.cau.cs.kieler.layouter.gef.SplineCurveConnectionWithPrefs;
+
 
 public class TransitionSplineCurve extends SplineCurveConnectionWithPrefs {
 //public class TransitionSplineCurve extends BezierCurveConnection {

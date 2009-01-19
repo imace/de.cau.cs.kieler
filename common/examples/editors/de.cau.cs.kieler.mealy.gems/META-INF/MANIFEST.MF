@@ -19,9 +19,9 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.platform,
  org.eclipse.gmt.gems.dsml.emf,
  org.eclipse.gmt.gems.dsml
-Export-Package: edu.unikiel.rtsys.gems.mealy.mealymachine,
- edu.unikiel.rtsys.gems.mealy.emf.mealymachine,
- edu.unikiel.rtsys.gems.mealy.emf.mealymachine.impl,
- edu.unikiel.rtsys.gems.mealy.emf.mealymachine.util
+Export-Package: de.cau.cs.kieler.gems.mealy.emf.mealymachine,
+ de.cau.cs.kieler.gems.mealy.emf.mealymachine.impl,
+ de.cau.cs.kieler.gems.mealy.emf.mealymachine.util,
+ edu.unikiel.rtsys.gems.mealy.mealymachine
 Bundle-ClassPath: .
 Eclipse-LazyStart: true

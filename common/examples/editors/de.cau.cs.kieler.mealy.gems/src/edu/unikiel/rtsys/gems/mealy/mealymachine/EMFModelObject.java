@@ -12,5 +12,5 @@ package edu.unikiel.rtsys.gems.mealy.mealymachine;
 
 
 public interface EMFModelObject {
-	public edu.unikiel.rtsys.gems.mealy.emf.mealymachine.ModelObject getEMFObject();
+	public de.cau.cs.kieler.gems.mealy.emf.mealymachine.ModelObject getEMFObject();
 }

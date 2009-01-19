@@ -33,37 +33,38 @@ import org.eclipse.gmt.gems.model.props.CustomProperty;
 import org.eclipse.gmt.gems.model.props.CustomPropertyEx;
 import org.eclipse.gmt.gems.model.props.PropertyRepository;
 import org.eclipse.emf.ecore.EObject;
-import edu.unikiel.rtsys.gems.mealy.emf.mealymachine.*;
+
+import de.cau.cs.kieler.gems.mealy.emf.mealymachine.*;
 
 public class MealyMachine extends org.eclipse.gmt.gems.model.LinkedModel  implements Adapter, EMFModelObject, org.eclipse.gmt.gems.model.EMFModelElement{
 
-	private edu.unikiel.rtsys.gems.mealy.emf.mealymachine.MealyMachine model_;
+	private de.cau.cs.kieler.gems.mealy.emf.mealymachine.MealyMachine model_;
 	private Notifier target_;
 	
 	public MealyMachine(){		
 	}
 	
-	public MealyMachine(edu.unikiel.rtsys.gems.mealy.emf.mealymachine.MealyMachine model){
+	public MealyMachine(de.cau.cs.kieler.gems.mealy.emf.mealymachine.MealyMachine model){
 		model_ = model;
 		super.setName(model_.getName());
 		super.setID(model_.getId());
     	model_.eAdapters().add(this);
 	}
 	
-	public edu.unikiel.rtsys.gems.mealy.emf.mealymachine.MealyMachine getModel(){
+	public de.cau.cs.kieler.gems.mealy.emf.mealymachine.MealyMachine getModel(){
 		if(model_ == null){
-			model_ = edu.unikiel.rtsys.gems.mealy.emf.mealymachine.impl.MealyMachineFactoryImpl.eINSTANCE.createMealyMachine();
+			model_ = de.cau.cs.kieler.gems.mealy.emf.mealymachine.impl.MealyMachineFactoryImpl.eINSTANCE.createMealyMachine();
 			super.setName(model_.getName());
 			model_.eAdapters().add(this);
 		}
 		return model_;
 	}
 	
-	public edu.unikiel.rtsys.gems.mealy.emf.mealymachine.MealyMachine getExtendedModel(){
+	public de.cau.cs.kieler.gems.mealy.emf.mealymachine.MealyMachine getExtendedModel(){
 		return getModel();
 	}
 	
-	public edu.unikiel.rtsys.gems.mealy.emf.mealymachine.MealyMachine getEMFObject(){
+	public de.cau.cs.kieler.gems.mealy.emf.mealymachine.MealyMachine getEMFObject(){
 		return getModel();
 	}
 	
@@ -333,7 +334,7 @@ public void accept(Visitor visitor) {
     public void addChild(LogicElement child, int index, boolean modifymodel) {
        	if(modifymodel){
     	  if(child instanceof State){
-    	    edu.unikiel.rtsys.gems.mealy.emf.mealymachine.State ceobj = ((State)child).getEMFObject();
+    	    de.cau.cs.kieler.gems.mealy.emf.mealymachine.State ceobj = ((State)child).getEMFObject();
     		getModel().getStates().add(ceobj);
     		ceobj.setParentMachine(getModel());
     	  }
@@ -352,7 +353,7 @@ public void accept(Visitor visitor) {
     	if(modifymodel){
      	
     	if(child instanceof State){
-    	    edu.unikiel.rtsys.gems.mealy.emf.mealymachine.State ceobj = ((State)child).getEMFObject();
+    	    de.cau.cs.kieler.gems.mealy.emf.mealymachine.State ceobj = ((State)child).getEMFObject();
     		getModel().getStates().remove(ceobj);
     		ceobj.setParentMachine(null);
     	}

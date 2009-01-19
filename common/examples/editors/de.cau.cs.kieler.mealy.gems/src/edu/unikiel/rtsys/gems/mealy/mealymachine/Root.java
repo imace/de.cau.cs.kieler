@@ -29,11 +29,12 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
 
+import de.cau.cs.kieler.gems.mealy.emf.mealymachine.*;
+
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.List;
 
-import edu.unikiel.rtsys.gems.mealy.emf.mealymachine.*;
 
 public class Root extends org.eclipse.gmt.gems.model.Root  implements Adapter{
 
@@ -49,7 +50,7 @@ public class Root extends org.eclipse.gmt.gems.model.Root  implements Adapter{
 		model_ = mdl;
 	}
 	
-	public edu.unikiel.rtsys.gems.mealy.emf.mealymachine.Root getEMFObject(){
+	public de.cau.cs.kieler.gems.mealy.emf.mealymachine.Root getEMFObject(){
 		return getModel();
 	}
 	
@@ -83,12 +84,12 @@ public class Root extends org.eclipse.gmt.gems.model.Root  implements Adapter{
         return MealyMachineProvider.MODEL_ID;
     }
     
-    public edu.unikiel.rtsys.gems.mealy.emf.mealymachine.Root getModel(){
+    public de.cau.cs.kieler.gems.mealy.emf.mealymachine.Root getModel(){
     	if(model_ == null){
-    		model_ = edu.unikiel.rtsys.gems.mealy.emf.mealymachine.impl.MealyMachineFactoryImpl.eINSTANCE.createRoot();
-    		((edu.unikiel.rtsys.gems.mealy.emf.mealymachine.Root)model_).eAdapters().add(this);	
+    		model_ = de.cau.cs.kieler.gems.mealy.emf.mealymachine.impl.MealyMachineFactoryImpl.eINSTANCE.createRoot();
+    		((de.cau.cs.kieler.gems.mealy.emf.mealymachine.Root)model_).eAdapters().add(this);	
     	}
-    	return (edu.unikiel.rtsys.gems.mealy.emf.mealymachine.Root)model_;
+    	return (de.cau.cs.kieler.gems.mealy.emf.mealymachine.Root)model_;
     }
     	
     	public Notifier getTarget() {

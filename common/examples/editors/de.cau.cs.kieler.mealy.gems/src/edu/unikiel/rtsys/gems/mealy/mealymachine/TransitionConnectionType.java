@@ -6,8 +6,10 @@ import org.eclipse.ui.views.properties.TextPropertyDescriptor;
 import org.eclipse.gmt.gems.model.BasicConnectionType;
 import org.eclipse.gmt.gems.model.Wire;
 import org.eclipse.gmt.gems.model.AttributeValue;
+
+import de.cau.cs.kieler.gems.mealy.emf.mealymachine.*;
+
 import java.util.Vector;
-import edu.unikiel.rtsys.gems.mealy.emf.mealymachine.*;
 
 
 public class TransitionConnectionType extends BasicConnectionType {

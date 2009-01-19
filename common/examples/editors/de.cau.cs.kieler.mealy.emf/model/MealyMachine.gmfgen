@@ -143,31 +143,31 @@
     </palette>
     <preferencePages
         xsi:type="gmfgen:GenStandardPreferencePage"
-        iD="edu.unikiel.rtsys.mealy.emf.diagram.general"
+        iD="de.cau.cs.kieler.mealy.emf.diagram.general"
         name="MealyMachine Diagram">
       <children
           xsi:type="gmfgen:GenStandardPreferencePage"
-          iD="edu.unikiel.rtsys.mealy.emf.diagram.appearance"
+          iD="de.cau.cs.kieler.mealy.emf.diagram.appearance"
           name="Appearance"
           kind="Appearance"/>
       <children
           xsi:type="gmfgen:GenStandardPreferencePage"
-          iD="edu.unikiel.rtsys.mealy.emf.diagram.connections"
+          iD="de.cau.cs.kieler.mealy.emf.diagram.connections"
           name="Connections"
           kind="Connections"/>
       <children
           xsi:type="gmfgen:GenStandardPreferencePage"
-          iD="edu.unikiel.rtsys.mealy.emf.diagram.printing"
+          iD="de.cau.cs.kieler.mealy.emf.diagram.printing"
           name="Printing"
           kind="Printing"/>
       <children
           xsi:type="gmfgen:GenStandardPreferencePage"
-          iD="edu.unikiel.rtsys.mealy.emf.diagram.rulersAndGrid"
+          iD="de.cau.cs.kieler.mealy.emf.diagram.rulersAndGrid"
           name="Rulers And Grid"
           kind="RulersAndGrid"/>
       <children
           xsi:type="gmfgen:GenStandardPreferencePage"
-          iD="edu.unikiel.rtsys.mealy.emf.diagram.pathmaps"
+          iD="de.cau.cs.kieler.mealy.emf.diagram.pathmaps"
           name="Pathmaps"
           kind="Pathmaps"/>
     </preferencePages>

@@ -40,7 +40,8 @@ import org.eclipse.gmt.gems.model.actions.ModelEventInterest;
 import org.eclipse.gmt.gems.model.actions.PersistentModelEventInterest;
 import org.eclipse.gmt.gems.model.actions.VisitorInterpreter;
 import org.eclipse.emf.common.util.EList;
-import edu.unikiel.rtsys.gems.mealy.emf.mealymachine.*;
+
+import de.cau.cs.kieler.gems.mealy.emf.mealymachine.*;
 
 public class Serializer implements ModelSerializer{
 	
@@ -53,7 +54,7 @@ public class Serializer implements ModelSerializer{
 		ResourceSet resourceSet = new ResourceSetImpl();
 
 		
-		resourceSet.getPackageRegistry().put(edu.unikiel.rtsys.gems.mealy.emf.mealymachine.impl.MealyMachinePackageImpl.eINSTANCE.getNsURI(),edu.unikiel.rtsys.gems.mealy.emf.mealymachine.impl.MealyMachinePackageImpl.eINSTANCE);
+		resourceSet.getPackageRegistry().put(de.cau.cs.kieler.gems.mealy.emf.mealymachine.impl.MealyMachinePackageImpl.eINSTANCE.getNsURI(),de.cau.cs.kieler.gems.mealy.emf.mealymachine.impl.MealyMachinePackageImpl.eINSTANCE);
 		
 
 	    resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("gemsmealy", 
@@ -68,7 +69,7 @@ public class Serializer implements ModelSerializer{
 		EList contents = resource.getContents();
 		edu.unikiel.rtsys.gems.mealy.mealymachine.Root root = null;
 		if(contents.size() > 0){
-			edu.unikiel.rtsys.gems.mealy.emf.mealymachine.Root eroot = (edu.unikiel.rtsys.gems.mealy.emf.mealymachine.Root)contents.get(0);
+			de.cau.cs.kieler.gems.mealy.emf.mealymachine.Root eroot = (de.cau.cs.kieler.gems.mealy.emf.mealymachine.Root)contents.get(0);
 			inst = factory.loadModel(eroot);
 			
 			List<EventInterestFactory> facts = EventInterestFactoryRepository.getInstance().getEventInterestFactories(inst.getRoot().getModelID());
@@ -154,7 +155,7 @@ public class Serializer implements ModelSerializer{
 			}
 		}
 		
-		resourceSet.getPackageRegistry().put(edu.unikiel.rtsys.gems.mealy.emf.mealymachine.impl.MealyMachinePackageImpl.eINSTANCE.getNsURI(),edu.unikiel.rtsys.gems.mealy.emf.mealymachine.impl.MealyMachinePackageImpl.eINSTANCE);
+		resourceSet.getPackageRegistry().put(de.cau.cs.kieler.gems.mealy.emf.mealymachine.impl.MealyMachinePackageImpl.eINSTANCE.getNsURI(),de.cau.cs.kieler.gems.mealy.emf.mealymachine.impl.MealyMachinePackageImpl.eINSTANCE);
 		
 
 		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("gemsmealy", 

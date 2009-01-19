@@ -19,17 +19,17 @@ import org.eclipse.gmt.gems.model.event.ModelChangeEvent;
 
 public class EMFSubtypeImpl extends org.eclipse.gmt.gems.SubtypeImpl {
 	public class EMFInstanceUpdater extends InstanceUpdater{
-		private edu.unikiel.rtsys.gems.mealy.emf.mealymachine.SubtypeLink link_;
+		private de.cau.cs.kieler.gems.mealy.emf.mealymachine.SubtypeLink link_;
 		
 		public EMFInstanceUpdater(ModelObject base, ModelObject m) {
 			super(base, m);
-			link_ = edu.unikiel.rtsys.gems.mealy.emf.mealymachine.impl.MealyMachineFactoryImpl.eINSTANCE.createSubtypeLink();
+			link_ = de.cau.cs.kieler.gems.mealy.emf.mealymachine.impl.MealyMachineFactoryImpl.eINSTANCE.createSubtypeLink();
 			link_.setBase(((EMFModelObject)base).getEMFObject());
 			link_.setInstance(((EMFModelObject)m).getEMFObject());
 			getModel().getLinks().add(link_);
 		}
 		
-		public EMFInstanceUpdater(ModelObject base, ModelObject m, edu.unikiel.rtsys.gems.mealy.emf.mealymachine.SubtypeLink link) {
+		public EMFInstanceUpdater(ModelObject base, ModelObject m, de.cau.cs.kieler.gems.mealy.emf.mealymachine.SubtypeLink link) {
 			super(base, m);
 			link_ = link;
 		}
@@ -42,14 +42,14 @@ public class EMFSubtypeImpl extends org.eclipse.gmt.gems.SubtypeImpl {
 		}
 		
 	}
-    edu.unikiel.rtsys.gems.mealy.emf.mealymachine.Subtype model_;
+    de.cau.cs.kieler.gems.mealy.emf.mealymachine.Subtype model_;
 
 	public EMFSubtypeImpl(ModelObject obj, String name){
 		super(obj,name);
 		register();
 	}
 	
-	public EMFSubtypeImpl(ModelObject obj, edu.unikiel.rtsys.gems.mealy.emf.mealymachine.Subtype emfobj, String name){
+	public EMFSubtypeImpl(ModelObject obj, de.cau.cs.kieler.gems.mealy.emf.mealymachine.Subtype emfobj, String name){
 		super(obj,name);
 		model_ = emfobj;
 		
@@ -59,7 +59,7 @@ public class EMFSubtypeImpl extends org.eclipse.gmt.gems.SubtypeImpl {
 		new EMFInstanceUpdater(base,cop);
 	}
 	
-	public void createUpdater(ModelObject base, ModelObject cop, edu.unikiel.rtsys.gems.mealy.emf.mealymachine.SubtypeLink link){
+	public void createUpdater(ModelObject base, ModelObject cop, de.cau.cs.kieler.gems.mealy.emf.mealymachine.SubtypeLink link){
 		new EMFInstanceUpdater(base,cop,link);
 	}
 	
@@ -90,9 +90,9 @@ public class EMFSubtypeImpl extends org.eclipse.gmt.gems.SubtypeImpl {
 			root.getEMFObject().getSubtypes().add(getModel());
 	}
 	
-    public edu.unikiel.rtsys.gems.mealy.emf.mealymachine.Subtype getModel(){
+    public de.cau.cs.kieler.gems.mealy.emf.mealymachine.Subtype getModel(){
 		if(model_ == null){
-			model_ = edu.unikiel.rtsys.gems.mealy.emf.mealymachine.impl.MealyMachineFactoryImpl.eINSTANCE.createSubtype();
+			model_ = de.cau.cs.kieler.gems.mealy.emf.mealymachine.impl.MealyMachineFactoryImpl.eINSTANCE.createSubtype();
 			model_.setBase(((edu.unikiel.rtsys.gems.mealy.mealymachine.EMFModelObject)getBase()).getEMFObject());
 			//model_.eAdapters().add(this);
 			model_.setName(getName());

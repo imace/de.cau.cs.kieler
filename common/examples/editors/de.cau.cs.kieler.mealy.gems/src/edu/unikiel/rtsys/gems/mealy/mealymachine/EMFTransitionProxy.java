@@ -6,8 +6,10 @@ import org.eclipse.ui.views.properties.TextPropertyDescriptor;
 import org.eclipse.gmt.gems.model.BasicConnectionType;
 import org.eclipse.gmt.gems.model.Wire;
 import org.eclipse.gmt.gems.model.AttributeValue;
+
+import de.cau.cs.kieler.gems.mealy.emf.mealymachine.*;
+
 import java.util.Vector;
-import edu.unikiel.rtsys.gems.mealy.emf.mealymachine.*;
 
 
 public class EMFTransitionProxy {
@@ -55,7 +57,7 @@ public class EMFTransitionProxy {
 		}
     	
     	public EMFTransitionProxy(){
-    		conn_ = edu.unikiel.rtsys.gems.mealy.emf.mealymachine.impl.MealyMachineFactoryImpl.eINSTANCE.createTransitionConnection();
+    		conn_ = de.cau.cs.kieler.gems.mealy.emf.mealymachine.impl.MealyMachineFactoryImpl.eINSTANCE.createTransitionConnection();
     		init();
     	}
     	

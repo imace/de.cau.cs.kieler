@@ -26,9 +26,9 @@
          icon="icons/obj16/ssmDiagramFile.gif"
          extensions="ssm_diagram"
          default="true"
-         class="edu.unikiel.rtsys.kieler.ssm.diagram.part.SafeStateMachineDiagramEditor"
-         matchingStrategy="edu.unikiel.rtsys.kieler.ssm.diagram.part.SafeStateMachineMatchingStrategy"
-         contributorClass="edu.unikiel.rtsys.kieler.ssm.diagram.part.SafeStateMachineDiagramActionBarContributor">
+         class="de.cau.cs.kieler.ssm.diagram.part.SafeStateMachineDiagramEditor"
+         matchingStrategy="de.cau.cs.kieler.ssm.diagram.part.SafeStateMachineMatchingStrategy"
+         contributorClass="de.cau.cs.kieler.ssm.diagram.part.SafeStateMachineDiagramActionBarContributor">
       </editor>
    </extension>
    
@@ -48,7 +48,7 @@
   	     name="%newWizardName"
   	     icon="icons/obj16/ssmDiagramFile.gif"
   	     category="org.eclipse.ui.Examples"
-  	     class="edu.unikiel.rtsys.kieler.ssm.diagram.part.SafeStateMachineCreationWizard"
+  	     class="de.cau.cs.kieler.ssm.diagram.part.SafeStateMachineCreationWizard"
   	     id="edu.unikiel.rtsys.kieler.ssm.diagram.part.SafeStateMachineCreationWizardID">
   	  	 <description>%newWizardDesc</description>  
       </wizard>
@@ -59,9 +59,9 @@
       <objectContribution
             adaptable="false"
             id="edu.unikiel.rtsys.kieler.ssm.gmf.diagram.LoadResource"
-            objectClass="edu.unikiel.rtsys.kieler.ssm.diagram.edit.parts.SafeStateMachineEditPart">
+            objectClass="de.cau.cs.kieler.ssm.diagram.edit.parts.SafeStateMachineEditPart">
          <action
-               class="edu.unikiel.rtsys.kieler.ssm.diagram.part.SafeStateMachineLoadResourceAction"
+               class="de.cau.cs.kieler.ssm.diagram.part.SafeStateMachineLoadResourceAction"
                enablesFor="1"
                id="edu.unikiel.rtsys.kieler.ssm.gmf.diagram.LoadResourceAction"
                label="%loadResourceActionLabel"
@@ -78,7 +78,7 @@
             objectClass="org.eclipse.core.resources.IFile">
          <action
                label="%initDiagramActionLabel"
-               class="edu.unikiel.rtsys.kieler.ssm.diagram.part.SafeStateMachineInitDiagramFileAction"
+               class="de.cau.cs.kieler.ssm.diagram.part.SafeStateMachineInitDiagramFileAction"
                menubarPath="additions"
                enablesFor="1"
                id="edu.unikiel.rtsys.kieler.ssm.gmf.diagram.InitDiagramAction">
@@ -128,7 +128,7 @@
 
    <extension point="org.eclipse.core.runtime.preferences">
       <?gmfgen generated="true"?>
-      <initializer class="edu.unikiel.rtsys.kieler.ssm.diagram.preferences.DiagramPreferenceInitializer"/>
+      <initializer class="de.cau.cs.kieler.ssm.diagram.preferences.DiagramPreferenceInitializer"/>
    </extension>
 
    <extension point="org.eclipse.ui.preferencePages">
@@ -136,31 +136,31 @@
       <page
             id="edu.unikiel.rtsys.kieler.ssm.emf.diagram.general"
             name="%preference.page.title.edu.unikiel.rtsys.kieler.ssm.emf.diagram.general"
-            class="edu.unikiel.rtsys.kieler.ssm.diagram.preferences.DiagramGeneralPreferencePage">
+            class="de.cau.cs.kieler.ssm.diagram.preferences.DiagramGeneralPreferencePage">
       </page>
       <page
             id="edu.unikiel.rtsys.kieler.ssm.emf.diagram.appearance"
             name="%preference.page.title.edu.unikiel.rtsys.kieler.ssm.emf.diagram.appearance"
             category="edu.unikiel.rtsys.kieler.ssm.emf.diagram.general"
-            class="edu.unikiel.rtsys.kieler.ssm.diagram.preferences.DiagramAppearancePreferencePage">
+            class="de.cau.cs.kieler.ssm.diagram.preferences.DiagramAppearancePreferencePage">
       </page>
       <page
             id="edu.unikiel.rtsys.kieler.ssm.emf.diagram.connections"
             name="%preference.page.title.edu.unikiel.rtsys.kieler.ssm.emf.diagram.connections"
             category="edu.unikiel.rtsys.kieler.ssm.emf.diagram.general"
-            class="edu.unikiel.rtsys.kieler.ssm.diagram.preferences.DiagramConnectionsPreferencePage">
+            class="de.cau.cs.kieler.ssm.diagram.preferences.DiagramConnectionsPreferencePage">
       </page>
       <page
             id="edu.unikiel.rtsys.kieler.ssm.emf.diagram.printing"
             name="%preference.page.title.edu.unikiel.rtsys.kieler.ssm.emf.diagram.printing"
             category="edu.unikiel.rtsys.kieler.ssm.emf.diagram.general"
-            class="edu.unikiel.rtsys.kieler.ssm.diagram.preferences.DiagramPrintingPreferencePage">
+            class="de.cau.cs.kieler.ssm.diagram.preferences.DiagramPrintingPreferencePage">
       </page>
       <page
             id="edu.unikiel.rtsys.kieler.ssm.emf.diagram.rulersAndGrid"
             name="%preference.page.title.edu.unikiel.rtsys.kieler.ssm.emf.diagram.rulersAndGrid"
             category="edu.unikiel.rtsys.kieler.ssm.emf.diagram.general"
-            class="edu.unikiel.rtsys.kieler.ssm.diagram.preferences.DiagramRulersAndGridPreferencePage">
+            class="de.cau.cs.kieler.ssm.diagram.preferences.DiagramRulersAndGridPreferencePage">
       </page>
       <page
             id="edu.unikiel.rtsys.kieler.ssm.emf.diagram.pathmaps"
@@ -192,21 +192,21 @@
 
    <extension point="org.eclipse.gmf.runtime.emf.ui.modelingAssistantProviders">
       <?gmfgen generated="true"?>
-      <modelingAssistantProvider class="edu.unikiel.rtsys.kieler.ssm.diagram.providers.SafeStateMachineModelingAssistantProvider">
+      <modelingAssistantProvider class="de.cau.cs.kieler.ssm.diagram.providers.SafeStateMachineModelingAssistantProvider">
          <Priority name="Lowest"/>
       </modelingAssistantProvider>
    </extension>
 
    <extension point="org.eclipse.gmf.runtime.common.ui.services.iconProviders">
       <?gmfgen generated="true"?>
-      <IconProvider class="edu.unikiel.rtsys.kieler.ssm.diagram.providers.SafeStateMachineIconProvider">
+      <IconProvider class="de.cau.cs.kieler.ssm.diagram.providers.SafeStateMachineIconProvider">
          <Priority name="Low"/>
       </IconProvider>
    </extension>
 
    <extension point="org.eclipse.gmf.runtime.common.ui.services.parserProviders">
       <?gmfgen generated="true"?>
-      <ParserProvider class="edu.unikiel.rtsys.kieler.ssm.diagram.providers.SafeStateMachineParserProvider">
+      <ParserProvider class="de.cau.cs.kieler.ssm.diagram.providers.SafeStateMachineParserProvider">
          <Priority name="Lowest"/>
       </ParserProvider>
    </extension>
@@ -219,7 +219,7 @@
                name="%metatype.name.SafeStateMachine_1000"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="SafeStateMachine"
-               edithelper="edu.unikiel.rtsys.kieler.ssm.diagram.edit.helpers.SafeStateMachineEditHelper">
+               edithelper="de.cau.cs.kieler.ssm.diagram.edit.helpers.SafeStateMachineEditHelper">
             <param name="semanticHint" value="1000"/>
          </metamodelType>
       </metamodel>
@@ -229,7 +229,7 @@
                name="%metatype.name.CompositeState_2001"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="CompositeState"
-               edithelper="edu.unikiel.rtsys.kieler.ssm.diagram.edit.helpers.CompositeStateEditHelper">
+               edithelper="de.cau.cs.kieler.ssm.diagram.edit.helpers.CompositeStateEditHelper">
             <param name="semanticHint" value="2001"/>
          </metamodelType>
       </metamodel>
@@ -239,7 +239,7 @@
                name="%metatype.name.Region_3001"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="Region"
-               edithelper="edu.unikiel.rtsys.kieler.ssm.diagram.edit.helpers.RegionEditHelper">
+               edithelper="de.cau.cs.kieler.ssm.diagram.edit.helpers.RegionEditHelper">
             <param name="semanticHint" value="3001"/>
          </metamodelType>
       </metamodel>
@@ -258,7 +258,7 @@
                name="%metatype.name.SimpleState_3003"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="SimpleState"
-               edithelper="edu.unikiel.rtsys.kieler.ssm.diagram.edit.helpers.SimpleStateEditHelper">
+               edithelper="de.cau.cs.kieler.ssm.diagram.edit.helpers.SimpleStateEditHelper">
             <param name="semanticHint" value="3003"/>
          </metamodelType>
       </metamodel>
@@ -268,7 +268,7 @@
                name="%metatype.name.InitialState_3004"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="InitialState"
-               edithelper="edu.unikiel.rtsys.kieler.ssm.diagram.edit.helpers.InitialStateEditHelper">
+               edithelper="de.cau.cs.kieler.ssm.diagram.edit.helpers.InitialStateEditHelper">
             <param name="semanticHint" value="3004"/>
          </metamodelType>
       </metamodel>
@@ -278,7 +278,7 @@
                name="%metatype.name.StrongAbortion_4001"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="StrongAbortion"
-               edithelper="edu.unikiel.rtsys.kieler.ssm.diagram.edit.helpers.StrongAbortionEditHelper">
+               edithelper="de.cau.cs.kieler.ssm.diagram.edit.helpers.StrongAbortionEditHelper">
             <param name="semanticHint" value="4001"/>
          </metamodelType>
       </metamodel>
@@ -288,7 +288,7 @@
                name="%metatype.name.NormalTermination_4002"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="NormalTermination"
-               edithelper="edu.unikiel.rtsys.kieler.ssm.diagram.edit.helpers.NormalTerminationEditHelper">
+               edithelper="de.cau.cs.kieler.ssm.diagram.edit.helpers.NormalTerminationEditHelper">
             <param name="semanticHint" value="4002"/>
          </metamodelType>
       </metamodel>
@@ -298,7 +298,7 @@
                name="%metatype.name.WeakAbortion_4003"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="WeakAbortion"
-               edithelper="edu.unikiel.rtsys.kieler.ssm.diagram.edit.helpers.WeakAbortionEditHelper">
+               edithelper="de.cau.cs.kieler.ssm.diagram.edit.helpers.WeakAbortionEditHelper">
             <param name="semanticHint" value="4003"/>
          </metamodelType>
       </metamodel>
@@ -333,7 +333,7 @@
            type="org.eclipse.emf.common.ui.URIEditorInput"
            namespace="edu.unikiel.rtsys.kieler.ssm.gmf.diagram"
            properties="isURIEditorInput"
-           class="edu.unikiel.rtsys.kieler.ssm.diagram.part.SafeStateMachineUriEditorInputTester">
+           class="de.cau.cs.kieler.ssm.diagram.part.SafeStateMachineUriEditorInputTester">
        </propertyTester>
    </extension>
 
@@ -344,7 +344,7 @@
            type="org.eclipse.emf.ecore.EObject"
            namespace="edu.unikiel.rtsys.kieler.ssm.gmf.diagram"
            properties="isDomainModelElement"
-           class="edu.unikiel.rtsys.kieler.ssm.diagram.part.SafeStateMachineDomainModelElementTester">
+           class="de.cau.cs.kieler.ssm.diagram.part.SafeStateMachineDomainModelElementTester">
        </propertyTester>
    </extension>
 
@@ -370,8 +370,8 @@
             id="edu.unikiel.rtsys.kieler.ssm.gmf.diagram.resourceContent" 
             name="%navigatorContentName" 
             priority="normal" 
-            contentProvider="edu.unikiel.rtsys.kieler.ssm.diagram.navigator.SafeStateMachineNavigatorContentProvider" 
-            labelProvider="edu.unikiel.rtsys.kieler.ssm.diagram.navigator.SafeStateMachineNavigatorLabelProvider"
+            contentProvider="de.cau.cs.kieler.ssm.diagram.navigator.SafeStateMachineNavigatorContentProvider" 
+            labelProvider="de.cau.cs.kieler.ssm.diagram.navigator.SafeStateMachineNavigatorLabelProvider"
             icon="icons/obj16/ssmDiagramFile.gif"
             activeByDefault="true">
          <triggerPoints>
@@ -380,24 +380,24 @@
     	          <instanceof value="org.eclipse.core.resources.IFile"/>
         	      <test property="org.eclipse.core.resources.extension" value="ssm_diagram"/>
                </and>
-               <instanceof value="edu.unikiel.rtsys.kieler.ssm.diagram.navigator.SafeStateMachineAbstractNavigatorItem"/>
+               <instanceof value="de.cau.cs.kieler.ssm.diagram.navigator.SafeStateMachineAbstractNavigatorItem"/>
             </or>
          </triggerPoints>
          <possibleChildren>
             <or>
-         	   <instanceof value="edu.unikiel.rtsys.kieler.ssm.diagram.navigator.SafeStateMachineAbstractNavigatorItem"/>
+         	   <instanceof value="de.cau.cs.kieler.ssm.diagram.navigator.SafeStateMachineAbstractNavigatorItem"/>
             </or>
          </possibleChildren>
          <commonSorter 
                id="edu.unikiel.rtsys.kieler.ssm.gmf.diagram.navigatorSorter" 
-               class="edu.unikiel.rtsys.kieler.ssm.diagram.navigator.SafeStateMachineNavigatorSorter">
+               class="de.cau.cs.kieler.ssm.diagram.navigator.SafeStateMachineNavigatorSorter">
             <parentExpression>
                <or>
 	              <and>
     	             <instanceof value="org.eclipse.core.resources.IFile"/>
         	         <test property="org.eclipse.core.resources.extension" value="ssm_diagram"/>
                   </and>
-                  <instanceof value="edu.unikiel.rtsys.kieler.ssm.diagram.navigator.SafeStateMachineAbstractNavigatorItem"/>
+                  <instanceof value="de.cau.cs.kieler.ssm.diagram.navigator.SafeStateMachineAbstractNavigatorItem"/>
                </or>
             </parentExpression>
          </commonSorter>
@@ -406,8 +406,8 @@
             id="edu.unikiel.rtsys.kieler.ssm.gmf.diagram.domainResourceContent" 
             name="%domainNavigatorContentName" 
             priority="normal" 
-            contentProvider="edu.unikiel.rtsys.kieler.ssm.diagram.navigator.SafeStateMachineDomainNavigatorContentProvider" 
-            labelProvider="edu.unikiel.rtsys.kieler.ssm.diagram.navigator.SafeStateMachineDomainNavigatorLabelProvider"
+            contentProvider="de.cau.cs.kieler.ssm.diagram.navigator.SafeStateMachineDomainNavigatorContentProvider" 
+            labelProvider="de.cau.cs.kieler.ssm.diagram.navigator.SafeStateMachineDomainNavigatorLabelProvider"
             icon="icons/obj16/ssmDiagramFile.gif"
             activeByDefault="true">
          <triggerPoints>
@@ -431,10 +431,10 @@
       </navigatorContent>
       <actionProvider
             id="edu.unikiel.rtsys.kieler.ssm.gmf.diagram.navigatorActionProvider"
-            class="edu.unikiel.rtsys.kieler.ssm.diagram.navigator.SafeStateMachineNavigatorActionProvider">
+            class="de.cau.cs.kieler.ssm.diagram.navigator.SafeStateMachineNavigatorActionProvider">
          <enablement>
             <or>
-               <instanceof value="edu.unikiel.rtsys.kieler.ssm.diagram.navigator.SafeStateMachineAbstractNavigatorItem"/>
+               <instanceof value="de.cau.cs.kieler.ssm.diagram.navigator.SafeStateMachineAbstractNavigatorItem"/>
             </or>
          </enablement>
       </actionProvider>
@@ -444,7 +444,7 @@
       <?gmfgen generated="true"?>
       <linkHelper
             id="edu.unikiel.rtsys.kieler.ssm.gmf.diagram.navigatorLinkHelper"
-            class="edu.unikiel.rtsys.kieler.ssm.diagram.navigator.SafeStateMachineNavigatorLinkHelper">
+            class="de.cau.cs.kieler.ssm.diagram.navigator.SafeStateMachineNavigatorLinkHelper">
          <editorInputEnablement>
             <and>
                <instanceof value="org.eclipse.emf.common.ui.URIEditorInput"/>
@@ -452,7 +452,7 @@
             </and>
          </editorInputEnablement>
          <selectionEnablement>
-            <instanceof value="edu.unikiel.rtsys.kieler.ssm.diagram.navigator.SafeStateMachineAbstractNavigatorItem"/>
+            <instanceof value="de.cau.cs.kieler.ssm.diagram.navigator.SafeStateMachineAbstractNavigatorItem"/>
          </selectionEnablement>
       </linkHelper>
    </extension>
@@ -460,7 +460,7 @@
       <?gmfgen generated="true"?>
       <command
          categoryId="org.eclipse.ui.category.edit"
-         defaultHandler="edu.unikiel.rtsys.kieler.ssm.diagram.part.SafeStateMachineDiagramUpdateCommand"
+         defaultHandler="de.cau.cs.kieler.ssm.diagram.part.SafeStateMachineDiagramUpdateCommand"
          description="%update.diagram.description"
          id="edu.unikiel.rtsys.kieler.ssm.diagram.updateDiagram"
          name="%update.diagram.name"/>
@@ -494,7 +494,7 @@
       <?gmfgen generated="true"?>
       <propertyContributor
             contributorId="edu.unikiel.rtsys.kieler.ssm.gmf.diagram"
-            labelProvider="edu.unikiel.rtsys.kieler.ssm.diagram.sheet.SafeStateMachineSheetLabelProvider">
+            labelProvider="de.cau.cs.kieler.ssm.diagram.sheet.SafeStateMachineSheetLabelProvider">
          <propertyCategory category="domain"/>
          <propertyCategory category="visual"/>
          <propertyCategory category="extra"/>
@@ -543,10 +543,10 @@
          <propertySection
             id="property.section.domain" 
             tab="property.tab.domain"
-            class="edu.unikiel.rtsys.kieler.ssm.diagram.sheet.SafeStateMachinePropertySection">
+            class="de.cau.cs.kieler.ssm.diagram.sheet.SafeStateMachinePropertySection">
             <input type="org.eclipse.gmf.runtime.notation.View"/>
             <input type="org.eclipse.gef.EditPart"/>
-            <input type="edu.unikiel.rtsys.kieler.ssm.diagram.navigator.SafeStateMachineAbstractNavigatorItem"/>
+            <input type="de.cau.cs.kieler.ssm.diagram.navigator.SafeStateMachineAbstractNavigatorItem"/>
          </propertySection>
       </propertySections>
    </extension>
@@ -556,14 +556,14 @@
          point="org.eclipse.core.runtime.adapters">
       <factory
             adaptableType="org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart"
-            class="edu.unikiel.rtsys.kieler.ssm.diagram.util.SafeStateMachineIAdapterFactory">
+            class="de.cau.cs.kieler.ssm.diagram.util.SafeStateMachineIAdapterFactory">
          <adapter
                type="java.util.Map">
          </adapter>
       </factory>
       <factory
             adaptableType="org.eclipse.gmf.runtime.diagram.ui.editparts.ConnectionEditPart"
-            class="edu.unikiel.rtsys.kieler.ssm.diagram.util.SafeStateMachineIAdapterFactory">
+            class="de.cau.cs.kieler.ssm.diagram.util.SafeStateMachineIAdapterFactory">
          <adapter
                type="java.util.Map">
          </adapter>

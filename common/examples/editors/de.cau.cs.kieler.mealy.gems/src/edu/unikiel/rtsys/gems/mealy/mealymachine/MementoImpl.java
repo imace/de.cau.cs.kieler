@@ -12,18 +12,18 @@ import org.eclipse.gmt.gems.Memento;
 
 public class MementoImpl implements Memento {
 
-	private edu.unikiel.rtsys.gems.mealy.emf.mealymachine.Memento model_;
+	private de.cau.cs.kieler.gems.mealy.emf.mealymachine.Memento model_;
 	
 	public MementoImpl(){		
 	}
 	
-	public MementoImpl(edu.unikiel.rtsys.gems.mealy.emf.mealymachine.Memento model){
+	public MementoImpl(de.cau.cs.kieler.gems.mealy.emf.mealymachine.Memento model){
 		model_ = model;
 	}
 	
-	public edu.unikiel.rtsys.gems.mealy.emf.mealymachine.Memento getModel(){
+	public de.cau.cs.kieler.gems.mealy.emf.mealymachine.Memento getModel(){
 		if(model_ == null){
-			model_ = edu.unikiel.rtsys.gems.mealy.emf.mealymachine.impl.MealyMachineFactoryImpl.eINSTANCE.createMemento();
+			model_ = de.cau.cs.kieler.gems.mealy.emf.mealymachine.impl.MealyMachineFactoryImpl.eINSTANCE.createMemento();
 		}
 		return model_;
 	}
@@ -36,14 +36,14 @@ public class MementoImpl implements Memento {
 	}
 	
 	public void setValue(String name, String value){
-		edu.unikiel.rtsys.gems.mealy.emf.mealymachine.MementoValue mv = edu.unikiel.rtsys.gems.mealy.emf.mealymachine.impl.MealyMachineFactoryImpl.eINSTANCE.createMementoValue();
+		de.cau.cs.kieler.gems.mealy.emf.mealymachine.MementoValue mv = de.cau.cs.kieler.gems.mealy.emf.mealymachine.impl.MealyMachineFactoryImpl.eINSTANCE.createMementoValue();
 		mv.setName(name);
 		mv.setValue(value);
 		getModel().getData().add(mv);
 	}
 	public String getValue(String name){
 		for(Object curr : getModel().getData()){
-			edu.unikiel.rtsys.gems.mealy.emf.mealymachine.MementoValue mv = (edu.unikiel.rtsys.gems.mealy.emf.mealymachine.MementoValue)curr;
+			de.cau.cs.kieler.gems.mealy.emf.mealymachine.MementoValue mv = (de.cau.cs.kieler.gems.mealy.emf.mealymachine.MementoValue)curr;
 			if(mv.getName().equals(name)){
 				return mv.getValue();
 			}

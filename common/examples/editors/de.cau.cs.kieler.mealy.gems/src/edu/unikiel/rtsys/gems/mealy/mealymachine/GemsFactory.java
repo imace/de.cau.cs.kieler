@@ -29,7 +29,7 @@ public class GemsFactory{
 	private LinkedList<Runnable> requests_ = new LinkedList<Runnable>();
 	private Hashtable connected_ = new Hashtable();
 	
-	public ModelInstance loadModel(edu.unikiel.rtsys.gems.mealy.emf.mealymachine.Root root){
+	public ModelInstance loadModel(de.cau.cs.kieler.gems.mealy.emf.mealymachine.Root root){
 		Root groot = load(root);
 		ModelInstance inst = ModelRepository.getInstance().getInstanceRepository().getInstance(groot.getModelInstanceID());
 		inst.setRoot(groot);
@@ -39,7 +39,7 @@ public class GemsFactory{
 		
 		EList subts = root.getSubtypes();
     	for(Object obj : subts){
-    		org.eclipse.gmt.gems.Subtype st = createSubtype((edu.unikiel.rtsys.gems.mealy.emf.mealymachine.Subtype)obj);
+    		org.eclipse.gmt.gems.Subtype st = createSubtype((de.cau.cs.kieler.gems.mealy.emf.mealymachine.Subtype)obj);
     		inst.addSubType(st);
     	}
     	
@@ -70,7 +70,7 @@ public class GemsFactory{
 		}
 	}
 	
-	public Root load(edu.unikiel.rtsys.gems.mealy.emf.mealymachine.Root root){
+	public Root load(de.cau.cs.kieler.gems.mealy.emf.mealymachine.Root root){
 		Root groot = new Root(root);
 		//root_ = groot;
 		//conns_ = new LinkedList();
@@ -80,7 +80,7 @@ public class GemsFactory{
 		parts_.put(root,groot);
 		
 		
-		edu.unikiel.rtsys.gems.mealy.emf.mealymachine.MealyMachine rrm = root.getRealRoot();
+		de.cau.cs.kieler.gems.mealy.emf.mealymachine.MealyMachine rrm = root.getRealRoot();
 		if(rrm != null){
 			MealyMachine rr = (MealyMachine)getPart(groot, rrm);
 			groot.setRealRoot(rr);			
@@ -102,7 +102,7 @@ public class GemsFactory{
     	
     	EList transitioncons = root.getTransitionConnection();
     	for(Object obj : transitioncons){
-    		createTransitionConnection(groot, (edu.unikiel.rtsys.gems.mealy.emf.mealymachine.TransitionConnection)obj);
+    		createTransitionConnection(groot, (de.cau.cs.kieler.gems.mealy.emf.mealymachine.TransitionConnection)obj);
     	} 
     	
     	
@@ -112,18 +112,18 @@ public class GemsFactory{
 	}
     
     public ModelObject load(Container root, Object child) {
-    	if(child instanceof edu.unikiel.rtsys.gems.mealy.emf.mealymachine.MealyMachine){
-    		return loadMealyMachine(root,(edu.unikiel.rtsys.gems.mealy.emf.mealymachine.MealyMachine)child);
+    	if(child instanceof de.cau.cs.kieler.gems.mealy.emf.mealymachine.MealyMachine){
+    		return loadMealyMachine(root,(de.cau.cs.kieler.gems.mealy.emf.mealymachine.MealyMachine)child);
     	}
     	
-    	if(child instanceof edu.unikiel.rtsys.gems.mealy.emf.mealymachine.State){
-    		return loadState(root,(edu.unikiel.rtsys.gems.mealy.emf.mealymachine.State)child);
+    	if(child instanceof de.cau.cs.kieler.gems.mealy.emf.mealymachine.State){
+    		return loadState(root,(de.cau.cs.kieler.gems.mealy.emf.mealymachine.State)child);
     	}
     	
     	return null;
     }
     
-    	public MealyMachine loadMealyMachine(Container root, edu.unikiel.rtsys.gems.mealy.emf.mealymachine.MealyMachine obj){
+    	public MealyMachine loadMealyMachine(Container root, de.cau.cs.kieler.gems.mealy.emf.mealymachine.MealyMachine obj){
     	   MealyMachine gobj = null;
     	   
     	   gobj = new MealyMachine(obj);  
@@ -136,7 +136,7 @@ public class GemsFactory{
     	   return gobj;
     	}
    	
-    	public State loadState(Container root, edu.unikiel.rtsys.gems.mealy.emf.mealymachine.State obj){
+    	public State loadState(Container root, de.cau.cs.kieler.gems.mealy.emf.mealymachine.State obj){
     	   State gobj = null;
     	   
     	   gobj = new State(obj);  
@@ -151,7 +151,7 @@ public class GemsFactory{
    	
    	
    	 
-    	public MealyMachine loadMealyMachine(Container root, edu.unikiel.rtsys.gems.mealy.emf.mealymachine.MealyMachine obj, MealyMachine gobj){
+    	public MealyMachine loadMealyMachine(Container root, de.cau.cs.kieler.gems.mealy.emf.mealymachine.MealyMachine obj, MealyMachine gobj){
     	   
     	   if(root != null)
     	     root.addChild(gobj,-1,false);
@@ -161,7 +161,7 @@ public class GemsFactory{
     	   
     		EList states = obj.getStates();
     		for(Object child : states){
-    			loadState(gobj,(edu.unikiel.rtsys.gems.mealy.emf.mealymachine.State)child);
+    			loadState(gobj,(de.cau.cs.kieler.gems.mealy.emf.mealymachine.State)child);
     		}
     	   
     	   
@@ -177,7 +177,7 @@ public class GemsFactory{
     	}
     	
     	
-    	public State loadState(Container root, edu.unikiel.rtsys.gems.mealy.emf.mealymachine.State obj, State gobj){
+    	public State loadState(Container root, de.cau.cs.kieler.gems.mealy.emf.mealymachine.State obj, State gobj){
     	   
     	   if(root != null)
     	     root.addChild(gobj,-1,false);
@@ -202,10 +202,10 @@ public class GemsFactory{
     	
     	public class StateConnector implements Runnable {
     	  private Container root_;
-    	  private edu.unikiel.rtsys.gems.mealy.emf.mealymachine.State obj_;
+    	  private de.cau.cs.kieler.gems.mealy.emf.mealymachine.State obj_;
     	  private State gobj_;
     	  
-    	  public StateConnector(Container root, edu.unikiel.rtsys.gems.mealy.emf.mealymachine.State obj, State gobj){
+    	  public StateConnector(Container root, de.cau.cs.kieler.gems.mealy.emf.mealymachine.State obj, State gobj){
     	    root_ = root;
     	    obj_ = obj;
     	    gobj_ = gobj;
@@ -215,7 +215,7 @@ public class GemsFactory{
     	  }
     	}
     	
-    	public void loadConnections(Container root, edu.unikiel.rtsys.gems.mealy.emf.mealymachine.State obj, State gobj){
+    	public void loadConnections(Container root, de.cau.cs.kieler.gems.mealy.emf.mealymachine.State obj, State gobj){
     	
     	   
     	   
@@ -223,7 +223,7 @@ public class GemsFactory{
     	
    	
    	
-   	public org.eclipse.gmt.gems.Subtype createSubtype(edu.unikiel.rtsys.gems.mealy.emf.mealymachine.Subtype subt){
+   	public org.eclipse.gmt.gems.Subtype createSubtype(de.cau.cs.kieler.gems.mealy.emf.mealymachine.Subtype subt){
    		ModelObject base = parts_.get(subt.getBase());
    		String name = subt.getName();
    		EMFSubtypeImpl esub = new EMFSubtypeImpl(base,subt,name);
@@ -233,13 +233,13 @@ public class GemsFactory{
    		
  
 		for(Object lo : subt.getLinks()){
-		   edu.unikiel.rtsys.gems.mealy.emf.mealymachine.SubtypeLink link = (edu.unikiel.rtsys.gems.mealy.emf.mealymachine.SubtypeLink)lo;
+		   de.cau.cs.kieler.gems.mealy.emf.mealymachine.SubtypeLink link = (de.cau.cs.kieler.gems.mealy.emf.mealymachine.SubtypeLink)lo;
 		   esub.createUpdater(parts_.get(link.getBase()),parts_.get(link.getInstance()),link);   
 		}
    		return esub;
    	}
    
-    public void createTransitionConnection(Container root, edu.unikiel.rtsys.gems.mealy.emf.mealymachine.TransitionConnection con){
+    public void createTransitionConnection(Container root, de.cau.cs.kieler.gems.mealy.emf.mealymachine.TransitionConnection con){
         if(con.getSource() == null || con.getTarget() ==  null)
            return;
     	ModelObject src = parts_.get(con.getSource());
@@ -304,8 +304,8 @@ public class GemsFactory{
 	
 	public ModelObject getPart(Container root, Object key, boolean load){
 		ModelObject part = parts_.get(key);
-		if(part == null && key instanceof edu.unikiel.rtsys.gems.mealy.emf.mealymachine.ModelObject && key != null){
-		    edu.unikiel.rtsys.gems.mealy.emf.mealymachine.ModelObject obj = (edu.unikiel.rtsys.gems.mealy.emf.mealymachine.ModelObject)key;
+		if(part == null && key instanceof de.cau.cs.kieler.gems.mealy.emf.mealymachine.ModelObject && key != null){
+		    de.cau.cs.kieler.gems.mealy.emf.mealymachine.ModelObject obj = (de.cau.cs.kieler.gems.mealy.emf.mealymachine.ModelObject)key;
 		    if(obj.eResource() != null)
 		   	   part = parts_.get(obj.eResource().getURI().toString()+"#"+obj.getId());
 		}

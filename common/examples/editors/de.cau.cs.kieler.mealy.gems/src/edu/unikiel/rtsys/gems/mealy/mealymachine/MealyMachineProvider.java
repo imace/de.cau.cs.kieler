@@ -125,7 +125,7 @@ public class MealyMachineProvider implements ModelProvider, org.eclipse.gmt.gems
 	}
 	
 	public EPackage getEMFPackage(){
-		return edu.unikiel.rtsys.gems.mealy.emf.mealymachine.impl.MealyMachinePackageImpl.eINSTANCE;
+		return de.cau.cs.kieler.gems.mealy.emf.mealymachine.impl.MealyMachinePackageImpl.eINSTANCE;
 	}
  
 }

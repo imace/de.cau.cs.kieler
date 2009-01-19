@@ -13,7 +13,7 @@
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
        uri = "http://www.informatik.uni-kiel.de/rtsys/mealy" 
-       class = "edu.unikiel.rtsys.mealy.MealyPackage"
+       class = "de.cau.cs.kieler.mealy.MealyPackage"
        genModel = "model/MealyMachine.genmodel" /> 
   </extension>
 

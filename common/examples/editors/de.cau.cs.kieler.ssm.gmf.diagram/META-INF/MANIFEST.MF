@@ -1,15 +1,15 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
-Bundle-SymbolicName: edu.unikiel.rtsys.kieler.ssm.gmf.diagram; singleton:=true
+Bundle-SymbolicName: de.cau.cs.kieler.ssm.gmf.diagram;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-ClassPath: .
-Bundle-Activator: edu.unikiel.rtsys.kieler.ssm.diagram.part.SafeStateMachineDiagramEditorPlugin
+Bundle-Activator: de.cau.cs.kieler.ssm.diagram.part.SafeStateMachineDiagramEditorPlugin
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Export-Package: edu.unikiel.rtsys.kieler.ssm.diagram.edit.parts,
- edu.unikiel.rtsys.kieler.ssm.diagram.part,
- edu.unikiel.rtsys.kieler.ssm.diagram.providers
+Export-Package: de.cau.cs.kieler.ssm.diagram.edit.parts,
+ de.cau.cs.kieler.ssm.diagram.part,
+ de.cau.cs.kieler.ssm.diagram.providers
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.core.resources,
  org.eclipse.core.expressions,
@@ -31,8 +31,8 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.gmf.runtime.diagram.ui.render,
  org.eclipse.gmf.runtime.diagram.ui.resources.editor,
  org.eclipse.gmf.runtime.diagram.ui.resources.editor.ide,
- edu.unikiel.rtsys.kieler.ssm.emf;visibility:=reexport,
- edu.unikiel.rtsys.kieler.ssm.emf.edit;visibility:=reexport,
+ de.cau.cs.kieler.ssm.emf;visibility:=reexport,
+ de.cau.cs.kieler.ssm.emf.edit;visibility:=reexport,
  org.eclipse.ocl.ecore;visibility:=reexport,
  org.eclipse.gmf.runtime.draw2d.ui;visibility:=reexport,
  org.eclipse.gef;visibility:=reexport,
