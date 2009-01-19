@@ -9,12 +9,12 @@
  *******************************************************************************/
 package kiel.layouter.graphviz;
 
-import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup;
-import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphFactory;
-import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO;
-import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_OPTION;
-import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_TYPE;
-import edu.unikiel.rtsys.kieler.kiml.layout.services.KimlAbstractLayoutProvider;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphFactory;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_OPTION;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_TYPE;
+import de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayoutProvider;
 
 /**
  * Implements the Circo layouter of the GraphViz suite. As this class extends
@@ -42,9 +42,9 @@ public class CircoLayoutProvider extends KimlAbstractLayoutProvider {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * edu.unikiel.rtsys.kieler.kiml.layout.services.KimlAbstractLayoutProvider
+	 * de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayoutProvider
 	 * #doLayout
-	 * (edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup)
+	 * (de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup)
 	 */
 	public void doLayout(KNodeGroup nodeGroup) {
 		if (graphvizLayouter == null)
@@ -56,7 +56,7 @@ public class CircoLayoutProvider extends KimlAbstractLayoutProvider {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * edu.unikiel.rtsys.kieler.kiml.layout.services.KimlAbstractLayoutProvider
+	 * de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayoutProvider
 	 * #getLayouterInfo()
 	 */
 	public final LAYOUTER_INFO getLayouterInfo() {

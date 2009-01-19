@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Graphviz Plug-in
-Bundle-SymbolicName: edu.unikiel.rtsys.layouter.graphviz;singleton:=true
+Bundle-SymbolicName: de.cau.cs.kieler.layouter.graphviz;singleton:=true
 Bundle-Version: 1.0.0
 Bundle-Activator: kiel.layouter.graphviz.LayouterPlugin
 Eclipse-LazyStart: true
@@ -9,12 +9,12 @@ Bundle-ClassPath: .,
  libGraphvizAPI.so,
  lib/,
  libdotneato.so.0
-Export-Package: edu.unikiel.rtsys.layouter,
- edu.unikiel.rtsys.layouter.gef,
- edu.unikiel.rtsys.layouter.graph,
- edu.unikiel.rtsys.layouter.graph.custom,
- edu.unikiel.rtsys.layouter.graph.impl,
- edu.unikiel.rtsys.layouter.graph.util,
+Export-Package: de.cau.cs.kieler.layouter,
+ de.cau.cs.kieler.layouter.gef,
+ de.cau.cs.kieler.layouter.graph,
+ de.cau.cs.kieler.layouter.graph.custom,
+ de.cau.cs.kieler.layouter.graph.impl,
+ de.cau.cs.kieler.layouter.graph.util,
  kiel.layouter.graphviz
 Require-Bundle: org.eclipse.gmf.codegen.edit,
  org.eclipse.gmf.graphdef.edit,
@@ -56,4 +56,4 @@ Require-Bundle: org.eclipse.gmf.codegen.edit,
  org.eclipse.gmf.xpand;bundle-version="1.1.0",
  org.eclipse.gmf.xpand.editor;bundle-version="1.0.0",
  org.eclipse.ocl.ecore;bundle-version="1.2.0",
- edu.unikiel.rtsys.kieler.core;bundle-version="1.0.0"
+ de.cau.cs.kieler.core;bundle-version="1.0.0"

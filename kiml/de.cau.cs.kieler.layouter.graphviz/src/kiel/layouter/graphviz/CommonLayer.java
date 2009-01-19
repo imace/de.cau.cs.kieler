@@ -1,6 +1,6 @@
 package kiel.layouter.graphviz;
 
-import edu.unikiel.rtsys.layouter.graph.Graph;
+import de.cau.cs.kieler.layouter.graph.Graph;
 /**
  * Common data supplied by this Plugin 
  * that is shared between different plugins. Other plugins need static

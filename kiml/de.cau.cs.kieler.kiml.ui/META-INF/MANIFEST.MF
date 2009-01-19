@@ -1,15 +1,15 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %Bundle-Name.1
-Bundle-SymbolicName: edu.unikiel.rtsys.kieler.kiml.ui;singleton:=true
+Bundle-SymbolicName: de.cau.cs.kieler.kiml.ui;singleton:=true
 Bundle-Version: 1.0.0
-Bundle-Activator: edu.unikiel.rtsys.kieler.kiml.ui.KimlUiPlugin
+Bundle-Activator: de.cau.cs.kieler.kiml.ui.KimlUiPlugin
 Bundle-Vendor: %Bundle-Vendor.1
 Bundle-Localization: plugin
-Export-Package: edu.unikiel.rtsys.kieler.kiml.ui,
- edu.unikiel.rtsys.kieler.kiml.ui.helpers,
- edu.unikiel.rtsys.kieler.kiml.ui.policies,
- edu.unikiel.rtsys.kieler.kiml.ui.properties.tabbed.sections
+Export-Package: de.cau.cs.kieler.kiml.ui,
+ de.cau.cs.kieler.kiml.ui.helpers,
+ de.cau.cs.kieler.kiml.ui.policies,
+ de.cau.cs.kieler.kiml.ui.properties.tabbed.sections
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.gmf.runtime.common.ui.services,
@@ -22,9 +22,9 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.core.resources,
  org.eclipse.gmf.runtime.diagram.ui.resources.editor,
  org.eclipse.gmf.runtime.diagram.ui.resources.editor.ide,
- edu.unikiel.rtsys.kieler.core,
- edu.unikiel.rtsys.kieler.kiml.layout,
- edu.unikiel.rtsys.kieler.kiml.helpers,
+ de.cau.cs.kieler.core,
+ de.cau.cs.kieler.kiml.layout,
+ de.cau.cs.kieler.kiml.helpers,
  org.eclipse.gmf.runtime.diagram.ui.properties,
  org.junit
 Bundle-RequiredExecutionEnvironment: J2SE-1.5

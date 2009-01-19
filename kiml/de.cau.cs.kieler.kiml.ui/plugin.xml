@@ -5,13 +5,13 @@
    <extension
          point="org.eclipse.ui.preferencePages">
       <page
-            class="edu.unikiel.rtsys.kieler.kiml.ui.preferences.MainPreferencePage"
+            class="de.cau.cs.kieler.kiml.ui.preferences.MainPreferencePage"
             id="edu.unikiel.rtsys.kieler.kiml.ui.PreferencePage"
             name="%page.name.0">
       </page>
    <page
-   			category="edu.unikiel.rtsys.kieler.kiml.layout.preferences.DiagramLayoutersPreferencePage"
-            class="edu.unikiel.rtsys.kieler.kiml.ui.preferences.GenericDiagramLayouterPreferencePage"
+   			category="de.cau.cs.kieler.kiml.layout.preferences.DiagramLayoutersPreferencePage"
+            class="de.cau.cs.kieler.kiml.ui.preferences.GenericDiagramLayouterPreferencePage"
             id="edu.unikiel.rtsys.kieler.kiml.ui.preferences.GenericDiagramLayouterPreferencePage"
             name="Generic Diagram Layouter">
       </page>
@@ -24,7 +24,7 @@
       </category>
       <view
             category="edu.unikiel.rtsys.kieler.kiml.ui"
-            class="edu.unikiel.rtsys.kieler.kiml.ui.views.KimlLayoutHintView"
+            class="de.cau.cs.kieler.kiml.ui.views.KimlLayoutHintView"
             icon="icons/layout_hint.gif"
             id="edu.unikiel.rtsys.kieler.kiml.ui.views.KimlLayoutHintView"
             name="%view.name.1"
@@ -34,7 +34,7 @@
    <extension
          point="org.eclipse.ui.perspectives">
       <perspective
-            class="edu.unikiel.rtsys.kieler.kiml.ui.KimlPerspectiveFactory"
+            class="de.cau.cs.kieler.kiml.ui.KimlPerspectiveFactory"
             fixed="false"
             id="edu.unikiel.rtsys.kieler.kiml.ui.perspective1"
             name="%perspective.name.0">
@@ -69,11 +69,11 @@ point="org.eclipse.ui.menus">
             style="push">
       </command>
       <dynamic
-            class="edu.unikiel.rtsys.kieler.kiml.ui.ContributionItemLayoutAs"
+            class="de.cau.cs.kieler.kiml.ui.ContributionItemLayoutAs"
             id="edu.unikiel.rtsys.kieler.kiml.ui.dynamic.LayoutAs">
       </dynamic>
       <dynamic
-            class="edu.unikiel.rtsys.kieler.kiml.ui.ContributionItemGroupFunctions"
+            class="de.cau.cs.kieler.kiml.ui.ContributionItemGroupFunctions"
             id="edu.unikiel.rtsys.kieler.kiml.ui.dynamic.groupFunctions">
       </dynamic>
    </menu>
@@ -153,11 +153,11 @@ point="org.eclipse.ui.menus">
    <extension
          point="org.eclipse.ui.handlers">
       <handler
-            class="edu.unikiel.rtsys.kieler.kiml.ui.handlers.LayoutAsHandler"
+            class="de.cau.cs.kieler.kiml.ui.handlers.LayoutAsHandler"
             commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.layoutAs">
       </handler>
       <handler
-            class="edu.unikiel.rtsys.kieler.kiml.ui.handlers.GroupFunctionHandler"
+            class="de.cau.cs.kieler.kiml.ui.handlers.GroupFunctionHandler"
             commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.selectGroupMembers">
          <enabledWhen>
             <reference
@@ -166,7 +166,7 @@ point="org.eclipse.ui.menus">
          </enabledWhen>
       </handler>
       <handler
-            class="edu.unikiel.rtsys.kieler.kiml.ui.handlers.GroupFunctionHandler"
+            class="de.cau.cs.kieler.kiml.ui.handlers.GroupFunctionHandler"
             commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.highlightGroupMembers">
          <enabledWhen>
             <reference
@@ -175,7 +175,7 @@ point="org.eclipse.ui.menus">
          </enabledWhen>
       </handler>
       <handler
-            class="edu.unikiel.rtsys.kieler.kiml.ui.handlers.GroupFunctionHandler"
+            class="de.cau.cs.kieler.kiml.ui.handlers.GroupFunctionHandler"
             commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.ungroupElements">
          <enabledWhen>
             <reference
@@ -184,15 +184,15 @@ point="org.eclipse.ui.menus">
          </enabledWhen>
       </handler>
       <handler
-            class="edu.unikiel.rtsys.kieler.kiml.ui.handlers.KimlLayoutHandler"
+            class="de.cau.cs.kieler.kiml.ui.handlers.KimlLayoutHandler"
             commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.kimlLayout">
       </handler>
       <handler
-            class="edu.unikiel.rtsys.kieler.kiml.ui.handlers.KimlLayoutHandler"
+            class="de.cau.cs.kieler.kiml.ui.handlers.KimlLayoutHandler"
             commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.kimlLayoutAll">
       </handler>
       <handler
-            class="edu.unikiel.rtsys.kieler.kiml.ui.handlers.ArbitraryTestHandler"
+            class="de.cau.cs.kieler.kiml.ui.handlers.ArbitraryTestHandler"
             commandId="edu.unikiel.rtsys.kieler.kiml.ui.arbitrarytest">
       </handler>
    </extension>
@@ -435,23 +435,23 @@ point="org.eclipse.ui.menus">
       </definition>
    </extension>
    <extension
-         point="edu.unikiel.rtsys.kieler.kiml.layout.kimlDiagramLayouter">
+         point="de.cau.cs.kieler.kiml.layout.kimlDiagramLayouter">
       <kimlDiagramLayouter
-            class="edu.unikiel.rtsys.kieler.kiml.ui.diagramlayouter.KimlGenericDiagramLayouter"
+            class="de.cau.cs.kieler.kiml.ui.diagramlayouter.KimlGenericDiagramLayouter"
             editor_id="*">
       </kimlDiagramLayouter>
    </extension>
    <extension
          point="org.eclipse.core.runtime.preferences">
       <initializer
-            class="edu.unikiel.rtsys.kieler.kiml.ui.preferences.PreferenceInitializer">
+            class="de.cau.cs.kieler.kiml.ui.preferences.PreferenceInitializer">
       </initializer>
    </extension>
 
  <extension point="org.eclipse.gmf.runtime.common.ui.services.action.contributionItemProviders">
       <contributionItemProvider
             checkPluginLoaded="false"
-            class="edu.unikiel.rtsys.kieler.kiml.ui.caaa.ContributionItemProvider">
+            class="de.cau.cs.kieler.kiml.ui.caaa.ContributionItemProvider">
          <Priority name="Low">
          </Priority>
          <partContribution class="org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramWorkbenchPart">
@@ -463,7 +463,7 @@ point="org.eclipse.ui.menus">
  <extension
        point="org.eclipse.ui.statusHandlers">
     <statusHandler
-          class="edu.unikiel.rtsys.kieler.kiml.ui.handlers.DebugErrorHandler"
+          class="de.cau.cs.kieler.kiml.ui.handlers.DebugErrorHandler"
           id="edu.unikiel.rtsys.kieler.kiml.ui.statusHandler">
     </statusHandler>
     <statusHandlerProductBinding

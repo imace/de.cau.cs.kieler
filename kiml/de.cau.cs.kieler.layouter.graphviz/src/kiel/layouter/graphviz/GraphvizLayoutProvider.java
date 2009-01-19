@@ -40,19 +40,20 @@ import org.eclipse.gmf.runtime.diagram.ui.requests.SetAllBendpointRequest;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.jface.preference.IPreferenceStore;
 
-import edu.unikiel.rtsys.layouter.LayoutType;
-import edu.unikiel.rtsys.layouter.gef.DebugFigureHandler;
-import edu.unikiel.rtsys.layouter.gef.SetLayoutCommand;
-import edu.unikiel.rtsys.layouter.graph.CompositeNode;
-import edu.unikiel.rtsys.layouter.graph.Coordinates;
-import edu.unikiel.rtsys.layouter.graph.Edge;
-import edu.unikiel.rtsys.layouter.graph.Graph;
-import edu.unikiel.rtsys.layouter.graph.GraphFactory;
-import edu.unikiel.rtsys.layouter.graph.Label;
-import edu.unikiel.rtsys.layouter.graph.Node;
-import edu.unikiel.rtsys.layouter.graph.Size;
-import edu.unikiel.rtsys.layouter.graph.custom.GraphTools;
-import edu.unikiel.rtsys.layouter.ui.WorkbenchPreferencePage;
+import de.cau.cs.kieler.layouter.LayoutType;
+import de.cau.cs.kieler.layouter.gef.DebugFigureHandler;
+import de.cau.cs.kieler.layouter.gef.SetLayoutCommand;
+import de.cau.cs.kieler.layouter.graph.CompositeNode;
+import de.cau.cs.kieler.layouter.graph.Coordinates;
+import de.cau.cs.kieler.layouter.graph.Edge;
+import de.cau.cs.kieler.layouter.graph.Graph;
+import de.cau.cs.kieler.layouter.graph.GraphFactory;
+import de.cau.cs.kieler.layouter.graph.Label;
+import de.cau.cs.kieler.layouter.graph.Node;
+import de.cau.cs.kieler.layouter.graph.Size;
+import de.cau.cs.kieler.layouter.graph.custom.GraphTools;
+import de.cau.cs.kieler.layouter.ui.WorkbenchPreferencePage;
+
 
 
 /**
@@ -64,7 +65,7 @@ import edu.unikiel.rtsys.layouter.ui.WorkbenchPreferencePage;
  */
 public class GraphvizLayoutProvider extends DefaultProvider{
 
-	public static final String ID = "edu.unikiel.rtsys.layouter.layoutprovider";
+	public static final String ID = "de.cau.cs.kieler.layouter.layoutprovider";
 	
 	private DebugFigureHandler debugFigureHandler = new DebugFigureHandler();
 	

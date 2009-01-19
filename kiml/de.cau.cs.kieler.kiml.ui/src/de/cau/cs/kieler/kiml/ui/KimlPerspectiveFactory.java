@@ -1,0 +1,46 @@
+/*******************************************************************************
+ * Copyright (c) 2008 Real-Time and Embedded Systems group
+ *
+ * INSERT LICENCE HERE
+ *
+ *
+ * Author: Arne Schipper, ars@informatik.uni-kiel.de 
+ *
+ *******************************************************************************/
+package de.cau.cs.kieler.kiml.ui;
+
+import org.eclipse.ui.IFolderLayout;
+import org.eclipse.ui.IPageLayout;
+import org.eclipse.ui.IPerspectiveFactory;
+
+import de.cau.cs.kieler.kiml.ui.views.KimlLayoutHintView;
+
+
+/**
+ * Build up the special KIELER view in Eclipse.
+ *  
+ * @author <a href="mailto:haf@informatik.uni-kiel.de">Hauke Fuhrmann</a>
+ */
+public class KimlPerspectiveFactory implements IPerspectiveFactory {
+
+	public void createInitialLayout(IPageLayout layout) {
+		// Get editor area
+		String editorArea = layout.getEditorArea();
+		
+		// Top left: Project Explorer
+		IFolderLayout topLeft = layout.createFolder("topLeft", IPageLayout.LEFT, 0.25f, editorArea);
+		topLeft.addView(IPageLayout.ID_RES_NAV);
+		
+		// Bottom left: Outline View
+		IFolderLayout bottomLeft = layout.createFolder("bottomLeft", IPageLayout.BOTTOM, 0.5f, "topLeft");
+		bottomLeft.addView(IPageLayout.ID_OUTLINE);
+		
+		// Bottom: Property and KIELER views
+		IFolderLayout bottom = layout.createFolder("bottom", IPageLayout.BOTTOM, 0.75f, editorArea);
+		bottom.addView(IPageLayout.ID_PROP_SHEET);
+		bottom.addView(KimlLayoutHintView.ID);
+		
+		layout.addActionSet("de.cau.cs.kieler.kiml.ui.KimlActionSet");
+	}
+
+}

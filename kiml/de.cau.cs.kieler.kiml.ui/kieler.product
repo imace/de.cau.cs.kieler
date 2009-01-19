@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.4"?>
 
-<product name="KIELER - Kiel Integrated Environment for Layout for the Eclipse RCP" id="edu.unikiel.rtsys.kieler.kiml.ui.product" application="org.eclipse.ui.ide.workbench" version="1.0.0" useFeatures="false">
+<product name="KIELER - Kiel Integrated Environment for Layout for the Eclipse RCP" id="de.cau.cs.kieler.kiml.ui.product" application="org.eclipse.ui.ide.workbench" version="1.0.0" useFeatures="false">
 
    <aboutInfo>
       <image path="eclipse_lg.gif"/>
@@ -35,11 +35,11 @@
 
    <plugins>
       <plugin id="com.ibm.icu"/>
-      <plugin id="edu.unikiel.rtsys.kieler.core"/>
-      <plugin id="edu.unikiel.rtsys.kieler.kiml.helpers"/>
-      <plugin id="edu.unikiel.rtsys.kieler.kiml.layout"/>
+      <plugin id="de.cau.cs.kieler.core"/>
+      <plugin id="de.cau.cs.kieler.kiml.helpers"/>
+      <plugin id="de.cau.cs.kieler.kiml.layout"/>
       <plugin id="edu.unikiel.rtsys.kieler.kiml.layouter.example"/>
-      <plugin id="edu.unikiel.rtsys.kieler.kiml.ui"/>
+      <plugin id="de.cau.cs.kieler.kiml.ui"/>
       <plugin id="edu.unikiel.rtsys.kieler.kiml.viewer"/>
       <plugin id="org.eclipse.core.commands"/>
       <plugin id="org.eclipse.core.contenttype"/>

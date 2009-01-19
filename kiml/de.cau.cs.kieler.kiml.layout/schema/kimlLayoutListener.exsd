@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!-- Schema file written by PDE -->
-<schema targetNamespace="edu.unikiel.rtsys.kieler.kiml.layout" xmlns="http://www.w3.org/2001/XMLSchema">
+<schema targetNamespace="de.cau.cs.kieler.kiml.layout" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
       <appinfo>
-         <meta.schema plugin="edu.unikiel.rtsys.kieler.kiml.layout" id="kimlLayoutListener" name="KIML Layout Listener"/>
+         <meta.schema plugin="de.cau.cs.kieler.kiml.layout" id="kimlLayoutListener" name="KIML Layout Listener"/>
       </appinfo>
       <documentation>
          A KIML layout listener gets notifications of all layout requests and performed layouts.
@@ -55,7 +55,7 @@
                   Implementing class of the layout listener
                </documentation>
                <appinfo>
-                  <meta.attribute kind="java" basedOn=":edu.unikiel.rtsys.kieler.kiml.layout.services.IKimlLayoutListener"/>
+                  <meta.attribute kind="java" basedOn=":de.cau.cs.kieler.kiml.layout.services.IKimlLayoutListener"/>
                </appinfo>
             </annotation>
          </attribute>
@@ -80,7 +80,7 @@
 &lt;p&gt;
    &lt;pre&gt;
      &lt;extension
-         point=&quot;edu.unikiel.rtsys.kieler.kiml.layout.kimlLayoutListener&quot;&gt;
+         point=&quot;de.cau.cs.kieler.kiml.layout.kimlLayoutListener&quot;&gt;
       &lt;kimlLayoutListener
             class=&quot;edu.unikiel.rtsys.kieler.kiml.viewer.ViewLayoutListener&quot;&gt;
       &lt;/kimlLayoutListener&gt;
@@ -96,7 +96,7 @@
       </appinfo>
       <documentation>
          The value of the attribute class must represent a fully qualified name of a class that implements
-&lt;samp&gt;edu.unikiel.rtsys.kieler.kiml.layout.services.IKimlLayoutListener&lt;/samp&gt;.
+&lt;samp&gt;de.cau.cs.kieler.kiml.layout.services.IKimlLayoutListener&lt;/samp&gt;.
       </documentation>
    </annotation>
 

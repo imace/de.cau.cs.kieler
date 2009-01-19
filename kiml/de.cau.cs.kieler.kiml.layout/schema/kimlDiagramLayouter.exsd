@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!-- Schema file written by PDE -->
-<schema targetNamespace="edu.unikiel.rtsys.kieler.kiml.layout" xmlns="http://www.w3.org/2001/XMLSchema">
+<schema targetNamespace="de.cau.cs.kieler.kiml.layout" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
       <appinfo>
-         <meta.schema plugin="edu.unikiel.rtsys.kieler.kiml.layout" id="kimlDiagramLayouter" name="KIML Diagram Layouter"/>
+         <meta.schema plugin="de.cau.cs.kieler.kiml.layout" id="kimlDiagramLayouter" name="KIML Diagram Layouter"/>
       </appinfo>
       <documentation>
          Extension point for implementations of the translation of diagram elements to a KIML Layout Graph.
@@ -52,10 +52,10 @@
          <attribute name="class" type="string">
             <annotation>
                <documentation>
-                  Implementing class of the diagram layouter, must extend &lt;samp&gt;edu.unikiel.rtsys.kieler.kiml.layout.services.KimlAbstractLayouter&lt;/samp&gt;.
+                  Implementing class of the diagram layouter, must extend &lt;samp&gt;de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayouter&lt;/samp&gt;.
                </documentation>
                <appinfo>
-                  <meta.attribute kind="java" basedOn="edu.unikiel.rtsys.kieler.kiml.layout.services.KimlAbstractLayouter:"/>
+                  <meta.attribute kind="java" basedOn="de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayouter:"/>
                </appinfo>
             </annotation>
          </attribute>
@@ -87,7 +87,7 @@
 &lt;p&gt;
    &lt;pre&gt;
      &lt;extension
-         point=&quot;edu.unikiel.rtsys.kieler.kiml.layout.kimlDiagramLayouter&quot;&gt;
+         point=&quot;de.cau.cs.kieler.kiml.layout.kimlDiagramLayouter&quot;&gt;
       &lt;kimlDiagramLayouter
             class=&quot;edu.unikiel.rtsys.kieler.ssm.gmf.diagram.layouter.KimlSSMDiagramLayouter&quot;
             editor_id=&quot;edu.unikiel.rtsys.kieler.ssm.diagram.part.SafeStateMachineDiagramEditorID&quot;&gt;
@@ -104,7 +104,7 @@
       </appinfo>
       <documentation>
          The value of the attribute class must represent a fully qualified name of a class that extends
-&lt;samp&gt;edu.unikiel.rtsys.kieler.kiml.layout.services.KimlAbstractLayouter&lt;/samp&gt;.
+&lt;samp&gt;de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayouter&lt;/samp&gt;.
       </documentation>
    </annotation>
 

@@ -5,8 +5,8 @@
    <extension
          point="org.eclipse.ui.preferencePages">
       <page
-            category="edu.unikiel.rtsys.kieler.kiml.layout.preferences.LayoutProvidersPreferencePage"
-            class="edu.unikiel.rtsys.kieler.kiml.layouter.graphviz.preferences.GraphvizPreferencePage"
+            category="de.cau.cs.kieler.kiml.layout.preferences.LayoutProvidersPreferencePage"
+            class="de.cau.cs.kieler.kiml.layouter.graphviz.preferences.GraphvizPreferencePage"
             id="edu.unikiel.rtsys.kieler.kiml.layouter.graphviz.preferences.GraphvizPreferencePage"
             name="GraphViz">
       </page>
@@ -14,11 +14,11 @@
    <extension
          point="org.eclipse.core.runtime.preferences">
       <initializer
-            class="edu.unikiel.rtsys.kieler.kiml.layouter.graphviz.preferences.PreferenceInitializer">
+            class="de.cau.cs.kieler.kiml.layouter.graphviz.preferences.PreferenceInitializer">
       </initializer>
    </extension>
    <extension
-         point="edu.unikiel.rtsys.kieler.kiml.layout.kimlLayoutProvider">
+         point="de.cau.cs.kieler.kiml.layout.kimlLayoutProvider">
       <kimlLayoutProvider
             class="kiel.layouter.graphviz.CircoLayoutProvider">
       </kimlLayoutProvider>

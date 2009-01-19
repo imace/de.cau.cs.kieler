@@ -3,7 +3,8 @@ package kiel.layouter.graphviz;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
-import edu.unikiel.rtsys.layouter.ui.WorkbenchPreferencePage;
+import de.cau.cs.kieler.layouter.ui.WorkbenchPreferencePage;
+
 
 /**
  * The activator class controls the plug-in life cycle
@@ -11,7 +12,7 @@ import edu.unikiel.rtsys.layouter.ui.WorkbenchPreferencePage;
 public class LayouterPlugin extends AbstractUIPlugin {
 
 	// The plug-in ID
-	public static final String PLUGIN_ID = "edu.unikiel.rtsys.layouter.graphviz";
+	public static final String PLUGIN_ID = "de.cau.cs.kieler.layouter.graphviz";
 
 	// The shared instance
 	private static LayouterPlugin plugin;

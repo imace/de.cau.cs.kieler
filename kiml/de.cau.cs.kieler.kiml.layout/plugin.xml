@@ -9,13 +9,13 @@
          point="org.eclipse.ui.preferencePages">
       <page
             category="edu.unikiel.rtsys.kieler.kiml.ui.PreferencePage"
-            class="edu.unikiel.rtsys.kieler.kiml.layout.preferences.LayoutProvidersPreferencePage"
+            class="de.cau.cs.kieler.kiml.layout.preferences.LayoutProvidersPreferencePage"
             id="edu.unikiel.rtsys.kieler.kiml.layout.preferences.LayoutProvidersPreferencePage"
             name="Layout Providers">
       </page>
       <page
             category="edu.unikiel.rtsys.kieler.kiml.ui.PreferencePage"
-            class="edu.unikiel.rtsys.kieler.kiml.layout.preferences.DiagramLayoutersPreferencePage"
+            class="de.cau.cs.kieler.kiml.layout.preferences.DiagramLayoutersPreferencePage"
             id="edu.unikiel.rtsys.kieler.kiml.layout.preferences.DiagramLayoutersPreferencePage"
             name="Diagram Layouters">
       </page>
@@ -23,7 +23,7 @@
    <extension
          point="org.eclipse.core.runtime.preferences">
       <initializer
-            class="edu.unikiel.rtsys.kieler.kiml.layout.preferences.PreferenceInitializer">
+            class="de.cau.cs.kieler.kiml.layout.preferences.PreferenceInitializer">
       </initializer>
    </extension>
 

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <genmodel:GenModel xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
-    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/edu.unikiel.rtsys.kieler.kiml.layout/src"
-    modelPluginID="edu.unikiel.rtsys.kieler.kiml.layout" modelName="KimlLayoutGraph"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/de.cau.cs.kieler.kiml.layout/src"
+    modelPluginID="de.cau.cs.kieler.kiml.layout" modelName="KimlLayoutGraph"
     importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0" copyrightFields="false"
     usedGenPackages="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
   <foreignModel>KimlLayoutGraph.ecore</foreignModel>
-  <genPackages prefix="KimlLayoutGraph" basePackage="edu.unikiel.rtsys.kieler.kiml.layout"
+  <genPackages prefix="KimlLayoutGraph" basePackage="de.cau.cs.kieler.kiml.layout"
       disposableProviderFactory="true" ecorePackage="KimlLayoutGraph.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="KimlLayoutGraph.ecore#//EDGE_TYPE">
       <genEnumLiterals ecoreEnumLiteral="KimlLayoutGraph.ecore#//EDGE_TYPE/DEFAULT"/>

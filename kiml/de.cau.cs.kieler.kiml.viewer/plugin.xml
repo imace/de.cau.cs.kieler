@@ -6,7 +6,7 @@
       <view
             allowMultiple="false"
             category="edu.unikiel.rtsys.kieler.kiml.ui"
-            class="edu.unikiel.rtsys.kieler.kiml.viewer.views.LayoutGraphView"
+            class="de.cau.cs.kieler.kiml.viewer.views.LayoutGraphView"
             icon="icons/graph.gif"
             id="edu.unikiel.rtsys.kieler.kiml.viewer.layoutGraph"
             name="Layout Graph"
@@ -14,9 +14,9 @@
       </view>
    </extension>
    <extension
-         point="edu.unikiel.rtsys.kieler.kiml.layout.kimlLayoutListener">
+         point="de.cau.cs.kieler.kiml.layout.kimlLayoutListener">
       <kimlLayoutListener
-            class="edu.unikiel.rtsys.kieler.kiml.viewer.ViewLayoutListener">
+            class="de.cau.cs.kieler.kiml.viewer.ViewLayoutListener">
       </kimlLayoutListener>
    </extension>
 

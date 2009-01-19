@@ -8,13 +8,14 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 
-import edu.unikiel.rtsys.layouter.graph.CompositeNode;
-import edu.unikiel.rtsys.layouter.graph.Coordinates;
-import edu.unikiel.rtsys.layouter.graph.Edge;
-import edu.unikiel.rtsys.layouter.graph.Graph;
-import edu.unikiel.rtsys.layouter.graph.GraphFactory;
-import edu.unikiel.rtsys.layouter.graph.Node;
-import edu.unikiel.rtsys.layouter.graph.Size;
+import de.cau.cs.kieler.layouter.graph.CompositeNode;
+import de.cau.cs.kieler.layouter.graph.Coordinates;
+import de.cau.cs.kieler.layouter.graph.Edge;
+import de.cau.cs.kieler.layouter.graph.Graph;
+import de.cau.cs.kieler.layouter.graph.GraphFactory;
+import de.cau.cs.kieler.layouter.graph.Node;
+import de.cau.cs.kieler.layouter.graph.Size;
+
 
 /**
  * Basic Layout Algorithm employing the Graphviz library (dot layout) to do a graphical

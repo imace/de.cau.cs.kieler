@@ -13,7 +13,7 @@
    <extension point="org.eclipse.emf.edit.itemProviderAdapterFactories">
       <factory
             uri="http://rtsys.informatik.uni-kiel.de"
-            class="edu.unikiel.rtsys.layouter.graph.provider.GraphItemProviderAdapterFactory"
+            class="de.cau.cs.kieler.layouter.graph.provider.GraphItemProviderAdapterFactory"
             supportedTypes=
               "org.eclipse.emf.edit.provider.IEditingDomainItemProvider
                org.eclipse.emf.edit.provider.IStructuredItemContentProvider

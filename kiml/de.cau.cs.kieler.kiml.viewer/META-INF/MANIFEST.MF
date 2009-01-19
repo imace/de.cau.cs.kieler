@@ -1,11 +1,11 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Layout Graph Viewer
-Bundle-SymbolicName: edu.unikiel.rtsys.kieler.kiml.viewer;singleton:=true
+Bundle-SymbolicName: de.cau.cs.kieler.kiml.viewer;singleton:=true
 Bundle-Version: 1.0.0
-Bundle-Activator: edu.unikiel.rtsys.kieler.kiml.viewer.Activator
+Bundle-Activator: de.cau.cs.kieler.kiml.viewer.Activator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
- edu.unikiel.rtsys.kieler.kiml.layout;bundle-version="1.0.0",
+ de.cau.cs.kieler.kiml.layout;bundle-version="1.0.0",
  org.eclipse.emf.ecore;bundle-version="2.4.1"
 Bundle-ActivationPolicy: lazy

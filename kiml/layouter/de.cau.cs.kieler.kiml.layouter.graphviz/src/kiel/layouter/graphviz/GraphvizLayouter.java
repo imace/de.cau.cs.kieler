@@ -22,23 +22,24 @@ import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.ui.statushandlers.StatusManager;
 
-import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.EDGE_LABEL_PLACEMENT;
-import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.EDGE_TYPE;
-import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KDimension;
-import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KEdge;
-import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KEdgeLabel;
-import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KEdgeLayout;
-import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup;
-import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPoint;
-import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphFactory;
-import edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_OPTION;
-import edu.unikiel.rtsys.kieler.kiml.layouter.graphviz.Activator;
-import edu.unikiel.rtsys.kieler.kiml.layouter.graphviz.preferences.PreferenceConstants;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.EDGE_LABEL_PLACEMENT;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.EDGE_TYPE;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KDimension;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdge;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLabel;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLayout;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPoint;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphFactory;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_OPTION;
+import de.cau.cs.kieler.kiml.layouter.graphviz.Activator;
+import de.cau.cs.kieler.kiml.layouter.graphviz.preferences.PreferenceConstants;
+
 
 /**
  * Basic layout algorithm employing the GraphViz library (e.g. dot layout) to do
  * a graphical layout on the passed
- * {@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KLayoutGraph
+ * {@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutGraph
  * KLayoutGraph} data structure. The basic principle is simple:
  * <ol>
  * <li>Read the KLayoutGraph data structure and use the {@link GraphvizAPI} to
@@ -124,7 +125,7 @@ public class GraphvizLayouter {
 
 	/**
 	 * Performs the actual work of the layout process. Translates the
-	 * {@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup
+	 * {@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup
 	 * KNodeGroup} into a structure GraphViz understands, calls the desired
 	 * GraphViz layouter and annotates the KLayoutGraph with the position and
 	 * size information provided by GraphViz.
@@ -205,7 +206,7 @@ public class GraphvizLayouter {
 
 	/**
 	 * Maps a
-	 * {@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup
+	 * {@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup
 	 * KNodeGroup} to the internal GraphvizAPI data structure. This is stored in
 	 * the GraphvizAPI internally.
 	 * 
@@ -310,7 +311,7 @@ public class GraphvizLayouter {
 	/**
 	 * Reads the internal GraphViz data structure that was filled by the
 	 * GraphViz library and writes the required parameters back to the
-	 * {@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup
+	 * {@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup
 	 * KNodeGroup}.
 	 * 
 	 * @param nodeGroup
@@ -544,7 +545,7 @@ public class GraphvizLayouter {
 
 	/**
 	 * Transforms GraphvizCoordinates to
-	 * {@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPoint
+	 * {@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPoint
 	 * KPoint} (KLayoutGraph) coordinates. The size of the provided item is used
 	 * to adjust the resulting location. Padding is also used.
 	 * 
@@ -567,7 +568,7 @@ public class GraphvizLayouter {
 
 	/**
 	 * Transforms GraphvizCoordinates to
-	 * {@link edu.unikiel.rtsys.kieler.kiml.layout.KimlLayoutGraph.KPoint
+	 * {@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPoint
 	 * KPoint} (KLayoutGraph) coordinates. Padding is also used.
 	 * 
 	 * @param location

@@ -9,7 +9,7 @@ import org.osgi.framework.BundleContext;
 public class Activator extends AbstractUIPlugin {
 
 	// The plug-in ID
-	public static final String PLUGIN_ID = "edu.unikiel.rtsys.layouter.graphviz";
+	public static final String PLUGIN_ID = "de.cau.cs.kieler.layouter.graphviz";
 
 	// The shared instance
 	private static Activator plugin;
