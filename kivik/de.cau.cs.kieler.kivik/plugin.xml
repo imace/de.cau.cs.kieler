@@ -18,7 +18,7 @@
    <extension
          point="org.eclipse.ui.preferencePages">
       <page
-            class="edu.unikiel.rtsys.kieler.kivik.preferences.KivikPreferencePage"
+            class="de.cau.cs.kieler.kivik.preferences.KivikPreferencePage"
             id="edu.unikiel.rtsys.kieler.kivik.preferences.KivikPreferencePage"
             name="KiViK">
       </page>
@@ -26,7 +26,7 @@
    <extension
          point="org.eclipse.core.runtime.preferences">
       <initializer
-            class="edu.unikiel.rtsys.kieler.kivik.preferences.PreferenceInitializer">
+            class="de.cau.cs.kieler.kivik.preferences.PreferenceInitializer">
       </initializer>
    </extension>
    <extension
@@ -38,7 +38,7 @@
    <extension
          point="org.eclipse.compare.contentMergeViewers">
       <viewer
-            class="edu.unikiel.rtsys.kieler.kivik.viewer.content.ModelContentMergeViewerCreator"
+            class="de.cau.cs.kieler.kivik.viewer.content.ModelContentMergeViewerCreator"
             extensions="*"
             id="edu.unikiel.rtsys.kieler.kivik.views.ContentMergeViewer">
       </viewer>
@@ -50,7 +50,7 @@
    <extension
          point="org.eclipse.compare.structureMergeViewers">
       <viewer
-            class="edu.unikiel.rtsys.kieler.kivik.viewer.structure.ModelStructureMergeViewerCreator"
+            class="de.cau.cs.kieler.kivik.viewer.structure.ModelStructureMergeViewerCreator"
             extensions="*"
             id="edu.unikiel.rtsys.kieler.kivik.viewer.StructuredMergeViewer">
       </viewer>
