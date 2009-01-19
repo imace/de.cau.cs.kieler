@@ -17,6 +17,15 @@ public class ExpansionECPlanarizer extends AbstractAlgorithm implements
 	/** map of embedding constraints */
 	private Map<KNodeGroup, EmbeddingConstraint> constraintsMap = null;
 	
+	/*
+	 * (non-Javadoc)
+	 * @see edu.unikiel.rtsys.klodd.core.algorithms.AbstractAlgorithm#reset()
+	 */
+	public void reset() {
+		super.reset();
+		constraintsMap = null;
+	}
+	
 	/* (non-Javadoc)
 	 * @see edu.unikiel.rtsys.klodd.orthogonal.modules.IECPlanarizer#setConstraints(java.util.Map)
 	 */

@@ -17,6 +17,15 @@ public class EdgeInsertionECPlanarizer extends AbstractAlgorithm implements
 	/** map of embedding constraints */
 	private Map<KNodeGroup, EmbeddingConstraint> constraintsMap = null;
 	
+	/*
+	 * (non-Javadoc)
+	 * @see edu.unikiel.rtsys.klodd.core.algorithms.AbstractAlgorithm#reset()
+	 */
+	public void reset() {
+		super.reset();
+		constraintsMap = null;
+	}
+	
 	/* (non-Javadoc)
 	 * @see edu.unikiel.rtsys.klodd.orthogonal.modules.IECPlanarizer#setConstraints(java.util.Map)
 	 */
@@ -33,6 +42,9 @@ public class EdgeInsertionECPlanarizer extends AbstractAlgorithm implements
 			throw new IllegalStateException("The method setConstraints() must be called first.");
 		
 		// TODO implement planarization through edge insertion
+		// build normal graph without edges, store edges in a list
+		// build dual graph with exactly one (external) face
+		// insert the stored edges, one by one, and preserve planarity
 		
 		return null;
 	}
