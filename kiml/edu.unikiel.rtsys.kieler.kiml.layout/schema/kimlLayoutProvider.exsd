@@ -109,8 +109,8 @@
          <meta.section type="apiinfo"/>
       </appinfo>
       <documentation>
-         The value of the attribute class must represent a fully qualified name of the class that implements
-&lt;samp&gt;edu.unikiel.rtsys.kieler.kiml.layout.servicesKimlAbstractLayoutProvider&lt;/samp&gt;.
+         The value of the attribute class must represent a fully qualified name of a class that extends
+&lt;samp&gt;edu.unikiel.rtsys.kieler.kiml.layout.services.KimlAbstractLayoutProvider&lt;/samp&gt;.
       </documentation>
    </annotation>
 

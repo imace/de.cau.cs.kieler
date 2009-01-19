@@ -83,7 +83,7 @@
          <meta.section type="examples"/>
       </appinfo>
       <documentation>
-         The following is an example for the KIML Layout Provider extension point:
+         The following is an example for the KIML Diagram Layouter extension point:
 &lt;p&gt;
    &lt;pre&gt;
      &lt;extension
@@ -103,8 +103,8 @@
          <meta.section type="apiinfo"/>
       </appinfo>
       <documentation>
-         The value of the attribute class must represent a fully qualified name of the class that implements
-&lt;samp&gt;edu.unikiel.rtsys.kieler.kiml.layout.servicesKimlAbstractLayoutProvider&lt;/samp&gt;.
+         The value of the attribute class must represent a fully qualified name of a class that extends
+&lt;samp&gt;edu.unikiel.rtsys.kieler.kiml.layout.services.KimlAbstractLayouter&lt;/samp&gt;.
       </documentation>
    </annotation>
 

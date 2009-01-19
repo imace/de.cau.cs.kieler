@@ -71,14 +71,32 @@
       </documentation>
    </annotation>
 
+   <annotation>
+      <appinfo>
+         <meta.section type="examples"/>
+      </appinfo>
+      <documentation>
+         The following is an example for the KIML Layout Listener extension point:
+&lt;p&gt;
+   &lt;pre&gt;
+     &lt;extension
+         point=&quot;edu.unikiel.rtsys.kieler.kiml.layout.kimlLayoutListener&quot;&gt;
+      &lt;kimlLayoutListener
+            class=&quot;edu.unikiel.rtsys.kieler.kiml.viewer.ViewLayoutListener&quot;&gt;
+      &lt;/kimlLayoutListener&gt;
+   &lt;/extension&gt;
+   &lt;/pre&gt;
+&lt;/p&gt;
+      </documentation>
+   </annotation>
 
    <annotation>
       <appinfo>
          <meta.section type="apiinfo"/>
       </appinfo>
       <documentation>
-         
-
+         The value of the attribute class must represent a fully qualified name of a class that implements
+&lt;samp&gt;edu.unikiel.rtsys.kieler.kiml.layout.services.IKimlLayoutListener&lt;/samp&gt;.
       </documentation>
    </annotation>
 
