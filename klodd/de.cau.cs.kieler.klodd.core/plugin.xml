@@ -4,8 +4,8 @@
    <extension
          point="org.eclipse.ui.preferencePages">
       <page
-            category="edu.unikiel.rtsys.kieler.kiml.layout.preferences.LayoutProvidersPreferencePage"
-            class="edu.unikiel.rtsys.klodd.core.preferences.KloddLayouterPreferencePage"
+            category="de.cau.cs.kieler.kiml.layout.preferences.LayoutProvidersPreferencePage"
+            class="de.cau.cs.kieler.klodd.core.preferences.KloddLayouterPreferencePage"
             id="edu.unikiel.rtsys.klodd.preferences"
             name="KLoDD">
       </page>
@@ -13,7 +13,7 @@
    <extension
          point="org.eclipse.core.runtime.preferences">
       <initializer
-            class="edu.unikiel.rtsys.klodd.core.preferences.PreferenceInitializer">
+            class="de.cau.cs.kieler.klodd.core.preferences.PreferenceInitializer">
       </initializer>
    </extension>
 

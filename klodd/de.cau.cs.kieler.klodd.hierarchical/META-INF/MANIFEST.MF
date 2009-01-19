@@ -1,8 +1,8 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Hierarchical Layout Plug-In
-Bundle-SymbolicName: edu.unikiel.rtsys.klodd.hierarchical;singleton:=true
+Bundle-SymbolicName: de.cau.cs.kieler.klodd.hierarchical;singleton:=true
 Bundle-Version: 1.0.0
 Require-Bundle: org.eclipse.emf.ecore;bundle-version="2.4.1",
- edu.unikiel.rtsys.klodd.core;bundle-version="1.0.0",
- edu.unikiel.rtsys.kieler.kiml.layout;bundle-version="1.0.0"
+ de.cau.cs.kieler.klodd.core;bundle-version="1.0.0",
+ de.cau.cs.kieler.kiml.layout;bundle-version="1.0.0"
