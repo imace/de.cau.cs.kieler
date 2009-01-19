@@ -1,4 +1,4 @@
-package edu.unikiel.rtsys.kieler.standalone;
+package de.cau.cs.kieler.standalone;
 
 import java.io.File;
 import java.io.IOException;

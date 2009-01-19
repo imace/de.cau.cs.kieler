@@ -2,8 +2,8 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/edu.unikiel.rtsys.kieler.ssm.emf"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/edu.unikiel.rtsys.kieler.ssm.emf.edit"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/de.cau.cs.kieler.ssm.emf"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/de.cau.cs.kieler.ssm.emf.edit"/>
 	<classpathentry kind="lib" path="/home/java/eclipse_3.4/plugins/org.eclipse.emf.ecore_2.4.0.v200806091234.jar" sourcepath="/home/java/eclipse_3.4/plugins/org.eclipse.emf.source_2.4.0.v200806091234/src/org.eclipse.emf.ecore_2.4.0.v200806091234/src.zip">
 		<attributes>
 			<attribute name="javadoc_location" value="jar:file:/home/java/eclipse_3.4/plugins/org.eclipse.emf.doc_2.4.0.v200806091234.jar!/references/javadoc"/>
