@@ -1,4 +1,4 @@
-package de.cau.cs.kieler.core.util;
+package de.cau.cs.kieler.core.preferences;
 
 import org.eclipse.jface.preference.StringFieldEditor;
 import org.eclipse.swt.widgets.Composite;
