@@ -10,7 +10,7 @@
  ****************************************************************************/
 
 
-package edu.unikiel.rtsys.gems.mealy.mealymachine;
+package de.cau.cs.kieler.gems.mealy.mealymachine;
 
 
 import org.eclipse.gmt.gems.model.ModelObject;

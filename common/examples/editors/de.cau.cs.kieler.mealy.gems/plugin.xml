@@ -8,7 +8,7 @@
             name="Generic Eclipse Modeling System"
             extensions="gemsmealy"
             icon="MealyMachine.gif"
-            class="edu.unikiel.rtsys.gems.mealy.mealymachine.DSMLEditor"
+            class="de.cau.cs.kieler.gems.mealy.mealymachine.DSMLEditor"
             contributorClass="org.eclipse.gmt.gems.actions.LogicActionBarContributor"
             id="edu.unikiel.rtsys.gems.mealy.mealymachine.editor">
       </editor>
@@ -24,14 +24,14 @@
             name="MealyMachine Model"
             icon="MealyMachine.gif"
             category="edu.unikiel.rtsys.gems.mealy.mealymachine"
-            class="edu.unikiel.rtsys.gems.mealy.mealymachine.GemsCreationWizard"
+            class="de.cau.cs.kieler.gems.mealy.mealymachine.GemsCreationWizard"
             id="edu.unikiel.rtsys.gems.mealy.mealymachine.NewWizard">
       </wizard>
    </extension>
       <extension
          point="org.eclipse.gmt.gems.dsml.serializer">
       <serializer
-            class="edu.unikiel.rtsys.gems.mealy.mealymachine.Serializer"
+            class="de.cau.cs.kieler.gems.mealy.mealymachine.Serializer"
             models="readers,http://www.informatik.uni-kiel.de/rtsys/gems/mealy"/>
    </extension>
 

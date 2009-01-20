@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: MealyMachine Plug-in
 Bundle-SymbolicName: edu.unikiel.rtsys.gems.mealy.mealymachine;singleton:=true
 Bundle-Version: 1.0.0
-Bundle-Activator: edu.unikiel.rtsys.gems.mealy.mealymachine.MealyMachinePlugin
+Bundle-Activator: de.cau.cs.kieler.gems.mealy.mealymachine.MealyMachinePlugin
 Bundle-Vendor: GEMS
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
@@ -22,6 +22,6 @@ Require-Bundle: org.eclipse.ui,
 Export-Package: de.cau.cs.kieler.gems.mealy.emf.mealymachine,
  de.cau.cs.kieler.gems.mealy.emf.mealymachine.impl,
  de.cau.cs.kieler.gems.mealy.emf.mealymachine.util,
- edu.unikiel.rtsys.gems.mealy.mealymachine
+ de.cau.cs.kieler.gems.mealy.mealymachine
 Bundle-ClassPath: .
 Eclipse-LazyStart: true

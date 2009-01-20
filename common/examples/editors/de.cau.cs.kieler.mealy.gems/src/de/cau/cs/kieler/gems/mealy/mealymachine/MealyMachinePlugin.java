@@ -1,4 +1,4 @@
-package edu.unikiel.rtsys.gems.mealy.mealymachine;
+package de.cau.cs.kieler.gems.mealy.mealymachine;
 
 import org.eclipse.ui.plugin.*;
 import org.osgi.framework.BundleContext;
@@ -17,7 +17,7 @@ public class MealyMachinePlugin extends AbstractUIPlugin {
 		super();
 		plugin = this;
 		try {
-			resourceBundle = ResourceBundle.getBundle("edu.unikiel.rtsys.gems.mealy.mealymachine.MealyMachinePluginResources");
+			resourceBundle = ResourceBundle.getBundle("de.cau.cs.kieler.gems.mealy.mealymachine.MealyMachinePluginResources");
 		} catch (MissingResourceException x) {
 			resourceBundle = null;
 		}
