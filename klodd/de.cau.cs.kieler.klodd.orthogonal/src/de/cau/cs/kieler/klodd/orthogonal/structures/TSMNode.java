@@ -33,13 +33,14 @@ public class TSMNode implements Comparable<TSMNode> {
 	}
 	
 	/**
-	 * Creates a node containing the given object.
+	 * Creates a node containing no object.
 	 * 
 	 * @param graph the graph to which the new node shall be added
 	 */
 	public TSMNode(TSMGraph graph) {
 		graph.nodes.add(this);
 		this.object = null;
+		this.nr = graph.nextNodeNr++;
 	}
 
 	/*
