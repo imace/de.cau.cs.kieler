@@ -4,7 +4,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:gmfgen="http://www.eclipse.org/gmf/2008/GenModel" sameFileForDiagramAndModel="true"
     dynamicTemplates="true"
-    templateDirectory="/edu.unikiel.rtsys.kieler.dataflow/gmf-templates">
+    templateDirectory="/de.cau.cs.kieler.dataflow/gmf-templates">
   <diagram
       visualID="79"
       editPartClassName="DataflowModelEditPart"
@@ -384,31 +384,31 @@
     </palette>
     <preferencePages
         xsi:type="gmfgen:GenStandardPreferencePage"
-        iD="edu.unikiel.rtsys.dataflow.diagram.general"
+        iD="de.cau.cs.kieler.dataflow.diagram.general"
         name="Dataflow Diagram">
       <children
           xsi:type="gmfgen:GenStandardPreferencePage"
-          iD="edu.unikiel.rtsys.dataflow.diagram.appearance"
+          iD="de.cau.cs.kieler.dataflow.diagram.appearance"
           name="Appearance"
           kind="Appearance"/>
       <children
           xsi:type="gmfgen:GenStandardPreferencePage"
-          iD="edu.unikiel.rtsys.dataflow.diagram.connections"
+          iD="de.cau.cs.kieler.dataflow.diagram.connections"
           name="Connections"
           kind="Connections"/>
       <children
           xsi:type="gmfgen:GenStandardPreferencePage"
-          iD="edu.unikiel.rtsys.dataflow.diagram.printing"
+          iD="de.cau.cs.kieler.dataflow.diagram.printing"
           name="Printing"
           kind="Printing"/>
       <children
           xsi:type="gmfgen:GenStandardPreferencePage"
-          iD="edu.unikiel.rtsys.dataflow.diagram.rulersAndGrid"
+          iD="de.cau.cs.kieler.dataflow.diagram.rulersAndGrid"
           name="Rulers And Grid"
           kind="RulersAndGrid"/>
       <children
           xsi:type="gmfgen:GenStandardPreferencePage"
-          iD="edu.unikiel.rtsys.dataflow.diagram.pathmaps"
+          iD="de.cau.cs.kieler.dataflow.diagram.pathmaps"
           name="Pathmaps"
           kind="Pathmaps"/>
     </preferencePages>

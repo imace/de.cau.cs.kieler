@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <genmodel:GenModel xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
-    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/edu.unikiel.rtsys.kieler.dataflow/src"
-    editDirectory="/edu.unikiel.rtsys.kieler.dataflow.edit/src" editorDirectory="/edu.unikiel.rtsys.kieler.dataflow.editor/src"
-    modelPluginID="edu.unikiel.rtsys.kieler.dataflow" modelName="Dataflow" importerID="org.eclipse.emf.importer.ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/de.cau.cs.kieler.dataflow/src"
+    editDirectory="/de.cau.cs.kieler.dataflow.edit/src" editorDirectory="/de.cau.cs.kieler.dataflow.editor/src"
+    modelPluginID="de.cau.cs.kieler.dataflow" modelName="Dataflow" importerID="org.eclipse.emf.importer.ecore"
     complianceLevel="6.0" copyrightFields="false">
   <foreignModel>Dataflow.ecore</foreignModel>
   <genPackages prefix="Dataflow" disposableProviderFactory="true" ecorePackage="Dataflow.ecore#/">
