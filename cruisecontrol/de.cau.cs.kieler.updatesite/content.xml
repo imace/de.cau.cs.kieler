@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <?metadataRepository class='org.eclipse.equinox.internal.p2.metadata.repository.LocalMetadataRepository' version='1.0.0'?>
-<repository name='file:/home/haf/shared/kieler/workspace2/edu.unikiel.rtsys.kieler.updatesite/ - metadata' type='org.eclipse.equinox.internal.p2.metadata.repository.LocalMetadataRepository' version='1.0.0'>
+<repository name='file:/home/haf/shared/kieler/workspace2/de.cau.cs.kieler.updatesite/ - metadata' type='org.eclipse.equinox.internal.p2.metadata.repository.LocalMetadataRepository' version='1.0.0'>
   <properties size='2'>
     <property name='p2.compressed' value='false'/>
     <property name='p2.timestamp' value='1220956123460'/>
@@ -64,8 +64,8 @@
         </instructions>
       </touchpointData>
     </unit>
-    <unit id='edu.unikiel.rtsys.kieler.ssm.feature.feature.group' version='0.1.0' singleton='false'>
-      <update id='edu.unikiel.rtsys.kieler.ssm.feature.feature.group' range='[0.0.0,0.1.0)' severity='0'/>
+    <unit id='de.cau.cs.kieler.ssm.feature.feature.group' version='0.1.0' singleton='false'>
+      <update id='de.cau.cs.kieler.ssm.feature.feature.group' range='[0.0.0,0.1.0)' severity='0'/>
       <properties size='5'>
         <property name='org.eclipse.equinox.p2.name' value='Feature SSM Editor'/>
         <property name='org.eclipse.equinox.p2.description' value='[Enter Feature Description here.]'/>
@@ -74,11 +74,11 @@
         <property name='org.eclipse.equinox.p2.type.group' value='true'/>
       </properties>
       <provides size='1'>
-        <provided namespace='org.eclipse.equinox.p2.iu' name='edu.unikiel.rtsys.kieler.ssm.feature.feature.group' version='0.1.0'/>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='de.cau.cs.kieler.ssm.feature.feature.group' version='0.1.0'/>
       </provides>
       <requires size='2'>
-        <required namespace='org.eclipse.equinox.p2.iu' name='edu.unikiel.rtsys.kieler.ssm.emf' range='[1.0.0,1.0.0]'/>
-        <required namespace='org.eclipse.equinox.p2.iu' name='edu.unikiel.rtsys.kieler.ssm.feature.feature.jar' range='[0.1.0,0.1.0]'>
+        <required namespace='org.eclipse.equinox.p2.iu' name='de.cau.cs.kieler.ssm.emf' range='[1.0.0,1.0.0]'/>
+        <required namespace='org.eclipse.equinox.p2.iu' name='de.cau.cs.kieler.ssm.feature.feature.jar' range='[0.1.0,0.1.0]'>
           <filter>
             (org.eclipse.update.install.features=true)
           </filter>
@@ -94,8 +94,8 @@
         [Enter Copyright Description here.]
       </copyright>
     </unit>
-    <unit id='edu.unikiel.rtsys.kieler.ssm.feature.feature.jar' version='0.1.0'>
-      <update id='edu.unikiel.rtsys.kieler.ssm.feature.feature.jar' range='[0.0.0,0.1.0)' severity='0'/>
+    <unit id='de.cau.cs.kieler.ssm.feature.feature.jar' version='0.1.0'>
+      <update id='de.cau.cs.kieler.ssm.feature.feature.jar' range='[0.0.0,0.1.0)' severity='0'/>
       <properties size='4'>
         <property name='org.eclipse.equinox.p2.name' value='Feature SSM Editor'/>
         <property name='org.eclipse.equinox.p2.description' value='[Enter Feature Description here.]'/>
@@ -103,15 +103,15 @@
         <property name='org.eclipse.equinox.p2.provider' value='Christian-Albrechts Universität zu Kiel'/>
       </properties>
       <provides size='3'>
-        <provided namespace='org.eclipse.equinox.p2.iu' name='edu.unikiel.rtsys.kieler.ssm.feature.feature.jar' version='0.1.0'/>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='de.cau.cs.kieler.ssm.feature.feature.jar' version='0.1.0'/>
         <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='feature' version='1.0.0'/>
-        <provided namespace='org.eclipse.update.feature' name='edu.unikiel.rtsys.kieler.ssm.feature' version='0.1.0'/>
+        <provided namespace='org.eclipse.update.feature' name='de.cau.cs.kieler.ssm.feature' version='0.1.0'/>
       </provides>
       <filter>
         (org.eclipse.update.install.features=true)
       </filter>
       <artifacts size='1'>
-        <artifact classifier='org.eclipse.update.feature' id='edu.unikiel.rtsys.kieler.ssm.feature' version='0.1.0'/>
+        <artifact classifier='org.eclipse.update.feature' id='de.cau.cs.kieler.ssm.feature' version='0.1.0'/>
       </artifacts>
       <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
       <touchpointData size='1'>
@@ -130,8 +130,8 @@
         [Enter Copyright Description here.]
       </copyright>
     </unit>
-    <unit id='edu.unikiel.rtsys.kieler.ssm.emf' version='1.0.0'>
-      <update id='edu.unikiel.rtsys.kieler.ssm.emf' range='[0.0.0,1.0.0)' severity='0'/>
+    <unit id='de.cau.cs.kieler.ssm.emf' version='1.0.0'>
+      <update id='de.cau.cs.kieler.ssm.emf' range='[0.0.0,1.0.0)' severity='0'/>
       <properties size='4'>
         <property name='df_LT.providerName' value='www.example.org'/>
         <property name='df_LT.pluginName' value='SSM Model'/>
@@ -139,11 +139,11 @@
         <property name='org.eclipse.equinox.p2.provider' value='%providerName'/>
       </properties>
       <provides size='7'>
-        <provided namespace='org.eclipse.equinox.p2.iu' name='edu.unikiel.rtsys.kieler.ssm.emf' version='1.0.0'/>
-        <provided namespace='osgi.bundle' name='edu.unikiel.rtsys.kieler.ssm.emf' version='1.0.0'/>
-        <provided namespace='java.package' name='edu.unikiel.rtsys.kieler.ssm' version='0.0.0'/>
-        <provided namespace='java.package' name='edu.unikiel.rtsys.kieler.ssm.impl' version='0.0.0'/>
-        <provided namespace='java.package' name='edu.unikiel.rtsys.kieler.ssm.util' version='0.0.0'/>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='de.cau.cs.kieler.ssm.emf' version='1.0.0'/>
+        <provided namespace='osgi.bundle' name='de.cau.cs.kieler.ssm.emf' version='1.0.0'/>
+        <provided namespace='java.package' name='de.cau.cs.kieler.ssm' version='0.0.0'/>
+        <provided namespace='java.package' name='de.cau.cs.kieler.ssm.impl' version='0.0.0'/>
+        <provided namespace='java.package' name='de.cau.cs.kieler.ssm.util' version='0.0.0'/>
         <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' version='1.0.0'/>
         <provided namespace='org.eclipse.equinox.p2.localization' name='df_LT' version='1.0.0'/>
       </provides>
@@ -152,13 +152,13 @@
         <required namespace='osgi.bundle' name='org.eclipse.emf.ecore' range='0.0.0'/>
       </requires>
       <artifacts size='1'>
-        <artifact classifier='osgi.bundle' id='edu.unikiel.rtsys.kieler.ssm.emf' version='1.0.0'/>
+        <artifact classifier='osgi.bundle' id='de.cau.cs.kieler.ssm.emf' version='1.0.0'/>
       </artifacts>
       <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
       <touchpointData size='1'>
         <instructions size='1'>
           <instruction key='manifest'>
-            Bundle-ManifestVersion: 2&#xA;Export-Package: edu.unikiel.rtsys.kieler.ssm,edu.unikiel.rtsys.kieler.ssm.impl,edu.unikiel.rtsys.kieler.ssm.util&#xA;Bundle-RequiredExecutionEnvironment: JavaSE-1.6&#xA;Bundle-Localization: plugin&#xA;Require-Bundle: org.eclipse.core.runtime,org.eclipse.emf.ecore;visibility:=reexport&#xA;Bundle-Name: %pluginName&#xA;Bundle-Version: 1.0.0&#xA;Bundle-Vendor: %providerName&#xA;Bundle-SymbolicName: edu.unikiel.rtsys.kieler.ssm.emf;singleton:=true&#xA;Bundle-ActivationPolicy: lazy&#xA;Bundle-ClassPath: .&#xA;Manifest-Version: 1.0
+            Bundle-ManifestVersion: 2&#xA;Export-Package: de.cau.cs.kieler.ssm,de.cau.cs.kieler.ssm.impl,de.cau.cs.kieler.ssm.util&#xA;Bundle-RequiredExecutionEnvironment: JavaSE-1.6&#xA;Bundle-Localization: plugin&#xA;Require-Bundle: org.eclipse.core.runtime,org.eclipse.emf.ecore;visibility:=reexport&#xA;Bundle-Name: %pluginName&#xA;Bundle-Version: 1.0.0&#xA;Bundle-Vendor: %providerName&#xA;Bundle-SymbolicName: de.cau.cs.kieler.ssm.emf;singleton:=true&#xA;Bundle-ActivationPolicy: lazy&#xA;Bundle-ClassPath: .&#xA;Manifest-Version: 1.0
           </instruction>
         </instructions>
       </touchpointData>

@@ -6,12 +6,11 @@
     dynamicTemplates="true"
     templateDirectory="/de.cau.cs.kieler.dataflow/gmf-templates">
   <diagram
-      visualID="79"
+      visualID="1000"
       editPartClassName="DataflowModelEditPart"
       itemSemanticEditPolicyClassName="DataflowModelItemSemanticEditPolicy"
       notationViewFactoryClassName="DataflowModelViewFactory"
       canonicalEditPolicyClassName="DataflowModelCanonicalEditPolicy"
-      editPartProviderPriority="Highest"
       iconProviderPriority="Low"
       validationProviderPriority="Low">
     <diagramRunTimeClass
@@ -26,7 +25,7 @@
         href="Dataflow.genmodel#//dataflow/DataflowModel"/>
     <childNodes
         xsi:type="gmfgen:GenChildSideAffixedNode"
-        visualID="2001"
+        visualID="3001"
         editPartClassName="InputPortEditPart"
         itemSemanticEditPolicyClassName="InputPortItemSemanticEditPolicy"
         notationViewFactoryClassName="InputPortViewFactory"
@@ -66,7 +65,7 @@
       </modelFacet>
       <labels
           xsi:type="gmfgen:GenExternalNodeLabel"
-          visualID="4001"
+          visualID="5001"
           editPartClassName="InputPortNameEditPart"
           itemSemanticEditPolicyClassName="InputPortNameItemSemanticEditPolicy"
           notationViewFactoryClassName="InputPortNameViewFactory">
@@ -75,7 +74,7 @@
         <viewmap
             xsi:type="gmfgen:InnerClassViewmap"
             className="PortNameFigure"
-            classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class PortNameFigure extends org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel {&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public PortNameFigure() {&#xA;&#x9;&#x9;&#x9;&#x9;this.setText(&quot;port&quot;);&#xA;&#xA;this.setFont(THIS_FONT);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;}&#xA;&#xA;/**&#xA; * @generated&#xA; */&#xA;static final org.eclipse.swt.graphics.Font THIS_FONT = new org.eclipse.swt.graphics.Font(org.eclipse.swt.widgets.Display.getCurrent(), &quot;Times&quot;, 8, org.eclipse.swt.SWT.NORMAL);&#xA;&#xA;">
+            classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class PortNameFigure extends org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel {&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public PortNameFigure() {&#xA;&#x9;&#x9;&#x9;&#x9;this.setText(&quot;&quot;);&#xA;&#xA;this.setFont(THIS_FONT);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;}&#xA;&#xA;/**&#xA; * @generated&#xA; */&#xA;static final org.eclipse.swt.graphics.Font THIS_FONT = new org.eclipse.swt.graphics.Font(org.eclipse.swt.widgets.Display.getCurrent(), &quot;Times&quot;, 8, org.eclipse.swt.SWT.NORMAL);&#xA;&#xA;">
           <attributes
               xsi:type="gmfgen:StyleAttributes"
               fixedFont="true"/>
@@ -90,7 +89,7 @@
     </childNodes>
     <childNodes
         xsi:type="gmfgen:GenChildSideAffixedNode"
-        visualID="2002"
+        visualID="3002"
         editPartClassName="OutputPortEditPart"
         itemSemanticEditPolicyClassName="OutputPortItemSemanticEditPolicy"
         notationViewFactoryClassName="OutputPortViewFactory"
@@ -130,7 +129,7 @@
       </modelFacet>
       <labels
           xsi:type="gmfgen:GenExternalNodeLabel"
-          visualID="4002"
+          visualID="5002"
           editPartClassName="OutputPortNameEditPart"
           itemSemanticEditPolicyClassName="OutputPortNameItemSemanticEditPolicy"
           notationViewFactoryClassName="OutputPortNameViewFactory">
@@ -139,7 +138,7 @@
         <viewmap
             xsi:type="gmfgen:InnerClassViewmap"
             className="PortNameFigure"
-            classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class PortNameFigure extends org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel {&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public PortNameFigure() {&#xA;&#x9;&#x9;&#x9;&#x9;this.setText(&quot;port&quot;);&#xA;&#xA;this.setFont(THIS_FONT);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;}&#xA;&#xA;/**&#xA; * @generated&#xA; */&#xA;static final org.eclipse.swt.graphics.Font THIS_FONT = new org.eclipse.swt.graphics.Font(org.eclipse.swt.widgets.Display.getCurrent(), &quot;Times&quot;, 8, org.eclipse.swt.SWT.NORMAL);&#xA;&#xA;">
+            classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class PortNameFigure extends org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel {&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public PortNameFigure() {&#xA;&#x9;&#x9;&#x9;&#x9;this.setText(&quot;&quot;);&#xA;&#xA;this.setFont(THIS_FONT);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;}&#xA;&#xA;/**&#xA; * @generated&#xA; */&#xA;static final org.eclipse.swt.graphics.Font THIS_FONT = new org.eclipse.swt.graphics.Font(org.eclipse.swt.widgets.Display.getCurrent(), &quot;Times&quot;, 8, org.eclipse.swt.SWT.NORMAL);&#xA;&#xA;">
           <attributes
               xsi:type="gmfgen:StyleAttributes"
               fixedFont="true"/>
@@ -153,7 +152,7 @@
       </labels>
     </childNodes>
     <childNodes
-        visualID="2003"
+        visualID="3003"
         editPartClassName="Box2EditPart"
         itemSemanticEditPolicyClassName="Box2ItemSemanticEditPolicy"
         notationViewFactoryClassName="Box2ViewFactory"
@@ -195,7 +194,7 @@
         </modelElementInitializer>
       </modelFacet>
       <labels
-          visualID="4003"
+          visualID="5003"
           editPartClassName="BoxName2EditPart"
           itemSemanticEditPolicyClassName="BoxName2ItemSemanticEditPolicy"
           notationViewFactoryClassName="BoxName2ViewFactory">
@@ -216,7 +215,7 @@
       </labels>
     </childNodes>
     <topLevelNodes
-        visualID="1001"
+        visualID="2001"
         editPartClassName="BoxEditPart"
         itemSemanticEditPolicyClassName="BoxItemSemanticEditPolicy"
         notationViewFactoryClassName="BoxViewFactory"
@@ -257,7 +256,7 @@
         </modelElementInitializer>
       </modelFacet>
       <labels
-          visualID="4004"
+          visualID="5004"
           editPartClassName="BoxNameEditPart"
           itemSemanticEditPolicyClassName="BoxNameItemSemanticEditPolicy"
           notationViewFactoryClassName="BoxNameViewFactory">
@@ -278,7 +277,7 @@
       </labels>
     </topLevelNodes>
     <links
-        visualID="3001"
+        visualID="4001"
         editPartClassName="ConnectionEditPart"
         itemSemanticEditPolicyClassName="ConnectionItemSemanticEditPolicy"
         notationViewFactoryClassName="ConnectionViewFactory"
@@ -298,8 +297,6 @@
             fixedForeground="true"/>
         <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
       </viewmap>
-      <styles
-          href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/RoutingStyle"/>
       <modelFacet
           xsi:type="gmfgen:TypeLinkModelFacet">
         <metaClass
@@ -315,14 +312,13 @@
       </modelFacet>
     </links>
     <compartments
-        visualID="5001"
+        visualID="7001"
         editPartClassName="BoxBoxCompartmentEditPart"
         itemSemanticEditPolicyClassName="BoxBoxCompartmentItemSemanticEditPolicy"
         notationViewFactoryClassName="BoxBoxCompartmentViewFactory"
         canonicalEditPolicyClassName="BoxBoxCompartmentCanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.2"
         title="BoxCompartment"
-        canCollapse="false"
         needsTitle="false"
         node="//@diagram/@topLevelNodes.0"
         listLayout="false">
@@ -339,14 +335,13 @@
       </viewmap>
     </compartments>
     <compartments
-        visualID="5002"
+        visualID="7002"
         editPartClassName="BoxBoxCompartment2EditPart"
         itemSemanticEditPolicyClassName="BoxBoxCompartment2ItemSemanticEditPolicy"
         notationViewFactoryClassName="BoxBoxCompartment2ViewFactory"
         canonicalEditPolicyClassName="BoxBoxCompartment2CanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.2"
         title="BoxCompartment"
-        canCollapse="false"
         needsTitle="false"
         node="//@diagram/@childNodes.2"
         listLayout="false">

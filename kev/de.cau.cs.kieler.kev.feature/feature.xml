@@ -29,25 +29,25 @@
       <import plugin="org.apache.batik.dom.svg" version="1.6.0" match="greaterOrEqual"/>
       <import plugin="org.apache.batik.css" version="1.6.0" match="greaterOrEqual"/>
       <import plugin="org.apache.xerces" version="2.9.0" match="greaterOrEqual"/>
-      <import plugin="edu.unikiel.rtsys.kieler.kev" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="de.cau.cs.kieler.kev" version="1.0.0" match="greaterOrEqual"/>
    </requires>
 
    <plugin
-         id="edu.unikiel.rtsys.kieler.kev"
+         id="de.cau.cs.kieler.kev"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="edu.unikiel.rtsys.kieler.kev.extension.elevator"
+         id="de.cau.cs.kieler.kev.extension.elevator"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="edu.unikiel.rtsys.kieler.kev.extension.scade"
+         id="de.cau.cs.kieler.kev.extension.scade"
          download-size="0"
          install-size="0"
          version="0.0.0"

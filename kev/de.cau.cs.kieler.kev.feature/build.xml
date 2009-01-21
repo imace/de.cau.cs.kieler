@@ -7,17 +7,17 @@
 	</target>
 
 	<target name="all.plugins" depends="init">
-		<ant antfile="build.xml" dir="../edu.unikiel.rtsys.kieler.kev" target="${target}">
+		<ant antfile="build.xml" dir="../de.cau.cs.kieler.kev" target="${target}">
 			<property name="arch" value="x86"/>
 			<property name="ws" value="gtk"/>
 			<property name="os" value="linux"/>
 		</ant>
-		<ant antfile="build.xml" dir="../edu.unikiel.rtsys.kieler.kev.extension.scade" target="${target}">
+		<ant antfile="build.xml" dir="../de.cau.cs.kieler.kev.extension.scade" target="${target}">
 			<property name="arch" value="x86"/>
 			<property name="ws" value="gtk"/>
 			<property name="os" value="linux"/>
 		</ant>
-		<ant antfile="build.xml" dir="../edu.unikiel.rtsys.kieler.kev.extension.elevator" target="${target}">
+		<ant antfile="build.xml" dir="../de.cau.cs.kieler.kev.extension.elevator" target="${target}">
 			<property name="arch" value="x86"/>
 			<property name="ws" value="gtk"/>
 			<property name="os" value="linux"/>
@@ -82,7 +82,7 @@
 				<include name="feature.xml"/>
 			</fileset>
 		</copy>
-		<eclipse.idReplacer featureFilePath="${feature.base}/features/edu.unikiel.rtsys.kev.feature_1.0.0/feature.xml"  selfVersion="1.0.0" featureIds="" pluginIds="edu.unikiel.rtsys.kieler.kev:0.0.0,1.0.0,edu.unikiel.rtsys.kieler.kev.extension.elevator:0.0.0,1.0.0,edu.unikiel.rtsys.kieler.kev.extension.scade:0.0.0,1.0.0,"/>
+		<eclipse.idReplacer featureFilePath="${feature.base}/features/edu.unikiel.rtsys.kev.feature_1.0.0/feature.xml"  selfVersion="1.0.0" featureIds="" pluginIds="de.cau.cs.kieler.kev:0.0.0,1.0.0,de.cau.cs.kieler.kev.extension.elevator:0.0.0,1.0.0,de.cau.cs.kieler.kev.extension.scade:0.0.0,1.0.0,"/>
 		<antcall target="rootFiles${os}_${ws}_${arch}"/>
 	</target>
 	<target name="rootFileslinux_gtk_x86">

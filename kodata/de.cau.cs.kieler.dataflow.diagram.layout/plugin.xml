@@ -10,7 +10,7 @@
  <extension
          point="org.eclipse.ui.views.properties.tabbed.propertyTabs">
       <propertyTabs
-            contributorId="edu.unikiel.rtsys.kieler.dataflow.diagram">
+            contributorId="de.cau.cs.kieler.dataflow.diagram">
          <propertyTab
                category="visual"
                id="property.tab.LayoutPropertySection"
@@ -21,7 +21,7 @@
    <extension
          point="org.eclipse.ui.views.properties.tabbed.propertySections">
       <propertySections
-            contributorId="edu.unikiel.rtsys.kieler.dataflow.diagram">
+            contributorId="de.cau.cs.kieler.dataflow.diagram">
          <propertySection
                class="de.cau.cs.kieler.kiml.ui.properties.tabbed.sections.KimlLayoutTypePropertySection"
                id="de.cau.cs.kieler.kiml.ui.properties.tabbed.sections.KimlLayoutTypePropertySection"
@@ -49,7 +49,7 @@
       <page
             category="edu.unikiel.rtsys.dataflow.diagram.general"
             class="dataflow.diagram.preferences.DiagramLayoutPreferencePage"
-            id="edu.unikiel.rtsys.kieler.dataflow.diagram.layout.preferences"
+            id="de.cau.cs.kieler.dataflow.diagram.layout.preferences"
             name="Layout">
       </page>
    </extension>
@@ -67,11 +67,11 @@
                name="Lowest">
          </Priority>
          <object
-               class="dataflow.diagram.edit.parts.InputPortEditPart(edu.unikiel.rtsys.kieler.dataflow.diagram)"
+               class="dataflow.diagram.edit.parts.InputPortEditPart(de.cau.cs.kieler.dataflow.diagram)"
                id="dataflow.diagram.layout.inputPortObject">
          </object>
          <object
-               class="dataflow.diagram.edit.parts.OutputPortEditPart(edu.unikiel.rtsys.kieler.dataflow.diagram)"
+               class="dataflow.diagram.edit.parts.OutputPortEditPart(de.cau.cs.kieler.dataflow.diagram)"
                id="dataflow.diagram.layout.outputPortObject">
          </object>
          <context

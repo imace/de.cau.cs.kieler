@@ -273,7 +273,7 @@ public class ModelContentMergeDiffTab extends TreeViewer implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seeedu.unikiel.rtsys.kieler.kivik.viewer.content.part.
+	 * @seede.cau.cs.kieler.kivik.viewer.content.part.
 	 * IModelContentMergeViewerTab#setReflectiveInput(java.lang.Object)
 	 */
 	public void setReflectiveInput(Object object) {

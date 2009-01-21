@@ -9,4 +9,4 @@ of the DEFINES, you can omit the rest).
 
 Open the .gmfgen model and set the "Dynamic Templates" property to true and
 specify the "Template Directory" there as "/<plugin name>/<template folder>", e.g.
-"/edu.unikiel.rtsys.kieler.dataflow/gmf-templates"
+"/de.cau.cs.kieler.dataflow/gmf-templates"

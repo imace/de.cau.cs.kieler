@@ -280,7 +280,7 @@ public class KimlLayoutHintView extends ViewPart implements ISelectionListener,
 
 		PlatformUI.getWorkbench().getHelpSystem().setHelp(
 				tableViewer.getControl(),
-				"edu.unikiel.rtsys.kieler.layouter.viewer");
+				"de.cau.cs.kieler.layouter.viewer");
 		hookContextMenu();
 		hookDoubleClickAction();
 		hookSelectionChangedListener();

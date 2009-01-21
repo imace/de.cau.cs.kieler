@@ -17,14 +17,14 @@
     <ownedAttribute xmi:type="uml:Port" xmi:id="_iGVLoGUoEd2C-7LNLQa2uw" name="contributionItemProvider" type="_Lygu0GUpEd2C-7LNLQa2uw" aggregation="composite"/>
     <ownedAttribute xmi:type="uml:Port" xmi:id="_x9nTwGUwEd2C-7LNLQa2uw" name="layoutProviders" type="_ArNJkGUxEd2C-7LNLQa2uw" aggregation="composite"/>
   </packagedElement>
-  <packagedElement xmi:type="uml:Package" xmi:id="_9mzlcGUlEd2C-7LNLQa2uw" name="edu.unikiel.rtsys.kieler.core">
-    <packagedElement xmi:type="uml:Package" xmi:id="_G9j5cGUmEd2C-7LNLQa2uw" name="edu.unikiel.rtsys.kieler.core.preferences"/>
-    <packagedElement xmi:type="uml:Package" xmi:id="_J_A4QGUmEd2C-7LNLQa2uw" name="edu.unikiel.rtsys.kieler.core.services"/>
+  <packagedElement xmi:type="uml:Package" xmi:id="_9mzlcGUlEd2C-7LNLQa2uw" name="de.cau.cs.kieler.core">
+    <packagedElement xmi:type="uml:Package" xmi:id="_G9j5cGUmEd2C-7LNLQa2uw" name="de.cau.cs.kieler.core.preferences"/>
+    <packagedElement xmi:type="uml:Package" xmi:id="_J_A4QGUmEd2C-7LNLQa2uw" name="de.cau.cs.kieler.core.services"/>
   </packagedElement>
-  <packagedElement xmi:type="uml:Package" xmi:id="_RZZmMGUmEd2C-7LNLQa2uw" name="edu.unikiel.rtsys.kieler.kiml.helpers">
+  <packagedElement xmi:type="uml:Package" xmi:id="_RZZmMGUmEd2C-7LNLQa2uw" name="de.cau.cs.kieler.kiml.helpers">
     <packagedElement xmi:type="uml:Class" xmi:id="_WPdWMGUmEd2C-7LNLQa2uw" name="MousePositionListener"/>
   </packagedElement>
-  <packagedElement xmi:type="uml:Package" xmi:id="_gGdQgGUmEd2C-7LNLQa2uw" name="edu.unikiel.rtsys.kieler.kiml.ui">
+  <packagedElement xmi:type="uml:Package" xmi:id="_gGdQgGUmEd2C-7LNLQa2uw" name="de.cau.cs.kieler.kiml.ui">
     <packagedElement xmi:type="uml:Class" xmi:id="_kfFdoGUmEd2C-7LNLQa2uw" name="KimlArrangeAction"/>
     <packagedElement xmi:type="uml:Class" xmi:id="_lrdxMGUmEd2C-7LNLQa2uw" name="KimlCommandTestAction"/>
     <packagedElement xmi:type="uml:Class" xmi:id="_nXPWgGUmEd2C-7LNLQa2uw" name="KimlContributionItemProvider"/>

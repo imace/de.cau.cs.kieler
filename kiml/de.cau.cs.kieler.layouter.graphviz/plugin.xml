@@ -15,7 +15,7 @@
    <extension
          point="org.eclipse.ui.preferencePages">
       <page
-            category="edu.unikiel.rtsys.kieler.kiml.ui.PreferencePage"
+            category="de.cau.cs.kieler.kiml.ui.PreferencePage"
             class="de.cau.cs.kieler.layouter.ui.WorkbenchPreferencePage"
             id="edu.unikiel.rtsys.layouter.graphviz.page2"
             name="Layouter">

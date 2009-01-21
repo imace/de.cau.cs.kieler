@@ -6,27 +6,27 @@
          point="org.eclipse.ui.preferencePages">
       <page
             class="de.cau.cs.kieler.kiml.ui.preferences.MainPreferencePage"
-            id="edu.unikiel.rtsys.kieler.kiml.ui.PreferencePage"
+            id="de.cau.cs.kieler.kiml.ui.PreferencePage"
             name="%page.name.0">
       </page>
    <page
    			category="de.cau.cs.kieler.kiml.layout.preferences.DiagramLayoutersPreferencePage"
             class="de.cau.cs.kieler.kiml.ui.preferences.GenericDiagramLayouterPreferencePage"
-            id="edu.unikiel.rtsys.kieler.kiml.ui.preferences.GenericDiagramLayouterPreferencePage"
+            id="de.cau.cs.kieler.kiml.ui.preferences.GenericDiagramLayouterPreferencePage"
             name="Generic Diagram Layouter">
       </page>
    </extension>
    <extension
          point="org.eclipse.ui.views">
       <category
-            id="edu.unikiel.rtsys.kieler.kiml.ui"
+            id="de.cau.cs.kieler.kiml.ui"
             name="%category.name.0">
       </category>
       <view
-            category="edu.unikiel.rtsys.kieler.kiml.ui"
+            category="de.cau.cs.kieler.kiml.ui"
             class="de.cau.cs.kieler.kiml.ui.views.KimlLayoutHintView"
             icon="icons/layout_hint.gif"
-            id="edu.unikiel.rtsys.kieler.kiml.ui.views.KimlLayoutHintView"
+            id="de.cau.cs.kieler.kiml.ui.views.KimlLayoutHintView"
             name="%view.name.1"
             restorable="true">
       </view>
@@ -36,7 +36,7 @@
       <perspective
             class="de.cau.cs.kieler.kiml.ui.KimlPerspectiveFactory"
             fixed="false"
-            id="edu.unikiel.rtsys.kieler.kiml.ui.perspective1"
+            id="de.cau.cs.kieler.kiml.ui.perspective1"
             name="%perspective.name.0">
       </perspective>
    </extension>
@@ -46,7 +46,7 @@ point="org.eclipse.ui.menus">
 <menuContribution
   locationURI="menu:org.eclipse.ui.main.menu?after=additions">
 <menu
-    id="edu.unikiel.rtsys.kieler.kiml.ui.menu.kiml"
+    id="de.cau.cs.kieler.kiml.ui.menu.kiml"
     label="%menu.label.1"
     mnemonic="%menu.mnemonic.0">
 </menu>
@@ -57,39 +57,39 @@ point="org.eclipse.ui.menus">
          icon="icons/sample.gif"
          label="%menu.label.4">
       <command
-            commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.kimlLayout"
+            commandId="de.cau.cs.kieler.kiml.ui.command.kimlLayout"
             icon="icons/kieler-arrange.png"
             label="Layout this"
             style="push">
       </command>
       <command
-            commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.kimlLayoutAll"
+            commandId="de.cau.cs.kieler.kiml.ui.command.kimlLayoutAll"
             icon="icons/kieler-arrange.png"
             label="Layout all"
             style="push">
       </command>
       <dynamic
             class="de.cau.cs.kieler.kiml.ui.ContributionItemLayoutAs"
-            id="edu.unikiel.rtsys.kieler.kiml.ui.dynamic.LayoutAs">
+            id="de.cau.cs.kieler.kiml.ui.dynamic.LayoutAs">
       </dynamic>
       <dynamic
             class="de.cau.cs.kieler.kiml.ui.ContributionItemGroupFunctions"
-            id="edu.unikiel.rtsys.kieler.kiml.ui.dynamic.groupFunctions">
+            id="de.cau.cs.kieler.kiml.ui.dynamic.groupFunctions">
       </dynamic>
    </menu>
 </menuContribution>
 <menuContribution
       locationURI="toolbar:org.eclipse.ui.main.toolbar?after=additions">
    <toolbar
-         id="edu.unikiel.rtsys.kieler.kiml.ui.toolbar.main">
+         id="de.cau.cs.kieler.kiml.ui.toolbar.main">
       <command
-            commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.kimlLayout"
+            commandId="de.cau.cs.kieler.kiml.ui.command.kimlLayout"
             icon="icons/kieler-arrange.png"
             label="KIML Layout"
             style="push">
       </command>
       <command
-            commandId="edu.unikiel.rtsys.kieler.kiml.ui.arbitrarytest"
+            commandId="de.cau.cs.kieler.kiml.ui.arbitrarytest"
             label="Test"
             style="push"
             tooltip="Arbitrary Test">
@@ -100,53 +100,53 @@ point="org.eclipse.ui.menus">
    <extension
          point="org.eclipse.ui.commands">
       <command
-            id="edu.unikiel.rtsys.kieler.kiml.ui.command.layoutAs"
+            id="de.cau.cs.kieler.kiml.ui.command.layoutAs"
             name="Layout As">
          <commandParameter
-               id="edu.unikiel.rtsys.kieler.kiml.ui.command.layoutAs.parameter.layouterName"
+               id="de.cau.cs.kieler.kiml.ui.command.layoutAs.parameter.layouterName"
                name="layouterName"
                optional="true">
          </commandParameter>
       </command>
       <command
-            id="edu.unikiel.rtsys.kieler.kiml.ui.command.groupAs"
+            id="de.cau.cs.kieler.kiml.ui.command.groupAs"
             name="Group As">
          <commandParameter
-               id="edu.unikiel.rtsys.kieler.kiml.ui.command.groupAs.parameter.layouterName"
+               id="de.cau.cs.kieler.kiml.ui.command.groupAs.parameter.layouterName"
                name="layouterName"
                optional="true">
          </commandParameter>
       </command>
       <command
             description="%command.description.6"
-            id="edu.unikiel.rtsys.kieler.kiml.ui.command.highlightGroupMembers"
+            id="de.cau.cs.kieler.kiml.ui.command.highlightGroupMembers"
             name="%command.name.6">
       </command>
       <command
             description="%command.description.7"
-            id="edu.unikiel.rtsys.kieler.kiml.ui.command.selectGroupMembers"
+            id="de.cau.cs.kieler.kiml.ui.command.selectGroupMembers"
             name="%command.name.7">
       </command>
       <command
             description="%command.description.8"
-            id="edu.unikiel.rtsys.kieler.kiml.ui.command.ungroupElements"
+            id="de.cau.cs.kieler.kiml.ui.command.ungroupElements"
             name="%command.name.8">
       </command>
       <command
-            id="edu.unikiel.rtsys.kieler.kiml.ui.command.kimlLayout"
+            id="de.cau.cs.kieler.kiml.ui.command.kimlLayout"
             name="KIML Layout">
       </command>
       <command
-            id="edu.unikiel.rtsys.kieler.kiml.ui.command.kimlLayoutAll"
+            id="de.cau.cs.kieler.kiml.ui.command.kimlLayoutAll"
             name="KIML Layout All">
       </command>
       <commandParameterType
-            id="edu.unikiel.rtsys.kieler.kiml.ui.commandParameterType.String"
+            id="de.cau.cs.kieler.kiml.ui.commandParameterType.String"
             type="java.lang.String">
       </commandParameterType>
       <command
             description="Arbitrary Test Command to trigger anything from the UI"
-            id="edu.unikiel.rtsys.kieler.kiml.ui.arbitrarytest"
+            id="de.cau.cs.kieler.kiml.ui.arbitrarytest"
             name="Arbitrary Test">
       </command>
    </extension>
@@ -154,11 +154,11 @@ point="org.eclipse.ui.menus">
          point="org.eclipse.ui.handlers">
       <handler
             class="de.cau.cs.kieler.kiml.ui.handlers.LayoutAsHandler"
-            commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.layoutAs">
+            commandId="de.cau.cs.kieler.kiml.ui.command.layoutAs">
       </handler>
       <handler
             class="de.cau.cs.kieler.kiml.ui.handlers.GroupFunctionHandler"
-            commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.selectGroupMembers">
+            commandId="de.cau.cs.kieler.kiml.ui.command.selectGroupMembers">
          <enabledWhen>
             <reference
                   definitionId="KIML.generalSelectionIs1ShapeNodeEditPart">
@@ -167,7 +167,7 @@ point="org.eclipse.ui.menus">
       </handler>
       <handler
             class="de.cau.cs.kieler.kiml.ui.handlers.GroupFunctionHandler"
-            commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.highlightGroupMembers">
+            commandId="de.cau.cs.kieler.kiml.ui.command.highlightGroupMembers">
          <enabledWhen>
             <reference
                   definitionId="KIML.generalSelectionIs1ShapeNodeEditPart">
@@ -176,7 +176,7 @@ point="org.eclipse.ui.menus">
       </handler>
       <handler
             class="de.cau.cs.kieler.kiml.ui.handlers.GroupFunctionHandler"
-            commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.ungroupElements">
+            commandId="de.cau.cs.kieler.kiml.ui.command.ungroupElements">
          <enabledWhen>
             <reference
                   definitionId="KIML.generalSelectionIs1OrMoreShapeNodeEditParts">
@@ -185,15 +185,15 @@ point="org.eclipse.ui.menus">
       </handler>
       <handler
             class="de.cau.cs.kieler.kiml.ui.handlers.KimlLayoutHandler"
-            commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.kimlLayout">
+            commandId="de.cau.cs.kieler.kiml.ui.command.kimlLayout">
       </handler>
       <handler
             class="de.cau.cs.kieler.kiml.ui.handlers.KimlLayoutHandler"
-            commandId="edu.unikiel.rtsys.kieler.kiml.ui.command.kimlLayoutAll">
+            commandId="de.cau.cs.kieler.kiml.ui.command.kimlLayoutAll">
       </handler>
       <handler
             class="de.cau.cs.kieler.kiml.ui.handlers.ArbitraryTestHandler"
-            commandId="edu.unikiel.rtsys.kieler.kiml.ui.arbitrarytest">
+            commandId="de.cau.cs.kieler.kiml.ui.arbitrarytest">
       </handler>
    </extension>
    <extension
@@ -464,11 +464,11 @@ point="org.eclipse.ui.menus">
        point="org.eclipse.ui.statusHandlers">
     <statusHandler
           class="de.cau.cs.kieler.kiml.ui.handlers.DebugErrorHandler"
-          id="edu.unikiel.rtsys.kieler.kiml.ui.statusHandler">
+          id="de.cau.cs.kieler.kiml.ui.statusHandler">
     </statusHandler>
     <statusHandlerProductBinding
-          handlerId="edu.unikiel.rtsys.kieler.kiml.ui.statusHandler"
-          productId="edu.unikiel.rtsys.kieler.kiml.ui.product">
+          handlerId="de.cau.cs.kieler.kiml.ui.statusHandler"
+          productId="de.cau.cs.kieler.kiml.ui.product">
     </statusHandlerProductBinding>
  </extension>
  <extension

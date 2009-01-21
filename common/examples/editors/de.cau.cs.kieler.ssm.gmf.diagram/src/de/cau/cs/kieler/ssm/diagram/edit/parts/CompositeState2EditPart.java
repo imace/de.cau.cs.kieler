@@ -61,29 +61,6 @@ public class CompositeState2EditPart extends ShapeNodeEditPart {
 	 * @generated
 	 */
 	protected void createDefaultEditPolicies() {
-		installEditPolicy(EditPolicyRoles.CREATION_ROLE,
-				new CreationEditPolicy() {
-					public Command getCommand(Request request) {
-						if (understandsRequest(request)) {
-							if (request instanceof CreateViewAndElementRequest) {
-								CreateElementRequestAdapter adapter = ((CreateViewAndElementRequest) request)
-										.getViewAndElementDescriptor()
-										.getCreateElementRequestAdapter();
-								IElementType type = (IElementType) adapter
-										.getAdapter(IElementType.class);
-								if (type == SafeStateMachineElementTypes.Region_3001) {
-									EditPart compartmentEditPart = getChildBySemanticHint(SafeStateMachineVisualIDRegistry
-											.getType(CompositeStateCompositeStateCompartment2EditPart.VISUAL_ID));
-									return compartmentEditPart == null ? null
-											: compartmentEditPart
-													.getCommand(request);
-								}
-							}
-							return super.getCommand(request);
-						}
-						return null;
-					}
-				});
 		super.createDefaultEditPolicies();
 		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE,
 				new CompositeState2ItemSemanticEditPolicy());
@@ -313,6 +290,6 @@ public class CompositeState2EditPart extends ShapeNodeEditPart {
 	/**
 	 * @generated
 	 */
-	static final Color THIS_BACK = new Color(null, 255, 246, 151);
+	static final Color THIS_BACK = new Color(null, 255, 255, 255);
 
 }

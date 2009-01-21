@@ -108,7 +108,7 @@ public class NormalTerminationPriorityEditPart extends LabelEditPart implements
 	 * @generated
 	 */
 	public int getKeyPoint() {
-		return ConnectionLocator.TARGET;
+		return ConnectionLocator.MIDDLE;
 	}
 
 	/**

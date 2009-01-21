@@ -10,7 +10,7 @@ import org.osgi.framework.BundleContext;
 public class DataflowDiagramLayoutPlugin extends AbstractUIPlugin {
 
 	// The plug-in ID
-	public static final String PLUGIN_ID = "edu.unikiel.rtsys.kieler.dataflow.diagram.layout";
+	public static final String PLUGIN_ID = "de.cau.cs.kieler.dataflow.diagram.layout";
 	
 	// The shared instance
 	private static DataflowDiagramLayoutPlugin plugin;

@@ -21,7 +21,7 @@ import de.cau.cs.kieler.ssm.diagram.part.Messages;
  * @generated
  */
 public class CompositeStateCompositeStateCompartment2EditPart extends
-		ListCompartmentEditPart {
+		ShapeCompartmentEditPart {
 
 	/**
 	 * @generated
@@ -33,13 +33,6 @@ public class CompositeStateCompositeStateCompartment2EditPart extends
 	 */
 	public CompositeStateCompositeStateCompartment2EditPart(View view) {
 		super(view);
-	}
-
-	/**
-	 * @generated
-	 */
-	protected boolean hasModelChildrenChanged(Notification evt) {
-		return false;
 	}
 
 	/**

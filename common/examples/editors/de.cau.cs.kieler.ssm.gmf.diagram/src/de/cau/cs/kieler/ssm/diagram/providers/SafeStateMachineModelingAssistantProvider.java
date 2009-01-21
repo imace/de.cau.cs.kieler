@@ -42,12 +42,7 @@ public class SafeStateMachineModelingAssistantProvider extends
 	public List getTypesForPopupBar(IAdaptable host) {
 		IGraphicalEditPart editPart = (IGraphicalEditPart) host
 				.getAdapter(IGraphicalEditPart.class);
-		if (editPart instanceof CompositeStateEditPart) {
-			List types = new ArrayList();
-			types.add(SafeStateMachineElementTypes.Region_3001);
-			return types;
-		}
-		if (editPart instanceof CompositeState2EditPart) {
+		if (editPart instanceof CompositeStateCompositeStateCompartmentEditPart) {
 			List types = new ArrayList();
 			types.add(SafeStateMachineElementTypes.Region_3001);
 			return types;
@@ -57,6 +52,11 @@ public class SafeStateMachineModelingAssistantProvider extends
 			types.add(SafeStateMachineElementTypes.CompositeState_3002);
 			types.add(SafeStateMachineElementTypes.SimpleState_3003);
 			types.add(SafeStateMachineElementTypes.InitialState_3004);
+			return types;
+		}
+		if (editPart instanceof CompositeStateCompositeStateCompartment2EditPart) {
+			List types = new ArrayList();
+			types.add(SafeStateMachineElementTypes.Region_3001);
 			return types;
 		}
 		if (editPart instanceof SafeStateMachineEditPart) {

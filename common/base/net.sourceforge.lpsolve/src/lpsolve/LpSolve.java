@@ -271,9 +271,16 @@ public class LpSolve {
 	 * Static initializer to load the stub library
 	 */
 	static {
-		System.loadLibrary("lpsolve55");
-		System.loadLibrary("lpsolve55j");
-		init();
+		try {
+			System.loadLibrary("lpsolve55");
+			System.loadLibrary("lpsolve55j");
+			//System.loadLibrary("lpsolve55j_jni");
+			init();
+		} catch (Throwable e) {
+			// FIXME: construct well defined error message
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		} 
 	}
 
 	/**

@@ -44,7 +44,7 @@
 			<isset property="buildTempFolder"/>
 		</condition>
 		<property name="pluginTemp" value="${basedir}"/>
-<condition property="build.result.folder" value="${pluginTemp}/edu.unikiel.rtsys.kieler.kev_1.0.0"		>
+<condition property="build.result.folder" value="${pluginTemp}/de.cau.cs.kieler.kev_1.0.0"		>
 			<isset property="buildTempFolder"/>
 		</condition>
 		<property name="build.result.folder" value="${basedir}"/>
@@ -64,7 +64,7 @@
 		<antcall target="gather.bin.parts">
 			<param name="destination.temp.folder" value="${temp.folder}/"/>
 		</antcall>
-		<jar destfile="${plugin.destination}/edu.unikiel.rtsys.kieler.kev_1.0.0.jar" basedir="${temp.folder}/edu.unikiel.rtsys.kieler.kev_1.0.0" filesetmanifest="merge"/>
+		<jar destfile="${plugin.destination}/de.cau.cs.kieler.kev_1.0.0.jar" basedir="${temp.folder}/de.cau.cs.kieler.kev_1.0.0" filesetmanifest="merge"/>
 		<delete dir="${temp.folder}"/>
 	</target>
 
@@ -198,13 +198,13 @@
 	</target>
 
 	<target name="gather.bin.parts" depends="init" if="destination.temp.folder">
-		<mkdir dir="${destination.temp.folder}/edu.unikiel.rtsys.kieler.kev_1.0.0"/>
-		<copy todir="${destination.temp.folder}/edu.unikiel.rtsys.kieler.kev_1.0.0" failonerror="true" overwrite="false">
+		<mkdir dir="${destination.temp.folder}/de.cau.cs.kieler.kev_1.0.0"/>
+		<copy todir="${destination.temp.folder}/de.cau.cs.kieler.kev_1.0.0" failonerror="true" overwrite="false">
 			<fileset dir="${build.result.folder}/@dot">
 				<include name="**"/>
 			</fileset>
 		</copy>
-		<copy todir="${destination.temp.folder}/edu.unikiel.rtsys.kieler.kev_1.0.0" failonerror="true" overwrite="false">
+		<copy todir="${destination.temp.folder}/de.cau.cs.kieler.kev_1.0.0" failonerror="true" overwrite="false">
 			<fileset dir="${basedir}">
 				<include name="plugin.xml"/>
 				<include name="META-INF/"/>
@@ -220,10 +220,10 @@
 	</target>
 
 	<target name="gather.sources" depends="init" if="destination.temp.folder">
-		<mkdir dir="${destination.temp.folder}/edu.unikiel.rtsys.kieler.kev_1.0.0"/>
-		<copy file="${build.result.folder}/src.zip" todir="${destination.temp.folder}/edu.unikiel.rtsys.kieler.kev_1.0.0" failonerror="false" overwrite="false"/>
+		<mkdir dir="${destination.temp.folder}/de.cau.cs.kieler.kev_1.0.0"/>
+		<copy file="${build.result.folder}/src.zip" todir="${destination.temp.folder}/de.cau.cs.kieler.kev_1.0.0" failonerror="false" overwrite="false"/>
 		<antcall target="copy.src.includes">
-			<param name="source.destination.folder" value="${destination.temp.folder}/edu.unikiel.rtsys.kieler.kev_1.0.0"/>
+			<param name="source.destination.folder" value="${destination.temp.folder}/de.cau.cs.kieler.kev_1.0.0"/>
 		</antcall>
 	</target>
 
@@ -240,8 +240,8 @@
 	</target>
 
 	<target name="gather.logs" depends="init" if="destination.temp.folder">
-		<mkdir dir="${destination.temp.folder}/edu.unikiel.rtsys.kieler.kev_1.0.0"/>
-		<copy todir="${destination.temp.folder}/edu.unikiel.rtsys.kieler.kev_1.0.0" failonerror="false" overwrite="false">
+		<mkdir dir="${destination.temp.folder}/de.cau.cs.kieler.kev_1.0.0"/>
+		<copy todir="${destination.temp.folder}/de.cau.cs.kieler.kev_1.0.0" failonerror="false" overwrite="false">
 			<fileset dir="${temp.folder}">
 				<include name="@dot.bin${logExtension}"/>
 			</fileset>
@@ -251,8 +251,8 @@
 	<target name="clean" depends="init" description="Clean the plug-in: de.cau.cs.kieler.kev of all the zips, jars and logs created.">
 		<delete dir="${build.result.folder}/@dot"/>
 		<delete file="${build.result.folder}/src.zip"/>
-		<delete file="${plugin.destination}/edu.unikiel.rtsys.kieler.kev_1.0.0.jar"/>
-		<delete file="${plugin.destination}/edu.unikiel.rtsys.kieler.kev_1.0.0.zip"/>
+		<delete file="${plugin.destination}/de.cau.cs.kieler.kev_1.0.0.jar"/>
+		<delete file="${plugin.destination}/de.cau.cs.kieler.kev_1.0.0.zip"/>
 		<delete dir="${temp.folder}"/>
 	</target>
 
@@ -277,7 +277,7 @@
 				<include name="**/*.bin${logExtension}"/>
 			</fileset>
 		</delete>
-		<zip destfile="${plugin.destination}/edu.unikiel.rtsys.kieler.kev_1.0.0.zip" basedir="${temp.folder}" filesonly="true" whenempty="skip" update="false"/>
+		<zip destfile="${plugin.destination}/de.cau.cs.kieler.kev_1.0.0.zip" basedir="${temp.folder}" filesonly="true" whenempty="skip" update="false"/>
 		<delete dir="${temp.folder}"/>
 	</target>
 

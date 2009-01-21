@@ -79,7 +79,7 @@
       <actualFigure
           xsi:type="gmfgraph:Label"
           name="PortNameLabelFigure"
-          text="port">
+          text="">
         <font
             xsi:type="gmfgraph:BasicFont"
             faceName="Times"
@@ -105,7 +105,8 @@
       figure="ConnectionFigure"/>
   <compartments
       name="BoxCompartment"
-      figure="BoxCompartmentFigure"/>
+      figure="BoxCompartmentFigure"
+      collapsible="true"/>
   <labels
       name="BoxName"
       figure="BoxFigure"

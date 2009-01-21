@@ -38,9 +38,9 @@
       <plugin id="de.cau.cs.kieler.core"/>
       <plugin id="de.cau.cs.kieler.kiml.helpers"/>
       <plugin id="de.cau.cs.kieler.kiml.layout"/>
-      <plugin id="edu.unikiel.rtsys.kieler.kiml.layouter.example"/>
+      <plugin id="de.cau.cs.kieler.kiml.layouter.example"/>
       <plugin id="de.cau.cs.kieler.kiml.ui"/>
-      <plugin id="edu.unikiel.rtsys.kieler.kiml.viewer"/>
+      <plugin id="de.cau.cs.kieler.kiml.viewer"/>
       <plugin id="org.eclipse.core.commands"/>
       <plugin id="org.eclipse.core.contenttype"/>
       <plugin id="org.eclipse.core.databinding"/>

@@ -629,7 +629,7 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seeedu.unikiel.rtsys.kieler.kivik.viewer.content.part.
+	 * @seede.cau.cs.kieler.kivik.viewer.content.part.
 	 * IModelContentMergeViewerTab#getSelectedElements()
 	 */
 	public List<? extends AbstractGraphicalEditPart> getSelectedElements() {
@@ -644,7 +644,7 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seeedu.unikiel.rtsys.kieler.kivik.viewer.content.part.
+	 * @seede.cau.cs.kieler.kivik.viewer.content.part.
 	 * IModelContentMergeViewerTab#getUIElement(org.eclipse.emf.ecore.EObject)
 	 */
 	public ModelContentMergeTabObject getUIElement(EObject data) {
@@ -662,7 +662,7 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seeedu.unikiel.rtsys.kieler.kivik.viewer.content.part.
+	 * @seede.cau.cs.kieler.kivik.viewer.content.part.
 	 * IModelContentMergeViewerTab#getVisibleElements()
 	 */
 	public List<ModelContentMergeTabObject> getVisibleElements() {
@@ -680,7 +680,7 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seeedu.unikiel.rtsys.kieler.kivik.viewer.content.part.
+	 * @seede.cau.cs.kieler.kivik.viewer.content.part.
 	 * IModelContentMergeViewerTab#showElements(java.util.List)
 	 */
 	public void showElements(List<DiffElement> diffElements) {

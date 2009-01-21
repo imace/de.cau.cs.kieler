@@ -108,7 +108,7 @@ public class WeakAbortionPriorityEditPart extends LabelEditPart implements
 	 * @generated
 	 */
 	public int getKeyPoint() {
-		return ConnectionLocator.TARGET;
+		return ConnectionLocator.MIDDLE;
 	}
 
 	/**

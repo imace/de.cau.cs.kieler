@@ -259,17 +259,7 @@
       name="CompositeStateName"
       figure="CompositeStateFigure"
       resizeConstraint="NONE"
-      accessor="//@figures.0/@descriptors.2/@accessors.0">
-    <facets
-        xsi:type="gmfgraph:DefaultSizeFacet">
-      <defaultSize
-          dx="10"
-          dy="10"/>
-    </facets>
-    <facets
-        xsi:type="gmfgraph:AlignmentFacet"
-        alignment="FILL"/>
-  </labels>
+      accessor="//@figures.0/@descriptors.2/@accessors.0"/>
   <labels
       name="WeakAbortionLabel"
       figure="WeakAbortionFigure"

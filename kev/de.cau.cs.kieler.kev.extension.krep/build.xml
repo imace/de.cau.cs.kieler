@@ -116,9 +116,9 @@
 			<pathelement path="../../../../../../../local/haf/eclipse/eclipse_3.4M4/plugins/org.eclipse.jface.text_3.4.0.v20071212-1800.jar"/>
 			<pathelement path="../../../../../../../local/haf/eclipse/eclipse_3.4M4/plugins/org.eclipse.text_3.4.0.v20071212-1800.jar"/>
 			<pathelement path="${build.result.folder}/../de.cau.cs.kieler.kev/bin/"/>
-			<pathelement path="${build.result.folder}/../edu.unikiel.rtsys.kieler.kev_1.0.0/bin/"/>
+			<pathelement path="${build.result.folder}/../de.cau.cs.kieler.kev_1.0.0/bin/"/>
 			<pathelement path="${build.result.folder}/../de.cau.cs.kieler.kev/@dot"/>
-			<pathelement path="${build.result.folder}/../edu.unikiel.rtsys.kieler.kev_1.0.0/@dot"/>
+			<pathelement path="${build.result.folder}/../de.cau.cs.kieler.kev_1.0.0/@dot"/>
 			<pathelement path="../../../../../../../local/haf/eclipse/eclipse_3.4M4/plugins/org.apache.batik.swing_1.6.0.v200711021015.jar"/>
 			<pathelement path="../../../../../../../local/haf/eclipse/eclipse_3.4M4/plugins/org.apache.batik.bridge_1.6.0.v200711021015.jar"/>
 			<pathelement path="../../../../../../../local/haf/eclipse/eclipse_3.4M4/plugins/org.apache.batik.css_1.6.0.v200711021015.jar"/>

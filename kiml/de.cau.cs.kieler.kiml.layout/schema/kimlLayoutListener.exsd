@@ -82,7 +82,7 @@
      &lt;extension
          point=&quot;de.cau.cs.kieler.kiml.layout.kimlLayoutListener&quot;&gt;
       &lt;kimlLayoutListener
-            class=&quot;edu.unikiel.rtsys.kieler.kiml.viewer.ViewLayoutListener&quot;&gt;
+            class=&quot;de.cau.cs.kieler.kiml.viewer.ViewLayoutListener&quot;&gt;
       &lt;/kimlLayoutListener&gt;
    &lt;/extension&gt;
    &lt;/pre&gt;

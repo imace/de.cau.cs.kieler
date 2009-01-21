@@ -89,8 +89,8 @@
      &lt;extension
          point=&quot;de.cau.cs.kieler.kiml.layout.kimlDiagramLayouter&quot;&gt;
       &lt;kimlDiagramLayouter
-            class=&quot;edu.unikiel.rtsys.kieler.ssm.gmf.diagram.layouter.KimlSSMDiagramLayouter&quot;
-            editor_id=&quot;edu.unikiel.rtsys.kieler.ssm.diagram.part.SafeStateMachineDiagramEditorID&quot;&gt;
+            class=&quot;de.cau.cs.kieler.ssm.gmf.diagram.layouter.KimlSSMDiagramLayouter&quot;
+            editor_id=&quot;de.cau.cs.kieler.ssm.diagram.part.SafeStateMachineDiagramEditorID&quot;&gt;
       &lt;/kimlDiagramLayouter&gt;
      &lt;/extension&gt;
    &lt;/pre&gt;

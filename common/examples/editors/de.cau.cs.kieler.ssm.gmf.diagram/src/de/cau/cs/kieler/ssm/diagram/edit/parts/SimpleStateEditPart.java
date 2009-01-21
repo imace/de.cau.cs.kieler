@@ -290,6 +290,6 @@ public class SimpleStateEditPart extends ShapeNodeEditPart {
 	/**
 	 * @generated
 	 */
-	static final Color THIS_BACK = new Color(null, 255, 246, 151);
+	static final Color THIS_BACK = new Color(null, 255, 255, 255);
 
 }
