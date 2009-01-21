@@ -632,7 +632,6 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 	 * @seeedu.unikiel.rtsys.kieler.kivik.viewer.content.part.
 	 * IModelContentMergeViewerTab#getSelectedElements()
 	 */
-	@Override
 	public List<? extends AbstractGraphicalEditPart> getSelectedElements() {
 		List<AbstractGraphicalEditPart> selectedEditParts = new ArrayList<AbstractGraphicalEditPart>();
 		for (Object element : getSelectedEditParts()) {
@@ -648,7 +647,6 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 	 * @seeedu.unikiel.rtsys.kieler.kivik.viewer.content.part.
 	 * IModelContentMergeViewerTab#getUIElement(org.eclipse.emf.ecore.EObject)
 	 */
-	@Override
 	public ModelContentMergeTabObject getUIElement(EObject data) {
 		/*
 		 * If the diff is hidden by another (diff extension), the item won't be
@@ -667,7 +665,6 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 	 * @seeedu.unikiel.rtsys.kieler.kivik.viewer.content.part.
 	 * IModelContentMergeViewerTab#getVisibleElements()
 	 */
-	@Override
 	public List<ModelContentMergeTabObject> getVisibleElements() {
 		final List<ModelContentMergeTabObject> result = new ArrayList<ModelContentMergeTabObject>();
 		// This will happen if the user has "merged all"
@@ -686,7 +683,6 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 	 * @seeedu.unikiel.rtsys.kieler.kivik.viewer.content.part.
 	 * IModelContentMergeViewerTab#showElements(java.util.List)
 	 */
-	@Override
 	public void showElements(List<DiffElement> diffElements) {
 		deselectAll();
 
@@ -955,7 +951,6 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 	 * org.eclipse.jface.util.IPropertyChangeListener#propertyChange(org.eclipse
 	 * .jface.util.PropertyChangeEvent)
 	 */
-	@Override
 	public void propertyChange(PropertyChangeEvent event) {
 		updatePreferences();
 	}
@@ -992,7 +987,6 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 		return (Diagram) getRootEditPart().getContents().getModel();
 	}
 
-	@Override
 	public void redraw() {
 	}
 }
