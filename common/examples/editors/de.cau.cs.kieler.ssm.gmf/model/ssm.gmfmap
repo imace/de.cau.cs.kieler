@@ -7,17 +7,17 @@
     xmlns:gmftool="http://www.eclipse.org/gmf/2005/ToolDefinition">
   <nodes>
     <containmentFeature
-        href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.ecore#//SafeStateMachine/top"/>
+        href="../../de.cau.cs.kieler.ssm.emf/model/ssm.ecore#//SafeStateMachine/top"/>
     <ownedChild
         relatedDiagrams="//@diagram">
       <domainMetaElement
-          href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.ecore#//CompositeState"/>
+          href="../../de.cau.cs.kieler.ssm.emf/model/ssm.ecore#//CompositeState"/>
       <labelMappings
           xsi:type="gmfmap:FeatureLabelMapping">
         <diagramLabel
             href="ssm.gmfgraph#CompositeStateName"/>
         <features
-            href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.ecore#//Named/name"/>
+            href="../../de.cau.cs.kieler.ssm.emf/model/ssm.ecore#//Named/name"/>
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
@@ -28,10 +28,10 @@
           compartment="//@nodes.0/@ownedChild/@compartments.0"
           referencedChild="//@nodes.0/@ownedChild/@children.0/@ownedChild">
         <containmentFeature
-            href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.ecore#//CompositeState/regions"/>
+            href="../../de.cau.cs.kieler.ssm.emf/model/ssm.ecore#//CompositeState/regions"/>
         <ownedChild>
           <domainMetaElement
-              href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.ecore#//Region"/>
+              href="../../de.cau.cs.kieler.ssm.emf/model/ssm.ecore#//Region"/>
           <tool
               xsi:type="gmftool:CreationTool"
               href="ssm.gmftool#//@palette/@tools.0/@tools.0"/>
@@ -41,16 +41,16 @@
               compartment="//@nodes.0/@ownedChild/@children.0/@ownedChild/@compartments.0"
               referencedChild="//@nodes.0/@ownedChild">
             <containmentFeature
-                href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.ecore#//Region/states"/>
+                href="../../de.cau.cs.kieler.ssm.emf/model/ssm.ecore#//Region/states"/>
           </children>
           <children
               compartment="//@nodes.0/@ownedChild/@children.0/@ownedChild/@compartments.0"
               referencedChild="//@nodes.0/@ownedChild/@children.0/@ownedChild/@children.1/@ownedChild">
             <containmentFeature
-                href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.ecore#//Region/states"/>
+                href="../../de.cau.cs.kieler.ssm.emf/model/ssm.ecore#//Region/states"/>
             <ownedChild>
               <domainMetaElement
-                  href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.ecore#//SimpleState"/>
+                  href="../../de.cau.cs.kieler.ssm.emf/model/ssm.ecore#//SimpleState"/>
               <domainSpecialization
                   body="not self.oclIsTypeOf(ssm::CompositeState)"/>
               <labelMappings
@@ -61,7 +61,7 @@
                 <diagramLabel
                     href="ssm.gmfgraph#SimpleStateName"/>
                 <features
-                    href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.ecore#//Named/name"/>
+                    href="../../de.cau.cs.kieler.ssm.emf/model/ssm.ecore#//Named/name"/>
               </labelMappings>
               <tool
                   xsi:type="gmftool:CreationTool"
@@ -74,10 +74,10 @@
               compartment="//@nodes.0/@ownedChild/@children.0/@ownedChild/@compartments.0"
               referencedChild="//@nodes.0/@ownedChild/@children.0/@ownedChild/@children.2/@ownedChild">
             <containmentFeature
-                href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.ecore#//Region/states"/>
+                href="../../de.cau.cs.kieler.ssm.emf/model/ssm.ecore#//Region/states"/>
             <ownedChild>
               <domainMetaElement
-                  href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.ecore#//InitialState"/>
+                  href="../../de.cau.cs.kieler.ssm.emf/model/ssm.ecore#//InitialState"/>
               <domainSpecialization
                   body="not self.oclIsTypeOf(ssm::CompositeState)"/>
               <tool
@@ -103,7 +103,7 @@
   </nodes>
   <links>
     <domainMetaElement
-        href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.ecore#//StrongAbortion"/>
+        href="../../de.cau.cs.kieler.ssm.emf/model/ssm.ecore#//StrongAbortion"/>
     <labelMappings
         xsi:type="gmfmap:FeatureLabelMapping"
         viewPattern="{0}{1}/{2}"
@@ -112,11 +112,11 @@
       <diagramLabel
           href="ssm.gmfgraph#StrongAbortionLabel"/>
       <features
-          href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.ecore#//TransitionImmediateable/isImmediateString"/>
+          href="../../de.cau.cs.kieler.ssm.emf/model/ssm.ecore#//TransitionImmediateable/isImmediateString"/>
       <features
-          href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.ecore#//TransitionTriggerable/triggerString"/>
+          href="../../de.cau.cs.kieler.ssm.emf/model/ssm.ecore#//TransitionTriggerable/triggerString"/>
       <features
-          href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.ecore#//Transition/effectString"/>
+          href="../../de.cau.cs.kieler.ssm.emf/model/ssm.ecore#//Transition/effectString"/>
     </labelMappings>
     <labelMappings
         xsi:type="gmfmap:FeatureLabelMapping"
@@ -126,10 +126,10 @@
       <diagramLabel
           href="ssm.gmfgraph#StrongAbortionPriority"/>
       <features
-          href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.ecore#//Transition/priority"/>
+          href="../../de.cau.cs.kieler.ssm.emf/model/ssm.ecore#//Transition/priority"/>
     </labelMappings>
     <containmentFeature
-        href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.ecore#//Region/transitions"/>
+        href="../../de.cau.cs.kieler.ssm.emf/model/ssm.ecore#//Region/transitions"/>
     <tool
         xsi:type="gmftool:CreationTool"
         href="ssm.gmftool#//@palette/@tools.1/@tools.1"/>
@@ -137,14 +137,14 @@
         href="ssm.gmfgraph#StrongAbortion"/>
     <sourceMetaFeature
         xsi:type="ecore:EReference"
-        href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.ecore#//Transition/source"/>
+        href="../../de.cau.cs.kieler.ssm.emf/model/ssm.ecore#//Transition/source"/>
     <linkMetaFeature
         xsi:type="ecore:EReference"
-        href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.ecore#//Transition/target"/>
+        href="../../de.cau.cs.kieler.ssm.emf/model/ssm.ecore#//Transition/target"/>
   </links>
   <links>
     <domainMetaElement
-        href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.ecore#//NormalTermination"/>
+        href="../../de.cau.cs.kieler.ssm.emf/model/ssm.ecore#//NormalTermination"/>
     <labelMappings
         xsi:type="gmfmap:FeatureLabelMapping"
         viewPattern="/{0}"
@@ -153,7 +153,7 @@
       <diagramLabel
           href="ssm.gmfgraph#NormalTerminationLabel"/>
       <features
-          href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.ecore#//Transition/effectString"/>
+          href="../../de.cau.cs.kieler.ssm.emf/model/ssm.ecore#//Transition/effectString"/>
     </labelMappings>
     <labelMappings
         xsi:type="gmfmap:FeatureLabelMapping"
@@ -163,10 +163,10 @@
       <diagramLabel
           href="ssm.gmfgraph#NormalTerminationPriority"/>
       <features
-          href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.ecore#//Transition/priority"/>
+          href="../../de.cau.cs.kieler.ssm.emf/model/ssm.ecore#//Transition/priority"/>
     </labelMappings>
     <containmentFeature
-        href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.ecore#//Region/transitions"/>
+        href="../../de.cau.cs.kieler.ssm.emf/model/ssm.ecore#//Region/transitions"/>
     <tool
         xsi:type="gmftool:CreationTool"
         href="ssm.gmftool#//@palette/@tools.1/@tools.0"/>
@@ -174,14 +174,14 @@
         href="ssm.gmfgraph#NormalTermination"/>
     <sourceMetaFeature
         xsi:type="ecore:EReference"
-        href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.ecore#//Transition/source"/>
+        href="../../de.cau.cs.kieler.ssm.emf/model/ssm.ecore#//Transition/source"/>
     <linkMetaFeature
         xsi:type="ecore:EReference"
-        href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.ecore#//Transition/target"/>
+        href="../../de.cau.cs.kieler.ssm.emf/model/ssm.ecore#//Transition/target"/>
   </links>
   <links>
     <domainMetaElement
-        href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.ecore#//WeakAbortion"/>
+        href="../../de.cau.cs.kieler.ssm.emf/model/ssm.ecore#//WeakAbortion"/>
     <labelMappings
         xsi:type="gmfmap:FeatureLabelMapping"
         viewPattern="{0}{1}/{2}"
@@ -190,11 +190,11 @@
       <diagramLabel
           href="ssm.gmfgraph#WeakAbortionLabel"/>
       <features
-          href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.ecore#//TransitionImmediateable/isImmediateString"/>
+          href="../../de.cau.cs.kieler.ssm.emf/model/ssm.ecore#//TransitionImmediateable/isImmediateString"/>
       <features
-          href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.ecore#//TransitionTriggerable/triggerString"/>
+          href="../../de.cau.cs.kieler.ssm.emf/model/ssm.ecore#//TransitionTriggerable/triggerString"/>
       <features
-          href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.ecore#//Transition/effectString"/>
+          href="../../de.cau.cs.kieler.ssm.emf/model/ssm.ecore#//Transition/effectString"/>
     </labelMappings>
     <labelMappings
         xsi:type="gmfmap:FeatureLabelMapping"
@@ -204,10 +204,10 @@
       <diagramLabel
           href="ssm.gmfgraph#WeakAbortionPriority"/>
       <features
-          href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.ecore#//Transition/priority"/>
+          href="../../de.cau.cs.kieler.ssm.emf/model/ssm.ecore#//Transition/priority"/>
     </labelMappings>
     <containmentFeature
-        href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.ecore#//Region/transitions"/>
+        href="../../de.cau.cs.kieler.ssm.emf/model/ssm.ecore#//Region/transitions"/>
     <tool
         xsi:type="gmftool:CreationTool"
         href="ssm.gmftool#//@palette/@tools.1/@tools.2"/>
@@ -215,18 +215,18 @@
         href="ssm.gmfgraph#WeakAbortion"/>
     <sourceMetaFeature
         xsi:type="ecore:EReference"
-        href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.ecore#//Transition/source"/>
+        href="../../de.cau.cs.kieler.ssm.emf/model/ssm.ecore#//Transition/source"/>
     <linkMetaFeature
         xsi:type="ecore:EReference"
-        href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.ecore#//Transition/target"/>
+        href="../../de.cau.cs.kieler.ssm.emf/model/ssm.ecore#//Transition/target"/>
   </links>
   <diagram>
     <diagramCanvas
         href="ssm.gmfgraph#SafeStateMachineCanvas"/>
     <domainModel
-        href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.ecore#/"/>
+        href="../../de.cau.cs.kieler.ssm.emf/model/ssm.ecore#/"/>
     <domainMetaElement
-        href="../../edu.unikiel.rtsys.kieler.ssm.emf/model/ssm.ecore#//SafeStateMachine"/>
+        href="../../de.cau.cs.kieler.ssm.emf/model/ssm.ecore#//SafeStateMachine"/>
     <palette
         href="ssm.gmftool#//@palette"/>
   </diagram>

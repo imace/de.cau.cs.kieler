@@ -48,7 +48,7 @@ public class StrongAbortionReorientCommand extends EditElementCommand {
 	 * @generated
 	 */
 	public boolean canExecute() {
-		if (false == getElementToEdit() instanceof de.cau.cs.kieler.ssm.StrongAbortion) {
+		if (false == getElementToEdit() instanceof StrongAbortion) {
 			return false;
 		}
 		if (reorientDirection == ReorientRelationshipRequest.REORIENT_SOURCE) {
@@ -64,15 +64,14 @@ public class StrongAbortionReorientCommand extends EditElementCommand {
 	 * @generated
 	 */
 	protected boolean canReorientSource() {
-		if (!(oldEnd instanceof de.cau.cs.kieler.ssm.AbstractState && newEnd instanceof de.cau.cs.kieler.ssm.AbstractState)) {
+		if (!(oldEnd instanceof AbstractState && newEnd instanceof AbstractState)) {
 			return false;
 		}
-		de.cau.cs.kieler.ssm.AbstractState target = getLink().getTarget();
-		if (!(getLink().eContainer() instanceof de.cau.cs.kieler.ssm.Region)) {
+		AbstractState target = getLink().getTarget();
+		if (!(getLink().eContainer() instanceof Region)) {
 			return false;
 		}
-		de.cau.cs.kieler.ssm.Region container = (de.cau.cs.kieler.ssm.Region) getLink()
-				.eContainer();
+		Region container = (Region) getLink().eContainer();
 		return SafeStateMachineBaseItemSemanticEditPolicy.LinkConstraints
 				.canExistStrongAbortion_4001(container, getNewSource(), target);
 	}
@@ -81,15 +80,14 @@ public class StrongAbortionReorientCommand extends EditElementCommand {
 	 * @generated
 	 */
 	protected boolean canReorientTarget() {
-		if (!(oldEnd instanceof de.cau.cs.kieler.ssm.AbstractState && newEnd instanceof de.cau.cs.kieler.ssm.AbstractState)) {
+		if (!(oldEnd instanceof AbstractState && newEnd instanceof AbstractState)) {
 			return false;
 		}
-		de.cau.cs.kieler.ssm.AbstractState source = getLink().getSource();
-		if (!(getLink().eContainer() instanceof de.cau.cs.kieler.ssm.Region)) {
+		AbstractState source = getLink().getSource();
+		if (!(getLink().eContainer() instanceof Region)) {
 			return false;
 		}
-		de.cau.cs.kieler.ssm.Region container = (de.cau.cs.kieler.ssm.Region) getLink()
-				.eContainer();
+		Region container = (Region) getLink().eContainer();
 		return SafeStateMachineBaseItemSemanticEditPolicy.LinkConstraints
 				.canExistStrongAbortion_4001(container, source, getNewTarget());
 	}
@@ -131,35 +129,35 @@ public class StrongAbortionReorientCommand extends EditElementCommand {
 	/**
 	 * @generated
 	 */
-	protected de.cau.cs.kieler.ssm.StrongAbortion getLink() {
-		return (de.cau.cs.kieler.ssm.StrongAbortion) getElementToEdit();
+	protected StrongAbortion getLink() {
+		return (StrongAbortion) getElementToEdit();
 	}
 
 	/**
 	 * @generated
 	 */
-	protected de.cau.cs.kieler.ssm.AbstractState getOldSource() {
-		return (de.cau.cs.kieler.ssm.AbstractState) oldEnd;
+	protected AbstractState getOldSource() {
+		return (AbstractState) oldEnd;
 	}
 
 	/**
 	 * @generated
 	 */
-	protected de.cau.cs.kieler.ssm.AbstractState getNewSource() {
-		return (de.cau.cs.kieler.ssm.AbstractState) newEnd;
+	protected AbstractState getNewSource() {
+		return (AbstractState) newEnd;
 	}
 
 	/**
 	 * @generated
 	 */
-	protected de.cau.cs.kieler.ssm.AbstractState getOldTarget() {
-		return (de.cau.cs.kieler.ssm.AbstractState) oldEnd;
+	protected AbstractState getOldTarget() {
+		return (AbstractState) oldEnd;
 	}
 
 	/**
 	 * @generated
 	 */
-	protected de.cau.cs.kieler.ssm.AbstractState getNewTarget() {
-		return (de.cau.cs.kieler.ssm.AbstractState) newEnd;
+	protected AbstractState getNewTarget() {
+		return (AbstractState) newEnd;
 	}
 }

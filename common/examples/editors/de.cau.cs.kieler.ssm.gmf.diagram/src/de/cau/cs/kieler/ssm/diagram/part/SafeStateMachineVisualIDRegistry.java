@@ -121,7 +121,7 @@ public class SafeStateMachineVisualIDRegistry {
 		}
 		if (de.cau.cs.kieler.ssm.ssmPackage.eINSTANCE.getSafeStateMachine()
 				.isSuperTypeOf(domainElement.eClass())
-				&& isDiagram((de.cau.cs.kieler.ssm.SafeStateMachine) domainElement)) {
+				&& isDiagram((SafeStateMachine) domainElement)) {
 			return SafeStateMachineEditPart.VISUAL_ID;
 		}
 		return -1;
@@ -164,12 +164,12 @@ public class SafeStateMachineVisualIDRegistry {
 			}
 			if (de.cau.cs.kieler.ssm.ssmPackage.eINSTANCE.getSimpleState()
 					.isSuperTypeOf(domainElement.eClass())
-					&& isSimpleState_3003((de.cau.cs.kieler.ssm.SimpleState) domainElement)) {
+					&& isSimpleState_3003((SimpleState) domainElement)) {
 				return SimpleStateEditPart.VISUAL_ID;
 			}
 			if (de.cau.cs.kieler.ssm.ssmPackage.eINSTANCE.getInitialState()
 					.isSuperTypeOf(domainElement.eClass())
-					&& isInitialState_3004((de.cau.cs.kieler.ssm.InitialState) domainElement)) {
+					&& isInitialState_3004((InitialState) domainElement)) {
 				return InitialStateEditPart.VISUAL_ID;
 			}
 			break;
@@ -318,16 +318,14 @@ public class SafeStateMachineVisualIDRegistry {
 	 * 
 	 * @generated
 	 */
-	private static boolean isDiagram(
-			de.cau.cs.kieler.ssm.SafeStateMachine element) {
+	private static boolean isDiagram(SafeStateMachine element) {
 		return true;
 	}
 
 	/**
 	 * @generated
 	 */
-	private static boolean isSimpleState_3003(
-			de.cau.cs.kieler.ssm.SimpleState domainElement) {
+	private static boolean isSimpleState_3003(SimpleState domainElement) {
 		if (SimpleState_3003_Constraint == null) { // lazy initialization
 			SimpleState_3003_Constraint = SafeStateMachineOCLFactory
 					.getExpression(
@@ -340,8 +338,7 @@ public class SafeStateMachineVisualIDRegistry {
 	/**
 	 * @generated
 	 */
-	private static boolean isInitialState_3004(
-			de.cau.cs.kieler.ssm.InitialState domainElement) {
+	private static boolean isInitialState_3004(InitialState domainElement) {
 		if (InitialState_3004_Constraint == null) { // lazy initialization
 			InitialState_3004_Constraint = SafeStateMachineOCLFactory
 					.getExpression(

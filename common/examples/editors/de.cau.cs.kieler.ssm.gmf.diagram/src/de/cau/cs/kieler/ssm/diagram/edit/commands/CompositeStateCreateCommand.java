@@ -36,7 +36,7 @@ public class CompositeStateCreateCommand extends CreateElementCommand {
 	 * @generated
 	 */
 	public boolean canExecute() {
-		de.cau.cs.kieler.ssm.SafeStateMachine container = (de.cau.cs.kieler.ssm.SafeStateMachine) getElementToEdit();
+		SafeStateMachine container = (SafeStateMachine) getElementToEdit();
 		if (container.getTop() != null) {
 			return false;
 		}

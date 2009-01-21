@@ -176,7 +176,7 @@ public class SafeStateMachineDiagramEditorUtil {
 			protected CommandResult doExecuteWithResult(
 					IProgressMonitor monitor, IAdaptable info)
 					throws ExecutionException {
-				de.cau.cs.kieler.ssm.SafeStateMachine model = createInitialModel();
+				SafeStateMachine model = createInitialModel();
 				attachModelToResource(model, modelResource);
 
 				Diagram diagram = ViewService
@@ -223,7 +223,7 @@ public class SafeStateMachineDiagramEditorUtil {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static de.cau.cs.kieler.ssm.SafeStateMachine createInitialModel() {
+	private static SafeStateMachine createInitialModel() {
 		return de.cau.cs.kieler.ssm.ssmFactory.eINSTANCE
 				.createSafeStateMachine();
 	}
@@ -234,8 +234,8 @@ public class SafeStateMachineDiagramEditorUtil {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static void attachModelToResource(
-			de.cau.cs.kieler.ssm.SafeStateMachine model, Resource resource) {
+	private static void attachModelToResource(SafeStateMachine model,
+			Resource resource) {
 		resource.getContents().add(model);
 	}
 

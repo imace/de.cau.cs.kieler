@@ -478,7 +478,7 @@
          point="org.eclipse.ui.popupMenus">
       <objectContribution
             adaptable="false"
-            id="edu.unikiel.rtsys.kieler.ssm.diagram.contributionCreate"
+            id="de.cau.cs.kieler.ssm.diagram.contributionCreate"
             nameFilter="*"
             objectClass="org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart">
          <menu

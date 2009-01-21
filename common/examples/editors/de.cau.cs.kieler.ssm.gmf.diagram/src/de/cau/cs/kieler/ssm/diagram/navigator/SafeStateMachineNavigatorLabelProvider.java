@@ -206,7 +206,7 @@ public class SafeStateMachineNavigatorLabelProvider extends LabelProvider
 	 * @generated
 	 */
 	private String getSafeStateMachine_1000Text(View view) {
-		de.cau.cs.kieler.ssm.SafeStateMachine domainModelElement = (de.cau.cs.kieler.ssm.SafeStateMachine) view
+		SafeStateMachine domainModelElement = (SafeStateMachine) view
 				.getElement();
 		if (domainModelElement != null) {
 			return domainModelElement.getName();

@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-ClassPath: .
 Bundle-Name: Test Plug-in
-Bundle-SymbolicName: edu.unikiel.rtsys.kieler.ssm.gmf.diagram.layouter;singleton:=true
+Bundle-SymbolicName: de.cau.cs.kieler.ssm.gmf.diagram.layouter;singleton:=true
 Bundle-Version: 1.0.0
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,

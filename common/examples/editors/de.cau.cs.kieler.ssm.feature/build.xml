@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="edu.unikiel.rtsys.kieler.ssm.feature" default="build.update.jar" basedir=".">
+<project name="de.cau.cs.kieler.ssm.feature" default="build.update.jar" basedir=".">
 
 	<target name="init">
 		<property name="feature.temp.folder" value="${basedir}/feature.temp.folder"/>
@@ -7,7 +7,7 @@
 	</target>
 
 	<target name="all.plugins" depends="init">
-		<ant antfile="build.xml" dir="../edu.unikiel.rtsys.kieler.ssm.emf" target="${target}">
+		<ant antfile="build.xml" dir="../de.cau.cs.kieler.ssm.emf" target="${target}">
 			<property name="arch" value="x86"/>
 			<property name="ws" value="gtk"/>
 			<property name="os" value="linux"/>
@@ -25,7 +25,7 @@
 		<antcall target="all.children"/>
 	</target>
 
-	<target name="build.jars" depends="init" description="Build all the jars for the feature: edu.unikiel.rtsys.kieler.ssm.feature.">
+	<target name="build.jars" depends="init" description="Build all the jars for the feature: de.cau.cs.kieler.ssm.feature.">
 		<antcall target="all.children">
 			<param name="target" value="build.jars"/>
 		</antcall>
@@ -43,14 +43,14 @@
 		</antcall>
 	</target>
 
-	<target name="build.update.jar" depends="init" description="Build the feature jar of: edu.unikiel.rtsys.kieler.ssm.feature for an update site.">
+	<target name="build.update.jar" depends="init" description="Build the feature jar of: de.cau.cs.kieler.ssm.feature for an update site.">
 		<antcall target="all.children">
 			<param name="target" value="build.update.jar"/>
 		</antcall>
 		<property name="feature.base" value="${feature.temp.folder}"/>
 		<delete dir="${feature.temp.folder}"/>
 		<mkdir dir="${feature.temp.folder}"/>
-		<mkdir dir="${feature.temp.folder}/features/edu.unikiel.rtsys.kieler.ssm.feature_0.1.0"/>
+		<mkdir dir="${feature.temp.folder}/features/de.cau.cs.kieler.ssm.feature_0.1.0"/>
 		<antcall target="gather.bin.parts" inheritAll="false">
 			<param name="os" value="*"/>
 			<param name="feature.base" value="${feature.temp.folder}"/>
@@ -59,22 +59,22 @@
 			<param name="arch" value="*"/>
 			<param name="nl" value="*"/>
 		</antcall>
-		<jar destfile="${feature.destination}/edu.unikiel.rtsys.kieler.ssm.feature_0.1.0.jar" basedir="${feature.temp.folder}/features/edu.unikiel.rtsys.kieler.ssm.feature_0.1.0"/>
+		<jar destfile="${feature.destination}/de.cau.cs.kieler.ssm.feature_0.1.0.jar" basedir="${feature.temp.folder}/features/de.cau.cs.kieler.ssm.feature_0.1.0"/>
 		<delete dir="${feature.temp.folder}"/>
 	</target>
 
 	<target name="gather.bin.parts" depends="init" if="feature.base">
-		<mkdir dir="${feature.base}/features/edu.unikiel.rtsys.kieler.ssm.feature_0.1.0"/>
+		<mkdir dir="${feature.base}/features/de.cau.cs.kieler.ssm.feature_0.1.0"/>
 		<antcall target="children">
 			<param name="target" value="gather.bin.parts"/>
 			<param name="destination.temp.folder" value="${feature.base}/plugins"/>
 		</antcall>
-		<copy todir="${feature.base}/features/edu.unikiel.rtsys.kieler.ssm.feature_0.1.0" failonerror="true" overwrite="false">
+		<copy todir="${feature.base}/features/de.cau.cs.kieler.ssm.feature_0.1.0" failonerror="true" overwrite="false">
 			<fileset dir="${basedir}">
 				<include name="feature.xml"/>
 			</fileset>
 		</copy>
-		<eclipse.idReplacer featureFilePath="${feature.base}/features/edu.unikiel.rtsys.kieler.ssm.feature_0.1.0/feature.xml"  selfVersion="0.1.0" featureIds="" pluginIds="edu.unikiel.rtsys.kieler.ssm.emf:0.0.0,1.0.0,"/>
+		<eclipse.idReplacer featureFilePath="${feature.base}/features/de.cau.cs.kieler.ssm.feature_0.1.0/feature.xml"  selfVersion="0.1.0" featureIds="" pluginIds="de.cau.cs.kieler.ssm.emf:0.0.0,1.0.0,"/>
 		<antcall target="rootFiles">
 			<param name="rootTarget" value="rootFiles${os}_${ws}_${arch}"/>
 		</antcall>
@@ -89,7 +89,7 @@
 		<antcall target="rootFileslinux_gtk_x86"/>
 	</target>
 
-	<target name="zip.distribution" depends="init" description="Create a zip containing all the plug-ins and features for the feature: edu.unikiel.rtsys.kieler.ssm.feature.">
+	<target name="zip.distribution" depends="init" description="Create a zip containing all the plug-ins and features for the feature: de.cau.cs.kieler.ssm.feature.">
 		<delete dir="${feature.temp.folder}"/>
 		<mkdir dir="${feature.temp.folder}"/>
 		<antcall target="gather.bin.parts">
@@ -100,7 +100,7 @@
 			<param name="nl" value="*"/>
 			<param name="include.children" value="true"/>
 		</antcall>
-		<zip destfile="${feature.destination}/edu.unikiel.rtsys.kieler.ssm.feature_0.1.0.bin.dist.zip" basedir="${feature.temp.folder}" filesonly="false" whenempty="skip" update="false"/>
+		<zip destfile="${feature.destination}/de.cau.cs.kieler.ssm.feature_0.1.0.bin.dist.zip" basedir="${feature.temp.folder}" filesonly="false" whenempty="skip" update="false"/>
 		<delete dir="${feature.temp.folder}"/>
 	</target>
 
@@ -112,7 +112,7 @@
 			<param name="destination.temp.folder" value="${feature.temp.folder}/plugins/null/src"/>
 			<param name="include.children" value="true"/>
 		</antcall>
-		<zip destfile="${feature.destination}/edu.unikiel.rtsys.kieler.ssm.feature_0.1.0.src.zip" basedir="${feature.temp.folder}" filesonly="true" whenempty="skip" update="false"/>
+		<zip destfile="${feature.destination}/de.cau.cs.kieler.ssm.feature_0.1.0.src.zip" basedir="${feature.temp.folder}" filesonly="true" whenempty="skip" update="false"/>
 		<delete dir="${feature.temp.folder}"/>
 	</target>
 
@@ -124,15 +124,15 @@
 			<param name="destination.temp.folder" value="${feature.temp.folder}/plugins"/>
 			<param name="include.children" value="true"/>
 		</antcall>
-		<zip destfile="${feature.destination}/edu.unikiel.rtsys.kieler.ssm.feature_0.1.0.log.zip" basedir="${feature.temp.folder}" filesonly="true" whenempty="skip" update="false"/>
+		<zip destfile="${feature.destination}/de.cau.cs.kieler.ssm.feature_0.1.0.log.zip" basedir="${feature.temp.folder}" filesonly="true" whenempty="skip" update="false"/>
 		<delete dir="${feature.temp.folder}"/>
 	</target>
 
-	<target name="clean" depends="init" description="Clean the feature: edu.unikiel.rtsys.kieler.ssm.feature of all the zips, jars and logs created.">
-		<delete file="${feature.destination}/edu.unikiel.rtsys.kieler.ssm.feature_0.1.0.jar"/>
-		<delete file="${feature.destination}/edu.unikiel.rtsys.kieler.ssm.feature_0.1.0.bin.dist.zip"/>
-		<delete file="${feature.destination}/edu.unikiel.rtsys.kieler.ssm.feature_0.1.0.log.zip"/>
-		<delete file="${feature.destination}/edu.unikiel.rtsys.kieler.ssm.feature_0.1.0.src.zip"/>
+	<target name="clean" depends="init" description="Clean the feature: de.cau.cs.kieler.ssm.feature of all the zips, jars and logs created.">
+		<delete file="${feature.destination}/de.cau.cs.kieler.ssm.feature_0.1.0.jar"/>
+		<delete file="${feature.destination}/de.cau.cs.kieler.ssm.feature_0.1.0.bin.dist.zip"/>
+		<delete file="${feature.destination}/de.cau.cs.kieler.ssm.feature_0.1.0.log.zip"/>
+		<delete file="${feature.destination}/de.cau.cs.kieler.ssm.feature_0.1.0.src.zip"/>
 		<delete dir="${feature.temp.folder}"/>
 		<antcall target="all.children">
 			<param name="target" value="clean"/>
@@ -140,7 +140,7 @@
 	</target>
 
 	<target name="refresh" depends="init" if="eclipse.running" description="Refresh this folder.">
-		<eclipse.convertPath fileSystemPath="/home/haf/shared/kieler/workspace2/edu.unikiel.rtsys.kieler.ssm.feature/" property="resourcePath"/>
+		<eclipse.convertPath fileSystemPath="/home/haf/shared/kieler/workspace2/de.cau.cs.kieler.ssm.feature/" property="resourcePath"/>
 		<eclipse.refreshLocal resource="${resourcePath}" depth="infinite"/>
 		<antcall target="all.children">
 			<param name="target" value="refresh"/>

@@ -13,7 +13,7 @@
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package
             uri="http://www.informatik.uni-kiel.de/rtsys/ssm"
-            class="edu.unikiel.rtsys.kieler.ssm.ssmPackage"
+            class="de.cau.cs.kieler.ssm.ssmPackage"
             genModel="model/ssm.genmodel"/>
    </extension>
 

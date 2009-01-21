@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="edu.unikiel.rtsys.kieler.ssm.feature"
+      id="de.cau.cs.kieler.ssm.feature"
       label="Feature SSM Editor"
       version="0.1.0"
       provider-name="Christian-Albrechts Universität zu Kiel">
@@ -23,21 +23,21 @@
    </requires>
 
    <plugin
-         id="edu.unikiel.rtsys.kieler.ssm.emf"
+         id="de.cau.cs.kieler.ssm.emf"
          download-size="0"
          install-size="0"
          version="0.1.0"
          unpack="false"/>
 
    <plugin
-         id="edu.unikiel.rtsys.kieler.ssm.emf.edit"
+         id="de.cau.cs.kieler.ssm.emf.edit"
          download-size="0"
          install-size="0"
          version="0.1.0"
          unpack="false"/>
 
    <plugin
-         id="edu.unikiel.rtsys.kieler.ssm.gmf.diagram"
+         id="de.cau.cs.kieler.ssm.gmf.diagram"
          download-size="0"
          install-size="0"
          version="0.1.0"

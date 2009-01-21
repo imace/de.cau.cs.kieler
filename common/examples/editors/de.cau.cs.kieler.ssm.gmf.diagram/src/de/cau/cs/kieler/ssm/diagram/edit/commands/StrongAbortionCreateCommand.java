@@ -34,7 +34,7 @@ public class StrongAbortionCreateCommand extends CreateElementCommand {
 	/**
 	 * @generated
 	 */
-	private de.cau.cs.kieler.ssm.Region container;
+	private Region container;
 
 	/**
 	 * @generated
@@ -54,8 +54,8 @@ public class StrongAbortionCreateCommand extends CreateElementCommand {
 		// and return the first element that is instance of the container class.
 		for (EObject element = source; element != null; element = element
 				.eContainer()) {
-			if (element instanceof de.cau.cs.kieler.ssm.Region) {
-				container = (de.cau.cs.kieler.ssm.Region) element;
+			if (element instanceof Region) {
+				container = (Region) element;
 				super.setElementToEdit(container);
 				break;
 			}
@@ -69,12 +69,10 @@ public class StrongAbortionCreateCommand extends CreateElementCommand {
 		if (source == null && target == null) {
 			return false;
 		}
-		if (source != null
-				&& false == source instanceof de.cau.cs.kieler.ssm.AbstractState) {
+		if (source != null && false == source instanceof AbstractState) {
 			return false;
 		}
-		if (target != null
-				&& false == target instanceof de.cau.cs.kieler.ssm.AbstractState) {
+		if (target != null && false == target instanceof AbstractState) {
 			return false;
 		}
 		if (getSource() == null) {
@@ -93,7 +91,7 @@ public class StrongAbortionCreateCommand extends CreateElementCommand {
 	 * @generated
 	 */
 	protected EObject doDefaultElementCreation() {
-		de.cau.cs.kieler.ssm.StrongAbortion newElement = de.cau.cs.kieler.ssm.ssmFactory.eINSTANCE
+		StrongAbortion newElement = de.cau.cs.kieler.ssm.ssmFactory.eINSTANCE
 				.createStrongAbortion();
 		getContainer().getTransitions().add(newElement);
 		newElement.setSource(getSource());
@@ -140,21 +138,21 @@ public class StrongAbortionCreateCommand extends CreateElementCommand {
 	/**
 	 * @generated
 	 */
-	protected de.cau.cs.kieler.ssm.AbstractState getSource() {
-		return (de.cau.cs.kieler.ssm.AbstractState) source;
+	protected AbstractState getSource() {
+		return (AbstractState) source;
 	}
 
 	/**
 	 * @generated
 	 */
-	protected de.cau.cs.kieler.ssm.AbstractState getTarget() {
-		return (de.cau.cs.kieler.ssm.AbstractState) target;
+	protected AbstractState getTarget() {
+		return (AbstractState) target;
 	}
 
 	/**
 	 * @generated
 	 */
-	public de.cau.cs.kieler.ssm.Region getContainer() {
+	public Region getContainer() {
 		return container;
 	}
 }
