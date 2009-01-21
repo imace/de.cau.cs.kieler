@@ -6,7 +6,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
-import de.cau.cs.kieler.core.util.FloatFieldEditor;
+import de.cau.cs.kieler.core.preferences.FloatFieldEditor;
 import de.cau.cs.kieler.kiml.layouter.zest.Activator;
 import de.cau.cs.kieler.kiml.layouter.zest.ZestAlgorithmWrapper;
 import de.cau.cs.kieler.kiml.ui.AbstractKimlLayoutProviderPreferencePage;
