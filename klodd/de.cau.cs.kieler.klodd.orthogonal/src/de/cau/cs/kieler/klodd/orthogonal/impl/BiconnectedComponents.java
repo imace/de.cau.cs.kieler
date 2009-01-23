@@ -70,27 +70,27 @@ public class BiconnectedComponents extends AbstractAlgorithm {
 	 */
 	private void dfsVisit(TSMNode node) {
 		node.rank = nextDfsnum++;
-		lowpt[node.nr] = node.rank;
+		lowpt[node.id] = node.rank;
 		unfinished.push(node);
 		for (TSMEdge edge : node.edges) {
 			TSMNode endpoint = edge.getEndpoint(node);
 			if (endpoint.rank < 0) {
-				parent[endpoint.nr] = node;
+				parent[endpoint.id] = node;
 				dfsVisit(endpoint);
-				lowpt[node.nr] = Math.min(lowpt[node.nr], lowpt[endpoint.nr]);
+				lowpt[node.id] = Math.min(lowpt[node.id], lowpt[endpoint.id]);
 			}
 			else {
-				lowpt[node.nr] = Math.min(lowpt[node.nr], endpoint.rank);
+				lowpt[node.id] = Math.min(lowpt[node.id], endpoint.rank);
 			}
 		}
-		if (node.rank >= 2 && lowpt[node.nr] == parent[node.nr].rank) {
+		if (node.rank >= 2 && lowpt[node.id] == parent[node.id].rank) {
 			GraphSection graphSection = new GraphSection();
 			TSMNode sectionNode;
 			do {
 				sectionNode = unfinished.pop();
 				graphSection.nodes.add(sectionNode);
 			} while (sectionNode != node);
-			graphSection.nodes.add(parent[node.nr]);
+			graphSection.nodes.add(parent[node.id]);
 			graphSection.sortNodes();
 			components.add(graphSection);
 		}

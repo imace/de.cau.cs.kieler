@@ -37,10 +37,10 @@ public class GraphSection {
 		int start = 0, end = nodes.size(), pos;
 		while (start != end) {
 			pos = start + (end - start) / 2;
-			int currentNr = nodes.get(pos).nr;
-			if (node.nr < currentNr)
+			int currentNr = nodes.get(pos).id;
+			if (node.id < currentNr)
 				end = pos;
-			else if (node.nr > currentNr)
+			else if (node.id > currentNr)
 				start = pos + 1;
 			else return true;
 		}

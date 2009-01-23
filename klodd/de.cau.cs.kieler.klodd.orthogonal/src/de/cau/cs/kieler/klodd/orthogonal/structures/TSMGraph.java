@@ -23,8 +23,10 @@ public class TSMGraph {
 	/** the external face of this TSM graph */
 	public TSMFace externalFace = new TSMFace(this);
 
-	/** next available creation number */
-	int nextNodeNr = 0;
+	/** next available identifier for nodes */
+	int nextNodeId = 0;
+	/** next available identifier for faces */
+	int nextFaceId = 0;
 	
 	/** parent node group from which this TSM graph was created */
 	private KNodeGroup parentGroup;

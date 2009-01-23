@@ -94,7 +94,7 @@ public class ConstraintExpander extends AbstractAlgorithm {
 			// create a single node and connect children with it
 			TSMNode groupingNode = new TSMNode(tsmGraph, constraint);
 			if (parentNode != null) {
-				new TSMEdge(tsmGraph, parentNode, groupingNode);
+				new TSMEdge(tsmGraph, parentNode, groupingNode, true);
 			}
 			for (EmbeddingConstraint childConstraint : constraint.children) {
 				expandConstraint(childConstraint, groupingNode);
@@ -107,27 +107,27 @@ public class ConstraintExpander extends AbstractAlgorithm {
 			TSMNode firstNode = null, lastNode = null;
 			if (parentNode != null) {
 				firstNode = new TSMNode(tsmGraph);
-				new TSMEdge(tsmGraph, firstNode, hubNode);
+				new TSMEdge(tsmGraph, firstNode, hubNode, true);
 				lastNode = new TSMNode(tsmGraph);
-				new TSMEdge(tsmGraph, hubNode, lastNode);
-				new TSMEdge(tsmGraph, firstNode, lastNode);
-				new TSMEdge(tsmGraph, parentNode, firstNode);
+				new TSMEdge(tsmGraph, hubNode, lastNode, true);
+				new TSMEdge(tsmGraph, firstNode, lastNode, true);
+				new TSMEdge(tsmGraph, parentNode, firstNode, true);
 			}
 			for (EmbeddingConstraint childConstraint : constraint.children) {
 				TSMNode xNode = new TSMNode(tsmGraph);
-				new TSMEdge(tsmGraph, xNode, hubNode);
+				new TSMEdge(tsmGraph, xNode, hubNode, true);
 				TSMNode yNode = new TSMNode(tsmGraph);
-				new TSMEdge(tsmGraph, hubNode, yNode);
-				new TSMEdge(tsmGraph, xNode, yNode);
+				new TSMEdge(tsmGraph, hubNode, yNode, true);
+				new TSMEdge(tsmGraph, xNode, yNode, true);
 				if (lastNode == null)
 					firstNode = xNode;
 				else
-					new TSMEdge(tsmGraph, lastNode, xNode);
+					new TSMEdge(tsmGraph, lastNode, xNode, true);
 				expandConstraint(childConstraint, xNode);
 				lastNode = yNode;
 			}
 			if (lastNode != null)
-				new TSMEdge(tsmGraph, lastNode, firstNode);
+				new TSMEdge(tsmGraph, lastNode, firstNode, true);
 			break;
 		}
 	}
@@ -149,7 +149,7 @@ public class ConstraintExpander extends AbstractAlgorithm {
 				outgoing2NodeMap.put(kEdge, tsmNode);
 			}
 			else {
-				new TSMEdge(tsmGraph, tsmNode, endPoint, kEdge);
+				new TSMEdge(tsmGraph, tsmNode, endPoint, true, kEdge);
 			}
 		}
 		else {
@@ -158,7 +158,7 @@ public class ConstraintExpander extends AbstractAlgorithm {
 				incoming2NodeMap.put(kEdge, tsmNode);
 			}
 			else {
-				new TSMEdge(tsmGraph, endPoint, tsmNode, kEdge);
+				new TSMEdge(tsmGraph, endPoint, tsmNode, true, kEdge);
 			}
 		}
 	}

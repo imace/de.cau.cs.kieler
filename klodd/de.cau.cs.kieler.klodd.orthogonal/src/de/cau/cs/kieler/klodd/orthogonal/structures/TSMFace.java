@@ -11,8 +11,11 @@ import java.util.List;
  */
 public class TSMFace {
 
-	/** list of bordering edges */
-	public List<TSMEdge> edges = new LinkedList<TSMEdge>();
+	/** set of lists of bordering edges (can be multiple lists for the
+	 *  external face) */
+	public List<List<TSMEdge>> edgeLists = new LinkedList<List<TSMEdge>>();
+	/** identifier of this face, determined at creation time */
+	public int id;
 	
 	/**
 	 * Creates a face and adds it to the given graph.
@@ -21,6 +24,16 @@ public class TSMFace {
 	 */
 	public TSMFace(TSMGraph graph) {
 		graph.faces.add(this);
+		this.id = graph.nextFaceId++;
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	public boolean equals(Object other) {
+		return (other instanceof TSMFace)
+				&& ((TSMFace)other).id == this.id;
 	}
 	
 }

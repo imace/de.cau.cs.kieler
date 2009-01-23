@@ -15,8 +15,8 @@ public class TSMNode implements Comparable<TSMNode> {
 	public List<TSMEdge> edges = new LinkedList<TSMEdge>();
 	/** object contained in this node, or null if there is none */
 	public Object object;
-	/** creation number of this node, determined at creation time */
-	public int nr;
+	/** identifier of this node, determined at creation time */
+	public int id;
 	/** rank of this node, used by various algorithms */
 	public int rank = 0;
 	
@@ -29,7 +29,7 @@ public class TSMNode implements Comparable<TSMNode> {
 	public TSMNode(TSMGraph graph, Object obj) {
 		graph.nodes.add(this);
 		this.object = obj;
-		this.nr = graph.nextNodeNr++;
+		this.id = graph.nextNodeId++;
 	}
 	
 	/**
@@ -40,7 +40,7 @@ public class TSMNode implements Comparable<TSMNode> {
 	public TSMNode(TSMGraph graph) {
 		graph.nodes.add(this);
 		this.object = null;
-		this.nr = graph.nextNodeNr++;
+		this.id = graph.nextNodeId++;
 	}
 
 	/*
@@ -48,9 +48,18 @@ public class TSMNode implements Comparable<TSMNode> {
 	 * @see java.lang.Comparable#compareTo(java.lang.Object)
 	 */
 	public int compareTo(TSMNode other) {
-		return this.nr > other.nr ? 1
-				: (this.nr < other.nr ? -1
+		return this.id > other.id ? 1
+				: (this.id < other.id ? -1
 				: 0);
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	public boolean equals(Object other) {
+		return (other instanceof TSMNode)
+				&& ((TSMNode)other).id == this.id;
 	}
 	
 }

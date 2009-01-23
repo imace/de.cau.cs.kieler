@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
+import java.util.Queue;
 
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdge;
 import de.cau.cs.kieler.klodd.core.algorithms.AbstractAlgorithm;
@@ -24,14 +25,48 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 	private class EdgePlacing {
 		/** rank of this placing in the clockwise order of edges */
 		int rank;
+		/** face related to this placing */
+		TSMFace face = null;
 		
 		/**
-		 * Creates an edge placing with given rank
+		 * Creates an edge placing with given rank.
 		 * @param rank the rank
 		 */
 		EdgePlacing(int rank) {
 			this.rank = rank;
 		}
+	}
+	
+	/**
+	 * Entry of a path in the dual graph.
+	 */
+	private class DualPathEntry {
+		/** the edge to take for this entry of a path */
+		TSMEdge edge;
+		/** the target face of the edge*/
+		TSMFace targetFace;
+		
+		/**
+		 * Creates a dual path entry with given edge and target face.
+		 * @param edge the edge
+		 * @param targetFace the target face
+		 */
+		DualPathEntry(TSMEdge edge, TSMFace targetFace) {
+			this.edge = edge;
+			this.targetFace = targetFace;
+		}
+	}
+	
+	/**
+	 * A path in the dual graph.
+	 */
+	private class DualPath {
+		/** the path consists of entries with crossed edges */
+		List<DualPathEntry> entries = null;
+		/** edge placing for insertion at source */
+		EdgePlacing sourcePlacing;
+		/** edge placing for insertion at target */
+		EdgePlacing targetPlacing;
 	}
 	
 	/**
@@ -48,14 +83,6 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 	
 	/** TSM graph that is currently processed */
 	private TSMGraph graph = null;
-	/** faces on the path that was chosen for insertion */
-	private List<TSMFace> facePath = new LinkedList<TSMFace>();
-	/** edges on the path that was chosen for insertion */
-	private List<TSMEdge> pathEdges = new LinkedList<TSMEdge>();
-	/** edge placing for insertion at source */
-	private EdgePlacing sourcePlacing;
-	/** edge placing for insertion at target */
-	private EdgePlacing targetPlacing;
 	
 	/*
 	 * (non-Javadoc)
@@ -77,6 +104,7 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 	
 	/**
 	 * Inserts an edge into the given graph, preserving its planarity.
+	 * The new edge is assumed to already exist in the graph's list of edges.
 	 * The graph must have a planar embedding, i.e. each existing edge
 	 * has its corresponding left and right face. Planarity is preserved
 	 * by creating new nodes to avoid crossings.
@@ -96,9 +124,9 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 		List<EdgePlacing> targetPlacings = getEdgePlacings(edge,
 				edge.target, targetConstraint);
 		// determine a shortest path from a source face to a target face
-		shortestPath(edge, sourcePlacings, targetPlacings);
+		DualPath path = shortestPath(edge, sourcePlacings, targetPlacings);
 		// insert the edge through the new path
-		insertEdge(edge);
+		insertEdge(edge, path);
 	}
 	
 	/**
@@ -115,6 +143,9 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 		int placingsCount = node.edges.size();
 		if (placingsCount <= 1) {
 			EdgePlacing placing = new EdgePlacing(0);
+			if (placingsCount == 0)
+				// TODO find an initial face more intelligently
+				placing.face = graph.externalFace;
 			List<EdgePlacing> placings = new LinkedList<EdgePlacing>();
 			placings.add(placing);
 			return placings;
@@ -156,10 +187,12 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 			TSMEdge tsmEdge = edgeMap.get(layoutEdge);
 			if (tsmEdge != null) {
 				if (tsmEdge.rank < 0) {
+					// the insertion edge was found
 					result.placings = new LinkedList<EdgePlacing>();
 					result.placings.add(new EdgePlacing(0));
 				}
 				else {
+					// an already inserted edge was found
 					result.edgeCount = 1;
 					result.firstEdgeRank = tsmEdge.rank;
 				}
@@ -277,15 +310,205 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 		return result;
 	}
 	
-	private void shortestPath(TSMEdge edge, List<EdgePlacing> sourcePlacings,
+	/**
+	 * Find a shortest path from one of the source placings to one of the
+	 * target placings.
+	 * 
+	 * @param insEdge insertion edge
+	 * @param sourcePlacings set of admissible source placings
+	 * @param targetPlacings set of admissible target placings
+	 * @return path leading from the source placing to the target placing
+	 */
+	private DualPath shortestPath(TSMEdge insEdge, List<EdgePlacing> sourcePlacings,
 			List<EdgePlacing> targetPlacings) {
-		facePath.clear();
-		pathEdges.clear();
-		// perform a BFS!
+		// determine the set of target faces
+		List<TSMFace> targetFaces = new LinkedList<TSMFace>();
+		for (EdgePlacing placing : targetPlacings) {
+			if (placing.face == null)
+				placing.face = insEdge.target.edges.get(placing.rank)
+						.getLeftFaceFrom(insEdge.target);
+			targetFaces.add(placing.face);
+		}
+		
+		// find the shortest path
+		DualPath shortestPath = new DualPath();
+		int shortestLength = Integer.MAX_VALUE;
+		for (EdgePlacing placing : sourcePlacings) {
+			if (placing.face == null)
+				placing.face = insEdge.source.edges.get(placing.rank)
+						.getLeftFaceFrom(insEdge.source);
+			List<DualPathEntry> path = bfsPath(placing.face, targetFaces);
+			if (path.size() < shortestLength) {
+				shortestPath.entries = path;
+				shortestLength = path.size();
+				shortestPath.sourcePlacing = placing;
+			}
+		}
+		
+		// get a placing for the selected target face
+		TSMFace targetFace = shortestPath.entries.isEmpty()
+				? shortestPath.sourcePlacing.face
+				: shortestPath.entries.get(shortestLength-1).targetFace;
+		for (EdgePlacing placing : targetPlacings) {
+			if (placing.face.id == targetFace.id)
+				shortestPath.targetPlacing = placing;
+		}
+		return shortestPath;
 	}
 	
-	private void insertEdge(TSMEdge edge) {
+	/**
+	 * Performs a BFS to find the shortest path from a given source Face to
+	 * any of the target faces.
+	 * 
+	 * @param sourceFace source face for the BFS
+	 * @param targetFaces set of target faces
+	 * @return shortest path from the source face to one of the target faces
+	 */
+	private List<DualPathEntry> bfsPath(TSMFace sourceFace, List<TSMFace> targetFaces) {
+		DualPathEntry[] parentPath = new DualPathEntry[graph.faces.size()];
+		Queue<DualPathEntry> bfsQueue = new LinkedList<DualPathEntry>();
+		TSMFace currentFace = sourceFace;
+		do {
+			if (targetFaces.contains(currentFace)) {
+				break;
+			}
+			for (List<TSMEdge> edgeList : currentFace.edgeLists) {
+				for (TSMEdge edge : edgeList)
+					bfsQueue.add(new DualPathEntry(edge, edge.getOpposed(currentFace)));
+			}
+			DualPathEntry currentEntry = null;
+			do {
+				currentEntry = bfsQueue.poll();
+				if (currentEntry != null) {
+					currentFace = currentEntry.targetFace;
+					if (parentPath[currentFace.id] == null
+							&& currentFace.id != sourceFace.id) {
+						parentPath[currentFace.id] = currentEntry;
+					}
+					else
+						currentEntry = null;
+				}
+			} while (currentEntry != null);
+		} while (!bfsQueue.isEmpty());
 		
+		// construct a shortest path to the current element
+		LinkedList<DualPathEntry> path = new LinkedList<DualPathEntry>();
+		while (parentPath[currentFace.id] != null) {
+			DualPathEntry pathEntry = parentPath[currentFace.id];
+			path.addFirst(pathEntry);
+			currentFace = pathEntry.edge.getOpposed(currentFace);
+		}
+		return path;
+	}
+	
+	/**
+	 * Insert an edge through the given path of the dual graph.
+	 * 
+	 * @param insEdge edge to be inserted
+	 * @param path path of the dual graph
+	 */
+	private void insertEdge(TSMEdge insEdge, DualPath path) {
+		TSMNode currentNode = insEdge.source;
+		TSMFace currentFace = path.sourcePlacing.face;
+		int currentRank = path.sourcePlacing.rank;
+		TSMEdge previousEdge = null;
+		for (DualPathEntry pathEntry : path.entries) {
+			// insert a pseudo node into the currently crossed edge
+			TSMNode pseudoNode = new TSMNode(graph);
+			TSMEdge edge1 = pathEntry.edge;
+			TSMNode oldTarget = edge1.target;
+			edge1.target = pseudoNode;
+			ListIterator<TSMEdge> oldTargetIter = getIteratorFor(oldTarget.edges, edge1);
+			oldTargetIter.remove();
+			TSMEdge edge2 = new TSMEdge(graph, pseudoNode, oldTarget,
+					false, edge1.layoutEdge);
+			oldTargetIter.add(edge2);
+			pseudoNode.edges.add(edge1);
+			pseudoNode.edges.add(edge2);
+			int firstRank, secondRank;
+			if (currentFace.id == edge1.leftFace.id) {
+				firstRank = 1;
+				secondRank = 0;
+			}
+			else {
+				assert currentFace.id == edge1.rightFace.id;
+				firstRank = 0;
+				secondRank = 2;
+			}
+			edge2.leftFace = edge1.leftFace;
+			edge2.rightFace = edge1.rightFace;
+			edge2.nextEdge = edge1.nextEdge;
+			edge1.nextEdge = edge2;
+			edge2.previousEdge = edge1;
+			// insert an edge from the current node to the new pseudo node
+			previousEdge = insertEdge(currentNode, currentRank, pseudoNode,
+					firstRank, currentFace, null, previousEdge,
+					insEdge.layoutEdge);
+			currentNode = pseudoNode;
+			currentRank = secondRank;
+			currentFace = pathEntry.targetFace;
+		}
+		// insert a final edge from the current node to the target node
+		insertEdge(currentNode, currentRank, insEdge.target,
+				path.targetPlacing.rank, path.targetPlacing.face, insEdge,
+				previousEdge, insEdge.layoutEdge);
+	}
+	
+	/**
+	 * 
+	 * @param sourceNode
+	 * @param sourceRank
+	 * @param targetNode
+	 * @param targetRank
+	 * @param face
+	 * @param edge
+	 * @param previousEdge
+	 * @param layoutEdge
+	 * @return
+	 */
+	private TSMEdge insertEdge(TSMNode sourceNode, int sourceRank,
+			TSMNode targetNode, int targetRank, TSMFace face, TSMEdge edge,
+			TSMEdge previousEdge, KEdge layoutEdge) {
+		if (edge == null) {
+			edge = new TSMEdge(graph, sourceNode, targetNode, false, layoutEdge);
+		}
+		else {
+			edge.source = sourceNode;
+			edge.target = targetNode;
+		}
+		if (previousEdge != null) {
+			previousEdge.nextEdge = edge;
+			edge.previousEdge = previousEdge;
+		}
+		
+		// insert the edge at the proper placings
+		sourceNode.edges.add(sourceRank, edge);
+		targetNode.edges.add(targetRank, edge);
+		
+		// update the crossed face
+		// TODO traverse all edges of the given face and look for the
+		//      source and target nodes
+		return edge;
+	}
+	
+	/**
+	 * Gets a list iterator for the given list of edges, with the
+	 * current position after the given edge.
+	 * 
+	 * @param edgeList list for which the iterator shall be created
+	 * @param edge edge at which the iterator shall point
+	 *     (with <code>previous()</code>)
+	 * @return iterator pointing at <code>edge</code>, or null if
+	 *     the edge was not found
+	 */
+	private ListIterator<TSMEdge> getIteratorFor(List<TSMEdge> edgeList,
+			TSMEdge edge) {
+		ListIterator<TSMEdge> edgeIter = edgeList.listIterator();
+		while (edgeIter.hasNext()) {
+			if (edgeIter.next() == edge)
+				return edgeIter;
+		}
+		return null;
 	}
 	
 }
