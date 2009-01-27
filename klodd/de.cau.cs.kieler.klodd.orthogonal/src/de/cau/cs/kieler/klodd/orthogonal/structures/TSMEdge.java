@@ -8,7 +8,7 @@ import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdge;
  * 
  * @author msp
  */
-public class TSMEdge {
+public class TSMEdge extends TSMGraphElement {
 
 	/** source node */
 	public TSMNode source;
@@ -20,8 +20,6 @@ public class TSMEdge {
 	public TSMFace rightFace;
 	/** layout graph edge contained in this TSM edge, or null if there is none */
 	public KEdge layoutEdge;
-	/** rank of this edge, used by various algorithms */
-	public int rank = 0;
 	/** the previous edge of a split edge */
 	public TSMEdge previousEdge;
 	/** the next edge of a split edge */
@@ -39,6 +37,7 @@ public class TSMEdge {
 	public TSMEdge(TSMGraph graph, TSMNode source, TSMNode target,
 			boolean connectNodes, KEdge layoutEdge) {
 		graph.edges.add(this);
+		this.id = graph.nextEdgeId++;
 		this.source = source;
 		this.target = target;
 		this.layoutEdge = layoutEdge;
@@ -131,6 +130,15 @@ public class TSMEdge {
 			assert node.id == target.id;
 			return rightFace;
 		}
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	public boolean equals(Object other) {
+		return (other instanceof TSMEdge)
+				&& ((TSMEdge)other).id == this.id;
 	}
 	
 }

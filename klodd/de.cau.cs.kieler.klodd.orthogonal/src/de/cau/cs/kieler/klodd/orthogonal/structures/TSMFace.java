@@ -9,13 +9,11 @@ import java.util.List;
  * 
  * @author msp
  */
-public class TSMFace {
+public class TSMFace extends TSMGraphElement {
 
 	/** set of lists of bordering edges (can be multiple lists for the
 	 *  external face) */
 	public List<List<TSMEdge>> edgeLists = new LinkedList<List<TSMEdge>>();
-	/** identifier of this face, determined at creation time */
-	public int id;
 	
 	/**
 	 * Creates a face and adds it to the given graph.

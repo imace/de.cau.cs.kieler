@@ -418,7 +418,8 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 			TSMEdge edge1 = pathEntry.edge;
 			TSMNode oldTarget = edge1.target;
 			edge1.target = pseudoNode;
-			ListIterator<TSMEdge> oldTargetIter = getIteratorFor(oldTarget.edges, edge1);
+			ListIterator<TSMEdge> oldTargetIter = getIteratorFor(
+					oldTarget.edges, edge1, true);
 			oldTargetIter.remove();
 			TSMEdge edge2 = new TSMEdge(graph, pseudoNode, oldTarget,
 					false, edge1.layoutEdge);
@@ -426,20 +427,40 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 			pseudoNode.edges.add(edge1);
 			pseudoNode.edges.add(edge2);
 			int firstRank, secondRank;
+			boolean insertForward;
 			if (currentFace.id == edge1.leftFace.id) {
 				firstRank = 1;
 				secondRank = 0;
+				insertForward = false;
 			}
 			else {
 				assert currentFace.id == edge1.rightFace.id;
 				firstRank = 0;
 				secondRank = 2;
+				insertForward = true;
 			}
-			edge2.leftFace = edge1.leftFace;
-			edge2.rightFace = edge1.rightFace;
 			edge2.nextEdge = edge1.nextEdge;
 			edge1.nextEdge = edge2;
 			edge2.previousEdge = edge1;
+			// update faces left and right of edge1
+			edge2.leftFace = edge1.leftFace;
+			edge2.rightFace = edge1.rightFace;
+			for (List<TSMEdge> edgeList : currentFace.edgeLists) {
+				ListIterator<TSMEdge> currentFaceIter = getIteratorFor(
+						edgeList, edge1, insertForward);
+				if (currentFaceIter != null) {
+					currentFaceIter.add(edge2);
+					break;
+				}
+			}
+			for (List<TSMEdge> edgeList : pathEntry.targetFace.edgeLists) {
+				ListIterator<TSMEdge> currentFaceIter = getIteratorFor(
+						edgeList, edge1, !insertForward);
+				if (currentFaceIter != null) {
+					currentFaceIter.add(edge2);
+					break;
+				}
+			}
 			// insert an edge from the current node to the new pseudo node
 			previousEdge = insertEdge(currentNode, currentRank, pseudoNode,
 					firstRank, currentFace, null, previousEdge,
@@ -455,60 +476,210 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 	}
 	
 	/**
+	 * Inserts an edge between two nodes and updates the affected faces.
 	 * 
-	 * @param sourceNode
-	 * @param sourceRank
-	 * @param targetNode
-	 * @param targetRank
-	 * @param face
-	 * @param edge
-	 * @param previousEdge
-	 * @param layoutEdge
-	 * @return
+	 * @param sourceNode source node of the new edge
+	 * @param sourceRank rank of the new edge at the source node
+	 * @param targetNode target node of the new edge
+	 * @param targetRank rank of the new edge at the target node
+	 * @param face face which is crossed by the new edge
+	 * @param insEdge new edge object, or null if it shall be created
+	 * @param previousEdge previous edge in a series of edges
+	 * @param layoutEdge reference to the layout edge from which the new
+	 *     edge is created
+	 * @return the new inserted edge
 	 */
 	private TSMEdge insertEdge(TSMNode sourceNode, int sourceRank,
-			TSMNode targetNode, int targetRank, TSMFace face, TSMEdge edge,
+			TSMNode targetNode, int targetRank, TSMFace face, TSMEdge insEdge,
 			TSMEdge previousEdge, KEdge layoutEdge) {
-		if (edge == null) {
-			edge = new TSMEdge(graph, sourceNode, targetNode, false, layoutEdge);
+		if (insEdge == null) {
+			insEdge = new TSMEdge(graph, sourceNode, targetNode, false, layoutEdge);
 		}
 		else {
-			edge.source = sourceNode;
-			edge.target = targetNode;
+			insEdge.source = sourceNode;
+			insEdge.target = targetNode;
 		}
 		if (previousEdge != null) {
-			previousEdge.nextEdge = edge;
-			edge.previousEdge = previousEdge;
+			previousEdge.nextEdge = insEdge;
+			insEdge.previousEdge = previousEdge;
+		}
+		
+		// update the crossed face
+		int sourceListIndex = getEdgeListIndexFor(face.edgeLists, sourceNode);
+		int targetListIndex = getEdgeListIndexFor(face.edgeLists, targetNode);
+		List<TSMEdge> sourceList = null, targetList = null;
+		ListIterator<TSMEdge> sourceIter = null, targetIter = null;
+		if (sourceListIndex > 0) {
+			sourceList = face.edgeLists.get(sourceListIndex);
+			sourceIter = getIteratorFor(sourceList, sourceNode, sourceRank);
+		}
+		if (targetListIndex > 0) {
+			targetList = face.edgeLists.get(targetListIndex);
+			targetIter = getIteratorFor(targetList, targetNode, targetRank);
+		}
+		
+		if (sourceList == null && targetList == null) {
+			List<TSMEdge> edgeList = new LinkedList<TSMEdge>();
+			edgeList.add(insEdge);
+			edgeList.add(insEdge);
+			face.edgeLists.add(edgeList);
+			insEdge.leftFace = face;
+			insEdge.rightFace = face;
+		}
+		else if (sourceList == null) {
+			targetIter.add(insEdge);
+			targetIter.add(insEdge);
+			insEdge.leftFace = face;
+			insEdge.rightFace = face;
+		}
+		else if (targetList == null) {
+			sourceIter.add(insEdge);
+			sourceIter.add(insEdge);
+			insEdge.leftFace = face;
+			insEdge.rightFace = face;
+		}
+		else if (sourceList == targetList) {
+			int sourceIndex = sourceIter.nextIndex();
+			targetIter.add(insEdge);
+			TSMFace newFace = new TSMFace(graph);
+			List<TSMEdge> newEdgeList = new LinkedList<TSMEdge>();
+			while (targetIter.hasNext() && targetIter.nextIndex() != sourceIndex) {
+				newEdgeList.add(targetIter.next());
+				targetIter.remove();
+			}
+			if (targetIter.nextIndex() != sourceIndex) {
+				targetIter = targetList.listIterator();
+				while (targetIter.nextIndex() < sourceIndex) {
+					newEdgeList.add(targetIter.next());
+					targetIter.remove();
+				}
+			}
+			newEdgeList.add(insEdge);
+			newFace.edgeLists.add(newEdgeList);
+			insEdge.leftFace = face;
+			insEdge.rightFace = newFace;
+		}
+		else {
+			int targetIndex = targetIter.nextIndex();
+			sourceIter.add(insEdge);
+			while (targetIter.hasNext()) {
+				sourceIter.add(targetIter.next());
+			}
+			targetIter = targetList.listIterator();
+			while (targetIter.nextIndex() < targetIndex) {
+				sourceIter.add(targetIter.next());
+			}
+			sourceIter.add(insEdge);
+			insEdge.leftFace = face;
+			insEdge.rightFace = face;
+			face.edgeLists.remove(targetListIndex);
 		}
 		
 		// insert the edge at the proper placings
-		sourceNode.edges.add(sourceRank, edge);
-		targetNode.edges.add(targetRank, edge);
+		sourceNode.edges.add(sourceRank, insEdge);
+		targetNode.edges.add(targetRank, insEdge);
 		
-		// update the crossed face
-		// TODO traverse all edges of the given face and look for the
-		//      source and target nodes
-		return edge;
+		return insEdge;
 	}
 	
 	/**
 	 * Gets a list iterator for the given list of edges, with the
-	 * current position after the given edge.
+	 * current position before or after the given edge.
 	 * 
 	 * @param edgeList list for which the iterator shall be created
 	 * @param edge edge at which the iterator shall point
-	 *     (with <code>previous()</code>)
+	 * @param forward if true, the iterator will be used in forward
+	 *     direction, else in backwards direction
 	 * @return iterator pointing at <code>edge</code>, or null if
 	 *     the edge was not found
 	 */
 	private ListIterator<TSMEdge> getIteratorFor(List<TSMEdge> edgeList,
-			TSMEdge edge) {
-		ListIterator<TSMEdge> edgeIter = edgeList.listIterator();
-		while (edgeIter.hasNext()) {
-			if (edgeIter.next() == edge)
-				return edgeIter;
+			TSMEdge edge, boolean forward) {
+		if (forward) {
+			ListIterator<TSMEdge> edgeIter = edgeList.listIterator();
+			while (edgeIter.hasNext()) {
+				if (edgeIter.next().id == edge.id)
+					return edgeIter;
+			}
+		}
+		else {
+			ListIterator<TSMEdge> edgeIter = edgeList.listIterator(edgeList.size());
+			while (edgeIter.hasPrevious()) {
+				if (edgeIter.previous().id == edge.id)
+					return edgeIter;
+			}
 		}
 		return null;
+	}
+
+	/**
+	 * Gets a list iterator for the given list of edges, with the current
+	 * position at the given rank. The list must not be empty.
+	 * 
+	 * @param edgeList list for which the iterator shall be created
+	 * @param node node for which the rank shall be valid
+	 * @param rank rank of the edge that is returned by calling
+	 *     <code>next()</code> on the resulting iterator
+	 * @return iterator pointing at the edge with rank <code>rank</code>
+	 *     of node <code>node</code>
+	 */
+	private ListIterator<TSMEdge> getIteratorFor(List<TSMEdge> edgeList,
+			TSMNode node, int rank) {
+		int edge1id, edge2id;
+		if (rank == 0) {
+			edge2id = node.edges.get(node.edges.size()-1).id;
+			edge1id = node.edges.get(0).id;
+		}
+		else {
+			ListIterator<TSMEdge> nodeEdgeIter = node.edges.listIterator(rank - 1);
+			edge2id = nodeEdgeIter.next().id;
+			edge1id = nodeEdgeIter.next().id;
+		}
+		
+		ListIterator<TSMEdge> edgeListIter = edgeList.listIterator();
+		boolean placingFound = false;
+		// the list is assumed to be non-empty
+		TSMEdge currentEdge = edgeListIter.next();
+		while (edgeListIter.hasNext()) {
+			TSMEdge nextEdge = edgeListIter.next();
+			if (currentEdge.id == edge1id && nextEdge.id == edge2id) {
+				edgeListIter.previous();
+				placingFound = true;
+				break;
+			}
+			currentEdge = nextEdge;
+		}
+		if (placingFound)
+			return edgeListIter;
+		else {
+			// return the last possible position
+			assert currentEdge.id == edge1id && edgeList.get(0).id == edge2id;
+			return edgeList.listIterator();
+		}
+	}
+	
+	/**
+	 * Finds the index of the edge list that contains an edge with the
+	 * given node as endpoint.
+	 * 
+	 * @param edgeLists list of edge lists
+	 * @param node node to look up
+	 * @return index of the edge list containing <code>node</code>,
+	 *     or -1 if the node was not found
+	 */
+	private int getEdgeListIndexFor(List<List<TSMEdge>> edgeLists,
+			TSMNode node) {
+		ListIterator<List<TSMEdge>> edgeListIter = edgeLists.listIterator();
+		while (edgeListIter.hasNext()) {
+			List<TSMEdge> nextList = edgeListIter.next();
+			for (TSMEdge edge : nextList) {
+				if (edge.source.id == node.id
+						|| edge.target.id == node.id) {
+					return edgeListIter.previousIndex();
+				}
+			}
+		}
+		return -1;
 	}
 	
 }

@@ -9,16 +9,12 @@ import java.util.List;
  * 
  * @author msp
  */
-public class TSMNode implements Comparable<TSMNode> {
+public class TSMNode extends TSMGraphElement implements Comparable<TSMNode> {
 
 	/** list of incident edges */
 	public List<TSMEdge> edges = new LinkedList<TSMEdge>();
 	/** object contained in this node, or null if there is none */
 	public Object object;
-	/** identifier of this node, determined at creation time */
-	public int id;
-	/** rank of this node, used by various algorithms */
-	public int rank = 0;
 	
 	/**
 	 * Creates a node containing the given object.

@@ -25,6 +25,8 @@ public class TSMGraph {
 
 	/** next available identifier for nodes */
 	int nextNodeId = 0;
+	/** next available identifier for edges */
+	int nextEdgeId = 0;
 	/** next available identifier for faces */
 	int nextFaceId = 0;
 	
