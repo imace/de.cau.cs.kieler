@@ -9,6 +9,8 @@ import de.cau.cs.kieler.klodd.orthogonal.structures.TSMGraph;
 
 
 /**
+ * Planarizer implementation that handles embedding constraints by
+ * performing EC expansion and EC planarity test.
  * 
  * @author msp
  */
