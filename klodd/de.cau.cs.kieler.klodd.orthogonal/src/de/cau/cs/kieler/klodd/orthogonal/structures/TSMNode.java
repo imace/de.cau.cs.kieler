@@ -9,7 +9,7 @@ import java.util.List;
  * 
  * @author msp
  */
-public class TSMNode extends TSMGraphElement implements Comparable<TSMNode> {
+public class TSMNode extends TSMGraphElement {
 
 	/** list of incident edges */
 	public List<TSMEdge> edges = new LinkedList<TSMEdge>();
@@ -37,25 +37,6 @@ public class TSMNode extends TSMGraphElement implements Comparable<TSMNode> {
 		graph.nodes.add(this);
 		this.object = null;
 		this.id = graph.nextNodeId++;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see java.lang.Comparable#compareTo(java.lang.Object)
-	 */
-	public int compareTo(TSMNode other) {
-		return this.id > other.id ? 1
-				: (this.id < other.id ? -1
-				: 0);
-	}
-	
-	/*
-	 * (non-Javadoc)
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
-	public boolean equals(Object other) {
-		return (other instanceof TSMNode)
-				&& ((TSMNode)other).id == this.id;
 	}
 	
 }

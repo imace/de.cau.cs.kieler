@@ -25,13 +25,4 @@ public class TSMFace extends TSMGraphElement {
 		this.id = graph.nextFaceId++;
 	}
 	
-	/*
-	 * (non-Javadoc)
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
-	public boolean equals(Object other) {
-		return (other instanceof TSMFace)
-				&& ((TSMFace)other).id == this.id;
-	}
-	
 }
