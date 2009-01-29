@@ -47,7 +47,7 @@
    <extension
          point="org.eclipse.ui.preferencePages">
       <page
-            category="edu.unikiel.rtsys.dataflow.diagram.general"
+            category="de.cau.cs.kieler.dataflow.diagram.general"
             class="dataflow.diagram.preferences.DiagramLayoutPreferencePage"
             id="de.cau.cs.kieler.dataflow.diagram.layout.preferences"
             name="Layout">
