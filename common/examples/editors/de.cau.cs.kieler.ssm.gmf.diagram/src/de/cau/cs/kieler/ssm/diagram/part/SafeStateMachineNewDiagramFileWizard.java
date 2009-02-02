@@ -140,6 +140,7 @@ public class SafeStateMachineNewDiagramFileWizard extends Wizard {
 								SafeStateMachineEditPart.MODEL_ID,
 								SafeStateMachineDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT);
 				diagramResource.getContents().add(diagram);
+				diagramResource.getContents().add(diagram.getElement());
 				return CommandResult.newOKCommandResult();
 			}
 		};

@@ -38,11 +38,6 @@ public class SafeStateMachineCreationWizard extends Wizard implements
 	/**
 	 * @generated
 	 */
-	protected SafeStateMachineCreationWizardPage domainModelFilePage;
-
-	/**
-	 * @generated
-	 */
 	protected Resource diagram;
 
 	/**
@@ -109,27 +104,6 @@ public class SafeStateMachineCreationWizard extends Wizard implements
 		diagramModelFilePage
 				.setDescription(Messages.SafeStateMachineCreationWizard_DiagramModelFilePageDescription);
 		addPage(diagramModelFilePage);
-
-		domainModelFilePage = new SafeStateMachineCreationWizardPage(
-				"DomainModelFile", getSelection(), "ssm") { //$NON-NLS-1$ //$NON-NLS-2$
-
-			public void setVisible(boolean visible) {
-				if (visible) {
-					String fileName = diagramModelFilePage.getFileName();
-					fileName = fileName.substring(0, fileName.length()
-							- ".ssm_diagram".length()); //$NON-NLS-1$
-					setFileName(SafeStateMachineDiagramEditorUtil
-							.getUniqueFileName(getContainerFullPath(),
-									fileName, "ssm")); //$NON-NLS-1$
-				}
-				super.setVisible(visible);
-			}
-		};
-		domainModelFilePage
-				.setTitle(Messages.SafeStateMachineCreationWizard_DomainModelFilePageTitle);
-		domainModelFilePage
-				.setDescription(Messages.SafeStateMachineCreationWizard_DomainModelFilePageDescription);
-		addPage(domainModelFilePage);
 	}
 
 	/**
@@ -141,8 +115,7 @@ public class SafeStateMachineCreationWizard extends Wizard implements
 			protected void execute(IProgressMonitor monitor)
 					throws CoreException, InterruptedException {
 				diagram = SafeStateMachineDiagramEditorUtil.createDiagram(
-						diagramModelFilePage.getURI(), domainModelFilePage
-								.getURI(), monitor);
+						diagramModelFilePage.getURI(), monitor);
 				if (isOpenNewlyCreatedDiagramEditor() && diagram != null) {
 					try {
 						SafeStateMachineDiagramEditorUtil.openDiagram(diagram);
