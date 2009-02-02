@@ -22,7 +22,7 @@ import org.osgi.framework.BundleContext;
 public class KimlSSMDiagramLayouterPlugin extends AbstractUIPlugin {
 
 	// The plug-in ID
-	public static final String PLUGIN_ID = "de.cau.cs.kieler.ssm.gmf.diagram.layouter";
+	public static final String PLUGIN_ID = "de.cau.cs.kieler.ssm.diagram.layouter";
 
 	// The shared instance
 	private static KimlSSMDiagramLayouterPlugin plugin;
