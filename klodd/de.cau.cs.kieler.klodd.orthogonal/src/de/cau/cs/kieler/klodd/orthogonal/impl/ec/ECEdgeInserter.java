@@ -143,9 +143,6 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 		int placingsCount = node.edges.size();
 		if (placingsCount <= 1) {
 			EdgePlacing placing = new EdgePlacing(0);
-			if (placingsCount == 0)
-				// TODO find an initial face more intelligently
-				placing.face = graph.externalFace;
 			List<EdgePlacing> placings = new LinkedList<EdgePlacing>();
 			placings.add(placing);
 			return placings;
@@ -321,37 +318,69 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 	 */
 	private DualPath shortestPath(TSMEdge insEdge, List<EdgePlacing> sourcePlacings,
 			List<EdgePlacing> targetPlacings) {
-		// determine the set of target faces
-		List<TSMFace> targetFaces = new LinkedList<TSMFace>();
-		for (EdgePlacing placing : targetPlacings) {
-			if (placing.face == null)
-				placing.face = insEdge.target.edges.get(placing.rank)
-						.getLeftFaceFrom(insEdge.target);
-			targetFaces.add(placing.face);
-		}
-		
-		// find the shortest path
 		DualPath shortestPath = new DualPath();
-		int shortestLength = Integer.MAX_VALUE;
-		for (EdgePlacing placing : sourcePlacings) {
-			if (placing.face == null)
-				placing.face = insEdge.source.edges.get(placing.rank)
-						.getLeftFaceFrom(insEdge.source);
-			List<DualPathEntry> path = bfsPath(placing.face, targetFaces);
-			if (path.size() < shortestLength) {
-				shortestPath.entries = path;
-				shortestLength = path.size();
-				shortestPath.sourcePlacing = placing;
+		// determine the sets of source and target faces
+		List<TSMFace> targetFaces = new LinkedList<TSMFace>();
+		boolean sourceEmpty = insEdge.source.edges.isEmpty();
+		boolean targetEmpty = insEdge.target.edges.isEmpty();
+		if (!sourceEmpty) {
+			for (EdgePlacing placing : sourcePlacings) {
+				if (placing.face == null)
+					placing.face = insEdge.source.edges.get(placing.rank)
+							.getLeftFaceFrom(insEdge.source);
+			}
+		}
+		if (!targetEmpty) {
+			for (EdgePlacing placing : targetPlacings) {
+				if (placing.face == null)
+					placing.face = insEdge.target.edges.get(placing.rank)
+							.getLeftFaceFrom(insEdge.target);
+				targetFaces.add(placing.face);
 			}
 		}
 		
-		// get a placing for the selected target face
-		TSMFace targetFace = shortestPath.entries.isEmpty()
-				? shortestPath.sourcePlacing.face
-				: shortestPath.entries.get(shortestLength-1).targetFace;
-		for (EdgePlacing placing : targetPlacings) {
-			if (placing.face.id == targetFace.id)
-				shortestPath.targetPlacing = placing;
+		if (sourceEmpty && targetEmpty) {
+			// put both the source and the target onto the external face
+			shortestPath.entries = new LinkedList<DualPathEntry>();
+			shortestPath.sourcePlacing = sourcePlacings.get(0);
+			shortestPath.sourcePlacing.face = graph.externalFace;
+			shortestPath.targetPlacing = targetPlacings.get(0);
+			shortestPath.targetPlacing.face = graph.externalFace;
+		}
+		else if (sourceEmpty) {
+			// choose an arbitrary placing of the target
+			shortestPath.entries = new LinkedList<DualPathEntry>();
+			shortestPath.sourcePlacing = sourcePlacings.get(0);
+			shortestPath.targetPlacing = targetPlacings.get(0);
+			shortestPath.sourcePlacing.face = shortestPath.targetPlacing.face;
+		}
+		else if (targetEmpty) {
+			// choose an arbitrary placing of the source
+			shortestPath.entries = new LinkedList<DualPathEntry>();
+			shortestPath.sourcePlacing = sourcePlacings.get(0);
+			shortestPath.targetPlacing = targetPlacings.get(0);
+			shortestPath.targetPlacing.face = shortestPath.sourcePlacing.face;
+		}
+		else {
+			// find the shortest path
+			int shortestLength = Integer.MAX_VALUE;
+			for (EdgePlacing placing : sourcePlacings) {
+				List<DualPathEntry> path = bfsPath(placing.face, targetFaces);
+				if (path.size() < shortestLength) {
+					shortestPath.entries = path;
+					shortestLength = path.size();
+					shortestPath.sourcePlacing = placing;
+				}
+			}
+			
+			// get a placing for the selected target face
+			TSMFace targetFace = shortestPath.entries.isEmpty()
+					? shortestPath.sourcePlacing.face
+					: shortestPath.entries.get(shortestLength-1).targetFace;
+			for (EdgePlacing placing : targetPlacings) {
+				if (placing.face.id == targetFace.id)
+					shortestPath.targetPlacing = placing;
+			}
 		}
 		return shortestPath;
 	}
@@ -372,9 +401,10 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 			if (targetFaces.contains(currentFace)) {
 				break;
 			}
-			for (List<TSMEdge> edgeList : currentFace.edgeLists) {
-				for (TSMEdge edge : edgeList)
-					bfsQueue.add(new DualPathEntry(edge, edge.getOpposed(currentFace)));
+			for (List<TSMFace.BorderEntry> border : currentFace.borders) {
+				for (TSMFace.BorderEntry entry : border)
+					bfsQueue.add(new DualPathEntry(entry.edge,
+							entry.edge.getOpposed(currentFace)));
 			}
 			DualPathEntry currentEntry = null;
 			do {
@@ -419,7 +449,7 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 			TSMNode oldTarget = edge1.target;
 			edge1.target = pseudoNode;
 			ListIterator<TSMEdge> oldTargetIter = getIteratorFor(
-					oldTarget.edges, edge1, true);
+					oldTarget.edges, edge1);
 			oldTargetIter.remove();
 			TSMEdge edge2 = new TSMEdge(graph, pseudoNode, oldTarget,
 					false, edge1.layoutEdge);
@@ -445,19 +475,29 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 			// update faces left and right of edge1
 			edge2.leftFace = edge1.leftFace;
 			edge2.rightFace = edge1.rightFace;
-			for (List<TSMEdge> edgeList : currentFace.edgeLists) {
-				ListIterator<TSMEdge> currentFaceIter = getIteratorFor(
-						edgeList, edge1, insertForward);
+			for (List<TSMFace.BorderEntry> border : currentFace.borders) {
+				ListIterator<TSMFace.BorderEntry> currentFaceIter =
+					getIteratorFor(border, edge1, insertForward);
 				if (currentFaceIter != null) {
-					currentFaceIter.add(edge2);
+					if (insertForward)
+						currentFaceIter.add(new TSMFace.BorderEntry(edge2,
+								edge2.source));
+					else
+						currentFaceIter.add(new TSMFace.BorderEntry(edge2,
+								edge2.target));
 					break;
 				}
 			}
-			for (List<TSMEdge> edgeList : pathEntry.targetFace.edgeLists) {
-				ListIterator<TSMEdge> currentFaceIter = getIteratorFor(
-						edgeList, edge1, !insertForward);
+			for (List<TSMFace.BorderEntry> border : pathEntry.targetFace.borders) {
+				ListIterator<TSMFace.BorderEntry> currentFaceIter =
+					getIteratorFor(border, edge1, !insertForward);
 				if (currentFaceIter != null) {
-					currentFaceIter.add(edge2);
+					if (insertForward)
+						currentFaceIter.add(new TSMFace.BorderEntry(edge2,
+								edge2.target));
+					else
+						currentFaceIter.add(new TSMFace.BorderEntry(edge2,
+								edge2.source));
 					break;
 				}
 			}
@@ -505,74 +545,74 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 		}
 		
 		// update the crossed face
-		int sourceListIndex = getEdgeListIndexFor(face.edgeLists, sourceNode);
-		int targetListIndex = getEdgeListIndexFor(face.edgeLists, targetNode);
-		List<TSMEdge> sourceList = null, targetList = null;
-		ListIterator<TSMEdge> sourceIter = null, targetIter = null;
-		if (sourceListIndex > 0) {
-			sourceList = face.edgeLists.get(sourceListIndex);
-			sourceIter = getIteratorFor(sourceList, sourceNode, sourceRank);
+		int sourceBorderIndex = getBorderIndexFor(face.borders, sourceNode);
+		int targetBorderIndex = getBorderIndexFor(face.borders, targetNode);
+		List<TSMFace.BorderEntry> sourceBorder = null, targetBorder = null;
+		ListIterator<TSMFace.BorderEntry> sourceIter = null, targetIter = null;
+		if (sourceBorderIndex > 0) {
+			sourceBorder = face.borders.get(sourceBorderIndex);
+			sourceIter = getIteratorFor(sourceBorder, sourceNode, sourceRank);
 		}
-		if (targetListIndex > 0) {
-			targetList = face.edgeLists.get(targetListIndex);
-			targetIter = getIteratorFor(targetList, targetNode, targetRank);
+		if (targetBorderIndex > 0) {
+			targetBorder = face.borders.get(targetBorderIndex);
+			targetIter = getIteratorFor(targetBorder, targetNode, targetRank);
 		}
 		
-		if (sourceList == null && targetList == null) {
-			List<TSMEdge> edgeList = new LinkedList<TSMEdge>();
-			edgeList.add(insEdge);
-			edgeList.add(insEdge);
-			face.edgeLists.add(edgeList);
+		if (sourceBorder == null && targetBorder == null) {
+			List<TSMFace.BorderEntry> newBorder = new LinkedList<TSMFace.BorderEntry>();
+			newBorder.add(new TSMFace.BorderEntry(insEdge, insEdge.source));
+			newBorder.add(new TSMFace.BorderEntry(insEdge, insEdge.target));
+			face.borders.add(newBorder);
 			insEdge.leftFace = face;
 			insEdge.rightFace = face;
 		}
-		else if (sourceList == null) {
-			targetIter.add(insEdge);
-			targetIter.add(insEdge);
+		else if (sourceBorder == null) {
+			targetIter.add(new TSMFace.BorderEntry(insEdge, insEdge.target));
+			targetIter.add(new TSMFace.BorderEntry(insEdge, insEdge.source));
 			insEdge.leftFace = face;
 			insEdge.rightFace = face;
 		}
-		else if (targetList == null) {
-			sourceIter.add(insEdge);
-			sourceIter.add(insEdge);
+		else if (targetBorder == null) {
+			sourceIter.add(new TSMFace.BorderEntry(insEdge, insEdge.source));
+			sourceIter.add(new TSMFace.BorderEntry(insEdge, insEdge.target));
 			insEdge.leftFace = face;
 			insEdge.rightFace = face;
 		}
-		else if (sourceList == targetList) {
+		else if (sourceBorder == targetBorder) {
 			int sourceIndex = sourceIter.nextIndex();
-			targetIter.add(insEdge);
+			targetIter.add(new TSMFace.BorderEntry(insEdge, insEdge.target));
 			TSMFace newFace = new TSMFace(graph);
-			List<TSMEdge> newEdgeList = new LinkedList<TSMEdge>();
+			List<TSMFace.BorderEntry> newBorder = new LinkedList<TSMFace.BorderEntry>();
 			while (targetIter.hasNext() && targetIter.nextIndex() != sourceIndex) {
-				newEdgeList.add(targetIter.next());
+				newBorder.add(targetIter.next());
 				targetIter.remove();
 			}
 			if (targetIter.nextIndex() != sourceIndex) {
-				targetIter = targetList.listIterator();
+				targetIter = targetBorder.listIterator();
 				while (targetIter.nextIndex() < sourceIndex) {
-					newEdgeList.add(targetIter.next());
+					newBorder.add(targetIter.next());
 					targetIter.remove();
 				}
 			}
-			newEdgeList.add(insEdge);
-			newFace.edgeLists.add(newEdgeList);
+			newBorder.add(new TSMFace.BorderEntry(insEdge, insEdge.source));
+			newFace.borders.add(newBorder);
 			insEdge.leftFace = face;
 			insEdge.rightFace = newFace;
 		}
 		else {
 			int targetIndex = targetIter.nextIndex();
-			sourceIter.add(insEdge);
+			sourceIter.add(new TSMFace.BorderEntry(insEdge, insEdge.source));
 			while (targetIter.hasNext()) {
 				sourceIter.add(targetIter.next());
 			}
-			targetIter = targetList.listIterator();
+			targetIter = targetBorder.listIterator();
 			while (targetIter.nextIndex() < targetIndex) {
 				sourceIter.add(targetIter.next());
 			}
-			sourceIter.add(insEdge);
+			sourceIter.add(new TSMFace.BorderEntry(insEdge, insEdge.target));
 			insEdge.leftFace = face;
 			insEdge.rightFace = face;
-			face.edgeLists.remove(targetListIndex);
+			face.borders.remove(targetBorderIndex);
 		}
 		
 		// insert the edge at the proper placings
@@ -588,43 +628,63 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 	 * 
 	 * @param edgeList list for which the iterator shall be created
 	 * @param edge edge at which the iterator shall point
-	 * @param forward if true, the iterator will be used in forward
-	 *     direction, else in backwards direction
 	 * @return iterator pointing at <code>edge</code>, or null if
 	 *     the edge was not found
 	 */
 	private ListIterator<TSMEdge> getIteratorFor(List<TSMEdge> edgeList,
-			TSMEdge edge, boolean forward) {
+			TSMEdge edge) {
+		ListIterator<TSMEdge> edgeIter = edgeList.listIterator();
+		while (edgeIter.hasNext()) {
+			if (edgeIter.next().id == edge.id)
+				return edgeIter;
+		}
+		return null;
+	}
+	
+	/**
+	 * Gets a list iterator for the given list of face border entries,
+	 * with the current position before or after the given edge.
+	 * 
+	 * @param border list of face border entries for which the iterator
+	 *     shall be created
+	 * @param edge edge at which the iterator shall point
+	 * @param forward if true, the list is traversed in forward direction,
+	 *     else backwards
+	 * @return iterator pointing at <code>edge</code>, or null if the
+	 *     edge was not found
+	 */
+	private ListIterator<TSMFace.BorderEntry> getIteratorFor(
+			List<TSMFace.BorderEntry> border, TSMEdge edge, boolean forward) {
 		if (forward) {
-			ListIterator<TSMEdge> edgeIter = edgeList.listIterator();
-			while (edgeIter.hasNext()) {
-				if (edgeIter.next().id == edge.id)
-					return edgeIter;
+			ListIterator<TSMFace.BorderEntry> borderIter = border.listIterator();
+			while (borderIter.hasNext()) {
+				if (borderIter.next().edge.id == edge.id)
+					return borderIter;
 			}
 		}
 		else {
-			ListIterator<TSMEdge> edgeIter = edgeList.listIterator(edgeList.size());
-			while (edgeIter.hasPrevious()) {
-				if (edgeIter.previous().id == edge.id)
-					return edgeIter;
+			ListIterator<TSMFace.BorderEntry> borderIter = border.listIterator(border.size());
+			while (borderIter.hasPrevious()) {
+				if (borderIter.previous().edge.id == edge.id)
+					return borderIter;
 			}
 		}
 		return null;
 	}
 
 	/**
-	 * Gets a list iterator for the given list of edges, with the current
+	 * Gets a list iterator for the given face border, with the current
 	 * position at the given rank. The list must not be empty.
 	 * 
-	 * @param edgeList list for which the iterator shall be created
+	 * @param border list for which the iterator shall be created
 	 * @param node node for which the rank shall be valid
 	 * @param rank rank of the edge that is returned by calling
 	 *     <code>next()</code> on the resulting iterator
 	 * @return iterator pointing at the edge with rank <code>rank</code>
 	 *     of node <code>node</code>
 	 */
-	private ListIterator<TSMEdge> getIteratorFor(List<TSMEdge> edgeList,
-			TSMNode node, int rank) {
+	private ListIterator<TSMFace.BorderEntry> getIteratorFor(
+			List<TSMFace.BorderEntry> border, TSMNode node, int rank) {
 		int edge1id, edge2id;
 		if (rank == 0) {
 			edge2id = node.edges.get(node.edges.size()-1).id;
@@ -636,46 +696,47 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 			edge1id = nodeEdgeIter.next().id;
 		}
 		
-		ListIterator<TSMEdge> edgeListIter = edgeList.listIterator();
+		ListIterator<TSMFace.BorderEntry> borderIter = border.listIterator();
 		boolean placingFound = false;
 		// the list is assumed to be non-empty
-		TSMEdge currentEdge = edgeListIter.next();
-		while (edgeListIter.hasNext()) {
-			TSMEdge nextEdge = edgeListIter.next();
-			if (currentEdge.id == edge1id && nextEdge.id == edge2id) {
-				edgeListIter.previous();
+		TSMFace.BorderEntry currentEntry = borderIter.next();
+		while (borderIter.hasNext()) {
+			TSMFace.BorderEntry nextEntry = borderIter.next();
+			if (currentEntry.edge.id == edge1id && nextEntry.edge.id == edge2id
+					&& currentEntry.node.id == node.id) {
+				borderIter.previous();
 				placingFound = true;
 				break;
 			}
-			currentEdge = nextEdge;
+			currentEntry = nextEntry;
 		}
 		if (placingFound)
-			return edgeListIter;
+			return borderIter;
 		else {
 			// return the last possible position
-			assert currentEdge.id == edge1id && edgeList.get(0).id == edge2id;
-			return edgeList.listIterator();
+			assert currentEntry.edge.id == edge1id
+					&& border.get(0).edge.id == edge2id;
+			return border.listIterator();
 		}
 	}
 	
 	/**
-	 * Finds the index of the edge list that contains an edge with the
+	 * Finds the index of the face border that contains an edge with the
 	 * given node as endpoint.
 	 * 
-	 * @param edgeLists list of edge lists
+	 * @param borders list of face borders
 	 * @param node node to look up
-	 * @return index of the edge list containing <code>node</code>,
+	 * @return index of the face border containing <code>node</code>,
 	 *     or -1 if the node was not found
 	 */
-	private int getEdgeListIndexFor(List<List<TSMEdge>> edgeLists,
+	private int getBorderIndexFor(List<List<TSMFace.BorderEntry>> borders,
 			TSMNode node) {
-		ListIterator<List<TSMEdge>> edgeListIter = edgeLists.listIterator();
-		while (edgeListIter.hasNext()) {
-			List<TSMEdge> nextList = edgeListIter.next();
-			for (TSMEdge edge : nextList) {
-				if (edge.source.id == node.id
-						|| edge.target.id == node.id) {
-					return edgeListIter.previousIndex();
+		ListIterator<List<TSMFace.BorderEntry>> borderIter = borders.listIterator();
+		while (borderIter.hasNext()) {
+			List<TSMFace.BorderEntry> nextBorder = borderIter.next();
+			for (TSMFace.BorderEntry entry : nextBorder) {
+				if (entry.node.id == node.id) {
+					return borderIter.previousIndex();
 				}
 			}
 		}

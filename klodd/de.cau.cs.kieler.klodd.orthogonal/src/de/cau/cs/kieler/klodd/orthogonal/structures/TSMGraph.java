@@ -21,7 +21,7 @@ public class TSMGraph {
 	/** list of internal faces in this TSM graph */
 	public List<TSMFace> faces = new LinkedList<TSMFace>();
 	/** the external face of this TSM graph */
-	public TSMFace externalFace = new TSMFace(this);
+	public TSMFace externalFace = new TSMFace(this, false);
 
 	/** next available identifier for nodes */
 	int nextNodeId = 0;
