@@ -55,12 +55,12 @@ public class PreferencePage extends FieldEditorPreferencePage implements
 		Group options = new Group(this.getFieldEditorParent(), SWT.NONE);
 		options.setText("General Options:");
 
-		addField(new BooleanFieldEditor(
-				KimlLayoutPreferenceConstants.PREF_GROUP_EVERY_SINGLE_ELEMENT,
-				"Enable grouping for every single element", options));
-		Label descriptionGroupSingle = new Label(options, SWT.WRAP);
-		descriptionGroupSingle
-				.setText("If checked, then it is possible to apply grouping and layout information to every single element. Note that this is then the only way to do this. Select several elemets and set grouping/layout information to them.");
+//		addField(new BooleanFieldEditor(
+//				KimlLayoutPreferenceConstants.PREF_GROUP_EVERY_SINGLE_ELEMENT,
+//				"Enable grouping for every single element", options));
+//		Label descriptionGroupSingle = new Label(options, SWT.WRAP);
+//		descriptionGroupSingle
+//				.setText("If checked, then it is possible to apply grouping and layout information to every single element. Note that this is then the only way to do this. Select several elemets and set grouping/layout information to them.");
 
 		addField(new BooleanFieldEditor(
 				PreferenceConstants.PREF_ALTERNATING_HV_LAYOUT,
