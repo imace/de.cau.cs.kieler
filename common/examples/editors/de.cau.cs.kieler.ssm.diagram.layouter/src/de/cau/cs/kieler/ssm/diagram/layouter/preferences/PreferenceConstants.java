@@ -7,7 +7,7 @@
  * Author: Arne Schipper, ars@informatik.uni-kiel.de 
  *
  *******************************************************************************/
-package de.cau.cs.kieler.ssm.gmf.diagram.layouter.preferences;
+package de.cau.cs.kieler.ssm.diagram.layouter.preferences;
 
 /**
  * Constant definitions for the SSM Diagram Layouter preferences.

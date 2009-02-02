@@ -7,13 +7,13 @@
  * Author: Arne Schipper, ars@informatik.uni-kiel.de 
  *
  *******************************************************************************/
-package de.cau.cs.kieler.ssm.gmf.diagram.layouter.preferences;
+package de.cau.cs.kieler.ssm.diagram.layouter.preferences;
 
 
 import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
 import org.eclipse.jface.preference.IPreferenceStore;
 
-import de.cau.cs.kieler.ssm.gmf.diagram.layouter.KimlSSMDiagramLayouterPlugin;
+import de.cau.cs.kieler.ssm.diagram.layouter.KimlSSMDiagramLayouterPlugin;
 
 
 
