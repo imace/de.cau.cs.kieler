@@ -11,19 +11,21 @@ package de.cau.cs.kieler.kiml.ui.helpers;
 
 import java.util.Map;
 
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Insets;
 import org.eclipse.draw2d.geometry.Point;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gef.GraphicalEditPart;
 import org.eclipse.gef.NodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ConnectionEditPart;
+import org.eclipse.gmf.runtime.notation.impl.ViewImpl;
 
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KDimension;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KInsets;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutGraph;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPoint;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphFactory;
-
 
 /**
  * Static helper class which fetches labels of EditParts of a GMF model through
@@ -48,8 +50,11 @@ public class KimlCommonHelper {
 
 		if (graphicalEditPart instanceof NodeEditPart) {
 
-			Map<String, String> labelMap = (Map<String, String>) ((NodeEditPart) graphicalEditPart)
-					.getAdapter(Map.class);
+			EObject obj = ((ViewImpl) graphicalEditPart.getModel())
+					.getElement();
+
+			Map<String, String> labelMap = (Map<String, String>) Platform
+					.getAdapterManager().getAdapter(obj, Map.class);
 			if (labelMap != null && labelMap.get("SHORT_LABEL") != null) {
 				return labelMap.get("SHORT_LABEL");
 			} else
@@ -71,8 +76,10 @@ public class KimlCommonHelper {
 
 		if (nodeEditPart instanceof NodeEditPart) {
 
-			Map<String, String> labelMap = (Map<String, String>) ((NodeEditPart) nodeEditPart)
-					.getAdapter(Map.class);
+			EObject obj = ((ViewImpl) nodeEditPart.getModel()).getElement();
+
+			Map<String, String> labelMap = (Map<String, String>) Platform
+					.getAdapterManager().getAdapter(obj, Map.class);
 			if (labelMap != null && labelMap.get("LONG_LABEL") != null) {
 				return labelMap.get("LONG_LABEL");
 			} else
@@ -94,8 +101,11 @@ public class KimlCommonHelper {
 
 		if (connectionEditPart instanceof ConnectionEditPart) {
 
-			Map<String, String> labelMap = (Map<String, String>) ((ConnectionEditPart) connectionEditPart)
-					.getAdapter(Map.class);
+			EObject obj = ((ViewImpl) connectionEditPart.getModel())
+					.getElement();
+
+			Map<String, String> labelMap = (Map<String, String>) Platform
+					.getAdapterManager().getAdapter(obj, Map.class);
 			if (labelMap != null && labelMap.get("MID_LABEL") != null) {
 				return labelMap.get("MID_LABEL");
 			} else
@@ -117,8 +127,11 @@ public class KimlCommonHelper {
 
 		if (connectionEditPart instanceof ConnectionEditPart) {
 
-			Map<String, String> labelMap = (Map<String, String>) ((ConnectionEditPart) connectionEditPart)
-					.getAdapter(Map.class);
+			EObject obj = ((ViewImpl) connectionEditPart.getModel())
+					.getElement();
+
+			Map<String, String> labelMap = (Map<String, String>) Platform
+					.getAdapterManager().getAdapter(obj, Map.class);
 			if (labelMap != null && labelMap.get("TAIL_LABEL") != null) {
 				return labelMap.get("TAIL_LABEL");
 			} else
@@ -140,8 +153,11 @@ public class KimlCommonHelper {
 
 		if (connectionEditPart instanceof ConnectionEditPart) {
 
-			Map<String, String> labelMap = (Map<String, String>) ((ConnectionEditPart) connectionEditPart)
-					.getAdapter(Map.class);
+			EObject obj = ((ViewImpl) connectionEditPart.getModel())
+					.getElement();
+
+			Map<String, String> labelMap = (Map<String, String>) Platform
+					.getAdapterManager().getAdapter(obj, Map.class);
 			if (labelMap != null && labelMap.get("HEAD_LABEL") != null) {
 				return labelMap.get("HEAD_LABEL");
 			} else
