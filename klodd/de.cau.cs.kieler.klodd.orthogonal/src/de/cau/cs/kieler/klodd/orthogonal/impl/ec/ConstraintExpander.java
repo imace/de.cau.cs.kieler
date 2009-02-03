@@ -65,7 +65,7 @@ public class ConstraintExpander extends AbstractAlgorithm {
 	 * @param nodeGroup layout node to process
 	 */
 	private void expandNode(KNodeGroup nodeGroup) {
-		TSMNode tsmNode = new TSMNode(tsmGraph, nodeGroup);
+		TSMNode tsmNode = new TSMNode(tsmGraph, TSMNode.Type.LAYOUT, nodeGroup);
 		for (KEdge edge : nodeGroup.getOutgoingEdges()) {
 			registerEdge(tsmNode, edge, true);
 		}
@@ -92,7 +92,8 @@ public class ConstraintExpander extends AbstractAlgorithm {
 			break;
 		case GROUPING:
 			// create a single node and connect children with it
-			TSMNode groupingNode = new TSMNode(tsmGraph, constraint);
+			TSMNode groupingNode = new TSMNode(tsmGraph, TSMNode.Type.ECEXPANSION,
+					constraint);
 			if (parentNode != null) {
 				new TSMEdge(tsmGraph, parentNode, groupingNode, true);
 			}
@@ -103,20 +104,21 @@ public class ConstraintExpander extends AbstractAlgorithm {
 		case ORIENTED:
 		case MIRROR:
 			// for oriented and mirrored constraints a wheel gadget is created
-			TSMNode hubNode = new TSMNode(tsmGraph, constraint);
+			TSMNode hubNode = new TSMNode(tsmGraph, TSMNode.Type.ECEXPANSION,
+					constraint);
 			TSMNode firstNode = null, lastNode = null;
 			if (parentNode != null) {
-				firstNode = new TSMNode(tsmGraph);
+				firstNode = new TSMNode(tsmGraph, TSMNode.Type.ECEXPANSION);
 				new TSMEdge(tsmGraph, firstNode, hubNode, true);
-				lastNode = new TSMNode(tsmGraph);
+				lastNode = new TSMNode(tsmGraph, TSMNode.Type.ECEXPANSION);
 				new TSMEdge(tsmGraph, hubNode, lastNode, true);
 				new TSMEdge(tsmGraph, firstNode, lastNode, true);
 				new TSMEdge(tsmGraph, parentNode, firstNode, true);
 			}
 			for (EmbeddingConstraint childConstraint : constraint.children) {
-				TSMNode xNode = new TSMNode(tsmGraph);
+				TSMNode xNode = new TSMNode(tsmGraph, TSMNode.Type.ECEXPANSION);
 				new TSMEdge(tsmGraph, xNode, hubNode, true);
-				TSMNode yNode = new TSMNode(tsmGraph);
+				TSMNode yNode = new TSMNode(tsmGraph, TSMNode.Type.ECEXPANSION);
 				new TSMEdge(tsmGraph, hubNode, yNode, true);
 				new TSMEdge(tsmGraph, xNode, yNode, true);
 				if (lastNode == null)

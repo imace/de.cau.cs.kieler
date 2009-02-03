@@ -36,15 +36,23 @@ public class OrthogonalDataflowLayoutProvider extends
 	public void doLayout(KNodeGroup nodeGroup) {
 		// get the currently configured modules
 		updateModules();
+		
+		long startTime = System.nanoTime();
 
 		// perform the planarization phase
 		TSMGraph tsmGraph = planarizer.planarize(nodeGroup);
 		// perform the orthogonalization phase
 		orthogonalizer.orthogonalize(tsmGraph);
 		// perform the compaction phase
-		//compacter.compact(tsmGraph);
+		compacter.compact(tsmGraph);
 		// apply layout information to the original graph
 		tsmGraph.applyLayout();
+		
+		double executionTime = (double)(System.nanoTime() - startTime) * 1e-9;
+		if (executionTime >= 1.0)
+			System.out.println("Execution time (" + nodeGroup.getSubNodeGroups().size() + " nodes): " + executionTime + " s");
+		else
+			System.out.println("Execution time (" + nodeGroup.getSubNodeGroups().size() + " nodes): " + executionTime * 1000 + " ms");
 	}
 
 	/* (non-Javadoc)
@@ -65,7 +73,8 @@ public class OrthogonalDataflowLayoutProvider extends
 	private void updateModules() {
 		planarizer = new PortConstraintsPlanarizer(new EdgeInsertionECPlanarizer());
 		orthogonalizer = new KandinskyLPOrthogonalizer();
-		compacter = null;
+		compacter = new NormalizingCompacter(new RefiningCompacter(
+				new FastRefinedCompacter()));
 	}
 
 }

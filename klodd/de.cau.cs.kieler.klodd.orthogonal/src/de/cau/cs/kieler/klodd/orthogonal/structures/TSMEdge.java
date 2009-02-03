@@ -1,5 +1,8 @@
 package de.cau.cs.kieler.klodd.orthogonal.structures;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdge;
 
 /**
@@ -10,6 +13,30 @@ import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdge;
  */
 public class TSMEdge extends TSMGraphElement {
 
+	/**
+	 * Definition of an edge bend for orthogonal drawing.
+	 */
+	public static class Bend {
+		/** Type of edge bend, from the perspective of the source node */
+		public enum Type {
+			LEFT, RIGHT
+		}
+		/** the type of edge bend */
+		public Type type;
+		/** the x coordinate position */
+		public float xpos;
+		/** the y coordinate position */
+		public float ypos;
+		
+		/**
+		 * Creates an edge bend of given type.
+		 * @param type type of edge bend
+		 */
+		public Bend(Type type) {
+			this.type = type;
+		}
+	}
+	
 	/** source node */
 	public TSMNode source;
 	/** target node */
@@ -24,6 +51,8 @@ public class TSMEdge extends TSMGraphElement {
 	public TSMEdge previousEdge;
 	/** the next edge of a split edge */
 	public TSMEdge nextEdge;
+	/** the bends of this edge */
+	public List<Bend> bends = new LinkedList<Bend>();
 	
 	/**
 	 * Creates an edge connecting two existing nodes, with a layout graph

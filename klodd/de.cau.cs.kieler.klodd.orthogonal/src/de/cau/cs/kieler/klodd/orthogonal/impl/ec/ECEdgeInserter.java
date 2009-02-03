@@ -443,19 +443,19 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 		int currentRank = path.sourcePlacing.rank;
 		TSMEdge previousEdge = null;
 		for (DualPathEntry pathEntry : path.entries) {
-			// insert a pseudo node into the currently crossed edge
-			TSMNode pseudoNode = new TSMNode(graph);
+			// insert a dummy node into the currently crossed edge
+			TSMNode dummyNode = new TSMNode(graph, TSMNode.Type.CROSSING);
 			TSMEdge edge1 = pathEntry.edge;
 			TSMNode oldTarget = edge1.target;
-			edge1.target = pseudoNode;
+			edge1.target = dummyNode;
 			ListIterator<TSMEdge> oldTargetIter = getIteratorFor(
 					oldTarget.edges, edge1);
 			oldTargetIter.remove();
-			TSMEdge edge2 = new TSMEdge(graph, pseudoNode, oldTarget,
+			TSMEdge edge2 = new TSMEdge(graph, dummyNode, oldTarget,
 					false, edge1.layoutEdge);
 			oldTargetIter.add(edge2);
-			pseudoNode.edges.add(edge1);
-			pseudoNode.edges.add(edge2);
+			dummyNode.edges.add(edge1);
+			dummyNode.edges.add(edge2);
 			int firstRank, secondRank;
 			boolean insertForward;
 			if (currentFace.id == edge1.leftFace.id) {
@@ -502,10 +502,10 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 				}
 			}
 			// insert an edge from the current node to the new pseudo node
-			previousEdge = insertEdge(currentNode, currentRank, pseudoNode,
+			previousEdge = insertEdge(currentNode, currentRank, dummyNode,
 					firstRank, currentFace, null, previousEdge,
 					insEdge.layoutEdge);
-			currentNode = pseudoNode;
+			currentNode = dummyNode;
 			currentRank = secondRank;
 			currentFace = pathEntry.targetFace;
 		}

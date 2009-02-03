@@ -84,7 +84,7 @@ public class EdgeInsertionECPlanarizer extends AbstractAlgorithm implements
 		// create TSM nodes
 		nodeGroup2TSMNodeMap = new HashMap<KNodeGroup, TSMNode>();
 		for (KNodeGroup child : parentGroup.getSubNodeGroups()) {
-			TSMNode tsmNode = new TSMNode(tsmGraph, child);
+			TSMNode tsmNode = new TSMNode(tsmGraph, TSMNode.Type.LAYOUT, child);
 			nodeGroup2TSMNodeMap.put(child, tsmNode);
 		}
 		// create TSM edges

@@ -8,6 +8,7 @@ import lpsolve.LpSolveException;
 import de.cau.cs.kieler.klodd.core.algorithms.AbstractAlgorithm;
 import de.cau.cs.kieler.klodd.orthogonal.modules.IOrthogonalizer;
 import de.cau.cs.kieler.klodd.orthogonal.structures.*;
+import de.cau.cs.kieler.klodd.orthogonal.structures.TSMEdge.Bend;
 
 /**
  * Orthogonalizer implementation that uses LP methods to solve the
@@ -255,6 +256,13 @@ public class KandinskyLPOrthogonalizer extends AbstractAlgorithm implements
 		for (TSMEdge edge : graph.edges) {
 			setK5Constraint(edge, ilp, i);
 			i += 6;
+		}
+		
+		ilp.setAddRowmode(true);
+		// add constraints for dummy nodes
+		for (TSMNode node : graph.nodes) {
+			if (node.object == null)
+				addDummyNodeConstraint(node, ilp);
 		}
 
 		return ilp;
@@ -512,6 +520,37 @@ public class KandinskyLPOrthogonalizer extends AbstractAlgorithm implements
 	}
 	
 	/**
+	 * Creates a dummy node constraint for the given node. This adds four
+	 * new rows to the ILP instance.
+	 * 
+	 * @param node node for which the constraint shall be created
+	 * @param ilp currently processed ILP instance
+	 * @throws LpSolveException if the lp_solve library reports a failure
+	 */
+	private void addDummyNodeConstraint(TSMNode node, LpSolve ilp)
+			throws LpSolveException {
+		assert node.edges.size() == 4;
+		double[] row = new double[1];
+		int[] rowIndex = new int[1];
+		for (TSMEdge edge : node.edges) {
+			row[0] = 1;
+			if (edge.source.id == node.id
+					&& (edge.target.id != node.id || edge.rank != 1)) {
+				rowIndex[0] = cols.sourceAnchor.start + edge.id;
+				if (edge.target.id == node.id)
+					edge.rank = 1;
+			}
+			else if (edge.target.id == node.id
+					&& (edge.source.id != node.id || edge.rank != -1)) {
+				rowIndex[0] = cols.targetAnchor.start + edge.id;
+				if (edge.source.id == node.id)
+					edge.rank = -1;
+			}
+			ilp.addConstraintex(1, row, rowIndex, LpSolve.EQ, 1);
+		}
+	}
+	
+	/**
 	 * Applies the ILP solution to the given graph.
 	 * 
 	 * @param graph graph to which the solution should be applied
@@ -519,13 +558,30 @@ public class KandinskyLPOrthogonalizer extends AbstractAlgorithm implements
 	 * @throws LpSolveException if the lp_solve library reports a failure
 	 */
 	private void applySolution(TSMGraph graph, LpSolve ilp) throws LpSolveException {
-		/* example
-		double[] solution = new double[1 + 2 + 2];
+		int rowCount = ilp.getNrows();
+		double[] solution = new double[1 + rowCount + ilp.getNcolumns()];
 		ilp.getPrimalSolution(solution);
-		System.out.println("Optimal solution:\n  objective function value "
-				+ solution[0] + "\n  constraint values "
-				+ solution[1] + ", " + solution[2]
-				+ "\n  variable values " + solution[3] + ", " + solution[4]);*/
+		for (TSMEdge edge : graph.edges) {
+			// add all bends to the current edge
+			if (solution[rowCount + cols.forwSourceLeft.start + edge.id] > 0.5)
+				edge.bends.add(new Bend(Bend.Type.LEFT));
+			if (solution[rowCount + cols.forwSourceRight.start + edge.id] > 0.5)
+				edge.bends.add(new Bend(Bend.Type.RIGHT));
+			long faceLeftBends = Math.round(solution[rowCount
+			        + cols.forwFaceLeft.start + edge.id]);
+			for (int i = 0; i < faceLeftBends; i++) {
+				edge.bends.add(new Bend(Bend.Type.LEFT));
+			}
+			long faceRightBends = Math.round(solution[rowCount
+			        + cols.forwFaceRight.start + edge.id]);
+			for (int i = 0; i < faceRightBends; i++) {
+				edge.bends.add(new Bend(Bend.Type.RIGHT));
+			}
+			if (solution[rowCount + cols.forwTargetLeft.start + edge.id] > 0.5)
+				edge.bends.add(new Bend(Bend.Type.LEFT));
+			if (solution[rowCount + cols.forwTargetRight.start + edge.id] > 0.5)
+				edge.bends.add(new Bend(Bend.Type.RIGHT));
+		}
 	}
 
 }
