@@ -14,7 +14,7 @@ public class TSMFace extends TSMGraphElement {
 	/**
 	 * An entry of a list associated with a face.
 	 */
-	public static class BorderEntry {
+	public class BorderEntry {
 		/** an edge bordering this face */
 		public TSMEdge edge;
 		/** the first node encountered when passing the edge with this
@@ -31,6 +31,31 @@ public class TSMFace extends TSMGraphElement {
 		public BorderEntry(TSMEdge edge, TSMNode node) {
 			this.edge = edge;
 			this.node = node;
+		}
+		
+		/**
+		 * Creates a border entry copying an existing one.
+		 * 
+		 * @param entry border entry to copy
+		 */
+		public BorderEntry(BorderEntry entry) {
+			this.edge = entry.edge;
+			this.node = entry.node;
+		}
+
+		/**
+		 * Returns the opposed face, as seen from the containing face.
+		 * 
+		 * @return the right face if the containing face is left of
+		 *     the bordering edge, else the left face 
+		 */
+		public TSMFace opposed() {
+			if (edge.leftFace.id == TSMFace.this.id)
+				return edge.rightFace;
+			else {
+				assert edge.rightFace.id == TSMFace.this.id;
+				return edge.leftFace;
+			}
 		}
 	}
 	

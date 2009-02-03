@@ -51,12 +51,12 @@ public class GraphSection {
 	 * Removes the given edge from the incidence lists of its source
 	 * and target.
 	 * 
-	 * @param edge edge to remove from this graph section.
+	 * @param edgeEntry edge entry to remove from this graph section
 	 */
-	public void removeEdge(TSMEdge edge) {
-		edge.source.edges.remove(edge);
-		edge.target.edges.remove(edge);
-		removedEdges.add(edge);
+	public void removeEdge(TSMNode.IncEntry edgeEntry) {
+		edgeEntry.edge.source.incidence.remove(edgeEntry);
+		edgeEntry.edge.target.incidence.remove(edgeEntry);
+		removedEdges.add(edgeEntry.edge);
 	}
 	
 	/**
@@ -64,8 +64,7 @@ public class GraphSection {
 	 */
 	public void restoreEdges() {
 		for (TSMEdge edge : removedEdges) {
-			edge.source.edges.add(edge);
-			edge.target.edges.add(edge);
+			edge.connectNodes();
 		}
 		removedEdges.clear();
 	}

@@ -43,7 +43,7 @@ public class ConstraintExpander extends AbstractAlgorithm {
 	 */
 	public TSMGraph expand(KNodeGroup parentGroup,
 			Map<KNodeGroup, EmbeddingConstraint> constraintsMap) {
-		tsmGraph = new TSMGraph(parentGroup);
+		tsmGraph = new TSMGraph();
 		
 		for (KNodeGroup child : parentGroup.getSubNodeGroups()) {
 			EmbeddingConstraint constraint = constraintsMap.get(child);
@@ -151,7 +151,8 @@ public class ConstraintExpander extends AbstractAlgorithm {
 				outgoing2NodeMap.put(kEdge, tsmNode);
 			}
 			else {
-				new TSMEdge(tsmGraph, tsmNode, endPoint, true, kEdge);
+				TSMEdge edge = new TSMEdge(tsmGraph, tsmNode, endPoint, kEdge);
+				edge.connectNodes();
 			}
 		}
 		else {
@@ -160,7 +161,8 @@ public class ConstraintExpander extends AbstractAlgorithm {
 				incoming2NodeMap.put(kEdge, tsmNode);
 			}
 			else {
-				new TSMEdge(tsmGraph, endPoint, tsmNode, true, kEdge);
+				TSMEdge edge = new TSMEdge(tsmGraph, endPoint, tsmNode, kEdge);
+				edge.connectNodes();
 			}
 		}
 	}

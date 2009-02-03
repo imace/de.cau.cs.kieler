@@ -70,7 +70,7 @@ public class HopcroftTarjanPlanarityTester extends AbstractAlgorithm implements
 		
 		// the first edge of the first DFS node is used as start for
 		// the recursive subroutine
-		TSMEdge edge0 = node0.edges.get(0);
+		TSMEdge edge0 = node0.incidence.get(0).edge;
 		List<TSMNode> attachments = stronglyPlanar(edge0, node0);
 		
 		return attachments != null;
@@ -88,12 +88,12 @@ public class HopcroftTarjanPlanarityTester extends AbstractAlgorithm implements
 		node.rank = nextDfsnum++;
 		lowpt[node.rank] = node.rank;
 		lowpt2[node.rank] = node.rank;
-		List<TSMEdge> edgesToRemove = null;
-		for (TSMEdge edge : node.edges) {
-			TSMNode endpoint = edge.getEndpoint(node);
+		List<TSMNode.IncEntry> edgesToRemove = null;
+		for (TSMNode.IncEntry edgeEntry : node.incidence) {
+			TSMNode endpoint = edgeEntry.endpoint();
 			if (biconnectedSection.contains(endpoint)) {
 				if (endpoint.rank < 0) {
-					edge.rank = TREE_EDGE;
+					edgeEntry.edge.rank = TREE_EDGE;
 					edgeCount = dfsVisit(endpoint) + 1;
 					if (lowpt[endpoint.rank] < lowpt[node.rank]) {
 						lowpt2[node.rank] = lowpt[node.rank];
@@ -101,7 +101,7 @@ public class HopcroftTarjanPlanarityTester extends AbstractAlgorithm implements
 					}
 				}
 				else if (endpoint.rank >= node.rank) {
-					edge.rank = BACK_EDGE;
+					edgeEntry.edge.rank = BACK_EDGE;
 					edgeCount++;
 					if (node.rank < lowpt[endpoint.rank]) {
 						lowpt2[endpoint.rank] = lowpt[endpoint.rank];
@@ -111,14 +111,14 @@ public class HopcroftTarjanPlanarityTester extends AbstractAlgorithm implements
 			}
 			else {
 				if (edgesToRemove == null)
-					edgesToRemove = new LinkedList<TSMEdge>();
-				edgesToRemove.add(edge);
+					edgesToRemove = new LinkedList<TSMNode.IncEntry>();
+				edgesToRemove.add(edgeEntry);
 			}
 		}
 		// remove marked edges
 		if (edgesToRemove != null) {
-			for (TSMEdge edge : edgesToRemove) {
-				biconnectedSection.removeEdge(edge);
+			for (TSMNode.IncEntry edgeEntry : edgesToRemove) {
+				biconnectedSection.removeEdge(edgeEntry);
 			}
 		}
 		return edgeCount;
@@ -130,17 +130,17 @@ public class HopcroftTarjanPlanarityTester extends AbstractAlgorithm implements
 	 */
 	private void reorderEdges() {
 		for (final TSMNode node : biconnectedSection.nodes) {
-			Collections.sort(node.edges, new Comparator<TSMEdge>() {
-				public int compare(TSMEdge edge1, TSMEdge edge2) {
+			Collections.sort(node.incidence, new Comparator<TSMNode.IncEntry>() {
+				public int compare(TSMNode.IncEntry edge1, TSMNode.IncEntry edge2) {
 					int value1 = value(edge1);
 					int value2 = value(edge2);
 					return value1 > value2 ? 1
 							: (value1 < value2 ? -1
 							: 0);
 				}
-				private int value(TSMEdge edge) {
-					TSMNode endpoint = edge.getEndpoint(node);
-					if (edge.rank == TREE_EDGE) {
+				private int value(TSMNode.IncEntry edgeEntry) {
+					TSMNode endpoint = edgeEntry.endpoint();
+					if (edgeEntry.edge.rank == TREE_EDGE) {
 						if (node.rank < endpoint.rank) {
 							if (lowpt2[endpoint.rank] >= node.rank)
 								return 2 * lowpt[endpoint.rank];
@@ -150,7 +150,7 @@ public class HopcroftTarjanPlanarityTester extends AbstractAlgorithm implements
 						else return Integer.MAX_VALUE;
 					}
 					else {
-						assert edge.rank == BACK_EDGE;
+						assert edgeEntry.edge.rank == BACK_EDGE;
 						if (node.rank >= endpoint.rank)
 							return 2 * endpoint.rank;
 						else return Integer.MAX_VALUE;
@@ -187,7 +187,13 @@ public class HopcroftTarjanPlanarityTester extends AbstractAlgorithm implements
 	 *     current segment is not strongly planar 
 	 */
 	private ConcatenableList<TSMNode> stronglyPlanar(TSMEdge edge0, TSMNode x0) {
-		TSMNode y0 = edge0.getEndpoint(x0);
+		TSMNode y0;
+		if (edge0.source.id == x0.id)
+			y0 = edge0.target;
+		else {
+			assert edge0.target.id == x0.id;
+			y0 = edge0.source;
+		}
 		// construct the spine of a cycle that starts at (x0, y0)
 		LinkedList<TSMNode> spine = buildSpine(x0, y0);
 		spine.addFirst(x0);
@@ -196,25 +202,29 @@ public class HopcroftTarjanPlanarityTester extends AbstractAlgorithm implements
 		ListIterator<TSMNode> spineIter = spine.listIterator(spine.size());
 		while (spineIter.previousIndex() > 0) {
 			TSMNode spineNode = spineIter.previous();
-			ListIterator<TSMEdge> edgeIter = spineNode.edges.listIterator(1);
+			ListIterator<TSMNode.IncEntry> edgeIter = spineNode.incidence.listIterator(1);
 			while (edgeIter.hasNext()) {
-				TSMEdge emanatingEdge = edgeIter.next();
-				TSMNode nextNode = emanatingEdge.getEndpoint(spineNode);
+				TSMNode.IncEntry emanatingEdge = edgeIter.next();
+				TSMNode nextNode = emanatingEdge.endpoint();
 				// check whether the current edge is taken in the proper direction
-				if (emanatingEdge.rank == TREE_EDGE && nextNode.rank > spineNode.rank
-						|| emanatingEdge.rank == BACK_EDGE && nextNode.rank <= spineNode.rank) {
+				if (emanatingEdge.edge.rank == TREE_EDGE
+						&& nextNode.rank > spineNode.rank
+						|| emanatingEdge.edge.rank == BACK_EDGE
+						&& nextNode.rank <= spineNode.rank) {
 					// recursive check of strong planarity
-					ConcatenableList<TSMNode> attachments = stronglyPlanar(emanatingEdge, spineNode);
+					ConcatenableList<TSMNode> attachments =
+						stronglyPlanar(emanatingEdge.edge, spineNode);
 					if (attachments == null)
 						return null;
 					// update the stack of interlacing blocks
 					int lowpte;
-					if (emanatingEdge.rank == BACK_EDGE)
+					if (emanatingEdge.edge.rank == BACK_EDGE)
 						lowpte = nextNode.rank;
 					else
 						lowpte = lowpt[nextNode.rank];
 					attachments.remove(spineNode);
-					boolean nonPlanar = updateBlockStack(blockStack, attachments, lowpte);
+					boolean nonPlanar = updateBlockStack(blockStack,
+							attachments, lowpte);
 					if (nonPlanar)
 						return null;
 				}
@@ -269,8 +279,7 @@ public class HopcroftTarjanPlanarityTester extends AbstractAlgorithm implements
 		TSMNode nextNode = y0;
 		while (nextNode.rank > x0.rank) {
 			spine.addLast(nextNode);
-			TSMEdge edge = nextNode.edges.get(0);
-			nextNode = edge.getEndpoint(nextNode);
+			nextNode = nextNode.incidence.get(0).endpoint();
 		}
 		return spine;
 	}

@@ -72,8 +72,8 @@ public class BiconnectedComponents extends AbstractAlgorithm {
 		node.rank = nextDfsnum++;
 		lowpt[node.id] = node.rank;
 		unfinished.push(node);
-		for (TSMEdge edge : node.edges) {
-			TSMNode endpoint = edge.getEndpoint(node);
+		for (TSMNode.IncEntry edgeEntry : node.incidence) {
+			TSMNode endpoint = edgeEntry.endpoint();
 			if (endpoint.rank < 0) {
 				parent[endpoint.id] = node;
 				dfsVisit(endpoint);

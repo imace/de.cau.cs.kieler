@@ -140,7 +140,7 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 	 */
 	private List<EdgePlacing> getEdgePlacings(TSMEdge insEdge, TSMNode node,
 			EmbeddingConstraint constraint) {
-		int placingsCount = node.edges.size();
+		int placingsCount = node.incidence.size();
 		if (placingsCount <= 1) {
 			EdgePlacing placing = new EdgePlacing(0);
 			List<EdgePlacing> placings = new LinkedList<EdgePlacing>();
@@ -151,9 +151,9 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 			// assign ranks to already placed edges
 			Map<KEdge, TSMEdge> edgeMap = new HashMap<KEdge, TSMEdge>();
 			int nextRank = 0;
-			for (TSMEdge tsmEdge : node.edges) {
-				tsmEdge.rank = nextRank++;
-				edgeMap.put(tsmEdge.layoutEdge, tsmEdge);
+			for (TSMNode.IncEntry tsmEdgeEntry : node.incidence) {
+				tsmEdgeEntry.edge.rank = nextRank++;
+				edgeMap.put(tsmEdgeEntry.edge.layoutEdge, tsmEdgeEntry.edge);
 			}
 			// the edge that is to be inserted gets a negative rank
 			insEdge.rank = -1;
@@ -321,20 +321,20 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 		DualPath shortestPath = new DualPath();
 		// determine the sets of source and target faces
 		List<TSMFace> targetFaces = new LinkedList<TSMFace>();
-		boolean sourceEmpty = insEdge.source.edges.isEmpty();
-		boolean targetEmpty = insEdge.target.edges.isEmpty();
+		boolean sourceEmpty = insEdge.source.incidence.isEmpty();
+		boolean targetEmpty = insEdge.target.incidence.isEmpty();
 		if (!sourceEmpty) {
 			for (EdgePlacing placing : sourcePlacings) {
 				if (placing.face == null)
-					placing.face = insEdge.source.edges.get(placing.rank)
-							.getLeftFaceFrom(insEdge.source);
+					placing.face = insEdge.source.incidence.get(placing.rank)
+							.leftFace();
 			}
 		}
 		if (!targetEmpty) {
 			for (EdgePlacing placing : targetPlacings) {
 				if (placing.face == null)
-					placing.face = insEdge.target.edges.get(placing.rank)
-							.getLeftFaceFrom(insEdge.target);
+					placing.face = insEdge.target.incidence.get(placing.rank)
+							.leftFace();
 				targetFaces.add(placing.face);
 			}
 		}
@@ -404,7 +404,7 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 			for (List<TSMFace.BorderEntry> border : currentFace.borders) {
 				for (TSMFace.BorderEntry entry : border)
 					bfsQueue.add(new DualPathEntry(entry.edge,
-							entry.edge.getOpposed(currentFace)));
+							entry.opposed()));
 			}
 			DualPathEntry currentEntry = null;
 			do {
@@ -426,7 +426,7 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 		while (parentPath[currentFace.id] != null) {
 			DualPathEntry pathEntry = parentPath[currentFace.id];
 			path.addFirst(pathEntry);
-			currentFace = pathEntry.edge.getOpposed(currentFace);
+			//currentFace = pathEntry.edge;
 		}
 		return path;
 	}
@@ -448,14 +448,17 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 			TSMEdge edge1 = pathEntry.edge;
 			TSMNode oldTarget = edge1.target;
 			edge1.target = dummyNode;
-			ListIterator<TSMEdge> oldTargetIter = getIteratorFor(
-					oldTarget.edges, edge1);
+			ListIterator<TSMNode.IncEntry> oldTargetIter = getIteratorFor(
+					oldTarget.incidence, edge1);
 			oldTargetIter.remove();
 			TSMEdge edge2 = new TSMEdge(graph, dummyNode, oldTarget,
-					false, edge1.layoutEdge);
-			oldTargetIter.add(edge2);
-			dummyNode.edges.add(edge1);
-			dummyNode.edges.add(edge2);
+					edge1.layoutEdge);
+			oldTargetIter.add(new TSMNode.IncEntry(edge2,
+					TSMNode.IncEntry.Type.IN));
+			dummyNode.incidence.add(new TSMNode.IncEntry(edge1,
+					TSMNode.IncEntry.Type.IN));
+			dummyNode.incidence.add(new TSMNode.IncEntry(edge2,
+					TSMNode.IncEntry.Type.OUT));
 			int firstRank, secondRank;
 			boolean insertForward;
 			if (currentFace.id == edge1.leftFace.id) {
@@ -480,10 +483,10 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 					getIteratorFor(border, edge1, insertForward);
 				if (currentFaceIter != null) {
 					if (insertForward)
-						currentFaceIter.add(new TSMFace.BorderEntry(edge2,
+						currentFaceIter.add(currentFace.new BorderEntry(edge2,
 								edge2.source));
 					else
-						currentFaceIter.add(new TSMFace.BorderEntry(edge2,
+						currentFaceIter.add(currentFace.new BorderEntry(edge2,
 								edge2.target));
 					break;
 				}
@@ -493,11 +496,11 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 					getIteratorFor(border, edge1, !insertForward);
 				if (currentFaceIter != null) {
 					if (insertForward)
-						currentFaceIter.add(new TSMFace.BorderEntry(edge2,
-								edge2.target));
+						currentFaceIter.add(pathEntry.targetFace.new BorderEntry(
+								edge2, edge2.target));
 					else
-						currentFaceIter.add(new TSMFace.BorderEntry(edge2,
-								edge2.source));
+						currentFaceIter.add(pathEntry.targetFace.new BorderEntry(
+								edge2, edge2.source));
 					break;
 				}
 			}
@@ -533,7 +536,7 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 			TSMNode targetNode, int targetRank, TSMFace face, TSMEdge insEdge,
 			TSMEdge previousEdge, KEdge layoutEdge) {
 		if (insEdge == null) {
-			insEdge = new TSMEdge(graph, sourceNode, targetNode, false, layoutEdge);
+			insEdge = new TSMEdge(graph, sourceNode, targetNode, layoutEdge);
 		}
 		else {
 			insEdge.source = sourceNode;
@@ -560,48 +563,48 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 		
 		if (sourceBorder == null && targetBorder == null) {
 			List<TSMFace.BorderEntry> newBorder = new LinkedList<TSMFace.BorderEntry>();
-			newBorder.add(new TSMFace.BorderEntry(insEdge, insEdge.source));
-			newBorder.add(new TSMFace.BorderEntry(insEdge, insEdge.target));
+			newBorder.add(face.new BorderEntry(insEdge, insEdge.source));
+			newBorder.add(face.new BorderEntry(insEdge, insEdge.target));
 			face.borders.add(newBorder);
 			insEdge.leftFace = face;
 			insEdge.rightFace = face;
 		}
 		else if (sourceBorder == null) {
-			targetIter.add(new TSMFace.BorderEntry(insEdge, insEdge.target));
-			targetIter.add(new TSMFace.BorderEntry(insEdge, insEdge.source));
+			targetIter.add(face.new BorderEntry(insEdge, insEdge.target));
+			targetIter.add(face.new BorderEntry(insEdge, insEdge.source));
 			insEdge.leftFace = face;
 			insEdge.rightFace = face;
 		}
 		else if (targetBorder == null) {
-			sourceIter.add(new TSMFace.BorderEntry(insEdge, insEdge.source));
-			sourceIter.add(new TSMFace.BorderEntry(insEdge, insEdge.target));
+			sourceIter.add(face.new BorderEntry(insEdge, insEdge.source));
+			sourceIter.add(face.new BorderEntry(insEdge, insEdge.target));
 			insEdge.leftFace = face;
 			insEdge.rightFace = face;
 		}
 		else if (sourceBorder == targetBorder) {
 			int sourceIndex = sourceIter.nextIndex();
-			targetIter.add(new TSMFace.BorderEntry(insEdge, insEdge.target));
+			targetIter.add(face.new BorderEntry(insEdge, insEdge.target));
 			TSMFace newFace = new TSMFace(graph);
 			List<TSMFace.BorderEntry> newBorder = new LinkedList<TSMFace.BorderEntry>();
 			while (targetIter.hasNext() && targetIter.nextIndex() != sourceIndex) {
-				newBorder.add(targetIter.next());
+				newBorder.add(newFace.new BorderEntry(targetIter.next()));
 				targetIter.remove();
 			}
 			if (targetIter.nextIndex() != sourceIndex) {
 				targetIter = targetBorder.listIterator();
 				while (targetIter.nextIndex() < sourceIndex) {
-					newBorder.add(targetIter.next());
+					newBorder.add(newFace.new BorderEntry(targetIter.next()));
 					targetIter.remove();
 				}
 			}
-			newBorder.add(new TSMFace.BorderEntry(insEdge, insEdge.source));
+			newBorder.add(newFace.new BorderEntry(insEdge, insEdge.source));
 			newFace.borders.add(newBorder);
 			insEdge.leftFace = face;
 			insEdge.rightFace = newFace;
 		}
 		else {
 			int targetIndex = targetIter.nextIndex();
-			sourceIter.add(new TSMFace.BorderEntry(insEdge, insEdge.source));
+			sourceIter.add(face.new BorderEntry(insEdge, insEdge.source));
 			while (targetIter.hasNext()) {
 				sourceIter.add(targetIter.next());
 			}
@@ -609,33 +612,32 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 			while (targetIter.nextIndex() < targetIndex) {
 				sourceIter.add(targetIter.next());
 			}
-			sourceIter.add(new TSMFace.BorderEntry(insEdge, insEdge.target));
+			sourceIter.add(face.new BorderEntry(insEdge, insEdge.target));
 			insEdge.leftFace = face;
 			insEdge.rightFace = face;
 			face.borders.remove(targetBorderIndex);
 		}
 		
 		// insert the edge at the proper placings
-		sourceNode.edges.add(sourceRank, insEdge);
-		targetNode.edges.add(targetRank, insEdge);
+		insEdge.connectNodes(sourceRank, targetRank);
 		
 		return insEdge;
 	}
 	
 	/**
-	 * Gets a list iterator for the given list of edges, with the
+	 * Gets a list iterator for the given incidence list, with the
 	 * current position before or after the given edge.
 	 * 
-	 * @param edgeList list for which the iterator shall be created
+	 * @param incList list for which the iterator shall be created
 	 * @param edge edge at which the iterator shall point
 	 * @return iterator pointing at <code>edge</code>, or null if
 	 *     the edge was not found
 	 */
-	private ListIterator<TSMEdge> getIteratorFor(List<TSMEdge> edgeList,
-			TSMEdge edge) {
-		ListIterator<TSMEdge> edgeIter = edgeList.listIterator();
+	private ListIterator<TSMNode.IncEntry> getIteratorFor(
+			List<TSMNode.IncEntry> incList,	TSMEdge edge) {
+		ListIterator<TSMNode.IncEntry> edgeIter = incList.listIterator();
 		while (edgeIter.hasNext()) {
-			if (edgeIter.next().id == edge.id)
+			if (edgeIter.next().edge.id == edge.id)
 				return edgeIter;
 		}
 		return null;
@@ -687,13 +689,14 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 			List<TSMFace.BorderEntry> border, TSMNode node, int rank) {
 		int edge1id, edge2id;
 		if (rank == 0) {
-			edge2id = node.edges.get(node.edges.size()-1).id;
-			edge1id = node.edges.get(0).id;
+			edge2id = node.incidence.get(node.incidence.size()-1).edge.id;
+			edge1id = node.incidence.get(0).edge.id;
 		}
 		else {
-			ListIterator<TSMEdge> nodeEdgeIter = node.edges.listIterator(rank - 1);
-			edge2id = nodeEdgeIter.next().id;
-			edge1id = nodeEdgeIter.next().id;
+			ListIterator<TSMNode.IncEntry> nodeEdgeIter = node.incidence
+					.listIterator(rank - 1);
+			edge2id = nodeEdgeIter.next().edge.id;
+			edge1id = nodeEdgeIter.next().edge.id;
 		}
 		
 		ListIterator<TSMFace.BorderEntry> borderIter = border.listIterator();

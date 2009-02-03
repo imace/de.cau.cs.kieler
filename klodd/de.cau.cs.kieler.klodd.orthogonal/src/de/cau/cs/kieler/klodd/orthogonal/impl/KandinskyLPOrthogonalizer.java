@@ -157,7 +157,7 @@ public class KandinskyLPOrthogonalizer extends AbstractAlgorithm implements
 		// count only nodes with degree > 0
 		int nodeCount = 0;
 		for (TSMNode node : graph.nodes) {
-			if (!node.edges.isEmpty())
+			if (!node.incidence.isEmpty())
 				nodeCount++;
 		}
 		int edgeCount = graph.edges.size();
@@ -239,15 +239,16 @@ public class KandinskyLPOrthogonalizer extends AbstractAlgorithm implements
 		// set constraint K4
 		i = rows.k4.start;
 		for (TSMNode node : graph.nodes) {
-			if (!node.edges.isEmpty()) {
-				Iterator<TSMEdge> edgeIter = node.edges.iterator();
-				TSMEdge currentEdge = edgeIter.next();
+			if (!node.incidence.isEmpty()) {
+				Iterator<TSMNode.IncEntry> edgeIter = node.incidence.iterator();
+				TSMEdge currentEdge = edgeIter.next().edge;
 				while (edgeIter.hasNext()) {
-					TSMEdge nextEdge = edgeIter.next();
+					TSMEdge nextEdge = edgeIter.next().edge;
 					setK4Constraint(node, currentEdge, nextEdge, ilp, i++);
 					currentEdge = nextEdge;
 				}
-				setK4Constraint(node, currentEdge, node.edges.get(0), ilp, i);
+				setK4Constraint(node, currentEdge, node.incidence.get(0).edge,
+						ilp, i);
 			}
 		}
 		
@@ -261,7 +262,7 @@ public class KandinskyLPOrthogonalizer extends AbstractAlgorithm implements
 		ilp.setAddRowmode(true);
 		// add constraints for dummy nodes
 		for (TSMNode node : graph.nodes) {
-			if (node.object == null)
+			if (node.type == TSMNode.Type.CROSSING)
 				addDummyNodeConstraint(node, ilp);
 		}
 
@@ -280,14 +281,15 @@ public class KandinskyLPOrthogonalizer extends AbstractAlgorithm implements
 	 */
 	private boolean setK1Constraint(TSMNode node, LpSolve ilp, int i)
 			throws LpSolveException {
-		int localEdgeCount = node.edges.size();
+		int localEdgeCount = node.incidence.size();
 		if (localEdgeCount > 0) {
 			ilp.setConstrType(i, LpSolve.EQ);
 			ilp.setRh(i, 4);
 			double[] row = new double[localEdgeCount];
 			int[] rowIndex = new int[localEdgeCount];
 			int jx = 0;
-			for (TSMEdge edge : node.edges) {
+			for (TSMNode.IncEntry edgeEntry : node.incidence) {
+				TSMEdge edge = edgeEntry.edge;
 				row[jx] = 1;
 				if (edge.source.id == node.id
 						&& (edge.target.id != node.id || edge.rank != 1)) {
@@ -529,10 +531,11 @@ public class KandinskyLPOrthogonalizer extends AbstractAlgorithm implements
 	 */
 	private void addDummyNodeConstraint(TSMNode node, LpSolve ilp)
 			throws LpSolveException {
-		assert node.edges.size() == 4;
+		assert node.incidence.size() == 4;
 		double[] row = new double[1];
 		int[] rowIndex = new int[1];
-		for (TSMEdge edge : node.edges) {
+		for (TSMNode.IncEntry edgeEntry : node.incidence) {
+			TSMEdge edge = edgeEntry.edge;
 			row[0] = 1;
 			if (edge.source.id == node.id
 					&& (edge.target.id != node.id || edge.rank != 1)) {
