@@ -14,8 +14,10 @@ public class EmbeddingConstraint {
 	 * Definition of constraint types.
 	 */
 	public enum Type {
-		/** this constraint object contains an edge */
-		EDGE,
+		/** this constraint object contains an input edge */
+		IN_EDGE,
+		/** this constraint object contains an output edge */
+		OUT_EDGE,
 		/** the order of children is fixed */
 		ORIENTED,
 		/** the order of children may be reversed */
@@ -44,7 +46,7 @@ public class EmbeddingConstraint {
 		this.type = type;
 		this.parent = parent;
 		this.object = obj;
-		if (type != Type.EDGE)
+		if (type != Type.IN_EDGE && type != Type.OUT_EDGE)
 			this.children = new LinkedList<EmbeddingConstraint>();
 	}
 	

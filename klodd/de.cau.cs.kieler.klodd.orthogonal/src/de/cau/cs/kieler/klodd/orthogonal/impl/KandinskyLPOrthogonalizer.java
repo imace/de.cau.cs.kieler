@@ -241,13 +241,13 @@ public class KandinskyLPOrthogonalizer extends AbstractAlgorithm implements
 		for (TSMNode node : graph.nodes) {
 			if (!node.incidence.isEmpty()) {
 				Iterator<TSMNode.IncEntry> edgeIter = node.incidence.iterator();
-				TSMEdge currentEdge = edgeIter.next().edge;
+				TSMNode.IncEntry currentEdge = edgeIter.next();
 				while (edgeIter.hasNext()) {
-					TSMEdge nextEdge = edgeIter.next().edge;
+					TSMNode.IncEntry nextEdge = edgeIter.next();
 					setK4Constraint(node, currentEdge, nextEdge, ilp, i++);
 					currentEdge = nextEdge;
 				}
-				setK4Constraint(node, currentEdge, node.incidence.get(0).edge,
+				setK4Constraint(node, currentEdge, node.incidence.get(0),
 						ilp, i);
 			}
 		}
@@ -289,20 +289,11 @@ public class KandinskyLPOrthogonalizer extends AbstractAlgorithm implements
 			int[] rowIndex = new int[localEdgeCount];
 			int jx = 0;
 			for (TSMNode.IncEntry edgeEntry : node.incidence) {
-				TSMEdge edge = edgeEntry.edge;
 				row[jx] = 1;
-				if (edge.source.id == node.id
-						&& (edge.target.id != node.id || edge.rank != 1)) {
-					rowIndex[jx] = cols.sourceAnchor.start + edge.id;
-					if (edge.target.id == node.id)
-						edge.rank = 1;
-				}
-				else if (edge.target.id == node.id
-						&& (edge.source.id != node.id || edge.rank != -1)) {
-					rowIndex[jx] = cols.targetAnchor.start + edge.id;
-					if (edge.source.id == node.id)
-						edge.rank = -1;
-				}
+				if (edgeEntry.type == TSMNode.IncEntry.Type.OUT)
+					rowIndex[jx] = cols.sourceAnchor.start + edgeEntry.edge.id;
+				else
+					rowIndex[jx] = cols.targetAnchor.start + edgeEntry.edge.id;
 				jx++;
 			}
 			ilp.setRowex(i, localEdgeCount, row, rowIndex);
@@ -419,40 +410,26 @@ public class KandinskyLPOrthogonalizer extends AbstractAlgorithm implements
 	 * @param i index of the first row that shall be modified
 	 * @throws LpSolveException if the lp_solve library reports a failure
 	 */
-	private void setK4Constraint(TSMNode node, TSMEdge leftEdge,
-			TSMEdge rightEdge, LpSolve ilp, int i) throws LpSolveException {
+	private void setK4Constraint(TSMNode node, TSMNode.IncEntry leftEdge,
+			TSMNode.IncEntry rightEdge, LpSolve ilp, int i) throws LpSolveException {
 		ilp.setConstrType(i, LpSolve.GE);
 		ilp.setRh(i, 1);
 		double[] row = new double[3];
 		int[] rowIndex = new int[3];
 		row[0] = 1;
-		if (leftEdge.source.id == node.id
-				&& (leftEdge.target.id != node.id || leftEdge.rank != 1)) {
-			rowIndex[0] = cols.forwSourceLeft.start + leftEdge.id;
-			if (leftEdge.target.id == node.id)
-				leftEdge.rank = 1;
-		}
-		else if (leftEdge.target.id == node.id
-				&& (leftEdge.source.id != node.id || leftEdge.rank != -1)) {
-			rowIndex[0] = cols.backSourceLeft.start + leftEdge.id;
-			if (leftEdge.source.id == node.id)
-				leftEdge.rank = -1;
-		}
+		if (leftEdge.type == TSMNode.IncEntry.Type.OUT)
+			rowIndex[0] = cols.forwSourceLeft.start + leftEdge.edge.id;
+		else
+			rowIndex[0] = cols.backSourceLeft.start + leftEdge.edge.id;
 		row[1] = 1;
 		row[2] = 1;
-		if (rightEdge.source.id == node.id
-				&& (rightEdge.target.id != node.id || rightEdge.rank != 1)) {
-			rowIndex[1] = cols.forwSourceRight.start + rightEdge.id;
-			rowIndex[2] = cols.sourceAnchor.start + rightEdge.id;
-			if (rightEdge.target.id == node.id)
-				rightEdge.rank = 1;
+		if (rightEdge.type == TSMNode.IncEntry.Type.OUT) {
+			rowIndex[1] = cols.forwSourceRight.start + rightEdge.edge.id;
+			rowIndex[2] = cols.sourceAnchor.start + rightEdge.edge.id;
 		}
-		else if (rightEdge.target.id == node.id
-				&& (rightEdge.source.id != node.id || rightEdge.rank != -1)) {
-			rowIndex[1] = cols.backSourceRight.start + rightEdge.id;
-			rowIndex[2] = cols.targetAnchor.start + rightEdge.id;
-			if (rightEdge.source.id == node.id)
-				rightEdge.rank = -1;
+		else {
+			rowIndex[1] = cols.backSourceRight.start + rightEdge.edge.id;
+			rowIndex[2] = cols.targetAnchor.start + rightEdge.edge.id;
 		}
 		ilp.setRowex(i, 2, row, rowIndex);
 	}
@@ -535,20 +512,11 @@ public class KandinskyLPOrthogonalizer extends AbstractAlgorithm implements
 		double[] row = new double[1];
 		int[] rowIndex = new int[1];
 		for (TSMNode.IncEntry edgeEntry : node.incidence) {
-			TSMEdge edge = edgeEntry.edge;
 			row[0] = 1;
-			if (edge.source.id == node.id
-					&& (edge.target.id != node.id || edge.rank != 1)) {
-				rowIndex[0] = cols.sourceAnchor.start + edge.id;
-				if (edge.target.id == node.id)
-					edge.rank = 1;
-			}
-			else if (edge.target.id == node.id
-					&& (edge.source.id != node.id || edge.rank != -1)) {
-				rowIndex[0] = cols.targetAnchor.start + edge.id;
-				if (edge.source.id == node.id)
-					edge.rank = -1;
-			}
+			if (edgeEntry.type == TSMNode.IncEntry.Type.OUT)
+				rowIndex[0] = cols.sourceAnchor.start + edgeEntry.edge.id;
+			else
+				rowIndex[0] = cols.targetAnchor.start + edgeEntry.edge.id;
 			ilp.addConstraintex(1, row, rowIndex, LpSolve.EQ, 1);
 		}
 	}

@@ -163,15 +163,19 @@ public class PortConstraintsPlanarizer extends AbstractAlgorithm implements
 		List<KEdge> filteredEdges = new LinkedList<KEdge>();
 		for (KEdge edge : port.getEdges()) {
 			// TODO edges to external ports are not considered yet
-			if (!(edge.getSource() == null || edge.getTarget() == null))
+			if (!(edge.getSource() == null || edge.getTarget() == null)
+					&& edge.getSourcePort() != edge.getTargetPort())
 				filteredEdges.add(edge);
 		}
 		if (!filteredEdges.isEmpty()) {
 			EmbeddingConstraint groupConstraint = new EmbeddingConstraint(
 					EmbeddingConstraint.Type.GROUPING, parent, port);
 			for (KEdge edge : filteredEdges) {
+				EmbeddingConstraint.Type constraintType = edge.getSourcePort()
+						== port ? EmbeddingConstraint.Type.OUT_EDGE
+						: EmbeddingConstraint.Type.IN_EDGE;
 				EmbeddingConstraint edgeConstraint = new EmbeddingConstraint(
-						EmbeddingConstraint.Type.EDGE, groupConstraint, edge);
+						constraintType, groupConstraint, edge);
 				groupConstraint.children.add(edgeConstraint);
 			}
 			return groupConstraint;

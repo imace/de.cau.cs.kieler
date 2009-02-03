@@ -79,10 +79,15 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 		int firstEdgeRank = 0;
 		/** set of admissible placings */
 		List<EdgePlacing> placings = null;
+		/** relative position of the other endpoint: < 0 for lesser,
+		 *  > 0 for greater, 0 for not found */
+		int endpoint = 0;
 	}
 	
 	/** TSM graph that is currently processed */
 	private TSMGraph graph = null;
+	/** for self-loops: is the target rank greater than the source rank? */
+	private boolean forwardSelfLoop;
 	
 	/*
 	 * (non-Javadoc)
@@ -120,9 +125,9 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 		
 		// determine the admissible placings at source and target
 		List<EdgePlacing> sourcePlacings = getEdgePlacings(edge,
-				edge.source, sourceConstraint);
+				edge.source, sourceConstraint, true);
 		List<EdgePlacing> targetPlacings = getEdgePlacings(edge,
-				edge.target, targetConstraint);
+				edge.target, targetConstraint, false);
 		// determine a shortest path from a source face to a target face
 		DualPath path = shortestPath(edge, sourcePlacings, targetPlacings);
 		// insert the edge through the new path
@@ -136,10 +141,11 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 	 * @param insEdge edge that is to be inserted
 	 * @param node node incident with <code>edge</code>
 	 * @param constraint embedding constraint for <code>node</code>
+	 * @param outgoing indicates whether the edge is outgoing for the node
 	 * @return array of placings that are admissible for the given edge
 	 */
 	private List<EdgePlacing> getEdgePlacings(TSMEdge insEdge, TSMNode node,
-			EmbeddingConstraint constraint) {
+			EmbeddingConstraint constraint, boolean outgoing) {
 		int placingsCount = node.incidence.size();
 		if (placingsCount <= 1) {
 			EdgePlacing placing = new EdgePlacing(0);
@@ -161,7 +167,9 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 			
 			// traverse the constraint tree recursively
 			ConstraintResult constraintResult = analyzeConstraint(edgeMap,
-					constraint);
+					constraint, outgoing);
+			forwardSelfLoop = outgoing && (constraintResult.endpoint > 0)
+					|| !outgoing && constraintResult.endpoint < 0;
 			return constraintResult.placings;
 		}
 	}
@@ -173,20 +181,27 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 	 * 
 	 * @param edgeMap map of layout edges to corresponding TSM edges
 	 * @param constraint embedding constraint to analyze
+	 * @param outgoing indicates whether the edge is outgoing for the node
 	 * @return constraint information with a list of admissible placements
 	 */
 	private ConstraintResult analyzeConstraint(Map<KEdge, TSMEdge> edgeMap,
-			EmbeddingConstraint constraint) {
+			EmbeddingConstraint constraint, boolean outgoing) {
 		ConstraintResult result = new ConstraintResult();
 		switch (constraint.type) {
-		case EDGE:
+		case OUT_EDGE:
+		case IN_EDGE:
 			KEdge layoutEdge = (KEdge)constraint.object;
 			TSMEdge tsmEdge = edgeMap.get(layoutEdge);
 			if (tsmEdge != null) {
 				if (tsmEdge.rank < 0) {
-					// the insertion edge was found
-					result.placings = new LinkedList<EdgePlacing>();
-					result.placings.add(new EdgePlacing(0));
+					if (outgoing == (constraint.type
+							== EmbeddingConstraint.Type.OUT_EDGE)) {
+						// the insertion edge was found
+						result.placings = new LinkedList<EdgePlacing>();
+						result.placings.add(new EdgePlacing(0));
+					}
+					else
+						result.endpoint = 1;
 				}
 				else {
 					// an already inserted edge was found
@@ -199,14 +214,24 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 			boolean firstEdgeFound = false;
 			for (EmbeddingConstraint childConstraint : constraint.children) {
 				ConstraintResult childResult = analyzeConstraint(edgeMap,
-						childConstraint);
+						childConstraint, outgoing);
+				
 				if (childResult.placings != null) {
 					assert result.placings == null;
 					result.placings = childResult.placings;
 					for (EdgePlacing placing : result.placings) {
 						placing.rank += result.edgeCount;
 					}
+					if (childResult.endpoint != 0)
+						result.endpoint = childResult.endpoint;
 				}
+				else if (childResult.endpoint != 0) {
+					if (result.placings == null)
+						result.endpoint = -1;
+					else
+						result.endpoint = 1;
+				}
+				
 				result.edgeCount += childResult.edgeCount;
 				if (!firstEdgeFound && childResult.edgeCount > 0) {
 					result.firstEdgeRank = childResult.firstEdgeRank;
@@ -218,20 +243,31 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 			int firstRank = -1, lastRank = -1, leftCount = 0, rightCount = 0;
 			for (EmbeddingConstraint childConstraint : constraint.children) {
 				ConstraintResult childResult = analyzeConstraint(edgeMap,
-						childConstraint);
+						childConstraint, outgoing);
 				if (result.placings == null)
 					leftCount = result.edgeCount;
 				else
 					rightCount += childResult.edgeCount;
+				
 				if (childResult.placings != null) {
 					assert result.placings == null;
 					result.placings = childResult.placings;
+					if (childResult.endpoint != 0)
+						result.endpoint = 2 * childResult.endpoint;
 				}
+				else if (childResult.endpoint != 0) {
+					if (result.placings == null)
+						result.endpoint = -1;
+					else
+						result.endpoint = 1;
+				}
+				
 				lastRank = childResult.firstEdgeRank;
 				if (firstRank < 0 && childResult.edgeCount > 0)
 					firstRank = lastRank;
 				result.edgeCount += childResult.edgeCount;
 			}
+			
 			if (firstRank < lastRank) {
 				result.firstEdgeRank = firstRank;
 				if (result.placings != null) {
@@ -247,6 +283,8 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 						placing.rank += rightCount;
 					}
 				}
+				if (result.endpoint == 1 || result.endpoint == 1)
+					result.endpoint = -result.endpoint;
 			}
 			else {
 				if (firstRank >= 0) {
@@ -264,13 +302,18 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 			boolean insBlockNonEmpty = false;
 			for (EmbeddingConstraint childConstraint : constraint.children) {
 				ConstraintResult childResult = analyzeConstraint(edgeMap,
-						childConstraint);
+						childConstraint, outgoing);
 				result.edgeCount += childResult.edgeCount;
+				
 				if (childResult.placings != null) {
 					assert result.placings == null;
 					result.placings = childResult.placings;
 					insBlockNonEmpty = (result.edgeCount != 0);
 				}
+				
+				if (childResult.endpoint != 0)
+					result.endpoint = childResult.endpoint;
+				
 				ListIterator<ConstraintResult> resultsIter = sortedResults.listIterator();
 				while (resultsIter.hasNext() && resultsIter.next().firstEdgeRank
 						< childResult.firstEdgeRank);
@@ -619,7 +662,7 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 		}
 		
 		// insert the edge at the proper placings
-		insEdge.connectNodes(sourceRank, targetRank);
+		insEdge.connectNodes(sourceRank, targetRank, forwardSelfLoop);
 		
 		return insEdge;
 	}

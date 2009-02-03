@@ -115,7 +115,7 @@ public class EdgeInsertionECPlanarizer extends AbstractAlgorithm implements
 			// TODO external ports need to be considered
 			if (targetLayoutNode != null) {
 				TSMNode targetTsmNode = nodeGroup2TSMNodeMap.get(targetLayoutNode);
-				new TSMEdge(tsmGraph, tsmNode, targetTsmNode, false);
+				new TSMEdge(tsmGraph, tsmNode, targetTsmNode);
 				if (dfsNum[targetTsmNode.id] < 0) {
 					dfsVisit(targetLayoutNode, targetTsmNode);
 				}

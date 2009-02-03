@@ -79,8 +79,7 @@ public class TSMEdge extends TSMGraphElement {
 	 * @param source source node
 	 * @param target target node
 	 */
-	public TSMEdge(TSMGraph graph, TSMNode source, TSMNode target,
-			boolean connect) {
+	public TSMEdge(TSMGraph graph, TSMNode source, TSMNode target) {
 		this(graph, source, target, null);
 	}
 	
@@ -103,8 +102,14 @@ public class TSMEdge extends TSMGraphElement {
 	 * 
 	 * @param sourceRank rank of the edge at source
 	 * @param targetRank rank of the edge at target
+	 * @param forwardSelfLoop for self-loops: is the target rank greater
+	 *     than the source rank?
 	 */
-	public void connectNodes(int sourceRank, int targetRank) {
+	public void connectNodes(int sourceRank, int targetRank, boolean
+			forwardSelfLoop) {
+		if (source.id == target.id && (sourceRank < targetRank
+				|| (sourceRank == targetRank && forwardSelfLoop)))
+			targetRank++;
 		source.incidence.add(sourceRank, new TSMNode.IncEntry(this,
 				TSMNode.IncEntry.Type.OUT));
 		target.incidence.add(targetRank, new TSMNode.IncEntry(this,

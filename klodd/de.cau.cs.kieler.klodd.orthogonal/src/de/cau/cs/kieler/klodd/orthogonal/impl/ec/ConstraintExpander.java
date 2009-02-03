@@ -83,19 +83,21 @@ public class ConstraintExpander extends AbstractAlgorithm {
 	 */
 	private void expandConstraint(EmbeddingConstraint constraint, TSMNode parentNode) {
 		switch (constraint.type) {
-		case EDGE:
+		case OUT_EDGE:
+		case IN_EDGE:
 			// connect an edge with the parent constraint
 			assert parentNode != null;
 			KEdge edge = (KEdge)constraint.object;
-			boolean forward = edge.getSourcePort() == constraint.parent.object;
-			registerEdge(parentNode, edge, forward);
+			registerEdge(parentNode, edge, constraint.type
+					== EmbeddingConstraint.Type.OUT_EDGE);
 			break;
 		case GROUPING:
 			// create a single node and connect children with it
 			TSMNode groupingNode = new TSMNode(tsmGraph, TSMNode.Type.ECEXPANSION,
 					constraint);
 			if (parentNode != null) {
-				new TSMEdge(tsmGraph, parentNode, groupingNode, true);
+				TSMEdge newEdge = new TSMEdge(tsmGraph, parentNode, groupingNode);
+				newEdge.connectNodes();
 			}
 			for (EmbeddingConstraint childConstraint : constraint.children) {
 				expandConstraint(childConstraint, groupingNode);
@@ -109,27 +111,38 @@ public class ConstraintExpander extends AbstractAlgorithm {
 			TSMNode firstNode = null, lastNode = null;
 			if (parentNode != null) {
 				firstNode = new TSMNode(tsmGraph, TSMNode.Type.ECEXPANSION);
-				new TSMEdge(tsmGraph, firstNode, hubNode, true);
+				TSMEdge newEdge = new TSMEdge(tsmGraph, firstNode, hubNode);
+				newEdge.connectNodes();
 				lastNode = new TSMNode(tsmGraph, TSMNode.Type.ECEXPANSION);
-				new TSMEdge(tsmGraph, hubNode, lastNode, true);
-				new TSMEdge(tsmGraph, firstNode, lastNode, true);
-				new TSMEdge(tsmGraph, parentNode, firstNode, true);
+				newEdge = new TSMEdge(tsmGraph, hubNode, lastNode);
+				newEdge.connectNodes();
+				newEdge = new TSMEdge(tsmGraph, firstNode, lastNode);
+				newEdge.connectNodes();
+				newEdge = new TSMEdge(tsmGraph, parentNode, firstNode);
+				newEdge.connectNodes();
 			}
 			for (EmbeddingConstraint childConstraint : constraint.children) {
 				TSMNode xNode = new TSMNode(tsmGraph, TSMNode.Type.ECEXPANSION);
-				new TSMEdge(tsmGraph, xNode, hubNode, true);
+				TSMEdge newEdge = new TSMEdge(tsmGraph, xNode, hubNode);
+				newEdge.connectNodes();
 				TSMNode yNode = new TSMNode(tsmGraph, TSMNode.Type.ECEXPANSION);
-				new TSMEdge(tsmGraph, hubNode, yNode, true);
-				new TSMEdge(tsmGraph, xNode, yNode, true);
+				newEdge = new TSMEdge(tsmGraph, hubNode, yNode);
+				newEdge.connectNodes();
+				newEdge = new TSMEdge(tsmGraph, xNode, yNode);
+				newEdge.connectNodes();
 				if (lastNode == null)
 					firstNode = xNode;
-				else
-					new TSMEdge(tsmGraph, lastNode, xNode, true);
+				else {
+					newEdge = new TSMEdge(tsmGraph, lastNode, xNode);
+					newEdge.connectNodes();
+				}
 				expandConstraint(childConstraint, xNode);
 				lastNode = yNode;
 			}
-			if (lastNode != null)
-				new TSMEdge(tsmGraph, lastNode, firstNode, true);
+			if (lastNode != null) {
+				TSMEdge newEdge = new TSMEdge(tsmGraph, lastNode, firstNode);
+				newEdge.connectNodes();
+			}
 			break;
 		}
 	}
