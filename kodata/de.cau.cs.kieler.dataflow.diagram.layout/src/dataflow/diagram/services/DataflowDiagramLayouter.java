@@ -5,6 +5,13 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.draw2d.IFigure;
+import org.eclipse.draw2d.PositionConstants;
+import org.eclipse.draw2d.geometry.Dimension;
+import org.eclipse.draw2d.geometry.Point;
+import org.eclipse.draw2d.geometry.PointList;
+import org.eclipse.draw2d.geometry.PrecisionDimension;
+import org.eclipse.draw2d.geometry.PrecisionPoint;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.commands.CommandStack;
 import org.eclipse.gef.commands.CompoundCommand;
@@ -23,23 +30,35 @@ import org.eclipse.gmf.runtime.diagram.ui.requests.SetAllBendpointRequest;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
 import org.eclipse.jface.preference.IPreferenceStore;
-import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.PlatformUI;
-import org.eclipse.draw2d.IFigure;
-import org.eclipse.draw2d.PositionConstants;
-import org.eclipse.draw2d.geometry.Point;
-import org.eclipse.draw2d.geometry.Dimension;
-import org.eclipse.draw2d.geometry.PointList;
-import org.eclipse.draw2d.geometry.PrecisionDimension;
-import org.eclipse.draw2d.geometry.PrecisionPoint;
 
-import dataflow.diagram.edit.parts.*;
 import dataflow.diagram.DataflowDiagramLayoutPlugin;
 import dataflow.diagram.Messages;
+import dataflow.diagram.edit.parts.ConnectionEditPart;
+import dataflow.diagram.edit.parts.DataflowModelEditPart;
+import dataflow.diagram.edit.parts.InputPortEditPart;
 import dataflow.diagram.part.DataflowDiagramEditor;
 import dataflow.diagram.preferences.DiagramLayoutPreferencePage;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.*;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KDimension;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLayout;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KInsets;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutGraph;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutOption;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeLabel;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeLabelLayout;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeLayout;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPoint;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPortLabel;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPortLabelLayout;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPortLayout;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPortPlacement;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPortType;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KShapeLayout;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphFactory;
 import de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayouter;
 import de.cau.cs.kieler.kiml.ui.helpers.KimlGMFLayoutHintHelper;
 import de.cau.cs.kieler.kiml.ui.policies.LayoutEditPolicy;
@@ -86,9 +105,6 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 	/** mapping used for creation of the layout graph */
 	private Map<BorderedBorderItemEditPart, KLayoutPort> borderItem2PortMapping = new HashMap<BorderedBorderItemEditPart, KLayoutPort>();
 	
-	/** label provider for the elements of dataflow diagrams */
-	private ILabelProvider dataflowLabelProvider = new DataflowLabelProvider();
-	
 	/** preference: preserve port positions for empty boxes */
 	private boolean fixedOuterPortsPref;
 	/** preference: preserve port positions for non-empty boxes */
@@ -100,13 +116,6 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 	/** preference: alternating layout direction */
 	private boolean alternateHV;
 	
-	/*
-	 * (non-Javadoc)
-	 * @see de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayouter#getLabelProvider()
-	 */
-	public ILabelProvider getLabelProvider() {
-		return dataflowLabelProvider;
-	}
 	
 	/*
 	 * (non-Javadoc)

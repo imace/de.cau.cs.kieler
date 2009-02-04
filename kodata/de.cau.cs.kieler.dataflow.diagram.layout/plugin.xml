@@ -79,4 +79,12 @@
          </context>
       </editpolicyProvider>
    </extension>
+   <extension
+         point="org.eclipse.emf.edit.itemProviderAdapterFactories">
+      <factory
+            class="dataflow.diagram.layout.kimllabelprovider.KimlDataflowItemProviderAdapterFactory"
+            supportedTypes="de.cau.cs.kieler.kiml.ui.provider.IKimlLabelProvider"
+            uri="http://www.informatik.uni-kiel.de/rtsys/">
+      </factory>
+   </extension>
 </plugin>
