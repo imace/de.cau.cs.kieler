@@ -23,6 +23,8 @@ import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.PointList;
 import org.eclipse.draw2d.geometry.Rectangle;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.gef.ConnectionEditPart;
 import org.eclipse.gef.GraphicalEditPart;
 import org.eclipse.gef.NodeEditPart;
@@ -43,6 +45,7 @@ import org.eclipse.gmf.runtime.diagram.ui.requests.RequestConstants;
 import org.eclipse.gmf.runtime.diagram.ui.requests.SetAllBendpointRequest;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
+import org.eclipse.gmf.runtime.notation.impl.ViewImpl;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.viewers.IStructuredSelection;
 
@@ -63,9 +66,10 @@ import de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayouter;
 import de.cau.cs.kieler.kiml.layout.util.KimlLayoutPreferenceConstants;
 import de.cau.cs.kieler.kiml.layout.util.KimlLayoutUtil;
 import de.cau.cs.kieler.kiml.ui.KimlUiPlugin;
-import de.cau.cs.kieler.kiml.ui.helpers.KimlCommonHelper;
+import de.cau.cs.kieler.kiml.ui.helpers.KimlMetricsHelper;
 import de.cau.cs.kieler.kiml.ui.helpers.KimlGMFLayoutHintHelper;
 import de.cau.cs.kieler.kiml.ui.preferences.PreferenceConstants;
+import de.cau.cs.kieler.kiml.ui.provider.KimlAdapterFactoryLabelProvider;
 
 
 /**
@@ -109,6 +113,8 @@ public class KimlGenericDiagramLayouter extends KimlAbstractLayouter {
 	private CommandStack commandStack = null;
 	private double zoomLevel = 1.0;
 	private ConnectionLayer connectionLayer = null;
+	private KimlAdapterFactoryLabelProvider kimlAdapterLabelProvider = new KimlAdapterFactoryLabelProvider(
+			new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE));
 
 	/*------------------------------------------------------------------------------*/
 	/*-----------------------------APPLICATION OF LAYOUT----------------------------*/
@@ -181,7 +187,7 @@ public class KimlGenericDiagramLayouter extends KimlAbstractLayouter {
 
 		/* stuff for the size, mind the zoom level */
 		Dimension oldSize = gep.getFigure().getBounds().getSize();
-		Dimension newSize = KimlCommonHelper.kDimension2Dimension(currentGroup
+		Dimension newSize = KimlMetricsHelper.kDimension2Dimension(currentGroup
 				.getLayout().getSize());
 
 		if (newSize != null && newSize.height != 0 && newSize.width != 0) {
@@ -192,7 +198,7 @@ public class KimlGenericDiagramLayouter extends KimlAbstractLayouter {
 
 		/* stuff for the location, mind the zoom level */
 		Point oldLocation = gep.getFigure().getBounds().getLocation();
-		Point newLocation = KimlCommonHelper.kPoint2Point(currentGroup
+		Point newLocation = KimlMetricsHelper.kPoint2Point(currentGroup
 				.getLayout().getLocation());
 
 		if (newLocation != null) {
@@ -238,18 +244,18 @@ public class KimlGenericDiagramLayouter extends KimlAbstractLayouter {
 			PointList pointList = new PointList();
 
 			/* fetch start point */
-			Point startPoint = KimlCommonHelper.kPoint2Point(edgeLayout
+			Point startPoint = KimlMetricsHelper.kPoint2Point(edgeLayout
 					.getSourcePoint());
 			pointList.addPoint(startPoint);
 
 			/* fetch grid/helper points */
 			for (KPoint gridPoint : edgeLayout.getGridPoints()) {
-				Point point = KimlCommonHelper.kPoint2Point(gridPoint);
+				Point point = KimlMetricsHelper.kPoint2Point(gridPoint);
 				pointList.addPoint(point);
 			}
 
 			/* set end point */
-			Point endPoint = KimlCommonHelper.kPoint2Point(edgeLayout
+			Point endPoint = KimlMetricsHelper.kPoint2Point(edgeLayout
 					.getTargetPoint());
 			pointList.addPoint(endPoint);
 
@@ -328,7 +334,7 @@ public class KimlGenericDiagramLayouter extends KimlAbstractLayouter {
 					KLayoutNode sourceNode = edge.getSource();
 					GraphicalEditPart sourceEditPart = layoutNode2GraphicalEditPart
 							.get(sourceNode);
-					newLocation = translateFromTo(KimlCommonHelper
+					newLocation = translateFromTo(KimlMetricsHelper
 							.kPoint2Point(edgeLabel.getLabelLayout()
 									.getLocation()),
 							sourceEditPart.getFigure(), connectionLayer);
@@ -376,11 +382,9 @@ public class KimlGenericDiagramLayouter extends KimlAbstractLayouter {
 		if (rootPart instanceof NodeEditPart) {
 			NodeEditPart rootEditPart = (NodeEditPart) rootPart;
 
-			/* set label and ID */
-			layoutGraph.getLabel().setText(
-					KimlCommonHelper.getShortLabel(rootEditPart));
-			layoutGraph.setIdString(KimlCommonHelper
-					.getLongLabel(rootEditPart));
+			/* set ID */
+			EObject currentEObject = ((ViewImpl)rootEditPart.getModel()).getElement();
+			layoutGraph.setIdString(kimlAdapterLabelProvider.getKimlLongLabel(currentEObject));
 
 			/* set location */
 			layoutGraph.getLayout().getLocation().setX(
@@ -477,11 +481,10 @@ public class KimlGenericDiagramLayouter extends KimlAbstractLayouter {
 				childLayoutNode.getLayout().getSize().setWidth(
 						childBounds.width);
 
-				/* set label and ID */
-				childLayoutNode.getLabel().setText(
-						KimlCommonHelper.getShortLabel(childNodeEditPart));
-				childLayoutNode.setIdString(KimlCommonHelper
-						.getLongLabel(childNodeEditPart));
+				/* set ID */
+				EObject currentEObject = ((ViewImpl)childNodeEditPart.getModel()).getElement();
+				childLayoutNode.setIdString(kimlAdapterLabelProvider.getKimlLongLabel(currentEObject));
+				
 
 				/*
 				 * set information about LayouterName and LayoutType
@@ -606,14 +609,13 @@ public class KimlGenericDiagramLayouter extends KimlAbstractLayouter {
 			for (Object obj : connection.getChildren()) {
 				if (obj instanceof LabelEditPart) {
 					LabelEditPart labelEditPart = (LabelEditPart) obj;
-					KDimension labelSize = KimlCommonHelper
+					KDimension labelSize = KimlMetricsHelper
 							.dimension2KDimension(labelEditPart.getFigure()
 									.getBounds().getSize());
 
 					// head label
 					if (labelEditPart.getKeyPoint() == ConnectionLocator.SOURCE) {
-						String headLabel = KimlCommonHelper
-								.getHeadLabel(connection);
+						String headLabel = "";
 
 						if ((headLabel.equals(""))
 								&& (labelEditPart.getFigure() instanceof WrappingLabel))
@@ -633,8 +635,7 @@ public class KimlGenericDiagramLayouter extends KimlAbstractLayouter {
 
 					// middle label
 					if (labelEditPart.getKeyPoint() == ConnectionLocator.MIDDLE) {
-						String midLabel = KimlCommonHelper
-								.getMidLabel(connection);
+						String midLabel = "";
 
 						if ((midLabel.equals(""))
 								&& (labelEditPart.getFigure() instanceof WrappingLabel))
@@ -654,8 +655,7 @@ public class KimlGenericDiagramLayouter extends KimlAbstractLayouter {
 
 					// tail label
 					if (labelEditPart.getKeyPoint() == ConnectionLocator.TARGET) {
-						String tailLabel = KimlCommonHelper
-								.getTailLabel(connection);
+						String tailLabel = "";
 
 						if ((tailLabel.equals(""))
 								&& (labelEditPart.getFigure() instanceof WrappingLabel))
