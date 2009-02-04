@@ -1,4 +1,4 @@
-package de.cau.cs.kieler.ssm.diagram.layouter.provider;
+package de.cau.cs.kieler.ssm.diagram.layouter.kimllabelprovider;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 

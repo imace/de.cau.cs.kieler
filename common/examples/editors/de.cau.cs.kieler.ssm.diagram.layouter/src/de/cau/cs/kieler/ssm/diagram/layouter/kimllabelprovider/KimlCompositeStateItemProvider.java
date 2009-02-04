@@ -1,26 +1,26 @@
-package de.cau.cs.kieler.ssm.diagram.layouter.provider;
+package de.cau.cs.kieler.ssm.diagram.layouter.kimllabelprovider;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 
 import de.cau.cs.kieler.kiml.ui.provider.IKimlLabelProvider;
-import de.cau.cs.kieler.ssm.SimpleState;
-import de.cau.cs.kieler.ssm.provider.SimpleStateItemProvider;
+import de.cau.cs.kieler.ssm.CompositeState;
+import de.cau.cs.kieler.ssm.provider.CompositeStateItemProvider;
 
-public class KimlSimpleStateItemProvider extends SimpleStateItemProvider implements IKimlLabelProvider {
+public class KimlCompositeStateItemProvider extends CompositeStateItemProvider implements IKimlLabelProvider {
 
-	public KimlSimpleStateItemProvider(AdapterFactory adapterFactory) {
+	public KimlCompositeStateItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
 	@Override
 	public String getKimlLongLabel(Object object) {
-		String label = ((SimpleState)object).getName();
+		String label = ((CompositeState)object).getName();
 		return label;
 	}
 
 	@Override
 	public String getKimlShortLabel(Object object) {
-		String label = ((SimpleState)object).getName();
+		String label = ((CompositeState)object).getName();
 		return label;
 	}
 
@@ -43,3 +43,4 @@ public class KimlSimpleStateItemProvider extends SimpleStateItemProvider impleme
 	}
 
 }
+
