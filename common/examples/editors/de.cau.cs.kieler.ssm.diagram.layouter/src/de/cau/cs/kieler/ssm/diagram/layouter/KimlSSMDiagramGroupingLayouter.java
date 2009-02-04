@@ -46,18 +46,18 @@ import org.eclipse.gmf.runtime.draw2d.ui.internal.figures.AnimatableScrollPane;
 import org.eclipse.jface.viewers.IStructuredSelection;
 
 import de.cau.cs.kieler.kiml.layout.KimlLayoutPlugin;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.EDGE_LABEL_PLACEMENT;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLabelPlacement;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KDimension;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdge;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLabel;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLayout;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLabel;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutGraph;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroupLayout;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeLayout;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPoint;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphFactory;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_TYPE;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutType;
 import de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayouter;
 import de.cau.cs.kieler.kiml.layout.util.KimlLayoutPreferenceConstants;
 import de.cau.cs.kieler.kiml.layout.util.KimlLayoutUtil;
@@ -93,9 +93,9 @@ public class KimlSSMDiagramGroupingLayouter extends KimlAbstractLayouter {
 	private float widthCollapsed = 80f;
 	private float heightCollapsed = 40f;
 
-	private Map<NodeEditPart, KNodeGroup> nodeEditPart2NodeGroup = new HashMap<NodeEditPart, KNodeGroup>();
-	private Map<KNodeGroup, GraphicalEditPart> nodeGroup2NodeEditPart = new HashMap<KNodeGroup, GraphicalEditPart>();
-	private Map<KEdge, ConnectionEditPart> edge2ConnectionEditPart = new HashMap<KEdge, ConnectionEditPart>();
+	private Map<NodeEditPart, KLayoutNode> nodeEditPart2layoutNode = new HashMap<NodeEditPart, KLayoutNode>();
+	private Map<KLayoutNode, GraphicalEditPart> layoutNode2nodeEditPart = new HashMap<KLayoutNode, GraphicalEditPart>();
+	private Map<KLayoutEdge, ConnectionEditPart> edge2ConnectionEditPart = new HashMap<KLayoutEdge, ConnectionEditPart>();
 	private Map<KLabel, LabelEditPart> label2LabelEditPart = new HashMap<KLabel, LabelEditPart>();
 	private CommandStack commandStack = null;
 
@@ -142,8 +142,7 @@ public class KimlSSMDiagramGroupingLayouter extends KimlAbstractLayouter {
 		compoundCommand.setLabel("SSM Diagram Layout");
 
 		Point offset = new Point();
-		GraphicalEditPart gep = nodeGroup2NodeEditPart.get(layoutGraph
-				.getTopGroup());
+		GraphicalEditPart gep = layoutNode2nodeEditPart.get(layoutGraph);
 
 		if (gep != null) {
 			ChangeBoundsRequest changeBoundsRequest = new ChangeBoundsRequest(
@@ -152,7 +151,7 @@ public class KimlSSMDiagramGroupingLayouter extends KimlAbstractLayouter {
 
 			Dimension oldSize = gep.getFigure().getBounds().getSize();
 			Dimension newSize = KimlCommonHelper
-					.kDimension2Dimension(layoutGraph.getTopGroup().getLayout()
+					.kDimension2Dimension(layoutGraph.getLayout()
 							.getSize());
 
 			if (newSize != null && newSize.height != 0 && newSize.width != 0) {
@@ -165,7 +164,7 @@ public class KimlSSMDiagramGroupingLayouter extends KimlAbstractLayouter {
 			compoundCommand.add(gep.getCommand(changeBoundsRequest));
 		}
 
-		applyNodeLayoutRecursively(layoutGraph.getTopGroup(), compoundCommand,
+		applyNodeLayoutRecursively(layoutGraph, compoundCommand,
 				offset);
 
 		commandStack.execute(compoundCommand);
@@ -184,14 +183,14 @@ public class KimlSSMDiagramGroupingLayouter extends KimlAbstractLayouter {
 	 *            were created that do not belong to actual 'physical' nodes in
 	 *            the source document
 	 */
-	private void applyNodeLayoutRecursively(KNodeGroup currentGroup,
+	private void applyNodeLayoutRecursively(KLayoutNode currentGroup,
 			CompoundCommand compoundCommand, Point offset) {
 
-		for (KNodeGroup childGroup : currentGroup.getSubNodeGroups()) {
-			GraphicalEditPart gep = nodeGroup2NodeEditPart.get(childGroup);
+		for (KLayoutNode childGroup : currentGroup.getChildNodes()) {
+			GraphicalEditPart gep = layoutNode2nodeEditPart.get(childGroup);
 
 			/*
-			 * There is a GraphicalEditPart for this NodeGroup. Apply the
+			 * There is a GraphicalEditPart for this layout node. Apply the
 			 * layout.
 			 */
 			if (gep != null) {
@@ -237,10 +236,10 @@ public class KimlSSMDiagramGroupingLayouter extends KimlAbstractLayouter {
 			}
 
 			/*
-			 * There is no GraphicalEditPart for this nodeGroup in the model. So
-			 * this node must have been created as an intermediate node group
+			 * There is no GraphicalEditPart for this layout node in the model. So
+			 * this node must have been created as an intermediate layout node
 			 * (see above in buildLayoutGraphRecursively). Now Emma must take
-			 * care of a proper layout of those intermediate nodeGroups within
+			 * care of a proper layout of those intermediate layout nodes within
 			 * one GraphicalEditPart. This is done by an offset which is passed
 			 * to the children.
 			 */
@@ -265,12 +264,12 @@ public class KimlSSMDiagramGroupingLayouter extends KimlAbstractLayouter {
 	 *            were created that do not belong to actual 'physical' nodes in
 	 *            the source document
 	 */
-	private void applyEdgeLayout(KNodeGroup childGroup,
+	private void applyEdgeLayout(KLayoutNode childGroup,
 			CompoundCommand compoundCommand, Point offset) {
 
-		GraphicalEditPart sourceEditPart = nodeGroup2NodeEditPart
+		GraphicalEditPart sourceEditPart = layoutNode2nodeEditPart
 				.get(childGroup);
-		for (KEdge edge : childGroup.getOutgoingEdges()) {
+		for (KLayoutEdge edge : childGroup.getOutgoingEdges()) {
 			ConnectionEditPart connection = edge2ConnectionEditPart.get(edge);
 			KEdgeLayout edgeLayout = edge.getLayout();
 			PointList pointList = new PointList();
@@ -336,11 +335,11 @@ public class KimlSSMDiagramGroupingLayouter extends KimlAbstractLayouter {
 	 *            were created that do not belong to actual 'physical' nodes in
 	 *            the source document
 	 */
-	private void applyEdgeLabelLayout(KEdge edge,
+	private void applyEdgeLabelLayout(KLayoutEdge edge,
 			CompoundCommand compoundCommand, Point offset) {
 
-		KNodeGroup sourceNode = edge.getSource();
-		GraphicalEditPart sourceEditPart = nodeGroup2NodeEditPart
+		KLayoutNode sourceNode = edge.getSource();
+		GraphicalEditPart sourceEditPart = layoutNode2nodeEditPart
 				.get(sourceNode);
 
 		for (KEdgeLabel edgeLabel : edge.getLabel()) {
@@ -391,29 +390,25 @@ public class KimlSSMDiagramGroupingLayouter extends KimlAbstractLayouter {
 
 	@Override
 	protected KLayoutGraph buildLayoutGraph() {
-		layoutGraph = KimlLayoutGraphFactory.eINSTANCE.createKLayoutGraph();
-
-		// set at least this to have a top node in the layout graph which is not
-		// null
-		KNodeGroup topNodeGroup = KimlLayoutUtil.createInitializedNodeGroup();
-		layoutGraph.setTopGroup(topNodeGroup);
+		// create an initialized layout graph, which is also the top node
+		layoutGraph = KimlLayoutUtil.createInitializedLayoutGraph();
 
 		// init took care that rootPart is instance of NodeEditPart
 		NodeEditPart rootEditPart = (NodeEditPart) rootPart;
 
 		// set label and ID
-		topNodeGroup.getLabel().setText(
+		layoutGraph.getLabel().setText(
 				KimlCommonHelper.getShortLabel(rootEditPart));
-		topNodeGroup.setIdString(KimlCommonHelper.getLongLabel(rootEditPart));
+		layoutGraph.setIdString(KimlCommonHelper.getLongLabel(rootEditPart));
 		if (!groupEverySingleElement) {
-			topNodeGroup.setIdString(KimlCommonHelper
+			layoutGraph.setIdString(KimlCommonHelper
 					.getLongLabel(rootEditPart));
-			topNodeGroup
+			layoutGraph
 					.getLayout()
 					.setLayouterName(
 							KimlGMFLayoutHintHelper
 									.getContainedElementsLayouterName((ShapeNodeEditPart) rootEditPart));
-			topNodeGroup
+			layoutGraph
 					.getLayout()
 					.setLayoutType(
 							KimlGMFLayoutHintHelper
@@ -421,10 +416,10 @@ public class KimlSSMDiagramGroupingLayouter extends KimlAbstractLayouter {
 
 		}
 
-		nodeEditPart2NodeGroup.put(rootEditPart, topNodeGroup);
-		nodeGroup2NodeEditPart.put(topNodeGroup, rootEditPart);
+		nodeEditPart2layoutNode.put(rootEditPart, layoutGraph);
+		layoutNode2nodeEditPart.put(layoutGraph, rootEditPart);
 
-		buildLayoutGraphRecursively(rootEditPart, topNodeGroup);
+		buildLayoutGraphRecursively(rootEditPart, layoutGraph);
 		return layoutGraph;
 	}
 
@@ -434,16 +429,16 @@ public class KimlSSMDiagramGroupingLayouter extends KimlAbstractLayouter {
 	 * 
 	 * @param current
 	 *            The GraphicalEditPart which children will be processed
-	 * @param currentNodeGroup
-	 *            The corresponding KNodeGroup
+	 * @param currentLayoutNode
+	 *            The corresponding KLayoutNode
 	 */
 	private void buildLayoutGraphRecursively(GraphicalEditPart current,
-			KNodeGroup currentNodeGroup) {
+			KLayoutNode currentLayoutNode) {
 
 		// List and Map to save some intermediate information. Are newly created
 		// and populated each recursive call.
 		ArrayList<ConnectionEditPart> connections = new ArrayList<ConnectionEditPart>();
-		Map<String, ArrayList<KNodeGroup>> nodes2Groups = new HashMap<String, ArrayList<KNodeGroup>>();
+		Map<String, ArrayList<KLayoutNode>> nodes2Groups = new HashMap<String, ArrayList<KLayoutNode>>();
 
 		boolean isExpanded = true;
 
@@ -468,21 +463,21 @@ public class KimlSSMDiagramGroupingLayouter extends KimlAbstractLayouter {
 					.getScrollPane();
 			isExpanded = asp.isExpanded();
 			try {
-				nodeEditPart2NodeGroup.get(current.getParent()).getLayout()
+				nodeEditPart2layoutNode.get(current.getParent()).getLayout()
 						.getInsets().setTop(insetsTop);
-				nodeEditPart2NodeGroup.get(current.getParent()).getLayout()
+				nodeEditPart2layoutNode.get(current.getParent()).getLayout()
 						.getInsets().setLeft(insetsLeft);
 				if (!isExpanded) {
 					// setting the size to default values
-					nodeEditPart2NodeGroup.get(current.getParent()).getLayout()
+					nodeEditPart2layoutNode.get(current.getParent()).getLayout()
 							.getSize().setHeight(heightCollapsed);
-					nodeEditPart2NodeGroup.get(current.getParent()).getLayout()
+					nodeEditPart2layoutNode.get(current.getParent()).getLayout()
 							.getSize().setWidth(widthCollapsed);
 					// extend the label string to handle the node label of a
 					// composite state correctly
-					String text = nodeEditPart2NodeGroup.get(
+					String text = nodeEditPart2layoutNode.get(
 							current.getParent()).getLabel().getText();
-					nodeEditPart2NodeGroup.get(current.getParent()).getLabel()
+					nodeEditPart2layoutNode.get(current.getParent()).getLabel()
 							.setText(text.concat("XX"));
 				}
 			} catch (Exception e) {
@@ -497,9 +492,9 @@ public class KimlSSMDiagramGroupingLayouter extends KimlAbstractLayouter {
 				// if true, Emma has a real EditPart with contents.
 				if (obj instanceof NodeEditPart) {
 					NodeEditPart childNodeEditPart = (NodeEditPart) obj;
-					KNodeGroup childKNodeGroup = KimlLayoutUtil
-							.createInitializedNodeGroup();
-					KNodeGroupLayout kLayout = childKNodeGroup.getLayout();
+					KLayoutNode childLayoutNode = KimlLayoutUtil
+							.createInitializedLayoutNode();
+					KNodeLayout kLayout = childLayoutNode.getLayout();
 
 					Rectangle childBounds = childNodeEditPart.getFigure()
 							.getBounds();
@@ -519,16 +514,16 @@ public class KimlSSMDiagramGroupingLayouter extends KimlAbstractLayouter {
 					kLayout.getSize().setWidth(childBounds.width);
 
 					// set label and ID
-					childKNodeGroup.getLabel().setText(
+					childLayoutNode.getLabel().setText(
 							KimlCommonHelper.getShortLabel(childNodeEditPart));
-					childKNodeGroup.setIdString(KimlCommonHelper
+					childLayoutNode.setIdString(KimlCommonHelper
 							.getLongLabel(childNodeEditPart));
 
 					// now process the layout groups correctly, as there may be
 					// more than one in each editPart itself
 					if (groupEverySingleElement) {
 						addNode2Group(nodes2Groups, childNodeEditPart,
-								childKNodeGroup);
+								childLayoutNode);
 					} else {
 						kLayout
 								.setLayouterName(KimlGMFLayoutHintHelper
@@ -536,20 +531,20 @@ public class KimlSSMDiagramGroupingLayouter extends KimlAbstractLayouter {
 						kLayout
 								.setLayoutType(KimlGMFLayoutHintHelper
 										.getContainedElementsLayoutType((ShapeNodeEditPart) childNodeEditPart));
-						childKNodeGroup.setIdString(KimlCommonHelper
+						childLayoutNode.setIdString(KimlCommonHelper
 								.getLongLabel(childNodeEditPart));
-						currentNodeGroup.getSubNodeGroups()
-								.add(childKNodeGroup);
+						currentLayoutNode.getChildNodes()
+								.add(childLayoutNode);
 					}
 					// keep track of mapping between elements
-					nodeEditPart2NodeGroup.put(childNodeEditPart,
-							childKNodeGroup);
-					nodeGroup2NodeEditPart.put(childKNodeGroup,
+					nodeEditPart2layoutNode.put(childNodeEditPart,
+							childLayoutNode);
+					layoutNode2nodeEditPart.put(childLayoutNode,
 							childNodeEditPart);
 
 					// and process the child as new current
 					buildLayoutGraphRecursively(childNodeEditPart,
-							childKNodeGroup);
+							childLayoutNode);
 				}
 
 				// If it is just a graphical edit part, it may be the
@@ -559,41 +554,41 @@ public class KimlSSMDiagramGroupingLayouter extends KimlAbstractLayouter {
 				// has the parent of it, but needs the direct children.
 				else if (obj instanceof GraphicalEditPart) {
 					GraphicalEditPart childPart = (GraphicalEditPart) obj;
-					buildLayoutGraphRecursively(childPart, currentNodeGroup);
+					buildLayoutGraphRecursively(childPart, currentLayoutNode);
 				}
 			}
 
 			/*
 			 * Now process the children correctly to add them to newly created
-			 * groups which are added as K-subgroups to the parent node group.
+			 * groups which are added as K-subgroups to the parent layout node.
 			 */
-			processNodeGroups(nodes2Groups, currentNodeGroup);
+			processLayoutNodes(nodes2Groups, currentLayoutNode);
 
 			/*
 			 * Finally process all the connections, as Emma has build all the
-			 * needed KNodeGroups which act as source and target.
+			 * needed KLayoutNodes which act as source and target.
 			 */
 			processConnections(connections);
 		}
 	}
 
 	/**
-	 * This function takes care of adding the node groups correctly to some
+	 * This function takes care of adding the layout nodes correctly to some
 	 * parent node. If inside of an node in, for example, a graphical editor
 	 * some nodes are grouped together, then this grouping itself will result in
-	 * a new intermediate KNodeGroup, to which the actual grouped nodes are
-	 * added as children. This intermediate KNodeGroup is then added to the
+	 * a new intermediate KLayoutNode, to which the actual grouped nodes are
+	 * added as children. This intermediate KLayoutNode is then added to the
 	 * current (=parent) group.
 	 * 
 	 * @param nodes2Groups
 	 *            A map with the grouping information of different nodes
-	 * @param currentNodeGroup
-	 *            The actually processed KNodeGroup from the
+	 * @param currentLayoutNode
+	 *            The actually processed KLayoutNode from the
 	 *            <code>buildLayoutGraphRecursively</code> step before.
 	 */
-	private void processNodeGroups(
-			Map<String, ArrayList<KNodeGroup>> nodes2Groups,
-			KNodeGroup currentNodeGroup) {
+	private void processLayoutNodes(
+			Map<String, ArrayList<KLayoutNode>> nodes2Groups,
+			KLayoutNode currentLayoutNode) {
 
 		/*
 		 * If there is just one group, Emma does not need to create a new
@@ -603,77 +598,77 @@ public class KimlSSMDiagramGroupingLayouter extends KimlAbstractLayouter {
 		 * information.
 		 */
 		if (nodes2Groups.size() == 1) {
-			for (ArrayList<KNodeGroup> nodesInGroup : nodes2Groups.values()) {
-				for (KNodeGroup childGroup : nodesInGroup) {
-					LAYOUT_TYPE layoutType = LAYOUT_TYPE.DEFAULT;
+			for (ArrayList<KLayoutNode> nodesInGroup : nodes2Groups.values()) {
+				for (KLayoutNode childGroup : nodesInGroup) {
+					KLayoutType layoutType = KLayoutType.DEFAULT;
 					String layouterName = "";
-					if (nodeGroup2NodeEditPart.get(childGroup) instanceof ShapeNodeEditPart) {
+					if (layoutNode2nodeEditPart.get(childGroup) instanceof ShapeNodeEditPart) {
 						layoutType = KimlGMFLayoutHintHelper
-								.getLayoutType((ShapeNodeEditPart) nodeGroup2NodeEditPart
+								.getLayoutType((ShapeNodeEditPart) layoutNode2nodeEditPart
 										.get(childGroup));
 						layouterName = KimlGMFLayoutHintHelper
-								.getLayouterName((ShapeNodeEditPart) nodeGroup2NodeEditPart
+								.getLayouterName((ShapeNodeEditPart) layoutNode2nodeEditPart
 										.get(childGroup));
 					}
-					currentNodeGroup.getLayout().setLayoutType(layoutType);
-					currentNodeGroup.getLayout().setLayouterName(layouterName);
-					currentNodeGroup.setIdString(KimlCommonHelper
-							.getLongLabel(nodeGroup2NodeEditPart
-									.get(currentNodeGroup)));
-					currentNodeGroup.getSubNodeGroups().add(childGroup);
+					currentLayoutNode.getLayout().setLayoutType(layoutType);
+					currentLayoutNode.getLayout().setLayouterName(layouterName);
+					currentLayoutNode.setIdString(KimlCommonHelper
+							.getLongLabel(layoutNode2nodeEditPart
+									.get(currentLayoutNode)));
+					currentLayoutNode.getChildNodes().add(childGroup);
 				}
 			}
 		}
 		/*
 		 * More than one subgroup inside a composite node. Create for each
-		 * layout group a new intermediate KNodeGroup. Add the elements with the
+		 * layout group a new intermediate KLayoutNode. Add the elements with the
 		 * same layout groupID to the intermediate groups and than add the
 		 * intermediate groups as children to the current one.
 		 */
 		else {
 			int i = 0;
-			for (ArrayList<KNodeGroup> nodesInGroup : nodes2Groups.values()) {
+			for (ArrayList<KLayoutNode> nodesInGroup : nodes2Groups.values()) {
 				i++;
-				KNodeGroup intermediateNodeGroup = KimlLayoutUtil
-						.createInitializedNodeGroup();
+				KLayoutNode intermediateLayoutNode = KimlLayoutUtil
+						.createInitializedLayoutNode();
 
-				for (KNodeGroup childGroup : nodesInGroup) {
-					intermediateNodeGroup.getSubNodeGroups().add(childGroup);
+				for (KLayoutNode childGroup : nodesInGroup) {
+					intermediateLayoutNode.getChildNodes().add(childGroup);
 				}
 
-				LAYOUT_TYPE layoutType = LAYOUT_TYPE.DEFAULT;
+				KLayoutType layoutType = KLayoutType.DEFAULT;
 				String layouterName = "";
-				if (nodeGroup2NodeEditPart.get(intermediateNodeGroup
-						.getSubNodeGroups().get(0)) instanceof ShapeNodeEditPart) {
+				if (layoutNode2nodeEditPart.get(intermediateLayoutNode
+						.getChildNodes().get(0)) instanceof ShapeNodeEditPart) {
 					layoutType = KimlGMFLayoutHintHelper
-							.getLayoutType((ShapeNodeEditPart) nodeGroup2NodeEditPart
-									.get(intermediateNodeGroup
-											.getSubNodeGroups().get(0)));
+							.getLayoutType((ShapeNodeEditPart) layoutNode2nodeEditPart
+									.get(intermediateLayoutNode
+											.getChildNodes().get(0)));
 					layouterName = KimlGMFLayoutHintHelper
-							.getLayouterName((ShapeNodeEditPart) nodeGroup2NodeEditPart
-									.get(intermediateNodeGroup
-											.getSubNodeGroups().get(0)));
+							.getLayouterName((ShapeNodeEditPart) layoutNode2nodeEditPart
+									.get(intermediateLayoutNode
+											.getChildNodes().get(0)));
 				}
-				intermediateNodeGroup.getLayout().setLayoutType(layoutType);
-				intermediateNodeGroup.getLayout().setLayouterName(layouterName);
-				intermediateNodeGroup
+				intermediateLayoutNode.getLayout().setLayoutType(layoutType);
+				intermediateLayoutNode.getLayout().setLayouterName(layouterName);
+				intermediateLayoutNode
 						.setIdString(i
 								+ ". Group of a "
 								+ KimlCommonHelper
-										.getLongLabel((ShapeNodeEditPart) nodeGroup2NodeEditPart
-												.get(currentNodeGroup)));
-				// set the layout type of the current node group, i.e. the
+										.getLongLabel((ShapeNodeEditPart) layoutNode2nodeEditPart
+												.get(currentLayoutNode)));
+				// set the layout type of the current layout node, i.e. the
 				// type
-				// how the child intermediate node groups, to which no
+				// how the child intermediate layout nodes, to which no
 				// corresponding element an an editor exists, should be laid
 				// out.
-				currentNodeGroup.getLayout().setLayoutType(LAYOUT_TYPE.DEFAULT);
-				currentNodeGroup.getLayout().setLayouterName("");
-				currentNodeGroup
+				currentLayoutNode.getLayout().setLayoutType(KLayoutType.DEFAULT);
+				currentLayoutNode.getLayout().setLayouterName("");
+				currentLayoutNode
 						.setIdString(KimlCommonHelper
-								.getLongLabel((ShapeNodeEditPart) nodeGroup2NodeEditPart
-										.get(currentNodeGroup)));
-				currentNodeGroup.getSubNodeGroups().add(intermediateNodeGroup);
+								.getLongLabel((ShapeNodeEditPart) layoutNode2nodeEditPart
+										.get(currentLayoutNode)));
+				currentLayoutNode.getChildNodes().add(intermediateLayoutNode);
 			}
 		}
 
@@ -691,9 +686,9 @@ public class KimlSSMDiagramGroupingLayouter extends KimlAbstractLayouter {
 
 		for (ConnectionEditPart connection : connections) {
 
-			KEdge edge = KimlLayoutUtil.createInitializedEdge();
-			edge.setSource(nodeEditPart2NodeGroup.get(connection.getSource()));
-			edge.setTarget(nodeEditPart2NodeGroup.get(connection.getTarget()));
+			KLayoutEdge edge = KimlLayoutUtil.createInitializedEdge();
+			edge.setSource(nodeEditPart2layoutNode.get(connection.getSource()));
+			edge.setTarget(nodeEditPart2layoutNode.get(connection.getTarget()));
 			edge2ConnectionEditPart.put(edge, connection);
 
 			/*
@@ -723,7 +718,7 @@ public class KimlSSMDiagramGroupingLayouter extends KimlAbstractLayouter {
 							KEdgeLabel hLabel = KimlLayoutUtil
 									.createInitializedEdgeLabel();
 							hLabel.getLabelLayout().setLabelPlacement(
-									EDGE_LABEL_PLACEMENT.HEAD);
+									KEdgeLabelPlacement.HEAD);
 							hLabel.getLabelLayout().setSize(labelSize);
 							hLabel.setText(headLabel);
 							edge.getLabel().add(hLabel);
@@ -739,7 +734,7 @@ public class KimlSSMDiagramGroupingLayouter extends KimlAbstractLayouter {
 							KEdgeLabel mLabel = KimlLayoutUtil
 									.createInitializedEdgeLabel();
 							mLabel.getLabelLayout().setLabelPlacement(
-									EDGE_LABEL_PLACEMENT.CENTER);
+									KEdgeLabelPlacement.CENTER);
 							mLabel.getLabelLayout().setSize(labelSize);
 							mLabel.setText(midLabel);
 							edge.getLabel().add(mLabel);
@@ -755,7 +750,7 @@ public class KimlSSMDiagramGroupingLayouter extends KimlAbstractLayouter {
 							KEdgeLabel tLabel = KimlLayoutUtil
 									.createInitializedEdgeLabel();
 							tLabel.getLabelLayout().setLabelPlacement(
-									EDGE_LABEL_PLACEMENT.TAIL);
+									KEdgeLabelPlacement.TAIL);
 							tLabel.getLabelLayout().setSize(labelSize);
 							tLabel.setText(tailLabel);
 							edge.getLabel().add(tLabel);
@@ -776,16 +771,16 @@ public class KimlSSMDiagramGroupingLayouter extends KimlAbstractLayouter {
 	 * @param childNode
 	 * @param childGroup
 	 */
-	private void addNode2Group(Map<String, ArrayList<KNodeGroup>> nodes2Groups,
-			NodeEditPart childNode, KNodeGroup childGroup) {
+	private void addNode2Group(Map<String, ArrayList<KLayoutNode>> nodes2Groups,
+			NodeEditPart childNode, KLayoutNode childGroup) {
 
 		String groupID = KimlGMFLayoutHintHelper
 				.getLayoutGroup((ShapeNodeEditPart) childNode);
 		if (nodes2Groups.containsKey(groupID)) {
-			ArrayList<KNodeGroup> nodesInGroup = nodes2Groups.get(groupID);
+			ArrayList<KLayoutNode> nodesInGroup = nodes2Groups.get(groupID);
 			nodesInGroup.add(childGroup);
 		} else {
-			ArrayList<KNodeGroup> nodesInGroup = new ArrayList<KNodeGroup>();
+			ArrayList<KLayoutNode> nodesInGroup = new ArrayList<KLayoutNode>();
 			nodesInGroup.add(childGroup);
 			nodes2Groups.put(groupID, nodesInGroup);
 		}
