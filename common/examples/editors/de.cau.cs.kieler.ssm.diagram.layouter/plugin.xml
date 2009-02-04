@@ -66,5 +66,14 @@
          </propertySection>
       </propertySections>
    </extension>
+   <extension
+         point="org.eclipse.emf.edit.itemProviderAdapterFactories">
+      <factory
+            class="de.cau.cs.kieler.ssm.diagram.layouter.provider.ssmKimlProviderAdapterFactory"
+            uri="http://www.informatik.uni-kiel.de/rtsys/ssm"
+            supportedTypes=
+              "de.cau.cs.kieler.kiml.ui.provider.IKimlLabelProvider">
+      </factory>
+   </extension>
 
 </plugin>

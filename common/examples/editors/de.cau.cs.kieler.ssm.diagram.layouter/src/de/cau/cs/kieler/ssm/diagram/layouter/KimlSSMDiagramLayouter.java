@@ -22,6 +22,8 @@ import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.PointList;
 import org.eclipse.draw2d.geometry.Rectangle;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.gef.ConnectionEditPart;
 import org.eclipse.gef.GraphicalEditPart;
@@ -42,6 +44,7 @@ import org.eclipse.gmf.runtime.diagram.ui.requests.RequestConstants;
 import org.eclipse.gmf.runtime.diagram.ui.requests.SetAllBendpointRequest;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx;
 import org.eclipse.gmf.runtime.draw2d.ui.internal.figures.AnimatableScrollPane;
+import org.eclipse.gmf.runtime.notation.impl.ViewImpl;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.SWT;
 
@@ -64,6 +67,7 @@ import de.cau.cs.kieler.kiml.layout.util.KimlLayoutPreferenceConstants;
 import de.cau.cs.kieler.kiml.layout.util.KimlLayoutUtil;
 import de.cau.cs.kieler.kiml.ui.helpers.KimlCommonHelper;
 import de.cau.cs.kieler.kiml.ui.helpers.KimlGMFLayoutHintHelper;
+import de.cau.cs.kieler.kiml.ui.provider.KimlAdapterFactoryLabelProvider;
 import de.cau.cs.kieler.ssm.diagram.edit.parts.CompositeState2EditPart;
 import de.cau.cs.kieler.ssm.diagram.edit.parts.CompositeStateCompositeStateCompartment2EditPart;
 import de.cau.cs.kieler.ssm.diagram.edit.parts.CompositeStateCompositeStateCompartmentEditPart;
@@ -131,6 +135,8 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 	private CommandStack commandStack = null;
 	private double zoomLevel = 1.0;
 	private ConnectionLayer connectionLayer = null;
+	private KimlAdapterFactoryLabelProvider kimlAdapterLabelProvider = new KimlAdapterFactoryLabelProvider(
+			new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE));
 
 	/*------------------------------------------------------------------------------*/
 	/*-----------------------------APPLICATION OF LAYOUT----------------------------*/
@@ -753,11 +759,10 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 					KDimension labelSize = KimlCommonHelper
 							.dimension2KDimension(labelEditPart.getFigure()
 									.getBounds().getSize());
-
+					EObject transition = ((ViewImpl)connection.getModel()).getElement();
 					// head label
 					if (labelEditPart.getKeyPoint() == ConnectionLocator.SOURCE) {
-						String headLabel = KimlCommonHelper
-								.getHeadLabel(connection);
+						String headLabel = kimlAdapterLabelProvider.getKimlHeadLabel(transition);
 						if (headLabel != null) {
 							KEdgeLabel hLabel = KimlLayoutUtil
 									.createInitializedEdgeLabel();
@@ -772,8 +777,7 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 
 					// middle label
 					if (labelEditPart.getKeyPoint() == ConnectionLocator.MIDDLE) {
-						String midLabel = KimlCommonHelper
-								.getMidLabel(connection);
+						String midLabel = kimlAdapterLabelProvider.getKimlCenterLabel(transition);
 						if (midLabel != null) {
 							KEdgeLabel mLabel = KimlLayoutUtil
 									.createInitializedEdgeLabel();
@@ -788,8 +792,7 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 
 					// tail label
 					if (labelEditPart.getKeyPoint() == ConnectionLocator.TARGET) {
-						String tailLabel = KimlCommonHelper
-								.getTailLabel(connection);
+						String tailLabel = kimlAdapterLabelProvider.getKimlTailLabel(transition);
 						if (tailLabel != null) {
 							KEdgeLabel tLabel = KimlLayoutUtil
 									.createInitializedEdgeLabel();
