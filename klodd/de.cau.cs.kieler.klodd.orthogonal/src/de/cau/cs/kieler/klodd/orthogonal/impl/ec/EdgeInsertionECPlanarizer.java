@@ -3,8 +3,8 @@ package de.cau.cs.kieler.klodd.orthogonal.impl.ec;
 import java.util.HashMap;
 import java.util.Map;
 
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdge;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
 import de.cau.cs.kieler.klodd.core.algorithms.AbstractAlgorithm;
 import de.cau.cs.kieler.klodd.orthogonal.modules.IECPlanarizer;
 import de.cau.cs.kieler.klodd.orthogonal.structures.*;
@@ -20,12 +20,12 @@ public class EdgeInsertionECPlanarizer extends AbstractAlgorithm implements
 		IECPlanarizer {
 
 	/** map of embedding constraints */
-	private Map<KNodeGroup, EmbeddingConstraint> constraintsMap = null;
+	private Map<KLayoutNode, EmbeddingConstraint> constraintsMap = null;
 	
 	/** TSM graph that is currently processed */
 	private TSMGraph tsmGraph;
-	/** map of node groups to corresponding TSM nodes */
-	private Map<KNodeGroup, TSMNode> nodeGroup2TSMNodeMap;
+	/** map of layout nodes to corresponding TSM nodes */
+	private Map<KLayoutNode, TSMNode> layoutNode2TSMNodeMap;
 	/** numbers assigned during DFS */
 	private int[] dfsNum;
 	/** next DFS number to be assigned */
@@ -44,19 +44,19 @@ public class EdgeInsertionECPlanarizer extends AbstractAlgorithm implements
 	 * @see de.cau.cs.kieler.klodd.orthogonal.modules.IECPlanarizer#setConstraints(java.util.Map)
 	 */
 	public void setConstraints(
-			Map<KNodeGroup, EmbeddingConstraint> constraintsMap) {
+			Map<KLayoutNode, EmbeddingConstraint> constraintsMap) {
 		this.constraintsMap = constraintsMap;
 	}
 
 	/* (non-Javadoc)
-	 * @see de.cau.cs.kieler.klodd.orthogonal.modules.IPlanarizer#planarize(de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup)
+	 * @see de.cau.cs.kieler.klodd.orthogonal.modules.IPlanarizer#planarize(de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode)
 	 */
-	public TSMGraph planarize(KNodeGroup nodeGroup) {
+	public TSMGraph planarize(KLayoutNode layoutNode) {
 		if (constraintsMap == null)
 			throw new IllegalStateException("The method setConstraints() must be called first.");
 		
 		// build normal graph without edges
-		tsmGraph = buildGraph(nodeGroup);
+		tsmGraph = buildGraph(layoutNode);
 		// insert the stored edges, one by one, and preserve planarity
 		ECEdgeInserter edgeInserter = new ECEdgeInserter();
 		edgeInserter.setGraph(tsmGraph);
@@ -72,29 +72,29 @@ public class EdgeInsertionECPlanarizer extends AbstractAlgorithm implements
 	}
 	
 	/**
-	 * Builds a TSM graph from a parent node group. The edges are inserted
+	 * Builds a TSM graph from a parent layout node. The edges are inserted
 	 * into the local list of edges, but not into the created graph. The
 	 * edges are created in the order of a DFS run.
 	 * 
-	 * @param parentGroup parent node group
+	 * @param parentNode parent layout node
 	 * @return the new TSM graph
 	 */
-	private TSMGraph buildGraph(KNodeGroup parentGroup) {
+	private TSMGraph buildGraph(KLayoutNode parentNode) {
 		TSMGraph tsmGraph = new TSMGraph();
 		// create TSM nodes
-		nodeGroup2TSMNodeMap = new HashMap<KNodeGroup, TSMNode>();
-		for (KNodeGroup child : parentGroup.getSubNodeGroups()) {
+		layoutNode2TSMNodeMap = new HashMap<KLayoutNode, TSMNode>();
+		for (KLayoutNode child : parentNode.getChildNodes()) {
 			TSMNode tsmNode = new TSMNode(tsmGraph, TSMNode.Type.LAYOUT, child);
-			nodeGroup2TSMNodeMap.put(child, tsmNode);
+			layoutNode2TSMNodeMap.put(child, tsmNode);
 		}
 		// create TSM edges
-		int nodeCount = parentGroup.getSubNodeGroups().size();
+		int nodeCount = parentNode.getChildNodes().size();
 		dfsNum = new int[nodeCount];
 		for (int i = 0; i < nodeCount; i++)
 			dfsNum[i] = -1;
 		nextDfsNum = 0;
-		for (KNodeGroup child : parentGroup.getSubNodeGroups()) {
-			TSMNode childTsmNode = nodeGroup2TSMNodeMap.get(child);
+		for (KLayoutNode child : parentNode.getChildNodes()) {
+			TSMNode childTsmNode = layoutNode2TSMNodeMap.get(child);
 			if (dfsNum[childTsmNode.id] < 0)
 				dfsVisit(child, childTsmNode);
 		}
@@ -108,13 +108,13 @@ public class EdgeInsertionECPlanarizer extends AbstractAlgorithm implements
 	 * @param layoutNode layout node to process
 	 * @param tsmNode TSM node that corresponds to the given layout node
 	 */
-	private void dfsVisit(KNodeGroup layoutNode, TSMNode tsmNode) {
+	private void dfsVisit(KLayoutNode layoutNode, TSMNode tsmNode) {
 		dfsNum[tsmNode.id] = nextDfsNum++;
-		for (KEdge edge : layoutNode.getOutgoingEdges()) {
-			KNodeGroup targetLayoutNode = edge.getTarget();
+		for (KLayoutEdge edge : layoutNode.getOutgoingEdges()) {
+			KLayoutNode targetLayoutNode = edge.getTarget();
 			// TODO external ports need to be considered
 			if (targetLayoutNode != null) {
-				TSMNode targetTsmNode = nodeGroup2TSMNodeMap.get(targetLayoutNode);
+				TSMNode targetTsmNode = layoutNode2TSMNodeMap.get(targetLayoutNode);
 				new TSMEdge(tsmGraph, tsmNode, targetTsmNode);
 				if (dfsNum[targetTsmNode.id] < 0) {
 					dfsVisit(targetLayoutNode, targetTsmNode);

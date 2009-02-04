@@ -3,9 +3,9 @@ package de.cau.cs.kieler.klodd.hierarchical.structures;
 import java.util.LinkedList;
 import java.util.List;
 
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdge;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPoint;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPort;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphFactory;
 
 
@@ -28,13 +28,13 @@ public class ElementLoop {
 	public List<KPoint> bendPoints = new LinkedList<KPoint>();
 	
 	/** the contained edge object */
-	private KEdge edge;
+	private KLayoutEdge edge;
 	/** the layer element */
 	private LayerElement element;
 	/** the source port */
-	private KPort sourcePort;
+	private KLayoutPort sourcePort;
 	/** the target port */
-	private KPort targetPort;
+	private KLayoutPort targetPort;
 	
 	/**
 	 * Creates an element loop with given source and target port.
@@ -44,8 +44,8 @@ public class ElementLoop {
 	 * @param sourcePort the source port
 	 * @param targetPort the target port
 	 */
-	public ElementLoop(KEdge edge, LayerElement elem, KPort sourcePort,
-			KPort targetPort) {
+	public ElementLoop(KLayoutEdge edge, LayerElement elem, KLayoutPort sourcePort,
+			KLayoutPort targetPort) {
 		this.edge = edge;
 		this.element = elem;
 		this.sourcePort = sourcePort;
@@ -66,7 +66,7 @@ public class ElementLoop {
 	 * 
 	 * @return the source port
 	 */
-	public KPort getSourcePort() {
+	public KLayoutPort getSourcePort() {
 		return sourcePort;
 	}
 
@@ -75,7 +75,7 @@ public class ElementLoop {
 	 * 
 	 * @return the target port
 	 */
-	public KPort getTargetPort() {
+	public KLayoutPort getTargetPort() {
 		return targetPort;
 	}
 	

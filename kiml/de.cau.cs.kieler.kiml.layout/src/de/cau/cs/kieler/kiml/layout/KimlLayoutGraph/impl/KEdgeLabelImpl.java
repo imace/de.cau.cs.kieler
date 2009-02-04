@@ -19,7 +19,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>KEdge Label</b></em>'.
+ * An implementation of the model object '<em><b>KLayoutEdge Label</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:

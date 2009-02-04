@@ -4,14 +4,14 @@ import java.util.LinkedList;
 import java.util.List;
 
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KDimension;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdge;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KInsets;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPoint;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPort;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPortLayout;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphFactory;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_OPTION;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.PORT_PLACEMENT;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutOption;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPortPlacement;
 
 
 /**
@@ -37,15 +37,15 @@ public class LayerConnection {
 	public List<KPoint> bendPoints = new LinkedList<KPoint>();
 	
 	/** the contained edge object */
-	private KEdge edge;
+	private KLayoutEdge edge;
 	/** the source element */
 	private LayerElement sourceElement;
 	/** the source port */
-	private KPort sourcePort;
+	private KLayoutPort sourcePort;
 	/** the target element */
 	private LayerElement targetElement;
 	/** the target port */
-	private KPort targetPort;
+	private KLayoutPort targetPort;
 
 	/**
 	 * Creates a layer connection with given source and target.
@@ -56,8 +56,8 @@ public class LayerConnection {
 	 * @param targetElem the target element
 	 * @param targetPort the target port
 	 */
-	public LayerConnection(KEdge edge, LayerElement sourceElem, KPort sourcePort,
-			LayerElement targetElem, KPort targetPort) {
+	public LayerConnection(KLayoutEdge edge, LayerElement sourceElem, KLayoutPort sourcePort,
+			LayerElement targetElem, KLayoutPort targetPort) {
 		this.edge = edge;
 		this.sourceElement = sourceElem;
 		this.sourcePort = sourcePort;
@@ -79,7 +79,7 @@ public class LayerConnection {
 	 * Applies the layout of this layer connection to the contained edge.
 	 * 
 	 * @param offset offset to be added to each bend point
-	 * @param insets insets of the containing parent node group
+	 * @param insets insets of the containing parent layout node
 	 */
 	public void applyLayout(KPoint offset, KInsets insets) {
 		LayeredGraph layeredGraph = sourceElement.getLayer().getLayeredGraph();
@@ -88,18 +88,18 @@ public class LayerConnection {
 		boolean subSourceXInset = false, subSourceYInset = false,
 			subTargetXInset = false, subTargetYInset = false;
 		if (layeredGraph.areExternalPortsFixed()) {
-			if (sourcePort != null && sourcePort.getNodeGroup() == layeredGraph.getParentGroup()) {
-				if (sourcePort.getLayout().getPlacement() == PORT_PLACEMENT.NORTH
-						|| sourcePort.getLayout().getPlacement() == PORT_PLACEMENT.SOUTH) {
+			if (sourcePort != null && sourcePort.getNode() == layeredGraph.getParentGroup()) {
+				if (sourcePort.getLayout().getPlacement() == KPortPlacement.NORTH
+						|| sourcePort.getLayout().getPlacement() == KPortPlacement.SOUTH) {
 					subSourceXInset = true;
 				}
 				else {
 					subSourceYInset = true;
 				}
 			}
-			if (targetPort != null && targetPort.getNodeGroup() == layeredGraph.getParentGroup()) {
-				if (targetPort.getLayout().getPlacement() == PORT_PLACEMENT.NORTH
-						|| targetPort.getLayout().getPlacement() == PORT_PLACEMENT.SOUTH) {
+			if (targetPort != null && targetPort.getNode() == layeredGraph.getParentGroup()) {
+				if (targetPort.getLayout().getPlacement() == KPortPlacement.NORTH
+						|| targetPort.getLayout().getPlacement() == KPortPlacement.SOUTH) {
 					subTargetXInset = true;
 				}
 				else {
@@ -118,7 +118,7 @@ public class LayerConnection {
 		// calculate position of source point
 		KPoint sourcePoint = KimlLayoutGraphFactory.eINSTANCE.createKPoint();
 		if (sourcePort != null) {
-			if (sourcePort.getNodeGroup() == layeredGraph.parentGroup) {
+			if (sourcePort.getNode() == layeredGraph.parentNode) {
 				sourcePoint.setX(sourceElement.getPosition().getX()
 						+ sourcePort.getLayout().getSize().getWidth() / 2);
 				if (subSourceXInset) {
@@ -156,7 +156,7 @@ public class LayerConnection {
 		// calculate position of target point
 		KPoint targetPoint = KimlLayoutGraphFactory.eINSTANCE.createKPoint();
 		if (targetPort != null) {
-			if (targetPort.getNodeGroup() == layeredGraph.parentGroup) {
+			if (targetPort.getNode() == layeredGraph.parentNode) {
 				targetPoint.setX(targetElement.getPosition().getX()
 						+ targetPort.getLayout().getSize().getWidth() / 2);
 				if (subTargetXInset) {
@@ -220,7 +220,7 @@ public class LayerConnection {
 	 * 
 	 * @return the sourcePort
 	 */
-	public KPort getSourcePort() {
+	public KLayoutPort getSourcePort() {
 		return sourcePort;
 	}
 
@@ -238,7 +238,7 @@ public class LayerConnection {
 	 * 
 	 * @return the targetPort
 	 */
-	public KPort getTargetPort() {
+	public KLayoutPort getTargetPort() {
 		return targetPort;
 	}
 	
@@ -251,25 +251,25 @@ public class LayerConnection {
 	 */
 	public float calcSourcePos(float minDist) {
 		LayeredGraph layeredGraph = sourceElement.getLayer().getLayeredGraph();
-		LAYOUT_OPTION layoutDirection = layeredGraph.getLayoutDirection();
-		sourceAnchorPos = layoutDirection == LAYOUT_OPTION.VERTICAL
+		KLayoutOption layoutDirection = layeredGraph.getLayoutDirection();
+		sourceAnchorPos = layoutDirection == KLayoutOption.VERTICAL
 				? sourceElement.getPosition().getX()
 				: sourceElement.getPosition().getY();
 		if (sourceSidePos == 0) {
 			if (sourcePort != null) {
 				KPortLayout portLayout = sourcePort.getLayout();
-				sourceAnchorPos += layoutDirection == LAYOUT_OPTION.VERTICAL
+				sourceAnchorPos += layoutDirection == KLayoutOption.VERTICAL
 						? portLayout.getSize().getWidth() / 2
 						: portLayout.getSize().getHeight() / 2;
-				if (sourcePort.getNodeGroup() != layeredGraph.getParentGroup()) {
-					sourceAnchorPos += layoutDirection == LAYOUT_OPTION.VERTICAL
+				if (sourcePort.getNode() != layeredGraph.getParentGroup()) {
+					sourceAnchorPos += layoutDirection == KLayoutOption.VERTICAL
 							? portLayout.getLocation().getX()
 							: portLayout.getLocation().getY();
 				}
 			}
 		}
 		else if (sourceSidePos > 0) {
-			sourceAnchorPos += (layoutDirection == LAYOUT_OPTION.VERTICAL
+			sourceAnchorPos += (layoutDirection == KLayoutOption.VERTICAL
 					? sourceElement.getRealDim().getWidth()
 					: sourceElement.getRealDim().getHeight())
 					+ sourceSidePos * minDist;
@@ -289,25 +289,25 @@ public class LayerConnection {
 	 */
 	public float calcTargetPos(float minDist) {
 		LayeredGraph layeredGraph = sourceElement.getLayer().getLayeredGraph();
-		LAYOUT_OPTION layoutDirection = layeredGraph.getLayoutDirection();
-		targetAnchorPos = layoutDirection == LAYOUT_OPTION.VERTICAL
+		KLayoutOption layoutDirection = layeredGraph.getLayoutDirection();
+		targetAnchorPos = layoutDirection == KLayoutOption.VERTICAL
 				? targetElement.getPosition().getX()
 				: targetElement.getPosition().getY();
 		if (targetSidePos == 0) {
 			if (targetPort != null) {
 				KPortLayout portLayout = targetPort.getLayout();
-				targetAnchorPos += layoutDirection == LAYOUT_OPTION.VERTICAL
+				targetAnchorPos += layoutDirection == KLayoutOption.VERTICAL
 						? portLayout.getSize().getWidth() / 2
 						: portLayout.getSize().getHeight() / 2;
-				if (targetPort.getNodeGroup() != layeredGraph.getParentGroup()) {
-					targetAnchorPos += layoutDirection == LAYOUT_OPTION.VERTICAL
+				if (targetPort.getNode() != layeredGraph.getParentGroup()) {
+					targetAnchorPos += layoutDirection == KLayoutOption.VERTICAL
 							? portLayout.getLocation().getX()
 							: portLayout.getLocation().getY();
 				}
 			}
 		}
 		else if (targetSidePos > 0) {
-			targetAnchorPos += (layoutDirection == LAYOUT_OPTION.VERTICAL
+			targetAnchorPos += (layoutDirection == KLayoutOption.VERTICAL
 					? targetElement.getRealDim().getWidth()
 					: targetElement.getRealDim().getHeight())
 					+ targetSidePos * minDist;
@@ -323,9 +323,9 @@ public class LayerConnection {
 	 * 
 	 * @param endpoint endpoint to align
 	 * @param port external port used as endpoint
-	 * @param insets insets of the parent node group
+	 * @param insets insets of the parent layout node
 	 */
-	private void toExternalEndpoint(KPoint endpoint, KPort port, KInsets insets) {
+	private void toExternalEndpoint(KPoint endpoint, KLayoutPort port, KInsets insets) {
 		switch (port.getLayout().getPlacement()) {
 		case NORTH:
 			endpoint.setY(endpoint.getY() - insets.getTop());

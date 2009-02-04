@@ -6,9 +6,9 @@
  */
 package de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl;
 
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroupLabelLayout;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeLabelLayout;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.NODE_LABEL_PLACEMENT;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeLabelPlacement;
 
 import org.eclipse.emf.common.notify.Notification;
 
@@ -23,13 +23,13 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KNodeGroupLabelLayoutImpl#getLabelPlacement <em>Label Placement</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KNodeLabelLayoutImpl#getLabelPlacement <em>Label Placement</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class KNodeGroupLabelLayoutImpl extends KShapeLayoutImpl implements KNodeGroupLabelLayout {
+public class KNodeLabelLayoutImpl extends KShapeLayoutImpl implements KNodeLabelLayout {
 	/**
 	 * The default value of the '{@link #getLabelPlacement() <em>Label Placement</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -38,7 +38,7 @@ public class KNodeGroupLabelLayoutImpl extends KShapeLayoutImpl implements KNode
 	 * @generated
 	 * @ordered
 	 */
-	protected static final NODE_LABEL_PLACEMENT LABEL_PLACEMENT_EDEFAULT = NODE_LABEL_PLACEMENT.DEFAULT;
+	protected static final KNodeLabelPlacement LABEL_PLACEMENT_EDEFAULT = KNodeLabelPlacement.DEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getLabelPlacement() <em>Label Placement</em>}' attribute.
@@ -48,14 +48,14 @@ public class KNodeGroupLabelLayoutImpl extends KShapeLayoutImpl implements KNode
 	 * @generated
 	 * @ordered
 	 */
-	protected NODE_LABEL_PLACEMENT labelPlacement = LABEL_PLACEMENT_EDEFAULT;
+	protected KNodeLabelPlacement labelPlacement = LABEL_PLACEMENT_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected KNodeGroupLabelLayoutImpl() {
+	protected KNodeLabelLayoutImpl() {
 		super();
 	}
 
@@ -66,7 +66,7 @@ public class KNodeGroupLabelLayoutImpl extends KShapeLayoutImpl implements KNode
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return KimlLayoutGraphPackage.Literals.KNODE_GROUP_LABEL_LAYOUT;
+		return KimlLayoutGraphPackage.Literals.KNODE_LABEL_LAYOUT;
 	}
 
 	/**
@@ -74,7 +74,7 @@ public class KNodeGroupLabelLayoutImpl extends KShapeLayoutImpl implements KNode
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NODE_LABEL_PLACEMENT getLabelPlacement() {
+	public KNodeLabelPlacement getLabelPlacement() {
 		return labelPlacement;
 	}
 
@@ -83,11 +83,11 @@ public class KNodeGroupLabelLayoutImpl extends KShapeLayoutImpl implements KNode
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setLabelPlacement(NODE_LABEL_PLACEMENT newLabelPlacement) {
-		NODE_LABEL_PLACEMENT oldLabelPlacement = labelPlacement;
+	public void setLabelPlacement(KNodeLabelPlacement newLabelPlacement) {
+		KNodeLabelPlacement oldLabelPlacement = labelPlacement;
 		labelPlacement = newLabelPlacement == null ? LABEL_PLACEMENT_EDEFAULT : newLabelPlacement;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KNODE_GROUP_LABEL_LAYOUT__LABEL_PLACEMENT, oldLabelPlacement, labelPlacement));
+			eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KNODE_LABEL_LAYOUT__LABEL_PLACEMENT, oldLabelPlacement, labelPlacement));
 	}
 
 	/**
@@ -98,7 +98,7 @@ public class KNodeGroupLabelLayoutImpl extends KShapeLayoutImpl implements KNode
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case KimlLayoutGraphPackage.KNODE_GROUP_LABEL_LAYOUT__LABEL_PLACEMENT:
+			case KimlLayoutGraphPackage.KNODE_LABEL_LAYOUT__LABEL_PLACEMENT:
 				return getLabelPlacement();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -112,8 +112,8 @@ public class KNodeGroupLabelLayoutImpl extends KShapeLayoutImpl implements KNode
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case KimlLayoutGraphPackage.KNODE_GROUP_LABEL_LAYOUT__LABEL_PLACEMENT:
-				setLabelPlacement((NODE_LABEL_PLACEMENT)newValue);
+			case KimlLayoutGraphPackage.KNODE_LABEL_LAYOUT__LABEL_PLACEMENT:
+				setLabelPlacement((KNodeLabelPlacement)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -127,7 +127,7 @@ public class KNodeGroupLabelLayoutImpl extends KShapeLayoutImpl implements KNode
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case KimlLayoutGraphPackage.KNODE_GROUP_LABEL_LAYOUT__LABEL_PLACEMENT:
+			case KimlLayoutGraphPackage.KNODE_LABEL_LAYOUT__LABEL_PLACEMENT:
 				setLabelPlacement(LABEL_PLACEMENT_EDEFAULT);
 				return;
 		}
@@ -142,7 +142,7 @@ public class KNodeGroupLabelLayoutImpl extends KShapeLayoutImpl implements KNode
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case KimlLayoutGraphPackage.KNODE_GROUP_LABEL_LAYOUT__LABEL_PLACEMENT:
+			case KimlLayoutGraphPackage.KNODE_LABEL_LAYOUT__LABEL_PLACEMENT:
 				return labelPlacement != LABEL_PLACEMENT_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
@@ -164,4 +164,4 @@ public class KNodeGroupLabelLayoutImpl extends KShapeLayoutImpl implements KNode
 		return result.toString();
 	}
 
-} //KNodeGroupLabelLayoutImpl
+} //KNodeLabelLayoutImpl

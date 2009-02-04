@@ -22,16 +22,16 @@ import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.ui.statushandlers.StatusManager;
 
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.EDGE_LABEL_PLACEMENT;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.EDGE_TYPE;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLabelPlacement;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeType;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KDimension;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdge;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLabel;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLayout;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPoint;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphFactory;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_OPTION;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutOption;
 import de.cau.cs.kieler.kiml.layouter.graphviz.Activator;
 import de.cau.cs.kieler.kiml.layouter.graphviz.preferences.PreferenceConstants;
 
@@ -69,8 +69,8 @@ import de.cau.cs.kieler.kiml.layouter.graphviz.preferences.PreferenceConstants;
 public class GraphvizLayouter {
 
 	/* Store the GraphViz internal C-Pointers of our nodes and edges */
-	private HashMap<KNodeGroup, Integer> mapNode2Pointer = new HashMap<KNodeGroup, Integer>();
-	private HashMap<KEdge, Integer> mapEdge2Pointer = new HashMap<KEdge, Integer>();
+	private HashMap<KLayoutNode, Integer> mapNode2Pointer = new HashMap<KLayoutNode, Integer>();
+	private HashMap<KLayoutEdge, Integer> mapEdge2Pointer = new HashMap<KLayoutEdge, Integer>();
 
 	/* C-pointer to the root GraphvizGraph data structure */
 	private int graphvizGraph;
@@ -125,19 +125,19 @@ public class GraphvizLayouter {
 
 	/**
 	 * Performs the actual work of the layout process. Translates the
-	 * {@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup
-	 * KNodeGroup} into a structure GraphViz understands, calls the desired
+	 * {@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode
+	 * KLayoutNode} into a structure GraphViz understands, calls the desired
 	 * GraphViz layouter and annotates the KLayoutGraph with the position and
 	 * size information provided by GraphViz.
 	 * 
-	 * @param nodeGroup
-	 *            The KNodeGroup to process
+	 * @param layoutNode
+	 *            The KLayoutNode to process
 	 */
-	public void visit(KNodeGroup nodeGroup) {
+	public void visit(KLayoutNode layoutNode) {
 		updatePreferences();
 
 		/* return if there is nothing in this group */
-		if (nodeGroup.getSubNodeGroups().size() == 0) {
+		if (layoutNode.getChildNodes().size() == 0) {
 			return;
 		}
 
@@ -147,11 +147,11 @@ public class GraphvizLayouter {
 				GraphvizAPI.ATTR_SHAPE, "box");
 
 		/* translate the KLayoutGraph to GraphViz */
-		mapNodeGroup2Graphviz(nodeGroup);
+		mapLayoutNode2Graphviz(layoutNode);
 
 		/* check if Emma wants to layout horizontal */
-		if (nodeGroup.getLayout().getLayoutOptions().contains(
-				LAYOUT_OPTION.VERTICAL)) {
+		if (layoutNode.getLayout().getLayoutOptions().contains(
+				KLayoutOption.VERTICAL)) {
 			GraphvizAPI.setGraphAttribute(graphvizGraph, "rankdir", "BT");
 		} else {
 			GraphvizAPI.setGraphAttribute(graphvizGraph, "rankdir", "LR");
@@ -161,24 +161,24 @@ public class GraphvizLayouter {
 		if (layouterName.equals(GraphvizLayoutProviderNames.GRAPHVIZ_CIRCO)) {
 			GraphvizAPI.doCircoLayout(graphvizGraph);
 			GraphvizAPI.attachAttributes(graphvizGraph);
-			mapGraphviz2NodeGroup(nodeGroup);
+			mapGraphviz2LayoutNode(layoutNode);
 			GraphvizAPI.circoCleanup(graphvizGraph);
 		} else if (layouterName
 				.equals(GraphvizLayoutProviderNames.GRAPHVIZ_NEATO)) {
 			GraphvizAPI.doNeatoLayout(graphvizGraph);
 			GraphvizAPI.attachAttributes(graphvizGraph);
-			mapGraphviz2NodeGroup(nodeGroup);
+			mapGraphviz2LayoutNode(layoutNode);
 			GraphvizAPI.neatoCleanup(graphvizGraph);
 		} else if (layouterName
 				.equals(GraphvizLayoutProviderNames.GRAPHVIZ_TWOPI)) {
 			GraphvizAPI.doTwopiLayout(graphvizGraph);
 			GraphvizAPI.attachAttributes(graphvizGraph);
-			mapGraphviz2NodeGroup(nodeGroup);
+			mapGraphviz2LayoutNode(layoutNode);
 			GraphvizAPI.twopiCleanup(graphvizGraph);
 		} else {
 			GraphvizAPI.doDotLayout(graphvizGraph);
 			GraphvizAPI.attachAttributes(graphvizGraph);
-			mapGraphviz2NodeGroup(nodeGroup);
+			mapGraphviz2LayoutNode(layoutNode);
 			GraphvizAPI.dotCleanup(graphvizGraph);
 		}
 
@@ -186,7 +186,7 @@ public class GraphvizLayouter {
 		if (Activator.getDefault().getPreferenceStore().getBoolean(
 				PreferenceConstants.PREF_GRAPHVIZ_ENABLE_DEBUG_OUTPUT)) {
 
-			String outputName = nodeGroup.getIdString().length() != 0 ? nodeGroup
+			String outputName = layoutNode.getIdString().length() != 0 ? layoutNode
 					.getIdString()
 					: "output";
 			String outputDir = Activator.getDefault().getPreferenceStore()
@@ -206,25 +206,25 @@ public class GraphvizLayouter {
 
 	/**
 	 * Maps a
-	 * {@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup
-	 * KNodeGroup} to the internal GraphvizAPI data structure. This is stored in
+	 * {@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode
+	 * KLayoutNode} to the internal GraphvizAPI data structure. This is stored in
 	 * the GraphvizAPI internally.
 	 * 
-	 * @param nodeGroup
-	 *            A KNodeGroup with the graph to lay out, the actual nodes of
-	 *            the graph are stored as subgroups of the nodeGroup.
+	 * @param layoutNode
+	 *            A KLayoutNode with the graph to lay out, the actual nodes of
+	 *            the graph are stored as subgroups of the layoutNode.
 	 */
-	private void mapNodeGroup2Graphviz(KNodeGroup nodeGroup) {
+	private void mapLayoutNode2Graphviz(KLayoutNode layoutNode) {
 		int i = 0;
 		/*
 		 * First process all nodes to have the pointers for them when creating
 		 * the edges.
 		 */
-		for (KNodeGroup subNodeGroup : nodeGroup.getSubNodeGroups()) {
+		for (KLayoutNode subLayoutNode : layoutNode.getChildNodes()) {
 			int pointer = GraphvizAPI.createNode(graphvizGraph, String
 					.valueOf(i));
-			mapNode2Pointer.put(subNodeGroup, new Integer(pointer));
-			String label = subNodeGroup.getLabel().getText();
+			mapNode2Pointer.put(subLayoutNode, new Integer(pointer));
+			String label = subLayoutNode.getLabel().getText();
 			if (label == null)
 				label = "";
 			/*
@@ -233,9 +233,9 @@ public class GraphvizLayouter {
 			 * (could result in different number formats, e.g. 0.33 on English
 			 * local, 0,33 on German)
 			 */
-			String height = pixels2GraphVizInches((int) subNodeGroup
+			String height = pixels2GraphVizInches((int) subLayoutNode
 					.getLayout().getSize().getHeight());
-			String width = pixels2GraphVizInches((int) subNodeGroup.getLayout()
+			String width = pixels2GraphVizInches((int) subLayoutNode.getLayout()
 					.getSize().getWidth());
 			GraphvizAPI.setLocalNodeAttribute(graphvizGraph, pointer, "label",
 					label);
@@ -249,13 +249,13 @@ public class GraphvizLayouter {
 		/*
 		 * Then create the edges
 		 */
-		for (KNodeGroup subNodeGroup : nodeGroup.getSubNodeGroups()) {
-			for (KEdge outgoingEdge : subNodeGroup.getOutgoingEdges()) {
+		for (KLayoutNode subLayoutNode : layoutNode.getChildNodes()) {
+			for (KLayoutEdge outgoingEdge : subLayoutNode.getOutgoingEdges()) {
 				if (mapNode2Pointer.get(outgoingEdge.getTarget()) != null) {
 
 					// create actual edge
 					int pointer = GraphvizAPI.createEdge(graphvizGraph,
-							mapNode2Pointer.get(subNodeGroup), mapNode2Pointer
+							mapNode2Pointer.get(subLayoutNode), mapNode2Pointer
 									.get(outgoingEdge.getTarget()));
 					GraphvizAPI.setLocalEdgeAttribute(graphvizGraph, pointer,
 							"arrowhead", "none");
@@ -273,7 +273,7 @@ public class GraphvizLayouter {
 						 * it here. First 'normal' label.
 						 */
 						if (label.getLabelLayout().getLabelPlacement().equals(
-								EDGE_LABEL_PLACEMENT.CENTER)) {
+								KEdgeLabelPlacement.CENTER)) {
 							String labelString = label.getText();
 
 							GraphvizAPI.setLocalEdgeAttribute(graphvizGraph,
@@ -284,7 +284,7 @@ public class GraphvizLayouter {
 						 * Give a try for head label.
 						 */
 						if (label.getLabelLayout().getLabelPlacement().equals(
-								EDGE_LABEL_PLACEMENT.HEAD)) {
+								KEdgeLabelPlacement.HEAD)) {
 							String labelString = label.getText();
 
 							GraphvizAPI.setLocalEdgeAttribute(graphvizGraph,
@@ -295,7 +295,7 @@ public class GraphvizLayouter {
 						 * Give a try for tail label.
 						 */
 						if (label.getLabelLayout().getLabelPlacement().equals(
-								EDGE_LABEL_PLACEMENT.TAIL)) {
+								KEdgeLabelPlacement.TAIL)) {
 							String labelString = label.getText();
 
 							GraphvizAPI.setLocalEdgeAttribute(graphvizGraph,
@@ -311,20 +311,20 @@ public class GraphvizLayouter {
 	/**
 	 * Reads the internal GraphViz data structure that was filled by the
 	 * GraphViz library and writes the required parameters back to the
-	 * {@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup
-	 * KNodeGroup}.
+	 * {@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode
+	 * KLayoutNode}.
 	 * 
-	 * @param nodeGroup
-	 *            The KNodeGroup to be filled with the layout information
+	 * @param layoutNode
+	 *            The KLayoutNode to be filled with the layout information
 	 */
-	private void mapGraphviz2NodeGroup(KNodeGroup nodeGroup) {
+	private void mapGraphviz2LayoutNode(KLayoutNode layoutNode) {
 		mapGraphvizNodes2KNodes();
 		mapGraphvizEdges2KEdges();
-		setTopNodeAttributes(nodeGroup);
+		setTopNodeAttributes(layoutNode);
 	}
 
 	/**
-	 * Writes all node related information from GraphViz into the KNodeGroup.
+	 * Writes all node related information from GraphViz into the KLayoutNode.
 	 * Uses HashMaps for the mapping.
 	 */
 	private void mapGraphvizNodes2KNodes() {
@@ -332,9 +332,9 @@ public class GraphvizLayouter {
 		 * iterate over all nodes in the GraphViz graph and copy their
 		 * attributes to the Graph data structure
 		 */
-		for (KNodeGroup nodeGroup : mapNode2Pointer.keySet()) {
+		for (KLayoutNode layoutNode : mapNode2Pointer.keySet()) {
 
-			int nodePointer = mapNode2Pointer.get(nodeGroup);
+			int nodePointer = mapNode2Pointer.get(layoutNode);
 			String posString = GraphvizAPI.getAttribute(nodePointer,
 					GraphvizAPI.ATTR_POS);
 			String heightString = GraphvizAPI.getAttribute(nodePointer,
@@ -360,21 +360,21 @@ public class GraphvizLayouter {
 						"Error while mapping nodes (" + posString + ")", exception);
 				StatusManager.getManager().handle(status, StatusManager.SHOW);
 			}
-			nodeGroup.getLayout().setLocation(location);
-			nodeGroup.getLayout().setSize(size);
+			layoutNode.getLayout().setLocation(location);
+			layoutNode.getLayout().setSize(size);
 		}
 	}
 
 	/**
 	 * Writes all edge related information from GraphViz into the the
-	 * KNodeGroup. Uses HashMaps for the mapping.
+	 * KLayoutNode. Uses HashMaps for the mapping.
 	 */
 	private void mapGraphvizEdges2KEdges() {
 		/*
 		 * iterate over all edges in the GraphViz graph and copy their
 		 * attributes to the Graph data structure
 		 */
-		for (KEdge edge : mapEdge2Pointer.keySet()) {
+		for (KLayoutEdge edge : mapEdge2Pointer.keySet()) {
 
 			int edgePointer = mapEdge2Pointer.get(edge);
 			String posString = GraphvizAPI.getAttribute(edgePointer,
@@ -420,7 +420,7 @@ public class GraphvizLayouter {
 								intList.get(intList.size() - 1)));
 
 				/* tell all users that we produced some sort of spline */
-				edge.getLayout().setEdgeType(EDGE_TYPE.SPLINE);
+				edge.getLayout().setEdgeType(KEdgeType.SPLINE);
 
 			} catch (Exception exception) {
 				/* in any failure, leave list empty */
@@ -436,7 +436,7 @@ public class GraphvizLayouter {
 
 				// head label
 				if (label.getLabelLayout().getLabelPlacement().equals(
-						EDGE_LABEL_PLACEMENT.HEAD)) {
+						KEdgeLabelPlacement.HEAD)) {
 					;/*
 					 * not possible to get the head label (placement) with
 					 * GraphViz
@@ -445,7 +445,7 @@ public class GraphvizLayouter {
 
 				/* mid label */
 				if (label.getLabelLayout().getLabelPlacement().equals(
-						EDGE_LABEL_PLACEMENT.CENTER)) {
+						KEdgeLabelPlacement.CENTER)) {
 					String midLoc = GraphvizAPI.getAttribute(edgePointer,
 							GraphvizAPI.ATTR_LP);
 					List<Integer> midInts = string2Ints(midLoc);
@@ -464,7 +464,7 @@ public class GraphvizLayouter {
 
 				/* tail label */
 				if (label.getLabelLayout().getLabelPlacement().equals(
-						EDGE_LABEL_PLACEMENT.TAIL)) {
+						KEdgeLabelPlacement.TAIL)) {
 					String tailLoc = GraphvizAPI.getAttribute(edgePointer,
 							GraphvizAPI.ATTR_TAILLP);
 					List<Integer> tailInts = string2Ints(tailLoc);
@@ -487,33 +487,33 @@ public class GraphvizLayouter {
 	}
 
 	/**
-	 * Sets the required size of the top KNodeGroup by obtaining the bounding
+	 * Sets the required size of the top KLayoutNode by obtaining the bounding
 	 * box of the GraphViz Graph, resulting from the positions of the contained
-	 * sub nodes. If insets are given in the top KNodeGroup, they are added to
+	 * sub nodes. If insets are given in the top KLayoutNode, they are added to
 	 * the size. Insets denote the difference between the resulting size of the
 	 * area the contained elements cover after the layout process and the real
 	 * size the composite node should have. An example is a compartment with a
 	 * header. The size (height) of the header has to be added to the desired
-	 * resulting size of the top KNodeGroup.
+	 * resulting size of the top KLayoutNode.
 	 * 
-	 * @param nodeGroup
-	 *            The top KNodeGroup to set the size of
+	 * @param layoutNode
+	 *            The top KLayoutNode to set the size of
 	 */
-	private void setTopNodeAttributes(KNodeGroup nodeGroup) {
+	private void setTopNodeAttributes(KLayoutNode layoutNode) {
 		Dimension bb = GraphvizAPI.getBoundingBox(graphvizGraph);
 		KDimension size = KimlLayoutGraphFactory.eINSTANCE.createKDimension();
 		float left = 0, right = 0, bottom = 0, top = 0;
 		try {
-			top = nodeGroup.getLayout().getInsets().getTop();
-			bottom = nodeGroup.getLayout().getInsets().getBottom();
-			left = nodeGroup.getLayout().getInsets().getLeft();
-			right = nodeGroup.getLayout().getInsets().getRight();
+			top = layoutNode.getLayout().getInsets().getTop();
+			bottom = layoutNode.getLayout().getInsets().getBottom();
+			left = layoutNode.getLayout().getInsets().getLeft();
+			right = layoutNode.getLayout().getInsets().getRight();
 		} catch (Exception e) {
 			/* no insets available, stay silent */
 		}
 		size.setWidth((bb.width + 2 * prefPadX) + left + right);
 		size.setHeight((bb.height + 2 * prefPadY) + top + bottom);
-		nodeGroup.getLayout().setSize(size);
+		layoutNode.getLayout().setSize(size);
 	}
 
 	/**

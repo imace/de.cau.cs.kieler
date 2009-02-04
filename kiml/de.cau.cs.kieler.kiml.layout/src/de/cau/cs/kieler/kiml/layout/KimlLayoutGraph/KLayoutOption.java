@@ -14,14 +14,14 @@ import org.eclipse.emf.common.util.Enumerator;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the literals of the enumeration '<em><b>PORT PLACEMENT</b></em>',
+ * A representation of the literals of the enumeration '<em><b>LAYOUT OPTION</b></em>',
  * and utility methods for working with them.
  * <!-- end-user-doc -->
- * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getPORT_PLACEMENT()
+ * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKLayoutOption()
  * @model
  * @generated
  */
-public enum PORT_PLACEMENT implements Enumerator {
+public enum KLayoutOption implements Enumerator {
 	/**
 	 * The '<em><b>DEFAULT</b></em>' literal object.
 	 * <!-- begin-user-doc -->
@@ -33,44 +33,46 @@ public enum PORT_PLACEMENT implements Enumerator {
 	DEFAULT(0, "DEFAULT", "Default"),
 
 	/**
-	 * The '<em><b>NORTH</b></em>' literal object.
+	 * The '<em><b>PRESERVE MENTAL MAP</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #NORTH_VALUE
+	 * @see #PRESERVE_MENTAL_MAP_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	NORTH(1, "NORTH", "North"),
-
-	/**
-	 * The '<em><b>EAST</b></em>' literal object.
+	PRESERVE_MENTAL_MAP(1, "PRESERVE_MENTAL_MAP", "Preserve mental map"), /**
+	 * The '<em><b>VERTICAL</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #EAST_VALUE
+	 * @see #VERTICAL_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	EAST(2, "EAST", "East"),
-
-	/**
-	 * The '<em><b>SOUTH</b></em>' literal object.
+	VERTICAL(2, "VERTICAL", "Vertical"), /**
+	 * The '<em><b>HORIZONTAL</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #SOUTH_VALUE
+	 * @see #HORIZONTAL_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	SOUTH(3, "SOUTH", "South"),
-
-	/**
-	 * The '<em><b>WEST</b></em>' literal object.
+	HORIZONTAL(3, "HORIZONTAL", "Horizontal"), /**
+	 * The '<em><b>FIXED PORTS</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #WEST_VALUE
+	 * @see #FIXED_PORTS_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	WEST(4, "WEST", "West");
+	FIXED_PORTS(4, "FIXED_PORTS", "Fixed ports"), /**
+	 * The '<em><b>FIXED SIZE</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #FIXED_SIZE_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	FIXED_SIZE(5, "FIXED_SIZE", "Fixed size");
 
 	/**
 	 * The '<em><b>DEFAULT</b></em>' literal value.
@@ -88,97 +90,113 @@ public enum PORT_PLACEMENT implements Enumerator {
 	public static final int DEFAULT_VALUE = 0;
 
 	/**
-	 * The '<em><b>NORTH</b></em>' literal value.
+	 * The '<em><b>PRESERVE MENTAL MAP</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>NORTH</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>PRESERVE MENTAL MAP</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #NORTH
-	 * @model literal="North"
+	 * @see #PRESERVE_MENTAL_MAP
+	 * @model literal="Preserve mental map"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int NORTH_VALUE = 1;
+	public static final int PRESERVE_MENTAL_MAP_VALUE = 1;
 
 	/**
-	 * The '<em><b>EAST</b></em>' literal value.
+	 * The '<em><b>VERTICAL</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>EAST</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>VERTICAL</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #EAST
-	 * @model literal="East"
+	 * @see #VERTICAL
+	 * @model literal="Vertical"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int EAST_VALUE = 2;
+	public static final int VERTICAL_VALUE = 2;
 
 	/**
-	 * The '<em><b>SOUTH</b></em>' literal value.
+	 * The '<em><b>HORIZONTAL</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>SOUTH</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>HORIZONTAL</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #SOUTH
-	 * @model literal="South"
+	 * @see #HORIZONTAL
+	 * @model literal="Horizontal"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int SOUTH_VALUE = 3;
+	public static final int HORIZONTAL_VALUE = 3;
 
 	/**
-	 * The '<em><b>WEST</b></em>' literal value.
+	 * The '<em><b>FIXED PORTS</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>WEST</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>FIXED PORTS</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #WEST
-	 * @model literal="West"
+	 * @see #FIXED_PORTS
+	 * @model literal="Fixed ports"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int WEST_VALUE = 4;
+	public static final int FIXED_PORTS_VALUE = 4;
 
 	/**
-	 * An array of all the '<em><b>PORT PLACEMENT</b></em>' enumerators.
+	 * The '<em><b>FIXED SIZE</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>FIXED SIZE</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #FIXED_SIZE
+	 * @model literal="Fixed size"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int FIXED_SIZE_VALUE = 5;
+
+	/**
+	 * An array of all the '<em><b>KLayout Option</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static final PORT_PLACEMENT[] VALUES_ARRAY =
-		new PORT_PLACEMENT[] {
+	private static final KLayoutOption[] VALUES_ARRAY =
+		new KLayoutOption[] {
 			DEFAULT,
-			NORTH,
-			EAST,
-			SOUTH,
-			WEST,
+			PRESERVE_MENTAL_MAP,
+			VERTICAL,
+			HORIZONTAL,
+			FIXED_PORTS,
+			FIXED_SIZE,
 		};
 
 	/**
-	 * A public read-only list of all the '<em><b>PORT PLACEMENT</b></em>' enumerators.
+	 * A public read-only list of all the '<em><b>KLayout Option</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final List<PORT_PLACEMENT> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
+	public static final List<KLayoutOption> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
 	/**
-	 * Returns the '<em><b>PORT PLACEMENT</b></em>' literal with the specified literal value.
+	 * Returns the '<em><b>KLayout Option</b></em>' literal with the specified literal value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static PORT_PLACEMENT get(String literal) {
+	public static KLayoutOption get(String literal) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			PORT_PLACEMENT result = VALUES_ARRAY[i];
+			KLayoutOption result = VALUES_ARRAY[i];
 			if (result.toString().equals(literal)) {
 				return result;
 			}
@@ -187,14 +205,14 @@ public enum PORT_PLACEMENT implements Enumerator {
 	}
 
 	/**
-	 * Returns the '<em><b>PORT PLACEMENT</b></em>' literal with the specified name.
+	 * Returns the '<em><b>KLayout Option</b></em>' literal with the specified name.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static PORT_PLACEMENT getByName(String name) {
+	public static KLayoutOption getByName(String name) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			PORT_PLACEMENT result = VALUES_ARRAY[i];
+			KLayoutOption result = VALUES_ARRAY[i];
 			if (result.getName().equals(name)) {
 				return result;
 			}
@@ -203,18 +221,19 @@ public enum PORT_PLACEMENT implements Enumerator {
 	}
 
 	/**
-	 * Returns the '<em><b>PORT PLACEMENT</b></em>' literal with the specified integer value.
+	 * Returns the '<em><b>KLayout Option</b></em>' literal with the specified integer value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static PORT_PLACEMENT get(int value) {
+	public static KLayoutOption get(int value) {
 		switch (value) {
 			case DEFAULT_VALUE: return DEFAULT;
-			case NORTH_VALUE: return NORTH;
-			case EAST_VALUE: return EAST;
-			case SOUTH_VALUE: return SOUTH;
-			case WEST_VALUE: return WEST;
+			case PRESERVE_MENTAL_MAP_VALUE: return PRESERVE_MENTAL_MAP;
+			case VERTICAL_VALUE: return VERTICAL;
+			case HORIZONTAL_VALUE: return HORIZONTAL;
+			case FIXED_PORTS_VALUE: return FIXED_PORTS;
+			case FIXED_SIZE_VALUE: return FIXED_SIZE;
 		}
 		return null;
 	}
@@ -246,7 +265,7 @@ public enum PORT_PLACEMENT implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private PORT_PLACEMENT(int value, String name, String literal) {
+	private KLayoutOption(int value, String name, String literal) {
 		this.value = value;
 		this.name = name;
 		this.literal = literal;
@@ -290,4 +309,4 @@ public enum PORT_PLACEMENT implements Enumerator {
 		return literal;
 	}
 	
-} //PORT_PLACEMENT
+} //KLayoutOption

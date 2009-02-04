@@ -14,14 +14,14 @@ import org.eclipse.emf.common.util.Enumerator;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the literals of the enumeration '<em><b>LAYOUT TYPE</b></em>',
+ * A representation of the literals of the enumeration '<em><b>EDGE LABEL PLACEMENT</b></em>',
  * and utility methods for working with them.
  * <!-- end-user-doc -->
- * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getLAYOUT_TYPE()
+ * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKEdgeLabelPlacement()
  * @model
  * @generated
  */
-public enum LAYOUT_TYPE implements Enumerator {
+public enum KEdgeLabelPlacement implements Enumerator {
 	/**
 	 * The '<em><b>DEFAULT</b></em>' literal object.
 	 * <!-- begin-user-doc -->
@@ -30,65 +30,57 @@ public enum LAYOUT_TYPE implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	DEFAULT(0, "DEFAULT", "Default"),
+	DEFAULT(0, "DEFAULT", "DEFAULT"),
 
 	/**
-	 * The '<em><b>ORTHOGONAL</b></em>' literal object.
+	 * The '<em><b>CENTER</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #ORTHOGONAL_VALUE
+	 * @see #CENTER_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	ORTHOGONAL(1, "ORTHOGONAL", "Orthogonal"), /**
-	 * The '<em><b>HIERARCHICAL</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #HIERARCHICAL_VALUE
-	 * @generated
-	 * @ordered
-	 */
-	HIERARCHICAL(2, "HIERARCHICAL", "Hierarchical"),
+	CENTER(1, "CENTER", "CENTER"),
 
 	/**
-	 * The '<em><b>CIRCLE</b></em>' literal object.
+	 * The '<em><b>HEAD</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #CIRCLE_VALUE
+	 * @see #HEAD_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	CIRCLE(3, "CIRCLE", "Circle"),
+	HEAD(2, "HEAD", "HEAD"),
 
 	/**
-	 * The '<em><b>RADIAL</b></em>' literal object.
+	 * The '<em><b>TAIL</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #RADIAL_VALUE
+	 * @see #TAIL_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	RADIAL(4, "RADIAL", "Radial"),
+	TAIL(4, "TAIL", "TAIL"),
 
 	/**
-	 * The '<em><b>SPRING MODEL</b></em>' literal object.
+	 * The '<em><b>LEFT</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #SPRING_MODEL_VALUE
+	 * @see #LEFT_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	SPRING_MODEL(5, "SPRING_MODEL", "Spring model"),
+	LEFT(8, "LEFT", "LEFT"),
 
 	/**
-	 * The '<em><b>OTHER</b></em>' literal object.
+	 * The '<em><b>RIGHT</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #OTHER_VALUE
+	 * @see #RIGHT_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	OTHER(6, "OTHER", "Other");
+	RIGHT(16, "RIGHT", "RIGHT");
 
 	/**
 	 * The '<em><b>DEFAULT</b></em>' literal value.
@@ -99,136 +91,120 @@ public enum LAYOUT_TYPE implements Enumerator {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #DEFAULT
-	 * @model literal="Default"
+	 * @model
 	 * @generated
 	 * @ordered
 	 */
 	public static final int DEFAULT_VALUE = 0;
 
 	/**
-	 * The '<em><b>ORTHOGONAL</b></em>' literal value.
+	 * The '<em><b>CENTER</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>ORTHOGONAL</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>CENTER</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #ORTHOGONAL
-	 * @model literal="Orthogonal"
+	 * @see #CENTER
+	 * @model
 	 * @generated
 	 * @ordered
 	 */
-	public static final int ORTHOGONAL_VALUE = 1;
+	public static final int CENTER_VALUE = 1;
 
 	/**
-	 * The '<em><b>HIERARCHICAL</b></em>' literal value.
+	 * The '<em><b>HEAD</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>HIERARCHICAL</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>HEAD</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #HIERARCHICAL
-	 * @model literal="Hierarchical"
+	 * @see #HEAD
+	 * @model
 	 * @generated
 	 * @ordered
 	 */
-	public static final int HIERARCHICAL_VALUE = 2;
+	public static final int HEAD_VALUE = 2;
 
 	/**
-	 * The '<em><b>CIRCLE</b></em>' literal value.
+	 * The '<em><b>TAIL</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>CIRCLE</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>TAIL</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #CIRCLE
-	 * @model literal="Circle"
+	 * @see #TAIL
+	 * @model
 	 * @generated
 	 * @ordered
 	 */
-	public static final int CIRCLE_VALUE = 3;
+	public static final int TAIL_VALUE = 4;
 
 	/**
-	 * The '<em><b>RADIAL</b></em>' literal value.
+	 * The '<em><b>LEFT</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>RADIAL</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>LEFT</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #RADIAL
-	 * @model literal="Radial"
+	 * @see #LEFT
+	 * @model
 	 * @generated
 	 * @ordered
 	 */
-	public static final int RADIAL_VALUE = 4;
+	public static final int LEFT_VALUE = 8;
 
 	/**
-	 * The '<em><b>SPRING MODEL</b></em>' literal value.
+	 * The '<em><b>RIGHT</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>SPRING MODEL</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>RIGHT</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #SPRING_MODEL
-	 * @model literal="Spring model"
+	 * @see #RIGHT
+	 * @model
 	 * @generated
 	 * @ordered
 	 */
-	public static final int SPRING_MODEL_VALUE = 5;
+	public static final int RIGHT_VALUE = 16;
 
 	/**
-	 * The '<em><b>OTHER</b></em>' literal value.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of '<em><b>OTHER</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @see #OTHER
-	 * @model literal="Other"
-	 * @generated
-	 * @ordered
-	 */
-	public static final int OTHER_VALUE = 6;
-
-	/**
-	 * An array of all the '<em><b>LAYOUT TYPE</b></em>' enumerators.
+	 * An array of all the '<em><b>KEdge Label Placement</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static final LAYOUT_TYPE[] VALUES_ARRAY =
-		new LAYOUT_TYPE[] {
+	private static final KEdgeLabelPlacement[] VALUES_ARRAY =
+		new KEdgeLabelPlacement[] {
 			DEFAULT,
-			ORTHOGONAL,
-			HIERARCHICAL,
-			CIRCLE,
-			RADIAL,
-			SPRING_MODEL,
-			OTHER,
+			CENTER,
+			HEAD,
+			TAIL,
+			LEFT,
+			RIGHT,
 		};
 
 	/**
-	 * A public read-only list of all the '<em><b>LAYOUT TYPE</b></em>' enumerators.
+	 * A public read-only list of all the '<em><b>KEdge Label Placement</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final List<LAYOUT_TYPE> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
+	public static final List<KEdgeLabelPlacement> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
 	/**
-	 * Returns the '<em><b>LAYOUT TYPE</b></em>' literal with the specified literal value.
+	 * Returns the '<em><b>KEdge Label Placement</b></em>' literal with the specified literal value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static LAYOUT_TYPE get(String literal) {
+	public static KEdgeLabelPlacement get(String literal) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			LAYOUT_TYPE result = VALUES_ARRAY[i];
+			KEdgeLabelPlacement result = VALUES_ARRAY[i];
 			if (result.toString().equals(literal)) {
 				return result;
 			}
@@ -237,14 +213,14 @@ public enum LAYOUT_TYPE implements Enumerator {
 	}
 
 	/**
-	 * Returns the '<em><b>LAYOUT TYPE</b></em>' literal with the specified name.
+	 * Returns the '<em><b>KEdge Label Placement</b></em>' literal with the specified name.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static LAYOUT_TYPE getByName(String name) {
+	public static KEdgeLabelPlacement getByName(String name) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			LAYOUT_TYPE result = VALUES_ARRAY[i];
+			KEdgeLabelPlacement result = VALUES_ARRAY[i];
 			if (result.getName().equals(name)) {
 				return result;
 			}
@@ -253,20 +229,19 @@ public enum LAYOUT_TYPE implements Enumerator {
 	}
 
 	/**
-	 * Returns the '<em><b>LAYOUT TYPE</b></em>' literal with the specified integer value.
+	 * Returns the '<em><b>KEdge Label Placement</b></em>' literal with the specified integer value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static LAYOUT_TYPE get(int value) {
+	public static KEdgeLabelPlacement get(int value) {
 		switch (value) {
 			case DEFAULT_VALUE: return DEFAULT;
-			case ORTHOGONAL_VALUE: return ORTHOGONAL;
-			case HIERARCHICAL_VALUE: return HIERARCHICAL;
-			case CIRCLE_VALUE: return CIRCLE;
-			case RADIAL_VALUE: return RADIAL;
-			case SPRING_MODEL_VALUE: return SPRING_MODEL;
-			case OTHER_VALUE: return OTHER;
+			case CENTER_VALUE: return CENTER;
+			case HEAD_VALUE: return HEAD;
+			case TAIL_VALUE: return TAIL;
+			case LEFT_VALUE: return LEFT;
+			case RIGHT_VALUE: return RIGHT;
 		}
 		return null;
 	}
@@ -298,7 +273,7 @@ public enum LAYOUT_TYPE implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private LAYOUT_TYPE(int value, String name, String literal) {
+	private KEdgeLabelPlacement(int value, String name, String literal) {
 		this.value = value;
 		this.name = name;
 		this.literal = literal;
@@ -342,4 +317,4 @@ public enum LAYOUT_TYPE implements Enumerator {
 		return literal;
 	}
 	
-} //LAYOUT_TYPE
+} //KEdgeLabelPlacement

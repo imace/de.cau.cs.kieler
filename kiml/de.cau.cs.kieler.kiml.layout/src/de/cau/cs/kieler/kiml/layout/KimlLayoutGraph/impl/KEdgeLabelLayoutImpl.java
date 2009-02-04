@@ -6,7 +6,7 @@
  */
 package de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl;
 
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.EDGE_LABEL_PLACEMENT;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLabelPlacement;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLabelLayout;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage;
 
@@ -18,7 +18,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>KEdge Label Layout</b></em>'.
+ * An implementation of the model object '<em><b>KLayoutEdge Label Layout</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
@@ -38,7 +38,7 @@ public class KEdgeLabelLayoutImpl extends KShapeLayoutImpl implements KEdgeLabel
 	 * @generated
 	 * @ordered
 	 */
-	protected static final EDGE_LABEL_PLACEMENT LABEL_PLACEMENT_EDEFAULT = EDGE_LABEL_PLACEMENT.DEFAULT;
+	protected static final KEdgeLabelPlacement LABEL_PLACEMENT_EDEFAULT = KEdgeLabelPlacement.DEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getLabelPlacement() <em>Label Placement</em>}' attribute.
@@ -48,7 +48,7 @@ public class KEdgeLabelLayoutImpl extends KShapeLayoutImpl implements KEdgeLabel
 	 * @generated
 	 * @ordered
 	 */
-	protected EDGE_LABEL_PLACEMENT labelPlacement = LABEL_PLACEMENT_EDEFAULT;
+	protected KEdgeLabelPlacement labelPlacement = LABEL_PLACEMENT_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -74,7 +74,7 @@ public class KEdgeLabelLayoutImpl extends KShapeLayoutImpl implements KEdgeLabel
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EDGE_LABEL_PLACEMENT getLabelPlacement() {
+	public KEdgeLabelPlacement getLabelPlacement() {
 		return labelPlacement;
 	}
 
@@ -83,8 +83,8 @@ public class KEdgeLabelLayoutImpl extends KShapeLayoutImpl implements KEdgeLabel
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setLabelPlacement(EDGE_LABEL_PLACEMENT newLabelPlacement) {
-		EDGE_LABEL_PLACEMENT oldLabelPlacement = labelPlacement;
+	public void setLabelPlacement(KEdgeLabelPlacement newLabelPlacement) {
+		KEdgeLabelPlacement oldLabelPlacement = labelPlacement;
 		labelPlacement = newLabelPlacement == null ? LABEL_PLACEMENT_EDEFAULT : newLabelPlacement;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KEDGE_LABEL_LAYOUT__LABEL_PLACEMENT, oldLabelPlacement, labelPlacement));
@@ -113,7 +113,7 @@ public class KEdgeLabelLayoutImpl extends KShapeLayoutImpl implements KEdgeLabel
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case KimlLayoutGraphPackage.KEDGE_LABEL_LAYOUT__LABEL_PLACEMENT:
-				setLabelPlacement((EDGE_LABEL_PLACEMENT)newValue);
+				setLabelPlacement((KEdgeLabelPlacement)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

@@ -3,7 +3,8 @@ package de.cau.cs.kieler.klodd.orthogonal.impl;
 import java.util.HashMap;
 import java.util.Map;
 
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPort;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPortPlacement;
 import de.cau.cs.kieler.klodd.core.algorithms.AbstractAlgorithm;
 import de.cau.cs.kieler.klodd.orthogonal.modules.ICompacter;
 import de.cau.cs.kieler.klodd.orthogonal.structures.*;
@@ -58,17 +59,27 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 	 */
 	private TSMGraph createNormalizedGraph(TSMGraph inputGraph) {
 		TSMGraph normalizedGraph = new TSMGraph();
-		Map<KPort, TSMNode> portMap = new HashMap<KPort, TSMNode>();
+		Map<KLayoutPort, TSMNode> portMap = new HashMap<KLayoutPort, TSMNode>();
 		for (TSMNode node : inputGraph.nodes) {
 			if (node.type == TSMNode.Type.LAYOUT) {
+				KPortPlacement currentSide = KPortPlacement.DEFAULT;
+				KPortPlacement startingSide = KPortPlacement.DEFAULT;
 				for (TSMNode.IncEntry edgeEntry : node.incidence) {
-					KPort port;
-					/*if (edge.source.id == node.id)
-						port = edge.layoutEdge.getSourcePort();
-					else {
-						assert edge.target.id == node.id;
-						port = edge.layoutEdge.getTargetPort();
-					}*/
+					KLayoutPort port;
+					if (edgeEntry.type == TSMNode.IncEntry.Type.OUT)
+						port = edgeEntry.edge.layoutEdge.getSourcePort();
+					else
+						port = edgeEntry.edge.layoutEdge.getTargetPort();
+					TSMNode portNode = portMap.get(port);
+					if (portNode == null) {
+						if (startingSide == KPortPlacement.DEFAULT) {
+							startingSide = port.getLayout().getPlacement();
+							currentSide = startingSide;
+						}
+						else {
+							
+						}
+					}
 				}
 			}
 		}

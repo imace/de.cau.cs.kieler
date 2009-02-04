@@ -92,20 +92,20 @@ public class KimlLayoutGraphAdapterFactory extends AdapterFactoryImpl {
 				return createKShapeLayoutAdapter();
 			}
 			@Override
-			public Adapter caseKEdge(KEdge object) {
-				return createKEdgeAdapter();
+			public Adapter caseKLayoutEdge(KLayoutEdge object) {
+				return createKLayoutEdgeAdapter();
 			}
 			@Override
 			public Adapter caseKEdgeLayout(KEdgeLayout object) {
 				return createKEdgeLayoutAdapter();
 			}
 			@Override
-			public Adapter caseKNodeGroup(KNodeGroup object) {
-				return createKNodeGroupAdapter();
+			public Adapter caseKLayoutNode(KLayoutNode object) {
+				return createKLayoutNodeAdapter();
 			}
 			@Override
-			public Adapter caseKNodeGroupLayout(KNodeGroupLayout object) {
-				return createKNodeGroupLayoutAdapter();
+			public Adapter caseKNodeLayout(KNodeLayout object) {
+				return createKNodeLayoutAdapter();
 			}
 			@Override
 			public Adapter caseKLabel(KLabel object) {
@@ -120,20 +120,20 @@ public class KimlLayoutGraphAdapterFactory extends AdapterFactoryImpl {
 				return createKEdgeLabelLayoutAdapter();
 			}
 			@Override
-			public Adapter caseKNodeGroupLabel(KNodeGroupLabel object) {
-				return createKNodeGroupLabelAdapter();
+			public Adapter caseKNodeLabel(KNodeLabel object) {
+				return createKNodeLabelAdapter();
 			}
 			@Override
-			public Adapter caseKNodeGroupLabelLayout(KNodeGroupLabelLayout object) {
-				return createKNodeGroupLabelLayoutAdapter();
+			public Adapter caseKNodeLabelLayout(KNodeLabelLayout object) {
+				return createKNodeLabelLayoutAdapter();
 			}
 			@Override
-			public Adapter caseLAYOUTER_INFO(LAYOUTER_INFO object) {
-				return createLAYOUTER_INFOAdapter();
+			public Adapter caseKLayouterInfo(KLayouterInfo object) {
+				return createKLayouterInfoAdapter();
 			}
 			@Override
-			public Adapter caseKPort(KPort object) {
-				return createKPortAdapter();
+			public Adapter caseKLayoutPort(KLayoutPort object) {
+				return createKLayoutPortAdapter();
 			}
 			@Override
 			public Adapter caseKPortLayout(KPortLayout object) {
@@ -238,16 +238,16 @@ public class KimlLayoutGraphAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdge <em>KEdge</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge <em>KLayout Edge</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdge
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge
 	 * @generated
 	 */
-	public Adapter createKEdgeAdapter() {
+	public Adapter createKLayoutEdgeAdapter() {
 		return null;
 	}
 
@@ -266,30 +266,30 @@ public class KimlLayoutGraphAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup <em>KNode Group</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode <em>KLayout Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode
 	 * @generated
 	 */
-	public Adapter createKNodeGroupAdapter() {
+	public Adapter createKLayoutNodeAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroupLayout <em>KNode Group Layout</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeLayout <em>KNode Layout</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroupLayout
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeLayout
 	 * @generated
 	 */
-	public Adapter createKNodeGroupLayoutAdapter() {
+	public Adapter createKNodeLayoutAdapter() {
 		return null;
 	}
 
@@ -336,58 +336,58 @@ public class KimlLayoutGraphAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroupLabel <em>KNode Group Label</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeLabel <em>KNode Label</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroupLabel
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeLabel
 	 * @generated
 	 */
-	public Adapter createKNodeGroupLabelAdapter() {
+	public Adapter createKNodeLabelAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroupLabelLayout <em>KNode Group Label Layout</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeLabelLayout <em>KNode Label Layout</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroupLabelLayout
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeLabelLayout
 	 * @generated
 	 */
-	public Adapter createKNodeGroupLabelLayoutAdapter() {
+	public Adapter createKNodeLabelLayoutAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO <em>LAYOUTER INFO</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayouterInfo <em>KLayouter Info</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayouterInfo
 	 * @generated
 	 */
-	public Adapter createLAYOUTER_INFOAdapter() {
+	public Adapter createKLayouterInfoAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPort <em>KPort</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort <em>KLayout Port</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPort
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort
 	 * @generated
 	 */
-	public Adapter createKPortAdapter() {
+	public Adapter createKLayoutPortAdapter() {
 		return null;
 	}
 

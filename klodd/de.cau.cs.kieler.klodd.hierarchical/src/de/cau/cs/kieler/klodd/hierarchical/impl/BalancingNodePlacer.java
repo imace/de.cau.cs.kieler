@@ -3,7 +3,7 @@ package de.cau.cs.kieler.klodd.hierarchical.impl;
 import java.util.ListIterator;
 
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPoint;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_OPTION;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutOption;
 import de.cau.cs.kieler.klodd.core.algorithms.AbstractAlgorithm;
 import de.cau.cs.kieler.klodd.hierarchical.modules.INodePlacer;
 import de.cau.cs.kieler.klodd.hierarchical.structures.Layer;
@@ -29,7 +29,7 @@ public class BalancingNodePlacer extends AbstractAlgorithm implements
 	/** maximal crosswise dimension of the layered graph */
 	private float maxWidth;
 	/** layout direction for this algorithm instance */
-	private LAYOUT_OPTION layoutDirection;
+	private KLayoutOption layoutDirection;
 	/** array of move requests for the linear segments */
 	float[] moveRequests;
 	
@@ -124,7 +124,7 @@ public class BalancingNodePlacer extends AbstractAlgorithm implements
 			float moveDelta = moveRequests[linearSegment.rank];
 			for (LayerElement element : linearSegment.elements) {
 				KPoint pos = element.getPosition();
-				if (layoutDirection == LAYOUT_OPTION.VERTICAL) {
+				if (layoutDirection == KLayoutOption.VERTICAL) {
 					pos.setX(pos.getX() + moveDelta);
 				}
 				else {

@@ -3,8 +3,8 @@ package de.cau.cs.kieler.klodd.orthogonal.impl.ec;
 import java.util.HashMap;
 import java.util.Map;
 
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdge;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
 import de.cau.cs.kieler.klodd.core.algorithms.AbstractAlgorithm;
 import de.cau.cs.kieler.klodd.orthogonal.structures.*;
 
@@ -17,9 +17,9 @@ import de.cau.cs.kieler.klodd.orthogonal.structures.*;
 public class ConstraintExpander extends AbstractAlgorithm {
 
 	/** mapping of unfinished outgoing edges to their already created endpoint */
-	private Map<KEdge, TSMNode> outgoing2NodeMap = new HashMap<KEdge, TSMNode>();
+	private Map<KLayoutEdge, TSMNode> outgoing2NodeMap = new HashMap<KLayoutEdge, TSMNode>();
 	/** mapping of unfinished incoming edges to their already created endpoint */
-	private Map<KEdge, TSMNode> incoming2NodeMap = new HashMap<KEdge, TSMNode>();
+	private Map<KLayoutEdge, TSMNode> incoming2NodeMap = new HashMap<KLayoutEdge, TSMNode>();
 	/** TSM graph created in the expansion step */
 	private TSMGraph tsmGraph;
 	
@@ -34,18 +34,18 @@ public class ConstraintExpander extends AbstractAlgorithm {
 	}
 	
 	/**
-	 * Creates a TSM graph from a given parent node group and
+	 * Creates a TSM graph from a given parent layout node and
 	 * expands all embedding constraints.
 	 * 
-	 * @param parentGroup parent node group
+	 * @param parentNode parent layout node
 	 * @param constraintsMap constraints for the child nodes
 	 * @return expanded TSM graph
 	 */
-	public TSMGraph expand(KNodeGroup parentGroup,
-			Map<KNodeGroup, EmbeddingConstraint> constraintsMap) {
+	public TSMGraph expand(KLayoutNode parentNode,
+			Map<KLayoutNode, EmbeddingConstraint> constraintsMap) {
 		tsmGraph = new TSMGraph();
 		
-		for (KNodeGroup child : parentGroup.getSubNodeGroups()) {
+		for (KLayoutNode child : parentNode.getChildNodes()) {
 			EmbeddingConstraint constraint = constraintsMap.get(child);
 			if (constraint == null) {
 				expandNode(child);
@@ -62,14 +62,14 @@ public class ConstraintExpander extends AbstractAlgorithm {
 	 * Creates a TSM node for the given layout node and registers all
 	 * incident edges.
 	 * 
-	 * @param nodeGroup layout node to process
+	 * @param layoutNode layout node to process
 	 */
-	private void expandNode(KNodeGroup nodeGroup) {
-		TSMNode tsmNode = new TSMNode(tsmGraph, TSMNode.Type.LAYOUT, nodeGroup);
-		for (KEdge edge : nodeGroup.getOutgoingEdges()) {
+	private void expandNode(KLayoutNode layoutNode) {
+		TSMNode tsmNode = new TSMNode(tsmGraph, TSMNode.Type.LAYOUT, layoutNode);
+		for (KLayoutEdge edge : layoutNode.getOutgoingEdges()) {
 			registerEdge(tsmNode, edge, true);
 		}
-		for (KEdge edge : nodeGroup.getIncomingEdges()) {
+		for (KLayoutEdge edge : layoutNode.getIncomingEdges()) {
 			registerEdge(tsmNode, edge, false);
 		}
 	}
@@ -87,7 +87,7 @@ public class ConstraintExpander extends AbstractAlgorithm {
 		case IN_EDGE:
 			// connect an edge with the parent constraint
 			assert parentNode != null;
-			KEdge edge = (KEdge)constraint.object;
+			KLayoutEdge edge = (KLayoutEdge)constraint.object;
 			registerEdge(parentNode, edge, constraint.type
 					== EmbeddingConstraint.Type.OUT_EDGE);
 			break;
@@ -157,7 +157,7 @@ public class ConstraintExpander extends AbstractAlgorithm {
 	 * @param forward if true, the edge goes out of the given TSM node,
 	 *     else it comes into the given TSM node
 	 */
-	private void registerEdge(TSMNode tsmNode, KEdge kEdge, boolean forward) {
+	private void registerEdge(TSMNode tsmNode, KLayoutEdge kEdge, boolean forward) {
 		if (forward) {
 			TSMNode endPoint = incoming2NodeMap.get(kEdge);
 			if (endPoint == null) {

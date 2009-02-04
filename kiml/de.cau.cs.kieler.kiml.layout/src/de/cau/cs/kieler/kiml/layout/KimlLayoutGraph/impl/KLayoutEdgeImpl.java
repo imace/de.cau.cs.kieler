@@ -6,11 +6,11 @@
  */
 package de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl;
 
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdge;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLabel;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLayout;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPort;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage;
 
 import java.util.Collection;
@@ -30,23 +30,23 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>KEdge</b></em>'.
+ * An implementation of the model object '<em><b>KLayoutEdge</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KEdgeImpl#getSource <em>Source</em>}</li>
- *   <li>{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KEdgeImpl#getTarget <em>Target</em>}</li>
- *   <li>{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KEdgeImpl#getLayout <em>Layout</em>}</li>
- *   <li>{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KEdgeImpl#getLabel <em>Label</em>}</li>
- *   <li>{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KEdgeImpl#getSourcePort <em>Source Port</em>}</li>
- *   <li>{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KEdgeImpl#getTargetPort <em>Target Port</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KLayoutEdgeImpl#getSource <em>Source</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KLayoutEdgeImpl#getTarget <em>Target</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KLayoutEdgeImpl#getLayout <em>Layout</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KLayoutEdgeImpl#getLabel <em>Label</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KLayoutEdgeImpl#getSourcePort <em>Source Port</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KLayoutEdgeImpl#getTargetPort <em>Target Port</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class KEdgeImpl extends EObjectImpl implements KEdge {
+public class KLayoutEdgeImpl extends EObjectImpl implements KLayoutEdge {
 	/**
 	 * The cached value of the '{@link #getSource() <em>Source</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -55,7 +55,7 @@ public class KEdgeImpl extends EObjectImpl implements KEdge {
 	 * @generated
 	 * @ordered
 	 */
-	protected KNodeGroup source;
+	protected KLayoutNode source;
 
 	/**
 	 * The cached value of the '{@link #getTarget() <em>Target</em>}' reference.
@@ -65,7 +65,7 @@ public class KEdgeImpl extends EObjectImpl implements KEdge {
 	 * @generated
 	 * @ordered
 	 */
-	protected KNodeGroup target;
+	protected KLayoutNode target;
 
 	/**
 	 * The cached value of the '{@link #getLayout() <em>Layout</em>}' reference.
@@ -95,7 +95,7 @@ public class KEdgeImpl extends EObjectImpl implements KEdge {
 	 * @generated
 	 * @ordered
 	 */
-	protected KPort sourcePort;
+	protected KLayoutPort sourcePort;
 
 	/**
 	 * The cached value of the '{@link #getTargetPort() <em>Target Port</em>}' reference.
@@ -105,14 +105,14 @@ public class KEdgeImpl extends EObjectImpl implements KEdge {
 	 * @generated
 	 * @ordered
 	 */
-	protected KPort targetPort;
+	protected KLayoutPort targetPort;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected KEdgeImpl() {
+	protected KLayoutEdgeImpl() {
 		super();
 	}
 
@@ -123,7 +123,7 @@ public class KEdgeImpl extends EObjectImpl implements KEdge {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return KimlLayoutGraphPackage.Literals.KEDGE;
+		return KimlLayoutGraphPackage.Literals.KLAYOUT_EDGE;
 	}
 
 	/**
@@ -131,13 +131,13 @@ public class KEdgeImpl extends EObjectImpl implements KEdge {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public KNodeGroup getSource() {
+	public KLayoutNode getSource() {
 		if (source != null && source.eIsProxy()) {
 			InternalEObject oldSource = (InternalEObject)source;
-			source = (KNodeGroup)eResolveProxy(oldSource);
+			source = (KLayoutNode)eResolveProxy(oldSource);
 			if (source != oldSource) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, KimlLayoutGraphPackage.KEDGE__SOURCE, oldSource, source));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, KimlLayoutGraphPackage.KLAYOUT_EDGE__SOURCE, oldSource, source));
 			}
 		}
 		return source;
@@ -148,7 +148,7 @@ public class KEdgeImpl extends EObjectImpl implements KEdge {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public KNodeGroup basicGetSource() {
+	public KLayoutNode basicGetSource() {
 		return source;
 	}
 
@@ -157,11 +157,11 @@ public class KEdgeImpl extends EObjectImpl implements KEdge {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetSource(KNodeGroup newSource, NotificationChain msgs) {
-		KNodeGroup oldSource = source;
+	public NotificationChain basicSetSource(KLayoutNode newSource, NotificationChain msgs) {
+		KLayoutNode oldSource = source;
 		source = newSource;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KEDGE__SOURCE, oldSource, newSource);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KLAYOUT_EDGE__SOURCE, oldSource, newSource);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -172,18 +172,18 @@ public class KEdgeImpl extends EObjectImpl implements KEdge {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setSource(KNodeGroup newSource) {
+	public void setSource(KLayoutNode newSource) {
 		if (newSource != source) {
 			NotificationChain msgs = null;
 			if (source != null)
-				msgs = ((InternalEObject)source).eInverseRemove(this, KimlLayoutGraphPackage.KNODE_GROUP__OUTGOING_EDGES, KNodeGroup.class, msgs);
+				msgs = ((InternalEObject)source).eInverseRemove(this, KimlLayoutGraphPackage.KLAYOUT_NODE__OUTGOING_EDGES, KLayoutNode.class, msgs);
 			if (newSource != null)
-				msgs = ((InternalEObject)newSource).eInverseAdd(this, KimlLayoutGraphPackage.KNODE_GROUP__OUTGOING_EDGES, KNodeGroup.class, msgs);
+				msgs = ((InternalEObject)newSource).eInverseAdd(this, KimlLayoutGraphPackage.KLAYOUT_NODE__OUTGOING_EDGES, KLayoutNode.class, msgs);
 			msgs = basicSetSource(newSource, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KEDGE__SOURCE, newSource, newSource));
+			eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KLAYOUT_EDGE__SOURCE, newSource, newSource));
 	}
 
 	/**
@@ -191,13 +191,13 @@ public class KEdgeImpl extends EObjectImpl implements KEdge {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public KNodeGroup getTarget() {
+	public KLayoutNode getTarget() {
 		if (target != null && target.eIsProxy()) {
 			InternalEObject oldTarget = (InternalEObject)target;
-			target = (KNodeGroup)eResolveProxy(oldTarget);
+			target = (KLayoutNode)eResolveProxy(oldTarget);
 			if (target != oldTarget) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, KimlLayoutGraphPackage.KEDGE__TARGET, oldTarget, target));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, KimlLayoutGraphPackage.KLAYOUT_EDGE__TARGET, oldTarget, target));
 			}
 		}
 		return target;
@@ -208,7 +208,7 @@ public class KEdgeImpl extends EObjectImpl implements KEdge {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public KNodeGroup basicGetTarget() {
+	public KLayoutNode basicGetTarget() {
 		return target;
 	}
 
@@ -217,11 +217,11 @@ public class KEdgeImpl extends EObjectImpl implements KEdge {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetTarget(KNodeGroup newTarget, NotificationChain msgs) {
-		KNodeGroup oldTarget = target;
+	public NotificationChain basicSetTarget(KLayoutNode newTarget, NotificationChain msgs) {
+		KLayoutNode oldTarget = target;
 		target = newTarget;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KEDGE__TARGET, oldTarget, newTarget);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KLAYOUT_EDGE__TARGET, oldTarget, newTarget);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -232,18 +232,18 @@ public class KEdgeImpl extends EObjectImpl implements KEdge {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setTarget(KNodeGroup newTarget) {
+	public void setTarget(KLayoutNode newTarget) {
 		if (newTarget != target) {
 			NotificationChain msgs = null;
 			if (target != null)
-				msgs = ((InternalEObject)target).eInverseRemove(this, KimlLayoutGraphPackage.KNODE_GROUP__INCOMING_EDGES, KNodeGroup.class, msgs);
+				msgs = ((InternalEObject)target).eInverseRemove(this, KimlLayoutGraphPackage.KLAYOUT_NODE__INCOMING_EDGES, KLayoutNode.class, msgs);
 			if (newTarget != null)
-				msgs = ((InternalEObject)newTarget).eInverseAdd(this, KimlLayoutGraphPackage.KNODE_GROUP__INCOMING_EDGES, KNodeGroup.class, msgs);
+				msgs = ((InternalEObject)newTarget).eInverseAdd(this, KimlLayoutGraphPackage.KLAYOUT_NODE__INCOMING_EDGES, KLayoutNode.class, msgs);
 			msgs = basicSetTarget(newTarget, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KEDGE__TARGET, newTarget, newTarget));
+			eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KLAYOUT_EDGE__TARGET, newTarget, newTarget));
 	}
 
 	/**
@@ -257,7 +257,7 @@ public class KEdgeImpl extends EObjectImpl implements KEdge {
 			layout = (KEdgeLayout)eResolveProxy(oldLayout);
 			if (layout != oldLayout) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, KimlLayoutGraphPackage.KEDGE__LAYOUT, oldLayout, layout));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, KimlLayoutGraphPackage.KLAYOUT_EDGE__LAYOUT, oldLayout, layout));
 			}
 		}
 		return layout;
@@ -281,7 +281,7 @@ public class KEdgeImpl extends EObjectImpl implements KEdge {
 		KEdgeLayout oldLayout = layout;
 		layout = newLayout;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KEDGE__LAYOUT, oldLayout, layout));
+			eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KLAYOUT_EDGE__LAYOUT, oldLayout, layout));
 	}
 
 	/**
@@ -291,7 +291,7 @@ public class KEdgeImpl extends EObjectImpl implements KEdge {
 	 */
 	public EList<KEdgeLabel> getLabel() {
 		if (label == null) {
-			label = new EObjectResolvingEList<KEdgeLabel>(KEdgeLabel.class, this, KimlLayoutGraphPackage.KEDGE__LABEL);
+			label = new EObjectResolvingEList<KEdgeLabel>(KEdgeLabel.class, this, KimlLayoutGraphPackage.KLAYOUT_EDGE__LABEL);
 		}
 		return label;
 	}
@@ -301,13 +301,13 @@ public class KEdgeImpl extends EObjectImpl implements KEdge {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public KPort getSourcePort() {
+	public KLayoutPort getSourcePort() {
 		if (sourcePort != null && sourcePort.eIsProxy()) {
 			InternalEObject oldSourcePort = (InternalEObject)sourcePort;
-			sourcePort = (KPort)eResolveProxy(oldSourcePort);
+			sourcePort = (KLayoutPort)eResolveProxy(oldSourcePort);
 			if (sourcePort != oldSourcePort) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, KimlLayoutGraphPackage.KEDGE__SOURCE_PORT, oldSourcePort, sourcePort));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, KimlLayoutGraphPackage.KLAYOUT_EDGE__SOURCE_PORT, oldSourcePort, sourcePort));
 			}
 		}
 		return sourcePort;
@@ -318,7 +318,7 @@ public class KEdgeImpl extends EObjectImpl implements KEdge {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public KPort basicGetSourcePort() {
+	public KLayoutPort basicGetSourcePort() {
 		return sourcePort;
 	}
 
@@ -327,11 +327,11 @@ public class KEdgeImpl extends EObjectImpl implements KEdge {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setSourcePort(KPort newSourcePort) {
-		KPort oldSourcePort = sourcePort;
+	public void setSourcePort(KLayoutPort newSourcePort) {
+		KLayoutPort oldSourcePort = sourcePort;
 		sourcePort = newSourcePort;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KEDGE__SOURCE_PORT, oldSourcePort, sourcePort));
+			eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KLAYOUT_EDGE__SOURCE_PORT, oldSourcePort, sourcePort));
 	}
 
 	/**
@@ -339,13 +339,13 @@ public class KEdgeImpl extends EObjectImpl implements KEdge {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public KPort getTargetPort() {
+	public KLayoutPort getTargetPort() {
 		if (targetPort != null && targetPort.eIsProxy()) {
 			InternalEObject oldTargetPort = (InternalEObject)targetPort;
-			targetPort = (KPort)eResolveProxy(oldTargetPort);
+			targetPort = (KLayoutPort)eResolveProxy(oldTargetPort);
 			if (targetPort != oldTargetPort) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, KimlLayoutGraphPackage.KEDGE__TARGET_PORT, oldTargetPort, targetPort));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, KimlLayoutGraphPackage.KLAYOUT_EDGE__TARGET_PORT, oldTargetPort, targetPort));
 			}
 		}
 		return targetPort;
@@ -356,7 +356,7 @@ public class KEdgeImpl extends EObjectImpl implements KEdge {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public KPort basicGetTargetPort() {
+	public KLayoutPort basicGetTargetPort() {
 		return targetPort;
 	}
 
@@ -365,11 +365,11 @@ public class KEdgeImpl extends EObjectImpl implements KEdge {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setTargetPort(KPort newTargetPort) {
-		KPort oldTargetPort = targetPort;
+	public void setTargetPort(KLayoutPort newTargetPort) {
+		KLayoutPort oldTargetPort = targetPort;
 		targetPort = newTargetPort;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KEDGE__TARGET_PORT, oldTargetPort, targetPort));
+			eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KLAYOUT_EDGE__TARGET_PORT, oldTargetPort, targetPort));
 	}
 
 	/**
@@ -380,14 +380,14 @@ public class KEdgeImpl extends EObjectImpl implements KEdge {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case KimlLayoutGraphPackage.KEDGE__SOURCE:
+			case KimlLayoutGraphPackage.KLAYOUT_EDGE__SOURCE:
 				if (source != null)
-					msgs = ((InternalEObject)source).eInverseRemove(this, KimlLayoutGraphPackage.KNODE_GROUP__OUTGOING_EDGES, KNodeGroup.class, msgs);
-				return basicSetSource((KNodeGroup)otherEnd, msgs);
-			case KimlLayoutGraphPackage.KEDGE__TARGET:
+					msgs = ((InternalEObject)source).eInverseRemove(this, KimlLayoutGraphPackage.KLAYOUT_NODE__OUTGOING_EDGES, KLayoutNode.class, msgs);
+				return basicSetSource((KLayoutNode)otherEnd, msgs);
+			case KimlLayoutGraphPackage.KLAYOUT_EDGE__TARGET:
 				if (target != null)
-					msgs = ((InternalEObject)target).eInverseRemove(this, KimlLayoutGraphPackage.KNODE_GROUP__INCOMING_EDGES, KNodeGroup.class, msgs);
-				return basicSetTarget((KNodeGroup)otherEnd, msgs);
+					msgs = ((InternalEObject)target).eInverseRemove(this, KimlLayoutGraphPackage.KLAYOUT_NODE__INCOMING_EDGES, KLayoutNode.class, msgs);
+				return basicSetTarget((KLayoutNode)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -400,9 +400,9 @@ public class KEdgeImpl extends EObjectImpl implements KEdge {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case KimlLayoutGraphPackage.KEDGE__SOURCE:
+			case KimlLayoutGraphPackage.KLAYOUT_EDGE__SOURCE:
 				return basicSetSource(null, msgs);
-			case KimlLayoutGraphPackage.KEDGE__TARGET:
+			case KimlLayoutGraphPackage.KLAYOUT_EDGE__TARGET:
 				return basicSetTarget(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -416,21 +416,21 @@ public class KEdgeImpl extends EObjectImpl implements KEdge {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case KimlLayoutGraphPackage.KEDGE__SOURCE:
+			case KimlLayoutGraphPackage.KLAYOUT_EDGE__SOURCE:
 				if (resolve) return getSource();
 				return basicGetSource();
-			case KimlLayoutGraphPackage.KEDGE__TARGET:
+			case KimlLayoutGraphPackage.KLAYOUT_EDGE__TARGET:
 				if (resolve) return getTarget();
 				return basicGetTarget();
-			case KimlLayoutGraphPackage.KEDGE__LAYOUT:
+			case KimlLayoutGraphPackage.KLAYOUT_EDGE__LAYOUT:
 				if (resolve) return getLayout();
 				return basicGetLayout();
-			case KimlLayoutGraphPackage.KEDGE__LABEL:
+			case KimlLayoutGraphPackage.KLAYOUT_EDGE__LABEL:
 				return getLabel();
-			case KimlLayoutGraphPackage.KEDGE__SOURCE_PORT:
+			case KimlLayoutGraphPackage.KLAYOUT_EDGE__SOURCE_PORT:
 				if (resolve) return getSourcePort();
 				return basicGetSourcePort();
-			case KimlLayoutGraphPackage.KEDGE__TARGET_PORT:
+			case KimlLayoutGraphPackage.KLAYOUT_EDGE__TARGET_PORT:
 				if (resolve) return getTargetPort();
 				return basicGetTargetPort();
 		}
@@ -446,24 +446,24 @@ public class KEdgeImpl extends EObjectImpl implements KEdge {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case KimlLayoutGraphPackage.KEDGE__SOURCE:
-				setSource((KNodeGroup)newValue);
+			case KimlLayoutGraphPackage.KLAYOUT_EDGE__SOURCE:
+				setSource((KLayoutNode)newValue);
 				return;
-			case KimlLayoutGraphPackage.KEDGE__TARGET:
-				setTarget((KNodeGroup)newValue);
+			case KimlLayoutGraphPackage.KLAYOUT_EDGE__TARGET:
+				setTarget((KLayoutNode)newValue);
 				return;
-			case KimlLayoutGraphPackage.KEDGE__LAYOUT:
+			case KimlLayoutGraphPackage.KLAYOUT_EDGE__LAYOUT:
 				setLayout((KEdgeLayout)newValue);
 				return;
-			case KimlLayoutGraphPackage.KEDGE__LABEL:
+			case KimlLayoutGraphPackage.KLAYOUT_EDGE__LABEL:
 				getLabel().clear();
 				getLabel().addAll((Collection<? extends KEdgeLabel>)newValue);
 				return;
-			case KimlLayoutGraphPackage.KEDGE__SOURCE_PORT:
-				setSourcePort((KPort)newValue);
+			case KimlLayoutGraphPackage.KLAYOUT_EDGE__SOURCE_PORT:
+				setSourcePort((KLayoutPort)newValue);
 				return;
-			case KimlLayoutGraphPackage.KEDGE__TARGET_PORT:
-				setTargetPort((KPort)newValue);
+			case KimlLayoutGraphPackage.KLAYOUT_EDGE__TARGET_PORT:
+				setTargetPort((KLayoutPort)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -477,23 +477,23 @@ public class KEdgeImpl extends EObjectImpl implements KEdge {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case KimlLayoutGraphPackage.KEDGE__SOURCE:
-				setSource((KNodeGroup)null);
+			case KimlLayoutGraphPackage.KLAYOUT_EDGE__SOURCE:
+				setSource((KLayoutNode)null);
 				return;
-			case KimlLayoutGraphPackage.KEDGE__TARGET:
-				setTarget((KNodeGroup)null);
+			case KimlLayoutGraphPackage.KLAYOUT_EDGE__TARGET:
+				setTarget((KLayoutNode)null);
 				return;
-			case KimlLayoutGraphPackage.KEDGE__LAYOUT:
+			case KimlLayoutGraphPackage.KLAYOUT_EDGE__LAYOUT:
 				setLayout((KEdgeLayout)null);
 				return;
-			case KimlLayoutGraphPackage.KEDGE__LABEL:
+			case KimlLayoutGraphPackage.KLAYOUT_EDGE__LABEL:
 				getLabel().clear();
 				return;
-			case KimlLayoutGraphPackage.KEDGE__SOURCE_PORT:
-				setSourcePort((KPort)null);
+			case KimlLayoutGraphPackage.KLAYOUT_EDGE__SOURCE_PORT:
+				setSourcePort((KLayoutPort)null);
 				return;
-			case KimlLayoutGraphPackage.KEDGE__TARGET_PORT:
-				setTargetPort((KPort)null);
+			case KimlLayoutGraphPackage.KLAYOUT_EDGE__TARGET_PORT:
+				setTargetPort((KLayoutPort)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -507,20 +507,20 @@ public class KEdgeImpl extends EObjectImpl implements KEdge {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case KimlLayoutGraphPackage.KEDGE__SOURCE:
+			case KimlLayoutGraphPackage.KLAYOUT_EDGE__SOURCE:
 				return source != null;
-			case KimlLayoutGraphPackage.KEDGE__TARGET:
+			case KimlLayoutGraphPackage.KLAYOUT_EDGE__TARGET:
 				return target != null;
-			case KimlLayoutGraphPackage.KEDGE__LAYOUT:
+			case KimlLayoutGraphPackage.KLAYOUT_EDGE__LAYOUT:
 				return layout != null;
-			case KimlLayoutGraphPackage.KEDGE__LABEL:
+			case KimlLayoutGraphPackage.KLAYOUT_EDGE__LABEL:
 				return label != null && !label.isEmpty();
-			case KimlLayoutGraphPackage.KEDGE__SOURCE_PORT:
+			case KimlLayoutGraphPackage.KLAYOUT_EDGE__SOURCE_PORT:
 				return sourcePort != null;
-			case KimlLayoutGraphPackage.KEDGE__TARGET_PORT:
+			case KimlLayoutGraphPackage.KLAYOUT_EDGE__TARGET_PORT:
 				return targetPort != null;
 		}
 		return super.eIsSet(featureID);
 	}
 
-} //KEdgeImpl
+} //KLayoutEdgeImpl

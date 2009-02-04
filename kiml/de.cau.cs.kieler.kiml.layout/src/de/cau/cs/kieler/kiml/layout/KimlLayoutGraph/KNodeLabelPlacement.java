@@ -17,11 +17,11 @@ import org.eclipse.emf.common.util.Enumerator;
  * A representation of the literals of the enumeration '<em><b>NODE LABEL PLACEMENT</b></em>',
  * and utility methods for working with them.
  * <!-- end-user-doc -->
- * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getNODE_LABEL_PLACEMENT()
+ * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKNodeLabelPlacement()
  * @model
  * @generated
  */
-public enum NODE_LABEL_PLACEMENT implements Enumerator {
+public enum KNodeLabelPlacement implements Enumerator {
 	/**
 	 * The '<em><b>DEFAULT</b></em>' literal object.
 	 * <!-- begin-user-doc -->
@@ -248,13 +248,13 @@ public enum NODE_LABEL_PLACEMENT implements Enumerator {
 	public static final int OUTSIDE_EAST_VALUE = 8;
 
 	/**
-	 * An array of all the '<em><b>NODE LABEL PLACEMENT</b></em>' enumerators.
+	 * An array of all the '<em><b>KNode Label Placement</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static final NODE_LABEL_PLACEMENT[] VALUES_ARRAY =
-		new NODE_LABEL_PLACEMENT[] {
+	private static final KNodeLabelPlacement[] VALUES_ARRAY =
+		new KNodeLabelPlacement[] {
 			DEFAULT,
 			INSIDE_NORTH,
 			INSIDE_SOUTH,
@@ -267,22 +267,22 @@ public enum NODE_LABEL_PLACEMENT implements Enumerator {
 		};
 
 	/**
-	 * A public read-only list of all the '<em><b>NODE LABEL PLACEMENT</b></em>' enumerators.
+	 * A public read-only list of all the '<em><b>KNode Label Placement</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final List<NODE_LABEL_PLACEMENT> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
+	public static final List<KNodeLabelPlacement> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
 	/**
-	 * Returns the '<em><b>NODE LABEL PLACEMENT</b></em>' literal with the specified literal value.
+	 * Returns the '<em><b>KNode Label Placement</b></em>' literal with the specified literal value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static NODE_LABEL_PLACEMENT get(String literal) {
+	public static KNodeLabelPlacement get(String literal) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			NODE_LABEL_PLACEMENT result = VALUES_ARRAY[i];
+			KNodeLabelPlacement result = VALUES_ARRAY[i];
 			if (result.toString().equals(literal)) {
 				return result;
 			}
@@ -291,14 +291,14 @@ public enum NODE_LABEL_PLACEMENT implements Enumerator {
 	}
 
 	/**
-	 * Returns the '<em><b>NODE LABEL PLACEMENT</b></em>' literal with the specified name.
+	 * Returns the '<em><b>KNode Label Placement</b></em>' literal with the specified name.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static NODE_LABEL_PLACEMENT getByName(String name) {
+	public static KNodeLabelPlacement getByName(String name) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			NODE_LABEL_PLACEMENT result = VALUES_ARRAY[i];
+			KNodeLabelPlacement result = VALUES_ARRAY[i];
 			if (result.getName().equals(name)) {
 				return result;
 			}
@@ -307,12 +307,12 @@ public enum NODE_LABEL_PLACEMENT implements Enumerator {
 	}
 
 	/**
-	 * Returns the '<em><b>NODE LABEL PLACEMENT</b></em>' literal with the specified integer value.
+	 * Returns the '<em><b>KNode Label Placement</b></em>' literal with the specified integer value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static NODE_LABEL_PLACEMENT get(int value) {
+	public static KNodeLabelPlacement get(int value) {
 		switch (value) {
 			case DEFAULT_VALUE: return DEFAULT;
 			case INSIDE_NORTH_VALUE: return INSIDE_NORTH;
@@ -354,7 +354,7 @@ public enum NODE_LABEL_PLACEMENT implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private NODE_LABEL_PLACEMENT(int value, String name, String literal) {
+	private KNodeLabelPlacement(int value, String name, String literal) {
 		this.value = value;
 		this.name = name;
 		this.literal = literal;
@@ -398,4 +398,4 @@ public enum NODE_LABEL_PLACEMENT implements Enumerator {
 		return literal;
 	}
 	
-} //NODE_LABEL_PLACEMENT
+} //KNodeLabelPlacement

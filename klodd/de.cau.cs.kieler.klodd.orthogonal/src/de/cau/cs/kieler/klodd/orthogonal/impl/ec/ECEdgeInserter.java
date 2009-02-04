@@ -7,7 +7,7 @@ import java.util.ListIterator;
 import java.util.Map;
 import java.util.Queue;
 
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdge;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge;
 import de.cau.cs.kieler.klodd.core.algorithms.AbstractAlgorithm;
 import de.cau.cs.kieler.klodd.orthogonal.structures.*;
 
@@ -22,7 +22,7 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 	/**
 	 * Admissible placing of an edge.
 	 */
-	private class EdgePlacing {
+	private static class EdgePlacing {
 		/** rank of this placing in the clockwise order of edges */
 		int rank;
 		/** face related to this placing */
@@ -40,7 +40,7 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 	/**
 	 * Entry of a path in the dual graph.
 	 */
-	private class DualPathEntry {
+	private static class DualPathEntry {
 		/** the edge to take for this entry of a path */
 		TSMEdge edge;
 		/** the target face of the edge*/
@@ -60,7 +60,7 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 	/**
 	 * A path in the dual graph.
 	 */
-	private class DualPath {
+	private static class DualPath {
 		/** the path consists of entries with crossed edges */
 		List<DualPathEntry> entries = null;
 		/** edge placing for insertion at source */
@@ -72,7 +72,7 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 	/**
 	 * Object returned as result of recursive constraint analysis.
 	 */
-	private class ConstraintResult {
+	private static class ConstraintResult {
 		/** number of edges that are already placed */
 		int edgeCount = 0;
 		/** rank of the first edge */
@@ -155,7 +155,7 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 		}
 		else {
 			// assign ranks to already placed edges
-			Map<KEdge, TSMEdge> edgeMap = new HashMap<KEdge, TSMEdge>();
+			Map<KLayoutEdge, TSMEdge> edgeMap = new HashMap<KLayoutEdge, TSMEdge>();
 			int nextRank = 0;
 			for (TSMNode.IncEntry tsmEdgeEntry : node.incidence) {
 				tsmEdgeEntry.edge.rank = nextRank++;
@@ -184,13 +184,13 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 	 * @param outgoing indicates whether the edge is outgoing for the node
 	 * @return constraint information with a list of admissible placements
 	 */
-	private ConstraintResult analyzeConstraint(Map<KEdge, TSMEdge> edgeMap,
+	private ConstraintResult analyzeConstraint(Map<KLayoutEdge, TSMEdge> edgeMap,
 			EmbeddingConstraint constraint, boolean outgoing) {
 		ConstraintResult result = new ConstraintResult();
 		switch (constraint.type) {
 		case OUT_EDGE:
 		case IN_EDGE:
-			KEdge layoutEdge = (KEdge)constraint.object;
+			KLayoutEdge layoutEdge = (KLayoutEdge)constraint.object;
 			TSMEdge tsmEdge = edgeMap.get(layoutEdge);
 			if (tsmEdge != null) {
 				if (tsmEdge.rank < 0) {
@@ -577,7 +577,7 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 	 */
 	private TSMEdge insertEdge(TSMNode sourceNode, int sourceRank,
 			TSMNode targetNode, int targetRank, TSMFace face, TSMEdge insEdge,
-			TSMEdge previousEdge, KEdge layoutEdge) {
+			TSMEdge previousEdge, KLayoutEdge layoutEdge) {
 		if (insEdge == null) {
 			insEdge = new TSMEdge(graph, sourceNode, targetNode, layoutEdge);
 		}

@@ -9,16 +9,16 @@
  *******************************************************************************/
 package de.cau.cs.kieler.kiml.layout.services;
 
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphFactory;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayouterInfo;
 
 /**
  * Implements the NullLayoutProvider. This layout provider just exists to
  * prevent NullPointerExceptions when someone requests a layouter and there is
  * none in the entire system. This layout provider is not registered through the
  * extension points as normal layout providers, but is instantiated and returned
- * from {@link LayoutProviders#getLayoutProvider(KNodeGroup)}, when no layout
+ * from {@link LayoutProviders#getLayoutProvider(KLayoutNode)}, when no layout
  * provider is found.
  * 
  * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
@@ -29,21 +29,21 @@ public class KimlNullLayoutProvider extends KimlAbstractLayoutProvider {
 	/**
 	 * Does nothing, as this is the NullLayoutProvider.
 	 * 
-	 * @see de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayoutProvider#doLayout(KNodeGroup)
-	 *      KimlAbstractLayoutProvider.doLayout(KNodeGroup)
+	 * @see de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayoutProvider#doLayout(KLayoutNode)
+	 *      KimlAbstractLayoutProvider.doLayout(KLayoutNode)
 	 */
-	public void doLayout(KNodeGroup nodeGroup) {
+	public void doLayout(KLayoutNode layoutNode) {
 		;/* NULL layouter, does nothing */
 	}
 
 	/**
-	 * Returns a to defaults initialized LAYOUTER_INFO, as this is the
+	 * Returns a to defaults initialized KLayouterInfo, as this is the
 	 * NullLayoutProvider.
 	 * 
 	 * @see de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayoutProvider#getLayouterInfo() KimlAbstractLayoutProvider.getLayouterInfo()
 	 */
-	public final LAYOUTER_INFO getLayouterInfo() {
-		return KimlLayoutGraphFactory.eINSTANCE.createLAYOUTER_INFO();
+	public final KLayouterInfo getLayouterInfo() {
+		return KimlLayoutGraphFactory.eINSTANCE.createKLayouterInfo();
 	}
 
 }

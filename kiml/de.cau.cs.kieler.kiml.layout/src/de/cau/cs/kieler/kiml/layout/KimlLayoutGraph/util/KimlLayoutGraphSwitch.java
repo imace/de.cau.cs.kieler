@@ -108,6 +108,7 @@ public class KimlLayoutGraphSwitch<T> {
 			case KimlLayoutGraphPackage.KLAYOUT_GRAPH: {
 				KLayoutGraph kLayoutGraph = (KLayoutGraph)theEObject;
 				T result = caseKLayoutGraph(kLayoutGraph);
+				if (result == null) result = caseKLayoutNode(kLayoutGraph);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -117,9 +118,9 @@ public class KimlLayoutGraphSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case KimlLayoutGraphPackage.KEDGE: {
-				KEdge kEdge = (KEdge)theEObject;
-				T result = caseKEdge(kEdge);
+			case KimlLayoutGraphPackage.KLAYOUT_EDGE: {
+				KLayoutEdge kLayoutEdge = (KLayoutEdge)theEObject;
+				T result = caseKLayoutEdge(kLayoutEdge);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -129,16 +130,16 @@ public class KimlLayoutGraphSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case KimlLayoutGraphPackage.KNODE_GROUP: {
-				KNodeGroup kNodeGroup = (KNodeGroup)theEObject;
-				T result = caseKNodeGroup(kNodeGroup);
+			case KimlLayoutGraphPackage.KLAYOUT_NODE: {
+				KLayoutNode kLayoutNode = (KLayoutNode)theEObject;
+				T result = caseKLayoutNode(kLayoutNode);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case KimlLayoutGraphPackage.KNODE_GROUP_LAYOUT: {
-				KNodeGroupLayout kNodeGroupLayout = (KNodeGroupLayout)theEObject;
-				T result = caseKNodeGroupLayout(kNodeGroupLayout);
-				if (result == null) result = caseKShapeLayout(kNodeGroupLayout);
+			case KimlLayoutGraphPackage.KNODE_LAYOUT: {
+				KNodeLayout kNodeLayout = (KNodeLayout)theEObject;
+				T result = caseKNodeLayout(kNodeLayout);
+				if (result == null) result = caseKShapeLayout(kNodeLayout);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -162,29 +163,29 @@ public class KimlLayoutGraphSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case KimlLayoutGraphPackage.KNODE_GROUP_LABEL: {
-				KNodeGroupLabel kNodeGroupLabel = (KNodeGroupLabel)theEObject;
-				T result = caseKNodeGroupLabel(kNodeGroupLabel);
-				if (result == null) result = caseKLabel(kNodeGroupLabel);
+			case KimlLayoutGraphPackage.KNODE_LABEL: {
+				KNodeLabel kNodeLabel = (KNodeLabel)theEObject;
+				T result = caseKNodeLabel(kNodeLabel);
+				if (result == null) result = caseKLabel(kNodeLabel);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case KimlLayoutGraphPackage.KNODE_GROUP_LABEL_LAYOUT: {
-				KNodeGroupLabelLayout kNodeGroupLabelLayout = (KNodeGroupLabelLayout)theEObject;
-				T result = caseKNodeGroupLabelLayout(kNodeGroupLabelLayout);
-				if (result == null) result = caseKShapeLayout(kNodeGroupLabelLayout);
+			case KimlLayoutGraphPackage.KNODE_LABEL_LAYOUT: {
+				KNodeLabelLayout kNodeLabelLayout = (KNodeLabelLayout)theEObject;
+				T result = caseKNodeLabelLayout(kNodeLabelLayout);
+				if (result == null) result = caseKShapeLayout(kNodeLabelLayout);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case KimlLayoutGraphPackage.LAYOUTER_INFO: {
-				LAYOUTER_INFO layouteR_INFO = (LAYOUTER_INFO)theEObject;
-				T result = caseLAYOUTER_INFO(layouteR_INFO);
+			case KimlLayoutGraphPackage.KLAYOUTER_INFO: {
+				KLayouterInfo kLayouterInfo = (KLayouterInfo)theEObject;
+				T result = caseKLayouterInfo(kLayouterInfo);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case KimlLayoutGraphPackage.KPORT: {
-				KPort kPort = (KPort)theEObject;
-				T result = caseKPort(kPort);
+			case KimlLayoutGraphPackage.KLAYOUT_PORT: {
+				KLayoutPort kLayoutPort = (KLayoutPort)theEObject;
+				T result = caseKLayoutPort(kLayoutPort);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -289,17 +290,17 @@ public class KimlLayoutGraphSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>KEdge</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>KLayout Edge</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>KEdge</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>KLayout Edge</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseKEdge(KEdge object) {
+	public T caseKLayoutEdge(KLayoutEdge object) {
 		return null;
 	}
 
@@ -319,32 +320,32 @@ public class KimlLayoutGraphSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>KNode Group</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>KLayout Node</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>KNode Group</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>KLayout Node</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseKNodeGroup(KNodeGroup object) {
+	public T caseKLayoutNode(KLayoutNode object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>KNode Group Layout</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>KNode Layout</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>KNode Group Layout</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>KNode Layout</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseKNodeGroupLayout(KNodeGroupLayout object) {
+	public T caseKNodeLayout(KNodeLayout object) {
 		return null;
 	}
 
@@ -394,62 +395,62 @@ public class KimlLayoutGraphSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>KNode Group Label</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>KNode Label</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>KNode Group Label</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>KNode Label</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseKNodeGroupLabel(KNodeGroupLabel object) {
+	public T caseKNodeLabel(KNodeLabel object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>KNode Group Label Layout</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>KNode Label Layout</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>KNode Group Label Layout</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>KNode Label Layout</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseKNodeGroupLabelLayout(KNodeGroupLabelLayout object) {
+	public T caseKNodeLabelLayout(KNodeLabelLayout object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>LAYOUTER INFO</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>KLayouter Info</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>LAYOUTER INFO</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>KLayouter Info</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseLAYOUTER_INFO(LAYOUTER_INFO object) {
+	public T caseKLayouterInfo(KLayouterInfo object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>KPort</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>KLayout Port</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>KPort</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>KLayout Port</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseKPort(KPort object) {
+	public T caseKLayoutPort(KLayoutPort object) {
 		return null;
 	}
 

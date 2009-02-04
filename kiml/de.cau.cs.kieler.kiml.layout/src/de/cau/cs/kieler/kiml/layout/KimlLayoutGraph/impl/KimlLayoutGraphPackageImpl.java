@@ -7,22 +7,30 @@
 package de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl;
 
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KDimension;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdge;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLabel;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLabelLayout;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLabelPlacement;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLayout;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeType;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KInsets;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLabel;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutGraph;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroupLabel;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroupLabelLayout;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroupLayout;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutOption;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeLabel;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeLabelLayout;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeLabelPlacement;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeLayout;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPoint;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPort;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutType;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayouterInfo;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPortLabel;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPortLabelLayout;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPortLayout;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPortPlacement;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPortType;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KShapeLayout;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphFactory;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage;
@@ -83,7 +91,7 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass kEdgeEClass = null;
+	private EClass kLayoutEdgeEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -97,14 +105,14 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass kNodeGroupEClass = null;
+	private EClass kLayoutNodeEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass kNodeGroupLayoutEClass = null;
+	private EClass kNodeLayoutEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -132,28 +140,28 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass kNodeGroupLabelEClass = null;
+	private EClass kNodeLabelEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass kNodeGroupLabelLayoutEClass = null;
+	private EClass kNodeLabelLayoutEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass layouteR_INFOEClass = null;
+	private EClass kLayouterInfoEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass kPortEClass = null;
+	private EClass kLayoutPortEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -181,49 +189,49 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EEnum edgE_TYPEEEnum = null;
+	private EEnum kEdgeTypeEEnum = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EEnum layouT_TYPEEEnum = null;
+	private EEnum kLayoutTypeEEnum = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EEnum layouT_OPTIONEEnum = null;
+	private EEnum kLayoutOptionEEnum = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EEnum edgE_LABEL_PLACEMENTEEnum = null;
+	private EEnum kEdgeLabelPlacementEEnum = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EEnum nodE_LABEL_PLACEMENTEEnum = null;
+	private EEnum kNodeLabelPlacementEEnum = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EEnum porT_TYPEEEnum = null;
+	private EEnum kPortTypeEEnum = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EEnum porT_PLACEMENTEEnum = null;
+	private EEnum kPortPlacementEEnum = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -409,15 +417,6 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getKLayoutGraph_TopGroup() {
-		return (EReference)kLayoutGraphEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getKShapeLayout() {
 		return kShapeLayoutEClass;
 	}
@@ -454,8 +453,8 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getKEdge() {
-		return kEdgeEClass;
+	public EClass getKLayoutEdge() {
+		return kLayoutEdgeEClass;
 	}
 
 	/**
@@ -463,8 +462,8 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getKEdge_Source() {
-		return (EReference)kEdgeEClass.getEStructuralFeatures().get(0);
+	public EReference getKLayoutEdge_Source() {
+		return (EReference)kLayoutEdgeEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -472,8 +471,8 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getKEdge_Target() {
-		return (EReference)kEdgeEClass.getEStructuralFeatures().get(1);
+	public EReference getKLayoutEdge_Target() {
+		return (EReference)kLayoutEdgeEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -481,8 +480,8 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getKEdge_Layout() {
-		return (EReference)kEdgeEClass.getEStructuralFeatures().get(2);
+	public EReference getKLayoutEdge_Layout() {
+		return (EReference)kLayoutEdgeEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -490,8 +489,8 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getKEdge_Label() {
-		return (EReference)kEdgeEClass.getEStructuralFeatures().get(3);
+	public EReference getKLayoutEdge_Label() {
+		return (EReference)kLayoutEdgeEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -499,8 +498,8 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getKEdge_SourcePort() {
-		return (EReference)kEdgeEClass.getEStructuralFeatures().get(4);
+	public EReference getKLayoutEdge_SourcePort() {
+		return (EReference)kLayoutEdgeEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -508,8 +507,8 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getKEdge_TargetPort() {
-		return (EReference)kEdgeEClass.getEStructuralFeatures().get(5);
+	public EReference getKLayoutEdge_TargetPort() {
+		return (EReference)kLayoutEdgeEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -571,8 +570,8 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getKNodeGroup() {
-		return kNodeGroupEClass;
+	public EClass getKLayoutNode() {
+		return kLayoutNodeEClass;
 	}
 
 	/**
@@ -580,8 +579,8 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getKNodeGroup_SubNodeGroups() {
-		return (EReference)kNodeGroupEClass.getEStructuralFeatures().get(0);
+	public EReference getKLayoutNode_ChildNodes() {
+		return (EReference)kLayoutNodeEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -589,8 +588,8 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getKNodeGroup_OutgoingEdges() {
-		return (EReference)kNodeGroupEClass.getEStructuralFeatures().get(1);
+	public EReference getKLayoutNode_OutgoingEdges() {
+		return (EReference)kLayoutNodeEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -598,8 +597,8 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getKNodeGroup_IncomingEdges() {
-		return (EReference)kNodeGroupEClass.getEStructuralFeatures().get(2);
+	public EReference getKLayoutNode_IncomingEdges() {
+		return (EReference)kLayoutNodeEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -607,8 +606,8 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getKNodeGroup_ParentGroup() {
-		return (EReference)kNodeGroupEClass.getEStructuralFeatures().get(3);
+	public EReference getKLayoutNode_ParentNode() {
+		return (EReference)kLayoutNodeEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -616,8 +615,8 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getKNodeGroup_Layout() {
-		return (EReference)kNodeGroupEClass.getEStructuralFeatures().get(4);
+	public EReference getKLayoutNode_Layout() {
+		return (EReference)kLayoutNodeEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -625,8 +624,8 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getKNodeGroup_Label() {
-		return (EReference)kNodeGroupEClass.getEStructuralFeatures().get(5);
+	public EReference getKLayoutNode_Label() {
+		return (EReference)kLayoutNodeEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -634,8 +633,8 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getKNodeGroup_IdString() {
-		return (EAttribute)kNodeGroupEClass.getEStructuralFeatures().get(6);
+	public EAttribute getKLayoutNode_IdString() {
+		return (EAttribute)kLayoutNodeEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -643,8 +642,8 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getKNodeGroup_Ports() {
-		return (EReference)kNodeGroupEClass.getEStructuralFeatures().get(7);
+	public EReference getKLayoutNode_Ports() {
+		return (EReference)kLayoutNodeEClass.getEStructuralFeatures().get(7);
 	}
 
 	/**
@@ -652,8 +651,8 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getKNodeGroupLayout() {
-		return kNodeGroupLayoutEClass;
+	public EClass getKNodeLayout() {
+		return kNodeLayoutEClass;
 	}
 
 	/**
@@ -661,8 +660,8 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getKNodeGroupLayout_LayoutType() {
-		return (EAttribute)kNodeGroupLayoutEClass.getEStructuralFeatures().get(0);
+	public EAttribute getKNodeLayout_LayoutType() {
+		return (EAttribute)kNodeLayoutEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -670,8 +669,8 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getKNodeGroupLayout_LayoutOptions() {
-		return (EAttribute)kNodeGroupLayoutEClass.getEStructuralFeatures().get(1);
+	public EAttribute getKNodeLayout_LayoutOptions() {
+		return (EAttribute)kNodeLayoutEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -679,8 +678,8 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getKNodeGroupLayout_LayouterName() {
-		return (EAttribute)kNodeGroupLayoutEClass.getEStructuralFeatures().get(2);
+	public EAttribute getKNodeLayout_LayouterName() {
+		return (EAttribute)kNodeLayoutEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -688,8 +687,8 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getKNodeGroupLayout_Insets() {
-		return (EReference)kNodeGroupLayoutEClass.getEStructuralFeatures().get(3);
+	public EReference getKNodeLayout_Insets() {
+		return (EReference)kNodeLayoutEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -751,8 +750,8 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getKNodeGroupLabel() {
-		return kNodeGroupLabelEClass;
+	public EClass getKNodeLabel() {
+		return kNodeLabelEClass;
 	}
 
 	/**
@@ -760,8 +759,8 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getKNodeGroupLabel_LabelLayout() {
-		return (EReference)kNodeGroupLabelEClass.getEStructuralFeatures().get(0);
+	public EReference getKNodeLabel_LabelLayout() {
+		return (EReference)kNodeLabelEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -769,8 +768,8 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getKNodeGroupLabelLayout() {
-		return kNodeGroupLabelLayoutEClass;
+	public EClass getKNodeLabelLayout() {
+		return kNodeLabelLayoutEClass;
 	}
 
 	/**
@@ -778,8 +777,8 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getKNodeGroupLabelLayout_LabelPlacement() {
-		return (EAttribute)kNodeGroupLabelLayoutEClass.getEStructuralFeatures().get(0);
+	public EAttribute getKNodeLabelLayout_LabelPlacement() {
+		return (EAttribute)kNodeLabelLayoutEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -787,8 +786,8 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getLAYOUTER_INFO() {
-		return layouteR_INFOEClass;
+	public EClass getKLayouterInfo() {
+		return kLayouterInfoEClass;
 	}
 
 	/**
@@ -796,8 +795,8 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getLAYOUTER_INFO_LayouterName() {
-		return (EAttribute)layouteR_INFOEClass.getEStructuralFeatures().get(0);
+	public EAttribute getKLayouterInfo_LayouterName() {
+		return (EAttribute)kLayouterInfoEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -805,8 +804,8 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getLAYOUTER_INFO_LayoutType() {
-		return (EAttribute)layouteR_INFOEClass.getEStructuralFeatures().get(1);
+	public EAttribute getKLayouterInfo_LayoutType() {
+		return (EAttribute)kLayouterInfoEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -814,8 +813,8 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getLAYOUTER_INFO_LayoutOption() {
-		return (EAttribute)layouteR_INFOEClass.getEStructuralFeatures().get(2);
+	public EAttribute getKLayouterInfo_LayoutOption() {
+		return (EAttribute)kLayouterInfoEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -823,8 +822,8 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getLAYOUTER_INFO_LayouterCollectionID() {
-		return (EAttribute)layouteR_INFOEClass.getEStructuralFeatures().get(3);
+	public EAttribute getKLayouterInfo_LayouterCollectionID() {
+		return (EAttribute)kLayouterInfoEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -832,8 +831,8 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getKPort() {
-		return kPortEClass;
+	public EClass getKLayoutPort() {
+		return kLayoutPortEClass;
 	}
 
 	/**
@@ -841,8 +840,8 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getKPort_Layout() {
-		return (EReference)kPortEClass.getEStructuralFeatures().get(0);
+	public EReference getKLayoutPort_Layout() {
+		return (EReference)kLayoutPortEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -850,8 +849,8 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getKPort_Label() {
-		return (EReference)kPortEClass.getEStructuralFeatures().get(1);
+	public EReference getKLayoutPort_Label() {
+		return (EReference)kLayoutPortEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -859,8 +858,8 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getKPort_NodeGroup() {
-		return (EReference)kPortEClass.getEStructuralFeatures().get(2);
+	public EReference getKLayoutPort_Node() {
+		return (EReference)kLayoutPortEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -868,8 +867,8 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getKPort_Type() {
-		return (EAttribute)kPortEClass.getEStructuralFeatures().get(3);
+	public EAttribute getKLayoutPort_Type() {
+		return (EAttribute)kLayoutPortEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -877,8 +876,8 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getKPort_Edges() {
-		return (EReference)kPortEClass.getEStructuralFeatures().get(4);
+	public EReference getKLayoutPort_Edges() {
+		return (EReference)kLayoutPortEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -931,8 +930,8 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EEnum getEDGE_TYPE() {
-		return edgE_TYPEEEnum;
+	public EEnum getKEdgeType() {
+		return kEdgeTypeEEnum;
 	}
 
 	/**
@@ -940,8 +939,8 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EEnum getLAYOUT_TYPE() {
-		return layouT_TYPEEEnum;
+	public EEnum getKLayoutType() {
+		return kLayoutTypeEEnum;
 	}
 
 	/**
@@ -949,8 +948,8 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EEnum getLAYOUT_OPTION() {
-		return layouT_OPTIONEEnum;
+	public EEnum getKLayoutOption() {
+		return kLayoutOptionEEnum;
 	}
 
 	/**
@@ -958,8 +957,8 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EEnum getEDGE_LABEL_PLACEMENT() {
-		return edgE_LABEL_PLACEMENTEEnum;
+	public EEnum getKEdgeLabelPlacement() {
+		return kEdgeLabelPlacementEEnum;
 	}
 
 	/**
@@ -967,8 +966,8 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EEnum getNODE_LABEL_PLACEMENT() {
-		return nodE_LABEL_PLACEMENTEEnum;
+	public EEnum getKNodeLabelPlacement() {
+		return kNodeLabelPlacementEEnum;
 	}
 
 	/**
@@ -976,8 +975,8 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EEnum getPORT_TYPE() {
-		return porT_TYPEEEnum;
+	public EEnum getKPortType() {
+		return kPortTypeEEnum;
 	}
 
 	/**
@@ -985,8 +984,8 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EEnum getPORT_PLACEMENT() {
-		return porT_PLACEMENTEEnum;
+	public EEnum getKPortPlacement() {
+		return kPortPlacementEEnum;
 	}
 
 	/**
@@ -1032,20 +1031,19 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 		createEAttribute(kInsetsEClass, KINSETS__TOP);
 
 		kLayoutGraphEClass = createEClass(KLAYOUT_GRAPH);
-		createEReference(kLayoutGraphEClass, KLAYOUT_GRAPH__TOP_GROUP);
 
 		kShapeLayoutEClass = createEClass(KSHAPE_LAYOUT);
 		createEReference(kShapeLayoutEClass, KSHAPE_LAYOUT__LOCATION);
 		createEReference(kShapeLayoutEClass, KSHAPE_LAYOUT__SIZE);
 		createEAttribute(kShapeLayoutEClass, KSHAPE_LAYOUT__USE_LAYOUT);
 
-		kEdgeEClass = createEClass(KEDGE);
-		createEReference(kEdgeEClass, KEDGE__SOURCE);
-		createEReference(kEdgeEClass, KEDGE__TARGET);
-		createEReference(kEdgeEClass, KEDGE__LAYOUT);
-		createEReference(kEdgeEClass, KEDGE__LABEL);
-		createEReference(kEdgeEClass, KEDGE__SOURCE_PORT);
-		createEReference(kEdgeEClass, KEDGE__TARGET_PORT);
+		kLayoutEdgeEClass = createEClass(KLAYOUT_EDGE);
+		createEReference(kLayoutEdgeEClass, KLAYOUT_EDGE__SOURCE);
+		createEReference(kLayoutEdgeEClass, KLAYOUT_EDGE__TARGET);
+		createEReference(kLayoutEdgeEClass, KLAYOUT_EDGE__LAYOUT);
+		createEReference(kLayoutEdgeEClass, KLAYOUT_EDGE__LABEL);
+		createEReference(kLayoutEdgeEClass, KLAYOUT_EDGE__SOURCE_PORT);
+		createEReference(kLayoutEdgeEClass, KLAYOUT_EDGE__TARGET_PORT);
 
 		kEdgeLayoutEClass = createEClass(KEDGE_LAYOUT);
 		createEReference(kEdgeLayoutEClass, KEDGE_LAYOUT__SOURCE_POINT);
@@ -1054,21 +1052,21 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 		createEAttribute(kEdgeLayoutEClass, KEDGE_LAYOUT__EDGE_TYPE);
 		createEAttribute(kEdgeLayoutEClass, KEDGE_LAYOUT__USE_LAYOUT);
 
-		kNodeGroupEClass = createEClass(KNODE_GROUP);
-		createEReference(kNodeGroupEClass, KNODE_GROUP__SUB_NODE_GROUPS);
-		createEReference(kNodeGroupEClass, KNODE_GROUP__OUTGOING_EDGES);
-		createEReference(kNodeGroupEClass, KNODE_GROUP__INCOMING_EDGES);
-		createEReference(kNodeGroupEClass, KNODE_GROUP__PARENT_GROUP);
-		createEReference(kNodeGroupEClass, KNODE_GROUP__LAYOUT);
-		createEReference(kNodeGroupEClass, KNODE_GROUP__LABEL);
-		createEAttribute(kNodeGroupEClass, KNODE_GROUP__ID_STRING);
-		createEReference(kNodeGroupEClass, KNODE_GROUP__PORTS);
+		kLayoutNodeEClass = createEClass(KLAYOUT_NODE);
+		createEReference(kLayoutNodeEClass, KLAYOUT_NODE__CHILD_NODES);
+		createEReference(kLayoutNodeEClass, KLAYOUT_NODE__OUTGOING_EDGES);
+		createEReference(kLayoutNodeEClass, KLAYOUT_NODE__INCOMING_EDGES);
+		createEReference(kLayoutNodeEClass, KLAYOUT_NODE__PARENT_NODE);
+		createEReference(kLayoutNodeEClass, KLAYOUT_NODE__LAYOUT);
+		createEReference(kLayoutNodeEClass, KLAYOUT_NODE__LABEL);
+		createEAttribute(kLayoutNodeEClass, KLAYOUT_NODE__ID_STRING);
+		createEReference(kLayoutNodeEClass, KLAYOUT_NODE__PORTS);
 
-		kNodeGroupLayoutEClass = createEClass(KNODE_GROUP_LAYOUT);
-		createEAttribute(kNodeGroupLayoutEClass, KNODE_GROUP_LAYOUT__LAYOUT_TYPE);
-		createEAttribute(kNodeGroupLayoutEClass, KNODE_GROUP_LAYOUT__LAYOUT_OPTIONS);
-		createEAttribute(kNodeGroupLayoutEClass, KNODE_GROUP_LAYOUT__LAYOUTER_NAME);
-		createEReference(kNodeGroupLayoutEClass, KNODE_GROUP_LAYOUT__INSETS);
+		kNodeLayoutEClass = createEClass(KNODE_LAYOUT);
+		createEAttribute(kNodeLayoutEClass, KNODE_LAYOUT__LAYOUT_TYPE);
+		createEAttribute(kNodeLayoutEClass, KNODE_LAYOUT__LAYOUT_OPTIONS);
+		createEAttribute(kNodeLayoutEClass, KNODE_LAYOUT__LAYOUTER_NAME);
+		createEReference(kNodeLayoutEClass, KNODE_LAYOUT__INSETS);
 
 		kLabelEClass = createEClass(KLABEL);
 		createEAttribute(kLabelEClass, KLABEL__TEXT);
@@ -1079,24 +1077,24 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 		kEdgeLabelLayoutEClass = createEClass(KEDGE_LABEL_LAYOUT);
 		createEAttribute(kEdgeLabelLayoutEClass, KEDGE_LABEL_LAYOUT__LABEL_PLACEMENT);
 
-		kNodeGroupLabelEClass = createEClass(KNODE_GROUP_LABEL);
-		createEReference(kNodeGroupLabelEClass, KNODE_GROUP_LABEL__LABEL_LAYOUT);
+		kNodeLabelEClass = createEClass(KNODE_LABEL);
+		createEReference(kNodeLabelEClass, KNODE_LABEL__LABEL_LAYOUT);
 
-		kNodeGroupLabelLayoutEClass = createEClass(KNODE_GROUP_LABEL_LAYOUT);
-		createEAttribute(kNodeGroupLabelLayoutEClass, KNODE_GROUP_LABEL_LAYOUT__LABEL_PLACEMENT);
+		kNodeLabelLayoutEClass = createEClass(KNODE_LABEL_LAYOUT);
+		createEAttribute(kNodeLabelLayoutEClass, KNODE_LABEL_LAYOUT__LABEL_PLACEMENT);
 
-		layouteR_INFOEClass = createEClass(LAYOUTER_INFO);
-		createEAttribute(layouteR_INFOEClass, LAYOUTER_INFO__LAYOUTER_NAME);
-		createEAttribute(layouteR_INFOEClass, LAYOUTER_INFO__LAYOUT_TYPE);
-		createEAttribute(layouteR_INFOEClass, LAYOUTER_INFO__LAYOUT_OPTION);
-		createEAttribute(layouteR_INFOEClass, LAYOUTER_INFO__LAYOUTER_COLLECTION_ID);
+		kLayouterInfoEClass = createEClass(KLAYOUTER_INFO);
+		createEAttribute(kLayouterInfoEClass, KLAYOUTER_INFO__LAYOUTER_NAME);
+		createEAttribute(kLayouterInfoEClass, KLAYOUTER_INFO__LAYOUT_TYPE);
+		createEAttribute(kLayouterInfoEClass, KLAYOUTER_INFO__LAYOUT_OPTION);
+		createEAttribute(kLayouterInfoEClass, KLAYOUTER_INFO__LAYOUTER_COLLECTION_ID);
 
-		kPortEClass = createEClass(KPORT);
-		createEReference(kPortEClass, KPORT__LAYOUT);
-		createEReference(kPortEClass, KPORT__LABEL);
-		createEReference(kPortEClass, KPORT__NODE_GROUP);
-		createEAttribute(kPortEClass, KPORT__TYPE);
-		createEReference(kPortEClass, KPORT__EDGES);
+		kLayoutPortEClass = createEClass(KLAYOUT_PORT);
+		createEReference(kLayoutPortEClass, KLAYOUT_PORT__LAYOUT);
+		createEReference(kLayoutPortEClass, KLAYOUT_PORT__LABEL);
+		createEReference(kLayoutPortEClass, KLAYOUT_PORT__NODE);
+		createEAttribute(kLayoutPortEClass, KLAYOUT_PORT__TYPE);
+		createEReference(kLayoutPortEClass, KLAYOUT_PORT__EDGES);
 
 		kPortLayoutEClass = createEClass(KPORT_LAYOUT);
 		createEAttribute(kPortLayoutEClass, KPORT_LAYOUT__PLACEMENT);
@@ -1107,13 +1105,13 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 		kPortLabelLayoutEClass = createEClass(KPORT_LABEL_LAYOUT);
 
 		// Create enums
-		edgE_TYPEEEnum = createEEnum(EDGE_TYPE);
-		layouT_TYPEEEnum = createEEnum(LAYOUT_TYPE);
-		layouT_OPTIONEEnum = createEEnum(LAYOUT_OPTION);
-		edgE_LABEL_PLACEMENTEEnum = createEEnum(EDGE_LABEL_PLACEMENT);
-		nodE_LABEL_PLACEMENTEEnum = createEEnum(NODE_LABEL_PLACEMENT);
-		porT_TYPEEEnum = createEEnum(PORT_TYPE);
-		porT_PLACEMENTEEnum = createEEnum(PORT_PLACEMENT);
+		kEdgeTypeEEnum = createEEnum(KEDGE_TYPE);
+		kLayoutTypeEEnum = createEEnum(KLAYOUT_TYPE);
+		kLayoutOptionEEnum = createEEnum(KLAYOUT_OPTION);
+		kEdgeLabelPlacementEEnum = createEEnum(KEDGE_LABEL_PLACEMENT);
+		kNodeLabelPlacementEEnum = createEEnum(KNODE_LABEL_PLACEMENT);
+		kPortTypeEEnum = createEEnum(KPORT_TYPE);
+		kPortPlacementEEnum = createEEnum(KPORT_PLACEMENT);
 	}
 
 	/**
@@ -1147,11 +1145,12 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
-		kNodeGroupLayoutEClass.getESuperTypes().add(this.getKShapeLayout());
+		kLayoutGraphEClass.getESuperTypes().add(this.getKLayoutNode());
+		kNodeLayoutEClass.getESuperTypes().add(this.getKShapeLayout());
 		kEdgeLabelEClass.getESuperTypes().add(this.getKLabel());
 		kEdgeLabelLayoutEClass.getESuperTypes().add(this.getKShapeLayout());
-		kNodeGroupLabelEClass.getESuperTypes().add(this.getKLabel());
-		kNodeGroupLabelLayoutEClass.getESuperTypes().add(this.getKShapeLayout());
+		kNodeLabelEClass.getESuperTypes().add(this.getKLabel());
+		kNodeLabelLayoutEClass.getESuperTypes().add(this.getKShapeLayout());
 		kPortLayoutEClass.getESuperTypes().add(this.getKShapeLayout());
 		kPortLabelEClass.getESuperTypes().add(this.getKLabel());
 		kPortLabelLayoutEClass.getESuperTypes().add(this.getKShapeLayout());
@@ -1172,43 +1171,42 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 		initEAttribute(getKInsets_Top(), theEcorePackage.getEFloat(), "top", null, 1, 1, KInsets.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(kLayoutGraphEClass, KLayoutGraph.class, "KLayoutGraph", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getKLayoutGraph_TopGroup(), this.getKNodeGroup(), null, "topGroup", null, 1, 1, KLayoutGraph.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(kShapeLayoutEClass, KShapeLayout.class, "KShapeLayout", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getKShapeLayout_Location(), this.getKPoint(), null, "location", null, 1, 1, KShapeLayout.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getKShapeLayout_Size(), this.getKDimension(), null, "size", null, 1, 1, KShapeLayout.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getKShapeLayout_UseLayout(), theEcorePackage.getEBoolean(), "useLayout", "true", 1, 1, KShapeLayout.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(kEdgeEClass, KEdge.class, "KEdge", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getKEdge_Source(), this.getKNodeGroup(), this.getKNodeGroup_OutgoingEdges(), "source", null, 1, 1, KEdge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getKEdge_Target(), this.getKNodeGroup(), this.getKNodeGroup_IncomingEdges(), "target", null, 1, 1, KEdge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getKEdge_Layout(), this.getKEdgeLayout(), null, "layout", null, 1, 1, KEdge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getKEdge_Label(), this.getKEdgeLabel(), null, "label", null, 0, -1, KEdge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getKEdge_SourcePort(), this.getKPort(), null, "sourcePort", null, 0, 1, KEdge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getKEdge_TargetPort(), this.getKPort(), null, "targetPort", null, 0, 1, KEdge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(kLayoutEdgeEClass, KLayoutEdge.class, "KLayoutEdge", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getKLayoutEdge_Source(), this.getKLayoutNode(), this.getKLayoutNode_OutgoingEdges(), "source", null, 1, 1, KLayoutEdge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getKLayoutEdge_Target(), this.getKLayoutNode(), this.getKLayoutNode_IncomingEdges(), "target", null, 1, 1, KLayoutEdge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getKLayoutEdge_Layout(), this.getKEdgeLayout(), null, "layout", null, 1, 1, KLayoutEdge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getKLayoutEdge_Label(), this.getKEdgeLabel(), null, "label", null, 0, -1, KLayoutEdge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getKLayoutEdge_SourcePort(), this.getKLayoutPort(), null, "sourcePort", null, 0, 1, KLayoutEdge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getKLayoutEdge_TargetPort(), this.getKLayoutPort(), null, "targetPort", null, 0, 1, KLayoutEdge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(kEdgeLayoutEClass, KEdgeLayout.class, "KEdgeLayout", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getKEdgeLayout_SourcePoint(), this.getKPoint(), null, "sourcePoint", null, 1, 1, KEdgeLayout.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getKEdgeLayout_TargetPoint(), this.getKPoint(), null, "targetPoint", null, 1, 1, KEdgeLayout.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getKEdgeLayout_GridPoints(), this.getKPoint(), null, "gridPoints", null, 0, -1, KEdgeLayout.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getKEdgeLayout_EdgeType(), this.getEDGE_TYPE(), "edgeType", null, 1, 1, KEdgeLayout.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getKEdgeLayout_EdgeType(), this.getKEdgeType(), "edgeType", null, 1, 1, KEdgeLayout.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getKEdgeLayout_UseLayout(), theEcorePackage.getEBoolean(), "useLayout", "true", 1, 1, KEdgeLayout.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(kNodeGroupEClass, KNodeGroup.class, "KNodeGroup", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getKNodeGroup_SubNodeGroups(), this.getKNodeGroup(), this.getKNodeGroup_ParentGroup(), "subNodeGroups", null, 0, -1, KNodeGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getKNodeGroup_OutgoingEdges(), this.getKEdge(), this.getKEdge_Source(), "outgoingEdges", null, 0, -1, KNodeGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getKNodeGroup_IncomingEdges(), this.getKEdge(), this.getKEdge_Target(), "incomingEdges", null, 0, -1, KNodeGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getKNodeGroup_ParentGroup(), this.getKNodeGroup(), this.getKNodeGroup_SubNodeGroups(), "parentGroup", null, 1, 1, KNodeGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getKNodeGroup_Layout(), this.getKNodeGroupLayout(), null, "layout", null, 1, 1, KNodeGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getKNodeGroup_Label(), this.getKNodeGroupLabel(), null, "label", null, 1, 1, KNodeGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getKNodeGroup_IdString(), theEcorePackage.getEString(), "idString", "\"\"", 1, 1, KNodeGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getKNodeGroup_Ports(), this.getKPort(), this.getKPort_NodeGroup(), "ports", null, 0, -1, KNodeGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(kLayoutNodeEClass, KLayoutNode.class, "KLayoutNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getKLayoutNode_ChildNodes(), this.getKLayoutNode(), this.getKLayoutNode_ParentNode(), "childNodes", null, 0, -1, KLayoutNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getKLayoutNode_OutgoingEdges(), this.getKLayoutEdge(), this.getKLayoutEdge_Source(), "outgoingEdges", null, 0, -1, KLayoutNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getKLayoutNode_IncomingEdges(), this.getKLayoutEdge(), this.getKLayoutEdge_Target(), "incomingEdges", null, 0, -1, KLayoutNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getKLayoutNode_ParentNode(), this.getKLayoutNode(), this.getKLayoutNode_ChildNodes(), "parentNode", null, 1, 1, KLayoutNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getKLayoutNode_Layout(), this.getKNodeLayout(), null, "layout", null, 1, 1, KLayoutNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getKLayoutNode_Label(), this.getKNodeLabel(), null, "label", null, 1, 1, KLayoutNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getKLayoutNode_IdString(), theEcorePackage.getEString(), "idString", "\"\"", 1, 1, KLayoutNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getKLayoutNode_Ports(), this.getKLayoutPort(), this.getKLayoutPort_Node(), "ports", null, 0, -1, KLayoutNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(kNodeGroupLayoutEClass, KNodeGroupLayout.class, "KNodeGroupLayout", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getKNodeGroupLayout_LayoutType(), this.getLAYOUT_TYPE(), "layoutType", "", 1, 1, KNodeGroupLayout.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getKNodeGroupLayout_LayoutOptions(), this.getLAYOUT_OPTION(), "layoutOptions", "", 0, -1, KNodeGroupLayout.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEAttribute(getKNodeGroupLayout_LayouterName(), theEcorePackage.getEString(), "layouterName", "\"\"", 1, 1, KNodeGroupLayout.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getKNodeGroupLayout_Insets(), this.getKInsets(), null, "insets", null, 1, 1, KNodeGroupLayout.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(kNodeLayoutEClass, KNodeLayout.class, "KNodeLayout", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getKNodeLayout_LayoutType(), this.getKLayoutType(), "layoutType", "", 1, 1, KNodeLayout.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getKNodeLayout_LayoutOptions(), this.getKLayoutOption(), "layoutOptions", "", 0, -1, KNodeLayout.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEAttribute(getKNodeLayout_LayouterName(), theEcorePackage.getEString(), "layouterName", "\"\"", 1, 1, KNodeLayout.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getKNodeLayout_Insets(), this.getKInsets(), null, "insets", null, 1, 1, KNodeLayout.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(kLabelEClass, KLabel.class, "KLabel", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getKLabel_Text(), theEcorePackage.getEString(), "text", null, 1, 1, KLabel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1217,29 +1215,29 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 		initEReference(getKEdgeLabel_LabelLayout(), this.getKEdgeLabelLayout(), null, "labelLayout", null, 1, 1, KEdgeLabel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(kEdgeLabelLayoutEClass, KEdgeLabelLayout.class, "KEdgeLabelLayout", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getKEdgeLabelLayout_LabelPlacement(), this.getEDGE_LABEL_PLACEMENT(), "labelPlacement", null, 1, 1, KEdgeLabelLayout.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getKEdgeLabelLayout_LabelPlacement(), this.getKEdgeLabelPlacement(), "labelPlacement", null, 1, 1, KEdgeLabelLayout.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(kNodeGroupLabelEClass, KNodeGroupLabel.class, "KNodeGroupLabel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getKNodeGroupLabel_LabelLayout(), this.getKNodeGroupLabelLayout(), null, "labelLayout", null, 1, 1, KNodeGroupLabel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(kNodeLabelEClass, KNodeLabel.class, "KNodeLabel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getKNodeLabel_LabelLayout(), this.getKNodeLabelLayout(), null, "labelLayout", null, 1, 1, KNodeLabel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(kNodeGroupLabelLayoutEClass, KNodeGroupLabelLayout.class, "KNodeGroupLabelLayout", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getKNodeGroupLabelLayout_LabelPlacement(), this.getNODE_LABEL_PLACEMENT(), "labelPlacement", null, 1, 1, KNodeGroupLabelLayout.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(kNodeLabelLayoutEClass, KNodeLabelLayout.class, "KNodeLabelLayout", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getKNodeLabelLayout_LabelPlacement(), this.getKNodeLabelPlacement(), "labelPlacement", null, 1, 1, KNodeLabelLayout.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(layouteR_INFOEClass, de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO.class, "LAYOUTER_INFO", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getLAYOUTER_INFO_LayouterName(), theEcorePackage.getEString(), "layouterName", null, 1, 1, de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getLAYOUTER_INFO_LayoutType(), this.getLAYOUT_TYPE(), "layoutType", null, 1, 1, de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getLAYOUTER_INFO_LayoutOption(), this.getLAYOUT_OPTION(), "layoutOption", null, 1, 1, de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getLAYOUTER_INFO_LayouterCollectionID(), theEcorePackage.getEString(), "layouterCollectionID", null, 1, 1, de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(kLayouterInfoEClass, KLayouterInfo.class, "KLayouterInfo", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getKLayouterInfo_LayouterName(), theEcorePackage.getEString(), "layouterName", null, 1, 1, KLayouterInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getKLayouterInfo_LayoutType(), this.getKLayoutType(), "layoutType", null, 1, 1, KLayouterInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getKLayouterInfo_LayoutOption(), this.getKLayoutOption(), "layoutOption", null, 1, 1, KLayouterInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getKLayouterInfo_LayouterCollectionID(), theEcorePackage.getEString(), "layouterCollectionID", null, 1, 1, KLayouterInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(kPortEClass, KPort.class, "KPort", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getKPort_Layout(), this.getKPortLayout(), null, "layout", null, 1, 1, KPort.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getKPort_Label(), this.getKPortLabel(), null, "label", null, 0, 1, KPort.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getKPort_NodeGroup(), this.getKNodeGroup(), this.getKNodeGroup_Ports(), "nodeGroup", null, 1, 1, KPort.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getKPort_Type(), this.getPORT_TYPE(), "type", "0", 1, 1, KPort.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getKPort_Edges(), this.getKEdge(), null, "edges", null, 0, -1, KPort.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(kLayoutPortEClass, KLayoutPort.class, "KLayoutPort", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getKLayoutPort_Layout(), this.getKPortLayout(), null, "layout", null, 1, 1, KLayoutPort.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getKLayoutPort_Label(), this.getKPortLabel(), null, "label", null, 0, 1, KLayoutPort.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getKLayoutPort_Node(), this.getKLayoutNode(), this.getKLayoutNode_Ports(), "node", null, 1, 1, KLayoutPort.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getKLayoutPort_Type(), this.getKPortType(), "type", "0", 1, 1, KLayoutPort.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getKLayoutPort_Edges(), this.getKLayoutEdge(), null, "edges", null, 0, -1, KLayoutPort.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(kPortLayoutEClass, KPortLayout.class, "KPortLayout", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getKPortLayout_Placement(), this.getPORT_PLACEMENT(), "placement", "0", 0, 1, KPortLayout.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getKPortLayout_Placement(), this.getKPortPlacement(), "placement", "0", 0, 1, KPortLayout.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(kPortLabelEClass, KPortLabel.class, "KPortLabel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getKPortLabel_LabelLayout(), this.getKPortLabelLayout(), null, "labelLayout", null, 0, 1, KPortLabel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1247,60 +1245,60 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 		initEClass(kPortLabelLayoutEClass, KPortLabelLayout.class, "KPortLabelLayout", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Initialize enums and add enum literals
-		initEEnum(edgE_TYPEEEnum, de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.EDGE_TYPE.class, "EDGE_TYPE");
-		addEEnumLiteral(edgE_TYPEEEnum, de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.EDGE_TYPE.DEFAULT);
-		addEEnumLiteral(edgE_TYPEEEnum, de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.EDGE_TYPE.DIRECT);
-		addEEnumLiteral(edgE_TYPEEEnum, de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.EDGE_TYPE.SPLINE);
-		addEEnumLiteral(edgE_TYPEEEnum, de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.EDGE_TYPE.BEZIER);
-		addEEnumLiteral(edgE_TYPEEEnum, de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.EDGE_TYPE.RECTILINEAR);
+		initEEnum(kEdgeTypeEEnum, KEdgeType.class, "KEdgeType");
+		addEEnumLiteral(kEdgeTypeEEnum, KEdgeType.DEFAULT);
+		addEEnumLiteral(kEdgeTypeEEnum, KEdgeType.DIRECT);
+		addEEnumLiteral(kEdgeTypeEEnum, KEdgeType.SPLINE);
+		addEEnumLiteral(kEdgeTypeEEnum, KEdgeType.BEZIER);
+		addEEnumLiteral(kEdgeTypeEEnum, KEdgeType.RECTILINEAR);
 
-		initEEnum(layouT_TYPEEEnum, de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_TYPE.class, "LAYOUT_TYPE");
-		addEEnumLiteral(layouT_TYPEEEnum, de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_TYPE.DEFAULT);
-		addEEnumLiteral(layouT_TYPEEEnum, de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_TYPE.ORTHOGONAL);
-		addEEnumLiteral(layouT_TYPEEEnum, de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_TYPE.HIERARCHICAL);
-		addEEnumLiteral(layouT_TYPEEEnum, de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_TYPE.CIRCLE);
-		addEEnumLiteral(layouT_TYPEEEnum, de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_TYPE.RADIAL);
-		addEEnumLiteral(layouT_TYPEEEnum, de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_TYPE.SPRING_MODEL);
-		addEEnumLiteral(layouT_TYPEEEnum, de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_TYPE.OTHER);
+		initEEnum(kLayoutTypeEEnum, KLayoutType.class, "KLayoutType");
+		addEEnumLiteral(kLayoutTypeEEnum, KLayoutType.DEFAULT);
+		addEEnumLiteral(kLayoutTypeEEnum, KLayoutType.ORTHOGONAL);
+		addEEnumLiteral(kLayoutTypeEEnum, KLayoutType.HIERARCHICAL);
+		addEEnumLiteral(kLayoutTypeEEnum, KLayoutType.CIRCLE);
+		addEEnumLiteral(kLayoutTypeEEnum, KLayoutType.RADIAL);
+		addEEnumLiteral(kLayoutTypeEEnum, KLayoutType.SPRING_MODEL);
+		addEEnumLiteral(kLayoutTypeEEnum, KLayoutType.OTHER);
 
-		initEEnum(layouT_OPTIONEEnum, de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_OPTION.class, "LAYOUT_OPTION");
-		addEEnumLiteral(layouT_OPTIONEEnum, de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_OPTION.DEFAULT);
-		addEEnumLiteral(layouT_OPTIONEEnum, de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_OPTION.PRESERVE_MENTAL_MAP);
-		addEEnumLiteral(layouT_OPTIONEEnum, de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_OPTION.VERTICAL);
-		addEEnumLiteral(layouT_OPTIONEEnum, de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_OPTION.HORIZONTAL);
-		addEEnumLiteral(layouT_OPTIONEEnum, de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_OPTION.FIXED_PORTS);
-		addEEnumLiteral(layouT_OPTIONEEnum, de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_OPTION.FIXED_SIZE);
+		initEEnum(kLayoutOptionEEnum, KLayoutOption.class, "KLayoutOption");
+		addEEnumLiteral(kLayoutOptionEEnum, KLayoutOption.DEFAULT);
+		addEEnumLiteral(kLayoutOptionEEnum, KLayoutOption.PRESERVE_MENTAL_MAP);
+		addEEnumLiteral(kLayoutOptionEEnum, KLayoutOption.VERTICAL);
+		addEEnumLiteral(kLayoutOptionEEnum, KLayoutOption.HORIZONTAL);
+		addEEnumLiteral(kLayoutOptionEEnum, KLayoutOption.FIXED_PORTS);
+		addEEnumLiteral(kLayoutOptionEEnum, KLayoutOption.FIXED_SIZE);
 
-		initEEnum(edgE_LABEL_PLACEMENTEEnum, de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.EDGE_LABEL_PLACEMENT.class, "EDGE_LABEL_PLACEMENT");
-		addEEnumLiteral(edgE_LABEL_PLACEMENTEEnum, de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.EDGE_LABEL_PLACEMENT.DEFAULT);
-		addEEnumLiteral(edgE_LABEL_PLACEMENTEEnum, de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.EDGE_LABEL_PLACEMENT.CENTER);
-		addEEnumLiteral(edgE_LABEL_PLACEMENTEEnum, de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.EDGE_LABEL_PLACEMENT.HEAD);
-		addEEnumLiteral(edgE_LABEL_PLACEMENTEEnum, de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.EDGE_LABEL_PLACEMENT.TAIL);
-		addEEnumLiteral(edgE_LABEL_PLACEMENTEEnum, de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.EDGE_LABEL_PLACEMENT.LEFT);
-		addEEnumLiteral(edgE_LABEL_PLACEMENTEEnum, de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.EDGE_LABEL_PLACEMENT.RIGHT);
+		initEEnum(kEdgeLabelPlacementEEnum, KEdgeLabelPlacement.class, "KEdgeLabelPlacement");
+		addEEnumLiteral(kEdgeLabelPlacementEEnum, KEdgeLabelPlacement.DEFAULT);
+		addEEnumLiteral(kEdgeLabelPlacementEEnum, KEdgeLabelPlacement.CENTER);
+		addEEnumLiteral(kEdgeLabelPlacementEEnum, KEdgeLabelPlacement.HEAD);
+		addEEnumLiteral(kEdgeLabelPlacementEEnum, KEdgeLabelPlacement.TAIL);
+		addEEnumLiteral(kEdgeLabelPlacementEEnum, KEdgeLabelPlacement.LEFT);
+		addEEnumLiteral(kEdgeLabelPlacementEEnum, KEdgeLabelPlacement.RIGHT);
 
-		initEEnum(nodE_LABEL_PLACEMENTEEnum, de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.NODE_LABEL_PLACEMENT.class, "NODE_LABEL_PLACEMENT");
-		addEEnumLiteral(nodE_LABEL_PLACEMENTEEnum, de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.NODE_LABEL_PLACEMENT.DEFAULT);
-		addEEnumLiteral(nodE_LABEL_PLACEMENTEEnum, de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.NODE_LABEL_PLACEMENT.INSIDE_NORTH);
-		addEEnumLiteral(nodE_LABEL_PLACEMENTEEnum, de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.NODE_LABEL_PLACEMENT.INSIDE_SOUTH);
-		addEEnumLiteral(nodE_LABEL_PLACEMENTEEnum, de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.NODE_LABEL_PLACEMENT.INSIDE_WEST);
-		addEEnumLiteral(nodE_LABEL_PLACEMENTEEnum, de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.NODE_LABEL_PLACEMENT.INSIDE_EAST);
-		addEEnumLiteral(nodE_LABEL_PLACEMENTEEnum, de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.NODE_LABEL_PLACEMENT.OUTSIDE_NORTH);
-		addEEnumLiteral(nodE_LABEL_PLACEMENTEEnum, de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.NODE_LABEL_PLACEMENT.OUTSIDE_SOUTH);
-		addEEnumLiteral(nodE_LABEL_PLACEMENTEEnum, de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.NODE_LABEL_PLACEMENT.OUTSIDE_WEST);
-		addEEnumLiteral(nodE_LABEL_PLACEMENTEEnum, de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.NODE_LABEL_PLACEMENT.OUTSIDE_EAST);
+		initEEnum(kNodeLabelPlacementEEnum, KNodeLabelPlacement.class, "KNodeLabelPlacement");
+		addEEnumLiteral(kNodeLabelPlacementEEnum, KNodeLabelPlacement.DEFAULT);
+		addEEnumLiteral(kNodeLabelPlacementEEnum, KNodeLabelPlacement.INSIDE_NORTH);
+		addEEnumLiteral(kNodeLabelPlacementEEnum, KNodeLabelPlacement.INSIDE_SOUTH);
+		addEEnumLiteral(kNodeLabelPlacementEEnum, KNodeLabelPlacement.INSIDE_WEST);
+		addEEnumLiteral(kNodeLabelPlacementEEnum, KNodeLabelPlacement.INSIDE_EAST);
+		addEEnumLiteral(kNodeLabelPlacementEEnum, KNodeLabelPlacement.OUTSIDE_NORTH);
+		addEEnumLiteral(kNodeLabelPlacementEEnum, KNodeLabelPlacement.OUTSIDE_SOUTH);
+		addEEnumLiteral(kNodeLabelPlacementEEnum, KNodeLabelPlacement.OUTSIDE_WEST);
+		addEEnumLiteral(kNodeLabelPlacementEEnum, KNodeLabelPlacement.OUTSIDE_EAST);
 
-		initEEnum(porT_TYPEEEnum, de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.PORT_TYPE.class, "PORT_TYPE");
-		addEEnumLiteral(porT_TYPEEEnum, de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.PORT_TYPE.DEFAULT);
-		addEEnumLiteral(porT_TYPEEEnum, de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.PORT_TYPE.INPUT);
-		addEEnumLiteral(porT_TYPEEEnum, de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.PORT_TYPE.OUTPUT);
+		initEEnum(kPortTypeEEnum, KPortType.class, "KPortType");
+		addEEnumLiteral(kPortTypeEEnum, KPortType.DEFAULT);
+		addEEnumLiteral(kPortTypeEEnum, KPortType.INPUT);
+		addEEnumLiteral(kPortTypeEEnum, KPortType.OUTPUT);
 
-		initEEnum(porT_PLACEMENTEEnum, de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.PORT_PLACEMENT.class, "PORT_PLACEMENT");
-		addEEnumLiteral(porT_PLACEMENTEEnum, de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.PORT_PLACEMENT.DEFAULT);
-		addEEnumLiteral(porT_PLACEMENTEEnum, de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.PORT_PLACEMENT.NORTH);
-		addEEnumLiteral(porT_PLACEMENTEEnum, de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.PORT_PLACEMENT.EAST);
-		addEEnumLiteral(porT_PLACEMENTEEnum, de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.PORT_PLACEMENT.SOUTH);
-		addEEnumLiteral(porT_PLACEMENTEEnum, de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.PORT_PLACEMENT.WEST);
+		initEEnum(kPortPlacementEEnum, KPortPlacement.class, "KPortPlacement");
+		addEEnumLiteral(kPortPlacementEEnum, KPortPlacement.DEFAULT);
+		addEEnumLiteral(kPortPlacementEEnum, KPortPlacement.NORTH);
+		addEEnumLiteral(kPortPlacementEEnum, KPortPlacement.EAST);
+		addEEnumLiteral(kPortPlacementEEnum, KPortPlacement.SOUTH);
+		addEEnumLiteral(kPortPlacementEEnum, KPortPlacement.WEST);
 
 		// Create resource
 		createResource(eNS_URI);

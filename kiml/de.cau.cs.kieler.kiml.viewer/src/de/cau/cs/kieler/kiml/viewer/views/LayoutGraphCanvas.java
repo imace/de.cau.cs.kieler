@@ -261,9 +261,9 @@ public class LayoutGraphCanvas extends Canvas implements PaintListener {
 	 */
 	public void setLayoutGraph(KLayoutGraph layoutGraph) {
 		// set new size values for the canvas
-		if (layoutGraph != null && layoutGraph.getTopGroup() != null)
+		if (layoutGraph != null && layoutGraph != null)
 		{
-			KDimension graphDim = layoutGraph.getTopGroup().getLayout().getSize();
+			KDimension graphDim = layoutGraph.getLayout().getSize();
 			setSize(new Point((int)graphDim.getWidth() + 1,
 					(int)graphDim.getHeight() + 1));
 		}
@@ -286,11 +286,11 @@ public class LayoutGraphCanvas extends Canvas implements PaintListener {
 				rectangle.painted = false;
 			}
 			
-			// paint the top node group with its children
+			// paint the top layout node with its children
 			KPoint offset = KimlLayoutGraphFactory.eINSTANCE.createKPoint();
 			PaintRectangle area = new PaintRectangle(event.x - 5, event.y - 5,
 					event.width + 10, event.height + 10, offset);
-			paintNodeGroup(layoutGraph.getTopGroup(), event.gc, area, offset);
+			paintLayoutNode(layoutGraph, event.gc, area, offset);
 		}
 	}
 	
@@ -307,30 +307,30 @@ public class LayoutGraphCanvas extends Canvas implements PaintListener {
 				rectangle.painted = false;
 			}
 			
-			// paint the top node group with its children
+			// paint the top layout node with its children
 			KPoint offset = KimlLayoutGraphFactory.eINSTANCE.createKPoint();
 			PaintRectangle area = new PaintRectangle(0, 0,
 					size.x, size.y, offset);
-			paintNodeGroup(layoutGraph.getTopGroup(), graphics, area, offset);
+			paintLayoutNode(layoutGraph, graphics, area, offset);
 		}
 	}
 	
 	/**
-	 * Paints a node group for the given dirty area.
+	 * Paints a layout node for the given dirty area.
 	 * 
-	 * @param nodeGroup node group to paint
+	 * @param layoutNode layout node to paint
 	 * @param graphics the graphics context used to paint
 	 * @param area dirty area that needs painting
 	 * @param offset offset to be added to relative coordinates
 	 */
-	private void paintNodeGroup(KNodeGroup nodeGroup, GC graphics,
+	private void paintLayoutNode(KLayoutNode layoutNode, GC graphics,
 			PaintRectangle area, KPoint offset) {
-		// paint ports of the node group
+		// paint ports of the layout node
 		graphics.setForeground(PORT_BORDER_COLOR);
 		graphics.setBackground(PORT_FILL_COLOR);
 		graphics.setAlpha(PORT_ALPHA);
 		graphics.setFont(portFont);
-		for (KPort port : nodeGroup.getPorts()) {
+		for (KLayoutPort port : layoutNode.getPorts()) {
 			PaintRectangle rect = boundsMap.get(port);
 			if (rect == null) {
 				rect = new PaintRectangle(port.getLayout(), offset);
@@ -359,13 +359,13 @@ public class LayoutGraphCanvas extends Canvas implements PaintListener {
 		}
 		
 		// add insets to offset value
-		KInsets insets = nodeGroup.getLayout().getInsets();
+		KInsets insets = layoutNode.getLayout().getInsets();
 		KPoint subOffset = KimlLayoutGraphFactory.eINSTANCE.createKPoint();
 		subOffset.setX(offset.getX() + insets.getLeft());
 		subOffset.setY(offset.getY() + insets.getTop());
 		
-		// paint sub node groups
-		for (KNodeGroup child : nodeGroup.getSubNodeGroups()) {
+		// paint sub layout nodes
+		for (KLayoutNode child : layoutNode.getChildNodes()) {
 			graphics.setForeground(NODE_BORDER_COLOR);
 			graphics.setBackground(NODE_FILL_COLOR);
 			graphics.setAlpha(NODE_ALPHA);
@@ -381,7 +381,7 @@ public class LayoutGraphCanvas extends Canvas implements PaintListener {
 				graphics.fillRectangle(rect.x, rect.y, rect.width, rect.height);
 				graphics.drawRectangle(rect.x, rect.y, rect.width, rect.height);
 				rect.painted = true;
-				paintNodeGroup(child, graphics, area, childOffset);
+				paintLayoutNode(child, graphics, area, childOffset);
 			}
 			if (paintLabels && child.getLabel() != null) {
 				graphics.setFont(nodeFont);
@@ -402,10 +402,10 @@ public class LayoutGraphCanvas extends Canvas implements PaintListener {
 			graphics.setBackground(EDGE_COLOR);
 			graphics.setAlpha(EDGE_ALPHA);
 			graphics.setFont(edgeFont);
-			for (KEdge edge : child.getIncomingEdges()) {
+			for (KLayoutEdge edge : child.getIncomingEdges()) {
 				paintEdge(edge, graphics, area, subOffset);
 			}
-			for (KEdge edge : child.getOutgoingEdges()) {
+			for (KLayoutEdge edge : child.getOutgoingEdges()) {
 				paintEdge(edge, graphics, area, subOffset);
 			}
 		}
@@ -419,7 +419,7 @@ public class LayoutGraphCanvas extends Canvas implements PaintListener {
 	 * @param area dirty area that needs painting
 	 * @param offset offset to be added to relative coordinates
 	 */
-	private void paintEdge(KEdge edge, GC graphics,
+	private void paintEdge(KLayoutEdge edge, GC graphics,
 			PaintRectangle area, KPoint offset) {
 		BendsIterator sourceIter = new BendsIterator(edge.getLayout(), true);
 		BendsIterator targetIter = new BendsIterator(edge.getLayout(), false);

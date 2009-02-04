@@ -1,10 +1,10 @@
 package de.cau.cs.kieler.klodd.hierarchical;
 
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphFactory;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_OPTION;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_TYPE;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayouterInfo;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutOption;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutType;
 import de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayoutProvider;
 import de.cau.cs.kieler.klodd.core.KloddCorePlugin;
 import de.cau.cs.kieler.klodd.core.algorithms.*;
@@ -42,20 +42,20 @@ public class HierarchicalDataflowLayoutProvider extends
 	private IEdgeRouter edgeRouter = null;
 	
 	/* (non-Javadoc)
-	 * @see de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayoutProvider#doLayout(de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup)
+	 * @see de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayoutProvider#doLayout(de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode)
 	 */
-	public void doLayout(KNodeGroup nodeGroup) {
+	public void doLayout(KLayoutNode layoutNode) {
 		// get the currently configured modules
 		updateModules();
 	
 		long startTime = System.nanoTime();
 
 		// set the size of each non-empty node
-		setNodeSizes(nodeGroup);
+		setNodeSizes(layoutNode);
 		// remove cycles in the input graph
-		cycleRemover.removeCycles(nodeGroup);
+		cycleRemover.removeCycles(layoutNode);
 		// put each node into a layer and get a layered graph
-		LayeredGraph layeredGraph = layerAssigner.assignLayers(nodeGroup);
+		LayeredGraph layeredGraph = layerAssigner.assignLayers(layoutNode);
 		if (!layeredGraph.getLayers().isEmpty()) {
 			layeredGraph.createConnections();
 			// optimize the order of nodes in each layer
@@ -72,19 +72,19 @@ public class HierarchicalDataflowLayoutProvider extends
 		
 		double executionTime = (double)(System.nanoTime() - startTime) * 1e-9;
 		if (executionTime >= 1.0)
-			System.out.println("Execution time (" + nodeGroup.getSubNodeGroups().size() + " nodes): " + executionTime + " s");
+			System.out.println("Execution time (" + layoutNode.getChildNodes().size() + " nodes): " + executionTime + " s");
 		else
-			System.out.println("Execution time (" + nodeGroup.getSubNodeGroups().size() + " nodes): " + executionTime * 1000 + " ms");
+			System.out.println("Execution time (" + layoutNode.getChildNodes().size() + " nodes): " + executionTime * 1000 + " ms");
 	}
 
 	/* (non-Javadoc)
 	 * @see de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayoutProvider#getLayouterInfo()
 	 */
-	public LAYOUTER_INFO getLayouterInfo() {
-		LAYOUTER_INFO info = KimlLayoutGraphFactory.eINSTANCE.createLAYOUTER_INFO();
+	public KLayouterInfo getLayouterInfo() {
+		KLayouterInfo info = KimlLayoutGraphFactory.eINSTANCE.createKLayouterInfo();
 		info.setLayouterName(LAYOUTER_NAME);
-		info.setLayoutType(LAYOUT_TYPE.HIERARCHICAL);
-		info.setLayoutOption(LAYOUT_OPTION.DEFAULT);
+		info.setLayoutType(KLayoutType.HIERARCHICAL);
+		info.setLayoutOption(KLayoutOption.DEFAULT);
 		info.setLayouterCollectionID(KloddCorePlugin.COLLECTION_NAME);
 		return info;
 	}
@@ -108,12 +108,12 @@ public class HierarchicalDataflowLayoutProvider extends
 	/**
 	 * Sets the size of each non-empty node, depending on its layout options.
 	 * 
-	 * @param parentGroup parent node group
+	 * @param parentNode parent layout node
 	 */
-	private void setNodeSizes(KNodeGroup parentGroup) {
-		for (KNodeGroup node : parentGroup.getSubNodeGroups()) {
-			if (!node.getLayout().getLayoutOptions().contains(LAYOUT_OPTION.FIXED_SIZE)
-					&& node.getSubNodeGroups().isEmpty()) {
+	private void setNodeSizes(KLayoutNode parentNode) {
+		for (KLayoutNode node : parentNode.getChildNodes()) {
+			if (!node.getLayout().getLayoutOptions().contains(KLayoutOption.FIXED_SIZE)
+					&& node.getChildNodes().isEmpty()) {
 				LayoutGraphs.resizeNode(node);
 			}
 		}

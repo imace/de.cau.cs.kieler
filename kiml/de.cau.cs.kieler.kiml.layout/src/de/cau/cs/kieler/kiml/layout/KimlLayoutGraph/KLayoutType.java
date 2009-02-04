@@ -14,14 +14,14 @@ import org.eclipse.emf.common.util.Enumerator;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the literals of the enumeration '<em><b>LAYOUT OPTION</b></em>',
+ * A representation of the literals of the enumeration '<em><b>LAYOUT TYPE</b></em>',
  * and utility methods for working with them.
  * <!-- end-user-doc -->
- * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getLAYOUT_OPTION()
+ * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKLayoutType()
  * @model
  * @generated
  */
-public enum LAYOUT_OPTION implements Enumerator {
+public enum KLayoutType implements Enumerator {
 	/**
 	 * The '<em><b>DEFAULT</b></em>' literal object.
 	 * <!-- begin-user-doc -->
@@ -33,46 +33,62 @@ public enum LAYOUT_OPTION implements Enumerator {
 	DEFAULT(0, "DEFAULT", "Default"),
 
 	/**
-	 * The '<em><b>PRESERVE MENTAL MAP</b></em>' literal object.
+	 * The '<em><b>ORTHOGONAL</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #PRESERVE_MENTAL_MAP_VALUE
+	 * @see #ORTHOGONAL_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	PRESERVE_MENTAL_MAP(1, "PRESERVE_MENTAL_MAP", "Preserve mental map"), /**
-	 * The '<em><b>VERTICAL</b></em>' literal object.
+	ORTHOGONAL(1, "ORTHOGONAL", "Orthogonal"), /**
+	 * The '<em><b>HIERARCHICAL</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #VERTICAL_VALUE
+	 * @see #HIERARCHICAL_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	VERTICAL(2, "VERTICAL", "Vertical"), /**
-	 * The '<em><b>HORIZONTAL</b></em>' literal object.
+	HIERARCHICAL(2, "HIERARCHICAL", "Hierarchical"),
+
+	/**
+	 * The '<em><b>CIRCLE</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #HORIZONTAL_VALUE
+	 * @see #CIRCLE_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	HORIZONTAL(3, "HORIZONTAL", "Horizontal"), /**
-	 * The '<em><b>FIXED PORTS</b></em>' literal object.
+	CIRCLE(3, "CIRCLE", "Circle"),
+
+	/**
+	 * The '<em><b>RADIAL</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #FIXED_PORTS_VALUE
+	 * @see #RADIAL_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	FIXED_PORTS(4, "FIXED_PORTS", "Fixed ports"), /**
-	 * The '<em><b>FIXED SIZE</b></em>' literal object.
+	RADIAL(4, "RADIAL", "Radial"),
+
+	/**
+	 * The '<em><b>SPRING MODEL</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #FIXED_SIZE_VALUE
+	 * @see #SPRING_MODEL_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	FIXED_SIZE(5, "FIXED_SIZE", "Fixed size");
+	SPRING_MODEL(5, "SPRING_MODEL", "Spring model"),
+
+	/**
+	 * The '<em><b>OTHER</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #OTHER_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	OTHER(6, "OTHER", "Other");
 
 	/**
 	 * The '<em><b>DEFAULT</b></em>' literal value.
@@ -90,113 +106,129 @@ public enum LAYOUT_OPTION implements Enumerator {
 	public static final int DEFAULT_VALUE = 0;
 
 	/**
-	 * The '<em><b>PRESERVE MENTAL MAP</b></em>' literal value.
+	 * The '<em><b>ORTHOGONAL</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>PRESERVE MENTAL MAP</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>ORTHOGONAL</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #PRESERVE_MENTAL_MAP
-	 * @model literal="Preserve mental map"
+	 * @see #ORTHOGONAL
+	 * @model literal="Orthogonal"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int PRESERVE_MENTAL_MAP_VALUE = 1;
+	public static final int ORTHOGONAL_VALUE = 1;
 
 	/**
-	 * The '<em><b>VERTICAL</b></em>' literal value.
+	 * The '<em><b>HIERARCHICAL</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>VERTICAL</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>HIERARCHICAL</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #VERTICAL
-	 * @model literal="Vertical"
+	 * @see #HIERARCHICAL
+	 * @model literal="Hierarchical"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int VERTICAL_VALUE = 2;
+	public static final int HIERARCHICAL_VALUE = 2;
 
 	/**
-	 * The '<em><b>HORIZONTAL</b></em>' literal value.
+	 * The '<em><b>CIRCLE</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>HORIZONTAL</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>CIRCLE</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #HORIZONTAL
-	 * @model literal="Horizontal"
+	 * @see #CIRCLE
+	 * @model literal="Circle"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int HORIZONTAL_VALUE = 3;
+	public static final int CIRCLE_VALUE = 3;
 
 	/**
-	 * The '<em><b>FIXED PORTS</b></em>' literal value.
+	 * The '<em><b>RADIAL</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>FIXED PORTS</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>RADIAL</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #FIXED_PORTS
-	 * @model literal="Fixed ports"
+	 * @see #RADIAL
+	 * @model literal="Radial"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int FIXED_PORTS_VALUE = 4;
+	public static final int RADIAL_VALUE = 4;
 
 	/**
-	 * The '<em><b>FIXED SIZE</b></em>' literal value.
+	 * The '<em><b>SPRING MODEL</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>FIXED SIZE</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>SPRING MODEL</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #FIXED_SIZE
-	 * @model literal="Fixed size"
+	 * @see #SPRING_MODEL
+	 * @model literal="Spring model"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int FIXED_SIZE_VALUE = 5;
+	public static final int SPRING_MODEL_VALUE = 5;
 
 	/**
-	 * An array of all the '<em><b>LAYOUT OPTION</b></em>' enumerators.
+	 * The '<em><b>OTHER</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>OTHER</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #OTHER
+	 * @model literal="Other"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int OTHER_VALUE = 6;
+
+	/**
+	 * An array of all the '<em><b>KLayout Type</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static final LAYOUT_OPTION[] VALUES_ARRAY =
-		new LAYOUT_OPTION[] {
+	private static final KLayoutType[] VALUES_ARRAY =
+		new KLayoutType[] {
 			DEFAULT,
-			PRESERVE_MENTAL_MAP,
-			VERTICAL,
-			HORIZONTAL,
-			FIXED_PORTS,
-			FIXED_SIZE,
+			ORTHOGONAL,
+			HIERARCHICAL,
+			CIRCLE,
+			RADIAL,
+			SPRING_MODEL,
+			OTHER,
 		};
 
 	/**
-	 * A public read-only list of all the '<em><b>LAYOUT OPTION</b></em>' enumerators.
+	 * A public read-only list of all the '<em><b>KLayout Type</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final List<LAYOUT_OPTION> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
+	public static final List<KLayoutType> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
 	/**
-	 * Returns the '<em><b>LAYOUT OPTION</b></em>' literal with the specified literal value.
+	 * Returns the '<em><b>KLayout Type</b></em>' literal with the specified literal value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static LAYOUT_OPTION get(String literal) {
+	public static KLayoutType get(String literal) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			LAYOUT_OPTION result = VALUES_ARRAY[i];
+			KLayoutType result = VALUES_ARRAY[i];
 			if (result.toString().equals(literal)) {
 				return result;
 			}
@@ -205,14 +237,14 @@ public enum LAYOUT_OPTION implements Enumerator {
 	}
 
 	/**
-	 * Returns the '<em><b>LAYOUT OPTION</b></em>' literal with the specified name.
+	 * Returns the '<em><b>KLayout Type</b></em>' literal with the specified name.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static LAYOUT_OPTION getByName(String name) {
+	public static KLayoutType getByName(String name) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			LAYOUT_OPTION result = VALUES_ARRAY[i];
+			KLayoutType result = VALUES_ARRAY[i];
 			if (result.getName().equals(name)) {
 				return result;
 			}
@@ -221,19 +253,20 @@ public enum LAYOUT_OPTION implements Enumerator {
 	}
 
 	/**
-	 * Returns the '<em><b>LAYOUT OPTION</b></em>' literal with the specified integer value.
+	 * Returns the '<em><b>KLayout Type</b></em>' literal with the specified integer value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static LAYOUT_OPTION get(int value) {
+	public static KLayoutType get(int value) {
 		switch (value) {
 			case DEFAULT_VALUE: return DEFAULT;
-			case PRESERVE_MENTAL_MAP_VALUE: return PRESERVE_MENTAL_MAP;
-			case VERTICAL_VALUE: return VERTICAL;
-			case HORIZONTAL_VALUE: return HORIZONTAL;
-			case FIXED_PORTS_VALUE: return FIXED_PORTS;
-			case FIXED_SIZE_VALUE: return FIXED_SIZE;
+			case ORTHOGONAL_VALUE: return ORTHOGONAL;
+			case HIERARCHICAL_VALUE: return HIERARCHICAL;
+			case CIRCLE_VALUE: return CIRCLE;
+			case RADIAL_VALUE: return RADIAL;
+			case SPRING_MODEL_VALUE: return SPRING_MODEL;
+			case OTHER_VALUE: return OTHER;
 		}
 		return null;
 	}
@@ -265,7 +298,7 @@ public enum LAYOUT_OPTION implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private LAYOUT_OPTION(int value, String name, String literal) {
+	private KLayoutType(int value, String name, String literal) {
 		this.value = value;
 		this.name = name;
 		this.literal = literal;
@@ -309,4 +342,4 @@ public enum LAYOUT_OPTION implements Enumerator {
 		return literal;
 	}
 	
-} //LAYOUT_OPTION
+} //KLayoutType

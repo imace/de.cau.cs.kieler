@@ -28,16 +28,16 @@ public class TSMGraph {
 	/** next available identifier for faces */
 	int nextFaceId = 0;
 	
-	/** parent node group from which this TSM graph was created */
-	//private KNodeGroup parentGroup;
+	/** parent layout node from which this TSM graph was created */
+	//private KLayoutNode parentNode;
 	
 	/**
-	 * Creates a TSM graph from a given parent node group.
+	 * Creates a TSM graph from a given parent layout node.
 	 * 
-	 * @param parentGroup parent node group
+	 * @param parentNode parent layout node
 	 */
-	//public TSMGraph(KNodeGroup parentGroup) {
-	//	this.parentGroup = parentGroup;
+	//public TSMGraph(KLayoutNode parentNode) {
+	//	this.parentNode = parentNode;
 	//}
 	
 	/**

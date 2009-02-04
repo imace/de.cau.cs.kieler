@@ -6,7 +6,7 @@
  */
 package de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl;
 
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.EDGE_TYPE;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeType;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLayout;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPoint;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage;
@@ -27,7 +27,7 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>KEdge Layout</b></em>'.
+ * An implementation of the model object '<em><b>KLayoutEdge Layout</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
@@ -81,7 +81,7 @@ public class KEdgeLayoutImpl extends EObjectImpl implements KEdgeLayout {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final EDGE_TYPE EDGE_TYPE_EDEFAULT = EDGE_TYPE.DEFAULT;
+	protected static final KEdgeType EDGE_TYPE_EDEFAULT = KEdgeType.DEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getEdgeType() <em>Edge Type</em>}' attribute.
@@ -91,7 +91,7 @@ public class KEdgeLayoutImpl extends EObjectImpl implements KEdgeLayout {
 	 * @generated
 	 * @ordered
 	 */
-	protected EDGE_TYPE edgeType = EDGE_TYPE_EDEFAULT;
+	protected KEdgeType edgeType = EDGE_TYPE_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #isUseLayout() <em>Use Layout</em>}' attribute.
@@ -225,7 +225,7 @@ public class KEdgeLayoutImpl extends EObjectImpl implements KEdgeLayout {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EDGE_TYPE getEdgeType() {
+	public KEdgeType getEdgeType() {
 		return edgeType;
 	}
 
@@ -234,8 +234,8 @@ public class KEdgeLayoutImpl extends EObjectImpl implements KEdgeLayout {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setEdgeType(EDGE_TYPE newEdgeType) {
-		EDGE_TYPE oldEdgeType = edgeType;
+	public void setEdgeType(KEdgeType newEdgeType) {
+		KEdgeType oldEdgeType = edgeType;
 		edgeType = newEdgeType == null ? EDGE_TYPE_EDEFAULT : newEdgeType;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KEDGE_LAYOUT__EDGE_TYPE, oldEdgeType, edgeType));
@@ -306,7 +306,7 @@ public class KEdgeLayoutImpl extends EObjectImpl implements KEdgeLayout {
 				getGridPoints().addAll((Collection<? extends KPoint>)newValue);
 				return;
 			case KimlLayoutGraphPackage.KEDGE_LAYOUT__EDGE_TYPE:
-				setEdgeType((EDGE_TYPE)newValue);
+				setEdgeType((KEdgeType)newValue);
 				return;
 			case KimlLayoutGraphPackage.KEDGE_LAYOUT__USE_LAYOUT:
 				setUseLayout(((Boolean)newValue).booleanValue());

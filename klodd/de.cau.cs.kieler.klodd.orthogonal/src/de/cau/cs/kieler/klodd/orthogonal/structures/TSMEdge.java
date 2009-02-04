@@ -3,7 +3,7 @@ package de.cau.cs.kieler.klodd.orthogonal.structures;
 import java.util.LinkedList;
 import java.util.List;
 
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdge;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge;
 
 /**
  * An edge in the graph structure used for the topology-shape-metrics
@@ -46,7 +46,7 @@ public class TSMEdge extends TSMGraphElement {
 	/** right face */
 	public TSMFace rightFace;
 	/** layout graph edge contained in this TSM edge, or null if there is none */
-	public KEdge layoutEdge;
+	public KLayoutEdge layoutEdge;
 	/** the previous edge of a split edge */
 	public TSMEdge previousEdge;
 	/** the next edge of a split edge */
@@ -64,7 +64,7 @@ public class TSMEdge extends TSMGraphElement {
 	 * @param layoutEdge the layout graph edge to be contained
 	 */
 	public TSMEdge(TSMGraph graph, TSMNode source, TSMNode target,
-			KEdge layoutEdge) {
+			KLayoutEdge layoutEdge) {
 		graph.edges.add(this);
 		this.id = graph.nextEdgeId++;
 		this.source = source;

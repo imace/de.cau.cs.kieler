@@ -9,7 +9,7 @@ package de.cau.cs.kieler.kiml.layout.KimlLayoutGraph;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>KPort Label Layout</b></em>'.
+ * A representation of the model object '<em><b>KLayoutPort Label Layout</b></em>'.
  * <!-- end-user-doc -->
  *
  *

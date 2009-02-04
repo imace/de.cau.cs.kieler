@@ -6,13 +6,13 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
 
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdge;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KInsets;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPoint;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPort;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphFactory;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_OPTION;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutOption;
 import de.cau.cs.kieler.klodd.core.util.FixedArrayList;
 
 
@@ -40,16 +40,16 @@ public class LayeredGraph {
 	
 	/** list of layers in this layered graph */
 	private List<Layer> layers;
-	/** parent node group associated with this layered graph */
-	KNodeGroup parentGroup;
+	/** parent layout node associated with this layered graph */
+	KLayoutNode parentNode;
 	/** map of objects to their corresponding layer */
 	private Map<Object, LayerElement> obj2LayerElemMap = new HashMap<Object, LayerElement>();
 	/** map of ports to connected long edges */
-	private Map<KPort, LinearSegment> longEdgesMap = new HashMap<KPort, LinearSegment>();
+	private Map<KLayoutPort, LinearSegment> longEdgesMap = new HashMap<KLayoutPort, LinearSegment>();
 	/** list of linear segments in this layered graph */
 	private List<LinearSegment> linearSegments = new LinkedList<LinearSegment>();
 	/** layout direction for this layered graph: HORIZONTAL or VERTICAL */
-	private LAYOUT_OPTION layoutDirection;
+	private KLayoutOption layoutDirection;
 	/** are the external ports of this layered graph fixed? */
 	private boolean fixedExternalPorts;
 	/** position of this layered graph */
@@ -62,10 +62,10 @@ public class LayeredGraph {
 	 * to put normal nodes.
 	 * 
 	 * @param type type of layered graph building: from front or from back
-	 * @param parentGroup parent node group
+	 * @param parentNode parent layout node
 	 */
-	public LayeredGraph(Type type, KNodeGroup parentGroup) {
-		layers = new FixedArrayList<Layer>(parentGroup.getSubNodeGroups().size() + 2,
+	public LayeredGraph(Type type, KLayoutNode parentNode) {
+		layers = new FixedArrayList<Layer>(parentNode.getChildNodes().size() + 2,
 				type == Type.BUILD_FRONT ? FixedArrayList.Type.ALIGN_FRONT
 						: FixedArrayList.Type.ALIGN_BACK);
 		position = KimlLayoutGraphFactory.eINSTANCE.createKPoint();
@@ -73,11 +73,11 @@ public class LayeredGraph {
 		position.setY(0.0f);
 		
 		// get layout options from the parent group
-		this.parentGroup = parentGroup;
-		List<LAYOUT_OPTION> parentOptions = parentGroup.getLayout().getLayoutOptions();
-		layoutDirection = parentOptions.contains(LAYOUT_OPTION.VERTICAL) ?
-				LAYOUT_OPTION.VERTICAL : LAYOUT_OPTION.HORIZONTAL;
-		fixedExternalPorts = parentOptions.contains(LAYOUT_OPTION.FIXED_PORTS);
+		this.parentNode = parentNode;
+		List<KLayoutOption> parentOptions = parentNode.getLayout().getLayoutOptions();
+		layoutDirection = parentOptions.contains(KLayoutOption.VERTICAL) ?
+				KLayoutOption.VERTICAL : KLayoutOption.HORIZONTAL;
+		fixedExternalPorts = parentOptions.contains(KLayoutOption.FIXED_PORTS);
 	}
 	
 	/*
@@ -85,7 +85,7 @@ public class LayeredGraph {
 	 * @see java.lang.Object#toString()
 	 */
 	public String toString() {
-		return parentGroup.getLabel().getText();
+		return parentNode.getLabel().getText();
 	}
 	
 	/**
@@ -168,12 +168,12 @@ public class LayeredGraph {
 	}
 
 	/**
-	 * Gets the parent node group.
+	 * Gets the parent layout node.
 	 * 
-	 * @return the parentGroup
+	 * @return the parentNode
 	 */
-	public KNodeGroup getParentGroup() {
-		return parentGroup;
+	public KLayoutNode getParentGroup() {
+		return parentNode;
 	}
 
 	/**
@@ -206,11 +206,11 @@ public class LayeredGraph {
 					// create new linear segment
 					createLinearSegment(element);
 				}
-				List<KEdge> outgoingEdges = element.getOutgoingEdges();
+				List<KLayoutEdge> outgoingEdges = element.getOutgoingEdges();
 				if (outgoingEdges != null) {
-					for (KEdge edge : outgoingEdges) {
-						KNodeGroup targetGroup = edge.getTarget();
-						KPort targetPort = edge.getTargetPort();
+					for (KLayoutEdge edge : outgoingEdges) {
+						KLayoutNode targetGroup = edge.getTarget();
+						KLayoutPort targetPort = edge.getTargetPort();
 						if (targetGroup != null) {
 							createConnection(element, obj2LayerElemMap.get(targetGroup), edge);
 						}
@@ -231,7 +231,7 @@ public class LayeredGraph {
 	 * Applies the layout of this layered graph to the contained layout graph.
 	 */
 	public void applyLayout() {
-		KInsets insets = parentGroup.getLayout().getInsets();
+		KInsets insets = parentNode.getLayout().getInsets();
 		// apply the new layout to the contained elements
 		for (Layer layer : layers) {
 			for (LayerElement element : layer.getElements()) {
@@ -245,10 +245,10 @@ public class LayeredGraph {
 			}
 		}
 		
-		// update the size of the parent node group
+		// update the size of the parent layout node
 		float width = insets.getLeft() + insets.getRight();
 		float height = insets.getTop() + insets.getBottom();
-		if (layoutDirection == LAYOUT_OPTION.VERTICAL) {
+		if (layoutDirection == KLayoutOption.VERTICAL) {
 			width += crosswiseDim;
 			height += lengthwiseDim;
 		}
@@ -256,15 +256,15 @@ public class LayeredGraph {
 			width += lengthwiseDim;
 			height += crosswiseDim;
 		}
-		parentGroup.getLayout().getSize().setWidth(width);
-		parentGroup.getLayout().getSize().setHeight(height);
+		parentNode.getLayout().getSize().setWidth(width);
+		parentNode.getLayout().getSize().setHeight(height);
 		
-		// update layout options of the parent node group
-		List<LAYOUT_OPTION> layoutOptions = parentGroup.getLayout().getLayoutOptions();
-		if (!layoutOptions.contains(LAYOUT_OPTION.FIXED_SIZE))
-			layoutOptions.add(LAYOUT_OPTION.FIXED_SIZE);
-		if (!layoutOptions.contains(LAYOUT_OPTION.FIXED_PORTS))
-			layoutOptions.add(LAYOUT_OPTION.FIXED_PORTS);
+		// update layout options of the parent layout node
+		List<KLayoutOption> layoutOptions = parentNode.getLayout().getLayoutOptions();
+		if (!layoutOptions.contains(KLayoutOption.FIXED_SIZE))
+			layoutOptions.add(KLayoutOption.FIXED_SIZE);
+		if (!layoutOptions.contains(KLayoutOption.FIXED_PORTS))
+			layoutOptions.add(KLayoutOption.FIXED_PORTS);
 	}
 
 	/**
@@ -272,7 +272,7 @@ public class LayeredGraph {
 	 * 
 	 * @return the layout direction
 	 */
-	public LAYOUT_OPTION getLayoutDirection() {
+	public KLayoutOption getLayoutDirection() {
 		return layoutDirection;
 	}
 
@@ -324,7 +324,7 @@ public class LayeredGraph {
 	 * @param edge the edge object connecting both elements
 	 */
 	private void createConnection(LayerElement source,
-			LayerElement target, KEdge edge) {
+			LayerElement target, KLayoutEdge edge) {
 		Layer sourceLayer = source.getLayer();
 		Layer targetLayer = target.getLayer();
 		if (targetLayer.rank - sourceLayer.rank == 1) {

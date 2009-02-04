@@ -16,7 +16,7 @@ public abstract class AbstractCycleRemover extends AbstractAlgorithm
 		implements ICycleRemover {
 	
 	/**	list of edges that are reversed and later restored */
-	protected LinkedList<KEdge> reversedEdges = new LinkedList<KEdge>();
+	protected LinkedList<KLayoutEdge> reversedEdges = new LinkedList<KLayoutEdge>();
 
 	/*
 	 * (non-Javadoc)
@@ -39,15 +39,15 @@ public abstract class AbstractCycleRemover extends AbstractAlgorithm
 	 * <code>reversedEdges</code> list.
 	 */
 	protected void reverseEdges() {
-		for (KEdge edge : reversedEdges) {
-			// reverse source and target node group
-			KNodeGroup source = edge.getSource();
-			KNodeGroup target = edge.getTarget();
+		for (KLayoutEdge edge : reversedEdges) {
+			// reverse source and target layout node
+			KLayoutNode source = edge.getSource();
+			KLayoutNode target = edge.getTarget();
 			edge.setSource(target);
 			edge.setTarget(source);
 			// reverse source and target port
-			KPort sourcePort = edge.getSourcePort();
-			KPort targetPort = edge.getTargetPort();
+			KLayoutPort sourcePort = edge.getSourcePort();
+			KLayoutPort targetPort = edge.getTargetPort();
 			edge.setSourcePort(targetPort);
 			edge.setTargetPort(sourcePort);
 			// reverse bend points

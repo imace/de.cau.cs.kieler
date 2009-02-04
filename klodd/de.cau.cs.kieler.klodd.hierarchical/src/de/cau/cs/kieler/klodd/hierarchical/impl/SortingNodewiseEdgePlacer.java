@@ -8,12 +8,12 @@ import java.util.List;
 import java.util.Map;
 
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KDimension;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdge;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPort;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPortLayout;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_OPTION;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.PORT_PLACEMENT;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutOption;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPortPlacement;
 import de.cau.cs.kieler.klodd.core.algorithms.AbstractAlgorithm;
 import de.cau.cs.kieler.klodd.hierarchical.modules.INodewiseEdgePlacer;
 import de.cau.cs.kieler.klodd.hierarchical.structures.*;
@@ -34,11 +34,11 @@ public class SortingNodewiseEdgePlacer extends AbstractAlgorithm implements
 	private class RoutingSlot {
 		float start = Float.MAX_VALUE, end = Float.MIN_VALUE;
 		int rank;
-		List<KPort> ports = new LinkedList<KPort>();
+		List<KLayoutPort> ports = new LinkedList<KLayoutPort>();
 	}
 	
 	/** layout direction configured for the given layered graph */
-	private LAYOUT_OPTION layoutDirection;
+	private KLayoutOption layoutDirection;
 	
 	/* (non-Javadoc)
 	 * @see de.cau.cs.kieler.klodd.hierarchical.modules.INodewiseEdgePlacer#placeEdges(de.cau.cs.kieler.klodd.hierarchical.structures.LayeredGraph)
@@ -61,31 +61,31 @@ public class SortingNodewiseEdgePlacer extends AbstractAlgorithm implements
 	 */
 	private void placeEdges(LayerElement element) {
 		Object elemObj = element.getElemObj();
-		if (elemObj instanceof KNodeGroup) {
-			KNodeGroup node = (KNodeGroup)elemObj;
+		if (elemObj instanceof KLayoutNode) {
+			KLayoutNode node = (KLayoutNode)elemObj;
 			if (node.getPorts().isEmpty()) return;
 			List<RoutingSlot> northSlots = new LinkedList<RoutingSlot>();
 			List<RoutingSlot> eastSlots = new LinkedList<RoutingSlot>();
 			List<RoutingSlot> southSlots = new LinkedList<RoutingSlot>();
 			List<RoutingSlot> westSlots = new LinkedList<RoutingSlot>();
-			Map<KPort, RoutingSlot> northMap = new HashMap<KPort, RoutingSlot>();
-			Map<KPort, RoutingSlot> eastMap = new HashMap<KPort, RoutingSlot>();
-			Map<KPort, RoutingSlot> southMap = new HashMap<KPort, RoutingSlot>();
-			Map<KPort, RoutingSlot> westMap = new HashMap<KPort, RoutingSlot>();
+			Map<KLayoutPort, RoutingSlot> northMap = new HashMap<KLayoutPort, RoutingSlot>();
+			Map<KLayoutPort, RoutingSlot> eastMap = new HashMap<KLayoutPort, RoutingSlot>();
+			Map<KLayoutPort, RoutingSlot> southMap = new HashMap<KLayoutPort, RoutingSlot>();
+			Map<KLayoutPort, RoutingSlot> westMap = new HashMap<KLayoutPort, RoutingSlot>();
 			KDimension nodeSize = node.getLayout().getSize();
 			
-			for (KPort port : node.getPorts()) {
-				PORT_PLACEMENT placement = port.getLayout().getPlacement();
+			for (KLayoutPort port : node.getPorts()) {
+				KPortPlacement placement = port.getLayout().getPlacement();
 				float xPos = port.getLayout().getLocation().getX()
 					+ port.getLayout().getSize().getWidth() / 2;
 				float yPos = port.getLayout().getLocation().getY()
 					+ port.getLayout().getSize().getHeight() / 2;
 				// process self-loops over the given port
-				for (KEdge edge : port.getEdges()) {
+				for (KLayoutEdge edge : port.getEdges()) {
 					if (edge.getSourcePort() == port && edge.getTarget() == node) {
 						ElementLoop loop = new ElementLoop(edge, element, port, edge.getTargetPort());
 						element.getLoops().add(loop);
-						PORT_PLACEMENT placement2 = edge.getTargetPort().getLayout().getPlacement();
+						KPortPlacement placement2 = edge.getTargetPort().getLayout().getPlacement();
 						KPortLayout targetLayout = edge.getTargetPort().getLayout();
 						float xPos2 = targetLayout.getLocation().getX()
 							+ targetLayout.getSize().getWidth() / 2;
@@ -208,7 +208,7 @@ public class SortingNodewiseEdgePlacer extends AbstractAlgorithm implements
 					}
 				}
 				// process routing to other layers
-				if (layoutDirection == LAYOUT_OPTION.VERTICAL) {
+				if (layoutDirection == KLayoutOption.VERTICAL) {
 					switch (placement) {
 					case NORTH:
 						if (hasOutgoing(element, port)) {
@@ -289,9 +289,9 @@ public class SortingNodewiseEdgePlacer extends AbstractAlgorithm implements
 			element.westRanks = assignRanks(westSlots, nodeSize.getHeight());
 			
 			// calculate edge routing for all incoming or outgoing connections
-			if (layoutDirection == LAYOUT_OPTION.VERTICAL) {
+			if (layoutDirection == KLayoutOption.VERTICAL) {
 				for (LayerConnection connection : element.getIncomingConnections()) {
-					KPort port = connection.getTargetPort();
+					KLayoutPort port = connection.getTargetPort();
 					switch (port.getLayout().getPlacement()) {
 					case EAST:
 						int rank = getRankFor(port, eastSlots, element.eastRanks);
@@ -310,7 +310,7 @@ public class SortingNodewiseEdgePlacer extends AbstractAlgorithm implements
 					}
 				}
 				for (LayerConnection connection : element.getOutgoingConnections()) {
-					KPort port = connection.getSourcePort();
+					KLayoutPort port = connection.getSourcePort();
 					switch (port.getLayout().getPlacement()) {
 					case NORTH:
 						int rank = getRankFor(port, eastSlots, element.eastRanks);
@@ -331,7 +331,7 @@ public class SortingNodewiseEdgePlacer extends AbstractAlgorithm implements
 			}
 			else {
 				for (LayerConnection connection : element.getIncomingConnections()) {
-					KPort port = connection.getTargetPort();
+					KLayoutPort port = connection.getTargetPort();
 					switch (port.getLayout().getPlacement()) {
 					case SOUTH:
 						int rank = getRankFor(port, southSlots, element.southRanks);
@@ -350,7 +350,7 @@ public class SortingNodewiseEdgePlacer extends AbstractAlgorithm implements
 					}
 				}
 				for (LayerConnection connection : element.getOutgoingConnections()) {
-					KPort port = connection.getSourcePort();
+					KLayoutPort port = connection.getSourcePort();
 					switch (port.getLayout().getPlacement()) {
 					case WEST:
 						int rank = getRankFor(port, southSlots, element.southRanks);
@@ -372,25 +372,25 @@ public class SortingNodewiseEdgePlacer extends AbstractAlgorithm implements
 			
 			// calculate edge routing for all element loops
 			for (ElementLoop loop : element.getLoops()) {
-				PORT_PLACEMENT placement1 = loop.getSourcePort().getLayout().getPlacement();
-				PORT_PLACEMENT placement2 = loop.getTargetPort().getLayout().getPlacement();
-				if (placement1 == PORT_PLACEMENT.NORTH || placement2 == PORT_PLACEMENT.NORTH) {
+				KPortPlacement placement1 = loop.getSourcePort().getLayout().getPlacement();
+				KPortPlacement placement2 = loop.getTargetPort().getLayout().getPlacement();
+				if (placement1 == KPortPlacement.NORTH || placement2 == KPortPlacement.NORTH) {
 					int rank = getRankFor(loop.getSourcePort(), northSlots, element.northRanks);
 					loop.northRoutePos = rank;
 				}
-				if (placement1 == PORT_PLACEMENT.EAST || placement2 == PORT_PLACEMENT.EAST
-						|| placement1 == PORT_PLACEMENT.NORTH && placement2 == PORT_PLACEMENT.SOUTH
-						|| placement1 == PORT_PLACEMENT.SOUTH && placement2 == PORT_PLACEMENT.NORTH) {
+				if (placement1 == KPortPlacement.EAST || placement2 == KPortPlacement.EAST
+						|| placement1 == KPortPlacement.NORTH && placement2 == KPortPlacement.SOUTH
+						|| placement1 == KPortPlacement.SOUTH && placement2 == KPortPlacement.NORTH) {
 					int rank = getRankFor(loop.getSourcePort(), eastSlots, element.eastRanks);
 					loop.eastRoutePos = rank;
 				}
-				if (placement1 == PORT_PLACEMENT.SOUTH || placement2 == PORT_PLACEMENT.SOUTH
-						|| placement1 == PORT_PLACEMENT.EAST && placement2 == PORT_PLACEMENT.WEST
-						|| placement1 == PORT_PLACEMENT.WEST && placement2 == PORT_PLACEMENT.EAST) {
+				if (placement1 == KPortPlacement.SOUTH || placement2 == KPortPlacement.SOUTH
+						|| placement1 == KPortPlacement.EAST && placement2 == KPortPlacement.WEST
+						|| placement1 == KPortPlacement.WEST && placement2 == KPortPlacement.EAST) {
 					int rank = getRankFor(loop.getSourcePort(), southSlots, element.southRanks);
 					loop.southRoutePos = rank;
 				}
-				if (placement1 == PORT_PLACEMENT.WEST || placement2 == PORT_PLACEMENT.WEST) {
+				if (placement1 == KPortPlacement.WEST || placement2 == KPortPlacement.WEST) {
 					int rank = getRankFor(loop.getSourcePort(), westSlots, element.westRanks);
 					loop.westRoutePos = rank;
 				}
@@ -401,18 +401,18 @@ public class SortingNodewiseEdgePlacer extends AbstractAlgorithm implements
 	/**
 	 * Adds a given port to an appropriate routing slot. 
 	 * 
-	 * @param node node group that is being processed
+	 * @param node layout node that is being processed
 	 * @param port port to be inserted
 	 * @param slotList list of existing routing slots
 	 * @param slotMap mapping of ports to existing slots
 	 * @param fromPos starting position for the given port
 	 * @param toPos ending position for the given port
 	 */
-	private void addToSlot(KNodeGroup node, KPort port, List<RoutingSlot> slotList,
-			Map<KPort, RoutingSlot> slotMap, float fromPos, float toPos) {
+	private void addToSlot(KLayoutNode node, KLayoutPort port, List<RoutingSlot> slotList,
+			Map<KLayoutPort, RoutingSlot> slotMap, float fromPos, float toPos) {
 		RoutingSlot slot = slotMap.get(port);
 		if (slot == null && port.getEdges().size() == 1) {
-			KEdge edge = port.getEdges().get(0);
+			KLayoutEdge edge = port.getEdges().get(0);
 			if (edge.getSourcePort() != port && edge.getSource() != node) {
 				slot = slotMap.get(edge.getSourcePort());
 				if (slot == null) {
@@ -450,8 +450,8 @@ public class SortingNodewiseEdgePlacer extends AbstractAlgorithm implements
 	 * @param fromPos starting position for the given port
 	 * @param toPos ending position for the given port
 	 */
-	private void addToSlot(KPort port1, KPort port2, List<RoutingSlot> slotList,
-			Map<KPort, RoutingSlot> slotMap, float fromPos, float toPos) {
+	private void addToSlot(KLayoutPort port1, KLayoutPort port2, List<RoutingSlot> slotList,
+			Map<KLayoutPort, RoutingSlot> slotMap, float fromPos, float toPos) {
 		RoutingSlot slot = slotMap.get(port1);
 		if (slot == null)
 			slot = slotMap.get(port2);
@@ -476,7 +476,7 @@ public class SortingNodewiseEdgePlacer extends AbstractAlgorithm implements
      * @param port port to check
      * @return true if the given port has an outgoing connection
      */
-    private boolean hasOutgoing(LayerElement element, KPort port) {
+    private boolean hasOutgoing(LayerElement element, KLayoutPort port) {
         for (LayerConnection connection : element.getOutgoingConnections()) {
                 if (connection.getSourcePort() == port) {
                         return true;
@@ -492,7 +492,7 @@ public class SortingNodewiseEdgePlacer extends AbstractAlgorithm implements
      * @param port port to check
      * @return true if the given port has an incoming connection
      */
-    private boolean hasIncoming(LayerElement element, KPort port) {
+    private boolean hasIncoming(LayerElement element, KLayoutPort port) {
         for (LayerConnection connection : element.getIncomingConnections()) {
                 if (connection.getTargetPort() == port) {
                         return true;
@@ -566,7 +566,7 @@ public class SortingNodewiseEdgePlacer extends AbstractAlgorithm implements
      * @param ranks number of assigned ranks
      * @return the assigned rank, or <code>ranks</code> if no rank is found
      */
-    private int getRankFor(KPort port, List<RoutingSlot> slotList, int ranks) {
+    private int getRankFor(KLayoutPort port, List<RoutingSlot> slotList, int ranks) {
     	for (RoutingSlot slot : slotList) {
     		if (slot.ports.contains(port))
     			return slot.rank;

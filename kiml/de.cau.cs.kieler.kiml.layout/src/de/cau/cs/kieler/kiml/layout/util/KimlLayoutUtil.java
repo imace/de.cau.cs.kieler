@@ -10,18 +10,18 @@
 package de.cau.cs.kieler.kiml.layout.util;
 
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KDimension;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdge;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLabel;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLabelLayout;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLayout;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KInsets;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutGraph;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroupLabel;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroupLayout;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeLabel;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeLayout;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPoint;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphFactory;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_TYPE;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutType;
 
 /**
  * Helper class with static convenience functions to create initialized
@@ -29,14 +29,14 @@ import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_TYPE;
  * 
  * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
  * @see KLayoutGraph
- * @see KNodeGroup
- * @see KEdge
+ * @see KLayoutNode
+ * @see KLayoutEdge
  * @see KEdgeLabel
  */
 public class KimlLayoutUtil {
 
 	/**
-	 * Creates a KNodeGroup, initializes some defaults and returns it.
+	 * Creates a KLayoutGraph, initializes some defaults and returns it.
 	 * Initialized values are:
 	 * <ul>
 	 * <li>IdString: ""</li>
@@ -46,38 +46,100 @@ public class KimlLayoutUtil {
 	 * <li>Size: Default KDimension object (0,0)</li>
 	 * <li>Insets: Default KInsets object (0,0,0,0)</li>
 	 * <li>LayouterName: ""</li>
-	 * <li>LayoutType: LAYOUT_TYPE.DEFAULT</li>
+	 * <li>LayoutType: KLayoutType.DEFAULT</li>
 	 * </ul>
 	 * </li>
-	 * <li>Label: Default KNodeGroupLabel object</li>
+	 * <li>Label: Default KNodeLabel object</li>
 	 * </ul>
 	 * 
-	 * @return An initialized KNodeGroup
-	 * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
+	 * @return An initialized KLayoutGraph
+	 * @author <a href="mailto:msp@informatik.uni-kiel.de">Miro Sp&ouml;nemann</a>
 	 */
-	public static KNodeGroup createInitializedNodeGroup() {
-		KNodeGroup nodeGroup = KimlLayoutGraphFactory.eINSTANCE
-				.createKNodeGroup();
-		KNodeGroupLayout layout = KimlLayoutGraphFactory.eINSTANCE
-				.createKNodeGroupLayout();
+	public static KLayoutGraph createInitializedLayoutGraph() {
+		KLayoutGraph layoutGraph = KimlLayoutGraphFactory.eINSTANCE
+				.createKLayoutGraph();
+		KNodeLayout layout = KimlLayoutGraphFactory.eINSTANCE
+				.createKNodeLayout();
 		KPoint location = KimlLayoutGraphFactory.eINSTANCE.createKPoint();
 		KDimension size = KimlLayoutGraphFactory.eINSTANCE.createKDimension();
 		KInsets insets = KimlLayoutGraphFactory.eINSTANCE.createKInsets();
-		KNodeGroupLabel nodeGroupLabel = KimlLayoutGraphFactory.eINSTANCE
-				.createKNodeGroupLabel();
+		KNodeLabel nodeLabel = KimlLayoutGraphFactory.eINSTANCE
+				.createKNodeLabel();
 		layout.setLocation(location);
 		layout.setSize(size);
 		layout.setInsets(insets);
 		layout.setLayouterName("");
-		layout.setLayoutType(LAYOUT_TYPE.DEFAULT);
-		nodeGroup.setLayout(layout);
-		nodeGroup.setLabel(nodeGroupLabel);
-		nodeGroup.setIdString("");
-		return nodeGroup;
+		layout.setLayoutType(KLayoutType.DEFAULT);
+		layoutGraph.setLayout(layout);
+		layoutGraph.setLabel(nodeLabel);
+		layoutGraph.setIdString("");
+		return layoutGraph;
+	}
+	
+	/**
+	 * Creates a KLayoutGraph and copies all contents of the given
+	 * layout node. This is just a shallow copy.
+	 * 
+	 * @param layoutNode layout node to copy
+	 * @return layout graph with all data from the given layout node
+	 * @author <a href="mailto:msp@informatik.uni-kiel.de">Miro Sp&ouml;nemann</a>
+	 */
+	public static KLayoutGraph layoutNode2LayoutGraph(KLayoutNode layoutNode) {
+		KLayoutGraph layoutGraph = KimlLayoutGraphFactory.eINSTANCE
+				.createKLayoutGraph();
+		layoutGraph.setIdString(layoutNode.getIdString());
+		layoutGraph.setLabel(layoutNode.getLabel());
+		layoutGraph.setLayout(layoutNode.getLayout());
+		layoutGraph.getIncomingEdges().addAll(layoutNode.getIncomingEdges());
+		layoutGraph.getOutgoingEdges().addAll(layoutNode.getOutgoingEdges());
+		layoutGraph.getPorts().addAll(layoutNode.getPorts());
+		layoutGraph.getChildNodes().addAll(layoutNode.getChildNodes());
+		return layoutGraph;
+	}
+	
+	/**
+	 * Creates a KLayoutNode, initializes some defaults and returns it.
+	 * Initialized values are:
+	 * <ul>
+	 * <li>IdString: ""</li>
+	 * <li>Layout:
+	 * <ul>
+	 * <li>Location: Default KPoint object (0,0)</li>
+	 * <li>Size: Default KDimension object (0,0)</li>
+	 * <li>Insets: Default KInsets object (0,0,0,0)</li>
+	 * <li>LayouterName: ""</li>
+	 * <li>LayoutType: KLayoutType.DEFAULT</li>
+	 * </ul>
+	 * </li>
+	 * <li>Label: Default KNodeLabel object</li>
+	 * </ul>
+	 * 
+	 * @return An initialized KLayoutNode
+	 * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
+	 */
+	public static KLayoutNode createInitializedLayoutNode() {
+		KLayoutNode layoutNode = KimlLayoutGraphFactory.eINSTANCE
+				.createKLayoutNode();
+		KNodeLayout layout = KimlLayoutGraphFactory.eINSTANCE
+				.createKNodeLayout();
+		KPoint location = KimlLayoutGraphFactory.eINSTANCE.createKPoint();
+		KDimension size = KimlLayoutGraphFactory.eINSTANCE.createKDimension();
+		KInsets insets = KimlLayoutGraphFactory.eINSTANCE.createKInsets();
+		KNodeLabel nodeLabel = KimlLayoutGraphFactory.eINSTANCE
+				.createKNodeLabel();
+		layout.setLocation(location);
+		layout.setSize(size);
+		layout.setInsets(insets);
+		layout.setLayouterName("");
+		layout.setLayoutType(KLayoutType.DEFAULT);
+		layoutNode.setLayout(layout);
+		layoutNode.setLabel(nodeLabel);
+		layoutNode.setIdString("");
+		return layoutNode;
 	}
 
 	/**
-	 * Creates a KEdge, initializes some defaults and returns it. Initialized
+	 * Creates a KLayoutEdge, initializes some defaults and returns it. Initialized
 	 * values are:
 	 * <ul>
 	 * <li>Layout:
@@ -88,11 +150,11 @@ public class KimlLayoutUtil {
 	 * </li>
 	 * </ul>
 	 * 
-	 * @return An initialized KEdge
+	 * @return An initialized KLayoutEdge
 	 * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
 	 */
-	public static KEdge createInitializedEdge() {
-		KEdge edge = KimlLayoutGraphFactory.eINSTANCE.createKEdge();
+	public static KLayoutEdge createInitializedEdge() {
+		KLayoutEdge edge = KimlLayoutGraphFactory.eINSTANCE.createKLayoutEdge();
 		KEdgeLayout edgeLayout = KimlLayoutGraphFactory.eINSTANCE
 				.createKEdgeLayout();
 

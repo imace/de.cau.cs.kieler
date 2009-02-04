@@ -8,7 +8,7 @@ package de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl;
 
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPortLayout;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.PORT_PLACEMENT;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPortPlacement;
 
 import org.eclipse.emf.common.notify.Notification;
 
@@ -18,7 +18,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>KPort Layout</b></em>'.
+ * An implementation of the model object '<em><b>KLayoutPort Layout</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
@@ -38,7 +38,7 @@ public class KPortLayoutImpl extends KShapeLayoutImpl implements KPortLayout {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final PORT_PLACEMENT PLACEMENT_EDEFAULT = PORT_PLACEMENT.DEFAULT;
+	protected static final KPortPlacement PLACEMENT_EDEFAULT = KPortPlacement.DEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getPlacement() <em>Placement</em>}' attribute.
@@ -48,7 +48,7 @@ public class KPortLayoutImpl extends KShapeLayoutImpl implements KPortLayout {
 	 * @generated
 	 * @ordered
 	 */
-	protected PORT_PLACEMENT placement = PLACEMENT_EDEFAULT;
+	protected KPortPlacement placement = PLACEMENT_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -74,7 +74,7 @@ public class KPortLayoutImpl extends KShapeLayoutImpl implements KPortLayout {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public PORT_PLACEMENT getPlacement() {
+	public KPortPlacement getPlacement() {
 		return placement;
 	}
 
@@ -83,8 +83,8 @@ public class KPortLayoutImpl extends KShapeLayoutImpl implements KPortLayout {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setPlacement(PORT_PLACEMENT newPlacement) {
-		PORT_PLACEMENT oldPlacement = placement;
+	public void setPlacement(KPortPlacement newPlacement) {
+		KPortPlacement oldPlacement = placement;
 		placement = newPlacement == null ? PLACEMENT_EDEFAULT : newPlacement;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KPORT_LAYOUT__PLACEMENT, oldPlacement, placement));
@@ -113,7 +113,7 @@ public class KPortLayoutImpl extends KShapeLayoutImpl implements KPortLayout {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case KimlLayoutGraphPackage.KPORT_LAYOUT__PLACEMENT:
-				setPlacement((PORT_PLACEMENT)newValue);
+				setPlacement((KPortPlacement)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

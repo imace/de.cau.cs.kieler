@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdge;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
 
 
 /**
@@ -16,7 +16,7 @@ import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup;
 public class DFSCycleRemover extends AbstractCycleRemover {
 
 	/** map of marked vertices */
-	private Map<KNodeGroup, Integer> markedMap = new HashMap<KNodeGroup, Integer>();
+	private Map<KLayoutNode, Integer> markedMap = new HashMap<KLayoutNode, Integer>();
 	/** next DFS number to use */
 	private int nextDfs;
 	
@@ -31,12 +31,12 @@ public class DFSCycleRemover extends AbstractCycleRemover {
 	
 	/*
 	 * (non-Javadoc)
-	 * @see de.cau.cs.kieler.klodd.core.algorithms.ICycleRemover#removeCycles(de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup)
+	 * @see de.cau.cs.kieler.klodd.core.algorithms.ICycleRemover#removeCycles(de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode)
 	 */
-	public void removeCycles(KNodeGroup parentGroup) {
-		Iterator<KNodeGroup> nodeIter = parentGroup.getSubNodeGroups().iterator(); 
+	public void removeCycles(KLayoutNode parentNode) {
+		Iterator<KLayoutNode> nodeIter = parentNode.getChildNodes().iterator(); 
 		while (nodeIter.hasNext()) {
-			KNodeGroup node = nodeIter.next();
+			KLayoutNode node = nodeIter.next();
 			if (markedMap.get(node) == null) {
 				// node was not visited yet
 				dfsVisit(node);
@@ -47,19 +47,19 @@ public class DFSCycleRemover extends AbstractCycleRemover {
 	}
 	
 	/**
-	 * Visits a node group in the DFS algorithm. This method
+	 * Visits a layout node in the DFS algorithm. This method
 	 * is recursive.
 	 * 
-	 * @param node node group to visit
+	 * @param node layout node to visit
 	 */
-	private void dfsVisit(KNodeGroup node) {
+	private void dfsVisit(KLayoutNode node) {
 		// put DFS mark on the new node
 		int myDfs = nextDfs++;
 		markedMap.put(node, new Integer(myDfs));
 		
 		// process all outgoing edges
-		for (KEdge edge : node.getOutgoingEdges()) {
-			KNodeGroup targetNode = edge.getTarget();
+		for (KLayoutEdge edge : node.getOutgoingEdges()) {
+			KLayoutNode targetNode = edge.getTarget();
 			if (targetNode != null) {
 				Integer targetDfs = markedMap.get(targetNode);
 				if (targetDfs != null) {

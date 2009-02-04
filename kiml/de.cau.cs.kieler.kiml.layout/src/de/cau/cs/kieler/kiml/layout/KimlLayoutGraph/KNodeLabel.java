@@ -15,15 +15,15 @@ package de.cau.cs.kieler.kiml.layout.KimlLayoutGraph;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroupLabel#getLabelLayout <em>Label Layout</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeLabel#getLabelLayout <em>Label Layout</em>}</li>
  * </ul>
  * </p>
  *
- * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKNodeGroupLabel()
+ * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKNodeLabel()
  * @model
  * @generated
  */
-public interface KNodeGroupLabel extends KLabel {
+public interface KNodeLabel extends KLabel {
 	/**
 	 * Returns the value of the '<em><b>Label Layout</b></em>' reference.
 	 * <!-- begin-user-doc -->
@@ -33,21 +33,21 @@ public interface KNodeGroupLabel extends KLabel {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Label Layout</em>' reference.
-	 * @see #setLabelLayout(KNodeGroupLabelLayout)
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKNodeGroupLabel_LabelLayout()
+	 * @see #setLabelLayout(KNodeLabelLayout)
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKNodeLabel_LabelLayout()
 	 * @model required="true"
 	 * @generated
 	 */
-	KNodeGroupLabelLayout getLabelLayout();
+	KNodeLabelLayout getLabelLayout();
 
 	/**
-	 * Sets the value of the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroupLabel#getLabelLayout <em>Label Layout</em>}' reference.
+	 * Sets the value of the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeLabel#getLabelLayout <em>Label Layout</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Label Layout</em>' reference.
 	 * @see #getLabelLayout()
 	 * @generated
 	 */
-	void setLabelLayout(KNodeGroupLabelLayout value);
+	void setLabelLayout(KNodeLabelLayout value);
 
-} // KNodeGroupLabel
+} // KNodeLabel

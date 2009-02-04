@@ -17,11 +17,11 @@ import org.eclipse.emf.common.util.Enumerator;
  * A representation of the literals of the enumeration '<em><b>PORT TYPE</b></em>',
  * and utility methods for working with them.
  * <!-- end-user-doc -->
- * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getPORT_TYPE()
+ * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKPortType()
  * @model
  * @generated
  */
-public enum PORT_TYPE implements Enumerator {
+public enum KPortType implements Enumerator {
 	/**
 	 * The '<em><b>DEFAULT</b></em>' literal object.
 	 * <!-- begin-user-doc -->
@@ -98,35 +98,35 @@ public enum PORT_TYPE implements Enumerator {
 	public static final int OUTPUT_VALUE = 2;
 
 	/**
-	 * An array of all the '<em><b>PORT TYPE</b></em>' enumerators.
+	 * An array of all the '<em><b>KPort Type</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static final PORT_TYPE[] VALUES_ARRAY =
-		new PORT_TYPE[] {
+	private static final KPortType[] VALUES_ARRAY =
+		new KPortType[] {
 			DEFAULT,
 			INPUT,
 			OUTPUT,
 		};
 
 	/**
-	 * A public read-only list of all the '<em><b>PORT TYPE</b></em>' enumerators.
+	 * A public read-only list of all the '<em><b>KPort Type</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final List<PORT_TYPE> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
+	public static final List<KPortType> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
 	/**
-	 * Returns the '<em><b>PORT TYPE</b></em>' literal with the specified literal value.
+	 * Returns the '<em><b>KPort Type</b></em>' literal with the specified literal value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static PORT_TYPE get(String literal) {
+	public static KPortType get(String literal) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			PORT_TYPE result = VALUES_ARRAY[i];
+			KPortType result = VALUES_ARRAY[i];
 			if (result.toString().equals(literal)) {
 				return result;
 			}
@@ -135,14 +135,14 @@ public enum PORT_TYPE implements Enumerator {
 	}
 
 	/**
-	 * Returns the '<em><b>PORT TYPE</b></em>' literal with the specified name.
+	 * Returns the '<em><b>KPort Type</b></em>' literal with the specified name.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static PORT_TYPE getByName(String name) {
+	public static KPortType getByName(String name) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			PORT_TYPE result = VALUES_ARRAY[i];
+			KPortType result = VALUES_ARRAY[i];
 			if (result.getName().equals(name)) {
 				return result;
 			}
@@ -151,12 +151,12 @@ public enum PORT_TYPE implements Enumerator {
 	}
 
 	/**
-	 * Returns the '<em><b>PORT TYPE</b></em>' literal with the specified integer value.
+	 * Returns the '<em><b>KPort Type</b></em>' literal with the specified integer value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static PORT_TYPE get(int value) {
+	public static KPortType get(int value) {
 		switch (value) {
 			case DEFAULT_VALUE: return DEFAULT;
 			case INPUT_VALUE: return INPUT;
@@ -192,7 +192,7 @@ public enum PORT_TYPE implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private PORT_TYPE(int value, String name, String literal) {
+	private KPortType(int value, String name, String literal) {
 		this.value = value;
 		this.name = name;
 		this.literal = literal;
@@ -236,4 +236,4 @@ public enum PORT_TYPE implements Enumerator {
 		return literal;
 	}
 	
-} //PORT_TYPE
+} //KPortType

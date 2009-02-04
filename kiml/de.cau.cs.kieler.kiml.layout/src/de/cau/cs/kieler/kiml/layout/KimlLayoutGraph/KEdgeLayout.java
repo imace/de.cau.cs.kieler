@@ -12,7 +12,7 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>KEdge Layout</b></em>'.
+ * A representation of the model object '<em><b>KLayoutEdge Layout</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
@@ -101,7 +101,7 @@ public interface KEdgeLayout extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Edge Type</b></em>' attribute.
-	 * The literals are from the enumeration {@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.EDGE_TYPE}.
+	 * The literals are from the enumeration {@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeType}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Edge Type</em>' attribute isn't clear,
@@ -109,24 +109,24 @@ public interface KEdgeLayout extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Edge Type</em>' attribute.
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.EDGE_TYPE
-	 * @see #setEdgeType(EDGE_TYPE)
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeType
+	 * @see #setEdgeType(KEdgeType)
 	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKEdgeLayout_EdgeType()
 	 * @model required="true"
 	 * @generated
 	 */
-	EDGE_TYPE getEdgeType();
+	KEdgeType getEdgeType();
 
 	/**
 	 * Sets the value of the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLayout#getEdgeType <em>Edge Type</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Edge Type</em>' attribute.
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.EDGE_TYPE
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeType
 	 * @see #getEdgeType()
 	 * @generated
 	 */
-	void setEdgeType(EDGE_TYPE value);
+	void setEdgeType(KEdgeType value);
 
 	/**
 	 * Returns the value of the '<em><b>Use Layout</b></em>' attribute.

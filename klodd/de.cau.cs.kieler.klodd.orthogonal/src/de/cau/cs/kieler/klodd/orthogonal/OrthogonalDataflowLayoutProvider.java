@@ -1,10 +1,10 @@
 package de.cau.cs.kieler.klodd.orthogonal;
 
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphFactory;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_OPTION;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_TYPE;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayouterInfo;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutOption;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutType;
 import de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayoutProvider;
 import de.cau.cs.kieler.klodd.core.KloddCorePlugin;
 import de.cau.cs.kieler.klodd.orthogonal.impl.*;
@@ -31,16 +31,16 @@ public class OrthogonalDataflowLayoutProvider extends
 	private ICompacter compacter;
 	
 	/* (non-Javadoc)
-	 * @see de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayoutProvider#doLayout(de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup)
+	 * @see de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayoutProvider#doLayout(de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode)
 	 */
-	public void doLayout(KNodeGroup nodeGroup) {
+	public void doLayout(KLayoutNode layoutNode) {
 		// get the currently configured modules
 		updateModules();
 		
 		long startTime = System.nanoTime();
 
 		// perform the planarization phase
-		TSMGraph tsmGraph = planarizer.planarize(nodeGroup);
+		TSMGraph tsmGraph = planarizer.planarize(layoutNode);
 		// perform the orthogonalization phase
 		orthogonalizer.orthogonalize(tsmGraph);
 		// perform the compaction phase
@@ -50,19 +50,19 @@ public class OrthogonalDataflowLayoutProvider extends
 		
 		double executionTime = (double)(System.nanoTime() - startTime) * 1e-9;
 		if (executionTime >= 1.0)
-			System.out.println("Execution time (" + nodeGroup.getSubNodeGroups().size() + " nodes): " + executionTime + " s");
+			System.out.println("Execution time (" + layoutNode.getChildNodes().size() + " nodes): " + executionTime + " s");
 		else
-			System.out.println("Execution time (" + nodeGroup.getSubNodeGroups().size() + " nodes): " + executionTime * 1000 + " ms");
+			System.out.println("Execution time (" + layoutNode.getChildNodes().size() + " nodes): " + executionTime * 1000 + " ms");
 	}
 
 	/* (non-Javadoc)
 	 * @see de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayoutProvider#getLayouterInfo()
 	 */
-	public LAYOUTER_INFO getLayouterInfo() {
-		LAYOUTER_INFO info = KimlLayoutGraphFactory.eINSTANCE.createLAYOUTER_INFO();
+	public KLayouterInfo getLayouterInfo() {
+		KLayouterInfo info = KimlLayoutGraphFactory.eINSTANCE.createKLayouterInfo();
 		info.setLayouterName(LAYOUTER_NAME);
-		info.setLayoutType(LAYOUT_TYPE.ORTHOGONAL);
-		info.setLayoutOption(LAYOUT_OPTION.DEFAULT);
+		info.setLayoutType(KLayoutType.ORTHOGONAL);
+		info.setLayoutOption(KLayoutOption.DEFAULT);
 		info.setLayouterCollectionID(KloddCorePlugin.COLLECTION_NAME);
 		return info;
 	}

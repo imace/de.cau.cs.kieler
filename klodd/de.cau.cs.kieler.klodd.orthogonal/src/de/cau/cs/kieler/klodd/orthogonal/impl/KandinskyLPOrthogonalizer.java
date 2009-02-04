@@ -84,7 +84,7 @@ public class KandinskyLPOrthogonalizer extends AbstractAlgorithm implements
 	/**
 	 * Structure describing the dimensions of the rows in the Kandinsky ILP. 
 	 */
-	private class KandinskyRows {
+	private static class KandinskyRows {
 		IlpSection k1, k2, k3, k4, k5;
 		int count;
 		
@@ -109,7 +109,7 @@ public class KandinskyLPOrthogonalizer extends AbstractAlgorithm implements
 	 * Structure describing the dimensions of the columns in the
 	 * Kandinsky ILP.
 	 */
-	private class KandinskyCols {
+	private static class KandinskyCols {
 		IlpSection forwSourceLeft, forwSourceRight, forwFaceLeft, forwFaceRight,
 		    forwTargetLeft, forwTargetRight, backSourceLeft, backSourceRight,
 		    backFaceLeft, backFaceRight, backTargetLeft, backTargetRight,

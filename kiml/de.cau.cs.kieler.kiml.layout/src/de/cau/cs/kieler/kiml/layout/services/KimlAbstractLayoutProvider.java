@@ -9,12 +9,12 @@
  *******************************************************************************/
 package de.cau.cs.kieler.kiml.layout.services;
 
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayouterInfo;
 
 /**
  * Abstract class every concrete layout provider has to extend. Performs the
- * layout of a KNodeGroup through the {@link #doLayout} method and provides
+ * layout of a KLayoutNode through the {@link #doLayout} method and provides
  * information of the layout provider through the {@link #getLayouterInfo}
  * method.
  * <p/>
@@ -51,10 +51,10 @@ public abstract class KimlAbstractLayoutProvider {
 	 * Layout providers must implement this method in which they perform the
 	 * actual layout process.
 	 * 
-	 * @param nodeGroup
-	 *            The KNodeGroup which should be laid out
+	 * @param layoutNode
+	 *            The KLayoutNode which should be laid out
 	 */
-	public abstract void doLayout(KNodeGroup nodeGroup);
+	public abstract void doLayout(KLayoutNode layoutNode);
 
 	/**
 	 * The implemented method should return a LAYOUT_INFO for the layout
@@ -66,16 +66,16 @@ public abstract class KimlAbstractLayoutProvider {
 	 * <li>Layouter Collection ID</li>
 	 * </ul>
 	 * 
-	 * @return The LAYOUTER_INFO for this layout provider
+	 * @return The KLayouterInfo for this layout provider
 	 * 
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO
-	 *      LAYOUTER_INFO
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_TYPE
-	 *      LAYOUT_TYPE
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_OPTION
-	 *      LAYOUT_OPTION
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayouterInfo
+	 *      KLayouterInfo
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutType
+	 *      KLayoutType
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutOption
+	 *      KLayoutOption
 	 */
-	public abstract LAYOUTER_INFO getLayouterInfo();
+	public abstract KLayouterInfo getLayouterInfo();
 
 	/**
 	 * Sets the desired state of the layout provider. Layout Providers can for

@@ -17,11 +17,11 @@ import org.eclipse.emf.common.util.Enumerator;
  * A representation of the literals of the enumeration '<em><b>EDGE TYPE</b></em>',
  * and utility methods for working with them.
  * <!-- end-user-doc -->
- * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getEDGE_TYPE()
+ * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKEdgeType()
  * @model
  * @generated
  */
-public enum EDGE_TYPE implements Enumerator {
+public enum KEdgeType implements Enumerator {
 	/**
 	 * The '<em><b>DEFAULT</b></em>' literal object.
 	 * <!-- begin-user-doc -->
@@ -146,13 +146,13 @@ public enum EDGE_TYPE implements Enumerator {
 	public static final int RECTILINEAR_VALUE = 4;
 
 	/**
-	 * An array of all the '<em><b>EDGE TYPE</b></em>' enumerators.
+	 * An array of all the '<em><b>KEdge Type</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static final EDGE_TYPE[] VALUES_ARRAY =
-		new EDGE_TYPE[] {
+	private static final KEdgeType[] VALUES_ARRAY =
+		new KEdgeType[] {
 			DEFAULT,
 			DIRECT,
 			SPLINE,
@@ -161,22 +161,22 @@ public enum EDGE_TYPE implements Enumerator {
 		};
 
 	/**
-	 * A public read-only list of all the '<em><b>EDGE TYPE</b></em>' enumerators.
+	 * A public read-only list of all the '<em><b>KEdge Type</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final List<EDGE_TYPE> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
+	public static final List<KEdgeType> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
 	/**
-	 * Returns the '<em><b>EDGE TYPE</b></em>' literal with the specified literal value.
+	 * Returns the '<em><b>KEdge Type</b></em>' literal with the specified literal value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static EDGE_TYPE get(String literal) {
+	public static KEdgeType get(String literal) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			EDGE_TYPE result = VALUES_ARRAY[i];
+			KEdgeType result = VALUES_ARRAY[i];
 			if (result.toString().equals(literal)) {
 				return result;
 			}
@@ -185,14 +185,14 @@ public enum EDGE_TYPE implements Enumerator {
 	}
 
 	/**
-	 * Returns the '<em><b>EDGE TYPE</b></em>' literal with the specified name.
+	 * Returns the '<em><b>KEdge Type</b></em>' literal with the specified name.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static EDGE_TYPE getByName(String name) {
+	public static KEdgeType getByName(String name) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			EDGE_TYPE result = VALUES_ARRAY[i];
+			KEdgeType result = VALUES_ARRAY[i];
 			if (result.getName().equals(name)) {
 				return result;
 			}
@@ -201,12 +201,12 @@ public enum EDGE_TYPE implements Enumerator {
 	}
 
 	/**
-	 * Returns the '<em><b>EDGE TYPE</b></em>' literal with the specified integer value.
+	 * Returns the '<em><b>KEdge Type</b></em>' literal with the specified integer value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static EDGE_TYPE get(int value) {
+	public static KEdgeType get(int value) {
 		switch (value) {
 			case DEFAULT_VALUE: return DEFAULT;
 			case DIRECT_VALUE: return DIRECT;
@@ -244,7 +244,7 @@ public enum EDGE_TYPE implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EDGE_TYPE(int value, String name, String literal) {
+	private KEdgeType(int value, String name, String literal) {
 		this.value = value;
 		this.name = name;
 		this.literal = literal;
@@ -288,4 +288,4 @@ public enum EDGE_TYPE implements Enumerator {
 		return literal;
 	}
 	
-} //EDGE_TYPE
+} //KEdgeType

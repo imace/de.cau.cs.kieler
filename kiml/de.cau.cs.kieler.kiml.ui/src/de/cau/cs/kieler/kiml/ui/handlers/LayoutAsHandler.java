@@ -25,8 +25,8 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.handlers.HandlerUtil;
 
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_TYPE;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayouterInfo;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutType;
 import de.cau.cs.kieler.kiml.layout.services.DiagramLayouters;
 import de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayouter;
 import de.cau.cs.kieler.kiml.layout.services.LayoutProviders;
@@ -113,9 +113,9 @@ public class LayoutAsHandler extends AbstractHandler implements IHandler {
 		/* the parameter provided holds the layouterName */
 		String layouterName = event
 				.getParameter(ContributionItemLayoutAs.PARAM_LAYOUTER_NAME);
-		LAYOUTER_INFO layouterInfo = LayoutProviders.getInstance()
+		KLayouterInfo layouterInfo = LayoutProviders.getInstance()
 				.getLayouterInfoForLayouterName(layouterName);
-		LAYOUT_TYPE layoutType = layouterInfo.getLayoutType();
+		KLayoutType layoutType = layouterInfo.getLayoutType();
 		String groupID = "";
 
 		/* just another sanity check if the right commandID */

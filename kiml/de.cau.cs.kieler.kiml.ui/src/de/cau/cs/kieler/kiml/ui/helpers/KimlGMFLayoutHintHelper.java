@@ -20,7 +20,7 @@ import org.eclipse.gmf.runtime.notation.NotationFactory;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.StringValueStyle;
 
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_TYPE;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutType;
 
 
 /**
@@ -178,7 +178,7 @@ public class KimlGMFLayoutHintHelper {
 	 *            the GraphicalEditPart to retrieve the layout type for
 	 * @return the layoutType
 	 */
-	public static LAYOUT_TYPE getLayoutType(GraphicalEditPart graphicalEditPart) {
+	public static KLayoutType getLayoutType(GraphicalEditPart graphicalEditPart) {
 
 		StringValueStyle layoutTypeStyle = (StringValueStyle) (graphicalEditPart
 				.getNotationView().getNamedStyle(NotationPackage.eINSTANCE
@@ -186,13 +186,13 @@ public class KimlGMFLayoutHintHelper {
 
 		// if property not available, return default value
 		if (layoutTypeStyle == null) {
-			return LAYOUT_TYPE.DEFAULT;
+			return KLayoutType.DEFAULT;
 			// return stored model/notation value
 		} else {
-			if (LAYOUT_TYPE.getByName(layoutTypeStyle.getStringValue()) != null)
-				return LAYOUT_TYPE.getByName(layoutTypeStyle.getStringValue());
+			if (KLayoutType.getByName(layoutTypeStyle.getStringValue()) != null)
+				return KLayoutType.getByName(layoutTypeStyle.getStringValue());
 			else
-				return LAYOUT_TYPE.DEFAULT;
+				return KLayoutType.DEFAULT;
 		}
 	}
 
@@ -207,7 +207,7 @@ public class KimlGMFLayoutHintHelper {
 	 */
 	public static void setLayoutType(
 			ArrayList<? extends GraphicalEditPart> GraphicalEditParts,
-			LAYOUT_TYPE layoutType) {
+			KLayoutType layoutType) {
 		for (GraphicalEditPart snep : GraphicalEditParts) {
 			setLayoutType(snep, layoutType);
 		}
@@ -223,7 +223,7 @@ public class KimlGMFLayoutHintHelper {
 	 *            The layoutType
 	 */
 	public static void setLayoutType(GraphicalEditPart[] GraphicalEditParts,
-			LAYOUT_TYPE layoutType) {
+			KLayoutType layoutType) {
 		for (GraphicalEditPart snep : GraphicalEditParts) {
 			setLayoutType(snep, layoutType);
 		}
@@ -240,7 +240,7 @@ public class KimlGMFLayoutHintHelper {
 	 *            The layoutType
 	 */
 	public static void setLayoutType(final GraphicalEditPart graphicalEditPart,
-			final LAYOUT_TYPE layoutType) {
+			final KLayoutType layoutType) {
 
 		// see if there is already an layoutTypeStyle
 		final StringValueStyle layoutTypeStyle = (StringValueStyle) (graphicalEditPart
@@ -396,7 +396,7 @@ public class KimlGMFLayoutHintHelper {
 	 */
 	public static void setLayoutHint(
 			final GraphicalEditPart[] GraphicalEditParts, final String groupID,
-			final LAYOUT_TYPE layoutType, final String layouterName) {
+			final KLayoutType layoutType, final String layouterName) {
 		setLayoutGroup(GraphicalEditParts, groupID);
 		setLayoutType(GraphicalEditParts, layoutType);
 		setLayouterName(GraphicalEditParts, layouterName);
@@ -417,7 +417,7 @@ public class KimlGMFLayoutHintHelper {
 	 */
 	public static void setLayoutHint(
 			final ArrayList<? extends GraphicalEditPart> GraphicalEditParts,
-			final String groupID, final LAYOUT_TYPE layoutType,
+			final String groupID, final KLayoutType layoutType,
 			final String layouterName) {
 		setLayoutGroup(GraphicalEditParts, groupID);
 		setLayoutType(GraphicalEditParts, layoutType);
@@ -440,7 +440,7 @@ public class KimlGMFLayoutHintHelper {
 	 */
 	public static void setChildrenLayoutHint(
 			final GraphicalEditPart graphicalEditPart, final String groupID,
-			final LAYOUT_TYPE layoutType, final String layouterName) {
+			final KLayoutType layoutType, final String layouterName) {
 
 		for (Object level1 : graphicalEditPart.getChildren()) {
 			if (level1 instanceof CompartmentEditPart) {
@@ -473,7 +473,7 @@ public class KimlGMFLayoutHintHelper {
 	 */
 	public static void setLayoutHint(
 			final GraphicalEditPart[] GraphicalEditParts, final String groupID,
-			final LAYOUT_TYPE layoutType) {
+			final KLayoutType layoutType) {
 		setLayoutGroup(GraphicalEditParts, groupID);
 		setLayoutType(GraphicalEditParts, layoutType);
 	}
@@ -494,7 +494,7 @@ public class KimlGMFLayoutHintHelper {
 	 */
 	public static void setLayoutHint(
 			final ArrayList<? extends GraphicalEditPart> GraphicalEditParts,
-			final String groupID, final LAYOUT_TYPE layoutType) {
+			final String groupID, final KLayoutType layoutType) {
 		setLayoutGroup(GraphicalEditParts, groupID);
 		setLayoutType(GraphicalEditParts, layoutType);
 	}
@@ -514,7 +514,7 @@ public class KimlGMFLayoutHintHelper {
 	 *            GraphicalEditPart
 	 */
 	public static void setLayoutHint(final GraphicalEditPart graphicalEditPart,
-			final String groupID, final LAYOUT_TYPE layoutType) {
+			final String groupID, final KLayoutType layoutType) {
 		setLayoutGroup(graphicalEditPart, groupID);
 		setLayoutType(graphicalEditPart, layoutType);
 	}
@@ -801,7 +801,7 @@ public class KimlGMFLayoutHintHelper {
 	 *            The GraphicalEditPart to retrieve the layout type for
 	 * @return The layoutType
 	 */
-	public static LAYOUT_TYPE getContainedElementsLayoutType(
+	public static KLayoutType getContainedElementsLayoutType(
 			GraphicalEditPart graphicalEditPart) {
 
 		StringValueStyle layoutTypeStyle = (StringValueStyle) (graphicalEditPart
@@ -810,13 +810,13 @@ public class KimlGMFLayoutHintHelper {
 
 		// if property not available, return default value
 		if (layoutTypeStyle == null) {
-			return LAYOUT_TYPE.DEFAULT;
+			return KLayoutType.DEFAULT;
 			// return stored model/notation value
 		} else {
-			if (LAYOUT_TYPE.getByName(layoutTypeStyle.getStringValue()) != null)
-				return LAYOUT_TYPE.getByName(layoutTypeStyle.getStringValue());
+			if (KLayoutType.getByName(layoutTypeStyle.getStringValue()) != null)
+				return KLayoutType.getByName(layoutTypeStyle.getStringValue());
 			else
-				return LAYOUT_TYPE.DEFAULT;
+				return KLayoutType.DEFAULT;
 		}
 	}
 
@@ -830,7 +830,7 @@ public class KimlGMFLayoutHintHelper {
 	 */
 	public static void setContainedElementsLayoutType(
 			final GraphicalEditPart graphicalEditPart,
-			final LAYOUT_TYPE layoutType) {
+			final KLayoutType layoutType) {
 
 		// see if there is already an layoutTypeStyle
 		final StringValueStyle layoutTypeStyle = (StringValueStyle) (graphicalEditPart
@@ -880,7 +880,7 @@ public class KimlGMFLayoutHintHelper {
 	 */
 	public static void setContainedElementsLayoutHint(
 			final GraphicalEditPart graphicalEditPart,
-			final LAYOUT_TYPE layoutType, final String layouterName) {
+			final KLayoutType layoutType, final String layouterName) {
 		setContainedElementsLayoutType(graphicalEditPart, layoutType);
 		setContainedElementsLayouterName(graphicalEditPart, layouterName);
 	}
@@ -946,7 +946,7 @@ public class KimlGMFLayoutHintHelper {
 	 */
 	public static void setAllContainedElementsLayoutHints(
 			final GraphicalEditPart graphicalEditPart,
-			final LAYOUT_TYPE layoutType, final String layouterName) {
+			final KLayoutType layoutType, final String layouterName) {
 
 		GraphicalViewer viewer = (GraphicalViewer) graphicalEditPart
 				.getViewer();

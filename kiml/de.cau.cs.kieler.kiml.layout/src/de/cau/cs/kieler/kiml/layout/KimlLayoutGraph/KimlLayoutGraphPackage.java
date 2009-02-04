@@ -190,6 +190,97 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	int KINSETS_FEATURE_COUNT = 4;
 
 	/**
+	 * The meta object id for the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KLayoutNodeImpl <em>KLayout Node</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KLayoutNodeImpl
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getKLayoutNode()
+	 * @generated
+	 */
+	int KLAYOUT_NODE = 7;
+
+	/**
+	 * The feature id for the '<em><b>Child Nodes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KLAYOUT_NODE__CHILD_NODES = 0;
+
+	/**
+	 * The feature id for the '<em><b>Outgoing Edges</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KLAYOUT_NODE__OUTGOING_EDGES = 1;
+
+	/**
+	 * The feature id for the '<em><b>Incoming Edges</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KLAYOUT_NODE__INCOMING_EDGES = 2;
+
+	/**
+	 * The feature id for the '<em><b>Parent Node</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KLAYOUT_NODE__PARENT_NODE = 3;
+
+	/**
+	 * The feature id for the '<em><b>Layout</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KLAYOUT_NODE__LAYOUT = 4;
+
+	/**
+	 * The feature id for the '<em><b>Label</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KLAYOUT_NODE__LABEL = 5;
+
+	/**
+	 * The feature id for the '<em><b>Id String</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KLAYOUT_NODE__ID_STRING = 6;
+
+	/**
+	 * The feature id for the '<em><b>Ports</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KLAYOUT_NODE__PORTS = 7;
+
+	/**
+	 * The number of structural features of the '<em>KLayout Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KLAYOUT_NODE_FEATURE_COUNT = 8;
+
+	/**
 	 * The meta object id for the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KLayoutGraphImpl <em>KLayout Graph</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -200,13 +291,76 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	int KLAYOUT_GRAPH = 3;
 
 	/**
-	 * The feature id for the '<em><b>Top Group</b></em>' reference.
+	 * The feature id for the '<em><b>Child Nodes</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int KLAYOUT_GRAPH__TOP_GROUP = 0;
+	int KLAYOUT_GRAPH__CHILD_NODES = KLAYOUT_NODE__CHILD_NODES;
+
+	/**
+	 * The feature id for the '<em><b>Outgoing Edges</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KLAYOUT_GRAPH__OUTGOING_EDGES = KLAYOUT_NODE__OUTGOING_EDGES;
+
+	/**
+	 * The feature id for the '<em><b>Incoming Edges</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KLAYOUT_GRAPH__INCOMING_EDGES = KLAYOUT_NODE__INCOMING_EDGES;
+
+	/**
+	 * The feature id for the '<em><b>Parent Node</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KLAYOUT_GRAPH__PARENT_NODE = KLAYOUT_NODE__PARENT_NODE;
+
+	/**
+	 * The feature id for the '<em><b>Layout</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KLAYOUT_GRAPH__LAYOUT = KLAYOUT_NODE__LAYOUT;
+
+	/**
+	 * The feature id for the '<em><b>Label</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KLAYOUT_GRAPH__LABEL = KLAYOUT_NODE__LABEL;
+
+	/**
+	 * The feature id for the '<em><b>Id String</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KLAYOUT_GRAPH__ID_STRING = KLAYOUT_NODE__ID_STRING;
+
+	/**
+	 * The feature id for the '<em><b>Ports</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KLAYOUT_GRAPH__PORTS = KLAYOUT_NODE__PORTS;
 
 	/**
 	 * The number of structural features of the '<em>KLayout Graph</em>' class.
@@ -215,7 +369,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KLAYOUT_GRAPH_FEATURE_COUNT = 1;
+	int KLAYOUT_GRAPH_FEATURE_COUNT = KLAYOUT_NODE_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KShapeLayoutImpl <em>KShape Layout</em>}' class.
@@ -264,14 +418,14 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	int KSHAPE_LAYOUT_FEATURE_COUNT = 3;
 
 	/**
-	 * The meta object id for the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KEdgeImpl <em>KEdge</em>}' class.
+	 * The meta object id for the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KLayoutEdgeImpl <em>KLayout Edge</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KEdgeImpl
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getKEdge()
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KLayoutEdgeImpl
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getKLayoutEdge()
 	 * @generated
 	 */
-	int KEDGE = 5;
+	int KLAYOUT_EDGE = 5;
 
 	/**
 	 * The feature id for the '<em><b>Source</b></em>' reference.
@@ -280,7 +434,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KEDGE__SOURCE = 0;
+	int KLAYOUT_EDGE__SOURCE = 0;
 
 	/**
 	 * The feature id for the '<em><b>Target</b></em>' reference.
@@ -289,7 +443,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KEDGE__TARGET = 1;
+	int KLAYOUT_EDGE__TARGET = 1;
 
 	/**
 	 * The feature id for the '<em><b>Layout</b></em>' reference.
@@ -298,7 +452,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KEDGE__LAYOUT = 2;
+	int KLAYOUT_EDGE__LAYOUT = 2;
 
 	/**
 	 * The feature id for the '<em><b>Label</b></em>' reference list.
@@ -307,7 +461,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KEDGE__LABEL = 3;
+	int KLAYOUT_EDGE__LABEL = 3;
 
 	/**
 	 * The feature id for the '<em><b>Source Port</b></em>' reference.
@@ -316,7 +470,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KEDGE__SOURCE_PORT = 4;
+	int KLAYOUT_EDGE__SOURCE_PORT = 4;
 
 	/**
 	 * The feature id for the '<em><b>Target Port</b></em>' reference.
@@ -325,16 +479,16 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KEDGE__TARGET_PORT = 5;
+	int KLAYOUT_EDGE__TARGET_PORT = 5;
 
 	/**
-	 * The number of structural features of the '<em>KEdge</em>' class.
+	 * The number of structural features of the '<em>KLayout Edge</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int KEDGE_FEATURE_COUNT = 6;
+	int KLAYOUT_EDGE_FEATURE_COUNT = 6;
 
 	/**
 	 * The meta object id for the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KEdgeLayoutImpl <em>KEdge Layout</em>}' class.
@@ -401,105 +555,14 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	int KEDGE_LAYOUT_FEATURE_COUNT = 5;
 
 	/**
-	 * The meta object id for the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KNodeGroupImpl <em>KNode Group</em>}' class.
+	 * The meta object id for the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KNodeLayoutImpl <em>KNode Layout</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KNodeGroupImpl
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getKNodeGroup()
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KNodeLayoutImpl
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getKNodeLayout()
 	 * @generated
 	 */
-	int KNODE_GROUP = 7;
-
-	/**
-	 * The feature id for the '<em><b>Sub Node Groups</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int KNODE_GROUP__SUB_NODE_GROUPS = 0;
-
-	/**
-	 * The feature id for the '<em><b>Outgoing Edges</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int KNODE_GROUP__OUTGOING_EDGES = 1;
-
-	/**
-	 * The feature id for the '<em><b>Incoming Edges</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int KNODE_GROUP__INCOMING_EDGES = 2;
-
-	/**
-	 * The feature id for the '<em><b>Parent Group</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int KNODE_GROUP__PARENT_GROUP = 3;
-
-	/**
-	 * The feature id for the '<em><b>Layout</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int KNODE_GROUP__LAYOUT = 4;
-
-	/**
-	 * The feature id for the '<em><b>Label</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int KNODE_GROUP__LABEL = 5;
-
-	/**
-	 * The feature id for the '<em><b>Id String</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int KNODE_GROUP__ID_STRING = 6;
-
-	/**
-	 * The feature id for the '<em><b>Ports</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int KNODE_GROUP__PORTS = 7;
-
-	/**
-	 * The number of structural features of the '<em>KNode Group</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int KNODE_GROUP_FEATURE_COUNT = 8;
-
-	/**
-	 * The meta object id for the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KNodeGroupLayoutImpl <em>KNode Group Layout</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KNodeGroupLayoutImpl
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getKNodeGroupLayout()
-	 * @generated
-	 */
-	int KNODE_GROUP_LAYOUT = 8;
+	int KNODE_LAYOUT = 8;
 
 	/**
 	 * The feature id for the '<em><b>Location</b></em>' reference.
@@ -508,7 +571,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KNODE_GROUP_LAYOUT__LOCATION = KSHAPE_LAYOUT__LOCATION;
+	int KNODE_LAYOUT__LOCATION = KSHAPE_LAYOUT__LOCATION;
 
 	/**
 	 * The feature id for the '<em><b>Size</b></em>' reference.
@@ -517,7 +580,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KNODE_GROUP_LAYOUT__SIZE = KSHAPE_LAYOUT__SIZE;
+	int KNODE_LAYOUT__SIZE = KSHAPE_LAYOUT__SIZE;
 
 	/**
 	 * The feature id for the '<em><b>Use Layout</b></em>' attribute.
@@ -526,7 +589,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KNODE_GROUP_LAYOUT__USE_LAYOUT = KSHAPE_LAYOUT__USE_LAYOUT;
+	int KNODE_LAYOUT__USE_LAYOUT = KSHAPE_LAYOUT__USE_LAYOUT;
 
 	/**
 	 * The feature id for the '<em><b>Layout Type</b></em>' attribute.
@@ -535,7 +598,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KNODE_GROUP_LAYOUT__LAYOUT_TYPE = KSHAPE_LAYOUT_FEATURE_COUNT + 0;
+	int KNODE_LAYOUT__LAYOUT_TYPE = KSHAPE_LAYOUT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Layout Options</b></em>' attribute list.
@@ -544,7 +607,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KNODE_GROUP_LAYOUT__LAYOUT_OPTIONS = KSHAPE_LAYOUT_FEATURE_COUNT + 1;
+	int KNODE_LAYOUT__LAYOUT_OPTIONS = KSHAPE_LAYOUT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Layouter Name</b></em>' attribute.
@@ -553,7 +616,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KNODE_GROUP_LAYOUT__LAYOUTER_NAME = KSHAPE_LAYOUT_FEATURE_COUNT + 2;
+	int KNODE_LAYOUT__LAYOUTER_NAME = KSHAPE_LAYOUT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Insets</b></em>' reference.
@@ -562,16 +625,16 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KNODE_GROUP_LAYOUT__INSETS = KSHAPE_LAYOUT_FEATURE_COUNT + 3;
+	int KNODE_LAYOUT__INSETS = KSHAPE_LAYOUT_FEATURE_COUNT + 3;
 
 	/**
-	 * The number of structural features of the '<em>KNode Group Layout</em>' class.
+	 * The number of structural features of the '<em>KNode Layout</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int KNODE_GROUP_LAYOUT_FEATURE_COUNT = KSHAPE_LAYOUT_FEATURE_COUNT + 4;
+	int KNODE_LAYOUT_FEATURE_COUNT = KSHAPE_LAYOUT_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KLabelImpl <em>KLabel</em>}' class.
@@ -694,14 +757,14 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	int KEDGE_LABEL_LAYOUT_FEATURE_COUNT = KSHAPE_LAYOUT_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KNodeGroupLabelImpl <em>KNode Group Label</em>}' class.
+	 * The meta object id for the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KNodeLabelImpl <em>KNode Label</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KNodeGroupLabelImpl
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getKNodeGroupLabel()
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KNodeLabelImpl
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getKNodeLabel()
 	 * @generated
 	 */
-	int KNODE_GROUP_LABEL = 12;
+	int KNODE_LABEL = 12;
 
 	/**
 	 * The feature id for the '<em><b>Text</b></em>' attribute.
@@ -710,7 +773,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KNODE_GROUP_LABEL__TEXT = KLABEL__TEXT;
+	int KNODE_LABEL__TEXT = KLABEL__TEXT;
 
 	/**
 	 * The feature id for the '<em><b>Label Layout</b></em>' reference.
@@ -719,26 +782,26 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KNODE_GROUP_LABEL__LABEL_LAYOUT = KLABEL_FEATURE_COUNT + 0;
+	int KNODE_LABEL__LABEL_LAYOUT = KLABEL_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the '<em>KNode Group Label</em>' class.
+	 * The number of structural features of the '<em>KNode Label</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int KNODE_GROUP_LABEL_FEATURE_COUNT = KLABEL_FEATURE_COUNT + 1;
+	int KNODE_LABEL_FEATURE_COUNT = KLABEL_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KNodeGroupLabelLayoutImpl <em>KNode Group Label Layout</em>}' class.
+	 * The meta object id for the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KNodeLabelLayoutImpl <em>KNode Label Layout</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KNodeGroupLabelLayoutImpl
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getKNodeGroupLabelLayout()
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KNodeLabelLayoutImpl
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getKNodeLabelLayout()
 	 * @generated
 	 */
-	int KNODE_GROUP_LABEL_LAYOUT = 13;
+	int KNODE_LABEL_LAYOUT = 13;
 
 	/**
 	 * The feature id for the '<em><b>Location</b></em>' reference.
@@ -747,7 +810,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KNODE_GROUP_LABEL_LAYOUT__LOCATION = KSHAPE_LAYOUT__LOCATION;
+	int KNODE_LABEL_LAYOUT__LOCATION = KSHAPE_LAYOUT__LOCATION;
 
 	/**
 	 * The feature id for the '<em><b>Size</b></em>' reference.
@@ -756,7 +819,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KNODE_GROUP_LABEL_LAYOUT__SIZE = KSHAPE_LAYOUT__SIZE;
+	int KNODE_LABEL_LAYOUT__SIZE = KSHAPE_LAYOUT__SIZE;
 
 	/**
 	 * The feature id for the '<em><b>Use Layout</b></em>' attribute.
@@ -765,7 +828,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KNODE_GROUP_LABEL_LAYOUT__USE_LAYOUT = KSHAPE_LAYOUT__USE_LAYOUT;
+	int KNODE_LABEL_LAYOUT__USE_LAYOUT = KSHAPE_LAYOUT__USE_LAYOUT;
 
 	/**
 	 * The feature id for the '<em><b>Label Placement</b></em>' attribute.
@@ -774,26 +837,26 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KNODE_GROUP_LABEL_LAYOUT__LABEL_PLACEMENT = KSHAPE_LAYOUT_FEATURE_COUNT + 0;
+	int KNODE_LABEL_LAYOUT__LABEL_PLACEMENT = KSHAPE_LAYOUT_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the '<em>KNode Group Label Layout</em>' class.
+	 * The number of structural features of the '<em>KNode Label Layout</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int KNODE_GROUP_LABEL_LAYOUT_FEATURE_COUNT = KSHAPE_LAYOUT_FEATURE_COUNT + 1;
+	int KNODE_LABEL_LAYOUT_FEATURE_COUNT = KSHAPE_LAYOUT_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.LAYOUTER_INFOImpl <em>LAYOUTER INFO</em>}' class.
+	 * The meta object id for the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KLayouterInfoImpl <em>KLayouter Info</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.LAYOUTER_INFOImpl
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getLAYOUTER_INFO()
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KLayouterInfoImpl
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getKLayouterInfo()
 	 * @generated
 	 */
-	int LAYOUTER_INFO = 14;
+	int KLAYOUTER_INFO = 14;
 
 	/**
 	 * The feature id for the '<em><b>Layouter Name</b></em>' attribute.
@@ -802,7 +865,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LAYOUTER_INFO__LAYOUTER_NAME = 0;
+	int KLAYOUTER_INFO__LAYOUTER_NAME = 0;
 
 	/**
 	 * The feature id for the '<em><b>Layout Type</b></em>' attribute.
@@ -811,7 +874,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LAYOUTER_INFO__LAYOUT_TYPE = 1;
+	int KLAYOUTER_INFO__LAYOUT_TYPE = 1;
 
 	/**
 	 * The feature id for the '<em><b>Layout Option</b></em>' attribute.
@@ -820,7 +883,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LAYOUTER_INFO__LAYOUT_OPTION = 2;
+	int KLAYOUTER_INFO__LAYOUT_OPTION = 2;
 
 	/**
 	 * The feature id for the '<em><b>Layouter Collection ID</b></em>' attribute.
@@ -829,26 +892,26 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LAYOUTER_INFO__LAYOUTER_COLLECTION_ID = 3;
+	int KLAYOUTER_INFO__LAYOUTER_COLLECTION_ID = 3;
 
 	/**
-	 * The number of structural features of the '<em>LAYOUTER INFO</em>' class.
+	 * The number of structural features of the '<em>KLayouter Info</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LAYOUTER_INFO_FEATURE_COUNT = 4;
+	int KLAYOUTER_INFO_FEATURE_COUNT = 4;
 
 	/**
-	 * The meta object id for the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KPortImpl <em>KPort</em>}' class.
+	 * The meta object id for the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KLayoutPortImpl <em>KLayout Port</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KPortImpl
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getKPort()
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KLayoutPortImpl
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getKLayoutPort()
 	 * @generated
 	 */
-	int KPORT = 15;
+	int KLAYOUT_PORT = 15;
 
 	/**
 	 * The feature id for the '<em><b>Layout</b></em>' reference.
@@ -857,7 +920,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KPORT__LAYOUT = 0;
+	int KLAYOUT_PORT__LAYOUT = 0;
 
 	/**
 	 * The feature id for the '<em><b>Label</b></em>' reference.
@@ -866,16 +929,16 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KPORT__LABEL = 1;
+	int KLAYOUT_PORT__LABEL = 1;
 
 	/**
-	 * The feature id for the '<em><b>Node Group</b></em>' reference.
+	 * The feature id for the '<em><b>Node</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int KPORT__NODE_GROUP = 2;
+	int KLAYOUT_PORT__NODE = 2;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -884,7 +947,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KPORT__TYPE = 3;
+	int KLAYOUT_PORT__TYPE = 3;
 
 	/**
 	 * The feature id for the '<em><b>Edges</b></em>' reference list.
@@ -893,16 +956,16 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KPORT__EDGES = 4;
+	int KLAYOUT_PORT__EDGES = 4;
 
 	/**
-	 * The number of structural features of the '<em>KPort</em>' class.
+	 * The number of structural features of the '<em>KLayout Port</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int KPORT_FEATURE_COUNT = 5;
+	int KLAYOUT_PORT_FEATURE_COUNT = 5;
 
 	/**
 	 * The meta object id for the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KPortLayoutImpl <em>KPort Layout</em>}' class.
@@ -1043,76 +1106,74 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	int KPORT_LABEL_LAYOUT_FEATURE_COUNT = KSHAPE_LAYOUT_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.EDGE_TYPE <em>EDGE TYPE</em>}' enum.
+	 * The meta object id for the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeType <em>KEdge Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.EDGE_TYPE
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getEDGE_TYPE()
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeType
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getKEdgeType()
 	 * @generated
 	 */
-	int EDGE_TYPE = 19;
+	int KEDGE_TYPE = 19;
 
 	/**
-	 * The meta object id for the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_TYPE <em>LAYOUT TYPE</em>}' enum.
+	 * The meta object id for the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutType <em>KLayout Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_TYPE
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getLAYOUT_TYPE()
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutType
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getKLayoutType()
 	 * @generated
 	 */
-	int LAYOUT_TYPE = 20;
+	int KLAYOUT_TYPE = 20;
 
 	/**
-	 * The meta object id for the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_OPTION <em>LAYOUT OPTION</em>}' enum.
+	 * The meta object id for the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutOption <em>KLayout Option</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_OPTION
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getLAYOUT_OPTION()
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutOption
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getKLayoutOption()
 	 * @generated
 	 */
-	int LAYOUT_OPTION = 21;
+	int KLAYOUT_OPTION = 21;
 
 	/**
-	 * The meta object id for the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.EDGE_LABEL_PLACEMENT <em>EDGE LABEL PLACEMENT</em>}' enum.
+	 * The meta object id for the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLabelPlacement <em>KEdge Label Placement</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.EDGE_LABEL_PLACEMENT
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getEDGE_LABEL_PLACEMENT()
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLabelPlacement
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getKEdgeLabelPlacement()
 	 * @generated
 	 */
-	int EDGE_LABEL_PLACEMENT = 22;
+	int KEDGE_LABEL_PLACEMENT = 22;
 
 	/**
-	 * The meta object id for the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.NODE_LABEL_PLACEMENT <em>NODE LABEL PLACEMENT</em>}' enum.
+	 * The meta object id for the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeLabelPlacement <em>KNode Label Placement</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.NODE_LABEL_PLACEMENT
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getNODE_LABEL_PLACEMENT()
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeLabelPlacement
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getKNodeLabelPlacement()
 	 * @generated
 	 */
-	int NODE_LABEL_PLACEMENT = 23;
-
+	int KNODE_LABEL_PLACEMENT = 23;
 
 	/**
-	 * The meta object id for the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.PORT_TYPE <em>PORT TYPE</em>}' enum.
+	 * The meta object id for the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPortType <em>KPort Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.PORT_TYPE
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getPORT_TYPE()
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPortType
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getKPortType()
 	 * @generated
 	 */
-	int PORT_TYPE = 24;
+	int KPORT_TYPE = 24;
 
 	/**
-	 * The meta object id for the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.PORT_PLACEMENT <em>PORT PLACEMENT</em>}' enum.
+	 * The meta object id for the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPortPlacement <em>KPort Placement</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.PORT_PLACEMENT
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getPORT_PLACEMENT()
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPortPlacement
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getKPortPlacement()
 	 * @generated
 	 */
-	int PORT_PLACEMENT = 25;
-
+	int KPORT_PLACEMENT = 25;
 
 	/**
 	 * Returns the meta object for class '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPoint <em>KPoint</em>}'.
@@ -1243,17 +1304,6 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	EClass getKLayoutGraph();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutGraph#getTopGroup <em>Top Group</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Top Group</em>'.
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutGraph#getTopGroup()
-	 * @see #getKLayoutGraph()
-	 * @generated
-	 */
-	EReference getKLayoutGraph_TopGroup();
-
-	/**
 	 * Returns the meta object for class '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KShapeLayout <em>KShape Layout</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1297,80 +1347,80 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	EAttribute getKShapeLayout_UseLayout();
 
 	/**
-	 * Returns the meta object for class '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdge <em>KEdge</em>}'.
+	 * Returns the meta object for class '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge <em>KLayout Edge</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>KEdge</em>'.
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdge
+	 * @return the meta object for class '<em>KLayout Edge</em>'.
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge
 	 * @generated
 	 */
-	EClass getKEdge();
+	EClass getKLayoutEdge();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdge#getSource <em>Source</em>}'.
+	 * Returns the meta object for the reference '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge#getSource <em>Source</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Source</em>'.
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdge#getSource()
-	 * @see #getKEdge()
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge#getSource()
+	 * @see #getKLayoutEdge()
 	 * @generated
 	 */
-	EReference getKEdge_Source();
+	EReference getKLayoutEdge_Source();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdge#getTarget <em>Target</em>}'.
+	 * Returns the meta object for the reference '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge#getTarget <em>Target</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Target</em>'.
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdge#getTarget()
-	 * @see #getKEdge()
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge#getTarget()
+	 * @see #getKLayoutEdge()
 	 * @generated
 	 */
-	EReference getKEdge_Target();
+	EReference getKLayoutEdge_Target();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdge#getLayout <em>Layout</em>}'.
+	 * Returns the meta object for the reference '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge#getLayout <em>Layout</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Layout</em>'.
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdge#getLayout()
-	 * @see #getKEdge()
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge#getLayout()
+	 * @see #getKLayoutEdge()
 	 * @generated
 	 */
-	EReference getKEdge_Layout();
+	EReference getKLayoutEdge_Layout();
 
 	/**
-	 * Returns the meta object for the reference list '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdge#getLabel <em>Label</em>}'.
+	 * Returns the meta object for the reference list '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge#getLabel <em>Label</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference list '<em>Label</em>'.
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdge#getLabel()
-	 * @see #getKEdge()
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge#getLabel()
+	 * @see #getKLayoutEdge()
 	 * @generated
 	 */
-	EReference getKEdge_Label();
+	EReference getKLayoutEdge_Label();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdge#getSourcePort <em>Source Port</em>}'.
+	 * Returns the meta object for the reference '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge#getSourcePort <em>Source Port</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Source Port</em>'.
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdge#getSourcePort()
-	 * @see #getKEdge()
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge#getSourcePort()
+	 * @see #getKLayoutEdge()
 	 * @generated
 	 */
-	EReference getKEdge_SourcePort();
+	EReference getKLayoutEdge_SourcePort();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdge#getTargetPort <em>Target Port</em>}'.
+	 * Returns the meta object for the reference '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge#getTargetPort <em>Target Port</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Target Port</em>'.
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdge#getTargetPort()
-	 * @see #getKEdge()
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge#getTargetPort()
+	 * @see #getKLayoutEdge()
 	 * @generated
 	 */
-	EReference getKEdge_TargetPort();
+	EReference getKLayoutEdge_TargetPort();
 
 	/**
 	 * Returns the meta object for class '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLayout <em>KEdge Layout</em>}'.
@@ -1438,156 +1488,156 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	EAttribute getKEdgeLayout_UseLayout();
 
 	/**
-	 * Returns the meta object for class '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup <em>KNode Group</em>}'.
+	 * Returns the meta object for class '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode <em>KLayout Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>KNode Group</em>'.
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup
+	 * @return the meta object for class '<em>KLayout Node</em>'.
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode
 	 * @generated
 	 */
-	EClass getKNodeGroup();
+	EClass getKLayoutNode();
 
 	/**
-	 * Returns the meta object for the reference list '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup#getSubNodeGroups <em>Sub Node Groups</em>}'.
+	 * Returns the meta object for the reference list '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode#getChildNodes <em>Child Nodes</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Sub Node Groups</em>'.
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup#getSubNodeGroups()
-	 * @see #getKNodeGroup()
+	 * @return the meta object for the reference list '<em>Child Nodes</em>'.
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode#getChildNodes()
+	 * @see #getKLayoutNode()
 	 * @generated
 	 */
-	EReference getKNodeGroup_SubNodeGroups();
+	EReference getKLayoutNode_ChildNodes();
 
 	/**
-	 * Returns the meta object for the reference list '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup#getOutgoingEdges <em>Outgoing Edges</em>}'.
+	 * Returns the meta object for the reference list '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode#getOutgoingEdges <em>Outgoing Edges</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference list '<em>Outgoing Edges</em>'.
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup#getOutgoingEdges()
-	 * @see #getKNodeGroup()
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode#getOutgoingEdges()
+	 * @see #getKLayoutNode()
 	 * @generated
 	 */
-	EReference getKNodeGroup_OutgoingEdges();
+	EReference getKLayoutNode_OutgoingEdges();
 
 	/**
-	 * Returns the meta object for the reference list '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup#getIncomingEdges <em>Incoming Edges</em>}'.
+	 * Returns the meta object for the reference list '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode#getIncomingEdges <em>Incoming Edges</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference list '<em>Incoming Edges</em>'.
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup#getIncomingEdges()
-	 * @see #getKNodeGroup()
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode#getIncomingEdges()
+	 * @see #getKLayoutNode()
 	 * @generated
 	 */
-	EReference getKNodeGroup_IncomingEdges();
+	EReference getKLayoutNode_IncomingEdges();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup#getParentGroup <em>Parent Group</em>}'.
+	 * Returns the meta object for the reference '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode#getParentNode <em>Parent Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Parent Group</em>'.
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup#getParentGroup()
-	 * @see #getKNodeGroup()
+	 * @return the meta object for the reference '<em>Parent Node</em>'.
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode#getParentNode()
+	 * @see #getKLayoutNode()
 	 * @generated
 	 */
-	EReference getKNodeGroup_ParentGroup();
+	EReference getKLayoutNode_ParentNode();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup#getLayout <em>Layout</em>}'.
+	 * Returns the meta object for the reference '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode#getLayout <em>Layout</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Layout</em>'.
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup#getLayout()
-	 * @see #getKNodeGroup()
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode#getLayout()
+	 * @see #getKLayoutNode()
 	 * @generated
 	 */
-	EReference getKNodeGroup_Layout();
+	EReference getKLayoutNode_Layout();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup#getLabel <em>Label</em>}'.
+	 * Returns the meta object for the reference '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode#getLabel <em>Label</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Label</em>'.
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup#getLabel()
-	 * @see #getKNodeGroup()
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode#getLabel()
+	 * @see #getKLayoutNode()
 	 * @generated
 	 */
-	EReference getKNodeGroup_Label();
+	EReference getKLayoutNode_Label();
 
 	/**
-	 * Returns the meta object for the attribute '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup#getIdString <em>Id String</em>}'.
+	 * Returns the meta object for the attribute '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode#getIdString <em>Id String</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Id String</em>'.
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup#getIdString()
-	 * @see #getKNodeGroup()
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode#getIdString()
+	 * @see #getKLayoutNode()
 	 * @generated
 	 */
-	EAttribute getKNodeGroup_IdString();
+	EAttribute getKLayoutNode_IdString();
 
 	/**
-	 * Returns the meta object for the reference list '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup#getPorts <em>Ports</em>}'.
+	 * Returns the meta object for the reference list '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode#getPorts <em>Ports</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference list '<em>Ports</em>'.
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup#getPorts()
-	 * @see #getKNodeGroup()
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode#getPorts()
+	 * @see #getKLayoutNode()
 	 * @generated
 	 */
-	EReference getKNodeGroup_Ports();
+	EReference getKLayoutNode_Ports();
 
 	/**
-	 * Returns the meta object for class '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroupLayout <em>KNode Group Layout</em>}'.
+	 * Returns the meta object for class '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeLayout <em>KNode Layout</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>KNode Group Layout</em>'.
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroupLayout
+	 * @return the meta object for class '<em>KNode Layout</em>'.
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeLayout
 	 * @generated
 	 */
-	EClass getKNodeGroupLayout();
+	EClass getKNodeLayout();
 
 	/**
-	 * Returns the meta object for the attribute '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroupLayout#getLayoutType <em>Layout Type</em>}'.
+	 * Returns the meta object for the attribute '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeLayout#getLayoutType <em>Layout Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Layout Type</em>'.
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroupLayout#getLayoutType()
-	 * @see #getKNodeGroupLayout()
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeLayout#getLayoutType()
+	 * @see #getKNodeLayout()
 	 * @generated
 	 */
-	EAttribute getKNodeGroupLayout_LayoutType();
+	EAttribute getKNodeLayout_LayoutType();
 
 	/**
-	 * Returns the meta object for the attribute list '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroupLayout#getLayoutOptions <em>Layout Options</em>}'.
+	 * Returns the meta object for the attribute list '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeLayout#getLayoutOptions <em>Layout Options</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute list '<em>Layout Options</em>'.
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroupLayout#getLayoutOptions()
-	 * @see #getKNodeGroupLayout()
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeLayout#getLayoutOptions()
+	 * @see #getKNodeLayout()
 	 * @generated
 	 */
-	EAttribute getKNodeGroupLayout_LayoutOptions();
+	EAttribute getKNodeLayout_LayoutOptions();
 
 	/**
-	 * Returns the meta object for the attribute '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroupLayout#getLayouterName <em>Layouter Name</em>}'.
+	 * Returns the meta object for the attribute '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeLayout#getLayouterName <em>Layouter Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Layouter Name</em>'.
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroupLayout#getLayouterName()
-	 * @see #getKNodeGroupLayout()
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeLayout#getLayouterName()
+	 * @see #getKNodeLayout()
 	 * @generated
 	 */
-	EAttribute getKNodeGroupLayout_LayouterName();
+	EAttribute getKNodeLayout_LayouterName();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroupLayout#getInsets <em>Insets</em>}'.
+	 * Returns the meta object for the reference '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeLayout#getInsets <em>Insets</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Insets</em>'.
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroupLayout#getInsets()
-	 * @see #getKNodeGroupLayout()
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeLayout#getInsets()
+	 * @see #getKNodeLayout()
 	 * @generated
 	 */
-	EReference getKNodeGroupLayout_Insets();
+	EReference getKNodeLayout_Insets();
 
 	/**
 	 * Returns the meta object for class '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLabel <em>KLabel</em>}'.
@@ -1653,165 +1703,165 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	EAttribute getKEdgeLabelLayout_LabelPlacement();
 
 	/**
-	 * Returns the meta object for class '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroupLabel <em>KNode Group Label</em>}'.
+	 * Returns the meta object for class '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeLabel <em>KNode Label</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>KNode Group Label</em>'.
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroupLabel
+	 * @return the meta object for class '<em>KNode Label</em>'.
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeLabel
 	 * @generated
 	 */
-	EClass getKNodeGroupLabel();
+	EClass getKNodeLabel();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroupLabel#getLabelLayout <em>Label Layout</em>}'.
+	 * Returns the meta object for the reference '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeLabel#getLabelLayout <em>Label Layout</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Label Layout</em>'.
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroupLabel#getLabelLayout()
-	 * @see #getKNodeGroupLabel()
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeLabel#getLabelLayout()
+	 * @see #getKNodeLabel()
 	 * @generated
 	 */
-	EReference getKNodeGroupLabel_LabelLayout();
+	EReference getKNodeLabel_LabelLayout();
 
 	/**
-	 * Returns the meta object for class '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroupLabelLayout <em>KNode Group Label Layout</em>}'.
+	 * Returns the meta object for class '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeLabelLayout <em>KNode Label Layout</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>KNode Group Label Layout</em>'.
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroupLabelLayout
+	 * @return the meta object for class '<em>KNode Label Layout</em>'.
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeLabelLayout
 	 * @generated
 	 */
-	EClass getKNodeGroupLabelLayout();
+	EClass getKNodeLabelLayout();
 
 	/**
-	 * Returns the meta object for the attribute '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroupLabelLayout#getLabelPlacement <em>Label Placement</em>}'.
+	 * Returns the meta object for the attribute '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeLabelLayout#getLabelPlacement <em>Label Placement</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Label Placement</em>'.
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroupLabelLayout#getLabelPlacement()
-	 * @see #getKNodeGroupLabelLayout()
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeLabelLayout#getLabelPlacement()
+	 * @see #getKNodeLabelLayout()
 	 * @generated
 	 */
-	EAttribute getKNodeGroupLabelLayout_LabelPlacement();
+	EAttribute getKNodeLabelLayout_LabelPlacement();
 
 	/**
-	 * Returns the meta object for class '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO <em>LAYOUTER INFO</em>}'.
+	 * Returns the meta object for class '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayouterInfo <em>KLayouter Info</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>LAYOUTER INFO</em>'.
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO
+	 * @return the meta object for class '<em>KLayouter Info</em>'.
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayouterInfo
 	 * @generated
 	 */
-	EClass getLAYOUTER_INFO();
+	EClass getKLayouterInfo();
 
 	/**
-	 * Returns the meta object for the attribute '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO#getLayouterName <em>Layouter Name</em>}'.
+	 * Returns the meta object for the attribute '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayouterInfo#getLayouterName <em>Layouter Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Layouter Name</em>'.
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO#getLayouterName()
-	 * @see #getLAYOUTER_INFO()
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayouterInfo#getLayouterName()
+	 * @see #getKLayouterInfo()
 	 * @generated
 	 */
-	EAttribute getLAYOUTER_INFO_LayouterName();
+	EAttribute getKLayouterInfo_LayouterName();
 
 	/**
-	 * Returns the meta object for the attribute '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO#getLayoutType <em>Layout Type</em>}'.
+	 * Returns the meta object for the attribute '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayouterInfo#getLayoutType <em>Layout Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Layout Type</em>'.
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO#getLayoutType()
-	 * @see #getLAYOUTER_INFO()
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayouterInfo#getLayoutType()
+	 * @see #getKLayouterInfo()
 	 * @generated
 	 */
-	EAttribute getLAYOUTER_INFO_LayoutType();
+	EAttribute getKLayouterInfo_LayoutType();
 
 	/**
-	 * Returns the meta object for the attribute '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO#getLayoutOption <em>Layout Option</em>}'.
+	 * Returns the meta object for the attribute '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayouterInfo#getLayoutOption <em>Layout Option</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Layout Option</em>'.
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO#getLayoutOption()
-	 * @see #getLAYOUTER_INFO()
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayouterInfo#getLayoutOption()
+	 * @see #getKLayouterInfo()
 	 * @generated
 	 */
-	EAttribute getLAYOUTER_INFO_LayoutOption();
+	EAttribute getKLayouterInfo_LayoutOption();
 
 	/**
-	 * Returns the meta object for the attribute '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO#getLayouterCollectionID <em>Layouter Collection ID</em>}'.
+	 * Returns the meta object for the attribute '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayouterInfo#getLayouterCollectionID <em>Layouter Collection ID</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Layouter Collection ID</em>'.
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO#getLayouterCollectionID()
-	 * @see #getLAYOUTER_INFO()
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayouterInfo#getLayouterCollectionID()
+	 * @see #getKLayouterInfo()
 	 * @generated
 	 */
-	EAttribute getLAYOUTER_INFO_LayouterCollectionID();
+	EAttribute getKLayouterInfo_LayouterCollectionID();
 
 	/**
-	 * Returns the meta object for class '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPort <em>KPort</em>}'.
+	 * Returns the meta object for class '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort <em>KLayout Port</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>KPort</em>'.
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPort
+	 * @return the meta object for class '<em>KLayout Port</em>'.
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort
 	 * @generated
 	 */
-	EClass getKPort();
+	EClass getKLayoutPort();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPort#getLayout <em>Layout</em>}'.
+	 * Returns the meta object for the reference '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort#getLayout <em>Layout</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Layout</em>'.
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPort#getLayout()
-	 * @see #getKPort()
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort#getLayout()
+	 * @see #getKLayoutPort()
 	 * @generated
 	 */
-	EReference getKPort_Layout();
+	EReference getKLayoutPort_Layout();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPort#getLabel <em>Label</em>}'.
+	 * Returns the meta object for the reference '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort#getLabel <em>Label</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Label</em>'.
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPort#getLabel()
-	 * @see #getKPort()
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort#getLabel()
+	 * @see #getKLayoutPort()
 	 * @generated
 	 */
-	EReference getKPort_Label();
+	EReference getKLayoutPort_Label();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPort#getNodeGroup <em>Node Group</em>}'.
+	 * Returns the meta object for the reference '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort#getNode <em>Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Node Group</em>'.
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPort#getNodeGroup()
-	 * @see #getKPort()
+	 * @return the meta object for the reference '<em>Node</em>'.
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort#getNode()
+	 * @see #getKLayoutPort()
 	 * @generated
 	 */
-	EReference getKPort_NodeGroup();
+	EReference getKLayoutPort_Node();
 
 	/**
-	 * Returns the meta object for the attribute '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPort#getType <em>Type</em>}'.
+	 * Returns the meta object for the attribute '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort#getType <em>Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Type</em>'.
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPort#getType()
-	 * @see #getKPort()
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort#getType()
+	 * @see #getKLayoutPort()
 	 * @generated
 	 */
-	EAttribute getKPort_Type();
+	EAttribute getKLayoutPort_Type();
 
 	/**
-	 * Returns the meta object for the reference list '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPort#getEdges <em>Edges</em>}'.
+	 * Returns the meta object for the reference list '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort#getEdges <em>Edges</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference list '<em>Edges</em>'.
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPort#getEdges()
-	 * @see #getKPort()
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort#getEdges()
+	 * @see #getKLayoutPort()
 	 * @generated
 	 */
-	EReference getKPort_Edges();
+	EReference getKLayoutPort_Edges();
 
 	/**
 	 * Returns the meta object for class '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPortLayout <em>KPort Layout</em>}'.
@@ -1866,74 +1916,74 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	EClass getKPortLabelLayout();
 
 	/**
-	 * Returns the meta object for enum '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.EDGE_TYPE <em>EDGE TYPE</em>}'.
+	 * Returns the meta object for enum '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeType <em>KEdge Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for enum '<em>EDGE TYPE</em>'.
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.EDGE_TYPE
+	 * @return the meta object for enum '<em>KEdge Type</em>'.
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeType
 	 * @generated
 	 */
-	EEnum getEDGE_TYPE();
+	EEnum getKEdgeType();
 
 	/**
-	 * Returns the meta object for enum '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_TYPE <em>LAYOUT TYPE</em>}'.
+	 * Returns the meta object for enum '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutType <em>KLayout Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for enum '<em>LAYOUT TYPE</em>'.
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_TYPE
+	 * @return the meta object for enum '<em>KLayout Type</em>'.
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutType
 	 * @generated
 	 */
-	EEnum getLAYOUT_TYPE();
+	EEnum getKLayoutType();
 
 	/**
-	 * Returns the meta object for enum '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_OPTION <em>LAYOUT OPTION</em>}'.
+	 * Returns the meta object for enum '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutOption <em>KLayout Option</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for enum '<em>LAYOUT OPTION</em>'.
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_OPTION
+	 * @return the meta object for enum '<em>KLayout Option</em>'.
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutOption
 	 * @generated
 	 */
-	EEnum getLAYOUT_OPTION();
+	EEnum getKLayoutOption();
 
 	/**
-	 * Returns the meta object for enum '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.EDGE_LABEL_PLACEMENT <em>EDGE LABEL PLACEMENT</em>}'.
+	 * Returns the meta object for enum '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLabelPlacement <em>KEdge Label Placement</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for enum '<em>EDGE LABEL PLACEMENT</em>'.
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.EDGE_LABEL_PLACEMENT
+	 * @return the meta object for enum '<em>KEdge Label Placement</em>'.
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLabelPlacement
 	 * @generated
 	 */
-	EEnum getEDGE_LABEL_PLACEMENT();
+	EEnum getKEdgeLabelPlacement();
 
 	/**
-	 * Returns the meta object for enum '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.NODE_LABEL_PLACEMENT <em>NODE LABEL PLACEMENT</em>}'.
+	 * Returns the meta object for enum '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeLabelPlacement <em>KNode Label Placement</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for enum '<em>NODE LABEL PLACEMENT</em>'.
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.NODE_LABEL_PLACEMENT
+	 * @return the meta object for enum '<em>KNode Label Placement</em>'.
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeLabelPlacement
 	 * @generated
 	 */
-	EEnum getNODE_LABEL_PLACEMENT();
+	EEnum getKNodeLabelPlacement();
 
 	/**
-	 * Returns the meta object for enum '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.PORT_TYPE <em>PORT TYPE</em>}'.
+	 * Returns the meta object for enum '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPortType <em>KPort Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for enum '<em>PORT TYPE</em>'.
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.PORT_TYPE
+	 * @return the meta object for enum '<em>KPort Type</em>'.
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPortType
 	 * @generated
 	 */
-	EEnum getPORT_TYPE();
+	EEnum getKPortType();
 
 	/**
-	 * Returns the meta object for enum '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.PORT_PLACEMENT <em>PORT PLACEMENT</em>}'.
+	 * Returns the meta object for enum '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPortPlacement <em>KPort Placement</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for enum '<em>PORT PLACEMENT</em>'.
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.PORT_PLACEMENT
+	 * @return the meta object for enum '<em>KPort Placement</em>'.
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPortPlacement
 	 * @generated
 	 */
-	EEnum getPORT_PLACEMENT();
+	EEnum getKPortPlacement();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -2062,14 +2112,6 @@ public interface KimlLayoutGraphPackage extends EPackage {
 		EClass KLAYOUT_GRAPH = eINSTANCE.getKLayoutGraph();
 
 		/**
-		 * The meta object literal for the '<em><b>Top Group</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference KLAYOUT_GRAPH__TOP_GROUP = eINSTANCE.getKLayoutGraph_TopGroup();
-
-		/**
 		 * The meta object literal for the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KShapeLayoutImpl <em>KShape Layout</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2104,14 +2146,14 @@ public interface KimlLayoutGraphPackage extends EPackage {
 		EAttribute KSHAPE_LAYOUT__USE_LAYOUT = eINSTANCE.getKShapeLayout_UseLayout();
 
 		/**
-		 * The meta object literal for the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KEdgeImpl <em>KEdge</em>}' class.
+		 * The meta object literal for the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KLayoutEdgeImpl <em>KLayout Edge</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KEdgeImpl
-		 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getKEdge()
+		 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KLayoutEdgeImpl
+		 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getKLayoutEdge()
 		 * @generated
 		 */
-		EClass KEDGE = eINSTANCE.getKEdge();
+		EClass KLAYOUT_EDGE = eINSTANCE.getKLayoutEdge();
 
 		/**
 		 * The meta object literal for the '<em><b>Source</b></em>' reference feature.
@@ -2119,7 +2161,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference KEDGE__SOURCE = eINSTANCE.getKEdge_Source();
+		EReference KLAYOUT_EDGE__SOURCE = eINSTANCE.getKLayoutEdge_Source();
 
 		/**
 		 * The meta object literal for the '<em><b>Target</b></em>' reference feature.
@@ -2127,7 +2169,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference KEDGE__TARGET = eINSTANCE.getKEdge_Target();
+		EReference KLAYOUT_EDGE__TARGET = eINSTANCE.getKLayoutEdge_Target();
 
 		/**
 		 * The meta object literal for the '<em><b>Layout</b></em>' reference feature.
@@ -2135,7 +2177,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference KEDGE__LAYOUT = eINSTANCE.getKEdge_Layout();
+		EReference KLAYOUT_EDGE__LAYOUT = eINSTANCE.getKLayoutEdge_Layout();
 
 		/**
 		 * The meta object literal for the '<em><b>Label</b></em>' reference list feature.
@@ -2143,7 +2185,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference KEDGE__LABEL = eINSTANCE.getKEdge_Label();
+		EReference KLAYOUT_EDGE__LABEL = eINSTANCE.getKLayoutEdge_Label();
 
 		/**
 		 * The meta object literal for the '<em><b>Source Port</b></em>' reference feature.
@@ -2151,7 +2193,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference KEDGE__SOURCE_PORT = eINSTANCE.getKEdge_SourcePort();
+		EReference KLAYOUT_EDGE__SOURCE_PORT = eINSTANCE.getKLayoutEdge_SourcePort();
 
 		/**
 		 * The meta object literal for the '<em><b>Target Port</b></em>' reference feature.
@@ -2159,7 +2201,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference KEDGE__TARGET_PORT = eINSTANCE.getKEdge_TargetPort();
+		EReference KLAYOUT_EDGE__TARGET_PORT = eINSTANCE.getKLayoutEdge_TargetPort();
 
 		/**
 		 * The meta object literal for the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KEdgeLayoutImpl <em>KEdge Layout</em>}' class.
@@ -2212,22 +2254,22 @@ public interface KimlLayoutGraphPackage extends EPackage {
 		EAttribute KEDGE_LAYOUT__USE_LAYOUT = eINSTANCE.getKEdgeLayout_UseLayout();
 
 		/**
-		 * The meta object literal for the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KNodeGroupImpl <em>KNode Group</em>}' class.
+		 * The meta object literal for the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KLayoutNodeImpl <em>KLayout Node</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KNodeGroupImpl
-		 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getKNodeGroup()
+		 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KLayoutNodeImpl
+		 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getKLayoutNode()
 		 * @generated
 		 */
-		EClass KNODE_GROUP = eINSTANCE.getKNodeGroup();
+		EClass KLAYOUT_NODE = eINSTANCE.getKLayoutNode();
 
 		/**
-		 * The meta object literal for the '<em><b>Sub Node Groups</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Child Nodes</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference KNODE_GROUP__SUB_NODE_GROUPS = eINSTANCE.getKNodeGroup_SubNodeGroups();
+		EReference KLAYOUT_NODE__CHILD_NODES = eINSTANCE.getKLayoutNode_ChildNodes();
 
 		/**
 		 * The meta object literal for the '<em><b>Outgoing Edges</b></em>' reference list feature.
@@ -2235,7 +2277,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference KNODE_GROUP__OUTGOING_EDGES = eINSTANCE.getKNodeGroup_OutgoingEdges();
+		EReference KLAYOUT_NODE__OUTGOING_EDGES = eINSTANCE.getKLayoutNode_OutgoingEdges();
 
 		/**
 		 * The meta object literal for the '<em><b>Incoming Edges</b></em>' reference list feature.
@@ -2243,15 +2285,15 @@ public interface KimlLayoutGraphPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference KNODE_GROUP__INCOMING_EDGES = eINSTANCE.getKNodeGroup_IncomingEdges();
+		EReference KLAYOUT_NODE__INCOMING_EDGES = eINSTANCE.getKLayoutNode_IncomingEdges();
 
 		/**
-		 * The meta object literal for the '<em><b>Parent Group</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Parent Node</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference KNODE_GROUP__PARENT_GROUP = eINSTANCE.getKNodeGroup_ParentGroup();
+		EReference KLAYOUT_NODE__PARENT_NODE = eINSTANCE.getKLayoutNode_ParentNode();
 
 		/**
 		 * The meta object literal for the '<em><b>Layout</b></em>' reference feature.
@@ -2259,7 +2301,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference KNODE_GROUP__LAYOUT = eINSTANCE.getKNodeGroup_Layout();
+		EReference KLAYOUT_NODE__LAYOUT = eINSTANCE.getKLayoutNode_Layout();
 
 		/**
 		 * The meta object literal for the '<em><b>Label</b></em>' reference feature.
@@ -2267,7 +2309,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference KNODE_GROUP__LABEL = eINSTANCE.getKNodeGroup_Label();
+		EReference KLAYOUT_NODE__LABEL = eINSTANCE.getKLayoutNode_Label();
 
 		/**
 		 * The meta object literal for the '<em><b>Id String</b></em>' attribute feature.
@@ -2275,7 +2317,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute KNODE_GROUP__ID_STRING = eINSTANCE.getKNodeGroup_IdString();
+		EAttribute KLAYOUT_NODE__ID_STRING = eINSTANCE.getKLayoutNode_IdString();
 
 		/**
 		 * The meta object literal for the '<em><b>Ports</b></em>' reference list feature.
@@ -2283,17 +2325,17 @@ public interface KimlLayoutGraphPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference KNODE_GROUP__PORTS = eINSTANCE.getKNodeGroup_Ports();
+		EReference KLAYOUT_NODE__PORTS = eINSTANCE.getKLayoutNode_Ports();
 
 		/**
-		 * The meta object literal for the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KNodeGroupLayoutImpl <em>KNode Group Layout</em>}' class.
+		 * The meta object literal for the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KNodeLayoutImpl <em>KNode Layout</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KNodeGroupLayoutImpl
-		 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getKNodeGroupLayout()
+		 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KNodeLayoutImpl
+		 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getKNodeLayout()
 		 * @generated
 		 */
-		EClass KNODE_GROUP_LAYOUT = eINSTANCE.getKNodeGroupLayout();
+		EClass KNODE_LAYOUT = eINSTANCE.getKNodeLayout();
 
 		/**
 		 * The meta object literal for the '<em><b>Layout Type</b></em>' attribute feature.
@@ -2301,7 +2343,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute KNODE_GROUP_LAYOUT__LAYOUT_TYPE = eINSTANCE.getKNodeGroupLayout_LayoutType();
+		EAttribute KNODE_LAYOUT__LAYOUT_TYPE = eINSTANCE.getKNodeLayout_LayoutType();
 
 		/**
 		 * The meta object literal for the '<em><b>Layout Options</b></em>' attribute list feature.
@@ -2309,7 +2351,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute KNODE_GROUP_LAYOUT__LAYOUT_OPTIONS = eINSTANCE.getKNodeGroupLayout_LayoutOptions();
+		EAttribute KNODE_LAYOUT__LAYOUT_OPTIONS = eINSTANCE.getKNodeLayout_LayoutOptions();
 
 		/**
 		 * The meta object literal for the '<em><b>Layouter Name</b></em>' attribute feature.
@@ -2317,7 +2359,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute KNODE_GROUP_LAYOUT__LAYOUTER_NAME = eINSTANCE.getKNodeGroupLayout_LayouterName();
+		EAttribute KNODE_LAYOUT__LAYOUTER_NAME = eINSTANCE.getKNodeLayout_LayouterName();
 
 		/**
 		 * The meta object literal for the '<em><b>Insets</b></em>' reference feature.
@@ -2325,7 +2367,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference KNODE_GROUP_LAYOUT__INSETS = eINSTANCE.getKNodeGroupLayout_Insets();
+		EReference KNODE_LAYOUT__INSETS = eINSTANCE.getKNodeLayout_Insets();
 
 		/**
 		 * The meta object literal for the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KLabelImpl <em>KLabel</em>}' class.
@@ -2382,14 +2424,14 @@ public interface KimlLayoutGraphPackage extends EPackage {
 		EAttribute KEDGE_LABEL_LAYOUT__LABEL_PLACEMENT = eINSTANCE.getKEdgeLabelLayout_LabelPlacement();
 
 		/**
-		 * The meta object literal for the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KNodeGroupLabelImpl <em>KNode Group Label</em>}' class.
+		 * The meta object literal for the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KNodeLabelImpl <em>KNode Label</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KNodeGroupLabelImpl
-		 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getKNodeGroupLabel()
+		 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KNodeLabelImpl
+		 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getKNodeLabel()
 		 * @generated
 		 */
-		EClass KNODE_GROUP_LABEL = eINSTANCE.getKNodeGroupLabel();
+		EClass KNODE_LABEL = eINSTANCE.getKNodeLabel();
 
 		/**
 		 * The meta object literal for the '<em><b>Label Layout</b></em>' reference feature.
@@ -2397,17 +2439,17 @@ public interface KimlLayoutGraphPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference KNODE_GROUP_LABEL__LABEL_LAYOUT = eINSTANCE.getKNodeGroupLabel_LabelLayout();
+		EReference KNODE_LABEL__LABEL_LAYOUT = eINSTANCE.getKNodeLabel_LabelLayout();
 
 		/**
-		 * The meta object literal for the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KNodeGroupLabelLayoutImpl <em>KNode Group Label Layout</em>}' class.
+		 * The meta object literal for the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KNodeLabelLayoutImpl <em>KNode Label Layout</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KNodeGroupLabelLayoutImpl
-		 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getKNodeGroupLabelLayout()
+		 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KNodeLabelLayoutImpl
+		 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getKNodeLabelLayout()
 		 * @generated
 		 */
-		EClass KNODE_GROUP_LABEL_LAYOUT = eINSTANCE.getKNodeGroupLabelLayout();
+		EClass KNODE_LABEL_LAYOUT = eINSTANCE.getKNodeLabelLayout();
 
 		/**
 		 * The meta object literal for the '<em><b>Label Placement</b></em>' attribute feature.
@@ -2415,17 +2457,17 @@ public interface KimlLayoutGraphPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute KNODE_GROUP_LABEL_LAYOUT__LABEL_PLACEMENT = eINSTANCE.getKNodeGroupLabelLayout_LabelPlacement();
+		EAttribute KNODE_LABEL_LAYOUT__LABEL_PLACEMENT = eINSTANCE.getKNodeLabelLayout_LabelPlacement();
 
 		/**
-		 * The meta object literal for the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.LAYOUTER_INFOImpl <em>LAYOUTER INFO</em>}' class.
+		 * The meta object literal for the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KLayouterInfoImpl <em>KLayouter Info</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.LAYOUTER_INFOImpl
-		 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getLAYOUTER_INFO()
+		 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KLayouterInfoImpl
+		 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getKLayouterInfo()
 		 * @generated
 		 */
-		EClass LAYOUTER_INFO = eINSTANCE.getLAYOUTER_INFO();
+		EClass KLAYOUTER_INFO = eINSTANCE.getKLayouterInfo();
 
 		/**
 		 * The meta object literal for the '<em><b>Layouter Name</b></em>' attribute feature.
@@ -2433,7 +2475,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute LAYOUTER_INFO__LAYOUTER_NAME = eINSTANCE.getLAYOUTER_INFO_LayouterName();
+		EAttribute KLAYOUTER_INFO__LAYOUTER_NAME = eINSTANCE.getKLayouterInfo_LayouterName();
 
 		/**
 		 * The meta object literal for the '<em><b>Layout Type</b></em>' attribute feature.
@@ -2441,7 +2483,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute LAYOUTER_INFO__LAYOUT_TYPE = eINSTANCE.getLAYOUTER_INFO_LayoutType();
+		EAttribute KLAYOUTER_INFO__LAYOUT_TYPE = eINSTANCE.getKLayouterInfo_LayoutType();
 
 		/**
 		 * The meta object literal for the '<em><b>Layout Option</b></em>' attribute feature.
@@ -2449,7 +2491,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute LAYOUTER_INFO__LAYOUT_OPTION = eINSTANCE.getLAYOUTER_INFO_LayoutOption();
+		EAttribute KLAYOUTER_INFO__LAYOUT_OPTION = eINSTANCE.getKLayouterInfo_LayoutOption();
 
 		/**
 		 * The meta object literal for the '<em><b>Layouter Collection ID</b></em>' attribute feature.
@@ -2457,17 +2499,17 @@ public interface KimlLayoutGraphPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute LAYOUTER_INFO__LAYOUTER_COLLECTION_ID = eINSTANCE.getLAYOUTER_INFO_LayouterCollectionID();
+		EAttribute KLAYOUTER_INFO__LAYOUTER_COLLECTION_ID = eINSTANCE.getKLayouterInfo_LayouterCollectionID();
 
 		/**
-		 * The meta object literal for the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KPortImpl <em>KPort</em>}' class.
+		 * The meta object literal for the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KLayoutPortImpl <em>KLayout Port</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KPortImpl
-		 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getKPort()
+		 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KLayoutPortImpl
+		 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getKLayoutPort()
 		 * @generated
 		 */
-		EClass KPORT = eINSTANCE.getKPort();
+		EClass KLAYOUT_PORT = eINSTANCE.getKLayoutPort();
 
 		/**
 		 * The meta object literal for the '<em><b>Layout</b></em>' reference feature.
@@ -2475,7 +2517,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference KPORT__LAYOUT = eINSTANCE.getKPort_Layout();
+		EReference KLAYOUT_PORT__LAYOUT = eINSTANCE.getKLayoutPort_Layout();
 
 		/**
 		 * The meta object literal for the '<em><b>Label</b></em>' reference feature.
@@ -2483,15 +2525,15 @@ public interface KimlLayoutGraphPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference KPORT__LABEL = eINSTANCE.getKPort_Label();
+		EReference KLAYOUT_PORT__LABEL = eINSTANCE.getKLayoutPort_Label();
 
 		/**
-		 * The meta object literal for the '<em><b>Node Group</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Node</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference KPORT__NODE_GROUP = eINSTANCE.getKPort_NodeGroup();
+		EReference KLAYOUT_PORT__NODE = eINSTANCE.getKLayoutPort_Node();
 
 		/**
 		 * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
@@ -2499,7 +2541,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute KPORT__TYPE = eINSTANCE.getKPort_Type();
+		EAttribute KLAYOUT_PORT__TYPE = eINSTANCE.getKLayoutPort_Type();
 
 		/**
 		 * The meta object literal for the '<em><b>Edges</b></em>' reference list feature.
@@ -2507,7 +2549,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference KPORT__EDGES = eINSTANCE.getKPort_Edges();
+		EReference KLAYOUT_PORT__EDGES = eINSTANCE.getKLayoutPort_Edges();
 
 		/**
 		 * The meta object literal for the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KPortLayoutImpl <em>KPort Layout</em>}' class.
@@ -2556,74 +2598,74 @@ public interface KimlLayoutGraphPackage extends EPackage {
 		EClass KPORT_LABEL_LAYOUT = eINSTANCE.getKPortLabelLayout();
 
 		/**
-		 * The meta object literal for the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.EDGE_TYPE <em>EDGE TYPE</em>}' enum.
+		 * The meta object literal for the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeType <em>KEdge Type</em>}' enum.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.EDGE_TYPE
-		 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getEDGE_TYPE()
+		 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeType
+		 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getKEdgeType()
 		 * @generated
 		 */
-		EEnum EDGE_TYPE = eINSTANCE.getEDGE_TYPE();
+		EEnum KEDGE_TYPE = eINSTANCE.getKEdgeType();
 
 		/**
-		 * The meta object literal for the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_TYPE <em>LAYOUT TYPE</em>}' enum.
+		 * The meta object literal for the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutType <em>KLayout Type</em>}' enum.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_TYPE
-		 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getLAYOUT_TYPE()
+		 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutType
+		 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getKLayoutType()
 		 * @generated
 		 */
-		EEnum LAYOUT_TYPE = eINSTANCE.getLAYOUT_TYPE();
+		EEnum KLAYOUT_TYPE = eINSTANCE.getKLayoutType();
 
 		/**
-		 * The meta object literal for the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_OPTION <em>LAYOUT OPTION</em>}' enum.
+		 * The meta object literal for the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutOption <em>KLayout Option</em>}' enum.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_OPTION
-		 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getLAYOUT_OPTION()
+		 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutOption
+		 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getKLayoutOption()
 		 * @generated
 		 */
-		EEnum LAYOUT_OPTION = eINSTANCE.getLAYOUT_OPTION();
+		EEnum KLAYOUT_OPTION = eINSTANCE.getKLayoutOption();
 
 		/**
-		 * The meta object literal for the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.EDGE_LABEL_PLACEMENT <em>EDGE LABEL PLACEMENT</em>}' enum.
+		 * The meta object literal for the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLabelPlacement <em>KEdge Label Placement</em>}' enum.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.EDGE_LABEL_PLACEMENT
-		 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getEDGE_LABEL_PLACEMENT()
+		 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLabelPlacement
+		 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getKEdgeLabelPlacement()
 		 * @generated
 		 */
-		EEnum EDGE_LABEL_PLACEMENT = eINSTANCE.getEDGE_LABEL_PLACEMENT();
+		EEnum KEDGE_LABEL_PLACEMENT = eINSTANCE.getKEdgeLabelPlacement();
 
 		/**
-		 * The meta object literal for the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.NODE_LABEL_PLACEMENT <em>NODE LABEL PLACEMENT</em>}' enum.
+		 * The meta object literal for the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeLabelPlacement <em>KNode Label Placement</em>}' enum.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.NODE_LABEL_PLACEMENT
-		 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getNODE_LABEL_PLACEMENT()
+		 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeLabelPlacement
+		 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getKNodeLabelPlacement()
 		 * @generated
 		 */
-		EEnum NODE_LABEL_PLACEMENT = eINSTANCE.getNODE_LABEL_PLACEMENT();
+		EEnum KNODE_LABEL_PLACEMENT = eINSTANCE.getKNodeLabelPlacement();
 
 		/**
-		 * The meta object literal for the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.PORT_TYPE <em>PORT TYPE</em>}' enum.
+		 * The meta object literal for the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPortType <em>KPort Type</em>}' enum.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.PORT_TYPE
-		 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getPORT_TYPE()
+		 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPortType
+		 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getKPortType()
 		 * @generated
 		 */
-		EEnum PORT_TYPE = eINSTANCE.getPORT_TYPE();
+		EEnum KPORT_TYPE = eINSTANCE.getKPortType();
 
 		/**
-		 * The meta object literal for the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.PORT_PLACEMENT <em>PORT PLACEMENT</em>}' enum.
+		 * The meta object literal for the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPortPlacement <em>KPort Placement</em>}' enum.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.PORT_PLACEMENT
-		 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getPORT_PLACEMENT()
+		 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPortPlacement
+		 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KimlLayoutGraphPackageImpl#getKPortPlacement()
 		 * @generated
 		 */
-		EEnum PORT_PLACEMENT = eINSTANCE.getPORT_PLACEMENT();
+		EEnum KPORT_PLACEMENT = eINSTANCE.getKPortPlacement();
 
 	}
 

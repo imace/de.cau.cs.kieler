@@ -4,8 +4,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPort;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.PORT_TYPE;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPortType;
 import de.cau.cs.kieler.klodd.core.algorithms.AbstractAlgorithm;
 import de.cau.cs.kieler.klodd.core.util.LayoutGraphs;
 import de.cau.cs.kieler.klodd.hierarchical.modules.ICrossingReducer;
@@ -49,10 +49,10 @@ public class LayerSweepCrossingReducer extends AbstractAlgorithm implements
 	public void reduceCrossings(LayeredGraph layeredGraph) {
 		if (layeredGraph.areExternalPortsFixed()) {
 			// sort input and output ports by their relative position
-			List<KPort> inputPorts = new LinkedList<KPort>();
-			List<KPort> outputPorts = new LinkedList<KPort>();
-			for (KPort port : layeredGraph.getParentGroup().getPorts()) {
-				if (port.getType() == PORT_TYPE.INPUT)
+			List<KLayoutPort> inputPorts = new LinkedList<KLayoutPort>();
+			List<KLayoutPort> outputPorts = new LinkedList<KLayoutPort>();
+			for (KLayoutPort port : layeredGraph.getParentGroup().getPorts()) {
+				if (port.getType() == KPortType.INPUT)
 					inputPorts.add(port);
 				else
 					outputPorts.add(port);
@@ -61,10 +61,10 @@ public class LayerSweepCrossingReducer extends AbstractAlgorithm implements
 			// apply ports ordering to the layer ranking
 			int firstLayer = 0, lastLayer = layeredGraph.getLayers().size() - 1;
 			if (!inputPorts.isEmpty()) {
-				KPort[] sortedInputPorts = LayoutGraphs.sortPortsByPosition(inputPorts,
+				KLayoutPort[] sortedInputPorts = LayoutGraphs.sortPortsByPosition(inputPorts,
 						layeredGraph.getLayoutDirection(), false);
 				int rank = 0;
-				for (KPort port : sortedInputPorts) {
+				for (KLayoutPort port : sortedInputPorts) {
 					LayerElement element = layeredGraph.getLayerElement(port);
 					element.rank = rank;
 					rank += element.getRankWidth();
@@ -77,10 +77,10 @@ public class LayerSweepCrossingReducer extends AbstractAlgorithm implements
 				layeredGraph.getLayers().get(0).calcElemRanks();
 			}
 			if (!outputPorts.isEmpty()) {
-				KPort[] sortedOutputPorts = LayoutGraphs.sortPortsByPosition(outputPorts,
+				KLayoutPort[] sortedOutputPorts = LayoutGraphs.sortPortsByPosition(outputPorts,
 						layeredGraph.getLayoutDirection(), true);
 				int rank = 0;
-				for (KPort port : sortedOutputPorts) {
+				for (KLayoutPort port : sortedOutputPorts) {
 					LayerElement element = layeredGraph.getLayerElement(port);
 					element.rank = rank;
 					rank += element.getRankWidth();

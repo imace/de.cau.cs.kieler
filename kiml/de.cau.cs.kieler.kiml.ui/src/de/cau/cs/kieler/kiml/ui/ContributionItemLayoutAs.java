@@ -21,8 +21,8 @@ import org.eclipse.ui.actions.CompoundContributionItem;
 import org.eclipse.ui.menus.CommandContributionItem;
 import org.eclipse.ui.menus.CommandContributionItemParameter;
 
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_TYPE;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayouterInfo;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutType;
 import de.cau.cs.kieler.kiml.layout.services.LayoutProviders;
 
 
@@ -49,13 +49,13 @@ public class ContributionItemLayoutAs extends CompoundContributionItem {
 
 		Map<String, String> parameters = new HashMap<String, String>();
 		ArrayList<IContributionItem> finalItems = new ArrayList<IContributionItem>();
-		Map<LAYOUT_TYPE, MenuManager> managers = new HashMap<LAYOUT_TYPE, MenuManager>();
+		Map<KLayoutType, MenuManager> managers = new HashMap<KLayoutType, MenuManager>();
 
 		/*
 		 * first, get all layout providers, build up the menu entry and order
 		 * the menu items according to the layout type, the layouter provides
 		 */
-		for (LAYOUTER_INFO layoutProviderInfo : LayoutProviders.getInstance()
+		for (KLayouterInfo layoutProviderInfo : LayoutProviders.getInstance()
 				.getEnabledLayouterInfos()) {
 
 			/* contruct one command for the layouter */
@@ -72,7 +72,7 @@ public class ContributionItemLayoutAs extends CompoundContributionItem {
 
 			/*
 			 * add the command to the right menu manager, that is a submenu
-			 * entry with the LAYOUT_TYPE literal as label. Make shure before
+			 * entry with the KLayoutType literal as label. Make shure before
 			 * that this menu manager exists...
 			 */
 			if (!managers.containsKey(layoutProviderInfo.getLayoutType())) {

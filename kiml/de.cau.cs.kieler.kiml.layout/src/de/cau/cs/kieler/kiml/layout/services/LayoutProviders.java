@@ -22,10 +22,10 @@ import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.ui.statushandlers.StatusManager;
 
 import de.cau.cs.kieler.kiml.layout.KimlLayoutPlugin;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphFactory;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_TYPE;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayouterInfo;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutType;
 import de.cau.cs.kieler.kiml.layout.util.KimlLayoutPreferenceConstants;
 
 
@@ -118,11 +118,11 @@ public final class LayoutProviders {
 
 	/**
 	 * Returns the best fitting {@link KimlAbstractLayoutProvider} for the
-	 * provided KNodeGroup. The layout provider is evaluated as follows:
+	 * provided KLayoutNode. The layout provider is evaluated as follows:
 	 * <ol>
-	 * <li>If Layouter Name attribute of KNodeGroup is fitting a certain layout
+	 * <li>If Layouter Name attribute of KLayoutNode is fitting a certain layout
 	 * provider, return this layout provider</li>
-	 * <li>If Layout Type attribute of KNodeGroup is fitting a certain layout
+	 * <li>If Layout Type attribute of KLayoutNode is fitting a certain layout
 	 * provider, return this layout provider</li>
 	 * <li>If not fitting so far, return the default layout provider. This can
 	 * be adjusted in the preference page.</li>
@@ -131,17 +131,17 @@ public final class LayoutProviders {
 	 * a NullPointerException.</li>
 	 * </ol>
 	 * 
-	 * @param nodeGroup
-	 *            The KNodeGroup for which the fitting layout provider should be
+	 * @param layoutNode
+	 *            The KLayoutNode for which the fitting layout provider should be
 	 *            returned
-	 * @return The best fitting LayoutProvider for the provided KNodeGroup
+	 * @return The best fitting LayoutProvider for the provided KLayoutNode
 	 * @see KimlNullLayoutProvider
 	 */
-	public KimlAbstractLayoutProvider getLayoutProvider(KNodeGroup nodeGroup) {
+	public KimlAbstractLayoutProvider getLayoutProvider(KLayoutNode layoutNode) {
 		KimlAbstractLayoutProvider layoutProvider = null;
 
 		/* if layouter name is fitting, use it */
-		String layouterName = nodeGroup.getLayout().getLayouterName();
+		String layouterName = layoutNode.getLayout().getLayouterName();
 		if (layoutProviderMap.containsKey(layouterName)) {
 			layoutProvider = layoutProviderMap.get(layouterName);
 			if (layoutProvider.isEnabled())
@@ -150,9 +150,9 @@ public final class LayoutProviders {
 
 		/* if no proper name, try same layout type */
 		else {
-			for (LAYOUTER_INFO layouterInfo : getEnabledLayouterInfos()) {
+			for (KLayouterInfo layouterInfo : getEnabledLayouterInfos()) {
 				if (layouterInfo.getLayoutType().equals(
-						nodeGroup.getLayout().getLayoutType())) {
+						layoutNode.getLayout().getLayoutType())) {
 					layoutProvider = layoutProviderMap.get(layouterInfo
 							.getLayouterName());
 					if (layoutProvider.isEnabled())
@@ -200,21 +200,21 @@ public final class LayoutProviders {
 	}
 
 	/**
-	 * Returns a non null, possibly empty list of {@link LAYOUT_TYPE}s,
+	 * Returns a non null, possibly empty list of {@link KLayoutType}s,
 	 * indicating all the LAYOUT_TYPEs all currently enabled layout providers
 	 * can handle.
 	 * 
 	 * @return An possibly empty list of LAYOUT_TYPEs the currently enabled
 	 *         layouters can handle
 	 */
-	public ArrayList<LAYOUT_TYPE> getEnabledLayoutTypes() {
+	public ArrayList<KLayoutType> getEnabledLayoutTypes() {
 
-		ArrayList<LAYOUT_TYPE> enabledLayoutTypes = new ArrayList<LAYOUT_TYPE>();
+		ArrayList<KLayoutType> enabledLayoutTypes = new ArrayList<KLayoutType>();
 
 		for (KimlAbstractLayoutProvider layoutProvider : layoutProviderMap
 				.values()) {
 			if (layoutProvider.isEnabled()) {
-				LAYOUT_TYPE type = layoutProvider.getLayouterInfo()
+				KLayoutType type = layoutProvider.getLayouterInfo()
 						.getLayoutType();
 				if (!enabledLayoutTypes.contains(type)) {
 					enabledLayoutTypes.add(type);
@@ -225,20 +225,20 @@ public final class LayoutProviders {
 	}
 
 	/**
-	 * Returns a non null, possibly empty list of {@link LAYOUTER_INFO}s for all
+	 * Returns a non null, possibly empty list of {@link KLayouterInfo}s for all
 	 * the enabled layout providers.
 	 * 
-	 * @return An possibly empty list of {@link LAYOUTER_INFO}s for all the
+	 * @return An possibly empty list of {@link KLayouterInfo}s for all the
 	 *         enabled layout providers
 	 */
-	public ArrayList<LAYOUTER_INFO> getEnabledLayouterInfos() {
+	public ArrayList<KLayouterInfo> getEnabledLayouterInfos() {
 
-		ArrayList<LAYOUTER_INFO> enabledLayouterInfos = new ArrayList<LAYOUTER_INFO>();
+		ArrayList<KLayouterInfo> enabledLayouterInfos = new ArrayList<KLayouterInfo>();
 
 		for (KimlAbstractLayoutProvider layoutProvider : layoutProviderMap
 				.values()) {
 			if (layoutProvider.isEnabled()) {
-				LAYOUTER_INFO info = layoutProvider.getLayouterInfo();
+				KLayouterInfo info = layoutProvider.getLayouterInfo();
 				if (!enabledLayouterInfos.contains(info)) {
 					enabledLayouterInfos.add(info);
 
@@ -249,21 +249,21 @@ public final class LayoutProviders {
 	}
 
 	/**
-	 * Returns the {@link LAYOUTER_INFO} for the given layout provider.
+	 * Returns the {@link KLayouterInfo} for the given layout provider.
 	 * 
-	 * @return The {@link LAYOUTER_INFO} for the layout provider, or the
-	 *         LAYOUTER_INFO filled with the default values if layout provider
+	 * @return The {@link KLayouterInfo} for the layout provider, or the
+	 *         KLayouterInfo filled with the default values if layout provider
 	 *         not found or not enabled.
 	 */
-	public LAYOUTER_INFO getLayouterInfoForLayouterName(
+	public KLayouterInfo getLayouterInfoForLayouterName(
 			String layouterProviderName) {
-		for (LAYOUTER_INFO layouterInfo : LayoutProviders.getInstance()
+		for (KLayouterInfo layouterInfo : LayoutProviders.getInstance()
 				.getEnabledLayouterInfos()) {
 			if (layouterInfo.getLayouterName().equals(layouterProviderName)) {
 				return layouterInfo;
 			}
 		}
-		return KimlLayoutGraphFactory.eINSTANCE.createLAYOUTER_INFO();
+		return KimlLayoutGraphFactory.eINSTANCE.createKLayouterInfo();
 	}
 
 	/**

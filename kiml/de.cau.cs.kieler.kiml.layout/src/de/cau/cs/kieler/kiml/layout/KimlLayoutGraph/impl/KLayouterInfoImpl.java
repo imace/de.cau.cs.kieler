@@ -7,9 +7,9 @@
 package de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl;
 
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_OPTION;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_TYPE;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayouterInfo;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutOption;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutType;
 
 import org.eclipse.emf.common.notify.Notification;
 
@@ -25,16 +25,16 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.LAYOUTER_INFOImpl#getLayouterName <em>Layouter Name</em>}</li>
- *   <li>{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.LAYOUTER_INFOImpl#getLayoutType <em>Layout Type</em>}</li>
- *   <li>{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.LAYOUTER_INFOImpl#getLayoutOption <em>Layout Option</em>}</li>
- *   <li>{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.LAYOUTER_INFOImpl#getLayouterCollectionID <em>Layouter Collection ID</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KLayouterInfoImpl#getLayouterName <em>Layouter Name</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KLayouterInfoImpl#getLayoutType <em>Layout Type</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KLayouterInfoImpl#getLayoutOption <em>Layout Option</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KLayouterInfoImpl#getLayouterCollectionID <em>Layouter Collection ID</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class LAYOUTER_INFOImpl extends EObjectImpl implements LAYOUTER_INFO {
+public class KLayouterInfoImpl extends EObjectImpl implements KLayouterInfo {
 	/**
 	 * The default value of the '{@link #getLayouterName() <em>Layouter Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -63,7 +63,7 @@ public class LAYOUTER_INFOImpl extends EObjectImpl implements LAYOUTER_INFO {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final LAYOUT_TYPE LAYOUT_TYPE_EDEFAULT = LAYOUT_TYPE.DEFAULT;
+	protected static final KLayoutType LAYOUT_TYPE_EDEFAULT = KLayoutType.DEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getLayoutType() <em>Layout Type</em>}' attribute.
@@ -73,7 +73,7 @@ public class LAYOUTER_INFOImpl extends EObjectImpl implements LAYOUTER_INFO {
 	 * @generated
 	 * @ordered
 	 */
-	protected LAYOUT_TYPE layoutType = LAYOUT_TYPE_EDEFAULT;
+	protected KLayoutType layoutType = LAYOUT_TYPE_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getLayoutOption() <em>Layout Option</em>}' attribute.
@@ -83,7 +83,7 @@ public class LAYOUTER_INFOImpl extends EObjectImpl implements LAYOUTER_INFO {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final LAYOUT_OPTION LAYOUT_OPTION_EDEFAULT = LAYOUT_OPTION.DEFAULT;
+	protected static final KLayoutOption LAYOUT_OPTION_EDEFAULT = KLayoutOption.DEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getLayoutOption() <em>Layout Option</em>}' attribute.
@@ -93,7 +93,7 @@ public class LAYOUTER_INFOImpl extends EObjectImpl implements LAYOUTER_INFO {
 	 * @generated
 	 * @ordered
 	 */
-	protected LAYOUT_OPTION layoutOption = LAYOUT_OPTION_EDEFAULT;
+	protected KLayoutOption layoutOption = LAYOUT_OPTION_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getLayouterCollectionID() <em>Layouter Collection ID</em>}' attribute.
@@ -120,7 +120,7 @@ public class LAYOUTER_INFOImpl extends EObjectImpl implements LAYOUTER_INFO {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected LAYOUTER_INFOImpl() {
+	protected KLayouterInfoImpl() {
 		super();
 	}
 
@@ -131,7 +131,7 @@ public class LAYOUTER_INFOImpl extends EObjectImpl implements LAYOUTER_INFO {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return KimlLayoutGraphPackage.Literals.LAYOUTER_INFO;
+		return KimlLayoutGraphPackage.Literals.KLAYOUTER_INFO;
 	}
 
 	/**
@@ -152,7 +152,7 @@ public class LAYOUTER_INFOImpl extends EObjectImpl implements LAYOUTER_INFO {
 		String oldLayouterName = layouterName;
 		layouterName = newLayouterName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.LAYOUTER_INFO__LAYOUTER_NAME, oldLayouterName, layouterName));
+			eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KLAYOUTER_INFO__LAYOUTER_NAME, oldLayouterName, layouterName));
 	}
 
 	/**
@@ -160,7 +160,7 @@ public class LAYOUTER_INFOImpl extends EObjectImpl implements LAYOUTER_INFO {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public LAYOUT_TYPE getLayoutType() {
+	public KLayoutType getLayoutType() {
 		return layoutType;
 	}
 
@@ -169,11 +169,11 @@ public class LAYOUTER_INFOImpl extends EObjectImpl implements LAYOUTER_INFO {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setLayoutType(LAYOUT_TYPE newLayoutType) {
-		LAYOUT_TYPE oldLayoutType = layoutType;
+	public void setLayoutType(KLayoutType newLayoutType) {
+		KLayoutType oldLayoutType = layoutType;
 		layoutType = newLayoutType == null ? LAYOUT_TYPE_EDEFAULT : newLayoutType;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.LAYOUTER_INFO__LAYOUT_TYPE, oldLayoutType, layoutType));
+			eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KLAYOUTER_INFO__LAYOUT_TYPE, oldLayoutType, layoutType));
 	}
 
 	/**
@@ -181,7 +181,7 @@ public class LAYOUTER_INFOImpl extends EObjectImpl implements LAYOUTER_INFO {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public LAYOUT_OPTION getLayoutOption() {
+	public KLayoutOption getLayoutOption() {
 		return layoutOption;
 	}
 
@@ -190,11 +190,11 @@ public class LAYOUTER_INFOImpl extends EObjectImpl implements LAYOUTER_INFO {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setLayoutOption(LAYOUT_OPTION newLayoutOption) {
-		LAYOUT_OPTION oldLayoutOption = layoutOption;
+	public void setLayoutOption(KLayoutOption newLayoutOption) {
+		KLayoutOption oldLayoutOption = layoutOption;
 		layoutOption = newLayoutOption == null ? LAYOUT_OPTION_EDEFAULT : newLayoutOption;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.LAYOUTER_INFO__LAYOUT_OPTION, oldLayoutOption, layoutOption));
+			eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KLAYOUTER_INFO__LAYOUT_OPTION, oldLayoutOption, layoutOption));
 	}
 
 	/**
@@ -215,7 +215,7 @@ public class LAYOUTER_INFOImpl extends EObjectImpl implements LAYOUTER_INFO {
 		String oldLayouterCollectionID = layouterCollectionID;
 		layouterCollectionID = newLayouterCollectionID;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.LAYOUTER_INFO__LAYOUTER_COLLECTION_ID, oldLayouterCollectionID, layouterCollectionID));
+			eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KLAYOUTER_INFO__LAYOUTER_COLLECTION_ID, oldLayouterCollectionID, layouterCollectionID));
 	}
 
 	/**
@@ -226,13 +226,13 @@ public class LAYOUTER_INFOImpl extends EObjectImpl implements LAYOUTER_INFO {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case KimlLayoutGraphPackage.LAYOUTER_INFO__LAYOUTER_NAME:
+			case KimlLayoutGraphPackage.KLAYOUTER_INFO__LAYOUTER_NAME:
 				return getLayouterName();
-			case KimlLayoutGraphPackage.LAYOUTER_INFO__LAYOUT_TYPE:
+			case KimlLayoutGraphPackage.KLAYOUTER_INFO__LAYOUT_TYPE:
 				return getLayoutType();
-			case KimlLayoutGraphPackage.LAYOUTER_INFO__LAYOUT_OPTION:
+			case KimlLayoutGraphPackage.KLAYOUTER_INFO__LAYOUT_OPTION:
 				return getLayoutOption();
-			case KimlLayoutGraphPackage.LAYOUTER_INFO__LAYOUTER_COLLECTION_ID:
+			case KimlLayoutGraphPackage.KLAYOUTER_INFO__LAYOUTER_COLLECTION_ID:
 				return getLayouterCollectionID();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -246,16 +246,16 @@ public class LAYOUTER_INFOImpl extends EObjectImpl implements LAYOUTER_INFO {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case KimlLayoutGraphPackage.LAYOUTER_INFO__LAYOUTER_NAME:
+			case KimlLayoutGraphPackage.KLAYOUTER_INFO__LAYOUTER_NAME:
 				setLayouterName((String)newValue);
 				return;
-			case KimlLayoutGraphPackage.LAYOUTER_INFO__LAYOUT_TYPE:
-				setLayoutType((LAYOUT_TYPE)newValue);
+			case KimlLayoutGraphPackage.KLAYOUTER_INFO__LAYOUT_TYPE:
+				setLayoutType((KLayoutType)newValue);
 				return;
-			case KimlLayoutGraphPackage.LAYOUTER_INFO__LAYOUT_OPTION:
-				setLayoutOption((LAYOUT_OPTION)newValue);
+			case KimlLayoutGraphPackage.KLAYOUTER_INFO__LAYOUT_OPTION:
+				setLayoutOption((KLayoutOption)newValue);
 				return;
-			case KimlLayoutGraphPackage.LAYOUTER_INFO__LAYOUTER_COLLECTION_ID:
+			case KimlLayoutGraphPackage.KLAYOUTER_INFO__LAYOUTER_COLLECTION_ID:
 				setLayouterCollectionID((String)newValue);
 				return;
 		}
@@ -270,16 +270,16 @@ public class LAYOUTER_INFOImpl extends EObjectImpl implements LAYOUTER_INFO {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case KimlLayoutGraphPackage.LAYOUTER_INFO__LAYOUTER_NAME:
+			case KimlLayoutGraphPackage.KLAYOUTER_INFO__LAYOUTER_NAME:
 				setLayouterName(LAYOUTER_NAME_EDEFAULT);
 				return;
-			case KimlLayoutGraphPackage.LAYOUTER_INFO__LAYOUT_TYPE:
+			case KimlLayoutGraphPackage.KLAYOUTER_INFO__LAYOUT_TYPE:
 				setLayoutType(LAYOUT_TYPE_EDEFAULT);
 				return;
-			case KimlLayoutGraphPackage.LAYOUTER_INFO__LAYOUT_OPTION:
+			case KimlLayoutGraphPackage.KLAYOUTER_INFO__LAYOUT_OPTION:
 				setLayoutOption(LAYOUT_OPTION_EDEFAULT);
 				return;
-			case KimlLayoutGraphPackage.LAYOUTER_INFO__LAYOUTER_COLLECTION_ID:
+			case KimlLayoutGraphPackage.KLAYOUTER_INFO__LAYOUTER_COLLECTION_ID:
 				setLayouterCollectionID(LAYOUTER_COLLECTION_ID_EDEFAULT);
 				return;
 		}
@@ -294,13 +294,13 @@ public class LAYOUTER_INFOImpl extends EObjectImpl implements LAYOUTER_INFO {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case KimlLayoutGraphPackage.LAYOUTER_INFO__LAYOUTER_NAME:
+			case KimlLayoutGraphPackage.KLAYOUTER_INFO__LAYOUTER_NAME:
 				return LAYOUTER_NAME_EDEFAULT == null ? layouterName != null : !LAYOUTER_NAME_EDEFAULT.equals(layouterName);
-			case KimlLayoutGraphPackage.LAYOUTER_INFO__LAYOUT_TYPE:
+			case KimlLayoutGraphPackage.KLAYOUTER_INFO__LAYOUT_TYPE:
 				return layoutType != LAYOUT_TYPE_EDEFAULT;
-			case KimlLayoutGraphPackage.LAYOUTER_INFO__LAYOUT_OPTION:
+			case KimlLayoutGraphPackage.KLAYOUTER_INFO__LAYOUT_OPTION:
 				return layoutOption != LAYOUT_OPTION_EDEFAULT;
-			case KimlLayoutGraphPackage.LAYOUTER_INFO__LAYOUTER_COLLECTION_ID:
+			case KimlLayoutGraphPackage.KLAYOUTER_INFO__LAYOUTER_COLLECTION_ID:
 				return LAYOUTER_COLLECTION_ID_EDEFAULT == null ? layouterCollectionID != null : !LAYOUTER_COLLECTION_ID_EDEFAULT.equals(layouterCollectionID);
 		}
 		return super.eIsSet(featureID);
@@ -328,4 +328,4 @@ public class LAYOUTER_INFOImpl extends EObjectImpl implements LAYOUTER_INFO {
 		return result.toString();
 	}
 
-} //LAYOUTER_INFOImpl
+} //KLayouterInfoImpl

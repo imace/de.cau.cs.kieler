@@ -12,7 +12,7 @@ public class AdvancedEntity extends SimpleNode {
 	/**
 	 * Initializes the entity.
 	 * 
-	 * @param realObject reference to the corresponding node group in the layout graph
+	 * @param realObject reference to the corresponding layout node in the layout graph
 	 * @param x current horizontal position
 	 * @param y current vertical position
 	 * @param width current width

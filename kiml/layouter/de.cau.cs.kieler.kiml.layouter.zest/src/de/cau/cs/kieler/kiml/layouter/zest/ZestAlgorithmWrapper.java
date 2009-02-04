@@ -32,8 +32,8 @@ public class ZestAlgorithmWrapper {
 	// layout algorithm used internally
 	private LayoutAlgorithm layoutAlgorithm;
 	
-	// mapping of node groups to layout entities
-	private Map<KNodeGroup, LayoutEntity> nodeGroup2EntityMap = new HashMap<KNodeGroup, LayoutEntity>();
+	// mapping of layout nodes to layout entities
+	private Map<KLayoutNode, LayoutEntity> layoutNode2EntityMap = new HashMap<KLayoutNode, LayoutEntity>();
 	// sum of the widths of all nodes
 	private float totalWidth = 0.0f;
 	// sum of the heights of all nodes
@@ -49,14 +49,14 @@ public class ZestAlgorithmWrapper {
 	}
 	
 	/**
-	 * Applies the predefined algorithm on the given node group.
+	 * Applies the predefined algorithm on the given layout node.
 	 * 
-	 * @param nodeGroup node group to be layouted
+	 * @param layoutNode layout node to be layouted
 	 */
-	public void doLayout(KNodeGroup nodeGroup) {
+	public void doLayout(KLayoutNode layoutNode) {
 		// build layout entities and relationships
-		LayoutEntity[] entities = buildEntities(nodeGroup);
-		LayoutRelationship[] relationships = buildRelationships(nodeGroup);
+		LayoutEntity[] entities = buildEntities(layoutNode);
+		LayoutRelationship[] relationships = buildRelationships(layoutNode);
 		
 		// compute preferred height and width of the graph
 		float scaleBase = Activator.getDefault().getPreferenceStore()
@@ -76,17 +76,17 @@ public class ZestAlgorithmWrapper {
 		}
 		
 		// transfer layout results to the original graph
-		transferLayoutResult(nodeGroup, entities, relationships);
+		transferLayoutResult(layoutNode, entities, relationships);
 	}
 	
 	/**
-	 * Builds a list of entities of a parent node group.
+	 * Builds a list of entities of a parent layout node.
 	 * 
-	 * @param parentGroup parent node group
-	 * @return entities in that node group
+	 * @param parentNode parent layout node
+	 * @return entities in that layout node
 	 */
-	private LayoutEntity[] buildEntities(KNodeGroup parentGroup) {
-		for (KNodeGroup child : parentGroup.getSubNodeGroups()) {
+	private LayoutEntity[] buildEntities(KLayoutNode parentNode) {
+		for (KLayoutNode child : parentNode.getChildNodes()) {
 			float x = child.getLayout().getLocation().getX();
 			float y = child.getLayout().getLocation().getY();
 			float width = child.getLayout().getSize().getWidth();
@@ -100,25 +100,25 @@ public class ZestAlgorithmWrapper {
 			entityConstraint.hasPreferredSize = true;
 			entityConstraint.hasPreferredLocation = false;
 			entity.populateLayoutConstraint(entityConstraint);
-			nodeGroup2EntityMap.put(child, entity);
+			layoutNode2EntityMap.put(child, entity);
 		}
-		return nodeGroup2EntityMap.values().toArray(new LayoutEntity[0]);
+		return layoutNode2EntityMap.values().toArray(new LayoutEntity[0]);
 	}
 	
 	/**
-	 * Builds a list of relationships of a parent node group.
+	 * Builds a list of relationships of a parent layout node.
 	 * 
-	 * @param parentGroup parent node group
-	 * @return relationships in that node group
+	 * @param parentNode parent layout node
+	 * @return relationships in that layout node
 	 */
-	private LayoutRelationship[] buildRelationships(KNodeGroup parentGroup) {
+	private LayoutRelationship[] buildRelationships(KLayoutNode parentNode) {
 		LinkedList<LayoutRelationship> edgeList = new LinkedList<LayoutRelationship>();
-		for (KNodeGroup sourceGroup : parentGroup.getSubNodeGroups()) {
-			for (KEdge edge : sourceGroup.getOutgoingEdges()) {
-				KNodeGroup targetGroup = edge.getTarget();
+		for (KLayoutNode sourceGroup : parentNode.getChildNodes()) {
+			for (KLayoutEdge edge : sourceGroup.getOutgoingEdges()) {
+				KLayoutNode targetGroup = edge.getTarget();
 				if (targetGroup != null) {
-					LayoutEntity sourceEntity = nodeGroup2EntityMap.get(sourceGroup);
-					LayoutEntity targetEntity = nodeGroup2EntityMap.get(targetGroup);
+					LayoutEntity sourceEntity = layoutNode2EntityMap.get(sourceGroup);
+					LayoutEntity targetEntity = layoutNode2EntityMap.get(targetGroup);
 					LayoutRelationship relationship = new AdvancedRelationship(edge, sourceEntity, targetEntity);
 					edgeList.add(relationship);
 				}
@@ -133,26 +133,26 @@ public class ZestAlgorithmWrapper {
 	 * @param entities list of layouted entities
 	 * @param relationships list of layouted relationships
 	 */
-	private void transferLayoutResult(KNodeGroup parentGroup,
+	private void transferLayoutResult(KLayoutNode parentNode,
 			LayoutEntity[] entities, LayoutRelationship[] relationships) {
 		float maxX = 0.0f, maxY = 0.0f;
 		
 		// transfer entities layouts
 		for (LayoutEntity entity : entities) {
-			KNodeGroup nodeGroup = (KNodeGroup)((AdvancedEntity)entity).getRealObject();
+			KLayoutNode layoutNode = (KLayoutNode)((AdvancedEntity)entity).getRealObject();
 			float x = (float)entity.getXInLayout();
 			float y = (float)entity.getYInLayout();
-			float width = nodeGroup.getLayout().getSize().getWidth();
-			float height = nodeGroup.getLayout().getSize().getHeight();
+			float width = layoutNode.getLayout().getSize().getWidth();
+			float height = layoutNode.getLayout().getSize().getHeight();
 			if (x + width > maxX) maxX = x + width;
 			if (y + height > maxY) maxY = y + height;
-			nodeGroup.getLayout().getLocation().setX(x);
-			nodeGroup.getLayout().getLocation().setY(y);
+			layoutNode.getLayout().getLocation().setX(x);
+			layoutNode.getLayout().getLocation().setY(y);
 		}
 		
 		// transfer relationships layouts
 		for (LayoutRelationship relationship : relationships) {
-			KEdge edge = (KEdge)((AdvancedRelationship)relationship).getRealObject();
+			KLayoutEdge edge = (KLayoutEdge)((AdvancedRelationship)relationship).getRealObject();
 			edge.getLayout().getGridPoints().clear();
 			for (LayoutBendPoint bendPoint : ((AdvancedRelationship)relationship).getBendPoints()) {
 				KPoint point = KimlLayoutGraphFactory.eINSTANCE.createKPoint();
@@ -167,10 +167,10 @@ public class ZestAlgorithmWrapper {
 		}
 		
 		// determine size of the parent group
-		KInsets insets = parentGroup.getLayout().getInsets();
-		parentGroup.getLayout().getSize().setWidth(maxX + insets.getLeft()
+		KInsets insets = parentNode.getLayout().getInsets();
+		parentNode.getLayout().getSize().setWidth(maxX + insets.getLeft()
 				+ insets.getRight() + SIZE_ADDITION);
-		parentGroup.getLayout().getSize().setHeight(maxY + insets.getTop()
+		parentNode.getLayout().getSize().setHeight(maxY + insets.getTop()
 				+ insets.getBottom() + SIZE_ADDITION);
 	}
 

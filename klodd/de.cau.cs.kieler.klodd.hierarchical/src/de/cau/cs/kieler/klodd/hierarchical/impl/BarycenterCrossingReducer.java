@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
 
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPort;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort;
 import de.cau.cs.kieler.klodd.core.algorithms.AbstractAlgorithm;
 import de.cau.cs.kieler.klodd.hierarchical.modules.ISingleLayerCrossingReducer;
 import de.cau.cs.kieler.klodd.hierarchical.structures.*;
@@ -35,13 +35,13 @@ public class BarycenterCrossingReducer extends AbstractAlgorithm implements
 			}
 			else {
 				// ports are not fixed, find an order for the ports
-				Map<KPort, List<Integer>> portRanks = element.getConnectionRanksByPort(forward);
-				Map<KPort, Double> abstractPortRanks = new HashMap<KPort, Double>();
-				List<KPort> ports = new LinkedList<KPort>(portRanks.keySet());
+				Map<KLayoutPort, List<Integer>> portRanks = element.getConnectionRanksByPort(forward);
+				Map<KLayoutPort, Double> abstractPortRanks = new HashMap<KLayoutPort, Double>();
+				List<KLayoutPort> ports = new LinkedList<KLayoutPort>(portRanks.keySet());
 				double sum = 0.0;
-				ListIterator<KPort> portsIter = ports.listIterator();
+				ListIterator<KLayoutPort> portsIter = ports.listIterator();
 				while (portsIter.hasNext()) {
-					KPort port = portsIter.next();
+					KLayoutPort port = portsIter.next();
 					List<Integer> rankList = portRanks.get(port);
 					double barycenter = calcBarycenter(rankList);
 					if (barycenter < 0.0) {
@@ -79,14 +79,14 @@ public class BarycenterCrossingReducer extends AbstractAlgorithm implements
 			}
 			else {
 				// ports are not fixed, find an order for the ports
-				Map<KPort, List<Integer>> forwardRanks = element.getConnectionRanksByPort(true);
-				Map<KPort, List<Integer>> backwardsRanks = element.getConnectionRanksByPort(false);
-				Map<KPort, Double> abstractPortRanks = new HashMap<KPort, Double>();
-				List<KPort> ports = new LinkedList<KPort>(forwardRanks.keySet());
+				Map<KLayoutPort, List<Integer>> forwardRanks = element.getConnectionRanksByPort(true);
+				Map<KLayoutPort, List<Integer>> backwardsRanks = element.getConnectionRanksByPort(false);
+				Map<KLayoutPort, Double> abstractPortRanks = new HashMap<KLayoutPort, Double>();
+				List<KLayoutPort> ports = new LinkedList<KLayoutPort>(forwardRanks.keySet());
 				double sum = 0.0;
-				ListIterator<KPort> portsIter = ports.listIterator();
+				ListIterator<KLayoutPort> portsIter = ports.listIterator();
 				while (portsIter.hasNext()) {
-					KPort port = portsIter.next();
+					KLayoutPort port = portsIter.next();
 					double barycenter = calcBarycenter(forwardRanks.get(port),
 							backwardsRanks.get(port));
 					if (barycenter < 0.0) {

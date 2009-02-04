@@ -23,58 +23,57 @@ public class LayoutGraphCloner {
 		if (layoutGraph == null)
 			return null;
 		else {
-			KLayoutGraph clone = KimlLayoutGraphFactory.eINSTANCE.createKLayoutGraph();
-			Map<KNodeGroup, KNodeGroup> nodeGroupMap = new HashMap<KNodeGroup, KNodeGroup>();
-			Map<KPort, KPort> portMap = new HashMap<KPort, KPort>();
-			Map<KEdge, KEdge> edgeMap = new HashMap<KEdge, KEdge>();
-			clone.setTopGroup(cloneNodeGroup(layoutGraph.getTopGroup(),
-					nodeGroupMap, portMap, edgeMap));
+			Map<KLayoutNode, KLayoutNode> nodeMap = new HashMap<KLayoutNode, KLayoutNode>();
+			Map<KLayoutPort, KLayoutPort> portMap = new HashMap<KLayoutPort, KLayoutPort>();
+			Map<KLayoutEdge, KLayoutEdge> edgeMap = new HashMap<KLayoutEdge, KLayoutEdge>();
+			KLayoutGraph clone = KimlLayoutUtil.layoutNode2LayoutGraph(
+					cloneLayoutNode(layoutGraph, nodeMap, portMap, edgeMap));
 			return clone;
 		}
 	}
 	
 	/**
-	 * Clones a node group.
+	 * Clones a layout node.
 	 * 
-	 * @param nodeGroup node group to clone
-	 * @param nodeGroupMap mapping of node groups to their clones
+	 * @param layoutNode layout node to clone
+	 * @param layoutNodeMap mapping of layout nodes to their clones
 	 * @param portMap mapping of ports to their clones
 	 * @param edgeMap mapping of edges to their clones
 	 * @return clone
 	 */
-	private static KNodeGroup cloneNodeGroup(KNodeGroup nodeGroup,
-			Map<KNodeGroup, KNodeGroup> nodeGroupMap, Map<KPort, KPort> portMap,
-			Map<KEdge, KEdge> edgeMap) {
-		if (nodeGroup == null)
+	private static KLayoutNode cloneLayoutNode(KLayoutNode layoutNode,
+			Map<KLayoutNode, KLayoutNode> layoutNodeMap, Map<KLayoutPort, KLayoutPort> portMap,
+			Map<KLayoutEdge, KLayoutEdge> edgeMap) {
+		if (layoutNode == null)
 			return null;
 		else {
-			KNodeGroup clone = KimlLayoutGraphFactory.eINSTANCE.createKNodeGroup();
-			nodeGroupMap.put(nodeGroup, clone);
-			clone.setIdString(new String(nodeGroup.getIdString()));
-			clone.setLabel(cloneNodeGroupLabel(nodeGroup.getLabel()));
-			clone.setLayout(cloneNodeGroupLayout(nodeGroup.getLayout()));
-			for (KPort port : nodeGroup.getPorts()) {
-				KPort portClone = clonePort(port);
+			KLayoutNode clone = KimlLayoutGraphFactory.eINSTANCE.createKLayoutNode();
+			layoutNodeMap.put(layoutNode, clone);
+			clone.setIdString(new String(layoutNode.getIdString()));
+			clone.setLabel(cloneLayoutNodeLabel(layoutNode.getLabel()));
+			clone.setLayout(cloneLayoutNodeLayout(layoutNode.getLayout()));
+			for (KLayoutPort port : layoutNode.getPorts()) {
+				KLayoutPort portClone = clonePort(port);
 				portMap.put(port, portClone);
 				clone.getPorts().add(portClone);
 			}
-			for (KNodeGroup subNodeGroup : nodeGroup.getSubNodeGroups()) {
-				clone.getSubNodeGroups().add(cloneNodeGroup(subNodeGroup,
-						nodeGroupMap, portMap, edgeMap));
+			for (KLayoutNode sublayoutNode : layoutNode.getChildNodes()) {
+				clone.getChildNodes().add(cloneLayoutNode(sublayoutNode,
+						layoutNodeMap, portMap, edgeMap));
 			}
-			for (KEdge edge : nodeGroup.getIncomingEdges()) {
+			for (KLayoutEdge edge : layoutNode.getIncomingEdges()) {
 				if (!edgeMap.containsKey(edge)
 						&& (edge.getSource() == null
-						|| nodeGroupMap.containsKey(edge.getSource()))) {
-					KEdge edgeClone = cloneEdge(edge, nodeGroupMap, portMap);
+						|| layoutNodeMap.containsKey(edge.getSource()))) {
+					KLayoutEdge edgeClone = cloneEdge(edge, layoutNodeMap, portMap);
 					edgeMap.put(edge, edgeClone);
 				}
 			}
-			for (KEdge edge : nodeGroup.getOutgoingEdges()) {
+			for (KLayoutEdge edge : layoutNode.getOutgoingEdges()) {
 				if (!edgeMap.containsKey(edge)
 						&& (edge.getTarget() == null
-						|| nodeGroupMap.containsKey(edge.getTarget()))) {
-					KEdge edgeClone = cloneEdge(edge, nodeGroupMap, portMap);
+						|| layoutNodeMap.containsKey(edge.getTarget()))) {
+					KLayoutEdge edgeClone = cloneEdge(edge, layoutNodeMap, portMap);
 					edgeMap.put(edge, edgeClone);
 				}
 			}
@@ -83,37 +82,37 @@ public class LayoutGraphCloner {
 	}
 	
 	/**
-	 * Clones a node group label.
+	 * Clones a layout node label.
 	 * 
-	 * @param nodeGroupLabel node group label to be cloned
+	 * @param layoutNodeLabel layout node label to be cloned
 	 * @return clone
 	 */
-	private static KNodeGroupLabel cloneNodeGroupLabel(KNodeGroupLabel nodeGroupLabel) {
-		if (nodeGroupLabel == null)
+	private static KNodeLabel cloneLayoutNodeLabel(KNodeLabel layoutNodeLabel) {
+		if (layoutNodeLabel == null)
 			return null;
 		else {
-			KNodeGroupLabel clone = KimlLayoutGraphFactory.eINSTANCE.createKNodeGroupLabel();
-			clone.setLabelLayout(cloneNodeGroupLabelLayout(nodeGroupLabel.getLabelLayout()));
-			clone.setText(new String(nodeGroupLabel.getText()));
+			KNodeLabel clone = KimlLayoutGraphFactory.eINSTANCE.createKNodeLabel();
+			clone.setLabelLayout(cloneLayoutNodeLabelLayout(layoutNodeLabel.getLabelLayout()));
+			clone.setText(new String(layoutNodeLabel.getText()));
 			return clone;
 		}
 	}
 	
 	/**
-	 * Clones a node group label layout.
+	 * Clones a layout node label layout.
 	 * 
-	 * @param nodeGroupLabelLayout node group label layout to be cloned
+	 * @param layoutNodeLabelLayout layout node label layout to be cloned
 	 * @return clone
 	 */
-	private static KNodeGroupLabelLayout cloneNodeGroupLabelLayout(KNodeGroupLabelLayout nodeGroupLabelLayout) {
-		if (nodeGroupLabelLayout == null)
+	private static KNodeLabelLayout cloneLayoutNodeLabelLayout(KNodeLabelLayout layoutNodeLabelLayout) {
+		if (layoutNodeLabelLayout == null)
 			return null;
 		else {
-			KNodeGroupLabelLayout clone = KimlLayoutGraphFactory.eINSTANCE.createKNodeGroupLabelLayout();
-			clone.setLabelPlacement(nodeGroupLabelLayout.getLabelPlacement());
-			clone.setLocation(clonePoint(nodeGroupLabelLayout.getLocation()));
-			clone.setSize(cloneDimension(nodeGroupLabelLayout.getSize()));
-			clone.setUseLayout(nodeGroupLabelLayout.isUseLayout());
+			KNodeLabelLayout clone = KimlLayoutGraphFactory.eINSTANCE.createKNodeLabelLayout();
+			clone.setLabelPlacement(layoutNodeLabelLayout.getLabelPlacement());
+			clone.setLocation(clonePoint(layoutNodeLabelLayout.getLocation()));
+			clone.setSize(cloneDimension(layoutNodeLabelLayout.getSize()));
+			clone.setUseLayout(layoutNodeLabelLayout.isUseLayout());
 			return clone;
 		}
 	}
@@ -153,23 +152,23 @@ public class LayoutGraphCloner {
 	}
 	
 	/**
-	 * Clones a node group layout.
+	 * Clones a layout node layout.
 	 * 
-	 * @param nodeGroupLayout node group layout to be cloned
+	 * @param layoutNodeLayout layout node layout to be cloned
 	 * @return clone
 	 */
-	private static KNodeGroupLayout cloneNodeGroupLayout(KNodeGroupLayout nodeGroupLayout) {
-		if (nodeGroupLayout == null)
+	private static KNodeLayout cloneLayoutNodeLayout(KNodeLayout layoutNodeLayout) {
+		if (layoutNodeLayout == null)
 			return null;
 		else {
-			KNodeGroupLayout clone = KimlLayoutGraphFactory.eINSTANCE.createKNodeGroupLayout();
-			clone.setInsets(cloneInsets(nodeGroupLayout.getInsets()));
-			clone.setLayouterName(nodeGroupLayout.getLayouterName());
-			clone.setLayoutType(nodeGroupLayout.getLayoutType());
-			clone.setLocation(clonePoint(nodeGroupLayout.getLocation()));
-			clone.setSize(cloneDimension(nodeGroupLayout.getSize()));
-			clone.setUseLayout(nodeGroupLayout.isUseLayout());
-			clone.getLayoutOptions().addAll(nodeGroupLayout.getLayoutOptions());
+			KNodeLayout clone = KimlLayoutGraphFactory.eINSTANCE.createKNodeLayout();
+			clone.setInsets(cloneInsets(layoutNodeLayout.getInsets()));
+			clone.setLayouterName(layoutNodeLayout.getLayouterName());
+			clone.setLayoutType(layoutNodeLayout.getLayoutType());
+			clone.setLocation(clonePoint(layoutNodeLayout.getLocation()));
+			clone.setSize(cloneDimension(layoutNodeLayout.getSize()));
+			clone.setUseLayout(layoutNodeLayout.isUseLayout());
+			clone.getLayoutOptions().addAll(layoutNodeLayout.getLayoutOptions());
 			return clone;
 		}
 	}
@@ -199,11 +198,11 @@ public class LayoutGraphCloner {
 	 * @param port port to be cloned
 	 * @return clone
 	 */
-	private static KPort clonePort(KPort port) {
+	private static KLayoutPort clonePort(KLayoutPort port) {
 		if (port == null)
 			return null;
 		else {
-			KPort clone = KimlLayoutGraphFactory.eINSTANCE.createKPort();
+			KLayoutPort clone = KimlLayoutGraphFactory.eINSTANCE.createKLayoutPort();
 			clone.setLabel(clonePortLabel(port.getLabel()));
 			clone.setLayout(clonePortLayout(port.getLayout()));
 			clone.setType(port.getType());
@@ -269,27 +268,27 @@ public class LayoutGraphCloner {
 	 * Clones an edge.
 	 * 
 	 * @param edge edge to be cloned
-	 * @param nodeGroupMap mapping of node groups to their clones
+	 * @param layoutNodeMap mapping of layout nodes to their clones
 	 * @param portMap mapping of ports to their clones
 	 * @return clone
 	 */
-	private static KEdge cloneEdge(KEdge edge,
-			Map<KNodeGroup, KNodeGroup> nodeGroupMap, Map<KPort, KPort> portMap) {
+	private static KLayoutEdge cloneEdge(KLayoutEdge edge,
+			Map<KLayoutNode, KLayoutNode> layoutNodeMap, Map<KLayoutPort, KLayoutPort> portMap) {
 		if (edge == null)
 			return null;
 		else {
-			KEdge clone = KimlLayoutGraphFactory.eINSTANCE.createKEdge();
+			KLayoutEdge clone = KimlLayoutGraphFactory.eINSTANCE.createKLayoutEdge();
 			clone.setLayout(cloneEdgeLayout(edge.getLayout()));
 			for (KEdgeLabel edgeLabel : edge.getLabel()) {
 				clone.getLabel().add(cloneEdgeLabel(edgeLabel));
 			}
-			clone.setSource(nodeGroupMap.get(edge.getSource()));
-			clone.setTarget(nodeGroupMap.get(edge.getTarget()));
-			KPort sourcePort = portMap.get(edge.getSourcePort());
+			clone.setSource(layoutNodeMap.get(edge.getSource()));
+			clone.setTarget(layoutNodeMap.get(edge.getTarget()));
+			KLayoutPort sourcePort = portMap.get(edge.getSourcePort());
 			clone.setSourcePort(sourcePort);
 			if (sourcePort != null)
 				sourcePort.getEdges().add(clone);
-			KPort targetPort = portMap.get(edge.getTargetPort());
+			KLayoutPort targetPort = portMap.get(edge.getTargetPort());
 			clone.setTargetPort(targetPort);
 			if (targetPort != null)
 				targetPort.getEdges().add(clone);

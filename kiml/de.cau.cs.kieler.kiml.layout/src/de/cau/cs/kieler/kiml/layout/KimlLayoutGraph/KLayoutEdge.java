@@ -12,29 +12,29 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>KEdge</b></em>'.
+ * A representation of the model object '<em><b>KLayoutEdge</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdge#getSource <em>Source</em>}</li>
- *   <li>{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdge#getTarget <em>Target</em>}</li>
- *   <li>{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdge#getLayout <em>Layout</em>}</li>
- *   <li>{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdge#getLabel <em>Label</em>}</li>
- *   <li>{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdge#getSourcePort <em>Source Port</em>}</li>
- *   <li>{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdge#getTargetPort <em>Target Port</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge#getSource <em>Source</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge#getTarget <em>Target</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge#getLayout <em>Layout</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge#getLabel <em>Label</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge#getSourcePort <em>Source Port</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge#getTargetPort <em>Target Port</em>}</li>
  * </ul>
  * </p>
  *
- * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKEdge()
+ * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKLayoutEdge()
  * @model
  * @generated
  */
-public interface KEdge extends EObject {
+public interface KLayoutEdge extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Source</b></em>' reference.
-	 * It is bidirectional and its opposite is '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup#getOutgoingEdges <em>Outgoing Edges</em>}'.
+	 * It is bidirectional and its opposite is '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode#getOutgoingEdges <em>Outgoing Edges</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Source</em>' reference isn't clear,
@@ -42,27 +42,27 @@ public interface KEdge extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Source</em>' reference.
-	 * @see #setSource(KNodeGroup)
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKEdge_Source()
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup#getOutgoingEdges
+	 * @see #setSource(KLayoutNode)
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKLayoutEdge_Source()
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode#getOutgoingEdges
 	 * @model opposite="outgoingEdges" required="true"
 	 * @generated
 	 */
-	KNodeGroup getSource();
+	KLayoutNode getSource();
 
 	/**
-	 * Sets the value of the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdge#getSource <em>Source</em>}' reference.
+	 * Sets the value of the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge#getSource <em>Source</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Source</em>' reference.
 	 * @see #getSource()
 	 * @generated
 	 */
-	void setSource(KNodeGroup value);
+	void setSource(KLayoutNode value);
 
 	/**
 	 * Returns the value of the '<em><b>Target</b></em>' reference.
-	 * It is bidirectional and its opposite is '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup#getIncomingEdges <em>Incoming Edges</em>}'.
+	 * It is bidirectional and its opposite is '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode#getIncomingEdges <em>Incoming Edges</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Target</em>' reference isn't clear,
@@ -70,23 +70,23 @@ public interface KEdge extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Target</em>' reference.
-	 * @see #setTarget(KNodeGroup)
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKEdge_Target()
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup#getIncomingEdges
+	 * @see #setTarget(KLayoutNode)
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKLayoutEdge_Target()
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode#getIncomingEdges
 	 * @model opposite="incomingEdges" required="true"
 	 * @generated
 	 */
-	KNodeGroup getTarget();
+	KLayoutNode getTarget();
 
 	/**
-	 * Sets the value of the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdge#getTarget <em>Target</em>}' reference.
+	 * Sets the value of the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge#getTarget <em>Target</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Target</em>' reference.
 	 * @see #getTarget()
 	 * @generated
 	 */
-	void setTarget(KNodeGroup value);
+	void setTarget(KLayoutNode value);
 
 	/**
 	 * Returns the value of the '<em><b>Layout</b></em>' reference.
@@ -98,14 +98,14 @@ public interface KEdge extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Layout</em>' reference.
 	 * @see #setLayout(KEdgeLayout)
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKEdge_Layout()
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKLayoutEdge_Layout()
 	 * @model required="true"
 	 * @generated
 	 */
 	KEdgeLayout getLayout();
 
 	/**
-	 * Sets the value of the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdge#getLayout <em>Layout</em>}' reference.
+	 * Sets the value of the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge#getLayout <em>Layout</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Layout</em>' reference.
@@ -124,7 +124,7 @@ public interface KEdge extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Label</em>' reference list.
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKEdge_Label()
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKLayoutEdge_Label()
 	 * @model
 	 * @generated
 	 */
@@ -139,22 +139,22 @@ public interface KEdge extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Source Port</em>' reference.
-	 * @see #setSourcePort(KPort)
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKEdge_SourcePort()
+	 * @see #setSourcePort(KLayoutPort)
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKLayoutEdge_SourcePort()
 	 * @model
 	 * @generated
 	 */
-	KPort getSourcePort();
+	KLayoutPort getSourcePort();
 
 	/**
-	 * Sets the value of the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdge#getSourcePort <em>Source Port</em>}' reference.
+	 * Sets the value of the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge#getSourcePort <em>Source Port</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Source Port</em>' reference.
 	 * @see #getSourcePort()
 	 * @generated
 	 */
-	void setSourcePort(KPort value);
+	void setSourcePort(KLayoutPort value);
 
 	/**
 	 * Returns the value of the '<em><b>Target Port</b></em>' reference.
@@ -165,21 +165,21 @@ public interface KEdge extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Target Port</em>' reference.
-	 * @see #setTargetPort(KPort)
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKEdge_TargetPort()
+	 * @see #setTargetPort(KLayoutPort)
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKLayoutEdge_TargetPort()
 	 * @model
 	 * @generated
 	 */
-	KPort getTargetPort();
+	KLayoutPort getTargetPort();
 
 	/**
-	 * Sets the value of the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdge#getTargetPort <em>Target Port</em>}' reference.
+	 * Sets the value of the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge#getTargetPort <em>Target Port</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Target Port</em>' reference.
 	 * @see #getTargetPort()
 	 * @generated
 	 */
-	void setTargetPort(KPort value);
+	void setTargetPort(KLayoutPort value);
 
-} // KEdge
+} // KLayoutEdge

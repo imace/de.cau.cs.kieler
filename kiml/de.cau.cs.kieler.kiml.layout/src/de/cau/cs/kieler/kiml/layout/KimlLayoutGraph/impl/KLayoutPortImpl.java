@@ -6,13 +6,13 @@
  */
 package de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl;
 
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdge;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPort;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPortLabel;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPortLayout;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.PORT_TYPE;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPortType;
 
 import java.util.Collection;
 
@@ -31,22 +31,22 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>KPort</b></em>'.
+ * An implementation of the model object '<em><b>KLayoutPort</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KPortImpl#getLayout <em>Layout</em>}</li>
- *   <li>{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KPortImpl#getLabel <em>Label</em>}</li>
- *   <li>{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KPortImpl#getNodeGroup <em>Node Group</em>}</li>
- *   <li>{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KPortImpl#getType <em>Type</em>}</li>
- *   <li>{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KPortImpl#getEdges <em>Edges</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KLayoutPortImpl#getLayout <em>Layout</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KLayoutPortImpl#getLabel <em>Label</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KLayoutPortImpl#getNode <em>Node</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KLayoutPortImpl#getType <em>Type</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KLayoutPortImpl#getEdges <em>Edges</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class KPortImpl extends EObjectImpl implements KPort {
+public class KLayoutPortImpl extends EObjectImpl implements KLayoutPort {
 	/**
 	 * The cached value of the '{@link #getLayout() <em>Layout</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -68,14 +68,14 @@ public class KPortImpl extends EObjectImpl implements KPort {
 	protected KPortLabel label;
 
 	/**
-	 * The cached value of the '{@link #getNodeGroup() <em>Node Group</em>}' reference.
+	 * The cached value of the '{@link #getNode() <em>Node</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getNodeGroup()
+	 * @see #getNode()
 	 * @generated
 	 * @ordered
 	 */
-	protected KNodeGroup nodeGroup;
+	protected KLayoutNode node;
 
 	/**
 	 * The default value of the '{@link #getType() <em>Type</em>}' attribute.
@@ -85,7 +85,7 @@ public class KPortImpl extends EObjectImpl implements KPort {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final PORT_TYPE TYPE_EDEFAULT = PORT_TYPE.DEFAULT;
+	protected static final KPortType TYPE_EDEFAULT = KPortType.DEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getType() <em>Type</em>}' attribute.
@@ -95,7 +95,7 @@ public class KPortImpl extends EObjectImpl implements KPort {
 	 * @generated
 	 * @ordered
 	 */
-	protected PORT_TYPE type = TYPE_EDEFAULT;
+	protected KPortType type = TYPE_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getEdges() <em>Edges</em>}' reference list.
@@ -105,14 +105,14 @@ public class KPortImpl extends EObjectImpl implements KPort {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<KEdge> edges;
+	protected EList<KLayoutEdge> edges;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected KPortImpl() {
+	protected KLayoutPortImpl() {
 		super();
 	}
 
@@ -123,7 +123,7 @@ public class KPortImpl extends EObjectImpl implements KPort {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return KimlLayoutGraphPackage.Literals.KPORT;
+		return KimlLayoutGraphPackage.Literals.KLAYOUT_PORT;
 	}
 
 	/**
@@ -137,7 +137,7 @@ public class KPortImpl extends EObjectImpl implements KPort {
 			layout = (KPortLayout)eResolveProxy(oldLayout);
 			if (layout != oldLayout) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, KimlLayoutGraphPackage.KPORT__LAYOUT, oldLayout, layout));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, KimlLayoutGraphPackage.KLAYOUT_PORT__LAYOUT, oldLayout, layout));
 			}
 		}
 		return layout;
@@ -161,7 +161,7 @@ public class KPortImpl extends EObjectImpl implements KPort {
 		KPortLayout oldLayout = layout;
 		layout = newLayout;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KPORT__LAYOUT, oldLayout, layout));
+			eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KLAYOUT_PORT__LAYOUT, oldLayout, layout));
 	}
 
 	/**
@@ -175,7 +175,7 @@ public class KPortImpl extends EObjectImpl implements KPort {
 			label = (KPortLabel)eResolveProxy(oldLabel);
 			if (label != oldLabel) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, KimlLayoutGraphPackage.KPORT__LABEL, oldLabel, label));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, KimlLayoutGraphPackage.KLAYOUT_PORT__LABEL, oldLabel, label));
 			}
 		}
 		return label;
@@ -199,7 +199,7 @@ public class KPortImpl extends EObjectImpl implements KPort {
 		KPortLabel oldLabel = label;
 		label = newLabel;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KPORT__LABEL, oldLabel, label));
+			eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KLAYOUT_PORT__LABEL, oldLabel, label));
 	}
 
 	/**
@@ -207,16 +207,16 @@ public class KPortImpl extends EObjectImpl implements KPort {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public KNodeGroup getNodeGroup() {
-		if (nodeGroup != null && nodeGroup.eIsProxy()) {
-			InternalEObject oldNodeGroup = (InternalEObject)nodeGroup;
-			nodeGroup = (KNodeGroup)eResolveProxy(oldNodeGroup);
-			if (nodeGroup != oldNodeGroup) {
+	public KLayoutNode getNode() {
+		if (node != null && node.eIsProxy()) {
+			InternalEObject oldNode = (InternalEObject)node;
+			node = (KLayoutNode)eResolveProxy(oldNode);
+			if (node != oldNode) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, KimlLayoutGraphPackage.KPORT__NODE_GROUP, oldNodeGroup, nodeGroup));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, KimlLayoutGraphPackage.KLAYOUT_PORT__NODE, oldNode, node));
 			}
 		}
-		return nodeGroup;
+		return node;
 	}
 
 	/**
@@ -224,8 +224,8 @@ public class KPortImpl extends EObjectImpl implements KPort {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public KNodeGroup basicGetNodeGroup() {
-		return nodeGroup;
+	public KLayoutNode basicGetNode() {
+		return node;
 	}
 
 	/**
@@ -233,11 +233,11 @@ public class KPortImpl extends EObjectImpl implements KPort {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetNodeGroup(KNodeGroup newNodeGroup, NotificationChain msgs) {
-		KNodeGroup oldNodeGroup = nodeGroup;
-		nodeGroup = newNodeGroup;
+	public NotificationChain basicSetNode(KLayoutNode newNode, NotificationChain msgs) {
+		KLayoutNode oldNode = node;
+		node = newNode;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KPORT__NODE_GROUP, oldNodeGroup, newNodeGroup);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KLAYOUT_PORT__NODE, oldNode, newNode);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -248,18 +248,18 @@ public class KPortImpl extends EObjectImpl implements KPort {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setNodeGroup(KNodeGroup newNodeGroup) {
-		if (newNodeGroup != nodeGroup) {
+	public void setNode(KLayoutNode newNode) {
+		if (newNode != node) {
 			NotificationChain msgs = null;
-			if (nodeGroup != null)
-				msgs = ((InternalEObject)nodeGroup).eInverseRemove(this, KimlLayoutGraphPackage.KNODE_GROUP__PORTS, KNodeGroup.class, msgs);
-			if (newNodeGroup != null)
-				msgs = ((InternalEObject)newNodeGroup).eInverseAdd(this, KimlLayoutGraphPackage.KNODE_GROUP__PORTS, KNodeGroup.class, msgs);
-			msgs = basicSetNodeGroup(newNodeGroup, msgs);
+			if (node != null)
+				msgs = ((InternalEObject)node).eInverseRemove(this, KimlLayoutGraphPackage.KLAYOUT_NODE__PORTS, KLayoutNode.class, msgs);
+			if (newNode != null)
+				msgs = ((InternalEObject)newNode).eInverseAdd(this, KimlLayoutGraphPackage.KLAYOUT_NODE__PORTS, KLayoutNode.class, msgs);
+			msgs = basicSetNode(newNode, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KPORT__NODE_GROUP, newNodeGroup, newNodeGroup));
+			eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KLAYOUT_PORT__NODE, newNode, newNode));
 	}
 
 	/**
@@ -267,7 +267,7 @@ public class KPortImpl extends EObjectImpl implements KPort {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public PORT_TYPE getType() {
+	public KPortType getType() {
 		return type;
 	}
 
@@ -276,11 +276,11 @@ public class KPortImpl extends EObjectImpl implements KPort {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setType(PORT_TYPE newType) {
-		PORT_TYPE oldType = type;
+	public void setType(KPortType newType) {
+		KPortType oldType = type;
 		type = newType == null ? TYPE_EDEFAULT : newType;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KPORT__TYPE, oldType, type));
+			eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KLAYOUT_PORT__TYPE, oldType, type));
 	}
 
 	/**
@@ -288,9 +288,9 @@ public class KPortImpl extends EObjectImpl implements KPort {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<KEdge> getEdges() {
+	public EList<KLayoutEdge> getEdges() {
 		if (edges == null) {
-			edges = new EObjectResolvingEList<KEdge>(KEdge.class, this, KimlLayoutGraphPackage.KPORT__EDGES);
+			edges = new EObjectResolvingEList<KLayoutEdge>(KLayoutEdge.class, this, KimlLayoutGraphPackage.KLAYOUT_PORT__EDGES);
 		}
 		return edges;
 	}
@@ -303,10 +303,10 @@ public class KPortImpl extends EObjectImpl implements KPort {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case KimlLayoutGraphPackage.KPORT__NODE_GROUP:
-				if (nodeGroup != null)
-					msgs = ((InternalEObject)nodeGroup).eInverseRemove(this, KimlLayoutGraphPackage.KNODE_GROUP__PORTS, KNodeGroup.class, msgs);
-				return basicSetNodeGroup((KNodeGroup)otherEnd, msgs);
+			case KimlLayoutGraphPackage.KLAYOUT_PORT__NODE:
+				if (node != null)
+					msgs = ((InternalEObject)node).eInverseRemove(this, KimlLayoutGraphPackage.KLAYOUT_NODE__PORTS, KLayoutNode.class, msgs);
+				return basicSetNode((KLayoutNode)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -319,8 +319,8 @@ public class KPortImpl extends EObjectImpl implements KPort {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case KimlLayoutGraphPackage.KPORT__NODE_GROUP:
-				return basicSetNodeGroup(null, msgs);
+			case KimlLayoutGraphPackage.KLAYOUT_PORT__NODE:
+				return basicSetNode(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -333,18 +333,18 @@ public class KPortImpl extends EObjectImpl implements KPort {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case KimlLayoutGraphPackage.KPORT__LAYOUT:
+			case KimlLayoutGraphPackage.KLAYOUT_PORT__LAYOUT:
 				if (resolve) return getLayout();
 				return basicGetLayout();
-			case KimlLayoutGraphPackage.KPORT__LABEL:
+			case KimlLayoutGraphPackage.KLAYOUT_PORT__LABEL:
 				if (resolve) return getLabel();
 				return basicGetLabel();
-			case KimlLayoutGraphPackage.KPORT__NODE_GROUP:
-				if (resolve) return getNodeGroup();
-				return basicGetNodeGroup();
-			case KimlLayoutGraphPackage.KPORT__TYPE:
+			case KimlLayoutGraphPackage.KLAYOUT_PORT__NODE:
+				if (resolve) return getNode();
+				return basicGetNode();
+			case KimlLayoutGraphPackage.KLAYOUT_PORT__TYPE:
 				return getType();
-			case KimlLayoutGraphPackage.KPORT__EDGES:
+			case KimlLayoutGraphPackage.KLAYOUT_PORT__EDGES:
 				return getEdges();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -359,21 +359,21 @@ public class KPortImpl extends EObjectImpl implements KPort {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case KimlLayoutGraphPackage.KPORT__LAYOUT:
+			case KimlLayoutGraphPackage.KLAYOUT_PORT__LAYOUT:
 				setLayout((KPortLayout)newValue);
 				return;
-			case KimlLayoutGraphPackage.KPORT__LABEL:
+			case KimlLayoutGraphPackage.KLAYOUT_PORT__LABEL:
 				setLabel((KPortLabel)newValue);
 				return;
-			case KimlLayoutGraphPackage.KPORT__NODE_GROUP:
-				setNodeGroup((KNodeGroup)newValue);
+			case KimlLayoutGraphPackage.KLAYOUT_PORT__NODE:
+				setNode((KLayoutNode)newValue);
 				return;
-			case KimlLayoutGraphPackage.KPORT__TYPE:
-				setType((PORT_TYPE)newValue);
+			case KimlLayoutGraphPackage.KLAYOUT_PORT__TYPE:
+				setType((KPortType)newValue);
 				return;
-			case KimlLayoutGraphPackage.KPORT__EDGES:
+			case KimlLayoutGraphPackage.KLAYOUT_PORT__EDGES:
 				getEdges().clear();
-				getEdges().addAll((Collection<? extends KEdge>)newValue);
+				getEdges().addAll((Collection<? extends KLayoutEdge>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -387,19 +387,19 @@ public class KPortImpl extends EObjectImpl implements KPort {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case KimlLayoutGraphPackage.KPORT__LAYOUT:
+			case KimlLayoutGraphPackage.KLAYOUT_PORT__LAYOUT:
 				setLayout((KPortLayout)null);
 				return;
-			case KimlLayoutGraphPackage.KPORT__LABEL:
+			case KimlLayoutGraphPackage.KLAYOUT_PORT__LABEL:
 				setLabel((KPortLabel)null);
 				return;
-			case KimlLayoutGraphPackage.KPORT__NODE_GROUP:
-				setNodeGroup((KNodeGroup)null);
+			case KimlLayoutGraphPackage.KLAYOUT_PORT__NODE:
+				setNode((KLayoutNode)null);
 				return;
-			case KimlLayoutGraphPackage.KPORT__TYPE:
+			case KimlLayoutGraphPackage.KLAYOUT_PORT__TYPE:
 				setType(TYPE_EDEFAULT);
 				return;
-			case KimlLayoutGraphPackage.KPORT__EDGES:
+			case KimlLayoutGraphPackage.KLAYOUT_PORT__EDGES:
 				getEdges().clear();
 				return;
 		}
@@ -414,15 +414,15 @@ public class KPortImpl extends EObjectImpl implements KPort {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case KimlLayoutGraphPackage.KPORT__LAYOUT:
+			case KimlLayoutGraphPackage.KLAYOUT_PORT__LAYOUT:
 				return layout != null;
-			case KimlLayoutGraphPackage.KPORT__LABEL:
+			case KimlLayoutGraphPackage.KLAYOUT_PORT__LABEL:
 				return label != null;
-			case KimlLayoutGraphPackage.KPORT__NODE_GROUP:
-				return nodeGroup != null;
-			case KimlLayoutGraphPackage.KPORT__TYPE:
+			case KimlLayoutGraphPackage.KLAYOUT_PORT__NODE:
+				return node != null;
+			case KimlLayoutGraphPackage.KLAYOUT_PORT__TYPE:
 				return type != TYPE_EDEFAULT;
-			case KimlLayoutGraphPackage.KPORT__EDGES:
+			case KimlLayoutGraphPackage.KLAYOUT_PORT__EDGES:
 				return edges != null && !edges.isEmpty();
 		}
 		return super.eIsSet(featureID);
@@ -444,4 +444,4 @@ public class KPortImpl extends EObjectImpl implements KPort {
 		return result.toString();
 	}
 
-} //KPortImpl
+} //KLayoutPortImpl

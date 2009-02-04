@@ -9,18 +9,18 @@
  *******************************************************************************/
 package de.cau.cs.kieler.kiml.layouter.example;
 
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphFactory;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_OPTION;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_TYPE;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayouterInfo;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutOption;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutType;
 import de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayoutProvider;
 
 /**
  * Implements the Example layouter. As this class extends the
  * {@link KimlAbstractLayoutProvider}, the most relevant method is
  * <code>doLayout</code>, which performs the actual layout, that is annotating
- * the provided KNodeGroup with the Example layouter layout information.
+ * the provided KLayoutNode with the Example layouter layout information.
  * <p/>
  * This class acts as a wrapper to the {@link ExampleLayouter}. Is uses the
  * {@link ExampleLayouter} with the standard (and currently only) engine and
@@ -37,24 +37,24 @@ import de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayoutProvider;
 public class ExampleLayoutProvider extends KimlAbstractLayoutProvider {
 	
 	/* some Strings used here */
-	private final LAYOUT_TYPE LAYOUT_PROVIDER_LAYOUT_TYPE = LAYOUT_TYPE.OTHER;
-	private final LAYOUT_OPTION LAYOUT_PROVIDER_LAYOUT_OPTION = LAYOUT_OPTION.DEFAULT;
+	private final KLayoutType LAYOUT_PROVIDER_LAYOUT_TYPE = KLayoutType.OTHER;
+	private final KLayoutOption LAYOUT_PROVIDER_LAYOUT_OPTION = KLayoutOption.DEFAULT;
 
 	/* (non-Javadoc)
-	 * @see de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayoutProvider#doLayout(de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup)
+	 * @see de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayoutProvider#doLayout(de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode)
 	 */
-	public void doLayout(KNodeGroup nodeGroup) {
+	public void doLayout(KLayoutNode layoutNode) {
 		ExampleLayouter el = new ExampleLayouter();
-		el.visit(nodeGroup);
+		el.visit(layoutNode);
 	}
 
 	/* (non-Javadoc)
 	 * @see de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayoutProvider#getLayouterInfo()
 	 */
-	public final LAYOUTER_INFO getLayouterInfo() {
+	public final KLayouterInfo getLayouterInfo() {
 
-		LAYOUTER_INFO info = KimlLayoutGraphFactory.eINSTANCE
-				.createLAYOUTER_INFO();
+		KLayouterInfo info = KimlLayoutGraphFactory.eINSTANCE
+				.createKLayouterInfo();
 		info.setLayouterName(Activator.LAYOUT_PROVIDER_NAME);
 		info.setLayoutType(LAYOUT_PROVIDER_LAYOUT_TYPE);
 		info.setLayoutOption(LAYOUT_PROVIDER_LAYOUT_OPTION);

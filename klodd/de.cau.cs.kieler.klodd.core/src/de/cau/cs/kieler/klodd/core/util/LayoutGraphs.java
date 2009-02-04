@@ -5,13 +5,13 @@ import java.util.Comparator;
 import java.util.List;
 
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KDimension;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroupLabelLayout;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroupLayout;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeLabelLayout;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeLayout;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPoint;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPort;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_OPTION;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.PORT_PLACEMENT;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutOption;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPortPlacement;
 
 
 /**
@@ -34,43 +34,43 @@ public class LayoutGraphs {
 	 *     else for a backwards layer sweep
 	 * @return a sorted array
 	 */
-	public static KPort[] sortPortsByPosition(final List<KPort> ports,
-			LAYOUT_OPTION layoutDirection, boolean forward) {
-		KPort[] portArray = ports.toArray(new KPort[0]);
+	public static KLayoutPort[] sortPortsByPosition(final List<KLayoutPort> ports,
+			KLayoutOption layoutDirection, boolean forward) {
+		KLayoutPort[] portArray = ports.toArray(new KLayoutPort[0]);
 		if (forward) {
-			if (layoutDirection == LAYOUT_OPTION.VERTICAL) {
+			if (layoutDirection == KLayoutOption.VERTICAL) {
 				// sort for forward vertical layout
-				Arrays.sort(portArray, new Comparator<KPort>() {
-					public int compare(KPort port1, KPort port2) {
-						PORT_PLACEMENT port1Place = port1.getLayout().getPlacement();
-						PORT_PLACEMENT port2Place = port2.getLayout().getPlacement();
+				Arrays.sort(portArray, new Comparator<KLayoutPort>() {
+					public int compare(KLayoutPort port1, KLayoutPort port2) {
+						KPortPlacement port1Place = port1.getLayout().getPlacement();
+						KPortPlacement port2Place = port2.getLayout().getPlacement();
 						KPoint port1Loc = port1.getLayout().getLocation();
 						KPoint port2Loc = port2.getLayout().getLocation();
 						
 						switch (port1Place) {
 						case WEST:
-							if (port2Place == PORT_PLACEMENT.WEST)
+							if (port2Place == KPortPlacement.WEST)
 								return Float.compare(port1Loc.getY(), port2Loc.getY());
 							else return -1;
 						case SOUTH:
-							if (port2Place == PORT_PLACEMENT.WEST)
+							if (port2Place == KPortPlacement.WEST)
 								return 1;
-							if (port2Place == PORT_PLACEMENT.SOUTH)
+							if (port2Place == KPortPlacement.SOUTH)
 								return Float.compare(port1Loc.getX(), port2Loc.getX());
 							else return -1;
 						case EAST:
-							if (port2Place == PORT_PLACEMENT.WEST
-								|| port2Place == PORT_PLACEMENT.SOUTH)
+							if (port2Place == KPortPlacement.WEST
+								|| port2Place == KPortPlacement.SOUTH)
 								return 1;
-							if (port2Place == PORT_PLACEMENT.EAST)
+							if (port2Place == KPortPlacement.EAST)
 								return Float.compare(port2Loc.getY(), port1Loc.getY());
 							else return -1;
 						case NORTH:
-							if (port2Place == PORT_PLACEMENT.WEST
-								|| port2Place == PORT_PLACEMENT.SOUTH
-								|| port2Place == PORT_PLACEMENT.EAST)
+							if (port2Place == KPortPlacement.WEST
+								|| port2Place == KPortPlacement.SOUTH
+								|| port2Place == KPortPlacement.EAST)
 								return 1;
-							if (port2Place == PORT_PLACEMENT.NORTH)
+							if (port2Place == KPortPlacement.NORTH)
 								return Float.compare(port2Loc.getX(), port1Loc.getX());
 							else return -1;
 						default:
@@ -81,37 +81,37 @@ public class LayoutGraphs {
 			}
 			else {
 				// sort for forward horizontal layout
-				Arrays.sort(portArray, new Comparator<KPort>() {
-					public int compare(KPort port1, KPort port2) {
-						PORT_PLACEMENT port1Place = port1.getLayout().getPlacement();
-						PORT_PLACEMENT port2Place = port2.getLayout().getPlacement();
+				Arrays.sort(portArray, new Comparator<KLayoutPort>() {
+					public int compare(KLayoutPort port1, KLayoutPort port2) {
+						KPortPlacement port1Place = port1.getLayout().getPlacement();
+						KPortPlacement port2Place = port2.getLayout().getPlacement();
 						KPoint port1Loc = port1.getLayout().getLocation();
 						KPoint port2Loc = port2.getLayout().getLocation();
 						
 						switch (port1Place) {
 						case NORTH:
-							if (port2Place == PORT_PLACEMENT.NORTH)
+							if (port2Place == KPortPlacement.NORTH)
 								return Float.compare(port1Loc.getX(), port2Loc.getX());
 							else return -1;
 						case EAST:
-							if (port2Place == PORT_PLACEMENT.NORTH)
+							if (port2Place == KPortPlacement.NORTH)
 								return 1;
-							if (port2Place == PORT_PLACEMENT.EAST)
+							if (port2Place == KPortPlacement.EAST)
 								return Float.compare(port1Loc.getY(), port2Loc.getY());
 							else return -1;
 						case SOUTH:
-							if (port2Place == PORT_PLACEMENT.NORTH
-								|| port2Place == PORT_PLACEMENT.EAST)
+							if (port2Place == KPortPlacement.NORTH
+								|| port2Place == KPortPlacement.EAST)
 								return 1;
-							if (port2Place == PORT_PLACEMENT.SOUTH)
+							if (port2Place == KPortPlacement.SOUTH)
 								return Float.compare(port2Loc.getX(), port1Loc.getX());
 							else return -1;
 						case WEST:
-							if (port2Place == PORT_PLACEMENT.NORTH
-								|| port2Place == PORT_PLACEMENT.EAST
-								|| port2Place == PORT_PLACEMENT.SOUTH)
+							if (port2Place == KPortPlacement.NORTH
+								|| port2Place == KPortPlacement.EAST
+								|| port2Place == KPortPlacement.SOUTH)
 								return 1;
-							if (port2Place == PORT_PLACEMENT.WEST)
+							if (port2Place == KPortPlacement.WEST)
 								return Float.compare(port2Loc.getY(), port1Loc.getY());
 							else return -1;
 						default:
@@ -122,39 +122,39 @@ public class LayoutGraphs {
 			}
 		}
 		else {
-			if (layoutDirection == LAYOUT_OPTION.VERTICAL) {
+			if (layoutDirection == KLayoutOption.VERTICAL) {
 				// sort for backwards vertical layout
-				Arrays.sort(portArray, new Comparator<KPort>() {
-					public int compare(KPort port1, KPort port2) {
-						PORT_PLACEMENT port1Place = port1.getLayout().getPlacement();
-						PORT_PLACEMENT port2Place = port2.getLayout().getPlacement();
+				Arrays.sort(portArray, new Comparator<KLayoutPort>() {
+					public int compare(KLayoutPort port1, KLayoutPort port2) {
+						KPortPlacement port1Place = port1.getLayout().getPlacement();
+						KPortPlacement port2Place = port2.getLayout().getPlacement();
 						KPoint port1Loc = port1.getLayout().getLocation();
 						KPoint port2Loc = port2.getLayout().getLocation();
 						
 						switch (port1Place) {
 						case WEST:
-							if (port2Place == PORT_PLACEMENT.WEST)
+							if (port2Place == KPortPlacement.WEST)
 								return Float.compare(port2Loc.getY(), port1Loc.getY());
 							else return -1;
 						case NORTH:
-							if (port2Place == PORT_PLACEMENT.WEST)
+							if (port2Place == KPortPlacement.WEST)
 								return 1;
-							if (port2Place == PORT_PLACEMENT.NORTH)
+							if (port2Place == KPortPlacement.NORTH)
 								return Float.compare(port1Loc.getX(), port2Loc.getX());
 							else return -1;
 						case EAST:
-							if (port2Place == PORT_PLACEMENT.WEST
-								|| port2Place == PORT_PLACEMENT.NORTH)
+							if (port2Place == KPortPlacement.WEST
+								|| port2Place == KPortPlacement.NORTH)
 								return 1;
-							if (port2Place == PORT_PLACEMENT.EAST)
+							if (port2Place == KPortPlacement.EAST)
 								return Float.compare(port1Loc.getY(), port2Loc.getY());
 							else return -1;
 						case SOUTH:
-							if (port2Place == PORT_PLACEMENT.WEST
-								|| port2Place == PORT_PLACEMENT.NORTH
-								|| port2Place == PORT_PLACEMENT.EAST)
+							if (port2Place == KPortPlacement.WEST
+								|| port2Place == KPortPlacement.NORTH
+								|| port2Place == KPortPlacement.EAST)
 								return 1;
-							if (port2Place == PORT_PLACEMENT.SOUTH)
+							if (port2Place == KPortPlacement.SOUTH)
 								return Float.compare(port2Loc.getX(), port1Loc.getX());
 							else return -1;
 						default:
@@ -165,37 +165,37 @@ public class LayoutGraphs {
 			}
 			else {
 				// sort for backwards horizontal layout
-				Arrays.sort(portArray, new Comparator<KPort>() {
-					public int compare(KPort port1, KPort port2) {
-						PORT_PLACEMENT port1Place = port1.getLayout().getPlacement();
-						PORT_PLACEMENT port2Place = port2.getLayout().getPlacement();
+				Arrays.sort(portArray, new Comparator<KLayoutPort>() {
+					public int compare(KLayoutPort port1, KLayoutPort port2) {
+						KPortPlacement port1Place = port1.getLayout().getPlacement();
+						KPortPlacement port2Place = port2.getLayout().getPlacement();
 						KPoint port1Loc = port1.getLayout().getLocation();
 						KPoint port2Loc = port2.getLayout().getLocation();
 						
 						switch (port1Place) {
 						case NORTH:
-							if (port2Place == PORT_PLACEMENT.NORTH)
+							if (port2Place == KPortPlacement.NORTH)
 								return Float.compare(port2Loc.getX(), port1Loc.getX());
 							else return -1;
 						case WEST:
-							if (port2Place == PORT_PLACEMENT.NORTH)
+							if (port2Place == KPortPlacement.NORTH)
 								return 1;
-							if (port2Place == PORT_PLACEMENT.WEST)
+							if (port2Place == KPortPlacement.WEST)
 								return Float.compare(port1Loc.getY(), port2Loc.getY());
 							else return -1;
 						case SOUTH:
-							if (port2Place == PORT_PLACEMENT.NORTH
-								|| port2Place == PORT_PLACEMENT.WEST)
+							if (port2Place == KPortPlacement.NORTH
+								|| port2Place == KPortPlacement.WEST)
 								return 1;
-							if (port2Place == PORT_PLACEMENT.SOUTH)
+							if (port2Place == KPortPlacement.SOUTH)
 								return Float.compare(port1Loc.getX(), port2Loc.getX());
 							else return -1;
 						case EAST:
-							if (port2Place == PORT_PLACEMENT.NORTH
-								|| port2Place == PORT_PLACEMENT.WEST
-								|| port2Place == PORT_PLACEMENT.SOUTH)
+							if (port2Place == KPortPlacement.NORTH
+								|| port2Place == KPortPlacement.WEST
+								|| port2Place == KPortPlacement.SOUTH)
 								return 1;
-							if (port2Place == PORT_PLACEMENT.EAST)
+							if (port2Place == KPortPlacement.EAST)
 								return Float.compare(port2Loc.getY(), port1Loc.getY());
 							else return -1;
 						default:
@@ -214,18 +214,18 @@ public class LayoutGraphs {
 	 * array.
 	 * 
 	 * @param ports array of ports to position
-	 * @param nodeSize size of the corresponding node group
+	 * @param nodeSize size of the corresponding layout node
 	 * @param layoutDirection layout direction: HORIZONTAL or VERTICAL
 	 * @param forward if true, ports are put clockwise on the node's border,
 	 *     else counter-clockwise; only valid if not symmetric
 	 * @param symmetric if true, ports are put on the node's border depending
 	 *     on the layout direction
 	 */
-	public static void positionPortsByOrder(KPort[] ports, KDimension nodeSize,
-			LAYOUT_OPTION layoutDirection, boolean forward, boolean symmetric) {
+	public static void positionPortsByOrder(KLayoutPort[] ports, KDimension nodeSize,
+			KLayoutOption layoutDirection, boolean forward, boolean symmetric) {
 		// determine number of ports on each side
 		int northTotal = 0, eastTotal = 0, southTotal = 0, westTotal = 0;
-		for (KPort port : ports) {
+		for (KLayoutPort port : ports) {
 			switch (port.getLayout().getPlacement()) {
 			case NORTH:
 				northTotal++;
@@ -253,7 +253,7 @@ public class LayoutGraphs {
 		// determine starting points and increments for each side
 		float northCur, eastCur, southCur, westCur;
 		if (symmetric) {
-			if (layoutDirection == LAYOUT_OPTION.VERTICAL) {
+			if (layoutDirection == KLayoutOption.VERTICAL) {
 				// layout ports for vertical flow
 				northCur = northDist;
 				eastCur = nodeHeight - eastDist;
@@ -294,7 +294,7 @@ public class LayoutGraphs {
 		}
 		
 		// calculate new position for each port
-		for (KPort port : ports) {
+		for (KLayoutPort port : ports) {
 			KPoint portLocation = port.getLayout().getLocation();
 			KDimension portSize = port.getLayout().getSize();
 			switch (port.getLayout().getPlacement()) {
@@ -367,11 +367,11 @@ public class LayoutGraphs {
 	 * 
 	 * @param node
 	 */
-	public static void resizeNode(KNodeGroup node) {
-		KNodeGroupLayout nodeLayout = node.getLayout();
+	public static void resizeNode(KLayoutNode node) {
+		KNodeLayout nodeLayout = node.getLayout();
 		float minWidth = nodeLayout.getInsets().getLeft() + nodeLayout.getInsets().getRight();
 		float minHeight = nodeLayout.getInsets().getTop() + nodeLayout.getInsets().getBottom();
-		KNodeGroupLabelLayout labelLayout = node.getLabel().getLabelLayout();
+		KNodeLabelLayout labelLayout = node.getLabel().getLabelLayout();
 		if (labelLayout != null) {
 			minWidth += labelLayout.getSize().getWidth();
 			minHeight += labelLayout.getSize().getHeight();
@@ -379,7 +379,7 @@ public class LayoutGraphs {
 		
 		float minNorth = MIN_PORT_DISTANCE, minEast = MIN_PORT_DISTANCE,
 			minSouth = MIN_PORT_DISTANCE, minWest = MIN_PORT_DISTANCE;
-		for (KPort port : node.getPorts()) {
+		for (KLayoutPort port : node.getPorts()) {
 			switch (port.getLayout().getPlacement()) {
 			case NORTH:
 				minNorth += MIN_PORT_DISTANCE;

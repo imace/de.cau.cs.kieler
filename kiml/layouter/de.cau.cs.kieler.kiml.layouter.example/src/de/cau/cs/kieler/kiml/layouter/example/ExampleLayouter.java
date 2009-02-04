@@ -11,7 +11,7 @@ package de.cau.cs.kieler.kiml.layouter.example;
 
 import org.eclipse.jface.preference.IPreferenceStore;
 
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
 import de.cau.cs.kieler.kiml.layout.util.KimlLayoutUtil;
 import de.cau.cs.kieler.kiml.layouter.example.preferences.PreferenceConstants;
 
@@ -53,28 +53,28 @@ public class ExampleLayouter {
 
 	/**
 	 * Performs the actual work of the layout process. Works directly on the
-	 * KNodeGroup and sub KNodeGroups and annotates them with the new position
+	 * KLayoutNode and sub KLayoutNodes and annotates them with the new position
 	 * and size information.
 	 * <p/>
 	 * The nodes are laid out in a line with predefined spaces between them.
 	 * 
-	 * @param nodeGroup
-	 *            The KNodeGroup to process
+	 * @param layoutNode
+	 *            The KLayoutNode to process
 	 */
-	public void visit(KNodeGroup nodeGroup) {
+	public void visit(KLayoutNode layoutNode) {
 
 		/* return if nothing to do */
-		if (nodeGroup == null)
+		if (layoutNode == null)
 			return;
 
-		KNodeGroup previousGroup = KimlLayoutUtil.createInitializedNodeGroup();
+		KLayoutNode previousGroup = KimlLayoutUtil.createInitializedLayoutNode();
 
 		/*
 		 * Layout horizontal
 		 */
 		if (prefHorizontal) {
 			float maxHeight = 0f;
-			for (KNodeGroup child : nodeGroup.getSubNodeGroups()) {
+			for (KLayoutNode child : layoutNode.getChildNodes()) {
 				child.getLayout().getLocation().setX(
 						previousGroup.getLayout().getLocation().getX()
 								+ previousGroup.getLayout().getSize()
@@ -86,16 +86,16 @@ public class ExampleLayouter {
 				previousGroup = child;
 
 			}
-			nodeGroup.getLayout().getSize().setWidth(
+			layoutNode.getLayout().getSize().setWidth(
 					previousGroup.getLayout().getSize().getWidth()
 							+ previousGroup.getLayout().getLocation().getX()
 							+ prefPadX
-							+ nodeGroup.getLayout().getInsets().getLeft()
-							+ nodeGroup.getLayout().getInsets().getRight());
-			nodeGroup.getLayout().getSize().setHeight(
+							+ layoutNode.getLayout().getInsets().getLeft()
+							+ layoutNode.getLayout().getInsets().getRight());
+			layoutNode.getLayout().getSize().setHeight(
 					maxHeight + 2 * prefPadY
-							+ nodeGroup.getLayout().getInsets().getBottom()
-							+ nodeGroup.getLayout().getInsets().getTop());
+							+ layoutNode.getLayout().getInsets().getBottom()
+							+ layoutNode.getLayout().getInsets().getTop());
 		}
 
 		/*
@@ -103,7 +103,7 @@ public class ExampleLayouter {
 		 */
 		else {
 			float maxWidth = 0f;
-			for (KNodeGroup child : nodeGroup.getSubNodeGroups()) {
+			for (KLayoutNode child : layoutNode.getChildNodes()) {
 				child.getLayout().getLocation().setY(
 						previousGroup.getLayout().getLocation().getY()
 								+ previousGroup.getLayout().getSize()
@@ -116,17 +116,17 @@ public class ExampleLayouter {
 
 			}
 
-			nodeGroup.getLayout().getSize().setHeight(
+			layoutNode.getLayout().getSize().setHeight(
 					previousGroup.getLayout().getSize().getHeight()
 							+ previousGroup.getLayout().getLocation().getY()
 							+ prefPadY
-							+ nodeGroup.getLayout().getInsets().getBottom()
-							+ nodeGroup.getLayout().getInsets().getTop());
+							+ layoutNode.getLayout().getInsets().getBottom()
+							+ layoutNode.getLayout().getInsets().getTop());
 
-			nodeGroup.getLayout().getSize().setWidth(
+			layoutNode.getLayout().getSize().setWidth(
 					maxWidth + 2 * prefPadX
-							+ nodeGroup.getLayout().getInsets().getLeft()
-							+ nodeGroup.getLayout().getInsets().getRight());
+							+ layoutNode.getLayout().getInsets().getLeft()
+							+ layoutNode.getLayout().getInsets().getRight());
 		}
 	}
 

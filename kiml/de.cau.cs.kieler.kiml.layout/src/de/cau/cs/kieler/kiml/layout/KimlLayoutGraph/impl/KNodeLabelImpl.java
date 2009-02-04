@@ -6,8 +6,8 @@
  */
 package de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl;
 
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroupLabel;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroupLabelLayout;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeLabel;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeLabelLayout;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -24,13 +24,13 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KNodeGroupLabelImpl#getLabelLayout <em>Label Layout</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KNodeLabelImpl#getLabelLayout <em>Label Layout</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class KNodeGroupLabelImpl extends KLabelImpl implements KNodeGroupLabel {
+public class KNodeLabelImpl extends KLabelImpl implements KNodeLabel {
 	/**
 	 * The cached value of the '{@link #getLabelLayout() <em>Label Layout</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -39,14 +39,14 @@ public class KNodeGroupLabelImpl extends KLabelImpl implements KNodeGroupLabel {
 	 * @generated
 	 * @ordered
 	 */
-	protected KNodeGroupLabelLayout labelLayout;
+	protected KNodeLabelLayout labelLayout;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected KNodeGroupLabelImpl() {
+	protected KNodeLabelImpl() {
 		super();
 	}
 
@@ -57,7 +57,7 @@ public class KNodeGroupLabelImpl extends KLabelImpl implements KNodeGroupLabel {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return KimlLayoutGraphPackage.Literals.KNODE_GROUP_LABEL;
+		return KimlLayoutGraphPackage.Literals.KNODE_LABEL;
 	}
 
 	/**
@@ -65,13 +65,13 @@ public class KNodeGroupLabelImpl extends KLabelImpl implements KNodeGroupLabel {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public KNodeGroupLabelLayout getLabelLayout() {
+	public KNodeLabelLayout getLabelLayout() {
 		if (labelLayout != null && labelLayout.eIsProxy()) {
 			InternalEObject oldLabelLayout = (InternalEObject)labelLayout;
-			labelLayout = (KNodeGroupLabelLayout)eResolveProxy(oldLabelLayout);
+			labelLayout = (KNodeLabelLayout)eResolveProxy(oldLabelLayout);
 			if (labelLayout != oldLabelLayout) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, KimlLayoutGraphPackage.KNODE_GROUP_LABEL__LABEL_LAYOUT, oldLabelLayout, labelLayout));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, KimlLayoutGraphPackage.KNODE_LABEL__LABEL_LAYOUT, oldLabelLayout, labelLayout));
 			}
 		}
 		return labelLayout;
@@ -82,7 +82,7 @@ public class KNodeGroupLabelImpl extends KLabelImpl implements KNodeGroupLabel {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public KNodeGroupLabelLayout basicGetLabelLayout() {
+	public KNodeLabelLayout basicGetLabelLayout() {
 		return labelLayout;
 	}
 
@@ -91,11 +91,11 @@ public class KNodeGroupLabelImpl extends KLabelImpl implements KNodeGroupLabel {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setLabelLayout(KNodeGroupLabelLayout newLabelLayout) {
-		KNodeGroupLabelLayout oldLabelLayout = labelLayout;
+	public void setLabelLayout(KNodeLabelLayout newLabelLayout) {
+		KNodeLabelLayout oldLabelLayout = labelLayout;
 		labelLayout = newLabelLayout;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KNODE_GROUP_LABEL__LABEL_LAYOUT, oldLabelLayout, labelLayout));
+			eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KNODE_LABEL__LABEL_LAYOUT, oldLabelLayout, labelLayout));
 	}
 
 	/**
@@ -106,7 +106,7 @@ public class KNodeGroupLabelImpl extends KLabelImpl implements KNodeGroupLabel {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case KimlLayoutGraphPackage.KNODE_GROUP_LABEL__LABEL_LAYOUT:
+			case KimlLayoutGraphPackage.KNODE_LABEL__LABEL_LAYOUT:
 				if (resolve) return getLabelLayout();
 				return basicGetLabelLayout();
 		}
@@ -121,8 +121,8 @@ public class KNodeGroupLabelImpl extends KLabelImpl implements KNodeGroupLabel {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case KimlLayoutGraphPackage.KNODE_GROUP_LABEL__LABEL_LAYOUT:
-				setLabelLayout((KNodeGroupLabelLayout)newValue);
+			case KimlLayoutGraphPackage.KNODE_LABEL__LABEL_LAYOUT:
+				setLabelLayout((KNodeLabelLayout)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -136,8 +136,8 @@ public class KNodeGroupLabelImpl extends KLabelImpl implements KNodeGroupLabel {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case KimlLayoutGraphPackage.KNODE_GROUP_LABEL__LABEL_LAYOUT:
-				setLabelLayout((KNodeGroupLabelLayout)null);
+			case KimlLayoutGraphPackage.KNODE_LABEL__LABEL_LAYOUT:
+				setLabelLayout((KNodeLabelLayout)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -151,10 +151,10 @@ public class KNodeGroupLabelImpl extends KLabelImpl implements KNodeGroupLabel {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case KimlLayoutGraphPackage.KNODE_GROUP_LABEL__LABEL_LAYOUT:
+			case KimlLayoutGraphPackage.KNODE_LABEL__LABEL_LAYOUT:
 				return labelLayout != null;
 		}
 		return super.eIsSet(featureID);
 	}
 
-} //KNodeGroupLabelImpl
+} //KNodeLabelImpl

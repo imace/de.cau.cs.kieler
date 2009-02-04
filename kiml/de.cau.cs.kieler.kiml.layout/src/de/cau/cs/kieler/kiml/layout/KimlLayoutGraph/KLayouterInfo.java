@@ -16,18 +16,18 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO#getLayouterName <em>Layouter Name</em>}</li>
- *   <li>{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO#getLayoutType <em>Layout Type</em>}</li>
- *   <li>{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO#getLayoutOption <em>Layout Option</em>}</li>
- *   <li>{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO#getLayouterCollectionID <em>Layouter Collection ID</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayouterInfo#getLayouterName <em>Layouter Name</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayouterInfo#getLayoutType <em>Layout Type</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayouterInfo#getLayoutOption <em>Layout Option</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayouterInfo#getLayouterCollectionID <em>Layouter Collection ID</em>}</li>
  * </ul>
  * </p>
  *
- * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getLAYOUTER_INFO()
+ * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKLayouterInfo()
  * @model
  * @generated
  */
-public interface LAYOUTER_INFO extends EObject {
+public interface KLayouterInfo extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Layouter Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -38,14 +38,14 @@ public interface LAYOUTER_INFO extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Layouter Name</em>' attribute.
 	 * @see #setLayouterName(String)
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getLAYOUTER_INFO_LayouterName()
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKLayouterInfo_LayouterName()
 	 * @model required="true"
 	 * @generated
 	 */
 	String getLayouterName();
 
 	/**
-	 * Sets the value of the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO#getLayouterName <em>Layouter Name</em>}' attribute.
+	 * Sets the value of the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayouterInfo#getLayouterName <em>Layouter Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Layouter Name</em>' attribute.
@@ -56,7 +56,7 @@ public interface LAYOUTER_INFO extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Layout Type</b></em>' attribute.
-	 * The literals are from the enumeration {@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_TYPE}.
+	 * The literals are from the enumeration {@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutType}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Layout Type</em>' attribute isn't clear,
@@ -64,28 +64,28 @@ public interface LAYOUTER_INFO extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Layout Type</em>' attribute.
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_TYPE
-	 * @see #setLayoutType(LAYOUT_TYPE)
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getLAYOUTER_INFO_LayoutType()
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutType
+	 * @see #setLayoutType(KLayoutType)
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKLayouterInfo_LayoutType()
 	 * @model required="true"
 	 * @generated
 	 */
-	LAYOUT_TYPE getLayoutType();
+	KLayoutType getLayoutType();
 
 	/**
-	 * Sets the value of the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO#getLayoutType <em>Layout Type</em>}' attribute.
+	 * Sets the value of the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayouterInfo#getLayoutType <em>Layout Type</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Layout Type</em>' attribute.
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_TYPE
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutType
 	 * @see #getLayoutType()
 	 * @generated
 	 */
-	void setLayoutType(LAYOUT_TYPE value);
+	void setLayoutType(KLayoutType value);
 
 	/**
 	 * Returns the value of the '<em><b>Layout Option</b></em>' attribute.
-	 * The literals are from the enumeration {@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_OPTION}.
+	 * The literals are from the enumeration {@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutOption}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Layout Option</em>' attribute isn't clear,
@@ -93,24 +93,24 @@ public interface LAYOUTER_INFO extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Layout Option</em>' attribute.
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_OPTION
-	 * @see #setLayoutOption(LAYOUT_OPTION)
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getLAYOUTER_INFO_LayoutOption()
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutOption
+	 * @see #setLayoutOption(KLayoutOption)
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKLayouterInfo_LayoutOption()
 	 * @model required="true"
 	 * @generated
 	 */
-	LAYOUT_OPTION getLayoutOption();
+	KLayoutOption getLayoutOption();
 
 	/**
-	 * Sets the value of the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO#getLayoutOption <em>Layout Option</em>}' attribute.
+	 * Sets the value of the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayouterInfo#getLayoutOption <em>Layout Option</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Layout Option</em>' attribute.
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_OPTION
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutOption
 	 * @see #getLayoutOption()
 	 * @generated
 	 */
-	void setLayoutOption(LAYOUT_OPTION value);
+	void setLayoutOption(KLayoutOption value);
 
 	/**
 	 * Returns the value of the '<em><b>Layouter Collection ID</b></em>' attribute.
@@ -122,14 +122,14 @@ public interface LAYOUTER_INFO extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Layouter Collection ID</em>' attribute.
 	 * @see #setLayouterCollectionID(String)
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getLAYOUTER_INFO_LayouterCollectionID()
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKLayouterInfo_LayouterCollectionID()
 	 * @model required="true"
 	 * @generated
 	 */
 	String getLayouterCollectionID();
 
 	/**
-	 * Sets the value of the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO#getLayouterCollectionID <em>Layouter Collection ID</em>}' attribute.
+	 * Sets the value of the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayouterInfo#getLayouterCollectionID <em>Layouter Collection ID</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Layouter Collection ID</em>' attribute.
@@ -138,4 +138,4 @@ public interface LAYOUTER_INFO extends EObject {
 	 */
 	void setLayouterCollectionID(String value);
 
-} // LAYOUTER_INFO
+} // KLayouterInfo

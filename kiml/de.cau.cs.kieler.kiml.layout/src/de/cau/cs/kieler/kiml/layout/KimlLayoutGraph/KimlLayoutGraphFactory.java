@@ -62,13 +62,13 @@ public interface KimlLayoutGraphFactory extends EFactory {
 	KLayoutGraph createKLayoutGraph();
 
 	/**
-	 * Returns a new object of class '<em>KEdge</em>'.
+	 * Returns a new object of class '<em>KLayout Edge</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>KEdge</em>'.
+	 * @return a new object of class '<em>KLayout Edge</em>'.
 	 * @generated
 	 */
-	KEdge createKEdge();
+	KLayoutEdge createKLayoutEdge();
 
 	/**
 	 * Returns a new object of class '<em>KEdge Layout</em>'.
@@ -80,22 +80,22 @@ public interface KimlLayoutGraphFactory extends EFactory {
 	KEdgeLayout createKEdgeLayout();
 
 	/**
-	 * Returns a new object of class '<em>KNode Group</em>'.
+	 * Returns a new object of class '<em>KLayout Node</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>KNode Group</em>'.
+	 * @return a new object of class '<em>KLayout Node</em>'.
 	 * @generated
 	 */
-	KNodeGroup createKNodeGroup();
+	KLayoutNode createKLayoutNode();
 
 	/**
-	 * Returns a new object of class '<em>KNode Group Layout</em>'.
+	 * Returns a new object of class '<em>KNode Layout</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>KNode Group Layout</em>'.
+	 * @return a new object of class '<em>KNode Layout</em>'.
 	 * @generated
 	 */
-	KNodeGroupLayout createKNodeGroupLayout();
+	KNodeLayout createKNodeLayout();
 
 	/**
 	 * Returns a new object of class '<em>KEdge Label</em>'.
@@ -116,40 +116,40 @@ public interface KimlLayoutGraphFactory extends EFactory {
 	KEdgeLabelLayout createKEdgeLabelLayout();
 
 	/**
-	 * Returns a new object of class '<em>KNode Group Label</em>'.
+	 * Returns a new object of class '<em>KNode Label</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>KNode Group Label</em>'.
+	 * @return a new object of class '<em>KNode Label</em>'.
 	 * @generated
 	 */
-	KNodeGroupLabel createKNodeGroupLabel();
+	KNodeLabel createKNodeLabel();
 
 	/**
-	 * Returns a new object of class '<em>KNode Group Label Layout</em>'.
+	 * Returns a new object of class '<em>KNode Label Layout</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>KNode Group Label Layout</em>'.
+	 * @return a new object of class '<em>KNode Label Layout</em>'.
 	 * @generated
 	 */
-	KNodeGroupLabelLayout createKNodeGroupLabelLayout();
+	KNodeLabelLayout createKNodeLabelLayout();
 
 	/**
-	 * Returns a new object of class '<em>LAYOUTER INFO</em>'.
+	 * Returns a new object of class '<em>KLayouter Info</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>LAYOUTER INFO</em>'.
+	 * @return a new object of class '<em>KLayouter Info</em>'.
 	 * @generated
 	 */
-	LAYOUTER_INFO createLAYOUTER_INFO();
+	KLayouterInfo createKLayouterInfo();
 
 	/**
-	 * Returns a new object of class '<em>KPort</em>'.
+	 * Returns a new object of class '<em>KLayout Port</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>KPort</em>'.
+	 * @return a new object of class '<em>KLayout Port</em>'.
 	 * @generated
 	 */
-	KPort createKPort();
+	KLayoutPort createKLayoutPort();
 
 	/**
 	 * Returns a new object of class '<em>KPort Layout</em>'.

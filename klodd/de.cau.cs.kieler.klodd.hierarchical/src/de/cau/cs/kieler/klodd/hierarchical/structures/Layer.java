@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.LinkedList;
 import java.util.Map;
 
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_OPTION;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutOption;
 
 
 /**
@@ -78,13 +78,13 @@ public class Layer {
 	 * @param minDist minimal distance between nodes and connections
 	 */
 	public void layoutElements(float layerPos, float minDist) {
-		LAYOUT_OPTION layoutDirection = layeredGraph.getLayoutDirection();
+		KLayoutOption layoutDirection = layeredGraph.getLayoutDirection();
 		float backPadding = 0.0f;
 		float frontPadding = 0.0f;
 		
 		// determine padding values
 		for (LayerElement element : elements) {
-			float sideSpace = (lengthwiseDim - (layoutDirection == LAYOUT_OPTION.VERTICAL
+			float sideSpace = (lengthwiseDim - (layoutDirection == KLayoutOption.VERTICAL
 					? element.getRealDim().getHeight() : element.getRealDim().getWidth())) / 2;
 			backPadding = Math.max(backPadding,
 					element.getEdgesBack() * minDist - sideSpace);
@@ -96,7 +96,7 @@ public class Layer {
 		// set the lengthwise position of each node
 		for (LayerElement element : elements) {
 			if (rank > 0 && height > 0) {
-				if (layoutDirection == LAYOUT_OPTION.VERTICAL) {
+				if (layoutDirection == KLayoutOption.VERTICAL) {
 					float sideSpace = (lengthwiseDim - element.getRealDim().getHeight()) / 2;
 					element.getPosition().setY(lengthwisePos + sideSpace);
 				}

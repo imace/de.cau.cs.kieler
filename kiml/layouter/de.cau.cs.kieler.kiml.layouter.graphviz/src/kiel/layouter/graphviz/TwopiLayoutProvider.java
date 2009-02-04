@@ -9,18 +9,18 @@
  *******************************************************************************/
 package kiel.layouter.graphviz;
 
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphFactory;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUTER_INFO;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_OPTION;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_TYPE;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayouterInfo;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutOption;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutType;
 import de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayoutProvider;
 
 /**
  * Implements the Twopi layouter of the GraphViz suite. As this class extends
  * the {@link KimlAbstractLayoutProvider}, the most relevant method is
  * <code>doLayout</code>, which performs the actual layout, that is annotating
- * the provided KNodeGroup with the Twopi layout information.
+ * the provided KLayoutNode with the Twopi layout information.
  * <p/>
  * This class acts as a wrapper to the {@link GraphvizLayouter}. Is uses the
  * {@link GraphvizLayouter} with the Twopi engine and publishes the Twopi
@@ -32,8 +32,8 @@ public class TwopiLayoutProvider extends KimlAbstractLayoutProvider {
 
 	/* some Strings used here */
 	private final String LAYOUT_PROVIDER_NAME = GraphvizLayoutProviderNames.GRAPHVIZ_TWOPI;
-	private final LAYOUT_TYPE LAYOUT_PROVIDER_LAYOUT_TYPE = LAYOUT_TYPE.SPRING_MODEL;
-	private final LAYOUT_OPTION LAYOUT_PROVIDER_LAYOUT_OPTION = LAYOUT_OPTION.DEFAULT;
+	private final KLayoutType LAYOUT_PROVIDER_LAYOUT_TYPE = KLayoutType.SPRING_MODEL;
+	private final KLayoutOption LAYOUT_PROVIDER_LAYOUT_OPTION = KLayoutOption.DEFAULT;
 
 	/* real GraphViz layouter Emma uses to do the layout */
 	private GraphvizLayouter graphvizLayouter = null;
@@ -44,12 +44,12 @@ public class TwopiLayoutProvider extends KimlAbstractLayoutProvider {
 	 * @see
 	 * de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayoutProvider
 	 * #doLayout
-	 * (de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup)
+	 * (de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode)
 	 */
-	public void doLayout(KNodeGroup nodeGroup) {
+	public void doLayout(KLayoutNode layoutNode) {
 		if (graphvizLayouter == null)
 			graphvizLayouter = new GraphvizLayouter(LAYOUT_PROVIDER_NAME);
-		graphvizLayouter.visit(nodeGroup);
+		graphvizLayouter.visit(layoutNode);
 	}
 
 	/*
@@ -59,9 +59,9 @@ public class TwopiLayoutProvider extends KimlAbstractLayoutProvider {
 	 * de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayoutProvider
 	 * #getLayouterInfo()
 	 */
-	public final LAYOUTER_INFO getLayouterInfo() {
-		LAYOUTER_INFO info = KimlLayoutGraphFactory.eINSTANCE
-				.createLAYOUTER_INFO();
+	public final KLayouterInfo getLayouterInfo() {
+		KLayouterInfo info = KimlLayoutGraphFactory.eINSTANCE
+				.createKLayouterInfo();
 		info.setLayouterName(LAYOUT_PROVIDER_NAME);
 		info.setLayoutType(LAYOUT_PROVIDER_LAYOUT_TYPE);
 		info.setLayoutOption(LAYOUT_PROVIDER_LAYOUT_OPTION);

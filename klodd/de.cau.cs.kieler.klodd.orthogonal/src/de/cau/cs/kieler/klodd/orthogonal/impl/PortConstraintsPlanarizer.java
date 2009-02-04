@@ -5,10 +5,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdge;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPort;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.LAYOUT_OPTION;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutOption;
 import de.cau.cs.kieler.klodd.core.algorithms.AbstractAlgorithm;
 import de.cau.cs.kieler.klodd.core.util.LayoutGraphs;
 import de.cau.cs.kieler.klodd.orthogonal.impl.ec.*;
@@ -49,37 +49,37 @@ public class PortConstraintsPlanarizer extends AbstractAlgorithm implements
 	
 	/*
 	 * (non-Javadoc)
-	 * @see de.cau.cs.kieler.klodd.orthogonal.modules.IPlanarizer#planarize(de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeGroup)
+	 * @see de.cau.cs.kieler.klodd.orthogonal.modules.IPlanarizer#planarize(de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode)
 	 */
-	public TSMGraph planarize(KNodeGroup nodeGroup) {
+	public TSMGraph planarize(KLayoutNode layoutNode) {
 		// create constraints for the input graph
-		Map<KNodeGroup, EmbeddingConstraint> constraintsMap = createConstraints(nodeGroup);
+		Map<KLayoutNode, EmbeddingConstraint> constraintsMap = createConstraints(layoutNode);
 		ecPlanarizer.setConstraints(constraintsMap);
 		
 		// planarize the input graph with embedding constraints
-		TSMGraph graph = ecPlanarizer.planarize(nodeGroup);
+		TSMGraph graph = ecPlanarizer.planarize(layoutNode);
 		return graph;
 	}
 	
 	/**
-	 * Creates embedding constraints for all children of a given node group.
+	 * Creates embedding constraints for all children of a given layout node.
 	 * 
-	 * @param nodeGroup parent node group
+	 * @param layoutNode parent layout node
 	 * @return mapping of children nodes to their embedding constraints
 	 */
-	private Map<KNodeGroup, EmbeddingConstraint> createConstraints(KNodeGroup nodeGroup) {
-		Map<KNodeGroup, EmbeddingConstraint> constraintsMap = new HashMap<KNodeGroup, EmbeddingConstraint>();
+	private Map<KLayoutNode, EmbeddingConstraint> createConstraints(KLayoutNode layoutNode) {
+		Map<KLayoutNode, EmbeddingConstraint> constraintsMap = new HashMap<KLayoutNode, EmbeddingConstraint>();
 		
-		for (KNodeGroup child : nodeGroup.getSubNodeGroups()) {
+		for (KLayoutNode child : layoutNode.getChildNodes()) {
 			if (!child.getPorts().isEmpty()) {
 				if (child.getLayout().getLayoutOptions()
-						.contains(LAYOUT_OPTION.FIXED_PORTS)) {
+						.contains(KLayoutOption.FIXED_PORTS)) {
 					// create port constraints 
-					KPort[] sortedPorts = LayoutGraphs.sortPortsByPosition(child.getPorts(),
-							LAYOUT_OPTION.HORIZONTAL, true);
+					KLayoutPort[] sortedPorts = LayoutGraphs.sortPortsByPosition(child.getPorts(),
+							KLayoutOption.HORIZONTAL, true);
 					EmbeddingConstraint portConstraint = new EmbeddingConstraint(
 							EmbeddingConstraint.Type.ORIENTED, null, child);
-					for (KPort port : sortedPorts) {
+					for (KLayoutPort port : sortedPorts) {
 						EmbeddingConstraint constraint = createConstraintFor(port, portConstraint);
 						if (constraint != null)
 							portConstraint.children.add(constraint);
@@ -93,7 +93,7 @@ public class PortConstraintsPlanarizer extends AbstractAlgorithm implements
 							EmbeddingConstraint.Type.ORIENTED, null, child);
 					EmbeddingConstraint northConstraint = null, eastConstraint = null,
 							southConstraint = null, westConstraint = null;
-					for (KPort port : child.getPorts()) {
+					for (KLayoutPort port : child.getPorts()) {
 						EmbeddingConstraint constraint = createConstraintFor(port, null);
 						if (constraint != null) {
 							switch (port.getLayout().getPlacement()) {
@@ -157,11 +157,11 @@ public class PortConstraintsPlanarizer extends AbstractAlgorithm implements
 	 * @return a constraint for the given port, or null if the port has
 	 *     no incoming or outgoing edges
 	 */
-	private EmbeddingConstraint createConstraintFor(KPort port,
+	private EmbeddingConstraint createConstraintFor(KLayoutPort port,
 			EmbeddingConstraint parent) {
 		// filter edges that lead to child nodes
-		List<KEdge> filteredEdges = new LinkedList<KEdge>();
-		for (KEdge edge : port.getEdges()) {
+		List<KLayoutEdge> filteredEdges = new LinkedList<KLayoutEdge>();
+		for (KLayoutEdge edge : port.getEdges()) {
 			// TODO edges to external ports are not considered yet
 			if (!(edge.getSource() == null || edge.getTarget() == null)
 					&& edge.getSourcePort() != edge.getTargetPort())
@@ -170,7 +170,7 @@ public class PortConstraintsPlanarizer extends AbstractAlgorithm implements
 		if (!filteredEdges.isEmpty()) {
 			EmbeddingConstraint groupConstraint = new EmbeddingConstraint(
 					EmbeddingConstraint.Type.GROUPING, parent, port);
-			for (KEdge edge : filteredEdges) {
+			for (KLayoutEdge edge : filteredEdges) {
 				EmbeddingConstraint.Type constraintType = edge.getSourcePort()
 						== port ? EmbeddingConstraint.Type.OUT_EDGE
 						: EmbeddingConstraint.Type.IN_EDGE;

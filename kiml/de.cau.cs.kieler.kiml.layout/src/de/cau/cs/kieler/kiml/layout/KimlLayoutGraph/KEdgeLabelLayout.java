@@ -9,7 +9,7 @@ package de.cau.cs.kieler.kiml.layout.KimlLayoutGraph;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>KEdge Label Layout</b></em>'.
+ * A representation of the model object '<em><b>KLayoutEdge Label Layout</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
@@ -26,7 +26,7 @@ package de.cau.cs.kieler.kiml.layout.KimlLayoutGraph;
 public interface KEdgeLabelLayout extends KShapeLayout {
 	/**
 	 * Returns the value of the '<em><b>Label Placement</b></em>' attribute.
-	 * The literals are from the enumeration {@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.EDGE_LABEL_PLACEMENT}.
+	 * The literals are from the enumeration {@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLabelPlacement}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Label Placement</em>' attribute isn't clear,
@@ -34,23 +34,23 @@ public interface KEdgeLabelLayout extends KShapeLayout {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Label Placement</em>' attribute.
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.EDGE_LABEL_PLACEMENT
-	 * @see #setLabelPlacement(EDGE_LABEL_PLACEMENT)
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLabelPlacement
+	 * @see #setLabelPlacement(KEdgeLabelPlacement)
 	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKEdgeLabelLayout_LabelPlacement()
 	 * @model required="true"
 	 * @generated
 	 */
-	EDGE_LABEL_PLACEMENT getLabelPlacement();
+	KEdgeLabelPlacement getLabelPlacement();
 
 	/**
 	 * Sets the value of the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLabelLayout#getLabelPlacement <em>Label Placement</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Label Placement</em>' attribute.
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.EDGE_LABEL_PLACEMENT
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLabelPlacement
 	 * @see #getLabelPlacement()
 	 * @generated
 	 */
-	void setLabelPlacement(EDGE_LABEL_PLACEMENT value);
+	void setLabelPlacement(KEdgeLabelPlacement value);
 
 } // KEdgeLabelLayout

@@ -9,7 +9,7 @@ package de.cau.cs.kieler.kiml.layout.KimlLayoutGraph;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>KEdge Label</b></em>'.
+ * A representation of the model object '<em><b>KLayoutEdge Label</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>

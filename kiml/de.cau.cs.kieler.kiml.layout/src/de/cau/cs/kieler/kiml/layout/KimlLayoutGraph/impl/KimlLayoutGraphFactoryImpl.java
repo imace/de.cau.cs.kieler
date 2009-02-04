@@ -65,16 +65,16 @@ public class KimlLayoutGraphFactoryImpl extends EFactoryImpl implements KimlLayo
 			case KimlLayoutGraphPackage.KDIMENSION: return createKDimension();
 			case KimlLayoutGraphPackage.KINSETS: return createKInsets();
 			case KimlLayoutGraphPackage.KLAYOUT_GRAPH: return createKLayoutGraph();
-			case KimlLayoutGraphPackage.KEDGE: return createKEdge();
+			case KimlLayoutGraphPackage.KLAYOUT_EDGE: return createKLayoutEdge();
 			case KimlLayoutGraphPackage.KEDGE_LAYOUT: return createKEdgeLayout();
-			case KimlLayoutGraphPackage.KNODE_GROUP: return createKNodeGroup();
-			case KimlLayoutGraphPackage.KNODE_GROUP_LAYOUT: return createKNodeGroupLayout();
+			case KimlLayoutGraphPackage.KLAYOUT_NODE: return createKLayoutNode();
+			case KimlLayoutGraphPackage.KNODE_LAYOUT: return createKNodeLayout();
 			case KimlLayoutGraphPackage.KEDGE_LABEL: return createKEdgeLabel();
 			case KimlLayoutGraphPackage.KEDGE_LABEL_LAYOUT: return createKEdgeLabelLayout();
-			case KimlLayoutGraphPackage.KNODE_GROUP_LABEL: return createKNodeGroupLabel();
-			case KimlLayoutGraphPackage.KNODE_GROUP_LABEL_LAYOUT: return createKNodeGroupLabelLayout();
-			case KimlLayoutGraphPackage.LAYOUTER_INFO: return createLAYOUTER_INFO();
-			case KimlLayoutGraphPackage.KPORT: return createKPort();
+			case KimlLayoutGraphPackage.KNODE_LABEL: return createKNodeLabel();
+			case KimlLayoutGraphPackage.KNODE_LABEL_LAYOUT: return createKNodeLabelLayout();
+			case KimlLayoutGraphPackage.KLAYOUTER_INFO: return createKLayouterInfo();
+			case KimlLayoutGraphPackage.KLAYOUT_PORT: return createKLayoutPort();
 			case KimlLayoutGraphPackage.KPORT_LAYOUT: return createKPortLayout();
 			case KimlLayoutGraphPackage.KPORT_LABEL: return createKPortLabel();
 			case KimlLayoutGraphPackage.KPORT_LABEL_LAYOUT: return createKPortLabelLayout();
@@ -91,20 +91,20 @@ public class KimlLayoutGraphFactoryImpl extends EFactoryImpl implements KimlLayo
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
-			case KimlLayoutGraphPackage.EDGE_TYPE:
-				return createEDGE_TYPEFromString(eDataType, initialValue);
-			case KimlLayoutGraphPackage.LAYOUT_TYPE:
-				return createLAYOUT_TYPEFromString(eDataType, initialValue);
-			case KimlLayoutGraphPackage.LAYOUT_OPTION:
-				return createLAYOUT_OPTIONFromString(eDataType, initialValue);
-			case KimlLayoutGraphPackage.EDGE_LABEL_PLACEMENT:
-				return createEDGE_LABEL_PLACEMENTFromString(eDataType, initialValue);
-			case KimlLayoutGraphPackage.NODE_LABEL_PLACEMENT:
-				return createNODE_LABEL_PLACEMENTFromString(eDataType, initialValue);
-			case KimlLayoutGraphPackage.PORT_TYPE:
-				return createPORT_TYPEFromString(eDataType, initialValue);
-			case KimlLayoutGraphPackage.PORT_PLACEMENT:
-				return createPORT_PLACEMENTFromString(eDataType, initialValue);
+			case KimlLayoutGraphPackage.KEDGE_TYPE:
+				return createKEdgeTypeFromString(eDataType, initialValue);
+			case KimlLayoutGraphPackage.KLAYOUT_TYPE:
+				return createKLayoutTypeFromString(eDataType, initialValue);
+			case KimlLayoutGraphPackage.KLAYOUT_OPTION:
+				return createKLayoutOptionFromString(eDataType, initialValue);
+			case KimlLayoutGraphPackage.KEDGE_LABEL_PLACEMENT:
+				return createKEdgeLabelPlacementFromString(eDataType, initialValue);
+			case KimlLayoutGraphPackage.KNODE_LABEL_PLACEMENT:
+				return createKNodeLabelPlacementFromString(eDataType, initialValue);
+			case KimlLayoutGraphPackage.KPORT_TYPE:
+				return createKPortTypeFromString(eDataType, initialValue);
+			case KimlLayoutGraphPackage.KPORT_PLACEMENT:
+				return createKPortPlacementFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -118,20 +118,20 @@ public class KimlLayoutGraphFactoryImpl extends EFactoryImpl implements KimlLayo
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
-			case KimlLayoutGraphPackage.EDGE_TYPE:
-				return convertEDGE_TYPEToString(eDataType, instanceValue);
-			case KimlLayoutGraphPackage.LAYOUT_TYPE:
-				return convertLAYOUT_TYPEToString(eDataType, instanceValue);
-			case KimlLayoutGraphPackage.LAYOUT_OPTION:
-				return convertLAYOUT_OPTIONToString(eDataType, instanceValue);
-			case KimlLayoutGraphPackage.EDGE_LABEL_PLACEMENT:
-				return convertEDGE_LABEL_PLACEMENTToString(eDataType, instanceValue);
-			case KimlLayoutGraphPackage.NODE_LABEL_PLACEMENT:
-				return convertNODE_LABEL_PLACEMENTToString(eDataType, instanceValue);
-			case KimlLayoutGraphPackage.PORT_TYPE:
-				return convertPORT_TYPEToString(eDataType, instanceValue);
-			case KimlLayoutGraphPackage.PORT_PLACEMENT:
-				return convertPORT_PLACEMENTToString(eDataType, instanceValue);
+			case KimlLayoutGraphPackage.KEDGE_TYPE:
+				return convertKEdgeTypeToString(eDataType, instanceValue);
+			case KimlLayoutGraphPackage.KLAYOUT_TYPE:
+				return convertKLayoutTypeToString(eDataType, instanceValue);
+			case KimlLayoutGraphPackage.KLAYOUT_OPTION:
+				return convertKLayoutOptionToString(eDataType, instanceValue);
+			case KimlLayoutGraphPackage.KEDGE_LABEL_PLACEMENT:
+				return convertKEdgeLabelPlacementToString(eDataType, instanceValue);
+			case KimlLayoutGraphPackage.KNODE_LABEL_PLACEMENT:
+				return convertKNodeLabelPlacementToString(eDataType, instanceValue);
+			case KimlLayoutGraphPackage.KPORT_TYPE:
+				return convertKPortTypeToString(eDataType, instanceValue);
+			case KimlLayoutGraphPackage.KPORT_PLACEMENT:
+				return convertKPortPlacementToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -182,9 +182,9 @@ public class KimlLayoutGraphFactoryImpl extends EFactoryImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public KEdge createKEdge() {
-		KEdgeImpl kEdge = new KEdgeImpl();
-		return kEdge;
+	public KLayoutEdge createKLayoutEdge() {
+		KLayoutEdgeImpl kLayoutEdge = new KLayoutEdgeImpl();
+		return kLayoutEdge;
 	}
 
 	/**
@@ -202,9 +202,9 @@ public class KimlLayoutGraphFactoryImpl extends EFactoryImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public KNodeGroup createKNodeGroup() {
-		KNodeGroupImpl kNodeGroup = new KNodeGroupImpl();
-		return kNodeGroup;
+	public KLayoutNode createKLayoutNode() {
+		KLayoutNodeImpl kLayoutNode = new KLayoutNodeImpl();
+		return kLayoutNode;
 	}
 
 	/**
@@ -212,9 +212,9 @@ public class KimlLayoutGraphFactoryImpl extends EFactoryImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public KNodeGroupLayout createKNodeGroupLayout() {
-		KNodeGroupLayoutImpl kNodeGroupLayout = new KNodeGroupLayoutImpl();
-		return kNodeGroupLayout;
+	public KNodeLayout createKNodeLayout() {
+		KNodeLayoutImpl kNodeLayout = new KNodeLayoutImpl();
+		return kNodeLayout;
 	}
 
 	/**
@@ -242,9 +242,9 @@ public class KimlLayoutGraphFactoryImpl extends EFactoryImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public KNodeGroupLabel createKNodeGroupLabel() {
-		KNodeGroupLabelImpl kNodeGroupLabel = new KNodeGroupLabelImpl();
-		return kNodeGroupLabel;
+	public KNodeLabel createKNodeLabel() {
+		KNodeLabelImpl kNodeLabel = new KNodeLabelImpl();
+		return kNodeLabel;
 	}
 
 	/**
@@ -252,9 +252,9 @@ public class KimlLayoutGraphFactoryImpl extends EFactoryImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public KNodeGroupLabelLayout createKNodeGroupLabelLayout() {
-		KNodeGroupLabelLayoutImpl kNodeGroupLabelLayout = new KNodeGroupLabelLayoutImpl();
-		return kNodeGroupLabelLayout;
+	public KNodeLabelLayout createKNodeLabelLayout() {
+		KNodeLabelLayoutImpl kNodeLabelLayout = new KNodeLabelLayoutImpl();
+		return kNodeLabelLayout;
 	}
 
 	/**
@@ -262,9 +262,9 @@ public class KimlLayoutGraphFactoryImpl extends EFactoryImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public LAYOUTER_INFO createLAYOUTER_INFO() {
-		LAYOUTER_INFOImpl layouteR_INFO = new LAYOUTER_INFOImpl();
-		return layouteR_INFO;
+	public KLayouterInfo createKLayouterInfo() {
+		KLayouterInfoImpl kLayouterInfo = new KLayouterInfoImpl();
+		return kLayouterInfo;
 	}
 
 	/**
@@ -272,9 +272,9 @@ public class KimlLayoutGraphFactoryImpl extends EFactoryImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public KPort createKPort() {
-		KPortImpl kPort = new KPortImpl();
-		return kPort;
+	public KLayoutPort createKLayoutPort() {
+		KLayoutPortImpl kLayoutPort = new KLayoutPortImpl();
+		return kLayoutPort;
 	}
 
 	/**
@@ -312,8 +312,8 @@ public class KimlLayoutGraphFactoryImpl extends EFactoryImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EDGE_TYPE createEDGE_TYPEFromString(EDataType eDataType, String initialValue) {
-		EDGE_TYPE result = EDGE_TYPE.get(initialValue);
+	public KEdgeType createKEdgeTypeFromString(EDataType eDataType, String initialValue) {
+		KEdgeType result = KEdgeType.get(initialValue);
 		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
 		return result;
 	}
@@ -323,7 +323,7 @@ public class KimlLayoutGraphFactoryImpl extends EFactoryImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String convertEDGE_TYPEToString(EDataType eDataType, Object instanceValue) {
+	public String convertKEdgeTypeToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 
@@ -332,8 +332,8 @@ public class KimlLayoutGraphFactoryImpl extends EFactoryImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public LAYOUT_TYPE createLAYOUT_TYPEFromString(EDataType eDataType, String initialValue) {
-		LAYOUT_TYPE result = LAYOUT_TYPE.get(initialValue);
+	public KLayoutType createKLayoutTypeFromString(EDataType eDataType, String initialValue) {
+		KLayoutType result = KLayoutType.get(initialValue);
 		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
 		return result;
 	}
@@ -343,7 +343,7 @@ public class KimlLayoutGraphFactoryImpl extends EFactoryImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String convertLAYOUT_TYPEToString(EDataType eDataType, Object instanceValue) {
+	public String convertKLayoutTypeToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 
@@ -352,8 +352,8 @@ public class KimlLayoutGraphFactoryImpl extends EFactoryImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public LAYOUT_OPTION createLAYOUT_OPTIONFromString(EDataType eDataType, String initialValue) {
-		LAYOUT_OPTION result = LAYOUT_OPTION.get(initialValue);
+	public KLayoutOption createKLayoutOptionFromString(EDataType eDataType, String initialValue) {
+		KLayoutOption result = KLayoutOption.get(initialValue);
 		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
 		return result;
 	}
@@ -363,7 +363,7 @@ public class KimlLayoutGraphFactoryImpl extends EFactoryImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String convertLAYOUT_OPTIONToString(EDataType eDataType, Object instanceValue) {
+	public String convertKLayoutOptionToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 
@@ -372,8 +372,8 @@ public class KimlLayoutGraphFactoryImpl extends EFactoryImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EDGE_LABEL_PLACEMENT createEDGE_LABEL_PLACEMENTFromString(EDataType eDataType, String initialValue) {
-		EDGE_LABEL_PLACEMENT result = EDGE_LABEL_PLACEMENT.get(initialValue);
+	public KEdgeLabelPlacement createKEdgeLabelPlacementFromString(EDataType eDataType, String initialValue) {
+		KEdgeLabelPlacement result = KEdgeLabelPlacement.get(initialValue);
 		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
 		return result;
 	}
@@ -383,7 +383,7 @@ public class KimlLayoutGraphFactoryImpl extends EFactoryImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String convertEDGE_LABEL_PLACEMENTToString(EDataType eDataType, Object instanceValue) {
+	public String convertKEdgeLabelPlacementToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 
@@ -392,8 +392,8 @@ public class KimlLayoutGraphFactoryImpl extends EFactoryImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NODE_LABEL_PLACEMENT createNODE_LABEL_PLACEMENTFromString(EDataType eDataType, String initialValue) {
-		NODE_LABEL_PLACEMENT result = NODE_LABEL_PLACEMENT.get(initialValue);
+	public KNodeLabelPlacement createKNodeLabelPlacementFromString(EDataType eDataType, String initialValue) {
+		KNodeLabelPlacement result = KNodeLabelPlacement.get(initialValue);
 		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
 		return result;
 	}
@@ -403,7 +403,7 @@ public class KimlLayoutGraphFactoryImpl extends EFactoryImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String convertNODE_LABEL_PLACEMENTToString(EDataType eDataType, Object instanceValue) {
+	public String convertKNodeLabelPlacementToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 
@@ -412,8 +412,8 @@ public class KimlLayoutGraphFactoryImpl extends EFactoryImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public PORT_TYPE createPORT_TYPEFromString(EDataType eDataType, String initialValue) {
-		PORT_TYPE result = PORT_TYPE.get(initialValue);
+	public KPortType createKPortTypeFromString(EDataType eDataType, String initialValue) {
+		KPortType result = KPortType.get(initialValue);
 		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
 		return result;
 	}
@@ -423,7 +423,7 @@ public class KimlLayoutGraphFactoryImpl extends EFactoryImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String convertPORT_TYPEToString(EDataType eDataType, Object instanceValue) {
+	public String convertKPortTypeToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 
@@ -432,8 +432,8 @@ public class KimlLayoutGraphFactoryImpl extends EFactoryImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public PORT_PLACEMENT createPORT_PLACEMENTFromString(EDataType eDataType, String initialValue) {
-		PORT_PLACEMENT result = PORT_PLACEMENT.get(initialValue);
+	public KPortPlacement createKPortPlacementFromString(EDataType eDataType, String initialValue) {
+		KPortPlacement result = KPortPlacement.get(initialValue);
 		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
 		return result;
 	}
@@ -443,7 +443,7 @@ public class KimlLayoutGraphFactoryImpl extends EFactoryImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String convertPORT_PLACEMENTToString(EDataType eDataType, Object instanceValue) {
+	public String convertKPortPlacementToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 
