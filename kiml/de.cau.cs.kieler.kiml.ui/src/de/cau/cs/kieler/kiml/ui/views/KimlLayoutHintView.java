@@ -10,14 +10,10 @@
 package de.cau.cs.kieler.kiml.ui.views;
 
 import java.util.ArrayList;
-import java.util.Map;
 
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
-import org.eclipse.emf.edit.provider.ReflectiveItemProviderAdapterFactory;
-import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.emf.transaction.NotificationFilter;
 import org.eclipse.emf.transaction.ResourceSetChangeEvent;
 import org.eclipse.emf.transaction.ResourceSetListener;
@@ -111,7 +107,7 @@ public class KimlLayoutHintView extends ViewPart implements ISelectionListener,
 	private final String LAYOUTTYPE_COLUMN = "Layout type";
 	private final String LAYOUTERNAME_COLUMN = "Layouter name";
 
-	private KimlAdapterFactoryLabelProvider adapterLabelProvider = new KimlAdapterFactoryLabelProvider(
+	private KimlAdapterFactoryLabelProvider kimlAdapterLabelProvider = new KimlAdapterFactoryLabelProvider(
 			new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE));
 
 	// Set column names
@@ -199,7 +195,7 @@ public class KimlLayoutHintView extends ViewPart implements ISelectionListener,
 					 * Returns some sort of name. Uses the Adapter factory which
 					 * needs to be contributed be the respective editor.
 					 */
-				String nodeName = adapterLabelProvider
+				String nodeName = kimlAdapterLabelProvider
 						.getKimlLongLabel(((ViewImpl) ((GraphicalEditPart) obj)
 								.getModel()).getElement());
 
