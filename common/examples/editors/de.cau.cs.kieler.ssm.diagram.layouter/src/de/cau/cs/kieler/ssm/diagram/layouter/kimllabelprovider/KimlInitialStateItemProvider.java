@@ -17,22 +17,20 @@ import de.cau.cs.kieler.ssm.InitialState;
 import de.cau.cs.kieler.ssm.Region;
 import de.cau.cs.kieler.ssm.provider.InitialStateItemProvider;
 
-public class KimlInitialStateItemProvider extends InitialStateItemProvider implements IKimlLabelProvider {
+public class KimlInitialStateItemProvider extends InitialStateItemProvider
+		implements IKimlLabelProvider {
 
 	public KimlInitialStateItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public String getKimlCenterLabel(Object object) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public String getKimlHeadLabel(Object object) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -40,20 +38,20 @@ public class KimlInitialStateItemProvider extends InitialStateItemProvider imple
 	public String getKimlLongLabel(Object object) {
 		InitialState initialState = (InitialState) object;
 		Region region = (Region) initialState.eContainer();
-		CompositeState compositeState = (CompositeState) region
-				.eContainer();
-		return "Initial State of a Region in "
-				+ compositeState.getName();
+		CompositeState compositeState = (CompositeState) region.eContainer();
+
+		return compositeState.getName() == null ? "Initial State of a Region in a Composite State"
+				: "Initial State of a Region in " + compositeState.getName();
 	}
 
 	@Override
 	public String getKimlShortLabel(Object object) {
+		/* Initial State has no label to display */
 		return "";
 	}
 
 	@Override
 	public String getKimlTailLabel(Object object) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

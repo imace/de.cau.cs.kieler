@@ -210,7 +210,7 @@ class AutoArrangeListener extends ResourceSetListenerImpl implements Runnable {
 	};
 
 	/*
-	 * determines, wether the Display has been requested to execute this object
+	 * determines, whether the Display has been requested to execute this object
 	 * as Runnable in the event loop
 	 */
 	private boolean aboutToArrange = false;

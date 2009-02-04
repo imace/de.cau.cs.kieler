@@ -34,13 +34,13 @@ public class KimlBoxItemProvider extends BoxItemProvider  implements IKimlLabelP
 	@Override
 	public String getKimlLongLabel(Object object) {
 		String label = ((Box)object).getName();
-		return label;
+		return label == null || label.length() == 0 ? "" : label;
 	}
 
 	@Override
 	public String getKimlShortLabel(Object object) {
 		String label = ((Box)object).getName();
-		return label;
+		return label == null || label.length() == 0 ? "" : label;
 	}
 
 	@Override

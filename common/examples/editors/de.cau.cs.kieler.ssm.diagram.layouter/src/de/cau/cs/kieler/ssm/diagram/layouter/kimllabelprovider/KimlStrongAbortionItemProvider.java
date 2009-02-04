@@ -19,7 +19,6 @@ public class KimlStrongAbortionItemProvider extends StrongAbortionItemProvider  
 
 	public KimlStrongAbortionItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -38,19 +37,16 @@ public class KimlStrongAbortionItemProvider extends StrongAbortionItemProvider  
 
 	@Override
 	public String getKimlHeadLabel(Object object) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public String getKimlLongLabel(Object object) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public String getKimlShortLabel(Object object) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

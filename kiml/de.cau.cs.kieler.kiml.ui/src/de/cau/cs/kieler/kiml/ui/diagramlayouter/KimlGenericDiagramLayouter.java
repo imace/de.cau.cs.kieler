@@ -694,25 +694,12 @@ public class KimlGenericDiagramLayouter extends KimlAbstractLayouter {
 	@Override
 	protected void init(Object target) {
 
-		/* get root part of provided object */
-		rootPart = getRootPart(target);
-
-		/* get zoom level, CommandStack and connection layer */
-		if (rootPart instanceof GraphicalEditPart
-				&& ((GraphicalEditPart) rootPart).getRoot() instanceof ScalableFreeformRootEditPart) {
-			GraphicalEditPart gep = (GraphicalEditPart) rootPart;
-			commandStack = new DiagramCommandStack(null);
-			ScalableFreeformRootEditPart sfrep = (ScalableFreeformRootEditPart) gep
-					.getRoot();
-			zoomLevel = sfrep.getZoomManager().getZoom();
-			connectionLayer = (ConnectionLayer) sfrep
-					.getLayer(DiagramRootEditPart.CONNECTION_LAYER);
-		}
-		if (commandStack == null) {
-			throw new IllegalArgumentException("Unsupported layout target: "
-				+ target.getClass().getSimpleName());
-		}
-
+		/* first clean up all HashMaps */
+		graphicalEditPart2LayoutNode.clear();
+		layoutNode2GraphicalEditPart.clear();
+		edge2ConnectionEditPart.clear();
+		label2LabelEditPart.clear();
+		
 		/* get preference values */
 		prefMultipleLayoutRuns = KimlLayoutPlugin
 				.getDefault()
@@ -739,6 +726,26 @@ public class KimlGenericDiagramLayouter extends KimlAbstractLayouter {
 				.getInt(PreferenceConstants.PREF_GENERIC_DIAGRAM_LAYOUTER_INSET_BOTTOM);
 		prefInsetsRight = kimlUiPreferenceStore
 				.getInt(PreferenceConstants.PREF_GENERIC_DIAGRAM_LAYOUTER_INSET_RIGHT);
+		
+		/* get root part of provided object */
+		rootPart = getRootPart(target);
+
+		/* get zoom level, CommandStack and connection layer */
+		if (rootPart instanceof GraphicalEditPart
+				&& ((GraphicalEditPart) rootPart).getRoot() instanceof ScalableFreeformRootEditPart) {
+			GraphicalEditPart gep = (GraphicalEditPart) rootPart;
+			commandStack = new DiagramCommandStack(null);
+			ScalableFreeformRootEditPart sfrep = (ScalableFreeformRootEditPart) gep
+					.getRoot();
+			zoomLevel = sfrep.getZoomManager().getZoom();
+			connectionLayer = (ConnectionLayer) sfrep
+					.getLayer(DiagramRootEditPart.CONNECTION_LAYER);
+		}
+		if (commandStack == null) {
+			throw new IllegalArgumentException("Unsupported layout target: "
+				+ target.getClass().getSimpleName());
+		}
+
 	}
 
 	/*------------------------------------------------------------------------------*/

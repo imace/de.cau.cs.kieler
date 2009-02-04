@@ -105,8 +105,8 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 	 * HashMaps to keep track of the various mappings of EditParts to
 	 * KLayoutGraph objects and vice versa
 	 */
-	private Map<GraphicalEditPart, KLayoutNode> graphicalEditPart2layoutNode = new HashMap<GraphicalEditPart, KLayoutNode>();
-	private Map<KLayoutNode, GraphicalEditPart> layoutNode2graphicalEditPart = new HashMap<KLayoutNode, GraphicalEditPart>();
+	private Map<GraphicalEditPart, KLayoutNode> graphicalEditPart2LayoutNode = new HashMap<GraphicalEditPart, KLayoutNode>();
+	private Map<KLayoutNode, GraphicalEditPart> layoutNode2GraphicalEditPart = new HashMap<KLayoutNode, GraphicalEditPart>();
 	private Map<KLayoutEdge, ConnectionEditPart> edge2ConnectionEditPart = new HashMap<KLayoutEdge, ConnectionEditPart>();
 	private Map<KLabel, LabelEditPart> label2LabelEditPart = new HashMap<KLabel, LabelEditPart>();
 
@@ -135,7 +135,8 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 	private double zoomLevel = 1.0;
 	private ConnectionLayer connectionLayer = null;
 	private KimlAdapterFactoryLabelProvider kimlAdapterLabelProvider = new KimlAdapterFactoryLabelProvider(
-			new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE));
+			new ComposedAdapterFactory(
+					ComposedAdapterFactory.Descriptor.Registry.INSTANCE));
 
 	/*------------------------------------------------------------------------------*/
 	/*-----------------------------APPLICATION OF LAYOUT----------------------------*/
@@ -157,7 +158,7 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 		compoundCommand.setLabel("SSM Diagram Layout");
 
 		/* start with the top KLayoutNode */
-		GraphicalEditPart gep = layoutNode2graphicalEditPart.get(layoutGraph);
+		GraphicalEditPart gep = layoutNode2GraphicalEditPart.get(layoutGraph);
 
 		if (gep != null) {
 
@@ -169,8 +170,7 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 			/* handle size, be aware of zoom level */
 			Dimension oldSize = gep.getFigure().getBounds().getSize();
 			Dimension newSize = KimlMetricsHelper
-					.kDimension2Dimension(layoutGraph.getLayout()
-							.getSize());
+					.kDimension2Dimension(layoutGraph.getLayout().getSize());
 
 			if (newSize != null && newSize.height != 0 && newSize.width != 0) {
 				Dimension sizeDelta = newSize.getExpanded(oldSize.negate());
@@ -217,11 +217,12 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 
 		/* process all the children */
 		for (KLayoutNode childGroup : currentNode.getChildNodes()) {
-			GraphicalEditPart gep = layoutNode2graphicalEditPart.get(childGroup);
+			GraphicalEditPart gep = layoutNode2GraphicalEditPart
+					.get(childGroup);
 
 			/*
-			 * There is a GraphicalEditPart for this node. Apply the
-			 * layout. Same mechanism as in the non-recursive case.
+			 * There is a GraphicalEditPart for this node. Apply the layout.
+			 * Same mechanism as in the non-recursive case.
 			 */
 			if (gep != null) {
 
@@ -318,7 +319,7 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 			if (connection.getFigure() instanceof PolylineConnectionEx) {
 				PolylineConnectionEx polyline = ((PolylineConnectionEx) connection
 						.getFigure());
-				
+
 				polyline.setSourceAnchor(new ChopboxAnchor(
 						((GraphicalEditPart) connection.getSource())
 								.getFigure()));
@@ -382,7 +383,7 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 				 */
 				else {
 					KLayoutNode sourceNode = edge.getSource();
-					GraphicalEditPart sourceEditPart = layoutNode2graphicalEditPart
+					GraphicalEditPart sourceEditPart = layoutNode2GraphicalEditPart
 							.get(sourceNode);
 					newLocation = translateFromTo(KimlMetricsHelper
 							.kPoint2Point(edgeLabel.getLabelLayout()
@@ -463,8 +464,8 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 			}
 
 			/* maintain the mapping of elements for the applyLayout function */
-			graphicalEditPart2layoutNode.put(rootPart, layoutGraph);
-			layoutNode2graphicalEditPart.put(layoutGraph, rootPart);
+			graphicalEditPart2LayoutNode.put(rootPart, layoutGraph);
+			layoutNode2GraphicalEditPart.put(layoutGraph, rootPart);
 
 			/* do the same for all children */
 			buildLayoutGraphRecursively(rootPart, layoutGraph);
@@ -549,6 +550,8 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 				 * composite state correctly
 				 */
 				String text = currentLayoutNode.getLabel().getText();
+				if (text == null)
+					text = "";
 				currentLayoutNode.getLabel().setText(text.concat("XX"));
 
 				/* check if Compartment is expanded */
@@ -562,7 +565,8 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 					 * if expanded, do also process the children
 					 */
 					buildLayoutGraphRecursively(
-							(GraphicalEditPart) childEditPart, currentLayoutNode);
+							(GraphicalEditPart) childEditPart,
+							currentLayoutNode);
 				}
 				/*
 				 * if collapsed, force the compartment to be laid out with the
@@ -589,12 +593,13 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 	 * returns it.
 	 * 
 	 * @param currentLayoutNode
-	 *            A KLayoutNode for which an initialized sub KLayoutNode should be
-	 *            created.
+	 *            A KLayoutNode for which an initialized sub KLayoutNode should
+	 *            be created.
 	 * @return An initialized KLayoutNode which is a subnode of the provided one
 	 */
 	private KLayoutNode processGetNewSubNode(KLayoutNode currentLayoutNode) {
-		KLayoutNode childLayoutNode = KimlLayoutUtil.createInitializedLayoutNode();
+		KLayoutNode childLayoutNode = KimlLayoutUtil
+				.createInitializedLayoutNode();
 		currentLayoutNode.getChildNodes().add(childLayoutNode);
 		return childLayoutNode;
 	}
@@ -650,13 +655,16 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 		}
 
 		// set label and ID
-		EObject currentEObject = ((ViewImpl)currentEditPart.getModel()).getElement();
-		currentLayoutNode.getLabel().setText(kimlAdapterLabelProvider.getKimlShortLabel(currentEObject));
-		currentLayoutNode.setIdString(kimlAdapterLabelProvider.getKimlLongLabel(currentEObject));
+		EObject currentEObject = ((ViewImpl) currentEditPart.getModel())
+				.getElement();
+		currentLayoutNode.getLabel().setText(
+				kimlAdapterLabelProvider.getKimlShortLabel(currentEObject));
+		currentLayoutNode.setIdString(kimlAdapterLabelProvider
+				.getKimlLongLabel(currentEObject));
 
 		// keep track of mapping between elements
-		graphicalEditPart2layoutNode.put(currentEditPart, currentLayoutNode);
-		layoutNode2graphicalEditPart.put(currentLayoutNode, currentEditPart);
+		graphicalEditPart2LayoutNode.put(currentEditPart, currentLayoutNode);
+		layoutNode2GraphicalEditPart.put(currentLayoutNode, currentEditPart);
 
 		return;
 	}
@@ -725,14 +733,14 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 		for (ConnectionEditPart connection : connections) {
 
 			/*
-			 * create the KLayoutEdge. The KLayoutEdge does not need to be added explicitly
-			 * to the KLayoutGraph, but exists in it through the
+			 * create the KLayoutEdge. The KLayoutEdge does not need to be added
+			 * explicitly to the KLayoutGraph, but exists in it through the
 			 * EOppositeReference of EMF.
 			 */
 			KLayoutEdge edge = KimlLayoutUtil.createInitializedEdge();
-			edge.setSource(graphicalEditPart2layoutNode.get(connection
+			edge.setSource(graphicalEditPart2LayoutNode.get(connection
 					.getSource()));
-			edge.setTarget(graphicalEditPart2layoutNode.get(connection
+			edge.setTarget(graphicalEditPart2LayoutNode.get(connection
 					.getTarget()));
 
 			/* keep track of the mapping */
@@ -757,10 +765,12 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 					KDimension labelSize = KimlMetricsHelper
 							.dimension2KDimension(labelEditPart.getFigure()
 									.getBounds().getSize());
-					EObject transition = ((ViewImpl)connection.getModel()).getElement();
+					EObject transition = ((ViewImpl) connection.getModel())
+							.getElement();
 					// head label
 					if (labelEditPart.getKeyPoint() == ConnectionLocator.SOURCE) {
-						String headLabel = kimlAdapterLabelProvider.getKimlHeadLabel(transition);
+						String headLabel = kimlAdapterLabelProvider
+								.getKimlHeadLabel(transition);
 						if (headLabel != null) {
 							KEdgeLabel hLabel = KimlLayoutUtil
 									.createInitializedEdgeLabel();
@@ -775,7 +785,8 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 
 					// middle label
 					if (labelEditPart.getKeyPoint() == ConnectionLocator.MIDDLE) {
-						String midLabel = kimlAdapterLabelProvider.getKimlCenterLabel(transition);
+						String midLabel = kimlAdapterLabelProvider
+								.getKimlCenterLabel(transition);
 						if (midLabel != null) {
 							KEdgeLabel mLabel = KimlLayoutUtil
 									.createInitializedEdgeLabel();
@@ -790,7 +801,8 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 
 					// tail label
 					if (labelEditPart.getKeyPoint() == ConnectionLocator.TARGET) {
-						String tailLabel = kimlAdapterLabelProvider.getKimlTailLabel(transition);
+						String tailLabel = kimlAdapterLabelProvider
+								.getKimlTailLabel(transition);
 						if (tailLabel != null) {
 							KEdgeLabel tLabel = KimlLayoutUtil
 									.createInitializedEdgeLabel();
@@ -824,34 +836,12 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 	protected void init(Object target) {
 
 		/* first clean up all HashMaps */
-		graphicalEditPart2layoutNode.clear();
-		layoutNode2graphicalEditPart.clear();
+		graphicalEditPart2LayoutNode.clear();
+		layoutNode2GraphicalEditPart.clear();
 		edge2ConnectionEditPart.clear();
 		label2LabelEditPart.clear();
 
-		// get root part provided object
-		rootPart = getRootPart(target);
-
-		// get zooming level
-		if (rootPart instanceof GraphicalEditPart
-				&& ((GraphicalEditPart) rootPart).getRoot() instanceof ScalableFreeformRootEditPart) {
-			GraphicalEditPart gep = (GraphicalEditPart) rootPart;
-			// commandStack = gep.getViewer().getEditDomain().getCommandStack();
-			commandStack = new DiagramCommandStack(null);
-			ScalableFreeformRootEditPart sfrep = (ScalableFreeformRootEditPart) gep
-					.getRoot();
-			zoomLevel = sfrep.getZoomManager().getZoom();
-			connectionLayer = (ConnectionLayer) sfrep
-					.getLayer(DiagramRootEditPart.CONNECTION_LAYER);
-			connectionLayer.setAntialias(SWT.ON);
-		} else {
-			throw new IllegalArgumentException(rootPart
-					+ "' is not an instance of GraphicalEditPart: ");
-		}
-		if (commandStack == null) {
-			throw new IllegalArgumentException("commandStack == null");
-		}
-		// handle edge label placement
+		/* fetch preferences */
 		prefUseGMFLabelLocation = KimlLayoutPlugin
 				.getDefault()
 				.getPreferenceStore()
@@ -879,6 +869,30 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 		prefAutosizeEmptyElements = KimlSSMDiagramLayouterPlugin.getDefault()
 				.getPreferenceStore().getBoolean(
 						PreferenceConstants.PREF_AUTOSIZE_EMPTY_ELEMENTS);
+
+		// get root part provided object
+		rootPart = getRootPart(target);
+
+		// get zooming level
+		if (rootPart instanceof GraphicalEditPart
+				&& ((GraphicalEditPart) rootPart).getRoot() instanceof ScalableFreeformRootEditPart) {
+			GraphicalEditPart gep = (GraphicalEditPart) rootPart;
+			// commandStack = gep.getViewer().getEditDomain().getCommandStack();
+			commandStack = new DiagramCommandStack(null);
+			ScalableFreeformRootEditPart sfrep = (ScalableFreeformRootEditPart) gep
+					.getRoot();
+			zoomLevel = sfrep.getZoomManager().getZoom();
+			connectionLayer = (ConnectionLayer) sfrep
+					.getLayer(DiagramRootEditPart.CONNECTION_LAYER);
+			connectionLayer.setAntialias(SWT.ON);
+		} else {
+			throw new IllegalArgumentException(rootPart
+					+ "' is not an instance of GraphicalEditPart: ");
+		}
+		if (commandStack == null) {
+			throw new IllegalArgumentException("commandStack == null");
+		}
+
 	}
 
 	/*------------------------------------------------------------------------------*/

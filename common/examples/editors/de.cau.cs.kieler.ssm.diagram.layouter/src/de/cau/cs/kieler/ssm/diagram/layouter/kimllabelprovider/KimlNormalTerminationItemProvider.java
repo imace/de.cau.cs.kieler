@@ -32,19 +32,16 @@ public class KimlNormalTerminationItemProvider extends
 
 	@Override
 	public String getKimlHeadLabel(Object object) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public String getKimlLongLabel(Object object) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public String getKimlShortLabel(Object object) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

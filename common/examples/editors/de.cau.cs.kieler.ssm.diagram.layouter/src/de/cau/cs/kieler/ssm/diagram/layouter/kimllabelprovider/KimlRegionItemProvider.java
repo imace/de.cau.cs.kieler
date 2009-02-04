@@ -16,7 +16,8 @@ import de.cau.cs.kieler.ssm.CompositeState;
 import de.cau.cs.kieler.ssm.Region;
 import de.cau.cs.kieler.ssm.provider.RegionItemProvider;
 
-public class KimlRegionItemProvider extends RegionItemProvider implements IKimlLabelProvider {
+public class KimlRegionItemProvider extends RegionItemProvider implements
+		IKimlLabelProvider {
 
 	public KimlRegionItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
@@ -24,22 +25,21 @@ public class KimlRegionItemProvider extends RegionItemProvider implements IKimlL
 
 	@Override
 	public String getKimlCenterLabel(Object object) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public String getKimlHeadLabel(Object object) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public String getKimlLongLabel(Object object) {
 		Region region = (Region) object;
-		CompositeState compositeState = (CompositeState) region
-				.eContainer();
-		return "Region " + region.hashCode()
+		CompositeState compositeState = (CompositeState) region.eContainer();
+		
+		return compositeState.getName() == null ? "Region " + region.hashCode()
+				+ " in a Composite State" : "Region " + region.hashCode()
 				+ " in " + compositeState.getName();
 	}
 
@@ -51,7 +51,6 @@ public class KimlRegionItemProvider extends RegionItemProvider implements IKimlL
 
 	@Override
 	public String getKimlTailLabel(Object object) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
