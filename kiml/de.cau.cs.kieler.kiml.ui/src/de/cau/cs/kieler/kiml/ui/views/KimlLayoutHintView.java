@@ -15,6 +15,9 @@ import java.util.Map;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.emf.common.command.Command;
+import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
+import org.eclipse.emf.edit.provider.ReflectiveItemProviderAdapterFactory;
+import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.emf.transaction.NotificationFilter;
 import org.eclipse.emf.transaction.ResourceSetChangeEvent;
 import org.eclipse.emf.transaction.ResourceSetListener;
@@ -25,6 +28,7 @@ import org.eclipse.gef.ui.parts.GraphicalEditor;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
+import org.eclipse.gmf.runtime.notation.impl.ViewImpl;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.viewers.DoubleClickEvent;
 import org.eclipse.jface.viewers.IDoubleClickListener;
@@ -64,7 +68,7 @@ import de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayouter;
 import de.cau.cs.kieler.kiml.layout.util.KimlLayoutPreferenceConstants;
 import de.cau.cs.kieler.kiml.ui.helpers.KimlGMFColorHelper;
 import de.cau.cs.kieler.kiml.ui.helpers.KimlGMFLayoutHintHelper;
-
+import de.cau.cs.kieler.kiml.ui.provider.KimlAdapterFactoryLabelProvider;
 
 /**
  * The KIML Layout Hints View.
@@ -106,6 +110,9 @@ public class KimlLayoutHintView extends ViewPart implements ISelectionListener,
 	private final String LAYOUTGROUP_COLUMN = "Layout group";
 	private final String LAYOUTTYPE_COLUMN = "Layout type";
 	private final String LAYOUTERNAME_COLUMN = "Layouter name";
+
+	private KimlAdapterFactoryLabelProvider adapterLabelProvider = new KimlAdapterFactoryLabelProvider(
+			new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE));
 
 	// Set column names
 	private String[] columnNames = new String[] { NODE_COLUMN,
@@ -190,37 +197,13 @@ public class KimlLayoutHintView extends ViewPart implements ISelectionListener,
 			switch (index) {
 			case 0: /*
 					 * Returns some sort of name. Uses the Adapter factory which
-					 * needs to be contributed be the respective editor. The
-					 * String.class adapter must return a name for the object.
-					 * If no such adapter is present, the simple class name is
-					 * returned. This works for all editors.
+					 * needs to be contributed be the respective editor.
 					 */
-				Map<String, String> labelMap = (Map<String, String>) Platform
-						.getAdapterManager().getAdapter(obj, Map.class);
-				if (labelMap != null) {
-					String nodeName = labelMap.get("LONG_LABEL");
-					if (nodeName != null) {
-						return nodeName;
-					}
-				}
+				String nodeName = adapterLabelProvider
+						.getKimlLongLabel(((ViewImpl) ((GraphicalEditPart) obj)
+								.getModel()).getElement());
 
-				try {
-					/*
-					 * Fetching of a label mapping failed; get a label provider
-					 * from the diagram layouter.
-					 */
-					String editorId = PlatformUI.getWorkbench()
-							.getActiveWorkbenchWindow().getActivePage()
-							.getActiveEditor().getEditorSite().getId();
-					return DiagramLayouters.getInstance().getDiagramLayouter(
-							editorId).getLabelProvider().getText(obj);
-				} catch (Exception e) {
-					/*
-					 * Fetching of a label provider failed; display the simple
-					 * class name.
-					 */
-					return obj.getClass().getSimpleName();
-				}
+				return nodeName;
 
 			case 1: /*
 					 * Returns the string nor grouped, if the element is not
@@ -279,8 +262,7 @@ public class KimlLayoutHintView extends ViewPart implements ISelectionListener,
 		createTableViewer();
 
 		PlatformUI.getWorkbench().getHelpSystem().setHelp(
-				tableViewer.getControl(),
-				"de.cau.cs.kieler.layouter.viewer");
+				tableViewer.getControl(), "de.cau.cs.kieler.layouter.viewer");
 		hookContextMenu();
 		hookDoubleClickAction();
 		hookSelectionChangedListener();
