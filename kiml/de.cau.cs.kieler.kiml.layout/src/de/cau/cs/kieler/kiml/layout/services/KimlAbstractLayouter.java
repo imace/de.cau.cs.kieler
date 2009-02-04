@@ -14,8 +14,6 @@ import java.util.Map;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.jface.viewers.ILabelProvider;
-import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.ui.statushandlers.StatusManager;
 
 import de.cau.cs.kieler.kiml.layout.KimlLayoutPlugin;
@@ -123,16 +121,6 @@ public abstract class KimlAbstractLayouter {
 	 */
 	public Map<String, String> getSettings() {
 		return new HashMap<String, String>();
-	}
-
-	/**
-	 * Returns a label provider that is capable of getting labels for concrete
-	 * diagram edit parts such as nodes.
-	 * 
-	 * @return a label provider that is compatible with the related diagram
-	 */
-	public ILabelProvider getLabelProvider() {
-		return new LabelProvider();
 	}
 
 	/**
