@@ -41,7 +41,6 @@ import dataflow.diagram.part.DataflowDiagramEditor;
 import dataflow.diagram.preferences.DiagramLayoutPreferencePage;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.*;
 import de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayouter;
-import de.cau.cs.kieler.kiml.layout.util.KimlLayoutUtil;
 import de.cau.cs.kieler.kiml.ui.helpers.KimlGMFLayoutHintHelper;
 import de.cau.cs.kieler.kiml.ui.policies.LayoutEditPolicy;
 
@@ -197,8 +196,7 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 		else if (layoutRootPart instanceof AbstractBorderedShapeEditPart) {
 			AbstractBorderedShapeEditPart boxEditPart = (AbstractBorderedShapeEditPart)layoutRootPart;
 			// build just the selected node
-			layoutGraph = KimlLayoutUtil.layoutNode2LayoutGraph(buildNode(
-					boxEditPart, layoutDirection));
+			layoutGraph = (KLayoutGraph)buildNode(boxEditPart, layoutDirection, true);
 			buildNodeEdges(boxEditPart, false);
 		}
 		
@@ -421,7 +419,7 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 			for (Object child : children) {
 				if (child instanceof AbstractBorderedShapeEditPart) {
 					AbstractBorderedShapeEditPart boxEditPart = (AbstractBorderedShapeEditPart)child;
-					KLayoutNode childNode = buildNode(boxEditPart, layoutDirection);
+					KLayoutNode childNode = buildNode(boxEditPart, layoutDirection, false);
 					// set the parent group; this automatically adds the node
 					// to the parent's list of children
 					childNode.setParentNode(parentNode);
@@ -443,13 +441,18 @@ public class DataflowDiagramLayouter extends KimlAbstractLayouter {
 	 * 
 	 * @param boxEditPart edit part for which the layout graph shall be built
 	 * @param layoutDirection layout direction
+	 * @param topNode if true, a KLayoutGraph will be created, else a KLayoutNode
 	 * @return the created layout node
 	 */
 	@SuppressWarnings("unchecked")
 	private KLayoutNode buildNode(AbstractBorderedShapeEditPart boxEditPart,
-			KLayoutOption layoutDirection) {
+			KLayoutOption layoutDirection, boolean topNode) {
 		// add the new child node
-		KLayoutNode childNode = KimlLayoutGraphFactory.eINSTANCE.createKLayoutNode();
+		KLayoutNode childNode;
+		if (topNode)
+			childNode = KimlLayoutGraphFactory.eINSTANCE.createKLayoutGraph();
+		else
+			childNode = KimlLayoutGraphFactory.eINSTANCE.createKLayoutNode();
 		node2BoxMapping.put(childNode, boxEditPart);
 		childNode.setIdString(Integer.toString((boxEditPart.hashCode())));
 		// set the child node's layout

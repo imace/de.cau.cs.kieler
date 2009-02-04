@@ -26,8 +26,8 @@ public class LayoutGraphCloner {
 			Map<KLayoutNode, KLayoutNode> nodeMap = new HashMap<KLayoutNode, KLayoutNode>();
 			Map<KLayoutPort, KLayoutPort> portMap = new HashMap<KLayoutPort, KLayoutPort>();
 			Map<KLayoutEdge, KLayoutEdge> edgeMap = new HashMap<KLayoutEdge, KLayoutEdge>();
-			KLayoutGraph clone = KimlLayoutUtil.layoutNode2LayoutGraph(
-					cloneLayoutNode(layoutGraph, nodeMap, portMap, edgeMap));
+			KLayoutGraph clone = (KLayoutGraph)cloneLayoutNode(layoutGraph,
+					nodeMap, portMap, edgeMap, true);
 			return clone;
 		}
 	}
@@ -39,15 +39,21 @@ public class LayoutGraphCloner {
 	 * @param layoutNodeMap mapping of layout nodes to their clones
 	 * @param portMap mapping of ports to their clones
 	 * @param edgeMap mapping of edges to their clones
+	 * @param topNode if true, a KLayoutGraph will be created instead of
+	 *     a KLayoutNode
 	 * @return clone
 	 */
 	private static KLayoutNode cloneLayoutNode(KLayoutNode layoutNode,
 			Map<KLayoutNode, KLayoutNode> layoutNodeMap, Map<KLayoutPort, KLayoutPort> portMap,
-			Map<KLayoutEdge, KLayoutEdge> edgeMap) {
+			Map<KLayoutEdge, KLayoutEdge> edgeMap, boolean topNode) {
 		if (layoutNode == null)
 			return null;
 		else {
-			KLayoutNode clone = KimlLayoutGraphFactory.eINSTANCE.createKLayoutNode();
+			KLayoutNode clone;
+			if (topNode)
+				clone = KimlLayoutGraphFactory.eINSTANCE.createKLayoutGraph();
+			else
+				clone = KimlLayoutGraphFactory.eINSTANCE.createKLayoutNode();
 			layoutNodeMap.put(layoutNode, clone);
 			clone.setIdString(new String(layoutNode.getIdString()));
 			clone.setLabel(cloneLayoutNodeLabel(layoutNode.getLabel()));
@@ -59,7 +65,7 @@ public class LayoutGraphCloner {
 			}
 			for (KLayoutNode sublayoutNode : layoutNode.getChildNodes()) {
 				clone.getChildNodes().add(cloneLayoutNode(sublayoutNode,
-						layoutNodeMap, portMap, edgeMap));
+						layoutNodeMap, portMap, edgeMap, false));
 			}
 			for (KLayoutEdge edge : layoutNode.getIncomingEdges()) {
 				if (!edgeMap.containsKey(edge)

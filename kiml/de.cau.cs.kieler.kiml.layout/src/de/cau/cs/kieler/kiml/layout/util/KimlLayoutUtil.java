@@ -77,27 +77,6 @@ public class KimlLayoutUtil {
 	}
 	
 	/**
-	 * Creates a KLayoutGraph and copies all contents of the given
-	 * layout node. This is just a shallow copy.
-	 * 
-	 * @param layoutNode layout node to copy
-	 * @return layout graph with all data from the given layout node
-	 * @author <a href="mailto:msp@informatik.uni-kiel.de">Miro Sp&ouml;nemann</a>
-	 */
-	public static KLayoutGraph layoutNode2LayoutGraph(KLayoutNode layoutNode) {
-		KLayoutGraph layoutGraph = KimlLayoutGraphFactory.eINSTANCE
-				.createKLayoutGraph();
-		layoutGraph.setIdString(layoutNode.getIdString());
-		layoutGraph.setLabel(layoutNode.getLabel());
-		layoutGraph.setLayout(layoutNode.getLayout());
-		layoutGraph.getIncomingEdges().addAll(layoutNode.getIncomingEdges());
-		layoutGraph.getOutgoingEdges().addAll(layoutNode.getOutgoingEdges());
-		layoutGraph.getPorts().addAll(layoutNode.getPorts());
-		layoutGraph.getChildNodes().addAll(layoutNode.getChildNodes());
-		return layoutGraph;
-	}
-	
-	/**
 	 * Creates a KLayoutNode, initializes some defaults and returns it.
 	 * Initialized values are:
 	 * <ul>
