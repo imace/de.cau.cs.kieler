@@ -69,9 +69,9 @@
     </genClasses>
     <genClasses ecoreClass="ssm.ecore#//InitialArc"/>
     <genClasses ecoreClass="ssm.ecore#//ConditionalTransition"/>
-    <genClasses ecoreClass="ssm.ecore#//NormalTermination"/>
-    <genClasses ecoreClass="ssm.ecore#//StrongAbortion"/>
-    <genClasses ecoreClass="ssm.ecore#//WeakAbortion"/>
+    <genClasses ecoreClass="ssm.ecore#//NormalTermination" labelFeature="#//ssm/Transition/effectString"/>
+    <genClasses ecoreClass="ssm.ecore#//StrongAbortion" labelFeature="#//ssm/Transition/effectString"/>
+    <genClasses ecoreClass="ssm.ecore#//WeakAbortion" labelFeature="#//ssm/Transition/effectString"/>
     <genClasses ecoreClass="ssm.ecore#//SafeStateMachine">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ssm.ecore#//SafeStateMachine/top"/>
     </genClasses>
