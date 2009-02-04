@@ -69,7 +69,7 @@
    <extension
          point="org.eclipse.emf.edit.itemProviderAdapterFactories">
       <factory
-            class="de.cau.cs.kieler.ssm.diagram.layouter.kimllabelprovider.ssmKimlProviderAdapterFactory"
+            class="de.cau.cs.kieler.ssm.diagram.layouter.kimllabelprovider.KimlSsmItemProviderAdapterFactory"
             uri="http://www.informatik.uni-kiel.de/rtsys/ssm"
             supportedTypes=
               "de.cau.cs.kieler.kiml.ui.provider.IKimlLabelProvider">

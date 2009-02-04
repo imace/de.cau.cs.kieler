@@ -4,7 +4,7 @@ import org.eclipse.emf.common.notify.Adapter;
 
 import de.cau.cs.kieler.ssm.provider.ssmItemProviderAdapterFactory;
 
-public class ssmKimlProviderAdapterFactory extends ssmItemProviderAdapterFactory{
+public class KimlSsmItemProviderAdapterFactory extends ssmItemProviderAdapterFactory{
 
 	/**
 	 * This creates an adapter for a {@link de.cau.cs.kieler.ssm.SimpleState}.
