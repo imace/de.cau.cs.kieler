@@ -48,7 +48,6 @@ import org.eclipse.gmf.runtime.notation.impl.ViewImpl;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.SWT;
 
-
 import de.cau.cs.kieler.kiml.layout.KimlLayoutPlugin;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLabelPlacement;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KDimension;
@@ -65,7 +64,7 @@ import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutType;
 import de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayouter;
 import de.cau.cs.kieler.kiml.layout.util.KimlLayoutPreferenceConstants;
 import de.cau.cs.kieler.kiml.layout.util.KimlLayoutUtil;
-import de.cau.cs.kieler.kiml.ui.helpers.KimlCommonHelper;
+import de.cau.cs.kieler.kiml.ui.helpers.KimlMetricsHelper;
 import de.cau.cs.kieler.kiml.ui.helpers.KimlGMFLayoutHintHelper;
 import de.cau.cs.kieler.kiml.ui.provider.KimlAdapterFactoryLabelProvider;
 import de.cau.cs.kieler.ssm.diagram.edit.parts.CompositeState2EditPart;
@@ -169,7 +168,7 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 
 			/* handle size, be aware of zoom level */
 			Dimension oldSize = gep.getFigure().getBounds().getSize();
-			Dimension newSize = KimlCommonHelper
+			Dimension newSize = KimlMetricsHelper
 					.kDimension2Dimension(layoutGraph.getLayout()
 							.getSize());
 
@@ -182,7 +181,7 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 
 			/* handle position, be aware of zoom level */
 			Point oldLocation = gep.getFigure().getBounds().getLocation();
-			Point newLocation = KimlCommonHelper.kPoint2Point(layoutGraph
+			Point newLocation = KimlMetricsHelper.kPoint2Point(layoutGraph
 					.getLayout().getLocation());
 
 			if (newLocation != null) {
@@ -231,7 +230,7 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 				changeBoundsRequest.setEditParts(gep);
 
 				Dimension oldSize = gep.getFigure().getBounds().getSize();
-				Dimension newSize = KimlCommonHelper
+				Dimension newSize = KimlMetricsHelper
 						.kDimension2Dimension(childGroup.getLayout().getSize());
 
 				if (newSize != null) {
@@ -243,7 +242,7 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 				}
 
 				Point oldLocation = gep.getFigure().getBounds().getLocation();
-				Point newLocation = KimlCommonHelper.kPoint2Point(childGroup
+				Point newLocation = KimlMetricsHelper.kPoint2Point(childGroup
 						.getLayout().getLocation());
 
 				if (newLocation != null) {
@@ -296,18 +295,18 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 			PointList pointList = new PointList();
 
 			/* fetch start point */
-			Point startPoint = KimlCommonHelper.kPoint2Point(edgeLayout
+			Point startPoint = KimlMetricsHelper.kPoint2Point(edgeLayout
 					.getSourcePoint());
 			pointList.addPoint(startPoint);
 
 			/* fetch grid/helper points */
 			for (KPoint gridPoint : edgeLayout.getGridPoints()) {
-				Point point = KimlCommonHelper.kPoint2Point(gridPoint);
+				Point point = KimlMetricsHelper.kPoint2Point(gridPoint);
 				pointList.addPoint(point);
 			}
 
 			/* set end point */
-			Point endPoint = KimlCommonHelper.kPoint2Point(edgeLayout
+			Point endPoint = KimlMetricsHelper.kPoint2Point(edgeLayout
 					.getTargetPoint());
 			pointList.addPoint(endPoint);
 
@@ -385,7 +384,7 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 					KLayoutNode sourceNode = edge.getSource();
 					GraphicalEditPart sourceEditPart = layoutNode2graphicalEditPart
 							.get(sourceNode);
-					newLocation = translateFromTo(KimlCommonHelper
+					newLocation = translateFromTo(KimlMetricsHelper
 							.kPoint2Point(edgeLabel.getLabelLayout()
 									.getLocation()),
 							sourceEditPart.getFigure(), connectionLayer);
@@ -651,10 +650,9 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 		}
 
 		// set label and ID
-		currentLayoutNode.getLabel().setText(
-				KimlCommonHelper.getShortLabel(currentEditPart));
-		currentLayoutNode.setIdString(KimlCommonHelper
-				.getLongLabel(currentEditPart));
+		EObject currentEObject = ((ViewImpl)currentEditPart.getModel()).getElement();
+		currentLayoutNode.getLabel().setText(kimlAdapterLabelProvider.getKimlShortLabel(currentEObject));
+		currentLayoutNode.setIdString(kimlAdapterLabelProvider.getKimlLongLabel(currentEObject));
 
 		// keep track of mapping between elements
 		graphicalEditPart2layoutNode.put(currentEditPart, currentLayoutNode);
@@ -756,7 +754,7 @@ public class KimlSSMDiagramLayouter extends KimlAbstractLayouter {
 				if (obj instanceof LabelEditPart) {
 					LabelEditPart labelEditPart = (LabelEditPart) obj;
 					// labelEditPart.getFigure().setLocation(new Point());
-					KDimension labelSize = KimlCommonHelper
+					KDimension labelSize = KimlMetricsHelper
 							.dimension2KDimension(labelEditPart.getFigure()
 									.getBounds().getSize());
 					EObject transition = ((ViewImpl)connection.getModel()).getElement();

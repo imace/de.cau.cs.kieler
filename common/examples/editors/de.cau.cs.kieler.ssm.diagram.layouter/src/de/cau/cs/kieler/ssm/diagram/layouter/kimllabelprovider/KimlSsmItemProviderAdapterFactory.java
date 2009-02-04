@@ -1,3 +1,12 @@
+/*******************************************************************************
+ * Copyright (c) 2008 Real-Time and Embedded Systems group
+ *
+ * INSERT LICENCE HERE
+ *
+ *
+ * Author: Arne Schipper, ars@informatik.uni-kiel.de 
+ *
+ *******************************************************************************/
 package de.cau.cs.kieler.ssm.diagram.layouter.kimllabelprovider;
 
 import org.eclipse.emf.common.notify.Adapter;

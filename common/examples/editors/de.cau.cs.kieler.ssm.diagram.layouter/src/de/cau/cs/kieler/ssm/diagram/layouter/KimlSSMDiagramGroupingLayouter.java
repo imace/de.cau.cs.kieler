@@ -21,6 +21,8 @@ import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.PointList;
 import org.eclipse.draw2d.geometry.Rectangle;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.gef.ConnectionEditPart;
 import org.eclipse.gef.GraphicalEditPart;
 import org.eclipse.gef.NodeEditPart;
@@ -43,26 +45,28 @@ import org.eclipse.gmf.runtime.diagram.ui.requests.RequestConstants;
 import org.eclipse.gmf.runtime.diagram.ui.requests.SetAllBendpointRequest;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx;
 import org.eclipse.gmf.runtime.draw2d.ui.internal.figures.AnimatableScrollPane;
+import org.eclipse.gmf.runtime.notation.impl.ViewImpl;
 import org.eclipse.jface.viewers.IStructuredSelection;
 
 import de.cau.cs.kieler.kiml.layout.KimlLayoutPlugin;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLabelPlacement;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KDimension;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLabel;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLabelPlacement;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLayout;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLabel;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutGraph;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutType;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeLayout;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPoint;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphFactory;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutType;
 import de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayouter;
 import de.cau.cs.kieler.kiml.layout.util.KimlLayoutPreferenceConstants;
 import de.cau.cs.kieler.kiml.layout.util.KimlLayoutUtil;
-import de.cau.cs.kieler.kiml.ui.helpers.KimlCommonHelper;
 import de.cau.cs.kieler.kiml.ui.helpers.KimlGMFLayoutHintHelper;
+import de.cau.cs.kieler.kiml.ui.helpers.KimlMetricsHelper;
+import de.cau.cs.kieler.kiml.ui.provider.KimlAdapterFactoryLabelProvider;
+import de.cau.cs.kieler.ssm.diagram.part.SafeStateMachineDiagramEditor;
 
 /**
  * The layouter for SafeStateMachines as defined and used by the
@@ -104,6 +108,8 @@ public class KimlSSMDiagramGroupingLayouter extends KimlAbstractLayouter {
 	private BorderItemsAwareFreeFormLayer primaryLayer = null;
 	private Viewport viewport;
 	private boolean groupEverySingleElement;
+	private KimlAdapterFactoryLabelProvider kimlAdapterLabelProvider = new KimlAdapterFactoryLabelProvider(
+			new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE));
 
 	/*------------------------------------------------------------------------------*/
 	/*-----------------------HACK DUE TO EDGES AND LABEL §$$/&%?--------------------*/
@@ -150,7 +156,7 @@ public class KimlSSMDiagramGroupingLayouter extends KimlAbstractLayouter {
 			changeBoundsRequest.setEditParts(gep);
 
 			Dimension oldSize = gep.getFigure().getBounds().getSize();
-			Dimension newSize = KimlCommonHelper
+			Dimension newSize = KimlMetricsHelper
 					.kDimension2Dimension(layoutGraph.getLayout()
 							.getSize());
 
@@ -200,7 +206,7 @@ public class KimlSSMDiagramGroupingLayouter extends KimlAbstractLayouter {
 				changeBoundsRequest.setEditParts(gep);
 
 				Dimension oldSize = gep.getFigure().getBounds().getSize();
-				Dimension newSize = KimlCommonHelper
+				Dimension newSize = KimlMetricsHelper
 						.kDimension2Dimension(childGroup.getLayout().getSize());
 
 				if (newSize != null) {
@@ -212,7 +218,7 @@ public class KimlSSMDiagramGroupingLayouter extends KimlAbstractLayouter {
 				}
 
 				Point oldLocation = gep.getFigure().getBounds().getLocation();
-				Point newLocation = KimlCommonHelper.kPoint2Point(childGroup
+				Point newLocation = KimlMetricsHelper.kPoint2Point(childGroup
 						.getLayout().getLocation());
 
 				if (newLocation != null) {
@@ -244,7 +250,7 @@ public class KimlSSMDiagramGroupingLayouter extends KimlAbstractLayouter {
 			 * to the children.
 			 */
 			else {
-				offset = KimlCommonHelper.kPoint2Point(childGroup.getLayout()
+				offset = KimlMetricsHelper.kPoint2Point(childGroup.getLayout()
 						.getLocation());
 				applyNodeLayoutRecursively(childGroup, compoundCommand, offset);
 			}
@@ -275,9 +281,9 @@ public class KimlSSMDiagramGroupingLayouter extends KimlAbstractLayouter {
 			PointList pointList = new PointList();
 
 			// set start point, mind the offset
-			Point startPoint = KimlCommonHelper.kPoint2Point(
+			Point startPoint = KimlMetricsHelper.kPoint2Point(
 					edgeLayout.getSourcePoint()).translate(offset);
-			Point translatedStartPoint = translateFromTo(KimlCommonHelper
+			Point translatedStartPoint = translateFromTo(KimlMetricsHelper
 					.kPoint2Point(edgeLayout.getSourcePoint())
 					.translate(offset), sourceEditPart.getFigure(),
 					primaryLayer);
@@ -285,9 +291,9 @@ public class KimlSSMDiagramGroupingLayouter extends KimlAbstractLayouter {
 
 			// set grid points, mind the offset (GraphViz: Bezier)
 			for (KPoint gridPoint : edgeLayout.getGridPoints()) {
-				Point point = KimlCommonHelper.kPoint2Point(gridPoint)
+				Point point = KimlMetricsHelper.kPoint2Point(gridPoint)
 						.translate(offset);
-				Point translatedPoint = translateFromTo(KimlCommonHelper
+				Point translatedPoint = translateFromTo(KimlMetricsHelper
 						.kPoint2Point(gridPoint).translate(offset),
 						((GraphicalEditPart) sourceEditPart.getParent())
 								.getFigure(), primaryLayer);
@@ -295,9 +301,9 @@ public class KimlSSMDiagramGroupingLayouter extends KimlAbstractLayouter {
 			}
 
 			// set end point, mind the offset
-			Point endPoint = KimlCommonHelper.kPoint2Point(
+			Point endPoint = KimlMetricsHelper.kPoint2Point(
 					edgeLayout.getTargetPoint()).translate(offset);
-			Point translatedEndPoint = translateFromTo(KimlCommonHelper
+			Point translatedEndPoint = translateFromTo(KimlMetricsHelper
 					.kPoint2Point(edgeLayout.getTargetPoint())
 					.translate(offset), sourceEditPart.getFigure(),
 					primaryLayer);
@@ -360,7 +366,7 @@ public class KimlSSMDiagramGroupingLayouter extends KimlAbstractLayouter {
 				} else {
 					oldLocation = translateFromTo(labelEditPart.getFigure(),
 							sourceEditPart.getFigure());
-					newLocation = KimlCommonHelper.kPoint2Point(edgeLabel
+					newLocation = KimlMetricsHelper.kPoint2Point(edgeLabel
 							.getLabelLayout().getLocation());
 					newLocation.translate(offset);
 				}
@@ -397,12 +403,12 @@ public class KimlSSMDiagramGroupingLayouter extends KimlAbstractLayouter {
 		NodeEditPart rootEditPart = (NodeEditPart) rootPart;
 
 		// set label and ID
-		layoutGraph.getLabel().setText(
-				KimlCommonHelper.getShortLabel(rootEditPart));
-		layoutGraph.setIdString(KimlCommonHelper.getLongLabel(rootEditPart));
+		EObject currentEObject = ((ViewImpl)rootEditPart.getModel()).getElement();
+		layoutGraph.getLabel().setText(kimlAdapterLabelProvider.getKimlShortLabel(currentEObject));
+		layoutGraph.setIdString(kimlAdapterLabelProvider.getKimlLongLabel(currentEObject));
+		
 		if (!groupEverySingleElement) {
-			layoutGraph.setIdString(KimlCommonHelper
-					.getLongLabel(rootEditPart));
+			layoutGraph.setIdString(kimlAdapterLabelProvider.getKimlLongLabel(currentEObject));
 			layoutGraph
 					.getLayout()
 					.setLayouterName(
@@ -514,10 +520,10 @@ public class KimlSSMDiagramGroupingLayouter extends KimlAbstractLayouter {
 					kLayout.getSize().setWidth(childBounds.width);
 
 					// set label and ID
-					childLayoutNode.getLabel().setText(
-							KimlCommonHelper.getShortLabel(childNodeEditPart));
-					childLayoutNode.setIdString(KimlCommonHelper
-							.getLongLabel(childNodeEditPart));
+					EObject currentEObject = ((ViewImpl)childNodeEditPart.getModel()).getElement();
+					childLayoutNode.getLabel().setText(kimlAdapterLabelProvider.getKimlShortLabel(currentEObject));
+					childLayoutNode.setIdString(kimlAdapterLabelProvider.getKimlLongLabel(currentEObject));
+					
 
 					// now process the layout groups correctly, as there may be
 					// more than one in each editPart itself
@@ -531,8 +537,7 @@ public class KimlSSMDiagramGroupingLayouter extends KimlAbstractLayouter {
 						kLayout
 								.setLayoutType(KimlGMFLayoutHintHelper
 										.getContainedElementsLayoutType((ShapeNodeEditPart) childNodeEditPart));
-						childLayoutNode.setIdString(KimlCommonHelper
-								.getLongLabel(childNodeEditPart));
+						childLayoutNode.setIdString(kimlAdapterLabelProvider.getKimlLongLabel(currentEObject));
 						currentLayoutNode.getChildNodes()
 								.add(childLayoutNode);
 					}
@@ -590,6 +595,9 @@ public class KimlSSMDiagramGroupingLayouter extends KimlAbstractLayouter {
 			Map<String, ArrayList<KLayoutNode>> nodes2Groups,
 			KLayoutNode currentLayoutNode) {
 
+		EObject currentEObject = ((ViewImpl)layoutNode2nodeEditPart
+				.get(currentLayoutNode).getModel()).getElement();
+		
 		/*
 		 * If there is just one group, Emma does not need to create a new
 		 * intermediate group, just store this group and its layout information
@@ -610,11 +618,11 @@ public class KimlSSMDiagramGroupingLayouter extends KimlAbstractLayouter {
 								.getLayouterName((ShapeNodeEditPart) layoutNode2nodeEditPart
 										.get(childGroup));
 					}
+					
 					currentLayoutNode.getLayout().setLayoutType(layoutType);
 					currentLayoutNode.getLayout().setLayouterName(layouterName);
-					currentLayoutNode.setIdString(KimlCommonHelper
-							.getLongLabel(layoutNode2nodeEditPart
-									.get(currentLayoutNode)));
+					currentLayoutNode.setIdString(kimlAdapterLabelProvider.getKimlLongLabel(currentEObject));
+					
 					currentLayoutNode.getChildNodes().add(childGroup);
 				}
 			}
@@ -654,9 +662,7 @@ public class KimlSSMDiagramGroupingLayouter extends KimlAbstractLayouter {
 				intermediateLayoutNode
 						.setIdString(i
 								+ ". Group of a "
-								+ KimlCommonHelper
-										.getLongLabel((ShapeNodeEditPart) layoutNode2nodeEditPart
-												.get(currentLayoutNode)));
+								+ kimlAdapterLabelProvider.getKimlLongLabel(currentEObject));
 				// set the layout type of the current layout node, i.e. the
 				// type
 				// how the child intermediate layout nodes, to which no
@@ -665,9 +671,7 @@ public class KimlSSMDiagramGroupingLayouter extends KimlAbstractLayouter {
 				currentLayoutNode.getLayout().setLayoutType(KLayoutType.DEFAULT);
 				currentLayoutNode.getLayout().setLayouterName("");
 				currentLayoutNode
-						.setIdString(KimlCommonHelper
-								.getLongLabel((ShapeNodeEditPart) layoutNode2nodeEditPart
-										.get(currentLayoutNode)));
+						.setIdString(kimlAdapterLabelProvider.getKimlLongLabel(currentEObject));
 				currentLayoutNode.getChildNodes().add(intermediateLayoutNode);
 			}
 		}
@@ -706,14 +710,15 @@ public class KimlSSMDiagramGroupingLayouter extends KimlAbstractLayouter {
 			for (Object obj : connection.getChildren()) {
 				if (obj instanceof LabelEditPart) {
 					LabelEditPart labelEditPart = (LabelEditPart) obj;
-					KDimension labelSize = KimlCommonHelper
+					KDimension labelSize = KimlMetricsHelper
 							.dimension2KDimension(labelEditPart.getFigure()
 									.getBounds().getSize());
 
+					EObject transition = ((ViewImpl)connection.getModel()).getElement();
+					
 					// head label
 					if (labelEditPart.getKeyPoint() == ConnectionLocator.SOURCE) {
-						String headLabel = KimlCommonHelper
-								.getHeadLabel(connection);
+						String headLabel = kimlAdapterLabelProvider.getKimlHeadLabel(transition);
 						if (headLabel != null) {
 							KEdgeLabel hLabel = KimlLayoutUtil
 									.createInitializedEdgeLabel();
@@ -728,8 +733,7 @@ public class KimlSSMDiagramGroupingLayouter extends KimlAbstractLayouter {
 
 					// middle label
 					if (labelEditPart.getKeyPoint() == ConnectionLocator.MIDDLE) {
-						String midLabel = KimlCommonHelper
-								.getMidLabel(connection);
+						String midLabel = kimlAdapterLabelProvider.getKimlCenterLabel(transition);
 						if (midLabel != null) {
 							KEdgeLabel mLabel = KimlLayoutUtil
 									.createInitializedEdgeLabel();
@@ -744,8 +748,7 @@ public class KimlSSMDiagramGroupingLayouter extends KimlAbstractLayouter {
 
 					// tail label
 					if (labelEditPart.getKeyPoint() == ConnectionLocator.TARGET) {
-						String tailLabel = KimlCommonHelper
-								.getTailLabel(connection);
+						String tailLabel = kimlAdapterLabelProvider.getKimlTailLabel(transition);
 						if (tailLabel != null) {
 							KEdgeLabel tLabel = KimlLayoutUtil
 									.createInitializedEdgeLabel();

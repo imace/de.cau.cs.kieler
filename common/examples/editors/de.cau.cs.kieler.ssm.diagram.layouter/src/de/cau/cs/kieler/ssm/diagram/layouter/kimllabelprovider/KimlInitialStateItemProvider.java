@@ -1,3 +1,12 @@
+/*******************************************************************************
+ * Copyright (c) 2008 Real-Time and Embedded Systems group
+ *
+ * INSERT LICENCE HERE
+ *
+ *
+ * Author: Arne Schipper, ars@informatik.uni-kiel.de 
+ *
+ *******************************************************************************/
 package de.cau.cs.kieler.ssm.diagram.layouter.kimllabelprovider;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
@@ -39,12 +48,7 @@ public class KimlInitialStateItemProvider extends InitialStateItemProvider imple
 
 	@Override
 	public String getKimlShortLabel(Object object) {
-		InitialState initialState = (InitialState) object;
-		Region region = (Region) initialState.eContainer();
-		CompositeState compositeState = (CompositeState) region
-				.eContainer();
-		return "Initial State of a Region in "
-				+ compositeState.getName();
+		return "";
 	}
 
 	@Override
