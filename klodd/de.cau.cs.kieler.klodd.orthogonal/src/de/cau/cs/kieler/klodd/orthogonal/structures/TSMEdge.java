@@ -2,6 +2,7 @@ package de.cau.cs.kieler.klodd.orthogonal.structures;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.ListIterator;
 
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge;
 
@@ -122,6 +123,40 @@ public class TSMEdge extends TSMGraphElement {
 				TSMNode.IncEntry.Type.OUT));
 		target.incidence.add(targetRank, new TSMNode.IncEntry(this,
 				TSMNode.IncEntry.Type.IN));		
+	}
+	
+	/**
+	 * Connects this edge with the source and target respecting the
+	 * order of incidence according to the given node sides.
+	 * 
+	 * @param sourceSide port side at the source node
+	 * @param targetSide port side at the target node
+	 */
+	public void connectNodes(TSMNode.Side sourceSide, TSMNode.Side targetSide) {
+		this.sourceSide = sourceSide;
+		this.targetSide = targetSide;
+		ListIterator<TSMNode.IncEntry> incIter = source.incidence.listIterator();
+		while (incIter.hasNext()) {
+			TSMNode.IncEntry nextEntry = incIter.next();
+			TSMNode.Side side = (nextEntry.type == TSMNode.IncEntry.Type.OUT
+					? nextEntry.edge.sourceSide : nextEntry.edge.targetSide);
+			if (sourceSide.compareTo(side) <= 0) {
+				incIter.previous();
+				break;
+			}
+		}
+		incIter.add(new TSMNode.IncEntry(this, TSMNode.IncEntry.Type.OUT));
+		incIter = target.incidence.listIterator();
+		while (incIter.hasNext()) {
+			TSMNode.IncEntry nextEntry = incIter.next();
+			TSMNode.Side side = (nextEntry.type == TSMNode.IncEntry.Type.OUT
+					? nextEntry.edge.sourceSide : nextEntry.edge.targetSide);
+			if (targetSide.compareTo(side) <= 0) {
+				incIter.previous();
+				break;
+			}
+		}
+		incIter.add(new TSMNode.IncEntry(this, TSMNode.IncEntry.Type.IN));
 	}
 	
 	/*

@@ -32,7 +32,9 @@ public class TSMNode extends TSMGraphElement {
 		/** node for normalization, north-west corner */
 		NORM_NW,
 		/** node for normalization, port */
-		NORM_PORT
+		NORM_PORT,
+		/** node for refinement */
+		REFINEMENT
 	}
 	
 	/**
@@ -119,10 +121,15 @@ public class TSMNode extends TSMGraphElement {
 	}
 	
 	/**
-	 * Definition of sides of a node.
+	 * Definition of sides of a node. The order of side definitions
+	 * ensures that the default enumeration comparator implementation
+	 * respects the node sides found in clockwise order.
 	 */
 	public static enum Side {
-		UNDEFINED, NORTH, EAST, SOUTH, WEST;
+		/** the side is undefined */
+		UNDEFINED,
+		/* side definitions in clockwise order */
+		NORTH, EAST, SOUTH, WEST;
 		
 		/**
 		 * Returns the next side in clockwise order.

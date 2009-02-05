@@ -9,6 +9,7 @@ import java.util.Map;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort;
 import de.cau.cs.kieler.klodd.core.algorithms.AbstractAlgorithm;
 import de.cau.cs.kieler.klodd.core.util.Pair;
+import de.cau.cs.kieler.klodd.orthogonal.impl.DualGraphBuilder.ExternalFaceDetector;
 import de.cau.cs.kieler.klodd.orthogonal.modules.ICompacter;
 import de.cau.cs.kieler.klodd.orthogonal.structures.*;
 
@@ -50,6 +51,8 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 	public void compact(TSMGraph graph) {
 		// create a normalized version of the input graph
 		TSMGraph normalizedGraph = createNormalizedGraph(graph);
+		// build dual graph for the normalized graph
+		buildDualGraph(normalizedGraph);
 		// execute the embedded compacter
 		normalizedCompacter.compact(normalizedGraph);
 		// transform abstract metrics to concrete metrics
@@ -112,9 +115,7 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 										currentNode, node, currentSide, newSide);
 							TSMEdge newEdge = new TSMEdge(normalizedGraph,
 									currentNode, newNode);
-							newEdge.connectNodes();
-							newEdge.sourceSide = newSide.right();
-							newEdge.targetSide = newEdge.sourceSide.opposed();
+							newEdge.connectNodes(newSide.right(), newSide.left());
 						}
 						portDescriptor = new PortDescriptor();
 						portDescriptor.nodes.add(newNode);
@@ -153,9 +154,7 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 				if (startingNode != null) {
 					TSMEdge newEdge = new TSMEdge(normalizedGraph,
 							currentNode, startingNode);
-					newEdge.connectNodes();
-					newEdge.sourceSide = startingSide.right();
-					newEdge.targetSide = newEdge.sourceSide.opposed();
+					newEdge.connectNodes(startingSide.right(), startingSide.left());
 				}
 			}
 			else if (node.type == TSMNode.Type.CROSSING) {
@@ -220,18 +219,14 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 						TSMNode.Type.BEND, edge);
 				TSMEdge newEdge = new TSMEdge(normalizedGraph,
 						currentNode, newNode, edge.layoutEdge);
-				newEdge.connectNodes();
-				newEdge.sourceSide = currentSide;
-				newEdge.targetSide = currentSide.opposed();
+				newEdge.connectNodes(currentSide, currentSide.opposed());
 				currentNode = newNode;
 				currentSide = (bend.type == TSMEdge.Bend.Type.LEFT
 						? currentSide.left() : currentSide.right());
 			}
 			TSMEdge newEdge = new TSMEdge(normalizedGraph,
 					currentNode, targetNode, edge.layoutEdge);
-			newEdge.connectNodes();
-			newEdge.sourceSide = currentSide;
-			newEdge.targetSide = currentSide.opposed();
+			newEdge.connectNodes(currentSide, currentSide.opposed());
 		}
 		
 		return normalizedGraph;
@@ -273,9 +268,7 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 			}
 			newNode = new TSMNode(graph, cornerType, origNode);
 			newEdge = new TSMEdge(graph, currentNode, newNode);
-			newEdge.connectNodes();
-			newEdge.sourceSide = currentSide.right();
-			newEdge.targetSide = newEdge.sourceSide.opposed();
+			newEdge.connectNodes(currentSide.right(), currentSide.left());
 			currentNode = newNode;
 			currentSide = currentSide.right();
 		} while (currentSide != endSide);
@@ -323,13 +316,38 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 			TSMNode newNode = new TSMNode(graph, TSMNode.Type.BEND, edge);
 			TSMEdge newEdge = new TSMEdge(graph, portDescriptor.nodes.get(i),
 					newNode, edge.layoutEdge);
-			newEdge.connectNodes();
-			newEdge.sourceSide = source ? edge.sourceSide : edge.targetSide;
-			newEdge.targetSide = newEdge.sourceSide.opposed();
+			TSMNode.Side newSide = source ? edge.sourceSide : edge.targetSide;
+			newEdge.connectNodes(newSide, newSide.opposed());
 			portDescriptor.nodes.add(newNode);
 		}
 		return new Pair<TSMNode, Boolean>(portDescriptor.nodes.get(nodeIndex),
 				new Boolean(bendConsumed));
+	}
+	
+	/**
+	 * Builds the dual graph of the given normalized graph using
+	 * a dual graph builder algorithm.
+	 * 
+	 * @param normalizedGraph normalized graph to process
+	 */
+	private void buildDualGraph(TSMGraph normalizedGraph) {
+		DualGraphBuilder dualGraphBuilder = new DualGraphBuilder();
+		dualGraphBuilder.buildDual(normalizedGraph, new ExternalFaceDetector() {
+			public boolean isExternal(List<TSMFace.BorderEntry> border) {
+				int cornerSum = 0;
+				TSMFace.BorderEntry currentEntry = border.get(border.size() - 1);
+				for (TSMFace.BorderEntry nextEntry : border) {
+					TSMNode.Side side1 = currentEntry.secondSide();
+					TSMNode.Side side2 = nextEntry.firstSide();
+					if (side1 == side2.left())
+						cornerSum--;
+					else if (side1 == side2.right())
+						cornerSum++;
+					currentEntry = nextEntry;
+				}
+				return cornerSum == -4;
+			}
+		});
 	}
 	
 	/**

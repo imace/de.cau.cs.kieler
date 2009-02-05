@@ -525,12 +525,8 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 				ListIterator<TSMFace.BorderEntry> currentFaceIter =
 					getIteratorFor(border, edge1, insertForward);
 				if (currentFaceIter != null) {
-					if (insertForward)
-						currentFaceIter.add(currentFace.new BorderEntry(edge2,
-								edge2.source));
-					else
-						currentFaceIter.add(currentFace.new BorderEntry(edge2,
-								edge2.target));
+					currentFaceIter.add(new TSMFace.BorderEntry(edge2,
+								insertForward));
 					break;
 				}
 			}
@@ -538,12 +534,8 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 				ListIterator<TSMFace.BorderEntry> currentFaceIter =
 					getIteratorFor(border, edge1, !insertForward);
 				if (currentFaceIter != null) {
-					if (insertForward)
-						currentFaceIter.add(pathEntry.targetFace.new BorderEntry(
-								edge2, edge2.target));
-					else
-						currentFaceIter.add(pathEntry.targetFace.new BorderEntry(
-								edge2, edge2.source));
+					currentFaceIter.add(new TSMFace.BorderEntry(edge2,
+							insertForward));
 					break;
 				}
 			}
@@ -606,48 +598,88 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 		
 		if (sourceBorder == null && targetBorder == null) {
 			List<TSMFace.BorderEntry> newBorder = new LinkedList<TSMFace.BorderEntry>();
-			newBorder.add(face.new BorderEntry(insEdge, insEdge.source));
-			newBorder.add(face.new BorderEntry(insEdge, insEdge.target));
+			if (insEdge.source.id == insEdge.target.id) {
+				if (sourceRank < targetRank || sourceRank == targetRank
+						&& forwardSelfLoop) {
+					newBorder.add(new TSMFace.BorderEntry(insEdge, false));
+					insEdge.leftFace = face;
+					TSMFace innerFace = new TSMFace(graph, true);
+					List<TSMFace.BorderEntry> innerBorder = new LinkedList<TSMFace.BorderEntry>();
+					innerBorder.add(new TSMFace.BorderEntry(insEdge, true));
+					innerFace.borders.add(innerBorder);
+					insEdge.rightFace = innerFace;
+				}
+				else {
+					newBorder.add(new TSMFace.BorderEntry(insEdge, true));
+					insEdge.rightFace = face;
+					TSMFace innerFace = new TSMFace(graph, true);
+					List<TSMFace.BorderEntry> innerBorder = new LinkedList<TSMFace.BorderEntry>();
+					innerBorder.add(new TSMFace.BorderEntry(insEdge, false));
+					innerFace.borders.add(innerBorder);
+					insEdge.leftFace = innerFace;
+				}
+			}
+			else {
+				newBorder.add(new TSMFace.BorderEntry(insEdge, true));
+				newBorder.add(new TSMFace.BorderEntry(insEdge, false));
+				insEdge.leftFace = face;
+				insEdge.rightFace = face;
+			}
 			face.borders.add(newBorder);
-			insEdge.leftFace = face;
-			insEdge.rightFace = face;
 		}
 		else if (sourceBorder == null) {
-			targetIter.add(face.new BorderEntry(insEdge, insEdge.target));
-			targetIter.add(face.new BorderEntry(insEdge, insEdge.source));
+			targetIter.add(new TSMFace.BorderEntry(insEdge, true));
+			targetIter.add(new TSMFace.BorderEntry(insEdge, false));
 			insEdge.leftFace = face;
 			insEdge.rightFace = face;
 		}
 		else if (targetBorder == null) {
-			sourceIter.add(face.new BorderEntry(insEdge, insEdge.source));
-			sourceIter.add(face.new BorderEntry(insEdge, insEdge.target));
+			sourceIter.add(new TSMFace.BorderEntry(insEdge, true));
+			sourceIter.add(new TSMFace.BorderEntry(insEdge, false));
 			insEdge.leftFace = face;
 			insEdge.rightFace = face;
 		}
 		else if (sourceBorder == targetBorder) {
-			int sourceIndex = sourceIter.nextIndex();
-			targetIter.add(face.new BorderEntry(insEdge, insEdge.target));
-			TSMFace newFace = new TSMFace(graph);
+			TSMFace newFace = new TSMFace(graph, true);
 			List<TSMFace.BorderEntry> newBorder = new LinkedList<TSMFace.BorderEntry>();
-			while (targetIter.hasNext() && targetIter.nextIndex() != sourceIndex) {
-				newBorder.add(newFace.new BorderEntry(targetIter.next()));
-				targetIter.remove();
-			}
-			if (targetIter.nextIndex() != sourceIndex) {
-				targetIter = targetBorder.listIterator();
-				while (targetIter.nextIndex() < sourceIndex) {
-					newBorder.add(newFace.new BorderEntry(targetIter.next()));
-					targetIter.remove();
+			if (insEdge.source.id == insEdge.target.id) {
+				if (sourceRank < targetRank || sourceRank == targetRank
+						&& forwardSelfLoop) {
+					sourceIter.add(new TSMFace.BorderEntry(insEdge, false));
+					insEdge.leftFace = face;
+					newBorder.add(new TSMFace.BorderEntry(insEdge, true));
+					insEdge.rightFace = newFace;
+				}
+				else {
+					sourceIter.add(new TSMFace.BorderEntry(insEdge, true));
+					insEdge.rightFace = face;
+					newBorder.add(new TSMFace.BorderEntry(insEdge, false));
+					insEdge.leftFace = newFace;
 				}
 			}
-			newBorder.add(newFace.new BorderEntry(insEdge, insEdge.source));
+			else {
+				int sourceIndex = sourceIter.nextIndex();
+				targetIter.add(new TSMFace.BorderEntry(insEdge, false));
+				while (targetIter.hasNext() && targetIter.nextIndex() != sourceIndex) {
+					newBorder.add(new TSMFace.BorderEntry(targetIter.next()));
+					targetIter.remove();
+				}
+				if (targetIter.nextIndex() != sourceIndex) {
+					targetIter = targetBorder.listIterator();
+					while (targetIter.nextIndex() < sourceIndex) {
+						newBorder.add(new TSMFace.BorderEntry(targetIter.next()));
+						targetIter.remove();
+					}
+				}
+				newBorder.add(new TSMFace.BorderEntry(insEdge, true));
+				insEdge.leftFace = face;
+				insEdge.rightFace = newFace;
+			}
 			newFace.borders.add(newBorder);
-			insEdge.leftFace = face;
-			insEdge.rightFace = newFace;
 		}
 		else {
 			int targetIndex = targetIter.nextIndex();
-			sourceIter.add(face.new BorderEntry(insEdge, insEdge.source));
+			sourceIter.add(new TSMFace.BorderEntry(insEdge, true));
 			while (targetIter.hasNext()) {
 				sourceIter.add(targetIter.next());
 			}
@@ -655,7 +687,7 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 			while (targetIter.nextIndex() < targetIndex) {
 				sourceIter.add(targetIter.next());
 			}
-			sourceIter.add(face.new BorderEntry(insEdge, insEdge.target));
+			sourceIter.add(new TSMFace.BorderEntry(insEdge, false));
 			insEdge.leftFace = face;
 			insEdge.rightFace = face;
 			face.borders.remove(targetBorderIndex);
@@ -748,8 +780,7 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 		TSMFace.BorderEntry currentEntry = borderIter.next();
 		while (borderIter.hasNext()) {
 			TSMFace.BorderEntry nextEntry = borderIter.next();
-			if (currentEntry.edge.id == edge1id && nextEntry.edge.id == edge2id
-					&& currentEntry.node.id == node.id) {
+			if (currentEntry.edge.id == edge1id && nextEntry.edge.id == edge2id) {
 				borderIter.previous();
 				placingFound = true;
 				break;
@@ -781,7 +812,8 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 		while (borderIter.hasNext()) {
 			List<TSMFace.BorderEntry> nextBorder = borderIter.next();
 			for (TSMFace.BorderEntry entry : nextBorder) {
-				if (entry.node.id == node.id) {
+				if (entry.edge.source.id == node.id
+						|| entry.edge.target.id == node.id) {
 					return borderIter.previousIndex();
 				}
 			}

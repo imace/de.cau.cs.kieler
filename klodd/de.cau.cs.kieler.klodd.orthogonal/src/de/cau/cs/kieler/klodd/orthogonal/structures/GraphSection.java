@@ -7,6 +7,7 @@ import java.util.List;
 
 /**
  * Section of a TSM graph.
+ * TODO change the whole concept of subgraphs! this approach here is not good
  * 
  * @author msp
  */

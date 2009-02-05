@@ -330,7 +330,7 @@ public class KandinskyLPOrthogonalizer extends AbstractAlgorithm implements
 		for (List<TSMFace.BorderEntry> border : face.borders) {
 			for (TSMFace.BorderEntry entry : border) {
 				int edgeId = entry.edge.id;
-				if (entry.edge.source.id == entry.node.id) {
+				if (entry.forward) {
 					row[jx] = 1;
 					rowIndex[jx++] = cols.sourceAnchor.start + edgeId;
 					row[jx] = 1;
@@ -347,7 +347,6 @@ public class KandinskyLPOrthogonalizer extends AbstractAlgorithm implements
 					rowIndex[jx++] = cols.forwTargetRight.start + edgeId;
 				}
 				else {
-					assert entry.edge.target.id == entry.node.id;
 					row[jx] = 1;
 					rowIndex[jx++] = cols.targetAnchor.start + edgeId;
 					row[jx] = 1;
