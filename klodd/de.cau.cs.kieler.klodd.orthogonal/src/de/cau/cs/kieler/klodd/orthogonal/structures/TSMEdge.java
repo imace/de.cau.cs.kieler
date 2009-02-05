@@ -53,6 +53,14 @@ public class TSMEdge extends TSMGraphElement {
 	public TSMEdge nextEdge;
 	/** the bends of this edge */
 	public List<Bend> bends = new LinkedList<Bend>();
+	/** the side on which the edge leaves the source */
+	public TSMNode.Side sourceSide = TSMNode.Side.UNDEFINED;
+	/** the side on which the edge reaches the target */
+	public TSMNode.Side targetSide = TSMNode.Side.UNDEFINED;
+	/** indicates whether this edge is the first edge on its side at source */
+	public boolean firstEdgeAtSource = false;
+	/** indicates whether this edge is the first edge on its side at target */
+	public boolean firstEdgeAtTarget = false;
 	
 	/**
 	 * Creates an edge connecting two existing nodes, with a layout graph

@@ -21,6 +21,8 @@ public class TSMNode extends TSMGraphElement {
 		ECEXPANSION,
 		/** node created to replace an edge crossing */
 		CROSSING,
+		/** node created to replace an edge bend */
+		BEND,
 		/** node for normalization, north-east corner */
 		NORM_NE,
 		/** node for normalization, south-east corner */
@@ -84,6 +86,102 @@ public class TSMNode extends TSMGraphElement {
 				return edge.rightFace;
 			else
 				return edge.leftFace;
+		}
+		
+		/**
+		 * Returns the side of the containing node on which this
+		 * incidence entry lies.
+		 * 
+		 * @return the target side of the edge if this is an incoming
+		 *     type, else the source side
+		 */
+		public Side side() {
+			if (type == Type.IN)
+				return edge.targetSide;
+			else
+				return edge.sourceSide;
+		}
+		
+		/**
+		 * Returns true if the edge is the first one on its corresponding
+		 * side of the containing node.
+		 * 
+		 * @return true if the edge is first at its target node for
+		 *     incoming types, or if it is first at its source node
+		 *     for outgoing types
+		 */
+		public boolean isFirstEdge() {
+			if (type == Type.IN)
+				return edge.firstEdgeAtTarget;
+			else
+				return edge.firstEdgeAtSource;
+		}
+	}
+	
+	/**
+	 * Definition of sides of a node.
+	 */
+	public static enum Side {
+		UNDEFINED, NORTH, EAST, SOUTH, WEST;
+		
+		/**
+		 * Returns the next side in clockwise order.
+		 * 
+		 * @return the next side in clockwise order
+		 */
+		public Side right() {
+			switch (this) {
+			case NORTH:
+				return EAST;
+			case EAST:
+				return SOUTH;
+			case SOUTH:
+				return WEST;
+			case WEST:
+				return NORTH;
+			default:
+				return UNDEFINED;
+			}
+		}
+		
+		/**
+		 * Returns the next side in counter-clockwise order.
+		 * 
+		 * @return the next side in counter-clockwise order
+		 */
+		public Side left() {
+			switch (this) {
+			case NORTH:
+				return WEST;
+			case EAST:
+				return NORTH;
+			case SOUTH:
+				return EAST;
+			case WEST:
+				return SOUTH;
+			default:
+				return UNDEFINED;
+			}
+		}
+		
+		/**
+		 * Returns the opposed side.
+		 * 
+		 * @return the opposed side
+		 */
+		public Side opposed() {
+			switch (this) {
+			case NORTH:
+				return SOUTH;
+			case EAST:
+				return WEST;
+			case SOUTH:
+				return NORTH;
+			case WEST:
+				return EAST;
+			default:
+				return UNDEFINED;
+			}
 		}
 	}
 	
