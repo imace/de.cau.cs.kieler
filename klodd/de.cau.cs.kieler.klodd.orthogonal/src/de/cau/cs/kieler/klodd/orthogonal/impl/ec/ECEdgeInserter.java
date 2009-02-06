@@ -491,8 +491,8 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 			TSMEdge edge1 = pathEntry.edge;
 			TSMNode oldTarget = edge1.target;
 			edge1.target = dummyNode;
-			ListIterator<TSMNode.IncEntry> oldTargetIter = getIteratorFor(
-					oldTarget.incidence, edge1);
+			ListIterator<TSMNode.IncEntry> oldTargetIter = oldTarget.getIterator(
+					edge1, false);
 			oldTargetIter.remove();
 			TSMEdge edge2 = new TSMEdge(graph, dummyNode, oldTarget,
 					edge1.layoutEdge);
@@ -518,27 +518,21 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 			edge2.nextEdge = edge1.nextEdge;
 			edge1.nextEdge = edge2;
 			edge2.previousEdge = edge1;
+			
 			// update faces left and right of edge1
 			edge2.leftFace = edge1.leftFace;
 			edge2.rightFace = edge1.rightFace;
-			for (List<TSMFace.BorderEntry> border : currentFace.borders) {
-				ListIterator<TSMFace.BorderEntry> currentFaceIter =
-					getIteratorFor(border, edge1, insertForward);
-				if (currentFaceIter != null) {
-					currentFaceIter.add(new TSMFace.BorderEntry(edge2,
-								insertForward));
-					break;
-				}
-			}
-			for (List<TSMFace.BorderEntry> border : pathEntry.targetFace.borders) {
-				ListIterator<TSMFace.BorderEntry> currentFaceIter =
-					getIteratorFor(border, edge1, !insertForward);
-				if (currentFaceIter != null) {
-					currentFaceIter.add(new TSMFace.BorderEntry(edge2,
-							insertForward));
-					break;
-				}
-			}
+			ListIterator<TSMFace.BorderEntry> currentFaceIter = currentFace
+					.getIterator(edge1, insertForward);
+			if (!insertForward)
+				currentFaceIter.previous();
+			currentFaceIter.add(new TSMFace.BorderEntry(edge2, insertForward));
+			ListIterator<TSMFace.BorderEntry> targetFaceIter = pathEntry
+					.targetFace.getIterator(edge1, !insertForward);
+			if (insertForward)
+				targetFaceIter.previous();
+			targetFaceIter.add(new TSMFace.BorderEntry(edge2, !insertForward));
+
 			// insert an edge from the current node to the new pseudo node
 			previousEdge = insertEdge(currentNode, currentRank, dummyNode,
 					firstRank, currentFace, null, previousEdge,
@@ -547,6 +541,7 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 			currentRank = secondRank;
 			currentFace = pathEntry.targetFace;
 		}
+		
 		// insert a final edge from the current node to the target node
 		insertEdge(currentNode, currentRank, insEdge.target,
 				path.targetPlacing.rank, path.targetPlacing.face, insEdge,
@@ -659,17 +654,21 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 			}
 			else {
 				int sourceIndex = sourceIter.nextIndex();
+				int nextIndex = targetIter.nextIndex();
 				targetIter.add(new TSMFace.BorderEntry(insEdge, false));
-				while (targetIter.hasNext() && targetIter.nextIndex() != sourceIndex) {
-					newBorder.add(new TSMFace.BorderEntry(targetIter.next()));
-					targetIter.remove();
-				}
-				if (targetIter.nextIndex() != sourceIndex) {
-					targetIter = targetBorder.listIterator();
-					while (targetIter.nextIndex() < sourceIndex) {
-						newBorder.add(new TSMFace.BorderEntry(targetIter.next()));
-						targetIter.remove();
+				while (nextIndex != sourceIndex) {
+					if (!targetIter.hasNext()) {
+						targetIter = targetBorder.listIterator();
+						nextIndex = 0;
 					}
+					TSMFace.BorderEntry nextEntry = targetIter.next();
+					newBorder.add(new TSMFace.BorderEntry(nextEntry));
+					targetIter.remove();
+					if (nextEntry.forward)
+						nextEntry.edge.rightFace = newFace;
+					else
+						nextEntry.edge.leftFace = newFace;
+					nextIndex++;
 				}
 				newBorder.add(new TSMFace.BorderEntry(insEdge, true));
 				insEdge.leftFace = face;
@@ -697,56 +696,6 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 		insEdge.connectNodes(sourceRank, targetRank, forwardSelfLoop);
 		
 		return insEdge;
-	}
-	
-	/**
-	 * Gets a list iterator for the given incidence list, with the
-	 * current position before or after the given edge.
-	 * 
-	 * @param incList list for which the iterator shall be created
-	 * @param edge edge at which the iterator shall point
-	 * @return iterator pointing at <code>edge</code>, or null if
-	 *     the edge was not found
-	 */
-	private ListIterator<TSMNode.IncEntry> getIteratorFor(
-			List<TSMNode.IncEntry> incList,	TSMEdge edge) {
-		ListIterator<TSMNode.IncEntry> edgeIter = incList.listIterator();
-		while (edgeIter.hasNext()) {
-			if (edgeIter.next().edge.id == edge.id)
-				return edgeIter;
-		}
-		return null;
-	}
-	
-	/**
-	 * Gets a list iterator for the given list of face border entries,
-	 * with the current position before or after the given edge.
-	 * 
-	 * @param border list of face border entries for which the iterator
-	 *     shall be created
-	 * @param edge edge at which the iterator shall point
-	 * @param forward if true, the list is traversed in forward direction,
-	 *     else backwards
-	 * @return iterator pointing at <code>edge</code>, or null if the
-	 *     edge was not found
-	 */
-	private ListIterator<TSMFace.BorderEntry> getIteratorFor(
-			List<TSMFace.BorderEntry> border, TSMEdge edge, boolean forward) {
-		if (forward) {
-			ListIterator<TSMFace.BorderEntry> borderIter = border.listIterator();
-			while (borderIter.hasNext()) {
-				if (borderIter.next().edge.id == edge.id)
-					return borderIter;
-			}
-		}
-		else {
-			ListIterator<TSMFace.BorderEntry> borderIter = border.listIterator(border.size());
-			while (borderIter.hasPrevious()) {
-				if (borderIter.previous().edge.id == edge.id)
-					return borderIter;
-			}
-		}
-		return null;
 	}
 
 	/**

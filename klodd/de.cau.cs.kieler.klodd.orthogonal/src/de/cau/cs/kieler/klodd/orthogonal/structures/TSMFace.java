@@ -2,6 +2,7 @@ package de.cau.cs.kieler.klodd.orthogonal.structures;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.ListIterator;
 
 /**
  * A face in the graph structure used for the topology-shape-metrics
@@ -128,4 +129,27 @@ public class TSMFace extends TSMGraphElement {
 		this.id = graph.nextFaceId++;
 	}
 	
+	
+	/**
+	 * Gets a list iterator with the current position at the given edge.
+	 * The returned iterator has its cursor directly after the edge.
+	 * 
+	 * @param edge edge at which the iterator shall point
+	 * @param forward is the given edge forward for this face?
+	 * @return iterator pointing at <code>edge</code>, or null if the
+	 *     edge was not found
+	 */
+	public ListIterator<TSMFace.BorderEntry> getIterator(TSMEdge edge,
+			boolean forward) {
+		for (List<BorderEntry> border : borders) {
+			ListIterator<BorderEntry> borderIter = border.listIterator();
+			while (borderIter.hasNext()) {
+				BorderEntry nextEntry = borderIter.next();
+				if (nextEntry.edge.id == edge.id && nextEntry.forward == forward)
+					return borderIter;
+			}
+		}
+		return null;
+	}
+
 }

@@ -2,6 +2,7 @@ package de.cau.cs.kieler.klodd.orthogonal.structures;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.ListIterator;
 
 /**
  * A node in the graph structure used for the topology-shape-metrics
@@ -224,6 +225,28 @@ public class TSMNode extends TSMGraphElement {
 		this.type = type;
 		this.object = null;
 		this.id = graph.nextNodeId++;
+	}
+	
+	/**
+	 * Gets a list iterator for this node's incidence list, with the
+	 * current position at the given edge. The returned list iterator
+	 * has its cursor directly after the edge
+	 * 
+	 * @param edge edge at which the iterator shall point
+	 * @param outgoing is the given edge an outgoing edge?
+	 * @return iterator pointing at <code>edge</code>, or null if
+	 *     the edge was not found
+	 */
+	public ListIterator<TSMNode.IncEntry> getIterator(TSMEdge edge,
+			boolean outgoing) {
+		ListIterator<IncEntry> edgeIter = incidence.listIterator();
+		while (edgeIter.hasNext()) {
+			IncEntry nextEntry = edgeIter.next();
+			if (nextEntry.edge.id == edge.id && (nextEntry.type
+					== IncEntry.Type.OUT) == outgoing)
+				return edgeIter;
+		}
+		return null;
 	}
 	
 }
