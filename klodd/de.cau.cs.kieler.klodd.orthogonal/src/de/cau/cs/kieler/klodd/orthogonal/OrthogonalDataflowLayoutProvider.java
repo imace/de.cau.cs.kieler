@@ -74,7 +74,7 @@ public class OrthogonalDataflowLayoutProvider extends
 		planarizer = new PortConstraintsPlanarizer(new EdgeInsertionECPlanarizer());
 		orthogonalizer = new KandinskyLPOrthogonalizer();
 		compacter = new NormalizingCompacter(new RefiningCompacter(
-				new FastRefinedCompacter()));
+				new LayeringCompacter()));
 	}
 
 }

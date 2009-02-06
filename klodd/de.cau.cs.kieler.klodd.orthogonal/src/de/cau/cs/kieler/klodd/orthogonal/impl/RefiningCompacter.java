@@ -106,6 +106,9 @@ public class RefiningCompacter extends AbstractAlgorithm implements ICompacter {
 		List<RefinementEdge> refinements = getRefinements(oldExternalFace);
 		List<TSMFace> newFaces = applyRefinements(graph, refinements);
 		graph.faces.addAll(newFaces);
+		
+		// execute the embedded compacter
+		refinedCompacter.compact(graph);
 	}
 
 	/**

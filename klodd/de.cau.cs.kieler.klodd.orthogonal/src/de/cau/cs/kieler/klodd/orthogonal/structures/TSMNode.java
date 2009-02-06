@@ -199,6 +199,10 @@ public class TSMNode extends TSMGraphElement {
 	public Object object;
 	/** the type of this node */
 	public Type type;
+	/** abstract x coordinate position */
+	public int abstrXpos;
+	/** abstract y coordinate position */
+	public int abstrYpos;
 	
 	/**
 	 * Creates a node containing the given object.
