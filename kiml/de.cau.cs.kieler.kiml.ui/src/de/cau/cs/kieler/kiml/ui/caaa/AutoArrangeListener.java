@@ -26,8 +26,7 @@ import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditor;
 import org.eclipse.gmf.runtime.notation.impl.DiagramImpl;
 import org.eclipse.swt.widgets.Display;
 
-import de.cau.cs.kieler.kiml.layout.services.DiagramLayouters;
-import de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayouter;
+import de.cau.cs.kieler.kiml.ui.diagramlayouter.KimlDiagramLayouter;
 
 
 /**
@@ -246,11 +245,8 @@ class AutoArrangeListener extends ResourceSetListenerImpl implements Runnable {
 	 */
 	public synchronized void run() {
 		// find a layouter
-		String editorId = listenedEditor.getEditorSite().getId();
-		KimlAbstractLayouter diagramLayouter = DiagramLayouters.getInstance()
-				.getDiagramLayouter(editorId);
 		Animation.markBegin();
-		diagramLayouter.layout(listenedEditor);
+		KimlDiagramLayouter.layout(listenedEditor);
 		Animation.run(1000);
 		// arranging completed, allow next one
 		aboutToArrange = false;

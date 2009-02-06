@@ -25,16 +25,12 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.handlers.HandlerUtil;
 
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayouterInfo;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutType;
-import de.cau.cs.kieler.kiml.layout.services.DiagramLayouters;
-import de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayouter;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayouterInfo;
 import de.cau.cs.kieler.kiml.layout.services.LayoutProviders;
-import de.cau.cs.kieler.kiml.layout.util.KimlLayoutPreferenceConstants;
 import de.cau.cs.kieler.kiml.ui.ContributionItemLayoutAs;
-import de.cau.cs.kieler.kiml.ui.diagramlayouter.KimlGenericDiagramLayouter;
+import de.cau.cs.kieler.kiml.ui.diagramlayouter.KimlDiagramLayouter;
 import de.cau.cs.kieler.kiml.ui.helpers.KimlGMFLayoutHintHelper;
-
 
 /**
  * The handler which is responsible to annotate the selected element with the
@@ -48,9 +44,9 @@ import de.cau.cs.kieler.kiml.ui.helpers.KimlGMFLayoutHintHelper;
  * parents and act just as an intermediate layer to hold children, special
  * processing must be done when selecting those EditParts.
  * <p>
- * So if a compartment was selecting during the call to this handler, the
- * parent of the compartment is fetched and the layout information is attached
- * to the parent. This complies with the semantics expected by the
+ * So if a compartment was selecting during the call to this handler, the parent
+ * of the compartment is fetched and the layout information is attached to the
+ * parent. This complies with the semantics expected by the
  * {@link KimlAbstractLayouter}s, as for example the
  * {@link KimlGenericDiagramLayouter}.
  * 
@@ -61,8 +57,12 @@ import de.cau.cs.kieler.kiml.ui.helpers.KimlGMFLayoutHintHelper;
  */
 public class LayoutAsHandler extends AbstractHandler implements IHandler {
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.core.commands.AbstractHandler#execute(org.eclipse.core.commands.ExecutionEvent)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.core.commands.AbstractHandler#execute(org.eclipse.core.commands
+	 * .ExecutionEvent)
 	 */
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 
@@ -116,57 +116,17 @@ public class LayoutAsHandler extends AbstractHandler implements IHandler {
 		KLayouterInfo layouterInfo = LayoutProviders.getInstance()
 				.getLayouterInfoForLayouterName(layouterName);
 		KLayoutType layoutType = layouterInfo.getLayoutType();
-		String groupID = "";
 
 		/* just another sanity check if the right commandID */
-		if (commandID
-				.equals("de.cau.cs.kieler.kiml.ui.command.layoutAs")) {
+		if (commandID.equals("de.cau.cs.kieler.kiml.ui.command.layoutAs")) {
 
 			IEditorPart editorPart = HandlerUtil.getActiveEditor(event);
-			String editorId = editorPart.getEditorSite().getId();
-			KimlAbstractLayouter diagramLayouter = DiagramLayouters
-					.getInstance().getDiagramLayouter(editorId);
 
-			/*
-			 * Check if Emma wants to lay out every single element, or if she
-			 * wants to apply the layout to sub (or contained elements) of the
-			 * one selected. This is an option of the DiagramLayouter, as this
-			 * class is responsible for the translation into the KLayoutGraph.
-			 */
-			if (Boolean
-					.parseBoolean(diagramLayouter
-							.getSettings()
-							.get(
-									KimlLayoutPreferenceConstants.PREF_GROUP_EVERY_SINGLE_ELEMENT))) {
-
-				/* group every single element */
-				groupID = KimlGMFLayoutHintHelper
-						.generateLayoutGroupID(selectedGraphicalEditParts);
-
-				/* take care of the selection, .. */
-				if (selectedGraphicalEditParts.size() == 1) {
-					/*
-					 * just 1 selected, assume that Emma wants to select
-					 * subelements
-					 */
-					KimlGMFLayoutHintHelper.setChildrenLayoutHint(
-							(ShapeNodeEditPart) selectedGraphicalEditParts
-									.get(0), groupID, layoutType, layouterName);
-				} else {
-					/* more selected, group single elements */
-					KimlGMFLayoutHintHelper.setLayoutHint(
-							selectedGraphicalEditParts, groupID, layoutType,
-							layouterName);
-				}
-
-			} else {
-
-				/* group all elements contained in selected ones */
-				for (Object shapeNodeEditPart : selectedGraphicalEditParts) {
-					KimlGMFLayoutHintHelper.setContainedElementsLayoutHint(
-							(GraphicalEditPart) shapeNodeEditPart, layoutType,
-							layouterName);
-				}
+			/* group all elements contained in selected ones */
+			for (Object shapeNodeEditPart : selectedGraphicalEditParts) {
+				KimlGMFLayoutHintHelper.setContainedElementsLayoutHint(
+						(GraphicalEditPart) shapeNodeEditPart, layoutType,
+						layouterName);
 			}
 
 			/*
@@ -174,7 +134,7 @@ public class LayoutAsHandler extends AbstractHandler implements IHandler {
 			 * whole diagram
 			 */
 			Animation.markBegin();
-			diagramLayouter.layout(editorPart);
+			KimlDiagramLayouter.layout(editorPart);
 			Animation.run(700);
 		}
 		return null;

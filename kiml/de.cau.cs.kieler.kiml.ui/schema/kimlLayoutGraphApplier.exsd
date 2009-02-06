@@ -1,0 +1,130 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Schema file written by PDE -->
+<schema targetNamespace="de.cau.cs.kieler.kiml.ui" xmlns="http://www.w3.org/2001/XMLSchema">
+<annotation>
+      <appinfo>
+         <meta.schema plugin="de.cau.cs.kieler.kiml.ui" id="kimlDiagramTransformer" name="KIML Diagram Transformer"/>
+      </appinfo>
+      <documentation>
+         Extension point for implementations of the appliance of the KLayoutGraph information to the diagram.
+      </documentation>
+   </annotation>
+
+   <element name="extension">
+      <annotation>
+         <appinfo>
+            <meta.element />
+         </appinfo>
+      </annotation>
+      <complexType>
+         <sequence>
+            <element ref="kimlLayoutGraphApplier"/>
+         </sequence>
+         <attribute name="point" type="string" use="required">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="id" type="string">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="name" type="string">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+               <appinfo>
+                  <meta.attribute translatable="true"/>
+               </appinfo>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <element name="kimlLayoutGraphApplier">
+      <complexType>
+         <attribute name="class" type="string">
+            <annotation>
+               <documentation>
+                  Implementing class of the layout graph applier, must extend &lt;samp&gt;de.cau.cs.kieler.kiml.ui.diagramtransformer.KimlAbstractLayoutGraphApplier&lt;/samp&gt;.
+               </documentation>
+               <appinfo>
+                  <meta.attribute kind="java" basedOn="de.cau.cs.kieler.kiml.ui.diagramlayouter.KimlAbstractLayoutGraphApplier:"/>
+               </appinfo>
+            </annotation>
+         </attribute>
+         <attribute name="editor_id" type="string">
+            <annotation>
+               <documentation>
+                  ID of the diagram editor for which this layout graph applier shall be used.
+               </documentation>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <annotation>
+      <appinfo>
+         <meta.section type="since"/>
+      </appinfo>
+      <documentation>
+         1.0.0
+      </documentation>
+   </annotation>
+
+   <annotation>
+      <appinfo>
+         <meta.section type="examples"/>
+      </appinfo>
+      <documentation>
+         The following is an example for the KIML LayoutGraph Applier extension point:
+&lt;p&gt;
+   &lt;pre&gt;
+     &lt;extension
+         point=&quot;de.cau.cs.kieler.kiml.layout.kimlLayoutGraphApplier&quot;&gt;
+      &lt;kimlDiagramLayouter
+            class=&quot;de.cau.cs.kieler.ssm.gmf.diagram.layouter.SSMLayoutGraphApplier&quot;
+            editor_id=&quot;de.cau.cs.kieler.ssm.diagram.part.SafeStateMachineDiagramEditorID&quot;&gt;
+      &lt;/kimlDiagramLayouter&gt;
+     &lt;/extension&gt;
+   &lt;/pre&gt;
+&lt;/p&gt;
+      </documentation>
+   </annotation>
+
+   <annotation>
+      <appinfo>
+         <meta.section type="apiinfo"/>
+      </appinfo>
+      <documentation>
+         The value of the attribute class must represent a fully qualified name of a class that extends
+&lt;samp&gt;de.cau.cs.kieler.kiml.ui.diagramtransformer.KimlLayoutGraphApplier&lt;/samp&gt;.
+      </documentation>
+   </annotation>
+
+   <annotation>
+      <appinfo>
+         <meta.section type="implementation"/>
+      </appinfo>
+      <documentation>
+         [Enter information about supplied implementation of this extension point.]
+      </documentation>
+   </annotation>
+
+   <annotation>
+      <appinfo>
+         <meta.section type="copyright"/>
+      </appinfo>
+      <documentation>
+         Copyright (c) 2008, 2009 Real-Time and Embedded Systems group
+Author: Arne Schipper, ars@informatik.uni-kiel.de
+      </documentation>
+   </annotation>
+
+</schema>

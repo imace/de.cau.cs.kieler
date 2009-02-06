@@ -59,8 +59,6 @@ import org.eclipse.ui.views.properties.IPropertySheetPage;
 import org.eclipse.ui.views.properties.tabbed.ITabbedPropertySheetPageContributor;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 
-import de.cau.cs.kieler.kiml.layout.services.DiagramLayouters;
-import de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayouter;
 import de.cau.cs.kieler.kiml.layout.util.KimlLayoutPreferenceConstants;
 import de.cau.cs.kieler.kiml.ui.helpers.KimlGMFColorHelper;
 import de.cau.cs.kieler.kiml.ui.helpers.KimlGMFLayoutHintHelper;
@@ -454,14 +452,7 @@ public class KimlLayoutHintView extends ViewPart implements ISelectionListener,
 					((DiagramDocumentEditor) newEditor).getEditingDomain()
 							.addResourceSetListener(this);
 					activeEditor = newEditor;
-					KimlAbstractLayouter diagramLayouter = DiagramLayouters
-							.getInstance().getDiagramLayouter(
-									activeEditor.getEditorSite().getId());
-					groupSingleElement = Boolean
-							.parseBoolean(diagramLayouter
-									.getSettings()
-									.get(
-											KimlLayoutPreferenceConstants.PREF_GROUP_EVERY_SINGLE_ELEMENT));
+					
 				}
 				/*
 				 * This is for GEF Editors.

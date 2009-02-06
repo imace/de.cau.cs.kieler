@@ -18,7 +18,6 @@ import org.eclipse.ui.actions.CompoundContributionItem;
 import org.eclipse.ui.menus.CommandContributionItem;
 import org.eclipse.ui.menus.CommandContributionItemParameter;
 
-import de.cau.cs.kieler.kiml.layout.services.DiagramLayouters;
 import de.cau.cs.kieler.kiml.layout.util.KimlLayoutPreferenceConstants;
 
 
@@ -50,11 +49,14 @@ public class ContributionItemGroupFunctions extends CompoundContributionItem {
 		String editorId = PlatformUI.getWorkbench().getActiveWorkbenchWindow()
 				.getActivePage().getActiveEditor().getEditorSite().getId();
 
+		return contribItems.toArray(new IContributionItem[] {});
+		
 		/*
 		 * show the grouping functions only if the diagram layouter can handle groups
 		 * other than complete compartments
 		 */
-		if (Boolean
+		/**
+		 if (Boolean
 				.parseBoolean(DiagramLayouters
 						.getInstance()
 						.getDiagramLayouter(editorId)
@@ -62,10 +64,10 @@ public class ContributionItemGroupFunctions extends CompoundContributionItem {
 						.get(
 								KimlLayoutPreferenceConstants.PREF_GROUP_EVERY_SINGLE_ELEMENT))) {
 
-			/* separator */
+			/( separator 
 			contribItems.add(new Separator());
 
-			/* highlight */
+			// highlight 
 			CommandContributionItemParameter ccip1 = new CommandContributionItemParameter(
 					PlatformUI.getWorkbench().getActiveWorkbenchWindow(),
 					"de.cau.cs.kieler.kiml.ui.CommandContributionItem.highlightGroupMembers",
@@ -74,7 +76,7 @@ public class ContributionItemGroupFunctions extends CompoundContributionItem {
 			IContributionItem cci = new CommandContributionItem(ccip1);
 			contribItems.add(cci);
 
-			/* select */
+			// select 
 			CommandContributionItemParameter ccip2 = new CommandContributionItemParameter(
 					PlatformUI.getWorkbench().getActiveWorkbenchWindow(),
 					"de.cau.cs.kieler.kiml.ui.CommandContributionItem.selectGroupMembers",
@@ -83,7 +85,7 @@ public class ContributionItemGroupFunctions extends CompoundContributionItem {
 			IContributionItem cci2 = new CommandContributionItem(ccip2);
 			contribItems.add(cci2);
 
-			/* ungroup */
+			// ungroup
 			CommandContributionItemParameter ccip3 = new CommandContributionItemParameter(
 					PlatformUI.getWorkbench().getActiveWorkbenchWindow(),
 					"de.cau.cs.kieler.kiml.ui.CommandContributionItem.ungroupElements",
@@ -93,5 +95,6 @@ public class ContributionItemGroupFunctions extends CompoundContributionItem {
 			contribItems.add(cci3);
 		}
 		return contribItems.toArray(new IContributionItem[] {});
+		*/
 	}
 }

@@ -27,19 +27,16 @@ import org.eclipse.ui.handlers.HandlerUtil;
 
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayouterInfo;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutType;
-import de.cau.cs.kieler.kiml.layout.services.DiagramLayouters;
-import de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayouter;
 import de.cau.cs.kieler.kiml.layout.services.LayoutProviders;
-import de.cau.cs.kieler.kiml.layout.util.KimlLayoutPreferenceConstants;
 import de.cau.cs.kieler.kiml.ui.ContributionItemLayoutAs;
+import de.cau.cs.kieler.kiml.ui.diagramlayouter.KimlDiagramLayouter;
 import de.cau.cs.kieler.kiml.ui.helpers.KimlGMFLayoutHintHelper;
-
 
 /**
  * The handler which is responsible for the functions that concern grouping of
- * single elements within a compartment. Handler is called when executing
- * a command. This is set in the plugin.xml file. The commands can only be
- * issued through a menu, when the grouping of single elements is enabled. 
+ * single elements within a compartment. Handler is called when executing a
+ * command. This is set in the plugin.xml file. The commands can only be issued
+ * through a menu, when the grouping of single elements is enabled.
  * 
  * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
  * @see LayoutAsHandler
@@ -57,8 +54,12 @@ import de.cau.cs.kieler.kiml.ui.helpers.KimlGMFLayoutHintHelper;
  */
 public class GroupAsHandler extends AbstractHandler implements IHandler {
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.core.commands.AbstractHandler#execute(org.eclipse.core.commands.ExecutionEvent)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.core.commands.AbstractHandler#execute(org.eclipse.core.commands
+	 * .ExecutionEvent)
 	 */
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 
@@ -114,57 +115,17 @@ public class GroupAsHandler extends AbstractHandler implements IHandler {
 		KLayouterInfo layouterInfo = LayoutProviders.getInstance()
 				.getLayouterInfoForLayouterName(layouterName);
 		KLayoutType layoutType = layouterInfo.getLayoutType();
-		String groupID = "";
 
 		/* just another sanity check if the right commandID */
-		if (commandID
-				.equals("de.cau.cs.kieler.kiml.ui.command.groupAs")) {
+		if (commandID.equals("de.cau.cs.kieler.kiml.ui.command.groupAs")) {
 
 			IEditorPart editorPart = HandlerUtil.getActiveEditor(event);
-			String editorId = editorPart.getEditorSite().getId();
-			KimlAbstractLayouter diagramLayouter = DiagramLayouters
-					.getInstance().getDiagramLayouter(editorId);
 
-			/*
-			 * Check if Emma wants to layout every single element, or if she
-			 * wants to apply the layout to sub (or contained elements) of the
-			 * one selected. This is an option of the DiagramLayouter, as this
-			 * Class is responsible for the translation into the KLayoutGraph.
-			 */
-			if (Boolean
-					.parseBoolean(diagramLayouter
-							.getSettings()
-							.get(
-									KimlLayoutPreferenceConstants.PREF_GROUP_EVERY_SINGLE_ELEMENT))) {
-
-				/* group every single element */
-				groupID = KimlGMFLayoutHintHelper
-						.generateLayoutGroupID(selectedShapeNodeEditParts);
-
-				/* take care of the selection, .. */
-				if (selectedShapeNodeEditParts.size() == 1) {
-					/*
-					 * just 1 selected, assume that Emma wants to select
-					 * subelements
-					 */
-					KimlGMFLayoutHintHelper.setChildrenLayoutHint(
-							(ShapeNodeEditPart) selectedShapeNodeEditParts
-									.get(0), groupID, layoutType, layouterName);
-				} else {
-					/* more selected, group single elements */
-					KimlGMFLayoutHintHelper.setLayoutHint(
-							selectedShapeNodeEditParts, groupID, layoutType,
-							layouterName);
-				}
-
-			} else {
-
-				/* group all elements contained in selected ones */
-				for (Object shapeNodeEditPart : selectedShapeNodeEditParts) {
-					KimlGMFLayoutHintHelper.setContainedElementsLayoutHint(
-							(ShapeNodeEditPart) shapeNodeEditPart, layoutType,
-							layouterName);
-				}
+			/* group all elements contained in selected ones */
+			for (Object shapeNodeEditPart : selectedShapeNodeEditParts) {
+				KimlGMFLayoutHintHelper.setContainedElementsLayoutHint(
+						(ShapeNodeEditPart) shapeNodeEditPart, layoutType,
+						layouterName);
 			}
 
 			/*
@@ -172,7 +133,7 @@ public class GroupAsHandler extends AbstractHandler implements IHandler {
 			 * whole diagram
 			 */
 			Animation.markBegin();
-			diagramLayouter.layout(editorPart);
+			KimlDiagramLayouter.layout(editorPart);
 			Animation.run(700);
 		}
 		return null;

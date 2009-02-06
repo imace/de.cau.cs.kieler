@@ -26,17 +26,15 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.views.properties.tabbed.ITabbedPropertyConstants;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayouterInfo;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutType;
-import de.cau.cs.kieler.kiml.layout.services.DiagramLayouters;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayouterInfo;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage;
 import de.cau.cs.kieler.kiml.layout.services.LayoutProviders;
+import de.cau.cs.kieler.kiml.ui.diagramlayouter.KimlDiagramLayouter;
 import de.cau.cs.kieler.kiml.ui.helpers.KimlGMFLayoutHintHelper;
-
 
 /**
  * The section displaying the Kiml Layout Hints in a tab in the properties view.
@@ -203,11 +201,9 @@ public class KimlLayoutTypePropertySection extends
 	 * Is called when the layout hint was changed and performs a new layout.
 	 */
 	private void performLayout() {
-		String editorID = PlatformUI.getWorkbench().getActiveWorkbenchWindow()
-				.getActivePage().getActiveEditor().getEditorSite().getId();
 		Animation.markBegin();
-		DiagramLayouters.getInstance().getDiagramLayouter(editorID).layout(
-				getSemanticEditPart().getRoot().getViewer().getContents());
+		KimlDiagramLayouter.layout(getSemanticEditPart().getRoot().getViewer()
+				.getContents());
 		Animation.run(1000);
 	}
 
