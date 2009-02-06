@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-ClassPath: .
-Bundle-Name: Test Plug-in
+Bundle-Name: SSM Diagram Layout Plug-in
 Bundle-SymbolicName: de.cau.cs.kieler.ssm.diagram.layouter;singleton:=true
 Bundle-Version: 1.0.0
 Require-Bundle: org.eclipse.ui,
