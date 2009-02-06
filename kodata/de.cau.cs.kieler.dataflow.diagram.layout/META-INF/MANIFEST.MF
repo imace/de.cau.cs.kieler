@@ -21,3 +21,4 @@ Export-Package: dataflow.diagram.layout.services;
    de.cau.cs.kieler.kiml.layout.KimlLayoutGraph,
    org.eclipse.gmf.runtime.common.core.service,
    org.eclipse.gef"
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
