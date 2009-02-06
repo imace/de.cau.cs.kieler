@@ -7,31 +7,31 @@
  * Author: Arne Schipper, ars@informatik.uni-kiel.de 
  *
  *******************************************************************************/
-package de.cau.cs.kieler.ssm.diagram.layouter.kimllabelprovider;
+package ssm.diagram.layout.kimllabelprovider;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 
 import de.cau.cs.kieler.kiml.ui.provider.IKimlLabelProvider;
-import de.cau.cs.kieler.ssm.WeakAbortion;
-import de.cau.cs.kieler.ssm.provider.WeakAbortionItemProvider;
+import de.cau.cs.kieler.ssm.StrongAbortion;
+import de.cau.cs.kieler.ssm.provider.StrongAbortionItemProvider;
 
-public class KimlWeakAbortionItemProvider extends WeakAbortionItemProvider  implements IKimlLabelProvider{
+public class KimlStrongAbortionItemProvider extends StrongAbortionItemProvider  implements IKimlLabelProvider{
 
-	public KimlWeakAbortionItemProvider(AdapterFactory adapterFactory) {
+	public KimlStrongAbortionItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
 	@Override
 	public String getKimlCenterLabel(Object object) {
-		WeakAbortion weakAbortion = (WeakAbortion) object;
+		StrongAbortion strongAbortion = (StrongAbortion) object;
 
-		String immediate = weakAbortion.getIsImmediateString() == null ? ""
-				: weakAbortion.getIsImmediateString();
-		String trigger = weakAbortion.getTriggerString() == null ? ""
-				: weakAbortion.getIsImmediateString()
-						+ weakAbortion.getTriggerString();
-		String effect = weakAbortion.getEffectString() == null ? ""
-				: weakAbortion.getEffectString();
+		String immediate = strongAbortion.getIsImmediateString() == null ? ""
+				: strongAbortion.getIsImmediateString();
+		String trigger = strongAbortion.getTriggerString() == null ? ""
+				: strongAbortion.getIsImmediateString()
+						+ strongAbortion.getTriggerString();
+		String effect = strongAbortion.getEffectString() == null ? ""
+				: strongAbortion.getEffectString();
 		return immediate + trigger + "/" + effect;
 	}
 
@@ -52,8 +52,8 @@ public class KimlWeakAbortionItemProvider extends WeakAbortionItemProvider  impl
 
 	@Override
 	public String getKimlTailLabel(Object object) {
-		WeakAbortion weakAbortion = (WeakAbortion) object;
-		return String.valueOf(weakAbortion
+		StrongAbortion strongAbortion = (StrongAbortion) object;
+		return String.valueOf(strongAbortion
 				.getPriority());
 	}
 

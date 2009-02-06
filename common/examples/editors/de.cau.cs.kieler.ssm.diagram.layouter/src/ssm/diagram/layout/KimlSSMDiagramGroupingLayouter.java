@@ -7,7 +7,7 @@
  * Author: Arne Schipper, ars@informatik.uni-kiel.de 
  *
  *******************************************************************************/
-package de.cau.cs.kieler.ssm.diagram.layouter;
+package ssm.diagram.layout;
 
 import java.util.ArrayList;
 import java.util.HashMap;

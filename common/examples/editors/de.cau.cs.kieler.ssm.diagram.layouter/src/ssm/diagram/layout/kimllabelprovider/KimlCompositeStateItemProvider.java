@@ -7,30 +7,29 @@
  * Author: Arne Schipper, ars@informatik.uni-kiel.de 
  *
  *******************************************************************************/
-package de.cau.cs.kieler.ssm.diagram.layouter.kimllabelprovider;
+package ssm.diagram.layout.kimllabelprovider;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 
 import de.cau.cs.kieler.kiml.ui.provider.IKimlLabelProvider;
-import de.cau.cs.kieler.ssm.SimpleState;
-import de.cau.cs.kieler.ssm.provider.SimpleStateItemProvider;
+import de.cau.cs.kieler.ssm.CompositeState;
+import de.cau.cs.kieler.ssm.provider.CompositeStateItemProvider;
 
-public class KimlSimpleStateItemProvider extends SimpleStateItemProvider
-		implements IKimlLabelProvider {
+public class KimlCompositeStateItemProvider extends CompositeStateItemProvider implements IKimlLabelProvider {
 
-	public KimlSimpleStateItemProvider(AdapterFactory adapterFactory) {
+	public KimlCompositeStateItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
 	@Override
 	public String getKimlLongLabel(Object object) {
-		String label = ((SimpleState) object).getName();
+		String label = ((CompositeState)object).getName();
 		return label == null || label.length() == 0 ? "" : label;
 	}
 
 	@Override
 	public String getKimlShortLabel(Object object) {
-		String label = ((SimpleState) object).getName();
+		String label = ((CompositeState)object).getName();
 		return label == null || label.length() == 0 ? "" : label;
 	}
 
@@ -50,3 +49,4 @@ public class KimlSimpleStateItemProvider extends SimpleStateItemProvider
 	}
 
 }
+

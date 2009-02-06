@@ -7,7 +7,7 @@
  * Author: Arne Schipper, ars@informatik.uni-kiel.de 
  *
  *******************************************************************************/
-package de.cau.cs.kieler.ssm.diagram.layouter.preferences;
+package ssm.diagram.layout.preferences;
 
 /**
  * The SSM Diagram Layouter preference page. This places a page into the KIML -> Diagram Layouters
@@ -26,7 +26,8 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
-import de.cau.cs.kieler.ssm.diagram.layouter.KimlSSMDiagramLayouterPlugin;
+import ssm.diagram.layout.KimlSSMDiagramLayouterPlugin;
+
 
 public class PreferencePage extends FieldEditorPreferencePage implements
 		IWorkbenchPreferencePage {

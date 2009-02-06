@@ -15,4 +15,4 @@ Require-Bundle: org.eclipse.ui,
  de.cau.cs.kieler.kiml.ui;bundle-version="1.0.0",
  de.cau.cs.kieler.ssm.diagram;bundle-version="1.0.0"
 Bundle-ActivationPolicy: lazy
-Bundle-Activator: de.cau.cs.kieler.ssm.diagram.layouter.KimlSSMDiagramLayouterPlugin
+Bundle-Activator: ssm.diagram.layout.KimlSSMDiagramLayouterPlugin

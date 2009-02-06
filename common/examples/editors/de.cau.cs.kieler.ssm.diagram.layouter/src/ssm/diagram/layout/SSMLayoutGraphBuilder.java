@@ -7,7 +7,7 @@
  * Author: Arne Schipper, ars@informatik.uni-kiel.de 
  *
  *******************************************************************************/
-package de.cau.cs.kieler.ssm.diagram.layouter;
+package ssm.diagram.layout;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,6 +29,8 @@ import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramGraphicalViewer;
 import org.eclipse.gmf.runtime.draw2d.ui.internal.figures.AnimatableScrollPane;
 import org.eclipse.gmf.runtime.notation.impl.ViewImpl;
 import org.eclipse.jface.viewers.IStructuredSelection;
+
+import ssm.diagram.layout.preferences.PreferenceConstants;
 
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KDimension;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLabel;
@@ -53,7 +55,6 @@ import de.cau.cs.kieler.ssm.diagram.edit.parts.RegionEditPart;
 import de.cau.cs.kieler.ssm.diagram.edit.parts.RegionRegionCompartmentEditPart;
 import de.cau.cs.kieler.ssm.diagram.edit.parts.SafeStateMachineEditPart;
 import de.cau.cs.kieler.ssm.diagram.edit.parts.SimpleStateEditPart;
-import de.cau.cs.kieler.ssm.diagram.layouter.preferences.PreferenceConstants;
 import de.cau.cs.kieler.ssm.diagram.part.SafeStateMachineDiagramEditor;
 
 /**
