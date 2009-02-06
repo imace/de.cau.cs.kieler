@@ -77,9 +77,8 @@ import org.eclipse.ui.IEditorRegistry;
 import org.eclipse.ui.PlatformUI;
 
 import de.cau.cs.kieler.kiml.layout.KimlLayoutPlugin;
-import de.cau.cs.kieler.kiml.layout.services.DiagramLayouters;
-import de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayouter;
 import de.cau.cs.kieler.kiml.layout.util.KimlLayoutPreferenceConstants;
+import de.cau.cs.kieler.kiml.ui.diagramlayouter.KimlDiagramLayouter;
 import de.cau.cs.kieler.kivik.Constants;
 import de.cau.cs.kieler.kivik.KivikPlugin;
 import de.cau.cs.kieler.kivik.preferences.PreferenceConstants;
@@ -262,8 +261,7 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 			IEditorRegistry reg = PlatformUI.getWorkbench().getEditorRegistry();
 			String filename = diagram.eResource().getURI().toString();
 			IEditorDescriptor editorDescriptor = reg.getDefaultEditor(filename);
-			KimlAbstractLayouter diagramLayouter = DiagramLayouters
-					.getInstance().getDiagramLayouter(editorDescriptor.getId());
+			
 			/*
 			 * force the diagram layouter to perform several layout steps, as
 			 * otherwise the connections and labels are not drawn properly. see:
@@ -280,7 +278,7 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 					.setValue(
 							KimlLayoutPreferenceConstants.PREF_DIAGRAMLAYOUTERS_MULTIPLE_LAYOUT_RUNS,
 							true);
-			diagramLayouter.layout(getEditPartRegistry().get(diagram));
+			KimlDiagramLayouter.layout(getEditPartRegistry().get(diagram));
 			KimlLayoutPlugin
 					.getDefault()
 					.getPreferenceStore()
