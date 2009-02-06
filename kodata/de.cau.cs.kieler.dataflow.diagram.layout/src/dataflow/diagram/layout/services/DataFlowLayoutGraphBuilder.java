@@ -538,25 +538,8 @@ public class DataFlowLayoutGraphBuilder extends KimlAbstractLayoutGraphBuilder {
 		}
 		return root;
 	}
-
-	protected void updatePreferences() {
-
-		// load layout preferences
-		IPreferenceStore preferenceStore = DataflowDiagramLayoutPlugin
-				.getDefault().getPreferenceStore();
-		fixedOuterPortsPref = preferenceStore
-				.getBoolean(DiagramLayoutPreferencePage.FIXED_OUTER_PORTS);
-		fixedInnerPortsPref = preferenceStore
-				.getBoolean(DiagramLayoutPreferencePage.FIXED_INNER_PORTS);
-		fixedNodeSizePref = preferenceStore
-				.getBoolean(DiagramLayoutPreferencePage.FIXED_NODE_SIZE);
-		strictPortSide = preferenceStore
-				.getBoolean(DiagramLayoutPreferencePage.STRICT_PORT_SIDE);
-		alternateHV = preferenceStore.getString(
-				DiagramLayoutPreferencePage.LAYOUT_DIRECTION).equals("hv");
-
-	}
 	
+		
 	/**
 	 * Analyzes the tree structure of a diagram and returns the edit
 	 * part that has all selected parts as children.
@@ -616,7 +599,31 @@ public class DataFlowLayoutGraphBuilder extends KimlAbstractLayoutGraphBuilder {
 	}
 
 
+	/* (non-Javadoc)
+	 * @see de.cau.cs.kieler.kiml.ui.diagramlayouter.KimlAbstractLayoutGraphBuilder#updatePreferences()
+	 */
+	@Override
+	protected void updatePreferences() {
 
+		// load layout preferences
+		IPreferenceStore preferenceStore = DataflowDiagramLayoutPlugin
+				.getDefault().getPreferenceStore();
+		fixedOuterPortsPref = preferenceStore
+				.getBoolean(DiagramLayoutPreferencePage.FIXED_OUTER_PORTS);
+		fixedInnerPortsPref = preferenceStore
+				.getBoolean(DiagramLayoutPreferencePage.FIXED_INNER_PORTS);
+		fixedNodeSizePref = preferenceStore
+				.getBoolean(DiagramLayoutPreferencePage.FIXED_NODE_SIZE);
+		strictPortSide = preferenceStore
+				.getBoolean(DiagramLayoutPreferencePage.STRICT_PORT_SIDE);
+		alternateHV = preferenceStore.getString(
+				DiagramLayoutPreferencePage.LAYOUT_DIRECTION).equals("hv");
+
+	}
+
+	/* (non-Javadoc)
+	 * @see de.cau.cs.kieler.kiml.ui.diagramlayouter.KimlAbstractLayoutGraphBuilder#resetCustomMaps()
+	 */
 	@Override
 	protected void resetCustomMaps() {
 		borderItem2PortMapping.clear();
