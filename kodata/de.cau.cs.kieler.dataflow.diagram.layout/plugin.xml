@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.2"?>
 <plugin>
-   <extension
-         point="de.cau.cs.kieler.kiml.layout.kimlDiagramLayouter">
-      <kimlDiagramLayouter
-            class="dataflow.diagram.services.DataflowDiagramLayouter"
-            editor_id="dataflow.diagram.part.DataflowDiagramEditorID"></kimlDiagramLayouter>
-   </extension>
  <extension
          point="org.eclipse.ui.views.properties.tabbed.propertyTabs">
       <propertyTabs
@@ -86,5 +80,12 @@
             supportedTypes="de.cau.cs.kieler.kiml.ui.provider.IKimlLabelProvider"
             uri="http://www.informatik.uni-kiel.de/rtsys/">
       </factory>
+   </extension>
+   <extension
+         point="de.cau.cs.kieler.kiml.ui.kimlLayoutGraphBuilder">
+      <kimlLayoutGraphBuilder
+            class="dataflow.diagram.services.DataFlowLayoutGraphBuilder"
+            editor_id="dataflow.diagram.part.DataflowDiagramEditorID">
+      </kimlLayoutGraphBuilder>
    </extension>
 </plugin>
