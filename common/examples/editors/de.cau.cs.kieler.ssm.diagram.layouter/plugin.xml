@@ -2,13 +2,6 @@
 <?eclipse version="3.2"?>
 <plugin>
    <extension
-         point="de.cau.cs.kieler.kiml.layout.kimlDiagramLayouter">
-      <kimlDiagramLayouter
-            class="de.cau.cs.kieler.ssm.diagram.layouter.KimlSSMDiagramLayouter"
-            editor_id="de.cau.cs.kieler.ssm.diagram.part.SafeStateMachineDiagramEditorID">
-      </kimlDiagramLayouter>
-   </extension>
-   <extension
          point="org.eclipse.ui.preferencePages">
       <page
             category="de.cau.cs.kieler.kiml.layout.preferences.DiagramLayoutersPreferencePage"
@@ -74,6 +67,13 @@
             supportedTypes=
               "de.cau.cs.kieler.kiml.ui.provider.IKimlLabelProvider">
       </factory>
+   </extension>
+   <extension
+         point="de.cau.cs.kieler.kiml.ui.kimlLayoutGraphBuilder">
+      <kimlLayoutGraphBuilder
+            class="de.cau.cs.kieler.ssm.diagram.layouter.SSMLayoutGraphBuilder"
+            editor_id="de.cau.cs.kieler.ssm.diagram.part.SafeStateMachineDiagramEditorID">
+      </kimlLayoutGraphBuilder>
    </extension>
 
 </plugin>
