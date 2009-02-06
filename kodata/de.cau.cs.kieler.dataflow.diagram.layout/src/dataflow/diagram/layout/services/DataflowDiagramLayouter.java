@@ -1,4 +1,4 @@
-package dataflow.diagram.services;
+package dataflow.diagram.layout.services;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -33,13 +33,13 @@ import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.PlatformUI;
 
-import dataflow.diagram.DataflowDiagramLayoutPlugin;
-import dataflow.diagram.Messages;
 import dataflow.diagram.edit.parts.ConnectionEditPart;
 import dataflow.diagram.edit.parts.DataflowModelEditPart;
 import dataflow.diagram.edit.parts.InputPortEditPart;
+import dataflow.diagram.layout.DataflowDiagramLayoutPlugin;
+import dataflow.diagram.layout.Messages;
+import dataflow.diagram.layout.preferences.DiagramLayoutPreferencePage;
 import dataflow.diagram.part.DataflowDiagramEditor;
-import dataflow.diagram.preferences.DiagramLayoutPreferencePage;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KDimension;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLayout;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KInsets;

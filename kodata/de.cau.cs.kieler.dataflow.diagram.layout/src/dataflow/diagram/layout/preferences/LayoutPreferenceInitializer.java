@@ -1,9 +1,9 @@
-package dataflow.diagram.preferences;
+package dataflow.diagram.layout.preferences;
 
 import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
 import org.eclipse.jface.preference.IPreferenceStore;
 
-import dataflow.diagram.DataflowDiagramLayoutPlugin;
+import dataflow.diagram.layout.DataflowDiagramLayoutPlugin;
 
 /**
  * Initializer class for the layout preferences of the dataflow diagram editor.

@@ -1,4 +1,4 @@
-package dataflow.diagram;
+package dataflow.diagram.layout;
 
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;

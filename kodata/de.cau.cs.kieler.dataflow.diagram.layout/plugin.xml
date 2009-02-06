@@ -42,7 +42,7 @@
          point="org.eclipse.ui.preferencePages">
       <page
             category="de.cau.cs.kieler.dataflow.diagram.general"
-            class="dataflow.diagram.preferences.DiagramLayoutPreferencePage"
+            class="dataflow.diagram.layout.preferences.DiagramLayoutPreferencePage"
             id="de.cau.cs.kieler.dataflow.diagram.layout.preferences"
             name="Layout">
       </page>
@@ -50,7 +50,7 @@
    <extension
          point="org.eclipse.core.runtime.preferences">
       <initializer
-            class="dataflow.diagram.preferences.LayoutPreferenceInitializer">
+            class="dataflow.diagram.layout.preferences.LayoutPreferenceInitializer">
       </initializer>
    </extension>
    <extension
@@ -84,7 +84,7 @@
    <extension
          point="de.cau.cs.kieler.kiml.ui.kimlLayoutGraphBuilder">
       <kimlLayoutGraphBuilder
-            class="dataflow.diagram.services.DataFlowLayoutGraphBuilder"
+            class="dataflow.diagram.layout.services.DataFlowLayoutGraphBuilder"
             editor_id="dataflow.diagram.part.DataflowDiagramEditorID">
       </kimlLayoutGraphBuilder>
    </extension>

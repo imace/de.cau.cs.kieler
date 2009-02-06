@@ -1,4 +1,4 @@
-package dataflow.diagram.preferences;
+package dataflow.diagram.layout.preferences;
 
 import org.eclipse.jface.preference.BooleanFieldEditor;
 import org.eclipse.jface.preference.FieldEditor;
@@ -8,8 +8,8 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
-import dataflow.diagram.DataflowDiagramLayoutPlugin;
-import dataflow.diagram.Messages;
+import dataflow.diagram.layout.DataflowDiagramLayoutPlugin;
+import dataflow.diagram.layout.Messages;
 
 /**
  * Preference page for the dataflow diagram editor that controls

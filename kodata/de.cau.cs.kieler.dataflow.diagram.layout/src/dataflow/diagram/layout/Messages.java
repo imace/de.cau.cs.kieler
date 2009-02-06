@@ -1,4 +1,4 @@
-package dataflow.diagram;
+package dataflow.diagram.layout;
 
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;

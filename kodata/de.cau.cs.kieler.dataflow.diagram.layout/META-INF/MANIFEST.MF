@@ -13,8 +13,8 @@ Require-Bundle: org.eclipse.core.runtime;bundle-version="3.4.0",
  de.cau.cs.kieler.kiml.layout;bundle-version="1.0.0",
  de.cau.cs.kieler.kiml.ui;bundle-version="1.0.0"
 Bundle-ActivationPolicy: lazy
-Bundle-Activator: dataflow.diagram.DataflowDiagramLayoutPlugin
-Export-Package: dataflow.diagram.services;
+Bundle-Activator: dataflow.diagram.layout.DataflowDiagramLayoutPlugin
+Export-Package: dataflow.diagram.layout.services;
   uses:="org.eclipse.gmf.runtime.diagram.ui.services.editpolicy,
    org.eclipse.jface.viewers,
    de.cau.cs.kieler.kiml.layout.services,

@@ -1,4 +1,4 @@
-package dataflow.diagram.services;
+package dataflow.diagram.layout.services;
 
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPolicy;

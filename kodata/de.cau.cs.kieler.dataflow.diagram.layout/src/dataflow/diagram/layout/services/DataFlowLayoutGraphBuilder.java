@@ -1,4 +1,4 @@
-package dataflow.diagram.services;
+package dataflow.diagram.layout.services;
 
 import java.util.HashMap;
 import java.util.List;
@@ -20,10 +20,10 @@ import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.viewers.IStructuredSelection;
 
-import dataflow.diagram.DataflowDiagramLayoutPlugin;
 import dataflow.diagram.edit.parts.DataflowModelEditPart;
 import dataflow.diagram.edit.parts.InputPortEditPart;
-import dataflow.diagram.preferences.DiagramLayoutPreferencePage;
+import dataflow.diagram.layout.DataflowDiagramLayoutPlugin;
+import dataflow.diagram.layout.preferences.DiagramLayoutPreferencePage;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KDimension;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLayout;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KInsets;
