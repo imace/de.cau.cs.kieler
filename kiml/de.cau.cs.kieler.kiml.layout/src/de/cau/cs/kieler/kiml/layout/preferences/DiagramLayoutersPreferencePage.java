@@ -29,7 +29,7 @@ import de.cau.cs.kieler.kiml.layout.util.KimlLayoutPreferenceConstants;
  * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
  * @see de.cau.cs.kieler.kiml.layout.services.DiagramLayouters
  *      DiagramLayouters
- * @see de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayouter
+ * @see de.cau.cs.kieler.kiml.layout.services.KimlAbstractDiagramTransformer
  *      KimlAbstractLayouter
  */
 public class DiagramLayoutersPreferencePage extends FieldEditorPreferencePage

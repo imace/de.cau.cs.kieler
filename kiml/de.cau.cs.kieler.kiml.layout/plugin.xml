@@ -2,7 +2,6 @@
 <?eclipse version="3.2"?>
 <plugin>
    <extension-point id="kimlLayoutProvider" name="KIML Layout Provider" schema="schema/kimlLayoutProvider.exsd"/>
-   <extension-point id="kimlDiagramLayouter" name="KIML Diagram Layouter" schema="schema/kimlDiagramLayouter.exsd"/>
    <extension-point id="kimlLayoutListener" name="KIML Layout Listener" schema="schema/kimlLayoutListener.exsd"/>
 
    <extension
