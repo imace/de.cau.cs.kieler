@@ -20,20 +20,21 @@ import org.eclipse.ui.statushandlers.StatusManager;
 
 import de.cau.cs.kieler.kiml.layout.KimlLayoutPlugin;
 
-
 /**
- * Controls all the diagram transformers; which are loaded at startup. Realized as
- * a singleton to allow easy access from anywhere and a fast processing.
+ * Controls all the KLayoutGraph appliers, which are loaded at startup. Realized
+ * as a singleton to allow easy access from anywhere and a fast processing.
  * <p/>
- * Collects the diagram transformers that extend {@link KimlAbstractLayoutGraphBuilder} and
- * register themselves at the <code>kimlDiagramLayouter</code> extension point.
+ * Collects the KLayoutGraph appliers that extend
+ * {@link KimlAbstractLayoutGraphApplier} and register themselves at the
+ * <code>kimlKLayoutGraphAppliers</code> extension point.
  * <p/>
- * Provides a function to get a concrete diagram transformer for a given
+ * Provides a function to get a concrete KLayoutGraph appliers for a given
  * model/editor provider.
  * 
  * @author <a href="mailto:msp@informatik.uni-kiel.de">Miro Spönemann</a>
  * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
  * @see KimlAbstractLayoutGraphBuilder
+ * @see KimlDiagramLayouter
  */
 public final class LayoutGraphAppliers {
 
@@ -41,13 +42,13 @@ public final class LayoutGraphAppliers {
 	private static final LayoutGraphAppliers INSTANCE = new LayoutGraphAppliers();
 
 	/*
-	 * maps the name of a diagram layouter to the instantiated diagram layouter
-	 * object
+	 * maps the name of a KLayoutGraph applier to the instantiated KLayoutGraph
+	 * applier object
 	 */
 	private HashMap<String, KimlAbstractLayoutGraphApplier> layoutGraphAppliersMap = new HashMap<String, KimlAbstractLayoutGraphApplier>();
 
 	/**
-	 * @return the singleton instance of the DiagramLayouters class
+	 * @return the singleton instance of the LayoutGraphAppliers class
 	 */
 	public static LayoutGraphAppliers getInstance() {
 		return INSTANCE;
@@ -61,8 +62,8 @@ public final class LayoutGraphAppliers {
 	};
 
 	/**
-	 * does the actual loading of the diagram layouters, which need to register
-	 * themselves through the kimlDiagramLayouter extension point.
+	 * does the actual loading of the KLayoutGraph applier, which need to
+	 * register themselves through the kimlKLayoutGraphApplier extension point.
 	 */
 	private void loadAvailableLayoutGraphAppliers() {
 		IExtensionRegistry reg = Platform.getExtensionRegistry();
@@ -79,21 +80,23 @@ public final class LayoutGraphAppliers {
 					layoutGraphAppliersMap.put(editorId, layoutGraphAppliers);
 				}
 			} catch (CoreException exception) {
-				StatusManager.getManager().handle(exception, KimlLayoutPlugin.PLUGIN_ID);
+				StatusManager.getManager().handle(exception,
+						KimlLayoutPlugin.PLUGIN_ID);
 			}
 		}
 	}
 
 	/**
-	 * Fetches the appropriate diagram layouter for a given diagram editor.
+	 * Fetches the appropriate KLayoutGraph applier for a given diagram editor.
 	 * 
 	 * @param editorId
 	 *            ID string for the editor
-	 * @return an instance of the diagram layouter, or the Generic layouter
-	 *         found in the ui.package, or no layouter is available at all
+	 * @return an instance of the KLayoutGraph applier, or the Generic
+	 *         KLayoutGraph applier found in the ui.package
 	 */
 	public KimlAbstractLayoutGraphApplier getLayoutGraphAppliers(String editorId) {
-		KimlAbstractLayoutGraphApplier layoutGraphApplier = layoutGraphAppliersMap.get(editorId);
+		KimlAbstractLayoutGraphApplier layoutGraphApplier = layoutGraphAppliersMap
+				.get(editorId);
 		if (layoutGraphApplier != null)
 			return layoutGraphApplier;
 		else

@@ -514,15 +514,11 @@ public class SSMLayoutGraphBuilder extends KimlAbstractLayoutGraphBuilder {
 		}
 	}
 
-	/*------------------------------------------------------------------------------*/
-	/*-------------------------------- PREFERENCES ---------------------------------*/
-	/*------------------------------------------------------------------------------*/
 
-	/**
-	 * Does the setup before the transformations can start. Fetches the
-	 * preferences as set in the preference page for the SSM Diagram Layouter.
-	 * 
+	/* (non-Javadoc)
+	 * @see de.cau.cs.kieler.kiml.ui.diagramlayouter.KimlAbstractLayoutGraphBuilder#updatePreferences()
 	 */
+	@Override
 	protected void updatePreferences() {
 
 		prefAlternatingHVLayout = SSMDiagramLayoutPlugin.getDefault()
@@ -540,19 +536,9 @@ public class SSMLayoutGraphBuilder extends KimlAbstractLayoutGraphBuilder {
 
 	}
 
-	/*------------------------------------------------------------------------------*/
-	/*-------------------------------- HELPERS -------------------------------------*/
-	/*------------------------------------------------------------------------------*/
 
-	/**
-	 * Fetches an appropriate EditPart that can be laid out corresponding to the
-	 * target Object that was provided in the {@link layout} function.
-	 * 
-	 * @param target
-	 *            The Object which was provided to this SSM Diagram Layouter and
-	 *            which should be laid out.
-	 * @return A fitting EditPart for this target Object which can be laid out
-	 *         (that is translated) by the SSM Diagram Layouter
+	/* (non-Javadoc)
+	 * @see de.cau.cs.kieler.kiml.ui.diagramlayouter.KimlAbstractLayoutGraphBuilder#getLayoutRootPart(java.lang.Object)
 	 */
 	@Override
 	protected GraphicalEditPart getLayoutRootPart(Object target) {
@@ -629,6 +615,9 @@ public class SSMLayoutGraphBuilder extends KimlAbstractLayoutGraphBuilder {
 			return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see de.cau.cs.kieler.kiml.ui.diagramlayouter.KimlAbstractLayoutGraphBuilder#resetCustomMaps()
+	 */
 	@Override
 	protected void resetCustomMaps() {
 		graphicalEditPart2LayoutNode.clear();		

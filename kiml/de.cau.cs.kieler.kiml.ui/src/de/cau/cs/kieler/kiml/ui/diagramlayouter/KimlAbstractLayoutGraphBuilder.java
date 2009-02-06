@@ -1,3 +1,12 @@
+/*******************************************************************************
+ * Copyright (c) 2009 Real-Time and Embedded Systems group
+ *
+ * INSERT LICENCE HERE
+ *
+ *
+ * Author: Arne Schipper, ars@informatik.uni-kiel.de 
+ *
+ *******************************************************************************/
 package de.cau.cs.kieler.kiml.ui.diagramlayouter;
 
 import java.util.HashMap;
@@ -24,6 +33,23 @@ import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPortLabel;
 import de.cau.cs.kieler.kiml.layout.util.KimlLayoutUtil;
 import de.cau.cs.kieler.kiml.ui.provider.KimlAdapterFactoryLabelProvider;
 
+/**
+ * The abstract base class for all LayoutGraphBuilders. <br/>
+ * Implementing classes must extend <code>doBuildLayoutGraph</code> which uses
+ * the information of the diagram to build up a KLayoutGraph,
+ * <code>resetCustomMaps</code> to reset implementation dependent mappings of
+ * elements, and <code>updatePreferences</code> to set preferences used during
+ * the building step. <br/>
+ * The final method <code>buildLayoutGraph</code> is responsible for the correct
+ * collaboration of the single steps, and for the correct passing of the
+ * information to the {@link KimlLayoutInformation} structure. <br/>
+ * The implementation of <code>doBuildLayoutGraph</code> must use the globally
+ * defined maps for the mapping of KLayoutGraph elements to EditParts, the
+ * <code>layoutGraph</code> and the <code>layoutRootPart</code>.
+ * 
+ * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
+ * 
+ */
 public abstract class KimlAbstractLayoutGraphBuilder {
 
 	/*
@@ -37,31 +63,62 @@ public abstract class KimlAbstractLayoutGraphBuilder {
 	public static final String ATTRIBUTE_NAME = "name";
 	public static final String ATTRIBUTE_ICON = "icon";
 
-	private KimlLayoutInformation layoutInformation = new KimlLayoutInformation();
-
-	protected KLayoutGraph layoutGraph = KimlLayoutUtil
-			.createInitializedLayoutGraph();
-
+	/* the mappings of KLayoutGraph LAYOUT elements to EditParts */
 	protected Map<KLayoutNode, GraphicalEditPart> layoutNode2EditPart = new HashMap<KLayoutNode, GraphicalEditPart>();
 	protected Map<KLayoutEdge, ConnectionEditPart> layoutEdge2EditPart = new HashMap<KLayoutEdge, ConnectionEditPart>();
 	protected Map<KLayoutPort, GraphicalEditPart> layoutPort2EditPart = new HashMap<KLayoutPort, GraphicalEditPart>();
 
+	/* the mappings of KLayoutGraph LABEL elements to LabelEditParts */
 	protected Map<KNodeLabel, LabelEditPart> nodeLabel2EditPart = new HashMap<KNodeLabel, LabelEditPart>();
 	protected Map<KEdgeLabel, LabelEditPart> edgeLabel2EditPart = new HashMap<KEdgeLabel, LabelEditPart>();
 	protected Map<KPortLabel, LabelEditPart> portLabel2EditPart = new HashMap<KPortLabel, LabelEditPart>();
 
-	protected GraphicalEditPart layoutRootPart = null;
+	/*
+	 * the layoutRootPart where the layout should start with and an instance of
+	 * the layout graph
+	 */
+	protected GraphicalEditPart layoutRootPart;
+	protected KLayoutGraph layoutGraph;
 
+	/*
+	 * can be used during the building of the KLayoutGraph to obtain nicer
+	 * labels than with the standard label functions
+	 */
 	protected KimlAdapterFactoryLabelProvider kimlAdapterLabelProvider = new KimlAdapterFactoryLabelProvider(
 			new ComposedAdapterFactory(
 					ComposedAdapterFactory.Descriptor.Registry.INSTANCE));
 
+	/**
+	 * Implementation must reset implementation dependent mappings of elements.
+	 */
 	protected abstract void resetCustomMaps();
 
+	/**
+	 * Implementation should fetch preference settings needed during the
+	 * doApplyLayout step.
+	 */
 	protected abstract void updatePreferences();
 
+	/**
+	 * Implementation should build a KLayoutGraph from the information of the
+	 * diagram. <br/>
+	 * The globally defined maps for the mapping of KLayoutGraph elements to
+	 * EditParts, the <code>layoutGraph</code> and the
+	 * <code>layoutRootPart</code> must be used. <br/>
+	 */
 	protected abstract void doBuildLayoutGraph();
 
+	/**
+	 * Is responsible for the correct collaboration of the single steps, and for
+	 * the correct passing of the information to the
+	 * {@link KimlLayoutInformation} class.
+	 * 
+	 * @param target
+	 *            The object which should be laid out. Is typically an
+	 *            IEditorPart or a StructuredSelection of EditParts
+	 * @return The KimlLayoutInformation structure with the KLayoutGraph, the
+	 *         layoutRootPart and the mapping of EditParts to the KLayoutGraph
+	 */
 	protected final KimlLayoutInformation buildLayoutGraph(Object target) {
 
 		updatePreferences();
@@ -78,6 +135,7 @@ public abstract class KimlAbstractLayoutGraphBuilder {
 
 		doBuildLayoutGraph();
 
+		KimlLayoutInformation layoutInformation = new KimlLayoutInformation();
 		layoutInformation.layoutNode2EditPart = layoutNode2EditPart;
 		layoutInformation.layoutEdge2EditPart = layoutEdge2EditPart;
 		layoutInformation.layoutPort2EditPart = layoutPort2EditPart;
@@ -90,6 +148,16 @@ public abstract class KimlAbstractLayoutGraphBuilder {
 		return layoutInformation;
 	}
 
+	/**
+	 * Overrideable function to obtain the layoutRootPart with which the layout
+	 * process should start out of the provided object, which is typically an
+	 * IEditorPart or a StructuredSelection.
+	 * 
+	 * @param target
+	 *            The object which should be laid out. Is typically an
+	 *            IEditorPart or a StructuredSelection of EditParts
+	 * @return A GraphicalEditPart with which the layout should start
+	 */
 	protected GraphicalEditPart getLayoutRootPart(Object target) {
 		GraphicalEditPart root = null;
 
@@ -138,7 +206,7 @@ public abstract class KimlAbstractLayoutGraphBuilder {
 		return root;
 	}
 
-	/**
+	/*
 	 * Recursive helper function to get a GraphicalEditPart parent for an
 	 * object.
 	 */

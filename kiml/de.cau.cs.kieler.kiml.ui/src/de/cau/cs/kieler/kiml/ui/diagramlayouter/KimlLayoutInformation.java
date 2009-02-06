@@ -1,3 +1,12 @@
+/*******************************************************************************
+ * Copyright (c) 2009 Real-Time and Embedded Systems group
+ *
+ * INSERT LICENCE HERE
+ *
+ *
+ * Author: Arne Schipper, ars@informatik.uni-kiel.de 
+ *
+ *******************************************************************************/
 package de.cau.cs.kieler.kiml.ui.diagramlayouter;
 
 import java.util.Map;
@@ -14,6 +23,15 @@ import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeLabel;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPortLabel;
 
+/**
+ * Structure used to pass all the needed layout information between the single
+ * layout steps. Interacts mainly between the
+ * {@link KimlAbstractLayoutGraphBuilder} and
+ * {@link KimlAbstractLayoutGraphApplier}.
+ * 
+ * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
+ * 
+ */
 public final class KimlLayoutInformation {
 
 	public KLayoutGraph layoutGraph;

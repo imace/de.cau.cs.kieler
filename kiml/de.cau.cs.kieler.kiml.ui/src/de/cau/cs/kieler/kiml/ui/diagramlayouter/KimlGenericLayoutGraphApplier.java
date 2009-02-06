@@ -1,3 +1,13 @@
+/*******************************************************************************
+ * Copyright (c) 2009 Real-Time and Embedded Systems group
+ *
+ * INSERT LICENCE HERE
+ *
+ *
+ * Author: Arne Schipper, ars@informatik.uni-kiel.de 
+ * 		   Miro Spönemann, mps@informatik.uni-kiel.de
+ *
+ *******************************************************************************/
 package de.cau.cs.kieler.kiml.ui.diagramlayouter;
 
 import org.eclipse.draw2d.ConnectionLayer;
@@ -38,15 +48,25 @@ import de.cau.cs.kieler.kiml.layout.util.KimlLayoutPreferenceConstants;
 import de.cau.cs.kieler.kiml.ui.helpers.KimlMetricsHelper;
 import de.cau.cs.kieler.kiml.ui.policies.LayoutEditPolicy;
 
-public class KimlGenericLayoutGraphApplier extends KimlAbstractLayoutGraphApplier {
+/**
+ * A generic implementation of the {@link KimlAbstractLayoutGraphApplier}.
+ * 
+ * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
+ * @author <a href="mailto:msp@informatik.uni-kiel.de">Miro Spönemann</a>
+ */
+public class KimlGenericLayoutGraphApplier extends
+		KimlAbstractLayoutGraphApplier {
 
 	/* preference settings */
 	private boolean prefUseGMFLabelLocation = false;
 	private boolean prefSmoothTransitions = false;
-	
+
+	/* (non-Javadoc)
+	 * @see de.cau.cs.kieler.kiml.ui.diagramlayouter.KimlAbstractLayoutGraphApplier#doApplyLayoutGraph()
+	 */
 	@Override
 	protected void doApplyLayoutGraph() {
-		
+
 		// get zoom level
 		double zoomLevel = 1.0;
 		ZoomManager zm = (ZoomManager) PlatformUI.getWorkbench()
@@ -232,8 +252,11 @@ public class KimlGenericLayoutGraphApplier extends KimlAbstractLayoutGraphApplie
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see de.cau.cs.kieler.kiml.ui.diagramlayouter.KimlAbstractLayoutGraphApplier#updatePreferences()
+	 */
 	protected void updatePreferences() {
-		
+
 		/* fetch preferences */
 		prefUseGMFLabelLocation = KimlLayoutPlugin
 				.getDefault()
@@ -248,30 +271,4 @@ public class KimlGenericLayoutGraphApplier extends KimlAbstractLayoutGraphApplie
 						KimlLayoutPreferenceConstants.PREF_DIAGRAMLAYOUTERS_SMOOTHEN_EDGES);
 
 	}
-
-	/**
-	 * Helper function used when translating the location for a connection or a
-	 * connection label as provided by the layout provider to the connection
-	 * layer. The layout provider returns relative positions for the connection
-	 * points for every level of a possible hierarchy, whereas in the GMF
-	 * diagram all the connections are draw plainly on the special connection
-	 * layer with absolute coordinates.
-	 * 
-	 * @param point
-	 *            The Point which should be translated
-	 * @param from
-	 *            The Figure with the coordinate system from which the given
-	 *            Point should be translated
-	 * @param to
-	 *            The Figure with the coordinate system to which the given Point
-	 *            should be translated
-	 * @return The translated Point with its location now in the coordinate
-	 *         system of the <b>to</b> Figure
-	 */
-	private Point translateFromTo(Point point, IFigure from, IFigure to) {
-		from.translateToAbsolute(point);
-		to.translateToRelative(point);
-		return point;
-	}
-
 }

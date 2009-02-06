@@ -25,7 +25,7 @@ import de.cau.cs.kieler.kiml.layout.services.LayoutListeners;
 public final class KimlDiagramLayouter {
 
 	/**
-	 * The wrapper methods to get a layout for a diagram. Performs several
+	 * The wrapper method to get a layout for a diagram. Performs several
 	 * steps.
 	 * 
 	 * @param target

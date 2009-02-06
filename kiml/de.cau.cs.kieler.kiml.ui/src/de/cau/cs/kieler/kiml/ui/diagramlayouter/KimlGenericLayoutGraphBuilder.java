@@ -1,3 +1,12 @@
+/*******************************************************************************
+ * Copyright (c) 2009 Real-Time and Embedded Systems group
+ *
+ * INSERT LICENCE HERE
+ *
+ *
+ * Author: Arne Schipper, ars@informatik.uni-kiel.de 
+ *
+ *******************************************************************************/
 package de.cau.cs.kieler.kiml.ui.diagramlayouter;
 
 import java.util.ArrayList;
@@ -33,9 +42,15 @@ import de.cau.cs.kieler.kiml.ui.helpers.KimlGMFLayoutHintHelper;
 import de.cau.cs.kieler.kiml.ui.helpers.KimlMetricsHelper;
 import de.cau.cs.kieler.kiml.ui.preferences.PreferenceConstants;
 
+/**
+ * A generic implementation of the {@link KimlGenericLayoutGraphBuilder}.
+ * 
+ * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
+ * 
+ */
 public class KimlGenericLayoutGraphBuilder extends
 		KimlAbstractLayoutGraphBuilder {
-	
+
 	/* preference setting */
 	private int prefInsetsTop = 0;
 	private int prefInsetsLeft = 0;
@@ -44,6 +59,9 @@ public class KimlGenericLayoutGraphBuilder extends
 
 	private Map<GraphicalEditPart, KLayoutNode> graphicalEditPart2LayoutNode = new HashMap<GraphicalEditPart, KLayoutNode>();
 
+	/* (non-Javadoc)
+	 * @see de.cau.cs.kieler.kiml.ui.diagramlayouter.KimlAbstractLayoutGraphBuilder#doBuildLayoutGraph()
+	 */
 	@Override
 	protected void doBuildLayoutGraph() {
 
@@ -347,15 +365,21 @@ public class KimlGenericLayoutGraphBuilder extends
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see de.cau.cs.kieler.kiml.ui.diagramlayouter.KimlAbstractLayoutGraphBuilder#resetCustomMaps()
+	 */
 	@Override
 	protected void resetCustomMaps() {
 		graphicalEditPart2LayoutNode.clear();
 	}
 
+	/* (non-Javadoc)
+	 * @see de.cau.cs.kieler.kiml.ui.diagramlayouter.KimlAbstractLayoutGraphBuilder#updatePreferences()
+	 */
 	@Override
 	protected void updatePreferences() {
 		/* get preference values */
-			IPreferenceStore kimlUiPreferenceStore = KimlUiPlugin.getDefault()
+		IPreferenceStore kimlUiPreferenceStore = KimlUiPlugin.getDefault()
 				.getPreferenceStore();
 		prefInsetsTop = kimlUiPreferenceStore
 				.getInt(PreferenceConstants.PREF_GENERIC_DIAGRAM_LAYOUTER_INSET_TOP);
@@ -365,7 +389,6 @@ public class KimlGenericLayoutGraphBuilder extends
 				.getInt(PreferenceConstants.PREF_GENERIC_DIAGRAM_LAYOUTER_INSET_BOTTOM);
 		prefInsetsRight = kimlUiPreferenceStore
 				.getInt(PreferenceConstants.PREF_GENERIC_DIAGRAM_LAYOUTER_INSET_RIGHT);
-		
 
 	}
 
