@@ -19,18 +19,18 @@ import org.osgi.framework.BundleContext;
  * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
  * 
  */
-public class KimlSSMDiagramLayouterPlugin extends AbstractUIPlugin {
+public class SSMDiagramLayoutPlugin extends AbstractUIPlugin {
 
 	// The plug-in ID
 	public static final String PLUGIN_ID = "de.cau.cs.kieler.ssm.diagram.layouter";
 
 	// The shared instance
-	private static KimlSSMDiagramLayouterPlugin plugin;
+	private static SSMDiagramLayoutPlugin plugin;
 
 	/**
 	 * Constructs a new instance of this plug-in.
 	 */
-	public KimlSSMDiagramLayouterPlugin() {
+	public SSMDiagramLayoutPlugin() {
 	}
 
 	/*
@@ -62,7 +62,7 @@ public class KimlSSMDiagramLayouterPlugin extends AbstractUIPlugin {
 	 * 
 	 * @return the shared instance
 	 */
-	public static KimlSSMDiagramLayouterPlugin getDefault() {
+	public static SSMDiagramLayoutPlugin getDefault() {
 		return plugin;
 	}
 

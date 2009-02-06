@@ -13,7 +13,7 @@ package ssm.diagram.layout.preferences;
 import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
 import org.eclipse.jface.preference.IPreferenceStore;
 
-import ssm.diagram.layout.KimlSSMDiagramLayouterPlugin;
+import ssm.diagram.layout.SSMDiagramLayoutPlugin;
 
 
 
@@ -31,7 +31,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 	 * initializeDefaultPreferences()
 	 */
 	public void initializeDefaultPreferences() {
-		IPreferenceStore store = KimlSSMDiagramLayouterPlugin.getDefault().getPreferenceStore();
+		IPreferenceStore store = SSMDiagramLayoutPlugin.getDefault().getPreferenceStore();
 
 		store.setDefault(PreferenceConstants.PREF_HEIGHT_COLLAPSED,40);
 		store

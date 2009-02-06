@@ -525,16 +525,16 @@ public class SSMLayoutGraphBuilder extends KimlAbstractLayoutGraphBuilder {
 	 */
 	protected void updatePreferences() {
 
-		prefAlternatingHVLayout = KimlSSMDiagramLayouterPlugin.getDefault()
+		prefAlternatingHVLayout = SSMDiagramLayoutPlugin.getDefault()
 				.getPreferenceStore().getBoolean(
 						PreferenceConstants.PREF_ALTERNATING_HV_LAYOUT);
-		prefHeightCollapsed = KimlSSMDiagramLayouterPlugin.getDefault()
+		prefHeightCollapsed = SSMDiagramLayoutPlugin.getDefault()
 				.getPreferenceStore().getInt(
 						PreferenceConstants.PREF_HEIGHT_COLLAPSED);
-		prefWidthCollapsed = KimlSSMDiagramLayouterPlugin.getDefault()
+		prefWidthCollapsed = SSMDiagramLayoutPlugin.getDefault()
 				.getPreferenceStore().getInt(
 						PreferenceConstants.PREF_WIDTH_COLLAPSED);
-		prefAutosizeEmptyElements = KimlSSMDiagramLayouterPlugin.getDefault()
+		prefAutosizeEmptyElements = SSMDiagramLayoutPlugin.getDefault()
 				.getPreferenceStore().getBoolean(
 						PreferenceConstants.PREF_AUTOSIZE_EMPTY_ELEMENTS);
 
