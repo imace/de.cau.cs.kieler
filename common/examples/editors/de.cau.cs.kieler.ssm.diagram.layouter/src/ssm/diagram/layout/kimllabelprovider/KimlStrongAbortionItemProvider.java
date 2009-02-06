@@ -28,8 +28,7 @@ public class KimlStrongAbortionItemProvider extends StrongAbortionItemProvider  
 		String immediate = strongAbortion.getIsImmediateString() == null ? ""
 				: strongAbortion.getIsImmediateString();
 		String trigger = strongAbortion.getTriggerString() == null ? ""
-				: strongAbortion.getIsImmediateString()
-						+ strongAbortion.getTriggerString();
+				:  strongAbortion.getTriggerString();
 		String effect = strongAbortion.getEffectString() == null ? ""
 				: strongAbortion.getEffectString();
 		return immediate + trigger + "/" + effect;

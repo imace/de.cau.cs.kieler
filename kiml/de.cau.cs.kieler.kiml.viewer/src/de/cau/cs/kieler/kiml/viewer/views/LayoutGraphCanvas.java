@@ -386,11 +386,11 @@ public class LayoutGraphCanvas extends Canvas implements PaintListener {
 			if (paintLabels && child.getLabel() != null) {
 				graphics.setFont(nodeFont);
 				rect = boundsMap.get(child.getLabel());
-				if (rect == null) {
+				if (rect == null && child.getLabel().getLabelLayout() != null) {
 					rect = new PaintRectangle(child.getLabel().getLabelLayout(), childOffset);
 					boundsMap.put(child.getLabel(), rect);
 				}
-				if (!rect.painted && rect.intersects(area)) {
+				if (rect != null && !rect.painted && rect.intersects(area)) {
 					graphics.drawString(child.getLabel().getText(),
 							rect.x, rect.y, true);
 					rect.painted = true;

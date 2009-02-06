@@ -28,8 +28,7 @@ public class KimlWeakAbortionItemProvider extends WeakAbortionItemProvider  impl
 		String immediate = weakAbortion.getIsImmediateString() == null ? ""
 				: weakAbortion.getIsImmediateString();
 		String trigger = weakAbortion.getTriggerString() == null ? ""
-				: weakAbortion.getIsImmediateString()
-						+ weakAbortion.getTriggerString();
+				: weakAbortion.getTriggerString();
 		String effect = weakAbortion.getEffectString() == null ? ""
 				: weakAbortion.getEffectString();
 		return immediate + trigger + "/" + effect;

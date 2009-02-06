@@ -56,7 +56,7 @@
    <extension
          point="org.eclipse.gmf.runtime.diagram.ui.editpolicyProviders">
       <editpolicyProvider
-            class="dataflow.diagram.services.DataflowLayoutEditPolicyProvider">
+            class="dataflow.diagram.layout.services.DataflowLayoutEditPolicyProvider">
          <Priority
                name="Lowest">
          </Priority>
