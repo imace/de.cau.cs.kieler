@@ -390,7 +390,10 @@ public class LayoutGraphCanvas extends Canvas implements PaintListener {
 					rect = new PaintRectangle(child.getLabel().getLabelLayout(), childOffset);
 					boundsMap.put(child.getLabel(), rect);
 				}
-				if (rect != null && !rect.painted && rect.intersects(area)) {
+				else if (rect == null && child.getLabel().getLabelLayout() == null) {
+					rect = new PaintRectangle(child.getLayout(), subOffset);
+				}
+				if (!rect.painted && rect.intersects(area)) {
 					graphics.drawString(child.getLabel().getText(),
 							rect.x, rect.y, true);
 					rect.painted = true;
