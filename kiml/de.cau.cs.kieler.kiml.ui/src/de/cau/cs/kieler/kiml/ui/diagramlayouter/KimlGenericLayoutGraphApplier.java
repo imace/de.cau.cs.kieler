@@ -61,35 +61,101 @@ public class KimlGenericLayoutGraphApplier extends
 	private boolean prefUseGMFLabelLocation = false;
 	private boolean prefSmoothTransitions = false;
 
-	/* (non-Javadoc)
-	 * @see de.cau.cs.kieler.kiml.ui.diagramlayouter.KimlAbstractLayoutGraphApplier#doApplyLayoutGraph()
+	/* zoom level and connection layer */
+	private double zoomLevel = 1.0;
+	private ConnectionLayer connectionLayer = null;
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * de.cau.cs.kieler.kiml.ui.diagramlayouter.KimlAbstractLayoutGraphApplier
+	 * #doApplyLayoutGraph()
 	 */
 	@Override
 	protected void doApplyLayoutGraph() {
 
-		// get zoom level
-		double zoomLevel = 1.0;
+		/* gets zoom level */
 		ZoomManager zm = (ZoomManager) PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor()
 				.getAdapter(ZoomManager.class);
 		if (zm != null)
 			zoomLevel = zm.getZoom();
+
+		/* gets connection layer */
 		ScalableFreeformRootEditPart sfrep = (ScalableFreeformRootEditPart) layoutRootPart
 				.getRoot();
-		ConnectionLayer connectionLayer = (ConnectionLayer) sfrep
+		connectionLayer = (ConnectionLayer) sfrep
 				.getLayer(DiagramRootEditPart.CONNECTION_LAYER);
 		connectionLayer.setAntialias(SWT.ON);
 
-		// apply node layouts
-		CompoundCommand nodesCC = new CompoundCommand();
+		/* applies node layouts */
+		CompoundCommand nodesCompoundCommand = doApplyNodeLayout();
+
+		/* applies port layouts */
+		CompoundCommand portsCompoundCommand = doApplyPortLayout();
+
+		/* applies edge layouts */
+		CompoundCommand edgesCompoundCommand = doApplyEdgeLayout();
+
+		/* applies node label layouts */
+		CompoundCommand nodeLabelsCompoundCommand = doApplyNodeLabelLayout();
+
+		/* applies port label layouts */
+		CompoundCommand portLabelsCompoundCommand = doApplyPortLabelLayout();
+
+		/* applies edge label layouts */
+		CompoundCommand edgeLabelsCompoundCommand = doApplyEdgeLabelLayout();
+
+		/* fetches the diagram command stack */
+		Object adapter = PlatformUI.getWorkbench().getActiveWorkbenchWindow()
+				.getActivePage().getActiveEditor().getAdapter(
+						CommandStack.class);
+
+		/*
+		 * collects all single commands and executes them; the check if the
+		 * command size is zero is necessary, otherwise all following commands
+		 * won't be executed.
+		 */
+		if (adapter instanceof DiagramCommandStack) {
+			final DiagramCommandStack commandStack = (DiagramCommandStack) adapter;
+			CompoundCommand compoundCommand = new CompoundCommand();
+			compoundCommand.setLabel("Layout"); //$NON-NLS-1$
+			if (nodesCompoundCommand.size() != 0)
+				compoundCommand.add(nodesCompoundCommand);
+			if (portsCompoundCommand.size() != 0)
+				compoundCommand.add(portsCompoundCommand);
+			if (edgesCompoundCommand.size() != 0)
+				compoundCommand.add(edgesCompoundCommand);
+			if (nodeLabelsCompoundCommand.size() != 0)
+				compoundCommand.add(nodeLabelsCompoundCommand);
+			if (portLabelsCompoundCommand.size() != 0)
+				compoundCommand.add(portLabelsCompoundCommand);
+			if (edgeLabelsCompoundCommand.size() != 0)
+				compoundCommand.add(edgeLabelsCompoundCommand);
+			commandStack.execute(compoundCommand);
+		}
+	}
+
+	/**
+	 * This functions builds the CompoundCommand which is responsible to lay out
+	 * the nodes of the diagram. The information is taken from the mappings
+	 * provided to the class through the function <code>applyLayoutGraph</code>
+	 * of the abstract parent class.
+	 * 
+	 * @return A CompoundCommand which lays out the nodes of the diagram
+	 */
+	private CompoundCommand doApplyNodeLayout() {
+		CompoundCommand nodesCompoundCommand = new CompoundCommand();
 		for (KLayoutNode layoutNode : layoutNode2EditPart.keySet()) {
-			GraphicalEditPart nodeItem = layoutNode2EditPart.get(layoutNode);
+			GraphicalEditPart nodeEditPart = layoutNode2EditPart
+					.get(layoutNode);
 			KNodeLayout nodeLayout = layoutNode.getLayout();
 			ChangeBoundsRequest changeBoundsRequest = new ChangeBoundsRequest(
 					RequestConstants.REQ_RESIZE);
-			changeBoundsRequest.setEditParts(nodeItem);
+			changeBoundsRequest.setEditParts(nodeEditPart);
 
-			Dimension oldSize = nodeItem.getFigure().getBounds().getSize();
+			Dimension oldSize = nodeEditPart.getFigure().getBounds().getSize();
 			PrecisionDimension newSize = new PrecisionDimension(nodeLayout
 					.getSize().getWidth(), nodeLayout.getSize().getHeight());
 
@@ -98,7 +164,8 @@ public class KimlGenericLayoutGraphApplier extends
 			changeBoundsRequest.setResizeDirection(PositionConstants.CENTER);
 			changeBoundsRequest.setSizeDelta(sizeDelta.scale(zoomLevel));
 
-			Point oldLocation = nodeItem.getFigure().getBounds().getLocation();
+			Point oldLocation = nodeEditPart.getFigure().getBounds()
+					.getLocation();
 			PrecisionPoint newLocation = new PrecisionPoint(nodeLayout
 					.getLocation().getX(), nodeLayout.getLocation().getY());
 
@@ -107,21 +174,34 @@ public class KimlGenericLayoutGraphApplier extends
 			changeBoundsRequest.setMoveDelta(moveDelta.scale(zoomLevel));
 			changeBoundsRequest.setLocation(newLocation);
 
-			nodesCC.add(nodeItem.getCommand(changeBoundsRequest));
+			nodesCompoundCommand.add(nodeEditPart
+					.getCommand(changeBoundsRequest));
 		}
+		return nodesCompoundCommand;
 
-		// apply port layouts
-		CompoundCommand portsCC = new CompoundCommand();
+	}
+
+	/**
+	 * This functions builds the CompoundCommand which is responsible to lay out
+	 * the ports of the diagram. The information is taken from the mappings
+	 * provided to the class through the function <code>applyLayoutGraph</code>
+	 * of the abstract parent class.
+	 * 
+	 * @return A CompoundCommand which lays out the ports of the diagram
+	 */
+	private CompoundCommand doApplyPortLayout() {
+		CompoundCommand portsCompoundCommand = new CompoundCommand();
 		for (KLayoutPort port : layoutPort2EditPart.keySet()) {
-			GraphicalEditPart portItem = layoutPort2EditPart.get(port);
+			GraphicalEditPart portEditPart = layoutPort2EditPart.get(port);
 			KPoint portLocation = port.getLayout().getLocation();
 			Point nodeLocation = layoutNode2EditPart.get(port.getNode())
 					.getFigure().getBounds().getLocation();
 			ChangeBoundsRequest changeBoundsRequest = new ChangeBoundsRequest(
 					RequestConstants.REQ_MOVE);
-			changeBoundsRequest.setEditParts(portItem);
+			changeBoundsRequest.setEditParts(portEditPart);
 
-			Point oldLocation = portItem.getFigure().getBounds().getLocation();
+			Point oldLocation = portEditPart.getFigure().getBounds()
+					.getLocation();
 			PrecisionPoint newLocation = new PrecisionPoint(portLocation.getX()
 					+ nodeLocation.x, portLocation.getY() + nodeLocation.y);
 
@@ -133,20 +213,32 @@ public class KimlGenericLayoutGraphApplier extends
 			// set the automatic layout option in the extended data
 			changeBoundsRequest.getExtendedData().put(
 					LayoutEditPolicy.AUTO_LAYOUT_KEY, Boolean.TRUE);
-			portsCC.add(portItem.getCommand(changeBoundsRequest));
+			portsCompoundCommand.add(portEditPart
+					.getCommand(changeBoundsRequest));
 		}
+		return portsCompoundCommand;
+	}
 
-		// apply edge layouts
-		final CompoundCommand edgesCC = new CompoundCommand();
+	/**
+	 * This functions builds the CompoundCommand which is responsible to lay out
+	 * the edges of the diagram. The information is taken from the mappings
+	 * provided to the class through the function <code>applyLayoutGraph</code>
+	 * of the abstract parent class.
+	 * 
+	 * @return A CompoundCommand which lays out the edges of the diagram
+	 */
+	private CompoundCommand doApplyEdgeLayout() {
+		final CompoundCommand edgesCompoundCommand = new CompoundCommand();
 		for (KLayoutEdge edge : layoutEdge2EditPart.keySet()) {
-			ConnectionEditPart connectionItem = layoutEdge2EditPart.get(edge);
+			ConnectionEditPart connectionEditPart = layoutEdge2EditPart
+					.get(edge);
 
 			/*
 			 * if this connection is a polyline connection, see if it should be
 			 * routed smoothly. This is an attribute of a polyline connection.
 			 */
-			if (connectionItem.getFigure() instanceof PolylineConnectionEx) {
-				PolylineConnectionEx polyline = ((PolylineConnectionEx) connectionItem
+			if (connectionEditPart.getFigure() instanceof PolylineConnectionEx) {
+				PolylineConnectionEx polyline = ((PolylineConnectionEx) connectionEditPart
 						.getFigure());
 
 				if (prefSmoothTransitions) {
@@ -179,11 +271,49 @@ public class KimlGenericLayoutGraphApplier extends
 			SetAllBendpointRequest request = new SetAllBendpointRequest(
 					RequestConstants.REQ_SET_ALL_BENDPOINT, pointList,
 					startPoint, endPoint);
-			edgesCC.add(connectionItem.getCommand(request));
+			edgesCompoundCommand.add(connectionEditPart.getCommand(request));
 		}
+		return edgesCompoundCommand;
+	}
 
-		// apply edge label layouts
-		CompoundCommand edgeLabelsCC = new CompoundCommand();
+	/**
+	 * This functions builds the CompoundCommand which is responsible to lay out
+	 * the nodes labels of the diagram. The information is taken from the
+	 * mappings provided to the class through the function
+	 * <code>applyLayoutGraph</code> of the abstract parent class.
+	 * 
+	 * @return A CompoundCommand which lays out the node labels of the diagram
+	 */
+	private CompoundCommand doApplyNodeLabelLayout() {
+		CompoundCommand nodeLabelsCompoundCommand = new CompoundCommand();
+		// TODO Auto-generated method stub
+		return nodeLabelsCompoundCommand;
+	}
+
+	/**
+	 * This functions builds the CompoundCommand which is responsible to lay out
+	 * the port labels of the diagram. The information is taken from the
+	 * mappings provided to the class through the function
+	 * <code>applyLayoutGraph</code> of the abstract parent class.
+	 * 
+	 * @return A CompoundCommand which lays out the port labels of the diagram
+	 */
+	private CompoundCommand doApplyPortLabelLayout() {
+		CompoundCommand portLabelsCompoundCommand = new CompoundCommand();
+		// TODO Auto-generated method stub
+		return portLabelsCompoundCommand;
+	}
+
+	/**
+	 * This functions builds the CompoundCommand which is responsible to lay out
+	 * the edge labels of the diagram. The information is taken from the
+	 * mappings provided to the class through the function
+	 * <code>applyLayoutGraph</code> of the abstract parent class.
+	 * 
+	 * @return A CompoundCommand which lays out the edge labels of the diagram
+	 */
+	private CompoundCommand doApplyEdgeLabelLayout() {
+		CompoundCommand edgeLabelsCompoundCommand = new CompoundCommand();
 		for (KEdgeLabel edgeLabel : edgeLabel2EditPart.keySet()) {
 			LabelEditPart edgeLabelEditPart = edgeLabel2EditPart.get(edgeLabel);
 			KEdgeLabelLayout edgeLabelLayout = edgeLabel.getLabelLayout();
@@ -229,31 +359,18 @@ public class KimlGenericLayoutGraphApplier extends
 			changeBoundsRequest.setMoveDelta(moveDelta.scale(zoomLevel));
 			changeBoundsRequest.setLocation(newLocation);
 
-			edgeLabelsCC.add(edgeLabelEditPart.getCommand(changeBoundsRequest));
+			edgeLabelsCompoundCommand.add(edgeLabelEditPart
+					.getCommand(changeBoundsRequest));
 		}
-
-		Object adapter = PlatformUI.getWorkbench().getActiveWorkbenchWindow()
-				.getActivePage().getActiveEditor().getAdapter(
-						CommandStack.class);
-
-		if (adapter instanceof DiagramCommandStack) {
-			final DiagramCommandStack commandStack = (DiagramCommandStack) adapter;
-			CompoundCommand compoundCommand = new CompoundCommand();
-			compoundCommand.setLabel("Layout"); //$NON-NLS-1$
-			if (nodesCC.size() != 0)
-				compoundCommand.add(nodesCC);
-			if (portsCC.size() != 0)
-				compoundCommand.add(portsCC);
-			if (edgesCC.size() != 0)
-				compoundCommand.add(edgesCC);
-			if (edgeLabelsCC.size() != 0)
-				compoundCommand.add(edgeLabelsCC);
-			commandStack.execute(compoundCommand);
-		}
+		return edgeLabelsCompoundCommand;
 	}
 
-	/* (non-Javadoc)
-	 * @see de.cau.cs.kieler.kiml.ui.diagramlayouter.KimlAbstractLayoutGraphApplier#updatePreferences()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * de.cau.cs.kieler.kiml.ui.diagramlayouter.KimlAbstractLayoutGraphApplier
+	 * #updatePreferences()
 	 */
 	protected void updatePreferences() {
 
