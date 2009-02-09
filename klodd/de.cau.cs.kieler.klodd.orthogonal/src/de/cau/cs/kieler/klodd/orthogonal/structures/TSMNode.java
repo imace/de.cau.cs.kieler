@@ -194,7 +194,7 @@ public class TSMNode extends TSMGraphElement {
 	}
 	
 	/** list of incident edges */
-	public List<IncEntry> incidence = new LinkedList<IncEntry>();
+	public final List<IncEntry> incidence = new LinkedList<IncEntry>();
 	/** object contained in this node, or null if there is none */
 	public Object object;
 	/** the type of this node */
@@ -203,6 +203,10 @@ public class TSMNode extends TSMGraphElement {
 	public int abstrXpos;
 	/** abstract y coordinate position */
 	public int abstrYpos;
+	/** concrete x coordinate position */
+	public float concrXpos;
+	/** concrete y coordinate position */
+	public float concrYpos;
 	
 	/**
 	 * Creates a node containing the given object.

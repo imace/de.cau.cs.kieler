@@ -1,12 +1,16 @@
 package de.cau.cs.kieler.klodd.orthogonal.impl;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
 
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPortLayout;
 import de.cau.cs.kieler.klodd.core.algorithms.AbstractAlgorithm;
 import de.cau.cs.kieler.klodd.core.util.Pair;
 import de.cau.cs.kieler.klodd.orthogonal.impl.DualGraphBuilder.ExternalFaceDetector;
@@ -24,6 +28,16 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 
 	/** the embedded compacter for normalized orthogonal representations */
 	private ICompacter normalizedCompacter;
+	/** mapping of nodes or edge bends to their first normalization node */
+	private Map<Object, TSMNode> startNodeMap = new HashMap<Object, TSMNode>();
+	/** mapping of nodes to their last normalization node (lower right corner) */
+	private Map<Object, TSMNode> endNodeMap = new HashMap<Object, TSMNode>();
+	/** minimal distance between elements */
+	private float minDist;
+	/** total width of the drawing */
+	private float totalWidth;
+	/** total height of the drawing */
+	private float totalHeight;
 	
 	/*
 	 * (non-Javadoc)
@@ -32,6 +46,8 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 	public void reset() {
 		super.reset();
 		normalizedCompacter.reset();
+		startNodeMap.clear();
+		endNodeMap.clear();
 	}
 	
 	/**
@@ -45,18 +61,36 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 		this.normalizedCompacter = normalizedCompacter;
 	}
 	
-	/* (non-Javadoc)
-	 * @see de.cau.cs.kieler.klodd.orthogonal.modules.ICompacter#compact(de.cau.cs.kieler.klodd.orthogonal.structures.TSMGraph)
+	/*
+	 * (non-Javadoc)
+	 * @see de.cau.cs.kieler.klodd.orthogonal.modules.ICompacter#compact(de.cau.cs.kieler.klodd.orthogonal.structures.TSMGraph, float)
 	 */
-	public void compact(TSMGraph graph) {
+	public void compact(TSMGraph graph, float minDist) {
+		this.minDist = minDist;
 		// create a normalized version of the input graph
 		TSMGraph normalizedGraph = createNormalizedGraph(graph);
 		// build dual graph for the normalized graph
 		buildDualGraph(normalizedGraph);
 		// execute the embedded compacter
-		normalizedCompacter.compact(normalizedGraph);
+		normalizedCompacter.compact(normalizedGraph, minDist);
 		// transform abstract metrics to concrete metrics
-		transformMetrics(graph, normalizedGraph);
+		transformMetrics(graph);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see de.cau.cs.kieler.klodd.orthogonal.modules.ICompacter#getTotalWidth()
+	 */
+	public float getTotalWidth() {
+		return totalWidth;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see de.cau.cs.kieler.klodd.orthogonal.modules.ICompacter#getTotalHeight()
+	 */
+	public float getTotalHeight() {
+		return totalHeight;
 	}
 	
 	/**
@@ -214,12 +248,17 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 			int targetIndex = targetBendConsumed ? edge.bends.size() - 1
 					: edge.bends.size();
 			while (bendIter.nextIndex() < targetIndex) {
+				// add the new node for normalization
 				TSMEdge.Bend bend = bendIter.next();
 				TSMNode newNode = new TSMNode(normalizedGraph,
 						TSMNode.Type.BEND, edge);
 				TSMEdge newEdge = new TSMEdge(normalizedGraph,
 						currentNode, newNode, edge.layoutEdge);
 				newEdge.connectNodes(currentSide, currentSide.opposed());
+				
+				// register the new node
+				startNodeMap.put(bend, newNode);
+				
 				currentNode = newNode;
 				currentSide = (bend.type == TSMEdge.Bend.Type.LEFT
 						? currentSide.left() : currentSide.right());
@@ -249,6 +288,7 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 		TSMNode newNode;
 		TSMEdge newEdge;
 		do {
+			// add the new node and a new edge
 			TSMNode.Type cornerType;
 			switch (currentSide) {
 			case NORTH:
@@ -269,6 +309,17 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 			newNode = new TSMNode(graph, cornerType, origNode);
 			newEdge = new TSMEdge(graph, currentNode, newNode);
 			newEdge.connectNodes(currentSide.right(), currentSide.left());
+			
+			// register the new normalization node
+			switch (cornerType) {
+			case NORM_NW:
+				startNodeMap.put(origNode, newNode);
+				break;
+			case NORM_SE:
+				endNodeMap.put(origNode, newNode);
+				break;
+			}
+			
 			currentNode = newNode;
 			currentSide = currentSide.right();
 		} while (currentSide != endSide);
@@ -355,10 +406,181 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 	 * metrics of the original graph.
 	 * 
 	 * @param origGraph the original graph
-	 * @param normalizedGraph the normalized graph
 	 */
-	private void transformMetrics(TSMGraph origGraph, TSMGraph normalizedGraph) {
-		// TODO transform metrics
+	private void transformMetrics(TSMGraph origGraph) {
+		// create pool of nodes and edge bends
+		List<Object> compactables = new LinkedList<Object>();
+		compactables.addAll(origGraph.nodes);
+		for (TSMEdge edge : origGraph.edges) {
+			ListIterator<TSMEdge.Bend> bendIter = edge.bends.listIterator(1);
+			while (bendIter.nextIndex() < edge.bends.size() - 1)
+				compactables.add(bendIter.next());
+		}
+		
+		// transform horizontal positions
+		totalWidth = transformMetrics(compactables, true);
+		// transform vertical positions
+		totalHeight = transformMetrics(compactables, false);
+		
+		// set proper coordinates for the first and the last bend of each edge
+		for (TSMEdge edge : origGraph.edges) {
+			int bendsCount = edge.bends.size();
+			if (bendsCount > 0) {
+				// set source bend
+				TSMEdge.Bend sourceBend = edge.bends.get(0);
+				if (edge.sourceSide == TSMNode.Side.NORTH
+						|| edge.sourceSide == TSMNode.Side.SOUTH) {
+					sourceBend.xpos = edge.source.concrXpos;
+					if (edge.source.type == TSMNode.Type.LAYOUT
+							&& edge.layoutEdge.getSourcePort() != null) {
+						KPortLayout portLayout = edge.layoutEdge.getSourcePort().getLayout();
+						sourceBend.xpos += portLayout.getLocation().getX()
+								+ portLayout.getSize().getWidth() / 2;
+					}
+					if (bendsCount > 1)
+						sourceBend.ypos = edge.bends.get(1).ypos;
+				}
+				else {
+					sourceBend.ypos = edge.source.concrYpos;
+					if (edge.source.type == TSMNode.Type.LAYOUT
+							&& edge.layoutEdge.getSourcePort() != null) {
+						KPortLayout portLayout = edge.layoutEdge.getSourcePort().getLayout();
+						sourceBend.ypos += portLayout.getLocation().getY()
+								+ portLayout.getSize().getHeight() / 2;
+					}
+					if (bendsCount > 1)
+						sourceBend.xpos = edge.bends.get(1).xpos;
+				}
+				
+				// set target bend
+				TSMEdge.Bend targetBend = edge.bends.get(bendsCount - 1);
+				if (edge.targetSide == TSMNode.Side.EAST
+						|| edge.targetSide == TSMNode.Side.WEST) {
+					targetBend.ypos = edge.target.concrYpos;
+					if (edge.target.type == TSMNode.Type.LAYOUT
+							&& edge.layoutEdge.getTargetPort() != null) {
+						KPortLayout portLayout = edge.layoutEdge.getTargetPort().getLayout();
+						targetBend.ypos += portLayout.getLocation().getY()
+								+ portLayout.getSize().getHeight() / 2;
+					}
+					if (bendsCount > 1)
+						sourceBend.xpos = edge.bends.get(bendsCount-2).xpos;
+				}
+				else {
+					targetBend.xpos = edge.target.concrXpos;
+					if (edge.target.type == TSMNode.Type.LAYOUT
+							&& edge.layoutEdge.getTargetPort() != null) {
+						KPortLayout portLayout = edge.layoutEdge.getTargetPort().getLayout();
+						targetBend.xpos += portLayout.getLocation().getX()
+								+ portLayout.getSize().getWidth() / 2;
+					}
+					if (bendsCount > 1)
+						sourceBend.ypos = edge.bends.get(bendsCount-2).ypos;
+				}
+			}
+		}
+	}
+	
+	/**
+	 * Transforms horizontal or vertical metrics for a given list of
+	 * compactable elements.
+	 * 
+	 * @param compactables list of compactable elements, i.e. nodes or
+	 *     edge bends
+	 * @param horizontal indicates whether horizontal or vertical compaction
+	 *     is performed
+	 * @return the total width or height of the graph
+	 */
+	private float transformMetrics(List<Object> compactables,
+			final boolean horizontal) {
+		// sort compactable elements by their abstract position
+		Collections.sort(compactables, new Comparator<Object>() {
+			public int compare(Object o1, Object o2) {
+				int pos1 = getPos(o1, true);
+				int pos2 = getPos(o2, true);
+				if (pos1 == pos2) {
+					int lastpos1 = getPos(o1, false);
+					int lastpos2 = getPos(o2, false);
+					return lastpos2 - lastpos1;
+				}
+				else
+					return pos1 - pos2;
+			}
+			/*
+			 * Returns the abstract position of a node or edge bend.
+			 * @param obj node or an edge bend transformed into a normalized node
+			 * @param first if true, the first position of a node is returned,
+			 *     which is the position of the upper left corner
+			 * @return abstract position, or -1 if the last position of a bend
+			 *     is requested
+			 */
+			int getPos(Object obj, boolean first) {
+				if (first)
+					return horizontal ? startNodeMap.get(obj).abstrXpos
+							: startNodeMap.get(obj).abstrYpos;
+				else if (obj instanceof TSMNode)
+					return horizontal ? endNodeMap.get(obj).abstrXpos
+							: endNodeMap.get(obj).abstrYpos;
+				else return -1;
+			}
+		});
+		
+		// initialize concrete positions array
+		int abstrSize = horizontal ? (int)normalizedCompacter.getTotalWidth()
+				: (int)normalizedCompacter.getTotalHeight();
+		float[] concrPos = new float[abstrSize];
+		for (int i = 1; i < abstrSize; i++)
+			concrPos[i] = -1;
+		
+		// set concrete positions for all compactable elements
+		int lastPos = 0;
+		for (Object obj : compactables) {
+			int abstrPos = horizontal ? startNodeMap.get(obj).abstrXpos
+					: startNodeMap.get(obj).abstrYpos;
+			if (abstrPos > lastPos) {
+				int lastWrittenPos = abstrPos - 1;
+				while (concrPos[lastWrittenPos] < 0)
+					lastWrittenPos--;
+				if (concrPos[abstrPos] < concrPos[lastWrittenPos] + minDist)
+					concrPos[abstrPos] = concrPos[lastWrittenPos] + minDist;
+				lastPos = abstrPos;
+			}
+			if (obj instanceof TSMNode) {
+				TSMNode node = (TSMNode)obj;
+				if (node.type == TSMNode.Type.LAYOUT) {
+					int endPos = horizontal ? endNodeMap.get(obj).abstrXpos
+							: endNodeMap.get(obj).abstrYpos;
+					KLayoutNode layoutNode = (KLayoutNode)node.object;
+					float size = horizontal ? layoutNode.getLayout().getSize().getWidth()
+							: layoutNode.getLayout().getSize().getHeight();
+					assert endPos - abstrPos > 0;
+					float stepSize = size / (endPos - abstrPos);
+					float currentStep = concrPos[abstrPos];
+					for (int i = abstrPos + 1; i <= endPos; i++) {
+						currentStep += stepSize;
+						concrPos[i] = Math.max(concrPos[i], currentStep);
+					}
+				}
+				if (horizontal)
+					node.concrXpos = concrPos[abstrPos];
+				else
+					node.concrYpos = concrPos[abstrPos];
+			}
+			else if (obj instanceof TSMEdge.Bend) {
+				TSMEdge.Bend edgeBend = (TSMEdge.Bend)obj;
+				if (horizontal)
+					edgeBend.xpos = concrPos[abstrPos];
+				else
+					edgeBend.ypos = concrPos[abstrPos];
+			}
+		}
+		
+		// determine total size
+		for (int i = abstrSize - 1; i >= 0; i--) {
+			if (concrPos[i] > 0)
+				return concrPos[i] + minDist;
+		}
+		return 0.0f;
 	}
 
 }

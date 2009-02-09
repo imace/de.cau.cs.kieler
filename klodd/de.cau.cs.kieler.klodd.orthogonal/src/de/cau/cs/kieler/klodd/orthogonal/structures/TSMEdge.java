@@ -53,7 +53,7 @@ public class TSMEdge extends TSMGraphElement {
 	/** the next edge of a split edge */
 	public TSMEdge nextEdge;
 	/** the bends of this edge */
-	public List<Bend> bends = new LinkedList<Bend>();
+	public final List<Bend> bends = new LinkedList<Bend>();
 	/** the side on which the edge leaves the source */
 	public TSMNode.Side sourceSide = TSMNode.Side.UNDEFINED;
 	/** the side on which the edge reaches the target */

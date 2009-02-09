@@ -17,9 +17,7 @@ public abstract class TSMGraphElement implements Comparable<TSMGraphElement> {
 	 * @see java.lang.Comparable#compareTo(java.lang.Object)
 	 */
 	public int compareTo(TSMGraphElement other) {
-		return this.id > other.id ? 1
-				: (this.id < other.id ? -1
-				: 0);
+		return this.id - other.id;
 	}
 	
 	/*

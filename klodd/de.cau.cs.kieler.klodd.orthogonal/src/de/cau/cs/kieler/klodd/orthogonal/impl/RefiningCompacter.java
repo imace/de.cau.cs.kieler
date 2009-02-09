@@ -87,10 +87,11 @@ public class RefiningCompacter extends AbstractAlgorithm implements ICompacter {
 		this.refinedCompacter = refinedCompacter;
 	}
 	
-	/* (non-Javadoc)
-	 * @see de.cau.cs.kieler.klodd.orthogonal.modules.ICompacter#compact(de.cau.cs.kieler.klodd.orthogonal.structures.TSMGraph)
+	/*
+	 * (non-Javadoc)
+	 * @see de.cau.cs.kieler.klodd.orthogonal.modules.ICompacter#compact(de.cau.cs.kieler.klodd.orthogonal.structures.TSMGraph, float)
 	 */
-	public void compact(TSMGraph graph) {
+	public void compact(TSMGraph graph, float minDist) {
 		// refine the internal faces
 		ListIterator<TSMFace> faceIter = graph.faces.listIterator();
 		while (faceIter.hasNext()) {
@@ -108,7 +109,23 @@ public class RefiningCompacter extends AbstractAlgorithm implements ICompacter {
 		graph.faces.addAll(newFaces);
 		
 		// execute the embedded compacter
-		refinedCompacter.compact(graph);
+		refinedCompacter.compact(graph, minDist);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see de.cau.cs.kieler.klodd.orthogonal.modules.ICompacter#getTotalHeight()
+	 */
+	public float getTotalHeight() {
+		return refinedCompacter.getTotalHeight();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see de.cau.cs.kieler.klodd.orthogonal.modules.ICompacter#getTotalWidth()
+	 */
+	public float getTotalWidth() {
+		return refinedCompacter.getTotalWidth();
 	}
 
 	/**

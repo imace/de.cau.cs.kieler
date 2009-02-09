@@ -13,11 +13,11 @@ import java.util.List;
 public class TSMGraph {
 
 	/** list of nodes in this TSM graph */
-	public List<TSMNode> nodes = new LinkedList<TSMNode>();
+	public final List<TSMNode> nodes = new LinkedList<TSMNode>();
 	/** list of edges in this TSM graph */
-	public List<TSMEdge> edges = new LinkedList<TSMEdge>();
+	public final List<TSMEdge> edges = new LinkedList<TSMEdge>();
 	/** list of internal faces in this TSM graph */
-	public List<TSMFace> faces = new LinkedList<TSMFace>();
+	public final List<TSMFace> faces = new LinkedList<TSMFace>();
 	/** the external face of this TSM graph */
 	public TSMFace externalFace = new TSMFace(this, false);
 

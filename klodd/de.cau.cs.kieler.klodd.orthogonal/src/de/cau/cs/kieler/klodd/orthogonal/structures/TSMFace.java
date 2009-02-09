@@ -114,7 +114,7 @@ public class TSMFace extends TSMGraphElement {
 	
 	/** set of lists of bordering edges (can be multiple lists for the
 	 *  external face) */
-	public List<List<BorderEntry>> borders = new LinkedList<List<BorderEntry>>();
+	public final List<List<BorderEntry>> borders = new LinkedList<List<BorderEntry>>();
 	
 	/**
 	 * Creates a face and optionally adds it to the given graph.

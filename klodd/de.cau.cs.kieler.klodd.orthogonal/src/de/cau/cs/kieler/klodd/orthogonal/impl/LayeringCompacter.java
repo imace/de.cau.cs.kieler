@@ -30,28 +30,53 @@ public class LayeringCompacter extends AbstractAlgorithm implements
 	
 	/** array of horizontal or vertical bars */
 	private TopoBar[] topoBars;
+	/** the greatest horizontal rank */
+	private int maxXrank;
+	/** the greatest vertical rank */
+	private int maxYrank;
 	
-	/* (non-Javadoc)
-	 * @see de.cau.cs.kieler.klodd.orthogonal.modules.ICompacter#compact(de.cau.cs.kieler.klodd.orthogonal.structures.TSMGraph)
+	/*
+	 * (non-Javadoc)
+	 * @see de.cau.cs.kieler.klodd.orthogonal.modules.ICompacter#compact(de.cau.cs.kieler.klodd.orthogonal.structures.TSMGraph, float)
 	 */
-	public void compact(TSMGraph graph) {
+	public void compact(TSMGraph graph, float minDist) {
 		// determine horizontal numbering
+		maxXrank = 0;
 		buildTopoBars(graph, true);
 		for (TopoBar topoBar : topoBars) {
 			if (topoBar.rank < 0)
 				visit(topoBar, TSMNode.Side.WEST);
 			for (TSMNode node : topoBar.nodes)
 				node.abstrXpos = topoBar.rank;
+			maxXrank = Math.max(maxXrank, topoBar.rank);
 		}
 		
 		// determine vertical numbering
+		maxYrank = 0;
 		buildTopoBars(graph, false);
 		for (TopoBar topoBar : topoBars) {
 			if (topoBar.rank < 0)
 				visit(topoBar, TSMNode.Side.NORTH);
 			for (TSMNode node : topoBar.nodes)
 				node.abstrYpos = topoBar.rank;
+			maxYrank = Math.max(maxYrank, topoBar.rank);
 		}
+	}
+
+	/**
+	 * Returns the number of horizontal abstract positions assigned by this
+	 * compacter.
+	 */
+	public float getTotalWidth() {
+		return maxXrank + 1;
+	}
+
+	/**
+	 * Returns the number of vertical abstract positions assigned by this
+	 * compacter.
+	 */
+	public float getTotalHeight() {
+		return maxYrank + 1;
 	}
 	
 	/**

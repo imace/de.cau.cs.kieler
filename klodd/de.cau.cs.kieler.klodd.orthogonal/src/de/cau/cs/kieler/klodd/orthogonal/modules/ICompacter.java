@@ -14,7 +14,22 @@ public interface ICompacter extends IAlgorithm {
 	 * Performs compaction of a given TSM graph.
 	 * 
 	 * @param graph TSM graph that is to be filled with metrics information.
+	 * @param minDist minimal distance between elements
 	 */
-	public void compact(TSMGraph graph);
+	public void compact(TSMGraph graph, float minDist);
+	
+	/**
+	 * Returns the total width of the drawing as determined by the compacter.
+	 * 
+	 * @return the total width
+	 */
+	public float getTotalWidth();
+	
+	/**
+	 * Returns the total height of the drawing as determined by the compacter.
+	 * 
+	 * @return the total height
+	 */
+	public float getTotalHeight();
 	
 }

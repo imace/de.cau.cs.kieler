@@ -23,6 +23,9 @@ public class OrthogonalDataflowLayoutProvider extends
 	/** displayed name of this layout provider */
 	public static final String LAYOUTER_NAME = "KLoDD Orthogonal";
 	
+	/** minimal distance between elements */
+	private static final float MIN_DIST = 12.0f;
+	
 	/** the planarization module */
 	private IPlanarizer planarizer;
 	/** the orthogonalization module */
@@ -44,7 +47,7 @@ public class OrthogonalDataflowLayoutProvider extends
 		// perform the orthogonalization phase
 		orthogonalizer.orthogonalize(tsmGraph);
 		// perform the compaction phase
-		compacter.compact(tsmGraph);
+		compacter.compact(tsmGraph, MIN_DIST);
 		// apply layout information to the original graph
 		tsmGraph.applyLayout();
 		
