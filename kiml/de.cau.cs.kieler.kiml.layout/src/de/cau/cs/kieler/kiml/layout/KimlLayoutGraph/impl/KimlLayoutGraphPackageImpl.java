@@ -543,7 +543,7 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getKEdgeLayout_GridPoints() {
+	public EReference getKEdgeLayout_BendPoints() {
 		return (EReference)kEdgeLayoutEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -1048,7 +1048,7 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 		kEdgeLayoutEClass = createEClass(KEDGE_LAYOUT);
 		createEReference(kEdgeLayoutEClass, KEDGE_LAYOUT__SOURCE_POINT);
 		createEReference(kEdgeLayoutEClass, KEDGE_LAYOUT__TARGET_POINT);
-		createEReference(kEdgeLayoutEClass, KEDGE_LAYOUT__GRID_POINTS);
+		createEReference(kEdgeLayoutEClass, KEDGE_LAYOUT__BEND_POINTS);
 		createEAttribute(kEdgeLayoutEClass, KEDGE_LAYOUT__EDGE_TYPE);
 		createEAttribute(kEdgeLayoutEClass, KEDGE_LAYOUT__USE_LAYOUT);
 
@@ -1188,7 +1188,7 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 		initEClass(kEdgeLayoutEClass, KEdgeLayout.class, "KEdgeLayout", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getKEdgeLayout_SourcePoint(), this.getKPoint(), null, "sourcePoint", null, 1, 1, KEdgeLayout.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getKEdgeLayout_TargetPoint(), this.getKPoint(), null, "targetPoint", null, 1, 1, KEdgeLayout.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getKEdgeLayout_GridPoints(), this.getKPoint(), null, "gridPoints", null, 0, -1, KEdgeLayout.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getKEdgeLayout_BendPoints(), this.getKPoint(), null, "bendPoints", null, 0, -1, KEdgeLayout.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getKEdgeLayout_EdgeType(), this.getKEdgeType(), "edgeType", null, 1, 1, KEdgeLayout.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getKEdgeLayout_UseLayout(), theEcorePackage.getEBoolean(), "useLayout", "true", 1, 1, KEdgeLayout.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 

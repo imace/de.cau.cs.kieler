@@ -184,7 +184,7 @@ public class TSMEdge extends TSMGraphElement {
 		TSMEdge firstEdge = currentEdge, lastEdge;
 		
 		// add all bend points of the edge
-		List<KPoint> bendPoints = layoutEdge.getLayout().getGridPoints();
+		List<KPoint> bendPoints = layoutEdge.getLayout().getBendPoints();
 		bendPoints.clear();
 		do {
 			for (Bend bend : currentEdge.bends) {

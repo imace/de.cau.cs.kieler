@@ -52,12 +52,12 @@ public abstract class AbstractCycleRemover extends AbstractAlgorithm
 			edge.setTargetPort(sourcePort);
 			// reverse bend points
 			List<KPoint> bendPoints = new LinkedList<KPoint>();
-			for (KPoint point : edge.getLayout().getGridPoints()) {
+			for (KPoint point : edge.getLayout().getBendPoints()) {
 				bendPoints.add(0, point);
 			}
-			edge.getLayout().getGridPoints().clear();
+			edge.getLayout().getBendPoints().clear();
 			for (KPoint point : bendPoints) {
-				edge.getLayout().getGridPoints().add(point);
+				edge.getLayout().getBendPoints().add(point);
 			}
 			// reverse source and target point
 			KPoint sourcePoint = edge.getLayout().getSourcePoint();

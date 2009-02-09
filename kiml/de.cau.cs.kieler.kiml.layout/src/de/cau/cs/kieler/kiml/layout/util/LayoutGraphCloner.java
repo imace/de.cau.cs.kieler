@@ -317,8 +317,8 @@ public class LayoutGraphCloner {
 			clone.setSourcePoint(clonePoint(edgeLayout.getSourcePoint()));
 			clone.setTargetPoint(clonePoint(edgeLayout.getTargetPoint()));
 			clone.setUseLayout(edgeLayout.isUseLayout());
-			for (KPoint point : edgeLayout.getGridPoints()) {
-				clone.getGridPoints().add(clonePoint(point));
+			for (KPoint point : edgeLayout.getBendPoints()) {
+				clone.getBendPoints().add(clonePoint(point));
 			}
 			return clone;
 		}

@@ -20,7 +20,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLayout#getSourcePoint <em>Source Point</em>}</li>
  *   <li>{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLayout#getTargetPoint <em>Target Point</em>}</li>
- *   <li>{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLayout#getGridPoints <em>Grid Points</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLayout#getBendPoints <em>Bend Points</em>}</li>
  *   <li>{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLayout#getEdgeType <em>Edge Type</em>}</li>
  *   <li>{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLayout#isUseLayout <em>Use Layout</em>}</li>
  * </ul>
@@ -84,7 +84,7 @@ public interface KEdgeLayout extends EObject {
 	void setTargetPoint(KPoint value);
 
 	/**
-	 * Returns the value of the '<em><b>Grid Points</b></em>' reference list.
+	 * Returns the value of the '<em><b>Bend Points</b></em>' reference list.
 	 * The list contents are of type {@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPoint}.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -92,12 +92,12 @@ public interface KEdgeLayout extends EObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Grid Points</em>' reference list.
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKEdgeLayout_GridPoints()
+	 * @return the value of the '<em>Bend Points</em>' reference list.
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKEdgeLayout_BendPoints()
 	 * @model
 	 * @generated
 	 */
-	EList<KPoint> getGridPoints();
+	EList<KPoint> getBendPoints();
 
 	/**
 	 * Returns the value of the '<em><b>Edge Type</b></em>' attribute.

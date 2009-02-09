@@ -411,8 +411,8 @@ public class GraphvizLayouter {
 				 * need to remove the last grid point, as this is the same as
 				 * the target point below
 				 */
-				edge.getLayout().getGridPoints().remove(
-						edge.getLayout().getGridPoints().size() - 1);
+				edge.getLayout().getBendPoints().remove(
+						edge.getLayout().getBendPoints().size() - 1);
 
 				/* last two points in the GraphViz list denote the end point */
 				edge.getLayout().setTargetPoint(
@@ -613,7 +613,7 @@ public class GraphvizLayouter {
 			tCubed = tSquared * t;
 			int x = (int) (((ax * tCubed) + (bx * tSquared) + (cx * t)) + p0.x);
 			int y = (int) (((ay * tCubed) + (by * tSquared) + (cy * t)) + p0.y);
-			layout.getGridPoints().add(graphviz2KPoint(x, y));
+			layout.getBendPoints().add(graphviz2KPoint(x, y));
 		}
 	}
 

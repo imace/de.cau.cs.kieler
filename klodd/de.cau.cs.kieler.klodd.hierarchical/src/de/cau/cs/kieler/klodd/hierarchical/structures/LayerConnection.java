@@ -63,7 +63,7 @@ public class LayerConnection {
 		this.sourcePort = sourcePort;
 		this.targetElement = targetElem;
 		this.targetPort = targetPort;
-		edge.getLayout().getGridPoints().clear();
+		edge.getLayout().getBendPoints().clear();
 	}
 	
 	/*
@@ -112,7 +112,7 @@ public class LayerConnection {
 		for (KPoint point : bendPoints) {
 			point.setX(point.getX() + offset.getX());
 			point.setY(point.getY() + offset.getY());
-			edge.getLayout().getGridPoints().add(point);
+			edge.getLayout().getBendPoints().add(point);
 		}
 		
 		// calculate position of source point

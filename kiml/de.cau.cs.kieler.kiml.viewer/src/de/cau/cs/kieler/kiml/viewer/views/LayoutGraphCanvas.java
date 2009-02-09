@@ -106,7 +106,7 @@ public class LayoutGraphCanvas extends Canvas implements PaintListener {
 			float minX = edgeLayout.getSourcePoint().getX(),
 				minY = edgeLayout.getSourcePoint().getY();
 			float maxX = minX, maxY = minY;
-			for (KPoint point : edgeLayout.getGridPoints()) {
+			for (KPoint point : edgeLayout.getBendPoints()) {
 				minX = Math.min(minX, point.getX());
 				minY = Math.min(minY, point.getY());
 				maxX = Math.max(maxX, point.getX());
@@ -152,7 +152,7 @@ public class LayoutGraphCanvas extends Canvas implements PaintListener {
 		 *     is used
 		 */
 		BendsIterator(KEdgeLayout edgeLayout, boolean forward) {
-			this.bendPoints = edgeLayout.getGridPoints();
+			this.bendPoints = edgeLayout.getBendPoints();
 			this.forward = forward;
 			this.startPoint = forward ? edgeLayout.getSourcePoint()
 					: edgeLayout.getTargetPoint();
@@ -456,7 +456,7 @@ public class LayoutGraphCanvas extends Canvas implements PaintListener {
 		if (!rect.painted && rect.intersects(area)) {
 			KPoint sourcePoint = edge.getLayout().getSourcePoint();
 			KPoint targetPoint = edge.getLayout().getTargetPoint();
-			List<KPoint> bendPoints = edge.getLayout().getGridPoints();
+			List<KPoint> bendPoints = edge.getLayout().getBendPoints();
 			KPoint lastPoint = sourcePoint;
 			for (KPoint point : bendPoints) {
 				graphics.drawLine(Math.round(lastPoint.getX() + offset.getX()),

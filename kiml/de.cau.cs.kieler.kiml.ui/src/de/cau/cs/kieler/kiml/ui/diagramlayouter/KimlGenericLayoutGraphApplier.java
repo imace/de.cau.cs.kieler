@@ -257,7 +257,7 @@ public class KimlGenericLayoutGraphApplier extends
 			pointList.addPoint(startPoint);
 
 			// set grid points
-			for (KPoint gridPoint : edgeLayout.getGridPoints()) {
+			for (KPoint gridPoint : edgeLayout.getBendPoints()) {
 				Point point = KimlMetricsHelper.kPoint2Point(gridPoint);
 				pointList.addPoint(point);
 			}

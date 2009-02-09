@@ -519,13 +519,13 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	int KEDGE_LAYOUT__TARGET_POINT = 1;
 
 	/**
-	 * The feature id for the '<em><b>Grid Points</b></em>' reference list.
+	 * The feature id for the '<em><b>Bend Points</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int KEDGE_LAYOUT__GRID_POINTS = 2;
+	int KEDGE_LAYOUT__BEND_POINTS = 2;
 
 	/**
 	 * The feature id for the '<em><b>Edge Type</b></em>' attribute.
@@ -1455,15 +1455,15 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	EReference getKEdgeLayout_TargetPoint();
 
 	/**
-	 * Returns the meta object for the reference list '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLayout#getGridPoints <em>Grid Points</em>}'.
+	 * Returns the meta object for the reference list '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLayout#getBendPoints <em>Bend Points</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Grid Points</em>'.
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLayout#getGridPoints()
+	 * @return the meta object for the reference list '<em>Bend Points</em>'.
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLayout#getBendPoints()
 	 * @see #getKEdgeLayout()
 	 * @generated
 	 */
-	EReference getKEdgeLayout_GridPoints();
+	EReference getKEdgeLayout_BendPoints();
 
 	/**
 	 * Returns the meta object for the attribute '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLayout#getEdgeType <em>Edge Type</em>}'.
@@ -2230,12 +2230,12 @@ public interface KimlLayoutGraphPackage extends EPackage {
 		EReference KEDGE_LAYOUT__TARGET_POINT = eINSTANCE.getKEdgeLayout_TargetPoint();
 
 		/**
-		 * The meta object literal for the '<em><b>Grid Points</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Bend Points</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference KEDGE_LAYOUT__GRID_POINTS = eINSTANCE.getKEdgeLayout_GridPoints();
+		EReference KEDGE_LAYOUT__BEND_POINTS = eINSTANCE.getKEdgeLayout_BendPoints();
 
 		/**
 		 * The meta object literal for the '<em><b>Edge Type</b></em>' attribute feature.

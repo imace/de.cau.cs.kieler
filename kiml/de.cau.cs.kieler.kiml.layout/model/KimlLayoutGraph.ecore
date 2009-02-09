@@ -45,7 +45,7 @@
         eType="#//KPoint"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="targetPoint" lowerBound="1"
         eType="#//KPoint"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="gridPoints" upperBound="-1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bendPoints" upperBound="-1"
         eType="#//KPoint"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="edgeType" lowerBound="1"
         eType="#//KEdgeType"/>

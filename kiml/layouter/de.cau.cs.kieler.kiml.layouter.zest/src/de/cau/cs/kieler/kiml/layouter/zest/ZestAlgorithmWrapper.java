@@ -153,7 +153,7 @@ public class ZestAlgorithmWrapper {
 		// transfer relationships layouts
 		for (LayoutRelationship relationship : relationships) {
 			KLayoutEdge edge = (KLayoutEdge)((AdvancedRelationship)relationship).getRealObject();
-			edge.getLayout().getGridPoints().clear();
+			edge.getLayout().getBendPoints().clear();
 			for (LayoutBendPoint bendPoint : ((AdvancedRelationship)relationship).getBendPoints()) {
 				KPoint point = KimlLayoutGraphFactory.eINSTANCE.createKPoint();
 				float x = (float)bendPoint.getX();
@@ -162,7 +162,7 @@ public class ZestAlgorithmWrapper {
 				if (y > maxY) maxY = y;
 				point.setX(x);
 				point.setY(y);
-				edge.getLayout().getGridPoints().add(point);
+				edge.getLayout().getBendPoints().add(point);
 			}
 		}
 		

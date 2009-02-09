@@ -50,7 +50,7 @@ public class ElementLoop {
 		this.element = elem;
 		this.sourcePort = sourcePort;
 		this.targetPort = targetPort;
-		edge.getLayout().getGridPoints().clear();
+		edge.getLayout().getBendPoints().clear();
 	}
 	
 	/*
@@ -89,7 +89,7 @@ public class ElementLoop {
 		for (KPoint point : bendPoints) {
 			point.setX(point.getX() + offset.getX());
 			point.setY(point.getY() + offset.getY());
-			edge.getLayout().getGridPoints().add(point);
+			edge.getLayout().getBendPoints().add(point);
 		}
 		
 		// set start and end points

@@ -34,7 +34,7 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
  * <ul>
  *   <li>{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KEdgeLayoutImpl#getSourcePoint <em>Source Point</em>}</li>
  *   <li>{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KEdgeLayoutImpl#getTargetPoint <em>Target Point</em>}</li>
- *   <li>{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KEdgeLayoutImpl#getGridPoints <em>Grid Points</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KEdgeLayoutImpl#getBendPoints <em>Bend Points</em>}</li>
  *   <li>{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KEdgeLayoutImpl#getEdgeType <em>Edge Type</em>}</li>
  *   <li>{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KEdgeLayoutImpl#isUseLayout <em>Use Layout</em>}</li>
  * </ul>
@@ -64,14 +64,14 @@ public class KEdgeLayoutImpl extends EObjectImpl implements KEdgeLayout {
 	protected KPoint targetPoint;
 
 	/**
-	 * The cached value of the '{@link #getGridPoints() <em>Grid Points</em>}' reference list.
+	 * The cached value of the '{@link #getBendPoints() <em>Bend Points</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getGridPoints()
+	 * @see #getBendPoints()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<KPoint> gridPoints;
+	protected EList<KPoint> bendPoints;
 
 	/**
 	 * The default value of the '{@link #getEdgeType() <em>Edge Type</em>}' attribute.
@@ -213,11 +213,11 @@ public class KEdgeLayoutImpl extends EObjectImpl implements KEdgeLayout {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<KPoint> getGridPoints() {
-		if (gridPoints == null) {
-			gridPoints = new EObjectResolvingEList<KPoint>(KPoint.class, this, KimlLayoutGraphPackage.KEDGE_LAYOUT__GRID_POINTS);
+	public EList<KPoint> getBendPoints() {
+		if (bendPoints == null) {
+			bendPoints = new EObjectResolvingEList<KPoint>(KPoint.class, this, KimlLayoutGraphPackage.KEDGE_LAYOUT__BEND_POINTS);
 		}
-		return gridPoints;
+		return bendPoints;
 	}
 
 	/**
@@ -276,8 +276,8 @@ public class KEdgeLayoutImpl extends EObjectImpl implements KEdgeLayout {
 			case KimlLayoutGraphPackage.KEDGE_LAYOUT__TARGET_POINT:
 				if (resolve) return getTargetPoint();
 				return basicGetTargetPoint();
-			case KimlLayoutGraphPackage.KEDGE_LAYOUT__GRID_POINTS:
-				return getGridPoints();
+			case KimlLayoutGraphPackage.KEDGE_LAYOUT__BEND_POINTS:
+				return getBendPoints();
 			case KimlLayoutGraphPackage.KEDGE_LAYOUT__EDGE_TYPE:
 				return getEdgeType();
 			case KimlLayoutGraphPackage.KEDGE_LAYOUT__USE_LAYOUT:
@@ -301,9 +301,9 @@ public class KEdgeLayoutImpl extends EObjectImpl implements KEdgeLayout {
 			case KimlLayoutGraphPackage.KEDGE_LAYOUT__TARGET_POINT:
 				setTargetPoint((KPoint)newValue);
 				return;
-			case KimlLayoutGraphPackage.KEDGE_LAYOUT__GRID_POINTS:
-				getGridPoints().clear();
-				getGridPoints().addAll((Collection<? extends KPoint>)newValue);
+			case KimlLayoutGraphPackage.KEDGE_LAYOUT__BEND_POINTS:
+				getBendPoints().clear();
+				getBendPoints().addAll((Collection<? extends KPoint>)newValue);
 				return;
 			case KimlLayoutGraphPackage.KEDGE_LAYOUT__EDGE_TYPE:
 				setEdgeType((KEdgeType)newValue);
@@ -329,8 +329,8 @@ public class KEdgeLayoutImpl extends EObjectImpl implements KEdgeLayout {
 			case KimlLayoutGraphPackage.KEDGE_LAYOUT__TARGET_POINT:
 				setTargetPoint((KPoint)null);
 				return;
-			case KimlLayoutGraphPackage.KEDGE_LAYOUT__GRID_POINTS:
-				getGridPoints().clear();
+			case KimlLayoutGraphPackage.KEDGE_LAYOUT__BEND_POINTS:
+				getBendPoints().clear();
 				return;
 			case KimlLayoutGraphPackage.KEDGE_LAYOUT__EDGE_TYPE:
 				setEdgeType(EDGE_TYPE_EDEFAULT);
@@ -354,8 +354,8 @@ public class KEdgeLayoutImpl extends EObjectImpl implements KEdgeLayout {
 				return sourcePoint != null;
 			case KimlLayoutGraphPackage.KEDGE_LAYOUT__TARGET_POINT:
 				return targetPoint != null;
-			case KimlLayoutGraphPackage.KEDGE_LAYOUT__GRID_POINTS:
-				return gridPoints != null && !gridPoints.isEmpty();
+			case KimlLayoutGraphPackage.KEDGE_LAYOUT__BEND_POINTS:
+				return bendPoints != null && !bendPoints.isEmpty();
 			case KimlLayoutGraphPackage.KEDGE_LAYOUT__EDGE_TYPE:
 				return edgeType != EDGE_TYPE_EDEFAULT;
 			case KimlLayoutGraphPackage.KEDGE_LAYOUT__USE_LAYOUT:
