@@ -112,22 +112,6 @@ public class RefiningCompacter extends AbstractAlgorithm implements ICompacter {
 		refinedCompacter.compact(graph, minDist);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see de.cau.cs.kieler.klodd.orthogonal.modules.ICompacter#getTotalHeight()
-	 */
-	public float getTotalHeight() {
-		return refinedCompacter.getTotalHeight();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see de.cau.cs.kieler.klodd.orthogonal.modules.ICompacter#getTotalWidth()
-	 */
-	public float getTotalWidth() {
-		return refinedCompacter.getTotalWidth();
-	}
-
 	/**
 	 * Creates refinement edges for the given face.
 	 * 

@@ -18,18 +18,4 @@ public interface ICompacter extends IAlgorithm {
 	 */
 	public void compact(TSMGraph graph, float minDist);
 	
-	/**
-	 * Returns the total width of the drawing as determined by the compacter.
-	 * 
-	 * @return the total width
-	 */
-	public float getTotalWidth();
-	
-	/**
-	 * Returns the total height of the drawing as determined by the compacter.
-	 * 
-	 * @return the total height
-	 */
-	public float getTotalHeight();
-	
 }

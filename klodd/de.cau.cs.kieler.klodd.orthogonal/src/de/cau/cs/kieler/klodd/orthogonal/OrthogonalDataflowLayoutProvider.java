@@ -1,5 +1,8 @@
 package de.cau.cs.kieler.klodd.orthogonal;
 
+import java.util.List;
+
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KInsets;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphFactory;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayouterInfo;
@@ -42,14 +45,22 @@ public class OrthogonalDataflowLayoutProvider extends
 		
 		long startTime = System.nanoTime();
 
-		// perform the planarization phase
-		TSMGraph tsmGraph = planarizer.planarize(layoutNode);
-		// perform the orthogonalization phase
-		orthogonalizer.orthogonalize(tsmGraph);
-		// perform the compaction phase
-		compacter.compact(tsmGraph, MIN_DIST);
+		// split the graph into connected components
+		ConnectedComponents componentsSplitter = new ConnectedComponents();
+		List<TSMGraph> components = componentsSplitter.findComponents(layoutNode);
+		for (TSMGraph tsmGraph : components) {
+			// perform the planarization phase
+			planarizer.reset();
+			planarizer.planarize(tsmGraph);
+			// perform the orthogonalization phase
+			orthogonalizer.reset();
+			orthogonalizer.orthogonalize(tsmGraph);
+			// perform the compaction phase
+			compacter.reset();
+			compacter.compact(tsmGraph, MIN_DIST);
+		}
 		// apply layout information to the original graph
-		tsmGraph.applyLayout();
+		applyLayout(components, layoutNode);
 		
 		double executionTime = (double)(System.nanoTime() - startTime) * 1e-9;
 		if (executionTime >= 1.0)
@@ -78,6 +89,35 @@ public class OrthogonalDataflowLayoutProvider extends
 		orthogonalizer = new KandinskyLPOrthogonalizer();
 		compacter = new NormalizingCompacter(new RefiningCompacter(
 				new LayeringCompacter()));
+	}
+	
+	/**
+	 * Applies layout to the given list of connected components of a graph.
+	 * 
+	 * @param components list of connected components
+	 * @param parentNode parent layout node
+	 */
+	private void applyLayout(List<TSMGraph> components, KLayoutNode parentNode) {
+		KInsets insets = parentNode.getLayout().getInsets();
+		float currentYpos = 0.0f, maxWidth = 0.0f;
+		for (TSMGraph component : components) {
+			component.applyLayout(0.0f, currentYpos, insets);
+			currentYpos += component.height;
+			maxWidth = Math.max(maxWidth, component.width);
+		}
+		
+		// update the size of the parent layout node
+		parentNode.getLayout().getSize().setWidth(insets.getLeft()
+				+ maxWidth + insets.getRight());
+		parentNode.getLayout().getSize().setHeight(insets.getTop()
+				+ currentYpos + insets.getBottom());
+		
+		// update layout options of the parent layout node
+		List<KLayoutOption> layoutOptions = parentNode.getLayout().getLayoutOptions();
+		if (!layoutOptions.contains(KLayoutOption.FIXED_SIZE))
+			layoutOptions.add(KLayoutOption.FIXED_SIZE);
+		if (!layoutOptions.contains(KLayoutOption.FIXED_PORTS))
+			layoutOptions.add(KLayoutOption.FIXED_PORTS);
 	}
 
 }

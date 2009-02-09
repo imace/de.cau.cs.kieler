@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.ListIterator;
 
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPoint;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphFactory;
 
 /**
  * An edge in the graph structure used for the topology-shape-metrics
@@ -166,6 +168,92 @@ public class TSMEdge extends TSMGraphElement {
 	public boolean equals(Object other) {
 		return (other instanceof TSMEdge)
 				&& ((TSMEdge)other).id == this.id;
+	}
+	
+	/**
+	 * Applies the layout to the original layout edge.
+	 * 
+	 * @param offsetX x offset to be added
+	 * @param offsetY y offset to be added
+	 */
+	public void applyLayout(float offsetX, float offsetY) {
+		// find the first edge in a series of edges
+		TSMEdge currentEdge = this;
+		while (currentEdge.previousEdge != null)
+			currentEdge = currentEdge.previousEdge;
+		TSMEdge firstEdge = currentEdge, lastEdge;
+		
+		// add all bend points of the edge
+		List<KPoint> bendPoints = layoutEdge.getLayout().getGridPoints();
+		bendPoints.clear();
+		do {
+			for (Bend bend : currentEdge.bends) {
+				KPoint newPoint = KimlLayoutGraphFactory.eINSTANCE.createKPoint();
+				newPoint.setX(bend.xpos + offsetX);
+				newPoint.setY(bend.ypos + offsetY);
+				bendPoints.add(newPoint);
+			}
+			lastEdge = currentEdge;
+			// mark the edge as visited
+			currentEdge.rank = 1;
+			currentEdge = currentEdge.nextEdge;
+		} while (currentEdge != null);
+		
+		// set start point
+		KPoint newPoint = KimlLayoutGraphFactory.eINSTANCE.createKPoint();
+		float xpos = layoutEdge.getSource().getLayout().getLocation().getX()
+				+ layoutEdge.getSourcePort().getLayout().getLocation().getX()
+				+ offsetX;
+		float ypos = layoutEdge.getSource().getLayout().getLocation().getY()
+				+ layoutEdge.getSourcePort().getLayout().getLocation().getY()
+				+ offsetY;
+		switch (firstEdge.sourceSide) {
+		case NORTH:
+			xpos += layoutEdge.getSourcePort().getLayout().getSize().getWidth() / 2;
+			break;
+		case EAST:
+			xpos += layoutEdge.getSourcePort().getLayout().getSize().getWidth();
+			ypos += layoutEdge.getSourcePort().getLayout().getSize().getHeight() / 2;
+			break;
+		case SOUTH:
+			xpos += layoutEdge.getSourcePort().getLayout().getSize().getWidth() / 2;
+			ypos += layoutEdge.getSourcePort().getLayout().getSize().getHeight();
+			break;
+		case WEST:
+			ypos += layoutEdge.getSourcePort().getLayout().getSize().getHeight() / 2;
+			break;
+		}
+		newPoint.setX(xpos);
+		newPoint.setY(ypos);
+		layoutEdge.getLayout().setSourcePoint(newPoint);
+		
+		// set end point
+		newPoint = KimlLayoutGraphFactory.eINSTANCE.createKPoint();
+		xpos = layoutEdge.getTarget().getLayout().getLocation().getX()
+				+ layoutEdge.getTargetPort().getLayout().getLocation().getX()
+				+ offsetX;
+		ypos = layoutEdge.getTarget().getLayout().getLocation().getY()
+				+ layoutEdge.getTargetPort().getLayout().getLocation().getY()
+				+ offsetY;
+		switch (lastEdge.targetSide) {
+		case NORTH:
+			xpos += layoutEdge.getTargetPort().getLayout().getSize().getWidth() / 2;
+			break;
+		case EAST:
+			xpos += layoutEdge.getTargetPort().getLayout().getSize().getWidth();
+			ypos += layoutEdge.getTargetPort().getLayout().getSize().getHeight() / 2;
+			break;
+		case SOUTH:
+			xpos += layoutEdge.getTargetPort().getLayout().getSize().getWidth() / 2;
+			ypos += layoutEdge.getTargetPort().getLayout().getSize().getHeight();
+			break;
+		case WEST:
+			ypos += layoutEdge.getTargetPort().getLayout().getSize().getHeight() / 2;
+			break;
+		}
+		newPoint.setX(xpos);
+		newPoint.setY(ypos);
+		layoutEdge.getLayout().setTargetPoint(newPoint);
 	}
 	
 }

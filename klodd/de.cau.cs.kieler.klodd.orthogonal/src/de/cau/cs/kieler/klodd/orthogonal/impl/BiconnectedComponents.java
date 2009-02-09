@@ -45,7 +45,7 @@ public class BiconnectedComponents extends AbstractAlgorithm {
 	 * @param graph graph to be processed
 	 * @return list of biconnected components
 	 */
-	public List<GraphSection> calcComponents(TSMGraph graph) {
+	public List<GraphSection> findComponents(TSMGraph graph) {
 		// initialize DFS variables
 		int graphSize = graph.nodes.size();
 		lowpt = new int[graphSize];

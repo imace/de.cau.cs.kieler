@@ -30,10 +30,6 @@ public class LayeringCompacter extends AbstractAlgorithm implements
 	
 	/** array of horizontal or vertical bars */
 	private TopoBar[] topoBars;
-	/** the greatest horizontal rank */
-	private int maxXrank;
-	/** the greatest vertical rank */
-	private int maxYrank;
 	
 	/*
 	 * (non-Javadoc)
@@ -41,7 +37,7 @@ public class LayeringCompacter extends AbstractAlgorithm implements
 	 */
 	public void compact(TSMGraph graph, float minDist) {
 		// determine horizontal numbering
-		maxXrank = 0;
+		int maxXrank = 0;
 		buildTopoBars(graph, true);
 		for (TopoBar topoBar : topoBars) {
 			if (topoBar.rank < 0)
@@ -50,9 +46,10 @@ public class LayeringCompacter extends AbstractAlgorithm implements
 				node.abstrXpos = topoBar.rank;
 			maxXrank = Math.max(maxXrank, topoBar.rank);
 		}
+		graph.width = maxXrank + 1;
 		
 		// determine vertical numbering
-		maxYrank = 0;
+		int maxYrank = 0;
 		buildTopoBars(graph, false);
 		for (TopoBar topoBar : topoBars) {
 			if (topoBar.rank < 0)
@@ -61,22 +58,7 @@ public class LayeringCompacter extends AbstractAlgorithm implements
 				node.abstrYpos = topoBar.rank;
 			maxYrank = Math.max(maxYrank, topoBar.rank);
 		}
-	}
-
-	/**
-	 * Returns the number of horizontal abstract positions assigned by this
-	 * compacter.
-	 */
-	public float getTotalWidth() {
-		return maxXrank + 1;
-	}
-
-	/**
-	 * Returns the number of vertical abstract positions assigned by this
-	 * compacter.
-	 */
-	public float getTotalHeight() {
-		return maxYrank + 1;
+		graph.height = maxYrank + 1;
 	}
 	
 	/**

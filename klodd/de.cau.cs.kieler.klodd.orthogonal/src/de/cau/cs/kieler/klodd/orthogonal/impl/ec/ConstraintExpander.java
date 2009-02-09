@@ -3,8 +3,6 @@ package de.cau.cs.kieler.klodd.orthogonal.impl.ec;
 import java.util.HashMap;
 import java.util.Map;
 
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
 import de.cau.cs.kieler.klodd.core.algorithms.AbstractAlgorithm;
 import de.cau.cs.kieler.klodd.orthogonal.structures.*;
 
@@ -15,23 +13,11 @@ import de.cau.cs.kieler.klodd.orthogonal.structures.*;
  * @author msp
  */
 public class ConstraintExpander extends AbstractAlgorithm {
-
-	/** mapping of unfinished outgoing edges to their already created endpoint */
-	private Map<KLayoutEdge, TSMNode> outgoing2NodeMap = new HashMap<KLayoutEdge, TSMNode>();
-	/** mapping of unfinished incoming edges to their already created endpoint */
-	private Map<KLayoutEdge, TSMNode> incoming2NodeMap = new HashMap<KLayoutEdge, TSMNode>();
-	/** TSM graph created in the expansion step */
-	private TSMGraph tsmGraph;
 	
-	/*
-	 * (non-Javadoc)
-	 * @see de.cau.cs.kieler.klodd.core.algorithms.AbstractAlgorithm#reset()
-	 */
-	public void reset() {
-		super.reset();
-		outgoing2NodeMap.clear();
-		incoming2NodeMap.clear();
-	}
+	/** the new graph created during EC expansion */
+	private TSMGraph expandedGraph;
+	private Map<TSMEdge, TSMNode> incoming2NodeMap = new HashMap<TSMEdge, TSMNode>();
+	private Map<TSMEdge, TSMNode> outgoing2NodeMap = new HashMap<TSMEdge, TSMNode>();
 	
 	/**
 	 * Creates a TSM graph from a given parent layout node and
@@ -41,62 +27,59 @@ public class ConstraintExpander extends AbstractAlgorithm {
 	 * @param constraintsMap constraints for the child nodes
 	 * @return expanded TSM graph
 	 */
-	public TSMGraph expand(KLayoutNode parentNode,
-			Map<KLayoutNode, EmbeddingConstraint> constraintsMap) {
-		tsmGraph = new TSMGraph();
+	public TSMGraph expand(TSMGraph graph) {
+		expandedGraph = new TSMGraph();
 		
-		for (KLayoutNode child : parentNode.getChildNodes()) {
-			EmbeddingConstraint constraint = constraintsMap.get(child);
-			if (constraint == null) {
-				expandNode(child);
+		for (TSMNode node : graph.nodes) {
+			if (node.embeddingConstraint == null) {
+				expandNode(node);
 			}
 			else {
-				expandConstraint(constraint, null);
+				expandConstraint(node.embeddingConstraint, null);
 			}
 		}
 		
-		return tsmGraph;
+		return expandedGraph;
 	}
 	
 	/**
-	 * Creates a TSM node for the given layout node and registers all
-	 * incident edges.
+	 * Creates a new node for the given node of the input graph and
+	 * registers all incident edges.
 	 * 
-	 * @param layoutNode layout node to process
+	 * @param node node of the input graph
 	 */
-	private void expandNode(KLayoutNode layoutNode) {
-		TSMNode tsmNode = new TSMNode(tsmGraph, TSMNode.Type.LAYOUT, layoutNode);
-		for (KLayoutEdge edge : layoutNode.getOutgoingEdges()) {
-			registerEdge(tsmNode, edge, true);
-		}
-		for (KLayoutEdge edge : layoutNode.getIncomingEdges()) {
-			registerEdge(tsmNode, edge, false);
+	private void expandNode(TSMNode node) {
+		TSMNode newNode = new TSMNode(expandedGraph, TSMNode.Type.LAYOUT, node);
+		for (TSMNode.IncEntry edgeEntry : node.incidence) {
+			registerEdge(newNode, edgeEntry.edge,
+					edgeEntry.type == TSMNode.IncEntry.Type.OUT);
 		}
 	}
 	
 	/**
 	 * Expands a given embedding constraint and connects the expansion with
-	 * the given TSM node.
+	 * the given node.
 	 * 
 	 * @param constraint embedding constraint to expand
-	 * @param parentNode TSM node to connect, or null if there is none
+	 * @param parentNode node to connect, or null if there is none
 	 */
-	private void expandConstraint(EmbeddingConstraint constraint, TSMNode parentNode) {
+	private void expandConstraint(EmbeddingConstraint constraint,
+			TSMNode parentNode) {
 		switch (constraint.type) {
 		case OUT_EDGE:
 		case IN_EDGE:
 			// connect an edge with the parent constraint
 			assert parentNode != null;
-			KLayoutEdge edge = (KLayoutEdge)constraint.object;
+			TSMEdge edge = (TSMEdge)constraint.object;
 			registerEdge(parentNode, edge, constraint.type
 					== EmbeddingConstraint.Type.OUT_EDGE);
 			break;
 		case GROUPING:
 			// create a single node and connect children with it
-			TSMNode groupingNode = new TSMNode(tsmGraph, TSMNode.Type.ECEXPANSION,
+			TSMNode groupingNode = new TSMNode(expandedGraph, TSMNode.Type.ECEXPANSION,
 					constraint);
 			if (parentNode != null) {
-				TSMEdge newEdge = new TSMEdge(tsmGraph, parentNode, groupingNode);
+				TSMEdge newEdge = new TSMEdge(expandedGraph, parentNode, groupingNode);
 				newEdge.connectNodes();
 			}
 			for (EmbeddingConstraint childConstraint : constraint.children) {
@@ -106,41 +89,41 @@ public class ConstraintExpander extends AbstractAlgorithm {
 		case ORIENTED:
 		case MIRROR:
 			// for oriented and mirrored constraints a wheel gadget is created
-			TSMNode hubNode = new TSMNode(tsmGraph, TSMNode.Type.ECEXPANSION,
+			TSMNode hubNode = new TSMNode(expandedGraph, TSMNode.Type.ECEXPANSION,
 					constraint);
 			TSMNode firstNode = null, lastNode = null;
 			if (parentNode != null) {
-				firstNode = new TSMNode(tsmGraph, TSMNode.Type.ECEXPANSION);
-				TSMEdge newEdge = new TSMEdge(tsmGraph, firstNode, hubNode);
+				firstNode = new TSMNode(expandedGraph, TSMNode.Type.ECEXPANSION);
+				TSMEdge newEdge = new TSMEdge(expandedGraph, firstNode, hubNode);
 				newEdge.connectNodes();
-				lastNode = new TSMNode(tsmGraph, TSMNode.Type.ECEXPANSION);
-				newEdge = new TSMEdge(tsmGraph, hubNode, lastNode);
+				lastNode = new TSMNode(expandedGraph, TSMNode.Type.ECEXPANSION);
+				newEdge = new TSMEdge(expandedGraph, hubNode, lastNode);
 				newEdge.connectNodes();
-				newEdge = new TSMEdge(tsmGraph, firstNode, lastNode);
+				newEdge = new TSMEdge(expandedGraph, firstNode, lastNode);
 				newEdge.connectNodes();
-				newEdge = new TSMEdge(tsmGraph, parentNode, firstNode);
+				newEdge = new TSMEdge(expandedGraph, parentNode, firstNode);
 				newEdge.connectNodes();
 			}
 			for (EmbeddingConstraint childConstraint : constraint.children) {
-				TSMNode xNode = new TSMNode(tsmGraph, TSMNode.Type.ECEXPANSION);
-				TSMEdge newEdge = new TSMEdge(tsmGraph, xNode, hubNode);
+				TSMNode xNode = new TSMNode(expandedGraph, TSMNode.Type.ECEXPANSION);
+				TSMEdge newEdge = new TSMEdge(expandedGraph, xNode, hubNode);
 				newEdge.connectNodes();
-				TSMNode yNode = new TSMNode(tsmGraph, TSMNode.Type.ECEXPANSION);
-				newEdge = new TSMEdge(tsmGraph, hubNode, yNode);
+				TSMNode yNode = new TSMNode(expandedGraph, TSMNode.Type.ECEXPANSION);
+				newEdge = new TSMEdge(expandedGraph, hubNode, yNode);
 				newEdge.connectNodes();
-				newEdge = new TSMEdge(tsmGraph, xNode, yNode);
+				newEdge = new TSMEdge(expandedGraph, xNode, yNode);
 				newEdge.connectNodes();
 				if (lastNode == null)
 					firstNode = xNode;
 				else {
-					newEdge = new TSMEdge(tsmGraph, lastNode, xNode);
+					newEdge = new TSMEdge(expandedGraph, lastNode, xNode);
 					newEdge.connectNodes();
 				}
 				expandConstraint(childConstraint, xNode);
 				lastNode = yNode;
 			}
 			if (lastNode != null) {
-				TSMEdge newEdge = new TSMEdge(tsmGraph, lastNode, firstNode);
+				TSMEdge newEdge = new TSMEdge(expandedGraph, lastNode, firstNode);
 				newEdge.connectNodes();
 			}
 			break;
@@ -148,34 +131,36 @@ public class ConstraintExpander extends AbstractAlgorithm {
 	}
 	
 	/**
-	 * Registers a given layout graph edge. If the other endpoint of the
-	 * edge is already registered, a new TSM edge connecting the corresponding
-	 * TSM nodes is created.
+	 * Registers a given edge of the input graph. If the other endpoint of the
+	 * edge is already registered, a new edge connecting the corresponding
+	 * expanded nodes is created.
 	 * 
-	 * @param tsmNode TSM node incident to the given edge
-	 * @param kEdge layout graph edge
-	 * @param forward if true, the edge goes out of the given TSM node,
-	 *     else it comes into the given TSM node
+	 * @param node node incident to the given edge in the expanded graph
+	 * @param edge edge of the input graph
+	 * @param forward if true, the edge goes out of the given node,
+	 *     else it comes into the given node
 	 */
-	private void registerEdge(TSMNode tsmNode, KLayoutEdge kEdge, boolean forward) {
+	private void registerEdge(TSMNode node, TSMEdge edge, boolean forward) {
 		if (forward) {
-			TSMNode endPoint = incoming2NodeMap.get(kEdge);
+			TSMNode endPoint = incoming2NodeMap.get(edge);
 			if (endPoint == null) {
-				outgoing2NodeMap.put(kEdge, tsmNode);
+				outgoing2NodeMap.put(edge, node);
 			}
 			else {
-				TSMEdge edge = new TSMEdge(tsmGraph, tsmNode, endPoint, kEdge);
-				edge.connectNodes();
+				TSMEdge newEdge = new TSMEdge(expandedGraph, node, endPoint,
+						edge.layoutEdge);
+				newEdge.connectNodes();
 			}
 		}
 		else {
-			TSMNode endPoint = outgoing2NodeMap.get(kEdge);
+			TSMNode endPoint = outgoing2NodeMap.get(edge);
 			if (endPoint == null) {
-				incoming2NodeMap.put(kEdge, tsmNode);
+				incoming2NodeMap.put(edge, node);
 			}
 			else {
-				TSMEdge edge = new TSMEdge(tsmGraph, endPoint, tsmNode, kEdge);
-				edge.connectNodes();
+				TSMEdge newEdge = new TSMEdge(expandedGraph, endPoint, node,
+						edge.layoutEdge);
+				newEdge.connectNodes();
 			}
 		}
 	}

@@ -34,10 +34,6 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 	private Map<Object, TSMNode> endNodeMap = new HashMap<Object, TSMNode>();
 	/** minimal distance between elements */
 	private float minDist;
-	/** total width of the drawing */
-	private float totalWidth;
-	/** total height of the drawing */
-	private float totalHeight;
 	
 	/*
 	 * (non-Javadoc)
@@ -75,22 +71,6 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 		normalizedCompacter.compact(normalizedGraph, minDist);
 		// transform abstract metrics to concrete metrics
 		transformMetrics(graph);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see de.cau.cs.kieler.klodd.orthogonal.modules.ICompacter#getTotalWidth()
-	 */
-	public float getTotalWidth() {
-		return totalWidth;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see de.cau.cs.kieler.klodd.orthogonal.modules.ICompacter#getTotalHeight()
-	 */
-	public float getTotalHeight() {
-		return totalHeight;
 	}
 	
 	/**
@@ -418,9 +398,9 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 		}
 		
 		// transform horizontal positions
-		totalWidth = transformMetrics(compactables, true);
+		origGraph.width = transformMetrics(compactables, origGraph, true);
 		// transform vertical positions
-		totalHeight = transformMetrics(compactables, false);
+		origGraph.height = transformMetrics(compactables, origGraph, false);
 		
 		// set proper coordinates for the first and the last bend of each edge
 		for (TSMEdge edge : origGraph.edges) {
@@ -487,11 +467,12 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 	 * 
 	 * @param compactables list of compactable elements, i.e. nodes or
 	 *     edge bends
+	 * @param graph the original graph
 	 * @param horizontal indicates whether horizontal or vertical compaction
 	 *     is performed
 	 * @return the total width or height of the graph
 	 */
-	private float transformMetrics(List<Object> compactables,
+	private float transformMetrics(List<Object> compactables, TSMGraph graph,
 			final boolean horizontal) {
 		// sort compactable elements by their abstract position
 		Collections.sort(compactables, new Comparator<Object>() {
@@ -526,8 +507,7 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 		});
 		
 		// initialize concrete positions array
-		int abstrSize = horizontal ? (int)normalizedCompacter.getTotalWidth()
-				: (int)normalizedCompacter.getTotalHeight();
+		int abstrSize = horizontal ? (int)graph.width : (int)graph.height;
 		float[] concrPos = new float[abstrSize];
 		for (int i = 1; i < abstrSize; i++)
 			concrPos[i] = -1;

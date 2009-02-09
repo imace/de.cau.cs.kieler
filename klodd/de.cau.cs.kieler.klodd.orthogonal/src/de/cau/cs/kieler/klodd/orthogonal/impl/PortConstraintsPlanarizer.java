@@ -1,24 +1,21 @@
 package de.cau.cs.kieler.klodd.orthogonal.impl;
 
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutOption;
 import de.cau.cs.kieler.klodd.core.algorithms.AbstractAlgorithm;
 import de.cau.cs.kieler.klodd.core.util.LayoutGraphs;
-import de.cau.cs.kieler.klodd.orthogonal.impl.ec.*;
-import de.cau.cs.kieler.klodd.orthogonal.modules.IECPlanarizer;
+import de.cau.cs.kieler.klodd.orthogonal.impl.ec.EmbeddingConstraint;
 import de.cau.cs.kieler.klodd.orthogonal.modules.IPlanarizer;
-import de.cau.cs.kieler.klodd.orthogonal.structures.TSMGraph;
+import de.cau.cs.kieler.klodd.orthogonal.structures.*;
 
 
 /**
- * Planarizer implementation that uses the EC embedding method.
+ * Planarizer implementation that uses an EC planarizer to handle port
+ * constraints.
  * 
  * @author msp
  */
@@ -26,7 +23,7 @@ public class PortConstraintsPlanarizer extends AbstractAlgorithm implements
 		IPlanarizer {
 
 	/** the embedding constraints planarizer */
-	private IECPlanarizer ecPlanarizer;
+	private IPlanarizer ecPlanarizer;
 	
 	/*
 	 * (non-Javadoc)
@@ -41,60 +38,58 @@ public class PortConstraintsPlanarizer extends AbstractAlgorithm implements
 	 * Creates a port constraints planarizer with a given embedding
 	 * constraints planarizer.
 	 * 
-	 * @param ecPlanarizer
+	 * @param ecPlanarizer EC planarizer
 	 */
-	public PortConstraintsPlanarizer(IECPlanarizer ecPlanarizer) {
+	public PortConstraintsPlanarizer(IPlanarizer ecPlanarizer) {
 		this.ecPlanarizer = ecPlanarizer;
 	}
 	
 	/*
 	 * (non-Javadoc)
-	 * @see de.cau.cs.kieler.klodd.orthogonal.modules.IPlanarizer#planarize(de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode)
+	 * @see de.cau.cs.kieler.klodd.orthogonal.modules.IPlanarizer#planarize(de.cau.cs.kieler.klodd.orthogonal.structures.TSMGraph)
 	 */
-	public TSMGraph planarize(KLayoutNode layoutNode) {
+	public void planarize(TSMGraph graph) {
 		// create constraints for the input graph
-		Map<KLayoutNode, EmbeddingConstraint> constraintsMap = createConstraints(layoutNode);
-		ecPlanarizer.setConstraints(constraintsMap);
+		createConstraints(graph);
 		
 		// planarize the input graph with embedding constraints
-		TSMGraph graph = ecPlanarizer.planarize(layoutNode);
-		return graph;
+		ecPlanarizer.planarize(graph);
 	}
 	
 	/**
-	 * Creates embedding constraints for all children of a given layout node.
+	 * Creates embedding constraints for all nodes of a graph.
 	 * 
-	 * @param layoutNode parent layout node
-	 * @return mapping of children nodes to their embedding constraints
+	 * @param graph for which constraints shall be created
 	 */
-	private Map<KLayoutNode, EmbeddingConstraint> createConstraints(KLayoutNode layoutNode) {
-		Map<KLayoutNode, EmbeddingConstraint> constraintsMap = new HashMap<KLayoutNode, EmbeddingConstraint>();
-		
-		for (KLayoutNode child : layoutNode.getChildNodes()) {
-			if (!child.getPorts().isEmpty()) {
-				if (child.getLayout().getLayoutOptions()
+	private void createConstraints(TSMGraph graph) {
+		for (TSMNode node : graph.nodes) {
+			KLayoutNode layoutNode = (KLayoutNode)node.object;
+			if (!layoutNode.getPorts().isEmpty()) {
+				if (layoutNode.getLayout().getLayoutOptions()
 						.contains(KLayoutOption.FIXED_PORTS)) {
 					// create port constraints 
-					KLayoutPort[] sortedPorts = LayoutGraphs.sortPortsByPosition(child.getPorts(),
-							KLayoutOption.HORIZONTAL, true);
+					KLayoutPort[] sortedPorts = LayoutGraphs.sortPortsByPosition(
+							layoutNode.getPorts(), KLayoutOption.HORIZONTAL, true);
 					EmbeddingConstraint portConstraint = new EmbeddingConstraint(
-							EmbeddingConstraint.Type.ORIENTED, null, child);
+							EmbeddingConstraint.Type.ORIENTED, null, layoutNode);
 					for (KLayoutPort port : sortedPorts) {
-						EmbeddingConstraint constraint = createConstraintFor(port, portConstraint);
+						EmbeddingConstraint constraint = createConstraintFor(port,
+								portConstraint, node);
 						if (constraint != null)
 							portConstraint.children.add(constraint);
 					}
 					if (!portConstraint.children.isEmpty())
-						constraintsMap.put(child, portConstraint);
+						node.embeddingConstraint = portConstraint;
 				}
 				else {
 					// create side constraints
 					EmbeddingConstraint sideConstraint = new EmbeddingConstraint(
-							EmbeddingConstraint.Type.ORIENTED, null, child);
+							EmbeddingConstraint.Type.ORIENTED, null, layoutNode);
 					EmbeddingConstraint northConstraint = null, eastConstraint = null,
 							southConstraint = null, westConstraint = null;
-					for (KLayoutPort port : child.getPorts()) {
-						EmbeddingConstraint constraint = createConstraintFor(port, null);
+					for (KLayoutPort port : layoutNode.getPorts()) {
+						EmbeddingConstraint constraint = createConstraintFor(port,
+								null, node);
 						if (constraint != null) {
 							switch (port.getLayout().getPlacement()) {
 							case NORTH:
@@ -141,12 +136,10 @@ public class PortConstraintsPlanarizer extends AbstractAlgorithm implements
 					if (westConstraint != null)
 						sideConstraint.children.add(westConstraint);
 					if (!sideConstraint.children.isEmpty())
-						constraintsMap.put(child, sideConstraint);
+						node.embeddingConstraint = sideConstraint;
 				}
 			}
 		}
-		
-		return constraintsMap;
 	}
 	
 	/**
@@ -154,24 +147,24 @@ public class PortConstraintsPlanarizer extends AbstractAlgorithm implements
 	 * 
 	 * @param port port to process
 	 * @param parent constraint for new constraints, or null if not specified
+	 * @param node the node that is currently processed
 	 * @return a constraint for the given port, or null if the port has
 	 *     no incoming or outgoing edges
 	 */
 	private EmbeddingConstraint createConstraintFor(KLayoutPort port,
-			EmbeddingConstraint parent) {
-		// filter edges that lead to child nodes
-		List<KLayoutEdge> filteredEdges = new LinkedList<KLayoutEdge>();
-		for (KLayoutEdge edge : port.getEdges()) {
-			// TODO edges to external ports are not considered yet
-			if (!(edge.getSource() == null || edge.getTarget() == null)
-					&& edge.getSourcePort() != edge.getTargetPort())
-				filteredEdges.add(edge);
+			EmbeddingConstraint parent, TSMNode node) {
+		// find edges connected with the given port
+		List<TSMEdge> portEdges = new LinkedList<TSMEdge>();
+		for (TSMNode.IncEntry edgeEntry : node.incidence) {
+			if (edgeEntry.edge.layoutEdge.getSourcePort() == port
+					|| edgeEntry.edge.layoutEdge.getTargetPort() == port)
+				portEdges.add(edgeEntry.edge);
 		}
-		if (!filteredEdges.isEmpty()) {
+		if (!portEdges.isEmpty()) {
 			EmbeddingConstraint groupConstraint = new EmbeddingConstraint(
 					EmbeddingConstraint.Type.GROUPING, parent, port);
-			for (KLayoutEdge edge : filteredEdges) {
-				EmbeddingConstraint.Type constraintType = edge.getSourcePort()
+			for (TSMEdge edge : portEdges) {
+				EmbeddingConstraint.Type constraintType = edge.layoutEdge.getSourcePort()
 						== port ? EmbeddingConstraint.Type.OUT_EDGE
 						: EmbeddingConstraint.Type.IN_EDGE;
 				EmbeddingConstraint edgeConstraint = new EmbeddingConstraint(

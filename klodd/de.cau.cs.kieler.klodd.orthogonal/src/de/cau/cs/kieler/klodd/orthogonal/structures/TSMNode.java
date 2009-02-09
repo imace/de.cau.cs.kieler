@@ -4,6 +4,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
+import de.cau.cs.kieler.klodd.orthogonal.impl.ec.EmbeddingConstraint;
+
 /**
  * A node in the graph structure used for the topology-shape-metrics
  * approach.
@@ -199,6 +202,8 @@ public class TSMNode extends TSMGraphElement {
 	public Object object;
 	/** the type of this node */
 	public Type type;
+	/** the embedding constraint for planarization of this node */
+	public EmbeddingConstraint embeddingConstraint;
 	/** abstract x coordinate position */
 	public int abstrXpos;
 	/** abstract y coordinate position */
@@ -255,6 +260,20 @@ public class TSMNode extends TSMGraphElement {
 				return edgeIter;
 		}
 		return null;
+	}
+	
+	/**
+	 * Applies the new layout to the original layout node.
+	 * 
+	 * @param offsetX x offset to be added
+	 * @param offsetY y offset to be added
+	 */
+	public void applyLayout(float offsetX, float offsetY) {
+		if (object instanceof KLayoutNode) {
+			KLayoutNode layoutNode = (KLayoutNode)object;
+			layoutNode.getLayout().getLocation().setX(concrXpos + offsetX);
+			layoutNode.getLayout().getLocation().setY(concrYpos + offsetY);
+		}
 	}
 	
 }

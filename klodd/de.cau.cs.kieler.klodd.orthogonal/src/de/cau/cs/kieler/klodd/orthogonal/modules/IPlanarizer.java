@@ -12,11 +12,11 @@ import de.cau.cs.kieler.klodd.orthogonal.structures.TSMGraph;
 public interface IPlanarizer extends IAlgorithm {
 
 	/**
-	 * Performs planarization of the given layout graph.
+	 * Performs planarization of the given graph. This is done by adding
+	 * dummy nodes to replace edge crossings.
 	 * 
-	 * @param layoutNode KIML layout graph to be planarized
-	 * @return a TSM graph with topology information
+	 * @param graph graph to be planarized
 	 */
-	public TSMGraph planarize(KLayoutNode layoutNode);
+	public void planarize(TSMGraph graph);
 	
 }
