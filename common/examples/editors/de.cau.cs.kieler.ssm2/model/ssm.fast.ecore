@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="ssm"
+    nsURI="http://www.informatik.uni-kiel.de/rtsys/ssm" nsPrefix="ssm">
+  <eClassifiers xsi:type="ecore:EClass" name="Named">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Region">
+    <eAnnotations source="http://rtsys.informatik.uni-kiel.de/trac/kieler">
+      <details key="documentation" value="Region corresponds to a STG (state-transition-graph) in the SSM syntax. It is named Region here for understandabilty reasons."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="states" lowerBound="1"
+        upperBound="-1" eType="#//AbstractState" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="transitions" upperBound="-1"
+        eType="#//Transition" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractState" abstract="true">
+    <eAnnotations source="http://rtsys.informatik.uni-kiel.de/trac/kieler">
+      <details key="documentation" value="This one is called Reactive-Cell in the SSM documentation. For convenience, it is called &quot;Abstract State&quot; here."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="incomingTransitions" upperBound="-1"
+        eType="#//Transition" eOpposite="#//Transition/target"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outgoingTransitions" upperBound="-1"
+        eType="#//Transition" eOpposite="#//Transition/source"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="onEntryActions" upperBound="-1"
+        eType="#//Action" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="onInsideActions" upperBound="-1"
+        eType="#//Action" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="onExitActions" upperBound="-1"
+        eType="#//Action" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SimpleState" eSuperTypes="#//AbstractState #//Named">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="stateFlag" unique="false"
+        lowerBound="1" eType="#//StateFlag" defaultValueLiteral=""/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PseudoState" eSuperTypes="#//AbstractState"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CompositeState" eSuperTypes="#//SimpleState">
+    <eAnnotations source="http://rtsys.informatik.uni-kiel.de/trac/kieler">
+      <details key="documentation" value="This one is called &quot;MacroState&quot; in the SSM definition"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="regions" lowerBound="1"
+        upperBound="-1" eType="#//Region" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="localSignals" upperBound="-1"
+        eType="#//Signal" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inputSignals" upperBound="-1"
+        eType="#//Signal" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outputSignals" upperBound="-1"
+        eType="#//Signal" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Transition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="#//AbstractState" eOpposite="#//AbstractState/incomingTransitions"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+        eType="#//AbstractState" eOpposite="#//AbstractState/outgoingTransitions"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="priority" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="effect" upperBound="-1"
+        eType="#//Action" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//TransitionType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="immediate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TransitionTriggerable" eSuperTypes="#//Transition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="trigger" lowerBound="1"
+        eType="#//Trigger" transient="true" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="triggerString" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ConditionalTransition" eSuperTypes="#//Transition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="condition" lowerBound="1"
+        eType="#//Condition" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SafeStateMachine" eSuperTypes="#//Named">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="top" lowerBound="1" eType="#//CompositeState"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Trigger">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="counter" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="event" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Action">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="condition" eType="#//Condition"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="emissions" upperBound="-1"
+        eType="#//Emissions" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="StateFlag">
+    <eLiterals name="NORMAL" literal="NORMAL"/>
+    <eLiterals name="INITIAL" value="1"/>
+    <eLiterals name="FINAL" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Signal">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="signalName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IntegerSignal" eSuperTypes="#//Signal">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="integerValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Condition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subConditions" upperBound="-1"
+        eType="#//Condition" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="combinationOperator" lowerBound="1"
+        eType="#//CombinationOperator"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="literals" upperBound="-1"
+        eType="#//Signal"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="CombinationOperator">
+    <eLiterals name="PURESIGNALAND"/>
+    <eLiterals name="PURESIGNALOR" value="1"/>
+    <eLiterals name="PURESIGNALNOT" value="2"/>
+    <eLiterals name="INTSIGNALADD" value="3"/>
+    <eLiterals name="INTSIGNALMUL" value="4"/>
+    <eLiterals name="INTSIGNALGT" value="5"/>
+    <eLiterals name="INTSIGNALLT" value="6"/>
+    <eLiterals name="INTSIGNALEQ" value="8"/>
+    <eLiterals name="PURESIGNALEQ" value="10"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BlackBox" abstract="true" interface="true"
+      eSuperTypes="#//AbstractState">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxPriority" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="content" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="WCRT" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="interfaceRenamings" upperBound="-1"
+        eType="#//SignalRenaming" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataDependency" eSuperTypes="#//Transition">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Not for use in Model editors. This is for visualizing dependencies calculated from the SSM.&#xA;"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="TransitionType">
+    <eLiterals name="STRONGABORT"/>
+    <eLiterals name="WEAKABORT" value="1"/>
+    <eLiterals name="NORMALTERMINATION" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Emissions">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="newValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="signal" lowerBound="1"
+        eType="#//Signal"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SignalRenaming">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outer" lowerBound="1" eType="#//Signal"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inner" lowerBound="1" eType="#//Signal"/>
+  </eClassifiers>
+</ecore:EPackage>
