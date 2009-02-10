@@ -5,7 +5,8 @@
     modelPluginID="de.cau.cs.kieler.ssm" modelName="Ssm.fast" importerID="org.eclipse.emf.importer.ecore"
     complianceLevel="5.0" copyrightFields="false">
   <foreignModel>ssm.fast.ecore_new.ecore</foreignModel>
-  <genPackages prefix="Ssm" disposableProviderFactory="true" ecorePackage="ssm.fast.ecore_new.ecore#/">
+  <genPackages prefix="ssm" basePackage="de.cau.cs.kieler" disposableProviderFactory="true"
+      ecorePackage="ssm.fast.ecore_new.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="ssm.fast.ecore_new.ecore#//StateKind">
       <genEnumLiterals ecoreEnumLiteral="ssm.fast.ecore_new.ecore#//StateKind/NORMAL"/>
       <genEnumLiterals ecoreEnumLiteral="ssm.fast.ecore_new.ecore#//StateKind/PSEUDO"/>
