@@ -260,6 +260,7 @@ public class KandinskyLPOrthogonalizer extends AbstractAlgorithm implements
 		}
 		
 		ilp.setAddRowmode(true);
+		
 		// add constraints for dummy nodes
 		for (TSMNode node : graph.nodes) {
 			if (node.type == TSMNode.Type.CROSSING)

@@ -1,6 +1,5 @@
 package de.cau.cs.kieler.klodd.orthogonal.impl;
 
-import java.util.Deque;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -20,7 +19,7 @@ import de.cau.cs.kieler.klodd.orthogonal.structures.*;
 public class ConnectedComponents extends AbstractAlgorithm {
 
 	/** stack of layout edges for BFS */
-	private Deque<KLayoutEdge> edgeStack = new LinkedList<KLayoutEdge>();
+	private LinkedList<KLayoutEdge> edgeStack = new LinkedList<KLayoutEdge>();
 	/** mapping of layout nodes to TSM nodes */
 	private Map<KLayoutNode, TSMNode> nodeMap = new HashMap<KLayoutNode, TSMNode>();
 	/** mapping of layout edges to TSM edges */
