@@ -21,7 +21,6 @@ public class KimlStrongAbortionItemProvider extends StrongAbortionItemProvider  
 		super(adapterFactory);
 	}
 
-	@Override
 	public String getKimlCenterLabel(Object object) {
 		StrongAbortion strongAbortion = (StrongAbortion) object;
 
@@ -34,22 +33,18 @@ public class KimlStrongAbortionItemProvider extends StrongAbortionItemProvider  
 		return immediate + trigger + "/" + effect;
 	}
 
-	@Override
 	public String getKimlHeadLabel(Object object) {
 		return null;
 	}
 
-	@Override
 	public String getKimlLongLabel(Object object) {
 		return null;
 	}
 
-	@Override
 	public String getKimlShortLabel(Object object) {
 		return null;
 	}
 
-	@Override
 	public String getKimlTailLabel(Object object) {
 		StrongAbortion strongAbortion = (StrongAbortion) object;
 		return String.valueOf(strongAbortion

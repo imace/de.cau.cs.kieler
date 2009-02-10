@@ -22,7 +22,6 @@ public class KimlNormalTerminationItemProvider extends
 		super(adapterFactory);
 	}
 
-	@Override
 	public String getKimlCenterLabel(Object object) {
 		NormalTermination normalTermination = (NormalTermination) object;
 		String effect = normalTermination.getEffectString() == null ? ""
@@ -30,22 +29,18 @@ public class KimlNormalTerminationItemProvider extends
 		return "/" + effect;
 	}
 
-	@Override
 	public String getKimlHeadLabel(Object object) {
 		return null;
 	}
 
-	@Override
 	public String getKimlLongLabel(Object object) {
 		return null;
 	}
 
-	@Override
 	public String getKimlShortLabel(Object object) {
 		return null;
 	}
 
-	@Override
 	public String getKimlTailLabel(Object object) {
 		NormalTermination normalTermination = (NormalTermination) object;
 		return String.valueOf(normalTermination

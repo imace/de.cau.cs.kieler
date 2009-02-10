@@ -21,29 +21,24 @@ public class KimlCompositeStateItemProvider extends CompositeStateItemProvider i
 		super(adapterFactory);
 	}
 
-	@Override
 	public String getKimlLongLabel(Object object) {
 		String label = ((CompositeState)object).getName();
 		return label == null || label.length() == 0 ? "" : label;
 	}
 
-	@Override
 	public String getKimlShortLabel(Object object) {
 		String label = ((CompositeState)object).getName();
 		return label == null || label.length() == 0 ? "" : label;
 	}
 
-	@Override
 	public String getKimlCenterLabel(Object object) {
 		return null;
 	}
 
-	@Override
 	public String getKimlHeadLabel(Object object) {
 		return null;
 	}
 
-	@Override
 	public String getKimlTailLabel(Object object) {
 		return null;
 	}

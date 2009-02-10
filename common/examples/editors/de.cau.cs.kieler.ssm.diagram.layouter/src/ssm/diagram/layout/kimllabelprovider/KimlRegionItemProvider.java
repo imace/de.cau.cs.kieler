@@ -23,17 +23,14 @@ public class KimlRegionItemProvider extends RegionItemProvider implements
 		super(adapterFactory);
 	}
 
-	@Override
 	public String getKimlCenterLabel(Object object) {
 		return null;
 	}
 
-	@Override
 	public String getKimlHeadLabel(Object object) {
 		return null;
 	}
 
-	@Override
 	public String getKimlLongLabel(Object object) {
 		Region region = (Region) object;
 		CompositeState compositeState = (CompositeState) region.eContainer();
@@ -43,13 +40,11 @@ public class KimlRegionItemProvider extends RegionItemProvider implements
 				+ " in " + compositeState.getName();
 	}
 
-	@Override
 	public String getKimlShortLabel(Object object) {
 		Region region = (Region) object;
 		return "Region " + region.hashCode();
 	}
 
-	@Override
 	public String getKimlTailLabel(Object object) {
 		return null;
 	}

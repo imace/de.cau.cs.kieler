@@ -22,29 +22,24 @@ public class KimlSimpleStateItemProvider extends SimpleStateItemProvider
 		super(adapterFactory);
 	}
 
-	@Override
 	public String getKimlLongLabel(Object object) {
 		String label = ((SimpleState) object).getName();
 		return label == null || label.length() == 0 ? "" : label;
 	}
 
-	@Override
 	public String getKimlShortLabel(Object object) {
 		String label = ((SimpleState) object).getName();
 		return label == null || label.length() == 0 ? "" : label;
 	}
 
-	@Override
 	public String getKimlCenterLabel(Object object) {
 		return null;
 	}
 
-	@Override
 	public String getKimlHeadLabel(Object object) {
 		return null;
 	}
 
-	@Override
 	public String getKimlTailLabel(Object object) {
 		return null;
 	}

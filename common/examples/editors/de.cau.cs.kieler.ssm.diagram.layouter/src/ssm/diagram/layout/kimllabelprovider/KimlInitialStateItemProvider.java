@@ -24,17 +24,14 @@ public class KimlInitialStateItemProvider extends InitialStateItemProvider
 		super(adapterFactory);
 	}
 
-	@Override
 	public String getKimlCenterLabel(Object object) {
 		return null;
 	}
 
-	@Override
 	public String getKimlHeadLabel(Object object) {
 		return null;
 	}
 
-	@Override
 	public String getKimlLongLabel(Object object) {
 		InitialState initialState = (InitialState) object;
 		Region region = (Region) initialState.eContainer();
@@ -44,13 +41,11 @@ public class KimlInitialStateItemProvider extends InitialStateItemProvider
 				: "Initial State of a Region in " + compositeState.getName();
 	}
 
-	@Override
 	public String getKimlShortLabel(Object object) {
 		/* Initial State has no label to display */
 		return "";
 	}
 
-	@Override
 	public String getKimlTailLabel(Object object) {
 		return null;
 	}
