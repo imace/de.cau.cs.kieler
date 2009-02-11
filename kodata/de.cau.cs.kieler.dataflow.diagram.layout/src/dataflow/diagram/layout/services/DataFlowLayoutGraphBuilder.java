@@ -617,7 +617,7 @@ public class DataFlowLayoutGraphBuilder extends KimlAbstractLayoutGraphBuilder {
 		strictPortSide = preferenceStore
 				.getBoolean(DiagramLayoutPreferencePage.STRICT_PORT_SIDE);
 		alternateHV = preferenceStore.getString(
-				DiagramLayoutPreferencePage.LAYOUT_DIRECTION).equals("hv");
+				DiagramLayoutPreferencePage.LAYOUT_DIRECTION).equals("hv"); //$NON-NLS-1$
 
 	}
 

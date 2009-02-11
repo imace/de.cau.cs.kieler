@@ -4,26 +4,26 @@ import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 /**
- * Generated class for externalization of strings.
+ * Messages class for language specific strings.
  * 
  * @author msp
  */
 public class Messages {
-
-	private static final String BUNDLE_NAME = "dataflow.diagram.messages"; //$NON-NLS-1$
-	private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle
-			.getBundle(BUNDLE_NAME);
-
+	
+	private static final String BUNDLE_NAME = "dataflow.diagram.layout.messages"; //$NON-NLS-1$
+	private static ResourceBundle resourceBundle = null;
 
 	/**
-	 * Gets the string associated with the given key.
+	 * Returns the string for a given message key.
 	 * 
 	 * @param key key to look up
-	 * @return the associated string
+	 * @return localized string
 	 */
 	public static String getString(String key) {
 		try {
-			return RESOURCE_BUNDLE.getString(key);
+			if (resourceBundle == null)
+				resourceBundle = ResourceBundle.getBundle(BUNDLE_NAME);
+			return resourceBundle.getString(key);
 		} catch (MissingResourceException e) {
 			return '!' + key + '!';
 		}
