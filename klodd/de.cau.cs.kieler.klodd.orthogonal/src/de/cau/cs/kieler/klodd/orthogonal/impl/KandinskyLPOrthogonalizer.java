@@ -2,9 +2,11 @@ package de.cau.cs.kieler.klodd.orthogonal.impl;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 import lpsolve.LpSolve;
 import lpsolve.LpSolveException;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPortPlacement;
 import de.cau.cs.kieler.klodd.core.algorithms.AbstractAlgorithm;
 import de.cau.cs.kieler.klodd.orthogonal.modules.IOrthogonalizer;
 import de.cau.cs.kieler.klodd.orthogonal.structures.*;
@@ -85,7 +87,7 @@ public class KandinskyLPOrthogonalizer extends AbstractAlgorithm implements
 	 * Structure describing the dimensions of the rows in the Kandinsky ILP. 
 	 */
 	private static class KandinskyRows {
-		IlpSection k1, k2, k3, k4, k5;
+		IlpSection k1, k2, k3, k4, k5, u12, u4;
 		int count;
 		
 		/**
@@ -101,6 +103,8 @@ public class KandinskyLPOrthogonalizer extends AbstractAlgorithm implements
 			k3 = new IlpSection(k2, 2 * edgeCount);
 			k4 = new IlpSection(k3, 2 * edgeCount);
 			k5 = new IlpSection(k4, 6 * edgeCount);
+			u12 = new IlpSection(k5, nodeCount);
+			u4 = new IlpSection(u12, edgeCount);
 			count = k5.start + k5.count - 1;
 		}
 	}
@@ -113,15 +117,16 @@ public class KandinskyLPOrthogonalizer extends AbstractAlgorithm implements
 		IlpSection forwSourceLeft, forwSourceRight, forwFaceLeft, forwFaceRight,
 		    forwTargetLeft, forwTargetRight, backSourceLeft, backSourceRight,
 		    backFaceLeft, backFaceRight, backTargetLeft, backTargetRight,
-		    sourceAnchor, targetAnchor, objFn;
+		    sourceAnchor, targetAnchor, anchorPos, modHelp1, objFn;
 		int count;
 		
 		/**
 		 * Creates a rows dimensions structure.
 		 * 
+		 * @param nodeCount number of nodes in the graph
 		 * @param edgeCount number of edges in the graph
 		 */
-		KandinskyCols(int edgeCount) {
+		KandinskyCols(int nodeCount, int edgeCount) {
 			forwSourceLeft = new IlpSection(edgeCount);
 			forwSourceRight = new IlpSection(forwSourceLeft, edgeCount);
 			forwFaceLeft = new IlpSection(forwSourceRight, edgeCount);
@@ -137,7 +142,39 @@ public class KandinskyLPOrthogonalizer extends AbstractAlgorithm implements
 			backTargetRight = new IlpSection(backTargetLeft, edgeCount);
 			sourceAnchor = new IlpSection(backTargetRight, edgeCount);
 			targetAnchor = new IlpSection(sourceAnchor, edgeCount);
-			count = targetAnchor.start + targetAnchor.count - 1;
+			anchorPos = new IlpSection(targetAnchor, nodeCount);
+			modHelp1 = new IlpSection(anchorPos, edgeCount);
+			count = modHelp1.start + modHelp1.count - 1;
+		}
+		
+		/**
+		 * Configures the given ILP to set bounds for a section of columns.
+		 * 
+		 * @param ilp ILP to configure
+		 * @param section section of columns
+		 * @param lower lower bound
+		 * @param upper upper bound
+		 * @throws LpSolveException if the lp_solve library reports a failure
+		 */
+		void setBounds(LpSolve ilp, IlpSection section, int lower, int upper)
+				throws LpSolveException {
+			int end = section.start + section.count;
+			for (int j = section.start; j < end; j++)
+				ilp.setBounds(j, lower, upper);
+		}
+		
+		/**
+		 * Configures the given ILP to remove bounds for a section of columns.
+		 * 
+		 * @param ilp ILP to configure
+		 * @param section section of columns
+		 * @throws LpSolveException if the lp_solve library reports a failure
+		 */
+		void setUnbounded(LpSolve ilp, IlpSection section)
+				throws LpSolveException {
+			int end = section.start + section.count;
+			for (int j = section.start; j < end; j++)
+				ilp.setUnbounded(j);
 		}
 	}
 	
@@ -164,7 +201,7 @@ public class KandinskyLPOrthogonalizer extends AbstractAlgorithm implements
 		int faceCount = graph.faces.size();
 		// create dimensions of rows and columns
 		rows = new KandinskyRows(nodeCount, edgeCount, faceCount);
-		cols = new KandinskyCols(edgeCount);
+		cols = new KandinskyCols(nodeCount, edgeCount);
 
 		// create instance of ILP
 		LpSolve ilp = LpSolve.makeLp(rows.count, cols.count);
@@ -184,36 +221,18 @@ public class KandinskyLPOrthogonalizer extends AbstractAlgorithm implements
 			ilp.setInt(j, true);
 		
 		// set variables bounds
-		int end = cols.forwSourceLeft.start + cols.forwSourceLeft.count;
-		for (int j = cols.forwSourceLeft.start; j < end; j++)
-			ilp.setBounds(j, 0, 1);
-		end = cols.forwSourceRight.start + cols.forwSourceRight.count;
-		for (int j = cols.forwSourceRight.start; j < end; j++)
-			ilp.setBounds(j, 0, 1);
-		end = cols.forwTargetLeft.start + cols.forwTargetLeft.count;
-		for (int j = cols.forwTargetLeft.start; j < end; j++)
-			ilp.setBounds(j, 0, 1);
-		end = cols.forwTargetRight.start + cols.forwTargetRight.count;
-		for (int j = cols.forwTargetRight.start; j < end; j++)
-			ilp.setBounds(j, 0, 1);
-		end = cols.backSourceLeft.start + cols.backSourceLeft.count;
-		for (int j = cols.backSourceLeft.start; j < end; j++)
-			ilp.setBounds(j, 0, 1);
-		end = cols.backSourceRight.start + cols.backSourceRight.count;
-		for (int j = cols.backSourceRight.start; j < end; j++)
-			ilp.setBounds(j, 0, 1);
-		end = cols.backTargetLeft.start + cols.backTargetLeft.count;
-		for (int j = cols.backTargetLeft.start; j < end; j++)
-			ilp.setBounds(j, 0, 1);
-		end = cols.backTargetRight.start + cols.backTargetRight.count;
-		for (int j = cols.backTargetRight.start; j < end; j++)
-			ilp.setBounds(j, 0, 1);
-		end = cols.sourceAnchor.start + cols.sourceAnchor.count;
-		for (int j = cols.sourceAnchor.start; j < end; j++)
-			ilp.setBounds(j, 0, 4);
-		end = cols.targetAnchor.start + cols.targetAnchor.count;
-		for (int j = cols.targetAnchor.start; j < end; j++)
-			ilp.setBounds(j, 0, 4);
+		cols.setBounds(ilp, cols.forwSourceLeft, 0, 1);
+		cols.setBounds(ilp, cols.forwSourceRight, 0, 1);
+		cols.setBounds(ilp, cols.forwTargetLeft, 0, 1);
+		cols.setBounds(ilp, cols.forwTargetRight, 0, 1);
+		cols.setBounds(ilp, cols.backSourceLeft, 0, 1);
+		cols.setBounds(ilp, cols.backSourceRight, 0, 1);
+		cols.setBounds(ilp, cols.backTargetLeft, 0, 1);
+		cols.setBounds(ilp, cols.backTargetRight, 0, 1);
+		cols.setBounds(ilp, cols.sourceAnchor, 0, 4);
+		cols.setBounds(ilp, cols.targetAnchor, 0, 4);
+		cols.setBounds(ilp, cols.anchorPos, 0, 4);
+		cols.setUnbounded(ilp, cols.modHelp1);
 		
 		// set constraint K1
 		int i = rows.k1.start;
@@ -259,7 +278,41 @@ public class KandinskyLPOrthogonalizer extends AbstractAlgorithm implements
 			i += 6;
 		}
 		
+		// set constraint U1/2
+		i = rows.u12.start;
+		for (TSMNode node : graph.nodes) {
+			if (!node.incidence.isEmpty()) {
+				setU12Constraint(node, ilp, i++);
+			}
+		}
+		
+		// set constraint U4
+		i = rows.u4.start;
+		for (TSMEdge edge : graph.edges) {
+			setU4Constraint(edge, ilp, i++);
+		}
+		
 		ilp.setAddRowmode(true);
+		
+		// add side constraints
+		for (TSMNode node : graph.nodes) {
+			if (node.type == TSMNode.Type.LAYOUT) {
+				for (TSMNode.IncEntry edgeEntry : node.incidence) {
+					if (edgeEntry.type == TSMNode.IncEntry.Type.OUT) {
+						if (edgeEntry.edge.layoutEdge.getSourcePort() != null)
+							addSideConstraint(edgeEntry.edge, edgeEntry.edge
+									.layoutEdge.getSourcePort().getLayout()
+									.getPlacement(), ilp, false);
+					}
+					else {
+						if (edgeEntry.edge.layoutEdge.getTargetPort() != null)
+							addSideConstraint(edgeEntry.edge, edgeEntry.edge
+									.layoutEdge.getTargetPort().getLayout()
+									.getPlacement(), ilp, true);
+					}
+				}
+			}
+		}
 		
 		// add constraints for dummy nodes
 		for (TSMNode node : graph.nodes) {
@@ -291,10 +344,9 @@ public class KandinskyLPOrthogonalizer extends AbstractAlgorithm implements
 			int jx = 0;
 			for (TSMNode.IncEntry edgeEntry : node.incidence) {
 				row[jx] = 1;
-				if (edgeEntry.type == TSMNode.IncEntry.Type.OUT)
-					rowIndex[jx] = cols.sourceAnchor.start + edgeEntry.edge.id;
-				else
-					rowIndex[jx] = cols.targetAnchor.start + edgeEntry.edge.id;
+				rowIndex[jx] = (edgeEntry.type == TSMNode.IncEntry.Type.OUT
+						? cols.sourceAnchor.start : cols.targetAnchor.start)
+						+ edgeEntry.edge.id;
 				jx++;
 			}
 			ilp.setRowex(i, localEdgeCount, row, rowIndex);
@@ -417,10 +469,9 @@ public class KandinskyLPOrthogonalizer extends AbstractAlgorithm implements
 		double[] row = new double[3];
 		int[] rowIndex = new int[3];
 		row[0] = 1;
-		if (leftEdge.type == TSMNode.IncEntry.Type.OUT)
-			rowIndex[0] = cols.forwSourceLeft.start + leftEdge.edge.id;
-		else
-			rowIndex[0] = cols.backSourceLeft.start + leftEdge.edge.id;
+		rowIndex[0] = (leftEdge.type == TSMNode.IncEntry.Type.OUT
+				? cols.forwSourceLeft.start : cols.backSourceLeft.start)
+				+ leftEdge.edge.id;
 		row[1] = 1;
 		row[2] = 1;
 		if (rightEdge.type == TSMNode.IncEntry.Type.OUT) {
@@ -496,6 +547,143 @@ public class KandinskyLPOrthogonalizer extends AbstractAlgorithm implements
 		row[1] = -1;
 		rowIndex[1] = cols.forwSourceRight.start + edge.id;
 		ilp.setRowex(i++, 2, row, rowIndex);
+	}
+	
+	/**
+	 * Creates a U1/2 node constraint for the given node.
+	 * 
+	 * @param node the node for which constraints shall be created
+	 * @param ilp currently processed ILP instance
+	 * @param i index of the row that shall be modified
+	 * @throws LpSolveException if the lp_solve library reports a failure
+	 */
+	private void setU12Constraint(TSMNode node, LpSolve ilp, int i)
+			throws LpSolveException {
+		int rowSize = node.incidence.size();
+		double[] row = new double[rowSize];
+		int[] rowIndex = new int[rowSize];
+
+		ilp.setConstrType(i, LpSolve.LE);
+		ilp.setRh(i, 4);
+		row[0] = 1;
+		rowIndex[0] = cols.anchorPos.start + node.id;
+		int j = 1;
+		ListIterator<TSMNode.IncEntry> edgeIter = node.incidence.listIterator(1);
+		while (edgeIter.hasNext()) {
+			TSMNode.IncEntry nextEntry = edgeIter.next();
+			row[j] = 1;
+			rowIndex[j] = (nextEntry.type == TSMNode.IncEntry.Type.OUT
+					? cols.sourceAnchor.start : cols.targetAnchor.start)
+					+ nextEntry.edge.id;
+			j++;
+		}
+		ilp.setRowex(i, rowSize, row, rowIndex);
+	}
+	
+	/**
+	 * Creates a U4 edge constraints for the given edge.
+	 * 
+	 * @param edge the edge for which constraints shall be created
+	 * @param ilp currently processed ILP instance
+	 * @param i index of the first row that shall be modified
+	 * @throws LpSolveException if the lp_solve library reports a failure
+	 */
+	private void setU4Constraint(TSMEdge edge, LpSolve ilp, int i)
+			throws LpSolveException {
+		ListIterator<TSMNode.IncEntry> sourceIter = edge.source.getIterator(
+				edge, true);
+		ListIterator<TSMNode.IncEntry> targetIter = edge.target.getIterator(
+				edge, false);
+		int rowSize = sourceIter.previousIndex() + targetIter.previousIndex() + 7;
+		double[] row = new double[rowSize];
+		int[] rowIndex = new int[rowSize];
+
+		ilp.setConstrType(i, LpSolve.EQ);
+		ilp.setRh(i, 2);
+		int j = 0;
+		while (sourceIter.previousIndex() > 0) {
+			TSMNode.IncEntry nextEntry = sourceIter.previous();
+			row[j] = 1;
+			rowIndex[j] = (nextEntry.type == TSMNode.IncEntry.Type.OUT
+					? cols.sourceAnchor.start : cols.targetAnchor.start)
+					+ nextEntry.edge.id;
+			j++;
+		}
+		row[j] = 1;
+		rowIndex[j++] = cols.anchorPos.start + edge.source.id;
+		row[j] = 1;
+		rowIndex[j++] = cols.forwSourceLeft.start + edge.id;
+		row[j] = 1;
+		rowIndex[j++] = cols.forwFaceLeft.start + edge.id;
+		row[j] = 1;
+		rowIndex[j++] = cols.forwTargetLeft.start + edge.id;
+		row[j] = -1;
+		rowIndex[j++] = cols.forwSourceRight.start + edge.id;
+		row[j] = -1;
+		rowIndex[j++] = cols.forwFaceRight.start + edge.id;
+		row[j] = -1;
+		rowIndex[j++] = cols.forwTargetRight.start + edge.id;
+		while (targetIter.previousIndex() > 0) {
+			TSMNode.IncEntry nextEntry = targetIter.previous();
+			row[j] = -1;
+			rowIndex[j] = (nextEntry.type == TSMNode.IncEntry.Type.OUT
+					? cols.sourceAnchor.start : cols.targetAnchor.start)
+					+ nextEntry.edge.id;
+			j++;
+		}
+		row[j] = -1;
+		rowIndex[j++] = cols.anchorPos.start + edge.target.id;
+		ilp.setRowex(i, rowSize, row, rowIndex);
+	}
+	
+	/**
+	 * Creates a side constraint for the given edge.
+	 * 
+	 * @param edge edge for which the constraint shall be created
+	 * @param side side on which the edge is incident
+	 * @param ilp currently processed ILP instance
+	 * @param isTarget indicates whether the target or the source is processed
+	 * @throws LpSolveException if the lp_solve library reports a failure
+	 */
+	private void addSideConstraint(TSMEdge edge, KPortPlacement side,
+			LpSolve ilp, boolean isTarget) throws LpSolveException {
+		int sideValue = -1;
+		switch (side) {
+		case NORTH:
+			sideValue = 0;
+			break;
+		case EAST:
+			sideValue = 1;
+			break;
+		case SOUTH:
+			sideValue = 2;
+			break;
+		case WEST:
+			sideValue = 3;
+			break;
+		default:
+			return;
+		}
+		
+		ListIterator<TSMNode.IncEntry> edgeIter = isTarget ? edge.target
+				.getIterator(edge, false) : edge.source.getIterator(edge, true);
+		int rowSize = edgeIter.previousIndex();
+		double[] row = new double[rowSize];
+		int[] rowIndex = new int[rowSize];
+
+		int j = 0;
+		while (edgeIter.previousIndex() > 0) {
+			TSMNode.IncEntry nextEntry = edgeIter.previous();
+			row[j] = 1;
+			rowIndex[j] = (nextEntry.type == TSMNode.IncEntry.Type.OUT
+					? cols.sourceAnchor.start : cols.targetAnchor.start)
+					+ nextEntry.edge.id;
+			j++;
+		}
+		row[j] = 1;
+		rowIndex[j++] = cols.anchorPos.start + (isTarget ? edge.target.id
+				: edge.source.id);
+		ilp.addConstraintex(rowSize, row, rowIndex, LpSolve.EQ, sideValue);
 	}
 	
 	/**

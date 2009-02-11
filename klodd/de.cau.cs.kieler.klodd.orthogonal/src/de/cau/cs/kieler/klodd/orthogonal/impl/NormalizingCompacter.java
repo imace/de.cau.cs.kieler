@@ -105,6 +105,7 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 				TSMNode.Side currentSide = TSMNode.Side.UNDEFINED;
 				TSMNode currentNode = null;
 				TSMNode.Side startingSide = TSMNode.Side.UNDEFINED;
+				boolean changedSide = false;
 				TSMNode startingNode = null;
 				int edgeRank = 0;
 				for (TSMNode.IncEntry edgeEntry : node.incidence) {
@@ -124,9 +125,11 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 							startingNode = newNode;
 						}
 						else {
-							if (edgeEntry.isFirstEdge())
+							if (currentSide != newSide) {
 								currentNode = addCornerNodes(normalizedGraph,
 										currentNode, node, currentSide, newSide);
+								changedSide = true;
+							}
 							TSMEdge newEdge = new TSMEdge(normalizedGraph,
 									currentNode, newNode);
 							newEdge.connectNodes(newSide.right(), newSide.left());
@@ -161,7 +164,7 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 				}
 				
 				// add remaining corners
-				if (startingSide != currentSide) {
+				if (startingSide != currentSide || !changedSide) {
 					currentNode = addCornerNodes(normalizedGraph,
 							currentNode, node, currentSide, startingSide);
 				}

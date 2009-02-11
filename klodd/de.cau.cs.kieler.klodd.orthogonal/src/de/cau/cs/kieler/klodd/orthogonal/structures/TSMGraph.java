@@ -55,4 +55,13 @@ public class TSMGraph {
 		}
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	public String toString() {
+		return "TSMGraph(" + nodes.size() + " nodes, " + edges.size()
+				+ " edges, " + (faces.size() + 1) + " faces)";
+	}
+	
 }

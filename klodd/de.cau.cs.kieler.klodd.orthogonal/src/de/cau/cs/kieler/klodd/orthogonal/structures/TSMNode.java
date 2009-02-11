@@ -108,20 +108,6 @@ public class TSMNode extends TSMGraphElement {
 				return edge.sourceSide;
 		}
 		
-		/**
-		 * Returns true if the edge is the first one on its corresponding
-		 * side of the containing node.
-		 * 
-		 * @return true if the edge is first at its target node for
-		 *     incoming types, or if it is first at its source node
-		 *     for outgoing types
-		 */
-		public boolean isFirstEdge() {
-			if (type == Type.IN)
-				return edge.firstEdgeAtTarget;
-			else
-				return edge.firstEdgeAtSource;
-		}
 	}
 	
 	/**
