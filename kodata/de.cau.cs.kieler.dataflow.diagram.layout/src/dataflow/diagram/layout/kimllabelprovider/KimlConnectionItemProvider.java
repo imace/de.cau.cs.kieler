@@ -21,27 +21,22 @@ public class KimlConnectionItemProvider extends ConnectionItemProvider
 		super(adapterFactory);
 	}
 
-	@Override
 	public String getKimlCenterLabel(Object object) {
 		return null;
 	}
 
-	@Override
 	public String getKimlHeadLabel(Object object) {
 		return null;
 	}
 
-	@Override
 	public String getKimlLongLabel(Object object) {
 		return null;
 	}
 
-	@Override
 	public String getKimlShortLabel(Object object) {
 		return null;
 	}
 
-	@Override
 	public String getKimlTailLabel(Object object) {
 		return null;
 	}
