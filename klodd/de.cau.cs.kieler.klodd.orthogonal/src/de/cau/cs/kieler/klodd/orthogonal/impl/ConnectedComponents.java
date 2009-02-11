@@ -79,6 +79,7 @@ public class ConnectedComponents extends AbstractAlgorithm {
 						edgeStack.addAll(currentLayoutNode.getOutgoingEdges());
 						edgeStack.addAll(currentLayoutNode.getIncomingEdges());
 					}
+					currentLayoutNode = layoutEdge.getTarget();
 					TSMNode targetNode = nodeMap.get(currentLayoutNode);
 					if (targetNode == null) {
 						targetNode = new TSMNode(graph, TSMNode.Type.LAYOUT,

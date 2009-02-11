@@ -237,8 +237,9 @@ public class KandinskyLPOrthogonalizer extends AbstractAlgorithm implements
 		// set constraint K1
 		int i = rows.k1.start;
 		for (TSMNode node : graph.nodes) {
-			if (setK1Constraint(node, ilp, i))
-				i++;
+			if (!node.incidence.isEmpty()) {
+				setK1Constraint(node, ilp, i++);
+			}
 		}
 		
 		// set constraint K2
@@ -292,6 +293,7 @@ public class KandinskyLPOrthogonalizer extends AbstractAlgorithm implements
 			setU4Constraint(edge, ilp, i++);
 		}
 		
+		// enter row entry mode for flexible constraints
 		ilp.setAddRowmode(true);
 		
 		// add side constraints
@@ -319,40 +321,38 @@ public class KandinskyLPOrthogonalizer extends AbstractAlgorithm implements
 			if (node.type == TSMNode.Type.CROSSING)
 				addDummyNodeConstraint(node, ilp);
 		}
+		
+		// exit row entry mode
+		ilp.setAddRowmode(false);
 
 		return ilp;
 	}
 	
 	/**
-	 * Creates a K1 node constraint for the given node. A new row is
-	 * added only if the node has degree > 0.
+	 * Creates a K1 node constraint for the given node. The node must have
+	 * degree > 0.
 	 * 
 	 * @param node node for which the constraint shall be created
 	 * @param ilp currently processed ILP instance
 	 * @param i index of the row that shall be modified
-	 * @return true if a row was added
 	 * @throws LpSolveException if the lp_solve library reports a failure
 	 */
-	private boolean setK1Constraint(TSMNode node, LpSolve ilp, int i)
+	private void setK1Constraint(TSMNode node, LpSolve ilp, int i)
 			throws LpSolveException {
 		int localEdgeCount = node.incidence.size();
-		if (localEdgeCount > 0) {
-			ilp.setConstrType(i, LpSolve.EQ);
-			ilp.setRh(i, 4);
-			double[] row = new double[localEdgeCount];
-			int[] rowIndex = new int[localEdgeCount];
-			int jx = 0;
-			for (TSMNode.IncEntry edgeEntry : node.incidence) {
-				row[jx] = 1;
-				rowIndex[jx] = (edgeEntry.type == TSMNode.IncEntry.Type.OUT
-						? cols.sourceAnchor.start : cols.targetAnchor.start)
-						+ edgeEntry.edge.id;
-				jx++;
-			}
-			ilp.setRowex(i, localEdgeCount, row, rowIndex);
-			return true;
+		ilp.setConstrType(i, LpSolve.EQ);
+		ilp.setRh(i, 4);
+		double[] row = new double[localEdgeCount];
+		int[] rowIndex = new int[localEdgeCount];
+		int jx = 0;
+		for (TSMNode.IncEntry edgeEntry : node.incidence) {
+			row[jx] = 1;
+			rowIndex[jx] = (edgeEntry.type == TSMNode.IncEntry.Type.OUT
+					? cols.sourceAnchor.start : cols.targetAnchor.start)
+					+ edgeEntry.edge.id;
+			jx++;
 		}
-		else return false;
+		ilp.setRowex(i, localEdgeCount, row, rowIndex);
 	}
 	
 	/**
@@ -550,7 +550,8 @@ public class KandinskyLPOrthogonalizer extends AbstractAlgorithm implements
 	}
 	
 	/**
-	 * Creates a U1/2 node constraint for the given node.
+	 * Creates a U1/2 node constraint for the given node. The node must have
+	 * degree > 0.
 	 * 
 	 * @param node the node for which constraints shall be created
 	 * @param ilp currently processed ILP instance
@@ -594,7 +595,7 @@ public class KandinskyLPOrthogonalizer extends AbstractAlgorithm implements
 				edge, true);
 		ListIterator<TSMNode.IncEntry> targetIter = edge.target.getIterator(
 				edge, false);
-		int rowSize = sourceIter.previousIndex() + targetIter.previousIndex() + 7;
+		int rowSize = sourceIter.nextIndex() + targetIter.nextIndex() + 7;
 		double[] row = new double[rowSize];
 		int[] rowIndex = new int[rowSize];
 
@@ -633,6 +634,8 @@ public class KandinskyLPOrthogonalizer extends AbstractAlgorithm implements
 		}
 		row[j] = -1;
 		rowIndex[j++] = cols.anchorPos.start + edge.target.id;
+		row[j] = 4;
+		rowIndex[j++] = cols.modHelp1.start + edge.id;
 		ilp.setRowex(i, rowSize, row, rowIndex);
 	}
 	
@@ -667,7 +670,7 @@ public class KandinskyLPOrthogonalizer extends AbstractAlgorithm implements
 		
 		ListIterator<TSMNode.IncEntry> edgeIter = isTarget ? edge.target
 				.getIterator(edge, false) : edge.source.getIterator(edge, true);
-		int rowSize = edgeIter.previousIndex();
+		int rowSize = edgeIter.nextIndex();
 		double[] row = new double[rowSize];
 		int[] rowIndex = new int[rowSize];
 
@@ -720,8 +723,8 @@ public class KandinskyLPOrthogonalizer extends AbstractAlgorithm implements
 		int rowCount = ilp.getNrows();
 		double[] solution = new double[1 + rowCount + ilp.getNcolumns()];
 		ilp.getPrimalSolution(solution);
+		// retrieve bend points from ILP solution
 		for (TSMEdge edge : graph.edges) {
-			// add all bends to the current edge
 			if (solution[rowCount + cols.forwSourceLeft.start + edge.id] > 0.5)
 				edge.bends.add(new Bend(Bend.Type.LEFT));
 			if (solution[rowCount + cols.forwSourceRight.start + edge.id] > 0.5)
@@ -740,6 +743,53 @@ public class KandinskyLPOrthogonalizer extends AbstractAlgorithm implements
 				edge.bends.add(new Bend(Bend.Type.LEFT));
 			if (solution[rowCount + cols.forwTargetRight.start + edge.id] > 0.5)
 				edge.bends.add(new Bend(Bend.Type.RIGHT));
+		}
+		
+		// retrieve port sides from ILP solution
+		for (TSMNode node : graph.nodes) {
+			if (!node.incidence.isEmpty()) {
+				int sideValue = (int)solution[rowCount + cols.anchorPos.start + node.id];
+				ListIterator<TSMNode.IncEntry> edgeIter = node.incidence.listIterator();
+				TSMNode.IncEntry nextEntry = edgeIter.next();
+				if (nextEntry.type == TSMNode.IncEntry.Type.OUT)
+					nextEntry.edge.sourceSide = getSide(sideValue);
+				else
+					nextEntry.edge.targetSide = getSide(sideValue);
+				while (edgeIter.hasNext()) {
+					nextEntry = edgeIter.next();
+					if (nextEntry.type == TSMNode.IncEntry.Type.OUT) {
+						sideValue += (int)solution[rowCount
+						        + cols.sourceAnchor.start + nextEntry.edge.id];
+						nextEntry.edge.sourceSide = getSide(sideValue);
+					}
+					else {
+						sideValue += (int)solution[rowCount
+						        + cols.targetAnchor.start + nextEntry.edge.id];
+						nextEntry.edge.targetSide = getSide(sideValue);
+					}
+				}
+			}
+		}
+	}
+	
+	/**
+	 * Returns the corresponding node side for a side value.
+	 * 
+	 * @param sideValue integer value 0...4
+	 * @return corresponding node side
+	 */
+	private TSMNode.Side getSide(int sideValue) {
+		switch (sideValue) {
+		case 0:
+			return TSMNode.Side.NORTH;
+		case 1:
+			return TSMNode.Side.EAST;
+		case 2:
+			return TSMNode.Side.SOUTH;
+		case 3:
+			return TSMNode.Side.WEST;
+		default:
+			return TSMNode.Side.UNDEFINED;
 		}
 	}
 

@@ -132,7 +132,7 @@ public class RefiningCompacter extends AbstractAlgorithm implements ICompacter {
 			if (side1 == side2.left()) {
 				// found a left turn, add refinement edge
 				TSMFace.BorderEntry frontEntry = getFrontEdge(border,
-						entryIter.previousIndex() < 0 ? border.size() - 1
+						entryIter.previousIndex() < 1 ? border.size() - 1
 						: entryIter.previousIndex() - 1);
 				if (frontEntry == null) {
 					TSMEdge frontEdge = null;
@@ -214,19 +214,20 @@ public class RefiningCompacter extends AbstractAlgorithm implements ICompacter {
 			TSMNode newNode = new TSMNode(graph, TSMNode.Type.REFINEMENT);
 			TSMEdge edge1 = refinementEdge.targetEdge;
 			TSMNode oldNode2;
+			TSMEdge edge2;
 			if (refinementEdge.targetForward) {
 				oldNode2 = edge1.target;
 				edge1.target = newNode;
+				edge2 = new TSMEdge(graph, newNode, oldNode2, edge1.layoutEdge);
 			}
 			else {
 				oldNode2 = edge1.source;
 				edge1.source = newNode;
+				edge2 = new TSMEdge(graph, oldNode2, newNode, edge1.layoutEdge);
 			}
 			ListIterator<TSMNode.IncEntry> oldNode2Iter = oldNode2.getIterator(
 					edge1, !refinementEdge.targetForward);
 			oldNode2Iter.remove();
-			TSMEdge edge2 = new TSMEdge(graph, newNode, oldNode2,
-					edge1.layoutEdge);
 			oldNode2Iter.add(new TSMNode.IncEntry(edge2,
 					refinementEdge.targetForward ? TSMNode.IncEntry.Type.IN
 					: TSMNode.IncEntry.Type.OUT));
@@ -320,6 +321,7 @@ public class RefiningCompacter extends AbstractAlgorithm implements ICompacter {
 			faceIter.add(new TSMFace.BorderEntry(newEdge, false));
 			newEdge.leftFace = face;
 			newEdge.rightFace = face;
+			frameConnected = true;
 			return null;
 		}
 		else {

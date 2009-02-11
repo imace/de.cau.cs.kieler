@@ -262,4 +262,15 @@ public class TSMNode extends TSMGraphElement {
 		}
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see de.cau.cs.kieler.klodd.orthogonal.structures.TSMGraphElement#toString()
+	 */
+	public String toString() {
+		String baseString = super.toString();
+		if (object instanceof KLayoutNode)
+			return baseString + " - " + ((KLayoutNode)object).getLabel().getText();
+		else return baseString + " - " + type.toString();
+	}
+	
 }

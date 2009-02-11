@@ -72,11 +72,14 @@ public class DualGraphBuilder extends AbstractAlgorithm {
 	private void buildBorder(TSMGraph graph, TSMEdge edge, boolean forward) {
 		List<TSMFace.BorderEntry> border = new LinkedList<TSMFace.BorderEntry>();
 		visit(edge, border, forward);
-		if (externalFaceDetector.isExternal(border))
-			graph.externalFace.borders.add(border); 
-		else {
-			TSMFace newFace = new TSMFace(graph, true);
-			newFace.borders.add(border);
+		TSMFace face = externalFaceDetector.isExternal(border)
+				? graph.externalFace : new TSMFace(graph, true);
+		face.borders.add(border);
+		for (TSMFace.BorderEntry borderEntry : border) {
+			if (borderEntry.forward)
+				borderEntry.edge.rightFace = face;
+			else
+				borderEntry.edge.leftFace = face;
 		}
 	}
 	

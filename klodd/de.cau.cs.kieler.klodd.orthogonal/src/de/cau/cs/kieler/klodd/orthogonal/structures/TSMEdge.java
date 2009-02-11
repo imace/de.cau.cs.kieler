@@ -252,4 +252,16 @@ public class TSMEdge extends TSMGraphElement {
 		layoutEdge.getLayout().setTargetPoint(newPoint);
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see de.cau.cs.kieler.klodd.orthogonal.structures.TSMGraphElement#toString()
+	 */
+	public String toString() {
+		String baseString = super.toString();
+		if (source != null && target != null)
+			return baseString + " - [" + source.toString() + "] > ["
+					+ target.toString() + "]";
+		else return baseString;
+	}
+	
 }
