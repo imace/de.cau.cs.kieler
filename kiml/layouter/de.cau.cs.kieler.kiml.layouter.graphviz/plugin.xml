@@ -31,6 +31,9 @@
       <kimlLayoutProvider
             class="kiel.layouter.graphviz.TwopiLayoutProvider">
       </kimlLayoutProvider>
+      <kimlLayoutProvider
+            class="kiel.layouter.graphviz.FdpLayoutProvider">
+      </kimlLayoutProvider>
    </extension>
 
 </plugin>

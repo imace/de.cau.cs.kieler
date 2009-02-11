@@ -13,8 +13,11 @@ import kiel.layouter.graphviz.GraphvizLayoutProviderNames;
 
 import org.eclipse.jface.preference.BooleanFieldEditor;
 import org.eclipse.jface.preference.DirectoryFieldEditor;
+import org.eclipse.jface.preference.FileFieldEditor;
 import org.eclipse.jface.preference.IntegerFieldEditor;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.ModifyEvent;
+import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Group;
@@ -38,6 +41,8 @@ public class GraphvizPreferencePage extends
 		AbstractKimlLayoutProviderPreferencePage implements
 		IWorkbenchPreferencePage {
 
+	public static final String ID = "de.cau.cs.kieler.kiml.layouter.graphviz.preferences.GraphvizPreferencePage";
+	
 	/**
 	 * The constructor for the preference page, uses
 	 * {@link de.cau.cs.kieler.kiml.ui.AbstractKimlLayoutProviderPreferencePage
@@ -99,12 +104,28 @@ public class GraphvizPreferencePage extends
 		gl.marginHeight = 10;
 		debug.setLayout(gl);
 
+		/* executable group */
+		Group executable = new Group(this.getFieldEditorParent(), SWT.NONE);
+		debug.setText("Executable:");
+
+		FileFieldEditor dotExecutable = new FileFieldEditor(
+				PreferenceConstants.PREF_GRAPHVIZ_EXECUTABLE,
+				"Dot Executable:", executable);
+		
+		executable.setLayoutData(new GridData(GridData.FILL, GridData.FILL, true,
+				false, 2, 1));
+		gl = new GridLayout(2, false);
+		gl.marginWidth = 15;
+		gl.marginHeight = 10;
+		executable.setLayout(gl);
+				
 		/* now add all the stuff */
 		addField(padx);
 		addField(pady);
 
 		addField(enableDebug);
 		addField(debugDir);
+		addField(dotExecutable);
 	}
 
 	/*

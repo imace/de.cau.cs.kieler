@@ -22,8 +22,8 @@ import de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayoutProvider;
  * <code>doLayout</code>, which performs the actual layout, that is annotating
  * the provided KLayoutNode with the Twopi layout information.
  * <p/>
- * This class acts as a wrapper to the {@link GraphvizLayouter}. Is uses the
- * {@link GraphvizLayouter} with the Twopi engine and publishes the Twopi
+ * This class acts as a wrapper to the {@link GraphvizLayouterLibrary}. Is uses the
+ * {@link GraphvizLayouterLibrary} with the Twopi engine and publishes the Twopi
  * specific capabilities trough <code>getLayouterInfo</code>.
  * 
  * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
@@ -48,7 +48,7 @@ public class TwopiLayoutProvider extends KimlAbstractLayoutProvider {
 	 */
 	public void doLayout(KLayoutNode layoutNode) {
 		if (graphvizLayouter == null)
-			graphvizLayouter = new GraphvizLayouter(LAYOUT_PROVIDER_NAME);
+			graphvizLayouter = new GraphvizLayouterBinary(LAYOUT_PROVIDER_NAME);
 		graphvizLayouter.visit(layoutNode);
 	}
 
