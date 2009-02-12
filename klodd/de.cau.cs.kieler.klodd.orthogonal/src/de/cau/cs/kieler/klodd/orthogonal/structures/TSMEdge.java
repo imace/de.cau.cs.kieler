@@ -216,11 +216,9 @@ public class TSMEdge extends TSMGraphElement {
 		// set start point
 		KPoint newPoint = KimlLayoutGraphFactory.eINSTANCE.createKPoint();
 		float xpos = layoutEdge.getSource().getLayout().getLocation().getX()
-				+ layoutEdge.getSourcePort().getLayout().getLocation().getX()
-				+ offsetX;
+				+ layoutEdge.getSourcePort().getLayout().getLocation().getX();
 		float ypos = layoutEdge.getSource().getLayout().getLocation().getY()
-				+ layoutEdge.getSourcePort().getLayout().getLocation().getY()
-				+ offsetY;
+				+ layoutEdge.getSourcePort().getLayout().getLocation().getY();
 		switch (firstEdge.sourceSide) {
 		case NORTH:
 			xpos += layoutEdge.getSourcePort().getLayout().getSize().getWidth() / 2;
@@ -244,11 +242,9 @@ public class TSMEdge extends TSMGraphElement {
 		// set end point
 		newPoint = KimlLayoutGraphFactory.eINSTANCE.createKPoint();
 		xpos = layoutEdge.getTarget().getLayout().getLocation().getX()
-				+ layoutEdge.getTargetPort().getLayout().getLocation().getX()
-				+ offsetX;
+				+ layoutEdge.getTargetPort().getLayout().getLocation().getX();
 		ypos = layoutEdge.getTarget().getLayout().getLocation().getY()
-				+ layoutEdge.getTargetPort().getLayout().getLocation().getY()
-				+ offsetY;
+				+ layoutEdge.getTargetPort().getLayout().getLocation().getY();
 		switch (lastEdge.targetSide) {
 		case NORTH:
 			xpos += layoutEdge.getTargetPort().getLayout().getSize().getWidth() / 2;
