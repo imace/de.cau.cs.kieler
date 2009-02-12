@@ -37,6 +37,7 @@ public final class KimlDiagramLayouter {
 	 *            IEditorPart or a StructuredSelection of EditParts
 	 */
 	public static void layout(Object target) {
+		KimlAbstractLayouterEngine layoutEngine = null;
 		try {
 			// fetches editor id
 			String editorID = PlatformUI.getWorkbench().getActiveWorkbenchWindow()
@@ -54,7 +55,7 @@ public final class KimlDiagramLayouter {
 			LayoutListeners.getInstance().layoutRequested(layoutInformation.layoutGraph);
 	
 			// chooses the default layout engine
-			KimlAbstractLayouterEngine layoutEngine = new KimlRecursiveGroupLayouterEngine();
+			layoutEngine = new KimlRecursiveGroupLayouterEngine();
 	
 			// does the layout with the layout graph
 			layoutEngine.layout(layoutInformation.layoutGraph);
@@ -70,8 +71,12 @@ public final class KimlDiagramLayouter {
 			layoutGraphApplier.applyLayoutGraph(layoutInformation);
 		}
 		catch (Throwable exception) {
+			String message = "Failed to perform diagram layout.";
+			if (layoutEngine != null && layoutEngine.getLastLayoutProvider() != null)
+				message += " (" + layoutEngine.getLastLayoutProvider()
+						.getLayouterInfo().getLayouterName() + ")";
             Status status = new Status(IStatus.ERROR, KimlLayoutPlugin.PLUGIN_ID,
-                    "Failed to perform diagram layout.", exception);
+                    message, exception);
             StatusManager.getManager().handle(status, StatusManager.SHOW);
         }
 	}
