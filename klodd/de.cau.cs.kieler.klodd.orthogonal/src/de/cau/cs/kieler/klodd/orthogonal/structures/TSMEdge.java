@@ -30,13 +30,31 @@ public class TSMEdge extends TSMGraphElement {
 		public float xpos;
 		/** the y coordinate position */
 		public float ypos;
+		/** the index of this bend */
+		public int index;
+		
+		/** the edge associated with this bend */
+		private TSMEdge edge;
 		
 		/**
 		 * Creates an edge bend of given type.
+		 * 
+		 * @param edge the edge to which the new bend is added
 		 * @param type type of edge bend
 		 */
-		public Bend(Type type) {
+		public Bend(TSMEdge edge, Type type) {
+			this.edge = edge;
 			this.type = type;
+			index = edge.bends.size();
+		}
+		
+		/**
+		 * Returns the TSM edge associated with this bend.
+		 * 
+		 * @return the edge
+		 */
+		public TSMEdge getEdge() {
+			return edge;
 		}
 	}
 	

@@ -34,7 +34,7 @@ public abstract class TSMGraphElement implements Comparable<TSMGraphElement> {
 	 * @see java.lang.Object#toString()
 	 */
 	public String toString() {
-		return getClass().getSimpleName() + "(id " + id + ", rank " + rank + ")";
+		return getClass().getSimpleName() + "(" + id + ")";
 	}
 	
 }

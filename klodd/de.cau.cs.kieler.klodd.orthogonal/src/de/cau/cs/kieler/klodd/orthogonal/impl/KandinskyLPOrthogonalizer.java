@@ -726,23 +726,23 @@ public class KandinskyLPOrthogonalizer extends AbstractAlgorithm implements
 		// retrieve bend points from ILP solution
 		for (TSMEdge edge : graph.edges) {
 			if (solution[rowCount + cols.forwSourceLeft.start + edge.id] > 0.5)
-				edge.bends.add(new Bend(Bend.Type.LEFT));
+				edge.bends.add(new Bend(edge, Bend.Type.LEFT));
 			if (solution[rowCount + cols.forwSourceRight.start + edge.id] > 0.5)
-				edge.bends.add(new Bend(Bend.Type.RIGHT));
+				edge.bends.add(new Bend(edge, Bend.Type.RIGHT));
 			long faceLeftBends = Math.round(solution[rowCount
 			        + cols.forwFaceLeft.start + edge.id]);
 			for (int i = 0; i < faceLeftBends; i++) {
-				edge.bends.add(new Bend(Bend.Type.LEFT));
+				edge.bends.add(new Bend(edge, Bend.Type.LEFT));
 			}
 			long faceRightBends = Math.round(solution[rowCount
 			        + cols.forwFaceRight.start + edge.id]);
 			for (int i = 0; i < faceRightBends; i++) {
-				edge.bends.add(new Bend(Bend.Type.RIGHT));
+				edge.bends.add(new Bend(edge, Bend.Type.RIGHT));
 			}
 			if (solution[rowCount + cols.forwTargetLeft.start + edge.id] > 0.5)
-				edge.bends.add(new Bend(Bend.Type.LEFT));
+				edge.bends.add(new Bend(edge, Bend.Type.LEFT));
 			if (solution[rowCount + cols.forwTargetRight.start + edge.id] > 0.5)
-				edge.bends.add(new Bend(Bend.Type.RIGHT));
+				edge.bends.add(new Bend(edge, Bend.Type.RIGHT));
 		}
 		
 		// retrieve port sides from ILP solution

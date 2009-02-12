@@ -36,9 +36,9 @@ public class LayeringCompacter extends AbstractAlgorithm implements
 	 * @see de.cau.cs.kieler.klodd.orthogonal.modules.ICompacter#compact(de.cau.cs.kieler.klodd.orthogonal.structures.TSMGraph, float)
 	 */
 	public void compact(TSMGraph graph, float minDist) {
-		// determine horizontal numbering
+		// determine horizontal numbering: build vertical bars
 		int maxXrank = 0;
-		buildTopoBars(graph, true);
+		buildTopoBars(graph, false);
 		for (TopoBar topoBar : topoBars) {
 			if (topoBar.rank < 0)
 				visit(topoBar, TSMNode.Side.WEST);
@@ -48,9 +48,9 @@ public class LayeringCompacter extends AbstractAlgorithm implements
 		}
 		graph.width = maxXrank + 1;
 		
-		// determine vertical numbering
+		// determine vertical numbering: build horizontal bars
 		int maxYrank = 0;
-		buildTopoBars(graph, false);
+		buildTopoBars(graph, true);
 		for (TopoBar topoBar : topoBars) {
 			if (topoBar.rank < 0)
 				visit(topoBar, TSMNode.Side.NORTH);
@@ -96,14 +96,14 @@ public class LayeringCompacter extends AbstractAlgorithm implements
 		node.rank = index;
 		
 		TSMNode currentNode = node;
-		TSMNode.Side direction = horizontal ? TSMNode.Side.SOUTH
-				: TSMNode.Side.EAST;
+		TSMNode.Side direction = horizontal ? TSMNode.Side.EAST
+				: TSMNode.Side.SOUTH;
 		while ((currentNode = nextNode(currentNode, direction)) != null) {
 			topoBar.nodes.add(currentNode);
 			currentNode.rank = index;
 		}
 		currentNode = node;
-		direction = horizontal ? TSMNode.Side.NORTH : TSMNode.Side.WEST;
+		direction = horizontal ? TSMNode.Side.WEST : TSMNode.Side.NORTH;
 		while ((currentNode = nextNode(currentNode, direction)) != null) {
 			topoBar.nodes.add(currentNode);
 			currentNode.rank = index;
@@ -143,7 +143,7 @@ public class LayeringCompacter extends AbstractAlgorithm implements
 				TopoBar connectedBar = topoBars[connectedNode.rank];
 				if (connectedBar.rank < 0)
 					visit(connectedBar, direction);
-				minRank = Math.min(minRank, connectedBar.rank + 1);
+				minRank = Math.max(minRank, connectedBar.rank + 1);
 			}
 		}
 		topoBar.rank = minRank;

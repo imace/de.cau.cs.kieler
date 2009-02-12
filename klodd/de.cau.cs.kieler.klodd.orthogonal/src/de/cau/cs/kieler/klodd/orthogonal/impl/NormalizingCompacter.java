@@ -70,7 +70,8 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 		// execute the embedded compacter
 		normalizedCompacter.compact(normalizedGraph, minDist);
 		// transform abstract metrics to concrete metrics
-		transformMetrics(graph);
+		transformMetrics(graph, (int)normalizedGraph.width,
+				(int)normalizedGraph.height);
 	}
 	
 	/**
@@ -164,6 +165,10 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 				}
 				
 				// add remaining corners
+				if (currentSide == TSMNode.Side.UNDEFINED) {
+					currentSide = TSMNode.Side.NORTH;
+					startingSide = currentSide;
+				}
 				if (startingSide != currentSide || !changedSide) {
 					currentNode = addCornerNodes(normalizedGraph,
 							currentNode, node, currentSide, startingSide);
@@ -203,6 +208,9 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 				PortDescriptor portDescriptor = portMap.get(edge.source);
 				currentNode = portDescriptor.nodes.get(0);
 			}
+			// register the new node
+			if (sourceBendConsumed)
+				startNodeMap.put(edge.bends.get(0), currentNode);
 			
 			// determine attachment point at target
 			if (edge.target.type == TSMNode.Type.LAYOUT) {
@@ -218,6 +226,10 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 				PortDescriptor portDescriptor = portMap.get(edge.target);
 				targetNode = portDescriptor.nodes.get(0);
 			}
+			// register the new node
+			if (targetBendConsumed)
+				startNodeMap.put(edge.bends.get(edge.bends.size() - 1),
+						targetNode);
 			
 			// create dummy nodes for remaining bends
 			TSMNode.Side currentSide = (sourceBendConsumed
@@ -259,7 +271,8 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 	 * the end side.
 	 * 
 	 * @param graph graph to which new nodes are added
-	 * @param currentNode node to which the first new node is connected
+	 * @param currentNode node to which the first new node is connected,
+	 *     or null if no normalization node was built for the given node
 	 * @param origNode the original node for which dummy nodes are created
 	 * @param startSide start side of the original node
 	 * @param endSide end side of the original node
@@ -268,8 +281,7 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 	private TSMNode addCornerNodes(TSMGraph graph, TSMNode currentNode,
 			TSMNode origNode, TSMNode.Side startSide, TSMNode.Side endSide) {
 		TSMNode.Side currentSide = startSide;
-		TSMNode newNode;
-		TSMEdge newEdge;
+		TSMNode newNode, startNode = null;
 		do {
 			// add the new node and a new edge
 			TSMNode.Type cornerType;
@@ -290,8 +302,12 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 				throw new IllegalStateException("Illegal value: " + currentSide);
 			}
 			newNode = new TSMNode(graph, cornerType, origNode);
-			newEdge = new TSMEdge(graph, currentNode, newNode);
-			newEdge.connectNodes(currentSide.right(), currentSide.left());
+			if (currentNode == null)
+				startNode = currentNode;
+			else {
+				TSMEdge newEdge = new TSMEdge(graph, currentNode, newNode);
+				newEdge.connectNodes(currentSide.right(), currentSide.left());
+			}
 			
 			// register the new normalization node
 			switch (cornerType) {
@@ -306,6 +322,10 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 			currentNode = newNode;
 			currentSide = currentSide.right();
 		} while (currentSide != endSide);
+		if (startNode != null) {
+			TSMEdge newEdge = new TSMEdge(graph, currentNode, startNode);
+			newEdge.connectNodes(currentSide.left(), currentSide.opposed());
+		}
 		return currentNode;
 	}
 	
@@ -338,11 +358,12 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 		else
 			nodeIndex = portDescriptor.leftEdges + portDescriptor.straightEdges
 					+ portDescriptor.rightEdges - rank;
+		
 		if (edge.bends.size() == 1 && nodeIndex == Math.max(
 				portDescriptor.leftEdges, portDescriptor.rightEdges)
 				&& portDescriptor.leftEdges != portDescriptor.rightEdges)
 			nodeIndex--;
-		else
+		else if (!edge.bends.isEmpty())
 			bendConsumed = true;
 		
 		// add new nodes if needed
@@ -377,6 +398,8 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 						cornerSum--;
 					else if (side1 == side2.right())
 						cornerSum++;
+					else if (side1 == side2)
+						cornerSum -= 2;
 					currentEntry = nextEntry;
 				}
 				return cornerSum == -4;
@@ -390,20 +413,21 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 	 * 
 	 * @param origGraph the original graph
 	 */
-	private void transformMetrics(TSMGraph origGraph) {
+	private void transformMetrics(TSMGraph origGraph, int abstrWidth,
+			int abstrHeight) {
 		// create pool of nodes and edge bends
 		List<Object> compactables = new LinkedList<Object>();
 		compactables.addAll(origGraph.nodes);
 		for (TSMEdge edge : origGraph.edges) {
-			ListIterator<TSMEdge.Bend> bendIter = edge.bends.listIterator(1);
-			while (bendIter.nextIndex() < edge.bends.size() - 1)
-				compactables.add(bendIter.next());
+			compactables.addAll(edge.bends);
 		}
 		
 		// transform horizontal positions
-		origGraph.width = transformMetrics(compactables, origGraph, true);
+		origGraph.width = transformMetrics(compactables, origGraph, true,
+				abstrWidth);
 		// transform vertical positions
-		origGraph.height = transformMetrics(compactables, origGraph, false);
+		origGraph.height = transformMetrics(compactables, origGraph, false,
+				abstrHeight);
 		
 		// set proper coordinates for the first and the last bend of each edge
 		for (TSMEdge edge : origGraph.edges) {
@@ -416,25 +440,26 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 					sourceBend.xpos = edge.source.concrXpos;
 					if (edge.source.type == TSMNode.Type.LAYOUT
 							&& edge.layoutEdge.getSourcePort() != null) {
-						KPortLayout portLayout = edge.layoutEdge.getSourcePort().getLayout();
+						KPortLayout portLayout = edge.layoutEdge
+								.getSourcePort().getLayout();
 						sourceBend.xpos += portLayout.getLocation().getX()
 								+ portLayout.getSize().getWidth() / 2;
 					}
 					if (bendsCount > 1)
 						sourceBend.ypos = edge.bends.get(1).ypos;
-				}
-				else {
+				} else {
 					sourceBend.ypos = edge.source.concrYpos;
 					if (edge.source.type == TSMNode.Type.LAYOUT
 							&& edge.layoutEdge.getSourcePort() != null) {
-						KPortLayout portLayout = edge.layoutEdge.getSourcePort().getLayout();
+						KPortLayout portLayout = edge.layoutEdge
+								.getSourcePort().getLayout();
 						sourceBend.ypos += portLayout.getLocation().getY()
 								+ portLayout.getSize().getHeight() / 2;
 					}
 					if (bendsCount > 1)
 						sourceBend.xpos = edge.bends.get(1).xpos;
 				}
-				
+
 				// set target bend
 				TSMEdge.Bend targetBend = edge.bends.get(bendsCount - 1);
 				if (edge.targetSide == TSMNode.Side.EAST
@@ -442,23 +467,24 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 					targetBend.ypos = edge.target.concrYpos;
 					if (edge.target.type == TSMNode.Type.LAYOUT
 							&& edge.layoutEdge.getTargetPort() != null) {
-						KPortLayout portLayout = edge.layoutEdge.getTargetPort().getLayout();
+						KPortLayout portLayout = edge.layoutEdge
+								.getTargetPort().getLayout();
 						targetBend.ypos += portLayout.getLocation().getY()
 								+ portLayout.getSize().getHeight() / 2;
 					}
 					if (bendsCount > 1)
-						sourceBend.xpos = edge.bends.get(bendsCount-2).xpos;
-				}
-				else {
+						sourceBend.xpos = edge.bends.get(bendsCount - 2).xpos;
+				} else {
 					targetBend.xpos = edge.target.concrXpos;
 					if (edge.target.type == TSMNode.Type.LAYOUT
 							&& edge.layoutEdge.getTargetPort() != null) {
-						KPortLayout portLayout = edge.layoutEdge.getTargetPort().getLayout();
+						KPortLayout portLayout = edge.layoutEdge
+								.getTargetPort().getLayout();
 						targetBend.xpos += portLayout.getLocation().getX()
 								+ portLayout.getSize().getWidth() / 2;
 					}
 					if (bendsCount > 1)
-						sourceBend.ypos = edge.bends.get(bendsCount-2).ypos;
+						sourceBend.ypos = edge.bends.get(bendsCount - 2).ypos;
 				}
 			}
 		}
@@ -476,7 +502,7 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 	 * @return the total width or height of the graph
 	 */
 	private float transformMetrics(List<Object> compactables, TSMGraph graph,
-			final boolean horizontal) {
+			final boolean horizontal, int abstrSize) {
 		// sort compactable elements by their abstract position
 		Collections.sort(compactables, new Comparator<Object>() {
 			public int compare(Object o1, Object o2) {
@@ -510,7 +536,6 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 		});
 		
 		// initialize concrete positions array
-		int abstrSize = horizontal ? (int)graph.width : (int)graph.height;
 		float[] concrPos = new float[abstrSize];
 		for (int i = 1; i < abstrSize; i++)
 			concrPos[i] = -1;

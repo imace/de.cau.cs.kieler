@@ -129,7 +129,7 @@ public class RefiningCompacter extends AbstractAlgorithm implements ICompacter {
 			TSMFace.BorderEntry nextEntry = entryIter.next();
 			TSMNode.Side side1 = currentEntry.secondSide();
 			TSMNode.Side side2 = nextEntry.firstSide();
-			if (side1 == side2.left()) {
+			if (side1 == side2.left() || side1 == side2) {
 				// found a left turn, add refinement edge
 				TSMFace.BorderEntry frontEntry = getFrontEdge(border,
 						entryIter.previousIndex() < 1 ? border.size() - 1
@@ -192,6 +192,8 @@ public class RefiningCompacter extends AbstractAlgorithm implements ICompacter {
 				cornerSum--;
 			else if (side1 == side2.right())
 				cornerSum++;
+			else if (side1 == side2)
+				cornerSum -= 2;
 			if (cornerSum == 1)
 				return nextEntry;
 			currentEntry = nextEntry;
@@ -210,6 +212,11 @@ public class RefiningCompacter extends AbstractAlgorithm implements ICompacter {
 			List<RefinementEdge> refinements) {
 		List<TSMFace> newFaces = new LinkedList<TSMFace>();
 		for (RefinementEdge refinementEdge : refinements) {
+			// look for the right target edge
+			while (!containsNode(refinementEdge.targetEdge,
+					refinementEdge.targetForward, refinementEdge.source))
+				refinementEdge.targetEdge = refinementEdge.targetEdge.nextEdge;
+			
 			// create new node and insert it into the border
 			TSMNode newNode = new TSMNode(graph, TSMNode.Type.REFINEMENT);
 			TSMEdge edge1 = refinementEdge.targetEdge;
@@ -239,6 +246,13 @@ public class RefiningCompacter extends AbstractAlgorithm implements ICompacter {
 							: TSMNode.IncEntry.Type.IN));
 			edge2.sourceSide = edge1.sourceSide;
 			edge2.targetSide = edge1.targetSide;
+			
+			// update links of chains of split edges 
+			edge2.nextEdge = edge1.nextEdge;
+			if (edge2.nextEdge != null)
+				edge2.nextEdge.previousEdge = edge2;
+			edge2.previousEdge = edge1;
+			edge1.nextEdge = edge2;
 			
 			// update faces left and right of edge1
 			edge2.leftFace = edge1.leftFace;
@@ -383,6 +397,27 @@ public class RefiningCompacter extends AbstractAlgorithm implements ICompacter {
 	}
 	
 	/**
+	 * Checks whether the face bordered by the given edge contains the given
+	 * node.
+	 * 
+	 * @param edge edge on the border
+	 * @param forward indicates whether the edge is forward on the border
+	 * @param node node to look up
+	 * @return true if the corresponding face contains the node
+	 */
+	private boolean containsNode(TSMEdge edge, boolean forward, TSMNode node) {
+		TSMFace face = forward ? edge.rightFace : edge.leftFace;
+		for (List<TSMFace.BorderEntry> border : face.borders) {
+			for (TSMFace.BorderEntry borderEntry : border) {
+				if (borderEntry.edge.source.id == node.id
+						|| borderEntry.edge.target.id == node.id)
+					return true;
+			}
+		}
+		return false;
+	}
+	
+	/**
 	 * Builds the external frame of the refined graph.
 	 * 
 	 * @param graph graph that is being refined
@@ -403,18 +438,26 @@ public class RefiningCompacter extends AbstractAlgorithm implements ICompacter {
 		northFrame.connectNodes();
 		northFrame.leftFace = newExternal;
 		northFrame.rightFace = oldExternal;
+		northFrame.sourceSide = TSMNode.Side.EAST;
+		northFrame.targetSide = TSMNode.Side.WEST;
 		eastFrame = new TSMEdge(graph, neNode, seNode);
 		eastFrame.connectNodes();
 		eastFrame.leftFace = newExternal;
 		eastFrame.rightFace = oldExternal;
+		eastFrame.sourceSide = TSMNode.Side.SOUTH;
+		eastFrame.targetSide = TSMNode.Side.NORTH;
 		southFrame = new TSMEdge(graph, seNode, swNode);
 		southFrame.connectNodes();
 		southFrame.leftFace = newExternal;
 		southFrame.rightFace = oldExternal;
+		southFrame.sourceSide = TSMNode.Side.WEST;
+		southFrame.targetSide = TSMNode.Side.EAST;
 		westFrame = new TSMEdge(graph, swNode, nwNode);
 		westFrame.connectNodes();
 		westFrame.leftFace = newExternal;
 		westFrame.rightFace = oldExternal;
+		westFrame.sourceSide = TSMNode.Side.NORTH;
+		westFrame.targetSide = TSMNode.Side.SOUTH;
 		newBorder.add(new TSMFace.BorderEntry(westFrame, false));
 		newBorder.add(new TSMFace.BorderEntry(southFrame, false));
 		newBorder.add(new TSMFace.BorderEntry(eastFrame, false));

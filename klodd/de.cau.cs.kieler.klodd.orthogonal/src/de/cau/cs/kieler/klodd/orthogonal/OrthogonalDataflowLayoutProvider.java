@@ -27,7 +27,7 @@ public class OrthogonalDataflowLayoutProvider extends
 	public static final String LAYOUTER_NAME = "KLoDD Orthogonal";
 	
 	/** minimal distance between elements */
-	private static final float MIN_DIST = 12.0f;
+	private static final float MIN_DIST = 15.0f;
 	
 	/** the planarization module */
 	private IPlanarizer planarizer;
