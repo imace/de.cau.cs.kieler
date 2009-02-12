@@ -261,7 +261,7 @@ public class LayoutGraphCanvas extends Canvas implements PaintListener {
 	 */
 	public void setLayoutGraph(KLayoutGraph layoutGraph) {
 		// set new size values for the canvas
-		if (layoutGraph != null && layoutGraph != null)
+		if (layoutGraph != null)
 		{
 			KDimension graphDim = layoutGraph.getLayout().getSize();
 			setSize(new Point((int)graphDim.getWidth() + 1,
