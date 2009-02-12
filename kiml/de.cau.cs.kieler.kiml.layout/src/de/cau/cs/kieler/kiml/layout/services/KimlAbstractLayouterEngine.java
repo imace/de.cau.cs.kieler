@@ -35,5 +35,13 @@ public abstract class KimlAbstractLayouterEngine {
 	 *            A KLayoutGraph with hierarchy which is laid out by this method
 	 */
 	public abstract void layout(KLayoutGraph layoutGraph);
+	
+	/**
+	 * Returns the last layout provider that was used for layout. This
+	 * can be used for error handling.
+	 * 
+	 * @return the last used layout provider, or null if none was used
+	 */
+	public abstract KimlAbstractLayoutProvider getLastLayoutProvider();
 
 }

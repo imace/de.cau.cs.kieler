@@ -28,6 +28,9 @@ import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
 public class KimlRecursiveGroupLayouterEngine extends
 		KimlAbstractLayouterEngine {
 
+	/** the last used layout provider */
+	private KimlAbstractLayoutProvider lastLayoutProvider;
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -37,6 +40,7 @@ public class KimlRecursiveGroupLayouterEngine extends
 	 * (de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutGraph)
 	 */
 	public void layout(KLayoutGraph layoutGraph) {
+		lastLayoutProvider = null;
 		if (layoutGraph != null)
 			layoutRecursively(layoutGraph);
 	}
@@ -54,9 +58,17 @@ public class KimlRecursiveGroupLayouterEngine extends
 		}
 
 		if (layoutNode.getChildNodes().size() > 0) {
-			layoutProviderHolder.getLayoutProvider(layoutNode).doLayout(
-					layoutNode);
+			lastLayoutProvider = layoutProviderHolder.getLayoutProvider(layoutNode);
+			lastLayoutProvider.doLayout(layoutNode);
 		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayouterEngine#getLastLayoutProvider()
+	 */
+	public KimlAbstractLayoutProvider getLastLayoutProvider() {
+		return lastLayoutProvider;
 	}
 
 }

@@ -33,11 +33,22 @@ import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutGraph;
  */
 public class KimlLayouterEngine extends KimlAbstractLayouterEngine {
 
+	private KimlAbstractLayoutProvider lastLayoutProvider;
+	
 	/* (non-Javadoc)
 	 * @see de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayouterEngine#layout(de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutGraph)
 	 */
 	public void layout(KLayoutGraph layoutGraph) {
-		layoutProviderHolder.getLayoutProvider(layoutGraph)
-				.doLayout(layoutGraph);
+		lastLayoutProvider = layoutProviderHolder.getLayoutProvider(layoutGraph);
+		lastLayoutProvider.doLayout(layoutGraph);
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayouterEngine#getLastLayoutProvider()
+	 */
+	public KimlAbstractLayoutProvider getLastLayoutProvider() {
+		return lastLayoutProvider;
+	}
+	
 }
