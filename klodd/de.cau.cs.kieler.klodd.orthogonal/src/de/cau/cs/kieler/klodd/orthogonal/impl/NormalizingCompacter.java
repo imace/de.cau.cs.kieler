@@ -445,8 +445,6 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 						sourceBend.xpos += portLayout.getLocation().getX()
 								+ portLayout.getSize().getWidth() / 2;
 					}
-					if (bendsCount > 1)
-						sourceBend.ypos = edge.bends.get(1).ypos;
 				} else {
 					sourceBend.ypos = edge.source.concrYpos;
 					if (edge.source.type == TSMNode.Type.LAYOUT
@@ -456,8 +454,6 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 						sourceBend.ypos += portLayout.getLocation().getY()
 								+ portLayout.getSize().getHeight() / 2;
 					}
-					if (bendsCount > 1)
-						sourceBend.xpos = edge.bends.get(1).xpos;
 				}
 
 				// set target bend
@@ -472,8 +468,6 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 						targetBend.ypos += portLayout.getLocation().getY()
 								+ portLayout.getSize().getHeight() / 2;
 					}
-					if (bendsCount > 1)
-						sourceBend.xpos = edge.bends.get(bendsCount - 2).xpos;
 				} else {
 					targetBend.xpos = edge.target.concrXpos;
 					if (edge.target.type == TSMNode.Type.LAYOUT
@@ -483,8 +477,6 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 						targetBend.xpos += portLayout.getLocation().getX()
 								+ portLayout.getSize().getWidth() / 2;
 					}
-					if (bendsCount > 1)
-						sourceBend.ypos = edge.bends.get(bendsCount - 2).ypos;
 				}
 			}
 		}
@@ -541,6 +533,7 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 			concrPos[i] = -1;
 		
 		// set concrete positions for all compactable elements
+		float maxPos = 0.0f;
 		int lastPos = 0;
 		for (Object obj : compactables) {
 			int abstrPos = horizontal ? startNodeMap.get(obj).abstrXpos
@@ -549,8 +542,10 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 				int lastWrittenPos = abstrPos - 1;
 				while (concrPos[lastWrittenPos] < 0)
 					lastWrittenPos--;
-				if (concrPos[abstrPos] < concrPos[lastWrittenPos] + minDist)
+				if (concrPos[abstrPos] < concrPos[lastWrittenPos] + minDist) {
 					concrPos[abstrPos] = concrPos[lastWrittenPos] + minDist;
+					maxPos = Math.max(maxPos, concrPos[abstrPos]);
+				}
 				lastPos = abstrPos;
 			}
 			if (obj instanceof TSMNode) {
@@ -568,6 +563,7 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 						currentStep += stepSize;
 						concrPos[i] = Math.max(concrPos[i], currentStep);
 					}
+					maxPos = Math.max(maxPos, concrPos[endPos]);
 				}
 				if (horizontal)
 					node.concrXpos = concrPos[abstrPos];
@@ -582,13 +578,7 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 					edgeBend.ypos = concrPos[abstrPos];
 			}
 		}
-		
-		// determine total size
-		for (int i = abstrSize - 1; i >= 0; i--) {
-			if (concrPos[i] > 0)
-				return concrPos[i] + minDist;
-		}
-		return 0.0f;
+		return maxPos + minDist;
 	}
 
 }

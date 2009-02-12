@@ -4,10 +4,12 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
+import lpsolve.AbortListener;
 import lpsolve.LpSolve;
 import lpsolve.LpSolveException;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPortPlacement;
 import de.cau.cs.kieler.klodd.core.algorithms.AbstractAlgorithm;
+import de.cau.cs.kieler.klodd.orthogonal.Messages;
 import de.cau.cs.kieler.klodd.orthogonal.modules.IOrthogonalizer;
 import de.cau.cs.kieler.klodd.orthogonal.structures.*;
 import de.cau.cs.kieler.klodd.orthogonal.structures.TSMEdge.Bend;
@@ -21,6 +23,30 @@ import de.cau.cs.kieler.klodd.orthogonal.structures.TSMEdge.Bend;
 public class KandinskyLPOrthogonalizer extends AbstractAlgorithm implements
 		IOrthogonalizer {
 
+	/** timeout in milliseconds after which the ILP solver is aborted */
+	private static final long SOLVE_TIMEOUT = 2000;
+	
+	/**
+	 * Abort listener implementation used to control execution of the
+	 * lp_solve library.
+	 */
+	private class LpSolveAborter implements AbortListener {
+		/** indicates whether a timeout has occurred */
+		boolean timeoutActive = false;
+		/** start time for timeout, set at creation time */
+		private long startTime = System.currentTimeMillis();
+		
+		/*
+		 * (non-Javadoc)
+		 * @see lpsolve.AbortListener#abortfunc(lpsolve.LpSolve, java.lang.Object)
+		 */
+		public boolean abortfunc(LpSolve problem, Object userhandle)
+				throws LpSolveException {
+			timeoutActive = System.currentTimeMillis() - startTime > SOLVE_TIMEOUT;
+			return timeoutActive;
+		}
+	}
+	
 	/* (non-Javadoc)
 	 * @see de.cau.cs.kieler.klodd.orthogonal.modules.IOrthogonalizer#orthogonalize(de.cau.cs.kieler.klodd.orthogonal.structures.TSMGraph)
 	 */
@@ -33,6 +59,8 @@ public class KandinskyLPOrthogonalizer extends AbstractAlgorithm implements
 		try {
 			// construct an ILP from the given graph
 			ilp = makeIlp(graph);
+			LpSolveAborter aborter = new LpSolveAborter();
+			ilp.putAbortfunc(aborter, null);
 			
 			// execute the solver on the ILP
 			int result = ilp.solve();
@@ -41,15 +69,51 @@ public class KandinskyLPOrthogonalizer extends AbstractAlgorithm implements
 				// apply the solution to the input graph
 				applySolution(graph, ilp);
 			}
-			else throw new RuntimeException("No solution was found in orthogonalization phase (lp_solve result: "
-					+ result + ").");
+			else {
+				if (result == LpSolve.USERABORT && aborter.timeoutActive)
+					result = LpSolve.TIMEOUT;
+				throw new RuntimeException(getErrorMessage(result));
+			}
 		}
 		catch (LpSolveException exception) {
-			throw new RuntimeException("Orthogonalization phase failed.", exception);
+			throw new RuntimeException(Messages.getString("orthog.0"), exception); //$NON-NLS-1$
 		}
 		finally {
 			if (ilp != null)
 				ilp.deleteLp();
+		}
+	}
+	
+	/**
+	 * Returns a readable error message for an lp_solve error.
+	 * 
+	 * @param returnValue return value of lp_solve
+	 * @return readable message
+	 */
+	private String getErrorMessage(int returnValue) {
+		switch (returnValue) {
+		case LpSolve.NOMEMORY:
+			return Messages.getString("orthog.1"); //$NON-NLS-1$
+		case LpSolve.INFEASIBLE:
+			return Messages.getString("orthog.2"); //$NON-NLS-1$
+		case LpSolve.UNBOUNDED:
+			return Messages.getString("orthog.3"); //$NON-NLS-1$
+		case LpSolve.DEGENERATE:
+			return Messages.getString("orthog.4"); //$NON-NLS-1$
+		case LpSolve.NUMFAILURE:
+			return Messages.getString("orthog.5"); //$NON-NLS-1$
+		case LpSolve.USERABORT:
+			return Messages.getString("orthog.6"); //$NON-NLS-1$
+		case LpSolve.TIMEOUT:
+			return Messages.getString("orthog.7") + SOLVE_TIMEOUT + " ms."; //$NON-NLS-1$ //$NON-NLS-2$
+		case LpSolve.PROCFAIL:
+			return Messages.getString("orthog.9"); //$NON-NLS-1$
+		case LpSolve.PROCBREAK:
+			return Messages.getString("orthog.10");	 //$NON-NLS-1$
+		case LpSolve.NOFEASFOUND:
+			return Messages.getString("orthog.11"); //$NON-NLS-1$
+		default:
+			return Messages.getString("orthog.12") + returnValue + ")."; //$NON-NLS-1$ //$NON-NLS-2$
 		}
 	}
 	

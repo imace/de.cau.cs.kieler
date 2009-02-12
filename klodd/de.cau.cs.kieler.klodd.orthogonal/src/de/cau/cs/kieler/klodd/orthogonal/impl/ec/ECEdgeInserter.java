@@ -1,10 +1,8 @@
 package de.cau.cs.kieler.klodd.orthogonal.impl.ec;
 
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
-import java.util.Map;
 import java.util.Queue;
 
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge;
@@ -86,6 +84,8 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 	
 	/** TSM graph that is currently processed */
 	private TSMGraph graph = null;
+	/** array of markers of already inserted edges */
+	private boolean[] inserted;
 	/** for self-loops: is the target rank greater than the source rank? */
 	private boolean forwardSelfLoop;
 	
@@ -105,6 +105,7 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 	 */
 	public void setGraph(TSMGraph graph) {
 		this.graph = graph;
+		inserted = new boolean[graph.edges.size()];
 	}
 	
 	/**
@@ -147,7 +148,7 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 	private List<EdgePlacing> getEdgePlacings(TSMEdge insEdge, TSMNode node,
 			EmbeddingConstraint constraint, boolean outgoing) {
 		int placingsCount = node.incidence.size();
-		if (placingsCount <= 1) {
+		if (placingsCount == 0) {
 			EdgePlacing placing = new EdgePlacing(0);
 			List<EdgePlacing> placings = new LinkedList<EdgePlacing>();
 			placings.add(placing);
@@ -155,19 +156,18 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 		}
 		else {
 			// assign ranks to already placed edges
-			Map<KLayoutEdge, TSMEdge> edgeMap = new HashMap<KLayoutEdge, TSMEdge>();
 			int nextRank = 0;
-			for (TSMNode.IncEntry tsmEdgeEntry : node.incidence) {
-				tsmEdgeEntry.edge.rank = nextRank++;
-				edgeMap.put(tsmEdgeEntry.edge.layoutEdge, tsmEdgeEntry.edge);
+			for (TSMNode.IncEntry edgeEntry : node.incidence) {
+				edgeEntry.edge.rank = nextRank++;
+				inserted[edgeEntry.edge.id] = true;
 			}
 			// the edge that is to be inserted gets a negative rank
 			insEdge.rank = -1;
-			edgeMap.put(insEdge.layoutEdge, insEdge);
+			inserted[insEdge.id] = true;
 			
 			// traverse the constraint tree recursively
-			ConstraintResult constraintResult = analyzeConstraint(edgeMap,
-					constraint, outgoing);
+			ConstraintResult constraintResult = analyzeConstraint(constraint,
+					outgoing);
 			forwardSelfLoop = outgoing && (constraintResult.endpoint > 0)
 					|| !outgoing && constraintResult.endpoint < 0;
 			return constraintResult.placings;
@@ -179,21 +179,19 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 	 * recursively and collecting information. This is used to get
 	 * the set of admissible placements for an edge.
 	 * 
-	 * @param edgeMap map of layout edges to corresponding TSM edges
 	 * @param constraint embedding constraint to analyze
 	 * @param outgoing indicates whether the edge is outgoing for the node
 	 * @return constraint information with a list of admissible placements
 	 */
-	private ConstraintResult analyzeConstraint(Map<KLayoutEdge, TSMEdge> edgeMap,
-			EmbeddingConstraint constraint, boolean outgoing) {
+	private ConstraintResult analyzeConstraint(EmbeddingConstraint constraint,
+			boolean outgoing) {
 		ConstraintResult result = new ConstraintResult();
 		switch (constraint.type) {
 		case OUT_EDGE:
 		case IN_EDGE:
-			KLayoutEdge layoutEdge = (KLayoutEdge)constraint.object;
-			TSMEdge tsmEdge = edgeMap.get(layoutEdge);
-			if (tsmEdge != null) {
-				if (tsmEdge.rank < 0) {
+			TSMEdge edge = (TSMEdge)constraint.object;
+			if (inserted[edge.id]) {
+				if (edge.rank < 0) {
 					if (outgoing == (constraint.type
 							== EmbeddingConstraint.Type.OUT_EDGE)) {
 						// the insertion edge was found
@@ -206,14 +204,14 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 				else {
 					// an already inserted edge was found
 					result.edgeCount = 1;
-					result.firstEdgeRank = tsmEdge.rank;
+					result.firstEdgeRank = edge.rank;
 				}
 			}
 			break;
 		case ORIENTED:
 			boolean firstEdgeFound = false;
 			for (EmbeddingConstraint childConstraint : constraint.children) {
-				ConstraintResult childResult = analyzeConstraint(edgeMap,
+				ConstraintResult childResult = analyzeConstraint(
 						childConstraint, outgoing);
 				
 				if (childResult.placings != null) {
@@ -242,7 +240,7 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 		case MIRROR:
 			int firstRank = -1, lastRank = -1, leftCount = 0, rightCount = 0;
 			for (EmbeddingConstraint childConstraint : constraint.children) {
-				ConstraintResult childResult = analyzeConstraint(edgeMap,
+				ConstraintResult childResult = analyzeConstraint(
 						childConstraint, outgoing);
 				if (result.placings == null)
 					leftCount = result.edgeCount;
@@ -301,7 +299,7 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 			LinkedList<ConstraintResult> sortedResults = new LinkedList<ConstraintResult>();
 			boolean insBlockNonEmpty = false;
 			for (EmbeddingConstraint childConstraint : constraint.children) {
-				ConstraintResult childResult = analyzeConstraint(edgeMap,
+				ConstraintResult childResult = analyzeConstraint(
 						childConstraint, outgoing);
 				result.edgeCount += childResult.edgeCount;
 				
@@ -368,16 +366,22 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 		boolean targetEmpty = insEdge.target.incidence.isEmpty();
 		if (!sourceEmpty) {
 			for (EdgePlacing placing : sourcePlacings) {
-				if (placing.face == null)
-					placing.face = insEdge.source.incidence.get(placing.rank)
+				if (placing.face == null) {
+					int index = (placing.rank >= insEdge.source.incidence.size()
+							? 0 : placing.rank);
+					placing.face = insEdge.source.incidence.get(index)
 							.leftFace();
+				}
 			}
 		}
 		if (!targetEmpty) {
 			for (EdgePlacing placing : targetPlacings) {
-				if (placing.face == null)
-					placing.face = insEdge.target.incidence.get(placing.rank)
+				if (placing.face == null) {
+					int index = (placing.rank >= insEdge.target.incidence.size()
+							? 0 : placing.rank);
+					placing.face = insEdge.target.incidence.get(index)
 							.leftFace();
+				}
 				targetFaces.add(placing.face);
 			}
 		}
@@ -437,7 +441,7 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 	 * @return shortest path from the source face to one of the target faces
 	 */
 	private List<DualPathEntry> bfsPath(TSMFace sourceFace, List<TSMFace> targetFaces) {
-		DualPathEntry[] parentPath = new DualPathEntry[graph.faces.size()];
+		DualPathEntry[] parentPath = new DualPathEntry[graph.faces.size() + 1];
 		Queue<DualPathEntry> bfsQueue = new LinkedList<DualPathEntry>();
 		TSMFace currentFace = sourceFace;
 		do {
@@ -712,7 +716,7 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 	private ListIterator<TSMFace.BorderEntry> getIteratorFor(
 			List<TSMFace.BorderEntry> border, TSMNode node, int rank) {
 		int edge1id, edge2id;
-		if (rank == 0) {
+		if (rank == 0 || rank >= node.incidence.size()) {
 			edge2id = node.incidence.get(node.incidence.size()-1).edge.id;
 			edge1id = node.incidence.get(0).edge.id;
 		}
