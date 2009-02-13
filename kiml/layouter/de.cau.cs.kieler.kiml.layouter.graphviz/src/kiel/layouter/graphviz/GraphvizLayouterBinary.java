@@ -272,7 +272,9 @@ public class GraphvizLayouterBinary implements GraphvizLayouter{
 		}
 		
 		// read graphviz output and apply layout information to KIELER datastructure
-		this.retrieveLayoutInformations(debugOut);
+		success = this.retrieveLayoutInformations(debugOut);
+		if( !success )
+			return; // something bad happened while trying to read dot output
 		
 		this.setTopNodeAttributes(node);
 		
@@ -686,7 +688,7 @@ public class GraphvizLayouterBinary implements GraphvizLayouter{
 	  /**
 	   * @see GraphvizLayouterLibrary#retrieveLayoutInformations(Collection, View)
 	   */
-	  protected final void retrieveLayoutInformations(PrintWriter debugWriter) {
+	  protected final boolean retrieveLayoutInformations(PrintWriter debugWriter) {
 	    boolean endOfGraph;
 
 	    // read error stream
@@ -702,6 +704,10 @@ public class GraphvizLayouterBinary implements GraphvizLayouter{
 
 	    // read output stream
 	    try {
+	    	// FIXME: should check if dot output is ready somewhere. This would
+	    	// require to wait until the dot process has finished. This was not implemented yet, because process.waitFor() does not terminate...
+	    	//if(!dotOutput.ready())
+	    	//	throw new IOException("Graphviz output stream empty. Most likely incompatible dot binary set.");
 	      endOfGraph = false;
 	      while (!endOfGraph) {
 	        String line;
@@ -746,7 +752,9 @@ public class GraphvizLayouterBinary implements GraphvizLayouter{
 	    	Status status = new Status(IStatus.ERROR, Activator.PLUGIN_ID,
 					"Error while reading dot output stream." , e);
 			StatusManager.getManager().handle(status, StatusManager.SHOW);
+			return false; // error
 	    }
+	    return true; // success
 	  }
 
 	private void retrieveBoundingBox(String line) {
