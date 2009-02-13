@@ -112,6 +112,15 @@ public class GraphvizLayouterBinary implements GraphvizLayouter{
 	   */
 	  private HashMap<String, Object> idToObject;
 	  
+	  /**
+	   * stores an instance of the preferences dialog.
+	   * This is used to present the preferences at the right
+	   * tab to the user whenever an error occurred that is likely
+	   * caused by wrong preferences 
+	   * TODO: put all UI stuff into seperate plugin
+	   */
+	  PreferenceDialog preferenceDialog;
+	  
 	/* Store the GraphViz internal C-Pointers of our nodes and edges */
 	private HashMap<KLayoutNode, Integer> mapNode2Pointer = new HashMap<KLayoutNode, Integer>();
 	private HashMap<KLayoutEdge, Integer> mapEdge2Pointer = new HashMap<KLayoutEdge, Integer>();
@@ -176,7 +185,8 @@ public class GraphvizLayouterBinary implements GraphvizLayouter{
 		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
 		prefPadX = store.getInt(PreferenceConstants.PREF_GRAPHVIZ_PADDING_X);
 		prefPadY = store.getInt(PreferenceConstants.PREF_GRAPHVIZ_PADDING_Y);
-		dotExecutable = store.getString(PreferenceConstants.PREF_GRAPHVIZ_EXECUTABLE);		
+		dotExecutable = store.getString(PreferenceConstants.PREF_GRAPHVIZ_EXECUTABLE);
+		System.out.println("Dot executable: "+dotExecutable);
 	}
 
 	/**
@@ -192,6 +202,7 @@ public class GraphvizLayouterBinary implements GraphvizLayouter{
 	public void visit(KLayoutNode node) {
 		updatePreferences();
 
+		try{
 		/* return if there is nothing in this node */
 		if (node.getChildNodes().size() == 0) {
 			return;
@@ -201,9 +212,7 @@ public class GraphvizLayouterBinary implements GraphvizLayouter{
 		this.init();
 		
 		// start the dot process
-		boolean success = this.startProcess();
-		if( !success )
-			return; // we could not start Graphviz!
+		this.startProcess();
 		
 		this.newGraph("KIELER");
 		Map<String,String> graphAttributes = new HashMap<String,String>();
@@ -270,19 +279,29 @@ public class GraphvizLayouterBinary implements GraphvizLayouter{
 				StatusManager.getManager().handle(myStatus, StatusManager.SHOW);
 			}
 		}
-		
+		// Wait for the graphviz process to terminate. This requires that the 
+		// input stream has been closed before, otherwise the process will run
+		// forever. 
+		// TODO: here should be some timeout...
+		try {graphvizProcess.waitFor();} catch (InterruptedException e1) {/*nothing*/}
 		// read graphviz output and apply layout information to KIELER datastructure
-		success = this.retrieveLayoutInformations(debugOut);
-		if( !success )
-			return; // something bad happened while trying to read dot output
-		
+		this.retrieveLayoutInformations(debugOut);
 		this.setTopNodeAttributes(node);
-		
-		this.killProcess();
+		this.killProcess(); // well, actually we know it has already finished, but destroy process anyway to be sure
+
 		if(fw != null)
-			try {fw.close();} catch (IOException e) {}
+			try {fw.close();} catch (IOException e) {/*nothing*/}
 		if(debugOut != null)
 			debugOut.close();
+		}catch(GraphvizException ge){
+			String message = "Error with the external GraphViz layouter library.";
+			Status myStatus = new Status(IStatus.ERROR, Activator.PLUGIN_ID, message, ge);
+			StatusManager.getManager().handle(myStatus, StatusManager.BLOCK);
+			if(preferenceDialog == null || preferenceDialog.getTray() == null){
+				preferenceDialog = PreferencesUtil.createPreferenceDialogOn(null, GraphvizPreferencePage.ID, null, null);
+				preferenceDialog.open();
+			}
+		}
 	}
 
 	/**
@@ -540,6 +559,17 @@ public class GraphvizLayouterBinary implements GraphvizLayouter{
 	  protected final void flushGraph() {
 	    dotInput.println("}");
 	    dotInput.flush();
+	    /* the dot process will immediately answer to graph strings
+	     * in the input stream, but the process will stay open and
+	     * responsive to new inputs, until the input stream is closed.
+	     * Hence we close it and will start the process againfor the next 
+	     * operation.
+	     * TODO: instead of closing the process and starting a new one, 
+	     * reusing the same process could be more efficient. This would
+	     * require additional exception handling in order to make it
+	     * stable and fault tolerant.
+	     */
+	    dotInput.close();
 	  }
 	  
 	  /**
@@ -688,7 +718,7 @@ public class GraphvizLayouterBinary implements GraphvizLayouter{
 	  /**
 	   * @see GraphvizLayouterLibrary#retrieveLayoutInformations(Collection, View)
 	   */
-	  protected final boolean retrieveLayoutInformations(PrintWriter debugWriter) {
+	  protected final void retrieveLayoutInformations(PrintWriter debugWriter) throws GraphvizException{
 	    boolean endOfGraph;
 
 	    // read error stream
@@ -698,16 +728,15 @@ public class GraphvizLayouterBinary implements GraphvizLayouter{
 	    	StatusManager.getManager().handle(error, StatusManager.SHOW);
 	      }
 	    } catch (IOException e) {
-	    	Status error = new Status(IStatus.ERROR, Activator.PLUGIN_ID, "Graphviz: error while reading dot error stream. (" + e + ")");
-	    	StatusManager.getManager().handle(error, StatusManager.SHOW);
+	    	throw new GraphvizException(e,"Graphviz: error while reading dot error stream.");
 	    }
 
 	    // read output stream
 	    try {
 	    	// FIXME: should check if dot output is ready somewhere. This would
 	    	// require to wait until the dot process has finished. This was not implemented yet, because process.waitFor() does not terminate...
-	    	//if(!dotOutput.ready())
-	    	//	throw new IOException("Graphviz output stream empty. Most likely incompatible dot binary set.");
+	    	if(!dotOutput.ready())
+	    		throw new GraphvizException("Graphviz output stream empty. Most likely incompatible dot binary set.");
 	      endOfGraph = false;
 	      while (!endOfGraph) {
 	        String line;
@@ -749,12 +778,8 @@ public class GraphvizLayouterBinary implements GraphvizLayouter{
 	        }
 	      }
 	    } catch (IOException e) {
-	    	Status status = new Status(IStatus.ERROR, Activator.PLUGIN_ID,
-					"Error while reading dot output stream." , e);
-			StatusManager.getManager().handle(status, StatusManager.SHOW);
-			return false; // error
+			throw new GraphvizException(e,"Error while reading dot output stream.");
 	    }
-	    return true; // success
 	  }
 
 	private void retrieveBoundingBox(String line) {
@@ -922,17 +947,22 @@ public class GraphvizLayouterBinary implements GraphvizLayouter{
 	}
 	
 	/**
-	   * Starts the dot process. (Taken from KIEL classic)
-	   *
+	   * Starts the dot process. 
+	   * Sets an input and output and error stream to and from the dot
+	   * process. The process itself will only terminate if it gets killed
+	   * or the input stream gets closed. While it is active it will respond
+	   * to new graph definitions in its input stream in the dot language
+	   * and answer with the layouted graph definition in the output stream.
+	   * Hence the same process could be used multiple times for multiple input
+	   * graphs. So far this is not done. 
+	   *  
+	   * @author taken from KIEL classic
 	   * @return returns true, if the dot process could be started
 	   */
-	  private boolean startProcess() {
-	    boolean success = true;
+	  private void startProcess() throws GraphvizException{
 	    
-	    if (! isGraphvizExecutableValid() ){
-	    	success = false;
-	    	return success;
-	    }
+	    isGraphvizExecutableValid(); // might also throw GraphvizException
+	    
 	    String[] exp = {dotExecutable, dotArgument};
 	    try {
 	      graphvizProcess = Runtime.getRuntime().exec(exp);
@@ -942,16 +972,13 @@ public class GraphvizLayouterBinary implements GraphvizLayouter{
 	        graphvizProcess.getErrorStream()));
 	      dotInput = new PrintWriter(graphvizProcess.getOutputStream());
 	    } catch (IOException e) {
-	    	Status myStatus = new Status(IStatus.ERROR, Activator.PLUGIN_ID, "Unable to start Graphviz process.", e);
-			StatusManager.getManager().handle(myStatus, StatusManager.SHOW);
-	      success = false;
+	    	throw new GraphvizException(e,"Unable to start Graphviz process.");
 	    }
-	    return success;
 	  }
 	  
 	  /**
 	   * Closes the dot process. I.e. it should wait for it to terminate
-	   * or kill it if it des not terminate.
+	   * or kill it if it does not terminate.
 	   * @return true iff process has ended
 	   */
 	  private boolean killProcess(){
@@ -967,26 +994,27 @@ public class GraphvizLayouterBinary implements GraphvizLayouter{
 	  /**
 	   * Checks whether the GraphvizBinary path is valid or not. Will
 	   * try to access the file and if it fails will show an error message.
-	   * @return true iff dot executable can be read and executed, false otherwise
+	   * @return true iff dot executable can be read and executed
+	   * @throws GraphvizException iff dot can not be executed
 	   * @author haf
 	   */
-	  private boolean isGraphvizExecutableValid(){
+	  private boolean isGraphvizExecutableValid() throws GraphvizException{
 		  try{
 			  if (dotExecutable == null || dotExecutable.equals(""))
-				  throw new IOException("Path not set, path empty.");
+				  throw new GraphvizException("Path not set, path empty.");
 			  File exec = new File(dotExecutable);
 			  if(exec.exists())
 				     return true;
 			  else
-				  throw new IOException("File not found.");
+				  throw new GraphvizException("File not found.");
 		  }catch(IOException e){
 			  // FIXME: put UI stuff in external package such that we can use the algorithm also standalone in headless environment
 			  String message = "Error executing Graphviz dot binary: "+dotExecutable+" Please set the right path in the preferences!";
-			  Status myStatus = new Status(IStatus.ERROR, Activator.PLUGIN_ID, message, e);
-			  StatusManager.getManager().handle(myStatus, StatusManager.BLOCK);
-			  PreferenceDialog dialog = PreferencesUtil.createPreferenceDialogOn(null, GraphvizPreferencePage.ID, null, null);
-			  dialog.open();
+			  //Status myStatus = new Status(IStatus.ERROR, Activator.PLUGIN_ID, message, e);
+			  //StatusManager.getManager().handle(myStatus, StatusManager.BLOCK);
+			  //PreferenceDialog dialog = PreferencesUtil.createPreferenceDialogOn(null, GraphvizPreferencePage.ID, null, null);
+			  //dialog.open();
+			  throw new GraphvizException(e,message);
 		  }
-		  return false;
 	  }
 }

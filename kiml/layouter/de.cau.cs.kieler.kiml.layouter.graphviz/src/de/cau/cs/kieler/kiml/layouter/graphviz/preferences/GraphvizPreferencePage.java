@@ -111,6 +111,7 @@ public class GraphvizPreferencePage extends
 		FileFieldEditor dotExecutable = new FileFieldEditor(
 				PreferenceConstants.PREF_GRAPHVIZ_EXECUTABLE,
 				"Dot Executable:", executable);
+		dotExecutable.setValidateStrategy(FileFieldEditor.VALIDATE_ON_KEY_STROKE);
 		
 		executable.setLayoutData(new GridData(GridData.FILL, GridData.FILL, true,
 				false, 2, 1));
