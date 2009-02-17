@@ -1,7 +1,7 @@
 package de.cau.cs.kieler.klodd.hierarchical.modules;
 
+import de.cau.cs.kieler.core.alg.IAlgorithm;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
-import de.cau.cs.kieler.klodd.core.algorithms.IAlgorithm;
 import de.cau.cs.kieler.klodd.hierarchical.structures.LayeredGraph;
 
 /**

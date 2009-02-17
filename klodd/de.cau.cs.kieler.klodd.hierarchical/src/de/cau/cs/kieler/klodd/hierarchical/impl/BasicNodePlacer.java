@@ -5,12 +5,12 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import de.cau.cs.kieler.core.alg.AbstractAlgorithm;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KDimension;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPoint;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutOption;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPortPlacement;
-import de.cau.cs.kieler.klodd.core.algorithms.AbstractAlgorithm;
 import de.cau.cs.kieler.klodd.hierarchical.modules.INodePlacer;
 import de.cau.cs.kieler.klodd.hierarchical.structures.Layer;
 import de.cau.cs.kieler.klodd.hierarchical.structures.LayerElement;

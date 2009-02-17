@@ -3,7 +3,7 @@ package de.cau.cs.kieler.klodd.orthogonal.impl.ec;
 import java.util.HashMap;
 import java.util.Map;
 
-import de.cau.cs.kieler.klodd.core.algorithms.AbstractAlgorithm;
+import de.cau.cs.kieler.core.alg.AbstractAlgorithm;
 import de.cau.cs.kieler.klodd.orthogonal.structures.*;
 
 

@@ -3,6 +3,7 @@ package de.cau.cs.kieler.klodd.core.algorithms;
 import java.util.LinkedList;
 import java.util.List;
 
+import de.cau.cs.kieler.core.alg.AbstractAlgorithm;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.*;
 
 

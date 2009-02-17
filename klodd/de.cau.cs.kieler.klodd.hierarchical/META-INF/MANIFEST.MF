@@ -4,5 +4,6 @@ Bundle-Name: Hierarchical Layout Plug-In
 Bundle-SymbolicName: de.cau.cs.kieler.klodd.hierarchical;singleton:=true
 Bundle-Version: 1.0.0
 Require-Bundle: org.eclipse.emf.ecore;bundle-version="2.4.1",
+ de.cau.cs.kieler.core;bundle-version="1.0.0",
  de.cau.cs.kieler.klodd.core;bundle-version="1.0.0",
  de.cau.cs.kieler.kiml.layout;bundle-version="1.0.0"

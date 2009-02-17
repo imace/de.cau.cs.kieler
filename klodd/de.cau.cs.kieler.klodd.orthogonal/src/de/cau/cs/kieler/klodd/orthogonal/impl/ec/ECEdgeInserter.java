@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Queue;
 
+import de.cau.cs.kieler.core.alg.AbstractAlgorithm;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge;
-import de.cau.cs.kieler.klodd.core.algorithms.AbstractAlgorithm;
 import de.cau.cs.kieler.klodd.orthogonal.structures.*;
 
 /**

@@ -2,7 +2,7 @@ package de.cau.cs.kieler.klodd.hierarchical.modules;
 
 import java.util.Map;
 
-import de.cau.cs.kieler.klodd.core.algorithms.IAlgorithm;
+import de.cau.cs.kieler.core.alg.IAlgorithm;
 import de.cau.cs.kieler.klodd.hierarchical.structures.Layer;
 import de.cau.cs.kieler.klodd.hierarchical.structures.RoutingSlot;
 

@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Stack;
 
-import de.cau.cs.kieler.klodd.core.algorithms.AbstractAlgorithm;
+import de.cau.cs.kieler.core.alg.AbstractAlgorithm;
 import de.cau.cs.kieler.klodd.core.util.ConcatenableList;
 import de.cau.cs.kieler.klodd.orthogonal.modules.IPlanarityTester;
 import de.cau.cs.kieler.klodd.orthogonal.structures.*;

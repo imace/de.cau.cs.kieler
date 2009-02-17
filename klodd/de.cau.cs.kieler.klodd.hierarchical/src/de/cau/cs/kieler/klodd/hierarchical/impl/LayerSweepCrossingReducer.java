@@ -4,9 +4,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 
+import de.cau.cs.kieler.core.alg.AbstractAlgorithm;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPortType;
-import de.cau.cs.kieler.klodd.core.algorithms.AbstractAlgorithm;
 import de.cau.cs.kieler.klodd.core.util.LayoutGraphs;
 import de.cau.cs.kieler.klodd.hierarchical.modules.ICrossingReducer;
 import de.cau.cs.kieler.klodd.hierarchical.modules.ISingleLayerCrossingReducer;

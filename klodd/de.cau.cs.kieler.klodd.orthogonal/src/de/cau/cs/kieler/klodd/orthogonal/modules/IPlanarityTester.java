@@ -1,6 +1,6 @@
 package de.cau.cs.kieler.klodd.orthogonal.modules;
 
-import de.cau.cs.kieler.klodd.core.algorithms.IAlgorithm;
+import de.cau.cs.kieler.core.alg.IAlgorithm;
 import de.cau.cs.kieler.klodd.orthogonal.structures.GraphSection;
 
 /**

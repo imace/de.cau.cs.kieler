@@ -9,9 +9,9 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
 
+import de.cau.cs.kieler.core.alg.AbstractAlgorithm;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutOption;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPortPlacement;
-import de.cau.cs.kieler.klodd.core.algorithms.AbstractAlgorithm;
 import de.cau.cs.kieler.klodd.hierarchical.modules.ILayerwiseEdgePlacer;
 import de.cau.cs.kieler.klodd.hierarchical.structures.*;
 

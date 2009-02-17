@@ -3,7 +3,7 @@ package de.cau.cs.kieler.klodd.orthogonal.impl;
 import java.util.LinkedList;
 import java.util.List;
 
-import de.cau.cs.kieler.klodd.core.algorithms.AbstractAlgorithm;
+import de.cau.cs.kieler.core.alg.AbstractAlgorithm;
 import de.cau.cs.kieler.klodd.orthogonal.modules.ICompacter;
 import de.cau.cs.kieler.klodd.orthogonal.structures.*;
 

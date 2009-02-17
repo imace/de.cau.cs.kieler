@@ -1,5 +1,6 @@
 package de.cau.cs.kieler.klodd.core.algorithms;
 
+import de.cau.cs.kieler.core.alg.IAlgorithm;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
 
 /**

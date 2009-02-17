@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 
-import de.cau.cs.kieler.klodd.core.algorithms.AbstractAlgorithm;
+import de.cau.cs.kieler.core.alg.AbstractAlgorithm;
 import de.cau.cs.kieler.klodd.orthogonal.modules.ICompacter;
 import de.cau.cs.kieler.klodd.orthogonal.structures.*;
 

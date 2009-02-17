@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
 
+import de.cau.cs.kieler.core.alg.AbstractAlgorithm;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort;
-import de.cau.cs.kieler.klodd.core.algorithms.AbstractAlgorithm;
 import de.cau.cs.kieler.klodd.hierarchical.modules.ISingleLayerCrossingReducer;
 import de.cau.cs.kieler.klodd.hierarchical.structures.*;
 

@@ -2,9 +2,9 @@ package de.cau.cs.kieler.klodd.hierarchical.impl;
 
 import java.util.ListIterator;
 
+import de.cau.cs.kieler.core.alg.AbstractAlgorithm;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPoint;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutOption;
-import de.cau.cs.kieler.klodd.core.algorithms.AbstractAlgorithm;
 import de.cau.cs.kieler.klodd.hierarchical.modules.INodePlacer;
 import de.cau.cs.kieler.klodd.hierarchical.structures.Layer;
 import de.cau.cs.kieler.klodd.hierarchical.structures.LayerConnection;

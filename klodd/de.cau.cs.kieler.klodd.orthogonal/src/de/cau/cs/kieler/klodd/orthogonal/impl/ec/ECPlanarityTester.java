@@ -1,6 +1,6 @@
 package de.cau.cs.kieler.klodd.orthogonal.impl.ec;
 
-import de.cau.cs.kieler.klodd.core.algorithms.AbstractAlgorithm;
+import de.cau.cs.kieler.core.alg.AbstractAlgorithm;
 import de.cau.cs.kieler.klodd.orthogonal.modules.IPlanarityTester;
 import de.cau.cs.kieler.klodd.orthogonal.structures.GraphSection;
 

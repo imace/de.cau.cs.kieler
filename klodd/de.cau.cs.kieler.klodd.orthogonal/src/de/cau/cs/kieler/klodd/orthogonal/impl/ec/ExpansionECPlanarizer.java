@@ -2,8 +2,8 @@ package de.cau.cs.kieler.klodd.orthogonal.impl.ec;
 
 import java.util.Map;
 
+import de.cau.cs.kieler.core.alg.AbstractAlgorithm;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
-import de.cau.cs.kieler.klodd.core.algorithms.AbstractAlgorithm;
 import de.cau.cs.kieler.klodd.orthogonal.modules.IPlanarizer;
 import de.cau.cs.kieler.klodd.orthogonal.structures.TSMGraph;
 
