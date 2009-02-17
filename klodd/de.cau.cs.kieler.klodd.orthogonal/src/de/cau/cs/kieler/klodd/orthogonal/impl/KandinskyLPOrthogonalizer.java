@@ -24,7 +24,7 @@ public class KandinskyLPOrthogonalizer extends AbstractAlgorithm implements
 		IOrthogonalizer {
 
 	/** timeout in milliseconds after which the ILP solver is aborted */
-	private static final long SOLVE_TIMEOUT = 2000;
+	private static final long SOLVE_TIMEOUT = 3000;
 	
 	/**
 	 * Abort listener implementation used to control execution of the
@@ -105,7 +105,8 @@ public class KandinskyLPOrthogonalizer extends AbstractAlgorithm implements
 		case LpSolve.USERABORT:
 			return Messages.getString("orthog.6"); //$NON-NLS-1$
 		case LpSolve.TIMEOUT:
-			return Messages.getString("orthog.7") + SOLVE_TIMEOUT + " ms."; //$NON-NLS-1$ //$NON-NLS-2$
+			return Messages.getString("orthog.7")
+					+ (SOLVE_TIMEOUT / 1000.0) + " s."; //$NON-NLS-1$ //$NON-NLS-2$
 		case LpSolve.PROCFAIL:
 			return Messages.getString("orthog.9"); //$NON-NLS-1$
 		case LpSolve.PROCBREAK:

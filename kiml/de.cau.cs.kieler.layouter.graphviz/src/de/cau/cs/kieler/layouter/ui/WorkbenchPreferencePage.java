@@ -5,12 +5,11 @@ import kiel.layouter.graphviz.LayouterPlugin;
 import org.eclipse.jface.preference.BooleanFieldEditor;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
 import org.eclipse.jface.preference.IPreferenceStore;
-import org.eclipse.jface.preference.StringFieldEditor;
 import org.eclipse.swt.SWT;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
-import de.cau.cs.kieler.core.preferences.DoubleFieldEditor;
+import de.cau.cs.kieler.core.ui.util.DoubleFieldEditor;
 
 
 /**
@@ -42,7 +41,7 @@ public class WorkbenchPreferencePage extends FieldEditorPreferencePage implement
 		this.setMessage("Layouter");
 		this.addField(new BooleanFieldEditor(PREF_LAYOUTER_DEBUG, "Debug Layout",SWT.DEFAULT, getFieldEditorParent()));
 		this.addField(new BooleanFieldEditor(PREF_LAYOUTER_CONNECTION, "Layout Connections",SWT.DEFAULT, getFieldEditorParent()));
-		DoubleFieldEditor dfe = new DoubleFieldEditor(PREF_CONNECTION_STEPSIZE, "Spline Stepsize", StringFieldEditor.UNLIMITED, StringFieldEditor.VALIDATE_ON_KEY_STROKE,getFieldEditorParent());
+		DoubleFieldEditor dfe = new DoubleFieldEditor(PREF_CONNECTION_STEPSIZE, "Spline Stepsize", getFieldEditorParent());
 		dfe.setValidRange(0, 1);
 		this.addField(dfe);
 		this.addField(new BooleanFieldEditor(PREF_CONNECTION_DEBUG, "Debug Connection",SWT.DEFAULT, getFieldEditorParent()));

@@ -6,7 +6,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
-import de.cau.cs.kieler.core.preferences.FloatFieldEditor;
+import de.cau.cs.kieler.core.ui.util.FloatFieldEditor;
 import de.cau.cs.kieler.kiml.ui.AbstractKimlLayoutProviderPreferencePage;
 import de.cau.cs.kieler.klodd.core.KloddCorePlugin;
 import de.cau.cs.kieler.klodd.core.Messages;
