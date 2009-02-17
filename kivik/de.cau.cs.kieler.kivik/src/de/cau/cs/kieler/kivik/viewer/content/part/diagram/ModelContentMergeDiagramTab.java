@@ -72,12 +72,9 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.ui.IEditorDescriptor;
 import org.eclipse.ui.IEditorRegistry;
 import org.eclipse.ui.PlatformUI;
 
-import de.cau.cs.kieler.kiml.layout.KimlLayoutPlugin;
-import de.cau.cs.kieler.kiml.layout.util.KimlLayoutPreferenceConstants;
 import de.cau.cs.kieler.kiml.ui.diagramlayouter.KimlDiagramLayouter;
 import de.cau.cs.kieler.kivik.Constants;
 import de.cau.cs.kieler.kivik.KivikPlugin;
@@ -87,7 +84,6 @@ import de.cau.cs.kieler.kivik.viewer.content.part.IModelContentMergeViewerTab;
 import de.cau.cs.kieler.kivik.viewer.content.part.ModelContentMergeTabFolder;
 import de.cau.cs.kieler.kivik.viewer.content.part.ModelContentMergeTabObject;
 import de.cau.cs.kieler.kivik.viewer.structure.ModelStructureMergeViewer;
-
 
 /**
  * Displays differences in two diagrams graphically.
@@ -221,7 +217,7 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 	public void setReflectiveInput(Object object) {
 		boolean collapsedElements = false;
 		Diagram diagram = null;
-		
+
 		// We *need* to invalidate the cache here since setInput() would try to
 		// use it otherwise
 		dataToDiff.clear();
@@ -260,31 +256,15 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 			primaryLayer.validate();
 			IEditorRegistry reg = PlatformUI.getWorkbench().getEditorRegistry();
 			String filename = diagram.eResource().getURI().toString();
-			IEditorDescriptor editorDescriptor = reg.getDefaultEditor(filename);
-			
+			String editorID = reg.getDefaultEditor(filename).getId();
+
 			/*
 			 * force the diagram layouter to perform several layout steps, as
-			 * otherwise the connections and labels are not drawn properly. see:
-			 * KimlGenericDiagramLayouter.layout() for this issue.
+			 * otherwise the connections and labels are not drawn properly.
+			 * Normally, 3 should be enough, don't know why we need 4.
 			 */
-			boolean oldPrefSetting = KimlLayoutPlugin
-					.getDefault()
-					.getPreferenceStore()
-					.getBoolean(
-							KimlLayoutPreferenceConstants.PREF_DIAGRAMLAYOUTERS_MULTIPLE_LAYOUT_RUNS);
-			KimlLayoutPlugin
-					.getDefault()
-					.getPreferenceStore()
-					.setValue(
-							KimlLayoutPreferenceConstants.PREF_DIAGRAMLAYOUTERS_MULTIPLE_LAYOUT_RUNS,
-							true);
-			KimlDiagramLayouter.layout(getEditPartRegistry().get(diagram));
-			KimlLayoutPlugin
-					.getDefault()
-					.getPreferenceStore()
-					.setValue(
-							KimlLayoutPreferenceConstants.PREF_DIAGRAMLAYOUTERS_MULTIPLE_LAYOUT_RUNS,
-							oldPrefSetting);
+			KimlDiagramLayouter.layout(getEditPartRegistry().get(diagram),
+					editorID, 4);
 		}
 
 		/* check if user wants to be able to click on changed Elements */
@@ -311,7 +291,7 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 	private boolean collapseUnchanged(Diagram diagram) {
 		TreeIterator<EObject> allContents = diagram.eAllContents();
 		boolean collapsedElements = false;
-		
+
 		while (allContents.hasNext()) {
 			EObject next = allContents.next();
 			if (next instanceof View) {

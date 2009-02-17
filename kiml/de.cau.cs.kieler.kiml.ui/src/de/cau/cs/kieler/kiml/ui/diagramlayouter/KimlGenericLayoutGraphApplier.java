@@ -76,19 +76,24 @@ public class KimlGenericLayoutGraphApplier extends
 	protected void doApplyLayoutGraph() {
 
 		/* gets zoom level */
-		ZoomManager zm = (ZoomManager) PlatformUI.getWorkbench()
-				.getActiveWorkbenchWindow().getActivePage().getActiveEditor()
-				.getAdapter(ZoomManager.class);
-		if (zm != null)
-			zoomLevel = zm.getZoom();
-
-		/* gets connection layer */
 		ScalableFreeformRootEditPart sfrep = (ScalableFreeformRootEditPart) layoutRootPart
 				.getRoot();
+		zoomLevel = sfrep.getZoomManager().getZoom();
+
+		/* gets connection layer */
 		connectionLayer = (ConnectionLayer) sfrep
 				.getLayer(DiagramRootEditPart.CONNECTION_LAYER);
 		connectionLayer.setAntialias(SWT.ON);
 
+		/* gets the diagram command stack */
+		DiagramCommandStack commandStack = null;
+		Object adapter = sfrep.getAdapter(CommandStack.class);
+		if (adapter instanceof DiagramCommandStack) {
+			commandStack = (DiagramCommandStack) adapter;
+		} else {
+			commandStack = new DiagramCommandStack(null);
+		}
+		
 		/* applies node layouts */
 		CompoundCommand nodesCompoundCommand = doApplyNodeLayout();
 
@@ -107,34 +112,26 @@ public class KimlGenericLayoutGraphApplier extends
 		/* applies edge label layouts */
 		CompoundCommand edgeLabelsCompoundCommand = doApplyEdgeLabelLayout();
 
-		/* fetches the diagram command stack */
-		Object adapter = PlatformUI.getWorkbench().getActiveWorkbenchWindow()
-				.getActivePage().getActiveEditor().getAdapter(
-						CommandStack.class);
-
 		/*
 		 * collects all single commands and executes them; the check if the
 		 * command size is zero is necessary, otherwise all following commands
 		 * won't be executed.
 		 */
-		if (adapter instanceof DiagramCommandStack) {
-			final DiagramCommandStack commandStack = (DiagramCommandStack) adapter;
-			CompoundCommand compoundCommand = new CompoundCommand();
-			compoundCommand.setLabel("Layout"); //$NON-NLS-1$
-			if (nodesCompoundCommand.size() != 0)
-				compoundCommand.add(nodesCompoundCommand);
-			if (portsCompoundCommand.size() != 0)
-				compoundCommand.add(portsCompoundCommand);
-			if (edgesCompoundCommand.size() != 0)
-				compoundCommand.add(edgesCompoundCommand);
-			if (nodeLabelsCompoundCommand.size() != 0)
-				compoundCommand.add(nodeLabelsCompoundCommand);
-			if (portLabelsCompoundCommand.size() != 0)
-				compoundCommand.add(portLabelsCompoundCommand);
-			if (edgeLabelsCompoundCommand.size() != 0)
-				compoundCommand.add(edgeLabelsCompoundCommand);
-			commandStack.execute(compoundCommand);
-		}
+		CompoundCommand compoundCommand = new CompoundCommand();
+		compoundCommand.setLabel("Layout"); //$NON-NLS-1$
+		if (nodesCompoundCommand.size() != 0)
+			compoundCommand.add(nodesCompoundCommand);
+		if (portsCompoundCommand.size() != 0)
+			compoundCommand.add(portsCompoundCommand);
+		if (edgesCompoundCommand.size() != 0)
+			compoundCommand.add(edgesCompoundCommand);
+		if (nodeLabelsCompoundCommand.size() != 0)
+			compoundCommand.add(nodeLabelsCompoundCommand);
+		if (portLabelsCompoundCommand.size() != 0)
+			compoundCommand.add(portLabelsCompoundCommand);
+		if (edgeLabelsCompoundCommand.size() != 0)
+			compoundCommand.add(edgeLabelsCompoundCommand);
+		commandStack.execute(compoundCommand);
 	}
 
 	/**
