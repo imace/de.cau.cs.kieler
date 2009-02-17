@@ -12,7 +12,7 @@ import org.eclipse.swt.widgets.Text;
 public class DoubleFieldEditor extends StringFieldEditor {
 
 	/** lower bound for double values */
-	private double lowerBound = Double.MIN_NORMAL;
+	private double lowerBound = Double.MIN_VALUE;
 	/** upper bound for double values */
 	private double upperBound = Double.MAX_VALUE;
 	
