@@ -16,13 +16,6 @@ public class DoubleFieldEditor extends StringFieldEditor {
 	/** upper bound for double values */
 	private double upperBound = Double.MAX_VALUE;
 	
-	/** 
-	 * Creates a new Double Field Editor
-	 */
-	public DoubleFieldEditor() {
-		super();
-	}
-	
 	/**
 	 * Creates a new Double Field Editor
 	 * 
