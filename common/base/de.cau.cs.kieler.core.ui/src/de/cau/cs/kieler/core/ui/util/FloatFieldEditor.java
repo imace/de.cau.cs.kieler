@@ -1,4 +1,4 @@
-package de.cau.cs.kieler.core.preferences;
+package de.cau.cs.kieler.core.ui.util;
 
 import org.eclipse.jface.preference.StringFieldEditor;
 import org.eclipse.swt.widgets.Composite;
@@ -10,7 +10,9 @@ import org.eclipse.swt.widgets.Composite;
  */
 public class FloatFieldEditor extends StringFieldEditor {
 	
+	/** lower bound for double values */
 	float lowerBound = -Float.MAX_VALUE;
+	/** upper bound for double values */
 	float upperBound = Float.MAX_VALUE;
 
 	/**

@@ -1,13 +1,20 @@
-package de.cau.cs.kieler.core.preferences;
+package de.cau.cs.kieler.core.ui.util;
 
 import org.eclipse.jface.preference.StringFieldEditor;
-import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 
+/**
+ * Field editor for input of float values.
+ * 
+ * @author ?
+ */
 public class DoubleFieldEditor extends StringFieldEditor {
 
-	double min=Double.MIN_NORMAL, max=Double.MAX_VALUE;
+	/** lower bound for double values */
+	private double lowerBound = Double.MIN_NORMAL;
+	/** upper bound for double values */
+	private double upperBound = Double.MAX_VALUE;
 	
 	/** 
 	 * Creates a new Double Field Editor
@@ -18,52 +25,28 @@ public class DoubleFieldEditor extends StringFieldEditor {
 	
 	/**
 	 * Creates a new Double Field Editor
+	 * 
 	 * @param name the name of the preference this field editor works on
 	 * @param labelText the label text of the field editor
 	 * @param parent the parent of the field editor's control
 	 */
 	public DoubleFieldEditor(String name, String labelText, Composite parent){
-		super(name,labelText,parent);
-	}
-	/**
-	 * Creates a new Double Field Editor
-	 * @param name the name of the preference this field editor works on
-	 * @param labelText the label text of the field editor
-	 * @param width the width of the text input field in characters, or UNLIMITED for no limit
-	 * @param parent the parent of the field editor's control
-	 */
-	public DoubleFieldEditor(String name, String labelText, int width,
-			Composite parent) {
-		super(name, labelText, width, parent);
-		// TODO Auto-generated constructor stub
-	}
-	/**
-	 * Creates a new Double Field Editor
-	 * @param name the name of the preference this field editor works on
-	 * @param labelText the label text of the field editor
-	 * @param width the width of the text input field in characters, or UNLIMITED for no limit
-	 * @param strategy either VALIDATE_ON_KEY_STROKE to perform on the fly checking (the default), or VALIDATE_ON_FOCUS_LOST to perform validation only after the text has been typed in
-	 * @param parent the parent of the field editor's control
-	 */
-	public DoubleFieldEditor(String name, String labelText, int width,
-			int strategy, Composite parent) {
-		super(name, labelText, width, strategy, parent);
-		// TODO Auto-generated constructor stub
+		super(name, labelText, parent);
 	}
 
 	/**
      * Sets the range of valid values for this field.
      * 
-     * @param min the minimum allowed value (inclusive)
-     * @param max the maximum allowed value (inclusive)
+     * @param lowerBound the minimum allowed value (inclusive)
+     * @param upperBound the maximum allowed value (inclusive)
      */
-    public void setValidRange(double min, double max) {
-        this.min = min;
-        this.max = max;
+    public void setValidRange(double lowerBound, double upperBound) {
+        this.lowerBound = lowerBound;
+        this.upperBound = upperBound;
 //        setErrorMessage(JFaceResources.format(
 //        		"DoubleFieldEditor.errorMessageRange", //$NON-NLS-1$
-//        		new Object[] { new Integer((int)min), new Integer((int)max) }));
-        setErrorMessage("Double Field requires double in the bounds ["+min+","+max+"]");
+//        		new Object[] { new Integer((int)lowerBound), new Integer((int)upperBound) }));
+        setErrorMessage("Double Field requires double in the bounds ["+lowerBound+","+upperBound+"]");
     }
 	
     /* (non-Javadoc)
@@ -81,7 +64,7 @@ public class DoubleFieldEditor extends StringFieldEditor {
         String numberString = text.getText();
         try {
             double number = Double.valueOf(numberString).doubleValue();
-            if (number >= min && number <= max) {
+            if (number >= lowerBound && number <= upperBound) {
 				clearErrorMessage();
 				return true;
 			}
