@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.4"?>
 
-<product name="KIELER - Kiel Integrated Environment for Layout for the Eclipse RCP" id="de.cau.cs.kieler.core.ui.kielerproduct" application="org.eclipse.ui.ide.workbench" version="1.0.0" useFeatures="false">
+<product name="KIELER" id="de.cau.cs.kieler.core.ui.kielerproduct" application="org.eclipse.ui.ide.workbench" version="1.0.0" useFeatures="false">
 
    <aboutInfo>
       <image path="eclipse_lg.gif"/>
