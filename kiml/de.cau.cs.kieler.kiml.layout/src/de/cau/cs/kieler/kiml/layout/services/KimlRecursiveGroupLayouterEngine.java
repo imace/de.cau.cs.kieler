@@ -58,7 +58,7 @@ public class KimlRecursiveGroupLayouterEngine extends
 		}
 
 		if (layoutNode.getChildNodes().size() > 0) {
-			lastLayoutProvider = layoutProviderHolder.getLayoutProvider(layoutNode);
+			lastLayoutProvider = layoutServices.getLayoutProvider(layoutNode);
 			lastLayoutProvider.doLayout(layoutNode);
 		}
 	}

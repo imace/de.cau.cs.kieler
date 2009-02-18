@@ -23,7 +23,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.ui.IWorkbench;
 
 import de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayoutProvider;
-import de.cau.cs.kieler.kiml.layout.services.LayoutProviders;
+import de.cau.cs.kieler.kiml.layout.services.KimlLayoutServices;
 
 
 /**
@@ -65,7 +65,7 @@ public abstract class AbstractKimlLayoutProviderPreferencePage extends
 	 */
 	protected void createFieldEditors() {
 		ArrayList<FieldEditor> editorsToAdd = createLayouterTable(this
-				.getFieldEditorParent(), LayoutProviders.getInstance()
+				.getFieldEditorParent(), KimlLayoutServices.getInstance()
 				.getLayoutProvidersOfCollection(LAYOUT_PROVIDER_COLLECTION_ID));
 		for (FieldEditor editorToAdd : editorsToAdd) {
 			addField(editorToAdd);
@@ -133,7 +133,7 @@ public abstract class AbstractKimlLayoutProviderPreferencePage extends
 	public boolean performOk() {
 		boolean retVal = super.performOk();
 
-		ArrayList<KimlAbstractLayoutProvider> layouters = LayoutProviders
+		ArrayList<KimlAbstractLayoutProvider> layouters = KimlLayoutServices
 				.getInstance().getLayoutProvidersOfCollection(
 						LAYOUT_PROVIDER_COLLECTION_ID);
 

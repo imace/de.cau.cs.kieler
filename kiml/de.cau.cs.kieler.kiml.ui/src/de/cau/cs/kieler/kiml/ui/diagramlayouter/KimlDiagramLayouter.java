@@ -14,11 +14,11 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.statushandlers.StatusManager;
 
-import de.cau.cs.kieler.kiml.layout.KimlLayoutPlugin;
 import de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayouterEngine;
+import de.cau.cs.kieler.kiml.layout.services.KimlLayoutServices;
 import de.cau.cs.kieler.kiml.layout.services.KimlRecursiveGroupLayouterEngine;
-import de.cau.cs.kieler.kiml.layout.services.LayoutListeners;
 import de.cau.cs.kieler.kiml.layout.util.KimlLayoutPreferenceConstants;
+import de.cau.cs.kieler.kiml.ui.KimlUiPlugin;
 
 /**
  * Convenience class with just one static method to perform all the necessary
@@ -106,7 +106,7 @@ public final class KimlDiagramLayouter {
 					.buildLayoutGraph(target);
 
 			// notifies layout listeners about the layout request
-			LayoutListeners.getInstance().layoutRequested(
+			KimlLayoutServices.getInstance().layoutRequested(
 					layoutInformation.layoutGraph);
 
 			// chooses the default layout engine
@@ -116,7 +116,7 @@ public final class KimlDiagramLayouter {
 			layoutEngine.layout(layoutInformation.layoutGraph);
 
 			// notifies layout listeners about the performed layout
-			LayoutListeners.getInstance().layoutPerformed(
+			KimlLayoutServices.getInstance().layoutPerformed(
 					layoutInformation.layoutGraph);
 
 			// fetches layout graph applier for the provided editor
@@ -149,7 +149,7 @@ public final class KimlDiagramLayouter {
 						+ layoutEngine.getLastLayoutProvider()
 								.getLayouterInfo().getLayouterName() + ")";
 			Status status = new Status(IStatus.ERROR,
-					KimlLayoutPlugin.PLUGIN_ID, message, exception);
+					KimlUiPlugin.PLUGIN_ID, message, exception);
 			StatusManager.getManager().handle(status, StatusManager.SHOW);
 		}
 	}
@@ -162,12 +162,12 @@ public final class KimlDiagramLayouter {
 	 *         in the preference page
 	 */
 	private static int runsWorkaround() {
-		boolean prefMultipleLayoutRuns = KimlLayoutPlugin
+		boolean prefMultipleLayoutRuns = KimlUiPlugin
 				.getDefault()
 				.getPreferenceStore()
 				.getBoolean(
 						KimlLayoutPreferenceConstants.PREF_DIAGRAMLAYOUTERS_MULTIPLE_LAYOUT_RUNS);
-		boolean prefUseGMFLabelLocation = KimlLayoutPlugin
+		boolean prefUseGMFLabelLocation = KimlUiPlugin
 				.getDefault()
 				.getPreferenceStore()
 				.getBoolean(

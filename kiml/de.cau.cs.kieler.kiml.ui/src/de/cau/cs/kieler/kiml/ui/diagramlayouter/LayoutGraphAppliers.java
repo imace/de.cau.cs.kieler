@@ -18,7 +18,7 @@ import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.ui.statushandlers.StatusManager;
 
-import de.cau.cs.kieler.kiml.layout.KimlLayoutPlugin;
+import de.cau.cs.kieler.kiml.ui.KimlUiPlugin;
 
 /**
  * Controls all the KLayoutGraph appliers, which are loaded at startup. Realized
@@ -81,7 +81,7 @@ public final class LayoutGraphAppliers {
 				}
 			} catch (CoreException exception) {
 				StatusManager.getManager().handle(exception,
-						KimlLayoutPlugin.PLUGIN_ID);
+						KimlUiPlugin.PLUGIN_ID);
 			}
 		}
 	}

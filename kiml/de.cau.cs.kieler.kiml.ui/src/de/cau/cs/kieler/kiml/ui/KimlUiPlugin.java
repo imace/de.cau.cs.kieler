@@ -13,6 +13,8 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
+import de.cau.cs.kieler.kiml.ui.diagramlayouter.LayoutServiceBuilder;
+
 /**
  * The activator class controls the plug-in life cycle.
  * 
@@ -40,9 +42,9 @@ public class KimlUiPlugin extends AbstractUIPlugin {
 	 * )
 	 */
 	public void start(BundleContext context) throws Exception {
-		System.out.println("Starting KimlUI");
 		super.start(context);
 		plugin = this;
+		LayoutServiceBuilder.buildLayoutServices();
 	}
 
 	/*

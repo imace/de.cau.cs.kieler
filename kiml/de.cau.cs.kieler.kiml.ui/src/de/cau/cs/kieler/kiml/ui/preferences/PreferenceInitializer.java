@@ -12,6 +12,7 @@ package de.cau.cs.kieler.kiml.ui.preferences;
 import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
 import org.eclipse.jface.preference.IPreferenceStore;
 
+import de.cau.cs.kieler.kiml.layout.util.KimlLayoutPreferenceConstants;
 import de.cau.cs.kieler.kiml.ui.KimlUiPlugin;
 
 
@@ -24,24 +25,26 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @seeorg.eclipse.core.runtime.preferences.AbstractPreferenceInitializer#
-	 * initializeDefaultPreferences()
+	 * @see org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer#initializeDefaultPreferences()
 	 */
 	public void initializeDefaultPreferences() {
 		IPreferenceStore store = KimlUiPlugin.getDefault().getPreferenceStore();
+		
+		// set defaults for layout preferences
+		store.setDefault(
+				KimlLayoutPreferenceConstants.PREF_LAYOUTPROVIDERS_LAYOUT_CONNECTION_LABELS,
+				false);
+		store.setDefault(
+				KimlLayoutPreferenceConstants.PREF_DIAGRAMLAYOUTERS_USE_GMF_TO_LAYOUT_CONNECTION_LABELS,
+				true);
 
-		/* set general UI preferences here */
-		// ... nothing yet ...
-		/* set defaults for GenericDiagramLayouter */
-		store
-				.setDefault(
-						PreferenceConstants.PREF_GENERIC_DIAGRAM_LAYOUTER_INSET_TOP,
-						25);
-		store
-				.setDefault(
-						PreferenceConstants.PREF_GENERIC_DIAGRAM_LAYOUTER_INSET_LEFT,
-						0);
+		// set defaults for GenericDiagramLayouter
+		store.setDefault(
+				PreferenceConstants.PREF_GENERIC_DIAGRAM_LAYOUTER_INSET_TOP,
+				25);
+		store.setDefault(
+				PreferenceConstants.PREF_GENERIC_DIAGRAM_LAYOUTER_INSET_LEFT,
+				0);
 		store.setDefault(
 				PreferenceConstants.PREF_GENERIC_DIAGRAM_LAYOUTER_INSET_BOTTOM,
 				0);

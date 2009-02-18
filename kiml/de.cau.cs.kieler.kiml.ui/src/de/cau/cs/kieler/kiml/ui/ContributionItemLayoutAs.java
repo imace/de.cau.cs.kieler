@@ -23,7 +23,7 @@ import org.eclipse.ui.menus.CommandContributionItemParameter;
 
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayouterInfo;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutType;
-import de.cau.cs.kieler.kiml.layout.services.LayoutProviders;
+import de.cau.cs.kieler.kiml.layout.services.KimlLayoutServices;
 
 
 /**
@@ -55,7 +55,7 @@ public class ContributionItemLayoutAs extends CompoundContributionItem {
 		 * first, get all layout providers, build up the menu entry and order
 		 * the menu items according to the layout type, the layouter provides
 		 */
-		for (KLayouterInfo layoutProviderInfo : LayoutProviders.getInstance()
+		for (KLayouterInfo layoutProviderInfo : KimlLayoutServices.getInstance()
 				.getEnabledLayouterInfos()) {
 
 			/* contruct one command for the layouter */

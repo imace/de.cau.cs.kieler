@@ -7,7 +7,7 @@
  * Author: Arne Schipper, ars@informatik.uni-kiel.de 
  *
  *******************************************************************************/
-package de.cau.cs.kieler.kiml.layout.preferences;
+package de.cau.cs.kieler.kiml.ui.preferences;
 
 import org.eclipse.jface.preference.BooleanFieldEditor;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
@@ -16,8 +16,8 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
-import de.cau.cs.kieler.kiml.layout.KimlLayoutPlugin;
 import de.cau.cs.kieler.kiml.layout.util.KimlLayoutPreferenceConstants;
+import de.cau.cs.kieler.kiml.ui.KimlUiPlugin;
 
 
 /**
@@ -40,7 +40,7 @@ public class DiagramLayoutersPreferencePage extends FieldEditorPreferencePage
 	 */
 	public DiagramLayoutersPreferencePage() {
 		super(GRID);
-		setPreferenceStore(KimlLayoutPlugin.getDefault().getPreferenceStore());
+		setPreferenceStore(KimlUiPlugin.getDefault().getPreferenceStore());
 		setDescription("Set the options for the KIML Diagram Layouters");
 	}
 

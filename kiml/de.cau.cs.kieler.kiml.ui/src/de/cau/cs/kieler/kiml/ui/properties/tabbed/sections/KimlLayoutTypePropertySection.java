@@ -32,7 +32,7 @@ import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutType;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayouterInfo;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage;
-import de.cau.cs.kieler.kiml.layout.services.LayoutProviders;
+import de.cau.cs.kieler.kiml.layout.services.KimlLayoutServices;
 import de.cau.cs.kieler.kiml.ui.diagramlayouter.KimlDiagramLayouter;
 import de.cau.cs.kieler.kiml.ui.helpers.KimlGMFLayoutHintHelper;
 
@@ -147,7 +147,7 @@ public class KimlLayoutTypePropertySection extends
 			GraphicalEditPart editPart = getSemanticEditPart();
 			/* here Emma has a concrete layout provider */
 			if (stringValue.substring(0, 2).equals("  ")) {
-				KLayouterInfo layouterInfo = LayoutProviders.getInstance()
+				KLayouterInfo layouterInfo = KimlLayoutServices.getInstance()
 						.getLayouterInfoForLayouterName(stringValue.trim());
 				KimlGMFLayoutHintHelper.setAllContainedElementsLayoutHints(
 						editPart, layouterInfo.getLayoutType(), layouterInfo
@@ -180,7 +180,7 @@ public class KimlLayoutTypePropertySection extends
 			GraphicalEditPart editPart = getSemanticEditPart();
 			/* here Emma has a concrete layout provider */
 			if (stringValue.substring(0, 2).equals("  ")) {
-				KLayouterInfo layouterInfo = LayoutProviders.getInstance()
+				KLayouterInfo layouterInfo = KimlLayoutServices.getInstance()
 						.getLayouterInfoForLayouterName(stringValue.trim());
 				KimlGMFLayoutHintHelper.setContainedElementsLayoutHint(
 						editPart, layouterInfo.getLayoutType(), layouterInfo
@@ -299,7 +299,7 @@ public class KimlLayoutTypePropertySection extends
 			/* add parent section delimiter */
 			valueList.add(value.getLiteral());
 			boolean somethingAdded = false;
-			for (KLayouterInfo layouterInfo : LayoutProviders.getInstance()
+			for (KLayouterInfo layouterInfo : KimlLayoutServices.getInstance()
 					.getEnabledLayouterInfos()) {
 				/* add the layout provider with some identation */
 				if (layouterInfo.getLayoutType().equals(value)) {

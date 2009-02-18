@@ -39,7 +39,7 @@ public class KimlLayouterEngine extends KimlAbstractLayouterEngine {
 	 * @see de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayouterEngine#layout(de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutGraph)
 	 */
 	public void layout(KLayoutGraph layoutGraph) {
-		lastLayoutProvider = layoutProviderHolder.getLayoutProvider(layoutGraph);
+		lastLayoutProvider = layoutServices.getLayoutProvider(layoutGraph);
 		lastLayoutProvider.doLayout(layoutGraph);
 	}
 

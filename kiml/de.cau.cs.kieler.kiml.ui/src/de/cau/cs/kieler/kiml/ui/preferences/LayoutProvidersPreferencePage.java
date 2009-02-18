@@ -7,7 +7,7 @@
  * Author: Arne Schipper, ars@informatik.uni-kiel.de 
  *
  *******************************************************************************/
-package de.cau.cs.kieler.kiml.layout.preferences;
+package de.cau.cs.kieler.kiml.ui.preferences;
 
 import java.util.ArrayList;
 
@@ -19,9 +19,9 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
-import de.cau.cs.kieler.kiml.layout.KimlLayoutPlugin;
-import de.cau.cs.kieler.kiml.layout.services.LayoutProviders;
+import de.cau.cs.kieler.kiml.layout.services.KimlLayoutServices;
 import de.cau.cs.kieler.kiml.layout.util.KimlLayoutPreferenceConstants;
+import de.cau.cs.kieler.kiml.ui.KimlUiPlugin;
 
 
 /**
@@ -31,7 +31,7 @@ import de.cau.cs.kieler.kiml.layout.util.KimlLayoutPreferenceConstants;
  * be made in the respective plugin.xml file.
  * 
  * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
- * @see de.cau.cs.kieler.kiml.layout.services.LayoutProviders
+ * @see de.cau.cs.kieler.kiml.ui.diagramlayouter.LayoutProviders
  *      LayoutProviders
  * @see de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayoutProvider
  *      KimlAbstractLayoutProvider
@@ -44,7 +44,7 @@ public class LayoutProvidersPreferencePage extends FieldEditorPreferencePage
 	 */
 	public LayoutProvidersPreferencePage() {
 		super(GRID);
-		setPreferenceStore(KimlLayoutPlugin.getDefault().getPreferenceStore());
+		setPreferenceStore(KimlUiPlugin.getDefault().getPreferenceStore());
 		getPreferenceStore().addPropertyChangeListener(this);
 		setDescription("Set here the general layout options that do not apply to a specific layout provider");
 	}
@@ -89,7 +89,7 @@ public class LayoutProvidersPreferencePage extends FieldEditorPreferencePage
 	 * currently enabled layout provider
 	 */
 	private String[][] getAvailableLayouterNames() {
-		ArrayList<String> names = LayoutProviders.getInstance()
+		ArrayList<String> names = KimlLayoutServices.getInstance()
 				.getEnabledLayouterNames();
 		String[][] options = new String[names.size()][2];
 

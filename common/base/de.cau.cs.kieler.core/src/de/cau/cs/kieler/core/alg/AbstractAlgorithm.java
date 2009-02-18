@@ -7,9 +7,8 @@ package de.cau.cs.kieler.core.alg;
  */
 public abstract class AbstractAlgorithm implements IAlgorithm {
 
-	/** The associated progress monitor. Subclasses should check
-	 *  for null-pointer before using this. */
-	protected IKielerProgressMonitor progressMonitor = null;
+	/** the associated progress monitor */
+	private IKielerProgressMonitor progressMonitor = null;
 	
 	/**
 	 * Removes the associated progress monitor. Any subclass that
@@ -25,6 +24,19 @@ public abstract class AbstractAlgorithm implements IAlgorithm {
 	 */
 	public void setProgressMonitor(IKielerProgressMonitor monitor) {
 		this.progressMonitor = monitor;
+	}
+	
+	/**
+	 * Returns a progress monitor that can be used by subclasses. This
+	 * method does not return null.
+	 * 
+	 * @return the associated monitor, or a default implementation
+	 *     if no progress monitor was set
+	 */
+	protected IKielerProgressMonitor getMonitor() {
+		if (progressMonitor == null)
+			progressMonitor = new NullProgressMonitor();
+		return progressMonitor;
 	}
 	
 }

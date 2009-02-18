@@ -4,26 +4,4 @@
    <extension-point id="kimlLayoutProvider" name="KIML Layout Provider" schema="schema/kimlLayoutProvider.exsd"/>
    <extension-point id="kimlLayoutListener" name="KIML Layout Listener" schema="schema/kimlLayoutListener.exsd"/>
 
-   <extension
-         point="org.eclipse.ui.preferencePages">
-      <page
-            category="de.cau.cs.kieler.kiml.ui.PreferencePage"
-            class="de.cau.cs.kieler.kiml.layout.preferences.LayoutProvidersPreferencePage"
-            id="de.cau.cs.kieler.kiml.layout.preferences.LayoutProvidersPreferencePage"
-            name="Layout Providers">
-      </page>
-      <page
-            category="de.cau.cs.kieler.kiml.ui.PreferencePage"
-            class="de.cau.cs.kieler.kiml.layout.preferences.DiagramLayoutersPreferencePage"
-            id="de.cau.cs.kieler.kiml.layout.preferences.DiagramLayoutersPreferencePage"
-            name="Diagram Layouters">
-      </page>
-   </extension>
-   <extension
-         point="org.eclipse.core.runtime.preferences">
-      <initializer
-            class="de.cau.cs.kieler.kiml.layout.preferences.PreferenceInitializer">
-      </initializer>
-   </extension>
-
 </plugin>

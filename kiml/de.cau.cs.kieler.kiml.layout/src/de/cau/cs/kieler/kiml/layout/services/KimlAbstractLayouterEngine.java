@@ -23,8 +23,8 @@ import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutGraph;
  */
 public abstract class KimlAbstractLayouterEngine {
 
-	/* caches the call to the LayoutProviders for the implementing classes */
-	protected LayoutProviders layoutProviderHolder = LayoutProviders
+	/* caches the call to the layout services class for subclasses */
+	protected KimlLayoutServices layoutServices = KimlLayoutServices
 			.getInstance();
 
 	/**

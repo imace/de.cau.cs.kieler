@@ -24,7 +24,6 @@ import org.eclipse.gef.GraphicalEditPart;
 import org.eclipse.gef.commands.CommandStack;
 import org.eclipse.gef.commands.CompoundCommand;
 import org.eclipse.gef.editparts.ScalableFreeformRootEditPart;
-import org.eclipse.gef.editparts.ZoomManager;
 import org.eclipse.gef.requests.ChangeBoundsRequest;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramRootEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.LabelEditPart;
@@ -33,9 +32,7 @@ import org.eclipse.gmf.runtime.diagram.ui.requests.RequestConstants;
 import org.eclipse.gmf.runtime.diagram.ui.requests.SetAllBendpointRequest;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx;
 import org.eclipse.swt.SWT;
-import org.eclipse.ui.PlatformUI;
 
-import de.cau.cs.kieler.kiml.layout.KimlLayoutPlugin;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLabel;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLabelLayout;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLayout;
@@ -45,6 +42,7 @@ import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeLayout;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPoint;
 import de.cau.cs.kieler.kiml.layout.util.KimlLayoutPreferenceConstants;
+import de.cau.cs.kieler.kiml.ui.KimlUiPlugin;
 import de.cau.cs.kieler.kiml.ui.helpers.KimlMetricsHelper;
 import de.cau.cs.kieler.kiml.ui.policies.LayoutEditPolicy;
 
@@ -372,13 +370,13 @@ public class KimlGenericLayoutGraphApplier extends
 	protected void updatePreferences() {
 
 		/* fetch preferences */
-		prefUseGMFLabelLocation = KimlLayoutPlugin
+		prefUseGMFLabelLocation = KimlUiPlugin
 				.getDefault()
 				.getPreferenceStore()
 				.getBoolean(
 						KimlLayoutPreferenceConstants.PREF_DIAGRAMLAYOUTERS_USE_GMF_TO_LAYOUT_CONNECTION_LABELS);
 
-		prefSmoothTransitions = KimlLayoutPlugin
+		prefSmoothTransitions = KimlUiPlugin
 				.getDefault()
 				.getPreferenceStore()
 				.getBoolean(

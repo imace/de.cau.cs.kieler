@@ -1,121 +1,109 @@
-/*******************************************************************************
- * Copyright (c) 2008 Real-Time and Embedded Systems group
- *
- * INSERT LICENCE HERE
- *
- *
- * Author: Arne Schipper, ars@informatik.uni-kiel.de 
- *
- *******************************************************************************/
 package de.cau.cs.kieler.kiml.layout.services;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IConfigurationElement;
-import org.eclipse.core.runtime.IExtensionRegistry;
-import org.eclipse.core.runtime.Platform;
-import org.eclipse.core.runtime.preferences.IEclipsePreferences;
-import org.eclipse.core.runtime.preferences.InstanceScope;
-import org.eclipse.jface.preference.IPreferenceStore;
-import org.eclipse.ui.statushandlers.StatusManager;
-
-import de.cau.cs.kieler.kiml.layout.KimlLayoutPlugin;
+import de.cau.cs.kieler.core.IKielerPreferenceStore;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutGraph;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphFactory;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayouterInfo;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutType;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayouterInfo;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphFactory;
 import de.cau.cs.kieler.kiml.layout.util.KimlLayoutPreferenceConstants;
 
-
 /**
- * Controls all the layout providers, which are loaded at startup. Realized as a
- * singleton to allow easy access from anywhere and a fast processing.
- * <p/>
- * Collects the layout providers that extend {@link KimlAbstractLayoutProvider}
- * and register themselves at the <code>kimlLayoutProvider</code> extension
- * point.
- * <p/>
- * Provides a function to get a concrete layout provider, which is used in
- * {@link KimlRecursiveGroupLayouterEngine}, for example, and some convenience
- * functions to query the status.
+ * Main class for access to the layout services layout provider and
+ * layout listener.
  * 
- * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
- * @see KimlAbstractLayoutProvider
- * @see KimlRecursiveGroupLayouterEngine
+ * @author msp
  */
-public final class LayoutProviders {
+public class KimlLayoutServices {
 
-	/* singleton holder */
-	private static final LayoutProviders INSTANCE = new LayoutProviders();
+	/** singleton holder */
+	private static KimlLayoutServices INSTANCE = null;
 
-	/*
-	 * maps the name of a layout provider to the instantiated layout provider
-	 * object
-	 */
-	private HashMap<String, KimlAbstractLayoutProvider> layoutProviderMap = new HashMap<String, KimlAbstractLayoutProvider>();
+	/** the preference store */
+	private IKielerPreferenceStore preferenceStore;
+	/** the list of layout listeners that have been loaded at startup */
+	private List<IKimlLayoutListener> listeners = new LinkedList<IKimlLayoutListener>();
+	/** maps the name of a layout provider to the instantiated
+	 *  layout provider object */
+	private HashMap<String, KimlAbstractLayoutProvider> layoutProviderMap
+			= new HashMap<String, KimlAbstractLayoutProvider>();
+
 
 	/**
-	 * Static method which returns the singleton LayoutProvider.
-	 * 
-	 * @return The LayoutProviders singleton
+	 * @return the singleton instance of the LayoutListeners class
 	 */
-	public static LayoutProviders getInstance() {
+	public static KimlLayoutServices getInstance() {
 		return INSTANCE;
 	}
-
+	
 	/**
-	 * Singleton constructor which loads all the layout providers once at
-	 * startup.
+	 * Creates the layout services and registers it as the singleton
+	 * instance. Any previously created instance is overwritten.
+	 * 
+	 * @param preferenceStore the preference store for layout services
 	 */
-	private LayoutProviders() {
-		loadAvailableLayouters();
-	};
-
-	/*
-	 * does the actual loading of the layout providers, which need to register
-	 * themselves through the kimlLayoutProvider extension point.
+	public KimlLayoutServices(IKielerPreferenceStore preferenceStore) {
+		this.preferenceStore = preferenceStore;
+		INSTANCE = this;
+	}
+	
+	/**
+	 * Returns the preference store for all layout services.
+	 * 
+	 * @return the preference store
 	 */
-	private void loadAvailableLayouters() {
-
-		IExtensionRegistry reg = Platform.getExtensionRegistry();
-		IConfigurationElement[] extensions = reg
-				.getConfigurationElementsFor(KimlAbstractLayoutProvider.EXTENSION_POINT_ID);
-
-		for (IConfigurationElement element : extensions) {
-			try {
-				KimlAbstractLayoutProvider layoutProvider = (KimlAbstractLayoutProvider) element
-						.createExecutableExtension(KimlAbstractLayoutProvider.ATTRIBUTE_CLASS);
-				/*
-				 * try to load every layout provider available on the system,
-				 * but ...
-				 */
-				if (layoutProvider != null) {
-					/*
-					 * ... disable those, which were disabled by the user. This
-					 * is set in the respective preference store of the user. As
-					 * this function (loadAvailableLayouters) is performed just
-					 * once during startup, Emma has to load all the layout
-					 * provider nevertheless, but then takes a look in the
-					 * preference store.
-					 */
-					String pluginName = element.getDeclaringExtension()
-							.getContributor().getName();
-					IEclipsePreferences pref = new InstanceScope()
-							.getNode(pluginName);
-					boolean state = pref.getBoolean(layoutProvider
-							.getLayouterInfo().getLayouterName(), true);
-					layoutProvider.setEnabled(state);
-					layoutProviderMap.put(layoutProvider.getLayouterInfo()
-							.getLayouterName(), layoutProvider);
-				}
-			} catch (CoreException exception) {
-				StatusManager.getManager().handle(exception, KimlLayoutPlugin.PLUGIN_ID);
-			}
+	public IKielerPreferenceStore getPreferenceStore() {
+		return preferenceStore;
+	}
+	
+	/**
+	 * Adds the given layout listener to the list of registered listeners.
+	 * 
+	 * @param listener layout listener to register
+	 */
+	public void addLayoutListener(IKimlLayoutListener listener) {
+		listeners.add(listener);
+	}
+	
+	/**
+	 * Calls the <code>layoutRequested</code> method of all registered
+	 * layout listeners.
+	 * 
+	 * @param layoutGraph layout graph for which layout is requested
+	 */
+	public void layoutRequested(KLayoutGraph layoutGraph) {
+		for (IKimlLayoutListener listener : listeners) {
+			listener.layoutRequested(layoutGraph);
+		}
+	}
+	
+	/**
+	 * Calls the <code>layoutPerformed</code> method of all registered
+	 * layout listeners.
+	 * 
+	 * @param layoutGraph layout graph for which layout was performed
+	 */
+	public void layoutPerformed(KLayoutGraph layoutGraph) {
+		for (IKimlLayoutListener listener : listeners) {
+			listener.layoutPerformed(layoutGraph);
 		}
 	}
 
+	/**
+	 * Registers the given layout provider.
+	 * 
+	 * @param provider layout provider to register
+	 */
+	public void addLayoutProvider(KimlAbstractLayoutProvider provider) {
+		layoutProviderMap.put(provider.getLayouterInfo().getLayouterName(),
+				provider);
+	}
+	
 	/**
 	 * Returns the best fitting {@link KimlAbstractLayoutProvider} for the
 	 * provided KLayoutNode. The layout provider is evaluated as follows:
@@ -162,9 +150,7 @@ public final class LayoutProviders {
 		}
 
 		/* if still no success, use default layout provider ... */
-		IPreferenceStore store = KimlLayoutPlugin.getDefault()
-				.getPreferenceStore();
-		String defaultLayoutProvider = store
+		String defaultLayoutProvider = preferenceStore
 				.getString(KimlLayoutPreferenceConstants.PREF_LAYOUTPROVIDERS_DEFAULT_LAYOUT_PROVIDER);
 		layoutProvider = layoutProviderMap.get(defaultLayoutProvider);
 
@@ -189,7 +175,6 @@ public final class LayoutProviders {
 	 *         enabled layout providers
 	 */
 	public ArrayList<String> getEnabledLayouterNames() {
-
 		ArrayList<String> enabledLayouterNames = new ArrayList<String>();
 
 		for (String layouterName : layoutProviderMap.keySet()) {
@@ -208,7 +193,6 @@ public final class LayoutProviders {
 	 *         layouters can handle
 	 */
 	public ArrayList<KLayoutType> getEnabledLayoutTypes() {
-
 		ArrayList<KLayoutType> enabledLayoutTypes = new ArrayList<KLayoutType>();
 
 		for (KimlAbstractLayoutProvider layoutProvider : layoutProviderMap
@@ -232,7 +216,6 @@ public final class LayoutProviders {
 	 *         enabled layout providers
 	 */
 	public ArrayList<KLayouterInfo> getEnabledLayouterInfos() {
-
 		ArrayList<KLayouterInfo> enabledLayouterInfos = new ArrayList<KLayouterInfo>();
 
 		for (KimlAbstractLayoutProvider layoutProvider : layoutProviderMap
@@ -257,8 +240,7 @@ public final class LayoutProviders {
 	 */
 	public KLayouterInfo getLayouterInfoForLayouterName(
 			String layouterProviderName) {
-		for (KLayouterInfo layouterInfo : LayoutProviders.getInstance()
-				.getEnabledLayouterInfos()) {
+		for (KLayouterInfo layouterInfo : getEnabledLayouterInfos()) {
 			if (layouterInfo.getLayouterName().equals(layouterProviderName)) {
 				return layouterInfo;
 			}
@@ -285,4 +267,5 @@ public final class LayoutProviders {
 		}
 		return collection;
 	}
+	
 }

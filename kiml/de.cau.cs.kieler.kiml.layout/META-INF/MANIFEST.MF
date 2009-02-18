@@ -3,14 +3,10 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Layout Plug-in
 Bundle-SymbolicName: de.cau.cs.kieler.kiml.layout;singleton:=true
 Bundle-Version: 1.0.0
-Bundle-Activator: de.cau.cs.kieler.kiml.layout.KimlLayoutPlugin
-Require-Bundle: org.eclipse.ui,
- org.eclipse.core.runtime,
- org.eclipse.emf.ecore;bundle-version="2.4.0"
-Bundle-ActivationPolicy: lazy
+Require-Bundle: org.eclipse.emf.ecore;bundle-version="2.4.0",
+ de.cau.cs.kieler.core;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Export-Package: de.cau.cs.kieler.kiml.layout,
- de.cau.cs.kieler.kiml.layout.KimlLayoutGraph;uses:="org.eclipse.emf.ecore,org.eclipse.emf.common.util",
+Export-Package: de.cau.cs.kieler.kiml.layout.KimlLayoutGraph;uses:="org.eclipse.emf.ecore,org.eclipse.emf.common.util",
  de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl;
   uses:="org.eclipse.emf.ecore,
    org.eclipse.emf.common.util,
