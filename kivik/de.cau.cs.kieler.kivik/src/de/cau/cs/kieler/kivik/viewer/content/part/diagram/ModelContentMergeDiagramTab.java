@@ -557,6 +557,7 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 			// differences
 			final String color;
 			final String backgroundColor;
+			
 			if (diff.getKind() == DifferenceKind.CONFLICT
 					|| diff.isConflicting()) {
 				color = EMFCompareConstants.PREFERENCES_KEY_CONFLICTING_COLOR;
@@ -564,19 +565,23 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 
 			} else if (diff.getKind() == DifferenceKind.ADDITION) {
 				color = EMFCompareConstants.PREFERENCES_KEY_ADDED_COLOR;
-				// if (partSide == EMFCompareConstants.LEFT) {
-				// backgroundColor = Constants.DO_NOT_COLORIZE;
-				// } else {
-				backgroundColor = EMFCompareConstants.PREFERENCES_KEY_ADDED_COLOR;
-				// }
+				// do not colorize containers of added elements in the left part
+				if (partSide == EMFCompareConstants.LEFT) {
+					backgroundColor = Constants.DO_NOT_COLORIZE;
+				} else {
+					backgroundColor = EMFCompareConstants.PREFERENCES_KEY_ADDED_COLOR;
+				}
 
 			} else if (diff.getKind() == DifferenceKind.DELETION) {
 				color = EMFCompareConstants.PREFERENCES_KEY_REMOVED_COLOR;
-				// if (partSide == EMFCompareConstants.RIGHT) {
-				// backgroundColor = Constants.DO_NOT_COLORIZE;
-				// } else {
-				backgroundColor = EMFCompareConstants.PREFERENCES_KEY_REMOVED_COLOR;
-				// }
+				// do not colorize containers of deleted elements in the right
+				// part
+				if (partSide == EMFCompareConstants.RIGHT) {
+					backgroundColor = Constants.DO_NOT_COLORIZE;
+				} else {
+					backgroundColor = EMFCompareConstants.PREFERENCES_KEY_REMOVED_COLOR;
+				}
+				
 			} else if (diff.getKind() == DifferenceKind.DELETION) {
 				color = EMFCompareConstants.PREFERENCES_KEY_REMOVED_COLOR;
 				backgroundColor = EMFCompareConstants.PREFERENCES_KEY_REMOVED_COLOR;
