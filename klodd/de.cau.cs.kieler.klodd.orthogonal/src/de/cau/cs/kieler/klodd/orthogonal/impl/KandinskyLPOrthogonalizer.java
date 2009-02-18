@@ -547,7 +547,7 @@ public class KandinskyLPOrthogonalizer extends AbstractAlgorithm implements
 			rowIndex[1] = cols.backSourceRight.start + rightEdge.edge.id;
 			rowIndex[2] = cols.targetAnchor.start + rightEdge.edge.id;
 		}
-		ilp.setRowex(i, 2, row, rowIndex);
+		ilp.setRowex(i, 3, row, rowIndex);
 	}
 	
 	/**

@@ -336,9 +336,11 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 					EdgePlacing[] placings = result.placings.toArray(new EdgePlacing[0]);
 					int position = 0;
 					for (ConstraintResult childResult : sortedResults) {
-						position += childResult.edgeCount;
-						for (EdgePlacing placing : placings) {
-							result.placings.add(new EdgePlacing(placing.rank + position));
+						if (childResult.edgeCount > 0) {
+							position += childResult.edgeCount;
+							for (EdgePlacing placing : placings) {
+								result.placings.add(new EdgePlacing(placing.rank + position));
+							}
 						}
 					}
 				}
@@ -586,11 +588,11 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 		int targetBorderIndex = getBorderIndexFor(face.borders, targetNode);
 		List<TSMFace.BorderEntry> sourceBorder = null, targetBorder = null;
 		ListIterator<TSMFace.BorderEntry> sourceIter = null, targetIter = null;
-		if (sourceBorderIndex > 0) {
+		if (sourceBorderIndex >= 0) {
 			sourceBorder = face.borders.get(sourceBorderIndex);
 			sourceIter = getIteratorFor(sourceBorder, sourceNode, sourceRank);
 		}
-		if (targetBorderIndex > 0) {
+		if (targetBorderIndex >= 0) {
 			targetBorder = face.borders.get(targetBorderIndex);
 			targetIter = getIteratorFor(targetBorder, targetNode, targetRank);
 		}
@@ -664,6 +666,8 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 					if (!targetIter.hasNext()) {
 						targetIter = targetBorder.listIterator();
 						nextIndex = 0;
+						if (nextIndex == sourceIndex)
+							break;
 					}
 					TSMFace.BorderEntry nextEntry = targetIter.next();
 					newBorder.add(new TSMFace.BorderEntry(nextEntry));
@@ -733,7 +737,9 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 		TSMFace.BorderEntry currentEntry = borderIter.next();
 		while (borderIter.hasNext()) {
 			TSMFace.BorderEntry nextEntry = borderIter.next();
-			if (currentEntry.edge.id == edge1id && nextEntry.edge.id == edge2id) {
+			if (currentEntry.edge.id == edge1id && nextEntry.edge.id == edge2id
+					&& currentEntry.secondNode().id == node.id
+					&& nextEntry.firstNode().id == node.id) {
 				borderIter.previous();
 				placingFound = true;
 				break;

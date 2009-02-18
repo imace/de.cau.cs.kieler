@@ -56,6 +56,14 @@ public class TSMEdge extends TSMGraphElement {
 		public TSMEdge getEdge() {
 			return edge;
 		}
+		
+		/*
+		 * (non-Javadoc)
+		 * @see java.lang.Object#toString()
+		 */
+		public String toString() {
+			return type.toString();
+		}
 	}
 	
 	/** source node */
@@ -273,8 +281,7 @@ public class TSMEdge extends TSMGraphElement {
 	public String toString() {
 		String baseString = super.toString();
 		if (source != null && target != null)
-			return baseString + " - [" + source.toString() + "] > ["
-					+ target.toString() + "]";
+			return baseString + " " + source.id + ">" + target.id;
 		else return baseString;
 	}
 	

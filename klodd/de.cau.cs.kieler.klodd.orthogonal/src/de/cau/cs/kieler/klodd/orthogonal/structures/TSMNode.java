@@ -108,6 +108,13 @@ public class TSMNode extends TSMGraphElement {
 				return edge.sourceSide;
 		}
 		
+		/*
+		 * (non-Javadoc)
+		 * @see java.lang.Object#toString()
+		 */
+		public String toString() {
+			return type.toString() + edge.id;
+		}
 	}
 	
 	/**
@@ -269,8 +276,8 @@ public class TSMNode extends TSMGraphElement {
 	public String toString() {
 		String baseString = super.toString();
 		if (object instanceof KLayoutNode)
-			return baseString + " - " + ((KLayoutNode)object).getLabel().getText();
-		else return baseString + " - " + type.toString();
+			return baseString + " \"" + ((KLayoutNode)object).getLabel().getText() + "\"";
+		else return baseString + " " + type.toString();
 	}
 	
 }

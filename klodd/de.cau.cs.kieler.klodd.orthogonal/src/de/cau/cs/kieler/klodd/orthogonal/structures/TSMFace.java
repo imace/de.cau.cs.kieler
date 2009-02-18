@@ -110,6 +110,17 @@ public class TSMFace extends TSMGraphElement {
 			else
 				return edge.sourceSide;
 		}
+		
+		/*
+		 * (non-Javadoc)
+		 * @see java.lang.Object#toString()
+		 */
+		public String toString() {
+			if (forward)
+				return ">" + edge.id;
+			else
+				return "<" + edge.id;
+		}
 	}
 	
 	/** set of lists of bordering edges (can be multiple lists for the
