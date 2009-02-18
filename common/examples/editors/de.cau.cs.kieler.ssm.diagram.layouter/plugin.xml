@@ -4,7 +4,7 @@
    <extension
          point="org.eclipse.ui.preferencePages">
       <page
-            category="de.cau.cs.kieler.kiml.layout.preferences.DiagramLayoutersPreferencePage"
+            category="de.cau.cs.kieler.kiml.ui.preferences.DiagramLayoutersPreferencePage"
             class="ssm.diagram.layout.preferences.PreferencePage"
             id="de.cau.cs.kieler.ssm.diagram.layouter.page1"
             name="SSM Diagram Layouter">

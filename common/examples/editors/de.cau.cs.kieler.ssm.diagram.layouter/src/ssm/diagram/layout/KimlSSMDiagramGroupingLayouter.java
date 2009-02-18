@@ -48,7 +48,6 @@ import org.eclipse.gmf.runtime.draw2d.ui.internal.figures.AnimatableScrollPane;
 import org.eclipse.gmf.runtime.notation.impl.ViewImpl;
 import org.eclipse.jface.viewers.IStructuredSelection;
 
-import de.cau.cs.kieler.kiml.layout.KimlLayoutPlugin;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KDimension;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLabel;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLabelPlacement;
@@ -60,6 +59,7 @@ import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutType;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeLayout;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPoint;
+import de.cau.cs.kieler.kiml.layout.services.KimlLayoutServices;
 import de.cau.cs.kieler.kiml.layout.util.KimlLayoutPreferenceConstants;
 import de.cau.cs.kieler.kiml.layout.util.KimlLayoutUtil;
 import de.cau.cs.kieler.kiml.ui.helpers.KimlGMFLayoutHintHelper;
@@ -140,7 +140,6 @@ public class KimlSSMDiagramGroupingLayouter {//extends KimlAbstractLayouter {
 //	/*-----------------------------APPLICATION OF LAYOUT----------------------------*/
 //	/*------------------------------------------------------------------------------*/
 //
-//	@Override
 //	protected void applyLayout() {
 //
 //		CompoundCommand compoundCommand = new CompoundCommand();
@@ -289,7 +288,7 @@ public class KimlSSMDiagramGroupingLayouter {//extends KimlAbstractLayouter {
 //			pointList.addPoint(startPoint);
 //
 //			// set grid points, mind the offset (GraphViz: Bezier)
-//			for (KPoint gridPoint : edgeLayout.getGridPoints()) {
+//			for (KPoint gridPoint : edgeLayout.getBendPoints()) {
 //				Point point = KimlMetricsHelper.kPoint2Point(gridPoint)
 //						.translate(offset);
 //				Point translatedPoint = translateFromTo(KimlMetricsHelper
@@ -393,7 +392,6 @@ public class KimlSSMDiagramGroupingLayouter {//extends KimlAbstractLayouter {
 //	/*------------------------BUILDING OF LAYOUT GRAPH------------------------------*/
 //	/*------------------------------------------------------------------------------*/
 //
-//	@Override
 //	protected KLayoutGraph buildLayoutGraph() {
 //		// create an initialized layout graph, which is also the top node
 //		layoutGraph = KimlLayoutUtil.createInitializedLayoutGraph();
@@ -792,7 +790,6 @@ public class KimlSSMDiagramGroupingLayouter {//extends KimlAbstractLayouter {
 //	/*------------------------------INIT FUNCTION-----------------------------------*/
 //	/*------------------------------------------------------------------------------*/
 //
-//	@Override
 //	protected void init(Object object) {
 //		// get root part provided object
 //		rootPart = getRootPart(object);
@@ -817,16 +814,12 @@ public class KimlSSMDiagramGroupingLayouter {//extends KimlAbstractLayouter {
 //			throw new IllegalArgumentException("commandStack == null");
 //		}
 //		// handle edge label placement
-//		useGMFLabelLocation = KimlLayoutPlugin
-//				.getDefault()
-//				.getPreferenceStore()
-//				.getBoolean(
+//		useGMFLabelLocation = KimlLayoutServices.getInstance()
+//				.getPreferenceStore().getBoolean(
 //						KimlLayoutPreferenceConstants.PREF_DIAGRAMLAYOUTERS_USE_GMF_TO_LAYOUT_CONNECTION_LABELS);
 //
-//		groupEverySingleElement = KimlSSMDiagramLayouterPlugin
-//				.getDefault()
-//				.getPreferenceStore()
-//				.getBoolean(
+//		groupEverySingleElement = KimlLayoutServices.getInstance()
+//				.getPreferenceStore().getBoolean(
 //						KimlLayoutPreferenceConstants.PREF_GROUP_EVERY_SINGLE_ELEMENT);
 //	}
 //
@@ -910,13 +903,10 @@ public class KimlSSMDiagramGroupingLayouter {//extends KimlAbstractLayouter {
 //		return point;
 //	}
 //
-//	@Override
 //	public Map<String, String> getSettings() {
 //		HashMap<String, String> settings = new HashMap<String, String>();
-//		boolean groupEverySingleElement = KimlSSMDiagramLayouterPlugin
-//				.getDefault()
-//				.getPreferenceStore()
-//				.getBoolean(
+//		boolean groupEverySingleElement = KimlLayoutServices.getInstance()
+//				.getPreferenceStore().getBoolean(
 //						KimlLayoutPreferenceConstants.PREF_GROUP_EVERY_SINGLE_ELEMENT);
 //		settings.put(
 //				KimlLayoutPreferenceConstants.PREF_GROUP_EVERY_SINGLE_ELEMENT,
