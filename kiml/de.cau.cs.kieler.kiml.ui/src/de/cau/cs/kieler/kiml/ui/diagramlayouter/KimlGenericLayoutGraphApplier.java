@@ -91,7 +91,7 @@ public class KimlGenericLayoutGraphApplier extends
 		} else {
 			commandStack = new DiagramCommandStack(null);
 		}
-		
+
 		/* applies node layouts */
 		CompoundCommand nodesCompoundCommand = doApplyNodeLayout();
 
@@ -342,11 +342,23 @@ public class KimlGenericLayoutGraphApplier extends
 							.getSource();
 					sourceFigure = sourceEditPart.getFigure();
 				}
-				Point newLocationNormal = translateFromTo(KimlMetricsHelper
-						.kPoint2Point(edgeLabelLayout.getLocation()),
-						sourceFigure, connectionLayer);
-				newLocation = new PrecisionPoint(newLocationNormal.x,
-						newLocationNormal.y);
+				Point labelLocation = KimlMetricsHelper
+						.kPoint2Point(edgeLabelLayout.getLocation());
+
+				/**
+				 * HACK IF THE LAYOUT ALG. DOES NOT PROVIDE VALID LABEL POS, USE
+				 * THEN ALSO GMF TO POSITION LABELS
+				 */
+				if (labelLocation.x == 0 && labelLocation.y == 0) {
+					newLocation = new PrecisionPoint(edgeLabelEditPart
+							.getReferencePoint().x, edgeLabelEditPart
+							.getReferencePoint().y);
+				} else {
+					Point newLocationNormal = translateFromTo(labelLocation,
+							sourceFigure, connectionLayer);
+					newLocation = new PrecisionPoint(newLocationNormal.x,
+							newLocationNormal.y);
+				}
 			}
 
 			Point moveDelta = new PrecisionPoint(newLocation.preciseX
