@@ -1,0 +1,14 @@
+17.02.09
+--------
+
+-altes ProgLog verloren, fange neues an
+-ersten, sehr einfachen SSM Editor erstellt: States und Transitionen setzen
+
+18.02.09
+--------
+
+-Editor ausgebaut: State- und Transitionsattribute werden angezeigt,
+ States können innere States enthalten
+-Modifizierung des Modells, um Anzeige der Transitionstrigger und -effekte
+ im einfachen Editor zu ermöglichen: Transitionen erhalten Strings,
+ in dem Trigger und Effekte gespeichert werden.

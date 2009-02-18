@@ -150,6 +150,14 @@
         <element xmi:type="ecore:EAttribute" href="ssm.ecore#//Transition/priority"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_kgR4IcCGEd22ncKoP1QzEA"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_JjHHQP20Ed2xvoILZYfrVA" type="3001">
+        <element xmi:type="ecore:EAttribute" href="ssm.ecore#//Transition/transitionKind"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_JjHHQf20Ed2xvoILZYfrVA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_Zph78P3aEd2xvoILZYfrVA" type="3001">
+        <element xmi:type="ecore:EAttribute" href="ssm.ecore#//Transition/triggersAndEffects"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_Zph78f3aEd2xvoILZYfrVA"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_TrOmlcCGEd22ncKoP1QzEA"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_TrOmlsCGEd22ncKoP1QzEA"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_TrOml8CGEd22ncKoP1QzEA"/>

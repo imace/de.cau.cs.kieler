@@ -77,6 +77,8 @@
         eType="#//State"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="sourceState" lowerBound="1"
         eType="#//State" eOpposite="#//State/outgoingTransitions"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="triggersAndEffects" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="TransitionKind">
     <eLiterals name="STRONGABORT"/>
