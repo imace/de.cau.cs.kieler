@@ -7,7 +7,7 @@
  * Author: Arne Schipper, ars@informatik.uni-kiel.de 
  *
  *******************************************************************************/
-package ssm.diagram.layout.kimllabelprovider;
+package ssm.diagram.custom.kiml.labelprovider;
 
 import org.eclipse.emf.common.notify.Adapter;
 

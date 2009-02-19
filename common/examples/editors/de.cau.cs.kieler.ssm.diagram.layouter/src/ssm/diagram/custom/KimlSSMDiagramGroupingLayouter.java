@@ -7,7 +7,7 @@
  * Author: Arne Schipper, ars@informatik.uni-kiel.de 
  *
  *******************************************************************************/
-package ssm.diagram.layout;
+package ssm.diagram.custom;
 
 import java.util.ArrayList;
 import java.util.HashMap;

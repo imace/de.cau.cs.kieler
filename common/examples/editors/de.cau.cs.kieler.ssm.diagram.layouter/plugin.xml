@@ -5,7 +5,7 @@
          point="org.eclipse.ui.preferencePages">
       <page
             category="de.cau.cs.kieler.kiml.ui.preferences.DiagramLayoutersPreferencePage"
-            class="ssm.diagram.layout.preferences.PreferencePage"
+            class="ssm.diagram.custom.preferences.PreferencePage"
             id="de.cau.cs.kieler.ssm.diagram.layouter.page1"
             name="SSM Diagram Layouter">
       </page>
@@ -13,7 +13,7 @@
    <extension
          point="org.eclipse.core.runtime.preferences">
       <initializer
-            class="ssm.diagram.layout.preferences.PreferenceInitializer">
+            class="ssm.diagram.custom.preferences.PreferenceInitializer">
       </initializer>
    </extension>
    <extension
@@ -62,7 +62,7 @@
    <extension
          point="org.eclipse.emf.edit.itemProviderAdapterFactories">
       <factory
-            class="ssm.diagram.layout.kimllabelprovider.KimlSsmItemProviderAdapterFactory"
+            class="ssm.diagram.custom.kiml.labelprovider.KimlSsmItemProviderAdapterFactory"
             uri="http://www.informatik.uni-kiel.de/rtsys/ssm"
             supportedTypes=
               "de.cau.cs.kieler.kiml.ui.provider.IKimlLabelProvider">
@@ -71,7 +71,7 @@
    <extension
          point="de.cau.cs.kieler.kiml.ui.kimlLayoutGraphBuilder">
       <kimlLayoutGraphBuilder
-            class="ssm.diagram.layout.SSMLayoutGraphBuilder"
+            class="ssm.diagram.custom.SSMLayoutGraphBuilder"
             editor_id="de.cau.cs.kieler.ssm.diagram.part.SafeStateMachineDiagramEditorID">
       </kimlLayoutGraphBuilder>
    </extension>

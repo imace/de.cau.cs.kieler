@@ -7,7 +7,7 @@
  * Author: Arne Schipper, ars@informatik.uni-kiel.de 
  *
  *******************************************************************************/
-package ssm.diagram.layout.preferences;
+package ssm.diagram.custom.preferences;
 
 /**
  * Constant definitions for the SSM Diagram Layouter preferences.

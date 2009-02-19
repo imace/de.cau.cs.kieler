@@ -7,13 +7,13 @@
  * Author: Arne Schipper, ars@informatik.uni-kiel.de 
  *
  *******************************************************************************/
-package ssm.diagram.layout.preferences;
+package ssm.diagram.custom.preferences;
 
 
 import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
 import org.eclipse.jface.preference.IPreferenceStore;
 
-import ssm.diagram.layout.SSMDiagramLayoutPlugin;
+import ssm.diagram.custom.SSMDiagramLayoutPlugin;
 
 
 
