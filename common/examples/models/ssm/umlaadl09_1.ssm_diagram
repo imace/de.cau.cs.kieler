@@ -12,7 +12,7 @@
           </regions>
         </states>
         <states xmi:type="ssm:SimpleState" xmi:id="_cLD0wPw-Ed2uffMsb835vg" incomingTransitions="_dNBoEPw-Ed2uffMsb835vg" outgoingTransitions="_fGdO4Pw-Ed2uffMsb835vg _34U44Pz1Ed2lErKWAEwhUA" name="S 1"/>
-        <states xmi:type="ssm:SimpleState" xmi:id="_2d47MPz1Ed2lErKWAEwhUA" incomingTransitions="_3hbb0Pz1Ed2lErKWAEwhUA _34U44Pz1Ed2lErKWAEwhUA" name="S 2"/>
+        <states xmi:type="ssm:SimpleState" xmi:id="_2d47MPz1Ed2lErKWAEwhUA" incomingTransitions="_3hbb0Pz1Ed2lErKWAEwhUA _34U44Pz1Ed2lErKWAEwhUA" name="S 2" stateFlag="FINAL"/>
         <transitions xmi:type="ssm:WeakAbortion" xmi:id="_dNBoEPw-Ed2uffMsb835vg" target="_cLD0wPw-Ed2uffMsb835vg" source="_Zk4csPw-Ed2uffMsb835vg"/>
         <transitions xmi:type="ssm:WeakAbortion" xmi:id="_fGdO4Pw-Ed2uffMsb835vg" target="_aO304Pw-Ed2uffMsb835vg" source="_cLD0wPw-Ed2uffMsb835vg" effectString="D" triggerString="C"/>
         <transitions xmi:type="ssm:WeakAbortion" xmi:id="_3hbb0Pz1Ed2lErKWAEwhUA" target="_2d47MPz1Ed2lErKWAEwhUA" source="_aO304Pw-Ed2uffMsb835vg" triggerString="F"/>
