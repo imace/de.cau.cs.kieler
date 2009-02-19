@@ -12,3 +12,8 @@
 -Modifizierung des Modells, um Anzeige der Transitionstrigger und -effekte
  im einfachen Editor zu ermöglichen: Transitionen erhalten Strings,
  in dem Trigger und Effekte gespeichert werden.
+-erste Version des SSM Editors eingecheckt
+-informieren, wie man state awareness implementieren kann
+-neue Idee: gucken, wie der Wizard Klassen als Labels implementiert und
+ unter Umständen nutzen, um Trigger, Effekte, Signale usw. schon im
+ einfachen Editor erstellen und anzeigen zu können
