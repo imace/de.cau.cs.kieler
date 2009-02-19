@@ -26,7 +26,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
-import ssm.diagram.custom.SSMDiagramLayoutPlugin;
+import ssm.diagram.custom.SSMDiagramCustomPlugin;
 
 
 public class PreferencePage extends FieldEditorPreferencePage implements
@@ -37,7 +37,7 @@ public class PreferencePage extends FieldEditorPreferencePage implements
 	 */
 	public PreferencePage() {
 		super(GRID);
-		setPreferenceStore(SSMDiagramLayoutPlugin.getDefault()
+		setPreferenceStore(SSMDiagramCustomPlugin.getDefault()
 				.getPreferenceStore());
 	}
 

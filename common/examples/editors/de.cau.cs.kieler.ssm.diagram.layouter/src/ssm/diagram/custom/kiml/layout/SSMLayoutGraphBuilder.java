@@ -7,7 +7,7 @@
  * Author: Arne Schipper, ars@informatik.uni-kiel.de 
  *
  *******************************************************************************/
-package ssm.diagram.custom;
+package ssm.diagram.custom.kiml.layout;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,6 +30,7 @@ import org.eclipse.gmf.runtime.draw2d.ui.internal.figures.AnimatableScrollPane;
 import org.eclipse.gmf.runtime.notation.impl.ViewImpl;
 import org.eclipse.jface.viewers.IStructuredSelection;
 
+import ssm.diagram.custom.SSMDiagramCustomPlugin;
 import ssm.diagram.custom.preferences.PreferenceConstants;
 
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KDimension;
@@ -521,16 +522,16 @@ public class SSMLayoutGraphBuilder extends KimlAbstractLayoutGraphBuilder {
 	@Override
 	protected void updatePreferences() {
 
-		prefAlternatingHVLayout = SSMDiagramLayoutPlugin.getDefault()
+		prefAlternatingHVLayout = SSMDiagramCustomPlugin.getDefault()
 				.getPreferenceStore().getBoolean(
 						PreferenceConstants.PREF_ALTERNATING_HV_LAYOUT);
-		prefHeightCollapsed = SSMDiagramLayoutPlugin.getDefault()
+		prefHeightCollapsed = SSMDiagramCustomPlugin.getDefault()
 				.getPreferenceStore().getInt(
 						PreferenceConstants.PREF_HEIGHT_COLLAPSED);
-		prefWidthCollapsed = SSMDiagramLayoutPlugin.getDefault()
+		prefWidthCollapsed = SSMDiagramCustomPlugin.getDefault()
 				.getPreferenceStore().getInt(
 						PreferenceConstants.PREF_WIDTH_COLLAPSED);
-		prefAutosizeEmptyElements = SSMDiagramLayoutPlugin.getDefault()
+		prefAutosizeEmptyElements = SSMDiagramCustomPlugin.getDefault()
 				.getPreferenceStore().getBoolean(
 						PreferenceConstants.PREF_AUTOSIZE_EMPTY_ELEMENTS);
 
