@@ -30,7 +30,6 @@
       </win>
    </launcher>
 
-
    <vm>
    </vm>
 
@@ -47,7 +46,6 @@
       <plugin id="de.cau.cs.kieler.kev.application"/>
       <plugin id="de.cau.cs.kieler.kev.extension.elevator"/>
       <plugin id="de.cau.cs.kieler.kev.extension.empty"/>
-      <plugin id="de.cau.cs.kieler.kev.extension.krep"/>
       <plugin id="de.cau.cs.kieler.kev.extension.scade"/>
       <plugin id="de.cau.cs.kieler.kiml.helpers"/>
       <plugin id="de.cau.cs.kieler.kiml.layout"/>
@@ -72,7 +70,6 @@
       <plugin id="de.cau.cs.kieler.ssm.edit"/>
       <plugin id="de.cau.cs.kieler.ssm2"/>
       <plugin id="javax.xml"/>
-      <plugin id="krep.evalbench.base"/>
       <plugin id="net.sourceforge.lpg.lpgjavaruntime"/>
       <plugin id="net.sourceforge.lpsolve"/>
       <plugin id="net.sourceforge.lpsolve.lib.linux" fragment="true"/>
