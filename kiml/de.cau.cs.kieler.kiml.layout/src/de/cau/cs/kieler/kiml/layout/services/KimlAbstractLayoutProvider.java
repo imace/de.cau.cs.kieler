@@ -9,6 +9,8 @@
  *******************************************************************************/
 package de.cau.cs.kieler.kiml.layout.services;
 
+import de.cau.cs.kieler.core.KielerException;
+import de.cau.cs.kieler.core.alg.IKielerProgressMonitor;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayouterInfo;
 
@@ -26,9 +28,6 @@ import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayouterInfo;
  * <code>kimlLayoutProvider</code> extension point. All layouter providers
  * published to Eclipse this way are collected with the {@link LayoutProviders}
  * singleton.
- * <p/>
- * There is still no proper error handling. This must be addressed on a KIELER
- * basis.
  * 
  * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
  * @see LayoutProviders
@@ -51,10 +50,13 @@ public abstract class KimlAbstractLayoutProvider {
 	 * Layout providers must implement this method in which they perform the
 	 * actual layout process.
 	 * 
-	 * @param layoutNode
-	 *            The KLayoutNode which should be laid out
+	 * @param layoutNode the KLayoutNode which should be laid out
+	 * @param progressMonitor progress monitor used to keep track of progress
+	 * @throws KielerException if the method fails to perform layout for
+	 *     some reason, which should be specified in the exception
 	 */
-	public abstract void doLayout(KLayoutNode layoutNode);
+	public abstract void doLayout(KLayoutNode layoutNode,
+			IKielerProgressMonitor progressMonitor) throws KielerException;
 
 	/**
 	 * The implemented method should return a LAYOUT_INFO for the layout

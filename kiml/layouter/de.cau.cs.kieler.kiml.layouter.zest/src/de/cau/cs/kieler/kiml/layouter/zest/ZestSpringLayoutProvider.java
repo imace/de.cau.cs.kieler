@@ -2,6 +2,8 @@ package de.cau.cs.kieler.kiml.layouter.zest;
 
 import org.eclipse.zest.layouts.algorithms.SpringLayoutAlgorithm;
 
+import de.cau.cs.kieler.core.KielerException;
+import de.cau.cs.kieler.core.alg.IKielerProgressMonitor;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphFactory;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayouterInfo;
@@ -22,11 +24,12 @@ public class ZestSpringLayoutProvider extends KimlAbstractLayoutProvider {
 	/* (non-Javadoc)
 	 * @see de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayoutProvider#doLayout(de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode)
 	 */
-	public void doLayout(KLayoutNode layoutNode) {
+	public void doLayout(KLayoutNode layoutNode,
+			IKielerProgressMonitor progressMonitor) throws KielerException {
 		SpringLayoutAlgorithm springAlgo = new SpringLayoutAlgorithm();
 		springAlgo.setRandom(false);
 		ZestAlgorithmWrapper wrapper = new ZestAlgorithmWrapper(springAlgo);
-		wrapper.doLayout(layoutNode);
+		wrapper.doLayout(layoutNode, progressMonitor);
 	}
 
 	/* (non-Javadoc)

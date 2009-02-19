@@ -2,6 +2,8 @@ package de.cau.cs.kieler.kiml.layouter.zest;
 
 import org.eclipse.zest.layouts.algorithms.DirectedGraphLayoutAlgorithm;
 
+import de.cau.cs.kieler.core.KielerException;
+import de.cau.cs.kieler.core.alg.IKielerProgressMonitor;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphFactory;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayouterInfo;
@@ -19,13 +21,15 @@ public class ZestDirectedLayoutProvider extends KimlAbstractLayoutProvider {
 
 	public static final String LAYOUTER_NAME = "Zest Directed Graph Layout";
 	
-	/* (non-Javadoc)
-	 * @see de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayoutProvider#doLayout(de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode)
+	/*
+	 * (non-Javadoc)
+	 * @see de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayoutProvider#doLayout(de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode, de.cau.cs.kieler.core.alg.IKielerProgressMonitor)
 	 */
-	public void doLayout(KLayoutNode layoutNode) {
+	public void doLayout(KLayoutNode layoutNode,
+			IKielerProgressMonitor progressMonitor) throws KielerException {
 		ZestAlgorithmWrapper wrapper = new ZestAlgorithmWrapper(
 				new DirectedGraphLayoutAlgorithm(0));
-		wrapper.doLayout(layoutNode);
+		wrapper.doLayout(layoutNode, progressMonitor);
 	}
 
 	/* (non-Javadoc)

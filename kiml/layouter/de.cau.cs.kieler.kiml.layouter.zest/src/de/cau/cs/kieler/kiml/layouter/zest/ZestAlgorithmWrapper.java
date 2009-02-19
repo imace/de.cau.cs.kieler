@@ -10,6 +10,8 @@ import org.eclipse.ui.statushandlers.StatusManager;
 import org.eclipse.zest.layouts.*;
 import org.eclipse.zest.layouts.constraints.BasicEntityConstraint;
 
+import de.cau.cs.kieler.core.KielerException;
+import de.cau.cs.kieler.core.alg.IKielerProgressMonitor;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.*;
 import de.cau.cs.kieler.kiml.layouter.zest.graph.*;
 import de.cau.cs.kieler.kiml.layouter.zest.preferences.ZestLayouterPreferencePage;
@@ -52,11 +54,15 @@ public class ZestAlgorithmWrapper {
 	 * Applies the predefined algorithm on the given layout node.
 	 * 
 	 * @param layoutNode layout node to be layouted
+	 * @param progressMonitor monitor used to keep track of progress
 	 */
-	public void doLayout(KLayoutNode layoutNode) {
+	public void doLayout(KLayoutNode layoutNode,
+			IKielerProgressMonitor progressMonitor) throws KielerException {
+		progressMonitor.begin("Zest layout", 15);
 		// build layout entities and relationships
 		LayoutEntity[] entities = buildEntities(layoutNode);
 		LayoutRelationship[] relationships = buildRelationships(layoutNode);
+		progressMonitor.worked(3);
 		
 		// compute preferred height and width of the graph
 		float scaleBase = Activator.getDefault().getPreferenceStore()
@@ -70,13 +76,14 @@ public class ZestAlgorithmWrapper {
 					SIZE_ADDITION, SIZE_ADDITION, width, height, false, false);
 		}
 		catch (InvalidLayoutConfiguration exception) {
-			Status status = new Status(IStatus.ERROR, Activator.PLUGIN_ID,
-					"Failed to execute Zest layout algorithm.", exception);
-			StatusManager.getManager().handle(status, StatusManager.SHOW);
+			throw new KielerException(exception.getMessage(),
+					KielerException.Type.EXTERNAL_ERROR);
 		}
+		progressMonitor.worked(8);
 		
 		// transfer layout results to the original graph
 		transferLayoutResult(layoutNode, entities, relationships);
+		progressMonitor.done();
 	}
 	
 	/**

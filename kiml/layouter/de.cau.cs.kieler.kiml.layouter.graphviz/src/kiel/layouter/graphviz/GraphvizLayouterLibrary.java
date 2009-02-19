@@ -22,6 +22,8 @@ import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.ui.statushandlers.StatusManager;
 
+import de.cau.cs.kieler.core.KielerException;
+import de.cau.cs.kieler.core.alg.IKielerProgressMonitor;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLabelPlacement;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeType;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KDimension;
@@ -130,14 +132,18 @@ public class GraphvizLayouterLibrary implements GraphvizLayouter{
 	 * GraphViz layouter and annotates the KLayoutGraph with the position and
 	 * size information provided by GraphViz.
 	 * 
-	 * @param layoutNode
-	 *            The KLayoutNode to process
+	 * @param layoutNode the KLayoutNode to process
+	 * @param progressMonitor the progress monitor
+	 * @throws KielerException if the layout process fails
 	 */
-	public void visit(KLayoutNode layoutNode) {
+	public void visit(KLayoutNode layoutNode,
+			IKielerProgressMonitor progressMonitor) throws KielerException {
+		progressMonitor.begin("GraphViz layout", 15);
 		updatePreferences();
 
 		/* return if there is nothing in this group */
 		if (layoutNode.getChildNodes().size() == 0) {
+			progressMonitor.done();
 			return;
 		}
 
@@ -156,6 +162,7 @@ public class GraphvizLayouterLibrary implements GraphvizLayouter{
 		} else {
 			GraphvizAPI.setGraphAttribute(graphvizGraph, "rankdir", "LR");
 		}
+		progressMonitor.worked(5);
 
 		/* pick up desired layouter */
 		if (layouterName.equals(GraphvizLayoutProviderNames.GRAPHVIZ_CIRCO)) {
@@ -202,6 +209,7 @@ public class GraphvizLayouterLibrary implements GraphvizLayouter{
 		/* cleanup */
 		mapNode2Pointer.clear();
 		mapEdge2Pointer.clear();
+		progressMonitor.done();
 	}
 
 	/**

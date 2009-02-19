@@ -49,6 +49,8 @@ import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutOption;
 import de.cau.cs.kieler.kiml.layouter.graphviz.Activator;
 import de.cau.cs.kieler.kiml.layouter.graphviz.preferences.GraphvizPreferencePage;
 import de.cau.cs.kieler.kiml.layouter.graphviz.preferences.PreferenceConstants;
+import de.cau.cs.kieler.core.KielerException;
+import de.cau.cs.kieler.core.alg.IKielerProgressMonitor;
 import de.cau.cs.kieler.core.util.MapPrinter;
 
 
@@ -199,7 +201,9 @@ public class GraphvizLayouterBinary implements GraphvizLayouter{
 	 * @param node
 	 *            The KLayoutNode to process
 	 */
-	public void visit(KLayoutNode node) {
+	public void visit(KLayoutNode node, IKielerProgressMonitor progressMonitor)
+			throws KielerException {
+		progressMonitor.begin("GraphViz layout", 15);
 		updatePreferences();
 
 		try{
@@ -228,11 +232,13 @@ public class GraphvizLayouterBinary implements GraphvizLayouter{
 		} else {
 			graphAttributes.put("rankdir", "LR");
 		}
+		progressMonitor.worked(5);
 
 		// Apply graph attributes
 		this.setGraphAttributes(graphAttributes);
 		// finalize graph input and flush it to graphviz
 		this.flushGraph();
+		progressMonitor.worked(5);
 		
 		/* pick up desired layouter */
 		if (layouterName.equals(GraphvizLayoutProviderNames.GRAPHVIZ_CIRCO)) {
@@ -294,6 +300,7 @@ public class GraphvizLayouterBinary implements GraphvizLayouter{
 		if(debugOut != null)
 			debugOut.close();
 		}catch(GraphvizException ge){
+			// TODO move error handling out of the layouter using KielerException
 			String message = "Error with the external GraphViz layouter library.";
 			Status myStatus = new Status(IStatus.ERROR, Activator.PLUGIN_ID, message, ge);
 			StatusManager.getManager().handle(myStatus, StatusManager.BLOCK);
@@ -302,6 +309,8 @@ public class GraphvizLayouterBinary implements GraphvizLayouter{
 				preferenceDialog.open();
 			}
 		}
+		
+		progressMonitor.done();
 	}
 
 	/**

@@ -244,10 +244,8 @@ class AutoArrangeListener extends ResourceSetListenerImpl implements Runnable {
 	 * @see java.lang.Runnable
 	 */
 	public synchronized void run() {
-		// find a layouter
-		Animation.markBegin();
-		KimlDiagramLayouter.layout(listenedEditor);
-		Animation.run(1000);
+		// layout the diagram
+		KimlDiagramLayouter.layout(listenedEditor, true, true);
 		// arranging completed, allow next one
 		aboutToArrange = false;
 	}

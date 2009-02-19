@@ -201,10 +201,8 @@ public class KimlLayoutTypePropertySection extends
 	 * Is called when the layout hint was changed and performs a new layout.
 	 */
 	private void performLayout() {
-		Animation.markBegin();
 		KimlDiagramLayouter.layout(getSemanticEditPart().getRoot().getViewer()
-				.getContents());
-		Animation.run(1000);
+				.getContents(), true, true);
 	}
 
 	/**

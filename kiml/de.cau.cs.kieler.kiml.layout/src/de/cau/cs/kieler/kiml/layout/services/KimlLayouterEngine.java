@@ -9,6 +9,8 @@
  *******************************************************************************/
 package de.cau.cs.kieler.kiml.layout.services;
 
+import de.cau.cs.kieler.core.KielerException;
+import de.cau.cs.kieler.core.alg.IKielerProgressMonitor;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutGraph;
 
 /**
@@ -33,14 +35,17 @@ import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutGraph;
  */
 public class KimlLayouterEngine extends KimlAbstractLayouterEngine {
 
+	/** the last used layout provider */
 	private KimlAbstractLayoutProvider lastLayoutProvider;
 	
-	/* (non-Javadoc)
-	 * @see de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayouterEngine#layout(de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutGraph)
+	/*
+	 * (non-Javadoc)
+	 * @see de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayouterEngine#layout(de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutGraph, de.cau.cs.kieler.core.alg.IKielerProgressMonitor)
 	 */
-	public void layout(KLayoutGraph layoutGraph) {
+	public void layout(KLayoutGraph layoutGraph,
+			IKielerProgressMonitor progressMonitor) throws KielerException {
 		lastLayoutProvider = layoutServices.getLayoutProvider(layoutGraph);
-		lastLayoutProvider.doLayout(layoutGraph);
+		lastLayoutProvider.doLayout(layoutGraph, progressMonitor);
 	}
 
 	/*

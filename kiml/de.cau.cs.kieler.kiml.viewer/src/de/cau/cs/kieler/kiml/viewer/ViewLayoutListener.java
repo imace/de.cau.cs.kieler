@@ -1,6 +1,8 @@
 package de.cau.cs.kieler.kiml.viewer;
 
 import org.eclipse.ui.IViewPart;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutGraph;
@@ -45,8 +47,15 @@ public class ViewLayoutListener implements IKimlLayoutListener {
 	 * @return the active layout graph view
 	 */
 	private LayoutGraphView getLayoutGraphView() {
-		IViewPart viewPart = PlatformUI.getWorkbench().getActiveWorkbenchWindow()
-			.getActivePage().findView(LayoutGraphView.VIEW_ID);
+		IWorkbenchWindow activeWindow = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
+		if (activeWindow == null)
+			return null;
+		
+		IWorkbenchPage activePage = activeWindow.getActivePage();
+		if (activePage == null)
+			return null;
+		
+		IViewPart viewPart = activePage.findView(LayoutGraphView.VIEW_ID);
 		if (viewPart instanceof LayoutGraphView)
 			return (LayoutGraphView)viewPart;
 		else

@@ -1,5 +1,7 @@
 package de.cau.cs.kieler.klodd.hierarchical;
 
+import de.cau.cs.kieler.core.KielerException;
+import de.cau.cs.kieler.core.alg.IKielerProgressMonitor;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphFactory;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayouterInfo;
@@ -41,14 +43,15 @@ public class HierarchicalDataflowLayoutProvider extends
 	/** the edge router module */
 	private IEdgeRouter edgeRouter = null;
 	
-	/* (non-Javadoc)
-	 * @see de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayoutProvider#doLayout(de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode)
+	/*
+	 * (non-Javadoc)
+	 * @see de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayoutProvider#doLayout(de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode, de.cau.cs.kieler.core.alg.IKielerProgressMonitor)
 	 */
-	public void doLayout(KLayoutNode layoutNode) {
+	public void doLayout(KLayoutNode layoutNode,
+			IKielerProgressMonitor progressMonitor) throws KielerException {
+		progressMonitor.begin("Hierarchical layout", 100);
 		// get the currently configured modules
 		updateModules();
-	
-		long startTime = System.nanoTime();
 
 		// set the size of each non-empty node
 		setNodeSizes(layoutNode);
@@ -69,12 +72,7 @@ public class HierarchicalDataflowLayoutProvider extends
 		}
 		layeredGraph.applyLayout();
 		cycleRemover.restoreGraph();
-		
-		double executionTime = (double)(System.nanoTime() - startTime) * 1e-9;
-		if (executionTime >= 1.0)
-			System.out.println("Execution time (" + layoutNode.getChildNodes().size() + " nodes): " + executionTime + " s");
-		else
-			System.out.println("Execution time (" + layoutNode.getChildNodes().size() + " nodes): " + executionTime * 1000 + " ms");
+		progressMonitor.done();
 	}
 
 	/* (non-Javadoc)

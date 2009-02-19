@@ -132,9 +132,7 @@ public class GroupAsHandler extends AbstractHandler implements IHandler {
 			 * now use the new grouping/layout information and re-layout the
 			 * whole diagram
 			 */
-			Animation.markBegin();
-			KimlDiagramLayouter.layout(editorPart);
-			Animation.run(700);
+			KimlDiagramLayouter.layout(editorPart, true, true);
 		}
 		return null;
 	}

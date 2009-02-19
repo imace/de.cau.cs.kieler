@@ -9,6 +9,8 @@
  *******************************************************************************/
 package de.cau.cs.kieler.kiml.layout.services;
 
+import de.cau.cs.kieler.core.KielerException;
+import de.cau.cs.kieler.core.alg.IKielerProgressMonitor;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphFactory;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayouterInfo;
@@ -29,11 +31,13 @@ public class KimlNullLayoutProvider extends KimlAbstractLayoutProvider {
 	/**
 	 * Does nothing, as this is the NullLayoutProvider.
 	 * 
-	 * @see de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayoutProvider#doLayout(KLayoutNode)
-	 *      KimlAbstractLayoutProvider.doLayout(KLayoutNode)
+	 * @see de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayoutProvider#doLayout(de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode, de.cau.cs.kieler.core.alg.IKielerProgressMonitor)
 	 */
-	public void doLayout(KLayoutNode layoutNode) {
-		;/* NULL layouter, does nothing */
+	public void doLayout(KLayoutNode layoutNode,
+			IKielerProgressMonitor progressMonitor) throws KielerException {
+		// notify the progress monitor of the start and immediate end
+		progressMonitor.begin("Null layout", 1);
+		progressMonitor.done();
 	}
 
 	/**

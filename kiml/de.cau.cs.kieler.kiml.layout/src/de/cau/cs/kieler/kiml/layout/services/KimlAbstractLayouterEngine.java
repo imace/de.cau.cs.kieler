@@ -9,6 +9,8 @@
  *******************************************************************************/
 package de.cau.cs.kieler.kiml.layout.services;
 
+import de.cau.cs.kieler.core.KielerException;
+import de.cau.cs.kieler.core.alg.IKielerProgressMonitor;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutGraph;
 
 /**
@@ -31,10 +33,13 @@ public abstract class KimlAbstractLayouterEngine {
 	 * Lays out a KLayoutGraph with hierarchy, that is attaches layout
 	 * information to the description of the KLayoutGraph.
 	 * 
-	 * @param layoutGraph
-	 *            A KLayoutGraph with hierarchy which is laid out by this method
+	 * @param layoutGraph a KLayoutGraph with hierarchy which is laid out
+	 *     by this method
+	 * @param progressMonitor progress monitor used to keep track of progress
+	 * @throws KielerException if the method fails to perform layout
 	 */
-	public abstract void layout(KLayoutGraph layoutGraph);
+	public abstract void layout(KLayoutGraph layoutGraph,
+			IKielerProgressMonitor progressMonitor) throws KielerException;
 	
 	/**
 	 * Returns the last layout provider that was used for layout. This

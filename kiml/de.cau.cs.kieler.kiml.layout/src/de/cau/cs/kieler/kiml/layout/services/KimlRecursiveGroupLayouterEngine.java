@@ -9,6 +9,8 @@
  *******************************************************************************/
 package de.cau.cs.kieler.kiml.layout.services;
 
+import de.cau.cs.kieler.core.KielerException;
+import de.cau.cs.kieler.core.alg.IKielerProgressMonitor;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutGraph;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
 
@@ -33,34 +35,53 @@ public class KimlRecursiveGroupLayouterEngine extends
 	
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayouterEngine
-	 * #layout
-	 * (de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutGraph)
+	 * @see de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayouterEngine#layout(de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutGraph, de.cau.cs.kieler.core.alg.IKielerProgressMonitor)
 	 */
-	public void layout(KLayoutGraph layoutGraph) {
+	public void layout(KLayoutGraph layoutGraph,
+			IKielerProgressMonitor progressMonitor) throws KielerException {
 		lastLayoutProvider = null;
+		int nodeCount = countNodes(layoutGraph);
+		progressMonitor.begin("Recursive graph layout", nodeCount);
 		if (layoutGraph != null)
-			layoutRecursively(layoutGraph);
+			layoutRecursively(layoutGraph, progressMonitor);
+		progressMonitor.done();
 	}
 
 	/**
 	 * Recursive function to enable hierarchically layout. The leafs are laid
 	 * out first to use the size information gained in the level above.
 	 * 
-	 * @param layoutNode
-	 *            The KLayoutNode with sub KLayoutNodes to be laid out.
+	 * @param layoutNode the KLayoutNode with sub KLayoutNodes to be laid out
+	 * @param progressMonitor monitor used to keep track of progress
+	 * @throws KielerException if one of the layout providers fails
 	 */
-	private void layoutRecursively(KLayoutNode layoutNode) {
+	private void layoutRecursively(KLayoutNode layoutNode,
+			IKielerProgressMonitor progressMonitor) throws KielerException {
 		for (KLayoutNode childNodes : layoutNode.getChildNodes()) {
-			layoutRecursively(childNodes);
+			layoutRecursively(childNodes, progressMonitor);
 		}
 
-		if (layoutNode.getChildNodes().size() > 0) {
+		if (!layoutNode.getChildNodes().isEmpty()) {
 			lastLayoutProvider = layoutServices.getLayoutProvider(layoutNode);
-			lastLayoutProvider.doLayout(layoutNode);
+			lastLayoutProvider.doLayout(layoutNode,
+					progressMonitor.subTask(layoutNode.getChildNodes().size()));
 		}
+	}
+	
+	/**
+	 * Determines the total number of layout nodes in the given layout
+	 * graph.
+	 * 
+	 * @param layoutNode parent layout node to examine
+	 * @return total number of child layout nodes
+	 */
+	private int countNodes(KLayoutNode layoutNode) {
+		int count = layoutNode.getChildNodes().size();
+		for (KLayoutNode childNode : layoutNode.getChildNodes()) {
+			if (!childNode.getChildNodes().isEmpty())
+				count += countNodes(childNode);
+		}
+		return count;
 	}
 
 	/*

@@ -2,6 +2,8 @@ package de.cau.cs.kieler.klodd.orthogonal;
 
 import java.util.List;
 
+import de.cau.cs.kieler.core.KielerException;
+import de.cau.cs.kieler.core.alg.IKielerProgressMonitor;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KInsets;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphFactory;
@@ -36,15 +38,16 @@ public class OrthogonalDataflowLayoutProvider extends
 	/** the compaction module */
 	private ICompacter compacter;
 	
-	/* (non-Javadoc)
-	 * @see de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayoutProvider#doLayout(de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode)
+	/*
+	 * (non-Javadoc)
+	 * @see de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayoutProvider#doLayout(de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode, de.cau.cs.kieler.core.alg.IKielerProgressMonitor)
 	 */
-	public void doLayout(KLayoutNode layoutNode) {
+	public void doLayout(KLayoutNode layoutNode,
+			IKielerProgressMonitor progressMonitor) throws KielerException {
+		progressMonitor.begin("Orthogonal layout", 100);
 		// get the currently configured modules
 		updateModules();
 		
-		long startTime = System.nanoTime();
-
 		// split the graph into connected components
 		ConnectedComponents componentsSplitter = new ConnectedComponents();
 		List<TSMGraph> components = componentsSplitter.findComponents(layoutNode);
@@ -61,12 +64,7 @@ public class OrthogonalDataflowLayoutProvider extends
 		}
 		// apply layout information to the original graph
 		applyLayout(components, layoutNode);
-		
-		double executionTime = (double)(System.nanoTime() - startTime) * 1e-9;
-		if (executionTime >= 1.0)
-			System.out.println("Execution time (" + layoutNode.getChildNodes().size() + " nodes): " + executionTime + " s");
-		else
-			System.out.println("Execution time (" + layoutNode.getChildNodes().size() + " nodes): " + executionTime * 1000 + " ms");
+		progressMonitor.done();
 	}
 
 	/* (non-Javadoc)

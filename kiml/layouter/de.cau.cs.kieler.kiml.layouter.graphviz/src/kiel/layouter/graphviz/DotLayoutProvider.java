@@ -9,6 +9,8 @@
  *******************************************************************************/
 package kiel.layouter.graphviz;
 
+import de.cau.cs.kieler.core.KielerException;
+import de.cau.cs.kieler.core.alg.IKielerProgressMonitor;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphFactory;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayouterInfo;
@@ -41,10 +43,11 @@ public class DotLayoutProvider extends KimlAbstractLayoutProvider {
 	/* (non-Javadoc)
 	 * @see de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayoutProvider#doLayout(de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode)
 	 */
-	public void doLayout(KLayoutNode layoutNode) {
+	public void doLayout(KLayoutNode layoutNode,
+			IKielerProgressMonitor progressMonitor) throws KielerException {
 		if (graphvizLayouter == null)
 			graphvizLayouter = new GraphvizLayouterBinary(LAYOUT_PROVIDER_NAME);
-		graphvizLayouter.visit(layoutNode);
+		graphvizLayouter.visit(layoutNode, progressMonitor);
 	}
 
 	/* (non-Javadoc)

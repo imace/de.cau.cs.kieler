@@ -68,14 +68,10 @@ public class KimlLayoutHandler extends AbstractHandler implements IHandler {
 						.size() == 0)
 				|| commandId.equals(COMMAND_ID_LAYOUT_ALL)) {
 			// start layout process with editor part
-			Animation.markBegin();
-			KimlDiagramLayouter.layout(editorPart);
-			Animation.run(1000);
+			KimlDiagramLayouter.layout(editorPart, true, true);
 		} else {
 			// start layout process with selection
-			Animation.markBegin();
-			KimlDiagramLayouter.layout(selection);
-			Animation.run(1000);
+			KimlDiagramLayouter.layout(selection, true, true);
 		}
 
 		return null;

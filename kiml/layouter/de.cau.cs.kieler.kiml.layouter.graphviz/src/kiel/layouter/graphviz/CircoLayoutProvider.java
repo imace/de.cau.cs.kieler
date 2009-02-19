@@ -9,6 +9,8 @@
  *******************************************************************************/
 package kiel.layouter.graphviz;
 
+import de.cau.cs.kieler.core.KielerException;
+import de.cau.cs.kieler.core.alg.IKielerProgressMonitor;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphFactory;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayouterInfo;
@@ -40,16 +42,13 @@ public class CircoLayoutProvider extends KimlAbstractLayoutProvider {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayoutProvider
-	 * #doLayout
-	 * (de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode)
+	 * @see de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayoutProvider#doLayout(de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode, de.cau.cs.kieler.core.alg.IKielerProgressMonitor)
 	 */
-	public void doLayout(KLayoutNode layoutNode) {
+	public void doLayout(KLayoutNode layoutNode,
+			IKielerProgressMonitor progressMonitor) throws KielerException {
 		if (graphvizLayouter == null)
 			graphvizLayouter = new GraphvizLayouterBinary(LAYOUT_PROVIDER_NAME);
-		graphvizLayouter.visit(layoutNode);
+		graphvizLayouter.visit(layoutNode, progressMonitor);
 	}
 
 	/*
@@ -65,8 +64,7 @@ public class CircoLayoutProvider extends KimlAbstractLayoutProvider {
 		info.setLayouterName(LAYOUT_PROVIDER_NAME);
 		info.setLayoutType(LAYOUT_PROVIDER_LAYOUT_TYPE);
 		info.setLayoutOption(LAYOUT_PROVIDER_LAYOUT_OPTION);
-		info
-				.setLayouterCollectionID(GraphvizLayoutProviderNames.LAYOUT_PROVIDER_COLLECTION_ID);
+		info.setLayouterCollectionID(GraphvizLayoutProviderNames.LAYOUT_PROVIDER_COLLECTION_ID);
 		return info;
 	}
 }
