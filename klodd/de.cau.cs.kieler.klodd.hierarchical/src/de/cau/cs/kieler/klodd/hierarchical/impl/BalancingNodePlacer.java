@@ -46,21 +46,16 @@ public class BalancingNodePlacer extends AbstractAlgorithm implements
 		this.basicNodePlacer = basicNodePlacer;
 	}
 	
-	/*
-	 * (non-Javadoc)
-	 * @see de.cau.cs.kieler.klodd.core.algorithms.AbstractAlgorithm#reset()
-	 */
-	public void reset() {
-		basicNodePlacer.reset();
-	}
-	
 	/* (non-Javadoc)
 	 * @see de.cau.cs.kieler.klodd.hierarchical.modules.INodePlacer#placeNodes(de.cau.cs.kieler.klodd.hierarchical.structures.LayeredGraph, float)
 	 */
 	public void placeNodes(LayeredGraph layeredGraph, float minDist) {
+		getMonitor().begin("Balancing node placement", 2);
+		
 		this.minDist = minDist;
 		this.layoutDirection = layeredGraph.getLayoutDirection();
 		// apply the basic node placement
+		basicNodePlacer.reset(getMonitor().subTask(1));
 		basicNodePlacer.placeNodes(layeredGraph, minDist);
 		int movableCount = basicNodePlacer.getMovableSegments().length;
 		
@@ -132,6 +127,8 @@ public class BalancingNodePlacer extends AbstractAlgorithm implements
 				}
 			}
 		}
+		
+		getMonitor().done();
 	}
 	
 	/**

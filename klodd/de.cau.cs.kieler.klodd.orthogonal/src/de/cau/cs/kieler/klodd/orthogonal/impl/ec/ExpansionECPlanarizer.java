@@ -22,12 +22,15 @@ public class ExpansionECPlanarizer extends AbstractAlgorithm implements
 	 * @see de.cau.cs.kieler.klodd.orthogonal.modules.IPlanarizer#planarize(de.cau.cs.kieler.klodd.orthogonal.structures.TSMGraph)
 	 */
 	public void planarize(TSMGraph graph) {
+		getMonitor().begin("EC Expansion planarization", 1);
+		
 		// expand the given embedding constraints
 		ConstraintExpander constraintExpander = new ConstraintExpander();
 		constraintExpander.expand(graph);
 
 		// TODO implement EC-planarization of the expanded graph
 		
+		getMonitor().done();
 	}
 
 }

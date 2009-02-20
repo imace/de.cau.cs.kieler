@@ -44,6 +44,8 @@ public class SortingNodewiseEdgePlacer extends AbstractAlgorithm implements
 	 * @see de.cau.cs.kieler.klodd.hierarchical.modules.INodewiseEdgePlacer#placeEdges(de.cau.cs.kieler.klodd.hierarchical.structures.LayeredGraph)
 	 */
 	public void placeEdges(LayeredGraph layeredGraph) {
+		getMonitor().begin("Nodewise edge placement", 1);
+		
 		layoutDirection = layeredGraph.getLayoutDirection();
 		// calculate the connection routing for each layer element
 		for (Layer layer : layeredGraph.getLayers()) {
@@ -51,6 +53,8 @@ public class SortingNodewiseEdgePlacer extends AbstractAlgorithm implements
 				placeEdges(element);
 			}
 		}
+		
+		getMonitor().done();
 	}
 	
 	/**

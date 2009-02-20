@@ -35,14 +35,6 @@ public class LayerSweepCrossingReducer extends AbstractAlgorithm implements
 		this.layerReducer = layerReducer;
 	}
 	
-	/*
-	 * (non-Javadoc)
-	 * @see de.cau.cs.kieler.klodd.core.algorithms.AbstractAlgorithm#reset()
-	 */
-	public void reset() {
-		layerReducer.reset();
-	}
-	
 	/* (non-Javadoc)
 	 * @see de.cau.cs.kieler.klodd.hierarchical.modules.ICrossingReducer#reduceCrossings(de.cau.cs.kieler.klodd.hierarchical.structures.LayeredGraph)
 	 */
@@ -89,15 +81,19 @@ public class LayerSweepCrossingReducer extends AbstractAlgorithm implements
 				lastLayer--;
 			}
 			
+			getMonitor().begin("Crossing reduction", lastLayer - firstLayer + 1);
+			
 			// process all but the port layers and the last layer
 			ListIterator<Layer> layerIter = layeredGraph.getLayers().listIterator(firstLayer);
 			int layerIndex = firstLayer;
 			while (layerIndex < lastLayer) {
+				layerReducer.reset(getMonitor().subTask(1));
 				layerReducer.reduceCrossings(layerIter.next(), true);
 				layerIndex++;
 			}
 			
 			// order the last layer by the preceding layer and the output ports layer
+			layerReducer.reset(getMonitor().subTask(1));
 			if (lastLayer < layeredGraph.getLayers().size() - 1) {
 				layerReducer.reduceCrossings(layerIter.next());
 			}
@@ -107,6 +103,9 @@ public class LayerSweepCrossingReducer extends AbstractAlgorithm implements
 		}
 		
 		else {
+			getMonitor().begin("Crossing reduction", 2 * (layeredGraph
+					.getLayers().size() - 1));
+			
 			// find arbitrary ranking of the first layer
 			Layer firstLayer = layeredGraph.getLayers().get(0);
 			firstLayer.calcElemRanks();
@@ -114,15 +113,18 @@ public class LayerSweepCrossingReducer extends AbstractAlgorithm implements
 			// process the other layers in forward direction
 			ListIterator<Layer> layerIter = layeredGraph.getLayers().listIterator(1);
 			while (layerIter.hasNext()) {
+				layerReducer.reset(getMonitor().subTask(1));
 				layerReducer.reduceCrossings(layerIter.next(), true);
 			}
 			
 			// process all layers again in backwards direction
 			layerIter.previous();
 			while (layerIter.hasPrevious()) {
+				layerReducer.reset(getMonitor().subTask(1));
 				layerReducer.reduceCrossings(layerIter.previous(), false);
 			}
 		}
+		getMonitor().done();
 	}
 
 }

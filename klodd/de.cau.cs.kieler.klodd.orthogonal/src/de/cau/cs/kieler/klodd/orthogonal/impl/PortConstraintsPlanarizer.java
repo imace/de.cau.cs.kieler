@@ -25,15 +25,6 @@ public class PortConstraintsPlanarizer extends AbstractAlgorithm implements
 	/** the embedding constraints planarizer */
 	private IPlanarizer ecPlanarizer;
 	
-	/*
-	 * (non-Javadoc)
-	 * @see de.cau.cs.kieler.klodd.core.algorithms.AbstractAlgorithm#reset()
-	 */
-	public void reset() {
-		super.reset();
-		ecPlanarizer.reset();
-	}
-	
 	/**
 	 * Creates a port constraints planarizer with a given embedding
 	 * constraints planarizer.
@@ -49,11 +40,14 @@ public class PortConstraintsPlanarizer extends AbstractAlgorithm implements
 	 * @see de.cau.cs.kieler.klodd.orthogonal.modules.IPlanarizer#planarize(de.cau.cs.kieler.klodd.orthogonal.structures.TSMGraph)
 	 */
 	public void planarize(TSMGraph graph) {
+		getMonitor().begin("Port constraints planarization", 1);
 		// create constraints for the input graph
 		createConstraints(graph);
 		
 		// planarize the input graph with embedding constraints
+		ecPlanarizer.reset(getMonitor().subTask(1));
 		ecPlanarizer.planarize(graph);
+		getMonitor().done();
 	}
 	
 	/**

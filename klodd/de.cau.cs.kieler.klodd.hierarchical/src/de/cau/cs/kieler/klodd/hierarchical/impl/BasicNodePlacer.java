@@ -41,6 +41,7 @@ public class BasicNodePlacer extends AbstractAlgorithm implements INodePlacer {
 	 * @see de.cau.cs.kieler.klodd.core.algorithms.AbstractAlgorithm#reset()
 	 */
 	public void reset() {
+		super.reset();
 		sortedSegments = null;
 	}
 	
@@ -49,6 +50,8 @@ public class BasicNodePlacer extends AbstractAlgorithm implements INodePlacer {
 	 * @see de.cau.cs.kieler.klodd.hierarchical.modules.INodePlacer#placeNodes(de.cau.cs.kieler.klodd.hierarchical.structures.LayeredGraph, float)
 	 */
 	public void placeNodes(LayeredGraph layeredGraph, float minDist) {
+		getMonitor().begin("Basic node placement", 1);
+		
 		this.minDist = minDist;
 		this.layoutDirection = layeredGraph.getLayoutDirection();
 		
@@ -73,6 +76,8 @@ public class BasicNodePlacer extends AbstractAlgorithm implements INodePlacer {
 			layeredGraph.crosswiseDim = Math.max(layeredGraph.crosswiseDim,
 					layer.crosswiseDim); 
 		}
+		
+		getMonitor().done();
 	}
 	
 	/**

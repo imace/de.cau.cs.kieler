@@ -40,6 +40,8 @@ public class ECPlanarityTester extends AbstractAlgorithm implements
 	 * @param biconnectedSection graph section to be tested
 	 */
 	public boolean isPlanar(GraphSection biconnectedSection) {
+		getMonitor().begin("EC planarity test", 1);
+		
 		try {
 			// test for basic planarity
 			boolean basicPlanar = basicPlanarityTester.isPlanar(biconnectedSection);
@@ -52,6 +54,7 @@ public class ECPlanarityTester extends AbstractAlgorithm implements
 		}
 		finally {
 			biconnectedSection.restoreEdges();
+			getMonitor().done();
 		}
 	}
 

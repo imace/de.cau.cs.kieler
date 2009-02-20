@@ -25,6 +25,8 @@ public class BarycenterCrossingReducer extends AbstractAlgorithm implements
 	 * @see de.cau.cs.kieler.klodd.hierarchical.modules.ISingleLayerCrossingReducer#reduceCrossings(de.cau.cs.kieler.klodd.hierarchical.structures.Layer, de.cau.cs.kieler.klodd.hierarchical.structures.Layer, boolean)
 	 */
 	public void reduceCrossings(Layer layer, boolean forward) {
+		getMonitor().begin("Barycenter method", 1);
+		
 		Map<LayerElement, Double> abstractRanks = new HashMap<LayerElement, Double>();
 		for (LayerElement element : layer.getElements()) {
 			if (element.arePortsFixed()) {
@@ -63,12 +65,16 @@ public class BarycenterCrossingReducer extends AbstractAlgorithm implements
 			}
 		}
 		layer.sortAbstract(abstractRanks);
+		
+		getMonitor().done();
 	}
 
 	/* (non-Javadoc)
 	 * @see de.cau.cs.kieler.klodd.hierarchical.modules.ISingleLayerCrossingReducer#reduceCrossings(de.cau.cs.kieler.klodd.hierarchical.structures.Layer, de.cau.cs.kieler.klodd.hierarchical.structures.Layer, de.cau.cs.kieler.klodd.hierarchical.structures.Layer, boolean)
 	 */
 	public void reduceCrossings(Layer layer) {
+		getMonitor().begin("Barycenter method", 1);
+		
 		Map<LayerElement, Double> abstractRanks = new HashMap<LayerElement, Double>();
 		for (LayerElement element : layer.getElements()) {
 			if (element.arePortsFixed()) {
@@ -108,6 +114,8 @@ public class BarycenterCrossingReducer extends AbstractAlgorithm implements
 			}
 		}
 		layer.sortAbstract(abstractRanks);
+		
+		getMonitor().done();
 	}
 
 	/**

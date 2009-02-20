@@ -49,28 +49,36 @@ public class HierarchicalDataflowLayoutProvider extends
 	 */
 	public void doLayout(KLayoutNode layoutNode,
 			IKielerProgressMonitor progressMonitor) throws KielerException {
-		progressMonitor.begin("Hierarchical layout", 100);
+		progressMonitor.begin("Hierarchical layout", 75);
 		// get the currently configured modules
 		updateModules();
 
 		// set the size of each non-empty node
 		setNodeSizes(layoutNode);
 		// remove cycles in the input graph
+		cycleRemover.reset(progressMonitor.subTask(10));
 		cycleRemover.removeCycles(layoutNode);
 		// put each node into a layer and get a layered graph
+		layerAssigner.reset(progressMonitor.subTask(10));
 		LayeredGraph layeredGraph = layerAssigner.assignLayers(layoutNode);
 		if (!layeredGraph.getLayers().isEmpty()) {
 			layeredGraph.createConnections();
+			progressMonitor.worked(5);
 			// optimize the order of nodes in each layer
+			crossingReducer.reset(progressMonitor.subTask(10));
 			crossingReducer.reduceCrossings(layeredGraph);
 			// determine a placement for all edge endpoints
+			nodewiseEdgePlacer.reset(progressMonitor.subTask(10));
 			nodewiseEdgePlacer.placeEdges(layeredGraph);
 			// determine a crosswise placement for each node
+			nodePlacer.reset(progressMonitor.subTask(10));
 			nodePlacer.placeNodes(layeredGraph, minDist);
 			// route edges between nodes
+			edgeRouter.reset(progressMonitor.subTask(10));
 			edgeRouter.routeEdges(layeredGraph, minDist);
 		}
 		layeredGraph.applyLayout();
+		progressMonitor.worked(5);
 		cycleRemover.restoreGraph();
 		progressMonitor.done();
 	}
@@ -93,12 +101,19 @@ public class HierarchicalDataflowLayoutProvider extends
 	private void updateModules() {
 		KloddLayoutPreferences pref = KloddCorePlugin.getLayoutPreferences();
 		
-		cycleRemover = new DFSCycleRemover();
-		layerAssigner = new LongestPathLayerAssigner();
-		crossingReducer = new LayerSweepCrossingReducer(new BarycenterCrossingReducer());
-		nodewiseEdgePlacer = new SortingNodewiseEdgePlacer();
-		nodePlacer = new BalancingNodePlacer(new BasicNodePlacer());
-		edgeRouter = new RectilinearEdgeRouter(new SortingLayerwiseEdgePlacer());
+		if (cycleRemover == null)
+			cycleRemover = new DFSCycleRemover();
+		if (layerAssigner == null)
+			layerAssigner = new LongestPathLayerAssigner();
+		if (crossingReducer == null)
+			crossingReducer = new LayerSweepCrossingReducer(
+					new BarycenterCrossingReducer());
+		if (nodewiseEdgePlacer == null)
+			nodewiseEdgePlacer = new SortingNodewiseEdgePlacer();
+		if (nodePlacer == null)
+			nodePlacer = new BalancingNodePlacer(new BasicNodePlacer());
+		if (edgeRouter == null)
+			edgeRouter = new RectilinearEdgeRouter(new SortingLayerwiseEdgePlacer());
 		
 		minDist = ((Float)pref.get(KloddLayoutPreferences.MIN_DIST)).floatValue();
 	}

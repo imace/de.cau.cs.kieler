@@ -41,7 +41,6 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 	 */
 	public void reset() {
 		super.reset();
-		normalizedCompacter.reset();
 		startNodeMap.clear();
 		endNodeMap.clear();
 	}
@@ -62,16 +61,21 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 	 * @see de.cau.cs.kieler.klodd.orthogonal.modules.ICompacter#compact(de.cau.cs.kieler.klodd.orthogonal.structures.TSMGraph, float)
 	 */
 	public void compact(TSMGraph graph, float minDist) {
+		getMonitor().begin("Normalizing compaction", 1);
+		
 		this.minDist = minDist;
 		// create a normalized version of the input graph
 		TSMGraph normalizedGraph = createNormalizedGraph(graph);
 		// build dual graph for the normalized graph
 		buildDualGraph(normalizedGraph);
 		// execute the embedded compacter
+		normalizedCompacter.reset(getMonitor().subTask(1));
 		normalizedCompacter.compact(normalizedGraph, minDist);
 		// transform abstract metrics to concrete metrics
 		transformMetrics(graph, (int)normalizedGraph.width,
 				(int)normalizedGraph.height);
+		
+		getMonitor().done();
 	}
 	
 	/**

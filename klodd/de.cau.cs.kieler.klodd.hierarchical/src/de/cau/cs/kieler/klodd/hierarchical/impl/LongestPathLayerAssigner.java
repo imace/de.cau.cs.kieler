@@ -23,6 +23,7 @@ public class LongestPathLayerAssigner extends AbstractAlgorithm implements
 	 * @see de.cau.cs.kieler.klodd.core.algorithms.AbstractAlgorithm#reset()
 	 */
 	public void reset() {
+		super.reset();
 		layeredGraph = null;
 	}
 
@@ -30,6 +31,7 @@ public class LongestPathLayerAssigner extends AbstractAlgorithm implements
 	 * @see de.cau.cs.kieler.klodd.hierarchical.modules.ILayerAssigner#assignLayers(de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode)
 	 */
 	public LayeredGraph assignLayers(KLayoutNode parentNode) {
+		getMonitor().begin("Longest path layering", 1);
 		layeredGraph = new LayeredGraph(LayeredGraph.Type.BUILD_BACK, parentNode);
 		
 		// process output ports
@@ -51,6 +53,7 @@ public class LongestPathLayerAssigner extends AbstractAlgorithm implements
 			}
 		}
 		
+		getMonitor().done();
 		return layeredGraph;
 	}
 	

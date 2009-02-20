@@ -72,7 +72,6 @@ public class RefiningCompacter extends AbstractAlgorithm implements ICompacter {
 	 */
 	public void reset() {
 		super.reset();
-		refinedCompacter.reset();
 		frameConnected = false;
 	}
 	
@@ -92,6 +91,8 @@ public class RefiningCompacter extends AbstractAlgorithm implements ICompacter {
 	 * @see de.cau.cs.kieler.klodd.orthogonal.modules.ICompacter#compact(de.cau.cs.kieler.klodd.orthogonal.structures.TSMGraph, float)
 	 */
 	public void compact(TSMGraph graph, float minDist) {
+		getMonitor().begin("Refined compaction", 1);
+		
 		// refine the internal faces
 		ListIterator<TSMFace> faceIter = graph.faces.listIterator();
 		while (faceIter.hasNext()) {
@@ -109,7 +110,9 @@ public class RefiningCompacter extends AbstractAlgorithm implements ICompacter {
 		graph.faces.addAll(newFaces);
 		
 		// execute the embedded compacter
+		refinedCompacter.reset(getMonitor().subTask(1));
 		refinedCompacter.compact(graph, minDist);
+		getMonitor().done();
 	}
 
 	/**

@@ -51,9 +51,12 @@ public class KandinskyLPOrthogonalizer extends AbstractAlgorithm implements
 	 * @see de.cau.cs.kieler.klodd.orthogonal.modules.IOrthogonalizer#orthogonalize(de.cau.cs.kieler.klodd.orthogonal.structures.TSMGraph)
 	 */
 	public void orthogonalize(TSMGraph graph) {
+		getMonitor().begin("Kandinsky orthogonalization", 4);
 		// exit immediately in the trivial case
-		if (graph.edges.isEmpty())
+		if (graph.edges.isEmpty()) {
+			getMonitor().done();
 			return;
+		}
 		
 		LpSolve ilp = null;
 		try {
@@ -61,9 +64,11 @@ public class KandinskyLPOrthogonalizer extends AbstractAlgorithm implements
 			ilp = makeIlp(graph);
 			LpSolveAborter aborter = new LpSolveAborter();
 			ilp.putAbortfunc(aborter, null);
+			getMonitor().worked(1);
 			
 			// execute the solver on the ILP
 			int result = ilp.solve();
+			getMonitor().worked(2);
 			
 			if (result == LpSolve.OPTIMAL || result == LpSolve.SUBOPTIMAL) {
 				// apply the solution to the input graph
@@ -81,6 +86,7 @@ public class KandinskyLPOrthogonalizer extends AbstractAlgorithm implements
 		finally {
 			if (ilp != null)
 				ilp.deleteLp();
+			getMonitor().done();
 		}
 	}
 	

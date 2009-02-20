@@ -36,6 +36,8 @@ public class LayeringCompacter extends AbstractAlgorithm implements
 	 * @see de.cau.cs.kieler.klodd.orthogonal.modules.ICompacter#compact(de.cau.cs.kieler.klodd.orthogonal.structures.TSMGraph, float)
 	 */
 	public void compact(TSMGraph graph, float minDist) {
+		getMonitor().begin("Layering compaction", 1);
+		
 		// determine horizontal numbering: build vertical bars
 		int maxXrank = 0;
 		buildTopoBars(graph, false);
@@ -59,6 +61,8 @@ public class LayeringCompacter extends AbstractAlgorithm implements
 			maxYrank = Math.max(maxYrank, topoBar.rank);
 		}
 		graph.height = maxYrank + 1;
+		
+		getMonitor().done();
 	}
 	
 	/**

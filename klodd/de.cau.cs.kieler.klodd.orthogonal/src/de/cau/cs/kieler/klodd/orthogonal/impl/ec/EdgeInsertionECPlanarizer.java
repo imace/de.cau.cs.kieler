@@ -19,6 +19,7 @@ public class EdgeInsertionECPlanarizer extends AbstractAlgorithm implements
 	 * @see de.cau.cs.kieler.klodd.orthogonal.modules.IPlanarizer#planarize(de.cau.cs.kieler.klodd.orthogonal.structures.TSMGraph)
 	 */
 	public void planarize(TSMGraph graph) {
+		getMonitor().begin("Edge insertion planarization", graph.edges.size());
 		// remove all edges from the incidence lists
 		for (TSMNode node : graph.nodes)
 			node.incidence.clear();
@@ -29,8 +30,11 @@ public class EdgeInsertionECPlanarizer extends AbstractAlgorithm implements
 		for (TSMEdge edge : graph.edges) {
 			EmbeddingConstraint sourceConstraint = edge.source.embeddingConstraint;
 			EmbeddingConstraint targetConstraint = edge.target.embeddingConstraint;
+			edgeInserter.setProgressMonitor(getMonitor().subTask(1));
 			edgeInserter.insertEdge(edge, sourceConstraint, targetConstraint);
 		}
+		
+		getMonitor().done();
 	}
 
 }

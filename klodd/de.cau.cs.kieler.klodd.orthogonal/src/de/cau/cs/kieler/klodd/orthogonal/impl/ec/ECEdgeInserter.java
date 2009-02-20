@@ -124,6 +124,8 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 		if (graph == null)
 			throw new IllegalStateException("The method setGraph() must be called first.");
 		
+		getMonitor().begin("EC edge insertion", 1);
+		
 		// determine the admissible placings at source and target
 		List<EdgePlacing> sourcePlacings = getEdgePlacings(edge,
 				edge.source, sourceConstraint, true);
@@ -133,6 +135,8 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 		DualPath path = shortestPath(edge, sourcePlacings, targetPlacings);
 		// insert the edge through the new path
 		insertEdge(edge, path);
+		
+		getMonitor().done();
 	}
 	
 	/**

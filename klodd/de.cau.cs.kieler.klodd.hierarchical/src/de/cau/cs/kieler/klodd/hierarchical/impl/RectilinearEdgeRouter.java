@@ -54,6 +54,9 @@ public class RectilinearEdgeRouter extends AbstractAlgorithm implements
 	 * @see de.cau.cs.kieler.klodd.hierarchical.modules.IEdgeRouter#routeEdges(de.cau.cs.kieler.klodd.hierarchical.structures.LayeredGraph, float)
 	 */
 	public void routeEdges(LayeredGraph layeredGraph, float minDist) {
+		getMonitor().begin("Rectilinear edge routing",
+				layeredGraph.getLayers().size() - 1);
+		
 		this.minDist = minDist;
 		this.layerPos = 0.0f; 
 		this.maxCrosswisePos = layeredGraph.crosswiseDim;
@@ -96,6 +99,7 @@ public class RectilinearEdgeRouter extends AbstractAlgorithm implements
 		
 		// process external ports
 		processExternalPorts(layeredGraph);
+		getMonitor().done();
 	}
 	
 	/**
@@ -180,7 +184,7 @@ public class RectilinearEdgeRouter extends AbstractAlgorithm implements
 		}
 		
 		// determine placement for all layer connections
-		layerwiseEdgePlacer.reset();
+		layerwiseEdgePlacer.reset(getMonitor().subTask(1));
 		int slotRanks = layerwiseEdgePlacer.placeEdges(layer, minDist);
 		Map<Object, RoutingSlot> slotMap = layerwiseEdgePlacer.getSlotMap();
 		

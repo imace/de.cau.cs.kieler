@@ -20,9 +20,18 @@ public abstract class AbstractAlgorithm implements IAlgorithm {
 	
 	/*
 	 * (non-Javadoc)
+	 * @see de.cau.cs.kieler.core.alg.IAlgorithm#reset(de.cau.cs.kieler.core.alg.IKielerProgressMonitor)
+	 */
+	public final void reset(IKielerProgressMonitor monitor) {
+		reset();
+		this.progressMonitor = monitor;
+	}
+	
+	/*
+	 * (non-Javadoc)
 	 * @see de.cau.cs.kieler.core.alg.IAlgorithm#setProgressMonitor(de.cau.cs.kieler.core.alg.IKielerProgressMonitor)
 	 */
-	public void setProgressMonitor(IKielerProgressMonitor monitor) {
+	public final void setProgressMonitor(IKielerProgressMonitor monitor) {
 		this.progressMonitor = monitor;
 	}
 	
@@ -33,7 +42,7 @@ public abstract class AbstractAlgorithm implements IAlgorithm {
 	 * @return the associated monitor, or a default implementation
 	 *     if no progress monitor was set
 	 */
-	protected IKielerProgressMonitor getMonitor() {
+	protected final IKielerProgressMonitor getMonitor() {
 		if (progressMonitor == null)
 			progressMonitor = new NullProgressMonitor();
 		return progressMonitor;

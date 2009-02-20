@@ -34,6 +34,7 @@ public class DFSCycleRemover extends AbstractCycleRemover {
 	 * @see de.cau.cs.kieler.klodd.core.algorithms.ICycleRemover#removeCycles(de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode)
 	 */
 	public void removeCycles(KLayoutNode parentNode) {
+		getMonitor().begin("DFS cycle removal", 1);
 		Iterator<KLayoutNode> nodeIter = parentNode.getChildNodes().iterator(); 
 		while (nodeIter.hasNext()) {
 			KLayoutNode node = nodeIter.next();
@@ -44,6 +45,7 @@ public class DFSCycleRemover extends AbstractCycleRemover {
 		}
 		// reverse all marked edges
 		reverseEdges();
+		getMonitor().done();
 	}
 	
 	/**

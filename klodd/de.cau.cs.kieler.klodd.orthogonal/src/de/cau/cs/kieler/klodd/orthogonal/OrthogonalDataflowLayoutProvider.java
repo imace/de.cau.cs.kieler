@@ -32,11 +32,11 @@ public class OrthogonalDataflowLayoutProvider extends
 	private static final float MIN_DIST = 15.0f;
 	
 	/** the planarization module */
-	private IPlanarizer planarizer;
+	private IPlanarizer planarizer = null;
 	/** the orthogonalization module */
-	private IOrthogonalizer orthogonalizer;
+	private IOrthogonalizer orthogonalizer = null;
 	/** the compaction module */
-	private ICompacter compacter;
+	private ICompacter compacter = null;
 	
 	/*
 	 * (non-Javadoc)
@@ -44,26 +44,28 @@ public class OrthogonalDataflowLayoutProvider extends
 	 */
 	public void doLayout(KLayoutNode layoutNode,
 			IKielerProgressMonitor progressMonitor) throws KielerException {
-		progressMonitor.begin("Orthogonal layout", 100);
 		// get the currently configured modules
 		updateModules();
 		
 		// split the graph into connected components
 		ConnectedComponents componentsSplitter = new ConnectedComponents();
 		List<TSMGraph> components = componentsSplitter.findComponents(layoutNode);
+		progressMonitor.begin("Orthogonal layout", components.size() * 30 + 2);
+		
 		for (TSMGraph tsmGraph : components) {
 			// perform the planarization phase
-			planarizer.reset();
+			planarizer.reset(progressMonitor.subTask(10));
 			planarizer.planarize(tsmGraph);
 			// perform the orthogonalization phase
-			orthogonalizer.reset();
+			orthogonalizer.reset(progressMonitor.subTask(10));
 			orthogonalizer.orthogonalize(tsmGraph);
 			// perform the compaction phase
-			compacter.reset();
+			compacter.reset(progressMonitor.subTask(10));
 			compacter.compact(tsmGraph, MIN_DIST);
 		}
 		// apply layout information to the original graph
 		applyLayout(components, layoutNode);
+		
 		progressMonitor.done();
 	}
 
@@ -83,10 +85,14 @@ public class OrthogonalDataflowLayoutProvider extends
 	 * Sets the internally used algorithm modules to the current configuration.
 	 */
 	private void updateModules() {
-		planarizer = new PortConstraintsPlanarizer(new EdgeInsertionECPlanarizer());
-		orthogonalizer = new KandinskyLPOrthogonalizer();
-		compacter = new NormalizingCompacter(new RefiningCompacter(
-				new LayeringCompacter()));
+		if (planarizer == null)
+			planarizer = new PortConstraintsPlanarizer(
+					new EdgeInsertionECPlanarizer());
+		if (orthogonalizer == null)
+			orthogonalizer = new KandinskyLPOrthogonalizer();
+		if (compacter == null)
+			compacter = new NormalizingCompacter(new RefiningCompacter(
+					new LayeringCompacter()));
 	}
 	
 	/**
