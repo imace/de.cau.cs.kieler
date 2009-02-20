@@ -82,6 +82,7 @@ public class SSMLayoutGraphBuilder extends KimlAbstractLayoutGraphBuilder {
 	/** preference settings */
 	private boolean prefAlternatingHVLayout = false;
 	private boolean prefAutosizeEmptyElements = true;
+	private boolean prefLayoutDirectionHorizontal = true;
 	private float prefWidthCollapsed = 80f;
 	private float prefHeightCollapsed = 40f;
 
@@ -105,16 +106,15 @@ public class SSMLayoutGraphBuilder extends KimlAbstractLayoutGraphBuilder {
 	 */
 	@Override
 	protected void doBuildLayoutGraph() {
-				
+
 		/*
 		 * if the rootPart was a complete SSM, that is when clicked into the
 		 * empty diagram background space, start with its first and only child,
 		 * the Top CompositeState.
 		 */
-		if (layoutRootPart.getClass().equals(
-				SafeStateMachineEditPart.class)) {
-			layoutRootPart = (GraphicalEditPart) layoutRootPart
-					.getChildren().get(0);
+		if (layoutRootPart.getClass().equals(SafeStateMachineEditPart.class)) {
+			layoutRootPart = (GraphicalEditPart) layoutRootPart.getChildren()
+					.get(0);
 		}
 
 		/*
@@ -123,30 +123,24 @@ public class SSMLayoutGraphBuilder extends KimlAbstractLayoutGraphBuilder {
 		 * CompositeStateEditPart corresponds to the one Top CompositeState of a
 		 * SSM.
 		 */
-		if (layoutRootPart.getClass().equals(
-				CompositeState2EditPart.class)
+		if (layoutRootPart.getClass().equals(CompositeState2EditPart.class)
 				|| layoutRootPart.getClass().equals(
 						CompositeStateEditPart.class)
-				|| layoutRootPart.getClass().equals(
-						RegionEditPart.class)) {
+				|| layoutRootPart.getClass().equals(RegionEditPart.class)) {
 
 			/*
 			 * do the common translation, that is position, size and label,
 			 * layout hints, ...
 			 */
-			processCommon(layoutRootPart,
-					layoutGraph,
+			processCommon(layoutRootPart, layoutGraph,
 					new ArrayList<ConnectionEditPart>());
-			processLayoutHints(
-					(GraphicalEditPart) layoutRootPart,
-					layoutGraph);
+			processLayoutHints((GraphicalEditPart) layoutRootPart, layoutGraph);
 			/*
 			 * If Emma wants to lay out the Top Composite State, that is also
 			 * the top figure of the StateMachine, move the upper left corner to
 			 * (10,10)
 			 */
-			if (layoutRootPart.getClass().equals(
-					CompositeStateEditPart.class)) {
+			if (layoutRootPart.getClass().equals(CompositeStateEditPart.class)) {
 				KPoint location = KimlLayoutGraphFactory.eINSTANCE
 						.createKPoint();
 				location.setX(10);
@@ -155,15 +149,11 @@ public class SSMLayoutGraphBuilder extends KimlAbstractLayoutGraphBuilder {
 			}
 
 			/* maintain the mapping of elements for the applyLayout function */
-			graphicalEditPart2LayoutNode.put(layoutRootPart,
-					layoutGraph);
-			layoutNode2EditPart.put(
-					layoutGraph,
-					layoutRootPart);
+			graphicalEditPart2LayoutNode.put(layoutRootPart, layoutGraph);
+			layoutNode2EditPart.put(layoutGraph, layoutRootPart);
 
 			/* do the same for all children */
-			buildLayoutGraphRecursively(layoutRootPart,
-					layoutGraph);
+			buildLayoutGraphRecursively(layoutRootPart, layoutGraph);
 		}
 	}
 
@@ -356,8 +346,7 @@ public class SSMLayoutGraphBuilder extends KimlAbstractLayoutGraphBuilder {
 
 		// keep track of mapping between elements
 		graphicalEditPart2LayoutNode.put(currentEditPart, currentLayoutNode);
-		layoutNode2EditPart.put(currentLayoutNode,
-				currentEditPart);
+		layoutNode2EditPart.put(currentLayoutNode, currentEditPart);
 
 		return;
 	}
@@ -391,6 +380,17 @@ public class SSMLayoutGraphBuilder extends KimlAbstractLayoutGraphBuilder {
 						CompositeStateEditPart.class)) {
 			currentLayoutNode.getLayout().getInsets().setTop(insetTop);
 		}
+
+		/* set layout direction, when not in AHV mode */
+		if (!prefAlternatingHVLayout) {
+			if (prefLayoutDirectionHorizontal)
+				currentLayoutNode.getLayout().getLayoutOptions().add(
+						KLayoutOption.HORIZONTAL);
+			else
+				currentLayoutNode.getLayout().getLayoutOptions().add(
+						KLayoutOption.VERTICAL);
+		}
+		
 		/* enable alternating layout of regions */
 		if (currentEditPart.getClass().equals(RegionEditPart.class)
 				&& prefAlternatingHVLayout) {
@@ -406,9 +406,15 @@ public class SSMLayoutGraphBuilder extends KimlAbstractLayoutGraphBuilder {
 				else
 					currentLayoutNode.getLayout().getLayoutOptions().add(
 							KLayoutOption.HORIZONTAL);
-			} else
-				currentLayoutNode.getLayout().getLayoutOptions().add(
-						KLayoutOption.HORIZONTAL);
+			} else {
+
+				if (prefLayoutDirectionHorizontal)
+					currentLayoutNode.getLayout().getLayoutOptions().add(
+							KLayoutOption.HORIZONTAL);
+				else
+					currentLayoutNode.getLayout().getLayoutOptions().add(
+							KLayoutOption.VERTICAL);
+			}
 		}
 	}
 
@@ -472,8 +478,7 @@ public class SSMLayoutGraphBuilder extends KimlAbstractLayoutGraphBuilder {
 							hLabel.getLabelLayout().setSize(labelSize);
 							hLabel.setText(headLabel);
 							edge.getLabel().add(hLabel);
-							edgeLabel2EditPart.put(hLabel,
-									labelEditPart);
+							edgeLabel2EditPart.put(hLabel, labelEditPart);
 						}
 					}
 
@@ -489,8 +494,7 @@ public class SSMLayoutGraphBuilder extends KimlAbstractLayoutGraphBuilder {
 							mLabel.getLabelLayout().setSize(labelSize);
 							mLabel.setText(midLabel);
 							edge.getLabel().add(mLabel);
-							edgeLabel2EditPart.put(mLabel,
-									labelEditPart);
+							edgeLabel2EditPart.put(mLabel, labelEditPart);
 						}
 					}
 
@@ -506,8 +510,7 @@ public class SSMLayoutGraphBuilder extends KimlAbstractLayoutGraphBuilder {
 							tLabel.getLabelLayout().setSize(labelSize);
 							tLabel.setText(tailLabel);
 							edge.getLabel().add(tLabel);
-							edgeLabel2EditPart.put(tLabel,
-									labelEditPart);
+							edgeLabel2EditPart.put(tLabel, labelEditPart);
 						}
 					}
 				}
@@ -515,9 +518,12 @@ public class SSMLayoutGraphBuilder extends KimlAbstractLayoutGraphBuilder {
 		}
 	}
 
-
-	/* (non-Javadoc)
-	 * @see de.cau.cs.kieler.kiml.ui.diagramlayouter.KimlAbstractLayoutGraphBuilder#updatePreferences()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * de.cau.cs.kieler.kiml.ui.diagramlayouter.KimlAbstractLayoutGraphBuilder
+	 * #updatePreferences()
 	 */
 	@Override
 	protected void updatePreferences() {
@@ -534,12 +540,17 @@ public class SSMLayoutGraphBuilder extends KimlAbstractLayoutGraphBuilder {
 		prefAutosizeEmptyElements = SSMDiagramCustomPlugin.getDefault()
 				.getPreferenceStore().getBoolean(
 						PreferenceConstants.PREF_AUTOSIZE_EMPTY_ELEMENTS);
-
+		prefLayoutDirectionHorizontal = SSMDiagramCustomPlugin.getDefault()
+				.getPreferenceStore().getBoolean(
+						PreferenceConstants.PREF_LAYOUT_DIRECTION_HORIZONTAL);
 	}
 
-
-	/* (non-Javadoc)
-	 * @see de.cau.cs.kieler.kiml.ui.diagramlayouter.KimlAbstractLayoutGraphBuilder#getLayoutRootPart(java.lang.Object)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * de.cau.cs.kieler.kiml.ui.diagramlayouter.KimlAbstractLayoutGraphBuilder
+	 * #getLayoutRootPart(java.lang.Object)
 	 */
 	@Override
 	protected GraphicalEditPart getLayoutRootPart(Object target) {
@@ -616,12 +627,16 @@ public class SSMLayoutGraphBuilder extends KimlAbstractLayoutGraphBuilder {
 			return null;
 	}
 
-	/* (non-Javadoc)
-	 * @see de.cau.cs.kieler.kiml.ui.diagramlayouter.KimlAbstractLayoutGraphBuilder#resetCustomMaps()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * de.cau.cs.kieler.kiml.ui.diagramlayouter.KimlAbstractLayoutGraphBuilder
+	 * #resetCustomMaps()
 	 */
 	@Override
 	protected void resetCustomMaps() {
-		graphicalEditPart2LayoutNode.clear();		
+		graphicalEditPart2LayoutNode.clear();
 	}
 
 }

@@ -28,7 +28,6 @@ import org.eclipse.ui.IWorkbenchPreferencePage;
 
 import ssm.diagram.custom.SSMDiagramCustomPlugin;
 
-
 public class PreferencePage extends FieldEditorPreferencePage implements
 		IWorkbenchPreferencePage {
 
@@ -67,6 +66,13 @@ public class PreferencePage extends FieldEditorPreferencePage implements
 		Label descriptionAHV = new Label(options, SWT.WRAP);
 		descriptionAHV
 				.setText("If checked, then the alternating HV layout is enabled. No layout of single regions is possible then; it is always the entire diagram rendered.");
+
+		addField(new BooleanFieldEditor(
+				PreferenceConstants.PREF_LAYOUT_DIRECTION_HORIZONTAL,
+				"Layout direction horizontal", options));
+		Label descriptionLDH = new Label(options, SWT.WRAP);
+		descriptionLDH
+				.setText("If checked, then the layout direction is horizontal. If alternating HV layout is enabled, the initial layout direction is horizontal.");
 
 		addField(new BooleanFieldEditor(
 				PreferenceConstants.PREF_AUTOSIZE_EMPTY_ELEMENTS,

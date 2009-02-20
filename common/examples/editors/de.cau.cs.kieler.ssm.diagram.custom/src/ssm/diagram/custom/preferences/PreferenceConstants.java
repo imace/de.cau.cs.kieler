@@ -21,4 +21,5 @@ public class PreferenceConstants {
 	public static final String PREF_HEIGHT_COLLAPSED = "height.collapsed";
 	public static final String PREF_WIDTH_COLLAPSED = "width.collapsed";
 	public static final String PREF_AUTOSIZE_EMPTY_ELEMENTS = "autosize.empty.elements";
+	public static final String PREF_LAYOUT_DIRECTION_HORIZONTAL = "layout.direction.horizontal";
 }
