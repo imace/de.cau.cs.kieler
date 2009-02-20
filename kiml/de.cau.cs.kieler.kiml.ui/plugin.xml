@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.2"?>
 <plugin>
+   
    <extension-point id="kimlLayoutGraphApplier" name="KIML LayoutGraph Applier" schema="schema/kimlLayoutGraphApplier.exsd"/>
    <extension-point id="kimlLayoutGraphBuilder" name="KIML LayoutGraph Builder" schema="schema/kimlLayoutGraphBuilder.exsd"/>
 

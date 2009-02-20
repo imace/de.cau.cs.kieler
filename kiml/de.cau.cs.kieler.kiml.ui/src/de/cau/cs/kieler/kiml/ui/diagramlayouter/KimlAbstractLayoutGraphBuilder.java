@@ -171,8 +171,7 @@ public abstract class KimlAbstractLayoutGraphBuilder {
 				if (selectedObject instanceof NodeEditPart) {
 					root = (NodeEditPart) selectedObject;
 				} else if (selectedObject instanceof DiagramEditPart) {
-					root = (GraphicalEditPart) ((DiagramEditPart) selectedObject)
-							.getChildren().get(0);
+					root = (GraphicalEditPart) ((DiagramEditPart) selectedObject).getViewer().getContents();
 				} else if (selectedObject instanceof CompartmentEditPart) {
 					root = (GraphicalEditPart) ((CompartmentEditPart) selectedObject)
 							.getParent();
@@ -187,17 +186,15 @@ public abstract class KimlAbstractLayoutGraphBuilder {
 
 		if (target instanceof DiagramGraphicalViewer) {
 			DiagramGraphicalViewer viewer = (DiagramGraphicalViewer) target;
-			root = (GraphicalEditPart) viewer.getRootEditPart().getChildren()
-					.get(0);
+			root = (GraphicalEditPart) viewer.getContents();
 		}
 		if (target instanceof DiagramEditor) {
 			DiagramEditor editor = (DiagramEditor) target;
-			root = (GraphicalEditPart) editor.getDiagramEditPart()
-					.getChildren().get(0);
+			root = (GraphicalEditPart) editor.getDiagramGraphicalViewer().getContents();
 		}
 		if (target instanceof DiagramEditPart) {
 			DiagramEditPart dep = (DiagramEditPart) target;
-			root = (GraphicalEditPart) dep.getChildren().get(0);
+			root = (GraphicalEditPart) dep.getViewer().getContents();
 		}
 		if (target instanceof GraphicalEditPart) {
 			root = (GraphicalEditPart) root;

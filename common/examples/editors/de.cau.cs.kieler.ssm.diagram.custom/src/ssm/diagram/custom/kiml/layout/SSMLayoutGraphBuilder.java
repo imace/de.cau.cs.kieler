@@ -19,20 +19,13 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gef.ConnectionEditPart;
 import org.eclipse.gef.GraphicalEditPart;
-import org.eclipse.gef.NodeEditPart;
-import org.eclipse.gmf.runtime.diagram.ui.editparts.CompartmentEditPart;
-import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.LabelEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.figures.ShapeCompartmentFigure;
-import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditor;
-import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramGraphicalViewer;
 import org.eclipse.gmf.runtime.draw2d.ui.internal.figures.AnimatableScrollPane;
 import org.eclipse.gmf.runtime.notation.impl.ViewImpl;
-import org.eclipse.jface.viewers.IStructuredSelection;
 
 import ssm.diagram.custom.SSMDiagramCustomPlugin;
 import ssm.diagram.custom.preferences.PreferenceConstants;
-
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KDimension;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLabel;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLabelPlacement;
@@ -107,6 +100,14 @@ public class SSMLayoutGraphBuilder extends KimlAbstractLayoutGraphBuilder {
 	@Override
 	protected void doBuildLayoutGraph() {
 
+		/*
+		 * if alternating HV layout was chosen, then the layout MUST always
+		 * start with the whole SSM, regardless what was seletec by the user
+		 */
+		if (prefAlternatingHVLayout) {
+			layoutRootPart = (GraphicalEditPart) layoutRootPart.getRoot()
+					.getContents();
+		}
 		/*
 		 * if the rootPart was a complete SSM, that is when clicked into the
 		 * empty diagram background space, start with its first and only child,
@@ -390,7 +391,7 @@ public class SSMLayoutGraphBuilder extends KimlAbstractLayoutGraphBuilder {
 				currentLayoutNode.getLayout().getLayoutOptions().add(
 						KLayoutOption.VERTICAL);
 		}
-		
+
 		/* enable alternating layout of regions */
 		if (currentEditPart.getClass().equals(RegionEditPart.class)
 				&& prefAlternatingHVLayout) {
@@ -545,87 +546,6 @@ public class SSMLayoutGraphBuilder extends KimlAbstractLayoutGraphBuilder {
 						PreferenceConstants.PREF_LAYOUT_DIRECTION_HORIZONTAL);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * de.cau.cs.kieler.kiml.ui.diagramlayouter.KimlAbstractLayoutGraphBuilder
-	 * #getLayoutRootPart(java.lang.Object)
-	 */
-	@Override
-	protected GraphicalEditPart getLayoutRootPart(Object target) {
-		GraphicalEditPart root = null;
-
-		// no matter how much was selected, get the first element
-		if (target instanceof IStructuredSelection) {
-			IStructuredSelection selection = (IStructuredSelection) target;
-
-			Object selectedObject = selection.getFirstElement();
-			// if just one element was selected, use this, if NodeEditPart
-			if (selection.size() == 1) {
-				if (selectedObject instanceof NodeEditPart) {
-					root = (NodeEditPart) selectedObject;
-				} else if (selectedObject instanceof DiagramEditPart) {
-					root = (GraphicalEditPart) ((DiagramEditPart) selectedObject)
-							.getChildren().get(0);
-				} else if (selectedObject instanceof CompartmentEditPart) {
-					root = (GraphicalEditPart) ((CompartmentEditPart) selectedObject)
-							.getParent();
-				}
-			}
-			// more selected, find parent thereof
-			else {
-				root = findParentNode(selectedObject);
-			}
-
-		}
-
-		if (target instanceof DiagramGraphicalViewer) {
-			DiagramGraphicalViewer viewer = (DiagramGraphicalViewer) target;
-			root = (GraphicalEditPart) viewer.getRootEditPart().getChildren()
-					.get(0);
-		}
-		if (target instanceof DiagramEditor) {
-			DiagramEditor editor = (DiagramEditor) target;
-			root = (GraphicalEditPart) editor.getDiagramEditPart()
-					.getChildren().get(0);
-		}
-		if (target instanceof DiagramEditPart) {
-			DiagramEditPart dep = (DiagramEditPart) target;
-			root = (GraphicalEditPart) dep.getChildren().get(0);
-		}
-		if (target instanceof GraphicalEditPart) {
-			root = (GraphicalEditPart) root;
-		}
-		/* if alternating layout selected force layout of whole diagram */
-		if (prefAlternatingHVLayout) {
-			root = (GraphicalEditPart) root.getRoot().getContents();
-		}
-		return root;
-	}
-
-	/**
-	 * Recursive helper function to get a GraphicalEditPart parent for an
-	 * object.
-	 */
-	private GraphicalEditPart findParentNode(Object current) {
-		if (current instanceof GraphicalEditPart) {
-			GraphicalEditPart aep = (GraphicalEditPart) current;
-			if (aep.getParent() instanceof NodeEditPart)
-				return (NodeEditPart) aep.getParent();
-			else {
-				GraphicalEditPart parent = findParentNode(aep.getParent());
-				if (parent == null) {
-					DiagramGraphicalViewer viewer = (DiagramGraphicalViewer) aep
-							.getViewer();
-					return (GraphicalEditPart) viewer.getRootEditPart()
-							.getChildren().get(0);
-				} else
-					return parent;
-			}
-		} else
-			return null;
-	}
 
 	/*
 	 * (non-Javadoc)

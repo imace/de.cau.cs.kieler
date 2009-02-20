@@ -59,8 +59,12 @@ public class KimlGenericLayoutGraphBuilder extends
 
 	private Map<GraphicalEditPart, KLayoutNode> graphicalEditPart2LayoutNode = new HashMap<GraphicalEditPart, KLayoutNode>();
 
-	/* (non-Javadoc)
-	 * @see de.cau.cs.kieler.kiml.ui.diagramlayouter.KimlAbstractLayoutGraphBuilder#doBuildLayoutGraph()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * de.cau.cs.kieler.kiml.ui.diagramlayouter.KimlAbstractLayoutGraphBuilder
+	 * #doBuildLayoutGraph()
 	 */
 	@Override
 	protected void doBuildLayoutGraph() {
@@ -112,6 +116,17 @@ public class KimlGenericLayoutGraphBuilder extends
 		 * empty diagram background space, start with its children.
 		 */
 		else if (layoutRootPart instanceof DiagramEditPart) {
+			/*
+			 * set information about LayouterName and LayoutType
+			 */
+			KLayoutType layoutType = KLayoutType.DEFAULT;
+			String layouterName = "";
+			layoutType = KimlGMFLayoutHintHelper
+					.getContainedElementsLayoutType((org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart) layoutRootPart);
+			layouterName = KimlGMFLayoutHintHelper
+					.getContainedElementsLayouterName((org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart) layoutRootPart);
+			layoutGraph.getLayout().setLayoutType(layoutType);
+			layoutGraph.getLayout().setLayouterName(layouterName);
 			graphicalEditPart2LayoutNode.put(layoutRootPart, layoutGraph);
 			layoutNode2EditPart.put(layoutGraph, layoutRootPart);
 			buildLayoutGraphRecursively(layoutRootPart, layoutGraph);
@@ -365,16 +380,24 @@ public class KimlGenericLayoutGraphBuilder extends
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see de.cau.cs.kieler.kiml.ui.diagramlayouter.KimlAbstractLayoutGraphBuilder#resetCustomMaps()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * de.cau.cs.kieler.kiml.ui.diagramlayouter.KimlAbstractLayoutGraphBuilder
+	 * #resetCustomMaps()
 	 */
 	@Override
 	protected void resetCustomMaps() {
 		graphicalEditPart2LayoutNode.clear();
 	}
 
-	/* (non-Javadoc)
-	 * @see de.cau.cs.kieler.kiml.ui.diagramlayouter.KimlAbstractLayoutGraphBuilder#updatePreferences()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * de.cau.cs.kieler.kiml.ui.diagramlayouter.KimlAbstractLayoutGraphBuilder
+	 * #updatePreferences()
 	 */
 	@Override
 	protected void updatePreferences() {
