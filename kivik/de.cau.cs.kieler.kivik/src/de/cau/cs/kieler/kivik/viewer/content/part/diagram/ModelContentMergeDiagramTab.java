@@ -344,7 +344,7 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 
 				if (changedEditPart instanceof ConnectionEditPart) {
 					changedEditPart.getFigure().setForegroundColor(
-							highlightColor);
+							brightenColor(highlightColor));
 				} else {
 					/*
 					 * If a compartment is collapsed, then highlight the whole
@@ -557,7 +557,7 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 			// differences
 			final String color;
 			final String backgroundColor;
-			
+
 			if (diff.getKind() == DifferenceKind.CONFLICT
 					|| diff.isConflicting()) {
 				color = EMFCompareConstants.PREFERENCES_KEY_CONFLICTING_COLOR;
@@ -581,10 +581,6 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 				} else {
 					backgroundColor = EMFCompareConstants.PREFERENCES_KEY_REMOVED_COLOR;
 				}
-				
-			} else if (diff.getKind() == DifferenceKind.DELETION) {
-				color = EMFCompareConstants.PREFERENCES_KEY_REMOVED_COLOR;
-				backgroundColor = EMFCompareConstants.PREFERENCES_KEY_REMOVED_COLOR;
 
 			} else if (diff.getKind() == DifferenceKind.CHANGE) {
 				color = EMFCompareConstants.PREFERENCES_KEY_CHANGED_COLOR;
@@ -971,5 +967,15 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 	}
 
 	public void redraw() {
+	}
+
+	private Color brightenColor(Color highlightColor) {
+		int red = (highlightColor.getRed() + 20) > 255 ? 255 : highlightColor
+				.getRed() + 20;
+		int green = (highlightColor.getGreen() + 20) > 255 ? 255
+				: highlightColor.getGreen() + 20;
+		int blue = (highlightColor.getBlue() + 20) > 255 ? 255 : highlightColor
+				.getBlue() + 20;
+		return new Color(null, red, green, blue);
 	}
 }
