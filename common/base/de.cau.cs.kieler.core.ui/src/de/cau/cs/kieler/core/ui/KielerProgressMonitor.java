@@ -35,6 +35,8 @@ public class KielerProgressMonitor implements IKielerProgressMonitor {
 	private int submittedWork = 0;
 	/** the number of work units that can be completed in total */
 	private int totalWork;
+	/** indicates whether the monitor has been closed */
+	private boolean closed = false;
 
 	/**
 	 * Creates a progress monitor wrapper for a given Eclipse progress
@@ -50,27 +52,33 @@ public class KielerProgressMonitor implements IKielerProgressMonitor {
 	 * @see de.cau.cs.kieler.core.alg.IKielerProgressMonitor#begin(java.lang.String, int)
 	 */
 	public void begin(String name, int totalWork) {
-		this.taskName = name;
-		this.totalWork = totalWork;
-		if (parentMonitor == null)
-			progressMonitor.beginTask(name, totalWork <= 0
-					? IProgressMonitor.UNKNOWN : totalWork);
-		else
-			progressMonitor.subTask(name);
-		
-		startTime = System.nanoTime();
+		if (!closed) {
+			this.taskName = name;
+			this.totalWork = totalWork;
+			if (parentMonitor == null)
+				progressMonitor.beginTask(name, totalWork <= 0
+						? IProgressMonitor.UNKNOWN : totalWork);
+			else
+				progressMonitor.subTask(name);
+			
+			startTime = System.nanoTime();
+		}
 	}
 
 	/* (non-Javadoc)
 	 * @see de.cau.cs.kieler.core.alg.IKielerProgressMonitor#done()
 	 */
 	public void done() {
-		totalTime = (System.nanoTime() - startTime) * 1e-9;
-		
-		if (completedWork < totalWork)
-			internalWorked(totalWork - completedWork);
-		if (parentMonitor == null)
-			progressMonitor.done();
+		if (!closed) {
+			totalTime = (System.nanoTime() - startTime) * 1e-9;
+			
+			if (completedWork < totalWork)
+				internalWorked(totalWork - completedWork);
+			if (parentMonitor == null)
+				progressMonitor.done();
+			
+			closed = true;
+		}
 	}
 
 	/* (non-Javadoc)
@@ -85,6 +93,14 @@ public class KielerProgressMonitor implements IKielerProgressMonitor {
 	 */
 	public List<IKielerProgressMonitor> getSubMonitors() {
 		return children;
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see de.cau.cs.kieler.core.alg.IKielerProgressMonitor#getParentMonitor()
+	 */
+	public IKielerProgressMonitor getParentMonitor() {
+		return parentMonitor;
 	}
 
 	/* (non-Javadoc)
@@ -105,18 +121,21 @@ public class KielerProgressMonitor implements IKielerProgressMonitor {
 	 * @see de.cau.cs.kieler.core.alg.IKielerProgressMonitor#subTask(int)
 	 */
 	public IKielerProgressMonitor subTask(int work) {
-		KielerProgressMonitor subMonitor = new KielerProgressMonitor(progressMonitor);
-		children.add(subMonitor);
-		subMonitor.parentMonitor = this;
-		currentChildWork = work;
-		return subMonitor;
+		if (!closed) {
+			KielerProgressMonitor subMonitor = new KielerProgressMonitor(progressMonitor);
+			children.add(subMonitor);
+			subMonitor.parentMonitor = this;
+			currentChildWork = work;
+			return subMonitor;
+		}
+		else return null;
 	}
 
 	/* (non-Javadoc)
 	 * @see de.cau.cs.kieler.core.alg.IKielerProgressMonitor#worked(int)
 	 */
 	public void worked(int work) {
-		if (work > 0)
+		if (work > 0 && !closed)
 			internalWorked(work);
 	}
 	
