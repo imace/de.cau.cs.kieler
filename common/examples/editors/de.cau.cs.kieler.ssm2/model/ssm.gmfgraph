@@ -10,6 +10,7 @@
       <actualFigure
           xsi:type="gmfgraph:RoundedRectangle"
           name="StateRoundedRectangle"
+          lineWidth="2"
           cornerWidth="16"
           cornerHeight="16">
         <foregroundColor
@@ -17,22 +18,15 @@
             value="black"/>
         <backgroundColor
             xsi:type="gmfgraph:ConstantColor"/>
+        <preferredSize
+            dx="40"
+            dy="30"/>
         <children
             xsi:type="gmfgraph:Label"
             name="StateNameLabel"/>
-        <children
-            xsi:type="gmfgraph:Label"
-            name="StateKindLabel"/>
-        <children
-            xsi:type="gmfgraph:Label"
-            name="StateFlagLabel"/>
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.0/@actualFigure/@children.0"/>
-      <accessors
-          figure="//@figures.0/@descriptors.0/@actualFigure/@children.1"/>
-      <accessors
-          figure="//@figures.0/@descriptors.0/@actualFigure/@children.2"/>
     </descriptors>
     <descriptors
         name="TransitionFigureDescriptor">
@@ -41,6 +35,9 @@
           name="TransitionPolylineConnection"
           targetDecoration="//@figures.0/@descriptors.2/@actualFigure">
         <foregroundColor
+            xsi:type="gmfgraph:ConstantColor"
+            value="black"/>
+        <backgroundColor
             xsi:type="gmfgraph:ConstantColor"
             value="black"/>
         <children
@@ -75,13 +72,57 @@
         name="ArrowFigureDescriptor">
       <actualFigure
           xsi:type="gmfgraph:PolygonDecoration"
-          name="ArrowPolygonDecoration">
+          name="ArrowPolygonDecoration"
+          lineWidth="2">
         <foregroundColor
             xsi:type="gmfgraph:ConstantColor"
             value="black"/>
         <backgroundColor
             xsi:type="gmfgraph:ConstantColor"
             value="black"/>
+      </actualFigure>
+    </descriptors>
+    <descriptors
+        name="StrongAbortFigureDescriptor">
+      <actualFigure
+          xsi:type="gmfgraph:PolygonDecoration"
+          name="StrongAbortPolygonDecoration">
+        <foregroundColor
+            xsi:type="gmfgraph:ConstantColor"
+            value="black"/>
+        <backgroundColor
+            xsi:type="gmfgraph:ConstantColor"
+            value="red"/>
+        <template/>
+        <template
+            y="-1"/>
+        <template
+            x="-1"
+            y="-1"/>
+        <template
+            x="-1"
+            y="1"/>
+        <template
+            y="1"/>
+      </actualFigure>
+    </descriptors>
+    <descriptors
+        name="NormalTerminationFigureDescriptor">
+      <actualFigure
+          xsi:type="gmfgraph:PolygonDecoration"
+          name="NormalTerminationPolygonDecoration">
+        <foregroundColor
+            xsi:type="gmfgraph:ConstantColor"
+            value="black"/>
+        <backgroundColor
+            xsi:type="gmfgraph:ConstantColor"
+            value="green"/>
+        <template
+            y="-1"/>
+        <template
+            x="-1"/>
+        <template
+            y="1"/>
       </actualFigure>
     </descriptors>
   </figures>
@@ -94,23 +135,14 @@
   <compartments
       name="StateCompartment"
       figure="StateFigureDescriptor"
-      collapsible="true"/>
+      collapsible="true"
+      accessor="//@figures.0/@descriptors.0/@accessors.0"/>
   <labels
       name="StateNameDiagramLabel"
       figure="StateFigureDescriptor"
       resizeConstraint="NONE"
       elementIcon="false"
       accessor="//@figures.0/@descriptors.0/@accessors.0"/>
-  <labels
-      name="StateKindDiagramLabel"
-      figure="StateFigureDescriptor"
-      elementIcon="false"
-      accessor="//@figures.0/@descriptors.0/@accessors.1"/>
-  <labels
-      name="StateFlagDiagramLabel"
-      figure="StateFigureDescriptor"
-      elementIcon="false"
-      accessor="//@figures.0/@descriptors.0/@accessors.2"/>
   <labels
       name="TransitionDelayDiagramLabel"
       figure="TransitionFigureDescriptor"

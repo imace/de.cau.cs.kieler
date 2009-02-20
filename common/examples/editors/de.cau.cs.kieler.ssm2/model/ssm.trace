@@ -8,12 +8,6 @@
     <nodeLabelTraces
         visualID="5001"
         queryText="true"/>
-    <nodeLabelTraces
-        visualID="5002"
-        queryText="true"/>
-    <nodeLabelTraces
-        visualID="5003"
-        queryText="true"/>
     <compartmentTraces
         visualID="7001"
         queryText="true"/>
@@ -24,11 +18,8 @@
     <nodeLabelTraces
         visualID="5004"
         queryText="true"/>
-    <nodeLabelTraces
-        visualID="5005"
-        queryText="true"/>
-    <nodeLabelTraces
-        visualID="5006"
+    <compartmentTraces
+        visualID="7002"
         queryText="true"/>
   </childNodeTraces>
   <linkTraces

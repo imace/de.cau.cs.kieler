@@ -202,7 +202,7 @@ public interface Transition extends Action {
 	 * @return the value of the '<em>Triggers And Effects</em>' attribute.
 	 * @see #setTriggersAndEffects(String)
 	 * @see ssm.ssmPackage#getTransition_TriggersAndEffects()
-	 * @model
+	 * @model required="true"
 	 * @generated
 	 */
 	String getTriggersAndEffects();

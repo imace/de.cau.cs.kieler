@@ -27,9 +27,10 @@
         itemSemanticEditPolicyClassName="State3ItemSemanticEditPolicy"
         notationViewFactoryClassName="State3ViewFactory"
         canonicalEditPolicyClassName="State3CanonicalEditPolicy"
+        compartments="//@diagram/@compartments.1"
         graphicalNodeEditPolicyClassName="State2GraphicalNodeEditPolicy"
         createCommandClassName="State2CreateCommand"
-        containers="//@diagram/@compartments.0">
+        containers="//@diagram/@compartments.1 //@diagram/@compartments.0">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <elementType
@@ -38,11 +39,13 @@
       <viewmap
           xsi:type="gmfgen:InnerClassViewmap"
           className="StateFigureDescriptor"
-          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class StateFigureDescriptor extends org.eclipse.draw2d.RoundedRectangle {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureStateNameLabel; &#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureStateKindLabel; &#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureStateFlagLabel; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public StateFigureDescriptor() {&#xA;&#x9;&#x9;&#x9;&#x9;this.setCornerDimensions(new org.eclipse.draw2d.geometry.Dimension(getMapMode().DPtoLP(16)&#xA;, getMapMode().DPtoLP(16)&#xA;));&#xA;&#x9;this.setForegroundColor(org.eclipse.draw2d.ColorConstants.black);&#xA;&#x9;this.setBackgroundColor(org.eclipse.draw2d.ColorConstants.white);&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureStateNameLabel = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureStateNameLabel.setText(&quot;&quot;);&#xA;&#xA;this.add(fFigureStateNameLabel);&#xA;&#xA;&#xA;&#xA;fFigureStateKindLabel = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureStateKindLabel.setText(&quot;&quot;);&#xA;&#xA;this.add(fFigureStateKindLabel);&#xA;&#xA;&#xA;&#xA;fFigureStateFlagLabel = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureStateFlagLabel.setText(&quot;&quot;);&#xA;&#xA;this.add(fFigureStateFlagLabel);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private boolean myUseLocalCoordinates = false;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected boolean useLocalCoordinates() {&#xA;&#x9;&#x9;return myUseLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#xA;&#x9;&#x9;myUseLocalCoordinates = useLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureStateNameLabel() {&#xA;&#x9;&#x9;return fFigureStateNameLabel;&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureStateKindLabel() {&#xA;&#x9;&#x9;return fFigureStateKindLabel;&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureStateFlagLabel() {&#xA;&#x9;&#x9;return fFigureStateFlagLabel;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;">
+          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class StateFigureDescriptor extends org.eclipse.draw2d.RoundedRectangle {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureStateNameLabel; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public StateFigureDescriptor() {&#xA;&#x9;&#x9;&#x9;&#x9;this.setCornerDimensions(new org.eclipse.draw2d.geometry.Dimension(getMapMode().DPtoLP(16)&#xA;, getMapMode().DPtoLP(16)&#xA;));&#xA;this.setLineWidth(2);&#xA;&#x9;this.setForegroundColor(org.eclipse.draw2d.ColorConstants.black);&#xA;&#x9;this.setBackgroundColor(org.eclipse.draw2d.ColorConstants.white);&#xA;this.setPreferredSize(new org.eclipse.draw2d.geometry.Dimension(getMapMode().DPtoLP(40)&#xA;, getMapMode().DPtoLP(30)&#xA;));&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureStateNameLabel = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureStateNameLabel.setText(&quot;&quot;);&#xA;&#xA;this.add(fFigureStateNameLabel);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private boolean myUseLocalCoordinates = false;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected boolean useLocalCoordinates() {&#xA;&#x9;&#x9;return myUseLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#xA;&#x9;&#x9;myUseLocalCoordinates = useLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureStateNameLabel() {&#xA;&#x9;&#x9;return fFigureStateNameLabel;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;">
         <attributes
             xsi:type="gmfgen:StyleAttributes"
             fixedForeground="true"
             fixedBackground="true"/>
+        <attributes
+            xsi:type="gmfgen:DefaultSizeAttributes"/>
         <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
       </viewmap>
       <modelFacet>
@@ -70,41 +73,6 @@
               href="ssm.genmodel#//ssm/State/name"/>
         </modelFacet>
       </labels>
-      <labels
-          visualID="5005"
-          editPartClassName="StateStateKind2EditPart"
-          itemSemanticEditPolicyClassName="StateStateKind2ItemSemanticEditPolicy"
-          notationViewFactoryClassName="StateStateKind2ViewFactory">
-        <diagramRunTimeClass
-            href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
-        <viewmap
-            xsi:type="gmfgen:ParentAssignedViewmap"
-            getterName="getFigureStateKindLabel"
-            figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel"/>
-        <modelFacet
-            xsi:type="gmfgen:FeatureLabelModelFacet"
-            editorPattern="">
-          <metaFeatures
-              href="ssm.genmodel#//ssm/State/stateKind"/>
-        </modelFacet>
-      </labels>
-      <labels
-          visualID="5006"
-          editPartClassName="StateStateFlag2EditPart"
-          itemSemanticEditPolicyClassName="StateStateFlag2ItemSemanticEditPolicy"
-          notationViewFactoryClassName="StateStateFlag2ViewFactory">
-        <diagramRunTimeClass
-            href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
-        <viewmap
-            xsi:type="gmfgen:ParentAssignedViewmap"
-            getterName="getFigureStateFlagLabel"
-            figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel"/>
-        <modelFacet
-            xsi:type="gmfgen:FeatureLabelModelFacet">
-          <metaFeatures
-              href="ssm.genmodel#//ssm/State/stateFlag"/>
-        </modelFacet>
-      </labels>
     </childNodes>
     <topLevelNodes
         visualID="2002"
@@ -123,11 +91,13 @@
       <viewmap
           xsi:type="gmfgen:InnerClassViewmap"
           className="StateFigureDescriptor"
-          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class StateFigureDescriptor extends org.eclipse.draw2d.RoundedRectangle {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureStateNameLabel; &#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureStateKindLabel; &#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureStateFlagLabel; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public StateFigureDescriptor() {&#xA;&#x9;&#x9;&#x9;&#x9;this.setCornerDimensions(new org.eclipse.draw2d.geometry.Dimension(getMapMode().DPtoLP(16)&#xA;, getMapMode().DPtoLP(16)&#xA;));&#xA;&#x9;this.setForegroundColor(org.eclipse.draw2d.ColorConstants.black);&#xA;&#x9;this.setBackgroundColor(org.eclipse.draw2d.ColorConstants.white);&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureStateNameLabel = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureStateNameLabel.setText(&quot;&quot;);&#xA;&#xA;this.add(fFigureStateNameLabel);&#xA;&#xA;&#xA;&#xA;fFigureStateKindLabel = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureStateKindLabel.setText(&quot;&quot;);&#xA;&#xA;this.add(fFigureStateKindLabel);&#xA;&#xA;&#xA;&#xA;fFigureStateFlagLabel = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureStateFlagLabel.setText(&quot;&quot;);&#xA;&#xA;this.add(fFigureStateFlagLabel);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private boolean myUseLocalCoordinates = false;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected boolean useLocalCoordinates() {&#xA;&#x9;&#x9;return myUseLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#xA;&#x9;&#x9;myUseLocalCoordinates = useLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureStateNameLabel() {&#xA;&#x9;&#x9;return fFigureStateNameLabel;&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureStateKindLabel() {&#xA;&#x9;&#x9;return fFigureStateKindLabel;&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureStateFlagLabel() {&#xA;&#x9;&#x9;return fFigureStateFlagLabel;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;">
+          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class StateFigureDescriptor extends org.eclipse.draw2d.RoundedRectangle {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureStateNameLabel; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public StateFigureDescriptor() {&#xA;&#x9;&#x9;&#x9;&#x9;this.setCornerDimensions(new org.eclipse.draw2d.geometry.Dimension(getMapMode().DPtoLP(16)&#xA;, getMapMode().DPtoLP(16)&#xA;));&#xA;this.setLineWidth(2);&#xA;&#x9;this.setForegroundColor(org.eclipse.draw2d.ColorConstants.black);&#xA;&#x9;this.setBackgroundColor(org.eclipse.draw2d.ColorConstants.white);&#xA;this.setPreferredSize(new org.eclipse.draw2d.geometry.Dimension(getMapMode().DPtoLP(40)&#xA;, getMapMode().DPtoLP(30)&#xA;));&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureStateNameLabel = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureStateNameLabel.setText(&quot;&quot;);&#xA;&#xA;this.add(fFigureStateNameLabel);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private boolean myUseLocalCoordinates = false;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected boolean useLocalCoordinates() {&#xA;&#x9;&#x9;return myUseLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#xA;&#x9;&#x9;myUseLocalCoordinates = useLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureStateNameLabel() {&#xA;&#x9;&#x9;return fFigureStateNameLabel;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;">
         <attributes
             xsi:type="gmfgen:StyleAttributes"
             fixedForeground="true"
             fixedBackground="true"/>
+        <attributes
+            xsi:type="gmfgen:DefaultSizeAttributes"/>
         <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
       </viewmap>
       <modelFacet>
@@ -155,41 +125,6 @@
               href="ssm.genmodel#//ssm/State/name"/>
         </modelFacet>
       </labels>
-      <labels
-          visualID="5002"
-          editPartClassName="StateStateKindEditPart"
-          itemSemanticEditPolicyClassName="StateStateKindItemSemanticEditPolicy"
-          notationViewFactoryClassName="StateStateKindViewFactory">
-        <diagramRunTimeClass
-            href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
-        <viewmap
-            xsi:type="gmfgen:ParentAssignedViewmap"
-            getterName="getFigureStateKindLabel"
-            figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel"/>
-        <modelFacet
-            xsi:type="gmfgen:FeatureLabelModelFacet">
-          <metaFeatures
-              href="ssm.genmodel#//ssm/State/stateKind"/>
-        </modelFacet>
-      </labels>
-      <labels
-          visualID="5003"
-          editPartClassName="StateStateFlagEditPart"
-          itemSemanticEditPolicyClassName="StateStateFlagItemSemanticEditPolicy"
-          notationViewFactoryClassName="StateStateFlagViewFactory">
-        <diagramRunTimeClass
-            href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
-        <viewmap
-            xsi:type="gmfgen:ParentAssignedViewmap"
-            getterName="getFigureStateFlagLabel"
-            figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel"/>
-        <modelFacet
-            xsi:type="gmfgen:FeatureLabelModelFacet"
-            editPattern="">
-          <metaFeatures
-              href="ssm.genmodel#//ssm/State/stateFlag"/>
-        </modelFacet>
-      </labels>
     </topLevelNodes>
     <links
         visualID="4006"
@@ -206,10 +141,11 @@
       <viewmap
           xsi:type="gmfgen:InnerClassViewmap"
           className="TransitionFigureDescriptor"
-          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class TransitionFigureDescriptor extends org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureTransitionDelayLabel; &#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureTransitionImmediateLabel; &#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureTransitionPriorityLabel; &#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureTransitionKindLabel; &#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureTransitionTriggerEffectLabel; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public TransitionFigureDescriptor() {&#xA;&#x9;&#x9;&#x9;this.setForegroundColor(org.eclipse.draw2d.ColorConstants.black);&#xA;&#xA;&#x9;&#x9;createContents();&#xA;&#x9;&#x9;setTargetDecoration(createTargetDecoration());&#xA;&#x9;}&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureTransitionDelayLabel = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureTransitionDelayLabel.setText(&quot;&quot;);&#xA;&#xA;this.add(fFigureTransitionDelayLabel);&#xA;&#xA;&#xA;&#xA;fFigureTransitionImmediateLabel = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureTransitionImmediateLabel.setText(&quot;&quot;);&#xA;&#xA;this.add(fFigureTransitionImmediateLabel);&#xA;&#xA;&#xA;&#xA;fFigureTransitionPriorityLabel = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureTransitionPriorityLabel.setText(&quot;&quot;);&#xA;&#xA;this.add(fFigureTransitionPriorityLabel);&#xA;&#xA;&#xA;&#xA;fFigureTransitionKindLabel = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureTransitionKindLabel.setText(&quot;&quot;);&#xA;&#xA;this.add(fFigureTransitionKindLabel);&#xA;&#xA;&#xA;&#xA;fFigureTransitionTriggerEffectLabel = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureTransitionTriggerEffectLabel.setText(&quot;&lt;Triggers>/&lt;Effects>&quot;);&#xA;&#xA;this.add(fFigureTransitionTriggerEffectLabel);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.draw2d.RotatableDecoration createTargetDecoration() {&#xA;&#x9;&#x9;org.eclipse.draw2d.PolygonDecoration df = new org.eclipse.draw2d.PolygonDecoration();&#xA;df.setFill(true);&#xA;&#x9;df.setForegroundColor(org.eclipse.draw2d.ColorConstants.black);&#xA;&#x9;df.setBackgroundColor(org.eclipse.draw2d.ColorConstants.black);&#xA;&#x9;&#x9;return df;&#xA;&#x9;}&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureTransitionDelayLabel() {&#xA;&#x9;&#x9;return fFigureTransitionDelayLabel;&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureTransitionImmediateLabel() {&#xA;&#x9;&#x9;return fFigureTransitionImmediateLabel;&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureTransitionPriorityLabel() {&#xA;&#x9;&#x9;return fFigureTransitionPriorityLabel;&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureTransitionKindLabel() {&#xA;&#x9;&#x9;return fFigureTransitionKindLabel;&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureTransitionTriggerEffectLabel() {&#xA;&#x9;&#x9;return fFigureTransitionTriggerEffectLabel;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;">
+          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class TransitionFigureDescriptor extends org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureTransitionDelayLabel; &#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureTransitionImmediateLabel; &#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureTransitionPriorityLabel; &#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureTransitionKindLabel; &#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureTransitionTriggerEffectLabel; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public TransitionFigureDescriptor() {&#xA;&#x9;&#x9;&#x9;this.setForegroundColor(org.eclipse.draw2d.ColorConstants.black);&#xA;&#x9;this.setBackgroundColor(org.eclipse.draw2d.ColorConstants.black);&#xA;&#xA;&#x9;&#x9;createContents();&#xA;&#x9;&#x9;setTargetDecoration(createTargetDecoration());&#xA;&#x9;}&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureTransitionDelayLabel = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureTransitionDelayLabel.setText(&quot;&quot;);&#xA;&#xA;this.add(fFigureTransitionDelayLabel);&#xA;&#xA;&#xA;&#xA;fFigureTransitionImmediateLabel = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureTransitionImmediateLabel.setText(&quot;&quot;);&#xA;&#xA;this.add(fFigureTransitionImmediateLabel);&#xA;&#xA;&#xA;&#xA;fFigureTransitionPriorityLabel = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureTransitionPriorityLabel.setText(&quot;&quot;);&#xA;&#xA;this.add(fFigureTransitionPriorityLabel);&#xA;&#xA;&#xA;&#xA;fFigureTransitionKindLabel = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureTransitionKindLabel.setText(&quot;&quot;);&#xA;&#xA;this.add(fFigureTransitionKindLabel);&#xA;&#xA;&#xA;&#xA;fFigureTransitionTriggerEffectLabel = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureTransitionTriggerEffectLabel.setText(&quot;&lt;Triggers>/&lt;Effects>&quot;);&#xA;&#xA;this.add(fFigureTransitionTriggerEffectLabel);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.draw2d.RotatableDecoration createTargetDecoration() {&#xA;&#x9;&#x9;org.eclipse.draw2d.PolygonDecoration df = new org.eclipse.draw2d.PolygonDecoration();&#xA;df.setFill(true);&#xA;df.setLineWidth(2);&#xA;&#x9;df.setForegroundColor(org.eclipse.draw2d.ColorConstants.black);&#xA;&#x9;df.setBackgroundColor(org.eclipse.draw2d.ColorConstants.black);&#xA;&#x9;&#x9;return df;&#xA;&#x9;}&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureTransitionDelayLabel() {&#xA;&#x9;&#x9;return fFigureTransitionDelayLabel;&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureTransitionImmediateLabel() {&#xA;&#x9;&#x9;return fFigureTransitionImmediateLabel;&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureTransitionPriorityLabel() {&#xA;&#x9;&#x9;return fFigureTransitionPriorityLabel;&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureTransitionKindLabel() {&#xA;&#x9;&#x9;return fFigureTransitionKindLabel;&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureTransitionTriggerEffectLabel() {&#xA;&#x9;&#x9;return fFigureTransitionTriggerEffectLabel;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;">
         <attributes
             xsi:type="gmfgen:StyleAttributes"
-            fixedForeground="true"/>
+            fixedForeground="true"
+            fixedBackground="true"/>
         <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
       </viewmap>
       <modelFacet
@@ -347,15 +283,27 @@
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <viewmap
-          xsi:type="gmfgen:InnerClassViewmap"
-          className="StateFigureDescriptor"
-          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class StateFigureDescriptor extends org.eclipse.draw2d.RoundedRectangle {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureStateNameLabel; &#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureStateKindLabel; &#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureStateFlagLabel; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public StateFigureDescriptor() {&#xA;&#x9;&#x9;&#x9;&#x9;this.setCornerDimensions(new org.eclipse.draw2d.geometry.Dimension(getMapMode().DPtoLP(16)&#xA;, getMapMode().DPtoLP(16)&#xA;));&#xA;&#x9;this.setForegroundColor(org.eclipse.draw2d.ColorConstants.black);&#xA;&#x9;this.setBackgroundColor(org.eclipse.draw2d.ColorConstants.white);&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureStateNameLabel = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureStateNameLabel.setText(&quot;&quot;);&#xA;&#xA;this.add(fFigureStateNameLabel);&#xA;&#xA;&#xA;&#xA;fFigureStateKindLabel = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureStateKindLabel.setText(&quot;&quot;);&#xA;&#xA;this.add(fFigureStateKindLabel);&#xA;&#xA;&#xA;&#xA;fFigureStateFlagLabel = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureStateFlagLabel.setText(&quot;&quot;);&#xA;&#xA;this.add(fFigureStateFlagLabel);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private boolean myUseLocalCoordinates = false;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected boolean useLocalCoordinates() {&#xA;&#x9;&#x9;return myUseLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#xA;&#x9;&#x9;myUseLocalCoordinates = useLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureStateNameLabel() {&#xA;&#x9;&#x9;return fFigureStateNameLabel;&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureStateKindLabel() {&#xA;&#x9;&#x9;return fFigureStateKindLabel;&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureStateFlagLabel() {&#xA;&#x9;&#x9;return fFigureStateFlagLabel;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;">
-        <attributes
-            xsi:type="gmfgen:StyleAttributes"
-            fixedForeground="true"
-            fixedBackground="true"/>
-        <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
-      </viewmap>
+          xsi:type="gmfgen:ParentAssignedViewmap"
+          getterName="getFigureStateNameLabel"
+          figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel"/>
+    </compartments>
+    <compartments
+        visualID="7002"
+        editPartClassName="StateStateCompartment2EditPart"
+        itemSemanticEditPolicyClassName="StateStateCompartment2ItemSemanticEditPolicy"
+        notationViewFactoryClassName="StateStateCompartment2ViewFactory"
+        canonicalEditPolicyClassName="StateStateCompartment2CanonicalEditPolicy"
+        childNodes="//@diagram/@childNodes.0"
+        title="StateCompartment"
+        needsTitle="false"
+        node="//@diagram/@childNodes.0"
+        listLayout="false">
+      <diagramRunTimeClass
+          href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+      <viewmap
+          xsi:type="gmfgen:ParentAssignedViewmap"
+          getterName="getFigureStateNameLabel"
+          figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel"/>
     </compartments>
     <palette>
       <groups

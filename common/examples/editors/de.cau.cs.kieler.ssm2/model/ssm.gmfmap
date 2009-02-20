@@ -18,61 +18,18 @@
         <features
             href="ssm.ecore#//State/name"/>
       </labelMappings>
-      <labelMappings
-          xsi:type="gmfmap:FeatureLabelMapping">
-        <diagramLabel
-            href="ssm.gmfgraph#StateKindDiagramLabel"/>
-        <features
-            href="ssm.ecore#//State/stateKind"/>
-      </labelMappings>
-      <labelMappings
-          xsi:type="gmfmap:FeatureLabelMapping"
-          editPattern="">
-        <diagramLabel
-            href="ssm.gmfgraph#StateFlagDiagramLabel"/>
-        <features
-            href="ssm.ecore#//State/stateFlag"/>
-      </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
           href="ssm.gmftool#//@palette/@tools.0/@tools.0"/>
       <diagramNode
           href="ssm.gmfgraph#StateNode"/>
       <children
-          compartment="//@nodes.0/@ownedChild/@compartments.0">
+          compartment="//@nodes.0/@ownedChild/@compartments.0"
+          referencedChild="//@nodes.0/@ownedChild">
         <containmentFeature
             href="ssm.ecore#//State/innerStates"/>
-        <ownedChild>
-          <domainMetaElement
-              href="ssm.ecore#//State"/>
-          <labelMappings
-              xsi:type="gmfmap:FeatureLabelMapping">
-            <diagramLabel
-                href="ssm.gmfgraph#StateNameDiagramLabel"/>
-            <features
-                href="ssm.ecore#//State/name"/>
-          </labelMappings>
-          <labelMappings
-              xsi:type="gmfmap:FeatureLabelMapping"
-              editorPattern="">
-            <diagramLabel
-                href="ssm.gmfgraph#StateKindDiagramLabel"/>
-            <features
-                href="ssm.ecore#//State/stateKind"/>
-          </labelMappings>
-          <labelMappings
-              xsi:type="gmfmap:FeatureLabelMapping">
-            <diagramLabel
-                href="ssm.gmfgraph#StateFlagDiagramLabel"/>
-            <features
-                href="ssm.ecore#//State/stateFlag"/>
-          </labelMappings>
-          <tool
-              xsi:type="gmftool:CreationTool"
-              href="ssm.gmftool#//@palette/@tools.0/@tools.0"/>
-          <diagramNode
-              href="ssm.gmfgraph#StateNode"/>
-        </ownedChild>
+        <childrenFeature
+            href="ssm.ecore#//State/innerStates"/>
       </children>
       <compartments
           children="//@nodes.0/@ownedChild/@children.0">
