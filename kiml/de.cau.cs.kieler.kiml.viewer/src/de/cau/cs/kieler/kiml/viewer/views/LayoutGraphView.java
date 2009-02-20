@@ -10,8 +10,7 @@ import org.eclipse.swt.SWT;
 
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutGraph;
 import de.cau.cs.kieler.kiml.viewer.Messages;
-
-
+import de.cau.cs.kieler.kiml.viewer.actions.ImageExportAction;
 
 /**
  * A viewer for layout graphs.

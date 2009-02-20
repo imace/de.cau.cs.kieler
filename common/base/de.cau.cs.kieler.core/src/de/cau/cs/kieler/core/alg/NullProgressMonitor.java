@@ -19,15 +19,19 @@ public class NullProgressMonitor implements IKielerProgressMonitor {
 	private double totalTime;
 	/** the name of the associated task */
 	private String taskName;
+	/** indicates whether the monitor is closed */
+	private boolean closed = false;
 	
 	/* (non-Javadoc)
 	 * @see de.cau.cs.kieler.core.alg.IKielerProgressMonitor#begin(java.lang.String, int)
 	 */
 	public void begin(String name, int totalWork) {
-		nestingLevel++;
-		if (nestingLevel == 0) {
-			this.taskName = name;
-			startTime = System.nanoTime();
+		if (!closed) {
+			nestingLevel++;
+			if (nestingLevel == 0) {
+				this.taskName = name;
+				startTime = System.nanoTime();
+			}
 		}
 	}
 
@@ -35,9 +39,13 @@ public class NullProgressMonitor implements IKielerProgressMonitor {
 	 * @see de.cau.cs.kieler.core.alg.IKielerProgressMonitor#done()
 	 */
 	public void done() {
-		if (nestingLevel == 0)
-			totalTime = (System.nanoTime() - startTime) * 1e-9;
-		nestingLevel--;
+		if (!closed) {
+			if (nestingLevel == 0) {
+				totalTime = (System.nanoTime() - startTime) * 1e-9;
+				closed = true;
+			}
+			nestingLevel--;
+		}
 	}
 
 	/* (non-Javadoc)
@@ -52,6 +60,14 @@ public class NullProgressMonitor implements IKielerProgressMonitor {
 	 */
 	public List<IKielerProgressMonitor> getSubMonitors() {
 		return Collections.emptyList();
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see de.cau.cs.kieler.core.alg.IKielerProgressMonitor#getParentMonitor()
+	 */
+	public IKielerProgressMonitor getParentMonitor() {
+		return null;
 	}
 
 	/* (non-Javadoc)
@@ -72,7 +88,9 @@ public class NullProgressMonitor implements IKielerProgressMonitor {
 	 * @see de.cau.cs.kieler.core.alg.IKielerProgressMonitor#subTask(int)
 	 */
 	public IKielerProgressMonitor subTask(int work) {
-		return this;
+		if (closed)
+			return null;
+		else return this;
 	}
 
 	/* (non-Javadoc)

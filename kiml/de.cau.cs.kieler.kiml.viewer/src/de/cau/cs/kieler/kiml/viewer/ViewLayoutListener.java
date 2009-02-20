@@ -5,9 +5,11 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 
+import de.cau.cs.kieler.core.alg.IKielerProgressMonitor;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutGraph;
 import de.cau.cs.kieler.kiml.layout.services.IKimlLayoutListener;
 import de.cau.cs.kieler.kiml.layout.util.LayoutGraphCloner;
+import de.cau.cs.kieler.kiml.viewer.views.ExecutionView;
 import de.cau.cs.kieler.kiml.viewer.views.LayoutGraphView;
 
 
@@ -19,47 +21,61 @@ import de.cau.cs.kieler.kiml.viewer.views.LayoutGraphView;
  */
 public class ViewLayoutListener implements IKimlLayoutListener {
 
+	/** the currently open layout graph view */
+	private LayoutGraphView layoutGraphView;
+	/** the currently open execution view */
+	private ExecutionView executionView;
+	
 	/* (non-Javadoc)
 	 * @see de.cau.cs.kieler.kiml.layout.services.IKimlLayoutListener#layoutRequested(de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutGraph)
 	 */
 	public void layoutRequested(KLayoutGraph layoutGraph) {
-		LayoutGraphView view = getLayoutGraphView();
-		if (view != null) {
-			view.setLayoutGraph(LayoutGraphCloner.cloneLayoutGraph(layoutGraph), false);
+		findViews();
+		if (layoutGraphView != null) {
+			layoutGraphView.setLayoutGraph(LayoutGraphCloner
+					.cloneLayoutGraph(layoutGraph), false);
 			// the last post-layout graph is deleted to avoid inconsistent graphs
-			view.setLayoutGraph(null, true);
+			layoutGraphView.setLayoutGraph(null, true);
 		}
 	}
 	
-	/* (non-Javadoc)
-	 * @see de.cau.cs.kieler.kiml.layout.services.IKimlLayoutListener#layoutPerformed(de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutGraph)
+	/*
+	 * (non-Javadoc)
+	 * @see de.cau.cs.kieler.kiml.layout.services.IKimlLayoutListener#layoutPerformed(de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutGraph, de.cau.cs.kieler.core.alg.IKielerProgressMonitor)
 	 */
-	public void layoutPerformed(KLayoutGraph layoutGraph) {
-		LayoutGraphView view = getLayoutGraphView();
-		if (view != null) {
-			view.setLayoutGraph(LayoutGraphCloner.cloneLayoutGraph(layoutGraph), true);
+	public void layoutPerformed(KLayoutGraph layoutGraph,
+			IKielerProgressMonitor monitor) {
+		findViews();
+		if (layoutGraphView != null) {
+			layoutGraphView.setLayoutGraph(LayoutGraphCloner
+					.cloneLayoutGraph(layoutGraph), true);
+		}
+		if (executionView != null) {
+			executionView.addExecution(monitor);
 		}
 	}
 	
 	/**
-	 * Retrieves the layout graph view.
-	 * 
-	 * @return the active layout graph view
+	 * Tries to find the relevant currently open views.
 	 */
-	private LayoutGraphView getLayoutGraphView() {
+	private void findViews() {
+		layoutGraphView = null;
+		executionView = null;
+		
 		IWorkbenchWindow activeWindow = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
 		if (activeWindow == null)
-			return null;
+			return;
 		
 		IWorkbenchPage activePage = activeWindow.getActivePage();
 		if (activePage == null)
-			return null;
+			return;
 		
 		IViewPart viewPart = activePage.findView(LayoutGraphView.VIEW_ID);
 		if (viewPart instanceof LayoutGraphView)
-			return (LayoutGraphView)viewPart;
-		else
-			return null;
+			layoutGraphView = (LayoutGraphView)viewPart;
+		viewPart = activePage.findView(ExecutionView.VIEW_ID);
+		if (viewPart instanceof ExecutionView)
+			executionView = (ExecutionView)viewPart;
 	}
 
 }

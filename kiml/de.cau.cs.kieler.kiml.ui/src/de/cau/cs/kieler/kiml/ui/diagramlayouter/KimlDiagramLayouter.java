@@ -199,6 +199,7 @@ public final class KimlDiagramLayouter {
 	private static IStatus layout(Object target, String editorID, boolean animate,
 			int runs, KielerProgressMonitor progressMonitor) {
 		KimlAbstractLayouterEngine layoutEngine = null;
+		KimlLayoutInformation layoutInformation = null;
 		try {
 			progressMonitor.begin("Diagram layout", 100);
 			
@@ -208,8 +209,7 @@ public final class KimlDiagramLayouter {
 
 			// transforms the diagram into the KLayoutGraph and also use the
 			// mappings
-			KimlLayoutInformation layoutInformation = layoutGraphBuilder
-					.buildLayoutGraph(target);
+			layoutInformation = layoutGraphBuilder.buildLayoutGraph(target);
 			progressMonitor.worked(5);
 
 			// notifies layout listeners about the layout request
@@ -222,10 +222,6 @@ public final class KimlDiagramLayouter {
 			// does the layout with the layout graph
 			layoutEngine.layout(layoutInformation.layoutGraph,
 					progressMonitor.subTask(90));
-
-			// notifies layout listeners about the performed layout
-			KimlLayoutServices.getInstance().layoutPerformed(
-					layoutInformation.layoutGraph);
 
 			// fetches layout graph applier for the provided editor
 			KimlAbstractLayoutGraphApplier layoutGraphApplier = LayoutGraphAppliers
@@ -250,6 +246,11 @@ public final class KimlDiagramLayouter {
 				layoutGraphApplier.applyLayoutGraph(layoutInformation);
 			}
 			/** WORKAROUND END **/
+			
+			progressMonitor.done();
+			// notifies layout listeners about the performed layout
+			KimlLayoutServices.getInstance().layoutPerformed(
+					layoutInformation.layoutGraph, progressMonitor);
 			return null;
 			
 		} catch (Throwable exception) {

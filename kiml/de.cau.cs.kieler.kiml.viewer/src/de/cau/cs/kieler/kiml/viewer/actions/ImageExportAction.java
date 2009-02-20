@@ -1,4 +1,4 @@
-package de.cau.cs.kieler.kiml.viewer.views;
+package de.cau.cs.kieler.kiml.viewer.actions;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -16,8 +16,10 @@ import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.FileDialog;
 
-import de.cau.cs.kieler.kiml.viewer.Activator;
+import de.cau.cs.kieler.kiml.viewer.KimlViewerPlugin;
 import de.cau.cs.kieler.kiml.viewer.Messages;
+import de.cau.cs.kieler.kiml.viewer.views.LayoutGraphCanvas;
+import de.cau.cs.kieler.kiml.viewer.views.LayoutGraphView;
 
 
 /**
@@ -48,8 +50,8 @@ public class ImageExportAction extends Action {
 		setId(ACTION_ID);
 		setText(Messages.getString("kiml.viewer.2"));
 		setToolTipText(Messages.getString("kiml.viewer.3"));
-		setImageDescriptor(Activator.imageDescriptorFromPlugin(
-			Activator.PLUGIN_ID, ICON_PATH));
+		setImageDescriptor(KimlViewerPlugin.imageDescriptorFromPlugin(
+			KimlViewerPlugin.PLUGIN_ID, ICON_PATH));
 	}
 
 	/*
@@ -76,7 +78,7 @@ public class ImageExportAction extends Action {
 							canvas.paintLayoutGraph(new GC(image), size);
 							monitor.worked(50);
 							if (monitor.isCanceled())
-								return new Status(IStatus.INFO, Activator.PLUGIN_ID,
+								return new Status(IStatus.INFO, KimlViewerPlugin.PLUGIN_ID,
 										0, "Aborted", null);
 							
 							// save the image into the selected file
@@ -86,10 +88,10 @@ public class ImageExportAction extends Action {
 							imageLoader.save(fileName, SWT.IMAGE_PNG);
 							monitor.worked(50);
 							
-							return new Status(IStatus.INFO, Activator.PLUGIN_ID,
+							return new Status(IStatus.INFO, KimlViewerPlugin.PLUGIN_ID,
 									0, "OK", null);
 						} catch (SWTException exception) {
-							return new Status(IStatus.ERROR, Activator.PLUGIN_ID, exception.code,
+							return new Status(IStatus.ERROR, KimlViewerPlugin.PLUGIN_ID, exception.code,
 									Messages.getString("kiml.viewer.7"), exception);
 						}
 						finally {
@@ -116,7 +118,7 @@ public class ImageExportAction extends Action {
 	 * @return file name, or null if no file was selected
 	 */
 	private static String getFileName(Display display) {
-		IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
+		IPreferenceStore preferenceStore = KimlViewerPlugin.getDefault().getPreferenceStore();
 		
 		// create and configure file dialog
 		FileDialog fileDialog = new FileDialog(display.getActiveShell(), SWT.SAVE);

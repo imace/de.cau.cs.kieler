@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import de.cau.cs.kieler.core.IKielerPreferenceStore;
+import de.cau.cs.kieler.core.alg.IKielerProgressMonitor;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutGraph;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutType;
@@ -87,10 +88,12 @@ public class KimlLayoutServices {
 	 * layout listeners.
 	 * 
 	 * @param layoutGraph layout graph for which layout was performed
+	 * @param monitor progress monitor containing execution time results
 	 */
-	public void layoutPerformed(KLayoutGraph layoutGraph) {
+	public void layoutPerformed(KLayoutGraph layoutGraph,
+			IKielerProgressMonitor monitor) {
 		for (IKimlLayoutListener listener : listeners) {
-			listener.layoutPerformed(layoutGraph);
+			listener.layoutPerformed(layoutGraph, monitor);
 		}
 	}
 

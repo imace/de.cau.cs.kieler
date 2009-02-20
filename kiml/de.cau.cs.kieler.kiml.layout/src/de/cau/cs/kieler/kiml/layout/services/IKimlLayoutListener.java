@@ -1,5 +1,6 @@
 package de.cau.cs.kieler.kiml.layout.services;
 
+import de.cau.cs.kieler.core.alg.IKielerProgressMonitor;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutGraph;
 
 /**
@@ -28,7 +29,9 @@ public interface IKimlLayoutListener {
 	 * The given layout graph must not be modified by this method.
 	 * 
 	 * @param layoutGraph layout graph that was layouted
+	 * @param monitor progress monitor containing execution time results
 	 */
-	public void layoutPerformed(KLayoutGraph layoutGraph);
+	public void layoutPerformed(KLayoutGraph layoutGraph,
+			IKielerProgressMonitor monitor);
 	
 }
