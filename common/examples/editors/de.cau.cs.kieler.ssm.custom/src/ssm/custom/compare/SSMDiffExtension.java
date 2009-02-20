@@ -17,10 +17,13 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.compare.diff.merge.api.IMerger;
 import org.eclipse.emf.compare.diff.metamodel.AbstractDiffExtension;
 import org.eclipse.emf.compare.diff.metamodel.AddReferenceValue;
+import org.eclipse.emf.compare.diff.metamodel.AttributeChange;
 import org.eclipse.emf.compare.diff.metamodel.DiffElement;
+import org.eclipse.emf.compare.diff.metamodel.DiffGroup;
 import org.eclipse.emf.compare.diff.metamodel.DiffModel;
 import org.eclipse.emf.compare.diff.metamodel.ReferenceChange;
 import org.eclipse.emf.compare.diff.metamodel.RemoveReferenceValue;
+import org.eclipse.emf.compare.diff.metamodel.UpdateAttribute;
 import org.eclipse.emf.compare.ui.util.EMFCompareEObjectUtils;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -80,7 +83,9 @@ public class SSMDiffExtension implements AbstractDiffExtension {
 	 */
 	public void visit(DiffModel diffModel) {
 		DiffElement diffElement = diffModel.getOwnedElements().get(0);
+		DiffElement rename;
 		EList<DiffElement> toRemove = new BasicEList<DiffElement>();
+		EList<DiffElement> toAdd = new BasicEList<DiffElement>();
 		TreeIterator<EObject> i = diffElement.eAllContents();
 
 		// collect items to remove, must be done in two steps to prevent
@@ -91,6 +96,9 @@ public class SSMDiffExtension implements AbstractDiffExtension {
 				toRemove.add(nextDiffElement);
 			if (removeChangeOfStateDueToTransitions(nextDiffElement))
 				toRemove.add(nextDiffElement);
+			if ((rename = changeStateWasJustRenamed(nextDiffElement)) != null) {
+				toRemove.add(rename);
+			}
 		}
 		// now actually remove the elements
 		for (DiffElement removeDiffElement : toRemove) {
@@ -203,7 +211,7 @@ public class SSMDiffExtension implements AbstractDiffExtension {
 	private boolean removeChangeOfStateDiffGroupDueToTransitions(
 			DiffElement diffElement) {
 		boolean deleteThisDiffElement = false;
-		
+
 		if (EMFCompareEObjectUtils.getLeftElement(diffElement) instanceof AbstractState) {
 			for (DiffElement subDiffElement : diffElement.getSubDiffElements()) {
 				if (subDiffElement instanceof ReferenceChange) {
@@ -240,5 +248,31 @@ public class SSMDiffExtension implements AbstractDiffExtension {
 				return true;
 		}
 		return false;
+	}
+
+	/**
+	 * Should move the Diffgroup with just one change, the name of the State, on
+	 * level higher in the hierarchy, but then the element in the higher levels
+	 * 'thinks' its attribute has been altered and is displayed like that.
+	 * 
+	 * @param diffElement
+	 *            A DiffElement for which it should be checked if it is just a
+	 *            renaming of a state.
+	 * @return The provided element if is should be deleted.
+	 */
+	private DiffElement changeStateWasJustRenamed(DiffElement diffElement) {
+//		if (EMFCompareEObjectUtils.getLeftElement(diffElement) instanceof AbstractState) {
+//			if (diffElement instanceof AttributeChange) {
+//				System.out.println("Rename: " + diffElement);
+//				UpdateAttribute copyOfDiffElement = (UpdateAttribute) EcoreUtil
+//						.copy(diffElement);
+//				DiffGroup parentParentDiffGroup = (DiffGroup) diffElement
+//						.eContainer().eContainer();
+//				parentParentDiffGroup.getSubDiffElements().add(
+//						copyOfDiffElement);
+//				return diffElement;
+//			}
+//		}
+		return null;
 	}
 }
