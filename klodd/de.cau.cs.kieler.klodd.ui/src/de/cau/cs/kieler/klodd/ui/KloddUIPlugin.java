@@ -1,16 +1,13 @@
-package de.cau.cs.kieler.klodd.core;
+package de.cau.cs.kieler.klodd.ui;
 
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
-import de.cau.cs.kieler.klodd.core.preferences.KloddLayoutPreferences;
-
-
 /**
  * The activator class controls the plug-in life cycle
  */
-public class KloddCorePlugin extends AbstractUIPlugin {
+public class KloddUIPlugin extends AbstractUIPlugin {
 
 	/** the plug-in ID */
 	public static final String PLUGIN_ID = "de.cau.cs.kieler.klodd.core";
@@ -18,14 +15,12 @@ public class KloddCorePlugin extends AbstractUIPlugin {
 	public static final String COLLECTION_NAME = "KLoDD Layouters";
 	
 	/** the shared instance */
-	private static KloddCorePlugin plugin;
-	/** the layout preferences map */
-	private static KloddLayoutPreferences layoutPreferences = null;
+	private static KloddUIPlugin plugin;
 	
 	/**
 	 * The constructor
 	 */
-	public KloddCorePlugin() {
+	public KloddUIPlugin() {
 	}
 
 	/*
@@ -51,21 +46,10 @@ public class KloddCorePlugin extends AbstractUIPlugin {
 	 *
 	 * @return the shared instance
 	 */
-	public static KloddCorePlugin getDefault() {
+	public static KloddUIPlugin getDefault() {
 		return plugin;
 	}
 	
-	/**
-	 * Returns the layout preferences.
-	 * 
-	 * @return the layout preferences
-	 */
-	public static KloddLayoutPreferences getLayoutPreferences() {
-		if (layoutPreferences == null)
-			layoutPreferences = new KloddLayoutPreferences();
-		return layoutPreferences;
-	}
-
 	/**
 	 * Returns an image descriptor for the image file at the given
 	 * plug-in relative path
