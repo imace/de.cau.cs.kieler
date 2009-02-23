@@ -5,6 +5,10 @@ import java.util.List;
 import java.util.ListIterator;
 
 import de.cau.cs.kieler.core.alg.AbstractAlgorithm;
+import de.cau.cs.kieler.core.graph.KEdge;
+import de.cau.cs.kieler.core.graph.KFace;
+import de.cau.cs.kieler.core.graph.KGraph;
+import de.cau.cs.kieler.core.graph.KNode;
 import de.cau.cs.kieler.klodd.orthogonal.modules.ICompacter;
 import de.cau.cs.kieler.klodd.orthogonal.structures.*;
 
@@ -25,13 +29,13 @@ public class RefiningCompacter extends AbstractAlgorithm implements ICompacter {
 		/** source node for the new edge */
 		TSMNode source;
 		/** side at the source node for the new edge */
-		TSMNode.Side sourceSide;
+		KNode.Side sourceSide;
 		/** edge which is split to create the target node */
 		TSMEdge targetEdge;
 		/** indicates whether the target is forward for the crossed face */
 		boolean targetForward;
 		/** side of external frame on which the target edge lies */
-		TSMNode.Side externalSide = TSMNode.Side.UNDEFINED;
+		KNode.Side externalSide = KNode.Side.UNDEFINED;
 		
 		/**
 		 * Creates a refinement edge with given values.
@@ -42,7 +46,7 @@ public class RefiningCompacter extends AbstractAlgorithm implements ICompacter {
 		 * @param targetForward indicates whether the target is forward
 		 *     for the crossed face
 		 */
-		RefinementEdge(TSMNode source, TSMNode.Side sourceSide,
+		RefinementEdge(TSMNode source, KNode.Side sourceSide,
 				TSMEdge targetEdge, boolean targetForward) {
 			this.source = source;
 			this.sourceSide = sourceSide;
@@ -90,23 +94,23 @@ public class RefiningCompacter extends AbstractAlgorithm implements ICompacter {
 	 * (non-Javadoc)
 	 * @see de.cau.cs.kieler.klodd.orthogonal.modules.ICompacter#compact(de.cau.cs.kieler.klodd.orthogonal.structures.TSMGraph, float)
 	 */
-	public void compact(TSMGraph graph, float minDist) {
+	public void compact(KGraph graph, float minDist) {
 		getMonitor().begin("Refined compaction", 1);
 		
 		// refine the internal faces
-		ListIterator<TSMFace> faceIter = graph.faces.listIterator();
+		ListIterator<KFace> faceIter = graph.faces.listIterator();
 		while (faceIter.hasNext()) {
-			TSMFace nextFace = faceIter.next();
+			KFace nextFace = faceIter.next();
 			List<RefinementEdge> refinements = getRefinements(nextFace);
-			List<TSMFace> newFaces = applyRefinements(graph, refinements);
-			for (TSMFace newFace : newFaces)
+			List<KFace> newFaces = applyRefinements(graph, refinements);
+			for (KFace newFace : newFaces)
 				faceIter.add(newFace);
 		}
 		// build the external frame
-		TSMFace oldExternalFace = buildExternalFrame(graph);
+		KFace oldExternalFace = buildExternalFrame(graph);
 		// refine the external face
 		List<RefinementEdge> refinements = getRefinements(oldExternalFace);
-		List<TSMFace> newFaces = applyRefinements(graph, refinements);
+		List<KFace> newFaces = applyRefinements(graph, refinements);
 		graph.faces.addAll(newFaces);
 		
 		// execute the embedded compacter
@@ -121,20 +125,20 @@ public class RefiningCompacter extends AbstractAlgorithm implements ICompacter {
 	 * @param face face to be processed
 	 * @return list of refinement edges
 	 */
-	private List<RefinementEdge> getRefinements(TSMFace face) {
+	private List<RefinementEdge> getRefinements(KFace face) {
 		// !! the graph is assumed to be connected here !!
-		List<TSMFace.BorderEntry> border = face.borders.get(0);
+		List<KFace.BorderEntry> border = face.borders.get(0);
 		List<RefinementEdge> refinementEdges = new LinkedList<RefinementEdge>();
 		
-		TSMFace.BorderEntry currentEntry = border.get(border.size() - 1);
-		ListIterator<TSMFace.BorderEntry> entryIter = border.listIterator();
+		KFace.BorderEntry currentEntry = border.get(border.size() - 1);
+		ListIterator<KFace.BorderEntry> entryIter = border.listIterator();
 		while (entryIter.hasNext()) {
-			TSMFace.BorderEntry nextEntry = entryIter.next();
-			TSMNode.Side side1 = currentEntry.secondSide();
-			TSMNode.Side side2 = nextEntry.firstSide();
+			KFace.BorderEntry nextEntry = entryIter.next();
+			KNode.Side side1 = currentEntry.secondSide();
+			KNode.Side side2 = nextEntry.firstSide();
 			if (side1 == side2.left() || side1 == side2) {
 				// found a left turn, add refinement edge
-				TSMFace.BorderEntry frontEntry = getFrontEdge(border,
+				KFace.BorderEntry frontEntry = getFrontEdge(border,
 						entryIter.previousIndex() < 1 ? border.size() - 1
 						: entryIter.previousIndex() - 1);
 				if (frontEntry == null) {
@@ -154,15 +158,15 @@ public class RefiningCompacter extends AbstractAlgorithm implements ICompacter {
 						break;
 					}
 					RefinementEdge refinementEdge = new RefinementEdge(
-							currentEntry.secondNode(), side1.opposed(),
+							(TSMNode)currentEntry.secondNode(), side1.opposed(),
 							frontEdge, true);
 					refinementEdge.externalSide = side1.opposed();
 					refinementEdges.add(refinementEdge);
 				}
 				else {
 					refinementEdges.add(new RefinementEdge(
-							currentEntry.secondNode(), side1.opposed(),
-							frontEntry.edge, frontEntry.forward));
+							(TSMNode)currentEntry.secondNode(), side1.opposed(),
+							(TSMEdge)frontEntry.edge, frontEntry.forward));
 				}
 			}
 			currentEntry = nextEntry;
@@ -179,18 +183,18 @@ public class RefiningCompacter extends AbstractAlgorithm implements ICompacter {
 	 * @return border entry containing the front edge, or null if there
 	 *     is no front edge
 	 */
-	private TSMFace.BorderEntry getFrontEdge(List<TSMFace.BorderEntry> border,
+	private KFace.BorderEntry getFrontEdge(List<KFace.BorderEntry> border,
 			int startIndex) {
-		ListIterator<TSMFace.BorderEntry> entryIter = border
+		ListIterator<KFace.BorderEntry> entryIter = border
 				.listIterator(startIndex);
-		TSMFace.BorderEntry currentEntry = entryIter.next();
+		KFace.BorderEntry currentEntry = entryIter.next();
 		int cornerSum = 0;
 		while (entryIter.nextIndex() != startIndex) {
 			if (!entryIter.hasNext())
 				entryIter = border.listIterator();
-			TSMFace.BorderEntry nextEntry = entryIter.next();
-			TSMNode.Side side1 = currentEntry.secondSide();
-			TSMNode.Side side2 = nextEntry.firstSide();
+			KFace.BorderEntry nextEntry = entryIter.next();
+			KNode.Side side1 = currentEntry.secondSide();
+			KNode.Side side2 = nextEntry.firstSide();
 			if (side1 == side2.left())
 				cornerSum--;
 			else if (side1 == side2.right())
@@ -211,9 +215,9 @@ public class RefiningCompacter extends AbstractAlgorithm implements ICompacter {
 	 * @param refinements list of refinement edges
 	 * @return list of newly created faces
 	 */
-	private List<TSMFace> applyRefinements(TSMGraph graph,
+	private List<KFace> applyRefinements(KGraph graph,
 			List<RefinementEdge> refinements) {
-		List<TSMFace> newFaces = new LinkedList<TSMFace>();
+		List<KFace> newFaces = new LinkedList<KFace>();
 		for (RefinementEdge refinementEdge : refinements) {
 			// look for the right target edge
 			while (!containsNode(refinementEdge.targetEdge,
@@ -221,9 +225,9 @@ public class RefiningCompacter extends AbstractAlgorithm implements ICompacter {
 				refinementEdge.targetEdge = refinementEdge.targetEdge.nextEdge;
 			
 			// create new node and insert it into the border
-			TSMNode newNode = new TSMNode(graph, TSMNode.Type.REFINEMENT);
+			KNode newNode = new TSMNode(graph, TSMNode.Type.REFINEMENT);
 			TSMEdge edge1 = refinementEdge.targetEdge;
-			TSMNode oldNode2;
+			KNode oldNode2;
 			TSMEdge edge2;
 			if (refinementEdge.targetForward) {
 				oldNode2 = edge1.target;
@@ -235,18 +239,18 @@ public class RefiningCompacter extends AbstractAlgorithm implements ICompacter {
 				edge1.source = newNode;
 				edge2 = new TSMEdge(graph, oldNode2, newNode, edge1.layoutEdge);
 			}
-			ListIterator<TSMNode.IncEntry> oldNode2Iter = oldNode2.getIterator(
+			ListIterator<KNode.IncEntry> oldNode2Iter = oldNode2.getIterator(
 					edge1, !refinementEdge.targetForward);
 			oldNode2Iter.remove();
-			oldNode2Iter.add(new TSMNode.IncEntry(edge2,
-					refinementEdge.targetForward ? TSMNode.IncEntry.Type.IN
-					: TSMNode.IncEntry.Type.OUT));
-			newNode.incidence.add(new TSMNode.IncEntry(edge1,
-					refinementEdge.targetForward ? TSMNode.IncEntry.Type.IN
-							: TSMNode.IncEntry.Type.OUT));
-			newNode.incidence.add(new TSMNode.IncEntry(edge2,
-					refinementEdge.targetForward ? TSMNode.IncEntry.Type.OUT
-							: TSMNode.IncEntry.Type.IN));
+			oldNode2Iter.add(new KNode.IncEntry(edge2,
+					refinementEdge.targetForward ? KNode.IncEntry.Type.IN
+					: KNode.IncEntry.Type.OUT));
+			newNode.incidence.add(new KNode.IncEntry(edge1,
+					refinementEdge.targetForward ? KNode.IncEntry.Type.IN
+							: KNode.IncEntry.Type.OUT));
+			newNode.incidence.add(new KNode.IncEntry(edge2,
+					refinementEdge.targetForward ? KNode.IncEntry.Type.OUT
+							: KNode.IncEntry.Type.IN));
 			edge2.sourceSide = edge1.sourceSide;
 			edge2.targetSide = edge1.targetSide;
 			
@@ -260,25 +264,25 @@ public class RefiningCompacter extends AbstractAlgorithm implements ICompacter {
 			// update faces left and right of edge1
 			edge2.leftFace = edge1.leftFace;
 			edge2.rightFace = edge1.rightFace;
-			TSMFace currentFace = refinementEdge.targetForward
+			KFace currentFace = refinementEdge.targetForward
 					? edge1.rightFace : edge1.leftFace;
-			if (refinementEdge.externalSide == TSMNode.Side.UNDEFINED
+			if (refinementEdge.externalSide == KNode.Side.UNDEFINED
 					|| frameConnected) {
-				ListIterator<TSMFace.BorderEntry> currentFaceIter = currentFace 
+				ListIterator<KFace.BorderEntry> currentFaceIter = currentFace 
 						.getIterator(edge1, refinementEdge.targetForward);
-				currentFaceIter.add(new TSMFace.BorderEntry(edge2,
+				currentFaceIter.add(new KFace.BorderEntry(edge2,
 						refinementEdge.targetForward));
 			}
-			TSMFace opposedFace = refinementEdge.targetForward
+			KFace opposedFace = refinementEdge.targetForward
 					? edge1.leftFace : edge1.rightFace;
-			ListIterator<TSMFace.BorderEntry> opposedFaceIter = opposedFace
+			ListIterator<KFace.BorderEntry> opposedFaceIter = opposedFace
 					.getIterator(edge1, !refinementEdge.targetForward);
 			opposedFaceIter.previous();
-			opposedFaceIter.add(new TSMFace.BorderEntry(edge2,
+			opposedFaceIter.add(new KFace.BorderEntry(edge2,
 					!refinementEdge.targetForward));
 			
 			// insert edge and add new face
-			TSMFace newFace = insertEdge(graph, refinementEdge, currentFace,
+			KFace newFace = insertEdge(graph, refinementEdge, currentFace,
 					newNode, edge2);
 			if (newFace != null)
 				newFaces.add(newFace);
@@ -298,44 +302,44 @@ public class RefiningCompacter extends AbstractAlgorithm implements ICompacter {
 	 *     new edge
 	 * @return a newly created face, or null if none was created
 	 */
-	private TSMFace insertEdge(TSMGraph graph, RefinementEdge refinementEdge,
-			TSMFace face, TSMNode targetNode, TSMEdge nextEdge) {
+	private KFace insertEdge(KGraph graph, RefinementEdge refinementEdge,
+			KFace face, KNode targetNode, KEdge nextEdge) {
 		// add edge to the graph
-		TSMEdge newEdge = new TSMEdge(graph, refinementEdge.source, targetNode);
+		KEdge newEdge = new KEdge(graph, refinementEdge.source, targetNode);
 		newEdge.connectNodes(refinementEdge.sourceSide,
 				refinementEdge.sourceSide.opposed());
 		
-		if (refinementEdge.externalSide != TSMNode.Side.UNDEFINED
+		if (refinementEdge.externalSide != KNode.Side.UNDEFINED
 				&& !frameConnected) {
 			// connect the external frame with the contained graph
-			ListIterator<TSMFace.BorderEntry> faceIter = getIteratorFor(face,
+			ListIterator<KFace.BorderEntry> faceIter = getIteratorFor(face,
 					refinementEdge.source, refinementEdge.sourceSide.opposed());
-			faceIter.add(new TSMFace.BorderEntry(newEdge, true));
-			faceIter.add(new TSMFace.BorderEntry(nextEdge, true));
+			faceIter.add(new KFace.BorderEntry(newEdge, true));
+			faceIter.add(new KFace.BorderEntry(nextEdge, true));
 			switch (refinementEdge.externalSide) {
 			case NORTH:
-				faceIter.add(new TSMFace.BorderEntry(eastFrame, true));
-				faceIter.add(new TSMFace.BorderEntry(southFrame, true));
-				faceIter.add(new TSMFace.BorderEntry(westFrame, true));
+				faceIter.add(new KFace.BorderEntry(eastFrame, true));
+				faceIter.add(new KFace.BorderEntry(southFrame, true));
+				faceIter.add(new KFace.BorderEntry(westFrame, true));
 				break;
 			case EAST:
-				faceIter.add(new TSMFace.BorderEntry(southFrame, true));
-				faceIter.add(new TSMFace.BorderEntry(westFrame, true));
-				faceIter.add(new TSMFace.BorderEntry(northFrame, true));
+				faceIter.add(new KFace.BorderEntry(southFrame, true));
+				faceIter.add(new KFace.BorderEntry(westFrame, true));
+				faceIter.add(new KFace.BorderEntry(northFrame, true));
 				break;
 			case SOUTH:
-				faceIter.add(new TSMFace.BorderEntry(westFrame, true));
-				faceIter.add(new TSMFace.BorderEntry(northFrame, true));
-				faceIter.add(new TSMFace.BorderEntry(eastFrame, true));
+				faceIter.add(new KFace.BorderEntry(westFrame, true));
+				faceIter.add(new KFace.BorderEntry(northFrame, true));
+				faceIter.add(new KFace.BorderEntry(eastFrame, true));
 				break;
 			case WEST:
-				faceIter.add(new TSMFace.BorderEntry(northFrame, true));
-				faceIter.add(new TSMFace.BorderEntry(eastFrame, true));
-				faceIter.add(new TSMFace.BorderEntry(southFrame, true));
+				faceIter.add(new KFace.BorderEntry(northFrame, true));
+				faceIter.add(new KFace.BorderEntry(eastFrame, true));
+				faceIter.add(new KFace.BorderEntry(southFrame, true));
 				break;
 			}
-			faceIter.add(new TSMFace.BorderEntry(refinementEdge.targetEdge, true));
-			faceIter.add(new TSMFace.BorderEntry(newEdge, false));
+			faceIter.add(new KFace.BorderEntry(refinementEdge.targetEdge, true));
+			faceIter.add(new KFace.BorderEntry(newEdge, false));
 			newEdge.leftFace = face;
 			newEdge.rightFace = face;
 			frameConnected = true;
@@ -343,9 +347,9 @@ public class RefiningCompacter extends AbstractAlgorithm implements ICompacter {
 		}
 		else {
 			// split the crossed face
-			TSMFace newFace = new TSMFace(graph, false);
-			List<TSMFace.BorderEntry> newBorder = new LinkedList<TSMFace.BorderEntry>();
-			ListIterator<TSMFace.BorderEntry> faceIter = getIteratorFor(face,
+			KFace newFace = new KFace(graph, false);
+			List<KFace.BorderEntry> newBorder = new LinkedList<KFace.BorderEntry>();
+			ListIterator<KFace.BorderEntry> faceIter = getIteratorFor(face,
 					refinementEdge.source, refinementEdge.sourceSide.opposed());
 			int targetIndex = face.getIterator(refinementEdge.targetEdge,
 					refinementEdge.targetForward).nextIndex();
@@ -355,8 +359,8 @@ public class RefiningCompacter extends AbstractAlgorithm implements ICompacter {
 					faceIter = face.borders.get(0).listIterator();
 					nextIndex = 0;
 				}
-				TSMFace.BorderEntry nextEntry = faceIter.next();
-				newBorder.add(new TSMFace.BorderEntry(nextEntry));
+				KFace.BorderEntry nextEntry = faceIter.next();
+				newBorder.add(new KFace.BorderEntry(nextEntry));
 				faceIter.remove();
 				if (nextEntry.forward)
 					nextEntry.edge.rightFace = newFace;
@@ -364,8 +368,8 @@ public class RefiningCompacter extends AbstractAlgorithm implements ICompacter {
 					nextEntry.edge.leftFace = newFace;
 				nextIndex++;
 			}
-			faceIter.add(new TSMFace.BorderEntry(newEdge, true));
-			newBorder.add(new TSMFace.BorderEntry(newEdge, false));
+			faceIter.add(new KFace.BorderEntry(newEdge, true));
+			newBorder.add(new KFace.BorderEntry(newEdge, false));
 			newEdge.leftFace = newFace;
 			newEdge.rightFace = face;
 			newFace.borders.add(newBorder);
@@ -383,12 +387,12 @@ public class RefiningCompacter extends AbstractAlgorithm implements ICompacter {
 	 * @return an iterator pointing at <code>node</code>, or null if the
 	 *     node was not found
 	 */
-	private ListIterator<TSMFace.BorderEntry> getIteratorFor(TSMFace face,
-			TSMNode node, TSMNode.Side side) {
-		for (List<TSMFace.BorderEntry> border : face.borders) {
-			ListIterator<TSMFace.BorderEntry> entryIter = border.listIterator();
+	private ListIterator<KFace.BorderEntry> getIteratorFor(KFace face,
+			KNode node, KNode.Side side) {
+		for (List<KFace.BorderEntry> border : face.borders) {
+			ListIterator<KFace.BorderEntry> entryIter = border.listIterator();
 			while (entryIter.hasNext()) {
-				TSMFace.BorderEntry nextEntry = entryIter.next();
+				KFace.BorderEntry nextEntry = entryIter.next();
 				if (nextEntry.forward && nextEntry.edge.target.id == node.id
 							&& nextEntry.edge.targetSide == side
 							|| !nextEntry.forward && nextEntry.edge.source.id
@@ -408,10 +412,10 @@ public class RefiningCompacter extends AbstractAlgorithm implements ICompacter {
 	 * @param node node to look up
 	 * @return true if the corresponding face contains the node
 	 */
-	private boolean containsNode(TSMEdge edge, boolean forward, TSMNode node) {
-		TSMFace face = forward ? edge.rightFace : edge.leftFace;
-		for (List<TSMFace.BorderEntry> border : face.borders) {
-			for (TSMFace.BorderEntry borderEntry : border) {
+	private boolean containsNode(KEdge edge, boolean forward, KNode node) {
+		KFace face = forward ? edge.rightFace : edge.leftFace;
+		for (List<KFace.BorderEntry> border : face.borders) {
+			for (KFace.BorderEntry borderEntry : border) {
 				if (borderEntry.edge.source.id == node.id
 						|| borderEntry.edge.target.id == node.id)
 					return true;
@@ -426,45 +430,45 @@ public class RefiningCompacter extends AbstractAlgorithm implements ICompacter {
 	 * @param graph graph that is being refined
 	 * @return the old external face of the graph
 	 */
-	private TSMFace buildExternalFrame(TSMGraph graph) {
-		TSMFace oldExternal = graph.externalFace;
-		TSMFace newExternal = new TSMFace(graph, false);
-		List<TSMFace.BorderEntry> newBorder = new LinkedList<TSMFace.BorderEntry>();
+	private KFace buildExternalFrame(KGraph graph) {
+		KFace oldExternal = graph.externalFace;
+		KFace newExternal = new KFace(graph, false);
+		List<KFace.BorderEntry> newBorder = new LinkedList<KFace.BorderEntry>();
 		newExternal.borders.add(newBorder);
 		graph.externalFace = newExternal;
 		graph.faces.add(oldExternal);
-		TSMNode neNode = new TSMNode(graph, TSMNode.Type.REFINEMENT);
-		TSMNode seNode = new TSMNode(graph, TSMNode.Type.REFINEMENT);
-		TSMNode swNode = new TSMNode(graph, TSMNode.Type.REFINEMENT);
-		TSMNode nwNode = new TSMNode(graph, TSMNode.Type.REFINEMENT);
+		KNode neNode = new TSMNode(graph, TSMNode.Type.REFINEMENT);
+		KNode seNode = new TSMNode(graph, TSMNode.Type.REFINEMENT);
+		KNode swNode = new TSMNode(graph, TSMNode.Type.REFINEMENT);
+		KNode nwNode = new TSMNode(graph, TSMNode.Type.REFINEMENT);
 		northFrame = new TSMEdge(graph, nwNode, neNode);
 		northFrame.connectNodes();
 		northFrame.leftFace = newExternal;
 		northFrame.rightFace = oldExternal;
-		northFrame.sourceSide = TSMNode.Side.EAST;
-		northFrame.targetSide = TSMNode.Side.WEST;
+		northFrame.sourceSide = KNode.Side.EAST;
+		northFrame.targetSide = KNode.Side.WEST;
 		eastFrame = new TSMEdge(graph, neNode, seNode);
 		eastFrame.connectNodes();
 		eastFrame.leftFace = newExternal;
 		eastFrame.rightFace = oldExternal;
-		eastFrame.sourceSide = TSMNode.Side.SOUTH;
-		eastFrame.targetSide = TSMNode.Side.NORTH;
+		eastFrame.sourceSide = KNode.Side.SOUTH;
+		eastFrame.targetSide = KNode.Side.NORTH;
 		southFrame = new TSMEdge(graph, seNode, swNode);
 		southFrame.connectNodes();
 		southFrame.leftFace = newExternal;
 		southFrame.rightFace = oldExternal;
-		southFrame.sourceSide = TSMNode.Side.WEST;
-		southFrame.targetSide = TSMNode.Side.EAST;
+		southFrame.sourceSide = KNode.Side.WEST;
+		southFrame.targetSide = KNode.Side.EAST;
 		westFrame = new TSMEdge(graph, swNode, nwNode);
 		westFrame.connectNodes();
 		westFrame.leftFace = newExternal;
 		westFrame.rightFace = oldExternal;
-		westFrame.sourceSide = TSMNode.Side.NORTH;
-		westFrame.targetSide = TSMNode.Side.SOUTH;
-		newBorder.add(new TSMFace.BorderEntry(westFrame, false));
-		newBorder.add(new TSMFace.BorderEntry(southFrame, false));
-		newBorder.add(new TSMFace.BorderEntry(eastFrame, false));
-		newBorder.add(new TSMFace.BorderEntry(northFrame, false));
+		westFrame.sourceSide = KNode.Side.NORTH;
+		westFrame.targetSide = KNode.Side.SOUTH;
+		newBorder.add(new KFace.BorderEntry(westFrame, false));
+		newBorder.add(new KFace.BorderEntry(southFrame, false));
+		newBorder.add(new KFace.BorderEntry(eastFrame, false));
+		newBorder.add(new KFace.BorderEntry(northFrame, false));
 		return oldExternal;
 	}
 

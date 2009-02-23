@@ -1,11 +1,11 @@
-package de.cau.cs.kieler.klodd.orthogonal.structures;
+package de.cau.cs.kieler.core.graph;
 
 /**
- * An element of a TSM graph, which can be a node, an edge or a face.
+ * An element of a KIELER graph, which can be a node, an edge or a face.
  * 
  * @author msp
  */
-public abstract class TSMGraphElement implements Comparable<TSMGraphElement> {
+public abstract class KGraphElement implements Comparable<KGraphElement> {
 
 	/** identifier of this element, determined at creation time */
 	public int id;
@@ -16,7 +16,7 @@ public abstract class TSMGraphElement implements Comparable<TSMGraphElement> {
 	 * (non-Javadoc)
 	 * @see java.lang.Comparable#compareTo(java.lang.Object)
 	 */
-	public int compareTo(TSMGraphElement other) {
+	public int compareTo(KGraphElement other) {
 		return this.id - other.id;
 	}
 	
@@ -26,7 +26,7 @@ public abstract class TSMGraphElement implements Comparable<TSMGraphElement> {
 	 */
 	public boolean equals(Object other) {
 		return (other.getClass() == this.getClass())
-				&& ((TSMGraphElement)other).id == this.id;
+				&& ((KGraphElement)other).id == this.id;
 	}
 	
 	/*

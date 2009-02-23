@@ -1,23 +1,22 @@
-package de.cau.cs.kieler.klodd.orthogonal.structures;
+package de.cau.cs.kieler.core.graph;
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 
 /**
- * A face in the graph structure used for the topology-shape-metrics
- * approach.
+ * A face in the KIELER graph structure.
  * 
  * @author msp
  */
-public class TSMFace extends TSMGraphElement {
+public class KFace extends KGraphElement {
 
 	/**
 	 * An entry of a list associated with a face.
 	 */
 	public static class BorderEntry {
 		/** an edge bordering this face */
-		public TSMEdge edge;
+		public KEdge edge;
 		/** indicates whether the bordering edge is traversed forward */
 		public boolean forward;
 		
@@ -27,7 +26,7 @@ public class TSMFace extends TSMGraphElement {
 		 * @param edge edge bordering the containing face
 		 * @param indicates whether the bordering edge is traversed forward
 		 */
-		public BorderEntry(TSMEdge edge, boolean forward) {
+		public BorderEntry(KEdge edge, boolean forward) {
 			this.edge = edge;
 			this.forward = forward;
 		}
@@ -48,7 +47,7 @@ public class TSMFace extends TSMGraphElement {
 		 * @return the left face if the contained edge is forward,
 		 *     else the right face
 		 */
-		public TSMFace opposed() {
+		public KFace opposed() {
 			if (forward)
 				return edge.leftFace;
 			else
@@ -62,7 +61,7 @@ public class TSMFace extends TSMGraphElement {
 		 * @return the source if the contained edge is forward,
 		 *     else the target
 		 */
-		public TSMNode firstNode() {
+		public KNode firstNode() {
 			if (forward)
 				return edge.source;
 			else
@@ -76,7 +75,7 @@ public class TSMFace extends TSMGraphElement {
 		 * @return the target if the contained edge is forward,
 		 *     else the source
 		 */
-		public TSMNode secondNode() {
+		public KNode secondNode() {
 			if (forward)
 				return edge.target;
 			else
@@ -90,7 +89,7 @@ public class TSMFace extends TSMGraphElement {
 		 * @return the side at source if the contained edge is forward,
 		 *     else the side at target
 		 */
-		public TSMNode.Side firstSide() {
+		public KNode.Side firstSide() {
 			if (forward)
 				return edge.sourceSide;
 			else
@@ -104,7 +103,7 @@ public class TSMFace extends TSMGraphElement {
 		 * @return the side at target if the contained edge is forward,
 		 *     else the side at source
 		 */
-		public TSMNode.Side secondSide() {
+		public KNode.Side secondSide() {
 			if (forward)
 				return edge.targetSide;
 			else
@@ -134,7 +133,7 @@ public class TSMFace extends TSMGraphElement {
 	 * @param addToInternal if true, the new face is added to the
 	 *     graph's list of internal faces 
 	 */
-	public TSMFace(TSMGraph graph, boolean addToInternal) {
+	public KFace(KGraph graph, boolean addToInternal) {
 		if (addToInternal)
 			graph.faces.add(this);
 		this.id = graph.nextFaceId++;
@@ -150,7 +149,7 @@ public class TSMFace extends TSMGraphElement {
 	 * @return iterator pointing at <code>edge</code>, or null if the
 	 *     edge was not found
 	 */
-	public ListIterator<TSMFace.BorderEntry> getIterator(TSMEdge edge,
+	public ListIterator<KFace.BorderEntry> getIterator(KEdge edge,
 			boolean forward) {
 		for (List<BorderEntry> border : borders) {
 			ListIterator<BorderEntry> borderIter = border.listIterator();

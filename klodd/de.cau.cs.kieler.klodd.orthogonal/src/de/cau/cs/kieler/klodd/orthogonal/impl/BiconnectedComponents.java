@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Stack;
 
 import de.cau.cs.kieler.core.alg.AbstractAlgorithm;
+import de.cau.cs.kieler.core.graph.KGraph;
+import de.cau.cs.kieler.core.graph.KNode;
 import de.cau.cs.kieler.klodd.orthogonal.structures.*;
 
 
@@ -23,9 +25,9 @@ public class BiconnectedComponents extends AbstractAlgorithm {
 	/** list of lowest point numbers */
 	private int[] lowpt;
 	/** list of parent nodes */
-	private TSMNode[] parent;
+	private KNode[] parent;
 	/** stack with unfinished nodes */
-	private Stack<TSMNode> unfinished = new Stack<TSMNode>();
+	private Stack<KNode> unfinished = new Stack<KNode>();
 	
 	/*
 	 * (non-Javadoc)
@@ -45,17 +47,17 @@ public class BiconnectedComponents extends AbstractAlgorithm {
 	 * @param graph graph to be processed
 	 * @return list of biconnected components
 	 */
-	public List<GraphSection> findComponents(TSMGraph graph) {
+	public List<GraphSection> findComponents(KGraph graph) {
 		// initialize DFS variables
 		int graphSize = graph.nodes.size();
 		lowpt = new int[graphSize];
-		parent = new TSMNode[graphSize];
-		for (TSMNode node : graph.nodes) {
+		parent = new KNode[graphSize];
+		for (KNode node : graph.nodes) {
 			node.rank = -1;
 		}
 		
 		// perform DFS on all nodes of the graph
-		for (TSMNode node : graph.nodes) {
+		for (KNode node : graph.nodes) {
 			if (node.rank < 0)
 				dfsVisit(node);
 		}
@@ -68,12 +70,12 @@ public class BiconnectedComponents extends AbstractAlgorithm {
 	 * 
 	 * @param node node to visit
 	 */
-	private void dfsVisit(TSMNode node) {
+	private void dfsVisit(KNode node) {
 		node.rank = nextDfsnum++;
 		lowpt[node.id] = node.rank;
 		unfinished.push(node);
-		for (TSMNode.IncEntry edgeEntry : node.incidence) {
-			TSMNode endpoint = edgeEntry.endpoint();
+		for (KNode.IncEntry edgeEntry : node.incidence) {
+			KNode endpoint = edgeEntry.endpoint();
 			if (endpoint.rank < 0) {
 				parent[endpoint.id] = node;
 				dfsVisit(endpoint);
@@ -85,7 +87,7 @@ public class BiconnectedComponents extends AbstractAlgorithm {
 		}
 		if (node.rank >= 2 && lowpt[node.id] == parent[node.id].rank) {
 			GraphSection graphSection = new GraphSection();
-			TSMNode sectionNode;
+			KNode sectionNode;
 			do {
 				sectionNode = unfinished.pop();
 				graphSection.nodes.add(sectionNode);

@@ -1,7 +1,7 @@
 package de.cau.cs.kieler.klodd.orthogonal.modules;
 
 import de.cau.cs.kieler.core.alg.IAlgorithm;
-import de.cau.cs.kieler.klodd.orthogonal.structures.TSMGraph;
+import de.cau.cs.kieler.core.graph.KGraph;
 
 /**
  * Interface for algorithms that perform planarization of a graph.
@@ -16,6 +16,6 @@ public interface IPlanarizer extends IAlgorithm {
 	 * 
 	 * @param graph graph to be planarized
 	 */
-	public void planarize(TSMGraph graph);
+	public void planarize(KGraph graph);
 	
 }

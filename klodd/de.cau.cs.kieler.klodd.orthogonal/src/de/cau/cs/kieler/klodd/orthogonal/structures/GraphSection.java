@@ -5,6 +5,9 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+import de.cau.cs.kieler.core.graph.KEdge;
+import de.cau.cs.kieler.core.graph.KNode;
+
 /**
  * Section of a TSM graph.
  * TODO change the whole concept of subgraphs! this approach here is not good
@@ -14,10 +17,10 @@ import java.util.List;
 public class GraphSection {
 
 	/** nodes of this graph section, sorted by their creation number */
-	public List<TSMNode> nodes = new ArrayList<TSMNode>();
+	public List<KNode> nodes = new ArrayList<KNode>();
 	
 	/** list of edges that were removed */
-	private List<TSMEdge> removedEdges = new LinkedList<TSMEdge>();
+	private List<KEdge> removedEdges = new LinkedList<KEdge>();
 
 	/**
 	 * Sorts the nodes of this graph section. This method must be called
@@ -34,7 +37,7 @@ public class GraphSection {
 	 * @param node node to lookup
 	 * @return true if the given node is contained in <code>nodes</code>
 	 */
-	public boolean contains(TSMNode node) {
+	public boolean contains(KNode node) {
 		int start = 0, end = nodes.size(), pos;
 		while (start != end) {
 			pos = start + (end - start) / 2;
@@ -54,7 +57,7 @@ public class GraphSection {
 	 * 
 	 * @param edgeEntry edge entry to remove from this graph section
 	 */
-	public void removeEdge(TSMNode.IncEntry edgeEntry) {
+	public void removeEdge(KNode.IncEntry edgeEntry) {
 		edgeEntry.edge.source.incidence.remove(edgeEntry);
 		edgeEntry.edge.target.incidence.remove(edgeEntry);
 		removedEdges.add(edgeEntry.edge);
@@ -64,7 +67,7 @@ public class GraphSection {
 	 * Restores all edges that were removed.
 	 */
 	public void restoreEdges() {
-		for (TSMEdge edge : removedEdges) {
+		for (KEdge edge : removedEdges) {
 			edge.connectNodes();
 		}
 		removedEdges.clear();

@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.ListIterator;
 
 import de.cau.cs.kieler.core.alg.AbstractAlgorithm;
-import de.cau.cs.kieler.klodd.orthogonal.structures.*;
+import de.cau.cs.kieler.core.graph.*;
 
 /**
  * Algorithm that constructs the dual graph of a given graph.
@@ -24,7 +24,7 @@ public class DualGraphBuilder extends AbstractAlgorithm {
 		 * @param border face border to test
 		 * @return true if the given face border is external
 		 */
-		public boolean isExternal(List<TSMFace.BorderEntry> border);
+		public boolean isExternal(List<KFace.BorderEntry> border);
 	}
 	
 	/** indicates whether each edge has been seen on the left side */
@@ -47,13 +47,13 @@ public class DualGraphBuilder extends AbstractAlgorithm {
 	 * @param graph graph for which the dual graph shall be constructed
 	 * @param externalFaceDetector detector for external faces
 	 */
-	public void buildDual(TSMGraph graph,
+	public void buildDual(KGraph graph,
 			ExternalFaceDetector externalFaceDetector) {
 		this.externalFaceDetector = externalFaceDetector;
 		seenLeft = new boolean[graph.edges.size()];
 		seenRight = new boolean[graph.edges.size()];
 
-		for (TSMEdge edge : graph.edges) {
+		for (KEdge edge : graph.edges) {
 			if (!seenRight[edge.id])
 				buildBorder(graph, edge, true);
 			if (!seenLeft[edge.id])
@@ -69,16 +69,16 @@ public class DualGraphBuilder extends AbstractAlgorithm {
 	 * @param forward if true, the right side of the given edge
 	 *     is taken to build the border
 	 */
-	private void buildBorder(TSMGraph graph, TSMEdge edge, boolean forward) {
-		List<TSMFace.BorderEntry> border = new LinkedList<TSMFace.BorderEntry>();
+	private void buildBorder(KGraph graph, KEdge edge, boolean forward) {
+		List<KFace.BorderEntry> border = new LinkedList<KFace.BorderEntry>();
 		visit(edge, border, forward);
-		TSMFace face;
+		KFace face;
 		if (externalFaceDetector.isExternal(border))
 			face = graph.externalFace;
 		else
-			face = new TSMFace(graph, true);
+			face = new KFace(graph, true);
 		face.borders.add(border);
-		for (TSMFace.BorderEntry borderEntry : border) {
+		for (KFace.BorderEntry borderEntry : border) {
 			if (borderEntry.forward)
 				borderEntry.edge.rightFace = face;
 			else
@@ -95,9 +95,9 @@ public class DualGraphBuilder extends AbstractAlgorithm {
 	 * @param forward indicates whether the given edge is traversed
 	 *     in forward direction
 	 */
-	private void visit(TSMEdge edge, List<TSMFace.BorderEntry> border,
+	private void visit(KEdge edge, List<KFace.BorderEntry> border,
 			boolean forward) {
-		TSMNode secondNode;
+		KNode secondNode;
 		if (forward) {
 			seenRight[edge.id] = true;
 			secondNode = edge.target;
@@ -106,9 +106,9 @@ public class DualGraphBuilder extends AbstractAlgorithm {
 			seenLeft[edge.id] = true;
 			secondNode = edge.source;
 		}
-		border.add(new TSMFace.BorderEntry(edge, forward));
-		TSMNode.IncEntry nextEdge = getNextEdge(secondNode, edge, forward);
-		boolean nextForward = (nextEdge.type == TSMNode.IncEntry.Type.OUT);
+		border.add(new KFace.BorderEntry(edge, forward));
+		KNode.IncEntry nextEdge = getNextEdge(secondNode, edge, forward);
+		boolean nextForward = (nextEdge.type == KNode.IncEntry.Type.OUT);
 		if (nextForward && !seenRight[nextEdge.edge.id]
 				|| !nextForward && !seenLeft[nextEdge.edge.id])
 			visit(nextEdge.edge, border, nextForward);
@@ -125,14 +125,14 @@ public class DualGraphBuilder extends AbstractAlgorithm {
 	 * @return the next incidence list entry as seen from the previous
 	 *     edge in counter-clockwise order
 	 */
-	private TSMNode.IncEntry getNextEdge(TSMNode node, TSMEdge prevEdge,
+	private KNode.IncEntry getNextEdge(KNode node, KEdge prevEdge,
 			boolean prevIncoming) {
-		ListIterator<TSMNode.IncEntry> edgeIter = node.incidence
+		ListIterator<KNode.IncEntry> edgeIter = node.incidence
 				.listIterator(node.incidence.size());
 		while (edgeIter.hasPrevious()) {
-			TSMNode.IncEntry entry = edgeIter.previous();
+			KNode.IncEntry entry = edgeIter.previous();
 			if (entry.edge.id == prevEdge.id && prevIncoming
-					== (entry.type == TSMNode.IncEntry.Type.IN))
+					== (entry.type == KNode.IncEntry.Type.IN))
 				break;
 		}
 		if (edgeIter.hasPrevious())

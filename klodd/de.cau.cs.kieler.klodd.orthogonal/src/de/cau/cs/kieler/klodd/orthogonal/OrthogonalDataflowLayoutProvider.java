@@ -4,6 +4,7 @@ import java.util.List;
 
 import de.cau.cs.kieler.core.KielerException;
 import de.cau.cs.kieler.core.alg.IKielerProgressMonitor;
+import de.cau.cs.kieler.core.graph.KGraph;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KInsets;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphFactory;
@@ -52,7 +53,7 @@ public class OrthogonalDataflowLayoutProvider extends
 		List<TSMGraph> components = componentsSplitter.findComponents(layoutNode);
 		progressMonitor.begin("Orthogonal layout", components.size() * 30 + 2);
 		
-		for (TSMGraph tsmGraph : components) {
+		for (KGraph tsmGraph : components) {
 			// perform the planarization phase
 			planarizer.reset(progressMonitor.subTask(10));
 			planarizer.planarize(tsmGraph);

@@ -1,12 +1,11 @@
 package de.cau.cs.kieler.klodd.orthogonal.structures;
 
-import java.util.LinkedList;
 import java.util.List;
-import java.util.ListIterator;
 
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPoint;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphFactory;
+import de.cau.cs.kieler.core.graph.*;
 
 /**
  * An edge in the graph structure used for the topology-shape-metrics
@@ -14,78 +13,14 @@ import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphFactory;
  * 
  * @author msp
  */
-public class TSMEdge extends TSMGraphElement {
+public class TSMEdge extends KEdge {
 
-	/**
-	 * Definition of an edge bend for orthogonal drawing.
-	 */
-	public static class Bend {
-		/** Type of edge bend, from the perspective of the source node */
-		public enum Type {
-			LEFT, RIGHT
-		}
-		/** the type of edge bend */
-		public Type type;
-		/** the x coordinate position */
-		public float xpos;
-		/** the y coordinate position */
-		public float ypos;
-		/** the index of this bend */
-		public int index;
-		
-		/** the edge associated with this bend */
-		private TSMEdge edge;
-		
-		/**
-		 * Creates an edge bend of given type.
-		 * 
-		 * @param edge the edge to which the new bend is added
-		 * @param type type of edge bend
-		 */
-		public Bend(TSMEdge edge, Type type) {
-			this.edge = edge;
-			this.type = type;
-			index = edge.bends.size();
-		}
-		
-		/**
-		 * Returns the TSM edge associated with this bend.
-		 * 
-		 * @return the edge
-		 */
-		public TSMEdge getEdge() {
-			return edge;
-		}
-		
-		/*
-		 * (non-Javadoc)
-		 * @see java.lang.Object#toString()
-		 */
-		public String toString() {
-			return type.toString();
-		}
-	}
-	
-	/** source node */
-	public TSMNode source;
-	/** target node */
-	public TSMNode target;
-	/** left face */
-	public TSMFace leftFace;
-	/** right face */
-	public TSMFace rightFace;
 	/** layout graph edge contained in this TSM edge, or null if there is none */
 	public KLayoutEdge layoutEdge;
 	/** the previous edge of a split edge */
 	public TSMEdge previousEdge;
 	/** the next edge of a split edge */
 	public TSMEdge nextEdge;
-	/** the bends of this edge */
-	public final List<Bend> bends = new LinkedList<Bend>();
-	/** the side on which the edge leaves the source */
-	public TSMNode.Side sourceSide = TSMNode.Side.UNDEFINED;
-	/** the side on which the edge reaches the target */
-	public TSMNode.Side targetSide = TSMNode.Side.UNDEFINED;
 	
 	/**
 	 * Creates an edge connecting two existing nodes, with a layout graph
@@ -96,12 +31,9 @@ public class TSMEdge extends TSMGraphElement {
 	 * @param target target node
 	 * @param layoutEdge the layout graph edge to be contained
 	 */
-	public TSMEdge(TSMGraph graph, TSMNode source, TSMNode target,
+	public TSMEdge(KGraph graph, KNode source, KNode target,
 			KLayoutEdge layoutEdge) {
-		graph.edges.add(this);
-		this.id = graph.nextEdgeId++;
-		this.source = source;
-		this.target = target;
+		super(graph, source, target);
 		this.layoutEdge = layoutEdge;
 	}
 	
@@ -112,84 +44,8 @@ public class TSMEdge extends TSMGraphElement {
 	 * @param source source node
 	 * @param target target node
 	 */
-	public TSMEdge(TSMGraph graph, TSMNode source, TSMNode target) {
-		this(graph, source, target, null);
-	}
-	
-	/**
-	 * Connects this edge with the source and target. New incidence
-	 * entries are created for the incidence lists of the source and
-	 * the target.
-	 */
-	public void connectNodes() {
-		source.incidence.add(new TSMNode.IncEntry(this,
-				TSMNode.IncEntry.Type.OUT));
-		target.incidence.add(new TSMNode.IncEntry(this,
-				TSMNode.IncEntry.Type.IN));
-	}
-	
-	/**
-	 * Connects this edge with the source and target with given ranks.
-	 * New incidence entries are created for the incidence lists of the
-	 * source and the target.
-	 * 
-	 * @param sourceRank rank of the edge at source
-	 * @param targetRank rank of the edge at target
-	 * @param forwardSelfLoop for self-loops: is the target rank greater
-	 *     than the source rank?
-	 */
-	public void connectNodes(int sourceRank, int targetRank, boolean
-			forwardSelfLoop) {
-		if (source.id == target.id && (sourceRank < targetRank
-				|| (sourceRank == targetRank && forwardSelfLoop)))
-			targetRank++;
-		source.incidence.add(sourceRank, new TSMNode.IncEntry(this,
-				TSMNode.IncEntry.Type.OUT));
-		target.incidence.add(targetRank, new TSMNode.IncEntry(this,
-				TSMNode.IncEntry.Type.IN));		
-	}
-	
-	/**
-	 * Connects this edge with the source and target respecting the
-	 * order of incidence according to the given node sides.
-	 * 
-	 * @param sourceSide port side at the source node
-	 * @param targetSide port side at the target node
-	 */
-	public void connectNodes(TSMNode.Side sourceSide, TSMNode.Side targetSide) {
-		this.sourceSide = sourceSide;
-		this.targetSide = targetSide;
-		ListIterator<TSMNode.IncEntry> incIter = source.incidence.listIterator();
-		while (incIter.hasNext()) {
-			TSMNode.IncEntry nextEntry = incIter.next();
-			TSMNode.Side side = (nextEntry.type == TSMNode.IncEntry.Type.OUT
-					? nextEntry.edge.sourceSide : nextEntry.edge.targetSide);
-			if (sourceSide.compareTo(side) <= 0) {
-				incIter.previous();
-				break;
-			}
-		}
-		incIter.add(new TSMNode.IncEntry(this, TSMNode.IncEntry.Type.OUT));
-		incIter = target.incidence.listIterator();
-		while (incIter.hasNext()) {
-			TSMNode.IncEntry nextEntry = incIter.next();
-			TSMNode.Side side = (nextEntry.type == TSMNode.IncEntry.Type.OUT
-					? nextEntry.edge.sourceSide : nextEntry.edge.targetSide);
-			if (targetSide.compareTo(side) <= 0) {
-				incIter.previous();
-				break;
-			}
-		}
-		incIter.add(new TSMNode.IncEntry(this, TSMNode.IncEntry.Type.IN));
-	}
-	
-	/*
-	 * (non-Javadoc)
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
-	public boolean equals(Object other) {
-		return (other instanceof TSMEdge)
-				&& ((TSMEdge)other).id == this.id;
+	public TSMEdge(KGraph graph, KNode source, KNode target) {
+		super(graph, source, target);
 	}
 	
 	/**
@@ -272,17 +128,6 @@ public class TSMEdge extends TSMGraphElement {
 		newPoint.setX(xpos);
 		newPoint.setY(ypos);
 		layoutEdge.getLayout().setTargetPoint(newPoint);
-	}
-	
-	/*
-	 * (non-Javadoc)
-	 * @see de.cau.cs.kieler.klodd.orthogonal.structures.TSMGraphElement#toString()
-	 */
-	public String toString() {
-		String baseString = super.toString();
-		if (source != null && target != null)
-			return baseString + " " + source.id + ">" + target.id;
-		else return baseString;
 	}
 	
 }

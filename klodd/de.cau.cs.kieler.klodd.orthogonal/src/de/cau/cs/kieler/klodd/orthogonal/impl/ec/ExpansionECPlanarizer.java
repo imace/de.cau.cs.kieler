@@ -3,9 +3,9 @@ package de.cau.cs.kieler.klodd.orthogonal.impl.ec;
 import java.util.Map;
 
 import de.cau.cs.kieler.core.alg.AbstractAlgorithm;
+import de.cau.cs.kieler.core.graph.KGraph;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
 import de.cau.cs.kieler.klodd.orthogonal.modules.IPlanarizer;
-import de.cau.cs.kieler.klodd.orthogonal.structures.TSMGraph;
 
 
 /**
@@ -21,7 +21,7 @@ public class ExpansionECPlanarizer extends AbstractAlgorithm implements
 	 * (non-Javadoc)
 	 * @see de.cau.cs.kieler.klodd.orthogonal.modules.IPlanarizer#planarize(de.cau.cs.kieler.klodd.orthogonal.structures.TSMGraph)
 	 */
-	public void planarize(TSMGraph graph) {
+	public void planarize(KGraph graph) {
 		getMonitor().begin("EC Expansion planarization", 1);
 		
 		// expand the given embedding constraints

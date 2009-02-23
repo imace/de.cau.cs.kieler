@@ -8,6 +8,8 @@ import java.util.ListIterator;
 import java.util.Stack;
 
 import de.cau.cs.kieler.core.alg.AbstractAlgorithm;
+import de.cau.cs.kieler.core.graph.KEdge;
+import de.cau.cs.kieler.core.graph.KNode;
 import de.cau.cs.kieler.klodd.core.util.ConcatenableList;
 import de.cau.cs.kieler.klodd.orthogonal.modules.IPlanarityTester;
 import de.cau.cs.kieler.klodd.orthogonal.structures.*;
@@ -54,11 +56,11 @@ public class HopcroftTarjanPlanarityTester extends AbstractAlgorithm implements
 		this.lowpt2 = new int[sectionSize];
 		
 		// initialize DFS numbers of each node
-		for (TSMNode node : biconnectedSection.nodes) {
+		for (KNode node : biconnectedSection.nodes) {
 			node.rank = -1;
 		}
 		// perform DFS on the biconnected section
-		TSMNode node0 = biconnectedSection.nodes.get(0);
+		KNode node0 = biconnectedSection.nodes.get(0);
 		int edgeCount = dfsVisit(node0);
 		
 		// check number of edges: if the graph is planar, then m <= 3*n - 6
@@ -70,8 +72,8 @@ public class HopcroftTarjanPlanarityTester extends AbstractAlgorithm implements
 		
 		// the first edge of the first DFS node is used as start for
 		// the recursive subroutine
-		TSMEdge edge0 = node0.incidence.get(0).edge;
-		List<TSMNode> attachments = stronglyPlanar(edge0, node0);
+		KEdge edge0 = node0.incidence.get(0).edge;
+		List<KNode> attachments = stronglyPlanar(edge0, node0);
 		
 		return attachments != null;
 	}
@@ -83,14 +85,14 @@ public class HopcroftTarjanPlanarityTester extends AbstractAlgorithm implements
 	 * @param node node to processed
 	 * @return number of edges found in the subgraph starting at <code>node</code
 	 */
-	private int dfsVisit(TSMNode node) {
+	private int dfsVisit(KNode node) {
 		int edgeCount = 0;
 		node.rank = nextDfsnum++;
 		lowpt[node.rank] = node.rank;
 		lowpt2[node.rank] = node.rank;
-		List<TSMNode.IncEntry> edgesToRemove = null;
-		for (TSMNode.IncEntry edgeEntry : node.incidence) {
-			TSMNode endpoint = edgeEntry.endpoint();
+		List<KNode.IncEntry> edgesToRemove = null;
+		for (KNode.IncEntry edgeEntry : node.incidence) {
+			KNode endpoint = edgeEntry.endpoint();
 			if (biconnectedSection.contains(endpoint)) {
 				if (endpoint.rank < 0) {
 					edgeEntry.edge.rank = TREE_EDGE;
@@ -111,13 +113,13 @@ public class HopcroftTarjanPlanarityTester extends AbstractAlgorithm implements
 			}
 			else {
 				if (edgesToRemove == null)
-					edgesToRemove = new LinkedList<TSMNode.IncEntry>();
+					edgesToRemove = new LinkedList<KNode.IncEntry>();
 				edgesToRemove.add(edgeEntry);
 			}
 		}
 		// remove marked edges
 		if (edgesToRemove != null) {
-			for (TSMNode.IncEntry edgeEntry : edgesToRemove) {
+			for (KNode.IncEntry edgeEntry : edgesToRemove) {
 				biconnectedSection.removeEdge(edgeEntry);
 			}
 		}
@@ -129,17 +131,17 @@ public class HopcroftTarjanPlanarityTester extends AbstractAlgorithm implements
 	 * some rules on the <code>lowpt</code> and <code>lowpt2</code> values.
 	 */
 	private void reorderEdges() {
-		for (final TSMNode node : biconnectedSection.nodes) {
-			Collections.sort(node.incidence, new Comparator<TSMNode.IncEntry>() {
-				public int compare(TSMNode.IncEntry edge1, TSMNode.IncEntry edge2) {
+		for (final KNode node : biconnectedSection.nodes) {
+			Collections.sort(node.incidence, new Comparator<KNode.IncEntry>() {
+				public int compare(KNode.IncEntry edge1, KNode.IncEntry edge2) {
 					int value1 = value(edge1);
 					int value2 = value(edge2);
 					return value1 > value2 ? 1
 							: (value1 < value2 ? -1
 							: 0);
 				}
-				private int value(TSMNode.IncEntry edgeEntry) {
-					TSMNode endpoint = edgeEntry.endpoint();
+				private int value(KNode.IncEntry edgeEntry) {
+					KNode endpoint = edgeEntry.endpoint();
 					if (edgeEntry.edge.rank == TREE_EDGE) {
 						if (node.rank < endpoint.rank) {
 							if (lowpt2[endpoint.rank] >= node.rank)
@@ -165,10 +167,10 @@ public class HopcroftTarjanPlanarityTester extends AbstractAlgorithm implements
 	 * associated with the current step in the algorithm.
 	 */
 	private static class InterlacingBlock {
-		ConcatenableList<TSMNode> left, right;
+		ConcatenableList<KNode> left, right;
 		
-		InterlacingBlock(ConcatenableList<TSMNode> left,
-				ConcatenableList<TSMNode> right) {
+		InterlacingBlock(ConcatenableList<KNode> left,
+				ConcatenableList<KNode> right) {
 			this.left = left;
 			this.right = right;
 		}
@@ -186,8 +188,8 @@ public class HopcroftTarjanPlanarityTester extends AbstractAlgorithm implements
 	 * @return ordered list of attachments to the new cycle, or null if the
 	 *     current segment is not strongly planar 
 	 */
-	private ConcatenableList<TSMNode> stronglyPlanar(TSMEdge edge0, TSMNode x0) {
-		TSMNode y0;
+	private ConcatenableList<KNode> stronglyPlanar(KEdge edge0, KNode x0) {
+		KNode y0;
 		if (edge0.source.id == x0.id)
 			y0 = edge0.target;
 		else {
@@ -195,24 +197,24 @@ public class HopcroftTarjanPlanarityTester extends AbstractAlgorithm implements
 			y0 = edge0.source;
 		}
 		// construct the spine of a cycle that starts at (x0, y0)
-		LinkedList<TSMNode> spine = buildSpine(x0, y0);
+		LinkedList<KNode> spine = buildSpine(x0, y0);
 		spine.addFirst(x0);
 		
 		Stack<InterlacingBlock> blockStack = new Stack<InterlacingBlock>();
-		ListIterator<TSMNode> spineIter = spine.listIterator(spine.size());
+		ListIterator<KNode> spineIter = spine.listIterator(spine.size());
 		while (spineIter.previousIndex() > 0) {
-			TSMNode spineNode = spineIter.previous();
-			ListIterator<TSMNode.IncEntry> edgeIter = spineNode.incidence.listIterator(1);
+			KNode spineNode = spineIter.previous();
+			ListIterator<KNode.IncEntry> edgeIter = spineNode.incidence.listIterator(1);
 			while (edgeIter.hasNext()) {
-				TSMNode.IncEntry emanatingEdge = edgeIter.next();
-				TSMNode nextNode = emanatingEdge.endpoint();
+				KNode.IncEntry emanatingEdge = edgeIter.next();
+				KNode nextNode = emanatingEdge.endpoint();
 				// check whether the current edge is taken in the proper direction
 				if (emanatingEdge.edge.rank == TREE_EDGE
 						&& nextNode.rank > spineNode.rank
 						|| emanatingEdge.edge.rank == BACK_EDGE
 						&& nextNode.rank <= spineNode.rank) {
 					// recursive check of strong planarity
-					ConcatenableList<TSMNode> attachments =
+					ConcatenableList<KNode> attachments =
 						stronglyPlanar(emanatingEdge.edge, spineNode);
 					if (attachments == null)
 						return null;
@@ -231,7 +233,7 @@ public class HopcroftTarjanPlanarityTester extends AbstractAlgorithm implements
 				// all non-proper edges were put to the end of the incidence list
 				else break;
 			}
-			TSMNode previousNode = spineIter.previous();
+			KNode previousNode = spineIter.previous();
 			while (!blockStack.isEmpty()) {
 				InterlacingBlock block = blockStack.peek();
 				int leftMax = block.left.isEmpty() ? -1 : block.left.getLast().rank;
@@ -248,7 +250,7 @@ public class HopcroftTarjanPlanarityTester extends AbstractAlgorithm implements
 		}
 		
 		// compute list of attachments for the given edge
-		ConcatenableList<TSMNode> attachments = new ConcatenableList<TSMNode>();
+		ConcatenableList<KNode> attachments = new ConcatenableList<KNode>();
 		int w1 = lowpt[y0.rank] + 1;
 		for (InterlacingBlock block : blockStack) {
 			int leftMax = block.left.isEmpty() ? -1 : block.left.getLast().rank;
@@ -274,9 +276,9 @@ public class HopcroftTarjanPlanarityTester extends AbstractAlgorithm implements
 	 * @param y0 second node of the edge on which a spine is built
 	 * @return list of nodes in the spine of the created cycle
 	 */
-	private LinkedList<TSMNode> buildSpine(TSMNode x0, TSMNode y0) {
-		LinkedList<TSMNode> spine = new LinkedList<TSMNode>();
-		TSMNode nextNode = y0;
+	private LinkedList<KNode> buildSpine(KNode x0, KNode y0) {
+		LinkedList<KNode> spine = new LinkedList<KNode>();
+		KNode nextNode = y0;
 		while (nextNode.rank > x0.rank) {
 			spine.addLast(nextNode);
 			nextNode = nextNode.incidence.get(0).endpoint();
@@ -293,7 +295,7 @@ public class HopcroftTarjanPlanarityTester extends AbstractAlgorithm implements
 	 * @return true if evidence for non-planarity was found
 	 */
 	private boolean updateBlockStack(Stack<InterlacingBlock> blockStack,
-			ConcatenableList<TSMNode> attachments, int lowpte) {
+			ConcatenableList<KNode> attachments, int lowpte) {
 		LinkedList<InterlacingBlock> poppedBlocks = new LinkedList<InterlacingBlock>();
 		while (!blockStack.isEmpty()) {
 			InterlacingBlock block = blockStack.peek();
@@ -302,7 +304,7 @@ public class HopcroftTarjanPlanarityTester extends AbstractAlgorithm implements
 			if (Math.max(leftMax, rightMax) <= lowpte)
 				break;
 			if (leftMax > lowpte) {
-				ConcatenableList<TSMNode> temp = block.left;
+				ConcatenableList<KNode> temp = block.left;
 				block.left = block.right;
 				block.right = temp;
 			}
@@ -311,8 +313,8 @@ public class HopcroftTarjanPlanarityTester extends AbstractAlgorithm implements
 			}
 			poppedBlocks.addLast(blockStack.pop());
 		}
-		ConcatenableList<TSMNode> newLeft = new ConcatenableList<TSMNode>();
-		ConcatenableList<TSMNode> newRight = new ConcatenableList<TSMNode>();
+		ConcatenableList<KNode> newLeft = new ConcatenableList<KNode>();
+		ConcatenableList<KNode> newRight = new ConcatenableList<KNode>();
 		for (InterlacingBlock block : poppedBlocks) {
 			newLeft.concatenate(block.left);
 			newRight.concatenate(block.right);

@@ -9,6 +9,10 @@ import java.util.ListIterator;
 import java.util.Map;
 
 import de.cau.cs.kieler.core.alg.AbstractAlgorithm;
+import de.cau.cs.kieler.core.graph.KEdge;
+import de.cau.cs.kieler.core.graph.KFace;
+import de.cau.cs.kieler.core.graph.KGraph;
+import de.cau.cs.kieler.core.graph.KNode;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPortLayout;
@@ -60,12 +64,12 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 	 * (non-Javadoc)
 	 * @see de.cau.cs.kieler.klodd.orthogonal.modules.ICompacter#compact(de.cau.cs.kieler.klodd.orthogonal.structures.TSMGraph, float)
 	 */
-	public void compact(TSMGraph graph, float minDist) {
+	public void compact(KGraph graph, float minDist) {
 		getMonitor().begin("Normalizing compaction", 1);
 		
 		this.minDist = minDist;
 		// create a normalized version of the input graph
-		TSMGraph normalizedGraph = createNormalizedGraph(graph);
+		KGraph normalizedGraph = createNormalizedGraph(graph);
 		// build dual graph for the normalized graph
 		buildDualGraph(normalizedGraph);
 		// execute the embedded compacter
@@ -98,44 +102,46 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 	 * @param inputGraph graph with orthogonal representation
 	 * @return new graph with normalized orthogonal representation
 	 */
-	private TSMGraph createNormalizedGraph(TSMGraph inputGraph) {
-		TSMGraph normalizedGraph = new TSMGraph();
+	private KGraph createNormalizedGraph(KGraph inputGraph) {
+		KGraph normalizedGraph = new KGraph();
 		Map<Object, PortDescriptor> portMap = new HashMap<Object, PortDescriptor>();
 		int[] sourceRank = new int[inputGraph.edges.size()];
 		int[] targetRank = new int[inputGraph.edges.size()];
 		
 		// process the nodes of the graph 
-		for (TSMNode node : inputGraph.nodes) {
-			if (node.type == TSMNode.Type.LAYOUT) {
-				TSMNode.Side currentSide = TSMNode.Side.UNDEFINED;
+		for (KNode node : inputGraph.nodes) {
+			TSMNode tsmNode = (TSMNode)node;
+			if (tsmNode.type == TSMNode.Type.LAYOUT) {
+				KNode.Side currentSide = KNode.Side.UNDEFINED;
 				TSMNode currentNode = null;
-				TSMNode.Side startingSide = TSMNode.Side.UNDEFINED;
+				KNode.Side startingSide = KNode.Side.UNDEFINED;
 				boolean changedSide = false;
-				TSMNode startingNode = null;
+				KNode startingNode = null;
 				int edgeRank = 0;
-				for (TSMNode.IncEntry edgeEntry : node.incidence) {
-					KLayoutPort port = (edgeEntry.type == TSMNode.IncEntry.Type.OUT
-							? edgeEntry.edge.layoutEdge.getSourcePort()
-							: edgeEntry.edge.layoutEdge.getTargetPort());
+				for (KNode.IncEntry edgeEntry : node.incidence) {
+					KLayoutPort port = (edgeEntry.type == KNode.IncEntry.Type.OUT
+							? ((TSMEdge)edgeEntry.edge).layoutEdge.getSourcePort()
+							: ((TSMEdge)edgeEntry.edge).layoutEdge.getTargetPort());
 					PortDescriptor portDescriptor = portMap.get(port);
 					
 					// create dummy nodes for ports and corners
 					if (portDescriptor == null) {
 						edgeRank = 0;
-						TSMNode.Side newSide = edgeEntry.side();
+						KNode.Side newSide = edgeEntry.side();
 						TSMNode newNode = new TSMNode(normalizedGraph,
 								TSMNode.Type.NORM_PORT, port);
-						if (startingSide == TSMNode.Side.UNDEFINED) {
+						if (startingSide == KNode.Side.UNDEFINED) {
 							startingSide = newSide;
 							startingNode = newNode;
 						}
 						else {
 							if (currentSide != newSide) {
 								currentNode = addCornerNodes(normalizedGraph,
-										currentNode, node, currentSide, newSide);
+										currentNode, (TSMNode)node,
+										currentSide, newSide);
 								changedSide = true;
 							}
-							TSMEdge newEdge = new TSMEdge(normalizedGraph,
+							KEdge newEdge = new KEdge(normalizedGraph,
 									currentNode, newNode);
 							newEdge.connectNodes(newSide.right(), newSide.left());
 						}
@@ -147,21 +153,21 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 					}
 					
 					// count the number of edges going left and right
-					List<TSMEdge.Bend> bends = edgeEntry.edge.bends;
+					List<KEdge.Bend> bends = edgeEntry.edge.bends;
 					if (bends.isEmpty())
 						portDescriptor.straightEdges++;
 					else {
-						if (edgeEntry.type == TSMNode.IncEntry.Type.OUT
-								&& bends.get(0).type == TSMEdge.Bend.Type.LEFT
-								|| edgeEntry.type == TSMNode.IncEntry.Type.IN
-								&& bends.get(bends.size()-1).type == TSMEdge.Bend.Type.RIGHT)
+						if (edgeEntry.type == KNode.IncEntry.Type.OUT
+								&& bends.get(0).type == KEdge.Bend.Type.LEFT
+								|| edgeEntry.type == KNode.IncEntry.Type.IN
+								&& bends.get(bends.size()-1).type == KEdge.Bend.Type.RIGHT)
 							portDescriptor.leftEdges++;
 						else
 							portDescriptor.rightEdges++;
 					}
 					
 					// determine the port rank of the current edge
-					if (edgeEntry.type == TSMNode.IncEntry.Type.OUT)
+					if (edgeEntry.type == KNode.IncEntry.Type.OUT)
 						sourceRank[edgeEntry.edge.id] = edgeRank;
 					else
 						targetRank[edgeEntry.edge.id] = edgeRank;
@@ -169,21 +175,21 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 				}
 				
 				// add remaining corners
-				if (currentSide == TSMNode.Side.UNDEFINED) {
-					currentSide = TSMNode.Side.NORTH;
+				if (currentSide == KNode.Side.UNDEFINED) {
+					currentSide = KNode.Side.NORTH;
 					startingSide = currentSide;
 				}
 				if (startingSide != currentSide || !changedSide) {
 					currentNode = addCornerNodes(normalizedGraph,
-							currentNode, node, currentSide, startingSide);
+							currentNode, (TSMNode)node, currentSide, startingSide);
 				}
 				if (startingNode != null) {
-					TSMEdge newEdge = new TSMEdge(normalizedGraph,
+					KEdge newEdge = new KEdge(normalizedGraph,
 							currentNode, startingNode);
 					newEdge.connectNodes(startingSide.right(), startingSide.left());
 				}
 			}
-			else if (node.type == TSMNode.Type.CROSSING) {
+			else if (tsmNode.type == TSMNode.Type.CROSSING) {
 				// handle dummy nodes of edge crossings
 				TSMNode dummyNode = new TSMNode(normalizedGraph,
 						TSMNode.Type.CROSSING, node);
@@ -195,30 +201,31 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 		}
 		
 		// process the edges of the graph
-		for (TSMEdge edge : inputGraph.edges) {
+		for (KEdge edge : inputGraph.edges) {
+			TSMEdge tsmEdge = (TSMEdge)edge;
 			// determine attachment point at source
 			TSMNode currentNode = null, targetNode = null;
 			boolean sourceBendConsumed = false, targetBendConsumed = false;
-			if (edge.source.type == TSMNode.Type.LAYOUT) {
-				PortDescriptor portDescriptor = portMap.get(edge
+			if (((TSMNode)edge.source).type == TSMNode.Type.LAYOUT) {
+				PortDescriptor portDescriptor = portMap.get(tsmEdge
 						.layoutEdge.getSourcePort());
 				Pair<TSMNode, Boolean> endpointResult = getEndpointNode(
 						normalizedGraph, edge, portDescriptor,
 						sourceRank[edge.id], true);
-				currentNode = endpointResult.first;
+				currentNode = (TSMNode)endpointResult.first;
 				sourceBendConsumed = endpointResult.second;
 			}
-			else if (edge.source.type == TSMNode.Type.CROSSING) {
+			else if (((TSMNode)edge.source).type == TSMNode.Type.CROSSING) {
 				PortDescriptor portDescriptor = portMap.get(edge.source);
-				currentNode = portDescriptor.nodes.get(0);
+				currentNode = (TSMNode)portDescriptor.nodes.get(0);
 			}
 			// register the new node
 			if (sourceBendConsumed)
 				startNodeMap.put(edge.bends.get(0), currentNode);
 			
 			// determine attachment point at target
-			if (edge.target.type == TSMNode.Type.LAYOUT) {
-				PortDescriptor portDescriptor = portMap.get(edge
+			if (((TSMNode)edge.target).type == TSMNode.Type.LAYOUT) {
+				PortDescriptor portDescriptor = portMap.get(tsmEdge
 						.layoutEdge.getTargetPort());
 				Pair<TSMNode, Boolean> endpointResult = getEndpointNode(
 						normalizedGraph, edge, portDescriptor,
@@ -226,7 +233,7 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 				targetNode = endpointResult.first;
 				targetBendConsumed = endpointResult.second;
 			}
-			else if (edge.target.type == TSMNode.Type.CROSSING) {
+			else if (((TSMNode)edge.target).type == TSMNode.Type.CROSSING) {
 				PortDescriptor portDescriptor = portMap.get(edge.target);
 				targetNode = portDescriptor.nodes.get(0);
 			}
@@ -236,34 +243,34 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 						targetNode);
 			
 			// create dummy nodes for remaining bends
-			TSMNode.Side currentSide = (sourceBendConsumed
-					? (edge.bends.get(0).type == TSMEdge.Bend.Type.LEFT
+			KNode.Side currentSide = (sourceBendConsumed
+					? (edge.bends.get(0).type == KEdge.Bend.Type.LEFT
 					? edge.sourceSide.left()
 					: edge.sourceSide.right())
 					: edge.sourceSide);
-			ListIterator<TSMEdge.Bend> bendIter = edge.bends.listIterator();
+			ListIterator<KEdge.Bend> bendIter = edge.bends.listIterator();
 			if (sourceBendConsumed)
 				bendIter.next();
 			int targetIndex = targetBendConsumed ? edge.bends.size() - 1
 					: edge.bends.size();
 			while (bendIter.nextIndex() < targetIndex) {
 				// add the new node for normalization
-				TSMEdge.Bend bend = bendIter.next();
+				KEdge.Bend bend = bendIter.next();
 				TSMNode newNode = new TSMNode(normalizedGraph,
 						TSMNode.Type.BEND, edge);
-				TSMEdge newEdge = new TSMEdge(normalizedGraph,
-						currentNode, newNode, edge.layoutEdge);
+				KEdge newEdge = new TSMEdge(normalizedGraph,
+						currentNode, newNode, tsmEdge.layoutEdge);
 				newEdge.connectNodes(currentSide, currentSide.opposed());
 				
 				// register the new node
 				startNodeMap.put(bend, newNode);
 				
 				currentNode = newNode;
-				currentSide = (bend.type == TSMEdge.Bend.Type.LEFT
+				currentSide = (bend.type == KEdge.Bend.Type.LEFT
 						? currentSide.left() : currentSide.right());
 			}
-			TSMEdge newEdge = new TSMEdge(normalizedGraph,
-					currentNode, targetNode, edge.layoutEdge);
+			KEdge newEdge = new TSMEdge(normalizedGraph,
+					currentNode, targetNode, tsmEdge.layoutEdge);
 			newEdge.connectNodes(currentSide, currentSide.opposed());
 		}
 		
@@ -282,9 +289,9 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 	 * @param endSide end side of the original node
 	 * @return the last newly created node
 	 */
-	private TSMNode addCornerNodes(TSMGraph graph, TSMNode currentNode,
-			TSMNode origNode, TSMNode.Side startSide, TSMNode.Side endSide) {
-		TSMNode.Side currentSide = startSide;
+	private TSMNode addCornerNodes(KGraph graph, TSMNode currentNode,
+			TSMNode origNode, KNode.Side startSide, KNode.Side endSide) {
+		KNode.Side currentSide = startSide;
 		TSMNode newNode, startNode = null;
 		do {
 			// add the new node and a new edge
@@ -309,7 +316,7 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 			if (currentNode == null)
 				startNode = currentNode;
 			else {
-				TSMEdge newEdge = new TSMEdge(graph, currentNode, newNode);
+				KEdge newEdge = new TSMEdge(graph, currentNode, newNode);
 				newEdge.connectNodes(currentSide.right(), currentSide.left());
 			}
 			
@@ -327,7 +334,7 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 			currentSide = currentSide.right();
 		} while (currentSide != endSide);
 		if (startNode != null) {
-			TSMEdge newEdge = new TSMEdge(graph, currentNode, startNode);
+			KEdge newEdge = new KEdge(graph, currentNode, startNode);
 			newEdge.connectNodes(currentSide.left(), currentSide.opposed());
 		}
 		return currentNode;
@@ -346,8 +353,8 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 	 *     and a boolean value showing whether the edge bend at the
 	 *     endpoint was consumed
 	 */
-	private Pair<TSMNode, Boolean> getEndpointNode(TSMGraph graph,
-			TSMEdge edge, PortDescriptor portDescriptor, int rank,
+	private Pair<TSMNode, Boolean> getEndpointNode(KGraph graph,
+			KEdge edge, PortDescriptor portDescriptor, int rank,
 			boolean source) {
 		int nodeIndex;
 		boolean bendConsumed = false;
@@ -355,9 +362,9 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 		if (edge.bends.isEmpty())
 			nodeIndex = Math.max(portDescriptor.leftEdges,
 					portDescriptor.rightEdges);
-		else if (source && edge.bends.get(0).type == TSMEdge.Bend.Type.LEFT
+		else if (source && edge.bends.get(0).type == KEdge.Bend.Type.LEFT
 				|| !source && edge.bends.get(edge.bends.size() - 1).type
-				== TSMEdge.Bend.Type.RIGHT)
+				== KEdge.Bend.Type.RIGHT)
 			nodeIndex = rank + 1;
 		else
 			nodeIndex = portDescriptor.leftEdges + portDescriptor.straightEdges
@@ -373,9 +380,9 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 		// add new nodes if needed
 		for (int i = portDescriptor.nodes.size() - 1; i < nodeIndex; i++) {
 			TSMNode newNode = new TSMNode(graph, TSMNode.Type.BEND, edge);
-			TSMEdge newEdge = new TSMEdge(graph, portDescriptor.nodes.get(i),
-					newNode, edge.layoutEdge);
-			TSMNode.Side newSide = source ? edge.sourceSide : edge.targetSide;
+			KEdge newEdge = new TSMEdge(graph, portDescriptor.nodes.get(i),
+					newNode, ((TSMEdge)edge).layoutEdge);
+			KNode.Side newSide = source ? edge.sourceSide : edge.targetSide;
 			newEdge.connectNodes(newSide, newSide.opposed());
 			portDescriptor.nodes.add(newNode);
 		}
@@ -389,15 +396,15 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 	 * 
 	 * @param normalizedGraph normalized graph to process
 	 */
-	private void buildDualGraph(TSMGraph normalizedGraph) {
+	private void buildDualGraph(KGraph normalizedGraph) {
 		DualGraphBuilder dualGraphBuilder = new DualGraphBuilder();
 		dualGraphBuilder.buildDual(normalizedGraph, new ExternalFaceDetector() {
-			public boolean isExternal(List<TSMFace.BorderEntry> border) {
+			public boolean isExternal(List<KFace.BorderEntry> border) {
 				int cornerSum = 0;
-				TSMFace.BorderEntry currentEntry = border.get(border.size() - 1);
-				for (TSMFace.BorderEntry nextEntry : border) {
-					TSMNode.Side side1 = currentEntry.secondSide();
-					TSMNode.Side side2 = nextEntry.firstSide();
+				KFace.BorderEntry currentEntry = border.get(border.size() - 1);
+				for (KFace.BorderEntry nextEntry : border) {
+					KNode.Side side1 = currentEntry.secondSide();
+					KNode.Side side2 = nextEntry.firstSide();
 					if (side1 == side2.left())
 						cornerSum--;
 					else if (side1 == side2.right())
@@ -417,12 +424,12 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 	 * 
 	 * @param origGraph the original graph
 	 */
-	private void transformMetrics(TSMGraph origGraph, int abstrWidth,
+	private void transformMetrics(KGraph origGraph, int abstrWidth,
 			int abstrHeight) {
 		// create pool of nodes and edge bends
 		List<Object> compactables = new LinkedList<Object>();
 		compactables.addAll(origGraph.nodes);
-		for (TSMEdge edge : origGraph.edges) {
+		for (KEdge edge : origGraph.edges) {
 			compactables.addAll(edge.bends);
 		}
 		
@@ -434,26 +441,27 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 				abstrHeight);
 		
 		// set proper coordinates for the first and the last bend of each edge
-		for (TSMEdge edge : origGraph.edges) {
+		for (KEdge edge : origGraph.edges) {
 			int bendsCount = edge.bends.size();
 			if (bendsCount > 0) {
+				TSMEdge tsmEdge = (TSMEdge)edge;
 				// set source bend
-				TSMEdge.Bend sourceBend = edge.bends.get(0);
-				if (edge.sourceSide == TSMNode.Side.NORTH
-						|| edge.sourceSide == TSMNode.Side.SOUTH) {
+				KEdge.Bend sourceBend = edge.bends.get(0);
+				if (edge.sourceSide == KNode.Side.NORTH
+						|| edge.sourceSide == KNode.Side.SOUTH) {
 					sourceBend.xpos = edge.source.concrXpos;
-					if (edge.source.type == TSMNode.Type.LAYOUT
-							&& edge.layoutEdge.getSourcePort() != null) {
-						KPortLayout portLayout = edge.layoutEdge
+					if (((TSMNode)edge.source).type == TSMNode.Type.LAYOUT
+							&& tsmEdge.layoutEdge.getSourcePort() != null) {
+						KPortLayout portLayout = tsmEdge.layoutEdge
 								.getSourcePort().getLayout();
 						sourceBend.xpos += portLayout.getLocation().getX()
 								+ portLayout.getSize().getWidth() / 2;
 					}
 				} else {
 					sourceBend.ypos = edge.source.concrYpos;
-					if (edge.source.type == TSMNode.Type.LAYOUT
-							&& edge.layoutEdge.getSourcePort() != null) {
-						KPortLayout portLayout = edge.layoutEdge
+					if (((TSMNode)edge.source).type == TSMNode.Type.LAYOUT
+							&& tsmEdge.layoutEdge.getSourcePort() != null) {
+						KPortLayout portLayout = tsmEdge.layoutEdge
 								.getSourcePort().getLayout();
 						sourceBend.ypos += portLayout.getLocation().getY()
 								+ portLayout.getSize().getHeight() / 2;
@@ -461,22 +469,22 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 				}
 
 				// set target bend
-				TSMEdge.Bend targetBend = edge.bends.get(bendsCount - 1);
-				if (edge.targetSide == TSMNode.Side.EAST
-						|| edge.targetSide == TSMNode.Side.WEST) {
+				KEdge.Bend targetBend = edge.bends.get(bendsCount - 1);
+				if (edge.targetSide == KNode.Side.EAST
+						|| edge.targetSide == KNode.Side.WEST) {
 					targetBend.ypos = edge.target.concrYpos;
-					if (edge.target.type == TSMNode.Type.LAYOUT
-							&& edge.layoutEdge.getTargetPort() != null) {
-						KPortLayout portLayout = edge.layoutEdge
+					if (((TSMNode)edge.target).type == TSMNode.Type.LAYOUT
+							&& tsmEdge.layoutEdge.getTargetPort() != null) {
+						KPortLayout portLayout = tsmEdge.layoutEdge
 								.getTargetPort().getLayout();
 						targetBend.ypos += portLayout.getLocation().getY()
 								+ portLayout.getSize().getHeight() / 2;
 					}
 				} else {
 					targetBend.xpos = edge.target.concrXpos;
-					if (edge.target.type == TSMNode.Type.LAYOUT
-							&& edge.layoutEdge.getTargetPort() != null) {
-						KPortLayout portLayout = edge.layoutEdge
+					if (((TSMNode)edge.target).type == TSMNode.Type.LAYOUT
+							&& tsmEdge.layoutEdge.getTargetPort() != null) {
+						KPortLayout portLayout = tsmEdge.layoutEdge
 								.getTargetPort().getLayout();
 						targetBend.xpos += portLayout.getLocation().getX()
 								+ portLayout.getSize().getWidth() / 2;
@@ -497,7 +505,7 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 	 *     is performed
 	 * @return the total width or height of the graph
 	 */
-	private float transformMetrics(List<Object> compactables, TSMGraph graph,
+	private float transformMetrics(List<Object> compactables, KGraph graph,
 			final boolean horizontal, int abstrSize) {
 		// sort compactable elements by their abstract position
 		Collections.sort(compactables, new Comparator<Object>() {
@@ -524,7 +532,7 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 				if (first)
 					return horizontal ? startNodeMap.get(obj).abstrXpos
 							: startNodeMap.get(obj).abstrYpos;
-				else if (obj instanceof TSMNode)
+				else if (obj instanceof KNode)
 					return horizontal ? endNodeMap.get(obj).abstrXpos
 							: endNodeMap.get(obj).abstrYpos;
 				else return -1;
@@ -574,8 +582,8 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 				else
 					node.concrYpos = concrPos[abstrPos];
 			}
-			else if (obj instanceof TSMEdge.Bend) {
-				TSMEdge.Bend edgeBend = (TSMEdge.Bend)obj;
+			else if (obj instanceof KEdge.Bend) {
+				KEdge.Bend edgeBend = (KEdge.Bend)obj;
 				if (horizontal)
 					edgeBend.xpos = concrPos[abstrPos];
 				else

@@ -4,6 +4,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 import de.cau.cs.kieler.core.alg.AbstractAlgorithm;
+import de.cau.cs.kieler.core.graph.KGraph;
+import de.cau.cs.kieler.core.graph.KNode;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutOption;
@@ -39,7 +41,7 @@ public class PortConstraintsPlanarizer extends AbstractAlgorithm implements
 	 * (non-Javadoc)
 	 * @see de.cau.cs.kieler.klodd.orthogonal.modules.IPlanarizer#planarize(de.cau.cs.kieler.klodd.orthogonal.structures.TSMGraph)
 	 */
-	public void planarize(TSMGraph graph) {
+	public void planarize(KGraph graph) {
 		getMonitor().begin("Port constraints planarization", 1);
 		// create constraints for the input graph
 		createConstraints(graph);
@@ -55,9 +57,10 @@ public class PortConstraintsPlanarizer extends AbstractAlgorithm implements
 	 * 
 	 * @param graph for which constraints shall be created
 	 */
-	private void createConstraints(TSMGraph graph) {
-		for (TSMNode node : graph.nodes) {
+	private void createConstraints(KGraph graph) {
+		for (KNode node : graph.nodes) {
 			KLayoutNode layoutNode = (KLayoutNode)node.object;
+			TSMNode tsmNode = (TSMNode)node;
 			if (!layoutNode.getPorts().isEmpty()) {
 				if (layoutNode.getLayout().getLayoutOptions()
 						.contains(KLayoutOption.FIXED_PORTS)) {
@@ -68,12 +71,12 @@ public class PortConstraintsPlanarizer extends AbstractAlgorithm implements
 							EmbeddingConstraint.Type.ORIENTED, null, layoutNode);
 					for (KLayoutPort port : sortedPorts) {
 						EmbeddingConstraint constraint = createConstraintFor(port,
-								portConstraint, node);
+								portConstraint, tsmNode);
 						if (constraint != null)
 							portConstraint.children.add(constraint);
 					}
 					if (!portConstraint.children.isEmpty())
-						node.embeddingConstraint = portConstraint;
+						tsmNode.embeddingConstraint = portConstraint;
 				}
 				else {
 					// create side constraints
@@ -83,7 +86,7 @@ public class PortConstraintsPlanarizer extends AbstractAlgorithm implements
 							southConstraint = null, westConstraint = null;
 					for (KLayoutPort port : layoutNode.getPorts()) {
 						EmbeddingConstraint constraint = createConstraintFor(port,
-								null, node);
+								null, tsmNode);
 						if (constraint != null) {
 							switch (port.getLayout().getPlacement()) {
 							case NORTH:
@@ -130,7 +133,7 @@ public class PortConstraintsPlanarizer extends AbstractAlgorithm implements
 					if (westConstraint != null)
 						sideConstraint.children.add(westConstraint);
 					if (!sideConstraint.children.isEmpty())
-						node.embeddingConstraint = sideConstraint;
+						tsmNode.embeddingConstraint = sideConstraint;
 				}
 			}
 		}
@@ -149,10 +152,11 @@ public class PortConstraintsPlanarizer extends AbstractAlgorithm implements
 			EmbeddingConstraint parent, TSMNode node) {
 		// find edges connected with the given port
 		List<TSMEdge> portEdges = new LinkedList<TSMEdge>();
-		for (TSMNode.IncEntry edgeEntry : node.incidence) {
-			if (edgeEntry.edge.layoutEdge.getSourcePort() == port
-					|| edgeEntry.edge.layoutEdge.getTargetPort() == port)
-				portEdges.add(edgeEntry.edge);
+		for (KNode.IncEntry edgeEntry : node.incidence) {
+			TSMEdge tsmEdge = (TSMEdge)edgeEntry.edge;
+			if (tsmEdge.layoutEdge.getSourcePort() == port
+					|| tsmEdge.layoutEdge.getTargetPort() == port)
+				portEdges.add(tsmEdge);
 		}
 		if (!portEdges.isEmpty()) {
 			EmbeddingConstraint groupConstraint = new EmbeddingConstraint(

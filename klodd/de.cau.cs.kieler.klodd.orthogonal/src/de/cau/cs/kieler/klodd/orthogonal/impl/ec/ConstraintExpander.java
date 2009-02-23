@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import de.cau.cs.kieler.core.alg.AbstractAlgorithm;
+import de.cau.cs.kieler.core.graph.KEdge;
+import de.cau.cs.kieler.core.graph.KGraph;
+import de.cau.cs.kieler.core.graph.KNode;
 import de.cau.cs.kieler.klodd.orthogonal.structures.*;
 
 
@@ -16,8 +19,8 @@ public class ConstraintExpander extends AbstractAlgorithm {
 	
 	/** the new graph created during EC expansion */
 	private TSMGraph expandedGraph;
-	private Map<TSMEdge, TSMNode> incoming2NodeMap = new HashMap<TSMEdge, TSMNode>();
-	private Map<TSMEdge, TSMNode> outgoing2NodeMap = new HashMap<TSMEdge, TSMNode>();
+	private Map<KEdge, TSMNode> incoming2NodeMap = new HashMap<KEdge, TSMNode>();
+	private Map<KEdge, TSMNode> outgoing2NodeMap = new HashMap<KEdge, TSMNode>();
 	
 	/**
 	 * Creates a TSM graph from a given parent layout node and
@@ -27,15 +30,16 @@ public class ConstraintExpander extends AbstractAlgorithm {
 	 * @param constraintsMap constraints for the child nodes
 	 * @return expanded TSM graph
 	 */
-	public TSMGraph expand(TSMGraph graph) {
+	public TSMGraph expand(KGraph graph) {
 		expandedGraph = new TSMGraph();
 		
-		for (TSMNode node : graph.nodes) {
-			if (node.embeddingConstraint == null) {
+		for (KNode node : graph.nodes) {
+			TSMNode tsmNode = (TSMNode)node;
+			if (tsmNode.embeddingConstraint == null) {
 				expandNode(node);
 			}
 			else {
-				expandConstraint(node.embeddingConstraint, null);
+				expandConstraint(tsmNode.embeddingConstraint, null);
 			}
 		}
 		
@@ -48,11 +52,11 @@ public class ConstraintExpander extends AbstractAlgorithm {
 	 * 
 	 * @param node node of the input graph
 	 */
-	private void expandNode(TSMNode node) {
-		TSMNode newNode = new TSMNode(expandedGraph, TSMNode.Type.LAYOUT, node);
-		for (TSMNode.IncEntry edgeEntry : node.incidence) {
-			registerEdge(newNode, edgeEntry.edge,
-					edgeEntry.type == TSMNode.IncEntry.Type.OUT);
+	private void expandNode(KNode node) {
+		TSMNode newNode = new TSMNode(expandedGraph, TSMNode.Type.ECEXPANSION, node);
+		for (KNode.IncEntry edgeEntry : node.incidence) {
+			registerEdge(newNode, (TSMEdge)edgeEntry.edge,
+					edgeEntry.type == KNode.IncEntry.Type.OUT);
 		}
 	}
 	
@@ -79,7 +83,7 @@ public class ConstraintExpander extends AbstractAlgorithm {
 			TSMNode groupingNode = new TSMNode(expandedGraph, TSMNode.Type.ECEXPANSION,
 					constraint);
 			if (parentNode != null) {
-				TSMEdge newEdge = new TSMEdge(expandedGraph, parentNode, groupingNode);
+				KEdge newEdge = new KEdge(expandedGraph, parentNode, groupingNode);
 				newEdge.connectNodes();
 			}
 			for (EmbeddingConstraint childConstraint : constraint.children) {
@@ -89,41 +93,41 @@ public class ConstraintExpander extends AbstractAlgorithm {
 		case ORIENTED:
 		case MIRROR:
 			// for oriented and mirrored constraints a wheel gadget is created
-			TSMNode hubNode = new TSMNode(expandedGraph, TSMNode.Type.ECEXPANSION,
+			KNode hubNode = new TSMNode(expandedGraph, TSMNode.Type.ECEXPANSION,
 					constraint);
-			TSMNode firstNode = null, lastNode = null;
+			KNode firstNode = null, lastNode = null;
 			if (parentNode != null) {
 				firstNode = new TSMNode(expandedGraph, TSMNode.Type.ECEXPANSION);
-				TSMEdge newEdge = new TSMEdge(expandedGraph, firstNode, hubNode);
+				KEdge newEdge = new KEdge(expandedGraph, firstNode, hubNode);
 				newEdge.connectNodes();
 				lastNode = new TSMNode(expandedGraph, TSMNode.Type.ECEXPANSION);
-				newEdge = new TSMEdge(expandedGraph, hubNode, lastNode);
+				newEdge = new KEdge(expandedGraph, hubNode, lastNode);
 				newEdge.connectNodes();
-				newEdge = new TSMEdge(expandedGraph, firstNode, lastNode);
+				newEdge = new KEdge(expandedGraph, firstNode, lastNode);
 				newEdge.connectNodes();
-				newEdge = new TSMEdge(expandedGraph, parentNode, firstNode);
+				newEdge = new KEdge(expandedGraph, parentNode, firstNode);
 				newEdge.connectNodes();
 			}
 			for (EmbeddingConstraint childConstraint : constraint.children) {
 				TSMNode xNode = new TSMNode(expandedGraph, TSMNode.Type.ECEXPANSION);
-				TSMEdge newEdge = new TSMEdge(expandedGraph, xNode, hubNode);
+				KEdge newEdge = new KEdge(expandedGraph, xNode, hubNode);
 				newEdge.connectNodes();
-				TSMNode yNode = new TSMNode(expandedGraph, TSMNode.Type.ECEXPANSION);
-				newEdge = new TSMEdge(expandedGraph, hubNode, yNode);
+				KNode yNode = new TSMNode(expandedGraph, TSMNode.Type.ECEXPANSION);
+				newEdge = new KEdge(expandedGraph, hubNode, yNode);
 				newEdge.connectNodes();
-				newEdge = new TSMEdge(expandedGraph, xNode, yNode);
+				newEdge = new KEdge(expandedGraph, xNode, yNode);
 				newEdge.connectNodes();
 				if (lastNode == null)
 					firstNode = xNode;
 				else {
-					newEdge = new TSMEdge(expandedGraph, lastNode, xNode);
+					newEdge = new KEdge(expandedGraph, lastNode, xNode);
 					newEdge.connectNodes();
 				}
 				expandConstraint(childConstraint, xNode);
 				lastNode = yNode;
 			}
 			if (lastNode != null) {
-				TSMEdge newEdge = new TSMEdge(expandedGraph, lastNode, firstNode);
+				KEdge newEdge = new KEdge(expandedGraph, lastNode, firstNode);
 				newEdge.connectNodes();
 			}
 			break;
@@ -147,18 +151,18 @@ public class ConstraintExpander extends AbstractAlgorithm {
 				outgoing2NodeMap.put(edge, node);
 			}
 			else {
-				TSMEdge newEdge = new TSMEdge(expandedGraph, node, endPoint,
+				KEdge newEdge = new TSMEdge(expandedGraph, node, endPoint,
 						edge.layoutEdge);
 				newEdge.connectNodes();
 			}
 		}
 		else {
-			TSMNode endPoint = outgoing2NodeMap.get(edge);
+			KNode endPoint = outgoing2NodeMap.get(edge);
 			if (endPoint == null) {
 				incoming2NodeMap.put(edge, node);
 			}
 			else {
-				TSMEdge newEdge = new TSMEdge(expandedGraph, endPoint, node,
+				KEdge newEdge = new TSMEdge(expandedGraph, endPoint, node,
 						edge.layoutEdge);
 				newEdge.connectNodes();
 			}
