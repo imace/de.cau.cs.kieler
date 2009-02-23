@@ -5,6 +5,6 @@ Bundle-SymbolicName: de.cau.cs.kieler.klodd.orthogonal;singleton:=true
 Bundle-Version: 1.0.0
 Require-Bundle: org.eclipse.emf.ecore;bundle-version="2.4.1",
  de.cau.cs.kieler.core;bundle-version="1.0.0",
- de.cau.cs.kieler.klodd.core;bundle-version="1.0.0",
  de.cau.cs.kieler.kiml.layout;bundle-version="1.0.0",
  net.sourceforge.lpsolve;bundle-version="5.5.0"
+Export-Package: de.cau.cs.kieler.klodd.orthogonal;uses:="de.cau.cs.kieler.kiml.layout.services,de.cau.cs.kieler.kiml.layout.KimlLayoutGraph,de.cau.cs.kieler.core.alg"

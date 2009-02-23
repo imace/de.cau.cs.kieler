@@ -3,6 +3,7 @@ package de.cau.cs.kieler.klodd.hierarchical;
 import java.util.LinkedList;
 import java.util.List;
 
+import de.cau.cs.kieler.core.IKielerPreferenceStore;
 import de.cau.cs.kieler.core.KielerException;
 import de.cau.cs.kieler.core.alg.IKielerProgressMonitor;
 import de.cau.cs.kieler.core.graph.KEdge;
@@ -11,17 +12,15 @@ import de.cau.cs.kieler.core.graph.alg.DFSCycleRemover;
 import de.cau.cs.kieler.core.graph.alg.ICycleRemover;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPoint;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphFactory;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayouterInfo;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutOption;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutType;
 import de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayoutProvider;
+import de.cau.cs.kieler.kiml.layout.services.KimlLayoutServices;
 import de.cau.cs.kieler.kiml.layout.util.GraphConverter;
 import de.cau.cs.kieler.kiml.layout.util.LayoutGraphUtil;
-import de.cau.cs.kieler.klodd.core.KloddCorePlugin;
-import de.cau.cs.kieler.klodd.core.preferences.KloddLayoutPreferences;
 import de.cau.cs.kieler.klodd.hierarchical.impl.*;
 import de.cau.cs.kieler.klodd.hierarchical.modules.*;
 import de.cau.cs.kieler.klodd.hierarchical.structures.LayeredGraph;
@@ -36,7 +35,14 @@ public class HierarchicalDataflowLayoutProvider extends
 	
 	/** displayed name of this layout provider */
 	public static final String LAYOUTER_NAME = "KLoDD Hierarchical";
+	/** name of the KLoDD layouters collection */
+	public static final String COLLECTION_NAME = "KLoDD Layouters";
 	
+	/** preference identifier for minimal distance */
+	public static final String PREF_MIN_DIST = "klodd.hierarchical.minDist";
+	/** default value for minimal distance */
+	public static final float DEF_MIN_DIST = 15.0f; 
+
 	/** the minimal distance between two nodes or edges */
 	private float minDist;
 	
@@ -66,7 +72,7 @@ public class HierarchicalDataflowLayoutProvider extends
 		updateModules();
 
 		// set the size of each non-empty node
-		try{setNodeSizes(layoutNode);
+		setNodeSizes(layoutNode);
 		// create a KIELER graph for cycle removal
 		graphConverter.reset(progressMonitor.subTask(5));
 		KGraph kGraph = graphConverter.convertGraph(layoutNode, true);
@@ -93,7 +99,7 @@ public class HierarchicalDataflowLayoutProvider extends
 			edgeRouter.routeEdges(layeredGraph, minDist);
 		}
 		layeredGraph.applyLayout();
-		restoreCycles();}catch(Exception e) {e.printStackTrace();}
+		restoreCycles();
 		
 		progressMonitor.done();
 	}
@@ -106,7 +112,7 @@ public class HierarchicalDataflowLayoutProvider extends
 		info.setLayouterName(LAYOUTER_NAME);
 		info.setLayoutType(KLayoutType.HIERARCHICAL);
 		info.setLayoutOption(KLayoutOption.DEFAULT);
-		info.setLayouterCollectionID(KloddCorePlugin.COLLECTION_NAME);
+		info.setLayouterCollectionID(COLLECTION_NAME);
 		return info;
 	}
 	
@@ -114,7 +120,8 @@ public class HierarchicalDataflowLayoutProvider extends
 	 * Sets the internally used algorithm modules to the current configuration.
 	 */
 	private void updateModules() {
-		KloddLayoutPreferences pref = KloddCorePlugin.getLayoutPreferences();
+		IKielerPreferenceStore preferenceStore = KimlLayoutServices
+				.getInstance().getPreferenceStore();
 		
 		if (cycleRemover == null)
 			cycleRemover = new DFSCycleRemover();
@@ -130,7 +137,7 @@ public class HierarchicalDataflowLayoutProvider extends
 		if (edgeRouter == null)
 			edgeRouter = new RectilinearEdgeRouter(new SortingLayerwiseEdgePlacer());
 		
-		minDist = ((Float)pref.get(KloddLayoutPreferences.MIN_DIST)).floatValue();
+		minDist = preferenceStore.getFloat(PREF_MIN_DIST);
 	}
 	
 	/**

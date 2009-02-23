@@ -2,6 +2,7 @@ package de.cau.cs.kieler.klodd.orthogonal;
 
 import java.util.List;
 
+import de.cau.cs.kieler.core.IKielerPreferenceStore;
 import de.cau.cs.kieler.core.KielerException;
 import de.cau.cs.kieler.core.alg.IKielerProgressMonitor;
 import de.cau.cs.kieler.core.graph.KGraph;
@@ -12,7 +13,7 @@ import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayouterInfo;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutOption;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutType;
 import de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayoutProvider;
-import de.cau.cs.kieler.klodd.core.KloddCorePlugin;
+import de.cau.cs.kieler.kiml.layout.services.KimlLayoutServices;
 import de.cau.cs.kieler.klodd.orthogonal.impl.*;
 import de.cau.cs.kieler.klodd.orthogonal.impl.ec.EdgeInsertionECPlanarizer;
 import de.cau.cs.kieler.klodd.orthogonal.modules.*;
@@ -28,9 +29,16 @@ public class OrthogonalDataflowLayoutProvider extends
 
 	/** displayed name of this layout provider */
 	public static final String LAYOUTER_NAME = "KLoDD Orthogonal";
+	/** name of the KLoDD layouters collection */
+	public static final String COLLECTION_NAME = "KLoDD Layouters";
 	
-	/** minimal distance between elements */
-	private static final float MIN_DIST = 15.0f;
+	/** preference identifier for minimal distance */
+	public static final String PREF_MIN_DIST = "klodd.orthogonal.minDist";
+	/** default value for minimal distance */
+	public static final float DEF_MIN_DIST = 15.0f; 
+
+	/** the minimal distance between two nodes or edges */
+	private float minDist;
 	
 	/** the planarization module */
 	private IPlanarizer planarizer = null;
@@ -62,7 +70,7 @@ public class OrthogonalDataflowLayoutProvider extends
 			orthogonalizer.orthogonalize(tsmGraph);
 			// perform the compaction phase
 			compacter.reset(progressMonitor.subTask(10));
-			compacter.compact(tsmGraph, MIN_DIST);
+			compacter.compact(tsmGraph, minDist);
 		}
 		// apply layout information to the original graph
 		applyLayout(components, layoutNode);
@@ -78,7 +86,7 @@ public class OrthogonalDataflowLayoutProvider extends
 		info.setLayouterName(LAYOUTER_NAME);
 		info.setLayoutType(KLayoutType.ORTHOGONAL);
 		info.setLayoutOption(KLayoutOption.DEFAULT);
-		info.setLayouterCollectionID(KloddCorePlugin.COLLECTION_NAME);
+		info.setLayouterCollectionID(COLLECTION_NAME);
 		return info;
 	}
 	
@@ -86,6 +94,9 @@ public class OrthogonalDataflowLayoutProvider extends
 	 * Sets the internally used algorithm modules to the current configuration.
 	 */
 	private void updateModules() {
+		IKielerPreferenceStore preferenceStore = KimlLayoutServices
+				.getInstance().getPreferenceStore();
+
 		if (planarizer == null)
 			planarizer = new PortConstraintsPlanarizer(
 					new EdgeInsertionECPlanarizer());
@@ -94,6 +105,8 @@ public class OrthogonalDataflowLayoutProvider extends
 		if (compacter == null)
 			compacter = new NormalizingCompacter(new RefiningCompacter(
 					new LayeringCompacter()));
+		
+		minDist = preferenceStore.getFloat(PREF_MIN_DIST);
 	}
 	
 	/**
