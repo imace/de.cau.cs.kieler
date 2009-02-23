@@ -7,7 +7,7 @@ import java.util.ListIterator;
 import de.cau.cs.kieler.core.alg.AbstractAlgorithm;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPortType;
-import de.cau.cs.kieler.klodd.core.util.LayoutGraphs;
+import de.cau.cs.kieler.kiml.layout.util.LayoutGraphUtil;
 import de.cau.cs.kieler.klodd.hierarchical.modules.ICrossingReducer;
 import de.cau.cs.kieler.klodd.hierarchical.modules.ISingleLayerCrossingReducer;
 import de.cau.cs.kieler.klodd.hierarchical.structures.*;
@@ -43,7 +43,7 @@ public class LayerSweepCrossingReducer extends AbstractAlgorithm implements
 			// sort input and output ports by their relative position
 			List<KLayoutPort> inputPorts = new LinkedList<KLayoutPort>();
 			List<KLayoutPort> outputPorts = new LinkedList<KLayoutPort>();
-			for (KLayoutPort port : layeredGraph.getParentGroup().getPorts()) {
+			for (KLayoutPort port : layeredGraph.getParentNode().getPorts()) {
 				if (port.getType() == KPortType.INPUT)
 					inputPorts.add(port);
 				else
@@ -53,7 +53,7 @@ public class LayerSweepCrossingReducer extends AbstractAlgorithm implements
 			// apply ports ordering to the layer ranking
 			int firstLayer = 0, lastLayer = layeredGraph.getLayers().size() - 1;
 			if (!inputPorts.isEmpty()) {
-				KLayoutPort[] sortedInputPorts = LayoutGraphs.sortPortsByPosition(inputPorts,
+				KLayoutPort[] sortedInputPorts = LayoutGraphUtil.sortPortsByPosition(inputPorts,
 						layeredGraph.getLayoutDirection(), false);
 				int rank = 0;
 				for (KLayoutPort port : sortedInputPorts) {
@@ -69,7 +69,7 @@ public class LayerSweepCrossingReducer extends AbstractAlgorithm implements
 				layeredGraph.getLayers().get(0).calcElemRanks();
 			}
 			if (!outputPorts.isEmpty()) {
-				KLayoutPort[] sortedOutputPorts = LayoutGraphs.sortPortsByPosition(outputPorts,
+				KLayoutPort[] sortedOutputPorts = LayoutGraphUtil.sortPortsByPosition(outputPorts,
 						layeredGraph.getLayoutDirection(), true);
 				int rank = 0;
 				for (KLayoutPort port : sortedOutputPorts) {

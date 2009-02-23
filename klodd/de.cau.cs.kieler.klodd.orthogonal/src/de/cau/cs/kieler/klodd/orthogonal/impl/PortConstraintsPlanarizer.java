@@ -9,7 +9,7 @@ import de.cau.cs.kieler.core.graph.KNode;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutOption;
-import de.cau.cs.kieler.klodd.core.util.LayoutGraphs;
+import de.cau.cs.kieler.kiml.layout.util.LayoutGraphUtil;
 import de.cau.cs.kieler.klodd.orthogonal.impl.ec.EmbeddingConstraint;
 import de.cau.cs.kieler.klodd.orthogonal.modules.IPlanarizer;
 import de.cau.cs.kieler.klodd.orthogonal.structures.*;
@@ -65,7 +65,7 @@ public class PortConstraintsPlanarizer extends AbstractAlgorithm implements
 				if (layoutNode.getLayout().getLayoutOptions()
 						.contains(KLayoutOption.FIXED_PORTS)) {
 					// create port constraints 
-					KLayoutPort[] sortedPorts = LayoutGraphs.sortPortsByPosition(
+					KLayoutPort[] sortedPorts = LayoutGraphUtil.sortPortsByPosition(
 							layoutNode.getPorts(), KLayoutOption.HORIZONTAL, true);
 					EmbeddingConstraint portConstraint = new EmbeddingConstraint(
 							EmbeddingConstraint.Type.ORIENTED, null, layoutNode);

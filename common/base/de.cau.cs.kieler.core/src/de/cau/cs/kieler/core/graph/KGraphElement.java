@@ -11,6 +11,8 @@ public abstract class KGraphElement implements Comparable<KGraphElement> {
 	public int id;
 	/** rank of this element, used by various algorithms */
 	public int rank = 0;
+	/** object contained in this element, or null if there is none */
+	public Object object = null;
 	
 	/*
 	 * (non-Javadoc)

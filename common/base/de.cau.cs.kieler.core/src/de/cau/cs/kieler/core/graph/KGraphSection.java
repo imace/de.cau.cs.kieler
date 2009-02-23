@@ -1,12 +1,10 @@
-package de.cau.cs.kieler.klodd.orthogonal.structures;
+package de.cau.cs.kieler.core.graph;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-import de.cau.cs.kieler.core.graph.KEdge;
-import de.cau.cs.kieler.core.graph.KNode;
 
 /**
  * Section of a TSM graph.
@@ -14,7 +12,7 @@ import de.cau.cs.kieler.core.graph.KNode;
  * 
  * @author msp
  */
-public class GraphSection {
+public class KGraphSection {
 
 	/** nodes of this graph section, sorted by their creation number */
 	public List<KNode> nodes = new ArrayList<KNode>();

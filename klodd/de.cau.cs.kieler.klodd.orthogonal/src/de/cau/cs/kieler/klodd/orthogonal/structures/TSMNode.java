@@ -79,8 +79,8 @@ public class TSMNode extends KNode {
 	public void applyLayout(float offsetX, float offsetY) {
 		if (object instanceof KLayoutNode) {
 			KLayoutNode layoutNode = (KLayoutNode)object;
-			layoutNode.getLayout().getLocation().setX(concrXpos + offsetX);
-			layoutNode.getLayout().getLocation().setY(concrYpos + offsetY);
+			layoutNode.getLayout().getLocation().setX(xpos + offsetX);
+			layoutNode.getLayout().getLocation().setY(ypos + offsetY);
 		}
 	}
 	

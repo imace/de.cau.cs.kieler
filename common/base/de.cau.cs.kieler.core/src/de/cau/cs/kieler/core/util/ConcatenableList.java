@@ -1,4 +1,4 @@
-package de.cau.cs.kieler.klodd.core.util;
+package de.cau.cs.kieler.core.util;
 
 import java.util.AbstractSequentialList;
 import java.util.Collection;

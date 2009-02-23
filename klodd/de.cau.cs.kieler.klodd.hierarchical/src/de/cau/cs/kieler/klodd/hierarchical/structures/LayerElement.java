@@ -8,8 +8,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import de.cau.cs.kieler.core.graph.KEdge;
+import de.cau.cs.kieler.core.graph.KNode;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.*;
-import de.cau.cs.kieler.klodd.core.util.LayoutGraphs;
+import de.cau.cs.kieler.kiml.layout.util.LayoutGraphUtil;
 
 
 /**
@@ -39,6 +41,8 @@ public class LayerElement {
 	private Object elemObj;
 	/** the containing layer */
 	private Layer layer;
+	/** the corresponding node in the acyclic KIELER graph */
+	private KNode kNode;
 	/** are the ports of this layer element fixed? */
 	private boolean fixedPorts;
 	/** number of rank numbers consumed by this layer element */
@@ -65,10 +69,12 @@ public class LayerElement {
 	 * 
 	 * @param obj the element object
 	 * @param layer the containing layer
+	 * @param kNode the corresponding node in the acyclic KIELER graph
 	 */
-	public LayerElement(Object obj, Layer layer) {
+	public LayerElement(Object obj, Layer layer, KNode kNode) {
 		this.elemObj = obj;
 		this.layer = layer;
+		this.kNode = kNode;
 		this.position = KimlLayoutGraphFactory.eINSTANCE.createKPoint();
 		
 		if (obj instanceof KLayoutNode) {
@@ -144,27 +150,16 @@ public class LayerElement {
 	 * 
 	 * @return the list of outgoing edges, or null if the object is an edge
 	 */
-	public List<KLayoutEdge> getOutgoingEdges() {
-		if (elemObj instanceof KLayoutNode) {
-			KLayoutNode node = (KLayoutNode)elemObj;
-			LinkedList<KLayoutEdge> nonLoopEdges = new LinkedList<KLayoutEdge>();
-			for (KLayoutEdge edge : node.getOutgoingEdges()) {
+	public List<KEdge> getOutgoingEdges() {
+		if (kNode != null) {
+			LinkedList<KEdge> nonLoopEdges = new LinkedList<KEdge>();
+			for (KNode.IncEntry edgeEntry : kNode.incidence) {
 				// ignore loops over a single node
-				if (edge.getSource() != edge.getTarget())
-					nonLoopEdges.add(edge);
+				if (edgeEntry.type == KNode.IncEntry.Type.OUT
+						&& edgeEntry.edge.source.id != edgeEntry.edge.target.id)
+					nonLoopEdges.add(edgeEntry.edge);
 			}
 			return nonLoopEdges;
-		}
-		else if (elemObj instanceof KLayoutPort) {
-			KLayoutPort port = (KLayoutPort)elemObj;
-			LinkedList<KLayoutEdge> internalEdges = new LinkedList<KLayoutEdge>();
-			for (KLayoutEdge edge : port.getEdges()) {
-				// edges going from a parent layout node to a child have null source
-				if (edge.getSource() == null
-						&& edge.getSourcePort().getNode() == layer.getLayeredGraph().getParentGroup())
-					internalEdges.add(edge);
-			}
-			return internalEdges;
 		}
 		else return null;
 	}
@@ -530,7 +525,7 @@ public class LayerElement {
 		});
 		
 		KLayoutOption layoutDirection = layer.getLayeredGraph().getLayoutDirection();
-		LayoutGraphs.positionPortsByOrder(ports, node.getLayout().getSize(),
+		LayoutGraphUtil.positionPortsByOrder(ports, node.getLayout().getSize(),
 				layoutDirection, forward, symmetric);
 	}
 	
@@ -550,7 +545,7 @@ public class LayerElement {
 		if (elemObj instanceof KLayoutNode) {
 			// sort all ports by their relative position
 			List<KLayoutPort> ports = ((KLayoutNode)elemObj).getPorts();
-			KLayoutPort[] portArray = LayoutGraphs.sortPortsByPosition(ports,
+			KLayoutPort[] portArray = LayoutGraphUtil.sortPortsByPosition(ports,
 					layoutDirection, forward);
 			// set the ranks in the newly sorted list
 			if (forward) {

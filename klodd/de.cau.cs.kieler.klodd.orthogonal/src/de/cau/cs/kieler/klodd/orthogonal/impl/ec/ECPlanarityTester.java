@@ -1,8 +1,8 @@
 package de.cau.cs.kieler.klodd.orthogonal.impl.ec;
 
 import de.cau.cs.kieler.core.alg.AbstractAlgorithm;
-import de.cau.cs.kieler.klodd.orthogonal.modules.IPlanarityTester;
-import de.cau.cs.kieler.klodd.orthogonal.structures.GraphSection;
+import de.cau.cs.kieler.core.graph.KGraphSection;
+import de.cau.cs.kieler.core.graph.alg.IPlanarityTester;
 
 /**
  * Planarity tester that checks for normal planarity and EC-planarity.
@@ -39,7 +39,7 @@ public class ECPlanarityTester extends AbstractAlgorithm implements
 	 * 
 	 * @param biconnectedSection graph section to be tested
 	 */
-	public boolean isPlanar(GraphSection biconnectedSection) {
+	public boolean isPlanar(KGraphSection biconnectedSection) {
 		getMonitor().begin("EC planarity test", 1);
 		
 		try {

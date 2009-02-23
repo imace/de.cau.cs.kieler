@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.LinkedList;
 import java.util.Map;
 
+import de.cau.cs.kieler.core.graph.KNode;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutOption;
 
 
@@ -63,10 +64,11 @@ public class Layer {
 	 * Puts an object into this layer.
 	 * 
 	 * @param obj the element object
+	 * @param kNode the corresponding node in the acyclic KIELER graph
 	 * @return the new layer element
 	 */
-	public LayerElement put(Object obj) {
-		LayerElement element = new LayerElement(obj, this);
+	public LayerElement put(Object obj, KNode kNode) {
+		LayerElement element = new LayerElement(obj, this, kNode);
 		elements.add(element);
 		return element;
 	}

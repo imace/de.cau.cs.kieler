@@ -13,10 +13,10 @@ import de.cau.cs.kieler.core.graph.KEdge;
 import de.cau.cs.kieler.core.graph.KFace;
 import de.cau.cs.kieler.core.graph.KGraph;
 import de.cau.cs.kieler.core.graph.KNode;
+import de.cau.cs.kieler.core.util.Pair;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPortLayout;
-import de.cau.cs.kieler.klodd.core.util.Pair;
 import de.cau.cs.kieler.klodd.orthogonal.impl.DualGraphBuilder.ExternalFaceDetector;
 import de.cau.cs.kieler.klodd.orthogonal.modules.ICompacter;
 import de.cau.cs.kieler.klodd.orthogonal.structures.*;
@@ -449,7 +449,7 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 				KEdge.Bend sourceBend = edge.bends.get(0);
 				if (edge.sourceSide == KNode.Side.NORTH
 						|| edge.sourceSide == KNode.Side.SOUTH) {
-					sourceBend.xpos = edge.source.concrXpos;
+					sourceBend.xpos = edge.source.xpos;
 					if (((TSMNode)edge.source).type == TSMNode.Type.LAYOUT
 							&& tsmEdge.layoutEdge.getSourcePort() != null) {
 						KPortLayout portLayout = tsmEdge.layoutEdge
@@ -458,7 +458,7 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 								+ portLayout.getSize().getWidth() / 2;
 					}
 				} else {
-					sourceBend.ypos = edge.source.concrYpos;
+					sourceBend.ypos = edge.source.ypos;
 					if (((TSMNode)edge.source).type == TSMNode.Type.LAYOUT
 							&& tsmEdge.layoutEdge.getSourcePort() != null) {
 						KPortLayout portLayout = tsmEdge.layoutEdge
@@ -472,7 +472,7 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 				KEdge.Bend targetBend = edge.bends.get(bendsCount - 1);
 				if (edge.targetSide == KNode.Side.EAST
 						|| edge.targetSide == KNode.Side.WEST) {
-					targetBend.ypos = edge.target.concrYpos;
+					targetBend.ypos = edge.target.ypos;
 					if (((TSMNode)edge.target).type == TSMNode.Type.LAYOUT
 							&& tsmEdge.layoutEdge.getTargetPort() != null) {
 						KPortLayout portLayout = tsmEdge.layoutEdge
@@ -481,7 +481,7 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 								+ portLayout.getSize().getHeight() / 2;
 					}
 				} else {
-					targetBend.xpos = edge.target.concrXpos;
+					targetBend.xpos = edge.target.xpos;
 					if (((TSMNode)edge.target).type == TSMNode.Type.LAYOUT
 							&& tsmEdge.layoutEdge.getTargetPort() != null) {
 						KPortLayout portLayout = tsmEdge.layoutEdge
@@ -578,9 +578,9 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 					maxPos = Math.max(maxPos, concrPos[endPos]);
 				}
 				if (horizontal)
-					node.concrXpos = concrPos[abstrPos];
+					node.xpos = concrPos[abstrPos];
 				else
-					node.concrYpos = concrPos[abstrPos];
+					node.ypos = concrPos[abstrPos];
 			}
 			else if (obj instanceof KEdge.Bend) {
 				KEdge.Bend edgeBend = (KEdge.Bend)obj;

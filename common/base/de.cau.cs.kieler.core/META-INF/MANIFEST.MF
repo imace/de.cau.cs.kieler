@@ -8,5 +8,6 @@ Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: de.cau.cs.kieler.core,
  de.cau.cs.kieler.core.alg,
  de.cau.cs.kieler.core.graph,
+ de.cau.cs.kieler.core.graph.alg,
  de.cau.cs.kieler.core.services,
  de.cau.cs.kieler.core.util

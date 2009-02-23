@@ -8,7 +8,7 @@ import java.util.Map;
 
 import de.cau.cs.kieler.core.alg.AbstractAlgorithm;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.*;
-import de.cau.cs.kieler.klodd.core.util.LayoutGraphs;
+import de.cau.cs.kieler.kiml.layout.util.LayoutGraphUtil;
 import de.cau.cs.kieler.klodd.hierarchical.modules.IEdgeRouter;
 import de.cau.cs.kieler.klodd.hierarchical.modules.ILayerwiseEdgePlacer;
 import de.cau.cs.kieler.klodd.hierarchical.structures.*;
@@ -582,37 +582,37 @@ public class RectilinearEdgeRouter extends AbstractAlgorithm implements
 			}
 			if (layoutDirection == KLayoutOption.VERTICAL) {
 				if (layer.rank == 0) {
-					LayoutGraphs.placePoints(westPorts, 0.0f,
+					LayoutGraphUtil.placePoints(westPorts, 0.0f,
 							layeredGraph.lengthwiseDim / 2, offsetY, true, true);
-					LayoutGraphs.placePoints(eastPorts, 0.0f,
+					LayoutGraphUtil.placePoints(eastPorts, 0.0f,
 							layeredGraph.lengthwiseDim / 2, offsetY, true, false);
-					LayoutGraphs.placePoints(southPorts, maxOutputPos,
+					LayoutGraphUtil.placePoints(southPorts, maxOutputPos,
 							layeredGraph.crosswiseDim + offsetX, 0.0f, false, true);
 				}
 				else {
-					LayoutGraphs.placePoints(westPorts, layeredGraph.lengthwiseDim / 2,
+					LayoutGraphUtil.placePoints(westPorts, layeredGraph.lengthwiseDim / 2,
 							layeredGraph.lengthwiseDim, offsetY, true, true);
-					LayoutGraphs.placePoints(eastPorts, layeredGraph.lengthwiseDim / 2,
+					LayoutGraphUtil.placePoints(eastPorts, layeredGraph.lengthwiseDim / 2,
 							layeredGraph.lengthwiseDim, offsetY, true, false);
-					LayoutGraphs.placePoints(northPorts, maxInputPos,
+					LayoutGraphUtil.placePoints(northPorts, maxInputPos,
 							layeredGraph.crosswiseDim + offsetX, 0.0f, false, true);
 				}
 			}
 			else {
 				if (layer.rank == 0) {
-					LayoutGraphs.placePoints(northPorts, 0.0f,
+					LayoutGraphUtil.placePoints(northPorts, 0.0f,
 							layeredGraph.lengthwiseDim / 2, offsetX, false, false);
-					LayoutGraphs.placePoints(southPorts, 0.0f,
+					LayoutGraphUtil.placePoints(southPorts, 0.0f,
 							layeredGraph.lengthwiseDim / 2, offsetX, false, true);
-					LayoutGraphs.placePoints(eastPorts, maxOutputPos,
+					LayoutGraphUtil.placePoints(eastPorts, maxOutputPos,
 							layeredGraph.crosswiseDim + offsetY, 0.0f, true, false);
 				}
 				else {
-					LayoutGraphs.placePoints(northPorts, layeredGraph.lengthwiseDim / 2,
+					LayoutGraphUtil.placePoints(northPorts, layeredGraph.lengthwiseDim / 2,
 							layeredGraph.lengthwiseDim, offsetX, false, true);
-					LayoutGraphs.placePoints(southPorts, layeredGraph.lengthwiseDim / 2,
+					LayoutGraphUtil.placePoints(southPorts, layeredGraph.lengthwiseDim / 2,
 							layeredGraph.lengthwiseDim, offsetX, false, false);
-					LayoutGraphs.placePoints(westPorts, maxInputPos,
+					LayoutGraphUtil.placePoints(westPorts, maxInputPos,
 							layeredGraph.crosswiseDim + offsetY, 0.0f, true, false);
 				}
 			}

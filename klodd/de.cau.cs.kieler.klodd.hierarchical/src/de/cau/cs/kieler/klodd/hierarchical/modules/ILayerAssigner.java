@@ -1,6 +1,7 @@
 package de.cau.cs.kieler.klodd.hierarchical.modules;
 
 import de.cau.cs.kieler.core.alg.IAlgorithm;
+import de.cau.cs.kieler.core.graph.KGraph;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
 import de.cau.cs.kieler.klodd.hierarchical.structures.LayeredGraph;
 
@@ -16,9 +17,10 @@ public interface ILayerAssigner extends IAlgorithm {
 	 * ports must be put into the first layer (rank == 0), the output
 	 * ports into the last layer (height == 0).
 	 * 
-	 * @param parentNode
-	 * @return
+	 * @param kGraph graph structure that contains no directed cycles
+	 * @param parentNode the parent layout node
+	 * @return a layered graph
 	 */
-	public LayeredGraph assignLayers(KLayoutNode parentNode);
+	public LayeredGraph assignLayers(KGraph kGraph, KLayoutNode parentNode);
 
 }

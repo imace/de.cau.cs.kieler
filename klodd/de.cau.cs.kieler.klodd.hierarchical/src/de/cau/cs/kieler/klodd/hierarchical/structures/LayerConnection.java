@@ -56,8 +56,9 @@ public class LayerConnection {
 	 * @param targetElem the target element
 	 * @param targetPort the target port
 	 */
-	public LayerConnection(KLayoutEdge edge, LayerElement sourceElem, KLayoutPort sourcePort,
-			LayerElement targetElem, KLayoutPort targetPort) {
+	public LayerConnection(KLayoutEdge edge, LayerElement sourceElem,
+			KLayoutPort sourcePort, LayerElement targetElem,
+			KLayoutPort targetPort) {
 		this.edge = edge;
 		this.sourceElement = sourceElem;
 		this.sourcePort = sourcePort;
@@ -88,7 +89,7 @@ public class LayerConnection {
 		boolean subSourceXInset = false, subSourceYInset = false,
 			subTargetXInset = false, subTargetYInset = false;
 		if (layeredGraph.areExternalPortsFixed()) {
-			if (sourcePort != null && sourcePort.getNode() == layeredGraph.getParentGroup()) {
+			if (sourcePort != null && sourcePort.getNode() == layeredGraph.getParentNode()) {
 				if (sourcePort.getLayout().getPlacement() == KPortPlacement.NORTH
 						|| sourcePort.getLayout().getPlacement() == KPortPlacement.SOUTH) {
 					subSourceXInset = true;
@@ -97,7 +98,7 @@ public class LayerConnection {
 					subSourceYInset = true;
 				}
 			}
-			if (targetPort != null && targetPort.getNode() == layeredGraph.getParentGroup()) {
+			if (targetPort != null && targetPort.getNode() == layeredGraph.getParentNode()) {
 				if (targetPort.getLayout().getPlacement() == KPortPlacement.NORTH
 						|| targetPort.getLayout().getPlacement() == KPortPlacement.SOUTH) {
 					subTargetXInset = true;
@@ -118,7 +119,7 @@ public class LayerConnection {
 		// calculate position of source point
 		KPoint sourcePoint = KimlLayoutGraphFactory.eINSTANCE.createKPoint();
 		if (sourcePort != null) {
-			if (sourcePort.getNode() == layeredGraph.parentNode) {
+			if (sourcePort.getNode() == layeredGraph.getParentNode()) {
 				sourcePoint.setX(sourceElement.getPosition().getX()
 						+ sourcePort.getLayout().getSize().getWidth() / 2);
 				if (subSourceXInset) {
@@ -156,7 +157,7 @@ public class LayerConnection {
 		// calculate position of target point
 		KPoint targetPoint = KimlLayoutGraphFactory.eINSTANCE.createKPoint();
 		if (targetPort != null) {
-			if (targetPort.getNode() == layeredGraph.parentNode) {
+			if (targetPort.getNode() == layeredGraph.getParentNode()) {
 				targetPoint.setX(targetElement.getPosition().getX()
 						+ targetPort.getLayout().getSize().getWidth() / 2);
 				if (subTargetXInset) {
@@ -261,7 +262,7 @@ public class LayerConnection {
 				sourceAnchorPos += layoutDirection == KLayoutOption.VERTICAL
 						? portLayout.getSize().getWidth() / 2
 						: portLayout.getSize().getHeight() / 2;
-				if (sourcePort.getNode() != layeredGraph.getParentGroup()) {
+				if (sourcePort.getNode() != layeredGraph.getParentNode()) {
 					sourceAnchorPos += layoutDirection == KLayoutOption.VERTICAL
 							? portLayout.getLocation().getX()
 							: portLayout.getLocation().getY();
@@ -299,7 +300,7 @@ public class LayerConnection {
 				targetAnchorPos += layoutDirection == KLayoutOption.VERTICAL
 						? portLayout.getSize().getWidth() / 2
 						: portLayout.getSize().getHeight() / 2;
-				if (targetPort.getNode() != layeredGraph.getParentGroup()) {
+				if (targetPort.getNode() != layeredGraph.getParentNode()) {
 					targetAnchorPos += layoutDirection == KLayoutOption.VERTICAL
 							? portLayout.getLocation().getX()
 							: portLayout.getLocation().getY();

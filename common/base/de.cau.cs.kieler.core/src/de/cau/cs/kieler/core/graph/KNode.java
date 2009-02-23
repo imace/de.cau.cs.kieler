@@ -162,12 +162,10 @@ public class KNode extends KGraphElement {
 	
 	/** list of incident edges */
 	public final List<IncEntry> incidence = new LinkedList<IncEntry>();
-	/** object contained in this node, or null if there is none */
-	public Object object;
 	/** concrete x coordinate position */
-	public float concrXpos;
+	public float xpos;
 	/** concrete y coordinate position */
-	public float concrYpos;
+	public float ypos;
 	
 	/**
 	 * Creates a node containing the given object.

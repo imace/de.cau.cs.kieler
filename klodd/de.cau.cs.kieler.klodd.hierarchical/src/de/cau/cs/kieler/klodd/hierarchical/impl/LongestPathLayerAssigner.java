@@ -1,7 +1,8 @@
 package de.cau.cs.kieler.klodd.hierarchical.impl;
 
 import de.cau.cs.kieler.core.alg.AbstractAlgorithm;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge;
+import de.cau.cs.kieler.core.graph.KGraph;
+import de.cau.cs.kieler.core.graph.KNode;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPortType;
@@ -27,30 +28,17 @@ public class LongestPathLayerAssigner extends AbstractAlgorithm implements
 		layeredGraph = null;
 	}
 
-	/* (non-Javadoc)
-	 * @see de.cau.cs.kieler.klodd.hierarchical.modules.ILayerAssigner#assignLayers(de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode)
+	/*
+	 * (non-Javadoc)
+	 * @see de.cau.cs.kieler.klodd.hierarchical.modules.ILayerAssigner#assignLayers(de.cau.cs.kieler.core.graph.KGraph, de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode)
 	 */
-	public LayeredGraph assignLayers(KLayoutNode parentNode) {
+	public LayeredGraph assignLayers(KGraph kGraph, KLayoutNode parentNode) {
 		getMonitor().begin("Longest path layering", 1);
-		layeredGraph = new LayeredGraph(LayeredGraph.Type.BUILD_BACK, parentNode);
-		
-		// process output ports
-		for (KLayoutPort port : parentNode.getPorts()) {
-			if (port.getType() == KPortType.OUTPUT) {
-				layeredGraph.putBack(port, 0);
-			}
-		}
+		layeredGraph = new LayeredGraph(parentNode);
 		
 		// process child nodes
-		for (KLayoutNode node : parentNode.getChildNodes()) {
+		for (KNode node : kGraph.nodes) {
 			visit(node);
-		}
-		
-		// process input ports
-		for (KLayoutPort port : parentNode.getPorts()) {
-			if (port.getType() == KPortType.INPUT) {
-				layeredGraph.putFront(port, 0);
-			}
 		}
 		
 		getMonitor().done();
@@ -64,24 +52,37 @@ public class LongestPathLayerAssigner extends AbstractAlgorithm implements
 	 * @param node node to visit
 	 * @return height of the given node in the layered graph
 	 */
-	private int visit(KLayoutNode node) {
-		LayerElement layerElement = layeredGraph.getLayerElement(node);
+	private int visit(KNode node) {
+		LayerElement layerElement = layeredGraph.getLayerElement(node.object);
 		if (layerElement != null) {
 			// the node was already visited
 			return layerElement.getLayer().height;
 		}
+		else if (node.object instanceof KLayoutPort) {
+			KLayoutPort port = (KLayoutPort)node.object;
+			if (port.getType() == KPortType.INPUT) {
+				layeredGraph.putFront(port, 0, node);
+				return Layer.UNDEF_HEIGHT;
+			}
+			else {
+				layeredGraph.putBack(port, 0, node);
+				return 0;
+			}
+		}
 		else
 		{
 			int maxHeight = 1;
-			for (KLayoutEdge edge : node.getOutgoingEdges()) {
-				KLayoutNode targetNode = edge.getTarget();
-				// do not follow loops over a single node
-				if (targetNode != null && targetNode != node) {
-					int height = visit(targetNode) + 1;
-					maxHeight = Math.max(height, maxHeight);
+			for (KNode.IncEntry edgeEntry : node.incidence) {
+				if (edgeEntry.type == KNode.IncEntry.Type.OUT) {
+					KNode targetNode = edgeEntry.edge.target;
+					// do not follow loops over a single node
+					if (targetNode.id != node.id) {
+						int height = visit(targetNode) + 1;
+						maxHeight = Math.max(height, maxHeight);
+					}
 				}
 			}
-			layeredGraph.putBack(node, maxHeight);
+			layeredGraph.putBack(node.object, maxHeight, node);
 			return maxHeight;
 		}
 	}

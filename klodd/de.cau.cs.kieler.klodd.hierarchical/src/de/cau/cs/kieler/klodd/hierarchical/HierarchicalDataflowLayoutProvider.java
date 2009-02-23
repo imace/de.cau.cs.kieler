@@ -1,17 +1,27 @@
 package de.cau.cs.kieler.klodd.hierarchical;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import de.cau.cs.kieler.core.KielerException;
 import de.cau.cs.kieler.core.alg.IKielerProgressMonitor;
+import de.cau.cs.kieler.core.graph.KEdge;
+import de.cau.cs.kieler.core.graph.KGraph;
+import de.cau.cs.kieler.core.graph.alg.DFSCycleRemover;
+import de.cau.cs.kieler.core.graph.alg.ICycleRemover;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPoint;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphFactory;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayouterInfo;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutOption;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutType;
 import de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayoutProvider;
+import de.cau.cs.kieler.kiml.layout.util.GraphConverter;
+import de.cau.cs.kieler.kiml.layout.util.LayoutGraphUtil;
 import de.cau.cs.kieler.klodd.core.KloddCorePlugin;
-import de.cau.cs.kieler.klodd.core.algorithms.*;
 import de.cau.cs.kieler.klodd.core.preferences.KloddLayoutPreferences;
-import de.cau.cs.kieler.klodd.core.util.LayoutGraphs;
 import de.cau.cs.kieler.klodd.hierarchical.impl.*;
 import de.cau.cs.kieler.klodd.hierarchical.modules.*;
 import de.cau.cs.kieler.klodd.hierarchical.structures.LayeredGraph;
@@ -30,6 +40,8 @@ public class HierarchicalDataflowLayoutProvider extends
 	/** the minimal distance between two nodes or edges */
 	private float minDist;
 	
+	/** the graph converter module */
+	private GraphConverter graphConverter = new GraphConverter();
 	/** the cycle remover module */
 	private ICycleRemover cycleRemover = null;
 	/** the layer assigner module */
@@ -54,18 +66,21 @@ public class HierarchicalDataflowLayoutProvider extends
 		updateModules();
 
 		// set the size of each non-empty node
-		setNodeSizes(layoutNode);
+		try{setNodeSizes(layoutNode);
+		// create a KIELER graph for cycle removal
+		graphConverter.reset(progressMonitor.subTask(5));
+		KGraph kGraph = graphConverter.convertGraph(layoutNode, true);
 		// remove cycles in the input graph
-		cycleRemover.reset(progressMonitor.subTask(10));
-		cycleRemover.removeCycles(layoutNode);
+		cycleRemover.reset(progressMonitor.subTask(5));
+		cycleRemover.removeCycles(kGraph);
 		// put each node into a layer and get a layered graph
 		layerAssigner.reset(progressMonitor.subTask(10));
-		LayeredGraph layeredGraph = layerAssigner.assignLayers(layoutNode);
+		LayeredGraph layeredGraph = layerAssigner.assignLayers(
+				kGraph, layoutNode);
 		if (!layeredGraph.getLayers().isEmpty()) {
-			layeredGraph.createConnections();
-			progressMonitor.worked(5);
+			layeredGraph.createConnections(kGraph);
 			// optimize the order of nodes in each layer
-			crossingReducer.reset(progressMonitor.subTask(10));
+			crossingReducer.reset(progressMonitor.subTask(15));
 			crossingReducer.reduceCrossings(layeredGraph);
 			// determine a placement for all edge endpoints
 			nodewiseEdgePlacer.reset(progressMonitor.subTask(10));
@@ -78,8 +93,8 @@ public class HierarchicalDataflowLayoutProvider extends
 			edgeRouter.routeEdges(layeredGraph, minDist);
 		}
 		layeredGraph.applyLayout();
-		progressMonitor.worked(5);
-		cycleRemover.restoreGraph();
+		restoreCycles();}catch(Exception e) {e.printStackTrace();}
+		
 		progressMonitor.done();
 	}
 
@@ -127,8 +142,32 @@ public class HierarchicalDataflowLayoutProvider extends
 		for (KLayoutNode node : parentNode.getChildNodes()) {
 			if (!node.getLayout().getLayoutOptions().contains(KLayoutOption.FIXED_SIZE)
 					&& node.getChildNodes().isEmpty()) {
-				LayoutGraphs.resizeNode(node);
+				LayoutGraphUtil.resizeNode(node);
 			}
+		}
+	}
+	
+	/**
+	 * Restores the edges that were reversed for cycle removal.
+	 */
+	private void restoreCycles() {
+		List<KEdge> reversedEdges = cycleRemover.getReversedEdges();
+		for (KEdge kEdge : reversedEdges) {
+			KLayoutEdge layoutEdge = (KLayoutEdge)kEdge.object;
+			// reverse bend points
+			List<KPoint> bendPoints = new LinkedList<KPoint>();
+			for (KPoint point : layoutEdge.getLayout().getBendPoints()) {
+				bendPoints.add(0, point);
+			}
+			layoutEdge.getLayout().getBendPoints().clear();
+			for (KPoint point : bendPoints) {
+				layoutEdge.getLayout().getBendPoints().add(point);
+			}
+			// reverse source and target point
+			KPoint sourcePoint = layoutEdge.getLayout().getSourcePoint();
+			layoutEdge.getLayout().setSourcePoint(layoutEdge
+					.getLayout().getTargetPoint());
+			layoutEdge.getLayout().setTargetPoint(sourcePoint);
 		}
 	}
 	

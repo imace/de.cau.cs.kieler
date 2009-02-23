@@ -1,4 +1,4 @@
-package de.cau.cs.kieler.klodd.orthogonal.impl;
+package de.cau.cs.kieler.core.graph.alg;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -8,11 +8,10 @@ import java.util.ListIterator;
 import java.util.Stack;
 
 import de.cau.cs.kieler.core.alg.AbstractAlgorithm;
+import de.cau.cs.kieler.core.graph.KGraphSection;
 import de.cau.cs.kieler.core.graph.KEdge;
 import de.cau.cs.kieler.core.graph.KNode;
-import de.cau.cs.kieler.klodd.core.util.ConcatenableList;
-import de.cau.cs.kieler.klodd.orthogonal.modules.IPlanarityTester;
-import de.cau.cs.kieler.klodd.orthogonal.structures.*;
+import de.cau.cs.kieler.core.util.ConcatenableList;
 
 
 /**
@@ -29,7 +28,7 @@ public class HopcroftTarjanPlanarityTester extends AbstractAlgorithm implements
 	private static final int BACK_EDGE = 0;
 	
 	/** the biconnected section that is being processed */
-	private GraphSection biconnectedSection;
+	private KGraphSection biconnectedSection;
 	/** the next DFS number that is assigned */
 	private int nextDfsnum = 0;
 	/** the lowest point values */
@@ -49,7 +48,7 @@ public class HopcroftTarjanPlanarityTester extends AbstractAlgorithm implements
 	/* (non-Javadoc)
 	 * @see de.cau.cs.kieler.klodd.orthogonal.modules.IPlanarityTester#isPlanar(de.cau.cs.kieler.klodd.orthogonal.structures.GraphSection)
 	 */
-	public boolean isPlanar(GraphSection biconnectedSection) {
+	public boolean isPlanar(KGraphSection biconnectedSection) {
 		int sectionSize = biconnectedSection.nodes.size();
 		this.biconnectedSection = biconnectedSection;
 		this.lowpt = new int[sectionSize];

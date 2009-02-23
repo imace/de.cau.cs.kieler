@@ -1,4 +1,4 @@
-package de.cau.cs.kieler.klodd.core.util;
+package de.cau.cs.kieler.kiml.layout.util;
 
 import java.util.Arrays;
 import java.util.Comparator;
@@ -20,7 +20,7 @@ import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPortPlacement;
  * 
  * @author msp
  */
-public class LayoutGraphs {
+public class LayoutGraphUtil {
 	
 	/** minimal distance of two ports on each side of a node */
 	private static final float MIN_PORT_DISTANCE = 16.0f;

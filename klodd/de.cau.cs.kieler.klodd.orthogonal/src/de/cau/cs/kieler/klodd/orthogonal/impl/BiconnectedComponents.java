@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Stack;
 
 import de.cau.cs.kieler.core.alg.AbstractAlgorithm;
+import de.cau.cs.kieler.core.graph.KGraphSection;
 import de.cau.cs.kieler.core.graph.KGraph;
 import de.cau.cs.kieler.core.graph.KNode;
 import de.cau.cs.kieler.klodd.orthogonal.structures.*;
@@ -19,7 +20,7 @@ import de.cau.cs.kieler.klodd.orthogonal.structures.*;
 public class BiconnectedComponents extends AbstractAlgorithm {
 
 	/** list of biconnected components calculated by the algorithm */
-	private List<GraphSection> components = new LinkedList<GraphSection>();
+	private List<KGraphSection> components = new LinkedList<KGraphSection>();
 	/** next DFS number to assign */
 	private int nextDfsnum = 0;
 	/** list of lowest point numbers */
@@ -47,7 +48,7 @@ public class BiconnectedComponents extends AbstractAlgorithm {
 	 * @param graph graph to be processed
 	 * @return list of biconnected components
 	 */
-	public List<GraphSection> findComponents(KGraph graph) {
+	public List<KGraphSection> findComponents(KGraph graph) {
 		// initialize DFS variables
 		int graphSize = graph.nodes.size();
 		lowpt = new int[graphSize];
@@ -86,7 +87,7 @@ public class BiconnectedComponents extends AbstractAlgorithm {
 			}
 		}
 		if (node.rank >= 2 && lowpt[node.id] == parent[node.id].rank) {
-			GraphSection graphSection = new GraphSection();
+			KGraphSection graphSection = new KGraphSection();
 			KNode sectionNode;
 			do {
 				sectionNode = unfinished.pop();

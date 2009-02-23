@@ -6,6 +6,10 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
 
+import de.cau.cs.kieler.core.graph.KEdge;
+import de.cau.cs.kieler.core.graph.KGraph;
+import de.cau.cs.kieler.core.graph.KNode;
+import de.cau.cs.kieler.core.graph.alg.ICycleRemover;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KInsets;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
@@ -13,7 +17,6 @@ import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPoint;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphFactory;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutOption;
-import de.cau.cs.kieler.klodd.core.util.FixedArrayList;
 
 
 /**
@@ -23,25 +26,15 @@ import de.cau.cs.kieler.klodd.core.util.FixedArrayList;
  */
 public class LayeredGraph {
 	
-	/**
-	 * Types of layered graphs.
-	 */
-	public enum Type {
-		/** the layered graph is built up from the front */
-		BUILD_FRONT,
-		/** the layered graph is built up from the back */
-		BUILD_BACK
-	}
-	
 	/** crosswise dimension of this layered graph */
 	public float crosswiseDim = 0.0f;
 	/** lengthwise dimension of this layered graph */
 	public float lengthwiseDim = 0.0f;
 	
 	/** list of layers in this layered graph */
-	private List<Layer> layers;
+	private List<Layer> layers = new LinkedList<Layer>();
 	/** parent layout node associated with this layered graph */
-	KLayoutNode parentNode;
+	private KLayoutNode parentNode;
 	/** map of objects to their corresponding layer */
 	private Map<Object, LayerElement> obj2LayerElemMap = new HashMap<Object, LayerElement>();
 	/** map of ports to connected long edges */
@@ -56,18 +49,11 @@ public class LayeredGraph {
 	private KPoint position;
 	
 	/**
-	 * Creates a new layered graph. Choosing the right type can be important
-	 * for efficiency; BUILD_FRONT should be chosen if putFront is used to
-	 * put normal nodes, and BUILD_BACK should be chosen if putBack is used
-	 * to put normal nodes.
+	 * Creates a new layered graph.
 	 * 
-	 * @param type type of layered graph building: from front or from back
 	 * @param parentNode parent layout node
 	 */
-	public LayeredGraph(Type type, KLayoutNode parentNode) {
-		layers = new FixedArrayList<Layer>(parentNode.getChildNodes().size() + 2,
-				type == Type.BUILD_FRONT ? FixedArrayList.Type.ALIGN_FRONT
-						: FixedArrayList.Type.ALIGN_BACK);
+	public LayeredGraph(KLayoutNode parentNode) {
 		position = KimlLayoutGraphFactory.eINSTANCE.createKPoint();
 		position.setX(0.0f);
 		position.setY(0.0f);
@@ -85,7 +71,10 @@ public class LayeredGraph {
 	 * @see java.lang.Object#toString()
 	 */
 	public String toString() {
-		return parentNode.getLabel().getText();
+		String text = getClass().getSimpleName();
+		if (parentNode.getLabel() != null)
+			text += "(" + parentNode.getLabel().getText() + ")";
+		return text;
 	}
 	
 	/**
@@ -94,27 +83,30 @@ public class LayeredGraph {
 	 * 
 	 * @param obj object to put
 	 * @param rank rank of the object
+	 * @param kNode the corresponding node in the acyclic KIELER graph
 	 */
-	public void putFront(Object obj, int rank) {
-		for (int i = 0; i < layers.size(); i++) {
-			int currentRank = layers.get(i).rank;
-			if (currentRank < 0 || currentRank > rank) {
+	public void putFront(Object obj, int rank, KNode kNode) {
+		ListIterator<Layer> layerIter = layers.listIterator();
+		while (layerIter.hasNext()) {
+			Layer layer = layerIter.next();
+			if (layer.rank < 0 || layer.rank > rank) {
 				// insert a new layer into the list
 				Layer newLayer = new Layer(rank, Layer.UNDEF_HEIGHT, this);
-				doPut(obj, newLayer);
-				layers.add(i, newLayer);
+				doPut(obj, newLayer, kNode);
+				layerIter.previous();
+				layerIter.add(newLayer);
 				return;
 			}
-			else if (currentRank == rank) {
+			else if (layer.rank == rank) {
 				// the right layer was found
-				doPut(obj, layers.get(i));
+				doPut(obj, layer, kNode);
 				return;
 			}
 		}
 		
 		// add a new layer at the end of the list
 		Layer newLayer = new Layer(rank, Layer.UNDEF_HEIGHT, this);
-		doPut(obj, newLayer);
+		doPut(obj, newLayer, kNode);
 		layers.add(newLayer);
 	}
 
@@ -124,27 +116,30 @@ public class LayeredGraph {
 	 * 
 	 * @param obj object to put
 	 * @param height height of the object
+	 * @param kNode the corresponding node in the acyclic KIELER graph
 	 */
-	public void putBack(Object obj, int height) {
-		for (int i = layers.size() - 1; i >= 0; i--) {
-			int currentHeight = layers.get(i).height;
-			if (currentHeight < 0 || currentHeight > height) {
+	public void putBack(Object obj, int height, KNode kNode) {
+		ListIterator<Layer> layerIter = layers.listIterator(layers.size());
+		while (layerIter.hasPrevious()) {
+			Layer layer = layerIter.previous();
+			if (layer.height < 0 || layer.height > height) {
 				// insert a new layer into the list
 				Layer newLayer = new Layer(Layer.UNDEF_RANK, height, this);
-				doPut(obj, newLayer);
-				layers.add(i, newLayer);
+				doPut(obj, newLayer, kNode);
+				layerIter.next();
+				layerIter.add(newLayer);
 				return;
 			}
-			else if (currentHeight == height) {
+			else if (layer.height == height) {
 				// the right layer was found
-				doPut(obj, layers.get(i));
+				doPut(obj, layer, kNode);
 				return;
 			}
 		}
 		
 		// add a new layer at the start of the list
 		Layer newLayer = new Layer(Layer.UNDEF_RANK, height, this);
-		doPut(obj, newLayer);
+		doPut(obj, newLayer, kNode);
 		layers.add(0, newLayer);
 	}
 	
@@ -170,9 +165,9 @@ public class LayeredGraph {
 	/**
 	 * Gets the parent layout node.
 	 * 
-	 * @return the parentNode
+	 * @return the parent node
 	 */
-	public KLayoutNode getParentGroup() {
+	public KLayoutNode getParentNode() {
 		return parentNode;
 	}
 
@@ -180,50 +175,76 @@ public class LayeredGraph {
 	 * Fills rank and height information for all layers, creates connections
 	 * between layer elements and creates long edges. This method should be
 	 * called after all nodes and ports have been put into the layered graph.
+	 * 
+	 * @param kGraph acyclic version of the graph
 	 */
-	public void createConnections() {
+	public void createConnections(KGraph kGraph) {
 		int layerCount = layers.size();
 		// fill rank information for all layers
-		int rank = layers.get(0).rank;
-		if (rank == Layer.UNDEF_RANK) rank = 1;
-		for (int i = 0; i < layerCount; i++) {
-			layers.get(i).rank = rank++;
-			if (i + 1 < layerCount)
-				layers.get(i).next = layers.get(i + 1);
+		ListIterator<Layer> layerIter = layers.listIterator();
+		Layer currentLayer = layerIter.next();
+		int rank = currentLayer.rank;
+		if (rank == Layer.UNDEF_RANK) {
+			rank = 1;
+			currentLayer.rank = rank;
 		}
+		while (layerIter.hasNext()) {
+			Layer nextLayer = layerIter.next();
+			nextLayer.rank = ++rank;
+			currentLayer.next = nextLayer;
+			currentLayer = nextLayer;
+		}
+		
 		// fill height information for all layers
-		int height = layers.get(layerCount - 1).height;
-		if (height == Layer.UNDEF_HEIGHT) height = 1;
-		for (int i = layerCount - 1; i >= 0; i--)
-			layers.get(i).height = height++;
+		layerIter = layers.listIterator(layerCount);
+		currentLayer = layerIter.previous();
+		int height = currentLayer.height;
+		if (height == Layer.UNDEF_HEIGHT) {
+			height = 1;
+			currentLayer.height = height;
+		}
+		while (layerIter.hasPrevious()) {
+			layerIter.previous().height = ++height;
+		}
 		
 		// create connections between layer elements
-		for (int i = 0; i < layerCount - 1; i++) {
-			Layer layer = layers.get(i);
+		for (Layer layer : layers) {
 			List<LayerElement> elements = layer.getElements();
 			for (LayerElement element : elements) {
 				if (element.linearSegment == null) {
 					// create new linear segment
 					createLinearSegment(element);
 				}
-				List<KLayoutEdge> outgoingEdges = element.getOutgoingEdges();
+				List<KEdge> outgoingEdges = element.getOutgoingEdges();
 				if (outgoingEdges != null) {
-					for (KLayoutEdge edge : outgoingEdges) {
-						KLayoutNode targetGroup = edge.getTarget();
-						KLayoutPort targetPort = edge.getTargetPort();
+					for (KEdge edge : outgoingEdges) {
+						KLayoutEdge layoutEdge = (KLayoutEdge)edge.object;
+						KLayoutNode targetGroup;
+						KLayoutPort sourcePort, targetPort;
+						if (edge.rank == ICycleRemover.REVERSED) {
+							targetGroup = layoutEdge.getSource();
+							sourcePort = layoutEdge.getTargetPort();
+							targetPort = layoutEdge.getSourcePort();
+						}
+						else {
+							targetGroup = layoutEdge.getTarget();
+							sourcePort = layoutEdge.getSourcePort();
+							targetPort = layoutEdge.getTargetPort();
+						}
+						
 						if (targetGroup != null) {
-							createConnection(element, obj2LayerElemMap.get(targetGroup), edge);
+							createConnection(element,
+									obj2LayerElemMap.get(targetGroup),
+									layoutEdge, sourcePort, targetPort);
 						}
 						else if (targetPort != null) {
-							createConnection(element, obj2LayerElemMap.get(targetPort), edge);
+							createConnection(element,
+									obj2LayerElemMap.get(targetPort),
+									layoutEdge, sourcePort, targetPort);
 						}
 					}
 				}
 			}
-		}
-		// create linear segments for the last layer
-		for (LayerElement element : layers.get(layerCount - 1).getElements()) {
-			createLinearSegment(element);
 		}
 	}
 	
@@ -309,9 +330,10 @@ public class LayeredGraph {
 	 * 
 	 * @param obj object to put
 	 * @param layer the layer
+	 * @param kNode the corresponding node in the acyclic KIELER graph
 	 */
-	private void doPut(Object obj, Layer layer) {
-		LayerElement element = layer.put(obj);
+	private void doPut(Object obj, Layer layer, KNode kNode) {
+		LayerElement element = layer.put(obj, kNode);
 		obj2LayerElemMap.put(obj, element);
 	}
 	
@@ -322,45 +344,47 @@ public class LayeredGraph {
 	 * @param source source element
 	 * @param target target element
 	 * @param edge the edge object connecting both elements
+	 * @param sourcePort the source port
+	 * @param targetPort the target port
 	 */
 	private void createConnection(LayerElement source,
-			LayerElement target, KLayoutEdge edge) {
+			LayerElement target, KLayoutEdge edge, KLayoutPort sourcePort,
+			KLayoutPort targetPort) {
 		Layer sourceLayer = source.getLayer();
 		Layer targetLayer = target.getLayer();
 		if (targetLayer.rank - sourceLayer.rank == 1) {
-			source.addOutgoing(edge, target, edge.getSourcePort(),
-					edge.getTargetPort());
+			source.addOutgoing(edge, target, sourcePort, targetPort);
 		}
 		else {
 			LayerElement currentElement = null;
 			// process existing long edges for the source or target port
-			LinearSegment linearSegment = longEdgesMap.get(edge.getSourcePort());
+			LinearSegment linearSegment = longEdgesMap.get(sourcePort);
 			if (linearSegment == null)
-				linearSegment = longEdgesMap.get(edge.getTargetPort());
+				linearSegment = longEdgesMap.get(targetPort);
 			if (linearSegment != null) {
 				ListIterator<LayerElement> elemIter = linearSegment.elements.listIterator();
 				while (elemIter.hasNext()
 						&& (currentElement = elemIter.next()).getLayer().rank
 						< targetLayer.rank - 1);
 				source.addOutgoing(edge, linearSegment.elements.get(0),
-						edge.getSourcePort(), null);
+						sourcePort, null);
 			}
 			else {
-				currentElement = sourceLayer.next.put(edge);
+				currentElement = sourceLayer.next.put(edge, null);
 				linearSegment = createLinearSegment(currentElement);
-				source.addOutgoing(edge, currentElement, edge.getSourcePort(), null);
+				source.addOutgoing(edge, currentElement, sourcePort, null);
 			}
 			// add new layer elements to the linear segment if needed
 			while (currentElement.getLayer().rank < targetLayer.rank - 1) {
-				LayerElement newElement = currentElement.getLayer().next.put(edge);
+				LayerElement newElement = currentElement.getLayer().next.put(edge, null);
 				linearSegment.elements.add(newElement);
 				newElement.linearSegment = linearSegment;
 				currentElement.addOutgoing(edge, newElement);
 				currentElement = newElement;
 			}
-			currentElement.addOutgoing(edge, target, null, edge.getTargetPort());
-			longEdgesMap.put(edge.getSourcePort(), linearSegment);
-			longEdgesMap.put(edge.getTargetPort(), linearSegment);
+			currentElement.addOutgoing(edge, target, null, targetPort);
+			longEdgesMap.put(sourcePort, linearSegment);
+			longEdgesMap.put(targetPort, linearSegment);
 		}
 	}
 	

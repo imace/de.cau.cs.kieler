@@ -78,8 +78,7 @@ public class KEdge extends KGraphElement {
 	public KNode.Side targetSide = KNode.Side.UNDEFINED;
 	
 	/**
-	 * Creates an edge connecting two existing nodes, with a layout graph
-	 * edge as reference.
+	 * Creates an edge connecting two existing nodes.
 	 * 
 	 * @param graph the graph to which the new edge shall be added
 	 * @param source source node
@@ -90,6 +89,20 @@ public class KEdge extends KGraphElement {
 		this.id = graph.nextEdgeId++;
 		this.source = source;
 		this.target = target;
+	}
+	
+	/**
+	 * Creates an edge connecting two existing nodes, with an object
+	 * to be contained.
+	 * 
+	 * @param graph the graph to which the new edge shall be added
+	 * @param source source node
+	 * @param target target node
+	 * @param obj object to be contained
+	 */
+	public KEdge(KGraph graph, KNode source, KNode target, Object obj) {
+		this(graph, source, target);
+		this.object = obj;
 	}
 	
 	/**

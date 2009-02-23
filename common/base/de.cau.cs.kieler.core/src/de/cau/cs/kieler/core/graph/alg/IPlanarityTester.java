@@ -1,7 +1,7 @@
-package de.cau.cs.kieler.klodd.orthogonal.modules;
+package de.cau.cs.kieler.core.graph.alg;
 
 import de.cau.cs.kieler.core.alg.IAlgorithm;
-import de.cau.cs.kieler.klodd.orthogonal.structures.GraphSection;
+import de.cau.cs.kieler.core.graph.KGraphSection;
 
 /**
  * Interface for algorithms that test planarity of a biconnected graph.
@@ -18,6 +18,6 @@ public interface IPlanarityTester extends IAlgorithm {
 	 * @param biconnectedSection biconnected graph section
 	 * @return true if the input graph is planar
 	 */
-	public boolean isPlanar(GraphSection biconnectedSection);
+	public boolean isPlanar(KGraphSection biconnectedSection);
 	
 }
