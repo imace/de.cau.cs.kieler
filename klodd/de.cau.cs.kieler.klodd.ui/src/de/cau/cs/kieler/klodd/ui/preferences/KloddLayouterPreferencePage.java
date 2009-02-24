@@ -8,7 +8,6 @@ import org.eclipse.ui.IWorkbenchPreferencePage;
 
 import de.cau.cs.kieler.core.ui.util.FloatFieldEditor;
 import de.cau.cs.kieler.kiml.ui.AbstractKimlLayoutProviderPreferencePage;
-import de.cau.cs.kieler.kiml.ui.KimlUiPlugin;
 import de.cau.cs.kieler.klodd.hierarchical.HierarchicalDataflowLayoutProvider;
 import de.cau.cs.kieler.klodd.orthogonal.OrthogonalDataflowLayoutProvider;
 import de.cau.cs.kieler.klodd.ui.KloddUIPlugin;
@@ -29,7 +28,7 @@ public class KloddLayouterPreferencePage extends
 	 */
 	public KloddLayouterPreferencePage() {
 		super(KloddUIPlugin.COLLECTION_NAME, GRID);
-		setPreferenceStore(KimlUiPlugin.getDefault().getPreferenceStore());
+		setPreferenceStore(KloddUIPlugin.getDefault().getPreferenceStore());
 		setDescription(Messages.getString("klodd.ui.0")); //$NON-NLS-1$
 	}
 	
@@ -49,7 +48,7 @@ public class KloddLayouterPreferencePage extends
 				Messages.getString("klodd.ui.2"), hieraGroup); //$NON-NLS-1$
 		addField(minDistEditor);
 		
-		hieraGroup.setLayoutData(new GridData(GridData.FILL, GridData.FILL, true,
+		hieraGroup.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, true,
 				false, 2, 1));
 		GridLayout gridLayout = new GridLayout(2, true);
 		gridLayout.marginWidth = 15;
@@ -65,7 +64,7 @@ public class KloddLayouterPreferencePage extends
 				Messages.getString("klodd.ui.4"), orthoGroup); //$NON-NLS-1$
 		addField(minDistEditor);
 		
-		orthoGroup.setLayoutData(new GridData(GridData.FILL, GridData.FILL, true,
+		orthoGroup.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, true,
 				false, 2, 1));
 		gridLayout = new GridLayout(2, true);
 		gridLayout.marginWidth = 15;
