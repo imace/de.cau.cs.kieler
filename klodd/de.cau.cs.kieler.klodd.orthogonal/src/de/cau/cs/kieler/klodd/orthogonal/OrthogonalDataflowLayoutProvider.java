@@ -13,7 +13,6 @@ import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayouterInfo;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutOption;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutType;
 import de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayoutProvider;
-import de.cau.cs.kieler.kiml.layout.services.KimlLayoutServices;
 import de.cau.cs.kieler.klodd.orthogonal.impl.*;
 import de.cau.cs.kieler.klodd.orthogonal.impl.ec.EdgeInsertionECPlanarizer;
 import de.cau.cs.kieler.klodd.orthogonal.modules.*;
@@ -35,7 +34,10 @@ public class OrthogonalDataflowLayoutProvider extends
 	/** preference identifier for minimal distance */
 	public static final String PREF_MIN_DIST = "klodd.orthogonal.minDist";
 	/** default value for minimal distance */
-	public static final float DEF_MIN_DIST = 15.0f; 
+	public static final float DEF_MIN_DIST = 15.0f;
+	
+	/** the preference store for this layouter */
+	public static IKielerPreferenceStore preferenceStore;
 
 	/** the minimal distance between two nodes or edges */
 	private float minDist;
@@ -94,9 +96,6 @@ public class OrthogonalDataflowLayoutProvider extends
 	 * Sets the internally used algorithm modules to the current configuration.
 	 */
 	private void updateModules() {
-		IKielerPreferenceStore preferenceStore = KimlLayoutServices
-				.getInstance().getPreferenceStore();
-
 		if (planarizer == null)
 			planarizer = new PortConstraintsPlanarizer(
 					new EdgeInsertionECPlanarizer());
@@ -106,7 +105,10 @@ public class OrthogonalDataflowLayoutProvider extends
 			compacter = new NormalizingCompacter(new RefiningCompacter(
 					new LayeringCompacter()));
 		
-		minDist = preferenceStore.getFloat(PREF_MIN_DIST);
+		if (preferenceStore == null)
+			minDist = DEF_MIN_DIST;
+		else
+			minDist = preferenceStore.getFloat(PREF_MIN_DIST);
 	}
 	
 	/**
