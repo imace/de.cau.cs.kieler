@@ -123,7 +123,8 @@
     <eLiterals name="VERTICAL" value="2" literal="Vertical"/>
     <eLiterals name="HORIZONTAL" value="3" literal="Horizontal"/>
     <eLiterals name="FIXED_PORTS" value="4" literal="Fixed ports"/>
-    <eLiterals name="FIXED_SIZE" value="5" literal="Fixed size"/>
+    <eLiterals name="FIXED_PORT_SIDES" value="5" literal="Fixed port sides"/>
+    <eLiterals name="FIXED_SIZE" value="6" literal="Fixed size"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="KEdgeLabelPlacement">
     <eLiterals name="DEFAULT" literal="DEFAULT"/>

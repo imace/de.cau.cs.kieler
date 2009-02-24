@@ -39,6 +39,10 @@ public class LayerSweepCrossingReducer extends AbstractAlgorithm implements
 	 * @see de.cau.cs.kieler.klodd.hierarchical.modules.ICrossingReducer#reduceCrossings(de.cau.cs.kieler.klodd.hierarchical.structures.LayeredGraph)
 	 */
 	public void reduceCrossings(LayeredGraph layeredGraph) {
+		int layerCount = layeredGraph.getLayers().size();
+		int firstLayer = 0, lastLayer = layerCount - 1;
+		getMonitor().begin("Crossing reduction", 2 * (layerCount - 1));
+		
 		if (layeredGraph.areExternalPortsFixed()) {
 			// sort input and output ports by their relative position
 			List<KLayoutPort> inputPorts = new LinkedList<KLayoutPort>();
@@ -51,7 +55,6 @@ public class LayerSweepCrossingReducer extends AbstractAlgorithm implements
 			}
 			
 			// apply ports ordering to the layer ranking
-			int firstLayer = 0, lastLayer = layeredGraph.getLayers().size() - 1;
 			if (!inputPorts.isEmpty()) {
 				KLayoutPort[] sortedInputPorts = LayoutGraphUtil.sortPortsByPosition(inputPorts,
 						layeredGraph.getLayoutDirection(), false);
@@ -62,7 +65,7 @@ public class LayerSweepCrossingReducer extends AbstractAlgorithm implements
 					rank += element.getRankWidth();
 				}
 				layeredGraph.getLayers().get(firstLayer).sortConcrete();
-				firstLayer++;
+				firstLayer += 2;
 			}
 			else {
 				// find arbitrary ranking of the first layer
@@ -78,52 +81,41 @@ public class LayerSweepCrossingReducer extends AbstractAlgorithm implements
 					rank += element.getRankWidth();
 				}
 				layeredGraph.getLayers().get(lastLayer).sortConcrete();
-				lastLayer--;
+				lastLayer -= 2;
 			}
-			
-			getMonitor().begin("Crossing reduction", lastLayer - firstLayer + 1);
-			
-			// process all but the port layers and the last layer
-			ListIterator<Layer> layerIter = layeredGraph.getLayers().listIterator(firstLayer);
-			int layerIndex = firstLayer;
-			while (layerIndex < lastLayer) {
-				layerReducer.reset(getMonitor().subTask(1));
-				layerReducer.reduceCrossings(layerIter.next(), true);
-				layerIndex++;
-			}
-			
-			// order the last layer by the preceding layer and the output ports layer
-			layerReducer.reset(getMonitor().subTask(1));
-			if (lastLayer < layeredGraph.getLayers().size() - 1) {
-				layerReducer.reduceCrossings(layerIter.next());
-			}
-			else {
-				layerReducer.reduceCrossings(layerIter.next(), true);
-			}
+		}
+		else {
+			// find arbitrary ranking of the first layer
+			layeredGraph.getLayers().get(0).calcElemRanks();
 		}
 		
-		else {
-			getMonitor().begin("Crossing reduction", 2 * (layeredGraph
-					.getLayers().size() - 1));
-			
-			// find arbitrary ranking of the first layer
-			Layer firstLayer = layeredGraph.getLayers().get(0);
-			firstLayer.calcElemRanks();
-			
-			// process the other layers in forward direction
-			ListIterator<Layer> layerIter = layeredGraph.getLayers().listIterator(1);
-			while (layerIter.hasNext()) {
-				layerReducer.reset(getMonitor().subTask(1));
-				layerReducer.reduceCrossings(layerIter.next(), true);
-			}
-			
-			// process all layers again in backwards direction
-			layerIter.previous();
-			while (layerIter.hasPrevious()) {
-				layerReducer.reset(getMonitor().subTask(1));
-				layerReducer.reduceCrossings(layerIter.previous(), false);
-			}
+		// process all but the port layers and the last layer
+		ListIterator<Layer> layerIter = layeredGraph.getLayers().listIterator(1);
+		while (layerIter.nextIndex() <= lastLayer) {
+			layerReducer.reset(getMonitor().subTask(1));
+			layerReducer.reduceCrossings(layerIter.next(), true);
 		}
+		
+		if (lastLayer < layerCount - 1) {
+			// order the last layer by the preceding layer and the output ports layer
+			layerReducer.reset(getMonitor().subTask(1));
+			layerReducer.reduceCrossings(layerIter.next());
+		}
+		else
+			layerIter.previous();
+		
+		// process all but the port layers and the first layer again
+		while (layerIter.previousIndex() >= firstLayer) {
+			layerReducer.reset(getMonitor().subTask(1));
+			layerReducer.reduceCrossings(layerIter.previous(), false);
+		}
+		
+		if (firstLayer > 0) {
+			// order the first layer by the subsequent layer and the input ports layer
+			layerReducer.reset(getMonitor().subTask(1));
+			layerReducer.reduceCrossings(layerIter.previous());
+		}
+
 		getMonitor().done();
 	}
 

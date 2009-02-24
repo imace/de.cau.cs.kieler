@@ -33,11 +33,14 @@ public class BarycenterCrossingReducer extends AbstractAlgorithm implements
 				// the ports of the current element are fixed
 				List<Integer> rankList = element.getConnectionRanks(forward);
 				double barycenter = calcBarycenter(rankList);
+				if (barycenter < 0.0)
+					barycenter = element.rank;
 				abstractRanks.put(element, new Double(barycenter));
 			}
 			else {
 				// ports are not fixed, find an order for the ports
-				Map<KLayoutPort, List<Integer>> portRanks = element.getConnectionRanksByPort(forward);
+				Map<KLayoutPort, List<Integer>> portRanks = element
+						.getConnectionRanksByPort(forward);
 				Map<KLayoutPort, Double> abstractPortRanks = new HashMap<KLayoutPort, Double>();
 				List<KLayoutPort> ports = new LinkedList<KLayoutPort>(portRanks.keySet());
 				double sum = 0.0;
@@ -55,8 +58,8 @@ public class BarycenterCrossingReducer extends AbstractAlgorithm implements
 					}
 				}
 				if (ports.isEmpty()) {
-					// elements with no connections are put together on one side
-					abstractRanks.put(element, new Double(-1.0));
+					// elements with no connections should stay where they are
+					abstractRanks.put(element, new Double(element.rank));
 				}
 				else {
 					element.sortPorts(abstractPortRanks, forward, false);
@@ -81,11 +84,14 @@ public class BarycenterCrossingReducer extends AbstractAlgorithm implements
 				// the ports of the current element are fixed
 				double barycenter = calcBarycenter(element.getConnectionRanks(true),
 						element.getConnectionRanks(false));
+				if (barycenter < 0.0)
+					barycenter = element.rank;
 				abstractRanks.put(element, new Double(barycenter));
 			}
 			else {
 				// ports are not fixed, find an order for the ports
-				Map<KLayoutPort, List<Integer>> forwardRanks = element.getConnectionRanksByPort(true);
+				Map<KLayoutPort, List<Integer>> forwardRanks = element
+						.getConnectionRanksByPort(true);
 				Map<KLayoutPort, List<Integer>> backwardsRanks = element.getConnectionRanksByPort(false);
 				Map<KLayoutPort, Double> abstractPortRanks = new HashMap<KLayoutPort, Double>();
 				List<KLayoutPort> ports = new LinkedList<KLayoutPort>(forwardRanks.keySet());
@@ -104,8 +110,8 @@ public class BarycenterCrossingReducer extends AbstractAlgorithm implements
 					}
 				}
 				if (ports.isEmpty()) {
-					// elements with no connections are put together on one side
-					abstractRanks.put(element, new Double(-1.0));
+					// elements with no connections should stay where they are
+					abstractRanks.put(element, new Double(element.rank));
 				}
 				else {
 					element.sortPorts(abstractPortRanks, false, true);

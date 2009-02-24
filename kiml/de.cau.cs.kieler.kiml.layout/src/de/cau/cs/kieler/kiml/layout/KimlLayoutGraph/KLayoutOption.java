@@ -65,6 +65,14 @@ public enum KLayoutOption implements Enumerator {
 	 * @ordered
 	 */
 	FIXED_PORTS(4, "FIXED_PORTS", "Fixed ports"), /**
+	 * The '<em><b>FIXED PORT SIDES</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #FIXED_PORT_SIDES_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	FIXED_PORT_SIDES(5, "FIXED_PORT_SIDES", "Fixed port sides"), /**
 	 * The '<em><b>FIXED SIZE</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -72,7 +80,7 @@ public enum KLayoutOption implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	FIXED_SIZE(5, "FIXED_SIZE", "Fixed size");
+	FIXED_SIZE(6, "FIXED_SIZE", "Fixed size");
 
 	/**
 	 * The '<em><b>DEFAULT</b></em>' literal value.
@@ -150,6 +158,21 @@ public enum KLayoutOption implements Enumerator {
 	public static final int FIXED_PORTS_VALUE = 4;
 
 	/**
+	 * The '<em><b>FIXED PORT SIDES</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>FIXED PORT SIDES</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #FIXED_PORT_SIDES
+	 * @model literal="Fixed port sides"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int FIXED_PORT_SIDES_VALUE = 5;
+
+	/**
 	 * The '<em><b>FIXED SIZE</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -162,7 +185,7 @@ public enum KLayoutOption implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int FIXED_SIZE_VALUE = 5;
+	public static final int FIXED_SIZE_VALUE = 6;
 
 	/**
 	 * An array of all the '<em><b>KLayout Option</b></em>' enumerators.
@@ -177,6 +200,7 @@ public enum KLayoutOption implements Enumerator {
 			VERTICAL,
 			HORIZONTAL,
 			FIXED_PORTS,
+			FIXED_PORT_SIDES,
 			FIXED_SIZE,
 		};
 
@@ -233,6 +257,7 @@ public enum KLayoutOption implements Enumerator {
 			case VERTICAL_VALUE: return VERTICAL;
 			case HORIZONTAL_VALUE: return HORIZONTAL;
 			case FIXED_PORTS_VALUE: return FIXED_PORTS;
+			case FIXED_PORT_SIDES_VALUE: return FIXED_PORT_SIDES;
 			case FIXED_SIZE_VALUE: return FIXED_SIZE;
 		}
 		return null;

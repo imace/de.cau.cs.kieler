@@ -1267,6 +1267,7 @@ public class KimlLayoutGraphPackageImpl extends EPackageImpl implements KimlLayo
 		addEEnumLiteral(kLayoutOptionEEnum, KLayoutOption.VERTICAL);
 		addEEnumLiteral(kLayoutOptionEEnum, KLayoutOption.HORIZONTAL);
 		addEEnumLiteral(kLayoutOptionEEnum, KLayoutOption.FIXED_PORTS);
+		addEEnumLiteral(kLayoutOptionEEnum, KLayoutOption.FIXED_PORT_SIDES);
 		addEEnumLiteral(kLayoutOptionEEnum, KLayoutOption.FIXED_SIZE);
 
 		initEEnum(kEdgeLabelPlacementEEnum, KEdgeLabelPlacement.class, "KEdgeLabelPlacement");

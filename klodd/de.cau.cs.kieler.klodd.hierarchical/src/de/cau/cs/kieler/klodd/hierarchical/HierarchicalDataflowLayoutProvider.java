@@ -12,7 +12,10 @@ import de.cau.cs.kieler.core.graph.alg.DFSCycleRemover;
 import de.cau.cs.kieler.core.graph.alg.ICycleRemover;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPoint;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPortPlacement;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPortType;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphFactory;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayouterInfo;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutOption;
@@ -147,8 +150,32 @@ public class HierarchicalDataflowLayoutProvider extends
 	 */
 	private void setNodeSizes(KLayoutNode parentNode) {
 		for (KLayoutNode node : parentNode.getChildNodes()) {
-			if (!node.getLayout().getLayoutOptions().contains(KLayoutOption.FIXED_SIZE)
-					&& node.getChildNodes().isEmpty()) {
+			// set port sides if not fixed
+			if (node.getChildNodes().isEmpty()
+					&& !node.getLayout().getLayoutOptions().contains(
+					KLayoutOption.FIXED_PORTS)
+					&& !node.getLayout().getLayoutOptions().contains(
+					KLayoutOption.FIXED_PORT_SIDES)) {
+				if (parentNode.getLayout().getLayoutOptions().contains(
+						KLayoutOption.VERTICAL)) {
+					for (KLayoutPort port : node.getPorts()) {
+						port.getLayout().setPlacement(port.getType()
+								== KPortType.INPUT ? KPortPlacement.NORTH
+								: KPortPlacement.SOUTH);
+					}
+				}
+				else {
+					for (KLayoutPort port : node.getPorts()) {
+						port.getLayout().setPlacement(port.getType()
+								== KPortType.INPUT ? KPortPlacement.WEST
+								: KPortPlacement.EAST);
+					}
+				}
+			}
+			// set node sizes if not fixed
+			if (node.getChildNodes().isEmpty()
+					&& !node.getLayout().getLayoutOptions().contains(
+					KLayoutOption.FIXED_SIZE)) {
 				LayoutGraphUtil.resizeNode(node);
 			}
 		}

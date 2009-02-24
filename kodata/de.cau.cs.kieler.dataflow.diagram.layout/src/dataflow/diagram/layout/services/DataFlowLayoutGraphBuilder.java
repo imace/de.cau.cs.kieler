@@ -70,13 +70,10 @@ public class DataFlowLayoutGraphBuilder extends KimlAbstractLayoutGraphBuilder {
 	private boolean fixedInnerPortsPref;
 	/** preference: preserve box size for empty boxes */
 	private boolean fixedNodeSizePref;
-	/**
-	 * preference: strict port side: left for input ports, right for output
-	 * ports
-	 */
-	private boolean strictPortSide;
+	/** preference: fixed port sides for non-empty boxes */
+	private boolean fixedPortSidesPref;
 	/** preference: alternating layout direction */
-	private boolean alternateHV;
+	private boolean alternateHVPref;
 
 	private Map<BorderedBorderItemEditPart, KLayoutPort> borderItem2PortMapping = new HashMap<BorderedBorderItemEditPart, KLayoutPort>();
 
@@ -111,7 +108,7 @@ public class DataFlowLayoutGraphBuilder extends KimlAbstractLayoutGraphBuilder {
 			topGroupLabel.setText(modelPart.getDiagramView().getName());
 			layoutGraph.setLabel(topGroupLabel);
 			// build the whole graph structure
-			if (alternateHV)
+			if (alternateHVPref)
 				layoutDirection = KLayoutOption.VERTICAL;
 			buildLayoutGraphRecursively(modelPart.getChildren(), layoutGraph,
 					layoutDirection);
@@ -246,7 +243,7 @@ public class DataFlowLayoutGraphBuilder extends KimlAbstractLayoutGraphBuilder {
 		nodeLayout.getLayoutOptions().add(layoutDirection);
 		childNode.setLayout(nodeLayout);
 		// switch layout direction if needed
-		if (alternateHV) {
+		if (alternateHVPref) {
 			if (layoutDirection == KLayoutOption.VERTICAL)
 				layoutDirection = KLayoutOption.HORIZONTAL;
 			else
@@ -316,13 +313,15 @@ public class DataFlowLayoutGraphBuilder extends KimlAbstractLayoutGraphBuilder {
 			}
 		}
 
-		// set fixed ports option
+		// set layout options
 		if (subChildren != null && !subChildren.isEmpty()) {
 			if (fixedOuterPortsPref)
 				nodeLayout.getLayoutOptions().add(KLayoutOption.FIXED_PORTS);
 		} else {
 			if (fixedInnerPortsPref)
 				nodeLayout.getLayoutOptions().add(KLayoutOption.FIXED_PORTS);
+			else if (fixedPortSidesPref)
+				nodeLayout.getLayoutOptions().add(KLayoutOption.FIXED_PORT_SIDES);
 			if (fixedNodeSizePref)
 				nodeLayout.getLayoutOptions().add(KLayoutOption.FIXED_SIZE);
 		}
@@ -463,30 +462,29 @@ public class DataFlowLayoutGraphBuilder extends KimlAbstractLayoutGraphBuilder {
 	private KPortPlacement getPortPlacement(KNodeLayout nodeLayout,
 			KPortLayout portLayout, KPortType portType,
 			KLayoutOption layoutDirection) {
-		if (!strictPortSide) {
-			// determine port placement from port position
-			float nodeWidth = nodeLayout.getSize().getWidth();
-			float nodeHeight = nodeLayout.getSize().getHeight();
-			float relx = (portLayout.getLocation().getX() + portLayout
-					.getSize().getWidth() / 2)
-					- (nodeWidth / 2);
-			float rely = (portLayout.getLocation().getY() + portLayout
-					.getSize().getHeight() / 2)
-					- (nodeHeight / 2);
+		// determine port placement from port position
+		float nodeWidth = nodeLayout.getSize().getWidth();
+		float nodeHeight = nodeLayout.getSize().getHeight();
+		float relx = (portLayout.getLocation().getX() + portLayout
+				.getSize().getWidth() / 2)
+				- (nodeWidth / 2);
+		float rely = (portLayout.getLocation().getY() + portLayout
+				.getSize().getHeight() / 2)
+				- (nodeHeight / 2);
 
-			if (relx > nodeWidth / 4 && rely > -nodeHeight / 2 + 3
-					&& rely < nodeHeight / 2 - 3)
-				return KPortPlacement.EAST;
-			if (relx < -nodeWidth / 4 && rely > -nodeHeight / 2 + 3
-					&& rely < nodeHeight / 2 - 3)
-				return KPortPlacement.WEST;
-			if (rely > nodeHeight / 4 && relx > -nodeWidth / 2 + 3
-					&& relx < nodeWidth / 2 - 3)
-				return KPortPlacement.SOUTH;
-			if (rely < -nodeHeight / 4 && relx > -nodeWidth / 2 + 3
-					&& relx < nodeWidth / 2 - 3)
-				return KPortPlacement.NORTH;
-		}
+		if (relx > nodeWidth / 4 && rely > -nodeHeight / 2 + 3
+				&& rely < nodeHeight / 2 - 3)
+			return KPortPlacement.EAST;
+		if (relx < -nodeWidth / 4 && rely > -nodeHeight / 2 + 3
+				&& rely < nodeHeight / 2 - 3)
+			return KPortPlacement.WEST;
+		if (rely > nodeHeight / 4 && relx > -nodeWidth / 2 + 3
+				&& relx < nodeWidth / 2 - 3)
+			return KPortPlacement.SOUTH;
+		if (rely < -nodeHeight / 4 && relx > -nodeWidth / 2 + 3
+				&& relx < nodeWidth / 2 - 3)
+			return KPortPlacement.NORTH;
+
 		// determine port placement from port type
 		if (layoutDirection == KLayoutOption.VERTICAL) {
 			if (portType == KPortType.INPUT)
@@ -604,21 +602,22 @@ public class DataFlowLayoutGraphBuilder extends KimlAbstractLayoutGraphBuilder {
 	 */
 	@Override
 	protected void updatePreferences() {
-
 		// load layout preferences
 		IPreferenceStore preferenceStore = DataflowDiagramLayoutPlugin
 				.getDefault().getPreferenceStore();
 		fixedOuterPortsPref = preferenceStore
 				.getBoolean(DiagramLayoutPreferencePage.FIXED_OUTER_PORTS);
-		fixedInnerPortsPref = preferenceStore
-				.getBoolean(DiagramLayoutPreferencePage.FIXED_INNER_PORTS);
 		fixedNodeSizePref = preferenceStore
 				.getBoolean(DiagramLayoutPreferencePage.FIXED_NODE_SIZE);
-		strictPortSide = preferenceStore
-				.getBoolean(DiagramLayoutPreferencePage.STRICT_PORT_SIDE);
-		alternateHV = preferenceStore.getString(
-				DiagramLayoutPreferencePage.LAYOUT_DIRECTION).equals("hv"); //$NON-NLS-1$
-
+		fixedInnerPortsPref = preferenceStore.getString(
+				DiagramLayoutPreferencePage.PORT_CONSTRAINTS).equals(
+				DiagramLayoutPreferencePage.VAL_FIXED_PORTS);
+		fixedPortSidesPref = preferenceStore.getString(
+				DiagramLayoutPreferencePage.PORT_CONSTRAINTS).equals(
+						DiagramLayoutPreferencePage.VAL_FIXED_SIDES);
+		alternateHVPref = preferenceStore.getString(
+				DiagramLayoutPreferencePage.LAYOUT_DIRECTION).equals(
+				DiagramLayoutPreferencePage.VAL_ALTERNATING);
 	}
 
 	/* (non-Javadoc)
