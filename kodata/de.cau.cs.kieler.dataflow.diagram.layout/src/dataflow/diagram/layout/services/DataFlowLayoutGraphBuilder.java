@@ -49,13 +49,16 @@ import de.cau.cs.kieler.kiml.ui.helpers.KimlGMFLayoutHintHelper;
 public class DataFlowLayoutGraphBuilder extends KimlAbstractLayoutGraphBuilder {
 
 	/** inset value to be used for the top side of each node */
-	private static final float INSET_TOP = 25.0f;
+	private static final float INSET_TOP = 5.0f;
 	/** inset value to be used for the bottom side of each node */
 	private static final float INSET_BOTTOM = 5.0f;
 	/** inset value to be used for the left side of each node */
 	private static final float INSET_LEFT = 5.0f;
 	/** inset value to be used for the right side of each node */
 	private static final float INSET_RIGHT = 5.0f;
+	
+	/** default height for node labels, to be added to the top inset */
+	private static final float DEFAULT_LABEL_HEIGHT = 15.0f;
 
 	/**
 	 * Definition of possible edge types in a dataflow diagram with operators.
@@ -233,7 +236,7 @@ public class DataFlowLayoutGraphBuilder extends KimlAbstractLayoutGraphBuilder {
 		KInsets insets = KimlLayoutGraphFactory.eINSTANCE.createKInsets();
 		insets.setLeft(INSET_LEFT);
 		insets.setRight(INSET_RIGHT);
-		insets.setTop(INSET_TOP);
+		insets.setTop(INSET_TOP + DEFAULT_LABEL_HEIGHT);
 		insets.setBottom(INSET_BOTTOM);
 		nodeLayout.setInsets(insets);
 		nodeLayout.setLayouterName(KimlGMFLayoutHintHelper
@@ -310,6 +313,8 @@ public class DataFlowLayoutGraphBuilder extends KimlAbstractLayoutGraphBuilder {
 						((WrappingLabel) boxNameEditPart.getFigure())
 								.getTextFigure(), nodeLayout.getLocation());
 				nodeLabel.setLabelLayout(labelLayout);
+				insets.setTop(INSET_TOP + nodeLabel.getLabelLayout()
+						.getSize().getHeight());
 			}
 		}
 
