@@ -10,6 +10,9 @@
       <actualFigure
           xsi:type="gmfgraph:Rectangle"
           name="BoxFigure">
+        <layout
+            xsi:type="gmfgraph:CustomLayout"
+            qualifiedClassName="dataflow.custom.diagram.TitledToolbarLayout"/>
         <backgroundColor
             xsi:type="gmfgraph:RGBColor"
             red="250"
