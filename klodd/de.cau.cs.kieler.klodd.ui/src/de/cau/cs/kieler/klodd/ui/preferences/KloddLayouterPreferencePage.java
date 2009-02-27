@@ -1,5 +1,7 @@
 package de.cau.cs.kieler.klodd.ui.preferences;
 
+import org.eclipse.jface.preference.FieldEditor;
+import org.eclipse.jface.preference.RadioGroupFieldEditor;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -47,6 +49,16 @@ public class KloddLayouterPreferencePage extends
 				HierarchicalDataflowLayoutProvider.PREF_MIN_DIST,
 				Messages.getString("klodd.ui.2"), hieraGroup); //$NON-NLS-1$
 		addField(minDistEditor);
+		
+		FieldEditor cycleRemEditor = new RadioGroupFieldEditor(
+				HierarchicalDataflowLayoutProvider.PREF_CYCLE_REM,
+				Messages.getString("klodd.ui.5"), 1, new String[][] { //$NON-NLS-1$
+					{ Messages.getString("klodd.ui.6"), //$NON-NLS-1$
+						HierarchicalDataflowLayoutProvider.VAL_DFS_CYCLE_REM},
+					{ Messages.getString("klodd.ui.7"), //$NON-NLS-1$
+						HierarchicalDataflowLayoutProvider.VAL_GREEDY_CYCLE_REM}
+				}, hieraGroup, false);
+		addField(cycleRemEditor);
 		
 		hieraGroup.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, true,
 				false, 2, 1));
