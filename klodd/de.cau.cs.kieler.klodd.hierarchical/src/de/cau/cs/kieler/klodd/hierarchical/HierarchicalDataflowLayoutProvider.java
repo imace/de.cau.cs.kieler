@@ -9,6 +9,7 @@ import de.cau.cs.kieler.core.alg.IKielerProgressMonitor;
 import de.cau.cs.kieler.core.graph.KEdge;
 import de.cau.cs.kieler.core.graph.KGraph;
 import de.cau.cs.kieler.core.graph.alg.DFSCycleRemover;
+import de.cau.cs.kieler.core.graph.alg.GreedyCycleRemover;
 import de.cau.cs.kieler.core.graph.alg.ICycleRemover;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
@@ -44,6 +45,12 @@ public class HierarchicalDataflowLayoutProvider extends
 	public static final String PREF_MIN_DIST = "klodd.hierarchical.minDist";
 	/** default value for minimal distance */
 	public static final float DEF_MIN_DIST = 15.0f; 
+	/** preference identifier for cycle remover module */
+	public static final String PREF_CYCLE_REM = "klodd.hierarchical.cycleRem";
+	/** value for DFS cycle remover module */
+	public static final String VAL_DFS_CYCLE_REM = "dfs";
+	/** value for greedy cycle remover module */
+	public static final String VAL_GREEDY_CYCLE_REM = "greedy";
 
 	/** the preference store for this layouter */
 	public static IKielerPreferenceStore preferenceStore;
@@ -92,7 +99,7 @@ public class HierarchicalDataflowLayoutProvider extends
 			layeredGraph.createConnections(kGraph);
 			// optimize the order of nodes in each layer
 			crossingReducer.reset(progressMonitor.subTask(15));
-			crossingReducer.reduceCrossings(layeredGraph);
+			try{crossingReducer.reduceCrossings(layeredGraph);}catch(RuntimeException e){e.printStackTrace(); throw e;}
 			// determine a placement for all edge endpoints
 			nodewiseEdgePlacer.reset(progressMonitor.subTask(10));
 			nodewiseEdgePlacer.placeEdges(layeredGraph);
@@ -125,8 +132,16 @@ public class HierarchicalDataflowLayoutProvider extends
 	 * Sets the internally used algorithm modules to the current configuration.
 	 */
 	private void updateModules() {
-		if (cycleRemover == null)
-			cycleRemover = new DFSCycleRemover();
+		if (preferenceStore != null && preferenceStore.getString(PREF_CYCLE_REM)
+				.equals(VAL_DFS_CYCLE_REM)) {
+			if (!(cycleRemover instanceof DFSCycleRemover))
+				cycleRemover = new DFSCycleRemover();
+		}
+		else {
+			if (!(cycleRemover instanceof GreedyCycleRemover))
+				cycleRemover = new GreedyCycleRemover();
+		}
+		
 		if (layerAssigner == null)
 			layerAssigner = new LongestPathLayerAssigner();
 		if (crossingReducer == null)
@@ -139,10 +154,10 @@ public class HierarchicalDataflowLayoutProvider extends
 		if (edgeRouter == null)
 			edgeRouter = new RectilinearEdgeRouter(new SortingLayerwiseEdgePlacer());
 		
-		if (preferenceStore == null)
-			minDist = DEF_MIN_DIST;
-		else
+		if (preferenceStore != null)
 			minDist = preferenceStore.getFloat(PREF_MIN_DIST);
+		else
+			minDist = DEF_MIN_DIST;
 	}
 	
 	/**
