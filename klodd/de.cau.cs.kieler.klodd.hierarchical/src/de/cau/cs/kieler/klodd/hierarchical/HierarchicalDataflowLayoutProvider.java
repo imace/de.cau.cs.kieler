@@ -99,7 +99,7 @@ public class HierarchicalDataflowLayoutProvider extends
 			layeredGraph.createConnections(kGraph);
 			// optimize the order of nodes in each layer
 			crossingReducer.reset(progressMonitor.subTask(15));
-			try{crossingReducer.reduceCrossings(layeredGraph);}catch(RuntimeException e){e.printStackTrace(); throw e;}
+			crossingReducer.reduceCrossings(layeredGraph);
 			// determine a placement for all edge endpoints
 			nodewiseEdgePlacer.reset(progressMonitor.subTask(10));
 			nodewiseEdgePlacer.placeEdges(layeredGraph);
