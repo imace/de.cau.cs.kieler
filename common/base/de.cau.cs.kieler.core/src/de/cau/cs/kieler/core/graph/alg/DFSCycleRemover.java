@@ -60,7 +60,6 @@ public class DFSCycleRemover extends AbstractCycleRemover {
 					if (targetNode.rank > 0 && targetNode.id != node.id) {
 						// a cycle was found, break it
 						reversedEdges.add(edgeEntry.edge);
-						edgeEntry.edge.rank = ICycleRemover.REVERSED;
 					}
 				}
 				else {

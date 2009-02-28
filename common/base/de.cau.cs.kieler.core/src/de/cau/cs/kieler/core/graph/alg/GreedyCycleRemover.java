@@ -98,6 +98,8 @@ public class GreedyCycleRemover extends AbstractCycleRemover {
 		for (KEdge edge : graph.edges) {
 			if (edge.source.rank > edge.target.rank)
 				reversedEdges.add(edge);
+			else
+				edge.rank = 0;
 		}
 		
 		// reverse all marked edges

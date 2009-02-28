@@ -55,6 +55,7 @@ public abstract class AbstractCycleRemover extends AbstractAlgorithm
 	 */
 	protected void reverseEdges() {
 		for (KEdge edge : reversedEdges) {
+			edge.rank = ICycleRemover.REVERSED;
 			// change incidence type at source and target
 			ListIterator<KNode.IncEntry> sourceIter = edge.source
 					.getIterator(edge, true);
