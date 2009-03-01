@@ -39,13 +39,15 @@ public class BalancingLayerAssigner extends AbstractAlgorithm implements
 				graph, parentNode);
 		
 		// balance layer assignment of each element in the layering
-		ListIterator<Layer> layerIter = layeredGraph.getLayers().listIterator(1);
-		while (layerIter.hasNext()) {
-			Layer layer = layerIter.next();
-			if (layer.height > 0) {
-				ListIterator<LayerElement> elemIter = layer.getElements().listIterator();
-				while (elemIter.hasNext()) {
-					balanceElement(layeredGraph, elemIter);
+		if (layeredGraph.getLayers().size() >= 3) {
+			ListIterator<Layer> layerIter = layeredGraph.getLayers().listIterator(2);
+			while (layerIter.hasNext()) {
+				Layer layer = layerIter.next();
+				if (layer.height > 0) {
+					ListIterator<LayerElement> elemIter = layer.getElements().listIterator();
+					while (elemIter.hasNext()) {
+						balanceElement(layeredGraph, elemIter);
+					}
 				}
 			}
 		}
