@@ -51,6 +51,12 @@ public class HierarchicalDataflowLayoutProvider extends
 	public static final String VAL_DFS_CYCLE_REM = "dfs";
 	/** value for greedy cycle remover module */
 	public static final String VAL_GREEDY_CYCLE_REM = "greedy";
+	/** preference identifier for layer assignment module */
+	public static final String PREF_LAYER_ASS = "klodd.hierarchical.layerAss";
+	/** value for longest path layer assignment module */
+	public static final String VAL_LONGP_LAYER_ASS = "longp";
+	/** value for balancing layer assignment module */
+	public static final String VAL_BAL_LAYER_ASS = "bal";
 
 	/** the preference store for this layouter */
 	public static IKielerPreferenceStore preferenceStore;
@@ -132,6 +138,7 @@ public class HierarchicalDataflowLayoutProvider extends
 	 * Sets the internally used algorithm modules to the current configuration.
 	 */
 	private void updateModules() {
+		// choose cycle remover module
 		if (preferenceStore != null && preferenceStore.getString(PREF_CYCLE_REM)
 				.equals(VAL_DFS_CYCLE_REM)) {
 			if (!(cycleRemover instanceof DFSCycleRemover))
@@ -142,8 +149,18 @@ public class HierarchicalDataflowLayoutProvider extends
 				cycleRemover = new GreedyCycleRemover();
 		}
 		
-		if (layerAssigner == null)
-			layerAssigner = new LongestPathLayerAssigner();
+		// choose layer assignment module
+		if (preferenceStore != null && preferenceStore.getString(PREF_LAYER_ASS)
+				.equals(VAL_LONGP_LAYER_ASS)) {
+			if (!(layerAssigner instanceof LongestPathLayerAssigner))
+				layerAssigner = new LongestPathLayerAssigner();
+		}
+		else {
+			if (!(layerAssigner instanceof BalancingLayerAssigner))
+				layerAssigner = new BalancingLayerAssigner(
+						new LongestPathLayerAssigner());
+		}
+		
 		if (crossingReducer == null)
 			crossingReducer = new LayerSweepCrossingReducer(
 					new BarycenterCrossingReducer());

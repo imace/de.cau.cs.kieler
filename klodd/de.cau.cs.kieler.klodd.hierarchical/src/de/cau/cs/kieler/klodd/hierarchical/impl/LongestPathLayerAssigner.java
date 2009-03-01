@@ -1,5 +1,7 @@
 package de.cau.cs.kieler.klodd.hierarchical.impl;
 
+import java.util.ListIterator;
+
 import de.cau.cs.kieler.core.alg.AbstractAlgorithm;
 import de.cau.cs.kieler.core.graph.KGraph;
 import de.cau.cs.kieler.core.graph.KNode;
@@ -39,6 +41,21 @@ public class LongestPathLayerAssigner extends AbstractAlgorithm implements
 		// process child nodes
 		for (KNode node : kGraph.nodes) {
 			visit(node);
+		}
+		
+		// fill rank information for all layers
+		ListIterator<Layer> layerIter = layeredGraph.getLayers().listIterator();
+		Layer currentLayer = layerIter.next();
+		int rank = currentLayer.rank;
+		if (rank == Layer.UNDEF_RANK) {
+			rank = 1;
+			currentLayer.rank = rank;
+		}
+		while (layerIter.hasNext()) {
+			Layer nextLayer = layerIter.next();
+			nextLayer.rank = ++rank;
+			currentLayer.next = nextLayer;
+			currentLayer = nextLayer;
 		}
 		
 		getMonitor().done();

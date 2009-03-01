@@ -146,6 +146,17 @@ public class LayerElement {
 	}
 	
 	/**
+	 * Set a new layer for this element. The element is added to the
+	 * new layer.
+	 * 
+	 * @param newLayer the new layer
+	 */
+	public void setLayer(Layer newLayer) {
+		this.layer = newLayer;
+		newLayer.getElements().add(this);
+	}
+	
+	/**
 	 * Gets the outgoing edges of the contained object.
 	 * 
 	 * @return the list of outgoing edges, or null if the object is an edge
@@ -346,6 +357,15 @@ public class LayerElement {
 	 */
 	public Object getElemObj() {
 		return elemObj;
+	}
+	
+	/**
+	 * Gets the KIELER node associated with this layer element.
+	 * 
+	 * @return the KIELER node
+	 */
+	public KNode getKNode() {
+		return kNode;
 	}
 
 	/**

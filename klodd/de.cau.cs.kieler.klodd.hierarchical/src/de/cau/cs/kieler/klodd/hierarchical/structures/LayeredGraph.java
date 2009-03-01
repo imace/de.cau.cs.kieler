@@ -172,42 +172,13 @@ public class LayeredGraph {
 	}
 
 	/**
-	 * Fills rank and height information for all layers, creates connections
-	 * between layer elements and creates long edges. This method should be
-	 * called after all nodes and ports have been put into the layered graph.
+	 * Creates connections between layer elements and creates long edges.
+	 * This method should be called after all nodes and ports have been
+	 * put into the layered graph.
 	 * 
 	 * @param kGraph acyclic version of the graph
 	 */
 	public void createConnections(KGraph kGraph) {
-		int layerCount = layers.size();
-		// fill rank information for all layers
-		ListIterator<Layer> layerIter = layers.listIterator();
-		Layer currentLayer = layerIter.next();
-		int rank = currentLayer.rank;
-		if (rank == Layer.UNDEF_RANK) {
-			rank = 1;
-			currentLayer.rank = rank;
-		}
-		while (layerIter.hasNext()) {
-			Layer nextLayer = layerIter.next();
-			nextLayer.rank = ++rank;
-			currentLayer.next = nextLayer;
-			currentLayer = nextLayer;
-		}
-		
-		// fill height information for all layers
-		layerIter = layers.listIterator(layerCount);
-		currentLayer = layerIter.previous();
-		int height = currentLayer.height;
-		if (height == Layer.UNDEF_HEIGHT) {
-			height = 1;
-			currentLayer.height = height;
-		}
-		while (layerIter.hasPrevious()) {
-			layerIter.previous().height = ++height;
-		}
-		
-		// create connections between layer elements
 		for (Layer layer : layers) {
 			List<LayerElement> elements = layer.getElements();
 			for (LayerElement element : elements) {
@@ -219,22 +190,22 @@ public class LayeredGraph {
 				if (outgoingEdges != null) {
 					for (KEdge edge : outgoingEdges) {
 						KLayoutEdge layoutEdge = (KLayoutEdge)edge.object;
-						KLayoutNode targetGroup;
+						KLayoutNode targetNode;
 						KLayoutPort sourcePort, targetPort;
 						if (edge.rank == ICycleRemover.REVERSED) {
-							targetGroup = layoutEdge.getSource();
+							targetNode = layoutEdge.getSource();
 							sourcePort = layoutEdge.getTargetPort();
 							targetPort = layoutEdge.getSourcePort();
 						}
 						else {
-							targetGroup = layoutEdge.getTarget();
+							targetNode = layoutEdge.getTarget();
 							sourcePort = layoutEdge.getSourcePort();
 							targetPort = layoutEdge.getTargetPort();
 						}
 						
-						if (targetGroup != null) {
+						if (targetNode != null) {
 							createConnection(element,
-									obj2LayerElemMap.get(targetGroup),
+									obj2LayerElemMap.get(targetNode),
 									layoutEdge, sourcePort, targetPort);
 						}
 						else if (targetPort != null) {
