@@ -27,6 +27,8 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 				HierarchicalDataflowLayoutProvider.DEF_MIN_DIST);
 		store.setDefault(HierarchicalDataflowLayoutProvider.PREF_CYCLE_REM,
 				HierarchicalDataflowLayoutProvider.VAL_GREEDY_CYCLE_REM);
+		store.setDefault(HierarchicalDataflowLayoutProvider.PREF_LAYER_ASS,
+				HierarchicalDataflowLayoutProvider.VAL_BAL_LAYER_ASS);
 		// initialize options for orthogonal layout
 		store.setDefault(OrthogonalDataflowLayoutProvider.LAYOUTER_NAME, true);
 		store.setDefault(OrthogonalDataflowLayoutProvider.PREF_MIN_DIST,

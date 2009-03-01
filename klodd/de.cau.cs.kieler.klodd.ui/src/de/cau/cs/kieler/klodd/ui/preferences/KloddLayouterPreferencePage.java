@@ -60,6 +60,16 @@ public class KloddLayouterPreferencePage extends
 				}, hieraGroup, false);
 		addField(cycleRemEditor);
 		
+		FieldEditor layerAssEditor = new RadioGroupFieldEditor(
+				HierarchicalDataflowLayoutProvider.PREF_LAYER_ASS,
+				Messages.getString("klodd.ui.8"), 1, new String[][] { //$NON-NLS-1$
+					{ Messages.getString("klodd.ui.9"), //$NON-NLS-1$
+						HierarchicalDataflowLayoutProvider.VAL_LONGP_LAYER_ASS},
+					{ Messages.getString("klodd.ui.10"), //$NON-NLS-1$
+						HierarchicalDataflowLayoutProvider.VAL_BAL_LAYER_ASS}
+				}, hieraGroup, false);
+		addField(layerAssEditor);
+		
 		hieraGroup.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, true,
 				false, 2, 1));
 		GridLayout gridLayout = new GridLayout(2, true);
