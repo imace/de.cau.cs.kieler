@@ -104,7 +104,7 @@
   </labels>
   <labels
       name="EdgeLabel"
-      figure="EdgeSplineFigure"
+      figure="EdgeFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.2/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.1/@accessors.0"/>
 </gmfgraph:Canvas>

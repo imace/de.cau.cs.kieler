@@ -7,8 +7,7 @@ Bundle-ClassPath: .
 Bundle-Activator: hierarchymealy.provider.MealyMachineEditPlugin$Implementation
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: hierarchymealy.provider
+Export-Package: de.cau.cs.kieler.hierarchymealy.provider
 Require-Bundle: org.eclipse.core.runtime,
  de.cau.cs.kieler.mealyhierarchy.emf;visibility:=reexport,
  org.eclipse.emf.edit;visibility:=reexport

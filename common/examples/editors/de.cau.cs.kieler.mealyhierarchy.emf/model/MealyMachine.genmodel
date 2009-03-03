@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <genmodel:GenModel xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
-    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/edu.unikiel.rtsys.mealyhierarchy.emf/src"
-    modelPluginID="edu.unikiel.rtsys.mealyhierarchy.emf" modelName="MealyMachine"
-    importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0" copyrightFields="false">
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/de.cau.cs.kieler.mealyhierarchy.emf/src"
+    editDirectory="/de.cau.cs.kieler.mealyhierarchy.emf.edit/src" editorDirectory="/de.cau.cs.kieler.mealyhierarchy.emf.editor/src"
+    modelPluginID="de.cau.cs.kieler.mealyhierarchy.emf" modelName="MealyMachine" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="6.0" copyrightFields="false">
   <foreignModel>MealyMachine.ecore</foreignModel>
-  <genPackages prefix="Mealy" disposableProviderFactory="true" ecorePackage="MealyMachine.ecore#/">
+  <genPackages prefix="Mealy" basePackage="de.cau.cs.kieler" disposableProviderFactory="true"
+      ecorePackage="MealyMachine.ecore#/">
     <genClasses ecoreClass="MealyMachine.ecore#//HierarchyMealyMachine">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MealyMachine.ecore#//HierarchyMealyMachine/machineName"/>
     </genClasses>
