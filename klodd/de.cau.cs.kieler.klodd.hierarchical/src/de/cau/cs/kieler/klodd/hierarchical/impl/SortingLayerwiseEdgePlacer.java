@@ -26,7 +26,7 @@ public class SortingLayerwiseEdgePlacer extends AbstractAlgorithm implements
 		ILayerwiseEdgePlacer {
 
 	/**
-	 * 
+	 * Routing slots used for sorting.
 	 */
 	private class SortableRoutingSlot extends RoutingSlot {
 		public boolean outgoingAtStart = false, outgoingAtEnd = false;

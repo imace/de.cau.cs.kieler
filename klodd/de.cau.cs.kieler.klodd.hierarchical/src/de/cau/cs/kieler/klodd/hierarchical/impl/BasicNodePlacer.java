@@ -186,14 +186,10 @@ public class BasicNodePlacer extends AbstractAlgorithm implements INodePlacer {
 				KDimension elemDim = element.getRealDim();
 				element.setCrosswisePos(newPos, minDist);
 				float totalCrosswiseDim = element.getTotalCrosswiseDim(minDist);
-				if (layoutDirection == KLayoutOption.VERTICAL) {
-					layer.crosswiseDim = newPos + totalCrosswiseDim;
-					layer.lengthwiseDim = Math.max(layer.lengthwiseDim, elemDim.getHeight());
-				}
-				else {
-					layer.crosswiseDim = newPos + totalCrosswiseDim;
-					layer.lengthwiseDim = Math.max(layer.lengthwiseDim, elemDim.getWidth());
-				}
+				layer.crosswiseDim = newPos + totalCrosswiseDim;
+				layer.lengthwiseDim = Math.max(layer.lengthwiseDim,
+						layoutDirection == KLayoutOption.VERTICAL
+						? elemDim.getHeight() : elemDim.getWidth());
 			}
 		}
 	}
