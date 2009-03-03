@@ -86,7 +86,7 @@
       figure="CompositeStateFigure"/>
   <connections
       name="Edge"
-      figure="EdgeSplineFigure"/>
+      figure="EdgeFigure"/>
   <compartments
       name="CompositeStateCompartment"
       figure="CompositeStateFigure"
