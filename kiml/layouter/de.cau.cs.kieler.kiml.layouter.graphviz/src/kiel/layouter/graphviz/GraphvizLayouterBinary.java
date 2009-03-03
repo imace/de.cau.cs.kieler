@@ -203,7 +203,7 @@ public class GraphvizLayouterBinary implements GraphvizLayouter{
 	 */
 	public void visit(KLayoutNode node, IKielerProgressMonitor progressMonitor)
 			throws KielerException {
-		progressMonitor.begin("GraphViz layout", 15);
+		progressMonitor.begin("GraphViz layout", 20);
 		updatePreferences();
 
 		try{
@@ -238,7 +238,7 @@ public class GraphvizLayouterBinary implements GraphvizLayouter{
 		this.setGraphAttributes(graphAttributes);
 		// finalize graph input and flush it to graphviz
 		this.flushGraph();
-		progressMonitor.worked(5);
+		
 		
 		/* pick up desired layouter */
 		if (layouterName.equals(GraphvizLayoutProviderNames.GRAPHVIZ_CIRCO)) {
@@ -289,7 +289,9 @@ public class GraphvizLayouterBinary implements GraphvizLayouter{
 		// input stream has been closed before, otherwise the process will run
 		// forever. 
 		// TODO: here should be some timeout...
+		progressMonitor.worked(5);
 		try {graphvizProcess.waitFor();} catch (InterruptedException e1) {/*nothing*/}
+		progressMonitor.worked(5);
 		// read graphviz output and apply layout information to KIELER datastructure
 		this.retrieveLayoutInformations(debugOut);
 		this.setTopNodeAttributes(node);
