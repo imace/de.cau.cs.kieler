@@ -49,7 +49,6 @@ public class WorkbenchPreferencePage extends FieldEditorPreferencePage implement
 	
 	
 
-	@Override
 	public void init(IWorkbench workbench) {
 		// set the preference store
 		IPreferenceStore preferenceStore = LayouterPlugin.getDefault().getPreferenceStore();
