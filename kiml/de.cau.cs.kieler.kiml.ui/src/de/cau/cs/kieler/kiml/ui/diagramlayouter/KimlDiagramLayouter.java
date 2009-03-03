@@ -9,14 +9,15 @@
  *******************************************************************************/
 package de.cau.cs.kieler.kiml.ui.diagramlayouter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.draw2d.Animation;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.progress.IProgressService;
 import org.eclipse.ui.statushandlers.StatusManager;
 
 import de.cau.cs.kieler.core.ui.KielerProgressMonitor;
@@ -40,6 +41,11 @@ import de.cau.cs.kieler.kiml.ui.KimlUiPlugin;
  */
 public final class KimlDiagramLayouter {
 
+	/** static List of Error Messages, such that they can be 
+	 * created from within other threads and handled later on from another thread.
+	 */
+	static List<IStatus> stati = new ArrayList<IStatus>();;
+	
 	/** duration of animation for diagram layout */
 	// TODO export duration of animation (e.g. make it user definable)
 	private final static int ANIMATION_TIME = 1000;
@@ -164,10 +170,13 @@ public final class KimlDiagramLayouter {
 				PlatformUI.getWorkbench().getProgressService().run(false, false,
 						new IRunnableWithProgress() {
 					public void run(IProgressMonitor monitor) {
+						// perform layout and add the result as a status to the 
+						// static status list such it can be handled from the original
+						// thread below.
 						IStatus status = layout(target, editorID, animate, runs,
 								new KielerProgressMonitor(monitor));
 						if (status != null)
-							StatusManager.getManager().handle(status, StatusManager.SHOW);
+							KimlDiagramLayouter.stati.add(status);
 					}
 				});
 				if (animate)
@@ -177,9 +186,20 @@ public final class KimlDiagramLayouter {
 				Status status = new Status(IStatus.ERROR, KimlUiPlugin.PLUGIN_ID,
 						"Failed to perform diagram layout.", exception);
 				StatusManager.getManager().handle(status, StatusManager.SHOW);
+				StatusManager.getManager().handle(status, StatusManager.LOG);
 			}
+			// handle errors from the Progress monitor thread
+			if(stati != null && !stati.isEmpty()){
+				for (IStatus status : stati){ 
+					StatusManager.getManager().handle(status, StatusManager.SHOW);
+					StatusManager.getManager().handle(status, StatusManager.LOG);
+				}
+				stati.clear();
+			}
+				
 //		}
 	}
+
 	
 	/**
 	 * The wrapper method to get a layout for a diagram. Performs several steps.
