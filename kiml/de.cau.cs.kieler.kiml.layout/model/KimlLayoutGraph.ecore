@@ -19,11 +19,15 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="right" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EFloat"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="top" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EFloat"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="KLayoutGraph" eSuperTypes="#//KLayoutNode"/>
+  <eClassifiers xsi:type="ecore:EClass" name="KLayoutGraph" eSuperTypes="#//KLayoutNode">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="graphEdges" upperBound="-1"
+        eType="#//KLayoutEdge" containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="KShapeLayout" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="location" lowerBound="1"
-        eType="#//KPoint"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="size" lowerBound="1" eType="#//KDimension"/>
+        eType="#//KPoint" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="size" lowerBound="1" eType="#//KDimension"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="useLayout" lowerBound="1"
         eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EBoolean"
         defaultValueLiteral="true"/>
@@ -34,17 +38,17 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
         eType="#//KLayoutNode" eOpposite="#//KLayoutNode/incomingEdges"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="layout" lowerBound="1"
-        eType="#//KEdgeLayout"/>
+        eType="#//KEdgeLayout" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="label" upperBound="-1"
-        eType="#//KEdgeLabel"/>
+        eType="#//KEdgeLabel" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="sourcePort" eType="#//KLayoutPort"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="targetPort" eType="#//KLayoutPort"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="KEdgeLayout">
     <eStructuralFeatures xsi:type="ecore:EReference" name="sourcePoint" lowerBound="1"
-        eType="#//KPoint"/>
+        eType="#//KPoint" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="targetPoint" lowerBound="1"
-        eType="#//KPoint"/>
+        eType="#//KPoint" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="bendPoints" upperBound="-1"
         eType="#//KPoint"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="edgeType" lowerBound="1"
@@ -55,7 +59,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="KLayoutNode">
     <eStructuralFeatures xsi:type="ecore:EReference" name="childNodes" upperBound="-1"
-        eType="#//KLayoutNode" eOpposite="#//KLayoutNode/parentNode"/>
+        eType="#//KLayoutNode" containment="true" eOpposite="#//KLayoutNode/parentNode"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="outgoingEdges" upperBound="-1"
         eType="#//KLayoutEdge" eOpposite="#//KLayoutEdge/source"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="incomingEdges" upperBound="-1"
@@ -63,13 +67,14 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="parentNode" lowerBound="1"
         eType="#//KLayoutNode" eOpposite="#//KLayoutNode/childNodes"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="layout" lowerBound="1"
-        eType="#//KNodeLayout"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="label" lowerBound="1" eType="#//KNodeLabel"/>
+        eType="#//KNodeLayout" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="label" lowerBound="1" eType="#//KNodeLabel"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="idString" lowerBound="1"
         eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"
         defaultValueLiteral="&quot;&quot;"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ports" upperBound="-1"
-        eType="#//KLayoutPort" eOpposite="#//KLayoutPort/node"/>
+        eType="#//KLayoutPort" containment="true" eOpposite="#//KLayoutPort/node"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="KNodeLayout" eSuperTypes="#//KShapeLayout">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="layoutType" lowerBound="1"
@@ -80,14 +85,14 @@
         eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"
         defaultValueLiteral="&quot;&quot;"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="insets" lowerBound="1"
-        eType="#//KInsets"/>
+        eType="#//KInsets" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="KLabel" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="text" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="KEdgeLabel" eSuperTypes="#//KLabel">
     <eStructuralFeatures xsi:type="ecore:EReference" name="labelLayout" lowerBound="1"
-        eType="#//KEdgeLabelLayout"/>
+        eType="#//KEdgeLabelLayout" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="KEdgeLabelLayout" eSuperTypes="#//KShapeLayout">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="labelPlacement" lowerBound="1"
@@ -95,7 +100,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="KNodeLabel" eSuperTypes="#//KLabel">
     <eStructuralFeatures xsi:type="ecore:EReference" name="labelLayout" lowerBound="1"
-        eType="#//KNodeLabelLayout"/>
+        eType="#//KNodeLabelLayout" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="KNodeLabelLayout" eSuperTypes="#//KShapeLayout">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="labelPlacement" lowerBound="1"
@@ -157,8 +162,9 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="KLayoutPort">
     <eStructuralFeatures xsi:type="ecore:EReference" name="layout" lowerBound="1"
-        eType="#//KPortLayout"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="label" eType="#//KPortLabel"/>
+        eType="#//KPortLayout" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="label" eType="#//KPortLabel"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="node" lowerBound="1" eType="#//KLayoutNode"
         eOpposite="#//KLayoutNode/ports"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1" eType="#//KPortType"
@@ -171,7 +177,8 @@
         defaultValueLiteral="0"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="KPortLabel" eSuperTypes="#//KLabel">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="labelLayout" eType="#//KPortLabelLayout"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="labelLayout" eType="#//KPortLabelLayout"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="KPortLabelLayout" eSuperTypes="#//KShapeLayout"/>
   <eClassifiers xsi:type="ecore:EEnum" name="KPortType">

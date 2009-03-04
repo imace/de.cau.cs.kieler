@@ -25,26 +25,26 @@ package de.cau.cs.kieler.kiml.layout.KimlLayoutGraph;
  */
 public interface KPortLabel extends KLabel {
 	/**
-	 * Returns the value of the '<em><b>Label Layout</b></em>' reference.
+	 * Returns the value of the '<em><b>Label Layout</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Label Layout</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Label Layout</em>' reference.
+	 * @return the value of the '<em>Label Layout</em>' containment reference.
 	 * @see #setLabelLayout(KPortLabelLayout)
 	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKPortLabel_LabelLayout()
-	 * @model
+	 * @model containment="true"
 	 * @generated
 	 */
 	KPortLabelLayout getLabelLayout();
 
 	/**
-	 * Sets the value of the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPortLabel#getLabelLayout <em>Label Layout</em>}' reference.
+	 * Sets the value of the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPortLabel#getLabelLayout <em>Label Layout</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Label Layout</em>' reference.
+	 * @param value the new value of the '<em>Label Layout</em>' containment reference.
 	 * @see #getLabelLayout()
 	 * @generated
 	 */

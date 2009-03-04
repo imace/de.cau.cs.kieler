@@ -643,6 +643,19 @@
     <element xmi:type="ecore:EEnum" href="KimlLayoutGraph.ecore#//KPortPlacement"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_wo7f8vKiEd2eFddVB1rYkA" x="48" y="408"/>
   </children>
+  <children xmi:type="notation:Node" xmi:id="_3fGXsAgFEd6POe_0lVxTKA" type="Note">
+    <children xmi:type="notation:Node" xmi:id="_3fG-wAgFEd6POe_0lVxTKA" type="DiagramName">
+      <element xsi:nil="true"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_3fHl0AgFEd6POe_0lVxTKA" type="Description">
+      <element xsi:nil="true"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_3fGXsQgFEd6POe_0lVxTKA" fontName="Lucida Grande" description="graphEdges is dummy Aggregation to have  any containment reference for edges. That is required for serializing, copying, etc. of the graph" fillColor="13369343" lineColor="6737151" lineWidth="1"/>
+    <styles xmi:type="notation:TextStyle" xmi:id="_3fGXsggFEd6POe_0lVxTKA"/>
+    <styles xmi:type="notation:LineTypeStyle" xmi:id="_3fGXswgFEd6POe_0lVxTKA"/>
+    <element xsi:nil="true"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_3fGXtAgFEd6POe_0lVxTKA" x="632" y="608" width="136"/>
+  </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_whdmAvKiEd2eFddVB1rYkA"/>
   <element xmi:type="ecore:EPackage" href="KimlLayoutGraph.ecore#/"/>
   <edges xmi:type="notation:Edge" xmi:id="_wpHGIPKiEd2eFddVB1rYkA" type="3003" source="_wnLzgPKiEd2eFddVB1rYkA" target="_wnc5RPKiEd2eFddVB1rYkA">
@@ -1052,5 +1065,19 @@
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_wpzCo_KiEd2eFddVB1rYkA" points="[31, 0, -76, 119]$[31, -119, -76, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_xKmpo_KiEd2eFddVB1rYkA" id="(0.5,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_xKnQsPKiEd2eFddVB1rYkA" id="(0.74850297,1.0)"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_m88M8AgFEd6POe_0lVxTKA" type="3002" source="_wnLzgPKiEd2eFddVB1rYkA" target="_wnU9cvKiEd2eFddVB1rYkA">
+    <children xmi:type="notation:Node" xmi:id="_m8-CIAgFEd6POe_0lVxTKA" type="4011">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_m8-CIQgFEd6POe_0lVxTKA" x="-105" y="27"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_m8-CIggFEd6POe_0lVxTKA" type="4012">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_m8-CIwgFEd6POe_0lVxTKA" x="10" y="10"/>
+    </children>
+    <styles xmi:type="notation:ConnectorStyle" xmi:id="_m88M8QgFEd6POe_0lVxTKA" lineColor="0"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_m88M8ggFEd6POe_0lVxTKA" fontName="Lucida Grande" fontHeight="10"/>
+    <element xmi:type="ecore:EReference" href="KimlLayoutGraph.ecore#//KLayoutGraph/graphEdges"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_m88M8wgFEd6POe_0lVxTKA" points="[21, 0, -149, 237]$[170, 0, 0, 237]$[170, -232, 0, 5]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_m9C6oAgFEd6POe_0lVxTKA" id="(0.79,0.225)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_m9C6oQgFEd6POe_0lVxTKA" id="(0.81,0.9)"/>
   </edges>
 </notation:Diagram>

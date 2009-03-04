@@ -105,26 +105,26 @@ public interface KNodeLayout extends KShapeLayout {
 	void setLayouterName(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Insets</b></em>' reference.
+	 * Returns the value of the '<em><b>Insets</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Insets</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Insets</em>' reference.
+	 * @return the value of the '<em>Insets</em>' containment reference.
 	 * @see #setInsets(KInsets)
 	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKNodeLayout_Insets()
-	 * @model required="true"
+	 * @model containment="true" required="true"
 	 * @generated
 	 */
 	KInsets getInsets();
 
 	/**
-	 * Sets the value of the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeLayout#getInsets <em>Insets</em>}' reference.
+	 * Sets the value of the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeLayout#getInsets <em>Insets</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Insets</em>' reference.
+	 * @param value the new value of the '<em>Insets</em>' containment reference.
 	 * @see #getInsets()
 	 * @generated
 	 */

@@ -28,52 +28,52 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface KShapeLayout extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Location</b></em>' reference.
+	 * Returns the value of the '<em><b>Location</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Location</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Location</em>' reference.
+	 * @return the value of the '<em>Location</em>' containment reference.
 	 * @see #setLocation(KPoint)
 	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKShapeLayout_Location()
-	 * @model required="true"
+	 * @model containment="true" required="true"
 	 * @generated
 	 */
 	KPoint getLocation();
 
 	/**
-	 * Sets the value of the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KShapeLayout#getLocation <em>Location</em>}' reference.
+	 * Sets the value of the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KShapeLayout#getLocation <em>Location</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Location</em>' reference.
+	 * @param value the new value of the '<em>Location</em>' containment reference.
 	 * @see #getLocation()
 	 * @generated
 	 */
 	void setLocation(KPoint value);
 
 	/**
-	 * Returns the value of the '<em><b>Size</b></em>' reference.
+	 * Returns the value of the '<em><b>Size</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Size</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Size</em>' reference.
+	 * @return the value of the '<em>Size</em>' containment reference.
 	 * @see #setSize(KDimension)
 	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKShapeLayout_Size()
-	 * @model required="true"
+	 * @model containment="true" required="true"
 	 * @generated
 	 */
 	KDimension getSize();
 
 	/**
-	 * Sets the value of the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KShapeLayout#getSize <em>Size</em>}' reference.
+	 * Sets the value of the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KShapeLayout#getSize <em>Size</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Size</em>' reference.
+	 * @param value the new value of the '<em>Size</em>' containment reference.
 	 * @see #getSize()
 	 * @generated
 	 */

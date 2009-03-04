@@ -94,7 +94,7 @@ public class LayoutGraphCloner {
 	 * @return clone
 	 */
 	private static KNodeLabel cloneLayoutNodeLabel(KNodeLabel layoutNodeLabel) {
-		if (layoutNodeLabel == null)
+		if (layoutNodeLabel == null || layoutNodeLabel.getText() == null)
 			return null;
 		else {
 			KNodeLabel clone = KimlLayoutGraphFactory.eINSTANCE.createKNodeLabel();

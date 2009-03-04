@@ -15,6 +15,7 @@ import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutType;
 import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -90,7 +91,7 @@ public class KNodeLayoutImpl extends KShapeLayoutImpl implements KNodeLayout {
 	protected String layouterName = LAYOUTER_NAME_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getInsets() <em>Insets</em>}' reference.
+	 * The cached value of the '{@link #getInsets() <em>Insets</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getInsets()
@@ -178,14 +179,6 @@ public class KNodeLayoutImpl extends KShapeLayoutImpl implements KNodeLayout {
 	 * @generated
 	 */
 	public KInsets getInsets() {
-		if (insets != null && insets.eIsProxy()) {
-			InternalEObject oldInsets = (InternalEObject)insets;
-			insets = (KInsets)eResolveProxy(oldInsets);
-			if (insets != oldInsets) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, KimlLayoutGraphPackage.KNODE_LAYOUT__INSETS, oldInsets, insets));
-			}
-		}
 		return insets;
 	}
 
@@ -194,8 +187,14 @@ public class KNodeLayoutImpl extends KShapeLayoutImpl implements KNodeLayout {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public KInsets basicGetInsets() {
-		return insets;
+	public NotificationChain basicSetInsets(KInsets newInsets, NotificationChain msgs) {
+		KInsets oldInsets = insets;
+		insets = newInsets;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KNODE_LAYOUT__INSETS, oldInsets, newInsets);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
 	}
 
 	/**
@@ -204,10 +203,31 @@ public class KNodeLayoutImpl extends KShapeLayoutImpl implements KNodeLayout {
 	 * @generated
 	 */
 	public void setInsets(KInsets newInsets) {
-		KInsets oldInsets = insets;
-		insets = newInsets;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KNODE_LAYOUT__INSETS, oldInsets, insets));
+		if (newInsets != insets) {
+			NotificationChain msgs = null;
+			if (insets != null)
+				msgs = ((InternalEObject)insets).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - KimlLayoutGraphPackage.KNODE_LAYOUT__INSETS, null, msgs);
+			if (newInsets != null)
+				msgs = ((InternalEObject)newInsets).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - KimlLayoutGraphPackage.KNODE_LAYOUT__INSETS, null, msgs);
+			msgs = basicSetInsets(newInsets, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KNODE_LAYOUT__INSETS, newInsets, newInsets));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case KimlLayoutGraphPackage.KNODE_LAYOUT__INSETS:
+				return basicSetInsets(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -225,8 +245,7 @@ public class KNodeLayoutImpl extends KShapeLayoutImpl implements KNodeLayout {
 			case KimlLayoutGraphPackage.KNODE_LAYOUT__LAYOUTER_NAME:
 				return getLayouterName();
 			case KimlLayoutGraphPackage.KNODE_LAYOUT__INSETS:
-				if (resolve) return getInsets();
-				return basicGetInsets();
+				return getInsets();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}

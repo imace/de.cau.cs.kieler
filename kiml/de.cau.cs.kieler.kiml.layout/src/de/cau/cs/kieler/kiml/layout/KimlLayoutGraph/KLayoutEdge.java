@@ -89,33 +89,33 @@ public interface KLayoutEdge extends EObject {
 	void setTarget(KLayoutNode value);
 
 	/**
-	 * Returns the value of the '<em><b>Layout</b></em>' reference.
+	 * Returns the value of the '<em><b>Layout</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Layout</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Layout</em>' reference.
+	 * @return the value of the '<em>Layout</em>' containment reference.
 	 * @see #setLayout(KEdgeLayout)
 	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKLayoutEdge_Layout()
-	 * @model required="true"
+	 * @model containment="true" required="true"
 	 * @generated
 	 */
 	KEdgeLayout getLayout();
 
 	/**
-	 * Sets the value of the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge#getLayout <em>Layout</em>}' reference.
+	 * Sets the value of the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge#getLayout <em>Layout</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Layout</em>' reference.
+	 * @param value the new value of the '<em>Layout</em>' containment reference.
 	 * @see #getLayout()
 	 * @generated
 	 */
 	void setLayout(KEdgeLayout value);
 
 	/**
-	 * Returns the value of the '<em><b>Label</b></em>' reference list.
+	 * Returns the value of the '<em><b>Label</b></em>' containment reference list.
 	 * The list contents are of type {@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLabel}.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -123,9 +123,9 @@ public interface KLayoutEdge extends EObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Label</em>' reference list.
+	 * @return the value of the '<em>Label</em>' containment reference list.
 	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKLayoutEdge_Label()
-	 * @model
+	 * @model containment="true"
 	 * @generated
 	 */
 	EList<KEdgeLabel> getLabel();

@@ -6,27 +6,25 @@
  */
 package de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl;
 
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLabel;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLayout;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage;
-
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLabel;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLayout;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage;
+import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.util.KimlLayoutGraphEdgeInserter;
 
 /**
  * <!-- begin-user-doc -->
@@ -68,7 +66,7 @@ public class KLayoutEdgeImpl extends EObjectImpl implements KLayoutEdge {
 	protected KLayoutNode target;
 
 	/**
-	 * The cached value of the '{@link #getLayout() <em>Layout</em>}' reference.
+	 * The cached value of the '{@link #getLayout() <em>Layout</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getLayout()
@@ -78,7 +76,7 @@ public class KLayoutEdgeImpl extends EObjectImpl implements KLayoutEdge {
 	protected KEdgeLayout layout;
 
 	/**
-	 * The cached value of the '{@link #getLabel() <em>Label</em>}' reference list.
+	 * The cached value of the '{@link #getLabel() <em>Label</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getLabel()
@@ -167,12 +165,17 @@ public class KLayoutEdgeImpl extends EObjectImpl implements KLayoutEdge {
 		return msgs;
 	}
 
+	public void setSource(KLayoutNode newSource) {
+		setSourceGen(newSource);
+		KimlLayoutGraphEdgeInserter.addEdgeContainment(this);
+	}
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setSource(KLayoutNode newSource) {
+	public void setSourceGen(KLayoutNode newSource) {
 		if (newSource != source) {
 			NotificationChain msgs = null;
 			if (source != null)
@@ -186,6 +189,8 @@ public class KLayoutEdgeImpl extends EObjectImpl implements KLayoutEdge {
 			eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KLAYOUT_EDGE__SOURCE, newSource, newSource));
 	}
 
+	
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -227,12 +232,17 @@ public class KLayoutEdgeImpl extends EObjectImpl implements KLayoutEdge {
 		return msgs;
 	}
 
+	public void setTarget(KLayoutNode newTarget) {
+		setTargetGen(newTarget);
+		KimlLayoutGraphEdgeInserter.addEdgeContainment(this);
+	}
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setTarget(KLayoutNode newTarget) {
+	public void setTargetGen(KLayoutNode newTarget) {
 		if (newTarget != target) {
 			NotificationChain msgs = null;
 			if (target != null)
@@ -252,14 +262,6 @@ public class KLayoutEdgeImpl extends EObjectImpl implements KLayoutEdge {
 	 * @generated
 	 */
 	public KEdgeLayout getLayout() {
-		if (layout != null && layout.eIsProxy()) {
-			InternalEObject oldLayout = (InternalEObject)layout;
-			layout = (KEdgeLayout)eResolveProxy(oldLayout);
-			if (layout != oldLayout) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, KimlLayoutGraphPackage.KLAYOUT_EDGE__LAYOUT, oldLayout, layout));
-			}
-		}
 		return layout;
 	}
 
@@ -268,8 +270,14 @@ public class KLayoutEdgeImpl extends EObjectImpl implements KLayoutEdge {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public KEdgeLayout basicGetLayout() {
-		return layout;
+	public NotificationChain basicSetLayout(KEdgeLayout newLayout, NotificationChain msgs) {
+		KEdgeLayout oldLayout = layout;
+		layout = newLayout;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KLAYOUT_EDGE__LAYOUT, oldLayout, newLayout);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
 	}
 
 	/**
@@ -278,10 +286,17 @@ public class KLayoutEdgeImpl extends EObjectImpl implements KLayoutEdge {
 	 * @generated
 	 */
 	public void setLayout(KEdgeLayout newLayout) {
-		KEdgeLayout oldLayout = layout;
-		layout = newLayout;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KLAYOUT_EDGE__LAYOUT, oldLayout, layout));
+		if (newLayout != layout) {
+			NotificationChain msgs = null;
+			if (layout != null)
+				msgs = ((InternalEObject)layout).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - KimlLayoutGraphPackage.KLAYOUT_EDGE__LAYOUT, null, msgs);
+			if (newLayout != null)
+				msgs = ((InternalEObject)newLayout).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - KimlLayoutGraphPackage.KLAYOUT_EDGE__LAYOUT, null, msgs);
+			msgs = basicSetLayout(newLayout, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KLAYOUT_EDGE__LAYOUT, newLayout, newLayout));
 	}
 
 	/**
@@ -291,7 +306,7 @@ public class KLayoutEdgeImpl extends EObjectImpl implements KLayoutEdge {
 	 */
 	public EList<KEdgeLabel> getLabel() {
 		if (label == null) {
-			label = new EObjectResolvingEList<KEdgeLabel>(KEdgeLabel.class, this, KimlLayoutGraphPackage.KLAYOUT_EDGE__LABEL);
+			label = new EObjectContainmentEList<KEdgeLabel>(KEdgeLabel.class, this, KimlLayoutGraphPackage.KLAYOUT_EDGE__LABEL);
 		}
 		return label;
 	}
@@ -322,12 +337,17 @@ public class KLayoutEdgeImpl extends EObjectImpl implements KLayoutEdge {
 		return sourcePort;
 	}
 
+	public void setSourcePort(KLayoutPort newSourcePort) {
+		setSourcePortGen(newSourcePort);
+		KimlLayoutGraphEdgeInserter.addEdgeContainment(this);
+	}
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setSourcePort(KLayoutPort newSourcePort) {
+	public void setSourcePortGen(KLayoutPort newSourcePort) {
 		KLayoutPort oldSourcePort = sourcePort;
 		sourcePort = newSourcePort;
 		if (eNotificationRequired())
@@ -360,12 +380,17 @@ public class KLayoutEdgeImpl extends EObjectImpl implements KLayoutEdge {
 		return targetPort;
 	}
 
+	public void setTargetPort(KLayoutPort newTargetPort) {
+		setTargetPortGen(newTargetPort);
+		KimlLayoutGraphEdgeInserter.addEdgeContainment(this);
+	}
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setTargetPort(KLayoutPort newTargetPort) {
+	public void setTargetPortGen(KLayoutPort newTargetPort) {
 		KLayoutPort oldTargetPort = targetPort;
 		targetPort = newTargetPort;
 		if (eNotificationRequired())
@@ -404,6 +429,10 @@ public class KLayoutEdgeImpl extends EObjectImpl implements KLayoutEdge {
 				return basicSetSource(null, msgs);
 			case KimlLayoutGraphPackage.KLAYOUT_EDGE__TARGET:
 				return basicSetTarget(null, msgs);
+			case KimlLayoutGraphPackage.KLAYOUT_EDGE__LAYOUT:
+				return basicSetLayout(null, msgs);
+			case KimlLayoutGraphPackage.KLAYOUT_EDGE__LABEL:
+				return ((InternalEList<?>)getLabel()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -423,8 +452,7 @@ public class KLayoutEdgeImpl extends EObjectImpl implements KLayoutEdge {
 				if (resolve) return getTarget();
 				return basicGetTarget();
 			case KimlLayoutGraphPackage.KLAYOUT_EDGE__LAYOUT:
-				if (resolve) return getLayout();
-				return basicGetLayout();
+				return getLayout();
 			case KimlLayoutGraphPackage.KLAYOUT_EDGE__LABEL:
 				return getLabel();
 			case KimlLayoutGraphPackage.KLAYOUT_EDGE__SOURCE_PORT:

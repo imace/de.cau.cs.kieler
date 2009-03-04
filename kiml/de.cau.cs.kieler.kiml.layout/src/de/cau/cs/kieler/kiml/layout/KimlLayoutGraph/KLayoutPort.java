@@ -32,59 +32,59 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface KLayoutPort extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Layout</b></em>' reference.
+	 * Returns the value of the '<em><b>Layout</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Layout</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Layout</em>' reference.
+	 * @return the value of the '<em>Layout</em>' containment reference.
 	 * @see #setLayout(KPortLayout)
 	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKLayoutPort_Layout()
-	 * @model required="true"
+	 * @model containment="true" required="true"
 	 * @generated
 	 */
 	KPortLayout getLayout();
 
 	/**
-	 * Sets the value of the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort#getLayout <em>Layout</em>}' reference.
+	 * Sets the value of the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort#getLayout <em>Layout</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Layout</em>' reference.
+	 * @param value the new value of the '<em>Layout</em>' containment reference.
 	 * @see #getLayout()
 	 * @generated
 	 */
 	void setLayout(KPortLayout value);
 
 	/**
-	 * Returns the value of the '<em><b>Label</b></em>' reference.
+	 * Returns the value of the '<em><b>Label</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Label</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Label</em>' reference.
+	 * @return the value of the '<em>Label</em>' containment reference.
 	 * @see #setLabel(KPortLabel)
 	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKLayoutPort_Label()
-	 * @model
+	 * @model containment="true"
 	 * @generated
 	 */
 	KPortLabel getLabel();
 
 	/**
-	 * Sets the value of the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort#getLabel <em>Label</em>}' reference.
+	 * Sets the value of the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort#getLabel <em>Label</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Label</em>' reference.
+	 * @param value the new value of the '<em>Label</em>' containment reference.
 	 * @see #getLabel()
 	 * @generated
 	 */
 	void setLabel(KPortLabel value);
 
 	/**
-	 * Returns the value of the '<em><b>Node</b></em>' reference.
+	 * Returns the value of the '<em><b>Node</b></em>' container reference.
 	 * It is bidirectional and its opposite is '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode#getPorts <em>Ports</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -92,20 +92,20 @@ public interface KLayoutPort extends EObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Node</em>' reference.
+	 * @return the value of the '<em>Node</em>' container reference.
 	 * @see #setNode(KLayoutNode)
 	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKLayoutPort_Node()
 	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode#getPorts
-	 * @model opposite="ports" required="true"
+	 * @model opposite="ports" required="true" transient="false"
 	 * @generated
 	 */
 	KLayoutNode getNode();
 
 	/**
-	 * Sets the value of the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort#getNode <em>Node</em>}' reference.
+	 * Sets the value of the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort#getNode <em>Node</em>}' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Node</em>' reference.
+	 * @param value the new value of the '<em>Node</em>' container reference.
 	 * @see #getNode()
 	 * @generated
 	 */

@@ -35,7 +35,7 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface KLayoutNode extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Child Nodes</b></em>' reference list.
+	 * Returns the value of the '<em><b>Child Nodes</b></em>' containment reference list.
 	 * The list contents are of type {@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode}.
 	 * It is bidirectional and its opposite is '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode#getParentNode <em>Parent Node</em>}'.
 	 * <!-- begin-user-doc -->
@@ -44,10 +44,10 @@ public interface KLayoutNode extends EObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Child Nodes</em>' reference list.
+	 * @return the value of the '<em>Child Nodes</em>' containment reference list.
 	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKLayoutNode_ChildNodes()
 	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode#getParentNode
-	 * @model opposite="parentNode"
+	 * @model opposite="parentNode" containment="true"
 	 * @generated
 	 */
 	EList<KLayoutNode> getChildNodes();
@@ -89,7 +89,7 @@ public interface KLayoutNode extends EObject {
 	EList<KLayoutEdge> getIncomingEdges();
 
 	/**
-	 * Returns the value of the '<em><b>Parent Node</b></em>' reference.
+	 * Returns the value of the '<em><b>Parent Node</b></em>' container reference.
 	 * It is bidirectional and its opposite is '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode#getChildNodes <em>Child Nodes</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -97,72 +97,72 @@ public interface KLayoutNode extends EObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Parent Node</em>' reference.
+	 * @return the value of the '<em>Parent Node</em>' container reference.
 	 * @see #setParentNode(KLayoutNode)
 	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKLayoutNode_ParentNode()
 	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode#getChildNodes
-	 * @model opposite="childNodes" required="true"
+	 * @model opposite="childNodes" required="true" transient="false"
 	 * @generated
 	 */
 	KLayoutNode getParentNode();
 
 	/**
-	 * Sets the value of the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode#getParentNode <em>Parent Node</em>}' reference.
+	 * Sets the value of the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode#getParentNode <em>Parent Node</em>}' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Parent Node</em>' reference.
+	 * @param value the new value of the '<em>Parent Node</em>' container reference.
 	 * @see #getParentNode()
 	 * @generated
 	 */
 	void setParentNode(KLayoutNode value);
 
 	/**
-	 * Returns the value of the '<em><b>Layout</b></em>' reference.
+	 * Returns the value of the '<em><b>Layout</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Layout</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Layout</em>' reference.
+	 * @return the value of the '<em>Layout</em>' containment reference.
 	 * @see #setLayout(KNodeLayout)
 	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKLayoutNode_Layout()
-	 * @model required="true"
+	 * @model containment="true" required="true"
 	 * @generated
 	 */
 	KNodeLayout getLayout();
 
 	/**
-	 * Sets the value of the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode#getLayout <em>Layout</em>}' reference.
+	 * Sets the value of the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode#getLayout <em>Layout</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Layout</em>' reference.
+	 * @param value the new value of the '<em>Layout</em>' containment reference.
 	 * @see #getLayout()
 	 * @generated
 	 */
 	void setLayout(KNodeLayout value);
 
 	/**
-	 * Returns the value of the '<em><b>Label</b></em>' reference.
+	 * Returns the value of the '<em><b>Label</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Label</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Label</em>' reference.
+	 * @return the value of the '<em>Label</em>' containment reference.
 	 * @see #setLabel(KNodeLabel)
 	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKLayoutNode_Label()
-	 * @model required="true"
+	 * @model containment="true" required="true"
 	 * @generated
 	 */
 	KNodeLabel getLabel();
 
 	/**
-	 * Sets the value of the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode#getLabel <em>Label</em>}' reference.
+	 * Sets the value of the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode#getLabel <em>Label</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Label</em>' reference.
+	 * @param value the new value of the '<em>Label</em>' containment reference.
 	 * @see #getLabel()
 	 * @generated
 	 */
@@ -196,7 +196,7 @@ public interface KLayoutNode extends EObject {
 	void setIdString(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Ports</b></em>' reference list.
+	 * Returns the value of the '<em><b>Ports</b></em>' containment reference list.
 	 * The list contents are of type {@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort}.
 	 * It is bidirectional and its opposite is '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort#getNode <em>Node</em>}'.
 	 * <!-- begin-user-doc -->
@@ -205,10 +205,10 @@ public interface KLayoutNode extends EObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Ports</em>' reference list.
+	 * @return the value of the '<em>Ports</em>' containment reference list.
 	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKLayoutNode_Ports()
 	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort#getNode
-	 * @model opposite="node"
+	 * @model opposite="node" containment="true"
 	 * @generated
 	 */
 	EList<KLayoutPort> getPorts();

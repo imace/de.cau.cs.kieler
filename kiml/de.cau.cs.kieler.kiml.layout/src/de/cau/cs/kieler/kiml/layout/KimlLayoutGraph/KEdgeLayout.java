@@ -32,52 +32,52 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface KEdgeLayout extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Source Point</b></em>' reference.
+	 * Returns the value of the '<em><b>Source Point</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Source Point</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Source Point</em>' reference.
+	 * @return the value of the '<em>Source Point</em>' containment reference.
 	 * @see #setSourcePoint(KPoint)
 	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKEdgeLayout_SourcePoint()
-	 * @model required="true"
+	 * @model containment="true" required="true"
 	 * @generated
 	 */
 	KPoint getSourcePoint();
 
 	/**
-	 * Sets the value of the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLayout#getSourcePoint <em>Source Point</em>}' reference.
+	 * Sets the value of the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLayout#getSourcePoint <em>Source Point</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Source Point</em>' reference.
+	 * @param value the new value of the '<em>Source Point</em>' containment reference.
 	 * @see #getSourcePoint()
 	 * @generated
 	 */
 	void setSourcePoint(KPoint value);
 
 	/**
-	 * Returns the value of the '<em><b>Target Point</b></em>' reference.
+	 * Returns the value of the '<em><b>Target Point</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Target Point</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Target Point</em>' reference.
+	 * @return the value of the '<em>Target Point</em>' containment reference.
 	 * @see #setTargetPoint(KPoint)
 	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKEdgeLayout_TargetPoint()
-	 * @model required="true"
+	 * @model containment="true" required="true"
 	 * @generated
 	 */
 	KPoint getTargetPoint();
 
 	/**
-	 * Sets the value of the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLayout#getTargetPoint <em>Target Point</em>}' reference.
+	 * Sets the value of the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLayout#getTargetPoint <em>Target Point</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Target Point</em>' reference.
+	 * @param value the new value of the '<em>Target Point</em>' containment reference.
 	 * @see #getTargetPoint()
 	 * @generated
 	 */

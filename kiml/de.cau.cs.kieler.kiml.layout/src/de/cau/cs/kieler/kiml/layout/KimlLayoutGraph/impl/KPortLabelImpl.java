@@ -12,6 +12,7 @@ import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage;
 
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
@@ -32,7 +33,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  */
 public class KPortLabelImpl extends KLabelImpl implements KPortLabel {
 	/**
-	 * The cached value of the '{@link #getLabelLayout() <em>Label Layout</em>}' reference.
+	 * The cached value of the '{@link #getLabelLayout() <em>Label Layout</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getLabelLayout()
@@ -66,14 +67,6 @@ public class KPortLabelImpl extends KLabelImpl implements KPortLabel {
 	 * @generated
 	 */
 	public KPortLabelLayout getLabelLayout() {
-		if (labelLayout != null && labelLayout.eIsProxy()) {
-			InternalEObject oldLabelLayout = (InternalEObject)labelLayout;
-			labelLayout = (KPortLabelLayout)eResolveProxy(oldLabelLayout);
-			if (labelLayout != oldLabelLayout) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, KimlLayoutGraphPackage.KPORT_LABEL__LABEL_LAYOUT, oldLabelLayout, labelLayout));
-			}
-		}
 		return labelLayout;
 	}
 
@@ -82,8 +75,14 @@ public class KPortLabelImpl extends KLabelImpl implements KPortLabel {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public KPortLabelLayout basicGetLabelLayout() {
-		return labelLayout;
+	public NotificationChain basicSetLabelLayout(KPortLabelLayout newLabelLayout, NotificationChain msgs) {
+		KPortLabelLayout oldLabelLayout = labelLayout;
+		labelLayout = newLabelLayout;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KPORT_LABEL__LABEL_LAYOUT, oldLabelLayout, newLabelLayout);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
 	}
 
 	/**
@@ -92,10 +91,31 @@ public class KPortLabelImpl extends KLabelImpl implements KPortLabel {
 	 * @generated
 	 */
 	public void setLabelLayout(KPortLabelLayout newLabelLayout) {
-		KPortLabelLayout oldLabelLayout = labelLayout;
-		labelLayout = newLabelLayout;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KPORT_LABEL__LABEL_LAYOUT, oldLabelLayout, labelLayout));
+		if (newLabelLayout != labelLayout) {
+			NotificationChain msgs = null;
+			if (labelLayout != null)
+				msgs = ((InternalEObject)labelLayout).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - KimlLayoutGraphPackage.KPORT_LABEL__LABEL_LAYOUT, null, msgs);
+			if (newLabelLayout != null)
+				msgs = ((InternalEObject)newLabelLayout).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - KimlLayoutGraphPackage.KPORT_LABEL__LABEL_LAYOUT, null, msgs);
+			msgs = basicSetLabelLayout(newLabelLayout, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KPORT_LABEL__LABEL_LAYOUT, newLabelLayout, newLabelLayout));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case KimlLayoutGraphPackage.KPORT_LABEL__LABEL_LAYOUT:
+				return basicSetLabelLayout(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -107,8 +127,7 @@ public class KPortLabelImpl extends KLabelImpl implements KPortLabel {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case KimlLayoutGraphPackage.KPORT_LABEL__LABEL_LAYOUT:
-				if (resolve) return getLabelLayout();
-				return basicGetLabelLayout();
+				return getLabelLayout();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}

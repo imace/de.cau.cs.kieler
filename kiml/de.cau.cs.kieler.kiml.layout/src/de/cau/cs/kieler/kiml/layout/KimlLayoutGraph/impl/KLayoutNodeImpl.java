@@ -15,7 +15,9 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge;
@@ -48,7 +50,7 @@ import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage;
  */
 public class KLayoutNodeImpl extends EObjectImpl implements KLayoutNode {
 	/**
-	 * The cached value of the '{@link #getChildNodes() <em>Child Nodes</em>}' reference list.
+	 * The cached value of the '{@link #getChildNodes() <em>Child Nodes</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getChildNodes()
@@ -78,17 +80,7 @@ public class KLayoutNodeImpl extends EObjectImpl implements KLayoutNode {
 	protected EList<KLayoutEdge> incomingEdges;
 
 	/**
-	 * The cached value of the '{@link #getParentNode() <em>Parent Node</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getParentNode()
-	 * @generated
-	 * @ordered
-	 */
-	protected KLayoutNode parentNode;
-
-	/**
-	 * The cached value of the '{@link #getLayout() <em>Layout</em>}' reference.
+	 * The cached value of the '{@link #getLayout() <em>Layout</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getLayout()
@@ -98,7 +90,7 @@ public class KLayoutNodeImpl extends EObjectImpl implements KLayoutNode {
 	protected KNodeLayout layout;
 
 	/**
-	 * The cached value of the '{@link #getLabel() <em>Label</em>}' reference.
+	 * The cached value of the '{@link #getLabel() <em>Label</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getLabel()
@@ -128,7 +120,7 @@ public class KLayoutNodeImpl extends EObjectImpl implements KLayoutNode {
 	protected String idString = ID_STRING_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getPorts() <em>Ports</em>}' reference list.
+	 * The cached value of the '{@link #getPorts() <em>Ports</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getPorts()
@@ -163,7 +155,7 @@ public class KLayoutNodeImpl extends EObjectImpl implements KLayoutNode {
 	 */
 	public EList<KLayoutNode> getChildNodes() {
 		if (childNodes == null) {
-			childNodes = new EObjectWithInverseResolvingEList<KLayoutNode>(KLayoutNode.class, this, KimlLayoutGraphPackage.KLAYOUT_NODE__CHILD_NODES, KimlLayoutGraphPackage.KLAYOUT_NODE__PARENT_NODE);
+			childNodes = new EObjectContainmentWithInverseEList<KLayoutNode>(KLayoutNode.class, this, KimlLayoutGraphPackage.KLAYOUT_NODE__CHILD_NODES, KimlLayoutGraphPackage.KLAYOUT_NODE__PARENT_NODE);
 		}
 		return childNodes;
 	}
@@ -198,24 +190,8 @@ public class KLayoutNodeImpl extends EObjectImpl implements KLayoutNode {
 	 * @generated
 	 */
 	public KLayoutNode getParentNode() {
-		if (parentNode != null && parentNode.eIsProxy()) {
-			InternalEObject oldParentNode = (InternalEObject)parentNode;
-			parentNode = (KLayoutNode)eResolveProxy(oldParentNode);
-			if (parentNode != oldParentNode) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, KimlLayoutGraphPackage.KLAYOUT_NODE__PARENT_NODE, oldParentNode, parentNode));
-			}
-		}
-		return parentNode;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public KLayoutNode basicGetParentNode() {
-		return parentNode;
+		if (eContainerFeatureID != KimlLayoutGraphPackage.KLAYOUT_NODE__PARENT_NODE) return null;
+		return (KLayoutNode)eContainer();
 	}
 
 	/**
@@ -224,12 +200,7 @@ public class KLayoutNodeImpl extends EObjectImpl implements KLayoutNode {
 	 * @generated
 	 */
 	public NotificationChain basicSetParentNode(KLayoutNode newParentNode, NotificationChain msgs) {
-		KLayoutNode oldParentNode = parentNode;
-		parentNode = newParentNode;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KLAYOUT_NODE__PARENT_NODE, oldParentNode, newParentNode);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
+		msgs = eBasicSetContainer((InternalEObject)newParentNode, KimlLayoutGraphPackage.KLAYOUT_NODE__PARENT_NODE, msgs);
 		return msgs;
 	}
 
@@ -239,10 +210,12 @@ public class KLayoutNodeImpl extends EObjectImpl implements KLayoutNode {
 	 * @generated
 	 */
 	public void setParentNode(KLayoutNode newParentNode) {
-		if (newParentNode != parentNode) {
+		if (newParentNode != eInternalContainer() || (eContainerFeatureID != KimlLayoutGraphPackage.KLAYOUT_NODE__PARENT_NODE && newParentNode != null)) {
+			if (EcoreUtil.isAncestor(this, newParentNode))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
-			if (parentNode != null)
-				msgs = ((InternalEObject)parentNode).eInverseRemove(this, KimlLayoutGraphPackage.KLAYOUT_NODE__CHILD_NODES, KLayoutNode.class, msgs);
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
 			if (newParentNode != null)
 				msgs = ((InternalEObject)newParentNode).eInverseAdd(this, KimlLayoutGraphPackage.KLAYOUT_NODE__CHILD_NODES, KLayoutNode.class, msgs);
 			msgs = basicSetParentNode(newParentNode, msgs);
@@ -258,14 +231,6 @@ public class KLayoutNodeImpl extends EObjectImpl implements KLayoutNode {
 	 * @generated
 	 */
 	public KNodeLayout getLayout() {
-		if (layout != null && layout.eIsProxy()) {
-			InternalEObject oldLayout = (InternalEObject)layout;
-			layout = (KNodeLayout)eResolveProxy(oldLayout);
-			if (layout != oldLayout) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, KimlLayoutGraphPackage.KLAYOUT_NODE__LAYOUT, oldLayout, layout));
-			}
-		}
 		return layout;
 	}
 
@@ -274,8 +239,14 @@ public class KLayoutNodeImpl extends EObjectImpl implements KLayoutNode {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public KNodeLayout basicGetLayout() {
-		return layout;
+	public NotificationChain basicSetLayout(KNodeLayout newLayout, NotificationChain msgs) {
+		KNodeLayout oldLayout = layout;
+		layout = newLayout;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KLAYOUT_NODE__LAYOUT, oldLayout, newLayout);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
 	}
 
 	/**
@@ -284,10 +255,17 @@ public class KLayoutNodeImpl extends EObjectImpl implements KLayoutNode {
 	 * @generated
 	 */
 	public void setLayout(KNodeLayout newLayout) {
-		KNodeLayout oldLayout = layout;
-		layout = newLayout;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KLAYOUT_NODE__LAYOUT, oldLayout, layout));
+		if (newLayout != layout) {
+			NotificationChain msgs = null;
+			if (layout != null)
+				msgs = ((InternalEObject)layout).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - KimlLayoutGraphPackage.KLAYOUT_NODE__LAYOUT, null, msgs);
+			if (newLayout != null)
+				msgs = ((InternalEObject)newLayout).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - KimlLayoutGraphPackage.KLAYOUT_NODE__LAYOUT, null, msgs);
+			msgs = basicSetLayout(newLayout, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KLAYOUT_NODE__LAYOUT, newLayout, newLayout));
 	}
 
 	/**
@@ -296,14 +274,6 @@ public class KLayoutNodeImpl extends EObjectImpl implements KLayoutNode {
 	 * @generated
 	 */
 	public KNodeLabel getLabel() {
-		if (label != null && label.eIsProxy()) {
-			InternalEObject oldLabel = (InternalEObject)label;
-			label = (KNodeLabel)eResolveProxy(oldLabel);
-			if (label != oldLabel) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, KimlLayoutGraphPackage.KLAYOUT_NODE__LABEL, oldLabel, label));
-			}
-		}
 		return label;
 	}
 
@@ -312,8 +282,14 @@ public class KLayoutNodeImpl extends EObjectImpl implements KLayoutNode {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public KNodeLabel basicGetLabel() {
-		return label;
+	public NotificationChain basicSetLabel(KNodeLabel newLabel, NotificationChain msgs) {
+		KNodeLabel oldLabel = label;
+		label = newLabel;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KLAYOUT_NODE__LABEL, oldLabel, newLabel);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
 	}
 
 	/**
@@ -322,10 +298,17 @@ public class KLayoutNodeImpl extends EObjectImpl implements KLayoutNode {
 	 * @generated
 	 */
 	public void setLabel(KNodeLabel newLabel) {
-		KNodeLabel oldLabel = label;
-		label = newLabel;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KLAYOUT_NODE__LABEL, oldLabel, label));
+		if (newLabel != label) {
+			NotificationChain msgs = null;
+			if (label != null)
+				msgs = ((InternalEObject)label).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - KimlLayoutGraphPackage.KLAYOUT_NODE__LABEL, null, msgs);
+			if (newLabel != null)
+				msgs = ((InternalEObject)newLabel).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - KimlLayoutGraphPackage.KLAYOUT_NODE__LABEL, null, msgs);
+			msgs = basicSetLabel(newLabel, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KLAYOUT_NODE__LABEL, newLabel, newLabel));
 	}
 
 	/**
@@ -356,7 +339,7 @@ public class KLayoutNodeImpl extends EObjectImpl implements KLayoutNode {
 	 */
 	public EList<KLayoutPort> getPorts() {
 		if (ports == null) {
-			ports = new EObjectWithInverseResolvingEList<KLayoutPort>(KLayoutPort.class, this, KimlLayoutGraphPackage.KLAYOUT_NODE__PORTS, KimlLayoutGraphPackage.KLAYOUT_PORT__NODE);
+			ports = new EObjectContainmentWithInverseEList<KLayoutPort>(KLayoutPort.class, this, KimlLayoutGraphPackage.KLAYOUT_NODE__PORTS, KimlLayoutGraphPackage.KLAYOUT_PORT__NODE);
 		}
 		return ports;
 	}
@@ -377,8 +360,8 @@ public class KLayoutNodeImpl extends EObjectImpl implements KLayoutNode {
 			case KimlLayoutGraphPackage.KLAYOUT_NODE__INCOMING_EDGES:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getIncomingEdges()).basicAdd(otherEnd, msgs);
 			case KimlLayoutGraphPackage.KLAYOUT_NODE__PARENT_NODE:
-				if (parentNode != null)
-					msgs = ((InternalEObject)parentNode).eInverseRemove(this, KimlLayoutGraphPackage.KLAYOUT_NODE__CHILD_NODES, KLayoutNode.class, msgs);
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetParentNode((KLayoutNode)otherEnd, msgs);
 			case KimlLayoutGraphPackage.KLAYOUT_NODE__PORTS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getPorts()).basicAdd(otherEnd, msgs);
@@ -402,10 +385,28 @@ public class KLayoutNodeImpl extends EObjectImpl implements KLayoutNode {
 				return ((InternalEList<?>)getIncomingEdges()).basicRemove(otherEnd, msgs);
 			case KimlLayoutGraphPackage.KLAYOUT_NODE__PARENT_NODE:
 				return basicSetParentNode(null, msgs);
+			case KimlLayoutGraphPackage.KLAYOUT_NODE__LAYOUT:
+				return basicSetLayout(null, msgs);
+			case KimlLayoutGraphPackage.KLAYOUT_NODE__LABEL:
+				return basicSetLabel(null, msgs);
 			case KimlLayoutGraphPackage.KLAYOUT_NODE__PORTS:
 				return ((InternalEList<?>)getPorts()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID) {
+			case KimlLayoutGraphPackage.KLAYOUT_NODE__PARENT_NODE:
+				return eInternalContainer().eInverseRemove(this, KimlLayoutGraphPackage.KLAYOUT_NODE__CHILD_NODES, KLayoutNode.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
 
 	/**
@@ -423,14 +424,11 @@ public class KLayoutNodeImpl extends EObjectImpl implements KLayoutNode {
 			case KimlLayoutGraphPackage.KLAYOUT_NODE__INCOMING_EDGES:
 				return getIncomingEdges();
 			case KimlLayoutGraphPackage.KLAYOUT_NODE__PARENT_NODE:
-				if (resolve) return getParentNode();
-				return basicGetParentNode();
+				return getParentNode();
 			case KimlLayoutGraphPackage.KLAYOUT_NODE__LAYOUT:
-				if (resolve) return getLayout();
-				return basicGetLayout();
+				return getLayout();
 			case KimlLayoutGraphPackage.KLAYOUT_NODE__LABEL:
-				if (resolve) return getLabel();
-				return basicGetLabel();
+				return getLabel();
 			case KimlLayoutGraphPackage.KLAYOUT_NODE__ID_STRING:
 				return getIdString();
 			case KimlLayoutGraphPackage.KLAYOUT_NODE__PORTS:
@@ -531,7 +529,7 @@ public class KLayoutNodeImpl extends EObjectImpl implements KLayoutNode {
 			case KimlLayoutGraphPackage.KLAYOUT_NODE__INCOMING_EDGES:
 				return incomingEdges != null && !incomingEdges.isEmpty();
 			case KimlLayoutGraphPackage.KLAYOUT_NODE__PARENT_NODE:
-				return parentNode != null;
+				return getParentNode() != null;
 			case KimlLayoutGraphPackage.KLAYOUT_NODE__LAYOUT:
 				return layout != null;
 			case KimlLayoutGraphPackage.KLAYOUT_NODE__LABEL:

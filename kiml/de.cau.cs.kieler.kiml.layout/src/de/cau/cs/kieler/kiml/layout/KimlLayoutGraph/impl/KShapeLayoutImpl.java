@@ -13,6 +13,7 @@ import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage;
 
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
@@ -36,7 +37,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  */
 public abstract class KShapeLayoutImpl extends EObjectImpl implements KShapeLayout {
 	/**
-	 * The cached value of the '{@link #getLocation() <em>Location</em>}' reference.
+	 * The cached value of the '{@link #getLocation() <em>Location</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getLocation()
@@ -46,7 +47,7 @@ public abstract class KShapeLayoutImpl extends EObjectImpl implements KShapeLayo
 	protected KPoint location;
 
 	/**
-	 * The cached value of the '{@link #getSize() <em>Size</em>}' reference.
+	 * The cached value of the '{@link #getSize() <em>Size</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getSize()
@@ -100,14 +101,6 @@ public abstract class KShapeLayoutImpl extends EObjectImpl implements KShapeLayo
 	 * @generated
 	 */
 	public KPoint getLocation() {
-		if (location != null && location.eIsProxy()) {
-			InternalEObject oldLocation = (InternalEObject)location;
-			location = (KPoint)eResolveProxy(oldLocation);
-			if (location != oldLocation) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, KimlLayoutGraphPackage.KSHAPE_LAYOUT__LOCATION, oldLocation, location));
-			}
-		}
 		return location;
 	}
 
@@ -116,8 +109,14 @@ public abstract class KShapeLayoutImpl extends EObjectImpl implements KShapeLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public KPoint basicGetLocation() {
-		return location;
+	public NotificationChain basicSetLocation(KPoint newLocation, NotificationChain msgs) {
+		KPoint oldLocation = location;
+		location = newLocation;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KSHAPE_LAYOUT__LOCATION, oldLocation, newLocation);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
 	}
 
 	/**
@@ -126,10 +125,17 @@ public abstract class KShapeLayoutImpl extends EObjectImpl implements KShapeLayo
 	 * @generated
 	 */
 	public void setLocation(KPoint newLocation) {
-		KPoint oldLocation = location;
-		location = newLocation;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KSHAPE_LAYOUT__LOCATION, oldLocation, location));
+		if (newLocation != location) {
+			NotificationChain msgs = null;
+			if (location != null)
+				msgs = ((InternalEObject)location).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - KimlLayoutGraphPackage.KSHAPE_LAYOUT__LOCATION, null, msgs);
+			if (newLocation != null)
+				msgs = ((InternalEObject)newLocation).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - KimlLayoutGraphPackage.KSHAPE_LAYOUT__LOCATION, null, msgs);
+			msgs = basicSetLocation(newLocation, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KSHAPE_LAYOUT__LOCATION, newLocation, newLocation));
 	}
 
 	/**
@@ -138,14 +144,6 @@ public abstract class KShapeLayoutImpl extends EObjectImpl implements KShapeLayo
 	 * @generated
 	 */
 	public KDimension getSize() {
-		if (size != null && size.eIsProxy()) {
-			InternalEObject oldSize = (InternalEObject)size;
-			size = (KDimension)eResolveProxy(oldSize);
-			if (size != oldSize) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, KimlLayoutGraphPackage.KSHAPE_LAYOUT__SIZE, oldSize, size));
-			}
-		}
 		return size;
 	}
 
@@ -154,8 +152,14 @@ public abstract class KShapeLayoutImpl extends EObjectImpl implements KShapeLayo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public KDimension basicGetSize() {
-		return size;
+	public NotificationChain basicSetSize(KDimension newSize, NotificationChain msgs) {
+		KDimension oldSize = size;
+		size = newSize;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KSHAPE_LAYOUT__SIZE, oldSize, newSize);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
 	}
 
 	/**
@@ -164,10 +168,17 @@ public abstract class KShapeLayoutImpl extends EObjectImpl implements KShapeLayo
 	 * @generated
 	 */
 	public void setSize(KDimension newSize) {
-		KDimension oldSize = size;
-		size = newSize;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KSHAPE_LAYOUT__SIZE, oldSize, size));
+		if (newSize != size) {
+			NotificationChain msgs = null;
+			if (size != null)
+				msgs = ((InternalEObject)size).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - KimlLayoutGraphPackage.KSHAPE_LAYOUT__SIZE, null, msgs);
+			if (newSize != null)
+				msgs = ((InternalEObject)newSize).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - KimlLayoutGraphPackage.KSHAPE_LAYOUT__SIZE, null, msgs);
+			msgs = basicSetSize(newSize, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KSHAPE_LAYOUT__SIZE, newSize, newSize));
 	}
 
 	/**
@@ -197,14 +208,28 @@ public abstract class KShapeLayoutImpl extends EObjectImpl implements KShapeLayo
 	 * @generated
 	 */
 	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case KimlLayoutGraphPackage.KSHAPE_LAYOUT__LOCATION:
+				return basicSetLocation(null, msgs);
+			case KimlLayoutGraphPackage.KSHAPE_LAYOUT__SIZE:
+				return basicSetSize(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case KimlLayoutGraphPackage.KSHAPE_LAYOUT__LOCATION:
-				if (resolve) return getLocation();
-				return basicGetLocation();
+				return getLocation();
 			case KimlLayoutGraphPackage.KSHAPE_LAYOUT__SIZE:
-				if (resolve) return getSize();
-				return basicGetSize();
+				return getSize();
 			case KimlLayoutGraphPackage.KSHAPE_LAYOUT__USE_LAYOUT:
 				return isUseLayout() ? Boolean.TRUE : Boolean.FALSE;
 		}

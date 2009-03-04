@@ -15,6 +15,7 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
@@ -44,7 +45,7 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
  */
 public class KEdgeLayoutImpl extends EObjectImpl implements KEdgeLayout {
 	/**
-	 * The cached value of the '{@link #getSourcePoint() <em>Source Point</em>}' reference.
+	 * The cached value of the '{@link #getSourcePoint() <em>Source Point</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getSourcePoint()
@@ -54,7 +55,7 @@ public class KEdgeLayoutImpl extends EObjectImpl implements KEdgeLayout {
 	protected KPoint sourcePoint;
 
 	/**
-	 * The cached value of the '{@link #getTargetPoint() <em>Target Point</em>}' reference.
+	 * The cached value of the '{@link #getTargetPoint() <em>Target Point</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getTargetPoint()
@@ -138,14 +139,6 @@ public class KEdgeLayoutImpl extends EObjectImpl implements KEdgeLayout {
 	 * @generated
 	 */
 	public KPoint getSourcePoint() {
-		if (sourcePoint != null && sourcePoint.eIsProxy()) {
-			InternalEObject oldSourcePoint = (InternalEObject)sourcePoint;
-			sourcePoint = (KPoint)eResolveProxy(oldSourcePoint);
-			if (sourcePoint != oldSourcePoint) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, KimlLayoutGraphPackage.KEDGE_LAYOUT__SOURCE_POINT, oldSourcePoint, sourcePoint));
-			}
-		}
 		return sourcePoint;
 	}
 
@@ -154,8 +147,14 @@ public class KEdgeLayoutImpl extends EObjectImpl implements KEdgeLayout {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public KPoint basicGetSourcePoint() {
-		return sourcePoint;
+	public NotificationChain basicSetSourcePoint(KPoint newSourcePoint, NotificationChain msgs) {
+		KPoint oldSourcePoint = sourcePoint;
+		sourcePoint = newSourcePoint;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KEDGE_LAYOUT__SOURCE_POINT, oldSourcePoint, newSourcePoint);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
 	}
 
 	/**
@@ -164,10 +163,17 @@ public class KEdgeLayoutImpl extends EObjectImpl implements KEdgeLayout {
 	 * @generated
 	 */
 	public void setSourcePoint(KPoint newSourcePoint) {
-		KPoint oldSourcePoint = sourcePoint;
-		sourcePoint = newSourcePoint;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KEDGE_LAYOUT__SOURCE_POINT, oldSourcePoint, sourcePoint));
+		if (newSourcePoint != sourcePoint) {
+			NotificationChain msgs = null;
+			if (sourcePoint != null)
+				msgs = ((InternalEObject)sourcePoint).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - KimlLayoutGraphPackage.KEDGE_LAYOUT__SOURCE_POINT, null, msgs);
+			if (newSourcePoint != null)
+				msgs = ((InternalEObject)newSourcePoint).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - KimlLayoutGraphPackage.KEDGE_LAYOUT__SOURCE_POINT, null, msgs);
+			msgs = basicSetSourcePoint(newSourcePoint, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KEDGE_LAYOUT__SOURCE_POINT, newSourcePoint, newSourcePoint));
 	}
 
 	/**
@@ -176,14 +182,6 @@ public class KEdgeLayoutImpl extends EObjectImpl implements KEdgeLayout {
 	 * @generated
 	 */
 	public KPoint getTargetPoint() {
-		if (targetPoint != null && targetPoint.eIsProxy()) {
-			InternalEObject oldTargetPoint = (InternalEObject)targetPoint;
-			targetPoint = (KPoint)eResolveProxy(oldTargetPoint);
-			if (targetPoint != oldTargetPoint) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, KimlLayoutGraphPackage.KEDGE_LAYOUT__TARGET_POINT, oldTargetPoint, targetPoint));
-			}
-		}
 		return targetPoint;
 	}
 
@@ -192,8 +190,14 @@ public class KEdgeLayoutImpl extends EObjectImpl implements KEdgeLayout {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public KPoint basicGetTargetPoint() {
-		return targetPoint;
+	public NotificationChain basicSetTargetPoint(KPoint newTargetPoint, NotificationChain msgs) {
+		KPoint oldTargetPoint = targetPoint;
+		targetPoint = newTargetPoint;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KEDGE_LAYOUT__TARGET_POINT, oldTargetPoint, newTargetPoint);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
 	}
 
 	/**
@@ -202,10 +206,17 @@ public class KEdgeLayoutImpl extends EObjectImpl implements KEdgeLayout {
 	 * @generated
 	 */
 	public void setTargetPoint(KPoint newTargetPoint) {
-		KPoint oldTargetPoint = targetPoint;
-		targetPoint = newTargetPoint;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KEDGE_LAYOUT__TARGET_POINT, oldTargetPoint, targetPoint));
+		if (newTargetPoint != targetPoint) {
+			NotificationChain msgs = null;
+			if (targetPoint != null)
+				msgs = ((InternalEObject)targetPoint).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - KimlLayoutGraphPackage.KEDGE_LAYOUT__TARGET_POINT, null, msgs);
+			if (newTargetPoint != null)
+				msgs = ((InternalEObject)newTargetPoint).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - KimlLayoutGraphPackage.KEDGE_LAYOUT__TARGET_POINT, null, msgs);
+			msgs = basicSetTargetPoint(newTargetPoint, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KEDGE_LAYOUT__TARGET_POINT, newTargetPoint, newTargetPoint));
 	}
 
 	/**
@@ -268,14 +279,28 @@ public class KEdgeLayoutImpl extends EObjectImpl implements KEdgeLayout {
 	 * @generated
 	 */
 	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case KimlLayoutGraphPackage.KEDGE_LAYOUT__SOURCE_POINT:
+				return basicSetSourcePoint(null, msgs);
+			case KimlLayoutGraphPackage.KEDGE_LAYOUT__TARGET_POINT:
+				return basicSetTargetPoint(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case KimlLayoutGraphPackage.KEDGE_LAYOUT__SOURCE_POINT:
-				if (resolve) return getSourcePoint();
-				return basicGetSourcePoint();
+				return getSourcePoint();
 			case KimlLayoutGraphPackage.KEDGE_LAYOUT__TARGET_POINT:
-				if (resolve) return getTargetPoint();
-				return basicGetTargetPoint();
+				return getTargetPoint();
 			case KimlLayoutGraphPackage.KEDGE_LAYOUT__BEND_POINTS:
 				return getBendPoints();
 			case KimlLayoutGraphPackage.KEDGE_LAYOUT__EDGE_TYPE:

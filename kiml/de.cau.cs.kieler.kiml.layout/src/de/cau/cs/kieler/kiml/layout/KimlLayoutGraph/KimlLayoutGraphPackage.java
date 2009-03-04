@@ -200,7 +200,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	int KLAYOUT_NODE = 7;
 
 	/**
-	 * The feature id for the '<em><b>Child Nodes</b></em>' reference list.
+	 * The feature id for the '<em><b>Child Nodes</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -227,7 +227,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	int KLAYOUT_NODE__INCOMING_EDGES = 2;
 
 	/**
-	 * The feature id for the '<em><b>Parent Node</b></em>' reference.
+	 * The feature id for the '<em><b>Parent Node</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -236,7 +236,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	int KLAYOUT_NODE__PARENT_NODE = 3;
 
 	/**
-	 * The feature id for the '<em><b>Layout</b></em>' reference.
+	 * The feature id for the '<em><b>Layout</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -245,7 +245,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	int KLAYOUT_NODE__LAYOUT = 4;
 
 	/**
-	 * The feature id for the '<em><b>Label</b></em>' reference.
+	 * The feature id for the '<em><b>Label</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -263,7 +263,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	int KLAYOUT_NODE__ID_STRING = 6;
 
 	/**
-	 * The feature id for the '<em><b>Ports</b></em>' reference list.
+	 * The feature id for the '<em><b>Ports</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -291,7 +291,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	int KLAYOUT_GRAPH = 3;
 
 	/**
-	 * The feature id for the '<em><b>Child Nodes</b></em>' reference list.
+	 * The feature id for the '<em><b>Child Nodes</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -318,7 +318,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	int KLAYOUT_GRAPH__INCOMING_EDGES = KLAYOUT_NODE__INCOMING_EDGES;
 
 	/**
-	 * The feature id for the '<em><b>Parent Node</b></em>' reference.
+	 * The feature id for the '<em><b>Parent Node</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -327,7 +327,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	int KLAYOUT_GRAPH__PARENT_NODE = KLAYOUT_NODE__PARENT_NODE;
 
 	/**
-	 * The feature id for the '<em><b>Layout</b></em>' reference.
+	 * The feature id for the '<em><b>Layout</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -336,7 +336,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	int KLAYOUT_GRAPH__LAYOUT = KLAYOUT_NODE__LAYOUT;
 
 	/**
-	 * The feature id for the '<em><b>Label</b></em>' reference.
+	 * The feature id for the '<em><b>Label</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -354,7 +354,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	int KLAYOUT_GRAPH__ID_STRING = KLAYOUT_NODE__ID_STRING;
 
 	/**
-	 * The feature id for the '<em><b>Ports</b></em>' reference list.
+	 * The feature id for the '<em><b>Ports</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -363,13 +363,22 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	int KLAYOUT_GRAPH__PORTS = KLAYOUT_NODE__PORTS;
 
 	/**
+	 * The feature id for the '<em><b>Graph Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KLAYOUT_GRAPH__GRAPH_EDGES = KLAYOUT_NODE_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>KLayout Graph</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int KLAYOUT_GRAPH_FEATURE_COUNT = KLAYOUT_NODE_FEATURE_COUNT + 0;
+	int KLAYOUT_GRAPH_FEATURE_COUNT = KLAYOUT_NODE_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KShapeLayoutImpl <em>KShape Layout</em>}' class.
@@ -382,7 +391,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	int KSHAPE_LAYOUT = 4;
 
 	/**
-	 * The feature id for the '<em><b>Location</b></em>' reference.
+	 * The feature id for the '<em><b>Location</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -391,7 +400,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	int KSHAPE_LAYOUT__LOCATION = 0;
 
 	/**
-	 * The feature id for the '<em><b>Size</b></em>' reference.
+	 * The feature id for the '<em><b>Size</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -446,7 +455,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	int KLAYOUT_EDGE__TARGET = 1;
 
 	/**
-	 * The feature id for the '<em><b>Layout</b></em>' reference.
+	 * The feature id for the '<em><b>Layout</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -455,7 +464,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	int KLAYOUT_EDGE__LAYOUT = 2;
 
 	/**
-	 * The feature id for the '<em><b>Label</b></em>' reference list.
+	 * The feature id for the '<em><b>Label</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -501,7 +510,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	int KEDGE_LAYOUT = 6;
 
 	/**
-	 * The feature id for the '<em><b>Source Point</b></em>' reference.
+	 * The feature id for the '<em><b>Source Point</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -510,7 +519,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	int KEDGE_LAYOUT__SOURCE_POINT = 0;
 
 	/**
-	 * The feature id for the '<em><b>Target Point</b></em>' reference.
+	 * The feature id for the '<em><b>Target Point</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -565,7 +574,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	int KNODE_LAYOUT = 8;
 
 	/**
-	 * The feature id for the '<em><b>Location</b></em>' reference.
+	 * The feature id for the '<em><b>Location</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -574,7 +583,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	int KNODE_LAYOUT__LOCATION = KSHAPE_LAYOUT__LOCATION;
 
 	/**
-	 * The feature id for the '<em><b>Size</b></em>' reference.
+	 * The feature id for the '<em><b>Size</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -619,7 +628,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	int KNODE_LAYOUT__LAYOUTER_NAME = KSHAPE_LAYOUT_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>Insets</b></em>' reference.
+	 * The feature id for the '<em><b>Insets</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -684,7 +693,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	int KEDGE_LABEL__TEXT = KLABEL__TEXT;
 
 	/**
-	 * The feature id for the '<em><b>Label Layout</b></em>' reference.
+	 * The feature id for the '<em><b>Label Layout</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -712,7 +721,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	int KEDGE_LABEL_LAYOUT = 11;
 
 	/**
-	 * The feature id for the '<em><b>Location</b></em>' reference.
+	 * The feature id for the '<em><b>Location</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -721,7 +730,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	int KEDGE_LABEL_LAYOUT__LOCATION = KSHAPE_LAYOUT__LOCATION;
 
 	/**
-	 * The feature id for the '<em><b>Size</b></em>' reference.
+	 * The feature id for the '<em><b>Size</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -776,7 +785,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	int KNODE_LABEL__TEXT = KLABEL__TEXT;
 
 	/**
-	 * The feature id for the '<em><b>Label Layout</b></em>' reference.
+	 * The feature id for the '<em><b>Label Layout</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -804,7 +813,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	int KNODE_LABEL_LAYOUT = 13;
 
 	/**
-	 * The feature id for the '<em><b>Location</b></em>' reference.
+	 * The feature id for the '<em><b>Location</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -813,7 +822,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	int KNODE_LABEL_LAYOUT__LOCATION = KSHAPE_LAYOUT__LOCATION;
 
 	/**
-	 * The feature id for the '<em><b>Size</b></em>' reference.
+	 * The feature id for the '<em><b>Size</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -914,7 +923,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	int KLAYOUT_PORT = 15;
 
 	/**
-	 * The feature id for the '<em><b>Layout</b></em>' reference.
+	 * The feature id for the '<em><b>Layout</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -923,7 +932,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	int KLAYOUT_PORT__LAYOUT = 0;
 
 	/**
-	 * The feature id for the '<em><b>Label</b></em>' reference.
+	 * The feature id for the '<em><b>Label</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -932,7 +941,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	int KLAYOUT_PORT__LABEL = 1;
 
 	/**
-	 * The feature id for the '<em><b>Node</b></em>' reference.
+	 * The feature id for the '<em><b>Node</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -978,7 +987,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	int KPORT_LAYOUT = 16;
 
 	/**
-	 * The feature id for the '<em><b>Location</b></em>' reference.
+	 * The feature id for the '<em><b>Location</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -987,7 +996,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	int KPORT_LAYOUT__LOCATION = KSHAPE_LAYOUT__LOCATION;
 
 	/**
-	 * The feature id for the '<em><b>Size</b></em>' reference.
+	 * The feature id for the '<em><b>Size</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1042,7 +1051,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	int KPORT_LABEL__TEXT = KLABEL__TEXT;
 
 	/**
-	 * The feature id for the '<em><b>Label Layout</b></em>' reference.
+	 * The feature id for the '<em><b>Label Layout</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1070,7 +1079,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	int KPORT_LABEL_LAYOUT = 18;
 
 	/**
-	 * The feature id for the '<em><b>Location</b></em>' reference.
+	 * The feature id for the '<em><b>Location</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1079,7 +1088,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	int KPORT_LABEL_LAYOUT__LOCATION = KSHAPE_LAYOUT__LOCATION;
 
 	/**
-	 * The feature id for the '<em><b>Size</b></em>' reference.
+	 * The feature id for the '<em><b>Size</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1304,6 +1313,17 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	EClass getKLayoutGraph();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutGraph#getGraphEdges <em>Graph Edges</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Graph Edges</em>'.
+	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutGraph#getGraphEdges()
+	 * @see #getKLayoutGraph()
+	 * @generated
+	 */
+	EReference getKLayoutGraph_GraphEdges();
+
+	/**
 	 * Returns the meta object for class '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KShapeLayout <em>KShape Layout</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1314,10 +1334,10 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	EClass getKShapeLayout();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KShapeLayout#getLocation <em>Location</em>}'.
+	 * Returns the meta object for the containment reference '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KShapeLayout#getLocation <em>Location</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Location</em>'.
+	 * @return the meta object for the containment reference '<em>Location</em>'.
 	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KShapeLayout#getLocation()
 	 * @see #getKShapeLayout()
 	 * @generated
@@ -1325,10 +1345,10 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	EReference getKShapeLayout_Location();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KShapeLayout#getSize <em>Size</em>}'.
+	 * Returns the meta object for the containment reference '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KShapeLayout#getSize <em>Size</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Size</em>'.
+	 * @return the meta object for the containment reference '<em>Size</em>'.
 	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KShapeLayout#getSize()
 	 * @see #getKShapeLayout()
 	 * @generated
@@ -1379,10 +1399,10 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	EReference getKLayoutEdge_Target();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge#getLayout <em>Layout</em>}'.
+	 * Returns the meta object for the containment reference '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge#getLayout <em>Layout</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Layout</em>'.
+	 * @return the meta object for the containment reference '<em>Layout</em>'.
 	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge#getLayout()
 	 * @see #getKLayoutEdge()
 	 * @generated
@@ -1390,10 +1410,10 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	EReference getKLayoutEdge_Layout();
 
 	/**
-	 * Returns the meta object for the reference list '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge#getLabel <em>Label</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge#getLabel <em>Label</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Label</em>'.
+	 * @return the meta object for the containment reference list '<em>Label</em>'.
 	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge#getLabel()
 	 * @see #getKLayoutEdge()
 	 * @generated
@@ -1433,10 +1453,10 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	EClass getKEdgeLayout();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLayout#getSourcePoint <em>Source Point</em>}'.
+	 * Returns the meta object for the containment reference '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLayout#getSourcePoint <em>Source Point</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Source Point</em>'.
+	 * @return the meta object for the containment reference '<em>Source Point</em>'.
 	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLayout#getSourcePoint()
 	 * @see #getKEdgeLayout()
 	 * @generated
@@ -1444,10 +1464,10 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	EReference getKEdgeLayout_SourcePoint();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLayout#getTargetPoint <em>Target Point</em>}'.
+	 * Returns the meta object for the containment reference '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLayout#getTargetPoint <em>Target Point</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Target Point</em>'.
+	 * @return the meta object for the containment reference '<em>Target Point</em>'.
 	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLayout#getTargetPoint()
 	 * @see #getKEdgeLayout()
 	 * @generated
@@ -1498,10 +1518,10 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	EClass getKLayoutNode();
 
 	/**
-	 * Returns the meta object for the reference list '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode#getChildNodes <em>Child Nodes</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode#getChildNodes <em>Child Nodes</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Child Nodes</em>'.
+	 * @return the meta object for the containment reference list '<em>Child Nodes</em>'.
 	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode#getChildNodes()
 	 * @see #getKLayoutNode()
 	 * @generated
@@ -1531,10 +1551,10 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	EReference getKLayoutNode_IncomingEdges();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode#getParentNode <em>Parent Node</em>}'.
+	 * Returns the meta object for the container reference '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode#getParentNode <em>Parent Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Parent Node</em>'.
+	 * @return the meta object for the container reference '<em>Parent Node</em>'.
 	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode#getParentNode()
 	 * @see #getKLayoutNode()
 	 * @generated
@@ -1542,10 +1562,10 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	EReference getKLayoutNode_ParentNode();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode#getLayout <em>Layout</em>}'.
+	 * Returns the meta object for the containment reference '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode#getLayout <em>Layout</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Layout</em>'.
+	 * @return the meta object for the containment reference '<em>Layout</em>'.
 	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode#getLayout()
 	 * @see #getKLayoutNode()
 	 * @generated
@@ -1553,10 +1573,10 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	EReference getKLayoutNode_Layout();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode#getLabel <em>Label</em>}'.
+	 * Returns the meta object for the containment reference '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode#getLabel <em>Label</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Label</em>'.
+	 * @return the meta object for the containment reference '<em>Label</em>'.
 	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode#getLabel()
 	 * @see #getKLayoutNode()
 	 * @generated
@@ -1575,10 +1595,10 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	EAttribute getKLayoutNode_IdString();
 
 	/**
-	 * Returns the meta object for the reference list '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode#getPorts <em>Ports</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode#getPorts <em>Ports</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Ports</em>'.
+	 * @return the meta object for the containment reference list '<em>Ports</em>'.
 	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode#getPorts()
 	 * @see #getKLayoutNode()
 	 * @generated
@@ -1629,10 +1649,10 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	EAttribute getKNodeLayout_LayouterName();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeLayout#getInsets <em>Insets</em>}'.
+	 * Returns the meta object for the containment reference '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeLayout#getInsets <em>Insets</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Insets</em>'.
+	 * @return the meta object for the containment reference '<em>Insets</em>'.
 	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeLayout#getInsets()
 	 * @see #getKNodeLayout()
 	 * @generated
@@ -1671,10 +1691,10 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	EClass getKEdgeLabel();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLabel#getLabelLayout <em>Label Layout</em>}'.
+	 * Returns the meta object for the containment reference '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLabel#getLabelLayout <em>Label Layout</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Label Layout</em>'.
+	 * @return the meta object for the containment reference '<em>Label Layout</em>'.
 	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLabel#getLabelLayout()
 	 * @see #getKEdgeLabel()
 	 * @generated
@@ -1713,10 +1733,10 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	EClass getKNodeLabel();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeLabel#getLabelLayout <em>Label Layout</em>}'.
+	 * Returns the meta object for the containment reference '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeLabel#getLabelLayout <em>Label Layout</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Label Layout</em>'.
+	 * @return the meta object for the containment reference '<em>Label Layout</em>'.
 	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeLabel#getLabelLayout()
 	 * @see #getKNodeLabel()
 	 * @generated
@@ -1809,10 +1829,10 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	EClass getKLayoutPort();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort#getLayout <em>Layout</em>}'.
+	 * Returns the meta object for the containment reference '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort#getLayout <em>Layout</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Layout</em>'.
+	 * @return the meta object for the containment reference '<em>Layout</em>'.
 	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort#getLayout()
 	 * @see #getKLayoutPort()
 	 * @generated
@@ -1820,10 +1840,10 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	EReference getKLayoutPort_Layout();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort#getLabel <em>Label</em>}'.
+	 * Returns the meta object for the containment reference '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort#getLabel <em>Label</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Label</em>'.
+	 * @return the meta object for the containment reference '<em>Label</em>'.
 	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort#getLabel()
 	 * @see #getKLayoutPort()
 	 * @generated
@@ -1831,10 +1851,10 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	EReference getKLayoutPort_Label();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort#getNode <em>Node</em>}'.
+	 * Returns the meta object for the container reference '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort#getNode <em>Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Node</em>'.
+	 * @return the meta object for the container reference '<em>Node</em>'.
 	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort#getNode()
 	 * @see #getKLayoutPort()
 	 * @generated
@@ -1895,10 +1915,10 @@ public interface KimlLayoutGraphPackage extends EPackage {
 	EClass getKPortLabel();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPortLabel#getLabelLayout <em>Label Layout</em>}'.
+	 * Returns the meta object for the containment reference '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPortLabel#getLabelLayout <em>Label Layout</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Label Layout</em>'.
+	 * @return the meta object for the containment reference '<em>Label Layout</em>'.
 	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPortLabel#getLabelLayout()
 	 * @see #getKPortLabel()
 	 * @generated
@@ -2112,6 +2132,14 @@ public interface KimlLayoutGraphPackage extends EPackage {
 		EClass KLAYOUT_GRAPH = eINSTANCE.getKLayoutGraph();
 
 		/**
+		 * The meta object literal for the '<em><b>Graph Edges</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference KLAYOUT_GRAPH__GRAPH_EDGES = eINSTANCE.getKLayoutGraph_GraphEdges();
+
+		/**
 		 * The meta object literal for the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl.KShapeLayoutImpl <em>KShape Layout</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2122,7 +2150,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 		EClass KSHAPE_LAYOUT = eINSTANCE.getKShapeLayout();
 
 		/**
-		 * The meta object literal for the '<em><b>Location</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Location</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -2130,7 +2158,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 		EReference KSHAPE_LAYOUT__LOCATION = eINSTANCE.getKShapeLayout_Location();
 
 		/**
-		 * The meta object literal for the '<em><b>Size</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Size</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -2172,7 +2200,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 		EReference KLAYOUT_EDGE__TARGET = eINSTANCE.getKLayoutEdge_Target();
 
 		/**
-		 * The meta object literal for the '<em><b>Layout</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Layout</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -2180,7 +2208,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 		EReference KLAYOUT_EDGE__LAYOUT = eINSTANCE.getKLayoutEdge_Layout();
 
 		/**
-		 * The meta object literal for the '<em><b>Label</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Label</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -2214,7 +2242,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 		EClass KEDGE_LAYOUT = eINSTANCE.getKEdgeLayout();
 
 		/**
-		 * The meta object literal for the '<em><b>Source Point</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Source Point</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -2222,7 +2250,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 		EReference KEDGE_LAYOUT__SOURCE_POINT = eINSTANCE.getKEdgeLayout_SourcePoint();
 
 		/**
-		 * The meta object literal for the '<em><b>Target Point</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Target Point</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -2264,7 +2292,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 		EClass KLAYOUT_NODE = eINSTANCE.getKLayoutNode();
 
 		/**
-		 * The meta object literal for the '<em><b>Child Nodes</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Child Nodes</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -2288,7 +2316,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 		EReference KLAYOUT_NODE__INCOMING_EDGES = eINSTANCE.getKLayoutNode_IncomingEdges();
 
 		/**
-		 * The meta object literal for the '<em><b>Parent Node</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Parent Node</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -2296,7 +2324,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 		EReference KLAYOUT_NODE__PARENT_NODE = eINSTANCE.getKLayoutNode_ParentNode();
 
 		/**
-		 * The meta object literal for the '<em><b>Layout</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Layout</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -2304,7 +2332,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 		EReference KLAYOUT_NODE__LAYOUT = eINSTANCE.getKLayoutNode_Layout();
 
 		/**
-		 * The meta object literal for the '<em><b>Label</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Label</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -2320,7 +2348,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 		EAttribute KLAYOUT_NODE__ID_STRING = eINSTANCE.getKLayoutNode_IdString();
 
 		/**
-		 * The meta object literal for the '<em><b>Ports</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Ports</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -2362,7 +2390,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 		EAttribute KNODE_LAYOUT__LAYOUTER_NAME = eINSTANCE.getKNodeLayout_LayouterName();
 
 		/**
-		 * The meta object literal for the '<em><b>Insets</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Insets</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -2398,7 +2426,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 		EClass KEDGE_LABEL = eINSTANCE.getKEdgeLabel();
 
 		/**
-		 * The meta object literal for the '<em><b>Label Layout</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Label Layout</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -2434,7 +2462,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 		EClass KNODE_LABEL = eINSTANCE.getKNodeLabel();
 
 		/**
-		 * The meta object literal for the '<em><b>Label Layout</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Label Layout</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -2512,7 +2540,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 		EClass KLAYOUT_PORT = eINSTANCE.getKLayoutPort();
 
 		/**
-		 * The meta object literal for the '<em><b>Layout</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Layout</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -2520,7 +2548,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 		EReference KLAYOUT_PORT__LAYOUT = eINSTANCE.getKLayoutPort_Layout();
 
 		/**
-		 * The meta object literal for the '<em><b>Label</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Label</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -2528,7 +2556,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 		EReference KLAYOUT_PORT__LABEL = eINSTANCE.getKLayoutPort_Label();
 
 		/**
-		 * The meta object literal for the '<em><b>Node</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Node</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -2580,7 +2608,7 @@ public interface KimlLayoutGraphPackage extends EPackage {
 		EClass KPORT_LABEL = eINSTANCE.getKPortLabel();
 
 		/**
-		 * The meta object literal for the '<em><b>Label Layout</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Label Layout</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
