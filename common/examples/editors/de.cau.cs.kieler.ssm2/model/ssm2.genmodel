@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/de.cau.cs.kieler.ssm2/src"
+    modelPluginID="de.cau.cs.kieler.ssm2" modelName="Ssm2" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="6.0" copyrightFields="false">
+  <foreignModel>ssm2.ecore</foreignModel>
+  <genPackages prefix="Ssm2" disposableProviderFactory="true" ecorePackage="ssm2.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="ssm2.ecore#//StateKind">
+      <genEnumLiterals ecoreEnumLiteral="ssm2.ecore#//StateKind/NORMAL"/>
+      <genEnumLiterals ecoreEnumLiteral="ssm2.ecore#//StateKind/PSEUDO"/>
+      <genEnumLiterals ecoreEnumLiteral="ssm2.ecore#//StateKind/REFERENCE"/>
+      <genEnumLiterals ecoreEnumLiteral="ssm2.ecore#//StateKind/TEXTUAL"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="ssm2.ecore#//StateFlag">
+      <genEnumLiterals ecoreEnumLiteral="ssm2.ecore#//StateFlag/NORMAL"/>
+      <genEnumLiterals ecoreEnumLiteral="ssm2.ecore#//StateFlag/INITIAL"/>
+      <genEnumLiterals ecoreEnumLiteral="ssm2.ecore#//StateFlag/FINAL"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="ssm2.ecore#//TransitionKind">
+      <genEnumLiterals ecoreEnumLiteral="ssm2.ecore#//TransitionKind/STRONGABORT"/>
+      <genEnumLiterals ecoreEnumLiteral="ssm2.ecore#//TransitionKind/WEAKABORT"/>
+      <genEnumLiterals ecoreEnumLiteral="ssm2.ecore#//TransitionKind/NORMALTERMINATION"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="ssm2.ecore#//OperatorKind">
+      <genEnumLiterals ecoreEnumLiteral="ssm2.ecore#//OperatorKind/NOT"/>
+      <genEnumLiterals ecoreEnumLiteral="ssm2.ecore#//OperatorKind/EQ"/>
+      <genEnumLiterals ecoreEnumLiteral="ssm2.ecore#//OperatorKind/LT"/>
+      <genEnumLiterals ecoreEnumLiteral="ssm2.ecore#//OperatorKind/LEQ"/>
+      <genEnumLiterals ecoreEnumLiteral="ssm2.ecore#//OperatorKind/AND"/>
+      <genEnumLiterals ecoreEnumLiteral="ssm2.ecore#//OperatorKind/OR"/>
+      <genEnumLiterals ecoreEnumLiteral="ssm2.ecore#//OperatorKind/ADD"/>
+      <genEnumLiterals ecoreEnumLiteral="ssm2.ecore#//OperatorKind/SUB"/>
+      <genEnumLiterals ecoreEnumLiteral="ssm2.ecore#//OperatorKind/MULT"/>
+      <genEnumLiterals ecoreEnumLiteral="ssm2.ecore#//OperatorKind/DIV"/>
+      <genEnumLiterals ecoreEnumLiteral="ssm2.ecore#//OperatorKind/VAL"/>
+    </genEnums>
+    <genClasses ecoreClass="ssm2.ecore#//State">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ssm2.ecore#//State/stateKind"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ssm2.ecore#//State/stateFlag"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ssm2.ecore#//State/signals"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ssm2.ecore#//State/innerStates"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ssm2.ecore#//State/entryActions"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ssm2.ecore#//State/innerActions"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ssm2.ecore#//State/exitActions"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ssm2.ecore#//State/signalRenamings"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ssm2.ecore#//State/suspensionTrigger"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ssm2.ecore#//State/outgoingTransitions"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ssm2.ecore#//State/name"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ssm2.ecore#//State/parentState"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ssm2.ecore#//State/variables"/>
+    </genClasses>
+    <genClasses ecoreClass="ssm2.ecore#//Signal">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ssm2.ecore#//Signal/value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ssm2.ecore#//Signal/name"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ssm2.ecore#//Signal/parentState"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ssm2.ecore#//Signal/isLocal"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ssm2.ecore#//Signal/isInput"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ssm2.ecore#//Signal/isOutput"/>
+    </genClasses>
+    <genClasses ecoreClass="ssm2.ecore#//Value">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ssm2.ecore#//Value/value"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ssm2.ecore#//Value/parentSignal"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ssm2.ecore#//Value/parentVariable"/>
+    </genClasses>
+    <genClasses ecoreClass="ssm2.ecore#//Emission">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ssm2.ecore#//Emission/newValue"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ssm2.ecore#//Emission/signal"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ssm2.ecore#//Emission/parentAction"/>
+    </genClasses>
+    <genClasses ecoreClass="ssm2.ecore#//Transition">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ssm2.ecore#//Transition/delay"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ssm2.ecore#//Transition/immediate"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ssm2.ecore#//Transition/priority"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ssm2.ecore#//Transition/transitionKind"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ssm2.ecore#//Transition/targetState"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ssm2.ecore#//Transition/sourceState"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ssm2.ecore#//Transition/triggersAndEffects"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ssm2.ecore#//Transition/history"/>
+    </genClasses>
+    <genClasses ecoreClass="ssm2.ecore#//Expression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ssm2.ecore#//Expression/subExpressions"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ssm2.ecore#//Expression/signal"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ssm2.ecore#//Expression/operator"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ssm2.ecore#//Expression/parentExpression"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ssm2.ecore#//Expression/parentAction"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ssm2.ecore#//Expression/variable"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ssm2.ecore#//Expression/parentEmisson"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ssm2.ecore#//Expression/assignment"/>
+    </genClasses>
+    <genClasses ecoreClass="ssm2.ecore#//SignalRenaming">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ssm2.ecore#//SignalRenaming/oldSignal"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ssm2.ecore#//SignalRenaming/newSignal"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ssm2.ecore#//SignalRenaming/parentState"/>
+    </genClasses>
+    <genClasses ecoreClass="ssm2.ecore#//Operator">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ssm2.ecore#//Operator/operatorKind"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ssm2.ecore#//Operator/parentExpression"/>
+    </genClasses>
+    <genClasses ecoreClass="ssm2.ecore#//Action">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ssm2.ecore#//Action/emissions"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ssm2.ecore#//Action/trigger"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ssm2.ecore#//Action/parentStateEntryAction"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ssm2.ecore#//Action/parentStateInnerAction"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ssm2.ecore#//Action/parentStateExitAction"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ssm2.ecore#//Action/assignments"/>
+    </genClasses>
+    <genClasses ecoreClass="ssm2.ecore#//SuspensionTrigger">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ssm2.ecore#//SuspensionTrigger/parentState"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ssm2.ecore#//SuspensionTrigger/immediate"/>
+    </genClasses>
+    <genClasses ecoreClass="ssm2.ecore#//Assignment">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ssm2.ecore#//Assignment/variable"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ssm2.ecore#//Assignment/parentExpression"/>
+    </genClasses>
+    <genClasses ecoreClass="ssm2.ecore#//Variable">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ssm2.ecore#//Variable/vname"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ssm2.ecore#//Variable/value"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ssm2.ecore#//Variable/parentState"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
