@@ -1,0 +1,64 @@
+graph KIELER{
+
+graph [overlap=scale, splines=true];
+node[color=blue];
+
+KIELER [style=filled, color=crimson, shape=doubleoctagon, pos="100,100" layer=l1];
+
+// subprojects
+node[shape=octagon, style=filled, color=firebrick1];
+Editors;
+Semantics;
+Visualization;
+Layout;
+Editing;
+
+// subsubprojects
+node[shape=ellipse, style=filled, color=lightcoral];
+KIELER -- Editors;
+Editors -- mealy;
+Editors -- ssm;
+Editors -- ssm2;
+Editors -- dataflow;
+
+KIELER -- Semantics;
+Semantics -- Simulation;
+Semantics -- CodeGen;
+Semantics -- OnlineDebugging;
+
+KIELER -- Visualization;
+Visualization -- Compare;
+Visualization -- Environment;
+Visualization -- Data;
+
+KIELER -- Layout;
+Layout -- MetaLayout;
+Layout -- Layouter;
+Layouter -- KGraph;
+Layouter -- example;
+Layouter -- GraphViz;
+Layouter -- Zest;
+Layouter -- KLoDD;
+
+KIELER -- Editing;
+Editing -- ModelSynthesis;
+Editing -- Textual;
+Textual -- MultiView;
+Textual -- Esterel;
+Editing -- StructureBased;
+
+// leafs
+node[shape=ellipse, style=filled, color=mistyrose];
+dataflow -- basic;
+dataflow -- Ptolemy;
+dataflow -- SCADE;
+Compare -- KiViK;
+Environment -- KEV;
+MetaLayout -- ViewManagement;
+KLoDD -- Hierarchical;
+KLoDD -- Orthogonal;
+ModelSynthesis -- LegacyCode;
+StructureBased -- GraphBased;
+StructureBased -- Dataflow;
+
+}
