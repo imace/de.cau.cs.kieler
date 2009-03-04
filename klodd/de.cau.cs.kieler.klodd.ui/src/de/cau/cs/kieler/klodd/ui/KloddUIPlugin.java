@@ -38,8 +38,8 @@ public class KloddUIPlugin extends AbstractUIPlugin {
 		// set preference stores
 		IKielerPreferenceStore preferenceStore =
 				new KielerPreferenceStore(getPreferenceStore());
-		HierarchicalDataflowLayoutProvider.preferenceStore = preferenceStore;
-		OrthogonalDataflowLayoutProvider.preferenceStore = preferenceStore;
+		HierarchicalDataflowLayoutProvider.setPreferenceStore(preferenceStore);
+		OrthogonalDataflowLayoutProvider.setPreferenceStore(preferenceStore);
 	}
 
 	/*
