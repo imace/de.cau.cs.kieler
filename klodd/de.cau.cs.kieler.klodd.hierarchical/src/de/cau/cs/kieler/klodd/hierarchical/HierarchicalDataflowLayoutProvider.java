@@ -59,7 +59,16 @@ public class HierarchicalDataflowLayoutProvider extends
 	public static final String VAL_BAL_LAYER_ASS = "bal";
 
 	/** the preference store for this layouter */
-	public static IKielerPreferenceStore preferenceStore;
+	private static IKielerPreferenceStore preferenceStore;
+	
+	/**
+	 * Sets the preference store
+	 * 
+	 * @param preferenceStore the preference store to set
+	 */
+	public static void setPreferenceStore(IKielerPreferenceStore preferenceStore) {
+		HierarchicalDataflowLayoutProvider.preferenceStore = preferenceStore;
+	}
 
 	/** the minimal distance between two nodes or edges */
 	private float minDist;

@@ -117,7 +117,7 @@ public class BalancingNodePlacer extends AbstractAlgorithm implements
 		// apply all move requests
 		for (LinearSegment linearSegment : basicNodePlacer.getMovableSegments()) {
 			float moveDelta = moveRequests[linearSegment.rank];
-			if (moveDelta != Float.NaN) {
+			if (!Float.isNaN(moveDelta)) {
 				for (LayerElement element : linearSegment.elements) {
 					KPoint pos = element.getPosition();
 					if (layoutDirection == KLayoutOption.VERTICAL) {

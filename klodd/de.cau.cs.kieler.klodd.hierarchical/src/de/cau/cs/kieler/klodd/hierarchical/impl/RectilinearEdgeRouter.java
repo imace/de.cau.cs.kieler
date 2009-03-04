@@ -569,6 +569,7 @@ public class RectilinearEdgeRouter extends AbstractAlgorithm implements
 				switch (port.getLayout().getPlacement()) {
 				case NORTH:
 					northPorts.add(element.getPosition());
+					break;
 				case EAST:
 					eastPorts.add(element.getPosition());
 					break;

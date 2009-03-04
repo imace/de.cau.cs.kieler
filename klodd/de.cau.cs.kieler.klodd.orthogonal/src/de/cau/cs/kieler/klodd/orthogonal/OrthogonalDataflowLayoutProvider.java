@@ -37,7 +37,16 @@ public class OrthogonalDataflowLayoutProvider extends
 	public static final float DEF_MIN_DIST = 15.0f;
 	
 	/** the preference store for this layouter */
-	public static IKielerPreferenceStore preferenceStore;
+	private static IKielerPreferenceStore preferenceStore;
+
+	/**
+	 * Sets the preference store.
+	 * 
+	 * @param preferenceStore the preference store to set
+	 */
+	public static void setPreferenceStore(IKielerPreferenceStore preferenceStore) {
+		OrthogonalDataflowLayoutProvider.preferenceStore = preferenceStore;
+	}
 
 	/** the minimal distance between two nodes or edges */
 	private float minDist;

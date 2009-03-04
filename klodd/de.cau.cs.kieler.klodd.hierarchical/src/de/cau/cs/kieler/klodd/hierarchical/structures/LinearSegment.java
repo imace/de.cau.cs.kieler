@@ -34,4 +34,13 @@ public class LinearSegment implements Comparable<LinearSegment> {
 				: -1);
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	public boolean equals(Object obj) {
+		return obj instanceof LinearSegment
+				&& ((LinearSegment)obj).rank == this.rank;
+	}
+	
 }

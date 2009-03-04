@@ -23,7 +23,7 @@ public class LayeringCompacter extends AbstractAlgorithm implements
 	 * Structure describing a horizontal or vertical bar used for
 	 * topological numbering.
 	 */
-	private class TopoBar {
+	private static class TopoBar {
 		/** list of nodes contained in this bar */
 		List<TSMNode> nodes = new LinkedList<TSMNode>();
 		/** rank of this bar obtained by topological numbering */

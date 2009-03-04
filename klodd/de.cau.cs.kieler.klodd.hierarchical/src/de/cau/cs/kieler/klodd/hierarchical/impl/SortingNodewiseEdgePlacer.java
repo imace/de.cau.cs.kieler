@@ -31,7 +31,7 @@ public class SortingNodewiseEdgePlacer extends AbstractAlgorithm implements
 	/**
 	 * Routing slot used to route edges around node elements.
 	 */
-	private class RoutingSlot {
+	private static class RoutingSlot {
 		float start = Float.MAX_VALUE, end = Float.MIN_VALUE;
 		int rank;
 		List<KLayoutPort> ports = new LinkedList<KLayoutPort>();

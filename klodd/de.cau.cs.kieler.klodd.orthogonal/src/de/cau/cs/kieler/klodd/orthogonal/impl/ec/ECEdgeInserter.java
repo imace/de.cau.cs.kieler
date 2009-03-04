@@ -289,7 +289,7 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 						placing.rank += rightCount;
 					}
 				}
-				if (result.endpoint == 1 || result.endpoint == 1)
+				if (result.endpoint == 1 || result.endpoint == -1)
 					result.endpoint = -result.endpoint;
 			}
 			else {

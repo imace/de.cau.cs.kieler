@@ -34,7 +34,7 @@ public class KandinskyLPOrthogonalizer extends AbstractAlgorithm implements
 	 * Abort listener implementation used to control execution of the
 	 * lp_solve library.
 	 */
-	private class LpSolveAborter implements AbortListener {
+	private static class LpSolveAborter implements AbortListener {
 		/** indicates whether a timeout has occurred */
 		boolean timeoutActive = false;
 		/** start time for timeout, set at creation time */

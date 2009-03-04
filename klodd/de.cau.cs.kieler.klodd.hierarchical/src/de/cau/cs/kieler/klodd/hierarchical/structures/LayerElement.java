@@ -429,13 +429,13 @@ public class LayerElement {
 			for (LayerConnection connection : incoming) {
 				if (connection.getSourcePort() != null) {
 					// the source is a node with ports or a port
-					connectionRanks.add(new Integer(connection.getSourceElement()
+					connectionRanks.add(Integer.valueOf(connection.getSourceElement()
 						.getPortRank(connection.getSourcePort(), true)
 						+ connection.getSourceElement().rank));
 				}
 				else {
 					// the source is a node without ports or an edge
-					connectionRanks.add(new Integer(connection.getSourceElement().rank));
+					connectionRanks.add(Integer.valueOf(connection.getSourceElement().rank));
 				}
 			}
 		}
@@ -443,13 +443,13 @@ public class LayerElement {
 			for (LayerConnection connection : outgoing) {
 				if (connection.getTargetPort() != null) {
 					// the target is a node with ports or a port
-					connectionRanks.add(new Integer(connection.getTargetElement()
+					connectionRanks.add(Integer.valueOf(connection.getTargetElement()
 						.getPortRank(connection.getTargetPort(), false)
 						+ connection.getTargetElement().rank));
 				}
 				else {
 					// the target is a node without ports or an edge
-					connectionRanks.add(new Integer(connection.getTargetElement().rank));
+					connectionRanks.add(Integer.valueOf(connection.getTargetElement().rank));
 				}
 			}
 		}
@@ -481,13 +481,13 @@ public class LayerElement {
 					List<Integer> portList = connectionRankMap.get(connection.getTargetPort());
 					if (connection.getSourcePort() != null) {
 						// the source is a node or a port
-						portList.add(new Integer(connection.getSourceElement()
+						portList.add(Integer.valueOf(connection.getSourceElement()
 							.getPortRank(connection.getSourcePort(), forward)
 							+ connection.getSourceElement().rank));
 					}
 					else {
 						// the source is an edge
-						portList.add(new Integer(connection.getSourceElement().rank));
+						portList.add(Integer.valueOf(connection.getSourceElement().rank));
 					}
 				}
 			}
@@ -496,13 +496,13 @@ public class LayerElement {
 					List<Integer> portList = connectionRankMap.get(connection.getSourcePort());
 					if (connection.getTargetPort() != null) {
 						// the target is a node or a port
-						portList.add(new Integer(connection.getTargetElement()
+						portList.add(Integer.valueOf(connection.getTargetElement()
 							.getPortRank(connection.getTargetPort(), forward)
 							+ connection.getTargetElement().rank));
 					}
 					else {
 						// the target is an edge
-						portList.add(new Integer(connection.getTargetElement().rank));
+						portList.add(Integer.valueOf(connection.getTargetElement().rank));
 					}
 				}
 			}
@@ -570,20 +570,20 @@ public class LayerElement {
 			// set the ranks in the newly sorted list
 			if (forward) {
 				for (int i = 0; i < portArray.length; i++) {
-					forwardPortRanks.put(portArray[i], new Integer(i));
+					forwardPortRanks.put(portArray[i], Integer.valueOf(i));
 				}
 			}
 			else {
 				for (int i = 0; i < portArray.length; i++) {
-					backwardsPortRanks.put(portArray[i], new Integer(i));
+					backwardsPortRanks.put(portArray[i], Integer.valueOf(i));
 				}	
 			}
 		}
 		else if (elemObj instanceof KLayoutPort) {
 			if (forward)
-				forwardPortRanks.put((KLayoutPort)elemObj, new Integer(0));
+				forwardPortRanks.put((KLayoutPort)elemObj, Integer.valueOf(0));
 			else
-				backwardsPortRanks.put((KLayoutPort)elemObj, new Integer(0));
+				backwardsPortRanks.put((KLayoutPort)elemObj, Integer.valueOf(0));
 		}
 	}
 	

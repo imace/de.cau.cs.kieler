@@ -85,7 +85,7 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 	/**
 	 * Descriptor class for ports.
 	 */
-	private class PortDescriptor {
+	private static class PortDescriptor {
 		/** list of dummy nodes that were created for the related port */
 		List<TSMNode> nodes = new LinkedList<TSMNode>();
 		/** number of edges going left */
@@ -387,7 +387,7 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 			portDescriptor.nodes.add(newNode);
 		}
 		return new Pair<TSMNode, Boolean>(portDescriptor.nodes.get(nodeIndex),
-				new Boolean(bendConsumed));
+				Boolean.valueOf(bendConsumed));
 	}
 	
 	/**
