@@ -12,7 +12,8 @@
           name="StateFigure"
           qualifiedClassName="de.cau.cs.kieler.ssm2.custom.AttributeAwareStateFigure">
         <layout
-            xsi:type="gmfgraph:FlowLayout"/>
+            xsi:type="gmfgraph:CustomLayout"
+            qualifiedClassName="de.cau.cs.kieler.ssm2.custom.TitledToolbarLayout"/>
         <children
             xsi:type="gmfgraph:Label"
             name="StateNameFigure"
@@ -27,7 +28,8 @@
           xsi:type="gmfgraph:Rectangle"
           name="SignalFigure">
         <layout
-            xsi:type="gmfgraph:FlowLayout"/>
+            xsi:type="gmfgraph:CustomLayout"
+            qualifiedClassName="de.cau.cs.kieler.ssm2.custom.TitledToolbarLayout"/>
         <children
             xsi:type="gmfgraph:Label"
             name="SignalNameFigure"

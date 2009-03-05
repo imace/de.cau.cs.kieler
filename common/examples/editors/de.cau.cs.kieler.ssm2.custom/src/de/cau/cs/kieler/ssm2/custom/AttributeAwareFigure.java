@@ -3,6 +3,7 @@ package de.cau.cs.kieler.ssm2.custom;
 import java.util.List;
 
 import org.eclipse.draw2d.Figure;
+import org.eclipse.draw2d.Graphics;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
@@ -34,14 +35,15 @@ public class AttributeAwareFigure extends Figure implements Adapter {
 		defaultFigure = f;
 	}
 	
+	@Override
+	public void paint(Graphics g){
+		super.paint(g);
+		currentFigure.setBounds(this.getBounds());
+		currentFigure.paint(g);
+	}
+	
 	public void setCurrentFigure(Figure f) {
-		// TODO wenn möglich, immer das Bild als erstes und einziges Kind der Figure behalten
-		// TODO und alle Kinder der Figure (Labels, Compartments usw.) als Kinder des Bildes setzen
-		if (currentFigure != null) {
-			this.remove(currentFigure);
-		}
 		currentFigure = f;
-		this.add(currentFigure);
 	}
 	
 	public void addConditionalFigure(ConditionalFigure cf) {
@@ -65,8 +67,7 @@ public class AttributeAwareFigure extends Figure implements Adapter {
 		for (ConditionalFigure cf : conditionalFigureList) {
 			boolean fulfilled = true;
 			for (Condition c : cf.getConditions()) {
-				if (((modelElement.eGet(c.getFeature()).getClass()).equals(c.getValue().getClass()))
-						&& (!modelElement.eGet(c.getFeature()).equals(c.getValue()))) {
+				if (!(c.isValid(modelElement))) {
 					fulfilled = false;
 					break;
 				}
@@ -79,6 +80,7 @@ public class AttributeAwareFigure extends Figure implements Adapter {
 				setCurrentFigure(defaultFigure);
 			}
 		}
+		this.repaint();
 	}
 
 	@Override
