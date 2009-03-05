@@ -1,5 +1,7 @@
-graph kieler{
+// neato -Tpdf kieler02.dot -o kieler02.pdf -Gstart=2
 
+graph kieler{
+ 
 graph [overlap=scale, splines=true];
 
 Eclipse [style=filled, color=blue1, shape=doubleoctagon, pos = "0, 200" layer=l1] ;
@@ -93,17 +95,14 @@ React[style=filled, color=limegreen, shape=doubleoctagon, label = "Reactive\nPro
 
 node[shape=octagon, style=filled, color=palegreen3];
 KEP;
-KReP;
 KLeP;
 React -- KEP;
-React -- KReP;
 React -- KLeP;
 
 node[shape=ellipse, style=filled, color=palegreen];
 KEP -- evalbench;
+KLeP -- evalbench;
 evalbench [label="KReP\nEval\nBench"];
-KReP -- evalbench;
-
 
 // interrelations 
 edge [len=2, style=dashed];
@@ -122,5 +121,6 @@ RCP -- evalbench;
 
 edge [len=1,style=dashed];
 CodeGen -- KEP;
+Simulation -- evalbench;
 
 }
