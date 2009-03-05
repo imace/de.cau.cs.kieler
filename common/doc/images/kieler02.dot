@@ -106,18 +106,21 @@ KReP -- evalbench;
 
 
 // interrelations 
-edge [len=2 style=dashed];
+edge [len=2, style=dashed];
 CodeGen -- oAWCodeGen;
 Textual -- Xtext;
 Compare -- EMFCompare;
 ssm2 -- Validation;
 StructureBased -- Transformation;
-RCP -- evalbench;
 Editors -- GMF;
 KGraph -- EMF;
 Dataflow -- dataflow;
 Esterel -- ssm2;
-CodeGen -- KEP;
 GraphBased -- ssm2;
 Simulation -- Ptolemy;
+RCP -- evalbench;
+
+edge [len=1,style=dashed];
+CodeGen -- KEP;
+
 }
