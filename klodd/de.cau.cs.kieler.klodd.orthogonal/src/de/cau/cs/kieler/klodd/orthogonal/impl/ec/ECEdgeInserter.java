@@ -78,7 +78,7 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 		/** number of edges that are already placed */
 		int edgeCount = 0;
 		/** rank of the first edge */
-		int firstEdgeRank = 0;
+		int firstEdgeRank = -1;
 		/** set of admissible placings */
 		List<EdgePlacing> placings = null;
 		/** relative position of the other endpoint: < 0 for lesser,
@@ -295,10 +295,12 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 			else {
 				if (firstRank >= 0) {
 					result.firstEdgeRank = firstRank;
-					EdgePlacing[] placings = result.placings.toArray(new EdgePlacing[0]);
-					for (EdgePlacing placing : placings) {
-						result.placings.add(new EdgePlacing(
-								placing.rank + leftCount));
+					if (result.placings != null) {
+						EdgePlacing[] placings = result.placings.toArray(new EdgePlacing[0]);
+						for (EdgePlacing placing : placings) {
+							result.placings.add(new EdgePlacing(
+									placing.rank + leftCount));
+						}
 					}
 				}
 			}
@@ -326,8 +328,12 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 				if (resultsIter.hasPrevious())
 					resultsIter.previous();
 				resultsIter.add(childResult);
+				
+				if (childResult.edgeCount > 0 && (result.firstEdgeRank == -1
+						|| result.firstEdgeRank < childResult.firstEdgeRank))
+					result.firstEdgeRank = childResult.firstEdgeRank;
 			}
-			result.firstEdgeRank = sortedResults.getFirst().firstEdgeRank;
+			
 			if (result.placings != null) {
 				if (insBlockNonEmpty) {
 					int position = 0;
