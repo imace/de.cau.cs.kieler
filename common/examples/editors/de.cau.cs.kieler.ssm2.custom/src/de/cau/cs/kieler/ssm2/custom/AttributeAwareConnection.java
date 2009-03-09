@@ -66,19 +66,16 @@ public class AttributeAwareConnection extends PolylineConnection implements Adap
 		conditionalFigureList.add(cf);
 	}
 	
-	@Override
 	public Notifier getTarget() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
 	public boolean isAdapterForType(Object type) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	@Override
 	public void notifyChanged(Notification notification) {
 		for (ConditionalFigure cf : conditionalFigureList) {
 			boolean fulfilled = true;
@@ -99,7 +96,6 @@ public class AttributeAwareConnection extends PolylineConnection implements Adap
 		this.repaint();
 	}
 
-	@Override
 	public void setTarget(Notifier newTarget) {
 		// TODO Auto-generated method stub
 		

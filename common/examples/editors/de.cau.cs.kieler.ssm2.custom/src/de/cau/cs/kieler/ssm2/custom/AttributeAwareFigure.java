@@ -60,19 +60,16 @@ public class AttributeAwareFigure extends Figure implements Adapter {
 		conditionalFigureList.add(cf);
 	}
 	
-	@Override
 	public Notifier getTarget() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
 	public boolean isAdapterForType(Object type) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	@Override
 	public void notifyChanged(Notification notification) {
 		for (ConditionalFigure cf : conditionalFigureList) {
 			boolean fulfilled = true;
@@ -93,7 +90,6 @@ public class AttributeAwareFigure extends Figure implements Adapter {
 		this.repaint();
 	}
 
-	@Override
 	public void setTarget(Notifier newTarget) {
 		// TODO Auto-generated method stub
 		
