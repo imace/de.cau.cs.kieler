@@ -13,10 +13,12 @@ import ssm2.StateFlag;
 import ssm2.StateKind;
 
 public class AttributeAwareStateFigure extends AttributeAwareFigure {
-		
+	
+	//Bei Gelegenheit durch Einsatz von Array optimieren
 	public AttributeAwareStateFigure(EditPart e) {
 		super();
 		this.setModelElementAndRegisterFromEditPart(e);
+		layout = new StateLayout();
 		
 		RoundedRectangle normalStateFigure = new RoundedRectangle();
 		normalStateFigure.setFill(false);
@@ -30,29 +32,29 @@ public class AttributeAwareStateFigure extends AttributeAwareFigure {
 		
 		RoundedRectangle initialStateFigure = new RoundedRectangle();
 		initialStateFigure.setFill(false);
-		initialStateFigure.setLineWidth(4);
+		initialStateFigure.setLineWidth(6);
 		initialStateFigure.setForegroundColor(ColorConstants.black);
 		
 		Ellipse initialNChildrenStateFigure = new Ellipse();
 		initialNChildrenStateFigure.setFill(false);
-		initialNChildrenStateFigure.setLineWidth(4);
+		initialNChildrenStateFigure.setLineWidth(6);
 		initialNChildrenStateFigure.setForegroundColor(ColorConstants.black);
 		
-		RoundedRectangle finalStateFigure = new RoundedRectangle();
+		RoundedRectangle finalStateFigure = new DoubleRoundedRectangle();
 		finalStateFigure.setFill(false);
 		finalStateFigure.setLineWidth(2);
 		finalStateFigure.setForegroundColor(ColorConstants.black);
 		
-		Ellipse finalNChildrenStateFigure = new Ellipse();
+		Ellipse finalNChildrenStateFigure = new DoubleEllipse();
 		finalNChildrenStateFigure.setFill(false);
 		finalNChildrenStateFigure.setLineWidth(2);
 		finalNChildrenStateFigure.setForegroundColor(ColorConstants.black);
 		
-		Ellipse pseudoStateFigure = new Ellipse();
+		PseudoStateFigure pseudoStateFigure = new PseudoStateFigure();
 		pseudoStateFigure.setFill(true);
 		pseudoStateFigure.setLineWidth(2);
 		pseudoStateFigure.setForegroundColor(ColorConstants.black);
-		pseudoStateFigure.setBackgroundColor(ColorConstants.gray);
+		pseudoStateFigure.setBackgroundColor(ColorConstants.lightGray);
 					
 		this.setDefaultFigure(normalStateFigure);
 		this.setCurrentFigure(normalNChildrenStateFigure);

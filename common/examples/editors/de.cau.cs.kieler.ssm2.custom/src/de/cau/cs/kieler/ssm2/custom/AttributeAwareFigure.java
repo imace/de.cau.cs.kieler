@@ -2,6 +2,7 @@ package de.cau.cs.kieler.ssm2.custom;
 
 import java.util.List;
 
+import org.eclipse.draw2d.AbstractLayout;
 import org.eclipse.draw2d.Figure;
 import org.eclipse.draw2d.Graphics;
 import org.eclipse.emf.common.notify.Adapter;
@@ -17,13 +18,18 @@ public class AttributeAwareFigure extends Figure implements Adapter {
 	protected EObject modelElement;
 	protected Figure defaultFigure;
 	protected Figure currentFigure;
+	protected AbstractLayout layout;
 	
 	public AttributeAwareFigure() {
 		super();
-		modelElement = null;
-		conditionalFigureList = null;
-		defaultFigure = null;
-		currentFigure = null;
+	}
+	
+	public void setLayout(AbstractLayout l) {
+		layout = l;
+	}
+	
+	public EObject getModelElement() {
+		return modelElement;
 	}
 		
 	public void setModelElementAndRegisterFromEditPart(EditPart e) {
@@ -40,6 +46,10 @@ public class AttributeAwareFigure extends Figure implements Adapter {
 		super.paint(g);
 		currentFigure.setBounds(this.getBounds());
 		currentFigure.paint(g);
+	}
+	
+	public Figure getCurrentFigure() {
+		return currentFigure;
 	}
 	
 	public void setCurrentFigure(Figure f) {
