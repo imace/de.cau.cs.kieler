@@ -7,12 +7,11 @@ import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.PolygonDecoration;
 import org.eclipse.draw2d.PolylineConnection;
 import org.eclipse.draw2d.PolylineDecoration;
-import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.PointList;
 import org.eclipse.gef.EditPart;
 
-import ssm2.Ssm2Package;
-import ssm2.TransitionKind;
+import de.cau.cs.kieler.ssm2.Ssm2Package;
+import de.cau.cs.kieler.ssm2.TransitionKind;
 
 public class AttributeAwareTransitionFigure extends AttributeAwareConnection {
 

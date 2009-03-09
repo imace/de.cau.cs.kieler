@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.eclipse.gef.EditPart;
 
-import ssm2.Ssm2Package;
+import de.cau.cs.kieler.ssm2.Ssm2Package;
 
 public class AttributeAwareSignalFigure extends AttributeAwareFigure {
 	

@@ -8,9 +8,9 @@ import org.eclipse.draw2d.Ellipse;
 import org.eclipse.draw2d.RoundedRectangle;
 import org.eclipse.gef.EditPart;
 
-import ssm2.Ssm2Package;
-import ssm2.StateFlag;
-import ssm2.StateKind;
+import de.cau.cs.kieler.ssm2.Ssm2Package;
+import de.cau.cs.kieler.ssm2.StateFlag;
+import de.cau.cs.kieler.ssm2.StateKind;
 
 public class AttributeAwareStateFigure extends AttributeAwareFigure {
 	
