@@ -22,8 +22,6 @@ import ssm2.State;
 import ssm2.Value;
 import ssm2.Variable;
 
-
-
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Variable</b></em>'.

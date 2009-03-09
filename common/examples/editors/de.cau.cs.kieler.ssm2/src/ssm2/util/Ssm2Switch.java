@@ -13,8 +13,6 @@ import org.eclipse.emf.ecore.EObject;
 
 import ssm2.*;
 
-
-
 /**
  * <!-- begin-user-doc -->
  * The <b>Switch</b> for the model's inheritance hierarchy.

@@ -22,8 +22,6 @@ import ssm2.Operator;
 import ssm2.OperatorKind;
 import ssm2.Ssm2Package;
 
-
-
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Operator</b></em>'.

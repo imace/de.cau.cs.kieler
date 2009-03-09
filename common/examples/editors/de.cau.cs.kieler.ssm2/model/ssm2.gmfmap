@@ -18,11 +18,8 @@
         <features
             href="ssm2.ecore#//Signal/name"/>
       </labelMappings>
-      <tool
-          xsi:type="gmftool:CreationTool"
-          href="ssm2.gmftool#//@palette/@tools.0/@tools.1"/>
       <diagramNode
-          href="ssm2.gmfgraph#Signal"/>
+          href="ssm2.gmfgraph#SignalName"/>
     </ownedChild>
   </nodes>
   <nodes>
@@ -51,11 +48,114 @@
         <childrenFeature
             href="ssm2.ecore#//State/innerStates"/>
       </children>
+      <children
+          compartment="//@nodes.1/@ownedChild/@compartments.1"
+          referencedChild="//@nodes.0/@ownedChild">
+        <containmentFeature
+            href="ssm2.ecore#//State/signals"/>
+        <childrenFeature
+            href="ssm2.ecore#//State/signals"/>
+      </children>
+      <children
+          compartment="//@nodes.1/@ownedChild/@compartments.2"
+          referencedChild="//@nodes.2/@ownedChild">
+        <containmentFeature
+            href="ssm2.ecore#//State/entryActions"/>
+        <childrenFeature
+            href="ssm2.ecore#//State/entryActions"/>
+      </children>
+      <children
+          compartment="//@nodes.1/@ownedChild/@compartments.3"
+          referencedChild="//@nodes.3/@ownedChild">
+        <containmentFeature
+            href="ssm2.ecore#//State/innerActions"/>
+        <childrenFeature
+            href="ssm2.ecore#//State/innerActions"/>
+      </children>
+      <children
+          compartment="//@nodes.1/@ownedChild/@compartments.4"
+          referencedChild="//@nodes.4/@ownedChild">
+        <containmentFeature
+            href="ssm2.ecore#//State/exitActions"/>
+        <childrenFeature
+            href="ssm2.ecore#//State/exitActions"/>
+      </children>
       <compartments
           children="//@nodes.1/@ownedChild/@children.0">
         <compartment
             href="ssm2.gmfgraph#StateCompartment"/>
       </compartments>
+      <compartments
+          children="//@nodes.1/@ownedChild/@children.1">
+        <compartment
+            href="ssm2.gmfgraph#SignalCompartment"/>
+      </compartments>
+      <compartments
+          children="//@nodes.1/@ownedChild/@children.2">
+        <compartment
+            href="ssm2.gmfgraph#EntryActionsCompartment"/>
+      </compartments>
+      <compartments
+          children="//@nodes.1/@ownedChild/@children.3">
+        <compartment
+            href="ssm2.gmfgraph#InnerActionsCompartment"/>
+      </compartments>
+      <compartments
+          children="//@nodes.1/@ownedChild/@children.4">
+        <compartment
+            href="ssm2.gmfgraph#ExitActionsCompartment"/>
+      </compartments>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
+        href="ssm2.ecore#//State/entryActions"/>
+    <ownedChild>
+      <domainMetaElement
+          href="ssm2.ecore#//Action"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="ssm2.gmfgraph#EntryActionTriggersAndEffects"/>
+        <features
+            href="ssm2.ecore#//Action/triggersAndEffects"/>
+      </labelMappings>
+      <diagramNode
+          href="ssm2.gmfgraph#EntryActionTriggersAndEffects"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
+        href="ssm2.ecore#//State/innerActions"/>
+    <ownedChild>
+      <domainMetaElement
+          href="ssm2.ecore#//Action"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="ssm2.gmfgraph#InnerActionTriggersAndEffects"/>
+        <features
+            href="ssm2.ecore#//Action/triggersAndEffects"/>
+      </labelMappings>
+      <diagramNode
+          href="ssm2.gmfgraph#InnerActionTriggersAndEffects"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
+        href="ssm2.ecore#//State/exitActions"/>
+    <ownedChild>
+      <domainMetaElement
+          href="ssm2.ecore#//Action"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="ssm2.gmfgraph#ExitActionsTriggersAndEffects"/>
+        <features
+            href="ssm2.ecore#//Action/triggersAndEffects"/>
+      </labelMappings>
+      <diagramNode
+          href="ssm2.gmfgraph#ExitActionsTriggersAndEffects"/>
     </ownedChild>
   </nodes>
   <links>
@@ -66,13 +166,13 @@
       <diagramLabel
           href="ssm2.gmfgraph#TransitionTriggersAndEffects"/>
       <features
-          href="ssm2.ecore#//Transition/triggersAndEffects"/>
+          href="ssm2.ecore#//Action/triggersAndEffects"/>
     </labelMappings>
     <containmentFeature
         href="ssm2.ecore#//State/outgoingTransitions"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="ssm2.gmftool#//@palette/@tools.0/@tools.2"/>
+        href="ssm2.gmftool#//@palette/@tools.0/@tools.1"/>
     <diagramLink
         href="ssm2.gmfgraph#Transition"/>
     <sourceMetaFeature

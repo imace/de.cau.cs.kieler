@@ -31,8 +31,6 @@ import ssm2.Expression;
 import ssm2.Ssm2Package;
 import ssm2.State;
 
-
-
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Action</b></em>'.
@@ -46,6 +44,7 @@ import ssm2.State;
  *   <li>{@link ssm2.impl.ActionImpl#getParentStateInnerAction <em>Parent State Inner Action</em>}</li>
  *   <li>{@link ssm2.impl.ActionImpl#getParentStateExitAction <em>Parent State Exit Action</em>}</li>
  *   <li>{@link ssm2.impl.ActionImpl#getAssignments <em>Assignments</em>}</li>
+ *   <li>{@link ssm2.impl.ActionImpl#getTriggersAndEffects <em>Triggers And Effects</em>}</li>
  * </ul>
  * </p>
  *
@@ -81,6 +80,26 @@ public class ActionImpl extends EObjectImpl implements Action {
 	 * @ordered
 	 */
 	protected EList<Assignment> assignments;
+
+	/**
+	 * The default value of the '{@link #getTriggersAndEffects() <em>Triggers And Effects</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTriggersAndEffects()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String TRIGGERS_AND_EFFECTS_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getTriggersAndEffects() <em>Triggers And Effects</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTriggersAndEffects()
+	 * @generated
+	 * @ordered
+	 */
+	protected String triggersAndEffects = TRIGGERS_AND_EFFECTS_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -296,6 +315,27 @@ public class ActionImpl extends EObjectImpl implements Action {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getTriggersAndEffects() {
+		return triggersAndEffects;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTriggersAndEffects(String newTriggersAndEffects) {
+		String oldTriggersAndEffects = triggersAndEffects;
+		triggersAndEffects = newTriggersAndEffects;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Ssm2Package.ACTION__TRIGGERS_AND_EFFECTS, oldTriggersAndEffects, triggersAndEffects));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -384,6 +424,8 @@ public class ActionImpl extends EObjectImpl implements Action {
 				return getParentStateExitAction();
 			case Ssm2Package.ACTION__ASSIGNMENTS:
 				return getAssignments();
+			case Ssm2Package.ACTION__TRIGGERS_AND_EFFECTS:
+				return getTriggersAndEffects();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -417,6 +459,9 @@ public class ActionImpl extends EObjectImpl implements Action {
 				getAssignments().clear();
 				getAssignments().addAll((Collection<? extends Assignment>)newValue);
 				return;
+			case Ssm2Package.ACTION__TRIGGERS_AND_EFFECTS:
+				setTriggersAndEffects((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -447,6 +492,9 @@ public class ActionImpl extends EObjectImpl implements Action {
 			case Ssm2Package.ACTION__ASSIGNMENTS:
 				getAssignments().clear();
 				return;
+			case Ssm2Package.ACTION__TRIGGERS_AND_EFFECTS:
+				setTriggersAndEffects(TRIGGERS_AND_EFFECTS_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -471,8 +519,26 @@ public class ActionImpl extends EObjectImpl implements Action {
 				return getParentStateExitAction() != null;
 			case Ssm2Package.ACTION__ASSIGNMENTS:
 				return assignments != null && !assignments.isEmpty();
+			case Ssm2Package.ACTION__TRIGGERS_AND_EFFECTS:
+				return TRIGGERS_AND_EFFECTS_EDEFAULT == null ? triggersAndEffects != null : !TRIGGERS_AND_EFFECTS_EDEFAULT.equals(triggersAndEffects);
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (triggersAndEffects: ");
+		result.append(triggersAndEffects);
+		result.append(')');
+		return result.toString();
 	}
 
 } //ActionImpl

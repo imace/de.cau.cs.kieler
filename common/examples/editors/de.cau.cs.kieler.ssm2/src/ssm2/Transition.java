@@ -21,7 +21,6 @@ package ssm2;
  *   <li>{@link ssm2.Transition#getTransitionKind <em>Transition Kind</em>}</li>
  *   <li>{@link ssm2.Transition#getTargetState <em>Target State</em>}</li>
  *   <li>{@link ssm2.Transition#getSourceState <em>Source State</em>}</li>
- *   <li>{@link ssm2.Transition#getTriggersAndEffects <em>Triggers And Effects</em>}</li>
  *   <li>{@link ssm2.Transition#isHistory <em>History</em>}</li>
  * </ul>
  * </p>
@@ -191,32 +190,6 @@ public interface Transition extends Action {
 	 * @generated
 	 */
 	void setSourceState(State value);
-
-	/**
-	 * Returns the value of the '<em><b>Triggers And Effects</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Triggers And Effects</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Triggers And Effects</em>' attribute.
-	 * @see #setTriggersAndEffects(String)
-	 * @see ssm2.Ssm2Package#getTransition_TriggersAndEffects()
-	 * @model required="true"
-	 * @generated
-	 */
-	String getTriggersAndEffects();
-
-	/**
-	 * Sets the value of the '{@link ssm2.Transition#getTriggersAndEffects <em>Triggers And Effects</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Triggers And Effects</em>' attribute.
-	 * @see #getTriggersAndEffects()
-	 * @generated
-	 */
-	void setTriggersAndEffects(String value);
 
 	/**
 	 * Returns the value of the '<em><b>History</b></em>' attribute.

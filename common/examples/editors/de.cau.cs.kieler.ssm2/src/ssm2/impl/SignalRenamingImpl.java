@@ -22,8 +22,6 @@ import ssm2.SignalRenaming;
 import ssm2.Ssm2Package;
 import ssm2.State;
 
-
-
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Signal Renaming</b></em>'.

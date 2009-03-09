@@ -5,38 +5,56 @@ import java.util.List;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.StackLayout;
 import org.eclipse.draw2d.geometry.Dimension;
-import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
 
 public class StateLayout extends StackLayout {
 
-	public void layout(IFigure parent) {
+	IFigure parent;
+	
+	public void layout(IFigure p) {
+		parent = p;
 		List children = parent.getChildren();
-		IFigure figure;
-		Rectangle newBounds;
+		int count = 1;
 		
-		if (children.size() > 0) {
-			figure = (IFigure) children.get(0);
-			if (figure instanceof WrappingLabel) {
-				center(parent, figure);
+		for (int i = 0; i < 6; i++) {
+			IFigure currentFigure = (IFigure) children.get(i);
+			
+			if (currentFigure instanceof WrappingLabel) {
+				centerAtTop(currentFigure);
+			}
+			else {
+				fillPart(currentFigure, 5, count, true);
+				count++;
 			}
 		}
-		if (children.size() > 1) {
-			figure = (IFigure) children.get(1);
-			newBounds = new Rectangle(parent.getClientArea());
-			newBounds.x += parent.getClientArea().width / 4;
-			newBounds.y += parent.getClientArea().height / 4;
-			newBounds.width = parent.getClientArea().width / 2;
-			newBounds.height = parent.getClientArea().height / 2;
-			figure.setBounds(newBounds);
-		}
 	}	
-	
-	private void center(IFigure parent, IFigure figure) {
+
+	private void center(IFigure figure) {
 		Dimension prefSize = figure.getPreferredSize();
 		figure.getBounds().x = parent.getClientArea().x + (parent.getClientArea().width / 2) - (prefSize.width / 2);
 		figure.getBounds().y = parent.getClientArea().y + (parent.getClientArea().height / 2) - (prefSize.height / 2);
 		figure.getBounds().width = prefSize.width;
 		figure.getBounds().height = prefSize.height;
+	}
+	
+	private void centerAtTop(IFigure figure) {
+		Dimension prefSize = figure.getPreferredSize();
+		figure.getBounds().x = parent.getClientArea().x + (parent.getClientArea().width / 2) - (prefSize.width / 2);
+		figure.getBounds().y = parent.getClientArea().y;
+		figure.getBounds().width = prefSize.width;
+		figure.getBounds().height = prefSize.height;
+	}
+	
+	private void fillPart(IFigure figure, int numOfParts, int numOfPart, boolean offset) {
+		figure.getBounds().x = parent.getClientArea().x + (parent.getClientArea().width / numOfParts)*(numOfPart-1);
+		figure.getBounds().y = parent.getClientArea().y;
+		figure.getBounds().width = parent.getClientArea().width / numOfParts;
+		figure.getBounds().height = parent.getClientArea().height;
+		
+		if (offset) {
+			int prefHeight = ((IFigure) parent.getChildren().get(0)).getPreferredSize().height;
+			figure.getBounds().y += prefHeight;
+			figure.getBounds().height -= prefHeight;
+		}
 	}
 }

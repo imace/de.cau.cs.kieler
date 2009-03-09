@@ -22,8 +22,6 @@ import ssm2.Ssm2Package;
 import ssm2.State;
 import ssm2.Value;
 
-
-
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Signal</b></em>'.

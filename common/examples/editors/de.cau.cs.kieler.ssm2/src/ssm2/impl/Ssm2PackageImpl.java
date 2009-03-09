@@ -33,8 +33,6 @@ import ssm2.TransitionKind;
 import ssm2.Value;
 import ssm2.Variable;
 
-
-
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model <b>Package</b>.
@@ -551,17 +549,8 @@ public class Ssm2PackageImpl extends EPackageImpl implements Ssm2Package {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getTransition_TriggersAndEffects() {
-		return (EAttribute)transitionEClass.getEStructuralFeatures().get(6);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAttribute getTransition_History() {
-		return (EAttribute)transitionEClass.getEStructuralFeatures().get(7);
+		return (EAttribute)transitionEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -776,6 +765,15 @@ public class Ssm2PackageImpl extends EPackageImpl implements Ssm2Package {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getAction_TriggersAndEffects() {
+		return (EAttribute)actionEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getSuspensionTrigger() {
 		return suspensionTriggerEClass;
 	}
@@ -965,7 +963,6 @@ public class Ssm2PackageImpl extends EPackageImpl implements Ssm2Package {
 		createEAttribute(transitionEClass, TRANSITION__TRANSITION_KIND);
 		createEReference(transitionEClass, TRANSITION__TARGET_STATE);
 		createEReference(transitionEClass, TRANSITION__SOURCE_STATE);
-		createEAttribute(transitionEClass, TRANSITION__TRIGGERS_AND_EFFECTS);
 		createEAttribute(transitionEClass, TRANSITION__HISTORY);
 
 		expressionEClass = createEClass(EXPRESSION);
@@ -994,6 +991,7 @@ public class Ssm2PackageImpl extends EPackageImpl implements Ssm2Package {
 		createEReference(actionEClass, ACTION__PARENT_STATE_INNER_ACTION);
 		createEReference(actionEClass, ACTION__PARENT_STATE_EXIT_ACTION);
 		createEReference(actionEClass, ACTION__ASSIGNMENTS);
+		createEAttribute(actionEClass, ACTION__TRIGGERS_AND_EFFECTS);
 
 		suspensionTriggerEClass = createEClass(SUSPENSION_TRIGGER);
 		createEReference(suspensionTriggerEClass, SUSPENSION_TRIGGER__PARENT_STATE);
@@ -1087,7 +1085,6 @@ public class Ssm2PackageImpl extends EPackageImpl implements Ssm2Package {
 		initEAttribute(getTransition_TransitionKind(), this.getTransitionKind(), "transitionKind", null, 1, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTransition_TargetState(), this.getState(), null, "targetState", null, 1, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTransition_SourceState(), this.getState(), this.getState_OutgoingTransitions(), "sourceState", null, 1, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getTransition_TriggersAndEffects(), ecorePackage.getEString(), "triggersAndEffects", null, 1, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTransition_History(), ecorePackage.getEBoolean(), "history", null, 0, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(expressionEClass, Expression.class, "Expression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1116,6 +1113,7 @@ public class Ssm2PackageImpl extends EPackageImpl implements Ssm2Package {
 		initEReference(getAction_ParentStateInnerAction(), this.getState(), this.getState_InnerActions(), "parentStateInnerAction", null, 0, 1, Action.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAction_ParentStateExitAction(), this.getState(), this.getState_ExitActions(), "parentStateExitAction", null, 0, 1, Action.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAction_Assignments(), this.getAssignment(), null, "assignments", null, 0, -1, Action.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAction_TriggersAndEffects(), ecorePackage.getEString(), "triggersAndEffects", null, 1, 1, Action.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(suspensionTriggerEClass, SuspensionTrigger.class, "SuspensionTrigger", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSuspensionTrigger_ParentState(), this.getState(), this.getState_SuspensionTrigger(), "parentState", null, 1, 1, SuspensionTrigger.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

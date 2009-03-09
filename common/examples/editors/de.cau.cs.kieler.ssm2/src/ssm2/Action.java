@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link ssm2.Action#getParentStateInnerAction <em>Parent State Inner Action</em>}</li>
  *   <li>{@link ssm2.Action#getParentStateExitAction <em>Parent State Exit Action</em>}</li>
  *   <li>{@link ssm2.Action#getAssignments <em>Assignments</em>}</li>
+ *   <li>{@link ssm2.Action#getTriggersAndEffects <em>Triggers And Effects</em>}</li>
  * </ul>
  * </p>
  *
@@ -177,5 +178,31 @@ public interface Action extends EObject {
 	 * @generated
 	 */
 	EList<Assignment> getAssignments();
+
+	/**
+	 * Returns the value of the '<em><b>Triggers And Effects</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Triggers And Effects</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Triggers And Effects</em>' attribute.
+	 * @see #setTriggersAndEffects(String)
+	 * @see ssm2.Ssm2Package#getAction_TriggersAndEffects()
+	 * @model required="true"
+	 * @generated
+	 */
+	String getTriggersAndEffects();
+
+	/**
+	 * Sets the value of the '{@link ssm2.Action#getTriggersAndEffects <em>Triggers And Effects</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Triggers And Effects</em>' attribute.
+	 * @see #getTriggersAndEffects()
+	 * @generated
+	 */
+	void setTriggersAndEffects(String value);
 
 } // Action

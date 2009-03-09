@@ -17,8 +17,6 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
 import ssm2.*;
 
-
-
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model <b>Factory</b>.

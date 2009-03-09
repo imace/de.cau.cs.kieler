@@ -20,8 +20,6 @@ import ssm2.Expression;
 import ssm2.Ssm2Package;
 import ssm2.Variable;
 
-
-
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Assignment</b></em>'.

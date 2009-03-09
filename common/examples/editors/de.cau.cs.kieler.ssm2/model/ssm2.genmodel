@@ -75,7 +75,6 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ssm2.ecore#//Transition/transitionKind"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ssm2.ecore#//Transition/targetState"/>
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ssm2.ecore#//Transition/sourceState"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ssm2.ecore#//Transition/triggersAndEffects"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ssm2.ecore#//Transition/history"/>
     </genClasses>
     <genClasses ecoreClass="ssm2.ecore#//Expression">
@@ -104,6 +103,7 @@
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ssm2.ecore#//Action/parentStateInnerAction"/>
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ssm2.ecore#//Action/parentStateExitAction"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ssm2.ecore#//Action/assignments"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ssm2.ecore#//Action/triggersAndEffects"/>
     </genClasses>
     <genClasses ecoreClass="ssm2.ecore#//SuspensionTrigger">
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ssm2.ecore#//SuspensionTrigger/parentState"/>

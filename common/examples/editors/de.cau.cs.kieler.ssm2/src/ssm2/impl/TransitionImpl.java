@@ -21,8 +21,6 @@ import ssm2.State;
 import ssm2.Transition;
 import ssm2.TransitionKind;
 
-
-
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Transition</b></em>'.
@@ -36,7 +34,6 @@ import ssm2.TransitionKind;
  *   <li>{@link ssm2.impl.TransitionImpl#getTransitionKind <em>Transition Kind</em>}</li>
  *   <li>{@link ssm2.impl.TransitionImpl#getTargetState <em>Target State</em>}</li>
  *   <li>{@link ssm2.impl.TransitionImpl#getSourceState <em>Source State</em>}</li>
- *   <li>{@link ssm2.impl.TransitionImpl#getTriggersAndEffects <em>Triggers And Effects</em>}</li>
  *   <li>{@link ssm2.impl.TransitionImpl#isHistory <em>History</em>}</li>
  * </ul>
  * </p>
@@ -133,26 +130,6 @@ public class TransitionImpl extends ActionImpl implements Transition {
 	 * @ordered
 	 */
 	protected State targetState;
-
-	/**
-	 * The default value of the '{@link #getTriggersAndEffects() <em>Triggers And Effects</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getTriggersAndEffects()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String TRIGGERS_AND_EFFECTS_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getTriggersAndEffects() <em>Triggers And Effects</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getTriggersAndEffects()
-	 * @generated
-	 * @ordered
-	 */
-	protected String triggersAndEffects = TRIGGERS_AND_EFFECTS_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #isHistory() <em>History</em>}' attribute.
@@ -361,27 +338,6 @@ public class TransitionImpl extends ActionImpl implements Transition {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getTriggersAndEffects() {
-		return triggersAndEffects;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setTriggersAndEffects(String newTriggersAndEffects) {
-		String oldTriggersAndEffects = triggersAndEffects;
-		triggersAndEffects = newTriggersAndEffects;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Ssm2Package.TRANSITION__TRIGGERS_AND_EFFECTS, oldTriggersAndEffects, triggersAndEffects));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public boolean isHistory() {
 		return history;
 	}
@@ -463,8 +419,6 @@ public class TransitionImpl extends ActionImpl implements Transition {
 				return basicGetTargetState();
 			case Ssm2Package.TRANSITION__SOURCE_STATE:
 				return getSourceState();
-			case Ssm2Package.TRANSITION__TRIGGERS_AND_EFFECTS:
-				return getTriggersAndEffects();
 			case Ssm2Package.TRANSITION__HISTORY:
 				return isHistory() ? Boolean.TRUE : Boolean.FALSE;
 		}
@@ -496,9 +450,6 @@ public class TransitionImpl extends ActionImpl implements Transition {
 				return;
 			case Ssm2Package.TRANSITION__SOURCE_STATE:
 				setSourceState((State)newValue);
-				return;
-			case Ssm2Package.TRANSITION__TRIGGERS_AND_EFFECTS:
-				setTriggersAndEffects((String)newValue);
 				return;
 			case Ssm2Package.TRANSITION__HISTORY:
 				setHistory(((Boolean)newValue).booleanValue());
@@ -533,9 +484,6 @@ public class TransitionImpl extends ActionImpl implements Transition {
 			case Ssm2Package.TRANSITION__SOURCE_STATE:
 				setSourceState((State)null);
 				return;
-			case Ssm2Package.TRANSITION__TRIGGERS_AND_EFFECTS:
-				setTriggersAndEffects(TRIGGERS_AND_EFFECTS_EDEFAULT);
-				return;
 			case Ssm2Package.TRANSITION__HISTORY:
 				setHistory(HISTORY_EDEFAULT);
 				return;
@@ -563,8 +511,6 @@ public class TransitionImpl extends ActionImpl implements Transition {
 				return targetState != null;
 			case Ssm2Package.TRANSITION__SOURCE_STATE:
 				return getSourceState() != null;
-			case Ssm2Package.TRANSITION__TRIGGERS_AND_EFFECTS:
-				return TRIGGERS_AND_EFFECTS_EDEFAULT == null ? triggersAndEffects != null : !TRIGGERS_AND_EFFECTS_EDEFAULT.equals(triggersAndEffects);
 			case Ssm2Package.TRANSITION__HISTORY:
 				return history != HISTORY_EDEFAULT;
 		}
@@ -589,8 +535,6 @@ public class TransitionImpl extends ActionImpl implements Transition {
 		result.append(priority);
 		result.append(", transitionKind: ");
 		result.append(transitionKind);
-		result.append(", triggersAndEffects: ");
-		result.append(triggersAndEffects);
 		result.append(", history: ");
 		result.append(history);
 		result.append(')');

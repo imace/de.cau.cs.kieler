@@ -15,8 +15,6 @@ import org.eclipse.emf.ecore.EObject;
 
 import ssm2.*;
 
-
-
 /**
  * <!-- begin-user-doc -->
  * The <b>Adapter Factory</b> for the model.

@@ -28,28 +28,6 @@
           figure="//@figures.0/@descriptors.0/@actualFigure/@children.0"/>
     </descriptors>
     <descriptors
-        name="SignalFigure">
-      <actualFigure
-          xsi:type="gmfgraph:CustomFigure"
-          name="SignalFigure"
-          qualifiedClassName="de.cau.cs.kieler.ssm2.custom.AttributeAwareSignalFigure">
-        <layout
-            xsi:type="gmfgraph:CustomLayout"
-            qualifiedClassName="de.cau.cs.kieler.ssm2.custom.SignalLayout"/>
-        <children
-            xsi:type="gmfgraph:Label"
-            name="SignalNameFigure"
-            text="&lt;...>">
-          <font
-              xsi:type="gmfgraph:BasicFont"
-              height="10"
-              style="BOLD"/>
-        </children>
-      </actualFigure>
-      <accessors
-          figure="//@figures.0/@descriptors.1/@actualFigure/@children.0"/>
-    </descriptors>
-    <descriptors
         name="TransitionFigure">
       <actualFigure
           xsi:type="gmfgraph:CustomFigure"
@@ -66,20 +44,29 @@
         </children>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.2/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.1/@actualFigure/@children.0"/>
     </descriptors>
   </figures>
   <nodes
       name="State"
       figure="StateFigure"/>
-  <nodes
-      name="Signal"
-      figure="SignalFigure"/>
   <connections
       name="Transition"
       figure="TransitionFigure"/>
   <compartments
       name="StateCompartment"
+      figure="StateFigure"/>
+  <compartments
+      name="SignalCompartment"
+      figure="StateFigure"/>
+  <compartments
+      name="EntryActionsCompartment"
+      figure="StateFigure"/>
+  <compartments
+      name="InnerActionsCompartment"
+      figure="StateFigure"/>
+  <compartments
+      name="ExitActionsCompartment"
       figure="StateFigure"/>
   <labels
       name="StateName"
@@ -87,13 +74,16 @@
       elementIcon="false"
       accessor="//@figures.0/@descriptors.0/@accessors.0"/>
   <labels
-      name="SignalName"
-      figure="SignalFigure"
-      elementIcon="false"
-      accessor="//@figures.0/@descriptors.1/@accessors.0"/>
+      name="SignalName"/>
   <labels
       name="TransitionTriggersAndEffects"
       figure="TransitionFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.2/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.1/@accessors.0"/>
+  <labels
+      name="EntryActionTriggersAndEffects"/>
+  <labels
+      name="InnerActionTriggersAndEffects"/>
+  <labels
+      name="ExitActionsTriggersAndEffects"/>
 </gmfgraph:Canvas>

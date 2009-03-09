@@ -23,8 +23,6 @@ import ssm2.Expression;
 import ssm2.Signal;
 import ssm2.Ssm2Package;
 
-
-
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Emission</b></em>'.

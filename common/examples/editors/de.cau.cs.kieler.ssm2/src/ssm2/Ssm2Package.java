@@ -426,13 +426,22 @@ public interface Ssm2Package extends EPackage {
 	int ACTION__ASSIGNMENTS = 5;
 
 	/**
+	 * The feature id for the '<em><b>Triggers And Effects</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTION__TRIGGERS_AND_EFFECTS = 6;
+
+	/**
 	 * The number of structural features of the '<em>Action</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ACTION_FEATURE_COUNT = 6;
+	int ACTION_FEATURE_COUNT = 7;
 
 	/**
 	 * The meta object id for the '{@link ssm2.impl.TransitionImpl <em>Transition</em>}' class.
@@ -499,6 +508,15 @@ public interface Ssm2Package extends EPackage {
 	int TRANSITION__ASSIGNMENTS = ACTION__ASSIGNMENTS;
 
 	/**
+	 * The feature id for the '<em><b>Triggers And Effects</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSITION__TRIGGERS_AND_EFFECTS = ACTION__TRIGGERS_AND_EFFECTS;
+
+	/**
 	 * The feature id for the '<em><b>Delay</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -553,22 +571,13 @@ public interface Ssm2Package extends EPackage {
 	int TRANSITION__SOURCE_STATE = ACTION_FEATURE_COUNT + 5;
 
 	/**
-	 * The feature id for the '<em><b>Triggers And Effects</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TRANSITION__TRIGGERS_AND_EFFECTS = ACTION_FEATURE_COUNT + 6;
-
-	/**
 	 * The feature id for the '<em><b>History</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSITION__HISTORY = ACTION_FEATURE_COUNT + 7;
+	int TRANSITION__HISTORY = ACTION_FEATURE_COUNT + 6;
 
 	/**
 	 * The number of structural features of the '<em>Transition</em>' class.
@@ -577,7 +586,7 @@ public interface Ssm2Package extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSITION_FEATURE_COUNT = ACTION_FEATURE_COUNT + 8;
+	int TRANSITION_FEATURE_COUNT = ACTION_FEATURE_COUNT + 7;
 
 	/**
 	 * The meta object id for the '{@link ssm2.impl.ExpressionImpl <em>Expression</em>}' class.
@@ -1378,17 +1387,6 @@ public interface Ssm2Package extends EPackage {
 	EReference getTransition_SourceState();
 
 	/**
-	 * Returns the meta object for the attribute '{@link ssm2.Transition#getTriggersAndEffects <em>Triggers And Effects</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Triggers And Effects</em>'.
-	 * @see ssm2.Transition#getTriggersAndEffects()
-	 * @see #getTransition()
-	 * @generated
-	 */
-	EAttribute getTransition_TriggersAndEffects();
-
-	/**
 	 * Returns the meta object for the attribute '{@link ssm2.Transition#isHistory <em>History</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1647,6 +1645,17 @@ public interface Ssm2Package extends EPackage {
 	 * @generated
 	 */
 	EReference getAction_Assignments();
+
+	/**
+	 * Returns the meta object for the attribute '{@link ssm2.Action#getTriggersAndEffects <em>Triggers And Effects</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Triggers And Effects</em>'.
+	 * @see ssm2.Action#getTriggersAndEffects()
+	 * @see #getAction()
+	 * @generated
+	 */
+	EAttribute getAction_TriggersAndEffects();
 
 	/**
 	 * Returns the meta object for class '{@link ssm2.SuspensionTrigger <em>Suspension Trigger</em>}'.
@@ -2116,14 +2125,6 @@ public interface Ssm2Package extends EPackage {
 		EReference TRANSITION__SOURCE_STATE = eINSTANCE.getTransition_SourceState();
 
 		/**
-		 * The meta object literal for the '<em><b>Triggers And Effects</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute TRANSITION__TRIGGERS_AND_EFFECTS = eINSTANCE.getTransition_TriggersAndEffects();
-
-		/**
 		 * The meta object literal for the '<em><b>History</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2322,6 +2323,14 @@ public interface Ssm2Package extends EPackage {
 		 * @generated
 		 */
 		EReference ACTION__ASSIGNMENTS = eINSTANCE.getAction_Assignments();
+
+		/**
+		 * The meta object literal for the '<em><b>Triggers And Effects</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ACTION__TRIGGERS_AND_EFFECTS = eINSTANCE.getAction_TriggersAndEffects();
 
 		/**
 		 * The meta object literal for the '{@link ssm2.impl.SuspensionTriggerImpl <em>Suspension Trigger</em>}' class.

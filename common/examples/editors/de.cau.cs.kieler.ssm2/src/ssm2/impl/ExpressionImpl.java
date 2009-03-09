@@ -32,8 +32,6 @@ import ssm2.Signal;
 import ssm2.Ssm2Package;
 import ssm2.Variable;
 
-
-
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Expression</b></em>'.
