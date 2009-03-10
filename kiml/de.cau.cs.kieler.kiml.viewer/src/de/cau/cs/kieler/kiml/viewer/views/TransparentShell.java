@@ -1,13 +1,17 @@
-/*******************************************************************************
- * Copyright (c) 2000, 2005 IBM Corporation and others.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
+/******************************************************************************
+ * KIELER - Kiel Integrated Environment for Layout for the Eclipse RCP
  *
- * Contributors:
- *     IBM Corporation - initial API and implementation
- *******************************************************************************/
+ * http://www.informatik.uni-kiel.de/rtsys/kieler/
+ * 
+ * Copyright ${year} by
+ * + Christian-Albrechts-University of Kiel
+ *   + Department of Computer Science
+ *     + Real-Time and Embedded Systems Group
+ * 
+ * This code is provided under the terms of the Eclipse Public License (EPL).
+ * See the file epl-v10.html for the license text.
+ * 
+ *****************************************************************************/
 package de.cau.cs.kieler.kiml.viewer.views;
 
 import org.eclipse.draw2d.FigureCanvas;
@@ -26,12 +30,15 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 
 /**
- * Region snippet: Create non-rectangular shell from an image with transparency
- *
- * For a list of all SWT example snippets see
- * http://www.eclipse.org/swt/snippets/
+ * A transparent shell, that will display some canvas contents with a transparent
+ * background. If there is no alpha data in the canvas, it assumes
+ * that the first pixel color is the background and sets all pixels of this color to 
+ * transparent.
  * 
- * @since 3.2
+ * This implements Runnable. However, it's only allowed to have access to the UI from
+ * one thread. So the run method needs to be called from the one and only UI thread.
+ * @author haf
+ *
  */
 public class TransparentShell implements Runnable{
     
@@ -43,9 +50,7 @@ public class TransparentShell implements Runnable{
     
     GmfDebugCanvas canvas;
     
-    /**
-     * 
-     */
+   
     public TransparentShell(GmfDebugCanvas canvas) {
         this.canvas = canvas;
     }
@@ -81,12 +86,9 @@ public class TransparentShell implements Runnable{
             // assume the first pixel belongs to the background and is reference for transparency
             RGB[] rgb = imageData.getRGBs();
             int transparent = imageData.getPixel(0,0);
-            System.out.println(Integer.toBinaryString(transparent));
             for (int y = 0; y < imageData.height; y++) {
                     for (int x = 0; x < imageData.width; x++) {
                             if (imageData.getPixel(x, y) != transparent) {
-                                    int p1 = imageData.getPixel(x, y);
-                                    String p1String = Integer.toBinaryString(p1);
                                     pixel.x = imageData.x + x;
                                     pixel.y = imageData.y + y;
                                     region.add(pixel);
@@ -136,6 +138,9 @@ public class TransparentShell implements Runnable{
         shell.setSize(imageData.x + imageData.width, imageData.y + imageData.height);
 }
 
+    /**
+     * Set the position of this shell to the same position of the GMF Editor canvas.
+     */
     void positionOverCanvas(){
         try{
         FigureCanvas gmfCanvas = (FigureCanvas)canvas.getGmfEditor().getDiagramGraphicalViewer().getControl();
