@@ -1,5 +1,8 @@
 package de.cau.cs.kieler.kiml.viewer;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 import org.eclipse.ui.IViewPart;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
@@ -11,7 +14,6 @@ import de.cau.cs.kieler.kiml.layout.services.IKimlLayoutListener;
 import de.cau.cs.kieler.kiml.layout.util.LayoutGraphCloner;
 import de.cau.cs.kieler.kiml.viewer.views.ExecutionView;
 import de.cau.cs.kieler.kiml.viewer.views.LayoutGraphView;
-
 
 /**
  * Layout listener implementation that displays the layout graphs in
@@ -32,10 +34,11 @@ public class ViewLayoutListener implements IKimlLayoutListener {
 	public void layoutRequested(KLayoutGraph layoutGraph) {
 		findViews();
 		if (layoutGraphView != null) {
-			layoutGraphView.setLayoutGraph(LayoutGraphCloner
-					.cloneLayoutGraph(layoutGraph), false);
+			//layoutGraphView.setLayoutGraph(LayoutGraphCloner
+			//		.cloneLayoutGraph(layoutGraph), false);
+			layoutGraphView.setLayoutGraph(this.cloneKLayoutGraph(layoutGraph),LayoutGraphView.PRE);
 			// the last post-layout graph is deleted to avoid inconsistent graphs
-			layoutGraphView.setLayoutGraph(null, true);
+			layoutGraphView.setLayoutGraph(null, LayoutGraphView.POST);
 		}
 	}
 	
@@ -47,8 +50,9 @@ public class ViewLayoutListener implements IKimlLayoutListener {
 			IKielerProgressMonitor monitor) {
 		findViews();
 		if (layoutGraphView != null) {
-			layoutGraphView.setLayoutGraph(LayoutGraphCloner
-					.cloneLayoutGraph(layoutGraph), true);
+			//layoutGraphView.setLayoutGraph(LayoutGraphCloner
+			//		.cloneLayoutGraph(layoutGraph), true);
+			layoutGraphView.setLayoutGraph(this.cloneKLayoutGraph(layoutGraph),LayoutGraphView.POST);
 		}
 		if (executionView != null) {
 			executionView.addExecution(monitor);
@@ -76,6 +80,11 @@ public class ViewLayoutListener implements IKimlLayoutListener {
 		viewPart = activePage.findView(ExecutionView.VIEW_ID);
 		if (viewPart instanceof ExecutionView)
 			executionView = (ExecutionView)viewPart;
+	}
+	
+	private KLayoutGraph cloneKLayoutGraph(KLayoutGraph input){
+		EObject result = EcoreUtil.copy(input);
+		return (KLayoutGraph) result;
 	}
 
 }
