@@ -141,7 +141,7 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 										currentSide, newSide);
 								changedSide = true;
 							}
-							KEdge newEdge = new KEdge(normalizedGraph,
+							KEdge newEdge = new TSMEdge(normalizedGraph,
 									currentNode, newNode);
 							newEdge.connectNodes(newSide.right(), newSide.left());
 						}
@@ -184,7 +184,7 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 							currentNode, (TSMNode)node, currentSide, startingSide);
 				}
 				if (startingNode != null) {
-					KEdge newEdge = new KEdge(normalizedGraph,
+					KEdge newEdge = new TSMEdge(normalizedGraph,
 							currentNode, startingNode);
 					newEdge.connectNodes(startingSide.right(), startingSide.left());
 				}
@@ -334,7 +334,7 @@ public class NormalizingCompacter extends AbstractAlgorithm implements
 			currentSide = currentSide.right();
 		} while (currentSide != endSide);
 		if (startNode != null) {
-			KEdge newEdge = new KEdge(graph, currentNode, startNode);
+			KEdge newEdge = new TSMEdge(graph, currentNode, startNode);
 			newEdge.connectNodes(currentSide.left(), currentSide.opposed());
 		}
 		return currentNode;
