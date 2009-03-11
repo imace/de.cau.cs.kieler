@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?> 
 <?eclipse version="3.0"?>
 
 <!--
@@ -13,7 +13,7 @@
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package
             uri="http://www.informatik.uni-kiel.de/rtsys/ssm2"
-            class="ssm2.Ssm2Package"
+            class="de.cau.cs.kieler.ssm2.Ssm2Package"
             genModel="model/ssm2.genmodel"/>
    </extension>
 

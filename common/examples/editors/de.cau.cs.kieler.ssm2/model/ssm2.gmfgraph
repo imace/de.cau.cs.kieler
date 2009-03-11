@@ -22,6 +22,11 @@
               xsi:type="gmfgraph:BasicFont"
               height="10"
               style="BOLD"/>
+          <insets
+              top="5"
+              left="10"
+              bottom="5"
+              right="10"/>
         </children>
       </actualFigure>
       <accessors
