@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="de.cau.cs.kieler.klodd"
+      label="KIELER Dataflow Layout"
+      version="1.0.0"
+      provider-name="Christian-Albrechts-University of Kiel">
+
+   <description url="http://rtsys.informatik.uni-kiel.de/trac/kieler">
+      See http://rtsys.informatik.uni-kiel.de/trac/kieler
+   </description>
+
+   <copyright>
+      Copyright 2009 by
++ Christian-Albrechts-University of Kiel
++ Department of Computer Science
++ Real-Time and Embedded Systems Group
+   </copyright>
+
+   <license url="http://www.eclipse.org/org/documents/epl-v10.html">
+      See http://www.eclipse.org/org/documents/epl-v10.html
+   </license>
+
+   <requires>
+      <import plugin="org.eclipse.emf.ecore" version="2.4.0" match="greaterOrEqual"/>
+   </requires>
+
+   <plugin
+         id="de.cau.cs.kieler.core"
+         download-size="0"
+         install-size="0"
+         version="1.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="de.cau.cs.kieler.kiml.layout"
+         download-size="0"
+         install-size="0"
+         version="1.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="de.cau.cs.kieler.klodd.hierarchical"
+         download-size="0"
+         install-size="0"
+         version="1.0.0"
+         unpack="false"/>
+
+</feature>
