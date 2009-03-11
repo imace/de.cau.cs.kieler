@@ -35,15 +35,15 @@ public class AttributeAwareTransitionFigure extends AttributeAwareConnection {
 		PolylineDecoration arrowDecoration = new PolylineDecoration();
 		arrowDecoration.setLineWidth(2);
 		arrowDecoration.setForegroundColor(ColorConstants.black);
-		arrowDecoration.setLocation(this.getEnd());
-		PointList arrowDecorationPoints = new PointList();
-		arrowDecorationPoints.addPoint(0, 2);
-		arrowDecorationPoints.addPoint(2, 0);
-		arrowDecorationPoints.addPoint(0, -2);
-		arrowDecoration.setTemplate(arrowDecorationPoints);
+		//arrowDecoration.setLocation(this.getEnd());
+		//PointList arrowDecorationPoints = new PointList();
+		//arrowDecorationPoints.addPoint(0, 2);
+		//arrowDecorationPoints.addPoint(2, 0);
+		//arrowDecorationPoints.addPoint(0, -2);
+		//arrowDecoration.setTemplate(arrowDecorationPoints);
 		strongAbortionFigure.setTargetDecoration(arrowDecoration);
-		weakAbortionFigure.setTargetDecoration(arrowDecoration);
-		normalTerminationFigure.setTargetDecoration(arrowDecoration);
+		//weakAbortionFigure.setTargetDecoration(arrowDecoration);
+		//normalTerminationFigure.setTargetDecoration(arrowDecoration);
 		
 		PolygonDecoration triangleDecoration = new PolygonDecoration();
 		triangleDecoration.setLineWidth(2);
