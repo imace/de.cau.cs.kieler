@@ -47,11 +47,6 @@ public class StateLayout extends ConstrainedToolbarLayout {
 		}
 		
 		if (simpleLayout) {
-			//newBounds.x = x + (width - 40) / 2;
-			//newBounds.y = ;
-			//newBounds.width = ;
-			//newBounds.height = ;
-			//parent.setBounds(transposer.t(newBounds));
 			for (int i = 0; i < numChildren; i++) {
 				IFigure child = (IFigure) children.get(i);
 				if (child instanceof WrappingLabel) {
