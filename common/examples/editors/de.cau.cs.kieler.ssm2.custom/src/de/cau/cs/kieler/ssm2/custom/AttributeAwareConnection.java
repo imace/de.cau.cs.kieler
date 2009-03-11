@@ -45,12 +45,7 @@ public class AttributeAwareConnection extends PolylineConnection implements Adap
 	@Override
 	public void paint(Graphics g){
 		super.paint(g);
-		currentFigure.setBounds(this.getBounds());
-		currentFigure.setStart(this.getStart());
-		currentFigure.setEnd(this.getEnd());
 		currentFigure.setPoints(this.getPoints());
-		// Anscheinend wird die location der Decorations nicht gesetzt
-		// gibt leider keinen Accessor dafür :(
 		currentFigure.paint(g);
 	}
 	
