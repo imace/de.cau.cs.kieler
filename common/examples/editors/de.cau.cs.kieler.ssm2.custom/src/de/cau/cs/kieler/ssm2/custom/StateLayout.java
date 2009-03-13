@@ -5,21 +5,31 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.draw2d.AbstractLayout;
+import org.eclipse.draw2d.Figure;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.Label;
+import org.eclipse.draw2d.StackLayout;
+import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Rectangle;
+import org.eclipse.draw2d.geometry.Transposer;
 import org.eclipse.gmf.runtime.diagram.ui.figures.ResizableCompartmentFigure;
 import org.eclipse.gmf.runtime.diagram.ui.figures.ShapeCompartmentFigure;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.ConstrainedToolbarLayout;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
 
 public class StateLayout extends ConstrainedToolbarLayout {
+	
+	protected Transposer transposer; {
+		transposer = new Transposer();
+		transposer.setEnabled(false);
+	}	
+	
 	/**
 	 * @see org.eclipse.draw2d.LayoutManager#layout(IFigure)
 	 */
 	public void layout(IFigure parent) {
-		
-		List children = getChildren(parent);
+		List children = parent.getChildren();
 		int numChildren = children.size();
 		Rectangle clientArea = transposer.t(parent.getClientArea());
 		Rectangle newBounds = new Rectangle();
@@ -56,10 +66,10 @@ public class StateLayout extends ConstrainedToolbarLayout {
 					newBounds.height = child.getPreferredSize().height;
 				}
 				else if (child instanceof ShapeCompartmentFigure) {
-					newBounds.x = x + width / 4;
-					newBounds.y = y + width / 4;
-					newBounds.width = width - width / 2;
-					newBounds.height = height - width / 2;
+					newBounds.x = x + width / 10;
+					newBounds.y = y + height / 10;
+					newBounds.width = width / 5*4;
+					newBounds.height = height / 5*4;
 				}
 				else {
 					newBounds.x = x;
@@ -193,5 +203,42 @@ public class StateLayout extends ConstrainedToolbarLayout {
 			Collections.reverse(children);
 		return children;
 	}
+
+	@Override
+	protected Dimension calculatePreferredSize(IFigure arg0, int arg1, int arg2) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
+	public Dimension calculateMinimumSize(IFigure container, int hint, int hint2) {
+		List children = getChildren(container);
+		Figure child;
+		Dimension minSize = new Dimension(0, 0);
+		Dimension currSize = new Dimension();
+		for (int i = 0; i < children.size(); i++) {
+			child = (Figure) children.get(i);
+			if (child instanceof WrappingLabel) {
+				currSize.width = child.getPreferredSize().width;
+				if (currSize.width < 57) {
+					currSize.height = currSize.width;
+				}
+				else {
+					currSize.height = 57;
+				}
+			}
+			else {
+				currSize = child.getMinimumSize();
+			}
+			if (currSize.width > minSize.width) {
+				minSize.width = currSize.width;
+			}
+			if (currSize.height > minSize.height) {
+				minSize.height = currSize.height;
+			}
+		}
+		return minSize;
+	}
+	
 }
 
