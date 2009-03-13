@@ -1,0 +1,201 @@
+// specify your DSL grammar rules here ...
+// IMPORTANT: You should change the property 'overwrite.pluginresources=true' in the properties file to 'overwrite.pluginresources=false' AFTER first generation
+// specify your DSL grammar rules here ...
+// IMPORTANT: You should change the property 'overwrite.pluginresources=true' in the properties file to 'overwrite.pluginresources=false' AFTER first generation
+
+Model:
+	ModelElement;
+
+ModelElement:
+	(states+=State)*
+	| (transitions+=Transition)*;
+		
+State: 
+	name=ID
+	argument=SArgument?
+	";";
+
+Region:
+	"<" name=ID ">"
+	argument=RArgument?;
+	
+NewRegion:
+	"||" Region?;
+	
+Element:
+	State | Transition | NewRegion;
+
+SArgument:
+	"[" (StateArgument)+ "]";
+	
+RArgument:
+	"[" (RegionArgument)+ "]";
+
+RegionArgument:
+	LabelAssignment ";"
+	| Event ";";
+	
+LabelAssignment:
+	"label" "=" label=ID;
+
+StateArgument:
+	LabelAssignment ";"
+	| TypeAssignment ";"
+	| Event ";"
+	| EntryAssignment ";"
+	| DoAssignment ";" 
+	| ExitAssignment ";";
+
+TypeAssignment:
+	"type" "=" type=Pseudo;
+
+EntryAssignment:
+	"entry" "=" entry=ID ;
+
+DoAssignment:
+	"do" "=" do=ID ;
+	
+ExitAssignment:
+	"exit" "=" exit=ID ;
+
+	
+Event:
+	"localEvent" "=" """ Declaration """; 
+	
+Pseudo:
+	"pseudo";
+	
+Transition:
+	Source? "->" Target TArgument;
+
+Source:
+	source=ID;
+
+Target:
+	target=ID;
+
+TArgument:
+	"[" TransArgument  "]";
+	
+TransArgument:
+	"label" "=" label=ID ";"
+	| "type" "=" type=TransType ";"
+	| "priority" "=" priority=INT ";";
+
+TransType:
+	"wa" | "sa" | "nt";
+	
+	
+	
+	
+============
+
+
+statechart: "statechart";
+model: "model";
+version: "version";
+edge: "->";
+input: "input";
+output: "output";
+var: "var";
+label: "label";
+type: "type";
+final: "final";
+do: "doActivity" | "do";
+entry: "entryActivity" | "entry";
+exit: "exitActivity" | "exit";
+bind: "bindActivity" | "bind";
+localevent: "localEvent";
+localvariable: "localVariable";
+priority: "priority";
+weakabortion: "weakAbortion" | "wa";
+strongabortion: "strongAbortion" | "sa";
+normaltermination: "normalTermination" | "nt";
+//suspension: "suspension" "sp";
+//conditional: "conditional" | "co";
+//internal: "internalTransition" | "it";
+integer: "integer";
+float: "float";
+double: "double";
+boolean: "boolean";
+combine: "combine";
+true: "true";
+false: "false";
+
+chart: statechart ID cargument? "{" iodeclaration* cstate "}" ";";
+
+chartargument: 
+	model "=" ID
+	| version "=" ID;
+	
+firstcarguments: chartargument ";" ;
+lastcargument: chartargument ";"? ;
+cargument: "[" firstcarguments* lastcargument "]";
+
+iodeclaration: decl_typ declaration ";";
+
+declaration: ID initialvalue? vtype?;
+
+// TODO: INT = number
+initialvalue: ":" "=" INT;
+
+vtype: ":" var_event_type;
+// TODO: combine
+var_event_type: 
+	boolean | double | float | integer ;
+
+decl_typ: input | output | var;
+
+cstate: sargument? "{" region? element* "}" ";";
+
+state:
+	ID sargument? ";"
+	| ID cstate;
+
+element: state | transition | "||" region?;
+
+region: "<" ID ">" ("[" (regionargument ";")* "]")?;
+regionargument:
+	label "=" ID
+	| event 
+	| variable;
+
+sargument: "[" (stateargument ";")* "]";	
+stateargument:
+	label "=" ID
+	| type "=" "pseudo" // pseudo
+	| event
+	| variable
+	| do "=" ID
+	| entry "=" ID
+	| exit "=" ID;
+
+// TODO: check this
+pseudo: "pseudo";
+
+event: localevent "=" ID;
+
+variable: localvariable "=" ID;
+
+transition:
+	ID? "->" ID targument? ";";
+
+targument: "[" (transargument ";")* "]";
+
+transargument: 
+	label "=" ID
+	| "type" "=" transtype // type
+	| priority "=" INT;
+	
+transtype:
+	weakabortion
+	| strongabortion 
+	| normaltermination;
+	
+	
+	
+	
+	
+	
+	
+	  

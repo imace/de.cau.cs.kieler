@@ -1,0 +1,71 @@
+Statechart: 
+	"statechart" name=ID ("[" (arguments+=ChartArgument)* "]")?
+	"{"
+		(iodeclarations+=IoDeclaration)*
+		"{"
+		(elements+=Element)*
+		"}"
+	"}" ";";
+	
+ChartArgument:
+	"model" "=" model=ID ";"
+	| "version" "=" version=ID ";";
+	
+IoDeclaration:
+	type=DeclType name=ID (":" "=" initialValue=INT)? (":" valueType=VType)? ";";
+	
+DeclType: "input" | "output";
+
+VType: "boolean" | "double" | "float" | "integer";
+
+State: name=ID ("[" (arguments+=StateArgument)* "]")?
+	("{" 
+		(elements+=Element)*
+	"}")?";";
+	
+StateArgument:
+	"label" "=" label=STRING ";"?
+	| "type" "=" type=Pseudo ";"?;
+	
+Pseudo: "final" | "initial" | "pseudo";
+
+Element:
+	State | Transition | "||";
+
+Transition:
+	(source=ID)? "->" target=ID ("[" (arguments+=TransArgument)* "]")? ";";
+
+TransArgument:
+	"label" "=" label=Action ";"?
+	| "type" "=" type=TransType ";"?
+	| "priority" "=" prio=INT ";"?;
+	
+TransType: 
+	weakabortion
+	| strongabortion 
+	| normaltermination;
+	
+weakabortion: "weakAbortion" | "wa";
+strongabortion: "strongAbortion" | "sa";
+normaltermination: "normalTermination" | "nt";	
+
+// SSM transition label
+
+Action: trigger=Trigger"/"(effects+=Emission)*;
+
+Emission: signal=Signal("("newValue=Value")")?;
+
+Value: value=INT;
+
+Signal: (isInput="I")?(isOutput="O")?(isLocal="L")?name=ID("("value=Value")")?;
+
+Trigger: //(operator=Operator)?("["literals+=Signal"]")+("<"subTrigger=Trigger">")?;
+	literals+=Signal
+//	| operator=UnaryOp literals+=Signal
+//	| operator=UnaryOp "(" subTrigger+=Trigger ")"
+	| literals+=Signal operator=BinaryOp literals+=Signal
+	| "(" subTrigger+=Trigger ")" operator=BinaryOp "(" subTrigger+=Trigger ")";  
+
+UnaryOp: "NOT";
+BinaryOp: "EQ" | "LT" | "LEQ"| "AND"| "OR" | "ADD" | "SUB" | "MULT" | "DIV";
+

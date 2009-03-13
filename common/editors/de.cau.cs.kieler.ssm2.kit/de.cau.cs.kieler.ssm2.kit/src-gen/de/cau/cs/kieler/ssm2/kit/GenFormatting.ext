@@ -1,0 +1,10 @@
+import kit;
+import org::openarchitectureware::xtext::resource::AbstractXtextResource;
+
+extension de::cau::cs::kieler::ssm2::kit::Extensions;
+
+String format(List[emf::EObject] this) :
+	JAVA org.openarchitectureware.xtext.resource.AbstractXtextResource.throwNoFormatterException();
+
+String NL() : "\n";
+String TAB() : "\t";
