@@ -20,11 +20,6 @@ import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
 
 public class StateLayout extends ConstrainedToolbarLayout {
 	
-	protected Transposer transposer; {
-		transposer = new Transposer();
-		transposer.setEnabled(false);
-	}	
-	
 	/**
 	 * @see org.eclipse.draw2d.LayoutManager#layout(IFigure)
 	 */
@@ -124,13 +119,7 @@ public class StateLayout extends ConstrainedToolbarLayout {
 			return child.getPreferredSize().width;
 		}
 		else if (child instanceof ShapeCompartmentFigure) {
-			try {
-				IFigure figure = ((IFigure) ((IFigure) ((IFigure) ((IFigure) child.getChildren().get(1)).getChildren().get(0)).getChildren().get(0)).getChildren().get(0));
-				return -1;
-				}
-			catch (Exception e) {
-				return -1;
-			}
+			return -1;
 		}
 		else if (child instanceof ResizableCompartmentFigure) {
 			try {
@@ -157,13 +146,7 @@ public class StateLayout extends ConstrainedToolbarLayout {
 			return child.getPreferredSize().height;
 		}
 		else if (child instanceof ShapeCompartmentFigure) {
-			try {
-				IFigure figure = ((IFigure) ((IFigure) ((IFigure) ((IFigure) child.getChildren().get(1)).getChildren().get(0)).getChildren().get(0)).getChildren().get(0));
-				return -1;
-				}
-			catch (Exception e) {
-				return -1;
-			}
+			return -1;
 		}
 		else if (child instanceof ResizableCompartmentFigure) {
 			try {

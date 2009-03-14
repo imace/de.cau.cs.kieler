@@ -68,7 +68,7 @@ public class AttributeAwareStateFigure extends AttributeAwareFigure {
 		Condition flagInitial = new Condition(Ssm2Package.eINSTANCE.getState_StateFlag(), StateFlag.INITIAL);
 		Condition flagFinal = new Condition(Ssm2Package.eINSTANCE.getState_StateFlag(), StateFlag.FINAL);
 		
-		Condition noChildren = new SizeCondition(Ssm2Package.eINSTANCE.getState_InnerStates(), new Integer(0));
+		Condition noChildren = new SizeCondition(Ssm2Package.eINSTANCE.getState_Regions(), new Integer(0));
 		
 		List<Condition> normalNCSF = new LinkedList<Condition>();
 		normalNCSF.add(kindNormal);

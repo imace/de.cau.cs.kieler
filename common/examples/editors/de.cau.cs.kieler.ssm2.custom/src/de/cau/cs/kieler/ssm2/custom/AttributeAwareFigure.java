@@ -72,21 +72,26 @@ public class AttributeAwareFigure extends Figure implements Adapter {
 	}
 
 	public void notifyChanged(Notification notification) {
-		for (ConditionalFigure cf : conditionalFigureList) {
-			boolean fulfilled = true;
-			for (Condition c : cf.getConditions()) {
-				if (!(c.isValid(modelElement))) {
-					fulfilled = false;
+		try {	
+			for (ConditionalFigure cf : conditionalFigureList) {
+				boolean fulfilled = true;
+				for (Condition c : cf.getConditions()) {
+					if (!(c.isValid(modelElement))) {
+						fulfilled = false;
+						break;
+					}
+				}
+				if (fulfilled) {
+					setCurrentFigure(cf.getFigure());
 					break;
+				} 
+				else {
+					setCurrentFigure(defaultFigure);
 				}
 			}
-			if (fulfilled) {
-				setCurrentFigure(cf.getFigure());
-				break;
-			} 
-			else {
-				setCurrentFigure(defaultFigure);
-			}
+		}
+		catch (Exception e) {
+			
 		}
 		this.repaint();
 	}
