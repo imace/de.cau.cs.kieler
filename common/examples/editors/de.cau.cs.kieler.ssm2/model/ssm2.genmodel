@@ -40,7 +40,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ssm2.ecore#//State/stateKind"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ssm2.ecore#//State/stateFlag"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ssm2.ecore#//State/signals"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ssm2.ecore#//State/innerStates"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ssm2.ecore#//State/regions"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ssm2.ecore#//State/entryActions"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ssm2.ecore#//State/innerActions"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ssm2.ecore#//State/exitActions"/>
@@ -48,7 +48,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ssm2.ecore#//State/suspensionTrigger"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ssm2.ecore#//State/outgoingTransitions"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ssm2.ecore#//State/name"/>
-      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ssm2.ecore#//State/parentState"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ssm2.ecore#//State/parentRegion"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ssm2.ecore#//State/variables"/>
     </genClasses>
     <genClasses ecoreClass="ssm2.ecore#//Signal">
@@ -118,6 +118,10 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ssm2.ecore#//Variable/vname"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ssm2.ecore#//Variable/value"/>
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ssm2.ecore#//Variable/parentState"/>
+    </genClasses>
+    <genClasses ecoreClass="ssm2.ecore#//Region">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ssm2.ecore#//Region/innerStates"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ssm2.ecore#//Region/parentState"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

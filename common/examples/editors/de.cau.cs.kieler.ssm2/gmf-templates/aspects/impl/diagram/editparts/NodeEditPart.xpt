@@ -194,7 +194,7 @@
 	«LET figureQualifiedClassName == null ? "org.eclipse.draw2d.RectangleFigure" : figureQualifiedClassName AS fqn-»
 		«EXPAND xpt::Common::generatedMemberComment»
 		protected org.eclipse.draw2d.IFigure createNodeShape() {
-			return primaryShape = new «fqn»()«IF node.getLayoutType().value == gmfgen::ViewmapLayoutType::XY_LAYOUT.value»{
+			return primaryShape = new «fqn»(this)«IF node.getLayoutType().value == gmfgen::ViewmapLayoutType::XY_LAYOUT.value»{ «REM» Added "this" «ENDREM»
 				protected boolean useLocalCoordinates() {
 					return true;
 				}

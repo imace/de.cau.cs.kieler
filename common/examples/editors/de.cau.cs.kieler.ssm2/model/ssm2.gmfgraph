@@ -51,16 +51,38 @@
       <accessors
           figure="//@figures.0/@descriptors.1/@actualFigure/@children.0"/>
     </descriptors>
+    <descriptors
+        name="RegionFigure">
+      <actualFigure
+          xsi:type="gmfgraph:CustomFigure"
+          name="RegionFigure"
+          qualifiedClassName="de.cau.cs.kieler.ssm2.custom.AttributeAwareRegionFigure"/>
+    </descriptors>
+    <descriptors
+        name="EmptyFigure">
+      <actualFigure
+          xsi:type="gmfgraph:Ellipse"
+          name="EmptyFigure"
+          outline="false"
+          fill="false"
+          lineWidth="0"/>
+    </descriptors>
   </figures>
   <nodes
       name="State"
       figure="StateFigure"/>
+  <nodes
+      name="Region"
+      figure="RegionFigure"/>
   <connections
       name="Transition"
       figure="TransitionFigure"/>
   <compartments
-      name="StateCompartment"
+      name="RegionCompartment"
       figure="StateFigure"/>
+  <compartments
+      name="StateCompartment"
+      figure="RegionFigure"/>
   <compartments
       name="SignalCompartment"
       figure="StateFigure"/>
@@ -79,16 +101,20 @@
       elementIcon="false"
       accessor="//@figures.0/@descriptors.0/@accessors.0"/>
   <labels
-      name="SignalName"/>
+      name="SignalName"
+      figure="EmptyFigure"/>
   <labels
       name="TransitionTriggersAndEffects"
       figure="TransitionFigure"
       elementIcon="false"
       accessor="//@figures.0/@descriptors.1/@accessors.0"/>
   <labels
-      name="EntryActionTriggersAndEffects"/>
+      name="EntryActionTriggersAndEffects"
+      figure="EmptyFigure"/>
   <labels
-      name="InnerActionTriggersAndEffects"/>
+      name="InnerActionTriggersAndEffects"
+      figure="EmptyFigure"/>
   <labels
-      name="ExitActionsTriggersAndEffects"/>
+      name="ExitActionsTriggersAndEffects"
+      figure="EmptyFigure"/>
 </gmfgraph:Canvas>
