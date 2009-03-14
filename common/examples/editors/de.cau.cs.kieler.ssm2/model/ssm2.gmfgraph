@@ -58,15 +58,6 @@
           name="RegionFigure"
           qualifiedClassName="de.cau.cs.kieler.ssm2.custom.AttributeAwareRegionFigure"/>
     </descriptors>
-    <descriptors
-        name="EmptyFigure">
-      <actualFigure
-          xsi:type="gmfgraph:Ellipse"
-          name="EmptyFigure"
-          outline="false"
-          fill="false"
-          lineWidth="0"/>
-    </descriptors>
   </figures>
   <nodes
       name="State"
@@ -101,20 +92,16 @@
       elementIcon="false"
       accessor="//@figures.0/@descriptors.0/@accessors.0"/>
   <labels
-      name="SignalName"
-      figure="EmptyFigure"/>
+      name="SignalName"/>
   <labels
       name="TransitionTriggersAndEffects"
       figure="TransitionFigure"
       elementIcon="false"
       accessor="//@figures.0/@descriptors.1/@accessors.0"/>
   <labels
-      name="EntryActionTriggersAndEffects"
-      figure="EmptyFigure"/>
+      name="EntryActionTriggersAndEffects"/>
   <labels
-      name="InnerActionTriggersAndEffects"
-      figure="EmptyFigure"/>
+      name="InnerActionTriggersAndEffects"/>
   <labels
-      name="ExitActionsTriggersAndEffects"
-      figure="EmptyFigure"/>
+      name="ExitActionsTriggersAndEffects"/>
 </gmfgraph:Canvas>
