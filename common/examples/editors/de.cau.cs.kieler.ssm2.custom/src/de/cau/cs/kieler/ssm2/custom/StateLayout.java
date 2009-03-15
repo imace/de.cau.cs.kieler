@@ -18,6 +18,10 @@ import org.eclipse.gmf.runtime.diagram.ui.figures.ShapeCompartmentFigure;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.ConstrainedToolbarLayout;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
 
+import de.cau.cs.kieler.ssm2.Action;
+import de.cau.cs.kieler.ssm2.Region;
+import de.cau.cs.kieler.ssm2.Signal;
+
 public class StateLayout extends ConstrainedToolbarLayout {
 	
 	/**
@@ -77,6 +81,7 @@ public class StateLayout extends ConstrainedToolbarLayout {
 		}
 		else {
 			for (int i = 0; i < numChildren; i++) {
+				boolean firstCompartment = true; 
 				IFigure child = (IFigure) children.get(i);
 				heights[i] = determineHeight(child);
 				widths[i] = determineWidth(child);
@@ -86,7 +91,7 @@ public class StateLayout extends ConstrainedToolbarLayout {
 				}
 				
 				if (heights[i] >= 0) {
-					availableHeight -= heights[i];
+						availableHeight -= heights[i];
 				}
 				else {
 					numUndecided++;
@@ -118,23 +123,8 @@ public class StateLayout extends ConstrainedToolbarLayout {
 		if (child instanceof WrappingLabel) {
 			return child.getPreferredSize().width;
 		}
-		else if (child instanceof ShapeCompartmentFigure) {
-			return -1;
-		}
 		else if (child instanceof ResizableCompartmentFigure) {
-			try {
-				IFigure figure = ((IFigure) ((IFigure) ((IFigure) ((IFigure) child.getChildren().get(1)).getChildren().get(0)).getChildren().get(0)).getChildren().get(0));
-			
-				if (figure instanceof Label) {
-					return -1;
-				}
-				else {
-					return 0;
-				}
-			}
-			catch (Exception e) {
-				return 0;
-			}
+			return -1;
 		}
 		else {
 			return 0;
@@ -145,27 +135,21 @@ public class StateLayout extends ConstrainedToolbarLayout {
 		if (child instanceof WrappingLabel) {
 			return child.getPreferredSize().height;
 		}
-		else if (child instanceof ShapeCompartmentFigure) {
-			return -1;
-		}
-		else if (child instanceof ResizableCompartmentFigure) {
+		if (child instanceof ResizableCompartmentFigure) {
 			try {
-				IFigure figure = ((IFigure) ((IFigure) ((IFigure) ((IFigure) child.getChildren().get(1)).getChildren().get(0)).getChildren().get(0)).getChildren().get(0));
-			
-				if (figure instanceof Label) {
-					return figure.getPreferredSize().height;
+				IFigure figure = ((AttributeAwareFigure) ((IFigure) ((IFigure) ((IFigure) ((IFigure) child.getChildren().get(1)).getChildren().get(0)).getChildren().get(0)).getChildren().get(0)).getChildren().get(0));
+				if (figure instanceof AttributeAwareRegionFigure) {
+					return -1;
 				}
-				else {
-					return 0;
+				if (figure != null) {
+					return 42;
 				}
 			}
 			catch (Exception e) {
-				return 0;
+					return 42;
 			}
 		}
-		else {
-			return 0;
-		}
+		return 42;
 	}
 
 	/**
