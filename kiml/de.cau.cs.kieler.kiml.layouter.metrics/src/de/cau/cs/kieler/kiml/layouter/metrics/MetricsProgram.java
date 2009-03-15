@@ -14,6 +14,7 @@
 package de.cau.cs.kieler.kiml.layouter.metrics;
 
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.OutputStream;
 
 import de.cau.cs.kieler.klodd.hierarchical.HierarchicalDataflowLayoutProvider;
@@ -32,16 +33,22 @@ public class MetricsProgram {
      */
     public static void main(String[] args) {
         // TODO generalize metrics selection, e.g. by reading command-line arguments
+        OutputStream fileStream = null;
         try {
             String fileName = "measurement" + (System.currentTimeMillis() & 0xfff)+".txt";
-            OutputStream fileStream = new FileOutputStream(fileName);
+            fileStream = new FileOutputStream(fileName);
             ExecutionTimeMetric executionTimeMetric = new ExecutionTimeMetric(
                     new HierarchicalDataflowLayoutProvider(), fileStream);
-            executionTimeMetric.measure(1, 2, 1);
-            fileStream.close();
+            executionTimeMetric.measure(2, 2, 1);
         }
         catch (Exception exception) {
             exception.printStackTrace();
+        }
+        finally {
+            try {
+                if (fileStream != null)
+                    fileStream.close();
+            } catch (IOException exception) {}
         }
     }
 

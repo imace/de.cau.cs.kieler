@@ -67,21 +67,24 @@ public class ExecutionTimeMetric {
             throw new IllegalArgumentException("Start decade must be non-negative and less or equal than end decade.");
         warmup();
         
-        int currentDecade = startDecade;
-        double currentSize = 1;
-        for (int d = 0; d < startDecade; d++)
-            currentSize *= 10;
-        double incFactor = Math.pow(10, 1.0 / measurementsPerDecade);
-        while (currentDecade < endDecade) {
-            for (int i = 0; i < measurementsPerDecade; i++) {
-                measure((int)Math.round(currentSize), maxEdges);
-                currentSize *= incFactor;
+        try {
+            int currentDecade = startDecade;
+            double currentSize = 1;
+            for (int d = 0; d < startDecade; d++)
+                currentSize *= 10;
+            double incFactor = Math.pow(10, 1.0 / measurementsPerDecade);
+            while (currentDecade < endDecade) {
+                for (int i = 0; i < measurementsPerDecade; i++) {
+                    measure((int)Math.round(currentSize), maxEdges);
+                    currentSize *= incFactor;
+                }
+                currentDecade++;
             }
-            currentDecade++;
+            measure((int)Math.round(currentSize), maxEdges);
         }
-        measure((int)Math.round(currentSize), maxEdges);
-        
-        outputWriter.flush();
+        finally {
+            outputWriter.flush();
+        }
     }
 
     /**
@@ -108,7 +111,7 @@ public class ExecutionTimeMetric {
     private void measure(int nodeCount, int maxEdges) throws KielerException, IOException {
         outputWriter.write(Integer.toString(nodeCount));
         for (int edgeCount = 1; edgeCount <= maxEdges; edgeCount++) {
-            System.out.print("n = " + nodeCount + ", m = " + edgeCount + "n\n  ");
+            System.out.print("n = " + nodeCount + ", m = " + edgeCount + "n: ");
             double totalTime = 0.0;
             for (int i = 0; i < graphsPerSize; i++) {
                 System.out.print(i);
@@ -123,8 +126,9 @@ public class ExecutionTimeMetric {
                 }
                 totalTime += minTime;
             }
-            outputWriter.write("," + (totalTime / graphsPerSize));
-            System.out.println();
+            double meanTime = totalTime / graphsPerSize;
+            outputWriter.write("," + meanTime);
+            System.out.println(" -> " + meanTime);
         }
         outputWriter.write("\n");
     }
