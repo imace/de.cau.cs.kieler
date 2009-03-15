@@ -44,7 +44,7 @@
 		public org.eclipse.draw2d.IFigure createFigure() {
 			org.eclipse.gmf.runtime.diagram.ui.figures.ResizableCompartmentFigure result = (org.eclipse.gmf.runtime.diagram.ui.figures.ResizableCompartmentFigure) super.createFigure();
 			result.setTitleVisibility(false);
-			result.setBorder(null);
+			result.setBorder(null); «REM» Added this line «ENDREM»
 			return result;
 		}
 	«ENDIF-»

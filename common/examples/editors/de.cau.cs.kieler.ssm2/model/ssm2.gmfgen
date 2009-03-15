@@ -103,24 +103,25 @@
       </modelFacet>
     </childNodes>
     <childNodes
-        xsi:type="gmfgen:GenChildLabelNode"
         visualID="3002"
-        editPartClassName="SignalEditPart"
-        itemSemanticEditPolicyClassName="SignalItemSemanticEditPolicy"
-        notationViewFactoryClassName="SignalViewFactory"
-        canonicalEditPolicyClassName="SignalCanonicalEditPolicy"
-        graphicalNodeEditPolicyClassName="SignalGraphicalNodeEditPolicy"
-        createCommandClassName="SignalCreateCommand"
-        containers="//@diagram/@compartments.2"
-        labelElementIcon="true">
+        editPartClassName="Signal2EditPart"
+        itemSemanticEditPolicyClassName="Signal2ItemSemanticEditPolicy"
+        notationViewFactoryClassName="Signal2ViewFactory"
+        canonicalEditPolicyClassName="Signal2CanonicalEditPolicy"
+        graphicalNodeEditPolicyClassName="Signal2GraphicalNodeEditPolicy"
+        createCommandClassName="Signal2CreateCommand"
+        containers="//@diagram/@compartments.2">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <elementType
           xsi:type="gmfgen:MetamodelType"
           editHelperClassName="SignalEditHelper"/>
       <viewmap
-          xsi:type="gmfgen:FigureViewmap"
-          figureQualifiedClassName="org.eclipse.draw2d.Label"/>
+          xsi:type="gmfgen:InnerClassViewmap"
+          className="SignalActionFigure"
+          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class SignalActionFigure extends de.cau.cs.kieler.ssm2.custom.AttributeAwareSignalActionFigure {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureSignalActionNameFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public SignalActionFigure(org.eclipse.gef.EditPart e) {&#xA;&#x9;super(e);&#x9;&#x9;&#x9;&#xA;&#xA;this.setMaximumSize(new org.eclipse.draw2d.geometry.Dimension(getMapMode().DPtoLP(-1)&#xA;, getMapMode().DPtoLP(20)&#xA;));&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureSignalActionNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureSignalActionNameFigure.setText(&quot;&lt;...>&quot;);&#xA;&#xA;fFigureSignalActionNameFigure.setFont(FFIGURESIGNALACTIONNAMEFIGURE_FONT);&#xA;&#xA;&#xA;&#xA;this.add(fFigureSignalActionNameFigure);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private boolean myUseLocalCoordinates = false;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected boolean useLocalCoordinates() {&#xA;&#x9;&#x9;return myUseLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#xA;&#x9;&#x9;myUseLocalCoordinates = useLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureSignalActionNameFigure() {&#xA;&#x9;&#x9;return fFigureSignalActionNameFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;/**&#xA; * @generated&#xA; */&#xA;static final org.eclipse.swt.graphics.Font FFIGURESIGNALACTIONNAMEFIGURE_FONT = new org.eclipse.swt.graphics.Font(org.eclipse.swt.widgets.Display.getCurrent(), org.eclipse.swt.widgets.Display.getDefault().getSystemFont().getFontData()[0].getName(), 10, org.eclipse.swt.SWT.BOLD);&#xA;&#xA;">
+        <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
+      </viewmap>
       <modelFacet>
         <metaClass
             href="ssm2.genmodel#//ssm2/Signal"/>
@@ -129,31 +130,49 @@
         <childMetaFeature
             href="ssm2.genmodel#//ssm2/State/signals"/>
       </modelFacet>
-      <labelModelFacet
-          xsi:type="gmfgen:FeatureLabelModelFacet">
-        <metaFeatures
-            href="ssm2.genmodel#//ssm2/Signal/name"/>
-      </labelModelFacet>
+      <labels
+          visualID="5013"
+          editPartClassName="SignalName2EditPart"
+          itemSemanticEditPolicyClassName="SignalName2ItemSemanticEditPolicy"
+          notationViewFactoryClassName="SignalName2ViewFactory"
+          elementIcon="true">
+        <diagramRunTimeClass
+            href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+        <viewmap
+            xsi:type="gmfgen:ParentAssignedViewmap"
+            getterName="getFigureSignalActionNameFigure"
+            figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel">
+          <attributes
+              xsi:type="gmfgen:StyleAttributes"
+              fixedFont="true"/>
+        </viewmap>
+        <modelFacet
+            xsi:type="gmfgen:FeatureLabelModelFacet">
+          <metaFeatures
+              href="ssm2.genmodel#//ssm2/Signal/name"/>
+        </modelFacet>
+      </labels>
     </childNodes>
     <childNodes
-        xsi:type="gmfgen:GenChildLabelNode"
         visualID="3003"
-        editPartClassName="ActionEditPart"
-        itemSemanticEditPolicyClassName="ActionItemSemanticEditPolicy"
-        notationViewFactoryClassName="ActionViewFactory"
-        canonicalEditPolicyClassName="ActionCanonicalEditPolicy"
-        graphicalNodeEditPolicyClassName="ActionGraphicalNodeEditPolicy"
-        createCommandClassName="ActionCreateCommand"
-        containers="//@diagram/@compartments.3"
-        labelElementIcon="true">
+        editPartClassName="Action4EditPart"
+        itemSemanticEditPolicyClassName="Action4ItemSemanticEditPolicy"
+        notationViewFactoryClassName="Action4ViewFactory"
+        canonicalEditPolicyClassName="Action4CanonicalEditPolicy"
+        graphicalNodeEditPolicyClassName="Action4GraphicalNodeEditPolicy"
+        createCommandClassName="Action4CreateCommand"
+        containers="//@diagram/@compartments.3">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <elementType
           xsi:type="gmfgen:MetamodelType"
           editHelperClassName="ActionEditHelper"/>
       <viewmap
-          xsi:type="gmfgen:FigureViewmap"
-          figureQualifiedClassName="org.eclipse.draw2d.Label"/>
+          xsi:type="gmfgen:InnerClassViewmap"
+          className="SignalActionFigure"
+          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class SignalActionFigure extends de.cau.cs.kieler.ssm2.custom.AttributeAwareSignalActionFigure {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureSignalActionNameFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public SignalActionFigure(org.eclipse.gef.EditPart e) {&#xA;&#x9;super(e);&#x9;&#x9;&#x9;&#xA;&#xA;this.setMaximumSize(new org.eclipse.draw2d.geometry.Dimension(getMapMode().DPtoLP(-1)&#xA;, getMapMode().DPtoLP(20)&#xA;));&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureSignalActionNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureSignalActionNameFigure.setText(&quot;&lt;...>&quot;);&#xA;&#xA;fFigureSignalActionNameFigure.setFont(FFIGURESIGNALACTIONNAMEFIGURE_FONT);&#xA;&#xA;&#xA;&#xA;this.add(fFigureSignalActionNameFigure);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private boolean myUseLocalCoordinates = false;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected boolean useLocalCoordinates() {&#xA;&#x9;&#x9;return myUseLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#xA;&#x9;&#x9;myUseLocalCoordinates = useLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureSignalActionNameFigure() {&#xA;&#x9;&#x9;return fFigureSignalActionNameFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;/**&#xA; * @generated&#xA; */&#xA;static final org.eclipse.swt.graphics.Font FFIGURESIGNALACTIONNAMEFIGURE_FONT = new org.eclipse.swt.graphics.Font(org.eclipse.swt.widgets.Display.getCurrent(), org.eclipse.swt.widgets.Display.getDefault().getSystemFont().getFontData()[0].getName(), 10, org.eclipse.swt.SWT.BOLD);&#xA;&#xA;">
+        <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
+      </viewmap>
       <modelFacet>
         <metaClass
             href="ssm2.genmodel#//ssm2/Action"/>
@@ -162,31 +181,49 @@
         <childMetaFeature
             href="ssm2.genmodel#//ssm2/State/entryActions"/>
       </modelFacet>
-      <labelModelFacet
-          xsi:type="gmfgen:FeatureLabelModelFacet">
-        <metaFeatures
-            href="ssm2.genmodel#//ssm2/Action/triggersAndEffects"/>
-      </labelModelFacet>
+      <labels
+          visualID="5014"
+          editPartClassName="ActionTriggersAndEffects4EditPart"
+          itemSemanticEditPolicyClassName="ActionTriggersAndEffects4ItemSemanticEditPolicy"
+          notationViewFactoryClassName="ActionTriggersAndEffects4ViewFactory"
+          elementIcon="true">
+        <diagramRunTimeClass
+            href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+        <viewmap
+            xsi:type="gmfgen:ParentAssignedViewmap"
+            getterName="getFigureSignalActionNameFigure"
+            figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel">
+          <attributes
+              xsi:type="gmfgen:StyleAttributes"
+              fixedFont="true"/>
+        </viewmap>
+        <modelFacet
+            xsi:type="gmfgen:FeatureLabelModelFacet">
+          <metaFeatures
+              href="ssm2.genmodel#//ssm2/Action/triggersAndEffects"/>
+        </modelFacet>
+      </labels>
     </childNodes>
     <childNodes
-        xsi:type="gmfgen:GenChildLabelNode"
         visualID="3004"
-        editPartClassName="Action2EditPart"
-        itemSemanticEditPolicyClassName="Action2ItemSemanticEditPolicy"
-        notationViewFactoryClassName="Action2ViewFactory"
-        canonicalEditPolicyClassName="Action2CanonicalEditPolicy"
-        graphicalNodeEditPolicyClassName="Action2GraphicalNodeEditPolicy"
-        createCommandClassName="Action2CreateCommand"
-        containers="//@diagram/@compartments.4"
-        labelElementIcon="true">
+        editPartClassName="Action5EditPart"
+        itemSemanticEditPolicyClassName="Action5ItemSemanticEditPolicy"
+        notationViewFactoryClassName="Action5ViewFactory"
+        canonicalEditPolicyClassName="Action5CanonicalEditPolicy"
+        graphicalNodeEditPolicyClassName="Action5GraphicalNodeEditPolicy"
+        createCommandClassName="Action5CreateCommand"
+        containers="//@diagram/@compartments.4">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <elementType
           xsi:type="gmfgen:SpecializationType"
           metamodelType="//@diagram/@childNodes.3/@elementType"/>
       <viewmap
-          xsi:type="gmfgen:FigureViewmap"
-          figureQualifiedClassName="org.eclipse.draw2d.Label"/>
+          xsi:type="gmfgen:InnerClassViewmap"
+          className="SignalActionFigure"
+          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class SignalActionFigure extends de.cau.cs.kieler.ssm2.custom.AttributeAwareSignalActionFigure {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureSignalActionNameFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public SignalActionFigure(org.eclipse.gef.EditPart e) {&#xA;&#x9;super(e);&#x9;&#x9;&#x9;&#xA;&#xA;this.setMaximumSize(new org.eclipse.draw2d.geometry.Dimension(getMapMode().DPtoLP(-1)&#xA;, getMapMode().DPtoLP(20)&#xA;));&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureSignalActionNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureSignalActionNameFigure.setText(&quot;&lt;...>&quot;);&#xA;&#xA;fFigureSignalActionNameFigure.setFont(FFIGURESIGNALACTIONNAMEFIGURE_FONT);&#xA;&#xA;&#xA;&#xA;this.add(fFigureSignalActionNameFigure);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private boolean myUseLocalCoordinates = false;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected boolean useLocalCoordinates() {&#xA;&#x9;&#x9;return myUseLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#xA;&#x9;&#x9;myUseLocalCoordinates = useLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureSignalActionNameFigure() {&#xA;&#x9;&#x9;return fFigureSignalActionNameFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;/**&#xA; * @generated&#xA; */&#xA;static final org.eclipse.swt.graphics.Font FFIGURESIGNALACTIONNAMEFIGURE_FONT = new org.eclipse.swt.graphics.Font(org.eclipse.swt.widgets.Display.getCurrent(), org.eclipse.swt.widgets.Display.getDefault().getSystemFont().getFontData()[0].getName(), 10, org.eclipse.swt.SWT.BOLD);&#xA;&#xA;">
+        <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
+      </viewmap>
       <modelFacet>
         <metaClass
             href="ssm2.genmodel#//ssm2/Action"/>
@@ -195,31 +232,49 @@
         <childMetaFeature
             href="ssm2.genmodel#//ssm2/State/innerActions"/>
       </modelFacet>
-      <labelModelFacet
-          xsi:type="gmfgen:FeatureLabelModelFacet">
-        <metaFeatures
-            href="ssm2.genmodel#//ssm2/Action/triggersAndEffects"/>
-      </labelModelFacet>
+      <labels
+          visualID="5015"
+          editPartClassName="ActionTriggersAndEffects5EditPart"
+          itemSemanticEditPolicyClassName="ActionTriggersAndEffects5ItemSemanticEditPolicy"
+          notationViewFactoryClassName="ActionTriggersAndEffects5ViewFactory"
+          elementIcon="true">
+        <diagramRunTimeClass
+            href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+        <viewmap
+            xsi:type="gmfgen:ParentAssignedViewmap"
+            getterName="getFigureSignalActionNameFigure"
+            figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel">
+          <attributes
+              xsi:type="gmfgen:StyleAttributes"
+              fixedFont="true"/>
+        </viewmap>
+        <modelFacet
+            xsi:type="gmfgen:FeatureLabelModelFacet">
+          <metaFeatures
+              href="ssm2.genmodel#//ssm2/Action/triggersAndEffects"/>
+        </modelFacet>
+      </labels>
     </childNodes>
     <childNodes
-        xsi:type="gmfgen:GenChildLabelNode"
         visualID="3005"
-        editPartClassName="Action3EditPart"
-        itemSemanticEditPolicyClassName="Action3ItemSemanticEditPolicy"
-        notationViewFactoryClassName="Action3ViewFactory"
-        canonicalEditPolicyClassName="Action3CanonicalEditPolicy"
-        graphicalNodeEditPolicyClassName="Action3GraphicalNodeEditPolicy"
-        createCommandClassName="Action3CreateCommand"
-        containers="//@diagram/@compartments.5"
-        labelElementIcon="true">
+        editPartClassName="Action6EditPart"
+        itemSemanticEditPolicyClassName="Action6ItemSemanticEditPolicy"
+        notationViewFactoryClassName="Action6ViewFactory"
+        canonicalEditPolicyClassName="Action6CanonicalEditPolicy"
+        graphicalNodeEditPolicyClassName="Action6GraphicalNodeEditPolicy"
+        createCommandClassName="Action6CreateCommand"
+        containers="//@diagram/@compartments.5">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <elementType
           xsi:type="gmfgen:SpecializationType"
           metamodelType="//@diagram/@childNodes.3/@elementType"/>
       <viewmap
-          xsi:type="gmfgen:FigureViewmap"
-          figureQualifiedClassName="org.eclipse.draw2d.Label"/>
+          xsi:type="gmfgen:InnerClassViewmap"
+          className="SignalActionFigure"
+          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class SignalActionFigure extends de.cau.cs.kieler.ssm2.custom.AttributeAwareSignalActionFigure {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureSignalActionNameFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public SignalActionFigure(org.eclipse.gef.EditPart e) {&#xA;&#x9;super(e);&#x9;&#x9;&#x9;&#xA;&#xA;this.setMaximumSize(new org.eclipse.draw2d.geometry.Dimension(getMapMode().DPtoLP(-1)&#xA;, getMapMode().DPtoLP(20)&#xA;));&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureSignalActionNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureSignalActionNameFigure.setText(&quot;&lt;...>&quot;);&#xA;&#xA;fFigureSignalActionNameFigure.setFont(FFIGURESIGNALACTIONNAMEFIGURE_FONT);&#xA;&#xA;&#xA;&#xA;this.add(fFigureSignalActionNameFigure);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private boolean myUseLocalCoordinates = false;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected boolean useLocalCoordinates() {&#xA;&#x9;&#x9;return myUseLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#xA;&#x9;&#x9;myUseLocalCoordinates = useLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureSignalActionNameFigure() {&#xA;&#x9;&#x9;return fFigureSignalActionNameFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;/**&#xA; * @generated&#xA; */&#xA;static final org.eclipse.swt.graphics.Font FFIGURESIGNALACTIONNAMEFIGURE_FONT = new org.eclipse.swt.graphics.Font(org.eclipse.swt.widgets.Display.getCurrent(), org.eclipse.swt.widgets.Display.getDefault().getSystemFont().getFontData()[0].getName(), 10, org.eclipse.swt.SWT.BOLD);&#xA;&#xA;">
+        <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
+      </viewmap>
       <modelFacet>
         <metaClass
             href="ssm2.genmodel#//ssm2/Action"/>
@@ -228,11 +283,28 @@
         <childMetaFeature
             href="ssm2.genmodel#//ssm2/State/exitActions"/>
       </modelFacet>
-      <labelModelFacet
-          xsi:type="gmfgen:FeatureLabelModelFacet">
-        <metaFeatures
-            href="ssm2.genmodel#//ssm2/Action/triggersAndEffects"/>
-      </labelModelFacet>
+      <labels
+          visualID="5016"
+          editPartClassName="ActionTriggersAndEffects6EditPart"
+          itemSemanticEditPolicyClassName="ActionTriggersAndEffects6ItemSemanticEditPolicy"
+          notationViewFactoryClassName="ActionTriggersAndEffects6ViewFactory"
+          elementIcon="true">
+        <diagramRunTimeClass
+            href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+        <viewmap
+            xsi:type="gmfgen:ParentAssignedViewmap"
+            getterName="getFigureSignalActionNameFigure"
+            figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel">
+          <attributes
+              xsi:type="gmfgen:StyleAttributes"
+              fixedFont="true"/>
+        </viewmap>
+        <modelFacet
+            xsi:type="gmfgen:FeatureLabelModelFacet">
+          <metaFeatures
+              href="ssm2.genmodel#//ssm2/Action/triggersAndEffects"/>
+        </modelFacet>
+      </labels>
     </childNodes>
     <topLevelNodes
         visualID="2007"
@@ -261,6 +333,206 @@
         <childMetaFeature
             href="ssm2.genmodel#//ssm2/State/regions"/>
       </modelFacet>
+    </topLevelNodes>
+    <topLevelNodes
+        visualID="2008"
+        editPartClassName="SignalEditPart"
+        itemSemanticEditPolicyClassName="SignalItemSemanticEditPolicy"
+        notationViewFactoryClassName="SignalViewFactory"
+        canonicalEditPolicyClassName="SignalCanonicalEditPolicy"
+        graphicalNodeEditPolicyClassName="SignalGraphicalNodeEditPolicy"
+        createCommandClassName="SignalCreateCommand">
+      <diagramRunTimeClass
+          href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+      <elementType
+          xsi:type="gmfgen:SpecializationType"
+          metamodelType="//@diagram/@childNodes.2/@elementType"/>
+      <viewmap
+          xsi:type="gmfgen:InnerClassViewmap"
+          className="SignalActionFigure"
+          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class SignalActionFigure extends de.cau.cs.kieler.ssm2.custom.AttributeAwareSignalActionFigure {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureSignalActionNameFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public SignalActionFigure(org.eclipse.gef.EditPart e) {&#xA;&#x9;super(e);&#x9;&#x9;&#x9;&#xA;&#xA;this.setMaximumSize(new org.eclipse.draw2d.geometry.Dimension(getMapMode().DPtoLP(-1)&#xA;, getMapMode().DPtoLP(20)&#xA;));&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureSignalActionNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureSignalActionNameFigure.setText(&quot;&lt;...>&quot;);&#xA;&#xA;fFigureSignalActionNameFigure.setFont(FFIGURESIGNALACTIONNAMEFIGURE_FONT);&#xA;&#xA;&#xA;&#xA;this.add(fFigureSignalActionNameFigure);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private boolean myUseLocalCoordinates = false;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected boolean useLocalCoordinates() {&#xA;&#x9;&#x9;return myUseLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#xA;&#x9;&#x9;myUseLocalCoordinates = useLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureSignalActionNameFigure() {&#xA;&#x9;&#x9;return fFigureSignalActionNameFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;/**&#xA; * @generated&#xA; */&#xA;static final org.eclipse.swt.graphics.Font FFIGURESIGNALACTIONNAMEFIGURE_FONT = new org.eclipse.swt.graphics.Font(org.eclipse.swt.widgets.Display.getCurrent(), org.eclipse.swt.widgets.Display.getDefault().getSystemFont().getFontData()[0].getName(), 10, org.eclipse.swt.SWT.BOLD);&#xA;&#xA;">
+        <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
+      </viewmap>
+      <modelFacet>
+        <metaClass
+            href="ssm2.genmodel#//ssm2/Signal"/>
+        <containmentMetaFeature
+            href="ssm2.genmodel#//ssm2/State/signals"/>
+        <childMetaFeature
+            href="ssm2.genmodel#//ssm2/State/signals"/>
+      </modelFacet>
+      <labels
+          visualID="5009"
+          editPartClassName="SignalNameEditPart"
+          itemSemanticEditPolicyClassName="SignalNameItemSemanticEditPolicy"
+          notationViewFactoryClassName="SignalNameViewFactory"
+          elementIcon="true">
+        <diagramRunTimeClass
+            href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+        <viewmap
+            xsi:type="gmfgen:ParentAssignedViewmap"
+            getterName="getFigureSignalActionNameFigure"
+            figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel">
+          <attributes
+              xsi:type="gmfgen:StyleAttributes"
+              fixedFont="true"/>
+        </viewmap>
+        <modelFacet
+            xsi:type="gmfgen:FeatureLabelModelFacet">
+          <metaFeatures
+              href="ssm2.genmodel#//ssm2/Signal/name"/>
+        </modelFacet>
+      </labels>
+    </topLevelNodes>
+    <topLevelNodes
+        visualID="2009"
+        editPartClassName="ActionEditPart"
+        itemSemanticEditPolicyClassName="ActionItemSemanticEditPolicy"
+        notationViewFactoryClassName="ActionViewFactory"
+        canonicalEditPolicyClassName="ActionCanonicalEditPolicy"
+        graphicalNodeEditPolicyClassName="ActionGraphicalNodeEditPolicy"
+        createCommandClassName="ActionCreateCommand">
+      <diagramRunTimeClass
+          href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+      <elementType
+          xsi:type="gmfgen:SpecializationType"
+          metamodelType="//@diagram/@childNodes.3/@elementType"/>
+      <viewmap
+          xsi:type="gmfgen:InnerClassViewmap"
+          className="SignalActionFigure"
+          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class SignalActionFigure extends de.cau.cs.kieler.ssm2.custom.AttributeAwareSignalActionFigure {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureSignalActionNameFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public SignalActionFigure(org.eclipse.gef.EditPart e) {&#xA;&#x9;super(e);&#x9;&#x9;&#x9;&#xA;&#xA;this.setMaximumSize(new org.eclipse.draw2d.geometry.Dimension(getMapMode().DPtoLP(-1)&#xA;, getMapMode().DPtoLP(20)&#xA;));&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureSignalActionNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureSignalActionNameFigure.setText(&quot;&lt;...>&quot;);&#xA;&#xA;fFigureSignalActionNameFigure.setFont(FFIGURESIGNALACTIONNAMEFIGURE_FONT);&#xA;&#xA;&#xA;&#xA;this.add(fFigureSignalActionNameFigure);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private boolean myUseLocalCoordinates = false;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected boolean useLocalCoordinates() {&#xA;&#x9;&#x9;return myUseLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#xA;&#x9;&#x9;myUseLocalCoordinates = useLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureSignalActionNameFigure() {&#xA;&#x9;&#x9;return fFigureSignalActionNameFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;/**&#xA; * @generated&#xA; */&#xA;static final org.eclipse.swt.graphics.Font FFIGURESIGNALACTIONNAMEFIGURE_FONT = new org.eclipse.swt.graphics.Font(org.eclipse.swt.widgets.Display.getCurrent(), org.eclipse.swt.widgets.Display.getDefault().getSystemFont().getFontData()[0].getName(), 10, org.eclipse.swt.SWT.BOLD);&#xA;&#xA;">
+        <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
+      </viewmap>
+      <modelFacet>
+        <metaClass
+            href="ssm2.genmodel#//ssm2/Action"/>
+        <containmentMetaFeature
+            href="ssm2.genmodel#//ssm2/State/entryActions"/>
+        <childMetaFeature
+            href="ssm2.genmodel#//ssm2/State/entryActions"/>
+      </modelFacet>
+      <labels
+          visualID="5010"
+          editPartClassName="ActionTriggersAndEffectsEditPart"
+          itemSemanticEditPolicyClassName="ActionTriggersAndEffectsItemSemanticEditPolicy"
+          notationViewFactoryClassName="ActionTriggersAndEffectsViewFactory"
+          elementIcon="true">
+        <diagramRunTimeClass
+            href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+        <viewmap
+            xsi:type="gmfgen:ParentAssignedViewmap"
+            getterName="getFigureSignalActionNameFigure"
+            figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel">
+          <attributes
+              xsi:type="gmfgen:StyleAttributes"
+              fixedFont="true"/>
+        </viewmap>
+        <modelFacet
+            xsi:type="gmfgen:FeatureLabelModelFacet">
+          <metaFeatures
+              href="ssm2.genmodel#//ssm2/Action/triggersAndEffects"/>
+        </modelFacet>
+      </labels>
+    </topLevelNodes>
+    <topLevelNodes
+        visualID="2010"
+        editPartClassName="Action2EditPart"
+        itemSemanticEditPolicyClassName="Action2ItemSemanticEditPolicy"
+        notationViewFactoryClassName="Action2ViewFactory"
+        canonicalEditPolicyClassName="Action2CanonicalEditPolicy"
+        graphicalNodeEditPolicyClassName="Action2GraphicalNodeEditPolicy"
+        createCommandClassName="Action2CreateCommand">
+      <diagramRunTimeClass
+          href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+      <elementType
+          xsi:type="gmfgen:SpecializationType"
+          metamodelType="//@diagram/@childNodes.3/@elementType"/>
+      <viewmap
+          xsi:type="gmfgen:InnerClassViewmap"
+          className="SignalActionFigure"
+          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class SignalActionFigure extends de.cau.cs.kieler.ssm2.custom.AttributeAwareSignalActionFigure {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureSignalActionNameFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public SignalActionFigure(org.eclipse.gef.EditPart e) {&#xA;&#x9;super(e);&#x9;&#x9;&#x9;&#xA;&#xA;this.setMaximumSize(new org.eclipse.draw2d.geometry.Dimension(getMapMode().DPtoLP(-1)&#xA;, getMapMode().DPtoLP(20)&#xA;));&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureSignalActionNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureSignalActionNameFigure.setText(&quot;&lt;...>&quot;);&#xA;&#xA;fFigureSignalActionNameFigure.setFont(FFIGURESIGNALACTIONNAMEFIGURE_FONT);&#xA;&#xA;&#xA;&#xA;this.add(fFigureSignalActionNameFigure);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private boolean myUseLocalCoordinates = false;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected boolean useLocalCoordinates() {&#xA;&#x9;&#x9;return myUseLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#xA;&#x9;&#x9;myUseLocalCoordinates = useLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureSignalActionNameFigure() {&#xA;&#x9;&#x9;return fFigureSignalActionNameFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;/**&#xA; * @generated&#xA; */&#xA;static final org.eclipse.swt.graphics.Font FFIGURESIGNALACTIONNAMEFIGURE_FONT = new org.eclipse.swt.graphics.Font(org.eclipse.swt.widgets.Display.getCurrent(), org.eclipse.swt.widgets.Display.getDefault().getSystemFont().getFontData()[0].getName(), 10, org.eclipse.swt.SWT.BOLD);&#xA;&#xA;">
+        <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
+      </viewmap>
+      <modelFacet>
+        <metaClass
+            href="ssm2.genmodel#//ssm2/Action"/>
+        <containmentMetaFeature
+            href="ssm2.genmodel#//ssm2/State/innerActions"/>
+        <childMetaFeature
+            href="ssm2.genmodel#//ssm2/State/innerActions"/>
+      </modelFacet>
+      <labels
+          visualID="5011"
+          editPartClassName="ActionTriggersAndEffects2EditPart"
+          itemSemanticEditPolicyClassName="ActionTriggersAndEffects2ItemSemanticEditPolicy"
+          notationViewFactoryClassName="ActionTriggersAndEffects2ViewFactory"
+          elementIcon="true">
+        <diagramRunTimeClass
+            href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+        <viewmap
+            xsi:type="gmfgen:ParentAssignedViewmap"
+            getterName="getFigureSignalActionNameFigure"
+            figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel">
+          <attributes
+              xsi:type="gmfgen:StyleAttributes"
+              fixedFont="true"/>
+        </viewmap>
+        <modelFacet
+            xsi:type="gmfgen:FeatureLabelModelFacet">
+          <metaFeatures
+              href="ssm2.genmodel#//ssm2/Action/triggersAndEffects"/>
+        </modelFacet>
+      </labels>
+    </topLevelNodes>
+    <topLevelNodes
+        visualID="2011"
+        editPartClassName="Action3EditPart"
+        itemSemanticEditPolicyClassName="Action3ItemSemanticEditPolicy"
+        notationViewFactoryClassName="Action3ViewFactory"
+        canonicalEditPolicyClassName="Action3CanonicalEditPolicy"
+        graphicalNodeEditPolicyClassName="Action3GraphicalNodeEditPolicy"
+        createCommandClassName="Action3CreateCommand">
+      <diagramRunTimeClass
+          href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+      <elementType
+          xsi:type="gmfgen:SpecializationType"
+          metamodelType="//@diagram/@childNodes.3/@elementType"/>
+      <viewmap
+          xsi:type="gmfgen:InnerClassViewmap"
+          className="SignalActionFigure"
+          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class SignalActionFigure extends de.cau.cs.kieler.ssm2.custom.AttributeAwareSignalActionFigure {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureSignalActionNameFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public SignalActionFigure(org.eclipse.gef.EditPart e) {&#xA;&#x9;super(e);&#x9;&#x9;&#x9;&#xA;&#xA;this.setMaximumSize(new org.eclipse.draw2d.geometry.Dimension(getMapMode().DPtoLP(-1)&#xA;, getMapMode().DPtoLP(20)&#xA;));&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureSignalActionNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureSignalActionNameFigure.setText(&quot;&lt;...>&quot;);&#xA;&#xA;fFigureSignalActionNameFigure.setFont(FFIGURESIGNALACTIONNAMEFIGURE_FONT);&#xA;&#xA;&#xA;&#xA;this.add(fFigureSignalActionNameFigure);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private boolean myUseLocalCoordinates = false;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected boolean useLocalCoordinates() {&#xA;&#x9;&#x9;return myUseLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#xA;&#x9;&#x9;myUseLocalCoordinates = useLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureSignalActionNameFigure() {&#xA;&#x9;&#x9;return fFigureSignalActionNameFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;/**&#xA; * @generated&#xA; */&#xA;static final org.eclipse.swt.graphics.Font FFIGURESIGNALACTIONNAMEFIGURE_FONT = new org.eclipse.swt.graphics.Font(org.eclipse.swt.widgets.Display.getCurrent(), org.eclipse.swt.widgets.Display.getDefault().getSystemFont().getFontData()[0].getName(), 10, org.eclipse.swt.SWT.BOLD);&#xA;&#xA;">
+        <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
+      </viewmap>
+      <modelFacet>
+        <metaClass
+            href="ssm2.genmodel#//ssm2/Action"/>
+        <containmentMetaFeature
+            href="ssm2.genmodel#//ssm2/State/exitActions"/>
+        <childMetaFeature
+            href="ssm2.genmodel#//ssm2/State/exitActions"/>
+      </modelFacet>
+      <labels
+          visualID="5012"
+          editPartClassName="ActionTriggersAndEffects3EditPart"
+          itemSemanticEditPolicyClassName="ActionTriggersAndEffects3ItemSemanticEditPolicy"
+          notationViewFactoryClassName="ActionTriggersAndEffects3ViewFactory"
+          elementIcon="true">
+        <diagramRunTimeClass
+            href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+        <viewmap
+            xsi:type="gmfgen:ParentAssignedViewmap"
+            getterName="getFigureSignalActionNameFigure"
+            figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel">
+          <attributes
+              xsi:type="gmfgen:StyleAttributes"
+              fixedFont="true"/>
+        </viewmap>
+        <modelFacet
+            xsi:type="gmfgen:FeatureLabelModelFacet">
+          <metaFeatures
+              href="ssm2.genmodel#//ssm2/Action/triggersAndEffects"/>
+        </modelFacet>
+      </labels>
     </topLevelNodes>
     <links
         visualID="4001"
