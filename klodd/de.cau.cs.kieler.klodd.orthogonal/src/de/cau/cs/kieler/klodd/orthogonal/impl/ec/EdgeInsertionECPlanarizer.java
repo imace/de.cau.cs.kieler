@@ -1,9 +1,22 @@
+/******************************************************************************
+ * KIELER - Kiel Integrated Environment for Layout for the Eclipse RCP
+ *
+ * http://www.informatik.uni-kiel.de/rtsys/kieler/
+ * 
+ * Copyright 2009 by
+ * + Christian-Albrechts-University of Kiel
+ *   + Department of Computer Science
+ *     + Real-Time and Embedded Systems Group
+ * 
+ * This code is provided under the terms of the Eclipse Public License (EPL).
+ * See the file epl-v10.html for the license text.
+ */
 package de.cau.cs.kieler.klodd.orthogonal.impl.ec;
 
 import de.cau.cs.kieler.core.alg.AbstractAlgorithm;
-import de.cau.cs.kieler.core.graph.KEdge;
-import de.cau.cs.kieler.core.graph.KGraph;
-import de.cau.cs.kieler.core.graph.KNode;
+import de.cau.cs.kieler.core.slimgraph.KSlimEdge;
+import de.cau.cs.kieler.core.slimgraph.KSlimGraph;
+import de.cau.cs.kieler.core.slimgraph.KSlimNode;
 import de.cau.cs.kieler.klodd.orthogonal.modules.IPlanarizer;
 import de.cau.cs.kieler.klodd.orthogonal.structures.*;
 
@@ -21,16 +34,16 @@ public class EdgeInsertionECPlanarizer extends AbstractAlgorithm implements
 	 * (non-Javadoc)
 	 * @see de.cau.cs.kieler.klodd.orthogonal.modules.IPlanarizer#planarize(de.cau.cs.kieler.klodd.orthogonal.structures.TSMGraph)
 	 */
-	public void planarize(KGraph graph) {
+	public void planarize(KSlimGraph graph) {
 		getMonitor().begin("Edge insertion planarization", graph.edges.size());
 		// remove all edges from the incidence lists
-		for (KNode node : graph.nodes)
+		for (KSlimNode node : graph.nodes)
 			node.incidence.clear();
 		
 		// insert the stored edges, one by one, and preserve planarity
 		ECEdgeInserter edgeInserter = new ECEdgeInserter();
 		edgeInserter.setGraph(graph);
-		for (KEdge edge : graph.edges) {
+		for (KSlimEdge edge : graph.edges) {
 			EmbeddingConstraint sourceConstraint = ((TSMNode)edge.source)
 					.embeddingConstraint;
 			EmbeddingConstraint targetConstraint = ((TSMNode)edge.target)

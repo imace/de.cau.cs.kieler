@@ -1,11 +1,11 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Hierarchical Layout Plug-In
+Bundle-Name: KIELER Hierarchical Layout
 Bundle-SymbolicName: de.cau.cs.kieler.klodd.hierarchical;singleton:=true
-Bundle-Version: 1.0.0
+Bundle-Version: 0.1.0
 Require-Bundle: org.eclipse.emf.ecore;bundle-version="2.4.1",
- de.cau.cs.kieler.core;bundle-version="1.0.0",
- de.cau.cs.kieler.kiml.layout;bundle-version="1.0.0"
+ de.cau.cs.kieler.core,
+ de.cau.cs.kieler.kiml.layout
 Export-Package: de.cau.cs.kieler.klodd.hierarchical;
   uses:="de.cau.cs.kieler.kiml.layout.services,
    de.cau.cs.kieler.core,

@@ -1,4 +1,17 @@
-package de.cau.cs.kieler.core.graph;
+/******************************************************************************
+ * KIELER - Kiel Integrated Environment for Layout for the Eclipse RCP
+ *
+ * http://www.informatik.uni-kiel.de/rtsys/kieler/
+ * 
+ * Copyright 2009 by
+ * + Christian-Albrechts-University of Kiel
+ *   + Department of Computer Science
+ *     + Real-Time and Embedded Systems Group
+ * 
+ * This code is provided under the terms of the Eclipse Public License (EPL).
+ * See the file epl-v10.html for the license text.
+ */
+package de.cau.cs.kieler.core.slimgraph;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -10,7 +23,7 @@ import java.util.ListIterator;
  * 
  * @author msp
  */
-public class KNode extends KGraphElement {
+public class KSlimNode extends KSlimGraphElement {
 
 	/**
 	 * Single entry of a incidence list. 
@@ -22,7 +35,7 @@ public class KNode extends KGraphElement {
 		}
 		
 		/** the edge of this incidence entry */
-		public KEdge edge;
+		public KSlimEdge edge;
 		/** type of incidence: incoming or outgoing */
 		public Type type;
 		
@@ -32,7 +45,7 @@ public class KNode extends KGraphElement {
 		 * @param edge the edge
 		 * @param type the incidence type
 		 */
-		public IncEntry(KEdge edge, Type type) {
+		public IncEntry(KSlimEdge edge, Type type) {
 			this.edge = edge;
 			this.type = type;
 		}
@@ -44,7 +57,7 @@ public class KNode extends KGraphElement {
 		 * @return the source of the edge if this is an incoming type,
 		 *     else the target of the edge
 		 */
-		public KNode endpoint() {
+		public KSlimNode endpoint() {
 			if (type == Type.IN)
 				return edge.source;
 			else
@@ -58,7 +71,7 @@ public class KNode extends KGraphElement {
 		 * @return the right face of the edge if this is an incoming
 		 *     type, else the left face of the edge
 		 */
-		public KFace leftFace() {
+		public KSlimFace leftFace() {
 			if (type == Type.IN)
 				return edge.rightFace;
 			else
@@ -173,7 +186,7 @@ public class KNode extends KGraphElement {
 	 * @param graph the graph to which the new node shall be added
 	 * @param obj the object to be contained
 	 */
-	public KNode(KGraph graph, Object obj) {
+	public KSlimNode(KSlimGraph graph, Object obj) {
 		graph.nodes.add(this);
 		this.object = obj;
 		this.id = graph.nextNodeId++;
@@ -184,7 +197,7 @@ public class KNode extends KGraphElement {
 	 * 
 	 * @param graph the graph to which the new node shall be added
 	 */
-	public KNode(KGraph graph) {
+	public KSlimNode(KSlimGraph graph) {
 		graph.nodes.add(this);
 		this.object = null;
 		this.id = graph.nextNodeId++;
@@ -200,7 +213,7 @@ public class KNode extends KGraphElement {
 	 * @return iterator pointing at <code>edge</code>, or null if
 	 *     the edge was not found
 	 */
-	public ListIterator<KNode.IncEntry> getIterator(KEdge edge,
+	public ListIterator<KSlimNode.IncEntry> getIterator(KSlimEdge edge,
 			boolean outgoing) {
 		ListIterator<IncEntry> edgeIter = incidence.listIterator();
 		while (edgeIter.hasNext()) {

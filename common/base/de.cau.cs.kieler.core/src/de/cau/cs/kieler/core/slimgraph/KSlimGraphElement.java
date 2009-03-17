@@ -1,11 +1,24 @@
-package de.cau.cs.kieler.core.graph;
+/******************************************************************************
+ * KIELER - Kiel Integrated Environment for Layout for the Eclipse RCP
+ *
+ * http://www.informatik.uni-kiel.de/rtsys/kieler/
+ * 
+ * Copyright 2009 by
+ * + Christian-Albrechts-University of Kiel
+ *   + Department of Computer Science
+ *     + Real-Time and Embedded Systems Group
+ * 
+ * This code is provided under the terms of the Eclipse Public License (EPL).
+ * See the file epl-v10.html for the license text.
+ */
+package de.cau.cs.kieler.core.slimgraph;
 
 /**
  * An element of a KIELER graph, which can be a node, an edge or a face.
  * 
  * @author msp
  */
-public abstract class KGraphElement implements Comparable<KGraphElement> {
+public abstract class KSlimGraphElement implements Comparable<KSlimGraphElement> {
 
 	/** identifier of this element, determined at creation time */
 	public int id;
@@ -18,7 +31,7 @@ public abstract class KGraphElement implements Comparable<KGraphElement> {
 	 * (non-Javadoc)
 	 * @see java.lang.Comparable#compareTo(java.lang.Object)
 	 */
-	public int compareTo(KGraphElement other) {
+	public int compareTo(KSlimGraphElement other) {
 		return this.id - other.id;
 	}
 	
@@ -28,7 +41,7 @@ public abstract class KGraphElement implements Comparable<KGraphElement> {
 	 */
 	public boolean equals(Object other) {
 		return (other.getClass() == this.getClass())
-				&& ((KGraphElement)other).id == this.id;
+				&& ((KSlimGraphElement)other).id == this.id;
 	}
 	
 	/*

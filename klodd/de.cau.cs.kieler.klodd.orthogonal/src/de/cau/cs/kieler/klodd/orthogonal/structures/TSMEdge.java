@@ -1,3 +1,16 @@
+/******************************************************************************
+ * KIELER - Kiel Integrated Environment for Layout for the Eclipse RCP
+ *
+ * http://www.informatik.uni-kiel.de/rtsys/kieler/
+ * 
+ * Copyright 2009 by
+ * + Christian-Albrechts-University of Kiel
+ *   + Department of Computer Science
+ *     + Real-Time and Embedded Systems Group
+ * 
+ * This code is provided under the terms of the Eclipse Public License (EPL).
+ * See the file epl-v10.html for the license text.
+ */
 package de.cau.cs.kieler.klodd.orthogonal.structures;
 
 import java.util.List;
@@ -5,7 +18,7 @@ import java.util.List;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPoint;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphFactory;
-import de.cau.cs.kieler.core.graph.*;
+import de.cau.cs.kieler.core.slimgraph.*;
 
 /**
  * An edge in the graph structure used for the topology-shape-metrics
@@ -13,7 +26,7 @@ import de.cau.cs.kieler.core.graph.*;
  * 
  * @author msp
  */
-public class TSMEdge extends KEdge {
+public class TSMEdge extends KSlimEdge {
 
 	/** layout graph edge contained in this TSM edge, or null if there is none */
 	public KLayoutEdge layoutEdge;
@@ -31,7 +44,7 @@ public class TSMEdge extends KEdge {
 	 * @param target target node
 	 * @param layoutEdge the layout graph edge to be contained
 	 */
-	public TSMEdge(KGraph graph, KNode source, KNode target,
+	public TSMEdge(KSlimGraph graph, KSlimNode source, KSlimNode target,
 			KLayoutEdge layoutEdge) {
 		super(graph, source, target);
 		this.layoutEdge = layoutEdge;
@@ -44,7 +57,7 @@ public class TSMEdge extends KEdge {
 	 * @param source source node
 	 * @param target target node
 	 */
-	public TSMEdge(KGraph graph, KNode source, KNode target) {
+	public TSMEdge(KSlimGraph graph, KSlimNode source, KSlimNode target) {
 		super(graph, source, target);
 	}
 	

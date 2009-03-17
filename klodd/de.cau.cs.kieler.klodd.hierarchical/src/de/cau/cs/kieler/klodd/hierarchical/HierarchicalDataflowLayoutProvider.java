@@ -1,3 +1,16 @@
+/******************************************************************************
+ * KIELER - Kiel Integrated Environment for Layout for the Eclipse RCP
+ *
+ * http://www.informatik.uni-kiel.de/rtsys/kieler/
+ * 
+ * Copyright 2008 by
+ * + Christian-Albrechts-University of Kiel
+ *   + Department of Computer Science
+ *     + Real-Time and Embedded Systems Group
+ * 
+ * This code is provided under the terms of the Eclipse Public License (EPL).
+ * See the file epl-v10.html for the license text.
+ */
 package de.cau.cs.kieler.klodd.hierarchical;
 
 import java.util.LinkedList;
@@ -6,11 +19,11 @@ import java.util.List;
 import de.cau.cs.kieler.core.IKielerPreferenceStore;
 import de.cau.cs.kieler.core.KielerException;
 import de.cau.cs.kieler.core.alg.IKielerProgressMonitor;
-import de.cau.cs.kieler.core.graph.KEdge;
-import de.cau.cs.kieler.core.graph.KGraph;
-import de.cau.cs.kieler.core.graph.alg.DFSCycleRemover;
-import de.cau.cs.kieler.core.graph.alg.GreedyCycleRemover;
-import de.cau.cs.kieler.core.graph.alg.ICycleRemover;
+import de.cau.cs.kieler.core.slimgraph.KSlimEdge;
+import de.cau.cs.kieler.core.slimgraph.KSlimGraph;
+import de.cau.cs.kieler.core.slimgraph.alg.DFSCycleRemover;
+import de.cau.cs.kieler.core.slimgraph.alg.GreedyCycleRemover;
+import de.cau.cs.kieler.core.slimgraph.alg.ICycleRemover;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort;
@@ -102,7 +115,7 @@ public class HierarchicalDataflowLayoutProvider extends
 		setNodeSizes(layoutNode);
 		// create a KIELER graph for cycle removal
 		graphConverter.reset(progressMonitor.subTask(5));
-		KGraph kGraph = graphConverter.convertGraph(layoutNode, true);
+		KSlimGraph kGraph = graphConverter.convertGraph(layoutNode, true);
 		// remove cycles in the input graph
 		cycleRemover.reset(progressMonitor.subTask(5));
 		cycleRemover.removeCycles(kGraph);
@@ -228,8 +241,8 @@ public class HierarchicalDataflowLayoutProvider extends
 	 * Restores the edges that were reversed for cycle removal.
 	 */
 	private void restoreCycles() {
-		List<KEdge> reversedEdges = cycleRemover.getReversedEdges();
-		for (KEdge kEdge : reversedEdges) {
+		List<KSlimEdge> reversedEdges = cycleRemover.getReversedEdges();
+		for (KSlimEdge kEdge : reversedEdges) {
 			KLayoutEdge layoutEdge = (KLayoutEdge)kEdge.object;
 			// reverse bend points
 			List<KPoint> bendPoints = new LinkedList<KPoint>();

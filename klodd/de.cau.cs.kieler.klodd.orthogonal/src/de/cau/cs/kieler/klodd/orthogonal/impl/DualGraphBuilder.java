@@ -1,3 +1,16 @@
+/******************************************************************************
+ * KIELER - Kiel Integrated Environment for Layout for the Eclipse RCP
+ *
+ * http://www.informatik.uni-kiel.de/rtsys/kieler/
+ * 
+ * Copyright 2009 by
+ * + Christian-Albrechts-University of Kiel
+ *   + Department of Computer Science
+ *     + Real-Time and Embedded Systems Group
+ * 
+ * This code is provided under the terms of the Eclipse Public License (EPL).
+ * See the file epl-v10.html for the license text.
+ */
 package de.cau.cs.kieler.klodd.orthogonal.impl;
 
 import java.util.LinkedList;
@@ -5,7 +18,7 @@ import java.util.List;
 import java.util.ListIterator;
 
 import de.cau.cs.kieler.core.alg.AbstractAlgorithm;
-import de.cau.cs.kieler.core.graph.*;
+import de.cau.cs.kieler.core.slimgraph.*;
 
 /**
  * Algorithm that constructs the dual graph of a given graph.
@@ -24,7 +37,7 @@ public class DualGraphBuilder extends AbstractAlgorithm {
 		 * @param border face border to test
 		 * @return true if the given face border is external
 		 */
-		public boolean isExternal(List<KFace.BorderEntry> border);
+		public boolean isExternal(List<KSlimFace.BorderEntry> border);
 	}
 	
 	/** indicates whether each edge has been seen on the left side */
@@ -47,13 +60,13 @@ public class DualGraphBuilder extends AbstractAlgorithm {
 	 * @param graph graph for which the dual graph shall be constructed
 	 * @param externalFaceDetector detector for external faces
 	 */
-	public void buildDual(KGraph graph,
+	public void buildDual(KSlimGraph graph,
 			ExternalFaceDetector externalFaceDetector) {
 		this.externalFaceDetector = externalFaceDetector;
 		seenLeft = new boolean[graph.edges.size()];
 		seenRight = new boolean[graph.edges.size()];
 
-		for (KEdge edge : graph.edges) {
+		for (KSlimEdge edge : graph.edges) {
 			if (!seenRight[edge.id])
 				buildBorder(graph, edge, true);
 			if (!seenLeft[edge.id])
@@ -69,16 +82,16 @@ public class DualGraphBuilder extends AbstractAlgorithm {
 	 * @param forward if true, the right side of the given edge
 	 *     is taken to build the border
 	 */
-	private void buildBorder(KGraph graph, KEdge edge, boolean forward) {
-		List<KFace.BorderEntry> border = new LinkedList<KFace.BorderEntry>();
+	private void buildBorder(KSlimGraph graph, KSlimEdge edge, boolean forward) {
+		List<KSlimFace.BorderEntry> border = new LinkedList<KSlimFace.BorderEntry>();
 		visit(edge, border, forward);
-		KFace face;
+		KSlimFace face;
 		if (externalFaceDetector.isExternal(border))
 			face = graph.externalFace;
 		else
-			face = new KFace(graph, true);
+			face = new KSlimFace(graph, true);
 		face.borders.add(border);
-		for (KFace.BorderEntry borderEntry : border) {
+		for (KSlimFace.BorderEntry borderEntry : border) {
 			if (borderEntry.forward)
 				borderEntry.edge.rightFace = face;
 			else
@@ -95,9 +108,9 @@ public class DualGraphBuilder extends AbstractAlgorithm {
 	 * @param forward indicates whether the given edge is traversed
 	 *     in forward direction
 	 */
-	private void visit(KEdge edge, List<KFace.BorderEntry> border,
+	private void visit(KSlimEdge edge, List<KSlimFace.BorderEntry> border,
 			boolean forward) {
-		KNode secondNode;
+		KSlimNode secondNode;
 		if (forward) {
 			seenRight[edge.id] = true;
 			secondNode = edge.target;
@@ -106,9 +119,9 @@ public class DualGraphBuilder extends AbstractAlgorithm {
 			seenLeft[edge.id] = true;
 			secondNode = edge.source;
 		}
-		border.add(new KFace.BorderEntry(edge, forward));
-		KNode.IncEntry nextEdge = getNextEdge(secondNode, edge, forward);
-		boolean nextForward = (nextEdge.type == KNode.IncEntry.Type.OUT);
+		border.add(new KSlimFace.BorderEntry(edge, forward));
+		KSlimNode.IncEntry nextEdge = getNextEdge(secondNode, edge, forward);
+		boolean nextForward = (nextEdge.type == KSlimNode.IncEntry.Type.OUT);
 		if (nextForward && !seenRight[nextEdge.edge.id]
 				|| !nextForward && !seenLeft[nextEdge.edge.id])
 			visit(nextEdge.edge, border, nextForward);
@@ -125,14 +138,14 @@ public class DualGraphBuilder extends AbstractAlgorithm {
 	 * @return the next incidence list entry as seen from the previous
 	 *     edge in counter-clockwise order
 	 */
-	private KNode.IncEntry getNextEdge(KNode node, KEdge prevEdge,
+	private KSlimNode.IncEntry getNextEdge(KSlimNode node, KSlimEdge prevEdge,
 			boolean prevIncoming) {
-		ListIterator<KNode.IncEntry> edgeIter = node.incidence
+		ListIterator<KSlimNode.IncEntry> edgeIter = node.incidence
 				.listIterator(node.incidence.size());
 		while (edgeIter.hasPrevious()) {
-			KNode.IncEntry entry = edgeIter.previous();
+			KSlimNode.IncEntry entry = edgeIter.previous();
 			if (entry.edge.id == prevEdge.id && prevIncoming
-					== (entry.type == KNode.IncEntry.Type.IN))
+					== (entry.type == KSlimNode.IncEntry.Type.IN))
 				break;
 		}
 		if (edgeIter.hasPrevious())

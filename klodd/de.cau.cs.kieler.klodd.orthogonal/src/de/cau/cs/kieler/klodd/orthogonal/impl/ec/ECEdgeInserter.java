@@ -1,3 +1,16 @@
+/******************************************************************************
+ * KIELER - Kiel Integrated Environment for Layout for the Eclipse RCP
+ *
+ * http://www.informatik.uni-kiel.de/rtsys/kieler/
+ * 
+ * Copyright 2009 by
+ * + Christian-Albrechts-University of Kiel
+ *   + Department of Computer Science
+ *     + Real-Time and Embedded Systems Group
+ * 
+ * This code is provided under the terms of the Eclipse Public License (EPL).
+ * See the file epl-v10.html for the license text.
+ */
 package de.cau.cs.kieler.klodd.orthogonal.impl.ec;
 
 import java.util.LinkedList;
@@ -6,10 +19,10 @@ import java.util.ListIterator;
 import java.util.Queue;
 
 import de.cau.cs.kieler.core.alg.AbstractAlgorithm;
-import de.cau.cs.kieler.core.graph.KEdge;
-import de.cau.cs.kieler.core.graph.KFace;
-import de.cau.cs.kieler.core.graph.KGraph;
-import de.cau.cs.kieler.core.graph.KNode;
+import de.cau.cs.kieler.core.slimgraph.KSlimEdge;
+import de.cau.cs.kieler.core.slimgraph.KSlimFace;
+import de.cau.cs.kieler.core.slimgraph.KSlimGraph;
+import de.cau.cs.kieler.core.slimgraph.KSlimNode;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge;
 import de.cau.cs.kieler.klodd.orthogonal.structures.*;
 
@@ -28,7 +41,7 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 		/** rank of this placing in the clockwise order of edges */
 		int rank;
 		/** face related to this placing */
-		KFace face = null;
+		KSlimFace face = null;
 		
 		/**
 		 * Creates an edge placing with given rank.
@@ -46,14 +59,14 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 		/** the edge to take for this entry of a path */
 		TSMEdge edge;
 		/** the target face of the edge*/
-		KFace targetFace;
+		KSlimFace targetFace;
 		
 		/**
 		 * Creates a dual path entry with given edge and target face.
 		 * @param edge the edge
 		 * @param targetFace the target face
 		 */
-		DualPathEntry(TSMEdge edge, KFace targetFace) {
+		DualPathEntry(TSMEdge edge, KSlimFace targetFace) {
 			this.edge = edge;
 			this.targetFace = targetFace;
 		}
@@ -87,7 +100,7 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 	}
 	
 	/** TSM graph that is currently processed */
-	private KGraph graph = null;
+	private KSlimGraph graph = null;
 	/** array of markers of already inserted edges */
 	private boolean[] inserted;
 	/** for self-loops: is the target rank greater than the source rank? */
@@ -107,7 +120,7 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 	 * 
 	 * @param graph TSM graph
 	 */
-	public void setGraph(KGraph graph) {
+	public void setGraph(KSlimGraph graph) {
 		this.graph = graph;
 		inserted = new boolean[graph.edges.size()];
 	}
@@ -123,7 +136,7 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 	 * @param sourceConstraint embedding constraint at the source
 	 * @param targetConstraint embedding constraint at the target
 	 */
-	public void insertEdge(KEdge edge, EmbeddingConstraint sourceConstraint,
+	public void insertEdge(KSlimEdge edge, EmbeddingConstraint sourceConstraint,
 			EmbeddingConstraint targetConstraint) {
 		if (graph == null)
 			throw new IllegalStateException("The method setGraph() must be called first.");
@@ -153,7 +166,7 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 	 * @param outgoing indicates whether the edge is outgoing for the node
 	 * @return array of placings that are admissible for the given edge
 	 */
-	private List<EdgePlacing> getEdgePlacings(KEdge insEdge, KNode node,
+	private List<EdgePlacing> getEdgePlacings(KSlimEdge insEdge, KSlimNode node,
 			EmbeddingConstraint constraint, boolean outgoing) {
 		int placingsCount = node.incidence.size();
 		if (placingsCount == 0) {
@@ -165,7 +178,7 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 		else {
 			// assign ranks to already placed edges
 			int nextRank = 0;
-			for (KNode.IncEntry edgeEntry : node.incidence) {
+			for (KSlimNode.IncEntry edgeEntry : node.incidence) {
 				edgeEntry.edge.rank = nextRank++;
 				inserted[edgeEntry.edge.id] = true;
 			}
@@ -197,7 +210,7 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 		switch (constraint.type) {
 		case OUT_EDGE:
 		case IN_EDGE:
-			KEdge edge = (KEdge)constraint.object;
+			KSlimEdge edge = (KSlimEdge)constraint.object;
 			if (inserted[edge.id]) {
 				if (edge.rank < 0) {
 					if (outgoing == (constraint.type
@@ -373,11 +386,11 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 	 * @param targetPlacings set of admissible target placings
 	 * @return path leading from the source placing to the target placing
 	 */
-	private DualPath shortestPath(KEdge insEdge, List<EdgePlacing> sourcePlacings,
+	private DualPath shortestPath(KSlimEdge insEdge, List<EdgePlacing> sourcePlacings,
 			List<EdgePlacing> targetPlacings) {
 		DualPath shortestPath = new DualPath();
 		// determine the sets of source and target faces
-		List<KFace> targetFaces = new LinkedList<KFace>();
+		List<KSlimFace> targetFaces = new LinkedList<KSlimFace>();
 		boolean sourceEmpty = insEdge.source.incidence.isEmpty();
 		boolean targetEmpty = insEdge.target.incidence.isEmpty();
 		if (!sourceEmpty) {
@@ -437,7 +450,7 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 			}
 			
 			// get a placing for the selected target face
-			KFace targetFace = shortestPath.entries.isEmpty()
+			KSlimFace targetFace = shortestPath.entries.isEmpty()
 					? shortestPath.sourcePlacing.face
 					: shortestPath.entries.get(shortestLength-1).targetFace;
 			for (EdgePlacing placing : targetPlacings) {
@@ -456,16 +469,16 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 	 * @param targetFaces set of target faces
 	 * @return shortest path from the source face to one of the target faces
 	 */
-	private List<DualPathEntry> bfsPath(KFace sourceFace, List<KFace> targetFaces) {
+	private List<DualPathEntry> bfsPath(KSlimFace sourceFace, List<KSlimFace> targetFaces) {
 		DualPathEntry[] parentPath = new DualPathEntry[graph.faces.size() + 1];
 		Queue<DualPathEntry> bfsQueue = new LinkedList<DualPathEntry>();
-		KFace currentFace = sourceFace;
+		KSlimFace currentFace = sourceFace;
 		do {
 			if (targetFaces.contains(currentFace)) {
 				break;
 			}
-			for (List<KFace.BorderEntry> border : currentFace.borders) {
-				for (KFace.BorderEntry entry : border)
+			for (List<KSlimFace.BorderEntry> border : currentFace.borders) {
+				for (KSlimFace.BorderEntry entry : border)
 					bfsQueue.add(new DualPathEntry((TSMEdge)entry.edge,
 							entry.opposed()));
 			}
@@ -501,27 +514,27 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 	 * @param path path of the dual graph
 	 */
 	private void insertEdge(TSMEdge insEdge, DualPath path) {
-		KNode currentNode = insEdge.source;
-		KFace currentFace = path.sourcePlacing.face;
+		KSlimNode currentNode = insEdge.source;
+		KSlimFace currentFace = path.sourcePlacing.face;
 		int currentRank = path.sourcePlacing.rank;
 		TSMEdge previousEdge = null;
 		for (DualPathEntry pathEntry : path.entries) {
 			// insert a dummy node into the currently crossed edge
-			KNode dummyNode = new TSMNode(graph, TSMNode.Type.CROSSING);
+			KSlimNode dummyNode = new TSMNode(graph, TSMNode.Type.CROSSING);
 			TSMEdge edge1 = pathEntry.edge;
-			KNode oldTarget = edge1.target;
+			KSlimNode oldTarget = edge1.target;
 			edge1.target = dummyNode;
-			ListIterator<KNode.IncEntry> oldTargetIter = oldTarget.getIterator(
+			ListIterator<KSlimNode.IncEntry> oldTargetIter = oldTarget.getIterator(
 					edge1, false);
 			oldTargetIter.remove();
 			TSMEdge edge2 = new TSMEdge(graph, dummyNode, oldTarget,
 					((TSMEdge)edge1).layoutEdge);
-			oldTargetIter.add(new KNode.IncEntry(edge2,
-					KNode.IncEntry.Type.IN));
-			dummyNode.incidence.add(new KNode.IncEntry(edge1,
-					KNode.IncEntry.Type.IN));
-			dummyNode.incidence.add(new KNode.IncEntry(edge2,
-					KNode.IncEntry.Type.OUT));
+			oldTargetIter.add(new KSlimNode.IncEntry(edge2,
+					KSlimNode.IncEntry.Type.IN));
+			dummyNode.incidence.add(new KSlimNode.IncEntry(edge1,
+					KSlimNode.IncEntry.Type.IN));
+			dummyNode.incidence.add(new KSlimNode.IncEntry(edge2,
+					KSlimNode.IncEntry.Type.OUT));
 			int firstRank, secondRank;
 			boolean insertForward;
 			if (currentFace.id == edge1.leftFace.id) {
@@ -542,16 +555,16 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 			// update faces left and right of edge1
 			edge2.leftFace = edge1.leftFace;
 			edge2.rightFace = edge1.rightFace;
-			ListIterator<KFace.BorderEntry> currentFaceIter = currentFace
+			ListIterator<KSlimFace.BorderEntry> currentFaceIter = currentFace
 					.getIterator(edge1, insertForward);
 			if (!insertForward)
 				currentFaceIter.previous();
-			currentFaceIter.add(new KFace.BorderEntry(edge2, insertForward));
-			ListIterator<KFace.BorderEntry> targetFaceIter = pathEntry
+			currentFaceIter.add(new KSlimFace.BorderEntry(edge2, insertForward));
+			ListIterator<KSlimFace.BorderEntry> targetFaceIter = pathEntry
 					.targetFace.getIterator(edge1, !insertForward);
 			if (insertForward)
 				targetFaceIter.previous();
-			targetFaceIter.add(new KFace.BorderEntry(edge2, !insertForward));
+			targetFaceIter.add(new KSlimFace.BorderEntry(edge2, !insertForward));
 
 			// insert an edge from the current node to the new pseudo node
 			previousEdge = insertEdge(currentNode, currentRank, dummyNode,
@@ -582,8 +595,8 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 	 *     edge is created
 	 * @return the new inserted edge
 	 */
-	private TSMEdge insertEdge(KNode sourceNode, int sourceRank,
-			KNode targetNode, int targetRank, KFace face, TSMEdge insEdge,
+	private TSMEdge insertEdge(KSlimNode sourceNode, int sourceRank,
+			KSlimNode targetNode, int targetRank, KSlimFace face, TSMEdge insEdge,
 			TSMEdge previousEdge, KLayoutEdge layoutEdge) {
 		if (insEdge == null) {
 			insEdge = new TSMEdge(graph, sourceNode, targetNode, layoutEdge);
@@ -600,8 +613,8 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 		// update the crossed face
 		int sourceBorderIndex = getBorderIndexFor(face.borders, sourceNode);
 		int targetBorderIndex = getBorderIndexFor(face.borders, targetNode);
-		List<KFace.BorderEntry> sourceBorder = null, targetBorder = null;
-		ListIterator<KFace.BorderEntry> sourceIter = null, targetIter = null;
+		List<KSlimFace.BorderEntry> sourceBorder = null, targetBorder = null;
+		ListIterator<KSlimFace.BorderEntry> sourceIter = null, targetIter = null;
 		if (sourceBorderIndex >= 0) {
 			sourceBorder = face.borders.get(sourceBorderIndex);
 			sourceIter = getIteratorFor(sourceBorder, sourceNode, sourceRank);
@@ -612,70 +625,70 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 		}
 		
 		if (sourceBorder == null && targetBorder == null) {
-			List<KFace.BorderEntry> newBorder = new LinkedList<KFace.BorderEntry>();
+			List<KSlimFace.BorderEntry> newBorder = new LinkedList<KSlimFace.BorderEntry>();
 			if (insEdge.source.id == insEdge.target.id) {
 				if (sourceRank < targetRank || sourceRank == targetRank
 						&& forwardSelfLoop) {
-					newBorder.add(new KFace.BorderEntry(insEdge, false));
+					newBorder.add(new KSlimFace.BorderEntry(insEdge, false));
 					insEdge.leftFace = face;
-					KFace innerFace = new KFace(graph, true);
-					List<KFace.BorderEntry> innerBorder = new LinkedList<KFace.BorderEntry>();
-					innerBorder.add(new KFace.BorderEntry(insEdge, true));
+					KSlimFace innerFace = new KSlimFace(graph, true);
+					List<KSlimFace.BorderEntry> innerBorder = new LinkedList<KSlimFace.BorderEntry>();
+					innerBorder.add(new KSlimFace.BorderEntry(insEdge, true));
 					innerFace.borders.add(innerBorder);
 					insEdge.rightFace = innerFace;
 				}
 				else {
-					newBorder.add(new KFace.BorderEntry(insEdge, true));
+					newBorder.add(new KSlimFace.BorderEntry(insEdge, true));
 					insEdge.rightFace = face;
-					KFace innerFace = new KFace(graph, true);
-					List<KFace.BorderEntry> innerBorder = new LinkedList<KFace.BorderEntry>();
-					innerBorder.add(new KFace.BorderEntry(insEdge, false));
+					KSlimFace innerFace = new KSlimFace(graph, true);
+					List<KSlimFace.BorderEntry> innerBorder = new LinkedList<KSlimFace.BorderEntry>();
+					innerBorder.add(new KSlimFace.BorderEntry(insEdge, false));
 					innerFace.borders.add(innerBorder);
 					insEdge.leftFace = innerFace;
 				}
 			}
 			else {
-				newBorder.add(new KFace.BorderEntry(insEdge, true));
-				newBorder.add(new KFace.BorderEntry(insEdge, false));
+				newBorder.add(new KSlimFace.BorderEntry(insEdge, true));
+				newBorder.add(new KSlimFace.BorderEntry(insEdge, false));
 				insEdge.leftFace = face;
 				insEdge.rightFace = face;
 			}
 			face.borders.add(newBorder);
 		}
 		else if (sourceBorder == null) {
-			targetIter.add(new KFace.BorderEntry(insEdge, true));
-			targetIter.add(new KFace.BorderEntry(insEdge, false));
+			targetIter.add(new KSlimFace.BorderEntry(insEdge, true));
+			targetIter.add(new KSlimFace.BorderEntry(insEdge, false));
 			insEdge.leftFace = face;
 			insEdge.rightFace = face;
 		}
 		else if (targetBorder == null) {
-			sourceIter.add(new KFace.BorderEntry(insEdge, true));
-			sourceIter.add(new KFace.BorderEntry(insEdge, false));
+			sourceIter.add(new KSlimFace.BorderEntry(insEdge, true));
+			sourceIter.add(new KSlimFace.BorderEntry(insEdge, false));
 			insEdge.leftFace = face;
 			insEdge.rightFace = face;
 		}
 		else if (sourceBorder == targetBorder) {
-			KFace newFace = new KFace(graph, true);
-			List<KFace.BorderEntry> newBorder = new LinkedList<KFace.BorderEntry>();
+			KSlimFace newFace = new KSlimFace(graph, true);
+			List<KSlimFace.BorderEntry> newBorder = new LinkedList<KSlimFace.BorderEntry>();
 			if (insEdge.source.id == insEdge.target.id) {
 				if (sourceRank < targetRank || sourceRank == targetRank
 						&& forwardSelfLoop) {
-					sourceIter.add(new KFace.BorderEntry(insEdge, false));
+					sourceIter.add(new KSlimFace.BorderEntry(insEdge, false));
 					insEdge.leftFace = face;
-					newBorder.add(new KFace.BorderEntry(insEdge, true));
+					newBorder.add(new KSlimFace.BorderEntry(insEdge, true));
 					insEdge.rightFace = newFace;
 				}
 				else {
-					sourceIter.add(new KFace.BorderEntry(insEdge, true));
+					sourceIter.add(new KSlimFace.BorderEntry(insEdge, true));
 					insEdge.rightFace = face;
-					newBorder.add(new KFace.BorderEntry(insEdge, false));
+					newBorder.add(new KSlimFace.BorderEntry(insEdge, false));
 					insEdge.leftFace = newFace;
 				}
 			}
 			else {
 				int sourceIndex = sourceIter.nextIndex();
 				int nextIndex = targetIter.nextIndex();
-				targetIter.add(new KFace.BorderEntry(insEdge, false));
+				targetIter.add(new KSlimFace.BorderEntry(insEdge, false));
 				while (nextIndex != sourceIndex) {
 					if (!targetIter.hasNext()) {
 						targetIter = targetBorder.listIterator();
@@ -683,8 +696,8 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 						if (nextIndex == sourceIndex)
 							break;
 					}
-					KFace.BorderEntry nextEntry = targetIter.next();
-					newBorder.add(new KFace.BorderEntry(nextEntry));
+					KSlimFace.BorderEntry nextEntry = targetIter.next();
+					newBorder.add(new KSlimFace.BorderEntry(nextEntry));
 					targetIter.remove();
 					if (nextEntry.forward)
 						nextEntry.edge.rightFace = newFace;
@@ -692,7 +705,7 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 						nextEntry.edge.leftFace = newFace;
 					nextIndex++;
 				}
-				newBorder.add(new KFace.BorderEntry(insEdge, true));
+				newBorder.add(new KSlimFace.BorderEntry(insEdge, true));
 				insEdge.leftFace = face;
 				insEdge.rightFace = newFace;
 			}
@@ -700,7 +713,7 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 		}
 		else {
 			int targetIndex = targetIter.nextIndex();
-			sourceIter.add(new KFace.BorderEntry(insEdge, true));
+			sourceIter.add(new KSlimFace.BorderEntry(insEdge, true));
 			while (targetIter.hasNext()) {
 				sourceIter.add(targetIter.next());
 			}
@@ -708,7 +721,7 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 			while (targetIter.nextIndex() < targetIndex) {
 				sourceIter.add(targetIter.next());
 			}
-			sourceIter.add(new KFace.BorderEntry(insEdge, false));
+			sourceIter.add(new KSlimFace.BorderEntry(insEdge, false));
 			insEdge.leftFace = face;
 			insEdge.rightFace = face;
 			face.borders.remove(targetBorderIndex);
@@ -731,26 +744,26 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 	 * @return iterator pointing at the edge with rank <code>rank</code>
 	 *     of node <code>node</code>
 	 */
-	private ListIterator<KFace.BorderEntry> getIteratorFor(
-			List<KFace.BorderEntry> border, KNode node, int rank) {
+	private ListIterator<KSlimFace.BorderEntry> getIteratorFor(
+			List<KSlimFace.BorderEntry> border, KSlimNode node, int rank) {
 		int edge1id, edge2id;
 		if (rank == 0 || rank >= node.incidence.size()) {
 			edge2id = node.incidence.get(node.incidence.size()-1).edge.id;
 			edge1id = node.incidence.get(0).edge.id;
 		}
 		else {
-			ListIterator<KNode.IncEntry> nodeEdgeIter = node.incidence
+			ListIterator<KSlimNode.IncEntry> nodeEdgeIter = node.incidence
 					.listIterator(rank - 1);
 			edge2id = nodeEdgeIter.next().edge.id;
 			edge1id = nodeEdgeIter.next().edge.id;
 		}
 		
-		ListIterator<KFace.BorderEntry> borderIter = border.listIterator();
+		ListIterator<KSlimFace.BorderEntry> borderIter = border.listIterator();
 		boolean placingFound = false;
 		// the list is assumed to be non-empty
-		KFace.BorderEntry currentEntry = borderIter.next();
+		KSlimFace.BorderEntry currentEntry = borderIter.next();
 		while (borderIter.hasNext()) {
-			KFace.BorderEntry nextEntry = borderIter.next();
+			KSlimFace.BorderEntry nextEntry = borderIter.next();
 			if (currentEntry.edge.id == edge1id && nextEntry.edge.id == edge2id
 					&& currentEntry.secondNode().id == node.id
 					&& nextEntry.firstNode().id == node.id) {
@@ -779,12 +792,12 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 	 * @return index of the face border containing <code>node</code>,
 	 *     or -1 if the node was not found
 	 */
-	private int getBorderIndexFor(List<List<KFace.BorderEntry>> borders,
-			KNode node) {
-		ListIterator<List<KFace.BorderEntry>> borderIter = borders.listIterator();
+	private int getBorderIndexFor(List<List<KSlimFace.BorderEntry>> borders,
+			KSlimNode node) {
+		ListIterator<List<KSlimFace.BorderEntry>> borderIter = borders.listIterator();
 		while (borderIter.hasNext()) {
-			List<KFace.BorderEntry> nextBorder = borderIter.next();
-			for (KFace.BorderEntry entry : nextBorder) {
+			List<KSlimFace.BorderEntry> nextBorder = borderIter.next();
+			for (KSlimFace.BorderEntry entry : nextBorder) {
 				if (entry.edge.source.id == node.id
 						|| entry.edge.target.id == node.id) {
 					return borderIter.previousIndex();

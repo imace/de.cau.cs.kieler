@@ -1,10 +1,23 @@
+/******************************************************************************
+ * KIELER - Kiel Integrated Environment for Layout for the Eclipse RCP
+ *
+ * http://www.informatik.uni-kiel.de/rtsys/kieler/
+ * 
+ * Copyright 2009 by
+ * + Christian-Albrechts-University of Kiel
+ *   + Department of Computer Science
+ *     + Real-Time and Embedded Systems Group
+ * 
+ * This code is provided under the terms of the Eclipse Public License (EPL).
+ * See the file epl-v10.html for the license text.
+ */
 package de.cau.cs.kieler.klodd.hierarchical.impl;
 
 import java.util.ListIterator;
 
 import de.cau.cs.kieler.core.alg.AbstractAlgorithm;
-import de.cau.cs.kieler.core.graph.KGraph;
-import de.cau.cs.kieler.core.graph.KNode;
+import de.cau.cs.kieler.core.slimgraph.KSlimGraph;
+import de.cau.cs.kieler.core.slimgraph.KSlimNode;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
 import de.cau.cs.kieler.klodd.hierarchical.modules.ILayerAssigner;
 import de.cau.cs.kieler.klodd.hierarchical.structures.*;
@@ -32,7 +45,7 @@ public class BalancingLayerAssigner extends AbstractAlgorithm implements
 	/* (non-Javadoc)
 	 * @see de.cau.cs.kieler.klodd.hierarchical.modules.ILayerAssigner#assignLayers(de.cau.cs.kieler.core.graph.KGraph, de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode)
 	 */
-	public LayeredGraph assignLayers(KGraph graph, KLayoutNode parentNode) {
+	public LayeredGraph assignLayers(KSlimGraph graph, KLayoutNode parentNode) {
 		getMonitor().begin("Balancing layer assignment", 1);
 		basicLayerAssigner.reset(getMonitor().subTask(1));
 		LayeredGraph layeredGraph = basicLayerAssigner.assignLayers(
@@ -67,10 +80,10 @@ public class BalancingLayerAssigner extends AbstractAlgorithm implements
 			ListIterator<LayerElement> elemIter) {
 		LayerElement element = elemIter.next();
 		Layer currentLayer = element.getLayer();
-		KNode kNode = element.getKNode();
+		KSlimNode kNode = element.getKNode();
 		int incoming = 0, outgoing = 0, minShiftRank = 0;
-		for (KNode.IncEntry edgeEntry : kNode.incidence) {
-			if (edgeEntry.type == KNode.IncEntry.Type.OUT)
+		for (KSlimNode.IncEntry edgeEntry : kNode.incidence) {
+			if (edgeEntry.type == KSlimNode.IncEntry.Type.OUT)
 				outgoing++;
 			else {
 				incoming++;

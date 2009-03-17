@@ -1,4 +1,5 @@
 package de.cau.cs.kieler.kiml.ui.handlers;
+
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
@@ -8,7 +9,6 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.ui.statushandlers.StatusManager;
 
 import de.cau.cs.kieler.kiml.ui.KimlUiPlugin;
-
 
 /**
  * A handler to support any arbitrary test. Simply do whatever you like here.

@@ -1,3 +1,16 @@
+/******************************************************************************
+ * KIELER - Kiel Integrated Environment for Layout for the Eclipse RCP
+ *
+ * http://www.informatik.uni-kiel.de/rtsys/kieler/
+ * 
+ * Copyright 2008 by
+ * + Christian-Albrechts-University of Kiel
+ *   + Department of Computer Science
+ *     + Real-Time and Embedded Systems Group
+ * 
+ * This code is provided under the terms of the Eclipse Public License (EPL).
+ * See the file epl-v10.html for the license text.
+ */
 package de.cau.cs.kieler.klodd.hierarchical.structures;
 
 import java.util.Arrays;
@@ -8,8 +21,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import de.cau.cs.kieler.core.graph.KEdge;
-import de.cau.cs.kieler.core.graph.KNode;
+import de.cau.cs.kieler.core.slimgraph.KSlimEdge;
+import de.cau.cs.kieler.core.slimgraph.KSlimNode;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.*;
 import de.cau.cs.kieler.kiml.layout.util.LayoutGraphUtil;
 
@@ -42,7 +55,7 @@ public class LayerElement {
 	/** the containing layer */
 	private Layer layer;
 	/** the corresponding node in the acyclic KIELER graph */
-	private KNode kNode;
+	private KSlimNode kNode;
 	/** are the ports of this layer element fixed? */
 	private boolean fixedPorts;
 	/** number of rank numbers consumed by this layer element */
@@ -71,7 +84,7 @@ public class LayerElement {
 	 * @param layer the containing layer
 	 * @param kNode the corresponding node in the acyclic KIELER graph
 	 */
-	public LayerElement(Object obj, Layer layer, KNode kNode) {
+	public LayerElement(Object obj, Layer layer, KSlimNode kNode) {
 		this.elemObj = obj;
 		this.layer = layer;
 		this.kNode = kNode;
@@ -161,12 +174,12 @@ public class LayerElement {
 	 * 
 	 * @return the list of outgoing edges, or null if the object is an edge
 	 */
-	public List<KEdge> getOutgoingEdges() {
+	public List<KSlimEdge> getOutgoingEdges() {
 		if (kNode != null) {
-			LinkedList<KEdge> nonLoopEdges = new LinkedList<KEdge>();
-			for (KNode.IncEntry edgeEntry : kNode.incidence) {
+			LinkedList<KSlimEdge> nonLoopEdges = new LinkedList<KSlimEdge>();
+			for (KSlimNode.IncEntry edgeEntry : kNode.incidence) {
 				// ignore loops over a single node
-				if (edgeEntry.type == KNode.IncEntry.Type.OUT
+				if (edgeEntry.type == KSlimNode.IncEntry.Type.OUT
 						&& edgeEntry.edge.source.id != edgeEntry.edge.target.id)
 					nonLoopEdges.add(edgeEntry.edge);
 			}
@@ -364,7 +377,7 @@ public class LayerElement {
 	 * 
 	 * @return the KIELER node
 	 */
-	public KNode getKNode() {
+	public KSlimNode getKNode() {
 		return kNode;
 	}
 

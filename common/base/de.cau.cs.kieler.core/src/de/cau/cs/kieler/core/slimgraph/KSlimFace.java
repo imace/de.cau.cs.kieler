@@ -1,4 +1,17 @@
-package de.cau.cs.kieler.core.graph;
+/******************************************************************************
+ * KIELER - Kiel Integrated Environment for Layout for the Eclipse RCP
+ *
+ * http://www.informatik.uni-kiel.de/rtsys/kieler/
+ * 
+ * Copyright 2009 by
+ * + Christian-Albrechts-University of Kiel
+ *   + Department of Computer Science
+ *     + Real-Time and Embedded Systems Group
+ * 
+ * This code is provided under the terms of the Eclipse Public License (EPL).
+ * See the file epl-v10.html for the license text.
+ */
+package de.cau.cs.kieler.core.slimgraph;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -9,14 +22,14 @@ import java.util.ListIterator;
  * 
  * @author msp
  */
-public class KFace extends KGraphElement {
+public class KSlimFace extends KSlimGraphElement {
 
 	/**
 	 * An entry of a list associated with a face.
 	 */
 	public static class BorderEntry {
 		/** an edge bordering this face */
-		public KEdge edge;
+		public KSlimEdge edge;
 		/** indicates whether the bordering edge is traversed forward */
 		public boolean forward;
 		
@@ -26,7 +39,7 @@ public class KFace extends KGraphElement {
 		 * @param edge edge bordering the containing face
 		 * @param indicates whether the bordering edge is traversed forward
 		 */
-		public BorderEntry(KEdge edge, boolean forward) {
+		public BorderEntry(KSlimEdge edge, boolean forward) {
 			this.edge = edge;
 			this.forward = forward;
 		}
@@ -47,7 +60,7 @@ public class KFace extends KGraphElement {
 		 * @return the left face if the contained edge is forward,
 		 *     else the right face
 		 */
-		public KFace opposed() {
+		public KSlimFace opposed() {
 			if (forward)
 				return edge.leftFace;
 			else
@@ -61,7 +74,7 @@ public class KFace extends KGraphElement {
 		 * @return the source if the contained edge is forward,
 		 *     else the target
 		 */
-		public KNode firstNode() {
+		public KSlimNode firstNode() {
 			if (forward)
 				return edge.source;
 			else
@@ -75,7 +88,7 @@ public class KFace extends KGraphElement {
 		 * @return the target if the contained edge is forward,
 		 *     else the source
 		 */
-		public KNode secondNode() {
+		public KSlimNode secondNode() {
 			if (forward)
 				return edge.target;
 			else
@@ -89,7 +102,7 @@ public class KFace extends KGraphElement {
 		 * @return the side at source if the contained edge is forward,
 		 *     else the side at target
 		 */
-		public KNode.Side firstSide() {
+		public KSlimNode.Side firstSide() {
 			if (forward)
 				return edge.sourceSide;
 			else
@@ -103,7 +116,7 @@ public class KFace extends KGraphElement {
 		 * @return the side at target if the contained edge is forward,
 		 *     else the side at source
 		 */
-		public KNode.Side secondSide() {
+		public KSlimNode.Side secondSide() {
 			if (forward)
 				return edge.targetSide;
 			else
@@ -133,7 +146,7 @@ public class KFace extends KGraphElement {
 	 * @param addToInternal if true, the new face is added to the
 	 *     graph's list of internal faces 
 	 */
-	public KFace(KGraph graph, boolean addToInternal) {
+	public KSlimFace(KSlimGraph graph, boolean addToInternal) {
 		if (addToInternal)
 			graph.faces.add(this);
 		this.id = graph.nextFaceId++;
@@ -149,7 +162,7 @@ public class KFace extends KGraphElement {
 	 * @return iterator pointing at <code>edge</code>, or null if the
 	 *     edge was not found
 	 */
-	public ListIterator<KFace.BorderEntry> getIterator(KEdge edge,
+	public ListIterator<KSlimFace.BorderEntry> getIterator(KSlimEdge edge,
 			boolean forward) {
 		for (List<BorderEntry> border : borders) {
 			ListIterator<BorderEntry> borderIter = border.listIterator();

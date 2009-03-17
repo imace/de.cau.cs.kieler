@@ -1,8 +1,21 @@
-package de.cau.cs.kieler.core.graph.alg;
+/******************************************************************************
+ * KIELER - Kiel Integrated Environment for Layout for the Eclipse RCP
+ *
+ * http://www.informatik.uni-kiel.de/rtsys/kieler/
+ * 
+ * Copyright 2009 by
+ * + Christian-Albrechts-University of Kiel
+ *   + Department of Computer Science
+ *     + Real-Time and Embedded Systems Group
+ * 
+ * This code is provided under the terms of the Eclipse Public License (EPL).
+ * See the file epl-v10.html for the license text.
+ */
+package de.cau.cs.kieler.core.slimgraph.alg;
 
 import java.util.LinkedList;
 
-import de.cau.cs.kieler.core.graph.*;
+import de.cau.cs.kieler.core.slimgraph.*;
 
 /**
  * Cycle remover implementation that uses a greedy algorithm.
@@ -16,9 +29,9 @@ public class GreedyCycleRemover extends AbstractCycleRemover {
 	/** outdegree values for the nodes */
 	private int outdeg[];
 	/** list of source nodes */
-	LinkedList<KNode> sources = new LinkedList<KNode>();
+	LinkedList<KSlimNode> sources = new LinkedList<KSlimNode>();
 	/** list of sink nodes */
-	LinkedList<KNode> sinks = new LinkedList<KNode>();
+	LinkedList<KSlimNode> sinks = new LinkedList<KSlimNode>();
 	
 	/*
 	 * (non-Javadoc)
@@ -33,19 +46,19 @@ public class GreedyCycleRemover extends AbstractCycleRemover {
 	/* (non-Javadoc)
 	 * @see de.cau.cs.kieler.core.graph.alg.ICycleRemover#removeCycles(de.cau.cs.kieler.core.graph.KGraph)
 	 */
-	public void removeCycles(KGraph graph) {
+	public void removeCycles(KSlimGraph graph) {
 		getMonitor().begin("Greedy cycle removal", 1);
-		reversedEdges = new LinkedList<KEdge>();
+		reversedEdges = new LinkedList<KSlimEdge>();
 
 		// initialize values for the algorithm
 		int unprocessedNodes = graph.nodes.size();
 		indeg = new int[unprocessedNodes];
 		outdeg = new int[unprocessedNodes];
 		int nextRight = -1, nextLeft = 1;
-		for (KNode node : graph.nodes) {
+		for (KSlimNode node : graph.nodes) {
 			node.rank = 0;
-			for (KNode.IncEntry edgeEntry : node.incidence) {
-				if (edgeEntry.type == KNode.IncEntry.Type.OUT)
+			for (KSlimNode.IncEntry edgeEntry : node.incidence) {
+				if (edgeEntry.type == KSlimNode.IncEntry.Type.OUT)
 					outdeg[node.id]++;
 				else
 					indeg[node.id]++;
@@ -59,21 +72,21 @@ public class GreedyCycleRemover extends AbstractCycleRemover {
 		// assign ranks to all nodes
 		while (unprocessedNodes > 0) {
 			while (!sinks.isEmpty()) {
-				KNode sink = sinks.removeFirst();
+				KSlimNode sink = sinks.removeFirst();
 				sink.rank = nextRight--;
 				updateNeighbors(sink);
 				unprocessedNodes--;
 			}
 			while (!sources.isEmpty()) {
-				KNode source = sources.removeFirst();
+				KSlimNode source = sources.removeFirst();
 				source.rank = nextLeft++;
 				updateNeighbors(source);
 				unprocessedNodes--;
 			}
 			if (unprocessedNodes != 0) {
 				int maxOutflow = Integer.MIN_VALUE;
-				KNode maxNode = null;
-				for (KNode node : graph.nodes) {
+				KSlimNode maxNode = null;
+				for (KSlimNode node : graph.nodes) {
 					if (node.rank == 0) {
 						int outflow = outdeg[node.id] - indeg[node.id];
 						if (outflow > maxOutflow) {
@@ -90,12 +103,12 @@ public class GreedyCycleRemover extends AbstractCycleRemover {
 		
 		// shift negative ranks
 		int shiftBase = graph.nodes.size() + 1;
-		for (KNode node : graph.nodes)
+		for (KSlimNode node : graph.nodes)
 			if (node.rank < 0)
 				node.rank += shiftBase;
 		
 		// mark edges that point left
-		for (KEdge edge : graph.edges) {
+		for (KSlimEdge edge : graph.edges) {
 			if (edge.source.rank > edge.target.rank)
 				reversedEdges.add(edge);
 			else
@@ -115,11 +128,11 @@ public class GreedyCycleRemover extends AbstractCycleRemover {
 	 * 
 	 * @param node node for which neighbors are updated
 	 */
-	private void updateNeighbors(KNode node) {
-		for (KNode.IncEntry edgeEntry : node.incidence) {
-			KNode endpoint = edgeEntry.endpoint();
+	private void updateNeighbors(KSlimNode node) {
+		for (KSlimNode.IncEntry edgeEntry : node.incidence) {
+			KSlimNode endpoint = edgeEntry.endpoint();
 			if (endpoint.rank == 0) {
-				if (edgeEntry.type == KNode.IncEntry.Type.OUT) {
+				if (edgeEntry.type == KSlimNode.IncEntry.Type.OUT) {
 					indeg[endpoint.id]--;
 					if (indeg[endpoint.id] == 0 && outdeg[endpoint.id] != 0)
 						sources.add(endpoint);

@@ -1,3 +1,16 @@
+/******************************************************************************
+ * KIELER - Kiel Integrated Environment for Layout for the Eclipse RCP
+ *
+ * http://www.informatik.uni-kiel.de/rtsys/kieler/
+ * 
+ * Copyright 2009 by
+ * + Christian-Albrechts-University of Kiel
+ *   + Department of Computer Science
+ *     + Real-Time and Embedded Systems Group
+ * 
+ * This code is provided under the terms of the Eclipse Public License (EPL).
+ * See the file epl-v10.html for the license text.
+ */
 package de.cau.cs.kieler.klodd.orthogonal;
 
 import java.util.List;
@@ -5,7 +18,7 @@ import java.util.List;
 import de.cau.cs.kieler.core.IKielerPreferenceStore;
 import de.cau.cs.kieler.core.KielerException;
 import de.cau.cs.kieler.core.alg.IKielerProgressMonitor;
-import de.cau.cs.kieler.core.graph.KGraph;
+import de.cau.cs.kieler.core.slimgraph.KSlimGraph;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KInsets;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphFactory;
@@ -72,7 +85,7 @@ public class OrthogonalDataflowLayoutProvider extends
 		List<TSMGraph> components = componentsSplitter.findComponents(layoutNode);
 		progressMonitor.begin("Orthogonal layout", components.size() * 30 + 2);
 		
-		for (KGraph tsmGraph : components) {
+		for (KSlimGraph tsmGraph : components) {
 			// perform the planarization phase
 			planarizer.reset(progressMonitor.subTask(10));
 			planarizer.planarize(tsmGraph);

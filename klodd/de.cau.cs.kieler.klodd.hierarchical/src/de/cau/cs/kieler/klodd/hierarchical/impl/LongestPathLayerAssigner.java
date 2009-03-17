@@ -1,10 +1,23 @@
+/******************************************************************************
+ * KIELER - Kiel Integrated Environment for Layout for the Eclipse RCP
+ *
+ * http://www.informatik.uni-kiel.de/rtsys/kieler/
+ * 
+ * Copyright 2008 by
+ * + Christian-Albrechts-University of Kiel
+ *   + Department of Computer Science
+ *     + Real-Time and Embedded Systems Group
+ * 
+ * This code is provided under the terms of the Eclipse Public License (EPL).
+ * See the file epl-v10.html for the license text.
+ */
 package de.cau.cs.kieler.klodd.hierarchical.impl;
 
 import java.util.ListIterator;
 
 import de.cau.cs.kieler.core.alg.AbstractAlgorithm;
-import de.cau.cs.kieler.core.graph.KGraph;
-import de.cau.cs.kieler.core.graph.KNode;
+import de.cau.cs.kieler.core.slimgraph.KSlimGraph;
+import de.cau.cs.kieler.core.slimgraph.KSlimNode;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPortType;
@@ -34,12 +47,12 @@ public class LongestPathLayerAssigner extends AbstractAlgorithm implements
 	 * (non-Javadoc)
 	 * @see de.cau.cs.kieler.klodd.hierarchical.modules.ILayerAssigner#assignLayers(de.cau.cs.kieler.core.graph.KGraph, de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode)
 	 */
-	public LayeredGraph assignLayers(KGraph kGraph, KLayoutNode parentNode) {
+	public LayeredGraph assignLayers(KSlimGraph kGraph, KLayoutNode parentNode) {
 		getMonitor().begin("Longest path layering", 1);
 		layeredGraph = new LayeredGraph(parentNode);
 		
 		// process child nodes
-		for (KNode node : kGraph.nodes) {
+		for (KSlimNode node : kGraph.nodes) {
 			visit(node);
 		}
 		
@@ -69,7 +82,7 @@ public class LongestPathLayerAssigner extends AbstractAlgorithm implements
 	 * @param node node to visit
 	 * @return height of the given node in the layered graph
 	 */
-	private int visit(KNode node) {
+	private int visit(KSlimNode node) {
 		LayerElement layerElement = layeredGraph.getLayerElement(node.object);
 		if (layerElement != null) {
 			// the node was already visited
@@ -89,9 +102,9 @@ public class LongestPathLayerAssigner extends AbstractAlgorithm implements
 		else
 		{
 			int maxHeight = 1;
-			for (KNode.IncEntry edgeEntry : node.incidence) {
-				if (edgeEntry.type == KNode.IncEntry.Type.OUT) {
-					KNode targetNode = edgeEntry.edge.target;
+			for (KSlimNode.IncEntry edgeEntry : node.incidence) {
+				if (edgeEntry.type == KSlimNode.IncEntry.Type.OUT) {
+					KSlimNode targetNode = edgeEntry.edge.target;
 					// do not follow loops over a single node
 					if (targetNode.id != node.id) {
 						int height = visit(targetNode) + 1;

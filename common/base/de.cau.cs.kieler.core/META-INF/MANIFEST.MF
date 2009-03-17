@@ -1,13 +1,12 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Core Plug-in
+Bundle-Name: KIELER Core
 Bundle-SymbolicName: de.cau.cs.kieler.core
-Bundle-Version: 1.0.0
-Bundle-Vendor: Christian-Albrechts-Universität zu Kiel
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-Version: 0.1.0
+Bundle-Vendor: Christian-Albrechts-University of Kiel
 Export-Package: de.cau.cs.kieler.core,
  de.cau.cs.kieler.core.alg,
- de.cau.cs.kieler.core.graph,
- de.cau.cs.kieler.core.graph.alg,
  de.cau.cs.kieler.core.services,
+ de.cau.cs.kieler.core.slimgraph,
+ de.cau.cs.kieler.core.slimgraph.alg,
  de.cau.cs.kieler.core.util

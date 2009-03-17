@@ -1,3 +1,16 @@
+/******************************************************************************
+ * KIELER - Kiel Integrated Environment for Layout for the Eclipse RCP
+ *
+ * http://www.informatik.uni-kiel.de/rtsys/kieler/
+ * 
+ * Copyright 2009 by
+ * + Christian-Albrechts-University of Kiel
+ *   + Department of Computer Science
+ *     + Real-Time and Embedded Systems Group
+ * 
+ * This code is provided under the terms of the Eclipse Public License (EPL).
+ * See the file epl-v10.html for the license text.
+ */
 package de.cau.cs.kieler.klodd.orthogonal.impl;
 
 import java.util.LinkedList;
@@ -5,9 +18,9 @@ import java.util.List;
 import java.util.Stack;
 
 import de.cau.cs.kieler.core.alg.AbstractAlgorithm;
-import de.cau.cs.kieler.core.graph.KGraphSection;
-import de.cau.cs.kieler.core.graph.KGraph;
-import de.cau.cs.kieler.core.graph.KNode;
+import de.cau.cs.kieler.core.slimgraph.KSlimGraph;
+import de.cau.cs.kieler.core.slimgraph.KGraphSection;
+import de.cau.cs.kieler.core.slimgraph.KSlimNode;
 import de.cau.cs.kieler.klodd.orthogonal.structures.*;
 
 
@@ -26,9 +39,9 @@ public class BiconnectedComponents extends AbstractAlgorithm {
 	/** list of lowest point numbers */
 	private int[] lowpt;
 	/** list of parent nodes */
-	private KNode[] parent;
+	private KSlimNode[] parent;
 	/** stack with unfinished nodes */
-	private Stack<KNode> unfinished = new Stack<KNode>();
+	private Stack<KSlimNode> unfinished = new Stack<KSlimNode>();
 	
 	/*
 	 * (non-Javadoc)
@@ -48,17 +61,17 @@ public class BiconnectedComponents extends AbstractAlgorithm {
 	 * @param graph graph to be processed
 	 * @return list of biconnected components
 	 */
-	public List<KGraphSection> findComponents(KGraph graph) {
+	public List<KGraphSection> findComponents(KSlimGraph graph) {
 		// initialize DFS variables
 		int graphSize = graph.nodes.size();
 		lowpt = new int[graphSize];
-		parent = new KNode[graphSize];
-		for (KNode node : graph.nodes) {
+		parent = new KSlimNode[graphSize];
+		for (KSlimNode node : graph.nodes) {
 			node.rank = -1;
 		}
 		
 		// perform DFS on all nodes of the graph
-		for (KNode node : graph.nodes) {
+		for (KSlimNode node : graph.nodes) {
 			if (node.rank < 0)
 				dfsVisit(node);
 		}
@@ -71,12 +84,12 @@ public class BiconnectedComponents extends AbstractAlgorithm {
 	 * 
 	 * @param node node to visit
 	 */
-	private void dfsVisit(KNode node) {
+	private void dfsVisit(KSlimNode node) {
 		node.rank = nextDfsnum++;
 		lowpt[node.id] = node.rank;
 		unfinished.push(node);
-		for (KNode.IncEntry edgeEntry : node.incidence) {
-			KNode endpoint = edgeEntry.endpoint();
+		for (KSlimNode.IncEntry edgeEntry : node.incidence) {
+			KSlimNode endpoint = edgeEntry.endpoint();
 			if (endpoint.rank < 0) {
 				parent[endpoint.id] = node;
 				dfsVisit(endpoint);
@@ -88,7 +101,7 @@ public class BiconnectedComponents extends AbstractAlgorithm {
 		}
 		if (node.rank >= 2 && lowpt[node.id] == parent[node.id].rank) {
 			KGraphSection graphSection = new KGraphSection();
-			KNode sectionNode;
+			KSlimNode sectionNode;
 			do {
 				sectionNode = unfinished.pop();
 				graphSection.nodes.add(sectionNode);

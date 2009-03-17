@@ -1,4 +1,17 @@
-package de.cau.cs.kieler.core.graph;
+/******************************************************************************
+ * KIELER - Kiel Integrated Environment for Layout for the Eclipse RCP
+ *
+ * http://www.informatik.uni-kiel.de/rtsys/kieler/
+ * 
+ * Copyright 2009 by
+ * + Christian-Albrechts-University of Kiel
+ *   + Department of Computer Science
+ *     + Real-Time and Embedded Systems Group
+ * 
+ * This code is provided under the terms of the Eclipse Public License (EPL).
+ * See the file epl-v10.html for the license text.
+ */
+package de.cau.cs.kieler.core.slimgraph;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -8,16 +21,16 @@ import java.util.List;
  * 
  * @author msp
  */
-public class KGraph {
+public class KSlimGraph {
 
 	/** list of nodes in this TSM graph */
-	public final List<KNode> nodes = new LinkedList<KNode>();
+	public final List<KSlimNode> nodes = new LinkedList<KSlimNode>();
 	/** list of edges in this TSM graph */
-	public final List<KEdge> edges = new LinkedList<KEdge>();
+	public final List<KSlimEdge> edges = new LinkedList<KSlimEdge>();
 	/** list of internal faces in this TSM graph */
-	public final List<KFace> faces = new LinkedList<KFace>();
+	public final List<KSlimFace> faces = new LinkedList<KSlimFace>();
 	/** the external face of this TSM graph */
-	public KFace externalFace = new KFace(this, false);
+	public KSlimFace externalFace = new KSlimFace(this, false);
 	
 	/** total width of the graph */
 	public float width;

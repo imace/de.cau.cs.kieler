@@ -1,23 +1,36 @@
+/******************************************************************************
+ * KIELER - Kiel Integrated Environment for Layout for the Eclipse RCP
+ *
+ * http://www.informatik.uni-kiel.de/rtsys/kieler/
+ * 
+ * Copyright 2009 by
+ * + Christian-Albrechts-University of Kiel
+ *   + Department of Computer Science
+ *     + Real-Time and Embedded Systems Group
+ * 
+ * This code is provided under the terms of the Eclipse Public License (EPL).
+ * See the file epl-v10.html for the license text.
+ */
 package de.cau.cs.kieler.kiml.layout.util;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import de.cau.cs.kieler.core.alg.AbstractAlgorithm;
-import de.cau.cs.kieler.core.graph.*;
+import de.cau.cs.kieler.core.slimgraph.*;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort;
 
 /**
- * Class that converts a KIML layout graph into a KIELER graph.
+ * Class that converts a KIML layout graph into a KIELER slim graph.
  * 
  * @author msp
  */
 public class GraphConverter extends AbstractAlgorithm {
 
 	/** map of layout nodes and ports to KIELER nodes */
-	private Map<Object, KNode> nodeMap = new HashMap<Object, KNode>();
+	private Map<Object, KSlimNode> nodeMap = new HashMap<Object, KSlimNode>();
 	
 	/*
 	 * (non-Javadoc)
@@ -38,13 +51,13 @@ public class GraphConverter extends AbstractAlgorithm {
 	 *     will also be added as nodes
 	 * @return a graph which consists of the child nodes
 	 */
-	public KGraph convertGraph(KLayoutNode parentNode, boolean includePorts) {
+	public KSlimGraph convertGraph(KLayoutNode parentNode, boolean includePorts) {
 		getMonitor().begin("Graph conversion", 1);
-		KGraph kGraph = new KGraph();
+		KSlimGraph kGraph = new KSlimGraph();
 		
 		// convert nodes
 		for (KLayoutNode child : parentNode.getChildNodes()) {
-			KNode newNode = new KNode(kGraph, child);
+			KSlimNode newNode = new KSlimNode(kGraph, child);
 			nodeMap.put(child, newNode);
 		}
 		
@@ -53,7 +66,7 @@ public class GraphConverter extends AbstractAlgorithm {
 			for (KLayoutEdge layoutEdge : child.getOutgoingEdges()) {
 				KLayoutNode targetNode = layoutEdge.getTarget();
 				if (targetNode != null) {
-					KEdge newEdge = new KEdge(kGraph, nodeMap.get(child),
+					KSlimEdge newEdge = new KSlimEdge(kGraph, nodeMap.get(child),
 							nodeMap.get(targetNode), layoutEdge);
 					newEdge.connectNodes();
 				}
@@ -63,7 +76,7 @@ public class GraphConverter extends AbstractAlgorithm {
 		if (includePorts) {
 			// convert external ports
 			for (KLayoutPort port : parentNode.getPorts()) {
-				KNode newNode = new KNode(kGraph, port);
+				KSlimNode newNode = new KSlimNode(kGraph, port);
 				nodeMap.put(port, newNode);
 			}
 			
@@ -75,14 +88,14 @@ public class GraphConverter extends AbstractAlgorithm {
 					if (layoutEdge.getSourcePort() == port
 							&& target != null
 							&& target.getParentNode() == parentNode) {
-						KEdge newEdge = new KEdge(kGraph, nodeMap.get(port),
+						KSlimEdge newEdge = new KSlimEdge(kGraph, nodeMap.get(port),
 								nodeMap.get(target), layoutEdge);
 						newEdge.connectNodes();
 					}
 					else if (layoutEdge.getTargetPort() == port
 							&& source != null
 							&& source.getParentNode() == parentNode) {
-						KEdge newEdge = new KEdge(kGraph, nodeMap.get(source),
+						KSlimEdge newEdge = new KSlimEdge(kGraph, nodeMap.get(source),
 								nodeMap.get(port), layoutEdge);
 						newEdge.connectNodes();
 					}

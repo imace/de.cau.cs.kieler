@@ -1,3 +1,16 @@
+/******************************************************************************
+ * KIELER - Kiel Integrated Environment for Layout for the Eclipse RCP
+ *
+ * http://www.informatik.uni-kiel.de/rtsys/kieler/
+ * 
+ * Copyright 2008 by
+ * + Christian-Albrechts-University of Kiel
+ *   + Department of Computer Science
+ *     + Real-Time and Embedded Systems Group
+ * 
+ * This code is provided under the terms of the Eclipse Public License (EPL).
+ * See the file epl-v10.html for the license text.
+ */
 package de.cau.cs.kieler.klodd.hierarchical.structures;
 
 import java.util.HashMap;
@@ -6,10 +19,10 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
 
-import de.cau.cs.kieler.core.graph.KEdge;
-import de.cau.cs.kieler.core.graph.KGraph;
-import de.cau.cs.kieler.core.graph.KNode;
-import de.cau.cs.kieler.core.graph.alg.ICycleRemover;
+import de.cau.cs.kieler.core.slimgraph.KSlimEdge;
+import de.cau.cs.kieler.core.slimgraph.KSlimGraph;
+import de.cau.cs.kieler.core.slimgraph.KSlimNode;
+import de.cau.cs.kieler.core.slimgraph.alg.ICycleRemover;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KInsets;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
@@ -85,7 +98,7 @@ public class LayeredGraph {
 	 * @param rank rank of the object
 	 * @param kNode the corresponding node in the acyclic KIELER graph
 	 */
-	public void putFront(Object obj, int rank, KNode kNode) {
+	public void putFront(Object obj, int rank, KSlimNode kNode) {
 		ListIterator<Layer> layerIter = layers.listIterator();
 		while (layerIter.hasNext()) {
 			Layer layer = layerIter.next();
@@ -118,7 +131,7 @@ public class LayeredGraph {
 	 * @param height height of the object
 	 * @param kNode the corresponding node in the acyclic KIELER graph
 	 */
-	public void putBack(Object obj, int height, KNode kNode) {
+	public void putBack(Object obj, int height, KSlimNode kNode) {
 		ListIterator<Layer> layerIter = layers.listIterator(layers.size());
 		while (layerIter.hasPrevious()) {
 			Layer layer = layerIter.previous();
@@ -178,7 +191,7 @@ public class LayeredGraph {
 	 * 
 	 * @param kGraph acyclic version of the graph
 	 */
-	public void createConnections(KGraph kGraph) {
+	public void createConnections(KSlimGraph kGraph) {
 		for (Layer layer : layers) {
 			List<LayerElement> elements = layer.getElements();
 			for (LayerElement element : elements) {
@@ -186,9 +199,9 @@ public class LayeredGraph {
 					// create new linear segment
 					createLinearSegment(element);
 				}
-				List<KEdge> outgoingEdges = element.getOutgoingEdges();
+				List<KSlimEdge> outgoingEdges = element.getOutgoingEdges();
 				if (outgoingEdges != null) {
-					for (KEdge edge : outgoingEdges) {
+					for (KSlimEdge edge : outgoingEdges) {
 						KLayoutEdge layoutEdge = (KLayoutEdge)edge.object;
 						KLayoutNode targetNode;
 						KLayoutPort sourcePort, targetPort;
@@ -303,7 +316,7 @@ public class LayeredGraph {
 	 * @param layer the layer
 	 * @param kNode the corresponding node in the acyclic KIELER graph
 	 */
-	private void doPut(Object obj, Layer layer, KNode kNode) {
+	private void doPut(Object obj, Layer layer, KSlimNode kNode) {
 		LayerElement element = layer.put(obj, kNode);
 		obj2LayerElemMap.put(obj, element);
 	}

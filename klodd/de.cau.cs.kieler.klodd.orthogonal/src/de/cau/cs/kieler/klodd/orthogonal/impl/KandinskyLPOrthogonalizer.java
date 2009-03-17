@@ -1,3 +1,16 @@
+/******************************************************************************
+ * KIELER - Kiel Integrated Environment for Layout for the Eclipse RCP
+ *
+ * http://www.informatik.uni-kiel.de/rtsys/kieler/
+ * 
+ * Copyright 2009 by
+ * + Christian-Albrechts-University of Kiel
+ *   + Department of Computer Science
+ *     + Real-Time and Embedded Systems Group
+ * 
+ * This code is provided under the terms of the Eclipse Public License (EPL).
+ * See the file epl-v10.html for the license text.
+ */
 package de.cau.cs.kieler.klodd.orthogonal.impl;
 
 import java.util.Iterator;
@@ -8,11 +21,11 @@ import lpsolve.AbortListener;
 import lpsolve.LpSolve;
 import lpsolve.LpSolveException;
 import de.cau.cs.kieler.core.alg.AbstractAlgorithm;
-import de.cau.cs.kieler.core.graph.KEdge;
-import de.cau.cs.kieler.core.graph.KFace;
-import de.cau.cs.kieler.core.graph.KGraph;
-import de.cau.cs.kieler.core.graph.KNode;
-import de.cau.cs.kieler.core.graph.KEdge.Bend;
+import de.cau.cs.kieler.core.slimgraph.KSlimEdge;
+import de.cau.cs.kieler.core.slimgraph.KSlimFace;
+import de.cau.cs.kieler.core.slimgraph.KSlimGraph;
+import de.cau.cs.kieler.core.slimgraph.KSlimNode;
+import de.cau.cs.kieler.core.slimgraph.KSlimEdge.Bend;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPortPlacement;
 import de.cau.cs.kieler.klodd.orthogonal.Messages;
 import de.cau.cs.kieler.klodd.orthogonal.modules.IOrthogonalizer;
@@ -54,7 +67,7 @@ public class KandinskyLPOrthogonalizer extends AbstractAlgorithm implements
 	/* (non-Javadoc)
 	 * @see de.cau.cs.kieler.klodd.orthogonal.modules.IOrthogonalizer#orthogonalize(de.cau.cs.kieler.klodd.orthogonal.structures.TSMGraph)
 	 */
-	public void orthogonalize(KGraph graph) {
+	public void orthogonalize(KSlimGraph graph) {
 		getMonitor().begin("Kandinsky orthogonalization", 4);
 		// exit immediately in the trivial case
 		if (graph.edges.isEmpty()) {
@@ -265,10 +278,10 @@ public class KandinskyLPOrthogonalizer extends AbstractAlgorithm implements
 	 * @return an ILP containing all constraints needed for the input graph
 	 * @throws LpSolveException if the lp_solve library reports a failure
 	 */
-	private LpSolve makeIlp(KGraph graph) throws LpSolveException {
+	private LpSolve makeIlp(KSlimGraph graph) throws LpSolveException {
 		// count only nodes with degree > 0
 		int nodeCount = 0;
-		for (KNode node : graph.nodes) {
+		for (KSlimNode node : graph.nodes) {
 			if (!node.incidence.isEmpty())
 				nodeCount++;
 		}
@@ -311,7 +324,7 @@ public class KandinskyLPOrthogonalizer extends AbstractAlgorithm implements
 		
 		// set constraint K1
 		int i = rows.k1.start;
-		for (KNode node : graph.nodes) {
+		for (KSlimNode node : graph.nodes) {
 			if (!node.incidence.isEmpty()) {
 				setK1Constraint(node, ilp, i++);
 			}
@@ -320,25 +333,25 @@ public class KandinskyLPOrthogonalizer extends AbstractAlgorithm implements
 		// set constraint K2
 		i = rows.k2.start;
 		setK2Constraint(graph.externalFace, true, ilp, i++);
-		for (KFace face : graph.faces) {
+		for (KSlimFace face : graph.faces) {
 			setK2Constraint(face, false, ilp, i++);
 		}
 		
 		// set constraint K3
 		i = rows.k3.start;
-		for (KEdge edge : graph.edges) {
+		for (KSlimEdge edge : graph.edges) {
 			setK3Constraint(edge, ilp, i);
 			i += 2;
 		}
 		
 		// set constraint K4
 		i = rows.k4.start;
-		for (KNode node : graph.nodes) {
+		for (KSlimNode node : graph.nodes) {
 			if (!node.incidence.isEmpty()) {
-				Iterator<KNode.IncEntry> edgeIter = node.incidence.iterator();
-				KNode.IncEntry currentEdge = edgeIter.next();
+				Iterator<KSlimNode.IncEntry> edgeIter = node.incidence.iterator();
+				KSlimNode.IncEntry currentEdge = edgeIter.next();
 				while (edgeIter.hasNext()) {
-					KNode.IncEntry nextEdge = edgeIter.next();
+					KSlimNode.IncEntry nextEdge = edgeIter.next();
 					setK4Constraint(node, currentEdge, nextEdge, ilp, i++);
 					currentEdge = nextEdge;
 				}
@@ -349,14 +362,14 @@ public class KandinskyLPOrthogonalizer extends AbstractAlgorithm implements
 		
 		// set constraint K5
 		i = rows.k5.start;
-		for (KEdge edge : graph.edges) {
+		for (KSlimEdge edge : graph.edges) {
 			setK5Constraint(edge, ilp, i);
 			i += 6;
 		}
 		
 		// set constraint U1/2
 		i = rows.u12.start;
-		for (KNode node : graph.nodes) {
+		for (KSlimNode node : graph.nodes) {
 			if (!node.incidence.isEmpty()) {
 				setU12Constraint(node, ilp, i++);
 			}
@@ -364,7 +377,7 @@ public class KandinskyLPOrthogonalizer extends AbstractAlgorithm implements
 		
 		// set constraint U4
 		i = rows.u4.start;
-		for (KEdge edge : graph.edges) {
+		for (KSlimEdge edge : graph.edges) {
 			setU4Constraint(edge, ilp, i++);
 		}
 		
@@ -372,11 +385,11 @@ public class KandinskyLPOrthogonalizer extends AbstractAlgorithm implements
 		ilp.setAddRowmode(true);
 		
 		// add side constraints
-		for (KNode node : graph.nodes) {
+		for (KSlimNode node : graph.nodes) {
 			if (((TSMNode)node).type == TSMNode.Type.LAYOUT) {
-				for (KNode.IncEntry edgeEntry : node.incidence) {
+				for (KSlimNode.IncEntry edgeEntry : node.incidence) {
 					TSMEdge tsmEdge = (TSMEdge)edgeEntry.edge;
-					if (edgeEntry.type == KNode.IncEntry.Type.OUT) {
+					if (edgeEntry.type == KSlimNode.IncEntry.Type.OUT) {
 						if (tsmEdge.layoutEdge.getSourcePort() != null)
 							addSideConstraint(edgeEntry.edge, tsmEdge
 									.layoutEdge.getSourcePort().getLayout()
@@ -393,7 +406,7 @@ public class KandinskyLPOrthogonalizer extends AbstractAlgorithm implements
 		}
 		
 		// add constraints for dummy nodes
-		for (KNode node : graph.nodes) {
+		for (KSlimNode node : graph.nodes) {
 			if (((TSMNode)node).type == TSMNode.Type.CROSSING)
 				addDummyNodeConstraint(node, ilp);
 		}
@@ -413,7 +426,7 @@ public class KandinskyLPOrthogonalizer extends AbstractAlgorithm implements
 	 * @param i index of the row that shall be modified
 	 * @throws LpSolveException if the lp_solve library reports a failure
 	 */
-	private void setK1Constraint(KNode node, LpSolve ilp, int i)
+	private void setK1Constraint(KSlimNode node, LpSolve ilp, int i)
 			throws LpSolveException {
 		int localEdgeCount = node.incidence.size();
 		ilp.setConstrType(i, LpSolve.EQ);
@@ -421,9 +434,9 @@ public class KandinskyLPOrthogonalizer extends AbstractAlgorithm implements
 		double[] row = new double[localEdgeCount];
 		int[] rowIndex = new int[localEdgeCount];
 		int jx = 0;
-		for (KNode.IncEntry edgeEntry : node.incidence) {
+		for (KSlimNode.IncEntry edgeEntry : node.incidence) {
 			row[jx] = 1;
-			rowIndex[jx] = (edgeEntry.type == KNode.IncEntry.Type.OUT
+			rowIndex[jx] = (edgeEntry.type == KSlimNode.IncEntry.Type.OUT
 					? cols.sourceAnchor.start : cols.targetAnchor.start)
 					+ edgeEntry.edge.id;
 			jx++;
@@ -440,10 +453,10 @@ public class KandinskyLPOrthogonalizer extends AbstractAlgorithm implements
 	 * @param i index of the row that shall be modified
 	 * @throws LpSolveException if the lp_solve library reports a failure
 	 */
-	private void setK2Constraint(KFace face, boolean external,
+	private void setK2Constraint(KSlimFace face, boolean external,
 			LpSolve ilp, int i) throws LpSolveException {
 		int edgeCount = 0; 
-		for (List<KFace.BorderEntry> border : face.borders) {
+		for (List<KSlimFace.BorderEntry> border : face.borders) {
 			edgeCount += border.size();
 		}
 		int colCount = 7 * edgeCount;
@@ -456,8 +469,8 @@ public class KandinskyLPOrthogonalizer extends AbstractAlgorithm implements
 		double[] row = new double[colCount];
 		int[] rowIndex = new int[colCount];
 		int jx = 0;
-		for (List<KFace.BorderEntry> border : face.borders) {
-			for (KFace.BorderEntry entry : border) {
+		for (List<KSlimFace.BorderEntry> border : face.borders) {
+			for (KSlimFace.BorderEntry entry : border) {
 				int edgeId = entry.edge.id;
 				if (entry.forward) {
 					row[jx] = 1;
@@ -506,7 +519,7 @@ public class KandinskyLPOrthogonalizer extends AbstractAlgorithm implements
 	 * @param i index of the first row that shall be modified
 	 * @throws LpSolveException if the lp_solve library reports a failure
 	 */
-	private void setK3Constraint(KEdge edge, LpSolve ilp, int i)
+	private void setK3Constraint(KSlimEdge edge, LpSolve ilp, int i)
 			throws LpSolveException {
 		double[] row = new double[2];
 		int[] rowIndex = new int[2];
@@ -538,19 +551,19 @@ public class KandinskyLPOrthogonalizer extends AbstractAlgorithm implements
 	 * @param i index of the first row that shall be modified
 	 * @throws LpSolveException if the lp_solve library reports a failure
 	 */
-	private void setK4Constraint(KNode node, KNode.IncEntry leftEdge,
-			KNode.IncEntry rightEdge, LpSolve ilp, int i) throws LpSolveException {
+	private void setK4Constraint(KSlimNode node, KSlimNode.IncEntry leftEdge,
+			KSlimNode.IncEntry rightEdge, LpSolve ilp, int i) throws LpSolveException {
 		ilp.setConstrType(i, LpSolve.GE);
 		ilp.setRh(i, 1);
 		double[] row = new double[3];
 		int[] rowIndex = new int[3];
 		row[0] = 1;
-		rowIndex[0] = (leftEdge.type == KNode.IncEntry.Type.OUT
+		rowIndex[0] = (leftEdge.type == KSlimNode.IncEntry.Type.OUT
 				? cols.forwSourceLeft.start : cols.backSourceLeft.start)
 				+ leftEdge.edge.id;
 		row[1] = 1;
 		row[2] = 1;
-		if (rightEdge.type == KNode.IncEntry.Type.OUT) {
+		if (rightEdge.type == KSlimNode.IncEntry.Type.OUT) {
 			rowIndex[1] = cols.forwSourceRight.start + rightEdge.edge.id;
 			rowIndex[2] = cols.sourceAnchor.start + rightEdge.edge.id;
 		}
@@ -571,7 +584,7 @@ public class KandinskyLPOrthogonalizer extends AbstractAlgorithm implements
 	 * @param i index of the first row that shall be modified
 	 * @throws LpSolveException if the lp_solve library reports a failure
 	 */
-	private void setK5Constraint(KEdge edge, LpSolve ilp, int i)
+	private void setK5Constraint(KSlimEdge edge, LpSolve ilp, int i)
 			throws LpSolveException {
 		double[] row = new double[2];
 		int[] rowIndex = new int[2];
@@ -634,7 +647,7 @@ public class KandinskyLPOrthogonalizer extends AbstractAlgorithm implements
 	 * @param i index of the row that shall be modified
 	 * @throws LpSolveException if the lp_solve library reports a failure
 	 */
-	private void setU12Constraint(KNode node, LpSolve ilp, int i)
+	private void setU12Constraint(KSlimNode node, LpSolve ilp, int i)
 			throws LpSolveException {
 		int rowSize = node.incidence.size();
 		double[] row = new double[rowSize];
@@ -645,11 +658,11 @@ public class KandinskyLPOrthogonalizer extends AbstractAlgorithm implements
 		row[0] = 1;
 		rowIndex[0] = cols.anchorPos.start + node.id;
 		int j = 1;
-		ListIterator<KNode.IncEntry> edgeIter = node.incidence.listIterator(1);
+		ListIterator<KSlimNode.IncEntry> edgeIter = node.incidence.listIterator(1);
 		while (edgeIter.hasNext()) {
-			KNode.IncEntry nextEntry = edgeIter.next();
+			KSlimNode.IncEntry nextEntry = edgeIter.next();
 			row[j] = 1;
-			rowIndex[j] = (nextEntry.type == KNode.IncEntry.Type.OUT
+			rowIndex[j] = (nextEntry.type == KSlimNode.IncEntry.Type.OUT
 					? cols.sourceAnchor.start : cols.targetAnchor.start)
 					+ nextEntry.edge.id;
 			j++;
@@ -665,11 +678,11 @@ public class KandinskyLPOrthogonalizer extends AbstractAlgorithm implements
 	 * @param i index of the first row that shall be modified
 	 * @throws LpSolveException if the lp_solve library reports a failure
 	 */
-	private void setU4Constraint(KEdge edge, LpSolve ilp, int i)
+	private void setU4Constraint(KSlimEdge edge, LpSolve ilp, int i)
 			throws LpSolveException {
-		ListIterator<KNode.IncEntry> sourceIter = edge.source.getIterator(
+		ListIterator<KSlimNode.IncEntry> sourceIter = edge.source.getIterator(
 				edge, true);
-		ListIterator<KNode.IncEntry> targetIter = edge.target.getIterator(
+		ListIterator<KSlimNode.IncEntry> targetIter = edge.target.getIterator(
 				edge, false);
 		int rowSize = sourceIter.nextIndex() + targetIter.nextIndex() + 7;
 		double[] row = new double[rowSize];
@@ -679,9 +692,9 @@ public class KandinskyLPOrthogonalizer extends AbstractAlgorithm implements
 		ilp.setRh(i, 2);
 		int j = 0;
 		while (sourceIter.previousIndex() > 0) {
-			KNode.IncEntry nextEntry = sourceIter.previous();
+			KSlimNode.IncEntry nextEntry = sourceIter.previous();
 			row[j] = 1;
-			rowIndex[j] = (nextEntry.type == KNode.IncEntry.Type.OUT
+			rowIndex[j] = (nextEntry.type == KSlimNode.IncEntry.Type.OUT
 					? cols.sourceAnchor.start : cols.targetAnchor.start)
 					+ nextEntry.edge.id;
 			j++;
@@ -701,9 +714,9 @@ public class KandinskyLPOrthogonalizer extends AbstractAlgorithm implements
 		row[j] = -1;
 		rowIndex[j++] = cols.forwTargetRight.start + edge.id;
 		while (targetIter.previousIndex() > 0) {
-			KNode.IncEntry nextEntry = targetIter.previous();
+			KSlimNode.IncEntry nextEntry = targetIter.previous();
 			row[j] = -1;
-			rowIndex[j] = (nextEntry.type == KNode.IncEntry.Type.OUT
+			rowIndex[j] = (nextEntry.type == KSlimNode.IncEntry.Type.OUT
 					? cols.sourceAnchor.start : cols.targetAnchor.start)
 					+ nextEntry.edge.id;
 			j++;
@@ -724,7 +737,7 @@ public class KandinskyLPOrthogonalizer extends AbstractAlgorithm implements
 	 * @param isTarget indicates whether the target or the source is processed
 	 * @throws LpSolveException if the lp_solve library reports a failure
 	 */
-	private void addSideConstraint(KEdge edge, KPortPlacement side,
+	private void addSideConstraint(KSlimEdge edge, KPortPlacement side,
 			LpSolve ilp, boolean isTarget) throws LpSolveException {
 		int sideValue = -1;
 		switch (side) {
@@ -744,7 +757,7 @@ public class KandinskyLPOrthogonalizer extends AbstractAlgorithm implements
 			return;
 		}
 		
-		ListIterator<KNode.IncEntry> edgeIter = isTarget ? edge.target
+		ListIterator<KSlimNode.IncEntry> edgeIter = isTarget ? edge.target
 				.getIterator(edge, false) : edge.source.getIterator(edge, true);
 		int rowSize = edgeIter.nextIndex();
 		double[] row = new double[rowSize];
@@ -752,9 +765,9 @@ public class KandinskyLPOrthogonalizer extends AbstractAlgorithm implements
 
 		int j = 0;
 		while (edgeIter.previousIndex() > 0) {
-			KNode.IncEntry nextEntry = edgeIter.previous();
+			KSlimNode.IncEntry nextEntry = edgeIter.previous();
 			row[j] = 1;
-			rowIndex[j] = (nextEntry.type == KNode.IncEntry.Type.OUT
+			rowIndex[j] = (nextEntry.type == KSlimNode.IncEntry.Type.OUT
 					? cols.sourceAnchor.start : cols.targetAnchor.start)
 					+ nextEntry.edge.id;
 			j++;
@@ -773,14 +786,14 @@ public class KandinskyLPOrthogonalizer extends AbstractAlgorithm implements
 	 * @param ilp currently processed ILP instance
 	 * @throws LpSolveException if the lp_solve library reports a failure
 	 */
-	private void addDummyNodeConstraint(KNode node, LpSolve ilp)
+	private void addDummyNodeConstraint(KSlimNode node, LpSolve ilp)
 			throws LpSolveException {
 		assert node.incidence.size() == 4;
 		double[] row = new double[1];
 		int[] rowIndex = new int[1];
-		for (KNode.IncEntry edgeEntry : node.incidence) {
+		for (KSlimNode.IncEntry edgeEntry : node.incidence) {
 			row[0] = 1;
-			if (edgeEntry.type == KNode.IncEntry.Type.OUT)
+			if (edgeEntry.type == KSlimNode.IncEntry.Type.OUT)
 				rowIndex[0] = cols.sourceAnchor.start + edgeEntry.edge.id;
 			else
 				rowIndex[0] = cols.targetAnchor.start + edgeEntry.edge.id;
@@ -795,12 +808,12 @@ public class KandinskyLPOrthogonalizer extends AbstractAlgorithm implements
 	 * @param ilp ILP with solution vector
 	 * @throws LpSolveException if the lp_solve library reports a failure
 	 */
-	private void applySolution(KGraph graph, LpSolve ilp) throws LpSolveException {
+	private void applySolution(KSlimGraph graph, LpSolve ilp) throws LpSolveException {
 		int rowCount = ilp.getNrows();
 		double[] solution = new double[1 + rowCount + ilp.getNcolumns()];
 		ilp.getPrimalSolution(solution);
 		// retrieve bend points from ILP solution
-		for (KEdge edge : graph.edges) {
+		for (KSlimEdge edge : graph.edges) {
 			if (solution[rowCount + cols.forwSourceLeft.start + edge.id] > 0.5)
 				edge.bends.add(new Bend(edge, Bend.Type.LEFT));
 			if (solution[rowCount + cols.forwSourceRight.start + edge.id] > 0.5)
@@ -822,18 +835,18 @@ public class KandinskyLPOrthogonalizer extends AbstractAlgorithm implements
 		}
 		
 		// retrieve port sides from ILP solution
-		for (KNode node : graph.nodes) {
+		for (KSlimNode node : graph.nodes) {
 			if (!node.incidence.isEmpty()) {
 				int sideValue = (int)solution[rowCount + cols.anchorPos.start + node.id];
-				ListIterator<KNode.IncEntry> edgeIter = node.incidence.listIterator();
-				KNode.IncEntry nextEntry = edgeIter.next();
-				if (nextEntry.type == KNode.IncEntry.Type.OUT)
+				ListIterator<KSlimNode.IncEntry> edgeIter = node.incidence.listIterator();
+				KSlimNode.IncEntry nextEntry = edgeIter.next();
+				if (nextEntry.type == KSlimNode.IncEntry.Type.OUT)
 					nextEntry.edge.sourceSide = getSide(sideValue);
 				else
 					nextEntry.edge.targetSide = getSide(sideValue);
 				while (edgeIter.hasNext()) {
 					nextEntry = edgeIter.next();
-					if (nextEntry.type == KNode.IncEntry.Type.OUT) {
+					if (nextEntry.type == KSlimNode.IncEntry.Type.OUT) {
 						sideValue += (int)solution[rowCount
 						        + cols.sourceAnchor.start + nextEntry.edge.id];
 						nextEntry.edge.sourceSide = getSide(sideValue);
@@ -854,18 +867,18 @@ public class KandinskyLPOrthogonalizer extends AbstractAlgorithm implements
 	 * @param sideValue integer value 0...4
 	 * @return corresponding node side
 	 */
-	private KNode.Side getSide(int sideValue) {
+	private KSlimNode.Side getSide(int sideValue) {
 		switch (sideValue) {
 		case 0:
-			return KNode.Side.NORTH;
+			return KSlimNode.Side.NORTH;
 		case 1:
-			return KNode.Side.EAST;
+			return KSlimNode.Side.EAST;
 		case 2:
-			return KNode.Side.SOUTH;
+			return KSlimNode.Side.SOUTH;
 		case 3:
-			return KNode.Side.WEST;
+			return KSlimNode.Side.WEST;
 		default:
-			return KNode.Side.UNDEFINED;
+			return KSlimNode.Side.UNDEFINED;
 		}
 	}
 

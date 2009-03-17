@@ -7,7 +7,7 @@ Bundle-Activator: de.cau.cs.kieler.kiml.layouter.example.Activator
 Require-Bundle: org.eclipse.emf.ecore;bundle-version="2.4.0",
  org.eclipse.ui,
  org.eclipse.core.runtime,
- de.cau.cs.kieler.kiml.layout;bundle-version="1.0.0",
- de.cau.cs.kieler.kiml.ui;bundle-version="1.0.0",
- de.cau.cs.kieler.core;bundle-version="1.0.0"
+ de.cau.cs.kieler.kiml.layout,
+ de.cau.cs.kieler.kiml.ui,
+ de.cau.cs.kieler.core
 Bundle-ActivationPolicy: lazy

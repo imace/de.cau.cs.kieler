@@ -1,7 +1,20 @@
+/******************************************************************************
+ * KIELER - Kiel Integrated Environment for Layout for the Eclipse RCP
+ *
+ * http://www.informatik.uni-kiel.de/rtsys/kieler/
+ * 
+ * Copyright 2008 by
+ * + Christian-Albrechts-University of Kiel
+ *   + Department of Computer Science
+ *     + Real-Time and Embedded Systems Group
+ * 
+ * This code is provided under the terms of the Eclipse Public License (EPL).
+ * See the file epl-v10.html for the license text.
+ */
 package de.cau.cs.kieler.klodd.hierarchical.modules;
 
 import de.cau.cs.kieler.core.alg.IAlgorithm;
-import de.cau.cs.kieler.core.graph.KGraph;
+import de.cau.cs.kieler.core.slimgraph.KSlimGraph;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
 import de.cau.cs.kieler.klodd.hierarchical.structures.LayeredGraph;
 
@@ -21,6 +34,6 @@ public interface ILayerAssigner extends IAlgorithm {
 	 * @param parentNode the parent layout node
 	 * @return a layered graph
 	 */
-	public LayeredGraph assignLayers(KGraph kGraph, KLayoutNode parentNode);
+	public LayeredGraph assignLayers(KSlimGraph kGraph, KLayoutNode parentNode);
 
 }

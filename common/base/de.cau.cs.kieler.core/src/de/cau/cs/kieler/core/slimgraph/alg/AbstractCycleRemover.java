@@ -1,12 +1,25 @@
-package de.cau.cs.kieler.core.graph.alg;
+/******************************************************************************
+ * KIELER - Kiel Integrated Environment for Layout for the Eclipse RCP
+ *
+ * http://www.informatik.uni-kiel.de/rtsys/kieler/
+ * 
+ * Copyright 2009 by
+ * + Christian-Albrechts-University of Kiel
+ *   + Department of Computer Science
+ *     + Real-Time and Embedded Systems Group
+ * 
+ * This code is provided under the terms of the Eclipse Public License (EPL).
+ * See the file epl-v10.html for the license text.
+ */
+package de.cau.cs.kieler.core.slimgraph.alg;
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 
 import de.cau.cs.kieler.core.alg.AbstractAlgorithm;
-import de.cau.cs.kieler.core.graph.KEdge;
-import de.cau.cs.kieler.core.graph.KNode;
+import de.cau.cs.kieler.core.slimgraph.KSlimEdge;
+import de.cau.cs.kieler.core.slimgraph.KSlimNode;
 
 
 /**
@@ -19,7 +32,7 @@ public abstract class AbstractCycleRemover extends AbstractAlgorithm
 		implements ICycleRemover {
 	
 	/**	list of edges that are reversed and later restored */
-	protected LinkedList<KEdge> reversedEdges = null;
+	protected LinkedList<KSlimEdge> reversedEdges = null;
 
 	/*
 	 * (non-Javadoc)
@@ -43,7 +56,7 @@ public abstract class AbstractCycleRemover extends AbstractAlgorithm
 	 * (non-Javadoc)
 	 * @see de.cau.cs.kieler.core.graph.alg.ICycleRemover#getReversedEdges()
 	 */
-	public List<KEdge> getReversedEdges() throws IllegalStateException {
+	public List<KSlimEdge> getReversedEdges() throws IllegalStateException {
 		if (reversedEdges == null)
 			throw new IllegalStateException("removeCycles must be called before getReversedEdges.");
 		else return reversedEdges;
@@ -54,23 +67,23 @@ public abstract class AbstractCycleRemover extends AbstractAlgorithm
 	 * <code>reversedEdges</code> list.
 	 */
 	protected void reverseEdges() {
-		for (KEdge edge : reversedEdges) {
+		for (KSlimEdge edge : reversedEdges) {
 			edge.rank = ICycleRemover.REVERSED;
 			// change incidence type at source and target
-			ListIterator<KNode.IncEntry> sourceIter = edge.source
+			ListIterator<KSlimNode.IncEntry> sourceIter = edge.source
 					.getIterator(edge, true);
-			ListIterator<KNode.IncEntry> targetIter = edge.target
+			ListIterator<KSlimNode.IncEntry> targetIter = edge.target
 					.getIterator(edge, false);
 			if (sourceIter != null)
-				sourceIter.previous().type = KNode.IncEntry.Type.IN;
+				sourceIter.previous().type = KSlimNode.IncEntry.Type.IN;
 			if (targetIter != null)
-				targetIter.previous().type = KNode.IncEntry.Type.OUT;
+				targetIter.previous().type = KSlimNode.IncEntry.Type.OUT;
 			
 			// reverse source and target node
-			KNode source = edge.source;
-			KNode.Side sourceSide = edge.sourceSide;
-			KNode target = edge.target;
-			KNode.Side targetSide = edge.targetSide;
+			KSlimNode source = edge.source;
+			KSlimNode.Side sourceSide = edge.sourceSide;
+			KSlimNode target = edge.target;
+			KSlimNode.Side targetSide = edge.targetSide;
 			edge.source = target;
 			edge.sourceSide = targetSide;
 			edge.target = source;

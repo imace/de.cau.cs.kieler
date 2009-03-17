@@ -1,12 +1,25 @@
+/******************************************************************************
+ * KIELER - Kiel Integrated Environment for Layout for the Eclipse RCP
+ *
+ * http://www.informatik.uni-kiel.de/rtsys/kieler/
+ * 
+ * Copyright 2009 by
+ * + Christian-Albrechts-University of Kiel
+ *   + Department of Computer Science
+ *     + Real-Time and Embedded Systems Group
+ * 
+ * This code is provided under the terms of the Eclipse Public License (EPL).
+ * See the file epl-v10.html for the license text.
+ */
 package de.cau.cs.kieler.klodd.orthogonal.impl.ec;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import de.cau.cs.kieler.core.alg.AbstractAlgorithm;
-import de.cau.cs.kieler.core.graph.KEdge;
-import de.cau.cs.kieler.core.graph.KGraph;
-import de.cau.cs.kieler.core.graph.KNode;
+import de.cau.cs.kieler.core.slimgraph.KSlimEdge;
+import de.cau.cs.kieler.core.slimgraph.KSlimGraph;
+import de.cau.cs.kieler.core.slimgraph.KSlimNode;
 import de.cau.cs.kieler.klodd.orthogonal.structures.*;
 
 
@@ -19,8 +32,8 @@ public class ConstraintExpander extends AbstractAlgorithm {
 	
 	/** the new graph created during EC expansion */
 	private TSMGraph expandedGraph;
-	private Map<KEdge, TSMNode> incoming2NodeMap = new HashMap<KEdge, TSMNode>();
-	private Map<KEdge, TSMNode> outgoing2NodeMap = new HashMap<KEdge, TSMNode>();
+	private Map<KSlimEdge, TSMNode> incoming2NodeMap = new HashMap<KSlimEdge, TSMNode>();
+	private Map<KSlimEdge, TSMNode> outgoing2NodeMap = new HashMap<KSlimEdge, TSMNode>();
 	
 	/**
 	 * Creates a TSM graph from a given parent layout node and
@@ -30,10 +43,10 @@ public class ConstraintExpander extends AbstractAlgorithm {
 	 * @param constraintsMap constraints for the child nodes
 	 * @return expanded TSM graph
 	 */
-	public TSMGraph expand(KGraph graph) {
+	public TSMGraph expand(KSlimGraph graph) {
 		expandedGraph = new TSMGraph();
 		
-		for (KNode node : graph.nodes) {
+		for (KSlimNode node : graph.nodes) {
 			TSMNode tsmNode = (TSMNode)node;
 			if (tsmNode.embeddingConstraint == null) {
 				expandNode(node);
@@ -52,11 +65,11 @@ public class ConstraintExpander extends AbstractAlgorithm {
 	 * 
 	 * @param node node of the input graph
 	 */
-	private void expandNode(KNode node) {
+	private void expandNode(KSlimNode node) {
 		TSMNode newNode = new TSMNode(expandedGraph, TSMNode.Type.ECEXPANSION, node);
-		for (KNode.IncEntry edgeEntry : node.incidence) {
+		for (KSlimNode.IncEntry edgeEntry : node.incidence) {
 			registerEdge(newNode, (TSMEdge)edgeEntry.edge,
-					edgeEntry.type == KNode.IncEntry.Type.OUT);
+					edgeEntry.type == KSlimNode.IncEntry.Type.OUT);
 		}
 	}
 	
@@ -83,7 +96,7 @@ public class ConstraintExpander extends AbstractAlgorithm {
 			TSMNode groupingNode = new TSMNode(expandedGraph, TSMNode.Type.ECEXPANSION,
 					constraint);
 			if (parentNode != null) {
-				KEdge newEdge = new KEdge(expandedGraph, parentNode, groupingNode);
+				KSlimEdge newEdge = new KSlimEdge(expandedGraph, parentNode, groupingNode);
 				newEdge.connectNodes();
 			}
 			for (EmbeddingConstraint childConstraint : constraint.children) {
@@ -93,41 +106,41 @@ public class ConstraintExpander extends AbstractAlgorithm {
 		case ORIENTED:
 		case MIRROR:
 			// for oriented and mirrored constraints a wheel gadget is created
-			KNode hubNode = new TSMNode(expandedGraph, TSMNode.Type.ECEXPANSION,
+			KSlimNode hubNode = new TSMNode(expandedGraph, TSMNode.Type.ECEXPANSION,
 					constraint);
-			KNode firstNode = null, lastNode = null;
+			KSlimNode firstNode = null, lastNode = null;
 			if (parentNode != null) {
 				firstNode = new TSMNode(expandedGraph, TSMNode.Type.ECEXPANSION);
-				KEdge newEdge = new KEdge(expandedGraph, firstNode, hubNode);
+				KSlimEdge newEdge = new KSlimEdge(expandedGraph, firstNode, hubNode);
 				newEdge.connectNodes();
 				lastNode = new TSMNode(expandedGraph, TSMNode.Type.ECEXPANSION);
-				newEdge = new KEdge(expandedGraph, hubNode, lastNode);
+				newEdge = new KSlimEdge(expandedGraph, hubNode, lastNode);
 				newEdge.connectNodes();
-				newEdge = new KEdge(expandedGraph, firstNode, lastNode);
+				newEdge = new KSlimEdge(expandedGraph, firstNode, lastNode);
 				newEdge.connectNodes();
-				newEdge = new KEdge(expandedGraph, parentNode, firstNode);
+				newEdge = new KSlimEdge(expandedGraph, parentNode, firstNode);
 				newEdge.connectNodes();
 			}
 			for (EmbeddingConstraint childConstraint : constraint.children) {
 				TSMNode xNode = new TSMNode(expandedGraph, TSMNode.Type.ECEXPANSION);
-				KEdge newEdge = new KEdge(expandedGraph, xNode, hubNode);
+				KSlimEdge newEdge = new KSlimEdge(expandedGraph, xNode, hubNode);
 				newEdge.connectNodes();
-				KNode yNode = new TSMNode(expandedGraph, TSMNode.Type.ECEXPANSION);
-				newEdge = new KEdge(expandedGraph, hubNode, yNode);
+				KSlimNode yNode = new TSMNode(expandedGraph, TSMNode.Type.ECEXPANSION);
+				newEdge = new KSlimEdge(expandedGraph, hubNode, yNode);
 				newEdge.connectNodes();
-				newEdge = new KEdge(expandedGraph, xNode, yNode);
+				newEdge = new KSlimEdge(expandedGraph, xNode, yNode);
 				newEdge.connectNodes();
 				if (lastNode == null)
 					firstNode = xNode;
 				else {
-					newEdge = new KEdge(expandedGraph, lastNode, xNode);
+					newEdge = new KSlimEdge(expandedGraph, lastNode, xNode);
 					newEdge.connectNodes();
 				}
 				expandConstraint(childConstraint, xNode);
 				lastNode = yNode;
 			}
 			if (lastNode != null) {
-				KEdge newEdge = new KEdge(expandedGraph, lastNode, firstNode);
+				KSlimEdge newEdge = new KSlimEdge(expandedGraph, lastNode, firstNode);
 				newEdge.connectNodes();
 			}
 			break;
@@ -151,18 +164,18 @@ public class ConstraintExpander extends AbstractAlgorithm {
 				outgoing2NodeMap.put(edge, node);
 			}
 			else {
-				KEdge newEdge = new TSMEdge(expandedGraph, node, endPoint,
+				KSlimEdge newEdge = new TSMEdge(expandedGraph, node, endPoint,
 						edge.layoutEdge);
 				newEdge.connectNodes();
 			}
 		}
 		else {
-			KNode endPoint = outgoing2NodeMap.get(edge);
+			KSlimNode endPoint = outgoing2NodeMap.get(edge);
 			if (endPoint == null) {
 				incoming2NodeMap.put(edge, node);
 			}
 			else {
-				KEdge newEdge = new TSMEdge(expandedGraph, endPoint, node,
+				KSlimEdge newEdge = new TSMEdge(expandedGraph, endPoint, node,
 						edge.layoutEdge);
 				newEdge.connectNodes();
 			}

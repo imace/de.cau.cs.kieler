@@ -1,3 +1,16 @@
+/******************************************************************************
+ * KIELER - Kiel Integrated Environment for Layout for the Eclipse RCP
+ *
+ * http://www.informatik.uni-kiel.de/rtsys/kieler/
+ * 
+ * Copyright 2009 by
+ * + Christian-Albrechts-University of Kiel
+ *   + Department of Computer Science
+ *     + Real-Time and Embedded Systems Group
+ * 
+ * This code is provided under the terms of the Eclipse Public License (EPL).
+ * See the file epl-v10.html for the license text.
+ */
 package de.cau.cs.kieler.klodd.orthogonal.impl;
 
 import java.util.HashMap;
@@ -6,8 +19,8 @@ import java.util.List;
 import java.util.Map;
 
 import de.cau.cs.kieler.core.alg.AbstractAlgorithm;
-import de.cau.cs.kieler.core.graph.KEdge;
-import de.cau.cs.kieler.core.graph.KNode;
+import de.cau.cs.kieler.core.slimgraph.KSlimEdge;
+import de.cau.cs.kieler.core.slimgraph.KSlimNode;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
 import de.cau.cs.kieler.klodd.orthogonal.structures.*;
@@ -23,9 +36,9 @@ public class ConnectedComponents extends AbstractAlgorithm {
 	/** stack of layout edges for BFS */
 	private LinkedList<KLayoutEdge> edgeStack = new LinkedList<KLayoutEdge>();
 	/** mapping of layout nodes to TSM nodes */
-	private Map<KLayoutNode, KNode> nodeMap = new HashMap<KLayoutNode, KNode>();
+	private Map<KLayoutNode, KSlimNode> nodeMap = new HashMap<KLayoutNode, KSlimNode>();
 	/** mapping of layout edges to TSM edges */
-	private Map<KLayoutEdge, KEdge> edgeMap = new HashMap<KLayoutEdge, KEdge>();
+	private Map<KLayoutEdge, KSlimEdge> edgeMap = new HashMap<KLayoutEdge, KSlimEdge>();
 	
 	/*
 	 * (non-Javadoc)
@@ -63,7 +76,7 @@ public class ConnectedComponents extends AbstractAlgorithm {
 	 */
 	private TSMGraph findComponent(KLayoutNode startLayoutNode) {
 		TSMGraph graph = new TSMGraph();
-		KNode newTsmNode = new TSMNode(graph, TSMNode.Type.LAYOUT, startLayoutNode);
+		KSlimNode newTsmNode = new TSMNode(graph, TSMNode.Type.LAYOUT, startLayoutNode);
 		nodeMap.put(startLayoutNode, newTsmNode);
 		edgeStack.addAll(startLayoutNode.getOutgoingEdges());
 		edgeStack.addAll(startLayoutNode.getIncomingEdges());
@@ -74,7 +87,7 @@ public class ConnectedComponents extends AbstractAlgorithm {
 			if (layoutEdge.getSource() != null && layoutEdge.getTarget() != null) {
 				if (!edgeMap.containsKey(layoutEdge)) {
 					KLayoutNode currentLayoutNode = layoutEdge.getSource();
-					KNode sourceNode = nodeMap.get(currentLayoutNode);
+					KSlimNode sourceNode = nodeMap.get(currentLayoutNode);
 					if (sourceNode == null) {
 						sourceNode = new TSMNode(graph, TSMNode.Type.LAYOUT,
 								currentLayoutNode);
@@ -83,7 +96,7 @@ public class ConnectedComponents extends AbstractAlgorithm {
 						edgeStack.addAll(currentLayoutNode.getIncomingEdges());
 					}
 					currentLayoutNode = layoutEdge.getTarget();
-					KNode targetNode = nodeMap.get(currentLayoutNode);
+					KSlimNode targetNode = nodeMap.get(currentLayoutNode);
 					if (targetNode == null) {
 						targetNode = new TSMNode(graph, TSMNode.Type.LAYOUT,
 								currentLayoutNode);
@@ -91,7 +104,7 @@ public class ConnectedComponents extends AbstractAlgorithm {
 						edgeStack.addAll(currentLayoutNode.getOutgoingEdges());
 						edgeStack.addAll(currentLayoutNode.getIncomingEdges());
 					}
-					KEdge tsmEdge = new TSMEdge(graph, sourceNode, targetNode,
+					KSlimEdge tsmEdge = new TSMEdge(graph, sourceNode, targetNode,
 							layoutEdge);
 					tsmEdge.connectNodes();
 					edgeMap.put(layoutEdge, tsmEdge);

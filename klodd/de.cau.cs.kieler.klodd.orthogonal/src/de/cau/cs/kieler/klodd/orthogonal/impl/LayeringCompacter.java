@@ -1,11 +1,24 @@
+/******************************************************************************
+ * KIELER - Kiel Integrated Environment for Layout for the Eclipse RCP
+ *
+ * http://www.informatik.uni-kiel.de/rtsys/kieler/
+ * 
+ * Copyright 2009 by
+ * + Christian-Albrechts-University of Kiel
+ *   + Department of Computer Science
+ *     + Real-Time and Embedded Systems Group
+ * 
+ * This code is provided under the terms of the Eclipse Public License (EPL).
+ * See the file epl-v10.html for the license text.
+ */
 package de.cau.cs.kieler.klodd.orthogonal.impl;
 
 import java.util.LinkedList;
 import java.util.List;
 
 import de.cau.cs.kieler.core.alg.AbstractAlgorithm;
-import de.cau.cs.kieler.core.graph.KGraph;
-import de.cau.cs.kieler.core.graph.KNode;
+import de.cau.cs.kieler.core.slimgraph.KSlimGraph;
+import de.cau.cs.kieler.core.slimgraph.KSlimNode;
 import de.cau.cs.kieler.klodd.orthogonal.modules.ICompacter;
 import de.cau.cs.kieler.klodd.orthogonal.structures.*;
 
@@ -37,7 +50,7 @@ public class LayeringCompacter extends AbstractAlgorithm implements
 	 * (non-Javadoc)
 	 * @see de.cau.cs.kieler.klodd.orthogonal.modules.ICompacter#compact(de.cau.cs.kieler.klodd.orthogonal.structures.TSMGraph, float)
 	 */
-	public void compact(KGraph graph, float minDist) {
+	public void compact(KSlimGraph graph, float minDist) {
 		getMonitor().begin("Layering compaction", 1);
 		
 		// determine horizontal numbering: build vertical bars
@@ -45,7 +58,7 @@ public class LayeringCompacter extends AbstractAlgorithm implements
 		buildTopoBars(graph, false);
 		for (TopoBar topoBar : topoBars) {
 			if (topoBar.rank < 0)
-				visit(topoBar, KNode.Side.WEST);
+				visit(topoBar, KSlimNode.Side.WEST);
 			for (TSMNode node : topoBar.nodes)
 				node.abstrXpos = topoBar.rank;
 			maxXrank = Math.max(maxXrank, topoBar.rank);
@@ -57,7 +70,7 @@ public class LayeringCompacter extends AbstractAlgorithm implements
 		buildTopoBars(graph, true);
 		for (TopoBar topoBar : topoBars) {
 			if (topoBar.rank < 0)
-				visit(topoBar, KNode.Side.NORTH);
+				visit(topoBar, KSlimNode.Side.NORTH);
 			for (TSMNode node : topoBar.nodes)
 				node.abstrYpos = topoBar.rank;
 			maxYrank = Math.max(maxYrank, topoBar.rank);
@@ -74,14 +87,14 @@ public class LayeringCompacter extends AbstractAlgorithm implements
 	 * @param horizontal if true, horizontal bars are created
 	 * @return a list of bars for topological numbering
 	 */
-	private void buildTopoBars(KGraph graph, boolean horizontal) {
+	private void buildTopoBars(KSlimGraph graph, boolean horizontal) {
 		// reset node ranks
-		for (KNode node : graph.nodes)
+		for (KSlimNode node : graph.nodes)
 			node.rank = -1;
 		
 		int currentIndex = 0;
 		List<TopoBar> topoBarList = new LinkedList<TopoBar>();
-		for (KNode node : graph.nodes) {
+		for (KSlimNode node : graph.nodes) {
 			if (node.rank < 0)
 				topoBarList.add(getTopoBar((TSMNode)node, horizontal, currentIndex++));
 		}
@@ -102,14 +115,14 @@ public class LayeringCompacter extends AbstractAlgorithm implements
 		node.rank = index;
 		
 		TSMNode currentNode = node;
-		KNode.Side direction = horizontal ? KNode.Side.EAST
-				: KNode.Side.SOUTH;
+		KSlimNode.Side direction = horizontal ? KSlimNode.Side.EAST
+				: KSlimNode.Side.SOUTH;
 		while ((currentNode = nextNode(currentNode, direction)) != null) {
 			topoBar.nodes.add(currentNode);
 			currentNode.rank = index;
 		}
 		currentNode = node;
-		direction = horizontal ? KNode.Side.WEST : KNode.Side.NORTH;
+		direction = horizontal ? KSlimNode.Side.WEST : KSlimNode.Side.NORTH;
 		while ((currentNode = nextNode(currentNode, direction)) != null) {
 			topoBar.nodes.add(currentNode);
 			currentNode.rank = index;
@@ -126,8 +139,8 @@ public class LayeringCompacter extends AbstractAlgorithm implements
 	 * @param side the side
 	 * @return the first node adjacent on the side of the node
 	 */
-	private TSMNode nextNode(KNode node, KNode.Side side) {
-		for (KNode.IncEntry edgeEntry : node.incidence) {
+	private TSMNode nextNode(KSlimNode node, KSlimNode.Side side) {
+		for (KSlimNode.IncEntry edgeEntry : node.incidence) {
 			if (edgeEntry.side() == side)
 				return (TSMNode)edgeEntry.endpoint();
 		}
@@ -141,10 +154,10 @@ public class LayeringCompacter extends AbstractAlgorithm implements
 	 * @param topoBar bar to process
 	 * @param direction direction to go for the source
 	 */
-	private void visit(TopoBar topoBar, KNode.Side direction) {
+	private void visit(TopoBar topoBar, KSlimNode.Side direction) {
 		int minRank = 0;
-		for (KNode node : topoBar.nodes) {
-			KNode connectedNode = nextNode(node, direction);
+		for (KSlimNode node : topoBar.nodes) {
+			KSlimNode connectedNode = nextNode(node, direction);
 			if (connectedNode != null) {
 				TopoBar connectedBar = topoBars[connectedNode.rank];
 				if (connectedBar.rank < 0)

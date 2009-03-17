@@ -1,11 +1,24 @@
+/******************************************************************************
+ * KIELER - Kiel Integrated Environment for Layout for the Eclipse RCP
+ *
+ * http://www.informatik.uni-kiel.de/rtsys/kieler/
+ * 
+ * Copyright 2009 by
+ * + Christian-Albrechts-University of Kiel
+ *   + Department of Computer Science
+ *     + Real-Time and Embedded Systems Group
+ * 
+ * This code is provided under the terms of the Eclipse Public License (EPL).
+ * See the file epl-v10.html for the license text.
+ */
 package de.cau.cs.kieler.klodd.orthogonal.impl;
 
 import java.util.LinkedList;
 import java.util.List;
 
 import de.cau.cs.kieler.core.alg.AbstractAlgorithm;
-import de.cau.cs.kieler.core.graph.KGraph;
-import de.cau.cs.kieler.core.graph.KNode;
+import de.cau.cs.kieler.core.slimgraph.KSlimGraph;
+import de.cau.cs.kieler.core.slimgraph.KSlimNode;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutOption;
@@ -41,7 +54,7 @@ public class PortConstraintsPlanarizer extends AbstractAlgorithm implements
 	 * (non-Javadoc)
 	 * @see de.cau.cs.kieler.klodd.orthogonal.modules.IPlanarizer#planarize(de.cau.cs.kieler.klodd.orthogonal.structures.TSMGraph)
 	 */
-	public void planarize(KGraph graph) {
+	public void planarize(KSlimGraph graph) {
 		getMonitor().begin("Port constraints planarization", 1);
 		// create constraints for the input graph
 		createConstraints(graph);
@@ -57,8 +70,8 @@ public class PortConstraintsPlanarizer extends AbstractAlgorithm implements
 	 * 
 	 * @param graph for which constraints shall be created
 	 */
-	private void createConstraints(KGraph graph) {
-		for (KNode node : graph.nodes) {
+	private void createConstraints(KSlimGraph graph) {
+		for (KSlimNode node : graph.nodes) {
 			KLayoutNode layoutNode = (KLayoutNode)node.object;
 			TSMNode tsmNode = (TSMNode)node;
 			if (!layoutNode.getPorts().isEmpty()) {
@@ -152,7 +165,7 @@ public class PortConstraintsPlanarizer extends AbstractAlgorithm implements
 			EmbeddingConstraint parent, TSMNode node) {
 		// find edges connected with the given port
 		List<TSMEdge> portEdges = new LinkedList<TSMEdge>();
-		for (KNode.IncEntry edgeEntry : node.incidence) {
+		for (KSlimNode.IncEntry edgeEntry : node.incidence) {
 			TSMEdge tsmEdge = (TSMEdge)edgeEntry.edge;
 			if (tsmEdge.layoutEdge.getSourcePort() == port
 					|| tsmEdge.layoutEdge.getTargetPort() == port)

@@ -1,4 +1,17 @@
-package de.cau.cs.kieler.core.graph;
+/******************************************************************************
+ * KIELER - Kiel Integrated Environment for Layout for the Eclipse RCP
+ *
+ * http://www.informatik.uni-kiel.de/rtsys/kieler/
+ * 
+ * Copyright 2009 by
+ * + Christian-Albrechts-University of Kiel
+ *   + Department of Computer Science
+ *     + Real-Time and Embedded Systems Group
+ * 
+ * This code is provided under the terms of the Eclipse Public License (EPL).
+ * See the file epl-v10.html for the license text.
+ */
+package de.cau.cs.kieler.core.slimgraph;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -10,7 +23,7 @@ import java.util.ListIterator;
  * 
  * @author msp
  */
-public class KEdge extends KGraphElement {
+public class KSlimEdge extends KSlimGraphElement {
 
 	/**
 	 * Definition of an edge bend for orthogonal drawing.
@@ -30,7 +43,7 @@ public class KEdge extends KGraphElement {
 		public int index;
 		
 		/** the edge associated with this bend */
-		private KEdge edge;
+		private KSlimEdge edge;
 		
 		/**
 		 * Creates an edge bend of given type.
@@ -38,7 +51,7 @@ public class KEdge extends KGraphElement {
 		 * @param edge the edge to which the new bend is added
 		 * @param type type of edge bend
 		 */
-		public Bend(KEdge edge, Type type) {
+		public Bend(KSlimEdge edge, Type type) {
 			this.edge = edge;
 			this.type = type;
 			index = edge.bends.size();
@@ -49,7 +62,7 @@ public class KEdge extends KGraphElement {
 		 * 
 		 * @return the edge
 		 */
-		public KEdge getEdge() {
+		public KSlimEdge getEdge() {
 			return edge;
 		}
 		
@@ -63,19 +76,19 @@ public class KEdge extends KGraphElement {
 	}
 	
 	/** source node */
-	public KNode source;
+	public KSlimNode source;
 	/** target node */
-	public KNode target;
+	public KSlimNode target;
 	/** left face */
-	public KFace leftFace;
+	public KSlimFace leftFace;
 	/** right face */
-	public KFace rightFace;
+	public KSlimFace rightFace;
 	/** the bends of this edge */
 	public final List<Bend> bends = new LinkedList<Bend>();
 	/** the side on which the edge leaves the source */
-	public KNode.Side sourceSide = KNode.Side.UNDEFINED;
+	public KSlimNode.Side sourceSide = KSlimNode.Side.UNDEFINED;
 	/** the side on which the edge reaches the target */
-	public KNode.Side targetSide = KNode.Side.UNDEFINED;
+	public KSlimNode.Side targetSide = KSlimNode.Side.UNDEFINED;
 	
 	/**
 	 * Creates an edge connecting two existing nodes.
@@ -84,7 +97,7 @@ public class KEdge extends KGraphElement {
 	 * @param source source node
 	 * @param target target node
 	 */
-	public KEdge(KGraph graph, KNode source, KNode target) {
+	public KSlimEdge(KSlimGraph graph, KSlimNode source, KSlimNode target) {
 		graph.edges.add(this);
 		this.id = graph.nextEdgeId++;
 		this.source = source;
@@ -100,7 +113,7 @@ public class KEdge extends KGraphElement {
 	 * @param target target node
 	 * @param obj object to be contained
 	 */
-	public KEdge(KGraph graph, KNode source, KNode target, Object obj) {
+	public KSlimEdge(KSlimGraph graph, KSlimNode source, KSlimNode target, Object obj) {
 		this(graph, source, target);
 		this.object = obj;
 	}
@@ -111,10 +124,10 @@ public class KEdge extends KGraphElement {
 	 * the target.
 	 */
 	public void connectNodes() {
-		source.incidence.add(new KNode.IncEntry(this,
-				KNode.IncEntry.Type.OUT));
-		target.incidence.add(new KNode.IncEntry(this,
-				KNode.IncEntry.Type.IN));
+		source.incidence.add(new KSlimNode.IncEntry(this,
+				KSlimNode.IncEntry.Type.OUT));
+		target.incidence.add(new KSlimNode.IncEntry(this,
+				KSlimNode.IncEntry.Type.IN));
 	}
 	
 	/**
@@ -132,10 +145,10 @@ public class KEdge extends KGraphElement {
 		if (source.id == target.id && (sourceRank < targetRank
 				|| (sourceRank == targetRank && forwardSelfLoop)))
 			targetRank++;
-		source.incidence.add(sourceRank, new KNode.IncEntry(this,
-				KNode.IncEntry.Type.OUT));
-		target.incidence.add(targetRank, new KNode.IncEntry(this,
-				KNode.IncEntry.Type.IN));		
+		source.incidence.add(sourceRank, new KSlimNode.IncEntry(this,
+				KSlimNode.IncEntry.Type.OUT));
+		target.incidence.add(targetRank, new KSlimNode.IncEntry(this,
+				KSlimNode.IncEntry.Type.IN));		
 	}
 	
 	/**
@@ -145,31 +158,31 @@ public class KEdge extends KGraphElement {
 	 * @param sourceSide port side at the source node
 	 * @param targetSide port side at the target node
 	 */
-	public void connectNodes(KNode.Side sourceSide, KNode.Side targetSide) {
+	public void connectNodes(KSlimNode.Side sourceSide, KSlimNode.Side targetSide) {
 		this.sourceSide = sourceSide;
 		this.targetSide = targetSide;
-		ListIterator<KNode.IncEntry> incIter = source.incidence.listIterator();
+		ListIterator<KSlimNode.IncEntry> incIter = source.incidence.listIterator();
 		while (incIter.hasNext()) {
-			KNode.IncEntry nextEntry = incIter.next();
-			KNode.Side side = (nextEntry.type == KNode.IncEntry.Type.OUT
+			KSlimNode.IncEntry nextEntry = incIter.next();
+			KSlimNode.Side side = (nextEntry.type == KSlimNode.IncEntry.Type.OUT
 					? nextEntry.edge.sourceSide : nextEntry.edge.targetSide);
 			if (sourceSide.compareTo(side) <= 0) {
 				incIter.previous();
 				break;
 			}
 		}
-		incIter.add(new KNode.IncEntry(this, KNode.IncEntry.Type.OUT));
+		incIter.add(new KSlimNode.IncEntry(this, KSlimNode.IncEntry.Type.OUT));
 		incIter = target.incidence.listIterator();
 		while (incIter.hasNext()) {
-			KNode.IncEntry nextEntry = incIter.next();
-			KNode.Side side = (nextEntry.type == KNode.IncEntry.Type.OUT
+			KSlimNode.IncEntry nextEntry = incIter.next();
+			KSlimNode.Side side = (nextEntry.type == KSlimNode.IncEntry.Type.OUT
 					? nextEntry.edge.sourceSide : nextEntry.edge.targetSide);
 			if (targetSide.compareTo(side) <= 0) {
 				incIter.previous();
 				break;
 			}
 		}
-		incIter.add(new KNode.IncEntry(this, KNode.IncEntry.Type.IN));
+		incIter.add(new KSlimNode.IncEntry(this, KSlimNode.IncEntry.Type.IN));
 	}
 	
 	/*

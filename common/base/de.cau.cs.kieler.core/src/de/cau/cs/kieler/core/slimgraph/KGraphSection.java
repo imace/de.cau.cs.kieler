@@ -1,4 +1,17 @@
-package de.cau.cs.kieler.core.graph;
+/******************************************************************************
+ * KIELER - Kiel Integrated Environment for Layout for the Eclipse RCP
+ *
+ * http://www.informatik.uni-kiel.de/rtsys/kieler/
+ * 
+ * Copyright 2009 by
+ * + Christian-Albrechts-University of Kiel
+ *   + Department of Computer Science
+ *     + Real-Time and Embedded Systems Group
+ * 
+ * This code is provided under the terms of the Eclipse Public License (EPL).
+ * See the file epl-v10.html for the license text.
+ */
+package de.cau.cs.kieler.core.slimgraph;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,10 +28,10 @@ import java.util.List;
 public class KGraphSection {
 
 	/** nodes of this graph section, sorted by their creation number */
-	public List<KNode> nodes = new ArrayList<KNode>();
+	public List<KSlimNode> nodes = new ArrayList<KSlimNode>();
 	
 	/** list of edges that were removed */
-	private List<KEdge> removedEdges = new LinkedList<KEdge>();
+	private List<KSlimEdge> removedEdges = new LinkedList<KSlimEdge>();
 
 	/**
 	 * Sorts the nodes of this graph section. This method must be called
@@ -35,7 +48,7 @@ public class KGraphSection {
 	 * @param node node to lookup
 	 * @return true if the given node is contained in <code>nodes</code>
 	 */
-	public boolean contains(KNode node) {
+	public boolean contains(KSlimNode node) {
 		int start = 0, end = nodes.size(), pos;
 		while (start != end) {
 			pos = start + (end - start) / 2;
@@ -55,7 +68,7 @@ public class KGraphSection {
 	 * 
 	 * @param edgeEntry edge entry to remove from this graph section
 	 */
-	public void removeEdge(KNode.IncEntry edgeEntry) {
+	public void removeEdge(KSlimNode.IncEntry edgeEntry) {
 		edgeEntry.edge.source.incidence.remove(edgeEntry);
 		edgeEntry.edge.target.incidence.remove(edgeEntry);
 		removedEdges.add(edgeEntry.edge);
@@ -65,7 +78,7 @@ public class KGraphSection {
 	 * Restores all edges that were removed.
 	 */
 	public void restoreEdges() {
-		for (KEdge edge : removedEdges) {
+		for (KSlimEdge edge : removedEdges) {
 			edge.connectNodes();
 		}
 		removedEdges.clear();
