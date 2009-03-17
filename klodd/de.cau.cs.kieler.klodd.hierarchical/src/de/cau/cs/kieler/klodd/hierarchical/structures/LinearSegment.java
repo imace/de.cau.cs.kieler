@@ -29,6 +29,28 @@ public class LinearSegment implements Comparable<LinearSegment> {
 	/** current rank of the linear segment */
 	public int rank = -1;
 	
+	/**
+	 * Determines whether the given element has preceding elements in this
+	 * linear segment.
+	 * 
+	 * @param elem element to test
+	 * @return true if there are other elements before <code>elem</code>
+	 */
+	public boolean hasPreceding(LayerElement elem) {
+	    return elements.indexOf(elem) > 0;
+	}
+	
+	/**
+	 * Determines whether the given element has following elements in this
+     * linear segment.
+     * 
+     * @param elem element to test
+     * @return true if there are other elements after <code>elem</code>
+     */
+	public boolean hasFollowing(LayerElement elem) {
+	    return elements.indexOf(elem) < elements.size() - 1;
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * @see java.lang.Object#toString()

@@ -173,6 +173,7 @@ public class BasicNodePlacer extends AbstractAlgorithm implements INodePlacer {
 		
 		// apply the new ordering to the array of linear segments
 		for (int i = 0; i < linearSegments.length; i++) {
+		    assert outgoing[i].isEmpty();
 			linearSegments[i].rank = newRanks[i];
 		}
 		Arrays.sort(linearSegments);

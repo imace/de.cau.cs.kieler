@@ -439,32 +439,56 @@ public class LayerElement {
 	public List<Integer> getConnectionRanks(boolean forward) {
 		List<Integer> connectionRanks = new LinkedList<Integer>();
 		if (forward) {
-			for (LayerConnection connection : incoming) {
-				if (connection.getSourcePort() != null) {
-					// the source is a node with ports or a port
-					connectionRanks.add(Integer.valueOf(connection.getSourceElement()
-						.getPortRank(connection.getSourcePort(), true)
-						+ connection.getSourceElement().rank));
-				}
-				else {
-					// the source is a node without ports or an edge
-					connectionRanks.add(Integer.valueOf(connection.getSourceElement().rank));
-				}
-			}
+		    if (elemObj instanceof KLayoutEdge && linearSegment.hasPreceding(this)) {
+		        // only the preceding element of the linear segment may be considered
+		        for (LayerConnection connection : incoming) {
+		            LayerElement source = connection.getSourceElement();
+		            if (source.elemObj instanceof KLayoutEdge) {
+		                connectionRanks.add(Integer.valueOf(source.rank));
+		                break;
+		            }
+		        }
+		    }
+		    else {
+    			for (LayerConnection connection : incoming) {
+    				if (connection.getSourcePort() != null) {
+    					// the source is a node with ports or a port
+    					connectionRanks.add(Integer.valueOf(connection.getSourceElement()
+    						.getPortRank(connection.getSourcePort(), true)
+    						+ connection.getSourceElement().rank));
+    				}
+    				else {
+    					// the source is a node without ports or an edge
+    					connectionRanks.add(Integer.valueOf(connection.getSourceElement().rank));
+    				}
+    			}
+		    }
 		}
 		else {
-			for (LayerConnection connection : outgoing) {
-				if (connection.getTargetPort() != null) {
-					// the target is a node with ports or a port
-					connectionRanks.add(Integer.valueOf(connection.getTargetElement()
-						.getPortRank(connection.getTargetPort(), false)
-						+ connection.getTargetElement().rank));
-				}
-				else {
-					// the target is a node without ports or an edge
-					connectionRanks.add(Integer.valueOf(connection.getTargetElement().rank));
-				}
-			}
+		    if (elemObj instanceof KLayoutEdge && linearSegment.hasFollowing(this)) {
+                // only the following element of the linear segment may be considered
+                for (LayerConnection connection : outgoing) {
+                    LayerElement target = connection.getTargetElement();
+                    if (target.elemObj instanceof KLayoutEdge) {
+                        connectionRanks.add(Integer.valueOf(target.rank));
+                        break;
+                    }
+                }
+            }
+            else {
+    			for (LayerConnection connection : outgoing) {
+    				if (connection.getTargetPort() != null) {
+    					// the target is a node with ports or a port
+    					connectionRanks.add(Integer.valueOf(connection.getTargetElement()
+    						.getPortRank(connection.getTargetPort(), false)
+    						+ connection.getTargetElement().rank));
+    				}
+    				else {
+    					// the target is a node without ports or an edge
+    					connectionRanks.add(Integer.valueOf(connection.getTargetElement().rank));
+    				}
+    			}
+            }
 		}
 		return connectionRanks;
 	}
