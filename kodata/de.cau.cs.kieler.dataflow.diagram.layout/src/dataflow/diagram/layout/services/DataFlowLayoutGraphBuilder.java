@@ -80,6 +80,7 @@ public class DataFlowLayoutGraphBuilder extends KimlAbstractLayoutGraphBuilder {
 
 	private Map<BorderedBorderItemEditPart, KLayoutPort> borderItem2PortMapping = new HashMap<BorderedBorderItemEditPart, KLayoutPort>();
 
+	
 	@Override
 	protected void doBuildLayoutGraph() {
 			
@@ -407,6 +408,11 @@ public class DataFlowLayoutGraphBuilder extends KimlAbstractLayoutGraphBuilder {
 	private void addEdge(KLayoutPort sourcePort, KLayoutPort targetPort,
 			ConnectionEditPart connectionEditPart, EdgeHierarchyType edgeType) {
 		KLayoutEdge edge = KimlLayoutGraphFactory.eINSTANCE.createKLayoutEdge();
+		
+		/* haf: to set a real containment reference for all edges
+		   FIXME: can be removed after the KLayoutGraph structure has been overworked */
+		layoutGraph.getGraphEdges().add(edge);
+		
 		layoutEdge2EditPart.put(edge, connectionEditPart);
 		float sourceNodeX = 0.0f, sourceNodeY = 0.0f, targetNodeX = 0.0f, targetNodeY = 0.0f;
 		if (edgeType != EdgeHierarchyType.INPUT_TO_OP) {
