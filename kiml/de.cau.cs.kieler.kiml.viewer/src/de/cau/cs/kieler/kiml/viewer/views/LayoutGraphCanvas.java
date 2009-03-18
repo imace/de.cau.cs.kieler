@@ -85,7 +85,7 @@ public class LayoutGraphCanvas extends Canvas implements PaintListener {
         new Color(Display.getDefault(), 81, 136, 95),
         new Color(Display.getDefault(), 136, 81, 95),
         new Color(Display.getDefault(), 95, 81, 136),
-        new Color(Display.getDefault(), 254, 0, 0)
+        new Color(Display.getDefault(), 255, 255, 255)
     };
     /** alpha value for ports */
     private static final int PORT_ALPHA = 240;
