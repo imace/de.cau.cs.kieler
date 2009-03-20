@@ -45,6 +45,15 @@
             name="%view.name.1"
             restorable="true">
       </view>
+      <view
+            allowMultiple="false"
+            category="de.cau.cs.kieler.kiml.ui"
+            class="de.cau.cs.kieler.kiml.ui.views.KimlLayoutView"
+            icon="icons/kieler-arrange.png"
+            id="de.cau.cs.kieler.kiml.ui.views.layout"
+            name="Layout"
+            restorable="true">
+      </view>
    </extension>
    <extension
          point="org.eclipse.ui.perspectives">
@@ -481,5 +490,22 @@ point="org.eclipse.ui.menus">
           editor_id="*">
     </kimlLayoutGraphBuilder>
  </extension>
+ <extension
+       point="org.eclipse.ui.viewActions">
+    <viewContribution
+          id="de.cau.cs.kieler.kiml.ui.views.layout.action"
+          targetID="de.cau.cs.kieler.kiml.ui.views.layout">
+       <action
+             class="de.cau.cs.kieler.kiml.ui.handlers.DeepLayoutActionDelegate"
+             icon="icons/kieler-arrange.png"
+             id="de.cau.cs.kieler.kiml.ui.action1"
+             label="Apply All"
+             style="push"
+             toolbarPath="layout"
+             tooltip="Applies options to all graphical elements and triggers layout.">
+       </action>
+    </viewContribution>
+ </extension>
+ 
    
 </plugin>
