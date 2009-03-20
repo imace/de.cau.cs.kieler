@@ -46,6 +46,7 @@ public interface IKielerPreferenceStore {
     public boolean getBoolean(String name);
 
     /**
+     * 
      * Returns the default value for the boolean-valued preference
      * with the given name.
      * Returns the default-default value (<code>false</code>) if there

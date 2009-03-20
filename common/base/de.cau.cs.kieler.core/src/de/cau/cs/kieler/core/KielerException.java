@@ -36,6 +36,8 @@ public class KielerException extends Exception {
 		TIMEOUT,
 		/** a constructed LP can't be solved because it is infeasible */
 		INFEASIBLE_LP,
+		/** layout is not applicable, maybe there is no diagram or the wrong editor type... */
+		LAYOUT_NOT_APPLICABLE,
 	}
 	
 	private Type type = Type.UNDEFINED;
