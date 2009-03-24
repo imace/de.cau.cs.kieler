@@ -1,0 +1,30 @@
+import ssm2dl;
+import ssm2;
+
+extension de::cau::cs::kieler::ssm2::dsl::Extensions;
+/*
+ * This check file is used by the parser
+ * and by the editor. Add your constraints here!
+ */
+
+context Variable ERROR "Write your constraint message here...!" :
+   true;
+
+context Emission ERROR "Write your constraint message here...!" :
+   true;
+
+context Expression ERROR "Write your constraint message here...!" :
+   true;
+
+context Action ERROR "Write your constraint message here...!" :
+   true;
+
+context Assignment ERROR "Write your constraint message here...!" :
+   true;
+
+context Signal ERROR "Write your constraint message here...!" :
+   true;
+
+context Operator ERROR "Write your constraint message here...!" :
+   true;
+
