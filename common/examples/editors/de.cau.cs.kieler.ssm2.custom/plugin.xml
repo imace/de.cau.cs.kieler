@@ -12,5 +12,14 @@
             primary="true">
       </toc>
    </extension>
+   <extension
+         point="org.eclipse.gmf.runtime.common.ui.services.parserProviders">
+      <ParserProvider
+            class="de.cau.cs.kieler.ssm2.custom.XTextParserProvider">
+         <Priority
+               name="Medium">
+         </Priority>
+      </ParserProvider>
+   </extension>
 
 </plugin>
