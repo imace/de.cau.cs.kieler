@@ -1,0 +1,11 @@
+import ssm2dl;
+import ssm2;
+import org::openarchitectureware::xtext::resource::AbstractXtextResource;
+
+extension de::cau::cs::kieler::ssm2::dsl::Extensions;
+
+String format(List[emf::EObject] this) :
+	JAVA org.openarchitectureware.xtext.resource.AbstractXtextResource.throwNoFormatterException();
+
+String NL() : "\n";
+String TAB() : "\t";

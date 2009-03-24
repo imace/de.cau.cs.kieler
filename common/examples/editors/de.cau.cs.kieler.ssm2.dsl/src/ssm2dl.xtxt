@@ -1,0 +1,41 @@
+// specify your DSL grammar rules here ...
+// IMPORTANT: You should change the property 'overwrite.pluginresources=true' in the properties file to 'overwrite.pluginresources=false' AFTER first generation
+
+// preventMMGeneration
+importMetamodel "http://www.informatik.uni-kiel.de/rtsys/ssm2" as ssm2;
+
+Action [ssm2::Action] :
+
+	(trigger=Expression)? "/" (emissions+=Emission | assignments+=Assignment)*; 
+	
+Expression [ssm2::Expression] :
+
+	Signal | Variable | ComplexExpression;
+	
+ComplexExpression [ssm2::ComplexExpression] :
+
+	"(" ( subExpressions+=Expression)? operator=Operator subExpressions+=Expression ")";
+
+Emission [ssm2::Emission] :
+
+	signal=Signal ("(" newValue=Expression ")")?;
+
+Assignment [ssm2::Assignment] :
+
+	variable=Variable "=" expression=Expression;
+
+Signal [ssm2::Signal] :
+
+	name=ID;
+	
+Variable [ssm2::Variable] :
+
+	vname=ID | value=INT;
+	
+Operator [ssm2::Operator] :
+
+	operatorKind=OperatorKind;
+	
+Enum OperatorKind [ssm2::OperatorKind] :
+
+	NOT="not" | EQ="=" | LT="<" | LEQ="<=" | AND="and" | OR="or" | ADD="+" | SUB="-" | MULT="*" | DIV="/" | VAL="?";
