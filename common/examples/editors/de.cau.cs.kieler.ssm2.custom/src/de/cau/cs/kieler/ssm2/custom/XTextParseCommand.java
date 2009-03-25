@@ -19,7 +19,10 @@ import de.cau.cs.kieler.ssm2.Assignment;
 import de.cau.cs.kieler.ssm2.ComplexExpression;
 import de.cau.cs.kieler.ssm2.Emission;
 import de.cau.cs.kieler.ssm2.Expression;
+import de.cau.cs.kieler.ssm2.Region;
 import de.cau.cs.kieler.ssm2.Signal;
+import de.cau.cs.kieler.ssm2.State;
+import de.cau.cs.kieler.ssm2.Transition;
 import de.cau.cs.kieler.ssm2.Variable;
 import de.cau.cs.kieler.ssm2.dsl.parser.XtextParser;
 
@@ -76,7 +79,14 @@ public class XTextParseCommand extends AbstractTransactionalCommand {
 		boolean oneEqual = false;
 		for (Signal s1 : getSignals(newAction)) {
 			oneEqual = false;
-			for (Signal s2 : action.getParentStateEntryAction().getSignals()) {
+			EList<Signal> validSignals;
+			if (action instanceof Transition) {
+				validSignals = ((State) ((Region) ((State) ((Transition) action).getSourceState()).getParentRegion()).getParentState()).getSignals();
+			}
+			else {
+				validSignals = action.getParentStateEntryAction().getSignals();
+			}
+			for (Signal s2 : validSignals) {
 				if (s1.getName().equals(s2.getName())) {
 					s1 = s2;
 					oneEqual = true;
