@@ -12,25 +12,21 @@ public class ParserListener implements Adapter{
 		
 	}
 
-	@Override
 	public Notifier getTarget() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
 	public boolean isAdapterForType(Object type) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	@Override
 	public void notifyChanged(Notification notification) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void setTarget(Notifier newTarget) {
 		// TODO Auto-generated method stub
 		

@@ -14,7 +14,6 @@ import de.cau.cs.kieler.ssm2.Action;
 
 public class XTextParserProvider extends AbstractProvider implements IParserProvider {
 	
-	@Override
 	public IParser getParser(IAdaptable hint) {
 		if (hint instanceof ParserHintAdapter) {
 			Object element = ((ParserHintAdapter) hint).getAdapter(EObject.class);

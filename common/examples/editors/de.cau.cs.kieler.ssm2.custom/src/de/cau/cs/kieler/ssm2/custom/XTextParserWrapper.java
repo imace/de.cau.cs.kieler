@@ -31,12 +31,10 @@ public class XTextParserWrapper implements IParser {
 	public XTextParserWrapper(Action action) {
 	}
 
-	@Override
 	public IContentAssistProcessor getCompletionProcessor(IAdaptable element) {
 		return null;
 	}
 
-	@Override
 	public String getEditString(IAdaptable element, int flags) {
 		if (element instanceof EObjectAdapter) {
 			if (((EObjectAdapter) element).getRealObject() instanceof Action) {
@@ -49,12 +47,10 @@ public class XTextParserWrapper implements IParser {
 		return "";
 	}
 
-	@Override
 	public ICommand getParseCommand(IAdaptable element, String newString, int flags) {
 		return new XTextParseCommand(element, newString, flags);
 	}
 
-	@Override
 	public String getPrintString(IAdaptable element, int flags) {
 		if (element instanceof EObjectAdapter) {
 			if (((EObjectAdapter) element).getRealObject() instanceof Action) {
@@ -67,7 +63,6 @@ public class XTextParserWrapper implements IParser {
 		return "";
 	}
 
-	@Override
 	public boolean isAffectingEvent(Object event, int flags) {
 		if (event instanceof Notification) {
 			Object feature = ((Notification) event).getFeature();
@@ -78,7 +73,6 @@ public class XTextParserWrapper implements IParser {
 		return false;
 	}
 
-	@Override
 	public IParserEditStatus isValidEditString(IAdaptable element, String editString) {
 		try {
 			if (element instanceof Action) {
