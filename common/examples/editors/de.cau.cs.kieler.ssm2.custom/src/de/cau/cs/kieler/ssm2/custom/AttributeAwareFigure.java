@@ -6,6 +6,7 @@ import org.eclipse.draw2d.AbstractLayout;
 import org.eclipse.draw2d.Figure;
 import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.LayoutManager;
+import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
@@ -45,7 +46,12 @@ public class AttributeAwareFigure extends Figure implements Adapter {
 	@Override
 	public void paint(Graphics g){
 		super.paint(g);
-		currentFigure.setBounds(this.getBounds());
+		Rectangle newBounds = new Rectangle();
+		newBounds.x = this.getBounds().x + 1;
+		newBounds.y = this.getBounds().y + 1;
+		newBounds.width = this.getBounds().width - 1;
+		newBounds.height = this.getBounds().height - 1;
+		currentFigure.setBounds(newBounds);
 		currentFigure.paint(g);
 	}
 	

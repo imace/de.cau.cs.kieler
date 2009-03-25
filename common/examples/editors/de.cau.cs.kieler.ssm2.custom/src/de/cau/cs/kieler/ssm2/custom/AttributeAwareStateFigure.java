@@ -14,7 +14,6 @@ import de.cau.cs.kieler.ssm2.StateKind;
 
 public class AttributeAwareStateFigure extends AttributeAwareFigure {
 	
-	//Bei Gelegenheit durch Einsatz von Array optimieren
 	public AttributeAwareStateFigure(EditPart e) {
 		super();
 		this.setModelElementAndRegisterFromEditPart(e);

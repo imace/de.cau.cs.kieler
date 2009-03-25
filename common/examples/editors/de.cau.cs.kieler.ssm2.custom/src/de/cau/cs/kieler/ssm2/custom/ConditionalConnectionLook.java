@@ -1,0 +1,31 @@
+package de.cau.cs.kieler.ssm2.custom;
+
+import java.util.List;
+
+import org.eclipse.draw2d.RotatableDecoration;
+
+public class ConditionalConnectionLook {
+
+	private List<Condition> conditions;
+	private RotatableDecoration sourceDeco;
+	private RotatableDecoration targetDeco;
+		
+	public ConditionalConnectionLook (List<Condition> c, RotatableDecoration sD, RotatableDecoration tD) {
+		conditions = c;
+		sourceDeco = sD;
+		targetDeco = tD;
+	}
+	
+	public List<Condition> getConditions() {
+		return conditions;
+	}
+	
+	public RotatableDecoration getSourceDeco() {
+		return sourceDeco;
+	}
+	
+	public RotatableDecoration getTargetDeco() {
+		return targetDeco;
+	}
+	
+}

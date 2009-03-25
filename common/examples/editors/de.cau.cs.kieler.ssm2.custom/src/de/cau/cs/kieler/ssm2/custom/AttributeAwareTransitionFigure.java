@@ -5,8 +5,8 @@ import java.util.List;
 
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.PolygonDecoration;
-import org.eclipse.draw2d.PolylineConnection;
 import org.eclipse.draw2d.PolylineDecoration;
+import org.eclipse.draw2d.RotatableDecoration;
 import org.eclipse.draw2d.geometry.PointList;
 import org.eclipse.gef.EditPart;
 
@@ -15,60 +15,13 @@ import de.cau.cs.kieler.ssm2.TransitionKind;
 
 public class AttributeAwareTransitionFigure extends AttributeAwareConnection {
 
-	//Bei Gelegenheit durch Einsatz von Array optimieren
 	public AttributeAwareTransitionFigure(EditPart e) {
 		super();
 		this.setModelElementAndRegisterFromEditPart(e);
 		
-		PolylineConnection weakAbortionFigure = new PolylineConnection();
-		weakAbortionFigure.setLineWidth(2);
-		weakAbortionFigure.setForegroundColor(ColorConstants.black);
-		
-		PolylineConnection strongAbortionFigure = new PolylineConnection();
-		strongAbortionFigure.setLineWidth(2);
-		strongAbortionFigure.setForegroundColor(ColorConstants.red);
-		
-		PolylineConnection normalTerminationFigure = new PolylineConnection();
-		normalTerminationFigure.setLineWidth(2);
-		normalTerminationFigure.setForegroundColor(ColorConstants.green);
-		
-		PolylineDecoration arrowDecoration = new PolylineDecoration();
-		arrowDecoration.setLineWidth(2);
-		arrowDecoration.setForegroundColor(ColorConstants.black);
-		PointList arrowDecorationPoints = new PointList();
-		arrowDecorationPoints.addPoint(-2, 2);
-		arrowDecorationPoints.addPoint(0, 0);
-		arrowDecorationPoints.addPoint(-2, -2);
-		arrowDecoration.setTemplate(arrowDecorationPoints);
-		strongAbortionFigure.setTargetDecoration(arrowDecoration);
-		weakAbortionFigure.setTargetDecoration(arrowDecoration);
-		normalTerminationFigure.setTargetDecoration(arrowDecoration);
-		
-		PolygonDecoration triangleDecoration = new PolygonDecoration();
-		triangleDecoration.setLineWidth(2);
-		triangleDecoration.setForegroundColor(ColorConstants.black);
-		triangleDecoration.setBackgroundColor(ColorConstants.green);
-		PointList triangleDecorationPoints = new PointList();
-		triangleDecorationPoints.addPoint(0, 2);
-		triangleDecorationPoints.addPoint(2, 0);
-		triangleDecorationPoints.addPoint(0, -2);
-		triangleDecoration.setTemplate(triangleDecorationPoints);
-		normalTerminationFigure.setSourceDecoration(triangleDecoration);
-		
-		PolygonDecoration circleDecoration = new PolygonDecoration();
-		circleDecoration.setLineWidth(2);
-		circleDecoration.setForegroundColor(ColorConstants.black);
-		circleDecoration.setBackgroundColor(ColorConstants.red);
-		PointList circleDecorationPoints = new PointList();
-		circleDecorationPoints.addPoint(0, 2);
-		circleDecorationPoints.addPoint(2, 2);
-		circleDecorationPoints.addPoint(2, -2);
-		circleDecorationPoints.addPoint(0, -2);
-		circleDecoration.setTemplate(circleDecorationPoints);
-		strongAbortionFigure.setSourceDecoration(circleDecoration);
-		
-		this.setDefaultFigure(strongAbortionFigure);
-		this.setCurrentFigure(strongAbortionFigure);
+		this.setForegroundColor(ColorConstants.black);
+		this.setBackgroundColor(ColorConstants.black);
+		this.setLineWidth(2);
 		
 		Condition kindWeakAbort = new Condition(Ssm2Package.eINSTANCE.getTransition_TransitionKind(), TransitionKind.WEAKABORT);
 		Condition kindStrongAbort = new Condition(Ssm2Package.eINSTANCE.getTransition_TransitionKind(), TransitionKind.STRONGABORT);
@@ -83,15 +36,65 @@ public class AttributeAwareTransitionFigure extends AttributeAwareConnection {
 		List<Condition> normalTerminationSF = new LinkedList<Condition>();
 		normalTerminationSF.add(kindNormalTermination);
 		
-		ConditionalFigure weakAbortCF = new ConditionalFigure(weakAbortSF, weakAbortionFigure);
-		ConditionalFigure strongAbortCF = new ConditionalFigure(strongAbortSF, strongAbortionFigure);
-		ConditionalFigure normalTerminationCF = new ConditionalFigure(normalTerminationSF, normalTerminationFigure);
+		ConditionalConnectionLook weakAbortCF = new ConditionalConnectionLook(weakAbortSF, createWeakAbortionDecoration(), createArrowDecoration());
+		ConditionalConnectionLook strongAbortCF = new ConditionalConnectionLook(strongAbortSF, createStrongAbortionDecoration(), createArrowDecoration());
+		ConditionalConnectionLook normalTerminationCF = new ConditionalConnectionLook(normalTerminationSF, createNormalTerminationDecoration(), createArrowDecoration());
 		
-		conditionalFigureList = new LinkedList<ConditionalFigure>();
+		conditionalFigureList = new LinkedList<ConditionalConnectionLook>();
 		conditionalFigureList.add(weakAbortCF);
 		conditionalFigureList.add(strongAbortCF);
 		conditionalFigureList.add(normalTerminationCF);
-
+		
+		this.setDefaultLook(weakAbortCF);
+		this.setCurrentLook(strongAbortCF);
+		this.setLook(strongAbortCF);
 	}
 	
+	private RotatableDecoration createStrongAbortionDecoration() {
+		PolygonDecoration circleDecoration = new PolygonDecoration();
+		circleDecoration.setLineWidth(2);
+		circleDecoration.setForegroundColor(ColorConstants.black);
+		circleDecoration.setBackgroundColor(ColorConstants.red);
+		PointList circleDecorationPoints = new PointList();
+		circleDecorationPoints.addPoint(0, 2);
+		circleDecorationPoints.addPoint(-2, 2);
+		circleDecorationPoints.addPoint(-2, -2);
+		circleDecorationPoints.addPoint(0, -2);
+		circleDecoration.setTemplate(circleDecorationPoints);
+		return circleDecoration;
+	}
+	
+	private RotatableDecoration createWeakAbortionDecoration() {
+		PolygonDecoration pointDecoration = new PolygonDecoration();
+		pointDecoration.setForegroundColor(ColorConstants.black);
+		PointList pointDecorationPoints = new PointList();
+		pointDecorationPoints.addPoint(0, 0);
+		pointDecoration.setTemplate(pointDecorationPoints);
+		return pointDecoration;
+	}
+	
+	private RotatableDecoration createNormalTerminationDecoration() {
+		PolygonDecoration triangleDecoration = new PolygonDecoration();
+		triangleDecoration.setLineWidth(2);
+		triangleDecoration.setForegroundColor(ColorConstants.black);
+		triangleDecoration.setBackgroundColor(ColorConstants.green);
+		PointList triangleDecorationPoints = new PointList();
+		triangleDecorationPoints.addPoint(0, 2);
+		triangleDecorationPoints.addPoint(-2, 0);
+		triangleDecorationPoints.addPoint(0, -2);
+		triangleDecoration.setTemplate(triangleDecorationPoints);
+		return triangleDecoration;
+	}
+	
+	private RotatableDecoration createArrowDecoration() {
+		PolylineDecoration arrowDecoration = new PolylineDecoration();
+		arrowDecoration.setLineWidth(2);
+		arrowDecoration.setForegroundColor(ColorConstants.black);
+		PointList arrowDecorationPoints = new PointList();
+		arrowDecorationPoints.addPoint(-2, 2);
+		arrowDecorationPoints.addPoint(0, 0);
+		arrowDecorationPoints.addPoint(-2, -2);
+		arrowDecoration.setTemplate(arrowDecorationPoints);
+		return arrowDecoration;
+	}
 }

@@ -3,23 +3,21 @@ package de.cau.cs.kieler.ssm2.custom;
 import java.util.List;
 
 import org.eclipse.draw2d.AbstractLayout;
-import org.eclipse.draw2d.Figure;
-import org.eclipse.draw2d.Graphics;
-import org.eclipse.draw2d.PolylineConnection;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gef.EditPart;
+import org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx;
 import org.eclipse.gmf.runtime.notation.View;
 
-public class AttributeAwareConnection extends PolylineConnection implements Adapter {
+public class AttributeAwareConnection extends PolylineConnectionEx implements Adapter {
 
-	protected List<ConditionalFigure> conditionalFigureList;
+	protected List<ConditionalConnectionLook> conditionalFigureList;
 	protected EObject modelElement;
-	protected PolylineConnection defaultFigure;
-	protected PolylineConnection currentFigure;
 	protected AbstractLayout layout;
+	protected ConditionalConnectionLook defaultLook;
+	protected ConditionalConnectionLook currentLook;
 	
 	public AttributeAwareConnection() {
 		super();
@@ -38,26 +36,23 @@ public class AttributeAwareConnection extends PolylineConnection implements Adap
 		((Notifier) modelElement).eAdapters().add(this);
 	}
 	
-	public void setDefaultFigure(PolylineConnection f) {
-		defaultFigure = f;
+	public void setDefaultLook(ConditionalConnectionLook look) {
+		defaultLook = look;
 	}
 	
-	@Override
-	public void paint(Graphics g){
-		super.paint(g);
-		currentFigure.setPoints(this.getPoints());
-		currentFigure.paint(g);
+	public void setCurrentLook(ConditionalConnectionLook look) {
+		currentLook = look;
 	}
 	
-	public Figure getCurrentFigure() {
-		return currentFigure;
+	public ConditionalConnectionLook getDefaultLook() {
+		return defaultLook;
 	}
 	
-	public void setCurrentFigure(PolylineConnection f) {
-		currentFigure = f;
+	public ConditionalConnectionLook getCurrentLook() {
+		return currentLook;
 	}
 	
-	public void addConditionalFigure(ConditionalFigure cf) {
+	public void addConditionalFigure(ConditionalConnectionLook cf) {
 		conditionalFigureList.add(cf);
 	}
 	
@@ -72,7 +67,7 @@ public class AttributeAwareConnection extends PolylineConnection implements Adap
 	}
 
 	public void notifyChanged(Notification notification) {
-		for (ConditionalFigure cf : conditionalFigureList) {
+		for (ConditionalConnectionLook cf : conditionalFigureList) {
 			boolean fulfilled = true;
 			for (Condition c : cf.getConditions()) {
 				if (!(c.isValid(modelElement))) {
@@ -81,11 +76,11 @@ public class AttributeAwareConnection extends PolylineConnection implements Adap
 				}
 			}
 			if (fulfilled) {
-				setCurrentFigure((PolylineConnection) (cf.getFigure()));
+				setLook(cf);
 				break;
 			} 
 			else {
-				setCurrentFigure(defaultFigure);
+				setLook(defaultLook);
 			}
 		}
 		this.repaint();
@@ -94,6 +89,11 @@ public class AttributeAwareConnection extends PolylineConnection implements Adap
 	public void setTarget(Notifier newTarget) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	protected void setLook(ConditionalConnectionLook look) {
+		this.setSourceDecoration(look.getSourceDeco());
+		this.setTargetDecoration(look.getTargetDeco());
 	}
 
 }
