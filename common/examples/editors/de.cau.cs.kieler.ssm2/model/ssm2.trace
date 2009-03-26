@@ -3,68 +3,30 @@
     xmlns:xmi="http://www.omg.org/XMI"
     xmlns:trace="http://www.eclipse.org/gmf/2006/Trace">
   <nodeTraces
-      visualID="2007"
-      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.informatik.uni-kiel.de/rtsys/ssm2' and _eClass_.name = 'Region') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.informatik.uni-kiel.de/rtsys/ssm2' and _eClass_.name = 'State') and _containmentMF_.name = 'regions')">
+      visualID="2012"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.informatik.uni-kiel.de/rtsys/ssm2' and _eClass_.name = 'State') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.informatik.uni-kiel.de/rtsys/ssm2' and _eClass_.name = 'Region') and _containmentMF_.name = 'innerStates')">
+    <nodeLabelTraces
+        visualID="5017"
+        queryText="true"/>
     <compartmentTraces
-        visualID="7022"
+        visualID="7024"
         queryText="true"/>
-  </nodeTraces>
-  <nodeTraces
-      visualID="2008"
-      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.informatik.uni-kiel.de/rtsys/ssm2' and _eClass_.name = 'Signal') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.informatik.uni-kiel.de/rtsys/ssm2' and _eClass_.name = 'State') and _containmentMF_.name = 'signals')">
-    <nodeLabelTraces
-        visualID="5009"
-        queryText="true"/>
-  </nodeTraces>
-  <nodeTraces
-      visualID="2009"
-      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.informatik.uni-kiel.de/rtsys/ssm2' and _eClass_.name = 'Action') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.informatik.uni-kiel.de/rtsys/ssm2' and _eClass_.name = 'State') and _containmentMF_.name = 'entryActions')">
-    <nodeLabelTraces
-        visualID="5010"
-        queryText="true"/>
-  </nodeTraces>
-  <nodeTraces
-      visualID="2010"
-      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.informatik.uni-kiel.de/rtsys/ssm2' and _eClass_.name = 'Action') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.informatik.uni-kiel.de/rtsys/ssm2' and _eClass_.name = 'State') and _containmentMF_.name = 'innerActions')">
-    <nodeLabelTraces
-        visualID="5011"
-        queryText="true"/>
-  </nodeTraces>
-  <nodeTraces
-      visualID="2011"
-      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.informatik.uni-kiel.de/rtsys/ssm2' and _eClass_.name = 'Action') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.informatik.uni-kiel.de/rtsys/ssm2' and _eClass_.name = 'State') and _containmentMF_.name = 'exitActions')">
-    <nodeLabelTraces
-        visualID="5012"
+    <compartmentTraces
+        visualID="7031"
         queryText="true"/>
   </nodeTraces>
   <childNodeTraces
       visualID="3002"
-      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.informatik.uni-kiel.de/rtsys/ssm2' and _eClass_.name = 'Signal') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.informatik.uni-kiel.de/rtsys/ssm2' and _eClass_.name = 'State') and _containmentMF_.name = 'signals')">
-    <nodeLabelTraces
-        visualID="5013"
-        queryText="true"/>
-  </childNodeTraces>
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.informatik.uni-kiel.de/rtsys/ssm2' and _eClass_.name = 'Signal') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.informatik.uni-kiel.de/rtsys/ssm2' and _eClass_.name = 'State') and _containmentMF_.name = 'signals')"/>
   <childNodeTraces
       visualID="3003"
-      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.informatik.uni-kiel.de/rtsys/ssm2' and _eClass_.name = 'Action') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.informatik.uni-kiel.de/rtsys/ssm2' and _eClass_.name = 'State') and _containmentMF_.name = 'entryActions')">
-    <nodeLabelTraces
-        visualID="5014"
-        queryText="true"/>
-  </childNodeTraces>
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.informatik.uni-kiel.de/rtsys/ssm2' and _eClass_.name = 'Action') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.informatik.uni-kiel.de/rtsys/ssm2' and _eClass_.name = 'State') and _containmentMF_.name = 'entryActions')"/>
   <childNodeTraces
       visualID="3004"
-      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.informatik.uni-kiel.de/rtsys/ssm2' and _eClass_.name = 'Action') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.informatik.uni-kiel.de/rtsys/ssm2' and _eClass_.name = 'State') and _containmentMF_.name = 'innerActions')">
-    <nodeLabelTraces
-        visualID="5015"
-        queryText="true"/>
-  </childNodeTraces>
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.informatik.uni-kiel.de/rtsys/ssm2' and _eClass_.name = 'Action') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.informatik.uni-kiel.de/rtsys/ssm2' and _eClass_.name = 'State') and _containmentMF_.name = 'innerActions')"/>
   <childNodeTraces
       visualID="3005"
-      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.informatik.uni-kiel.de/rtsys/ssm2' and _eClass_.name = 'Action') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.informatik.uni-kiel.de/rtsys/ssm2' and _eClass_.name = 'State') and _containmentMF_.name = 'exitActions')">
-    <nodeLabelTraces
-        visualID="5016"
-        queryText="true"/>
-  </childNodeTraces>
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.informatik.uni-kiel.de/rtsys/ssm2' and _eClass_.name = 'Action') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.informatik.uni-kiel.de/rtsys/ssm2' and _eClass_.name = 'State') and _containmentMF_.name = 'exitActions')"/>
   <childNodeTraces
       visualID="3006"
       queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.informatik.uni-kiel.de/rtsys/ssm2' and _eClass_.name = 'Region') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.informatik.uni-kiel.de/rtsys/ssm2' and _eClass_.name = 'State') and _containmentMF_.name = 'regions')">
@@ -73,25 +35,16 @@
         queryText="true"/>
   </childNodeTraces>
   <childNodeTraces
-      visualID="3007"
+      visualID="3009"
       queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.informatik.uni-kiel.de/rtsys/ssm2' and _eClass_.name = 'State') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.informatik.uni-kiel.de/rtsys/ssm2' and _eClass_.name = 'Region') and _containmentMF_.name = 'innerStates')">
     <nodeLabelTraces
-        visualID="5008"
+        visualID="5018"
         queryText="true"/>
     <compartmentTraces
-        visualID="7017"
+        visualID="7030"
         queryText="true"/>
     <compartmentTraces
-        visualID="7018"
-        queryText="true"/>
-    <compartmentTraces
-        visualID="7019"
-        queryText="true"/>
-    <compartmentTraces
-        visualID="7020"
-        queryText="true"/>
-    <compartmentTraces
-        visualID="7021"
+        visualID="7032"
         queryText="true"/>
   </childNodeTraces>
   <linkTraces

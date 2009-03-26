@@ -44,7 +44,16 @@
 		public org.eclipse.draw2d.IFigure createFigure() {
 			org.eclipse.gmf.runtime.diagram.ui.figures.ResizableCompartmentFigure result = (org.eclipse.gmf.runtime.diagram.ui.figures.ResizableCompartmentFigure) super.createFigure();
 			result.setTitleVisibility(false);
-			result.setBorder(null); «REM» Added this line «ENDREM»
+			
+			«REM» Additions start here «ENDREM»
+			Object border = result.getBorder();
+			if (border instanceof org.eclipse.draw2d.LineBorder) {
+				org.eclipse.draw2d.LineBorder lineBorder = ((org.eclipse.draw2d.LineBorder) border);
+				lineBorder.setWidth(2);
+				lineBorder.setColor(org.eclipse.draw2d.ColorConstants.black); 
+			}
+			«REM» result.setBorder(null);  Added this line «ENDREM»
+			«REM» Additions end here «ENDREM»
 			return result;
 		}
 	«ENDIF-»

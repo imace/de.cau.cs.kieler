@@ -7,187 +7,160 @@
     xmlns:gmftool="http://www.eclipse.org/gmf/2005/ToolDefinition">
   <nodes>
     <containmentFeature
-        href="ssm2.ecore#//State/regions"/>
+        href="ssm2.ecore#//Region/innerStates"/>
     <childrenFeature
-        href="ssm2.ecore#//State/regions"/>
+        href="ssm2.ecore#//Region/innerStates"/>
     <ownedChild>
       <domainMetaElement
-          href="ssm2.ecore#//Region"/>
+          href="ssm2.ecore#//State"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="ssm2.gmfgraph#StateName"/>
+        <features
+            href="ssm2.ecore#//State/name"/>
+      </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="ssm2.gmftool#//@palette/@tools.0/@tools.2"/>
+          href="ssm2.gmftool#//@palette/@tools.0/@tools.0"/>
       <diagramNode
-          href="ssm2.gmfgraph#Region"/>
+          href="ssm2.gmfgraph#State"/>
       <children
-          compartment="//@nodes.0/@ownedChild/@compartments.0"
-          referencedChild="//@nodes.0/@ownedChild">
+          compartment="//@nodes.0/@ownedChild/@compartments.1"
+          referencedChild="//@nodes.0/@ownedChild/@children.0/@ownedChild">
         <containmentFeature
-            href="ssm2.ecore#//Region/innerStates"/>
+            href="ssm2.ecore#//State/regions"/>
         <childrenFeature
-            href="ssm2.ecore#//Region/innerStates"/>
+            href="ssm2.ecore#//State/regions"/>
         <ownedChild>
           <domainMetaElement
-              href="ssm2.ecore#//State"/>
-          <labelMappings
-              xsi:type="gmfmap:FeatureLabelMapping">
-            <diagramLabel
-                href="ssm2.gmfgraph#StateName"/>
-            <features
-                href="ssm2.ecore#//State/name"/>
-          </labelMappings>
+              href="ssm2.ecore#//Region"/>
           <tool
               xsi:type="gmftool:CreationTool"
-              href="ssm2.gmftool#//@palette/@tools.0/@tools.0"/>
+              href="ssm2.gmftool#//@palette/@tools.0/@tools.2"/>
           <diagramNode
-              href="ssm2.gmfgraph#State"/>
+              href="ssm2.gmfgraph#Region"/>
           <children
               compartment="//@nodes.0/@ownedChild/@children.0/@ownedChild/@compartments.0"
               referencedChild="//@nodes.0/@ownedChild">
             <containmentFeature
-                href="ssm2.ecore#//State/regions"/>
+                href="ssm2.ecore#//Region/innerStates"/>
             <childrenFeature
-                href="ssm2.ecore#//State/regions"/>
-          </children>
-          <children
-              compartment="//@nodes.0/@ownedChild/@children.0/@ownedChild/@compartments.1"
-              referencedChild="//@nodes.1/@ownedChild">
-            <containmentFeature
-                href="ssm2.ecore#//State/signals"/>
-            <childrenFeature
-                href="ssm2.ecore#//State/signals"/>
-          </children>
-          <children
-              compartment="//@nodes.0/@ownedChild/@children.0/@ownedChild/@compartments.2"
-              referencedChild="//@nodes.2/@ownedChild">
-            <containmentFeature
-                href="ssm2.ecore#//State/entryActions"/>
-            <childrenFeature
-                href="ssm2.ecore#//State/entryActions"/>
-          </children>
-          <children
-              compartment="//@nodes.0/@ownedChild/@children.0/@ownedChild/@compartments.3"
-              referencedChild="//@nodes.3/@ownedChild">
-            <containmentFeature
-                href="ssm2.ecore#//State/innerActions"/>
-            <childrenFeature
-                href="ssm2.ecore#//State/innerActions"/>
-          </children>
-          <children
-              compartment="//@nodes.0/@ownedChild/@children.0/@ownedChild/@compartments.4"
-              referencedChild="//@nodes.4/@ownedChild">
-            <containmentFeature
-                href="ssm2.ecore#//State/exitActions"/>
-            <childrenFeature
-                href="ssm2.ecore#//State/exitActions"/>
+                href="ssm2.ecore#//Region/innerStates"/>
           </children>
           <compartments
               children="//@nodes.0/@ownedChild/@children.0/@ownedChild/@children.0">
             <compartment
-                href="ssm2.gmfgraph#RegionCompartment"/>
-          </compartments>
-          <compartments
-              children="//@nodes.0/@ownedChild/@children.0/@ownedChild/@children.1">
-            <compartment
-                href="ssm2.gmfgraph#SignalCompartment"/>
-          </compartments>
-          <compartments
-              children="//@nodes.0/@ownedChild/@children.0/@ownedChild/@children.2">
-            <compartment
-                href="ssm2.gmfgraph#EntryActionsCompartment"/>
-          </compartments>
-          <compartments
-              children="//@nodes.0/@ownedChild/@children.0/@ownedChild/@children.3">
-            <compartment
-                href="ssm2.gmfgraph#InnerActionsCompartment"/>
-          </compartments>
-          <compartments
-              children="//@nodes.0/@ownedChild/@children.0/@ownedChild/@children.4">
-            <compartment
-                href="ssm2.gmfgraph#ExitActionsCompartment"/>
+                href="ssm2.gmfgraph#StateCompartment"/>
           </compartments>
         </ownedChild>
       </children>
+      <children
+          compartment="//@nodes.0/@ownedChild/@compartments.0"
+          referencedChild="//@nodes.0/@ownedChild/@children.1/@ownedChild">
+        <containmentFeature
+            href="ssm2.ecore#//State/signals"/>
+        <childrenFeature
+            href="ssm2.ecore#//State/signals"/>
+        <ownedChild>
+          <domainMetaElement
+              href="ssm2.ecore#//Signal"/>
+          <labelMappings
+              xsi:type="gmfmap:FeatureLabelMapping">
+            <diagramLabel
+                href="ssm2.gmfgraph#SignalName"/>
+            <features
+                href="ssm2.ecore#//Signal/name"/>
+          </labelMappings>
+          <tool
+              xsi:type="gmftool:CreationTool"
+              href="ssm2.gmftool#//@palette/@tools.0/@tools.3"/>
+          <diagramNode
+              href="ssm2.gmfgraph#SignalName"/>
+        </ownedChild>
+      </children>
+      <children
+          compartment="//@nodes.0/@ownedChild/@compartments.0"
+          referencedChild="//@nodes.0/@ownedChild/@children.2/@ownedChild">
+        <containmentFeature
+            href="ssm2.ecore#//State/entryActions"/>
+        <childrenFeature
+            href="ssm2.ecore#//State/entryActions"/>
+        <ownedChild>
+          <domainMetaElement
+              href="ssm2.ecore#//Action"/>
+          <labelMappings
+              xsi:type="gmfmap:FeatureLabelMapping">
+            <diagramLabel
+                href="ssm2.gmfgraph#EntryActionTriggersAndEffects"/>
+            <features
+                href="ssm2.ecore#//Action/triggersAndEffects"/>
+          </labelMappings>
+          <tool
+              xsi:type="gmftool:CreationTool"
+              href="ssm2.gmftool#//@palette/@tools.0/@tools.4"/>
+          <diagramNode
+              href="ssm2.gmfgraph#EntryActionTriggersAndEffects"/>
+        </ownedChild>
+      </children>
+      <children
+          compartment="//@nodes.0/@ownedChild/@compartments.0"
+          referencedChild="//@nodes.0/@ownedChild/@children.3/@ownedChild">
+        <containmentFeature
+            href="ssm2.ecore#//State/innerActions"/>
+        <childrenFeature
+            href="ssm2.ecore#//State/innerActions"/>
+        <ownedChild>
+          <domainMetaElement
+              href="ssm2.ecore#//Action"/>
+          <labelMappings
+              xsi:type="gmfmap:FeatureLabelMapping">
+            <diagramLabel
+                href="ssm2.gmfgraph#InnerActionTriggersAndEffects"/>
+            <features
+                href="ssm2.ecore#//Action/triggersAndEffects"/>
+          </labelMappings>
+          <tool
+              xsi:type="gmftool:CreationTool"
+              href="ssm2.gmftool#//@palette/@tools.0/@tools.4"/>
+          <diagramNode
+              href="ssm2.gmfgraph#InnerActionTriggersAndEffects"/>
+        </ownedChild>
+      </children>
+      <children
+          compartment="//@nodes.0/@ownedChild/@compartments.0"
+          referencedChild="//@nodes.0/@ownedChild/@children.4/@ownedChild">
+        <containmentFeature
+            href="ssm2.ecore#//State/exitActions"/>
+        <childrenFeature
+            href="ssm2.ecore#//State/exitActions"/>
+        <ownedChild>
+          <domainMetaElement
+              href="ssm2.ecore#//Action"/>
+          <labelMappings
+              xsi:type="gmfmap:FeatureLabelMapping">
+            <diagramLabel
+                href="ssm2.gmfgraph#ExitActionsTriggersAndEffects"/>
+            <features
+                href="ssm2.ecore#//Action/triggersAndEffects"/>
+          </labelMappings>
+          <tool
+              xsi:type="gmftool:CreationTool"
+              href="ssm2.gmftool#//@palette/@tools.0/@tools.4"/>
+          <diagramNode
+              href="ssm2.gmfgraph#ExitActionsTriggersAndEffects"/>
+        </ownedChild>
+      </children>
       <compartments
-          children="//@nodes.0/@ownedChild/@children.0">
+          children="//@nodes.0/@ownedChild/@children.1 //@nodes.0/@ownedChild/@children.2 //@nodes.0/@ownedChild/@children.3 //@nodes.0/@ownedChild/@children.4">
         <compartment
             href="ssm2.gmfgraph#StateCompartment"/>
       </compartments>
-    </ownedChild>
-  </nodes>
-  <nodes>
-    <containmentFeature
-        href="ssm2.ecore#//State/signals"/>
-    <childrenFeature
-        href="ssm2.ecore#//State/signals"/>
-    <ownedChild>
-      <domainMetaElement
-          href="ssm2.ecore#//Signal"/>
-      <labelMappings
-          xsi:type="gmfmap:FeatureLabelMapping">
-        <diagramLabel
-            href="ssm2.gmfgraph#SignalName"/>
-        <features
-            href="ssm2.ecore#//Signal/name"/>
-      </labelMappings>
-      <diagramNode
-          href="ssm2.gmfgraph#Signal"/>
-    </ownedChild>
-  </nodes>
-  <nodes>
-    <containmentFeature
-        href="ssm2.ecore#//State/entryActions"/>
-    <childrenFeature
-        href="ssm2.ecore#//State/entryActions"/>
-    <ownedChild>
-      <domainMetaElement
-          href="ssm2.ecore#//Action"/>
-      <labelMappings
-          xsi:type="gmfmap:FeatureLabelMapping">
-        <diagramLabel
-            href="ssm2.gmfgraph#EntryActionTriggersAndEffects"/>
-        <features
-            href="ssm2.ecore#//Action/triggersAndEffects"/>
-      </labelMappings>
-      <diagramNode
-          href="ssm2.gmfgraph#entryAction"/>
-    </ownedChild>
-  </nodes>
-  <nodes>
-    <containmentFeature
-        href="ssm2.ecore#//State/innerActions"/>
-    <childrenFeature
-        href="ssm2.ecore#//State/innerActions"/>
-    <ownedChild>
-      <domainMetaElement
-          href="ssm2.ecore#//Action"/>
-      <labelMappings
-          xsi:type="gmfmap:FeatureLabelMapping">
-        <diagramLabel
-            href="ssm2.gmfgraph#InnerActionTriggersAndEffects"/>
-        <features
-            href="ssm2.ecore#//Action/triggersAndEffects"/>
-      </labelMappings>
-      <diagramNode
-          href="ssm2.gmfgraph#innerAction"/>
-    </ownedChild>
-  </nodes>
-  <nodes>
-    <containmentFeature
-        href="ssm2.ecore#//State/exitActions"/>
-    <childrenFeature
-        href="ssm2.ecore#//State/exitActions"/>
-    <ownedChild>
-      <domainMetaElement
-          href="ssm2.ecore#//Action"/>
-      <labelMappings
-          xsi:type="gmfmap:FeatureLabelMapping">
-        <diagramLabel
-            href="ssm2.gmfgraph#ExitActionsTriggersAndEffects"/>
-        <features
-            href="ssm2.ecore#//Action/triggersAndEffects"/>
-      </labelMappings>
-      <diagramNode
-          href="ssm2.gmfgraph#exitAction"/>
+      <compartments
+          children="//@nodes.0/@ownedChild/@children.0">
+        <compartment
+            href="ssm2.gmfgraph#RegionCompartment"/>
+      </compartments>
     </ownedChild>
   </nodes>
   <links>
@@ -220,7 +193,7 @@
     <domainModel
         href="ssm2.ecore#/"/>
     <domainMetaElement
-        href="ssm2.ecore#//State"/>
+        href="ssm2.ecore#//Region"/>
     <palette
         href="ssm2.gmftool#//@palette"/>
   </diagram>

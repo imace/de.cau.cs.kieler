@@ -33,6 +33,14 @@
         <smallIcon
             xsi:type="gmftool:DefaultImage"/>
       </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="Signal"
+          description="Create new Signal"/>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="Action"
+          description="Create new Action"/>
     </tools>
   </palette>
 </gmftool:ToolRegistry>

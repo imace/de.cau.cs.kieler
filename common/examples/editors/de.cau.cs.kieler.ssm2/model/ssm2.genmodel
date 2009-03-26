@@ -79,14 +79,10 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ssm2.ecore#//Transition/history"/>
     </genClasses>
     <genClasses ecoreClass="ssm2.ecore#//Expression">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ssm2.ecore#//Expression/subExpressions"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ssm2.ecore#//Expression/signal"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ssm2.ecore#//Expression/operator"/>
-      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ssm2.ecore#//Expression/parentExpression"/>
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ssm2.ecore#//Expression/parentAction"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ssm2.ecore#//Expression/variable"/>
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ssm2.ecore#//Expression/parentEmisson"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ssm2.ecore#//Expression/assignment"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ssm2.ecore#//Expression/parentAssignment"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ssm2.ecore#//Expression/parentExpression"/>
     </genClasses>
     <genClasses ecoreClass="ssm2.ecore#//SignalRenaming">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ssm2.ecore#//SignalRenaming/oldSignal"/>
@@ -112,7 +108,8 @@
     </genClasses>
     <genClasses ecoreClass="ssm2.ecore#//Assignment">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ssm2.ecore#//Assignment/variable"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ssm2.ecore#//Assignment/parentExpression"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ssm2.ecore#//Assignment/parentAction"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ssm2.ecore#//Assignment/expression"/>
     </genClasses>
     <genClasses ecoreClass="ssm2.ecore#//Variable">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ssm2.ecore#//Variable/vname"/>
@@ -122,6 +119,10 @@
     <genClasses ecoreClass="ssm2.ecore#//Region">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ssm2.ecore#//Region/innerStates"/>
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ssm2.ecore#//Region/parentState"/>
+    </genClasses>
+    <genClasses ecoreClass="ssm2.ecore#//ComplexExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ssm2.ecore#//ComplexExpression/operator"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ssm2.ecore#//ComplexExpression/subExpressions"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>
