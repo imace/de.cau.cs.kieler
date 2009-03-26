@@ -78,12 +78,20 @@ public class XTextParseCommand extends AbstractTransactionalCommand {
 		boolean oneEqual = false;
 		for (Signal s1 : getSignals(newAction)) {
 			oneEqual = false;
-			EList<Signal> validSignals;
+			EList<Signal> validSignals = new BasicEList();
 			if (action instanceof Transition) {
-				validSignals = ((State) ((Region) ((State) ((Transition) action).getSourceState()).getParentRegion()).getParentState()).getSignals();
+				try {
+					validSignals = ((State) ((Region) ((State) ((Transition) action).getSourceState()).getParentRegion()).getParentState()).getSignals();
+				} catch (Exception e) {
+					return false;
+				}
 			}
 			else {
-				validSignals = action.getParentStateEntryAction().getSignals();
+				try {
+					validSignals = action.getParentStateEntryAction().getSignals();
+				} catch (Exception e) {
+					return false;
+				}
 			}
 			for (Signal s2 : validSignals) {
 				if (s1.getName().equals(s2.getName())) {
@@ -102,9 +110,15 @@ public class XTextParseCommand extends AbstractTransactionalCommand {
 	
 	private EList<Signal> getSignals(Action action) {
 		EList<Signal> signals = getSignals(action.getTrigger());
+		if (signals == null) {
+			signals = new BasicEList<Signal>();
+		}
 		EList<Signal> tempSignals;
 		for (Emission e : action.getEmissions()) {
 			tempSignals = getSignals(e);
+			if (tempSignals == null) {
+				tempSignals = new BasicEList<Signal>();
+			}
 			for (Signal s : tempSignals) {
 				if (!signals.contains(s)) {
 					signals.add(s);
@@ -113,6 +127,9 @@ public class XTextParseCommand extends AbstractTransactionalCommand {
 		}
 		for (Assignment a : action.getAssignments()) {
 			tempSignals = getSignals(a);
+			if (tempSignals == null) {
+				tempSignals = new BasicEList<Signal>();
+			}
 			for (Signal s : tempSignals) {
 				if (!signals.contains(s)) {
 					signals.add(s);
