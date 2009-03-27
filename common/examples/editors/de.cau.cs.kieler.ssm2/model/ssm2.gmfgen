@@ -351,7 +351,6 @@
         canonicalEditPolicyClassName="StateStateCompartmentCanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.2 //@diagram/@childNodes.3 //@diagram/@childNodes.4 //@diagram/@childNodes.5"
         title="StateCompartment"
-        canCollapse="false"
         needsTitle="false"
         node="//@diagram/@topLevelNodes.0">
       <diagramRunTimeClass
@@ -370,7 +369,6 @@
         canonicalEditPolicyClassName="StateRegionCompartmentCanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.0"
         title="RegionCompartment"
-        canCollapse="false"
         needsTitle="false"
         node="//@diagram/@topLevelNodes.0"
         listLayout="false">
@@ -391,7 +389,6 @@
         canonicalEditPolicyClassName="RegionStateCompartmentCanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.1"
         title="StateCompartment"
-        canCollapse="false"
         needsTitle="false"
         node="//@diagram/@childNodes.0"
         listLayout="false">
@@ -411,7 +408,6 @@
         canonicalEditPolicyClassName="StateStateCompartment2CanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.2 //@diagram/@childNodes.3 //@diagram/@childNodes.4 //@diagram/@childNodes.5"
         title="StateCompartment"
-        canCollapse="false"
         needsTitle="false"
         node="//@diagram/@childNodes.1">
       <diagramRunTimeClass
@@ -430,7 +426,6 @@
         canonicalEditPolicyClassName="StateRegionCompartment2CanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.0"
         title="RegionCompartment"
-        canCollapse="false"
         needsTitle="false"
         node="//@diagram/@childNodes.1"
         listLayout="false">
