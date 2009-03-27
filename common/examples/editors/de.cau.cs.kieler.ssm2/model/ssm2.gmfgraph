@@ -17,7 +17,7 @@
         <children
             xsi:type="gmfgraph:Label"
             name="StateNameFigure"
-            text="&lt;...>">
+            text="">
           <font
               xsi:type="gmfgraph:BasicFont"
               height="10"
@@ -41,7 +41,7 @@
         <children
             xsi:type="gmfgraph:Label"
             name="TransitionTriggersAndEffectsFigure"
-            text="&lt;...>">
+            text="">
           <font
               xsi:type="gmfgraph:BasicFont"
               height="10"
@@ -89,14 +89,12 @@
   <labels
       name="StateName"
       figure="StateFigure"
-      elementIcon="false"
       accessor="//@figures.0/@descriptors.0/@accessors.0"/>
   <labels
       name="SignalName"/>
   <labels
       name="TransitionTriggersAndEffects"
       figure="TransitionFigure"
-      elementIcon="false"
       accessor="//@figures.0/@descriptors.1/@accessors.0"/>
   <labels
       name="EntryActionTriggersAndEffects"/>
