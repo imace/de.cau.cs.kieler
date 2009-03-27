@@ -57,9 +57,7 @@ public class AttributeAwareTransitionFigure extends AttributeAwareConnection {
 		circleDecoration.setBackgroundColor(ColorConstants.red);
 		PointList circleDecorationPoints = new PointList();
 		circleDecorationPoints.addPoint(1, 2);
-		circleDecorationPoints.addPoint(-1, 2);
 		circleDecorationPoints.addPoint(-1, -2);
-		circleDecorationPoints.addPoint(1, -2);
 		circleDecoration.setTemplate(circleDecorationPoints);
 		return circleDecoration;
 	}
