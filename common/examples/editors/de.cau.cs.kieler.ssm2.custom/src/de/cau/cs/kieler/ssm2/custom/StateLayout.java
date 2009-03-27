@@ -5,8 +5,10 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.Figure;
 import org.eclipse.draw2d.IFigure;
+import org.eclipse.draw2d.LineBorder;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.emf.ecore.EObject;
@@ -44,45 +46,52 @@ public class StateLayout extends ConstrainedToolbarLayout {
 	}
 	
 	private void complexLayout(IFigure parent, List children, int x, int y, int height, int width) {
-		String name;
-		int prefWidth = 0;
-		int prefHeight = 0;
+		int numChildren = children.size();
+		int totalWidth = 0;
+		int totalHeight = 0;
+		int[] prefWidths = new int[numChildren];
+		int[] prefHeights = new int[numChildren];
 		Rectangle newBounds = new Rectangle();
-		for (Object child : children) {
-			if (child instanceof WrappingLabel) {
+		for (int i = 0; i < numChildren; i++) {
+			Object child = children.get(i);
+			if (child instanceof IFigure) {
 				IFigure childFigure = (IFigure) child;
 				int newWidth = childFigure.getPreferredSize().width;
 				int newHeight = childFigure.getPreferredSize().height;
-				if (newWidth > prefWidth) {
-					prefWidth = newWidth; 
-				}
-				if (newHeight > prefHeight) {
-					prefHeight = newHeight; 
+				prefWidths[i] = newWidth;
+				prefHeights[i] = newHeight;
+				totalHeight += newHeight;
+				if (newWidth > totalWidth) {
+					totalWidth = newWidth;
 				}
 			}
 		}
 
-		for (Object child : children) {
+		for (int i = 0; i < numChildren; i++) {
+			Object child = children.get(i);
 			if (child instanceof Figure) {
 				IFigure childFigure = (IFigure) child;
 				if (child instanceof WrappingLabel) {
-					prefWidth = childFigure.getPreferredSize().width;
-					prefHeight = childFigure.getPreferredSize().height;
-					newBounds.x = x + (width / 2) - (prefWidth / 2);
+					newBounds.x = x + (width - prefWidths[i]) / 2;
 					newBounds.y = y;
-					newBounds.width = prefWidth;
-					newBounds.height = prefHeight;
+					newBounds.width = prefWidths[i];
+					newBounds.height = prefHeights[i];
 				}
 				else if (child instanceof ResizableCompartmentFigure) {
-					name = ((ResizableCompartmentFigure) child).getCompartmentTitle();
-					int offsetY = prefHeight;
-					if (name.equals("RegionCompartment")) {
-						offsetY += (height - prefHeight) / 2;
+					int offsetY = 0;
+					for (int j = 0; j < i; j++) {
+						Object child2 = children.get(j);
+						if (child2 instanceof IFigure) {
+							offsetY += ((IFigure) child2).getPreferredSize().height;
+						}
 					}
-						newBounds.x = x;
-						newBounds.y = y + offsetY;
-						newBounds.width = width;
-						newBounds.height = (height - prefHeight) / 2;
+					newBounds.x = x;
+					newBounds.y = y + offsetY;
+					newBounds.width = width;
+					newBounds.height = totalHeight - offsetY;
+					
+					((LineBorder) ((ResizableCompartmentFigure) child).getBorder()).setColor(ColorConstants.black);
+					
 				}
 				childFigure.setBounds(transposer.t(newBounds));
 			}
@@ -129,6 +138,8 @@ public class StateLayout extends ConstrainedToolbarLayout {
 						newBounds.y = y + offsetY;
 						newBounds.width = width;
 						newBounds.height = (height - prefHeight) / 2;
+						
+						((LineBorder) ((ResizableCompartmentFigure) child).getBorder()).setColor(ColorConstants.white);
 				}
 				childFigure.setBounds(transposer.t(newBounds));
 			}
@@ -182,7 +193,7 @@ public class StateLayout extends ConstrainedToolbarLayout {
 		return new Dimension(minWidth, minHeight);
 	}
 	
-	@Override
+/*	@Override
 	public Dimension calculatePreferredSize(IFigure container, int hint, int hint2) {
 		
 		int minWidth = 0;
@@ -199,5 +210,5 @@ public class StateLayout extends ConstrainedToolbarLayout {
 		}
 		return new Dimension(minWidth, minHeight);
 	}
-	
+*/	
 }
