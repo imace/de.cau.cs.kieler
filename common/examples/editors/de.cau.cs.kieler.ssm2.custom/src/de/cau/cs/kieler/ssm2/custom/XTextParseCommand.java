@@ -48,7 +48,18 @@ public class XTextParseCommand extends AbstractTransactionalCommand {
 				Action newAction = (Action) node.getModelElement();
 				Action action = (Action) (((EObjectAdapter)element).getRealObject());
 				
+				if (newAction == null) {
+					action.setTrigger(null);
+					action.getEmissions().clear();
+					action.getAssignments().clear();
+					action.setTriggersAndEffects("");
+					return CommandResult.newOKCommandResult();
+				}
+				
 				if (!checkSignals(action, newAction)) {
+					action.setTrigger(null);
+					action.getEmissions().clear();
+					action.getAssignments().clear();
 					action.setTriggersAndEffects("");
 					return CommandResult.newErrorCommandResult("The action contains invalid signals!");					
 				}
@@ -90,7 +101,15 @@ public class XTextParseCommand extends AbstractTransactionalCommand {
 				try {
 					validSignals = action.getParentStateEntryAction().getSignals();
 				} catch (Exception e) {
-					return false;
+					try {
+						validSignals = action.getParentStateInnerAction().getSignals();
+					} catch (Exception f) {
+						try {
+							validSignals = action.getParentStateExitAction().getSignals();
+						} catch (Exception g) {
+							return false;
+						}
+					}
 				}
 			}
 			for (Signal s2 : validSignals) {

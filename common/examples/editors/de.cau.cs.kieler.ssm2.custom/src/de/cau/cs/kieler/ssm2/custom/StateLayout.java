@@ -90,8 +90,9 @@ public class StateLayout extends ConstrainedToolbarLayout {
 					newBounds.width = width;
 					newBounds.height = totalHeight - offsetY;
 					
-					((LineBorder) ((ResizableCompartmentFigure) child).getBorder()).setColor(ColorConstants.black);
-					
+					//((LineBorder) ((ResizableCompartmentFigure) child).getBorder()).setColor(ColorConstants.black);
+					//((LineBorder) ((ResizableCompartmentFigure) child).getBorder()).setWidth(2);
+					//((ResizableCompartmentFigure) child).setBorder(new LineBorder(ColorConstants.black, 2));
 				}
 				childFigure.setBounds(transposer.t(newBounds));
 			}
@@ -139,7 +140,9 @@ public class StateLayout extends ConstrainedToolbarLayout {
 						newBounds.width = width;
 						newBounds.height = (height - prefHeight) / 2;
 						
-						((LineBorder) ((ResizableCompartmentFigure) child).getBorder()).setColor(ColorConstants.white);
+						//((LineBorder) ((ResizableCompartmentFigure) child).getBorder()).setColor(ColorConstants.white);
+						//((LineBorder) ((ResizableCompartmentFigure) child).getBorder()).setWidth(0);
+						//((ResizableCompartmentFigure) child).setBorder(new InvisibleBorder(ColorConstants.black, 2));
 				}
 				childFigure.setBounds(transposer.t(newBounds));
 			}
@@ -166,7 +169,8 @@ public class StateLayout extends ConstrainedToolbarLayout {
 	}
 
 	private boolean isSimple(State state) {
-		if ((state.getRegions() == null || state.getRegions().size() == 0) 
+		if ((state.getRegions() == null || state.getRegions().size() == 0)
+				&& (state.getSignals() == null || state.getSignals().size() == 0)
 				&& (state.getEntryActions() == null || state.getEntryActions().size() == 0)
 				&& (state.getInnerActions() == null || state.getInnerActions().size() == 0)
 				&& (state.getExitActions() == null || state.getExitActions().size() == 0)) {

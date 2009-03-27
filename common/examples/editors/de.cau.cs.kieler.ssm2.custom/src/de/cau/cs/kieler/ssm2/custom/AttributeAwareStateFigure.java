@@ -68,21 +68,37 @@ public class AttributeAwareStateFigure extends AttributeAwareFigure {
 		Condition flagFinal = new Condition(Ssm2Package.eINSTANCE.getState_StateFlag(), StateFlag.FINAL);
 		
 		Condition noChildren = new SizeCondition(Ssm2Package.eINSTANCE.getState_Regions(), new Integer(0));
+		Condition noSignals = new SizeCondition(Ssm2Package.eINSTANCE.getState_Signals(), new Integer(0));
+		Condition noEntryActions = new SizeCondition(Ssm2Package.eINSTANCE.getState_EntryActions(), new Integer(0));
+		Condition noInnerActions = new SizeCondition(Ssm2Package.eINSTANCE.getState_InnerActions(), new Integer(0));
+		Condition noExitActions = new SizeCondition(Ssm2Package.eINSTANCE.getState_ExitActions(), new Integer(0));
 		
 		List<Condition> normalNCSF = new LinkedList<Condition>();
 		normalNCSF.add(kindNormal);
 		normalNCSF.add(flagNormal);
 		normalNCSF.add(noChildren);
+		normalNCSF.add(noSignals);
+		normalNCSF.add(noEntryActions);
+		normalNCSF.add(noInnerActions);
+		normalNCSF.add(noExitActions);
 		
 		List<Condition> initialNCSF = new LinkedList<Condition>();
 		initialNCSF.add(kindNormal);
 		initialNCSF.add(flagInitial);
 		initialNCSF.add(noChildren);
+		initialNCSF.add(noSignals);
+		initialNCSF.add(noEntryActions);
+		initialNCSF.add(noInnerActions);
+		initialNCSF.add(noExitActions);
 		
 		List<Condition> finalNCSF = new LinkedList<Condition>();
 		finalNCSF.add(kindNormal);
 		finalNCSF.add(flagFinal);
 		finalNCSF.add(noChildren);
+		finalNCSF.add(noSignals);
+		finalNCSF.add(noEntryActions);
+		finalNCSF.add(noInnerActions);
+		finalNCSF.add(noExitActions);
 		
 		List<Condition> initialSF = new LinkedList<Condition>();
 		initialSF.add(flagInitial);
