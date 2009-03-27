@@ -51,15 +51,15 @@ public class AttributeAwareTransitionFigure extends AttributeAwareConnection {
 	}
 	
 	private RotatableDecoration createStrongAbortionDecoration() {
-		PolygonDecoration circleDecoration = new PolygonDecoration();
+		PolygonDecoration circleDecoration = new CircleDecoration();
 		circleDecoration.setLineWidth(2);
 		circleDecoration.setForegroundColor(ColorConstants.black);
 		circleDecoration.setBackgroundColor(ColorConstants.red);
 		PointList circleDecorationPoints = new PointList();
-		circleDecorationPoints.addPoint(0, 2);
-		circleDecorationPoints.addPoint(-2, 2);
-		circleDecorationPoints.addPoint(-2, -2);
-		circleDecorationPoints.addPoint(0, -2);
+		circleDecorationPoints.addPoint(1, 2);
+		circleDecorationPoints.addPoint(-1, 2);
+		circleDecorationPoints.addPoint(-1, -2);
+		circleDecorationPoints.addPoint(1, -2);
 		circleDecoration.setTemplate(circleDecorationPoints);
 		return circleDecoration;
 	}
