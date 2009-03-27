@@ -299,8 +299,7 @@ public class KimlGenericLayoutGraphBuilder extends
 			layoutEdge2EditPart.put(edge, connection);
 
 			/*
-			 * Process the label, at the moment 3 are hard coded. Actually no
-			 * possibility to get the location of the head label from GraphViz.
+			 * Process the label, at the moment 3 are hard coded.
 			 * 
 			 * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 			 * SOURCE and TARGET is exchanged when defining it in the.gmfgen

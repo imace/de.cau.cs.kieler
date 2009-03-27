@@ -23,217 +23,217 @@ import org.eclipse.emf.common.util.Enumerator;
  */
 public enum KPortType implements Enumerator {
 	/**
-	 * The '<em><b>DEFAULT</b></em>' literal object.
-	 * <!-- begin-user-doc -->
+     * The '<em><b>DEFAULT</b></em>' literal object.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #DEFAULT_VALUE
-	 * @generated
-	 * @ordered
-	 */
+     * @see #DEFAULT_VALUE
+     * @generated
+     * @ordered
+     */
 	DEFAULT(0, "DEFAULT", "Default"),
 
 	/**
-	 * The '<em><b>INPUT</b></em>' literal object.
-	 * <!-- begin-user-doc -->
+     * The '<em><b>INPUT</b></em>' literal object.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #INPUT_VALUE
-	 * @generated
-	 * @ordered
-	 */
+     * @see #INPUT_VALUE
+     * @generated
+     * @ordered
+     */
 	INPUT(1, "INPUT", "Input"),
 
 	/**
-	 * The '<em><b>OUTPUT</b></em>' literal object.
-	 * <!-- begin-user-doc -->
+     * The '<em><b>OUTPUT</b></em>' literal object.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #OUTPUT_VALUE
-	 * @generated
-	 * @ordered
-	 */
+     * @see #OUTPUT_VALUE
+     * @generated
+     * @ordered
+     */
 	OUTPUT(2, "OUTPUT", "Output");
 
 	/**
-	 * The '<em><b>DEFAULT</b></em>' literal value.
-	 * <!-- begin-user-doc -->
+     * The '<em><b>DEFAULT</b></em>' literal value.
+     * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of '<em><b>DEFAULT</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #DEFAULT
-	 * @model literal="Default"
-	 * @generated
-	 * @ordered
-	 */
+     * @see #DEFAULT
+     * @model literal="Default"
+     * @generated
+     * @ordered
+     */
 	public static final int DEFAULT_VALUE = 0;
 
 	/**
-	 * The '<em><b>INPUT</b></em>' literal value.
-	 * <!-- begin-user-doc -->
+     * The '<em><b>INPUT</b></em>' literal value.
+     * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of '<em><b>INPUT</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #INPUT
-	 * @model literal="Input"
-	 * @generated
-	 * @ordered
-	 */
+     * @see #INPUT
+     * @model literal="Input"
+     * @generated
+     * @ordered
+     */
 	public static final int INPUT_VALUE = 1;
 
 	/**
-	 * The '<em><b>OUTPUT</b></em>' literal value.
-	 * <!-- begin-user-doc -->
+     * The '<em><b>OUTPUT</b></em>' literal value.
+     * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of '<em><b>OUTPUT</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #OUTPUT
-	 * @model literal="Output"
-	 * @generated
-	 * @ordered
-	 */
+     * @see #OUTPUT
+     * @model literal="Output"
+     * @generated
+     * @ordered
+     */
 	public static final int OUTPUT_VALUE = 2;
 
 	/**
-	 * An array of all the '<em><b>KPort Type</b></em>' enumerators.
-	 * <!-- begin-user-doc -->
+     * An array of all the '<em><b>KPort Type</b></em>' enumerators.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	private static final KPortType[] VALUES_ARRAY =
 		new KPortType[] {
-			DEFAULT,
-			INPUT,
-			OUTPUT,
-		};
+            DEFAULT,
+            INPUT,
+            OUTPUT,
+        };
 
 	/**
-	 * A public read-only list of all the '<em><b>KPort Type</b></em>' enumerators.
-	 * <!-- begin-user-doc -->
+     * A public read-only list of all the '<em><b>KPort Type</b></em>' enumerators.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public static final List<KPortType> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
 	/**
-	 * Returns the '<em><b>KPort Type</b></em>' literal with the specified literal value.
-	 * <!-- begin-user-doc -->
+     * Returns the '<em><b>KPort Type</b></em>' literal with the specified literal value.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public static KPortType get(String literal) {
-		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			KPortType result = VALUES_ARRAY[i];
-			if (result.toString().equals(literal)) {
-				return result;
-			}
-		}
-		return null;
-	}
+        for (int i = 0; i < VALUES_ARRAY.length; ++i) {
+            KPortType result = VALUES_ARRAY[i];
+            if (result.toString().equals(literal)) {
+                return result;
+            }
+        }
+        return null;
+    }
 
 	/**
-	 * Returns the '<em><b>KPort Type</b></em>' literal with the specified name.
-	 * <!-- begin-user-doc -->
+     * Returns the '<em><b>KPort Type</b></em>' literal with the specified name.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public static KPortType getByName(String name) {
-		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			KPortType result = VALUES_ARRAY[i];
-			if (result.getName().equals(name)) {
-				return result;
-			}
-		}
-		return null;
-	}
+        for (int i = 0; i < VALUES_ARRAY.length; ++i) {
+            KPortType result = VALUES_ARRAY[i];
+            if (result.getName().equals(name)) {
+                return result;
+            }
+        }
+        return null;
+    }
 
 	/**
-	 * Returns the '<em><b>KPort Type</b></em>' literal with the specified integer value.
-	 * <!-- begin-user-doc -->
+     * Returns the '<em><b>KPort Type</b></em>' literal with the specified integer value.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public static KPortType get(int value) {
-		switch (value) {
-			case DEFAULT_VALUE: return DEFAULT;
-			case INPUT_VALUE: return INPUT;
-			case OUTPUT_VALUE: return OUTPUT;
-		}
-		return null;
-	}
+        switch (value) {
+            case DEFAULT_VALUE: return DEFAULT;
+            case INPUT_VALUE: return INPUT;
+            case OUTPUT_VALUE: return OUTPUT;
+        }
+        return null;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	private final int value;
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	private final String name;
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	private final String literal;
 
 	/**
-	 * Only this class can construct instances.
-	 * <!-- begin-user-doc -->
+     * Only this class can construct instances.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	private KPortType(int value, String name, String literal) {
-		this.value = value;
-		this.name = name;
-		this.literal = literal;
-	}
+        this.value = value;
+        this.name = name;
+        this.literal = literal;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public int getValue() {
-	  return value;
-	}
+      return value;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public String getName() {
-	  return name;
-	}
+      return name;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public String getLiteral() {
-	  return literal;
-	}
+      return literal;
+    }
 
 	/**
-	 * Returns the literal value of the enumerator, which is its string representation.
-	 * <!-- begin-user-doc -->
+     * Returns the literal value of the enumerator, which is its string representation.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public String toString() {
-		return literal;
-	}
+        return literal;
+    }
 	
 } //KPortType

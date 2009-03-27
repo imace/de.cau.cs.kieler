@@ -41,303 +41,303 @@ import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
  */
 public class KNodeLayoutImpl extends KShapeLayoutImpl implements KNodeLayout {
 	/**
-	 * The default value of the '{@link #getLayoutType() <em>Layout Type</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * The default value of the '{@link #getLayoutType() <em>Layout Type</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getLayoutType()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getLayoutType()
+     * @generated
+     * @ordered
+     */
 	protected static final KLayoutType LAYOUT_TYPE_EDEFAULT = KLayoutType.DEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getLayoutType() <em>Layout Type</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * The cached value of the '{@link #getLayoutType() <em>Layout Type</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getLayoutType()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getLayoutType()
+     * @generated
+     * @ordered
+     */
 	protected KLayoutType layoutType = LAYOUT_TYPE_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getLayoutOptions() <em>Layout Options</em>}' attribute list.
-	 * <!-- begin-user-doc -->
+     * The cached value of the '{@link #getLayoutOptions() <em>Layout Options</em>}' attribute list.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getLayoutOptions()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getLayoutOptions()
+     * @generated
+     * @ordered
+     */
 	protected EList<KLayoutOption> layoutOptions;
 
 	/**
-	 * The default value of the '{@link #getLayouterName() <em>Layouter Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * The default value of the '{@link #getLayouterName() <em>Layouter Name</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getLayouterName()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getLayouterName()
+     * @generated
+     * @ordered
+     */
 	protected static final String LAYOUTER_NAME_EDEFAULT = "\"\"";
 
 	/**
-	 * The cached value of the '{@link #getLayouterName() <em>Layouter Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * The cached value of the '{@link #getLayouterName() <em>Layouter Name</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getLayouterName()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getLayouterName()
+     * @generated
+     * @ordered
+     */
 	protected String layouterName = LAYOUTER_NAME_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getInsets() <em>Insets</em>}' containment reference.
-	 * <!-- begin-user-doc -->
+     * The cached value of the '{@link #getInsets() <em>Insets</em>}' containment reference.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getInsets()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getInsets()
+     * @generated
+     * @ordered
+     */
 	protected KInsets insets;
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	protected KNodeLayoutImpl() {
-		super();
-	}
+        super();
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	protected EClass eStaticClass() {
-		return KimlLayoutGraphPackage.Literals.KNODE_LAYOUT;
-	}
+        return KimlLayoutGraphPackage.Literals.KNODE_LAYOUT;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public KLayoutType getLayoutType() {
-		return layoutType;
-	}
+        return layoutType;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public void setLayoutType(KLayoutType newLayoutType) {
-		KLayoutType oldLayoutType = layoutType;
-		layoutType = newLayoutType == null ? LAYOUT_TYPE_EDEFAULT : newLayoutType;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KNODE_LAYOUT__LAYOUT_TYPE, oldLayoutType, layoutType));
-	}
+        KLayoutType oldLayoutType = layoutType;
+        layoutType = newLayoutType == null ? LAYOUT_TYPE_EDEFAULT : newLayoutType;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KNODE_LAYOUT__LAYOUT_TYPE, oldLayoutType, layoutType));
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public EList<KLayoutOption> getLayoutOptions() {
-		if (layoutOptions == null) {
-			layoutOptions = new EDataTypeUniqueEList<KLayoutOption>(KLayoutOption.class, this, KimlLayoutGraphPackage.KNODE_LAYOUT__LAYOUT_OPTIONS);
-		}
-		return layoutOptions;
-	}
+        if (layoutOptions == null) {
+            layoutOptions = new EDataTypeUniqueEList<KLayoutOption>(KLayoutOption.class, this, KimlLayoutGraphPackage.KNODE_LAYOUT__LAYOUT_OPTIONS);
+        }
+        return layoutOptions;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public String getLayouterName() {
-		return layouterName;
-	}
+        return layouterName;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public void setLayouterName(String newLayouterName) {
-		String oldLayouterName = layouterName;
-		layouterName = newLayouterName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KNODE_LAYOUT__LAYOUTER_NAME, oldLayouterName, layouterName));
-	}
+        String oldLayouterName = layouterName;
+        layouterName = newLayouterName;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KNODE_LAYOUT__LAYOUTER_NAME, oldLayouterName, layouterName));
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public KInsets getInsets() {
-		return insets;
-	}
+        return insets;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public NotificationChain basicSetInsets(KInsets newInsets, NotificationChain msgs) {
-		KInsets oldInsets = insets;
-		insets = newInsets;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KNODE_LAYOUT__INSETS, oldInsets, newInsets);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
+        KInsets oldInsets = insets;
+        insets = newInsets;
+        if (eNotificationRequired()) {
+            ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KNODE_LAYOUT__INSETS, oldInsets, newInsets);
+            if (msgs == null) msgs = notification; else msgs.add(notification);
+        }
+        return msgs;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public void setInsets(KInsets newInsets) {
-		if (newInsets != insets) {
-			NotificationChain msgs = null;
-			if (insets != null)
-				msgs = ((InternalEObject)insets).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - KimlLayoutGraphPackage.KNODE_LAYOUT__INSETS, null, msgs);
-			if (newInsets != null)
-				msgs = ((InternalEObject)newInsets).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - KimlLayoutGraphPackage.KNODE_LAYOUT__INSETS, null, msgs);
-			msgs = basicSetInsets(newInsets, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KNODE_LAYOUT__INSETS, newInsets, newInsets));
-	}
+        if (newInsets != insets) {
+            NotificationChain msgs = null;
+            if (insets != null)
+                msgs = ((InternalEObject)insets).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - KimlLayoutGraphPackage.KNODE_LAYOUT__INSETS, null, msgs);
+            if (newInsets != null)
+                msgs = ((InternalEObject)newInsets).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - KimlLayoutGraphPackage.KNODE_LAYOUT__INSETS, null, msgs);
+            msgs = basicSetInsets(newInsets, msgs);
+            if (msgs != null) msgs.dispatch();
+        }
+        else if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KNODE_LAYOUT__INSETS, newInsets, newInsets));
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case KimlLayoutGraphPackage.KNODE_LAYOUT__INSETS:
-				return basicSetInsets(null, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
+        switch (featureID) {
+            case KimlLayoutGraphPackage.KNODE_LAYOUT__INSETS:
+                return basicSetInsets(null, msgs);
+        }
+        return super.eInverseRemove(otherEnd, featureID, msgs);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case KimlLayoutGraphPackage.KNODE_LAYOUT__LAYOUT_TYPE:
-				return getLayoutType();
-			case KimlLayoutGraphPackage.KNODE_LAYOUT__LAYOUT_OPTIONS:
-				return getLayoutOptions();
-			case KimlLayoutGraphPackage.KNODE_LAYOUT__LAYOUTER_NAME:
-				return getLayouterName();
-			case KimlLayoutGraphPackage.KNODE_LAYOUT__INSETS:
-				return getInsets();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+        switch (featureID) {
+            case KimlLayoutGraphPackage.KNODE_LAYOUT__LAYOUT_TYPE:
+                return getLayoutType();
+            case KimlLayoutGraphPackage.KNODE_LAYOUT__LAYOUT_OPTIONS:
+                return getLayoutOptions();
+            case KimlLayoutGraphPackage.KNODE_LAYOUT__LAYOUTER_NAME:
+                return getLayouterName();
+            case KimlLayoutGraphPackage.KNODE_LAYOUT__INSETS:
+                return getInsets();
+        }
+        return super.eGet(featureID, resolve, coreType);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case KimlLayoutGraphPackage.KNODE_LAYOUT__LAYOUT_TYPE:
-				setLayoutType((KLayoutType)newValue);
-				return;
-			case KimlLayoutGraphPackage.KNODE_LAYOUT__LAYOUT_OPTIONS:
-				getLayoutOptions().clear();
-				getLayoutOptions().addAll((Collection<? extends KLayoutOption>)newValue);
-				return;
-			case KimlLayoutGraphPackage.KNODE_LAYOUT__LAYOUTER_NAME:
-				setLayouterName((String)newValue);
-				return;
-			case KimlLayoutGraphPackage.KNODE_LAYOUT__INSETS:
-				setInsets((KInsets)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+        switch (featureID) {
+            case KimlLayoutGraphPackage.KNODE_LAYOUT__LAYOUT_TYPE:
+                setLayoutType((KLayoutType)newValue);
+                return;
+            case KimlLayoutGraphPackage.KNODE_LAYOUT__LAYOUT_OPTIONS:
+                getLayoutOptions().clear();
+                getLayoutOptions().addAll((Collection<? extends KLayoutOption>)newValue);
+                return;
+            case KimlLayoutGraphPackage.KNODE_LAYOUT__LAYOUTER_NAME:
+                setLayouterName((String)newValue);
+                return;
+            case KimlLayoutGraphPackage.KNODE_LAYOUT__INSETS:
+                setInsets((KInsets)newValue);
+                return;
+        }
+        super.eSet(featureID, newValue);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case KimlLayoutGraphPackage.KNODE_LAYOUT__LAYOUT_TYPE:
-				setLayoutType(LAYOUT_TYPE_EDEFAULT);
-				return;
-			case KimlLayoutGraphPackage.KNODE_LAYOUT__LAYOUT_OPTIONS:
-				getLayoutOptions().clear();
-				return;
-			case KimlLayoutGraphPackage.KNODE_LAYOUT__LAYOUTER_NAME:
-				setLayouterName(LAYOUTER_NAME_EDEFAULT);
-				return;
-			case KimlLayoutGraphPackage.KNODE_LAYOUT__INSETS:
-				setInsets((KInsets)null);
-				return;
-		}
-		super.eUnset(featureID);
-	}
+        switch (featureID) {
+            case KimlLayoutGraphPackage.KNODE_LAYOUT__LAYOUT_TYPE:
+                setLayoutType(LAYOUT_TYPE_EDEFAULT);
+                return;
+            case KimlLayoutGraphPackage.KNODE_LAYOUT__LAYOUT_OPTIONS:
+                getLayoutOptions().clear();
+                return;
+            case KimlLayoutGraphPackage.KNODE_LAYOUT__LAYOUTER_NAME:
+                setLayouterName(LAYOUTER_NAME_EDEFAULT);
+                return;
+            case KimlLayoutGraphPackage.KNODE_LAYOUT__INSETS:
+                setInsets((KInsets)null);
+                return;
+        }
+        super.eUnset(featureID);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case KimlLayoutGraphPackage.KNODE_LAYOUT__LAYOUT_TYPE:
-				return layoutType != LAYOUT_TYPE_EDEFAULT;
-			case KimlLayoutGraphPackage.KNODE_LAYOUT__LAYOUT_OPTIONS:
-				return layoutOptions != null && !layoutOptions.isEmpty();
-			case KimlLayoutGraphPackage.KNODE_LAYOUT__LAYOUTER_NAME:
-				return LAYOUTER_NAME_EDEFAULT == null ? layouterName != null : !LAYOUTER_NAME_EDEFAULT.equals(layouterName);
-			case KimlLayoutGraphPackage.KNODE_LAYOUT__INSETS:
-				return insets != null;
-		}
-		return super.eIsSet(featureID);
-	}
+        switch (featureID) {
+            case KimlLayoutGraphPackage.KNODE_LAYOUT__LAYOUT_TYPE:
+                return layoutType != LAYOUT_TYPE_EDEFAULT;
+            case KimlLayoutGraphPackage.KNODE_LAYOUT__LAYOUT_OPTIONS:
+                return layoutOptions != null && !layoutOptions.isEmpty();
+            case KimlLayoutGraphPackage.KNODE_LAYOUT__LAYOUTER_NAME:
+                return LAYOUTER_NAME_EDEFAULT == null ? layouterName != null : !LAYOUTER_NAME_EDEFAULT.equals(layouterName);
+            case KimlLayoutGraphPackage.KNODE_LAYOUT__INSETS:
+                return insets != null;
+        }
+        return super.eIsSet(featureID);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+        if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (layoutType: ");
-		result.append(layoutType);
-		result.append(", layoutOptions: ");
-		result.append(layoutOptions);
-		result.append(", layouterName: ");
-		result.append(layouterName);
-		result.append(')');
-		return result.toString();
-	}
+        StringBuffer result = new StringBuffer(super.toString());
+        result.append(" (layoutType: ");
+        result.append(layoutType);
+        result.append(", layoutOptions: ");
+        result.append(layoutOptions);
+        result.append(", layouterName: ");
+        result.append(layouterName);
+        result.append(')');
+        return result.toString();
+    }
 
 } //KNodeLayoutImpl

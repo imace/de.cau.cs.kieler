@@ -26,29 +26,29 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface KLabel extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Text</b></em>' attribute.
-	 * <!-- begin-user-doc -->
+     * Returns the value of the '<em><b>Text</b></em>' attribute.
+     * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Text</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Text</em>' attribute.
-	 * @see #setText(String)
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKLabel_Text()
-	 * @model required="true"
-	 * @generated
-	 */
+     * @return the value of the '<em>Text</em>' attribute.
+     * @see #setText(String)
+     * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKLabel_Text()
+     * @model required="true"
+     * @generated
+     */
 	String getText();
 
 	/**
-	 * Sets the value of the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLabel#getText <em>Text</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * Sets the value of the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLabel#getText <em>Text</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Text</em>' attribute.
-	 * @see #getText()
-	 * @generated
-	 */
+     * @param value the new value of the '<em>Text</em>' attribute.
+     * @see #getText()
+     * @generated
+     */
 	void setText(String value);
 
 } // KLabel

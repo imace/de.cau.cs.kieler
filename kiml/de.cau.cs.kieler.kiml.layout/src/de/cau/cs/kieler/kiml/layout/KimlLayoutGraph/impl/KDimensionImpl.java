@@ -32,190 +32,190 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  */
 public class KDimensionImpl extends EObjectImpl implements KDimension {
 	/**
-	 * The default value of the '{@link #getHeight() <em>Height</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * The default value of the '{@link #getHeight() <em>Height</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getHeight()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getHeight()
+     * @generated
+     * @ordered
+     */
 	protected static final float HEIGHT_EDEFAULT = 0.0F;
 
 	/**
-	 * The cached value of the '{@link #getHeight() <em>Height</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * The cached value of the '{@link #getHeight() <em>Height</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getHeight()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getHeight()
+     * @generated
+     * @ordered
+     */
 	protected float height = HEIGHT_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getWidth() <em>Width</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * The default value of the '{@link #getWidth() <em>Width</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getWidth()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getWidth()
+     * @generated
+     * @ordered
+     */
 	protected static final float WIDTH_EDEFAULT = 0.0F;
 
 	/**
-	 * The cached value of the '{@link #getWidth() <em>Width</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * The cached value of the '{@link #getWidth() <em>Width</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getWidth()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getWidth()
+     * @generated
+     * @ordered
+     */
 	protected float width = WIDTH_EDEFAULT;
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	protected KDimensionImpl() {
-		super();
-	}
+        super();
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	protected EClass eStaticClass() {
-		return KimlLayoutGraphPackage.Literals.KDIMENSION;
-	}
+        return KimlLayoutGraphPackage.Literals.KDIMENSION;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public float getHeight() {
-		return height;
-	}
+        return height;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public void setHeight(float newHeight) {
-		float oldHeight = height;
-		height = newHeight;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KDIMENSION__HEIGHT, oldHeight, height));
-	}
+        float oldHeight = height;
+        height = newHeight;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KDIMENSION__HEIGHT, oldHeight, height));
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public float getWidth() {
-		return width;
-	}
+        return width;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public void setWidth(float newWidth) {
-		float oldWidth = width;
-		width = newWidth;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KDIMENSION__WIDTH, oldWidth, width));
-	}
+        float oldWidth = width;
+        width = newWidth;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KDIMENSION__WIDTH, oldWidth, width));
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case KimlLayoutGraphPackage.KDIMENSION__HEIGHT:
-				return new Float(getHeight());
-			case KimlLayoutGraphPackage.KDIMENSION__WIDTH:
-				return new Float(getWidth());
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+        switch (featureID) {
+            case KimlLayoutGraphPackage.KDIMENSION__HEIGHT:
+                return new Float(getHeight());
+            case KimlLayoutGraphPackage.KDIMENSION__WIDTH:
+                return new Float(getWidth());
+        }
+        return super.eGet(featureID, resolve, coreType);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case KimlLayoutGraphPackage.KDIMENSION__HEIGHT:
-				setHeight(((Float)newValue).floatValue());
-				return;
-			case KimlLayoutGraphPackage.KDIMENSION__WIDTH:
-				setWidth(((Float)newValue).floatValue());
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+        switch (featureID) {
+            case KimlLayoutGraphPackage.KDIMENSION__HEIGHT:
+                setHeight(((Float)newValue).floatValue());
+                return;
+            case KimlLayoutGraphPackage.KDIMENSION__WIDTH:
+                setWidth(((Float)newValue).floatValue());
+                return;
+        }
+        super.eSet(featureID, newValue);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case KimlLayoutGraphPackage.KDIMENSION__HEIGHT:
-				setHeight(HEIGHT_EDEFAULT);
-				return;
-			case KimlLayoutGraphPackage.KDIMENSION__WIDTH:
-				setWidth(WIDTH_EDEFAULT);
-				return;
-		}
-		super.eUnset(featureID);
-	}
+        switch (featureID) {
+            case KimlLayoutGraphPackage.KDIMENSION__HEIGHT:
+                setHeight(HEIGHT_EDEFAULT);
+                return;
+            case KimlLayoutGraphPackage.KDIMENSION__WIDTH:
+                setWidth(WIDTH_EDEFAULT);
+                return;
+        }
+        super.eUnset(featureID);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case KimlLayoutGraphPackage.KDIMENSION__HEIGHT:
-				return height != HEIGHT_EDEFAULT;
-			case KimlLayoutGraphPackage.KDIMENSION__WIDTH:
-				return width != WIDTH_EDEFAULT;
-		}
-		return super.eIsSet(featureID);
-	}
+        switch (featureID) {
+            case KimlLayoutGraphPackage.KDIMENSION__HEIGHT:
+                return height != HEIGHT_EDEFAULT;
+            case KimlLayoutGraphPackage.KDIMENSION__WIDTH:
+                return width != WIDTH_EDEFAULT;
+        }
+        return super.eIsSet(featureID);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+        if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (height: ");
-		result.append(height);
-		result.append(", width: ");
-		result.append(width);
-		result.append(')');
-		return result.toString();
-	}
+        StringBuffer result = new StringBuffer(super.toString());
+        result.append(" (height: ");
+        result.append(height);
+        result.append(", width: ");
+        result.append(width);
+        result.append(')');
+        return result.toString();
+    }
 
 } //KDimensionImpl

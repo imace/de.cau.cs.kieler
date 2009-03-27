@@ -39,118 +39,118 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  */
 public class KLayoutGraphImpl extends KLayoutNodeImpl implements KLayoutGraph {
 	/**
-	 * The cached value of the '{@link #getGraphEdges() <em>Graph Edges</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
+     * The cached value of the '{@link #getGraphEdges() <em>Graph Edges</em>}' containment reference list.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getGraphEdges()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getGraphEdges()
+     * @generated
+     * @ordered
+     */
 	protected EList<KLayoutEdge> graphEdges;
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	protected KLayoutGraphImpl() {
-		super();
-	}
+        super();
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	protected EClass eStaticClass() {
-		return KimlLayoutGraphPackage.Literals.KLAYOUT_GRAPH;
-	}
+        return KimlLayoutGraphPackage.Literals.KLAYOUT_GRAPH;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public EList<KLayoutEdge> getGraphEdges() {
-		if (graphEdges == null) {
-			graphEdges = new EObjectContainmentEList<KLayoutEdge>(KLayoutEdge.class, this, KimlLayoutGraphPackage.KLAYOUT_GRAPH__GRAPH_EDGES);
-		}
-		return graphEdges;
-	}
+        if (graphEdges == null) {
+            graphEdges = new EObjectContainmentEList<KLayoutEdge>(KLayoutEdge.class, this, KimlLayoutGraphPackage.KLAYOUT_GRAPH__GRAPH_EDGES);
+        }
+        return graphEdges;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case KimlLayoutGraphPackage.KLAYOUT_GRAPH__GRAPH_EDGES:
-				return ((InternalEList<?>)getGraphEdges()).basicRemove(otherEnd, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
+        switch (featureID) {
+            case KimlLayoutGraphPackage.KLAYOUT_GRAPH__GRAPH_EDGES:
+                return ((InternalEList<?>)getGraphEdges()).basicRemove(otherEnd, msgs);
+        }
+        return super.eInverseRemove(otherEnd, featureID, msgs);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case KimlLayoutGraphPackage.KLAYOUT_GRAPH__GRAPH_EDGES:
-				return getGraphEdges();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+        switch (featureID) {
+            case KimlLayoutGraphPackage.KLAYOUT_GRAPH__GRAPH_EDGES:
+                return getGraphEdges();
+        }
+        return super.eGet(featureID, resolve, coreType);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case KimlLayoutGraphPackage.KLAYOUT_GRAPH__GRAPH_EDGES:
-				getGraphEdges().clear();
-				getGraphEdges().addAll((Collection<? extends KLayoutEdge>)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+        switch (featureID) {
+            case KimlLayoutGraphPackage.KLAYOUT_GRAPH__GRAPH_EDGES:
+                getGraphEdges().clear();
+                getGraphEdges().addAll((Collection<? extends KLayoutEdge>)newValue);
+                return;
+        }
+        super.eSet(featureID, newValue);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case KimlLayoutGraphPackage.KLAYOUT_GRAPH__GRAPH_EDGES:
-				getGraphEdges().clear();
-				return;
-		}
-		super.eUnset(featureID);
-	}
+        switch (featureID) {
+            case KimlLayoutGraphPackage.KLAYOUT_GRAPH__GRAPH_EDGES:
+                getGraphEdges().clear();
+                return;
+        }
+        super.eUnset(featureID);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case KimlLayoutGraphPackage.KLAYOUT_GRAPH__GRAPH_EDGES:
-				return graphEdges != null && !graphEdges.isEmpty();
-		}
-		return super.eIsSet(featureID);
-	}
+        switch (featureID) {
+            case KimlLayoutGraphPackage.KLAYOUT_GRAPH__GRAPH_EDGES:
+                return graphEdges != null && !graphEdges.isEmpty();
+        }
+        return super.eIsSet(featureID);
+    }
 
 } //KLayoutGraphImpl

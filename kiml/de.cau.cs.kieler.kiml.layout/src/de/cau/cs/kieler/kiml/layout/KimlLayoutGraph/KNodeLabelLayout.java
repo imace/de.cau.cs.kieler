@@ -25,32 +25,32 @@ package de.cau.cs.kieler.kiml.layout.KimlLayoutGraph;
  */
 public interface KNodeLabelLayout extends KShapeLayout {
 	/**
-	 * Returns the value of the '<em><b>Label Placement</b></em>' attribute.
-	 * The literals are from the enumeration {@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeLabelPlacement}.
-	 * <!-- begin-user-doc -->
+     * Returns the value of the '<em><b>Label Placement</b></em>' attribute.
+     * The literals are from the enumeration {@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeLabelPlacement}.
+     * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Label Placement</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Label Placement</em>' attribute.
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeLabelPlacement
-	 * @see #setLabelPlacement(KNodeLabelPlacement)
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKNodeLabelLayout_LabelPlacement()
-	 * @model required="true"
-	 * @generated
-	 */
+     * @return the value of the '<em>Label Placement</em>' attribute.
+     * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeLabelPlacement
+     * @see #setLabelPlacement(KNodeLabelPlacement)
+     * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKNodeLabelLayout_LabelPlacement()
+     * @model required="true"
+     * @generated
+     */
 	KNodeLabelPlacement getLabelPlacement();
 
 	/**
-	 * Sets the value of the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeLabelLayout#getLabelPlacement <em>Label Placement</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * Sets the value of the '{@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeLabelLayout#getLabelPlacement <em>Label Placement</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Label Placement</em>' attribute.
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeLabelPlacement
-	 * @see #getLabelPlacement()
-	 * @generated
-	 */
+     * @param value the new value of the '<em>Label Placement</em>' attribute.
+     * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeLabelPlacement
+     * @see #getLabelPlacement()
+     * @generated
+     */
 	void setLabelPlacement(KNodeLabelPlacement value);
 
 } // KNodeLabelLayout

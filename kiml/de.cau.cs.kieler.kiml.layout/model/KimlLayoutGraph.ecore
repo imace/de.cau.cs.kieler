@@ -40,7 +40,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="layout" lowerBound="1"
         eType="#//KEdgeLayout" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="label" upperBound="-1"
-        eType="#//KEdgeLabel" containment="true"/>
+        eType="#//KEdgeLabel" containment="true" eOpposite="#//KEdgeLabel/parentEdge"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="sourcePort" eType="#//KLayoutPort"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="targetPort" eType="#//KLayoutPort"/>
   </eClassifiers>
@@ -93,6 +93,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="KEdgeLabel" eSuperTypes="#//KLabel">
     <eStructuralFeatures xsi:type="ecore:EReference" name="labelLayout" lowerBound="1"
         eType="#//KEdgeLabelLayout" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentEdge" lowerBound="1"
+        eType="#//KLayoutEdge" eOpposite="#//KLayoutEdge/label"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="KEdgeLabelLayout" eSuperTypes="#//KShapeLayout">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="labelPlacement" lowerBound="1"

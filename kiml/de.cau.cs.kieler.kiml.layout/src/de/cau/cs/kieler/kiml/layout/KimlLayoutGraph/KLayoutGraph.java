@@ -28,19 +28,19 @@ import org.eclipse.emf.ecore.EObject;
 public interface KLayoutGraph extends KLayoutNode {
 
 	/**
-	 * Returns the value of the '<em><b>Graph Edges</b></em>' containment reference list.
-	 * The list contents are of type {@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge}.
-	 * <!-- begin-user-doc -->
+     * Returns the value of the '<em><b>Graph Edges</b></em>' containment reference list.
+     * The list contents are of type {@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge}.
+     * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Graph Edges</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Graph Edges</em>' containment reference list.
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKLayoutGraph_GraphEdges()
-	 * @model containment="true"
-	 * @generated
-	 */
+     * @return the value of the '<em>Graph Edges</em>' containment reference list.
+     * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage#getKLayoutGraph_GraphEdges()
+     * @model containment="true"
+     * @generated
+     */
 	EList<KLayoutEdge> getGraphEdges();
 
 } // KLayoutGraph

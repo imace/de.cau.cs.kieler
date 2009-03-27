@@ -265,6 +265,24 @@ public class KimlLayoutServices {
 	}
 
 	/**
+	 * Returns a non-null possibly empty list of Layouter Infos corresponding
+	 * to the given layout type. Only enabled layouters are considered.
+	 * 
+	 * @param layoutTypeName
+	 * @return A list of {@link KLayouterInfo} with the given layout type.
+	 */
+	public List<KLayouterInfo> getLayouterInfosForType(String layoutTypeName){
+	    ArrayList<KLayouterInfo> list = new ArrayList<KLayouterInfo>(); 
+	    for (KLayouterInfo layouterInfo : getEnabledLayouterInfos()) {
+                KLayoutType type = KLayoutType.getByName(layoutTypeName);
+	        if (layouterInfo.getLayoutType().equals(type)) {
+                        list.add(layouterInfo);
+                }
+        }
+        return list;
+	}
+	
+	/**
 	 * Returns a non null, possibly empty list of enabled
 	 * {@link KimlAbstractLayoutProvider}s for a given collectionID.
 	 * 

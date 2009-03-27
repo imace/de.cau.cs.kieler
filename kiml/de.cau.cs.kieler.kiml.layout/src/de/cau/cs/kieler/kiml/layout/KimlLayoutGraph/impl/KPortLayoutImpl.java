@@ -31,137 +31,137 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  */
 public class KPortLayoutImpl extends KShapeLayoutImpl implements KPortLayout {
 	/**
-	 * The default value of the '{@link #getPlacement() <em>Placement</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * The default value of the '{@link #getPlacement() <em>Placement</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getPlacement()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getPlacement()
+     * @generated
+     * @ordered
+     */
 	protected static final KPortPlacement PLACEMENT_EDEFAULT = KPortPlacement.DEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getPlacement() <em>Placement</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * The cached value of the '{@link #getPlacement() <em>Placement</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getPlacement()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getPlacement()
+     * @generated
+     * @ordered
+     */
 	protected KPortPlacement placement = PLACEMENT_EDEFAULT;
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	protected KPortLayoutImpl() {
-		super();
-	}
+        super();
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	protected EClass eStaticClass() {
-		return KimlLayoutGraphPackage.Literals.KPORT_LAYOUT;
-	}
+        return KimlLayoutGraphPackage.Literals.KPORT_LAYOUT;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public KPortPlacement getPlacement() {
-		return placement;
-	}
+        return placement;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public void setPlacement(KPortPlacement newPlacement) {
-		KPortPlacement oldPlacement = placement;
-		placement = newPlacement == null ? PLACEMENT_EDEFAULT : newPlacement;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KPORT_LAYOUT__PLACEMENT, oldPlacement, placement));
-	}
+        KPortPlacement oldPlacement = placement;
+        placement = newPlacement == null ? PLACEMENT_EDEFAULT : newPlacement;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, KimlLayoutGraphPackage.KPORT_LAYOUT__PLACEMENT, oldPlacement, placement));
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case KimlLayoutGraphPackage.KPORT_LAYOUT__PLACEMENT:
-				return getPlacement();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+        switch (featureID) {
+            case KimlLayoutGraphPackage.KPORT_LAYOUT__PLACEMENT:
+                return getPlacement();
+        }
+        return super.eGet(featureID, resolve, coreType);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case KimlLayoutGraphPackage.KPORT_LAYOUT__PLACEMENT:
-				setPlacement((KPortPlacement)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+        switch (featureID) {
+            case KimlLayoutGraphPackage.KPORT_LAYOUT__PLACEMENT:
+                setPlacement((KPortPlacement)newValue);
+                return;
+        }
+        super.eSet(featureID, newValue);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case KimlLayoutGraphPackage.KPORT_LAYOUT__PLACEMENT:
-				setPlacement(PLACEMENT_EDEFAULT);
-				return;
-		}
-		super.eUnset(featureID);
-	}
+        switch (featureID) {
+            case KimlLayoutGraphPackage.KPORT_LAYOUT__PLACEMENT:
+                setPlacement(PLACEMENT_EDEFAULT);
+                return;
+        }
+        super.eUnset(featureID);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case KimlLayoutGraphPackage.KPORT_LAYOUT__PLACEMENT:
-				return placement != PLACEMENT_EDEFAULT;
-		}
-		return super.eIsSet(featureID);
-	}
+        switch (featureID) {
+            case KimlLayoutGraphPackage.KPORT_LAYOUT__PLACEMENT:
+                return placement != PLACEMENT_EDEFAULT;
+        }
+        return super.eIsSet(featureID);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+        if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (placement: ");
-		result.append(placement);
-		result.append(')');
-		return result.toString();
-	}
+        StringBuffer result = new StringBuffer(super.toString());
+        result.append(" (placement: ");
+        result.append(placement);
+        result.append(')');
+        return result.toString();
+    }
 
 } //KPortLayoutImpl

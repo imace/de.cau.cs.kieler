@@ -22,22 +22,22 @@ import org.eclipse.emf.ecore.EClass;
  */
 public class KPortLabelLayoutImpl extends KShapeLayoutImpl implements KPortLabelLayout {
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	protected KPortLabelLayoutImpl() {
-		super();
-	}
+        super();
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	protected EClass eStaticClass() {
-		return KimlLayoutGraphPackage.Literals.KPORT_LABEL_LAYOUT;
-	}
+        return KimlLayoutGraphPackage.Literals.KPORT_LABEL_LAYOUT;
+    }
 
 } //KPortLabelLayoutImpl

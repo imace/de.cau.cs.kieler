@@ -743,12 +743,12 @@
     <children xmi:type="notation:Node" xmi:id="_wpT6dPKiEd2eFddVB1rYkA" type="4012">
       <layoutConstraint xmi:type="notation:Location" xmi:id="_wpT6dfKiEd2eFddVB1rYkA" x="39" y="-13"/>
     </children>
-    <styles xmi:type="notation:ConnectorStyle" xmi:id="_wpTTbfKiEd2eFddVB1rYkA" routing="Rectilinear" lineColor="0"/>
+    <styles xmi:type="notation:ConnectorStyle" xmi:id="_wpTTbfKiEd2eFddVB1rYkA" lineColor="0"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_wpT6cPKiEd2eFddVB1rYkA" fontName="Sans" fontHeight="10"/>
     <element xmi:type="ecore:EReference" href="KimlLayoutGraph.ecore#//KLayoutEdge/label"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_wpT6cfKiEd2eFddVB1rYkA" points="[-5, -6, 256, 72]$[-293, -6, -32, 72]$[-293, -78, -32, 0]"/>
-    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_xKoe0vKiEd2eFddVB1rYkA" id="(0.04901961,0.29268292)"/>
-    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_xKpF4PKiEd2eFddVB1rYkA" id="(0.68,1.0)"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_wpT6cfKiEd2eFddVB1rYkA" points="[-25, 0, 272, 74]$[-297, 0, 0, 74]$[-297, -71, 0, 3]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_z3g4IBrsEd6YtYnEBGjnxg" id="(0.26,0.075)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_z3g4IRrsEd6YtYnEBGjnxg" id="(0.53,0.95)"/>
   </edges>
   <edges xmi:type="notation:Edge" xmi:id="_wpT6dvKiEd2eFddVB1rYkA" type="3002" source="_wnU9cvKiEd2eFddVB1rYkA" target="_womv0PKiEd2eFddVB1rYkA">
     <children xmi:type="notation:Node" xmi:id="_wpT6evKiEd2eFddVB1rYkA" type="4011">
@@ -1079,5 +1079,19 @@
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_m88M8wgFEd6POe_0lVxTKA" points="[21, 0, -149, 237]$[170, 0, 0, 237]$[170, -232, 0, 5]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_m9C6oAgFEd6POe_0lVxTKA" id="(0.79,0.225)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_m9C6oQgFEd6POe_0lVxTKA" id="(0.81,0.9)"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_uMiSUBrsEd6YtYnEBGjnxg" type="3002" source="_wnpGgvKiEd2eFddVB1rYkA" target="_wnU9cvKiEd2eFddVB1rYkA">
+    <children xmi:type="notation:Node" xmi:id="_uMkHgBrsEd6YtYnEBGjnxg" type="4011">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_uMkHgRrsEd6YtYnEBGjnxg" x="42" y="-13"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_uMkukBrsEd6YtYnEBGjnxg" type="4012">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_uMkukRrsEd6YtYnEBGjnxg" y="-13"/>
+    </children>
+    <styles xmi:type="notation:ConnectorStyle" xmi:id="_uMi5YBrsEd6YtYnEBGjnxg" lineColor="0"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_uMi5YRrsEd6YtYnEBGjnxg" fontName="Lucida Grande" fontHeight="10"/>
+    <element xmi:type="ecore:EReference" href="KimlLayoutGraph.ecore#//KEdgeLabel/parentEdge"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_uMi5YhrsEd6YtYnEBGjnxg" points="[0, 3, -297, -71]$[0, 74, -297, 0]$[272, 74, -25, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_uMnx4BrsEd6YtYnEBGjnxg" id="(0.53,0.95)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_uMnx4RrsEd6YtYnEBGjnxg" id="(0.26,0.075)"/>
   </edges>
 </notation:Diagram>
