@@ -52,7 +52,7 @@
 				lineBorder.setWidth(2);
 				lineBorder.setColor(org.eclipse.draw2d.ColorConstants.black); 
 			}
-			«REM» result.setBorder(null);  Added this line «ENDREM»
+			«REM» result.setBorder(null); «ENDREM»
 			«REM» Additions end here «ENDREM»
 			return result;
 		}
