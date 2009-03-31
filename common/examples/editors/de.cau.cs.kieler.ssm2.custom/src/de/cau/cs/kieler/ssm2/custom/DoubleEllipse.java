@@ -6,6 +6,7 @@ import org.eclipse.draw2d.geometry.Rectangle;
 
 public class DoubleEllipse extends Ellipse {
 	
+	// A class that draws two ellipses instead of only one
 	public DoubleEllipse() {
 		super();
 	}

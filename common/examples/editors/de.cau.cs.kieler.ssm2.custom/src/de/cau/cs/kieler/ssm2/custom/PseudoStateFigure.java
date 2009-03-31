@@ -7,6 +7,7 @@ import org.eclipse.draw2d.geometry.Rectangle;
 
 public class PseudoStateFigure extends Ellipse {
 	
+	// A class that draws a 'P' inside of an ellipse
 	public PseudoStateFigure() {
 		super();
 	}

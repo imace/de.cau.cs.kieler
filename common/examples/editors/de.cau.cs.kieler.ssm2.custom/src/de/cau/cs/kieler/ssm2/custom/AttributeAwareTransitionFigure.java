@@ -15,6 +15,7 @@ import de.cau.cs.kieler.ssm2.TransitionKind;
 
 public class AttributeAwareTransitionFigure extends AttributeAwareConnection {
 
+	// The attribute aware figure that is used for transitions
 	public AttributeAwareTransitionFigure(EditPart e) {
 		super();
 		this.setModelElementAndRegisterFromEditPart(e);
@@ -23,10 +24,12 @@ public class AttributeAwareTransitionFigure extends AttributeAwareConnection {
 		this.setBackgroundColor(ColorConstants.black);
 		this.setLineWidth(2);
 		
+		// Create all needed conditions
 		Condition kindWeakAbort = new Condition(Ssm2Package.eINSTANCE.getTransition_TransitionKind(), TransitionKind.WEAKABORT);
 		Condition kindStrongAbort = new Condition(Ssm2Package.eINSTANCE.getTransition_TransitionKind(), TransitionKind.STRONGABORT);
 		Condition kindNormalTermination = new Condition(Ssm2Package.eINSTANCE.getTransition_TransitionKind(), TransitionKind.NORMALTERMINATION);
 		
+		// Combine them in lists
 		List<Condition> weakAbortSF = new LinkedList<Condition>();
 		weakAbortSF.add(kindWeakAbort);
 		
@@ -36,20 +39,24 @@ public class AttributeAwareTransitionFigure extends AttributeAwareConnection {
 		List<Condition> normalTerminationSF = new LinkedList<Condition>();
 		normalTerminationSF.add(kindNormalTermination);
 		
+		// Add the looks that are to be displayed when all the conditions in
+		// the list are true
 		ConditionalConnectionLook weakAbortCF = new ConditionalConnectionLook(weakAbortSF, createWeakAbortionDecoration(), createArrowDecoration());
 		ConditionalConnectionLook strongAbortCF = new ConditionalConnectionLook(strongAbortSF, createStrongAbortionDecoration(), createArrowDecoration());
 		ConditionalConnectionLook normalTerminationCF = new ConditionalConnectionLook(normalTerminationSF, createNormalTerminationDecoration(), createArrowDecoration());
 		
+		// Add all ConditionalConnectionLooks to the figure's list
 		conditionalFigureList = new LinkedList<ConditionalConnectionLook>();
 		conditionalFigureList.add(weakAbortCF);
 		conditionalFigureList.add(strongAbortCF);
 		conditionalFigureList.add(normalTerminationCF);
 		
+		// Set default and current look
 		this.setDefaultLook(weakAbortCF);
-		this.setCurrentLook(strongAbortCF);
 		this.setLook(strongAbortCF);
 	}
 	
+	// Methods to create the different decorations
 	private RotatableDecoration createStrongAbortionDecoration() {
 		PolygonDecoration circleDecoration = new CircleDecoration();
 		circleDecoration.setLineWidth(2);

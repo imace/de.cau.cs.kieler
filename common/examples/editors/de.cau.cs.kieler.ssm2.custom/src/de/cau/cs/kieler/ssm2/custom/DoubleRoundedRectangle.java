@@ -6,6 +6,7 @@ import org.eclipse.draw2d.geometry.Rectangle;
 
 public class DoubleRoundedRectangle extends RoundedRectangle {
 
+	// A class that draws two rectangles instead of only one
 	public DoubleRoundedRectangle() {
 		super();
 	}

@@ -25,6 +25,8 @@ import de.cau.cs.kieler.ssm2.Transition;
 import de.cau.cs.kieler.ssm2.Variable;
 import de.cau.cs.kieler.ssm2.dsl.parser.XtextParser;
 
+// This command parses the text of a label and integrates the results into the
+// given SSM model
 public class XTextParseCommand extends AbstractTransactionalCommand {
 
 	IAdaptable element;
@@ -37,10 +39,12 @@ public class XTextParseCommand extends AbstractTransactionalCommand {
 		this.string = newString;
 	}
 
+	// This method is executed when the text of the label has been changed
 	@Override
 	protected CommandResult doExecuteWithResult(IProgressMonitor monitor,
 			IAdaptable info) throws ExecutionException {
 		try {
+			// Parse the text and get the newly created action
 			if ((element != null) && (element instanceof EObjectAdapter) && (((EObjectAdapter)element).getRealObject() instanceof Action)) {
 				ByteArrayInputStream stream = new ByteArrayInputStream(string.getBytes());
 				parser = new XtextParser(stream);
@@ -48,6 +52,8 @@ public class XTextParseCommand extends AbstractTransactionalCommand {
 				Action newAction = (Action) node.getModelElement();
 				Action action = (Action) (((EObjectAdapter)element).getRealObject());
 				
+				// Only proceed if an action has been created and its signals have
+				// already beeb defined within the parent state
 				if (newAction == null) {
 					action.setTrigger(null);
 					action.getEmissions().clear();
@@ -64,6 +70,8 @@ public class XTextParseCommand extends AbstractTransactionalCommand {
 					return CommandResult.newErrorCommandResult("The action contains invalid signals!");					
 				}
 				
+				// Integrate the action's trigger, its emissions and assignments
+				// into the SSM model
 				action.setTrigger(newAction.getTrigger());
 				action.setTriggersAndEffects(string);
 				action.getEmissions().clear();
@@ -84,6 +92,7 @@ public class XTextParseCommand extends AbstractTransactionalCommand {
 		return CommandResult.newOKCommandResult();
 	}
 
+	// Method to check whether the sinals have already been definded in the parent state
 	private boolean checkSignals(Action action, Action newAction) {
 		boolean allValid = true;
 		boolean oneEqual = false;
@@ -128,6 +137,7 @@ public class XTextParseCommand extends AbstractTransactionalCommand {
 		return allValid;
 	}
 	
+	// Several methods to get the signals from the different types of model elements
 	private EList<Signal> getSignals(Action action) {
 		EList<Signal> signals = getSignals(action.getTrigger());
 		if (signals == null) {

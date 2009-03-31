@@ -14,11 +14,13 @@ import de.cau.cs.kieler.ssm2.StateKind;
 
 public class AttributeAwareStateFigure extends AttributeAwareFigure {
 	
+	// This is the figure figure for states
 	public AttributeAwareStateFigure(EditPart e) {
 		super();
 		this.setModelElementAndRegisterFromEditPart(e);
 		layout = new StateLayout();
 		
+		// Create all needed figures
 		RoundedRectangle normalStateFigure = new RoundedRectangle();
 		normalStateFigure.setFill(false);
 		normalStateFigure.setLineWidth(2);
@@ -54,10 +56,12 @@ public class AttributeAwareStateFigure extends AttributeAwareFigure {
 		pseudoStateFigure.setLineWidth(2);
 		pseudoStateFigure.setForegroundColor(ColorConstants.black);
 		pseudoStateFigure.setBackgroundColor(ColorConstants.lightGray);
-					
+		
+		// Set default and current figure
 		this.setDefaultFigure(normalStateFigure);
 		this.setCurrentFigure(normalNChildrenStateFigure);
 		
+		// Create all needed conditions
 		Condition kindNormal = new Condition(Ssm2Package.eINSTANCE.getState_StateKind(), StateKind.NORMAL);
 		Condition kindPseudo = new Condition(Ssm2Package.eINSTANCE.getState_StateKind(), StateKind.PSEUDO);
 		Condition kindReference = new Condition(Ssm2Package.eINSTANCE.getState_StateKind(), StateKind.REFERENCE);
@@ -73,6 +77,7 @@ public class AttributeAwareStateFigure extends AttributeAwareFigure {
 		Condition noInnerActions = new SizeCondition(Ssm2Package.eINSTANCE.getState_InnerActions(), new Integer(0));
 		Condition noExitActions = new SizeCondition(Ssm2Package.eINSTANCE.getState_ExitActions(), new Integer(0));
 		
+		// Combine conditions in lists
 		List<Condition> normalNCSF = new LinkedList<Condition>();
 		normalNCSF.add(kindNormal);
 		normalNCSF.add(flagNormal);
@@ -109,7 +114,8 @@ public class AttributeAwareStateFigure extends AttributeAwareFigure {
 		List<Condition> pseudoSF = new LinkedList<Condition>();
 		pseudoSF.add(kindPseudo);
 		
-		
+		// Add the figures that are to be drawn, when all the conditions
+		// in the list are fulfilled
 		ConditionalFigure normalNCCF = new ConditionalFigure(normalNCSF, normalNChildrenStateFigure);
 		ConditionalFigure initialNCCF = new ConditionalFigure(initialNCSF, initialNChildrenStateFigure);
 		ConditionalFigure finalNCCF = new ConditionalFigure(finalNCSF, finalNChildrenStateFigure);
@@ -117,6 +123,7 @@ public class AttributeAwareStateFigure extends AttributeAwareFigure {
 		ConditionalFigure finalCF = new ConditionalFigure(finalSF, finalStateFigure);
 		ConditionalFigure pseudoCF = new ConditionalFigure(pseudoSF, pseudoStateFigure);
 		
+		// Add all ConditionalFigures to the figure's list
 		conditionalFigureList = new LinkedList<ConditionalFigure>();
 		conditionalFigureList.add(pseudoCF);
 		conditionalFigureList.add(initialNCCF);

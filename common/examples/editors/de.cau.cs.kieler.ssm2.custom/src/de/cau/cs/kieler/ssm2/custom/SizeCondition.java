@@ -6,6 +6,8 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 
 public class SizeCondition extends Condition {
 
+	// A type of condition that equals to true if the specified feature
+	// contains a list with the specified number of elements
 	public SizeCondition(EStructuralFeature f, Integer v) {
 		super(f, v);
 	}

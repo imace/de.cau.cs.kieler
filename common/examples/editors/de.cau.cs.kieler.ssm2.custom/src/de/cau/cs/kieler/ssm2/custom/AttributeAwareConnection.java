@@ -24,8 +24,7 @@ public class AttributeAwareConnection extends PolylineConnectionEx implements Ad
 	// The default look that is to be displayed when no conditionalFigure's 
 	// conditions are all fulfilled
 	protected ConditionalConnectionLook defaultLook;
-	// The figure that will be displayed when the paint method is called
-	protected ConditionalConnectionLook currentLook;
+	
 	
 	public AttributeAwareConnection() {
 		super();
@@ -49,16 +48,8 @@ public class AttributeAwareConnection extends PolylineConnectionEx implements Ad
 		defaultLook = look;
 	}
 	
-	public void setCurrentLook(ConditionalConnectionLook look) {
-		currentLook = look;
-	}
-	
 	public ConditionalConnectionLook getDefaultLook() {
 		return defaultLook;
-	}
-	
-	public ConditionalConnectionLook getCurrentLook() {
-		return currentLook;
 	}
 	
 	public void addConditionalFigure(ConditionalConnectionLook cf) {

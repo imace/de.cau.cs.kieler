@@ -20,6 +20,7 @@ import de.cau.cs.kieler.ssm2.State;
 
 public class StateLayout extends ConstrainedToolbarLayout {
 
+	// A layout for states
 	public void layout(IFigure parent) {
 		if (!parent.isVisible())
 			return;
@@ -31,6 +32,8 @@ public class StateLayout extends ConstrainedToolbarLayout {
 		int width = clientArea.width;
 		int height = clientArea.height;
 		
+		// Check if the figure is an attribute aware state and wether it is
+		// a simple or a complex state
 		if (parent instanceof AttributeAwareFigure) {
 			EObject modelElement = ((AttributeAwareFigure) parent).getModelElement();
 			if (modelElement instanceof State) {
@@ -45,6 +48,7 @@ public class StateLayout extends ConstrainedToolbarLayout {
 		}
 	}
 	
+	// The layout for complex states
 	private void complexLayout(IFigure parent, List children, int x, int y, int height, int width) {
 		int numChildren = children.size();
 		int totalWidth = 0;
@@ -67,6 +71,8 @@ public class StateLayout extends ConstrainedToolbarLayout {
 			}
 		}
 
+		// Labels are centered in the upper area while compartments share the
+		// rest of the space. always using the full available width
 		for (int i = 0; i < numChildren; i++) {
 			Object child = children.get(i);
 			if (child instanceof Figure) {
@@ -89,16 +95,13 @@ public class StateLayout extends ConstrainedToolbarLayout {
 					newBounds.y = y + offsetY;
 					newBounds.width = width;
 					newBounds.height = totalHeight - offsetY;
-					
-					//((LineBorder) ((ResizableCompartmentFigure) child).getBorder()).setColor(ColorConstants.black);
-					//((LineBorder) ((ResizableCompartmentFigure) child).getBorder()).setWidth(2);
-					//((ResizableCompartmentFigure) child).setBorder(new LineBorder(ColorConstants.black, 2));
 				}
 				childFigure.setBounds(transposer.t(newBounds));
 			}
 		}
 	}
 
+	// The layout for simple states
 	private void simpleLayout(IFigure parent, List children, int x, int y, int height, int width) {
 		String name;
 		int prefWidth = 0;
@@ -118,6 +121,8 @@ public class StateLayout extends ConstrainedToolbarLayout {
 			}
 		}
 
+		// The label is centered in the middle, and the compartments are arranged
+		// around it
 		for (Object child : children) {
 			if (child instanceof Figure) {
 				IFigure childFigure = (IFigure) child;
@@ -139,10 +144,6 @@ public class StateLayout extends ConstrainedToolbarLayout {
 						newBounds.y = y + offsetY;
 						newBounds.width = width;
 						newBounds.height = (height - prefHeight) / 2;
-						
-						//((LineBorder) ((ResizableCompartmentFigure) child).getBorder()).setColor(ColorConstants.white);
-						//((LineBorder) ((ResizableCompartmentFigure) child).getBorder()).setWidth(0);
-						//((ResizableCompartmentFigure) child).setBorder(new InvisibleBorder(ColorConstants.black, 2));
 				}
 				childFigure.setBounds(transposer.t(newBounds));
 			}
@@ -168,6 +169,7 @@ public class StateLayout extends ConstrainedToolbarLayout {
 		return children;
 	}
 
+	// Method to decide whether a state is simple
 	private boolean isSimple(State state) {
 		if ((state.getRegions() == null || state.getRegions().size() == 0)
 				&& (state.getSignals() == null || state.getSignals().size() == 0)
@@ -179,6 +181,7 @@ public class StateLayout extends ConstrainedToolbarLayout {
 		return false;
 	}
 
+	// Method to calculate the minimum size of the figure
 	@Override
 	public Dimension calculateMinimumSize(IFigure container, int hint, int hint2) {
 		
@@ -196,23 +199,4 @@ public class StateLayout extends ConstrainedToolbarLayout {
 		}
 		return new Dimension(minWidth, minHeight);
 	}
-	
-/*	@Override
-	public Dimension calculatePreferredSize(IFigure container, int hint, int hint2) {
-		
-		int minWidth = 0;
-		int minHeight = 0;
-		for (Object child : container.getChildren()) {
-			if (child instanceof Figure) {
-				IFigure childFigure = (IFigure) child;
-				int newWidth = childFigure.getPreferredSize().width;
-				if (newWidth > minWidth) {
-					minWidth = newWidth;
-				}
-				minHeight += childFigure.getPreferredSize().height;
-			}
-		}
-		return new Dimension(minWidth, minHeight);
-	}
-*/	
 }

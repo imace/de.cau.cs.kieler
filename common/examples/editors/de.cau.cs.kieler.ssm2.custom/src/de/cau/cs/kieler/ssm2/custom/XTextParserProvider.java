@@ -11,9 +11,10 @@ import org.eclipse.gmf.runtime.emf.ui.services.parser.ParserHintAdapter;
 
 import de.cau.cs.kieler.ssm2.Action;
 
-
+// A provider for the xText parser
 public class XTextParserProvider extends AbstractProvider implements IParserProvider {
 	
+	// Return the xText parser
 	public IParser getParser(IAdaptable hint) {
 		if (hint instanceof ParserHintAdapter) {
 			Object element = ((ParserHintAdapter) hint).getAdapter(EObject.class);
@@ -26,6 +27,7 @@ public class XTextParserProvider extends AbstractProvider implements IParserProv
 		return null;
 	}
 
+	// Return true for GetParserOperations
 	public boolean provides(IOperation operation) {
 		if (operation instanceof GetParserOperation) {
 			IAdaptable hint = ((GetParserOperation) operation).getHint();

@@ -24,6 +24,7 @@ import de.cau.cs.kieler.ssm2.Ssm2Package;
 import de.cau.cs.kieler.ssm2.Variable;
 import de.cau.cs.kieler.ssm2.dsl.parser.XtextParser;
 
+// A wrapper for the xText parser
 public class XTextParserWrapper implements IParser {
 
 	private XtextParser parser;
@@ -35,6 +36,7 @@ public class XTextParserWrapper implements IParser {
 		return null;
 	}
 
+	// Method to return the editString of an action
 	public String getEditString(IAdaptable element, int flags) {
 		if (element instanceof EObjectAdapter) {
 			if (((EObjectAdapter) element).getRealObject() instanceof Action) {
@@ -47,10 +49,12 @@ public class XTextParserWrapper implements IParser {
 		return "";
 	}
 
+	// Return our special xText command
 	public ICommand getParseCommand(IAdaptable element, String newString, int flags) {
 		return new XTextParseCommand(element, newString, flags);
 	}
 
+	// Return the print string of an action
 	public String getPrintString(IAdaptable element, int flags) {
 		if (element instanceof EObjectAdapter) {
 			if (((EObjectAdapter) element).getRealObject() instanceof Action) {
@@ -63,6 +67,7 @@ public class XTextParserWrapper implements IParser {
 		return "";
 	}
 
+	// This wrapper affects notification events
 	public boolean isAffectingEvent(Object event, int flags) {
 		if (event instanceof Notification) {
 			Object feature = ((Notification) event).getFeature();
@@ -73,6 +78,7 @@ public class XTextParserWrapper implements IParser {
 		return false;
 	}
 
+	// Check whether the edit string is valid by parsing it
 	public IParserEditStatus isValidEditString(IAdaptable element, String editString) {
 		try {
 			if (element instanceof Action) {
@@ -92,6 +98,8 @@ public class XTextParserWrapper implements IParser {
 		return ParserEditStatus.UNEDITABLE_STATUS;
 	}
 			
+	// These are the same method as in XTextParseCommand as they are needed
+	// here too. I should tidy this up when I find some time.
 	private boolean checkSignals(Action action, Action newAction) {
 		boolean allValid = true;
 		boolean oneEqual = false;
