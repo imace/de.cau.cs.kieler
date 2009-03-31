@@ -7,6 +7,9 @@ import org.eclipse.gef.EditPart;
 
 public class AttributeAwareRegionFigure extends AttributeAwareFigure {
 
+	// The figure for regions; actually they do not need to be attribute aware,
+	// but if they were not, the code templates would not work since we cannot
+	// distinguish different classes in code templates (at least I can't)
 	public AttributeAwareRegionFigure(EditPart e) {
 		super();
 		this.setModelElementAndRegisterFromEditPart(e);

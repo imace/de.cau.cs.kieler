@@ -115,6 +115,7 @@ public class XTextParseCommand extends AbstractTransactionalCommand {
 			for (Signal s2 : validSignals) {
 				if (s1.getName().equals(s2.getName())) {
 					s1 = s2;
+					if (s1.getParentAction() == null) System.out.println("PARENT ACTION NULL!");
 					oneEqual = true;
 					break;
 				}

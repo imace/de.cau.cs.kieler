@@ -15,9 +15,14 @@ import org.eclipse.gmf.runtime.notation.View;
 
 public class AttributeAwareFigure extends Figure implements Adapter {
 
+	// This list contains all possible figures and when they are to be displayed	
 	protected List<ConditionalFigure> conditionalFigureList;
+	// This figure's corrresponding model element
 	protected EObject modelElement;
+	// The default figure that is to be displayed when no conditionalFigure's 
+	// conditions are all fulfilled
 	protected Figure defaultFigure;
+	// The figure that will be drawn when the paint method is called
 	protected Figure currentFigure;
 	protected AbstractLayout layout;
 	
@@ -32,7 +37,8 @@ public class AttributeAwareFigure extends Figure implements Adapter {
 	public EObject getModelElement() {
 		return modelElement;
 	}
-		
+	
+	// This method is used to establish a link between the figure and its EditPart
 	public void setModelElementAndRegisterFromEditPart(EditPart e) {
 		modelElement = ((View) (e.getModel())).getElement();
 		((Notifier) modelElement).eAdapters().add(this);
@@ -42,6 +48,8 @@ public class AttributeAwareFigure extends Figure implements Adapter {
 		defaultFigure = f;
 	}
 	
+	// Instead of painting the figure itself, its currentFigure is painted
+	// after its bounds have been adjusted
 	@Override
 	public void paint(Graphics g){
 		super.paint(g);
@@ -76,6 +84,7 @@ public class AttributeAwareFigure extends Figure implements Adapter {
 		return false;
 	}
 
+	// If the model element's properties have changed,  adjust currentFigure
 	public void notifyChanged(Notification notification) {
 		try {	
 			for (ConditionalFigure cf : conditionalFigureList) {

@@ -10,7 +10,7 @@ import org.eclipse.gmf.runtime.common.ui.services.parser.IParserProvider;
 import org.eclipse.gmf.runtime.emf.ui.services.parser.ParserHintAdapter;
 
 import de.cau.cs.kieler.ssm2.Action;
-//import de.cau.cs.kieler.ssm2.diagram.providers.Ssm2ElementTypes;
+
 
 public class XTextParserProvider extends AbstractProvider implements IParserProvider {
 	
@@ -29,9 +29,6 @@ public class XTextParserProvider extends AbstractProvider implements IParserProv
 	public boolean provides(IOperation operation) {
 		if (operation instanceof GetParserOperation) {
 			IAdaptable hint = ((GetParserOperation) operation).getHint();
-			/*if (Ssm2ElementTypes.getElement(hint) == null) {
-				return false;
-			}*/
 			return getParser(hint) != null;
 		}
 		return false;
