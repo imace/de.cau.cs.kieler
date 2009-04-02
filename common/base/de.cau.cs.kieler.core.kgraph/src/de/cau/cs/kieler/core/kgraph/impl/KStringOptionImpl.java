@@ -13,10 +13,10 @@
  *
  * $Id$
  */
-package de.cau.cs.kieler.core.graph.kgraph.impl;
+package de.cau.cs.kieler.core.kgraph.impl;
 
-import de.cau.cs.kieler.core.graph.kgraph.KFloatOption;
-import de.cau.cs.kieler.core.graph.kgraph.KGraphPackage;
+import de.cau.cs.kieler.core.kgraph.KGraphPackage;
+import de.cau.cs.kieler.core.kgraph.KStringOption;
 
 import org.eclipse.emf.common.notify.Notification;
 
@@ -26,18 +26,18 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>KFloat Option</b></em>'.
+ * An implementation of the model object '<em><b>KString Option</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link de.cau.cs.kieler.core.graph.kgraph.impl.KFloatOptionImpl#getValue <em>Value</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.core.kgraph.impl.KStringOptionImpl#getValue <em>Value</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class KFloatOptionImpl extends KOptionImpl implements KFloatOption {
+public class KStringOptionImpl extends KOptionImpl implements KStringOption {
     /**
      * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
      * <!-- begin-user-doc -->
@@ -46,7 +46,7 @@ public class KFloatOptionImpl extends KOptionImpl implements KFloatOption {
      * @generated
      * @ordered
      */
-    protected static final float VALUE_EDEFAULT = 0.0F;
+    protected static final String VALUE_EDEFAULT = "";
 
     /**
      * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
@@ -56,14 +56,14 @@ public class KFloatOptionImpl extends KOptionImpl implements KFloatOption {
      * @generated
      * @ordered
      */
-    protected float value = VALUE_EDEFAULT;
+    protected String value = VALUE_EDEFAULT;
 
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    protected KFloatOptionImpl() {
+    protected KStringOptionImpl() {
         super();
     }
 
@@ -74,7 +74,7 @@ public class KFloatOptionImpl extends KOptionImpl implements KFloatOption {
      */
     @Override
     protected EClass eStaticClass() {
-        return KGraphPackage.Literals.KFLOAT_OPTION;
+        return KGraphPackage.Literals.KSTRING_OPTION;
     }
 
     /**
@@ -82,7 +82,7 @@ public class KFloatOptionImpl extends KOptionImpl implements KFloatOption {
      * <!-- end-user-doc -->
      * @generated
      */
-    public float getValue() {
+    public String getValue() {
         return value;
     }
 
@@ -91,11 +91,11 @@ public class KFloatOptionImpl extends KOptionImpl implements KFloatOption {
      * <!-- end-user-doc -->
      * @generated
      */
-    public void setValue(float newValue) {
-        float oldValue = value;
+    public void setValue(String newValue) {
+        String oldValue = value;
         value = newValue;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, KGraphPackage.KFLOAT_OPTION__VALUE, oldValue, value));
+            eNotify(new ENotificationImpl(this, Notification.SET, KGraphPackage.KSTRING_OPTION__VALUE, oldValue, value));
     }
 
     /**
@@ -106,8 +106,8 @@ public class KFloatOptionImpl extends KOptionImpl implements KFloatOption {
     @Override
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
         switch (featureID) {
-            case KGraphPackage.KFLOAT_OPTION__VALUE:
-                return new Float(getValue());
+            case KGraphPackage.KSTRING_OPTION__VALUE:
+                return getValue();
         }
         return super.eGet(featureID, resolve, coreType);
     }
@@ -120,8 +120,8 @@ public class KFloatOptionImpl extends KOptionImpl implements KFloatOption {
     @Override
     public void eSet(int featureID, Object newValue) {
         switch (featureID) {
-            case KGraphPackage.KFLOAT_OPTION__VALUE:
-                setValue(((Float)newValue).floatValue());
+            case KGraphPackage.KSTRING_OPTION__VALUE:
+                setValue((String)newValue);
                 return;
         }
         super.eSet(featureID, newValue);
@@ -135,7 +135,7 @@ public class KFloatOptionImpl extends KOptionImpl implements KFloatOption {
     @Override
     public void eUnset(int featureID) {
         switch (featureID) {
-            case KGraphPackage.KFLOAT_OPTION__VALUE:
+            case KGraphPackage.KSTRING_OPTION__VALUE:
                 setValue(VALUE_EDEFAULT);
                 return;
         }
@@ -150,8 +150,8 @@ public class KFloatOptionImpl extends KOptionImpl implements KFloatOption {
     @Override
     public boolean eIsSet(int featureID) {
         switch (featureID) {
-            case KGraphPackage.KFLOAT_OPTION__VALUE:
-                return value != VALUE_EDEFAULT;
+            case KGraphPackage.KSTRING_OPTION__VALUE:
+                return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
         }
         return super.eIsSet(featureID);
     }
@@ -172,4 +172,4 @@ public class KFloatOptionImpl extends KOptionImpl implements KFloatOption {
         return result.toString();
     }
 
-} //KFloatOptionImpl
+} //KStringOptionImpl

@@ -13,9 +13,9 @@
  *
  * $Id$
  */
-package de.cau.cs.kieler.core.graph.kgraph.impl;
+package de.cau.cs.kieler.core.kgraph.impl;
 
-import de.cau.cs.kieler.core.graph.kgraph.*;
+import de.cau.cs.kieler.core.kgraph.*;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;

@@ -13,7 +13,7 @@
  *
  * $Id$
  */
-package de.cau.cs.kieler.core.graph.kgraph;
+package de.cau.cs.kieler.core.kgraph;
 
 
 /**
@@ -24,11 +24,11 @@ package de.cau.cs.kieler.core.graph.kgraph;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link de.cau.cs.kieler.core.graph.kgraph.KFloatOption#getValue <em>Value</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.core.kgraph.KFloatOption#getValue <em>Value</em>}</li>
  * </ul>
  * </p>
  *
- * @see de.cau.cs.kieler.core.graph.kgraph.KGraphPackage#getKFloatOption()
+ * @see de.cau.cs.kieler.core.kgraph.KGraphPackage#getKFloatOption()
  * @model
  * @generated
  */
@@ -43,14 +43,14 @@ public interface KFloatOption extends KOption {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Value</em>' attribute.
      * @see #setValue(float)
-     * @see de.cau.cs.kieler.core.graph.kgraph.KGraphPackage#getKFloatOption_Value()
+     * @see de.cau.cs.kieler.core.kgraph.KGraphPackage#getKFloatOption_Value()
      * @model
      * @generated
      */
     float getValue();
 
     /**
-     * Sets the value of the '{@link de.cau.cs.kieler.core.graph.kgraph.KFloatOption#getValue <em>Value</em>}' attribute.
+     * Sets the value of the '{@link de.cau.cs.kieler.core.kgraph.KFloatOption#getValue <em>Value</em>}' attribute.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @param value the new value of the '<em>Value</em>' attribute.

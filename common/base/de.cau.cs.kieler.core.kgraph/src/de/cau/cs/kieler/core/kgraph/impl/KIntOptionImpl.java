@@ -13,10 +13,10 @@
  *
  * $Id$
  */
-package de.cau.cs.kieler.core.graph.kgraph.impl;
+package de.cau.cs.kieler.core.kgraph.impl;
 
-import de.cau.cs.kieler.core.graph.kgraph.KGraphPackage;
-import de.cau.cs.kieler.core.graph.kgraph.KStringOption;
+import de.cau.cs.kieler.core.kgraph.KGraphPackage;
+import de.cau.cs.kieler.core.kgraph.KIntOption;
 
 import org.eclipse.emf.common.notify.Notification;
 
@@ -26,18 +26,18 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>KString Option</b></em>'.
+ * An implementation of the model object '<em><b>KInt Option</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link de.cau.cs.kieler.core.graph.kgraph.impl.KStringOptionImpl#getValue <em>Value</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.core.kgraph.impl.KIntOptionImpl#getValue <em>Value</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class KStringOptionImpl extends KOptionImpl implements KStringOption {
+public class KIntOptionImpl extends KOptionImpl implements KIntOption {
     /**
      * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
      * <!-- begin-user-doc -->
@@ -46,7 +46,7 @@ public class KStringOptionImpl extends KOptionImpl implements KStringOption {
      * @generated
      * @ordered
      */
-    protected static final String VALUE_EDEFAULT = "";
+    protected static final int VALUE_EDEFAULT = 0;
 
     /**
      * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
@@ -56,14 +56,14 @@ public class KStringOptionImpl extends KOptionImpl implements KStringOption {
      * @generated
      * @ordered
      */
-    protected String value = VALUE_EDEFAULT;
+    protected int value = VALUE_EDEFAULT;
 
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    protected KStringOptionImpl() {
+    protected KIntOptionImpl() {
         super();
     }
 
@@ -74,7 +74,7 @@ public class KStringOptionImpl extends KOptionImpl implements KStringOption {
      */
     @Override
     protected EClass eStaticClass() {
-        return KGraphPackage.Literals.KSTRING_OPTION;
+        return KGraphPackage.Literals.KINT_OPTION;
     }
 
     /**
@@ -82,7 +82,7 @@ public class KStringOptionImpl extends KOptionImpl implements KStringOption {
      * <!-- end-user-doc -->
      * @generated
      */
-    public String getValue() {
+    public int getValue() {
         return value;
     }
 
@@ -91,11 +91,11 @@ public class KStringOptionImpl extends KOptionImpl implements KStringOption {
      * <!-- end-user-doc -->
      * @generated
      */
-    public void setValue(String newValue) {
-        String oldValue = value;
+    public void setValue(int newValue) {
+        int oldValue = value;
         value = newValue;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, KGraphPackage.KSTRING_OPTION__VALUE, oldValue, value));
+            eNotify(new ENotificationImpl(this, Notification.SET, KGraphPackage.KINT_OPTION__VALUE, oldValue, value));
     }
 
     /**
@@ -106,8 +106,8 @@ public class KStringOptionImpl extends KOptionImpl implements KStringOption {
     @Override
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
         switch (featureID) {
-            case KGraphPackage.KSTRING_OPTION__VALUE:
-                return getValue();
+            case KGraphPackage.KINT_OPTION__VALUE:
+                return new Integer(getValue());
         }
         return super.eGet(featureID, resolve, coreType);
     }
@@ -120,8 +120,8 @@ public class KStringOptionImpl extends KOptionImpl implements KStringOption {
     @Override
     public void eSet(int featureID, Object newValue) {
         switch (featureID) {
-            case KGraphPackage.KSTRING_OPTION__VALUE:
-                setValue((String)newValue);
+            case KGraphPackage.KINT_OPTION__VALUE:
+                setValue(((Integer)newValue).intValue());
                 return;
         }
         super.eSet(featureID, newValue);
@@ -135,7 +135,7 @@ public class KStringOptionImpl extends KOptionImpl implements KStringOption {
     @Override
     public void eUnset(int featureID) {
         switch (featureID) {
-            case KGraphPackage.KSTRING_OPTION__VALUE:
+            case KGraphPackage.KINT_OPTION__VALUE:
                 setValue(VALUE_EDEFAULT);
                 return;
         }
@@ -150,8 +150,8 @@ public class KStringOptionImpl extends KOptionImpl implements KStringOption {
     @Override
     public boolean eIsSet(int featureID) {
         switch (featureID) {
-            case KGraphPackage.KSTRING_OPTION__VALUE:
-                return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
+            case KGraphPackage.KINT_OPTION__VALUE:
+                return value != VALUE_EDEFAULT;
         }
         return super.eIsSet(featureID);
     }
@@ -172,4 +172,4 @@ public class KStringOptionImpl extends KOptionImpl implements KStringOption {
         return result.toString();
     }
 
-} //KStringOptionImpl
+} //KIntOptionImpl

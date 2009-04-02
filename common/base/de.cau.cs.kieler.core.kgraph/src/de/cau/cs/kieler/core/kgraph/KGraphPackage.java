@@ -13,7 +13,7 @@
  *
  * $Id$
  */
-package de.cau.cs.kieler.core.graph.kgraph;
+package de.cau.cs.kieler.core.kgraph;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -35,7 +35,7 @@ import org.eclipse.gmf.runtime.notation.NotationPackage;
  *   <li>and each data type</li>
  * </ul>
  * <!-- end-user-doc -->
- * @see de.cau.cs.kieler.core.graph.kgraph.KGraphFactory
+ * @see de.cau.cs.kieler.core.kgraph.KGraphFactory
  * @model kind="package"
  * @generated
  */
@@ -70,14 +70,14 @@ public interface KGraphPackage extends EPackage {
      * <!-- end-user-doc -->
      * @generated
      */
-    KGraphPackage eINSTANCE = de.cau.cs.kieler.core.graph.kgraph.impl.KGraphPackageImpl.init();
+    KGraphPackage eINSTANCE = de.cau.cs.kieler.core.kgraph.impl.KGraphPackageImpl.init();
 
     /**
-     * The meta object id for the '{@link de.cau.cs.kieler.core.graph.kgraph.impl.KGraphElementImpl <em>Element</em>}' class.
+     * The meta object id for the '{@link de.cau.cs.kieler.core.kgraph.impl.KGraphElementImpl <em>Element</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see de.cau.cs.kieler.core.graph.kgraph.impl.KGraphElementImpl
-     * @see de.cau.cs.kieler.core.graph.kgraph.impl.KGraphPackageImpl#getKGraphElement()
+     * @see de.cau.cs.kieler.core.kgraph.impl.KGraphElementImpl
+     * @see de.cau.cs.kieler.core.kgraph.impl.KGraphPackageImpl#getKGraphElement()
      * @generated
      */
     int KGRAPH_ELEMENT = 0;
@@ -110,11 +110,11 @@ public interface KGraphPackage extends EPackage {
     int KGRAPH_ELEMENT_FEATURE_COUNT = EcorePackage.EMODEL_ELEMENT_FEATURE_COUNT + 1;
 
     /**
-     * The meta object id for the '{@link de.cau.cs.kieler.core.graph.kgraph.KGraphData <em>Data</em>}' class.
+     * The meta object id for the '{@link de.cau.cs.kieler.core.kgraph.KGraphData <em>Data</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see de.cau.cs.kieler.core.graph.kgraph.KGraphData
-     * @see de.cau.cs.kieler.core.graph.kgraph.impl.KGraphPackageImpl#getKGraphData()
+     * @see de.cau.cs.kieler.core.kgraph.KGraphData
+     * @see de.cau.cs.kieler.core.kgraph.impl.KGraphPackageImpl#getKGraphData()
      * @generated
      */
     int KGRAPH_DATA = 1;
@@ -129,11 +129,11 @@ public interface KGraphPackage extends EPackage {
     int KGRAPH_DATA_FEATURE_COUNT = NotationPackage.STYLE_FEATURE_COUNT + 0;
 
     /**
-     * The meta object id for the '{@link de.cau.cs.kieler.core.graph.kgraph.impl.KNodeImpl <em>KNode</em>}' class.
+     * The meta object id for the '{@link de.cau.cs.kieler.core.kgraph.impl.KNodeImpl <em>KNode</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see de.cau.cs.kieler.core.graph.kgraph.impl.KNodeImpl
-     * @see de.cau.cs.kieler.core.graph.kgraph.impl.KGraphPackageImpl#getKNode()
+     * @see de.cau.cs.kieler.core.kgraph.impl.KNodeImpl
+     * @see de.cau.cs.kieler.core.kgraph.impl.KGraphPackageImpl#getKNode()
      * @generated
      */
     int KNODE = 2;
@@ -220,11 +220,11 @@ public interface KGraphPackage extends EPackage {
     int KNODE_FEATURE_COUNT = KGRAPH_ELEMENT_FEATURE_COUNT + 6;
 
     /**
-     * The meta object id for the '{@link de.cau.cs.kieler.core.graph.kgraph.impl.KEdgeImpl <em>KEdge</em>}' class.
+     * The meta object id for the '{@link de.cau.cs.kieler.core.kgraph.impl.KEdgeImpl <em>KEdge</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see de.cau.cs.kieler.core.graph.kgraph.impl.KEdgeImpl
-     * @see de.cau.cs.kieler.core.graph.kgraph.impl.KGraphPackageImpl#getKEdge()
+     * @see de.cau.cs.kieler.core.kgraph.impl.KEdgeImpl
+     * @see de.cau.cs.kieler.core.kgraph.impl.KGraphPackageImpl#getKEdge()
      * @generated
      */
     int KEDGE = 3;
@@ -302,11 +302,11 @@ public interface KGraphPackage extends EPackage {
     int KEDGE_FEATURE_COUNT = KGRAPH_ELEMENT_FEATURE_COUNT + 5;
 
     /**
-     * The meta object id for the '{@link de.cau.cs.kieler.core.graph.kgraph.impl.KPortImpl <em>KPort</em>}' class.
+     * The meta object id for the '{@link de.cau.cs.kieler.core.kgraph.impl.KPortImpl <em>KPort</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see de.cau.cs.kieler.core.graph.kgraph.impl.KPortImpl
-     * @see de.cau.cs.kieler.core.graph.kgraph.impl.KGraphPackageImpl#getKPort()
+     * @see de.cau.cs.kieler.core.kgraph.impl.KPortImpl
+     * @see de.cau.cs.kieler.core.kgraph.impl.KGraphPackageImpl#getKPort()
      * @generated
      */
     int KPORT = 4;
@@ -375,11 +375,11 @@ public interface KGraphPackage extends EPackage {
     int KPORT_FEATURE_COUNT = KGRAPH_ELEMENT_FEATURE_COUNT + 4;
 
     /**
-     * The meta object id for the '{@link de.cau.cs.kieler.core.graph.kgraph.impl.KLabelImpl <em>KLabel</em>}' class.
+     * The meta object id for the '{@link de.cau.cs.kieler.core.kgraph.impl.KLabelImpl <em>KLabel</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see de.cau.cs.kieler.core.graph.kgraph.impl.KLabelImpl
-     * @see de.cau.cs.kieler.core.graph.kgraph.impl.KGraphPackageImpl#getKLabel()
+     * @see de.cau.cs.kieler.core.kgraph.impl.KLabelImpl
+     * @see de.cau.cs.kieler.core.kgraph.impl.KGraphPackageImpl#getKLabel()
      * @generated
      */
     int KLABEL = 5;
@@ -421,11 +421,11 @@ public interface KGraphPackage extends EPackage {
     int KLABEL_FEATURE_COUNT = KGRAPH_ELEMENT_FEATURE_COUNT + 1;
 
     /**
-     * The meta object id for the '{@link de.cau.cs.kieler.core.graph.kgraph.impl.KOptionImpl <em>KOption</em>}' class.
+     * The meta object id for the '{@link de.cau.cs.kieler.core.kgraph.impl.KOptionImpl <em>KOption</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see de.cau.cs.kieler.core.graph.kgraph.impl.KOptionImpl
-     * @see de.cau.cs.kieler.core.graph.kgraph.impl.KGraphPackageImpl#getKOption()
+     * @see de.cau.cs.kieler.core.kgraph.impl.KOptionImpl
+     * @see de.cau.cs.kieler.core.kgraph.impl.KGraphPackageImpl#getKOption()
      * @generated
      */
     int KOPTION = 6;
@@ -449,11 +449,11 @@ public interface KGraphPackage extends EPackage {
     int KOPTION_FEATURE_COUNT = 1;
 
     /**
-     * The meta object id for the '{@link de.cau.cs.kieler.core.graph.kgraph.impl.KStringOptionImpl <em>KString Option</em>}' class.
+     * The meta object id for the '{@link de.cau.cs.kieler.core.kgraph.impl.KStringOptionImpl <em>KString Option</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see de.cau.cs.kieler.core.graph.kgraph.impl.KStringOptionImpl
-     * @see de.cau.cs.kieler.core.graph.kgraph.impl.KGraphPackageImpl#getKStringOption()
+     * @see de.cau.cs.kieler.core.kgraph.impl.KStringOptionImpl
+     * @see de.cau.cs.kieler.core.kgraph.impl.KGraphPackageImpl#getKStringOption()
      * @generated
      */
     int KSTRING_OPTION = 7;
@@ -486,11 +486,11 @@ public interface KGraphPackage extends EPackage {
     int KSTRING_OPTION_FEATURE_COUNT = KOPTION_FEATURE_COUNT + 1;
 
     /**
-     * The meta object id for the '{@link de.cau.cs.kieler.core.graph.kgraph.impl.KIntOptionImpl <em>KInt Option</em>}' class.
+     * The meta object id for the '{@link de.cau.cs.kieler.core.kgraph.impl.KIntOptionImpl <em>KInt Option</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see de.cau.cs.kieler.core.graph.kgraph.impl.KIntOptionImpl
-     * @see de.cau.cs.kieler.core.graph.kgraph.impl.KGraphPackageImpl#getKIntOption()
+     * @see de.cau.cs.kieler.core.kgraph.impl.KIntOptionImpl
+     * @see de.cau.cs.kieler.core.kgraph.impl.KGraphPackageImpl#getKIntOption()
      * @generated
      */
     int KINT_OPTION = 8;
@@ -523,11 +523,11 @@ public interface KGraphPackage extends EPackage {
     int KINT_OPTION_FEATURE_COUNT = KOPTION_FEATURE_COUNT + 1;
 
     /**
-     * The meta object id for the '{@link de.cau.cs.kieler.core.graph.kgraph.impl.KFloatOptionImpl <em>KFloat Option</em>}' class.
+     * The meta object id for the '{@link de.cau.cs.kieler.core.kgraph.impl.KFloatOptionImpl <em>KFloat Option</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see de.cau.cs.kieler.core.graph.kgraph.impl.KFloatOptionImpl
-     * @see de.cau.cs.kieler.core.graph.kgraph.impl.KGraphPackageImpl#getKFloatOption()
+     * @see de.cau.cs.kieler.core.kgraph.impl.KFloatOptionImpl
+     * @see de.cau.cs.kieler.core.kgraph.impl.KGraphPackageImpl#getKFloatOption()
      * @generated
      */
     int KFLOAT_OPTION = 9;
@@ -560,353 +560,353 @@ public interface KGraphPackage extends EPackage {
     int KFLOAT_OPTION_FEATURE_COUNT = KOPTION_FEATURE_COUNT + 1;
 
     /**
-     * The meta object id for the '{@link de.cau.cs.kieler.core.graph.kgraph.KPortType <em>KPort Type</em>}' enum.
+     * The meta object id for the '{@link de.cau.cs.kieler.core.kgraph.KPortType <em>KPort Type</em>}' enum.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see de.cau.cs.kieler.core.graph.kgraph.KPortType
-     * @see de.cau.cs.kieler.core.graph.kgraph.impl.KGraphPackageImpl#getKPortType()
+     * @see de.cau.cs.kieler.core.kgraph.KPortType
+     * @see de.cau.cs.kieler.core.kgraph.impl.KGraphPackageImpl#getKPortType()
      * @generated
      */
     int KPORT_TYPE = 10;
 
 
     /**
-     * Returns the meta object for class '{@link de.cau.cs.kieler.core.graph.kgraph.KGraphElement <em>Element</em>}'.
+     * Returns the meta object for class '{@link de.cau.cs.kieler.core.kgraph.KGraphElement <em>Element</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for class '<em>Element</em>'.
-     * @see de.cau.cs.kieler.core.graph.kgraph.KGraphElement
+     * @see de.cau.cs.kieler.core.kgraph.KGraphElement
      * @generated
      */
     EClass getKGraphElement();
 
     /**
-     * Returns the meta object for the containment reference list '{@link de.cau.cs.kieler.core.graph.kgraph.KGraphElement#getData <em>Data</em>}'.
+     * Returns the meta object for the containment reference list '{@link de.cau.cs.kieler.core.kgraph.KGraphElement#getData <em>Data</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for the containment reference list '<em>Data</em>'.
-     * @see de.cau.cs.kieler.core.graph.kgraph.KGraphElement#getData()
+     * @see de.cau.cs.kieler.core.kgraph.KGraphElement#getData()
      * @see #getKGraphElement()
      * @generated
      */
     EReference getKGraphElement_Data();
 
     /**
-     * Returns the meta object for class '{@link de.cau.cs.kieler.core.graph.kgraph.KGraphData <em>Data</em>}'.
+     * Returns the meta object for class '{@link de.cau.cs.kieler.core.kgraph.KGraphData <em>Data</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for class '<em>Data</em>'.
-     * @see de.cau.cs.kieler.core.graph.kgraph.KGraphData
+     * @see de.cau.cs.kieler.core.kgraph.KGraphData
      * @generated
      */
     EClass getKGraphData();
 
     /**
-     * Returns the meta object for class '{@link de.cau.cs.kieler.core.graph.kgraph.KNode <em>KNode</em>}'.
+     * Returns the meta object for class '{@link de.cau.cs.kieler.core.kgraph.KNode <em>KNode</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for class '<em>KNode</em>'.
-     * @see de.cau.cs.kieler.core.graph.kgraph.KNode
+     * @see de.cau.cs.kieler.core.kgraph.KNode
      * @generated
      */
     EClass getKNode();
 
     /**
-     * Returns the meta object for the containment reference list '{@link de.cau.cs.kieler.core.graph.kgraph.KNode#getChildren <em>Children</em>}'.
+     * Returns the meta object for the containment reference list '{@link de.cau.cs.kieler.core.kgraph.KNode#getChildren <em>Children</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for the containment reference list '<em>Children</em>'.
-     * @see de.cau.cs.kieler.core.graph.kgraph.KNode#getChildren()
+     * @see de.cau.cs.kieler.core.kgraph.KNode#getChildren()
      * @see #getKNode()
      * @generated
      */
     EReference getKNode_Children();
 
     /**
-     * Returns the meta object for the container reference '{@link de.cau.cs.kieler.core.graph.kgraph.KNode#getParent <em>Parent</em>}'.
+     * Returns the meta object for the container reference '{@link de.cau.cs.kieler.core.kgraph.KNode#getParent <em>Parent</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for the container reference '<em>Parent</em>'.
-     * @see de.cau.cs.kieler.core.graph.kgraph.KNode#getParent()
+     * @see de.cau.cs.kieler.core.kgraph.KNode#getParent()
      * @see #getKNode()
      * @generated
      */
     EReference getKNode_Parent();
 
     /**
-     * Returns the meta object for the containment reference list '{@link de.cau.cs.kieler.core.graph.kgraph.KNode#getPorts <em>Ports</em>}'.
+     * Returns the meta object for the containment reference list '{@link de.cau.cs.kieler.core.kgraph.KNode#getPorts <em>Ports</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for the containment reference list '<em>Ports</em>'.
-     * @see de.cau.cs.kieler.core.graph.kgraph.KNode#getPorts()
+     * @see de.cau.cs.kieler.core.kgraph.KNode#getPorts()
      * @see #getKNode()
      * @generated
      */
     EReference getKNode_Ports();
 
     /**
-     * Returns the meta object for the containment reference list '{@link de.cau.cs.kieler.core.graph.kgraph.KNode#getOutgoingEdges <em>Outgoing Edges</em>}'.
+     * Returns the meta object for the containment reference list '{@link de.cau.cs.kieler.core.kgraph.KNode#getOutgoingEdges <em>Outgoing Edges</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for the containment reference list '<em>Outgoing Edges</em>'.
-     * @see de.cau.cs.kieler.core.graph.kgraph.KNode#getOutgoingEdges()
+     * @see de.cau.cs.kieler.core.kgraph.KNode#getOutgoingEdges()
      * @see #getKNode()
      * @generated
      */
     EReference getKNode_OutgoingEdges();
 
     /**
-     * Returns the meta object for the reference list '{@link de.cau.cs.kieler.core.graph.kgraph.KNode#getIncomingEdges <em>Incoming Edges</em>}'.
+     * Returns the meta object for the reference list '{@link de.cau.cs.kieler.core.kgraph.KNode#getIncomingEdges <em>Incoming Edges</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for the reference list '<em>Incoming Edges</em>'.
-     * @see de.cau.cs.kieler.core.graph.kgraph.KNode#getIncomingEdges()
+     * @see de.cau.cs.kieler.core.kgraph.KNode#getIncomingEdges()
      * @see #getKNode()
      * @generated
      */
     EReference getKNode_IncomingEdges();
 
     /**
-     * Returns the meta object for the containment reference '{@link de.cau.cs.kieler.core.graph.kgraph.KNode#getLabel <em>Label</em>}'.
+     * Returns the meta object for the containment reference '{@link de.cau.cs.kieler.core.kgraph.KNode#getLabel <em>Label</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for the containment reference '<em>Label</em>'.
-     * @see de.cau.cs.kieler.core.graph.kgraph.KNode#getLabel()
+     * @see de.cau.cs.kieler.core.kgraph.KNode#getLabel()
      * @see #getKNode()
      * @generated
      */
     EReference getKNode_Label();
 
     /**
-     * Returns the meta object for class '{@link de.cau.cs.kieler.core.graph.kgraph.KEdge <em>KEdge</em>}'.
+     * Returns the meta object for class '{@link de.cau.cs.kieler.core.kgraph.KEdge <em>KEdge</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for class '<em>KEdge</em>'.
-     * @see de.cau.cs.kieler.core.graph.kgraph.KEdge
+     * @see de.cau.cs.kieler.core.kgraph.KEdge
      * @generated
      */
     EClass getKEdge();
 
     /**
-     * Returns the meta object for the container reference '{@link de.cau.cs.kieler.core.graph.kgraph.KEdge#getSource <em>Source</em>}'.
+     * Returns the meta object for the container reference '{@link de.cau.cs.kieler.core.kgraph.KEdge#getSource <em>Source</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for the container reference '<em>Source</em>'.
-     * @see de.cau.cs.kieler.core.graph.kgraph.KEdge#getSource()
+     * @see de.cau.cs.kieler.core.kgraph.KEdge#getSource()
      * @see #getKEdge()
      * @generated
      */
     EReference getKEdge_Source();
 
     /**
-     * Returns the meta object for the reference '{@link de.cau.cs.kieler.core.graph.kgraph.KEdge#getTarget <em>Target</em>}'.
+     * Returns the meta object for the reference '{@link de.cau.cs.kieler.core.kgraph.KEdge#getTarget <em>Target</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for the reference '<em>Target</em>'.
-     * @see de.cau.cs.kieler.core.graph.kgraph.KEdge#getTarget()
+     * @see de.cau.cs.kieler.core.kgraph.KEdge#getTarget()
      * @see #getKEdge()
      * @generated
      */
     EReference getKEdge_Target();
 
     /**
-     * Returns the meta object for the reference '{@link de.cau.cs.kieler.core.graph.kgraph.KEdge#getSourcePort <em>Source Port</em>}'.
+     * Returns the meta object for the reference '{@link de.cau.cs.kieler.core.kgraph.KEdge#getSourcePort <em>Source Port</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for the reference '<em>Source Port</em>'.
-     * @see de.cau.cs.kieler.core.graph.kgraph.KEdge#getSourcePort()
+     * @see de.cau.cs.kieler.core.kgraph.KEdge#getSourcePort()
      * @see #getKEdge()
      * @generated
      */
     EReference getKEdge_SourcePort();
 
     /**
-     * Returns the meta object for the reference '{@link de.cau.cs.kieler.core.graph.kgraph.KEdge#getTargetPort <em>Target Port</em>}'.
+     * Returns the meta object for the reference '{@link de.cau.cs.kieler.core.kgraph.KEdge#getTargetPort <em>Target Port</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for the reference '<em>Target Port</em>'.
-     * @see de.cau.cs.kieler.core.graph.kgraph.KEdge#getTargetPort()
+     * @see de.cau.cs.kieler.core.kgraph.KEdge#getTargetPort()
      * @see #getKEdge()
      * @generated
      */
     EReference getKEdge_TargetPort();
 
     /**
-     * Returns the meta object for the containment reference list '{@link de.cau.cs.kieler.core.graph.kgraph.KEdge#getLabels <em>Labels</em>}'.
+     * Returns the meta object for the containment reference list '{@link de.cau.cs.kieler.core.kgraph.KEdge#getLabels <em>Labels</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for the containment reference list '<em>Labels</em>'.
-     * @see de.cau.cs.kieler.core.graph.kgraph.KEdge#getLabels()
+     * @see de.cau.cs.kieler.core.kgraph.KEdge#getLabels()
      * @see #getKEdge()
      * @generated
      */
     EReference getKEdge_Labels();
 
     /**
-     * Returns the meta object for class '{@link de.cau.cs.kieler.core.graph.kgraph.KPort <em>KPort</em>}'.
+     * Returns the meta object for class '{@link de.cau.cs.kieler.core.kgraph.KPort <em>KPort</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for class '<em>KPort</em>'.
-     * @see de.cau.cs.kieler.core.graph.kgraph.KPort
+     * @see de.cau.cs.kieler.core.kgraph.KPort
      * @generated
      */
     EClass getKPort();
 
     /**
-     * Returns the meta object for the container reference '{@link de.cau.cs.kieler.core.graph.kgraph.KPort#getNode <em>Node</em>}'.
+     * Returns the meta object for the container reference '{@link de.cau.cs.kieler.core.kgraph.KPort#getNode <em>Node</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for the container reference '<em>Node</em>'.
-     * @see de.cau.cs.kieler.core.graph.kgraph.KPort#getNode()
+     * @see de.cau.cs.kieler.core.kgraph.KPort#getNode()
      * @see #getKPort()
      * @generated
      */
     EReference getKPort_Node();
 
     /**
-     * Returns the meta object for the reference list '{@link de.cau.cs.kieler.core.graph.kgraph.KPort#getEdges <em>Edges</em>}'.
+     * Returns the meta object for the reference list '{@link de.cau.cs.kieler.core.kgraph.KPort#getEdges <em>Edges</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for the reference list '<em>Edges</em>'.
-     * @see de.cau.cs.kieler.core.graph.kgraph.KPort#getEdges()
+     * @see de.cau.cs.kieler.core.kgraph.KPort#getEdges()
      * @see #getKPort()
      * @generated
      */
     EReference getKPort_Edges();
 
     /**
-     * Returns the meta object for the containment reference '{@link de.cau.cs.kieler.core.graph.kgraph.KPort#getLabel <em>Label</em>}'.
+     * Returns the meta object for the containment reference '{@link de.cau.cs.kieler.core.kgraph.KPort#getLabel <em>Label</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for the containment reference '<em>Label</em>'.
-     * @see de.cau.cs.kieler.core.graph.kgraph.KPort#getLabel()
+     * @see de.cau.cs.kieler.core.kgraph.KPort#getLabel()
      * @see #getKPort()
      * @generated
      */
     EReference getKPort_Label();
 
     /**
-     * Returns the meta object for the attribute '{@link de.cau.cs.kieler.core.graph.kgraph.KPort#getType <em>Type</em>}'.
+     * Returns the meta object for the attribute '{@link de.cau.cs.kieler.core.kgraph.KPort#getType <em>Type</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for the attribute '<em>Type</em>'.
-     * @see de.cau.cs.kieler.core.graph.kgraph.KPort#getType()
+     * @see de.cau.cs.kieler.core.kgraph.KPort#getType()
      * @see #getKPort()
      * @generated
      */
     EAttribute getKPort_Type();
 
     /**
-     * Returns the meta object for class '{@link de.cau.cs.kieler.core.graph.kgraph.KLabel <em>KLabel</em>}'.
+     * Returns the meta object for class '{@link de.cau.cs.kieler.core.kgraph.KLabel <em>KLabel</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for class '<em>KLabel</em>'.
-     * @see de.cau.cs.kieler.core.graph.kgraph.KLabel
+     * @see de.cau.cs.kieler.core.kgraph.KLabel
      * @generated
      */
     EClass getKLabel();
 
     /**
-     * Returns the meta object for the attribute '{@link de.cau.cs.kieler.core.graph.kgraph.KLabel#getText <em>Text</em>}'.
+     * Returns the meta object for the attribute '{@link de.cau.cs.kieler.core.kgraph.KLabel#getText <em>Text</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for the attribute '<em>Text</em>'.
-     * @see de.cau.cs.kieler.core.graph.kgraph.KLabel#getText()
+     * @see de.cau.cs.kieler.core.kgraph.KLabel#getText()
      * @see #getKLabel()
      * @generated
      */
     EAttribute getKLabel_Text();
 
     /**
-     * Returns the meta object for class '{@link de.cau.cs.kieler.core.graph.kgraph.KOption <em>KOption</em>}'.
+     * Returns the meta object for class '{@link de.cau.cs.kieler.core.kgraph.KOption <em>KOption</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for class '<em>KOption</em>'.
-     * @see de.cau.cs.kieler.core.graph.kgraph.KOption
+     * @see de.cau.cs.kieler.core.kgraph.KOption
      * @generated
      */
     EClass getKOption();
 
     /**
-     * Returns the meta object for the attribute '{@link de.cau.cs.kieler.core.graph.kgraph.KOption#getKey <em>Key</em>}'.
+     * Returns the meta object for the attribute '{@link de.cau.cs.kieler.core.kgraph.KOption#getKey <em>Key</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for the attribute '<em>Key</em>'.
-     * @see de.cau.cs.kieler.core.graph.kgraph.KOption#getKey()
+     * @see de.cau.cs.kieler.core.kgraph.KOption#getKey()
      * @see #getKOption()
      * @generated
      */
     EAttribute getKOption_Key();
 
     /**
-     * Returns the meta object for class '{@link de.cau.cs.kieler.core.graph.kgraph.KStringOption <em>KString Option</em>}'.
+     * Returns the meta object for class '{@link de.cau.cs.kieler.core.kgraph.KStringOption <em>KString Option</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for class '<em>KString Option</em>'.
-     * @see de.cau.cs.kieler.core.graph.kgraph.KStringOption
+     * @see de.cau.cs.kieler.core.kgraph.KStringOption
      * @generated
      */
     EClass getKStringOption();
 
     /**
-     * Returns the meta object for the attribute '{@link de.cau.cs.kieler.core.graph.kgraph.KStringOption#getValue <em>Value</em>}'.
+     * Returns the meta object for the attribute '{@link de.cau.cs.kieler.core.kgraph.KStringOption#getValue <em>Value</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for the attribute '<em>Value</em>'.
-     * @see de.cau.cs.kieler.core.graph.kgraph.KStringOption#getValue()
+     * @see de.cau.cs.kieler.core.kgraph.KStringOption#getValue()
      * @see #getKStringOption()
      * @generated
      */
     EAttribute getKStringOption_Value();
 
     /**
-     * Returns the meta object for class '{@link de.cau.cs.kieler.core.graph.kgraph.KIntOption <em>KInt Option</em>}'.
+     * Returns the meta object for class '{@link de.cau.cs.kieler.core.kgraph.KIntOption <em>KInt Option</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for class '<em>KInt Option</em>'.
-     * @see de.cau.cs.kieler.core.graph.kgraph.KIntOption
+     * @see de.cau.cs.kieler.core.kgraph.KIntOption
      * @generated
      */
     EClass getKIntOption();
 
     /**
-     * Returns the meta object for the attribute '{@link de.cau.cs.kieler.core.graph.kgraph.KIntOption#getValue <em>Value</em>}'.
+     * Returns the meta object for the attribute '{@link de.cau.cs.kieler.core.kgraph.KIntOption#getValue <em>Value</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for the attribute '<em>Value</em>'.
-     * @see de.cau.cs.kieler.core.graph.kgraph.KIntOption#getValue()
+     * @see de.cau.cs.kieler.core.kgraph.KIntOption#getValue()
      * @see #getKIntOption()
      * @generated
      */
     EAttribute getKIntOption_Value();
 
     /**
-     * Returns the meta object for class '{@link de.cau.cs.kieler.core.graph.kgraph.KFloatOption <em>KFloat Option</em>}'.
+     * Returns the meta object for class '{@link de.cau.cs.kieler.core.kgraph.KFloatOption <em>KFloat Option</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for class '<em>KFloat Option</em>'.
-     * @see de.cau.cs.kieler.core.graph.kgraph.KFloatOption
+     * @see de.cau.cs.kieler.core.kgraph.KFloatOption
      * @generated
      */
     EClass getKFloatOption();
 
     /**
-     * Returns the meta object for the attribute '{@link de.cau.cs.kieler.core.graph.kgraph.KFloatOption#getValue <em>Value</em>}'.
+     * Returns the meta object for the attribute '{@link de.cau.cs.kieler.core.kgraph.KFloatOption#getValue <em>Value</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for the attribute '<em>Value</em>'.
-     * @see de.cau.cs.kieler.core.graph.kgraph.KFloatOption#getValue()
+     * @see de.cau.cs.kieler.core.kgraph.KFloatOption#getValue()
      * @see #getKFloatOption()
      * @generated
      */
     EAttribute getKFloatOption_Value();
 
     /**
-     * Returns the meta object for enum '{@link de.cau.cs.kieler.core.graph.kgraph.KPortType <em>KPort Type</em>}'.
+     * Returns the meta object for enum '{@link de.cau.cs.kieler.core.kgraph.KPortType <em>KPort Type</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @return the meta object for enum '<em>KPort Type</em>'.
-     * @see de.cau.cs.kieler.core.graph.kgraph.KPortType
+     * @see de.cau.cs.kieler.core.kgraph.KPortType
      * @generated
      */
     EEnum getKPortType();
@@ -934,11 +934,11 @@ public interface KGraphPackage extends EPackage {
      */
     interface Literals {
         /**
-         * The meta object literal for the '{@link de.cau.cs.kieler.core.graph.kgraph.impl.KGraphElementImpl <em>Element</em>}' class.
+         * The meta object literal for the '{@link de.cau.cs.kieler.core.kgraph.impl.KGraphElementImpl <em>Element</em>}' class.
          * <!-- begin-user-doc -->
          * <!-- end-user-doc -->
-         * @see de.cau.cs.kieler.core.graph.kgraph.impl.KGraphElementImpl
-         * @see de.cau.cs.kieler.core.graph.kgraph.impl.KGraphPackageImpl#getKGraphElement()
+         * @see de.cau.cs.kieler.core.kgraph.impl.KGraphElementImpl
+         * @see de.cau.cs.kieler.core.kgraph.impl.KGraphPackageImpl#getKGraphElement()
          * @generated
          */
         EClass KGRAPH_ELEMENT = eINSTANCE.getKGraphElement();
@@ -952,21 +952,21 @@ public interface KGraphPackage extends EPackage {
         EReference KGRAPH_ELEMENT__DATA = eINSTANCE.getKGraphElement_Data();
 
         /**
-         * The meta object literal for the '{@link de.cau.cs.kieler.core.graph.kgraph.KGraphData <em>Data</em>}' class.
+         * The meta object literal for the '{@link de.cau.cs.kieler.core.kgraph.KGraphData <em>Data</em>}' class.
          * <!-- begin-user-doc -->
          * <!-- end-user-doc -->
-         * @see de.cau.cs.kieler.core.graph.kgraph.KGraphData
-         * @see de.cau.cs.kieler.core.graph.kgraph.impl.KGraphPackageImpl#getKGraphData()
+         * @see de.cau.cs.kieler.core.kgraph.KGraphData
+         * @see de.cau.cs.kieler.core.kgraph.impl.KGraphPackageImpl#getKGraphData()
          * @generated
          */
         EClass KGRAPH_DATA = eINSTANCE.getKGraphData();
 
         /**
-         * The meta object literal for the '{@link de.cau.cs.kieler.core.graph.kgraph.impl.KNodeImpl <em>KNode</em>}' class.
+         * The meta object literal for the '{@link de.cau.cs.kieler.core.kgraph.impl.KNodeImpl <em>KNode</em>}' class.
          * <!-- begin-user-doc -->
          * <!-- end-user-doc -->
-         * @see de.cau.cs.kieler.core.graph.kgraph.impl.KNodeImpl
-         * @see de.cau.cs.kieler.core.graph.kgraph.impl.KGraphPackageImpl#getKNode()
+         * @see de.cau.cs.kieler.core.kgraph.impl.KNodeImpl
+         * @see de.cau.cs.kieler.core.kgraph.impl.KGraphPackageImpl#getKNode()
          * @generated
          */
         EClass KNODE = eINSTANCE.getKNode();
@@ -1020,11 +1020,11 @@ public interface KGraphPackage extends EPackage {
         EReference KNODE__LABEL = eINSTANCE.getKNode_Label();
 
         /**
-         * The meta object literal for the '{@link de.cau.cs.kieler.core.graph.kgraph.impl.KEdgeImpl <em>KEdge</em>}' class.
+         * The meta object literal for the '{@link de.cau.cs.kieler.core.kgraph.impl.KEdgeImpl <em>KEdge</em>}' class.
          * <!-- begin-user-doc -->
          * <!-- end-user-doc -->
-         * @see de.cau.cs.kieler.core.graph.kgraph.impl.KEdgeImpl
-         * @see de.cau.cs.kieler.core.graph.kgraph.impl.KGraphPackageImpl#getKEdge()
+         * @see de.cau.cs.kieler.core.kgraph.impl.KEdgeImpl
+         * @see de.cau.cs.kieler.core.kgraph.impl.KGraphPackageImpl#getKEdge()
          * @generated
          */
         EClass KEDGE = eINSTANCE.getKEdge();
@@ -1070,11 +1070,11 @@ public interface KGraphPackage extends EPackage {
         EReference KEDGE__LABELS = eINSTANCE.getKEdge_Labels();
 
         /**
-         * The meta object literal for the '{@link de.cau.cs.kieler.core.graph.kgraph.impl.KPortImpl <em>KPort</em>}' class.
+         * The meta object literal for the '{@link de.cau.cs.kieler.core.kgraph.impl.KPortImpl <em>KPort</em>}' class.
          * <!-- begin-user-doc -->
          * <!-- end-user-doc -->
-         * @see de.cau.cs.kieler.core.graph.kgraph.impl.KPortImpl
-         * @see de.cau.cs.kieler.core.graph.kgraph.impl.KGraphPackageImpl#getKPort()
+         * @see de.cau.cs.kieler.core.kgraph.impl.KPortImpl
+         * @see de.cau.cs.kieler.core.kgraph.impl.KGraphPackageImpl#getKPort()
          * @generated
          */
         EClass KPORT = eINSTANCE.getKPort();
@@ -1112,11 +1112,11 @@ public interface KGraphPackage extends EPackage {
         EAttribute KPORT__TYPE = eINSTANCE.getKPort_Type();
 
         /**
-         * The meta object literal for the '{@link de.cau.cs.kieler.core.graph.kgraph.impl.KLabelImpl <em>KLabel</em>}' class.
+         * The meta object literal for the '{@link de.cau.cs.kieler.core.kgraph.impl.KLabelImpl <em>KLabel</em>}' class.
          * <!-- begin-user-doc -->
          * <!-- end-user-doc -->
-         * @see de.cau.cs.kieler.core.graph.kgraph.impl.KLabelImpl
-         * @see de.cau.cs.kieler.core.graph.kgraph.impl.KGraphPackageImpl#getKLabel()
+         * @see de.cau.cs.kieler.core.kgraph.impl.KLabelImpl
+         * @see de.cau.cs.kieler.core.kgraph.impl.KGraphPackageImpl#getKLabel()
          * @generated
          */
         EClass KLABEL = eINSTANCE.getKLabel();
@@ -1130,11 +1130,11 @@ public interface KGraphPackage extends EPackage {
         EAttribute KLABEL__TEXT = eINSTANCE.getKLabel_Text();
 
         /**
-         * The meta object literal for the '{@link de.cau.cs.kieler.core.graph.kgraph.impl.KOptionImpl <em>KOption</em>}' class.
+         * The meta object literal for the '{@link de.cau.cs.kieler.core.kgraph.impl.KOptionImpl <em>KOption</em>}' class.
          * <!-- begin-user-doc -->
          * <!-- end-user-doc -->
-         * @see de.cau.cs.kieler.core.graph.kgraph.impl.KOptionImpl
-         * @see de.cau.cs.kieler.core.graph.kgraph.impl.KGraphPackageImpl#getKOption()
+         * @see de.cau.cs.kieler.core.kgraph.impl.KOptionImpl
+         * @see de.cau.cs.kieler.core.kgraph.impl.KGraphPackageImpl#getKOption()
          * @generated
          */
         EClass KOPTION = eINSTANCE.getKOption();
@@ -1148,11 +1148,11 @@ public interface KGraphPackage extends EPackage {
         EAttribute KOPTION__KEY = eINSTANCE.getKOption_Key();
 
         /**
-         * The meta object literal for the '{@link de.cau.cs.kieler.core.graph.kgraph.impl.KStringOptionImpl <em>KString Option</em>}' class.
+         * The meta object literal for the '{@link de.cau.cs.kieler.core.kgraph.impl.KStringOptionImpl <em>KString Option</em>}' class.
          * <!-- begin-user-doc -->
          * <!-- end-user-doc -->
-         * @see de.cau.cs.kieler.core.graph.kgraph.impl.KStringOptionImpl
-         * @see de.cau.cs.kieler.core.graph.kgraph.impl.KGraphPackageImpl#getKStringOption()
+         * @see de.cau.cs.kieler.core.kgraph.impl.KStringOptionImpl
+         * @see de.cau.cs.kieler.core.kgraph.impl.KGraphPackageImpl#getKStringOption()
          * @generated
          */
         EClass KSTRING_OPTION = eINSTANCE.getKStringOption();
@@ -1166,11 +1166,11 @@ public interface KGraphPackage extends EPackage {
         EAttribute KSTRING_OPTION__VALUE = eINSTANCE.getKStringOption_Value();
 
         /**
-         * The meta object literal for the '{@link de.cau.cs.kieler.core.graph.kgraph.impl.KIntOptionImpl <em>KInt Option</em>}' class.
+         * The meta object literal for the '{@link de.cau.cs.kieler.core.kgraph.impl.KIntOptionImpl <em>KInt Option</em>}' class.
          * <!-- begin-user-doc -->
          * <!-- end-user-doc -->
-         * @see de.cau.cs.kieler.core.graph.kgraph.impl.KIntOptionImpl
-         * @see de.cau.cs.kieler.core.graph.kgraph.impl.KGraphPackageImpl#getKIntOption()
+         * @see de.cau.cs.kieler.core.kgraph.impl.KIntOptionImpl
+         * @see de.cau.cs.kieler.core.kgraph.impl.KGraphPackageImpl#getKIntOption()
          * @generated
          */
         EClass KINT_OPTION = eINSTANCE.getKIntOption();
@@ -1184,11 +1184,11 @@ public interface KGraphPackage extends EPackage {
         EAttribute KINT_OPTION__VALUE = eINSTANCE.getKIntOption_Value();
 
         /**
-         * The meta object literal for the '{@link de.cau.cs.kieler.core.graph.kgraph.impl.KFloatOptionImpl <em>KFloat Option</em>}' class.
+         * The meta object literal for the '{@link de.cau.cs.kieler.core.kgraph.impl.KFloatOptionImpl <em>KFloat Option</em>}' class.
          * <!-- begin-user-doc -->
          * <!-- end-user-doc -->
-         * @see de.cau.cs.kieler.core.graph.kgraph.impl.KFloatOptionImpl
-         * @see de.cau.cs.kieler.core.graph.kgraph.impl.KGraphPackageImpl#getKFloatOption()
+         * @see de.cau.cs.kieler.core.kgraph.impl.KFloatOptionImpl
+         * @see de.cau.cs.kieler.core.kgraph.impl.KGraphPackageImpl#getKFloatOption()
          * @generated
          */
         EClass KFLOAT_OPTION = eINSTANCE.getKFloatOption();
@@ -1202,11 +1202,11 @@ public interface KGraphPackage extends EPackage {
         EAttribute KFLOAT_OPTION__VALUE = eINSTANCE.getKFloatOption_Value();
 
         /**
-         * The meta object literal for the '{@link de.cau.cs.kieler.core.graph.kgraph.KPortType <em>KPort Type</em>}' enum.
+         * The meta object literal for the '{@link de.cau.cs.kieler.core.kgraph.KPortType <em>KPort Type</em>}' enum.
          * <!-- begin-user-doc -->
          * <!-- end-user-doc -->
-         * @see de.cau.cs.kieler.core.graph.kgraph.KPortType
-         * @see de.cau.cs.kieler.core.graph.kgraph.impl.KGraphPackageImpl#getKPortType()
+         * @see de.cau.cs.kieler.core.kgraph.KPortType
+         * @see de.cau.cs.kieler.core.kgraph.impl.KGraphPackageImpl#getKPortType()
          * @generated
          */
         EEnum KPORT_TYPE = eINSTANCE.getKPortType();

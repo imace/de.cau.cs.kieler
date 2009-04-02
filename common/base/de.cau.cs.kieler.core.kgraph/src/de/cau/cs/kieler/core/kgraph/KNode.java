@@ -13,7 +13,7 @@
  *
  * $Id$
  */
-package de.cau.cs.kieler.core.graph.kgraph;
+package de.cau.cs.kieler.core.kgraph;
 
 import org.eclipse.emf.common.util.EList;
 
@@ -25,24 +25,24 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link de.cau.cs.kieler.core.graph.kgraph.KNode#getChildren <em>Children</em>}</li>
- *   <li>{@link de.cau.cs.kieler.core.graph.kgraph.KNode#getParent <em>Parent</em>}</li>
- *   <li>{@link de.cau.cs.kieler.core.graph.kgraph.KNode#getPorts <em>Ports</em>}</li>
- *   <li>{@link de.cau.cs.kieler.core.graph.kgraph.KNode#getOutgoingEdges <em>Outgoing Edges</em>}</li>
- *   <li>{@link de.cau.cs.kieler.core.graph.kgraph.KNode#getIncomingEdges <em>Incoming Edges</em>}</li>
- *   <li>{@link de.cau.cs.kieler.core.graph.kgraph.KNode#getLabel <em>Label</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.core.kgraph.KNode#getChildren <em>Children</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.core.kgraph.KNode#getParent <em>Parent</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.core.kgraph.KNode#getPorts <em>Ports</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.core.kgraph.KNode#getOutgoingEdges <em>Outgoing Edges</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.core.kgraph.KNode#getIncomingEdges <em>Incoming Edges</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.core.kgraph.KNode#getLabel <em>Label</em>}</li>
  * </ul>
  * </p>
  *
- * @see de.cau.cs.kieler.core.graph.kgraph.KGraphPackage#getKNode()
+ * @see de.cau.cs.kieler.core.kgraph.KGraphPackage#getKNode()
  * @model
  * @generated
  */
 public interface KNode extends KGraphElement {
     /**
      * Returns the value of the '<em><b>Children</b></em>' containment reference list.
-     * The list contents are of type {@link de.cau.cs.kieler.core.graph.kgraph.KNode}.
-     * It is bidirectional and its opposite is '{@link de.cau.cs.kieler.core.graph.kgraph.KNode#getParent <em>Parent</em>}'.
+     * The list contents are of type {@link de.cau.cs.kieler.core.kgraph.KNode}.
+     * It is bidirectional and its opposite is '{@link de.cau.cs.kieler.core.kgraph.KNode#getParent <em>Parent</em>}'.
      * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Children</em>' containment reference list isn't clear,
@@ -50,8 +50,8 @@ public interface KNode extends KGraphElement {
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Children</em>' containment reference list.
-     * @see de.cau.cs.kieler.core.graph.kgraph.KGraphPackage#getKNode_Children()
-     * @see de.cau.cs.kieler.core.graph.kgraph.KNode#getParent
+     * @see de.cau.cs.kieler.core.kgraph.KGraphPackage#getKNode_Children()
+     * @see de.cau.cs.kieler.core.kgraph.KNode#getParent
      * @model opposite="parent" containment="true"
      * @generated
      */
@@ -59,7 +59,7 @@ public interface KNode extends KGraphElement {
 
     /**
      * Returns the value of the '<em><b>Parent</b></em>' container reference.
-     * It is bidirectional and its opposite is '{@link de.cau.cs.kieler.core.graph.kgraph.KNode#getChildren <em>Children</em>}'.
+     * It is bidirectional and its opposite is '{@link de.cau.cs.kieler.core.kgraph.KNode#getChildren <em>Children</em>}'.
      * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Parent</em>' container reference isn't clear,
@@ -68,15 +68,15 @@ public interface KNode extends KGraphElement {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Parent</em>' container reference.
      * @see #setParent(KNode)
-     * @see de.cau.cs.kieler.core.graph.kgraph.KGraphPackage#getKNode_Parent()
-     * @see de.cau.cs.kieler.core.graph.kgraph.KNode#getChildren
+     * @see de.cau.cs.kieler.core.kgraph.KGraphPackage#getKNode_Parent()
+     * @see de.cau.cs.kieler.core.kgraph.KNode#getChildren
      * @model opposite="children" transient="false"
      * @generated
      */
     KNode getParent();
 
     /**
-     * Sets the value of the '{@link de.cau.cs.kieler.core.graph.kgraph.KNode#getParent <em>Parent</em>}' container reference.
+     * Sets the value of the '{@link de.cau.cs.kieler.core.kgraph.KNode#getParent <em>Parent</em>}' container reference.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @param value the new value of the '<em>Parent</em>' container reference.
@@ -87,8 +87,8 @@ public interface KNode extends KGraphElement {
 
     /**
      * Returns the value of the '<em><b>Ports</b></em>' containment reference list.
-     * The list contents are of type {@link de.cau.cs.kieler.core.graph.kgraph.KPort}.
-     * It is bidirectional and its opposite is '{@link de.cau.cs.kieler.core.graph.kgraph.KPort#getNode <em>Node</em>}'.
+     * The list contents are of type {@link de.cau.cs.kieler.core.kgraph.KPort}.
+     * It is bidirectional and its opposite is '{@link de.cau.cs.kieler.core.kgraph.KPort#getNode <em>Node</em>}'.
      * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Ports</em>' containment reference list isn't clear,
@@ -96,8 +96,8 @@ public interface KNode extends KGraphElement {
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Ports</em>' containment reference list.
-     * @see de.cau.cs.kieler.core.graph.kgraph.KGraphPackage#getKNode_Ports()
-     * @see de.cau.cs.kieler.core.graph.kgraph.KPort#getNode
+     * @see de.cau.cs.kieler.core.kgraph.KGraphPackage#getKNode_Ports()
+     * @see de.cau.cs.kieler.core.kgraph.KPort#getNode
      * @model opposite="node" containment="true"
      * @generated
      */
@@ -105,8 +105,8 @@ public interface KNode extends KGraphElement {
 
     /**
      * Returns the value of the '<em><b>Outgoing Edges</b></em>' containment reference list.
-     * The list contents are of type {@link de.cau.cs.kieler.core.graph.kgraph.KEdge}.
-     * It is bidirectional and its opposite is '{@link de.cau.cs.kieler.core.graph.kgraph.KEdge#getSource <em>Source</em>}'.
+     * The list contents are of type {@link de.cau.cs.kieler.core.kgraph.KEdge}.
+     * It is bidirectional and its opposite is '{@link de.cau.cs.kieler.core.kgraph.KEdge#getSource <em>Source</em>}'.
      * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Outgoing Edges</em>' containment reference list isn't clear,
@@ -114,8 +114,8 @@ public interface KNode extends KGraphElement {
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Outgoing Edges</em>' containment reference list.
-     * @see de.cau.cs.kieler.core.graph.kgraph.KGraphPackage#getKNode_OutgoingEdges()
-     * @see de.cau.cs.kieler.core.graph.kgraph.KEdge#getSource
+     * @see de.cau.cs.kieler.core.kgraph.KGraphPackage#getKNode_OutgoingEdges()
+     * @see de.cau.cs.kieler.core.kgraph.KEdge#getSource
      * @model opposite="source" containment="true"
      * @generated
      */
@@ -123,8 +123,8 @@ public interface KNode extends KGraphElement {
 
     /**
      * Returns the value of the '<em><b>Incoming Edges</b></em>' reference list.
-     * The list contents are of type {@link de.cau.cs.kieler.core.graph.kgraph.KEdge}.
-     * It is bidirectional and its opposite is '{@link de.cau.cs.kieler.core.graph.kgraph.KEdge#getTarget <em>Target</em>}'.
+     * The list contents are of type {@link de.cau.cs.kieler.core.kgraph.KEdge}.
+     * It is bidirectional and its opposite is '{@link de.cau.cs.kieler.core.kgraph.KEdge#getTarget <em>Target</em>}'.
      * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Incoming Edges</em>' reference list isn't clear,
@@ -132,8 +132,8 @@ public interface KNode extends KGraphElement {
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Incoming Edges</em>' reference list.
-     * @see de.cau.cs.kieler.core.graph.kgraph.KGraphPackage#getKNode_IncomingEdges()
-     * @see de.cau.cs.kieler.core.graph.kgraph.KEdge#getTarget
+     * @see de.cau.cs.kieler.core.kgraph.KGraphPackage#getKNode_IncomingEdges()
+     * @see de.cau.cs.kieler.core.kgraph.KEdge#getTarget
      * @model opposite="target"
      * @generated
      */
@@ -149,14 +149,14 @@ public interface KNode extends KGraphElement {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Label</em>' containment reference.
      * @see #setLabel(KLabel)
-     * @see de.cau.cs.kieler.core.graph.kgraph.KGraphPackage#getKNode_Label()
+     * @see de.cau.cs.kieler.core.kgraph.KGraphPackage#getKNode_Label()
      * @model containment="true"
      * @generated
      */
     KLabel getLabel();
 
     /**
-     * Sets the value of the '{@link de.cau.cs.kieler.core.graph.kgraph.KNode#getLabel <em>Label</em>}' containment reference.
+     * Sets the value of the '{@link de.cau.cs.kieler.core.kgraph.KNode#getLabel <em>Label</em>}' containment reference.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @param value the new value of the '<em>Label</em>' containment reference.

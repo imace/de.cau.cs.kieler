@@ -13,11 +13,11 @@
  *
  * $Id$
  */
-package de.cau.cs.kieler.core.graph.kgraph.impl;
+package de.cau.cs.kieler.core.kgraph.impl;
 
-import de.cau.cs.kieler.core.graph.kgraph.KGraphData;
-import de.cau.cs.kieler.core.graph.kgraph.KGraphElement;
-import de.cau.cs.kieler.core.graph.kgraph.KGraphPackage;
+import de.cau.cs.kieler.core.kgraph.KGraphData;
+import de.cau.cs.kieler.core.kgraph.KGraphElement;
+import de.cau.cs.kieler.core.kgraph.KGraphPackage;
 
 import java.util.Collection;
 
@@ -40,7 +40,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link de.cau.cs.kieler.core.graph.kgraph.impl.KGraphElementImpl#getData <em>Data</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.core.kgraph.impl.KGraphElementImpl#getData <em>Data</em>}</li>
  * </ul>
  * </p>
  *

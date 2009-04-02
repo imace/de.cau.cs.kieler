@@ -13,58 +13,57 @@
  *
  * $Id$
  */
-package de.cau.cs.kieler.core.graph.kgraph.impl;
+package de.cau.cs.kieler.core.kgraph.impl;
 
-import de.cau.cs.kieler.core.graph.kgraph.KGraphPackage;
-import de.cau.cs.kieler.core.graph.kgraph.KOption;
+import de.cau.cs.kieler.core.kgraph.KGraphPackage;
+import de.cau.cs.kieler.core.kgraph.KLabel;
 
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>KOption</b></em>'.
+ * An implementation of the model object '<em><b>KLabel</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link de.cau.cs.kieler.core.graph.kgraph.impl.KOptionImpl#getKey <em>Key</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.core.kgraph.impl.KLabelImpl#getText <em>Text</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class KOptionImpl extends EObjectImpl implements KOption {
+public class KLabelImpl extends KGraphElementImpl implements KLabel {
     /**
-     * The default value of the '{@link #getKey() <em>Key</em>}' attribute.
+     * The default value of the '{@link #getText() <em>Text</em>}' attribute.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getKey()
+     * @see #getText()
      * @generated
      * @ordered
      */
-    protected static final String KEY_EDEFAULT = null;
+    protected static final String TEXT_EDEFAULT = null;
 
     /**
-     * The cached value of the '{@link #getKey() <em>Key</em>}' attribute.
+     * The cached value of the '{@link #getText() <em>Text</em>}' attribute.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getKey()
+     * @see #getText()
      * @generated
      * @ordered
      */
-    protected String key = KEY_EDEFAULT;
+    protected String text = TEXT_EDEFAULT;
 
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    protected KOptionImpl() {
+    protected KLabelImpl() {
         super();
     }
 
@@ -75,7 +74,7 @@ public class KOptionImpl extends EObjectImpl implements KOption {
      */
     @Override
     protected EClass eStaticClass() {
-        return KGraphPackage.Literals.KOPTION;
+        return KGraphPackage.Literals.KLABEL;
     }
 
     /**
@@ -83,8 +82,8 @@ public class KOptionImpl extends EObjectImpl implements KOption {
      * <!-- end-user-doc -->
      * @generated
      */
-    public String getKey() {
-        return key;
+    public String getText() {
+        return text;
     }
 
     /**
@@ -92,11 +91,11 @@ public class KOptionImpl extends EObjectImpl implements KOption {
      * <!-- end-user-doc -->
      * @generated
      */
-    public void setKey(String newKey) {
-        String oldKey = key;
-        key = newKey;
+    public void setText(String newText) {
+        String oldText = text;
+        text = newText;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, KGraphPackage.KOPTION__KEY, oldKey, key));
+            eNotify(new ENotificationImpl(this, Notification.SET, KGraphPackage.KLABEL__TEXT, oldText, text));
     }
 
     /**
@@ -107,8 +106,8 @@ public class KOptionImpl extends EObjectImpl implements KOption {
     @Override
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
         switch (featureID) {
-            case KGraphPackage.KOPTION__KEY:
-                return getKey();
+            case KGraphPackage.KLABEL__TEXT:
+                return getText();
         }
         return super.eGet(featureID, resolve, coreType);
     }
@@ -121,8 +120,8 @@ public class KOptionImpl extends EObjectImpl implements KOption {
     @Override
     public void eSet(int featureID, Object newValue) {
         switch (featureID) {
-            case KGraphPackage.KOPTION__KEY:
-                setKey((String)newValue);
+            case KGraphPackage.KLABEL__TEXT:
+                setText((String)newValue);
                 return;
         }
         super.eSet(featureID, newValue);
@@ -136,8 +135,8 @@ public class KOptionImpl extends EObjectImpl implements KOption {
     @Override
     public void eUnset(int featureID) {
         switch (featureID) {
-            case KGraphPackage.KOPTION__KEY:
-                setKey(KEY_EDEFAULT);
+            case KGraphPackage.KLABEL__TEXT:
+                setText(TEXT_EDEFAULT);
                 return;
         }
         super.eUnset(featureID);
@@ -151,8 +150,8 @@ public class KOptionImpl extends EObjectImpl implements KOption {
     @Override
     public boolean eIsSet(int featureID) {
         switch (featureID) {
-            case KGraphPackage.KOPTION__KEY:
-                return KEY_EDEFAULT == null ? key != null : !KEY_EDEFAULT.equals(key);
+            case KGraphPackage.KLABEL__TEXT:
+                return TEXT_EDEFAULT == null ? text != null : !TEXT_EDEFAULT.equals(text);
         }
         return super.eIsSet(featureID);
     }
@@ -167,10 +166,10 @@ public class KOptionImpl extends EObjectImpl implements KOption {
         if (eIsProxy()) return super.toString();
 
         StringBuffer result = new StringBuffer(super.toString());
-        result.append(" (key: ");
-        result.append(key);
+        result.append(" (text: ");
+        result.append(text);
         result.append(')');
         return result.toString();
     }
 
-} //KOptionImpl
+} //KLabelImpl

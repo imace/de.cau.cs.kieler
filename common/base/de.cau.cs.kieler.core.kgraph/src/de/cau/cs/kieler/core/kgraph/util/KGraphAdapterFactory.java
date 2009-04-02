@@ -13,9 +13,9 @@
  *
  * $Id$
  */
-package de.cau.cs.kieler.core.graph.kgraph.util;
+package de.cau.cs.kieler.core.kgraph.util;
 
-import de.cau.cs.kieler.core.graph.kgraph.*;
+import de.cau.cs.kieler.core.kgraph.*;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
@@ -32,7 +32,7 @@ import org.eclipse.gmf.runtime.notation.Style;
  * The <b>Adapter Factory</b> for the model.
  * It provides an adapter <code>createXXX</code> method for each class of the model.
  * <!-- end-user-doc -->
- * @see de.cau.cs.kieler.core.graph.kgraph.KGraphPackage
+ * @see de.cau.cs.kieler.core.kgraph.KGraphPackage
  * @generated
  */
 public class KGraphAdapterFactory extends AdapterFactoryImpl {
@@ -152,13 +152,13 @@ public class KGraphAdapterFactory extends AdapterFactoryImpl {
 
 
     /**
-     * Creates a new adapter for an object of class '{@link de.cau.cs.kieler.core.graph.kgraph.KGraphElement <em>Element</em>}'.
+     * Creates a new adapter for an object of class '{@link de.cau.cs.kieler.core.kgraph.KGraphElement <em>Element</em>}'.
      * <!-- begin-user-doc -->
      * This default implementation returns null so that we can easily ignore cases;
      * it's useful to ignore a case when inheritance will catch all the cases anyway.
      * <!-- end-user-doc -->
      * @return the new adapter.
-     * @see de.cau.cs.kieler.core.graph.kgraph.KGraphElement
+     * @see de.cau.cs.kieler.core.kgraph.KGraphElement
      * @generated
      */
     public Adapter createKGraphElementAdapter() {
@@ -166,13 +166,13 @@ public class KGraphAdapterFactory extends AdapterFactoryImpl {
     }
 
     /**
-     * Creates a new adapter for an object of class '{@link de.cau.cs.kieler.core.graph.kgraph.KGraphData <em>Data</em>}'.
+     * Creates a new adapter for an object of class '{@link de.cau.cs.kieler.core.kgraph.KGraphData <em>Data</em>}'.
      * <!-- begin-user-doc -->
      * This default implementation returns null so that we can easily ignore cases;
      * it's useful to ignore a case when inheritance will catch all the cases anyway.
      * <!-- end-user-doc -->
      * @return the new adapter.
-     * @see de.cau.cs.kieler.core.graph.kgraph.KGraphData
+     * @see de.cau.cs.kieler.core.kgraph.KGraphData
      * @generated
      */
     public Adapter createKGraphDataAdapter() {
@@ -180,13 +180,13 @@ public class KGraphAdapterFactory extends AdapterFactoryImpl {
     }
 
     /**
-     * Creates a new adapter for an object of class '{@link de.cau.cs.kieler.core.graph.kgraph.KNode <em>KNode</em>}'.
+     * Creates a new adapter for an object of class '{@link de.cau.cs.kieler.core.kgraph.KNode <em>KNode</em>}'.
      * <!-- begin-user-doc -->
      * This default implementation returns null so that we can easily ignore cases;
      * it's useful to ignore a case when inheritance will catch all the cases anyway.
      * <!-- end-user-doc -->
      * @return the new adapter.
-     * @see de.cau.cs.kieler.core.graph.kgraph.KNode
+     * @see de.cau.cs.kieler.core.kgraph.KNode
      * @generated
      */
     public Adapter createKNodeAdapter() {
@@ -194,13 +194,13 @@ public class KGraphAdapterFactory extends AdapterFactoryImpl {
     }
 
     /**
-     * Creates a new adapter for an object of class '{@link de.cau.cs.kieler.core.graph.kgraph.KEdge <em>KEdge</em>}'.
+     * Creates a new adapter for an object of class '{@link de.cau.cs.kieler.core.kgraph.KEdge <em>KEdge</em>}'.
      * <!-- begin-user-doc -->
      * This default implementation returns null so that we can easily ignore cases;
      * it's useful to ignore a case when inheritance will catch all the cases anyway.
      * <!-- end-user-doc -->
      * @return the new adapter.
-     * @see de.cau.cs.kieler.core.graph.kgraph.KEdge
+     * @see de.cau.cs.kieler.core.kgraph.KEdge
      * @generated
      */
     public Adapter createKEdgeAdapter() {
@@ -208,13 +208,13 @@ public class KGraphAdapterFactory extends AdapterFactoryImpl {
     }
 
     /**
-     * Creates a new adapter for an object of class '{@link de.cau.cs.kieler.core.graph.kgraph.KPort <em>KPort</em>}'.
+     * Creates a new adapter for an object of class '{@link de.cau.cs.kieler.core.kgraph.KPort <em>KPort</em>}'.
      * <!-- begin-user-doc -->
      * This default implementation returns null so that we can easily ignore cases;
      * it's useful to ignore a case when inheritance will catch all the cases anyway.
      * <!-- end-user-doc -->
      * @return the new adapter.
-     * @see de.cau.cs.kieler.core.graph.kgraph.KPort
+     * @see de.cau.cs.kieler.core.kgraph.KPort
      * @generated
      */
     public Adapter createKPortAdapter() {
@@ -222,13 +222,13 @@ public class KGraphAdapterFactory extends AdapterFactoryImpl {
     }
 
     /**
-     * Creates a new adapter for an object of class '{@link de.cau.cs.kieler.core.graph.kgraph.KLabel <em>KLabel</em>}'.
+     * Creates a new adapter for an object of class '{@link de.cau.cs.kieler.core.kgraph.KLabel <em>KLabel</em>}'.
      * <!-- begin-user-doc -->
      * This default implementation returns null so that we can easily ignore cases;
      * it's useful to ignore a case when inheritance will catch all the cases anyway.
      * <!-- end-user-doc -->
      * @return the new adapter.
-     * @see de.cau.cs.kieler.core.graph.kgraph.KLabel
+     * @see de.cau.cs.kieler.core.kgraph.KLabel
      * @generated
      */
     public Adapter createKLabelAdapter() {
@@ -236,13 +236,13 @@ public class KGraphAdapterFactory extends AdapterFactoryImpl {
     }
 
     /**
-     * Creates a new adapter for an object of class '{@link de.cau.cs.kieler.core.graph.kgraph.KOption <em>KOption</em>}'.
+     * Creates a new adapter for an object of class '{@link de.cau.cs.kieler.core.kgraph.KOption <em>KOption</em>}'.
      * <!-- begin-user-doc -->
      * This default implementation returns null so that we can easily ignore cases;
      * it's useful to ignore a case when inheritance will catch all the cases anyway.
      * <!-- end-user-doc -->
      * @return the new adapter.
-     * @see de.cau.cs.kieler.core.graph.kgraph.KOption
+     * @see de.cau.cs.kieler.core.kgraph.KOption
      * @generated
      */
     public Adapter createKOptionAdapter() {
@@ -250,13 +250,13 @@ public class KGraphAdapterFactory extends AdapterFactoryImpl {
     }
 
     /**
-     * Creates a new adapter for an object of class '{@link de.cau.cs.kieler.core.graph.kgraph.KStringOption <em>KString Option</em>}'.
+     * Creates a new adapter for an object of class '{@link de.cau.cs.kieler.core.kgraph.KStringOption <em>KString Option</em>}'.
      * <!-- begin-user-doc -->
      * This default implementation returns null so that we can easily ignore cases;
      * it's useful to ignore a case when inheritance will catch all the cases anyway.
      * <!-- end-user-doc -->
      * @return the new adapter.
-     * @see de.cau.cs.kieler.core.graph.kgraph.KStringOption
+     * @see de.cau.cs.kieler.core.kgraph.KStringOption
      * @generated
      */
     public Adapter createKStringOptionAdapter() {
@@ -264,13 +264,13 @@ public class KGraphAdapterFactory extends AdapterFactoryImpl {
     }
 
     /**
-     * Creates a new adapter for an object of class '{@link de.cau.cs.kieler.core.graph.kgraph.KIntOption <em>KInt Option</em>}'.
+     * Creates a new adapter for an object of class '{@link de.cau.cs.kieler.core.kgraph.KIntOption <em>KInt Option</em>}'.
      * <!-- begin-user-doc -->
      * This default implementation returns null so that we can easily ignore cases;
      * it's useful to ignore a case when inheritance will catch all the cases anyway.
      * <!-- end-user-doc -->
      * @return the new adapter.
-     * @see de.cau.cs.kieler.core.graph.kgraph.KIntOption
+     * @see de.cau.cs.kieler.core.kgraph.KIntOption
      * @generated
      */
     public Adapter createKIntOptionAdapter() {
@@ -278,13 +278,13 @@ public class KGraphAdapterFactory extends AdapterFactoryImpl {
     }
 
     /**
-     * Creates a new adapter for an object of class '{@link de.cau.cs.kieler.core.graph.kgraph.KFloatOption <em>KFloat Option</em>}'.
+     * Creates a new adapter for an object of class '{@link de.cau.cs.kieler.core.kgraph.KFloatOption <em>KFloat Option</em>}'.
      * <!-- begin-user-doc -->
      * This default implementation returns null so that we can easily ignore cases;
      * it's useful to ignore a case when inheritance will catch all the cases anyway.
      * <!-- end-user-doc -->
      * @return the new adapter.
-     * @see de.cau.cs.kieler.core.graph.kgraph.KFloatOption
+     * @see de.cau.cs.kieler.core.kgraph.KFloatOption
      * @generated
      */
     public Adapter createKFloatOptionAdapter() {

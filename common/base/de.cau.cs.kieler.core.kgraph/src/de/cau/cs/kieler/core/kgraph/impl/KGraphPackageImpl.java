@@ -13,21 +13,21 @@
  *
  * $Id$
  */
-package de.cau.cs.kieler.core.graph.kgraph.impl;
+package de.cau.cs.kieler.core.kgraph.impl;
 
-import de.cau.cs.kieler.core.graph.kgraph.KEdge;
-import de.cau.cs.kieler.core.graph.kgraph.KFloatOption;
-import de.cau.cs.kieler.core.graph.kgraph.KGraphData;
-import de.cau.cs.kieler.core.graph.kgraph.KGraphElement;
-import de.cau.cs.kieler.core.graph.kgraph.KGraphFactory;
-import de.cau.cs.kieler.core.graph.kgraph.KGraphPackage;
-import de.cau.cs.kieler.core.graph.kgraph.KIntOption;
-import de.cau.cs.kieler.core.graph.kgraph.KLabel;
-import de.cau.cs.kieler.core.graph.kgraph.KNode;
-import de.cau.cs.kieler.core.graph.kgraph.KOption;
-import de.cau.cs.kieler.core.graph.kgraph.KPort;
-import de.cau.cs.kieler.core.graph.kgraph.KPortType;
-import de.cau.cs.kieler.core.graph.kgraph.KStringOption;
+import de.cau.cs.kieler.core.kgraph.KEdge;
+import de.cau.cs.kieler.core.kgraph.KFloatOption;
+import de.cau.cs.kieler.core.kgraph.KGraphData;
+import de.cau.cs.kieler.core.kgraph.KGraphElement;
+import de.cau.cs.kieler.core.kgraph.KGraphFactory;
+import de.cau.cs.kieler.core.kgraph.KGraphPackage;
+import de.cau.cs.kieler.core.kgraph.KIntOption;
+import de.cau.cs.kieler.core.kgraph.KLabel;
+import de.cau.cs.kieler.core.kgraph.KNode;
+import de.cau.cs.kieler.core.kgraph.KOption;
+import de.cau.cs.kieler.core.kgraph.KPort;
+import de.cau.cs.kieler.core.kgraph.KPortType;
+import de.cau.cs.kieler.core.kgraph.KStringOption;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -136,7 +136,7 @@ public class KGraphPackageImpl extends EPackageImpl implements KGraphPackage {
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @see org.eclipse.emf.ecore.EPackage.Registry
-     * @see de.cau.cs.kieler.core.graph.kgraph.KGraphPackage#eNS_URI
+     * @see de.cau.cs.kieler.core.kgraph.KGraphPackage#eNS_URI
      * @see #init()
      * @generated
      */

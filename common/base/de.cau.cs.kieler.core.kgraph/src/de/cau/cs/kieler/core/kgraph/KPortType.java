@@ -13,7 +13,7 @@
  *
  * $Id$
  */
-package de.cau.cs.kieler.core.graph.kgraph;
+package de.cau.cs.kieler.core.kgraph;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -26,7 +26,7 @@ import org.eclipse.emf.common.util.Enumerator;
  * A representation of the literals of the enumeration '<em><b>KPort Type</b></em>',
  * and utility methods for working with them.
  * <!-- end-user-doc -->
- * @see de.cau.cs.kieler.core.graph.kgraph.KGraphPackage#getKPortType()
+ * @see de.cau.cs.kieler.core.kgraph.KGraphPackage#getKPortType()
  * @model
  * @generated
  */

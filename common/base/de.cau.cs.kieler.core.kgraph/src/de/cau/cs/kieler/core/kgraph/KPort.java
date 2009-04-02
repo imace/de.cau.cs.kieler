@@ -13,7 +13,7 @@
  *
  * $Id$
  */
-package de.cau.cs.kieler.core.graph.kgraph;
+package de.cau.cs.kieler.core.kgraph;
 
 import org.eclipse.emf.common.util.EList;
 
@@ -25,21 +25,21 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link de.cau.cs.kieler.core.graph.kgraph.KPort#getNode <em>Node</em>}</li>
- *   <li>{@link de.cau.cs.kieler.core.graph.kgraph.KPort#getEdges <em>Edges</em>}</li>
- *   <li>{@link de.cau.cs.kieler.core.graph.kgraph.KPort#getLabel <em>Label</em>}</li>
- *   <li>{@link de.cau.cs.kieler.core.graph.kgraph.KPort#getType <em>Type</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.core.kgraph.KPort#getNode <em>Node</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.core.kgraph.KPort#getEdges <em>Edges</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.core.kgraph.KPort#getLabel <em>Label</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.core.kgraph.KPort#getType <em>Type</em>}</li>
  * </ul>
  * </p>
  *
- * @see de.cau.cs.kieler.core.graph.kgraph.KGraphPackage#getKPort()
+ * @see de.cau.cs.kieler.core.kgraph.KGraphPackage#getKPort()
  * @model
  * @generated
  */
 public interface KPort extends KGraphElement {
     /**
      * Returns the value of the '<em><b>Node</b></em>' container reference.
-     * It is bidirectional and its opposite is '{@link de.cau.cs.kieler.core.graph.kgraph.KNode#getPorts <em>Ports</em>}'.
+     * It is bidirectional and its opposite is '{@link de.cau.cs.kieler.core.kgraph.KNode#getPorts <em>Ports</em>}'.
      * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Node</em>' container reference isn't clear,
@@ -48,15 +48,15 @@ public interface KPort extends KGraphElement {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Node</em>' container reference.
      * @see #setNode(KNode)
-     * @see de.cau.cs.kieler.core.graph.kgraph.KGraphPackage#getKPort_Node()
-     * @see de.cau.cs.kieler.core.graph.kgraph.KNode#getPorts
+     * @see de.cau.cs.kieler.core.kgraph.KGraphPackage#getKPort_Node()
+     * @see de.cau.cs.kieler.core.kgraph.KNode#getPorts
      * @model opposite="ports" required="true" transient="false"
      * @generated
      */
     KNode getNode();
 
     /**
-     * Sets the value of the '{@link de.cau.cs.kieler.core.graph.kgraph.KPort#getNode <em>Node</em>}' container reference.
+     * Sets the value of the '{@link de.cau.cs.kieler.core.kgraph.KPort#getNode <em>Node</em>}' container reference.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @param value the new value of the '<em>Node</em>' container reference.
@@ -67,7 +67,7 @@ public interface KPort extends KGraphElement {
 
     /**
      * Returns the value of the '<em><b>Edges</b></em>' reference list.
-     * The list contents are of type {@link de.cau.cs.kieler.core.graph.kgraph.KEdge}.
+     * The list contents are of type {@link de.cau.cs.kieler.core.kgraph.KEdge}.
      * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Edges</em>' reference list isn't clear,
@@ -75,7 +75,7 @@ public interface KPort extends KGraphElement {
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Edges</em>' reference list.
-     * @see de.cau.cs.kieler.core.graph.kgraph.KGraphPackage#getKPort_Edges()
+     * @see de.cau.cs.kieler.core.kgraph.KGraphPackage#getKPort_Edges()
      * @model
      * @generated
      */
@@ -91,14 +91,14 @@ public interface KPort extends KGraphElement {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Label</em>' containment reference.
      * @see #setLabel(KLabel)
-     * @see de.cau.cs.kieler.core.graph.kgraph.KGraphPackage#getKPort_Label()
+     * @see de.cau.cs.kieler.core.kgraph.KGraphPackage#getKPort_Label()
      * @model containment="true"
      * @generated
      */
     KLabel getLabel();
 
     /**
-     * Sets the value of the '{@link de.cau.cs.kieler.core.graph.kgraph.KPort#getLabel <em>Label</em>}' containment reference.
+     * Sets the value of the '{@link de.cau.cs.kieler.core.kgraph.KPort#getLabel <em>Label</em>}' containment reference.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @param value the new value of the '<em>Label</em>' containment reference.
@@ -109,7 +109,7 @@ public interface KPort extends KGraphElement {
 
     /**
      * Returns the value of the '<em><b>Type</b></em>' attribute.
-     * The literals are from the enumeration {@link de.cau.cs.kieler.core.graph.kgraph.KPortType}.
+     * The literals are from the enumeration {@link de.cau.cs.kieler.core.kgraph.KPortType}.
      * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Type</em>' attribute isn't clear,
@@ -117,20 +117,20 @@ public interface KPort extends KGraphElement {
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Type</em>' attribute.
-     * @see de.cau.cs.kieler.core.graph.kgraph.KPortType
+     * @see de.cau.cs.kieler.core.kgraph.KPortType
      * @see #setType(KPortType)
-     * @see de.cau.cs.kieler.core.graph.kgraph.KGraphPackage#getKPort_Type()
+     * @see de.cau.cs.kieler.core.kgraph.KGraphPackage#getKPort_Type()
      * @model
      * @generated
      */
     KPortType getType();
 
     /**
-     * Sets the value of the '{@link de.cau.cs.kieler.core.graph.kgraph.KPort#getType <em>Type</em>}' attribute.
+     * Sets the value of the '{@link de.cau.cs.kieler.core.kgraph.KPort#getType <em>Type</em>}' attribute.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @param value the new value of the '<em>Type</em>' attribute.
-     * @see de.cau.cs.kieler.core.graph.kgraph.KPortType
+     * @see de.cau.cs.kieler.core.kgraph.KPortType
      * @see #getType()
      * @generated
      */

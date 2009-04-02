@@ -13,10 +13,10 @@
  *
  * $Id$
  */
-package de.cau.cs.kieler.core.graph.kgraph.impl;
+package de.cau.cs.kieler.core.kgraph.impl;
 
-import de.cau.cs.kieler.core.graph.kgraph.KGraphPackage;
-import de.cau.cs.kieler.core.graph.kgraph.KLabel;
+import de.cau.cs.kieler.core.kgraph.KFloatOption;
+import de.cau.cs.kieler.core.kgraph.KGraphPackage;
 
 import org.eclipse.emf.common.notify.Notification;
 
@@ -26,44 +26,44 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>KLabel</b></em>'.
+ * An implementation of the model object '<em><b>KFloat Option</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link de.cau.cs.kieler.core.graph.kgraph.impl.KLabelImpl#getText <em>Text</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.core.kgraph.impl.KFloatOptionImpl#getValue <em>Value</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class KLabelImpl extends KGraphElementImpl implements KLabel {
+public class KFloatOptionImpl extends KOptionImpl implements KFloatOption {
     /**
-     * The default value of the '{@link #getText() <em>Text</em>}' attribute.
+     * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getText()
+     * @see #getValue()
      * @generated
      * @ordered
      */
-    protected static final String TEXT_EDEFAULT = null;
+    protected static final float VALUE_EDEFAULT = 0.0F;
 
     /**
-     * The cached value of the '{@link #getText() <em>Text</em>}' attribute.
+     * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getText()
+     * @see #getValue()
      * @generated
      * @ordered
      */
-    protected String text = TEXT_EDEFAULT;
+    protected float value = VALUE_EDEFAULT;
 
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    protected KLabelImpl() {
+    protected KFloatOptionImpl() {
         super();
     }
 
@@ -74,7 +74,7 @@ public class KLabelImpl extends KGraphElementImpl implements KLabel {
      */
     @Override
     protected EClass eStaticClass() {
-        return KGraphPackage.Literals.KLABEL;
+        return KGraphPackage.Literals.KFLOAT_OPTION;
     }
 
     /**
@@ -82,8 +82,8 @@ public class KLabelImpl extends KGraphElementImpl implements KLabel {
      * <!-- end-user-doc -->
      * @generated
      */
-    public String getText() {
-        return text;
+    public float getValue() {
+        return value;
     }
 
     /**
@@ -91,11 +91,11 @@ public class KLabelImpl extends KGraphElementImpl implements KLabel {
      * <!-- end-user-doc -->
      * @generated
      */
-    public void setText(String newText) {
-        String oldText = text;
-        text = newText;
+    public void setValue(float newValue) {
+        float oldValue = value;
+        value = newValue;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, KGraphPackage.KLABEL__TEXT, oldText, text));
+            eNotify(new ENotificationImpl(this, Notification.SET, KGraphPackage.KFLOAT_OPTION__VALUE, oldValue, value));
     }
 
     /**
@@ -106,8 +106,8 @@ public class KLabelImpl extends KGraphElementImpl implements KLabel {
     @Override
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
         switch (featureID) {
-            case KGraphPackage.KLABEL__TEXT:
-                return getText();
+            case KGraphPackage.KFLOAT_OPTION__VALUE:
+                return new Float(getValue());
         }
         return super.eGet(featureID, resolve, coreType);
     }
@@ -120,8 +120,8 @@ public class KLabelImpl extends KGraphElementImpl implements KLabel {
     @Override
     public void eSet(int featureID, Object newValue) {
         switch (featureID) {
-            case KGraphPackage.KLABEL__TEXT:
-                setText((String)newValue);
+            case KGraphPackage.KFLOAT_OPTION__VALUE:
+                setValue(((Float)newValue).floatValue());
                 return;
         }
         super.eSet(featureID, newValue);
@@ -135,8 +135,8 @@ public class KLabelImpl extends KGraphElementImpl implements KLabel {
     @Override
     public void eUnset(int featureID) {
         switch (featureID) {
-            case KGraphPackage.KLABEL__TEXT:
-                setText(TEXT_EDEFAULT);
+            case KGraphPackage.KFLOAT_OPTION__VALUE:
+                setValue(VALUE_EDEFAULT);
                 return;
         }
         super.eUnset(featureID);
@@ -150,8 +150,8 @@ public class KLabelImpl extends KGraphElementImpl implements KLabel {
     @Override
     public boolean eIsSet(int featureID) {
         switch (featureID) {
-            case KGraphPackage.KLABEL__TEXT:
-                return TEXT_EDEFAULT == null ? text != null : !TEXT_EDEFAULT.equals(text);
+            case KGraphPackage.KFLOAT_OPTION__VALUE:
+                return value != VALUE_EDEFAULT;
         }
         return super.eIsSet(featureID);
     }
@@ -166,10 +166,10 @@ public class KLabelImpl extends KGraphElementImpl implements KLabel {
         if (eIsProxy()) return super.toString();
 
         StringBuffer result = new StringBuffer(super.toString());
-        result.append(" (text: ");
-        result.append(text);
+        result.append(" (value: ");
+        result.append(value);
         result.append(')');
         return result.toString();
     }
 
-} //KLabelImpl
+} //KFloatOptionImpl

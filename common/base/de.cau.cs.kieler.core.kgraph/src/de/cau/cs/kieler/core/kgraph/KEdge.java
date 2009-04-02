@@ -13,7 +13,7 @@
  *
  * $Id$
  */
-package de.cau.cs.kieler.core.graph.kgraph;
+package de.cau.cs.kieler.core.kgraph;
 
 import org.eclipse.emf.common.util.EList;
 
@@ -25,22 +25,22 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link de.cau.cs.kieler.core.graph.kgraph.KEdge#getSource <em>Source</em>}</li>
- *   <li>{@link de.cau.cs.kieler.core.graph.kgraph.KEdge#getTarget <em>Target</em>}</li>
- *   <li>{@link de.cau.cs.kieler.core.graph.kgraph.KEdge#getSourcePort <em>Source Port</em>}</li>
- *   <li>{@link de.cau.cs.kieler.core.graph.kgraph.KEdge#getTargetPort <em>Target Port</em>}</li>
- *   <li>{@link de.cau.cs.kieler.core.graph.kgraph.KEdge#getLabels <em>Labels</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.core.kgraph.KEdge#getSource <em>Source</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.core.kgraph.KEdge#getTarget <em>Target</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.core.kgraph.KEdge#getSourcePort <em>Source Port</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.core.kgraph.KEdge#getTargetPort <em>Target Port</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.core.kgraph.KEdge#getLabels <em>Labels</em>}</li>
  * </ul>
  * </p>
  *
- * @see de.cau.cs.kieler.core.graph.kgraph.KGraphPackage#getKEdge()
+ * @see de.cau.cs.kieler.core.kgraph.KGraphPackage#getKEdge()
  * @model
  * @generated
  */
 public interface KEdge extends KGraphElement {
     /**
      * Returns the value of the '<em><b>Source</b></em>' container reference.
-     * It is bidirectional and its opposite is '{@link de.cau.cs.kieler.core.graph.kgraph.KNode#getOutgoingEdges <em>Outgoing Edges</em>}'.
+     * It is bidirectional and its opposite is '{@link de.cau.cs.kieler.core.kgraph.KNode#getOutgoingEdges <em>Outgoing Edges</em>}'.
      * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Source</em>' container reference isn't clear,
@@ -49,15 +49,15 @@ public interface KEdge extends KGraphElement {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Source</em>' container reference.
      * @see #setSource(KNode)
-     * @see de.cau.cs.kieler.core.graph.kgraph.KGraphPackage#getKEdge_Source()
-     * @see de.cau.cs.kieler.core.graph.kgraph.KNode#getOutgoingEdges
+     * @see de.cau.cs.kieler.core.kgraph.KGraphPackage#getKEdge_Source()
+     * @see de.cau.cs.kieler.core.kgraph.KNode#getOutgoingEdges
      * @model opposite="outgoingEdges" required="true" transient="false"
      * @generated
      */
     KNode getSource();
 
     /**
-     * Sets the value of the '{@link de.cau.cs.kieler.core.graph.kgraph.KEdge#getSource <em>Source</em>}' container reference.
+     * Sets the value of the '{@link de.cau.cs.kieler.core.kgraph.KEdge#getSource <em>Source</em>}' container reference.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @param value the new value of the '<em>Source</em>' container reference.
@@ -68,7 +68,7 @@ public interface KEdge extends KGraphElement {
 
     /**
      * Returns the value of the '<em><b>Target</b></em>' reference.
-     * It is bidirectional and its opposite is '{@link de.cau.cs.kieler.core.graph.kgraph.KNode#getIncomingEdges <em>Incoming Edges</em>}'.
+     * It is bidirectional and its opposite is '{@link de.cau.cs.kieler.core.kgraph.KNode#getIncomingEdges <em>Incoming Edges</em>}'.
      * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Target</em>' reference isn't clear,
@@ -77,15 +77,15 @@ public interface KEdge extends KGraphElement {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Target</em>' reference.
      * @see #setTarget(KNode)
-     * @see de.cau.cs.kieler.core.graph.kgraph.KGraphPackage#getKEdge_Target()
-     * @see de.cau.cs.kieler.core.graph.kgraph.KNode#getIncomingEdges
+     * @see de.cau.cs.kieler.core.kgraph.KGraphPackage#getKEdge_Target()
+     * @see de.cau.cs.kieler.core.kgraph.KNode#getIncomingEdges
      * @model opposite="incomingEdges" required="true"
      * @generated
      */
     KNode getTarget();
 
     /**
-     * Sets the value of the '{@link de.cau.cs.kieler.core.graph.kgraph.KEdge#getTarget <em>Target</em>}' reference.
+     * Sets the value of the '{@link de.cau.cs.kieler.core.kgraph.KEdge#getTarget <em>Target</em>}' reference.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @param value the new value of the '<em>Target</em>' reference.
@@ -104,14 +104,14 @@ public interface KEdge extends KGraphElement {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Source Port</em>' reference.
      * @see #setSourcePort(KPort)
-     * @see de.cau.cs.kieler.core.graph.kgraph.KGraphPackage#getKEdge_SourcePort()
+     * @see de.cau.cs.kieler.core.kgraph.KGraphPackage#getKEdge_SourcePort()
      * @model
      * @generated
      */
     KPort getSourcePort();
 
     /**
-     * Sets the value of the '{@link de.cau.cs.kieler.core.graph.kgraph.KEdge#getSourcePort <em>Source Port</em>}' reference.
+     * Sets the value of the '{@link de.cau.cs.kieler.core.kgraph.KEdge#getSourcePort <em>Source Port</em>}' reference.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @param value the new value of the '<em>Source Port</em>' reference.
@@ -130,14 +130,14 @@ public interface KEdge extends KGraphElement {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Target Port</em>' reference.
      * @see #setTargetPort(KPort)
-     * @see de.cau.cs.kieler.core.graph.kgraph.KGraphPackage#getKEdge_TargetPort()
+     * @see de.cau.cs.kieler.core.kgraph.KGraphPackage#getKEdge_TargetPort()
      * @model
      * @generated
      */
     KPort getTargetPort();
 
     /**
-     * Sets the value of the '{@link de.cau.cs.kieler.core.graph.kgraph.KEdge#getTargetPort <em>Target Port</em>}' reference.
+     * Sets the value of the '{@link de.cau.cs.kieler.core.kgraph.KEdge#getTargetPort <em>Target Port</em>}' reference.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @param value the new value of the '<em>Target Port</em>' reference.
@@ -148,7 +148,7 @@ public interface KEdge extends KGraphElement {
 
     /**
      * Returns the value of the '<em><b>Labels</b></em>' containment reference list.
-     * The list contents are of type {@link de.cau.cs.kieler.core.graph.kgraph.KLabel}.
+     * The list contents are of type {@link de.cau.cs.kieler.core.kgraph.KLabel}.
      * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Labels</em>' containment reference list isn't clear,
@@ -156,7 +156,7 @@ public interface KEdge extends KGraphElement {
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Labels</em>' containment reference list.
-     * @see de.cau.cs.kieler.core.graph.kgraph.KGraphPackage#getKEdge_Labels()
+     * @see de.cau.cs.kieler.core.kgraph.KGraphPackage#getKEdge_Labels()
      * @model containment="true"
      * @generated
      */

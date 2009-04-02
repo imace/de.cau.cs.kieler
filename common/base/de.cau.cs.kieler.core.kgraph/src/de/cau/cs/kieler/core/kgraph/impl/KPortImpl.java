@@ -13,14 +13,14 @@
  *
  * $Id$
  */
-package de.cau.cs.kieler.core.graph.kgraph.impl;
+package de.cau.cs.kieler.core.kgraph.impl;
 
-import de.cau.cs.kieler.core.graph.kgraph.KEdge;
-import de.cau.cs.kieler.core.graph.kgraph.KGraphPackage;
-import de.cau.cs.kieler.core.graph.kgraph.KLabel;
-import de.cau.cs.kieler.core.graph.kgraph.KNode;
-import de.cau.cs.kieler.core.graph.kgraph.KPort;
-import de.cau.cs.kieler.core.graph.kgraph.KPortType;
+import de.cau.cs.kieler.core.kgraph.KEdge;
+import de.cau.cs.kieler.core.kgraph.KGraphPackage;
+import de.cau.cs.kieler.core.kgraph.KLabel;
+import de.cau.cs.kieler.core.kgraph.KNode;
+import de.cau.cs.kieler.core.kgraph.KPort;
+import de.cau.cs.kieler.core.kgraph.KPortType;
 
 import java.util.Collection;
 
@@ -44,10 +44,10 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link de.cau.cs.kieler.core.graph.kgraph.impl.KPortImpl#getNode <em>Node</em>}</li>
- *   <li>{@link de.cau.cs.kieler.core.graph.kgraph.impl.KPortImpl#getEdges <em>Edges</em>}</li>
- *   <li>{@link de.cau.cs.kieler.core.graph.kgraph.impl.KPortImpl#getLabel <em>Label</em>}</li>
- *   <li>{@link de.cau.cs.kieler.core.graph.kgraph.impl.KPortImpl#getType <em>Type</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.core.kgraph.impl.KPortImpl#getNode <em>Node</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.core.kgraph.impl.KPortImpl#getEdges <em>Edges</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.core.kgraph.impl.KPortImpl#getLabel <em>Label</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.core.kgraph.impl.KPortImpl#getType <em>Type</em>}</li>
  * </ul>
  * </p>
  *

@@ -13,7 +13,7 @@
  *
  * $Id$
  */
-package de.cau.cs.kieler.core.graph.kgraph;
+package de.cau.cs.kieler.core.kgraph;
 
 import org.eclipse.gmf.runtime.notation.Style;
 
@@ -23,7 +23,7 @@ import org.eclipse.gmf.runtime.notation.Style;
  * <!-- end-user-doc -->
  *
  *
- * @see de.cau.cs.kieler.core.graph.kgraph.KGraphPackage#getKGraphData()
+ * @see de.cau.cs.kieler.core.kgraph.KGraphPackage#getKGraphData()
  * @model interface="true" abstract="true"
  * @generated
  */

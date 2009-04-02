@@ -13,9 +13,9 @@
  *
  * $Id$
  */
-package de.cau.cs.kieler.core.graph.kgraph.util;
+package de.cau.cs.kieler.core.kgraph.util;
 
-import de.cau.cs.kieler.core.graph.kgraph.*;
+import de.cau.cs.kieler.core.kgraph.*;
 
 import java.util.List;
 
@@ -35,7 +35,7 @@ import org.eclipse.gmf.runtime.notation.Style;
  * until a non-null result is returned,
  * which is the result of the switch.
  * <!-- end-user-doc -->
- * @see de.cau.cs.kieler.core.graph.kgraph.KGraphPackage
+ * @see de.cau.cs.kieler.core.kgraph.KGraphPackage
  * @generated
  */
 public class KGraphSwitch<T> {

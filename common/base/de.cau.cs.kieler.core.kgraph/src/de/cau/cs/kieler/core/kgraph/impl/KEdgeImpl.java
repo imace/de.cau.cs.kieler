@@ -13,13 +13,13 @@
  *
  * $Id$
  */
-package de.cau.cs.kieler.core.graph.kgraph.impl;
+package de.cau.cs.kieler.core.kgraph.impl;
 
-import de.cau.cs.kieler.core.graph.kgraph.KEdge;
-import de.cau.cs.kieler.core.graph.kgraph.KGraphPackage;
-import de.cau.cs.kieler.core.graph.kgraph.KLabel;
-import de.cau.cs.kieler.core.graph.kgraph.KNode;
-import de.cau.cs.kieler.core.graph.kgraph.KPort;
+import de.cau.cs.kieler.core.kgraph.KEdge;
+import de.cau.cs.kieler.core.kgraph.KGraphPackage;
+import de.cau.cs.kieler.core.kgraph.KLabel;
+import de.cau.cs.kieler.core.kgraph.KNode;
+import de.cau.cs.kieler.core.kgraph.KPort;
 
 import java.util.Collection;
 
@@ -44,11 +44,11 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link de.cau.cs.kieler.core.graph.kgraph.impl.KEdgeImpl#getSource <em>Source</em>}</li>
- *   <li>{@link de.cau.cs.kieler.core.graph.kgraph.impl.KEdgeImpl#getTarget <em>Target</em>}</li>
- *   <li>{@link de.cau.cs.kieler.core.graph.kgraph.impl.KEdgeImpl#getSourcePort <em>Source Port</em>}</li>
- *   <li>{@link de.cau.cs.kieler.core.graph.kgraph.impl.KEdgeImpl#getTargetPort <em>Target Port</em>}</li>
- *   <li>{@link de.cau.cs.kieler.core.graph.kgraph.impl.KEdgeImpl#getLabels <em>Labels</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.core.kgraph.impl.KEdgeImpl#getSource <em>Source</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.core.kgraph.impl.KEdgeImpl#getTarget <em>Target</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.core.kgraph.impl.KEdgeImpl#getSourcePort <em>Source Port</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.core.kgraph.impl.KEdgeImpl#getTargetPort <em>Target Port</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.core.kgraph.impl.KEdgeImpl#getLabels <em>Labels</em>}</li>
  * </ul>
  * </p>
  *

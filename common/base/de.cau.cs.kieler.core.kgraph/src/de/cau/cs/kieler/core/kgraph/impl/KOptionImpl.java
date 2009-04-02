@@ -13,57 +13,58 @@
  *
  * $Id$
  */
-package de.cau.cs.kieler.core.graph.kgraph.impl;
+package de.cau.cs.kieler.core.kgraph.impl;
 
-import de.cau.cs.kieler.core.graph.kgraph.KGraphPackage;
-import de.cau.cs.kieler.core.graph.kgraph.KIntOption;
+import de.cau.cs.kieler.core.kgraph.KGraphPackage;
+import de.cau.cs.kieler.core.kgraph.KOption;
 
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>KInt Option</b></em>'.
+ * An implementation of the model object '<em><b>KOption</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link de.cau.cs.kieler.core.graph.kgraph.impl.KIntOptionImpl#getValue <em>Value</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.core.kgraph.impl.KOptionImpl#getKey <em>Key</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class KIntOptionImpl extends KOptionImpl implements KIntOption {
+public class KOptionImpl extends EObjectImpl implements KOption {
     /**
-     * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
+     * The default value of the '{@link #getKey() <em>Key</em>}' attribute.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getValue()
+     * @see #getKey()
      * @generated
      * @ordered
      */
-    protected static final int VALUE_EDEFAULT = 0;
+    protected static final String KEY_EDEFAULT = null;
 
     /**
-     * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
+     * The cached value of the '{@link #getKey() <em>Key</em>}' attribute.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getValue()
+     * @see #getKey()
      * @generated
      * @ordered
      */
-    protected int value = VALUE_EDEFAULT;
+    protected String key = KEY_EDEFAULT;
 
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    protected KIntOptionImpl() {
+    protected KOptionImpl() {
         super();
     }
 
@@ -74,7 +75,7 @@ public class KIntOptionImpl extends KOptionImpl implements KIntOption {
      */
     @Override
     protected EClass eStaticClass() {
-        return KGraphPackage.Literals.KINT_OPTION;
+        return KGraphPackage.Literals.KOPTION;
     }
 
     /**
@@ -82,8 +83,8 @@ public class KIntOptionImpl extends KOptionImpl implements KIntOption {
      * <!-- end-user-doc -->
      * @generated
      */
-    public int getValue() {
-        return value;
+    public String getKey() {
+        return key;
     }
 
     /**
@@ -91,11 +92,11 @@ public class KIntOptionImpl extends KOptionImpl implements KIntOption {
      * <!-- end-user-doc -->
      * @generated
      */
-    public void setValue(int newValue) {
-        int oldValue = value;
-        value = newValue;
+    public void setKey(String newKey) {
+        String oldKey = key;
+        key = newKey;
         if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, KGraphPackage.KINT_OPTION__VALUE, oldValue, value));
+            eNotify(new ENotificationImpl(this, Notification.SET, KGraphPackage.KOPTION__KEY, oldKey, key));
     }
 
     /**
@@ -106,8 +107,8 @@ public class KIntOptionImpl extends KOptionImpl implements KIntOption {
     @Override
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
         switch (featureID) {
-            case KGraphPackage.KINT_OPTION__VALUE:
-                return new Integer(getValue());
+            case KGraphPackage.KOPTION__KEY:
+                return getKey();
         }
         return super.eGet(featureID, resolve, coreType);
     }
@@ -120,8 +121,8 @@ public class KIntOptionImpl extends KOptionImpl implements KIntOption {
     @Override
     public void eSet(int featureID, Object newValue) {
         switch (featureID) {
-            case KGraphPackage.KINT_OPTION__VALUE:
-                setValue(((Integer)newValue).intValue());
+            case KGraphPackage.KOPTION__KEY:
+                setKey((String)newValue);
                 return;
         }
         super.eSet(featureID, newValue);
@@ -135,8 +136,8 @@ public class KIntOptionImpl extends KOptionImpl implements KIntOption {
     @Override
     public void eUnset(int featureID) {
         switch (featureID) {
-            case KGraphPackage.KINT_OPTION__VALUE:
-                setValue(VALUE_EDEFAULT);
+            case KGraphPackage.KOPTION__KEY:
+                setKey(KEY_EDEFAULT);
                 return;
         }
         super.eUnset(featureID);
@@ -150,8 +151,8 @@ public class KIntOptionImpl extends KOptionImpl implements KIntOption {
     @Override
     public boolean eIsSet(int featureID) {
         switch (featureID) {
-            case KGraphPackage.KINT_OPTION__VALUE:
-                return value != VALUE_EDEFAULT;
+            case KGraphPackage.KOPTION__KEY:
+                return KEY_EDEFAULT == null ? key != null : !KEY_EDEFAULT.equals(key);
         }
         return super.eIsSet(featureID);
     }
@@ -166,10 +167,10 @@ public class KIntOptionImpl extends KOptionImpl implements KIntOption {
         if (eIsProxy()) return super.toString();
 
         StringBuffer result = new StringBuffer(super.toString());
-        result.append(" (value: ");
-        result.append(value);
+        result.append(" (key: ");
+        result.append(key);
         result.append(')');
         return result.toString();
     }
 
-} //KIntOptionImpl
+} //KOptionImpl

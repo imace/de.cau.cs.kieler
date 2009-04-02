@@ -13,13 +13,13 @@
  *
  * $Id$
  */
-package de.cau.cs.kieler.core.graph.kgraph.impl;
+package de.cau.cs.kieler.core.kgraph.impl;
 
-import de.cau.cs.kieler.core.graph.kgraph.KEdge;
-import de.cau.cs.kieler.core.graph.kgraph.KGraphPackage;
-import de.cau.cs.kieler.core.graph.kgraph.KLabel;
-import de.cau.cs.kieler.core.graph.kgraph.KNode;
-import de.cau.cs.kieler.core.graph.kgraph.KPort;
+import de.cau.cs.kieler.core.kgraph.KEdge;
+import de.cau.cs.kieler.core.kgraph.KGraphPackage;
+import de.cau.cs.kieler.core.kgraph.KLabel;
+import de.cau.cs.kieler.core.kgraph.KNode;
+import de.cau.cs.kieler.core.kgraph.KPort;
 
 import java.util.Collection;
 
@@ -45,12 +45,12 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link de.cau.cs.kieler.core.graph.kgraph.impl.KNodeImpl#getChildren <em>Children</em>}</li>
- *   <li>{@link de.cau.cs.kieler.core.graph.kgraph.impl.KNodeImpl#getParent <em>Parent</em>}</li>
- *   <li>{@link de.cau.cs.kieler.core.graph.kgraph.impl.KNodeImpl#getPorts <em>Ports</em>}</li>
- *   <li>{@link de.cau.cs.kieler.core.graph.kgraph.impl.KNodeImpl#getOutgoingEdges <em>Outgoing Edges</em>}</li>
- *   <li>{@link de.cau.cs.kieler.core.graph.kgraph.impl.KNodeImpl#getIncomingEdges <em>Incoming Edges</em>}</li>
- *   <li>{@link de.cau.cs.kieler.core.graph.kgraph.impl.KNodeImpl#getLabel <em>Label</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.core.kgraph.impl.KNodeImpl#getChildren <em>Children</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.core.kgraph.impl.KNodeImpl#getParent <em>Parent</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.core.kgraph.impl.KNodeImpl#getPorts <em>Ports</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.core.kgraph.impl.KNodeImpl#getOutgoingEdges <em>Outgoing Edges</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.core.kgraph.impl.KNodeImpl#getIncomingEdges <em>Incoming Edges</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.core.kgraph.impl.KNodeImpl#getLabel <em>Label</em>}</li>
  * </ul>
  * </p>
  *

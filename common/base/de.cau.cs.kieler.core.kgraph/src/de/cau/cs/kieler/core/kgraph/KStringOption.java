@@ -13,28 +13,29 @@
  *
  * $Id$
  */
-package de.cau.cs.kieler.core.graph.kgraph;
+package de.cau.cs.kieler.core.kgraph;
 
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>KInt Option</b></em>'.
+ * A representation of the model object '<em><b>KString Option</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link de.cau.cs.kieler.core.graph.kgraph.KIntOption#getValue <em>Value</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.core.kgraph.KStringOption#getValue <em>Value</em>}</li>
  * </ul>
  * </p>
  *
- * @see de.cau.cs.kieler.core.graph.kgraph.KGraphPackage#getKIntOption()
+ * @see de.cau.cs.kieler.core.kgraph.KGraphPackage#getKStringOption()
  * @model
  * @generated
  */
-public interface KIntOption extends KOption {
+public interface KStringOption extends KOption {
     /**
      * Returns the value of the '<em><b>Value</b></em>' attribute.
+     * The default value is <code>""</code>.
      * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Value</em>' attribute isn't clear,
@@ -42,21 +43,21 @@ public interface KIntOption extends KOption {
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Value</em>' attribute.
-     * @see #setValue(int)
-     * @see de.cau.cs.kieler.core.graph.kgraph.KGraphPackage#getKIntOption_Value()
-     * @model
+     * @see #setValue(String)
+     * @see de.cau.cs.kieler.core.kgraph.KGraphPackage#getKStringOption_Value()
+     * @model default=""
      * @generated
      */
-    int getValue();
+    String getValue();
 
     /**
-     * Sets the value of the '{@link de.cau.cs.kieler.core.graph.kgraph.KIntOption#getValue <em>Value</em>}' attribute.
+     * Sets the value of the '{@link de.cau.cs.kieler.core.kgraph.KStringOption#getValue <em>Value</em>}' attribute.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @param value the new value of the '<em>Value</em>' attribute.
      * @see #getValue()
      * @generated
      */
-    void setValue(int value);
+    void setValue(String value);
 
-} // KIntOption
+} // KStringOption

@@ -13,7 +13,7 @@
  *
  * $Id$
  */
-package de.cau.cs.kieler.core.graph.kgraph;
+package de.cau.cs.kieler.core.kgraph;
 
 
 /**
@@ -24,11 +24,11 @@ package de.cau.cs.kieler.core.graph.kgraph;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link de.cau.cs.kieler.core.graph.kgraph.KLabel#getText <em>Text</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.core.kgraph.KLabel#getText <em>Text</em>}</li>
  * </ul>
  * </p>
  *
- * @see de.cau.cs.kieler.core.graph.kgraph.KGraphPackage#getKLabel()
+ * @see de.cau.cs.kieler.core.kgraph.KGraphPackage#getKLabel()
  * @model
  * @generated
  */
@@ -43,14 +43,14 @@ public interface KLabel extends KGraphElement {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Text</em>' attribute.
      * @see #setText(String)
-     * @see de.cau.cs.kieler.core.graph.kgraph.KGraphPackage#getKLabel_Text()
+     * @see de.cau.cs.kieler.core.kgraph.KGraphPackage#getKLabel_Text()
      * @model required="true"
      * @generated
      */
     String getText();
 
     /**
-     * Sets the value of the '{@link de.cau.cs.kieler.core.graph.kgraph.KLabel#getText <em>Text</em>}' attribute.
+     * Sets the value of the '{@link de.cau.cs.kieler.core.kgraph.KLabel#getText <em>Text</em>}' attribute.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @param value the new value of the '<em>Text</em>' attribute.

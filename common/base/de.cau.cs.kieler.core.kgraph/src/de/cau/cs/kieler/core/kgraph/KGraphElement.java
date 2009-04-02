@@ -13,7 +13,7 @@
  *
  * $Id$
  */
-package de.cau.cs.kieler.core.graph.kgraph;
+package de.cau.cs.kieler.core.kgraph;
 
 import org.eclipse.emf.common.util.EList;
 
@@ -28,18 +28,18 @@ import org.eclipse.emf.ecore.EModelElement;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link de.cau.cs.kieler.core.graph.kgraph.KGraphElement#getData <em>Data</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.core.kgraph.KGraphElement#getData <em>Data</em>}</li>
  * </ul>
  * </p>
  *
- * @see de.cau.cs.kieler.core.graph.kgraph.KGraphPackage#getKGraphElement()
+ * @see de.cau.cs.kieler.core.kgraph.KGraphPackage#getKGraphElement()
  * @model abstract="true"
  * @generated
  */
 public interface KGraphElement extends EModelElement {
     /**
      * Returns the value of the '<em><b>Data</b></em>' containment reference list.
-     * The list contents are of type {@link de.cau.cs.kieler.core.graph.kgraph.KGraphData}.
+     * The list contents are of type {@link de.cau.cs.kieler.core.kgraph.KGraphData}.
      * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Data</em>' containment reference list isn't clear,
@@ -47,7 +47,7 @@ public interface KGraphElement extends EModelElement {
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Data</em>' containment reference list.
-     * @see de.cau.cs.kieler.core.graph.kgraph.KGraphPackage#getKGraphElement_Data()
+     * @see de.cau.cs.kieler.core.kgraph.KGraphPackage#getKGraphElement_Data()
      * @model containment="true"
      * @generated
      */

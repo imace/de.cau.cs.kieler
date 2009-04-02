@@ -13,7 +13,7 @@
  *
  * $Id$
  */
-package de.cau.cs.kieler.core.graph.kgraph;
+package de.cau.cs.kieler.core.kgraph;
 
 import org.eclipse.emf.ecore.EObject;
 
@@ -25,11 +25,11 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link de.cau.cs.kieler.core.graph.kgraph.KOption#getKey <em>Key</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.core.kgraph.KOption#getKey <em>Key</em>}</li>
  * </ul>
  * </p>
  *
- * @see de.cau.cs.kieler.core.graph.kgraph.KGraphPackage#getKOption()
+ * @see de.cau.cs.kieler.core.kgraph.KGraphPackage#getKOption()
  * @model
  * @generated
  */
@@ -44,14 +44,14 @@ public interface KOption extends EObject {
      * <!-- end-user-doc -->
      * @return the value of the '<em>Key</em>' attribute.
      * @see #setKey(String)
-     * @see de.cau.cs.kieler.core.graph.kgraph.KGraphPackage#getKOption_Key()
+     * @see de.cau.cs.kieler.core.kgraph.KGraphPackage#getKOption_Key()
      * @model
      * @generated
      */
     String getKey();
 
     /**
-     * Sets the value of the '{@link de.cau.cs.kieler.core.graph.kgraph.KOption#getKey <em>Key</em>}' attribute.
+     * Sets the value of the '{@link de.cau.cs.kieler.core.kgraph.KOption#getKey <em>Key</em>}' attribute.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @param value the new value of the '<em>Key</em>' attribute.
