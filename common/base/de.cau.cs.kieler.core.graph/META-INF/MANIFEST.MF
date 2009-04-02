@@ -1,8 +1,16 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: KGraph Ecore Model
-Bundle-SymbolicName: de.cau.cs.kieler.core.graph
-Bundle-Version: 0.1.0
-Bundle-Vendor: Christian-Albrechts-University of Kiel
-Require-Bundle: org.eclipse.emf.ecore;bundle-version="2.4.0",
- org.eclipse.gmf.runtime.notation;bundle-version="1.1.0"
+Bundle-Name: %pluginName
+Bundle-SymbolicName: de.cau.cs.kieler.core.graph;singleton:=true
+Bundle-Version: 1.0.0
+Bundle-ClassPath: .
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Export-Package: de.cau.cs.kieler.core.graph.kgraph,
+ de.cau.cs.kieler.core.graph.kgraph.impl,
+ de.cau.cs.kieler.core.graph.kgraph.util
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.ecore;visibility:=reexport,
+ org.eclipse.gmf.runtime.notation;visibility:=reexport
+Bundle-ActivationPolicy: lazy
