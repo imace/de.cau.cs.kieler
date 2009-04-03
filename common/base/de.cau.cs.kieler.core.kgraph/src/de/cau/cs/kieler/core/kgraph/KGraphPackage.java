@@ -3,7 +3,7 @@
  * 
  * http://www.informatik.uni-kiel.de/rtsys/kieler/
  * 
- * Copyright ${year} by
+ * Copyright 2009 by
  * + Christian-Albrechts-University of Kiel
  *   + Department of Computer Science
  *     + Real-Time and Embedded Systems Group
@@ -54,7 +54,7 @@ public interface KGraphPackage extends EPackage {
      * <!-- end-user-doc -->
      * @generated
      */
-    String eNS_URI = "https://rtsys.informatik.uni-kiel.de/trac/kieler/KGraph";
+    String eNS_URI = "http://rtsys.informatik.uni-kiel.de/trac/kieler/wiki/KGraph";
 
     /**
      * The package namespace name.
