@@ -16,11 +16,11 @@ import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphFactory;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayouterInfo;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutOption;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutType;
-import de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayoutProvider;
+import de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider;
 
 /**
  * Implements the Neato layouter of the GraphViz suite. As this class extends
- * the {@link KimlAbstractLayoutProvider}, the most relevant method is
+ * the {@link AbstractLayoutProvider}, the most relevant method is
  * <code>doLayout</code>, which performs the actual layout, that is annotating
  * the provided KLayoutNode with the Neato layout information.
  * <p/>
@@ -30,7 +30,7 @@ import de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayoutProvider;
  * 
  * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
  */
-public class NeatoLayoutProvider extends KimlAbstractLayoutProvider {
+public class NeatoLayoutProvider extends AbstractLayoutProvider {
 
 	/* some Strings used here */
 	private final String LAYOUT_PROVIDER_NAME = GraphvizLayoutProviderNames.GRAPHVIZ_NEATO;
@@ -42,7 +42,7 @@ public class NeatoLayoutProvider extends KimlAbstractLayoutProvider {
 
 	/*
 	 * (non-Javadoc)
-	 * @see de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayoutProvider#doLayout(de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode, de.cau.cs.kieler.core.alg.IKielerProgressMonitor)
+	 * @see de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider#doLayout(de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode, de.cau.cs.kieler.core.alg.IKielerProgressMonitor)
 	 */
 	public void doLayout(KLayoutNode layoutNode,
 			IKielerProgressMonitor progressMonitor) throws KielerException {
@@ -55,7 +55,7 @@ public class NeatoLayoutProvider extends KimlAbstractLayoutProvider {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayoutProvider
+	 * de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider
 	 * #getLayouterInfo()
 	 */
 	public final KLayouterInfo getLayouterInfo() {

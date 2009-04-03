@@ -26,7 +26,7 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.ui.IWorkbench;
 
-import de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayoutProvider;
+import de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider;
 import de.cau.cs.kieler.kiml.layout.services.KimlLayoutServices;
 
 
@@ -87,7 +87,7 @@ public abstract class AbstractKimlLayoutProviderPreferencePage extends
 	 *         afterwards
 	 */
 	protected ArrayList<FieldEditor> createLayouterTable(Composite parent,
-			ArrayList<KimlAbstractLayoutProvider> layoutProviders) {
+			ArrayList<AbstractLayoutProvider> layoutProviders) {
 		ArrayList<FieldEditor> createdFieldEditors = new ArrayList<FieldEditor>();
 
 		Group availableLayouters = new Group(parent, SWT.NONE);
@@ -101,7 +101,7 @@ public abstract class AbstractKimlLayoutProviderPreferencePage extends
 			description.setText("Enable the layouter you want to use:");
 			description.setLayoutData(new GridData(GridData.FILL,
 					GridData.FILL, true, true, 2, 1));
-			for (KimlAbstractLayoutProvider layoutProvider : layoutProviders) {
+			for (AbstractLayoutProvider layoutProvider : layoutProviders) {
 				String label = layoutProvider.getLayouterInfo()
 						.getLayouterName()
 						+ " ("
@@ -137,11 +137,11 @@ public abstract class AbstractKimlLayoutProviderPreferencePage extends
 	public boolean performOk() {
 		boolean retVal = super.performOk();
 
-		ArrayList<KimlAbstractLayoutProvider> layouters = KimlLayoutServices
+		ArrayList<AbstractLayoutProvider> layouters = KimlLayoutServices
 				.getInstance().getLayoutProvidersOfCollection(
 						LAYOUT_PROVIDER_COLLECTION_ID);
 
-		for (KimlAbstractLayoutProvider layouter : layouters) {
+		for (AbstractLayoutProvider layouter : layouters) {
 			layouter.setEnabled(getPreferenceStore().getBoolean(
 					layouter.getLayouterInfo().getLayouterName()));
 		}

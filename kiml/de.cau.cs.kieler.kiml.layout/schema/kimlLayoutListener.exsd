@@ -55,7 +55,7 @@
                   Implementing class of the layout listener
                </documentation>
                <appinfo>
-                  <meta.attribute kind="java" basedOn=":de.cau.cs.kieler.kiml.layout.services.IKimlLayoutListener"/>
+                  <meta.attribute kind="java" basedOn=":de.cau.cs.kieler.kiml.layout.services.ILayoutListener"/>
                </appinfo>
             </annotation>
          </attribute>
@@ -96,7 +96,7 @@
       </appinfo>
       <documentation>
          The value of the attribute class must represent a fully qualified name of a class that implements
-&lt;samp&gt;de.cau.cs.kieler.kiml.layout.services.IKimlLayoutListener&lt;/samp&gt;.
+&lt;samp&gt;de.cau.cs.kieler.kiml.layout.services.ILayoutListener&lt;/samp&gt;.
       </documentation>
    </annotation>
 

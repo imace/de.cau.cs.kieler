@@ -30,12 +30,12 @@ import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayouterInfo;
  * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
  * @see LayoutProviders
  */
-public class KimlNullLayoutProvider extends KimlAbstractLayoutProvider {
+public class NullLayoutProvider extends AbstractLayoutProvider {
 
 	/**
 	 * Does nothing, as this is the NullLayoutProvider.
 	 * 
-	 * @see de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayoutProvider#doLayout(de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode, de.cau.cs.kieler.core.alg.IKielerProgressMonitor)
+	 * @see de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider#doLayout(de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode, de.cau.cs.kieler.core.alg.IKielerProgressMonitor)
 	 */
 	public void doLayout(KLayoutNode layoutNode,
 			IKielerProgressMonitor progressMonitor) throws KielerException {
@@ -48,7 +48,7 @@ public class KimlNullLayoutProvider extends KimlAbstractLayoutProvider {
 	 * Returns a to defaults initialized KLayouterInfo, as this is the
 	 * NullLayoutProvider.
 	 * 
-	 * @see de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayoutProvider#getLayouterInfo() KimlAbstractLayoutProvider.getLayouterInfo()
+	 * @see de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider#getLayouterInfo() AbstractLayoutProvider.getLayouterInfo()
 	 */
 	public final KLayouterInfo getLayouterInfo() {
 		return KimlLayoutGraphFactory.eINSTANCE.createKLayouterInfo();

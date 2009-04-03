@@ -60,7 +60,7 @@
                   Implementing class of the layout provider, must extend &lt;samp&gt;de.cau.cs.kieler.kiml.layout.servicesKimlAbstractLayoutProvider&lt;/samp&gt;
                </documentation>
                <appinfo>
-                  <meta.attribute kind="java" basedOn="de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayoutProvider:"/>
+                  <meta.attribute kind="java" basedOn="de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider:"/>
                </appinfo>
             </annotation>
          </attribute>
@@ -110,7 +110,7 @@
       </appinfo>
       <documentation>
          The value of the attribute class must represent a fully qualified name of a class that extends
-&lt;samp&gt;de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayoutProvider&lt;/samp&gt;.
+&lt;samp&gt;de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider&lt;/samp&gt;.
       </documentation>
    </annotation>
 

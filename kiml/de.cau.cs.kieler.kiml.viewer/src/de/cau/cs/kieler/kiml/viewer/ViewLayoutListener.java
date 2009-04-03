@@ -22,7 +22,7 @@ import org.eclipse.ui.PlatformUI;
 
 import de.cau.cs.kieler.core.alg.IKielerProgressMonitor;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutGraph;
-import de.cau.cs.kieler.kiml.layout.services.IKimlLayoutListener;
+import de.cau.cs.kieler.kiml.layout.services.ILayoutListener;
 import de.cau.cs.kieler.kiml.viewer.views.ExecutionView;
 import de.cau.cs.kieler.kiml.viewer.views.LayoutGraphView;
 
@@ -32,7 +32,7 @@ import de.cau.cs.kieler.kiml.viewer.views.LayoutGraphView;
  * 
  * @author msp
  */
-public class ViewLayoutListener implements IKimlLayoutListener {
+public class ViewLayoutListener implements ILayoutListener {
 
 	/** the currently open layout graph view */
 	private LayoutGraphView layoutGraphView;
@@ -40,7 +40,7 @@ public class ViewLayoutListener implements IKimlLayoutListener {
 	private ExecutionView executionView;
 	
 	/* (non-Javadoc)
-	 * @see de.cau.cs.kieler.kiml.layout.services.IKimlLayoutListener#layoutRequested(de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutGraph)
+	 * @see de.cau.cs.kieler.kiml.layout.services.ILayoutListener#layoutRequested(de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutGraph)
 	 */
 	public void layoutRequested(KLayoutGraph layoutGraph) {
 		findViews();
@@ -55,7 +55,7 @@ public class ViewLayoutListener implements IKimlLayoutListener {
 	
 	/*
 	 * (non-Javadoc)
-	 * @see de.cau.cs.kieler.kiml.layout.services.IKimlLayoutListener#layoutPerformed(de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutGraph, de.cau.cs.kieler.core.alg.IKielerProgressMonitor)
+	 * @see de.cau.cs.kieler.kiml.layout.services.ILayoutListener#layoutPerformed(de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutGraph, de.cau.cs.kieler.core.alg.IKielerProgressMonitor)
 	 */
 	public void layoutPerformed(KLayoutGraph layoutGraph,
 			IKielerProgressMonitor monitor) {

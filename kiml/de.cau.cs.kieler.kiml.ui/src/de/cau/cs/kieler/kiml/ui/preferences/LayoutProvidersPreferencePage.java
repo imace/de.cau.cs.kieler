@@ -37,8 +37,8 @@ import de.cau.cs.kieler.kiml.ui.KimlUiPlugin;
  * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
  * @see de.cau.cs.kieler.kiml.ui.diagramlayouter.LayoutProviders
  *      LayoutProviders
- * @see de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayoutProvider
- *      KimlAbstractLayoutProvider
+ * @see de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider
+ *      AbstractLayoutProvider
  */
 public class LayoutProvidersPreferencePage extends FieldEditorPreferencePage
 		implements IWorkbenchPreferencePage {

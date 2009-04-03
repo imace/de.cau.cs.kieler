@@ -21,7 +21,7 @@ import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutGraph;
  * 
  * @author msp
  */
-public interface IKimlLayoutListener {
+public interface ILayoutListener {
 
 	/** the extension point identifier */
 	public static final String EXTENSION_POINT_ID = "de.cau.cs.kieler.kiml.layout.kimlLayoutListener";

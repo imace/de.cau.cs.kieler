@@ -31,15 +31,15 @@ import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
  * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
  * @see LayoutProviders
  */
-public class KimlRecursiveGroupLayouterEngine extends
-		KimlAbstractLayouterEngine {
+public class RecursiveGroupLayouterEngine extends
+		AbstractLayouterEngine {
 
 	/** the last used layout provider */
-	private KimlAbstractLayoutProvider lastLayoutProvider;
+	private AbstractLayoutProvider lastLayoutProvider;
 	
 	/*
 	 * (non-Javadoc)
-	 * @see de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayouterEngine#layout(de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutGraph, de.cau.cs.kieler.core.alg.IKielerProgressMonitor)
+	 * @see de.cau.cs.kieler.kiml.layout.services.AbstractLayouterEngine#layout(de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutGraph, de.cau.cs.kieler.core.alg.IKielerProgressMonitor)
 	 */
 	public void layout(KLayoutGraph layoutGraph,
 			IKielerProgressMonitor progressMonitor) throws KielerException {
@@ -90,9 +90,9 @@ public class KimlRecursiveGroupLayouterEngine extends
 
 	/*
 	 * (non-Javadoc)
-	 * @see de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayouterEngine#getLastLayoutProvider()
+	 * @see de.cau.cs.kieler.kiml.layout.services.AbstractLayouterEngine#getLastLayoutProvider()
 	 */
-	public KimlAbstractLayoutProvider getLastLayoutProvider() {
+	public AbstractLayoutProvider getLastLayoutProvider() {
 		return lastLayoutProvider;
 	}
 

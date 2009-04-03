@@ -41,11 +41,11 @@ public class KimlLayoutServices {
 	/** the preference store */
 	private IKielerPreferenceStore preferenceStore;
 	/** the list of layout listeners that have been loaded at startup */
-	private List<IKimlLayoutListener> listeners = new LinkedList<IKimlLayoutListener>();
+	private List<ILayoutListener> listeners = new LinkedList<ILayoutListener>();
 	/** maps the name of a layout provider to the instantiated
 	 *  layout provider object */
-	private HashMap<String, KimlAbstractLayoutProvider> layoutProviderMap
-			= new HashMap<String, KimlAbstractLayoutProvider>();
+	private HashMap<String, AbstractLayoutProvider> layoutProviderMap
+			= new HashMap<String, AbstractLayoutProvider>();
 
 
 	/**
@@ -80,7 +80,7 @@ public class KimlLayoutServices {
 	 * 
 	 * @param listener layout listener to register
 	 */
-	public void addLayoutListener(IKimlLayoutListener listener) {
+	public void addLayoutListener(ILayoutListener listener) {
 		listeners.add(listener);
 	}
 	
@@ -91,7 +91,7 @@ public class KimlLayoutServices {
 	 * @param layoutGraph layout graph for which layout is requested
 	 */
 	public void layoutRequested(KLayoutGraph layoutGraph) {
-		for (IKimlLayoutListener listener : listeners) {
+		for (ILayoutListener listener : listeners) {
 			listener.layoutRequested(layoutGraph);
 		}
 	}
@@ -105,7 +105,7 @@ public class KimlLayoutServices {
 	 */
 	public void layoutPerformed(KLayoutGraph layoutGraph,
 			IKielerProgressMonitor monitor) {
-		for (IKimlLayoutListener listener : listeners) {
+		for (ILayoutListener listener : listeners) {
 			listener.layoutPerformed(layoutGraph, monitor);
 		}
 	}
@@ -115,13 +115,13 @@ public class KimlLayoutServices {
 	 * 
 	 * @param provider layout provider to register
 	 */
-	public void addLayoutProvider(KimlAbstractLayoutProvider provider) {
+	public void addLayoutProvider(AbstractLayoutProvider provider) {
 		layoutProviderMap.put(provider.getLayouterInfo().getLayouterName(),
 				provider);
 	}
 	
 	/**
-	 * Returns the best fitting {@link KimlAbstractLayoutProvider} for the
+	 * Returns the best fitting {@link AbstractLayoutProvider} for the
 	 * provided KLayoutNode. The layout provider is evaluated as follows:
 	 * <ol>
 	 * <li>If Layouter Name attribute of KLayoutNode is fitting a certain layout
@@ -131,7 +131,7 @@ public class KimlLayoutServices {
 	 * <li>If not fitting so far, return the default layout provider. This can
 	 * be adjusted in the preference page.</li>
 	 * <li>If no default layout provider found, return the
-	 * {@link KimlNullLayoutProvider}, which does nothing, but does not trigger
+	 * {@link NullLayoutProvider}, which does nothing, but does not trigger
 	 * a NullPointerException.</li>
 	 * </ol>
 	 * 
@@ -139,10 +139,10 @@ public class KimlLayoutServices {
 	 *            The KLayoutNode for which the fitting layout provider should be
 	 *            returned
 	 * @return The best fitting LayoutProvider for the provided KLayoutNode
-	 * @see KimlNullLayoutProvider
+	 * @see NullLayoutProvider
 	 */
-	public KimlAbstractLayoutProvider getLayoutProvider(KLayoutNode layoutNode) {
-		KimlAbstractLayoutProvider layoutProvider = null;
+	public AbstractLayoutProvider getLayoutProvider(KLayoutNode layoutNode) {
+		AbstractLayoutProvider layoutProvider = null;
 
 		/* if layouter name is fitting, use it */
 		String layouterName = layoutNode.getLayout().getLayouterName();
@@ -179,7 +179,7 @@ public class KimlLayoutServices {
 		 * so that no null pointer exception arises in other plugins.
 		 */
 		else {
-			return new KimlNullLayoutProvider();
+			return new NullLayoutProvider();
 		}
 	}
 
@@ -211,7 +211,7 @@ public class KimlLayoutServices {
 	public ArrayList<KLayoutType> getEnabledLayoutTypes() {
 		ArrayList<KLayoutType> enabledLayoutTypes = new ArrayList<KLayoutType>();
 
-		for (KimlAbstractLayoutProvider layoutProvider : layoutProviderMap
+		for (AbstractLayoutProvider layoutProvider : layoutProviderMap
 				.values()) {
 			if (layoutProvider.isEnabled()) {
 				KLayoutType type = layoutProvider.getLayouterInfo()
@@ -234,7 +234,7 @@ public class KimlLayoutServices {
 	public ArrayList<KLayouterInfo> getEnabledLayouterInfos() {
 		ArrayList<KLayouterInfo> enabledLayouterInfos = new ArrayList<KLayouterInfo>();
 
-		for (KimlAbstractLayoutProvider layoutProvider : layoutProviderMap
+		for (AbstractLayoutProvider layoutProvider : layoutProviderMap
 				.values()) {
 			if (layoutProvider.isEnabled()) {
 				KLayouterInfo info = layoutProvider.getLayouterInfo();
@@ -284,15 +284,15 @@ public class KimlLayoutServices {
 	
 	/**
 	 * Returns a non null, possibly empty list of enabled
-	 * {@link KimlAbstractLayoutProvider}s for a given collectionID.
+	 * {@link AbstractLayoutProvider}s for a given collectionID.
 	 * 
 	 * @return An possibly empty list of enabled
-	 *         {@link KimlAbstractLayoutProvider}s for a given collectionID
+	 *         {@link AbstractLayoutProvider}s for a given collectionID
 	 */
-	public ArrayList<KimlAbstractLayoutProvider> getLayoutProvidersOfCollection(
+	public ArrayList<AbstractLayoutProvider> getLayoutProvidersOfCollection(
 			String collectionID) {
-		ArrayList<KimlAbstractLayoutProvider> collection = new ArrayList<KimlAbstractLayoutProvider>();
-		for (KimlAbstractLayoutProvider layoutProvider : layoutProviderMap
+		ArrayList<AbstractLayoutProvider> collection = new ArrayList<AbstractLayoutProvider>();
+		for (AbstractLayoutProvider layoutProvider : layoutProviderMap
 				.values()) {
 			if (layoutProvider.getLayouterInfo().getLayouterCollectionID()
 					.equals(collectionID)) {

@@ -35,9 +35,9 @@ import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayouterInfo;
  * 
  * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
  * @see LayoutProviders
- * @see KimlNullLayoutProvider
+ * @see NullLayoutProvider
  */
-public abstract class KimlAbstractLayoutProvider {
+public abstract class AbstractLayoutProvider {
 
 	/*
 	 * some strings used when creating the concrete layouters via the extension

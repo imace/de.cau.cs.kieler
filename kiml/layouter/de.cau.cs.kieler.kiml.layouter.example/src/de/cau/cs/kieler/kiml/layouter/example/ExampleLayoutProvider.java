@@ -16,11 +16,11 @@ import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphFactory;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayouterInfo;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutOption;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutType;
-import de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayoutProvider;
+import de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider;
 
 /**
  * Implements the Example layouter. As this class extends the
- * {@link KimlAbstractLayoutProvider}, the most relevant method is
+ * {@link AbstractLayoutProvider}, the most relevant method is
  * <code>doLayout</code>, which performs the actual layout, that is annotating
  * the provided KLayoutNode with the Example layouter layout information.
  * <p/>
@@ -36,14 +36,14 @@ import de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayoutProvider;
  * 
  * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
  */
-public class ExampleLayoutProvider extends KimlAbstractLayoutProvider {
+public class ExampleLayoutProvider extends AbstractLayoutProvider {
 	
 	/* some Strings used here */
 	private final KLayoutType LAYOUT_PROVIDER_LAYOUT_TYPE = KLayoutType.OTHER;
 	private final KLayoutOption LAYOUT_PROVIDER_LAYOUT_OPTION = KLayoutOption.DEFAULT;
 
 	/* (non-Javadoc)
-	 * @see de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayoutProvider#doLayout(de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode)
+	 * @see de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider#doLayout(de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode)
 	 */
 	public void doLayout(KLayoutNode layoutNode,
 			IKielerProgressMonitor progressMonitor) throws KielerException {
@@ -54,7 +54,7 @@ public class ExampleLayoutProvider extends KimlAbstractLayoutProvider {
 	}
 
 	/* (non-Javadoc)
-	 * @see de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayoutProvider#getLayouterInfo()
+	 * @see de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider#getLayouterInfo()
 	 */
 	public final KLayouterInfo getLayouterInfo() {
 

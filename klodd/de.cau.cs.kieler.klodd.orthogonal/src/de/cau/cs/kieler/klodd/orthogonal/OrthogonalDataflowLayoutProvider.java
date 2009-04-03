@@ -25,7 +25,7 @@ import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphFactory;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayouterInfo;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutOption;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutType;
-import de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayoutProvider;
+import de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider;
 import de.cau.cs.kieler.klodd.orthogonal.impl.*;
 import de.cau.cs.kieler.klodd.orthogonal.impl.ec.EdgeInsertionECPlanarizer;
 import de.cau.cs.kieler.klodd.orthogonal.modules.*;
@@ -37,7 +37,7 @@ import de.cau.cs.kieler.klodd.orthogonal.structures.TSMGraph;
  * @author msp
  */
 public class OrthogonalDataflowLayoutProvider extends
-		KimlAbstractLayoutProvider {
+		AbstractLayoutProvider {
 
 	/** displayed name of this layout provider */
 	public static final String LAYOUTER_NAME = "KLoDD Orthogonal";
@@ -73,7 +73,7 @@ public class OrthogonalDataflowLayoutProvider extends
 	
 	/*
 	 * (non-Javadoc)
-	 * @see de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayoutProvider#doLayout(de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode, de.cau.cs.kieler.core.alg.IKielerProgressMonitor)
+	 * @see de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider#doLayout(de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode, de.cau.cs.kieler.core.alg.IKielerProgressMonitor)
 	 */
 	public void doLayout(KLayoutNode layoutNode,
 			IKielerProgressMonitor progressMonitor) throws KielerException {
@@ -103,7 +103,7 @@ public class OrthogonalDataflowLayoutProvider extends
 	}
 
 	/* (non-Javadoc)
-	 * @see de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayoutProvider#getLayouterInfo()
+	 * @see de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider#getLayouterInfo()
 	 */
 	public KLayouterInfo getLayouterInfo() {
 		KLayouterInfo info = KimlLayoutGraphFactory.eINSTANCE.createKLayouterInfo();

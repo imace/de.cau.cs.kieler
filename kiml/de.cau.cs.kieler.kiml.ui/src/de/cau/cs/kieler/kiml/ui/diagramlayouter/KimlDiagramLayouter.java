@@ -25,9 +25,9 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.statushandlers.StatusManager;
 
 import de.cau.cs.kieler.core.ui.KielerProgressMonitor;
-import de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayouterEngine;
+import de.cau.cs.kieler.kiml.layout.services.AbstractLayouterEngine;
 import de.cau.cs.kieler.kiml.layout.services.KimlLayoutServices;
-import de.cau.cs.kieler.kiml.layout.services.KimlRecursiveGroupLayouterEngine;
+import de.cau.cs.kieler.kiml.layout.services.RecursiveGroupLayouterEngine;
 import de.cau.cs.kieler.kiml.layout.util.KimlLayoutPreferenceConstants;
 import de.cau.cs.kieler.kiml.ui.KimlUiPlugin;
 
@@ -222,7 +222,7 @@ public final class KimlDiagramLayouter {
 	 */
 	private static IStatus layout(Object target, String editorID, boolean animate,
 			int runs, KielerProgressMonitor progressMonitor) {
-		KimlAbstractLayouterEngine layoutEngine = null;
+		AbstractLayouterEngine layoutEngine = null;
 		KimlLayoutInformation layoutInformation = null;
 		try {
 			progressMonitor.begin("Diagram layout", 100);
@@ -241,7 +241,7 @@ public final class KimlDiagramLayouter {
 					layoutInformation.layoutGraph);
 
 			// chooses the default layout engine
-			layoutEngine = new KimlRecursiveGroupLayouterEngine();
+			layoutEngine = new RecursiveGroupLayouterEngine();
 
 			// does the layout with the layout graph
 			layoutEngine.layout(layoutInformation.layoutGraph,

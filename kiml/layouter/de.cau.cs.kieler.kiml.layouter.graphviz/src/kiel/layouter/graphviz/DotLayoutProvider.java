@@ -16,11 +16,11 @@ import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphFactory;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayouterInfo;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutOption;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutType;
-import de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayoutProvider;
+import de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider;
 
 /**
  * Implements the Dot layouter of the GraphViz suite. As this class extends
- * the {@link KimlAbstractLayoutProvider}, the most relevant method is
+ * the {@link AbstractLayoutProvider}, the most relevant method is
  * <code>doLayout</code>, which performs the actual layout, that is annotating
  * the provided KLayoutNode with the Dot layout information.
  * <p/>
@@ -30,7 +30,7 @@ import de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayoutProvider;
  * 
  * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
  */
-public class DotLayoutProvider extends KimlAbstractLayoutProvider {
+public class DotLayoutProvider extends AbstractLayoutProvider {
 
 	/* some Strings used here */
 	private final String LAYOUT_PROVIDER_NAME = GraphvizLayoutProviderNames.GRAPHVIZ_DOT;
@@ -41,7 +41,7 @@ public class DotLayoutProvider extends KimlAbstractLayoutProvider {
 	private GraphvizLayouter graphvizLayouter = null;
 
 	/* (non-Javadoc)
-	 * @see de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayoutProvider#doLayout(de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode)
+	 * @see de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider#doLayout(de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode)
 	 */
 	public void doLayout(KLayoutNode layoutNode,
 			IKielerProgressMonitor progressMonitor) throws KielerException {
@@ -51,7 +51,7 @@ public class DotLayoutProvider extends KimlAbstractLayoutProvider {
 	}
 
 	/* (non-Javadoc)
-	 * @see de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayoutProvider#getLayouterInfo()
+	 * @see de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider#getLayouterInfo()
 	 */
 	public final KLayouterInfo getLayouterInfo() {
 		KLayouterInfo info = KimlLayoutGraphFactory.eINSTANCE

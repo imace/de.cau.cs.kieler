@@ -9,7 +9,7 @@ import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphFactory;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayouterInfo;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutOption;
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutType;
-import de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayoutProvider;
+import de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider;
 
 
 /**
@@ -17,12 +17,12 @@ import de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayoutProvider;
  * 
  * @author msp
  */
-public class ZestSpringLayoutProvider extends KimlAbstractLayoutProvider {
+public class ZestSpringLayoutProvider extends AbstractLayoutProvider {
 	
 	public static final String LAYOUTER_NAME = "Zest Spring Layout";
 
 	/* (non-Javadoc)
-	 * @see de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayoutProvider#doLayout(de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode)
+	 * @see de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider#doLayout(de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode)
 	 */
 	public void doLayout(KLayoutNode layoutNode,
 			IKielerProgressMonitor progressMonitor) throws KielerException {
@@ -33,7 +33,7 @@ public class ZestSpringLayoutProvider extends KimlAbstractLayoutProvider {
 	}
 
 	/* (non-Javadoc)
-	 * @see de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayoutProvider#getLayouterInfo()
+	 * @see de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider#getLayouterInfo()
 	 */
 	public KLayouterInfo getLayouterInfo() {
 		KLayouterInfo info = KimlLayoutGraphFactory.eINSTANCE.createKLayouterInfo();

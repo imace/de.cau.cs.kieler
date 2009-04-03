@@ -22,8 +22,8 @@ import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.ui.statushandlers.StatusManager;
 
 import de.cau.cs.kieler.core.ui.KielerPreferenceStore;
-import de.cau.cs.kieler.kiml.layout.services.IKimlLayoutListener;
-import de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayoutProvider;
+import de.cau.cs.kieler.kiml.layout.services.ILayoutListener;
+import de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider;
 import de.cau.cs.kieler.kiml.layout.services.KimlLayoutServices;
 import de.cau.cs.kieler.kiml.ui.KimlUiPlugin;
 
@@ -55,12 +55,12 @@ public class LayoutServiceBuilder {
 
 		IExtensionRegistry reg = Platform.getExtensionRegistry();
 		IConfigurationElement[] extensions = reg
-				.getConfigurationElementsFor(KimlAbstractLayoutProvider.EXTENSION_POINT_ID);
+				.getConfigurationElementsFor(AbstractLayoutProvider.EXTENSION_POINT_ID);
 
 		for (IConfigurationElement element : extensions) {
 			try {
-				KimlAbstractLayoutProvider layoutProvider = (KimlAbstractLayoutProvider) element
-						.createExecutableExtension(KimlAbstractLayoutProvider.ATTRIBUTE_CLASS);
+				AbstractLayoutProvider layoutProvider = (AbstractLayoutProvider) element
+						.createExecutableExtension(AbstractLayoutProvider.ATTRIBUTE_CLASS);
 				/*
 				 * try to load every layout provider available on the system,
 				 * but ...
@@ -97,12 +97,12 @@ public class LayoutServiceBuilder {
 	private static void loadAvailableListeners() {
 		IExtensionRegistry reg = Platform.getExtensionRegistry();
 		IConfigurationElement[] extensions = reg
-				.getConfigurationElementsFor(IKimlLayoutListener.EXTENSION_POINT_ID);
+				.getConfigurationElementsFor(ILayoutListener.EXTENSION_POINT_ID);
 
 		for (IConfigurationElement element : extensions) {
 			try {
-				IKimlLayoutListener layoutListener = (IKimlLayoutListener) element
-						.createExecutableExtension(IKimlLayoutListener.ATTRIBUTE_CLASS);
+				ILayoutListener layoutListener = (ILayoutListener) element
+						.createExecutableExtension(ILayoutListener.ATTRIBUTE_CLASS);
 				if (layoutListener != null) {
 					KimlLayoutServices.getInstance().addLayoutListener(
 							layoutListener);
