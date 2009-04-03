@@ -1,10 +1,10 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: KIML Layout
+Bundle-Name: %pluginName
 Bundle-SymbolicName: de.cau.cs.kieler.kiml.layout;singleton:=true
 Bundle-Version: 0.1.0
-Require-Bundle: org.eclipse.emf.ecore;bundle-version="2.4.0",
- de.cau.cs.kieler.core
+Require-Bundle: de.cau.cs.kieler.core,
+ de.cau.cs.kieler.core.kgraph;visibility:=reexport
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: de.cau.cs.kieler.kiml.layout.KimlLayoutGraph;uses:="org.eclipse.emf.ecore,org.eclipse.emf.common.util",
  de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl;
@@ -25,4 +25,4 @@ Export-Package: de.cau.cs.kieler.kiml.layout.KimlLayoutGraph;uses:="org.eclipse.
    de.cau.cs.kieler.kiml.layout.KimlLayoutGraph,
    org.eclipse.gef",
  de.cau.cs.kieler.kiml.layout.util
-Bundle-Vendor: Christian-Albrechts-University of Kiel
+Bundle-Vendor: %providerName
