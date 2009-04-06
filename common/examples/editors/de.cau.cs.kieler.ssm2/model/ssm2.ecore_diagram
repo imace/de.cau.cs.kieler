@@ -40,10 +40,6 @@
         <element xmi:type="ecore:EEnumLiteral" href="ssm2.ecore#//StateKind/TEXTUAL"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_NVuK8R0pEd6ANuWx7hYraw"/>
       </children>
-      <children xmi:type="notation:Node" xmi:id="_27v7cB0sEd6ANuWx7hYraw" type="3009">
-        <element xmi:type="ecore:EEnumLiteral" href="ssm2.ecore#//StateKind/@eLiterals.4"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_27v7cR0sEd6ANuWx7hYraw"/>
-      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_NR6pAR0pEd6ANuWx7hYraw"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_NR6pAh0pEd6ANuWx7hYraw"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_NR6pAx0pEd6ANuWx7hYraw"/>
@@ -71,7 +67,7 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_NR9sUR0pEd6ANuWx7hYraw" fontName="Sans"/>
     <element xmi:type="ecore:EEnum" href="ssm2.ecore#//StateFlag"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_NR9sUh0pEd6ANuWx7hYraw" y="204"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_NR9sUh0pEd6ANuWx7hYraw" y="187"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_NR-6dB0pEd6ANuWx7hYraw" type="2001">
     <children xmi:type="notation:Node" xmi:id="_NR_hgB0pEd6ANuWx7hYraw" type="5001"/>
@@ -283,10 +279,6 @@
         <element xmi:type="ecore:EEnumLiteral" href="ssm2.ecore#//OperatorKind/VAL"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_NWxT0x0pEd6ANuWx7hYraw"/>
       </children>
-      <children xmi:type="notation:Node" xmi:id="_ShXwcB0pEd6ANuWx7hYraw" type="3009">
-        <element xmi:type="ecore:EEnumLiteral" href="ssm2.ecore#//OperatorKind/@eLiterals.11"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_ShXwcR0pEd6ANuWx7hYraw"/>
-      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_NSfQwh0pEd6ANuWx7hYraw"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_NSfQwx0pEd6ANuWx7hYraw"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_NSfQxB0pEd6ANuWx7hYraw"/>
@@ -298,7 +290,7 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_NSeCoB0pEd6ANuWx7hYraw" fontName="Sans"/>
     <element xmi:type="ecore:EEnum" href="ssm2.ecore#//OperatorKind"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_NSeCoR0pEd6ANuWx7hYraw" y="288"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_NSeCoR0pEd6ANuWx7hYraw" x="-1" y="273"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_NSf31B0pEd6ANuWx7hYraw" type="2001">
     <children xmi:type="notation:Node" xmi:id="_NSge4B0pEd6ANuWx7hYraw" type="5001"/>
