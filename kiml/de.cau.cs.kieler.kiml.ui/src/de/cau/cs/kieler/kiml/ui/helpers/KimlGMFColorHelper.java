@@ -23,8 +23,6 @@ import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.ui.themes.ColorUtil;
 
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutGraph;
-
 
 /**
  * Helper class which colorize EditParts. Must be instantiated to be able to

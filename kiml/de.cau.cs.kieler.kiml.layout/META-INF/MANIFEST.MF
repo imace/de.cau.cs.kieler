@@ -6,25 +6,17 @@ Bundle-Version: 0.1.0
 Require-Bundle: de.cau.cs.kieler.core,
  de.cau.cs.kieler.core.kgraph;visibility:=reexport
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Export-Package: de.cau.cs.kieler.kiml.layout.KimlLayoutGraph;uses:="org.eclipse.emf.ecore,org.eclipse.emf.common.util",
- de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.impl;
-  uses:="org.eclipse.emf.ecore,
-   org.eclipse.emf.common.util,
-   org.eclipse.emf.common.notify,
-   org.eclipse.emf.ecore.impl,
-   de.cau.cs.kieler.kiml.layout.KimlLayoutGraph",
- de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.util;
-  uses:="org.eclipse.emf.ecore,
-   org.eclipse.emf.common.notify.impl,
-   org.eclipse.emf.common.notify,
-   de.cau.cs.kieler.kiml.layout.KimlLayoutGraph",
- de.cau.cs.kieler.kiml.layout.klayoutdata,
- de.cau.cs.kieler.kiml.layout.options,
+Export-Package: de.cau.cs.kieler.kiml.layout.klayoutdata;uses:="org.eclipse.emf.ecore,org.eclipse.emf.common.util,de.cau.cs.kieler.core.kgraph",
+ de.cau.cs.kieler.kiml.layout.options;uses:="de.cau.cs.kieler.kiml.layout.klayoutdata",
  de.cau.cs.kieler.kiml.layout.services;
-  uses:="org.eclipse.core.runtime,
-   org.eclipse.ui,
-   de.cau.cs.kieler.kiml.layout.util,
-   de.cau.cs.kieler.kiml.layout.KimlLayoutGraph,
-   org.eclipse.gef",
- de.cau.cs.kieler.kiml.layout.util
+  uses:="de.cau.cs.kieler.core,
+   de.cau.cs.kieler.kiml.layout.options,
+   de.cau.cs.kieler.core.alg,
+   de.cau.cs.kieler.core.kgraph",
+ de.cau.cs.kieler.kiml.layout.util;
+  uses:="de.cau.cs.kieler.kiml.layout.klayoutdata,
+   de.cau.cs.kieler.core.alg,
+   de.cau.cs.kieler.kiml.layout.options,
+   de.cau.cs.kieler.core.slimgraph,
+   de.cau.cs.kieler.core.kgraph"
 Bundle-Vendor: %providerName

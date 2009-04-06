@@ -17,13 +17,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import de.cau.cs.kieler.core.alg.AbstractAlgorithm;
+import de.cau.cs.kieler.core.kgraph.KEdge;
+import de.cau.cs.kieler.core.kgraph.KNode;
+import de.cau.cs.kieler.core.kgraph.KPort;
 import de.cau.cs.kieler.core.slimgraph.*;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort;
 
 /**
- * Class that converts a KIML layout graph into a KIELER slim graph.
+ * Class that converts an Ecore graph into a slim graph.
  * 
  * @author msp
  */
@@ -42,7 +42,7 @@ public class GraphConverter extends AbstractAlgorithm {
 	}
 	
 	/**
-	 * Converts a given layout graph into a KIELER graph. Each node
+	 * Converts a given Ecore graph into a slim graph. Each node
 	 * contains a reference to the corresponding layout node, and each
 	 * edge contains a reference to the corresponding layout edge.
 	 * 
@@ -51,22 +51,22 @@ public class GraphConverter extends AbstractAlgorithm {
 	 *     will also be added as nodes
 	 * @return a graph which consists of the child nodes
 	 */
-	public KSlimGraph convertGraph(KLayoutNode parentNode, boolean includePorts) {
+	public KSlimGraph convertGraph(KNode parentNode, boolean includePorts) {
 		getMonitor().begin("Graph conversion", 1);
-		KSlimGraph kGraph = new KSlimGraph();
+		KSlimGraph slimGraph = new KSlimGraph();
 		
 		// convert nodes
-		for (KLayoutNode child : parentNode.getChildNodes()) {
-			KSlimNode newNode = new KSlimNode(kGraph, child);
+		for (KNode child : parentNode.getChildren()) {
+			KSlimNode newNode = new KSlimNode(slimGraph, child);
 			nodeMap.put(child, newNode);
 		}
 		
 		// convert edges
-		for (KLayoutNode child : parentNode.getChildNodes()) {
-			for (KLayoutEdge layoutEdge : child.getOutgoingEdges()) {
-				KLayoutNode targetNode = layoutEdge.getTarget();
-				if (targetNode != null) {
-					KSlimEdge newEdge = new KSlimEdge(kGraph, nodeMap.get(child),
+		for (KNode child : parentNode.getChildren()) {
+			for (KEdge layoutEdge : child.getOutgoingEdges()) {
+				KNode targetNode = layoutEdge.getTarget();
+				if (targetNode != child.getParent()) {
+					KSlimEdge newEdge = new KSlimEdge(slimGraph, nodeMap.get(child),
 							nodeMap.get(targetNode), layoutEdge);
 					newEdge.connectNodes();
 				}
@@ -75,27 +75,25 @@ public class GraphConverter extends AbstractAlgorithm {
 		
 		if (includePorts) {
 			// convert external ports
-			for (KLayoutPort port : parentNode.getPorts()) {
-				KSlimNode newNode = new KSlimNode(kGraph, port);
+			for (KPort port : parentNode.getPorts()) {
+				KSlimNode newNode = new KSlimNode(slimGraph, port);
 				nodeMap.put(port, newNode);
 			}
 			
 			// convert edges to external ports
-			for (KLayoutPort port : parentNode.getPorts()) {
-				for (KLayoutEdge layoutEdge : port.getEdges()) {
-					KLayoutNode source = layoutEdge.getSource();
-					KLayoutNode target = layoutEdge.getTarget();
+			for (KPort port : parentNode.getPorts()) {
+				for (KEdge layoutEdge : port.getEdges()) {
+					KNode source = layoutEdge.getSource();
+					KNode target = layoutEdge.getTarget();
 					if (layoutEdge.getSourcePort() == port
-							&& target != null
-							&& target.getParentNode() == parentNode) {
-						KSlimEdge newEdge = new KSlimEdge(kGraph, nodeMap.get(port),
+							&& target.getParent() == parentNode) {
+						KSlimEdge newEdge = new KSlimEdge(slimGraph, nodeMap.get(port),
 								nodeMap.get(target), layoutEdge);
 						newEdge.connectNodes();
 					}
 					else if (layoutEdge.getTargetPort() == port
-							&& source != null
-							&& source.getParentNode() == parentNode) {
-						KSlimEdge newEdge = new KSlimEdge(kGraph, nodeMap.get(source),
+							&& source.getParent() == parentNode) {
+						KSlimEdge newEdge = new KSlimEdge(slimGraph, nodeMap.get(source),
 								nodeMap.get(port), layoutEdge);
 						newEdge.connectNodes();
 					}
@@ -104,7 +102,7 @@ public class GraphConverter extends AbstractAlgorithm {
 		}
 		
 		getMonitor().done();
-		return kGraph;
+		return slimGraph;
 	}
 	
 }

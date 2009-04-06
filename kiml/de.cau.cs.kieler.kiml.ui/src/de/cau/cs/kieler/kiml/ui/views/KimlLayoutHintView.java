@@ -214,7 +214,7 @@ public class KimlLayoutHintView extends ViewPart implements ISelectionListener,
 						: "";
 
 			case 2: // returns the layout type for this object
-				return KimlGMFLayoutHintHelper.getLayoutType(snep).getLiteral();
+				return KimlGMFLayoutHintHelper.getLayoutType(snep).toString();
 
 			case 3: // returns the layouter name for this object
 				return KimlGMFLayoutHintHelper.getLayouterName(snep);
