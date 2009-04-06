@@ -479,14 +479,14 @@ point="org.eclipse.ui.menus">
  <extension
        point="de.cau.cs.kieler.kiml.ui.kimlLayoutGraphApplier">
     <kimlLayoutGraphApplier
-          class="de.cau.cs.kieler.kiml.ui.diagramlayouter.KimlGenericLayoutGraphApplier"
+          class="de.cau.cs.kieler.kiml.ui.layout.GenericLayoutGraphApplier"
           editor_id="*">
     </kimlLayoutGraphApplier>
  </extension>
  <extension
        point="de.cau.cs.kieler.kiml.ui.kimlLayoutGraphBuilder">
     <kimlLayoutGraphBuilder
-          class="de.cau.cs.kieler.kiml.ui.diagramlayouter.KimlGenericLayoutGraphBuilder"
+          class="de.cau.cs.kieler.kiml.ui.layout.GenericLayoutGraphBuilder"
           editor_id="*">
     </kimlLayoutGraphBuilder>
  </extension>

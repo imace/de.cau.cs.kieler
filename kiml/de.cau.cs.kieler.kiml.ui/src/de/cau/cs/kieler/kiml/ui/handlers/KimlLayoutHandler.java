@@ -23,7 +23,7 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.handlers.HandlerUtil;
 
 import de.cau.cs.kieler.kiml.ui.ContributionItemLayoutAs;
-import de.cau.cs.kieler.kiml.ui.diagramlayouter.KimlDiagramLayouter;
+import de.cau.cs.kieler.kiml.ui.layout.DiagramLayouter;
 
 /**
  * The handler which is responsible to lay out the diagram or parts thereof.
@@ -71,10 +71,10 @@ public class KimlLayoutHandler extends AbstractHandler implements IHandler {
 						.size() == 0)
 				|| commandId.equals(COMMAND_ID_LAYOUT_ALL)) {
 			// start layout process with editor part
-			KimlDiagramLayouter.layout(editorPart, true, true);
+			DiagramLayouter.layout(editorPart, true, true);
 		} else {
 			// start layout process with selection
-			KimlDiagramLayouter.layout(selection, true, true);
+			DiagramLayouter.layout(selection, true, true);
 		}
 
 		return null;

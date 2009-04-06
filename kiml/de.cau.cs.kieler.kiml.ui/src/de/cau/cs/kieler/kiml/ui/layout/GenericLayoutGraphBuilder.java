@@ -11,7 +11,7 @@
  * This code is provided under the terms of the Eclipse Public License (EPL).
  * See the file epl-v10.html for the license text.
  */
-package de.cau.cs.kieler.kiml.ui.diagramlayouter;
+package de.cau.cs.kieler.kiml.ui.layout;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -46,13 +46,13 @@ import de.cau.cs.kieler.kiml.ui.helpers.KimlGMFLayoutHintHelper;
 import de.cau.cs.kieler.kiml.ui.preferences.PreferenceConstants;
 
 /**
- * A generic implementation of the {@link KimlGenericLayoutGraphBuilder}.
+ * A generic implementation of the {@link GenericLayoutGraphBuilder}.
  * 
  * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
  * 
  */
-public class KimlGenericLayoutGraphBuilder extends
-		KimlAbstractLayoutGraphBuilder {
+public class GenericLayoutGraphBuilder extends
+		AbstractLayoutGraphBuilder {
 
 	/* preference setting */
 	private int prefInsetsTop = 0;
@@ -66,7 +66,7 @@ public class KimlGenericLayoutGraphBuilder extends
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * de.cau.cs.kieler.kiml.ui.diagramlayouter.KimlAbstractLayoutGraphBuilder
+	 * de.cau.cs.kieler.kiml.ui.layout.AbstractLayoutGraphBuilder
 	 * #doBuildLayoutGraph()
 	 */
 	@Override
@@ -367,7 +367,7 @@ public class KimlGenericLayoutGraphBuilder extends
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * de.cau.cs.kieler.kiml.ui.diagramlayouter.KimlAbstractLayoutGraphBuilder
+	 * de.cau.cs.kieler.kiml.ui.layout.AbstractLayoutGraphBuilder
 	 * #resetCustomMaps()
 	 */
 	@Override
@@ -379,7 +379,7 @@ public class KimlGenericLayoutGraphBuilder extends
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * de.cau.cs.kieler.kiml.ui.diagramlayouter.KimlAbstractLayoutGraphBuilder
+	 * de.cau.cs.kieler.kiml.ui.layout.AbstractLayoutGraphBuilder
 	 * #updatePreferences()
 	 */
 	@Override

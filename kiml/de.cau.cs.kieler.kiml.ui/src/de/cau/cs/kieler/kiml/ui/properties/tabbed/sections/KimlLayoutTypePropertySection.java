@@ -34,8 +34,8 @@ import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 import de.cau.cs.kieler.kiml.layout.options.LayoutType;
 import de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider;
 import de.cau.cs.kieler.kiml.layout.services.KimlLayoutServices;
-import de.cau.cs.kieler.kiml.ui.diagramlayouter.KimlDiagramLayouter;
 import de.cau.cs.kieler.kiml.ui.helpers.KimlGMFLayoutHintHelper;
+import de.cau.cs.kieler.kiml.ui.layout.DiagramLayouter;
 
 /**
  * The section displaying the Kiml Layout Hints in a tab in the properties view.
@@ -200,7 +200,7 @@ public class KimlLayoutTypePropertySection extends
 	 * Is called when the layout hint was changed and performs a new layout.
 	 */
 	private void performLayout() {
-		KimlDiagramLayouter.layout(getSemanticEditPart().getRoot().getViewer()
+		DiagramLayouter.layout(getSemanticEditPart().getRoot().getViewer()
 				.getContents(), true, true);
 	}
 

@@ -39,10 +39,10 @@ import de.cau.cs.kieler.kiml.layout.options.LayoutOptions;
 import de.cau.cs.kieler.kiml.layout.options.PortConstraints;
 import de.cau.cs.kieler.kiml.layout.options.PortSide;
 import de.cau.cs.kieler.kiml.layout.util.KimlLayoutUtil;
-import de.cau.cs.kieler.kiml.ui.diagramlayouter.KimlAbstractLayoutGraphBuilder;
 import de.cau.cs.kieler.kiml.ui.helpers.KimlGMFLayoutHintHelper;
+import de.cau.cs.kieler.kiml.ui.layout.AbstractLayoutGraphBuilder;
 
-public class DataFlowLayoutGraphBuilder extends KimlAbstractLayoutGraphBuilder {
+public class DataFlowLayoutGraphBuilder extends AbstractLayoutGraphBuilder {
 
 	/** inset value to be used for the top side of each node */
 	private static final float INSET_TOP = 5.0f;
@@ -78,7 +78,7 @@ public class DataFlowLayoutGraphBuilder extends KimlAbstractLayoutGraphBuilder {
 
 	/*
 	 * (non-Javadoc)
-	 * @see de.cau.cs.kieler.kiml.ui.diagramlayouter.KimlAbstractLayoutGraphBuilder#doBuildLayoutGraph()
+	 * @see de.cau.cs.kieler.kiml.ui.layout.AbstractLayoutGraphBuilder#doBuildLayoutGraph()
 	 */
 	@Override
 	protected void doBuildLayoutGraph() {
@@ -561,7 +561,7 @@ public class DataFlowLayoutGraphBuilder extends KimlAbstractLayoutGraphBuilder {
 
 
 	/* (non-Javadoc)
-	 * @see de.cau.cs.kieler.kiml.ui.diagramlayouter.KimlAbstractLayoutGraphBuilder#updatePreferences()
+	 * @see de.cau.cs.kieler.kiml.ui.layout.AbstractLayoutGraphBuilder#updatePreferences()
 	 */
 	@Override
 	protected void updatePreferences() {
@@ -584,7 +584,7 @@ public class DataFlowLayoutGraphBuilder extends KimlAbstractLayoutGraphBuilder {
 	}
 
 	/* (non-Javadoc)
-	 * @see de.cau.cs.kieler.kiml.ui.diagramlayouter.KimlAbstractLayoutGraphBuilder#resetCustomMaps()
+	 * @see de.cau.cs.kieler.kiml.ui.layout.AbstractLayoutGraphBuilder#resetCustomMaps()
 	 */
 	@Override
 	protected void resetCustomMaps() {

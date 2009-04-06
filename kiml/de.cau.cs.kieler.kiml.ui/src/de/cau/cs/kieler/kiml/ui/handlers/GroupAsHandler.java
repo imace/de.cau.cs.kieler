@@ -31,8 +31,8 @@ import org.eclipse.ui.handlers.HandlerUtil;
 import de.cau.cs.kieler.kiml.layout.options.LayoutType;
 import de.cau.cs.kieler.kiml.layout.services.KimlLayoutServices;
 import de.cau.cs.kieler.kiml.ui.ContributionItemLayoutAs;
-import de.cau.cs.kieler.kiml.ui.diagramlayouter.KimlDiagramLayouter;
 import de.cau.cs.kieler.kiml.ui.helpers.KimlGMFLayoutHintHelper;
+import de.cau.cs.kieler.kiml.ui.layout.DiagramLayouter;
 
 /**
  * The handler which is responsible for the functions that concern grouping of
@@ -134,7 +134,7 @@ public class GroupAsHandler extends AbstractHandler implements IHandler {
 			 * now use the new grouping/layout information and re-layout the
 			 * whole diagram
 			 */
-			KimlDiagramLayouter.layout(editorPart, true, true);
+			DiagramLayouter.layout(editorPart, true, true);
 		}
 		return null;
 	}

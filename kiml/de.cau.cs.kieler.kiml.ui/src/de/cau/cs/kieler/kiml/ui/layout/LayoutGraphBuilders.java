@@ -11,7 +11,7 @@
  * This code is provided under the terms of the Eclipse Public License (EPL).
  * See the file epl-v10.html for the license text.
  */
-package de.cau.cs.kieler.kiml.ui.diagramlayouter;
+package de.cau.cs.kieler.kiml.ui.layout;
 
 import java.util.HashMap;
 
@@ -28,7 +28,7 @@ import de.cau.cs.kieler.kiml.ui.KimlUiPlugin;
  * as a singleton to allow easy access from anywhere and a fast processing.
  * <p/>
  * Collects the KLayoutGraph builders that extend
- * {@link KimlAbstractLayoutGraphBuilder} and register themselves at the
+ * {@link AbstractLayoutGraphBuilder} and register themselves at the
  * <code>kimlLayoutGraphBuilder</code> extension point.
  * <p/>
  * Provides a function to get a concrete KLayoutGraph builder for a given
@@ -36,8 +36,8 @@ import de.cau.cs.kieler.kiml.ui.KimlUiPlugin;
  * 
  * @author <a href="mailto:msp@informatik.uni-kiel.de">Miro Spönemann</a>
  * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
- * @see KimlAbstractLayoutGraphBuilder
- * @see KimlDiagramLayouter
+ * @see AbstractLayoutGraphBuilder
+ * @see DiagramLayouter
  */
 public final class LayoutGraphBuilders {
 
@@ -48,7 +48,7 @@ public final class LayoutGraphBuilders {
 	 * maps the name of a KLayoutGraph builder to the instantiated KLayoutGraph
 	 * builder object
 	 */
-	private HashMap<String, KimlAbstractLayoutGraphBuilder> layoutGraphBuildersMap = new HashMap<String, KimlAbstractLayoutGraphBuilder>();
+	private HashMap<String, AbstractLayoutGraphBuilder> layoutGraphBuildersMap = new HashMap<String, AbstractLayoutGraphBuilder>();
 
 	/**
 	 * @return the singleton instance of the LayoutGraphBuilders class
@@ -71,14 +71,14 @@ public final class LayoutGraphBuilders {
 	private void loadAvailableLayoutGraphBuilders() {
 		IExtensionRegistry reg = Platform.getExtensionRegistry();
 		IConfigurationElement[] extensions = reg
-				.getConfigurationElementsFor(KimlAbstractLayoutGraphBuilder.EXTENSION_POINT_ID);
+				.getConfigurationElementsFor(AbstractLayoutGraphBuilder.EXTENSION_POINT_ID);
 
 		for (IConfigurationElement element : extensions) {
 			try {
-				KimlAbstractLayoutGraphBuilder layoutGraphBuilder = (KimlAbstractLayoutGraphBuilder) element
-						.createExecutableExtension(KimlAbstractLayoutGraphBuilder.ATTRIBUTE_CLASS);
+				AbstractLayoutGraphBuilder layoutGraphBuilder = (AbstractLayoutGraphBuilder) element
+						.createExecutableExtension(AbstractLayoutGraphBuilder.ATTRIBUTE_CLASS);
 				String editorId = element
-						.getAttribute(KimlAbstractLayoutGraphBuilder.ATTRIBUTE_EDITOR_ID);
+						.getAttribute(AbstractLayoutGraphBuilder.ATTRIBUTE_EDITOR_ID);
 				if (layoutGraphBuilder != null && editorId != null) {
 					layoutGraphBuildersMap.put(editorId, layoutGraphBuilder);
 				}
@@ -97,8 +97,8 @@ public final class LayoutGraphBuilders {
 	 * @return an instance of the KLayoutGraph builder, or the Generic
 	 *         KLayoutGraph builder in the ui.package
 	 */
-	public KimlAbstractLayoutGraphBuilder getLayoutGraphBuilder(String editorId) {
-		KimlAbstractLayoutGraphBuilder layoutGraphBuilder = layoutGraphBuildersMap
+	public AbstractLayoutGraphBuilder getLayoutGraphBuilder(String editorId) {
+		AbstractLayoutGraphBuilder layoutGraphBuilder = layoutGraphBuildersMap
 				.get(editorId);
 		if (layoutGraphBuilder != null)
 			return layoutGraphBuilder;

@@ -7,8 +7,8 @@ Bundle-Activator: de.cau.cs.kieler.kiml.ui.KimlUiPlugin
 Bundle-Vendor: %Bundle-Vendor.1
 Bundle-Localization: plugin
 Export-Package: de.cau.cs.kieler.kiml.ui,
- de.cau.cs.kieler.kiml.ui.diagramlayouter,
  de.cau.cs.kieler.kiml.ui.helpers,
+ de.cau.cs.kieler.kiml.ui.layout,
  de.cau.cs.kieler.kiml.ui.policies,
  de.cau.cs.kieler.kiml.ui.properties.tabbed.sections,
  de.cau.cs.kieler.kiml.ui.provider

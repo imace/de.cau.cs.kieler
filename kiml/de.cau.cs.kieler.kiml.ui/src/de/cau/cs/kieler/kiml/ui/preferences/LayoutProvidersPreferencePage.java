@@ -36,7 +36,7 @@ import de.cau.cs.kieler.kiml.ui.KimlUiPlugin;
  * be made in the respective plugin.xml file.
  * 
  * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
- * @see de.cau.cs.kieler.kiml.ui.diagramlayouter.LayoutProviders
+ * @see de.cau.cs.kieler.kiml.ui.layout.LayoutProviders
  *      LayoutProviders
  * @see de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider
  *      AbstractLayoutProvider

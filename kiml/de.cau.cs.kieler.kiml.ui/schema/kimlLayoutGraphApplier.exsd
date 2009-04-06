@@ -55,7 +55,7 @@
                   Implementing class of the layout graph applier, must extend &lt;samp&gt;de.cau.cs.kieler.kiml.ui.diagramtransformer.KimlAbstractLayoutGraphApplier&lt;/samp&gt;.
                </documentation>
                <appinfo>
-                  <meta.attribute kind="java" basedOn="de.cau.cs.kieler.kiml.ui.diagramlayouter.KimlAbstractLayoutGraphApplier:"/>
+                  <meta.attribute kind="java" basedOn="de.cau.cs.kieler.kiml.ui.layout.AbstractLayoutGraphApplier:"/>
                </appinfo>
             </annotation>
          </attribute>

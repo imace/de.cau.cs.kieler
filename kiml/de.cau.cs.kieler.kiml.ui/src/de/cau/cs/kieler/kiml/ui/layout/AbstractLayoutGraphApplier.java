@@ -11,7 +11,7 @@
  * This code is provided under the terms of the Eclipse Public License (EPL).
  * See the file epl-v10.html for the license text.
  */
-package de.cau.cs.kieler.kiml.ui.diagramlayouter;
+package de.cau.cs.kieler.kiml.ui.layout;
 
 import java.util.Map;
 
@@ -42,7 +42,7 @@ import de.cau.cs.kieler.core.kgraph.KPort;
  * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
  * 
  */
-public abstract class KimlAbstractLayoutGraphApplier {
+public abstract class AbstractLayoutGraphApplier {
 
 	/*
 	 * some strings used when creating the concrete LayoutGraphAppliers via the

@@ -75,7 +75,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IEditorRegistry;
 import org.eclipse.ui.PlatformUI;
 
-import de.cau.cs.kieler.kiml.ui.diagramlayouter.KimlDiagramLayouter;
+import de.cau.cs.kieler.kiml.ui.layout.DiagramLayouter;
 import de.cau.cs.kieler.kivik.Constants;
 import de.cau.cs.kieler.kivik.KivikPlugin;
 import de.cau.cs.kieler.kivik.preferences.PreferenceConstants;
@@ -263,7 +263,7 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 			 * otherwise the connections and labels are not drawn properly.
 			 * Normally, 3 should be enough, don't know why we need 4.
 			 */
-			KimlDiagramLayouter.layout(getEditPartRegistry().get(diagram),
+			DiagramLayouter.layout(getEditPartRegistry().get(diagram),
 					editorID, false, false, 4);
 		}
 

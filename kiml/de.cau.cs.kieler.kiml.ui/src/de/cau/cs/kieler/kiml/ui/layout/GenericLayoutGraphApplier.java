@@ -11,7 +11,7 @@
  * This code is provided under the terms of the Eclipse Public License (EPL).
  * See the file epl-v10.html for the license text.
  */
-package de.cau.cs.kieler.kiml.ui.diagramlayouter;
+package de.cau.cs.kieler.kiml.ui.layout;
 
 import java.util.Iterator;
 
@@ -70,13 +70,13 @@ import de.cau.cs.kieler.kiml.ui.helpers.KimlMetricsHelper;
 import de.cau.cs.kieler.kiml.ui.policies.LayoutEditPolicy;
 
 /**
- * A generic implementation of the {@link KimlAbstractLayoutGraphApplier}.
+ * A generic implementation of the {@link AbstractLayoutGraphApplier}.
  * 
  * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
  * @author <a href="mailto:msp@informatik.uni-kiel.de">Miro Spönemann</a>
  */
-public class KimlGenericLayoutGraphApplier extends
-        KimlAbstractLayoutGraphApplier {
+public class GenericLayoutGraphApplier extends
+        AbstractLayoutGraphApplier {
 
     /* preference settings */
     private boolean prefUseGMFLabelLocation = false;
@@ -90,7 +90,7 @@ public class KimlGenericLayoutGraphApplier extends
      * (non-Javadoc)
      * 
      * @see
-     * de.cau.cs.kieler.kiml.ui.diagramlayouter.KimlAbstractLayoutGraphApplier
+     * de.cau.cs.kieler.kiml.ui.layout.AbstractLayoutGraphApplier
      * #doApplyLayoutGraph()
      */
     @Override
@@ -505,7 +505,7 @@ public class KimlGenericLayoutGraphApplier extends
 
     /*
      * (non-Javadoc)
-     * @see de.cau.cs.kieler.kiml.ui.diagramlayouter.KimlAbstractLayoutGraphApplier#updatePreferences()
+     * @see de.cau.cs.kieler.kiml.ui.layout.AbstractLayoutGraphApplier#updatePreferences()
      */
     protected void updatePreferences() {
 
