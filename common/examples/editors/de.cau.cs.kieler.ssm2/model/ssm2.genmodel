@@ -12,6 +12,7 @@
       <genEnumLiterals ecoreEnumLiteral="ssm2.ecore#//StateKind/PSEUDO"/>
       <genEnumLiterals ecoreEnumLiteral="ssm2.ecore#//StateKind/REFERENCE"/>
       <genEnumLiterals ecoreEnumLiteral="ssm2.ecore#//StateKind/TEXTUAL"/>
+      <genEnumLiterals ecoreEnumLiteral="ssm2.ecore#//StateKind/@eLiterals.4"/>
     </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="ssm2.ecore#//StateFlag">
       <genEnumLiterals ecoreEnumLiteral="ssm2.ecore#//StateFlag/NORMAL"/>
@@ -35,6 +36,7 @@
       <genEnumLiterals ecoreEnumLiteral="ssm2.ecore#//OperatorKind/MULT"/>
       <genEnumLiterals ecoreEnumLiteral="ssm2.ecore#//OperatorKind/DIV"/>
       <genEnumLiterals ecoreEnumLiteral="ssm2.ecore#//OperatorKind/VAL"/>
+      <genEnumLiterals ecoreEnumLiteral="ssm2.ecore#//OperatorKind/@eLiterals.11"/>
     </genEnums>
     <genClasses ecoreClass="ssm2.ecore#//State">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ssm2.ecore#//State/stateKind"/>
