@@ -24,25 +24,21 @@ import dataflow.diagram.edit.parts.DataflowModelEditPart;
 import dataflow.diagram.edit.parts.InputPortEditPart;
 import dataflow.diagram.layout.DataflowDiagramLayoutPlugin;
 import dataflow.diagram.layout.preferences.DiagramLayoutPreferencePage;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KDimension;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLayout;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KInsets;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutGraph;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutOption;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeLabel;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeLabelLayout;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeLayout;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPoint;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPortLabel;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPortLabelLayout;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPortLayout;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPortPlacement;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPortType;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KShapeLayout;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphFactory;
+import de.cau.cs.kieler.core.kgraph.KEdge;
+import de.cau.cs.kieler.core.kgraph.KLabel;
+import de.cau.cs.kieler.core.kgraph.KNode;
+import de.cau.cs.kieler.core.kgraph.KPort;
+import de.cau.cs.kieler.core.kgraph.KPortType;
+import de.cau.cs.kieler.kiml.layout.klayoutdata.KEdgeLayout;
+import de.cau.cs.kieler.kiml.layout.klayoutdata.KInsets;
+import de.cau.cs.kieler.kiml.layout.klayoutdata.KLayoutDataFactory;
+import de.cau.cs.kieler.kiml.layout.klayoutdata.KPoint;
+import de.cau.cs.kieler.kiml.layout.klayoutdata.KShapeLayout;
+import de.cau.cs.kieler.kiml.layout.options.LayoutDirection;
+import de.cau.cs.kieler.kiml.layout.options.LayoutOptions;
+import de.cau.cs.kieler.kiml.layout.options.PortConstraints;
+import de.cau.cs.kieler.kiml.layout.options.PortSide;
+import de.cau.cs.kieler.kiml.layout.util.KimlLayoutUtil;
 import de.cau.cs.kieler.kiml.ui.diagramlayouter.KimlAbstractLayoutGraphBuilder;
 import de.cau.cs.kieler.kiml.ui.helpers.KimlGMFLayoutHintHelper;
 
@@ -78,49 +74,44 @@ public class DataFlowLayoutGraphBuilder extends KimlAbstractLayoutGraphBuilder {
 	/** preference: alternating layout direction */
 	private boolean alternateHVPref;
 
-	private Map<BorderedBorderItemEditPart, KLayoutPort> borderItem2PortMapping = new HashMap<BorderedBorderItemEditPart, KLayoutPort>();
+	private Map<BorderedBorderItemEditPart, KPort> borderItem2PortMapping = new HashMap<BorderedBorderItemEditPart, KPort>();
 
-	
+	/*
+	 * (non-Javadoc)
+	 * @see de.cau.cs.kieler.kiml.ui.diagramlayouter.KimlAbstractLayoutGraphBuilder#doBuildLayoutGraph()
+	 */
 	@Override
 	protected void doBuildLayoutGraph() {
 			
 		IPreferenceStore preferenceStore = DataflowDiagramLayoutPlugin
 				.getDefault().getPreferenceStore();
-		KLayoutOption layoutDirection = preferenceStore.getString(
+		LayoutDirection layoutDirection = preferenceStore.getString(
 				DiagramLayoutPreferencePage.LAYOUT_DIRECTION)
 				.equals("vertical") //$NON-NLS-1$
-		? KLayoutOption.VERTICAL
-				: KLayoutOption.HORIZONTAL;
+				? LayoutDirection.VERTICAL
+				: LayoutDirection.HORIZONTAL;
 		if (layoutRootPart instanceof DataflowModelEditPart) {
-			layoutGraph = KimlLayoutGraphFactory.eINSTANCE.createKLayoutGraph();
+			layoutGraph = KimlLayoutUtil.createInitializedNode();
 			DataflowModelEditPart modelPart = (DataflowModelEditPart)layoutRootPart;
-			layoutGraph.setIdString(Integer.toString((modelPart.hashCode())));
 			// set the top node's layout
-			KNodeLayout topGroupLayout = KimlLayoutGraphFactory.eINSTANCE
-					.createKNodeLayout();
+			KShapeLayout topGroupLayout = KimlLayoutUtil.getShapeLayout(layoutGraph);
 			createLayout(topGroupLayout, modelPart.getFigure());
-			KInsets insets = KimlLayoutGraphFactory.eINSTANCE.createKInsets();
-			topGroupLayout.setInsets(insets);
-			topGroupLayout.setLayouterName(KimlGMFLayoutHintHelper
+			LayoutOptions.setLayouterName(topGroupLayout, KimlGMFLayoutHintHelper
 					.getContainedElementsLayouterName(modelPart));
-			topGroupLayout.setLayoutType(KimlGMFLayoutHintHelper
+			LayoutOptions.setLayoutType(topGroupLayout, KimlGMFLayoutHintHelper
 					.getContainedElementsLayoutType(modelPart));
-			topGroupLayout.getLayoutOptions().add(layoutDirection);
-			layoutGraph.setLayout(topGroupLayout);
-			KNodeLabel topGroupLabel = KimlLayoutGraphFactory.eINSTANCE
-					.createKNodeLabel();
-			topGroupLabel.setText(modelPart.getDiagramView().getName());
-			layoutGraph.setLabel(topGroupLabel);
+			LayoutOptions.setLayoutDirection(topGroupLayout, layoutDirection);
+			layoutGraph.getLabel().setText(modelPart
+			        .getDiagramView().getName());
 			// build the whole graph structure
 			if (alternateHVPref)
-				layoutDirection = KLayoutOption.VERTICAL;
+				layoutDirection = LayoutDirection.VERTICAL;
 			buildLayoutGraphRecursively(modelPart.getChildren(), layoutGraph,
 					layoutDirection);
 		} else if (layoutRootPart instanceof AbstractBorderedShapeEditPart) {
 			AbstractBorderedShapeEditPart boxEditPart = (AbstractBorderedShapeEditPart) layoutRootPart;
 			// build just the selected node
-			layoutGraph = (KLayoutGraph) buildNode(boxEditPart,
-					layoutDirection, true);
+			layoutGraph = buildNode(boxEditPart, layoutDirection);
 			buildNodeEdges(boxEditPart, false);
 		}
 
@@ -137,15 +128,10 @@ public class DataFlowLayoutGraphBuilder extends KimlAbstractLayoutGraphBuilder {
 	 *            source object with layout information
 	 */
 	private static void createLayout(KShapeLayout shapeLayout, IFigure figure) {
-		KPoint kPoint = KimlLayoutGraphFactory.eINSTANCE.createKPoint();
-		kPoint.setX(figure.getBounds().x);
-		kPoint.setY(figure.getBounds().y);
-		shapeLayout.setLocation(kPoint);
-		KDimension kDimension = KimlLayoutGraphFactory.eINSTANCE
-				.createKDimension();
-		kDimension.setHeight(figure.getBounds().height);
-		kDimension.setWidth(figure.getBounds().width);
-		shapeLayout.setSize(kDimension);
+	    shapeLayout.setXpos(figure.getBounds().x);
+	    shapeLayout.setYpos(figure.getBounds().y);
+	    shapeLayout.setHeight(figure.getBounds().height);
+	    shapeLayout.setWidth(figure.getBounds().width);
 	}
 
 	/**
@@ -156,20 +142,17 @@ public class DataFlowLayoutGraphBuilder extends KimlAbstractLayoutGraphBuilder {
 	 *            layout object to be changed
 	 * @param figure
 	 *            source object with layout information
-	 * @param offset
-	 *            by which the given figure is translated
+	 * @param xoffset
+	 *            x offset by which the given figure is translated
+	 * @param yoffset
+     *            y offset by which the given figure is translated
 	 */
 	private static void createRelativeLayout(KShapeLayout shapeLayout,
-			IFigure figure, KPoint offset) {
-		KPoint kPoint = KimlLayoutGraphFactory.eINSTANCE.createKPoint();
-		kPoint.setX(figure.getBounds().x - offset.getX());
-		kPoint.setY(figure.getBounds().y - offset.getY());
-		shapeLayout.setLocation(kPoint);
-		KDimension kDimension = KimlLayoutGraphFactory.eINSTANCE
-				.createKDimension();
-		kDimension.setHeight(figure.getBounds().height);
-		kDimension.setWidth(figure.getBounds().width);
-		shapeLayout.setSize(kDimension);
+			IFigure figure, float xoffset, float yoffset) {
+	    shapeLayout.setXpos(figure.getBounds().x - xoffset);
+	    shapeLayout.setYpos(figure.getBounds().y - yoffset);
+	    shapeLayout.setHeight(figure.getBounds().height);
+	    shapeLayout.setWidth(figure.getBounds().width);
 	}
 
 	/**
@@ -182,19 +165,18 @@ public class DataFlowLayoutGraphBuilder extends KimlAbstractLayoutGraphBuilder {
 	 * @param layoutDirection
 	 *            layout direction
 	 */
-	@SuppressWarnings("unchecked")
-	private void buildLayoutGraphRecursively(List children,
-			KLayoutNode parentNode, KLayoutOption layoutDirection) {
+	private void buildLayoutGraphRecursively(List<?> children,
+			KNode parentNode, LayoutDirection layoutDirection) {
 		if (children != null) {
 			// build layout nodes
 			for (Object child : children) {
 				if (child instanceof AbstractBorderedShapeEditPart) {
 					AbstractBorderedShapeEditPart boxEditPart = (AbstractBorderedShapeEditPart) child;
-					KLayoutNode childNode = buildNode(boxEditPart,
-							layoutDirection, false);
+					KNode childNode = buildNode(boxEditPart,
+							layoutDirection);
 					// set the parent group; this automatically adds the node
 					// to the parent's list of children
-					childNode.setParentNode(parentNode);
+					childNode.setParent(parentNode);
 				}
 			}
 
@@ -215,46 +197,35 @@ public class DataFlowLayoutGraphBuilder extends KimlAbstractLayoutGraphBuilder {
 	 *            edit part for which the layout graph shall be built
 	 * @param layoutDirection
 	 *            layout direction
-	 * @param topNode
-	 *            if true, a KLayoutGraph will be created, else a KLayoutNode
 	 * @return the created layout node
 	 */
-	@SuppressWarnings("unchecked")
-	private KLayoutNode buildNode(AbstractBorderedShapeEditPart boxEditPart,
-			KLayoutOption layoutDirection, boolean topNode) {
+	private KNode buildNode(AbstractBorderedShapeEditPart boxEditPart,
+			LayoutDirection layoutDirection) {
 		// add the new child node
-		KLayoutNode childNode;
-		if (topNode)
-			childNode = KimlLayoutGraphFactory.eINSTANCE.createKLayoutGraph();
-		else
-			childNode = KimlLayoutGraphFactory.eINSTANCE.createKLayoutNode();
+		KNode childNode = KimlLayoutUtil.createInitializedNode();
 		layoutNode2EditPart.put(childNode, boxEditPart);
-		childNode.setIdString(Integer.toString((boxEditPart.hashCode())));
 		// set the child node's layout
-		KNodeLayout nodeLayout = KimlLayoutGraphFactory.eINSTANCE
-				.createKNodeLayout();
+		KShapeLayout nodeLayout = KimlLayoutUtil.getShapeLayout(childNode);
 		createLayout(nodeLayout, boxEditPart.getFigure());
-		KInsets insets = KimlLayoutGraphFactory.eINSTANCE.createKInsets();
+		KInsets insets = LayoutOptions.getInsets(nodeLayout);
 		insets.setLeft(INSET_LEFT);
 		insets.setRight(INSET_RIGHT);
 		insets.setTop(INSET_TOP + DEFAULT_LABEL_HEIGHT);
 		insets.setBottom(INSET_BOTTOM);
-		nodeLayout.setInsets(insets);
-		nodeLayout.setLayouterName(KimlGMFLayoutHintHelper
+		LayoutOptions.setLayouterName(nodeLayout, KimlGMFLayoutHintHelper
 				.getContainedElementsLayouterName(boxEditPart));
-		nodeLayout.setLayoutType(KimlGMFLayoutHintHelper
+		LayoutOptions.setLayoutType(nodeLayout, KimlGMFLayoutHintHelper
 				.getContainedElementsLayoutType(boxEditPart));
-		nodeLayout.getLayoutOptions().add(layoutDirection);
-		childNode.setLayout(nodeLayout);
+		LayoutOptions.setLayoutDirection(nodeLayout, layoutDirection);
 		// switch layout direction if needed
 		if (alternateHVPref) {
-			if (layoutDirection == KLayoutOption.VERTICAL)
-				layoutDirection = KLayoutOption.HORIZONTAL;
+			if (layoutDirection == LayoutDirection.VERTICAL)
+				layoutDirection = LayoutDirection.HORIZONTAL;
 			else
-				layoutDirection = KLayoutOption.VERTICAL;
+				layoutDirection = LayoutDirection.VERTICAL;
 		}
 		// set the input and output ports and node label
-		List subChildren = null;
+		List<?> subChildren = null;
 		for (Object nodeElement : boxEditPart.getChildren()) {
 			if (nodeElement instanceof ShapeCompartmentEditPart) {
 				subChildren = ((ShapeCompartmentEditPart) nodeElement)
@@ -262,74 +233,64 @@ public class DataFlowLayoutGraphBuilder extends KimlAbstractLayoutGraphBuilder {
 			} else if (nodeElement instanceof BorderedBorderItemEditPart) {
 				BorderedBorderItemEditPart borderItem = (BorderedBorderItemEditPart) nodeElement;
 				// add the new port
-				KLayoutPort port = KimlLayoutGraphFactory.eINSTANCE
-						.createKLayoutPort();
+				KPort port = KimlLayoutUtil.createInitializedPort();
 				layoutPort2EditPart.put(port, borderItem);
 				borderItem2PortMapping.put(borderItem, port);
-				port
-						.setType(borderItem instanceof InputPortEditPart ? KPortType.INPUT
-								: KPortType.OUTPUT);
+				port.setType(borderItem instanceof InputPortEditPart
+				        ? KPortType.INPUT : KPortType.OUTPUT);
 				port.setNode(childNode);
 				// set the port's layout
-				KPortLayout portLayout = KimlLayoutGraphFactory.eINSTANCE
-						.createKPortLayout();
+				KShapeLayout portLayout = KimlLayoutUtil.getShapeLayout(port);
 				createRelativeLayout(portLayout, borderItem.getFigure(),
-						nodeLayout.getLocation());
-				portLayout.setPlacement(getPortPlacement(nodeLayout,
-						portLayout, port.getType(), layoutDirection));
-				port.setLayout(portLayout);
+						nodeLayout.getXpos(), nodeLayout.getYpos());
+				LayoutOptions.setPortSide(portLayout, getPortSide(
+				        nodeLayout,	portLayout, port.getType(),
+				        layoutDirection));
 				// set the port label
 				for (Object portChild : borderItem.getChildren()) {
 					if (portChild instanceof ITextAwareEditPart) {
 						ITextAwareEditPart portNameEditPart = (ITextAwareEditPart) portChild;
-						KPortLabel portLabel = KimlLayoutGraphFactory.eINSTANCE
-								.createKPortLabel();
+						KLabel portLabel = port.getLabel();
 						portLabel.setText(portNameEditPart.getEditText());
-						port.setLabel(portLabel);
 						// set the port label's layout
-						KPortLabelLayout labelLayout = KimlLayoutGraphFactory.eINSTANCE
-								.createKPortLabelLayout();
-						KPoint offset = KimlLayoutGraphFactory.eINSTANCE
-								.createKPoint();
-						offset.setX(nodeLayout.getLocation().getX()
-								+ portLayout.getLocation().getX());
-						offset.setY(nodeLayout.getLocation().getY()
-								+ portLayout.getLocation().getY());
+						KShapeLayout labelLayout = KimlLayoutUtil.getShapeLayout(portLabel);
+						float xoffset = nodeLayout.getXpos()
+								+ portLayout.getXpos();
+						float yoffset = nodeLayout.getYpos()
+								+ portLayout.getYpos();
 						createRelativeLayout(labelLayout, portNameEditPart
-								.getFigure(), offset);
-						portLabel.setLabelLayout(labelLayout);
+								.getFigure(), xoffset, yoffset);
 					}
 				}
 			} else if (nodeElement instanceof ITextAwareEditPart) {
 				ITextAwareEditPart boxNameEditPart = (ITextAwareEditPart) nodeElement;
 				// add layout node label
-				KNodeLabel nodeLabel = KimlLayoutGraphFactory.eINSTANCE
-						.createKNodeLabel();
+				KLabel nodeLabel = childNode.getLabel();
 				nodeLabel.setText(boxNameEditPart.getEditText());
-				childNode.setLabel(nodeLabel);
-				// set the layout node label's layout
-				KNodeLabelLayout labelLayout = KimlLayoutGraphFactory.eINSTANCE
-						.createKNodeLabelLayout();
+				// set the node label's layout
+				KShapeLayout labelLayout = KimlLayoutUtil.getShapeLayout(nodeLabel);
 				createRelativeLayout(labelLayout,
 						((WrappingLabel) boxNameEditPart.getFigure())
-								.getTextFigure(), nodeLayout.getLocation());
-				nodeLabel.setLabelLayout(labelLayout);
-				insets.setTop(INSET_TOP + nodeLabel.getLabelLayout()
-						.getSize().getHeight());
+								.getTextFigure(), nodeLayout.getXpos(),
+								nodeLayout.getYpos());
+				insets.setTop(INSET_TOP + labelLayout.getHeight());
 			}
 		}
 
 		// set layout options
 		if (subChildren != null && !subChildren.isEmpty()) {
 			if (fixedOuterPortsPref)
-				nodeLayout.getLayoutOptions().add(KLayoutOption.FIXED_PORTS);
+				LayoutOptions.setPortConstraints(nodeLayout,
+				        PortConstraints.FIXED_POS);
 		} else {
 			if (fixedInnerPortsPref)
-				nodeLayout.getLayoutOptions().add(KLayoutOption.FIXED_PORTS);
+			    LayoutOptions.setPortConstraints(nodeLayout,
+                        PortConstraints.FIXED_POS);
 			else if (fixedPortSidesPref)
-				nodeLayout.getLayoutOptions().add(KLayoutOption.FIXED_PORT_SIDES);
+			    LayoutOptions.setPortConstraints(nodeLayout,
+                        PortConstraints.FIXED_SIDE);
 			if (fixedNodeSizePref)
-				nodeLayout.getLayoutOptions().add(KLayoutOption.FIXED_SIZE);
+				LayoutOptions.setFixedSize(nodeLayout);
 		}
 
 		// process next hierarchy level
@@ -352,33 +313,32 @@ public class DataFlowLayoutGraphBuilder extends KimlAbstractLayoutGraphBuilder {
 		for (Object nodeElement : boxEditPart.getChildren()) {
 			if (nodeElement instanceof BorderedBorderItemEditPart) {
 				BorderedBorderItemEditPart portEditPart = (BorderedBorderItemEditPart) nodeElement;
-				KLayoutPort port1 = borderItem2PortMapping.get(portEditPart);
+				KPort port1 = borderItem2PortMapping.get(portEditPart);
 				for (Object portElement : portEditPart.getSourceConnections()) {
 					if (portElement instanceof ConnectionEditPart) {
 						ConnectionEditPart connectionEditPart = (ConnectionEditPart) portElement;
-						KLayoutPort port2 = borderItem2PortMapping
+						KPort port2 = borderItem2PortMapping
 								.get(connectionEditPart.getTarget());
 						if (port2 != null) {
 							// add the new edge according to its type
 							if (port1.getType() == KPortType.OUTPUT
 									&& port2.getType() == KPortType.INPUT) {
 								if (processExternal
-										&& port1.getNode().getParentNode() == port2
-												.getNode().getParentNode()) {
+										&& port1.getNode().getParent() == port2
+												.getNode().getParent()) {
 									addEdge(port1, port2, connectionEditPart,
 											EdgeHierarchyType.OP_TO_OP);
 								}
 							} else if (port1.getType() == KPortType.INPUT
 									&& port2.getType() == KPortType.INPUT) {
-								if (port1.getNode() == port2.getNode()
-										.getParentNode()) {
+								if (port1.getNode() == port2.getNode().getParent()) {
 									addEdge(port1, port2, connectionEditPart,
 											EdgeHierarchyType.INPUT_TO_OP);
 								}
 							} else if (port1.getType() == KPortType.OUTPUT
 									&& port2.getType() == KPortType.OUTPUT) {
 								if (processExternal
-										&& port1.getNode().getParentNode() == port2
+										&& port1.getNode().getParent() == port2
 												.getNode()) {
 									addEdge(port1, port2, connectionEditPart,
 											EdgeHierarchyType.OP_TO_OUTPUT);
@@ -405,56 +365,50 @@ public class DataFlowLayoutGraphBuilder extends KimlAbstractLayoutGraphBuilder {
 	 * @param edgeType
 	 *            hierarchy type of the edge
 	 */
-	private void addEdge(KLayoutPort sourcePort, KLayoutPort targetPort,
+	private void addEdge(KPort sourcePort, KPort targetPort,
 			ConnectionEditPart connectionEditPart, EdgeHierarchyType edgeType) {
-		KLayoutEdge edge = KimlLayoutGraphFactory.eINSTANCE.createKLayoutEdge();
-		
-		/* haf: to set a real containment reference for all edges
-		   FIXME: can be removed after the KLayoutGraph structure has been overworked */
-		layoutGraph.getGraphEdges().add(edge);
+		KEdge edge = KimlLayoutUtil.createInitializedEdge();
 		
 		layoutEdge2EditPart.put(edge, connectionEditPart);
 		float sourceNodeX = 0.0f, sourceNodeY = 0.0f, targetNodeX = 0.0f, targetNodeY = 0.0f;
-		if (edgeType != EdgeHierarchyType.INPUT_TO_OP) {
+		//if (edgeType != EdgeHierarchyType.INPUT_TO_OP) {
 			// set the source node; this automatically adds the edge
 			// to the source's list of outgoing edges
-			edge.setSource(sourcePort.getNode());
-			sourceNodeX = sourcePort.getNode().getLayout().getLocation().getX();
-			sourceNodeY = sourcePort.getNode().getLayout().getLocation().getY();
-		}
+		KShapeLayout sourceLayout = KimlLayoutUtil.getShapeLayout(
+		        sourcePort.getNode());
+		edge.setSource(sourcePort.getNode());
+		sourceNodeX = sourceLayout.getXpos();
+		sourceNodeY = sourceLayout.getYpos();
+		//}
 		edge.setSourcePort(sourcePort);
-		if (edgeType != EdgeHierarchyType.OP_TO_OUTPUT) {
+		//if (edgeType != EdgeHierarchyType.OP_TO_OUTPUT) {
 			// set the target node; this automatically adds the edge to
 			// the target's list of incoming edges
-			edge.setTarget(targetPort.getNode());
-			targetNodeX = targetPort.getNode().getLayout().getLocation().getX();
-			targetNodeY = targetPort.getNode().getLayout().getLocation().getY();
-		}
+		KShapeLayout targetLayout = KimlLayoutUtil.getShapeLayout(
+		        targetPort.getNode());
+		edge.setTarget(targetPort.getNode());
+		targetNodeX = targetLayout.getXpos();
+		targetNodeY = targetLayout.getYpos();
+		//}
 		edge.setTargetPort(targetPort);
 		sourcePort.getEdges().add(edge);
 		targetPort.getEdges().add(edge);
 		// set the edge's layout
-		KEdgeLayout edgeLayout = KimlLayoutGraphFactory.eINSTANCE
-				.createKEdgeLayout();
-		KPoint sourcePoint = KimlLayoutGraphFactory.eINSTANCE.createKPoint();
-		sourcePoint
-				.setX(sourcePort.getLayout().getLocation().getX()
-						+ sourcePort.getLayout().getSize().getWidth() / 2
-						+ sourceNodeX);
-		sourcePoint.setY(sourcePort.getLayout().getLocation().getY()
-				+ sourcePort.getLayout().getSize().getHeight() / 2
-				+ sourceNodeY);
+		KEdgeLayout edgeLayout = KimlLayoutUtil.getEdgeLayout(edge);
+		KPoint sourcePoint = KLayoutDataFactory.eINSTANCE.createKPoint();
+		KShapeLayout sourcePortLayout = KimlLayoutUtil.getShapeLayout(sourcePort);
+		sourcePoint.setX(sourcePortLayout.getXpos()
+				+ sourcePortLayout.getWidth() / 2 + sourceNodeX);
+		sourcePoint.setY(sourcePortLayout.getYpos()
+				+ sourcePortLayout.getHeight() / 2 + sourceNodeY);
 		edgeLayout.setSourcePoint(sourcePoint);
-		KPoint targetPoint = KimlLayoutGraphFactory.eINSTANCE.createKPoint();
-		targetPoint
-				.setX(targetPort.getLayout().getLocation().getX()
-						+ targetPort.getLayout().getSize().getWidth() / 2
-						+ targetNodeX);
-		targetPoint.setY(targetPort.getLayout().getLocation().getY()
-				+ targetPort.getLayout().getSize().getHeight() / 2
-				+ targetNodeY);
+		KPoint targetPoint = KLayoutDataFactory.eINSTANCE.createKPoint();
+		KShapeLayout targetPortLayout = KimlLayoutUtil.getShapeLayout(targetPort);
+		targetPoint.setX(targetPortLayout.getXpos()
+				+ targetPortLayout.getWidth() / 2 + targetNodeX);
+		targetPoint.setY(targetPortLayout.getYpos()
+				+ targetPortLayout.getHeight() / 2 + targetNodeY);
 		edgeLayout.setTargetPoint(targetPoint);
-		edge.setLayout(edgeLayout);
 	}
 
 	/**
@@ -470,43 +424,41 @@ public class DataFlowLayoutGraphBuilder extends KimlAbstractLayoutGraphBuilder {
 	 *            layout direction
 	 * @return port placement
 	 */
-	private KPortPlacement getPortPlacement(KNodeLayout nodeLayout,
-			KPortLayout portLayout, KPortType portType,
-			KLayoutOption layoutDirection) {
+	private PortSide getPortSide(KShapeLayout nodeLayout,
+			KShapeLayout portLayout, KPortType portType,
+			LayoutDirection layoutDirection) {
 		// determine port placement from port position
-		float nodeWidth = nodeLayout.getSize().getWidth();
-		float nodeHeight = nodeLayout.getSize().getHeight();
-		float relx = (portLayout.getLocation().getX() + portLayout
-				.getSize().getWidth() / 2)
+		float nodeWidth = nodeLayout.getWidth();
+		float nodeHeight = nodeLayout.getHeight();
+		float relx = (portLayout.getXpos() + portLayout.getWidth() / 2)
 				- (nodeWidth / 2);
-		float rely = (portLayout.getLocation().getY() + portLayout
-				.getSize().getHeight() / 2)
+		float rely = (portLayout.getYpos() + portLayout.getHeight() / 2)
 				- (nodeHeight / 2);
 
 		if (relx > nodeWidth / 4 && rely > -nodeHeight / 2 + 3
 				&& rely < nodeHeight / 2 - 3)
-			return KPortPlacement.EAST;
+			return PortSide.EAST;
 		if (relx < -nodeWidth / 4 && rely > -nodeHeight / 2 + 3
 				&& rely < nodeHeight / 2 - 3)
-			return KPortPlacement.WEST;
+			return PortSide.WEST;
 		if (rely > nodeHeight / 4 && relx > -nodeWidth / 2 + 3
 				&& relx < nodeWidth / 2 - 3)
-			return KPortPlacement.SOUTH;
+			return PortSide.SOUTH;
 		if (rely < -nodeHeight / 4 && relx > -nodeWidth / 2 + 3
 				&& relx < nodeWidth / 2 - 3)
-			return KPortPlacement.NORTH;
+			return PortSide.NORTH;
 
 		// determine port placement from port type
-		if (layoutDirection == KLayoutOption.VERTICAL) {
+		if (layoutDirection == LayoutDirection.VERTICAL) {
 			if (portType == KPortType.INPUT)
-				return KPortPlacement.NORTH;
+				return PortSide.NORTH;
 			else
-				return KPortPlacement.SOUTH;
+				return PortSide.SOUTH;
 		} else {
 			if (portType == KPortType.INPUT)
-				return KPortPlacement.WEST;
+				return PortSide.WEST;
 			else
-				return KPortPlacement.EAST;
+				return PortSide.EAST;
 		}
 	}
 

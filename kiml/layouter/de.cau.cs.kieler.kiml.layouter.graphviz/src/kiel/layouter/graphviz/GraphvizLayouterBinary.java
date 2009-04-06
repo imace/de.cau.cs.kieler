@@ -36,31 +36,32 @@ import org.eclipse.jface.preference.PreferenceDialog;
 import org.eclipse.ui.dialogs.PreferencesUtil;
 import org.eclipse.ui.statushandlers.StatusManager;
 
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLabelPlacement;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeType;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KDimension;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLabel;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLayout;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPoint;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphFactory;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutOption;
+import de.cau.cs.kieler.kiml.layout.klayoutdata.KEdgeLayout;
+import de.cau.cs.kieler.kiml.layout.klayoutdata.KInsets;
+import de.cau.cs.kieler.kiml.layout.klayoutdata.KLayoutData;
+import de.cau.cs.kieler.kiml.layout.klayoutdata.KLayoutDataFactory;
+import de.cau.cs.kieler.kiml.layout.klayoutdata.KPoint;
+import de.cau.cs.kieler.kiml.layout.klayoutdata.KShapeLayout;
+import de.cau.cs.kieler.kiml.layout.options.EdgeLabelPlacement;
+import de.cau.cs.kieler.kiml.layout.options.LayoutDirection;
+import de.cau.cs.kieler.kiml.layout.options.LayoutOptions;
+import de.cau.cs.kieler.kiml.layout.util.KimlLayoutUtil;
 import de.cau.cs.kieler.kiml.layouter.graphviz.Activator;
 import de.cau.cs.kieler.kiml.layouter.graphviz.preferences.GraphvizPreferencePage;
 import de.cau.cs.kieler.kiml.layouter.graphviz.preferences.PreferenceConstants;
 import de.cau.cs.kieler.core.KielerException;
 import de.cau.cs.kieler.core.alg.IKielerProgressMonitor;
+import de.cau.cs.kieler.core.kgraph.KEdge;
+import de.cau.cs.kieler.core.kgraph.KLabel;
+import de.cau.cs.kieler.core.kgraph.KNode;
 import de.cau.cs.kieler.core.util.MapPrinter;
 
 
 /**
  * Basic layout algorithm employing the GraphViz binary (e.g. dot layout) to do
- * a graphical layout on the passed
- * {@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutGraph
- * KLayoutGraph} data structure. The basic principle is simple:
+ * a graphical layout on the passed KNode data structure. The basic principle is simple:
  * <ol>
- * <li>Read the KLayoutGraph data structure and use the {@link GraphvizAPI} to
+ * <li>Read the KNode data structure and use the {@link GraphvizAPI} to
  * fill a GraphViz internal (native) data structure.</li>
  * <li>Call a GraphViz layout engine (e.g. the dot layouter) on the GraphViz
  * data structure. The data structure will get augmented by positioning
@@ -84,7 +85,7 @@ import de.cau.cs.kieler.core.util.MapPrinter;
  * @author <a href="mailto:haf@informatik.uni-kiel.de">Hauke Fuhrmann</a>
  * 
  */
-public class GraphvizLayouterBinary implements GraphvizLayouter{
+public class GraphvizLayouterBinary implements GraphvizLayouter {
 	/**
 	   * This is the dimension of bounding box from last read graph.
 	   */
@@ -119,14 +120,10 @@ public class GraphvizLayouterBinary implements GraphvizLayouter{
 	   * This is used to present the preferences at the right
 	   * tab to the user whenever an error occurred that is likely
 	   * caused by wrong preferences 
-	   * TODO: put all UI stuff into seperate plugin
+	   * TODO: put all UI stuff into separate plugin
 	   */
 	  PreferenceDialog preferenceDialog;
 	  
-	/* Store the GraphViz internal C-Pointers of our nodes and edges */
-	private HashMap<KLayoutNode, Integer> mapNode2Pointer = new HashMap<KLayoutNode, Integer>();
-	private HashMap<KLayoutEdge, Integer> mapEdge2Pointer = new HashMap<KLayoutEdge, Integer>();
-
 	/* internal file counter for debug output files */
 	private int fileCounter = 0;
 	
@@ -193,22 +190,20 @@ public class GraphvizLayouterBinary implements GraphvizLayouter{
 
 	/**
 	 * Performs the actual work of the layout process. Translates the
-	 * {@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode
-	 * KLayoutNode} into a structure GraphViz understands, calls the desired
+	 * KNode into a structure GraphViz understands, calls the desired
 	 * GraphViz layouter and annotates the KLayoutGraph with the position and
 	 * size information provided by GraphViz.
 	 * 
-	 * @param node
-	 *            The KLayoutNode to process
+	 * @param node the node to process
 	 */
-	public void visit(KLayoutNode node, IKielerProgressMonitor progressMonitor)
+	public void visit(KNode node, IKielerProgressMonitor progressMonitor)
 			throws KielerException {
 		progressMonitor.begin("GraphViz layout", 20);
 		updatePreferences();
 
 		try{
 		/* return if there is nothing in this node */
-		if (node.getChildNodes().size() == 0) {
+		if (node.getChildren().isEmpty()) {
 			return;
 		}
 
@@ -226,8 +221,9 @@ public class GraphvizLayouterBinary implements GraphvizLayouter{
 		mapNodeGroup2Graphviz(node);
 		
 		/* check if Emma wants to layout horizontal */
-		if (node.getLayout().getLayoutOptions().contains(
-				KLayoutOption.VERTICAL)) {
+		KLayoutData layoutData = KimlLayoutUtil.getLayoutData(node);
+		if (LayoutOptions.getLayoutDirection(layoutData)
+		        == LayoutDirection.VERTICAL) {
 			graphAttributes.put("rankdir", "BT");
 		} else {
 			graphAttributes.put("rankdir", "LR");
@@ -268,9 +264,7 @@ public class GraphvizLayouterBinary implements GraphvizLayouter{
 		if (Activator.getDefault().getPreferenceStore().getBoolean(
 				PreferenceConstants.PREF_GRAPHVIZ_ENABLE_DEBUG_OUTPUT)) {
 
-			String outputName = node.getIdString().length() != 0 ? node
-					.getIdString()
-					: "output";
+			String outputName = Integer.toString(node.hashCode());
 			String outputDir = Activator.getDefault().getPreferenceStore()
 					.getString(PreferenceConstants.PREF_GRAPHVIZ_DEBUG_DIR);
 			if (outputDir.equals("")) {
@@ -325,13 +319,13 @@ public class GraphvizLayouterBinary implements GraphvizLayouter{
 	 *            A KLayoutNode with the graph to lay out, the actual nodes of
 	 *            the graph are stored as subgroups of the nodeGroup.
 	 */
-	private void mapNodeGroup2Graphviz(KLayoutNode node) {
+	private void mapNodeGroup2Graphviz(KNode node) {
 		int i = 0;
 		/*
 		 * First process all nodes to have the pointers for them when creating
 		 * the edges.
 		 */
-		for (KLayoutNode childNode : node.getChildNodes()) {
+		for (KNode childNode : node.getChildren()) {
 			Map<String, String> nodeAttributes = new HashMap<String, String>();
 			String label = childNode.getLabel().getText();
 			if (label == null)
@@ -342,10 +336,9 @@ public class GraphvizLayouterBinary implements GraphvizLayouter{
 			 * (could result in different number formats, e.g. 0.33 on English
 			 * local, 0,33 on German)
 			 */
-			String height = pixels2GraphVizInches((int) childNode
-					.getLayout().getSize().getHeight());
-			String width = pixels2GraphVizInches((int) childNode.getLayout()
-					.getSize().getWidth());
+			KShapeLayout shapeLayout = KimlLayoutUtil.getShapeLayout(childNode);
+			String height = pixels2GraphVizInches((int)shapeLayout.getHeight());
+			String width = pixels2GraphVizInches((int)shapeLayout.getWidth());
 			nodeAttributes.put("label", label);
 			nodeAttributes.put("height", height);
 			nodeAttributes.put("width", width);
@@ -357,36 +350,35 @@ public class GraphvizLayouterBinary implements GraphvizLayouter{
 		/*
 		 * Then create the edges
 		 */
-		for (KLayoutNode childNode : node.getChildNodes()) {
-			for (KLayoutEdge outgoingEdge : childNode.getOutgoingEdges()) {
+		for (KNode childNode : node.getChildren()) {
+			for (KEdge outgoingEdge : childNode.getOutgoingEdges()) {
 				Map<String,String> edgeAttributes = new HashMap<String,String>();
 				edgeAttributes.put("arrowhead", "none");
 				edgeAttributes.put("arrowtail", "none");
 				
-				for (KEdgeLabel label : outgoingEdge.getLabel()) {
+				for (KLabel label : outgoingEdge.getLabels()) {
+				    KLayoutData layoutData = KimlLayoutUtil.getLayoutData(label);
+				    EdgeLabelPlacement labelPlacement = LayoutOptions.getEdgeLabelPlacement(layoutData);
 					/*
 					 * As graphViz just handles three labels properly (well,
 					 * actually just two, the mid and tail label), hard code
 					 * it here. First 'normal' label.
 					 */
-					if (label.getLabelLayout().getLabelPlacement().equals(
-							KEdgeLabelPlacement.CENTER)) {
+					if (labelPlacement == EdgeLabelPlacement.CENTER) {
 						String labelString = label.getText();
 						edgeAttributes.put(GraphvizAPI.ATTR_LABEL, labelString);
 					}
 					/*
 					 * Give a try for head label.
 					 */
-					if (label.getLabelLayout().getLabelPlacement().equals(
-							KEdgeLabelPlacement.HEAD)) {
+					else if (labelPlacement == EdgeLabelPlacement.HEAD) {
 						String labelString = label.getText();
 						edgeAttributes.put(GraphvizAPI.ATTR_HEADLABEL, labelString);
 					}
 					/*
 					 * Give a try for tail label.
 					 */
-					if (label.getLabelLayout().getLabelPlacement().equals(
-							KEdgeLabelPlacement.TAIL)) {
+					else if (labelPlacement == EdgeLabelPlacement.TAIL) {
 						String labelString = label.getText();
 						edgeAttributes.put(GraphvizAPI.ATTR_TAILLABEL, labelString);
 					}
@@ -404,26 +396,25 @@ public class GraphvizLayouterBinary implements GraphvizLayouter{
 	 * area the contained elements cover after the layout process and the real
 	 * size the composite node should have. An example is a compartment with a
 	 * header. The size (height) of the header has to be added to the desired
-	 * resulting size of the top KLayoutNode.
+	 * resulting size of the top KNode.
 	 * 
-	 * @param nodeGroup
-	 *            The top KLayoutNode to set the size of
+	 * @param node the top KNode to set the size of
 	 */
-	private void setTopNodeAttributes(KLayoutNode nodeGroup) {
+	private void setTopNodeAttributes(KNode node) {
 		Dimension bb = this.boundingBox;
-		KDimension size = KimlLayoutGraphFactory.eINSTANCE.createKDimension();
+        KShapeLayout shapeLayout = KimlLayoutUtil.getShapeLayout(node);
 		float left = 0, right = 0, bottom = 0, top = 0;
 		try {
-			top = nodeGroup.getLayout().getInsets().getTop();
-			bottom = nodeGroup.getLayout().getInsets().getBottom();
-			left = nodeGroup.getLayout().getInsets().getLeft();
-			right = nodeGroup.getLayout().getInsets().getRight();
+		    KInsets insets = LayoutOptions.getInsets(shapeLayout);
+			top = insets.getTop();
+			bottom = insets.getBottom();
+			left = insets.getLeft();
+			right = insets.getRight();
 		} catch (Exception e) {
 			/* no insets available, stay silent */
 		}
-		size.setWidth((bb.width + 2 * prefPadX) + left + right);
-		size.setHeight((bb.height + 2 * prefPadY) + top + bottom);
-		nodeGroup.getLayout().setSize(size);
+		shapeLayout.setWidth((bb.width + 2 * prefPadX) + left + right);
+		shapeLayout.setHeight((bb.height + 2 * prefPadY) + top + bottom);
 	}
 
 	/**
@@ -471,10 +462,10 @@ public class GraphvizLayouterBinary implements GraphvizLayouter{
 	 *            left corner.
 	 * @return KPoint the location of the item in terms of the upper left corner
 	 */
-	private KPoint graphviz2KPoint(int x, int y, KDimension size) {
-		KPoint newLocation = KimlLayoutGraphFactory.eINSTANCE.createKPoint();
-		newLocation.setX(x - (size.getWidth() / 2) + prefPadX);
-		newLocation.setY(y - (size.getHeight() / 2) + prefPadY);
+	private KPoint graphviz2KPoint(int x, int y, float width, float height) {
+		KPoint newLocation = KLayoutDataFactory.eINSTANCE.createKPoint();
+		newLocation.setX(x - (width / 2) + prefPadX);
+		newLocation.setY(y - (height / 2) + prefPadY);
 		return newLocation;
 	}
 
@@ -488,7 +479,7 @@ public class GraphvizLayouterBinary implements GraphvizLayouter{
 	 * @return Draw2D coordinates
 	 */
 	private KPoint graphviz2KPoint(int x, int y) {
-		KPoint newLocation = KimlLayoutGraphFactory.eINSTANCE.createKPoint();
+		KPoint newLocation = KLayoutDataFactory.eINSTANCE.createKPoint();
 		newLocation.setX(x + prefPadX);
 		newLocation.setY(y + prefPadY);
 		return newLocation;
@@ -606,7 +597,8 @@ public class GraphvizLayouterBinary implements GraphvizLayouter{
 	  /**
 	   * @see GraphvizLayouterLibrary#addNodeToGraph(Node, Map)
 	   */
-	  protected final void addNodeToGraph(final KLayoutNode node, final Map<String,String> attributes, int number) {
+	  protected final void addNodeToGraph(final KNode node,
+	          final Map<String,String> attributes, int number) {
 	    Iterator<String> iter = attributes.keySet().iterator();
 	    
 	    //String nodeID = "node"+number;//this.getNodeID(node);
@@ -630,7 +622,8 @@ public class GraphvizLayouterBinary implements GraphvizLayouter{
 	  /**
 	   * @see GraphvizLayouterLibrary#addEdgeToGraph(Edge, Map)
 	   */
-	  protected final void addEdgeToGraph(final KLayoutEdge edge, final Map<String,String> attributes) {
+	  protected final void addEdgeToGraph(final KEdge edge,
+	          final Map<String,String> attributes) {
 	    Iterator<String> iter = attributes.keySet().iterator();
 	    
 	    dotInput.print("\"" + this.getNodeID(edge.getSource()) + "\" -> \""
@@ -648,11 +641,11 @@ public class GraphvizLayouterBinary implements GraphvizLayouter{
 	  }
 	  
 	  /** Create some temporary ID (hash code) */
-	  private String getNodeID(KLayoutNode node){
+	  private String getNodeID(KNode node){
 		  String nodeID = "node"+node.hashCode();
 		  return nodeID;
 	  }
-	  private String getEdgeID(KLayoutEdge edge){
+	  private String getEdgeID(KEdge edge){
 		  String edgeID = "edge"+edge.hashCode();
 		  return edgeID;
 	  }
@@ -805,39 +798,37 @@ public class GraphvizLayouterBinary implements GraphvizLayouter{
 
 	private void retrieveNodeLayout(String line) {
 		try {
-		StringTokenizer st = new StringTokenizer(line);
-		Map<String,String> attributes;
-		//st.nextToken("\""); // throw away leading " signs
-		String nodeString = st.nextToken("[\t").trim(); 
-		KLayoutNode node = (KLayoutNode) idToObject.get(nodeString);
-		//st.nextToken("\"["); // " [
-		String attributeString = st.nextToken("[]");
-		attributes = readAttributes(attributeString);
-		String posString = attributes.get(GraphvizAPI.ATTR_POS); 
-		String heightString = attributes.get(GraphvizAPI.ATTR_HEIGHT); 
-		String widthString = attributes.get(GraphvizAPI.ATTR_WIDTH); 
-		KPoint location = KimlLayoutGraphFactory.eINSTANCE.createKPoint();
-		KDimension size = KimlLayoutGraphFactory.eINSTANCE
-				.createKDimension();
-		try {
-			List<Integer> position = string2Ints(posString);
-			// use NumberFormat for parsing, see respective methods below
-			size.setHeight(graphVizInches2Pixels(heightString));
-			size.setWidth(graphVizInches2Pixels(widthString));
-			// in GraphViz position is the center of the node
-			// in draw2D it's the upper left corner
-			location = graphviz2KPoint(position.get(0).intValue(), position
-					.get(1).intValue(), size);
-
-		} catch (Exception exception) {
-			// if there are no valid layout informations, use default values
-			size.setHeight(graphVizInches2Pixels("10"));
-			size.setWidth(graphVizInches2Pixels("10"));
-			location.setX(0);
-			location.setY(0);
-		}
-		node.getLayout().setLocation(location);
-		node.getLayout().setSize(size);
+    		StringTokenizer st = new StringTokenizer(line);
+    		Map<String,String> attributes;
+    		//st.nextToken("\""); // throw away leading " signs
+    		String nodeString = st.nextToken("[\t").trim(); 
+    		KNode node = (KNode) idToObject.get(nodeString);
+    		//st.nextToken("\"["); // " [
+    		String attributeString = st.nextToken("[]");
+    		attributes = readAttributes(attributeString);
+    		String posString = attributes.get(GraphvizAPI.ATTR_POS); 
+    		String heightString = attributes.get(GraphvizAPI.ATTR_HEIGHT); 
+    		String widthString = attributes.get(GraphvizAPI.ATTR_WIDTH); 
+    		KShapeLayout shapeLayout = KimlLayoutUtil.getShapeLayout(node);
+    		try {
+    			List<Integer> position = string2Ints(posString);
+    			// use NumberFormat for parsing, see respective methods below
+    			shapeLayout.setHeight(graphVizInches2Pixels(heightString));
+    			shapeLayout.setWidth(graphVizInches2Pixels(widthString));
+    			// in GraphViz position is the center of the node
+    			// in draw2D it's the upper left corner
+    			KPoint location = graphviz2KPoint(position.get(0).intValue(), position
+    					.get(1).intValue(), shapeLayout.getWidth(), shapeLayout.getHeight());
+    			shapeLayout.setXpos(location.getX());
+    			shapeLayout.setYpos(location.getY());
+    
+    		} catch (Exception exception) {
+    			// if there are no valid layout informations, use default values
+    		    shapeLayout.setHeight(graphVizInches2Pixels("10"));
+    		    shapeLayout.setWidth(graphVizInches2Pixels("10"));
+    		    shapeLayout.setXpos(0);
+    		    shapeLayout.setYpos(0);
+    		}
 		} catch (Exception e) {
 			Status status = new Status(IStatus.ERROR, Activator.PLUGIN_ID,
 					"Error while reading node attributes from graphviz:" , e);
@@ -847,114 +838,110 @@ public class GraphvizLayouterBinary implements GraphvizLayouter{
 
 	private void retrieveEdgeLayout(String line) {
 		// edge found
-		  Map<String,String> attributes;
-		  KLayoutEdge edge;
-		  attributes = readAttributes(line.substring(
-		    line.indexOf('[') + 1, line.lastIndexOf(']')));
-		  try{
-		  edge = (KLayoutEdge) idToObject.get(attributes.get("comment"));
-		  String posString =   (String) attributes.get("pos");
-		  List<Integer> intList = string2Ints(posString);
-			
-				/*
-				 * ars, 2008-11-15: when setting arrowhead to 'none' then there
-				 * is no seperate end coordinate for the edge given, as assumed
-				 * before.
-				 * 
-				 * ars, 2008-11-21, GraphViz uses cubic B-Splines, some
-				 * generalisation of Bezier Curves. The B-Splines are converted
-				 * here to a polyline that Eclipse understands
-				 * 
-				 * Addressing bezier curves in eclipse:
-				 * 
-				 * @see Eclipse bug: 234808 and 168307
-				 */
+        Map<String, String> attributes;
+        KEdge edge;
+        attributes = readAttributes(line.substring(line.indexOf('[') + 1, line
+                .lastIndexOf(']')));
+        try {
+            edge = (KEdge) idToObject.get(attributes.get("comment"));
+            String posString = (String) attributes.get("pos");
+            List<Integer> intList = string2Ints(posString);
+            KEdgeLayout edgeLayout = KimlLayoutUtil.getEdgeLayout(edge);
 
-				/* first two points in list denote the start point */
-				edge.getLayout().setSourcePoint(
-						graphviz2KPoint(intList.get(0), intList.get(1)));
+            /*
+             * ars, 2008-11-15: when setting arrowhead to 'none' then there
+             * is no separate end coordinate for the edge given, as assumed
+             * before.
+             * 
+             * ars, 2008-11-21, GraphViz uses cubic B-Splines, some
+             * generalization of Bezier Curves. The B-Splines are converted
+             * here to a polyline that Eclipse understands
+             * 
+             * Addressing Bezier curves in eclipse:
+             * 
+             * @see Eclipse bug: 234808 and 168307
+             */
 
-				for (int i = 0; i < intList.size() - 7; i += 6) {
-					/* convert the bezier representation to a poly line */
-					bezierToPolyline(edge.getLayout(), new Point(intList
-							.get(i + 0), intList.get(i + 1)), new Point(intList
-							.get(i + 2), intList.get(i + 3)), new Point(intList
-							.get(i + 4), intList.get(i + 5)), new Point(intList
-							.get(i + 6), intList.get(i + 7)));
-				}
-				/*
-				 * need to remove the last grid point, as this is the same as
-				 * the target point below
-				 */
-				edge.getLayout().getBendPoints().remove(
-						edge.getLayout().getBendPoints().size() - 1);
+            /* first two points in list denote the start point */
+            edgeLayout.setSourcePoint(graphviz2KPoint(intList.get(0), intList
+                    .get(1)));
 
-				/* last two points in the GraphViz list denote the end point */
-				edge.getLayout().setTargetPoint(
-						graphviz2KPoint(intList.get(intList.size() - 2),
-								intList.get(intList.size() - 1)));
+            for (int i = 0; i < intList.size() - 7; i += 6) {
+                /* convert the bezier representation to a poly line */
+                bezierToPolyline(edgeLayout, new Point(intList.get(i + 0),
+                        intList.get(i + 1)), new Point(intList.get(i + 2),
+                        intList.get(i + 3)), new Point(intList.get(i + 4),
+                        intList.get(i + 5)), new Point(intList.get(i + 6),
+                        intList.get(i + 7)));
+            }
+            /*
+             * need to remove the last grid point, as this is the same as
+             * the target point below
+             */
+            edgeLayout.getBendPoints().remove(
+                    edgeLayout.getBendPoints().size() - 1);
 
-				/* tell all users that we produced some sort of spline */
-				edge.getLayout().setEdgeType(KEdgeType.SPLINE);
-			
-		  
-			/*
-			 * Process labels, there is a maximum of three that can be handled
-			 * by GraphViz. Well, actually two with locations.
-			 */
-			for (KEdgeLabel label : edge.getLabel()) {
+            /* last two points in the GraphViz list denote the end point */
+            edgeLayout.setTargetPoint(graphviz2KPoint(intList.get(intList
+                    .size() - 2), intList.get(intList.size() - 1)));
 
-				// head label
-				if (label.getLabelLayout().getLabelPlacement().equals(
-						KEdgeLabelPlacement.HEAD)) {
-					;/*
-					 * not possible to get the head label (placement) with
-					 * GraphViz
-					 */
-				}
+            /* tell all users that we produced some sort of spline */
+            // edgeLayout.getOptions().add(new KIntOption(KEdgeType.SPLINE));
 
-				/* mid label */
-				if (label.getLabelLayout().getLabelPlacement().equals(
-						KEdgeLabelPlacement.CENTER)) {
-					String midLoc = attributes.get(GraphvizAPI.ATTR_LP);
-					List<Integer> midInts = string2Ints(midLoc);
-					KPoint midLocation = KimlLayoutGraphFactory.eINSTANCE
-							.createKPoint();
-					if (midInts.size() == 2) {
-						KDimension labelSize = KimlLayoutGraphFactory.eINSTANCE
-								.createKDimension();
-						labelSize = label.getLabelLayout().getSize();
-						midLocation = graphviz2KPoint(
-								midInts.get(0).intValue() + 2, midInts.get(1)
-										.intValue(), labelSize);
-					}
-					label.getLabelLayout().setLocation(midLocation);
-				}
+            /*
+             * Process labels, there is a maximum of three that can be handled
+             * by GraphViz. Well, actually two with locations.
+             */
+            for (KLabel label : edge.getLabels()) {
 
-				/* tail label */
-				if (label.getLabelLayout().getLabelPlacement().equals(
-						KEdgeLabelPlacement.TAIL)) {
-					String tailLoc = attributes.get(GraphvizAPI.ATTR_TAILLP);
-					List<Integer> tailInts = string2Ints(tailLoc);
-					KPoint tailLocation = KimlLayoutGraphFactory.eINSTANCE
-							.createKPoint();
-					if (tailInts.size() == 2) {
-						KDimension labelSize = KimlLayoutGraphFactory.eINSTANCE
-								.createKDimension();
-						labelSize = label.getLabelLayout().getSize();
-						/* small adjust of size, and therefore of position */
-						labelSize.setHeight(labelSize.getHeight() + 7);
-						tailLocation = graphviz2KPoint(tailInts.get(0)
-								.intValue(), tailInts.get(1).intValue(),
-								labelSize);
-					}
-					label.getLabelLayout().setLocation(tailLocation);
-				}
-			}
-		  }catch(Exception e){
-				Status myStatus = new Status(IStatus.ERROR, Activator.PLUGIN_ID, "Graphviz Edge result reading problem.", e);
-				StatusManager.getManager().handle(myStatus, StatusManager.SHOW);
-			}
+                // head label
+                KShapeLayout shapeLayout = KimlLayoutUtil.getShapeLayout(label);
+                EdgeLabelPlacement labelPlacement = LayoutOptions.getEdgeLabelPlacement(shapeLayout);
+                if (labelPlacement == EdgeLabelPlacement.HEAD) {
+                    ;/*
+					  * not possible to get the head label (placement) with
+					  * GraphViz
+					  */
+                }
+
+                /* mid label */
+                else if (labelPlacement == EdgeLabelPlacement.CENTER) {
+                    String midLoc = attributes.get(GraphvizAPI.ATTR_LP);
+                    List<Integer> midInts = string2Ints(midLoc);
+                    KPoint midLocation = KLayoutDataFactory.eINSTANCE
+                            .createKPoint();
+                    if (midInts.size() == 2) {
+                        midLocation = graphviz2KPoint(
+                                midInts.get(0).intValue() + 2, midInts.get(1)
+                                .intValue(), shapeLayout.getWidth(),
+                                shapeLayout.getHeight());
+                    }
+                    shapeLayout.setXpos(midLocation.getX());
+                    shapeLayout.setYpos(midLocation.getY());
+                }
+
+                /* tail label */
+                else if (labelPlacement == EdgeLabelPlacement.TAIL) {
+                    String tailLoc = attributes.get(GraphvizAPI.ATTR_TAILLP);
+                    List<Integer> tailInts = string2Ints(tailLoc);
+                    KPoint tailLocation = KLayoutDataFactory.eINSTANCE
+                            .createKPoint();
+                    if (tailInts.size() == 2) {
+                        /* small adjust of size, and therefore of position */
+                        shapeLayout.setHeight(shapeLayout.getHeight() + 7);
+                        tailLocation = graphviz2KPoint(tailInts.get(0)
+                                .intValue(), tailInts.get(1).intValue(),
+                                shapeLayout.getWidth(), shapeLayout.getHeight());
+                    }
+                    shapeLayout.setXpos(tailLocation.getX());
+                    shapeLayout.setYpos(tailLocation.getY());
+                }
+            }
+        } catch (Exception e) {
+            Status myStatus = new Status(IStatus.ERROR, Activator.PLUGIN_ID,
+                    "Graphviz Edge result reading problem.", e);
+            StatusManager.getManager().handle(myStatus, StatusManager.SHOW);
+        }
 	}
 	
 	/**

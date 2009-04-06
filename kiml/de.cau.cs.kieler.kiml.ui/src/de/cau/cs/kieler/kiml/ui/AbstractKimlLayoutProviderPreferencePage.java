@@ -14,6 +14,7 @@
 package de.cau.cs.kieler.kiml.ui;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.eclipse.jface.preference.BooleanFieldEditor;
 import org.eclipse.jface.preference.FieldEditor;
@@ -68,9 +69,9 @@ public abstract class AbstractKimlLayoutProviderPreferencePage extends
 	 * @see LayoutProviders
 	 */
 	protected void createFieldEditors() {
-		ArrayList<FieldEditor> editorsToAdd = createLayouterTable(this
+		List<FieldEditor> editorsToAdd = createLayouterTable(this
 				.getFieldEditorParent(), KimlLayoutServices.getInstance()
-				.getLayoutProvidersOfCollection(LAYOUT_PROVIDER_COLLECTION_ID));
+				.getLayoutProviders(LAYOUT_PROVIDER_COLLECTION_ID));
 		for (FieldEditor editorToAdd : editorsToAdd) {
 			addField(editorToAdd);
 		}
@@ -86,8 +87,8 @@ public abstract class AbstractKimlLayoutProviderPreferencePage extends
 	 * @return A list of field editors which must be added to a preference page
 	 *         afterwards
 	 */
-	protected ArrayList<FieldEditor> createLayouterTable(Composite parent,
-			ArrayList<AbstractLayoutProvider> layoutProviders) {
+	protected List<FieldEditor> createLayouterTable(Composite parent,
+			List<AbstractLayoutProvider> layoutProviders) {
 		ArrayList<FieldEditor> createdFieldEditors = new ArrayList<FieldEditor>();
 
 		Group availableLayouters = new Group(parent, SWT.NONE);
@@ -102,13 +103,12 @@ public abstract class AbstractKimlLayoutProviderPreferencePage extends
 			description.setLayoutData(new GridData(GridData.FILL,
 					GridData.FILL, true, true, 2, 1));
 			for (AbstractLayoutProvider layoutProvider : layoutProviders) {
-				String label = layoutProvider.getLayouterInfo()
-						.getLayouterName()
+				String label = layoutProvider.getName()
 						+ " ("
-						+ layoutProvider.getLayouterInfo().getLayoutType()
+						+ layoutProvider.getType()
 						+ ")";
 				BooleanFieldEditor enable = new BooleanFieldEditor(
-						layoutProvider.getLayouterInfo().getLayouterName(),
+						layoutProvider.getName(),
 						label, availableLayouters);
 				createdFieldEditors.add(enable);
 			}
@@ -137,13 +137,13 @@ public abstract class AbstractKimlLayoutProviderPreferencePage extends
 	public boolean performOk() {
 		boolean retVal = super.performOk();
 
-		ArrayList<AbstractLayoutProvider> layouters = KimlLayoutServices
-				.getInstance().getLayoutProvidersOfCollection(
+		List<AbstractLayoutProvider> layouters = KimlLayoutServices
+				.getInstance().getLayoutProviders(
 						LAYOUT_PROVIDER_COLLECTION_ID);
 
 		for (AbstractLayoutProvider layouter : layouters) {
 			layouter.setEnabled(getPreferenceStore().getBoolean(
-					layouter.getLayouterInfo().getLayouterName()));
+					layouter.getName()));
 		}
 		return retVal;
 	}

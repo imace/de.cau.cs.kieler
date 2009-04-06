@@ -132,6 +132,12 @@ public class KLayoutDataSwitch<T> {
                 if (result == null) result = defaultCase(theEObject);
                 return result;
             }
+            case KLayoutDataPackage.KINSETS: {
+                KInsets kInsets = (KInsets)theEObject;
+                T result = caseKInsets(kInsets);
+                if (result == null) result = defaultCase(theEObject);
+                return result;
+            }
             default: return defaultCase(theEObject);
         }
     }
@@ -193,6 +199,21 @@ public class KLayoutDataSwitch<T> {
      * @generated
      */
     public T caseKPoint(KPoint object) {
+        return null;
+    }
+
+    /**
+     * Returns the result of interpreting the object as an instance of '<em>KInsets</em>'.
+     * <!-- begin-user-doc -->
+     * This implementation returns null;
+     * returning a non-null result will terminate the switch.
+     * <!-- end-user-doc -->
+     * @param object the target of the switch.
+     * @return the result of interpreting the object as an instance of '<em>KInsets</em>'.
+     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+     * @generated
+     */
+    public T caseKInsets(KInsets object) {
         return null;
     }
 

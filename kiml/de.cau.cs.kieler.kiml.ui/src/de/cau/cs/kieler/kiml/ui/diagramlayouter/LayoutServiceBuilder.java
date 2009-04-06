@@ -79,7 +79,7 @@ public class LayoutServiceBuilder {
 					IEclipsePreferences pref = new InstanceScope()
 							.getNode(pluginName);
 					boolean state = pref.getBoolean(layoutProvider
-							.getLayouterInfo().getLayouterName(), true);
+							.getName(), true);
 					layoutProvider.setEnabled(state);
 					KimlLayoutServices.getInstance().addLayoutProvider(
 							layoutProvider);

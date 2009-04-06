@@ -37,6 +37,7 @@ import org.eclipse.emf.ecore.EObject;
 public interface KPoint extends EObject {
     /**
      * Returns the value of the '<em><b>X</b></em>' attribute.
+     * The default value is <code>"0.0f"</code>.
      * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>X</em>' attribute isn't clear,
@@ -46,7 +47,7 @@ public interface KPoint extends EObject {
      * @return the value of the '<em>X</em>' attribute.
      * @see #setX(float)
      * @see de.cau.cs.kieler.kiml.layout.klayoutdata.KLayoutDataPackage#getKPoint_X()
-     * @model
+     * @model default="0.0f"
      * @generated
      */
     float getX();
@@ -63,6 +64,7 @@ public interface KPoint extends EObject {
 
     /**
      * Returns the value of the '<em><b>Y</b></em>' attribute.
+     * The default value is <code>"0.0f"</code>.
      * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Y</em>' attribute isn't clear,
@@ -72,7 +74,7 @@ public interface KPoint extends EObject {
      * @return the value of the '<em>Y</em>' attribute.
      * @see #setY(float)
      * @see de.cau.cs.kieler.kiml.layout.klayoutdata.KLayoutDataPackage#getKPoint_Y()
-     * @model
+     * @model default="0.0f"
      * @generated
      */
     float getY();

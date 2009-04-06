@@ -15,7 +15,7 @@ package de.cau.cs.kieler.kiml.layout.services;
 
 import de.cau.cs.kieler.core.KielerException;
 import de.cau.cs.kieler.core.alg.IKielerProgressMonitor;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutGraph;
+import de.cau.cs.kieler.core.kgraph.KNode;
 
 /**
  * Abstract class every concrete layouter engine has to extend. Pushes the
@@ -34,15 +34,15 @@ public abstract class AbstractLayouterEngine {
 			.getInstance();
 
 	/**
-	 * Lays out a KLayoutGraph with hierarchy, that is attaches layout
-	 * information to the description of the KLayoutGraph.
+	 * Lays out a parent node with hierarchy, that is attaches layout
+	 * information to the description of the node object.
 	 * 
-	 * @param layoutGraph a KLayoutGraph with hierarchy which is laid out
+	 * @param layoutGraph a node with hierarchy which is laid out
 	 *     by this method
 	 * @param progressMonitor progress monitor used to keep track of progress
 	 * @throws KielerException if the method fails to perform layout
 	 */
-	public abstract void layout(KLayoutGraph layoutGraph,
+	public abstract void layout(KNode layoutGraph,
 			IKielerProgressMonitor progressMonitor) throws KielerException;
 	
 	/**

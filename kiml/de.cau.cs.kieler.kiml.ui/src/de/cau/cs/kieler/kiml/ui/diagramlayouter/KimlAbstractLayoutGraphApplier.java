@@ -21,13 +21,11 @@ import org.eclipse.gef.ConnectionEditPart;
 import org.eclipse.gef.GraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.LabelEditPart;
 
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLabel;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutGraph;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeLabel;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPortLabel;
+import de.cau.cs.kieler.core.kgraph.KEdge;
+import de.cau.cs.kieler.core.kgraph.KLabel;
+import de.cau.cs.kieler.core.kgraph.KNode;
+import de.cau.cs.kieler.core.kgraph.KPort;
+
 
 /**
  * The abstract base class for all LayoutGraphAppliers. <br/>
@@ -57,22 +55,22 @@ public abstract class KimlAbstractLayoutGraphApplier {
 	public static final String ATTRIBUTE_NAME = "name";
 	public static final String ATTRIBUTE_ICON = "icon";
 
-	/* the mappings of KLayoutGraph LAYOUT elements to EditParts */
-	protected Map<KLayoutNode, GraphicalEditPart> layoutNode2EditPart;
-	protected Map<KLayoutEdge, ConnectionEditPart> layoutEdge2EditPart;
-	protected Map<KLayoutPort, GraphicalEditPart> layoutPort2EditPart;
+	/* the mappings of KGraph LAYOUT elements to EditParts */
+	protected Map<KNode, GraphicalEditPart> layoutNode2EditPart;
+	protected Map<KEdge, ConnectionEditPart> layoutEdge2EditPart;
+	protected Map<KPort, GraphicalEditPart> layoutPort2EditPart;
 
-	/* the mappings of KLayoutGraph LABEL elements to LabelEditParts */
-	protected Map<KNodeLabel, LabelEditPart> nodeLabel2EditPart;
-	protected Map<KEdgeLabel, LabelEditPart> edgeLabel2EditPart;
-	protected Map<KPortLabel, LabelEditPart> portLabel2EditPart;
+	/* the mappings of KGraph LABEL elements to LabelEditParts */
+	protected Map<KLabel, LabelEditPart> nodeLabel2EditPart;
+	protected Map<KLabel, LabelEditPart> edgeLabel2EditPart;
+	protected Map<KLabel, LabelEditPart> portLabel2EditPart;
 
 	/*
 	 * the layoutRootPart where the layout should start with and an instance of
 	 * the layout graph
 	 */
 	protected GraphicalEditPart layoutRootPart;
-	protected KLayoutGraph layoutGraph;
+	protected KNode layoutGraph;
 
 	/**
 	 * Is responsible for the correct collaboration of the single steps, and for

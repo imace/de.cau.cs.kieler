@@ -92,12 +92,16 @@ public abstract class KLayoutDataImpl extends EObjectImpl implements KLayoutData
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
+     * @generated NOT
      */
     public KOption getOption(String key) {
-        // TODO: implement this method
-        // Ensure that you remove @generated or mark it @generated NOT
-        throw new UnsupportedOperationException();
+        if (key != null) {
+            for (KOption option : getOptions()) {
+                if (key.equals(option.getKey()))
+                    return option;
+            }
+        }
+        return null;
     }
 
     /**

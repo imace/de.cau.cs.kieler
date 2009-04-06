@@ -12,10 +12,14 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="KShapeLayout" eSuperTypes="#//KLayoutData">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="xpos" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EFloat"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ypos" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EFloat"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="width" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EFloat"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="height" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EFloat"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="xpos" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EFloat"
+        defaultValueLiteral="0.0f"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ypos" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EFloat"
+        defaultValueLiteral="0.0f"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="width" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EFloat"
+        defaultValueLiteral="0.0f"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="height" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EFloat"
+        defaultValueLiteral="0.0f"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="KEdgeLayout" eSuperTypes="#//KLayoutData">
     <eStructuralFeatures xsi:type="ecore:EReference" name="bendPoints" upperBound="-1"
@@ -26,7 +30,15 @@
         eType="#//KPoint" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="KPoint">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="x" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EFloat"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="y" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EFloat"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="x" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EFloat"
+        defaultValueLiteral="0.0f"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="y" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EFloat"
+        defaultValueLiteral="0.0f"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="KInsets">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="top" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EFloat"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bottom" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EFloat"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="left" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EFloat"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="right" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EFloat"/>
   </eClassifiers>
 </ecore:EPackage>

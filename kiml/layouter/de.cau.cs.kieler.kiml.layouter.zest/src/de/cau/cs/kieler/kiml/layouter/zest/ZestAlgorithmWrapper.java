@@ -4,15 +4,20 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Status;
-import org.eclipse.ui.statushandlers.StatusManager;
 import org.eclipse.zest.layouts.*;
 import org.eclipse.zest.layouts.constraints.BasicEntityConstraint;
 
 import de.cau.cs.kieler.core.KielerException;
 import de.cau.cs.kieler.core.alg.IKielerProgressMonitor;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.*;
+import de.cau.cs.kieler.core.kgraph.KEdge;
+import de.cau.cs.kieler.core.kgraph.KNode;
+import de.cau.cs.kieler.kiml.layout.klayoutdata.KEdgeLayout;
+import de.cau.cs.kieler.kiml.layout.klayoutdata.KInsets;
+import de.cau.cs.kieler.kiml.layout.klayoutdata.KLayoutDataFactory;
+import de.cau.cs.kieler.kiml.layout.klayoutdata.KPoint;
+import de.cau.cs.kieler.kiml.layout.klayoutdata.KShapeLayout;
+import de.cau.cs.kieler.kiml.layout.options.LayoutOptions;
+import de.cau.cs.kieler.kiml.layout.util.KimlLayoutUtil;
 import de.cau.cs.kieler.kiml.layouter.zest.graph.*;
 import de.cau.cs.kieler.kiml.layouter.zest.preferences.ZestLayouterPreferencePage;
 
@@ -34,8 +39,8 @@ public class ZestAlgorithmWrapper {
 	// layout algorithm used internally
 	private LayoutAlgorithm layoutAlgorithm;
 	
-	// mapping of layout nodes to layout entities
-	private Map<KLayoutNode, LayoutEntity> layoutNode2EntityMap = new HashMap<KLayoutNode, LayoutEntity>();
+	// mapping of nodes to layout entities
+	private Map<KNode, LayoutEntity> layoutNode2EntityMap = new HashMap<KNode, LayoutEntity>();
 	// sum of the widths of all nodes
 	private float totalWidth = 0.0f;
 	// sum of the heights of all nodes
@@ -56,7 +61,7 @@ public class ZestAlgorithmWrapper {
 	 * @param layoutNode layout node to be layouted
 	 * @param progressMonitor monitor used to keep track of progress
 	 */
-	public void doLayout(KLayoutNode layoutNode,
+	public void doLayout(KNode layoutNode,
 			IKielerProgressMonitor progressMonitor) throws KielerException {
 		progressMonitor.begin("Zest layout", 15);
 		// build layout entities and relationships
@@ -92,12 +97,13 @@ public class ZestAlgorithmWrapper {
 	 * @param parentNode parent layout node
 	 * @return entities in that layout node
 	 */
-	private LayoutEntity[] buildEntities(KLayoutNode parentNode) {
-		for (KLayoutNode child : parentNode.getChildNodes()) {
-			float x = child.getLayout().getLocation().getX();
-			float y = child.getLayout().getLocation().getY();
-			float width = child.getLayout().getSize().getWidth();
-			float height = child.getLayout().getSize().getHeight();
+	private LayoutEntity[] buildEntities(KNode parentNode) {
+		for (KNode child : parentNode.getChildren()) {
+		    KShapeLayout shapeLayout = KimlLayoutUtil.getShapeLayout(child);
+			float x = shapeLayout.getXpos();
+			float y = shapeLayout.getYpos();
+			float width = shapeLayout.getWidth();
+			float height = shapeLayout.getHeight();
 			AdvancedEntity entity = new AdvancedEntity(child, x, y, width, height);
 			totalWidth += width;
 			totalHeight += height;
@@ -118,14 +124,14 @@ public class ZestAlgorithmWrapper {
 	 * @param parentNode parent layout node
 	 * @return relationships in that layout node
 	 */
-	private LayoutRelationship[] buildRelationships(KLayoutNode parentNode) {
+	private LayoutRelationship[] buildRelationships(KNode parentNode) {
 		LinkedList<LayoutRelationship> edgeList = new LinkedList<LayoutRelationship>();
-		for (KLayoutNode sourceGroup : parentNode.getChildNodes()) {
-			for (KLayoutEdge edge : sourceGroup.getOutgoingEdges()) {
-				KLayoutNode targetGroup = edge.getTarget();
-				if (targetGroup != null) {
-					LayoutEntity sourceEntity = layoutNode2EntityMap.get(sourceGroup);
-					LayoutEntity targetEntity = layoutNode2EntityMap.get(targetGroup);
+		for (KNode sourceNode : parentNode.getChildren()) {
+			for (KEdge edge : sourceNode.getOutgoingEdges()) {
+				KNode targetNode = edge.getTarget();
+				if (targetNode != null) {
+					LayoutEntity sourceEntity = layoutNode2EntityMap.get(sourceNode);
+					LayoutEntity targetEntity = layoutNode2EntityMap.get(targetNode);
 					LayoutRelationship relationship = new AdvancedRelationship(edge, sourceEntity, targetEntity);
 					edgeList.add(relationship);
 				}
@@ -140,44 +146,47 @@ public class ZestAlgorithmWrapper {
 	 * @param entities list of layouted entities
 	 * @param relationships list of layouted relationships
 	 */
-	private void transferLayoutResult(KLayoutNode parentNode,
+	private void transferLayoutResult(KNode parentNode,
 			LayoutEntity[] entities, LayoutRelationship[] relationships) {
 		float maxX = 0.0f, maxY = 0.0f;
 		
 		// transfer entities layouts
 		for (LayoutEntity entity : entities) {
-			KLayoutNode layoutNode = (KLayoutNode)((AdvancedEntity)entity).getRealObject();
+			KNode layoutNode = (KNode)((AdvancedEntity)entity).getRealObject();
+			KShapeLayout shapeLayout = KimlLayoutUtil.getShapeLayout(layoutNode);
 			float x = (float)entity.getXInLayout();
 			float y = (float)entity.getYInLayout();
-			float width = layoutNode.getLayout().getSize().getWidth();
-			float height = layoutNode.getLayout().getSize().getHeight();
+			float width = shapeLayout.getWidth();
+			float height = shapeLayout.getHeight();
 			if (x + width > maxX) maxX = x + width;
 			if (y + height > maxY) maxY = y + height;
-			layoutNode.getLayout().getLocation().setX(x);
-			layoutNode.getLayout().getLocation().setY(y);
+			shapeLayout.setXpos(x);
+			shapeLayout.setYpos(y);
 		}
 		
 		// transfer relationships layouts
 		for (LayoutRelationship relationship : relationships) {
-			KLayoutEdge edge = (KLayoutEdge)((AdvancedRelationship)relationship).getRealObject();
-			edge.getLayout().getBendPoints().clear();
+			KEdge edge = (KEdge)((AdvancedRelationship)relationship).getRealObject();
+			KEdgeLayout edgeLayout = KimlLayoutUtil.getEdgeLayout(edge);
+			edgeLayout.getBendPoints().clear();
 			for (LayoutBendPoint bendPoint : ((AdvancedRelationship)relationship).getBendPoints()) {
-				KPoint point = KimlLayoutGraphFactory.eINSTANCE.createKPoint();
+				KPoint point = KLayoutDataFactory.eINSTANCE.createKPoint();
 				float x = (float)bendPoint.getX();
 				float y = (float)bendPoint.getY();
 				if (x > maxX) maxX = x;
 				if (y > maxY) maxY = y;
 				point.setX(x);
 				point.setY(y);
-				edge.getLayout().getBendPoints().add(point);
+				edgeLayout.getBendPoints().add(point);
 			}
 		}
 		
 		// determine size of the parent group
-		KInsets insets = parentNode.getLayout().getInsets();
-		parentNode.getLayout().getSize().setWidth(maxX + insets.getLeft()
+		KShapeLayout shapeLayout = KimlLayoutUtil.getShapeLayout(parentNode);
+		KInsets insets = LayoutOptions.getInsets(shapeLayout);
+		shapeLayout.setWidth(maxX + insets.getLeft()
 				+ insets.getRight() + SIZE_ADDITION);
-		parentNode.getLayout().getSize().setHeight(maxY + insets.getTop()
+		shapeLayout.setHeight(maxY + insets.getTop()
 				+ insets.getBottom() + SIZE_ADDITION);
 	}
 

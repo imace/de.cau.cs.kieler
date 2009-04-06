@@ -4,11 +4,8 @@ import org.eclipse.zest.layouts.algorithms.SpringLayoutAlgorithm;
 
 import de.cau.cs.kieler.core.KielerException;
 import de.cau.cs.kieler.core.alg.IKielerProgressMonitor;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphFactory;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayouterInfo;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutOption;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutType;
+import de.cau.cs.kieler.core.kgraph.KNode;
+import de.cau.cs.kieler.kiml.layout.options.LayoutType;
 import de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider;
 
 
@@ -21,10 +18,11 @@ public class ZestSpringLayoutProvider extends AbstractLayoutProvider {
 	
 	public static final String LAYOUTER_NAME = "Zest Spring Layout";
 
-	/* (non-Javadoc)
-	 * @see de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider#doLayout(de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode)
+	/*
+	 * (non-Javadoc)
+	 * @see de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider#doLayout(de.cau.cs.kieler.core.kgraph.KNode, de.cau.cs.kieler.core.alg.IKielerProgressMonitor)
 	 */
-	public void doLayout(KLayoutNode layoutNode,
+	public void doLayout(KNode layoutNode,
 			IKielerProgressMonitor progressMonitor) throws KielerException {
 		SpringLayoutAlgorithm springAlgo = new SpringLayoutAlgorithm();
 		springAlgo.setRandom(false);
@@ -32,16 +30,25 @@ public class ZestSpringLayoutProvider extends AbstractLayoutProvider {
 		wrapper.doLayout(layoutNode, progressMonitor);
 	}
 
-	/* (non-Javadoc)
-	 * @see de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider#getLayouterInfo()
-	 */
-	public KLayouterInfo getLayouterInfo() {
-		KLayouterInfo info = KimlLayoutGraphFactory.eINSTANCE.createKLayouterInfo();
-		info.setLayouterName(LAYOUTER_NAME);
-		info.setLayoutType(KLayoutType.SPRING_MODEL);
-		info.setLayoutOption(KLayoutOption.DEFAULT);
-		info.setLayouterCollectionID(ZestAlgorithmWrapper.COLLECTION_NAME);
-		return info;
-	}
+    /* (non-Javadoc)
+     * @see de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider#getCollection()
+     */
+    public String getCollection() {
+        return ZestAlgorithmWrapper.COLLECTION_NAME;
+    }
+
+    /* (non-Javadoc)
+     * @see de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider#getName()
+     */
+    public String getName() {
+        return LAYOUTER_NAME;
+    }
+
+    /* (non-Javadoc)
+     * @see de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider#getType()
+     */
+    public LayoutType getType() {
+        return LayoutType.SPRING;
+    }
 
 }

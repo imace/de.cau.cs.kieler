@@ -27,13 +27,10 @@ import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditor;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramGraphicalViewer;
 import org.eclipse.jface.viewers.IStructuredSelection;
 
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLabel;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutGraph;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeLabel;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPortLabel;
+import de.cau.cs.kieler.core.kgraph.KEdge;
+import de.cau.cs.kieler.core.kgraph.KLabel;
+import de.cau.cs.kieler.core.kgraph.KNode;
+import de.cau.cs.kieler.core.kgraph.KPort;
 import de.cau.cs.kieler.kiml.layout.util.KimlLayoutUtil;
 import de.cau.cs.kieler.kiml.ui.provider.KimlAdapterFactoryLabelProvider;
 
@@ -68,21 +65,21 @@ public abstract class KimlAbstractLayoutGraphBuilder {
 	public static final String ATTRIBUTE_ICON = "icon";
 
 	/* the mappings of KLayoutGraph LAYOUT elements to EditParts */
-	protected Map<KLayoutNode, GraphicalEditPart> layoutNode2EditPart = new HashMap<KLayoutNode, GraphicalEditPart>();
-	protected Map<KLayoutEdge, ConnectionEditPart> layoutEdge2EditPart = new HashMap<KLayoutEdge, ConnectionEditPart>();
-	protected Map<KLayoutPort, GraphicalEditPart> layoutPort2EditPart = new HashMap<KLayoutPort, GraphicalEditPart>();
+	protected Map<KNode, GraphicalEditPart> layoutNode2EditPart = new HashMap<KNode, GraphicalEditPart>();
+	protected Map<KEdge, ConnectionEditPart> layoutEdge2EditPart = new HashMap<KEdge, ConnectionEditPart>();
+	protected Map<KPort, GraphicalEditPart> layoutPort2EditPart = new HashMap<KPort, GraphicalEditPart>();
 
 	/* the mappings of KLayoutGraph LABEL elements to LabelEditParts */
-	protected Map<KNodeLabel, LabelEditPart> nodeLabel2EditPart = new HashMap<KNodeLabel, LabelEditPart>();
-	protected Map<KEdgeLabel, LabelEditPart> edgeLabel2EditPart = new HashMap<KEdgeLabel, LabelEditPart>();
-	protected Map<KPortLabel, LabelEditPart> portLabel2EditPart = new HashMap<KPortLabel, LabelEditPart>();
+	protected Map<KLabel, LabelEditPart> nodeLabel2EditPart = new HashMap<KLabel, LabelEditPart>();
+	protected Map<KLabel, LabelEditPart> edgeLabel2EditPart = new HashMap<KLabel, LabelEditPart>();
+	protected Map<KLabel, LabelEditPart> portLabel2EditPart = new HashMap<KLabel, LabelEditPart>();
 
 	/*
 	 * the layoutRootPart where the layout should start with and an instance of
 	 * the layout graph
 	 */
 	protected GraphicalEditPart layoutRootPart;
-	protected KLayoutGraph layoutGraph;
+	protected KNode layoutGraph;
 
 	/*
 	 * can be used during the building of the KLayoutGraph to obtain nicer
@@ -135,7 +132,7 @@ public abstract class KimlAbstractLayoutGraphBuilder {
 		edgeLabel2EditPart.clear();
 		portLabel2EditPart.clear();
 		layoutRootPart = getLayoutRootPart(target);
-		layoutGraph = KimlLayoutUtil.createInitializedLayoutGraph();
+		layoutGraph = KimlLayoutUtil.createInitializedNode();
 
 		doBuildLayoutGraph();
 

@@ -1,11 +1,11 @@
 package de.cau.cs.kieler.kiml.ui.views;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
@@ -14,8 +14,8 @@ import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.ui.part.ViewPart;
 
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutType;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayouterInfo;
+import de.cau.cs.kieler.kiml.layout.options.LayoutType;
+import de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider;
 import de.cau.cs.kieler.kiml.layout.services.KimlLayoutServices;
 
 public class KimlLayoutView extends ViewPart {
@@ -29,8 +29,12 @@ public class KimlLayoutView extends ViewPart {
     @Override
     public void createPartControl(Composite parent) {
         
-        List<KLayouterInfo> layouters = KimlLayoutServices.getInstance().getEnabledLayouterInfos();
-        List<KLayoutType> types = KimlLayoutServices.getInstance().getEnabledLayoutTypes();
+        List<AbstractLayoutProvider> layouters = KimlLayoutServices.getInstance().getEnabledProviders();
+        List<LayoutType> types = new LinkedList<LayoutType>();
+        for (AbstractLayoutProvider provider : layouters) {
+            if (!types.contains(provider.getType()))
+                types.add(provider.getType());
+        }
         
         Group layoutGroup = new Group(parent, SWT.NONE);
         layoutGroup.setText("Layouters");
@@ -40,14 +44,14 @@ public class KimlLayoutView extends ViewPart {
         
         layoutTree = new Tree(layoutGroup, SWT.BORDER);   
         
-        for (KLayoutType layoutType : types) {
+        for (LayoutType layoutType : types) {
             TreeItem typeTreeItem = new TreeItem(layoutTree, SWT.NONE);
-            typeTreeItem.setText(layoutType.getName());
+            typeTreeItem.setText(layoutType.toString());
             
-            for (KLayouterInfo layouter : layouters) {
-                if ( layouter.getLayoutType().equals(layoutType) ){
+            for (AbstractLayoutProvider layouter : layouters) {
+                if (layouter.getType().equals(layoutType) ){
                     TreeItem ti = new TreeItem(typeTreeItem, SWT.NONE);
-                    ti.setText(layouter.getLayouterName());
+                    ti.setText(layouter.getName());
                 }
             }
         }
@@ -67,7 +71,7 @@ public class KimlLayoutView extends ViewPart {
 
     @Override
     public void setFocus() {
-        // TODO Auto-generated method stub
+        layoutTree.setFocus();
     }
     
     void setExpanded(boolean state){
@@ -76,17 +80,19 @@ public class KimlLayoutView extends ViewPart {
         }
     }
     
-    public KLayouterInfo getSelectedLayouter(){
+    public AbstractLayoutProvider getSelectedLayouter(){
         TreeItem items[] = layoutTree.getSelection();
         if(items.length >= 1){
             String layouterName = items[0].getText();
-            KLayouterInfo info = KimlLayoutServices.getInstance().getLayouterInfoForLayouterName(layouterName); 
-            if(info.getLayouterName() == null){
-                List<KLayouterInfo> ls = KimlLayoutServices.getInstance().getLayouterInfosForType(layouterName);
+            AbstractLayoutProvider provider = KimlLayoutServices.getInstance()
+                    .getLayoutProvider(layouterName); 
+            if (provider.getName() == null) {
+                List<AbstractLayoutProvider> ls = KimlLayoutServices.getInstance()
+                        .getEnabledProviders(provider.getType());
                 if(ls.size() >= 1)
-                    info = ls.get(0); // select some layouter from the possible types
+                    provider = ls.get(0); // select some layouter from the possible types
             }
-            return info; 
+            return provider; 
         }
         return null;
     }

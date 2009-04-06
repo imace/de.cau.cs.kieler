@@ -14,24 +14,20 @@
 package de.cau.cs.kieler.kiml.layout.options;
 
 /**
- * Definition of port constraints.
+ * Definition of placement positions for edge labels.
  * 
  * @author msp
  */
-public enum PortConstraints {
+public enum EdgeLabelPlacement {
 
-    /** undefined constraints */
+    /** undefined label placement */
     UNDEFINED,
-    /** all ports are free */
-    FREE_PORTS,
-    /** the side is fixed for each port */
-    FIXED_SIDE,
-    /** the side is fixed for each port, and the order of ports
-     * is fixed for each side
-     */
-    FIXED_ORDER,
-    /** the exact position is fixed for each port */
-    FIXED_POS;
+    /** label is centered on the edge */
+    CENTER,
+    /** label is at the head (target) of the edge */
+    HEAD,
+    /** label is at the tail (source) of the edge */
+    TAIL;
     
     /**
      * Returns the enumeration value related to the given ordinal.
@@ -39,7 +35,7 @@ public enum PortConstraints {
      * @param i ordinal value
      * @return the related enumeration value
      */
-    public static PortConstraints valueOf(int i) {
+    public static EdgeLabelPlacement valueOf(int i) {
         return values()[i];
     }
     

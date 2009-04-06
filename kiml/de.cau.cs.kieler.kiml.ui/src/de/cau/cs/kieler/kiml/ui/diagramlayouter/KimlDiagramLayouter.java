@@ -193,8 +193,8 @@ public final class KimlDiagramLayouter {
 				StatusManager.getManager().handle(status, StatusManager.LOG);
 			}
 			// handle errors from the Progress monitor thread
-			if(stati != null && !stati.isEmpty()){
-				for (IStatus status : stati){ 
+			if (stati != null && !stati.isEmpty()) {
+				for (IStatus status : stati) { 
 					StatusManager.getManager().handle(status, StatusManager.SHOW);
 					StatusManager.getManager().handle(status, StatusManager.LOG);
 				}
@@ -282,8 +282,7 @@ public final class KimlDiagramLayouter {
 			if (layoutEngine != null
 					&& layoutEngine.getLastLayoutProvider() != null)
 				message += " ("
-						+ layoutEngine.getLastLayoutProvider()
-								.getLayouterInfo().getLayouterName() + ")";
+						+ layoutEngine.getLastLayoutProvider().getName() + ")";
 			Status status = new Status(IStatus.ERROR,
 					KimlUiPlugin.PLUGIN_ID, message, exception);
 			return status;

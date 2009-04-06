@@ -62,6 +62,15 @@ public interface KLayoutDataFactory extends EFactory {
     KPoint createKPoint();
 
     /**
+     * Returns a new object of class '<em>KInsets</em>'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return a new object of class '<em>KInsets</em>'.
+     * @generated
+     */
+    KInsets createKInsets();
+
+    /**
      * Returns the package supported by this factory.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->

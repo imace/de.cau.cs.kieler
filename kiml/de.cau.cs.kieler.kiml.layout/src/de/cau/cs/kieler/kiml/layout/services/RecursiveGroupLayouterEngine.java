@@ -15,8 +15,7 @@ package de.cau.cs.kieler.kiml.layout.services;
 
 import de.cau.cs.kieler.core.KielerException;
 import de.cau.cs.kieler.core.alg.IKielerProgressMonitor;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutGraph;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
+import de.cau.cs.kieler.core.kgraph.KNode;
 
 /**
  * One possible implementation to cope with hierarchy in a KLayoutGraph, though
@@ -39,9 +38,9 @@ public class RecursiveGroupLayouterEngine extends
 	
 	/*
 	 * (non-Javadoc)
-	 * @see de.cau.cs.kieler.kiml.layout.services.AbstractLayouterEngine#layout(de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutGraph, de.cau.cs.kieler.core.alg.IKielerProgressMonitor)
+	 * @see de.cau.cs.kieler.kiml.layout.services.AbstractLayouterEngine#layout(de.cau.cs.kieler.core.kgraph.KNode, de.cau.cs.kieler.core.alg.IKielerProgressMonitor)
 	 */
-	public void layout(KLayoutGraph layoutGraph,
+	public void layout(KNode layoutGraph,
 			IKielerProgressMonitor progressMonitor) throws KielerException {
 		lastLayoutProvider = null;
 		int nodeCount = countNodes(layoutGraph);
@@ -55,20 +54,20 @@ public class RecursiveGroupLayouterEngine extends
 	 * Recursive function to enable hierarchically layout. The leafs are laid
 	 * out first to use the size information gained in the level above.
 	 * 
-	 * @param layoutNode the KLayoutNode with sub KLayoutNodes to be laid out
+	 * @param layoutNode the node with children to be laid out
 	 * @param progressMonitor monitor used to keep track of progress
 	 * @throws KielerException if one of the layout providers fails
 	 */
-	private void layoutRecursively(KLayoutNode layoutNode,
+	private void layoutRecursively(KNode layoutNode,
 			IKielerProgressMonitor progressMonitor) throws KielerException {
-		for (KLayoutNode childNodes : layoutNode.getChildNodes()) {
-			layoutRecursively(childNodes, progressMonitor);
+		for (KNode child : layoutNode.getChildren()) {
+			layoutRecursively(child, progressMonitor);
 		}
 
-		if (!layoutNode.getChildNodes().isEmpty()) {
+		if (!layoutNode.getChildren().isEmpty()) {
 			lastLayoutProvider = layoutServices.getLayoutProvider(layoutNode);
 			lastLayoutProvider.doLayout(layoutNode,
-					progressMonitor.subTask(layoutNode.getChildNodes().size()));
+					progressMonitor.subTask(layoutNode.getChildren().size()));
 		}
 	}
 	
@@ -79,10 +78,10 @@ public class RecursiveGroupLayouterEngine extends
 	 * @param layoutNode parent layout node to examine
 	 * @return total number of child layout nodes
 	 */
-	private int countNodes(KLayoutNode layoutNode) {
-		int count = layoutNode.getChildNodes().size();
-		for (KLayoutNode childNode : layoutNode.getChildNodes()) {
-			if (!childNode.getChildNodes().isEmpty())
+	private int countNodes(KNode layoutNode) {
+		int count = layoutNode.getChildren().size();
+		for (KNode childNode : layoutNode.getChildren()) {
+			if (!childNode.getChildren().isEmpty())
 				count += countNodes(childNode);
 		}
 		return count;

@@ -20,7 +20,7 @@ import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.ui.part.ViewPart;
 
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutGraph;
+import de.cau.cs.kieler.core.kgraph.KNode;
 import de.cau.cs.kieler.kiml.viewer.Messages;
 import de.cau.cs.kieler.kiml.viewer.actions.GmfDebugGraphicsAction;
 import de.cau.cs.kieler.kiml.viewer.actions.ImageExportAction;
@@ -49,7 +49,7 @@ public class LayoutGraphView extends ViewPart {
 	private LayoutGraphCanvas preCanvas;
 	/** the canvas used to draw post-layout graphs */
 	private LayoutGraphCanvas postCanvas;
-	/** a debugging cancas to compare layout with GMF values */
+	/** a debugging canvas to compare layout with GMF values */
 	private GmfDebugCanvas compareCanvas;
 	/** New transparent "window" to display on top of the Eclipse window, i.e. the GMF editor */ 
 	TransparentShell transparentShell;
@@ -126,7 +126,7 @@ public class LayoutGraphView extends ViewPart {
 	 * @param post if true, the graph is displayed as 'post-layout', else
 	 *     it is displayed as 'pre-layout'
 	 */
-	public void setLayoutGraph(KLayoutGraph layoutGraph, boolean post) {
+	public void setLayoutGraph(KNode layoutGraph, boolean post) {
 		if (post)
 			postCanvas.setLayoutGraph(layoutGraph);
 		else
@@ -140,7 +140,7 @@ public class LayoutGraphView extends ViewPart {
          * @param post if true, the graph is displayed as 'post-layout', else
          *     it is displayed as 'pre-layout'
          */
-        public void setLayoutGraph(KLayoutGraph layoutGraph, int index) {
+        public void setLayoutGraph(KNode layoutGraph, int index) {
                 switch (index) {
                 case PRE:
                     preCanvas.setLayoutGraph(layoutGraph);

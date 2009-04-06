@@ -22,9 +22,6 @@
             class="de.cau.cs.kieler.kiml.layouter.zest.ZestSpringLayoutProvider">
       </kimlLayoutProvider>
       <kimlLayoutProvider
-            class="de.cau.cs.kieler.kiml.layouter.zest.ZestDirectedLayoutProvider">
-      </kimlLayoutProvider>
-      <kimlLayoutProvider
             class="de.cau.cs.kieler.kiml.layouter.zest.ZestGridLayoutProvider">
       </kimlLayoutProvider>
    </extension>

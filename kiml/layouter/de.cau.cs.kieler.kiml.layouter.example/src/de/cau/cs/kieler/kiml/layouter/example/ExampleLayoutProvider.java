@@ -11,11 +11,8 @@ package de.cau.cs.kieler.kiml.layouter.example;
 
 import de.cau.cs.kieler.core.KielerException;
 import de.cau.cs.kieler.core.alg.IKielerProgressMonitor;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphFactory;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayouterInfo;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutOption;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutType;
+import de.cau.cs.kieler.core.kgraph.KNode;
+import de.cau.cs.kieler.kiml.layout.options.LayoutType;
 import de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider;
 
 /**
@@ -38,14 +35,11 @@ import de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider;
  */
 public class ExampleLayoutProvider extends AbstractLayoutProvider {
 	
-	/* some Strings used here */
-	private final KLayoutType LAYOUT_PROVIDER_LAYOUT_TYPE = KLayoutType.OTHER;
-	private final KLayoutOption LAYOUT_PROVIDER_LAYOUT_OPTION = KLayoutOption.DEFAULT;
-
-	/* (non-Javadoc)
-	 * @see de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider#doLayout(de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode)
+	/*
+	 * (non-Javadoc)
+	 * @see de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider#doLayout(de.cau.cs.kieler.core.kgraph.KNode, de.cau.cs.kieler.core.alg.IKielerProgressMonitor)
 	 */
-	public void doLayout(KLayoutNode layoutNode,
+	public void doLayout(KNode layoutNode,
 			IKielerProgressMonitor progressMonitor) throws KielerException {
 		progressMonitor.begin("Example layout", 1);
 		ExampleLayouter el = new ExampleLayouter();
@@ -53,18 +47,25 @@ public class ExampleLayoutProvider extends AbstractLayoutProvider {
 		progressMonitor.done();
 	}
 
-	/* (non-Javadoc)
-	 * @see de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider#getLayouterInfo()
-	 */
-	public final KLayouterInfo getLayouterInfo() {
+    /* (non-Javadoc)
+     * @see de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider#getCollection()
+     */
+    public String getCollection() {
+        return Activator.LAYOUT_PROVIDER_COLLECTION_ID;
+    }
 
-		KLayouterInfo info = KimlLayoutGraphFactory.eINSTANCE
-				.createKLayouterInfo();
-		info.setLayouterName(Activator.LAYOUT_PROVIDER_NAME);
-		info.setLayoutType(LAYOUT_PROVIDER_LAYOUT_TYPE);
-		info.setLayoutOption(LAYOUT_PROVIDER_LAYOUT_OPTION);
-		info.setLayouterCollectionID(Activator.LAYOUT_PROVIDER_COLLECTION_ID);
-		return info;
-	}
+    /* (non-Javadoc)
+     * @see de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider#getName()
+     */
+    public String getName() {
+        return Activator.LAYOUT_PROVIDER_NAME;
+    }
+
+    /* (non-Javadoc)
+     * @see de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider#getType()
+     */
+    public LayoutType getType() {
+        return LayoutType.OTHER;
+    }
 
 }

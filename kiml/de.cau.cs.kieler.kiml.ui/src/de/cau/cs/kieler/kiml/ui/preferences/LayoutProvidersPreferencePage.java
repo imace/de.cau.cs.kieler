@@ -13,7 +13,7 @@
  */
 package de.cau.cs.kieler.kiml.ui.preferences;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
 import org.eclipse.jface.preference.RadioGroupFieldEditor;
@@ -23,6 +23,7 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
+import de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider;
 import de.cau.cs.kieler.kiml.layout.services.KimlLayoutServices;
 import de.cau.cs.kieler.kiml.layout.util.KimlLayoutPreferenceConstants;
 import de.cau.cs.kieler.kiml.ui.KimlUiPlugin;
@@ -81,25 +82,23 @@ public class LayoutProvidersPreferencePage extends FieldEditorPreferencePage
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.ui.IWorkbenchPreferencePage#init(org.eclipse.ui.IWorkbench)
+	 * @see org.eclipse.ui.IWorkbenchPreferencePage#init(org.eclipse.ui.IWorkbench)
 	 */
 	public void init(IWorkbench workbench) {
 	}
 
-	/*
+	/**
 	 * returns a string matrix as needed from a RadioGroupFieldEditor with the
 	 * currently enabled layout provider
 	 */
 	private String[][] getAvailableLayouterNames() {
-		ArrayList<String> names = KimlLayoutServices.getInstance()
-				.getEnabledLayouterNames();
-		String[][] options = new String[names.size()][2];
+		List<AbstractLayoutProvider> providers = KimlLayoutServices.getInstance()
+		        .getEnabledProviders();
+		String[][] options = new String[providers.size()][2];
 
 		for (int i = 0; i < options.length; i++) {
-			options[i][0] = names.get(i);
-			options[i][1] = names.get(i);
+			options[i][0] = providers.get(i).getName();
+			options[i][1] = providers.get(i).getName();
 		}
 		return options;
 	}

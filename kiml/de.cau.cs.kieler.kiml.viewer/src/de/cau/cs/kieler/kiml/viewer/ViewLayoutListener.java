@@ -21,7 +21,7 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 
 import de.cau.cs.kieler.core.alg.IKielerProgressMonitor;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutGraph;
+import de.cau.cs.kieler.core.kgraph.KNode;
 import de.cau.cs.kieler.kiml.layout.services.ILayoutListener;
 import de.cau.cs.kieler.kiml.viewer.views.ExecutionView;
 import de.cau.cs.kieler.kiml.viewer.views.LayoutGraphView;
@@ -42,12 +42,11 @@ public class ViewLayoutListener implements ILayoutListener {
 	/* (non-Javadoc)
 	 * @see de.cau.cs.kieler.kiml.layout.services.ILayoutListener#layoutRequested(de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutGraph)
 	 */
-	public void layoutRequested(KLayoutGraph layoutGraph) {
+	public void layoutRequested(KNode layoutGraph) {
 		findViews();
 		if (layoutGraphView != null) {
-			//layoutGraphView.setLayoutGraph(LayoutGraphCloner
-			//		.cloneLayoutGraph(layoutGraph), false);
-			layoutGraphView.setLayoutGraph(this.cloneKLayoutGraph(layoutGraph),LayoutGraphView.PRE);
+			layoutGraphView.setLayoutGraph(cloneLayoutGraph(layoutGraph),
+			        LayoutGraphView.PRE);
 			// the last post-layout graph is deleted to avoid inconsistent graphs
 			layoutGraphView.setLayoutGraph(null, LayoutGraphView.POST);
 		}
@@ -57,13 +56,12 @@ public class ViewLayoutListener implements ILayoutListener {
 	 * (non-Javadoc)
 	 * @see de.cau.cs.kieler.kiml.layout.services.ILayoutListener#layoutPerformed(de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutGraph, de.cau.cs.kieler.core.alg.IKielerProgressMonitor)
 	 */
-	public void layoutPerformed(KLayoutGraph layoutGraph,
+	public void layoutPerformed(KNode layoutGraph,
 			IKielerProgressMonitor monitor) {
 		findViews();
 		if (layoutGraphView != null) {
-			//layoutGraphView.setLayoutGraph(LayoutGraphCloner
-			//		.cloneLayoutGraph(layoutGraph), true);
-			layoutGraphView.setLayoutGraph(this.cloneKLayoutGraph(layoutGraph),LayoutGraphView.POST);
+			layoutGraphView.setLayoutGraph(this.cloneLayoutGraph(layoutGraph),
+			        LayoutGraphView.POST);
 		}
 		if (executionView != null) {
 			executionView.addExecution(monitor);
@@ -93,9 +91,15 @@ public class ViewLayoutListener implements ILayoutListener {
 			executionView = (ExecutionView)viewPart;
 	}
 	
-	private KLayoutGraph cloneKLayoutGraph(KLayoutGraph input){
+	/**
+	 * Clones an instance of a layout graph.
+	 * 
+	 * @param input parent node to clone
+	 * @return a cloned instance
+	 */
+	private KNode cloneLayoutGraph(KNode input){
 		EObject result = EcoreUtil.copy(input);
-		return (KLayoutGraph) result;
+		return (KNode) result;
 	}
 
 }

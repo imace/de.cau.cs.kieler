@@ -38,6 +38,7 @@ package de.cau.cs.kieler.kiml.layout.klayoutdata;
 public interface KShapeLayout extends KLayoutData {
     /**
      * Returns the value of the '<em><b>Xpos</b></em>' attribute.
+     * The default value is <code>"0.0f"</code>.
      * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Xpos</em>' attribute isn't clear,
@@ -47,7 +48,7 @@ public interface KShapeLayout extends KLayoutData {
      * @return the value of the '<em>Xpos</em>' attribute.
      * @see #setXpos(float)
      * @see de.cau.cs.kieler.kiml.layout.klayoutdata.KLayoutDataPackage#getKShapeLayout_Xpos()
-     * @model
+     * @model default="0.0f"
      * @generated
      */
     float getXpos();
@@ -64,6 +65,7 @@ public interface KShapeLayout extends KLayoutData {
 
     /**
      * Returns the value of the '<em><b>Ypos</b></em>' attribute.
+     * The default value is <code>"0.0f"</code>.
      * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Ypos</em>' attribute isn't clear,
@@ -73,7 +75,7 @@ public interface KShapeLayout extends KLayoutData {
      * @return the value of the '<em>Ypos</em>' attribute.
      * @see #setYpos(float)
      * @see de.cau.cs.kieler.kiml.layout.klayoutdata.KLayoutDataPackage#getKShapeLayout_Ypos()
-     * @model
+     * @model default="0.0f"
      * @generated
      */
     float getYpos();
@@ -90,6 +92,7 @@ public interface KShapeLayout extends KLayoutData {
 
     /**
      * Returns the value of the '<em><b>Width</b></em>' attribute.
+     * The default value is <code>"0.0f"</code>.
      * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Width</em>' attribute isn't clear,
@@ -99,7 +102,7 @@ public interface KShapeLayout extends KLayoutData {
      * @return the value of the '<em>Width</em>' attribute.
      * @see #setWidth(float)
      * @see de.cau.cs.kieler.kiml.layout.klayoutdata.KLayoutDataPackage#getKShapeLayout_Width()
-     * @model
+     * @model default="0.0f"
      * @generated
      */
     float getWidth();
@@ -116,6 +119,7 @@ public interface KShapeLayout extends KLayoutData {
 
     /**
      * Returns the value of the '<em><b>Height</b></em>' attribute.
+     * The default value is <code>"0.0f"</code>.
      * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Height</em>' attribute isn't clear,
@@ -125,7 +129,7 @@ public interface KShapeLayout extends KLayoutData {
      * @return the value of the '<em>Height</em>' attribute.
      * @see #setHeight(float)
      * @see de.cau.cs.kieler.kiml.layout.klayoutdata.KLayoutDataPackage#getKShapeLayout_Height()
-     * @model
+     * @model default="0.0f"
      * @generated
      */
     float getHeight();

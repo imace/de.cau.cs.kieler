@@ -18,7 +18,6 @@ import java.util.Iterator;
 import org.eclipse.draw2d.Connection;
 import org.eclipse.draw2d.ConnectionLayer;
 import org.eclipse.draw2d.ConnectionLocator;
-import org.eclipse.draw2d.Figure;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.PositionConstants;
 import org.eclipse.draw2d.geometry.Dimension;
@@ -56,15 +55,15 @@ import org.eclipse.gmf.runtime.emf.core.util.EObjectAdapter;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.swt.SWT;
 
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLabel;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLabelLayout;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLayout;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNodeLayout;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPoint;
+import de.cau.cs.kieler.core.kgraph.KEdge;
+import de.cau.cs.kieler.core.kgraph.KLabel;
+import de.cau.cs.kieler.core.kgraph.KNode;
+import de.cau.cs.kieler.core.kgraph.KPort;
+import de.cau.cs.kieler.kiml.layout.klayoutdata.KEdgeLayout;
+import de.cau.cs.kieler.kiml.layout.klayoutdata.KPoint;
+import de.cau.cs.kieler.kiml.layout.klayoutdata.KShapeLayout;
 import de.cau.cs.kieler.kiml.layout.util.KimlLayoutPreferenceConstants;
+import de.cau.cs.kieler.kiml.layout.util.KimlLayoutUtil;
 import de.cau.cs.kieler.kiml.ui.KimlUiPlugin;
 import de.cau.cs.kieler.kiml.ui.helpers.KimlLabelHelper;
 import de.cau.cs.kieler.kiml.ui.helpers.KimlMetricsHelper;
@@ -166,17 +165,17 @@ public class KimlGenericLayoutGraphApplier extends
      */
     private CompoundCommand doApplyNodeLayout() {
         CompoundCommand nodesCompoundCommand = new CompoundCommand();
-        for (KLayoutNode layoutNode : layoutNode2EditPart.keySet()) {
+        for (KNode layoutNode : layoutNode2EditPart.keySet()) {
             GraphicalEditPart nodeEditPart = layoutNode2EditPart
                     .get(layoutNode);
-            KNodeLayout nodeLayout = layoutNode.getLayout();
+            KShapeLayout nodeLayout = KimlLayoutUtil.getShapeLayout(layoutNode);
             ChangeBoundsRequest changeBoundsRequest = new ChangeBoundsRequest(
                     RequestConstants.REQ_RESIZE);
             changeBoundsRequest.setEditParts(nodeEditPart);
 
             Dimension oldSize = nodeEditPart.getFigure().getBounds().getSize();
             PrecisionDimension newSize = new PrecisionDimension(nodeLayout
-                    .getSize().getWidth(), nodeLayout.getSize().getHeight());
+                    .getWidth(), nodeLayout.getHeight());
 
             Dimension sizeDelta = new PrecisionDimension(newSize.preciseWidth
                     - oldSize.width, newSize.preciseHeight - oldSize.height);
@@ -186,7 +185,7 @@ public class KimlGenericLayoutGraphApplier extends
             Point oldLocation = nodeEditPart.getFigure().getBounds()
                     .getLocation();
             PrecisionPoint newLocation = new PrecisionPoint(nodeLayout
-                    .getLocation().getX(), nodeLayout.getLocation().getY());
+                    .getXpos(), nodeLayout.getYpos());
 
             Point moveDelta = new PrecisionPoint(newLocation.preciseX
                     - oldLocation.x, newLocation.preciseY - oldLocation.y);
@@ -207,11 +206,12 @@ public class KimlGenericLayoutGraphApplier extends
      * 
      * @return A CompoundCommand which lays out the ports of the diagram
      */
+    @SuppressWarnings("unchecked")
     private CompoundCommand doApplyPortLayout() {
         CompoundCommand portsCompoundCommand = new CompoundCommand();
-        for (KLayoutPort port : layoutPort2EditPart.keySet()) {
+        for (KPort port : layoutPort2EditPart.keySet()) {
             GraphicalEditPart portEditPart = layoutPort2EditPart.get(port);
-            KPoint portLocation = port.getLayout().getLocation();
+            KShapeLayout portLayout = KimlLayoutUtil.getShapeLayout(port);
             Point nodeLocation = layoutNode2EditPart.get(port.getNode())
                     .getFigure().getBounds().getLocation();
             ChangeBoundsRequest changeBoundsRequest = new ChangeBoundsRequest(
@@ -220,8 +220,8 @@ public class KimlGenericLayoutGraphApplier extends
 
             Point oldLocation = portEditPart.getFigure().getBounds()
                     .getLocation();
-            PrecisionPoint newLocation = new PrecisionPoint(portLocation.getX()
-                    + nodeLocation.x, portLocation.getY() + nodeLocation.y);
+            PrecisionPoint newLocation = new PrecisionPoint(portLayout.getXpos()
+                    + nodeLocation.x, portLayout.getYpos() + nodeLocation.y);
 
             Point moveDelta = new PrecisionPoint(newLocation.preciseX
                     - oldLocation.x, newLocation.preciseY - oldLocation.y);
@@ -247,7 +247,7 @@ public class KimlGenericLayoutGraphApplier extends
      */
     private CompoundCommand doApplyEdgeLayout() {
         final CompoundCommand edgesCompoundCommand = new CompoundCommand();
-        for (KLayoutEdge edge : layoutEdge2EditPart.keySet()) {
+        for (KEdge edge : layoutEdge2EditPart.keySet()) {
             ConnectionEditPart connectionEditPart = layoutEdge2EditPart
                     .get(edge);
 
@@ -292,8 +292,8 @@ public class KimlGenericLayoutGraphApplier extends
      *            the KLayoutEdge that stores the new bendpoints
      * @return PointList with the new bendpoints
      */
-    private PointList getBendpoints(KLayoutEdge edge) {
-        KEdgeLayout edgeLayout = edge.getLayout();
+    private PointList getBendpoints(KEdge edge) {
+        KEdgeLayout edgeLayout = KimlLayoutUtil.getEdgeLayout(edge);
         PointList pointList = new PointList();
 
         // set start point
@@ -327,7 +327,7 @@ public class KimlGenericLayoutGraphApplier extends
      *               translation between the coordinate systems.
      * @return
      */
-    private PointList getAbsoluteBendPoints(KLayoutEdge edge, IFigure source){
+    private PointList getAbsoluteBendPoints(KEdge edge, IFigure source){
         PointList bendPoints = getBendpoints(edge);
         PointList absolutePoints = new PointList();
         
@@ -376,9 +376,9 @@ public class KimlGenericLayoutGraphApplier extends
      */
     private CompoundCommand doApplyEdgeLabelLayout() {
         CompoundCommand edgeLabelsCompoundCommand = new CompoundCommand();
-        for (KEdgeLabel edgeLabel : edgeLabel2EditPart.keySet()) {
+        for (KLabel edgeLabel : edgeLabel2EditPart.keySet()) {
             LabelEditPart edgeLabelEditPart = edgeLabel2EditPart.get(edgeLabel);
-            KEdgeLabelLayout edgeLabelLayout = edgeLabel.getLabelLayout();
+            KShapeLayout edgeLabelLayout = KimlLayoutUtil.getShapeLayout(edgeLabel);
             ChangeBoundsRequest changeBoundsRequest = new ChangeBoundsRequest(
                     RequestConstants.REQ_MOVE);
             changeBoundsRequest.setEditParts(edgeLabelEditPart);
@@ -409,8 +409,8 @@ public class KimlGenericLayoutGraphApplier extends
                             .getSource();
                     sourceFigure = sourceEditPart.getFigure();
                 }
-                Point labelLocation = KimlMetricsHelper
-                        .kPoint2Point(edgeLabelLayout.getLocation());
+                Point labelLocation = new Point(edgeLabelLayout.getXpos(),
+                        edgeLabelLayout.getYpos());
 
                 /**
                  * HACK IF THE LAYOUT ALG. DOES NOT PROVIDE VALID LABEL POS, USE
@@ -452,8 +452,8 @@ public class KimlGenericLayoutGraphApplier extends
                 // Command
 
                 // get NEW bend points for the parent edge
-                PointList parentBendPoints = getAbsoluteBendPoints(edgeLabel
-                        .getParentEdge(), sourceFigure);
+                PointList parentBendPoints = getAbsoluteBendPoints(
+                        (KEdge)edgeLabel.getParent(), sourceFigure);
                 // get the referencePoint for the label in the future
                 Point refPoint = PointListUtilities
                         .calculatePointRelativeToLine(parentBendPoints, 0,
@@ -505,10 +505,7 @@ public class KimlGenericLayoutGraphApplier extends
 
     /*
      * (non-Javadoc)
-     * 
-     * @see
-     * de.cau.cs.kieler.kiml.ui.diagramlayouter.KimlAbstractLayoutGraphApplier
-     * #updatePreferences()
+     * @see de.cau.cs.kieler.kiml.ui.diagramlayouter.KimlAbstractLayoutGraphApplier#updatePreferences()
      */
     protected void updatePreferences() {
 
@@ -553,7 +550,7 @@ public class KimlGenericLayoutGraphApplier extends
      * @param target
      *            target node
      * @param cep
-     *            connection editpart
+     *            connection edit part
      * @param diffX
      *            x axis offset
      * @param diffY
@@ -563,7 +560,7 @@ public class KimlGenericLayoutGraphApplier extends
      */
     protected LineSeg addAnchorsCommands(CompoundCommand cc,
             Point sourceAnchorLocation, Point targetAnchorLocation,
-            KLayoutEdge edge) {
+            KEdge edge) {
         ConnectionEditPart cep = layoutEdge2EditPart.get(edge);
 
         // Edit Parts that the connection should dock to
@@ -573,60 +570,51 @@ public class KimlGenericLayoutGraphApplier extends
         Rectangle sourceExt = null;
         Rectangle targetExt = null;
 
-        KLayoutNode sourceNode = edge.getSource();
-        KLayoutNode targetNode = edge.getTarget();
+        KNode sourceNode = edge.getSource();
+        KShapeLayout sourceLayout = KimlLayoutUtil.getShapeLayout(sourceNode);
+        KNode targetNode = edge.getTarget();
+        KShapeLayout targetLayout = KimlLayoutUtil.getShapeLayout(targetNode);
 
         /*
          * Set the EditPart at that the anchors should dock to the source and
-         * target nodes. In very special cases, these might be null. In that
-         * case a port will be used instead. This is the case for connections
-         * between hierarchy layers. TODO: We should think whether have null
-         * sources and targets really makes sense.
+         * target nodes.
          */
-        if (sourceNode != null) {
-            sourceEP = layoutNode2EditPart.get(sourceNode);
-            sourceExt = new Rectangle((int) sourceNode.getLayout()
-                    .getLocation().getX(), (int) sourceNode.getLayout()
-                    .getLocation().getY(), (int) sourceNode.getLayout()
-                    .getSize().getWidth(), (int) sourceNode.getLayout()
-                    .getSize().getHeight());
-        }
-        if (targetNode != null) {
-            targetEP = layoutNode2EditPart.get(targetNode);
-            targetExt = new Rectangle((int) targetNode.getLayout()
-                    .getLocation().getX(), (int) targetNode.getLayout()
-                    .getLocation().getY(), (int) targetNode.getLayout()
-                    .getSize().getWidth(), (int) targetNode.getLayout()
-                    .getSize().getHeight());
-        }
+        sourceEP = layoutNode2EditPart.get(sourceNode);
+        sourceExt = new Rectangle((int) sourceLayout.getXpos(),
+                (int) sourceLayout.getYpos(),
+                (int) sourceLayout.getWidth(),
+                (int) sourceLayout.getHeight());
+        targetEP = layoutNode2EditPart.get(targetNode);
+        targetExt = new Rectangle((int) targetLayout.getXpos(),
+                (int) targetLayout.getYpos(),
+                (int) targetLayout.getWidth(),
+                (int) targetLayout.getHeight());
 
         // determine whether we have ports or not
         // if yes, use ports instead of the nodes
-        KLayoutPort sourcePort = edge.getSourcePort();
-        KLayoutPort targetPort = edge.getTargetPort();
+        KPort sourcePort = edge.getSourcePort();
+        KPort targetPort = edge.getTargetPort();
         if (sourcePort != null) {
             // get the parent node because location of ports is relative to its
             // parent
-            KLayoutNode parentNode = sourcePort.getNode();
+            KShapeLayout portLayout = KimlLayoutUtil.getShapeLayout(sourcePort);
+            KNode parentNode = sourcePort.getNode();
+            KShapeLayout nodeLayout = KimlLayoutUtil.getShapeLayout(parentNode);
             sourceEP = layoutPort2EditPart.get(sourcePort);
-            sourceExt = new Rectangle((int) (sourcePort.getLayout()
-                    .getLocation().getX() + parentNode.getLayout()
-                    .getLocation().getX()), (int) (sourcePort.getLayout()
-                    .getLocation().getY() + parentNode.getLayout()
-                    .getLocation().getY()), (int) sourcePort.getLayout()
-                    .getSize().getWidth(), (int) sourcePort.getLayout()
-                    .getSize().getHeight());
+            sourceExt = new Rectangle((int) (portLayout.getXpos()
+                    + nodeLayout.getXpos()), (int) (portLayout.getYpos()
+                    + nodeLayout.getYpos()), (int) portLayout.getWidth(),
+                    (int) portLayout.getHeight());
         }
         if (targetPort != null) {
-            KLayoutNode parentNode = targetPort.getNode();
+            KShapeLayout portLayout = KimlLayoutUtil.getShapeLayout(targetPort);
+            KNode parentNode = targetPort.getNode();
+            KShapeLayout nodeLayout = KimlLayoutUtil.getShapeLayout(parentNode);
             targetEP = layoutPort2EditPart.get(targetPort);
-            targetExt = new Rectangle((int) (targetPort.getLayout()
-                    .getLocation().getX() + parentNode.getLayout()
-                    .getLocation().getX()), (int) (targetPort.getLayout()
-                    .getLocation().getY() + parentNode.getLayout()
-                    .getLocation().getY()), (int) targetPort.getLayout()
-                    .getSize().getWidth(), (int) targetPort.getLayout()
-                    .getSize().getHeight());
+            targetExt = new Rectangle((int) (portLayout.getXpos()
+                    + nodeLayout.getXpos()), (int) (portLayout.getYpos()
+                    + nodeLayout.getYpos()), (int) portLayout.getWidth(),
+                    (int) portLayout.getHeight());
         }
 
         // check whether any valid source and target was set
@@ -637,7 +625,7 @@ public class KimlGenericLayoutGraphApplier extends
         /*
          * If source or target anchor command won't be created or will be
          * non-executable, source or target reference point is assumed to be the
-         * geometric centre of a shape.
+         * geometric center of a shape.
          */
         Point resultantSourceAnchorReference = sourceExt.getCenter();
         Point resultantTargetAnchorReference = targetExt.getCenter();
@@ -775,7 +763,7 @@ public class KimlGenericLayoutGraphApplier extends
         if (cmd instanceof SetConnectionAnchorsCommand) {
             return (SetConnectionAnchorsCommand) cmd;
         } else if (cmd instanceof CompositeCommand) {
-            for (Iterator itr = ((CompositeCommand) cmd).listIterator(); itr
+            for (Iterator<?> itr = ((CompositeCommand) cmd).listIterator(); itr
                     .hasNext();) {
                 ICommand childCmd = (ICommand) itr.next();
                 SetConnectionAnchorsCommand setAnchorsCmd = findSetConnectionAnchorsCommand(childCmd);

@@ -11,7 +11,10 @@ package de.cau.cs.kieler.kiml.layouter.example;
 
 import org.eclipse.jface.preference.IPreferenceStore;
 
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
+import de.cau.cs.kieler.core.kgraph.KNode;
+import de.cau.cs.kieler.kiml.layout.klayoutdata.KInsets;
+import de.cau.cs.kieler.kiml.layout.klayoutdata.KShapeLayout;
+import de.cau.cs.kieler.kiml.layout.options.LayoutOptions;
 import de.cau.cs.kieler.kiml.layout.util.KimlLayoutUtil;
 import de.cau.cs.kieler.kiml.layouter.example.preferences.PreferenceConstants;
 
@@ -59,74 +62,54 @@ public class ExampleLayouter {
 	 * The nodes are laid out in a line with predefined spaces between them.
 	 * 
 	 * @param layoutNode
-	 *            The KLayoutNode to process
+	 *            The node to process
 	 */
-	public void visit(KLayoutNode layoutNode) {
+	public void visit(KNode layoutNode) {
 
 		/* return if nothing to do */
 		if (layoutNode == null)
 			return;
 
-		KLayoutNode previousGroup = KimlLayoutUtil.createInitializedLayoutNode();
+        KShapeLayout parentLayout = KimlLayoutUtil.getShapeLayout(layoutNode);
+		KInsets insets = LayoutOptions.getInsets(parentLayout);
+		float currentPos = 0.0f;
 
-		/*
-		 * Layout horizontal
-		 */
+		// layout horizontal
 		if (prefHorizontal) {
 			float maxHeight = 0f;
-			for (KLayoutNode child : layoutNode.getChildNodes()) {
-				child.getLayout().getLocation().setX(
-						previousGroup.getLayout().getLocation().getX()
-								+ previousGroup.getLayout().getSize()
-										.getWidth() + prefPadX);
-				child.getLayout().getLocation().setY(prefPadY);
+			for (KNode child : layoutNode.getChildren()) {
+			    KShapeLayout childLayout = KimlLayoutUtil.getShapeLayout(child);
+			    childLayout.setXpos(currentPos + prefPadX);
+			    childLayout.setYpos(prefPadY);
 
-				if (maxHeight < child.getLayout().getSize().getHeight())
-					maxHeight = child.getLayout().getSize().getHeight();
-				previousGroup = child;
-
+				if (maxHeight < childLayout.getHeight())
+					maxHeight = childLayout.getHeight();
+				currentPos = childLayout.getXpos() + childLayout.getWidth();
 			}
-			layoutNode.getLayout().getSize().setWidth(
-					previousGroup.getLayout().getSize().getWidth()
-							+ previousGroup.getLayout().getLocation().getX()
-							+ prefPadX
-							+ layoutNode.getLayout().getInsets().getLeft()
-							+ layoutNode.getLayout().getInsets().getRight());
-			layoutNode.getLayout().getSize().setHeight(
-					maxHeight + 2 * prefPadY
-							+ layoutNode.getLayout().getInsets().getBottom()
-							+ layoutNode.getLayout().getInsets().getTop());
+			parentLayout.setWidth(currentPos + prefPadX
+			        + insets.getLeft() + insets.getRight());
+			parentLayout.setHeight(maxHeight + 2 * prefPadY
+					+ insets.getTop() + insets.getBottom());
 		}
 
-		/*
-		 * Layout vertical
-		 */
+		// layout vertical
 		else {
 			float maxWidth = 0f;
-			for (KLayoutNode child : layoutNode.getChildNodes()) {
-				child.getLayout().getLocation().setY(
-						previousGroup.getLayout().getLocation().getY()
-								+ previousGroup.getLayout().getSize()
-										.getHeight() + prefPadY);
-				child.getLayout().getLocation().setX(prefPadX);
+			for (KNode child : layoutNode.getChildren()) {
+			    KShapeLayout childLayout = KimlLayoutUtil.getShapeLayout(child);
+			    childLayout.setYpos(currentPos + prefPadY);
+			    childLayout.setXpos(prefPadX);
 
-				if (maxWidth < child.getLayout().getSize().getWidth())
-					maxWidth = child.getLayout().getSize().getWidth();
-				previousGroup = child;
-
+				if (maxWidth < childLayout.getWidth())
+					maxWidth = childLayout.getWidth();
+				currentPos = childLayout.getYpos() + childLayout.getHeight();
 			}
 
-			layoutNode.getLayout().getSize().setHeight(
-					previousGroup.getLayout().getSize().getHeight()
-							+ previousGroup.getLayout().getLocation().getY()
-							+ prefPadY
-							+ layoutNode.getLayout().getInsets().getBottom()
-							+ layoutNode.getLayout().getInsets().getTop());
+			parentLayout.setHeight(currentPos + prefPadY
+							+ insets.getTop() + insets.getBottom());
 
-			layoutNode.getLayout().getSize().setWidth(
-					maxWidth + 2 * prefPadX
-							+ layoutNode.getLayout().getInsets().getLeft()
-							+ layoutNode.getLayout().getInsets().getRight());
+			parentLayout.setWidth(maxWidth + 2 * prefPadX
+							+ insets.getLeft() + insets.getRight());
 		}
 	}
 

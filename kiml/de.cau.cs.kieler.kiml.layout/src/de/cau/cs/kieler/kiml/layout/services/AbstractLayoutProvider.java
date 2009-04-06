@@ -15,8 +15,8 @@ package de.cau.cs.kieler.kiml.layout.services;
 
 import de.cau.cs.kieler.core.KielerException;
 import de.cau.cs.kieler.core.alg.IKielerProgressMonitor;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayouterInfo;
+import de.cau.cs.kieler.core.kgraph.KNode;
+import de.cau.cs.kieler.kiml.layout.options.LayoutType;
 
 /**
  * Abstract class every concrete layout provider has to extend. Performs the
@@ -54,34 +54,34 @@ public abstract class AbstractLayoutProvider {
 	 * Layout providers must implement this method in which they perform the
 	 * actual layout process.
 	 * 
-	 * @param layoutNode the KLayoutNode which should be laid out
+	 * @param layoutNode the parent node which should be laid out
 	 * @param progressMonitor progress monitor used to keep track of progress
 	 * @throws KielerException if the method fails to perform layout for
 	 *     some reason, which should be specified in the exception
 	 */
-	public abstract void doLayout(KLayoutNode layoutNode,
+	public abstract void doLayout(KNode layoutNode,
 			IKielerProgressMonitor progressMonitor) throws KielerException;
 
 	/**
-	 * The implemented method should return a LAYOUT_INFO for the layout
-	 * provider. Information provided is:
-	 * <ul>
-	 * <li>Layouter Name</li>
-	 * <li>Layout Type</li>
-	 * <li>Layout option </i>
-	 * <li>Layouter Collection ID</li>
-	 * </ul>
+	 * Returns the name of this layout provider.
 	 * 
-	 * @return The KLayouterInfo for this layout provider
-	 * 
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayouterInfo
-	 *      KLayouterInfo
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutType
-	 *      KLayoutType
-	 * @see de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutOption
-	 *      KLayoutOption
+	 * @return the layouter name
 	 */
-	public abstract KLayouterInfo getLayouterInfo();
+	public abstract String getName();
+	
+	/**
+	 * Returns the type of this layout provider.
+	 * 
+	 * @return the layout type
+	 */
+	public abstract LayoutType getType();
+	
+	/**
+	 * Returns the collection name of this layout provider.
+	 * 
+	 * @return the collection name
+	 */
+	public abstract String getCollection();
 
 	/**
 	 * Sets the desired state of the layout provider. Layout Providers can for
@@ -90,7 +90,7 @@ public abstract class AbstractLayoutProvider {
 	 * @param state
 	 *            Boolean indicating the state to be set.
 	 */
-	public void setEnabled(boolean state) {
+	public final void setEnabled(boolean state) {
 		enabled = state;
 	}
 
@@ -99,7 +99,7 @@ public abstract class AbstractLayoutProvider {
 	 * 
 	 * @return true, if layouter is enabled
 	 */
-	public boolean isEnabled() {
+	public final boolean isEnabled() {
 		return enabled;
 	}
 }

@@ -18,6 +18,8 @@ Export-Package: de.cau.cs.kieler.kiml.layout.KimlLayoutGraph;uses:="org.eclipse.
    org.eclipse.emf.common.notify.impl,
    org.eclipse.emf.common.notify,
    de.cau.cs.kieler.kiml.layout.KimlLayoutGraph",
+ de.cau.cs.kieler.kiml.layout.klayoutdata,
+ de.cau.cs.kieler.kiml.layout.options,
  de.cau.cs.kieler.kiml.layout.services;
   uses:="org.eclipse.core.runtime,
    org.eclipse.ui,

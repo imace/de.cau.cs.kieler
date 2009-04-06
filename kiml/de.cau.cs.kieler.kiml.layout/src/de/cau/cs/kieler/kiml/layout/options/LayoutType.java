@@ -45,12 +45,44 @@ public enum LayoutType {
         this.name = name;
     }
     
-    /*
-     * (non-Javadoc)
-     * @see java.lang.Enum#toString()
+    /**
+     * Returns the name of this layout type.
+     * 
+     * @return the name of layout type
      */
     public String toString() {
         return name;
+    }
+    
+    /**
+     * Gets the layout type related to the given name.
+     * 
+     * @param name name of layout type
+     * @return the related type constant
+     */
+    public static LayoutType fromString(String name) {
+        if (name.equals("Orthogonal"))
+            return ORTHOGONAL;
+        else if (name.equals("Layered"))
+            return LAYERED;
+        else if (name.equals("Spring Embedder"))
+            return SPRING;
+        else if (name.equals("Circle"))
+            return CIRCLE;
+        else if (name.equals("Radial"))
+            return RADIAL;
+        else
+            return OTHER;
+    }
+    
+    /**
+     * Returns the enumeration value related to the given ordinal.
+     * 
+     * @param i ordinal value
+     * @return the related enumeration value
+     */
+    public static LayoutType valueOf(int i) {
+        return values()[i];
     }
     
 }

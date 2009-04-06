@@ -14,7 +14,6 @@
 package de.cau.cs.kieler.kiml.ui.properties.tabbed.sections;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.gef.EditPart;
@@ -32,9 +31,8 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.views.properties.tabbed.ITabbedPropertyConstants;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutType;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayouterInfo;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphPackage;
+import de.cau.cs.kieler.kiml.layout.options.LayoutType;
+import de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider;
 import de.cau.cs.kieler.kiml.layout.services.KimlLayoutServices;
 import de.cau.cs.kieler.kiml.ui.diagramlayouter.KimlDiagramLayouter;
 import de.cau.cs.kieler.kiml.ui.helpers.KimlGMFLayoutHintHelper;
@@ -150,16 +148,15 @@ public class KimlLayoutTypePropertySection extends
 			GraphicalEditPart editPart = getSemanticEditPart();
 			/* here Emma has a concrete layout provider */
 			if (stringValue.substring(0, 2).equals("  ")) {
-				KLayouterInfo layouterInfo = KimlLayoutServices.getInstance()
-						.getLayouterInfoForLayouterName(stringValue.trim());
+				AbstractLayoutProvider layouter = KimlLayoutServices.getInstance()
+						.getLayoutProvider(stringValue.trim());
 				KimlGMFLayoutHintHelper.setAllContainedElementsLayoutHints(
-						editPart, layouterInfo.getLayoutType(), layouterInfo
-								.getLayouterName());
+						editPart, layouter.getType(), layouter.getName());
 			}
 			/* she has just a layout type */
 			else {
 				KimlGMFLayoutHintHelper.setAllContainedElementsLayoutHints(
-						editPart, (KLayoutType.get(stringValue)), "");
+						editPart, (LayoutType.fromString(stringValue)), "");
 			}
 
 			performLayout();
@@ -183,18 +180,17 @@ public class KimlLayoutTypePropertySection extends
 			GraphicalEditPart editPart = getSemanticEditPart();
 			/* here Emma has a concrete layout provider */
 			if (stringValue.substring(0, 2).equals("  ")) {
-				KLayouterInfo layouterInfo = KimlLayoutServices.getInstance()
-						.getLayouterInfoForLayouterName(stringValue.trim());
+			    AbstractLayoutProvider layouter = KimlLayoutServices.getInstance()
+						.getLayoutProvider(stringValue.trim());
 				KimlGMFLayoutHintHelper.setContainedElementsLayoutHint(
-						editPart, layouterInfo.getLayoutType(), layouterInfo
-								.getLayouterName());
+						editPart, layouter.getType(), layouter.getName());
 			}
 			/* she has just a layout type */
 			else {
 				KimlGMFLayoutHintHelper
 						.unsetContainedElementsLayoutHint(editPart);
 				KimlGMFLayoutHintHelper.setContainedElementsLayoutType(
-						editPart, (KLayoutType.get(stringValue)));
+						editPart, (LayoutType.fromString(stringValue)));
 			}
 			performLayout();
 		}
@@ -241,7 +237,8 @@ public class KimlLayoutTypePropertySection extends
 	 * @see org.eclipse.ui.examples.views.properties.tabbed.hockeyleague.ui.properties.sections.AbstractEnumerationPropertySection#getFeature()
 	 */
 	protected EAttribute getFeature() {
-		return KimlLayoutGraphPackage.eINSTANCE.getKLayouterInfo_LayoutType();
+		// FIXME return KLayoutDataPackage.eINSTANCE.getKLayouterInfo_LayoutType();
+	    return null;
 	}
 
 	/**
@@ -254,7 +251,7 @@ public class KimlLayoutTypePropertySection extends
 			return "  " + layouterName;
 		} else {
 			return KimlGMFLayoutHintHelper.getContainedElementsLayoutType(
-					e2Gep.get(eObject)).getLiteral();
+					e2Gep.get(eObject)).toString();
 		}
 	}
 
@@ -285,26 +282,25 @@ public class KimlLayoutTypePropertySection extends
 	 * @see org.eclipse.ui.examples.views.properties.tabbed.hockeyleague.ui.properties.sections.AbstractEnumerationPropertySection#getEnumerationFeatureValues()
 	 */
 	protected String[] getEnumerationFeatureValues() {
-		List<KLayoutType> values = KLayoutType.VALUES;
 		ArrayList<String> valueList = new ArrayList<String>();
 
 		/* make sure default is always on the list */
-		valueList.add(KLayoutType.DEFAULT.getLiteral());
+		valueList.add(LayoutType.OTHER.toString());
 
 		/*
 		 * iterate through layout types and add the type as some kind of parent
 		 * section, and then add all the layout providers for this type
 		 */
-		for (KLayoutType value : values) {
+		for (LayoutType value : LayoutType.values()) {
 
 			/* add parent section delimiter */
-			valueList.add(value.getLiteral());
+			valueList.add(value.toString());
 			boolean somethingAdded = false;
-			for (KLayouterInfo layouterInfo : KimlLayoutServices.getInstance()
-					.getEnabledLayouterInfos()) {
-				/* add the layout provider with some identation */
-				if (layouterInfo.getLayoutType().equals(value)) {
-					valueList.add("  " + layouterInfo.getLayouterName());
+			for (AbstractLayoutProvider layouter : KimlLayoutServices.getInstance()
+					.getEnabledProviders()) {
+				/* add the layout provider with some indentation */
+				if (layouter.getType().equals(value)) {
+					valueList.add("  " + layouter.getName());
 					somethingAdded = true;
 				}
 			}

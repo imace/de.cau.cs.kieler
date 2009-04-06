@@ -13,7 +13,7 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.statushandlers.StatusManager;
 
 import de.cau.cs.kieler.core.KielerException;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayouterInfo;
+import de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider;
 import de.cau.cs.kieler.kiml.ui.KimlUiPlugin;
 import de.cau.cs.kieler.kiml.ui.diagramlayouter.KimlDiagramLayouter;
 import de.cau.cs.kieler.kiml.ui.helpers.KimlGMFLayoutHintHelper;
@@ -37,11 +37,10 @@ public class DeepLayoutActionDelegate implements IViewActionDelegate {
                 DiagramEditPart dep = gmfEditor.getDiagramEditPart();
 
                 // set layouter type for all edit parts
-                KLayouterInfo layouter = view.getSelectedLayouter();
+                AbstractLayoutProvider layouter = view.getSelectedLayouter();
                 if (layouter != null)
                     KimlGMFLayoutHintHelper.setAllContainedElementsLayoutHints(
-                            dep, layouter.getLayoutType(), layouter
-                                    .getLayouterName());
+                            dep, layouter.getType(), layouter.getName());
 
                 // perform layout
                 KimlDiagramLayouter.layout(editor, true, true, 1);

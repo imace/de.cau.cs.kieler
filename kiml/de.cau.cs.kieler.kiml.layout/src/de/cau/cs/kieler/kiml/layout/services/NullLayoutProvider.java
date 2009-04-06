@@ -15,9 +15,8 @@ package de.cau.cs.kieler.kiml.layout.services;
 
 import de.cau.cs.kieler.core.KielerException;
 import de.cau.cs.kieler.core.alg.IKielerProgressMonitor;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphFactory;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayouterInfo;
+import de.cau.cs.kieler.core.kgraph.KNode;
+import de.cau.cs.kieler.kiml.layout.options.LayoutType;
 
 /**
  * Implements the NullLayoutProvider. This layout provider just exists to
@@ -32,26 +31,40 @@ import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayouterInfo;
  */
 public class NullLayoutProvider extends AbstractLayoutProvider {
 
+    /** the layouter name */
+    private static final String LAYOUTER_NAME = "Null Layout";
+
 	/**
 	 * Does nothing, as this is the NullLayoutProvider.
 	 * 
 	 * @see de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider#doLayout(de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode, de.cau.cs.kieler.core.alg.IKielerProgressMonitor)
 	 */
-	public void doLayout(KLayoutNode layoutNode,
+	public void doLayout(KNode layoutNode,
 			IKielerProgressMonitor progressMonitor) throws KielerException {
 		// notify the progress monitor of the start and immediate end
 		progressMonitor.begin("Null layout", 1);
 		progressMonitor.done();
 	}
 
-	/**
-	 * Returns a to defaults initialized KLayouterInfo, as this is the
-	 * NullLayoutProvider.
-	 * 
-	 * @see de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider#getLayouterInfo() AbstractLayoutProvider.getLayouterInfo()
-	 */
-	public final KLayouterInfo getLayouterInfo() {
-		return KimlLayoutGraphFactory.eINSTANCE.createKLayouterInfo();
-	}
+    /* (non-Javadoc)
+     * @see de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider#getCollection()
+     */
+    public String getCollection() {
+        return "";
+    }
+
+    /* (non-Javadoc)
+     * @see de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider#getName()
+     */
+    public String getName() {
+        return LAYOUTER_NAME;
+    }
+
+    /* (non-Javadoc)
+     * @see de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider#getType()
+     */
+    public LayoutType getType() {
+        return LayoutType.OTHER;
+    }
 
 }

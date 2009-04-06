@@ -25,6 +25,7 @@ import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.StringValueStyle;
 
 import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutType;
+import de.cau.cs.kieler.kiml.layout.options.LayoutType;
 
 
 /**
@@ -805,7 +806,7 @@ public class KimlGMFLayoutHintHelper {
 	 *            The GraphicalEditPart to retrieve the layout type for
 	 * @return The layoutType
 	 */
-	public static KLayoutType getContainedElementsLayoutType(
+	public static LayoutType getContainedElementsLayoutType(
 			GraphicalEditPart graphicalEditPart) {
 
 		StringValueStyle layoutTypeStyle = (StringValueStyle) (graphicalEditPart
@@ -814,13 +815,13 @@ public class KimlGMFLayoutHintHelper {
 
 		// if property not available, return default value
 		if (layoutTypeStyle == null) {
-			return KLayoutType.DEFAULT;
+			return LayoutType.OTHER;
 			// return stored model/notation value
 		} else {
 			if (KLayoutType.getByName(layoutTypeStyle.getStringValue()) != null)
-				return KLayoutType.getByName(layoutTypeStyle.getStringValue());
+				return LayoutType.fromString(layoutTypeStyle.getStringValue());
 			else
-				return KLayoutType.DEFAULT;
+				return LayoutType.OTHER;
 		}
 	}
 
@@ -834,7 +835,7 @@ public class KimlGMFLayoutHintHelper {
 	 */
 	public static void setContainedElementsLayoutType(
 			final GraphicalEditPart graphicalEditPart,
-			final KLayoutType layoutType) {
+			final LayoutType layoutType) {
 
 		// see if there is already an layoutTypeStyle
 		final StringValueStyle layoutTypeStyle = (StringValueStyle) (graphicalEditPart
@@ -846,7 +847,7 @@ public class KimlGMFLayoutHintHelper {
 			final StringValueStyle newlayoutTypeStyle = NotationFactory.eINSTANCE
 					.createStringValueStyle();
 			newlayoutTypeStyle.setName(CONTAINED_ELEMENTS_LAYOUT_TYPE_STYLE);
-			newlayoutTypeStyle.setStringValue(layoutType.getName());
+			newlayoutTypeStyle.setStringValue(layoutType.toString());
 			graphicalEditPart.getEditingDomain().getCommandStack().execute(
 					new RecordingCommand(graphicalEditPart.getEditingDomain()) {
 						protected void doExecute() {
@@ -865,7 +866,7 @@ public class KimlGMFLayoutHintHelper {
 									NotationPackage.eINSTANCE
 											.getStringValueStyle(),
 									CONTAINED_ELEMENTS_LAYOUT_TYPE_STYLE)))
-									.setStringValue(layoutType.getName());
+									.setStringValue(layoutType.toString());
 						}
 					});
 		}
@@ -884,7 +885,7 @@ public class KimlGMFLayoutHintHelper {
 	 */
 	public static void setContainedElementsLayoutHint(
 			final GraphicalEditPart graphicalEditPart,
-			final KLayoutType layoutType, final String layouterName) {
+			final LayoutType layoutType, final String layouterName) {
 		setContainedElementsLayoutType(graphicalEditPart, layoutType);
 		setContainedElementsLayouterName(graphicalEditPart, layouterName);
 	}
@@ -950,7 +951,7 @@ public class KimlGMFLayoutHintHelper {
 	 */
 	public static void setAllContainedElementsLayoutHints(
 			final GraphicalEditPart graphicalEditPart,
-			final KLayoutType layoutType, final String layouterName) {
+			final LayoutType layoutType, final String layouterName) {
 
 		GraphicalViewer viewer = (GraphicalViewer) graphicalEditPart
 				.getViewer();

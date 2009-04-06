@@ -256,6 +256,62 @@ public interface KLayoutDataPackage extends EPackage {
 
 
     /**
+     * The meta object id for the '{@link de.cau.cs.kieler.kiml.layout.klayoutdata.impl.KInsetsImpl <em>KInsets</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see de.cau.cs.kieler.kiml.layout.klayoutdata.impl.KInsetsImpl
+     * @see de.cau.cs.kieler.kiml.layout.klayoutdata.impl.KLayoutDataPackageImpl#getKInsets()
+     * @generated
+     */
+    int KINSETS = 4;
+
+    /**
+     * The feature id for the '<em><b>Top</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int KINSETS__TOP = 0;
+
+    /**
+     * The feature id for the '<em><b>Bottom</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int KINSETS__BOTTOM = 1;
+
+    /**
+     * The feature id for the '<em><b>Left</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int KINSETS__LEFT = 2;
+
+    /**
+     * The feature id for the '<em><b>Right</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int KINSETS__RIGHT = 3;
+
+    /**
+     * The number of structural features of the '<em>KInsets</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int KINSETS_FEATURE_COUNT = 4;
+
+
+    /**
      * Returns the meta object for class '{@link de.cau.cs.kieler.kiml.layout.klayoutdata.KLayoutData <em>KLayout Data</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -406,6 +462,60 @@ public interface KLayoutDataPackage extends EPackage {
     EAttribute getKPoint_Y();
 
     /**
+     * Returns the meta object for class '{@link de.cau.cs.kieler.kiml.layout.klayoutdata.KInsets <em>KInsets</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for class '<em>KInsets</em>'.
+     * @see de.cau.cs.kieler.kiml.layout.klayoutdata.KInsets
+     * @generated
+     */
+    EClass getKInsets();
+
+    /**
+     * Returns the meta object for the attribute '{@link de.cau.cs.kieler.kiml.layout.klayoutdata.KInsets#getTop <em>Top</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>Top</em>'.
+     * @see de.cau.cs.kieler.kiml.layout.klayoutdata.KInsets#getTop()
+     * @see #getKInsets()
+     * @generated
+     */
+    EAttribute getKInsets_Top();
+
+    /**
+     * Returns the meta object for the attribute '{@link de.cau.cs.kieler.kiml.layout.klayoutdata.KInsets#getBottom <em>Bottom</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>Bottom</em>'.
+     * @see de.cau.cs.kieler.kiml.layout.klayoutdata.KInsets#getBottom()
+     * @see #getKInsets()
+     * @generated
+     */
+    EAttribute getKInsets_Bottom();
+
+    /**
+     * Returns the meta object for the attribute '{@link de.cau.cs.kieler.kiml.layout.klayoutdata.KInsets#getLeft <em>Left</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>Left</em>'.
+     * @see de.cau.cs.kieler.kiml.layout.klayoutdata.KInsets#getLeft()
+     * @see #getKInsets()
+     * @generated
+     */
+    EAttribute getKInsets_Left();
+
+    /**
+     * Returns the meta object for the attribute '{@link de.cau.cs.kieler.kiml.layout.klayoutdata.KInsets#getRight <em>Right</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>Right</em>'.
+     * @see de.cau.cs.kieler.kiml.layout.klayoutdata.KInsets#getRight()
+     * @see #getKInsets()
+     * @generated
+     */
+    EAttribute getKInsets_Right();
+
+    /**
      * Returns the factory that creates the instances of the model.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -546,6 +656,48 @@ public interface KLayoutDataPackage extends EPackage {
          * @generated
          */
         EAttribute KPOINT__Y = eINSTANCE.getKPoint_Y();
+
+        /**
+         * The meta object literal for the '{@link de.cau.cs.kieler.kiml.layout.klayoutdata.impl.KInsetsImpl <em>KInsets</em>}' class.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @see de.cau.cs.kieler.kiml.layout.klayoutdata.impl.KInsetsImpl
+         * @see de.cau.cs.kieler.kiml.layout.klayoutdata.impl.KLayoutDataPackageImpl#getKInsets()
+         * @generated
+         */
+        EClass KINSETS = eINSTANCE.getKInsets();
+
+        /**
+         * The meta object literal for the '<em><b>Top</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute KINSETS__TOP = eINSTANCE.getKInsets_Top();
+
+        /**
+         * The meta object literal for the '<em><b>Bottom</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute KINSETS__BOTTOM = eINSTANCE.getKInsets_Bottom();
+
+        /**
+         * The meta object literal for the '<em><b>Left</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute KINSETS__LEFT = eINSTANCE.getKInsets_Left();
+
+        /**
+         * The meta object literal for the '<em><b>Right</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute KINSETS__RIGHT = eINSTANCE.getKInsets_Right();
 
     }
 

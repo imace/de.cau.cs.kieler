@@ -101,6 +101,10 @@ public class KLayoutDataAdapterFactory extends AdapterFactoryImpl {
                 return createKPointAdapter();
             }
             @Override
+            public Adapter caseKInsets(KInsets object) {
+                return createKInsetsAdapter();
+            }
+            @Override
             public Adapter caseStyle(Style object) {
                 return createStyleAdapter();
             }
@@ -181,6 +185,20 @@ public class KLayoutDataAdapterFactory extends AdapterFactoryImpl {
      * @generated
      */
     public Adapter createKPointAdapter() {
+        return null;
+    }
+
+    /**
+     * Creates a new adapter for an object of class '{@link de.cau.cs.kieler.kiml.layout.klayoutdata.KInsets <em>KInsets</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see de.cau.cs.kieler.kiml.layout.klayoutdata.KInsets
+     * @generated
+     */
+    public Adapter createKInsetsAdapter() {
         return null;
     }
 

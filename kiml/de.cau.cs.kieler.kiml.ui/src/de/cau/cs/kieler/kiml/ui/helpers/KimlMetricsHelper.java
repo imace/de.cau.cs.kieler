@@ -17,11 +17,10 @@ import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Insets;
 import org.eclipse.draw2d.geometry.Point;
 
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KDimension;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KInsets;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutGraph;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPoint;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphFactory;
+import de.cau.cs.kieler.kiml.layout.klayoutdata.KInsets;
+import de.cau.cs.kieler.kiml.layout.klayoutdata.KLayoutDataFactory;
+import de.cau.cs.kieler.kiml.layout.klayoutdata.KPoint;
+
 
 /**
  * Static helper class which provides functions to translate Draw2D metrics to
@@ -51,37 +50,10 @@ public class KimlMetricsHelper {
 	 * @return new KPoint with the same coordinates
 	 */
 	public static KPoint point2KPoint(Point point) {
-		KPoint kPoint = KimlLayoutGraphFactory.eINSTANCE.createKPoint();
+		KPoint kPoint = KLayoutDataFactory.eINSTANCE.createKPoint();
 		kPoint.setX(point.x);
 		kPoint.setY(point.y);
 		return kPoint;
-	}
-
-	/**
-	 * Translates a KDimension into a Draw2D Dimension.
-	 * 
-	 * @param kDimension
-	 *            The KDimension to translate
-	 * @return new Draw2D Dimension with the same size
-	 */
-	public static Dimension kDimension2Dimension(KDimension kDimension) {
-		return new Dimension((int) kDimension.getWidth(), (int) kDimension
-				.getHeight());
-	}
-
-	/**
-	 * Translates a Draw2D Dimension into a KDimension.
-	 * 
-	 * @param dimension
-	 *            The Draw2D Dimension to translate
-	 * @return new KDimension with the same size
-	 */
-	public static KDimension dimension2KDimension(Dimension dimension) {
-		KDimension kDimension = KimlLayoutGraphFactory.eINSTANCE
-				.createKDimension();
-		kDimension.setWidth(dimension.width);
-		kDimension.setHeight(dimension.height);
-		return kDimension;
 	}
 
 	/**
@@ -104,7 +76,7 @@ public class KimlMetricsHelper {
 	 * @return new KInsets
 	 */
 	public static KInsets insets2KInsets(Insets insets) {
-		KInsets kInsets = KimlLayoutGraphFactory.eINSTANCE.createKInsets();
+		KInsets kInsets = KLayoutDataFactory.eINSTANCE.createKInsets();
 		kInsets.setTop(insets.top);
 		kInsets.setLeft(insets.left);
 		kInsets.setBottom(insets.bottom);

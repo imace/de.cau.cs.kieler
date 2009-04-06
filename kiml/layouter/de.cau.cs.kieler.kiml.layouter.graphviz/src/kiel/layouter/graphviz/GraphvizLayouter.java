@@ -2,7 +2,7 @@ package kiel.layouter.graphviz;
 
 import de.cau.cs.kieler.core.KielerException;
 import de.cau.cs.kieler.core.alg.IKielerProgressMonitor;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
+import de.cau.cs.kieler.core.kgraph.KNode;
 
 /**
  * Interface for GraphViz layout access classes.
@@ -18,7 +18,7 @@ public interface GraphvizLayouter {
 	 * @param progressMonitor progress monitor
 	 * @throws KielerException if the layout process fails
 	 */
-	public void visit(KLayoutNode node, IKielerProgressMonitor progressMonitor)
+	public void visit(KNode node, IKielerProgressMonitor progressMonitor)
 			throws KielerException;
 	
 }

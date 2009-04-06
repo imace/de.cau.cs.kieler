@@ -25,8 +25,8 @@ import org.eclipse.ui.actions.CompoundContributionItem;
 import org.eclipse.ui.menus.CommandContributionItem;
 import org.eclipse.ui.menus.CommandContributionItemParameter;
 
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayouterInfo;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutType;
+import de.cau.cs.kieler.kiml.layout.options.LayoutType;
+import de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider;
 import de.cau.cs.kieler.kiml.layout.services.KimlLayoutServices;
 
 
@@ -53,40 +53,38 @@ public class ContributionItemLayoutAs extends CompoundContributionItem {
 
 		Map<String, String> parameters = new HashMap<String, String>();
 		ArrayList<IContributionItem> finalItems = new ArrayList<IContributionItem>();
-		Map<KLayoutType, MenuManager> managers = new HashMap<KLayoutType, MenuManager>();
+		Map<LayoutType, MenuManager> managers = new HashMap<LayoutType, MenuManager>();
 
 		/*
 		 * first, get all layout providers, build up the menu entry and order
 		 * the menu items according to the layout type, the layouter provides
 		 */
-		for (KLayouterInfo layoutProviderInfo : KimlLayoutServices.getInstance()
-				.getEnabledLayouterInfos()) {
+		for (AbstractLayoutProvider layoutProvider : KimlLayoutServices
+		        .getInstance().getEnabledProviders()) {
 
-			/* contruct one command for the layouter */
+			// construct one command for the layouter
 			parameters.clear();
-			parameters.put(PARAM_LAYOUTER_NAME, layoutProviderInfo
-					.getLayouterName());
+			parameters.put(PARAM_LAYOUTER_NAME, layoutProvider.getName());
 			CommandContributionItemParameter ccip = new CommandContributionItemParameter(
 					PlatformUI.getWorkbench().getActiveWorkbenchWindow(),
-					LAYOUT_AS_COMMAND + layoutProviderInfo.getLayouterName(),
+					LAYOUT_AS_COMMAND + layoutProvider.getName(),
 					LAYOUT_AS_COMMAND, CommandContributionItem.STYLE_PUSH);
 			ccip.parameters = parameters;
-			ccip.label = layoutProviderInfo.getLayouterName();
+			ccip.label = layoutProvider.getName();
 			IContributionItem cci = new CommandContributionItem(ccip);
 
 			/*
 			 * add the command to the right menu manager, that is a submenu
-			 * entry with the KLayoutType literal as label. Make shure before
+			 * entry with the KLayoutType literal as label. Make sure before
 			 * that this menu manager exists...
 			 */
-			if (!managers.containsKey(layoutProviderInfo.getLayoutType())) {
-				MenuManager mm = new MenuManager(layoutProviderInfo
-						.getLayoutType().getLiteral());
-				managers.put(layoutProviderInfo.getLayoutType(), mm);
+			if (!managers.containsKey(layoutProvider.getType())) {
+				MenuManager mm = new MenuManager(layoutProvider.getType().toString());
+				managers.put(layoutProvider.getType(), mm);
 				finalItems.add(mm);
 			}
 			/* ... and then add command to it */
-			managers.get(layoutProviderInfo.getLayoutType()).add(cci);
+			managers.get(layoutProvider.getType()).add(cci);
 		}
 
 		/* if there is actually at least one item, add a new separator */

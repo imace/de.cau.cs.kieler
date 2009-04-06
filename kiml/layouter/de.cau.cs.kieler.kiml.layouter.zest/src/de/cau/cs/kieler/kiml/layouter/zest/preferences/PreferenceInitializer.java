@@ -4,7 +4,6 @@ import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
 import org.eclipse.jface.preference.IPreferenceStore;
 
 import de.cau.cs.kieler.kiml.layouter.zest.Activator;
-import de.cau.cs.kieler.kiml.layouter.zest.ZestDirectedLayoutProvider;
 import de.cau.cs.kieler.kiml.layouter.zest.ZestGridLayoutProvider;
 import de.cau.cs.kieler.kiml.layouter.zest.ZestSpringLayoutProvider;
 
@@ -24,7 +23,6 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		
 		/* initialize the layout providers */
 		store.setDefault(ZestSpringLayoutProvider.LAYOUTER_NAME, true);
-		store.setDefault(ZestDirectedLayoutProvider.LAYOUTER_NAME, true);
 		store.setDefault(ZestGridLayoutProvider.LAYOUTER_NAME, true);
 		
 		/* initialize the layout options */

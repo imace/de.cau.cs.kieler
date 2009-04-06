@@ -14,7 +14,7 @@
 package de.cau.cs.kieler.kiml.layout.services;
 
 import de.cau.cs.kieler.core.alg.IKielerProgressMonitor;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutGraph;
+import de.cau.cs.kieler.core.kgraph.KNode;
 
 /**
  * Interface for listeners to the KIML layout.
@@ -35,7 +35,7 @@ public interface ILayoutListener {
 	 * @param layoutGraph layout graph that will be processed after
 	 *     this method returns
 	 */
-	public void layoutRequested(KLayoutGraph layoutGraph);
+	public void layoutRequested(KNode layoutGraph);
 	
 	/**
 	 * Called after layout was performed for the given layout graph.
@@ -44,7 +44,7 @@ public interface ILayoutListener {
 	 * @param layoutGraph layout graph that was layouted
 	 * @param monitor progress monitor containing execution time results
 	 */
-	public void layoutPerformed(KLayoutGraph layoutGraph,
+	public void layoutPerformed(KNode layoutGraph,
 			IKielerProgressMonitor monitor);
 	
 }
