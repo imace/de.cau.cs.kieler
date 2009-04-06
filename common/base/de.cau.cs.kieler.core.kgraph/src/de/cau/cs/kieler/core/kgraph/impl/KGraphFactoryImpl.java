@@ -78,6 +78,7 @@ public class KGraphFactoryImpl extends EFactoryImpl implements KGraphFactory {
             case KGraphPackage.KSTRING_OPTION: return createKStringOption();
             case KGraphPackage.KINT_OPTION: return createKIntOption();
             case KGraphPackage.KFLOAT_OPTION: return createKFloatOption();
+            case KGraphPackage.KOBJECT_OPTION: return createKObjectOption();
             default:
                 throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
         }
@@ -191,6 +192,16 @@ public class KGraphFactoryImpl extends EFactoryImpl implements KGraphFactory {
     public KFloatOption createKFloatOption() {
         KFloatOptionImpl kFloatOption = new KFloatOptionImpl();
         return kFloatOption;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public KObjectOption createKObjectOption() {
+        KObjectOptionImpl kObjectOption = new KObjectOptionImpl();
+        return kObjectOption;
     }
 
     /**

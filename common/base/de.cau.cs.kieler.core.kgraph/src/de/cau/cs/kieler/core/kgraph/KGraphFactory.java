@@ -107,6 +107,15 @@ public interface KGraphFactory extends EFactory {
     KFloatOption createKFloatOption();
 
     /**
+     * Returns a new object of class '<em>KObject Option</em>'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return a new object of class '<em>KObject Option</em>'.
+     * @generated
+     */
+    KObjectOption createKObjectOption();
+
+    /**
      * Returns the package supported by this factory.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->

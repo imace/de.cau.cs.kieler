@@ -172,6 +172,13 @@ public class KGraphSwitch<T> {
                 if (result == null) result = defaultCase(theEObject);
                 return result;
             }
+            case KGraphPackage.KOBJECT_OPTION: {
+                KObjectOption kObjectOption = (KObjectOption)theEObject;
+                T result = caseKObjectOption(kObjectOption);
+                if (result == null) result = caseKOption(kObjectOption);
+                if (result == null) result = defaultCase(theEObject);
+                return result;
+            }
             default: return defaultCase(theEObject);
         }
     }
@@ -323,6 +330,21 @@ public class KGraphSwitch<T> {
      * @generated
      */
     public T caseKFloatOption(KFloatOption object) {
+        return null;
+    }
+
+    /**
+     * Returns the result of interpreting the object as an instance of '<em>KObject Option</em>'.
+     * <!-- begin-user-doc -->
+     * This implementation returns null;
+     * returning a non-null result will terminate the switch.
+     * <!-- end-user-doc -->
+     * @param object the target of the switch.
+     * @return the result of interpreting the object as an instance of '<em>KObject Option</em>'.
+     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+     * @generated
+     */
+    public T caseKObjectOption(KObjectOption object) {
         return null;
     }
 

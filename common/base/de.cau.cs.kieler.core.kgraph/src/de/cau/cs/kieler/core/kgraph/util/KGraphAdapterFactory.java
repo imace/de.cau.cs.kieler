@@ -124,6 +124,10 @@ public class KGraphAdapterFactory extends AdapterFactoryImpl {
                 return createKFloatOptionAdapter();
             }
             @Override
+            public Adapter caseKObjectOption(KObjectOption object) {
+                return createKObjectOptionAdapter();
+            }
+            @Override
             public Adapter caseEModelElement(EModelElement object) {
                 return createEModelElementAdapter();
             }
@@ -288,6 +292,20 @@ public class KGraphAdapterFactory extends AdapterFactoryImpl {
      * @generated
      */
     public Adapter createKFloatOptionAdapter() {
+        return null;
+    }
+
+    /**
+     * Creates a new adapter for an object of class '{@link de.cau.cs.kieler.core.kgraph.KObjectOption <em>KObject Option</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see de.cau.cs.kieler.core.kgraph.KObjectOption
+     * @generated
+     */
+    public Adapter createKObjectOptionAdapter() {
         return null;
     }
 

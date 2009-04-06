@@ -14,8 +14,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.draw2d.ConnectionLocator;
+import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Rectangle;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gef.ConnectionEditPart;
 import org.eclipse.gef.GraphicalEditPart;
@@ -26,20 +26,17 @@ import org.eclipse.gmf.runtime.notation.impl.ViewImpl;
 
 import ssm.diagram.custom.SSMDiagramCustomPlugin;
 import ssm.diagram.custom.preferences.PreferenceConstants;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KDimension;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLabel;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KEdgeLabelPlacement;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutGraph;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutOption;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutType;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPoint;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphFactory;
+import de.cau.cs.kieler.core.kgraph.KEdge;
+import de.cau.cs.kieler.core.kgraph.KLabel;
+import de.cau.cs.kieler.core.kgraph.KNode;
+import de.cau.cs.kieler.kiml.layout.klayoutdata.KShapeLayout;
+import de.cau.cs.kieler.kiml.layout.options.EdgeLabelPlacement;
+import de.cau.cs.kieler.kiml.layout.options.LayoutDirection;
+import de.cau.cs.kieler.kiml.layout.options.LayoutOptions;
+import de.cau.cs.kieler.kiml.layout.options.LayoutType;
 import de.cau.cs.kieler.kiml.layout.util.KimlLayoutUtil;
 import de.cau.cs.kieler.kiml.ui.diagramlayouter.KimlAbstractLayoutGraphBuilder;
 import de.cau.cs.kieler.kiml.ui.helpers.KimlGMFLayoutHintHelper;
-import de.cau.cs.kieler.kiml.ui.helpers.KimlMetricsHelper;
 import de.cau.cs.kieler.ssm.diagram.edit.parts.CompositeState2EditPart;
 import de.cau.cs.kieler.ssm.diagram.edit.parts.CompositeStateCompositeStateCompartment2EditPart;
 import de.cau.cs.kieler.ssm.diagram.edit.parts.CompositeStateCompositeStateCompartmentEditPart;
@@ -87,7 +84,7 @@ public class SSMLayoutGraphBuilder extends KimlAbstractLayoutGraphBuilder {
 	private int defaultWidthComposite = 50;
 
 	/** mappings just for this special layout graph builder */
-	private Map<GraphicalEditPart, KLayoutNode> graphicalEditPart2LayoutNode = new HashMap<GraphicalEditPart, KLayoutNode>();
+	private Map<GraphicalEditPart, KNode> graphicalEditPart2LayoutNode = new HashMap<GraphicalEditPart, KNode>();
 
 	/*------------------------------------------------------------------------------*/
 	/*------------------------- BUILDING OF KLAYOUTGRAPH ---------------------------*/
@@ -142,11 +139,9 @@ public class SSMLayoutGraphBuilder extends KimlAbstractLayoutGraphBuilder {
 			 * (10,10)
 			 */
 			if (layoutRootPart.getClass().equals(CompositeStateEditPart.class)) {
-				KPoint location = KimlLayoutGraphFactory.eINSTANCE
-						.createKPoint();
-				location.setX(10);
-				location.setY(10);
-				layoutGraph.getLayout().setLocation(location);
+				KShapeLayout shapeLayout = KimlLayoutUtil.getShapeLayout(layoutGraph);
+				shapeLayout.setXpos(10);
+				shapeLayout.setYpos(10);
 			}
 
 			/* maintain the mapping of elements for the applyLayout function */
@@ -168,7 +163,7 @@ public class SSMLayoutGraphBuilder extends KimlAbstractLayoutGraphBuilder {
 	 *            The corresponding KLayoutNode
 	 */
 	private void buildLayoutGraphRecursively(GraphicalEditPart currentEditPart,
-			KLayoutNode currentLayoutNode) {
+			KNode currentLayoutNode) {
 
 		/*
 		 * List to save the information about the connections. Connections can
@@ -192,7 +187,7 @@ public class SSMLayoutGraphBuilder extends KimlAbstractLayoutGraphBuilder {
 					|| childEditPart.getClass().equals(
 							InitialStateEditPart.class)) {
 
-				KLayoutNode childLayoutNode = processGetNewSubNode(currentLayoutNode);
+				KNode childLayoutNode = processGetNewSubNode(currentLayoutNode);
 				processCommon((GraphicalEditPart) childEditPart,
 						childLayoutNode, connections);
 			}
@@ -207,7 +202,7 @@ public class SSMLayoutGraphBuilder extends KimlAbstractLayoutGraphBuilder {
 					|| childEditPart.getClass().equals(
 							CompositeStateEditPart.class)) {
 
-				KLayoutNode childLayoutNode = processGetNewSubNode(currentLayoutNode);
+				KNode childLayoutNode = processGetNewSubNode(currentLayoutNode);
 				processCommon((GraphicalEditPart) childEditPart,
 						childLayoutNode, connections);
 				processLayoutHints((GraphicalEditPart) childEditPart,
@@ -256,10 +251,9 @@ public class SSMLayoutGraphBuilder extends KimlAbstractLayoutGraphBuilder {
 				 * size to default values and omit all the children.
 				 */
 				else {
-					currentLayoutNode.getLayout().getSize().setHeight(
-							prefHeightCollapsed);
-					currentLayoutNode.getLayout().getSize().setWidth(
-							prefWidthCollapsed);
+				    KShapeLayout shapeLayout = KimlLayoutUtil.getShapeLayout(currentLayoutNode);
+				    shapeLayout.setHeight(prefHeightCollapsed);
+					shapeLayout.setWidth(prefWidthCollapsed);
 				}
 			}
 		}
@@ -272,18 +266,17 @@ public class SSMLayoutGraphBuilder extends KimlAbstractLayoutGraphBuilder {
 	}
 
 	/**
-	 * Creates a new initialized KLayoutNode for the provided KLayoutNode and
+	 * Creates a new initialized KNode for the provided KNode and
 	 * returns it.
 	 * 
 	 * @param currentLayoutNode
-	 *            A KLayoutNode for which an initialized sub KLayoutNode should
+	 *            A KNode for which an initialized sub KNode should
 	 *            be created.
 	 * @return An initialized KLayoutNode which is a subnode of the provided one
 	 */
-	private KLayoutNode processGetNewSubNode(KLayoutNode currentLayoutNode) {
-		KLayoutNode childLayoutNode = KimlLayoutUtil
-				.createInitializedLayoutNode();
-		currentLayoutNode.getChildNodes().add(childLayoutNode);
+	private KNode processGetNewSubNode(KNode currentLayoutNode) {
+		KNode childLayoutNode = KimlLayoutUtil.createInitializedNode();
+		currentLayoutNode.getChildren().add(childLayoutNode);
 		return childLayoutNode;
 	}
 
@@ -301,7 +294,7 @@ public class SSMLayoutGraphBuilder extends KimlAbstractLayoutGraphBuilder {
 	 *            A list to which all the connections of the EditPart are added.
 	 */
 	private void processCommon(GraphicalEditPart currentEditPart,
-			KLayoutNode currentLayoutNode,
+			KNode currentLayoutNode,
 			ArrayList<ConnectionEditPart> connections) {
 
 		Rectangle currentBounds = currentEditPart.getFigure().getBounds();
@@ -312,27 +305,28 @@ public class SSMLayoutGraphBuilder extends KimlAbstractLayoutGraphBuilder {
 				connections.add((ConnectionEditPart) conn);
 			}
 		}
+		KShapeLayout nodeLayout = KimlLayoutUtil.getShapeLayout(currentLayoutNode);
 		// set location
-		currentLayoutNode.getLayout().getLocation().setX(currentBounds.x);
-		currentLayoutNode.getLayout().getLocation().setY(currentBounds.y);
+		nodeLayout.setXpos(currentBounds.x);
+		nodeLayout.setYpos(currentBounds.y);
 
 		// set size
-		currentLayoutNode.getLayout().getSize().setHeight(currentBounds.height);
-		currentLayoutNode.getLayout().getSize().setWidth(currentBounds.width);
+		nodeLayout.setHeight(currentBounds.height);
+		nodeLayout.setWidth(currentBounds.width);
 
 		// special treatment if Emma wants auto sizing
 		if (prefAutosizeEmptyElements) {
 			if (currentEditPart.getClass()
 					.equals(CompositeState2EditPart.class)) {
-				currentLayoutNode.getLayout().getSize().setHeight(
+			    nodeLayout.setHeight(
 						defaultHeightComposite);
-				currentLayoutNode.getLayout().getSize().setWidth(
+			    nodeLayout.setWidth(
 						defaultWidthComposite);
 			} else if (currentEditPart.getClass().equals(
 					SimpleStateEditPart.class)) {
-				currentLayoutNode.getLayout().getSize().setHeight(
+			    nodeLayout.setHeight(
 						defaultHeightSimple);
-				currentLayoutNode.getLayout().getSize().setWidth(
+			    nodeLayout.setWidth(
 						defaultWidthSimple);
 			}
 		}
@@ -342,8 +336,6 @@ public class SSMLayoutGraphBuilder extends KimlAbstractLayoutGraphBuilder {
 				.getElement();
 		currentLayoutNode.getLabel().setText(
 				kimlAdapterLabelProvider.getKimlShortLabel(currentEObject));
-		currentLayoutNode.setIdString(kimlAdapterLabelProvider
-				.getKimlLongLabel(currentEObject));
 
 		// keep track of mapping between elements
 		graphicalEditPart2LayoutNode.put(currentEditPart, currentLayoutNode);
@@ -365,56 +357,56 @@ public class SSMLayoutGraphBuilder extends KimlAbstractLayoutGraphBuilder {
 	 *            The respective KLayoutNode
 	 */
 	private void processLayoutHints(GraphicalEditPart currentEditPart,
-			KLayoutNode currentLayoutNode) {
-		KLayoutType layoutType = KLayoutType.DEFAULT;
+			KNode currentLayoutNode) {
+		LayoutType layoutType = LayoutType.OTHER;
 		String layouterName = "";
+		KShapeLayout nodeLayout = KimlLayoutUtil.getShapeLayout(currentLayoutNode);
 		layoutType = KimlGMFLayoutHintHelper
 				.getContainedElementsLayoutType((org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart) currentEditPart);
 		layouterName = KimlGMFLayoutHintHelper
 				.getContainedElementsLayouterName((org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart) currentEditPart);
-		currentLayoutNode.getLayout().setLayoutType(layoutType);
-		currentLayoutNode.getLayout().setLayouterName(layouterName);
+		LayoutOptions.setLayoutType(nodeLayout, layoutType);
+		LayoutOptions.setLayouterName(nodeLayout, layouterName);
 
 		/* attach top inset to compensate the label of a CompositeState */
 		if (currentEditPart.getClass().equals(CompositeState2EditPart.class)
 				|| currentEditPart.getClass().equals(
 						CompositeStateEditPart.class)) {
-			currentLayoutNode.getLayout().getInsets().setTop(insetTop);
+			LayoutOptions.getInsets(nodeLayout).setTop(insetTop);
 		}
 
 		/* set layout direction, when not in AHV mode */
 		if (!prefAlternatingHVLayout) {
 			if (prefLayoutDirectionHorizontal)
-				currentLayoutNode.getLayout().getLayoutOptions().add(
-						KLayoutOption.HORIZONTAL);
+				LayoutOptions.setLayoutDirection(nodeLayout,
+						LayoutDirection.HORIZONTAL);
 			else
-				currentLayoutNode.getLayout().getLayoutOptions().add(
-						KLayoutOption.VERTICAL);
+				LayoutOptions.setLayoutDirection(nodeLayout,
+						LayoutDirection.VERTICAL);
 		}
 
 		/* enable alternating layout of regions */
 		if (currentEditPart.getClass().equals(RegionEditPart.class)
 				&& prefAlternatingHVLayout) {
 
-			if (currentLayoutNode.getParentNode() != null
-					&& currentLayoutNode.getParentNode().getParentNode() != null) {
-				EList<KLayoutOption> layoutOptions = currentLayoutNode
-						.getParentNode().getParentNode().getLayout()
-						.getLayoutOptions();
-				if (layoutOptions.contains(KLayoutOption.HORIZONTAL))
-					currentLayoutNode.getLayout().getLayoutOptions().add(
-							KLayoutOption.VERTICAL);
+			if (currentLayoutNode.getParent() != null
+					&& currentLayoutNode.getParent().getParent() != null) {
+				if (LayoutOptions.getLayoutDirection(KimlLayoutUtil.getLayoutData(
+				        currentLayoutNode.getParent().getParent()))
+				        == LayoutDirection.HORIZONTAL)
+					LayoutOptions.setLayoutDirection(nodeLayout,
+					        LayoutDirection.VERTICAL);
 				else
-					currentLayoutNode.getLayout().getLayoutOptions().add(
-							KLayoutOption.HORIZONTAL);
+					LayoutOptions.setLayoutDirection(nodeLayout,
+							LayoutDirection.HORIZONTAL);
 			} else {
 
 				if (prefLayoutDirectionHorizontal)
-					currentLayoutNode.getLayout().getLayoutOptions().add(
-							KLayoutOption.HORIZONTAL);
+					LayoutOptions.setLayoutDirection(nodeLayout,
+							LayoutDirection.HORIZONTAL);
 				else
-					currentLayoutNode.getLayout().getLayoutOptions().add(
-							KLayoutOption.VERTICAL);
+				    LayoutOptions.setLayoutDirection(nodeLayout,
+                            LayoutDirection.VERTICAL);
 			}
 		}
 	}
@@ -437,7 +429,7 @@ public class SSMLayoutGraphBuilder extends KimlAbstractLayoutGraphBuilder {
 			 * explicitly to the KLayoutGraph, but exists in it through the
 			 * EOppositeReference of EMF.
 			 */
-			KLayoutEdge edge = KimlLayoutUtil.createInitializedEdge();
+			KEdge edge = KimlLayoutUtil.createInitializedEdge();
 			edge.setSource(graphicalEditPart2LayoutNode.get(connection
 					.getSource()));
 			edge.setTarget(graphicalEditPart2LayoutNode.get(connection
@@ -462,9 +454,8 @@ public class SSMLayoutGraphBuilder extends KimlAbstractLayoutGraphBuilder {
 				if (obj instanceof LabelEditPart) {
 					LabelEditPart labelEditPart = (LabelEditPart) obj;
 					// labelEditPart.getFigure().setLocation(new Point());
-					KDimension labelSize = KimlMetricsHelper
-							.dimension2KDimension(labelEditPart.getFigure()
-									.getBounds().getSize());
+					Dimension labelSize = labelEditPart.getFigure()
+									.getBounds().getSize();
 					EObject transition = ((ViewImpl) connection.getModel())
 							.getElement();
 					// head label
@@ -472,13 +463,14 @@ public class SSMLayoutGraphBuilder extends KimlAbstractLayoutGraphBuilder {
 						String headLabel = kimlAdapterLabelProvider
 								.getKimlHeadLabel(transition);
 						if (headLabel != null) {
-							KEdgeLabel hLabel = KimlLayoutUtil
-									.createInitializedEdgeLabel();
-							hLabel.getLabelLayout().setLabelPlacement(
-									KEdgeLabelPlacement.HEAD);
-							hLabel.getLabelLayout().setSize(labelSize);
+							KLabel hLabel = KimlLayoutUtil.createInitializedLabel(edge);
+							KShapeLayout shapeLayout = KimlLayoutUtil.getShapeLayout(hLabel);
+							LayoutOptions.setEdgeLabelPlacement(shapeLayout,
+									EdgeLabelPlacement.HEAD);
+							shapeLayout.setWidth(labelSize.width);
+							shapeLayout.setHeight(labelSize.height);
 							hLabel.setText(headLabel);
-							edge.getLabel().add(hLabel);
+							edge.getLabels().add(hLabel);
 							edgeLabel2EditPart.put(hLabel, labelEditPart);
 						}
 					}
@@ -488,13 +480,14 @@ public class SSMLayoutGraphBuilder extends KimlAbstractLayoutGraphBuilder {
 						String midLabel = kimlAdapterLabelProvider
 								.getKimlCenterLabel(transition);
 						if (midLabel != null) {
-							KEdgeLabel mLabel = KimlLayoutUtil
-									.createInitializedEdgeLabel();
-							mLabel.getLabelLayout().setLabelPlacement(
-									KEdgeLabelPlacement.CENTER);
-							mLabel.getLabelLayout().setSize(labelSize);
+							KLabel mLabel = KimlLayoutUtil.createInitializedLabel(edge);
+							KShapeLayout shapeLayout = KimlLayoutUtil.getShapeLayout(mLabel);
+							LayoutOptions.setEdgeLabelPlacement(shapeLayout,
+									EdgeLabelPlacement.CENTER);
+							shapeLayout.setWidth(labelSize.width);
+							shapeLayout.setHeight(labelSize.height);
 							mLabel.setText(midLabel);
-							edge.getLabel().add(mLabel);
+							edge.getLabels().add(mLabel);
 							edgeLabel2EditPart.put(mLabel, labelEditPart);
 						}
 					}
@@ -504,13 +497,14 @@ public class SSMLayoutGraphBuilder extends KimlAbstractLayoutGraphBuilder {
 						String tailLabel = kimlAdapterLabelProvider
 								.getKimlTailLabel(transition);
 						if (tailLabel != null) {
-							KEdgeLabel tLabel = KimlLayoutUtil
-									.createInitializedEdgeLabel();
-							tLabel.getLabelLayout().setLabelPlacement(
-									KEdgeLabelPlacement.TAIL);
-							tLabel.getLabelLayout().setSize(labelSize);
+							KLabel tLabel = KimlLayoutUtil.createInitializedLabel(edge);
+							KShapeLayout shapeLayout = KimlLayoutUtil.getShapeLayout(tLabel);
+							LayoutOptions.setEdgeLabelPlacement(shapeLayout,
+									EdgeLabelPlacement.TAIL);
+							shapeLayout.setWidth(labelSize.width);
+							shapeLayout.setHeight(labelSize.height);
 							tLabel.setText(tailLabel);
-							edge.getLabel().add(tLabel);
+							edge.getLabels().add(tLabel);
 							edgeLabel2EditPart.put(tLabel, labelEditPart);
 						}
 					}

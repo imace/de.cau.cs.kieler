@@ -24,6 +24,7 @@ import de.cau.cs.kieler.core.kgraph.KGraphPackage;
 import de.cau.cs.kieler.core.kgraph.KIntOption;
 import de.cau.cs.kieler.core.kgraph.KLabel;
 import de.cau.cs.kieler.core.kgraph.KNode;
+import de.cau.cs.kieler.core.kgraph.KObjectOption;
 import de.cau.cs.kieler.core.kgraph.KOption;
 import de.cau.cs.kieler.core.kgraph.KPort;
 import de.cau.cs.kieler.core.kgraph.KPortType;
@@ -117,6 +118,13 @@ public class KGraphPackageImpl extends EPackageImpl implements KGraphPackage {
      * @generated
      */
     private EClass kFloatOptionEClass = null;
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    private EClass kObjectOptionEClass = null;
 
     /**
      * <!-- begin-user-doc -->
@@ -408,6 +416,15 @@ public class KGraphPackageImpl extends EPackageImpl implements KGraphPackage {
      * <!-- end-user-doc -->
      * @generated
      */
+    public EReference getKLabel_Parent() {
+        return (EReference)kLabelEClass.getEStructuralFeatures().get(1);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
     public EClass getKOption() {
         return kOptionEClass;
     }
@@ -480,6 +497,24 @@ public class KGraphPackageImpl extends EPackageImpl implements KGraphPackage {
      * <!-- end-user-doc -->
      * @generated
      */
+    public EClass getKObjectOption() {
+        return kObjectOptionEClass;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EReference getKObjectOption_Value() {
+        return (EReference)kObjectOptionEClass.getEStructuralFeatures().get(0);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
     public EEnum getKPortType() {
         return kPortTypeEEnum;
     }
@@ -540,6 +575,7 @@ public class KGraphPackageImpl extends EPackageImpl implements KGraphPackage {
 
         kLabelEClass = createEClass(KLABEL);
         createEAttribute(kLabelEClass, KLABEL__TEXT);
+        createEReference(kLabelEClass, KLABEL__PARENT);
 
         kOptionEClass = createEClass(KOPTION);
         createEAttribute(kOptionEClass, KOPTION__KEY);
@@ -552,6 +588,9 @@ public class KGraphPackageImpl extends EPackageImpl implements KGraphPackage {
 
         kFloatOptionEClass = createEClass(KFLOAT_OPTION);
         createEAttribute(kFloatOptionEClass, KFLOAT_OPTION__VALUE);
+
+        kObjectOptionEClass = createEClass(KOBJECT_OPTION);
+        createEReference(kObjectOptionEClass, KOBJECT_OPTION__VALUE);
 
         // Create enums
         kPortTypeEEnum = createEEnum(KPORT_TYPE);
@@ -598,6 +637,7 @@ public class KGraphPackageImpl extends EPackageImpl implements KGraphPackage {
         kStringOptionEClass.getESuperTypes().add(this.getKOption());
         kIntOptionEClass.getESuperTypes().add(this.getKOption());
         kFloatOptionEClass.getESuperTypes().add(this.getKOption());
+        kObjectOptionEClass.getESuperTypes().add(this.getKOption());
 
         // Initialize classes and features; add operations and parameters
         initEClass(kGraphElementEClass, KGraphElement.class, "KGraphElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -631,6 +671,7 @@ public class KGraphPackageImpl extends EPackageImpl implements KGraphPackage {
 
         initEClass(kLabelEClass, KLabel.class, "KLabel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
         initEAttribute(getKLabel_Text(), theEcorePackage.getEString(), "text", null, 1, 1, KLabel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEReference(getKLabel_Parent(), this.getKGraphElement(), null, "parent", null, 1, 1, KLabel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
         initEClass(kOptionEClass, KOption.class, "KOption", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
         initEAttribute(getKOption_Key(), theEcorePackage.getEString(), "key", null, 0, 1, KOption.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -643,6 +684,9 @@ public class KGraphPackageImpl extends EPackageImpl implements KGraphPackage {
 
         initEClass(kFloatOptionEClass, KFloatOption.class, "KFloatOption", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
         initEAttribute(getKFloatOption_Value(), theEcorePackage.getEFloat(), "value", null, 0, 1, KFloatOption.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+        initEClass(kObjectOptionEClass, KObjectOption.class, "KObjectOption", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+        initEReference(getKObjectOption_Value(), theEcorePackage.getEObject(), null, "value", null, 1, 1, KObjectOption.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
         // Initialize enums and add enum literals
         initEEnum(kPortTypeEEnum, KPortType.class, "KPortType");

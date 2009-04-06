@@ -47,6 +47,8 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="KLabel" eSuperTypes="#//KGraphElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="text" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parent" lowerBound="1"
+        eType="#//KGraphElement"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="KPortType">
     <eLiterals name="UNDEFINED" literal="undefined"/>
@@ -65,5 +67,9 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="KFloatOption" eSuperTypes="#//KOption">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EFloat"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="KObjectOption" eSuperTypes="#//KOption">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EObject"
+        containment="true"/>
   </eClassifiers>
 </ecore:EPackage>
