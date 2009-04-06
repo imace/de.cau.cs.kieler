@@ -35,8 +35,8 @@ import de.cau.cs.kieler.kiml.layout.options.LayoutDirection;
 import de.cau.cs.kieler.kiml.layout.options.LayoutOptions;
 import de.cau.cs.kieler.kiml.layout.options.LayoutType;
 import de.cau.cs.kieler.kiml.layout.util.KimlLayoutUtil;
-import de.cau.cs.kieler.kiml.ui.diagramlayouter.KimlAbstractLayoutGraphBuilder;
 import de.cau.cs.kieler.kiml.ui.helpers.KimlGMFLayoutHintHelper;
+import de.cau.cs.kieler.kiml.ui.layout.AbstractLayoutGraphBuilder;
 import de.cau.cs.kieler.ssm.diagram.edit.parts.CompositeState2EditPart;
 import de.cau.cs.kieler.ssm.diagram.edit.parts.CompositeStateCompositeStateCompartment2EditPart;
 import de.cau.cs.kieler.ssm.diagram.edit.parts.CompositeStateCompositeStateCompartmentEditPart;
@@ -65,9 +65,9 @@ import de.cau.cs.kieler.ssm.diagram.part.SafeStateMachineDiagramEditor;
  * {@link KimlSSMDiagramGroupingLayouter}.
  * 
  * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
- * @see KimlAbstractLayoutGraphBuilder
+ * @see AbstractLayoutGraphBuilder
  */
-public class SSMLayoutGraphBuilder extends KimlAbstractLayoutGraphBuilder {
+public class SSMLayoutGraphBuilder extends AbstractLayoutGraphBuilder {
 
 	/** preference settings */
 	private boolean prefAlternatingHVLayout = false;
@@ -517,7 +517,7 @@ public class SSMLayoutGraphBuilder extends KimlAbstractLayoutGraphBuilder {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * de.cau.cs.kieler.kiml.ui.diagramlayouter.KimlAbstractLayoutGraphBuilder
+	 * de.cau.cs.kieler.kiml.ui.layout.AbstractLayoutGraphBuilder
 	 * #updatePreferences()
 	 */
 	@Override
@@ -545,7 +545,7 @@ public class SSMLayoutGraphBuilder extends KimlAbstractLayoutGraphBuilder {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * de.cau.cs.kieler.kiml.ui.diagramlayouter.KimlAbstractLayoutGraphBuilder
+	 * de.cau.cs.kieler.kiml.ui.layout.AbstractLayoutGraphBuilder
 	 * #resetCustomMaps()
 	 */
 	@Override
