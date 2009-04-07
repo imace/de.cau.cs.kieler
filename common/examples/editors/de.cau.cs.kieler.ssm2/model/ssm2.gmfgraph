@@ -86,20 +86,38 @@
   <compartments
       name="ExitActionsCompartment"
       figure="StateFigure"/>
+  <compartments
+      name="VariableCompartment"
+      figure="StateFigure"/>
+  <compartments
+      name="SuspensionTriggerCompartment"
+      figure="StateFigure"/>
   <labels
       name="StateName"
       figure="StateFigure"
+      elementIcon="false"
       accessor="//@figures.0/@descriptors.0/@accessors.0"/>
   <labels
-      name="SignalName"/>
+      name="VariableName"
+      elementIcon="false"/>
   <labels
       name="TransitionTriggersAndEffects"
       figure="TransitionFigure"
+      elementIcon="false"
       accessor="//@figures.0/@descriptors.1/@accessors.0"/>
   <labels
-      name="EntryActionTriggersAndEffects"/>
+      name="EntryActionTriggersAndEffects"
+      elementIcon="false"/>
   <labels
-      name="InnerActionTriggersAndEffects"/>
+      name="InnerActionTriggersAndEffects"
+      elementIcon="false"/>
   <labels
-      name="ExitActionsTriggersAndEffects"/>
+      name="ExitActionsTriggersAndEffects"
+      elementIcon="false"/>
+  <labels
+      name="SuspensionTriggerName"
+      elementIcon="false"/>
+  <labels
+      name="SignalName"
+      elementIcon="false"/>
 </gmfgraph:Canvas>

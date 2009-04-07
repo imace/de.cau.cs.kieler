@@ -14,6 +14,21 @@
     <compartmentTraces
         visualID="7031"
         queryText="true"/>
+    <compartmentTraces
+        visualID="7033"
+        queryText="true"/>
+    <compartmentTraces
+        visualID="7034"
+        queryText="true"/>
+    <compartmentTraces
+        visualID="7035"
+        queryText="true"/>
+    <compartmentTraces
+        visualID="7039"
+        queryText="true"/>
+    <compartmentTraces
+        visualID="7040"
+        queryText="true"/>
   </nodeTraces>
   <childNodeTraces
       visualID="3002"
@@ -46,7 +61,28 @@
     <compartmentTraces
         visualID="7032"
         queryText="true"/>
+    <compartmentTraces
+        visualID="7036"
+        queryText="true"/>
+    <compartmentTraces
+        visualID="7037"
+        queryText="true"/>
+    <compartmentTraces
+        visualID="7038"
+        queryText="true"/>
+    <compartmentTraces
+        visualID="7041"
+        queryText="true"/>
+    <compartmentTraces
+        visualID="7042"
+        queryText="true"/>
   </childNodeTraces>
+  <childNodeTraces
+      visualID="3010"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.informatik.uni-kiel.de/rtsys/ssm2' and _eClass_.name = 'Variable') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.informatik.uni-kiel.de/rtsys/ssm2' and _eClass_.name = 'State') and _containmentMF_.name = 'variables')"/>
+  <childNodeTraces
+      visualID="3011"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.informatik.uni-kiel.de/rtsys/ssm2' and _eClass_.name = 'SuspensionTrigger') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.informatik.uni-kiel.de/rtsys/ssm2' and _eClass_.name = 'State') and _containmentMF_.name = 'suspensionTrigger')"/>
   <linkTraces
       visualID="4001"
       queryText="modelFacet.oclIsKindOf(gmfgen::TypeLinkModelFacet) and (let _eClass_:ecore::EClass = modelFacet.oclAsType(gmfgen::TypeLinkModelFacet).metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.informatik.uni-kiel.de/rtsys/ssm2' and _eClass_.name = 'Transition')">

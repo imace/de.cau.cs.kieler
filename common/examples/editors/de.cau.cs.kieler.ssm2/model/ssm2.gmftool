@@ -26,33 +26,6 @@
             path="/customIcons/transition.gif"
             bundle="de.cau.cs.kieler.ssm2"/>
       </tools>
-      <tools
-          xsi:type="gmftool:CreationTool"
-          title="Region"
-          description="Create new Region">
-        <smallIcon
-            xsi:type="gmftool:BundleImage"
-            path="/customIcons/region.gif"
-            bundle="de.cau.cs.kieler.ssm2"/>
-      </tools>
-      <tools
-          xsi:type="gmftool:CreationTool"
-          title="Signal"
-          description="Create new Signal">
-        <smallIcon
-            xsi:type="gmftool:BundleImage"
-            path="/customIcons/signal.gif"
-            bundle="de.cau.cs.kieler.ssm2"/>
-      </tools>
-      <tools
-          xsi:type="gmftool:CreationTool"
-          title="Action"
-          description="Create new Action">
-        <smallIcon
-            xsi:type="gmftool:BundleImage"
-            path="/customIcons/action.gif"
-            bundle="de.cau.cs.kieler.ssm2"/>
-      </tools>
     </tools>
   </palette>
 </gmftool:ToolRegistry>
