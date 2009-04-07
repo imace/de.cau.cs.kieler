@@ -32,7 +32,7 @@ public class StateLayout extends ConstrainedToolbarLayout {
 		int width = clientArea.width;
 		int height = clientArea.height;
 		
-		// Check if the figure is an attribute aware state and wether it is
+		// Check if the figure is an attribute aware state and whether it is
 		// a simple or a complex state
 		if (parent instanceof AttributeAwareFigure) {
 			EObject modelElement = ((AttributeAwareFigure) parent).getModelElement();
@@ -50,6 +50,8 @@ public class StateLayout extends ConstrainedToolbarLayout {
 	
 	// The layout for complex states
 	private void complexLayout(IFigure parent, List children, int x, int y, int height, int width) {
+		
+		// Collect preferred widths and heights
 		int numChildren = children.size();
 		int totalWidth = 0;
 		int totalHeight = 0;
@@ -137,13 +139,13 @@ public class StateLayout extends ConstrainedToolbarLayout {
 				else if (child instanceof ResizableCompartmentFigure) {
 					name = ((ResizableCompartmentFigure) child).getCompartmentTitle();
 					int offsetY = 0;
-					if (name.equals("RegionCompartment")) {
+					/*if (name.equals("RegionCompartment")) {
 						offsetY = (height + prefHeight) / 2;
-					}
+					}*/
 						newBounds.x = x;
-						newBounds.y = y + offsetY;
-						newBounds.width = width;
-						newBounds.height = (height - prefHeight) / 2;
+						newBounds.y = y /*+ offsetY*/;
+						newBounds.width = 0; //width;
+						newBounds.height = 0; //(height - prefHeight) / 2;
 				}
 				childFigure.setBounds(transposer.t(newBounds));
 			}
@@ -181,13 +183,24 @@ public class StateLayout extends ConstrainedToolbarLayout {
 		return false;
 	}
 
-	// Method to calculate the minimum size of the figure
+	// Method to calculate the minimum size of a figure
 	@Override
-	public Dimension calculateMinimumSize(IFigure container, int hint, int hint2) {
+	public Dimension calculateMinimumSize(IFigure parent, int hint, int hint2) {
 		
+		// Check if the figure is an attribute aware state and whether it is
+		// a simple or a complex state
+		if (parent instanceof AttributeAwareFigure) {
+			EObject modelElement = ((AttributeAwareFigure) parent).getModelElement();
+			if (modelElement instanceof State) {
+				State state = (State) modelElement;
+				if (isSimple(state)) {
+					return new Dimension(20, 20);
+				}
+			}
+		}		
 		int minWidth = 0;
 		int minHeight = 0;
-		for (Object child : container.getChildren()) {
+		for (Object child : parent.getChildren()) {
 			if (child instanceof Figure) {
 				IFigure childFigure = (IFigure) child;
 				int newWidth = childFigure.getPreferredSize().width;
@@ -198,5 +211,25 @@ public class StateLayout extends ConstrainedToolbarLayout {
 			}
 		}
 		return new Dimension(minWidth, minHeight);
+	}
+	
+	// Method to calculate the preferred size of a figure
+	@Override
+	protected Dimension calculatePreferredSize(IFigure parent, int hint, int hint2) {
+		
+		// Check if the figure is an attribute aware state and whether it is
+		// a simple or a complex state
+		if (parent instanceof AttributeAwareFigure) {
+			EObject modelElement = ((AttributeAwareFigure) parent).getModelElement();
+			if (modelElement instanceof State) {
+				State state = (State) modelElement;
+				if (isSimple(state)) {
+					Dimension newDimension = super.calculatePreferredSize(parent, hint, hint2);
+					newDimension.height = 40;
+					return newDimension;
+				}
+			}
+		}
+		return super.calculatePreferredSize(parent, hint, hint2);
 	}
 }
