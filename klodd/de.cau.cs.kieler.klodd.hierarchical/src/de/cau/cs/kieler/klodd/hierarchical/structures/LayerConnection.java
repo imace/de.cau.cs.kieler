@@ -99,8 +99,10 @@ public class LayerConnection {
 	 */
 	public void applyLayout(KPoint offset, KInsets insets) {
 		LayeredGraph layeredGraph = sourceElement.getLayer().getLayeredGraph();
-		KShapeLayout sourcePortLayout = KimlLayoutUtil.getShapeLayout(sourcePort);
-		KShapeLayout targetPortLayout = KimlLayoutUtil.getShapeLayout(targetPort);
+		KShapeLayout sourcePortLayout = (sourcePort == null ? null
+		        : KimlLayoutUtil.getShapeLayout(sourcePort));
+		KShapeLayout targetPortLayout = (targetPort == null ? null
+		        : KimlLayoutUtil.getShapeLayout(targetPort));
 		KEdgeLayout edgeLayout = KimlLayoutUtil.getEdgeLayout(edge);
 		
 		// subtract insets values from bend points near fixed external ports

@@ -24,8 +24,8 @@ public enum LayoutType {
     ORTHOGONAL ("Orthogonal"),
     /** layout based on the layered approach */
     LAYERED ("Layered"),
-    /** a spring embedder method */
-    SPRING ("Spring Embedder"),
+    /** a method based on physical forces */
+    FORCE ("Force"),
     /** places all nodes on a circle */
     CIRCLE ("Circle"),
     /** emphasizes radial tree structures */
@@ -65,8 +65,8 @@ public enum LayoutType {
             return ORTHOGONAL;
         else if (name.equals("Layered"))
             return LAYERED;
-        else if (name.equals("Spring Embedder"))
-            return SPRING;
+        else if (name.equals("Force"))
+            return FORCE;
         else if (name.equals("Circle"))
             return CIRCLE;
         else if (name.equals("Radial"))

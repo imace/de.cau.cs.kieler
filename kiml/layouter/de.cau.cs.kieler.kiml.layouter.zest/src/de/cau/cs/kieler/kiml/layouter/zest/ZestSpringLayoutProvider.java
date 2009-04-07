@@ -48,7 +48,7 @@ public class ZestSpringLayoutProvider extends AbstractLayoutProvider {
      * @see de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider#getType()
      */
     public LayoutType getType() {
-        return LayoutType.SPRING;
+        return LayoutType.FORCE;
     }
 
 }

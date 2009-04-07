@@ -31,7 +31,7 @@ public class TwopiLayoutProvider extends AbstractLayoutProvider {
 
 	/* some Strings used here */
 	private final String LAYOUT_PROVIDER_NAME = GraphvizLayoutProviderNames.GRAPHVIZ_TWOPI;
-	private final LayoutType LAYOUT_PROVIDER_LAYOUT_TYPE = LayoutType.SPRING;
+	private final LayoutType LAYOUT_PROVIDER_LAYOUT_TYPE = LayoutType.FORCE;
 
 	/* real GraphViz layouter Emma uses to do the layout */
 	private GraphvizLayouter graphvizLayouter = null;
