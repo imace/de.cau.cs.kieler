@@ -26,7 +26,7 @@
       <diagramNode
           href="ssm2.gmfgraph#State"/>
       <children
-          compartment="//@nodes.0/@ownedChild/@compartments.4"
+          compartment="//@nodes.0/@ownedChild/@compartments.6"
           referencedChild="//@nodes.0/@ownedChild/@children.0/@ownedChild">
         <containmentFeature
             href="ssm2.ecore#//State/regions"/>
@@ -74,7 +74,7 @@
         </ownedChild>
       </children>
       <children
-          compartment="//@nodes.0/@ownedChild/@compartments.1"
+          compartment="//@nodes.0/@ownedChild/@compartments.2"
           referencedChild="//@nodes.0/@ownedChild/@children.2/@ownedChild">
         <containmentFeature
             href="ssm2.ecore#//State/entryActions"/>
@@ -95,7 +95,7 @@
         </ownedChild>
       </children>
       <children
-          compartment="//@nodes.0/@ownedChild/@compartments.2"
+          compartment="//@nodes.0/@ownedChild/@compartments.3"
           referencedChild="//@nodes.0/@ownedChild/@children.3/@ownedChild">
         <containmentFeature
             href="ssm2.ecore#//State/innerActions"/>
@@ -116,7 +116,7 @@
         </ownedChild>
       </children>
       <children
-          compartment="//@nodes.0/@ownedChild/@compartments.3"
+          compartment="//@nodes.0/@ownedChild/@compartments.4"
           referencedChild="//@nodes.0/@ownedChild/@children.4/@ownedChild">
         <containmentFeature
             href="ssm2.ecore#//State/exitActions"/>
@@ -137,7 +137,7 @@
         </ownedChild>
       </children>
       <children
-          compartment="//@nodes.0/@ownedChild/@compartments.5"
+          compartment="//@nodes.0/@ownedChild/@compartments.1"
           referencedChild="//@nodes.0/@ownedChild/@children.5/@ownedChild">
         <containmentFeature
             href="ssm2.ecore#//State/variables"/>
@@ -158,7 +158,7 @@
         </ownedChild>
       </children>
       <children
-          compartment="//@nodes.0/@ownedChild/@compartments.6"
+          compartment="//@nodes.0/@ownedChild/@compartments.5"
           referencedChild="//@nodes.0/@ownedChild/@children.6/@ownedChild">
         <containmentFeature
             href="ssm2.ecore#//State/suspensionTrigger"/>
@@ -184,6 +184,11 @@
             href="ssm2.gmfgraph#SignalCompartment"/>
       </compartments>
       <compartments
+          children="//@nodes.0/@ownedChild/@children.5">
+        <compartment
+            href="ssm2.gmfgraph#VariableCompartment"/>
+      </compartments>
+      <compartments
           children="//@nodes.0/@ownedChild/@children.2">
         <compartment
             href="ssm2.gmfgraph#EntryActionsCompartment"/>
@@ -199,19 +204,14 @@
             href="ssm2.gmfgraph#ExitActionsCompartment"/>
       </compartments>
       <compartments
-          children="//@nodes.0/@ownedChild/@children.0">
-        <compartment
-            href="ssm2.gmfgraph#RegionCompartment"/>
-      </compartments>
-      <compartments
-          children="//@nodes.0/@ownedChild/@children.5">
-        <compartment
-            href="ssm2.gmfgraph#VariableCompartment"/>
-      </compartments>
-      <compartments
           children="//@nodes.0/@ownedChild/@children.6">
         <compartment
             href="ssm2.gmfgraph#SuspensionTriggerCompartment"/>
+      </compartments>
+      <compartments
+          children="//@nodes.0/@ownedChild/@children.0">
+        <compartment
+            href="ssm2.gmfgraph#RegionCompartment"/>
       </compartments>
     </ownedChild>
   </nodes>

@@ -57,7 +57,7 @@
         itemSemanticEditPolicyClassName="State2ItemSemanticEditPolicy"
         notationViewFactoryClassName="State2ViewFactory"
         canonicalEditPolicyClassName="State2CanonicalEditPolicy"
-        compartments="//@diagram/@compartments.8 //@diagram/@compartments.10 //@diagram/@compartments.11 //@diagram/@compartments.12 //@diagram/@compartments.14 //@diagram/@compartments.9 //@diagram/@compartments.13"
+        compartments="//@diagram/@compartments.8 //@diagram/@compartments.9 //@diagram/@compartments.10 //@diagram/@compartments.11 //@diagram/@compartments.12 //@diagram/@compartments.13 //@diagram/@compartments.14"
         graphicalNodeEditPolicyClassName="State2GraphicalNodeEditPolicy"
         createCommandClassName="State2CreateCommand"
         containers="//@diagram/@compartments.7">
@@ -300,7 +300,7 @@
         itemSemanticEditPolicyClassName="StateItemSemanticEditPolicy"
         notationViewFactoryClassName="StateViewFactory"
         canonicalEditPolicyClassName="StateCanonicalEditPolicy"
-        compartments="//@diagram/@compartments.0 //@diagram/@compartments.2 //@diagram/@compartments.3 //@diagram/@compartments.4 //@diagram/@compartments.6 //@diagram/@compartments.1 //@diagram/@compartments.5"
+        compartments="//@diagram/@compartments.0 //@diagram/@compartments.1 //@diagram/@compartments.2 //@diagram/@compartments.3 //@diagram/@compartments.4 //@diagram/@compartments.5 //@diagram/@compartments.6"
         graphicalNodeEditPolicyClassName="StateGraphicalNodeEditPolicy"
         createCommandClassName="StateCreateCommand">
       <diagramRunTimeClass
@@ -420,7 +420,7 @@
       </viewmap>
     </compartments>
     <compartments
-        visualID="7039"
+        visualID="7031"
         editPartClassName="StateVariableCompartmentEditPart"
         itemSemanticEditPolicyClassName="StateVariableCompartmentItemSemanticEditPolicy"
         notationViewFactoryClassName="StateVariableCompartmentViewFactory"
@@ -439,7 +439,7 @@
       </viewmap>
     </compartments>
     <compartments
-        visualID="7031"
+        visualID="7033"
         editPartClassName="StateEntryActionsCompartmentEditPart"
         itemSemanticEditPolicyClassName="StateEntryActionsCompartmentItemSemanticEditPolicy"
         notationViewFactoryClassName="StateEntryActionsCompartmentViewFactory"
@@ -458,7 +458,7 @@
       </viewmap>
     </compartments>
     <compartments
-        visualID="7033"
+        visualID="7034"
         editPartClassName="StateInnerActionsCompartmentEditPart"
         itemSemanticEditPolicyClassName="StateInnerActionsCompartmentItemSemanticEditPolicy"
         notationViewFactoryClassName="StateInnerActionsCompartmentViewFactory"
@@ -477,7 +477,7 @@
       </viewmap>
     </compartments>
     <compartments
-        visualID="7034"
+        visualID="7035"
         editPartClassName="StateExitActionsCompartmentEditPart"
         itemSemanticEditPolicyClassName="StateExitActionsCompartmentItemSemanticEditPolicy"
         notationViewFactoryClassName="StateExitActionsCompartmentViewFactory"
@@ -496,7 +496,7 @@
       </viewmap>
     </compartments>
     <compartments
-        visualID="7040"
+        visualID="7039"
         editPartClassName="StateSuspensionTriggerCompartmentEditPart"
         itemSemanticEditPolicyClassName="StateSuspensionTriggerCompartmentItemSemanticEditPolicy"
         notationViewFactoryClassName="StateSuspensionTriggerCompartmentViewFactory"
@@ -515,7 +515,7 @@
       </viewmap>
     </compartments>
     <compartments
-        visualID="7035"
+        visualID="7040"
         editPartClassName="StateRegionCompartmentEditPart"
         itemSemanticEditPolicyClassName="StateRegionCompartmentItemSemanticEditPolicy"
         notationViewFactoryClassName="StateRegionCompartmentViewFactory"
@@ -572,7 +572,7 @@
       </viewmap>
     </compartments>
     <compartments
-        visualID="7041"
+        visualID="7032"
         editPartClassName="StateVariableCompartment2EditPart"
         itemSemanticEditPolicyClassName="StateVariableCompartment2ItemSemanticEditPolicy"
         notationViewFactoryClassName="StateVariableCompartment2ViewFactory"
@@ -591,7 +591,7 @@
       </viewmap>
     </compartments>
     <compartments
-        visualID="7032"
+        visualID="7036"
         editPartClassName="StateEntryActionsCompartment2EditPart"
         itemSemanticEditPolicyClassName="StateEntryActionsCompartment2ItemSemanticEditPolicy"
         notationViewFactoryClassName="StateEntryActionsCompartment2ViewFactory"
@@ -610,7 +610,7 @@
       </viewmap>
     </compartments>
     <compartments
-        visualID="7036"
+        visualID="7037"
         editPartClassName="StateInnerActionsCompartment2EditPart"
         itemSemanticEditPolicyClassName="StateInnerActionsCompartment2ItemSemanticEditPolicy"
         notationViewFactoryClassName="StateInnerActionsCompartment2ViewFactory"
@@ -629,7 +629,7 @@
       </viewmap>
     </compartments>
     <compartments
-        visualID="7037"
+        visualID="7038"
         editPartClassName="StateExitActionsCompartment2EditPart"
         itemSemanticEditPolicyClassName="StateExitActionsCompartment2ItemSemanticEditPolicy"
         notationViewFactoryClassName="StateExitActionsCompartment2ViewFactory"
@@ -648,7 +648,7 @@
       </viewmap>
     </compartments>
     <compartments
-        visualID="7042"
+        visualID="7041"
         editPartClassName="StateSuspensionTriggerCompartment2EditPart"
         itemSemanticEditPolicyClassName="StateSuspensionTriggerCompartment2ItemSemanticEditPolicy"
         notationViewFactoryClassName="StateSuspensionTriggerCompartment2ViewFactory"
@@ -667,7 +667,7 @@
       </viewmap>
     </compartments>
     <compartments
-        visualID="7038"
+        visualID="7042"
         editPartClassName="StateRegionCompartment2EditPart"
         itemSemanticEditPolicyClassName="StateRegionCompartment2ItemSemanticEditPolicy"
         notationViewFactoryClassName="StateRegionCompartment2ViewFactory"

@@ -69,13 +69,10 @@
       name="Transition"
       figure="TransitionFigure"/>
   <compartments
-      name="RegionCompartment"
+      name="SignalCompartment"
       figure="StateFigure"/>
   <compartments
-      name="StateCompartment"
-      figure="RegionFigure"/>
-  <compartments
-      name="SignalCompartment"
+      name="VariableCompartment"
       figure="StateFigure"/>
   <compartments
       name="EntryActionsCompartment"
@@ -87,11 +84,14 @@
       name="ExitActionsCompartment"
       figure="StateFigure"/>
   <compartments
-      name="VariableCompartment"
-      figure="StateFigure"/>
-  <compartments
       name="SuspensionTriggerCompartment"
       figure="StateFigure"/>
+  <compartments
+      name="RegionCompartment"
+      figure="StateFigure"/>
+  <compartments
+      name="StateCompartment"
+      figure="RegionFigure"/>
   <labels
       name="StateName"
       figure="StateFigure"
