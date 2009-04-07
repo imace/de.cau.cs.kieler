@@ -13,7 +13,15 @@
  */
 package de.cau.cs.kieler.kiml.layouter.metrics;
 
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.*;
+import de.cau.cs.kieler.core.kgraph.KEdge;
+import de.cau.cs.kieler.core.kgraph.KNode;
+import de.cau.cs.kieler.core.kgraph.KPort;
+import de.cau.cs.kieler.kiml.layout.klayoutdata.KShapeLayout;
+import de.cau.cs.kieler.kiml.layout.options.LayoutDirection;
+import de.cau.cs.kieler.kiml.layout.options.LayoutOptions;
+import de.cau.cs.kieler.kiml.layout.options.PortConstraints;
+import de.cau.cs.kieler.kiml.layout.options.PortSide;
+import de.cau.cs.kieler.kiml.layout.util.KimlLayoutUtil;
 
 /**
  * Generator for random graphs.
@@ -35,53 +43,37 @@ public class GraphGenerator {
      * @param withPorts if true, ports a generated and connected to the edges
      * @return a randomly generated graph
      */
-    public static KLayoutGraph generateGraph(int nodeCount, int edgesPerNode,
+    public static KNode generateGraph(int nodeCount, int edgesPerNode,
             boolean withPorts) {
         if (nodeCount < 1 || edgesPerNode < 0)
             throw new IllegalArgumentException("Number of nodes and edges per node must be positive.");
         
         // create parent node
-        KLayoutGraph layoutGraph = KimlLayoutGraphFactory.eINSTANCE.createKLayoutGraph();
+        KNode layoutGraph = KimlLayoutUtil.createInitializedNode();
         {
-            KNodeLayout nodeLayout = KimlLayoutGraphFactory.eINSTANCE.createKNodeLayout();
-            nodeLayout.setLocation(KimlLayoutGraphFactory.eINSTANCE.createKPoint());
-            nodeLayout.setSize(KimlLayoutGraphFactory.eINSTANCE.createKDimension());
-            nodeLayout.getLayoutOptions().add(KLayoutOption.HORIZONTAL);
-            KInsets insets = KimlLayoutGraphFactory.eINSTANCE.createKInsets();
-            nodeLayout.setInsets(insets);
-            layoutGraph.setLayout(nodeLayout);
+            KShapeLayout nodeLayout = KimlLayoutUtil.getShapeLayout(layoutGraph);
+            LayoutOptions.setLayoutDirection(nodeLayout, LayoutDirection.HORIZONTAL);
         }
         
         // create nodes
-        KLayoutNode[] nodes = new KLayoutNode[nodeCount];
+        KNode[] nodes = new KNode[nodeCount];
         for (int i = 0; i < nodeCount; i++) {
-            nodes[i] = KimlLayoutGraphFactory.eINSTANCE.createKLayoutNode();
-            KNodeLayout nodeLayout = KimlLayoutGraphFactory.eINSTANCE.createKNodeLayout();
-            nodeLayout.setLocation(KimlLayoutGraphFactory.eINSTANCE.createKPoint());
-            KDimension nodeSize = KimlLayoutGraphFactory.eINSTANCE.createKDimension();
-            nodeSize.setWidth(NODE_WIDTH);
-            nodeSize.setHeight(NODE_HEIGHT);
-            nodeLayout.setSize(nodeSize);
-            nodeLayout.getLayoutOptions().add(KLayoutOption.FIXED_SIZE);
+            nodes[i] = KimlLayoutUtil.createInitializedNode();
+            KShapeLayout nodeLayout = KimlLayoutUtil.getShapeLayout(nodes[i]);
+            nodeLayout.setWidth(NODE_WIDTH);
+            nodeLayout.setHeight(NODE_HEIGHT);
+            LayoutOptions.setFixedSize(nodeLayout);
             if (withPorts) {
-                nodeLayout.getLayoutOptions().add(KLayoutOption.FIXED_PORTS);
+                LayoutOptions.setPortConstraints(nodeLayout,
+                        PortConstraints.FIXED_POS);;
             }
-            nodes[i].setLayout(nodeLayout);
-            KNodeLabel nodeLabel = KimlLayoutGraphFactory.eINSTANCE.createKNodeLabel();
-            KNodeLabelLayout nodeLabelLayout = KimlLayoutGraphFactory.eINSTANCE.createKNodeLabelLayout();
-            nodeLabelLayout.setLocation(KimlLayoutGraphFactory.eINSTANCE.createKPoint());
-            nodeLabelLayout.setSize(KimlLayoutGraphFactory.eINSTANCE.createKDimension());
-            nodeLabel.setLabelLayout(nodeLabelLayout);
-            nodes[i].setLabel(nodeLabel);
-            nodes[i].setParentNode(layoutGraph);
+            nodes[i].setParent(layoutGraph);
         }
         
         // create edges
         for (int i = 0; i < nodeCount; i++) {
             for (int j = 0; j < edgesPerNode; j++) {
-                KLayoutEdge edge = KimlLayoutGraphFactory.eINSTANCE.createKLayoutEdge();
-                KEdgeLayout edgeLayout = KimlLayoutGraphFactory.eINSTANCE.createKEdgeLayout();
-                edge.setLayout(edgeLayout);
+                KEdge edge = KimlLayoutUtil.createInitializedEdge();
                 edge.setSource(nodes[i]);
                 int targetIndex = (int)(Math.random() * nodeCount);
                 edge.setTarget(nodes[targetIndex]);
@@ -103,35 +95,31 @@ public class GraphGenerator {
      * @param edge edge to connect to the new port
      * @return a new port
      */
-    private static KLayoutPort createPort(KLayoutNode node, KLayoutEdge edge) {
-        KLayoutPort port = KimlLayoutGraphFactory.eINSTANCE.createKLayoutPort();
-        KPortLayout portLayout = KimlLayoutGraphFactory.eINSTANCE.createKPortLayout();
-        KPoint portLocation = KimlLayoutGraphFactory.eINSTANCE.createKPoint();
+    private static KPort createPort(KNode node, KEdge edge) {
+        KPort port = KimlLayoutUtil.createInitializedPort();
+        KShapeLayout portLayout = KimlLayoutUtil.getShapeLayout(port);
         switch ((int)(Math.random() * 4)) {
         case 0:
-            portLocation.setX((float)(Math.random() * NODE_WIDTH));
-            portLocation.setY(0.0f);
-            portLayout.setPlacement(KPortPlacement.NORTH);
+            portLayout.setXpos((float)(Math.random() * NODE_WIDTH));
+            portLayout.setYpos(0.0f);
+            LayoutOptions.setPortSide(portLayout, PortSide.NORTH);
             break;
         case 1:
-            portLocation.setX(NODE_WIDTH);
-            portLocation.setY((float)(Math.random() * NODE_HEIGHT));
-            portLayout.setPlacement(KPortPlacement.EAST);
+            portLayout.setXpos(NODE_WIDTH);
+            portLayout.setYpos((float)(Math.random() * NODE_HEIGHT));
+            LayoutOptions.setPortSide(portLayout, PortSide.EAST);
             break;
         case 2:
-            portLocation.setX((float)(Math.random() * NODE_WIDTH));
-            portLocation.setY(NODE_HEIGHT);
-            portLayout.setPlacement(KPortPlacement.SOUTH);
+            portLayout.setXpos((float)(Math.random() * NODE_WIDTH));
+            portLayout.setYpos(NODE_HEIGHT);
+            LayoutOptions.setPortSide(portLayout, PortSide.SOUTH);
             break;
         case 3:
-            portLocation.setX(0.0f);
-            portLocation.setY((float)(Math.random() * NODE_HEIGHT));
-            portLayout.setPlacement(KPortPlacement.WEST);
+            portLayout.setXpos(0.0f);
+            portLayout.setYpos((float)(Math.random() * NODE_HEIGHT));
+            LayoutOptions.setPortSide(portLayout, PortSide.WEST);
             break;
         }
-        portLayout.setLocation(portLocation);
-        portLayout.setSize(KimlLayoutGraphFactory.eINSTANCE.createKDimension());
-        port.setLayout(portLayout);
         port.setNode(node);
         port.getEdges().add(edge);
         return port;

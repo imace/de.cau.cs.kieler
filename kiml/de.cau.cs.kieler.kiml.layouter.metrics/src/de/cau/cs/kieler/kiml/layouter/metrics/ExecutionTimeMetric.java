@@ -20,8 +20,8 @@ import java.io.OutputStreamWriter;
 import de.cau.cs.kieler.core.KielerException;
 import de.cau.cs.kieler.core.alg.IKielerProgressMonitor;
 import de.cau.cs.kieler.core.alg.NullProgressMonitor;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutGraph;
-import de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayoutProvider;
+import de.cau.cs.kieler.core.kgraph.KNode;
+import de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider;
 
 /**
  * 
@@ -30,7 +30,7 @@ import de.cau.cs.kieler.kiml.layout.services.KimlAbstractLayoutProvider;
 public class ExecutionTimeMetric {
     
     /** the layout provider */
-    private KimlAbstractLayoutProvider layoutProvider;
+    private AbstractLayoutProvider layoutProvider;
     /** the output stream writer */
     private OutputStreamWriter outputWriter;
     /** number of execution time measurements per decade */
@@ -46,7 +46,7 @@ public class ExecutionTimeMetric {
      * @param layoutProvider the layout provider to examine
      * @param outputStream the output stream to which measurements are written
      */
-    public ExecutionTimeMetric(KimlAbstractLayoutProvider layoutProvider,
+    public ExecutionTimeMetric(AbstractLayoutProvider layoutProvider,
             OutputStream outputStream) {
         this.layoutProvider = layoutProvider;
         this.outputWriter = new OutputStreamWriter(outputStream);
@@ -93,7 +93,7 @@ public class ExecutionTimeMetric {
      * @throws KielerException if the layout provider fails
      */
     private void warmup() throws KielerException {
-        KLayoutGraph layoutGraph = GraphGenerator.generateGraph(100, 2, true);
+        KNode layoutGraph = GraphGenerator.generateGraph(100, 2, true);
         IKielerProgressMonitor progressMonitor = new NullProgressMonitor();
         for (int i = 0; i < 3; i++) {
             layoutProvider.doLayout(layoutGraph, progressMonitor);
@@ -115,7 +115,7 @@ public class ExecutionTimeMetric {
             double totalTime = 0.0;
             for (int i = 0; i < graphsPerSize; i++) {
                 System.out.print(i);
-                KLayoutGraph layoutGraph = GraphGenerator.generateGraph(nodeCount, edgeCount, true);
+                KNode layoutGraph = GraphGenerator.generateGraph(nodeCount, edgeCount, true);
                 double minTime = Double.MAX_VALUE;
                 for (int j = 0; j < runsPerGraph; j++) {
                     System.gc();

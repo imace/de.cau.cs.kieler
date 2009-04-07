@@ -2,7 +2,7 @@
 <feature
       id="de.cau.cs.kieler.klodd"
       label="KIELER Dataflow Layout"
-      version="1.0.0"
+      version="0.1.0"
       provider-name="Christian-Albrechts-University of Kiel">
 
    <description url="http://rtsys.informatik.uni-kiel.de/trac/kieler">
@@ -21,28 +21,37 @@
    </license>
 
    <requires>
-      <import plugin="org.eclipse.emf.ecore" version="2.4.0" match="greaterOrEqual"/>
+      <import feature="org.eclipse.emf.ecore" version="2.4.0" match="greaterOrEqual"/>
+      <import feature="org.eclipse.emf.common" version="2.4.0" match="greaterOrEqual"/>
+      <import feature="org.eclipse.gmf.runtime.notation" version="1.1.2" match="greaterOrEqual"/>
    </requires>
 
    <plugin
          id="de.cau.cs.kieler.core"
-         download-size="0"
-         install-size="0"
-         version="1.0.0"
+         download-size="44"
+         install-size="44"
+         version="0.1.0"
          unpack="false"/>
 
    <plugin
          id="de.cau.cs.kieler.kiml.layout"
-         download-size="0"
-         install-size="0"
-         version="1.0.0"
+         download-size="58"
+         install-size="58"
+         version="0.1.0"
          unpack="false"/>
 
    <plugin
          id="de.cau.cs.kieler.klodd.hierarchical"
-         download-size="0"
-         install-size="0"
-         version="1.0.0"
+         download-size="77"
+         install-size="77"
+         version="0.1.0"
+         unpack="false"/>
+
+   <plugin
+         id="de.cau.cs.kieler.core.kgraph"
+         download-size="47"
+         install-size="47"
+         version="0.1.0"
          unpack="false"/>
 
 </feature>
