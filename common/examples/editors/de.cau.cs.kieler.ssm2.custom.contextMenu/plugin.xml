@@ -71,6 +71,9 @@
             label="Insert Element" 
             path="additions"> 
             <separator name="group1"/>
+            <separator name="group2"/>
+            <separator name="group3"/>
+            <separator name="group4"/>
          </menu>
          <action
                class="de.cau.cs.kieler.ssm2.custom.contextMenu.AddSuspensionTriggerAction"
@@ -78,7 +81,7 @@
                enablesFor="1"
                id="de.cau.cs.kieler.ssm2.custom.contextMenu.AddSuspensionTriggerActionID"
                label="Add SuspensionTrigger"
-               menubarPath="ElementInsert/group1">
+               menubarPath="ElementInsert/group4">
          </action>
          <action
                class="de.cau.cs.kieler.ssm2.custom.contextMenu.AddExitActionAction"
@@ -86,7 +89,7 @@
                enablesFor="1"
                id="de.cau.cs.kieler.ssm2.custom.contextMenu.AddExitActionActionID"
                label="Add OnExitAction"
-               menubarPath="ElementInsert/group1">
+               menubarPath="ElementInsert/group3">
          </action>
          <action
                class="de.cau.cs.kieler.ssm2.custom.contextMenu.AddInnerActionAction"
@@ -94,7 +97,7 @@
                enablesFor="1"
                id="de.cau.cs.kieler.ssm2.custom.contextMenu.AddInnerActionActionID"
                label="Add OnInsideAction"
-               menubarPath="ElementInsert/group1">
+               menubarPath="ElementInsert/group3">
          </action>
          <action
                class="de.cau.cs.kieler.ssm2.custom.contextMenu.AddEntryActionAction"
@@ -102,7 +105,7 @@
                enablesFor="1"
                id="de.cau.cs.kieler.ssm2.custom.contextMenu.AddEntryActionActionID"
                label="Add OnEntryAction"
-               menubarPath="ElementInsert/group1">
+               menubarPath="ElementInsert/group3">
          </action>
          <action
                class="de.cau.cs.kieler.ssm2.custom.contextMenu.AddVariableAction"
@@ -110,7 +113,7 @@
                enablesFor="1"
                id="de.cau.cs.kieler.ssm2.custom.contextMenu.AddVariableActionID"
                label="Add Variable"
-               menubarPath="ElementInsert/group1">
+               menubarPath="ElementInsert/group2">
          </action>
          <action
                class="de.cau.cs.kieler.ssm2.custom.contextMenu.AddSignalAction"
@@ -118,7 +121,7 @@
                enablesFor="1"
                id="de.cau.cs.kieler.ssm2.custom.contextMenu.AddSignalActionID"
                label="Add Signal"
-               menubarPath="ElementInsert/group1">
+               menubarPath="ElementInsert/group2">
          </action>
          <action
                class="de.cau.cs.kieler.ssm2.custom.contextMenu.AddRegionAction"
@@ -139,14 +142,25 @@
             label="Insert Element" 
             path="additions"> 
             <separator name="group1"/>
+            <separator name="group2"/>
+            <separator name="group3"/>
+            <separator name="group4"/>
          </menu>
+          <action
+               class="de.cau.cs.kieler.ssm2.custom.contextMenu.AddSuspensionTrigger2Action"
+               definitionId="de.cau.cs.kieler.ssm2.custom.contextMenu.AddSuspensionTrigger2"
+               enablesFor="1"
+               id="de.cau.cs.kieler.ssm2.custom.contextMenu.AddSuspensionTrigger2ActionID"
+               label="Add SuspensionTrigger"
+               menubarPath="ElementInsert/group4">
+         </action>
          <action
                class="de.cau.cs.kieler.ssm2.custom.contextMenu.AddExitAction2Action"
                definitionId="de.cau.cs.kieler.ssm2.custom.contextMenu.AddExitAction2"
                enablesFor="1"
                id="de.cau.cs.kieler.ssm2.custom.contextMenu.AddExitAction2ActionID"
                label="Add OnExitAction"
-               menubarPath="ElementInsert/group1">
+               menubarPath="ElementInsert/group3">
          </action>
          <action
                class="de.cau.cs.kieler.ssm2.custom.contextMenu.AddInnerAction2Action"
@@ -154,7 +168,7 @@
                enablesFor="1"
                id="de.cau.cs.kieler.ssm2.custom.contextMenu.AddInnerAction2ActionID"
                label="Add OnInsideAction"
-               menubarPath="ElementInsert/group1">
+               menubarPath="ElementInsert/group3">
          </action>
          <action
                class="de.cau.cs.kieler.ssm2.custom.contextMenu.AddEntryAction2Action"
@@ -162,7 +176,15 @@
                enablesFor="1"
                id="de.cau.cs.kieler.ssm2.custom.contextMenu.AddEntryAction2ActionID"
                label="Add OnEntryAction"
-               menubarPath="ElementInsert/group1">
+               menubarPath="ElementInsert/group3">
+         </action>
+         <action
+               class="de.cau.cs.kieler.ssm2.custom.contextMenu.AddVariable2Action"
+               definitionId="de.cau.cs.kieler.ssm2.custom.contextMenu.AddVariable2"
+               enablesFor="1"
+               id="de.cau.cs.kieler.ssm2.custom.contextMenu.AddVariabl2eActionID"
+               label="Add Variable"
+               menubarPath="ElementInsert/group2">
          </action>
          <action
                class="de.cau.cs.kieler.ssm2.custom.contextMenu.AddSignal2Action"
@@ -170,7 +192,7 @@
                enablesFor="1"
                id="de.cau.cs.kieler.ssm2.custom.contextMenu.AddSignal2ActionID"
                label="Add Signal"
-               menubarPath="ElementInsert/group1">
+               menubarPath="ElementInsert/group2">
          </action>
          <action
                class="de.cau.cs.kieler.ssm2.custom.contextMenu.AddRegion2Action"
