@@ -203,6 +203,9 @@ public class StateLayout extends ConstrainedToolbarLayout {
 				State state = (State) modelElement;
 				if (isSimple(state)) {
 					minHeight = 40;
+					if (minWidth < 40) {
+						minWidth = 40;
+					}
 				}
 			}
 		}	
