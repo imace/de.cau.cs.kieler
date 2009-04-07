@@ -3,6 +3,7 @@ package de.cau.cs.kieler.core.services;
 import java.util.EventObject;
 
 
+@SuppressWarnings("serial")
 public class GenericEvent extends EventObject {
 
 	Object data;

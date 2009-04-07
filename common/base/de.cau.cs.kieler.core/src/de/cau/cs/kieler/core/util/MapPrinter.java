@@ -18,12 +18,12 @@ import java.util.Map;
 /**
  * Debugger Class to visualize the contents of a Map. Simply prints the Map
  * contents into a String.
+ * 
  * @author haf
  */
-
 public class MapPrinter {
 	
-	public static String toString(Map m){
+	public static String toString(Map<?,?> m){
 		StringBuffer b = new StringBuffer();
 		
 		for (Object key : m.keySet()) {
@@ -37,4 +37,5 @@ public class MapPrinter {
 		
 		return b.toString();
 	}
+	
 }
