@@ -31,7 +31,7 @@
         compartments="//@diagram/@compartments.7"
         graphicalNodeEditPolicyClassName="RegionGraphicalNodeEditPolicy"
         createCommandClassName="RegionCreateCommand"
-        containers="//@diagram/@compartments.12 //@diagram/@compartments.4">
+        containers="//@diagram/@compartments.14 //@diagram/@compartments.6">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <elementType
@@ -57,7 +57,7 @@
         itemSemanticEditPolicyClassName="State2ItemSemanticEditPolicy"
         notationViewFactoryClassName="State2ViewFactory"
         canonicalEditPolicyClassName="State2CanonicalEditPolicy"
-        compartments="//@diagram/@compartments.8 //@diagram/@compartments.9 //@diagram/@compartments.10 //@diagram/@compartments.11 //@diagram/@compartments.12 //@diagram/@compartments.13 //@diagram/@compartments.14"
+        compartments="//@diagram/@compartments.8 //@diagram/@compartments.10 //@diagram/@compartments.11 //@diagram/@compartments.12 //@diagram/@compartments.14 //@diagram/@compartments.9 //@diagram/@compartments.13"
         graphicalNodeEditPolicyClassName="State2GraphicalNodeEditPolicy"
         createCommandClassName="State2CreateCommand"
         containers="//@diagram/@compartments.7">
@@ -143,7 +143,7 @@
         canonicalEditPolicyClassName="ActionCanonicalEditPolicy"
         graphicalNodeEditPolicyClassName="ActionGraphicalNodeEditPolicy"
         createCommandClassName="ActionCreateCommand"
-        containers="//@diagram/@compartments.9 //@diagram/@compartments.1">
+        containers="//@diagram/@compartments.10 //@diagram/@compartments.2">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <elementType
@@ -175,7 +175,7 @@
         canonicalEditPolicyClassName="Action2CanonicalEditPolicy"
         graphicalNodeEditPolicyClassName="Action2GraphicalNodeEditPolicy"
         createCommandClassName="Action2CreateCommand"
-        containers="//@diagram/@compartments.10 //@diagram/@compartments.2">
+        containers="//@diagram/@compartments.11 //@diagram/@compartments.3">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <elementType
@@ -207,7 +207,7 @@
         canonicalEditPolicyClassName="Action3CanonicalEditPolicy"
         graphicalNodeEditPolicyClassName="Action3GraphicalNodeEditPolicy"
         createCommandClassName="Action3CreateCommand"
-        containers="//@diagram/@compartments.11 //@diagram/@compartments.3">
+        containers="//@diagram/@compartments.12 //@diagram/@compartments.4">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <elementType
@@ -239,7 +239,7 @@
         canonicalEditPolicyClassName="VariableCanonicalEditPolicy"
         graphicalNodeEditPolicyClassName="VariableGraphicalNodeEditPolicy"
         createCommandClassName="VariableCreateCommand"
-        containers="//@diagram/@compartments.13 //@diagram/@compartments.5">
+        containers="//@diagram/@compartments.9 //@diagram/@compartments.1">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <elementType
@@ -271,7 +271,7 @@
         canonicalEditPolicyClassName="SuspensionTriggerCanonicalEditPolicy"
         graphicalNodeEditPolicyClassName="SuspensionTriggerGraphicalNodeEditPolicy"
         createCommandClassName="SuspensionTriggerCreateCommand"
-        containers="//@diagram/@compartments.14 //@diagram/@compartments.6">
+        containers="//@diagram/@compartments.13 //@diagram/@compartments.5">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <elementType
@@ -300,7 +300,7 @@
         itemSemanticEditPolicyClassName="StateItemSemanticEditPolicy"
         notationViewFactoryClassName="StateViewFactory"
         canonicalEditPolicyClassName="StateCanonicalEditPolicy"
-        compartments="//@diagram/@compartments.0 //@diagram/@compartments.1 //@diagram/@compartments.2 //@diagram/@compartments.3 //@diagram/@compartments.4 //@diagram/@compartments.5 //@diagram/@compartments.6"
+        compartments="//@diagram/@compartments.0 //@diagram/@compartments.2 //@diagram/@compartments.3 //@diagram/@compartments.4 //@diagram/@compartments.6 //@diagram/@compartments.1 //@diagram/@compartments.5"
         graphicalNodeEditPolicyClassName="StateGraphicalNodeEditPolicy"
         createCommandClassName="StateCreateCommand">
       <diagramRunTimeClass
@@ -420,6 +420,25 @@
       </viewmap>
     </compartments>
     <compartments
+        visualID="7039"
+        editPartClassName="StateVariableCompartmentEditPart"
+        itemSemanticEditPolicyClassName="StateVariableCompartmentItemSemanticEditPolicy"
+        notationViewFactoryClassName="StateVariableCompartmentViewFactory"
+        canonicalEditPolicyClassName="StateVariableCompartmentCanonicalEditPolicy"
+        childNodes="//@diagram/@childNodes.6"
+        title="VariableCompartment"
+        needsTitle="false"
+        node="//@diagram/@topLevelNodes.0">
+      <diagramRunTimeClass
+          href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+      <viewmap
+          xsi:type="gmfgen:InnerClassViewmap"
+          className="StateFigure"
+          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class StateFigure extends de.cau.cs.kieler.ssm2.custom.AttributeAwareStateFigure {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureStateNameFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public StateFigure() {&#xA;&#x9;&#x9;&#xA;&#x9;de.cau.cs.kieler.ssm2.custom.StateLayout layoutThis = new de.cau.cs.kieler.ssm2.custom.StateLayout();&#xA;&#xA;&#xA;&#x9;this.setLayoutManager(layoutThis);&#xA;&#xA;&#x9;&#x9;&#xA;&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureStateNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureStateNameFigure.setText(&quot;&quot;);&#xA;&#xA;fFigureStateNameFigure.setFont(FFIGURESTATENAMEFIGURE_FONT);&#xA;&#xA;&#xA;&#xA;fFigureStateNameFigure.setBorder(new org.eclipse.draw2d.MarginBorder(getMapMode().DPtoLP(5)&#xA;, getMapMode().DPtoLP(10)&#xA;, getMapMode().DPtoLP(5)&#xA;, getMapMode().DPtoLP(10)&#xA;));&#xA;&#xA;this.add(fFigureStateNameFigure);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private boolean myUseLocalCoordinates = false;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected boolean useLocalCoordinates() {&#xA;&#x9;&#x9;return myUseLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#xA;&#x9;&#x9;myUseLocalCoordinates = useLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureStateNameFigure() {&#xA;&#x9;&#x9;return fFigureStateNameFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;/**&#xA; * @generated&#xA; */&#xA;static final org.eclipse.swt.graphics.Font FFIGURESTATENAMEFIGURE_FONT = new org.eclipse.swt.graphics.Font(org.eclipse.swt.widgets.Display.getCurrent(), org.eclipse.swt.widgets.Display.getDefault().getSystemFont().getFontData()[0].getName(), 10, org.eclipse.swt.SWT.BOLD);&#xA;&#xA;">
+        <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
+      </viewmap>
+    </compartments>
+    <compartments
         visualID="7031"
         editPartClassName="StateEntryActionsCompartmentEditPart"
         itemSemanticEditPolicyClassName="StateEntryActionsCompartmentItemSemanticEditPolicy"
@@ -477,44 +496,6 @@
       </viewmap>
     </compartments>
     <compartments
-        visualID="7035"
-        editPartClassName="StateRegionCompartmentEditPart"
-        itemSemanticEditPolicyClassName="StateRegionCompartmentItemSemanticEditPolicy"
-        notationViewFactoryClassName="StateRegionCompartmentViewFactory"
-        canonicalEditPolicyClassName="StateRegionCompartmentCanonicalEditPolicy"
-        childNodes="//@diagram/@childNodes.0"
-        title="RegionCompartment"
-        needsTitle="false"
-        node="//@diagram/@topLevelNodes.0">
-      <diagramRunTimeClass
-          href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
-      <viewmap
-          xsi:type="gmfgen:InnerClassViewmap"
-          className="StateFigure"
-          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class StateFigure extends de.cau.cs.kieler.ssm2.custom.AttributeAwareStateFigure {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureStateNameFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public StateFigure() {&#xA;&#x9;&#x9;&#xA;&#x9;de.cau.cs.kieler.ssm2.custom.StateLayout layoutThis = new de.cau.cs.kieler.ssm2.custom.StateLayout();&#xA;&#xA;&#xA;&#x9;this.setLayoutManager(layoutThis);&#xA;&#xA;&#x9;&#x9;&#xA;&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureStateNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureStateNameFigure.setText(&quot;&quot;);&#xA;&#xA;fFigureStateNameFigure.setFont(FFIGURESTATENAMEFIGURE_FONT);&#xA;&#xA;&#xA;&#xA;fFigureStateNameFigure.setBorder(new org.eclipse.draw2d.MarginBorder(getMapMode().DPtoLP(5)&#xA;, getMapMode().DPtoLP(10)&#xA;, getMapMode().DPtoLP(5)&#xA;, getMapMode().DPtoLP(10)&#xA;));&#xA;&#xA;this.add(fFigureStateNameFigure);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private boolean myUseLocalCoordinates = false;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected boolean useLocalCoordinates() {&#xA;&#x9;&#x9;return myUseLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#xA;&#x9;&#x9;myUseLocalCoordinates = useLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureStateNameFigure() {&#xA;&#x9;&#x9;return fFigureStateNameFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;/**&#xA; * @generated&#xA; */&#xA;static final org.eclipse.swt.graphics.Font FFIGURESTATENAMEFIGURE_FONT = new org.eclipse.swt.graphics.Font(org.eclipse.swt.widgets.Display.getCurrent(), org.eclipse.swt.widgets.Display.getDefault().getSystemFont().getFontData()[0].getName(), 10, org.eclipse.swt.SWT.BOLD);&#xA;&#xA;">
-        <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
-      </viewmap>
-    </compartments>
-    <compartments
-        visualID="7039"
-        editPartClassName="StateVariableCompartmentEditPart"
-        itemSemanticEditPolicyClassName="StateVariableCompartmentItemSemanticEditPolicy"
-        notationViewFactoryClassName="StateVariableCompartmentViewFactory"
-        canonicalEditPolicyClassName="StateVariableCompartmentCanonicalEditPolicy"
-        childNodes="//@diagram/@childNodes.6"
-        title="VariableCompartment"
-        needsTitle="false"
-        node="//@diagram/@topLevelNodes.0">
-      <diagramRunTimeClass
-          href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
-      <viewmap
-          xsi:type="gmfgen:InnerClassViewmap"
-          className="StateFigure"
-          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class StateFigure extends de.cau.cs.kieler.ssm2.custom.AttributeAwareStateFigure {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureStateNameFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public StateFigure() {&#xA;&#x9;&#x9;&#xA;&#x9;de.cau.cs.kieler.ssm2.custom.StateLayout layoutThis = new de.cau.cs.kieler.ssm2.custom.StateLayout();&#xA;&#xA;&#xA;&#x9;this.setLayoutManager(layoutThis);&#xA;&#xA;&#x9;&#x9;&#xA;&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureStateNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureStateNameFigure.setText(&quot;&quot;);&#xA;&#xA;fFigureStateNameFigure.setFont(FFIGURESTATENAMEFIGURE_FONT);&#xA;&#xA;&#xA;&#xA;fFigureStateNameFigure.setBorder(new org.eclipse.draw2d.MarginBorder(getMapMode().DPtoLP(5)&#xA;, getMapMode().DPtoLP(10)&#xA;, getMapMode().DPtoLP(5)&#xA;, getMapMode().DPtoLP(10)&#xA;));&#xA;&#xA;this.add(fFigureStateNameFigure);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private boolean myUseLocalCoordinates = false;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected boolean useLocalCoordinates() {&#xA;&#x9;&#x9;return myUseLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#xA;&#x9;&#x9;myUseLocalCoordinates = useLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureStateNameFigure() {&#xA;&#x9;&#x9;return fFigureStateNameFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;/**&#xA; * @generated&#xA; */&#xA;static final org.eclipse.swt.graphics.Font FFIGURESTATENAMEFIGURE_FONT = new org.eclipse.swt.graphics.Font(org.eclipse.swt.widgets.Display.getCurrent(), org.eclipse.swt.widgets.Display.getDefault().getSystemFont().getFontData()[0].getName(), 10, org.eclipse.swt.SWT.BOLD);&#xA;&#xA;">
-        <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
-      </viewmap>
-    </compartments>
-    <compartments
         visualID="7040"
         editPartClassName="StateSuspensionTriggerCompartmentEditPart"
         itemSemanticEditPolicyClassName="StateSuspensionTriggerCompartmentItemSemanticEditPolicy"
@@ -522,6 +503,25 @@
         canonicalEditPolicyClassName="StateSuspensionTriggerCompartmentCanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.7"
         title="SuspensionTriggerCompartment"
+        needsTitle="false"
+        node="//@diagram/@topLevelNodes.0">
+      <diagramRunTimeClass
+          href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+      <viewmap
+          xsi:type="gmfgen:InnerClassViewmap"
+          className="StateFigure"
+          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class StateFigure extends de.cau.cs.kieler.ssm2.custom.AttributeAwareStateFigure {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureStateNameFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public StateFigure() {&#xA;&#x9;&#x9;&#xA;&#x9;de.cau.cs.kieler.ssm2.custom.StateLayout layoutThis = new de.cau.cs.kieler.ssm2.custom.StateLayout();&#xA;&#xA;&#xA;&#x9;this.setLayoutManager(layoutThis);&#xA;&#xA;&#x9;&#x9;&#xA;&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureStateNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureStateNameFigure.setText(&quot;&quot;);&#xA;&#xA;fFigureStateNameFigure.setFont(FFIGURESTATENAMEFIGURE_FONT);&#xA;&#xA;&#xA;&#xA;fFigureStateNameFigure.setBorder(new org.eclipse.draw2d.MarginBorder(getMapMode().DPtoLP(5)&#xA;, getMapMode().DPtoLP(10)&#xA;, getMapMode().DPtoLP(5)&#xA;, getMapMode().DPtoLP(10)&#xA;));&#xA;&#xA;this.add(fFigureStateNameFigure);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private boolean myUseLocalCoordinates = false;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected boolean useLocalCoordinates() {&#xA;&#x9;&#x9;return myUseLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#xA;&#x9;&#x9;myUseLocalCoordinates = useLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureStateNameFigure() {&#xA;&#x9;&#x9;return fFigureStateNameFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;/**&#xA; * @generated&#xA; */&#xA;static final org.eclipse.swt.graphics.Font FFIGURESTATENAMEFIGURE_FONT = new org.eclipse.swt.graphics.Font(org.eclipse.swt.widgets.Display.getCurrent(), org.eclipse.swt.widgets.Display.getDefault().getSystemFont().getFontData()[0].getName(), 10, org.eclipse.swt.SWT.BOLD);&#xA;&#xA;">
+        <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
+      </viewmap>
+    </compartments>
+    <compartments
+        visualID="7035"
+        editPartClassName="StateRegionCompartmentEditPart"
+        itemSemanticEditPolicyClassName="StateRegionCompartmentItemSemanticEditPolicy"
+        notationViewFactoryClassName="StateRegionCompartmentViewFactory"
+        canonicalEditPolicyClassName="StateRegionCompartmentCanonicalEditPolicy"
+        childNodes="//@diagram/@childNodes.0"
+        title="RegionCompartment"
         needsTitle="false"
         node="//@diagram/@topLevelNodes.0">
       <diagramRunTimeClass
@@ -560,6 +560,25 @@
         canonicalEditPolicyClassName="StateSignalCompartment2CanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.2"
         title="SignalCompartment"
+        needsTitle="false"
+        node="//@diagram/@childNodes.1">
+      <diagramRunTimeClass
+          href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+      <viewmap
+          xsi:type="gmfgen:InnerClassViewmap"
+          className="StateFigure"
+          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class StateFigure extends de.cau.cs.kieler.ssm2.custom.AttributeAwareStateFigure {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureStateNameFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public StateFigure() {&#xA;&#x9;&#x9;&#xA;&#x9;de.cau.cs.kieler.ssm2.custom.StateLayout layoutThis = new de.cau.cs.kieler.ssm2.custom.StateLayout();&#xA;&#xA;&#xA;&#x9;this.setLayoutManager(layoutThis);&#xA;&#xA;&#x9;&#x9;&#xA;&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureStateNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureStateNameFigure.setText(&quot;&quot;);&#xA;&#xA;fFigureStateNameFigure.setFont(FFIGURESTATENAMEFIGURE_FONT);&#xA;&#xA;&#xA;&#xA;fFigureStateNameFigure.setBorder(new org.eclipse.draw2d.MarginBorder(getMapMode().DPtoLP(5)&#xA;, getMapMode().DPtoLP(10)&#xA;, getMapMode().DPtoLP(5)&#xA;, getMapMode().DPtoLP(10)&#xA;));&#xA;&#xA;this.add(fFigureStateNameFigure);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private boolean myUseLocalCoordinates = false;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected boolean useLocalCoordinates() {&#xA;&#x9;&#x9;return myUseLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#xA;&#x9;&#x9;myUseLocalCoordinates = useLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureStateNameFigure() {&#xA;&#x9;&#x9;return fFigureStateNameFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;/**&#xA; * @generated&#xA; */&#xA;static final org.eclipse.swt.graphics.Font FFIGURESTATENAMEFIGURE_FONT = new org.eclipse.swt.graphics.Font(org.eclipse.swt.widgets.Display.getCurrent(), org.eclipse.swt.widgets.Display.getDefault().getSystemFont().getFontData()[0].getName(), 10, org.eclipse.swt.SWT.BOLD);&#xA;&#xA;">
+        <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
+      </viewmap>
+    </compartments>
+    <compartments
+        visualID="7041"
+        editPartClassName="StateVariableCompartment2EditPart"
+        itemSemanticEditPolicyClassName="StateVariableCompartment2ItemSemanticEditPolicy"
+        notationViewFactoryClassName="StateVariableCompartment2ViewFactory"
+        canonicalEditPolicyClassName="StateVariableCompartment2CanonicalEditPolicy"
+        childNodes="//@diagram/@childNodes.6"
+        title="VariableCompartment"
         needsTitle="false"
         node="//@diagram/@childNodes.1">
       <diagramRunTimeClass
@@ -629,44 +648,6 @@
       </viewmap>
     </compartments>
     <compartments
-        visualID="7038"
-        editPartClassName="StateRegionCompartment2EditPart"
-        itemSemanticEditPolicyClassName="StateRegionCompartment2ItemSemanticEditPolicy"
-        notationViewFactoryClassName="StateRegionCompartment2ViewFactory"
-        canonicalEditPolicyClassName="StateRegionCompartment2CanonicalEditPolicy"
-        childNodes="//@diagram/@childNodes.0"
-        title="RegionCompartment"
-        needsTitle="false"
-        node="//@diagram/@childNodes.1">
-      <diagramRunTimeClass
-          href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
-      <viewmap
-          xsi:type="gmfgen:InnerClassViewmap"
-          className="StateFigure"
-          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class StateFigure extends de.cau.cs.kieler.ssm2.custom.AttributeAwareStateFigure {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureStateNameFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public StateFigure() {&#xA;&#x9;&#x9;&#xA;&#x9;de.cau.cs.kieler.ssm2.custom.StateLayout layoutThis = new de.cau.cs.kieler.ssm2.custom.StateLayout();&#xA;&#xA;&#xA;&#x9;this.setLayoutManager(layoutThis);&#xA;&#xA;&#x9;&#x9;&#xA;&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureStateNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureStateNameFigure.setText(&quot;&quot;);&#xA;&#xA;fFigureStateNameFigure.setFont(FFIGURESTATENAMEFIGURE_FONT);&#xA;&#xA;&#xA;&#xA;fFigureStateNameFigure.setBorder(new org.eclipse.draw2d.MarginBorder(getMapMode().DPtoLP(5)&#xA;, getMapMode().DPtoLP(10)&#xA;, getMapMode().DPtoLP(5)&#xA;, getMapMode().DPtoLP(10)&#xA;));&#xA;&#xA;this.add(fFigureStateNameFigure);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private boolean myUseLocalCoordinates = false;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected boolean useLocalCoordinates() {&#xA;&#x9;&#x9;return myUseLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#xA;&#x9;&#x9;myUseLocalCoordinates = useLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureStateNameFigure() {&#xA;&#x9;&#x9;return fFigureStateNameFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;/**&#xA; * @generated&#xA; */&#xA;static final org.eclipse.swt.graphics.Font FFIGURESTATENAMEFIGURE_FONT = new org.eclipse.swt.graphics.Font(org.eclipse.swt.widgets.Display.getCurrent(), org.eclipse.swt.widgets.Display.getDefault().getSystemFont().getFontData()[0].getName(), 10, org.eclipse.swt.SWT.BOLD);&#xA;&#xA;">
-        <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
-      </viewmap>
-    </compartments>
-    <compartments
-        visualID="7041"
-        editPartClassName="StateVariableCompartment2EditPart"
-        itemSemanticEditPolicyClassName="StateVariableCompartment2ItemSemanticEditPolicy"
-        notationViewFactoryClassName="StateVariableCompartment2ViewFactory"
-        canonicalEditPolicyClassName="StateVariableCompartment2CanonicalEditPolicy"
-        childNodes="//@diagram/@childNodes.6"
-        title="VariableCompartment"
-        needsTitle="false"
-        node="//@diagram/@childNodes.1">
-      <diagramRunTimeClass
-          href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
-      <viewmap
-          xsi:type="gmfgen:InnerClassViewmap"
-          className="StateFigure"
-          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class StateFigure extends de.cau.cs.kieler.ssm2.custom.AttributeAwareStateFigure {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureStateNameFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public StateFigure() {&#xA;&#x9;&#x9;&#xA;&#x9;de.cau.cs.kieler.ssm2.custom.StateLayout layoutThis = new de.cau.cs.kieler.ssm2.custom.StateLayout();&#xA;&#xA;&#xA;&#x9;this.setLayoutManager(layoutThis);&#xA;&#xA;&#x9;&#x9;&#xA;&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureStateNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureStateNameFigure.setText(&quot;&quot;);&#xA;&#xA;fFigureStateNameFigure.setFont(FFIGURESTATENAMEFIGURE_FONT);&#xA;&#xA;&#xA;&#xA;fFigureStateNameFigure.setBorder(new org.eclipse.draw2d.MarginBorder(getMapMode().DPtoLP(5)&#xA;, getMapMode().DPtoLP(10)&#xA;, getMapMode().DPtoLP(5)&#xA;, getMapMode().DPtoLP(10)&#xA;));&#xA;&#xA;this.add(fFigureStateNameFigure);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private boolean myUseLocalCoordinates = false;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected boolean useLocalCoordinates() {&#xA;&#x9;&#x9;return myUseLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#xA;&#x9;&#x9;myUseLocalCoordinates = useLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureStateNameFigure() {&#xA;&#x9;&#x9;return fFigureStateNameFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;/**&#xA; * @generated&#xA; */&#xA;static final org.eclipse.swt.graphics.Font FFIGURESTATENAMEFIGURE_FONT = new org.eclipse.swt.graphics.Font(org.eclipse.swt.widgets.Display.getCurrent(), org.eclipse.swt.widgets.Display.getDefault().getSystemFont().getFontData()[0].getName(), 10, org.eclipse.swt.SWT.BOLD);&#xA;&#xA;">
-        <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
-      </viewmap>
-    </compartments>
-    <compartments
         visualID="7042"
         editPartClassName="StateSuspensionTriggerCompartment2EditPart"
         itemSemanticEditPolicyClassName="StateSuspensionTriggerCompartment2ItemSemanticEditPolicy"
@@ -674,6 +655,25 @@
         canonicalEditPolicyClassName="StateSuspensionTriggerCompartment2CanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.7"
         title="SuspensionTriggerCompartment"
+        needsTitle="false"
+        node="//@diagram/@childNodes.1">
+      <diagramRunTimeClass
+          href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+      <viewmap
+          xsi:type="gmfgen:InnerClassViewmap"
+          className="StateFigure"
+          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class StateFigure extends de.cau.cs.kieler.ssm2.custom.AttributeAwareStateFigure {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureStateNameFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public StateFigure() {&#xA;&#x9;&#x9;&#xA;&#x9;de.cau.cs.kieler.ssm2.custom.StateLayout layoutThis = new de.cau.cs.kieler.ssm2.custom.StateLayout();&#xA;&#xA;&#xA;&#x9;this.setLayoutManager(layoutThis);&#xA;&#xA;&#x9;&#x9;&#xA;&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureStateNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureStateNameFigure.setText(&quot;&quot;);&#xA;&#xA;fFigureStateNameFigure.setFont(FFIGURESTATENAMEFIGURE_FONT);&#xA;&#xA;&#xA;&#xA;fFigureStateNameFigure.setBorder(new org.eclipse.draw2d.MarginBorder(getMapMode().DPtoLP(5)&#xA;, getMapMode().DPtoLP(10)&#xA;, getMapMode().DPtoLP(5)&#xA;, getMapMode().DPtoLP(10)&#xA;));&#xA;&#xA;this.add(fFigureStateNameFigure);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private boolean myUseLocalCoordinates = false;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected boolean useLocalCoordinates() {&#xA;&#x9;&#x9;return myUseLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#xA;&#x9;&#x9;myUseLocalCoordinates = useLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureStateNameFigure() {&#xA;&#x9;&#x9;return fFigureStateNameFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;/**&#xA; * @generated&#xA; */&#xA;static final org.eclipse.swt.graphics.Font FFIGURESTATENAMEFIGURE_FONT = new org.eclipse.swt.graphics.Font(org.eclipse.swt.widgets.Display.getCurrent(), org.eclipse.swt.widgets.Display.getDefault().getSystemFont().getFontData()[0].getName(), 10, org.eclipse.swt.SWT.BOLD);&#xA;&#xA;">
+        <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
+      </viewmap>
+    </compartments>
+    <compartments
+        visualID="7038"
+        editPartClassName="StateRegionCompartment2EditPart"
+        itemSemanticEditPolicyClassName="StateRegionCompartment2ItemSemanticEditPolicy"
+        notationViewFactoryClassName="StateRegionCompartment2ViewFactory"
+        canonicalEditPolicyClassName="StateRegionCompartment2CanonicalEditPolicy"
+        childNodes="//@diagram/@childNodes.0"
+        title="RegionCompartment"
         needsTitle="false"
         node="//@diagram/@childNodes.1">
       <diagramRunTimeClass
