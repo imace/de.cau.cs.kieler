@@ -131,5 +131,8 @@ public class AttributeAwareStateFigure extends AttributeAwareFigure {
 		conditionalFigureList.add(finalNCCF);
 		conditionalFigureList.add(finalCF);
 		conditionalFigureList.add(normalNCCF);
+		
+		// check conditions
+		notifyChanged(null);
 	}
 }

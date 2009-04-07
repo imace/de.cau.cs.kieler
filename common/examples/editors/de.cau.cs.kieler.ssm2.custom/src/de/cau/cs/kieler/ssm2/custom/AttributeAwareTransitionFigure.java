@@ -54,6 +54,9 @@ public class AttributeAwareTransitionFigure extends AttributeAwareConnection {
 		// Set default and current look
 		this.setDefaultLook(weakAbortCF);
 		this.setLook(strongAbortCF);
+		
+		// check conditions
+		notifyChanged(null);
 	}
 	
 	// Methods to create the different decorations
