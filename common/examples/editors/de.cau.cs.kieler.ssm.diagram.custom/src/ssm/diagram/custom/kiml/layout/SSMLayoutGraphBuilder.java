@@ -160,7 +160,7 @@ public class SSMLayoutGraphBuilder extends AbstractLayoutGraphBuilder {
 	 * @param currentEditPart
 	 *            The GraphicalEditPart which children will be processed
 	 * @param currentLayoutNode
-	 *            The corresponding KLayoutNode
+	 *            The corresponding KNode
 	 */
 	private void buildLayoutGraphRecursively(GraphicalEditPart currentEditPart,
 			KNode currentLayoutNode) {
@@ -260,7 +260,7 @@ public class SSMLayoutGraphBuilder extends AbstractLayoutGraphBuilder {
 
 		/*
 		 * Finally process all the connections, as Emma has build all the needed
-		 * KLayoutNodes which act as source and target.
+		 * KNodes which act as source and target.
 		 */
 		processConnections(connections);
 	}
@@ -272,7 +272,7 @@ public class SSMLayoutGraphBuilder extends AbstractLayoutGraphBuilder {
 	 * @param currentLayoutNode
 	 *            A KNode for which an initialized sub KNode should
 	 *            be created.
-	 * @return An initialized KLayoutNode which is a subnode of the provided one
+	 * @return An initialized KNode which is a subnode of the provided one
 	 */
 	private KNode processGetNewSubNode(KNode currentLayoutNode) {
 		KNode childLayoutNode = KimlLayoutUtil.createInitializedNode();
@@ -281,15 +281,15 @@ public class SSMLayoutGraphBuilder extends AbstractLayoutGraphBuilder {
 	}
 
 	/**
-	 * Takes a KLayoutNode and an EditPart and fills the layout information of
-	 * the EditPart into the KLayoutNode. Fills also the global maps which keep
-	 * track of the mapping between EditParts and KLayoutNodes.
+	 * Takes a KNode and an EditPart and fills the layout information of
+	 * the EditPart into the KNode. Fills also the global maps which keep
+	 * track of the mapping between EditParts and KNodes.
 	 * 
 	 * @param currentEditPart
 	 *            The EditPart whose information should be filled into the
-	 *            KLayoutNode
+	 *            KNode
 	 * @param currentLayoutNode
-	 *            The respective KLayoutNode
+	 *            The respective KNode
 	 * @param connections
 	 *            A list to which all the connections of the EditPart are added.
 	 */
@@ -345,16 +345,16 @@ public class SSMLayoutGraphBuilder extends AbstractLayoutGraphBuilder {
 	}
 
 	/**
-	 * Takes a KLayoutNode and an EditPart and fills the layout hint information
-	 * of the EditPart into the KLayoutNode. Layout hints are only applicable to
+	 * Takes a KNode and an EditPart and fills the layout hint information
+	 * of the EditPart into the KNode. Layout hints are only applicable to
 	 * certain elements of a SSM, that are Regions and CompositeStates, so
 	 * therefore the distinction from <code>processCommon</code>.
 	 * 
 	 * @param currentEditPart
 	 *            The EditPart whose layout hint information should be filled
-	 *            into the KLayoutNode
+	 *            into the KNode
 	 * @param currentLayoutNode
-	 *            The respective KLayoutNode
+	 *            The respective KNode
 	 */
 	private void processLayoutHints(GraphicalEditPart currentEditPart,
 			KNode currentLayoutNode) {
@@ -391,7 +391,7 @@ public class SSMLayoutGraphBuilder extends AbstractLayoutGraphBuilder {
 
 			if (currentLayoutNode.getParent() != null
 					&& currentLayoutNode.getParent().getParent() != null) {
-				if (LayoutOptions.getLayoutDirection(KimlLayoutUtil.getLayoutData(
+				if (LayoutOptions.getLayoutDirection(KimlLayoutUtil.getShapeLayout(
 				        currentLayoutNode.getParent().getParent()))
 				        == LayoutDirection.HORIZONTAL)
 					LayoutOptions.setLayoutDirection(nodeLayout,
@@ -425,7 +425,7 @@ public class SSMLayoutGraphBuilder extends AbstractLayoutGraphBuilder {
 		for (ConnectionEditPart connection : connections) {
 
 			/*
-			 * create the KLayoutEdge. The KLayoutEdge does not need to be added
+			 * create the KEdge. The KEdge does not need to be added
 			 * explicitly to the KLayoutGraph, but exists in it through the
 			 * EOppositeReference of EMF.
 			 */
