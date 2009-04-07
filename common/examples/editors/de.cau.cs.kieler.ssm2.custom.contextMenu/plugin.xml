@@ -33,25 +33,31 @@
    
    <extension point="org.eclipse.ui.commands">
 	  <category name="SSM2" description="Commands related to SSM diagrams." id="org.eclipse.gmf.category.ssm2"/>
-	  <command categoryId="org.eclipse.gmf.category.ssm2" description="Adds a new Input Signal" id="de.cau.cs.kieler.ssm2.custom.contextMenu.addInputSignal" name="Add Input Signal">
+	  <command categoryId="org.eclipse.gmf.category.ssm2" description="Adds a new Signal" id="de.cau.cs.kieler.ssm2.custom.contextMenu.addSignal" name="Add Signal">
 	  </command>
    </extension>
    
    <extension point="org.eclipse.ui.commands">
 	  <category name="SSM2" description="Commands related to SSM diagrams." id="org.eclipse.gmf.category.ssm2"/>
-	  <command categoryId="org.eclipse.gmf.category.ssm2" description="Adds a new Local Signal" id="de.cau.cs.kieler.ssm2.custom.contextMenu.addLocalSignal" name="Add Local Signal">
+	  <command categoryId="org.eclipse.gmf.category.ssm2" description="Adds a new Variable" id="de.cau.cs.kieler.ssm2.custom.contextMenu.addVariable" name="Add Variable">
 	  </command>
    </extension>
    
    <extension point="org.eclipse.ui.commands">
 	  <category name="SSM2" description="Commands related to SSM diagrams." id="org.eclipse.gmf.category.ssm2"/>
-	  <command categoryId="org.eclipse.gmf.category.ssm2" description="Adds a new Output Signal" id="de.cau.cs.kieler.ssm2.custom.contextMenu.addOutputSignal" name="Add Output Signal">
+	  <command categoryId="org.eclipse.gmf.category.ssm2" description="Adds a new SuspensionTrigger" id="de.cau.cs.kieler.ssm2.custom.contextMenu.addSuspensionTrigger" name="Add SuspensionTrigger">
 	  </command>
    </extension>
    
    <extension point="org.eclipse.ui.commands">
 	  <category name="SSM2" description="Commands related to SSM diagrams." id="org.eclipse.gmf.category.ssm2"/>
-	  <command categoryId="org.eclipse.gmf.category.ssm2" description="Adds a new Input/Output Signal" id="de.cau.cs.kieler.ssm2.custom.contextMenu.addInputOutputSignal" name="Add Input/Output Signal">
+	  <command categoryId="org.eclipse.gmf.category.ssm2" description="Adds a new Region" id="de.cau.cs.kieler.ssm2.custom.contextMenu.addRegion" name="Add Region">
+	  </command>
+   </extension>
+   
+   <extension point="org.eclipse.ui.commands">
+	  <category name="SSM2" description="Commands related to SSM diagrams." id="org.eclipse.gmf.category.ssm2"/>
+	  <command categoryId="org.eclipse.gmf.category.ssm2" description="Adds a new State" id="de.cau.cs.kieler.ssm2.custom.contextMenu.addState" name="Add State">
 	  </command>
    </extension>
    
@@ -61,24 +67,26 @@
             id="de.cau.cs.kieler.ssm2.diagram.ui.objectContribution.StateEditPart"
             objectClass="de.cau.cs.kieler.ssm2.diagram.edit.parts.StateEditPart">
          <menu 
-            id="ActionInsert" 
-            label="Add Action" 
+            id="ElementInsert" 
+            label="Insert Element" 
             path="additions"> 
             <separator name="group1"/>
          </menu>
-         <menu 
-            id="SignalInsert" 
-            label="Add Signal" 
-            path="additions"> 
-            <separator name="group2"/>
-         </menu>
+         <action
+               class="de.cau.cs.kieler.ssm2.custom.contextMenu.AddSuspensionTriggerAction"
+               definitionId="de.cau.cs.kieler.ssm2.custom.contextMenu.AddSuspensionTrigger"
+               enablesFor="1"
+               id="de.cau.cs.kieler.ssm2.custom.contextMenu.AddSuspensionTriggerActionID"
+               label="Add SuspensionTrigger"
+               menubarPath="ElementInsert/group1">
+         </action>
          <action
                class="de.cau.cs.kieler.ssm2.custom.contextMenu.AddExitActionAction"
                definitionId="de.cau.cs.kieler.ssm2.custom.contextMenu.AddExitAction"
                enablesFor="1"
                id="de.cau.cs.kieler.ssm2.custom.contextMenu.AddExitActionActionID"
                label="Add OnExitAction"
-               menubarPath="ActionInsert/group1">
+               menubarPath="ElementInsert/group1">
          </action>
          <action
                class="de.cau.cs.kieler.ssm2.custom.contextMenu.AddInnerActionAction"
@@ -86,7 +94,7 @@
                enablesFor="1"
                id="de.cau.cs.kieler.ssm2.custom.contextMenu.AddInnerActionActionID"
                label="Add OnInsideAction"
-               menubarPath="ActionInsert/group1">
+               menubarPath="ElementInsert/group1">
          </action>
          <action
                class="de.cau.cs.kieler.ssm2.custom.contextMenu.AddEntryActionAction"
@@ -94,39 +102,31 @@
                enablesFor="1"
                id="de.cau.cs.kieler.ssm2.custom.contextMenu.AddEntryActionActionID"
                label="Add OnEntryAction"
-               menubarPath="ActionInsert/group1">
+               menubarPath="ElementInsert/group1">
          </action>
          <action
-               class="de.cau.cs.kieler.ssm2.custom.contextMenu.AddInputOutputSignalAction"
-               definitionId="de.cau.cs.kieler.ssm2.custom.contextMenu.AddInputOutputSignal"
+               class="de.cau.cs.kieler.ssm2.custom.contextMenu.AddVariableAction"
+               definitionId="de.cau.cs.kieler.ssm2.custom.contextMenu.AddVariable"
                enablesFor="1"
-               id="de.cau.cs.kieler.ssm2.custom.contextMenu.AddInputOutputSignalActionID"
-               label="Add Input/Output Signal"
-               menubarPath="SignalInsert/group2">
+               id="de.cau.cs.kieler.ssm2.custom.contextMenu.AddVariableActionID"
+               label="Add Variable"
+               menubarPath="ElementInsert/group1">
          </action>
-          <action
-               class="de.cau.cs.kieler.ssm2.custom.contextMenu.AddOutputSignalAction"
-               definitionId="de.cau.cs.kieler.ssm2.custom.contextMenu.AddOutputSignal"
+         <action
+               class="de.cau.cs.kieler.ssm2.custom.contextMenu.AddSignalAction"
+               definitionId="de.cau.cs.kieler.ssm2.custom.contextMenu.AddSignal"
                enablesFor="1"
-               id="de.cau.cs.kieler.ssm2.custom.contextMenu.AddOutputSignalActionID"
-               label="Add Output Signal"
-               menubarPath="SignalInsert/group2">
+               id="de.cau.cs.kieler.ssm2.custom.contextMenu.AddSignalActionID"
+               label="Add Signal"
+               menubarPath="ElementInsert/group1">
          </action>
-          <action
-               class="de.cau.cs.kieler.ssm2.custom.contextMenu.AddLocalSignalAction"
-               definitionId="de.cau.cs.kieler.ssm2.custom.contextMenu.AddLocalSignal"
+         <action
+               class="de.cau.cs.kieler.ssm2.custom.contextMenu.AddRegionAction"
+               definitionId="de.cau.cs.kieler.ssm2.custom.contextMenu.AddRegion"
                enablesFor="1"
-               id="de.cau.cs.kieler.ssm2.custom.contextMenu.AddLocalSignalActionID"
-               label="Add Local Signal"
-               menubarPath="SignalInsert/group2">
-         </action>
-          <action
-               class="de.cau.cs.kieler.ssm2.custom.contextMenu.AddInputSignalAction"
-               definitionId="de.cau.cs.kieler.ssm2.custom.contextMenu.AddInputSignal"
-               enablesFor="1"
-               id="de.cau.cs.kieler.ssm2.custom.contextMenu.AddInputSignalActionID"
-               label="Add Input Signal"
-               menubarPath="SignalInsert/group2">
+               id="de.cau.cs.kieler.ssm2.custom.contextMenu.AddRegionActionID"
+               label="Add Region"
+               menubarPath="ElementInsert/group1">
          </action>
       </objectContribution>
       
@@ -135,16 +135,10 @@
             id="de.cau.cs.kieler.ssm2.diagram.ui.objectContribution.State2EditPart"
             objectClass="de.cau.cs.kieler.ssm2.diagram.edit.parts.State2EditPart">
          <menu 
-            id="ActionInsert" 
-            label="Add Action" 
+            id="ElementInsert" 
+            label="Insert Element" 
             path="additions"> 
             <separator name="group1"/>
-         </menu>
-          <menu 
-            id="SignalInsert" 
-            label="Add Signal" 
-            path="additions"> 
-            <separator name="group2"/>
          </menu>
          <action
                class="de.cau.cs.kieler.ssm2.custom.contextMenu.AddExitAction2Action"
@@ -152,7 +146,7 @@
                enablesFor="1"
                id="de.cau.cs.kieler.ssm2.custom.contextMenu.AddExitAction2ActionID"
                label="Add OnExitAction"
-               menubarPath="ActionInsert/group1">
+               menubarPath="ElementInsert/group1">
          </action>
          <action
                class="de.cau.cs.kieler.ssm2.custom.contextMenu.AddInnerAction2Action"
@@ -160,7 +154,7 @@
                enablesFor="1"
                id="de.cau.cs.kieler.ssm2.custom.contextMenu.AddInnerAction2ActionID"
                label="Add OnInsideAction"
-               menubarPath="ActionInsert/group1">
+               menubarPath="ElementInsert/group1">
          </action>
          <action
                class="de.cau.cs.kieler.ssm2.custom.contextMenu.AddEntryAction2Action"
@@ -168,41 +162,66 @@
                enablesFor="1"
                id="de.cau.cs.kieler.ssm2.custom.contextMenu.AddEntryAction2ActionID"
                label="Add OnEntryAction"
-               menubarPath="ActionInsert/group1">
+               menubarPath="ElementInsert/group1">
          </action>
          <action
-               class="de.cau.cs.kieler.ssm2.custom.contextMenu.AddInputOutputSignal2Action"
-               definitionId="de.cau.cs.kieler.ssm2.custom.contextMenu.AddInputOutputSignal2"
+               class="de.cau.cs.kieler.ssm2.custom.contextMenu.AddSignal2Action"
+               definitionId="de.cau.cs.kieler.ssm2.custom.contextMenu.AddSignal2"
                enablesFor="1"
-               id="de.cau.cs.kieler.ssm2.custom.contextMenu.AddInputOutputSignal2ActionID"
-               label="Add Input/Output Signal"
-               menubarPath="SignalInsert/group2">
+               id="de.cau.cs.kieler.ssm2.custom.contextMenu.AddSignal2ActionID"
+               label="Add Signal"
+               menubarPath="ElementInsert/group1">
          </action>
-          <action
-               class="de.cau.cs.kieler.ssm2.custom.contextMenu.AddOutputSignal2Action"
-               definitionId="de.cau.cs.kieler.ssm2.custom.contextMenu.AddOutputSignal2"
+         <action
+               class="de.cau.cs.kieler.ssm2.custom.contextMenu.AddRegion2Action"
+               definitionId="de.cau.cs.kieler.ssm2.custom.contextMenu.AddRegion2"
                enablesFor="1"
-               id="de.cau.cs.kieler.ssm2.custom.contextMenu.AddOutputSignal2ActionID"
-               label="Add Output Signal"
-               menubarPath="SignalInsert/group2">
+               id="de.cau.cs.kieler.ssm2.custom.contextMenu.AddRegion2ActionID"
+               label="Add Region"
+               menubarPath="ElementInsert/group1">
          </action>
-          <action
-               class="de.cau.cs.kieler.ssm2.custom.contextMenu.AddLocalSignal2Action"
-               definitionId="de.cau.cs.kieler.ssm2.custom.contextMenu.AddLocalSignal2"
+      </objectContribution>
+      
+      <objectContribution
+            adaptable="false"
+            id="de.cau.cs.kieler.ssm2.diagram.ui.objectContribution.RegionEditPart"
+            objectClass="de.cau.cs.kieler.ssm2.diagram.edit.parts.RegionEditPart">
+         <menu 
+            id="ElementInsert" 
+            label="Insert Element" 
+            path="additions"> 
+            <separator name="group1"/>
+         </menu>
+         <action
+               class="de.cau.cs.kieler.ssm2.custom.contextMenu.AddStateAction"
+               definitionId="de.cau.cs.kieler.ssm2.custom.contextMenu.AddState"
                enablesFor="1"
-               id="de.cau.cs.kieler.ssm2.custom.contextMenu.AddLocalSignal2ActionID"
-               label="Add Local Signal"
-               menubarPath="SignalInsert/group2">
+               id="de.cau.cs.kieler.ssm2.custom.contextMenu.AddStateActionID"
+               label="Add State"
+               menubarPath="ElementInsert/group1">
          </action>
-          <action
-               class="de.cau.cs.kieler.ssm2.custom.contextMenu.AddInputSignal2Action"
-               definitionId="de.cau.cs.kieler.ssm2.custom.contextMenu.AddInputSignal2"
+      </objectContribution>
+      
+      <objectContribution
+            adaptable="false"
+            id="de.cau.cs.kieler.ssm2.diagram.ui.objectContribution.Region2EditPart"
+            objectClass="de.cau.cs.kieler.ssm2.diagram.edit.parts.Region2EditPart">
+         <menu 
+            id="ElementInsert" 
+            label="Insert Element" 
+            path="additions"> 
+            <separator name="group1"/>
+         </menu>
+         <action
+               class="de.cau.cs.kieler.ssm2.custom.contextMenu.AddState2Action"
+               definitionId="de.cau.cs.kieler.ssm2.custom.contextMenu.AddState2"
                enablesFor="1"
-               id="de.cau.cs.kieler.ssm2.custom.contextMenu.AddInputSignal2ActionID"
-               label="Add Input Signal"
-               menubarPath="SignalInsert/group2">
+               id="de.cau.cs.kieler.ssm2.custom.contextMenu.AddState2ActionID"
+               label="Add State"
+               menubarPath="ElementInsert/group1">
          </action>
-      </objectContribution>                    
+      </objectContribution>
+      
    </extension>
 
 </plugin>

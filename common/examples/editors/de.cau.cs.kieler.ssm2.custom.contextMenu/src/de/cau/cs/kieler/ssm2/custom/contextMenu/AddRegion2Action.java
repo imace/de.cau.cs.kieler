@@ -8,8 +8,6 @@ import org.eclipse.gef.EditPartViewer;
 import org.eclipse.gef.Request;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.commands.CompoundCommand;
-import org.eclipse.gmf.runtime.diagram.ui.commands.DeferredCreateConnectionViewAndElementCommand;
-import org.eclipse.gmf.runtime.diagram.ui.requests.CreateConnectionViewAndElementRequest;
 import org.eclipse.gmf.runtime.diagram.ui.requests.CreateViewRequest;
 import org.eclipse.gmf.runtime.diagram.ui.requests.CreateViewRequestFactory;
 import org.eclipse.gmf.runtime.diagram.ui.requests.RequestConstants;
@@ -20,35 +18,33 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IActionDelegate;
-import org.eclipse.ui.actions.ActionDelegate;
 
-import de.cau.cs.kieler.ssm2.diagram.edit.parts.RegionEditPart;
-import de.cau.cs.kieler.ssm2.diagram.edit.parts.StateEditPart;
+import de.cau.cs.kieler.ssm2.diagram.edit.parts.State2EditPart;
 import de.cau.cs.kieler.ssm2.diagram.providers.Ssm2ElementTypes;
 
-public class AddInnerActionAction implements IActionDelegate {
+public class AddRegion2Action implements IActionDelegate {
 
 	private IStructuredSelection currentSelection;
-	private StateEditPart selectedElement;
+	private State2EditPart selectedElement;
 	
 	@Override
 	public void run(IAction action) {
-		CompoundCommand cc = new CompoundCommand("Add OnInsideAction");
+		CompoundCommand cc = new CompoundCommand("Add Region");
 
-		// Create the new action.
-		CreateViewRequest actionRequest = CreateViewRequestFactory.getCreateShapeRequest(Ssm2ElementTypes.Action_3004, selectedElement.getDiagramPreferencesHint());
+		// Create the new Region
+		CreateViewRequest regionRequest = CreateViewRequestFactory.getCreateShapeRequest(Ssm2ElementTypes.Region_3006, selectedElement.getDiagramPreferencesHint());
 
-		//RegionEditPart regionEditPart = (RegionEditPart) selectedElement.getParent();
-		Command createActionCmd = /*regionEditPart*/selectedElement.getCommand(actionRequest);
-		IAdaptable actionViewAdapter = (IAdaptable) ((List) actionRequest.getNewObject()).get(0);
-
-		cc.add(createActionCmd);
+		
+		Command createRegionCmd = selectedElement.getCommand(regionRequest);
+		IAdaptable regionViewAdapter = (IAdaptable) ((List) regionRequest.getNewObject()).get(0);
+		
+		cc.add(createRegionCmd);
 
 		selectedElement.getDiagramEditDomain().getDiagramCommandStack().execute(cc);
 
-		// put the new action in edit mode
+		// Put the new Region in edit mode
 		final EditPartViewer viewer = selectedElement.getViewer();
-		final EditPart elementPart = (EditPart) viewer.getEditPartRegistry().get(actionViewAdapter.getAdapter(View.class));
+		final EditPart elementPart = (EditPart) viewer.getEditPartRegistry().get(regionViewAdapter.getAdapter(View.class));
 		if (elementPart != null) {
 			Display.getCurrent().asyncExec(new Runnable() {
 
@@ -65,7 +61,7 @@ public class AddInnerActionAction implements IActionDelegate {
 	public void selectionChanged(IAction action, ISelection selection) {
 		try {
 			currentSelection = (IStructuredSelection) selection;
-			selectedElement = (StateEditPart) currentSelection.getFirstElement();
+			selectedElement = (State2EditPart) currentSelection.getFirstElement();
 			action.setEnabled(true);
 			return;
 		}

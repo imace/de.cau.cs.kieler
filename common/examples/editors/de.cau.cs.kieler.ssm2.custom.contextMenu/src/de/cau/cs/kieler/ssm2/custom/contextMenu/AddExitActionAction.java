@@ -33,7 +33,7 @@ public class AddExitActionAction implements IActionDelegate {
 	
 	@Override
 	public void run(IAction action) {
-		CompoundCommand cc = new CompoundCommand("Add OnEntryAction");
+		CompoundCommand cc = new CompoundCommand("Add OnExitAction");
 
 		// Create the new action.
 		CreateViewRequest actionRequest = CreateViewRequestFactory.getCreateShapeRequest(Ssm2ElementTypes.Action_3005, selectedElement.getDiagramPreferencesHint());
