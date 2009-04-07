@@ -16,9 +16,9 @@ package de.cau.cs.kieler.klodd.hierarchical.impl;
 import java.util.ListIterator;
 
 import de.cau.cs.kieler.core.alg.AbstractAlgorithm;
+import de.cau.cs.kieler.core.kgraph.KNode;
 import de.cau.cs.kieler.core.slimgraph.KSlimGraph;
 import de.cau.cs.kieler.core.slimgraph.KSlimNode;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
 import de.cau.cs.kieler.klodd.hierarchical.modules.ILayerAssigner;
 import de.cau.cs.kieler.klodd.hierarchical.structures.*;
 
@@ -43,9 +43,9 @@ public class BalancingLayerAssigner extends AbstractAlgorithm implements
 	}
 	
 	/* (non-Javadoc)
-	 * @see de.cau.cs.kieler.klodd.hierarchical.modules.ILayerAssigner#assignLayers(de.cau.cs.kieler.core.graph.KGraph, de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode)
+	 * @see de.cau.cs.kieler.klodd.hierarchical.modules.ILayerAssigner#assignLayers(de.cau.cs.kieler.core.graph.KGraph, de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNode)
 	 */
-	public LayeredGraph assignLayers(KSlimGraph graph, KLayoutNode parentNode) {
+	public LayeredGraph assignLayers(KSlimGraph graph, KNode parentNode) {
 		getMonitor().begin("Balancing layer assignment", 1);
 		basicLayerAssigner.reset(getMonitor().subTask(1));
 		LayeredGraph layeredGraph = basicLayerAssigner.assignLayers(

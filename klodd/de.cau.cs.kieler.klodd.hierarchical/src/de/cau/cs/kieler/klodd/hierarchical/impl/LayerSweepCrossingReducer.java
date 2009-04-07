@@ -18,8 +18,8 @@ import java.util.List;
 import java.util.ListIterator;
 
 import de.cau.cs.kieler.core.alg.AbstractAlgorithm;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPortType;
+import de.cau.cs.kieler.core.kgraph.KPort;
+import de.cau.cs.kieler.core.kgraph.KPortType;
 import de.cau.cs.kieler.kiml.layout.util.LayoutGraphUtil;
 import de.cau.cs.kieler.klodd.hierarchical.modules.ICrossingReducer;
 import de.cau.cs.kieler.klodd.hierarchical.modules.ISingleLayerCrossingReducer;
@@ -58,9 +58,9 @@ public class LayerSweepCrossingReducer extends AbstractAlgorithm implements
 		
 		if (layeredGraph.areExternalPortsFixed()) {
 			// sort input and output ports by their relative position
-			List<KLayoutPort> inputPorts = new LinkedList<KLayoutPort>();
-			List<KLayoutPort> outputPorts = new LinkedList<KLayoutPort>();
-			for (KLayoutPort port : layeredGraph.getParentNode().getPorts()) {
+			List<KPort> inputPorts = new LinkedList<KPort>();
+			List<KPort> outputPorts = new LinkedList<KPort>();
+			for (KPort port : layeredGraph.getParentNode().getPorts()) {
 				if (port.getType() == KPortType.INPUT)
 					inputPorts.add(port);
 				else
@@ -69,10 +69,10 @@ public class LayerSweepCrossingReducer extends AbstractAlgorithm implements
 			
 			// apply ports ordering to the layer ranking
 			if (!inputPorts.isEmpty()) {
-				KLayoutPort[] sortedInputPorts = LayoutGraphUtil.sortPortsByPosition(inputPorts,
+				KPort[] sortedInputPorts = LayoutGraphUtil.sortPortsByPosition(inputPorts,
 						layeredGraph.getLayoutDirection(), false);
 				int rank = 0;
-				for (KLayoutPort port : sortedInputPorts) {
+				for (KPort port : sortedInputPorts) {
 					LayerElement element = layeredGraph.getLayerElement(port);
 					element.rank = rank;
 					rank += element.getRankWidth();
@@ -85,10 +85,10 @@ public class LayerSweepCrossingReducer extends AbstractAlgorithm implements
 				layeredGraph.getLayers().get(0).calcElemRanks();
 			}
 			if (!outputPorts.isEmpty()) {
-				KLayoutPort[] sortedOutputPorts = LayoutGraphUtil.sortPortsByPosition(outputPorts,
+				KPort[] sortedOutputPorts = LayoutGraphUtil.sortPortsByPosition(outputPorts,
 						layeredGraph.getLayoutDirection(), true);
 				int rank = 0;
-				for (KLayoutPort port : sortedOutputPorts) {
+				for (KPort port : sortedOutputPorts) {
 					LayerElement element = layeredGraph.getLayerElement(port);
 					element.rank = rank;
 					rank += element.getRankWidth();

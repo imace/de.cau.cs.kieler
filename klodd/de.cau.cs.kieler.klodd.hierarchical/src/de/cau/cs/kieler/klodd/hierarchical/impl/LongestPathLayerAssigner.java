@@ -16,11 +16,12 @@ package de.cau.cs.kieler.klodd.hierarchical.impl;
 import java.util.ListIterator;
 
 import de.cau.cs.kieler.core.alg.AbstractAlgorithm;
+import de.cau.cs.kieler.core.kgraph.KGraphElement;
+import de.cau.cs.kieler.core.kgraph.KNode;
+import de.cau.cs.kieler.core.kgraph.KPort;
+import de.cau.cs.kieler.core.kgraph.KPortType;
 import de.cau.cs.kieler.core.slimgraph.KSlimGraph;
 import de.cau.cs.kieler.core.slimgraph.KSlimNode;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPortType;
 import de.cau.cs.kieler.klodd.hierarchical.modules.ILayerAssigner;
 import de.cau.cs.kieler.klodd.hierarchical.structures.*;
 
@@ -45,9 +46,9 @@ public class LongestPathLayerAssigner extends AbstractAlgorithm implements
 
 	/*
 	 * (non-Javadoc)
-	 * @see de.cau.cs.kieler.klodd.hierarchical.modules.ILayerAssigner#assignLayers(de.cau.cs.kieler.core.graph.KGraph, de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode)
+	 * @see de.cau.cs.kieler.klodd.hierarchical.modules.ILayerAssigner#assignLayers(de.cau.cs.kieler.core.graph.KGraph, de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNode)
 	 */
-	public LayeredGraph assignLayers(KSlimGraph kGraph, KLayoutNode parentNode) {
+	public LayeredGraph assignLayers(KSlimGraph kGraph, KNode parentNode) {
 		getMonitor().begin("Longest path layering", 1);
 		layeredGraph = new LayeredGraph(parentNode);
 		
@@ -88,8 +89,8 @@ public class LongestPathLayerAssigner extends AbstractAlgorithm implements
 			// the node was already visited
 			return layerElement.getLayer().height;
 		}
-		else if (node.object instanceof KLayoutPort) {
-			KLayoutPort port = (KLayoutPort)node.object;
+		else if (node.object instanceof KPort) {
+			KPort port = (KPort)node.object;
 			if (port.getType() == KPortType.INPUT) {
 				layeredGraph.putFront(port, 0, node);
 				return Layer.UNDEF_HEIGHT;
@@ -112,7 +113,8 @@ public class LongestPathLayerAssigner extends AbstractAlgorithm implements
 					}
 				}
 			}
-			layeredGraph.putBack(node.object, maxHeight, node);
+			layeredGraph.putBack((KGraphElement)node.object,
+			        maxHeight, node);
 			return maxHeight;
 		}
 	}

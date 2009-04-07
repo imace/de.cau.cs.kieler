@@ -19,23 +19,26 @@ import java.util.List;
 import de.cau.cs.kieler.core.IKielerPreferenceStore;
 import de.cau.cs.kieler.core.KielerException;
 import de.cau.cs.kieler.core.alg.IKielerProgressMonitor;
+import de.cau.cs.kieler.core.kgraph.KEdge;
+import de.cau.cs.kieler.core.kgraph.KNode;
+import de.cau.cs.kieler.core.kgraph.KPort;
+import de.cau.cs.kieler.core.kgraph.KPortType;
 import de.cau.cs.kieler.core.slimgraph.KSlimEdge;
 import de.cau.cs.kieler.core.slimgraph.KSlimGraph;
 import de.cau.cs.kieler.core.slimgraph.alg.DFSCycleRemover;
 import de.cau.cs.kieler.core.slimgraph.alg.GreedyCycleRemover;
 import de.cau.cs.kieler.core.slimgraph.alg.ICycleRemover;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPoint;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPortPlacement;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPortType;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphFactory;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayouterInfo;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutOption;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutType;
+import de.cau.cs.kieler.kiml.layout.klayoutdata.KEdgeLayout;
+import de.cau.cs.kieler.kiml.layout.klayoutdata.KLayoutData;
+import de.cau.cs.kieler.kiml.layout.klayoutdata.KPoint;
+import de.cau.cs.kieler.kiml.layout.options.LayoutDirection;
+import de.cau.cs.kieler.kiml.layout.options.LayoutOptions;
+import de.cau.cs.kieler.kiml.layout.options.LayoutType;
+import de.cau.cs.kieler.kiml.layout.options.PortConstraints;
+import de.cau.cs.kieler.kiml.layout.options.PortSide;
 import de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider;
 import de.cau.cs.kieler.kiml.layout.util.GraphConverter;
+import de.cau.cs.kieler.kiml.layout.util.KimlLayoutUtil;
 import de.cau.cs.kieler.kiml.layout.util.LayoutGraphUtil;
 import de.cau.cs.kieler.klodd.hierarchical.impl.*;
 import de.cau.cs.kieler.klodd.hierarchical.modules.*;
@@ -103,9 +106,9 @@ public class HierarchicalDataflowLayoutProvider extends
 	
 	/*
 	 * (non-Javadoc)
-	 * @see de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider#doLayout(de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode, de.cau.cs.kieler.core.alg.IKielerProgressMonitor)
+	 * @see de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider#doLayout(de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNode, de.cau.cs.kieler.core.alg.IKielerProgressMonitor)
 	 */
-	public void doLayout(KLayoutNode layoutNode,
+	public void doLayout(KNode layoutNode,
 			IKielerProgressMonitor progressMonitor) throws KielerException {
 		progressMonitor.begin("Hierarchical layout", 75);
 		// get the currently configured modules
@@ -115,16 +118,16 @@ public class HierarchicalDataflowLayoutProvider extends
 		setNodeSizes(layoutNode);
 		// create a KIELER graph for cycle removal
 		graphConverter.reset(progressMonitor.subTask(5));
-		KSlimGraph kGraph = graphConverter.convertGraph(layoutNode, true);
+		KSlimGraph slimGraph = graphConverter.convertGraph(layoutNode, true);
 		// remove cycles in the input graph
 		cycleRemover.reset(progressMonitor.subTask(5));
-		cycleRemover.removeCycles(kGraph);
+		cycleRemover.removeCycles(slimGraph);
 		// put each node into a layer and get a layered graph
 		layerAssigner.reset(progressMonitor.subTask(10));
 		LayeredGraph layeredGraph = layerAssigner.assignLayers(
-				kGraph, layoutNode);
+				slimGraph, layoutNode);
 		if (!layeredGraph.getLayers().isEmpty()) {
-			layeredGraph.createConnections(kGraph);
+			layeredGraph.createConnections(slimGraph);
 			// optimize the order of nodes in each layer
 			crossingReducer.reset(progressMonitor.subTask(15));
 			crossingReducer.reduceCrossings(layeredGraph);
@@ -144,18 +147,6 @@ public class HierarchicalDataflowLayoutProvider extends
 		progressMonitor.done();
 	}
 
-	/* (non-Javadoc)
-	 * @see de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider#getLayouterInfo()
-	 */
-	public KLayouterInfo getLayouterInfo() {
-		KLayouterInfo info = KimlLayoutGraphFactory.eINSTANCE.createKLayouterInfo();
-		info.setLayouterName(LAYOUTER_NAME);
-		info.setLayoutType(KLayoutType.HIERARCHICAL);
-		info.setLayoutOption(KLayoutOption.DEFAULT);
-		info.setLayouterCollectionID(COLLECTION_NAME);
-		return info;
-	}
-	
 	/**
 	 * Sets the internally used algorithm modules to the current configuration.
 	 */
@@ -204,34 +195,33 @@ public class HierarchicalDataflowLayoutProvider extends
 	 * 
 	 * @param parentNode parent layout node
 	 */
-	private void setNodeSizes(KLayoutNode parentNode) {
-		for (KLayoutNode node : parentNode.getChildNodes()) {
+	private void setNodeSizes(KNode parentNode) {
+		for (KNode node : parentNode.getChildren()) {
 			// set port sides if not fixed
-			if (node.getChildNodes().isEmpty()
-					&& !node.getLayout().getLayoutOptions().contains(
-					KLayoutOption.FIXED_PORTS)
-					&& !node.getLayout().getLayoutOptions().contains(
-					KLayoutOption.FIXED_PORT_SIDES)) {
-				if (parentNode.getLayout().getLayoutOptions().contains(
-						KLayoutOption.VERTICAL)) {
-					for (KLayoutPort port : node.getPorts()) {
-						port.getLayout().setPlacement(port.getType()
-								== KPortType.INPUT ? KPortPlacement.NORTH
-								: KPortPlacement.SOUTH);
+		    KLayoutData layoutData = KimlLayoutUtil.getShapeLayout(node);
+		    PortConstraints portConstraints = LayoutOptions.getPortConstraints(layoutData);
+			if (node.getChildren().isEmpty()
+					&& portConstraints != PortConstraints.FIXED_POS 
+					&& portConstraints != PortConstraints.FIXED_SIDE) {
+				if (LayoutOptions.getLayoutDirection(layoutData)
+				        == LayoutDirection.VERTICAL) {
+					for (KPort port : node.getPorts()) {
+						LayoutOptions.setPortSide(KimlLayoutUtil.getShapeLayout(port),
+						        port.getType() == KPortType.INPUT ? PortSide.NORTH
+								: PortSide.SOUTH);
 					}
 				}
 				else {
-					for (KLayoutPort port : node.getPorts()) {
-						port.getLayout().setPlacement(port.getType()
-								== KPortType.INPUT ? KPortPlacement.WEST
-								: KPortPlacement.EAST);
+					for (KPort port : node.getPorts()) {
+					    LayoutOptions.setPortSide(KimlLayoutUtil.getShapeLayout(port),
+					            port.getType() == KPortType.INPUT ? PortSide.WEST
+								: PortSide.EAST);
 					}
 				}
 			}
 			// set node sizes if not fixed
-			if (node.getChildNodes().isEmpty()
-					&& !node.getLayout().getLayoutOptions().contains(
-					KLayoutOption.FIXED_SIZE)) {
+			if (node.getChildren().isEmpty()
+					&& !LayoutOptions.isFixedSize(layoutData)) {
 				LayoutGraphUtil.resizeNode(node);
 			}
 		}
@@ -242,23 +232,44 @@ public class HierarchicalDataflowLayoutProvider extends
 	 */
 	private void restoreCycles() {
 		List<KSlimEdge> reversedEdges = cycleRemover.getReversedEdges();
-		for (KSlimEdge kEdge : reversedEdges) {
-			KLayoutEdge layoutEdge = (KLayoutEdge)kEdge.object;
+		for (KSlimEdge slimEdge : reversedEdges) {
+			KEdge layoutEdge = (KEdge)slimEdge.object;
+			KEdgeLayout edgeLayout = KimlLayoutUtil.getEdgeLayout(layoutEdge);
 			// reverse bend points
 			List<KPoint> bendPoints = new LinkedList<KPoint>();
-			for (KPoint point : layoutEdge.getLayout().getBendPoints()) {
+			for (KPoint point : edgeLayout.getBendPoints()) {
 				bendPoints.add(0, point);
 			}
-			layoutEdge.getLayout().getBendPoints().clear();
+			edgeLayout.getBendPoints().clear();
 			for (KPoint point : bendPoints) {
-				layoutEdge.getLayout().getBendPoints().add(point);
+			    edgeLayout.getBendPoints().add(point);
 			}
 			// reverse source and target point
-			KPoint sourcePoint = layoutEdge.getLayout().getSourcePoint();
-			layoutEdge.getLayout().setSourcePoint(layoutEdge
-					.getLayout().getTargetPoint());
-			layoutEdge.getLayout().setTargetPoint(sourcePoint);
+			KPoint sourcePoint = edgeLayout.getSourcePoint();
+			edgeLayout.setSourcePoint(edgeLayout.getTargetPoint());
+			edgeLayout.setTargetPoint(sourcePoint);
 		}
 	}
+
+    /* (non-Javadoc)
+     * @see de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider#getCollection()
+     */
+    public String getCollection() {
+        return COLLECTION_NAME;
+    }
+
+    /* (non-Javadoc)
+     * @see de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider#getName()
+     */
+    public String getName() {
+        return LAYOUTER_NAME;
+    }
+
+    /* (non-Javadoc)
+     * @see de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider#getType()
+     */
+    public LayoutType getType() {
+        return LayoutType.LAYERED;
+    }
 	
 }

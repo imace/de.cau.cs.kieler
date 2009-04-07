@@ -55,10 +55,14 @@ public class LayoutOptions {
      */
     public static void setLayoutType(KLayoutData layoutData,
             LayoutType layoutType) {
-        KIntOption layoutTypeOption = KGraphFactory.eINSTANCE.createKIntOption();
-        layoutTypeOption.setKey(LAYOUT_TYPE);
-        layoutTypeOption.setValue(layoutType.ordinal());
-        layoutData.getOptions().add(layoutTypeOption);
+        KIntOption typeOption = (KIntOption)layoutData.getOption(
+                LAYOUT_TYPE);
+        if (typeOption == null) {
+            typeOption = KGraphFactory.eINSTANCE.createKIntOption();
+            typeOption.setKey(LAYOUT_TYPE);
+            layoutData.getOptions().add(typeOption);
+        }
+        typeOption.setValue(layoutType.ordinal());
     }
     
     /** direction of layout */
@@ -87,10 +91,14 @@ public class LayoutOptions {
      */
     public static void setLayoutDirection(KLayoutData layoutData,
             LayoutDirection layoutDirection) {
-        KIntOption directionOption = KGraphFactory.eINSTANCE.createKIntOption();
-        directionOption.setKey(LAYOUT_DIRECTION);
+        KIntOption directionOption = (KIntOption)layoutData.getOption(
+                LAYOUT_DIRECTION);
+        if (directionOption == null) {
+            directionOption = KGraphFactory.eINSTANCE.createKIntOption();
+            directionOption.setKey(LAYOUT_DIRECTION);
+            layoutData.getOptions().add(directionOption);
+        }
         directionOption.setValue(layoutDirection.ordinal());
-        layoutData.getOptions().add(directionOption);
     }
     
     /** name of selected layouter */
@@ -104,10 +112,14 @@ public class LayoutOptions {
      */
     public static void setLayouterName(KLayoutData layoutData,
             String layouterName) {
-        KStringOption layouterNameOption = KGraphFactory.eINSTANCE.createKStringOption();
-        layouterNameOption.setKey(LAYOUTER_NAME);
-        layouterNameOption.setValue(layouterName);
-        layoutData.getOptions().add(layouterNameOption);
+        KStringOption nameOption = (KStringOption)layoutData.getOption(
+                LAYOUTER_NAME);
+        if (nameOption == null) {
+            nameOption = KGraphFactory.eINSTANCE.createKStringOption();
+            nameOption.setKey(LAYOUTER_NAME);
+            layoutData.getOptions().add(nameOption);
+        }
+        nameOption.setValue(layouterName);
     }
     
     /** distance of node contents to the boundary */
@@ -155,10 +167,14 @@ public class LayoutOptions {
      */
     public static void setPortSide(KLayoutData layoutData,
             PortSide portSide) {
-        KIntOption sideOption = KGraphFactory.eINSTANCE.createKIntOption();
-        sideOption.setKey(PORT_SIDE);
+        KIntOption sideOption = (KIntOption)layoutData.getOption(
+                PORT_SIDE);
+        if (sideOption == null) {
+            sideOption = KGraphFactory.eINSTANCE.createKIntOption();
+            sideOption.setKey(PORT_SIDE);
+            layoutData.getOptions().add(sideOption);
+        }
         sideOption.setValue(portSide.ordinal());
-        layoutData.getOptions().add(sideOption);
     }
     
     /** constraints for port positions */
@@ -187,10 +203,14 @@ public class LayoutOptions {
      */
     public static void setPortConstraints(KLayoutData layoutData,
             PortConstraints portConstraints) {
-        KIntOption constraintsOption = KGraphFactory.eINSTANCE.createKIntOption();
-        constraintsOption.setKey(PORT_CONSTRAINTS);
+        KIntOption constraintsOption = (KIntOption)layoutData.getOption(
+                PORT_CONSTRAINTS);
+        if (constraintsOption == null) {
+            constraintsOption = KGraphFactory.eINSTANCE.createKIntOption();
+            constraintsOption.setKey(PORT_CONSTRAINTS);
+            layoutData.getOptions().add(constraintsOption);
+        }
         constraintsOption.setValue(portConstraints.ordinal());
-        layoutData.getOptions().add(constraintsOption);
     }
     
     /** placement positions for edge labels */
@@ -219,10 +239,14 @@ public class LayoutOptions {
      */
     public static void setEdgeLabelPlacement(KLayoutData layoutData,
             EdgeLabelPlacement placement) {
-        KIntOption placementOption = KGraphFactory.eINSTANCE.createKIntOption();
-        placementOption.setKey(EDGE_LABEL_PLACEMENT);
+        KIntOption placementOption = (KIntOption)layoutData.getOption(
+                EDGE_LABEL_PLACEMENT);
+        if (placementOption == null) {
+            placementOption = KGraphFactory.eINSTANCE.createKIntOption();
+            placementOption.setKey(EDGE_LABEL_PLACEMENT);
+            layoutData.getOptions().add(placementOption);
+        }
         placementOption.setValue(placement.ordinal());
-        layoutData.getOptions().add(placementOption);
     }
     
     /** size constraint for nodes */
@@ -247,9 +271,12 @@ public class LayoutOptions {
      * @param layoutData layout data for a node
      */
     public static void setFixedSize(KLayoutData layoutData) {
-        KOption sizeOption = KGraphFactory.eINSTANCE.createKOption();
-        sizeOption.setKey(FIXED_SIZE);
-        layoutData.getOptions().add(sizeOption);
+        KOption sizeOption = layoutData.getOption(FIXED_SIZE);
+        if (sizeOption == null) {
+            sizeOption = KGraphFactory.eINSTANCE.createKOption();
+            sizeOption.setKey(FIXED_SIZE);
+            layoutData.getOptions().add(sizeOption);
+        }
     }
     
 }

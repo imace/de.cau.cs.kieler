@@ -128,8 +128,8 @@ public class GraphvizLayouterLibrary implements GraphvizLayouter{
 
 	/**
 	 * Performs the actual work of the layout process. Translates the
-	 * {@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode
-	 * KLayoutNode} into a structure GraphViz understands, calls the desired
+	 * {@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNode
+	 * KNode} into a structure GraphViz understands, calls the desired
 	 * GraphViz layouter and annotates the KLayoutGraph with the position and
 	 * size information provided by GraphViz.
 	 * 
@@ -157,7 +157,7 @@ public class GraphvizLayouterLibrary implements GraphvizLayouter{
 		mapLayoutNode2Graphviz(layoutNode);
 
 		/* check if Emma wants to layout horizontal */
-		KLayoutData layoutData = KimlLayoutUtil.getLayoutData(layoutNode);
+		KLayoutData layoutData = KimlLayoutUtil.getShapeLayout(layoutNode);
         if (LayoutOptions.getLayoutDirection(layoutData)
                 == LayoutDirection.VERTICAL) {
 			GraphvizAPI.setGraphAttribute(graphvizGraph, "rankdir", "BT");
@@ -315,8 +315,8 @@ public class GraphvizLayouterLibrary implements GraphvizLayouter{
 	/**
 	 * Reads the internal GraphViz data structure that was filled by the
 	 * GraphViz library and writes the required parameters back to the
-	 * {@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode
-	 * KLayoutNode}.
+	 * {@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNode
+	 * KNode}.
 	 * 
 	 * @param layoutNode the KNode to be filled with the layout information
 	 */
@@ -327,7 +327,7 @@ public class GraphvizLayouterLibrary implements GraphvizLayouter{
 	}
 
 	/**
-	 * Writes all node related information from GraphViz into the KLayoutNode.
+	 * Writes all node related information from GraphViz into the KNode.
 	 * Uses HashMaps for the mapping.
 	 */
 	private void mapGraphvizNodes2KNodes() {
@@ -370,7 +370,7 @@ public class GraphvizLayouterLibrary implements GraphvizLayouter{
 
 	/**
 	 * Writes all edge related information from GraphViz into the the
-	 * KLayoutNode. Uses HashMaps for the mapping.
+	 * KNode. Uses HashMaps for the mapping.
 	 */
 	private void mapGraphvizEdges2KEdges() {
 		/*
@@ -487,9 +487,9 @@ public class GraphvizLayouterLibrary implements GraphvizLayouter{
 	}
 
 	/**
-	 * Sets the required size of the top KLayoutNode by obtaining the bounding
+	 * Sets the required size of the top KNode by obtaining the bounding
 	 * box of the GraphViz Graph, resulting from the positions of the contained
-	 * sub nodes. If insets are given in the top KLayoutNode, they are added to
+	 * sub nodes. If insets are given in the top KNode, they are added to
 	 * the size. Insets denote the difference between the resulting size of the
 	 * area the contained elements cover after the layout process and the real
 	 * size the composite node should have. An example is a compartment with a

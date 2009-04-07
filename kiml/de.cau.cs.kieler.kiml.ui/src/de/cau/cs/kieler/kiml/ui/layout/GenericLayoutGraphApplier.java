@@ -283,13 +283,13 @@ public class GenericLayoutGraphApplier extends
     }
 
     /**
-     * Retrieve the list of bendpoints of an KLayoutEdge in a PointList that is
+     * Retrieve the list of bendpoints of an KEdge in a PointList that is
      * understood by GMF Requests.
      * 
      * @author haf
      * 
      * @param edge
-     *            the KLayoutEdge that stores the new bendpoints
+     *            the KEdge that stores the new bendpoints
      * @return PointList with the new bendpoints
      */
     private PointList getBendpoints(KEdge edge) {

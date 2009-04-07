@@ -19,7 +19,7 @@ import de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider;
  * Implements the Fdp layouter of the GraphViz suite. As this class extends
  * the {@link AbstractLayoutProvider}, the most relevant method is
  * <code>doLayout</code>, which performs the actual layout, that is annotating
- * the provided KLayoutNode with the Twopi layout information.
+ * the provided KNode with the Twopi layout information.
  * <p/>
  * This class acts as a wrapper to the {@link GraphvizLayouterLibrary}. Is uses the
  * {@link GraphvizLayouterLibrary} with the Fdp engine and publishes the Fdp

@@ -22,9 +22,9 @@ import de.cau.cs.kieler.core.kgraph.KNode;
  * all LayoutProviders (for example GraphViz, Zest) can not handle hierarchy
  * properly.
  * <p/>
- * For every level in the hierarchy of the KLayoutNodes, a separate call to a
+ * For every level in the hierarchy of the KNodes, a separate call to a
  * LayoutProvider is performed. This is done recursively from the leafs to the
- * root of the KLayoutNodes in the KLayoutGraph, using the size information from
+ * root of the KNodes in the KLayoutGraph, using the size information from
  * a lower level in the level above to generate a smooth hierarchically layout.
  * 
  * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>

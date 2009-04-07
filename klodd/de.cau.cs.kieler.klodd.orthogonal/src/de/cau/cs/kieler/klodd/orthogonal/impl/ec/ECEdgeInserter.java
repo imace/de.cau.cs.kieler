@@ -19,11 +19,11 @@ import java.util.ListIterator;
 import java.util.Queue;
 
 import de.cau.cs.kieler.core.alg.AbstractAlgorithm;
+import de.cau.cs.kieler.core.kgraph.KEdge;
 import de.cau.cs.kieler.core.slimgraph.KSlimEdge;
 import de.cau.cs.kieler.core.slimgraph.KSlimFace;
 import de.cau.cs.kieler.core.slimgraph.KSlimGraph;
 import de.cau.cs.kieler.core.slimgraph.KSlimNode;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge;
 import de.cau.cs.kieler.klodd.orthogonal.structures.*;
 
 /**
@@ -528,7 +528,7 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 					edge1, false);
 			oldTargetIter.remove();
 			TSMEdge edge2 = new TSMEdge(graph, dummyNode, oldTarget,
-					((TSMEdge)edge1).layoutEdge);
+					(KEdge)edge1.object);
 			oldTargetIter.add(new KSlimNode.IncEntry(edge2,
 					KSlimNode.IncEntry.Type.IN));
 			dummyNode.incidence.add(new KSlimNode.IncEntry(edge1,
@@ -569,7 +569,7 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 			// insert an edge from the current node to the new pseudo node
 			previousEdge = insertEdge(currentNode, currentRank, dummyNode,
 					firstRank, currentFace, null, previousEdge,
-					insEdge.layoutEdge);
+					(KEdge)insEdge.object);
 			currentNode = dummyNode;
 			currentRank = secondRank;
 			currentFace = pathEntry.targetFace;
@@ -578,7 +578,7 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 		// insert a final edge from the current node to the target node
 		insertEdge(currentNode, currentRank, insEdge.target,
 				path.targetPlacing.rank, path.targetPlacing.face, insEdge,
-				previousEdge, insEdge.layoutEdge);
+				previousEdge, (KEdge)insEdge.object);
 	}
 	
 	/**
@@ -597,7 +597,7 @@ public class ECEdgeInserter extends AbstractAlgorithm {
 	 */
 	private TSMEdge insertEdge(KSlimNode sourceNode, int sourceRank,
 			KSlimNode targetNode, int targetRank, KSlimFace face, TSMEdge insEdge,
-			TSMEdge previousEdge, KLayoutEdge layoutEdge) {
+			TSMEdge previousEdge, KEdge layoutEdge) {
 		if (insEdge == null) {
 			insEdge = new TSMEdge(graph, sourceNode, targetNode, layoutEdge);
 		}

@@ -56,7 +56,7 @@ public class ExampleLayouter {
 
 	/**
 	 * Performs the actual work of the layout process. Works directly on the
-	 * KLayoutNode and sub KLayoutNodes and annotates them with the new position
+	 * KNode and sub KNodes and annotates them with the new position
 	 * and size information.
 	 * <p/>
 	 * The nodes are laid out in a line with predefined spaces between them.

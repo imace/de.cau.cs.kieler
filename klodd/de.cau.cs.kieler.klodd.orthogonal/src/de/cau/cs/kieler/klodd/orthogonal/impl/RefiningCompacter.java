@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.ListIterator;
 
 import de.cau.cs.kieler.core.alg.AbstractAlgorithm;
+import de.cau.cs.kieler.core.kgraph.KEdge;
 import de.cau.cs.kieler.core.slimgraph.KSlimEdge;
 import de.cau.cs.kieler.core.slimgraph.KSlimFace;
 import de.cau.cs.kieler.core.slimgraph.KSlimGraph;
@@ -245,12 +246,12 @@ public class RefiningCompacter extends AbstractAlgorithm implements ICompacter {
 			if (refinementEdge.targetForward) {
 				oldNode2 = edge1.target;
 				edge1.target = newNode;
-				edge2 = new TSMEdge(graph, newNode, oldNode2, edge1.layoutEdge);
+				edge2 = new TSMEdge(graph, newNode, oldNode2, (KEdge)edge1.object);
 			}
 			else {
 				oldNode2 = edge1.source;
 				edge1.source = newNode;
-				edge2 = new TSMEdge(graph, oldNode2, newNode, edge1.layoutEdge);
+				edge2 = new TSMEdge(graph, oldNode2, newNode, (KEdge)edge1.object);
 			}
 			ListIterator<KSlimNode.IncEntry> oldNode2Iter = oldNode2.getIterator(
 					edge1, !refinementEdge.targetForward);

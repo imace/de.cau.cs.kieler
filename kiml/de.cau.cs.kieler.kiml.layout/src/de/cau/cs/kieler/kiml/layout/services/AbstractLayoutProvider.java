@@ -20,7 +20,7 @@ import de.cau.cs.kieler.kiml.layout.options.LayoutType;
 
 /**
  * Abstract class every concrete layout provider has to extend. Performs the
- * layout of a KLayoutNode through the {@link #doLayout} method and provides
+ * layout of a KNode through the {@link #doLayout} method and provides
  * information of the layout provider through the {@link #getLayouterInfo}
  * method.
  * <p/>

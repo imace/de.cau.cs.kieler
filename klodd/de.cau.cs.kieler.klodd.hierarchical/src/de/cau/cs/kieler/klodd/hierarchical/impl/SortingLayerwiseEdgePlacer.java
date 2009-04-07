@@ -23,8 +23,10 @@ import java.util.ListIterator;
 import java.util.Map;
 
 import de.cau.cs.kieler.core.alg.AbstractAlgorithm;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutOption;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPortPlacement;
+import de.cau.cs.kieler.kiml.layout.options.LayoutDirection;
+import de.cau.cs.kieler.kiml.layout.options.LayoutOptions;
+import de.cau.cs.kieler.kiml.layout.options.PortSide;
+import de.cau.cs.kieler.kiml.layout.util.KimlLayoutUtil;
 import de.cau.cs.kieler.klodd.hierarchical.modules.ILayerwiseEdgePlacer;
 import de.cau.cs.kieler.klodd.hierarchical.structures.*;
 
@@ -66,7 +68,7 @@ public class SortingLayerwiseEdgePlacer extends AbstractAlgorithm implements
 	 */
 	public int placeEdges(Layer layer, float minDist) {
 		getMonitor().begin("Layerwise edge placement", 1);
-		KLayoutOption layoutDirection = layer.getLayeredGraph().getLayoutDirection();
+		LayoutDirection layoutDirection = layer.getLayeredGraph().getLayoutDirection();
 		
 		// determine number of outgoing connections for each port
 		Map<Object, Integer> outgoing = new HashMap<Object, Integer>();
@@ -104,51 +106,53 @@ public class SortingLayerwiseEdgePlacer extends AbstractAlgorithm implements
 				float sourcePos = connection.calcSourcePos(minDist);
 				float targetPos = connection.calcTargetPos(minDist);
 				if (layer.rank == 0) {
-					KPortPlacement placement = connection.getSourcePort().getLayout().getPlacement();
-					if (layoutDirection == KLayoutOption.VERTICAL) {
-						if (placement == KPortPlacement.WEST) {
+					PortSide placement = LayoutOptions.getPortSide(
+					        KimlLayoutUtil.getShapeLayout(connection.getSourcePort()));
+					if (layoutDirection == LayoutDirection.VERTICAL) {
+						if (placement == PortSide.WEST) {
 							sourcePos = 0.0f;
 						}
-						else if (placement == KPortPlacement.EAST) {
+						else if (placement == PortSide.EAST) {
 							sourcePos = layer.crosswiseDim;
 						}
-						else if (placement == KPortPlacement.SOUTH) {
+						else if (placement == PortSide.SOUTH) {
 							sourcePos = layer.crosswiseDim;
 						}
 					}
 					else {
-						if (placement == KPortPlacement.NORTH) {
+						if (placement == PortSide.NORTH) {
 							sourcePos = 0.0f;
 						}
-						else if (placement == KPortPlacement.SOUTH) {
+						else if (placement == PortSide.SOUTH) {
 							sourcePos = layer.crosswiseDim;
 						}
-						else if (placement == KPortPlacement.EAST) {
+						else if (placement == PortSide.EAST) {
 							sourcePos = layer.crosswiseDim;
 						}
 					}
 				}
 				else if (layer.height == 1) {
-					KPortPlacement placement = connection.getTargetPort().getLayout().getPlacement();
-					if (layoutDirection == KLayoutOption.VERTICAL) {
-						if (placement == KPortPlacement.WEST) {
+					PortSide placement = LayoutOptions.getPortSide(
+                            KimlLayoutUtil.getShapeLayout(connection.getTargetPort()));
+					if (layoutDirection == LayoutDirection.VERTICAL) {
+						if (placement == PortSide.WEST) {
 							targetPos = 0.0f;
 						}
-						else if (placement == KPortPlacement.EAST) {
+						else if (placement == PortSide.EAST) {
 							targetPos = layer.crosswiseDim;
 						}
-						else if (placement == KPortPlacement.NORTH) {
+						else if (placement == PortSide.NORTH) {
 							targetPos = layer.crosswiseDim;
 						}
 					}
 					else {
-						if (placement == KPortPlacement.NORTH) {
+						if (placement == PortSide.NORTH) {
 							targetPos = 0.0f;
 						}
-						else if (placement == KPortPlacement.SOUTH) {
+						else if (placement == PortSide.SOUTH) {
 							targetPos = layer.crosswiseDim;
 						}
-						else if (placement == KPortPlacement.WEST) {
+						else if (placement == PortSide.WEST) {
 							targetPos = layer.crosswiseDim;
 						}
 					}

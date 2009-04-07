@@ -19,7 +19,7 @@ import de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider;
  * Implements the Neato layouter of the GraphViz suite. As this class extends
  * the {@link AbstractLayoutProvider}, the most relevant method is
  * <code>doLayout</code>, which performs the actual layout, that is annotating
- * the provided KLayoutNode with the Neato layout information.
+ * the provided KNode with the Neato layout information.
  * <p/>
  * This class acts as a wrapper to the {@link GraphvizLayouterLibrary}. Is uses the
  * {@link GraphvizLayouterLibrary} with the Neato engine and publishes the Neato

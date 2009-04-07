@@ -22,7 +22,6 @@ import de.cau.cs.kieler.core.kgraph.KObjectOption;
 import de.cau.cs.kieler.core.kgraph.KPort;
 import de.cau.cs.kieler.kiml.layout.klayoutdata.KEdgeLayout;
 import de.cau.cs.kieler.kiml.layout.klayoutdata.KInsets;
-import de.cau.cs.kieler.kiml.layout.klayoutdata.KLayoutData;
 import de.cau.cs.kieler.kiml.layout.klayoutdata.KLayoutDataFactory;
 import de.cau.cs.kieler.kiml.layout.klayoutdata.KLayoutDataPackage;
 import de.cau.cs.kieler.kiml.layout.klayoutdata.KShapeLayout;
@@ -34,23 +33,12 @@ import de.cau.cs.kieler.kiml.layout.options.LayoutOptions;
  * 
  * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
  * @see KLayoutGraph
- * @see KLayoutNode
- * @see KLayoutEdge
+ * @see KNode
+ * @see KEdge
  * @see KEdgeLabel
  */
 public class KimlLayoutUtil {
 
-    /**
-     * Returns layout data for a given graph element.
-     * 
-     * @param graphElement the graph element
-     * @return related layout data
-     */
-    public static KLayoutData getLayoutData(KGraphElement graphElement) {
-        return (KLayoutData)graphElement.getData(KLayoutDataPackage
-                .eINSTANCE.getKLayoutData());
-    }
-    
     /**
      * Returns shape layout data for a given graph element.
      * 
@@ -76,7 +64,7 @@ public class KimlLayoutUtil {
 	/**
 	 * Creates a KNode, initializes some defaults and returns it.
 	 * 
-	 * @return an initialized KLayoutNode
+	 * @return an initialized KNode
 	 */
 	public static KNode createInitializedNode() {
 		KNode layoutNode = KGraphFactory.eINSTANCE.createKNode();

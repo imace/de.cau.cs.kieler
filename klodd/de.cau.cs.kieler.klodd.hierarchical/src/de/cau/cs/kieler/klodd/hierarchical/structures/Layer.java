@@ -19,8 +19,9 @@ import java.util.List;
 import java.util.LinkedList;
 import java.util.Map;
 
+import de.cau.cs.kieler.core.kgraph.KGraphElement;
 import de.cau.cs.kieler.core.slimgraph.KSlimNode;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutOption;
+import de.cau.cs.kieler.kiml.layout.options.LayoutDirection;
 
 
 /**
@@ -80,7 +81,7 @@ public class Layer {
 	 * @param kNode the corresponding node in the acyclic KIELER graph
 	 * @return the new layer element
 	 */
-	public LayerElement put(Object obj, KSlimNode kNode) {
+	public LayerElement put(KGraphElement obj, KSlimNode kNode) {
 		LayerElement element = new LayerElement(obj, this, kNode);
 		elements.add(element);
 		return element;
@@ -93,14 +94,14 @@ public class Layer {
 	 * @param minDist minimal distance between nodes and connections
 	 */
 	public void layoutElements(float layerPos, float minDist) {
-		KLayoutOption layoutDirection = layeredGraph.getLayoutDirection();
+		LayoutDirection layoutDirection = layeredGraph.getLayoutDirection();
 		float backPadding = 0.0f;
 		float frontPadding = 0.0f;
 		
 		// determine padding values
 		for (LayerElement element : elements) {
-			float sideSpace = (lengthwiseDim - (layoutDirection == KLayoutOption.VERTICAL
-					? element.getRealDim().getHeight() : element.getRealDim().getWidth())) / 2;
+			float sideSpace = (lengthwiseDim - (layoutDirection == LayoutDirection.VERTICAL
+					? element.getRealHeight() : element.getRealWidth())) / 2;
 			backPadding = Math.max(backPadding,
 					element.getEdgesBack() * minDist - sideSpace);
 			frontPadding = Math.max(frontPadding,
@@ -111,12 +112,12 @@ public class Layer {
 		// set the lengthwise position of each node
 		for (LayerElement element : elements) {
 			if (rank > 0 && height > 0) {
-				if (layoutDirection == KLayoutOption.VERTICAL) {
-					float sideSpace = (lengthwiseDim - element.getRealDim().getHeight()) / 2;
+				if (layoutDirection == LayoutDirection.VERTICAL) {
+					float sideSpace = (lengthwiseDim - element.getRealHeight()) / 2;
 					element.getPosition().setY(lengthwisePos + sideSpace);
 				}
 				else {
-					float sideSpace = (lengthwiseDim - element.getRealDim().getWidth()) / 2;
+					float sideSpace = (lengthwiseDim - element.getRealWidth()) / 2;
 					element.getPosition().setX(lengthwisePos + sideSpace);
 				}
 			}

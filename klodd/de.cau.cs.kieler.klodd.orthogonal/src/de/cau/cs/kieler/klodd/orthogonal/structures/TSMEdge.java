@@ -15,10 +15,13 @@ package de.cau.cs.kieler.klodd.orthogonal.structures;
 
 import java.util.List;
 
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPoint;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphFactory;
+import de.cau.cs.kieler.core.kgraph.KEdge;
 import de.cau.cs.kieler.core.slimgraph.*;
+import de.cau.cs.kieler.kiml.layout.klayoutdata.KEdgeLayout;
+import de.cau.cs.kieler.kiml.layout.klayoutdata.KLayoutDataFactory;
+import de.cau.cs.kieler.kiml.layout.klayoutdata.KPoint;
+import de.cau.cs.kieler.kiml.layout.klayoutdata.KShapeLayout;
+import de.cau.cs.kieler.kiml.layout.util.KimlLayoutUtil;
 
 /**
  * An edge in the graph structure used for the topology-shape-metrics
@@ -28,8 +31,6 @@ import de.cau.cs.kieler.core.slimgraph.*;
  */
 public class TSMEdge extends KSlimEdge {
 
-	/** layout graph edge contained in this TSM edge, or null if there is none */
-	public KLayoutEdge layoutEdge;
 	/** the previous edge of a split edge */
 	public TSMEdge previousEdge;
 	/** the next edge of a split edge */
@@ -45,9 +46,9 @@ public class TSMEdge extends KSlimEdge {
 	 * @param layoutEdge the layout graph edge to be contained
 	 */
 	public TSMEdge(KSlimGraph graph, KSlimNode source, KSlimNode target,
-			KLayoutEdge layoutEdge) {
+			KEdge layoutEdge) {
 		super(graph, source, target);
-		this.layoutEdge = layoutEdge;
+		this.object = layoutEdge;
 	}
 	
 	/**
@@ -68,6 +69,17 @@ public class TSMEdge extends KSlimEdge {
 	 * @param offsetY y offset to be added
 	 */
 	public void applyLayout(float offsetX, float offsetY) {
+	    KEdge layoutEdge = (KEdge)object;
+	    KEdgeLayout edgeLayout = KimlLayoutUtil.getEdgeLayout(layoutEdge);
+	    KShapeLayout sourceLayout = KimlLayoutUtil.getShapeLayout(
+	            layoutEdge.getSource());
+	    KShapeLayout targetLayout = KimlLayoutUtil.getShapeLayout(
+	            layoutEdge.getTarget());
+	    KShapeLayout sourcePortLayout = KimlLayoutUtil.getShapeLayout(
+                layoutEdge.getSourcePort());
+        KShapeLayout targetPortLayout = KimlLayoutUtil.getShapeLayout(
+                layoutEdge.getTargetPort());
+	    
 		// find the first edge in a series of edges
 		TSMEdge currentEdge = this;
 		while (currentEdge.previousEdge != null)
@@ -75,11 +87,11 @@ public class TSMEdge extends KSlimEdge {
 		TSMEdge firstEdge = currentEdge, lastEdge;
 		
 		// add all bend points of the edge
-		List<KPoint> bendPoints = layoutEdge.getLayout().getBendPoints();
+		List<KPoint> bendPoints = edgeLayout.getBendPoints();
 		bendPoints.clear();
 		do {
 			for (Bend bend : currentEdge.bends) {
-				KPoint newPoint = KimlLayoutGraphFactory.eINSTANCE.createKPoint();
+				KPoint newPoint = KLayoutDataFactory.eINSTANCE.createKPoint();
 				newPoint.setX(bend.xpos + offsetX);
 				newPoint.setY(bend.ypos + offsetY);
 				bendPoints.add(newPoint);
@@ -91,56 +103,52 @@ public class TSMEdge extends KSlimEdge {
 		} while (currentEdge != null);
 		
 		// set start point
-		KPoint newPoint = KimlLayoutGraphFactory.eINSTANCE.createKPoint();
-		float xpos = layoutEdge.getSource().getLayout().getLocation().getX()
-				+ layoutEdge.getSourcePort().getLayout().getLocation().getX();
-		float ypos = layoutEdge.getSource().getLayout().getLocation().getY()
-				+ layoutEdge.getSourcePort().getLayout().getLocation().getY();
+		KPoint newPoint = KLayoutDataFactory.eINSTANCE.createKPoint();
+		float xpos = sourceLayout.getXpos() + sourcePortLayout.getXpos();
+		float ypos = sourceLayout.getYpos() + sourcePortLayout.getYpos();
 		switch (firstEdge.sourceSide) {
 		case NORTH:
-			xpos += layoutEdge.getSourcePort().getLayout().getSize().getWidth() / 2;
+			xpos += sourcePortLayout.getWidth() / 2;
 			break;
 		case EAST:
-			xpos += layoutEdge.getSourcePort().getLayout().getSize().getWidth();
-			ypos += layoutEdge.getSourcePort().getLayout().getSize().getHeight() / 2;
+			xpos += sourcePortLayout.getWidth();
+			ypos += sourcePortLayout.getHeight() / 2;
 			break;
 		case SOUTH:
-			xpos += layoutEdge.getSourcePort().getLayout().getSize().getWidth() / 2;
-			ypos += layoutEdge.getSourcePort().getLayout().getSize().getHeight();
+			xpos += sourcePortLayout.getWidth() / 2;
+			ypos += sourcePortLayout.getHeight();
 			break;
 		case WEST:
-			ypos += layoutEdge.getSourcePort().getLayout().getSize().getHeight() / 2;
+			ypos += sourcePortLayout.getHeight() / 2;
 			break;
 		}
 		newPoint.setX(xpos);
 		newPoint.setY(ypos);
-		layoutEdge.getLayout().setSourcePoint(newPoint);
+		edgeLayout.setSourcePoint(newPoint);
 		
 		// set end point
-		newPoint = KimlLayoutGraphFactory.eINSTANCE.createKPoint();
-		xpos = layoutEdge.getTarget().getLayout().getLocation().getX()
-				+ layoutEdge.getTargetPort().getLayout().getLocation().getX();
-		ypos = layoutEdge.getTarget().getLayout().getLocation().getY()
-				+ layoutEdge.getTargetPort().getLayout().getLocation().getY();
+		newPoint = KLayoutDataFactory.eINSTANCE.createKPoint();
+		xpos = targetLayout.getXpos() + targetPortLayout.getXpos();
+		ypos = targetLayout.getYpos() + targetPortLayout.getYpos();
 		switch (lastEdge.targetSide) {
 		case NORTH:
-			xpos += layoutEdge.getTargetPort().getLayout().getSize().getWidth() / 2;
+			xpos += targetPortLayout.getWidth() / 2;
 			break;
 		case EAST:
-			xpos += layoutEdge.getTargetPort().getLayout().getSize().getWidth();
-			ypos += layoutEdge.getTargetPort().getLayout().getSize().getHeight() / 2;
+			xpos += targetPortLayout.getWidth();
+			ypos += targetPortLayout.getHeight() / 2;
 			break;
 		case SOUTH:
-			xpos += layoutEdge.getTargetPort().getLayout().getSize().getWidth() / 2;
-			ypos += layoutEdge.getTargetPort().getLayout().getSize().getHeight();
+			xpos += targetPortLayout.getWidth() / 2;
+			ypos += targetPortLayout.getHeight();
 			break;
 		case WEST:
-			ypos += layoutEdge.getTargetPort().getLayout().getSize().getHeight() / 2;
+			ypos += targetPortLayout.getHeight() / 2;
 			break;
 		}
 		newPoint.setX(xpos);
 		newPoint.setY(ypos);
-		layoutEdge.getLayout().setTargetPoint(newPoint);
+		edgeLayout.setTargetPoint(newPoint);
 	}
 	
 }

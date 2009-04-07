@@ -19,11 +19,13 @@ import java.util.LinkedList;
 import java.util.List;
 
 import de.cau.cs.kieler.core.alg.AbstractAlgorithm;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KDimension;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPoint;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutOption;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPortPlacement;
+import de.cau.cs.kieler.core.kgraph.KPort;
+import de.cau.cs.kieler.kiml.layout.klayoutdata.KPoint;
+import de.cau.cs.kieler.kiml.layout.klayoutdata.KShapeLayout;
+import de.cau.cs.kieler.kiml.layout.options.LayoutDirection;
+import de.cau.cs.kieler.kiml.layout.options.LayoutOptions;
+import de.cau.cs.kieler.kiml.layout.options.PortSide;
+import de.cau.cs.kieler.kiml.layout.util.KimlLayoutUtil;
 import de.cau.cs.kieler.klodd.hierarchical.modules.INodePlacer;
 import de.cau.cs.kieler.klodd.hierarchical.structures.Layer;
 import de.cau.cs.kieler.klodd.hierarchical.structures.LayerElement;
@@ -45,7 +47,7 @@ public class BasicNodePlacer extends AbstractAlgorithm implements INodePlacer {
 	/** minimal distance between two nodes or edges in each layer */
 	private float minDist;
 	/** layout direction for this algorithm instance */
-	private KLayoutOption layoutDirection;
+	private LayoutDirection layoutDirection;
 	/** array of sorted segments */
 	private LinearSegment[] sortedSegments = null;
 	
@@ -197,13 +199,12 @@ public class BasicNodePlacer extends AbstractAlgorithm implements INodePlacer {
 			float newPos = leftmostPlace + DIST_FACTOR * minDist;
 			for (LayerElement element : segment.elements) {
 				Layer layer = element.getLayer();
-				KDimension elemDim = element.getRealDim();
 				element.setCrosswisePos(newPos, minDist);
 				float totalCrosswiseDim = element.getTotalCrosswiseDim(minDist);
 				layer.crosswiseDim = newPos + totalCrosswiseDim;
 				layer.lengthwiseDim = Math.max(layer.lengthwiseDim,
-						layoutDirection == KLayoutOption.VERTICAL
-						? elemDim.getHeight() : elemDim.getWidth());
+						layoutDirection == LayoutDirection.VERTICAL
+						? element.getRealHeight() : element.getRealWidth());
 			}
 		}
 	}
@@ -219,33 +220,33 @@ public class BasicNodePlacer extends AbstractAlgorithm implements INodePlacer {
 		if (layeredGraph.areExternalPortsFixed()) {
 			// process fixed external layer
 			for (LayerElement element : layer.getElements()) {
-				KLayoutPort port = (KLayoutPort)element.getElemObj();
-				KPortPlacement placement = port.getLayout().getPlacement();
+				KPort port = (KPort)element.getElemObj();
+				KShapeLayout portLayout = KimlLayoutUtil.getShapeLayout(port);
+				PortSide placement = LayoutOptions.getPortSide(portLayout);
 				KPoint position = element.getPosition();
-				position.setX(port.getLayout().getLocation().getX());
-				position.setY(port.getLayout().getLocation().getY());
-				KDimension size = element.getRealDim();
-				if (layoutDirection == KLayoutOption.VERTICAL) {
+				position.setX(portLayout.getXpos());
+				position.setY(portLayout.getYpos());
+				if (layoutDirection == LayoutDirection.VERTICAL) {
 					layer.lengthwiseDim = Math.max(layer.lengthwiseDim,
-							size.getHeight());
-					if (placement != KPortPlacement.EAST
-							&& placement != KPortPlacement.WEST)
+							element.getRealHeight());
+					if (placement != PortSide.EAST
+							&& placement != PortSide.WEST)
 						layer.crosswiseDim = Math.max(layer.crosswiseDim,
-								position.getX() + size.getWidth());
-					if (placement != KPortPlacement.NORTH
-							&& placement != KPortPlacement.SOUTH)
+								position.getX() + element.getRealWidth());
+					if (placement != PortSide.NORTH
+							&& placement != PortSide.SOUTH)
 						layeredGraph.lengthwiseDim = Math.max(layeredGraph.lengthwiseDim,
 								position.getY());
 				}
 				else {
 					layer.lengthwiseDim = Math.max(layer.lengthwiseDim,
-							size.getWidth());
-					if (placement != KPortPlacement.NORTH
-							&& placement != KPortPlacement.SOUTH)
+							element.getRealWidth());
+					if (placement != PortSide.NORTH
+							&& placement != PortSide.SOUTH)
 						layer.crosswiseDim = Math.max(layer.crosswiseDim,
-								position.getY() + size.getHeight());
-					if (placement != KPortPlacement.EAST
-							&& placement != KPortPlacement.WEST)
+								position.getY() + element.getRealHeight());
+					if (placement != PortSide.EAST
+							&& placement != PortSide.WEST)
 						layeredGraph.lengthwiseDim = Math.max(layeredGraph.lengthwiseDim,
 								position.getX());
 				}

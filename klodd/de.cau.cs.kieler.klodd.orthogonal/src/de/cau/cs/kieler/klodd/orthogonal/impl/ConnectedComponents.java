@@ -19,10 +19,10 @@ import java.util.List;
 import java.util.Map;
 
 import de.cau.cs.kieler.core.alg.AbstractAlgorithm;
+import de.cau.cs.kieler.core.kgraph.KEdge;
+import de.cau.cs.kieler.core.kgraph.KNode;
 import de.cau.cs.kieler.core.slimgraph.KSlimEdge;
 import de.cau.cs.kieler.core.slimgraph.KSlimNode;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
 import de.cau.cs.kieler.klodd.orthogonal.structures.*;
 
 /**
@@ -34,11 +34,11 @@ import de.cau.cs.kieler.klodd.orthogonal.structures.*;
 public class ConnectedComponents extends AbstractAlgorithm {
 
 	/** stack of layout edges for BFS */
-	private LinkedList<KLayoutEdge> edgeStack = new LinkedList<KLayoutEdge>();
+	private LinkedList<KEdge> edgeStack = new LinkedList<KEdge>();
 	/** mapping of layout nodes to TSM nodes */
-	private Map<KLayoutNode, KSlimNode> nodeMap = new HashMap<KLayoutNode, KSlimNode>();
+	private Map<KNode, KSlimNode> nodeMap = new HashMap<KNode, KSlimNode>();
 	/** mapping of layout edges to TSM edges */
-	private Map<KLayoutEdge, KSlimEdge> edgeMap = new HashMap<KLayoutEdge, KSlimEdge>();
+	private Map<KEdge, KSlimEdge> edgeMap = new HashMap<KEdge, KSlimEdge>();
 	
 	/*
 	 * (non-Javadoc)
@@ -58,10 +58,10 @@ public class ConnectedComponents extends AbstractAlgorithm {
 	 * @param parentNode parent layout node
 	 * @return list of connected components
 	 */
-	public List<TSMGraph> findComponents(KLayoutNode parentNode) {
+	public List<TSMGraph> findComponents(KNode parentNode) {
 		List<TSMGraph> components = new LinkedList<TSMGraph>();
 		
-		for (KLayoutNode child : parentNode.getChildNodes()) {
+		for (KNode child : parentNode.getChildren()) {
 			if (!nodeMap.containsKey(child))
 				components.add(findComponent(child));
 		}
@@ -74,7 +74,7 @@ public class ConnectedComponents extends AbstractAlgorithm {
 	 * @param startLayoutNode node to use as start for the new component
 	 * @return a graph representing the connected component
 	 */
-	private TSMGraph findComponent(KLayoutNode startLayoutNode) {
+	private TSMGraph findComponent(KNode startLayoutNode) {
 		TSMGraph graph = new TSMGraph();
 		KSlimNode newTsmNode = new TSMNode(graph, TSMNode.Type.LAYOUT, startLayoutNode);
 		nodeMap.put(startLayoutNode, newTsmNode);
@@ -82,11 +82,11 @@ public class ConnectedComponents extends AbstractAlgorithm {
 		edgeStack.addAll(startLayoutNode.getIncomingEdges());
 		
 		while (!edgeStack.isEmpty()) {
-			KLayoutEdge layoutEdge = edgeStack.removeFirst();
+			KEdge layoutEdge = edgeStack.removeFirst();
 			// TODO add support for external ports
 			if (layoutEdge.getSource() != null && layoutEdge.getTarget() != null) {
 				if (!edgeMap.containsKey(layoutEdge)) {
-					KLayoutNode currentLayoutNode = layoutEdge.getSource();
+					KNode currentLayoutNode = layoutEdge.getSource();
 					KSlimNode sourceNode = nodeMap.get(currentLayoutNode);
 					if (sourceNode == null) {
 						sourceNode = new TSMNode(graph, TSMNode.Type.LAYOUT,

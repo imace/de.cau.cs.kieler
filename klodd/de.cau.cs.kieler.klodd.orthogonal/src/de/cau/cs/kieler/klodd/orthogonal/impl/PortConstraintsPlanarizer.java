@@ -17,11 +17,16 @@ import java.util.LinkedList;
 import java.util.List;
 
 import de.cau.cs.kieler.core.alg.AbstractAlgorithm;
+import de.cau.cs.kieler.core.kgraph.KEdge;
+import de.cau.cs.kieler.core.kgraph.KNode;
+import de.cau.cs.kieler.core.kgraph.KPort;
 import de.cau.cs.kieler.core.slimgraph.KSlimGraph;
 import de.cau.cs.kieler.core.slimgraph.KSlimNode;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutOption;
+import de.cau.cs.kieler.kiml.layout.klayoutdata.KShapeLayout;
+import de.cau.cs.kieler.kiml.layout.options.LayoutDirection;
+import de.cau.cs.kieler.kiml.layout.options.LayoutOptions;
+import de.cau.cs.kieler.kiml.layout.options.PortConstraints;
+import de.cau.cs.kieler.kiml.layout.util.KimlLayoutUtil;
 import de.cau.cs.kieler.kiml.layout.util.LayoutGraphUtil;
 import de.cau.cs.kieler.klodd.orthogonal.impl.ec.EmbeddingConstraint;
 import de.cau.cs.kieler.klodd.orthogonal.modules.IPlanarizer;
@@ -72,17 +77,18 @@ public class PortConstraintsPlanarizer extends AbstractAlgorithm implements
 	 */
 	private void createConstraints(KSlimGraph graph) {
 		for (KSlimNode node : graph.nodes) {
-			KLayoutNode layoutNode = (KLayoutNode)node.object;
+			KNode layoutNode = (KNode)node.object;
+			KShapeLayout nodeLayout = KimlLayoutUtil.getShapeLayout(layoutNode);
+			PortConstraints portConstraints = LayoutOptions.getPortConstraints(nodeLayout);
 			TSMNode tsmNode = (TSMNode)node;
 			if (!layoutNode.getPorts().isEmpty()) {
-				if (layoutNode.getLayout().getLayoutOptions()
-						.contains(KLayoutOption.FIXED_PORTS)) {
+				if (portConstraints == PortConstraints.FIXED_POS) {
 					// create port constraints 
-					KLayoutPort[] sortedPorts = LayoutGraphUtil.sortPortsByPosition(
-							layoutNode.getPorts(), KLayoutOption.HORIZONTAL, true);
+					KPort[] sortedPorts = LayoutGraphUtil.sortPortsByPosition(
+							layoutNode.getPorts(), LayoutDirection.HORIZONTAL, true);
 					EmbeddingConstraint portConstraint = new EmbeddingConstraint(
 							EmbeddingConstraint.Type.ORIENTED, null, layoutNode);
-					for (KLayoutPort port : sortedPorts) {
+					for (KPort port : sortedPorts) {
 						EmbeddingConstraint constraint = createConstraintFor(port,
 								portConstraint, tsmNode);
 						if (constraint != null)
@@ -97,11 +103,12 @@ public class PortConstraintsPlanarizer extends AbstractAlgorithm implements
 							EmbeddingConstraint.Type.ORIENTED, null, layoutNode);
 					EmbeddingConstraint northConstraint = null, eastConstraint = null,
 							southConstraint = null, westConstraint = null;
-					for (KLayoutPort port : layoutNode.getPorts()) {
+					for (KPort port : layoutNode.getPorts()) {
 						EmbeddingConstraint constraint = createConstraintFor(port,
 								null, tsmNode);
 						if (constraint != null) {
-							switch (port.getLayout().getPlacement()) {
+							switch (LayoutOptions.getPortSide(
+							        KimlLayoutUtil.getShapeLayout(port))) {
 							case NORTH:
 								if (northConstraint == null)
 									northConstraint = new EmbeddingConstraint(
@@ -161,21 +168,23 @@ public class PortConstraintsPlanarizer extends AbstractAlgorithm implements
 	 * @return a constraint for the given port, or null if the port has
 	 *     no incoming or outgoing edges
 	 */
-	private EmbeddingConstraint createConstraintFor(KLayoutPort port,
+	private EmbeddingConstraint createConstraintFor(KPort port,
 			EmbeddingConstraint parent, TSMNode node) {
 		// find edges connected with the given port
 		List<TSMEdge> portEdges = new LinkedList<TSMEdge>();
 		for (KSlimNode.IncEntry edgeEntry : node.incidence) {
 			TSMEdge tsmEdge = (TSMEdge)edgeEntry.edge;
-			if (tsmEdge.layoutEdge.getSourcePort() == port
-					|| tsmEdge.layoutEdge.getTargetPort() == port)
+			KEdge layoutEdge = (KEdge)tsmEdge.object;
+			if (layoutEdge.getSourcePort() == port
+					|| layoutEdge.getTargetPort() == port)
 				portEdges.add(tsmEdge);
 		}
 		if (!portEdges.isEmpty()) {
 			EmbeddingConstraint groupConstraint = new EmbeddingConstraint(
 					EmbeddingConstraint.Type.GROUPING, parent, port);
 			for (TSMEdge edge : portEdges) {
-				EmbeddingConstraint.Type constraintType = edge.layoutEdge.getSourcePort()
+			    KEdge layoutEdge = (KEdge)edge.object;
+				EmbeddingConstraint.Type constraintType = layoutEdge.getSourcePort()
 						== port ? EmbeddingConstraint.Type.OUT_EDGE
 						: EmbeddingConstraint.Type.IN_EDGE;
 				EmbeddingConstraint edgeConstraint = new EmbeddingConstraint(

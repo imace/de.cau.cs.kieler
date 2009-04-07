@@ -19,17 +19,23 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
 
+import de.cau.cs.kieler.core.kgraph.KEdge;
+import de.cau.cs.kieler.core.kgraph.KGraphElement;
+import de.cau.cs.kieler.core.kgraph.KNode;
+import de.cau.cs.kieler.core.kgraph.KPort;
 import de.cau.cs.kieler.core.slimgraph.KSlimEdge;
 import de.cau.cs.kieler.core.slimgraph.KSlimGraph;
 import de.cau.cs.kieler.core.slimgraph.KSlimNode;
 import de.cau.cs.kieler.core.slimgraph.alg.ICycleRemover;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KInsets;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPoint;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphFactory;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutOption;
+import de.cau.cs.kieler.kiml.layout.klayoutdata.KInsets;
+import de.cau.cs.kieler.kiml.layout.klayoutdata.KLayoutData;
+import de.cau.cs.kieler.kiml.layout.klayoutdata.KLayoutDataFactory;
+import de.cau.cs.kieler.kiml.layout.klayoutdata.KPoint;
+import de.cau.cs.kieler.kiml.layout.klayoutdata.KShapeLayout;
+import de.cau.cs.kieler.kiml.layout.options.LayoutDirection;
+import de.cau.cs.kieler.kiml.layout.options.LayoutOptions;
+import de.cau.cs.kieler.kiml.layout.options.PortConstraints;
+import de.cau.cs.kieler.kiml.layout.util.KimlLayoutUtil;
 
 
 /**
@@ -47,15 +53,15 @@ public class LayeredGraph {
 	/** list of layers in this layered graph */
 	private List<Layer> layers = new LinkedList<Layer>();
 	/** parent layout node associated with this layered graph */
-	private KLayoutNode parentNode;
+	private KNode parentNode;
 	/** map of objects to their corresponding layer */
 	private Map<Object, LayerElement> obj2LayerElemMap = new HashMap<Object, LayerElement>();
 	/** map of ports to connected long edges */
-	private Map<KLayoutPort, LinearSegment> longEdgesMap = new HashMap<KLayoutPort, LinearSegment>();
+	private Map<KPort, LinearSegment> longEdgesMap = new HashMap<KPort, LinearSegment>();
 	/** list of linear segments in this layered graph */
 	private List<LinearSegment> linearSegments = new LinkedList<LinearSegment>();
 	/** layout direction for this layered graph: HORIZONTAL or VERTICAL */
-	private KLayoutOption layoutDirection;
+	private LayoutDirection layoutDirection;
 	/** are the external ports of this layered graph fixed? */
 	private boolean fixedExternalPorts;
 	/** position of this layered graph */
@@ -66,17 +72,19 @@ public class LayeredGraph {
 	 * 
 	 * @param parentNode parent layout node
 	 */
-	public LayeredGraph(KLayoutNode parentNode) {
-		position = KimlLayoutGraphFactory.eINSTANCE.createKPoint();
+	public LayeredGraph(KNode parentNode) {
+		position = KLayoutDataFactory.eINSTANCE.createKPoint();
 		position.setX(0.0f);
 		position.setY(0.0f);
 		
 		// get layout options from the parent group
 		this.parentNode = parentNode;
-		List<KLayoutOption> parentOptions = parentNode.getLayout().getLayoutOptions();
-		layoutDirection = parentOptions.contains(KLayoutOption.VERTICAL) ?
-				KLayoutOption.VERTICAL : KLayoutOption.HORIZONTAL;
-		fixedExternalPorts = parentOptions.contains(KLayoutOption.FIXED_PORTS);
+		KLayoutData layoutData = KimlLayoutUtil.getShapeLayout(parentNode);
+		layoutDirection = LayoutOptions.getLayoutDirection(layoutData);
+		if (layoutDirection == LayoutDirection.UNDEFINED)
+		    layoutDirection = LayoutDirection.HORIZONTAL;
+		fixedExternalPorts = LayoutOptions.getPortConstraints(layoutData)
+		        != PortConstraints.FREE_PORTS;
 	}
 	
 	/*
@@ -98,7 +106,7 @@ public class LayeredGraph {
 	 * @param rank rank of the object
 	 * @param kNode the corresponding node in the acyclic KIELER graph
 	 */
-	public void putFront(Object obj, int rank, KSlimNode kNode) {
+	public void putFront(KGraphElement obj, int rank, KSlimNode kNode) {
 		ListIterator<Layer> layerIter = layers.listIterator();
 		while (layerIter.hasNext()) {
 			Layer layer = layerIter.next();
@@ -131,7 +139,7 @@ public class LayeredGraph {
 	 * @param height height of the object
 	 * @param kNode the corresponding node in the acyclic KIELER graph
 	 */
-	public void putBack(Object obj, int height, KSlimNode kNode) {
+	public void putBack(KGraphElement obj, int height, KSlimNode kNode) {
 		ListIterator<Layer> layerIter = layers.listIterator(layers.size());
 		while (layerIter.hasPrevious()) {
 			Layer layer = layerIter.previous();
@@ -180,7 +188,7 @@ public class LayeredGraph {
 	 * 
 	 * @return the parent node
 	 */
-	public KLayoutNode getParentNode() {
+	public KNode getParentNode() {
 		return parentNode;
 	}
 
@@ -202,9 +210,9 @@ public class LayeredGraph {
 				List<KSlimEdge> outgoingEdges = element.getOutgoingEdges();
 				if (outgoingEdges != null) {
 					for (KSlimEdge edge : outgoingEdges) {
-						KLayoutEdge layoutEdge = (KLayoutEdge)edge.object;
-						KLayoutNode targetNode;
-						KLayoutPort sourcePort, targetPort;
+						KEdge layoutEdge = (KEdge)edge.object;
+						KNode targetNode;
+						KPort sourcePort, targetPort;
 						if (edge.rank == ICycleRemover.REVERSED) {
 							targetNode = layoutEdge.getSource();
 							sourcePort = layoutEdge.getTargetPort();
@@ -236,7 +244,8 @@ public class LayeredGraph {
 	 * Applies the layout of this layered graph to the contained layout graph.
 	 */
 	public void applyLayout() {
-		KInsets insets = parentNode.getLayout().getInsets();
+	    KShapeLayout parentLayout = KimlLayoutUtil.getShapeLayout(parentNode);
+		KInsets insets = LayoutOptions.getInsets(parentLayout);
 		// apply the new layout to the contained elements
 		for (Layer layer : layers) {
 			for (LayerElement element : layer.getElements()) {
@@ -253,7 +262,7 @@ public class LayeredGraph {
 		// update the size of the parent layout node
 		float width = insets.getLeft() + insets.getRight();
 		float height = insets.getTop() + insets.getBottom();
-		if (layoutDirection == KLayoutOption.VERTICAL) {
+		if (layoutDirection == LayoutDirection.VERTICAL) {
 			width += crosswiseDim;
 			height += lengthwiseDim;
 		}
@@ -261,15 +270,13 @@ public class LayeredGraph {
 			width += lengthwiseDim;
 			height += crosswiseDim;
 		}
-		parentNode.getLayout().getSize().setWidth(width);
-		parentNode.getLayout().getSize().setHeight(height);
+		parentLayout.setWidth(width);
+		parentLayout.setHeight(height);
 		
 		// update layout options of the parent layout node
-		List<KLayoutOption> layoutOptions = parentNode.getLayout().getLayoutOptions();
-		if (!layoutOptions.contains(KLayoutOption.FIXED_SIZE))
-			layoutOptions.add(KLayoutOption.FIXED_SIZE);
-		if (!layoutOptions.contains(KLayoutOption.FIXED_PORTS))
-			layoutOptions.add(KLayoutOption.FIXED_PORTS);
+		LayoutOptions.setFixedSize(parentLayout);
+		LayoutOptions.setPortConstraints(parentLayout,
+		        PortConstraints.FIXED_POS);
 	}
 
 	/**
@@ -277,7 +284,7 @@ public class LayeredGraph {
 	 * 
 	 * @return the layout direction
 	 */
-	public KLayoutOption getLayoutDirection() {
+	public LayoutDirection getLayoutDirection() {
 		return layoutDirection;
 	}
 
@@ -316,7 +323,7 @@ public class LayeredGraph {
 	 * @param layer the layer
 	 * @param kNode the corresponding node in the acyclic KIELER graph
 	 */
-	private void doPut(Object obj, Layer layer, KSlimNode kNode) {
+	private void doPut(KGraphElement obj, Layer layer, KSlimNode kNode) {
 		LayerElement element = layer.put(obj, kNode);
 		obj2LayerElemMap.put(obj, element);
 	}
@@ -332,8 +339,8 @@ public class LayeredGraph {
 	 * @param targetPort the target port
 	 */
 	private void createConnection(LayerElement source,
-			LayerElement target, KLayoutEdge edge, KLayoutPort sourcePort,
-			KLayoutPort targetPort) {
+			LayerElement target, KEdge edge, KPort sourcePort,
+			KPort targetPort) {
 		Layer sourceLayer = source.getLayer();
 		Layer targetLayer = target.getLayer();
 		if (targetLayer.rank - sourceLayer.rank == 1) {

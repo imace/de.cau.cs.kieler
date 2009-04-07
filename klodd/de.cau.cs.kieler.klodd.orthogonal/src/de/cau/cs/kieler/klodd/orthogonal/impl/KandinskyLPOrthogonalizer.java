@@ -21,12 +21,15 @@ import lpsolve.AbortListener;
 import lpsolve.LpSolve;
 import lpsolve.LpSolveException;
 import de.cau.cs.kieler.core.alg.AbstractAlgorithm;
+import de.cau.cs.kieler.core.kgraph.KEdge;
 import de.cau.cs.kieler.core.slimgraph.KSlimEdge;
 import de.cau.cs.kieler.core.slimgraph.KSlimFace;
 import de.cau.cs.kieler.core.slimgraph.KSlimGraph;
 import de.cau.cs.kieler.core.slimgraph.KSlimNode;
 import de.cau.cs.kieler.core.slimgraph.KSlimEdge.Bend;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPortPlacement;
+import de.cau.cs.kieler.kiml.layout.options.LayoutOptions;
+import de.cau.cs.kieler.kiml.layout.options.PortSide;
+import de.cau.cs.kieler.kiml.layout.util.KimlLayoutUtil;
 import de.cau.cs.kieler.klodd.orthogonal.Messages;
 import de.cau.cs.kieler.klodd.orthogonal.modules.IOrthogonalizer;
 import de.cau.cs.kieler.klodd.orthogonal.structures.*;
@@ -389,17 +392,20 @@ public class KandinskyLPOrthogonalizer extends AbstractAlgorithm implements
 			if (((TSMNode)node).type == TSMNode.Type.LAYOUT) {
 				for (KSlimNode.IncEntry edgeEntry : node.incidence) {
 					TSMEdge tsmEdge = (TSMEdge)edgeEntry.edge;
+					KEdge layoutEdge = (KEdge)tsmEdge.object;
 					if (edgeEntry.type == KSlimNode.IncEntry.Type.OUT) {
-						if (tsmEdge.layoutEdge.getSourcePort() != null)
-							addSideConstraint(edgeEntry.edge, tsmEdge
-									.layoutEdge.getSourcePort().getLayout()
-									.getPlacement(), ilp, false);
+						if (layoutEdge.getSourcePort() != null)
+							addSideConstraint(edgeEntry.edge,
+							        LayoutOptions.getPortSide(
+							        KimlLayoutUtil.getShapeLayout(
+							        layoutEdge.getSourcePort())), ilp, false);
 					}
 					else {
-						if (tsmEdge.layoutEdge.getTargetPort() != null)
-							addSideConstraint(edgeEntry.edge, tsmEdge
-									.layoutEdge.getTargetPort().getLayout()
-									.getPlacement(), ilp, true);
+						if (layoutEdge.getTargetPort() != null)
+							addSideConstraint(edgeEntry.edge,
+							        LayoutOptions.getPortSide(
+		                            KimlLayoutUtil.getShapeLayout(
+		                            layoutEdge.getTargetPort())), ilp, true);
 					}
 				}
 			}
@@ -737,7 +743,7 @@ public class KandinskyLPOrthogonalizer extends AbstractAlgorithm implements
 	 * @param isTarget indicates whether the target or the source is processed
 	 * @throws LpSolveException if the lp_solve library reports a failure
 	 */
-	private void addSideConstraint(KSlimEdge edge, KPortPlacement side,
+	private void addSideConstraint(KSlimEdge edge, PortSide side,
 			LpSolve ilp, boolean isTarget) throws LpSolveException {
 		int sideValue = -1;
 		switch (side) {

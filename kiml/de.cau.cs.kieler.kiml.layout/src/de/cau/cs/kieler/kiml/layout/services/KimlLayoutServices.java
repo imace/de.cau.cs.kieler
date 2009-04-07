@@ -134,11 +134,11 @@ public class KimlLayoutServices {
 	
 	/**
 	 * Returns the best fitting {@link AbstractLayoutProvider} for the
-	 * provided KLayoutNode. The layout provider is evaluated as follows:
+	 * provided KNode. The layout provider is evaluated as follows:
 	 * <ol>
-	 * <li>If Layouter Name attribute of KLayoutNode is fitting a certain layout
+	 * <li>If Layouter Name attribute of KNode is fitting a certain layout
 	 * provider, return this layout provider</li>
-	 * <li>If Layout Type attribute of KLayoutNode is fitting a certain layout
+	 * <li>If Layout Type attribute of KNode is fitting a certain layout
 	 * provider, return this layout provider</li>
 	 * <li>If not fitting so far, return the default layout provider. This can
 	 * be adjusted in the preference page.</li>
@@ -150,14 +150,14 @@ public class KimlLayoutServices {
 	 * @param layoutNode
 	 *            The KNode for which the fitting layout provider should be
 	 *            returned
-	 * @return The best fitting LayoutProvider for the provided KLayoutNode
+	 * @return The best fitting LayoutProvider for the provided KNode
 	 * @see NullLayoutProvider
 	 */
 	public AbstractLayoutProvider getLayoutProvider(KNode layoutNode) {
 		AbstractLayoutProvider layoutProvider = null;
 
 		// if layouter name is fitting, use it
-		KLayoutData layoutData = KimlLayoutUtil.getLayoutData(layoutNode);
+		KLayoutData layoutData = KimlLayoutUtil.getShapeLayout(layoutNode);
 		KStringOption layouterName = (KStringOption)layoutData
 		        .getOption(LayoutOptions.LAYOUTER_NAME);
 		if (layouterName != null && layoutProviderMap.containsKey(

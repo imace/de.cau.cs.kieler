@@ -18,14 +18,15 @@ import java.util.List;
 import de.cau.cs.kieler.core.IKielerPreferenceStore;
 import de.cau.cs.kieler.core.KielerException;
 import de.cau.cs.kieler.core.alg.IKielerProgressMonitor;
+import de.cau.cs.kieler.core.kgraph.KNode;
 import de.cau.cs.kieler.core.slimgraph.KSlimGraph;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KInsets;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphFactory;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayouterInfo;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutOption;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutType;
+import de.cau.cs.kieler.kiml.layout.klayoutdata.KInsets;
+import de.cau.cs.kieler.kiml.layout.klayoutdata.KShapeLayout;
+import de.cau.cs.kieler.kiml.layout.options.LayoutOptions;
+import de.cau.cs.kieler.kiml.layout.options.LayoutType;
+import de.cau.cs.kieler.kiml.layout.options.PortConstraints;
 import de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider;
+import de.cau.cs.kieler.kiml.layout.util.KimlLayoutUtil;
 import de.cau.cs.kieler.klodd.orthogonal.impl.*;
 import de.cau.cs.kieler.klodd.orthogonal.impl.ec.EdgeInsertionECPlanarizer;
 import de.cau.cs.kieler.klodd.orthogonal.modules.*;
@@ -73,9 +74,9 @@ public class OrthogonalDataflowLayoutProvider extends
 	
 	/*
 	 * (non-Javadoc)
-	 * @see de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider#doLayout(de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode, de.cau.cs.kieler.core.alg.IKielerProgressMonitor)
+	 * @see de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider#doLayout(de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNode, de.cau.cs.kieler.core.alg.IKielerProgressMonitor)
 	 */
-	public void doLayout(KLayoutNode layoutNode,
+	public void doLayout(KNode layoutNode,
 			IKielerProgressMonitor progressMonitor) throws KielerException {
 		// get the currently configured modules
 		updateModules();
@@ -100,18 +101,6 @@ public class OrthogonalDataflowLayoutProvider extends
 		applyLayout(components, layoutNode);
 		
 		progressMonitor.done();
-	}
-
-	/* (non-Javadoc)
-	 * @see de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider#getLayouterInfo()
-	 */
-	public KLayouterInfo getLayouterInfo() {
-		KLayouterInfo info = KimlLayoutGraphFactory.eINSTANCE.createKLayouterInfo();
-		info.setLayouterName(LAYOUTER_NAME);
-		info.setLayoutType(KLayoutType.ORTHOGONAL);
-		info.setLayoutOption(KLayoutOption.DEFAULT);
-		info.setLayouterCollectionID(COLLECTION_NAME);
-		return info;
 	}
 	
 	/**
@@ -139,8 +128,9 @@ public class OrthogonalDataflowLayoutProvider extends
 	 * @param components list of connected components
 	 * @param parentNode parent layout node
 	 */
-	private void applyLayout(List<TSMGraph> components, KLayoutNode parentNode) {
-		KInsets insets = parentNode.getLayout().getInsets();
+	private void applyLayout(List<TSMGraph> components, KNode parentNode) {
+		KShapeLayout parentLayout = KimlLayoutUtil.getShapeLayout(parentNode);
+	    KInsets insets = LayoutOptions.getInsets(parentLayout);
 		float currentYpos = 0.0f, maxWidth = 0.0f;
 		for (TSMGraph component : components) {
 			component.applyLayout(0.0f, currentYpos, insets);
@@ -149,17 +139,36 @@ public class OrthogonalDataflowLayoutProvider extends
 		}
 		
 		// update the size of the parent layout node
-		parentNode.getLayout().getSize().setWidth(insets.getLeft()
+		parentLayout.setWidth(insets.getLeft()
 				+ maxWidth + insets.getRight());
-		parentNode.getLayout().getSize().setHeight(insets.getTop()
+		parentLayout.setHeight(insets.getTop()
 				+ currentYpos + insets.getBottom());
 		
 		// update layout options of the parent layout node
-		List<KLayoutOption> layoutOptions = parentNode.getLayout().getLayoutOptions();
-		if (!layoutOptions.contains(KLayoutOption.FIXED_SIZE))
-			layoutOptions.add(KLayoutOption.FIXED_SIZE);
-		if (!layoutOptions.contains(KLayoutOption.FIXED_PORTS))
-			layoutOptions.add(KLayoutOption.FIXED_PORTS);
+		LayoutOptions.setFixedSize(parentLayout);
+		LayoutOptions.setPortConstraints(parentLayout,
+		        PortConstraints.FIXED_POS);
 	}
+
+    /* (non-Javadoc)
+     * @see de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider#getCollection()
+     */
+    public String getCollection() {
+        return COLLECTION_NAME;
+    }
+
+    /* (non-Javadoc)
+     * @see de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider#getName()
+     */
+    public String getName() {
+        return LAYOUTER_NAME;
+    }
+
+    /* (non-Javadoc)
+     * @see de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider#getType()
+     */
+    public LayoutType getType() {
+        return LayoutType.ORTHOGONAL;
+    }
 
 }

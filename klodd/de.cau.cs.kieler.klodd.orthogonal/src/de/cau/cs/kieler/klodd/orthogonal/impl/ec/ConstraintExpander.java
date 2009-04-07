@@ -17,6 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import de.cau.cs.kieler.core.alg.AbstractAlgorithm;
+import de.cau.cs.kieler.core.kgraph.KEdge;
 import de.cau.cs.kieler.core.slimgraph.KSlimEdge;
 import de.cau.cs.kieler.core.slimgraph.KSlimGraph;
 import de.cau.cs.kieler.core.slimgraph.KSlimNode;
@@ -165,7 +166,7 @@ public class ConstraintExpander extends AbstractAlgorithm {
 			}
 			else {
 				KSlimEdge newEdge = new TSMEdge(expandedGraph, node, endPoint,
-						edge.layoutEdge);
+				        (KEdge)edge.object);
 				newEdge.connectNodes();
 			}
 		}
@@ -176,7 +177,7 @@ public class ConstraintExpander extends AbstractAlgorithm {
 			}
 			else {
 				KSlimEdge newEdge = new TSMEdge(expandedGraph, endPoint, node,
-						edge.layoutEdge);
+				        (KEdge)edge.object);
 				newEdge.connectNodes();
 			}
 		}

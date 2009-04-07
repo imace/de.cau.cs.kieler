@@ -19,7 +19,7 @@ import de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider;
  * Implements the Circo layouter of the GraphViz suite. As this class extends
  * the {@link AbstractLayoutProvider}, the most relevant method is
  * <code>doLayout</code>, which performs the actual layout, that is annotating
- * the provided KLayoutNode with the Circo layout information.
+ * the provided KNode with the Circo layout information.
  * <p/>
  * This class acts as a wrapper to the {@link GraphvizLayouterLibrary}. Is uses the
  * {@link GraphvizLayouterLibrary} with the Circo engine and publishes the Circo

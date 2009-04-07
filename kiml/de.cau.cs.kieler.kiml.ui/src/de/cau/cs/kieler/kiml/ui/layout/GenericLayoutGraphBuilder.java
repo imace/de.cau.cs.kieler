@@ -95,7 +95,7 @@ public class GenericLayoutGraphBuilder extends
 						(ShapeNodeEditPart) rootEditPart));
 			}
 
-			/* map the root EditPart to the top KLayoutNode */
+			/* map the root EditPart to the top KNode */
 			graphicalEditPart2LayoutNode.put(rootEditPart, layoutGraph);
 			layoutNode2EditPart.put(layoutGraph, rootEditPart);
 
@@ -131,7 +131,7 @@ public class GenericLayoutGraphBuilder extends
 	 * @param currentEditPart
 	 *            The GraphicalEditPart which children will be processed
 	 * @param currentLayoutNode
-	 *            The corresponding KLayoutNode
+	 *            The corresponding KNode
 	 */
 	private void buildLayoutGraphRecursively(GraphicalEditPart currentEditPart,
 			KNode currentLayoutNode) {
@@ -198,7 +198,7 @@ public class GenericLayoutGraphBuilder extends
 
 			/*
 			 * If it is ShapeCompartmentEditPart, Emma needs the children of it
-			 * to add to new KLayoutNodes. She handles possible insets, which
+			 * to add to new KNodes. She handles possible insets, which
 			 * may result from labels and other stuff.
 			 */
 			if (obj instanceof ShapeCompartmentEditPart
@@ -246,7 +246,7 @@ public class GenericLayoutGraphBuilder extends
 		}
 		/*
 		 * Finally process all the connections, as Emma has build all the needed
-		 * KLayoutNodes which act as source and target.
+		 * KNodes which act as source and target.
 		 */
 		processConnections(connections);
 	}
@@ -265,7 +265,7 @@ public class GenericLayoutGraphBuilder extends
 		for (ConnectionEditPart connection : connections) {
 
 			/*
-			 * create the KLayoutEdge. The KLayoutEdge does not need to be added
+			 * create the KEdge. The KEdge does not need to be added
 			 * explicitly to the KLayoutGraph, but exists in it through the
 			 * EOppositeReference of EMF.
 			 */

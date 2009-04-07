@@ -13,8 +13,10 @@
  */
 package de.cau.cs.kieler.klodd.orthogonal.structures;
 
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
+import de.cau.cs.kieler.kiml.layout.klayoutdata.KShapeLayout;
+import de.cau.cs.kieler.kiml.layout.util.KimlLayoutUtil;
 import de.cau.cs.kieler.klodd.orthogonal.impl.ec.EmbeddingConstraint;
+import de.cau.cs.kieler.core.kgraph.KNode;
 import de.cau.cs.kieler.core.slimgraph.*;
 
 /**
@@ -90,10 +92,11 @@ public class TSMNode extends KSlimNode {
 	 * @param offsetY y offset to be added
 	 */
 	public void applyLayout(float offsetX, float offsetY) {
-		if (object instanceof KLayoutNode) {
-			KLayoutNode layoutNode = (KLayoutNode)object;
-			layoutNode.getLayout().getLocation().setX(xpos + offsetX);
-			layoutNode.getLayout().getLocation().setY(ypos + offsetY);
+		if (object instanceof KNode) {
+			KNode layoutNode = (KNode)object;
+			KShapeLayout nodeLayout = KimlLayoutUtil.getShapeLayout(layoutNode);
+			nodeLayout.setXpos(xpos + offsetX);
+			nodeLayout.setYpos(ypos + offsetY);
 		}
 	}
 	
@@ -103,8 +106,8 @@ public class TSMNode extends KSlimNode {
 	 */
 	public String toString() {
 		String baseString = super.toString();
-		if (object instanceof KLayoutNode)
-			return baseString + " \"" + ((KLayoutNode)object).getLabel().getText() + "\"";
+		if (object instanceof KNode)
+			return baseString + " \"" + ((KNode)object).getLabel().getText() + "\"";
 		else return baseString + " " + type.toString();
 	}
 	

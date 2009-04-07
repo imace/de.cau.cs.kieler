@@ -14,8 +14,8 @@
 package de.cau.cs.kieler.klodd.hierarchical.modules;
 
 import de.cau.cs.kieler.core.alg.IAlgorithm;
+import de.cau.cs.kieler.core.kgraph.KNode;
 import de.cau.cs.kieler.core.slimgraph.KSlimGraph;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode;
 import de.cau.cs.kieler.klodd.hierarchical.structures.LayeredGraph;
 
 /**
@@ -34,6 +34,6 @@ public interface ILayerAssigner extends IAlgorithm {
 	 * @param parentNode the parent layout node
 	 * @return a layered graph
 	 */
-	public LayeredGraph assignLayers(KSlimGraph kGraph, KLayoutNode parentNode);
+	public LayeredGraph assignLayers(KSlimGraph kGraph, KNode parentNode);
 
 }

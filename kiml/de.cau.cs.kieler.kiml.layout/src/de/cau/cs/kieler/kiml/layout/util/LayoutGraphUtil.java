@@ -241,7 +241,7 @@ public class LayoutGraphUtil {
 		int northTotal = 0, eastTotal = 0, southTotal = 0, westTotal = 0;
 		for (KPort port : ports) {
 			switch (LayoutOptions.getPortSide(
-			        KimlLayoutUtil.getLayoutData(port))) {
+			        KimlLayoutUtil.getShapeLayout(port))) {
 			case NORTH:
 				northTotal++;
 				break;
@@ -394,7 +394,7 @@ public class LayoutGraphUtil {
 			minSouth = MIN_PORT_DISTANCE, minWest = MIN_PORT_DISTANCE;
 		for (KPort port : node.getPorts()) {
 			switch (LayoutOptions.getPortSide(
-                    KimlLayoutUtil.getLayoutData(port))) {
+                    KimlLayoutUtil.getShapeLayout(port))) {
 			case NORTH:
 				minNorth += MIN_PORT_DISTANCE;
 				break;

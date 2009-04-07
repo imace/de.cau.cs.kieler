@@ -21,9 +21,20 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import de.cau.cs.kieler.core.kgraph.KEdge;
+import de.cau.cs.kieler.core.kgraph.KGraphElement;
+import de.cau.cs.kieler.core.kgraph.KNode;
+import de.cau.cs.kieler.core.kgraph.KPort;
 import de.cau.cs.kieler.core.slimgraph.KSlimEdge;
 import de.cau.cs.kieler.core.slimgraph.KSlimNode;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.*;
+import de.cau.cs.kieler.kiml.layout.klayoutdata.KInsets;
+import de.cau.cs.kieler.kiml.layout.klayoutdata.KLayoutDataFactory;
+import de.cau.cs.kieler.kiml.layout.klayoutdata.KPoint;
+import de.cau.cs.kieler.kiml.layout.klayoutdata.KShapeLayout;
+import de.cau.cs.kieler.kiml.layout.options.LayoutDirection;
+import de.cau.cs.kieler.kiml.layout.options.LayoutOptions;
+import de.cau.cs.kieler.kiml.layout.options.PortConstraints;
+import de.cau.cs.kieler.kiml.layout.util.KimlLayoutUtil;
 import de.cau.cs.kieler.kiml.layout.util.LayoutGraphUtil;
 
 
@@ -51,7 +62,7 @@ public class LayerElement {
 	public int westRanks = 0;
 	
 	/** the element object */
-	private Object elemObj;
+	private KGraphElement elemObj;
 	/** the containing layer */
 	private Layer layer;
 	/** the corresponding node in the acyclic KIELER graph */
@@ -62,8 +73,10 @@ public class LayerElement {
 	private int rankWidth;
 	/** the new position that is determined for this layer element */
 	private KPoint position;
-	/** the dimension of the contained object */
-	private KDimension realDim;
+	/** the width of the contained object */
+	private float realWidth;
+	/** the height of the contained object */
+	private float realHeight;
 	/** the total crosswise dimension */
 	private float totalCrosswiseDim = -1.0f;
 	/** the list of incoming layer connections */
@@ -73,9 +86,9 @@ public class LayerElement {
 	/** the list of element loop */
 	private List<ElementLoop> loops = new LinkedList<ElementLoop>();
 	/** map of ports to port ranks for forward layer sweep */
-	private Map<KLayoutPort, Integer> forwardPortRanks = null;
+	private Map<KPort, Integer> forwardPortRanks = null;
 	/** map of ports to port ranks for backwards layer sweep */
-	private Map<KLayoutPort, Integer> backwardsPortRanks = null;
+	private Map<KPort, Integer> backwardsPortRanks = null;
 	
 	/**
 	 * Creates a layer element in an existing layer.
@@ -84,32 +97,37 @@ public class LayerElement {
 	 * @param layer the containing layer
 	 * @param kNode the corresponding node in the acyclic KIELER graph
 	 */
-	public LayerElement(Object obj, Layer layer, KSlimNode kNode) {
+	public LayerElement(KGraphElement obj, Layer layer, KSlimNode kNode) {
 		this.elemObj = obj;
 		this.layer = layer;
 		this.kNode = kNode;
-		this.position = KimlLayoutGraphFactory.eINSTANCE.createKPoint();
+		this.position = KLayoutDataFactory.eINSTANCE.createKPoint();
 		
-		if (obj instanceof KLayoutNode) {
+		if (obj instanceof KNode) {
 			// the layer element is a layout node
-			KLayoutNode node = (KLayoutNode)obj;
-			fixedPorts = node.getLayout().getLayoutOptions().contains(KLayoutOption.FIXED_PORTS)
-				|| node.getPorts().isEmpty();
+		    KNode node = (KNode)obj;
+		    KShapeLayout shapeLayout = KimlLayoutUtil.getShapeLayout(node);
+            fixedPorts = LayoutOptions.getPortConstraints(shapeLayout)
+                    == PortConstraints.FIXED_POS || node.getPorts().isEmpty();
 			rankWidth = Math.max(node.getPorts().size(), 1);
-			realDim = node.getLayout().getSize();
+			realWidth = shapeLayout.getWidth();
+			realHeight = shapeLayout.getHeight();
 		}
-		else if (obj instanceof KLayoutPort) {
+		else if (obj instanceof KPort) {
 			// the layer element is a port
-			KLayoutPort port= (KLayoutPort)obj;
-			fixedPorts = true;
+			KPort port= (KPort)obj;
+			KShapeLayout shapeLayout = KimlLayoutUtil.getShapeLayout(port);
+            fixedPorts = true;
 			rankWidth = 1;
-			realDim = port.getLayout().getSize();
+            realWidth = shapeLayout.getWidth();
+            realHeight = shapeLayout.getHeight();
 		}
-		else if (obj instanceof KLayoutEdge) {
+		else if (obj instanceof KEdge) {
 			// the layer element is a long edge
 			fixedPorts = true;
 			rankWidth = 1;
-			realDim = KimlLayoutGraphFactory.eINSTANCE.createKDimension();
+			realWidth = 0.0f;
+			realHeight = 0.0f;
 		}
 		else
 			throw new IllegalArgumentException("Unknown object type received.");
@@ -120,18 +138,18 @@ public class LayerElement {
 	 * @see java.lang.Object#toString()
 	 */
 	public String toString() {
-		if (elemObj instanceof KLayoutNode) {
-			KLayoutNode node = (KLayoutNode)elemObj;
+		if (elemObj instanceof KNode) {
+			KNode node = (KNode)elemObj;
 			return node.getLabel().getText();
 		}
-		else if (elemObj instanceof KLayoutPort) {
-			KLayoutPort port = (KLayoutPort)elemObj;
+		else if (elemObj instanceof KPort) {
+			KPort port = (KPort)elemObj;
 			return port.getLabel().getText();
 		}
-		else if (elemObj instanceof KLayoutEdge) {
-			KLayoutEdge edge = (KLayoutEdge)elemObj;
-			KLayoutNode source = edge.getSource();
-			KLayoutNode target = edge.getTarget();
+		else if (elemObj instanceof KEdge) {
+			KEdge edge = (KEdge)elemObj;
+			KNode source = edge.getSource();
+			KNode target = edge.getTarget();
 			if (source != null && target != null)
 				return "(" + source.getLabel().getText() + ") > ("
 					+ target.getLabel().getText() + ")";
@@ -194,7 +212,7 @@ public class LayerElement {
 	 * @param edge the edge between the two layout nodes
 	 * @param target target layer element
 	 */
-	public void addOutgoing(KLayoutEdge edge, LayerElement target) {
+	public void addOutgoing(KEdge edge, LayerElement target) {
 		addOutgoing(edge, target, null, null);
 	}
 	
@@ -206,8 +224,8 @@ public class LayerElement {
 	 * @param sourcePort the source port
 	 * @param targetPort the target port
 	 */
-	public void addOutgoing(KLayoutEdge edge, LayerElement target,
-			KLayoutPort sourcePort, KLayoutPort targetPort) {
+	public void addOutgoing(KEdge edge, LayerElement target,
+			KPort sourcePort, KPort targetPort) {
 		LayerConnection connection = new LayerConnection(edge, this,
 				sourcePort, target, targetPort);
 		this.outgoing.add(connection);
@@ -224,42 +242,41 @@ public class LayerElement {
 	public void applyLayout(KPoint offset, KInsets insets) {
 		position.setX(position.getX() + offset.getX());
 		position.setY(position.getY() + offset.getY());
-		if (elemObj instanceof KLayoutNode) {
-			KPoint nodeLoc = ((KLayoutNode)elemObj).getLayout().getLocation();
-			nodeLoc.setX(position.getX());
-			nodeLoc.setY(position.getY());
+		if (elemObj instanceof KNode) {
+			KShapeLayout shapeLayout = KimlLayoutUtil.getShapeLayout(elemObj);
+			shapeLayout.setXpos(position.getX());
+			shapeLayout.setYpos(position.getY());
 		}
-		else if (elemObj instanceof KLayoutPort) {
-			KLayoutPort port = (KLayoutPort)elemObj;
-			KPoint portLoc = port.getLayout().getLocation();
-			switch (port.getLayout().getPlacement()) {
+		else if (elemObj instanceof KPort) {
+			KShapeLayout shapeLayout = KimlLayoutUtil.getShapeLayout(elemObj);
+            switch (LayoutOptions.getPortSide(shapeLayout)) {
 			case NORTH:
 				if (layer.getLayeredGraph().areExternalPortsFixed())
-					portLoc.setX(position.getX());
+				    shapeLayout.setXpos(position.getX());
 				else
-					portLoc.setX(position.getX() + insets.getLeft());
-				portLoc.setY(position.getY());
+				    shapeLayout.setXpos(position.getX() + insets.getLeft());
+				shapeLayout.setYpos(position.getY());
 				break;
 			case EAST:
-				portLoc.setX(position.getX() + insets.getLeft() + insets.getRight());
+			    shapeLayout.setXpos(position.getX() + insets.getLeft() + insets.getRight());
 				if (layer.getLayeredGraph().areExternalPortsFixed())
-					portLoc.setY(position.getY());
+				    shapeLayout.setYpos(position.getY());
 				else
-					portLoc.setY(position.getY() + insets.getTop());
+				    shapeLayout.setYpos(position.getY() + insets.getTop());
 				break;
 			case SOUTH:
 				if (layer.getLayeredGraph().areExternalPortsFixed())
-					portLoc.setX(position.getX());
+				    shapeLayout.setXpos(position.getX());
 				else
-					portLoc.setX(position.getX() + insets.getLeft());
-				portLoc.setY(position.getY() + insets.getTop() + insets.getBottom());
+				    shapeLayout.setXpos(position.getX() + insets.getLeft());
+				shapeLayout.setYpos(position.getY() + insets.getTop() + insets.getBottom());
 				break;
 			case WEST:
-				portLoc.setX(position.getX());
+			    shapeLayout.setXpos(position.getX());
 				if (layer.getLayeredGraph().areExternalPortsFixed())
-					portLoc.setY(position.getY());
+				    shapeLayout.setYpos(position.getY());
 				else
-					portLoc.setY(position.getY() + insets.getTop());
+				    shapeLayout.setYpos(position.getY() + insets.getTop());
 				break;
 			}
 		}
@@ -311,12 +328,21 @@ public class LayerElement {
 	}
 
 	/**
-	 * Determines the dimension of this layer element.
+	 * Returns the width of this layer element.
 	 * 
-	 * @return the dimension
+	 * @return the width
 	 */
-	public KDimension getRealDim() {
-		return realDim;
+	public float getRealWidth() {
+		return realWidth;
+	}
+	
+	/**
+	 * Returns the height of this layer element.
+	 * 
+	 * @return the height
+	 */
+	public float getRealHeight() {
+	    return realHeight;
 	}
 	
 	/**
@@ -327,8 +353,8 @@ public class LayerElement {
 	 * @param minDist minimal distance for routed edges
 	 */
 	public void setCrosswisePos(float pos, float minDist) {
-		KLayoutOption layoutDirection = layer.getLayeredGraph().getLayoutDirection();
-		if (layoutDirection == KLayoutOption.VERTICAL)
+		LayoutDirection layoutDirection = layer.getLayeredGraph().getLayoutDirection();
+		if (layoutDirection == LayoutDirection.VERTICAL)
 			position.setX(pos + westRanks * minDist);
 		else
 			position.setY(pos + northRanks * minDist);
@@ -343,13 +369,13 @@ public class LayerElement {
 	 */
 	public float getTotalCrosswiseDim(float minDist) {
 		if (totalCrosswiseDim < 0.0f) {
-			KLayoutOption layoutDirection = layer.getLayeredGraph().getLayoutDirection();
-			if (layoutDirection == KLayoutOption.VERTICAL)
+		    LayoutDirection layoutDirection = layer.getLayeredGraph().getLayoutDirection();
+			if (layoutDirection == LayoutDirection.VERTICAL)
 				totalCrosswiseDim = (westRanks + eastRanks)
-					* minDist + getRealDim().getWidth();
+					* minDist + realWidth;
 			else
 				totalCrosswiseDim = (northRanks + southRanks)
-					* minDist + getRealDim().getHeight();
+					* minDist + realHeight;
 		}
 		return totalCrosswiseDim;
 	}
@@ -387,8 +413,8 @@ public class LayerElement {
 	 * @return number of edges in front
 	 */
 	public int getEdgesFront() {
-		KLayoutOption layoutDirection = layer.getLayeredGraph().getLayoutDirection();
-		return layoutDirection == KLayoutOption.VERTICAL
+	    LayoutDirection layoutDirection = layer.getLayeredGraph().getLayoutDirection();
+		return layoutDirection == LayoutDirection.VERTICAL
 			? northRanks : westRanks;
 	}
 
@@ -398,8 +424,8 @@ public class LayerElement {
 	 * @return number of edges in the back
 	 */
 	public int getEdgesBack() {
-		KLayoutOption layoutDirection = layer.getLayeredGraph().getLayoutDirection();
-		return layoutDirection == KLayoutOption.VERTICAL
+	    LayoutDirection layoutDirection = layer.getLayeredGraph().getLayoutDirection();
+		return layoutDirection == LayoutDirection.VERTICAL
 			? southRanks : eastRanks;
 	}
 
@@ -411,7 +437,7 @@ public class LayerElement {
 	 *     else for a backwards layer sweep
 	 * @return port rank, or 0 if <code>port == null</code
 	 */
-	public int getPortRank(KLayoutPort port, boolean forward) {
+	public int getPortRank(KPort port, boolean forward) {
 		if (port != null) {
 			if (forward) {
 				if (forwardPortRanks == null)
@@ -439,11 +465,11 @@ public class LayerElement {
 	public List<Integer> getConnectionRanks(boolean forward) {
 		List<Integer> connectionRanks = new LinkedList<Integer>();
 		if (forward) {
-		    if (elemObj instanceof KLayoutEdge && linearSegment.hasPreceding(this)) {
+		    if (elemObj instanceof KEdge && linearSegment.hasPreceding(this)) {
 		        // only the preceding element of the linear segment may be considered
 		        for (LayerConnection connection : incoming) {
 		            LayerElement source = connection.getSourceElement();
-		            if (source.elemObj instanceof KLayoutEdge) {
+		            if (source.elemObj instanceof KEdge) {
 		                connectionRanks.add(Integer.valueOf(source.rank));
 		                break;
 		            }
@@ -465,11 +491,11 @@ public class LayerElement {
 		    }
 		}
 		else {
-		    if (elemObj instanceof KLayoutEdge && linearSegment.hasFollowing(this)) {
+		    if (elemObj instanceof KEdge && linearSegment.hasFollowing(this)) {
                 // only the following element of the linear segment may be considered
                 for (LayerConnection connection : outgoing) {
                     LayerElement target = connection.getTargetElement();
-                    if (target.elemObj instanceof KLayoutEdge) {
+                    if (target.elemObj instanceof KEdge) {
                         connectionRanks.add(Integer.valueOf(target.rank));
                         break;
                     }
@@ -505,11 +531,11 @@ public class LayerElement {
 	 * @return list of connection ranks for each port of this layout node,
 	 *     or null if the contained object is not a layout node
 	 */
-	public Map<KLayoutPort, List<Integer>> getConnectionRanksByPort(boolean forward) {
-		if (elemObj instanceof KLayoutNode) {
-			KLayoutNode node = (KLayoutNode)elemObj;
-			Map<KLayoutPort, List<Integer>> connectionRankMap = new LinkedHashMap<KLayoutPort, List<Integer>>();
-			for (KLayoutPort port : node.getPorts()) {
+	public Map<KPort, List<Integer>> getConnectionRanksByPort(boolean forward) {
+		if (elemObj instanceof KNode) {
+			KNode node = (KNode)elemObj;
+			Map<KPort, List<Integer>> connectionRankMap = new LinkedHashMap<KPort, List<Integer>>();
+			for (KPort port : node.getPorts()) {
 				connectionRankMap.put(port, new LinkedList<Integer>());
 			}
 			
@@ -561,13 +587,13 @@ public class LayerElement {
 	 *     on the layout direction
 	 * @throws ClassCastException when the contained object is not a layout node
 	 */
-	public void sortPorts(final Map<KLayoutPort, Double> abstractPortRanks,
+	public void sortPorts(final Map<KPort, Double> abstractPortRanks,
 			boolean forward, boolean symmetric) {
-		KLayoutNode node = (KLayoutNode)elemObj;
-		KLayoutPort[] ports = node.getPorts().toArray(new KLayoutPort[0]);
+		KNode node = (KNode)elemObj;
+		KPort[] ports = node.getPorts().toArray(new KPort[0]);
 		
-		Arrays.sort(ports, new Comparator<KLayoutPort>() {
-			public int compare(KLayoutPort port1, KLayoutPort port2) {
+		Arrays.sort(ports, new Comparator<KPort>() {
+			public int compare(KPort port1, KPort port2) {
 				Double d1 = abstractPortRanks.get(port1);
 				Double d2 = abstractPortRanks.get(port2);
 				if (d1 == null && d2 == null)
@@ -581,9 +607,10 @@ public class LayerElement {
 			}
 		});
 		
-		KLayoutOption layoutDirection = layer.getLayeredGraph().getLayoutDirection();
-		LayoutGraphUtil.positionPortsByOrder(ports, node.getLayout().getSize(),
-				layoutDirection, forward, symmetric);
+		LayoutDirection layoutDirection = layer.getLayeredGraph().getLayoutDirection();
+		KShapeLayout shapeLayout = KimlLayoutUtil.getShapeLayout(node);
+		LayoutGraphUtil.positionPortsByOrder(ports, shapeLayout.getWidth(),
+		        shapeLayout.getHeight(), layoutDirection, forward, symmetric);
 	}
 	
 	/**
@@ -593,16 +620,16 @@ public class LayerElement {
 	 *     else for a backwards layer sweep
 	 */
 	private void calcPortRanks(boolean forward) {
-		KLayoutOption layoutDirection = layer.getLayeredGraph().getLayoutDirection();
+		LayoutDirection layoutDirection = layer.getLayeredGraph().getLayoutDirection();
 		if (forward)
-			forwardPortRanks = new HashMap<KLayoutPort, Integer>();
+			forwardPortRanks = new HashMap<KPort, Integer>();
 		else
-			backwardsPortRanks = new HashMap<KLayoutPort, Integer>();
+			backwardsPortRanks = new HashMap<KPort, Integer>();
 		
-		if (elemObj instanceof KLayoutNode) {
+		if (elemObj instanceof KNode) {
 			// sort all ports by their relative position
-			List<KLayoutPort> ports = ((KLayoutNode)elemObj).getPorts();
-			KLayoutPort[] portArray = LayoutGraphUtil.sortPortsByPosition(ports,
+			List<KPort> ports = ((KNode)elemObj).getPorts();
+			KPort[] portArray = LayoutGraphUtil.sortPortsByPosition(ports,
 					layoutDirection, forward);
 			// set the ranks in the newly sorted list
 			if (forward) {
@@ -616,11 +643,11 @@ public class LayerElement {
 				}	
 			}
 		}
-		else if (elemObj instanceof KLayoutPort) {
+		else if (elemObj instanceof KPort) {
 			if (forward)
-				forwardPortRanks.put((KLayoutPort)elemObj, Integer.valueOf(0));
+				forwardPortRanks.put((KPort)elemObj, Integer.valueOf(0));
 			else
-				backwardsPortRanks.put((KLayoutPort)elemObj, Integer.valueOf(0));
+				backwardsPortRanks.put((KPort)elemObj, Integer.valueOf(0));
 		}
 	}
 	

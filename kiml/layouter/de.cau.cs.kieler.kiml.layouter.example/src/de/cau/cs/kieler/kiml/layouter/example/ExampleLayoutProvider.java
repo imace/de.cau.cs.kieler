@@ -19,7 +19,7 @@ import de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider;
  * Implements the Example layouter. As this class extends the
  * {@link AbstractLayoutProvider}, the most relevant method is
  * <code>doLayout</code>, which performs the actual layout, that is annotating
- * the provided KLayoutNode with the Example layouter layout information.
+ * the provided KNode with the Example layouter layout information.
  * <p/>
  * This class acts as a wrapper to the {@link ExampleLayouter}. Is uses the
  * {@link ExampleLayouter} with the standard (and currently only) engine and

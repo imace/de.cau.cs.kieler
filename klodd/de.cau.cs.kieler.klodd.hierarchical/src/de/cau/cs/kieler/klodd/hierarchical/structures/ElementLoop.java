@@ -16,10 +16,13 @@ package de.cau.cs.kieler.klodd.hierarchical.structures;
 import java.util.LinkedList;
 import java.util.List;
 
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutEdge;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KPoint;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutPort;
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KimlLayoutGraphFactory;
+import de.cau.cs.kieler.core.kgraph.KEdge;
+import de.cau.cs.kieler.core.kgraph.KPort;
+import de.cau.cs.kieler.kiml.layout.klayoutdata.KEdgeLayout;
+import de.cau.cs.kieler.kiml.layout.klayoutdata.KLayoutDataFactory;
+import de.cau.cs.kieler.kiml.layout.klayoutdata.KPoint;
+import de.cau.cs.kieler.kiml.layout.klayoutdata.KShapeLayout;
+import de.cau.cs.kieler.kiml.layout.util.KimlLayoutUtil;
 
 
 /**
@@ -41,13 +44,13 @@ public class ElementLoop {
 	public List<KPoint> bendPoints = new LinkedList<KPoint>();
 	
 	/** the contained edge object */
-	private KLayoutEdge edge;
+	private KEdge edge;
 	/** the layer element */
 	private LayerElement element;
 	/** the source port */
-	private KLayoutPort sourcePort;
+	private KPort sourcePort;
 	/** the target port */
-	private KLayoutPort targetPort;
+	private KPort targetPort;
 	
 	/**
 	 * Creates an element loop with given source and target port.
@@ -57,13 +60,13 @@ public class ElementLoop {
 	 * @param sourcePort the source port
 	 * @param targetPort the target port
 	 */
-	public ElementLoop(KLayoutEdge edge, LayerElement elem, KLayoutPort sourcePort,
-			KLayoutPort targetPort) {
+	public ElementLoop(KEdge edge, LayerElement elem, KPort sourcePort,
+			KPort targetPort) {
 		this.edge = edge;
 		this.element = elem;
 		this.sourcePort = sourcePort;
 		this.targetPort = targetPort;
-		edge.getLayout().getBendPoints().clear();
+		KimlLayoutUtil.getEdgeLayout(edge).getBendPoints().clear();
 	}
 	
 	/*
@@ -79,7 +82,7 @@ public class ElementLoop {
 	 * 
 	 * @return the source port
 	 */
-	public KLayoutPort getSourcePort() {
+	public KPort getSourcePort() {
 		return sourcePort;
 	}
 
@@ -88,7 +91,7 @@ public class ElementLoop {
 	 * 
 	 * @return the target port
 	 */
-	public KLayoutPort getTargetPort() {
+	public KPort getTargetPort() {
 		return targetPort;
 	}
 	
@@ -98,33 +101,37 @@ public class ElementLoop {
 	 * @param offset offset to be added to each bend point
 	 */
 	public void applyLayout(KPoint offset) {
-		// set bend points
+	    KShapeLayout sourcePortLayout = KimlLayoutUtil.getShapeLayout(sourcePort);
+        KShapeLayout targetPortLayout = KimlLayoutUtil.getShapeLayout(targetPort);
+        KEdgeLayout edgeLayout = KimlLayoutUtil.getEdgeLayout(edge);
+        
+        // set bend points
 		for (KPoint point : bendPoints) {
 			point.setX(point.getX() + offset.getX());
 			point.setY(point.getY() + offset.getY());
-			edge.getLayout().getBendPoints().add(point);
+			edgeLayout.getBendPoints().add(point);
 		}
 		
 		// set start and end points
 		if (sourcePort != null) {
-			KPoint point = KimlLayoutGraphFactory.eINSTANCE.createKPoint();
-			point.setX(sourcePort.getLayout().getLocation().getX()
-					+ sourcePort.getLayout().getSize().getWidth() / 2
+			KPoint point = KLayoutDataFactory.eINSTANCE.createKPoint();
+			point.setX(sourcePortLayout.getXpos()
+					+ sourcePortLayout.getWidth() / 2
 					+ element.getPosition().getX());
-			point.setY(sourcePort.getLayout().getLocation().getY()
-					+ sourcePort.getLayout().getSize().getHeight() / 2
+			point.setY(sourcePortLayout.getYpos()
+					+ sourcePortLayout.getHeight() / 2
 					+ element.getPosition().getY());
-			edge.getLayout().setSourcePoint(point);
+			edgeLayout.setSourcePoint(point);
 		}
 		if (targetPort != null) {
-			KPoint point = KimlLayoutGraphFactory.eINSTANCE.createKPoint();
-			point.setX(targetPort.getLayout().getLocation().getX()
-					+ targetPort.getLayout().getSize().getWidth() / 2
+			KPoint point = KLayoutDataFactory.eINSTANCE.createKPoint();
+			point.setX(targetPortLayout.getXpos()
+					+ targetPortLayout.getWidth() / 2
 					+ element.getPosition().getX());
-			point.setY(targetPort.getLayout().getLocation().getY()
-					+ targetPort.getLayout().getSize().getHeight() / 2
+			point.setY(targetPortLayout.getYpos()
+					+ targetPortLayout.getHeight() / 2
 					+ element.getPosition().getY());
-			edge.getLayout().setTargetPoint(point);
+			edgeLayout.setTargetPoint(point);
 		}
 	}
 

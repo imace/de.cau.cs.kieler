@@ -221,7 +221,7 @@ public class GraphvizLayouterBinary implements GraphvizLayouter {
 		mapNodeGroup2Graphviz(node);
 		
 		/* check if Emma wants to layout horizontal */
-		KLayoutData layoutData = KimlLayoutUtil.getLayoutData(node);
+		KLayoutData layoutData = KimlLayoutUtil.getShapeLayout(node);
 		if (LayoutOptions.getLayoutDirection(layoutData)
 		        == LayoutDirection.VERTICAL) {
 			graphAttributes.put("rankdir", "BT");
@@ -311,12 +311,12 @@ public class GraphvizLayouterBinary implements GraphvizLayouter {
 
 	/**
 	 * Maps a
-	 * {@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KLayoutNode
-	 * KLayoutNode} to the internal GraphvizAPI data structure. This is stored in
+	 * {@link de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNode
+	 * KNode} to the internal GraphvizAPI data structure. This is stored in
 	 * the GraphvizAPI internally.
 	 * 
 	 * @param node
-	 *            A KLayoutNode with the graph to lay out, the actual nodes of
+	 *            A KNode with the graph to lay out, the actual nodes of
 	 *            the graph are stored as subgroups of the nodeGroup.
 	 */
 	private void mapNodeGroup2Graphviz(KNode node) {
@@ -357,7 +357,7 @@ public class GraphvizLayouterBinary implements GraphvizLayouter {
 				edgeAttributes.put("arrowtail", "none");
 				
 				for (KLabel label : outgoingEdge.getLabels()) {
-				    KLayoutData layoutData = KimlLayoutUtil.getLayoutData(label);
+				    KLayoutData layoutData = KimlLayoutUtil.getShapeLayout(label);
 				    EdgeLabelPlacement labelPlacement = LayoutOptions.getEdgeLabelPlacement(layoutData);
 					/*
 					 * As graphViz just handles three labels properly (well,
@@ -389,9 +389,9 @@ public class GraphvizLayouterBinary implements GraphvizLayouter {
 	}
 
 	/**
-	 * Sets the required size of the top KLayoutNode by obtaining the bounding
+	 * Sets the required size of the top KNode by obtaining the bounding
 	 * box of the GraphViz Graph, resulting from the positions of the contained
-	 * sub nodes. If insets are given in the top KLayoutNode, they are added to
+	 * sub nodes. If insets are given in the top KNode, they are added to
 	 * the size. Insets denote the difference between the resulting size of the
 	 * area the contained elements cover after the layout process and the real
 	 * size the composite node should have. An example is a compartment with a

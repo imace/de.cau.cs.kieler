@@ -13,8 +13,8 @@
  */
 package de.cau.cs.kieler.klodd.orthogonal.structures;
 
-import de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KInsets;
 import de.cau.cs.kieler.core.slimgraph.*;
+import de.cau.cs.kieler.kiml.layout.klayoutdata.KInsets;
 
 
 /**
