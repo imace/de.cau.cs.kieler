@@ -74,7 +74,7 @@ public class StateLayout extends ConstrainedToolbarLayout {
 		}
 
 		// Labels are centered in the upper area while compartments share the
-		// rest of the space. always using the full available width
+		// rest of the space, always using the full available width
 		for (int i = 0; i < numChildren; i++) {
 			Object child = children.get(i);
 			if (child instanceof Figure) {
@@ -123,8 +123,7 @@ public class StateLayout extends ConstrainedToolbarLayout {
 			}
 		}
 
-		// The label is centered in the middle, and the compartments are arranged
-		// around it
+		// The label is centered in the middle, and the compartments are hidden by setting their size to 0
 		for (Object child : children) {
 			if (child instanceof Figure) {
 				IFigure childFigure = (IFigure) child;
@@ -139,13 +138,10 @@ public class StateLayout extends ConstrainedToolbarLayout {
 				else if (child instanceof ResizableCompartmentFigure) {
 					name = ((ResizableCompartmentFigure) child).getCompartmentTitle();
 					int offsetY = 0;
-					/*if (name.equals("RegionCompartment")) {
-						offsetY = (height + prefHeight) / 2;
-					}*/
-						newBounds.x = x;
-						newBounds.y = y /*+ offsetY*/;
-						newBounds.width = 0; //width;
-						newBounds.height = 0; //(height - prefHeight) / 2;
+					newBounds.x = x;
+					newBounds.y = y;
+					newBounds.width = 0;
+					newBounds.height = 0;
 				}
 				childFigure.setBounds(transposer.t(newBounds));
 			}
@@ -187,17 +183,6 @@ public class StateLayout extends ConstrainedToolbarLayout {
 	@Override
 	public Dimension calculateMinimumSize(IFigure parent, int hint, int hint2) {
 		
-		// Check if the figure is an attribute aware state and whether it is
-		// a simple or a complex state
-		if (parent instanceof AttributeAwareFigure) {
-			EObject modelElement = ((AttributeAwareFigure) parent).getModelElement();
-			if (modelElement instanceof State) {
-				State state = (State) modelElement;
-				if (isSimple(state)) {
-					return new Dimension(20, 20);
-				}
-			}
-		}		
 		int minWidth = 0;
 		int minHeight = 0;
 		for (Object child : parent.getChildren()) {
@@ -210,6 +195,18 @@ public class StateLayout extends ConstrainedToolbarLayout {
 				minHeight += childFigure.getPreferredSize().height;
 			}
 		}
+		
+		// simple states can be made smaller in height than the compartments would allow
+		if (parent instanceof AttributeAwareFigure) {
+			EObject modelElement = ((AttributeAwareFigure) parent).getModelElement();
+			if (modelElement instanceof State) {
+				State state = (State) modelElement;
+				if (isSimple(state)) {
+					minHeight = 40;
+				}
+			}
+		}	
+		
 		return new Dimension(minWidth, minHeight);
 	}
 	
@@ -217,8 +214,7 @@ public class StateLayout extends ConstrainedToolbarLayout {
 	@Override
 	protected Dimension calculatePreferredSize(IFigure parent, int hint, int hint2) {
 		
-		// Check if the figure is an attribute aware state and whether it is
-		// a simple or a complex state
+		// The height of simple states is reduced
 		if (parent instanceof AttributeAwareFigure) {
 			EObject modelElement = ((AttributeAwareFigure) parent).getModelElement();
 			if (modelElement instanceof State) {
