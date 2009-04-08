@@ -407,8 +407,7 @@
         notationViewFactoryClassName="StateSignalCompartmentViewFactory"
         canonicalEditPolicyClassName="StateSignalCompartmentCanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.2"
-        title="SignalCompartment"
-        needsTitle="false"
+        title="Signals:"
         node="//@diagram/@topLevelNodes.0">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
@@ -426,8 +425,7 @@
         notationViewFactoryClassName="StateVariableCompartmentViewFactory"
         canonicalEditPolicyClassName="StateVariableCompartmentCanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.6"
-        title="VariableCompartment"
-        needsTitle="false"
+        title="Variables:"
         node="//@diagram/@topLevelNodes.0">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
@@ -445,8 +443,7 @@
         notationViewFactoryClassName="StateEntryActionsCompartmentViewFactory"
         canonicalEditPolicyClassName="StateEntryActionsCompartmentCanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.3"
-        title="EntryActionsCompartment"
-        needsTitle="false"
+        title="OnEntryActions:"
         node="//@diagram/@topLevelNodes.0">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
@@ -464,8 +461,7 @@
         notationViewFactoryClassName="StateInnerActionsCompartmentViewFactory"
         canonicalEditPolicyClassName="StateInnerActionsCompartmentCanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.4"
-        title="InnerActionsCompartment"
-        needsTitle="false"
+        title="OnInsideActions:"
         node="//@diagram/@topLevelNodes.0">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
@@ -483,8 +479,7 @@
         notationViewFactoryClassName="StateExitActionsCompartmentViewFactory"
         canonicalEditPolicyClassName="StateExitActionsCompartmentCanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.5"
-        title="ExitActionsCompartment"
-        needsTitle="false"
+        title="OnExitActions:"
         node="//@diagram/@topLevelNodes.0">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
@@ -502,8 +497,7 @@
         notationViewFactoryClassName="StateSuspensionTriggerCompartmentViewFactory"
         canonicalEditPolicyClassName="StateSuspensionTriggerCompartmentCanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.7"
-        title="SuspensionTriggerCompartment"
-        needsTitle="false"
+        title="Suspend:"
         node="//@diagram/@topLevelNodes.0">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
@@ -559,8 +553,7 @@
         notationViewFactoryClassName="StateSignalCompartment2ViewFactory"
         canonicalEditPolicyClassName="StateSignalCompartment2CanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.2"
-        title="SignalCompartment"
-        needsTitle="false"
+        title="Signals:"
         node="//@diagram/@childNodes.1">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
@@ -578,8 +571,7 @@
         notationViewFactoryClassName="StateVariableCompartment2ViewFactory"
         canonicalEditPolicyClassName="StateVariableCompartment2CanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.6"
-        title="VariableCompartment"
-        needsTitle="false"
+        title="Variables:"
         node="//@diagram/@childNodes.1">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
@@ -597,8 +589,7 @@
         notationViewFactoryClassName="StateEntryActionsCompartment2ViewFactory"
         canonicalEditPolicyClassName="StateEntryActionsCompartment2CanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.3"
-        title="EntryActionsCompartment"
-        needsTitle="false"
+        title="OnEntryActions:"
         node="//@diagram/@childNodes.1">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
@@ -616,8 +607,7 @@
         notationViewFactoryClassName="StateInnerActionsCompartment2ViewFactory"
         canonicalEditPolicyClassName="StateInnerActionsCompartment2CanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.4"
-        title="InnerActionsCompartment"
-        needsTitle="false"
+        title="OnInsideActions:"
         node="//@diagram/@childNodes.1">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
@@ -635,8 +625,7 @@
         notationViewFactoryClassName="StateExitActionsCompartment2ViewFactory"
         canonicalEditPolicyClassName="StateExitActionsCompartment2CanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.5"
-        title="ExitActionsCompartment"
-        needsTitle="false"
+        title="OnExitActions:"
         node="//@diagram/@childNodes.1">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
@@ -654,8 +643,7 @@
         notationViewFactoryClassName="StateSuspensionTriggerCompartment2ViewFactory"
         canonicalEditPolicyClassName="StateSuspensionTriggerCompartment2CanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.7"
-        title="SuspensionTriggerCompartment"
-        needsTitle="false"
+        title="Suspend:"
         node="//@diagram/@childNodes.1">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
