@@ -28,8 +28,21 @@ public class AttributeAwareTransitionFigure extends AttributeAwareConnection {
 		Condition kindWeakAbort = new Condition(Ssm2Package.eINSTANCE.getTransition_TransitionKind(), TransitionKind.WEAKABORT);
 		Condition kindStrongAbort = new Condition(Ssm2Package.eINSTANCE.getTransition_TransitionKind(), TransitionKind.STRONGABORT);
 		Condition kindNormalTermination = new Condition(Ssm2Package.eINSTANCE.getTransition_TransitionKind(), TransitionKind.NORMALTERMINATION);
+		Condition isHistory = new Condition(Ssm2Package.eINSTANCE.getTransition_History(), new Boolean(true));
 		
 		// Combine them in lists
+		List<Condition> weakAbortHistorySF = new LinkedList<Condition>();
+		weakAbortHistorySF.add(kindWeakAbort);
+		weakAbortHistorySF.add(isHistory);
+		
+		List<Condition> strongAbortHistorySF = new LinkedList<Condition>();
+		strongAbortHistorySF.add(kindStrongAbort);
+		strongAbortHistorySF.add(isHistory);
+		
+		List<Condition> normalTerminationHistorySF = new LinkedList<Condition>();
+		normalTerminationHistorySF.add(kindNormalTermination);
+		normalTerminationHistorySF.add(isHistory);
+		
 		List<Condition> weakAbortSF = new LinkedList<Condition>();
 		weakAbortSF.add(kindWeakAbort);
 		
@@ -41,12 +54,19 @@ public class AttributeAwareTransitionFigure extends AttributeAwareConnection {
 		
 		// Add the looks that are to be displayed when all the conditions in
 		// the list are true
+		ConditionalConnectionLook weakAbortHistoryCF = new ConditionalConnectionLook(weakAbortHistorySF, createWeakAbortionDecoration(), createHistoryDecoration());
+		ConditionalConnectionLook strongAbortHistoryCF = new ConditionalConnectionLook(strongAbortHistorySF, createStrongAbortionDecoration(), createHistoryDecoration());
+		ConditionalConnectionLook normalTerminationHistoryCF = new ConditionalConnectionLook(normalTerminationHistorySF, createNormalTerminationDecoration(), createHistoryDecoration());
+		
 		ConditionalConnectionLook weakAbortCF = new ConditionalConnectionLook(weakAbortSF, createWeakAbortionDecoration(), createArrowDecoration());
 		ConditionalConnectionLook strongAbortCF = new ConditionalConnectionLook(strongAbortSF, createStrongAbortionDecoration(), createArrowDecoration());
 		ConditionalConnectionLook normalTerminationCF = new ConditionalConnectionLook(normalTerminationSF, createNormalTerminationDecoration(), createArrowDecoration());
 		
 		// Add all ConditionalConnectionLooks to the figure's list
 		conditionalFigureList = new LinkedList<ConditionalConnectionLook>();
+		conditionalFigureList.add(weakAbortHistoryCF);
+		conditionalFigureList.add(strongAbortHistoryCF);
+		conditionalFigureList.add(normalTerminationHistoryCF);
 		conditionalFigureList.add(weakAbortCF);
 		conditionalFigureList.add(strongAbortCF);
 		conditionalFigureList.add(normalTerminationCF);
@@ -104,5 +124,17 @@ public class AttributeAwareTransitionFigure extends AttributeAwareConnection {
 		arrowDecorationPoints.addPoint(-2, -2);
 		arrowDecoration.setTemplate(arrowDecorationPoints);
 		return arrowDecoration;
+	}
+	
+	private RotatableDecoration createHistoryDecoration() {
+		HistoryDecoration historyDecoration = new HistoryDecoration();
+		historyDecoration.setLineWidth(2);
+		historyDecoration.setForegroundColor(ColorConstants.black);
+		historyDecoration.setForegroundColor(ColorConstants.gray);
+		PointList historyDecorationPoints = new PointList();
+		historyDecorationPoints.addPoint(1, 2);
+		historyDecorationPoints.addPoint(-1, -2);
+		historyDecoration.setTemplate(historyDecorationPoints);
+		return historyDecoration;
 	}
 }

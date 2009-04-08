@@ -28,7 +28,7 @@ public class CircleDecoration extends PolygonDecoration {
 	}
 	
 	// Transforms the PointList into bounds that can be used to draw the circle
-	private Rectangle getBoundsFromPoints() {
+	protected Rectangle getBoundsFromPoints() {
 		if (getPoints().size() < 2) {
 			return null;
 		}

@@ -27,7 +27,7 @@ public class Condition {
 		if ((modelElement == null) || (modelElement.eGet(feature) == null)) {
 			return false;
 		}
-		if (value == modelElement.eGet(feature)) {
+		if (value.equals(modelElement.eGet(feature))) {
 			return true;
 		}
 		return false;
