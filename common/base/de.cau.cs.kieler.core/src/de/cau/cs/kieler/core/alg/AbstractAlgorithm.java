@@ -14,9 +14,11 @@
 package de.cau.cs.kieler.core.alg;
 
 /**
- * Superclass for algorithms used in the KIELER project.
+ * Superclass for algorithms used in the KIELER project. This class stores a
+ * reference to the currently used progress monitor.
  * 
- * @author msp
+ * @see IKielerProgressMonitor
+ * @author <a href="mailto:msp@informatik.uni-kiel.de">Miro Sp&ouml;nemann</a>
  */
 public abstract class AbstractAlgorithm implements IAlgorithm {
 
@@ -57,7 +59,7 @@ public abstract class AbstractAlgorithm implements IAlgorithm {
 	 */
 	protected final IKielerProgressMonitor getMonitor() {
 		if (progressMonitor == null)
-			progressMonitor = new NullProgressMonitor();
+			progressMonitor = new BasicProgressMonitor();
 		return progressMonitor;
 	}
 	

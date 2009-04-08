@@ -20,10 +20,11 @@ import java.util.List;
 
 
 /**
- * Section of a TSM graph.
- * TODO change the whole concept of subgraphs! this approach here is not good
+ * Section of a slim graph.
+ * <p>
+ * TODO: Change the whole concept of subgraphs! This approach here is not good.
  * 
- * @author msp
+ * @author <a href="mailto:msp@informatik.uni-kiel.de">Miro Sp&ouml;nemann</a>
  */
 public class KGraphSection {
 

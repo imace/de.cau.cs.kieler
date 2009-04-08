@@ -15,11 +15,22 @@ package de.cau.cs.kieler.core;
 
 /**
  * Interface for mappings of named preferences to values.
- * <p>
  * Most of this interface was copied from
- *   <code>org.eclipse.jface.preference.IPreferenceStore</code>.
+ * {@link org.eclipse.jface.preference.IPreferenceStore IPreferenceStore}.
+ * <p>
+ * Inside Eclipse
+ * {@link de.cau.cs.kieler.core.ui.KielerPreferenceStore KielerPreferenceStore}
+ * is used as implementation, which is a wrapper for {@code IPreferenceStore}.
+ * In other environments a new implementation must be provided, for which
+ * {@link MapPreferenceStore} can serve as superclass.
+ * <p>
+ * Names of preference entries are usually available as constants in the
+ * respective plug-ins.
+ * <p>
+ * A preference store may be linked to the UI so the user is able to change
+ * preference values.
  * 
- * @author msp
+ * @author <a href="mailto:msp@informatik.uni-kiel.de">Miro Sp&ouml;nemann</a>
  */
 public interface IKielerPreferenceStore {
 
@@ -110,7 +121,7 @@ public interface IKielerPreferenceStore {
      * Returns the default value for the string-valued preference
      * with the given name.
      * Returns the default-default value (the empty string <code>""</code>) 
-     * is no default preference with the given name, or if the default 
+     * if there is no default preference with the given name, or if the default 
      * value cannot be treated as a string.
      *
      * @param name the name of the preference

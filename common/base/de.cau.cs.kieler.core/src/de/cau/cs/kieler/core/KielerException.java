@@ -16,7 +16,7 @@ package de.cau.cs.kieler.core;
 /**
  * Exception for error handling in KIELER projects.
  * 
- * @author msp
+ * @author <a href="mailto:msp@informatik.uni-kiel.de">Miro Sp&ouml;nemann</a>
  */
 public class KielerException extends Exception {
 

@@ -19,7 +19,7 @@ import java.util.Map;
  * Debugger Class to visualize the contents of a Map. Simply prints the Map
  * contents into a String.
  * 
- * @author haf
+ * @author <a href="mailto:haf@informatik.uni-kiel.de">Hauke Fuhrmann</a>
  */
 public class MapPrinter {
 	

@@ -29,10 +29,10 @@ import de.cau.cs.kieler.core.util.ConcatenableList;
 
 /**
  * Implementation of the Hopcroft & Tarjan planarity test.
+ * <p>
+ * <b>WARNING:</b> This implementation was not tested yet.
  * 
- * WARNING: This implementation was not tested yet.
- * 
- * @author msp
+ * @author <a href="mailto:msp@informatik.uni-kiel.de">Miro Sp&ouml;nemann</a>
  */
 public class HopcroftTarjanPlanarityTester extends AbstractAlgorithm implements
 		IPlanarityTester {

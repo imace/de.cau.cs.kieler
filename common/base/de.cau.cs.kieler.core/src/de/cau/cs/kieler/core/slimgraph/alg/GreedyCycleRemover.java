@@ -20,7 +20,7 @@ import de.cau.cs.kieler.core.slimgraph.*;
 /**
  * Cycle remover implementation that uses a greedy algorithm.
  * 
- * @author msp
+ * @author <a href="mailto:msp@informatik.uni-kiel.de">Miro Sp&ouml;nemann</a>
  */
 public class GreedyCycleRemover extends AbstractCycleRemover {
 

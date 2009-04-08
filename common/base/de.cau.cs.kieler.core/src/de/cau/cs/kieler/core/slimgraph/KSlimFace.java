@@ -18,9 +18,9 @@ import java.util.List;
 import java.util.ListIterator;
 
 /**
- * A face in the KIELER graph structure.
+ * A face in the slim graph structure.
  * 
- * @author msp
+ * @author <a href="mailto:msp@informatik.uni-kiel.de">Miro Sp&ouml;nemann</a>
  */
 public class KSlimFace extends KSlimGraphElement {
 

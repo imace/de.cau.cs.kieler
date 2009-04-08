@@ -18,10 +18,9 @@ import java.util.List;
 import java.util.ListIterator;
 
 /**
- * An edge in the graph structure used for the topology-shape-metrics
- * approach.
+ * An edge in the slim graph structure.
  * 
- * @author msp
+ * @author <a href="mailto:msp@informatik.uni-kiel.de">Miro Sp&ouml;nemann</a>
  */
 public class KSlimEdge extends KSlimGraphElement {
 
@@ -58,7 +57,7 @@ public class KSlimEdge extends KSlimGraphElement {
 		}
 		
 		/**
-		 * Returns the TSM edge associated with this bend.
+		 * Returns the slim edge associated with this bend.
 		 * 
 		 * @return the edge
 		 */

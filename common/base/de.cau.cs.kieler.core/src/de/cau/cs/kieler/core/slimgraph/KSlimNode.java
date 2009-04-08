@@ -18,10 +18,9 @@ import java.util.List;
 import java.util.ListIterator;
 
 /**
- * A node in the graph structure used for the topology-shape-metrics
- * approach.
+ * A node in the slim graph structure.
  * 
- * @author msp
+ * @author <a href="mailto:msp@informatik.uni-kiel.de">Miro Sp&ouml;nemann</a>
  */
 public class KSlimNode extends KSlimGraphElement {
 

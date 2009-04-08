@@ -21,7 +21,7 @@ import de.cau.cs.kieler.core.slimgraph.*;
 /**
  * Cycle remover that uses a depth first search to remove cycles.
  * 
- * @author msp
+ * @author <a href="mailto:msp@informatik.uni-kiel.de">Miro Sp&ouml;nemann</a>
  */
 public class DFSCycleRemover extends AbstractCycleRemover {
 

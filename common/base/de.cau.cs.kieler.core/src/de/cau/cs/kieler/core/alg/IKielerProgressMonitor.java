@@ -16,9 +16,11 @@ package de.cau.cs.kieler.core.alg;
 import java.util.List;
 
 /**
- * Interface for monitors of progress of a job.
+ * Interface for monitors of progress of a job. A progress monitor can be
+ * used in conjunction with {@link IAlgorithm} to track progress of an algorithm
+ * run.
  * 
- * @author msp
+ * @author <a href="mailto:msp@informatik.uni-kiel.de">Miro Sp&ouml;nemann</a>
  */
 public interface IKielerProgressMonitor {
 
@@ -59,9 +61,13 @@ public interface IKielerProgressMonitor {
 	
 	/**
 	 * Creates a new sub-task that will complete the given amount of
-	 * work units when it is done.
+	 * work units when it is done. The sub-task begins when
+	 * {@link #begin(String, int)} is called for the new progress monitor
+	 * instance, and it ends when {@link #done()} is called for that
+	 * instance.
 	 * 
-	 * @param work number of work units
+	 * @param work number of work units that are completed in the current
+	 *     monitor instance when the sub-task is done
 	 * @return a progress monitor for the new sub-task, or null if the
 	 *     monitor is closed
 	 */
@@ -75,7 +81,8 @@ public interface IKielerProgressMonitor {
 	public List<IKielerProgressMonitor> getSubMonitors();
 	
 	/**
-	 * Returns the parent monitor.
+	 * Returns the parent monitor. The parent monitor is the one for which
+	 * a call to {@link #subTask(int)} resulted in the current monitor instance.
 	 * 
 	 * @return the parent monitor, or null if there is none
 	 */

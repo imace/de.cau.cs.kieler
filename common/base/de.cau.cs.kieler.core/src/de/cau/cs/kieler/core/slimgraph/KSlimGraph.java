@@ -17,9 +17,13 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * The general-purpose KIELER graph structure.
+ * The general-purpose slim graph structure. This structure is specially
+ * designed for use in graph algorithms for undirected graphs, because each
+ * node has only one incidence list for both the incoming and the outgoing
+ * edges. However, the direction of each edge can be obtained by a respective
+ * in the incidence list of the respective node.
  * 
- * @author msp
+ * @author <a href="mailto:msp@informatik.uni-kiel.de">Miro Sp&ouml;nemann</a>
  */
 public class KSlimGraph {
 
