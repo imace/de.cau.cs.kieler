@@ -19,7 +19,9 @@ import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>KPort</b></em>'.
+ * A representation of the model object '<em><b>KPort</b></em>'. Each port must
+ * be assigned a containing node. A port may contain incoming edges as well
+ * as outgoing edges, independently of its type.
  * <!-- end-user-doc -->
  *
  * <p>
@@ -42,8 +44,10 @@ public interface KPort extends KGraphElement {
      * It is bidirectional and its opposite is '{@link de.cau.cs.kieler.core.kgraph.KNode#getPorts <em>Ports</em>}'.
      * <!-- begin-user-doc -->
      * <p>
-     * If the meaning of the '<em>Node</em>' container reference isn't clear,
-     * there really should be more of a description here...
+     * Each port must be assigned a containing node. This is especially
+     * important because the node is defined to be the container of the
+     * port, which is relevant for many EMF features such as XML storage or
+     * copying.
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Node</em>' container reference.
@@ -70,8 +74,8 @@ public interface KPort extends KGraphElement {
      * The list contents are of type {@link de.cau.cs.kieler.core.kgraph.KEdge}.
      * <!-- begin-user-doc -->
      * <p>
-     * If the meaning of the '<em>Edges</em>' reference list isn't clear,
-     * there really should be more of a description here...
+     * Edges in this list may be incoming as well as outgoing with respect
+     * to the containing node.
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Edges</em>' reference list.
@@ -85,8 +89,7 @@ public interface KPort extends KGraphElement {
      * Returns the value of the '<em><b>Label</b></em>' containment reference.
      * <!-- begin-user-doc -->
      * <p>
-     * If the meaning of the '<em>Label</em>' containment reference isn't clear,
-     * there really should be more of a description here...
+     * The label of a port is optional.
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Label</em>' containment reference.
@@ -112,8 +115,7 @@ public interface KPort extends KGraphElement {
      * The literals are from the enumeration {@link de.cau.cs.kieler.core.kgraph.KPortType}.
      * <!-- begin-user-doc -->
      * <p>
-     * If the meaning of the '<em>Type</em>' attribute isn't clear,
-     * there really should be more of a description here...
+     * Ports may be either input or output type.
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Type</em>' attribute.

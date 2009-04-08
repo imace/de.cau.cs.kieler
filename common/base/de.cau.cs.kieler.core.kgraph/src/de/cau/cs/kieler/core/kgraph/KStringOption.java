@@ -18,7 +18,8 @@ package de.cau.cs.kieler.core.kgraph;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>KString Option</b></em>'.
+ * A representation of the model object '<em><b>KString Option</b></em>'. Used
+ * to store string values in the graph model.
  * <!-- end-user-doc -->
  *
  * <p>
@@ -38,8 +39,6 @@ public interface KStringOption extends KOption {
      * The default value is <code>""</code>.
      * <!-- begin-user-doc -->
      * <p>
-     * If the meaning of the '<em>Value</em>' attribute isn't clear,
-     * there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Value</em>' attribute.

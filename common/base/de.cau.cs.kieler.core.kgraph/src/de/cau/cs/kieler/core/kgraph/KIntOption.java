@@ -18,7 +18,8 @@ package de.cau.cs.kieler.core.kgraph;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>KInt Option</b></em>'.
+ * A representation of the model object '<em><b>Int Option</b></em>'. Used
+ * to store int values in the graph model.
  * <!-- end-user-doc -->
  *
  * <p>
@@ -37,8 +38,6 @@ public interface KIntOption extends KOption {
      * Returns the value of the '<em><b>Value</b></em>' attribute.
      * <!-- begin-user-doc -->
      * <p>
-     * If the meaning of the '<em>Value</em>' attribute isn't clear,
-     * there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Value</em>' attribute.

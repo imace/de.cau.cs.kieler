@@ -19,7 +19,13 @@ import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>KNode</b></em>'.
+ * A representation of the model object '<em><b>Node</b></em>'. All nodes
+ * except exactly one node must have an assigned parent node. The node without
+ * parent is the top node of the graph and represents the graph itself. Each
+ * node must be assigned a label.
+ * <p>
+ * The parent-child relationship of nodes can be used to describe hierarchy in
+ * nested graphs.
  * <!-- end-user-doc -->
  *
  * <p>
@@ -45,8 +51,8 @@ public interface KNode extends KGraphElement {
      * It is bidirectional and its opposite is '{@link de.cau.cs.kieler.core.kgraph.KNode#getParent <em>Parent</em>}'.
      * <!-- begin-user-doc -->
      * <p>
-     * If the meaning of the '<em>Children</em>' containment reference list isn't clear,
-     * there really should be more of a description here...
+     * The children together with their edges form a sub-graph that is contained
+     * in this parent node.
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Children</em>' containment reference list.
@@ -62,8 +68,8 @@ public interface KNode extends KGraphElement {
      * It is bidirectional and its opposite is '{@link de.cau.cs.kieler.core.kgraph.KNode#getChildren <em>Children</em>}'.
      * <!-- begin-user-doc -->
      * <p>
-     * If the meaning of the '<em>Parent</em>' container reference isn't clear,
-     * there really should be more of a description here...
+     * The parent node must be {@code null} if and only if this is the top node of
+     * the graph structure.
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Parent</em>' container reference.
@@ -78,6 +84,7 @@ public interface KNode extends KGraphElement {
     /**
      * Sets the value of the '{@link de.cau.cs.kieler.core.kgraph.KNode#getParent <em>Parent</em>}' container reference.
      * <!-- begin-user-doc -->
+     * This automatically adds the node to the parent's list of children.
      * <!-- end-user-doc -->
      * @param value the new value of the '<em>Parent</em>' container reference.
      * @see #getParent()
@@ -91,8 +98,8 @@ public interface KNode extends KGraphElement {
      * It is bidirectional and its opposite is '{@link de.cau.cs.kieler.core.kgraph.KPort#getNode <em>Node</em>}'.
      * <!-- begin-user-doc -->
      * <p>
-     * If the meaning of the '<em>Ports</em>' containment reference list isn't clear,
-     * there really should be more of a description here...
+     * Each node may have an arbitrary number of ports. Edges may or may not be
+     * connected to ports.
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Ports</em>' containment reference list.
@@ -109,8 +116,6 @@ public interface KNode extends KGraphElement {
      * It is bidirectional and its opposite is '{@link de.cau.cs.kieler.core.kgraph.KEdge#getSource <em>Source</em>}'.
      * <!-- begin-user-doc -->
      * <p>
-     * If the meaning of the '<em>Outgoing Edges</em>' containment reference list isn't clear,
-     * there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Outgoing Edges</em>' containment reference list.
@@ -127,8 +132,6 @@ public interface KNode extends KGraphElement {
      * It is bidirectional and its opposite is '{@link de.cau.cs.kieler.core.kgraph.KEdge#getTarget <em>Target</em>}'.
      * <!-- begin-user-doc -->
      * <p>
-     * If the meaning of the '<em>Incoming Edges</em>' reference list isn't clear,
-     * there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Incoming Edges</em>' reference list.
@@ -143,8 +146,7 @@ public interface KNode extends KGraphElement {
      * Returns the value of the '<em><b>Label</b></em>' containment reference.
      * <!-- begin-user-doc -->
      * <p>
-     * If the meaning of the '<em>Label</em>' containment reference isn't clear,
-     * there really should be more of a description here...
+     * Each node must be assigned a label.
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Label</em>' containment reference.

@@ -19,7 +19,10 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>KOption</b></em>'.
+ * A representation of the model object '<em><b>KOption</b></em>'. Used
+ * to store boolean values that default to 'false' in the graph model.
+ * The value of this option is defined to be 'true' if and only if an instance
+ * of this option exists in a list of options.
  * <!-- end-user-doc -->
  *
  * <p>

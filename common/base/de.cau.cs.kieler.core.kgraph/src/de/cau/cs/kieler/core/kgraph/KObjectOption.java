@@ -19,7 +19,8 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>KObject Option</b></em>'.
+ * A representation of the model object '<em><b>KObject Option</b></em>'. Used
+ * to store arbitrary EMF objects in the graph model.
  * <!-- end-user-doc -->
  *
  * <p>
@@ -38,8 +39,6 @@ public interface KObjectOption extends KOption {
      * Returns the value of the '<em><b>Value</b></em>' containment reference.
      * <!-- begin-user-doc -->
      * <p>
-     * If the meaning of the '<em>Value</em>' containment reference isn't clear,
-     * there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Value</em>' containment reference.

@@ -19,7 +19,9 @@ import org.eclipse.gmf.runtime.notation.Style;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Data</b></em>'.
+ * A representation of the model object '<em><b>Graph Data</b></em>'. This
+ * class can be extended to hold arbitrary additional data for each
+ * graph element.
  * <!-- end-user-doc -->
  *
  *

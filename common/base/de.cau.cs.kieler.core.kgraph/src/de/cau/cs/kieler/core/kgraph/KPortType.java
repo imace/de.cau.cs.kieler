@@ -23,7 +23,7 @@ import org.eclipse.emf.common.util.Enumerator;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the literals of the enumeration '<em><b>KPort Type</b></em>',
+ * A representation of the literals of the enumeration '<em><b>Port Type</b></em>',
  * and utility methods for working with them.
  * <!-- end-user-doc -->
  * @see de.cau.cs.kieler.core.kgraph.KGraphPackage#getKPortType()

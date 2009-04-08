@@ -22,7 +22,10 @@ import org.eclipse.emf.ecore.EModelElement;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Element</b></em>'.
+ * A representation of the model object '<em><b>Graph Element</b></em>'. This
+ * is the superclass of all elements of a graph such as nodes, edges, ports,
+ * and labels. A graph element may contain an arbitrary number of additional
+ * data instances.
  * <!-- end-user-doc -->
  *
  * <p>
@@ -42,8 +45,7 @@ public interface KGraphElement extends EModelElement {
      * The list contents are of type {@link de.cau.cs.kieler.core.kgraph.KGraphData}.
      * <!-- begin-user-doc -->
      * <p>
-     * If the meaning of the '<em>Data</em>' containment reference list isn't clear,
-     * there really should be more of a description here...
+     * Each element of this list may contain additional data for the model element.
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Data</em>' containment reference list.
@@ -55,6 +57,10 @@ public interface KGraphElement extends EModelElement {
 
     /**
      * <!-- begin-user-doc -->
+     * Returns the first data instance that matches the given class. Classes
+     * can be obtained using the static package methods of the corresponding
+     * EMF model.
+     * @return graph data for the given type, or null if there is none
      * <!-- end-user-doc -->
      * @model
      * @generated
