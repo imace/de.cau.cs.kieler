@@ -19,7 +19,7 @@ import java.io.OutputStreamWriter;
 
 import de.cau.cs.kieler.core.KielerException;
 import de.cau.cs.kieler.core.alg.IKielerProgressMonitor;
-import de.cau.cs.kieler.core.alg.NullProgressMonitor;
+import de.cau.cs.kieler.core.alg.BasicProgressMonitor;
 import de.cau.cs.kieler.core.kgraph.KNode;
 import de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider;
 
@@ -94,7 +94,7 @@ public class ExecutionTimeMetric {
      */
     private void warmup() throws KielerException {
         KNode layoutGraph = GraphGenerator.generateGraph(100, 2, true);
-        IKielerProgressMonitor progressMonitor = new NullProgressMonitor();
+        IKielerProgressMonitor progressMonitor = new BasicProgressMonitor();
         for (int i = 0; i < 3; i++) {
             layoutProvider.doLayout(layoutGraph, progressMonitor);
         }
@@ -119,7 +119,7 @@ public class ExecutionTimeMetric {
                 double minTime = Double.MAX_VALUE;
                 for (int j = 0; j < runsPerGraph; j++) {
                     System.gc();
-                    IKielerProgressMonitor progressMonitor = new NullProgressMonitor();
+                    IKielerProgressMonitor progressMonitor = new BasicProgressMonitor();
                     layoutProvider.doLayout(layoutGraph, progressMonitor);
                     minTime = Math.min(minTime, progressMonitor.getExecutionTime());
                     System.out.print(".");

@@ -65,7 +65,7 @@ public class GraphGenerator {
             LayoutOptions.setFixedSize(nodeLayout);
             if (withPorts) {
                 LayoutOptions.setPortConstraints(nodeLayout,
-                        PortConstraints.FIXED_POS);;
+                        PortConstraints.FIXED_POS);
             }
             nodes[i].setParent(layoutGraph);
         }

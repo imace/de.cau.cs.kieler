@@ -13,43 +13,22 @@
  */
 package de.cau.cs.kieler.core.ui;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import org.eclipse.core.runtime.IProgressMonitor;
 
-import de.cau.cs.kieler.core.alg.IKielerProgressMonitor;
+import de.cau.cs.kieler.core.alg.BasicProgressMonitor;
+
 
 /**
  * Wrapper class for Eclipse progress monitors.
  * 
  * @author msp
  */
-public class KielerProgressMonitor implements IKielerProgressMonitor {
+public class KielerProgressMonitor extends BasicProgressMonitor {
 
 	/** the Eclipse progress monitor used by this monitor */
 	private IProgressMonitor progressMonitor;
-	/** the parent monitor */
-	private KielerProgressMonitor parentMonitor = null;
-	/** list of child monitors */
-	private List<IKielerProgressMonitor> children = new LinkedList<IKielerProgressMonitor>();
-	/** the number of work units that will be consumed after completion
-	 *  of the currently active child task */
-	private int currentChildWork = -1;
-	/** the start time of the associated task, in nanoseconds */
-	private long startTime;
-	/** the total time of the associated task, in seconds */
-	private double totalTime;
-	/** the name of the associated task */
-	private String taskName;
-	/** the amount of work that is completed */
-	private float completedWork = 0.0f;
 	/** the number of work units that were already submitted */
 	private int submittedWork = 0;
-	/** the number of work units that can be completed in total */
-	private int totalWork;
-	/** indicates whether the monitor has been closed */
-	private boolean closed = false;
 
 	/**
 	 * Creates a progress monitor wrapper for a given Eclipse progress
@@ -61,116 +40,69 @@ public class KielerProgressMonitor implements IKielerProgressMonitor {
 		this.progressMonitor = progressMonitor;
 	}
 	
-	/* (non-Javadoc)
-	 * @see de.cau.cs.kieler.core.alg.IKielerProgressMonitor#begin(java.lang.String, int)
+	/**
+	 * Reports to the integrated Eclipse progress monitor that the current
+	 * task begins.
+	 * 
+     * @param name task name
+     * @param totalWork total amount of work for the new task
+     * @param topInstance if true, this progress monitor is the top instance
 	 */
-	public void begin(String name, int totalWork) {
-		if (!closed) {
-			this.taskName = name;
-			this.totalWork = totalWork;
-			if (parentMonitor == null)
-				progressMonitor.beginTask(name, totalWork <= 0
-						? IProgressMonitor.UNKNOWN : totalWork);
-			else
-				progressMonitor.subTask(name);
-			
-			startTime = System.nanoTime();
-		}
+	protected void doBegin(String name, int totalWork, boolean topInstance) {
+        if (topInstance)
+			progressMonitor.beginTask(name, totalWork <= 0
+					? IProgressMonitor.UNKNOWN : totalWork);
+		else
+			progressMonitor.subTask(name);
 	}
 
-	/* (non-Javadoc)
-	 * @see de.cau.cs.kieler.core.alg.IKielerProgressMonitor#done()
+	/**
+	 * Reports to the integrated Eclipse progress monitor that the main task
+	 * is done, if this is the top instance.
+     * 
+     * @param topInstance if true, this progress monitor is the top instance
 	 */
-	public void done() {
-		if (!closed) {
-			totalTime = (System.nanoTime() - startTime) * 1e-9;
-			
-			if (completedWork < totalWork)
-				internalWorked(totalWork - completedWork);
-			if (parentMonitor == null)
-				progressMonitor.done();
-			
-			closed = true;
-		}
-	}
-
-	/* (non-Javadoc)
-	 * @see de.cau.cs.kieler.core.alg.IKielerProgressMonitor#getExecutionTime()
-	 */
-	public double getExecutionTime() {
-		return totalTime;
-	}
-
-	/* (non-Javadoc)
-	 * @see de.cau.cs.kieler.core.alg.IKielerProgressMonitor#getSubMonitors()
-	 */
-	public List<IKielerProgressMonitor> getSubMonitors() {
-		return children;
-	}
-	
-	/*
-	 * (non-Javadoc)
-	 * @see de.cau.cs.kieler.core.alg.IKielerProgressMonitor#getParentMonitor()
-	 */
-	public IKielerProgressMonitor getParentMonitor() {
-		return parentMonitor;
-	}
-
-	/* (non-Javadoc)
-	 * @see de.cau.cs.kieler.core.alg.IKielerProgressMonitor#getTaskName()
-	 */
-	public String getTaskName() {
-		return taskName;
-	}
-
-	/* (non-Javadoc)
-	 * @see de.cau.cs.kieler.core.alg.IKielerProgressMonitor#isCanceled()
-	 */
-	public boolean isCanceled() {
-		return progressMonitor.isCanceled();
-	}
-
-	/* (non-Javadoc)
-	 * @see de.cau.cs.kieler.core.alg.IKielerProgressMonitor#subTask(int)
-	 */
-	public IKielerProgressMonitor subTask(int work) {
-		if (!closed) {
-			KielerProgressMonitor subMonitor = new KielerProgressMonitor(progressMonitor);
-			children.add(subMonitor);
-			subMonitor.parentMonitor = this;
-			currentChildWork = work;
-			return subMonitor;
-		}
-		else return null;
-	}
-
-	/* (non-Javadoc)
-	 * @see de.cau.cs.kieler.core.alg.IKielerProgressMonitor#worked(int)
-	 */
-	public void worked(int work) {
-		if (work > 0 && !closed)
-			internalWorked(work);
+	protected void doDone(boolean topInstance) {
+		if (topInstance)
+			progressMonitor.done();
 	}
 	
 	/**
-	 * Sets the current work counters of this monitor and all
-	 * parent monitors.
+	 * Returns true if the integrated Eclipse progress monitor reports
+	 * cancellation.
 	 * 
-	 * @param work amount of work that has been completed
+	 * @return true if the user has requested to cancel the operation
 	 */
-	private void internalWorked(float work) {
-		if (totalWork > 0 && completedWork < totalWork) {
-			completedWork += work;
-			if (parentMonitor == null) {
-				int newWork = (int)completedWork;
-				if (newWork > submittedWork) {
-					progressMonitor.worked(newWork - submittedWork);
-					submittedWork = newWork;
-				}
-			}
-			else if (parentMonitor.currentChildWork > 0) {
-				 parentMonitor.internalWorked(work / totalWork
-						 * parentMonitor.currentChildWork);
+	public boolean isCanceled() {
+	    return progressMonitor.isCanceled();
+	}
+
+	/**
+	 * Creates a new instance of {@code KielerProgressMonitor}.
+     * 
+     * @param work amount of work that is completed in the current monitor
+     *     instance when the sub-task ends
+     * @return a new progress monitor instance
+	 */
+	public BasicProgressMonitor doSubTask(int work) {
+		return new KielerProgressMonitor(progressMonitor);
+	}
+
+	/**
+	 * Reports to the integrated Eclipse progress monitor that some
+	 * work was done, if this is the top instance.
+     * 
+     * @param work amount of work that has just been done
+     * @param completedWork total number of work that is done for this task
+     * @param topInstance if true, this progress monitor is the top instance
+	 */
+	protected void doWorked(float work, float completedWork,
+	        boolean topInstance) {
+		if (topInstance) {
+			int newWork = (int)completedWork;
+			if (newWork > submittedWork) {
+				progressMonitor.worked(newWork - submittedWork);
+				submittedWork = newWork;
 			}
 		}
 	}
