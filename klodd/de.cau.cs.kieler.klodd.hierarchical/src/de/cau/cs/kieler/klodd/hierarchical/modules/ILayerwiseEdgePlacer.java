@@ -24,7 +24,7 @@ import de.cau.cs.kieler.klodd.hierarchical.structures.RoutingSlot;
  * Interface for algorithms that calculate routing slots for connections
  * going from a layer to the subsequent one.
  * 
- * @author msp
+ * @author <a href="mailto:msp@informatik.uni-kiel.de">Miro Sp&ouml;nemann</a>
  */
 public interface ILayerwiseEdgePlacer extends IAlgorithm {
 

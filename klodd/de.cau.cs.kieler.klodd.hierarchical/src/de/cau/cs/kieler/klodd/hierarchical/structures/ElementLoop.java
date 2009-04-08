@@ -28,7 +28,7 @@ import de.cau.cs.kieler.kiml.layout.util.KimlLayoutUtil;
 /**
  * Loop over a single layer element in a layered graph.
  * 
- * @author msp
+ * @author <a href="mailto:msp@informatik.uni-kiel.de">Miro Sp&ouml;nemann</a>
  */
 public class ElementLoop {
 	

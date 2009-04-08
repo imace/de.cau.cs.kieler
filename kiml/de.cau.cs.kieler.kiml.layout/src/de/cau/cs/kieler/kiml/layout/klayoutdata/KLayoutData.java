@@ -22,7 +22,10 @@ import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>KLayout Data</b></em>'.
+ * A representation of the model object '<em><b>Layout Data</b></em>'. Layout
+ * data can be attached to any
+ * {@linkplain de.cau.cs.kieler.core.kgraph.KGraphElement graph element} and may
+ * contain layout options to customize the behavior of layout algorithms.
  * <!-- end-user-doc -->
  *
  * <p>
@@ -42,8 +45,12 @@ public interface KLayoutData extends KGraphData {
      * The list contents are of type {@link de.cau.cs.kieler.core.kgraph.KOption}.
      * <!-- begin-user-doc -->
      * <p>
-     * If the meaning of the '<em>Options</em>' containment reference list isn't clear,
-     * there really should be more of a description here...
+     * Layout options specify how a layout algorithm shall handle the related
+     * graph element or its children. Options are defined in
+     * {@link de.cau.cs.kieler.kiml.layout.options.LayoutOptions LayoutOptions}
+     * and consist either of a key-value pair for valued options or of an
+     * unvalued {@code KOption} for boolean options, in which case the default
+     * is implicitly 'false'.
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Options</em>' containment reference list.
@@ -55,6 +62,8 @@ public interface KLayoutData extends KGraphData {
 
     /**
      * <!-- begin-user-doc -->
+     * Retrieves the first option of given key in the list of layout options.
+     * @return layout option for the given key, or null if there is none 
      * <!-- end-user-doc -->
      * @model
      * @generated

@@ -27,10 +27,9 @@ import de.cau.cs.kieler.kiml.layout.options.LayoutOptions;
 import de.cau.cs.kieler.kiml.layout.options.PortSide;
 
 /**
- * Utility class with static methods for the internally used layout graph
- * structure.
+ * Utility methods for use in layout algorithms on the KGraph structure.
  * 
- * @author msp
+ * @author <a href="mailto:msp@informatik.uni-kiel.de">Miro Sp&ouml;nemann</a>
  */
 public class LayoutGraphUtil {
 	

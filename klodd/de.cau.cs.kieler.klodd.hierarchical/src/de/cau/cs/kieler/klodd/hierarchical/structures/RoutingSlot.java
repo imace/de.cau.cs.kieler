@@ -16,7 +16,7 @@ package de.cau.cs.kieler.klodd.hierarchical.structures;
 /**
  * A routing slot is a place in which layer connections can be routed. 
  * 
- * @author msp
+ * @author <a href="mailto:msp@informatik.uni-kiel.de">Miro Sp&ouml;nemann</a>
  */
 public class RoutingSlot {
 	

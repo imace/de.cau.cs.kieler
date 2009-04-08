@@ -30,7 +30,7 @@ import de.cau.cs.kieler.klodd.hierarchical.structures.LinearSegment;
  * Node placing algorithm that improves the overall balance of the graph
  * after executing a basic node placer.
  * 
- * @author msp
+ * @author <a href="mailto:msp@informatik.uni-kiel.de">Miro Sp&ouml;nemann</a>
  */
 public class BalancingNodePlacer extends AbstractAlgorithm implements
 		INodePlacer {

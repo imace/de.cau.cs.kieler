@@ -16,7 +16,7 @@ package de.cau.cs.kieler.kiml.layout.options;
 /**
  * Definition of layout types.
  * 
- * @author msp
+ * @author <a href="mailto:msp@informatik.uni-kiel.de">Miro Sp&ouml;nemann</a>
  */
 public enum LayoutType {
 
@@ -58,21 +58,14 @@ public enum LayoutType {
      * Gets the layout type related to the given name.
      * 
      * @param name name of layout type
-     * @return the related type constant
+     * @return the related type constant, or OTHER if there is no such type
      */
     public static LayoutType fromString(String name) {
-        if (name.equals("Orthogonal"))
-            return ORTHOGONAL;
-        else if (name.equals("Layered"))
-            return LAYERED;
-        else if (name.equals("Force"))
-            return FORCE;
-        else if (name.equals("Circle"))
-            return CIRCLE;
-        else if (name.equals("Radial"))
-            return RADIAL;
-        else
-            return OTHER;
+        for (LayoutType layoutType : values()) {
+            if (layoutType.name.equals(name))
+                return layoutType;
+        }
+        return OTHER;
     }
     
     /**

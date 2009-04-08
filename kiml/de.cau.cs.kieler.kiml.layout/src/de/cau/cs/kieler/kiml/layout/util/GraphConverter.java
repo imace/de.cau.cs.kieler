@@ -23,9 +23,9 @@ import de.cau.cs.kieler.core.kgraph.KPort;
 import de.cau.cs.kieler.core.slimgraph.*;
 
 /**
- * Class that converts an Ecore graph into a slim graph.
+ * Class that converts a KGraph into a slim graph.
  * 
- * @author msp
+ * @author <a href="mailto:msp@informatik.uni-kiel.de">Miro Sp&ouml;nemann</a>
  */
 public class GraphConverter extends AbstractAlgorithm {
 

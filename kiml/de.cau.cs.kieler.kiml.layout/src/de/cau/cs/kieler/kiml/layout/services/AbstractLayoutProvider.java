@@ -19,40 +19,36 @@ import de.cau.cs.kieler.core.kgraph.KNode;
 import de.cau.cs.kieler.kiml.layout.options.LayoutType;
 
 /**
- * Abstract class every concrete layout provider has to extend. Performs the
- * layout of a KNode through the {@link #doLayout} method and provides
- * information of the layout provider through the {@link #getLayouterInfo}
- * method.
- * <p/>
- * Every layout provider can be switched to enabled or disabled with the
- * {@link #setEnabled} method, as well as its status can be queried with the
- * {@link #isEnabled} call.
- * <p/>
- * Concrete layout providers for must register themselves through the
- * <code>kimlLayoutProvider</code> extension point. All layouter providers
- * published to Eclipse this way are collected with the {@link LayoutProviders}
+ * A layout provider executes a layout algorithm to layout the child elements of
+ * a node.
+ * <p>
+ * When used in Eclipse, concrete layout providers must register through the
+ * {@code kimlLayoutProvider} extension point. All layout providers
+ * published to Eclipse this way are collected with the {@link KimlLayoutServices}
  * singleton.
  * 
  * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
- * @see LayoutProviders
  * @see NullLayoutProvider
  */
 public abstract class AbstractLayoutProvider {
 
-	/*
-	 * some strings used when creating the concrete layouters via the extension
-	 * point mechanism
-	 */
+    /** identifier of the Eclipse extension point for layout providers */
 	public static final String EXTENSION_POINT_ID = "de.cau.cs.kieler.kiml.layout.kimlLayoutProvider";
+	/** name of the 'id' attribute in the extension point */
 	public static final String ATTRIBUTE_ID = "id";
+	/** name of the 'class' attribute in the extension point */
 	public static final String ATTRIBUTE_CLASS = "class";
+	/** name of the 'name' attribute in the extension point */
 	public static final String ATTRIBUTE_NAME = "name";
+	/** name of the 'icon' attribute in the extension point */
 	public static final String ATTRIBUTE_ICON = "icon";
+	
+	/** indicates whether this layout provider is enabled in the UI */
 	private boolean enabled = true;
 
 	/**
-	 * Layout providers must implement this method in which they perform the
-	 * actual layout process.
+	 * Performs the actual layout process, that is attaches layout
+     * information to the given node object.
 	 * 
 	 * @param layoutNode the parent node which should be laid out
 	 * @param progressMonitor progress monitor used to keep track of progress
@@ -88,7 +84,7 @@ public abstract class AbstractLayoutProvider {
 	 * example be turned of in the preference page of each layouter.
 	 * 
 	 * @param state
-	 *            Boolean indicating the state to be set.
+	 *            boolean indicating the state to be set
 	 */
 	public final void setEnabled(boolean state) {
 		enabled = state;
@@ -97,9 +93,10 @@ public abstract class AbstractLayoutProvider {
 	/**
 	 * Queries the actual enable state of the layout provider.
 	 * 
-	 * @return true, if layouter is enabled
+	 * @return true if the layouter is enabled
 	 */
 	public final boolean isEnabled() {
 		return enabled;
 	}
+	
 }

@@ -19,7 +19,9 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>KInsets</b></em>'.
+ * A representation of the model object '<em><b>Insets</b></em>'. Insets describe
+ * the minimal amount of space that is required between the children of a node
+ * and the node's boundary.
  * <!-- end-user-doc -->
  *
  * <p>
@@ -41,8 +43,7 @@ public interface KInsets extends EObject {
      * Returns the value of the '<em><b>Top</b></em>' attribute.
      * <!-- begin-user-doc -->
      * <p>
-     * If the meaning of the '<em>Top</em>' attribute isn't clear,
-     * there really should be more of a description here...
+     * This is the minimal distance to the top side of a parent node.
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Top</em>' attribute.
@@ -67,8 +68,7 @@ public interface KInsets extends EObject {
      * Returns the value of the '<em><b>Bottom</b></em>' attribute.
      * <!-- begin-user-doc -->
      * <p>
-     * If the meaning of the '<em>Bottom</em>' attribute isn't clear,
-     * there really should be more of a description here...
+     * This is the minimal distance to the bottom side of a parent node.
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Bottom</em>' attribute.
@@ -93,8 +93,7 @@ public interface KInsets extends EObject {
      * Returns the value of the '<em><b>Left</b></em>' attribute.
      * <!-- begin-user-doc -->
      * <p>
-     * If the meaning of the '<em>Left</em>' attribute isn't clear,
-     * there really should be more of a description here...
+     * This is the minimal distance to the left side of a parent node.
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Left</em>' attribute.
@@ -119,8 +118,7 @@ public interface KInsets extends EObject {
      * Returns the value of the '<em><b>Right</b></em>' attribute.
      * <!-- begin-user-doc -->
      * <p>
-     * If the meaning of the '<em>Right</em>' attribute isn't clear,
-     * there really should be more of a description here...
+     * This is the minimal distance to the right side of a parent node.
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Right</em>' attribute.

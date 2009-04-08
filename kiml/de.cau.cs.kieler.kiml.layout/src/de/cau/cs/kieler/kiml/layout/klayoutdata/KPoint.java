@@ -19,7 +19,8 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>KPoint</b></em>'.
+ * A representation of the model object '<em><b>Point</b></em>'. A point has
+ * an x and a y coordinate.
  * <!-- end-user-doc -->
  *
  * <p>
@@ -40,8 +41,6 @@ public interface KPoint extends EObject {
      * The default value is <code>"0.0f"</code>.
      * <!-- begin-user-doc -->
      * <p>
-     * If the meaning of the '<em>X</em>' attribute isn't clear,
-     * there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>X</em>' attribute.
@@ -67,8 +66,6 @@ public interface KPoint extends EObject {
      * The default value is <code>"0.0f"</code>.
      * <!-- begin-user-doc -->
      * <p>
-     * If the meaning of the '<em>Y</em>' attribute isn't clear,
-     * there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Y</em>' attribute.

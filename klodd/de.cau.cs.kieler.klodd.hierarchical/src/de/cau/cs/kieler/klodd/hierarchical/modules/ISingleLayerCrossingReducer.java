@@ -20,7 +20,7 @@ import de.cau.cs.kieler.klodd.hierarchical.structures.Layer;
  * Interface for algorithms that offer heuristics for the 2-layer
  * and 3-layer crossing reduction problem.
  * 
- * @author msp
+ * @author <a href="mailto:msp@informatik.uni-kiel.de">Miro Sp&ouml;nemann</a>
  */
 public interface ISingleLayerCrossingReducer extends IAlgorithm {
 	

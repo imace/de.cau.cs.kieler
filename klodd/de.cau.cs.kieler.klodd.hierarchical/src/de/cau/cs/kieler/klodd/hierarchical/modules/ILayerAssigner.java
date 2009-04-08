@@ -21,7 +21,7 @@ import de.cau.cs.kieler.klodd.hierarchical.structures.LayeredGraph;
 /**
  * Interface for algorithms that assign layers to each node of a graph.
  * 
- * @author msp
+ * @author <a href="mailto:msp@informatik.uni-kiel.de">Miro Sp&ouml;nemann</a>
  */
 public interface ILayerAssigner extends IAlgorithm {
 	

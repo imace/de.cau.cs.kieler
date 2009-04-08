@@ -18,7 +18,13 @@ package de.cau.cs.kieler.kiml.layout.klayoutdata;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>KShape Layout</b></em>'.
+ * A representation of the model object '<em><b>Shape Layout</b></em>'. This
+ * layout data contains information for graph elements for which rectangular
+ * shape is assumed for layout, such as nodes, ports, and labels.
+ * <p>
+ * Layout coordinates for nodes, ports, and node labels are relative to the
+ * position of the parent node. For edge labels the rules defined in
+ * {@link KEdgeLayout} apply. Port labels are relative to their ports.  
  * <!-- end-user-doc -->
  *
  * <p>
@@ -41,8 +47,6 @@ public interface KShapeLayout extends KLayoutData {
      * The default value is <code>"0.0f"</code>.
      * <!-- begin-user-doc -->
      * <p>
-     * If the meaning of the '<em>Xpos</em>' attribute isn't clear,
-     * there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Xpos</em>' attribute.
@@ -68,8 +72,6 @@ public interface KShapeLayout extends KLayoutData {
      * The default value is <code>"0.0f"</code>.
      * <!-- begin-user-doc -->
      * <p>
-     * If the meaning of the '<em>Ypos</em>' attribute isn't clear,
-     * there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Ypos</em>' attribute.
@@ -95,8 +97,6 @@ public interface KShapeLayout extends KLayoutData {
      * The default value is <code>"0.0f"</code>.
      * <!-- begin-user-doc -->
      * <p>
-     * If the meaning of the '<em>Width</em>' attribute isn't clear,
-     * there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Width</em>' attribute.
@@ -122,8 +122,6 @@ public interface KShapeLayout extends KLayoutData {
      * The default value is <code>"0.0f"</code>.
      * <!-- begin-user-doc -->
      * <p>
-     * If the meaning of the '<em>Height</em>' attribute isn't clear,
-     * there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Height</em>' attribute.

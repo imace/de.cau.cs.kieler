@@ -17,9 +17,10 @@ import de.cau.cs.kieler.core.alg.IKielerProgressMonitor;
 import de.cau.cs.kieler.core.kgraph.KNode;
 
 /**
- * Interface for listeners to the KIML layout.
+ * Interface for listeners to the KIML layout. In Eclipse such listeners must
+ * register using the {@code kimlLayoutListener} extension point.
  * 
- * @author msp
+ * @author <a href="mailto:msp@informatik.uni-kiel.de">Miro Sp&ouml;nemann</a>
  */
 public interface ILayoutListener {
 

@@ -18,19 +18,14 @@ import de.cau.cs.kieler.core.alg.IKielerProgressMonitor;
 import de.cau.cs.kieler.core.kgraph.KNode;
 
 /**
- * One possible implementation to cope with hierarchy in a KLayoutGraph, though
- * all LayoutProviders (for example GraphViz, Zest) can not handle hierarchy
- * properly.
- * <p/>
- * For every level in the hierarchy of the KNodes, a separate call to a
- * LayoutProvider is performed. This is done recursively from the leafs to the
- * root of the KNodes in the KLayoutGraph, using the size information from
- * a lower level in the level above to generate a smooth hierarchically layout.
+ * Performs layout in a graph with hierarchy by executing a layout provider
+ * on each level of the hierarchy. This is done recursively from the leafs to the
+ * root of the nodes in the graph, using size information from lower levels in the
+ * levels above.
  * 
  * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
- * @see LayoutProviders
  */
-public class RecursiveGroupLayouterEngine extends
+public class RecursiveLayouterEngine extends
 		AbstractLayouterEngine {
 
 	/** the last used layout provider */
@@ -51,7 +46,7 @@ public class RecursiveGroupLayouterEngine extends
 	}
 
 	/**
-	 * Recursive function to enable hierarchically layout. The leafs are laid
+	 * Recursive function to enable layout of hierarchy. The leafs are laid
 	 * out first to use the size information gained in the level above.
 	 * 
 	 * @param layoutNode the node with children to be laid out

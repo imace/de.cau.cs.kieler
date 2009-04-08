@@ -23,13 +23,14 @@ import de.cau.cs.kieler.kiml.layout.klayoutdata.KLayoutData;
 import de.cau.cs.kieler.kiml.layout.klayoutdata.KLayoutDataFactory;
 
 /**
- * Definition of keys used for layout options
+ * Definition of layout options and utility methods to get and set these
+ * options.
  * 
- * @author msp
+ * @author <a href="mailto:msp@informatik.uni-kiel.de">Miro Sp&ouml;nemann</a>
  */
 public class LayoutOptions {
 
-    /** type of layout method */
+    /** layout option key: type of layout method */
     public final static String LAYOUT_TYPE = "layoutType";
     
     /**
@@ -65,7 +66,7 @@ public class LayoutOptions {
         typeOption.setValue(layoutType.ordinal());
     }
     
-    /** direction of layout */
+    /** layout option key: direction of layout */
     public final static String LAYOUT_DIRECTION = "layoutDirection";
     
     /**
@@ -101,7 +102,7 @@ public class LayoutOptions {
         directionOption.setValue(layoutDirection.ordinal());
     }
     
-    /** name of selected layouter */
+    /** layout option key: name of selected layouter */
     public final static String LAYOUTER_NAME = "layouterName";
     
     /**
@@ -122,7 +123,7 @@ public class LayoutOptions {
         nameOption.setValue(layouterName);
     }
     
-    /** distance of node contents to the boundary */
+    /** layout option key: distance of node contents to the boundary */
     public final static String INSETS = "insets";
     
     /**
@@ -141,7 +142,7 @@ public class LayoutOptions {
             return (KInsets)insetsOption.getValue();
     }
     
-    /** side of a port on its node's boundary */
+    /** layout option key: side of a port on its node's boundary */
     public final static String PORT_SIDE = "portSide";
     
     /**
@@ -177,7 +178,7 @@ public class LayoutOptions {
         sideOption.setValue(portSide.ordinal());
     }
     
-    /** constraints for port positions */
+    /** layout option key: constraints for port positions */
     public final static String PORT_CONSTRAINTS = "portConstraints";
 
     /**
@@ -213,7 +214,7 @@ public class LayoutOptions {
         constraintsOption.setValue(portConstraints.ordinal());
     }
     
-    /** placement positions for edge labels */
+    /** layout option key: placement positions for edge labels */
     public final static String EDGE_LABEL_PLACEMENT = "edgeLabelPlacement";
     
     /**
@@ -249,7 +250,7 @@ public class LayoutOptions {
         placementOption.setValue(placement.ordinal());
     }
     
-    /** size constraint for nodes */
+    /** layout option key: size constraint for nodes */
     public final static String FIXED_SIZE = "fixedSize";
     
     /**

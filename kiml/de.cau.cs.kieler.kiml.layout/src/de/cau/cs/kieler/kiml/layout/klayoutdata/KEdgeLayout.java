@@ -19,7 +19,13 @@ import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>KEdge Layout</b></em>'.
+ * A representation of the model object '<em><b>Edge Layout</b></em>'. This
+ * layout data contains special information for edges, such as bend points.
+ * <p>
+ * All layout coordinates for edges are defined to be relative to the position
+ * of the parent of the source node, except when the target node is contained
+ * in the source node, in which case all coordinates are relative to the
+ * position of the source node.
  * <!-- end-user-doc -->
  *
  * <p>
@@ -41,8 +47,8 @@ public interface KEdgeLayout extends KLayoutData {
      * The list contents are of type {@link de.cau.cs.kieler.kiml.layout.klayoutdata.KPoint}.
      * <!-- begin-user-doc -->
      * <p>
-     * If the meaning of the '<em>Bend Points</em>' containment reference list isn't clear,
-     * there really should be more of a description here...
+     * The coordinates of bend points must obey the general rules for edge
+     * coordinates defined above. 
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Bend Points</em>' containment reference list.
@@ -56,8 +62,9 @@ public interface KEdgeLayout extends KLayoutData {
      * Returns the value of the '<em><b>Source Point</b></em>' containment reference.
      * <!-- begin-user-doc -->
      * <p>
-     * If the meaning of the '<em>Source Point</em>' containment reference isn't clear,
-     * there really should be more of a description here...
+     * The source point is the point at which the edge touches the source node
+     * or source port. The coordinates of source points must obey the general
+     * rules for edge coordinates defined above. 
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Source Point</em>' containment reference.
@@ -82,8 +89,9 @@ public interface KEdgeLayout extends KLayoutData {
      * Returns the value of the '<em><b>Target Point</b></em>' containment reference.
      * <!-- begin-user-doc -->
      * <p>
-     * If the meaning of the '<em>Target Point</em>' containment reference isn't clear,
-     * there really should be more of a description here...
+     * The target point is the point at which the edge touches the target node
+     * or target port. The coordinates of target points must obey the general
+     * rules for edge coordinates defined above.
      * </p>
      * <!-- end-user-doc -->
      * @return the value of the '<em>Target Point</em>' containment reference.

@@ -18,31 +18,27 @@ import de.cau.cs.kieler.core.alg.IKielerProgressMonitor;
 import de.cau.cs.kieler.core.kgraph.KNode;
 
 /**
- * Abstract class every concrete layouter engine has to extend. Pushes the
- * KLayoutGraph with hierarchy to the concrete LayoutProviders which can or
- * cannot handle hierarchy. One implementation is
- * {@link RecursiveGroupLayouterEngine}.
- * <p/>
+ * A layouter engine performs layout on a graph and handles hierarchy by
+ * choosing appropriate layout providers and possibly executing them
+ * repeatedly. The basic implementation is {@link RecursiveLayouterEngine},
+ * which executes a layout provider for each non-empty node in the graph. 
  * 
  * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
- * @see RecursiveGroupLayouterEngine
  */
 public abstract class AbstractLayouterEngine {
 
-	/* caches the call to the layout services class for subclasses */
+	/** caches the call to the layout services class for subclasses */
 	protected KimlLayoutServices layoutServices = KimlLayoutServices
 			.getInstance();
 
 	/**
-	 * Lays out a parent node with hierarchy, that is attaches layout
-	 * information to the description of the node object.
+	 * Lays out a parent node with hierarchy.
 	 * 
-	 * @param layoutGraph a node with hierarchy which is laid out
-	 *     by this method
+	 * @param layoutNode a node with hierarchy which is laid out
 	 * @param progressMonitor progress monitor used to keep track of progress
 	 * @throws KielerException if the method fails to perform layout
 	 */
-	public abstract void layout(KNode layoutGraph,
+	public abstract void layout(KNode layoutNode,
 			IKielerProgressMonitor progressMonitor) throws KielerException;
 	
 	/**

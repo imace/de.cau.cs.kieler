@@ -28,14 +28,9 @@ import de.cau.cs.kieler.kiml.layout.klayoutdata.KShapeLayout;
 import de.cau.cs.kieler.kiml.layout.options.LayoutOptions;
 
 /**
- * Helper class with static convenience functions to create initialized
- * KLayoutGraph elements.
+ * Utility methods for KGraphs and layout data.
  * 
- * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
- * @see KLayoutGraph
- * @see KNode
- * @see KEdge
- * @see KEdgeLabel
+ * @author <a href="mailto:msp@informatik.uni-kiel.de">Miro Sp&ouml;nemann</a>
  */
 public class KimlLayoutUtil {
 
@@ -62,7 +57,7 @@ public class KimlLayoutUtil {
     }
     
 	/**
-	 * Creates a KNode, initializes some defaults and returns it.
+	 * Creates a KNode, initializes some attributes, and returns it.
 	 * 
 	 * @return an initialized KNode
 	 */
@@ -81,7 +76,7 @@ public class KimlLayoutUtil {
 	}
 
 	/**
-	 * Creates a KEdge, initializes some defaults and returns it.
+	 * Creates a KEdge, initializes some attributes, and returns it.
 	 * 
 	 * @return an initialized KEdge
 	 */
@@ -95,7 +90,7 @@ public class KimlLayoutUtil {
 	}
 	
 	/**
-     * Creates a KPort, initializes some defaults and returns it.
+     * Creates a KPort, initializes some attributes, and returns it.
      * 
      * @return an initialized KPort
      */
@@ -109,7 +104,7 @@ public class KimlLayoutUtil {
     }
 
 	/**
-	 * Creates a KLabel, initializes some defaults and returns it.
+	 * Creates a KLabel, initializes some attributes, and returns it.
 	 * 
 	 * @param parent the parent graph element
 	 * @return an initialized KLabel

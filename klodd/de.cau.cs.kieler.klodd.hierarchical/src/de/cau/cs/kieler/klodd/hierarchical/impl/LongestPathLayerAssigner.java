@@ -28,7 +28,7 @@ import de.cau.cs.kieler.klodd.hierarchical.structures.*;
 /**
  * Layer assigner working with the longest path layering algorithm.
  * 
- * @author msp
+ * @author <a href="mailto:msp@informatik.uni-kiel.de">Miro Sp&ouml;nemann</a>
  */
 public class LongestPathLayerAssigner extends AbstractAlgorithm implements
 		ILayerAssigner {

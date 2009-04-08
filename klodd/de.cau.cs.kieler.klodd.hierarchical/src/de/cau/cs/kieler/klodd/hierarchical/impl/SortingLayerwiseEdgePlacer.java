@@ -35,7 +35,7 @@ import de.cau.cs.kieler.klodd.hierarchical.structures.*;
  * Layerwise edge placer implementation that sorts the edges and gives
  * them slot ranks according to the result.
  * 
- * @author msp
+ * @author <a href="mailto:msp@informatik.uni-kiel.de">Miro Sp&ouml;nemann</a>
  */
 public class SortingLayerwiseEdgePlacer extends AbstractAlgorithm implements
 		ILayerwiseEdgePlacer {

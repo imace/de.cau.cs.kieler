@@ -30,7 +30,7 @@ import de.cau.cs.kieler.klodd.hierarchical.structures.*;
  * Implementation of a crossing reducer that performs a layer-by-layer
  * sweep with a 2-layer crossing reducer.
  * 
- * @author msp
+ * @author <a href="mailto:msp@informatik.uni-kiel.de">Miro Sp&ouml;nemann</a>
  */
 public class LayerSweepCrossingReducer extends AbstractAlgorithm implements
 		ICrossingReducer {

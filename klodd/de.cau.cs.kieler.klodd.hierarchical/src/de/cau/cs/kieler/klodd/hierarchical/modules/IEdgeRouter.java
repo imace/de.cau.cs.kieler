@@ -19,7 +19,7 @@ import de.cau.cs.kieler.klodd.hierarchical.structures.LayeredGraph;
 /**
  * Interface for algorithms that route edges in a layered graph.
  * 
- * @author msp
+ * @author <a href="mailto:msp@informatik.uni-kiel.de">Miro Sp&ouml;nemann</a>
  */
 public interface IEdgeRouter extends IAlgorithm {
 	

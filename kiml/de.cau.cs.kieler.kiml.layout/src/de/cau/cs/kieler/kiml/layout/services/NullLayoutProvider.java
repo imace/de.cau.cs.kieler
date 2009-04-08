@@ -19,15 +19,14 @@ import de.cau.cs.kieler.core.kgraph.KNode;
 import de.cau.cs.kieler.kiml.layout.options.LayoutType;
 
 /**
- * Implements the NullLayoutProvider. This layout provider just exists to
+ * Layout provider that does nothing. This layout provider just exists to
  * prevent NullPointerExceptions when someone requests a layouter and there is
  * none in the entire system. This layout provider is not registered through the
  * extension points as normal layout providers, but is instantiated and returned
- * from {@link LayoutProviders#getLayoutProvider(KNode)}, when no layout
+ * from {@link KimlLayoutServices#getLayoutProvider(KNode)} when no layout
  * provider is found.
  * 
  * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
- * @see LayoutProviders
  */
 public class NullLayoutProvider extends AbstractLayoutProvider {
 

@@ -30,10 +30,10 @@ import de.cau.cs.kieler.kiml.layout.util.KimlLayoutPreferenceConstants;
 import de.cau.cs.kieler.kiml.layout.util.KimlLayoutUtil;
 
 /**
- * Main class for access to the layout services layout provider and
- * layout listener.
+ * Main class for access to the layout services <em>layout provider</em> and
+ * <em>layout listener</em>.
  * 
- * @author msp
+ * @author <a href="mailto:msp@informatik.uni-kiel.de">Miro Sp&ouml;nemann</a>
  */
 public class KimlLayoutServices {
 
@@ -51,7 +51,9 @@ public class KimlLayoutServices {
 
 
 	/**
-	 * @return the singleton instance of the LayoutListeners class
+	 * Returns the singleton instance of this class.
+	 * 
+	 * @return the singleton instance
 	 */
 	public static KimlLayoutServices getInstance() {
 		return INSTANCE;

@@ -41,7 +41,7 @@ import de.cau.cs.kieler.kiml.layout.util.LayoutGraphUtil;
 /**
  * A layer element representing a node or a long edge in the layered graph.
  * 
- * @author msp
+ * @author <a href="mailto:msp@informatik.uni-kiel.de">Miro Sp&ouml;nemann</a>
  */
 public class LayerElement {
 

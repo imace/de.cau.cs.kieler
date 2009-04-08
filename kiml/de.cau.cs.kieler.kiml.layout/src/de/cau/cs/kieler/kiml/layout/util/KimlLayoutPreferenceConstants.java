@@ -14,8 +14,8 @@
 package de.cau.cs.kieler.kiml.layout.util;
 
 /**
- * Constant definitions for the KimlLayout plug-in preferences. Can be used be
- * other plug-in to query the global layout settings through this plug-in's
+ * Constant definitions for the KIML layout plug-in preferences. Can be used in
+ * other plug-ins to query the global layout settings through this plug-in's
  * preference store.
  * 
  * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>

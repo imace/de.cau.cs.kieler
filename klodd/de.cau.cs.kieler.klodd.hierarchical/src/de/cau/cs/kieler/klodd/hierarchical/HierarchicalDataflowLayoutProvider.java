@@ -47,7 +47,7 @@ import de.cau.cs.kieler.klodd.hierarchical.structures.LayeredGraph;
 /**
  * Layout provider for the KLoDD hierarchical dataflow diagram layouter.
  * 
- * @author msp
+ * @author <a href="mailto:msp@informatik.uni-kiel.de">Miro Sp&ouml;nemann</a>
  */
 public class HierarchicalDataflowLayoutProvider extends
 		AbstractLayoutProvider {

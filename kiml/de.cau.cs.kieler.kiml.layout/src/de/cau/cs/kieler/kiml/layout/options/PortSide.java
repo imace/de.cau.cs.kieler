@@ -16,7 +16,7 @@ package de.cau.cs.kieler.kiml.layout.options;
 /**
  * Definition of port sides on a node.
  * 
- * @author msp
+ * @author <a href="mailto:msp@informatik.uni-kiel.de">Miro Sp&ouml;nemann</a>
  */
 public enum PortSide {
     

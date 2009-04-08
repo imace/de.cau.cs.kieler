@@ -27,7 +27,7 @@ import de.cau.cs.kieler.kiml.layout.options.LayoutDirection;
 /**
  * A single Layer used in a layered graph.
  * 
- * @author msp
+ * @author <a href="mailto:msp@informatik.uni-kiel.de">Miro Sp&ouml;nemann</a>
  */
 public class Layer {
 	
