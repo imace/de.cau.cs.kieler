@@ -498,11 +498,21 @@ point="org.eclipse.ui.menus">
        <action
              class="de.cau.cs.kieler.kiml.ui.handlers.DeepLayoutActionDelegate"
              icon="icons/kieler-arrange.png"
-             id="de.cau.cs.kieler.kiml.ui.action1"
+             id="de.cau.cs.kieler.kiml.ui.layoutview.deepapply"
              label="Apply All"
              style="push"
              toolbarPath="layout"
              tooltip="Applies options to all graphical elements and triggers layout.">
+       </action>
+       <action
+             class="de.cau.cs.kieler.kiml.ui.handlers.DeepLayoutActionDelegate"
+             icon="icons/obj16/expand_collapse.gif"
+             id="de.cau.cs.kieler.kiml.ui.layoutview.expand"
+             label="Expand/Collapse"
+             state="false"
+             style="toggle"
+             toolbarPath="layout"
+             tooltip="Expand/Collapse the list of layouters">
        </action>
     </viewContribution>
  </extension>

@@ -19,15 +19,58 @@ import de.cau.cs.kieler.kiml.ui.helpers.KimlGMFLayoutHintHelper;
 import de.cau.cs.kieler.kiml.ui.layout.DiagramLayouter;
 import de.cau.cs.kieler.kiml.ui.views.KimlLayoutView;
 
+/**
+ * View action delegate for all actions of the LayoutView.
+ * @author haf
+ *
+ */
 public class DeepLayoutActionDelegate implements IViewActionDelegate {
 
+    public final String DEEP_APPLY_ALL = "de.cau.cs.kieler.kiml.ui.layoutview.deepapply";
+    public final String EXPAND = "de.cau.cs.kieler.kiml.ui.layoutview.expand";
+    
     KimlLayoutView view;
 
+    boolean expanded = false;
+    
     public void init(IViewPart view) {
         this.view = (KimlLayoutView) view;
     }
 
+    /**
+     * Calls the appropriate method for the corresponding action.
+     * Supported actions are EXPAND and DEEP_APPLY_ALL.
+     */
     public void run(IAction action) {
+        String actionID = action.getId();
+        
+        if(actionID.equals(DEEP_APPLY_ALL)){
+            deepApplyAll();
+        }
+
+        else if(actionID.equals(EXPAND)){
+            expanded = !expanded;
+            expandLayouters(expanded);
+        }
+
+    }
+
+    /**
+     * Expands the tree of all layouters in the view or
+     * collapses it depending on the given state.
+     * @param state true iff expanding, false if collapsing
+     */
+    private void expandLayouters(boolean state) {
+        view.setExpanded(state);
+    }
+
+    /**
+     * Applies the selected layouter to all nodes in the
+     * diagram and then executes a layout run for the
+     * whole diagram. Will overwrite all local settings
+     * for all nodes.
+     */
+    private void deepApplyAll() {
         try {
             IEditorPart editor = PlatformUI.getWorkbench()
                     .getActiveWorkbenchWindow().getActivePage()
@@ -55,7 +98,6 @@ public class DeepLayoutActionDelegate implements IViewActionDelegate {
                     "Could not perform automatic layout of diagram.", e);
             StatusManager.getManager().handle(myStatus, StatusManager.SHOW);
         }
-
     }
 
     public void selectionChanged(IAction action, ISelection selection) {
