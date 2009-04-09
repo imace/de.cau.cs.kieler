@@ -435,7 +435,7 @@ public class LayerElement {
 	 * @param port port for which the rank shall be obtained
 	 * @param forward if true, ranks are determined for a forward layer sweep,
 	 *     else for a backwards layer sweep
-	 * @return port rank, or 0 if <code>port == null</code
+	 * @return port rank, or 0 if {@code port == null}
 	 */
 	public int getPortRank(KPort port, boolean forward) {
 		if (port != null) {

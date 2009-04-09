@@ -65,7 +65,7 @@ public class GraphConverter extends AbstractAlgorithm {
 		for (KNode child : parentNode.getChildren()) {
 			for (KEdge layoutEdge : child.getOutgoingEdges()) {
 				KNode targetNode = layoutEdge.getTarget();
-				if (targetNode != child.getParent()) {
+				if (targetNode.getParent() == child.getParent()) {
 					KSlimEdge newEdge = new KSlimEdge(slimGraph, nodeMap.get(child),
 							nodeMap.get(targetNode), layoutEdge);
 					newEdge.connectNodes();

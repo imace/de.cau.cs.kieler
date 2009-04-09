@@ -84,7 +84,8 @@ public class ConnectedComponents extends AbstractAlgorithm {
 		while (!edgeStack.isEmpty()) {
 			KEdge layoutEdge = edgeStack.removeFirst();
 			// TODO add support for external ports
-			if (layoutEdge.getSource() != null && layoutEdge.getTarget() != null) {
+			if (layoutEdge.getSource().getParent()
+			        == layoutEdge.getTarget().getParent()) {
 				if (!edgeMap.containsKey(layoutEdge)) {
 					KNode currentLayoutNode = layoutEdge.getSource();
 					KSlimNode sourceNode = nodeMap.get(currentLayoutNode);

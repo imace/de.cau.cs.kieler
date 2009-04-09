@@ -224,7 +224,7 @@ public class LayeredGraph {
 							targetPort = layoutEdge.getTargetPort();
 						}
 						
-						if (targetNode != null) {
+						if (edge.target.object instanceof KNode) {
 							createConnection(element,
 									obj2LayerElemMap.get(targetNode),
 									layoutEdge, sourcePort, targetPort);
