@@ -49,6 +49,7 @@ import org.eclipse.gmf.runtime.diagram.ui.requests.RequestConstants;
 import org.eclipse.gmf.runtime.diagram.ui.requests.SetAllBendpointRequest;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.BaseSlidableAnchor;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx;
+import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
 import org.eclipse.gmf.runtime.draw2d.ui.geometry.LineSeg;
 import org.eclipse.gmf.runtime.draw2d.ui.geometry.PointListUtilities;
 import org.eclipse.gmf.runtime.emf.core.util.EObjectAdapter;
@@ -413,7 +414,7 @@ public class GenericLayoutGraphApplier extends
                         edgeLabelLayout.getYpos());
 
                 /**
-                 * HACK IF THE LAYOUT ALG. DOES NOT PROVIDE VALID LABEL POS, USE
+                 * IF THE LAYOUT ALG. DOES NOT PROVIDE VALID LABEL POS, USE
                  * THEN ALSO GMF TO POSITION LABELS
                  */
                 if (labelLocation.x == 0 && labelLocation.y == 0) {
@@ -475,9 +476,34 @@ public class GenericLayoutGraphApplier extends
                         new EObjectAdapter((View) edgeLabelEditPart.getModel()),
                         normalPoint);
                 edgeLabelsCompoundCommand.add(new ICommandProxy(moveCommand));
+                // refresh the label such that the label content's bounds get updated
+                edgeLabelsCompoundCommand.add(refreshLabel(labelFigure));
             }
         }
         return edgeLabelsCompoundCommand;
+    }
+
+    /**
+     * Creates a Command to call the layout() method to a
+     * figure if it is a WrappingLabel. This is intended
+     * to refresh the bounds of the children of the WrappingLabel.
+     * Otherwise the text contents of the label might not be redrawn
+     * correctly. The command does nothing if the figure is not
+     * a WrappingLabel.
+     * @author haf
+     * @param labelFigure any IFigure
+     * @return Command that will call layout()
+     */
+    private Command refreshLabel(final IFigure labelFigure) {
+        Command cmd = new Command() {
+            @Override
+            public void execute() {
+                super.execute();
+                // mark the figure as dirty in order that the UpdateManager will redraw it
+                labelFigure.invalidate();
+                }
+        };
+        return cmd;
     }
 
     /**
