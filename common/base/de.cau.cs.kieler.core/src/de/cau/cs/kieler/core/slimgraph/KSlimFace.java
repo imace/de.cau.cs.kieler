@@ -37,7 +37,7 @@ public class KSlimFace extends KSlimGraphElement {
 		 * Creates a border entry for the given edge.
 		 * 
 		 * @param edge edge bordering the containing face
-		 * @param indicates whether the bordering edge is traversed forward
+		 * @param forward indicates whether the bordering edge is traversed forward
 		 */
 		public BorderEntry(KSlimEdge edge, boolean forward) {
 			this.edge = edge;

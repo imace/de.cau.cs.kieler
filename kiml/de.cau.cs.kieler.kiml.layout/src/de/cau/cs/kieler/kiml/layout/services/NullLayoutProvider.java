@@ -36,7 +36,10 @@ public class NullLayoutProvider extends AbstractLayoutProvider {
 	/**
 	 * Does nothing, as this is the NullLayoutProvider.
 	 * 
-	 * @see de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider#doLayout(de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNode, de.cau.cs.kieler.core.alg.IKielerProgressMonitor)
+     * @param layoutNode the parent node which should be laid out
+     * @param progressMonitor progress monitor used to keep track of progress
+     * @throws KielerException if the method fails to perform layout for
+     *     some reason, which should be specified in the exception
 	 */
 	public void doLayout(KNode layoutNode,
 			IKielerProgressMonitor progressMonitor) throws KielerException {
