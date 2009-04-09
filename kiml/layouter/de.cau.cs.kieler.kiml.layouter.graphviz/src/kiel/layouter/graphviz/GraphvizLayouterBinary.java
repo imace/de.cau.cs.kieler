@@ -342,6 +342,9 @@ public class GraphvizLayouterBinary implements GraphvizLayouter {
 			nodeAttributes.put("label", label);
 			nodeAttributes.put("height", height);
 			nodeAttributes.put("width", width);
+			// hardcoded shape value here. Had the case where dot did not handle
+			// a global graph attribute of shape resulting in circles
+			nodeAttributes.put("shape", "box");
 			
 			addNodeToGraph(childNode, nodeAttributes, i);
 			i++;
@@ -893,55 +896,44 @@ public class GraphvizLayouterBinary implements GraphvizLayouter {
              * by GraphViz. Well, actually two with locations.
              */
             for (KLabel label : edge.getLabels()) {
-
-                // head label
                 KShapeLayout shapeLayout = KimlLayoutUtil.getShapeLayout(label);
                 EdgeLabelPlacement labelPlacement = LayoutOptions.getEdgeLabelPlacement(shapeLayout);
+                
+                String labelLoc = "0 0";
+
+                // head label
                 if (labelPlacement == EdgeLabelPlacement.HEAD) {
-                    ;/*
-					  * not possible to get the head label (placement) with
-					  * GraphViz
-					  */
-                }
+					labelLoc = attributes.get(GraphvizAPI.ATTR_HEADLP);
+				}
 
-                /* mid label */
-                else if (labelPlacement == EdgeLabelPlacement.CENTER) {
-                    String midLoc = attributes.get(GraphvizAPI.ATTR_LP);
-                    List<Integer> midInts = string2Ints(midLoc);
-                    KPoint midLocation = KLayoutDataFactory.eINSTANCE
-                            .createKPoint();
-                    if (midInts.size() == 2) {
-                        midLocation = graphviz2KPoint(
-                                midInts.get(0).intValue() + 2, midInts.get(1)
-                                .intValue(), shapeLayout.getWidth(),
-                                shapeLayout.getHeight());
-                    }
-                    shapeLayout.setXpos(midLocation.getX());
-                    shapeLayout.setYpos(midLocation.getY());
-                }
+				/* mid label */
+				if (labelPlacement == EdgeLabelPlacement.CENTER){
+					labelLoc = attributes.get(GraphvizAPI.ATTR_LP);
+				}
 
-                /* tail label */
-                else if (labelPlacement == EdgeLabelPlacement.TAIL) {
-                    String tailLoc = attributes.get(GraphvizAPI.ATTR_TAILLP);
-                    List<Integer> tailInts = string2Ints(tailLoc);
-                    KPoint tailLocation = KLayoutDataFactory.eINSTANCE
-                            .createKPoint();
-                    if (tailInts.size() == 2) {
-                        /* small adjust of size, and therefore of position */
-                        shapeLayout.setHeight(shapeLayout.getHeight() + 7);
-                        tailLocation = graphviz2KPoint(tailInts.get(0)
-                                .intValue(), tailInts.get(1).intValue(),
-                                shapeLayout.getWidth(), shapeLayout.getHeight());
-                    }
-                    shapeLayout.setXpos(tailLocation.getX());
-                    shapeLayout.setYpos(tailLocation.getY());
-                }
-            }
-        } catch (Exception e) {
-            Status myStatus = new Status(IStatus.ERROR, Activator.PLUGIN_ID,
-                    "Graphviz Edge result reading problem.", e);
-            StatusManager.getManager().handle(myStatus, StatusManager.SHOW);
-        }
+				/* tail label */
+				if (labelPlacement == EdgeLabelPlacement.TAIL) {
+					labelLoc = attributes.get(GraphvizAPI.ATTR_TAILLP);
+				}
+					
+				List<Integer> labelInts = string2Ints(labelLoc);
+				KPoint labelLocation = KLayoutDataFactory.eINSTANCE
+						.createKPoint();
+				if (labelInts.size() == 2) {
+				    /* small adjust of size, and therefore of position */
+				    shapeLayout.setHeight(shapeLayout.getHeight() + 7);
+				    labelLocation = graphviz2KPoint(
+		                                labelInts.get(0).intValue(), labelInts.get(1)
+		                                .intValue(), shapeLayout.getWidth(),
+		                                shapeLayout.getHeight());
+				}
+		                shapeLayout.setXpos(labelLocation.getX());
+		                shapeLayout.setYpos(labelLocation.getY());
+			}
+		  }catch(Exception e){
+				Status myStatus = new Status(IStatus.ERROR, Activator.PLUGIN_ID, "Graphviz Edge result reading problem.", e);
+				StatusManager.getManager().handle(myStatus, StatusManager.SHOW);
+			}
 	}
 	
 	/**

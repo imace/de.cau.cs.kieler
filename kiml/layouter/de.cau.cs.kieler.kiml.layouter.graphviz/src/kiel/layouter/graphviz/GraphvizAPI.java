@@ -101,6 +101,11 @@ public final class GraphvizAPI {
      * This is a graphviz attribute.
      */
     protected static final String ATTR_LP            = "lp";
+    
+    /**
+     * This is a graphviz attribute.
+     */
+    protected static final String ATTR_HEADLP            = "head_lp";
 
     /**
      * This is a graphviz attribute.
