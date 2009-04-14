@@ -181,8 +181,9 @@ public class GenericLayoutGraphApplier extends
             Dimension sizeDelta = new PrecisionDimension(newSize.preciseWidth
                     - oldSize.width, newSize.preciseHeight - oldSize.height);
             changeBoundsRequest.setResizeDirection(PositionConstants.CENTER);
-            changeBoundsRequest.setSizeDelta(sizeDelta.scale(zoomLevel));
-
+            sizeDelta.performScale(zoomLevel);
+            changeBoundsRequest.setSizeDelta(sizeDelta);
+            
             Point oldLocation = nodeEditPart.getFigure().getBounds()
                     .getLocation();
             PrecisionPoint newLocation = new PrecisionPoint(nodeLayout
@@ -190,7 +191,8 @@ public class GenericLayoutGraphApplier extends
 
             Point moveDelta = new PrecisionPoint(newLocation.preciseX
                     - oldLocation.x, newLocation.preciseY - oldLocation.y);
-            changeBoundsRequest.setMoveDelta(moveDelta.scale(zoomLevel));
+            moveDelta.performScale(zoomLevel);
+            changeBoundsRequest.setMoveDelta(moveDelta);
             changeBoundsRequest.setLocation(newLocation);
 
             nodesCompoundCommand.add(nodeEditPart
@@ -226,7 +228,8 @@ public class GenericLayoutGraphApplier extends
 
             Point moveDelta = new PrecisionPoint(newLocation.preciseX
                     - oldLocation.x, newLocation.preciseY - oldLocation.y);
-            changeBoundsRequest.setMoveDelta(moveDelta.scale(zoomLevel));
+            moveDelta.performScale(zoomLevel);
+            changeBoundsRequest.setMoveDelta(moveDelta);
             changeBoundsRequest.setLocation(newLocation);
 
             // set the automatic layout option in the extended data
@@ -430,7 +433,8 @@ public class GenericLayoutGraphApplier extends
 
                 Point moveDelta = new PrecisionPoint(newLocation.preciseX
                         - oldLocation.x, newLocation.preciseY - oldLocation.y);
-                changeBoundsRequest.setMoveDelta(moveDelta.scale(zoomLevel));
+                moveDelta.performScale(zoomLevel);
+                changeBoundsRequest.setMoveDelta(moveDelta);
                 changeBoundsRequest.setLocation(newLocation);
 
                 // haf - 2009-03-27
