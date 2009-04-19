@@ -5,7 +5,7 @@ import java.util.List;
 import org.eclipse.draw2d.RotatableDecoration;
 
 // A ConditionalConnectionLook contains decorations and conditions which
-// indicate when the decos are to be used
+// indicate when the decorations are to be used
 public class ConditionalConnectionLook {
 
 	private List<Condition> conditions;

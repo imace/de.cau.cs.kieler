@@ -17,7 +17,7 @@ public class AttributeAwareFigure extends Figure implements Adapter {
 
 	// This list contains all possible figures and when they are to be displayed	
 	protected List<ConditionalFigure> conditionalFigureList;
-	// This figure's corrresponding model element
+	// This figure's corresponding model element
 	protected EObject modelElement;
 	// The default figure that is to be displayed when no conditionalFigure's 
 	// conditions are all fulfilled
@@ -84,7 +84,8 @@ public class AttributeAwareFigure extends Figure implements Adapter {
 		return false;
 	}
 
-	// If the model element's properties have changed,  adjust currentFigure
+	// If the model element's properties have changed, adjust currentFigure
+	// remove ugly try and catch and substitute with guard!!!
 	public void notifyChanged(Notification notification) {
 		try {	
 			for (ConditionalFigure cf : conditionalFigureList) {

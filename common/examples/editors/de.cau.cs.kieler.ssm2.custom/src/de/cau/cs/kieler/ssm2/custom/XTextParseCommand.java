@@ -53,7 +53,7 @@ public class XTextParseCommand extends AbstractTransactionalCommand {
 				Action action = (Action) (((EObjectAdapter)element).getRealObject());
 				
 				// Only proceed if an action has been created and its signals have
-				// already beeb defined within the parent state
+				// already been defined within the parent state
 				if (newAction == null) {
 					action.setTrigger(null);
 					action.getEmissions().clear();
