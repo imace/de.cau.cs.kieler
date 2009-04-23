@@ -3,5 +3,11 @@
 <plugin>
    <extension-point id="kimlLayoutProvider" name="KIML Layout Provider" schema="schema/kimlLayoutProvider.exsd"/>
    <extension-point id="kimlLayoutListener" name="KIML Layout Listener" schema="schema/kimlLayoutListener.exsd"/>
+   <extension
+         point="de.cau.cs.kieler.kiml.layout.kimlLayoutProvider">
+      <kimlLayoutProvider
+            class="de.cau.cs.kieler.kiml.layout.util.BoxLayoutProvider">
+      </kimlLayoutProvider>
+   </extension>
 
 </plugin>

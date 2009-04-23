@@ -13,6 +13,7 @@
  */
 package de.cau.cs.kieler.kiml.layout.options;
 
+import de.cau.cs.kieler.core.kgraph.KFloatOption;
 import de.cau.cs.kieler.core.kgraph.KGraphFactory;
 import de.cau.cs.kieler.core.kgraph.KIntOption;
 import de.cau.cs.kieler.core.kgraph.KObjectOption;
@@ -278,6 +279,43 @@ public class LayoutOptions {
             sizeOption.setKey(FIXED_SIZE);
             layoutData.getOptions().add(sizeOption);
         }
+    }
+    
+    /** layout option key: minimal distance between elements */
+    public final static String MIN_SPACING = "minSpacing";
+    
+    /**
+     * Returns the minimal spacing for a given layout data instance.
+     * 
+     * @param layoutData layout data for a parent node
+     * @return the minimal spacing for the given layout data, or
+     *     {@code NaN} if there is no such option
+     */
+    public static float getMinSpacing(KLayoutData layoutData) {
+        KFloatOption spacingOption = (KFloatOption)layoutData.getOption(
+                MIN_SPACING);
+        if (spacingOption == null)
+            return Float.NaN;
+        else
+            return spacingOption.getValue();
+    }
+    
+    /**
+     * Sets the minimal spacing for the given layout data instance.
+     * 
+     * @param layoutData layout data for a parent node
+     * @param spacing minimal spacing to set
+     */
+    public static void setMinSpacing(KLayoutData layoutData,
+            float spacing) {
+        KFloatOption spacingOption = (KFloatOption)layoutData.getOption(
+                MIN_SPACING);
+        if (spacingOption == null) {
+            spacingOption = KGraphFactory.eINSTANCE.createKFloatOption();
+            spacingOption.setKey(MIN_SPACING);
+            layoutData.getOptions().add(spacingOption);
+        }
+        spacingOption.setValue(spacing);
     }
     
 }

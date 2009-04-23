@@ -13,9 +13,13 @@
  */
 package de.cau.cs.kieler.kiml.layout.services;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import de.cau.cs.kieler.core.KielerException;
 import de.cau.cs.kieler.core.alg.IKielerProgressMonitor;
 import de.cau.cs.kieler.core.kgraph.KNode;
+import de.cau.cs.kieler.core.kgraph.KOption;
 import de.cau.cs.kieler.kiml.layout.options.LayoutType;
 
 /**
@@ -45,6 +49,8 @@ public abstract class AbstractLayoutProvider {
 	
 	/** indicates whether this layout provider is enabled in the UI */
 	private boolean enabled = true;
+	/** list of layout options to use as default */
+	private List<KOption> defaultOptions = new LinkedList<KOption>();
 
 	/**
 	 * Performs the actual layout process, that is attaches layout
@@ -97,6 +103,31 @@ public abstract class AbstractLayoutProvider {
 	 */
 	public final boolean isEnabled() {
 		return enabled;
+	}
+	
+	/**
+	 * Returns the list of default options. This list may be
+	 * arbitrarily modified to set or remove options for the
+	 * layout provider.
+	 * 
+	 * @return default options for the layout provider
+	 */
+	public List<KOption> getDefaultOptions() {
+	    return defaultOptions;
+	}
+	
+	/**
+	 * Returns the first default option with given key.
+	 * 
+	 * @param key key for the option to look up
+	 * @return the associated option, or null if there is none
+	 */
+	protected KOption getDefault(String key) {
+	    for (KOption option : defaultOptions) {
+	        if (option.getKey().equals(key))
+	            return option;
+	    }
+	    return null;
 	}
 	
 }

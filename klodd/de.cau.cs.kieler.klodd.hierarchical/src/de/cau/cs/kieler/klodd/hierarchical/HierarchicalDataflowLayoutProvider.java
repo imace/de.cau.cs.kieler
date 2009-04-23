@@ -20,7 +20,9 @@ import de.cau.cs.kieler.core.IKielerPreferenceStore;
 import de.cau.cs.kieler.core.KielerException;
 import de.cau.cs.kieler.core.alg.IKielerProgressMonitor;
 import de.cau.cs.kieler.core.kgraph.KEdge;
+import de.cau.cs.kieler.core.kgraph.KFloatOption;
 import de.cau.cs.kieler.core.kgraph.KNode;
+import de.cau.cs.kieler.core.kgraph.KOption;
 import de.cau.cs.kieler.core.kgraph.KPort;
 import de.cau.cs.kieler.core.kgraph.KPortType;
 import de.cau.cs.kieler.core.slimgraph.KSlimEdge;
@@ -57,8 +59,6 @@ public class HierarchicalDataflowLayoutProvider extends
 	/** name of the KLoDD layouters collection */
 	public static final String COLLECTION_NAME = "KLoDD Layouters";
 	
-	/** preference identifier for minimal distance */
-	public static final String PREF_MIN_DIST = "klodd.hierarchical.minDist";
 	/** default value for minimal distance */
 	public static final float DEF_MIN_DIST = 15.0f; 
 	/** preference identifier for cycle remover module */
@@ -86,9 +86,6 @@ public class HierarchicalDataflowLayoutProvider extends
 		HierarchicalDataflowLayoutProvider.preferenceStore = preferenceStore;
 	}
 
-	/** the minimal distance between two nodes or edges */
-	private float minDist;
-	
 	/** the graph converter module */
 	private GraphConverter graphConverter = new GraphConverter();
 	/** the cycle remover module */
@@ -113,6 +110,16 @@ public class HierarchicalDataflowLayoutProvider extends
 		progressMonitor.begin("Hierarchical layout", 75);
 		// get the currently configured modules
 		updateModules();
+		// set option for minimal distance
+		float minDist = LayoutOptions.getMinSpacing(
+		        KimlLayoutUtil.getShapeLayout(layoutNode));
+		if (Float.isNaN(minDist)) {
+            KOption spacingOption = getDefault(LayoutOptions.MIN_SPACING);
+            if (spacingOption instanceof KFloatOption)
+                minDist = ((KFloatOption)spacingOption).getValue();
+            else
+                minDist = DEF_MIN_DIST;
+		}
 
 		// set the size of each non-empty node
 		setNodeSizes(layoutNode);
@@ -183,11 +190,6 @@ public class HierarchicalDataflowLayoutProvider extends
 			nodePlacer = new BalancingNodePlacer(new BasicNodePlacer());
 		if (edgeRouter == null)
 			edgeRouter = new RectilinearEdgeRouter(new SortingLayerwiseEdgePlacer());
-		
-		if (preferenceStore != null)
-			minDist = preferenceStore.getFloat(PREF_MIN_DIST);
-		else
-			minDist = DEF_MIN_DIST;
 	}
 	
 	/**
