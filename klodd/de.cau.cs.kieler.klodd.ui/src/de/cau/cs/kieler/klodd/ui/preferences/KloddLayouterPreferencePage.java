@@ -21,10 +21,8 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
-import de.cau.cs.kieler.core.ui.util.FloatFieldEditor;
 import de.cau.cs.kieler.kiml.ui.AbstractKimlLayoutProviderPreferencePage;
 import de.cau.cs.kieler.klodd.hierarchical.HierarchicalDataflowLayoutProvider;
-import de.cau.cs.kieler.klodd.orthogonal.OrthogonalDataflowLayoutProvider;
 import de.cau.cs.kieler.klodd.ui.KloddUIPlugin;
 import de.cau.cs.kieler.klodd.ui.Messages;
 
@@ -58,11 +56,6 @@ public class KloddLayouterPreferencePage extends
 		Group hieraGroup = new Group(this.getFieldEditorParent(), SWT.NONE);
 		hieraGroup.setText(Messages.getString("klodd.ui.1")); //$NON-NLS-1$
 
-		FloatFieldEditor minDistEditor = new FloatFieldEditor(
-				HierarchicalDataflowLayoutProvider.PREF_MIN_DIST,
-				Messages.getString("klodd.ui.2"), hieraGroup); //$NON-NLS-1$
-		addField(minDistEditor);
-		
 		FieldEditor cycleRemEditor = new RadioGroupFieldEditor(
 				HierarchicalDataflowLayoutProvider.PREF_CYCLE_REM,
 				Messages.getString("klodd.ui.5"), 1, new String[][] { //$NON-NLS-1$
@@ -94,11 +87,6 @@ public class KloddLayouterPreferencePage extends
 		Group orthoGroup = new Group(this.getFieldEditorParent(), SWT.NONE);
 		orthoGroup.setText(Messages.getString("klodd.ui.3")); //$NON-NLS-1$
 
-		minDistEditor = new FloatFieldEditor(
-				OrthogonalDataflowLayoutProvider.PREF_MIN_DIST,
-				Messages.getString("klodd.ui.4"), orthoGroup); //$NON-NLS-1$
-		addField(minDistEditor);
-		
 		orthoGroup.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, true,
 				false, 2, 1));
 		gridLayout = new GridLayout(2, true);
