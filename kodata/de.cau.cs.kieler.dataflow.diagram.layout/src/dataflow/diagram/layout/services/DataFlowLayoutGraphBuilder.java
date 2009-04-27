@@ -37,7 +37,6 @@ import de.cau.cs.kieler.kiml.layout.klayoutdata.KShapeLayout;
 import de.cau.cs.kieler.kiml.layout.options.LayoutDirection;
 import de.cau.cs.kieler.kiml.layout.options.LayoutOptions;
 import de.cau.cs.kieler.kiml.layout.options.PortConstraints;
-import de.cau.cs.kieler.kiml.layout.options.PortSide;
 import de.cau.cs.kieler.kiml.layout.util.KimlLayoutUtil;
 import de.cau.cs.kieler.kiml.ui.helpers.KimlGMFLayoutHintHelper;
 import de.cau.cs.kieler.kiml.ui.layout.AbstractLayoutGraphBuilder;
@@ -63,14 +62,12 @@ public class DataFlowLayoutGraphBuilder extends AbstractLayoutGraphBuilder {
 		INPUT_TO_OP, OP_TO_OP, OP_TO_OUTPUT
 	}
 
-	/** preference: preserve port positions for empty boxes */
-	private boolean fixedOuterPortsPref;
-	/** preference: preserve port positions for non-empty boxes */
-	private boolean fixedInnerPortsPref;
 	/** preference: preserve box size for empty boxes */
 	private boolean fixedNodeSizePref;
-	/** preference: fixed port sides for non-empty boxes */
-	private boolean fixedPortSidesPref;
+	/** preference: port constraints for empty boxes */
+	private PortConstraints emptyPortConstraints;
+	/** preference: port constraints for non-empty boxes */
+	private PortConstraints nonemptyPortConstraints;
 	/** preference: alternating layout direction */
 	private boolean alternateHVPref;
 
@@ -243,9 +240,6 @@ public class DataFlowLayoutGraphBuilder extends AbstractLayoutGraphBuilder {
 				KShapeLayout portLayout = KimlLayoutUtil.getShapeLayout(port);
 				createRelativeLayout(portLayout, borderItem.getFigure(),
 						nodeLayout.getXpos(), nodeLayout.getYpos());
-				LayoutOptions.setPortSide(portLayout, getPortSide(
-				        nodeLayout,	portLayout, port.getType(),
-				        layoutDirection));
 				// set the port label
 				for (Object portChild : borderItem.getChildren()) {
 					if (portChild instanceof ITextAwareEditPart) {
@@ -279,16 +273,11 @@ public class DataFlowLayoutGraphBuilder extends AbstractLayoutGraphBuilder {
 
 		// set layout options
 		if (subChildren != null && !subChildren.isEmpty()) {
-			if (fixedOuterPortsPref)
-				LayoutOptions.setPortConstraints(nodeLayout,
-				        PortConstraints.FIXED_POS);
+			LayoutOptions.setPortConstraints(nodeLayout,
+			        nonemptyPortConstraints);
 		} else {
-			if (fixedInnerPortsPref)
-			    LayoutOptions.setPortConstraints(nodeLayout,
-                        PortConstraints.FIXED_POS);
-			else if (fixedPortSidesPref)
-			    LayoutOptions.setPortConstraints(nodeLayout,
-                        PortConstraints.FIXED_SIDE);
+		    LayoutOptions.setPortConstraints(nodeLayout,
+		            emptyPortConstraints);
 			if (fixedNodeSizePref)
 				LayoutOptions.setFixedSize(nodeLayout);
 		}
@@ -411,57 +400,6 @@ public class DataFlowLayoutGraphBuilder extends AbstractLayoutGraphBuilder {
 		edgeLayout.setTargetPoint(targetPoint);
 	}
 
-	/**
-	 * Determines the port placement from a given node and port layout.
-	 * 
-	 * @param nodeLayout
-	 *            layout object of the corresponding node
-	 * @param portLayout
-	 *            layout object of the corresponding port
-	 * @param portType
-	 *            port type
-	 * @param layoutDirection
-	 *            layout direction
-	 * @return port placement
-	 */
-	private PortSide getPortSide(KShapeLayout nodeLayout,
-			KShapeLayout portLayout, KPortType portType,
-			LayoutDirection layoutDirection) {
-		// determine port placement from port position
-		float nodeWidth = nodeLayout.getWidth();
-		float nodeHeight = nodeLayout.getHeight();
-		float relx = (portLayout.getXpos() + portLayout.getWidth() / 2)
-				- (nodeWidth / 2);
-		float rely = (portLayout.getYpos() + portLayout.getHeight() / 2)
-				- (nodeHeight / 2);
-
-		if (relx > nodeWidth / 4 && rely > -nodeHeight / 2 + 3
-				&& rely < nodeHeight / 2 - 3)
-			return PortSide.EAST;
-		if (relx < -nodeWidth / 4 && rely > -nodeHeight / 2 + 3
-				&& rely < nodeHeight / 2 - 3)
-			return PortSide.WEST;
-		if (rely > nodeHeight / 4 && relx > -nodeWidth / 2 + 3
-				&& relx < nodeWidth / 2 - 3)
-			return PortSide.SOUTH;
-		if (rely < -nodeHeight / 4 && relx > -nodeWidth / 2 + 3
-				&& relx < nodeWidth / 2 - 3)
-			return PortSide.NORTH;
-
-		// determine port placement from port type
-		if (layoutDirection == LayoutDirection.VERTICAL) {
-			if (portType == KPortType.INPUT)
-				return PortSide.NORTH;
-			else
-				return PortSide.SOUTH;
-		} else {
-			if (portType == KPortType.INPUT)
-				return PortSide.WEST;
-			else
-				return PortSide.EAST;
-		}
-	}
-
 	@Override
 	protected GraphicalEditPart getLayoutRootPart(Object target) {
 		GraphicalEditPart root = null;
@@ -568,19 +506,31 @@ public class DataFlowLayoutGraphBuilder extends AbstractLayoutGraphBuilder {
 		// load layout preferences
 		IPreferenceStore preferenceStore = DataflowDiagramLayoutPlugin
 				.getDefault().getPreferenceStore();
-		fixedOuterPortsPref = preferenceStore
-				.getBoolean(DiagramLayoutPreferencePage.FIXED_OUTER_PORTS);
 		fixedNodeSizePref = preferenceStore
 				.getBoolean(DiagramLayoutPreferencePage.FIXED_NODE_SIZE);
-		fixedInnerPortsPref = preferenceStore.getString(
-				DiagramLayoutPreferencePage.PORT_CONSTRAINTS).equals(
-				DiagramLayoutPreferencePage.VAL_FIXED_PORTS);
-		fixedPortSidesPref = preferenceStore.getString(
-				DiagramLayoutPreferencePage.PORT_CONSTRAINTS).equals(
-						DiagramLayoutPreferencePage.VAL_FIXED_SIDES);
 		alternateHVPref = preferenceStore.getString(
 				DiagramLayoutPreferencePage.LAYOUT_DIRECTION).equals(
 				DiagramLayoutPreferencePage.VAL_ALTERNATING);
+		
+		String emptyPortVal = preferenceStore.getString(
+		        DiagramLayoutPreferencePage.EMPTY_PORT_CONSTRAINTS);
+		if (emptyPortVal.equals(DiagramLayoutPreferencePage.VAL_PORT_FIXED_POS))
+		    emptyPortConstraints = PortConstraints.FIXED_POS;
+		else if (emptyPortVal.equals(DiagramLayoutPreferencePage.VAL_PORT_FIXED_ORDER))
+            emptyPortConstraints = PortConstraints.FIXED_ORDER;
+		else if (emptyPortVal.equals(DiagramLayoutPreferencePage.VAL_PORT_FIXED_SIDE))
+            emptyPortConstraints = PortConstraints.FIXED_SIDE;
+		else emptyPortConstraints = PortConstraints.FREE_PORTS;
+		
+		String nonemptyPortVal = preferenceStore.getString(
+                DiagramLayoutPreferencePage.NONEMPTY_PORT_CONSTRAINTS);
+        if (nonemptyPortVal.equals(DiagramLayoutPreferencePage.VAL_PORT_FIXED_POS))
+            nonemptyPortConstraints = PortConstraints.FIXED_POS;
+        else if (nonemptyPortVal.equals(DiagramLayoutPreferencePage.VAL_PORT_FIXED_ORDER))
+            nonemptyPortConstraints = PortConstraints.FIXED_ORDER;
+        else if (nonemptyPortVal.equals(DiagramLayoutPreferencePage.VAL_PORT_FIXED_SIDE))
+            nonemptyPortConstraints = PortConstraints.FIXED_SIDE;
+        else nonemptyPortConstraints = PortConstraints.FREE_PORTS;
 	}
 
 	/* (non-Javadoc)

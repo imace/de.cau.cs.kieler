@@ -17,10 +17,11 @@ public class LayoutPreferenceInitializer extends AbstractPreferenceInitializer {
 	 */
 	public void initializeDefaultPreferences() {
 		IPreferenceStore preferenceStore = DataflowDiagramLayoutPlugin.getDefault().getPreferenceStore();
-		preferenceStore.setDefault(DiagramLayoutPreferencePage.FIXED_OUTER_PORTS, false);
 		preferenceStore.setDefault(DiagramLayoutPreferencePage.FIXED_NODE_SIZE, true);
-		preferenceStore.setDefault(DiagramLayoutPreferencePage.PORT_CONSTRAINTS,
-				DiagramLayoutPreferencePage.VAL_FIXED_PORTS);
+		preferenceStore.setDefault(DiagramLayoutPreferencePage.EMPTY_PORT_CONSTRAINTS,
+				DiagramLayoutPreferencePage.VAL_PORT_FIXED_POS);
+        preferenceStore.setDefault(DiagramLayoutPreferencePage.NONEMPTY_PORT_CONSTRAINTS,
+                DiagramLayoutPreferencePage.VAL_FREE_PORTS);
 		preferenceStore.setDefault(DiagramLayoutPreferencePage.LAYOUT_DIRECTION,
 				DiagramLayoutPreferencePage.VAL_HORIZONTAL);
 	}

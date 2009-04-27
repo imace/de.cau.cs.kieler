@@ -21,10 +21,9 @@ import de.cau.cs.kieler.core.KielerException;
 import de.cau.cs.kieler.core.alg.IKielerProgressMonitor;
 import de.cau.cs.kieler.core.kgraph.KEdge;
 import de.cau.cs.kieler.core.kgraph.KFloatOption;
+import de.cau.cs.kieler.core.kgraph.KIntOption;
 import de.cau.cs.kieler.core.kgraph.KNode;
 import de.cau.cs.kieler.core.kgraph.KOption;
-import de.cau.cs.kieler.core.kgraph.KPort;
-import de.cau.cs.kieler.core.kgraph.KPortType;
 import de.cau.cs.kieler.core.slimgraph.KSlimEdge;
 import de.cau.cs.kieler.core.slimgraph.KSlimGraph;
 import de.cau.cs.kieler.core.slimgraph.alg.DFSCycleRemover;
@@ -36,12 +35,9 @@ import de.cau.cs.kieler.kiml.layout.klayoutdata.KPoint;
 import de.cau.cs.kieler.kiml.layout.options.LayoutDirection;
 import de.cau.cs.kieler.kiml.layout.options.LayoutOptions;
 import de.cau.cs.kieler.kiml.layout.options.LayoutType;
-import de.cau.cs.kieler.kiml.layout.options.PortConstraints;
-import de.cau.cs.kieler.kiml.layout.options.PortSide;
 import de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider;
 import de.cau.cs.kieler.kiml.layout.util.GraphConverter;
 import de.cau.cs.kieler.kiml.layout.util.KimlLayoutUtil;
-import de.cau.cs.kieler.kiml.layout.util.LayoutGraphUtil;
 import de.cau.cs.kieler.klodd.hierarchical.impl.*;
 import de.cau.cs.kieler.klodd.hierarchical.modules.*;
 import de.cau.cs.kieler.klodd.hierarchical.structures.LayeredGraph;
@@ -121,8 +117,8 @@ public class HierarchicalDataflowLayoutProvider extends
                 minDist = DEF_MIN_DIST;
 		}
 
-		// set the size of each non-empty node
-		setNodeSizes(layoutNode);
+		// perform some pre-processing
+		preProcess(layoutNode);
 		// create a KIELER graph for cycle removal
 		graphConverter.reset(progressMonitor.subTask(5));
 		KSlimGraph slimGraph = graphConverter.convertGraph(layoutNode, true);
@@ -193,40 +189,39 @@ public class HierarchicalDataflowLayoutProvider extends
 	}
 	
 	/**
-	 * Sets the size of each non-empty node, depending on its layout options.
+	 * Performs some pre-processing for the elements of the given
+	 * parent node.
 	 * 
 	 * @param parentNode parent layout node
 	 */
-	private void setNodeSizes(KNode parentNode) {
+	private void preProcess(KNode parentNode) {
+	    // get layout direction from default options if needed
+	    KLayoutData parentLayout = KimlLayoutUtil.getShapeLayout(parentNode);
+	    LayoutDirection layoutDirection = LayoutOptions.getLayoutDirection(parentLayout);
+	    if (layoutDirection == LayoutDirection.UNDEFINED) {
+	        KIntOption directionOption = (KIntOption)getDefault(LayoutOptions.LAYOUT_DIRECTION);
+	        if (directionOption != null) {
+	            layoutDirection = LayoutDirection.valueOf(
+	                    directionOption.getValue());
+	            LayoutOptions.setLayoutDirection(parentLayout,
+	                    layoutDirection);
+	        }
+	    }
+	    
 		for (KNode node : parentNode.getChildren()) {
-			// set port sides if not fixed
-		    KLayoutData layoutData = KimlLayoutUtil.getShapeLayout(node);
-		    PortConstraints portConstraints = LayoutOptions.getPortConstraints(layoutData);
+			// fill port data for the child node
+		    KimlLayoutUtil.fillPortInfo(node, layoutDirection);
+			
+			// set node size if not fixed
 			if (node.getChildren().isEmpty()
-					&& portConstraints != PortConstraints.FIXED_POS 
-					&& portConstraints != PortConstraints.FIXED_SIDE) {
-				if (LayoutOptions.getLayoutDirection(layoutData)
-				        == LayoutDirection.VERTICAL) {
-					for (KPort port : node.getPorts()) {
-						LayoutOptions.setPortSide(KimlLayoutUtil.getShapeLayout(port),
-						        port.getType() == KPortType.INPUT ? PortSide.NORTH
-								: PortSide.SOUTH);
-					}
-				}
-				else {
-					for (KPort port : node.getPorts()) {
-					    LayoutOptions.setPortSide(KimlLayoutUtil.getShapeLayout(port),
-					            port.getType() == KPortType.INPUT ? PortSide.WEST
-								: PortSide.EAST);
-					}
-				}
-			}
-			// set node sizes if not fixed
-			if (node.getChildren().isEmpty()
-					&& !LayoutOptions.isFixedSize(layoutData)) {
-				LayoutGraphUtil.resizeNode(node);
+					&& !LayoutOptions.isFixedSize(
+					KimlLayoutUtil.getShapeLayout(node))) {
+				KimlLayoutUtil.resizeNode(node);
 			}
 		}
+		
+		// fill port data for the parent node
+		KimlLayoutUtil.fillPortInfo(parentNode, layoutDirection);
 	}
 	
 	/**

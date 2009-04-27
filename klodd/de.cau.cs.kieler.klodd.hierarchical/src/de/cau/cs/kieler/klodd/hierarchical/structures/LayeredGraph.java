@@ -62,8 +62,8 @@ public class LayeredGraph {
 	private List<LinearSegment> linearSegments = new LinkedList<LinearSegment>();
 	/** layout direction for this layered graph: HORIZONTAL or VERTICAL */
 	private LayoutDirection layoutDirection;
-	/** are the external ports of this layered graph fixed? */
-	private boolean fixedExternalPorts;
+	/** port constraints for the external ports */
+	private PortConstraints externalPortConstraints;
 	/** position of this layered graph */
 	private KPoint position;
 	
@@ -83,8 +83,7 @@ public class LayeredGraph {
 		layoutDirection = LayoutOptions.getLayoutDirection(layoutData);
 		if (layoutDirection == LayoutDirection.UNDEFINED)
 		    layoutDirection = LayoutDirection.HORIZONTAL;
-		fixedExternalPorts = LayoutOptions.getPortConstraints(layoutData)
-		        != PortConstraints.FREE_PORTS;
+		externalPortConstraints = LayoutOptions.getPortConstraints(layoutData);
 	}
 	
 	/*
@@ -289,12 +288,12 @@ public class LayeredGraph {
 	}
 
 	/**
-	 * Are the external ports of this layered graph fixed?
+	 * Returns the port constraints for external ports.
 	 * 
-	 * @return true if external ports are fixed
+	 * @return the port constraints for external ports
 	 */
-	public boolean areExternalPortsFixed() {
-		return fixedExternalPorts;
+	public PortConstraints getExternalPortConstraints() {
+	    return externalPortConstraints;
 	}
 	
 	/**

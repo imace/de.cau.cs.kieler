@@ -26,9 +26,9 @@ import de.cau.cs.kieler.kiml.layout.klayoutdata.KPoint;
 import de.cau.cs.kieler.kiml.layout.klayoutdata.KShapeLayout;
 import de.cau.cs.kieler.kiml.layout.options.LayoutDirection;
 import de.cau.cs.kieler.kiml.layout.options.LayoutOptions;
+import de.cau.cs.kieler.kiml.layout.options.PortConstraints;
 import de.cau.cs.kieler.kiml.layout.options.PortSide;
 import de.cau.cs.kieler.kiml.layout.util.KimlLayoutUtil;
-import de.cau.cs.kieler.kiml.layout.util.LayoutGraphUtil;
 import de.cau.cs.kieler.klodd.hierarchical.modules.IEdgeRouter;
 import de.cau.cs.kieler.klodd.hierarchical.modules.ILayerwiseEdgePlacer;
 import de.cau.cs.kieler.klodd.hierarchical.structures.*;
@@ -586,7 +586,8 @@ public class RectilinearEdgeRouter extends AbstractAlgorithm implements
 		float offsetY = -layeredGraph.getPosition().getY();
 		
 		// choose a placement for non-fixed ports
-		if (!layeredGraph.areExternalPortsFixed()) {
+		if (layeredGraph.getExternalPortConstraints()
+		        != PortConstraints.FIXED_POS) {
 			List<KPoint> northPorts = new LinkedList<KPoint>();
 			List<KPoint> eastPorts = new LinkedList<KPoint>();
 			List<KPoint> southPorts = new LinkedList<KPoint>();
@@ -611,37 +612,37 @@ public class RectilinearEdgeRouter extends AbstractAlgorithm implements
 			}
 			if (layoutDirection == LayoutDirection.VERTICAL) {
 				if (layer.rank == 0) {
-					LayoutGraphUtil.placePoints(westPorts, 0.0f,
+				    KimlLayoutUtil.placePoints(westPorts, 0.0f,
 							layeredGraph.lengthwiseDim / 2, offsetY, true, true);
-					LayoutGraphUtil.placePoints(eastPorts, 0.0f,
+				    KimlLayoutUtil.placePoints(eastPorts, 0.0f,
 							layeredGraph.lengthwiseDim / 2, offsetY, true, false);
-					LayoutGraphUtil.placePoints(southPorts, maxOutputPos,
+				    KimlLayoutUtil.placePoints(southPorts, maxOutputPos,
 							layeredGraph.crosswiseDim + offsetX, 0.0f, false, true);
 				}
 				else {
-					LayoutGraphUtil.placePoints(westPorts, layeredGraph.lengthwiseDim / 2,
+				    KimlLayoutUtil.placePoints(westPorts, layeredGraph.lengthwiseDim / 2,
 							layeredGraph.lengthwiseDim, offsetY, true, true);
-					LayoutGraphUtil.placePoints(eastPorts, layeredGraph.lengthwiseDim / 2,
+				    KimlLayoutUtil.placePoints(eastPorts, layeredGraph.lengthwiseDim / 2,
 							layeredGraph.lengthwiseDim, offsetY, true, false);
-					LayoutGraphUtil.placePoints(northPorts, maxInputPos,
+				    KimlLayoutUtil.placePoints(northPorts, maxInputPos,
 							layeredGraph.crosswiseDim + offsetX, 0.0f, false, true);
 				}
 			}
 			else {
 				if (layer.rank == 0) {
-					LayoutGraphUtil.placePoints(northPorts, 0.0f,
+				    KimlLayoutUtil.placePoints(northPorts, 0.0f,
 							layeredGraph.lengthwiseDim / 2, offsetX, false, false);
-					LayoutGraphUtil.placePoints(southPorts, 0.0f,
+				    KimlLayoutUtil.placePoints(southPorts, 0.0f,
 							layeredGraph.lengthwiseDim / 2, offsetX, false, true);
-					LayoutGraphUtil.placePoints(eastPorts, maxOutputPos,
+				    KimlLayoutUtil.placePoints(eastPorts, maxOutputPos,
 							layeredGraph.crosswiseDim + offsetY, 0.0f, true, false);
 				}
 				else {
-					LayoutGraphUtil.placePoints(northPorts, layeredGraph.lengthwiseDim / 2,
+				    KimlLayoutUtil.placePoints(northPorts, layeredGraph.lengthwiseDim / 2,
 							layeredGraph.lengthwiseDim, offsetX, false, true);
-					LayoutGraphUtil.placePoints(southPorts, layeredGraph.lengthwiseDim / 2,
+				    KimlLayoutUtil.placePoints(southPorts, layeredGraph.lengthwiseDim / 2,
 							layeredGraph.lengthwiseDim, offsetX, false, false);
-					LayoutGraphUtil.placePoints(westPorts, maxInputPos,
+				    KimlLayoutUtil.placePoints(westPorts, maxInputPos,
 							layeredGraph.crosswiseDim + offsetY, 0.0f, true, false);
 				}
 			}

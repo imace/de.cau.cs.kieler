@@ -25,6 +25,7 @@ import de.cau.cs.kieler.kiml.layout.klayoutdata.KPoint;
 import de.cau.cs.kieler.kiml.layout.klayoutdata.KShapeLayout;
 import de.cau.cs.kieler.kiml.layout.options.LayoutDirection;
 import de.cau.cs.kieler.kiml.layout.options.LayoutOptions;
+import de.cau.cs.kieler.kiml.layout.options.PortConstraints;
 import de.cau.cs.kieler.kiml.layout.options.PortSide;
 import de.cau.cs.kieler.kiml.layout.util.KimlLayoutUtil;
 
@@ -108,7 +109,8 @@ public class LayerConnection {
 		// subtract insets values from bend points near fixed external ports
 		boolean subSourceXInset = false, subSourceYInset = false,
 			subTargetXInset = false, subTargetYInset = false;
-		if (layeredGraph.areExternalPortsFixed()) {
+		if (layeredGraph.getExternalPortConstraints()
+		        == PortConstraints.FIXED_POS) {
 			if (sourcePort != null && sourcePort.getNode()
 			        == layeredGraph.getParentNode()) {
 			    PortSide sourceSide = LayoutOptions.getPortSide(sourcePortLayout);

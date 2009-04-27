@@ -24,6 +24,7 @@ import de.cau.cs.kieler.kiml.layout.klayoutdata.KPoint;
 import de.cau.cs.kieler.kiml.layout.klayoutdata.KShapeLayout;
 import de.cau.cs.kieler.kiml.layout.options.LayoutDirection;
 import de.cau.cs.kieler.kiml.layout.options.LayoutOptions;
+import de.cau.cs.kieler.kiml.layout.options.PortConstraints;
 import de.cau.cs.kieler.kiml.layout.options.PortSide;
 import de.cau.cs.kieler.kiml.layout.util.KimlLayoutUtil;
 import de.cau.cs.kieler.klodd.hierarchical.modules.INodePlacer;
@@ -116,7 +117,8 @@ public class BasicNodePlacer extends AbstractAlgorithm implements INodePlacer {
 	private LinearSegment[] sortLinearSegments(LayeredGraph layeredGraph) {
 		// create and initialize segment ordering graph
 		LinearSegment[] linearSegments;
-		if (layeredGraph.areExternalPortsFixed()) {
+		if (layeredGraph.getExternalPortConstraints()
+		        == PortConstraints.FIXED_POS) {
 			List<LinearSegment> filteredSegments = new LinkedList<LinearSegment>();
 			for (LinearSegment segment : layeredGraph.getLinearSegments()) {
 				if (segment.elements.size() == 1) {
@@ -142,7 +144,8 @@ public class BasicNodePlacer extends AbstractAlgorithm implements INodePlacer {
 		
 		// create edges in the segment ordering graph
 		for (Layer layer : layeredGraph.getLayers()) {
-			if (!(layeredGraph.areExternalPortsFixed()
+			if (!(layeredGraph.getExternalPortConstraints()
+	                == PortConstraints.FIXED_POS
 					&& (layer.rank == 0 || layer.height == 0))) {
 				Iterator<LayerElement> elemIter = layer.getElements().iterator();
 				LayerElement elem1 = elemIter.next();
@@ -217,7 +220,8 @@ public class BasicNodePlacer extends AbstractAlgorithm implements INodePlacer {
 	 */
 	private void processExternalLayer(Layer layer) {
 		LayeredGraph layeredGraph = layer.getLayeredGraph();
-		if (layeredGraph.areExternalPortsFixed()) {
+		if (layeredGraph.getExternalPortConstraints()
+                == PortConstraints.FIXED_POS) {
 			// process fixed external layer
 			for (LayerElement element : layer.getElements()) {
 				KPort port = (KPort)element.getElemObj();

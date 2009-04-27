@@ -38,22 +38,22 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class DataflowModelImpl extends BoxImpl implements DataflowModel {
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	protected DataflowModelImpl() {
-		super();
-	}
+        super();
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	protected EClass eStaticClass() {
-		return DataflowPackage.Literals.DATAFLOW_MODEL;
-	}
+        return DataflowPackage.Literals.DATAFLOW_MODEL;
+    }
 
 } //DataflowModelImpl

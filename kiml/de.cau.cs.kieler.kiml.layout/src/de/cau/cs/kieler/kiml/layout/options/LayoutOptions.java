@@ -74,7 +74,8 @@ public class LayoutOptions {
      * Returns the layout direction for a given layout data instance.
      * 
      * @param layoutData layout data for a parent node
-     * @return the layout direction for the given layout data
+     * @return the layout direction for the given layout data, or
+     *     {@code UNDEFINED} if there is no such option
      */
     public static LayoutDirection getLayoutDirection(KLayoutData layoutData) {
         KIntOption directionOption = (KIntOption)layoutData.getOption(
@@ -213,6 +214,43 @@ public class LayoutOptions {
             layoutData.getOptions().add(constraintsOption);
         }
         constraintsOption.setValue(portConstraints.ordinal());
+    }
+    
+    /** layout option key: rank of a port */
+    public final static String PORT_RANK = "portRank";
+    
+    /**
+     * Returns the port rank for a given layout data instance.
+     * 
+     * @param layoutData layout data for a port
+     * @return the port rank for the given layout data, or
+     *     -1 if there is no such option
+     */
+    public static int getPortRank(KLayoutData layoutData) {
+        KIntOption rankOption = (KIntOption)layoutData.getOption(
+                PORT_RANK);
+        if (rankOption == null)
+            return -1;
+        else
+            return rankOption.getValue();
+    }
+    
+    /**
+     * Sets the port rank for the given layout data instance.
+     * 
+     * @param layoutData layout data for a port
+     * @param rank port rank to set
+     */
+    public static void setPortRank(KLayoutData layoutData,
+            int rank) {
+        KIntOption rankOption = (KIntOption)layoutData.getOption(
+                PORT_RANK);
+        if (rankOption == null) {
+            rankOption = KGraphFactory.eINSTANCE.createKIntOption();
+            rankOption.setKey(PORT_RANK);
+            layoutData.getOptions().add(rankOption);
+        }
+        rankOption.setValue(rank);
     }
     
     /** layout option key: placement positions for edge labels */

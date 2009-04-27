@@ -21,6 +21,7 @@ import java.util.Map;
 
 import de.cau.cs.kieler.core.alg.AbstractAlgorithm;
 import de.cau.cs.kieler.core.kgraph.KPort;
+import de.cau.cs.kieler.kiml.layout.options.PortConstraints;
 import de.cau.cs.kieler.klodd.hierarchical.modules.ISingleLayerCrossingReducer;
 import de.cau.cs.kieler.klodd.hierarchical.structures.*;
 
@@ -42,13 +43,14 @@ public class BarycenterCrossingReducer extends AbstractAlgorithm implements
 		
 		Map<LayerElement, Double> abstractRanks = new HashMap<LayerElement, Double>();
 		for (LayerElement element : layer.getElements()) {
-			if (element.arePortsFixed()) {
+			if (element.getPortConstraints() == PortConstraints.FIXED_POS
+			        || element.getPortConstraints() == PortConstraints.FIXED_ORDER) {
 				// the ports of the current element are fixed
 				List<Integer> rankList = element.getConnectionRanks(forward);
 				double barycenter = calcBarycenter(rankList);
 				if (barycenter < 0.0)
 					barycenter = element.rank;
-				abstractRanks.put(element, new Double(barycenter));
+				abstractRanks.put(element, Double.valueOf(barycenter));
 			}
 			else {
 				// ports are not fixed, find an order for the ports
@@ -67,16 +69,16 @@ public class BarycenterCrossingReducer extends AbstractAlgorithm implements
 					}
 					else {
 						sum += barycenter;
-						abstractPortRanks.put(port, new Double(barycenter));
+						abstractPortRanks.put(port, Double.valueOf(barycenter));
 					}
 				}
 				if (ports.isEmpty()) {
 					// elements with no connections should stay where they are
-					abstractRanks.put(element, new Double(element.rank));
+					abstractRanks.put(element, Double.valueOf(element.rank));
 				}
 				else {
-					element.sortPorts(abstractPortRanks, forward, false);
-					abstractRanks.put(element, new Double(sum / ports.size()));
+					element.sortPorts(abstractPortRanks, forward);
+					abstractRanks.put(element, Double.valueOf(sum / ports.size()));
 				}
 			}
 		}
@@ -93,42 +95,49 @@ public class BarycenterCrossingReducer extends AbstractAlgorithm implements
 		
 		Map<LayerElement, Double> abstractRanks = new HashMap<LayerElement, Double>();
 		for (LayerElement element : layer.getElements()) {
-			if (element.arePortsFixed()) {
+			if (element.getPortConstraints() == PortConstraints.FIXED_POS) {
 				// the ports of the current element are fixed
-				double barycenter = calcBarycenter(element.getConnectionRanks(true),
-						element.getConnectionRanks(false));
+				double bary1 = calcBarycenter(element.getConnectionRanks(true));
+				double bary2 = calcBarycenter(element.getConnectionRanks(false));
+				double barycenter = mergeBarycenters(bary1, bary2);
 				if (barycenter < 0.0)
 					barycenter = element.rank;
-				abstractRanks.put(element, new Double(barycenter));
+				abstractRanks.put(element, Double.valueOf(barycenter));
 			}
 			else {
 				// ports are not fixed, find an order for the ports
 				Map<KPort, List<Integer>> forwardRanks = element
 						.getConnectionRanksByPort(true);
-				Map<KPort, List<Integer>> backwardsRanks = element.getConnectionRanksByPort(false);
-				Map<KPort, Double> abstractPortRanks = new HashMap<KPort, Double>();
-				List<KPort> ports = new LinkedList<KPort>(forwardRanks.keySet());
+				Map<KPort, List<Integer>> backwardsRanks = element
+				        .getConnectionRanksByPort(false);
+				Map<KPort, Double> abstractForward = new HashMap<KPort, Double>();
+				Map<KPort, Double> abstractBackwards = new HashMap<KPort, Double>();
+                List<KPort> ports = new LinkedList<KPort>(forwardRanks.keySet());
 				double sum = 0.0;
 				ListIterator<KPort> portsIter = ports.listIterator();
 				while (portsIter.hasNext()) {
 					KPort port = portsIter.next();
-					double barycenter = calcBarycenter(forwardRanks.get(port),
-							backwardsRanks.get(port));
+					double bary1 = calcBarycenter(forwardRanks.get(port));
+	                double bary2 = calcBarycenter(backwardsRanks.get(port));
+	                double barycenter = mergeBarycenters(bary1, bary2);
 					if (barycenter < 0.0) {
 						portsIter.remove();
 					}
 					else {
 						sum += barycenter;
-						abstractPortRanks.put(port, new Double(barycenter));
+						if (bary1 >= 0.0)
+						    abstractForward.put(port, Double.valueOf(bary1));
+						if (bary2 >= 0.0)
+						    abstractBackwards.put(port, Double.valueOf(bary2));
 					}
 				}
 				if (ports.isEmpty()) {
 					// elements with no connections should stay where they are
-					abstractRanks.put(element, new Double(element.rank));
+					abstractRanks.put(element, Double.valueOf(element.rank));
 				}
 				else {
-					element.sortPorts(abstractPortRanks, false, true);
-					abstractRanks.put(element, new Double(sum / ports.size()));
+					element.sortPorts(abstractForward, abstractBackwards);
+					abstractRanks.put(element, Double.valueOf(sum / ports.size()));
 				}
 			}
 		}
@@ -156,30 +165,21 @@ public class BarycenterCrossingReducer extends AbstractAlgorithm implements
 	}
 	
 	/**
-	 * Calculates the barycenter of two given lists of ranks,
-	 * which may be empty.
+	 * Merges two barycenter values, considering special cases.
 	 * 
-	 * @param forwardRanks list of forward ranks
-	 * @param backwardsRanks list of backwards ranks
-	 * @return barycenter value
+	 * @param b1 first value
+	 * @param b2 second value
+	 * @return merged barycenter value
 	 */
-	private double calcBarycenter(List<Integer> forwardRanks,
-			List<Integer> backwardsRanks) {
-		double forwardValue = -1.0, backwardsValue = -1.0;
-		if (!forwardRanks.isEmpty())
-			forwardValue = calcBarycenter(forwardRanks);
-		if (!backwardsRanks.isEmpty())
-			backwardsValue = calcBarycenter(backwardsRanks);
-		
-		// determine the center of both values
-		if (forwardValue == -1.0 && backwardsValue == -1.0)
+	private double mergeBarycenters(double b1, double b2) {
+		if (b1 == -1.0 && b2 == -1.0)
 			return -1.0;
-		else if (forwardValue == -1.0)
-			return backwardsValue;
-		else if (backwardsValue == -1.0)
-			return forwardValue;
+		else if (b1 == -1.0)
+			return b2;
+		else if (b2 == -1.0)
+			return b1;
 		else
-			return (forwardValue + backwardsValue) / 2;
+			return (b1 + b2) / 2;
 	}
 
 }

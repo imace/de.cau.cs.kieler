@@ -13,6 +13,8 @@
  */
 package de.cau.cs.kieler.klodd.orthogonal.impl;
 
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -23,11 +25,9 @@ import de.cau.cs.kieler.core.kgraph.KPort;
 import de.cau.cs.kieler.core.slimgraph.KSlimGraph;
 import de.cau.cs.kieler.core.slimgraph.KSlimNode;
 import de.cau.cs.kieler.kiml.layout.klayoutdata.KShapeLayout;
-import de.cau.cs.kieler.kiml.layout.options.LayoutDirection;
 import de.cau.cs.kieler.kiml.layout.options.LayoutOptions;
 import de.cau.cs.kieler.kiml.layout.options.PortConstraints;
 import de.cau.cs.kieler.kiml.layout.util.KimlLayoutUtil;
-import de.cau.cs.kieler.kiml.layout.util.LayoutGraphUtil;
 import de.cau.cs.kieler.klodd.orthogonal.impl.ec.EmbeddingConstraint;
 import de.cau.cs.kieler.klodd.orthogonal.modules.IPlanarizer;
 import de.cau.cs.kieler.klodd.orthogonal.structures.*;
@@ -82,10 +82,19 @@ public class PortConstraintsPlanarizer extends AbstractAlgorithm implements
 			PortConstraints portConstraints = LayoutOptions.getPortConstraints(nodeLayout);
 			TSMNode tsmNode = (TSMNode)node;
 			if (!layoutNode.getPorts().isEmpty()) {
-				if (portConstraints == PortConstraints.FIXED_POS) {
+				if (portConstraints == PortConstraints.FIXED_POS
+				        || portConstraints == PortConstraints.FIXED_ORDER) {
 					// create port constraints 
-					KPort[] sortedPorts = LayoutGraphUtil.sortPortsByPosition(
-							layoutNode.getPorts(), LayoutDirection.HORIZONTAL, true);
+					KPort[] sortedPorts = layoutNode.getPorts().toArray(new KPort[0]);
+					Arrays.sort(sortedPorts, new Comparator<KPort>() {
+                        public int compare(KPort port1, KPort port2) {
+                            KShapeLayout layout1 = KimlLayoutUtil.getShapeLayout(port1);
+                            KShapeLayout layout2 = KimlLayoutUtil.getShapeLayout(port2);
+                            int rank1 = LayoutOptions.getPortRank(layout1);
+                            int rank2 = LayoutOptions.getPortRank(layout2);
+                            return rank1 - rank2;
+                        }
+					});
 					EmbeddingConstraint portConstraint = new EmbeddingConstraint(
 							EmbeddingConstraint.Type.ORIENTED, null, layoutNode);
 					for (KPort port : sortedPorts) {

@@ -18,6 +18,7 @@ import java.util.ListIterator;
 import de.cau.cs.kieler.core.alg.AbstractAlgorithm;
 import de.cau.cs.kieler.kiml.layout.klayoutdata.KPoint;
 import de.cau.cs.kieler.kiml.layout.options.LayoutDirection;
+import de.cau.cs.kieler.kiml.layout.options.PortConstraints;
 import de.cau.cs.kieler.klodd.hierarchical.modules.INodePlacer;
 import de.cau.cs.kieler.klodd.hierarchical.structures.Layer;
 import de.cau.cs.kieler.klodd.hierarchical.structures.LayerConnection;
@@ -234,7 +235,8 @@ public class BalancingNodePlacer extends AbstractAlgorithm implements
 	 * @return
 	 */
 	private boolean isMovable(Layer layer) {
-		return !(layer.getLayeredGraph().areExternalPortsFixed()
+		return !(layer.getLayeredGraph().getExternalPortConstraints()
+                == PortConstraints.FIXED_POS
 			&& (layer.rank == 0 || layer.height == 0));
 	}
 

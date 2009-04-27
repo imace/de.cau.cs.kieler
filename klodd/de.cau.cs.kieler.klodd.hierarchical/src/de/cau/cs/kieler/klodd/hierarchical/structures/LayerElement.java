@@ -34,8 +34,8 @@ import de.cau.cs.kieler.kiml.layout.klayoutdata.KShapeLayout;
 import de.cau.cs.kieler.kiml.layout.options.LayoutDirection;
 import de.cau.cs.kieler.kiml.layout.options.LayoutOptions;
 import de.cau.cs.kieler.kiml.layout.options.PortConstraints;
+import de.cau.cs.kieler.kiml.layout.options.PortSide;
 import de.cau.cs.kieler.kiml.layout.util.KimlLayoutUtil;
-import de.cau.cs.kieler.kiml.layout.util.LayoutGraphUtil;
 
 
 /**
@@ -67,8 +67,8 @@ public class LayerElement {
 	private Layer layer;
 	/** the corresponding node in the acyclic KIELER graph */
 	private KSlimNode kNode;
-	/** are the ports of this layer element fixed? */
-	private boolean fixedPorts;
+	/** port constraints for this layer element */
+	private PortConstraints portConstraints;
 	/** number of rank numbers consumed by this layer element */
 	private int rankWidth;
 	/** the new position that is determined for this layer element */
@@ -89,6 +89,14 @@ public class LayerElement {
 	private Map<KPort, Integer> forwardPortRanks = null;
 	/** map of ports to port ranks for backwards layer sweep */
 	private Map<KPort, Integer> backwardsPortRanks = null;
+	/** ports on the north side */
+	private KPort[] northPorts;
+	/** ports on the east side */
+    private KPort[] eastPorts;
+    /** ports on the south side */
+    private KPort[] southPorts;
+    /** ports on the west side */
+    private KPort[] westPorts;
 	
 	/**
 	 * Creates a layer element in an existing layer.
@@ -106,25 +114,67 @@ public class LayerElement {
 		if (obj instanceof KNode) {
 			// the layer element is a layout node
 		    KNode node = (KNode)obj;
-		    KShapeLayout shapeLayout = KimlLayoutUtil.getShapeLayout(node);
-            fixedPorts = LayoutOptions.getPortConstraints(shapeLayout)
-                    == PortConstraints.FIXED_POS || node.getPorts().isEmpty();
+		    KShapeLayout nodeLayout = KimlLayoutUtil.getShapeLayout(node);
+            portConstraints = LayoutOptions.getPortConstraints(nodeLayout);
 			rankWidth = Math.max(node.getPorts().size(), 1);
-			realWidth = shapeLayout.getWidth();
-			realHeight = shapeLayout.getHeight();
+			realWidth = nodeLayout.getWidth();
+			realHeight = nodeLayout.getHeight();
+			// create port lists
+			List<KPort> northPortList = new LinkedList<KPort>();
+			List<KPort> eastPortList = new LinkedList<KPort>();
+			List<KPort> southPortList = new LinkedList<KPort>();
+			List<KPort> westPortList = new LinkedList<KPort>();
+			for (KPort port : node.getPorts()) {
+			    PortSide portSide = LayoutOptions.getPortSide(
+			            KimlLayoutUtil.getShapeLayout(port));
+			    switch (portSide) {
+			    case NORTH:
+			        northPortList.add(port);
+			        break;
+			    case EAST:
+			        eastPortList.add(port);
+			        break;
+			    case SOUTH:
+			        southPortList.add(port);
+			        break;
+			    case WEST:
+			        westPortList.add(port);
+			    }
+			}
+			KPort[] dummyArray = new KPort[0];
+			northPorts = northPortList.toArray(dummyArray);
+			eastPorts = eastPortList.toArray(dummyArray);
+			southPorts = southPortList.toArray(dummyArray);
+			westPorts = westPortList.toArray(dummyArray);
+			if (portConstraints == PortConstraints.FIXED_POS
+			        || portConstraints == PortConstraints.FIXED_ORDER) {
+			    Comparator<KPort> portComparator = new Comparator<KPort>() {
+                    public int compare(KPort port1, KPort port2) {
+                        KShapeLayout layout1 = KimlLayoutUtil.getShapeLayout(port1);
+                        KShapeLayout layout2 = KimlLayoutUtil.getShapeLayout(port2);
+                        int rank1 = LayoutOptions.getPortRank(layout1);
+                        int rank2 = LayoutOptions.getPortRank(layout2);
+                        return rank1 - rank2;
+                    }
+			    };
+			    Arrays.sort(northPorts, portComparator);
+			    Arrays.sort(eastPorts, portComparator);
+			    Arrays.sort(southPorts, portComparator);
+			    Arrays.sort(westPorts, portComparator);
+			}
 		}
 		else if (obj instanceof KPort) {
 			// the layer element is a port
 			KPort port= (KPort)obj;
 			KShapeLayout shapeLayout = KimlLayoutUtil.getShapeLayout(port);
-            fixedPorts = true;
+			portConstraints = PortConstraints.FIXED_POS;
 			rankWidth = 1;
             realWidth = shapeLayout.getWidth();
             realHeight = shapeLayout.getHeight();
 		}
 		else if (obj instanceof KEdge) {
 			// the layer element is a long edge
-			fixedPorts = true;
+		    portConstraints = PortConstraints.FIXED_POS;
 			rankWidth = 1;
 			realWidth = 0.0f;
 			realHeight = 0.0f;
@@ -251,7 +301,8 @@ public class LayerElement {
 			KShapeLayout shapeLayout = KimlLayoutUtil.getShapeLayout(elemObj);
             switch (LayoutOptions.getPortSide(shapeLayout)) {
 			case NORTH:
-				if (layer.getLayeredGraph().areExternalPortsFixed())
+				if (layer.getLayeredGraph().getExternalPortConstraints()
+				        == PortConstraints.FIXED_POS)
 				    shapeLayout.setXpos(position.getX());
 				else
 				    shapeLayout.setXpos(position.getX() + insets.getLeft());
@@ -259,13 +310,15 @@ public class LayerElement {
 				break;
 			case EAST:
 			    shapeLayout.setXpos(position.getX() + insets.getLeft() + insets.getRight());
-				if (layer.getLayeredGraph().areExternalPortsFixed())
+				if (layer.getLayeredGraph().getExternalPortConstraints()
+                        == PortConstraints.FIXED_POS)
 				    shapeLayout.setYpos(position.getY());
 				else
 				    shapeLayout.setYpos(position.getY() + insets.getTop());
 				break;
 			case SOUTH:
-				if (layer.getLayeredGraph().areExternalPortsFixed())
+				if (layer.getLayeredGraph().getExternalPortConstraints()
+                        == PortConstraints.FIXED_POS)
 				    shapeLayout.setXpos(position.getX());
 				else
 				    shapeLayout.setXpos(position.getX() + insets.getLeft());
@@ -273,7 +326,8 @@ public class LayerElement {
 				break;
 			case WEST:
 			    shapeLayout.setXpos(position.getX());
-				if (layer.getLayeredGraph().areExternalPortsFixed())
+				if (layer.getLayeredGraph().getExternalPortConstraints()
+                        == PortConstraints.FIXED_POS)
 				    shapeLayout.setYpos(position.getY());
 				else
 				    shapeLayout.setYpos(position.getY() + insets.getTop());
@@ -283,18 +337,18 @@ public class LayerElement {
 	}
 
 	/**
-	 * Are the ports of this layer element fixed?
+	 * Gets the port constraints for this layer element.
 	 * 
-	 * @return the fixedPorts
+	 * @return the port constraints
 	 */
-	public boolean arePortsFixed() {
-		return fixedPorts;
+	public PortConstraints getPortConstraints() {
+	    return portConstraints;
 	}
 	
 	/**
 	 * Gets the rank width of this layer element.
 	 * 
-	 * @return the rankWidth
+	 * @return the rank width
 	 */
 	public int getRankWidth() {
 		return rankWidth;
@@ -455,6 +509,44 @@ public class LayerElement {
 	}
 	
 	/**
+     * Determines the rank of each port of a layout node.
+     * 
+     * @param forward if true, ranks are determined for a forward layer sweep,
+     *     else for a backwards layer sweep
+     */
+    private void calcPortRanks(boolean forward) {
+        LayoutDirection layoutDirection = layer.getLayeredGraph().getLayoutDirection();
+        if (forward)
+            forwardPortRanks = new HashMap<KPort, Integer>();
+        else
+            backwardsPortRanks = new HashMap<KPort, Integer>();
+        
+        if (elemObj instanceof KNode) {
+            // sort all ports by their relative position
+            KPort[] portArray = ((KNode)elemObj).getPorts().toArray(new KPort[0]);
+            Arrays.sort(portArray, new KimlLayoutUtil.PortComparator(
+                    forward, layoutDirection));
+            // set the ranks in the newly sorted list
+            if (forward) {
+                for (int i = 0; i < portArray.length; i++) {
+                    forwardPortRanks.put(portArray[i], Integer.valueOf(i));
+                }
+            }
+            else {
+                for (int i = 0; i < portArray.length; i++) {
+                    backwardsPortRanks.put(portArray[i], Integer.valueOf(i));
+                }   
+            }
+        }
+        else if (elemObj instanceof KPort) {
+            if (forward)
+                forwardPortRanks.put((KPort)elemObj, Integer.valueOf(0));
+            else
+                backwardsPortRanks.put((KPort)elemObj, Integer.valueOf(0));
+        }
+    }
+	
+	/**
 	 * Gets a list of combined element and port ranks for all incoming
 	 * or for all outgoing connections.
 	 * 
@@ -576,79 +668,226 @@ public class LayerElement {
 	}
 	
 	/**
-	 * Sorts the ports by their abstract ranks and updates the port
-	 * positions. This method may only be used if this layer element
-	 * contains a layout node.
-	 * 
-	 * @param abstractPortRanks abstract ranks used to sort
-	 * @param forward if true, ports are put clockwise on the node's border,
-	 *     else counter-clockwise; only valid if not symmetric
-	 * @param symmetric if true, ports are put on the node's border depending
-	 *     on the layout direction
-	 * @throws ClassCastException when the contained object is not a layout node
+	 * Comparator used to sort ports using a list of abstract ranks.
 	 */
-	public void sortPorts(final Map<KPort, Double> abstractPortRanks,
-			boolean forward, boolean symmetric) {
-		KNode node = (KNode)elemObj;
-		KPort[] ports = node.getPorts().toArray(new KPort[0]);
-		
-		Arrays.sort(ports, new Comparator<KPort>() {
-			public int compare(KPort port1, KPort port2) {
-				Double d1 = abstractPortRanks.get(port1);
-				Double d2 = abstractPortRanks.get(port2);
-				if (d1 == null && d2 == null)
-					return 0;
-				if (d1 == null && d2 != null)
-					return 1;
-				if (d1 != null && d2 == null)
-					return -1;
-				else
-					return d1.compareTo(d2);
-			}
-		});
-		
-		LayoutDirection layoutDirection = layer.getLayeredGraph().getLayoutDirection();
-		KShapeLayout shapeLayout = KimlLayoutUtil.getShapeLayout(node);
-		LayoutGraphUtil.positionPortsByOrder(ports, shapeLayout.getWidth(),
-		        shapeLayout.getHeight(), layoutDirection, forward, symmetric);
+	private static class DirectedPortComparator implements Comparator<KPort> {
+        private Map<KPort, Double> abstractPortRanks;
+        private boolean forward, definedFirst;
+        
+        /**
+         * Creates a port comparator for a single list of abstract
+         * ranks.
+         * 
+         * @param abstractPortRanks abstract ranks for some ports
+         * @param forward indicates whether to use the ranks in
+         *     forward direction
+         * @param definedFirst indicates whether to put ports with
+         *     defined abstract rank before ports with undefined
+         *     abstract rank
+         */
+        DirectedPortComparator(Map<KPort, Double> abstractPortRanks,
+                boolean forward, boolean definedFirst) {
+            this.abstractPortRanks = abstractPortRanks;
+            this.forward = forward;
+            this.definedFirst = definedFirst;
+        }
+	    
+	    /*
+	     * (non-Javadoc)
+	     * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
+	     */
+        public int compare(KPort port1, KPort port2) {
+            Double arank1 = abstractPortRanks.get(port1);
+            Double arank2 = abstractPortRanks.get(port2);
+            if (arank1 == null && arank2 == null) {
+                int rank1 = LayoutOptions.getPortRank(
+                        KimlLayoutUtil.getShapeLayout(port1));
+                int rank2 = LayoutOptions.getPortRank(
+                        KimlLayoutUtil.getShapeLayout(port2));
+                return rank1 - rank2;
+            }
+            else if (arank1 == null)
+                return definedFirst ? 1 : -1;
+            else if (arank2 == null)
+                return definedFirst ? -1 : 1;
+            else return forward ? arank1.compareTo(arank2)
+                    : arank2.compareTo(arank1);
+        }
 	}
 	
 	/**
-	 * Determines the rank of each port of a layout node.
+	 * Sorts the ports on each side of the related node according
+	 * to the given abstract ranks.
 	 * 
-	 * @param forward if true, ranks are determined for a forward layer sweep,
-	 *     else for a backwards layer sweep
+	 * @param abstractPortRanks abstract port ranks
+	 * @param forward if true, the abstract ranks are assumed to
+	 *     be for outgoing connections, else for incoming connections
 	 */
-	private void calcPortRanks(boolean forward) {
-		LayoutDirection layoutDirection = layer.getLayeredGraph().getLayoutDirection();
-		if (forward)
-			forwardPortRanks = new HashMap<KPort, Integer>();
-		else
-			backwardsPortRanks = new HashMap<KPort, Integer>();
-		
-		if (elemObj instanceof KNode) {
-			// sort all ports by their relative position
-			List<KPort> ports = ((KNode)elemObj).getPorts();
-			KPort[] portArray = LayoutGraphUtil.sortPortsByPosition(ports,
-					layoutDirection, forward);
-			// set the ranks in the newly sorted list
-			if (forward) {
-				for (int i = 0; i < portArray.length; i++) {
-					forwardPortRanks.put(portArray[i], Integer.valueOf(i));
-				}
-			}
-			else {
-				for (int i = 0; i < portArray.length; i++) {
-					backwardsPortRanks.put(portArray[i], Integer.valueOf(i));
-				}	
-			}
-		}
-		else if (elemObj instanceof KPort) {
-			if (forward)
-				forwardPortRanks.put((KPort)elemObj, Integer.valueOf(0));
-			else
-				backwardsPortRanks.put((KPort)elemObj, Integer.valueOf(0));
-		}
+	public void sortPorts(Map<KPort, Double> abstractPortRanks,
+			boolean forward) {
+	    boolean vertical = layer.getLayeredGraph().getLayoutDirection()
+	            == LayoutDirection.VERTICAL;
+		Arrays.sort(northPorts, new DirectedPortComparator(
+		        abstractPortRanks,
+		        vertical ? !forward : forward,
+		        !forward));
+		Arrays.sort(eastPorts, new DirectedPortComparator(
+		        abstractPortRanks,
+		        vertical ? !forward : forward,
+		        vertical ? !forward : forward));
+		Arrays.sort(southPorts, new DirectedPortComparator(
+		        abstractPortRanks,
+		        vertical ? !forward : forward,
+		        vertical ? !forward : forward));
+		Arrays.sort(westPorts, new DirectedPortComparator(
+		        abstractPortRanks,
+		        vertical ? !forward : forward,
+		        forward));
+		assignPortRanks();
+	}
+	
+	/**
+     * Comparator used to sort ports using two lists of abstract ranks.
+     */
+    private static class SymmetricPortComparator implements Comparator<KPort> {
+        private Map<KPort, Double> abstractPortRanks1, abstractPortRanks2;
+        private boolean list1First, firstForward;
+        
+        SymmetricPortComparator(Map<KPort, Double> abstractPortRanks1,
+                Map<KPort, Double> abstractPortRanks2,
+                boolean list1First, boolean firstForward) {
+            this.abstractPortRanks1 = abstractPortRanks1;
+            this.abstractPortRanks2 = abstractPortRanks2;
+            this.list1First = list1First;
+            this.firstForward = firstForward;
+        }
+        
+        /*
+         * (non-Javadoc)
+         * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
+         */
+        public int compare(KPort port1, KPort port2) {
+            Double a1rank1 = abstractPortRanks1.get(port1);
+            Double a2rank1 = abstractPortRanks2.get(port1);
+            Double a1rank2 = abstractPortRanks1.get(port2);
+            Double a2rank2 = abstractPortRanks2.get(port2);
+            if (a1rank1 != null && a1rank2 != null)
+                return list1First && firstForward || !list1First && !firstForward
+                        ? a1rank1.compareTo(a1rank2)
+                        : a1rank2.compareTo(a1rank1);
+            else if (a1rank1 != null && a2rank2 != null)
+                return list1First ? -1 : 1;
+            else if (a2rank1 != null && a1rank2 != null)
+                return list1First ? 1 : -1;
+            else if (a2rank1 != null && a2rank2 != null)
+                return list1First && !firstForward || !list1First && firstForward
+                        ? a2rank1.compareTo(a2rank2)
+                        : a2rank2.compareTo(a2rank1);
+            else if (a1rank1 != null || a2rank1 != null)
+                return 1;
+            else if (a1rank2 != null || a2rank2 != null)
+                return -1;
+            else return 0;
+        }
+    }
+	
+    /**
+     * Sorts the ports on each side of the related node according
+     * to the given abstract ranks.
+     * 
+     * @param forwardPortRanks ranks for ports with outgoing connections
+     * @param backwardsPortRanks ranks for ports with incoming connections
+     */
+	public void sortPorts(final Map<KPort, Double> forwardPortRanks,
+	        final Map<KPort, Double> backwardsPortRanks) {
+	    boolean vertical = layer.getLayeredGraph().getLayoutDirection()
+                == LayoutDirection.VERTICAL;
+	    Arrays.sort(northPorts, new SymmetricPortComparator(
+	            forwardPortRanks, backwardsPortRanks,
+	            false, vertical));
+	    Arrays.sort(eastPorts, new SymmetricPortComparator(
+                forwardPortRanks, backwardsPortRanks,
+                !vertical, true));
+	    Arrays.sort(southPorts, new SymmetricPortComparator(
+                forwardPortRanks, backwardsPortRanks,
+                !vertical, true));
+	    Arrays.sort(westPorts, new SymmetricPortComparator(
+                forwardPortRanks, backwardsPortRanks,
+                true, !vertical));
+	    assignPortRanks();
+	}
+	
+	/**
+	 * Assigns ranks to the ports of the related node according
+	 * to the order of ports in the port lists.
+	 */
+	private void assignPortRanks() {
+	    int rank = 0;
+	    for (KPort port : northPorts) {
+	        LayoutOptions.setPortRank(KimlLayoutUtil.getShapeLayout(port),
+	                rank++);
+	    }
+	    for (KPort port : eastPorts) {
+            LayoutOptions.setPortRank(KimlLayoutUtil.getShapeLayout(port),
+                    rank++);
+        }
+	    for (KPort port : southPorts) {
+            LayoutOptions.setPortRank(KimlLayoutUtil.getShapeLayout(port),
+                    rank++);
+        }
+	    for (KPort port : westPorts) {
+            LayoutOptions.setPortRank(KimlLayoutUtil.getShapeLayout(port),
+                    rank++);
+        }
+	}
+	
+	/**
+	 * Determines placements for the ports of the related node,
+	 * based on the internally stored order. This order should
+	 * be compatible to the assigned rank of each port.
+	 */
+	public void placePorts() {
+	    if (elemObj instanceof KNode) {
+	        KShapeLayout nodeLayout = KimlLayoutUtil.getShapeLayout(elemObj);
+	        if (portConstraints != PortConstraints.FIXED_POS) {
+    	        float width = nodeLayout.getWidth();
+    	        float height = nodeLayout.getHeight();
+    	        placePorts(northPorts, 0.0f, 0.0f, false, true, width);
+    	        placePorts(eastPorts, width, 0.0f, true, true, height);
+    	        placePorts(southPorts, width, height, false, false, width);
+    	        placePorts(westPorts, 0.0f, height, true, false, height);
+	        }
+	    }
+	}
+	
+	/**
+	 * Determines placements for the given ports, equally distributing
+	 * them on a horizontal or vertical line.
+	 * 
+	 * @param ports ports to place
+	 * @param startX horizontal offset for placement
+	 * @param startY vertical offset for placement
+	 * @param vertical indicates whether ports shall be placed
+	 *     vertically
+	 * @param forward indicates whether ports shall be placed
+	 *     in positive direction from the starting point
+	 * @param length length of the line on which ports shall be placed
+	 */
+	private static void placePorts(KPort[] ports, float startX,
+	        float startY, boolean vertical, boolean forward,
+	        float length) {
+	    float pos = vertical ? startY : startX;
+	    float incr = length / (ports.length + 1);
+	    if (!forward)
+	        incr = -incr;
+	    for (KPort port : ports) {
+	        pos += incr;
+	        KShapeLayout portLayout = KimlLayoutUtil.getShapeLayout(port);
+	        portLayout.setXpos(vertical ? startX - (forward
+	                ? 0 : portLayout.getWidth()) : pos);
+	        portLayout.setYpos(vertical ? pos : startY - (forward
+                    ? 0 : portLayout.getHeight()));
+	    }
 	}
 	
 }

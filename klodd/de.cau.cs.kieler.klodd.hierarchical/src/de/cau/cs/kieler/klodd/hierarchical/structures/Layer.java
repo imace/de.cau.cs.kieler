@@ -20,8 +20,10 @@ import java.util.LinkedList;
 import java.util.Map;
 
 import de.cau.cs.kieler.core.kgraph.KGraphElement;
+import de.cau.cs.kieler.core.kgraph.KPort;
 import de.cau.cs.kieler.core.slimgraph.KSlimNode;
 import de.cau.cs.kieler.kiml.layout.options.LayoutDirection;
+import de.cau.cs.kieler.kiml.layout.util.KimlLayoutUtil;
 
 
 /**
@@ -145,8 +147,8 @@ public class Layer {
 	}
 	
 	/**
-	 * Sorts the elements in this layer and assigns them new rank values
-	 * based on a map of abstract ranks.
+	 * Sorts the elements in this layer and assigns them new
+	 * rank values based on a map of abstract ranks.
 	 * 
 	 * @param abstractRanks map of abstract ranks used as base for sorting
 	 */
@@ -159,6 +161,34 @@ public class Layer {
 		
 		// calculate concrete rank values
 		calcElemRanks();
+	}
+	
+	/**
+	 * Sorts the elements in this layer and assigns them new
+	 * rank values based on the ranks of contained ports. This
+	 * method may only be called on external ports layers with
+	 * either {@code rank == 0} or {@code height == 0}.
+	 */
+	public void sortByPorts() {
+	    boolean forward;
+	    if (rank == 0)
+	        forward = true;
+	    else if (height == 0)
+	        forward = false;
+	    else throw new UnsupportedOperationException();
+	    
+	    final Comparator<KPort> portComparator = new KimlLayoutUtil.PortComparator(
+	            forward, layeredGraph.getLayoutDirection());
+	    Collections.sort(elements, new Comparator<LayerElement>() {
+            public int compare(LayerElement elem1, LayerElement elem2) {
+                KPort port1 = (KPort)elem1.getElemObj();
+                KPort port2 = (KPort)elem2.getElemObj();
+                return portComparator.compare(port1, port2);
+            }
+	    });
+	    
+	    // calculate concrete rank values
+        calcElemRanks();
 	}
 
 	/**
