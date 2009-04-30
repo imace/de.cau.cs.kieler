@@ -20,30 +20,42 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IActionDelegate;
 
 import de.cau.cs.kieler.ssm2.diagram.edit.parts.State2EditPart;
+import de.cau.cs.kieler.ssm2.diagram.edit.parts.StateRegionCompartmentEditPart;
+import de.cau.cs.kieler.ssm2.diagram.edit.parts.StateSuspensionTriggerCompartment2EditPart;
 import de.cau.cs.kieler.ssm2.diagram.providers.Ssm2ElementTypes;
 
 public class AddSuspensionTrigger2Action implements IActionDelegate {
 
 	private IStructuredSelection currentSelection;
 	private State2EditPart selectedElement;
+	private StateSuspensionTriggerCompartment2EditPart suspensionTriggerCompartment;
 	
 	@Override
 	public void run(IAction action) {
+		
+		// Search for suspensionTrigger compartment
+		List<EditPart> compartments = selectedElement.getResizableCompartments();
+		for (EditPart editPart : compartments) {
+			if (editPart instanceof StateSuspensionTriggerCompartment2EditPart) {
+				suspensionTriggerCompartment = (StateSuspensionTriggerCompartment2EditPart) editPart;
+			}
+		}
+		
 		CompoundCommand cc = new CompoundCommand("Add SuspensionTrigger");
 
 		// Create the new SuspensionTrigger
 		CreateViewRequest suspensionTriggerRequest = CreateViewRequestFactory.getCreateShapeRequest(Ssm2ElementTypes.SuspensionTrigger_3011, selectedElement.getDiagramPreferencesHint());
 
 		//RegionEditPart regionEditPart = (RegionEditPart) selectedElement.getParent();
-		Command createSuspensionTriggerCmd = /*regionEditPart*/selectedElement.getCommand(suspensionTriggerRequest);
+		Command createSuspensionTriggerCmd = /*regionEditPart*/suspensionTriggerCompartment.getCommand(suspensionTriggerRequest);
 		IAdaptable suspensionTriggerViewAdapter = (IAdaptable) ((List) suspensionTriggerRequest.getNewObject()).get(0);
 		
 		cc.add(createSuspensionTriggerCmd);
 
-		selectedElement.getDiagramEditDomain().getDiagramCommandStack().execute(cc);
+		suspensionTriggerCompartment.getDiagramEditDomain().getDiagramCommandStack().execute(cc);
 
-		// Put the new Signal in edit mode
-		final EditPartViewer viewer = selectedElement.getViewer();
+		// Put the new SuspensionTrigger in edit mode
+		final EditPartViewer viewer = suspensionTriggerCompartment.getViewer();
 		final EditPart elementPart = (EditPart) viewer.getEditPartRegistry().get(suspensionTriggerViewAdapter.getAdapter(View.class));
 		if (elementPart != null) {
 			Display.getCurrent().asyncExec(new Runnable() {

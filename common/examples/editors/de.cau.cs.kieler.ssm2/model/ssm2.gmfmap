@@ -70,7 +70,7 @@
                 href="ssm2.ecore#//Signal/name"/>
           </labelMappings>
           <diagramNode
-              href="ssm2.gmfgraph#SignalName"/>
+              href="ssm2.gmfgraph#InvisibleNode"/>
         </ownedChild>
       </children>
       <children
@@ -91,7 +91,7 @@
                 href="ssm2.ecore#//Action/triggersAndEffects"/>
           </labelMappings>
           <diagramNode
-              href="ssm2.gmfgraph#EntryActionTriggersAndEffects"/>
+              href="ssm2.gmfgraph#InvisibleNode"/>
         </ownedChild>
       </children>
       <children
@@ -112,7 +112,7 @@
                 href="ssm2.ecore#//Action/triggersAndEffects"/>
           </labelMappings>
           <diagramNode
-              href="ssm2.gmfgraph#InnerActionTriggersAndEffects"/>
+              href="ssm2.gmfgraph#InvisibleNode"/>
         </ownedChild>
       </children>
       <children
@@ -133,7 +133,7 @@
                 href="ssm2.ecore#//Action/triggersAndEffects"/>
           </labelMappings>
           <diagramNode
-              href="ssm2.gmfgraph#ExitActionsTriggersAndEffects"/>
+              href="ssm2.gmfgraph#InvisibleNode"/>
         </ownedChild>
       </children>
       <children
@@ -154,7 +154,7 @@
                 href="ssm2.ecore#//Variable/vname"/>
           </labelMappings>
           <diagramNode
-              href="ssm2.gmfgraph#VariableName"/>
+              href="ssm2.gmfgraph#InvisibleNode"/>
         </ownedChild>
       </children>
       <children
@@ -172,10 +172,10 @@
             <diagramLabel
                 href="ssm2.gmfgraph#SuspensionTriggerName"/>
             <features
-                href="ssm2.ecore#//SuspensionTrigger/immediate"/>
+                href="ssm2.ecore#//SuspensionTrigger/trigger"/>
           </labelMappings>
           <diagramNode
-              href="ssm2.gmfgraph#SuspensionTriggerName"/>
+              href="ssm2.gmfgraph#InvisibleNode"/>
         </ownedChild>
       </children>
       <compartments

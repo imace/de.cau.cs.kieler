@@ -58,6 +58,19 @@
           name="RegionFigure"
           qualifiedClassName="de.cau.cs.kieler.ssm2.custom.AttributeAwareRegionFigure"/>
     </descriptors>
+    <descriptors
+        name="InvisibleFigure">
+      <actualFigure
+          xsi:type="gmfgraph:CustomFigure"
+          name="InvisibleFigure"
+          qualifiedClassName="de.cau.cs.kieler.ssm2.custom.AttributeAwareInvisibleFigure">
+        <children
+            xsi:type="gmfgraph:Label"
+            name="InvisibleFigureLabelFigure"/>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.3/@actualFigure/@children.0"/>
+    </descriptors>
   </figures>
   <nodes
       name="State"
@@ -65,33 +78,50 @@
   <nodes
       name="Region"
       figure="RegionFigure"/>
+  <nodes
+      name="InvisibleNode"
+      figure="InvisibleFigure"/>
   <connections
       name="Transition"
       figure="TransitionFigure"/>
   <compartments
       name="SignalCompartment"
-      figure="StateFigure"/>
+      figure="StateFigure"
+      collapsible="true"
+      needsTitle="true"/>
   <compartments
       name="VariableCompartment"
-      figure="StateFigure"/>
+      figure="StateFigure"
+      collapsible="true"
+      needsTitle="true"/>
   <compartments
       name="EntryActionsCompartment"
-      figure="StateFigure"/>
+      figure="StateFigure"
+      collapsible="true"
+      needsTitle="true"/>
   <compartments
       name="InnerActionsCompartment"
-      figure="StateFigure"/>
+      figure="StateFigure"
+      collapsible="true"
+      needsTitle="true"/>
   <compartments
       name="ExitActionsCompartment"
-      figure="StateFigure"/>
+      figure="StateFigure"
+      collapsible="true"
+      needsTitle="true"/>
   <compartments
       name="SuspensionTriggerCompartment"
-      figure="StateFigure"/>
+      figure="StateFigure"
+      collapsible="true"
+      needsTitle="true"/>
   <compartments
       name="RegionCompartment"
-      figure="StateFigure"/>
+      figure="StateFigure"
+      collapsible="true"/>
   <compartments
       name="StateCompartment"
-      figure="RegionFigure"/>
+      figure="RegionFigure"
+      collapsible="true"/>
   <labels
       name="StateName"
       figure="StateFigure"
@@ -99,7 +129,9 @@
       accessor="//@figures.0/@descriptors.0/@accessors.0"/>
   <labels
       name="VariableName"
-      elementIcon="false"/>
+      figure="InvisibleFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.3/@accessors.0"/>
   <labels
       name="TransitionTriggersAndEffects"
       figure="TransitionFigure"
@@ -107,17 +139,27 @@
       accessor="//@figures.0/@descriptors.1/@accessors.0"/>
   <labels
       name="EntryActionTriggersAndEffects"
-      elementIcon="false"/>
+      figure="InvisibleFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.3/@accessors.0"/>
   <labels
       name="InnerActionTriggersAndEffects"
-      elementIcon="false"/>
+      figure="InvisibleFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.3/@accessors.0"/>
   <labels
       name="ExitActionsTriggersAndEffects"
-      elementIcon="false"/>
+      figure="InvisibleFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.3/@accessors.0"/>
   <labels
       name="SuspensionTriggerName"
-      elementIcon="false"/>
+      figure="InvisibleFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.3/@accessors.0"/>
   <labels
       name="SignalName"
-      elementIcon="false"/>
+      figure="InvisibleFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.3/@accessors.0"/>
 </gmfgraph:Canvas>

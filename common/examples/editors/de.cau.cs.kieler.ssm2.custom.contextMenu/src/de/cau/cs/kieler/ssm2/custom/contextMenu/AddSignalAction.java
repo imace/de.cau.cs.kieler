@@ -20,30 +20,43 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IActionDelegate;
 
 import de.cau.cs.kieler.ssm2.diagram.edit.parts.StateEditPart;
+import de.cau.cs.kieler.ssm2.diagram.edit.parts.StateRegionCompartmentEditPart;
+import de.cau.cs.kieler.ssm2.diagram.edit.parts.StateSignalCompartment2EditPart;
+import de.cau.cs.kieler.ssm2.diagram.edit.parts.StateSignalCompartmentEditPart;
 import de.cau.cs.kieler.ssm2.diagram.providers.Ssm2ElementTypes;
 
 public class AddSignalAction implements IActionDelegate {
 
 	private IStructuredSelection currentSelection;
 	private StateEditPart selectedElement;
+	private StateSignalCompartmentEditPart signalCompartment;
 	
 	@Override
 	public void run(IAction action) {
+		
+		// Search for signal compartment
+		List<EditPart> compartments = selectedElement.getResizableCompartments();
+		for (EditPart editPart : compartments) {
+			if (editPart instanceof StateSignalCompartmentEditPart) {
+				signalCompartment = (StateSignalCompartmentEditPart) editPart;
+			}
+		}
+		
 		CompoundCommand cc = new CompoundCommand("Add Signal");
 
 		// Create the new Signal
 		CreateViewRequest signalRequest = CreateViewRequestFactory.getCreateShapeRequest(Ssm2ElementTypes.Signal_3002, selectedElement.getDiagramPreferencesHint());
 
 		//RegionEditPart regionEditPart = (RegionEditPart) selectedElement.getParent();
-		Command createSignalCmd = /*regionEditPart*/selectedElement.getCommand(signalRequest);
+		Command createSignalCmd = /*regionEditPart*/signalCompartment.getCommand(signalRequest);
 		IAdaptable signalViewAdapter = (IAdaptable) ((List) signalRequest.getNewObject()).get(0);
 		
 		cc.add(createSignalCmd);
 
-		selectedElement.getDiagramEditDomain().getDiagramCommandStack().execute(cc);
+		signalCompartment.getDiagramEditDomain().getDiagramCommandStack().execute(cc);
 
 		// Put the new Signal in edit mode
-		final EditPartViewer viewer = selectedElement.getViewer();
+		final EditPartViewer viewer = signalCompartment.getViewer();
 		final EditPart elementPart = (EditPart) viewer.getEditPartRegistry().get(signalViewAdapter.getAdapter(View.class));
 		if (elementPart != null) {
 			Display.getCurrent().asyncExec(new Runnable() {

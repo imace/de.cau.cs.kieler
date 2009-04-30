@@ -53,6 +53,9 @@
 				lineBorder.setColor(org.eclipse.draw2d.ColorConstants.black); 
 			}
 			result.setBorder(null);
+			«IF title != "StateCompartment"-»
+				result.getContentPane().setLayoutManager(new de.cau.cs.kieler.ssm2.custom.CustomCompartmentLayout());
+			«ENDIF-»
 			«REM» Additions end here «ENDREM»
 			return result;
 		}

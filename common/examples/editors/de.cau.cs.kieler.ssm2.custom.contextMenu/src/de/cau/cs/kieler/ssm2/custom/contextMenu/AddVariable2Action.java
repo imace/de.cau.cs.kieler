@@ -20,30 +20,42 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IActionDelegate;
 
 import de.cau.cs.kieler.ssm2.diagram.edit.parts.State2EditPart;
+import de.cau.cs.kieler.ssm2.diagram.edit.parts.StateRegionCompartmentEditPart;
+import de.cau.cs.kieler.ssm2.diagram.edit.parts.StateVariableCompartment2EditPart;
 import de.cau.cs.kieler.ssm2.diagram.providers.Ssm2ElementTypes;
 
 public class AddVariable2Action implements IActionDelegate {
 
 	private IStructuredSelection currentSelection;
 	private State2EditPart selectedElement;
+	private StateVariableCompartment2EditPart variableCompartment;
 	
 	@Override
 	public void run(IAction action) {
+		
+		// Search for region compartment
+		List<EditPart> compartments = selectedElement.getResizableCompartments();
+		for (EditPart editPart : compartments) {
+			if (editPart instanceof StateVariableCompartment2EditPart) {
+				variableCompartment = (StateVariableCompartment2EditPart) editPart;
+			}
+		}
+		
 		CompoundCommand cc = new CompoundCommand("Add Variable");
 
 		// Create the new Variable
 		CreateViewRequest variableRequest = CreateViewRequestFactory.getCreateShapeRequest(Ssm2ElementTypes.Variable_3010, selectedElement.getDiagramPreferencesHint());
 
 		//RegionEditPart regionEditPart = (RegionEditPart) selectedElement.getParent();
-		Command createVariableCmd = /*regionEditPart*/selectedElement.getCommand(variableRequest);
+		Command createVariableCmd = /*regionEditPart*/variableCompartment.getCommand(variableRequest);
 		IAdaptable variableViewAdapter = (IAdaptable) ((List) variableRequest.getNewObject()).get(0);
 		
 		cc.add(createVariableCmd);
 
-		selectedElement.getDiagramEditDomain().getDiagramCommandStack().execute(cc);
+		variableCompartment.getDiagramEditDomain().getDiagramCommandStack().execute(cc);
 
 		// Put the new Signal in edit mode
-		final EditPartViewer viewer = selectedElement.getViewer();
+		final EditPartViewer viewer = variableCompartment.getViewer();
 		final EditPart elementPart = (EditPart) viewer.getEditPartRegistry().get(variableViewAdapter.getAdapter(View.class));
 		if (elementPart != null) {
 			Display.getCurrent().asyncExec(new Runnable() {

@@ -21,30 +21,42 @@ import org.eclipse.ui.IActionDelegate;
 
 import de.cau.cs.kieler.ssm2.diagram.edit.parts.Region2EditPart;
 import de.cau.cs.kieler.ssm2.diagram.edit.parts.RegionEditPart;
+import de.cau.cs.kieler.ssm2.diagram.edit.parts.RegionStateCompartmentEditPart;
+import de.cau.cs.kieler.ssm2.diagram.edit.parts.StateRegionCompartmentEditPart;
 import de.cau.cs.kieler.ssm2.diagram.providers.Ssm2ElementTypes;
 
 public class AddStateAction implements IActionDelegate {
 
 	private IStructuredSelection currentSelection;
 	private RegionEditPart selectedElement;
+	private RegionStateCompartmentEditPart stateCompartment;
 	
 	@Override
 	public void run(IAction action) {
+		
+		// Search for region compartment
+		List<Object> compartments = selectedElement.getChildren();
+		for (Object editPart : compartments) {
+			if (editPart instanceof RegionStateCompartmentEditPart) {
+				stateCompartment = (RegionStateCompartmentEditPart) editPart;
+			}
+		}
+		
 		CompoundCommand cc = new CompoundCommand("Add State");
 
 		// Create the new State
 		CreateViewRequest stateRequest = CreateViewRequestFactory.getCreateShapeRequest(Ssm2ElementTypes.State_2012, selectedElement.getDiagramPreferencesHint());
 
 		
-		Command createStateCmd = selectedElement.getCommand(stateRequest);
+		Command createStateCmd = stateCompartment.getCommand(stateRequest);
 		IAdaptable stateViewAdapter = (IAdaptable) ((List) stateRequest.getNewObject()).get(0);
 		
 		cc.add(createStateCmd);
 
-		selectedElement.getDiagramEditDomain().getDiagramCommandStack().execute(cc);
+		stateCompartment.getDiagramEditDomain().getDiagramCommandStack().execute(cc);
 
 		// Put the new State in edit mode
-		final EditPartViewer viewer = selectedElement.getViewer();
+		final EditPartViewer viewer = stateCompartment.getViewer();
 		final EditPart elementPart = (EditPart) viewer.getEditPartRegistry().get(stateViewAdapter.getAdapter(View.class));
 		if (elementPart != null) {
 			Display.getCurrent().asyncExec(new Runnable() {

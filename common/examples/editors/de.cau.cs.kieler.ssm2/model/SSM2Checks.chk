@@ -1,0 +1,6 @@
+import ssm2;
+
+extension de::cau::cs::kieler::ssm2::dsl::Extensions;
+
+context Signal ERROR "Signal names have to contain at least one letter!" :
+   name.length >= 1;

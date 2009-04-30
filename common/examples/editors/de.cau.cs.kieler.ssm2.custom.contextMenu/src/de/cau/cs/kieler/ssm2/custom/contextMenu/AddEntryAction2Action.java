@@ -25,30 +25,42 @@ import org.eclipse.ui.actions.ActionDelegate;
 import de.cau.cs.kieler.ssm2.diagram.edit.parts.RegionEditPart;
 import de.cau.cs.kieler.ssm2.diagram.edit.parts.State2EditPart;
 import de.cau.cs.kieler.ssm2.diagram.edit.parts.StateEditPart;
+import de.cau.cs.kieler.ssm2.diagram.edit.parts.StateEntryActionsCompartment2EditPart;
+import de.cau.cs.kieler.ssm2.diagram.edit.parts.StateRegionCompartmentEditPart;
 import de.cau.cs.kieler.ssm2.diagram.providers.Ssm2ElementTypes;
 
 public class AddEntryAction2Action implements IActionDelegate {
 
 	private IStructuredSelection currentSelection;
 	private State2EditPart selectedElement;
+	private StateEntryActionsCompartment2EditPart entryActionCompartment;
 	
 	@Override
 	public void run(IAction action) {
+		
+		// Search for entry action compartment
+		List<EditPart> compartments = selectedElement.getResizableCompartments();
+		for (EditPart editPart : compartments) {
+			if (editPart instanceof StateEntryActionsCompartment2EditPart) {
+				entryActionCompartment = (StateEntryActionsCompartment2EditPart) editPart;
+			}
+		}
+		
 		CompoundCommand cc = new CompoundCommand("Add OnEntryAction");
 
 		// Create the new action.
 		CreateViewRequest actionRequest = CreateViewRequestFactory.getCreateShapeRequest(Ssm2ElementTypes.Action_3003, selectedElement.getDiagramPreferencesHint());
 
 		//RegionEditPart regionEditPart = (RegionEditPart) selectedElement.getParent();
-		Command createActionCmd = /*regionEditPart*/selectedElement.getCommand(actionRequest);
+		Command createActionCmd = /*regionEditPart*/entryActionCompartment.getCommand(actionRequest);
 		IAdaptable actionViewAdapter = (IAdaptable) ((List) actionRequest.getNewObject()).get(0);
 
 		cc.add(createActionCmd);
 
-		selectedElement.getDiagramEditDomain().getDiagramCommandStack().execute(cc);
+		entryActionCompartment.getDiagramEditDomain().getDiagramCommandStack().execute(cc);
 
 		// put the new action in edit mode
-		final EditPartViewer viewer = selectedElement.getViewer();
+		final EditPartViewer viewer = entryActionCompartment.getViewer();
 		final EditPart elementPart = (EditPart) viewer.getEditPartRegistry().get(actionViewAdapter.getAdapter(View.class));
 		if (elementPart != null) {
 			Display.getCurrent().asyncExec(new Runnable() {

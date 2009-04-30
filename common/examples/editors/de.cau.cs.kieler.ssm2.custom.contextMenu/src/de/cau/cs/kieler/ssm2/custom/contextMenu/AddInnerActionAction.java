@@ -24,30 +24,42 @@ import org.eclipse.ui.actions.ActionDelegate;
 
 import de.cau.cs.kieler.ssm2.diagram.edit.parts.RegionEditPart;
 import de.cau.cs.kieler.ssm2.diagram.edit.parts.StateEditPart;
+import de.cau.cs.kieler.ssm2.diagram.edit.parts.StateInnerActionsCompartmentEditPart;
+import de.cau.cs.kieler.ssm2.diagram.edit.parts.StateRegionCompartmentEditPart;
 import de.cau.cs.kieler.ssm2.diagram.providers.Ssm2ElementTypes;
 
 public class AddInnerActionAction implements IActionDelegate {
 
 	private IStructuredSelection currentSelection;
 	private StateEditPart selectedElement;
+	private StateInnerActionsCompartmentEditPart innerActionsCompartment;
 	
 	@Override
 	public void run(IAction action) {
+		
+		// Search for inner action compartment
+		List<EditPart> compartments = selectedElement.getResizableCompartments();
+		for (EditPart editPart : compartments) {
+			if (editPart instanceof StateInnerActionsCompartmentEditPart) {
+				innerActionsCompartment = (StateInnerActionsCompartmentEditPart) editPart;
+			}
+		}
+		
 		CompoundCommand cc = new CompoundCommand("Add OnInsideAction");
 
 		// Create the new action.
 		CreateViewRequest actionRequest = CreateViewRequestFactory.getCreateShapeRequest(Ssm2ElementTypes.Action_3004, selectedElement.getDiagramPreferencesHint());
 
 		//RegionEditPart regionEditPart = (RegionEditPart) selectedElement.getParent();
-		Command createActionCmd = /*regionEditPart*/selectedElement.getCommand(actionRequest);
+		Command createActionCmd = /*regionEditPart*/innerActionsCompartment.getCommand(actionRequest);
 		IAdaptable actionViewAdapter = (IAdaptable) ((List) actionRequest.getNewObject()).get(0);
 
 		cc.add(createActionCmd);
 
-		selectedElement.getDiagramEditDomain().getDiagramCommandStack().execute(cc);
+		innerActionsCompartment.getDiagramEditDomain().getDiagramCommandStack().execute(cc);
 
 		// put the new action in edit mode
-		final EditPartViewer viewer = selectedElement.getViewer();
+		final EditPartViewer viewer = innerActionsCompartment.getViewer();
 		final EditPart elementPart = (EditPart) viewer.getEditPartRegistry().get(actionViewAdapter.getAdapter(View.class));
 		if (elementPart != null) {
 			Display.getCurrent().asyncExec(new Runnable() {

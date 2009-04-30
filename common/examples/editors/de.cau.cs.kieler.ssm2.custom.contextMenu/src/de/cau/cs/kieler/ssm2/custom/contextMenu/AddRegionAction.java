@@ -20,31 +20,42 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IActionDelegate;
 
 import de.cau.cs.kieler.ssm2.diagram.edit.parts.StateEditPart;
+import de.cau.cs.kieler.ssm2.diagram.edit.parts.StateRegionCompartmentEditPart;
 import de.cau.cs.kieler.ssm2.diagram.providers.Ssm2ElementTypes;
 
 public class AddRegionAction implements IActionDelegate {
 
 	private IStructuredSelection currentSelection;
 	private StateEditPart selectedElement;
+	private StateRegionCompartmentEditPart regionCompartment;
 	
 	@Override
 	public void run(IAction action) {
+		
+		// Search for region compartment
+		List<EditPart> compartments = selectedElement.getResizableCompartments();
+		for (EditPart editPart : compartments) {
+			if (editPart instanceof StateRegionCompartmentEditPart) {
+				regionCompartment = (StateRegionCompartmentEditPart) editPart;
+			}
+		}
+		
 		CompoundCommand cc = new CompoundCommand("Add Region");
 
 		// Create the new Region
 		CreateViewRequest regionRequest = CreateViewRequestFactory.getCreateShapeRequest(Ssm2ElementTypes.Region_3006, selectedElement.getDiagramPreferencesHint());
-
+		// Problem: request nicht richtig erstellt - newObject == null !
 		
-		Command createRegionCmd = selectedElement.getCommand(regionRequest);
+		Command createRegionCmd = regionCompartment.getCommand(regionRequest); // Problem: command == null !
 		IAdaptable regionViewAdapter = (IAdaptable) ((List) regionRequest.getNewObject()).get(0);
 		
 		cc.add(createRegionCmd);
 
-		selectedElement.getDiagramEditDomain().getDiagramCommandStack().execute(cc);
+		regionCompartment.getDiagramEditDomain().getDiagramCommandStack().execute(cc);
 
 		// Put the new Region in edit mode
-		final EditPartViewer viewer = selectedElement.getViewer();
-		final EditPart elementPart = (EditPart) viewer.getEditPartRegistry().get(regionViewAdapter.getAdapter(View.class));
+		final EditPartViewer viewer = regionCompartment.getViewer();
+		final EditPart elementPart = (EditPart) viewer.getEditPartRegistry().get(regionViewAdapter.getAdapter(View.class)); // Problem: regionViewAdapter.getAdapter(View.class) == null !
 		if (elementPart != null) {
 			Display.getCurrent().asyncExec(new Runnable() {
 

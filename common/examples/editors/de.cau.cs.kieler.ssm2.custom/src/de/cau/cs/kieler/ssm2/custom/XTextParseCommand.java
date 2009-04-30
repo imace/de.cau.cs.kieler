@@ -20,9 +20,11 @@ import de.cau.cs.kieler.ssm2.Emission;
 import de.cau.cs.kieler.ssm2.Expression;
 import de.cau.cs.kieler.ssm2.Region;
 import de.cau.cs.kieler.ssm2.Signal;
+import de.cau.cs.kieler.ssm2.SignalReference;
 import de.cau.cs.kieler.ssm2.State;
 import de.cau.cs.kieler.ssm2.Transition;
 import de.cau.cs.kieler.ssm2.Variable;
+import de.cau.cs.kieler.ssm2.VariableReference;
 import de.cau.cs.kieler.ssm2.dsl.parser.XtextParser;
 
 // This command parses the text of a label and integrates the results into the
@@ -93,6 +95,7 @@ public class XTextParseCommand extends AbstractTransactionalCommand {
 	}
 
 	// Method to check whether the sinals have already been definded in the parent state
+	// remove ugly try-catches by using guard!!!
 	private boolean checkSignals(Action action, Action newAction) {
 		boolean allValid = true;
 		boolean oneEqual = false;
@@ -123,8 +126,9 @@ public class XTextParseCommand extends AbstractTransactionalCommand {
 			}
 			for (Signal s2 : validSignals) {
 				if (s1.getName().equals(s2.getName())) {
-					s1 = s2;
-					if (s1.getParentAction() == null) System.out.println("PARENT ACTION NULL!");
+					forwardSignals(newAction, s2);
+					//s1 = s2; // TODO: Here is the bug! -> retrieve s1 properly! (actually not that easy :( )
+					//if (s1.getParentAction() == null) System.out.println("PARENT ACTION NULL!");
 					oneEqual = true;
 					break;
 				}
@@ -135,6 +139,55 @@ public class XTextParseCommand extends AbstractTransactionalCommand {
 			}
 		}
 		return allValid;
+	}
+	
+	// Methods to forward signal pointers
+	private void forwardSignals(Action action, Signal signal) {
+		Expression trigger = action.getTrigger();
+		EList<Emission> emissions = action.getEmissions();
+		EList<Assignment> assignments = action.getAssignments();
+		
+		if ((trigger instanceof SignalReference) && (((Signal) ((SignalReference) trigger).getSignal()).getName().equals(signal.getName()))) {
+			SignalReference sigRef = (SignalReference) trigger;
+			sigRef.setSignal(signal);
+		}
+		else if (trigger instanceof ComplexExpression) {
+			setSignal((ComplexExpression) trigger, signal);
+		}
+		
+		for (Emission emission : emissions) {
+			if (emission.getSignal().getName().equals(signal.getName())) {
+				emission.setSignal(signal);
+			}
+		}
+		
+		for (Assignment assignment : assignments) {
+			Expression expression = assignment.getExpression();
+			if ((expression instanceof SignalReference) && ((Signal) ((SignalReference) expression).getSignal()).getName().equals(signal.getName())) {
+				SignalReference sigRef = (SignalReference) assignment.getExpression();
+				sigRef.setSignal(signal);
+			}
+			else if (expression instanceof ComplexExpression) {
+				setSignal((ComplexExpression) expression, signal);
+			}
+		}
+	}
+	
+	private void setSignal(ComplexExpression trigger, Signal signal) {
+		EList<Expression> subExpressions = trigger.getSubExpressions();
+		Expression expression;
+		if (subExpressions != null) {
+			for (int i = 0; i < subExpressions.size(); i++) {
+				expression = subExpressions.get(i);
+				if ((expression instanceof SignalReference) && ((Signal) ((SignalReference) expression).getSignal()).getName().equals(signal.getName())) {
+					SignalReference sigRef = (SignalReference) expression;
+					sigRef.setSignal(signal);
+				}
+				else if (expression instanceof ComplexExpression) {
+					setSignal((ComplexExpression) expression, signal);
+				}
+			}
+		}
 	}
 	
 	// Several methods to get the signals from the different types of model elements
@@ -210,4 +263,5 @@ public class XTextParseCommand extends AbstractTransactionalCommand {
 		signals.add(signal);
 		return signals;
 	}
+	
 }

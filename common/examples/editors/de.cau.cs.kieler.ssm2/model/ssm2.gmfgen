@@ -103,7 +103,6 @@
       </labels>
     </childNodes>
     <childNodes
-        xsi:type="gmfgen:GenChildLabelNode"
         visualID="3002"
         editPartClassName="SignalEditPart"
         itemSemanticEditPolicyClassName="SignalItemSemanticEditPolicy"
@@ -118,8 +117,11 @@
           xsi:type="gmfgen:MetamodelType"
           editHelperClassName="SignalEditHelper"/>
       <viewmap
-          xsi:type="gmfgen:FigureViewmap"
-          figureQualifiedClassName="org.eclipse.draw2d.Label"/>
+          xsi:type="gmfgen:InnerClassViewmap"
+          className="InvisibleFigure"
+          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class InvisibleFigure extends de.cau.cs.kieler.ssm2.custom.AttributeAwareInvisibleFigure {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureInvisibleFigureLabelFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public InvisibleFigure(org.eclipse.gef.EditPart e) {&#xA;&#x9;super(e);&#x9;&#x9;&#x9;&#xA;&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureInvisibleFigureLabelFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureInvisibleFigureLabelFigure.setText(&quot;&quot;);&#xA;&#xA;this.add(fFigureInvisibleFigureLabelFigure);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private boolean myUseLocalCoordinates = false;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected boolean useLocalCoordinates() {&#xA;&#x9;&#x9;return myUseLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#xA;&#x9;&#x9;myUseLocalCoordinates = useLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureInvisibleFigureLabelFigure() {&#xA;&#x9;&#x9;return fFigureInvisibleFigureLabelFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;">
+        <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
+      </viewmap>
       <modelFacet>
         <metaClass
             href="ssm2.genmodel#//ssm2/Signal"/>
@@ -128,14 +130,25 @@
         <childMetaFeature
             href="ssm2.genmodel#//ssm2/State/signals"/>
       </modelFacet>
-      <labelModelFacet
-          xsi:type="gmfgen:FeatureLabelModelFacet">
-        <metaFeatures
-            href="ssm2.genmodel#//ssm2/Signal/name"/>
-      </labelModelFacet>
+      <labels
+          visualID="5019"
+          editPartClassName="SignalNameEditPart"
+          itemSemanticEditPolicyClassName="SignalNameItemSemanticEditPolicy"
+          notationViewFactoryClassName="SignalNameViewFactory">
+        <diagramRunTimeClass
+            href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+        <viewmap
+            xsi:type="gmfgen:ParentAssignedViewmap"
+            getterName="getFigureInvisibleFigureLabelFigure"
+            figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel"/>
+        <modelFacet
+            xsi:type="gmfgen:FeatureLabelModelFacet">
+          <metaFeatures
+              href="ssm2.genmodel#//ssm2/Signal/name"/>
+        </modelFacet>
+      </labels>
     </childNodes>
     <childNodes
-        xsi:type="gmfgen:GenChildLabelNode"
         visualID="3003"
         editPartClassName="ActionEditPart"
         itemSemanticEditPolicyClassName="ActionItemSemanticEditPolicy"
@@ -150,8 +163,11 @@
           xsi:type="gmfgen:MetamodelType"
           editHelperClassName="ActionEditHelper"/>
       <viewmap
-          xsi:type="gmfgen:FigureViewmap"
-          figureQualifiedClassName="org.eclipse.draw2d.Label"/>
+          xsi:type="gmfgen:InnerClassViewmap"
+          className="InvisibleFigure"
+          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class InvisibleFigure extends de.cau.cs.kieler.ssm2.custom.AttributeAwareInvisibleFigure {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureInvisibleFigureLabelFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public InvisibleFigure(org.eclipse.gef.EditPart e) {&#xA;&#x9;super(e);&#x9;&#x9;&#x9;&#xA;&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureInvisibleFigureLabelFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureInvisibleFigureLabelFigure.setText(&quot;&quot;);&#xA;&#xA;this.add(fFigureInvisibleFigureLabelFigure);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private boolean myUseLocalCoordinates = false;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected boolean useLocalCoordinates() {&#xA;&#x9;&#x9;return myUseLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#xA;&#x9;&#x9;myUseLocalCoordinates = useLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureInvisibleFigureLabelFigure() {&#xA;&#x9;&#x9;return fFigureInvisibleFigureLabelFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;">
+        <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
+      </viewmap>
       <modelFacet>
         <metaClass
             href="ssm2.genmodel#//ssm2/Action"/>
@@ -160,14 +176,25 @@
         <childMetaFeature
             href="ssm2.genmodel#//ssm2/State/entryActions"/>
       </modelFacet>
-      <labelModelFacet
-          xsi:type="gmfgen:FeatureLabelModelFacet">
-        <metaFeatures
-            href="ssm2.genmodel#//ssm2/Action/triggersAndEffects"/>
-      </labelModelFacet>
+      <labels
+          visualID="5020"
+          editPartClassName="ActionTriggersAndEffectsEditPart"
+          itemSemanticEditPolicyClassName="ActionTriggersAndEffectsItemSemanticEditPolicy"
+          notationViewFactoryClassName="ActionTriggersAndEffectsViewFactory">
+        <diagramRunTimeClass
+            href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+        <viewmap
+            xsi:type="gmfgen:ParentAssignedViewmap"
+            getterName="getFigureInvisibleFigureLabelFigure"
+            figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel"/>
+        <modelFacet
+            xsi:type="gmfgen:FeatureLabelModelFacet">
+          <metaFeatures
+              href="ssm2.genmodel#//ssm2/Action/triggersAndEffects"/>
+        </modelFacet>
+      </labels>
     </childNodes>
     <childNodes
-        xsi:type="gmfgen:GenChildLabelNode"
         visualID="3004"
         editPartClassName="Action2EditPart"
         itemSemanticEditPolicyClassName="Action2ItemSemanticEditPolicy"
@@ -182,8 +209,11 @@
           xsi:type="gmfgen:SpecializationType"
           metamodelType="//@diagram/@childNodes.3/@elementType"/>
       <viewmap
-          xsi:type="gmfgen:FigureViewmap"
-          figureQualifiedClassName="org.eclipse.draw2d.Label"/>
+          xsi:type="gmfgen:InnerClassViewmap"
+          className="InvisibleFigure"
+          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class InvisibleFigure extends de.cau.cs.kieler.ssm2.custom.AttributeAwareInvisibleFigure {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureInvisibleFigureLabelFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public InvisibleFigure(org.eclipse.gef.EditPart e) {&#xA;&#x9;super(e);&#x9;&#x9;&#x9;&#xA;&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureInvisibleFigureLabelFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureInvisibleFigureLabelFigure.setText(&quot;&quot;);&#xA;&#xA;this.add(fFigureInvisibleFigureLabelFigure);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private boolean myUseLocalCoordinates = false;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected boolean useLocalCoordinates() {&#xA;&#x9;&#x9;return myUseLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#xA;&#x9;&#x9;myUseLocalCoordinates = useLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureInvisibleFigureLabelFigure() {&#xA;&#x9;&#x9;return fFigureInvisibleFigureLabelFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;">
+        <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
+      </viewmap>
       <modelFacet>
         <metaClass
             href="ssm2.genmodel#//ssm2/Action"/>
@@ -192,14 +222,25 @@
         <childMetaFeature
             href="ssm2.genmodel#//ssm2/State/innerActions"/>
       </modelFacet>
-      <labelModelFacet
-          xsi:type="gmfgen:FeatureLabelModelFacet">
-        <metaFeatures
-            href="ssm2.genmodel#//ssm2/Action/triggersAndEffects"/>
-      </labelModelFacet>
+      <labels
+          visualID="5021"
+          editPartClassName="ActionTriggersAndEffects2EditPart"
+          itemSemanticEditPolicyClassName="ActionTriggersAndEffects2ItemSemanticEditPolicy"
+          notationViewFactoryClassName="ActionTriggersAndEffects2ViewFactory">
+        <diagramRunTimeClass
+            href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+        <viewmap
+            xsi:type="gmfgen:ParentAssignedViewmap"
+            getterName="getFigureInvisibleFigureLabelFigure"
+            figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel"/>
+        <modelFacet
+            xsi:type="gmfgen:FeatureLabelModelFacet">
+          <metaFeatures
+              href="ssm2.genmodel#//ssm2/Action/triggersAndEffects"/>
+        </modelFacet>
+      </labels>
     </childNodes>
     <childNodes
-        xsi:type="gmfgen:GenChildLabelNode"
         visualID="3005"
         editPartClassName="Action3EditPart"
         itemSemanticEditPolicyClassName="Action3ItemSemanticEditPolicy"
@@ -214,8 +255,11 @@
           xsi:type="gmfgen:SpecializationType"
           metamodelType="//@diagram/@childNodes.3/@elementType"/>
       <viewmap
-          xsi:type="gmfgen:FigureViewmap"
-          figureQualifiedClassName="org.eclipse.draw2d.Label"/>
+          xsi:type="gmfgen:InnerClassViewmap"
+          className="InvisibleFigure"
+          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class InvisibleFigure extends de.cau.cs.kieler.ssm2.custom.AttributeAwareInvisibleFigure {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureInvisibleFigureLabelFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public InvisibleFigure(org.eclipse.gef.EditPart e) {&#xA;&#x9;super(e);&#x9;&#x9;&#x9;&#xA;&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureInvisibleFigureLabelFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureInvisibleFigureLabelFigure.setText(&quot;&quot;);&#xA;&#xA;this.add(fFigureInvisibleFigureLabelFigure);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private boolean myUseLocalCoordinates = false;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected boolean useLocalCoordinates() {&#xA;&#x9;&#x9;return myUseLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#xA;&#x9;&#x9;myUseLocalCoordinates = useLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureInvisibleFigureLabelFigure() {&#xA;&#x9;&#x9;return fFigureInvisibleFigureLabelFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;">
+        <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
+      </viewmap>
       <modelFacet>
         <metaClass
             href="ssm2.genmodel#//ssm2/Action"/>
@@ -224,14 +268,25 @@
         <childMetaFeature
             href="ssm2.genmodel#//ssm2/State/exitActions"/>
       </modelFacet>
-      <labelModelFacet
-          xsi:type="gmfgen:FeatureLabelModelFacet">
-        <metaFeatures
-            href="ssm2.genmodel#//ssm2/Action/triggersAndEffects"/>
-      </labelModelFacet>
+      <labels
+          visualID="5022"
+          editPartClassName="ActionTriggersAndEffects3EditPart"
+          itemSemanticEditPolicyClassName="ActionTriggersAndEffects3ItemSemanticEditPolicy"
+          notationViewFactoryClassName="ActionTriggersAndEffects3ViewFactory">
+        <diagramRunTimeClass
+            href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+        <viewmap
+            xsi:type="gmfgen:ParentAssignedViewmap"
+            getterName="getFigureInvisibleFigureLabelFigure"
+            figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel"/>
+        <modelFacet
+            xsi:type="gmfgen:FeatureLabelModelFacet">
+          <metaFeatures
+              href="ssm2.genmodel#//ssm2/Action/triggersAndEffects"/>
+        </modelFacet>
+      </labels>
     </childNodes>
     <childNodes
-        xsi:type="gmfgen:GenChildLabelNode"
         visualID="3010"
         editPartClassName="VariableEditPart"
         itemSemanticEditPolicyClassName="VariableItemSemanticEditPolicy"
@@ -246,8 +301,11 @@
           xsi:type="gmfgen:MetamodelType"
           editHelperClassName="VariableEditHelper"/>
       <viewmap
-          xsi:type="gmfgen:FigureViewmap"
-          figureQualifiedClassName="org.eclipse.draw2d.Label"/>
+          xsi:type="gmfgen:InnerClassViewmap"
+          className="InvisibleFigure"
+          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class InvisibleFigure extends de.cau.cs.kieler.ssm2.custom.AttributeAwareInvisibleFigure {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureInvisibleFigureLabelFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public InvisibleFigure(org.eclipse.gef.EditPart e) {&#xA;&#x9;super(e);&#x9;&#x9;&#x9;&#xA;&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureInvisibleFigureLabelFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureInvisibleFigureLabelFigure.setText(&quot;&quot;);&#xA;&#xA;this.add(fFigureInvisibleFigureLabelFigure);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private boolean myUseLocalCoordinates = false;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected boolean useLocalCoordinates() {&#xA;&#x9;&#x9;return myUseLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#xA;&#x9;&#x9;myUseLocalCoordinates = useLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureInvisibleFigureLabelFigure() {&#xA;&#x9;&#x9;return fFigureInvisibleFigureLabelFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;">
+        <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
+      </viewmap>
       <modelFacet>
         <metaClass
             href="ssm2.genmodel#//ssm2/Variable"/>
@@ -256,14 +314,25 @@
         <childMetaFeature
             href="ssm2.genmodel#//ssm2/State/variables"/>
       </modelFacet>
-      <labelModelFacet
-          xsi:type="gmfgen:FeatureLabelModelFacet">
-        <metaFeatures
-            href="ssm2.genmodel#//ssm2/Variable/vname"/>
-      </labelModelFacet>
+      <labels
+          visualID="5023"
+          editPartClassName="VariableVnameEditPart"
+          itemSemanticEditPolicyClassName="VariableVnameItemSemanticEditPolicy"
+          notationViewFactoryClassName="VariableVnameViewFactory">
+        <diagramRunTimeClass
+            href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+        <viewmap
+            xsi:type="gmfgen:ParentAssignedViewmap"
+            getterName="getFigureInvisibleFigureLabelFigure"
+            figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel"/>
+        <modelFacet
+            xsi:type="gmfgen:FeatureLabelModelFacet">
+          <metaFeatures
+              href="ssm2.genmodel#//ssm2/Variable/vname"/>
+        </modelFacet>
+      </labels>
     </childNodes>
     <childNodes
-        xsi:type="gmfgen:GenChildLabelNode"
         visualID="3011"
         editPartClassName="SuspensionTriggerEditPart"
         itemSemanticEditPolicyClassName="SuspensionTriggerItemSemanticEditPolicy"
@@ -278,8 +347,11 @@
           xsi:type="gmfgen:MetamodelType"
           editHelperClassName="SuspensionTriggerEditHelper"/>
       <viewmap
-          xsi:type="gmfgen:FigureViewmap"
-          figureQualifiedClassName="org.eclipse.draw2d.Label"/>
+          xsi:type="gmfgen:InnerClassViewmap"
+          className="InvisibleFigure"
+          classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class InvisibleFigure extends de.cau.cs.kieler.ssm2.custom.AttributeAwareInvisibleFigure {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureInvisibleFigureLabelFigure; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public InvisibleFigure(org.eclipse.gef.EditPart e) {&#xA;&#x9;super(e);&#x9;&#x9;&#x9;&#xA;&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureInvisibleFigureLabelFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureInvisibleFigureLabelFigure.setText(&quot;&quot;);&#xA;&#xA;this.add(fFigureInvisibleFigureLabelFigure);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private boolean myUseLocalCoordinates = false;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected boolean useLocalCoordinates() {&#xA;&#x9;&#x9;return myUseLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#xA;&#x9;&#x9;myUseLocalCoordinates = useLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureInvisibleFigureLabelFigure() {&#xA;&#x9;&#x9;return fFigureInvisibleFigureLabelFigure;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;">
+        <requiredPluginIDs>org.eclipse.gmf.runtime.draw2d.ui</requiredPluginIDs>
+      </viewmap>
       <modelFacet>
         <metaClass
             href="ssm2.genmodel#//ssm2/SuspensionTrigger"/>
@@ -288,11 +360,23 @@
         <childMetaFeature
             href="ssm2.genmodel#//ssm2/State/suspensionTrigger"/>
       </modelFacet>
-      <labelModelFacet
-          xsi:type="gmfgen:FeatureLabelModelFacet">
-        <metaFeatures
-            href="ssm2.genmodel#//ssm2/SuspensionTrigger/immediate"/>
-      </labelModelFacet>
+      <labels
+          visualID="5024"
+          editPartClassName="SuspensionTriggerTriggerEditPart"
+          itemSemanticEditPolicyClassName="SuspensionTriggerTriggerItemSemanticEditPolicy"
+          notationViewFactoryClassName="SuspensionTriggerTriggerViewFactory">
+        <diagramRunTimeClass
+            href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+        <viewmap
+            xsi:type="gmfgen:ParentAssignedViewmap"
+            getterName="getFigureInvisibleFigureLabelFigure"
+            figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel"/>
+        <modelFacet
+            xsi:type="gmfgen:FeatureLabelModelFacet">
+          <metaFeatures
+              href="ssm2.genmodel#//ssm2/SuspensionTrigger/trigger"/>
+        </modelFacet>
+      </labels>
     </childNodes>
     <topLevelNodes
         visualID="2012"
@@ -408,7 +492,8 @@
         canonicalEditPolicyClassName="StateSignalCompartmentCanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.2"
         title="Signals:"
-        node="//@diagram/@topLevelNodes.0">
+        node="//@diagram/@topLevelNodes.0"
+        listLayout="false">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <viewmap
@@ -426,7 +511,8 @@
         canonicalEditPolicyClassName="StateVariableCompartmentCanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.6"
         title="Variables:"
-        node="//@diagram/@topLevelNodes.0">
+        node="//@diagram/@topLevelNodes.0"
+        listLayout="false">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <viewmap
@@ -444,7 +530,8 @@
         canonicalEditPolicyClassName="StateEntryActionsCompartmentCanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.3"
         title="OnEntryActions:"
-        node="//@diagram/@topLevelNodes.0">
+        node="//@diagram/@topLevelNodes.0"
+        listLayout="false">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <viewmap
@@ -462,7 +549,8 @@
         canonicalEditPolicyClassName="StateInnerActionsCompartmentCanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.4"
         title="OnInsideActions:"
-        node="//@diagram/@topLevelNodes.0">
+        node="//@diagram/@topLevelNodes.0"
+        listLayout="false">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <viewmap
@@ -480,7 +568,8 @@
         canonicalEditPolicyClassName="StateExitActionsCompartmentCanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.5"
         title="OnExitActions:"
-        node="//@diagram/@topLevelNodes.0">
+        node="//@diagram/@topLevelNodes.0"
+        listLayout="false">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <viewmap
@@ -497,8 +586,9 @@
         notationViewFactoryClassName="StateSuspensionTriggerCompartmentViewFactory"
         canonicalEditPolicyClassName="StateSuspensionTriggerCompartmentCanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.7"
-        title="Suspend:"
-        node="//@diagram/@topLevelNodes.0">
+        title="SuspensionTrigger:"
+        node="//@diagram/@topLevelNodes.0"
+        listLayout="false">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <viewmap
@@ -517,7 +607,8 @@
         childNodes="//@diagram/@childNodes.0"
         title="RegionCompartment"
         needsTitle="false"
-        node="//@diagram/@topLevelNodes.0">
+        node="//@diagram/@topLevelNodes.0"
+        listLayout="false">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <viewmap
@@ -554,7 +645,8 @@
         canonicalEditPolicyClassName="StateSignalCompartment2CanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.2"
         title="Signals:"
-        node="//@diagram/@childNodes.1">
+        node="//@diagram/@childNodes.1"
+        listLayout="false">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <viewmap
@@ -572,7 +664,8 @@
         canonicalEditPolicyClassName="StateVariableCompartment2CanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.6"
         title="Variables:"
-        node="//@diagram/@childNodes.1">
+        node="//@diagram/@childNodes.1"
+        listLayout="false">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <viewmap
@@ -590,7 +683,8 @@
         canonicalEditPolicyClassName="StateEntryActionsCompartment2CanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.3"
         title="OnEntryActions:"
-        node="//@diagram/@childNodes.1">
+        node="//@diagram/@childNodes.1"
+        listLayout="false">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <viewmap
@@ -608,7 +702,8 @@
         canonicalEditPolicyClassName="StateInnerActionsCompartment2CanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.4"
         title="OnInsideActions:"
-        node="//@diagram/@childNodes.1">
+        node="//@diagram/@childNodes.1"
+        listLayout="false">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <viewmap
@@ -626,7 +721,8 @@
         canonicalEditPolicyClassName="StateExitActionsCompartment2CanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.5"
         title="OnExitActions:"
-        node="//@diagram/@childNodes.1">
+        node="//@diagram/@childNodes.1"
+        listLayout="false">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <viewmap
@@ -643,8 +739,9 @@
         notationViewFactoryClassName="StateSuspensionTriggerCompartment2ViewFactory"
         canonicalEditPolicyClassName="StateSuspensionTriggerCompartment2CanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.7"
-        title="Suspend:"
-        node="//@diagram/@childNodes.1">
+        title="SuspensionTrigger:"
+        node="//@diagram/@childNodes.1"
+        listLayout="false">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <viewmap
@@ -663,7 +760,8 @@
         childNodes="//@diagram/@childNodes.0"
         title="RegionCompartment"
         needsTitle="false"
-        node="//@diagram/@childNodes.1">
+        node="//@diagram/@childNodes.1"
+        listLayout="false">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <viewmap
