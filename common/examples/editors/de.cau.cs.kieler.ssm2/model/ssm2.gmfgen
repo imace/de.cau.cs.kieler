@@ -492,6 +492,7 @@
         canonicalEditPolicyClassName="StateSignalCompartmentCanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.2"
         title="Signals:"
+        needsTitle="false"
         node="//@diagram/@topLevelNodes.0"
         listLayout="false">
       <diagramRunTimeClass
@@ -511,6 +512,7 @@
         canonicalEditPolicyClassName="StateVariableCompartmentCanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.6"
         title="Variables:"
+        needsTitle="false"
         node="//@diagram/@topLevelNodes.0"
         listLayout="false">
       <diagramRunTimeClass
@@ -530,6 +532,7 @@
         canonicalEditPolicyClassName="StateEntryActionsCompartmentCanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.3"
         title="OnEntryActions:"
+        needsTitle="false"
         node="//@diagram/@topLevelNodes.0"
         listLayout="false">
       <diagramRunTimeClass
@@ -549,6 +552,7 @@
         canonicalEditPolicyClassName="StateInnerActionsCompartmentCanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.4"
         title="OnInsideActions:"
+        needsTitle="false"
         node="//@diagram/@topLevelNodes.0"
         listLayout="false">
       <diagramRunTimeClass
@@ -568,6 +572,7 @@
         canonicalEditPolicyClassName="StateExitActionsCompartmentCanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.5"
         title="OnExitActions:"
+        needsTitle="false"
         node="//@diagram/@topLevelNodes.0"
         listLayout="false">
       <diagramRunTimeClass
@@ -587,6 +592,7 @@
         canonicalEditPolicyClassName="StateSuspensionTriggerCompartmentCanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.7"
         title="SuspensionTrigger:"
+        needsTitle="false"
         node="//@diagram/@topLevelNodes.0"
         listLayout="false">
       <diagramRunTimeClass
@@ -645,6 +651,7 @@
         canonicalEditPolicyClassName="StateSignalCompartment2CanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.2"
         title="Signals:"
+        needsTitle="false"
         node="//@diagram/@childNodes.1"
         listLayout="false">
       <diagramRunTimeClass
@@ -664,6 +671,7 @@
         canonicalEditPolicyClassName="StateVariableCompartment2CanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.6"
         title="Variables:"
+        needsTitle="false"
         node="//@diagram/@childNodes.1"
         listLayout="false">
       <diagramRunTimeClass
@@ -683,6 +691,7 @@
         canonicalEditPolicyClassName="StateEntryActionsCompartment2CanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.3"
         title="OnEntryActions:"
+        needsTitle="false"
         node="//@diagram/@childNodes.1"
         listLayout="false">
       <diagramRunTimeClass
@@ -702,6 +711,7 @@
         canonicalEditPolicyClassName="StateInnerActionsCompartment2CanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.4"
         title="OnInsideActions:"
+        needsTitle="false"
         node="//@diagram/@childNodes.1"
         listLayout="false">
       <diagramRunTimeClass
@@ -721,6 +731,7 @@
         canonicalEditPolicyClassName="StateExitActionsCompartment2CanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.5"
         title="OnExitActions:"
+        needsTitle="false"
         node="//@diagram/@childNodes.1"
         listLayout="false">
       <diagramRunTimeClass
@@ -740,6 +751,7 @@
         canonicalEditPolicyClassName="StateSuspensionTriggerCompartment2CanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.7"
         title="SuspensionTrigger:"
+        needsTitle="false"
         node="//@diagram/@childNodes.1"
         listLayout="false">
       <diagramRunTimeClass
