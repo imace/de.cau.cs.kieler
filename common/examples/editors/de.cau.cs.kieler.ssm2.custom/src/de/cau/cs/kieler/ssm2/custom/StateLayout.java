@@ -5,21 +5,29 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.Figure;
 import org.eclipse.draw2d.IFigure;
-import org.eclipse.draw2d.LineBorder;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gmf.runtime.diagram.ui.figures.ResizableCompartmentFigure;
+import org.eclipse.gmf.runtime.diagram.ui.figures.ShapeCompartmentFigure;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.ConstrainedToolbarLayout;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
+import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
 
 import de.cau.cs.kieler.ssm2.State;
 
 public class StateLayout extends ConstrainedToolbarLayout {
 
+	boolean containsRegions;
+	boolean containsSignals;
+	boolean containsVariables;
+	boolean containsEntryActions;
+	boolean containsInnerActions;
+	boolean containsExitActions;
+	boolean containsSuspensionTrigger;
+	
 	// A layout for states
 	public void layout(IFigure parent) {
 		if (!parent.isVisible())
@@ -42,12 +50,46 @@ public class StateLayout extends ConstrainedToolbarLayout {
 					simpleLayout(parent, children, x, y ,height, width);
 				}
 				else {
+					retrieveContents(state);
 					complexLayout(parent, children, x, y ,height, width);
 				}
 			}
 		}
 	}
 	
+	// Method to lookup which compartments have contents
+	private void retrieveContents(State state) {
+		containsRegions = false;
+		containsSignals = false;
+		containsVariables = false;
+		containsEntryActions = false;
+		containsInnerActions = false;
+		containsExitActions = false;
+		containsSuspensionTrigger = false;
+		
+		if ((state.getRegions() != null && state.getRegions().size() > 0)) {
+			containsRegions = true;
+		}
+		if ((state.getSignals() != null && state.getSignals().size() > 0)) {
+			containsSignals = true;
+		}
+		if ((state.getEntryActions() != null && state.getEntryActions().size() > 0)) {
+			containsEntryActions = true;
+		}
+		if ((state.getInnerActions() != null && state.getInnerActions().size() > 0)) {
+			containsInnerActions = true;
+		}
+		if ((state.getExitActions() != null && state.getExitActions().size() > 0)) {
+			containsExitActions = true;
+		}
+		if ((state.getVariables() != null && state.getVariables().size() > 0)) {
+			containsVariables = true;
+		}
+		if (state.getSuspensionTrigger() != null) {
+			containsSuspensionTrigger = true;
+		}
+	}
+
 	// The layout for complex states
 	private void complexLayout(IFigure parent, List children, int x, int y, int height, int width) {
 		
@@ -55,7 +97,7 @@ public class StateLayout extends ConstrainedToolbarLayout {
 		int numChildren = children.size();
 		int totalWidth = 0;
 		int totalHeight = 0;
-		int[] prefWidths = new int[numChildren];
+		int [] prefWidths = new int[numChildren];
 		int[] prefHeights = new int[numChildren];
 		Rectangle newBounds = new Rectangle();
 		for (int i = 0; i < numChildren; i++) {
@@ -64,6 +106,17 @@ public class StateLayout extends ConstrainedToolbarLayout {
 				IFigure childFigure = (IFigure) child;
 				int newWidth = childFigure.getPreferredSize().width;
 				int newHeight = childFigure.getPreferredSize().height;
+				if (child instanceof ShapeCompartmentFigure) {
+					if ((getName((ShapeCompartmentFigure) child).equals("Signals:") && (!containsSignals))
+							|| (getName((ShapeCompartmentFigure) child).equals("Variables:") && (!containsVariables))
+							|| (getName((ShapeCompartmentFigure) child).equals("OnEntryActions:") && (!containsEntryActions))
+							|| (getName((ShapeCompartmentFigure) child).equals("OnInsideActions:") && (!containsInnerActions))
+							|| (getName((ShapeCompartmentFigure) child).equals("OnExitActions:") && (!containsExitActions))
+							|| (getName((ShapeCompartmentFigure) child).equals("SuspensionTrigger:") && (!containsSuspensionTrigger))
+							|| (getName((ShapeCompartmentFigure) child).equals("RegionCompartment") && (!containsRegions))) {
+						newHeight = 0;
+					}
+				}
 				prefWidths[i] = newWidth;
 				prefHeights[i] = newHeight;
 				totalHeight += newHeight;
@@ -85,12 +138,12 @@ public class StateLayout extends ConstrainedToolbarLayout {
 					newBounds.width = prefWidths[i];
 					newBounds.height = prefHeights[i];
 				}
-				else if (child instanceof ResizableCompartmentFigure) {
+				else if (child instanceof ShapeCompartmentFigure) {
 					int offsetY = 0;
 					for (int j = 0; j < i; j++) {
 						Object child2 = children.get(j);
 						if (child2 instanceof IFigure) {
-							offsetY += ((IFigure) child2).getPreferredSize().height;
+							offsetY += prefHeights[j];
 						}
 					}
 					newBounds.x = x;
@@ -101,6 +154,19 @@ public class StateLayout extends ConstrainedToolbarLayout {
 				childFigure.setBounds(transposer.t(newBounds));
 			}
 		}
+	}
+
+	private String getName(ShapeCompartmentFigure child) {
+		if ((child.getChildren() != null) && (child.getChildren().size() > 0)
+				&& (child.getChildren().get(0) instanceof IFigure)) {
+			IFigure rcf = (IFigure) child.getChildren().get(0);
+			if ((rcf.getChildren() != null) && (rcf.getChildren().size() > 0)
+					&& (rcf.getChildren().get(0) instanceof WrappingLabel)) {
+				WrappingLabel label = (WrappingLabel) rcf.getChildren().get(0);
+				return label.getText();
+			}
+		}
+		return "";
 	}
 
 	// The layout for simple states
@@ -217,7 +283,8 @@ public class StateLayout extends ConstrainedToolbarLayout {
 	@Override
 	protected Dimension calculatePreferredSize(IFigure parent, int hint, int hint2) {
 		
-		// The height of simple states is reduced
+		// The height of simple states is reduced,
+		// the height of complex states considers only the compartments with contents
 		if (parent instanceof AttributeAwareFigure) {
 			EObject modelElement = ((AttributeAwareFigure) parent).getModelElement();
 			if (modelElement instanceof State) {
@@ -226,7 +293,7 @@ public class StateLayout extends ConstrainedToolbarLayout {
 					Dimension newDimension = super.calculatePreferredSize(parent, hint, hint2);
 					newDimension.height = 40;
 					return newDimension;
-				}
+				} 
 			}
 		}
 		return super.calculatePreferredSize(parent, hint, hint2);

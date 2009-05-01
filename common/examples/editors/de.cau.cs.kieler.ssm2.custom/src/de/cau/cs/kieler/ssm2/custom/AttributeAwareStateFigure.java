@@ -5,14 +5,28 @@ import java.util.List;
 
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.Ellipse;
+import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.RoundedRectangle;
+import org.eclipse.draw2d.geometry.Dimension;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gef.EditPart;
+import org.eclipse.gmf.runtime.diagram.ui.figures.ShapeCompartmentFigure;
+import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
 
 import de.cau.cs.kieler.ssm2.Ssm2Package;
+import de.cau.cs.kieler.ssm2.State;
 import de.cau.cs.kieler.ssm2.StateFlag;
 import de.cau.cs.kieler.ssm2.StateKind;
 
 public class AttributeAwareStateFigure extends AttributeAwareFigure {
+	
+	boolean containsRegions;
+	boolean containsSignals;
+	boolean containsVariables;
+	boolean containsEntryActions;
+	boolean containsInnerActions;
+	boolean containsExitActions;
+	boolean containsSuspensionTrigger;
 	
 	// This is the figure figure for states
 	public AttributeAwareStateFigure(EditPart e) {
@@ -135,4 +149,147 @@ public class AttributeAwareStateFigure extends AttributeAwareFigure {
 		// check conditions
 		notifyChanged(null);
 	}
+	
+	@Override
+	public Dimension getMinimumSize(int hint, int hint2) {
+		if (modelElement instanceof State) {
+			State state = (State) modelElement;
+			if (isSimple(state)) {
+				Dimension size = super.getMinimumSize(hint, hint2);
+				size.height = 40;
+				return size;
+			} else {
+				
+				int prefWidth = super.getMinimumSize(hint, hint2).width;
+				int prefHeight = 0;
+				
+				List<Object> children = getChildren();
+				int numChildren = children.size();
+				
+				retrieveContents(state);
+				
+				for (int i = 0; i < numChildren; i++) {
+					Object child = children.get(i);
+					if (child instanceof IFigure) {
+						IFigure childFigure = (IFigure) child;
+						prefHeight += childFigure.getMinimumSize().height;
+						if (child instanceof ShapeCompartmentFigure) {
+							if ((getName((ShapeCompartmentFigure) child).equals("Signals:") && (!containsSignals))
+									|| (getName((ShapeCompartmentFigure) child).equals("Variables:") && (!containsVariables))
+									|| (getName((ShapeCompartmentFigure) child).equals("OnEntryActions:") && (!containsEntryActions))
+									|| (getName((ShapeCompartmentFigure) child).equals("OnInsideActions:") && (!containsInnerActions))
+									|| (getName((ShapeCompartmentFigure) child).equals("OnExitActions:") && (!containsExitActions))
+									|| (getName((ShapeCompartmentFigure) child).equals("SuspensionTrigger:") && (!containsSuspensionTrigger))
+									|| (getName((ShapeCompartmentFigure) child).equals("RegionCompartment") && (!containsRegions))) {
+								prefHeight -= childFigure.getMinimumSize().height;
+							}
+						}
+					}
+				}
+				return new Dimension(prefWidth, prefHeight);
+			}
+		}
+		return super.getMinimumSize(hint, hint2);
+	}
+	
+	@Override
+	public Dimension getPreferredSize(int hint, int hint2) {
+		if (modelElement instanceof State) {
+			State state = (State) modelElement;
+			if (isSimple(state)) {
+				Dimension size = super.getPreferredSize(hint, hint2);
+				size.height = 40;
+				return size;
+			} else {
+				
+				int prefWidth = super.getPreferredSize(hint, hint2).width;
+				int prefHeight = 0;
+				
+				List<Object> children = getChildren();
+				int numChildren = children.size();
+				
+				retrieveContents(state);
+				
+				for (int i = 0; i < numChildren; i++) {
+					Object child = children.get(i);
+					if (child instanceof IFigure) {
+						IFigure childFigure = (IFigure) child;
+						prefHeight += childFigure.getPreferredSize().height;
+						if (child instanceof ShapeCompartmentFigure) {
+							if ((getName((ShapeCompartmentFigure) child).equals("Signals:") && (!containsSignals))
+									|| (getName((ShapeCompartmentFigure) child).equals("Variables:") && (!containsVariables))
+									|| (getName((ShapeCompartmentFigure) child).equals("OnEntryActions:") && (!containsEntryActions))
+									|| (getName((ShapeCompartmentFigure) child).equals("OnInsideActions:") && (!containsInnerActions))
+									|| (getName((ShapeCompartmentFigure) child).equals("OnExitActions:") && (!containsExitActions))
+									|| (getName((ShapeCompartmentFigure) child).equals("SuspensionTrigger:") && (!containsSuspensionTrigger))
+									|| (getName((ShapeCompartmentFigure) child).equals("RegionCompartment") && (!containsRegions))) {
+								prefHeight -= childFigure.getPreferredSize().height;
+							}
+						}
+					}
+				}
+				return new Dimension(prefWidth, prefHeight);
+			}
+		}
+		return super.getPreferredSize(hint, hint2);
+	}
+	
+	private String getName(ShapeCompartmentFigure child) {
+		if ((child.getChildren() != null) && (child.getChildren().size() > 0)
+				&& (child.getChildren().get(0) instanceof IFigure)) {
+			IFigure rcf = (IFigure) child.getChildren().get(0);
+			if ((rcf.getChildren() != null) && (rcf.getChildren().size() > 0)
+					&& (rcf.getChildren().get(0) instanceof WrappingLabel)) {
+				WrappingLabel label = (WrappingLabel) rcf.getChildren().get(0);
+				return label.getText();
+			}
+		}
+		return "";
+	}
+	
+	// Method to lookup which compartments have contents
+	private void retrieveContents(State state) {
+		containsRegions = false;
+		containsSignals = false;
+		containsVariables = false;
+		containsEntryActions = false;
+		containsInnerActions = false;
+		containsExitActions = false;
+		containsSuspensionTrigger = false;
+		
+		if ((state.getRegions() != null && state.getRegions().size() > 0)) {
+			containsRegions = true;
+		}
+		if ((state.getSignals() != null && state.getSignals().size() > 0)) {
+			containsSignals = true;
+		}
+		if ((state.getEntryActions() != null && state.getEntryActions().size() > 0)) {
+			containsEntryActions = true;
+		}
+		if ((state.getInnerActions() != null && state.getInnerActions().size() > 0)) {
+			containsInnerActions = true;
+		}
+		if ((state.getExitActions() != null && state.getExitActions().size() > 0)) {
+			containsExitActions = true;
+		}
+		if ((state.getVariables() != null && state.getVariables().size() > 0)) {
+			containsVariables = true;
+		}
+		if (state.getSuspensionTrigger() != null) {
+			containsSuspensionTrigger = true;
+		}
+	}
+	
+	// Method to decide whether a state is simple
+	private boolean isSimple(State state) {
+		if ((state.getRegions() == null || state.getRegions().size() == 0)
+				&& (state.getSignals() == null || state.getSignals().size() == 0)
+				&& (state.getEntryActions() == null || state.getEntryActions().size() == 0)
+				&& (state.getInnerActions() == null || state.getInnerActions().size() == 0)
+				&& (state.getExitActions() == null || state.getExitActions().size() == 0)) {
+		return true;	
+		}
+		return false;
+	}
+	
 }

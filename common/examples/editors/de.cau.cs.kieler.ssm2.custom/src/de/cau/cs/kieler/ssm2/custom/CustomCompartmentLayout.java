@@ -15,15 +15,13 @@ public class CustomCompartmentLayout extends XYLayout {
 	// A custom layout for compartments which lays its children out in rows
 	// and wraps them around if needed.
 	public void layout(IFigure parent) {
+		
 		if (!parent.isVisible())
 			return;
 		
 		List children = parent.getChildren();
 		Rectangle clientArea = parent.getClientArea();
-		int x = clientArea.x;
-		int y = clientArea.y;
 		int width = clientArea.width;
-		int height = clientArea.height;
 		Rectangle newBounds = new Rectangle();
 		newBounds.x = 0;
 		newBounds.y = 0;
@@ -34,8 +32,14 @@ public class CustomCompartmentLayout extends XYLayout {
 		for (Object child : children) {
 			if (child instanceof IFigure) {
 				IFigure childFigure = (IFigure) child;
-				newBounds.width = childFigure.getPreferredSize().width;
-				newBounds.height = childFigure.getPreferredSize().height;
+				if ((childFigure.getChildren() != null) && (childFigure.getChildren().size() > 0) && (childFigure.getChildren().get(0) instanceof AttributeAwareInvisibleFigure)) {
+					newBounds.width = childFigure.getMinimumSize(-1, -1).width;
+					newBounds.height = childFigure.getMinimumSize(-1, -1).height;
+				}
+				else {
+					newBounds.width = childFigure.getPreferredSize(-1, -1).width;
+					newBounds.height = childFigure.getPreferredSize(-1, -1).height;
+				}
 				
 				if (newBounds.x + newBounds.width > width) {
 					newBounds.x = 0;
@@ -56,6 +60,6 @@ public class CustomCompartmentLayout extends XYLayout {
 	@Override
 	protected Dimension calculatePreferredSize(IFigure parent, int hint, int hint2) {
 		
-		return parent.getPreferredSize();
+		return parent.getPreferredSize(hint, hint2);
 	}
 }
