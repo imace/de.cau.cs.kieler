@@ -1,4 +1,4 @@
-// $ANTLR 3.0 ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g 2009-03-25 12:11:04
+// $ANTLR 3.0 ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g 2009-05-02 13:07:41
 
 package de.cau.cs.kieler.ssm2.dsl.parser;
 
@@ -36,7 +36,7 @@ public class ssm2dlParser extends Parser {
 
         public ssm2dlParser(TokenStream input) {
             super(input);
-            ruleMemo = new HashMap[28+1];
+            ruleMemo = new HashMap[30+1];
          }
         
 
@@ -339,20 +339,20 @@ public class ssm2dlParser extends Parser {
 
 
     // $ANTLR start ruleExpression
-    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:169:1: ruleExpression returns [EObject result] : (temp_signal= ruleSignal | temp_variable= ruleVariable | temp_complexexpression= ruleComplexExpression );
+    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:169:1: ruleExpression returns [EObject result] : (temp_signalreference= ruleSignalReference | temp_variablereference= ruleVariableReference | temp_complexexpression= ruleComplexExpression );
     public EObject ruleExpression() throws RecognitionException {
         EObject result = null;
         int ruleExpression_StartIndex = input.index();
-        EObject temp_signal = null;
+        EObject temp_signalreference = null;
 
-        EObject temp_variable = null;
+        EObject temp_variablereference = null;
 
         EObject temp_complexexpression = null;
 
 
         try {
             if ( backtracking>0 && alreadyParsedRule(input, 3) ) { return result; }
-            // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:171:9: (temp_signal= ruleSignal | temp_variable= ruleVariable | temp_complexexpression= ruleComplexExpression )
+            // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:171:9: (temp_signalreference= ruleSignalReference | temp_variablereference= ruleVariableReference | temp_complexexpression= ruleComplexExpression )
             int alt3=3;
             switch ( input.LA(1) ) {
             case RULE_ID:
@@ -368,7 +368,7 @@ public class ssm2dlParser extends Parser {
                 else {
                     if (backtracking>0) {failed=true; return result;}
                     NoViableAltException nvae =
-                        new NoViableAltException("169:1: ruleExpression returns [EObject result] : (temp_signal= ruleSignal | temp_variable= ruleVariable | temp_complexexpression= ruleComplexExpression );", 3, 1, input);
+                        new NoViableAltException("169:1: ruleExpression returns [EObject result] : (temp_signalreference= ruleSignalReference | temp_variablereference= ruleVariableReference | temp_complexexpression= ruleComplexExpression );", 3, 1, input);
 
                     throw nvae;
                 }
@@ -387,40 +387,40 @@ public class ssm2dlParser extends Parser {
             default:
                 if (backtracking>0) {failed=true; return result;}
                 NoViableAltException nvae =
-                    new NoViableAltException("169:1: ruleExpression returns [EObject result] : (temp_signal= ruleSignal | temp_variable= ruleVariable | temp_complexexpression= ruleComplexExpression );", 3, 0, input);
+                    new NoViableAltException("169:1: ruleExpression returns [EObject result] : (temp_signalreference= ruleSignalReference | temp_variablereference= ruleVariableReference | temp_complexexpression= ruleComplexExpression );", 3, 0, input);
 
                 throw nvae;
             }
 
             switch (alt3) {
                 case 1 :
-                    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:171:9: temp_signal= ruleSignal
+                    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:171:9: temp_signalreference= ruleSignalReference
                     {
-                    pushFollow(FOLLOW_ruleSignal_in_ruleExpression179);
-                    temp_signal=ruleSignal();
+                    pushFollow(FOLLOW_ruleSignalReference_in_ruleExpression179);
+                    temp_signalreference=ruleSignalReference();
                     _fsp--;
                     if (failed) return result;
                     if ( backtracking==0 ) {
-                      result =temp_signal;
+                      result =temp_signalreference;
                     }
 
                     }
                     break;
                 case 2 :
-                    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:171:64: temp_variable= ruleVariable
+                    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:171:91: temp_variablereference= ruleVariableReference
                     {
-                    pushFollow(FOLLOW_ruleVariable_in_ruleExpression194);
-                    temp_variable=ruleVariable();
+                    pushFollow(FOLLOW_ruleVariableReference_in_ruleExpression194);
+                    temp_variablereference=ruleVariableReference();
                     _fsp--;
                     if (failed) return result;
                     if ( backtracking==0 ) {
-                      result =temp_variable;
+                      result =temp_variablereference;
                     }
 
                     }
                     break;
                 case 3 :
-                    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:171:125: temp_complexexpression= ruleComplexExpression
+                    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:171:179: temp_complexexpression= ruleComplexExpression
                     {
                     pushFollow(FOLLOW_ruleComplexExpression_in_ruleExpression209);
                     temp_complexexpression=ruleComplexExpression();
@@ -875,34 +875,164 @@ public class ssm2dlParser extends Parser {
     // $ANTLR end ruleAssignment
 
 
+    // $ANTLR start ruleSignalReference
+    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:327:1: ruleSignalReference returns [EObject result] : (temp_Signal= ruleSignal ) ;
+    public EObject ruleSignalReference() throws RecognitionException {
+        EObject result = null;
+        int ruleSignalReference_StartIndex = input.index();
+        EObject temp_Signal = null;
+
+
+        boolean hasContent = false;
+        try {
+            if ( backtracking>0 && alreadyParsedRule(input, 7) ) { return result; }
+            // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:330:4: ( (temp_Signal= ruleSignal ) )
+            // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:330:4: (temp_Signal= ruleSignal )
+            {
+            if ( backtracking==0 ) {
+
+              				result = factory.create("ssm2", "SignalReference");
+              			 
+            }
+            // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:333:1: (temp_Signal= ruleSignal )
+            // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:333:2: temp_Signal= ruleSignal
+            {
+            if ( backtracking==0 ) {
+              ptm.createNode(((EObject)((EObject)xtextfile.eContents().get(6)).eContents().get(1)));
+            }
+            pushFollow(FOLLOW_ruleSignal_in_ruleSignalReference449);
+            temp_Signal=ruleSignal();
+            _fsp--;
+            if (failed) return result;
+            if ( backtracking==0 ) {
+              if (temp_Signal != null) {
+                hasContent = true;
+                ptm.setModelElement(temp_Signal);
+                factory.set(result,"signal",convert(temp_Signal),false);
+                ptm.ruleFinished(temp_Signal);
+              } else {
+                ptm.destroyNode();
+              }
+
+            }
+
+            }
+
+            if ( backtracking==0 ) {
+              if (!hasContent)
+                result = null;
+            }
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            if (!hasContent)
+                result = null;
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+            if ( backtracking>0 ) { memoize(input, 7, ruleSignalReference_StartIndex); }
+        }
+        return result;
+    }
+    // $ANTLR end ruleSignalReference
+
+
+    // $ANTLR start ruleVariableReference
+    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:351:1: ruleVariableReference returns [EObject result] : (temp_Variable= ruleVariable ) ;
+    public EObject ruleVariableReference() throws RecognitionException {
+        EObject result = null;
+        int ruleVariableReference_StartIndex = input.index();
+        EObject temp_Variable = null;
+
+
+        boolean hasContent = false;
+        try {
+            if ( backtracking>0 && alreadyParsedRule(input, 8) ) { return result; }
+            // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:354:4: ( (temp_Variable= ruleVariable ) )
+            // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:354:4: (temp_Variable= ruleVariable )
+            {
+            if ( backtracking==0 ) {
+
+              				result = factory.create("ssm2", "VariableReference");
+              			 
+            }
+            // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:357:1: (temp_Variable= ruleVariable )
+            // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:357:2: temp_Variable= ruleVariable
+            {
+            if ( backtracking==0 ) {
+              ptm.createNode(((EObject)((EObject)xtextfile.eContents().get(7)).eContents().get(1)));
+            }
+            pushFollow(FOLLOW_ruleVariable_in_ruleVariableReference488);
+            temp_Variable=ruleVariable();
+            _fsp--;
+            if (failed) return result;
+            if ( backtracking==0 ) {
+              if (temp_Variable != null) {
+                hasContent = true;
+                ptm.setModelElement(temp_Variable);
+                factory.set(result,"variable",convert(temp_Variable),false);
+                ptm.ruleFinished(temp_Variable);
+              } else {
+                ptm.destroyNode();
+              }
+
+            }
+
+            }
+
+            if ( backtracking==0 ) {
+              if (!hasContent)
+                result = null;
+            }
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            if (!hasContent)
+                result = null;
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+            if ( backtracking>0 ) { memoize(input, 8, ruleVariableReference_StartIndex); }
+        }
+        return result;
+    }
+    // $ANTLR end ruleVariableReference
+
+
     // $ANTLR start ruleSignal
-    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:327:1: ruleSignal returns [EObject result] : ( RULE_ID ) ;
+    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:375:1: ruleSignal returns [EObject result] : ( RULE_ID ) ;
     public EObject ruleSignal() throws RecognitionException {
         EObject result = null;
         int ruleSignal_StartIndex = input.index();
         boolean hasContent = false;
         try {
-            if ( backtracking>0 && alreadyParsedRule(input, 7) ) { return result; }
-            // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:330:4: ( ( RULE_ID ) )
-            // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:330:4: ( RULE_ID )
+            if ( backtracking>0 && alreadyParsedRule(input, 9) ) { return result; }
+            // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:378:4: ( ( RULE_ID ) )
+            // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:378:4: ( RULE_ID )
             {
             if ( backtracking==0 ) {
 
               				result = factory.create("ssm2", "Signal");
               			 
             }
-            // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:333:1: ( RULE_ID )
-            // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:333:2: RULE_ID
+            // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:381:1: ( RULE_ID )
+            // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:381:2: RULE_ID
             {
             if ( backtracking==0 ) {
               skipCurrentToken = false;
             }
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSignal447); if (failed) return result;
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSignal525); if (failed) return result;
             if ( backtracking==0 ) {
               if (!skipCurrentToken) {
                 hasContent = true;
                 Token temp = getLastToken();
-                ptm.createNode(((EObject)((EObject)xtextfile.eContents().get(6)).eContents().get(1)));
+                ptm.createNode(((EObject)((EObject)xtextfile.eContents().get(8)).eContents().get(1)));
                 factory.set(result,"name",convert(temp),false);
                 ptm.ruleFinished(temp);
               }
@@ -925,7 +1055,7 @@ public class ssm2dlParser extends Parser {
             recover(input,re);
         }
         finally {
-            if ( backtracking>0 ) { memoize(input, 7, ruleSignal_StartIndex); }
+            if ( backtracking>0 ) { memoize(input, 9, ruleSignal_StartIndex); }
         }
         return result;
     }
@@ -933,22 +1063,22 @@ public class ssm2dlParser extends Parser {
 
 
     // $ANTLR start ruleVariable
-    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:349:1: ruleVariable returns [EObject result] : ( ( RULE_ID ) | ( RULE_INT ) ) ;
+    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:397:1: ruleVariable returns [EObject result] : ( ( RULE_ID ) | ( RULE_INT ) ) ;
     public EObject ruleVariable() throws RecognitionException {
         EObject result = null;
         int ruleVariable_StartIndex = input.index();
         boolean hasContent = false;
         try {
-            if ( backtracking>0 && alreadyParsedRule(input, 8) ) { return result; }
-            // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:352:4: ( ( ( RULE_ID ) | ( RULE_INT ) ) )
-            // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:352:4: ( ( RULE_ID ) | ( RULE_INT ) )
+            if ( backtracking>0 && alreadyParsedRule(input, 10) ) { return result; }
+            // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:400:4: ( ( ( RULE_ID ) | ( RULE_INT ) ) )
+            // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:400:4: ( ( RULE_ID ) | ( RULE_INT ) )
             {
             if ( backtracking==0 ) {
 
               				result = factory.create("ssm2", "Variable");
               			 
             }
-            // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:355:1: ( ( RULE_ID ) | ( RULE_INT ) )
+            // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:403:1: ( ( RULE_ID ) | ( RULE_INT ) )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -961,26 +1091,26 @@ public class ssm2dlParser extends Parser {
             else {
                 if (backtracking>0) {failed=true; return result;}
                 NoViableAltException nvae =
-                    new NoViableAltException("355:1: ( ( RULE_ID ) | ( RULE_INT ) )", 6, 0, input);
+                    new NoViableAltException("403:1: ( ( RULE_ID ) | ( RULE_INT ) )", 6, 0, input);
 
                 throw nvae;
             }
             switch (alt6) {
                 case 1 :
-                    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:355:2: ( RULE_ID )
+                    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:403:2: ( RULE_ID )
                     {
-                    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:355:2: ( RULE_ID )
-                    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:355:3: RULE_ID
+                    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:403:2: ( RULE_ID )
+                    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:403:3: RULE_ID
                     {
                     if ( backtracking==0 ) {
                       skipCurrentToken = false;
                     }
-                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleVariable485); if (failed) return result;
+                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleVariable563); if (failed) return result;
                     if ( backtracking==0 ) {
                       if (!skipCurrentToken) {
                         hasContent = true;
                         Token temp = getLastToken();
-                        ptm.createNode(((EObject)((EObject)((EObject)xtextfile.eContents().get(7)).eContents().get(1)).eContents().get(0)));
+                        ptm.createNode(((EObject)((EObject)((EObject)xtextfile.eContents().get(9)).eContents().get(1)).eContents().get(0)));
                         factory.set(result,"vname",convert(temp),false);
                         ptm.ruleFinished(temp);
                       }
@@ -992,20 +1122,20 @@ public class ssm2dlParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:365:1: ( RULE_INT )
+                    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:413:1: ( RULE_INT )
                     {
-                    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:365:1: ( RULE_INT )
-                    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:365:2: RULE_INT
+                    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:413:1: ( RULE_INT )
+                    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:413:2: RULE_INT
                     {
                     if ( backtracking==0 ) {
                       skipCurrentToken = false;
                     }
-                    match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleVariable496); if (failed) return result;
+                    match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleVariable574); if (failed) return result;
                     if ( backtracking==0 ) {
                       if (!skipCurrentToken) {
                         hasContent = true;
                         Token temp = getLastToken();
-                        ptm.createNode(((EObject)((EObject)((EObject)xtextfile.eContents().get(7)).eContents().get(1)).eContents().get(1)));
+                        ptm.createNode(((EObject)((EObject)((EObject)xtextfile.eContents().get(9)).eContents().get(1)).eContents().get(1)));
                         factory.set(result,"value",convert(temp),false);
                         ptm.ruleFinished(temp);
                       }
@@ -1034,7 +1164,7 @@ public class ssm2dlParser extends Parser {
             recover(input,re);
         }
         finally {
-            if ( backtracking>0 ) { memoize(input, 8, ruleVariable_StartIndex); }
+            if ( backtracking>0 ) { memoize(input, 10, ruleVariable_StartIndex); }
         }
         return result;
     }
@@ -1042,7 +1172,7 @@ public class ssm2dlParser extends Parser {
 
 
     // $ANTLR start ruleOperator
-    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:382:1: ruleOperator returns [EObject result] : (temp_OperatorKind= ruleOperatorKind ) ;
+    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:430:1: ruleOperator returns [EObject result] : (temp_OperatorKind= ruleOperatorKind ) ;
     public EObject ruleOperator() throws RecognitionException {
         EObject result = null;
         int ruleOperator_StartIndex = input.index();
@@ -1051,22 +1181,22 @@ public class ssm2dlParser extends Parser {
 
         boolean hasContent = false;
         try {
-            if ( backtracking>0 && alreadyParsedRule(input, 9) ) { return result; }
-            // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:385:4: ( (temp_OperatorKind= ruleOperatorKind ) )
-            // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:385:4: (temp_OperatorKind= ruleOperatorKind )
+            if ( backtracking>0 && alreadyParsedRule(input, 11) ) { return result; }
+            // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:433:4: ( (temp_OperatorKind= ruleOperatorKind ) )
+            // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:433:4: (temp_OperatorKind= ruleOperatorKind )
             {
             if ( backtracking==0 ) {
 
               				result = factory.create("ssm2", "Operator");
               			 
             }
-            // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:388:1: (temp_OperatorKind= ruleOperatorKind )
-            // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:388:2: temp_OperatorKind= ruleOperatorKind
+            // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:436:1: (temp_OperatorKind= ruleOperatorKind )
+            // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:436:2: temp_OperatorKind= ruleOperatorKind
             {
             if ( backtracking==0 ) {
-              ptm.createNode(((EObject)((EObject)xtextfile.eContents().get(8)).eContents().get(1)));
+              ptm.createNode(((EObject)((EObject)xtextfile.eContents().get(10)).eContents().get(1)));
             }
-            pushFollow(FOLLOW_ruleOperatorKind_in_ruleOperator537);
+            pushFollow(FOLLOW_ruleOperatorKind_in_ruleOperator615);
             temp_OperatorKind=ruleOperatorKind();
             _fsp--;
             if (failed) return result;
@@ -1098,7 +1228,7 @@ public class ssm2dlParser extends Parser {
             recover(input,re);
         }
         finally {
-            if ( backtracking>0 ) { memoize(input, 9, ruleOperator_StartIndex); }
+            if ( backtracking>0 ) { memoize(input, 11, ruleOperator_StartIndex); }
         }
         return result;
     }
@@ -1106,13 +1236,13 @@ public class ssm2dlParser extends Parser {
 
 
     // $ANTLR start ruleOperatorKind
-    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:405:1: ruleOperatorKind returns [Enumerator r] : ( 'not' | '=' | '<' | '<=' | 'and' | 'or' | '+' | '-' | '*' | '/' | '?' );
+    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:453:1: ruleOperatorKind returns [Enumerator r] : ( 'not' | '=' | '<' | '<=' | 'and' | 'or' | '+' | '-' | '*' | '/' | '?' );
     public Enumerator ruleOperatorKind() throws RecognitionException {
         Enumerator r = null;
         int ruleOperatorKind_StartIndex = input.index();
         try {
-            if ( backtracking>0 && alreadyParsedRule(input, 10) ) { return r; }
-            // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:406:4: ( 'not' | '=' | '<' | '<=' | 'and' | 'or' | '+' | '-' | '*' | '/' | '?' )
+            if ( backtracking>0 && alreadyParsedRule(input, 12) ) { return r; }
+            // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:454:4: ( 'not' | '=' | '<' | '<=' | 'and' | 'or' | '+' | '-' | '*' | '/' | '?' )
             int alt7=11;
             switch ( input.LA(1) ) {
             case 14:
@@ -1173,18 +1303,18 @@ public class ssm2dlParser extends Parser {
             default:
                 if (backtracking>0) {failed=true; return r;}
                 NoViableAltException nvae =
-                    new NoViableAltException("405:1: ruleOperatorKind returns [Enumerator r] : ( 'not' | '=' | '<' | '<=' | 'and' | 'or' | '+' | '-' | '*' | '/' | '?' );", 7, 0, input);
+                    new NoViableAltException("453:1: ruleOperatorKind returns [Enumerator r] : ( 'not' | '=' | '<' | '<=' | 'and' | 'or' | '+' | '-' | '*' | '/' | '?' );", 7, 0, input);
 
                 throw nvae;
             }
 
             switch (alt7) {
                 case 1 :
-                    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:406:4: 'not'
+                    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:454:4: 'not'
                     {
-                    match(input,14,FOLLOW_14_in_ruleOperatorKind564); if (failed) return r;
+                    match(input,14,FOLLOW_14_in_ruleOperatorKind642); if (failed) return r;
                     if ( backtracking==0 ) {
-                      ptm.createNode(((EObject)((EObject)xtextfile.eContents().get(9)).eContents().get(1)));
+                      ptm.createNode(((EObject)((EObject)xtextfile.eContents().get(11)).eContents().get(1)));
                       r =factory.enumLit("ssm2", "OperatorKind","NOT");
                       ptm.setModelElement(r);
                       ptm.ruleFinished(getLastToken());
@@ -1194,11 +1324,11 @@ public class ssm2dlParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:412:7: '='
+                    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:460:7: '='
                     {
-                    match(input,13,FOLLOW_13_in_ruleOperatorKind577); if (failed) return r;
+                    match(input,13,FOLLOW_13_in_ruleOperatorKind655); if (failed) return r;
                     if ( backtracking==0 ) {
-                      ptm.createNode(((EObject)((EObject)xtextfile.eContents().get(9)).eContents().get(2)));
+                      ptm.createNode(((EObject)((EObject)xtextfile.eContents().get(11)).eContents().get(2)));
                       r =factory.enumLit("ssm2", "OperatorKind","EQ");
                       ptm.setModelElement(r);
                       ptm.ruleFinished(getLastToken());
@@ -1208,11 +1338,11 @@ public class ssm2dlParser extends Parser {
                     }
                     break;
                 case 3 :
-                    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:418:7: '<'
+                    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:466:7: '<'
                     {
-                    match(input,15,FOLLOW_15_in_ruleOperatorKind590); if (failed) return r;
+                    match(input,15,FOLLOW_15_in_ruleOperatorKind668); if (failed) return r;
                     if ( backtracking==0 ) {
-                      ptm.createNode(((EObject)((EObject)xtextfile.eContents().get(9)).eContents().get(3)));
+                      ptm.createNode(((EObject)((EObject)xtextfile.eContents().get(11)).eContents().get(3)));
                       r =factory.enumLit("ssm2", "OperatorKind","LT");
                       ptm.setModelElement(r);
                       ptm.ruleFinished(getLastToken());
@@ -1222,11 +1352,11 @@ public class ssm2dlParser extends Parser {
                     }
                     break;
                 case 4 :
-                    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:424:7: '<='
+                    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:472:7: '<='
                     {
-                    match(input,16,FOLLOW_16_in_ruleOperatorKind603); if (failed) return r;
+                    match(input,16,FOLLOW_16_in_ruleOperatorKind681); if (failed) return r;
                     if ( backtracking==0 ) {
-                      ptm.createNode(((EObject)((EObject)xtextfile.eContents().get(9)).eContents().get(4)));
+                      ptm.createNode(((EObject)((EObject)xtextfile.eContents().get(11)).eContents().get(4)));
                       r =factory.enumLit("ssm2", "OperatorKind","LEQ");
                       ptm.setModelElement(r);
                       ptm.ruleFinished(getLastToken());
@@ -1236,11 +1366,11 @@ public class ssm2dlParser extends Parser {
                     }
                     break;
                 case 5 :
-                    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:430:7: 'and'
+                    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:478:7: 'and'
                     {
-                    match(input,17,FOLLOW_17_in_ruleOperatorKind616); if (failed) return r;
+                    match(input,17,FOLLOW_17_in_ruleOperatorKind694); if (failed) return r;
                     if ( backtracking==0 ) {
-                      ptm.createNode(((EObject)((EObject)xtextfile.eContents().get(9)).eContents().get(5)));
+                      ptm.createNode(((EObject)((EObject)xtextfile.eContents().get(11)).eContents().get(5)));
                       r =factory.enumLit("ssm2", "OperatorKind","AND");
                       ptm.setModelElement(r);
                       ptm.ruleFinished(getLastToken());
@@ -1250,11 +1380,11 @@ public class ssm2dlParser extends Parser {
                     }
                     break;
                 case 6 :
-                    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:436:7: 'or'
+                    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:484:7: 'or'
                     {
-                    match(input,18,FOLLOW_18_in_ruleOperatorKind629); if (failed) return r;
+                    match(input,18,FOLLOW_18_in_ruleOperatorKind707); if (failed) return r;
                     if ( backtracking==0 ) {
-                      ptm.createNode(((EObject)((EObject)xtextfile.eContents().get(9)).eContents().get(6)));
+                      ptm.createNode(((EObject)((EObject)xtextfile.eContents().get(11)).eContents().get(6)));
                       r =factory.enumLit("ssm2", "OperatorKind","OR");
                       ptm.setModelElement(r);
                       ptm.ruleFinished(getLastToken());
@@ -1264,11 +1394,11 @@ public class ssm2dlParser extends Parser {
                     }
                     break;
                 case 7 :
-                    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:442:7: '+'
+                    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:490:7: '+'
                     {
-                    match(input,19,FOLLOW_19_in_ruleOperatorKind642); if (failed) return r;
+                    match(input,19,FOLLOW_19_in_ruleOperatorKind720); if (failed) return r;
                     if ( backtracking==0 ) {
-                      ptm.createNode(((EObject)((EObject)xtextfile.eContents().get(9)).eContents().get(7)));
+                      ptm.createNode(((EObject)((EObject)xtextfile.eContents().get(11)).eContents().get(7)));
                       r =factory.enumLit("ssm2", "OperatorKind","ADD");
                       ptm.setModelElement(r);
                       ptm.ruleFinished(getLastToken());
@@ -1278,11 +1408,11 @@ public class ssm2dlParser extends Parser {
                     }
                     break;
                 case 8 :
-                    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:448:7: '-'
+                    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:496:7: '-'
                     {
-                    match(input,20,FOLLOW_20_in_ruleOperatorKind655); if (failed) return r;
+                    match(input,20,FOLLOW_20_in_ruleOperatorKind733); if (failed) return r;
                     if ( backtracking==0 ) {
-                      ptm.createNode(((EObject)((EObject)xtextfile.eContents().get(9)).eContents().get(8)));
+                      ptm.createNode(((EObject)((EObject)xtextfile.eContents().get(11)).eContents().get(8)));
                       r =factory.enumLit("ssm2", "OperatorKind","SUB");
                       ptm.setModelElement(r);
                       ptm.ruleFinished(getLastToken());
@@ -1292,11 +1422,11 @@ public class ssm2dlParser extends Parser {
                     }
                     break;
                 case 9 :
-                    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:454:7: '*'
+                    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:502:7: '*'
                     {
-                    match(input,21,FOLLOW_21_in_ruleOperatorKind668); if (failed) return r;
+                    match(input,21,FOLLOW_21_in_ruleOperatorKind746); if (failed) return r;
                     if ( backtracking==0 ) {
-                      ptm.createNode(((EObject)((EObject)xtextfile.eContents().get(9)).eContents().get(9)));
+                      ptm.createNode(((EObject)((EObject)xtextfile.eContents().get(11)).eContents().get(9)));
                       r =factory.enumLit("ssm2", "OperatorKind","MULT");
                       ptm.setModelElement(r);
                       ptm.ruleFinished(getLastToken());
@@ -1306,11 +1436,11 @@ public class ssm2dlParser extends Parser {
                     }
                     break;
                 case 10 :
-                    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:460:7: '/'
+                    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:508:7: '/'
                     {
-                    match(input,10,FOLLOW_10_in_ruleOperatorKind681); if (failed) return r;
+                    match(input,10,FOLLOW_10_in_ruleOperatorKind759); if (failed) return r;
                     if ( backtracking==0 ) {
-                      ptm.createNode(((EObject)((EObject)xtextfile.eContents().get(9)).eContents().get(10)));
+                      ptm.createNode(((EObject)((EObject)xtextfile.eContents().get(11)).eContents().get(10)));
                       r =factory.enumLit("ssm2", "OperatorKind","DIV");
                       ptm.setModelElement(r);
                       ptm.ruleFinished(getLastToken());
@@ -1320,11 +1450,11 @@ public class ssm2dlParser extends Parser {
                     }
                     break;
                 case 11 :
-                    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:466:7: '?'
+                    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:514:7: '?'
                     {
-                    match(input,22,FOLLOW_22_in_ruleOperatorKind694); if (failed) return r;
+                    match(input,22,FOLLOW_22_in_ruleOperatorKind772); if (failed) return r;
                     if ( backtracking==0 ) {
-                      ptm.createNode(((EObject)((EObject)xtextfile.eContents().get(9)).eContents().get(11)));
+                      ptm.createNode(((EObject)((EObject)xtextfile.eContents().get(11)).eContents().get(11)));
                       r =factory.enumLit("ssm2", "OperatorKind","VAL");
                       ptm.setModelElement(r);
                       ptm.ruleFinished(getLastToken());
@@ -1341,7 +1471,7 @@ public class ssm2dlParser extends Parser {
             recover(input,re);
         }
         finally {
-            if ( backtracking>0 ) { memoize(input, 10, ruleOperatorKind_StartIndex); }
+            if ( backtracking>0 ) { memoize(input, 12, ruleOperatorKind_StartIndex); }
         }
         return r;
     }
@@ -1349,11 +1479,11 @@ public class ssm2dlParser extends Parser {
 
     // $ANTLR start synpred4
     public void synpred4_fragment() throws RecognitionException {   
-        // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:171:9: ( ruleSignal )
-        // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:171:9: ruleSignal
+        // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:171:9: ( ruleSignalReference )
+        // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:171:9: ruleSignalReference
         {
-        pushFollow(FOLLOW_ruleSignal_in_synpred4179);
-        ruleSignal();
+        pushFollow(FOLLOW_ruleSignalReference_in_synpred4179);
+        ruleSignalReference();
         _fsp--;
         if (failed) return ;
 
@@ -1363,11 +1493,11 @@ public class ssm2dlParser extends Parser {
 
     // $ANTLR start synpred5
     public void synpred5_fragment() throws RecognitionException {   
-        // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:171:64: ( ruleVariable )
-        // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:171:64: ruleVariable
+        // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:171:91: ( ruleVariableReference )
+        // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:171:91: ruleVariableReference
         {
-        pushFollow(FOLLOW_ruleVariable_in_synpred5194);
-        ruleVariable();
+        pushFollow(FOLLOW_ruleVariableReference_in_synpred5194);
+        ruleVariableReference();
         _fsp--;
         if (failed) return ;
 
@@ -1413,8 +1543,8 @@ public class ssm2dlParser extends Parser {
     public static final BitSet FOLLOW_10_in_ruleAction116 = new BitSet(new long[]{0x0000000000000032L});
     public static final BitSet FOLLOW_ruleEmission_in_ruleAction127 = new BitSet(new long[]{0x0000000000000032L});
     public static final BitSet FOLLOW_ruleAssignment_in_ruleAction140 = new BitSet(new long[]{0x0000000000000032L});
-    public static final BitSet FOLLOW_ruleSignal_in_ruleExpression179 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleVariable_in_ruleExpression194 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleSignalReference_in_ruleExpression179 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleVariableReference_in_ruleExpression194 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleComplexExpression_in_ruleExpression209 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_11_in_ruleComplexExpression237 = new BitSet(new long[]{0x00000000007FEC30L});
     public static final BitSet FOLLOW_ruleExpression_in_ruleComplexExpression247 = new BitSet(new long[]{0x00000000007FE400L});
@@ -1428,22 +1558,24 @@ public class ssm2dlParser extends Parser {
     public static final BitSet FOLLOW_ruleVariable_in_ruleAssignment390 = new BitSet(new long[]{0x0000000000002000L});
     public static final BitSet FOLLOW_13_in_ruleAssignment398 = new BitSet(new long[]{0x0000000000000830L});
     public static final BitSet FOLLOW_ruleExpression_in_ruleAssignment408 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleSignal447 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleVariable485 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleVariable496 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleOperatorKind_in_ruleOperator537 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_14_in_ruleOperatorKind564 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_13_in_ruleOperatorKind577 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_15_in_ruleOperatorKind590 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_16_in_ruleOperatorKind603 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_17_in_ruleOperatorKind616 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_18_in_ruleOperatorKind629 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_19_in_ruleOperatorKind642 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_20_in_ruleOperatorKind655 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_21_in_ruleOperatorKind668 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_10_in_ruleOperatorKind681 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_22_in_ruleOperatorKind694 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSignal_in_synpred4179 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleVariable_in_synpred5194 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleSignal_in_ruleSignalReference449 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleVariable_in_ruleVariableReference488 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleSignal525 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleVariable563 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_INT_in_ruleVariable574 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleOperatorKind_in_ruleOperator615 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_14_in_ruleOperatorKind642 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_13_in_ruleOperatorKind655 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_15_in_ruleOperatorKind668 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_16_in_ruleOperatorKind681 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_17_in_ruleOperatorKind694 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_18_in_ruleOperatorKind707 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_19_in_ruleOperatorKind720 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_20_in_ruleOperatorKind733 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_21_in_ruleOperatorKind746 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_10_in_ruleOperatorKind759 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_22_in_ruleOperatorKind772 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleSignalReference_in_synpred4179 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleVariableReference_in_synpred5194 = new BitSet(new long[]{0x0000000000000002L});
 
 }

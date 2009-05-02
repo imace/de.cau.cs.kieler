@@ -21,8 +21,8 @@
   <rules xsi:type="org.openarchitectureware.xtext:TypeRule" name="Expression">
     <type alias="ssm2" name="Expression"/>
     <content xsi:type="org.openarchitectureware.xtext:Alternatives">
-      <alternatives xsi:type="org.openarchitectureware.xtext:RuleName" name="Signal"/>
-      <alternatives xsi:type="org.openarchitectureware.xtext:RuleName" name="Variable"/>
+      <alternatives xsi:type="org.openarchitectureware.xtext:RuleName" name="SignalReference"/>
+      <alternatives xsi:type="org.openarchitectureware.xtext:RuleName" name="VariableReference"/>
       <alternatives xsi:type="org.openarchitectureware.xtext:RuleName" name="ComplexExpression"/>
     </content>
   </rules>
@@ -67,6 +67,18 @@
       <children xsi:type="org.openarchitectureware.xtext:Assignment" feature="expression" operator="ASSIGN">
         <token xsi:type="org.openarchitectureware.xtext:RuleName" name="Expression"/>
       </children>
+    </content>
+  </rules>
+  <rules xsi:type="org.openarchitectureware.xtext:TypeRule" name="SignalReference">
+    <type alias="ssm2" name="SignalReference"/>
+    <content xsi:type="org.openarchitectureware.xtext:Assignment" feature="signal" operator="ASSIGN">
+      <token xsi:type="org.openarchitectureware.xtext:RuleName" name="Signal"/>
+    </content>
+  </rules>
+  <rules xsi:type="org.openarchitectureware.xtext:TypeRule" name="VariableReference">
+    <type alias="ssm2" name="VariableReference"/>
+    <content xsi:type="org.openarchitectureware.xtext:Assignment" feature="variable" operator="ASSIGN">
+      <token xsi:type="org.openarchitectureware.xtext:RuleName" name="Variable"/>
     </content>
   </rules>
   <rules xsi:type="org.openarchitectureware.xtext:TypeRule" name="Signal">

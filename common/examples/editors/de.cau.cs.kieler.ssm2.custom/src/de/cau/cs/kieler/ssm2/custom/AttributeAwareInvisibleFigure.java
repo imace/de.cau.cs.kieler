@@ -27,6 +27,18 @@ public class AttributeAwareInvisibleFigure extends AttributeAwareFigure {
 		
 	}
 	
+	public AttributeAwareInvisibleFigure() {
+		super();
+		
+		RoundedRectangle invisibleFigure = new RoundedRectangle();
+		invisibleFigure.setFill(false);
+		invisibleFigure.setOutline(false);
+		
+		this.setDefaultFigure(invisibleFigure);
+		this.setCurrentFigure(invisibleFigure);
+		
+	}
+	
 	// The preferred size of the invisible figure is the maximum preferred size
 	// of all its child labels
 	@Override

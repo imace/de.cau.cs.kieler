@@ -56,6 +56,11 @@
 			«IF title != "StateCompartment"-»
 				result.getContentPane().setLayoutManager(new de.cau.cs.kieler.ssm2.custom.CustomCompartmentLayout());
 			«ENDIF-»
+			«REM»
+			«IF title == "RegionCompartment"-»
+				result.getContentPane().setLayoutManager(new de.cau.cs.kieler.ssm2.custom.CustomRegionCompartmentLayout());
+			«ENDIF-»
+			«ENDREM»
 			«REM» Additions end here «ENDREM»
 			return result;
 		}

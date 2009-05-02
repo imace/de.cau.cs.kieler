@@ -26,7 +26,7 @@ ruleAction
 
 ruleExpression 
 :
-        temp_signal=ruleSignal 	|        temp_variable=ruleVariable 	|        temp_complexexpression=ruleComplexExpression 	;
+        temp_signalreference=ruleSignalReference 	|        temp_variablereference=ruleVariableReference 	|        temp_complexexpression=ruleComplexExpression 	;
 
 ruleComplexExpression 
 
@@ -66,6 +66,18 @@ ruleAssignment
 
 (ruleExpression)
 )
+;
+
+ruleSignalReference 
+
+:
+(ruleSignal)
+;
+
+ruleVariableReference 
+
+:
+(ruleVariable)
 ;
 
 ruleSignal 

@@ -34,16 +34,16 @@ public class Ssm2dlUtilities extends AbstractLanguageUtilities {
 	List<String> r = new ArrayList<String>();
 	{
 		r.add("not");
-		r.add("or");
 		r.add("<=");
+		r.add("or");
 		r.add("*");
 		r.add("+");
 		r.add("?");
 		r.add("/");
 		r.add("=");
+		r.add("and");
 		r.add("-");
 		r.add("<");
-		r.add("and");
 	}
 	public List<String> allKeywords() {
 		return r;

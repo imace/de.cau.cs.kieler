@@ -10,7 +10,7 @@ Action [ssm2::Action] :
 	
 Expression [ssm2::Expression] :
 
-	Signal | Variable | ComplexExpression;
+	SignalReference | VariableReference | ComplexExpression;
 	
 ComplexExpression [ssm2::ComplexExpression] :
 
@@ -23,6 +23,14 @@ Emission [ssm2::Emission] :
 Assignment [ssm2::Assignment] :
 
 	variable=Variable "=" expression=Expression;
+
+SignalReference [ssm2::SignalReference] :
+
+	signal=Signal;
+	
+VariableReference [ssm2::VariableReference] :
+
+	variable=Variable;
 
 Signal [ssm2::Signal] :
 

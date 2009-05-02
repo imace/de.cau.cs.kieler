@@ -20,8 +20,10 @@ import de.cau.cs.kieler.ssm2.ComplexExpression;
 import de.cau.cs.kieler.ssm2.Emission;
 import de.cau.cs.kieler.ssm2.Expression;
 import de.cau.cs.kieler.ssm2.Signal;
+import de.cau.cs.kieler.ssm2.SignalReference;
 import de.cau.cs.kieler.ssm2.Ssm2Package;
 import de.cau.cs.kieler.ssm2.Variable;
+import de.cau.cs.kieler.ssm2.VariableReference;
 import de.cau.cs.kieler.ssm2.dsl.parser.XtextParser;
 
 // A wrapper for the xText parser
@@ -143,10 +145,10 @@ public class XTextParserWrapper implements IParser {
 	}
 	
 	private EList<Signal> getSignals(Expression expression) {
-		if (expression instanceof Signal)
-			return getSignals((Signal)expression);
-		if (expression instanceof Variable)
-			return getSignals((Variable)expression);
+		if (expression instanceof SignalReference)
+			return getSignals((SignalReference)expression);
+		if (expression instanceof VariableReference)
+			return getSignals((VariableReference)expression);
 		if (expression instanceof ComplexExpression)
 			return getSignals((ComplexExpression)expression);
 		return null;
@@ -172,6 +174,14 @@ public class XTextParserWrapper implements IParser {
 	
 	private EList<Signal> getSignals(Emission emission) {
 		return getSignals(emission.getSignal());
+	}
+	
+	private EList<Signal> getSignals(SignalReference signalRef) {
+		return getSignals(signalRef.getSignal());
+	}
+	
+	private EList<Signal> getSignals(VariableReference variableRef) {
+		return getSignals(variableRef.getVariable());
 	}
 
 	private EList<Signal> getSignals(Variable variable) {

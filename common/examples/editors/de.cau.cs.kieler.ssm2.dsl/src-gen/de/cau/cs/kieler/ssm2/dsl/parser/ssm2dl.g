@@ -168,7 +168,7 @@ recover(input,re);}
 
 ruleExpression returns [EObject result]
 :
-        temp_signal=ruleSignal {$result=temp_signal;}	|        temp_variable=ruleVariable {$result=temp_variable;}	|        temp_complexexpression=ruleComplexExpression {$result=temp_complexexpression;}	;
+        temp_signalreference=ruleSignalReference {$result=temp_signalreference;}	|        temp_variablereference=ruleVariableReference {$result=temp_variablereference;}	|        temp_complexexpression=ruleComplexExpression {$result=temp_complexexpression;}	;
 
 ruleComplexExpression returns [EObject result]
 @init {boolean hasContent = false;}
@@ -324,6 +324,54 @@ catch [RecognitionException re] {if (!hasContent)
 reportError(re);
 recover(input,re);}
 
+ruleSignalReference returns [EObject result]
+@init {boolean hasContent = false;}
+:
+			{
+				$result = factory.create("ssm2", "SignalReference");
+			 }
+({ptm.createNode(((EObject)((EObject)xtextfile.eContents().get(6)).eContents().get(1)));}temp_Signal=
+ruleSignal{if (temp_Signal != null) {
+  hasContent = true;
+  ptm.setModelElement(temp_Signal);
+  factory.set($result,"signal",convert(temp_Signal),false);
+  ptm.ruleFinished(temp_Signal);
+} else {
+  ptm.destroyNode();
+}
+}
+)
+ {if (!hasContent)
+  $result = null;};
+catch [RecognitionException re] {if (!hasContent)
+    $result = null;
+reportError(re);
+recover(input,re);}
+
+ruleVariableReference returns [EObject result]
+@init {boolean hasContent = false;}
+:
+			{
+				$result = factory.create("ssm2", "VariableReference");
+			 }
+({ptm.createNode(((EObject)((EObject)xtextfile.eContents().get(7)).eContents().get(1)));}temp_Variable=
+ruleVariable{if (temp_Variable != null) {
+  hasContent = true;
+  ptm.setModelElement(temp_Variable);
+  factory.set($result,"variable",convert(temp_Variable),false);
+  ptm.ruleFinished(temp_Variable);
+} else {
+  ptm.destroyNode();
+}
+}
+)
+ {if (!hasContent)
+  $result = null;};
+catch [RecognitionException re] {if (!hasContent)
+    $result = null;
+reportError(re);
+recover(input,re);}
+
 ruleSignal returns [EObject result]
 @init {boolean hasContent = false;}
 :
@@ -334,7 +382,7 @@ ruleSignal returns [EObject result]
 RULE_ID{if (!skipCurrentToken) {
   hasContent = true;
   Token temp = getLastToken();
-  ptm.createNode(((EObject)((EObject)xtextfile.eContents().get(6)).eContents().get(1)));
+  ptm.createNode(((EObject)((EObject)xtextfile.eContents().get(8)).eContents().get(1)));
   factory.set($result,"name",convert(temp),false);
   ptm.ruleFinished(temp);
 }}
@@ -356,7 +404,7 @@ ruleVariable returns [EObject result]
 RULE_ID{if (!skipCurrentToken) {
   hasContent = true;
   Token temp = getLastToken();
-  ptm.createNode(((EObject)((EObject)((EObject)xtextfile.eContents().get(7)).eContents().get(1)).eContents().get(0)));
+  ptm.createNode(((EObject)((EObject)((EObject)xtextfile.eContents().get(9)).eContents().get(1)).eContents().get(0)));
   factory.set($result,"vname",convert(temp),false);
   ptm.ruleFinished(temp);
 }}
@@ -366,7 +414,7 @@ RULE_ID{if (!skipCurrentToken) {
 RULE_INT{if (!skipCurrentToken) {
   hasContent = true;
   Token temp = getLastToken();
-  ptm.createNode(((EObject)((EObject)((EObject)xtextfile.eContents().get(7)).eContents().get(1)).eContents().get(1)));
+  ptm.createNode(((EObject)((EObject)((EObject)xtextfile.eContents().get(9)).eContents().get(1)).eContents().get(1)));
   factory.set($result,"value",convert(temp),false);
   ptm.ruleFinished(temp);
 }}
@@ -385,7 +433,7 @@ ruleOperator returns [EObject result]
 			{
 				$result = factory.create("ssm2", "Operator");
 			 }
-({ptm.createNode(((EObject)((EObject)xtextfile.eContents().get(8)).eContents().get(1)));}temp_OperatorKind=
+({ptm.createNode(((EObject)((EObject)xtextfile.eContents().get(10)).eContents().get(1)));}temp_OperatorKind=
 ruleOperatorKind{if (temp_OperatorKind != null) {
   hasContent = true;
   factory.set($result,"operatorKind",convert(temp_OperatorKind),false);
@@ -404,67 +452,67 @@ recover(input,re);}
 
 ruleOperatorKind returns [Enumerator r] :
 		 'not'
-		 {ptm.createNode(((EObject)((EObject)xtextfile.eContents().get(9)).eContents().get(1)));
+		 {ptm.createNode(((EObject)((EObject)xtextfile.eContents().get(11)).eContents().get(1)));
 $r=factory.enumLit("ssm2", "OperatorKind","NOT");
 ptm.setModelElement($r);
 ptm.ruleFinished(getLastToken());
 }
 	 |		 '='
-		 {ptm.createNode(((EObject)((EObject)xtextfile.eContents().get(9)).eContents().get(2)));
+		 {ptm.createNode(((EObject)((EObject)xtextfile.eContents().get(11)).eContents().get(2)));
 $r=factory.enumLit("ssm2", "OperatorKind","EQ");
 ptm.setModelElement($r);
 ptm.ruleFinished(getLastToken());
 }
 	 |		 '<'
-		 {ptm.createNode(((EObject)((EObject)xtextfile.eContents().get(9)).eContents().get(3)));
+		 {ptm.createNode(((EObject)((EObject)xtextfile.eContents().get(11)).eContents().get(3)));
 $r=factory.enumLit("ssm2", "OperatorKind","LT");
 ptm.setModelElement($r);
 ptm.ruleFinished(getLastToken());
 }
 	 |		 '<='
-		 {ptm.createNode(((EObject)((EObject)xtextfile.eContents().get(9)).eContents().get(4)));
+		 {ptm.createNode(((EObject)((EObject)xtextfile.eContents().get(11)).eContents().get(4)));
 $r=factory.enumLit("ssm2", "OperatorKind","LEQ");
 ptm.setModelElement($r);
 ptm.ruleFinished(getLastToken());
 }
 	 |		 'and'
-		 {ptm.createNode(((EObject)((EObject)xtextfile.eContents().get(9)).eContents().get(5)));
+		 {ptm.createNode(((EObject)((EObject)xtextfile.eContents().get(11)).eContents().get(5)));
 $r=factory.enumLit("ssm2", "OperatorKind","AND");
 ptm.setModelElement($r);
 ptm.ruleFinished(getLastToken());
 }
 	 |		 'or'
-		 {ptm.createNode(((EObject)((EObject)xtextfile.eContents().get(9)).eContents().get(6)));
+		 {ptm.createNode(((EObject)((EObject)xtextfile.eContents().get(11)).eContents().get(6)));
 $r=factory.enumLit("ssm2", "OperatorKind","OR");
 ptm.setModelElement($r);
 ptm.ruleFinished(getLastToken());
 }
 	 |		 '+'
-		 {ptm.createNode(((EObject)((EObject)xtextfile.eContents().get(9)).eContents().get(7)));
+		 {ptm.createNode(((EObject)((EObject)xtextfile.eContents().get(11)).eContents().get(7)));
 $r=factory.enumLit("ssm2", "OperatorKind","ADD");
 ptm.setModelElement($r);
 ptm.ruleFinished(getLastToken());
 }
 	 |		 '-'
-		 {ptm.createNode(((EObject)((EObject)xtextfile.eContents().get(9)).eContents().get(8)));
+		 {ptm.createNode(((EObject)((EObject)xtextfile.eContents().get(11)).eContents().get(8)));
 $r=factory.enumLit("ssm2", "OperatorKind","SUB");
 ptm.setModelElement($r);
 ptm.ruleFinished(getLastToken());
 }
 	 |		 '*'
-		 {ptm.createNode(((EObject)((EObject)xtextfile.eContents().get(9)).eContents().get(9)));
+		 {ptm.createNode(((EObject)((EObject)xtextfile.eContents().get(11)).eContents().get(9)));
 $r=factory.enumLit("ssm2", "OperatorKind","MULT");
 ptm.setModelElement($r);
 ptm.ruleFinished(getLastToken());
 }
 	 |		 '/'
-		 {ptm.createNode(((EObject)((EObject)xtextfile.eContents().get(9)).eContents().get(10)));
+		 {ptm.createNode(((EObject)((EObject)xtextfile.eContents().get(11)).eContents().get(10)));
 $r=factory.enumLit("ssm2", "OperatorKind","DIV");
 ptm.setModelElement($r);
 ptm.ruleFinished(getLastToken());
 }
 	 |		 '?'
-		 {ptm.createNode(((EObject)((EObject)xtextfile.eContents().get(9)).eContents().get(11)));
+		 {ptm.createNode(((EObject)((EObject)xtextfile.eContents().get(11)).eContents().get(11)));
 $r=factory.enumLit("ssm2", "OperatorKind","VAL");
 ptm.setModelElement($r);
 ptm.ruleFinished(getLastToken());

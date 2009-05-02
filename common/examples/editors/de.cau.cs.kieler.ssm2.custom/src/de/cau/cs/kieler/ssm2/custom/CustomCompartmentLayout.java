@@ -32,7 +32,8 @@ public class CustomCompartmentLayout extends XYLayout {
 		for (Object child : children) {
 			if (child instanceof IFigure) {
 				IFigure childFigure = (IFigure) child;
-				if ((childFigure.getChildren() != null) && (childFigure.getChildren().size() > 0) && (childFigure.getChildren().get(0) instanceof AttributeAwareInvisibleFigure)) {
+				if ((childFigure.getChildren() != null) && (childFigure.getChildren().size() > 0)
+					&& (childFigure.getChildren().get(0) instanceof AttributeAwareInvisibleFigure)) {
 					newBounds.width = childFigure.getMinimumSize(-1, -1).width;
 					newBounds.height = childFigure.getMinimumSize(-1, -1).height;
 				}
