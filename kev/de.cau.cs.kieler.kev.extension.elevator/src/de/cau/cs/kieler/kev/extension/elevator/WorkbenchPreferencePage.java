@@ -28,7 +28,6 @@ public class WorkbenchPreferencePage extends FieldEditorPreferencePage implement
 		this.addField(new ComboFieldEditor(CONTROLLERID,"Choose Example", namesAndIds, getFieldEditorParent()));
 	}
 
-	@Override
 	public void init(IWorkbench workbench) {
 		// set the preference store
 		IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();

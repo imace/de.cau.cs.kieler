@@ -71,7 +71,6 @@ public class KevPreferencePage extends PreferencePage implements
 		return container;
 	}
 
-	@Override
 	public void init(IWorkbench workbench) {
 		// set the preference store
 		IPreferenceStore preferenceStore = KevPlugin.getDefault().getPreferenceStore();

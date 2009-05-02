@@ -72,7 +72,9 @@ public class EnvironmentView extends ViewPart {
 		IPreferenceStore preferenceStore = KevPlugin.getDefault().getPreferenceStore();
 		String defaultFile = preferenceStore.getString(OpenImageWizard.DEFAULT_IMAGE);
 		boolean load = preferenceStore.getBoolean(OpenImageWizard.LOAD_STARTUP);
-		if(defaultFile != null && !defaultFile.isEmpty() && load)
+		if(     (defaultFile != null) && 
+		        ( !defaultFile.trim().equals("") ) && 
+		        load)
 			try {
 				svg.setSVGFile(new URL(defaultFile));
 			} catch (MalformedURLException e) {

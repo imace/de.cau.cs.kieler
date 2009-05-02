@@ -55,7 +55,6 @@ public class AbortErrorDialog extends ErrorDialog implements SelectionListener{
 
 	}
 
-	@Override
 	public void widgetDefaultSelected(SelectionEvent e) {
 		// TODO Auto-generated method stub
 		
@@ -64,7 +63,6 @@ public class AbortErrorDialog extends ErrorDialog implements SelectionListener{
 	/**
 	 * Callback function for abort button
 	 */
-	@Override
 	public void widgetSelected(SelectionEvent e) {
 		try{
 		if(e.getSource().getClass() == Button.class){

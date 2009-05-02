@@ -35,13 +35,11 @@ public class DelayTextField extends ControlContribution implements KeyListener{
 		return textfield;
 	}
 
-	@Override
 	public void keyPressed(KeyEvent e) {
 		if(e.character=='\r'){
 			updateDelay();
 		}			
 	}
-	@Override
 	public void keyReleased(KeyEvent e) {
 		/* nothing */
 	}

@@ -7,4 +7,3 @@ Bundle-Activator: de.cau.cs.kieler.kev.extension.empty.Activator
 Require-Bundle: org.eclipse.core.runtime,
  de.cau.cs.kieler.kev;bundle-version="1.0.0"
 Eclipse-LazyStart: true
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6

@@ -133,7 +133,6 @@ public class Tools {
 	public static void setStatusLine(String message){
 				final String msg = message;
 				PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable(){
-					@Override
 					public void run() {
 						if(statusLineManager == null)
 							statusLineManager = getStatusLineManager();
@@ -447,7 +446,6 @@ class DiagramRunnable implements Runnable{
 			this.exc = new Exception("not specified");
 		}
 	}
-	@Override
 	public void run() {
 		Exception alibiException = new Exception(Tools.getStackTrace(exc));
 		Status s = new Status(IStatus.ERROR, KevPlugin.PLUGIN_ID, exc.getMessage(),alibiException);

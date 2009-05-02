@@ -116,7 +116,6 @@ public class OpenImageWizard extends Wizard {
 			this.setMessage("Select the SVG Image for animation");
 			this.setTitle("Select Image");
 		}
-		@Override
 		public void createControl(Composite parent) {
 			Composite composite = new Composite(parent, SWT.NONE);
 												
@@ -160,7 +159,7 @@ public class OpenImageWizard extends Wizard {
 			// write last loaded filename
 			IPreferenceStore preferences = KevPlugin.getDefault().getPreferenceStore();
 			String last = preferences.getString(DEFAULT_IMAGE);
-			if(last != null && !last.isEmpty())
+			if(last != null && !last.trim().equals(""))
 				resourceNameField.setText(last);
 			
 			Button resourceButton = new Button(resourceComposite, SWT.NONE);
@@ -196,7 +195,7 @@ public class OpenImageWizard extends Wizard {
 					URL url = FileLocator.find(bundle, path, Collections.EMPTY_MAP);
 					String name = configElements[i].getAttribute("name");
 					System.out.println("path:"+path+" url:"+url+" name:"+name);
-					if(name == null || name.isEmpty())
+					if(name == null || name.trim().equals(""))
 						name = url.getFile();
 					int suffix = 2; // make sure there are no doubles
 					while(images.containsKey(name)){
@@ -217,7 +216,7 @@ public class OpenImageWizard extends Wizard {
 			dialog.setFilterExtensions(extensions);
 			dialog.open();
 			String path = dialog.getFilterPath()+File.separator+dialog.getFileName();
-			if(path != null && !path.isEmpty()){
+			if(path != null && !path.trim().equals("")){
 				try {
 					File file = new File(path);
 					URL url = file.toURI().toURL();
@@ -235,7 +234,6 @@ public class OpenImageWizard extends Wizard {
 		 * item is selected, the corresponding URL is automatically inserted
 		 * into the resource file text field.
 		 */
-		@Override
 		public void widgetSelected(SelectionEvent e) {
 			if (e.getSource() instanceof List){ // Item in List was selected
 				List list = (List)e.getSource();
@@ -262,15 +260,11 @@ public class OpenImageWizard extends Wizard {
 				}
 			}
 		}
-		@Override
 		public void widgetDefaultSelected(SelectionEvent e) {/*nothing*/}
-		@Override
 		public void mouseDoubleClick(MouseEvent e) {
 			finishAndDispose();
 		}
-		@Override
 		public void mouseDown(MouseEvent e) {/*nothing*/}
-		@Override
 		public void mouseUp(MouseEvent e) {/*nothing*/}
 		
 	}

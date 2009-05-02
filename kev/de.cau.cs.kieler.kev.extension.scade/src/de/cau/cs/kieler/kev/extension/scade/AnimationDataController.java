@@ -16,7 +16,6 @@ public class AnimationDataController extends
 		
 	}
 
-	@Override
 	public void controlFlowChanged(ControlFlowChangeEvent e) {
 		if(controlJob == null)
 			controlJob = new ScadeStepControlJob(this);
@@ -57,13 +56,11 @@ public class AnimationDataController extends
 
 	}
 
-	@Override
 	public void dataChanged(DataChangeEvent e) {
 		System.out.println("Control Data changed."+e.getPort());
 		controlJob.setControlData(e);
 	}
 
-	@Override
 	public void setDataSize(int size) {
 		
 	}

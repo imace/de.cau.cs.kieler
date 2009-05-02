@@ -3,15 +3,6 @@
 <plugin>
 
    <extension
-         id="application"
-         point="org.eclipse.core.runtime.applications">
-      <application>
-         <run
-               class="de.cau.cs.kieler.kev.application.Application">
-         </run>
-      </application>
-   </extension>
-   <extension
          point="org.eclipse.ui.perspectives">
       <perspective
             name="RCP Perspective"
@@ -23,7 +14,7 @@
          id="product"
          point="org.eclipse.core.runtime.products">
       <product
-            application="de.cau.cs.kieler.kev.application.application"
+            application="de.cau.cs.kieler.kev.application.kevapplication"
             name="KIEL Environment Visualization">
          <property
                name="windowImages"
@@ -78,6 +69,18 @@
                tooltip="Open a new Environment Image">
          </action>
       </actionSet>
+   </extension>
+   <extension
+         id="kevapplication"
+         point="org.eclipse.core.runtime.applications">
+      <application
+            cardinality="singleton-global"
+            thread="main"
+            visible="true">
+         <run
+               class="de.cau.cs.kieler.kev.application.Application">
+         </run>
+      </application>
    </extension>
 
 </plugin>

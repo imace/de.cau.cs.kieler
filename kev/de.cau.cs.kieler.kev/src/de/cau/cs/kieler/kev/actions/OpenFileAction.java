@@ -35,7 +35,7 @@ public class OpenFileAction extends Action {
 				dialog.setFilterExtensions(extensions);
 				dialog.open();
 				String path = dialog.getFilterPath()+File.separator+dialog.getFileName();
-				if(path != null && !path.isEmpty() && !path.equals("/")){
+				if(path != null && !path.trim().equals("") && !path.equals("/")){
 					try {
 						File file = new File(path);
 						URL url = file.toURI().toURL();

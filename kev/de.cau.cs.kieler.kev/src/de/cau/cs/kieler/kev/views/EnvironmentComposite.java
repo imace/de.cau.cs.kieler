@@ -55,6 +55,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.ISelectionListener;
 import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.statushandlers.StatusManager;
 import org.w3c.dom.Element;
 
 import de.cau.cs.kieler.kev.KevPlugin;
@@ -172,7 +173,9 @@ public class EnvironmentComposite extends Composite implements ISelectionListene
 			updater = new SVGResourceChangeListener();
 			workspace.addResourceChangeListener(updater);
 		} catch (Throwable t) {
-			//Status s = new Status(0,"",0,t.getMessage(),t);
+			Status s = new Status(IStatus.ERROR,KevPlugin.PLUGIN_ID,t.getMessage(),t);
+			StatusManager.getManager().handle(s, StatusManager.SHOW);
+			StatusManager.getManager().handle(s, StatusManager.LOG);
 			//ErrorDialog d = new ErrorDialog(this.getShell(),"Error",t.getMessage(),s,IStatus.ERROR);
 		}
 	}

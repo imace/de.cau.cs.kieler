@@ -38,7 +38,6 @@ public class TestController extends AnimationDataController{
 	 * (non-Javadoc)
 	 * @see de.cau.cs.kieler.kev.extension.ControlFlowChangeListener#controlFlowChanged(de.cau.cs.kieler.kev.extension.ControlFlowChangeEvent)
 	 */
-	@Override
 	public void controlFlowChanged(ControlFlowChangeEvent e) {
 		System.out.println("Control Flow Changed: "+e.getType()+" "+e.getData());
 		if(controlJob == null)
@@ -96,7 +95,6 @@ public class TestController extends AnimationDataController{
 	 * (non-Javadoc)
 	 * @see de.cau.cs.kieler.kev.extension.DataChangeListener#dataChanged(de.cau.cs.kieler.kev.extension.DataChangeEvent)
 	 */
-	@Override
 	public void dataChanged(DataChangeEvent e) {
 		System.out.println("Control data Changed: "+e.getData());
 		controlJob.setControlData(e.getData());
@@ -106,7 +104,6 @@ public class TestController extends AnimationDataController{
 	 * (non-Javadoc)
 	 * @see de.cau.cs.kieler.kev.extension.DataChangeListener#setDataSize(int)
 	 */
-	@Override
 	public void setDataSize(int size) {
 		System.out.println("Display data size from mapping: "+size);
 	}

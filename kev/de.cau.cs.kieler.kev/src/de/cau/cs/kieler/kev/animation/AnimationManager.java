@@ -122,7 +122,6 @@ public class AnimationManager extends GVTTreeRendererAdapter implements DataChan
 	 * Listens to DataChangeEvents that are supposed to indicate that input data
 	 * has changed, that should be animated in the graphical representation.
 	 */
-	@Override
 	public void dataChanged(DataChangeEvent e) {
 		//System.out.println("Input Data has changed: "+e.getData());
 		try {
@@ -133,7 +132,6 @@ public class AnimationManager extends GVTTreeRendererAdapter implements DataChan
 		}
 	}
 
-	@Override
 	public void setDataSize(int size) {
 		System.out.println("Control data size: "+size);
 	}
@@ -190,7 +188,6 @@ public class AnimationManager extends GVTTreeRendererAdapter implements DataChan
 		public AnimationRunner(AnimationData data) {
 			this.data = data;
 		}
-		@Override
 		public void run() {
 			for (int i = 0; i < animationMapping.getAnimationList().size(); i++) {
 				animationMapping.getAnimationList().get(i).doAnimation(data);

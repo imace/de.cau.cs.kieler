@@ -39,7 +39,6 @@ public abstract class AnimationDataController extends DataChangeEventSource impl
 
 	private String name;
 	
-	@Override
 	public void setInitializationData(IConfigurationElement config,
 			String propertyName, Object data) throws CoreException {
 		this.name = config.getAttribute("name");

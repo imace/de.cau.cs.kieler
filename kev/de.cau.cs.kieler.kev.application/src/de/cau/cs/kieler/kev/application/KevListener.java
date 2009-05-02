@@ -24,24 +24,19 @@ public class KevListener implements GVTTreeRendererListener {
 		this.canvas = c;
 	}
 
-	@Override
 	public void gvtRenderingCompleted(GVTTreeRendererEvent e) {
 		Tools.setStatusLine("Image rendering finished.");
 		this.resizeWindow();
 	}
-	@Override
 	public void gvtRenderingCancelled(GVTTreeRendererEvent arg0) {
 		Tools.setStatusLine("Cancelled image rendering.");
 	}
-	@Override
 	public void gvtRenderingFailed(GVTTreeRendererEvent arg0) {
 		Tools.setStatusLine("Failed image rendering.");
 	}
-	@Override
 	public void gvtRenderingPrepare(GVTTreeRendererEvent arg0) {
 		Tools.setStatusLine("Image loading...");
 	}
-	@Override
 	public void gvtRenderingStarted(GVTTreeRendererEvent arg0) {
 		Tools.setStatusLine("Image rendering...");
 	}
@@ -50,7 +45,6 @@ public class KevListener implements GVTTreeRendererListener {
 		Tools.setStatusLine("Automatic resizing of frame...");
 		try{
 			PlatformUI.getWorkbench().getDisplay().syncExec(new Runnable(){
-				@Override
 				public void run() {
 					try{
 					Dimension size = canvas.getPreferredSize();

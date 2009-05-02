@@ -24,7 +24,6 @@ public abstract class AnimationDataControllerAggregated extends
 
 	private AnimationData controlData;
 	
-	@Override
 	public void dataChanged(DataChangeEvent e) {
 		AnimationData dataFromKev = e.getData();
 		if(controlData == null)

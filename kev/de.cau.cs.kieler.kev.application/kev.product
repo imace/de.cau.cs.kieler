@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?pde version="3.1"?>
+<?pde version="3.4"?>
 
-<product name="KIEL Environment Visualization" id="de.cau.cs.kieler.kev.application.product" application="de.cau.cs.kieler.kev.application.application" useFeatures="false">
+<product name="KIEL Environment Visualization" id="de.cau.cs.kieler.kev.application.product" application="de.cau.cs.kieler.kev.application.kevapplication" useFeatures="false">
 
    <aboutInfo>
       <image path="/de.cau.cs.kieler.kev.application/icons/kev_about.png"/>
@@ -15,7 +15,8 @@ http://www.informatik.uni-kiel.de/en/rtsys/
       </text>
    </aboutInfo>
 
-   <configIni use="default" path="plugin_customization.ini"/>
+   <configIni use="default" path="plugin_customization.ini">
+   </configIni>
 
    <launcherArgs>
       <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts</vmArgsMac>
@@ -35,7 +36,6 @@ http://www.informatik.uni-kiel.de/en/rtsys/
       </win>
    </launcher>
 
-
    <vm>
       <linux>org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre1.6.0_03</linux>
       <windows>org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre1.6.0_03</windows>
@@ -46,8 +46,7 @@ http://www.informatik.uni-kiel.de/en/rtsys/
       <plugin id="de.cau.cs.kieler.kev"/>
       <plugin id="de.cau.cs.kieler.kev.application"/>
       <plugin id="de.cau.cs.kieler.kev.extension.elevator"/>
-      <plugin id="de.cau.cs.kieler.kev.extension.scade"/>
-      <plugin id="javax.servlet"/>
+      <plugin id="de.cau.cs.kieler.kev.extension.empty"/>
       <plugin id="javax.xml"/>
       <plugin id="org.apache.batik.bridge"/>
       <plugin id="org.apache.batik.css"/>
@@ -62,27 +61,17 @@ http://www.informatik.uni-kiel.de/en/rtsys/
       <plugin id="org.apache.xerces"/>
       <plugin id="org.apache.xml.resolver"/>
       <plugin id="org.apache.xml.serializer"/>
-      <plugin id="org.eclipse.ant.core"/>
       <plugin id="org.eclipse.core.commands"/>
       <plugin id="org.eclipse.core.contenttype"/>
       <plugin id="org.eclipse.core.databinding"/>
       <plugin id="org.eclipse.core.expressions"/>
       <plugin id="org.eclipse.core.filesystem"/>
-      <plugin id="org.eclipse.core.filesystem.hpux.ia64_32" fragment="true"/>
-      <plugin id="org.eclipse.core.filesystem.linux.ppc" fragment="true"/>
-      <plugin id="org.eclipse.core.filesystem.linux.x86" fragment="true"/>
-      <plugin id="org.eclipse.core.filesystem.linux.x86_64" fragment="true"/>
       <plugin id="org.eclipse.core.filesystem.macosx" fragment="true"/>
-      <plugin id="org.eclipse.core.filesystem.solaris.sparc" fragment="true"/>
-      <plugin id="org.eclipse.core.filesystem.win32.x86" fragment="true"/>
       <plugin id="org.eclipse.core.jobs"/>
       <plugin id="org.eclipse.core.resources"/>
       <plugin id="org.eclipse.core.resources.compatibility" fragment="true"/>
-      <plugin id="org.eclipse.core.resources.win32.x86" fragment="true"/>
       <plugin id="org.eclipse.core.runtime"/>
-      <plugin id="org.eclipse.core.runtime.compatibility.auth"/>
       <plugin id="org.eclipse.core.runtime.compatibility.registry" fragment="true"/>
-      <plugin id="org.eclipse.core.variables"/>
       <plugin id="org.eclipse.equinox.app"/>
       <plugin id="org.eclipse.equinox.common"/>
       <plugin id="org.eclipse.equinox.preferences"/>
@@ -91,18 +80,8 @@ http://www.informatik.uni-kiel.de/en/rtsys/
       <plugin id="org.eclipse.jface"/>
       <plugin id="org.eclipse.jface.databinding"/>
       <plugin id="org.eclipse.osgi"/>
-      <plugin id="org.eclipse.osgi.services"/>
       <plugin id="org.eclipse.swt"/>
       <plugin id="org.eclipse.swt.carbon.macosx" fragment="true"/>
-      <plugin id="org.eclipse.swt.gtk.linux.ppc" fragment="true"/>
-      <plugin id="org.eclipse.swt.gtk.linux.x86" fragment="true"/>
-      <plugin id="org.eclipse.swt.gtk.linux.x86_64" fragment="true"/>
-      <plugin id="org.eclipse.swt.gtk.solaris.sparc" fragment="true"/>
-      <plugin id="org.eclipse.swt.motif.aix.ppc" fragment="true"/>
-      <plugin id="org.eclipse.swt.motif.hpux.ia64_32" fragment="true"/>
-      <plugin id="org.eclipse.swt.win32.win32.x86" fragment="true"/>
-      <plugin id="org.eclipse.swt.win32.win32.x86_64" fragment="true"/>
-      <plugin id="org.eclipse.swt.wpf.win32.x86" fragment="true"/>
       <plugin id="org.eclipse.ui"/>
       <plugin id="org.eclipse.ui.carbon" fragment="true"/>
       <plugin id="org.eclipse.ui.workbench"/>
