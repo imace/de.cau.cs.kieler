@@ -41,10 +41,9 @@
     <eLiterals name="INITIAL" value="1"/>
     <eLiterals name="FINAL" value="2"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Signal">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//Value"
-        containment="true" eOpposite="#//Value/parentSignal"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Signal" eSuperTypes="#//ValuedObject">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//ValuedObject"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parentState" lowerBound="1"
         eType="#//State" eOpposite="#//State/signals"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isLocal" lowerBound="1"
@@ -56,12 +55,11 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="combineType" lowerBound="1"
         eType="#//CombineType"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Value">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="parentSignal" eType="#//Signal"
-        eOpposite="#//Signal/value"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="parentVariable" eType="#//Variable"
-        eOpposite="#//Variable/value"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ValuedObject">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1" eType="#//ValueType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="initialValue" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Emission">
     <eStructuralFeatures xsi:type="ecore:EReference" name="newValue" eType="#//Expression"
@@ -162,10 +160,9 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="expression" lowerBound="1"
         eType="#//Expression" eOpposite="#//Expression/parentAssignment"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Variable">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="vname" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="#//Value"
-        containment="true" eOpposite="#//Value/parentVariable"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Variable" eSuperTypes="#//ValuedObject">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="#//ValuedObject"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parentState" eType="#//State"
         eOpposite="#//State/variables"/>
   </eClassifiers>
@@ -193,5 +190,12 @@
   <eClassifiers xsi:type="ecore:EClass" name="VariableReference" eSuperTypes="#//Expression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="variable" lowerBound="1"
         eType="#//Variable"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ValueType">
+    <eLiterals name="PURE"/>
+    <eLiterals name="BOOL" value="1"/>
+    <eLiterals name="UNSIGNED" value="2"/>
+    <eLiterals name="INTEGER" value="3"/>
+    <eLiterals name="DOUBLE" value="4"/>
   </eClassifiers>
 </ecore:EPackage>

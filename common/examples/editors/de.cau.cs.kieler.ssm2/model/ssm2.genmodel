@@ -41,6 +41,13 @@
       <genEnumLiterals ecoreEnumLiteral="ssm2.ecore#//CombineType/ADD"/>
       <genEnumLiterals ecoreEnumLiteral="ssm2.ecore#//CombineType/MULT"/>
     </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="ssm2.ecore#//ValueType">
+      <genEnumLiterals ecoreEnumLiteral="ssm2.ecore#//ValueType/PURE"/>
+      <genEnumLiterals ecoreEnumLiteral="ssm2.ecore#//ValueType/BOOL"/>
+      <genEnumLiterals ecoreEnumLiteral="ssm2.ecore#//ValueType/UNSIGNED"/>
+      <genEnumLiterals ecoreEnumLiteral="ssm2.ecore#//ValueType/INTEGER"/>
+      <genEnumLiterals ecoreEnumLiteral="ssm2.ecore#//ValueType/DOUBLE"/>
+    </genEnums>
     <genClasses ecoreClass="ssm2.ecore#//State">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ssm2.ecore#//State/stateKind"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ssm2.ecore#//State/stateFlag"/>
@@ -58,17 +65,16 @@
     </genClasses>
     <genClasses ecoreClass="ssm2.ecore#//Signal">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ssm2.ecore#//Signal/value"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ssm2.ecore#//Signal/name"/>
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ssm2.ecore#//Signal/parentState"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ssm2.ecore#//Signal/isLocal"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ssm2.ecore#//Signal/isInput"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ssm2.ecore#//Signal/isOutput"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ssm2.ecore#//Signal/combineType"/>
     </genClasses>
-    <genClasses ecoreClass="ssm2.ecore#//Value">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ssm2.ecore#//Value/value"/>
-      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ssm2.ecore#//Value/parentSignal"/>
-      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ssm2.ecore#//Value/parentVariable"/>
+    <genClasses ecoreClass="ssm2.ecore#//ValuedObject">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ssm2.ecore#//ValuedObject/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ssm2.ecore#//ValuedObject/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ssm2.ecore#//ValuedObject/initialValue"/>
     </genClasses>
     <genClasses ecoreClass="ssm2.ecore#//Emission">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ssm2.ecore#//Emission/newValue"/>
@@ -121,7 +127,6 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ssm2.ecore#//Assignment/expression"/>
     </genClasses>
     <genClasses ecoreClass="ssm2.ecore#//Variable">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ssm2.ecore#//Variable/vname"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ssm2.ecore#//Variable/value"/>
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ssm2.ecore#//Variable/parentState"/>
     </genClasses>

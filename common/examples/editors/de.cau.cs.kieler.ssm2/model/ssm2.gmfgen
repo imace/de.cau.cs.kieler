@@ -132,9 +132,9 @@
       </modelFacet>
       <labels
           visualID="5019"
-          editPartClassName="SignalNameEditPart"
-          itemSemanticEditPolicyClassName="SignalNameItemSemanticEditPolicy"
-          notationViewFactoryClassName="SignalNameViewFactory">
+          editPartClassName="SignalNameTypeCombineTypeEditPart"
+          itemSemanticEditPolicyClassName="SignalNameTypeCombineTypeItemSemanticEditPolicy"
+          notationViewFactoryClassName="SignalNameTypeCombineTypeViewFactory">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap
@@ -142,9 +142,16 @@
             getterName="getFigureInvisibleFigureLabelFigure"
             figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel"/>
         <modelFacet
-            xsi:type="gmfgen:FeatureLabelModelFacet">
+            xsi:type="gmfgen:FeatureLabelModelFacet"
+            viewPattern="{0}: {1} combine with {2}"
+            editorPattern="{0}: {1} combine with {2}"
+            editPattern="{0}: {1} combine with {2}">
           <metaFeatures
-              href="ssm2.genmodel#//ssm2/Signal/name"/>
+              href="ssm2.genmodel#//ssm2/ValuedObject/name"/>
+          <metaFeatures
+              href="ssm2.genmodel#//ssm2/ValuedObject/type"/>
+          <metaFeatures
+              href="ssm2.genmodel#//ssm2/Signal/combineType"/>
         </modelFacet>
       </labels>
     </childNodes>
@@ -316,9 +323,9 @@
       </modelFacet>
       <labels
           visualID="5023"
-          editPartClassName="VariableVnameEditPart"
-          itemSemanticEditPolicyClassName="VariableVnameItemSemanticEditPolicy"
-          notationViewFactoryClassName="VariableVnameViewFactory">
+          editPartClassName="VariableNameTypeEditPart"
+          itemSemanticEditPolicyClassName="VariableNameTypeItemSemanticEditPolicy"
+          notationViewFactoryClassName="VariableNameTypeViewFactory">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap
@@ -326,9 +333,14 @@
             getterName="getFigureInvisibleFigureLabelFigure"
             figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel"/>
         <modelFacet
-            xsi:type="gmfgen:FeatureLabelModelFacet">
+            xsi:type="gmfgen:FeatureLabelModelFacet"
+            viewPattern="{0}: {1}"
+            editorPattern="{0}: {1}"
+            editPattern="{0}: {1}">
           <metaFeatures
-              href="ssm2.genmodel#//ssm2/Variable/vname"/>
+              href="ssm2.genmodel#//ssm2/ValuedObject/name"/>
+          <metaFeatures
+              href="ssm2.genmodel#//ssm2/ValuedObject/type"/>
         </modelFacet>
       </labels>
     </childNodes>
