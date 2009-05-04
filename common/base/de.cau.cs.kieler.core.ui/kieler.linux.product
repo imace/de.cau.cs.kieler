@@ -23,12 +23,13 @@
       startupProgressRect="0,280,455,15"
       startupMessageRect="7,220,441,20"
       startupForegroundColor="C8D5EA" />
-   <launcher>
+   <launcher name="kieler">
       <solaris/>
       <win useIco="false">
          <bmp/>
       </win>
    </launcher>
+
 
    <vm>
    </vm>
@@ -42,11 +43,6 @@
       <plugin id="de.cau.cs.kieler.dataflow.diagram.layout"/>
       <plugin id="de.cau.cs.kieler.dataflow.edit"/>
       <plugin id="de.cau.cs.kieler.dataflow.ui"/>
-      <plugin id="de.cau.cs.kieler.kev"/>
-      <plugin id="de.cau.cs.kieler.kev.application"/>
-      <plugin id="de.cau.cs.kieler.kev.extension.elevator"/>
-      <plugin id="de.cau.cs.kieler.kev.extension.empty"/>
-      <plugin id="de.cau.cs.kieler.kev.extension.scade"/>
       <plugin id="de.cau.cs.kieler.kiml.helpers"/>
       <plugin id="de.cau.cs.kieler.kiml.layout"/>
       <plugin id="de.cau.cs.kieler.kiml.layouter.example"/>
@@ -60,19 +56,16 @@
       <plugin id="de.cau.cs.kieler.klodd.orthogonal"/>
       <plugin id="de.cau.cs.kieler.layouter.graphviz"/>
       <plugin id="de.cau.cs.kieler.layouter.graphviz.edit"/>
-      <plugin id="de.cau.cs.kieler.mealy.emf"/>
-      <plugin id="de.cau.cs.kieler.mealyhierarchy.emf"/>
-      <plugin id="de.cau.cs.kieler.mealyhierarchy.emf.diagram"/>
-      <plugin id="de.cau.cs.kieler.mealyhierarchy.emf.edit"/>
       <plugin id="de.cau.cs.kieler.ssm"/>
       <plugin id="de.cau.cs.kieler.ssm.diagram"/>
       <plugin id="de.cau.cs.kieler.ssm.diagram.layout"/>
       <plugin id="de.cau.cs.kieler.ssm.edit"/>
-      <plugin id="de.cau.cs.kieler.ssm2"/>
       <plugin id="javax.xml"/>
       <plugin id="net.sourceforge.lpg.lpgjavaruntime"/>
       <plugin id="net.sourceforge.lpsolve"/>
       <plugin id="net.sourceforge.lpsolve.lib.linux" fragment="true"/>
+      <plugin id="net.sourceforge.lpsolve.lib.macx86" fragment="true"/>
+      <plugin id="net.sourceforge.lpsolve.lib.win32" fragment="true"/>
       <plugin id="org.apache.ant"/>
       <plugin id="org.apache.batik.bridge"/>
       <plugin id="org.apache.batik.css"/>
@@ -82,7 +75,6 @@
       <plugin id="org.apache.batik.parser"/>
       <plugin id="org.apache.batik.pdf"/>
       <plugin id="org.apache.batik.svggen"/>
-      <plugin id="org.apache.batik.swing"/>
       <plugin id="org.apache.batik.transcoder"/>
       <plugin id="org.apache.batik.util"/>
       <plugin id="org.apache.batik.util.gui"/>
@@ -101,10 +93,11 @@
       <plugin id="org.eclipse.core.expressions"/>
       <plugin id="org.eclipse.core.filebuffers"/>
       <plugin id="org.eclipse.core.filesystem"/>
-      <plugin id="org.eclipse.core.filesystem.linux.x86" fragment="true"/>
+      <plugin id="org.eclipse.core.filesystem.linux.x86"/>
+      <plugin id="org.eclipse.core.filesystem.macosx" fragment="true"/>
       <plugin id="org.eclipse.core.jobs"/>
       <plugin id="org.eclipse.core.net"/>
-      <plugin id="org.eclipse.core.net.linux.x86" fragment="true"/>
+      <plugin id="org.eclipse.core.net.linux.x86"/>
       <plugin id="org.eclipse.core.resources"/>
       <plugin id="org.eclipse.core.resources.compatibility" fragment="true"/>
       <plugin id="org.eclipse.core.runtime"/>
@@ -140,6 +133,7 @@
       <plugin id="org.eclipse.equinox.preferences"/>
       <plugin id="org.eclipse.equinox.registry"/>
       <plugin id="org.eclipse.equinox.security"/>
+      <plugin id="org.eclipse.equinox.security.macosx" fragment="true"/>
       <plugin id="org.eclipse.gef"/>
       <plugin id="org.eclipse.gmf"/>
       <plugin id="org.eclipse.gmf.bridge"/>
@@ -228,11 +222,13 @@
       <plugin id="org.eclipse.pde.ui"/>
       <plugin id="org.eclipse.search"/>
       <plugin id="org.eclipse.swt"/>
-      <plugin id="org.eclipse.swt.gtk.linux.x86" fragment="true"/>
+      <plugin id="org.eclipse.swt.carbon.macosx" fragment="true"/>
+      <plugin id="org.eclipse.swt.gtk.linux.x86"/>
       <plugin id="org.eclipse.team.core"/>
       <plugin id="org.eclipse.team.ui"/>
       <plugin id="org.eclipse.text"/>
       <plugin id="org.eclipse.ui"/>
+      <plugin id="org.eclipse.ui.carbon" fragment="true"/>
       <plugin id="org.eclipse.ui.cheatsheets"/>
       <plugin id="org.eclipse.ui.console"/>
       <plugin id="org.eclipse.ui.editors"/>
@@ -249,7 +245,7 @@
       <plugin id="org.eclipse.ui.workbench.texteditor"/>
       <plugin id="org.eclipse.update.configurator"/>
       <plugin id="org.eclipse.update.core"/>
-      <plugin id="org.eclipse.update.core.linux" fragment="true"/>
+      <plugin id="org.eclipse.update.core.linux"/>
       <plugin id="org.eclipse.zest.layouts"/>
       <plugin id="org.junit"/>
       <plugin id="org.w3c.css.sac"/>

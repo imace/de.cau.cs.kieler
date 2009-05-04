@@ -23,7 +23,7 @@
       startupProgressRect="0,280,455,15"
       startupMessageRect="7,220,441,20"
       startupForegroundColor="C8D5EA" />
-   <launcher>
+   <launcher name="kieler">
       <solaris/>
       <win useIco="false">
          <bmp/>
@@ -50,22 +50,22 @@
       <plugin id="de.cau.cs.kieler.kiml.ui"/>
       <plugin id="de.cau.cs.kieler.kiml.viewer"/>
       <plugin id="de.cau.cs.kieler.kivik"/>
-      <plugin id="de.cau.cs.kieler.klodd.core"/>
       <plugin id="de.cau.cs.kieler.klodd.hierarchical"/>
       <plugin id="de.cau.cs.kieler.klodd.orthogonal"/>
+      <plugin id="de.cau.cs.kieler.mealyhierarchy.emf"/>
+      <plugin id="de.cau.cs.kieler.mealyhierarchy.emf.diagram"/>
+      <plugin id="de.cau.cs.kieler.mealyhierarchy.emf.edit"/>
       <plugin id="de.cau.cs.kieler.ssm"/>
+      <plugin id="de.cau.cs.kieler.ssm.custom"/>
       <plugin id="de.cau.cs.kieler.ssm.diagram"/>
-      <plugin id="de.cau.cs.kieler.ssm.diagram.layout"/>
+      <plugin id="de.cau.cs.kieler.ssm.diagram.custom"/>
       <plugin id="de.cau.cs.kieler.ssm.edit"/>
       <plugin id="de.cau.cs.kieler.ssm.editor"/>
-      <plugin id="de.cau.cs.kieler.ssm2"/>
-      <plugin id="de.cau.cs.kieler.ssm2.edit"/>
-      <plugin id="de.cau.cs.kieler.ssm2.editor"/>
       <plugin id="net.sourceforge.lpg.lpgjavaruntime"/>
       <plugin id="net.sourceforge.lpsolve"/>
       <plugin id="net.sourceforge.lpsolve.lib.linux" fragment="true"/>
-      <plugin id="net.sourceforge.lpsolve.lib.macx86"/>
-      <plugin id="net.sourceforge.lpsolve.lib.win32"/>
+      <plugin id="net.sourceforge.lpsolve.lib.macx86" fragment="true"/>
+      <plugin id="net.sourceforge.lpsolve.lib.win32" fragment="true"/>
       <plugin id="org.apache.batik.bridge"/>
       <plugin id="org.apache.batik.css"/>
       <plugin id="org.apache.batik.dom"/>
@@ -86,7 +86,7 @@
       <plugin id="org.eclipse.core.expressions"/>
       <plugin id="org.eclipse.core.filebuffers"/>
       <plugin id="org.eclipse.core.filesystem"/>
-      <plugin id="org.eclipse.core.filesystem.macosx"/>
+      <plugin id="org.eclipse.core.filesystem.macosx" fragment="true"/>
       <plugin id="org.eclipse.core.jobs"/>
       <plugin id="org.eclipse.core.net"/>
       <plugin id="org.eclipse.core.resources"/>
@@ -95,6 +95,7 @@
       <plugin id="org.eclipse.core.runtime.compatibility.registry" fragment="true"/>
       <plugin id="org.eclipse.core.variables"/>
       <plugin id="org.eclipse.draw2d"/>
+      <plugin id="org.eclipse.emf"/>
       <plugin id="org.eclipse.emf.common"/>
       <plugin id="org.eclipse.emf.common.ui"/>
       <plugin id="org.eclipse.emf.compare"/>
@@ -117,7 +118,7 @@
       <plugin id="org.eclipse.equinox.preferences"/>
       <plugin id="org.eclipse.equinox.registry"/>
       <plugin id="org.eclipse.equinox.security"/>
-      <plugin id="org.eclipse.equinox.security.macosx"/>
+      <plugin id="org.eclipse.equinox.security.macosx" fragment="true"/>
       <plugin id="org.eclipse.gef"/>
       <plugin id="org.eclipse.gmf.runtime.common.core"/>
       <plugin id="org.eclipse.gmf.runtime.common.ui"/>
@@ -161,12 +162,12 @@
       <plugin id="org.eclipse.ocl.ecore"/>
       <plugin id="org.eclipse.osgi"/>
       <plugin id="org.eclipse.swt"/>
-      <plugin id="org.eclipse.swt.carbon.macosx"/>
+      <plugin id="org.eclipse.swt.carbon.macosx" fragment="true"/>
       <plugin id="org.eclipse.team.core"/>
       <plugin id="org.eclipse.team.ui"/>
       <plugin id="org.eclipse.text"/>
       <plugin id="org.eclipse.ui"/>
-      <plugin id="org.eclipse.ui.carbon"/>
+      <plugin id="org.eclipse.ui.carbon" fragment="true"/>
       <plugin id="org.eclipse.ui.console"/>
       <plugin id="org.eclipse.ui.editors"/>
       <plugin id="org.eclipse.ui.forms"/>
