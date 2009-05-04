@@ -99,7 +99,8 @@ public class XTextParseCommand extends AbstractTransactionalCommand {
 				parser = new XtextParser(stream);
 				Node node = parser.getParser().parse();
 				SuspensionTrigger suspensionTrigger = (SuspensionTrigger) (((EObjectAdapter)element).getRealObject());
-				Expression newExpression = (Expression) ((Action) node.getModelElement()).getTrigger();
+				Action newAction = (Action) node.getModelElement();
+				Expression newExpression = (Expression) newAction.getTrigger();
 				Expression expression =  (Expression) suspensionTrigger.getExpression();
 				
 				
@@ -111,10 +112,12 @@ public class XTextParseCommand extends AbstractTransactionalCommand {
 					return CommandResult.newOKCommandResult();
 				}
 				
-				if (!checkSignals(suspensionTrigger, expression, newExpression)) {
+				if (!checkSignals(suspensionTrigger, expression, newExpression)
+					|| (newAction.getEmissions().size() > 0)
+					|| (newAction.getAssignments().size() > 0)) {
 					suspensionTrigger.setExpression(null);
 					suspensionTrigger.setTrigger("INVALID: " + string);
-					return CommandResult.newErrorCommandResult("The Expression contains invalid signals!");					
+					return CommandResult.newErrorCommandResult("The Expression contains invalid signals or other invalid characters!");					
 				}
 				
 				// Integrate the new Expression into the SSM model
