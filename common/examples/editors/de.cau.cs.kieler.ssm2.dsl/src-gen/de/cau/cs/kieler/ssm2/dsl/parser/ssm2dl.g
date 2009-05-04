@@ -128,13 +128,13 @@ ruleExpression{if (temp_Expression != null) {
 }
 )?
 
-({skipCurrentToken = false;}'/'{if (!skipCurrentToken) {
+(({skipCurrentToken = false;}'/'{if (!skipCurrentToken) {
   hasContent = true;
-  ptm.createNode(((EObject)((EObject)((EObject)xtextfile.eContents().get(1)).eContents().get(1)).eContents().get(1)));
+  ptm.createNode(((EObject)((EObject)((EObject)((EObject)xtextfile.eContents().get(1)).eContents().get(1)).eContents().get(1)).eContents().get(0)));
   ptm.ruleFinished(getLastToken());
 }})
 
-(({ptm.createNode(((EObject)((EObject)((EObject)((EObject)xtextfile.eContents().get(1)).eContents().get(1)).eContents().get(2)).eContents().get(0)));}temp_Emission=
+(({ptm.createNode(((EObject)((EObject)((EObject)((EObject)((EObject)xtextfile.eContents().get(1)).eContents().get(1)).eContents().get(1)).eContents().get(1)).eContents().get(0)));}temp_Emission=
 ruleEmission{if (temp_Emission != null) {
   hasContent = true;
   ptm.setModelElement(temp_Emission);
@@ -146,7 +146,7 @@ ruleEmission{if (temp_Emission != null) {
 }
 )
 	|
-({ptm.createNode(((EObject)((EObject)((EObject)((EObject)xtextfile.eContents().get(1)).eContents().get(1)).eContents().get(2)).eContents().get(1)));}temp_Assignment=
+({ptm.createNode(((EObject)((EObject)((EObject)((EObject)((EObject)xtextfile.eContents().get(1)).eContents().get(1)).eContents().get(1)).eContents().get(1)).eContents().get(1)));}temp_Assignment=
 ruleAssignment{if (temp_Assignment != null) {
   hasContent = true;
   ptm.setModelElement(temp_Assignment);
@@ -158,6 +158,7 @@ ruleAssignment{if (temp_Assignment != null) {
 }
 )
 )*
+)?
 )
  {if (!hasContent)
   $result = null;};

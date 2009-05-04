@@ -1,4 +1,4 @@
-// $ANTLR 3.0 ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g 2009-05-02 13:07:41
+// $ANTLR 3.0 ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g 2009-05-04 12:30:37
 
 package de.cau.cs.kieler.ssm2.dsl.parser;
 
@@ -294,10 +294,10 @@ public class ssm2dlLexer extends Lexer {
     public void mRULE_ID() throws RecognitionException {
         try {
             int _type = RULE_ID;
-            // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:524:3: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:524:3: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:525:3: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:525:3: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:524:3: ( '^' )?
+            // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:525:3: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -306,7 +306,7 @@ public class ssm2dlLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:524:4: '^'
+                    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:525:4: '^'
                     {
                     match('^'); 
 
@@ -325,7 +325,7 @@ public class ssm2dlLexer extends Lexer {
                 recover(mse);    throw mse;
             }
 
-            // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:524:33: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:525:33: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -373,7 +373,7 @@ public class ssm2dlLexer extends Lexer {
     public void mRULE_STRING() throws RecognitionException {
         try {
             int _type = RULE_STRING;
-            // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:530:3: ( '\\\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\\"' ) )* '\\\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\'' ) )* '\\'' )
+            // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:531:3: ( '\\\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\\"' ) )* '\\\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\'' ) )* '\\'' )
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -385,16 +385,16 @@ public class ssm2dlLexer extends Lexer {
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("528:1: RULE_STRING : ( '\\\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\\"' ) )* '\\\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\'' ) )* '\\'' );", 5, 0, input);
+                    new NoViableAltException("529:1: RULE_STRING : ( '\\\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\\"' ) )* '\\\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\'' ) )* '\\'' );", 5, 0, input);
 
                 throw nvae;
             }
             switch (alt5) {
                 case 1 :
-                    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:530:3: '\\\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\\"' ) )* '\\\"'
+                    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:531:3: '\\\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\\"' ) )* '\\\"'
                     {
                     match('\"'); 
-                    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:530:8: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\\"' ) )*
+                    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:531:8: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\\"' ) )*
                     loop3:
                     do {
                         int alt3=3;
@@ -410,7 +410,7 @@ public class ssm2dlLexer extends Lexer {
 
                         switch (alt3) {
                     	case 1 :
-                    	    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:530:10: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' )
+                    	    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:531:10: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||input.LA(1)=='t' ) {
@@ -427,7 +427,7 @@ public class ssm2dlLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:530:54: ~ ( '\\\\' | '\\\"' )
+                    	    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:531:54: ~ ( '\\\\' | '\\\"' )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFE') ) {
                     	        input.consume();
@@ -453,10 +453,10 @@ public class ssm2dlLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:531:3: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\'' ) )* '\\''
+                    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:532:3: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\'' ) )* '\\''
                     {
                     match('\''); 
-                    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:531:8: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\'' ) )*
+                    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:532:8: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\'' ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -472,7 +472,7 @@ public class ssm2dlLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:531:10: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' )
+                    	    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:532:10: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||input.LA(1)=='t' ) {
@@ -489,7 +489,7 @@ public class ssm2dlLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:531:54: ~ ( '\\\\' | '\\'' )
+                    	    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:532:54: ~ ( '\\\\' | '\\'' )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFE') ) {
                     	        input.consume();
@@ -527,10 +527,10 @@ public class ssm2dlLexer extends Lexer {
     public void mRULE_INT() throws RecognitionException {
         try {
             int _type = RULE_INT;
-            // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:537:3: ( ( '-' )? ( '0' .. '9' )+ )
-            // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:537:3: ( '-' )? ( '0' .. '9' )+
+            // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:538:3: ( ( '-' )? ( '0' .. '9' )+ )
+            // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:538:3: ( '-' )? ( '0' .. '9' )+
             {
-            // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:537:3: ( '-' )?
+            // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:538:3: ( '-' )?
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -539,7 +539,7 @@ public class ssm2dlLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:537:4: '-'
+                    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:538:4: '-'
                     {
                     match('-'); 
 
@@ -548,7 +548,7 @@ public class ssm2dlLexer extends Lexer {
 
             }
 
-            // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:537:9: ( '0' .. '9' )+
+            // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:538:9: ( '0' .. '9' )+
             int cnt7=0;
             loop7:
             do {
@@ -562,7 +562,7 @@ public class ssm2dlLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:537:10: '0' .. '9'
+            	    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:538:10: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -592,10 +592,10 @@ public class ssm2dlLexer extends Lexer {
     public void mRULE_WS() throws RecognitionException {
         try {
             int _type = RULE_WS;
-            // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:543:3: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:543:3: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:544:3: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:544:3: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:543:3: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:544:3: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt8=0;
             loop8:
             do {
@@ -649,12 +649,12 @@ public class ssm2dlLexer extends Lexer {
     public void mRULE_ML_COMMENT() throws RecognitionException {
         try {
             int _type = RULE_ML_COMMENT;
-            // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:549:3: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:549:3: '/*' ( options {greedy=false; } : . )* '*/'
+            // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:550:3: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:550:3: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:549:8: ( options {greedy=false; } : . )*
+            // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:550:8: ( options {greedy=false; } : . )*
             loop9:
             do {
                 int alt9=2;
@@ -679,7 +679,7 @@ public class ssm2dlLexer extends Lexer {
 
                 switch (alt9) {
             	case 1 :
-            	    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:549:36: .
+            	    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:550:36: .
             	    {
             	    matchAny(); 
 
@@ -708,12 +708,12 @@ public class ssm2dlLexer extends Lexer {
     public void mRULE_SL_COMMENT() throws RecognitionException {
         try {
             int _type = RULE_SL_COMMENT;
-            // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:555:3: ( '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n' )
-            // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:555:3: '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n'
+            // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:556:3: ( '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n' )
+            // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:556:3: '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n'
             {
             match("//"); 
 
-            // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:555:8: (~ ( '\\n' | '\\r' ) )*
+            // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:556:8: (~ ( '\\n' | '\\r' ) )*
             loop10:
             do {
                 int alt10=2;
@@ -726,7 +726,7 @@ public class ssm2dlLexer extends Lexer {
 
                 switch (alt10) {
             	case 1 :
-            	    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:555:8: ~ ( '\\n' | '\\r' )
+            	    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:556:8: ~ ( '\\n' | '\\r' )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFE') ) {
             	        input.consume();
@@ -747,7 +747,7 @@ public class ssm2dlLexer extends Lexer {
                 }
             } while (true);
 
-            // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:555:22: ( '\\r' )?
+            // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:556:22: ( '\\r' )?
             int alt11=2;
             int LA11_0 = input.LA(1);
 
@@ -756,7 +756,7 @@ public class ssm2dlLexer extends Lexer {
             }
             switch (alt11) {
                 case 1 :
-                    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:555:22: '\\r'
+                    // ..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g:556:22: '\\r'
                     {
                     match('\r'); 
 

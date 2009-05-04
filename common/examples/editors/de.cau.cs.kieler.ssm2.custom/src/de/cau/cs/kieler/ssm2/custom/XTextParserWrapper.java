@@ -22,6 +22,7 @@ import de.cau.cs.kieler.ssm2.Expression;
 import de.cau.cs.kieler.ssm2.Signal;
 import de.cau.cs.kieler.ssm2.SignalReference;
 import de.cau.cs.kieler.ssm2.Ssm2Package;
+import de.cau.cs.kieler.ssm2.SuspensionTrigger;
 import de.cau.cs.kieler.ssm2.Variable;
 import de.cau.cs.kieler.ssm2.VariableReference;
 import de.cau.cs.kieler.ssm2.dsl.parser.XtextParser;
@@ -33,12 +34,15 @@ public class XTextParserWrapper implements IParser {
 	
 	public XTextParserWrapper(Action action) {
 	}
+	
+	public XTextParserWrapper(SuspensionTrigger suspensionTrigger) {
+	}
 
 	public IContentAssistProcessor getCompletionProcessor(IAdaptable element) {
 		return null;
 	}
 
-	// Method to return the editString of an action
+	// Method to return the editString of an action or a suspensionTrigger
 	public String getEditString(IAdaptable element, int flags) {
 		if (element instanceof EObjectAdapter) {
 			if (((EObjectAdapter) element).getRealObject() instanceof Action) {
@@ -47,22 +51,39 @@ public class XTextParserWrapper implements IParser {
 					return action.getTriggersAndEffects();
 				}
 			}
+			else if (((EObjectAdapter) element).getRealObject() instanceof SuspensionTrigger) {
+				SuspensionTrigger suspensionTrigger = (SuspensionTrigger) (((EObjectAdapter) element).getRealObject());
+				if (suspensionTrigger.getTrigger() != null) {
+					return suspensionTrigger.getTrigger();
+				}
+			}
 		}
 		return "";
 	}
 
 	// Return our special xText command
 	public ICommand getParseCommand(IAdaptable element, String newString, int flags) {
-		return new XTextParseCommand(element, newString, flags);
+		if (((EObjectAdapter) element).getRealObject() instanceof SuspensionTrigger) {
+			return new XTextParseExpressionCommand(element, newString, flags);
+		}
+		else {
+			return new XTextParseCommand(element, newString, flags);
+		}
 	}
 
-	// Return the print string of an action
+	// Return the print string of an action or a suspensionTrigger
 	public String getPrintString(IAdaptable element, int flags) {
 		if (element instanceof EObjectAdapter) {
 			if (((EObjectAdapter) element).getRealObject() instanceof Action) {
 				Action action = (Action) (((EObjectAdapter) element).getRealObject());
 				if (action.getTriggersAndEffects() != null) {
 					return action.getTriggersAndEffects();
+				}
+			}
+			else if (((EObjectAdapter) element).getRealObject() instanceof SuspensionTrigger) {
+				SuspensionTrigger suspensionTrigger = (SuspensionTrigger) (((EObjectAdapter) element).getRealObject());
+				if (suspensionTrigger.getTrigger() != null) {
+					return suspensionTrigger.getTrigger();
 				}
 			}
 		}
@@ -74,6 +95,9 @@ public class XTextParserWrapper implements IParser {
 		if (event instanceof Notification) {
 			Object feature = ((Notification) event).getFeature();
 			if (feature.equals(Ssm2Package.eINSTANCE.getAction_TriggersAndEffects())) {
+				return true;
+			}
+			else if (feature.equals(Ssm2Package.eINSTANCE.getSuspensionTrigger_Trigger())) {
 				return true;
 			}
 		}
@@ -93,6 +117,16 @@ public class XTextParserWrapper implements IParser {
 					return ParserEditStatus.EDITABLE_STATUS;
 				}
 			}
+			if (element instanceof SuspensionTrigger) {
+				ByteArrayInputStream stream = new ByteArrayInputStream(editString.getBytes());
+				parser = new XtextParser(stream);
+				Node node = parser.getParser().parse();
+				Expression newExpression = (Expression) node.getModelElement();
+				Expression expression = (Expression) ((SuspensionTrigger) element).getExpression();
+				if (checkSignals((SuspensionTrigger) element, expression, newExpression)) {
+					return ParserEditStatus.EDITABLE_STATUS;
+				}
+			}
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -100,7 +134,7 @@ public class XTextParserWrapper implements IParser {
 		return ParserEditStatus.UNEDITABLE_STATUS;
 	}
 			
-	// These are the same method as in XTextParseCommand as they are needed
+	// These are the same methods as in XTextParseCommand as they are needed
 	// here too. I should tidy this up when I find some time.
 	private boolean checkSignals(Action action, Action newAction) {
 		boolean allValid = true;
@@ -108,6 +142,26 @@ public class XTextParserWrapper implements IParser {
 		for (Signal s1 : getSignals(newAction)) {
 			oneEqual = false;
 			for (Signal s2 : action.getParentStateEntryAction().getSignals()) {
+				if (s1.getName().equals(s2.getName())) {
+					s1 = s2;
+					oneEqual = true;
+					break;						
+				}					
+			}
+			if (!oneEqual) {
+				allValid = false;
+				break;
+			}
+		}
+		return allValid;
+	}
+	
+	private boolean checkSignals(SuspensionTrigger suspensionTrigger, Expression expression, Expression newExpression) {
+		boolean allValid = true;
+		boolean oneEqual = false;
+		for (Signal s1 : getSignals(newExpression)) {
+			oneEqual = false;
+			for (Signal s2 : suspensionTrigger.getParentState().getSignals()) {
 				if (s1.getName().equals(s2.getName())) {
 					s1 = s2;
 					oneEqual = true;

@@ -15,12 +15,13 @@ ruleAction
 :
 ((ruleExpression)?
 
-('/')
+(('/')
 
 ((ruleEmission)
 	|
 (ruleAssignment)
 )*
+)?
 )
 ;
 

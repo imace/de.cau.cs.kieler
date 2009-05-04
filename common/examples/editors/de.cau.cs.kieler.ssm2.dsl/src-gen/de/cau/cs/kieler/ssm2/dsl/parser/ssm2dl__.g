@@ -33,14 +33,14 @@ T20 : '-' ;
 T21 : '*' ;
 T22 : '?' ;
 
-// $ANTLR src "..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g" 522
+// $ANTLR src "..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g" 523
 RULE_ID :
 
 	 ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*
 	 
 ;
 
-// $ANTLR src "..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g" 528
+// $ANTLR src "..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g" 529
 RULE_STRING :
 
 	 '\"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'\"') )* '\"' |
@@ -48,28 +48,28 @@ RULE_STRING :
 	 
 ;
 
-// $ANTLR src "..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g" 535
+// $ANTLR src "..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g" 536
 RULE_INT :
 
 	 ('-')?('0'..'9')+
 	 
 ;
 
-// $ANTLR src "..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g" 541
+// $ANTLR src "..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g" 542
 RULE_WS :
 
 	 (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;}
 	 
 ;
 
-// $ANTLR src "..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g" 547
+// $ANTLR src "..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g" 548
 RULE_ML_COMMENT :
 
 	 '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;}
 	 
 ;
 
-// $ANTLR src "..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g" 553
+// $ANTLR src "..//de.cau.cs.kieler.ssm2.dsl/src-gen/de/cau/cs/kieler/ssm2/dsl/parser/ssm2dl.g" 554
 RULE_SL_COMMENT :
 
 	 '//' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;}

@@ -7,6 +7,7 @@ import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.gmf.runtime.common.core.command.CommandResult;
 import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand;
@@ -22,6 +23,7 @@ import de.cau.cs.kieler.ssm2.Region;
 import de.cau.cs.kieler.ssm2.Signal;
 import de.cau.cs.kieler.ssm2.SignalReference;
 import de.cau.cs.kieler.ssm2.State;
+import de.cau.cs.kieler.ssm2.SuspensionTrigger;
 import de.cau.cs.kieler.ssm2.Transition;
 import de.cau.cs.kieler.ssm2.Variable;
 import de.cau.cs.kieler.ssm2.VariableReference;
@@ -39,6 +41,11 @@ public class XTextParseCommand extends AbstractTransactionalCommand {
 		super(TransactionUtil.getEditingDomain(((Action) (((EObjectAdapter) element).getRealObject()))), newString, null);
 		this.element = element;
 		this.string = newString;
+	}
+
+	public XTextParseCommand(TransactionalEditingDomain editingDomain,
+			String newString, Object object) {
+		super(editingDomain, newString, null);
 	}
 
 	// This method is executed when the text of the label has been changed
@@ -87,6 +94,33 @@ public class XTextParseCommand extends AbstractTransactionalCommand {
 					action.getAssignments().add(newAction.getAssignments().get(i));
 				}
 			}
+			else if ((element != null) && (element instanceof EObjectAdapter) && (((EObjectAdapter)element).getRealObject() instanceof SuspensionTrigger)) {
+				ByteArrayInputStream stream = new ByteArrayInputStream(string.getBytes());
+				parser = new XtextParser(stream);
+				Node node = parser.getParser().parse();
+				SuspensionTrigger suspensionTrigger = (SuspensionTrigger) (((EObjectAdapter)element).getRealObject());
+				Expression newExpression = (Expression) ((Action) node.getModelElement()).getTrigger();
+				Expression expression =  (Expression) suspensionTrigger.getExpression();
+				
+				
+				// Only proceed if an expression has been created and its signals have
+				// already been defined within the parent state
+				if (newExpression == null) {
+					suspensionTrigger.setExpression(null);
+					suspensionTrigger.setTrigger("");
+					return CommandResult.newOKCommandResult();
+				}
+				
+				if (!checkSignals(suspensionTrigger, expression, newExpression)) {
+					suspensionTrigger.setExpression(null);
+					suspensionTrigger.setTrigger("INVALID: " + string);
+					return CommandResult.newErrorCommandResult("The Expression contains invalid signals!");					
+				}
+				
+				// Integrate the new Expression into the SSM model
+				suspensionTrigger.setExpression(newExpression);
+				suspensionTrigger.setTrigger(string);
+			}
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -94,7 +128,7 @@ public class XTextParseCommand extends AbstractTransactionalCommand {
 		return CommandResult.newOKCommandResult();
 	}
 
-	// Method to check whether the sinals have already been definded in the parent state
+	// Method to check whether the signals have already been defined in the parent state
 	// remove ugly try-catches by using guard!!!
 	private boolean checkSignals(Action action, Action newAction) {
 		boolean allValid = true;
@@ -141,6 +175,29 @@ public class XTextParseCommand extends AbstractTransactionalCommand {
 		return allValid;
 	}
 	
+	private boolean checkSignals(SuspensionTrigger suspensionTrigger, Expression expression, Expression newExpression) {
+		boolean allValid = true;
+		boolean oneEqual = false;
+		for (Signal s1 : getSignals(newExpression)) {
+			oneEqual = false;
+			EList<Signal> validSignals = new BasicEList();
+			
+			validSignals = suspensionTrigger.getParentState().getSignals();
+			for (Signal s2 : validSignals) {
+				if (s1.getName().equals(s2.getName())) {
+					forwardSignals(newExpression, s2);
+					oneEqual = true;
+					break;
+				}
+			}
+			if (!oneEqual) {
+				allValid = false;
+				break;
+			}
+		}
+		return allValid;
+	}
+	
 	// Methods to forward signal pointers
 	private void forwardSignals(Action action, Signal signal) {
 		Expression trigger = action.getTrigger();
@@ -170,6 +227,18 @@ public class XTextParseCommand extends AbstractTransactionalCommand {
 			else if (expression instanceof ComplexExpression) {
 				setSignal((ComplexExpression) expression, signal);
 			}
+		}
+	}
+	
+	// Methods to forward signal pointers
+	private void forwardSignals(Expression expression, Signal signal) {
+		
+		if ((expression instanceof SignalReference) && (((Signal) ((SignalReference) expression).getSignal()).getName().equals(signal.getName()))) {
+			SignalReference sigRef = (SignalReference) expression;
+			sigRef.setSignal(signal);
+		}
+		else if (expression instanceof ComplexExpression) {
+			setSignal((ComplexExpression) expression, signal);
 		}
 	}
 	

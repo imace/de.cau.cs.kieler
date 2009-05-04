@@ -6,12 +6,12 @@ importMetamodel "http://www.informatik.uni-kiel.de/rtsys/ssm2" as ssm2;
 
 Action [ssm2::Action] :
 
-	(trigger=Expression)? "/" (emissions+=Emission | assignments+=Assignment)*; 
-	
+	(trigger=Expression)? ("/" (emissions+=Emission | assignments+=Assignment)*)?; 
+		
 Expression [ssm2::Expression] :
 
 	SignalReference | VariableReference | ComplexExpression;
-	
+
 ComplexExpression [ssm2::ComplexExpression] :
 
 	"(" ( subExpressions+=Expression)? operator=Operator subExpressions+=Expression ")";
