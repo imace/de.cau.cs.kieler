@@ -53,28 +53,21 @@ public class LayerSweepCrossingReducer extends AbstractAlgorithm implements
 		getMonitor().begin("Crossing reduction", 2 * (layerCount - 1));
 		PortConstraints externalConstraints = layeredGraph.getExternalPortConstraints();
 		
-		Layer firstLayer = layeredGraph.getLayers().get(firstLayerIx); 
-        if (externalConstraints == PortConstraints.FIXED_POS
-		        || externalConstraints == PortConstraints.FIXED_ORDER) {
+		if (externalConstraints != PortConstraints.FREE_PORTS) {
 			// sort input and output ports by their relative position
-		    if (firstLayer.rank == 0) {
-				firstLayer.sortByPorts();
-				firstLayerIx += 2;
-			}
-			else {
-				// find arbitrary ranking of the first layer
-				firstLayer.calcElemRanks();
+		    Layer firstLayer = layeredGraph.getLayers().get(firstLayerIx); 
+	        if (firstLayer.rank == 0) {
+				firstLayer.sortByPorts(false);
+				if (externalConstraints != PortConstraints.FIXED_SIDE)
+				    firstLayerIx += 2;
 			}
 			
 			Layer lastLayer = layeredGraph.getLayers().get(lastLayerIx);
 			if (lastLayer.height == 0) {
-				lastLayer.sortByPorts();
-				lastLayerIx -= 2;
+				lastLayer.sortByPorts(false);
+				if (externalConstraints != PortConstraints.FIXED_SIDE)
+	                lastLayerIx -= 2;
 			}
-		}
-		else {
-			// find arbitrary ranking of the first layer
-		    firstLayer.calcElemRanks();
 		}
 		
 		// process all but the port layers and the last layer
@@ -89,8 +82,11 @@ public class LayerSweepCrossingReducer extends AbstractAlgorithm implements
 			layerReducer.reset(getMonitor().subTask(1));
 			layerReducer.reduceCrossings(layerIter.next());
 		}
-		else
+		else {
+		    if (externalConstraints == PortConstraints.FIXED_SIDE)
+		        layeredGraph.getLayers().get(lastLayerIx).sortByPorts(true);
 			layerIter.previous();
+		}
 		
 		// process all but the port layers and the first layer again
 		while (layerIter.previousIndex() >= firstLayerIx) {
@@ -102,6 +98,11 @@ public class LayerSweepCrossingReducer extends AbstractAlgorithm implements
 			// order the first layer by the subsequent layer and the input ports layer
 			layerReducer.reset(getMonitor().subTask(1));
 			layerReducer.reduceCrossings(layerIter.previous());
+		}
+		else {
+		    if (externalConstraints == PortConstraints.FIXED_SIDE)
+                layeredGraph.getLayers().get(firstLayerIx).sortByPorts(true);
+            layerIter.next();
 		}
 		
 		// find placements for all ports in the graph

@@ -56,7 +56,8 @@ public class LinearSegment implements Comparable<LinearSegment> {
 	 * @see java.lang.Object#toString()
 	 */
 	public String toString() {
-		return elements.toString();
+		//return elements.toString();
+	    return Integer.toString(rank);
 	}
 	
 	/*

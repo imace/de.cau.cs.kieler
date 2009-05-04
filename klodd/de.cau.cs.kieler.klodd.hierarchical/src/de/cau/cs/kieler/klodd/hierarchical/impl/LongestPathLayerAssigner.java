@@ -48,12 +48,12 @@ public class LongestPathLayerAssigner extends AbstractAlgorithm implements
 	 * (non-Javadoc)
 	 * @see de.cau.cs.kieler.klodd.hierarchical.modules.ILayerAssigner#assignLayers(de.cau.cs.kieler.core.graph.KGraph, de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNode)
 	 */
-	public LayeredGraph assignLayers(KSlimGraph kGraph, KNode parentNode) {
+	public LayeredGraph assignLayers(KSlimGraph slimGraph, KNode parentNode) {
 		getMonitor().begin("Longest path layering", 1);
 		layeredGraph = new LayeredGraph(parentNode);
 		
 		// process child nodes
-		for (KSlimNode node : kGraph.nodes) {
+		for (KSlimNode node : slimGraph.nodes) {
 			visit(node);
 		}
 		

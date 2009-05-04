@@ -53,7 +53,7 @@ public class KSlimGraph {
 	 * @see java.lang.Object#toString()
 	 */
 	public String toString() {
-		return "TSMGraph(" + nodes.size() + " nodes, " + edges.size()
+		return "SlimGraph(" + nodes.size() + " nodes, " + edges.size()
 				+ " edges, " + (faces.size() + 1) + " faces)";
 	}
 	

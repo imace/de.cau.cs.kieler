@@ -236,6 +236,8 @@ public class LayeredGraph {
 					}
 				}
 			}
+			// assign ranks to all elements of the current layer
+			layer.calcElemRanks();
 		}
 	}
 	

@@ -194,7 +194,7 @@ public class LayerElement {
 		}
 		else if (elemObj instanceof KPort) {
 			KPort port = (KPort)elemObj;
-			return port.getLabel().getText();
+			return "port:" + port.getLabel().getText();
 		}
 		else if (elemObj instanceof KEdge) {
 			KEdge edge = (KEdge)elemObj;
@@ -720,29 +720,29 @@ public class LayerElement {
 	 * to the given abstract ranks.
 	 * 
 	 * @param abstractPortRanks abstract port ranks
-	 * @param forward if true, the abstract ranks are assumed to
+	 * @param outgoing if true, the abstract ranks are assumed to
 	 *     be for outgoing connections, else for incoming connections
 	 */
 	public void sortPorts(Map<KPort, Double> abstractPortRanks,
-			boolean forward) {
+			boolean outgoing) {
 	    boolean vertical = layer.getLayeredGraph().getLayoutDirection()
 	            == LayoutDirection.VERTICAL;
 		Arrays.sort(northPorts, new DirectedPortComparator(
 		        abstractPortRanks,
-		        vertical ? !forward : forward,
-		        !forward));
+		        vertical ? !outgoing : outgoing,
+		        !outgoing));
 		Arrays.sort(eastPorts, new DirectedPortComparator(
 		        abstractPortRanks,
-		        vertical ? !forward : forward,
-		        vertical ? !forward : forward));
+		        vertical ? !outgoing : outgoing,
+		        vertical ? !outgoing : outgoing));
 		Arrays.sort(southPorts, new DirectedPortComparator(
 		        abstractPortRanks,
-		        vertical ? !forward : forward,
-		        vertical ? !forward : forward));
+		        vertical ? !outgoing : outgoing,
+		        vertical ? !outgoing : outgoing));
 		Arrays.sort(westPorts, new DirectedPortComparator(
 		        abstractPortRanks,
-		        vertical ? !forward : forward,
-		        forward));
+		        vertical ? !outgoing : outgoing,
+		        outgoing));
 		assignPortRanks();
 	}
 	
@@ -795,24 +795,24 @@ public class LayerElement {
      * Sorts the ports on each side of the related node according
      * to the given abstract ranks.
      * 
-     * @param forwardPortRanks ranks for ports with outgoing connections
-     * @param backwardsPortRanks ranks for ports with incoming connections
+     * @param outgoingPortRanks ranks for ports with outgoing connections
+     * @param incomingPortRanks ranks for ports with incoming connections
      */
-	public void sortPorts(final Map<KPort, Double> forwardPortRanks,
-	        final Map<KPort, Double> backwardsPortRanks) {
+	public void sortPorts(final Map<KPort, Double> outgoingPortRanks,
+	        final Map<KPort, Double> incomingPortRanks) {
 	    boolean vertical = layer.getLayeredGraph().getLayoutDirection()
                 == LayoutDirection.VERTICAL;
 	    Arrays.sort(northPorts, new SymmetricPortComparator(
-	            forwardPortRanks, backwardsPortRanks,
+	            outgoingPortRanks, incomingPortRanks,
 	            false, vertical));
 	    Arrays.sort(eastPorts, new SymmetricPortComparator(
-                forwardPortRanks, backwardsPortRanks,
+                outgoingPortRanks, incomingPortRanks,
                 !vertical, true));
 	    Arrays.sort(southPorts, new SymmetricPortComparator(
-                forwardPortRanks, backwardsPortRanks,
+                outgoingPortRanks, incomingPortRanks,
                 !vertical, true));
 	    Arrays.sort(westPorts, new SymmetricPortComparator(
-                forwardPortRanks, backwardsPortRanks,
+                outgoingPortRanks, incomingPortRanks,
                 true, !vertical));
 	    assignPortRanks();
 	}
@@ -852,10 +852,10 @@ public class LayerElement {
 	        if (portConstraints != PortConstraints.FIXED_POS) {
     	        float width = nodeLayout.getWidth();
     	        float height = nodeLayout.getHeight();
-    	        placePorts(northPorts, 0.0f, 0.0f, false, true, width);
-    	        placePorts(eastPorts, width, 0.0f, true, true, height);
-    	        placePorts(southPorts, width, height, false, false, width);
-    	        placePorts(westPorts, 0.0f, height, true, false, height);
+    	        placePorts(northPorts, 0.0f, 0.0f, false, true, true, width);
+    	        placePorts(eastPorts, width, 0.0f, true, true, false, height);
+    	        placePorts(southPorts, width, height, false, false, false, width);
+    	        placePorts(westPorts, 0.0f, height, true, false, true, height);
 	        }
 	    }
 	}
@@ -871,11 +871,13 @@ public class LayerElement {
 	 *     vertically
 	 * @param forward indicates whether ports shall be placed
 	 *     in positive direction from the starting point
+	 * @param subPortDim indicates whether port dimension shall be
+	 *     subtracted from each position
 	 * @param length length of the line on which ports shall be placed
 	 */
 	private static void placePorts(KPort[] ports, float startX,
 	        float startY, boolean vertical, boolean forward,
-	        float length) {
+	        boolean subPortDim, float length) {
 	    float pos = vertical ? startY : startX;
 	    float incr = length / (ports.length + 1);
 	    if (!forward)
@@ -883,10 +885,10 @@ public class LayerElement {
 	    for (KPort port : ports) {
 	        pos += incr;
 	        KShapeLayout portLayout = KimlLayoutUtil.getShapeLayout(port);
-	        portLayout.setXpos(vertical ? startX - (forward
-	                ? 0 : portLayout.getWidth()) : pos);
-	        portLayout.setYpos(vertical ? pos : startY - (forward
-                    ? 0 : portLayout.getHeight()));
+	        portLayout.setXpos(vertical ? startX - (subPortDim
+	                ? portLayout.getWidth() : 0) : pos);
+	        portLayout.setYpos(vertical ? pos : startY - (subPortDim
+                    ? portLayout.getHeight() : 0));
 	    }
 	}
 	

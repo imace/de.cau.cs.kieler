@@ -13,6 +13,8 @@
  */
 package de.cau.cs.kieler.klodd.hierarchical.impl;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -35,22 +37,23 @@ import de.cau.cs.kieler.klodd.hierarchical.structures.*;
 public class BarycenterCrossingReducer extends AbstractAlgorithm implements
 		ISingleLayerCrossingReducer {
 
+    /** number of surrounding ranks to consider for elements with undefined abstract rank */
+    private static final int RANK_AVG_RADIUS = 1;
+    
 	/* (non-Javadoc)
 	 * @see de.cau.cs.kieler.klodd.hierarchical.modules.ISingleLayerCrossingReducer#reduceCrossings(de.cau.cs.kieler.klodd.hierarchical.structures.Layer, de.cau.cs.kieler.klodd.hierarchical.structures.Layer, boolean)
 	 */
 	public void reduceCrossings(Layer layer, boolean forward) {
 		getMonitor().begin("Barycenter method", 1);
 		
-		Map<LayerElement, Double> abstractRanks = new HashMap<LayerElement, Double>();
+		double[] abstractRanks = new double[layer.getElements().size()];
+		int elemIndex = 0;
 		for (LayerElement element : layer.getElements()) {
 			if (element.getPortConstraints() == PortConstraints.FIXED_POS
 			        || element.getPortConstraints() == PortConstraints.FIXED_ORDER) {
 				// the ports of the current element are fixed
 				List<Integer> rankList = element.getConnectionRanks(forward);
-				double barycenter = calcBarycenter(rankList);
-				if (barycenter < 0.0)
-					barycenter = element.rank;
-				abstractRanks.put(element, Double.valueOf(barycenter));
+				abstractRanks[elemIndex] = calcBarycenter(rankList);
 			}
 			else {
 				// ports are not fixed, find an order for the ports
@@ -74,15 +77,16 @@ public class BarycenterCrossingReducer extends AbstractAlgorithm implements
 				}
 				if (ports.isEmpty()) {
 					// elements with no connections should stay where they are
-					abstractRanks.put(element, Double.valueOf(element.rank));
+					abstractRanks[elemIndex] = -1.0;
 				}
 				else {
-					element.sortPorts(abstractPortRanks, forward);
-					abstractRanks.put(element, Double.valueOf(sum / ports.size()));
+					element.sortPorts(abstractPortRanks, !forward);
+					abstractRanks[elemIndex] = sum / ports.size();
 				}
 			}
+			elemIndex++;
 		}
-		layer.sortAbstract(abstractRanks);
+		sortAbstract(layer, abstractRanks);
 		
 		getMonitor().done();
 	}
@@ -93,16 +97,14 @@ public class BarycenterCrossingReducer extends AbstractAlgorithm implements
 	public void reduceCrossings(Layer layer) {
 		getMonitor().begin("Barycenter method", 1);
 		
-		Map<LayerElement, Double> abstractRanks = new HashMap<LayerElement, Double>();
-		for (LayerElement element : layer.getElements()) {
+		double[] abstractRanks = new double[layer.getElements().size()];
+		int elemIndex = 0;
+        for (LayerElement element : layer.getElements()) {
 			if (element.getPortConstraints() == PortConstraints.FIXED_POS) {
 				// the ports of the current element are fixed
 				double bary1 = calcBarycenter(element.getConnectionRanks(true));
 				double bary2 = calcBarycenter(element.getConnectionRanks(false));
-				double barycenter = mergeBarycenters(bary1, bary2);
-				if (barycenter < 0.0)
-					barycenter = element.rank;
-				abstractRanks.put(element, Double.valueOf(barycenter));
+				abstractRanks[elemIndex] = mergeBarycenters(bary1, bary2);
 			}
 			else {
 				// ports are not fixed, find an order for the ports
@@ -133,15 +135,16 @@ public class BarycenterCrossingReducer extends AbstractAlgorithm implements
 				}
 				if (ports.isEmpty()) {
 					// elements with no connections should stay where they are
-					abstractRanks.put(element, Double.valueOf(element.rank));
+					abstractRanks[elemIndex] = -1.0;
 				}
 				else {
-					element.sortPorts(abstractForward, abstractBackwards);
-					abstractRanks.put(element, Double.valueOf(sum / ports.size()));
+					element.sortPorts(abstractBackwards, abstractForward);
+					abstractRanks[elemIndex] = sum / ports.size();
 				}
 			}
+			elemIndex++;
 		}
-		layer.sortAbstract(abstractRanks);
+        sortAbstract(layer, abstractRanks);
 		
 		getMonitor().done();
 	}
@@ -172,14 +175,67 @@ public class BarycenterCrossingReducer extends AbstractAlgorithm implements
 	 * @return merged barycenter value
 	 */
 	private double mergeBarycenters(double b1, double b2) {
-		if (b1 == -1.0 && b2 == -1.0)
+		if (b1 < 0.0 && b2 < 0.0)
 			return -1.0;
-		else if (b1 == -1.0)
+		else if (b1 < 0.0)
 			return b2;
-		else if (b2 == -1.0)
+		else if (b2 < 0.0)
 			return b1;
 		else
 			return (b1 + b2) / 2;
 	}
+	
+	/**
+     * Sorts the elements in the given layer and assigns them new
+     * rank values based on a map of abstract ranks. The algorithm
+     * tries to put elements with abstract rank smaller than zero
+     * near their previous position. 
+     * 
+     * @param layer layer to sort
+     * @param abstractRanks array of abstract ranks used as
+     *     base for sorting
+     */
+    private void sortAbstract(Layer layer, double[] abstractRanks) {
+        List<LayerElement> elements = layer.getElements();
+        // determine placements for elements with no abstract rank
+        final double[] filteredRanks = new double[elements.size()];
+        int index = 0;
+        double lastRank = 0.0;
+        for (LayerElement element : elements) {
+            double arank = abstractRanks[index]; 
+            if (arank < 0.0) {
+                int definedRanks = 0;
+                double sum = 0.0;
+                for (int i = index - RANK_AVG_RADIUS;
+                        i <= index + RANK_AVG_RADIUS; i++) {
+                    if (i >= 0 && i < abstractRanks.length
+                            && abstractRanks[i] >= 0.0) {
+                        sum += abstractRanks[i];
+                        definedRanks++;
+                    }
+                }
+                if (definedRanks > 0)
+                    filteredRanks[index] = sum / definedRanks;
+                else
+                    filteredRanks[index] = lastRank;
+            }
+            else {
+                filteredRanks[index] = arank;
+                lastRank = arank;
+            }
+            element.rank = index++;
+        }
+        
+        // sort all elements by the filtered ranks
+        Collections.sort(elements, new Comparator<LayerElement>() {
+            public int compare(LayerElement elem1, LayerElement elem2) {
+                return Double.compare(filteredRanks[elem1.rank],
+                        filteredRanks[elem2.rank]);
+            }
+        });
+        
+        // calculate concrete rank values
+        layer.calcElemRanks();
+    }
 
 }

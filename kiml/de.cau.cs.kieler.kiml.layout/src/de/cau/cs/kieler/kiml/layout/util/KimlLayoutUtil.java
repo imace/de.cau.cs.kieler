@@ -74,29 +74,29 @@ public class KimlLayoutUtil {
             PortSide side1 = LayoutOptions.getPortSide(layout1);
             PortSide side2 = LayoutOptions.getPortSide(layout2);
             if (side1 == side2)
-                return layoutDirection == LayoutDirection.VERTICAL && forward
-                        || layoutDirection == LayoutDirection.HORIZONTAL && !forward
+                return layoutDirection == LayoutDirection.VERTICAL && !forward
+                        || layoutDirection == LayoutDirection.HORIZONTAL && forward
                         ? rank1 - rank2 : rank2 - rank1;
             else if (layoutDirection == LayoutDirection.VERTICAL) {
                 if (forward)
-                    return side1 == PortSide.SOUTH
-                            || side1 == PortSide.EAST && (side2 == PortSide.NORTH || side2 == PortSide.WEST)
-                            || side1 == PortSide.NORTH && side2 == PortSide.WEST
-                            ? 1 : -1;
-                else return side1 == PortSide.NORTH
-                            || side1 == PortSide.EAST && (side2 == PortSide.SOUTH || side2 == PortSide.WEST)
-                            || side1 == PortSide.SOUTH && side2 == PortSide.WEST
-                            ? 1 : -1;
+                    return side1 == PortSide.NORTH
+                        || side1 == PortSide.EAST && (side2 == PortSide.SOUTH || side2 == PortSide.WEST)
+                        || side1 == PortSide.SOUTH && side2 == PortSide.WEST
+                        ? 1 : -1;
+                else return side1 == PortSide.SOUTH
+                        || side1 == PortSide.EAST && (side2 == PortSide.NORTH || side2 == PortSide.WEST)
+                        || side1 == PortSide.NORTH && side2 == PortSide.WEST
+                        ? 1 : -1;
             }
             else {
                 if (forward)
-                    return side1 == PortSide.EAST
-                        || side1 == PortSide.SOUTH && (side2 == PortSide.WEST || side2 == PortSide.NORTH)
-                        || side1 == PortSide.WEST && side2 == PortSide.NORTH
-                        ? 1 : -1;
-                else return side1 == PortSide.WEST
+                    return side1 == PortSide.WEST
                         || side1 == PortSide.SOUTH && (side2 == PortSide.EAST || side2 == PortSide.NORTH)
                         || side1 == PortSide.EAST && side2 == PortSide.NORTH
+                        ? 1 : -1;
+                else return side1 == PortSide.EAST
+                        || side1 == PortSide.SOUTH && (side2 == PortSide.WEST || side2 == PortSide.NORTH)
+                        || side1 == PortSide.WEST && side2 == PortSide.NORTH
                         ? 1 : -1;
             }
         }
@@ -302,21 +302,19 @@ public class KimlLayoutUtil {
         KLayoutData layoutData = getShapeLayout(node);
         PortConstraints portConstraints = LayoutOptions.getPortConstraints(layoutData);
         if (portConstraints == PortConstraints.FREE_PORTS) {
-            if (node.getChildren().isEmpty()) {
-                // set port sides according to layout direction
-                if (layoutDirection == LayoutDirection.VERTICAL) {
-                    for (KPort port : node.getPorts()) {
-                        LayoutOptions.setPortSide(getShapeLayout(port),
-                                port.getType() == KPortType.INPUT ? PortSide.NORTH
-                                : PortSide.SOUTH);
-                    }
+            // set port sides according to layout direction
+            if (layoutDirection == LayoutDirection.VERTICAL) {
+                for (KPort port : node.getPorts()) {
+                    LayoutOptions.setPortSide(getShapeLayout(port),
+                            port.getType() == KPortType.INPUT ? PortSide.NORTH
+                            : PortSide.SOUTH);
                 }
-                else {
-                    for (KPort port : node.getPorts()) {
-                        LayoutOptions.setPortSide(getShapeLayout(port),
-                                port.getType() == KPortType.INPUT ? PortSide.WEST
-                                : PortSide.EAST);
-                    }
+            }
+            else {
+                for (KPort port : node.getPorts()) {
+                    LayoutOptions.setPortSide(getShapeLayout(port),
+                            port.getType() == KPortType.INPUT ? PortSide.WEST
+                            : PortSide.EAST);
                 }
             }
             LayoutOptions.setPortConstraints(layoutData, PortConstraints.FIXED_SIDE);

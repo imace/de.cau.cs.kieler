@@ -17,12 +17,12 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.LinkedList;
-import java.util.Map;
 
 import de.cau.cs.kieler.core.kgraph.KGraphElement;
 import de.cau.cs.kieler.core.kgraph.KPort;
 import de.cau.cs.kieler.core.slimgraph.KSlimNode;
 import de.cau.cs.kieler.kiml.layout.options.LayoutDirection;
+import de.cau.cs.kieler.kiml.layout.options.LayoutOptions;
 import de.cau.cs.kieler.kiml.layout.util.KimlLayoutUtil;
 
 
@@ -148,28 +148,14 @@ public class Layer {
 	
 	/**
 	 * Sorts the elements in this layer and assigns them new
-	 * rank values based on a map of abstract ranks.
-	 * 
-	 * @param abstractRanks map of abstract ranks used as base for sorting
-	 */
-	public void sortAbstract(final Map<LayerElement, Double> abstractRanks) {
-		Collections.sort(elements, new Comparator<LayerElement>() {
-			public int compare(LayerElement elem1, LayerElement elem2) {
-				return abstractRanks.get(elem1).compareTo(abstractRanks.get(elem2));
-			}
-		});
-		
-		// calculate concrete rank values
-		calcElemRanks();
-	}
-	
-	/**
-	 * Sorts the elements in this layer and assigns them new
 	 * rank values based on the ranks of contained ports. This
 	 * method may only be called on external ports layers with
 	 * either {@code rank == 0} or {@code height == 0}.
+	 * 
+	 * @param newRanks if true new port ranks are determined for
+	 *     the contained ports
 	 */
-	public void sortByPorts() {
+	public void sortByPorts(boolean newRanks) {
 	    boolean forward;
 	    if (rank == 0)
 	        forward = true;
@@ -177,6 +163,16 @@ public class Layer {
 	        forward = false;
 	    else throw new UnsupportedOperationException();
 	    
+	    if (newRanks) {
+	        // set port ranks according to current order in this layer
+	        int rank = 0;
+	        for (LayerElement element : elements) {
+	            KPort port = (KPort)element.getElemObj();
+	            LayoutOptions.setPortRank(KimlLayoutUtil.getShapeLayout(
+	                    port), rank++);
+	        }
+	    }
+	    // sort elements according to port sides and ranks
 	    final Comparator<KPort> portComparator = new KimlLayoutUtil.PortComparator(
 	            forward, layeredGraph.getLayoutDirection());
 	    Collections.sort(elements, new Comparator<LayerElement>() {
@@ -186,25 +182,20 @@ public class Layer {
                 return portComparator.compare(port1, port2);
             }
 	    });
+	    if (newRanks) {
+	        // set port ranks according to new sorted order
+	        int rank = 0;
+            for (LayerElement element : elements) {
+                KPort port = (KPort)element.getElemObj();
+                LayoutOptions.setPortRank(KimlLayoutUtil.getShapeLayout(
+                        port), rank++);
+            }
+	    }
 	    
-	    // calculate concrete rank values
+	    // calculate concrete rank values for the layer elements
         calcElemRanks();
 	}
 
-	/**
-	 * Sorts the elements in this layer by concrete rank values that are
-	 * already assigned to each element.
-	 */
-	public void sortConcrete() {
-		Collections.sort(elements, new Comparator<LayerElement>() {
-			public int compare(LayerElement elem1, LayerElement elem2) {
-				return elem1.rank == elem2.rank ? 0
-						: (elem1.rank > elem2.rank ? 1
-						: -1);
-			}
-		});
-	}
-	
 	/**
 	 * Calculates the element rank of each element in this layer. The rank
 	 * is induced by the order of elements in the internal list and the

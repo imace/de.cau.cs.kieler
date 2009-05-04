@@ -30,10 +30,10 @@ public interface ILayerAssigner extends IAlgorithm {
 	 * ports must be put into the first layer (rank == 0), the output
 	 * ports into the last layer (height == 0).
 	 * 
-	 * @param kGraph graph structure that contains no directed cycles
+	 * @param slimGraph graph structure that contains no directed cycles
 	 * @param parentNode the parent layout node
 	 * @return a layered graph
 	 */
-	public LayeredGraph assignLayers(KSlimGraph kGraph, KNode parentNode);
+	public LayeredGraph assignLayers(KSlimGraph slimGraph, KNode parentNode);
 
 }
