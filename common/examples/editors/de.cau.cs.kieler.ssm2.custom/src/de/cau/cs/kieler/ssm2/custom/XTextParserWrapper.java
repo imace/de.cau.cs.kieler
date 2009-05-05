@@ -19,10 +19,13 @@ import de.cau.cs.kieler.ssm2.Assignment;
 import de.cau.cs.kieler.ssm2.ComplexExpression;
 import de.cau.cs.kieler.ssm2.Emission;
 import de.cau.cs.kieler.ssm2.Expression;
+import de.cau.cs.kieler.ssm2.Region;
 import de.cau.cs.kieler.ssm2.Signal;
 import de.cau.cs.kieler.ssm2.SignalReference;
 import de.cau.cs.kieler.ssm2.Ssm2Package;
+import de.cau.cs.kieler.ssm2.State;
 import de.cau.cs.kieler.ssm2.SuspensionTrigger;
+import de.cau.cs.kieler.ssm2.Transition;
 import de.cau.cs.kieler.ssm2.Variable;
 import de.cau.cs.kieler.ssm2.VariableReference;
 import de.cau.cs.kieler.ssm2.dsl.parser.XtextParser;
@@ -141,12 +144,34 @@ public class XTextParserWrapper implements IParser {
 		boolean oneEqual = false;
 		for (Signal s1 : getSignals(newAction)) {
 			oneEqual = false;
-			for (Signal s2 : action.getParentStateEntryAction().getSignals()) {
+			EList<Signal> validSignals = new BasicEList();
+			if (action instanceof Transition) {
+				try {
+					validSignals = collectValidSignals((State) ((Region) ((State) ((Transition) action).getSourceState()).getParentRegion()).getParentState());
+				} catch (Exception e) {
+					return false;
+				}
+			}
+			else {
+				try {
+					validSignals = collectValidSignals(action.getParentStateEntryAction());
+				} catch (Exception e) {
+					try {
+						validSignals = collectValidSignals(action.getParentStateInnerAction());
+					} catch (Exception f) {
+						try {
+							validSignals = collectValidSignals(action.getParentStateExitAction());
+						} catch (Exception g) {
+							return false;
+						}
+					}
+				}
+			}
+			for (Signal s2 : validSignals) {
 				if (s1.getName().equals(s2.getName())) {
-					s1 = s2;
 					oneEqual = true;
-					break;						
-				}					
+					break;
+				}
 			}
 			if (!oneEqual) {
 				allValid = false;
@@ -161,12 +186,14 @@ public class XTextParserWrapper implements IParser {
 		boolean oneEqual = false;
 		for (Signal s1 : getSignals(newExpression)) {
 			oneEqual = false;
-			for (Signal s2 : suspensionTrigger.getParentState().getSignals()) {
+			EList<Signal> validSignals = new BasicEList();
+			
+			validSignals = collectValidSignals(suspensionTrigger.getParentState());
+			for (Signal s2 : validSignals) {
 				if (s1.getName().equals(s2.getName())) {
-					s1 = s2;
 					oneEqual = true;
-					break;						
-				}					
+					break;
+				}
 			}
 			if (!oneEqual) {
 				allValid = false;
@@ -174,6 +201,18 @@ public class XTextParserWrapper implements IParser {
 			}
 		}
 		return allValid;
+	}
+	
+	// Method to collect all signals declared in state or its parent (+ grandparent etc.) states
+	private EList<Signal> collectValidSignals(State state) {
+		EList<Signal> newSignals = new BasicEList<Signal>();
+		if ((state.getSignals() != null) && (state.getSignals().size() > 0)) {
+			newSignals.addAll(state.getSignals());
+		}
+		if ((state.getParentRegion() != null) && (state.getParentRegion().getParentState() != null)) {
+			newSignals.addAll(collectValidSignals(state.getParentRegion().getParentState()));
+		}
+		return newSignals;
 	}
 	
 	private EList<Signal> getSignals(Action action) {

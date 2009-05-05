@@ -141,20 +141,20 @@ public class XTextParseCommand extends AbstractTransactionalCommand {
 			EList<Signal> validSignals = new BasicEList();
 			if (action instanceof Transition) {
 				try {
-					validSignals = ((State) ((Region) ((State) ((Transition) action).getSourceState()).getParentRegion()).getParentState()).getSignals();
+					validSignals = collectValidSignals((State) ((Region) ((State) ((Transition) action).getSourceState()).getParentRegion()).getParentState());
 				} catch (Exception e) {
 					return false;
 				}
 			}
 			else {
 				try {
-					validSignals = action.getParentStateEntryAction().getSignals();
+					validSignals = collectValidSignals(action.getParentStateEntryAction());
 				} catch (Exception e) {
 					try {
-						validSignals = action.getParentStateInnerAction().getSignals();
+						validSignals = collectValidSignals(action.getParentStateInnerAction());
 					} catch (Exception f) {
 						try {
-							validSignals = action.getParentStateExitAction().getSignals();
+							validSignals = collectValidSignals(action.getParentStateExitAction());
 						} catch (Exception g) {
 							return false;
 						}
@@ -164,8 +164,6 @@ public class XTextParseCommand extends AbstractTransactionalCommand {
 			for (Signal s2 : validSignals) {
 				if (s1.getName().equals(s2.getName())) {
 					forwardSignals(newAction, s2);
-					//s1 = s2; // TODO: Here is the bug! -> retrieve s1 properly! (actually not that easy :( )
-					//if (s1.getParentAction() == null) System.out.println("PARENT ACTION NULL!");
 					oneEqual = true;
 					break;
 				}
@@ -185,7 +183,7 @@ public class XTextParseCommand extends AbstractTransactionalCommand {
 			oneEqual = false;
 			EList<Signal> validSignals = new BasicEList();
 			
-			validSignals = suspensionTrigger.getParentState().getSignals();
+			validSignals = collectValidSignals(suspensionTrigger.getParentState());
 			for (Signal s2 : validSignals) {
 				if (s1.getName().equals(s2.getName())) {
 					forwardSignals(newExpression, s2);
@@ -260,6 +258,18 @@ public class XTextParseCommand extends AbstractTransactionalCommand {
 				}
 			}
 		}
+	}
+	
+	// Method to collect all signals declared in state or its parent (+ grandparent etc.) states
+	private EList<Signal> collectValidSignals(State state) {
+		EList<Signal> newSignals = new BasicEList<Signal>();
+		if ((state.getSignals() != null) && (state.getSignals().size() > 0)) {
+			newSignals.addAll(state.getSignals());
+		}
+		if ((state.getParentRegion() != null) && (state.getParentRegion().getParentState() != null)) {
+			newSignals.addAll(collectValidSignals(state.getParentRegion().getParentState()));
+		}
+		return newSignals;
 	}
 	
 	// Several methods to get the signals from the different types of model elements
