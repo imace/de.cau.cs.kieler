@@ -146,14 +146,16 @@ public class StateLayout extends ConstrainedToolbarLayout {
 							offsetY += prefHeights[j];
 						}
 					}
-					newBounds.x = x;
+					// Leave a little border so that transition anchors
+					// can be moved freely by the user
+					newBounds.x = x + 1;
 					newBounds.y = y + offsetY;
-					newBounds.width = width;
+					newBounds.width = width - 2;
 					newBounds.height = totalHeight - offsetY;
 				}
 				childFigure.setBounds(transposer.t(newBounds));
 			}
-		}
+		}	
 	}
 
 	private String getName(ShapeCompartmentFigure child) {
