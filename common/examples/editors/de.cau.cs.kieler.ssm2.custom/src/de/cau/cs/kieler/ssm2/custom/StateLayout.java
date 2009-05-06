@@ -107,12 +107,12 @@ public class StateLayout extends ConstrainedToolbarLayout {
 				int newWidth = childFigure.getPreferredSize().width;
 				int newHeight = childFigure.getPreferredSize().height;
 				if (child instanceof ShapeCompartmentFigure) {
-					if ((getName((ShapeCompartmentFigure) child).equals("Signals:") && (!containsSignals))
-							|| (getName((ShapeCompartmentFigure) child).equals("Variables:") && (!containsVariables))
+					if ((getName((ShapeCompartmentFigure) child).equals("Signal:") && (!containsSignals))
+							|| (getName((ShapeCompartmentFigure) child).equals("Variable:") && (!containsVariables))
 							|| (getName((ShapeCompartmentFigure) child).equals("OnEntryActions:") && (!containsEntryActions))
 							|| (getName((ShapeCompartmentFigure) child).equals("OnInsideActions:") && (!containsInnerActions))
 							|| (getName((ShapeCompartmentFigure) child).equals("OnExitActions:") && (!containsExitActions))
-							|| (getName((ShapeCompartmentFigure) child).equals("SuspensionTrigger:") && (!containsSuspensionTrigger))
+							|| (getName((ShapeCompartmentFigure) child).equals("Suspend:") && (!containsSuspensionTrigger))
 							|| (getName((ShapeCompartmentFigure) child).equals("RegionCompartment") && (!containsRegions))) {
 						newHeight = 0;
 					}

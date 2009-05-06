@@ -132,9 +132,9 @@
       </modelFacet>
       <labels
           visualID="5019"
-          editPartClassName="SignalNameTypeCombineTypeEditPart"
-          itemSemanticEditPolicyClassName="SignalNameTypeCombineTypeItemSemanticEditPolicy"
-          notationViewFactoryClassName="SignalNameTypeCombineTypeViewFactory">
+          editPartClassName="SignalNameTypeEditPart"
+          itemSemanticEditPolicyClassName="SignalNameTypeItemSemanticEditPolicy"
+          notationViewFactoryClassName="SignalNameTypeViewFactory">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap
@@ -143,15 +143,13 @@
             figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel"/>
         <modelFacet
             xsi:type="gmfgen:FeatureLabelModelFacet"
-            viewPattern="{0}: {1} combine with {2}"
-            editorPattern="{0}: {1} combine with {2}"
-            editPattern="{0}: {1} combine with {2}">
+            viewPattern="{0}: {1},"
+            editorPattern="{0}"
+            editPattern="{0}">
           <metaFeatures
               href="ssm2.genmodel#//ssm2/ValuedObject/name"/>
           <metaFeatures
               href="ssm2.genmodel#//ssm2/ValuedObject/type"/>
-          <metaFeatures
-              href="ssm2.genmodel#//ssm2/Signal/combineType"/>
         </modelFacet>
       </labels>
     </childNodes>
@@ -334,9 +332,9 @@
             figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel"/>
         <modelFacet
             xsi:type="gmfgen:FeatureLabelModelFacet"
-            viewPattern="{0}: {1}"
-            editorPattern="{0}: {1}"
-            editPattern="{0}: {1}">
+            viewPattern="{0}: {1},"
+            editorPattern="{0}"
+            editPattern="{0}">
           <metaFeatures
               href="ssm2.genmodel#//ssm2/ValuedObject/name"/>
           <metaFeatures
@@ -503,7 +501,7 @@
         notationViewFactoryClassName="StateSignalCompartmentViewFactory"
         canonicalEditPolicyClassName="StateSignalCompartmentCanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.2"
-        title="Signals:"
+        title="Signal:"
         needsTitle="false"
         node="//@diagram/@topLevelNodes.0"
         listLayout="false">
@@ -523,7 +521,7 @@
         notationViewFactoryClassName="StateVariableCompartmentViewFactory"
         canonicalEditPolicyClassName="StateVariableCompartmentCanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.6"
-        title="Variables:"
+        title="Variable:"
         needsTitle="false"
         node="//@diagram/@topLevelNodes.0"
         listLayout="false">
@@ -603,7 +601,7 @@
         notationViewFactoryClassName="StateSuspensionTriggerCompartmentViewFactory"
         canonicalEditPolicyClassName="StateSuspensionTriggerCompartmentCanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.7"
-        title="SuspensionTrigger:"
+        title="Suspend:"
         needsTitle="false"
         node="//@diagram/@topLevelNodes.0"
         listLayout="false">
@@ -662,7 +660,7 @@
         notationViewFactoryClassName="StateSignalCompartment2ViewFactory"
         canonicalEditPolicyClassName="StateSignalCompartment2CanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.2"
-        title="Signals:"
+        title="Signal:"
         needsTitle="false"
         node="//@diagram/@childNodes.1"
         listLayout="false">
@@ -682,7 +680,7 @@
         notationViewFactoryClassName="StateVariableCompartment2ViewFactory"
         canonicalEditPolicyClassName="StateVariableCompartment2CanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.6"
-        title="Variables:"
+        title="Variable:"
         needsTitle="false"
         node="//@diagram/@childNodes.1"
         listLayout="false">
@@ -762,7 +760,7 @@
         notationViewFactoryClassName="StateSuspensionTriggerCompartment2ViewFactory"
         canonicalEditPolicyClassName="StateSuspensionTriggerCompartment2CanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.7"
-        title="SuspensionTrigger:"
+        title="Suspend:"
         needsTitle="false"
         node="//@diagram/@childNodes.1"
         listLayout="false">

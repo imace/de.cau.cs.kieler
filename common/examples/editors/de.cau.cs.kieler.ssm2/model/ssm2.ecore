@@ -158,7 +158,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="parentAction" eType="#//Action"
         eOpposite="#//Action/assignments"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="expression" lowerBound="1"
-        eType="#//Expression" eOpposite="#//Expression/parentAssignment"/>
+        eType="#//Expression" containment="true" eOpposite="#//Expression/parentAssignment"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Variable" eSuperTypes="#//ValuedObject">
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="#//ValuedObject"

@@ -64,17 +64,15 @@
               href="ssm2.ecore#//Signal"/>
           <labelMappings
               xsi:type="gmfmap:FeatureLabelMapping"
-              viewPattern="{0}: {1} combine with {2}"
-              editorPattern="{0}: {1} combine with {2}"
-              editPattern="{0}: {1} combine with {2}">
+              viewPattern="{0}: {1},"
+              editorPattern="{0}"
+              editPattern="{0}">
             <diagramLabel
                 href="ssm2.gmfgraph#SignalName"/>
             <features
                 href="ssm2.ecore#//ValuedObject/name"/>
             <features
                 href="ssm2.ecore#//ValuedObject/type"/>
-            <features
-                href="ssm2.ecore#//Signal/combineType"/>
           </labelMappings>
           <diagramNode
               href="ssm2.gmfgraph#InvisibleNode"/>
@@ -155,9 +153,9 @@
               href="ssm2.ecore#//Variable"/>
           <labelMappings
               xsi:type="gmfmap:FeatureLabelMapping"
-              viewPattern="{0}: {1}"
-              editorPattern="{0}: {1}"
-              editPattern="{0}: {1}">
+              viewPattern="{0}: {1},"
+              editorPattern="{0}"
+              editPattern="{0}">
             <diagramLabel
                 href="ssm2.gmfgraph#VariableName"/>
             <features
