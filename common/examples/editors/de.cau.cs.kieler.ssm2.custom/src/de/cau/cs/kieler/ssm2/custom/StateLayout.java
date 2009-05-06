@@ -16,6 +16,7 @@ import org.eclipse.gmf.runtime.draw2d.ui.figures.ConstrainedToolbarLayout;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
 import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
 
+import de.cau.cs.kieler.ssm2.Region;
 import de.cau.cs.kieler.ssm2.State;
 
 public class StateLayout extends ConstrainedToolbarLayout {
@@ -32,6 +33,25 @@ public class StateLayout extends ConstrainedToolbarLayout {
 	public void layout(IFigure parent) {
 		if (!parent.isVisible())
 			return;
+		
+		if (parent instanceof AttributeAwareStateFigure) {
+			AttributeAwareStateFigure aasf = (AttributeAwareStateFigure) parent;
+			if (aasf.modelElement instanceof State) {
+				State s = (State) aasf.modelElement;
+				if (s.getParentRegion() != null) {
+					Region parentRegion = s.getParentRegion();
+					if (parentRegion.getParentState() == null) {
+						// Set this state's bounds to diagram size
+						/*Rectangle stateBounds = new Rectangle();
+						stateBounds.x = 0;
+						stateBounds.y = 0;
+						stateBounds.width = 1000;
+						stateBounds.height = 1000;
+						parent.setBounds(transposer.t(stateBounds));*/
+					}
+				}
+			}
+		}
 		
 		List children = getChildren(parent);
 		Rectangle clientArea = transposer.t(parent.getClientArea());

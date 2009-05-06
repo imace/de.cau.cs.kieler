@@ -76,17 +76,29 @@ public class XTextParserWrapper implements IParser {
 
 	// Return the print string of an action or a suspensionTrigger
 	public String getPrintString(IAdaptable element, int flags) {
+		String immediateString = "";
 		if (element instanceof EObjectAdapter) {
 			if (((EObjectAdapter) element).getRealObject() instanceof Action) {
 				Action action = (Action) (((EObjectAdapter) element).getRealObject());
+				// If the element is a transition, has a trigger and is immediate, add a '#' to the string
+				if (((EObjectAdapter) element).getRealObject() instanceof Transition) {
+					Transition transition = (Transition) (((EObjectAdapter) element).getRealObject());
+					if ((transition.getTrigger() != null) && (transition.isImmediate())) {
+						immediateString = "#";
+					}
+				}
 				if (action.getTriggersAndEffects() != null) {
-					return action.getTriggersAndEffects();
+					return immediateString + action.getTriggersAndEffects();
 				}
 			}
 			else if (((EObjectAdapter) element).getRealObject() instanceof SuspensionTrigger) {
 				SuspensionTrigger suspensionTrigger = (SuspensionTrigger) (((EObjectAdapter) element).getRealObject());
+				// If the suspension trigger is immediate, add a '#' to the string
+				if (suspensionTrigger.isImmediate()) {
+					immediateString = "#";
+				}
 				if (suspensionTrigger.getTrigger() != null) {
-					return suspensionTrigger.getTrigger();
+					return immediateString + suspensionTrigger.getTrigger();
 				}
 			}
 		}
