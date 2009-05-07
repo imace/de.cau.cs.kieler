@@ -59,17 +59,19 @@ public class LongestPathLayerAssigner extends AbstractAlgorithm implements
 		
 		// fill rank information for all layers
 		ListIterator<Layer> layerIter = layeredGraph.getLayers().listIterator();
-		Layer currentLayer = layerIter.next();
-		int rank = currentLayer.rank;
-		if (rank == Layer.UNDEF_RANK) {
-			rank = 1;
-			currentLayer.rank = rank;
-		}
-		while (layerIter.hasNext()) {
-			Layer nextLayer = layerIter.next();
-			nextLayer.rank = ++rank;
-			currentLayer.next = nextLayer;
-			currentLayer = nextLayer;
+		if (layerIter.hasNext()) {
+    		Layer currentLayer = layerIter.next();
+    		int rank = currentLayer.rank;
+    		if (rank == Layer.UNDEF_RANK) {
+    			rank = 1;
+    			currentLayer.rank = rank;
+    		}
+    		while (layerIter.hasNext()) {
+    			Layer nextLayer = layerIter.next();
+    			nextLayer.rank = ++rank;
+    			currentLayer.next = nextLayer;
+    			currentLayer = nextLayer;
+    		}
 		}
 		
 		getMonitor().done();

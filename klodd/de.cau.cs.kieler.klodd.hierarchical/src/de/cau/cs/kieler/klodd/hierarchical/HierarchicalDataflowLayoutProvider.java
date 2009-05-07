@@ -118,7 +118,7 @@ public class HierarchicalDataflowLayoutProvider extends
 		}
 
 		// perform some pre-processing
-		try{preProcess(layoutNode);
+		preProcess(layoutNode);
 		// create a KIELER graph for cycle removal
 		graphConverter.reset(progressMonitor.subTask(5));
 		KSlimGraph slimGraph = graphConverter.convertGraph(layoutNode, true);
@@ -145,7 +145,7 @@ public class HierarchicalDataflowLayoutProvider extends
 			edgeRouter.routeEdges(layeredGraph, minDist);
 		}
 		layeredGraph.applyLayout();
-		restoreCycles();}catch(Throwable t) {t.printStackTrace();}
+		restoreCycles();
 		
 		progressMonitor.done();
 	}

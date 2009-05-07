@@ -251,37 +251,55 @@ public class KimlLayoutUtil {
             public int compare(KPort port1, KPort port2) {
                 KShapeLayout port1Layout = getShapeLayout(port1);
                 PortSide port1Side = LayoutOptions.getPortSide(port1Layout);
+                int port1Rank = LayoutOptions.getPortRank(port1Layout);
                 KShapeLayout port2Layout = getShapeLayout(port2);
                 PortSide port2Side = LayoutOptions.getPortSide(port2Layout);
+                int port2Rank = LayoutOptions.getPortRank(port2Layout);
+                int result = 0;
                 switch (port1Side) {
                 case NORTH:
-                    if (port2Side == PortSide.NORTH)
-                        return Float.compare(port1Layout.getXpos(), port2Layout.getXpos());
-                    else return -1;
+                    if (port2Side == PortSide.NORTH) {
+                        result = Float.compare(port1Layout.getXpos(), port2Layout.getXpos());
+                        if (result == 0)
+                            result = port1Rank > port2Rank ? 1
+                                    : (port1Rank < port2Rank ? -1 : 0);
+                    }
+                    else result = -1;
                 case EAST:
                     if (port2Side == PortSide.NORTH)
-                        return 1;
-                    if (port2Side == PortSide.EAST)
-                        return Float.compare(port1Layout.getYpos(), port2Layout.getYpos());
-                    else return -1;
+                        result = 1;
+                    else if (port2Side == PortSide.EAST) {
+                        result =  Float.compare(port1Layout.getYpos(), port2Layout.getYpos());
+                        if (result == 0)
+                            result = port1Rank > port2Rank ? 1
+                                    : (port1Rank < port2Rank ? -1 : 0);
+                    }
+                    else result = -1;
                 case SOUTH:
                     if (port2Side == PortSide.NORTH
                         || port2Side == PortSide.EAST)
-                        return 1;
-                    if (port2Side == PortSide.SOUTH)
-                        return Float.compare(port2Layout.getXpos(), port1Layout.getXpos());
-                    else return -1;
+                        result = 1;
+                    else if (port2Side == PortSide.SOUTH) {
+                        result = Float.compare(port2Layout.getXpos(), port1Layout.getXpos());
+                        if (result == 0)
+                            result = port1Rank > port2Rank ? 1
+                                    : (port1Rank < port2Rank ? -1 : 0);
+                    }
+                    else result = -1;
                 case WEST:
                     if (port2Side == PortSide.NORTH
                         || port2Side == PortSide.EAST
                         || port2Side == PortSide.SOUTH)
-                        return 1;
-                    if (port2Side == PortSide.WEST)
-                        return Float.compare(port2Layout.getYpos(), port1Layout.getYpos());
-                    else return -1;
-                default:
-                    return 0;
+                        result = 1;
+                    else if (port2Side == PortSide.WEST) {
+                        result = Float.compare(port2Layout.getYpos(), port1Layout.getYpos());
+                        if (result == 0)
+                            result = port1Rank > port2Rank ? 1
+                                    : (port1Rank < port2Rank ? -1 : 0);
+                    }
+                    else result = -1;
                 }
+                return result;
             }
         });
         
