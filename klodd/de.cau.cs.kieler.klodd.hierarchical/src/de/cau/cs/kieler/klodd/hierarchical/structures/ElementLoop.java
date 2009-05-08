@@ -113,24 +113,22 @@ public class ElementLoop {
 		}
 		
 		// set start and end points
+		float xbase = element.getPosition().getX() + element.getPosOffset().getX();
+		float ybase = element.getPosition().getY() + element.getPosOffset().getY();
 		if (sourcePort != null) {
 			KPoint point = KLayoutDataFactory.eINSTANCE.createKPoint();
 			point.setX(sourcePortLayout.getXpos()
-					+ sourcePortLayout.getWidth() / 2
-					+ element.getPosition().getX());
+					+ sourcePortLayout.getWidth() / 2 + xbase);
 			point.setY(sourcePortLayout.getYpos()
-					+ sourcePortLayout.getHeight() / 2
-					+ element.getPosition().getY());
+					+ sourcePortLayout.getHeight() / 2 + ybase);
 			edgeLayout.setSourcePoint(point);
 		}
 		if (targetPort != null) {
 			KPoint point = KLayoutDataFactory.eINSTANCE.createKPoint();
 			point.setX(targetPortLayout.getXpos()
-					+ targetPortLayout.getWidth() / 2
-					+ element.getPosition().getX());
+					+ targetPortLayout.getWidth() / 2 + xbase);
 			point.setY(targetPortLayout.getYpos()
-					+ targetPortLayout.getHeight() / 2
-					+ element.getPosition().getY());
+					+ targetPortLayout.getHeight() / 2 + ybase);
 			edgeLayout.setTargetPoint(point);
 		}
 	}

@@ -170,10 +170,12 @@ public class LayerConnection {
 			else {
 				sourcePoint.setX(sourcePortLayout.getXpos()
 						+ sourcePortLayout.getWidth() / 2
-						+ sourceElement.getPosition().getX());
+						+ sourceElement.getPosition().getX()
+						+ sourceElement.getPosOffset().getX());
 				sourcePoint.setY(sourcePortLayout.getYpos()
 						+ sourcePortLayout.getHeight() / 2
-						+ sourceElement.getPosition().getY());
+						+ sourceElement.getPosition().getY()
+						+ sourceElement.getPosOffset().getY());
 			}
 		}
 		else {
@@ -209,10 +211,12 @@ public class LayerConnection {
 			else {
 				targetPoint.setX(targetPortLayout.getXpos()
 						+ targetPortLayout.getWidth() / 2
-						+ targetElement.getPosition().getX());
+						+ targetElement.getPosition().getX()
+						+ targetElement.getPosOffset().getX());
 				targetPoint.setY(targetPortLayout.getYpos()
 						+ targetPortLayout.getHeight() / 2
-						+ targetElement.getPosition().getY());
+						+ targetElement.getPosition().getY()
+						+ targetElement.getPosOffset().getY());
 			}
 		}
 		else {
@@ -292,8 +296,8 @@ public class LayerConnection {
 						: portLayout.getHeight() / 2;
 				if (sourcePort.getNode() != layeredGraph.getParentNode()) {
 					sourceAnchorPos += layoutDirection == LayoutDirection.VERTICAL
-							? portLayout.getXpos()
-							: portLayout.getYpos();
+							? portLayout.getXpos() + sourceElement.getPosOffset().getX()
+							: portLayout.getYpos() + sourceElement.getPosOffset().getY();
 				}
 			}
 		}
@@ -330,8 +334,8 @@ public class LayerConnection {
 						: portLayout.getHeight() / 2;
 				if (targetPort.getNode() != layeredGraph.getParentNode()) {
 					targetAnchorPos += layoutDirection == LayoutDirection.VERTICAL
-							? portLayout.getXpos()
-							: portLayout.getYpos();
+							? portLayout.getXpos() + targetElement.getPosOffset().getX()
+							: portLayout.getYpos() + targetElement.getPosOffset().getY();
 				}
 			}
 		}

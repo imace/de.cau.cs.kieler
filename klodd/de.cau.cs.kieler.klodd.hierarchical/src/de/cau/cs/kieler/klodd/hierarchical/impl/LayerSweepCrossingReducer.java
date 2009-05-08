@@ -105,13 +105,6 @@ public class LayerSweepCrossingReducer extends AbstractAlgorithm implements
             layerIter.next();
 		}
 		
-		// find placements for all ports in the graph
-		for (Layer layer : layeredGraph.getLayers()) {
-		    for (LayerElement element : layer.getElements()) {
-		        element.placePorts();
-		    }
-		}
-
 		getMonitor().done();
 	}
 

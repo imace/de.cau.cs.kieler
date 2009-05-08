@@ -64,6 +64,7 @@ public class SortingNodewiseEdgePlacer extends AbstractAlgorithm implements
 		// calculate the connection routing for each layer element
 		for (Layer layer : layeredGraph.getLayers()) {
 			for (LayerElement element : layer.getElements()) {
+			    element.placePorts();
 				placeEdges(element);
 			}
 		}

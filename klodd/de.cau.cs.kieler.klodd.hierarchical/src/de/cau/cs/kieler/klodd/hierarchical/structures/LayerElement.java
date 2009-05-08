@@ -73,6 +73,8 @@ public class LayerElement {
 	private int rankWidth;
 	/** the new position that is determined for this layer element */
 	private KPoint position;
+	/** offset to be added to the determined position */
+	private KPoint posOffset;
 	/** the width of the contained object */
 	private float realWidth;
 	/** the height of the contained object */
@@ -110,6 +112,7 @@ public class LayerElement {
 		this.layer = layer;
 		this.kNode = kNode;
 		this.position = KLayoutDataFactory.eINSTANCE.createKPoint();
+		this.posOffset = KLayoutDataFactory.eINSTANCE.createKPoint();
 		
 		if (obj instanceof KNode) {
 			// the layer element is a layout node
@@ -117,8 +120,9 @@ public class LayerElement {
 		    KShapeLayout nodeLayout = KimlLayoutUtil.getShapeLayout(node);
             portConstraints = LayoutOptions.getPortConstraints(nodeLayout);
 			rankWidth = Math.max(node.getPorts().size(), 1);
-			realWidth = nodeLayout.getWidth();
-			realHeight = nodeLayout.getHeight();
+            realWidth = nodeLayout.getWidth();
+            realHeight = nodeLayout.getHeight();
+			
 			// create port lists
 			List<KPort> northPortList = new LinkedList<KPort>();
 			List<KPort> eastPortList = new LinkedList<KPort>();
@@ -161,7 +165,7 @@ public class LayerElement {
 			    Arrays.sort(eastPorts, portComparator);
 			    Arrays.sort(southPorts, portComparator);
 			    Arrays.sort(westPorts, portComparator);
-			}
+			}		
 		}
 		else if (obj instanceof KPort) {
 			// the layer element is a port
@@ -294,8 +298,8 @@ public class LayerElement {
 		position.setY(position.getY() + offset.getY());
 		if (elemObj instanceof KNode) {
 			KShapeLayout shapeLayout = KimlLayoutUtil.getShapeLayout(elemObj);
-			shapeLayout.setXpos(position.getX());
-			shapeLayout.setYpos(position.getY());
+			shapeLayout.setXpos(position.getX() + posOffset.getX());
+			shapeLayout.setYpos(position.getY() + posOffset.getY());
 		}
 		else if (elemObj instanceof KPort) {
 			KShapeLayout shapeLayout = KimlLayoutUtil.getShapeLayout(elemObj);
@@ -441,6 +445,16 @@ public class LayerElement {
 	 */
 	public KPoint getPosition() {
 		return position;
+	}
+	
+	/**
+	 * Gets the current position offset of the contained node,
+	 * or {@code null} if the contained object is not a node.
+	 * 
+	 * @return the position offset
+	 */
+	public KPoint getPosOffset() {
+	    return posOffset;
 	}
 	
 	/**
@@ -848,15 +862,29 @@ public class LayerElement {
 	 */
 	public void placePorts() {
 	    if (elemObj instanceof KNode) {
-	        KShapeLayout nodeLayout = KimlLayoutUtil.getShapeLayout(elemObj);
+	        KNode node = (KNode)elemObj;
+            float width = realWidth;
+            float height = realHeight;
 	        if (portConstraints != PortConstraints.FIXED_POS) {
-    	        float width = nodeLayout.getWidth();
-    	        float height = nodeLayout.getHeight();
     	        placePorts(northPorts, 0.0f, 0.0f, false, true, true, width);
     	        placePorts(eastPorts, width, 0.0f, true, true, false, height);
     	        placePorts(southPorts, width, height, false, false, false, width);
     	        placePorts(westPorts, 0.0f, height, true, false, true, height);
 	        }
+	        
+	        // determine new bounds for the contained node
+	        float minX = 0.0f, minY = 0.0f, maxX = width, maxY = height;
+	        for (KPort port : node.getPorts()) {
+	            KShapeLayout portLayout = KimlLayoutUtil.getShapeLayout(port);
+	            minX = Math.min(minX, portLayout.getXpos());
+	            minY = Math.min(minY, portLayout.getYpos());
+	            maxX = Math.max(maxX, portLayout.getXpos() + portLayout.getWidth());
+	            maxY = Math.max(maxY, portLayout.getYpos() + portLayout.getHeight());
+	        }
+	        posOffset.setX(-minX);
+	        posOffset.setY(-minY);
+	        realWidth = maxX;
+	        realHeight = maxY;
 	    }
 	}
 	
