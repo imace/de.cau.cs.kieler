@@ -1,5 +1,45 @@
 import ssm2;
-   
-context State ERROR "Only pseudo states do not have a name!" :
-   ((stateKind != StateKind::PSEUDO) && (name.length != 0))
-   || ((stateKind == StateKind::PSEUDO) && (name.length == 0));  
+
+context State if (stateKind == StateKind::PSEUDO) ERROR "pseudo states must not have a name!" :
+	(name == null) || (name.length == 0);
+
+context State if (stateKind != StateKind::PSEUDO) ERROR "name must be set!" :
+	(name != null) && (name.length > 0);
+
+context State if (stateKind == StateKind::PSEUDO) ERROR "pseudo states must not be initial or final!" :
+	stateFlag == StateFlag::NORMAL;
+	
+context State if (stateKind == StateKind::PSEUDO) ERROR "pseudo states must not contain regions!" :
+	(regions == null) || (regions.size == 0);
+	
+context State if (stateKind == StateKind::PSEUDO) ERROR "pseudo states must not contain signals!" :
+	(signals == null) || (signals.size == 0);
+	
+context State if (stateKind == StateKind::PSEUDO) ERROR "pseudo states must not contain variables!" :
+	(variables == null) || (variables.size == 0);
+	
+context State if (stateKind == StateKind::PSEUDO) ERROR "pseudo states must not contain actions!" :
+	((entryActions == null) || (entryActions.size == 0))
+	&& ((innerActions == null) || (innerActions.size == 0))
+	&& ((exitActions == null) || (exitActions.size == 0));
+	
+context State if (stateKind == StateKind::PSEUDO) ERROR "pseudo states must not contain a suspension trigger!" :
+	suspensionTrigger == null;
+	
+context State if (stateKind != StateKind::REFERENCE) ERROR "only reference states may contain signal renamings!" :
+	(signalRenamings == null) || (signalRenamings.size == 0);
+
+context Signal if (isLocal) ERROR "local signals must not be input or output!" :
+	((!isInput) && (!isOutput));
+	
+context Signal ERROR "signals have to be input, local or output!" :
+	isInput || isLocal || isOutput;
+
+context Signal if ((initialValue == null) || (initialValue == "")) ERROR "only valued signals may have a combine type other than NONE!" :
+	combineType == CombineType::NONE;
+
+context Transition if (immediate) ERROR "immediate transitions must not have a delay!" :
+	delay == 0;
+	
+context SignalRenaming ERROR "The old and new signal of a signal renaming must be different!" :
+	oldSignal != newSignal;
