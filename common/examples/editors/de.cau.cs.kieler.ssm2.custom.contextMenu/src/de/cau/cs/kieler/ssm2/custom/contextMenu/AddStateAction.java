@@ -8,6 +8,7 @@ import org.eclipse.gef.EditPartViewer;
 import org.eclipse.gef.Request;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.commands.CompoundCommand;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.requests.CreateViewRequest;
 import org.eclipse.gmf.runtime.diagram.ui.requests.CreateViewRequestFactory;
 import org.eclipse.gmf.runtime.diagram.ui.requests.RequestConstants;
@@ -29,7 +30,7 @@ public class AddStateAction implements IActionDelegate {
 
 	private IStructuredSelection currentSelection;
 	private RegionEditPart selectedElement;
-	private RegionStateCompartmentEditPart stateCompartment;
+	private GraphicalEditPart stateCompartment;
 	
 	@Override
 	public void run(IAction action) {
@@ -40,6 +41,11 @@ public class AddStateAction implements IActionDelegate {
 			if (editPart instanceof RegionStateCompartmentEditPart) {
 				stateCompartment = (RegionStateCompartmentEditPart) editPart;
 			}
+		}
+		
+		// The diagram root does not have a compartment, but holds the state itself
+		if (stateCompartment == null) {
+			stateCompartment = selectedElement;
 		}
 		
 		CompoundCommand cc = new CompoundCommand("Add State");

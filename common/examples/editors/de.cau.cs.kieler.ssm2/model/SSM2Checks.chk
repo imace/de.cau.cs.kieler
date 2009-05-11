@@ -1,6 +1,5 @@
 import ssm2;
-
-extension de::cau::cs::kieler::ssm2::dsl::Extensions;
-
-context Signal ERROR "Signal names have to contain at least one letter!" :
-   name.length >= 1;
+   
+context State ERROR "Only pseudo states do not have a name!" :
+   ((stateKind != StateKind::PSEUDO) && (name.length != 0))
+   || ((stateKind == StateKind::PSEUDO) && (name.length == 0));  

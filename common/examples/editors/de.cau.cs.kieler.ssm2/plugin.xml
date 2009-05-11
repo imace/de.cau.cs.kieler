@@ -16,5 +16,14 @@
             class="de.cau.cs.kieler.ssm2.Ssm2Package"
             genModel="model/ssm2.genmodel"/>
    </extension>
+   <extension
+         point="org.openarchitectureware.adapter.emf.check.checks">
+      <metaModel
+            nsURI="http://www.informatik.uni-kiel.de/rtsys/ssm2">
+         <checkFile
+               path="model/SSM2Checks.chk">
+         </checkFile>
+      </metaModel>
+   </extension>
 
 </plugin>
