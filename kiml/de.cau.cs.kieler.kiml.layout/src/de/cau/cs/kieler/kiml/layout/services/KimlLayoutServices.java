@@ -179,15 +179,14 @@ public class KimlLayoutServices {
     		}
 		}
 
-		// if still no success, use default layout provider ...
+		// if still no success, use default layout provider
 		String defaultLayoutProvider = preferenceStore
 				.getString(KimlLayoutPreferenceConstants.PREF_LAYOUTPROVIDERS_DEFAULT_LAYOUT_PROVIDER);
 		layoutProvider = layoutProviderMap.get(defaultLayoutProvider);
-
-		// ... and if found return it
 		if (layoutProvider != null && layoutProvider.isEnabled()) {
 			return layoutProvider;
 		}
+		
 		/*
 		 * if still no layout provider found, return dummy null layout provider,
 		 * so that no null pointer exception arises in other plugins.

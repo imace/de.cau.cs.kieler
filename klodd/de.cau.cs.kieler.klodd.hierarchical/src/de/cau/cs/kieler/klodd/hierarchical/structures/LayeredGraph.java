@@ -275,7 +275,7 @@ public class LayeredGraph {
 		parentLayout.setHeight(height);
 		
 		// update layout options of the parent layout node
-		LayoutOptions.setFixedSize(parentLayout);
+		LayoutOptions.setFixedSize(parentLayout, true);
 		LayoutOptions.setPortConstraints(parentLayout,
 		        PortConstraints.FIXED_POS);
 	}

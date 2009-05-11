@@ -279,7 +279,7 @@ public class DataFlowLayoutGraphBuilder extends AbstractLayoutGraphBuilder {
 		    LayoutOptions.setPortConstraints(nodeLayout,
 		            emptyPortConstraints);
 			if (fixedNodeSizePref)
-				LayoutOptions.setFixedSize(nodeLayout);
+				LayoutOptions.setFixedSize(nodeLayout, true);
 		}
 
 		// process next hierarchy level

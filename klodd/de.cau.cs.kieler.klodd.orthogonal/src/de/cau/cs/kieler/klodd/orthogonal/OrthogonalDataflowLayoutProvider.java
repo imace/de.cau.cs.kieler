@@ -147,7 +147,7 @@ public class OrthogonalDataflowLayoutProvider extends
 				+ currentYpos + insets.getBottom());
 		
 		// update layout options of the parent layout node
-		LayoutOptions.setFixedSize(parentLayout);
+		LayoutOptions.setFixedSize(parentLayout, true);
 		LayoutOptions.setPortConstraints(parentLayout,
 		        PortConstraints.FIXED_POS);
 	}

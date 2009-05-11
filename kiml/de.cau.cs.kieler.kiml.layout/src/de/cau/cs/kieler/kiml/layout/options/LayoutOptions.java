@@ -13,6 +13,8 @@
  */
 package de.cau.cs.kieler.kiml.layout.options;
 
+import java.util.ListIterator;
+
 import de.cau.cs.kieler.core.kgraph.KFloatOption;
 import de.cau.cs.kieler.core.kgraph.KGraphFactory;
 import de.cau.cs.kieler.core.kgraph.KIntOption;
@@ -305,17 +307,28 @@ public class LayoutOptions {
     }
 
     /**
-     * Activates the fixed size option for the given layout data
-     * instance.
+     * Activates or deactivates the fixed size option for the
+     * given layout data instance.
      * 
      * @param layoutData layout data for a node
+     * @param fixedSize true if the node's size shall be fixed
      */
-    public static void setFixedSize(KLayoutData layoutData) {
-        KOption sizeOption = layoutData.getOption(FIXED_SIZE);
-        if (sizeOption == null) {
-            sizeOption = KGraphFactory.eINSTANCE.createKOption();
-            sizeOption.setKey(FIXED_SIZE);
-            layoutData.getOptions().add(sizeOption);
+    public static void setFixedSize(KLayoutData layoutData,
+            boolean fixedSize) {
+        if (fixedSize) {
+            KOption sizeOption = layoutData.getOption(FIXED_SIZE);
+            if (sizeOption == null) {
+                sizeOption = KGraphFactory.eINSTANCE.createKOption();
+                sizeOption.setKey(FIXED_SIZE);
+                layoutData.getOptions().add(sizeOption);
+            }
+        }
+        else {
+            ListIterator<KOption> optionIter = layoutData.getOptions().listIterator();
+            while (optionIter.hasNext()) {
+                if (FIXED_SIZE.equals(optionIter.next().getKey()))
+                    optionIter.remove();
+            }
         }
     }
     

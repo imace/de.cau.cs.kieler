@@ -55,11 +55,11 @@ public class RecursiveLayouterEngine extends
 	 */
 	private void layoutRecursively(KNode layoutNode,
 			IKielerProgressMonitor progressMonitor) throws KielerException {
-		for (KNode child : layoutNode.getChildren()) {
-			layoutRecursively(child, progressMonitor);
-		}
-
 		if (!layoutNode.getChildren().isEmpty()) {
+	        for (KNode child : layoutNode.getChildren()) {
+	            layoutRecursively(child, progressMonitor);
+	        }
+		    
 			lastLayoutProvider = layoutServices.getLayoutProvider(layoutNode);
 			lastLayoutProvider.doLayout(layoutNode,
 					progressMonitor.subTask(layoutNode.getChildren().size()));
