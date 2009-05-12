@@ -1,11 +1,13 @@
 package de.cau.cs.kieler.ssm2.custom;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.XYLayout;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Rectangle;
+import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
 
 public class CustomCompartmentLayout extends XYLayout {
 
@@ -19,7 +21,7 @@ public class CustomCompartmentLayout extends XYLayout {
 		if (!parent.isVisible())
 			return;
 		
-		List children = parent.getChildren();
+		List children = sort(parent.getChildren());
 		Rectangle clientArea = parent.getClientArea();
 		int width = clientArea.width;
 		Rectangle newBounds = new Rectangle();
@@ -55,6 +57,22 @@ public class CustomCompartmentLayout extends XYLayout {
 				newBounds.x += newBounds.width;
 			}
 		}
+	}
+
+	// return a sorted list in which WrappingLabels come first
+	private List sort(List list) {
+		List newList = new LinkedList();
+		for (Object object : list) {
+			if (object instanceof WrappingLabel) {
+				newList.add(object);
+			}
+		}
+		for (Object object : list) {
+			if (!(object instanceof WrappingLabel)) {
+			newList.add(object);
+			}
+		}
+		return newList;
 	}
 
 	// Method to calculate the preferred size of a figure

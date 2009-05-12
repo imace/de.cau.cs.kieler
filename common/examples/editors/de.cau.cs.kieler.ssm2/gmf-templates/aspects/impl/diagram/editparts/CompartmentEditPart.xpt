@@ -55,6 +55,12 @@
 			result.setBorder(null);
 			«IF title != "StateCompartment"-»
 				result.getContentPane().setLayoutManager(new de.cau.cs.kieler.ssm2.custom.CustomCompartmentLayout());
+				«IF title != "RegionCompartment"-»
+					org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel title = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();
+					title.setText(result.getCompartmentTitle() + " ");
+					title.setForegroundColor(org.eclipse.draw2d.ColorConstants.black);
+					result.getContentPane().add(title, 0);
+				«ENDIF-»
 			«ENDIF-»
 			«REM»
 			«IF title == "RegionCompartment"-»

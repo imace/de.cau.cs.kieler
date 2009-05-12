@@ -136,6 +136,49 @@ public class StateLayout extends ConstrainedToolbarLayout {
 							|| (getName((ShapeCompartmentFigure) child).equals("RegionCompartment") && (!containsRegions))) {
 						newHeight = 0;
 					}
+					// Make title label invisible if the compartment is not a region compartment and has only the title label as content
+					if (getName((ShapeCompartmentFigure) child).equals("Signal:")) {
+						if (!containsSignals) {
+							setCompartmentTitleVisibility(child, false);
+						} else {
+							setCompartmentTitleVisibility(child, true);
+						}
+					}
+					if (getName((ShapeCompartmentFigure) child).equals("Variable:")) {
+						if (!containsVariables) {
+							setCompartmentTitleVisibility(child, false);
+						} else {
+							setCompartmentTitleVisibility(child, true);
+						}
+					}
+					if (getName((ShapeCompartmentFigure) child).equals("OnEntryActions:")) {
+						if (!containsEntryActions) {
+							setCompartmentTitleVisibility(child, false);
+						} else {
+							setCompartmentTitleVisibility(child, true);
+						}
+					}
+					if (getName((ShapeCompartmentFigure) child).equals("OnInsideActions:")) {
+						if (!containsInnerActions) {
+							setCompartmentTitleVisibility(child, false);
+						} else {
+							setCompartmentTitleVisibility(child, true);
+						}
+					}
+					if (getName((ShapeCompartmentFigure) child).equals("OnExitActions:")) {
+						if (!containsExitActions) {
+							setCompartmentTitleVisibility(child, false);
+						} else {
+							setCompartmentTitleVisibility(child, true);
+						}
+					}
+					if (getName((ShapeCompartmentFigure) child).equals("Suspend:")) {
+						if (!containsSuspensionTrigger) {
+							setCompartmentTitleVisibility(child, false);
+						} else {
+							setCompartmentTitleVisibility(child, true);
+						}
+					}
 				}
 				prefWidths[i] = newWidth;
 				prefHeights[i] = newHeight;
@@ -176,6 +219,14 @@ public class StateLayout extends ConstrainedToolbarLayout {
 				childFigure.setBounds(transposer.t(newBounds));
 			}
 		}	
+	}
+
+	private void setCompartmentTitleVisibility(Object child, boolean b) {
+		for (Object o : ((ShapeCompartmentFigure) child).getContentPane().getChildren()) {
+			if (o instanceof WrappingLabel) {
+				((WrappingLabel) o).setVisible(b);
+			}
+		}
 	}
 
 	private String getName(ShapeCompartmentFigure child) {
