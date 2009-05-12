@@ -59,10 +59,11 @@ public class GraphGenerator {
         KNode[] nodes = new KNode[nodeCount];
         for (int i = 0; i < nodeCount; i++) {
             nodes[i] = KimlLayoutUtil.createInitializedNode();
+            nodes[i].getLabel().setText("N" + i);
             KShapeLayout nodeLayout = KimlLayoutUtil.getShapeLayout(nodes[i]);
             nodeLayout.setWidth(NODE_WIDTH);
             nodeLayout.setHeight(NODE_HEIGHT);
-            LayoutOptions.setFixedSize(nodeLayout);
+            LayoutOptions.setFixedSize(nodeLayout, true);
             if (withPorts) {
                 LayoutOptions.setPortConstraints(nodeLayout,
                         PortConstraints.FIXED_POS);

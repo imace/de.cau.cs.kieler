@@ -35,7 +35,7 @@ public class MetricsProgram {
         // TODO generalize metrics selection, e.g. by reading command-line arguments
         OutputStream fileStream = null;
         try {
-            String fileName = "measurement" + (System.currentTimeMillis() & 0xfff)+".txt";
+            String fileName = "measurement" + (System.currentTimeMillis() & 0xfff)+".csv";
             fileStream = new FileOutputStream(fileName);
             ExecutionTimeMetric executionTimeMetric = new ExecutionTimeMetric(
                     new HierarchicalDataflowLayoutProvider(), fileStream);
