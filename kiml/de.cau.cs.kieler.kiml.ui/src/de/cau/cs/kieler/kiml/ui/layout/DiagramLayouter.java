@@ -48,7 +48,9 @@ public final class DiagramLayouter {
 	/** static List of Error Messages, such that they can be 
 	 * created from within other threads and handled later on from another thread.
 	 */
-	static List<IStatus> stati = new ArrayList<IStatus>();;
+	private static List<IStatus> stati = new ArrayList<IStatus>();;
+	/** the layouter engine used to layout diagrams */
+    private static AbstractLayouterEngine layouterEngine = null;
 	
 	/** duration of animation for diagram layout */
 	// TODO export duration of animation (e.g. make it user definable)
@@ -222,7 +224,6 @@ public final class DiagramLayouter {
 	 */
 	private static IStatus layout(Object target, String editorID, boolean animate,
 			int runs, KielerProgressMonitor progressMonitor) {
-		AbstractLayouterEngine layoutEngine = null;
 		KimlLayoutInformation layoutInformation = null;
 		try {
 			progressMonitor.begin("Diagram layout", 100);
@@ -241,10 +242,11 @@ public final class DiagramLayouter {
 					layoutInformation.layoutGraph);
 
 			// chooses the default layout engine
-			layoutEngine = new RecursiveLayouterEngine();
+			if (layouterEngine == null)
+			    layouterEngine = new RecursiveLayouterEngine();
 
 			// does the layout with the layout graph
-			layoutEngine.layout(layoutInformation.layoutGraph,
+			layouterEngine.layout(layoutInformation.layoutGraph,
 					progressMonitor.subTask(90));
 
 			// fetches layout graph applier for the provided editor
@@ -279,10 +281,10 @@ public final class DiagramLayouter {
 			
 		} catch (Throwable exception) {
 			String message = "Failed to perform diagram layout.";
-			if (layoutEngine != null
-					&& layoutEngine.getLastLayoutProvider() != null)
+			if (layouterEngine != null
+					&& layouterEngine.getLastLayoutProvider() != null)
 				message += " ("
-						+ layoutEngine.getLastLayoutProvider().getName() + ")";
+						+ layouterEngine.getLastLayoutProvider().getName() + ")";
 			Status status = new Status(IStatus.ERROR,
 					KimlUiPlugin.PLUGIN_ID, message, exception);
 			return status;

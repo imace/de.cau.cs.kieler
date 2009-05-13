@@ -343,6 +343,17 @@ public class LayoutGraphCanvas extends Canvas implements PaintListener {
             this.layoutGraph.clear();
         this.addLayoutGraph(layoutGraph);
     }
+    
+    /**
+     * Returns the currently painted layout graph.
+     * 
+     * @return the painted layout graph
+     */
+    public KNode getLayoutGraph() {
+        if (layoutGraph != null)
+            return layoutGraph.get(0);
+        else return null;
+    }
 
     /**
      * Adds a layout graph to be painted. Multiple graphs may be overlaid to get

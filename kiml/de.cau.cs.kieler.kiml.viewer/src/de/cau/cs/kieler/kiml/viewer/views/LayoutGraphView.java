@@ -19,6 +19,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
@@ -41,6 +42,7 @@ import de.cau.cs.kieler.kiml.viewer.KimlViewerPlugin;
 import de.cau.cs.kieler.kiml.viewer.Messages;
 import de.cau.cs.kieler.kiml.viewer.actions.GmfDebugGraphicsAction;
 import de.cau.cs.kieler.kiml.viewer.actions.ImageExportAction;
+import de.cau.cs.kieler.kiml.viewer.actions.PerformLayoutAction;
 
 /**
  * A viewer for layout graphs.
@@ -69,14 +71,12 @@ public class LayoutGraphView extends ViewPart {
 	private LayoutGraphCanvas preCanvas;
 	/** the canvas used to draw post-layout graphs */
 	private LayoutGraphCanvas postCanvas;
-	/** the canvas used to draw XMI resources */
-	private LayoutGraphCanvas xmiCanvas;
-	/** a debugging canvas to compare layout with GMF values */
+    /** the canvas used to draw XMI resources */
+    private LayoutGraphCanvas xmiCanvas;
+    /** a debugging canvas to compare layout with GMF values */
 	private GmfDebugCanvas compareCanvas;
 	/** New transparent "window" to display on top of the Eclipse window, i.e. the GMF editor */ 
 	TransparentShell transparentShell;
-
-	
 	
 	/**
 	 * Creates a layout graph view.
@@ -91,10 +91,10 @@ public class LayoutGraphView extends ViewPart {
 	 */
 	public void createPartControl(Composite parent) {
 		// create actions in the view toolbar
-		getViewSite().getActionBars().getToolBarManager()
-				.add(new ImageExportAction(this));
-		getViewSite().getActionBars().getToolBarManager()
-                                .add(new GmfDebugGraphicsAction(this));
+	    IToolBarManager toolBarManager = getViewSite().getActionBars().getToolBarManager();
+	    toolBarManager.add(new ImageExportAction(this));
+	    toolBarManager.add(new GmfDebugGraphicsAction(this));
+	    toolBarManager.add(new PerformLayoutAction(this));
 
 		
 		// create tab folder for layout graphs
@@ -244,6 +244,16 @@ public class LayoutGraphView extends ViewPart {
 					.getItem(tabIndex).getControl()).getContent();
 		}
 		else return null;
+	}
+	
+	/**
+	 * Returns the layout graph that is currently displayed in the
+	 * XMI canvas, or {@code null} if there is none.
+	 * 
+	 * @return the layout graph from the XMI canvas
+	 */
+	public KNode getXmiGraph() {
+	    return xmiCanvas.getLayoutGraph();
 	}
 	
 	public GmfDebugCanvas getDebugCanvas(){
