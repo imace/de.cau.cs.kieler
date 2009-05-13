@@ -13,14 +13,17 @@
  */
 package de.cau.cs.kieler.kiml.viewer.actions;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.action.Action;
+import org.eclipse.jface.operation.IRunnableWithProgress;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.statushandlers.StatusManager;
 
-import de.cau.cs.kieler.core.alg.BasicProgressMonitor;
 import de.cau.cs.kieler.core.kgraph.KNode;
+import de.cau.cs.kieler.core.ui.KielerProgressMonitor;
 import de.cau.cs.kieler.kiml.layout.services.KimlLayoutServices;
 import de.cau.cs.kieler.kiml.layout.services.RecursiveLayouterEngine;
 import de.cau.cs.kieler.kiml.ui.layout.LayoutServiceBuilder;
@@ -71,28 +74,48 @@ public class PerformLayoutAction extends Action {
             // get a layouter engine for layout
             if (KimlLayoutServices.getInstance() == null)
                 LayoutServiceBuilder.buildLayoutServices();
-            RecursiveLayouterEngine layouterEngine = new RecursiveLayouterEngine();
+            final RecursiveLayouterEngine layouterEngine = new RecursiveLayouterEngine();
             
             // copy the layout graph
-            KNode layoutGraphCopy = (KNode)EcoreUtil.copy(layoutGraph);
+            final KNode layoutGraphCopy = (KNode)EcoreUtil.copy(layoutGraph);
             
             // perform layout on the new copy
             try {
-                layouterEngine.layout(layoutGraphCopy, new BasicProgressMonitor());
+                PlatformUI.getWorkbench().getProgressService().run(false, false,
+                        new IRunnableWithProgress() {
+                    public void run(IProgressMonitor monitor) {
+                        try {
+                            layouterEngine.layout(layoutGraphCopy,
+                                    new KielerProgressMonitor(monitor));
+                        } catch (Throwable throwable) {
+                            String message = "Failed to perform layout.";
+                            if (layouterEngine.getLastLayoutProvider() != null)
+                                message += " (" + layouterEngine.getLastLayoutProvider().getName() + ")";
+                            handleError(throwable, message);
+                        }
+                    }
+                });
             }
             catch (Throwable throwable) {
-                String message = "Failed to perform layout.";
-                if (layouterEngine.getLastLayoutProvider() != null)
-                    message += " (" + layouterEngine.getLastLayoutProvider().getName() + ")";
-                Status status = new Status(IStatus.ERROR,
-                        KimlViewerPlugin.PLUGIN_ID, message, throwable);
-                StatusManager.getManager().handle(status, StatusManager.SHOW);
-                StatusManager.getManager().handle(status, StatusManager.LOG);
+                handleError(throwable, "Failed to perform layout: Could not run progress service.");
             }
             
             // display the layouted layout graph in the post canvas
             view.setLayoutGraph(layoutGraphCopy, LayoutGraphView.POST);
 	    }
+	}
+	
+	/**
+	 * Handles an error by delegating it to the status manager.
+	 * 
+	 * @param throwable error that has been thrown
+	 * @param message additional message to show
+	 */
+	private static void handleError(Throwable throwable, String message) {
+        Status status = new Status(IStatus.ERROR,
+                KimlViewerPlugin.PLUGIN_ID, message, throwable);
+        StatusManager.getManager().handle(status, StatusManager.SHOW);
+        StatusManager.getManager().handle(status, StatusManager.LOG);
 	}
 
 }
