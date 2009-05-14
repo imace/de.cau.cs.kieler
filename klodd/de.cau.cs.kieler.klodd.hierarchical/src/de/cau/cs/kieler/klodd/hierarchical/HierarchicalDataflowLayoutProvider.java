@@ -69,6 +69,10 @@ public class HierarchicalDataflowLayoutProvider extends
 	public static final String VAL_LONGP_LAYER_ASS = "longp";
 	/** value for balancing layer assignment module */
 	public static final String VAL_BAL_LAYER_ASS = "bal";
+	/** preference identifier for the number of passes for crossing reduction */
+	public static final String PREF_CROSSRED_PASSES = "klodd.hierarchical.crossRedPasses";
+	/** default value for the number of passes for crossing reduction */
+	public static final int DEF_CROSSRED_PASSES = 2;
 
 	/** the preference store for this layouter */
 	private static IKielerPreferenceStore preferenceStore;
@@ -180,6 +184,14 @@ public class HierarchicalDataflowLayoutProvider extends
 		if (crossingReducer == null)
 			crossingReducer = new LayerSweepCrossingReducer(
 					new BarycenterCrossingReducer());
+		int passes = DEF_CROSSRED_PASSES;
+		if (preferenceStore != null) {
+		    int prefPasses = preferenceStore.getInt(PREF_CROSSRED_PASSES);
+		    if (prefPasses > 0)
+		        passes = prefPasses;
+		}
+		((LayerSweepCrossingReducer)crossingReducer).setPasses(passes);
+		
 		if (nodewiseEdgePlacer == null)
 			nodewiseEdgePlacer = new SortingNodewiseEdgePlacer();
 		if (nodePlacer == null)

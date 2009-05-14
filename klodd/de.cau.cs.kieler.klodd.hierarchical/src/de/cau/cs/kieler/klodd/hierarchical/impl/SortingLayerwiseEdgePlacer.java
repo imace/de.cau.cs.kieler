@@ -67,7 +67,7 @@ public class SortingLayerwiseEdgePlacer extends AbstractAlgorithm implements
 	 * @see de.cau.cs.kieler.klodd.hierarchical.modules.ILayerwiseEdgePlacer#placeEdges(de.cau.cs.kieler.klodd.hierarchical.structures.Layer)
 	 */
 	public int placeEdges(Layer layer, float minDist) {
-		getMonitor().begin("Layerwise edge placement", 1);
+		getMonitor().begin("Edge routing (layer " + layer.rank + ")", 1);
 		LayoutDirection layoutDirection = layer.getLayeredGraph().getLayoutDirection();
 		
 		// determine number of outgoing connections for each port

@@ -87,10 +87,8 @@ public class LayerElement {
 	private List<LayerConnection> outgoing = new LinkedList<LayerConnection>();
 	/** the list of element loop */
 	private List<ElementLoop> loops = new LinkedList<ElementLoop>();
-	/** map of ports to port ranks for forward layer sweep */
-	private Map<KPort, Integer> forwardPortRanks = null;
-	/** map of ports to port ranks for backwards layer sweep */
-	private Map<KPort, Integer> backwardsPortRanks = null;
+	/** map of ports to port ranks */
+	private Map<KPort, Integer> portRanks = null;
 	/** ports on the north side */
 	private KPort[] northPorts;
 	/** ports on the east side */
@@ -474,6 +472,13 @@ public class LayerElement {
 	public KSlimNode getKNode() {
 		return kNode;
 	}
+	
+	/**
+	 * Clears the internal map of port ranks.
+	 */
+	public void clearPortRanks() {
+	    portRanks = null;
+	}
 
 	/**
 	 * Gets the number of edges that are routed in front of this element.
@@ -507,19 +512,11 @@ public class LayerElement {
 	 */
 	public int getPortRank(KPort port, boolean forward) {
 		if (port != null) {
-			if (forward) {
-				if (forwardPortRanks == null)
-					calcPortRanks(true);
-				return forwardPortRanks.get(port).intValue();
-			}
-			else {
-				if (backwardsPortRanks == null)
-					calcPortRanks(false);
-				return backwardsPortRanks.get(port).intValue();
-			}
+			if (portRanks == null)
+				calcPortRanks(forward);
+			return portRanks.get(port).intValue();
 		}
-		else
-			return 0;
+		else return 0;
 	}
 	
 	/**
@@ -530,10 +527,7 @@ public class LayerElement {
      */
     private void calcPortRanks(boolean forward) {
         LayoutDirection layoutDirection = layer.getLayeredGraph().getLayoutDirection();
-        if (forward)
-            forwardPortRanks = new HashMap<KPort, Integer>();
-        else
-            backwardsPortRanks = new HashMap<KPort, Integer>();
+        portRanks = new HashMap<KPort, Integer>();
         
         if (elemObj instanceof KNode) {
             // sort all ports by their relative position
@@ -541,22 +535,12 @@ public class LayerElement {
             Arrays.sort(portArray, new KimlLayoutUtil.PortComparator(
                     forward, layoutDirection));
             // set the ranks in the newly sorted list
-            if (forward) {
-                for (int i = 0; i < portArray.length; i++) {
-                    forwardPortRanks.put(portArray[i], Integer.valueOf(i));
-                }
-            }
-            else {
-                for (int i = 0; i < portArray.length; i++) {
-                    backwardsPortRanks.put(portArray[i], Integer.valueOf(i));
-                }   
+            for (int i = 0; i < portArray.length; i++) {
+                portRanks.put(portArray[i], Integer.valueOf(i));
             }
         }
         else if (elemObj instanceof KPort) {
-            if (forward)
-                forwardPortRanks.put((KPort)elemObj, Integer.valueOf(0));
-            else
-                backwardsPortRanks.put((KPort)elemObj, Integer.valueOf(0));
+            portRanks.put((KPort)elemObj, Integer.valueOf(0));
         }
     }
 	

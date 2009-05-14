@@ -44,7 +44,8 @@ public class BarycenterCrossingReducer extends AbstractAlgorithm implements
 	 * @see de.cau.cs.kieler.klodd.hierarchical.modules.ISingleLayerCrossingReducer#reduceCrossings(de.cau.cs.kieler.klodd.hierarchical.structures.Layer, de.cau.cs.kieler.klodd.hierarchical.structures.Layer, boolean)
 	 */
 	public void reduceCrossings(Layer layer, boolean forward) {
-		getMonitor().begin("Barycenter method", 1);
+		getMonitor().begin("Barycenter method (layer " + layer.rank
+		        + (forward ? ", forward)" : ", backwards)"), 1);
 		
 		double[] abstractRanks = new double[layer.getElements().size()];
 		int elemIndex = 0;
