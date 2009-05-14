@@ -14,6 +14,7 @@
 package de.cau.cs.kieler.klodd.ui.preferences;
 
 import org.eclipse.jface.preference.FieldEditor;
+import org.eclipse.jface.preference.IntegerFieldEditor;
 import org.eclipse.jface.preference.RadioGroupFieldEditor;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
@@ -75,6 +76,11 @@ public class KloddLayouterPreferencePage extends
 						HierarchicalDataflowLayoutProvider.VAL_BAL_LAYER_ASS}
 				}, hieraGroup, false);
 		addField(layerAssEditor);
+		
+		FieldEditor crossRedPassesEditor = new IntegerFieldEditor(
+		        HierarchicalDataflowLayoutProvider.PREF_CROSSRED_PASSES,
+		        Messages.getString("klodd.ui.11"), hieraGroup, 3);
+		addField(crossRedPassesEditor);
 		
 		hieraGroup.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, true,
 				false, 2, 1));

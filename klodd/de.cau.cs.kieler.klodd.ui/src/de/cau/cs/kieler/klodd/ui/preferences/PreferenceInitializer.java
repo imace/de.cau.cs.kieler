@@ -40,6 +40,8 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 				HierarchicalDataflowLayoutProvider.VAL_GREEDY_CYCLE_REM);
 		store.setDefault(HierarchicalDataflowLayoutProvider.PREF_LAYER_ASS,
 				HierarchicalDataflowLayoutProvider.VAL_BAL_LAYER_ASS);
+		store.setDefault(HierarchicalDataflowLayoutProvider.PREF_CROSSRED_PASSES,
+		        HierarchicalDataflowLayoutProvider.DEF_CROSSRED_PASSES);
 		// initialize options for orthogonal layout
 		store.setDefault(OrthogonalDataflowLayoutProvider.LAYOUTER_NAME, true);
 	}
