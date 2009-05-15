@@ -19,6 +19,7 @@ public class DoubleEllipse extends Ellipse {
 		r.height--;
 		r.shrink((lineWidth - 1) / 2, (lineWidth - 1) / 2);
 		graphics.drawOval(r);
+		// Draw the second ellipse inside the first one
 		r.x += 5;
 		r.y += 5;
 		r.width -= 10;

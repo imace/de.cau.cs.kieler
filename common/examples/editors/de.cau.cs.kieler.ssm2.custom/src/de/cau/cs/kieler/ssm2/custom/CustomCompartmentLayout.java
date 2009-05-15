@@ -34,6 +34,9 @@ public class CustomCompartmentLayout extends XYLayout {
 		for (Object child : children) {
 			if (child instanceof IFigure) {
 				IFigure childFigure = (IFigure) child;
+				// The first if decides whether the compartment is one of those that need a
+				// special layout, which are those that contain AttributeAwareInvisibleFigures;
+				// For these, only their minimum size is considered.
 				if ((childFigure.getChildren() != null) && (childFigure.getChildren().size() > 0)
 					&& (childFigure.getChildren().get(0) instanceof AttributeAwareInvisibleFigure)) {
 					newBounds.width = childFigure.getMinimumSize(-1, -1).width;
@@ -44,6 +47,7 @@ public class CustomCompartmentLayout extends XYLayout {
 					newBounds.height = childFigure.getPreferredSize(-1, -1).height;
 				}
 				
+				// The figures are laid out in rows and wrapped around if needed
 				if (newBounds.x + newBounds.width > width) {
 					newBounds.x = 0;
 					newBounds.y += maxHeight;
@@ -59,7 +63,7 @@ public class CustomCompartmentLayout extends XYLayout {
 		}
 	}
 
-	// return a sorted list in which WrappingLabels come first
+	// Return a sorted list in which WrappingLabels come first
 	private List sort(List list) {
 		List newList = new LinkedList();
 		for (Object object : list) {
@@ -78,7 +82,6 @@ public class CustomCompartmentLayout extends XYLayout {
 	// Method to calculate the preferred size of a figure
 	@Override
 	protected Dimension calculatePreferredSize(IFigure parent, int hint, int hint2) {
-		
 		return parent.getPreferredSize(hint, hint2);
 	}
 }

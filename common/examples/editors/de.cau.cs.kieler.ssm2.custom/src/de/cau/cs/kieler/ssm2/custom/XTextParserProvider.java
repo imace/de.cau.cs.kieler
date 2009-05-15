@@ -33,7 +33,7 @@ public class XTextParserProvider extends AbstractProvider implements IParserProv
 		return null;
 	}
 
-	//
+	// Provide hint for GetParserOperations
 	public boolean provides(IOperation operation) {
 		if (operation instanceof GetParserOperation) {
 			IAdaptable hint = ((GetParserOperation) operation).getHint();

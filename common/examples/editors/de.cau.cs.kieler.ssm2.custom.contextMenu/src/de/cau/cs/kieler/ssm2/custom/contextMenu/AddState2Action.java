@@ -46,7 +46,6 @@ public class AddState2Action implements IActionDelegate {
 		// Create the new State
 		CreateViewRequest stateRequest = CreateViewRequestFactory.getCreateShapeRequest(Ssm2ElementTypes.State_3009, selectedElement.getDiagramPreferencesHint());
 
-		
 		Command createStateCmd = stateCompartment.getCommand(stateRequest);
 		IAdaptable stateViewAdapter = (IAdaptable) ((List) stateRequest.getNewObject()).get(0);
 		
@@ -69,6 +68,7 @@ public class AddState2Action implements IActionDelegate {
 		}
 	}
 
+	// Update variables upon selection change
 	@Override
 	public void selectionChanged(IAction action, ISelection selection) {
 		try {

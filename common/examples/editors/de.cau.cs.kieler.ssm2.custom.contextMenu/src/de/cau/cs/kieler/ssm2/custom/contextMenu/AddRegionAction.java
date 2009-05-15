@@ -44,9 +44,8 @@ public class AddRegionAction implements IActionDelegate {
 
 		// Create the new Region
 		CreateViewRequest regionRequest = CreateViewRequestFactory.getCreateShapeRequest(Ssm2ElementTypes.Region_3006, selectedElement.getDiagramPreferencesHint());
-		// Problem: request nicht richtig erstellt - newObject == null !
 		
-		Command createRegionCmd = regionCompartment.getCommand(regionRequest); // Problem: command == null !
+		Command createRegionCmd = regionCompartment.getCommand(regionRequest);
 		IAdaptable regionViewAdapter = (IAdaptable) ((List) regionRequest.getNewObject()).get(0);
 		
 		cc.add(createRegionCmd);
@@ -68,6 +67,7 @@ public class AddRegionAction implements IActionDelegate {
 		}
 	}
 
+	// Update variables upon selection change
 	@Override
 	public void selectionChanged(IAction action, ISelection selection) {
 		try {

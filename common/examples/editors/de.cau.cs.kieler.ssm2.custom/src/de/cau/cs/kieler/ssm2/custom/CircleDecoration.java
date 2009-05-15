@@ -40,6 +40,7 @@ public class CircleDecoration extends PolygonDecoration {
 		int right = pointList.getFirstPoint().x;
 		int bottom = pointList.getFirstPoint().y;
 		
+		// Take the outermost coordinates of all points as bounds 
 		for (int i = 1; i < getPoints().size(); i++) {
 			Point p = pointList.getPoint(i);
 			if (p.x < left)

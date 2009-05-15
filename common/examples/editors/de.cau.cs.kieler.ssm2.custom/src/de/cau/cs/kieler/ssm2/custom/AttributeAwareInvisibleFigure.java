@@ -27,6 +27,7 @@ public class AttributeAwareInvisibleFigure extends AttributeAwareFigure {
 		
 	}
 	
+	// Just a variant of the above constructor without the edit part parameter
 	public AttributeAwareInvisibleFigure() {
 		super();
 		

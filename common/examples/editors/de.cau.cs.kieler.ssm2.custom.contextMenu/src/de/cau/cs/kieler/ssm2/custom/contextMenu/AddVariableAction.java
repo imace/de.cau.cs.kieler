@@ -46,8 +46,7 @@ public class AddVariableAction implements IActionDelegate {
 		// Create the new Variable
 		CreateViewRequest variableRequest = CreateViewRequestFactory.getCreateShapeRequest(Ssm2ElementTypes.Variable_3010, selectedElement.getDiagramPreferencesHint());
 
-		//RegionEditPart regionEditPart = (RegionEditPart) selectedElement.getParent();
-		Command createVariableCmd = /*regionEditPart*/variableCompartment.getCommand(variableRequest);
+		Command createVariableCmd = variableCompartment.getCommand(variableRequest);
 		IAdaptable variableViewAdapter = (IAdaptable) ((List) variableRequest.getNewObject()).get(0);
 		
 		cc.add(createVariableCmd);
@@ -69,6 +68,7 @@ public class AddVariableAction implements IActionDelegate {
 		}
 	}
 
+	// Update variables upon selection change
 	@Override
 	public void selectionChanged(IAction action, ISelection selection) {
 		try {

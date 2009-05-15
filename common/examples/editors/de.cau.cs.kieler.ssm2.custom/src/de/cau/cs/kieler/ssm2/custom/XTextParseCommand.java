@@ -132,7 +132,6 @@ public class XTextParseCommand extends AbstractTransactionalCommand {
 	}
 
 	// Method to check whether the signals have already been defined in the parent state
-	// remove ugly try-catches by using guard!!!
 	private boolean checkSignals(Action action, Action newAction) {
 		boolean allValid = true;
 		boolean oneEqual = false;
@@ -176,6 +175,7 @@ public class XTextParseCommand extends AbstractTransactionalCommand {
 		return allValid;
 	}
 	
+	// A similar method for suspension triggers
 	private boolean checkSignals(SuspensionTrigger suspensionTrigger, Expression expression, Expression newExpression) {
 		boolean allValid = true;
 		boolean oneEqual = false;

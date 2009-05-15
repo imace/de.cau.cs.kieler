@@ -6,13 +6,13 @@ import org.eclipse.draw2d.geometry.Rectangle;
 
 public class HistoryDecoration extends CircleDecoration {
 
+	// Decoration for history transitions;
+	// draws an "H" inside the circle.
 	@Override
 	protected void outlineShape(Graphics g) {
 		super.outlineShape(g);
 		Rectangle ovalBounds = getBoundsFromPoints();
 		
-		// Unfortunately, there is no place for an "H". Will have to find
-		// another way to draw it
 		int wUnit = ovalBounds.width / 3;
 		int hUnit = ovalBounds.height / 4;
 		

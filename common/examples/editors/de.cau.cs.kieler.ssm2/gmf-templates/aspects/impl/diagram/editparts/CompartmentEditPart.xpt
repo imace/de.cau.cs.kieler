@@ -46,15 +46,18 @@
 			result.setTitleVisibility(false);
 			
 			«REM» Additions start here «ENDREM»
+			«REM» Make compartment borders invisible «ENDREM»
 			Object border = result.getBorder();
 			if (border instanceof org.eclipse.draw2d.LineBorder) {
 				org.eclipse.draw2d.LineBorder lineBorder = ((org.eclipse.draw2d.LineBorder) border);
 				lineBorder.setWidth(2);
 				lineBorder.setColor(org.eclipse.draw2d.ColorConstants.black); 
-			}
+			} 
 			result.setBorder(null);
+			«REM» Give all but state compartments a custom layout «ENDREM» 
 			«IF title != "StateCompartment"-»
 				result.getContentPane().setLayoutManager(new de.cau.cs.kieler.ssm2.custom.CustomCompartmentLayout());
+				«REM» Add the compartment's title as a new figure within the compartment «ENDREM»
 				«IF title != "RegionCompartment"-»
 					org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel title = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();
 					title.setText(result.getCompartmentTitle() + " ");
@@ -62,11 +65,6 @@
 					result.getContentPane().add(title, 0);
 				«ENDIF-»
 			«ENDIF-»
-			«REM»
-			«IF title == "RegionCompartment"-»
-				result.getContentPane().setLayoutManager(new de.cau.cs.kieler.ssm2.custom.CustomRegionCompartmentLayout());
-			«ENDIF-»
-			«ENDREM»
 			«REM» Additions end here «ENDREM»
 			return result;
 		}

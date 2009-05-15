@@ -64,7 +64,7 @@ public class XTextParserWrapper implements IParser {
 		return "";
 	}
 
-	// Return our special xText command
+	// Return the xText command
 	public ICommand getParseCommand(IAdaptable element, String newString, int flags) {
 		if (((EObjectAdapter) element).getRealObject() instanceof SuspensionTrigger) {
 			return new XTextParseExpressionCommand(element, newString, flags);
@@ -149,8 +149,19 @@ public class XTextParserWrapper implements IParser {
 		return ParserEditStatus.UNEDITABLE_STATUS;
 	}
 			
-	// These are the same methods as in XTextParseCommand as they are needed
-	// here too. I should tidy this up when I find some time.
+	// Method to collect all signals declared in state or its parent (+ grandparent etc.) states
+	private EList<Signal> collectValidSignals(State state) {
+		EList<Signal> newSignals = new BasicEList<Signal>();
+		if ((state.getSignals() != null) && (state.getSignals().size() > 0)) {
+			newSignals.addAll(state.getSignals());
+		}
+		if ((state.getParentRegion() != null) && (state.getParentRegion().getParentState() != null)) {
+			newSignals.addAll(collectValidSignals(state.getParentRegion().getParentState()));
+		}
+		return newSignals;
+	}
+	
+	// Methods to check whether the signals are defined correctly
 	private boolean checkSignals(Action action, Action newAction) {
 		boolean allValid = true;
 		boolean oneEqual = false;
@@ -193,6 +204,7 @@ public class XTextParserWrapper implements IParser {
 		return allValid;
 	}
 	
+	// A similar method for suspension triggers
 	private boolean checkSignals(SuspensionTrigger suspensionTrigger, Expression expression, Expression newExpression) {
 		boolean allValid = true;
 		boolean oneEqual = false;
@@ -213,18 +225,6 @@ public class XTextParserWrapper implements IParser {
 			}
 		}
 		return allValid;
-	}
-	
-	// Method to collect all signals declared in state or its parent (+ grandparent etc.) states
-	private EList<Signal> collectValidSignals(State state) {
-		EList<Signal> newSignals = new BasicEList<Signal>();
-		if ((state.getSignals() != null) && (state.getSignals().size() > 0)) {
-			newSignals.addAll(state.getSignals());
-		}
-		if ((state.getParentRegion() != null) && (state.getParentRegion().getParentState() != null)) {
-			newSignals.addAll(collectValidSignals(state.getParentRegion().getParentState()));
-		}
-		return newSignals;
 	}
 	
 	private EList<Signal> getSignals(Action action) {

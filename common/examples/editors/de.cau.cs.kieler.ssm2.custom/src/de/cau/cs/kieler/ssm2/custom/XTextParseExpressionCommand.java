@@ -8,6 +8,7 @@ import de.cau.cs.kieler.ssm2.SuspensionTrigger;
 
 public class XTextParseExpressionCommand extends XTextParseCommand {
 
+	// A special command for parsing Expressions
 	public XTextParseExpressionCommand(IAdaptable element, String newString, int flags) {
 		super(TransactionUtil.getEditingDomain(((SuspensionTrigger) (((EObjectAdapter) element).getRealObject()))), newString, null);
 		this.element = element;

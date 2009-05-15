@@ -85,7 +85,6 @@ public class AttributeAwareFigure extends Figure implements Adapter {
 	}
 
 	// If the model element's properties have changed, adjust currentFigure
-	// remove ugly try and catch and substitute with guard!!!
 	public void notifyChanged(Notification notification) {
 		try {	
 			for (ConditionalFigure cf : conditionalFigureList) {

@@ -50,8 +50,7 @@ public class AddEntryActionAction implements IActionDelegate {
 		// Create the new action.
 		CreateViewRequest actionRequest = CreateViewRequestFactory.getCreateShapeRequest(Ssm2ElementTypes.Action_3003, selectedElement.getDiagramPreferencesHint());
 
-		//RegionEditPart regionEditPart = (RegionEditPart) selectedElement.getParent();
-		Command createActionCmd = /*regionEditPart*/entryActionCompartment.getCommand(actionRequest);
+		Command createActionCmd = entryActionCompartment.getCommand(actionRequest);
 		IAdaptable actionViewAdapter = (IAdaptable) ((List) actionRequest.getNewObject()).get(0);
 
 		cc.add(createActionCmd);
@@ -73,6 +72,7 @@ public class AddEntryActionAction implements IActionDelegate {
 		}
 	}
 
+	// Update variables upon selection change
 	@Override
 	public void selectionChanged(IAction action, ISelection selection) {
 		try {

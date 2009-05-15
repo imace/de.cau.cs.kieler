@@ -21,6 +21,7 @@ public class PseudoStateFigure extends Ellipse {
 		t.shrink((lineWidth - 1) / 2, (lineWidth - 1) / 2);
 		graphics.drawOval(t);
 		
+		// Calculate the bounds of the "P"
 		Rectangle f = Rectangle.SINGLETON;
 		Rectangle r = getBounds();
 		f.x = r.x + (r.width / 3);
@@ -28,6 +29,7 @@ public class PseudoStateFigure extends Ellipse {
 		f.width = r.width / 3;
 		f.height = r.height / 3;
 		
+		// Draw the "P"
 		int hUnit = f.width / 4;
 		int vUnit = f.height / 6;
 		Point sP = new Point(f.x + hUnit, f.y + 6*vUnit);

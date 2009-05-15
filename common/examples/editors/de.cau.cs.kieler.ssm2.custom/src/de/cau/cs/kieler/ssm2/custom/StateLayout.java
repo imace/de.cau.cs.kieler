@@ -34,25 +34,6 @@ public class StateLayout extends ConstrainedToolbarLayout {
 		if (!parent.isVisible())
 			return;
 		
-		if (parent instanceof AttributeAwareStateFigure) {
-			AttributeAwareStateFigure aasf = (AttributeAwareStateFigure) parent;
-			if (aasf.modelElement instanceof State) {
-				State s = (State) aasf.modelElement;
-				if (s.getParentRegion() != null) {
-					Region parentRegion = s.getParentRegion();
-					if (parentRegion.getParentState() == null) {
-						// Set this state's bounds to diagram size
-						/*Rectangle stateBounds = new Rectangle();
-						stateBounds.x = 0;
-						stateBounds.y = 0;
-						stateBounds.width = 1000;
-						stateBounds.height = 1000;
-						parent.setBounds(transposer.t(stateBounds));*/
-					}
-				}
-			}
-		}
-		
 		List children = getChildren(parent);
 		Rectangle clientArea = transposer.t(parent.getClientArea());
 		int x = clientArea.x;
@@ -126,6 +107,7 @@ public class StateLayout extends ConstrainedToolbarLayout {
 				IFigure childFigure = (IFigure) child;
 				int newWidth = childFigure.getPreferredSize().width;
 				int newHeight = childFigure.getPreferredSize().height;
+				// Empty compartments are not considered
 				if (child instanceof ShapeCompartmentFigure) {
 					if ((getName((ShapeCompartmentFigure) child).equals("Signal:") && (!containsSignals))
 							|| (getName((ShapeCompartmentFigure) child).equals("Variable:") && (!containsVariables))
@@ -180,6 +162,7 @@ public class StateLayout extends ConstrainedToolbarLayout {
 						}
 					}
 				}
+				// Take maximum width and sum of heights
 				prefWidths[i] = newWidth;
 				prefHeights[i] = newHeight;
 				totalHeight += newHeight;
@@ -221,6 +204,7 @@ public class StateLayout extends ConstrainedToolbarLayout {
 		}	
 	}
 
+	// Method to make the compartment's title figure invisible
 	private void setCompartmentTitleVisibility(Object child, boolean b) {
 		for (Object o : ((ShapeCompartmentFigure) child).getContentPane().getChildren()) {
 			if (o instanceof WrappingLabel) {
@@ -229,6 +213,7 @@ public class StateLayout extends ConstrainedToolbarLayout {
 		}
 	}
 
+	// Method to retrieve a compartment's name
 	private String getName(ShapeCompartmentFigure child) {
 		if ((child.getChildren() != null) && (child.getChildren().size() > 0)
 				&& (child.getChildren().get(0) instanceof IFigure)) {
@@ -262,7 +247,8 @@ public class StateLayout extends ConstrainedToolbarLayout {
 			}
 		}
 
-		// The label is centered in the middle, and the compartments are hidden by setting their size to 0
+		// The label is centered in the middle, and the compartments are hidden
+		// by setting their size to 0
 		for (Object child : children) {
 			if (child instanceof Figure) {
 				IFigure childFigure = (IFigure) child;
@@ -357,7 +343,8 @@ public class StateLayout extends ConstrainedToolbarLayout {
 	protected Dimension calculatePreferredSize(IFigure parent, int hint, int hint2) {
 		
 		// The height of simple states is reduced,
-		// the height of complex states considers only the compartments with contents
+		// the height of complex states considers only
+		// the compartments with contents
 		if (parent instanceof AttributeAwareFigure) {
 			EObject modelElement = ((AttributeAwareFigure) parent).getModelElement();
 			if (modelElement instanceof State) {

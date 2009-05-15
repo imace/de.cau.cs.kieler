@@ -10,7 +10,8 @@ import org.eclipse.draw2d.geometry.Rectangle;
 public class CustomRegionCompartmentLayout extends XYLayout {
 
 	// A custom layout for the region compartment which lays its children out
-	// in columns that equally share the maximal available width
+	// in columns that equally share the maximal available width;
+	// it is currently not used.
 	public void layout(IFigure parent) {
 		
 		if (!parent.isVisible())
@@ -37,12 +38,6 @@ public class CustomRegionCompartmentLayout extends XYLayout {
 			if (child instanceof IFigure) {
 				IFigure childFigure = (IFigure) child;
 				newBounds.x = x + (counter * (width / numChildren));
-				
-				/*int prefHeight =  childFigure.getPreferredSize().height;
-				if (newBounds.height < prefHeight) {
-					newBounds.height = prefHeight;
-				}*/
-				
 				childFigure.setBounds(newBounds);
 				counter++;
 			}
@@ -52,7 +47,6 @@ public class CustomRegionCompartmentLayout extends XYLayout {
 	// Method to calculate the preferred size of a figure
 	@Override
 	protected Dimension calculatePreferredSize(IFigure parent, int hint, int hint2) {
-		
 		return parent.getPreferredSize(hint, hint2);
 	}
 }

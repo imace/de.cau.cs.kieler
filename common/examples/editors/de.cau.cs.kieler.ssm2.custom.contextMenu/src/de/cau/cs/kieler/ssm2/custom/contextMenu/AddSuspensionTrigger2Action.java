@@ -46,8 +46,7 @@ public class AddSuspensionTrigger2Action implements IActionDelegate {
 		// Create the new SuspensionTrigger
 		CreateViewRequest suspensionTriggerRequest = CreateViewRequestFactory.getCreateShapeRequest(Ssm2ElementTypes.SuspensionTrigger_3011, selectedElement.getDiagramPreferencesHint());
 
-		//RegionEditPart regionEditPart = (RegionEditPart) selectedElement.getParent();
-		Command createSuspensionTriggerCmd = /*regionEditPart*/suspensionTriggerCompartment.getCommand(suspensionTriggerRequest);
+		Command createSuspensionTriggerCmd = suspensionTriggerCompartment.getCommand(suspensionTriggerRequest);
 		IAdaptable suspensionTriggerViewAdapter = (IAdaptable) ((List) suspensionTriggerRequest.getNewObject()).get(0);
 		
 		cc.add(createSuspensionTriggerCmd);
@@ -69,6 +68,7 @@ public class AddSuspensionTrigger2Action implements IActionDelegate {
 		}
 	}
 
+	// Update variables upon selection change
 	@Override
 	public void selectionChanged(IAction action, ISelection selection) {
 		try {

@@ -215,7 +215,8 @@
 «DEFINE createNodeShape(gmfgen::GenNode node) FOR gmfgen::InnerClassViewmap-»
 	«EXPAND xpt::Common::generatedMemberComment»
 	protected org.eclipse.draw2d.IFigure createNodeShape() {
-		«className» figure = new «className»(this); «REM» Added "this" «ENDREM»
+		«REM» Added "this" to let edit part pass itself to the figure «ENDREM»
+		«className» figure = new «className»(this);
 		«IF node.childNodes.size() > 0 && node.getLayoutType().value == gmfgen::ViewmapLayoutType::XY_LAYOUT.value-»
  		figure.setUseLocalCoordinates(true);
 		«ENDIF-»

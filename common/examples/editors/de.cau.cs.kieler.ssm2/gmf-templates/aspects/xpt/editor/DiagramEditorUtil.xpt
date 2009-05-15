@@ -239,13 +239,15 @@ public class «diagramEditorUtilClassName» {
 	«EXPAND xpt::Common::generatedMemberComment("Create a new instance of domain element associated with canvas.\n<!-- begin-user-doc -->\n<!-- end-user-doc -->")»
 	private static «EXPAND MetaModel::QualifiedClassName FOR domainDiagramElement» createInitialModel() {
 		«REM» Additions start here «ENDREM»
+		«REM» Add a root region with a state and another region to the diagram «ENDREM»
 		de.cau.cs.kieler.ssm2.Region root = de.cau.cs.kieler.ssm2.Ssm2Factory.eINSTANCE.createRegion();
 		de.cau.cs.kieler.ssm2.State state = de.cau.cs.kieler.ssm2.Ssm2Factory.eINSTANCE.createState();
 		de.cau.cs.kieler.ssm2.Region region = de.cau.cs.kieler.ssm2.Ssm2Factory.eINSTANCE.createRegion();
 		state.setName("TOP LEVEL STATE");
 		state.getRegions().add(region);
 		root.getInnerStates().add(state);
-		return root«REM» «EXPAND MetaModel::NewInstance FOR domainDiagramElement» «ENDREM»;
+		return root
+		«REM» This is old code: «EXPAND MetaModel::NewInstance FOR domainDiagramElement» «ENDREM»;
 		«REM» Additions end here «ENDREM»
 	}
 «ENDDEFINE»

@@ -28,9 +28,11 @@ public class AttributeAwareStateFigure extends AttributeAwareFigure {
 	boolean containsExitActions;
 	boolean containsSuspensionTrigger;
 	
-	// This is the figure figure for states
+	// This is the figure for states
 	public AttributeAwareStateFigure(EditPart e) {
 		super();
+		
+		// Register edit part
 		this.setModelElementAndRegisterFromEditPart(e);
 		layout = new StateLayout();
 		
@@ -150,38 +152,49 @@ public class AttributeAwareStateFigure extends AttributeAwareFigure {
 		notifyChanged(null);
 	}
 	
+	// The minimum size of a simple state is 40x40 pixels
+	// The minimum height of complex states is the sum of 
+	// all its children's minimum heights, while its minimum
+	// width is the maximum of all its children's minimum sizes;
+	// however, empty compartments are not considered.
 	@Override
 	public Dimension getMinimumSize(int hint, int hint2) {
 		if (modelElement instanceof State) {
 			State state = (State) modelElement;
+			
+			int prefWidth = super.getMinimumSize(hint, hint2).width;
+			int prefHeight = 0;
+			
+			List<Object> children = getChildren();
+			int numChildren = children.size();
+			
 			if (isSimple(state)) {
-				Dimension size = super.getMinimumSize(hint, hint2);
-				size.height = 40;
-				return size;
+				if (children.get(0) instanceof WrappingLabel) {
+					return new Dimension(((WrappingLabel) children.get(0)).getPreferredSize(hint, hint2).width, 40);
+				}
+				else {
+					return new Dimension(super.getMinimumSize(hint, hint2).width, 40);
+				}
 			} else {
 				
-				int prefWidth = super.getMinimumSize(hint, hint2).width;
-				int prefHeight = 0;
-				
-				List<Object> children = getChildren();
-				int numChildren = children.size();
-				
+				// Lookup, which compartments contain contents
 				retrieveContents(state);
 				
 				for (int i = 0; i < numChildren; i++) {
 					Object child = children.get(i);
 					if (child instanceof IFigure) {
 						IFigure childFigure = (IFigure) child;
-						prefHeight += childFigure.getMinimumSize().height;
+						prefHeight += childFigure.getPreferredSize().height;
 						if (child instanceof ShapeCompartmentFigure) {
-							if ((getName((ShapeCompartmentFigure) child).equals("Signals:") && (!containsSignals))
-									|| (getName((ShapeCompartmentFigure) child).equals("Variables:") && (!containsVariables))
+							// Empty compartments are not considered 
+							if ((getName((ShapeCompartmentFigure) child).equals("Signal:") && (!containsSignals))
+									|| (getName((ShapeCompartmentFigure) child).equals("Variable:") && (!containsVariables))
 									|| (getName((ShapeCompartmentFigure) child).equals("OnEntryActions:") && (!containsEntryActions))
 									|| (getName((ShapeCompartmentFigure) child).equals("OnInsideActions:") && (!containsInnerActions))
 									|| (getName((ShapeCompartmentFigure) child).equals("OnExitActions:") && (!containsExitActions))
-									|| (getName((ShapeCompartmentFigure) child).equals("SuspensionTrigger:") && (!containsSuspensionTrigger))
+									|| (getName((ShapeCompartmentFigure) child).equals("Suspend:") && (!containsSuspensionTrigger))
 									|| (getName((ShapeCompartmentFigure) child).equals("RegionCompartment") && (!containsRegions))) {
-								prefHeight -= childFigure.getMinimumSize().height;
+								prefHeight -= childFigure.getPreferredSize().height;
 							}
 						}
 					}
@@ -192,48 +205,13 @@ public class AttributeAwareStateFigure extends AttributeAwareFigure {
 		return super.getMinimumSize(hint, hint2);
 	}
 	
+	// The preferred size is the same as the minimum size
 	@Override
 	public Dimension getPreferredSize(int hint, int hint2) {
-		if (modelElement instanceof State) {
-			State state = (State) modelElement;
-			if (isSimple(state)) {
-				Dimension size = super.getPreferredSize(hint, hint2);
-				size.height = 40;
-				return size;
-			} else {
-				
-				int prefWidth = super.getPreferredSize(hint, hint2).width;
-				int prefHeight = 0;
-				
-				List<Object> children = getChildren();
-				int numChildren = children.size();
-				
-				retrieveContents(state);
-				
-				for (int i = 0; i < numChildren; i++) {
-					Object child = children.get(i);
-					if (child instanceof IFigure) {
-						IFigure childFigure = (IFigure) child;
-						prefHeight += childFigure.getPreferredSize().height;
-						if (child instanceof ShapeCompartmentFigure) {
-							if ((getName((ShapeCompartmentFigure) child).equals("Signals:") && (!containsSignals))
-									|| (getName((ShapeCompartmentFigure) child).equals("Variables:") && (!containsVariables))
-									|| (getName((ShapeCompartmentFigure) child).equals("OnEntryActions:") && (!containsEntryActions))
-									|| (getName((ShapeCompartmentFigure) child).equals("OnInsideActions:") && (!containsInnerActions))
-									|| (getName((ShapeCompartmentFigure) child).equals("OnExitActions:") && (!containsExitActions))
-									|| (getName((ShapeCompartmentFigure) child).equals("SuspensionTrigger:") && (!containsSuspensionTrigger))
-									|| (getName((ShapeCompartmentFigure) child).equals("RegionCompartment") && (!containsRegions))) {
-								prefHeight -= childFigure.getPreferredSize().height;
-							}
-						}
-					}
-				}
-				return new Dimension(prefWidth, prefHeight);
-			}
-		}
-		return super.getPreferredSize(hint, hint2);
+		return getMinimumSize(hint, hint2);
 	}
 	
+	// Method to retrieve a compartment's name
 	private String getName(ShapeCompartmentFigure child) {
 		if ((child.getChildren() != null) && (child.getChildren().size() > 0)
 				&& (child.getChildren().get(0) instanceof IFigure)) {

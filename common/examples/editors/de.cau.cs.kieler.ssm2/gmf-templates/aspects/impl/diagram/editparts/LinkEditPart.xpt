@@ -101,7 +101,8 @@
 
 «DEFINE createLinkFigure(gmfgen::GenLink link) FOR gmfgen::InnerClassViewmap»
 	protected org.eclipse.draw2d.Connection createConnectionFigure() {
-		return new «className»(this); «REM» Added "this" «ENDREM»
+		«REM» Added "this" to let edit part pass itself to the figure «ENDREM»
+		return new «className»(this);
 	}
 
 	«EXPAND xpt::Common::generatedMemberComment»

@@ -47,8 +47,7 @@ public class AddSignalAction implements IActionDelegate {
 		// Create the new Signal
 		CreateViewRequest signalRequest = CreateViewRequestFactory.getCreateShapeRequest(Ssm2ElementTypes.Signal_3002, selectedElement.getDiagramPreferencesHint());
 
-		//RegionEditPart regionEditPart = (RegionEditPart) selectedElement.getParent();
-		Command createSignalCmd = /*regionEditPart*/signalCompartment.getCommand(signalRequest);
+		Command createSignalCmd = signalCompartment.getCommand(signalRequest);
 		IAdaptable signalViewAdapter = (IAdaptable) ((List) signalRequest.getNewObject()).get(0);
 		
 		cc.add(createSignalCmd);
@@ -70,6 +69,7 @@ public class AddSignalAction implements IActionDelegate {
 		}
 	}
 
+	// Update variables upon selection change
 	@Override
 	public void selectionChanged(IAction action, ISelection selection) {
 		try {
