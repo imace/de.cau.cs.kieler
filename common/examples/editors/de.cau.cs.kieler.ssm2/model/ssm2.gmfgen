@@ -11,9 +11,7 @@
       notationViewFactoryClassName="RegionViewFactory"
       canonicalEditPolicyClassName="RegionCanonicalEditPolicy"
       iconProviderPriority="Low"
-      validationProviderPriority="Low"
-      validationEnabled="true"
-      validationDecorators="true">
+      validationProviderPriority="Low">
     <diagramRunTimeClass
         href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Diagram"/>
     <elementType
@@ -146,8 +144,8 @@
         <modelFacet
             xsi:type="gmfgen:FeatureLabelModelFacet"
             viewPattern="{0}: {1},"
-            editorPattern="{0}"
-            editPattern="{0}">
+            editorPattern="{0}: {1}"
+            editPattern="{0}: {1}">
           <metaFeatures
               href="ssm2.genmodel#//ssm2/ValuedObject/name"/>
           <metaFeatures
@@ -335,8 +333,8 @@
         <modelFacet
             xsi:type="gmfgen:FeatureLabelModelFacet"
             viewPattern="{0}: {1},"
-            editorPattern="{0}"
-            editPattern="{0}">
+            editorPattern="{0}: {1}"
+            editPattern="{0}: {1}">
           <metaFeatures
               href="ssm2.genmodel#//ssm2/ValuedObject/name"/>
           <metaFeatures

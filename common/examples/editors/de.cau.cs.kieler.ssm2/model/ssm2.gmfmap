@@ -65,8 +65,8 @@
           <labelMappings
               xsi:type="gmfmap:FeatureLabelMapping"
               viewPattern="{0}: {1},"
-              editorPattern="{0}"
-              editPattern="{0}">
+              editorPattern="{0}: {1}"
+              editPattern="{0}: {1}">
             <diagramLabel
                 href="ssm2.gmfgraph#SignalName"/>
             <features
@@ -154,8 +154,8 @@
           <labelMappings
               xsi:type="gmfmap:FeatureLabelMapping"
               viewPattern="{0}: {1},"
-              editorPattern="{0}"
-              editPattern="{0}">
+              editorPattern="{0}: {1}"
+              editPattern="{0}: {1}">
             <diagramLabel
                 href="ssm2.gmfgraph#VariableName"/>
             <features
