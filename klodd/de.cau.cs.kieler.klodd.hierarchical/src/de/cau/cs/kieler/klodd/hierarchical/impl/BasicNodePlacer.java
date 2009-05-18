@@ -14,9 +14,11 @@
 package de.cau.cs.kieler.klodd.hierarchical.impl;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import de.cau.cs.kieler.core.alg.AbstractAlgorithm;
 import de.cau.cs.kieler.core.kgraph.KPort;
@@ -51,6 +53,10 @@ public class BasicNodePlacer extends AbstractAlgorithm implements INodePlacer {
 	private LayoutDirection layoutDirection;
 	/** array of sorted segments */
 	private LinearSegment[] sortedSegments = null;
+	/** amount of available spacing for each layer element */
+	private Map<LayerElement, Float> spacingMap = new HashMap<LayerElement, Float>();
+	/** the last element that was processed in each layer */
+	private LayerElement[] lastElements;
 	
 	/*
 	 * (non-Javadoc)
@@ -59,6 +65,7 @@ public class BasicNodePlacer extends AbstractAlgorithm implements INodePlacer {
 	public void reset() {
 		super.reset();
 		sortedSegments = null;
+		spacingMap.clear();
 	}
 	
 	/*
@@ -70,6 +77,8 @@ public class BasicNodePlacer extends AbstractAlgorithm implements INodePlacer {
 		
 		this.minDist = minDist;
 		this.layoutDirection = layeredGraph.getLayoutDirection();
+		this.lastElements = new LayerElement[layeredGraph.getLayers().size()
+		        + layeredGraph.getLayers().get(0).rank];
 		
 		// sort the linear segments of the layered graph
 		sortedSegments = sortLinearSegments(layeredGraph);
@@ -104,6 +113,16 @@ public class BasicNodePlacer extends AbstractAlgorithm implements INodePlacer {
 	 */
 	public LinearSegment[] getMovableSegments() {
 		return sortedSegments;
+	}
+	
+	/**
+	 * Gets a map for the amount of spacing available for each layer
+	 * element. The last element of each layer is not stored in this map.
+	 * 
+	 * @return spacing map
+	 */
+	public Map<LayerElement, Float> getElementSpacing() {
+	    return spacingMap;
 	}
 	
 	/**
@@ -202,12 +221,16 @@ public class BasicNodePlacer extends AbstractAlgorithm implements INodePlacer {
 			float newPos = leftmostPlace + DIST_FACTOR * minDist;
 			for (LayerElement element : segment.elements) {
 				Layer layer = element.getLayer();
+				if (lastElements[layer.rank] != null)
+				    spacingMap.put(lastElements[layer.rank], Float.valueOf(
+				            leftmostPlace - layer.crosswiseDim));
 				element.setCrosswisePos(newPos, minDist);
 				float totalCrosswiseDim = element.getTotalCrosswiseDim(minDist);
 				layer.crosswiseDim = newPos + totalCrosswiseDim;
 				layer.lengthwiseDim = Math.max(layer.lengthwiseDim,
 						layoutDirection == LayoutDirection.VERTICAL
 						? element.getRealHeight() : element.getRealWidth());
+				lastElements[layer.rank] = element;
 			}
 		}
 	}

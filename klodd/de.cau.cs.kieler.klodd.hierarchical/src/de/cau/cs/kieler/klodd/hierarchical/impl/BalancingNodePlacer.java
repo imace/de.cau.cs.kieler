@@ -80,29 +80,25 @@ public class BalancingNodePlacer extends AbstractAlgorithm implements
 		// find the layer with the greatest crosswise dimension
 		maxWidth = 0.0f;
 		int referenceRank = 0;
-		Layer referenceLayer = null;
 		for (Layer layer : layeredGraph.getLayers()) {
 			if (isMovable(layer) && layer.crosswiseDim > maxWidth) {
 				maxWidth = layer.crosswiseDim;
 				referenceRank = layer.rank;
-				referenceLayer = layer;
 			}
-		}
-		// initialize move requests for the reference layer
-		for (LayerElement element : referenceLayer.getElements()) {
-			moveRequests[element.linearSegment.rank] = 0.0f;
 		}
 		ListIterator<Layer> layerIter = layeredGraph.getLayers().listIterator();
 		Layer layer;
-		while (layerIter.hasNext() && layerIter.next().rank < referenceRank);
+		do {
+		    layer = layerIter.hasNext() ? layerIter.next() : null;
+		} while (layer != null && layer.rank <= referenceRank);
 		
 		// create move requests below the reference layer
-		while (layerIter.hasNext()) {
-			layer = layerIter.next();
+		while (layer != null) {
 			if (isMovable(layer)) {
 				createRequests(layer, true);
 				validateRequests(layer);
 			}
+			layer = layerIter.hasNext() ? layerIter.next() : null;
 		}
 		
 		// revalidate all requests below the reference layer
@@ -113,17 +109,17 @@ public class BalancingNodePlacer extends AbstractAlgorithm implements
 		}
 		
 		// create move requests above the reference layer
-		while (layerIter.hasPrevious()) {
-			layer = layerIter.previous();
+		do {
 			if (isMovable(layer)) {
 				createRequests(layer, false);
 				validateRequests(layer);
 			}
-		}
+			layer = layerIter.hasPrevious() ? layerIter.previous() : null;
+		} while (layer != null);
 		
 		// revalidate all requests above the reference layer
 		while (layerIter.hasNext()
-				&& (layer = layerIter.next()).rank < referenceRank) {
+				&& (layer = layerIter.next()).rank <= referenceRank) {
 			if (isMovable(layer))
 				validateRequests(layer);
 		}
@@ -190,8 +186,12 @@ public class BalancingNodePlacer extends AbstractAlgorithm implements
 		while (elemIter.hasPrevious()) {
 			LayerElement element = elemIter.previous();
 			float elemRequest = moveRequests[element.linearSegment.rank];
-			elemRequest = Math.max(elemRequest, 0.0f);
-			maxMove = Math.min(elemRequest, maxMove);
+			elemRequest = elemRequest < 0.0f ? 0.0f : elemRequest;
+			Float spacing = basicNodePlacer.getElementSpacing().get(element);
+			if (spacing == null)
+			    maxMove = Math.min(elemRequest, maxMove);
+			else
+			    maxMove = Math.min(elemRequest, maxMove + spacing.floatValue());
 			moveRequests[element.linearSegment.rank] = maxMove;
 		}
 	}
