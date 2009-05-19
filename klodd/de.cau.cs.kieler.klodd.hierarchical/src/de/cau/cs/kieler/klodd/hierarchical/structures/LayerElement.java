@@ -192,7 +192,10 @@ public class LayerElement {
 	public String toString() {
 		if (elemObj instanceof KNode) {
 			KNode node = (KNode)elemObj;
-			return node.getLabel().getText();
+			String label = node.getLabel().getText();
+			if (label != null && label.length() > 0)
+			    return label;
+			else return "node:" + rank;
 		}
 		else if (elemObj instanceof KPort) {
 			KPort port = (KPort)elemObj;
@@ -460,7 +463,7 @@ public class LayerElement {
 	 * 
 	 * @return the element object
 	 */
-	public Object getElemObj() {
+	public KGraphElement getElemObj() {
 		return elemObj;
 	}
 	

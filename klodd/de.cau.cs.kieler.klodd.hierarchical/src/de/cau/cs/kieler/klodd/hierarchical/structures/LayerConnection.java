@@ -17,6 +17,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import de.cau.cs.kieler.core.kgraph.KEdge;
+import de.cau.cs.kieler.core.kgraph.KNode;
 import de.cau.cs.kieler.core.kgraph.KPort;
 import de.cau.cs.kieler.kiml.layout.klayoutdata.KEdgeLayout;
 import de.cau.cs.kieler.kiml.layout.klayoutdata.KInsets;
@@ -100,6 +101,7 @@ public class LayerConnection {
 	 */
 	public void applyLayout(KPoint offset, KInsets insets) {
 		LayeredGraph layeredGraph = sourceElement.getLayer().getLayeredGraph();
+        LayoutDirection layoutDirection = layeredGraph.getLayoutDirection();
 		KShapeLayout sourcePortLayout = (sourcePort == null ? null
 		        : KimlLayoutUtil.getShapeLayout(sourcePort));
 		KShapeLayout targetPortLayout = (targetPort == null ? null
@@ -178,9 +180,20 @@ public class LayerConnection {
 						+ sourceElement.getPosOffset().getY());
 			}
 		}
-		else {
-			sourcePoint.setX(sourceElement.getPosition().getX());
-			sourcePoint.setY(sourceElement.getPosition().getY());
+		else if (sourceElement.getElemObj() instanceof KNode) {
+		    KNode sourceNode = (KNode)sourceElement.getElemObj();
+		    KShapeLayout sourceLayout = KimlLayoutUtil.getShapeLayout(sourceNode);
+		    sourcePoint.setX(sourceElement.getPosition().getX()
+			        + sourceElement.getPosOffset().getX()
+			        + (layoutDirection == LayoutDirection.VERTICAL
+			        ? sourceLayout.getWidth() / 2
+			        : sourceLayout.getWidth()));
+			sourcePoint.setY(sourceElement.getPosition().getY()
+			        + sourceElement.getPosOffset().getY()
+			        + (layoutDirection == LayoutDirection.VERTICAL
+			        ? sourceLayout.getHeight()
+			        : sourceLayout.getHeight() / 2));
+			edgeLayout.setSourcePoint(sourcePoint);
 		}
 		
 		// calculate position of target point
@@ -219,11 +232,21 @@ public class LayerConnection {
 						+ targetElement.getPosOffset().getY());
 			}
 		}
-		else {
-			targetPoint.setX(targetElement.getPosition().getX());
-			targetPoint.setY(targetElement.getPosition().getY());
-		}
+		else if (targetElement.getElemObj() instanceof KNode) {
+            KNode targetNode = (KNode)targetElement.getElemObj();
+            KShapeLayout targetLayout = KimlLayoutUtil.getShapeLayout(targetNode);
+            targetPoint.setX(targetElement.getPosition().getX()
+                    + targetElement.getPosOffset().getX()
+                    + (layoutDirection == LayoutDirection.VERTICAL
+                    ? targetLayout.getWidth() / 2 : 0.0f));
+            targetPoint.setY(targetElement.getPosition().getY()
+                    + targetElement.getPosOffset().getY()
+                    + (layoutDirection == LayoutDirection.VERTICAL
+                    ? 0.0f : targetLayout.getHeight() / 2));
+            edgeLayout.setTargetPoint(targetPoint);
+        }
 		
+		// align the endpoints of the edge if they go to ports
 		if (sourcePort != null) {
 			alignEndpoint(sourcePoint, bendPoints.isEmpty()
 					? targetPoint : bendPoints.get(0),
@@ -289,7 +312,14 @@ public class LayerConnection {
 				? sourceElement.getPosition().getX()
 				: sourceElement.getPosition().getY();
 		if (sourceSidePos == 0) {
-			if (sourcePort != null) {
+			if (sourcePort == null) {
+			    // there is no source port, find appropriate anchor
+			    sourceAnchorPos += layoutDirection == LayoutDirection.VERTICAL
+			            ? sourceElement.getRealWidth() / 2
+			            : sourceElement.getRealHeight() / 2;
+			}
+			else {
+			    // align the edge to the source port
 				KShapeLayout portLayout = KimlLayoutUtil.getShapeLayout(sourcePort);
 				sourceAnchorPos += layoutDirection == LayoutDirection.VERTICAL
 						? portLayout.getWidth() / 2
@@ -327,7 +357,13 @@ public class LayerConnection {
 				? targetElement.getPosition().getX()
 				: targetElement.getPosition().getY();
 		if (targetSidePos == 0) {
-			if (targetPort != null) {
+			if (targetPort == null) {
+	             // there is no source port, find appropriate anchor
+			    targetAnchorPos += layoutDirection == LayoutDirection.VERTICAL
+                        ? targetElement.getRealWidth() / 2
+                        : targetElement.getRealHeight() / 2;
+			}
+			else {
 			    KShapeLayout portLayout = KimlLayoutUtil.getShapeLayout(targetPort);
                 targetAnchorPos += layoutDirection == LayoutDirection.VERTICAL
 						? portLayout.getWidth() / 2

@@ -50,13 +50,9 @@ public class BarycenterCrossingReducer extends AbstractAlgorithm implements
 		double[] abstractRanks = new double[layer.getElements().size()];
 		int elemIndex = 0;
 		for (LayerElement element : layer.getElements()) {
-			if (element.getPortConstraints() == PortConstraints.FIXED_POS
-			        || element.getPortConstraints() == PortConstraints.FIXED_ORDER) {
-				// the ports of the current element are fixed
-				List<Integer> rankList = element.getConnectionRanks(forward);
-				abstractRanks[elemIndex] = calcBarycenter(rankList);
-			}
-			else {
+		    PortConstraints portConstraints = element.getPortConstraints();
+		    if (portConstraints == PortConstraints.FIXED_SIDE
+			        || portConstraints == PortConstraints.FREE_PORTS) {
 				// ports are not fixed, find an order for the ports
 				Map<KPort, List<Integer>> portRanks = element
 						.getConnectionRanksByPort(forward);
@@ -85,6 +81,12 @@ public class BarycenterCrossingReducer extends AbstractAlgorithm implements
 					abstractRanks[elemIndex] = sum / ports.size();
 				}
 			}
+		    else {
+                // the ports of the current element are fixed,
+		        // or there are no port constraints
+                List<Integer> rankList = element.getConnectionRanks(forward);
+                abstractRanks[elemIndex] = calcBarycenter(rankList);
+		    }
 			elemIndex++;
 		}
 		sortAbstract(layer, abstractRanks);
@@ -101,13 +103,9 @@ public class BarycenterCrossingReducer extends AbstractAlgorithm implements
 		double[] abstractRanks = new double[layer.getElements().size()];
 		int elemIndex = 0;
         for (LayerElement element : layer.getElements()) {
-			if (element.getPortConstraints() == PortConstraints.FIXED_POS) {
-				// the ports of the current element are fixed
-				double bary1 = calcBarycenter(element.getConnectionRanks(true));
-				double bary2 = calcBarycenter(element.getConnectionRanks(false));
-				abstractRanks[elemIndex] = mergeBarycenters(bary1, bary2);
-			}
-			else {
+            PortConstraints portConstraints = element.getPortConstraints();
+            if (portConstraints == PortConstraints.FIXED_SIDE
+                    || portConstraints == PortConstraints.FREE_PORTS) {
 				// ports are not fixed, find an order for the ports
 				Map<KPort, List<Integer>> forwardRanks = element
 						.getConnectionRanksByPort(true);
@@ -143,6 +141,13 @@ public class BarycenterCrossingReducer extends AbstractAlgorithm implements
 					abstractRanks[elemIndex] = sum / ports.size();
 				}
 			}
+            else {
+                // the ports of the current element are fixed,
+                // or there are no port constraints
+                double bary1 = calcBarycenter(element.getConnectionRanks(true));
+                double bary2 = calcBarycenter(element.getConnectionRanks(false));
+                abstractRanks[elemIndex] = mergeBarycenters(bary1, bary2);
+            }
 			elemIndex++;
 		}
         sortAbstract(layer, abstractRanks);

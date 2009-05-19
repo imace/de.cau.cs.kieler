@@ -34,7 +34,7 @@ public class LayerSweepCrossingReducer extends AbstractAlgorithm implements
 	/** the algorithm used to reduce crossings between two or three layers */
 	private ISingleLayerCrossingReducer layerReducer;
 	/** number of passes for crossing reduction */
-	private int passes;
+	private int passes = 1;
 	
 	/**
 	 * Creates a layer-by-layer sweep crossing reducer with given single
@@ -52,7 +52,8 @@ public class LayerSweepCrossingReducer extends AbstractAlgorithm implements
 	 * @param passes number of passes
 	 */
 	public void setPasses(int passes) {
-	    this.passes = Math.max(1, passes);
+	    if (passes >= 1)
+	        this.passes = passes;
 	}
 	
 	/* (non-Javadoc)
