@@ -313,6 +313,7 @@ public class SSMLayoutGraphBuilder extends AbstractLayoutGraphBuilder {
 		// set size
 		nodeLayout.setHeight(currentBounds.height);
 		nodeLayout.setWidth(currentBounds.width);
+		LayoutOptions.setFixedSize(nodeLayout, true);
 
 		// special treatment if Emma wants auto sizing
 		if (prefAutosizeEmptyElements) {

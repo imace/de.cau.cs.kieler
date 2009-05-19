@@ -77,9 +77,10 @@ public class KloddLayouterPreferencePage extends
 				}, hieraGroup, false);
 		addField(layerAssEditor);
 		
-		FieldEditor crossRedPassesEditor = new IntegerFieldEditor(
+		IntegerFieldEditor crossRedPassesEditor = new IntegerFieldEditor(
 		        HierarchicalDataflowLayoutProvider.PREF_CROSSRED_PASSES,
 		        Messages.getString("klodd.ui.11"), hieraGroup, 3);
+		crossRedPassesEditor.setValidRange(1, 999);
 		addField(crossRedPassesEditor);
 		
 		hieraGroup.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, true,
