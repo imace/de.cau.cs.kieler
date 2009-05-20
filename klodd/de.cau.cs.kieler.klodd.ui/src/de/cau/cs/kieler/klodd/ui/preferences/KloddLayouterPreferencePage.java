@@ -91,15 +91,15 @@ public class KloddLayouterPreferencePage extends
 		hieraGroup.setLayout(gridLayout);
 		
 		// options group for orthogonal layouter
-		Group orthoGroup = new Group(this.getFieldEditorParent(), SWT.NONE);
-		orthoGroup.setText(Messages.getString("klodd.ui.3")); //$NON-NLS-1$
-
-		orthoGroup.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, true,
-				false, 2, 1));
-		gridLayout = new GridLayout(2, true);
-		gridLayout.marginWidth = 15;
-		gridLayout.marginHeight = 10;
-		orthoGroup.setLayout(gridLayout);
+//		Group orthoGroup = new Group(this.getFieldEditorParent(), SWT.NONE);
+//		orthoGroup.setText(Messages.getString("klodd.ui.3")); //$NON-NLS-1$
+//
+//		orthoGroup.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, true,
+//				false, 2, 1));
+//		gridLayout = new GridLayout(2, true);
+//		gridLayout.marginWidth = 15;
+//		gridLayout.marginHeight = 10;
+//		orthoGroup.setLayout(gridLayout);
 	}
 
 }
