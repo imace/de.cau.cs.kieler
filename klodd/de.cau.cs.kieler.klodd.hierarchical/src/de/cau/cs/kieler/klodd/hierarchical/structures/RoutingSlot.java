@@ -26,4 +26,12 @@ public class RoutingSlot {
 	/** crosswise starting and ending position of this slot */
 	public float start, end;
 	
+    /*
+     * (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
+    public String toString() {
+        return "slot:" + Math.round(start) + "-" + Math.round(end);
+    }
+	
 }

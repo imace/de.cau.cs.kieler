@@ -13,9 +13,9 @@
  */
 package de.cau.cs.kieler.klodd.hierarchical.impl;
 
-import java.util.Arrays;
-import java.util.Comparator;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -40,19 +40,48 @@ import de.cau.cs.kieler.klodd.hierarchical.structures.*;
 public class SortingLayerwiseEdgePlacer extends AbstractAlgorithm implements
 		ILayerwiseEdgePlacer {
 
-	/**
-	 * Routing slots used for sorting.
-	 */
-	private static class SortableRoutingSlot extends RoutingSlot {
-		public boolean outgoingAtStart = false, outgoingAtEnd = false;
-	}
+    /**
+     * Routing slot used for sorting.
+     */
+    private class SortableRoutingSlot extends RoutingSlot
+        implements Comparable<RoutingSlot> {
+        
+        /** positions of line segments going to the preceding layer */
+        List<Float> sourcePosis = new LinkedList<Float>();
+        /** positions of line segments going to the next layer */
+        List<Float> targetPosis = new LinkedList<Float>();
+        
+        /* (non-Javadoc)
+         * @see java.lang.Comparable#compareTo(java.lang.Object)
+         */
+        public int compareTo(RoutingSlot o) {
+            SortableRoutingSlot other = (SortableRoutingSlot)o;
+            // compare number of conflicts for both variants
+            int conflicts1 = countConflicts(this.targetPosis, other.sourcePosis);
+            int conflicts2 = countConflicts(other.targetPosis, this.sourcePosis);
+            if (conflicts1 > conflicts2)
+                return 1;
+            else if (conflicts1 < conflicts2)
+                return -1;
+            else {
+                // compare number of crossings for both variants
+                int crossings1 = countCrossings(this.targetPosis, other.start, other.end)
+                        + countCrossings(other.sourcePosis, this.start, this.end);
+                int crossings2 = countCrossings(other.targetPosis, this.start, this.end)
+                        + countCrossings(this.sourcePosis, other.start, other.end);
+                return crossings1 > crossings2 ? 1
+                        : (crossings1 < crossings2 ? -1 : 0);
+            }
+        }
+    }
 	
-	/** minimal distance of two edges to make them feasible in the same
-	 *  routing layer */
-	private static final float EDGE_DIST = 2.0f;
+	/** factor for the minimal distance value for edge spacing */
+	private static final float EDGE_DIST_FACT = 0.25f;
 	
 	/** map of layer elements to their corresponding routing slots */
 	private Map<Object, RoutingSlot> slotMap = new LinkedHashMap<Object, RoutingSlot>();
+	/** minimal distance for edge spacing */
+	private float edgeSpacing;
 	
 	/*
 	 * (non-Javadoc)
@@ -69,6 +98,7 @@ public class SortingLayerwiseEdgePlacer extends AbstractAlgorithm implements
 	public int placeEdges(Layer layer, float minDist) {
 		getMonitor().begin("Edge routing (layer " + layer.rank + ")", 1);
 		LayoutDirection layoutDirection = layer.getLayeredGraph().getLayoutDirection();
+		this.edgeSpacing = minDist * EDGE_DIST_FACT;
 		
 		// determine number of outgoing connections for each port
 		Map<Object, Integer> outgoing = new HashMap<Object, Integer>();
@@ -157,79 +187,44 @@ public class SortingLayerwiseEdgePlacer extends AbstractAlgorithm implements
 						}
 					}
 				}
-				float startPos = Math.min(sourcePos, targetPos) - EDGE_DIST;
-				float endPos  = Math.max(sourcePos, targetPos) + EDGE_DIST;
+				float startPos = Math.min(sourcePos, targetPos);
+				float endPos  = Math.max(sourcePos, targetPos);
 				
-				// get routing slot and insert connection area
-				SortableRoutingSlot slot = (SortableRoutingSlot)slotMap.get(key);
-				if (slot == null) {
-					slot = new SortableRoutingSlot();
-					if (targetPos <= sourcePos)
-						slot.outgoingAtStart = true;
-					if (targetPos >= sourcePos)
-						slot.outgoingAtEnd = true;
-					slot.start = startPos;
-					slot.end = endPos;
-					slotMap.put(key, slot);
-				}
-				else {
-					if (startPos < slot.start) {
-						if (targetPos <= sourcePos)
-							slot.outgoingAtStart = true;
-						else
-							slot.outgoingAtStart = false;
-					}
-					if (endPos > slot.end) {
-						if (targetPos >= sourcePos)
-							slot.outgoingAtEnd = true;
-						else
-							slot.outgoingAtEnd = false;
-					}
-					slot.start = Math.min(slot.start, startPos);
-					slot.end = Math.max(slot.end, endPos);
-				}
+                // get routing slot and insert connection area
+                SortableRoutingSlot slot = (SortableRoutingSlot)slotMap.get(key);
+                if (slot == null) {
+                    slot = new SortableRoutingSlot();
+                    slot.start = startPos;
+                    slot.end = endPos;
+                    slot.sourcePosis.add(Float.valueOf(sourcePos));
+                    slot.targetPosis.add(Float.valueOf(targetPos));
+                    slotMap.put(key, slot);
+                }
+                else {
+                    slot.start = Math.min(slot.start, startPos);
+                    slot.end = Math.max(slot.end, endPos);
+                    insertSorted(slot.sourcePosis, sourcePos);
+                    insertSorted(slot.targetPosis, targetPos);
+                }
 			}
 		}
 		
-		// sort all routing slots
+		// sort all routing slots using insert sort
 		List<List<RoutingSlot>> routingLayers = new LinkedList<List<RoutingSlot>>();
-		RoutingSlot[] sortedSlots = slotMap.values().toArray(new RoutingSlot[0]);
-		Arrays.sort(sortedSlots, new Comparator<RoutingSlot>() {
-			public int compare(RoutingSlot s1, RoutingSlot s2) {
-				SortableRoutingSlot slot1 = (SortableRoutingSlot)s1;
-				SortableRoutingSlot slot2 = (SortableRoutingSlot)s2;
-				if (slot1.outgoingAtStart && !slot2.outgoingAtStart
-						&& slot1.start == slot2.start)
-					return 1;
-				else if (slot2.outgoingAtStart && !slot1.outgoingAtStart
-						&& slot1.start == slot2.start)
-					return -1;
-				else if (slot1.outgoingAtEnd && !slot2.outgoingAtEnd
-						&& slot1.end == slot2.end)
-					return 1;
-				else if (slot2.outgoingAtEnd && !slot1.outgoingAtEnd
-						&& slot1.end == slot2.end)
-					return -1;
-				else if (slot1.outgoingAtStart && slot1.start > slot2.start)
-					return 1;
-				else if (slot2.outgoingAtStart && slot2.start > slot1.start)
-					return -1;
-				else if (slot1.outgoingAtEnd && slot1.end < slot2.end)
-					return 1;
-				else if (slot2.outgoingAtEnd && slot2.end < slot1.end)
-					return -1;
-				else if (!slot1.outgoingAtStart && slot1.start > slot2.start)
-					return -1;
-				else if (!slot2.outgoingAtStart && slot2.start > slot1.start)
-					return 1;
-				else if (!slot1.outgoingAtEnd && slot1.end < slot2.end)
-					return -1;
-				else if (!slot2.outgoingAtEnd && slot2.end < slot1.end)
-					return 1;
-				else
-					return 0;
-			}
-		});
+		Collection<RoutingSlot> unsortedSlots = slotMap.values();
+		List<SortableRoutingSlot> sortedSlots = new LinkedList<SortableRoutingSlot>();
+		for (RoutingSlot slot : unsortedSlots) {
+		    ListIterator<SortableRoutingSlot> slotIter = sortedSlots.listIterator();
+		    while (slotIter.hasNext()) {
+		        if (slotIter.next().compareTo(slot) > 0) {
+		            slotIter.previous();
+		            break;
+		        }
+		    }
+		    slotIter.add((SortableRoutingSlot)slot);
+		}
+		
+		
 		// assign ranks to each routing slot
 		int slotRanks = 0;
 		for (RoutingSlot slot : sortedSlots) {
@@ -240,7 +235,8 @@ public class SortingLayerwiseEdgePlacer extends AbstractAlgorithm implements
 				List<RoutingSlot> routingLayer = routingLayerIter.previous();
 				boolean feasible = true;
 				for (RoutingSlot layerSlot : routingLayer) {
-					if (slot.start < layerSlot.end && slot.end > layerSlot.start) {
+					if (slot.start < layerSlot.end + edgeSpacing
+					        && slot.end > layerSlot.start - edgeSpacing) {
 						feasible = false;
 						break;
 					}
@@ -274,5 +270,70 @@ public class SortingLayerwiseEdgePlacer extends AbstractAlgorithm implements
 	public Map<Object, RoutingSlot> getSlotMap() {
 		return slotMap;
 	}
+	
+	/**
+     * Inserts a given value into a sorted list.
+     * 
+     * @param list sorted list
+     * @param value value to insert
+     */
+    private void insertSorted(List<Float> list, float value) {
+        ListIterator<Float> listIter = list.listIterator();
+        while (listIter.hasNext()) {
+            if (listIter.next() <= value) {
+                listIter.previous();
+                break;
+            }
+        }
+        listIter.add(Float.valueOf(value));
+    }
+    
+    /**
+     * Counts the number of crossings for a given list of positions.
+     * 
+     * @param posis sorted list of positions
+     * @param start start of the critical area
+     * @param end end of the critical area
+     * @return number of positions in the critical area
+     */
+    private int countCrossings(List<Float> posis,
+            float start, float end) {
+        int crossings = 0;
+        for (float pos : posis) {
+            if (pos > end)
+                break;
+            else if (pos >= start)
+                crossings++;
+        }
+        return crossings;
+    }
+    
+    /**
+     * Counts the number of conflicts for the given lists of positions.
+     * 
+     * @param posis1 sorted list of positions
+     * @param posis2 sorted list of positions
+     * @return number of positions that overlap
+     */
+    private int countConflicts(List<Float> posis1, List<Float> posis2) {
+        int conflicts = 0;
+        if (!posis1.isEmpty() && !posis2.isEmpty()) {
+            Iterator<Float> iter1 = posis1.iterator();
+            Iterator<Float> iter2 = posis2.iterator();
+            float pos1 = iter1.next();
+            float pos2 = iter2.next();
+            boolean hasMore = true;
+            do {
+                if (pos1 > pos2 - edgeSpacing && pos1 < pos2 + edgeSpacing)
+                    conflicts++;
+                if (pos1 <= pos2 && iter1.hasNext())
+                    pos1 = iter1.next();
+                else if (pos2 <= pos1 && iter2.hasNext())
+                    pos2 = iter2.next();
+                else hasMore = false;
+            } while (hasMore);
+        }
+        return conflicts;
+    }
 
 }

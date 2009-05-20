@@ -13,6 +13,8 @@
  */
 package de.cau.cs.kieler.core.util;
 
+import java.util.Comparator;
+
 /**
  * A simple pair implementation.
  * 
@@ -34,6 +36,32 @@ public class Pair <F, S> {
 	public Pair (F first, S second) {
 		this.first = first;
 		this.second = second;
+	}
+	
+	/**
+	 * Comparator that uses the first element as base.
+	 */
+	public static class FirstComparator <F extends Comparable<F>, S>
+	        implements Comparator<Pair<F,S>> {
+        /* (non-Javadoc)
+         * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
+         */
+        public int compare(Pair<F, S> o1, Pair<F, S> o2) {
+            return o1.first.compareTo(o2.first);
+        }
+	}
+
+	/**
+	 * Comparator that uses the second element as base.
+	 */
+	public static class SecondComparator <F, S extends Comparable<S>>
+	        implements Comparator<Pair<F,S>> {
+        /* (non-Javadoc)
+         * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
+         */
+        public int compare(Pair<F, S> o1, Pair<F, S> o2) {
+            return o1.second.compareTo(o2.second);
+        }
 	}
 	
 }
