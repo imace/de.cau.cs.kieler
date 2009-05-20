@@ -265,6 +265,7 @@ public class KimlLayoutUtil {
                                     : (port1Rank < port2Rank ? -1 : 0);
                     }
                     else result = -1;
+                    break;
                 case EAST:
                     if (port2Side == PortSide.NORTH)
                         result = 1;
@@ -275,6 +276,7 @@ public class KimlLayoutUtil {
                                     : (port1Rank < port2Rank ? -1 : 0);
                     }
                     else result = -1;
+                    break;
                 case SOUTH:
                     if (port2Side == PortSide.NORTH
                         || port2Side == PortSide.EAST)
@@ -286,6 +288,7 @@ public class KimlLayoutUtil {
                                     : (port1Rank < port2Rank ? -1 : 0);
                     }
                     else result = -1;
+                    break;
                 case WEST:
                     if (port2Side == PortSide.NORTH
                         || port2Side == PortSide.EAST
@@ -298,6 +301,7 @@ public class KimlLayoutUtil {
                                     : (port1Rank < port2Rank ? -1 : 0);
                     }
                     else result = -1;
+                    break;
                 }
                 return result;
             }
@@ -394,7 +398,7 @@ public class KimlLayoutUtil {
     }
     
     /** minimal distance of two ports on each side of a node */
-    private static final float MIN_PORT_DISTANCE = 16.0f;
+    private static final float MIN_PORT_DISTANCE = 8.0f;
     
     /**
      * Sets the size of a given node, depending on the number of ports
@@ -433,10 +437,24 @@ public class KimlLayoutUtil {
             }
         }
         
-        nodeLayout.setWidth(Math.max(minWidth,
-                Math.max(minNorth, minSouth)));
-        nodeLayout.setHeight(Math.max(minHeight,
-                Math.max(minEast, minWest)));
+        float oldWidth = nodeLayout.getWidth();
+        float oldHeight = nodeLayout.getHeight();
+        float newWidth = Math.max(minWidth, Math.max(minNorth, minSouth));
+        float newHeight = Math.max(minHeight, Math.max(minEast, minWest));
+        nodeLayout.setWidth(newWidth);
+        nodeLayout.setHeight(newHeight);
+        
+        // update port positions
+        for (KPort port : node.getPorts()) {
+            KShapeLayout portLayout = KimlLayoutUtil.getShapeLayout(port);
+            switch (LayoutOptions.getPortSide(portLayout)) {
+            case EAST:
+                portLayout.setXpos(portLayout.getXpos() + newWidth - oldWidth);
+                break;
+            case SOUTH:
+                portLayout.setYpos(portLayout.getYpos() + newHeight - oldHeight);
+            }
+        }
     }
 
 }

@@ -16,7 +16,6 @@ import org.eclipse.gmf.runtime.diagram.ui.editparts.ITextAwareEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.LabelEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeCompartmentEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
-import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.viewers.IStructuredSelection;
 
@@ -79,7 +78,6 @@ public class DataFlowLayoutGraphBuilder extends AbstractLayoutGraphBuilder {
 	 */
 	@Override
 	protected void doBuildLayoutGraph() {
-			
 		IPreferenceStore preferenceStore = DataflowDiagramLayoutPlugin
 				.getDefault().getPreferenceStore();
 		LayoutDirection layoutDirection = preferenceStore.getString(
@@ -111,7 +109,6 @@ public class DataFlowLayoutGraphBuilder extends AbstractLayoutGraphBuilder {
 			layoutGraph = buildNode(boxEditPart, layoutDirection);
 			buildNodeEdges(boxEditPart, false);
 		}
-
 	}
 
 	
@@ -263,10 +260,11 @@ public class DataFlowLayoutGraphBuilder extends AbstractLayoutGraphBuilder {
 				nodeLabel.setText(boxNameEditPart.getEditText());
 				// set the node label's layout
 				KShapeLayout labelLayout = KimlLayoutUtil.getShapeLayout(nodeLabel);
-				createRelativeLayout(labelLayout,
-						((WrappingLabel) boxNameEditPart.getFigure())
-								.getTextFigure(), nodeLayout.getXpos(),
-								nodeLayout.getYpos());
+				IFigure labelFigure = boxNameEditPart.getFigure();
+				labelLayout.setXpos(labelFigure.getBounds().x - nodeLayout.getXpos());
+				labelLayout.setYpos(labelFigure.getBounds().y - nodeLayout.getYpos());
+				labelLayout.setWidth(labelFigure.getPreferredSize().width);
+				labelLayout.setHeight(labelFigure.getPreferredSize().height);
 				insets.setTop(INSET_TOP + labelLayout.getHeight());
 			}
 		}
