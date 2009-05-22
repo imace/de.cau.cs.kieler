@@ -79,12 +79,10 @@ public class SortingLayerwiseEdgePlacer extends AbstractAlgorithm implements
 				if (key == null)
 					key = element;
 				Integer value = outgoing.get(key);
-				if (value == null) {
+				if (value == null)
 					outgoing.put(key, Integer.valueOf(1));
-				}
-				else {
+				else
 					outgoing.put(key, Integer.valueOf(value.intValue() + 1));
-				}
 			}
 		}
 		
@@ -109,52 +107,40 @@ public class SortingLayerwiseEdgePlacer extends AbstractAlgorithm implements
 					PortSide placement = LayoutOptions.getPortSide(
 					        KimlLayoutUtil.getShapeLayout(connection.getSourcePort()));
 					if (layoutDirection == LayoutDirection.VERTICAL) {
-						if (placement == PortSide.WEST) {
+						if (placement == PortSide.WEST)
 							sourcePos = 0.0f;
-						}
-						else if (placement == PortSide.EAST) {
+						else if (placement == PortSide.EAST)
 							sourcePos = layer.crosswiseDim;
-						}
-						else if (placement == PortSide.SOUTH) {
+						else if (placement == PortSide.SOUTH)
 							sourcePos = layer.crosswiseDim;
-						}
 					}
 					else {
-						if (placement == PortSide.NORTH) {
+						if (placement == PortSide.NORTH)
 							sourcePos = 0.0f;
-						}
-						else if (placement == PortSide.SOUTH) {
+						else if (placement == PortSide.SOUTH)
 							sourcePos = layer.crosswiseDim;
-						}
-						else if (placement == PortSide.EAST) {
+						else if (placement == PortSide.EAST)
 							sourcePos = layer.crosswiseDim;
-						}
 					}
 				}
 				else if (layer.height == 1) {
 					PortSide placement = LayoutOptions.getPortSide(
                             KimlLayoutUtil.getShapeLayout(connection.getTargetPort()));
 					if (layoutDirection == LayoutDirection.VERTICAL) {
-						if (placement == PortSide.WEST) {
+						if (placement == PortSide.WEST)
 							targetPos = 0.0f;
-						}
-						else if (placement == PortSide.EAST) {
+						else if (placement == PortSide.EAST)
 							targetPos = layer.crosswiseDim;
-						}
-						else if (placement == PortSide.NORTH) {
+						else if (placement == PortSide.NORTH)
 							targetPos = layer.crosswiseDim;
-						}
 					}
 					else {
-						if (placement == PortSide.NORTH) {
+						if (placement == PortSide.NORTH)
 							targetPos = 0.0f;
-						}
-						else if (placement == PortSide.SOUTH) {
+						else if (placement == PortSide.SOUTH)
 							targetPos = layer.crosswiseDim;
-						}
-						else if (placement == PortSide.WEST) {
+						else if (placement == PortSide.WEST)
 							targetPos = layer.crosswiseDim;
-						}
 					}
 				}
 				float startPos = Math.min(sourcePos, targetPos) - EDGE_DIST;

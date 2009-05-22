@@ -69,6 +69,12 @@ public class HierarchicalDataflowLayoutProvider extends
 	public static final String VAL_LONGP_LAYER_ASS = "longp";
 	/** value for balancing layer assignment module */
 	public static final String VAL_BAL_LAYER_ASS = "bal";
+	/** preference identifier for layerwise edge placement module */
+	public static final String PREF_LAYER_EDGEROUTER = "klodd.hierarchical.layerEdge";
+	/** value for sorting layerwise edge placer module */
+	public static final String VAL_SORT_LAYER_EDGEROUTER = "sort";
+	/** value for topological numbering layerwise edge placer module */
+	public static final String VAL_TOPO_LAYER_EDGEROUTER = "topo";
 	/** preference identifier for the number of passes for crossing reduction */
 	public static final String PREF_CROSSRED_PASSES = "klodd.hierarchical.crossRedPasses";
 	/** default value for the number of passes for crossing reduction */
@@ -98,6 +104,8 @@ public class HierarchicalDataflowLayoutProvider extends
 	private INodewiseEdgePlacer nodewiseEdgePlacer = null;
 	/** the node placer module */
 	private INodePlacer nodePlacer = null;
+	/** the layerwise edge placer module */
+	private ILayerwiseEdgePlacer layerwiseEdgePlacer = null;
 	/** the edge router module */
 	private IEdgeRouter edgeRouter = null;
 	
@@ -196,8 +204,21 @@ public class HierarchicalDataflowLayoutProvider extends
 			nodewiseEdgePlacer = new SortingNodewiseEdgePlacer();
 		if (nodePlacer == null)
 			nodePlacer = new BalancingNodePlacer(new BasicNodePlacer());
-		if (edgeRouter == null)
-			edgeRouter = new RectilinearEdgeRouter(new SortingLayerwiseEdgePlacer());
+		
+		// choose edge router module
+		if (preferenceStore != null && preferenceStore.getString(PREF_LAYER_EDGEROUTER)
+		        .equals(VAL_SORT_LAYER_EDGEROUTER)) {
+		    if (!(layerwiseEdgePlacer instanceof SortingLayerwiseEdgePlacer)) {
+		        layerwiseEdgePlacer = new SortingLayerwiseEdgePlacer();
+		        edgeRouter = new RectilinearEdgeRouter(layerwiseEdgePlacer);
+		    }
+		}
+		else {
+		    if (!(layerwiseEdgePlacer instanceof ToponumLayerwiseEdgePlacer)) {
+		        layerwiseEdgePlacer = new ToponumLayerwiseEdgePlacer();
+		        edgeRouter = new RectilinearEdgeRouter(layerwiseEdgePlacer);
+		    }
+		}
 	}
 	
 	/**

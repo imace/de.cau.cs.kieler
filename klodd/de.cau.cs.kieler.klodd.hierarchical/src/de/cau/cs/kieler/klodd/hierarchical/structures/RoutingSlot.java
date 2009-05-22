@@ -21,7 +21,7 @@ package de.cau.cs.kieler.klodd.hierarchical.structures;
 public class RoutingSlot {
 	
 	/** the slot rank determines the lengthwise distance to the preceding layer */
-	public int rank;
+	public int rank = 0;
 	
 	/** crosswise starting and ending position of this slot */
 	public float start, end;
