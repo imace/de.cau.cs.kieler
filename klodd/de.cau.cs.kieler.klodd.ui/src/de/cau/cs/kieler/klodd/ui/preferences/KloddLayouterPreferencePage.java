@@ -77,6 +77,16 @@ public class KloddLayouterPreferencePage extends
 				}, hieraGroup, false);
 		addField(layerAssEditor);
 		
+		FieldEditor edgeRouteEditor = new RadioGroupFieldEditor(
+		        HierarchicalDataflowLayoutProvider.PREF_LAYER_EDGEROUTER,
+		        Messages.getString("klodd.ui.12"), 1, new String[][] { //$NON-NLS-1$
+                    { Messages.getString("klodd.ui.13"), //$NON-NLS-1$
+                        HierarchicalDataflowLayoutProvider.VAL_SORT_LAYER_EDGEROUTER},
+                    { Messages.getString("klodd.ui.14"), //$NON-NLS-1$
+                        HierarchicalDataflowLayoutProvider.VAL_TOPO_LAYER_EDGEROUTER}
+                }, hieraGroup, false);
+		addField(edgeRouteEditor);
+		
 		IntegerFieldEditor crossRedPassesEditor = new IntegerFieldEditor(
 		        HierarchicalDataflowLayoutProvider.PREF_CROSSRED_PASSES,
 		        Messages.getString("klodd.ui.11"), hieraGroup, 3);
