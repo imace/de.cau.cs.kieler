@@ -44,6 +44,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		        HierarchicalDataflowLayoutProvider.VAL_TOPO_LAYER_EDGEROUTER);
 		store.setDefault(HierarchicalDataflowLayoutProvider.PREF_CROSSRED_PASSES,
 		        HierarchicalDataflowLayoutProvider.DEF_CROSSRED_PASSES);
+		store.setDefault(HierarchicalDataflowLayoutProvider.PREF_BALANCE_VS_SIZE, true);
 		// initialize options for orthogonal layout
 		store.setDefault(OrthogonalDataflowLayoutProvider.LAYOUTER_NAME, true);
 	}

@@ -13,6 +13,7 @@
  */
 package de.cau.cs.kieler.klodd.ui.preferences;
 
+import org.eclipse.jface.preference.BooleanFieldEditor;
 import org.eclipse.jface.preference.FieldEditor;
 import org.eclipse.jface.preference.IntegerFieldEditor;
 import org.eclipse.jface.preference.RadioGroupFieldEditor;
@@ -57,6 +58,11 @@ public class KloddLayouterPreferencePage extends
 		Group hieraGroup = new Group(this.getFieldEditorParent(), SWT.NONE);
 		hieraGroup.setText(Messages.getString("klodd.ui.1")); //$NON-NLS-1$
 
+		FieldEditor balanceEditor = new BooleanFieldEditor(
+		        HierarchicalDataflowLayoutProvider.PREF_BALANCE_VS_SIZE,
+		        Messages.getString("klodd.ui.15"), hieraGroup);
+		addField(balanceEditor);
+		
 		FieldEditor cycleRemEditor = new RadioGroupFieldEditor(
 				HierarchicalDataflowLayoutProvider.PREF_CYCLE_REM,
 				Messages.getString("klodd.ui.5"), 1, new String[][] { //$NON-NLS-1$
