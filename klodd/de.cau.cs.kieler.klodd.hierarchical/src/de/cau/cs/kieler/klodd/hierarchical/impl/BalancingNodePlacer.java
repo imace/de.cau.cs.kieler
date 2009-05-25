@@ -145,12 +145,12 @@ public class BalancingNodePlacer extends AbstractAlgorithm implements
 			}
 		}
 		
-	    // set proper crosswise dimension for the whole graph
+	    // update crosswise dimension for the whole graph
         for (Layer layer2 : layeredGraph.getLayers()) {
             LayerElement lastElem = layer2.getElements().get(layer2.getElements().size() - 1);
-            layer.crosswiseDim = (layoutDirection == LayoutDirection.VERTICAL
-                    ? lastElem.getPosition().getX() + lastElem.getRealWidth()
-                    : lastElem.getPosition().getY() + lastElem.getRealHeight())
+            layer2.crosswiseDim = (layoutDirection == LayoutDirection.VERTICAL
+                    ? lastElem.getPosition().getX() + lastElem.getRealWidth() + lastElem.eastRanks * minDist
+                    : lastElem.getPosition().getY() + lastElem.getRealHeight() + lastElem.southRanks * minDist)
                     + minDist;
             layeredGraph.crosswiseDim = Math.max(layeredGraph.crosswiseDim,
                     layer2.crosswiseDim); 

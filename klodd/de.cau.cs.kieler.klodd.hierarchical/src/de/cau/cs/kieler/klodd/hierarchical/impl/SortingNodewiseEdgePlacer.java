@@ -13,11 +13,10 @@
  */
 package de.cau.cs.kieler.klodd.hierarchical.impl;
 
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
 
 import de.cau.cs.kieler.core.alg.AbstractAlgorithm;
@@ -45,10 +44,21 @@ public class SortingNodewiseEdgePlacer extends AbstractAlgorithm implements
 	/**
 	 * Routing slot used to route edges around node elements.
 	 */
-	private static class RoutingSlot {
-		float start = Float.MAX_VALUE, end = Float.MIN_VALUE;
+	private static class RoutingSlot implements Comparable<RoutingSlot> {
+		float start = -Float.MAX_VALUE, end = Float.MAX_VALUE;
 		int rank;
 		List<KPort> ports = new LinkedList<KPort>();
+		
+        /* (non-Javadoc)
+         * @see java.lang.Comparable#compareTo(java.lang.Object)
+         */
+        public int compareTo(RoutingSlot other) {
+            if (this.start <= other.start && this.end >= other.end)
+                return 1;
+            else if (this.start >= other.start && this.end <= other.end)
+                return -1;
+            else return 0;
+        }
 	}
 	
 	/** layout direction configured for the given layered graph */
@@ -80,344 +90,352 @@ public class SortingNodewiseEdgePlacer extends AbstractAlgorithm implements
 	 */
 	private void placeEdges(LayerElement element) {
 		Object elemObj = element.getElemObj();
-		if (elemObj instanceof KNode) {
-			KNode node = (KNode)elemObj;
-			if (node.getPorts().isEmpty()) return;
-			List<RoutingSlot> northSlots = new LinkedList<RoutingSlot>();
-			List<RoutingSlot> eastSlots = new LinkedList<RoutingSlot>();
-			List<RoutingSlot> southSlots = new LinkedList<RoutingSlot>();
-			List<RoutingSlot> westSlots = new LinkedList<RoutingSlot>();
-			Map<KPort, RoutingSlot> northMap = new HashMap<KPort, RoutingSlot>();
-			Map<KPort, RoutingSlot> eastMap = new HashMap<KPort, RoutingSlot>();
-			Map<KPort, RoutingSlot> southMap = new HashMap<KPort, RoutingSlot>();
-			Map<KPort, RoutingSlot> westMap = new HashMap<KPort, RoutingSlot>();
-			KShapeLayout nodeLayout = KimlLayoutUtil.getShapeLayout(node);
-			
-			for (KPort port : node.getPorts()) {
-			    KShapeLayout portLayout = KimlLayoutUtil.getShapeLayout(port);
-				PortSide placement = LayoutOptions.getPortSide(portLayout);
-				float xPos = portLayout.getXpos() + portLayout.getWidth() / 2;
-				float yPos = portLayout.getYpos() + portLayout.getHeight() / 2;
-				// process self-loops over the given port
-				for (KEdge edge : port.getEdges()) {
-					if (edge.getSourcePort() == port && edge.getTarget() == node) {
-						ElementLoop loop = new ElementLoop(edge, element, port, edge.getTargetPort());
-						element.getLoops().add(loop);
-						KShapeLayout targetLayout = KimlLayoutUtil.getShapeLayout(edge.getTargetPort());
-						PortSide placement2 = LayoutOptions.getPortSide(targetLayout);
-						float xPos2 = targetLayout.getXpos()
-							    + targetLayout.getWidth() / 2;
-						float yPos2 = targetLayout.getYpos()
-							    + targetLayout.getHeight() / 2;
-						switch (placement) {
+		if (!(elemObj instanceof KNode)) return;
+		KNode node = (KNode)elemObj;
+		if (node.getPorts().isEmpty()) return;
+		List<RoutingSlot> northSlots = new LinkedList<RoutingSlot>();
+		List<RoutingSlot> eastSlots = new LinkedList<RoutingSlot>();
+		List<RoutingSlot> southSlots = new LinkedList<RoutingSlot>();
+		List<RoutingSlot> westSlots = new LinkedList<RoutingSlot>();
+		Map<KPort, RoutingSlot> northMap = new HashMap<KPort, RoutingSlot>();
+		Map<KPort, RoutingSlot> eastMap = new HashMap<KPort, RoutingSlot>();
+		Map<KPort, RoutingSlot> southMap = new HashMap<KPort, RoutingSlot>();
+		Map<KPort, RoutingSlot> westMap = new HashMap<KPort, RoutingSlot>();
+		float nodeWidth = element.getRealWidth();
+		float nodeHeight = element.getRealHeight();
+		
+		for (KPort port1 : node.getPorts()) {
+		    KShapeLayout portLayout = KimlLayoutUtil.getShapeLayout(port1);
+			PortSide placement = LayoutOptions.getPortSide(portLayout);
+			float xPos1 = portLayout.getXpos() + portLayout.getWidth() / 2;
+			float yPos1 = portLayout.getYpos() + portLayout.getHeight() / 2;
+			// process self-loops over the given port
+			for (KEdge edge : port1.getEdges()) {
+				if (edge.getSourcePort() == port1 && edge.getTarget() == node) {
+				    KPort port2 = edge.getTargetPort();
+					ElementLoop loop = new ElementLoop(edge, element, port1, port2);
+					element.getLoops().add(loop);
+					KShapeLayout targetLayout = KimlLayoutUtil.getShapeLayout(port2);
+					PortSide placement2 = LayoutOptions.getPortSide(targetLayout);
+					float xPos2 = targetLayout.getXpos()
+						    + targetLayout.getWidth() / 2;
+					float yPos2 = targetLayout.getYpos()
+						    + targetLayout.getHeight() / 2;
+					switch (placement) {
+					case NORTH:
+						switch (placement2) {
 						case NORTH:
-							switch (placement2) {
-							case NORTH:
-								addToSlot(port, edge.getTargetPort(), northSlots, northMap,
-										Math.min(xPos, xPos2), Math.max(xPos, xPos2));
-								break;
-							case EAST:
-								addToSlot(port, edge.getTargetPort(), northSlots, northMap,
-										xPos, nodeLayout.getWidth());
-								addToSlot(port, edge.getTargetPort(), eastSlots, eastMap,
-										0.0f, yPos2);
-								break;
-							case SOUTH:
-								addToSlot(port, edge.getTargetPort(), northSlots, northMap,
-										xPos, nodeLayout.getWidth());
-								addToSlot(port, edge.getTargetPort(), eastSlots, eastMap,
-										0.0f, nodeLayout.getHeight());
-								addToSlot(port, edge.getTargetPort(), southSlots, southMap,
-										xPos2, nodeLayout.getWidth());
-								break;
-							case WEST:
-								addToSlot(port, edge.getTargetPort(), northSlots, northMap,
-										0.0f, xPos);
-								addToSlot(port, edge.getTargetPort(), westSlots, westMap,
-										0.0f, yPos2);
-								break;
-							}
+							addToSlot(port1, port2, northSlots, northMap,
+									Math.min(xPos1, xPos2), Math.max(xPos1, xPos2));
 							break;
 						case EAST:
-							switch (placement2) {
-							case NORTH:
-								addToSlot(port, edge.getTargetPort(), eastSlots, eastMap,
-										0.0f, yPos);
-								addToSlot(port, edge.getTargetPort(), northSlots, northMap,
-										xPos2, nodeLayout.getWidth());
-								break;
-							case EAST:
-								addToSlot(port, edge.getTargetPort(), eastSlots, eastMap,
-										Math.min(yPos, yPos2), Math.max(yPos, yPos2));
-								break;
-							case SOUTH:
-								addToSlot(port, edge.getTargetPort(), eastSlots, eastMap,
-										yPos, nodeLayout.getHeight());
-								addToSlot(port, edge.getTargetPort(), southSlots, southMap,
-										xPos2, nodeLayout.getWidth());
-								break;
-							case WEST:
-								addToSlot(port, edge.getTargetPort(), eastSlots, eastMap,
-										yPos, nodeLayout.getHeight());
-								addToSlot(port, edge.getTargetPort(), southSlots, southMap,
-										0.0f, nodeLayout.getWidth());
-								addToSlot(port, edge.getTargetPort(), westSlots, westMap,
-										yPos2, nodeLayout.getHeight());
-								break;
-							}
+							addToSlot(port1, port2, northSlots, northMap,
+									xPos1, nodeWidth + yPos2);
+							addToSlot(port1, port2, eastSlots, eastMap,
+									xPos1 - nodeWidth, yPos2);
 							break;
 						case SOUTH:
-							switch (placement2) {
-							case NORTH:
-								addToSlot(port, edge.getTargetPort(), southSlots, southMap,
-										xPos, nodeLayout.getWidth());
-								addToSlot(port, edge.getTargetPort(), eastSlots, eastMap,
-										0.0f, nodeLayout.getHeight());
-								addToSlot(port, edge.getTargetPort(), northSlots, northMap,
-										xPos2, nodeLayout.getWidth());
-								break;
-							case EAST:
-								addToSlot(port, edge.getTargetPort(), southSlots, southMap,
-										xPos, nodeLayout.getWidth());
-								addToSlot(port, edge.getTargetPort(), eastSlots, eastMap,
-										yPos2, nodeLayout.getHeight());
-								break;
-							case SOUTH:
-								addToSlot(port, edge.getTargetPort(), southSlots, southMap,
-										Math.min(xPos, xPos2), Math.max(xPos, xPos2));
-								break;
-							case WEST:
-								addToSlot(port, edge.getTargetPort(), southSlots, southMap,
-										0.0f, xPos);
-								addToSlot(port, edge.getTargetPort(), westSlots, westMap,
-										yPos2, nodeLayout.getHeight());
-								break;
-							}
+							addToSlot(port1, port2, northSlots, northMap,
+									xPos1, 2*nodeWidth + nodeHeight - xPos2);
+							addToSlot(port1, port2, eastSlots, eastMap,
+							        xPos1 - nodeWidth, nodeHeight + nodeWidth - xPos2);
+							addToSlot(port1, port2, southSlots, southMap,
+									xPos1 - nodeHeight - nodeWidth, nodeWidth - xPos2);
 							break;
 						case WEST:
-							switch (placement2) {
-							case NORTH:
-								addToSlot(port, edge.getTargetPort(), westSlots, westMap,
-										0.0f, yPos);
-								addToSlot(port, edge.getTargetPort(), northSlots, northMap,
-										0.0f, xPos2);
-								break;
-							case EAST:
-								addToSlot(port, edge.getTargetPort(), westSlots, westMap,
-										yPos, nodeLayout.getHeight());
-								addToSlot(port, edge.getTargetPort(), southSlots, southMap,
-										0.0f, nodeLayout.getWidth());
-								addToSlot(port, edge.getTargetPort(), eastSlots, eastMap,
-										yPos2, nodeLayout.getHeight());
-								break;
-							case SOUTH:
-								addToSlot(port, edge.getTargetPort(), westSlots, westMap,
-										yPos, nodeLayout.getHeight());
-								addToSlot(port, edge.getTargetPort(), southSlots, southMap,
-										0.0f, xPos2);
-								break;
-							case WEST:
-								addToSlot(port, edge.getTargetPort(), westSlots, westMap,
-										Math.min(yPos, yPos2), Math.max(yPos, yPos2));
-								break;
-							}
+							addToSlot(port1, port2, northSlots, northMap,
+									-yPos2, xPos1);
+							addToSlot(port1, port2, westSlots, westMap,
+									nodeHeight - yPos2, nodeHeight + xPos1);
 							break;
 						}
-					}
-				}
-				// process routing to other layers
-				if (layoutDirection == LayoutDirection.VERTICAL) {
-					switch (placement) {
-					case NORTH:
-						if (hasOutgoing(element, port)) {
-							addToSlot(node, port, northSlots, northMap, xPos, nodeLayout.getWidth());
-							addToSlot(node, port, eastSlots, eastMap, 0.0f, nodeLayout.getHeight());
-						}
 						break;
 					case EAST:
-						if (!port.getEdges().isEmpty()) {
-							float fromPos = yPos, toPos = yPos;
-							if (hasOutgoing(element, port))
-								toPos = nodeLayout.getHeight();
-							if (hasIncoming(element, port))
-								fromPos = 0.0f;
-							addToSlot(node, port, eastSlots, eastMap, fromPos, toPos);
+						switch (placement2) {
+						case NORTH:
+							addToSlot(port1, port2, eastSlots, eastMap,
+									xPos2 - nodeWidth, yPos1);
+							addToSlot(port1, port2, northSlots, northMap,
+									xPos2, nodeWidth + yPos1);
+							break;
+						case EAST:
+							addToSlot(port1, port2, eastSlots, eastMap,
+									Math.min(yPos1, yPos2), Math.max(yPos1, yPos2));
+							break;
+						case SOUTH:
+							addToSlot(port1, port2, eastSlots, eastMap,
+									yPos1, nodeHeight + nodeWidth - xPos2);
+							addToSlot(port1, port2, southSlots, southMap,
+									yPos1 - nodeHeight, nodeWidth - xPos2);
+							break;
+						case WEST:
+							addToSlot(port1, port2, eastSlots, eastMap,
+									yPos1, 2*nodeHeight + nodeWidth - yPos2);
+							addToSlot(port1, port2, southSlots, southMap,
+									yPos1 - nodeHeight, nodeWidth + nodeHeight - yPos2);
+							addToSlot(port1, port2, westSlots, westMap,
+									yPos1 - nodeWidth - nodeHeight, nodeHeight - yPos2);
+							break;
 						}
 						break;
 					case SOUTH:
-						if (hasIncoming(element, port)) {
-							addToSlot(node, port, southSlots, southMap, xPos, nodeLayout.getWidth());
-							addToSlot(node, port, eastSlots, eastMap, 0.0f, nodeLayout.getHeight());
+						switch (placement2) {
+						case NORTH:
+							addToSlot(port1, port2, southSlots, southMap,
+									xPos2 - nodeHeight - nodeWidth, nodeWidth - xPos1);
+							addToSlot(port1, port2, eastSlots, eastMap,
+									xPos2 - nodeWidth, nodeHeight + nodeWidth - xPos1);
+							addToSlot(port1, port2, northSlots, northMap,
+									xPos2, 2*nodeWidth + nodeHeight - xPos1);
+							break;
+						case EAST:
+							addToSlot(port1, port2, southSlots, southMap,
+									yPos2 - nodeHeight, nodeWidth - xPos1);
+							addToSlot(port1, port2, eastSlots, eastMap,
+									yPos2, nodeHeight + nodeWidth - xPos1);
+							break;
+						case SOUTH:
+							addToSlot(port1, port2, southSlots, southMap,
+									nodeWidth - Math.max(xPos1, xPos2),
+									nodeWidth - Math.min(xPos1, xPos2));
+							break;
+						case WEST:
+							addToSlot(port1, port2, southSlots, southMap,
+									nodeWidth - xPos1, nodeWidth + nodeHeight - yPos2);
+							addToSlot(port1, port2, westSlots, westMap,
+									-xPos1, nodeHeight - yPos2);
+							break;
 						}
 						break;
 					case WEST:
-						if (!port.getEdges().isEmpty()) {
-							float fromPos = yPos, toPos = yPos;
-							if (hasOutgoing(element, port))
-								toPos = nodeLayout.getHeight();
-							if (hasIncoming(element, port))
-								fromPos = 0.0f;
-							addToSlot(node, port, westSlots, westMap, fromPos, toPos);
-						}
-						break;
-					}
-				}
-				else {
-					switch (placement) {
-					case NORTH:
-						if (!port.getEdges().isEmpty()) {
-							float fromPos = xPos, toPos = xPos;
-							if (hasOutgoing(element, port))
-								toPos = nodeLayout.getWidth();
-							if (hasIncoming(element, port))
-								fromPos = 0.0f;
-							addToSlot(node, port, northSlots, northMap, fromPos, toPos);
-						}
-						break;
-					case EAST:
-						if (hasIncoming(element, port)) {
-							addToSlot(node, port, eastSlots, eastMap, yPos, nodeLayout.getHeight());
-							addToSlot(node, port, southSlots, southMap, 0.0f, nodeLayout.getWidth());
-						}
-						break;
-					case SOUTH:
-						if (!port.getEdges().isEmpty()) {
-							float fromPos = xPos, toPos = xPos;
-							if (hasOutgoing(element, port))
-								toPos = nodeLayout.getWidth();
-							if (hasIncoming(element, port))
-								fromPos = 0.0f;
-							addToSlot(node, port, southSlots, southMap, fromPos, toPos);
-						}
-						break;
-					case WEST:
-						if (hasOutgoing(element, port)) {
-							addToSlot(node, port, westSlots, westMap, yPos, nodeLayout.getHeight());
-							addToSlot(node, port, southSlots, southMap, 0.0f, nodeLayout.getWidth());
+						switch (placement2) {
+						case NORTH:
+							addToSlot(port1, port2, westSlots, westMap,
+									nodeHeight - yPos1, nodeHeight + xPos2);
+							addToSlot(port1, port2, northSlots, northMap,
+									-yPos1, xPos2);
+							break;
+						case EAST:
+							addToSlot(port1, port2, westSlots, westMap,
+									yPos2 - nodeWidth - nodeHeight, nodeHeight - yPos1);
+							addToSlot(port1, port2, southSlots, southMap,
+									yPos2 - nodeHeight, nodeWidth + nodeHeight - yPos1);
+							addToSlot(port1, port2, eastSlots, eastMap,
+									yPos2, 2*nodeHeight + nodeWidth - yPos1);
+							break;
+						case SOUTH:
+							addToSlot(port1, port2, westSlots, westMap,
+									-xPos2, nodeHeight - yPos1);
+							addToSlot(port1, port2, southSlots, southMap,
+									nodeWidth - xPos2, nodeWidth + nodeHeight - yPos1);
+							break;
+						case WEST:
+							addToSlot(port1, port2, westSlots, westMap,
+									nodeHeight - Math.max(yPos1, yPos2),
+									nodeHeight - Math.min(yPos1, yPos2));
+							break;
 						}
 						break;
 					}
 				}
 			}
 			
-			// assign ranks to all routing slots 
-			element.northRanks = assignRanks(northSlots, nodeLayout.getWidth());
-			element.eastRanks = assignRanks(eastSlots, nodeLayout.getHeight());
-			element.southRanks = assignRanks(southSlots, nodeLayout.getWidth());
-			element.westRanks = assignRanks(westSlots, nodeLayout.getHeight());
-			
-			// calculate edge routing for all incoming or outgoing connections
+			// process routing to other layers
 			if (layoutDirection == LayoutDirection.VERTICAL) {
-				for (LayerConnection connection : element.getIncomingConnections()) {
-					KPort port = connection.getTargetPort();
-					switch (LayoutOptions.getPortSide(
-					        KimlLayoutUtil.getShapeLayout(port))) {
-					case EAST:
-						int rank = getRankFor(port, eastSlots, element.eastRanks);
-						connection.targetSidePos = rank;
-						break;
-					case SOUTH:
-						rank = getRankFor(port, eastSlots, element.eastRanks);
-						connection.targetSidePos = rank;
-						rank = getRankFor(port, southSlots, element.southRanks);
-						connection.targetFrontPos = rank;
-						break;
-					case WEST:
-						rank = getRankFor(port, westSlots, element.westRanks);
-						connection.targetSidePos = -rank;
-						break;
+				switch (placement) {
+				case NORTH:
+					if (hasOutgoing(element, port1)) {
+						addToSlot(node, port1, northSlots, northMap,
+						        xPos1, Float.MAX_VALUE);
+						addToSlot(node, port1, eastSlots, eastMap,
+						        xPos1 - nodeWidth, Float.MAX_VALUE);
 					}
-				}
-				for (LayerConnection connection : element.getOutgoingConnections()) {
-					KPort port = connection.getSourcePort();
-					switch (LayoutOptions.getPortSide(
-                            KimlLayoutUtil.getShapeLayout(port))) {
-					case NORTH:
-						int rank = getRankFor(port, eastSlots, element.eastRanks);
-						connection.sourceSidePos = rank;
-						rank = getRankFor(port, northSlots, element.northRanks);
-						connection.sourceBackPos = rank;
-						break;
-					case EAST:
-						rank = getRankFor(port, eastSlots, element.eastRanks);
-						connection.sourceSidePos = rank;
-						break;
-					case WEST:
-						rank = getRankFor(port, westSlots, element.westRanks);
-						connection.sourceSidePos = -rank;
-						break;
+					break;
+				case EAST:
+					float fromPos = yPos1, toPos = yPos1;
+					if (hasOutgoing(element, port1))
+						toPos = Float.MAX_VALUE;
+					if (hasIncoming(element, port1))
+						fromPos = -Float.MAX_VALUE;
+					if (fromPos != toPos)
+						addToSlot(node, port1, eastSlots, eastMap, fromPos, toPos);
+					break;
+				case SOUTH:
+					if (hasIncoming(element, port1)) {
+						addToSlot(node, port1, southSlots, southMap,
+						        -Float.MAX_VALUE, nodeWidth - xPos1);
+						addToSlot(node, port1, eastSlots, eastMap,
+						        -Float.MAX_VALUE, nodeHeight + nodeWidth - xPos1);
 					}
+					break;
+				case WEST:
+					fromPos = nodeHeight - yPos1; toPos = fromPos;
+					if (hasOutgoing(element, port1))
+					    fromPos = -Float.MAX_VALUE;
+					if (hasIncoming(element, port1))
+					    toPos = Float.MAX_VALUE;
+					if (fromPos != toPos)
+						addToSlot(node, port1, westSlots, westMap, fromPos, toPos);
+					break;
 				}
 			}
 			else {
-				for (LayerConnection connection : element.getIncomingConnections()) {
-					KPort port = connection.getTargetPort();
-					switch (LayoutOptions.getPortSide(
-                            KimlLayoutUtil.getShapeLayout(port))) {
-					case SOUTH:
-						int rank = getRankFor(port, southSlots, element.southRanks);
-						connection.targetSidePos = rank;
-						break;
-					case EAST:
-						rank = getRankFor(port, southSlots, element.southRanks);
-						connection.targetSidePos = rank;
-						rank = getRankFor(port, eastSlots, element.eastRanks);
-						connection.targetFrontPos = rank;
-						break;
-					case NORTH:
-						rank = getRankFor(port, northSlots, element.northRanks);
-						connection.targetSidePos = -rank;
-						break;
+				switch (placement) {
+				case NORTH:
+					float fromPos = xPos1, toPos = xPos1;
+					if (hasOutgoing(element, port1))
+						toPos = Float.MAX_VALUE;
+					if (hasIncoming(element, port1))
+						fromPos = -Float.MAX_VALUE;
+					if (fromPos != toPos)
+						addToSlot(node, port1, northSlots, northMap, fromPos, toPos);
+					break;
+				case EAST:
+					if (hasIncoming(element, port1)) {
+						addToSlot(node, port1, eastSlots, eastMap,
+						        yPos1, Float.MAX_VALUE);
+						addToSlot(node, port1, southSlots, southMap,
+						        yPos1 - nodeHeight, Float.MAX_VALUE);
 					}
-				}
-				for (LayerConnection connection : element.getOutgoingConnections()) {
-					KPort port = connection.getSourcePort();
-					switch (LayoutOptions.getPortSide(
-                            KimlLayoutUtil.getShapeLayout(port))) {
-					case WEST:
-						int rank = getRankFor(port, southSlots, element.southRanks);
-						connection.sourceSidePos = rank;
-						rank = getRankFor(port, westSlots, element.westRanks);
-						connection.sourceBackPos = rank;
-						break;
-					case SOUTH:
-						rank = getRankFor(port, southSlots, element.southRanks);
-						connection.sourceSidePos = rank;
-						break;
-					case NORTH:
-						rank = getRankFor(port, northSlots, element.northRanks);
-						connection.sourceSidePos = -rank;
-						break;
+					break;
+				case SOUTH:
+					fromPos = nodeWidth - xPos1; toPos = fromPos;
+					if (hasOutgoing(element, port1))
+						fromPos = -Float.MAX_VALUE;
+					if (hasIncoming(element, port1))
+						toPos = Float.MAX_VALUE;
+					if (fromPos != toPos)
+						addToSlot(node, port1, southSlots, southMap, fromPos, toPos);
+					break;
+				case WEST:
+					if (hasOutgoing(element, port1)) {
+						addToSlot(node, port1, westSlots, westMap,
+						        -Float.MAX_VALUE, nodeHeight - yPos1);
+						addToSlot(node, port1, southSlots, southMap,
+						        -Float.MAX_VALUE, nodeWidth + nodeHeight - yPos1);
 					}
+					break;
 				}
 			}
-			
-			// calculate edge routing for all element loops
-			for (ElementLoop loop : element.getLoops()) {
-				PortSide placement1 = LayoutOptions.getPortSide(
-                        KimlLayoutUtil.getShapeLayout(loop.getSourcePort()));
-				PortSide placement2 = LayoutOptions.getPortSide(
-                        KimlLayoutUtil.getShapeLayout(loop.getTargetPort()));
-				if (placement1 == PortSide.NORTH || placement2 == PortSide.NORTH) {
-					int rank = getRankFor(loop.getSourcePort(), northSlots, element.northRanks);
-					loop.northRoutePos = rank;
+		}
+		
+		// assign ranks to all routing slots 
+		element.northRanks = assignRanks(northSlots);
+		element.eastRanks = assignRanks(eastSlots);
+		element.southRanks = assignRanks(southSlots);
+		element.westRanks = assignRanks(westSlots);
+		
+		// calculate edge routing for all incoming or outgoing connections
+		if (layoutDirection == LayoutDirection.VERTICAL) {
+			for (LayerConnection connection : element.getIncomingConnections()) {
+				KPort port = connection.getTargetPort();
+				switch (LayoutOptions.getPortSide(
+				        KimlLayoutUtil.getShapeLayout(port))) {
+				case EAST:
+					int rank = getRankFor(port, eastSlots, element.eastRanks);
+					connection.targetSidePos = rank;
+					break;
+				case SOUTH:
+					rank = getRankFor(port, eastSlots, element.eastRanks);
+					connection.targetSidePos = rank;
+					rank = getRankFor(port, southSlots, element.southRanks);
+					connection.targetFrontPos = rank;
+					break;
+				case WEST:
+					rank = getRankFor(port, westSlots, element.westRanks);
+					connection.targetSidePos = -rank;
+					break;
 				}
-				if (placement1 == PortSide.EAST || placement2 == PortSide.EAST
-						|| placement1 == PortSide.NORTH && placement2 == PortSide.SOUTH
-						|| placement1 == PortSide.SOUTH && placement2 == PortSide.NORTH) {
-					int rank = getRankFor(loop.getSourcePort(), eastSlots, element.eastRanks);
-					loop.eastRoutePos = rank;
+			}
+			for (LayerConnection connection : element.getOutgoingConnections()) {
+				KPort port = connection.getSourcePort();
+				switch (LayoutOptions.getPortSide(
+                        KimlLayoutUtil.getShapeLayout(port))) {
+				case NORTH:
+					int rank = getRankFor(port, eastSlots, element.eastRanks);
+					connection.sourceSidePos = rank;
+					rank = getRankFor(port, northSlots, element.northRanks);
+					connection.sourceBackPos = rank;
+					break;
+				case EAST:
+					rank = getRankFor(port, eastSlots, element.eastRanks);
+					connection.sourceSidePos = rank;
+					break;
+				case WEST:
+					rank = getRankFor(port, westSlots, element.westRanks);
+					connection.sourceSidePos = -rank;
+					break;
 				}
-				if (placement1 == PortSide.SOUTH || placement2 == PortSide.SOUTH
-						|| placement1 == PortSide.EAST && placement2 == PortSide.WEST
-						|| placement1 == PortSide.WEST && placement2 == PortSide.EAST) {
-					int rank = getRankFor(loop.getSourcePort(), southSlots, element.southRanks);
-					loop.southRoutePos = rank;
+			}
+		}
+		else {
+			for (LayerConnection connection : element.getIncomingConnections()) {
+				KPort port = connection.getTargetPort();
+				switch (LayoutOptions.getPortSide(
+                        KimlLayoutUtil.getShapeLayout(port))) {
+				case SOUTH:
+					int rank = getRankFor(port, southSlots, element.southRanks);
+					connection.targetSidePos = rank;
+					break;
+				case EAST:
+					rank = getRankFor(port, southSlots, element.southRanks);
+					connection.targetSidePos = rank;
+					rank = getRankFor(port, eastSlots, element.eastRanks);
+					connection.targetFrontPos = rank;
+					break;
+				case NORTH:
+					rank = getRankFor(port, northSlots, element.northRanks);
+					connection.targetSidePos = -rank;
+					break;
 				}
-				if (placement1 == PortSide.WEST || placement2 == PortSide.WEST) {
-					int rank = getRankFor(loop.getSourcePort(), westSlots, element.westRanks);
-					loop.westRoutePos = rank;
+			}
+			for (LayerConnection connection : element.getOutgoingConnections()) {
+				KPort port = connection.getSourcePort();
+				switch (LayoutOptions.getPortSide(
+                        KimlLayoutUtil.getShapeLayout(port))) {
+				case WEST:
+					int rank = getRankFor(port, southSlots, element.southRanks);
+					connection.sourceSidePos = rank;
+					rank = getRankFor(port, westSlots, element.westRanks);
+					connection.sourceBackPos = rank;
+					break;
+				case SOUTH:
+					rank = getRankFor(port, southSlots, element.southRanks);
+					connection.sourceSidePos = rank;
+					break;
+				case NORTH:
+					rank = getRankFor(port, northSlots, element.northRanks);
+					connection.sourceSidePos = -rank;
+					break;
 				}
+			}
+		}
+		
+		// calculate edge routing for all element loops
+		for (ElementLoop loop : element.getLoops()) {
+			PortSide placement1 = LayoutOptions.getPortSide(
+                    KimlLayoutUtil.getShapeLayout(loop.getSourcePort()));
+			PortSide placement2 = LayoutOptions.getPortSide(
+                    KimlLayoutUtil.getShapeLayout(loop.getTargetPort()));
+			if (placement1 == PortSide.NORTH || placement2 == PortSide.NORTH) {
+				int rank = getRankFor(loop.getSourcePort(), northSlots, element.northRanks);
+				loop.northRoutePos = rank;
+			}
+			if (placement1 == PortSide.EAST || placement2 == PortSide.EAST
+					|| placement1 == PortSide.NORTH && placement2 == PortSide.SOUTH
+					|| placement1 == PortSide.SOUTH && placement2 == PortSide.NORTH) {
+				int rank = getRankFor(loop.getSourcePort(), eastSlots, element.eastRanks);
+				loop.eastRoutePos = rank;
+			}
+			if (placement1 == PortSide.SOUTH || placement2 == PortSide.SOUTH
+					|| placement1 == PortSide.EAST && placement2 == PortSide.WEST
+					|| placement1 == PortSide.WEST && placement2 == PortSide.EAST) {
+				int rank = getRankFor(loop.getSourcePort(), southSlots, element.southRanks);
+				loop.southRoutePos = rank;
+			}
+			if (placement1 == PortSide.WEST || placement2 == PortSide.WEST) {
+				int rank = getRankFor(loop.getSourcePort(), westSlots, element.westRanks);
+				loop.westRoutePos = rank;
 			}
 		}
 	}
@@ -460,8 +478,8 @@ public class SortingNodewiseEdgePlacer extends AbstractAlgorithm implements
 		}
 		if (!slot.ports.contains(port))
 			slot.ports.add(port);
-		slot.start = Math.min(slot.start, fromPos);
-		slot.end = Math.max(slot.end, toPos);
+		slot.start = Math.max(slot.start, fromPos);
+		slot.end = Math.min(slot.end, toPos);
 	}
 	
 	/**
@@ -489,8 +507,8 @@ public class SortingNodewiseEdgePlacer extends AbstractAlgorithm implements
 			slot.ports.add(port1);
 		if (!slot.ports.contains(port2))
 			slot.ports.add(port2);
-		slot.start = Math.min(slot.start, fromPos);
-		slot.end = Math.max(slot.end, toPos);
+		slot.start = Math.max(slot.start, fromPos);
+		slot.end = Math.min(slot.end, toPos);
 	}
 	
 	/**
@@ -502,7 +520,8 @@ public class SortingNodewiseEdgePlacer extends AbstractAlgorithm implements
      */
     private boolean hasOutgoing(LayerElement element, KPort port) {
         for (LayerConnection connection : element.getOutgoingConnections()) {
-                if (connection.getSourcePort() == port) {
+                if (connection.getSourcePort() == port
+                        && connection.getTargetElement() != element) {
                         return true;
                 }
         }
@@ -518,7 +537,8 @@ public class SortingNodewiseEdgePlacer extends AbstractAlgorithm implements
      */
     private boolean hasIncoming(LayerElement element, KPort port) {
         for (LayerConnection connection : element.getIncomingConnections()) {
-                if (connection.getTargetPort() == port) {
+                if (connection.getTargetPort() == port
+                        && connection.getSourceElement() != element) {
                         return true;
                 }
         }
@@ -529,29 +549,26 @@ public class SortingNodewiseEdgePlacer extends AbstractAlgorithm implements
      * Assigns slot ranks to all slots of a given list.
      * 
      * @param slotList list of slot ranks
-     * @param size size of the node side for the given slots
      * @return number of assigned slot ranks
      */
-    private int assignRanks(List<RoutingSlot> slotList, final float size) {
-    	// sort list by start and end values
-    	Collections.sort(slotList, new Comparator<RoutingSlot>() {
-			public int compare(RoutingSlot slot1, RoutingSlot slot2) {
-				if (slot1.start > 0.0f && slot2.start > 0.0f)
-					return -Float.compare(slot1.start, slot2.start);
-				else if (slot1.end < size && slot2.end < size)
-					return Float.compare(slot1.end, slot2.end);
-				else if (slot1.start > 0.0f && slot1.end < size)
-					return -1;
-				else if (slot2.start > 0.0f && slot2.end < size)
-					return 1;
-				else return 0;
-			}
-    	});
+    private int assignRanks(List<RoutingSlot> slotList) {
+    	// sort list by start and end values using insertion sort
+        LinkedList<RoutingSlot> sortedList = new LinkedList<RoutingSlot>();
+        for (RoutingSlot slot : slotList) {
+            ListIterator<RoutingSlot> slotIter = sortedList.listIterator();
+            while (slotIter.hasNext()) {
+                if (slotIter.next().compareTo(slot) > 0) {
+                    slotIter.previous();
+                    break;
+                }
+            }
+            slotIter.add(slot);
+        }
     	
     	// assign ranks to each routing slot
     	int slotRanks = 0;
     	List<List<RoutingSlot>> routingLayers = new LinkedList<List<RoutingSlot>>();
-    	for (RoutingSlot slot : slotList) {
+    	for (RoutingSlot slot : sortedList) {
     		boolean foundPlace = false;
     		int rank = 1;
     		for (List<RoutingSlot> routingLayer : routingLayers) {

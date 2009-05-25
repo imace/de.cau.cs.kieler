@@ -117,20 +117,49 @@ public class ElementLoop {
 		float ybase = element.getPosition().getY() + element.getPosOffset().getY();
 		if (sourcePort != null) {
 			KPoint point = KLayoutDataFactory.eINSTANCE.createKPoint();
+			float sourcePortWidth = sourcePortLayout.getWidth();
+			float sourcePortHeight = sourcePortLayout.getHeight();
 			point.setX(sourcePortLayout.getXpos()
-					+ sourcePortLayout.getWidth() / 2 + xbase);
+			        + sourcePortWidth / 2 + xbase);
 			point.setY(sourcePortLayout.getYpos()
-					+ sourcePortLayout.getHeight() / 2 + ybase);
+			        + sourcePortHeight / 2 + ybase);
+			alignEndpoint(point, edgeLayout.getBendPoints().get(0),
+			        sourcePortWidth, sourcePortHeight);
 			edgeLayout.setSourcePoint(point);
 		}
 		if (targetPort != null) {
 			KPoint point = KLayoutDataFactory.eINSTANCE.createKPoint();
+			float targetPortWidth = targetPortLayout.getWidth();
+			float targetPortHeight = targetPortLayout.getHeight();
 			point.setX(targetPortLayout.getXpos()
-					+ targetPortLayout.getWidth() / 2 + xbase);
+			        + targetPortWidth / 2 + xbase);
 			point.setY(targetPortLayout.getYpos()
-					+ targetPortLayout.getHeight() / 2 + ybase);
+			        + targetPortHeight / 2 + ybase);
+			alignEndpoint(point, edgeLayout.getBendPoints().get(edgeLayout.getBendPoints().size() - 1),
+			        targetPortWidth, targetPortHeight);
 			edgeLayout.setTargetPoint(point);
 		}
 	}
+	
+	/**
+     * Adds or subtracts the width or height of the given endpoint size,
+     * depending on the relative position of the next point.
+     * 
+     * @param endpoint endpoint to align
+     * @param next next point on the edge
+     * @param width width of the endpoint object
+     * @param height height of the endpoint object
+     */
+    private void alignEndpoint(KPoint endpoint, KPoint next,
+            float width, float height) {
+        if (next.getX() > endpoint.getX())
+            endpoint.setX(endpoint.getX() + width / 2);
+        else if (next.getY() > endpoint.getY())
+            endpoint.setY(endpoint.getY() + height / 2);
+        else if (next.getX() < endpoint.getX())
+            endpoint.setX(endpoint.getX() - width / 2);
+        else if (next.getY() < endpoint.getY())
+            endpoint.setY(endpoint.getY() - height / 2);
+    }
 
 }
