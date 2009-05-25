@@ -70,9 +70,10 @@ public class BasicNodePlacer extends AbstractAlgorithm implements INodePlacer {
 	
 	/*
 	 * (non-Javadoc)
-	 * @see de.cau.cs.kieler.klodd.hierarchical.modules.INodePlacer#placeNodes(de.cau.cs.kieler.klodd.hierarchical.structures.LayeredGraph, float)
+	 * @see de.cau.cs.kieler.klodd.hierarchical.modules.INodePlacer#placeNodes(de.cau.cs.kieler.klodd.hierarchical.structures.LayeredGraph, float, boolean)
 	 */
-	public void placeNodes(LayeredGraph layeredGraph, float minDist) {
+	public void placeNodes(LayeredGraph layeredGraph, float minDist,
+	        boolean balanceOverSize) {
 		getMonitor().begin("Basic node placement", 1);
 		
 		this.minDist = minDist;

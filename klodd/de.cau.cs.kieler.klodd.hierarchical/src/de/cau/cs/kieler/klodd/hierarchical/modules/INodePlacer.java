@@ -29,7 +29,10 @@ public interface INodePlacer extends IAlgorithm {
 	 * 
 	 * @param layeredGraph layered graph to process
 	 * @param minDist minimal distance between two nodes or edges in each layer
+	 * @param balanceOverSize indicates whether node balancing has
+	 *     priority over diagram size
 	 */
-	public void placeNodes(LayeredGraph layeredGraph, float minDist);
+	public void placeNodes(LayeredGraph layeredGraph, float minDist,
+	        boolean balanceOverSize);
 	
 }

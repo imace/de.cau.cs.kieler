@@ -79,6 +79,8 @@ public class HierarchicalDataflowLayoutProvider extends
 	public static final String PREF_CROSSRED_PASSES = "klodd.hierarchical.crossRedPasses";
 	/** default value for the number of passes for crossing reduction */
 	public static final int DEF_CROSSRED_PASSES = 2;
+	/** preference identifier for the priority of node balancing over diagram size */
+	public static final String PREF_BALANCE_VS_SIZE = "klodd.hierarchical.balance";
 
 	/** the preference store for this layouter */
 	private static IKielerPreferenceStore preferenceStore;
@@ -108,6 +110,9 @@ public class HierarchicalDataflowLayoutProvider extends
 	private ILayerwiseEdgePlacer layerwiseEdgePlacer = null;
 	/** the edge router module */
 	private IEdgeRouter edgeRouter = null;
+	
+	/** indicates whether node balance has priority over diagram size */
+	private boolean balanceOverSize;
 	
 	/*
 	 * (non-Javadoc)
@@ -140,7 +145,7 @@ public class HierarchicalDataflowLayoutProvider extends
 		// put each node into a layer and get a layered graph
 		layerAssigner.reset(progressMonitor.subTask(10));
 		LayeredGraph layeredGraph = layerAssigner.assignLayers(
-				slimGraph, layoutNode);
+				slimGraph, layoutNode, balanceOverSize);
 		if (!layeredGraph.getLayers().isEmpty()) {
 			layeredGraph.createConnections(slimGraph);
 			// optimize the order of nodes in each layer
@@ -151,7 +156,7 @@ public class HierarchicalDataflowLayoutProvider extends
 			nodewiseEdgePlacer.placeEdges(layeredGraph);
 			// determine a crosswise placement for each node
 			nodePlacer.reset(progressMonitor.subTask(10));
-			nodePlacer.placeNodes(layeredGraph, minDist);
+			nodePlacer.placeNodes(layeredGraph, minDist, balanceOverSize);
 			// route edges between nodes
 			edgeRouter.reset(progressMonitor.subTask(10));
 			edgeRouter.routeEdges(layeredGraph, minDist);
@@ -219,6 +224,12 @@ public class HierarchicalDataflowLayoutProvider extends
 		        edgeRouter = new RectilinearEdgeRouter(layerwiseEdgePlacer);
 		    }
 		}
+
+		// set balance over size option
+		if (preferenceStore != null)
+		    balanceOverSize = preferenceStore.getBoolean(PREF_BALANCE_VS_SIZE);
+		else
+		    balanceOverSize = true;
 	}
 	
 	/**

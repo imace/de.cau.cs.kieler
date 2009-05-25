@@ -42,14 +42,16 @@ public class BalancingLayerAssigner extends AbstractAlgorithm implements
 		this.basicLayerAssigner = basicLayerAssigner;
 	}
 	
-	/* (non-Javadoc)
-	 * @see de.cau.cs.kieler.klodd.hierarchical.modules.ILayerAssigner#assignLayers(de.cau.cs.kieler.core.graph.KGraph, de.cau.cs.kieler.kiml.layout.KimlLayoutGraph.KNode)
+	/*
+	 * (non-Javadoc)
+	 * @see de.cau.cs.kieler.klodd.hierarchical.modules.ILayerAssigner#assignLayers(de.cau.cs.kieler.core.slimgraph.KSlimGraph, de.cau.cs.kieler.core.kgraph.KNode, boolean)
 	 */
-	public LayeredGraph assignLayers(KSlimGraph graph, KNode parentNode) {
+	public LayeredGraph assignLayers(KSlimGraph graph, KNode parentNode,
+	        boolean balanceOverSize) {
 		getMonitor().begin("Balancing layer assignment", 1);
 		basicLayerAssigner.reset(getMonitor().subTask(1));
 		LayeredGraph layeredGraph = basicLayerAssigner.assignLayers(
-				graph, parentNode);
+				graph, parentNode, balanceOverSize);
 		
 		// balance layer assignment of each element in the layering
 		if (layeredGraph.getLayers().size() >= 3) {
@@ -59,7 +61,7 @@ public class BalancingLayerAssigner extends AbstractAlgorithm implements
 				if (layer.height > 0) {
 					ListIterator<LayerElement> elemIter = layer.getElements().listIterator();
 					while (elemIter.hasNext()) {
-						balanceElement(layeredGraph, elemIter);
+						balanceElement(layeredGraph, elemIter, balanceOverSize);
 					}
 				}
 			}
@@ -75,9 +77,11 @@ public class BalancingLayerAssigner extends AbstractAlgorithm implements
 	 * 
 	 * @param layeredGraph layered graph
 	 * @param elemIter iterator whose next element shall be balanced
+	 * @param balanceOverSize indicates whether node balancing has
+	 *     priority over diagram size
 	 */
 	private void balanceElement(LayeredGraph layeredGraph,
-			ListIterator<LayerElement> elemIter) {
+			ListIterator<LayerElement> elemIter, boolean balanceOverSize) {
 		LayerElement element = elemIter.next();
 		Layer currentLayer = element.getLayer();
 		KSlimNode kNode = element.getKNode();
@@ -94,17 +98,26 @@ public class BalancingLayerAssigner extends AbstractAlgorithm implements
 		}
 		if (minShiftRank > 0 && incoming >= outgoing) {
 			int layerOffset = layeredGraph.getLayers().get(0).rank;
-			ListIterator<Layer> layerIter = layeredGraph.getLayers()
-					.listIterator(minShiftRank - layerOffset);
-			int currentSize = currentLayer.getElements().size();
-			while (layerIter.nextIndex() < currentLayer.rank - layerOffset) {
-				Layer layer = layerIter.next();
-				if (layer.getElements().size() <= currentSize) {
-					// move the current element to the new layer
-					elemIter.remove();
-					element.setLayer(layer);
-					break;
-				}
+			if (balanceOverSize) {
+			    if (minShiftRank < currentLayer.rank) {
+    			    elemIter.remove();
+    			    element.setLayer(layeredGraph.getLayers().get(
+    			            minShiftRank - layerOffset));
+			    }
+			}
+			else {
+    			ListIterator<Layer> layerIter = layeredGraph.getLayers()
+    					.listIterator(minShiftRank - layerOffset);
+    			int currentSize = currentLayer.getElements().size();
+    			while (layerIter.nextIndex() < currentLayer.rank - layerOffset) {
+    				Layer layer = layerIter.next();
+    				if (layer.getElements().size() <= currentSize) {
+    					// move the current element to the new layer
+    					elemIter.remove();
+    					element.setLayer(layer);
+    					break;
+    				}
+    			}
 			}
 		}
 	}

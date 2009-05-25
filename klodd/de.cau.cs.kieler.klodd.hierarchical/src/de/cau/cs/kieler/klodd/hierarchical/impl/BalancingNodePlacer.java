@@ -44,6 +44,8 @@ public class BalancingNodePlacer extends AbstractAlgorithm implements
 	private float maxWidth;
 	/** layout direction for this algorithm instance */
 	private LayoutDirection layoutDirection;
+	/** indicates whether node balancing has priority over diagram size */
+	private boolean balanceOverSize;
 	/** array of move requests for the linear segments */
 	float[] moveRequests;
 	
@@ -60,17 +62,20 @@ public class BalancingNodePlacer extends AbstractAlgorithm implements
 		this.basicNodePlacer = basicNodePlacer;
 	}
 	
-	/* (non-Javadoc)
-	 * @see de.cau.cs.kieler.klodd.hierarchical.modules.INodePlacer#placeNodes(de.cau.cs.kieler.klodd.hierarchical.structures.LayeredGraph, float)
+	/*
+	 * (non-Javadoc)
+	 * @see de.cau.cs.kieler.klodd.hierarchical.modules.INodePlacer#placeNodes(de.cau.cs.kieler.klodd.hierarchical.structures.LayeredGraph, float, boolean)
 	 */
-	public void placeNodes(LayeredGraph layeredGraph, float minDist) {
+	public void placeNodes(LayeredGraph layeredGraph, float minDist,
+	        boolean balanceOverSize) {
 		getMonitor().begin("Balancing node placement", 2);
 		
 		this.minDist = minDist;
 		this.layoutDirection = layeredGraph.getLayoutDirection();
+		this.balanceOverSize = balanceOverSize;
 		// apply the basic node placement
 		basicNodePlacer.reset(getMonitor().subTask(1));
-		basicNodePlacer.placeNodes(layeredGraph, minDist);
+		basicNodePlacer.placeNodes(layeredGraph, minDist, balanceOverSize);
 		int movableCount = basicNodePlacer.getMovableSegments().length;
 		
 		// create array of move requests
@@ -140,6 +145,17 @@ public class BalancingNodePlacer extends AbstractAlgorithm implements
 			}
 		}
 		
+	    // set proper crosswise dimension for the whole graph
+        for (Layer layer2 : layeredGraph.getLayers()) {
+            LayerElement lastElem = layer2.getElements().get(layer2.getElements().size() - 1);
+            layer.crosswiseDim = (layoutDirection == LayoutDirection.VERTICAL
+                    ? lastElem.getPosition().getX() + lastElem.getRealWidth()
+                    : lastElem.getPosition().getY() + lastElem.getRealHeight())
+                    + minDist;
+            layeredGraph.crosswiseDim = Math.max(layeredGraph.crosswiseDim,
+                    layer2.crosswiseDim); 
+        }
+		
 		getMonitor().done();
 	}
 	
@@ -182,7 +198,9 @@ public class BalancingNodePlacer extends AbstractAlgorithm implements
 	private void validateRequests(Layer layer) {
 		ListIterator<LayerElement> elemIter = layer.getElements().listIterator(
 				layer.getElements().size());
-		float maxMove = maxWidth - layer.crosswiseDim;
+		float maxMove = Float.MAX_VALUE;
+		if (!balanceOverSize)
+		    maxMove = maxWidth - layer.crosswiseDim;
 		while (elemIter.hasPrevious()) {
 			LayerElement element = elemIter.previous();
 			float elemRequest = moveRequests[element.linearSegment.rank];
