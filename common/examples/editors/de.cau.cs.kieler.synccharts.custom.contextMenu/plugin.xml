@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<?eclipse version="3.2"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.help.toc">
+      <toc
+            file="toc.xml">
+      </toc>
+      <toc
+            file="testToc.xml"
+            primary="true">
+      </toc>
+   </extension>
+   
+   <extension point="org.eclipse.ui.commands">
+	  <category name="SSM2" description="Commands related to SSM diagrams." id="org.eclipse.gmf.category.synccharts"/>
+	  <command categoryId="org.eclipse.gmf.category.synccharts" description="Adds a new OnEntryAction" id="de.cau.cs.kieler.synccharts.custom.contextMenu.addEntryAction" name="Add OnEntryAction">
+	  </command>
+   </extension>
+   
+    <extension point="org.eclipse.ui.commands">
+	  <category name="SSM2" description="Commands related to SSM diagrams." id="org.eclipse.gmf.category.synccharts"/>
+	  <command categoryId="org.eclipse.gmf.category.synccharts" description="Adds a new OnInsideAction" id="de.cau.cs.kieler.synccharts.custom.contextMenu.addInnerAction" name="Add OnInsideAction">
+	  </command>
+   </extension>
+   
+   <extension point="org.eclipse.ui.commands">
+	  <category name="SSM2" description="Commands related to SSM diagrams." id="org.eclipse.gmf.category.synccharts"/>
+	  <command categoryId="org.eclipse.gmf.category.synccharts" description="Adds a new OnExitAction" id="de.cau.cs.kieler.synccharts.custom.contextMenu.addExitAction" name="Add OnExitAction">
+	  </command>
+   </extension>
+   
+   <extension point="org.eclipse.ui.commands">
+	  <category name="SSM2" description="Commands related to SSM diagrams." id="org.eclipse.gmf.category.synccharts"/>
+	  <command categoryId="org.eclipse.gmf.category.synccharts" description="Adds a new Signal" id="de.cau.cs.kieler.synccharts.custom.contextMenu.addSignal" name="Add Signal">
+	  </command>
+   </extension>
+   
+   <extension point="org.eclipse.ui.commands">
+	  <category name="SSM2" description="Commands related to SSM diagrams." id="org.eclipse.gmf.category.synccharts"/>
+	  <command categoryId="org.eclipse.gmf.category.synccharts" description="Adds a new Variable" id="de.cau.cs.kieler.synccharts.custom.contextMenu.addVariable" name="Add Variable">
+	  </command>
+   </extension>
+   
+   <extension point="org.eclipse.ui.commands">
+	  <category name="SSM2" description="Commands related to SSM diagrams." id="org.eclipse.gmf.category.synccharts"/>
+	  <command categoryId="org.eclipse.gmf.category.synccharts" description="Adds a new SuspensionTrigger" id="de.cau.cs.kieler.synccharts.custom.contextMenu.addSuspensionTrigger" name="Add SuspensionTrigger">
+	  </command>
+   </extension>
+   
+   <extension point="org.eclipse.ui.commands">
+	  <category name="SSM2" description="Commands related to SSM diagrams." id="org.eclipse.gmf.category.synccharts"/>
+	  <command categoryId="org.eclipse.gmf.category.synccharts" description="Adds a new Region" id="de.cau.cs.kieler.synccharts.custom.contextMenu.addRegion" name="Add Region">
+	  </command>
+   </extension>
+   
+   <extension point="org.eclipse.ui.commands">
+	  <category name="SSM2" description="Commands related to SSM diagrams." id="org.eclipse.gmf.category.synccharts"/>
+	  <command categoryId="org.eclipse.gmf.category.synccharts" description="Adds a new State" id="de.cau.cs.kieler.synccharts.custom.contextMenu.addState" name="Add State">
+	  </command>
+   </extension>
+   
+   <extension point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            adaptable="false"
+            id="de.cau.cs.kieler.synccharts.diagram.ui.objectContribution.StateEditPart"
+            objectClass="de.cau.cs.kieler.synccharts.diagram.edit.parts.StateEditPart">
+         <menu 
+            id="ElementInsert" 
+            label="Insert Element" 
+            path="additions"> 
+            <separator name="group1"/>
+            <separator name="group2"/>
+            <separator name="group3"/>
+            <separator name="group4"/>
+         </menu>
+         <action
+               class="de.cau.cs.kieler.synccharts.custom.contextMenu.AddSuspensionTriggerAction"
+               definitionId="de.cau.cs.kieler.synccharts.custom.contextMenu.AddSuspensionTrigger"
+               enablesFor="1"
+               id="de.cau.cs.kieler.synccharts.custom.contextMenu.AddSuspensionTriggerActionID"
+               label="Add SuspensionTrigger"
+               menubarPath="ElementInsert/group4">
+         </action>
+         <action
+               class="de.cau.cs.kieler.synccharts.custom.contextMenu.AddExitActionAction"
+               definitionId="de.cau.cs.kieler.synccharts.custom.contextMenu.AddExitAction"
+               enablesFor="1"
+               id="de.cau.cs.kieler.synccharts.custom.contextMenu.AddExitActionActionID"
+               label="Add OnExitAction"
+               menubarPath="ElementInsert/group3">
+         </action>
+         <action
+               class="de.cau.cs.kieler.synccharts.custom.contextMenu.AddInnerActionAction"
+               definitionId="de.cau.cs.kieler.synccharts.custom.contextMenu.AddInnerAction"
+               enablesFor="1"
+               id="de.cau.cs.kieler.synccharts.custom.contextMenu.AddInnerActionActionID"
+               label="Add OnInsideAction"
+               menubarPath="ElementInsert/group3">
+         </action>
+         <action
+               class="de.cau.cs.kieler.synccharts.custom.contextMenu.AddEntryActionAction"
+               definitionId="de.cau.cs.kieler.synccharts.custom.contextMenu.AddEntryAction"
+               enablesFor="1"
+               id="de.cau.cs.kieler.synccharts.custom.contextMenu.AddEntryActionActionID"
+               label="Add OnEntryAction"
+               menubarPath="ElementInsert/group3">
+         </action>
+         <action
+               class="de.cau.cs.kieler.synccharts.custom.contextMenu.AddVariableAction"
+               definitionId="de.cau.cs.kieler.synccharts.custom.contextMenu.AddVariable"
+               enablesFor="1"
+               id="de.cau.cs.kieler.synccharts.custom.contextMenu.AddVariableActionID"
+               label="Add Variable"
+               menubarPath="ElementInsert/group2">
+         </action>
+         <action
+               class="de.cau.cs.kieler.synccharts.custom.contextMenu.AddSignalAction"
+               definitionId="de.cau.cs.kieler.synccharts.custom.contextMenu.AddSignal"
+               enablesFor="1"
+               id="de.cau.cs.kieler.synccharts.custom.contextMenu.AddSignalActionID"
+               label="Add Signal"
+               menubarPath="ElementInsert/group2">
+         </action>
+         <action
+               class="de.cau.cs.kieler.synccharts.custom.contextMenu.AddRegionAction"
+               definitionId="de.cau.cs.kieler.synccharts.custom.contextMenu.AddRegion"
+               enablesFor="1"
+               id="de.cau.cs.kieler.synccharts.custom.contextMenu.AddRegionActionID"
+               label="Add Region"
+               menubarPath="ElementInsert/group1">
+         </action>
+      </objectContribution>
+      
+      <objectContribution
+            adaptable="false"
+            id="de.cau.cs.kieler.synccharts.diagram.ui.objectContribution.State2EditPart"
+            objectClass="de.cau.cs.kieler.synccharts.diagram.edit.parts.State2EditPart">
+         <menu 
+            id="ElementInsert" 
+            label="Insert Element" 
+            path="additions"> 
+            <separator name="group1"/>
+            <separator name="group2"/>
+            <separator name="group3"/>
+            <separator name="group4"/>
+         </menu>
+          <action
+               class="de.cau.cs.kieler.synccharts.custom.contextMenu.AddSuspensionTrigger2Action"
+               definitionId="de.cau.cs.kieler.synccharts.custom.contextMenu.AddSuspensionTrigger2"
+               enablesFor="1"
+               id="de.cau.cs.kieler.synccharts.custom.contextMenu.AddSuspensionTrigger2ActionID"
+               label="Add SuspensionTrigger"
+               menubarPath="ElementInsert/group4">
+         </action>
+         <action
+               class="de.cau.cs.kieler.synccharts.custom.contextMenu.AddExitAction2Action"
+               definitionId="de.cau.cs.kieler.synccharts.custom.contextMenu.AddExitAction2"
+               enablesFor="1"
+               id="de.cau.cs.kieler.synccharts.custom.contextMenu.AddExitAction2ActionID"
+               label="Add OnExitAction"
+               menubarPath="ElementInsert/group3">
+         </action>
+         <action
+               class="de.cau.cs.kieler.synccharts.custom.contextMenu.AddInnerAction2Action"
+               definitionId="de.cau.cs.kieler.synccharts.custom.contextMenu.AddInnerAction2"
+               enablesFor="1"
+               id="de.cau.cs.kieler.synccharts.custom.contextMenu.AddInnerAction2ActionID"
+               label="Add OnInsideAction"
+               menubarPath="ElementInsert/group3">
+         </action>
+         <action
+               class="de.cau.cs.kieler.synccharts.custom.contextMenu.AddEntryAction2Action"
+               definitionId="de.cau.cs.kieler.synccharts.custom.contextMenu.AddEntryAction2"
+               enablesFor="1"
+               id="de.cau.cs.kieler.synccharts.custom.contextMenu.AddEntryAction2ActionID"
+               label="Add OnEntryAction"
+               menubarPath="ElementInsert/group3">
+         </action>
+         <action
+               class="de.cau.cs.kieler.synccharts.custom.contextMenu.AddVariable2Action"
+               definitionId="de.cau.cs.kieler.synccharts.custom.contextMenu.AddVariable2"
+               enablesFor="1"
+               id="de.cau.cs.kieler.synccharts.custom.contextMenu.AddVariabl2eActionID"
+               label="Add Variable"
+               menubarPath="ElementInsert/group2">
+         </action>
+         <action
+               class="de.cau.cs.kieler.synccharts.custom.contextMenu.AddSignal2Action"
+               definitionId="de.cau.cs.kieler.synccharts.custom.contextMenu.AddSignal2"
+               enablesFor="1"
+               id="de.cau.cs.kieler.synccharts.custom.contextMenu.AddSignal2ActionID"
+               label="Add Signal"
+               menubarPath="ElementInsert/group2">
+         </action>
+         <action
+               class="de.cau.cs.kieler.synccharts.custom.contextMenu.AddRegion2Action"
+               definitionId="de.cau.cs.kieler.synccharts.custom.contextMenu.AddRegion2"
+               enablesFor="1"
+               id="de.cau.cs.kieler.synccharts.custom.contextMenu.AddRegion2ActionID"
+               label="Add Region"
+               menubarPath="ElementInsert/group1">
+         </action>
+      </objectContribution>
+      
+      <objectContribution
+            adaptable="false"
+            id="de.cau.cs.kieler.synccharts.diagram.ui.objectContribution.RegionEditPart"
+            objectClass="de.cau.cs.kieler.synccharts.diagram.edit.parts.RegionEditPart">
+         <menu 
+            id="ElementInsert" 
+            label="Insert Element" 
+            path="additions"> 
+            <separator name="group1"/>
+         </menu>
+         <action
+               class="de.cau.cs.kieler.synccharts.custom.contextMenu.AddStateAction"
+               definitionId="de.cau.cs.kieler.synccharts.custom.contextMenu.AddState"
+               enablesFor="1"
+               id="de.cau.cs.kieler.synccharts.custom.contextMenu.AddStateActionID"
+               label="Add State"
+               menubarPath="ElementInsert/group1">
+         </action>
+      </objectContribution>
+      
+      <objectContribution
+            adaptable="false"
+            id="de.cau.cs.kieler.synccharts.diagram.ui.objectContribution.Region2EditPart"
+            objectClass="de.cau.cs.kieler.synccharts.diagram.edit.parts.Region2EditPart">
+         <menu 
+            id="ElementInsert" 
+            label="Insert Element" 
+            path="additions"> 
+            <separator name="group1"/>
+         </menu>
+         <action
+               class="de.cau.cs.kieler.synccharts.custom.contextMenu.AddState2Action"
+               definitionId="de.cau.cs.kieler.synccharts.custom.contextMenu.AddState2"
+               enablesFor="1"
+               id="de.cau.cs.kieler.synccharts.custom.contextMenu.AddState2ActionID"
+               label="Add State"
+               menubarPath="ElementInsert/group1">
+         </action>
+      </objectContribution>
+      
+   </extension>
+
+</plugin>
