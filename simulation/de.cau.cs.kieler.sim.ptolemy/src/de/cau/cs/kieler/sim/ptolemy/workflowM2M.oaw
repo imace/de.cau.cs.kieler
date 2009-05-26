@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<workflow>
+	<property name="emfmetamodel" value="platform:/resource/de.cau.cs.kieler.sim.ptolemy/simplerailctrl.ecore" />
+	<property name="ptometamodel" value="platform:/resource/de.cau.cs.kieler.sim.ptolemy/MoML.ecore" />
+	
+	<property name="emfmodel" value="platform:/resource/de.cau.cs.kieler.sim.ptolemy/girlsday.simplerailctrl" />
+
+	<!-- set up EMF for standalone execution -->
+	<bean class="org.eclipse.mwe.emf.StandaloneSetup" >
+		<platformUri value=".."/>
+	</bean>
+	
+	<!-- load model and store it in slot 'emfmodel' -->
+	<component class="org.eclipse.mwe.emf.Reader">
+	    <uri value="${emfmodel}" />
+		<!-- <uri value="platform:/resource/${model}" />  -->
+		<modelSlot value="emfmodel" />
+	</component>
+	
+	
+	<!-- load emfmetamodel, load ptometamodel -->
+	<!-- perform transformation -->
+	<component class="oaw.xtend.XtendComponent">
+		<metaModel id="emfmm" class="oaw.type.emf.EmfMetaModel">
+			<metaModelFile value="${emfmetamodel}" />
+		</metaModel>
+		<metaModel id="ptomm" class="oaw.type.emf.EmfMetaModel">
+			<metaModelFile value="${ptometamodel}" />
+		</metaModel>
+		<invoke value="ecore2moml::transform(emfmodel)" />
+		<outputSlot value="ptomodel" />
+	</component>
+
+
+	<!-- store as xml -->
+	<component class="org.openarchitectureware.xsd.XMLWriter">
+		<metaModel idRef="ptomm" />
+		<modelSlot value="ptomodel" />
+		<uri value="c:/railcontroller.moml" />
+	</component>
+	
+</workflow>
