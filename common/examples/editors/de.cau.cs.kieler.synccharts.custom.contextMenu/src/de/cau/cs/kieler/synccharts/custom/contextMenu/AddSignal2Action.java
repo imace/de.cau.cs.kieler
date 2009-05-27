@@ -30,7 +30,6 @@ public class AddSignal2Action implements IActionDelegate {
 	private State2EditPart selectedElement;
 	private StateSignalCompartment2EditPart signalCompartment;
 	
-	@Override
 	public void run(IAction action) {
 		
 		// Search for signal compartment
@@ -69,7 +68,6 @@ public class AddSignal2Action implements IActionDelegate {
 	}
 
 	// Update variables upon selection change
-	@Override
 	public void selectionChanged(IAction action, ISelection selection) {
 		try {
 			currentSelection = (IStructuredSelection) selection;

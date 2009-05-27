@@ -34,7 +34,6 @@ public class AddInnerActionAction implements IActionDelegate {
 	private StateEditPart selectedElement;
 	private StateInnerActionsCompartmentEditPart innerActionsCompartment;
 	
-	@Override
 	public void run(IAction action) {
 		
 		// Search for inner action compartment
@@ -73,7 +72,6 @@ public class AddInnerActionAction implements IActionDelegate {
 	}
 
 	// Update variables upon selection change
-	@Override
 	public void selectionChanged(IAction action, ISelection selection) {
 		try {
 			currentSelection = (IStructuredSelection) selection;

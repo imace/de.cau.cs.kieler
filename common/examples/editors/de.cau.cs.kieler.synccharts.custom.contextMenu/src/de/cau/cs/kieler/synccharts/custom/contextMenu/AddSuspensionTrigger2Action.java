@@ -30,7 +30,6 @@ public class AddSuspensionTrigger2Action implements IActionDelegate {
 	private State2EditPart selectedElement;
 	private StateSuspensionTriggerCompartment2EditPart suspensionTriggerCompartment;
 	
-	@Override
 	public void run(IAction action) {
 		
 		// Search for suspensionTrigger compartment
@@ -69,7 +68,6 @@ public class AddSuspensionTrigger2Action implements IActionDelegate {
 	}
 
 	// Update variables upon selection change
-	@Override
 	public void selectionChanged(IAction action, ISelection selection) {
 		try {
 			currentSelection = (IStructuredSelection) selection;

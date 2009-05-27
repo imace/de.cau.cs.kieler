@@ -30,7 +30,6 @@ public class AddVariableAction implements IActionDelegate {
 	private StateEditPart selectedElement;
 	private StateVariableCompartmentEditPart variableCompartment;
 	
-	@Override
 	public void run(IAction action) {
 		
 		// Search for variable compartment
@@ -69,7 +68,6 @@ public class AddVariableAction implements IActionDelegate {
 	}
 
 	// Update variables upon selection change
-	@Override
 	public void selectionChanged(IAction action, ISelection selection) {
 		try {
 			currentSelection = (IStructuredSelection) selection;

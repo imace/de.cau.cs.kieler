@@ -35,7 +35,6 @@ public class AddExitAction2Action implements IActionDelegate {
 	private State2EditPart selectedElement;
 	private StateExitActionsCompartment2EditPart exitActionsCompartment;
 	
-	@Override
 	public void run(IAction action) {
 		
 		// Search for exit action compartment
@@ -74,7 +73,6 @@ public class AddExitAction2Action implements IActionDelegate {
 	}
 
 	// Update variables upon selection change
-	@Override
 	public void selectionChanged(IAction action, ISelection selection) {
 		try {
 			currentSelection = (IStructuredSelection) selection;

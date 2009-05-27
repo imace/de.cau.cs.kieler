@@ -34,7 +34,6 @@ public class AddEntryActionAction implements IActionDelegate {
 	private StateEditPart selectedElement;
 	private StateEntryActionsCompartmentEditPart entryActionCompartment;
 	
-	@Override
 	public void run(IAction action) {
 		
 		// Search for region compartment
@@ -73,7 +72,6 @@ public class AddEntryActionAction implements IActionDelegate {
 	}
 
 	// Update variables upon selection change
-	@Override
 	public void selectionChanged(IAction action, ISelection selection) {
 		try {
 			currentSelection = (IStructuredSelection) selection;
