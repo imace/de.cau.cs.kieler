@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <feature url="features/de.cau.cs.kieler.ssm_0.1.0.jar" id="de.cau.cs.kieler.ssm" version="0.1.0">
-      <category name="KIELER"/>
-   </feature>
-   <feature url="features/de.cau.cs.kieler.klodd_1.0.0.jar" id="de.cau.cs.kieler.klodd" version="1.0.0">
+   <feature url="features/de.cau.cs.kieler.synccharts.feature_0.1.0.jar" id="de.cau.cs.kieler.synccharts.feature" version="0.1.0">
       <category name="KIELER"/>
    </feature>
    <category-def name="KIELER" label="KIELER">
