@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.views">
+      <category
+            id="de.cau.cs.kieler"
+            name="KIELER (Kiel Integrated Environment for Layout Eclipse RCP)">
+      </category>
+      <view
+            category="de.cau.cs.kieler"
+            class="de.cau.cs.kieler.sim.kiem.views.KIEMView"
+            icon="icons/sample.gif"
+            id="de.cau.cs.kieler.sim.kiem.view"
+            name="KIEM (KIELER Execution Manager)"
+            restorable="true">
+      </view>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="*">
+         <view
+               id="de.cau.cs.kieler.sim.kiem.views.KIEM"
+               minimized="false"
+               relationship="right"
+               relative="org.eclipse.ui.views.TaskList">
+         </view>
+      </perspectiveExtension>
+   </extension>
+
+
+</plugin>
