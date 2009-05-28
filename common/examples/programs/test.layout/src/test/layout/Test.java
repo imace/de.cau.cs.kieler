@@ -119,7 +119,7 @@ public class Test {
             childLayout.setWidth(30.0f);
             childLayout.setHeight(30.0f);
             // set fixed size for the child
-            LayoutOptions.setFixedSize(childLayout);
+            LayoutOptions.setFixedSize(childLayout, true);
             // set port constraints to fixed port positions
             LayoutOptions.setPortConstraints(childLayout,
                     PortConstraints.FIXED_POS);
