@@ -37,7 +37,7 @@ Signal [synccharts::Signal] :
 	
 Variable [synccharts::Variable] :
 
-	vname=ID | value=INT;
+	name=ID | value=INT;
 	
 Operator [synccharts::Operator] :
 
