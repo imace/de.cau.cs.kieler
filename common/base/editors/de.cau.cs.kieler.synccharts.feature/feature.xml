@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="de.cau.cs.kieler.synccharts.feature"
-      label="Synchcharts Editor"
+      label="KIELER Synccharts Editor"
       version="0.1.0"
       provider-name="Christian-Albrechts-Universität zu Kiel">
 
@@ -104,6 +104,7 @@ This Agreement is governed by the laws of the State of New York and the intellec
    </license>
 
    <url>
+      <update label="KIELER Update Site" url="http://rtsys.informatik.uni-kiel.de/~kieler/updatesite"/>
       <discovery label="openArchitectureware Update Site" url="http://www.openarchitectureware.org/updatesite/milestone/site.xml"/>
    </url>
 
@@ -120,8 +121,6 @@ This Agreement is governed by the laws of the State of New York and the intellec
       <import plugin="org.eclipse.draw2d"/>
       <import plugin="org.eclipse.gmf.runtime.draw2d.ui" version="1.1.2" match="greaterOrEqual"/>
       <import plugin="org.eclipse.gmf.runtime.diagram.ui" version="1.1.2" match="greaterOrEqual"/>
-      <import plugin="de.cau.cs.kieler.synccharts" version="1.0.0" match="greaterOrEqual"/>
-      <import plugin="de.cau.cs.kieler.synccharts.dsl" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="org.openarchitectureware.xtext.core" version="4.3.1" match="greaterOrEqual"/>
       <import plugin="org.openarchitectureware.xtext.core.base" version="4.3.1" match="greaterOrEqual"/>
       <import plugin="org.openarchitectureware.xtext.editor" version="4.3.1" match="greaterOrEqual"/>
@@ -132,7 +131,6 @@ This Agreement is governed by the laws of the State of New York and the intellec
       <import plugin="org.eclipse.gef"/>
       <import plugin="org.eclipse.gmf.runtime.common.ui" version="1.1.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.gef" version="3.4.1" match="greaterOrEqual"/>
-      <import plugin="de.cau.cs.kieler.synccharts.diagram" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.core.resources"/>
       <import plugin="org.eclipse.core.expressions"/>
       <import plugin="org.eclipse.jface"/>
@@ -164,56 +162,56 @@ This Agreement is governed by the laws of the State of New York and the intellec
          id="de.cau.cs.kieler.synccharts"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="0.1.0"
          unpack="false"/>
 
    <plugin
          id="de.cau.cs.kieler.synccharts.custom"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="0.1.0"
          unpack="false"/>
 
    <plugin
          id="de.cau.cs.kieler.synccharts.custom.contextMenu"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="0.1.0"
          unpack="false"/>
 
    <plugin
          id="de.cau.cs.kieler.synccharts.diagram"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="0.1.0"
          unpack="false"/>
 
    <plugin
          id="de.cau.cs.kieler.synccharts.dsl"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="0.1.0"
          unpack="false"/>
 
    <plugin
          id="de.cau.cs.kieler.synccharts.dsl.editor"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="0.1.0"
          unpack="false"/>
 
    <plugin
          id="de.cau.cs.kieler.synccharts.dsl.generator"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="0.1.0"
          unpack="false"/>
 
    <plugin
          id="de.cau.cs.kieler.synccharts.edit"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="0.1.0"
          unpack="false"/>
 
 </feature>
