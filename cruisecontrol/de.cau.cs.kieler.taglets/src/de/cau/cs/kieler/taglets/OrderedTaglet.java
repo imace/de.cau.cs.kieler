@@ -19,25 +19,17 @@ import com.sun.javadoc.Tag;
 import com.sun.tools.doclets.Taglet;
 
 /**
- * Taglet for generated code.
+ * Taglet for "ordered" tags in generated code.
  * 
  * @author msp
  */
-public class GeneratedTaglet implements Taglet {
+public class OrderedTaglet implements Taglet {
 
     /** the name of this taglet */
-    private final String NAME = "generated";
-    /** indicator for elements that are NOT generated */
-    private final String NEGATION = "NOT";
-    /** printed header for generated elements */
-    private final String POS_HEADER = "Generated:";
-    /** printed text for generated elements */
-    private final String POS_TEXT = "This code was automatically generated.";
-    /** printed header for elements that are NOT generated */
-    private final String NEG_HEADER = "Not generated:";
-    /** printed text for elements that are NOT generated */
-    private final String NEG_TEXT = "This code was hand-written.";
-    
+    private final String NAME = "ordered";
+    /** printed header for this taglet */
+    private final String HEADER = "Ordered";
+
     /* (non-Javadoc)
      * @see com.sun.tools.doclets.Taglet#getName()
      */
@@ -49,7 +41,7 @@ public class GeneratedTaglet implements Taglet {
      * @see com.sun.tools.doclets.Taglet#inConstructor()
      */
     public boolean inConstructor() {
-        return true;
+        return false;
     }
 
     /* (non-Javadoc)
@@ -63,7 +55,7 @@ public class GeneratedTaglet implements Taglet {
      * @see com.sun.tools.doclets.Taglet#inMethod()
      */
     public boolean inMethod() {
-        return true;
+        return false;
     }
 
     /* (non-Javadoc)
@@ -77,14 +69,14 @@ public class GeneratedTaglet implements Taglet {
      * @see com.sun.tools.doclets.Taglet#inPackage()
      */
     public boolean inPackage() {
-        return true;
+        return false;
     }
 
     /* (non-Javadoc)
      * @see com.sun.tools.doclets.Taglet#inType()
      */
     public boolean inType() {
-        return true;
+        return false;
     }
 
     /* (non-Javadoc)
@@ -98,34 +90,16 @@ public class GeneratedTaglet implements Taglet {
      * @see com.sun.tools.doclets.Taglet#toString(com.sun.javadoc.Tag)
      */
     public String toString(Tag tag) {
-        return getOutput(!tag.text().startsWith(NEGATION));
+        return "<dt><b>" + HEADER + "</b><dd></dd>\n";
     }
 
     /* (non-Javadoc)
      * @see com.sun.tools.doclets.Taglet#toString(com.sun.javadoc.Tag[])
      */
     public String toString(Tag[] tagArray) {
-        for (Tag tag : tagArray) {
-            if (tag.text().startsWith(NEGATION))
-                return getOutput(false);
-        }
-        return getOutput(true);
+        return "<dt><b>" + HEADER + "</b><dd></dd>\n";
     }
-    
-    /**
-     * Writes the output string for this taglet.
-     * 
-     * @param isGenerated indicates whether the corresponding element was
-     *     generated or not
-     * @return an HTML formatted string
-     */
-    private String getOutput(boolean isGenerated) {
-        if (isGenerated)
-            return "<dt><b>" + POS_HEADER + "</b><dd>" + POS_TEXT + "</dd>\n";
-        else
-            return "<dt><b>" + NEG_HEADER + "</b><dd>" + NEG_TEXT + "</dd>\n";
-    }
-    
+
     /**
      * Register this Taglet.
      * 
@@ -133,12 +107,12 @@ public class GeneratedTaglet implements Taglet {
      */
     @SuppressWarnings("unchecked")
     public static void register(Map tagletMap) {
-        Taglet newTaglet = new GeneratedTaglet();
+        Taglet newTaglet = new OrderedTaglet();
         Taglet oldTaglet = (Taglet)tagletMap.get(newTaglet.getName());
         if (oldTaglet != null) {
             tagletMap.remove(newTaglet.getName());
         }
         tagletMap.put(newTaglet.getName(), newTaglet);
     }
-
+    
 }

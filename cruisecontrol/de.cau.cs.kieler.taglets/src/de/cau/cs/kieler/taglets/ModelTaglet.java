@@ -14,29 +14,21 @@
 package de.cau.cs.kieler.taglets;
 
 import java.util.Map;
+import java.util.StringTokenizer;
 
 import com.sun.javadoc.Tag;
 import com.sun.tools.doclets.Taglet;
 
 /**
- * Taglet for generated code.
  * 
  * @author msp
  */
-public class GeneratedTaglet implements Taglet {
+public class ModelTaglet implements Taglet {
 
     /** the name of this taglet */
-    private final String NAME = "generated";
-    /** indicator for elements that are NOT generated */
-    private final String NEGATION = "NOT";
-    /** printed header for generated elements */
-    private final String POS_HEADER = "Generated:";
-    /** printed text for generated elements */
-    private final String POS_TEXT = "This code was automatically generated.";
-    /** printed header for elements that are NOT generated */
-    private final String NEG_HEADER = "Not generated:";
-    /** printed text for elements that are NOT generated */
-    private final String NEG_TEXT = "This code was hand-written.";
+    private final String NAME = "model";
+    /** printed header for this taglet */
+    private final String HEADER = "Model element:";
     
     /* (non-Javadoc)
      * @see com.sun.tools.doclets.Taglet#getName()
@@ -77,7 +69,7 @@ public class GeneratedTaglet implements Taglet {
      * @see com.sun.tools.doclets.Taglet#inPackage()
      */
     public boolean inPackage() {
-        return true;
+        return false;
     }
 
     /* (non-Javadoc)
@@ -98,34 +90,34 @@ public class GeneratedTaglet implements Taglet {
      * @see com.sun.tools.doclets.Taglet#toString(com.sun.javadoc.Tag)
      */
     public String toString(Tag tag) {
-        return getOutput(!tag.text().startsWith(NEGATION));
+        return toString(new Tag[] {tag});
     }
 
     /* (non-Javadoc)
      * @see com.sun.tools.doclets.Taglet#toString(com.sun.javadoc.Tag[])
      */
     public String toString(Tag[] tagArray) {
+        StringBuffer output = new StringBuffer("<dt><b>" + HEADER + "</b><dd><table>");
         for (Tag tag : tagArray) {
-            if (tag.text().startsWith(NEGATION))
-                return getOutput(false);
+            StringTokenizer tokenizer = new StringTokenizer(tag.text(), " \n\r\t");
+            while (tokenizer.hasMoreTokens()) {
+                String nextToken = tokenizer.nextToken();
+                int separatorPos = nextToken.indexOf('=');
+                if (separatorPos > 0) {
+                    String valueString = nextToken.substring(separatorPos + 1);
+                    if (valueString.charAt(0) == '\"'
+                        && valueString.charAt(valueString.length()-1) == '\"')
+                        valueString = valueString.substring(1, valueString.length() - 1);
+                    output.append("<tr><td>" + nextToken.substring(0, separatorPos)
+                            + "</td><td>=</td><td><i>" + valueString
+                            + "</i></td></tr>");
+                }
+            }
         }
-        return getOutput(true);
+        output.append("</table></dd>\n");
+        return output.toString();
     }
-    
-    /**
-     * Writes the output string for this taglet.
-     * 
-     * @param isGenerated indicates whether the corresponding element was
-     *     generated or not
-     * @return an HTML formatted string
-     */
-    private String getOutput(boolean isGenerated) {
-        if (isGenerated)
-            return "<dt><b>" + POS_HEADER + "</b><dd>" + POS_TEXT + "</dd>\n";
-        else
-            return "<dt><b>" + NEG_HEADER + "</b><dd>" + NEG_TEXT + "</dd>\n";
-    }
-    
+
     /**
      * Register this Taglet.
      * 
@@ -133,12 +125,12 @@ public class GeneratedTaglet implements Taglet {
      */
     @SuppressWarnings("unchecked")
     public static void register(Map tagletMap) {
-        Taglet newTaglet = new GeneratedTaglet();
+        Taglet newTaglet = new ModelTaglet();
         Taglet oldTaglet = (Taglet)tagletMap.get(newTaglet.getName());
         if (oldTaglet != null) {
             tagletMap.remove(newTaglet.getName());
         }
         tagletMap.put(newTaglet.getName(), newTaglet);
     }
-
+    
 }
