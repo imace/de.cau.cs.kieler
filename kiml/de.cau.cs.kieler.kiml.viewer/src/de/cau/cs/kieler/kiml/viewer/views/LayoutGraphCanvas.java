@@ -559,10 +559,12 @@ public class LayoutGraphCanvas extends Canvas implements PaintListener {
             graphics.setAlpha(EDGE_ALPHA);
             graphics.setFont(edgeFont);
             for (KEdge edge : child.getIncomingEdges()) {
-                paintEdge(edge, graphics, area, subOffset);
+                if (edge.getSource().getParent() != child)
+                    paintEdge(edge, graphics, area, subOffset);
             }
             for (KEdge edge : child.getOutgoingEdges()) {
-                paintEdge(edge, graphics, area, subOffset);
+                if (edge.getTarget().getParent() != child)
+                    paintEdge(edge, graphics, area, subOffset);
             }
         }
     }

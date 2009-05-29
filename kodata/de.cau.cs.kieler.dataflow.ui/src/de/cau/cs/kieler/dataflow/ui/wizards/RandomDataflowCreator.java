@@ -16,11 +16,12 @@ public class RandomDataflowCreator {
 	 */
 	float hierarchyProb = 0.1f;
 
-	DataflowModel createModel(int nodes, int connections, float hierarchyProb) {
+	DataflowModel createModel(int nodes, int minConnections,
+	        int maxConnections, float hierarchyProb) {
 		this.hierarchyProb = hierarchyProb;
 		DataflowModel dm = df.createDataflowModel();
 
-		createBoxes(dm, nodes, connections);
+		createBoxes(dm, nodes, minConnections, maxConnections);
 
 		return dm;
 	}
@@ -29,12 +30,8 @@ public class RandomDataflowCreator {
 	 * Creates a set of child subboxes in the parent, each box will have the
 	 * given amount of outgoing connections. New hierarchy levels are introduced
 	 * by random by the hierarchyProb variable.
-	 * 
-	 * @param parent
-	 * @param nodes
-	 * @param connections
 	 */
-	void createBoxes(Box parent, int nodes, int connections) {
+	void createBoxes(Box parent, int nodes, int minConnections, int maxConnections) {
 		if (nodes <= 0)
 			return;
 		do {
@@ -47,10 +44,12 @@ public class RandomDataflowCreator {
 		int thisLayerSize = parent.getBoxes().size();
 		for (Object box : parent.getBoxes()) {
 			// create new hierarchical layers by calling this recursively
-			createBoxes((Box) box, nodes / thisLayerSize, connections);
-			// connect inter level hierarchy levels (inputs with the box' children inputs)
+			createBoxes((Box) box, nodes / thisLayerSize, minConnections, maxConnections);
+			// connect inter-level hierarchy levels
 			connectInterlevelPorts((Box) box);
 			// connect this hierarchy layer
+			int connections = (int)Math.round(Math.random() * (maxConnections - minConnections))
+			        + minConnections;
 			for (int i = 0; i < connections; i++)
 				connectBox((Box) box, parent);
 		}
@@ -73,9 +72,9 @@ public class RandomDataflowCreator {
 
 		// create ports
 		OutputPort op = df.createOutputPort();
-		op.setName("output");
+		op.setName("");
 		InputPort ip = df.createInputPort();
-		ip.setName("input");
+		ip.setName("");
 		box.getOutputs().add(op);
 		randomBox.getInputs().add(ip);
 
@@ -105,7 +104,7 @@ public class RandomDataflowCreator {
 
 				// create new input port
 				InputPort ip = df.createInputPort();
-				ip.setName("input");
+				ip.setName("");
 				randomBox.getInputs().add(ip);
 
 				// connect ports
@@ -128,7 +127,7 @@ public class RandomDataflowCreator {
 
 				// create new output port
 				OutputPort op = df.createOutputPort();
-				op.setName("output");
+				op.setName("");
 				randomBox.getOutputs().add(op);
 
 				// connect ports

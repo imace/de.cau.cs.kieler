@@ -75,6 +75,7 @@ public class CreateRandomModelWizard extends Wizard implements INewWizard {
 	 * using wizard as execution context.
 	 */
 	public boolean performFinish() {
+	    page.storeDefaults();
 		final String containerName = page.getContainerName();
 		final String fileName = page.getFileName();
 		IRunnableWithProgress op = new IRunnableWithProgress() {
@@ -136,7 +137,9 @@ public class CreateRandomModelWizard extends Wizard implements INewWizard {
 		ResourceSet resourceSet = new ResourceSetImpl();
 		Resource emfResource = resourceSet.createResource(URI.createURI(file.getLocationURI().toString()));
 		RandomDataflowCreator modelCreator = new RandomDataflowCreator();
-		DataflowModel df = modelCreator.createModel(page.getNodes(), page.getConnections(), page.getHierarchyProb());
+		DataflowModel df = modelCreator.createModel(page.getNodes(),
+		        page.getMinConnections(), page.getMaxConnections(),
+		        page.getHierarchyProb());
 		emfResource.getContents().add(df);
 		try{
 			emfResource.save(Collections.EMPTY_MAP);

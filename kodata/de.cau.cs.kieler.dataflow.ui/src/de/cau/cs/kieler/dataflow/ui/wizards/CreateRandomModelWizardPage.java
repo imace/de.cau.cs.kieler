@@ -4,6 +4,7 @@ import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.WizardPage;
@@ -20,6 +21,8 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.dialogs.ContainerSelectionDialog;
 
+import de.cau.cs.kieler.dataflow.ui.Activator;
+
 /**
  * The "New" wizard page allows setting the container for the new file as well
  * as the file name. The page will only accept file name without the extension
@@ -32,16 +35,24 @@ public class CreateRandomModelWizardPage extends WizardPage {
 	private Text fileText;
 	
 	private Text nodeText;
-	private Text connectionText;
+	private Text minConnectionText;
+	private Text maxConnectionText;
 	private Text hierarchyText;
-
-	private int nodeDefault = 10;
-	private int connectionDefault = 2;
-	private float hierarchyDefault = 0.1f;
 	
-	private int nodes = nodeDefault;
-	private int connections = connectionDefault;
-	private float hierarchyProb = hierarchyDefault;
+	private static final String PREF_NODES = "nodes";
+	private static final String PREF_MIN_CONNECTIONS = "minConnections";
+	private static final String PREF_MAX_CONNECTIONS = "maxConnections";
+	private static final String PREF_HIERARCHY = "hierarchy";
+
+	private static final int DEF_NODES = 10;
+	private static final int DEF_MIN_CONNECTIONS = 0;
+	private static final int DEF_MAX_CONNECTIONS = 3;
+	private static final float DEF_HIERARCHY = 0.1f;
+	
+	private int nodes;
+	private int minConnections;
+	private int maxConnections;
+	private float hierarchyProb;
 	
 	private ISelection selection;
 
@@ -63,6 +74,7 @@ public class CreateRandomModelWizardPage extends WizardPage {
 	 * @see IDialogPage#createControl(Composite)
 	 */
 	public void createControl(Composite parent) {
+	    IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
 		Composite container = new Composite(parent, SWT.NULL);
 		GridLayout layout = new GridLayout();
 		container.setLayout(layout);
@@ -99,13 +111,16 @@ public class CreateRandomModelWizardPage extends WizardPage {
 			}
 		});
 		
-		// Specify amount of Nodes
+		// Specify number of Nodes
 		label = new Label(container, SWT.NULL); // empty label to fill grid
 		label = new Label(container, SWT.NULL);
-		label.setText("&Amount of Nodes:");
+		label.setText("&Number of nodes:");
 		
+		nodes = preferenceStore.getInt(PREF_NODES);
+		if (nodes <= 0)
+		    nodes = DEF_NODES;
 		nodeText = new Text(container, SWT.BORDER | SWT.SINGLE);
-		nodeText.setText(""+nodeDefault);
+		nodeText.setText(Integer.toString(nodes));
 		gd = new GridData(GridData.FILL_HORIZONTAL);
 		nodeText.setLayoutData(gd);
 		nodeText.addModifyListener(new ModifyListener() {
@@ -114,28 +129,52 @@ public class CreateRandomModelWizardPage extends WizardPage {
 			}
 		});
 		
-		// Specify amount of Connections
+		// Specify minimal number of Connections
 		label = new Label(container, SWT.NULL); // empty label to fill grid
 		label = new Label(container, SWT.NULL);
-		label.setText("&Amount of outgoing Connections per node:");
+		label.setText("&Minimal number of outgoing connections per node:");
 		
-		connectionText = new Text(container, SWT.BORDER | SWT.SINGLE);
-		connectionText.setText(""+connectionDefault);
+		minConnections = preferenceStore.getInt(PREF_MIN_CONNECTIONS);
+		if (minConnections < 0)
+		    minConnections = DEF_MIN_CONNECTIONS;
+		minConnectionText = new Text(container, SWT.BORDER | SWT.SINGLE);
+		minConnectionText.setText(Integer.toString(minConnections));
 		gd = new GridData(GridData.FILL_HORIZONTAL);
-		connectionText.setLayoutData(gd);
-		connectionText.addModifyListener(new ModifyListener() {
+		minConnectionText.setLayoutData(gd);
+		minConnectionText.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent e) {
 				dialogChanged();
 			}
 		});
+		
+	      // Specify number of Connections
+        label = new Label(container, SWT.NULL); // empty label to fill grid
+        label = new Label(container, SWT.NULL);
+        label.setText("Ma&ximal number of outgoing connections per node:");
+        
+        maxConnections = preferenceStore.getInt(PREF_MAX_CONNECTIONS);
+        if (maxConnections < minConnections)
+            maxConnections = Math.max(minConnections, DEF_MAX_CONNECTIONS);
+        maxConnectionText = new Text(container, SWT.BORDER | SWT.SINGLE);
+        maxConnectionText.setText(Integer.toString(maxConnections));
+        gd = new GridData(GridData.FILL_HORIZONTAL);
+        maxConnectionText.setLayoutData(gd);
+        maxConnectionText.addModifyListener(new ModifyListener() {
+            public void modifyText(ModifyEvent e) {
+                dialogChanged();
+            }
+        });
 		
 		// Specify probability of hierarchy level introduction
 		label = new Label(container, SWT.NULL); // empty label to fill grid
 		label = new Label(container, SWT.NULL);
 		label.setText("&Probability of introducing new hierarchy levels:");
 
+		hierarchyProb = preferenceStore.getFloat(PREF_HIERARCHY);
+		if (hierarchyProb < 0.0 || hierarchyProb > 1.0)
+		    hierarchyProb = DEF_HIERARCHY;
 		hierarchyText = new Text(container, SWT.BORDER | SWT.SINGLE);
-		hierarchyText.setText(""+hierarchyDefault);
+		hierarchyText.setText(Float.toString(hierarchyProb));
 		gd = new GridData(GridData.FILL_HORIZONTAL);
 		hierarchyText.setLayoutData(gd);
 		hierarchyText.addModifyListener(new ModifyListener() {
@@ -229,18 +268,31 @@ public class CreateRandomModelWizardPage extends WizardPage {
 		}
 		try{
 			nodes = Integer.parseInt(nodeText.getText());
+			if (nodes <= 0)
+			    throw new NumberFormatException();
 		}
 		catch( NumberFormatException exc ){
-			updateStatus("Amount of Nodes must be an integer number!");
+			updateStatus("Number of nodes must be a positive integer!");
 			return;
 		}
 		try{
-		    connections = Integer.parseInt(connectionText.getText());
+		    minConnections = Integer.parseInt(minConnectionText.getText());
+            if (minConnections < 0)
+                throw new NumberFormatException();
 		}
 		catch( NumberFormatException exc ){
-			updateStatus("Amount of Connections must be an integer number!");
+			updateStatus("Minimal number of connections must be a non-negative integer!");
 			return;
 		}
+        try{
+              maxConnections = Integer.parseInt(maxConnectionText.getText());
+              if (maxConnections < minConnections)
+                  throw new NumberFormatException();
+        }
+        catch( NumberFormatException exc ){
+            updateStatus("Maximal number of connections must be an integer greater or equal to the minimal number of connections!");
+            return;
+        }
 		try{
 		    float temp = Float.parseFloat(hierarchyText.getText());
 			if(temp >= 0 && temp <= 1)
@@ -271,11 +323,27 @@ public class CreateRandomModelWizardPage extends WizardPage {
 	public int getNodes(){
 		return nodes;
 	}
-	public int getConnections(){
-		return connections;
+	
+	public int getMinConnections(){
+		return minConnections;
+	}
+	
+	public int getMaxConnections() {
+	    return maxConnections;
 	}
 
 	public float getHierarchyProb() {
 		return hierarchyProb;
+	}
+	
+	/**
+	 * Store the current value into the preference store.
+	 */
+	public void storeDefaults() {
+	    IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
+	    preferenceStore.setValue(PREF_NODES, nodes);
+	    preferenceStore.setValue(PREF_MIN_CONNECTIONS, minConnections);
+	    preferenceStore.setValue(PREF_MAX_CONNECTIONS, maxConnections);
+	    preferenceStore.setValue(PREF_HIERARCHY, hierarchyProb);
 	}
 }

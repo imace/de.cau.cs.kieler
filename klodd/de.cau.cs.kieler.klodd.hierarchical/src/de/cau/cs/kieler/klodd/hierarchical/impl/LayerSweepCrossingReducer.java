@@ -65,16 +65,16 @@ public class LayerSweepCrossingReducer extends AbstractAlgorithm implements
 		getMonitor().begin("Crossing reduction", passes * 2 * (layerCount - 1));
 		PortConstraints externalConstraints = layeredGraph.getExternalPortConstraints();
 		
+        Layer firstLayer = layeredGraph.getLayers().get(firstLayerIx); 
+        Layer lastLayer = layeredGraph.getLayers().get(lastLayerIx);
 		if (externalConstraints != PortConstraints.FREE_PORTS) {
 			// sort input and output ports by their relative position
-		    Layer firstLayer = layeredGraph.getLayers().get(firstLayerIx); 
 	        if (firstLayer.rank == 0) {
 				firstLayer.sortByPorts(false);
 				if (externalConstraints != PortConstraints.FIXED_SIDE)
 				    firstLayerIx += 2;
 			}
 			
-			Layer lastLayer = layeredGraph.getLayers().get(lastLayerIx);
 			if (lastLayer.height == 0) {
 				lastLayer.sortByPorts(false);
 				if (externalConstraints != PortConstraints.FIXED_SIDE)
@@ -96,8 +96,9 @@ public class LayerSweepCrossingReducer extends AbstractAlgorithm implements
     			layerReducer.reduceCrossings(layerIter.next());
     		}
     		else {
-    		    if (externalConstraints == PortConstraints.FIXED_SIDE)
-    		        layeredGraph.getLayers().get(lastLayerIx).sortByPorts(true);
+    		    if (externalConstraints == PortConstraints.FIXED_SIDE
+    		            && lastLayer.height == 0)
+    		        lastLayer.sortByPorts(true);
     			layerIter.previous();
     		}
     		
@@ -120,8 +121,9 @@ public class LayerSweepCrossingReducer extends AbstractAlgorithm implements
     			layerReducer.reduceCrossings(layerIter.previous());
     		}
     		else {
-    		    if (externalConstraints == PortConstraints.FIXED_SIDE)
-                    layeredGraph.getLayers().get(firstLayerIx).sortByPorts(true);
+    		    if (externalConstraints == PortConstraints.FIXED_SIDE
+    		            && firstLayer.rank == 0)
+    		        firstLayer.sortByPorts(true);
                 layerIter.next();
     		}
     		
