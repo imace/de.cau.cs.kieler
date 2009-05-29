@@ -7,6 +7,7 @@
 
 	<!-- set up EMF for standalone execution -->
 	<bean class="org.eclipse.mwe.emf.StandaloneSetup" >
+		<registerGeneratedEPackage value="Moml.MomlPackage" />
 		<platformUri value=".."/>
 	</bean>
 	
@@ -25,18 +26,28 @@
 			<metaModelFile value="${emfmetamodel}" />
 		</metaModel>
 		<metaModel id="ptomm" class="oaw.type.emf.EmfMetaModel">
-			<metaModelFile value="${ptometamodel}" />
+			<metaModelPackage value="Moml.MomlPackage" /> 
+			<!-- <metaModelPackage value="Moml.MomlPackage" />  -->
+			<!-- <metaModelFile value="${ptometamodel}" /> -->
 		</metaModel>
 		<invoke value="ecore2moml::transform(emfmodel)" />
-		<outputSlot value="ptomodel" />
+		<outputSlot value="ptomodel"/>
 	</component>
 
 
-	<!-- store as xml -->
-	<component class="org.openarchitectureware.xsd.XMLWriter">
-		<metaModel idRef="ptomm" />
-		<modelSlot value="ptomodel" />
-		<uri value="c:/railcontroller.moml" />
+	<!-- store model -->
+	<component class="de.cau.cs.kieler.sim.ptolemy.EmfMomlWriter">
+		<uri value="railcontroller.moml" />
+		<modelSlot value="ptomodel"/>
 	</component>
-	
+
+	<!-- store model 
+	<component class="org.eclipse.mwe.emf.Writer">
+		<uri value="railcontroller.moml" />
+		<modelSlot value="ptomodel"/>
+		<useSingleGlobalResourceSet value="false"/>     
+		<cloneSlotContents value="true"/>
+	</component>
+	 -->		
+
 </workflow>
