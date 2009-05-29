@@ -1,0 +1,19 @@
+import simplerailctrl;
+import Moml;
+
+
+// *********************************************
+Void dump(String s) :
+	JAVA de.cau.cs.kieler.sim.ptolemy.XtendJavaSystemOutput.dump(java.lang.String)
+;
+
+create DocumentRoot this transform(simplerailctrl::RailController rc):
+ this.setEntity(createEntity(rc))
+;   
+	
+create EntityType this createEntity(simplerailctrl::RailController rc):
+   this.setName("Simple Ptolemy Model") ->
+   this.setClass1("ptolemy.actor.TypedCompositeActor") ->
+   dump(this.name)
+;	
+
