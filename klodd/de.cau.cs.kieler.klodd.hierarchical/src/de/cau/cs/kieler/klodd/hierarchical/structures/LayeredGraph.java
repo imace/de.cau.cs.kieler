@@ -278,6 +278,7 @@ public class LayeredGraph {
 		LayoutOptions.setFixedSize(parentLayout, true);
 		LayoutOptions.setPortConstraints(parentLayout,
 		        PortConstraints.FIXED_POS);
+		KimlLayoutUtil.calcPortRanks(parentNode);
 	}
 
 	/**

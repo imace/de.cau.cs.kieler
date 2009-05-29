@@ -114,12 +114,25 @@ public class Layer {
 		// set the lengthwise position of each node
 		for (LayerElement element : elements) {
 			if (rank > 0 && height > 0) {
+			    float sideSpace;
 				if (layoutDirection == LayoutDirection.VERTICAL) {
-					float sideSpace = (lengthwiseDim - element.getRealHeight()) / 2;
+				    if (element.getIncomingConnections().isEmpty()
+				            && !element.getOutgoingConnections().isEmpty())
+				        sideSpace = (lengthwiseDim - element.getRealHeight());
+				    else if (element.getOutgoingConnections().isEmpty()
+				            && !element.getIncomingConnections().isEmpty())
+				        sideSpace = 0;
+				    else sideSpace = (lengthwiseDim - element.getRealHeight()) / 2;
 					element.getPosition().setY(lengthwisePos + sideSpace);
 				}
 				else {
-					float sideSpace = (lengthwiseDim - element.getRealWidth()) / 2;
+				    if (element.getIncomingConnections().isEmpty()
+                            && !element.getOutgoingConnections().isEmpty())
+                        sideSpace = (lengthwiseDim - element.getRealWidth());
+                    else if (element.getOutgoingConnections().isEmpty()
+                            && !element.getIncomingConnections().isEmpty())
+                        sideSpace = 0;
+                    else sideSpace = (lengthwiseDim - element.getRealWidth()) / 2;
 					element.getPosition().setX(lengthwisePos + sideSpace);
 				}
 			}
