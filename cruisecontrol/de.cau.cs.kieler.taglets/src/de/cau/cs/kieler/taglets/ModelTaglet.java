@@ -28,7 +28,7 @@ public class ModelTaglet implements Taglet {
     /** the name of this taglet */
     private final String NAME = "model";
     /** printed header for this taglet */
-    private final String HEADER = "Model element:";
+    private final String HEADER = "Model element";
     
     /* (non-Javadoc)
      * @see com.sun.tools.doclets.Taglet#getName()
@@ -97,7 +97,10 @@ public class ModelTaglet implements Taglet {
      * @see com.sun.tools.doclets.Taglet#toString(com.sun.javadoc.Tag[])
      */
     public String toString(Tag[] tagArray) {
-        StringBuffer output = new StringBuffer("<dt><b>" + HEADER + "</b><dd><table>");
+        StringBuffer output = new StringBuffer("<dt><b>" + HEADER);
+        if (tagArray.length > 0 && tagArray[0].text().length() > 0)
+            output.append(":");
+        output.append("</b><dd><table>");
         for (Tag tag : tagArray) {
             StringTokenizer tokenizer = new StringTokenizer(tag.text(), " \n\r\t");
             while (tokenizer.hasMoreTokens()) {
