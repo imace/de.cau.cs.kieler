@@ -26,17 +26,17 @@ import com.sun.tools.doclets.Taglet;
 public class GeneratedTaglet implements Taglet {
 
     /** the name of this taglet */
-    private final String NAME = "generated";
+    private static final String NAME = "generated";
     /** indicator for elements that are NOT generated */
-    private final String NEGATION = "NOT";
+    private static final String NEGATION = "NOT";
     /** printed header for generated elements */
-    private final String POS_HEADER = "Generated:";
+    private static final String POS_HEADER = "Generated:";
     /** printed text for generated elements */
-    private final String POS_TEXT = "This code was automatically generated.";
+    private static final String POS_TEXT = "This code was automatically generated.";
     /** printed header for elements that are NOT generated */
-    private final String NEG_HEADER = "Not generated:";
+    private static final String NEG_HEADER = "Not generated:";
     /** printed text for elements that are NOT generated */
-    private final String NEG_TEXT = "This code was hand-written.";
+    private static final String NEG_TEXT = "This code was hand-written.";
     
     /* (non-Javadoc)
      * @see com.sun.tools.doclets.Taglet#getName()
@@ -98,18 +98,27 @@ public class GeneratedTaglet implements Taglet {
      * @see com.sun.tools.doclets.Taglet#toString(com.sun.javadoc.Tag)
      */
     public String toString(Tag tag) {
-        return getOutput(!tag.text().startsWith(NEGATION));
+        if (tag.name().equals("@" + NAME))
+            return getOutput(!tag.text().startsWith(NEGATION));
+        else return "";
     }
 
     /* (non-Javadoc)
      * @see com.sun.tools.doclets.Taglet#toString(com.sun.javadoc.Tag[])
      */
     public String toString(Tag[] tagArray) {
+        boolean positiveOutput = false;
         for (Tag tag : tagArray) {
-            if (tag.text().startsWith(NEGATION))
-                return getOutput(false);
+            if (tag.name().equals("@" + NAME)) {
+                if (tag.text().startsWith(NEGATION))
+                    return getOutput(false);
+                else
+                    positiveOutput = true;
+            }
         }
-        return getOutput(true);
+        if (positiveOutput)
+            return getOutput(true);
+        else return "";
     }
     
     /**
@@ -134,11 +143,11 @@ public class GeneratedTaglet implements Taglet {
     @SuppressWarnings("unchecked")
     public static void register(Map tagletMap) {
         Taglet newTaglet = new GeneratedTaglet();
-        Taglet oldTaglet = (Taglet)tagletMap.get(newTaglet.getName());
+        Taglet oldTaglet = (Taglet)tagletMap.get(NAME);
         if (oldTaglet != null) {
-            tagletMap.remove(newTaglet.getName());
+            tagletMap.remove(NAME);
         }
-        tagletMap.put(newTaglet.getName(), newTaglet);
+        tagletMap.put(NAME, newTaglet);
     }
 
 }

@@ -26,9 +26,9 @@ import com.sun.tools.doclets.Taglet;
 public class OrderedTaglet implements Taglet {
 
     /** the name of this taglet */
-    private final String NAME = "ordered";
+    private static final String NAME = "ordered";
     /** printed header for this taglet */
-    private final String HEADER = "Ordered";
+    private static final String HEADER = "Ordered";
 
     /* (non-Javadoc)
      * @see com.sun.tools.doclets.Taglet#getName()
@@ -90,14 +90,25 @@ public class OrderedTaglet implements Taglet {
      * @see com.sun.tools.doclets.Taglet#toString(com.sun.javadoc.Tag)
      */
     public String toString(Tag tag) {
-        return "<dt><b>" + HEADER + "</b><dd></dd>\n";
+        if (tag.name().equals("@" + NAME))
+            return "<dt><b>" + HEADER + "</b><dd></dd>\n";
+        else return "";
     }
 
     /* (non-Javadoc)
      * @see com.sun.tools.doclets.Taglet#toString(com.sun.javadoc.Tag[])
      */
     public String toString(Tag[] tagArray) {
-        return "<dt><b>" + HEADER + "</b><dd></dd>\n";
+        boolean printOutput = false;
+        for (Tag tag : tagArray) {
+            if (tag.name().equals("@" + NAME)) {
+                printOutput = true;
+                break;
+            }
+        }
+        if (printOutput)
+            return "<dt><b>" + HEADER + "</b><dd></dd>\n";
+        else return "";
     }
 
     /**
@@ -108,11 +119,11 @@ public class OrderedTaglet implements Taglet {
     @SuppressWarnings("unchecked")
     public static void register(Map tagletMap) {
         Taglet newTaglet = new OrderedTaglet();
-        Taglet oldTaglet = (Taglet)tagletMap.get(newTaglet.getName());
+        Taglet oldTaglet = (Taglet)tagletMap.get(NAME);
         if (oldTaglet != null) {
-            tagletMap.remove(newTaglet.getName());
+            tagletMap.remove(NAME);
         }
-        tagletMap.put(newTaglet.getName(), newTaglet);
+        tagletMap.put(NAME, newTaglet);
     }
     
 }

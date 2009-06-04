@@ -26,9 +26,9 @@ import com.sun.tools.doclets.Taglet;
 public class ModelTaglet implements Taglet {
 
     /** the name of this taglet */
-    private final String NAME = "model";
+    private static final String NAME = "model";
     /** printed header for this taglet */
-    private final String HEADER = "Model element";
+    private static final String HEADER = "Model element";
     
     /* (non-Javadoc)
      * @see com.sun.tools.doclets.Taglet#getName()
@@ -97,28 +97,34 @@ public class ModelTaglet implements Taglet {
      * @see com.sun.tools.doclets.Taglet#toString(com.sun.javadoc.Tag[])
      */
     public String toString(Tag[] tagArray) {
+        boolean printOutput = false;
         StringBuffer output = new StringBuffer("<dt><b>" + HEADER);
         if (tagArray.length > 0 && tagArray[0].text().length() > 0)
             output.append(":");
         output.append("</b><dd><table>");
         for (Tag tag : tagArray) {
-            StringTokenizer tokenizer = new StringTokenizer(tag.text(), " \n\r\t");
-            while (tokenizer.hasMoreTokens()) {
-                String nextToken = tokenizer.nextToken();
-                int separatorPos = nextToken.indexOf('=');
-                if (separatorPos > 0) {
-                    String valueString = nextToken.substring(separatorPos + 1);
-                    if (valueString.charAt(0) == '\"'
-                        && valueString.charAt(valueString.length()-1) == '\"')
-                        valueString = valueString.substring(1, valueString.length() - 1);
-                    output.append("<tr><td>" + nextToken.substring(0, separatorPos)
-                            + "</td><td>=</td><td><i>" + valueString
-                            + "</i></td></tr>");
+            if (tag.name().equals("@" + NAME)) {
+                printOutput = true;
+                StringTokenizer tokenizer = new StringTokenizer(tag.text(), " \n\r\t");
+                while (tokenizer.hasMoreTokens()) {
+                    String nextToken = tokenizer.nextToken();
+                    int separatorPos = nextToken.indexOf('=');
+                    if (separatorPos > 0) {
+                        String valueString = nextToken.substring(separatorPos + 1);
+                        if (valueString.charAt(0) == '\"'
+                            && valueString.charAt(valueString.length()-1) == '\"')
+                            valueString = valueString.substring(1, valueString.length() - 1);
+                        output.append("<tr><td>" + nextToken.substring(0, separatorPos)
+                                + "</td><td>=</td><td><i>" + valueString
+                                + "</i></td></tr>");
+                    }
                 }
             }
         }
         output.append("</table></dd>\n");
-        return output.toString();
+        if (printOutput)
+            return output.toString();
+        else return "";
     }
 
     /**
@@ -129,11 +135,11 @@ public class ModelTaglet implements Taglet {
     @SuppressWarnings("unchecked")
     public static void register(Map tagletMap) {
         Taglet newTaglet = new ModelTaglet();
-        Taglet oldTaglet = (Taglet)tagletMap.get(newTaglet.getName());
+        Taglet oldTaglet = (Taglet)tagletMap.get(NAME);
         if (oldTaglet != null) {
-            tagletMap.remove(newTaglet.getName());
+            tagletMap.remove(NAME);
         }
-        tagletMap.put(newTaglet.getName(), newTaglet);
+        tagletMap.put(NAME, newTaglet);
     }
     
 }
