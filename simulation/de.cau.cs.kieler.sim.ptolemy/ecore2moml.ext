@@ -1,19 +1,152 @@
-import simplerailctrl;
+import synccharts;
 import Moml;
 
+//-----------------------------------------------------------------------------
 
-// *********************************************
 Void dump(String s) :
 	JAVA de.cau.cs.kieler.sim.ptolemy.XtendJavaSystemOutput.dump(java.lang.String)
 ;
 
-create DocumentRoot this transform(simplerailctrl::RailController rc):
- this.setEntity(createEntity(rc))
+create DocumentRoot this transform(synccharts::Region sc):
+ 	this.setEntity(createBaseEntity(sc))
 ;   
 	
-create EntityType this createEntity(simplerailctrl::RailController rc):
-   this.setName("Simple Ptolemy Model") ->
-   this.setClass1("ptolemy.actor.TypedCompositeActor") ->
-   dump(this.name)
-;	
+	
+//creates basic / outer most enclosing entity	
+create EntityType this createBaseEntity(synccharts::Region mainRegion):
+   	this.setName(mainRegion.innerStates.get(0).name + "_simulation") ->
+  	this.setClass1("ptolemy.actor.TypedCompositeActor") ->
+   	this.property.add(createDEDirector()) ->
+	dump("created:" + this.name ) ->
+    IterateRegions(mainRegion.innerStates.get(0).regions, this)
+   	//mainRegion has exactly ONE top most state
+   	//iterate over all regions within this top most state
+   	//the name of this containing Entity is derived from this
+   	//   top most state, w/ " simulation" added
+;
 
+
+
+//ModalModel == Region-Component 
+create EntityType this createModalModelEntity(synccharts::Region region, int number):
+	let p1 = new PropertyType:
+		p1.setName("_tableauFactory") ->
+		p1.setClass("ptolemy.vergil.fsm.modal.ModalTableauFactory") ->
+	this.property.add(p1) ->
+   	this.setName(region.parentState.name + "_region_" + number) ->
+  	this.setClass1("ptolemy.domains.fsm.modal.ModalModel") ->
+   	//this.property.add(createFSMDirector()) ->
+	dump("created:" + this.name ) ->
+   	this.entity.add(createModalControllerEntity(region)) ->
+   	IterateStatesRefinement(region.innerStates, this)
+;
+//ModalController == Region-Definition (has States and MacroStates)
+create EntityType this createModalControllerEntity(synccharts::Region region):
+   	this.setName("_Controller") ->
+  	this.setClass1("ptolemy.domains.fsm.modal.ModalController") ->
+	dump("created:" + this.name ) ->
+	IterateStates(region.innerStates, this)
+;
+
+
+//MacroState == State-Component (of a MacroState)
+create EntityType this createMacroStateEntity(synccharts::State state):
+	let p1 = new PropertyType:
+		p1.setName("refinementName") ->
+		p1.setClass("ptolemy.kernel.util.StringAttribute") ->
+		p1.setValue(state.name) ->
+   	this.setName(state.name) ->
+  	this.setClass1("ptolemy.domains.fsm.kernel.State") ->
+	this.property.add(p1) ->
+	dump("created:" + this.name ) 
+;
+//ModalRefinement == State-Definition (of a MacroState = has Regions)
+create EntityType this createMacroStateRefinementEntity(synccharts::State state):
+   	this.setName(state.name) ->
+  	this.setClass1("ptolemy.domains.fsm.modal.Refinement") ->
+   	this.property.add(createSRDirector()) ->
+	dump("created:" + this.name ) ->
+   	IterateRegions(state.regions, this)
+;
+
+
+//SimpleState == State-Component 
+create EntityType this createSimpleStateEntity(synccharts::State state):
+   	this.setName(state.name) ->
+  	this.setClass1("ptolemy.domains.fsm.kernel.State")
+;
+
+
+//-----------------------------------------------------------------------------
+
+
+//test whether a state is a macrostate or a simplestate
+boolean IsMacroState(synccharts::State state) :
+ 	state.regions.size > 0
+; 
+
+
+//iteratate over all states (in a region) - list them as a refinement property
+void IterateStates(List[synccharts::State] stateList, EntityType entity):
+   	IterateStatesHelper(stateList, entity, stateList.size-1)
+;
+int IterateStatesHelper(List[synccharts::State] stateList, EntityType entity, int i):
+ 	let state = stateList.get(i):
+ 	IsMacroState(state) ? entity.entity.add(createMacroStateEntity(state)) : entity.entity.add(createSimpleStateEntity(state)) ->
+    (i > 0) ? IterateStatesHelper(stateList, entity, i-1) : i
+;
+
+//iteratate over all states (in a region) - define the refinement (and recursively add regions!)
+void IterateStatesRefinement(List[synccharts::State] stateList, EntityType entity):
+   	IterateStatesRefinementHelper(stateList, entity, stateList.size-1)
+;
+int IterateStatesRefinementHelper(List[synccharts::State] stateList, EntityType entity, int i):
+ 	let state = stateList.get(i):
+ 	IsMacroState(state) ? entity.entity.add(createMacroStateRefinementEntity(state)) : null ->
+    (i > 0) ? IterateStatesRefinementHelper(stateList, entity, i-1) : i
+;
+
+
+
+//iterate over all regions (in a state)
+void IterateRegions(List[synccharts::Region] regionList, EntityType entity):
+   	IterateRegionsHelper(regionList, entity, regionList.size-1)
+;
+int IterateRegionsHelper(List[synccharts::Region] regionList, EntityType entity, int i):
+ 	let region = regionList.get(i):
+ 	entity.entity.add(createModalModelEntity(region,i)) ->
+    (i > 0) ? IterateRegionsHelper(regionList, entity, i-1) : i
+;    
+
+
+//-----------------------------------------------------------------------------
+
+    
+//create a "SR Director" (for macro state definition)
+create PropertyType this createSRDirector():
+    this.setName("SR Director") ->
+	this.setClass("ptolemy.domains.sr.kernel.SRDirector")
+;
+
+//create a "FSM Director" (for a region component)
+create PropertyType this createFSMDirector():
+    this.setName("directorClass") ->
+    this.setValue("ptolemy.domains.fsm.kernel.FSMDirector") ->
+	this.setClass("ptolemy.data.expr.StringParameter")
+;
+
+//create a "DE Director" (for the outer most entity)
+create PropertyType this createDEDirector():
+	let p1 = new PropertyType:
+	let p2 = new PropertyType:
+		p1.setName("stopTime") ->
+		p1.setClass("ptolemy.data.expr.Parameter") ->
+		p1.setValue("Infinity") ->
+		p2.setName("synchronizeToRealTime") ->
+		p2.setClass("ptolemy.data.expr.Parameter") ->
+		p2.setValue("true") ->
+    this.setName("DE Director") ->
+	this.setClass("ptolemy.domains.de.kernel.DEDirector") ->
+	this.property.add(p1) ->
+	this.property.add(p2)
+;
