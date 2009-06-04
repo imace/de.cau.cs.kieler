@@ -39,7 +39,22 @@ context Signal if ((initialValue == null) || (initialValue == "")) ERROR "only v
 	combineType == CombineType::NONE;
 
 context Transition if (immediate) ERROR "immediate transitions must not have a delay!" :
-	delay == 0;
+	(delay == null) || (delay == 1);
+	
+context Transition ERROR "Delays have to be at least 1!" :
+	(delay == null) || (delay >= 1);
 	
 context SignalRenaming ERROR "The old and new signal of a signal renaming must be different!" :
 	oldSignal != newSignal;
+	
+context Operator if ((operatorKind == OperatorKind::NOT) || (operatorKind == OperatorKind::VAL)) ERROR "Unary operators have one operand!" :
+	subExpressions.size == 1;
+	
+context Operator if (!((operatorKind == OperatorKind::NOT) || (operatorKind == OperatorKind::VAL))) ERROR "Binary operators have two operands!" :
+	subExpressions.size == 2;
+	
+context Emission if (signal.type == ValueType::PURE) ERROR "Pure signals cannot be assigned a value!" :
+	newValue == null;
+	
+context Emission if (!(signal.type == ValueType::PURE)) ERROR "Valued signals must be assigned a value!" :
+	newValue != null;
