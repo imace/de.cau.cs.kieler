@@ -12,6 +12,18 @@
         <property class="ptolemy.kernel.util.StringAttribute" name="refinementName" value="ABO"/>
         <property class="ptolemy.data.expr.Parameter" name="isInitialState" value="true"/>
       </entity>
+      <relation name="ABO_transition_0">
+        <property class="ptolemy.kernel.util.StringAttribute" name="guardExpression"/>
+        <property class="ptolemy.domains.fsm.kernel.OutputActionsAttribute" name="outputActions"/>
+        <property class="ptolemy.domains.fsm.kernel.CommitActionsAttribute" name="setActions"/>
+        <property class="ptolemy.data.expr.Parameter" name="reset" value="false"/>
+        <property class="ptolemy.data.expr.Parameter" name="preemptive" value="false"/>
+        <property class="ptolemy.data.expr.Parameter" name="defaultTransition" value="false"/>
+        <property class="ptolemy.data.expr.Parameter" name="nondeterministic" value="false"/>
+        <property class="ptolemy.kernel.util.StringAttribute" name="refinementName"/>
+      </relation>
+      <link port="ABO.outgoingPort" relation="ABO_transition_0"/>
+      <link port="ABO.incomingPort" relation="ABO_transition_0"/>
     </entity>
     <entity class="ptolemy.domains.fsm.modal.Refinement" name="ABO">
       <entity class="ptolemy.domains.fsm.modal.ModalModel" name="ABO_region_0">
@@ -24,6 +36,18 @@
             <property class="ptolemy.kernel.util.StringAttribute" name="refinementName" value="Wait A and B"/>
             <property class="ptolemy.data.expr.Parameter" name="isInitialState" value="true"/>
           </entity>
+          <relation name="Wait A and B_transition_0">
+            <property class="ptolemy.kernel.util.StringAttribute" name="guardExpression"/>
+            <property class="ptolemy.domains.fsm.kernel.OutputActionsAttribute" name="outputActions"/>
+            <property class="ptolemy.domains.fsm.kernel.CommitActionsAttribute" name="setActions"/>
+            <property class="ptolemy.data.expr.Parameter" name="reset" value="false"/>
+            <property class="ptolemy.data.expr.Parameter" name="preemptive" value="false"/>
+            <property class="ptolemy.data.expr.Parameter" name="defaultTransition" value="false"/>
+            <property class="ptolemy.data.expr.Parameter" name="nondeterministic" value="false"/>
+            <property class="ptolemy.kernel.util.StringAttribute" name="refinementName"/>
+          </relation>
+          <link port="Wait A and B.outgoingPort" relation="Wait A and B_transition_0"/>
+          <link port="done.incomingPort" relation="Wait A and B_transition_0"/>
         </entity>
         <entity class="ptolemy.domains.fsm.modal.Refinement" name="Wait A and B">
           <property class="ptolemy.domains.sr.kernel.SRDirector" name="SR Director"/>
@@ -36,6 +60,18 @@
               <entity class="ptolemy.domains.fsm.kernel.State" name="wB">
                 <property class="ptolemy.data.expr.Parameter" name="isInitialState" value="true"/>
               </entity>
+              <relation name="wB_transition_0">
+                <property class="ptolemy.kernel.util.StringAttribute" name="guardExpression"/>
+                <property class="ptolemy.domains.fsm.kernel.OutputActionsAttribute" name="outputActions"/>
+                <property class="ptolemy.domains.fsm.kernel.CommitActionsAttribute" name="setActions"/>
+                <property class="ptolemy.data.expr.Parameter" name="reset" value="false"/>
+                <property class="ptolemy.data.expr.Parameter" name="preemptive" value="false"/>
+                <property class="ptolemy.data.expr.Parameter" name="defaultTransition" value="false"/>
+                <property class="ptolemy.data.expr.Parameter" name="nondeterministic" value="false"/>
+                <property class="ptolemy.kernel.util.StringAttribute" name="refinementName"/>
+              </relation>
+              <link port="wB.outgoingPort" relation="wB_transition_0"/>
+              <link port="dB.incomingPort" relation="wB_transition_0"/>
             </entity>
           </entity>
           <entity class="ptolemy.domains.fsm.modal.ModalModel" name="Wait A and B_region_0">
@@ -47,6 +83,18 @@
               <entity class="ptolemy.domains.fsm.kernel.State" name="wA">
                 <property class="ptolemy.data.expr.Parameter" name="isInitialState" value="true"/>
               </entity>
+              <relation name="wA_transition_0">
+                <property class="ptolemy.kernel.util.StringAttribute" name="guardExpression"/>
+                <property class="ptolemy.domains.fsm.kernel.OutputActionsAttribute" name="outputActions"/>
+                <property class="ptolemy.domains.fsm.kernel.CommitActionsAttribute" name="setActions"/>
+                <property class="ptolemy.data.expr.Parameter" name="reset" value="false"/>
+                <property class="ptolemy.data.expr.Parameter" name="preemptive" value="false"/>
+                <property class="ptolemy.data.expr.Parameter" name="defaultTransition" value="false"/>
+                <property class="ptolemy.data.expr.Parameter" name="nondeterministic" value="false"/>
+                <property class="ptolemy.kernel.util.StringAttribute" name="refinementName"/>
+              </relation>
+              <link port="wA.outgoingPort" relation="wA_transition_0"/>
+              <link port="dA.incomingPort" relation="wA_transition_0"/>
             </entity>
           </entity>
         </entity>
