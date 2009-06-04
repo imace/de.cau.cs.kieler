@@ -124,8 +124,7 @@ int IterateTransitionsHelper(List[synccharts::Transition] transitionList,
 							 EntityType entity, int i):
  	let transition = transitionList.get(i):
  	dump(transition.sourceState.name + " -> " + transition.targetState.name) ->
-	addTransition(transition.sourceState, 
-				  transition.targetState,
+	addTransition(transition,
 				  entity,
 				  transition.sourceState.name + "_transition_" + i) -> 	
     (i > 0) ? IterateTransitionsHelper(transitionList, entity, i-1) : i
@@ -214,23 +213,23 @@ create PropertyType this createDEDirector():
 //--         C R E A T E     R E L A T I O N S   &   L I N K S               --
 //-----------------------------------------------------------------------------
 
-void addTransition(	synccharts::State source, 
-					synccharts::State destination,
+void addTransition(	synccharts::Transition transition, 
 					EntityType entity,
 					String name) :
 	let link1 = new LinkType:
 	let link2 = new LinkType:
-	link1.setPort(source.name + ".outgoingPort") ->
+	link1.setPort(transition.sourceState.name + ".outgoingPort") ->
 	link1.setRelation(name) ->
-	link2.setPort(destination.name + ".incomingPort") ->
+	link2.setPort(transition.targetState.name + ".incomingPort") ->
 	link2.setRelation(name) ->
-	entity.relation.add(createRelation(name)) ->
+	entity.relation.add(createRelation(name, transition)) ->
 	entity.link.add(link1) ->
 	entity.link.add(link2) 
 ;
 
 //create a Relation Type
-create RelationType this createRelation(String name):
+create RelationType this createRelation(String name,
+										synccharts::Transition transition):
 	let p1 = new PropertyType:
 	let p2 = new PropertyType:
 	let p3 = new PropertyType:
@@ -250,10 +249,12 @@ create RelationType this createRelation(String name):
 		p4.setValue("false") ->
 		p5.setName("preemptive") ->
 		p5.setClass("ptolemy.data.expr.Parameter") ->
-		p5.setValue("false") ->
+		transition.transitionKind.toString().matches("STRONGABORT") ? 
+								p5.setValue("true") : p5.setValue("false") ->
 		p6.setName("defaultTransition") ->
 		p6.setClass("ptolemy.data.expr.Parameter") ->
-		p6.setValue("false") ->
+		transition.transitionKind.toString().matches("NORMALTERMINATION") ? 
+								p6.setValue("true") : p6.setValue("false") ->
 		p7.setName("nondeterministic") ->
 		p7.setClass("ptolemy.data.expr.Parameter") ->
 		p7.setValue("false") ->

@@ -27,13 +27,13 @@ import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
-import MoML1.DocumentRoot;
-import MoML1.EntityType;
-import MoML1.LinkType;
-import MoML1.MoML1Factory;
-import MoML1.PropertyType;
-import MoML1.RelationType;
-import MoML1.util.MoML1ResourceFactoryImpl;
+import Moml.DocumentRoot;
+import Moml.EntityType;
+import Moml.LinkType;
+import Moml.MomlFactory;
+import Moml.PropertyType;
+import Moml.RelationType;
+import Moml.util.MomlResourceFactoryImpl;
 
 /**
  * Example test class that shows how to use the XML Schema Definition (XSD) 
@@ -49,16 +49,16 @@ public class TestCreateMomlFile {
     
     public static void main(String[] args) {
         // Get the EMF factory to create new elements
-        MoML1Factory f = MoML1.MoML1Factory.eINSTANCE;
+        MomlFactory f = Moml.MomlFactory.eINSTANCE;
         
         // create example model ptolemy/moml/demo/test.xml
         EntityType t1 = f.createEntityType();
         t1.setName("test");
-        t1.setClass("ptolemy.actor.TypedCompositeActor");
+        t1.setClass1("ptolemy.actor.TypedCompositeActor");
         
         EntityType ramp = f.createEntityType();
         ramp.setName("ramp");
-        ramp.setClass("ptolemy.actor.lib.Ramp");
+        ramp.setClass1("ptolemy.actor.lib.Ramp");
         
         // a plotter is a visible gui component and can only be used
         // in vergil
@@ -69,7 +69,7 @@ public class TestCreateMomlFile {
         // instead use a simple std.out writer
         EntityType writer = f.createEntityType();
         writer.setName("writer");
-        writer.setClass("ptolemy.actor.lib.io.LineWriter");
+        writer.setClass1("ptolemy.actor.lib.io.LineWriter");
                 
         RelationType relation = f.createRelationType();
         relation.setName("r");
@@ -125,7 +125,7 @@ public class TestCreateMomlFile {
         // file with the syntax valid to the MoML XSD.
         // An alternative would be the XMIResourceFactoryImpl, which
         // uses standard XMI which is not MoML compliant.
-        Resource.Factory resourceFactory = new MoML1ResourceFactoryImpl();
+        Resource.Factory resourceFactory = new MomlResourceFactoryImpl();
         
         // Register the default resource factory -- only needed for stand-alone!
         resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put(

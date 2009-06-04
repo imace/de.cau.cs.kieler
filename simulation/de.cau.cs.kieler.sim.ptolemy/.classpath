@@ -3,5 +3,59 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5"/>
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
+	<classpathentry kind="lib" path="C:/Program Files/eclipse-ganymede/plugins/org.openarchitectureware.xtext.ui_4.3.1.20090107-2000PRD.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/eclipse-ganymede/plugins/org.openarchitectureware.adapter.emf.check_4.3.1.20090107-2000PRD.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/eclipse-ganymede/plugins/org.openarchitectureware.adapter.rsdp.plugin_4.3.1.20090107-2000PRD.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/eclipse-ganymede/plugins/org.openarchitectureware.adapter.rsdp.test_4.3.1.20090107-2000PRD.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/eclipse-ganymede/plugins/org.openarchitectureware.adapter.rsdp_4.3.1.20090107-2000PRD.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/eclipse-ganymede/plugins/org.openarchitectureware.base_4.3.1.20090107-2000PRD.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/eclipse-ganymede/plugins/org.openarchitectureware.check.editor_4.3.1.20090107-2000PRD.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/eclipse-ganymede/plugins/org.openarchitectureware.classic.core.tests_4.3.1.20090107-2000PRD.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/eclipse-ganymede/plugins/org.openarchitectureware.classic.core_4.3.1.20090107-2000PRD.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/eclipse-ganymede/plugins/org.openarchitectureware.classic.metamodelGenerator_4.3.1.20090107-2000PRD.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/eclipse-ganymede/plugins/org.openarchitectureware.classic.umlMetamodel_4.3.1.20090107-2000PRD.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/eclipse-ganymede/plugins/org.openarchitectureware.classic.workflow_4.3.1.20090107-2000PRD.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/eclipse-ganymede/plugins/org.openarchitectureware.classic.xmiInstantiator.tests_4.3.1.20090107-2000PRD.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/eclipse-ganymede/plugins/org.openarchitectureware.classic.xmiInstantiator_4.3.1.20090107-2000PRD.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/eclipse-ganymede/plugins/org.openarchitectureware.classic.xmlInstantiator.tests_4.3.1.20090107-2000PRD.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/eclipse-ganymede/plugins/org.openarchitectureware.classic.xmlInstantiator_4.3.1.20090107-2000PRD.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/eclipse-ganymede/plugins/org.openarchitectureware.core.emftools_4.3.1.20090107-2000PRD.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/eclipse-ganymede/plugins/org.openarchitectureware.core.expressions_4.3.1.20090107-2000PRD.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/eclipse-ganymede/plugins/org.openarchitectureware.core.workflow_4.3.1.20090107-2000PRD.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/eclipse-ganymede/plugins/org.openarchitectureware.core.xpand2_4.3.1.20090107-2000PRD.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/eclipse-ganymede/plugins/org.openarchitectureware.dependencies_4.3.1.20090107-2000PRD.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/eclipse-ganymede/plugins/org.openarchitectureware.emf.generic.editor_4.3.1.20090107-2000PRD.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/eclipse-ganymede/plugins/org.openarchitectureware.emftools_4.3.1.20090107-2000PRD.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/eclipse-ganymede/plugins/org.openarchitectureware.graphviz.editor_4.3.1.20090107-2000PRD.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/eclipse-ganymede/plugins/org.openarchitectureware.graphviz_4.3.1.20090107-2000PRD.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/eclipse-ganymede/plugins/org.openarchitectureware.recipe.core_4.3.1.20090107-2000PRD.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/eclipse-ganymede/plugins/org.openarchitectureware.recipe.eclipseChecks_4.3.1.20090107-2000PRD.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/eclipse-ganymede/plugins/org.openarchitectureware.recipe.simpleChecks_4.3.1.20090107-2000PRD.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/eclipse-ganymede/plugins/org.openarchitectureware.recipe.workflow_4.3.1.20090107-2000PRD.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/eclipse-ganymede/plugins/org.openarchitectureware.recipe_4.3.1.20090107-2000PRD.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/eclipse-ganymede/plugins/org.openarchitectureware.uml2.adapter.plugin_4.3.1.20090107-2000PRD.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/eclipse-ganymede/plugins/org.openarchitectureware.uml2.adapter_4.3.1.20090107-2000PRD.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/eclipse-ganymede/plugins/org.openarchitectureware.util.featureconfig_4.3.1.20090107-2000PRD.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/eclipse-ganymede/plugins/org.openarchitectureware.util.stdlib_4.3.1.20090107-2000PRD.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/eclipse-ganymede/plugins/org.openarchitectureware.util.uml2ecore_4.3.1.20090107-2000PRD.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/eclipse-ganymede/plugins/org.openarchitectureware.util.xvar_4.3.1.20090107-2000PRD.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/eclipse-ganymede/plugins/org.openarchitectureware.util.xweave_4.3.1.20090107-2000PRD.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/eclipse-ganymede/plugins/org.openarchitectureware.workflow_4.3.1.20090107-2000PRD.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/eclipse-ganymede/plugins/org.openarchitectureware.xpand2.editor_4.3.1.20090107-2000PRD.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/eclipse-ganymede/plugins/org.openarchitectureware.xsd.demos_4.3.1.20090107-2000PRD.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/eclipse-ganymede/plugins/org.openarchitectureware.xsd.plugin_4.3.1.20090107-2000PRD.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/eclipse-ganymede/plugins/org.openarchitectureware.xsd_4.3.1.20090107-2000PRD.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/eclipse-ganymede/plugins/org.openarchitectureware.xtend.editor_4.3.1.20090107-2000PRD.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/eclipse-ganymede/plugins/org.openarchitectureware.xtext.core.base_4.3.1.20090107-2000PRD.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/eclipse-ganymede/plugins/org.openarchitectureware.xtext.core_4.3.1.20090107-2000PRD.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/eclipse-ganymede/plugins/org.openarchitectureware.xtext.editor.base_4.3.1.20090107-2000PRD.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/eclipse-ganymede/plugins/org.openarchitectureware.xtext.editor_4.3.1.20090107-2000PRD.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/eclipse-ganymede/plugins/org.openarchitectureware.xtext.generator_4.3.1.20090107-2000PRD.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/eclipse-ganymede/plugins/org.antlr.runtime_3.0.0/antlr-runtime-3.0.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/eclipse-ganymede/plugins/org.antlr_3.0.0/antlr-2.7.7.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/eclipse-ganymede/plugins/org.apache.commons.logging_1.0.4.v20080605-1930.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/eclipse-ganymede/plugins/org.apache.commons.cli_1.0.0.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/eclipse-ganymede/google-gson-1.3/gson-1.3.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/eclipse-ganymede/plugins/org.eclipse.xsd_2.4.2.v200902171115.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

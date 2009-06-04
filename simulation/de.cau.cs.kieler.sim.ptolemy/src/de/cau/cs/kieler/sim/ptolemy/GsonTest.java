@@ -23,6 +23,7 @@ import ptolemy.data.IntToken;
  * @author cmot
  *
  */
+
 public class GsonTest {
 
 	public static void main(String[] args) {
@@ -43,3 +44,12 @@ public class GsonTest {
 	}
 
 }
+
+///////////////
+//  OUTPUT:  //
+///////////////
+//
+//ptolemy data orginal:5
+//ptolemy data JSON:{"_value":5}
+//ptolemy data recovered:5
+//

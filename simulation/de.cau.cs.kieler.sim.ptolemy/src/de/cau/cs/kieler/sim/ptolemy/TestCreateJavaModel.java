@@ -65,6 +65,7 @@ public class TestCreateJavaModel {
             
             // run forest, run!
             manager.initialize();
+            ///manager.stop();
             for(int i=0; i<=10; i++){
                 manager.iterate();
             }

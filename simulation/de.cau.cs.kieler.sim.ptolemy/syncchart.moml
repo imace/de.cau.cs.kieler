@@ -17,7 +17,7 @@
         <property class="ptolemy.domains.fsm.kernel.OutputActionsAttribute" name="outputActions"/>
         <property class="ptolemy.domains.fsm.kernel.CommitActionsAttribute" name="setActions"/>
         <property class="ptolemy.data.expr.Parameter" name="reset" value="false"/>
-        <property class="ptolemy.data.expr.Parameter" name="preemptive" value="false"/>
+        <property class="ptolemy.data.expr.Parameter" name="preemptive" value="true"/>
         <property class="ptolemy.data.expr.Parameter" name="defaultTransition" value="false"/>
         <property class="ptolemy.data.expr.Parameter" name="nondeterministic" value="false"/>
         <property class="ptolemy.kernel.util.StringAttribute" name="refinementName"/>
@@ -42,7 +42,7 @@
             <property class="ptolemy.domains.fsm.kernel.CommitActionsAttribute" name="setActions"/>
             <property class="ptolemy.data.expr.Parameter" name="reset" value="false"/>
             <property class="ptolemy.data.expr.Parameter" name="preemptive" value="false"/>
-            <property class="ptolemy.data.expr.Parameter" name="defaultTransition" value="false"/>
+            <property class="ptolemy.data.expr.Parameter" name="defaultTransition" value="true"/>
             <property class="ptolemy.data.expr.Parameter" name="nondeterministic" value="false"/>
             <property class="ptolemy.kernel.util.StringAttribute" name="refinementName"/>
           </relation>
@@ -65,7 +65,7 @@
                 <property class="ptolemy.domains.fsm.kernel.OutputActionsAttribute" name="outputActions"/>
                 <property class="ptolemy.domains.fsm.kernel.CommitActionsAttribute" name="setActions"/>
                 <property class="ptolemy.data.expr.Parameter" name="reset" value="false"/>
-                <property class="ptolemy.data.expr.Parameter" name="preemptive" value="false"/>
+                <property class="ptolemy.data.expr.Parameter" name="preemptive" value="true"/>
                 <property class="ptolemy.data.expr.Parameter" name="defaultTransition" value="false"/>
                 <property class="ptolemy.data.expr.Parameter" name="nondeterministic" value="false"/>
                 <property class="ptolemy.kernel.util.StringAttribute" name="refinementName"/>
@@ -88,7 +88,7 @@
                 <property class="ptolemy.domains.fsm.kernel.OutputActionsAttribute" name="outputActions"/>
                 <property class="ptolemy.domains.fsm.kernel.CommitActionsAttribute" name="setActions"/>
                 <property class="ptolemy.data.expr.Parameter" name="reset" value="false"/>
-                <property class="ptolemy.data.expr.Parameter" name="preemptive" value="false"/>
+                <property class="ptolemy.data.expr.Parameter" name="preemptive" value="true"/>
                 <property class="ptolemy.data.expr.Parameter" name="defaultTransition" value="false"/>
                 <property class="ptolemy.data.expr.Parameter" name="nondeterministic" value="false"/>
                 <property class="ptolemy.kernel.util.StringAttribute" name="refinementName"/>
