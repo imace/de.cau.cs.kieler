@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <workflow>
-	<property name="emfmetamodel" value="platform:/resource/de.cau.cs.kieler.sim.ptolemy/simplerailctrl.ecore" />
+	<property name="emfmetamodel" value="platform:/resource/de.cau.cs.kieler.sim.ptolemy/synccharts.ecore" />
 	<property name="ptometamodel" value="platform:/resource/de.cau.cs.kieler.sim.ptolemy/MoML.ecore" />
 	
-	<property name="emfmodel" value="platform:/resource/de.cau.cs.kieler.sim.ptolemy/girlsday.simplerailctrl" />
+	<property name="emfmodel" value="platform:/resource/de.cau.cs.kieler.sim.ptolemy/abro.synccharts" />
 
 	<!-- set up EMF for standalone execution -->
 	<bean class="org.eclipse.mwe.emf.StandaloneSetup" >
@@ -37,7 +37,7 @@
 
 	<!-- store model -->
 	<component class="de.cau.cs.kieler.sim.ptolemy.EmfMomlWriter">
-		<uri value="railcontroller.moml" />
+		<uri value="syncchart.moml" />
 		<modelSlot value="ptomodel"/>
 	</component>
 
