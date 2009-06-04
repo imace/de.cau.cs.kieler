@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<synccharts:Region xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:synccharts="http://www.informatik.uni-kiel.de/rtsys/synccharts">
+  <innerStates name="SIMPLE SYNC CHART">
+    <signals name="C" isInput="true"/>
+    <signals name="D" isOutput="true"/>
+    <regions>
+      <innerStates stateFlag="INITIAL" name="A">
+        <outgoingTransitions triggersAndEffects="C / D" targetState="//@innerStates.0/@regions.0/@innerStates.1">
+          <emissions signal="//@innerStates.0/@signals.1"/>
+          <trigger xsi:type="synccharts:SignalReference" signal="//@innerStates.0/@signals.0"/>
+        </outgoingTransitions>
+      </innerStates>
+      <innerStates stateFlag="FINAL" name="B"/>
+    </regions>
+  </innerStates>
+</synccharts:Region>

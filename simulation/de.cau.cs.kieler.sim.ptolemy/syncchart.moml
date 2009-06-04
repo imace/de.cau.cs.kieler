@@ -10,15 +10,19 @@
     <entity class="ptolemy.domains.fsm.modal.ModalController" name="_Controller">
       <entity class="ptolemy.domains.fsm.kernel.State" name="ABO">
         <property class="ptolemy.kernel.util.StringAttribute" name="refinementName" value="ABO"/>
+        <property class="ptolemy.data.expr.Parameter" name="isInitialState" value="true"/>
       </entity>
     </entity>
     <entity class="ptolemy.domains.fsm.modal.Refinement" name="ABO">
       <entity class="ptolemy.domains.fsm.modal.ModalModel" name="ABO_region_0">
         <property class="ptolemy.vergil.fsm.modal.ModalTableauFactory" name="_tableauFactory"/>
         <entity class="ptolemy.domains.fsm.modal.ModalController" name="_Controller">
-          <entity class="ptolemy.domains.fsm.kernel.State" name="done"/>
+          <entity class="ptolemy.domains.fsm.kernel.State" name="done">
+            <property class="ptolemy.data.expr.Parameter" name="isFinalState" value="true"/>
+          </entity>
           <entity class="ptolemy.domains.fsm.kernel.State" name="Wait A and B">
             <property class="ptolemy.kernel.util.StringAttribute" name="refinementName" value="Wait A and B"/>
+            <property class="ptolemy.data.expr.Parameter" name="isInitialState" value="true"/>
           </entity>
         </entity>
         <entity class="ptolemy.domains.fsm.modal.Refinement" name="Wait A and B">
@@ -26,15 +30,23 @@
           <entity class="ptolemy.domains.fsm.modal.ModalModel" name="Wait A and B_region_1">
             <property class="ptolemy.vergil.fsm.modal.ModalTableauFactory" name="_tableauFactory"/>
             <entity class="ptolemy.domains.fsm.modal.ModalController" name="_Controller">
-              <entity class="ptolemy.domains.fsm.kernel.State" name="dB"/>
-              <entity class="ptolemy.domains.fsm.kernel.State" name="wB"/>
+              <entity class="ptolemy.domains.fsm.kernel.State" name="dB">
+                <property class="ptolemy.data.expr.Parameter" name="isFinalState" value="true"/>
+              </entity>
+              <entity class="ptolemy.domains.fsm.kernel.State" name="wB">
+                <property class="ptolemy.data.expr.Parameter" name="isInitialState" value="true"/>
+              </entity>
             </entity>
           </entity>
           <entity class="ptolemy.domains.fsm.modal.ModalModel" name="Wait A and B_region_0">
             <property class="ptolemy.vergil.fsm.modal.ModalTableauFactory" name="_tableauFactory"/>
             <entity class="ptolemy.domains.fsm.modal.ModalController" name="_Controller">
-              <entity class="ptolemy.domains.fsm.kernel.State" name="dA"/>
-              <entity class="ptolemy.domains.fsm.kernel.State" name="wA"/>
+              <entity class="ptolemy.domains.fsm.kernel.State" name="dA">
+                <property class="ptolemy.data.expr.Parameter" name="isFinalState" value="true"/>
+              </entity>
+              <entity class="ptolemy.domains.fsm.kernel.State" name="wA">
+                <property class="ptolemy.data.expr.Parameter" name="isInitialState" value="true"/>
+              </entity>
             </entity>
           </entity>
         </entity>

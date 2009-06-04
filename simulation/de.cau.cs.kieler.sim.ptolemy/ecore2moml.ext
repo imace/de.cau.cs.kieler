@@ -3,31 +3,28 @@ import Moml;
 
 //-----------------------------------------------------------------------------
 
-Void dump(String s) :
-	JAVA de.cau.cs.kieler.sim.ptolemy.XtendJavaSystemOutput.dump(java.lang.String)
-;
-
+//Start Model Transformation here
 create DocumentRoot this transform(synccharts::Region sc):
  	this.setEntity(createBaseEntity(sc))
 ;   
 	
-	
-//creates basic / outer most enclosing entity	
+//-----------------------------------------------------------------------------
+
+//create basic / outer most enclosing entity	
 create EntityType this createBaseEntity(synccharts::Region mainRegion):
    	this.setName(mainRegion.innerStates.get(0).name + "_simulation") ->
   	this.setClass1("ptolemy.actor.TypedCompositeActor") ->
    	this.property.add(createDEDirector()) ->
-	dump("created:" + this.name ) ->
-    IterateRegions(mainRegion.innerStates.get(0).regions, this)
    	//mainRegion has exactly ONE top most state
    	//iterate over all regions within this top most state
    	//the name of this containing Entity is derived from this
    	//   top most state, w/ " simulation" added
+    IterateRegions(mainRegion.innerStates.get(0).regions, this)
+    //add "this" EntityType so that IterateRegions is able to add 
+    //new entities or properties
 ;
 
-
-
-//ModalModel == Region-Component 
+//create ModalModel == Region-Component 
 create EntityType this createModalModelEntity(synccharts::Region region, int number):
 	let p1 = new PropertyType:
 		p1.setName("_tableauFactory") ->
@@ -35,21 +32,20 @@ create EntityType this createModalModelEntity(synccharts::Region region, int num
 	this.property.add(p1) ->
    	this.setName(region.parentState.name + "_region_" + number) ->
   	this.setClass1("ptolemy.domains.fsm.modal.ModalModel") ->
-   	//this.property.add(createFSMDirector()) ->
-	dump("created:" + this.name ) ->
+  	//first create simple states and macro state declarations
    	this.entity.add(createModalControllerEntity(region)) ->
+   	//then add macro state refinements (for all macro states)
    	IterateStatesRefinement(region.innerStates, this)
 ;
-//ModalController == Region-Definition (has States and MacroStates)
+//create ModalController == Region-Declaration (simple states and macro states declarations)
 create EntityType this createModalControllerEntity(synccharts::Region region):
    	this.setName("_Controller") ->
   	this.setClass1("ptolemy.domains.fsm.modal.ModalController") ->
-	dump("created:" + this.name ) ->
 	IterateStates(region.innerStates, this)
 ;
 
 
-//MacroState == State-Component (of a MacroState)
+//create MacroState == State-Component (of a macro state)
 create EntityType this createMacroStateEntity(synccharts::State state):
 	let p1 = new PropertyType:
 		p1.setName("refinementName") ->
@@ -58,35 +54,59 @@ create EntityType this createMacroStateEntity(synccharts::State state):
    	this.setName(state.name) ->
   	this.setClass1("ptolemy.domains.fsm.kernel.State") ->
 	this.property.add(p1) ->
-	dump("created:" + this.name ) 
+  	SetStateInitialFinalFlag(state, this)
 ;
-//ModalRefinement == State-Definition (of a MacroState = has Regions)
+//create ModalRefinement == State-Definition (of a macro state /w regions)
 create EntityType this createMacroStateRefinementEntity(synccharts::State state):
    	this.setName(state.name) ->
   	this.setClass1("ptolemy.domains.fsm.modal.Refinement") ->
    	this.property.add(createSRDirector()) ->
-	dump("created:" + this.name ) ->
    	IterateRegions(state.regions, this)
 ;
-
-
-//SimpleState == State-Component 
+//create SimpleState == State-Component 
 create EntityType this createSimpleStateEntity(synccharts::State state):
    	this.setName(state.name) ->
-  	this.setClass1("ptolemy.domains.fsm.kernel.State")
+  	this.setClass1("ptolemy.domains.fsm.kernel.State") ->
+  	SetStateInitialFinalFlag(state, this)
 ;
 
-
+//-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
+//HELPER//
+//just do some java console output for debugging purpose 
+Void dump(String s) :
+	JAVA de.cau.cs.kieler.sim.ptolemy.XtendJavaSystemOutput.dump(java.lang.String)
+;
 
-//test whether a state is a macrostate or a simplestate
+//HELPER//
+//decide whether a states is initial or final and add the appropriate
+//property to the entity
+void SetStateInitialFinalFlag(synccharts::State state, EntityType entity) :
+	let p1 = new PropertyType:
+	let p2 = new PropertyType:
+		p1.setName("isInitialState") ->
+		p1.setClass("ptolemy.data.expr.Parameter") ->
+		p1.setValue("true") ->
+		p2.setName("isFinalState") ->
+		p2.setClass("ptolemy.data.expr.Parameter") ->
+		p2.setValue("true") ->
+  	state.stateFlag.toString().matches("INITIAL") ? entity.property.add(p1) : null ->
+  	state.stateFlag.toString().matches("FINAL") ? entity.property.add(p2) : null
+;
+
+//HELPER//
+//test whether a state is a macro state or a simple state
 boolean IsMacroState(synccharts::State state) :
  	state.regions.size > 0
 ; 
 
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
-//iteratate over all states (in a region) - list them as a refinement property
+//iteratate over all states (in a region)
+//for  macro states : add states entity AND list them as a refinement property
+//for simple states : add states
 void IterateStates(List[synccharts::State] stateList, EntityType entity):
    	IterateStatesHelper(stateList, entity, stateList.size-1)
 ;
@@ -96,7 +116,9 @@ int IterateStatesHelper(List[synccharts::State] stateList, EntityType entity, in
     (i > 0) ? IterateStatesHelper(stateList, entity, i-1) : i
 ;
 
-//iteratate over all states (in a region) - define the refinement (and recursively add regions!)
+//iteratate over all states (in a region)
+//for  macro states : define the refinement (and recursively add regions!)
+//for simple states : do nothing
 void IterateStatesRefinement(List[synccharts::State] stateList, EntityType entity):
    	IterateStatesRefinementHelper(stateList, entity, stateList.size-1)
 ;
@@ -107,8 +129,8 @@ int IterateStatesRefinementHelper(List[synccharts::State] stateList, EntityType 
 ;
 
 
-
 //iterate over all regions (in a state)
+//add an own modal model for each region
 void IterateRegions(List[synccharts::Region] regionList, EntityType entity):
    	IterateRegionsHelper(regionList, entity, regionList.size-1)
 ;
