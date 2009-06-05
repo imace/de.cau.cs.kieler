@@ -12,7 +12,7 @@
 
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package
-            uri="http://www.informatik.uni-kiel.de/rtsys/snyccharts"
+            uri="http://www.informatik.uni-kiel.de/rtsys/synccharts"
             class="de.cau.cs.kieler.synccharts.SyncchartsPackage"
             genModel="model/synccharts.genmodel"/>
    </extension>
