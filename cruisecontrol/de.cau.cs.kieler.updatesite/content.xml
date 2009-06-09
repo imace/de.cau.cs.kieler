@@ -3,12 +3,12 @@
 <repository name='file:/home/haf/shared/kieler/workspace2/de.cau.cs.kieler.updatesite/ - metadata' type='org.eclipse.equinox.internal.p2.metadata.repository.LocalMetadataRepository' version='1.0.0'>
   <properties size='2'>
     <property name='p2.compressed' value='false'/>
-    <property name='p2.timestamp' value='1244221189682'/>
+    <property name='p2.timestamp' value='1244546752097'/>
   </properties>
   <references size='4'>
     <repository url='http://www.openarchitectureware.org/updatesite/milestone/site.xml' type='1' options='0'/>
-    <repository url='http://rtsys.informatik.uni-kiel.de/~kieler/updatesite' type='1' options='0'/>
     <repository url='http://www.openarchitectureware.org/updatesite/milestone/site.xml' type='0' options='0'/>
+    <repository url='http://rtsys.informatik.uni-kiel.de/~kieler/updatesite' type='1' options='0'/>
     <repository url='http://rtsys.informatik.uni-kiel.de/~kieler/updatesite' type='0' options='0'/>
   </references>
   <units size='19'>
