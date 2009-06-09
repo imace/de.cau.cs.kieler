@@ -13,50 +13,51 @@
       </toc>
    </extension>
    
+<!--
    <extension point="org.eclipse.ui.commands">
-	  <category name="SSM2" description="Commands related to SSM diagrams." id="org.eclipse.gmf.category.synccharts"/>
+	  <category name="Synccharts" description="Commands related to state charts." id="org.eclipse.gmf.category.synccharts"/>
 	  <command categoryId="org.eclipse.gmf.category.synccharts" description="Adds a new OnEntryAction" id="de.cau.cs.kieler.synccharts.custom.contextMenu.addEntryAction" name="Add OnEntryAction">
 	  </command>
    </extension>
    
     <extension point="org.eclipse.ui.commands">
-	  <category name="SSM2" description="Commands related to SSM diagrams." id="org.eclipse.gmf.category.synccharts"/>
+	  <category name="Synccharts" description="Commands related to state charts." id="org.eclipse.gmf.category.synccharts"/>
 	  <command categoryId="org.eclipse.gmf.category.synccharts" description="Adds a new OnInsideAction" id="de.cau.cs.kieler.synccharts.custom.contextMenu.addInnerAction" name="Add OnInsideAction">
 	  </command>
    </extension>
    
    <extension point="org.eclipse.ui.commands">
-	  <category name="SSM2" description="Commands related to SSM diagrams." id="org.eclipse.gmf.category.synccharts"/>
+	  <category name="Synccharts" description="Commands related to state charts." id="org.eclipse.gmf.category.synccharts"/>
 	  <command categoryId="org.eclipse.gmf.category.synccharts" description="Adds a new OnExitAction" id="de.cau.cs.kieler.synccharts.custom.contextMenu.addExitAction" name="Add OnExitAction">
 	  </command>
    </extension>
    
    <extension point="org.eclipse.ui.commands">
-	  <category name="SSM2" description="Commands related to SSM diagrams." id="org.eclipse.gmf.category.synccharts"/>
+	  <category name="Synccharts" description="Commands related to state charts." id="org.eclipse.gmf.category.synccharts"/>
 	  <command categoryId="org.eclipse.gmf.category.synccharts" description="Adds a new Signal" id="de.cau.cs.kieler.synccharts.custom.contextMenu.addSignal" name="Add Signal">
 	  </command>
    </extension>
    
    <extension point="org.eclipse.ui.commands">
-	  <category name="SSM2" description="Commands related to SSM diagrams." id="org.eclipse.gmf.category.synccharts"/>
+	  <category name="Synccharts" description="Commands related to state charts." id="org.eclipse.gmf.category.synccharts"/>
 	  <command categoryId="org.eclipse.gmf.category.synccharts" description="Adds a new Variable" id="de.cau.cs.kieler.synccharts.custom.contextMenu.addVariable" name="Add Variable">
 	  </command>
    </extension>
    
    <extension point="org.eclipse.ui.commands">
-	  <category name="SSM2" description="Commands related to SSM diagrams." id="org.eclipse.gmf.category.synccharts"/>
+	  <category name="Synccharts" description="Commands related to state charts." id="org.eclipse.gmf.category.synccharts"/>
 	  <command categoryId="org.eclipse.gmf.category.synccharts" description="Adds a new SuspensionTrigger" id="de.cau.cs.kieler.synccharts.custom.contextMenu.addSuspensionTrigger" name="Add SuspensionTrigger">
 	  </command>
    </extension>
    
    <extension point="org.eclipse.ui.commands">
-	  <category name="SSM2" description="Commands related to SSM diagrams." id="org.eclipse.gmf.category.synccharts"/>
+	  <category name="Synccharts" description="Commands related to state charts." id="org.eclipse.gmf.category.synccharts"/>
 	  <command categoryId="org.eclipse.gmf.category.synccharts" description="Adds a new Region" id="de.cau.cs.kieler.synccharts.custom.contextMenu.addRegion" name="Add Region">
 	  </command>
    </extension>
    
    <extension point="org.eclipse.ui.commands">
-	  <category name="SSM2" description="Commands related to SSM diagrams." id="org.eclipse.gmf.category.synccharts"/>
+	  <category name="Synccharts" description="Commands related to state charts." id="org.eclipse.gmf.category.synccharts"/>
 	  <command categoryId="org.eclipse.gmf.category.synccharts" description="Adds a new State" id="de.cau.cs.kieler.synccharts.custom.contextMenu.addState" name="Add State">
 	  </command>
    </extension>
@@ -242,8 +243,58 @@
                label="Add State"
                menubarPath="ElementInsert/group1">
          </action>
-      </objectContribution>
-      
-   </extension>
+      </objectContribution> 
+-->
 
+<extension
+	point="org.eclipse.ui.menus">
+	<menuContribution
+  		locationURI="menu:org.eclipse.ui.main.menu?after=additions">
+		<menu
+    		id="de.cau.cs.kieler.synccharts.custom.contextMenu.ui.menu.synccharts"
+    		label="Syncchart"
+    		mnemonic="S">
+		</menu>
+	</menuContribution>
+	<menuContribution
+		locationURI="popup:org.eclipse.ui.popup.any?after=additions">
+   		<menu
+			label="Syncchart">
+	   		<command
+	        	commandId="de.cau.cs.kieler.synccharts.custom.contextMenu.addEntryAction"
+	        	label="Add OnEntryAction"
+	        	style="push">
+	    	</command>
+	    </menu>
+	</menuContribution>
+	<menuContribution
+	      locationURI="toolbar:org.eclipse.ui.main.toolbar?after=additions">
+	   	<toolbar
+	         id="de.cau.cs.kieler.synccharts.custom.contextMenu.ui.toolbar.main">
+	         <command
+	            commandId="de.cau.cs.kieler.synccharts.custom.contextMenu.addEntryAction"
+	            label="Add OnEntryAction"
+	            style="push">
+	     	 </command>
+	    </toolbar>
+	</menuContribution>
+</extension>
+	
+<extension
+	point="org.eclipse.ui.commands">
+	<command
+		description="Add new OnEntryAction to selected state"
+		id="de.cau.cs.kieler.synccharts.custom.contextMenu.addEntryAction"
+	    name="Add OnEntryAction">
+	</command>
+</extension>
+	   
+<extension
+	point="org.eclipse.ui.handlers">
+	<handler
+		class="de.cau.cs.kieler.synccharts.custom.contextMenu.AddEntryActionHandler"
+	    commandId="de.cau.cs.kieler.synccharts.custom.contextMenu.addEntryAction">
+	</handler>
+</extension>
+	
 </plugin>
