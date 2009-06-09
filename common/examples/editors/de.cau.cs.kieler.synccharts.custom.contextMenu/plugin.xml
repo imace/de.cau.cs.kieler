@@ -13,7 +13,6 @@
       </toc>
    </extension>
    
-<!--
    <extension point="org.eclipse.ui.commands">
 	  <category name="Synccharts" description="Commands related to state charts." id="org.eclipse.gmf.category.synccharts"/>
 	  <command categoryId="org.eclipse.gmf.category.synccharts" description="Adds a new OnEntryAction" id="de.cau.cs.kieler.synccharts.custom.contextMenu.addEntryAction" name="Add OnEntryAction">
@@ -244,9 +243,8 @@
                menubarPath="ElementInsert/group1">
          </action>
       </objectContribution> 
--->
-
-<extension
+	</extension>
+<!-- <extension
 	point="org.eclipse.ui.menus">
 	<menuContribution
   		locationURI="menu:org.eclipse.ui.main.menu?after=additions">
@@ -295,6 +293,6 @@
 		class="de.cau.cs.kieler.synccharts.custom.contextMenu.AddEntryActionHandler"
 	    commandId="de.cau.cs.kieler.synccharts.custom.contextMenu.addEntryAction">
 	</handler>
-</extension>
+</extension> -->
 	
 </plugin>
