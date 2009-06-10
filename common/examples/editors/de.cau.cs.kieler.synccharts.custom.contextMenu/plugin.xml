@@ -274,5 +274,20 @@
          </Priority>
       </contributionItemProvider>
    </extension>
+   <extension
+         point="org.eclipse.ui.editorActions">
+      <editorContribution
+            id="de.cau.cs.kieler.synccharts.custom.contextMenu.editorContribution1"
+            targetID="de.cau.cs.kieler.synccharts.diagram.part.SyncchartsDiagramEditorID">
+         <action
+               class="de.cau.cs.kieler.synccharts.custom.contextMenu.TestEditorActionDelegate"
+               id="de.cau.cs.kieler.synccharts.custom.contextMenu.action1"
+               label="AddSignal"
+               menubarPath="/diagramMenu"
+               style="push"
+               toolbarPath="/addMenu">
+         </action>
+      </editorContribution>
+   </extension>
 
 </plugin>
