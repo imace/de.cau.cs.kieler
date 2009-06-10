@@ -52,8 +52,10 @@ import de.cau.cs.kieler.sim.kiem.Tools;
 
 public class KiemView extends ViewPart {
 	private TableViewer viewer;
+	private Action action0;
 	private Action action1;
 	private Action action2;
+	private Action action3;
 	private Action doubleClickAction;
 	
 	public static final String ID = "de.cau.cs.kieler.sim.kiem.views.KiemView";
@@ -78,7 +80,12 @@ public class KiemView extends ViewPart {
 		public void dispose() {
 		}
 		public Object[] getElements(Object parent) {
-			return new String[] { "One", "Two", "Three" };
+			String[] returnList = new String[dataProducerList.size()];
+			for (int i = 0; i < dataProducerList.size(); i++) {
+				returnList[i] = dataProducerList.get(i).getName();
+			}
+			
+			return returnList;
 		}
 	}
 	class ViewLabelProvider extends LabelProvider implements ITableLabelProvider {
@@ -102,11 +109,7 @@ public class KiemView extends ViewPart {
 	 */
 	public KiemView() {
 		dataProducerList = this.getDataProducerList();
-		for (int i = 0; i < dataProducerList.size(); i++) {
-			System.out.print(dataProducerList.get(i).getName());
-		}
-		System.out.print("TEST");
-		this.setTitle(Messages.ViewTitle);
+		//this. (Messages.ViewTitle);
 	}
 
 	/**
@@ -161,28 +164,40 @@ public class KiemView extends ViewPart {
 	}
 	
 	private void fillLocalToolBar(IToolBarManager manager) {
+		manager.add(action0);
 		manager.add(action1);
 		manager.add(action2);
+		manager.add(action3);
 	}
 
 	private void makeActions() {
-		action1 = new Action() {
+		action0 = new Action() {
 			public void run() {
 				showMessage("Model simulation run");
 			}
 		};
-		action1.setText("Run/Resume");
-		action1.setToolTipText("Run or Resume the model");
-		action1.setImageDescriptor(KiemPlugin.getImageDescriptor("icons/play.gif"));
+		action0.setText("Step");
+		action0.setToolTipText("Make a step");
+		action0.setImageDescriptor(KiemPlugin.getImageDescriptor("icons/StepIcon.gif"));
+
+		action1 = new Action() {
+			public void run() {
+				showMessage("Model simulation play");
+			}
+		};
+		action1.setText("Play");
+		action1.setToolTipText("Make several steps");
+		action1.setImageDescriptor(KiemPlugin.getImageDescriptor("icons/PlayIcon.gif"));
+		
 		
 		action2 = new Action() {
 			public void run() {
-				showMessage("Model simulation pause");
+				showMessage("Pause simulation");
 			}
 		};
 		action2.setText("Pause");
-		action2.setToolTipText("Pause the model");
-		action2.setImageDescriptor(KiemPlugin.getImageDescriptor("icons/pause.gif"));
+		action2.setToolTipText("Pause simulation");
+		action2.setImageDescriptor(KiemPlugin.getImageDescriptor("icons/PauseIcon.gif"));
 		doubleClickAction = new Action() {
 			public void run() {
 				ISelection selection = viewer.getSelection();
@@ -190,6 +205,15 @@ public class KiemView extends ViewPart {
 				showMessage("Double-click detected on "+obj.toString());
 			}
 		};
+		
+		action3 = new Action() {
+			public void run() {
+				showMessage("Stop simulation");
+			}
+		};
+		action3.setText("Stop");
+		action3.setToolTipText("Stop simulation");
+		action3.setImageDescriptor(KiemPlugin.getImageDescriptor("icons/StopIcon.gif"));
 	}
 
 	private void hookDoubleClickAction() {
