@@ -1,9 +1,9 @@
 /* An actor that interacts with the Model Railway (and its simulation) of
    the Department of Computer Science of Kiel University, Germany.
-   
+
    The Model Railway can be found here:
    http://www.informatik.uni-kiel.de/~railway/
-   
+
    The simulation of the Model Railway can be found here:
    http://rtsys.informatik.uni-kiel.de/~biblio/downloads/theses/cmot-st.pdf
 
@@ -16,18 +16,18 @@
  of this software.
 
  IN NO EVENT SHALL THE AUTHOR BE LIABLE TO ANY PARTY FOR DIRECT, INDIRECT,
- SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES ARISING OUT OF THE USE OF 
+ SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES ARISING OUT OF THE USE OF
  THIS SOFTWARE AND ITS DOCUMENTATION, EVEN IF THE AUTHOR HAS BEEN ADVISED
  OF THE POSSIBILITY OF SUCH DAMAGE.
 
  THE AUTHOR SPECIFICALLY DISCLAIMS ANY WARRANTIES, INCLUDING, BUT NOT
  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
- A PARTICULAR PURPOSE. THE SOFTWARE PROVIDED HEREUNDER IS ON AN "AS IS" 
+ A PARTICULAR PURPOSE. THE SOFTWARE PROVIDED HEREUNDER IS ON AN "AS IS"
  BASIS, AND THE AUTHOR HAS NO OBLIGATION TO PROVIDE MAINTENANCE, SUPPORT,
  UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 
 */
-package de.cau.cs.kieler.sim.ptolemy;
+package ptolemy.actor.lib;
 
 import ptolemy.actor.TypedAtomicActor;
 import ptolemy.actor.TypedIOPort;
@@ -53,13 +53,13 @@ import java.net.*;
  http://www.informatik.uni-kiel.de/~railway/
  The simulation of the Model Railway can be found here:
  http://rtsys.informatik.uni-kiel.de/~biblio/downloads/theses/cmot-st.pdf
- 
+
  Input track, point and signal commands as RecordTokens of the following form:
  port={track2={motormode=1,speed=100}}
  where motormode can be off(0), primary(1), secondary(2) or brake(3)
    	   DEFAULT is primary(1)
    and speed is a value between 0 .. 100
-       DEFAULT is 0  
+       DEFAULT is 0
  port={point2={turn=0}}
  where a turn value of 0 indicates straight and
        a turn value of 1 indicates turn position
@@ -76,7 +76,7 @@ import java.net.*;
   contact: not triggered(-1), triggered first(0) and triggered second(1)
   		   in default driving direction
  occupied: not occupied(0) or occupied(1)
- 
+
  @author Christian Motika
  @version $Id: ModelRailwayIO.java 44783 2009-06-07 16:41:17Z $
  @since Ptolemy II 0.2
@@ -88,7 +88,7 @@ public class ModelRailwayIO extends TypedAtomicActor {
      *  the <i>host</i> and <i>port</i> parameters, the <i>speed</i>,
      *  <i>point</i> and <i>signal</i> input ports and the <i>contact</i>
      *  and <i>occupied</i> output ports. Initialize <i>host</i>
-     *  to StringToken with value 'localhost', and <i>port</i> to 
+     *  to StringToken with value 'localhost', and <i>port</i> to
      *  IntToken with value 2000.
      *  @param container The container.
      *  @param name The name of this actor.
@@ -100,12 +100,12 @@ public class ModelRailwayIO extends TypedAtomicActor {
     public ModelRailwayIO(CompositeEntity container, String name)
             throws NameDuplicationException, IllegalActionException {
         super(container, name);
-        
+
         host = new Parameter(this, "host");
         host.setExpression("'localhost'");
         port = new Parameter(this, "port");
         port.setExpression("2000");
-        
+
         trigger   = new TypedIOPort(this, "trigger", true, false);
         tracks    = new TypedIOPort(this, "tracks", true, false);
         points    = new TypedIOPort(this, "points", true, false);
@@ -121,8 +121,8 @@ public class ModelRailwayIO extends TypedAtomicActor {
     ///////////////////////////////////////////////////////////////////
     ////                     ports and parameters                  ////
 
-    /** The host and port to make the connection to, i.e., where the 
-     *  Model Railway interface program is running. Often this is set to 
+    /** The host and port to make the connection to, i.e., where the
+     *  Model Railway interface program is running. Often this is set to
      *  the string value 'localhost' for the host and 2000 for the port.
      */
     public Parameter host;
@@ -137,7 +137,7 @@ public class ModelRailwayIO extends TypedAtomicActor {
      *  where motormode can be off(0), primary(1), secondary(2) or brake(3)
      *  	  DEFAULT is primary(1)
      *    and speed is a value between 0 .. 100
-     *    	  DEFAULT is 0  
+     *    	  DEFAULT is 0
      */
     public TypedIOPort tracks;
 
@@ -169,13 +169,13 @@ public class ModelRailwayIO extends TypedAtomicActor {
      */
     public TypedIOPort occupied;
 
-    
+
     ///////////////////////////////////////////////////////////////////
     ////                         public methods                    ////
 
     /** Collect the trigger Token first, then process possible speed, point
      *  or signal commands. After that collect the reed contact values to
-     *  an ArrayToken. Also do this for the occupied track states. 
+     *  an ArrayToken. Also do this for the occupied track states.
      *  @exception IllegalActionException If calling send() or super.fire()
      *  throws it.
      */
@@ -191,7 +191,7 @@ public class ModelRailwayIO extends TypedAtomicActor {
         if (tracks.getWidth() > 0) {
             if (tracks.hasToken(0)) {
             	RecordToken token = (RecordToken)tracks.get(0);
-            	for (int i = 1; i < 48; i++) {
+            	for (int i = 0; i < 48; i++) {
             		try{
             			RecordToken token2 = (RecordToken)token.get("track"+i);
             			if (token2 != null) {
@@ -224,12 +224,12 @@ public class ModelRailwayIO extends TypedAtomicActor {
             	catch(Exception e){}
             }
          }
-        
+
         //process point commands
         if (points.getWidth() > 0) {
             if (points.hasToken(0)) {
             	RecordToken token = (RecordToken)points.get(0);
-            	for (int i = 1; i < 29; i++) {
+            	for (int i = 0; i < 29; i++) {
             		try{
             			RecordToken token2 = (RecordToken)token.get("point"+i);
             			if (token2 != null) {
@@ -254,12 +254,12 @@ public class ModelRailwayIO extends TypedAtomicActor {
             	catch(Exception e){}
             }
          }
-        
+
         //process signal commands
         if (signals.getWidth() > 0) {
             if (signals.hasToken(0)) {
             	RecordToken token = (RecordToken)signals.get(0);
-            	for (int i = 1; i < 48; i++) {
+            	for (int i = 0; i < 48; i++) {
             		try{
             			RecordToken token2 = (RecordToken)token.get("signal"+i+"a");
             			if (token2 != null) {
@@ -298,37 +298,47 @@ public class ModelRailwayIO extends TypedAtomicActor {
             }
          }
 
-        //process contact events
+    	{
+            //process contact events
+            boolean found = true;
+        	Token[] tokenArray = new Token[48];
+        	int maxfound = 48;
+        	int foundcnt = 0;
+            while ((found && !this._stopRequested)&&(foundcnt < maxfound)) {
+            	found = false;
+            	try {
+            		RailwayInterface.Contact scancontact = RI.ScanContact(-1, -1, true);
+                	if ((scancontact.tracknum > -1)&&(scancontact.tracknum < 48)) {
+               			tokenArray[scancontact.tracknum] = new IntToken(scancontact.contactno);
+                		found = true;
+                		foundcnt++;
+                	}
+            	}catch(Exception e){e.printStackTrace();}
+            }
+        	for (int track = 0; track < 48; track++) {
+        		if(tokenArray[track] == null)
+        			tokenArray[track] = new IntToken(-1);
+        	}
+    		contact.send(0, new ArrayToken(tokenArray));
+        	}
+
+
+        {
+        //process occupied events
         boolean found = true;
     	Token[] tokenArray = new Token[48];
-        while (found && !this._stopRequested) {
-        	found = false;
-        	try {
-        		RailwayInterface.Contact scancontact = RI.ScanContact(-1, -1, true);
-            	if ((scancontact.tracknum > -1)&&(scancontact.tracknum < 48)) {
-           			tokenArray[scancontact.tracknum] = new IntToken(scancontact.contactno);
-            		found = true;
-            	}
-        	}catch(Exception e){}
-        }
-    	for (int track = 0; track < 48; track++) {
-    		if(tokenArray[track] == null)
-    			tokenArray[track] = new IntToken(-1);
-    	}
-		contact.send(0, new ArrayToken(tokenArray));
-        
-        //process occupied events
-        found = true;
-    	tokenArray = new Token[48];
+    	int maxfound = 48;
+    	int foundcnt = 0;
     	int currentTrack = -1;  //start w/ track 0 (-1+1=0)
-        while (found && !this._stopRequested) {
+        while ((found && !this._stopRequested)&&(foundcnt < maxfound)) {
         	found = false;
         	try {
         		currentTrack = RI.ScanTrackUsed(currentTrack);
-        	}catch(Exception e){}
+        	}catch(Exception e){e.printStackTrace();}
         	if (currentTrack > -1) {
        			tokenArray[currentTrack] = new IntToken(1);
         		found = true;
+        		foundcnt++;
         	}
         }
     	for (int track = 0; track < 48; track++) {
@@ -336,31 +346,32 @@ public class ModelRailwayIO extends TypedAtomicActor {
     			tokenArray[track] = new IntToken(0);
     	}
     	occupied.send(0, new ArrayToken(tokenArray));
-    	
+        }
+
         super.fire();
     }
 
-    
+
     /** Set the RailwayInterface and open a TCP connection to the
-     *  Model Railway interface program w/ the given <i>host</i> and 
+     *  Model Railway interface program w/ the given <i>host</i> and
      *  <i>port</i> parameters.
      *  @exception IllegalActionException If the parent class throws it.
      */
     public void initialize() throws IllegalActionException {
-    	
+
     	try {
     	if (RI == null)
-    		RI = new RailwayInterface(((StringToken)host.getToken()).stringValue(), 
+    		RI = new RailwayInterface(((StringToken)host.getToken()).stringValue(),
         	  						  ((IntToken)port.getToken()).intValue());
     	}catch(Exception e){
     		IllegalActionException e2 = new IllegalActionException(e.getMessage());
     		throw(e2);
     	}
-    	
+
         super.initialize();
     }
-    
-    
+
+
     /** Terminate the TCP connection of the Model Railway interface.
      *  Set RI object to null so that for the next execution a new
      *  connection will be made.
@@ -372,28 +383,28 @@ public class ModelRailwayIO extends TypedAtomicActor {
     	RI = null;
     	super.wrapup();
     }
-    
+
 
     ///////////////////////////////////////////////////////////////////
     ////                         private variables                 ////
     private RailwayInterface RI;
-    
 
- // ============================================================================ 
+
+ // ============================================================================
  // ==   Model Railway Interface - Java Side Part  == (c) C.Motika, Aug 2007  ==
  // ============================================================================
 
  /*! \file RailwayInterface.java
-  
+
    This module implements the Java side part of the Model Railway Interface
    that is intended to fit together with the Simulation and with the real Model
-   Railway Interface (UDP and Ethernet) invented initially by Stephan Hörmann. 
-  
+   Railway Interface (UDP and Ethernet) invented initially by Stephan Hï¿½rmann.
+
    The class below defines similar methods to be used in Java programs. An
    attached SampleController.java shows an example of how to use this class.
    Each method is described below. Often there are predefined constants that
    should be used in order to clearify the resulting programming code.
-   
+
    An instance of this class connects over the given host/port to the tcp
    interface program. The simulation cannot be started by the controller. There
    fore the GUI program that is also connected to the interface program that
@@ -403,12 +414,12 @@ public class ModelRailwayIO extends TypedAtomicActor {
    methods defined by this class will have no meaning and will be ignored.
 
   */
-   
+
   // ==========================================================================
-   
+
 
  public class RailwayInterface {
- 	
+
  	  public final int IC_JCT_0 = 0;  //!< track segment constant
  	  public final int IC_LN_0 = 1;   //!< track segment constant
  	  public final int IC_LN_1 = 2;   //!< track segment constant
@@ -457,57 +468,57 @@ public class ModelRailwayIO extends TypedAtomicActor {
  	  public final int OI_LN_0 = 45;  //!< track segment constant
  	  public final int OI_LN_1 = 46;  //!< track segment constant
  	  public final int OI_LN_2 = 47;  //!< track segment constant
- 	  
+
  	  public final int MOTORMODE_OFF       = 0;  //!< motormode constant
  	  public final int MOTORMODE_PRIMARY   = 1;  //!< motormode constant
  	  public final int MOTORMODE_SECONDARY = 2;  //!< motormode constant
  	  public final int MOTORMODE_BRAKE     = 3;  //!< motormode constant
- 	  
+
  	  public final int CONTACTEVENT_NONE = 0;    //!< contact event constant
  	  public final int CONTACTEVENT_FWD  = 0;    //!< contact event constant
  	  public final int CONTACTEVENT_REV  = 0;    //!< contact event constant
  	  public final int CONTACTEVENT_UNI  = 0;    //!< contact event constant
- 	  
+
  	  public final int SIGNAL_RED    = 1;        //!< signal light constant
  	  public final int SIGNAL_YELLOW = 2;        //!< signal light constant
  	  public final int SIGNAL_GREEN  = 4;        //!< signal light constant
- 	  
+
  	  public final boolean POINT_STRAIGHT = false;  //!< point state constant
  	  public final boolean POINT_TURN     = true;   //!< point state constant
- 	  
+
  	  public final int ALL_TRACKS  = -1;   //!< catch all tracks constant
  	  public final int ALL_POINTS  = -1;   //!< catch all points constant
  	  public final int ALL_SIGNALS = -1;   //!< catch all signals constant
- 	  
+
  	  public final int SIGNAL_FIRST  = 0;  //!< signal select constant
  	  public final int SIGNAL_SECOND = 1;  //!< signal select constant
- 	  
+
  	  public final int CONTACT_FIST = 0;   //!< contact select constant
  	  public final int CONTACT_SECOND = 1; //!< contact select constant
- 	  
+
        TAsyncCom TcpCommunication;
- 	  
+
        //----------------------------------------------------------------------
        //! Constructor of this class.
- 	  //! 
-       //! @param host 
+ 	  //!
+       //! @param host
  	  //!			specifies the url/ip of the machine on which the
        //!			interface program runs on
-       //! @param port 
- 	  //!			specifies the port of the machine that the interface 
+       //! @param port
+ 	  //!			specifies the port of the machine that the interface
        //!           program runs on
-       //! @return 
+       //! @return
  	  //!			an instance of this class
        //!
        public RailwayInterface(String host, int port) throws IOException{
            TcpCommunication = new TAsyncCom(host,port);
  	  }
- 	
+
        //----------------------------------------------------------------------
        //! Set initial trains.
  	  //!
        //! @param tracknum
- 	  //!			specifies the number (id) of the track - here a 
+ 	  //!			specifies the number (id) of the track - here a
        //!           class internal constant should be used (s.a.)
        //! @param forward
  	  //!			sets the alignment, forward=default, if false
@@ -518,21 +529,21 @@ public class ModelRailwayIO extends TypedAtomicActor {
  		  SetInitialTrain(tracknum, true);
  	  }
  	  public void SetInitialTrain(int tracknum, boolean forward) {
- 		  if (forward) 
+ 		  if (forward)
  			  TcpCommunication.Send("SETINITIALTRAIN#"+tracknum+"\r\n");
  		  else
  			  TcpCommunication.Send("SETINITIALTRAINEX#"+tracknum+"#1\r\n");
  	  }
- 	  
+
        //----------------------------------------------------------------------
  	  //! Clear all initial trains.
        //!
  	  public void ResetInitialTrains() {
  		  TcpCommunication.Send("RESETINITIALTRAINS\r\n");
  	  }
-       
+
        //----------------------------------------------------------------------
- 	  //! Stops the TCP interface part of the interface program and force the 
+ 	  //! Stops the TCP interface part of the interface program and force the
  	  //! connection between an instance of this class and the program to be
  	  //! terminated.
  	  //! The interface program will exit its tcp interface thread.
@@ -550,7 +561,7 @@ public class ModelRailwayIO extends TypedAtomicActor {
  	  }
 
        //----------------------------------------------------------------------
- 	  //! Stops the GUI interface part of the interface program and force the 
+ 	  //! Stops the GUI interface part of the interface program and force the
  	  //! connection between the GUI and the program to be terminated.
  	  //! The interface program will exit its GUI interface thread.
        //!
@@ -567,7 +578,7 @@ public class ModelRailwayIO extends TypedAtomicActor {
  	  }
 
        //----------------------------------------------------------------------
- 	  //! This restarts the simulation meaning to clear all not consumed 
+ 	  //! This restarts the simulation meaning to clear all not consumed
  	  //! contact events and restart the simulation at tick 0.
        //!
  	  public void RestartSimulation() {
@@ -576,10 +587,10 @@ public class ModelRailwayIO extends TypedAtomicActor {
 
        //----------------------------------------------------------------------
  	  //! This method returns the current internal tick of the simulation
- 	  //! that is included in the TCP interface program an instance of this 
+ 	  //! that is included in the TCP interface program an instance of this
  	  //! class is connected to
  	  //!
- 	  //! @return 
+ 	  //! @return
  	  //!			integer that represents the ticks <verstrichene> since
  	  //!			the simulation was started
        //!
@@ -589,7 +600,7 @@ public class ModelRailwayIO extends TypedAtomicActor {
  			  tick = new Integer(TcpCommunication.SendAndReceive(
  					  			 "GETSIMULATIONTICK\r\n")).intValue();
  		  }catch(Exception e){}
- 		  try{Thread.sleep(20);}catch(Exception e){}
+// 		  try{Thread.sleep(10);}catch(Exception e){}
  		  return tick;
  	  }
 
@@ -603,12 +614,12 @@ public class ModelRailwayIO extends TypedAtomicActor {
  	  }
 
        //----------------------------------------------------------------------
- 	  //! In the real world this function will return the status of the 
+ 	  //! In the real world this function will return the status of the
  	  //! controller pheripherals wether an fatal error occured which prevents
  	  //! the hardware to work corretly. In the simulation it will return true
  	  //! if the GUI is connected and false otherwise.
  	  //!
- 	  //! @return 
+ 	  //! @return
  	  //!			boolean value, true if GUI connected or no error occured
        //!
  	  public boolean RailwayAlive() {
@@ -617,15 +628,15 @@ public class ModelRailwayIO extends TypedAtomicActor {
  			  value = new Integer(TcpCommunication.SendAndReceive(
  					  			  "RAILWAYALIVE\r\n")).intValue();
  		  }catch(Exception e){}
- 		  try{Thread.sleep(20);}catch(Exception e){}
+// 		  try{Thread.sleep(10);}catch(Exception e){}
  		  return (value == 1);
  	  }
- 	  
+
        //----------------------------------------------------------------------
  	  //! This method will return the measured speed of a track segment.
  	  //!
        //! @param tracknum
- 	  //!			specifies the number (id) of the track - here a 
+ 	  //!			specifies the number (id) of the track - here a
        //!           class internal constant should be used (s.a.)
  	  //! @return
  	  //!			speed of the track segment
@@ -636,18 +647,18 @@ public class ModelRailwayIO extends TypedAtomicActor {
  			  value = new Integer(TcpCommunication.SendAndReceive("GETSPEED#"
  					  			  +tracknum+"\r\n")).intValue();
  		  }catch(Exception e){}
- 		  try{Thread.sleep(20);}catch(Exception e){}
+// 		  try{Thread.sleep(10);}catch(Exception e){}
  		  return value;
  	  }
- 	  
+
       //----------------------------------------------------------------------
  	  //! This method will return true if an engine of a train is detected to
  	  //! be on a track segment.
  	  //!
-       //! @param tracknum 
- 	  //!			specifies the number (id) of the track - here a 
+       //! @param tracknum
+ 	  //!			specifies the number (id) of the track - here a
        //!           class internal constant should be used (s.a.)
- 	  //! @return 
+ 	  //! @return
  	  //!			true if an engine is located on the tracksegment
  	  //!			false otherwise
        //!
@@ -657,18 +668,18 @@ public class ModelRailwayIO extends TypedAtomicActor {
  			  value = new Integer(TcpCommunication.SendAndReceive("TRACKUSED#"
  					  			  +tracknum+"\r\n")).intValue();
  		  }catch(Exception e){}
- 		  try{Thread.sleep(20);}catch(Exception e){}
+// 		  try{Thread.sleep(10);}catch(Exception e){}
  		  return (value == 1);
  	  }
- 	  
+
  	  //----------------------------------------------------------------------
- 	  //! This method will return the next occupied track w.r.t the track 
+ 	  //! This method will return the next occupied track w.r.t the track
  	  //! number tracknum
  	  //!
-      //! @param tracknum 
- 	  //!			specifies the number (id) of the track - here a 
+      //! @param tracknum
+ 	  //!			specifies the number (id) of the track - here a
       //!           class internal constant should be used (s.a.)
- 	  //! @return 
+ 	  //! @return
  	  //!			true if an engine is located on the tracksegment
  	  //!			false otherwise
       //!
@@ -678,12 +689,12 @@ public class ModelRailwayIO extends TypedAtomicActor {
  			  value = new Integer(TcpCommunication.SendAndReceive("SCANTRACKUSED#"
  					  			  +tracknum+"\r\n")).intValue();
  		  }catch(Exception e){}
- 		  try{Thread.sleep(20);}catch(Exception e){}
+// 		  try{Thread.sleep(10);}catch(Exception e){}
  		  return value;
  	  }
- 	  
+
        //----------------------------------------------------------------------
-       //! GetContact will return the (buffered) contact event, an integer 
+       //! GetContact will return the (buffered) contact event, an integer
  	  //! value that can be compared to the offered CONTACTEVENT_~ constants:
  	  //! CONTACTEVENT_NONE contact was not triggered since last call
  	  //! CONTACTEVENT_FWD contact was triggered in driving direction
@@ -691,23 +702,23 @@ public class ModelRailwayIO extends TypedAtomicActor {
  	  //! CONTACTEVENT_UNI contact was triggered but a direction can
  	  //!                  not be provided
  	  //!
- 	  //! @param tracknum 
- 	  //!			specifies the number (id) of the track - here a 
+ 	  //! @param tracknum
+ 	  //!			specifies the number (id) of the track - here a
        //!           class internal constant should be used (s.a.)
- 	  //! @param contact 
+ 	  //! @param contact
  	  //!			specifies the contact of the track segment. 0 for
  	  //!           the first contact in default driving direction and
- 	  //!           1 for the seoncd contact in default driving 
- 	  //!           direction. Use constants CONTACT_FIRST and 
+ 	  //!           1 for the seoncd contact in default driving
+ 	  //!           direction. Use constants CONTACT_FIRST and
  	  //!           CONTACT_SECOND
- 	  //! @param clear 
- 	  //!			if clear is true all following buffered not consumed 
+ 	  //! @param clear
+ 	  //!			if clear is true all following buffered not consumed
  	  //!           contact events of the specified/found contact will be
  	  //!           cleared
- 	  //! @return 
+ 	  //! @return
  	  //!			CONTACTEVENT_NONE, CONTACTEVENT_FWD, CONTACTEVENT_REV
  	  //!			or CONTACTEVENT_UNI
- 	  //!                   
+ 	  //!
  	  public int GetContact(int tracknum, int contact, boolean clear) {
  		  int value = 0;
  		  int clearint = 0;
@@ -717,7 +728,7 @@ public class ModelRailwayIO extends TypedAtomicActor {
  					  			  +tracknum+"#"+contact+"#"+clearint
  					  			  +"\r\n")).intValue();
  		  }catch(Exception e){e.printStackTrace();}
- 		  try{Thread.sleep(20);}catch(Exception e){}
+// 		  try{Thread.sleep(10);}catch(Exception e){}
  		  return value;
  	  }
 
@@ -729,21 +740,21 @@ public class ModelRailwayIO extends TypedAtomicActor {
  	  //! tracknum and contact
  	  //!
  	  //! @param tracknum
- 	  //!			specifies the number (id) of the track - here a 
+ 	  //!			specifies the number (id) of the track - here a
        //!           class internal constant should be used (s.a.)
  	  //!           also the wildcard -1 == ALL_TRACKS can be used
- 	  //! @param contact 
+ 	  //! @param contact
  	  //!			specifies the contact of the track segment. 0 for
  	  //!           the first contact in default driving direction and
- 	  //!           1 for the seoncd contact in default driving 
- 	  //!           direction. Use constants CONTACT_FIRST and 
+ 	  //!           1 for the seoncd contact in default driving
+ 	  //!           direction. Use constants CONTACT_FIRST and
  	  //!           CONTACT_SECOND
  	  //! @param clear
- 	  //!			if clear is true all following buffered not consumed 
+ 	  //!			if clear is true all following buffered not consumed
  	  //!           contact events of the specified/found contact will be
  	  //!           cleared
- 	  //! @return 
- 	  //!			Contact type consting of tracknum, contactno and 
+ 	  //! @return
+ 	  //!			Contact type consting of tracknum, contactno and
  	  //!			contactvalue
        //!
  	  public Contact ScanContact(int tracknum, int contact, boolean clear) {
@@ -759,19 +770,19 @@ public class ModelRailwayIO extends TypedAtomicActor {
  		 returnvalue.contactvalue= new Integer(value.split("#")[0]).intValue();
  		 returnvalue.tracknum    = new Integer(value.split("#")[1]).intValue();
  		 returnvalue.contactno   = new Integer(value.split("#")[2]).intValue();
- 		 try{Thread.sleep(20);}catch(Exception e){}
+// 		 try{Thread.sleep(10);}catch(Exception e){}
  		 return returnvalue;
  	  }
- 	  
+
  	  class Contact {
  		  int tracknum;
  		  int contactno;
  		  int contactvalue;
  	  }
- 	  	  
+
        //----------------------------------------------------------------------
- 	  //! This method allows to set the points that can be accessed through 
- 	  //! their identification numbers 0 - 29. For the turn value also 
+ 	  //! This method allows to set the points that can be accessed through
+ 	  //! their identification numbers 0 - 29. For the turn value also
  	  //! constants exist.
  	  //!
  	  //! @param pointnum
@@ -792,16 +803,16 @@ public class ModelRailwayIO extends TypedAtomicActor {
  	  //! segment. The track segment again should be indentified by its
  	  //! designated constant.
  	  //!
- 	  //! @param tracknum 
- 	  //!			specifies the number (id) of the track - here a 
+ 	  //! @param tracknum
+ 	  //!			specifies the number (id) of the track - here a
        //!           class internal constant should be used (s.a.)
  	  //!           also the wildcard -1 == ALL_TRACKS can be used
- 	  //! @param motormode 
+ 	  //! @param motormode
  	  //!			specifies wether the track segment is set to
- 	  //!           be forward, backwards, brake or off. Use the 
- 	  //!  			following constants MOTORMODE_PRIMARY, 
+ 	  //!           be forward, backwards, brake or off. Use the
+ 	  //!  			following constants MOTORMODE_PRIMARY,
  	  //! 			MOTORMODE_SECONDARY, MOTORMODE_BRAKE, MOTORMODE_OFF
- 	  //! @param speed 
+ 	  //! @param speed
  	  //!			speed (0 - 100) of the track segment that defines how
  	  //!           fast the train is moved driving there
        //!
@@ -809,43 +820,43 @@ public class ModelRailwayIO extends TypedAtomicActor {
  		  TcpCommunication.Send("SETTRACK#"+tracknum+"#"+motormode+"#"
  				  			    +speed+"\r\n");
  	  }
- 	  
+
        //----------------------------------------------------------------------
- 	  //! This method allows to set the signals of a track segment. Likewise 
+ 	  //! This method allows to set the signals of a track segment. Likewise
  	  //! to the contacts there may be two signals connected to one track
  	  //! segment.
  	  //! The signal parameter identifies the first signal in default driving
  	  //! direction as signal 0 and the second in default driving direction as
- 	  //! signal 1. The lights parameter can be a cobination (bitwise sum) of 
- 	  //! the following constants: 
+ 	  //! signal 1. The lights parameter can be a cobination (bitwise sum) of
+ 	  //! the following constants:
  	  //! SIGNAL_OFF, SIGNAL_RED, SIGNAL_YELLOW and SIGNAL_GREEN.
- 	  //! In the Simulation SIGNAL_OFF results in red lights, SIGNAL_RED 
+ 	  //! In the Simulation SIGNAL_OFF results in red lights, SIGNAL_RED
  	  //! combinded with SIGNAL_YELLOW or SIGNAL_GREEN will also only result
- 	  //! in red lights. The combination SIGNALS_YELLOW+SIGNALS_GREEN or 
+ 	  //! in red lights. The combination SIGNALS_YELLOW+SIGNALS_GREEN or
  	  //! SIGNALS_GREEN only are further possible values for lights.
  	  //!
- 	  //! @param tracknum 
- 	  //!			specifies the number (id) of the track - here a 
+ 	  //! @param tracknum
+ 	  //!			specifies the number (id) of the track - here a
        //!           class internal constant should be used (s.a.)
  	  //!           also the wildcard -1 == ALL_TRACKS can be used
- 	  //! @param signal 
- 	  //!			0 for the first signal in default driving direction 
- 	  //!			and 1 for the second signal (use the constants 
+ 	  //! @param signal
+ 	  //!			0 for the first signal in default driving direction
+ 	  //!			and 1 for the second signal (use the constants
  	  //!			SIGNAL_FIRST, SIGNAL_SECOND)
- 	  //! @param signal 
+ 	  //! @param signal
  	  //!			defines which lights the signal should show (s.a.)
        //!
  	  public void SetSignal(int tracknum, int signal, int lights) {
  		  TcpCommunication.Send("SETSIGNAL#"+tracknum+"#"+signal
  				  				+"#"+lights+"\r\n");
  	  }
- 	  
+
  	  //----------------------------------------------------------------------
  	 public class TAsyncCom {
  		Socket socket;
  		PrintWriter writer;
  		BufferedReader reader;
- 	 	
+
  		//------------------------------------------------------------------------
  	 	//! The Constructor sets up a listening port server-socket for every new
  	 	//! TAsyncCom-Object. The port has to be unique!
@@ -862,10 +873,10 @@ public class ModelRailwayIO extends TypedAtomicActor {
  			 	  writer = new PrintWriter(socket.getOutputStream(),true);
  				  reader = new BufferedReader
  					            (new InputStreamReader(socket.getInputStream()));
- 			 return;		     
+ 			 return;
  		   }
- 	   
- 		
+
+
  		//------------------------------------------------------------------------
  		//! Send() send a String-Command to a specific Host and Port.
  		//! There also is a second version of Send() which will not just send one
@@ -876,14 +887,14 @@ public class ModelRailwayIO extends TypedAtomicActor {
  		//! @return
  		//!				string answer received from tcp connection
  		//!
- 		public String SendAndReceive(String Command) {
+ 		public synchronized String SendAndReceive(String Command) {
  	 	   String Result = "";
 
  	       try {
  				  //send command
  				  writer.print(Command);
  		  	  	  writer.flush();
- 		  	  	  
+
  	           	  //read answer
  		  	  	  String line = "";
  				  if ((line = reader.readLine()) != null){
@@ -891,6 +902,8 @@ public class ModelRailwayIO extends TypedAtomicActor {
  				  }//end while
  			}
  			catch(Exception e){e.printStackTrace();}
+  		    //System.out.println(Command+" "+Result);
+  		    //System.out.println("----------------------------------");
  	        return Result;
  		}
 
@@ -903,16 +916,18 @@ public class ModelRailwayIO extends TypedAtomicActor {
  		//! @param Command
  		//!				string command to send over tcp
  		//!
- 		public void Send(String Command) {
+ 		public synchronized void Send(String Command) {
+ 		   //System.out.println("send command"+Command);
  	       try {
  				//send command
  				writer.print(Command);
  		  	  	writer.flush();
  			}
  			catch(Exception e){e.printStackTrace();}
+  		    //System.out.println("command sent. ("+Command+")");
  	        return;
  		}
  	}
  }
-    
+
 }
