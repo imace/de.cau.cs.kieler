@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.2"?>
 <plugin>
+   <extension-point id="de.cau.cs.kieler.sim.kiem.dataproducer" name="de.cau.cs.kieler.sim.kiem.dataproducer" schema="schema/de.cau.cs.kieler.sim.kiem.dataproducer.exsd"/>
    <extension
          point="org.eclipse.ui.views">
       <category
             id="de.cau.cs.kieler"
-            name="KIELER (Kiel Integrated Environment for Layout Eclipse RCP)">
+            name="KIELER">
       </category>
       <view
             category="de.cau.cs.kieler"
-            class="de.cau.cs.kieler.sim.kiem.views.KIEMView"
-            icon="icons/sample.gif"
+            class="de.cau.cs.kieler.sim.kiem.views.KiemView"
+            icon="icons/KiemIcon.gif"
             id="de.cau.cs.kieler.sim.kiem.view"
-            name="KIEM (KIELER Execution Manager)"
+            name="KIELER Execution Manager"
             restorable="true">
       </view>
    </extension>

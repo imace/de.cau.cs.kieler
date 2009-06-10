@@ -7,18 +7,18 @@ import org.osgi.framework.BundleContext;
 /**
  * The activator class controls the plug-in life cycle
  */
-public class Activator extends AbstractUIPlugin {
+public class KiemPlugin extends AbstractUIPlugin {
 
 	// The plug-in ID
-	public static final String PLUGIN_ID = "de.cau.cs.kieler.sim.execmgr";
+	public static final String PLUGIN_ID = "de.cau.cs.kieler.sim.kiem";
 
 	// The shared instance
-	private static Activator plugin;
+	private static KiemPlugin plugin;
 	
 	/**
 	 * The constructor
 	 */
-	public Activator() {
+	public KiemPlugin() {
 	}
 
 	/*
@@ -44,7 +44,7 @@ public class Activator extends AbstractUIPlugin {
 	 *
 	 * @return the shared instance
 	 */
-	public static Activator getDefault() {
+	public static KiemPlugin getDefault() {
 		return plugin;
 	}
 

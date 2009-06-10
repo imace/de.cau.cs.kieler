@@ -1,7 +1,23 @@
 package de.cau.cs.kieler.sim.kiem.views;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.eclipse.core.runtime.IConfigurationElement;
+import org.eclipse.core.runtime.Platform;
+import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.jface.preference.PreferencePage;
+import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.IWorkbenchPreferencePage;
+
 import org.eclipse.ui.part.*;
 import org.eclipse.jface.viewers.*;
 import org.eclipse.swt.graphics.Image;
@@ -9,10 +25,11 @@ import org.eclipse.jface.action.*;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.ui.*;
 import org.eclipse.swt.widgets.Menu;
-import org.eclipse.swt.SWT;
-import org.eclipse.jface.resource.ImageDescriptor;
 
-import de.cau.cs.kieler.sim.kiem.Activator;
+import de.cau.cs.kieler.sim.kiem.KiemPlugin;
+import de.cau.cs.kieler.sim.kiem.Messages;
+import de.cau.cs.kieler.sim.kiem.extension.*;
+import de.cau.cs.kieler.sim.kiem.Tools;
 
 
 /**
@@ -33,11 +50,17 @@ import de.cau.cs.kieler.sim.kiem.Activator;
  * <p>
  */
 
-public class KIEMView extends ViewPart {
+public class KiemView extends ViewPart {
 	private TableViewer viewer;
 	private Action action1;
 	private Action action2;
 	private Action doubleClickAction;
+	
+	public static final String ID = "de.cau.cs.kieler.sim.kiem.views.KiemView";
+
+	/** List of available dataProducers */
+	List<DataProducer> dataProducerList;
+
 
 	/*
 	 * The content provider class is responsible for
@@ -77,7 +100,13 @@ public class KIEMView extends ViewPart {
 	/**
 	 * The constructor.
 	 */
-	public KIEMView() {
+	public KiemView() {
+		dataProducerList = this.getDataProducerList();
+		for (int i = 0; i < dataProducerList.size(); i++) {
+			System.out.print(dataProducerList.get(i).getName());
+		}
+		System.out.print("TEST");
+		this.setTitle(Messages.ViewTitle);
 	}
 
 	/**
@@ -92,7 +121,7 @@ public class KIEMView extends ViewPart {
 		viewer.setInput(getViewSite());
 
 		// Create the help context id for the viewer's control
-		PlatformUI.getWorkbench().getHelpSystem().setHelp(viewer.getControl(), "edu.unikiel.rtsys.kieler.klepto.viewer");
+		PlatformUI.getWorkbench().getHelpSystem().setHelp(viewer.getControl(), "de.cau.cs.kieler.sim.viewer");
 		makeActions();
 		hookContextMenu();
 		hookDoubleClickAction();
@@ -104,7 +133,7 @@ public class KIEMView extends ViewPart {
 		menuMgr.setRemoveAllWhenShown(true);
 		menuMgr.addMenuListener(new IMenuListener() {
 			public void menuAboutToShow(IMenuManager manager) {
-				KIEMView.this.fillContextMenu(manager);
+				KiemView.this.fillContextMenu(manager);
 			}
 		});
 		Menu menu = menuMgr.createContextMenu(viewer.getControl());
@@ -144,7 +173,7 @@ public class KIEMView extends ViewPart {
 		};
 		action1.setText("Run/Resume");
 		action1.setToolTipText("Run or Resume the model");
-		action1.setImageDescriptor(Activator.getImageDescriptor("icons/play.gif"));
+		action1.setImageDescriptor(KiemPlugin.getImageDescriptor("icons/play.gif"));
 		
 		action2 = new Action() {
 			public void run() {
@@ -153,7 +182,7 @@ public class KIEMView extends ViewPart {
 		};
 		action2.setText("Pause");
 		action2.setToolTipText("Pause the model");
-		action2.setImageDescriptor(Activator.getImageDescriptor("icons/pause.gif"));
+		action2.setImageDescriptor(KiemPlugin.getImageDescriptor("icons/pause.gif"));
 		doubleClickAction = new Action() {
 			public void run() {
 				ISelection selection = viewer.getSelection();
@@ -183,4 +212,25 @@ public class KIEMView extends ViewPart {
 	public void setFocus() {
 		viewer.getControl().setFocus();
 	}
+	
+	
+	private List<DataProducer> getDataProducerList(){
+		if(dataProducerList != null)
+			return dataProducerList;
+				
+		// get the available interfaces
+		IConfigurationElement[] configElements = Platform.getExtensionRegistry().getConfigurationElementsFor(Messages.extensionPointID);
+		dataProducerList = new ArrayList<DataProducer>(configElements.length);
+		System.out.println(Messages.extensionPointID);
+		System.out.println("Found Controllers for "+Messages.extensionPointID+": "+configElements.length);
+		for (int i = 0; i < configElements.length; i++) {
+			try{
+				DataProducer dataProducer = (DataProducer)configElements[i].createExecutableExtension("class");
+				dataProducerList.add(dataProducer); 
+			}catch(Exception e){Tools.showDialog("Error at loading a KEV data interface plugin",e);} 
+		}
+		
+		return dataProducerList;
+	}
+
 }
