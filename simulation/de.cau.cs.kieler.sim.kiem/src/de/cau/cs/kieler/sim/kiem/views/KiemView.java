@@ -157,8 +157,10 @@ public class KiemView extends ViewPart {
 	}
 
 	private void fillContextMenu(IMenuManager manager) {
+		manager.add(action0);
 		manager.add(action1);
 		manager.add(action2);
+		manager.add(action3);
 		// Other plug-ins can contribute there actions here
 		manager.add(new Separator(IWorkbenchActionConstants.MB_ADDITIONS));
 	}
@@ -198,14 +200,7 @@ public class KiemView extends ViewPart {
 		action2.setText("Pause");
 		action2.setToolTipText("Pause simulation");
 		action2.setImageDescriptor(KiemPlugin.getImageDescriptor("icons/PauseIcon.gif"));
-		doubleClickAction = new Action() {
-			public void run() {
-				ISelection selection = viewer.getSelection();
-				Object obj = ((IStructuredSelection)selection).getFirstElement();
-				showMessage("Double-click detected on "+obj.toString());
-			}
-		};
-		
+
 		action3 = new Action() {
 			public void run() {
 				showMessage("Stop simulation");
@@ -214,6 +209,14 @@ public class KiemView extends ViewPart {
 		action3.setText("Stop");
 		action3.setToolTipText("Stop simulation");
 		action3.setImageDescriptor(KiemPlugin.getImageDescriptor("icons/StopIcon.gif"));
+		
+		doubleClickAction = new Action() {
+			public void run() {
+				ISelection selection = viewer.getSelection();
+				Object obj = ((IStructuredSelection)selection).getFirstElement();
+				showMessage("Double-click detected on "+obj.toString());
+			}
+		};
 	}
 
 	private void hookDoubleClickAction() {
