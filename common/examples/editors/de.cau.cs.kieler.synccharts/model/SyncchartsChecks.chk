@@ -3,9 +3,6 @@ import synccharts;
 context State if (stateKind == StateKind::PSEUDO) ERROR "pseudo states must not have a name!" :
 	(name == null) || (name.length == 0);
 
-context State if (stateKind != StateKind::PSEUDO) ERROR "name must be set!" :
-	(name != null) && (name.length > 0);
-
 context State if (stateKind == StateKind::PSEUDO) ERROR "pseudo states must not be initial or final!" :
 	stateFlag == StateFlag::NORMAL;
 	
