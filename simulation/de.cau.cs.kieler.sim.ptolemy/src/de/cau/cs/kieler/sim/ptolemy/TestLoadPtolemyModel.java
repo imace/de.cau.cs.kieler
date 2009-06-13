@@ -14,6 +14,7 @@
  *****************************************************************************/
 package de.cau.cs.kieler.sim.ptolemy;
 
+import java.io.File;
 import java.net.URL;
 import java.util.Iterator;
 import java.util.List;
@@ -26,8 +27,10 @@ import ptolemy.actor.IOPort;
 import ptolemy.actor.IOPortEvent;
 import ptolemy.actor.IOPortEventListener;
 import ptolemy.actor.Manager;
+import ptolemy.data.IntToken;
 import ptolemy.kernel.util.NamedObj;
 import ptolemy.moml.MoMLParser;
+import ptolemy.actor.lib.io.*;
 
 /**
  * Simple Test class that calls a Ptolemy MoML parser to create
@@ -43,9 +46,12 @@ public class TestLoadPtolemyModel {
     public static void main(String[] args) {
 
         // first create MoML file
-        TestCreateMomlFile.main(null);
+        //TestCreateMomlFile.main(null);
         // get URI of MoML file
-        URI momlFile = TestCreateMomlFile.momlFileUri;
+        String filename = "userinput.moml";
+        URI fileURI = URI.createFileURI(new File(filename).getAbsolutePath());
+    	
+        URI momlFile = fileURI;
 
         // create new MoML parser. Make sure ptolemy is in your dependencies
         MoMLParser parser = new MoMLParser();
@@ -77,8 +83,17 @@ public class TestLoadPtolemyModel {
                 // our hands on the execution data
                 Iterator<Object> childrenIterator = actor.containedObjectsIterator();
                 while( childrenIterator.hasNext() ){
-                    // search output ports of any child actors
                     Object child = childrenIterator.next();
+                	//search for KielerIO ports
+                    if(child instanceof KielerIO){
+                    	KielerIO kielerIO = (KielerIO)child;
+                    	System.out.println(kielerIO.getSignalName());
+                    	kielerIO.setValue(2);
+                    	kielerIO.setPresent(true);
+                    	kielerIO.setPermanent(true);
+                    }
+                	
+                    // search output ports of any child actors
                     if(child instanceof Actor){
                         List<Object> ports = ( (Actor)child ).outputPortList(); 
                         for (Object port : ports) {
@@ -102,9 +117,11 @@ public class TestLoadPtolemyModel {
                     List<Actor> children = actor.getChildren();
                     // run forest, run!
                     manager.initialize();
-                    for (int i = 0; i < 10; i++) {
+                    //System.out.println(children.get(0).toString());
+                    for (int i = 0; i < 100; i++) {
                         manager.iterate();
-                        
+                        //((IOPort)actor.portList().get(0)).send(0, new IntToken(8));
+
                     }
                     manager.wrapup();
                     // calling manager.execute() would run the model

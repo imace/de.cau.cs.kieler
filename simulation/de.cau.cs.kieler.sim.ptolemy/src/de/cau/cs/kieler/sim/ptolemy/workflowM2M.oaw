@@ -37,7 +37,7 @@
 
 	<!-- store model -->
 	<component class="de.cau.cs.kieler.sim.ptolemy.EmfMomlWriter">
-		<uri value="syncchart.moml" />
+		<uri value="abro.moml" />
 		<modelSlot value="ptomodel"/>
 	</component>
 
