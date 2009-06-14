@@ -2,15 +2,15 @@ package de.cau.cs.kieler.sim.ptolemy;
 
 //Example Data Producer//
 
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.core.runtime.Platform;
 import org.openarchitectureware.workflow.WorkflowRunner;
+import org.openarchitectureware.workflow.monitor.ProgressMonitor;
 
+
+import de.cau.cs.kieler.sim.kiem.KiemPlugin;
 import de.cau.cs.kieler.sim.kiem.extension.DataProducer;
 
 public class DataProducerExample extends DataProducer { 
@@ -19,32 +19,17 @@ public class DataProducerExample extends DataProducer {
 	
 	public DataProducerExample() {
 	}
-	
-	public void InitializeExecution(String ModelFile) {
-		System.setProperty("javax.xml.parsers.SAXParserFactory",
-		"com.sun.org.apache.xerces.internal.jaxp.SAXParserFactoryImpl");
-		
-        String PluginRoot = DataProducerExample.getPluginFolder();
 
-		//delete old generated model if exists
+	public void InitializeExecution() {
+		String PluginRoot = DataProducerExample.getPluginFolder();
 		String PtolemyModel = PluginRoot + "src-gen/generated.moml";
-		File PtolemyModelFile = new File(PtolemyModel);
-		if (PtolemyModelFile.exists()) {
-			System.out.println("Deleting file '"+PtolemyModel+"'");
-			if (!PtolemyModelFile.delete()) {
-				System.out.println("Could not delete file '"+PtolemyModel+"'");
-			}
-		}
 		
 		// M2M transformation here //
-		System.out.println("M2M transformation about to start...");
-		System.out.println(ModelFile);
-		
         Map<String,String> properties = new HashMap<String,String>();
         Map<String, Object> slotContents = new HashMap<String, Object>();
         
         String WorkflowFile = "model/workflowM2M.oaw";
-		properties.put("emfmodel", "file:"+ModelFile);
+		properties.put("emfmodel", "file:"+this.getModelFile());
 		properties.put("emfmetamodel", "synccharts.ecore");
 		properties.put("ptometamodel", "Moml.ecore");
 		properties.put("momlmodel", PtolemyModel); //"src-gen/generated.moml") ;
@@ -53,14 +38,13 @@ public class DataProducerExample extends DataProducer {
 		System.out.println("M2M transformation - starting...");
 		
         if (new WorkflowRunner().run(WorkflowFile , 
-        		null, properties, slotContents)) {
+        		new oAwMonitor(), properties, slotContents)) {
         	System.out.println("M2M transformation - completed.");
         }
         else {
         	System.out.println("M2M transformation - failed.");
         }
 		
-        /*
 		try {
 	        String command = "D:\\Studium2009\\PtolemyVergil.bat " + PtolemyModel;
 	        Process enc = Runtime.getRuntime().exec(command);
@@ -68,12 +52,11 @@ public class DataProducerExample extends DataProducer {
 	    	enc.getErrorStream().close();
 	    	enc.getOutputStream().close();
 	    	enc.getInputStream().close();
-		    System.out.println(command);
 		}//end try
 		catch(Exception e) {
 			e.printStackTrace();
 		}//end catch
-		*/
+		
 
 	}
 	
@@ -83,6 +66,71 @@ public class DataProducerExample extends DataProducer {
 	            _pluginFolder = _pluginFolder.replace("initial@reference:", "");
 	        }
 	        return _pluginFolder;
+	 }
+	 
+	 //-------------------------------------------------------------------
+	 class oAwMonitor implements ProgressMonitor {
+
+		public void beginTask(String name, int totalWork) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		public void done() {
+			// TODO Auto-generated method stub
+			
+		}
+
+		public void finished(Object element, Object context) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		public void internalWorked(double work) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		public boolean isCanceled() {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
+		public void postTask(Object element, Object context) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		public void preTask(Object element, Object context) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		public void setCanceled(boolean value) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		public void setTaskName(String name) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		public void started(Object element, Object context) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		public void subTask(String name) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		public void worked(int work) {
+			// TODO Auto-generated method stub
+			
+		}
+		 
 	 }
 	
 	
