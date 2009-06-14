@@ -1,9 +1,10 @@
 <?xml version="1.0"?>
 <workflow>
-	<property name="emfmetamodel" value="platform:/resource/de.cau.cs.kieler.sim.ptolemy/synccharts.ecore" />
-	<property name="ptometamodel" value="platform:/resource/de.cau.cs.kieler.sim.ptolemy/MoML.ecore" />
+	<property name="emfmetamodel" value="platform:/resource/de.cau.cs.kieler.sim.ptolemy/model/synccharts.ecore" />
+	<property name="ptometamodel" value="platform:/resource/de.cau.cs.kieler.sim.ptolemy/model/Moml.ecore" />
 	
 	<property name="emfmodel" value="platform:/resource/de.cau.cs.kieler.sim.ptolemy/abro.synccharts" />
+	<property name="momlmodel" value="abro.moml" />
 
 	<!-- set up EMF for standalone execution -->
 	<bean class="org.eclipse.mwe.emf.StandaloneSetup" >
@@ -37,7 +38,7 @@
 
 	<!-- store model -->
 	<component class="de.cau.cs.kieler.sim.ptolemy.EmfMomlWriter">
-		<uri value="abro.moml" />
+		<uri value="${momlmodel}" />
 		<modelSlot value="ptomodel"/>
 	</component>
 
