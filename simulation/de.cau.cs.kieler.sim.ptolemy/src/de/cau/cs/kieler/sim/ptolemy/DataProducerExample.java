@@ -15,52 +15,67 @@ import de.cau.cs.kieler.sim.kiem.extension.DataProducer;
 
 public class DataProducerExample extends DataProducer { 
   
-	private static File _pluginFolder;
+	private static String _pluginFolder;
 	
 	public DataProducerExample() {
 	}
 	
 	public void InitializeExecution(String ModelFile) {
+        String PluginRoot = DataProducerExample.getPluginFolder();
+
+		//delete old generated model if exists
+		String PtolemyModel = PluginRoot + "src-gen/generated.moml";
+		File PtolemyModelFile = new File(PtolemyModel);
+		if (PtolemyModelFile.exists()) {
+			System.out.println("Deleting file '"+PtolemyModel+"'");
+			if (!PtolemyModelFile.delete()) {
+				System.out.println("Could not delete file '"+PtolemyModel+"'");
+			}
+		}
+		
 		// M2M transformation here //
 		System.out.println("M2M transformation about to start...");
 		System.out.println(ModelFile);
 		
-		//String WorkflowFile = "file:X:/dop_eclipse/testspace/de.cau.cs.kieler.sim.ptolemy/src/de/cau/cs/kieler/sim/ptolemy/workflowM2M.oaw";
-		
         Map<String,String> properties = new HashMap<String,String>();
         Map<String, Object> slotContents = new HashMap<String, Object>();
         
-        System.out.println(DataProducerExample.getPluginFolder());
-        
-        String PluginRoot = DataProducerExample.getPluginFolder().getAbsolutePath();
-
-        String WorkflowFile = PluginRoot + "\\workflowM2M.oaw";
+        String WorkflowFile = "model/workflowM2M.oaw";
 		properties.put("emfmodel", "file:"+ModelFile);
 		properties.put("emfmetamodel", "synccharts.ecore");
 		properties.put("ptometamodel", "Moml.ecore");
-		properties.put("momlmodel", "file:c:/generated.moml") ;
+		properties.put("momlmodel", PtolemyModel); //"src-gen/generated.moml") ;
+		
         
 		System.out.println("M2M transformation - starting...");
 		
         if (new WorkflowRunner().run(WorkflowFile , 
         		null, properties, slotContents)) {
-        	System.out.println("C-Code Generation - completed.");
-            System.exit(1);
-
+        	System.out.println("M2M transformation - completed.");
         }
         else {
-        	System.out.println("C-Code Generation - failed.");
-        	System.exit(0);
+        	System.out.println("M2M transformation - failed.");
         }
 		
+		try {
+	        String command = "D:\\Studium2009\\PtolemyVergil.bat " + PtolemyModel;
+	        Process enc = Runtime.getRuntime().exec(command);
+	        enc.waitFor();
+	    	enc.getErrorStream().close();
+	    	enc.getOutputStream().close();
+	    	enc.getInputStream().close();
+		    System.out.println(command);
+		}//end try
+		catch(Exception e) {
+			e.printStackTrace();
+		}//end catch
 
 	}
 	
-	 public static File getPluginFolder() {
+	 public static String getPluginFolder() {
 	        if(_pluginFolder == null) {
-	            //URL url = Platform.getBundle("ID_OF_YOUR_PLUGIN").getEntry("/");
-	            _pluginFolder = Platform.getLocation().toFile();// .resolve(url);
-	            //_pluginFolder = new File(url.getPath());
+	            _pluginFolder = Platform.getBundle("de.cau.cs.kieler.sim.ptolemy").getLocation();// .toFile();// .resolve(url);
+	            _pluginFolder = _pluginFolder.replace("initial@reference:", "");
 	        }
 	        return _pluginFolder;
 	 }

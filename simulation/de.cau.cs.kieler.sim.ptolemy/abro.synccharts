@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<synccharts:Region xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:synccharts="http://www.informatik.uni-kiel.de/rtsys/synccharts">
+<synccharts:Region xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:synccharts="http://www.informatik.uni-kiel.de/rtsys/synccharts">
   <innerStates name="ABRO">
     <signals name="A" isInput="true"/>
     <signals name="B" isInput="true"/>
@@ -8,29 +8,31 @@
     <regions>
       <innerStates stateFlag="INITIAL" name="ABO">
         <regions>
-          <innerStates stateFlag="INITIAL" name="Wait A and B">
+          <innerStates stateFlag="INITIAL" name="Wait A and C">
             <regions>
               <innerStates stateFlag="INITIAL" name="wA">
-                <outgoingTransitions triggersAndEffects="A /" targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.0/@innerStates.0/@regions.0/@innerStates.1">
-                  <trigger xsi:type="synccharts:SignalReference" signal="//@innerStates.0/@signals.0"/>
+                <outgoingTransitions triggersAndEffects="A /" targetState="#//@innerStates.0/@regions.0/@innerStates.0/@regions.0/@innerStates.0/@regions.0/@innerStates.1">
+                  <trigger xsi:type="synccharts:SignalReference" signal="#//@innerStates.0/@signals.0"/>
                 </outgoingTransitions>
               </innerStates>
               <innerStates stateFlag="FINAL" name="dA"/>
             </regions>
             <regions>
               <innerStates stateFlag="INITIAL" name="wB">
-                <outgoingTransitions triggersAndEffects="B /" targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.0/@innerStates.0/@regions.1/@innerStates.1">
-                  <trigger xsi:type="synccharts:SignalReference" signal="//@innerStates.0/@signals.1"/>
+                <outgoingTransitions triggersAndEffects="B /" targetState="#//@innerStates.0/@regions.0/@innerStates.0/@regions.0/@innerStates.0/@regions.1/@innerStates.1">
+                  <trigger xsi:type="synccharts:SignalReference" signal="#//@innerStates.0/@signals.1"/>
                 </outgoingTransitions>
               </innerStates>
               <innerStates stateFlag="FINAL" name="dB"/>
             </regions>
-            <outgoingTransitions transitionKind="NORMALTERMINATION" targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.0/@innerStates.1"/>
+            <outgoingTransitions triggersAndEffects="/O" transitionKind="NORMALTERMINATION" targetState="#//@innerStates.0/@regions.0/@innerStates.0/@regions.0/@innerStates.1">
+              <emissions signal="#//@innerStates.0/@signals.3"/>
+            </outgoingTransitions>
           </innerStates>
-          <innerStates stateFlag="FINAL" name="done"/>
+          <innerStates name="done"/>
         </regions>
-        <outgoingTransitions triggersAndEffects="R /" targetState="//@innerStates.0/@regions.0/@innerStates.0">
-          <trigger xsi:type="synccharts:SignalReference" signal="//@innerStates.0/@signals.2"/>
+        <outgoingTransitions triggersAndEffects="R /" targetState="#//@innerStates.0/@regions.0/@innerStates.0">
+          <trigger xsi:type="synccharts:SignalReference" signal="#//@innerStates.0/@signals.2"/>
         </outgoingTransitions>
       </innerStates>
     </regions>

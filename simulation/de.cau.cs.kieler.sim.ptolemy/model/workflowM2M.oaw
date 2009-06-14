@@ -4,7 +4,7 @@
 	<property name="ptometamodel" value="platform:/resource/de.cau.cs.kieler.sim.ptolemy/model/Moml.ecore" />
 	
 	<property name="emfmodel" value="platform:/resource/de.cau.cs.kieler.sim.ptolemy/abro.synccharts" />
-	<property name="momlmodel" value="abro.moml" />
+	<property name="momlmodel" value="src-gen/generated.moml" />
 
 	<!-- set up EMF for standalone execution -->
 	<bean class="org.eclipse.mwe.emf.StandaloneSetup" >

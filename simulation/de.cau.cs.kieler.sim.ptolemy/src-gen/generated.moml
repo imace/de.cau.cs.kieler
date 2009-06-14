@@ -29,14 +29,12 @@
       <entity class="ptolemy.domains.fsm.modal.ModalModel" name="ABO_region_0">
         <property class="ptolemy.vergil.fsm.modal.ModalTableauFactory" name="_tableauFactory"/>
         <entity class="ptolemy.domains.fsm.modal.ModalController" name="_Controller">
-          <entity class="ptolemy.domains.fsm.kernel.State" name="done">
-            <property class="ptolemy.data.expr.Parameter" name="isFinalState" value="true"/>
-          </entity>
-          <entity class="ptolemy.domains.fsm.kernel.State" name="Wait A and B">
-            <property class="ptolemy.kernel.util.StringAttribute" name="refinementName" value="Wait A and B"/>
+          <entity class="ptolemy.domains.fsm.kernel.State" name="done"/>
+          <entity class="ptolemy.domains.fsm.kernel.State" name="Wait A and C">
+            <property class="ptolemy.kernel.util.StringAttribute" name="refinementName" value="Wait A and C"/>
             <property class="ptolemy.data.expr.Parameter" name="isInitialState" value="true"/>
           </entity>
-          <relation name="Wait A and B_transition_0">
+          <relation name="Wait A and C_transition_0">
             <property class="ptolemy.kernel.util.StringAttribute" name="guardExpression"/>
             <property class="ptolemy.domains.fsm.kernel.OutputActionsAttribute" name="outputActions"/>
             <property class="ptolemy.domains.fsm.kernel.CommitActionsAttribute" name="setActions"/>
@@ -46,12 +44,12 @@
             <property class="ptolemy.data.expr.Parameter" name="nondeterministic" value="false"/>
             <property class="ptolemy.kernel.util.StringAttribute" name="refinementName"/>
           </relation>
-          <link port="Wait A and B.outgoingPort" relation="Wait A and B_transition_0"/>
-          <link port="done.incomingPort" relation="Wait A and B_transition_0"/>
+          <link port="Wait A and C.outgoingPort" relation="Wait A and C_transition_0"/>
+          <link port="done.incomingPort" relation="Wait A and C_transition_0"/>
         </entity>
-        <entity class="ptolemy.domains.fsm.modal.Refinement" name="Wait A and B">
+        <entity class="ptolemy.domains.fsm.modal.Refinement" name="Wait A and C">
           <property class="ptolemy.domains.sr.kernel.SRDirector" name="SR Director"/>
-          <entity class="ptolemy.domains.fsm.modal.ModalModel" name="Wait A and B_region_1">
+          <entity class="ptolemy.domains.fsm.modal.ModalModel" name="Wait A and C_region_1">
             <property class="ptolemy.vergil.fsm.modal.ModalTableauFactory" name="_tableauFactory"/>
             <entity class="ptolemy.domains.fsm.modal.ModalController" name="_Controller">
               <entity class="ptolemy.domains.fsm.kernel.State" name="dB">
@@ -74,7 +72,7 @@
               <link port="dB.incomingPort" relation="wB_transition_0"/>
             </entity>
           </entity>
-          <entity class="ptolemy.domains.fsm.modal.ModalModel" name="Wait A and B_region_0">
+          <entity class="ptolemy.domains.fsm.modal.ModalModel" name="Wait A and C_region_0">
             <property class="ptolemy.vergil.fsm.modal.ModalTableauFactory" name="_tableauFactory"/>
             <entity class="ptolemy.domains.fsm.modal.ModalController" name="_Controller">
               <entity class="ptolemy.domains.fsm.kernel.State" name="dA">
