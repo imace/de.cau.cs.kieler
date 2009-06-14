@@ -12,3 +12,5 @@ Export-Package: de.cau.cs.kieler.sim.kiem,
  de.cau.cs.kieler.sim.kiem.extension;uses:="org.eclipse.core.runtime",
  de.cau.cs.kieler.sim.kiem.ui,
  de.cau.cs.kieler.sim.kiem.views
+Import-Package: org.eclipse.emf.common.ui,
+ org.eclipse.ui.part

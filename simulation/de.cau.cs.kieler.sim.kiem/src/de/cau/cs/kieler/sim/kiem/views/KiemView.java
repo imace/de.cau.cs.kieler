@@ -6,18 +6,10 @@ import java.util.List;
 
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
-import org.eclipse.jface.preference.IPreferenceStore;
-import org.eclipse.jface.preference.PreferencePage;
-import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Control;
-import org.eclipse.swt.widgets.Label;
-import org.eclipse.ui.IWorkbench;
-import org.eclipse.ui.IWorkbenchPreferencePage;
 
+import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.ui.part.*;
 import org.eclipse.jface.viewers.*;
 import org.eclipse.swt.graphics.Image;
@@ -31,6 +23,9 @@ import de.cau.cs.kieler.sim.kiem.Messages;
 import de.cau.cs.kieler.sim.kiem.extension.*;
 import de.cau.cs.kieler.sim.kiem.Tools;
 
+import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.part.FileEditorInput;
 
 /**
  * This sample class demonstrates how to plug-in a new
@@ -58,10 +53,11 @@ public class KiemView extends ViewPart {
 	private Action action3;
 	private Action doubleClickAction;
 	
+	private KiemPlugin KIEM;
+	
 	public static final String ID = "de.cau.cs.kieler.sim.kiem.views.KiemView";
 
-	/** List of available dataProducers */
-	List<DataProducer> dataProducerList;
+	private IWorkbenchWindow window;
 
 
 	/*
@@ -79,10 +75,11 @@ public class KiemView extends ViewPart {
 		}
 		public void dispose() {
 		}
+		
 		public Object[] getElements(Object parent) {
-			String[] returnList = new String[dataProducerList.size()];
-			for (int i = 0; i < dataProducerList.size(); i++) {
-				returnList[i] = dataProducerList.get(i).getName();
+			String[] returnList = new String[KIEM.getDataProducerList().size()];
+			for (int i = 0; i < KIEM.getDataProducerList().size(); i++) {
+				returnList[i] = KIEM.getDataProducerList().get(i).getName();
 			}
 			
 			return returnList;
@@ -108,10 +105,31 @@ public class KiemView extends ViewPart {
 	 * The constructor.
 	 */
 	public KiemView() {
-		dataProducerList = this.getDataProducerList();
-		//this. (Messages.ViewTitle);
+		KIEM = KiemPlugin.getDefault();
 	}
-
+	
+	public String getModelFile() {
+		IWorkbenchWindow window = this.getViewSite().getWorkbenchWindow();
+		//get model instance file
+		IEditorPart Editor = window.getActivePage().getActiveEditor();
+		FileEditorInput uri = (FileEditorInput)Editor.getEditorInput();
+		String ModelFile = uri.getURI().getRawPath();// .getPath().makeAbsolute().toString();// .lastSegment().toString();// .toFile().toURI().getRawPath(); // .toString();// .toString();// .getURI() .toFileString();
+		//delete "_diagram"-extension
+		ModelFile = ModelFile.replace("_diagram", "");
+		//ModelFile = ModelFile.substring(0,ModelFile.length()-8);
+		return ModelFile;
+	}
+	
+	
+	/**
+	 * We will cache window object in order to
+	 * be able to provide parent shell for the message dialog.
+	 * @see IWorkbenchWindowActionDelegate#init
+	 */
+	public void init(IWorkbenchWindow window) {
+		this.window = window;
+	}
+	
 	/**
 	 * This is a callback that will allow us
 	 * to create the viewer and initialize it.
@@ -171,11 +189,31 @@ public class KiemView extends ViewPart {
 		manager.add(action2);
 		manager.add(action3);
 	}
+	
+	private DataProducer getDataProducer(String DataProducerName) {
+		for (int c = 0; c < KIEM.getDataProducerList().size(); c++) {
+			String vglSelection = KIEM.getDataProducerList().get(c).getName();
+			if (vglSelection.equals(DataProducerName))  
+			 return (DataProducer)KIEM.getDataProducerList().get(c);
+		}
+		return null;
+	}
 
 	private void makeActions() {
 		action0 = new Action() {
 			public void run() {
-				showMessage("Model simulation run");
+				try {
+					ISelection selection = viewer.getSelection();
+					Object obj = ((IStructuredSelection)selection).getFirstElement();
+					
+					DataProducer dataProducer = getDataProducer((String)obj);
+					String ModelFile = getModelFile();
+					dataProducer.setModelFile(ModelFile);
+					dataProducer.InitializeExecution();
+				} catch(Exception e) {
+					e.printStackTrace();
+					showMessage("Please select a DataProducer!");
+				}
 			}
 		};
 		action0.setText("Step");
@@ -241,23 +279,5 @@ public class KiemView extends ViewPart {
 	}
 	
 	
-	private List<DataProducer> getDataProducerList(){
-		if(dataProducerList != null)
-			return dataProducerList;
-				
-		// get the available interfaces
-		IConfigurationElement[] configElements = Platform.getExtensionRegistry().getConfigurationElementsFor(Messages.extensionPointID);
-		dataProducerList = new ArrayList<DataProducer>(configElements.length);
-		System.out.println(Messages.extensionPointID);
-		System.out.println("Found Controllers for "+Messages.extensionPointID+": "+configElements.length);
-		for (int i = 0; i < configElements.length; i++) {
-			try{
-				DataProducer dataProducer = (DataProducer)configElements[i].createExecutableExtension("class");
-				dataProducerList.add(dataProducer); 
-			}catch(Exception e){Tools.showDialog("Error at loading a KEV data interface plugin",e);} 
-		}
-		
-		return dataProducerList;
-	}
 
 }

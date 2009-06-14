@@ -1,8 +1,15 @@
 package de.cau.cs.kieler.sim.kiem;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.eclipse.core.runtime.IConfigurationElement;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
+
+import de.cau.cs.kieler.sim.kiem.extension.DataProducer;
 
 /**
  * The activator class controls the plug-in life cycle
@@ -15,10 +22,14 @@ public class KiemPlugin extends AbstractUIPlugin {
 	// The shared instance
 	private static KiemPlugin plugin;
 	
+	// List of available dataProducers
+	List<DataProducer> dataProducerList;
+
 	/**
 	 * The constructor
 	 */
 	public KiemPlugin() {
+		dataProducerList = this.getDataProducerList();
 	}
 
 	/*
@@ -58,4 +69,24 @@ public class KiemPlugin extends AbstractUIPlugin {
 	public static ImageDescriptor getImageDescriptor(String path) {
 		return imageDescriptorFromPlugin(PLUGIN_ID, path);
 	}
+	
+	public List<DataProducer> getDataProducerList(){
+		if(dataProducerList != null)
+			return dataProducerList;
+				
+		// get the available interfaces and initialize them
+		IConfigurationElement[] configElements = Platform.getExtensionRegistry().getConfigurationElementsFor(Messages.extensionPointID);
+		dataProducerList = new ArrayList<DataProducer>(configElements.length);
+		System.out.println("Found Controllers for "+Messages.extensionPointID+": "+configElements.length);
+		for (int i = 0; i < configElements.length; i++) {
+			try{
+				DataProducer dataProducer = (DataProducer)configElements[i].createExecutableExtension("class");
+				dataProducerList.add(dataProducer);
+				System.out.println(dataProducer.getName());
+			}catch(Exception e){Tools.showDialog("Error at loading a KEV data interface plugin",e);} 
+		}
+		
+		return dataProducerList;
+	}
+	
 }
