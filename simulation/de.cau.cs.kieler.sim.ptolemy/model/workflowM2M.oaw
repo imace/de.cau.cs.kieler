@@ -31,7 +31,7 @@
 			<!-- <metaModelPackage value="Moml.MomlPackage" />  -->
 			<!-- <metaModelFile value="${ptometamodel}" /> -->
 		</metaModel>
-		<invoke value="ecore2moml::transform(emfmodel)" />
+		<invoke value="model/ecore2moml::transform(emfmodel)" />
 		<outputSlot value="ptomodel"/>
 	</component>
 
