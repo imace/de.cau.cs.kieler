@@ -21,6 +21,9 @@ public class DataProducerExample extends DataProducer {
 	}
 	
 	public void InitializeExecution(String ModelFile) {
+		System.setProperty("javax.xml.parsers.SAXParserFactory",
+		"com.sun.org.apache.xerces.internal.jaxp.SAXParserFactoryImpl");
+		
         String PluginRoot = DataProducerExample.getPluginFolder();
 
 		//delete old generated model if exists
@@ -57,6 +60,7 @@ public class DataProducerExample extends DataProducer {
         	System.out.println("M2M transformation - failed.");
         }
 		
+        /*
 		try {
 	        String command = "D:\\Studium2009\\PtolemyVergil.bat " + PtolemyModel;
 	        Process enc = Runtime.getRuntime().exec(command);
@@ -69,6 +73,7 @@ public class DataProducerExample extends DataProducer {
 		catch(Exception e) {
 			e.printStackTrace();
 		}//end catch
+		*/
 
 	}
 	

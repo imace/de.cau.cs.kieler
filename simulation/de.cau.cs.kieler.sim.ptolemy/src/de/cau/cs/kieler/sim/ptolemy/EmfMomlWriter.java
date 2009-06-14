@@ -9,6 +9,8 @@ import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 
 import Moml.util.MomlResourceFactoryImpl;
+import org.eclipse.emf.ecore.xmi.XMIResource;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -92,8 +94,6 @@ public class EmfMomlWriter extends AbstractEmfWorkflowComponent {
 		}
 
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("*", new MomlResourceFactoryImpl());
-
-
         
 		if (!multipleResourcesInCaseOfList) {
 			//Resource r = getResourceSet().createResource(URI.createURI(getUri()));
@@ -154,6 +154,11 @@ public class EmfMomlWriter extends AbstractEmfWorkflowComponent {
 //				options.put(XMIResource.OPTION_SCHEMA_LOCATION_IMPLEMENTATION, Boolean.TRUE);
 //			}
 			r.save(options);
+			
+			//clean resource afterwards
+			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("*", new XMIResourceFactoryImpl());
+			//r.delete(options);
+			//r = null;
 		}
 		catch (final IOException e) {
 			throw new WorkflowInterruptedException("Problems writing xmi file to " + getUri() + " : " + e.getMessage());
