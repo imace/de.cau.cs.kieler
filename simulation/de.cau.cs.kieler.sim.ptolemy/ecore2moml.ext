@@ -30,7 +30,9 @@ create EntityType this createBaseEntity(synccharts::Region mainRegion):
 ;
 
 //create ModalModel == Region-Component 
-create EntityType this createModalModelEntity(synccharts::Region region, int number):
+create EntityType this createModalModelEntity(synccharts::Region region, 
+											  int number, 
+											  List[synccharts::Signal] signalList):
 	let p1 = new PropertyType:
 		p1.setName("_tableauFactory") ->
 		p1.setClass("ptolemy.vergil.fsm.modal.ModalTableauFactory") ->
@@ -40,7 +42,7 @@ create EntityType this createModalModelEntity(synccharts::Region region, int num
   	//first create simple states and macro state declarations
    	this.entity.add(createModalControllerEntity(region)) ->
    	//then add macro state refinements (for all macro states)
-   	IterateStatesRefinement(region.innerStates, this)
+   	IterateStatesRefinement(region.innerStates, this, signalList)
 ;
 //create ModalController == Region-Declaration (simple states and macro states declarations)
 create EntityType this createModalControllerEntity(synccharts::Region region):
@@ -62,11 +64,13 @@ create EntityType this createMacroStateEntity(synccharts::State state):
   	SetStateInitialFinalFlag(state, this)
 ;
 //create ModalRefinement == State-Definition (of a macro state /w regions)
-create EntityType this createMacroStateRefinementEntity(synccharts::State state):
+create EntityType this createMacroStateRefinementEntity(synccharts::State state,
+														List[synccharts::Signal] signalList):
    	this.setName(state.name) ->
   	this.setClass1("ptolemy.domains.fsm.modal.Refinement") ->
    	this.property.add(createSRDirector()) ->
-   	IterateRegions(state.regions, this, state.signals)
+   	signalList.addAll(state.signals) ->
+   	IterateRegions(state.regions, this, signalList)
 ;
 //create SimpleState == State-Component 
 create EntityType this createSimpleStateEntity(synccharts::State state):
@@ -114,53 +118,40 @@ boolean IsMacroState(synccharts::State state) :
 //iteratate over all states (in a region)
 //for  macro states : add states entity AND list them as a refinement property
 //for simple states : add states
-void IterateTransitions(List[synccharts::Transition] transitionList, 
-						EntityType entity):
-   	(transitionList.size > 0) ? IterateTransitionsHelper(transitionList, 
-   														 entity, 
-   														 transitionList.size-1)
-   								: null
-;
-int IterateTransitionsHelper(List[synccharts::Transition] transitionList,
-							 EntityType entity, int i):
- 	let transition = transitionList.get(i):
- 	dump(transition.sourceState.name + " -> " + transition.targetState.name) ->
-	addTransition(transition,
-				  entity,
-				  transition.sourceState.name + "_transition_" + i) -> 	
-    (i > 0) ? IterateTransitionsHelper(transitionList, entity, i-1) : i
+void IterateTransitions(List[synccharts::Transition] transitionList,
+							 EntityType entity):
+ 	let transition = transitionList.last():
+ 	(transitionList.size > 0) ? dump(transition.sourceState.name + " -> " + transition.targetState.name) : null ->
+	(transitionList.size > 0) ? addTransition(transition,
+				  							  entity,
+				  							  transition.sourceState.name + "_transition_" + transitionList.size) :null -> 	
+    (transitionList.size > 1) ? IterateTransitions(transitionList.withoutLast(), entity) : null
 ;
 
 
 //iteratate over all states (in a region)
 //for  macro states : add states entity AND list them as a refinement property
 //for simple states : add states
-void IterateStates(List[synccharts::State] stateList, EntityType entity):
-   	IterateStatesHelper(stateList, entity, stateList.size-1)
-;
-int IterateStatesHelper(List[synccharts::State] stateList, 
-						EntityType entity, int i):
- 	let state = stateList.get(i):
+void IterateStates(List[synccharts::State] stateList, 
+						EntityType entity):
+ 	let state = stateList.last():
  	IsMacroState(state) ? entity.entity.add(createMacroStateEntity(state)) 
  					    : entity.entity.add(createSimpleStateEntity(state)) ->
  	IterateTransitions(state.outgoingTransitions, entity) ->
-    (i > 0) ? IterateStatesHelper(stateList, entity, i-1) : i
+    (stateList.size > 1) ? IterateStates(stateList.withoutLast(), entity) : null
 ;
 
 //iteratate over all states (in a region)
 //for  macro states : define the refinement (and recursively add regions!)
 //for simple states : do nothing
 void IterateStatesRefinement(List[synccharts::State] stateList, 
-							 EntityType entity):
-   	IterateStatesRefinementHelper(stateList, entity, stateList.size-1)
-;
-int IterateStatesRefinementHelper(List[synccharts::State] stateList, 
-								  EntityType entity, int i):
- 	let state = stateList.get(i):
+								  EntityType entity, 
+								  List[synccharts::Signal] signalList):
+ 	let state = stateList.last():
  	IsMacroState(state) ? entity.entity.add(
- 							createMacroStateRefinementEntity(state)) 
+ 							createMacroStateRefinementEntity(state, signalList)) 
  						: null ->
-    (i > 0) ? IterateStatesRefinementHelper(stateList, entity, i-1) : i
+    (stateList.size > 1) ? IterateStatesRefinement(stateList.withoutLast(), entity, signalList) : null
 ;
 
 
@@ -168,18 +159,12 @@ int IterateStatesRefinementHelper(List[synccharts::State] stateList,
 //add an own modal model for each region
 //define all signals that are defined until now!
 void IterateRegions(List[synccharts::Region] regionList, 
-					EntityType entity,
-					List[synccharts::Signal] signalList):
-   	IterateRegionsHelper(regionList, entity, regionList.size-1, signalList)
-;
-int IterateRegionsHelper(List[synccharts::Region] regionList, 
 						EntityType entity, 
-						int i,
 						List[synccharts::Signal] signalList):
- 	let region = regionList.get(i):
- 	entity.entity.add(createModalModelEntity(region,i)) ->
-    (i > 0) ? IterateRegionsHelper(regionList, entity, i-1, signalList) : i
-;    
+ 	let region = regionList.last():
+ 	entity.entity.add(createModalModelEntity(region, regionList.size, signalList)) ->
+    (regionList.size > 1) ? IterateRegions(regionList.withoutLast(), entity, signalList) : null 
+; 
 
 
 //-----------------------------------------------------------------------------
