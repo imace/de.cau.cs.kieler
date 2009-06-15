@@ -1,9 +1,0 @@
-<?xml version="1.0" standalone="no"?>
-<!DOCTYPE entity PUBLIC "-//UC Berkeley//DTD MoML 1//EN" "http://ptolemy.eecs.berkeley edu/xml/dtd/MoML_1.dtd">
-<entity class="ptolemy.actor.TypedCompositeActor" name="test">
-  <entity class="ptolemy.actor.lib.Ramp" name="ramp"/>
-  <entity class="ptolemy.actor.lib.gui.SequencePlotter" name="plot"/>
-  <relation class="ptolemy.actor.TypedIORelation" name="r"/>
-  <link port="ramp.output" relation="r"/>
-  <link port="plot.input" relation="r"/>
-</entity>
