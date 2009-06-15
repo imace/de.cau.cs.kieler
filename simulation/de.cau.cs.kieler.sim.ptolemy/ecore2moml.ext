@@ -6,7 +6,7 @@ import Moml;
 //-----------------------------------------------------------------------------
 
 //Start Model Transformation here
-create DocumentRoot this transform(Region sc):
+create DocumentRoot this transform(synccharts::Region sc):
  	this.setEntity(createBaseEntity(sc))
 ;   
 	
@@ -19,12 +19,12 @@ create DocumentRoot this transform(Region sc):
 create EntityType this createBaseEntity(synccharts::Region mainRegion):
    	this.setName(mainRegion.innerStates.get(0).name + "_simulation") ->
   	this.setClass1("ptolemy.actor.TypedCompositeActor") ->
-   	this.property.add(createDEDirector()) ->
+   	this.property.add(createMainSRDirector()) ->
    	//mainRegion has exactly ONE top most state
    	//iterate over all regions within this top most state
    	//the name of this containing Entity is derived from this
    	//   top most state, w/ " simulation" added
-    IterateRegions(mainRegion.innerStates.get(0).regions, this)
+    IterateRegions(mainRegion.innerStates.get(0).regions, this, mainRegion.innerStates.get(0).signals)
     //add "this" EntityType so that IterateRegions is able to add 
     //new entities or properties
 ;
@@ -66,7 +66,7 @@ create EntityType this createMacroStateRefinementEntity(synccharts::State state)
    	this.setName(state.name) ->
   	this.setClass1("ptolemy.domains.fsm.modal.Refinement") ->
    	this.property.add(createSRDirector()) ->
-   	IterateRegions(state.regions, this)
+   	IterateRegions(state.regions, this, state.signals)
 ;
 //create SimpleState == State-Component 
 create EntityType this createSimpleStateEntity(synccharts::State state):
@@ -96,8 +96,9 @@ void SetStateInitialFinalFlag(synccharts::State state, EntityType entity) :
 		p2.setName("isFinalState") ->
 		p2.setClass("ptolemy.data.expr.Parameter") ->
 		p2.setValue("true") ->
-  	state.stateFlag.toString().matches("INITIAL") ? entity.property.add(p1) : null ->
-  	state.stateFlag.toString().matches("FINAL") ? entity.property.add(p2) : null
+  	state.stateFlag.toString().matches("INITIAL") ? entity.property.add(p1) : null
+  	//do not set it to final, otherwise it can't even being reset! 
+  	//state.stateFlag.toString().matches("FINAL") ? entity.property.add(p2) : null
 ;
 
 //test whether a state is a macro state or a simple state
@@ -165,14 +166,19 @@ int IterateStatesRefinementHelper(List[synccharts::State] stateList,
 
 //iterate over all regions (in a state)
 //add an own modal model for each region
-void IterateRegions(List[synccharts::Region] regionList, EntityType entity):
-   	IterateRegionsHelper(regionList, entity, regionList.size-1)
+//define all signals that are defined until now!
+void IterateRegions(List[synccharts::Region] regionList, 
+					EntityType entity,
+					List[synccharts::Signal] signalList):
+   	IterateRegionsHelper(regionList, entity, regionList.size-1, signalList)
 ;
 int IterateRegionsHelper(List[synccharts::Region] regionList, 
-						EntityType entity, int i):
+						EntityType entity, 
+						int i,
+						List[synccharts::Signal] signalList):
  	let region = regionList.get(i):
  	entity.entity.add(createModalModelEntity(region,i)) ->
-    (i > 0) ? IterateRegionsHelper(regionList, entity, i-1) : i
+    (i > 0) ? IterateRegionsHelper(regionList, entity, i-1, signalList) : i
 ;    
 
 
@@ -185,6 +191,33 @@ create PropertyType this createSRDirector():
     this.setName("SR Director") ->
 	this.setClass("ptolemy.domains.sr.kernel.SRDirector")
 ;
+
+//create outer most "SR Director" (ticks every seconds)
+create PropertyType this createMainSRDirector():
+	let p1 = new PropertyType:
+	let p2 = new PropertyType:
+	let p3 = new PropertyType:
+	let p4 = new PropertyType:
+		p1.setName("iterations") ->
+		p1.setClass("ptolemy.data.expr.Parameter") ->
+		p1.setValue("Infinity") ->
+		p2.setName("synchronizeToRealTime") ->
+		p2.setClass("ptolemy.data.expr.Parameter") ->
+		p2.setValue("true") ->
+		p3.setName("timeResolution") ->
+		p3.setClass("ptolemy.data.expr.Parameter") ->
+		p3.setValue("1.0E-10") ->
+		p4.setName("period") ->
+		p4.setClass("ptolemy.data.expr.Parameter") ->
+		p4.setValue("1") ->
+    this.setName("SR Director") ->
+	this.setClass("ptolemy.domains.sr.kernel.SRDirector") ->
+	this.property.add(p1) ->
+	this.property.add(p2) ->
+	this.property.add(p3) ->
+	this.property.add(p4)
+;
+
 
 //create a "FSM Director" (for a region component)
 create PropertyType this createFSMDirector():

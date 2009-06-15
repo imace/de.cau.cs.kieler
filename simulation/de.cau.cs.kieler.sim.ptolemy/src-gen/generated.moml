@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="ASCII"?>
 <!DOCTYPE entity PUBLIC "-//UC Berkeley//DTD MoML 1//EN" "http://ptolemy.eecs.berkeley.edu/xml/dtd/MoML_1.dtd">
 <entity class="ptolemy.actor.TypedCompositeActor" name="ABRO_simulation">
-  <property class="ptolemy.domains.de.kernel.DEDirector" name="DE Director">
-    <property class="ptolemy.data.expr.Parameter" name="stopTime" value="Infinity"/>
+  <property class="ptolemy.domains.sr.kernel.SRDirector" name="SR Director">
+    <property class="ptolemy.data.expr.Parameter" name="iterations" value="Infinity"/>
     <property class="ptolemy.data.expr.Parameter" name="synchronizeToRealTime" value="true"/>
+    <property class="ptolemy.data.expr.Parameter" name="timeResolution" value="1.0E-10"/>
+    <property class="ptolemy.data.expr.Parameter" name="period" value="1"/>
   </property>
   <entity class="ptolemy.domains.fsm.modal.ModalModel" name="ABRO_region_0">
     <property class="ptolemy.vergil.fsm.modal.ModalTableauFactory" name="_tableauFactory"/>
@@ -52,9 +54,7 @@
           <entity class="ptolemy.domains.fsm.modal.ModalModel" name="Wait A and C_region_1">
             <property class="ptolemy.vergil.fsm.modal.ModalTableauFactory" name="_tableauFactory"/>
             <entity class="ptolemy.domains.fsm.modal.ModalController" name="_Controller">
-              <entity class="ptolemy.domains.fsm.kernel.State" name="dB">
-                <property class="ptolemy.data.expr.Parameter" name="isFinalState" value="true"/>
-              </entity>
+              <entity class="ptolemy.domains.fsm.kernel.State" name="dB"/>
               <entity class="ptolemy.domains.fsm.kernel.State" name="wB">
                 <property class="ptolemy.data.expr.Parameter" name="isInitialState" value="true"/>
               </entity>
@@ -75,9 +75,7 @@
           <entity class="ptolemy.domains.fsm.modal.ModalModel" name="Wait A and C_region_0">
             <property class="ptolemy.vergil.fsm.modal.ModalTableauFactory" name="_tableauFactory"/>
             <entity class="ptolemy.domains.fsm.modal.ModalController" name="_Controller">
-              <entity class="ptolemy.domains.fsm.kernel.State" name="dA">
-                <property class="ptolemy.data.expr.Parameter" name="isFinalState" value="true"/>
-              </entity>
+              <entity class="ptolemy.domains.fsm.kernel.State" name="dA"/>
               <entity class="ptolemy.domains.fsm.kernel.State" name="wA">
                 <property class="ptolemy.data.expr.Parameter" name="isInitialState" value="true"/>
               </entity>
