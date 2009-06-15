@@ -29,6 +29,7 @@ create EntityType this createBaseEntity(synccharts::Region mainRegion):
     //new entities or properties
 ;
 
+
 //create ModalModel == Region-Component 
 create EntityType this createModalModelEntity(synccharts::Region region, 
 											  int number, 
@@ -39,7 +40,9 @@ create EntityType this createModalModelEntity(synccharts::Region region,
 	this.property.add(p1) ->
    	this.setName(region.parentState.name + "_region_" + number) ->
   	this.setClass1("ptolemy.domains.fsm.modal.ModalModel") ->
-  	//first create simple states and macro state declarations
+  	//first add signals
+  	addSignalsToModalModel(this,signalList) ->
+  	//then create simple states and macro state declarations
    	this.entity.add(createModalControllerEntity(region)) ->
    	//then add macro state refinements (for all macro states)
    	IterateStatesRefinement(region.innerStates, this, signalList)
@@ -48,6 +51,9 @@ create EntityType this createModalModelEntity(synccharts::Region region,
 create EntityType this createModalControllerEntity(synccharts::Region region):
    	this.setName("_Controller") ->
   	this.setClass1("ptolemy.domains.fsm.modal.ModalController") ->
+  	//first add signals
+	addSignalsToModalController(this,signalList) ->  	
+  	//then iterated all states
 	IterateStates(region.innerStates, this)
 ;
 
@@ -264,15 +270,18 @@ create RelationType this createRelation(String name,
 		p3.setClass("ptolemy.domains.fsm.kernel.CommitActionsAttribute") ->
 		p4.setName("reset") ->
 		p4.setClass("ptolemy.data.expr.Parameter") ->
-		p4.setValue("false") ->
+		//by default in SyncCharts we have a reset behavior unless its 
+		//a history transition
+		(!transition.history) ? p4.setValue("true") : p4.setValue("false") ->
 		p5.setName("preemptive") ->
 		p5.setClass("ptolemy.data.expr.Parameter") ->
 		transition.transitionKind.toString().matches("STRONGABORT") ? 
 								p5.setValue("true") : p5.setValue("false") ->
 		p6.setName("defaultTransition") ->
 		p6.setClass("ptolemy.data.expr.Parameter") ->
-		transition.transitionKind.toString().matches("NORMALTERMINATION") ? 
-								p6.setValue("true") : p6.setValue("false") ->
+		p6.setValue("false") -> //defaultTransition is NOT "normal termination" !!!
+		//transition.transitionKind.toString().matches("NORMALTERMINATION") ? 
+		//						p6.setValue("true") : p6.setValue("false") ->
 		p7.setName("nondeterministic") ->
 		p7.setClass("ptolemy.data.expr.Parameter") ->
 		p7.setValue("false") ->
@@ -286,6 +295,103 @@ create RelationType this createRelation(String name,
 	this.property.add(p5) ->
 	this.property.add(p6) ->
 	this.property.add(p7) ->
-	this.property.add(p8)
+	this.property.add(p8) ->
+	addTrigger(this, transition) ->
+	addEmission(this, transition)
 ;
 
+//-----------------------------------------------------------------------------
+//--                    C R E A T E     S I G N A L S                        --
+//-----------------------------------------------------------------------------
+
+void addSignalsToModalModel(EntityType entity, 
+							List[synccharts::Signal] signalList) :
+	let port = new PortType:
+	let p1 = new PropertyType:
+	let p2 = new PropertyType:
+	let signal = signalList.last():
+	port.setClass("ptolemy.domains.fsm.modal.ModalPort") ->
+	port.setName(signal.name) ->
+	p1.setName("input") ->
+	p2.setName("output") ->
+	(signal.isInput) ? port.property.add(p1) : null ->
+	(signal.isLocal || signal.isOutput) ? port.property.add(p2) : null ->
+	entity.port.add(port) ->
+	(signalList.size > 1) ? addSignalsToModalModel(entity,signalList.withoutLast()) : null
+;
+
+void addSignalsToModalController(EntityType entity,
+								 List[synccharts::Signal] signalList) :
+	let port = new PortType:
+	let p1 = new PropertyType:
+	let p2 = new PropertyType:
+	let signal = signalList.last():
+	port.setClass("ptolemy.domains.fsm.modal.RefinementPort") ->
+	port.setName(signal.name) ->
+	p1.setName("input") ->
+	p2.setName("output") ->
+	(signal.isInput) ? port.property.add(p1) : null ->
+	(signal.isLocal || signal.isOutput) ? port.property.add(p2) : null ->
+	entity.port.add(port) ->
+	(signalList.size > 1) ? addSignalsToModalController(entity,signalList.withoutLast()) : null	
+;
+
+
+//-----------------------------------------------------------------------------
+//--         C R E A T E     T R I G G E R   /   E M I S S I O N S           --
+//-----------------------------------------------------------------------------
+
+//create guardExpression
+void addTrigger(RelationType relation, synccharts::Transition transition) :
+	let p1 = new PropertyType:
+	p1.setName("guardExpression") ->
+	p1.setClass("ptolemy.kernel.util.StringAttribute") ->
+	p1.setValue(buildTrigger(transition.trigger)) ->
+	relation.property.add(p1)
+;
+
+//create outputActions
+void addEmission(RelationType relation, synccharts::Transition transition) :
+	let p1 = new PropertyType:
+	p1.setName("outputActions") ->
+	p1.setClass("ptolemy.domains.fsm.kernel.OutputActionsAttribute") ->
+	p1.setValue(buildEmission(transition.emissions)) ->
+	relation.property.add(p1) 
+;
+
+
+String buildTrigger(synccharts::Expression expression) :
+ switch (expression.metaType.toString()) {
+ 	case "synccharts::SignalReference" : ((synccharts::SignalReference)expression).signal.name + "_isPresent"
+    case "synccharts::ComplexExpression" : buildComplexExpression((synccharts::ComplexExpression)expression)
+    default : ""
+ } 		 
+;
+
+String buildComplexExpression(synccharts::ComplexExpression complexExpression) :
+	let operator = complexExpression.operator:
+	(complexExpression.subExpressions.size > 0) ? buildComplexExpression(complexExpression.subExpressions.withoutFirst()) : null ->
+	buildTrigger(complexExpression.subExpressions.first()) + getOperator(operator) + buildTrigger(complexExpression)
+;
+
+String getOperator(synccharts::Operator operator) :
+    switch (operator.operatorKind.toString()) {
+		case "NOT" : "!"
+		case "EQ" : "=="
+		case "LT" : "<" 
+		case "LEQ" : "<="
+		case "AND" : "&&"
+		case "OR" : "||"
+		case "ADD" : "+"
+		case "SUB" : "-"
+		case "MULT" : "*"
+		case "DIV" : "/"
+		//case "VAL" : "!"
+		default : ""
+	}
+;
+
+
+String buildEmission(List[synccharts::Emission] emissions) :
+ ""
+;
