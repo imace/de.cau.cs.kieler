@@ -73,7 +73,7 @@ public class AttributeAwareTransitionFigure extends AttributeAwareConnection {
 		
 		// Set default and current look
 		this.setDefaultLook(weakAbortCF);
-		this.setLook(strongAbortCF);
+		this.setLook(weakAbortCF);
 		
 		// check conditions
 		notifyChanged(null);

@@ -42,7 +42,7 @@
     <eLiterals name="FINAL" value="2"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Signal" eSuperTypes="#//ValuedObject">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//ValuedObject"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parentState" lowerBound="1"
         eType="#//State" eOpposite="#//State/signals"/>
@@ -83,9 +83,9 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="history" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="TransitionKind">
-    <eLiterals name="STRONGABORT"/>
-    <eLiterals name="WEAKABORT" value="1" literal="WEAKABORT"/>
-    <eLiterals name="NORMALTERMINATION" value="3" literal="NORMALTERMINATION"/>
+    <eLiterals name="WEAKABORT" literal="WEAKABORT"/>
+    <eLiterals name="STRONGABORT" value="1"/>
+    <eLiterals name="NORMALTERMINATION" value="2" literal="NORMALTERMINATION"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Expression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="parentAction" lowerBound="1"
@@ -161,7 +161,7 @@
         eType="#//Expression" containment="true" eOpposite="#//Expression/parentAssignment"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Variable" eSuperTypes="#//ValuedObject">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="#//ValuedObject"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parentState" eType="#//State"
         eOpposite="#//State/variables"/>

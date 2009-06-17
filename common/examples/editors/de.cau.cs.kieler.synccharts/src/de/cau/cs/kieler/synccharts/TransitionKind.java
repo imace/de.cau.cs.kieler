@@ -23,16 +23,6 @@ import org.eclipse.emf.common.util.Enumerator;
  */
 public enum TransitionKind implements Enumerator {
 	/**
-	 * The '<em><b>STRONGABORT</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #STRONGABORT_VALUE
-	 * @generated
-	 * @ordered
-	 */
-	STRONGABORT(0, "STRONGABORT", "STRONGABORT"),
-
-	/**
 	 * The '<em><b>WEAKABORT</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -40,7 +30,15 @@ public enum TransitionKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	WEAKABORT(1, "WEAKABORT", "WEAKABORT"),
+	WEAKABORT(0, "WEAKABORT", "WEAKABORT"), /**
+	 * The '<em><b>STRONGABORT</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #STRONGABORT_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	STRONGABORT(1, "STRONGABORT", "STRONGABORT"),
 
 	/**
 	 * The '<em><b>NORMALTERMINATION</b></em>' literal object.
@@ -50,22 +48,7 @@ public enum TransitionKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	NORMALTERMINATION(3, "NORMALTERMINATION", "NORMALTERMINATION");
-
-	/**
-	 * The '<em><b>STRONGABORT</b></em>' literal value.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of '<em><b>STRONGABORT</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @see #STRONGABORT
-	 * @model
-	 * @generated
-	 * @ordered
-	 */
-	public static final int STRONGABORT_VALUE = 0;
+	NORMALTERMINATION(2, "NORMALTERMINATION", "NORMALTERMINATION");
 
 	/**
 	 * The '<em><b>WEAKABORT</b></em>' literal value.
@@ -80,7 +63,22 @@ public enum TransitionKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int WEAKABORT_VALUE = 1;
+	public static final int WEAKABORT_VALUE = 0;
+
+	/**
+	 * The '<em><b>STRONGABORT</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>STRONGABORT</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #STRONGABORT
+	 * @model
+	 * @generated
+	 * @ordered
+	 */
+	public static final int STRONGABORT_VALUE = 1;
 
 	/**
 	 * The '<em><b>NORMALTERMINATION</b></em>' literal value.
@@ -95,7 +93,7 @@ public enum TransitionKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int NORMALTERMINATION_VALUE = 3;
+	public static final int NORMALTERMINATION_VALUE = 2;
 
 	/**
 	 * An array of all the '<em><b>Transition Kind</b></em>' enumerators.
@@ -105,8 +103,8 @@ public enum TransitionKind implements Enumerator {
 	 */
 	private static final TransitionKind[] VALUES_ARRAY =
 		new TransitionKind[] {
-			STRONGABORT,
 			WEAKABORT,
+			STRONGABORT,
 			NORMALTERMINATION,
 		};
 
@@ -158,8 +156,8 @@ public enum TransitionKind implements Enumerator {
 	 */
 	public static TransitionKind get(int value) {
 		switch (value) {
-			case STRONGABORT_VALUE: return STRONGABORT;
 			case WEAKABORT_VALUE: return WEAKABORT;
+			case STRONGABORT_VALUE: return STRONGABORT;
 			case NORMALTERMINATION_VALUE: return NORMALTERMINATION;
 		}
 		return null;

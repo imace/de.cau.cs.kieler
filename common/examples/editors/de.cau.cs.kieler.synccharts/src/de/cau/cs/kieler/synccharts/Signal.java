@@ -6,6 +6,8 @@
  */
 package de.cau.cs.kieler.synccharts;
 
+import org.eclipse.emf.ecore.EObject;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -38,12 +40,12 @@ public interface Signal extends ValuedObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Value</em>' containment reference.
-	 * @see #setValue(ValuedObject)
+	 * @see #setValue(EObject)
 	 * @see de.cau.cs.kieler.synccharts.SyncchartsPackage#getSignal_Value()
 	 * @model containment="true"
 	 * @generated
 	 */
-	ValuedObject getValue();
+	EObject getValue();
 
 	/**
 	 * Sets the value of the '{@link de.cau.cs.kieler.synccharts.Signal#getValue <em>Value</em>}' containment reference.
@@ -53,7 +55,7 @@ public interface Signal extends ValuedObject {
 	 * @see #getValue()
 	 * @generated
 	 */
-	void setValue(ValuedObject value);
+	void setValue(EObject value);
 
 	/**
 	 * Returns the value of the '<em><b>Parent State</b></em>' container reference.

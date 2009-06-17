@@ -64,15 +64,13 @@
               href="synccharts.ecore#//Signal"/>
           <labelMappings
               xsi:type="gmfmap:FeatureLabelMapping"
-              viewPattern="{0}: {1},"
-              editorPattern="{0}: {1}"
-              editPattern="{0}: {1}">
+              viewPattern="{0},"
+              editorPattern="{0}"
+              editPattern="{0}">
             <diagramLabel
                 href="synccharts.gmfgraph#SignalName"/>
             <features
                 href="synccharts.ecore#//ValuedObject/name"/>
-            <features
-                href="synccharts.ecore#//ValuedObject/type"/>
           </labelMappings>
           <diagramNode
               href="synccharts.gmfgraph#InvisibleNode"/>
@@ -153,15 +151,13 @@
               href="synccharts.ecore#//Variable"/>
           <labelMappings
               xsi:type="gmfmap:FeatureLabelMapping"
-              viewPattern="{0}: {1},"
-              editorPattern="{0}: {1}"
-              editPattern="{0}: {1}">
+              viewPattern="{0},"
+              editorPattern="{0}"
+              editPattern="{0}">
             <diagramLabel
                 href="synccharts.gmfgraph#VariableName"/>
             <features
                 href="synccharts.ecore#//ValuedObject/name"/>
-            <features
-                href="synccharts.ecore#//ValuedObject/type"/>
           </labelMappings>
           <diagramNode
               href="synccharts.gmfgraph#InvisibleNode"/>

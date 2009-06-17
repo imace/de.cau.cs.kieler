@@ -16,6 +16,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -49,7 +50,7 @@ public class SignalImpl extends ValuedObjectImpl implements Signal {
 	 * @generated
 	 * @ordered
 	 */
-	protected ValuedObject value;
+	protected EObject value;
 
 	/**
 	 * The default value of the '{@link #isIsLocal() <em>Is Local</em>}' attribute.
@@ -155,7 +156,7 @@ public class SignalImpl extends ValuedObjectImpl implements Signal {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ValuedObject getValue() {
+	public EObject getValue() {
 		return value;
 	}
 
@@ -164,8 +165,8 @@ public class SignalImpl extends ValuedObjectImpl implements Signal {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetValue(ValuedObject newValue, NotificationChain msgs) {
-		ValuedObject oldValue = value;
+	public NotificationChain basicSetValue(EObject newValue, NotificationChain msgs) {
+		EObject oldValue = value;
 		value = newValue;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SyncchartsPackage.SIGNAL__VALUE, oldValue, newValue);
@@ -179,7 +180,7 @@ public class SignalImpl extends ValuedObjectImpl implements Signal {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setValue(ValuedObject newValue) {
+	public void setValue(EObject newValue) {
 		if (newValue != value) {
 			NotificationChain msgs = null;
 			if (value != null)
@@ -397,7 +398,7 @@ public class SignalImpl extends ValuedObjectImpl implements Signal {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case SyncchartsPackage.SIGNAL__VALUE:
-				setValue((ValuedObject)newValue);
+				setValue((EObject)newValue);
 				return;
 			case SyncchartsPackage.SIGNAL__PARENT_STATE:
 				setParentState((State)newValue);
@@ -427,7 +428,7 @@ public class SignalImpl extends ValuedObjectImpl implements Signal {
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case SyncchartsPackage.SIGNAL__VALUE:
-				setValue((ValuedObject)null);
+				setValue((EObject)null);
 				return;
 			case SyncchartsPackage.SIGNAL__PARENT_STATE:
 				setParentState((State)null);

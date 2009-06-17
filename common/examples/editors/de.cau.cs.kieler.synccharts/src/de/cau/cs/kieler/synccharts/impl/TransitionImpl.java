@@ -109,7 +109,7 @@ public class TransitionImpl extends ActionImpl implements Transition {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final TransitionKind TRANSITION_KIND_EDEFAULT = TransitionKind.STRONGABORT;
+	protected static final TransitionKind TRANSITION_KIND_EDEFAULT = TransitionKind.WEAKABORT;
 
 	/**
 	 * The cached value of the '{@link #getTransitionKind() <em>Transition Kind</em>}' attribute.

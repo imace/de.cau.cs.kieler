@@ -111,9 +111,9 @@ public class StateLayout extends ConstrainedToolbarLayout {
 				if (child instanceof ShapeCompartmentFigure) {
 					if ((getName((ShapeCompartmentFigure) child).equals("Signal:") && (!containsSignals))
 							|| (getName((ShapeCompartmentFigure) child).equals("Variable:") && (!containsVariables))
-							|| (getName((ShapeCompartmentFigure) child).equals("OnEntryActions:") && (!containsEntryActions))
-							|| (getName((ShapeCompartmentFigure) child).equals("OnInsideActions:") && (!containsInnerActions))
-							|| (getName((ShapeCompartmentFigure) child).equals("OnExitActions:") && (!containsExitActions))
+							|| (getName((ShapeCompartmentFigure) child).equals("OnEntryAction:") && (!containsEntryActions))
+							|| (getName((ShapeCompartmentFigure) child).equals("OnInsideAction:") && (!containsInnerActions))
+							|| (getName((ShapeCompartmentFigure) child).equals("OnExitAction:") && (!containsExitActions))
 							|| (getName((ShapeCompartmentFigure) child).equals("Suspend:") && (!containsSuspensionTrigger))
 							|| (getName((ShapeCompartmentFigure) child).equals("RegionCompartment") && (!containsRegions))) {
 						newHeight = 0;
@@ -133,21 +133,21 @@ public class StateLayout extends ConstrainedToolbarLayout {
 							setCompartmentTitleVisibility(child, true);
 						}
 					}
-					if (getName((ShapeCompartmentFigure) child).equals("OnEntryActions:")) {
+					if (getName((ShapeCompartmentFigure) child).equals("OnEntryAction:")) {
 						if (!containsEntryActions) {
 							setCompartmentTitleVisibility(child, false);
 						} else {
 							setCompartmentTitleVisibility(child, true);
 						}
 					}
-					if (getName((ShapeCompartmentFigure) child).equals("OnInsideActions:")) {
+					if (getName((ShapeCompartmentFigure) child).equals("OnInsideAction:")) {
 						if (!containsInnerActions) {
 							setCompartmentTitleVisibility(child, false);
 						} else {
 							setCompartmentTitleVisibility(child, true);
 						}
 					}
-					if (getName((ShapeCompartmentFigure) child).equals("OnExitActions:")) {
+					if (getName((ShapeCompartmentFigure) child).equals("OnExitAction:")) {
 						if (!containsExitActions) {
 							setCompartmentTitleVisibility(child, false);
 						} else {

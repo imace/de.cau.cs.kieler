@@ -19,8 +19,8 @@
       <genEnumLiterals ecoreEnumLiteral="synccharts.ecore#//StateFlag/FINAL"/>
     </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="synccharts.ecore#//TransitionKind">
-      <genEnumLiterals ecoreEnumLiteral="synccharts.ecore#//TransitionKind/STRONGABORT"/>
       <genEnumLiterals ecoreEnumLiteral="synccharts.ecore#//TransitionKind/WEAKABORT"/>
+      <genEnumLiterals ecoreEnumLiteral="synccharts.ecore#//TransitionKind/STRONGABORT"/>
       <genEnumLiterals ecoreEnumLiteral="synccharts.ecore#//TransitionKind/NORMALTERMINATION"/>
     </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="synccharts.ecore#//OperatorKind">
