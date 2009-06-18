@@ -15,15 +15,16 @@ package de.cau.cs.kieler.klodd.ui.preferences;
 
 import org.eclipse.jface.preference.BooleanFieldEditor;
 import org.eclipse.jface.preference.FieldEditor;
+import org.eclipse.jface.preference.FieldEditorPreferencePage;
 import org.eclipse.jface.preference.IntegerFieldEditor;
 import org.eclipse.jface.preference.RadioGroupFieldEditor;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Group;
+import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
-import de.cau.cs.kieler.kiml.ui.AbstractKimlLayoutProviderPreferencePage;
 import de.cau.cs.kieler.klodd.hierarchical.HierarchicalDataflowLayoutProvider;
 import de.cau.cs.kieler.klodd.ui.KloddUIPlugin;
 import de.cau.cs.kieler.klodd.ui.Messages;
@@ -34,26 +35,22 @@ import de.cau.cs.kieler.klodd.ui.Messages;
  * 
  * @author msp
  */
-public class KloddLayouterPreferencePage extends
-		AbstractKimlLayoutProviderPreferencePage implements
+public class KloddLayouterPreferencePage extends FieldEditorPreferencePage implements
 		IWorkbenchPreferencePage {
-	
-	/**
-	 * Creates the KLoDD layouter preference page.
-	 */
-	public KloddLayouterPreferencePage() {
-		super(KloddUIPlugin.COLLECTION_NAME, GRID);
-		setPreferenceStore(KloddUIPlugin.getDefault().getPreferenceStore());
-		setDescription(Messages.getString("klodd.ui.0")); //$NON-NLS-1$
-	}
-	
+
+    /**
+     * Creates the preference page.
+     */
+    public KloddLayouterPreferencePage() {
+        super(GRID);
+        setDescription(Messages.getString("klodd.ui.0")); //$NON-NLS-1$
+    }
+    
 	/*
 	 * (non-Javadoc)
-	 * @see de.cau.cs.kieler.kiml.ui.AbstractKimlLayoutProviderPreferencePage#createFieldEditors()
+	 * @see org.eclipse.jface.preference.FieldEditorPreferencePage#createFieldEditors()
 	 */
 	public void createFieldEditors() {
-		super.createFieldEditors();
-
 		// options group for hierarchical layouter
 		Group hieraGroup = new Group(this.getFieldEditorParent(), SWT.NONE);
 		hieraGroup.setText(Messages.getString("klodd.ui.1")); //$NON-NLS-1$
@@ -117,5 +114,12 @@ public class KloddLayouterPreferencePage extends
 //		gridLayout.marginHeight = 10;
 //		orthoGroup.setLayout(gridLayout);
 	}
+
+    /* (non-Javadoc)
+     * @see org.eclipse.ui.IWorkbenchPreferencePage#init(org.eclipse.ui.IWorkbench)
+     */
+    public void init(IWorkbench workbench) {
+        setPreferenceStore(KloddUIPlugin.getDefault().getPreferenceStore());
+    }
 
 }

@@ -4,10 +4,10 @@
    <extension
          point="org.eclipse.ui.preferencePages">
       <page
-            category="de.cau.cs.kieler.kiml.ui.preferences.LayoutProvidersPreferencePage"
+            category="de.cau.cs.kieler.kiml.ui.preferences.layout"
             class="de.cau.cs.kieler.klodd.ui.preferences.KloddLayouterPreferencePage"
             id="edu.unikiel.rtsys.klodd.preferences"
-            name="KLoDD">
+            name="Data Flow">
       </page>
    </extension>
    <extension
