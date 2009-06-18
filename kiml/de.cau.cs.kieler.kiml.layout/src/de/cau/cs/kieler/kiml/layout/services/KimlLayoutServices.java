@@ -14,6 +14,7 @@
 package de.cau.cs.kieler.kiml.layout.services;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -231,9 +232,12 @@ public class KimlLayoutServices {
 	 * Returns a list of layout providers for the given collection name.
 	 *
 	 * @param collection collection name
-	 * @return list of layout providers in the given collection
+	 * @return list of layout providers in the given collection, or an
+	 *     empty list if {@code collection} is {@code null}
 	 */
 	public List<AbstractLayoutProvider> getLayoutProviders(String collection) {
+	    if (collection == null)
+	        return Collections.emptyList();
 		ArrayList<AbstractLayoutProvider> providers = new ArrayList<AbstractLayoutProvider>();
 		for (AbstractLayoutProvider layoutProvider : layoutProviderMap.values()) {
 			if (layoutProvider.getCollection().equals(collection)) {

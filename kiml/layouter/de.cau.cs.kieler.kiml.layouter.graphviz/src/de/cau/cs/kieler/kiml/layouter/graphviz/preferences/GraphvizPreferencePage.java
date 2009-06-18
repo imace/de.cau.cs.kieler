@@ -16,8 +16,6 @@ import org.eclipse.jface.preference.DirectoryFieldEditor;
 import org.eclipse.jface.preference.FileFieldEditor;
 import org.eclipse.jface.preference.IntegerFieldEditor;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.ModifyEvent;
-import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Group;
@@ -26,37 +24,25 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
 import de.cau.cs.kieler.kiml.layouter.graphviz.Activator;
-import de.cau.cs.kieler.kiml.ui.AbstractKimlLayoutProviderPreferencePage;
+import de.cau.cs.kieler.kiml.ui.preferences.LayouterCollectionPreferencePage;
 
 
 /**
  * The GraphViz preference page. This page extends the
- * {@link de.cau.cs.kieler.kiml.ui.AbstractKimlLayoutProviderPreferencePage
- * AbstractKimlLayoutProviderPreferencePage} to draw the group for enabling and
- * disabling all the available GraphViz layouters.
+ * {@link de.cau.cs.kieler.kiml.ui.preferences.LayouterCollectionPreferencePage
+ * LayouterCollectionPreferencePage} to draw the group for enabling and
+ * disabling all the available Graphviz layouters.
  * 
  * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
  */
 public class GraphvizPreferencePage extends
-		AbstractKimlLayoutProviderPreferencePage implements
+		LayouterCollectionPreferencePage implements
 		IWorkbenchPreferencePage {
 
 	public static final String ID = "de.cau.cs.kieler.kiml.layouter.graphviz.preferences.GraphvizPreferencePage";
 	
 	/**
-	 * The constructor for the preference page, uses
-	 * {@link de.cau.cs.kieler.kiml.ui.AbstractKimlLayoutProviderPreferencePage
-	 * AbstractKimlLayoutProviderPreferencePage} to generate the fields for
-	 * enabling and disabling the layouters of the GraphViz suite.
-	 */
-	public GraphvizPreferencePage() {
-		super(GraphvizLayoutProviderNames.LAYOUT_PROVIDER_COLLECTION_ID, GRID);
-		setPreferenceStore(Activator.getDefault().getPreferenceStore());
-		setDescription("Set the options for the GraphViz layout engine:");
-	}
-
-	/**
-	 * Creates the field editors for the GraphViz options
+	 * Creates the field editors for the Graphviz preferences.
 	 */
 	public void createFieldEditors() {
 		super.createFieldEditors();
@@ -131,11 +117,11 @@ public class GraphvizPreferencePage extends
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.ui.IWorkbenchPreferencePage#init(org.eclipse.ui.IWorkbench)
+	 * @see org.eclipse.ui.IWorkbenchPreferencePage#init(org.eclipse.ui.IWorkbench)
 	 */
 	public void init(IWorkbench workbench) {
+        setPreferenceStore(Activator.getDefault().getPreferenceStore());
+        init(GraphvizLayoutProviderNames.LAYOUT_PROVIDER_COLLECTION_ID);
 	}
 
 }

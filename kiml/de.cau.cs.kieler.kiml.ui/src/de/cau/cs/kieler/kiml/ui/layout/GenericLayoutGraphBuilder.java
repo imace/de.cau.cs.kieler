@@ -43,7 +43,6 @@ import de.cau.cs.kieler.kiml.layout.options.LayoutType;
 import de.cau.cs.kieler.kiml.layout.util.KimlLayoutUtil;
 import de.cau.cs.kieler.kiml.ui.KimlUiPlugin;
 import de.cau.cs.kieler.kiml.ui.helpers.KimlGMFLayoutHintHelper;
-import de.cau.cs.kieler.kiml.ui.preferences.PreferenceConstants;
 
 /**
  * A generic implementation of the {@link GenericLayoutGraphBuilder}.
@@ -375,27 +374,10 @@ public class GenericLayoutGraphBuilder extends
 		graphicalEditPart2LayoutNode.clear();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * de.cau.cs.kieler.kiml.ui.layout.AbstractLayoutGraphBuilder
-	 * #updatePreferences()
-	 */
-	@Override
-	protected void updatePreferences() {
-		/* get preference values */
-		IPreferenceStore kimlUiPreferenceStore = KimlUiPlugin.getDefault()
-				.getPreferenceStore();
-		prefInsetsTop = kimlUiPreferenceStore
-				.getInt(PreferenceConstants.PREF_GENERIC_DIAGRAM_LAYOUTER_INSET_TOP);
-		prefInsetsLeft = kimlUiPreferenceStore
-				.getInt(PreferenceConstants.PREF_GENERIC_DIAGRAM_LAYOUTER_INSET_LEFT);
-		prefInsetsBottom = kimlUiPreferenceStore
-				.getInt(PreferenceConstants.PREF_GENERIC_DIAGRAM_LAYOUTER_INSET_BOTTOM);
-		prefInsetsRight = kimlUiPreferenceStore
-				.getInt(PreferenceConstants.PREF_GENERIC_DIAGRAM_LAYOUTER_INSET_RIGHT);
-
-	}
+    /* (non-Javadoc)
+     * @see de.cau.cs.kieler.kiml.ui.layout.AbstractLayoutGraphBuilder#updatePreferences()
+     */
+    protected void updatePreferences() {
+    }
 
 }

@@ -1,15 +1,16 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: %Bundle-Name.1
+Bundle-Name: %Bundle-Name.0
 Bundle-SymbolicName: de.cau.cs.kieler.kiml.ui;singleton:=true
 Bundle-Version: 1.0.0
 Bundle-Activator: de.cau.cs.kieler.kiml.ui.KimlUiPlugin
-Bundle-Vendor: %Bundle-Vendor.1
+Bundle-Vendor: %Bundle-Vendor.0
 Bundle-Localization: plugin
 Export-Package: de.cau.cs.kieler.kiml.ui,
  de.cau.cs.kieler.kiml.ui.helpers,
  de.cau.cs.kieler.kiml.ui.layout,
  de.cau.cs.kieler.kiml.ui.policies,
+ de.cau.cs.kieler.kiml.ui.preferences,
  de.cau.cs.kieler.kiml.ui.properties.tabbed.sections,
  de.cau.cs.kieler.kiml.ui.provider
 Require-Bundle: org.eclipse.ui,

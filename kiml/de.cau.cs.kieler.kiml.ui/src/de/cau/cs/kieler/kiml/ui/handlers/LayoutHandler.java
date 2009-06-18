@@ -22,7 +22,6 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.handlers.HandlerUtil;
 
-import de.cau.cs.kieler.kiml.ui.ContributionItemLayoutAs;
 import de.cau.cs.kieler.kiml.ui.layout.DiagramLayouter;
 
 /**
@@ -36,7 +35,7 @@ import de.cau.cs.kieler.kiml.ui.layout.DiagramLayouter;
  * @see LayoutAsHandler
  * @see ContributionItemLayoutAs
  */
-public class KimlLayoutHandler extends AbstractHandler implements IHandler {
+public class LayoutHandler extends AbstractHandler implements IHandler {
 
 	/* must be the same String as defined in the plugin.xml under the command */
 	private static final String COMMAND_ID_LAYOUT_ALL = "de.cau.cs.kieler.kiml.ui.command.kimlLayoutAll";

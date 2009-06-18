@@ -26,7 +26,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		store.setDefault(ZestGridLayoutProvider.LAYOUTER_NAME, true);
 		
 		/* initialize the layout options */
-		store.setDefault(ZestLayouterPreferencePage.SCALE_BASE, 40.0f);
+		store.setDefault(ZestLayouterPreferencePage.PREF_SCALE_BASE, 40.0f);
 	}
 
 }

@@ -17,7 +17,7 @@ import de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider;
 import de.cau.cs.kieler.kiml.ui.KimlUiPlugin;
 import de.cau.cs.kieler.kiml.ui.helpers.KimlGMFLayoutHintHelper;
 import de.cau.cs.kieler.kiml.ui.layout.DiagramLayouter;
-import de.cau.cs.kieler.kiml.ui.views.KimlLayoutView;
+import de.cau.cs.kieler.kiml.ui.views.LayoutView;
 
 /**
  * View action delegate for all actions of the LayoutView.
@@ -29,12 +29,12 @@ public class DeepLayoutActionDelegate implements IViewActionDelegate {
     public final String DEEP_APPLY_ALL = "de.cau.cs.kieler.kiml.ui.layoutview.deepapply";
     public final String EXPAND = "de.cau.cs.kieler.kiml.ui.layoutview.expand";
     
-    KimlLayoutView view;
+    LayoutView view;
 
     boolean expanded = false;
     
     public void init(IViewPart view) {
-        this.view = (KimlLayoutView) view;
+        this.view = (LayoutView) view;
     }
 
     /**

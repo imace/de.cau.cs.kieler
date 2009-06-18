@@ -71,7 +71,7 @@ public class ZestAlgorithmWrapper {
 		
 		// compute preferred height and width of the graph
 		float scaleBase = Activator.getDefault().getPreferenceStore()
-				.getFloat(ZestLayouterPreferencePage.SCALE_BASE);
+				.getFloat(ZestLayouterPreferencePage.PREF_SCALE_BASE);
 		float width = (float)Math.sqrt(totalWidth / entities.length) * scaleBase;
 		float height = (float)Math.sqrt(totalHeight / entities.length) * scaleBase;
 		

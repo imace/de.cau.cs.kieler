@@ -67,7 +67,6 @@ import de.cau.cs.kieler.kiml.layout.util.KimlLayoutPreferenceConstants;
 import de.cau.cs.kieler.kiml.layout.util.KimlLayoutUtil;
 import de.cau.cs.kieler.kiml.ui.KimlUiPlugin;
 import de.cau.cs.kieler.kiml.ui.helpers.KimlLabelHelper;
-import de.cau.cs.kieler.kiml.ui.helpers.KimlMetricsHelper;
 import de.cau.cs.kieler.kiml.ui.policies.LayoutEditPolicy;
 
 /**
@@ -285,6 +284,16 @@ public class GenericLayoutGraphApplier extends
         }
         return edgesCompoundCommand;
     }
+    
+    /**
+     * Translates the given KPoint into a Draw2D Point.
+     * 
+     * @param kPoint KPoint to translate
+     * @return new Point with the same coordinates
+     */
+    private static Point kPoint2Point(KPoint kPoint) {
+        return new Point((int) kPoint.getX(), (int) kPoint.getY());
+    }
 
     /**
      * Retrieve the list of bendpoints of an KEdge in a PointList that is
@@ -301,19 +310,17 @@ public class GenericLayoutGraphApplier extends
         PointList pointList = new PointList();
 
         // set start point
-        Point startPoint = KimlMetricsHelper.kPoint2Point(edgeLayout
-                .getSourcePoint());
+        Point startPoint = kPoint2Point(edgeLayout.getSourcePoint());
         pointList.addPoint(startPoint);
 
         // set grid points
         for (KPoint gridPoint : edgeLayout.getBendPoints()) {
-            Point point = KimlMetricsHelper.kPoint2Point(gridPoint);
+            Point point = kPoint2Point(gridPoint);
             pointList.addPoint(point);
         }
 
         // set end point
-        Point endPoint = KimlMetricsHelper.kPoint2Point(edgeLayout
-                .getTargetPoint());
+        Point endPoint = kPoint2Point(edgeLayout.getTargetPoint());
         pointList.addPoint(endPoint);
 
         return pointList;

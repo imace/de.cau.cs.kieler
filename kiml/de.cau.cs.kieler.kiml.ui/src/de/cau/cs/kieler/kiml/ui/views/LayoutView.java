@@ -35,13 +35,13 @@ import de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider;
 import de.cau.cs.kieler.kiml.layout.services.KimlLayoutServices;
 
 /**
- * The KimlLayoutView is the main user interface to the layout capabilities of KIELER.
+ * The LayoutView is the main user interface to the layout capabilities of KIELER.
  * It shows a list of all installed and enabled layout engines and lets the user select 
  * one of them. It has view actions to trigger layout runs.
  * @author haf
  *
  */
-public class KimlLayoutView extends ViewPart {
+public class LayoutView extends ViewPart {
 
     /**
      * The tree widget that shows the layouters
