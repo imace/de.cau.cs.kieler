@@ -141,11 +141,21 @@
   <eClassifiers xsi:type="ecore:EClass" name="EventOccupied" eSuperTypes="#//Transition">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="track" upperBound="48"
         eType="#//TRACK"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="condition" eType="#//CONDITION"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="conjunction" eType="#//CONJUNCTION"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="MOTORDIR">
     <eLiterals name="FWD" value="1"/>
     <eLiterals name="REV" value="2"/>
     <eLiterals name="BRAKE" value="3"/>
     <eLiterals name="OFF"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="CONDITION">
+    <eLiterals name="IF" literal="IF"/>
+    <eLiterals name="IF_NOT" value="1" literal="IF_NOT"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="CONJUNCTION">
+    <eLiterals name="AND" literal="AND"/>
+    <eLiterals name="OR" value="1" literal="OR"/>
   </eClassifiers>
 </ecore:EPackage>

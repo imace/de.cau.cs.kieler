@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <genmodel:GenModel xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
-    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/de.cau.cs.kieler.simplerailctrl/src"
-    modelPluginID="de.cau.cs.kieler.simplerailctrl" modelName="SimpleRailCtrl" importerID="org.eclipse.emf.importer.ecore"
-    complianceLevel="5.0" copyrightFields="false">
-  <foreignModel>SimpleRailCtrl.ecore</foreignModel>
-  <genPackages prefix="Simplerailctrl" disposableProviderFactory="true" ecorePackage="SimpleRailCtrl.ecore#/">
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/de.cau.cs.kieler.simplerailctrl/src/"
+    modelPluginID="de.cau.cs.kieler.simplerailctrl" modelName="Simplerailctrl" copyrightFields="false">
+  <genPackages prefix="Simplerailctrl" basePackage="de.cau.cs.kieler" disposableProviderFactory="true"
+      ecorePackage="SimpleRailCtrl.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="SimpleRailCtrl.ecore#//TRACK">
       <genEnumLiterals ecoreEnumLiteral="SimpleRailCtrl.ecore#//TRACK/IC_JCT_0"/>
       <genEnumLiterals ecoreEnumLiteral="SimpleRailCtrl.ecore#//TRACK/IC_LN_0"/>
@@ -108,6 +107,14 @@
       <genEnumLiterals ecoreEnumLiteral="SimpleRailCtrl.ecore#//MOTORDIR/BRAKE"/>
       <genEnumLiterals ecoreEnumLiteral="SimpleRailCtrl.ecore#//MOTORDIR/OFF"/>
     </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="SimpleRailCtrl.ecore#//CONDITION">
+      <genEnumLiterals ecoreEnumLiteral="SimpleRailCtrl.ecore#//CONDITION/IF"/>
+      <genEnumLiterals ecoreEnumLiteral="SimpleRailCtrl.ecore#//CONDITION/IF_NOT"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="SimpleRailCtrl.ecore#//CONJUNCTION">
+      <genEnumLiterals ecoreEnumLiteral="SimpleRailCtrl.ecore#//CONJUNCTION/AND"/>
+      <genEnumLiterals ecoreEnumLiteral="SimpleRailCtrl.ecore#//CONJUNCTION/OR"/>
+    </genEnums>
     <genClasses ecoreClass="SimpleRailCtrl.ecore#//EventWait">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleRailCtrl.ecore#//EventWait/seconds"/>
     </genClasses>
@@ -141,6 +148,8 @@
     </genClasses>
     <genClasses ecoreClass="SimpleRailCtrl.ecore#//EventOccupied">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleRailCtrl.ecore#//EventOccupied/track"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleRailCtrl.ecore#//EventOccupied/condition"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleRailCtrl.ecore#//EventOccupied/conjunction"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

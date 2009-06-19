@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.4"?>
 
-<product name="SimpleRailCtrl" id="SimpleRailCtrl.SimpleRailCtrl" application="SimpleRailCtrl.diagram.SimpleRailCtrlApplication" version="1.0" useFeatures="false">
+<product name="KIELER SimpleRailCtrl" id="de.cau.cs.kieler.simplerailctrl.product" application="de.cau.cs.kieler.simplerailctrl.diagram.SimpleRailCtrlApplication" version="1.0" useFeatures="false">
+
 
    <configIni use="default">
    </configIni>
@@ -11,6 +12,7 @@
    </launcherArgs>
 
    <windowImages i16="/SimpleRailCtrl/icons/TRAIN16px.png" i32="/SimpleRailCtrl/icons/TRAIN32px.png" i48="/SimpleRailCtrl/icons/TRAIN48px.png" i64="/SimpleRailCtrl/icons/TRAIN64px.png" i128="/SimpleRailCtrl/icons/TRAIN128px.png"/>
+
 
    <launcher name="SimpleRailCtrl">
       <solaris/>
@@ -26,17 +28,17 @@
       </win>
    </launcher>
 
+
    <vm>
       <macos>org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/OSGi%Minimum-1.0</macos>
    </vm>
 
    <plugins>
       <plugin id="SimpleRailCtrl"/>
-      <plugin id="SimpleRailCtrl.diagram"/>
-      <plugin id="SimpleRailCtrl.edit"/>
-      <plugin id="SimpleRailCtrl.editor"/>
       <plugin id="SimpleRailCtrl.genplugin"/>
       <plugin id="com.ibm.icu"/>
+      <plugin id="de.cau.cs.kieler.simplerailctrl"/>
+      <plugin id="de.cau.cs.kieler.simplerailctrl.edit"/>
       <plugin id="javax.servlet"/>
       <plugin id="javax.servlet.jsp"/>
       <plugin id="javax.xml"/>
