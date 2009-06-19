@@ -5,7 +5,7 @@
    <extension
          point="org.eclipse.ui.views">
       <category
-            id="de.cau.cs.kieler"
+            id="de.cau.cs.kieler.views.category"
             name="KIELER">
       </category>
       <view
@@ -32,7 +32,7 @@
    <extension
          point="org.eclipse.ui.commands">
       <category
-            id="de.cau.cs.kieler.sim.kiem.commands.category"
+            id="de.cau.cs.kieler.views.category"
             name="Sample Category">
       </category>
       <command
