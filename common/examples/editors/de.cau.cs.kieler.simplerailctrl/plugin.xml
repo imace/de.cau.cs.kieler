@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id$
+-->
+
+<plugin>
+
+   <extension
+         id="SimpleRailCtrl"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="SimpleRailCtrl.diagram.SimpleRailCtrlApplication"
+            name="SimpleRailCtrl">
+         <property
+               name="appName"
+               value="SimpleRailCtrl">
+         </property>
+         <property
+               name="windowImages"
+               value="icons/TRAIN16px.png,icons/TRAIN32px.png,icons/TRAIN48px.png,icons/TRAIN64px.png,icons/TRAIN128px.png">
+         </property>
+      </product>
+   </extension>
+
+</plugin>
