@@ -16,7 +16,7 @@
           description="Create new SetSpeed">
         <smallIcon
             xsi:type="gmftool:BundleImage"
-            path="/icons/full/obj16/SetSpeed.gif"
+            path="/customIcons/SetSpeed.gif"
             bundle="de.cau.cs.kieler.simplerailctrl"/>
       </tools>
       <tools
@@ -25,7 +25,7 @@
           description="Create new SetPoint">
         <smallIcon
             xsi:type="gmftool:BundleImage"
-            path="/icons/full/obj16/SetPoint.gif"
+            path="/customIcons/SetPoint.gif"
             bundle="de.cau.cs.kieler.simplerailctrl"/>
       </tools>
       <tools
@@ -34,7 +34,7 @@
           description="Create new SetSignal">
         <smallIcon
             xsi:type="gmftool:BundleImage"
-            path="/icons/full/obj16/SetSignal.gif"
+            path="/customIcons/SetSignal.gif"
             bundle="de.cau.cs.kieler.simplerailctrl"/>
       </tools>
     </tools>
@@ -48,7 +48,7 @@
           description="Create new EventWait">
         <smallIcon
             xsi:type="gmftool:BundleImage"
-            path="/icons/full/obj16/EventWait.gif"
+            path="/customIcons/EventWait.gif"
             bundle="de.cau.cs.kieler.simplerailctrl"/>
       </tools>
       <tools
@@ -57,7 +57,7 @@
           description="Create new EventContact">
         <smallIcon
             xsi:type="gmftool:BundleImage"
-            path="/icons/full/obj16/EventContact.gif"
+            path="/customIcons/EventContact.gif"
             bundle="de.cau.cs.kieler.simplerailctrl"/>
       </tools>
       <tools
@@ -66,7 +66,7 @@
           description="Create new EventOccupied">
         <smallIcon
             xsi:type="gmftool:BundleImage"
-            path="/icons/full/obj16/EventOccupied.gif"
+            path="/customIcons/EventOccupied.gif"
             bundle="de.cau.cs.kieler.simplerailctrl"/>
       </tools>
     </tools>

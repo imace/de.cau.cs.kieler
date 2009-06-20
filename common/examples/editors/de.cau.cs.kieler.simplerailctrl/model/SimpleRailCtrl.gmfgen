@@ -174,14 +174,14 @@
     </links>
     <palette>
       <groups title="Nodes" collapse="true">
-        <entries xsi:type="gmfgen:ToolEntry" title="Set Speed" description="Create new SetSpeed" smallIconPath="/de.cau.cs.kieler.simplerailctrl/icons/full/obj16/SetSpeed.gif" genNodes="//@diagram/@topLevelNodes.0"/>
-        <entries xsi:type="gmfgen:ToolEntry" title="Set Point" description="Create new SetPoint" smallIconPath="/de.cau.cs.kieler.simplerailctrl/icons/full/obj16/SetPoint.gif" genNodes="//@diagram/@topLevelNodes.2"/>
-        <entries xsi:type="gmfgen:ToolEntry" title="Set Signal" description="Create new SetSignal" smallIconPath="/de.cau.cs.kieler.simplerailctrl/icons/full/obj16/SetSignal.gif" genNodes="//@diagram/@topLevelNodes.1"/>
+        <entries xsi:type="gmfgen:ToolEntry" title="Set Speed" description="Create new SetSpeed" smallIconPath="/de.cau.cs.kieler.simplerailctrl/customIcons/SetSpeed.gif" genNodes="//@diagram/@topLevelNodes.0"/>
+        <entries xsi:type="gmfgen:ToolEntry" title="Set Point" description="Create new SetPoint" smallIconPath="/de.cau.cs.kieler.simplerailctrl/customIcons/SetPoint.gif" genNodes="//@diagram/@topLevelNodes.2"/>
+        <entries xsi:type="gmfgen:ToolEntry" title="Set Signal" description="Create new SetSignal" smallIconPath="/de.cau.cs.kieler.simplerailctrl/customIcons/SetSignal.gif" genNodes="//@diagram/@topLevelNodes.1"/>
       </groups>
       <groups title="Transitions" collapse="true">
-        <entries xsi:type="gmfgen:ToolEntry" title="Event Wait" description="Create new EventWait" smallIconPath="/de.cau.cs.kieler.simplerailctrl/icons/full/obj16/EventWait.gif" genLinks="//@diagram/@links.0"/>
-        <entries xsi:type="gmfgen:ToolEntry" title="Event Contact" description="Create new EventContact" smallIconPath="/de.cau.cs.kieler.simplerailctrl/icons/full/obj16/EventContact.gif" genLinks="//@diagram/@links.1"/>
-        <entries xsi:type="gmfgen:ToolEntry" title="Event Occupied" description="Create new EventOccupied" smallIconPath="/de.cau.cs.kieler.simplerailctrl/icons/full/obj16/EventOccupied.gif" genLinks="//@diagram/@links.2"/>
+        <entries xsi:type="gmfgen:ToolEntry" title="Event Wait" description="Create new EventWait" smallIconPath="/de.cau.cs.kieler.simplerailctrl/customIcons/EventWait.gif" genLinks="//@diagram/@links.0"/>
+        <entries xsi:type="gmfgen:ToolEntry" title="Event Contact" description="Create new EventContact" smallIconPath="/de.cau.cs.kieler.simplerailctrl/customIcons/EventContact.gif" genLinks="//@diagram/@links.1"/>
+        <entries xsi:type="gmfgen:ToolEntry" title="Event Occupied" description="Create new EventOccupied" smallIconPath="/de.cau.cs.kieler.simplerailctrl/customIcons/EventOccupied.gif" genLinks="//@diagram/@links.2"/>
       </groups>
     </palette>
     <preferencePages xsi:type="gmfgen:GenStandardPreferencePage" iD="de.cau.cs.kieler.simplerailctrl.diagram.general" name="Simplerailctrl Diagram">
