@@ -68,7 +68,24 @@ int GLOBSEM = 0; 			// a global semaphore to rail API (released)
 int MasterShutdown;			// master shutdown initialization
 int TICK = 0; 				// globally increased (MACRO)TICK
 
+int ContactMem[48][2];      // arrays for saving contact/occupied
+int OccupiedMem[48];		// information during one macro tick
+
+
+int localLOCK2 = 0;   
+
 struct railway_system *railway;
+
+//synchronous getcontact and trackused functions
+//ContactMem array and OccupiedMem array are filled by master thread
+//prior to each round and remain persistent for each thread during a macro tick
+int getcontact_sync(struct railway_system *railway, int track, int position, int clear) {
+	return ContactMem[track][position];
+}
+int trackused_sync(struct railway_system *railway, int track) {
+	return OccupiedMem[track];
+}
+
 
 //hash function for state-ids
 int HASH (const char *str_param) {
@@ -124,12 +141,21 @@ void V(int ThreadId){
 // set their localLOCKs to > 0 and hence have done a step
 void* ThreadFunctionMaster(void* port)
 {
+  int track;
   while (!MasterShutdown) {
   		//wait for all localTicks to be increased
-  		if ((1)) {
+  		if ((localLOCK2 == 1)&&(1)) {
+			//fill ContactMem and OccupiedMem array
+			for (track = 0; track < 48; track++) {
+ 			  ContactMem[track][0] = getcontact(railway,track,FIRST,1);
+ 			  ContactMem[track][1] = getcontact(railway,track,SECOND,1);
+ 			  OccupiedMem[track] = trackused_sync(railway,track);
+			}
+
   			//increase a tick counter (useless)
   			TICK++;
 			//if (DEBUGCONTROLLER) printf("TICK %d\n",TICK);
+			localLOCK2 = 0;   
   		}//end if
 		usleep(1000); // sleep for 1ms
   }
@@ -137,6 +163,278 @@ void* ThreadFunctionMaster(void* port)
 }
  
  
+void* ThreadFunction2(void* port)
+{
+  int secondcounter = 0;
+  int outtransition = 0;
+  int state = (int)(HASH("org.eclipse.emf.ecore.impl.DynamicEObjectImpl@cdb06e (eClass: org.eclipse.emf.ecore.impl.EClassImpl@12cc95d (name: SetPoint) (instanceClassName: null) (abstract: false, interface: false))"));
+  
+  if (DEBUGCONTROLLER) printf("Thread 'org.openarchitectureware.xpand2.type.XpandIterator@6bade9' started.\n");
+  
+  while(1) {
+      if (DEBUGCONTROLLER) printf("Entering state %d.\n",state);
+      
+      //escape if railway system is down
+      if (!railway_alive(railway)) {
+	  	  if (DEBUGCONTROLLER) printf("Railway system down - terminating thread.\n");
+     	  exit(EXIT_FAILURE);
+	  }//end if
+	  
+      //all states
+      if (state == -1) {}
+	  else if (state == ((int)(HASH("org.eclipse.emf.ecore.impl.DynamicEObjectImpl@14384c2 (eClass: org.eclipse.emf.ecore.impl.EClassImpl@ba9340 (name: SetSpeed) (instanceClassName: null) (abstract: false, interface: false))")))) {
+	  		  P(2); // GET THE GLOBALLOCK
+              if (DEBUGCONTROLLER) printf("State %d (simplerailctrl::SetSpeed(outTransitions={simplerailctrl::EventContact(destination=unnamed : SetSpeed,track=IC_ST_3,position=FIRST)},initial=false,track=[IC_JCT_0, IC_LN_0, IC_LN_1, IC_LN_2, IC_LN_3, IC_LN_4, IC_LN_5, IC_ST_0, IC_ST_3, IC_ST_4],speed=100,direction=FWD)) entered.\n",(int)(HASH("org.eclipse.emf.ecore.impl.DynamicEObjectImpl@14384c2 (eClass: org.eclipse.emf.ecore.impl.EClassImpl@ba9340 (name: SetSpeed) (instanceClassName: null) (abstract: false, interface: false))")));
+	          //state1 entry code (SET SPEED)
+			  settrack(railway, IC_JCT_0, FWD, 100);
+		      setsignal(railway, IC_JCT_0, FIRST, OFF);
+		      setsignal(railway, IC_JCT_0, SECOND, GREEN);
+			  settrack(railway, IC_LN_0, FWD, 100);
+		      setsignal(railway, IC_LN_0, FIRST, OFF);
+		      setsignal(railway, IC_LN_0, SECOND, GREEN);
+			  settrack(railway, IC_LN_1, FWD, 100);
+		      setsignal(railway, IC_LN_1, FIRST, OFF);
+		      setsignal(railway, IC_LN_1, SECOND, GREEN);
+			  settrack(railway, IC_LN_2, FWD, 100);
+		      setsignal(railway, IC_LN_2, FIRST, OFF);
+		      setsignal(railway, IC_LN_2, SECOND, GREEN);
+			  settrack(railway, IC_LN_3, FWD, 100);
+		      setsignal(railway, IC_LN_3, FIRST, OFF);
+		      setsignal(railway, IC_LN_3, SECOND, GREEN);
+			  settrack(railway, IC_LN_4, FWD, 100);
+		      setsignal(railway, IC_LN_4, FIRST, OFF);
+		      setsignal(railway, IC_LN_4, SECOND, GREEN);
+			  settrack(railway, IC_LN_5, FWD, 100);
+		      setsignal(railway, IC_LN_5, FIRST, OFF);
+		      setsignal(railway, IC_LN_5, SECOND, GREEN);
+			  settrack(railway, IC_ST_0, FWD, 100);
+		      setsignal(railway, IC_ST_0, FIRST, OFF);
+		      setsignal(railway, IC_ST_0, SECOND, GREEN);
+			  settrack(railway, IC_ST_3, FWD, 100);
+		      setsignal(railway, IC_ST_3, FIRST, OFF);
+		      setsignal(railway, IC_ST_3, SECOND, GREEN);
+			  settrack(railway, IC_ST_4, FWD, 100);
+		      setsignal(railway, IC_ST_4, FIRST, OFF);
+		      setsignal(railway, IC_ST_4, SECOND, GREEN);
+	  		  V(2); // RELEASE THE GLOBALLOCK
+	  		  
+	          
+	          //state1 transitions code
+	          secondcounter = 0;
+	          while(1) {
+		   		    P(2); // GET THE GLOBALLOCK
+	                outtransition = 0;
+		            if ((DEBUGCONTROLLER)&&(!(secondcounter%10))) printf("Transition wait (%d seconds).\n",secondcounter/10);
+			  		outtransition = 1;
+	          		//test for contact-events
+			  		if ((getcontact_sync(railway,IC_ST_3,FIRST,1) != 0)) {
+			  		    V(2); // RELEASE THE GLOBALLOCK
+	 	                if (DEBUGCONTROLLER) printf("Event-Transition taken.\n");
+			  			state = HASH("org.eclipse.emf.ecore.impl.DynamicEObjectImpl@b6e39f (eClass: org.eclipse.emf.ecore.impl.EClassImpl@ba9340 (name: SetSpeed) (instanceClassName: null) (abstract: false, interface: false))");
+			  			break;
+			  		}
+	  		  		V(2); // RELEASE THE GLOBALLOCK
+			  			          		
+	                //escape if railway system is down
+                    if (!railway_alive(railway)) {
+	 	                if (DEBUGCONTROLLER) printf("Railway system down - terminating thread.\n");
+				    	exit(EXIT_FAILURE);
+                    }//end if
+                    	          
+                    //escape if not outtransitions
+                    if (!outtransition) {
+	 	                if (DEBUGCONTROLLER) printf("Final state - terminating thread.\n");
+						return (void *)1;
+                    }//end if
+                    	          
+	          		secondcounter++;
+				usleep(100000); // sleep for 100ms
+					
+					//set localLOCK := 1 and wait for its reset
+	          		localLOCK2 = 1;   
+	          		while (localLOCK2 == 1){
+		                    if (!railway_alive(railway)) {
+	 			                if (DEBUGCONTROLLER) printf("Railway system down - terminating thread.\n");
+						    	exit(EXIT_FAILURE);
+                    		}//end if
+							usleep(5000); // sleep for 5ms
+							//if (DEBUGCONTROLLER) printf("Thread 2 waiting for next tick.\n");
+	          		}//end while
+	          		
+	          }//end while
+	      }//end if
+	      
+	  else if (state == ((int)(HASH("org.eclipse.emf.ecore.impl.DynamicEObjectImpl@cdb06e (eClass: org.eclipse.emf.ecore.impl.EClassImpl@12cc95d (name: SetPoint) (instanceClassName: null) (abstract: false, interface: false))")))) {
+	  		  P(2); // GET THE GLOBALLOCK
+              if (DEBUGCONTROLLER) printf("State %d (simplerailctrl::SetPoint(outTransitions={simplerailctrl::EventWait(destination=unnamed : SetSpeed,seconds=2)},initial=true,point=[POINT_20, POINT_24],direction=BRANCH)) entered.\n",(int)(HASH("org.eclipse.emf.ecore.impl.DynamicEObjectImpl@cdb06e (eClass: org.eclipse.emf.ecore.impl.EClassImpl@12cc95d (name: SetPoint) (instanceClassName: null) (abstract: false, interface: false))")));
+	          //state2 enty code (SET POINT)
+			  setpoint(railway,  POINT_20, BRANCH);
+			  setpoint(railway,  POINT_24, BRANCH);
+	  		  V(2); // RELEASE THE GLOBALLOCK
+	  		  
+	          
+	          //state2 transitions code
+	          secondcounter = 0;
+	          while(1) {
+		   		    P(2); // GET THE GLOBALLOCK
+	                outtransition = 0;
+		            if ((DEBUGCONTROLLER)&&(!(secondcounter%10))) printf("Transition wait (%d seconds).\n",secondcounter/10);
+			  		outtransition = 1;
+	          		//test for wait-events
+			  		if (secondcounter/10 >= 2) {
+			  		    V(2); // RELEASE THE GLOBALLOCK
+	 	                if (DEBUGCONTROLLER) printf("Wait-Transition taken.\n");
+			  			state = HASH("org.eclipse.emf.ecore.impl.DynamicEObjectImpl@14384c2 (eClass: org.eclipse.emf.ecore.impl.EClassImpl@ba9340 (name: SetSpeed) (instanceClassName: null) (abstract: false, interface: false))");
+			  			break;
+			  		}
+			  		
+	  		  		V(2); // RELEASE THE GLOBALLOCK
+			  			          		
+	                //escape if railway system is down
+                    if (!railway_alive(railway)) {
+	 	                if (DEBUGCONTROLLER) printf("Railway system down - terminating thread.\n");
+				    	exit(EXIT_FAILURE);
+                    }//end if
+                    	          
+                    //escape if not outtransitions
+                    if (!outtransition) {
+	 	                if (DEBUGCONTROLLER) printf("Final state - terminating thread.\n");
+						return (void *)1;
+                    }//end if
+                    	          
+	          		secondcounter++;
+				usleep(100000); // sleep for 100ms
+					
+					//set localLOCK := 1 and wait for its reset
+	          		localLOCK2 = 1;   
+	          		while (localLOCK2 == 1){
+		                    if (!railway_alive(railway)) {
+	 			                if (DEBUGCONTROLLER) printf("Railway system down - terminating thread.\n");
+						    	exit(EXIT_FAILURE);
+                    		}//end if
+							usleep(5000); // sleep for 5ms
+							//if (DEBUGCONTROLLER) printf("Thread 2 waiting for next tick.\n");
+	          		}//end while
+	          		
+	          }//end while
+	      }//end if
+	      
+	  else if (state == ((int)(HASH("org.eclipse.emf.ecore.impl.DynamicEObjectImpl@b6e39f (eClass: org.eclipse.emf.ecore.impl.EClassImpl@ba9340 (name: SetSpeed) (instanceClassName: null) (abstract: false, interface: false))")))) {
+	  		  P(2); // GET THE GLOBALLOCK
+              if (DEBUGCONTROLLER) printf("State %d (simplerailctrl::SetSpeed(outTransitions={simplerailctrl::EventContact(destination=unnamed : SetSpeed,track=IC_ST_3,position=SECOND)},initial=false,track=[IC_ST_0, IC_ST_3],speed=30,direction=FWD)) entered.\n",(int)(HASH("org.eclipse.emf.ecore.impl.DynamicEObjectImpl@b6e39f (eClass: org.eclipse.emf.ecore.impl.EClassImpl@ba9340 (name: SetSpeed) (instanceClassName: null) (abstract: false, interface: false))")));
+	          //state3 entry code (SET SPEED)
+			  settrack(railway, IC_ST_0, FWD, 30);
+		      setsignal(railway, IC_ST_0, FIRST, OFF);
+		      setsignal(railway, IC_ST_0, SECOND, YELLOW);
+			  settrack(railway, IC_ST_3, FWD, 30);
+		      setsignal(railway, IC_ST_3, FIRST, OFF);
+		      setsignal(railway, IC_ST_3, SECOND, YELLOW);
+	  		  V(2); // RELEASE THE GLOBALLOCK
+	  		  
+	          
+	          //state3 transitions code
+	          secondcounter = 0;
+	          while(1) {
+		   		    P(2); // GET THE GLOBALLOCK
+	                outtransition = 0;
+		            if ((DEBUGCONTROLLER)&&(!(secondcounter%10))) printf("Transition wait (%d seconds).\n",secondcounter/10);
+			  		outtransition = 1;
+	          		//test for contact-events
+			  		if ((getcontact_sync(railway,IC_ST_3,SECOND,1) != 0)) {
+			  		    V(2); // RELEASE THE GLOBALLOCK
+	 	                if (DEBUGCONTROLLER) printf("Event-Transition taken.\n");
+			  			state = HASH("org.eclipse.emf.ecore.impl.DynamicEObjectImpl@119dc16 (eClass: org.eclipse.emf.ecore.impl.EClassImpl@ba9340 (name: SetSpeed) (instanceClassName: null) (abstract: false, interface: false))");
+			  			break;
+			  		}
+	  		  		V(2); // RELEASE THE GLOBALLOCK
+			  			          		
+	                //escape if railway system is down
+                    if (!railway_alive(railway)) {
+	 	                if (DEBUGCONTROLLER) printf("Railway system down - terminating thread.\n");
+				    	exit(EXIT_FAILURE);
+                    }//end if
+                    	          
+                    //escape if not outtransitions
+                    if (!outtransition) {
+	 	                if (DEBUGCONTROLLER) printf("Final state - terminating thread.\n");
+						return (void *)1;
+                    }//end if
+                    	          
+	          		secondcounter++;
+				usleep(100000); // sleep for 100ms
+					
+					//set localLOCK := 1 and wait for its reset
+	          		localLOCK2 = 1;   
+	          		while (localLOCK2 == 1){
+		                    if (!railway_alive(railway)) {
+	 			                if (DEBUGCONTROLLER) printf("Railway system down - terminating thread.\n");
+						    	exit(EXIT_FAILURE);
+                    		}//end if
+							usleep(5000); // sleep for 5ms
+							//if (DEBUGCONTROLLER) printf("Thread 2 waiting for next tick.\n");
+	          		}//end while
+	          		
+	          }//end while
+	      }//end if
+	      
+	  else if (state == ((int)(HASH("org.eclipse.emf.ecore.impl.DynamicEObjectImpl@119dc16 (eClass: org.eclipse.emf.ecore.impl.EClassImpl@ba9340 (name: SetSpeed) (instanceClassName: null) (abstract: false, interface: false))")))) {
+	  		  P(2); // GET THE GLOBALLOCK
+              if (DEBUGCONTROLLER) printf("State %d (simplerailctrl::SetSpeed(outTransitions={simplerailctrl::EventWait(destination=unnamed : SetSpeed,seconds=10)},initial=false,track=[IC_ST_3],speed=0,direction=FWD)) entered.\n",(int)(HASH("org.eclipse.emf.ecore.impl.DynamicEObjectImpl@119dc16 (eClass: org.eclipse.emf.ecore.impl.EClassImpl@ba9340 (name: SetSpeed) (instanceClassName: null) (abstract: false, interface: false))")));
+	          //state4 entry code (SET SPEED)
+			  settrack(railway, IC_ST_3, FWD, 0);
+		      setsignal(railway, IC_ST_3, FIRST, OFF);
+		      setsignal(railway, IC_ST_3, SECOND, RED);
+	  		  V(2); // RELEASE THE GLOBALLOCK
+	  		  
+	          
+	          //state4 transitions code
+	          secondcounter = 0;
+	          while(1) {
+		   		    P(2); // GET THE GLOBALLOCK
+	                outtransition = 0;
+		            if ((DEBUGCONTROLLER)&&(!(secondcounter%10))) printf("Transition wait (%d seconds).\n",secondcounter/10);
+			  		outtransition = 1;
+	          		//test for wait-events
+			  		if (secondcounter/10 >= 10) {
+			  		    V(2); // RELEASE THE GLOBALLOCK
+	 	                if (DEBUGCONTROLLER) printf("Wait-Transition taken.\n");
+			  			state = HASH("org.eclipse.emf.ecore.impl.DynamicEObjectImpl@14384c2 (eClass: org.eclipse.emf.ecore.impl.EClassImpl@ba9340 (name: SetSpeed) (instanceClassName: null) (abstract: false, interface: false))");
+			  			break;
+			  		}
+			  		
+	  		  		V(2); // RELEASE THE GLOBALLOCK
+			  			          		
+	                //escape if railway system is down
+                    if (!railway_alive(railway)) {
+	 	                if (DEBUGCONTROLLER) printf("Railway system down - terminating thread.\n");
+				    	exit(EXIT_FAILURE);
+                    }//end if
+                    	          
+                    //escape if not outtransitions
+                    if (!outtransition) {
+	 	                if (DEBUGCONTROLLER) printf("Final state - terminating thread.\n");
+						return (void *)1;
+                    }//end if
+                    	          
+	          		secondcounter++;
+				usleep(100000); // sleep for 100ms
+					
+					//set localLOCK := 1 and wait for its reset
+	          		localLOCK2 = 1;   
+	          		while (localLOCK2 == 1){
+		                    if (!railway_alive(railway)) {
+	 			                if (DEBUGCONTROLLER) printf("Railway system down - terminating thread.\n");
+						    	exit(EXIT_FAILURE);
+                    		}//end if
+							usleep(5000); // sleep for 5ms
+							//if (DEBUGCONTROLLER) printf("Thread 2 waiting for next tick.\n");
+	          		}//end while
+	          		
+	          }//end while
+	      }//end if
+	      
+  }//end while
+}	
 
 
 int main() {
@@ -162,8 +460,11 @@ int main() {
     pthread_create (&ThreadMaster, NULL, &ThreadFunctionMaster, NULL);
     
     //start concurrent threads of controllers
+    pthread_t Thread2;
+    pthread_create (&Thread2, NULL, &ThreadFunction2, NULL);
  
     //wait for concurrent controller threads
+    pthread_join( Thread2, NULL ); 
 	
 	//shutdown master thread
 	MasterShutdown = 1;

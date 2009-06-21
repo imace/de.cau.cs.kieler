@@ -1,8 +1,9 @@
 <?xml version="1.0"?>
 <workflow>
 	<property name="metamodel" value="platform:/resource/de.cau.cs.kieler.simplerailctrl.codegen.c/model/SimpleRailCtrl.ecore" />
-	<property name="model" value="platform:/resource/de.cau.cs.kieler.simplerailctrl.codegen.c/sample.simplerailctrl" />
-	<property name="src-gen" value="c:/src-gen" />
+	<property name="model2" value="platform:/resource/de.cau.cs.kieler.simplerailctrl.codegen.c/default.simplerailctrl" />
+	<property name="model" value="file:/X:/dop_eclipse/testspace/de.cau.cs.kieler.simplerailctrl.diagram/example/default.simplerailctrl" />
+	<property name="src-gen" value="src-gen" />
 	
 	<!-- set up EMF for standalone execution -->
 	<bean class="org.eclipse.mwe.emf.StandaloneSetup" >
@@ -11,7 +12,8 @@
 
 	<!-- load model and store it in slot 'model' -->
 	<component class="org.eclipse.mwe.emf.Reader">
-	    <uri value="${model}" />
+        <!--   <uri value="platform:/resource/${model}" />   -->  
+    	<uri value="${model}" /> 
 		<!-- <uri value="platform:/resource/${model}" />  -->
 		<modelSlot value="model" />
 	</component>

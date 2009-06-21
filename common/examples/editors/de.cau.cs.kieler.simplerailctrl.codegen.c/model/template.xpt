@@ -71,6 +71,11 @@ int GLOBSEM = 0; 			// a global semaphore to rail API (released)
 
 int MasterShutdown;			// master shutdown initialization
 int TICK = 0; 				// globally increased (MACRO)TICK
+
+int ContactMem[48][2];      // arrays for saving contact/occupied
+int OccupiedMem[48];		// information during one macro tick
+
+
 «FOREACH nodes AS n ITERATOR i-»
    «IF n.initial-»
 int localLOCK«i.counter1-» = 0;   
@@ -78,6 +83,17 @@ int localLOCK«i.counter1-» = 0;
 «ENDFOREACH-»
 
 struct railway_system *railway;
+
+//synchronous getcontact and trackused functions
+//ContactMem array and OccupiedMem array are filled by master thread
+//prior to each round and remain persistent for each thread during a macro tick
+int getcontact_sync(struct railway_system *railway, int track, int position, int clear) {
+	return ContactMem[track][position];
+}
+int trackused_sync(struct railway_system *railway, int track) {
+	return OccupiedMem[track];
+}
+
 
 //hash function for state-ids
 int HASH (const char *str_param) {
@@ -133,9 +149,17 @@ void V(int ThreadId){
 // set their localLOCKs to > 0 and hence have done a step
 void* ThreadFunctionMaster(void* port)
 {
+  int track;
   while (!MasterShutdown) {
   		//wait for all localTicks to be increased
   		if («FOREACH nodes AS n ITERATOR i-»«IF n.initial-»(localLOCK«i.counter1-» == 1)&&«ENDIF-»«ENDFOREACH-»(1)) {
+			//fill ContactMem and OccupiedMem array
+			for (track = 0; track < 48; track++) {
+ 			  ContactMem[track][0] = getcontact(railway,track,FIRST,1);
+ 			  ContactMem[track][1] = getcontact(railway,track,SECOND,1);
+ 			  OccupiedMem[track] = trackused_sync(railway,track);
+			}
+
   			//increase a tick counter (useless)
   			TICK++;
 			//if (DEBUGCONTROLLER) printf("TICK %d\n",TICK);
@@ -176,13 +200,7 @@ void* ThreadFunction«i.counter1-»(void* port)
 	  else if (state == ((int)(HASH("«nn»")))) {
 	  		  P(«i.counter1-»); // GET THE GLOBALLOCK
               if (DEBUGCONTROLLER) printf("State %d («nn.toString()») entered.\n",(int)(HASH("«nn-»")));
-	  		  //clearing contact cache (if any outgoing contact events)  
-	  		  «FOREACH (nn).outTransitions AS ot-»
-	  		  «IF (simplerailctrl::EventContact.isInstance(ot))-»
-  	  		  getcontact(railway,«((simplerailctrl::EventContact)ot).track»,«((simplerailctrl::EventContact)ot).position»,1);
-  	  		  «ENDIF-»
-      	 	  «ENDFOREACH-»	          		
-	          «IF (simplerailctrl::SetSpeed.isInstance(nn))-»
+	          «IF (nn.metaType.name.matches("simplerailctrl::SetSpeed"))-»
 	          //state«ii.counter1-» entry code (SET SPEED)
 			  «FOREACH ((simplerailctrl::SetSpeed)nn).track AS t-»
 			  settrack(railway, «t-», «((simplerailctrl::SetSpeed)nn).direction-», «((simplerailctrl::SetSpeed)nn).speed-»);
@@ -222,7 +240,7 @@ void* ThreadFunction«i.counter1-»(void* port)
 		      «ENDIF-»
 			  «ENDFOREACH-»	          		
 	          «ENDIF-»
-	          «IF (simplerailctrl::SetSignal.isInstance(nn))-»
+	          «IF (nn.metaType.name.matches("simplerailctrl::SetSignal"))-»
 	          //state«ii.counter1-» enty code (SET SIGNAL)
 			  «FOREACH ((simplerailctrl::SetSignal)nn).track AS t-»
 			  «FOREACH ((simplerailctrl::SetSignal)nn).position AS p-»
@@ -230,7 +248,7 @@ void* ThreadFunction«i.counter1-»(void* port)
 			  «ENDFOREACH-»	          		
 			  «ENDFOREACH-»	          		
 	          «ENDIF-»
-	          «IF (simplerailctrl::SetPoint.isInstance(nn))-»
+	          «IF (nn.metaType.name.matches("simplerailctrl::SetPoint"))-»
 	          //state«ii.counter1-» enty code (SET POINT)
 			  «FOREACH ((simplerailctrl::SetPoint)nn).point AS p-»
 			  setpoint(railway,  «p-», «((simplerailctrl::SetPoint)nn).direction-»);
@@ -247,7 +265,7 @@ void* ThreadFunction«i.counter1-»(void* port)
 		            if ((DEBUGCONTROLLER)&&(!(secondcounter%10))) printf("Transition wait (%d seconds).\n",secondcounter/10);
 			  		«FOREACH (nn).outTransitions AS ot-»
 			  		outtransition = 1;
-	          		«IF (simplerailctrl::EventWait.isInstance(ot))-»
+	          		«IF (ot.metaType.name.matches("simplerailctrl::EventWait"))-»
 	          		//test for wait-events
 			  		if (secondcounter/10 >= «((simplerailctrl::EventWait)ot).seconds») {
 			  		    V(«i.counter1-»); // RELEASE THE GLOBALLOCK
@@ -257,23 +275,16 @@ void* ThreadFunction«i.counter1-»(void* port)
 			  		}
 			  		
 	          		«ENDIF-»
-	          		«IF (simplerailctrl::EventContact.isInstance(ot))-»
+	          		«IF (ot.metaType.name.matches("simplerailctrl::EventContact"))-»
 	          		//test for contact-events
-			  		if ((getcontact(railway,«((simplerailctrl::EventContact)ot).track»,«((simplerailctrl::EventContact)ot).position»,1) != 0)) {
+			  		if ((getcontact_sync(railway,«((simplerailctrl::EventContact)ot).track»,«((simplerailctrl::EventContact)ot).position»,1) != 0)) {
 			  		    V(«i.counter1-»); // RELEASE THE GLOBALLOCK
-			  		     //safety waiting for rail control to overtake and clear contact events
-					    usleep(100000); // sleep for 100ms
-					    getcontact(railway,«((simplerailctrl::EventContact)ot).track»,FIRST,1),
-					    getcontact(railway,«((simplerailctrl::EventContact)ot).track»,SECOND,1),
-					    getcontact(railway,«((simplerailctrl::EventContact)ot).track»,FIRST,1),
-					    getcontact(railway,«((simplerailctrl::EventContact)ot).track»,SECOND,1),
-					    usleep(100000); // sleep for 100ms
 	 	                if (DEBUGCONTROLLER) printf("Event-Transition taken.\n");
 			  			state = HASH("«((simplerailctrl::EventWait)ot).destination-»");
 			  			break;
 			  		}
 	          		«ENDIF-»
-	          		«IF (simplerailctrl::EventOccupied.isInstance(ot))-»
+	          		«IF (ot.metaType.name.matches("simplerailctrl::EventOccupied"))-»
 	          			//test for occupied-events
 			       		«IF (((simplerailctrl::EventOccupied)ot).condition.toString() == 'IF') -»
 				       		«IF (((simplerailctrl::EventOccupied)ot).conjunction.toString() == 'AND') -»

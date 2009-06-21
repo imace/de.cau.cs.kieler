@@ -14,7 +14,6 @@ import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.emf.common.ui.URIEditorInput;
 import org.eclipse.emf.common.util.URI;
 import org.openarchitectureware.workflow.WorkflowRunner;
-import org.openarchitectureware.workflow.monitor.ProgressMonitor;
 import org.eclipse.ui.part.FileEditorInput;
 
 public class CodeGenerationHandler extends AbstractHandler {
@@ -51,8 +50,10 @@ public class CodeGenerationHandler extends AbstractHandler {
 		
         //delete "_diagram"-extension
 		ModelFile = ModelFile.replace("_diagram", "");
+		//ModelFile = ModelFile.replace("reference:", "");
+		//ModelFile = ModelFile.replace("file:/", "");
 
-		String PluginRoot = this.getPluginFolder();
+		String PluginRoot = CodeGenerationHandler.getPluginFolder();
 		String GenFolder = PluginRoot + "src-gen";
 		
 		// code generation here //
@@ -66,8 +67,19 @@ public class CodeGenerationHandler extends AbstractHandler {
 		
 		System.out.println("Code Generation - starting...");
 		
-        if (new WorkflowRunner().run(WorkflowFile , 
-        		new oAwMonitor(), properties, slotContents)) {
+		boolean success = false;
+		try {  
+//		     ProjectIncludingResourceLoader resourceLoader =   
+//		      new ProjectIncludingResourceLoader(project);  
+//		     ResourceLoaderFactory.setCurrentThreadResourceLoader(resourceLoader);  
+		     WorkflowRunner runner = new WorkflowRunner();  
+		     success = runner.run(WorkflowFile, null,    
+		                                  properties, slotContents);  
+		}	finally {  
+//		     ResourceLoaderFactory.setCurrentThreadResourceLoader(null);  
+		}  
+			   
+        if (success) {
         	System.out.println("Code Generation - completed.");
         }
         else {
@@ -86,70 +98,5 @@ public class CodeGenerationHandler extends AbstractHandler {
 	            _pluginFolder = _pluginFolder.replace("file:/", "");
 	        }
 	        return _pluginFolder;
-	 }
-	
-	 //-------------------------------------------------------------------
-	 class oAwMonitor implements ProgressMonitor {
-
-		public void beginTask(String name, int totalWork) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		public void done() {
-			// TODO Auto-generated method stub
-			
-		}
-
-		public void finished(Object element, Object context) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		public void internalWorked(double work) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		public boolean isCanceled() {
-			// TODO Auto-generated method stub
-			return false;
-		}
-
-		public void postTask(Object element, Object context) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		public void preTask(Object element, Object context) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		public void setCanceled(boolean value) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		public void setTaskName(String name) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		public void started(Object element, Object context) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		public void subTask(String name) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		public void worked(int work) {
-			// TODO Auto-generated method stub
-			
-		}
-		 
 	 }
 }
