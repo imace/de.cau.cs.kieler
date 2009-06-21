@@ -2,47 +2,30 @@ import simplerailctrl;
 import Moml;
 
 //-----------------------------------------------------------------------------
-//--            S S M - 2 - P T O       T R A N S F O R M A T I O N          --
+//-- S I M P L E R A I L C T R L - 2 - P T O     T R A N S F O R M A T I O N --
 //-----------------------------------------------------------------------------
 
-//Start Model Transformation here
+//start model transformation here
 create DocumentRoot this transform(simplerailctrl::RailController rc):
  	this.setEntity(createBaseEntity(rc))
 ;   
 	
-//-----------------------------------------------------------------------------
-//--       B A S I C   M O M L - E N T I T I E S   C R E A T I O N           --
-//-----------------------------------------------------------------------------
-
 //create basic / outer most enclosing entity	
 create EntityType this createBaseEntity(simplerailctrl::RailController rc):
    	this.setName("RailController") ->
   	this.setClass1("ptolemy.actor.TypedCompositeActor") ->
+  	//crate SR director
    	this.property.add(createMainSRDirector()) ->
+   	//create ModelRailwayIO actor
    	this.entity.add(createModelRailwayIOActor()) ->
+   	//create concurrent threads
    	createThreads(rc.nodes, this)
-   	//mainRegion has exactly ONE top most state
-   	//iterate over all regions within this top most state
-   	//the name of this containing Entity is derived from this
-   	//   top most state, w/ " simulation" added
-    
-    //IterateRegions(mainRegion.innerStates.get(0).regions, this, mainRegion.innerStates.get(0).signals)
-    //add "this" EntityType so that IterateRegions is able to add 
-    //new entities or properties
 ;
-
-
 
 
 //-----------------------------------------------------------------------------
 //--                 C R E A T E     D I R E C T O R S                       --
 //-----------------------------------------------------------------------------
-
-//create a "SR Director" (for macro state definition)
-create PropertyType this createSRDirector():
-    this.setName("SR Director") ->
-	this.setClass("ptolemy.domains.sr.kernel.SRDirector")
-;
 
 //create outer most "SR Director" (ticks every seconds)
 create PropertyType this createMainSRDirector():
@@ -70,7 +53,6 @@ create PropertyType this createMainSRDirector():
 	this.property.add(p4)
 ;
 
-
 //create a "FSM Director" (for a region component)
 create PropertyType this createFSMDirector():
     this.setName("directorClass") ->
@@ -78,22 +60,10 @@ create PropertyType this createFSMDirector():
 	this.setClass("ptolemy.data.expr.StringParameter")
 ;
 
-//create a "DE Director" (for the outer most entity)
-create PropertyType this createDEDirector():
-	let p1 = new PropertyType:
-	let p2 = new PropertyType:
-		p1.setName("stopTime") ->
-		p1.setClass("ptolemy.data.expr.Parameter") ->
-		p1.setValue("Infinity") ->
-		p2.setName("synchronizeToRealTime") ->
-		p2.setClass("ptolemy.data.expr.Parameter") ->
-		p2.setValue("true") ->
-    this.setName("DE Director") ->
-	this.setClass("ptolemy.domains.de.kernel.DEDirector") ->
-	this.property.add(p1) ->
-	this.property.add(p2)
-;
 
+//-----------------------------------------------------------------------------
+//--                 C R E A T E     MODEL RAILWAY IO                        --
+//-----------------------------------------------------------------------------
 
 //create a "ModelRailwayIO" 
 create EntityType this createModelRailwayIOActor():
@@ -126,7 +96,11 @@ create EntityType this createModelRailwayIOActor():
 ;
 
 
+//-----------------------------------------------------------------------------
+//--                   C R E A T E     T H R E A D S                         --
+//-----------------------------------------------------------------------------
 
+//create ALL threads, i.e., start w/ initial-nodes
 int createThreads(List[simplerailctrl::Node] nodes,
 				   EntityType mainEntity):
   let currentNode = nodes.last():
@@ -137,8 +111,7 @@ int createThreads(List[simplerailctrl::Node] nodes,
   									mainEntity)
 ;
 
-
-//create a "Thread" (ModalModel)
+//create a thread (ModalModel)
 create EntityType this createThread(simplerailctrl::Node initialNode, 
 											  int number):
 	let p1 = new PropertyType:
@@ -154,7 +127,8 @@ create EntityType this createThread(simplerailctrl::Node initialNode,
    	//then add macro state refinements (for all macro states)
    	//IterateStatesRefinement(region.innerStates, this, signalList)
 ;
-//create "Thread-Refinement" (ModalController)
+
+//create thread refinement (ModalController)
 create EntityType this createThreadRefinement(simplerailctrl::Node initialNode):
    	this.setName("_Controller") ->
   	this.setClass1("ptolemy.domains.fsm.modal.ModalController")
