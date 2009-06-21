@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <workflow>
-	<property name="metamodel" value="platform:/resource/de.cau.cs.kieler.simplerailctrl.codegen.c/model/SimpleRailCtrl.ecore" />
-	<property name="model2" value="platform:/resource/de.cau.cs.kieler.simplerailctrl.codegen.c/default.simplerailctrl" />
+	<property name="metamodel" value="platform:/resource/de.cau.cs.kieler.simplerailctrl.codegen.c/model/simplerailctrl.ecore" />
+	<!--  <property name="model2" value="platform:/resource/de.cau.cs.kieler.simplerailctrl.codegen.c/default.simplerailctrl" />  -->
 	<property name="model" value="file:/X:/dop_eclipse/testspace/de.cau.cs.kieler.simplerailctrl.diagram/example/default.simplerailctrl" />
 	<property name="src-gen" value="src-gen" />
 	

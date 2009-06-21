@@ -18,7 +18,7 @@
       <menuContribution
             locationURI="popup:org.eclipse.gmf.runtime.diagram.ui.DiagramEditorContextMenu?before=viewGroup">
          <separator
-               name="de.cau.cs.kieler.simplerailctrl.codegen.c.separator1"
+               name="de.cau.cs.kieler.simplerailctrl.separator"
                visible="true">
          </separator>
          <command
@@ -35,9 +35,9 @@
          </command>
       </menuContribution>
       <menuContribution
-            locationURI="menu:file?after=revert">
+            locationURI="menu:file?before=additions">
          <separator
-               name="de.cau.cs.kieler.simplerailctrl.codegen.c.separator3"
+               name="de.cau.cs.kieler.simplerailctrl.separator"
                visible="true">
          </separator>
          <command
@@ -58,7 +58,7 @@
          <toolbar
                id="de.cau.cs.kieler.simplerailctrl.codegen.c.codegentoolbar">
             <separator
-                  name="de.cau.cs.kieler.simplerailctrl.codegen.c.separator3"
+                  name="de.cau.cs.kieler.simplerailctrl.separator"
                   visible="true">
             </separator>
             <command
