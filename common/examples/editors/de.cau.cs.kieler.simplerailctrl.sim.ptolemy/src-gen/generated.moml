@@ -17,15 +17,7 @@
       <property name="output"/>
     </port>
   </entity>
-  <entity class="ptolemy.domains.fsm.modal.ModalModel" name="simplerailctrl::SetPoint_region_2">
-    <property class="ptolemy.vergil.fsm.modal.ModalTableauFactory" name="_tableauFactory"/>
-    <entity class="ptolemy.domains.fsm.modal.ModalController" name="_Controller">
-      <entity class="ptolemy.domains.fsm.kernel.State" name="SetSpeed"/>
-      <entity class="ptolemy.domains.fsm.kernel.State" name="SetSpeed"/>
-      <entity class="ptolemy.domains.fsm.kernel.State" name="SetSpeed"/>
-    </entity>
-  </entity>
-  <entity class="ptolemy.domains.fsm.modal.ModalModel" name="simplerailctrl::SetSpeed_region_1">
+  <entity class="ptolemy.domains.fsm.modal.ModalModel" name="Region16022517">
     <property class="ptolemy.vergil.fsm.modal.ModalTableauFactory" name="_tableauFactory"/>
     <port class="ptolemy.domains.fsm.modal.ModalPort" name="contact">
       <property class="ptolemy.actor.TypeAttribute" name="_type" value="arrayType(int,48)"/>
@@ -68,6 +60,66 @@
         <property name="output"/>
         <property name="input"/>
       </port>
+      <entity class="ptolemy.domains.fsm.kernel.State" name="SetPoint16022517"/>
+      <entity class="ptolemy.domains.fsm.kernel.State" name="SetSpeed9883409"/>
+      <relation name="1152907">
+        <property class="ptolemy.kernel.util.StringAttribute" name="guardExpression"/>
+        <property class="ptolemy.domains.fsm.kernel.OutputActionsAttribute" name="outputActions"/>
+        <property class="ptolemy.domains.fsm.kernel.CommitActionsAttribute" name="setActions"/>
+        <property class="ptolemy.data.expr.Parameter" name="reset" value="true"/>
+        <property class="ptolemy.data.expr.Parameter" name="preemptive" value="true"/>
+        <property class="ptolemy.data.expr.Parameter" name="defaultTransition" value="false"/>
+        <property class="ptolemy.data.expr.Parameter" name="nondeterministic" value="false"/>
+        <property class="ptolemy.kernel.util.StringAttribute" name="refinementName"/>
+        <property class="ptolemy.kernel.util.StringAttribute" name="guardExpression" value=""/>
+        <property class="ptolemy.domains.fsm.kernel.OutputActionsAttribute" name="outputActions" value=""/>
+      </relation>
+      <link port="SetPoint16022517.outgoingPort" relation="1152907"/>
+      <link port="SetSpeed9883409.incomingPort" relation="1152907"/>
+      <entity class="ptolemy.domains.fsm.kernel.State" name="SetSpeed16139149"/>
+      <relation name="19551658">
+        <property class="ptolemy.kernel.util.StringAttribute" name="guardExpression"/>
+        <property class="ptolemy.domains.fsm.kernel.OutputActionsAttribute" name="outputActions"/>
+        <property class="ptolemy.domains.fsm.kernel.CommitActionsAttribute" name="setActions"/>
+        <property class="ptolemy.data.expr.Parameter" name="reset" value="true"/>
+        <property class="ptolemy.data.expr.Parameter" name="preemptive" value="true"/>
+        <property class="ptolemy.data.expr.Parameter" name="defaultTransition" value="false"/>
+        <property class="ptolemy.data.expr.Parameter" name="nondeterministic" value="false"/>
+        <property class="ptolemy.kernel.util.StringAttribute" name="refinementName"/>
+        <property class="ptolemy.kernel.util.StringAttribute" name="guardExpression" value=""/>
+        <property class="ptolemy.domains.fsm.kernel.OutputActionsAttribute" name="outputActions" value=""/>
+      </relation>
+      <link port="SetSpeed9883409.outgoingPort" relation="19551658"/>
+      <link port="SetSpeed16139149.incomingPort" relation="19551658"/>
+      <entity class="ptolemy.domains.fsm.kernel.State" name="SetSpeed30214280"/>
+      <relation name="5195164">
+        <property class="ptolemy.kernel.util.StringAttribute" name="guardExpression"/>
+        <property class="ptolemy.domains.fsm.kernel.OutputActionsAttribute" name="outputActions"/>
+        <property class="ptolemy.domains.fsm.kernel.CommitActionsAttribute" name="setActions"/>
+        <property class="ptolemy.data.expr.Parameter" name="reset" value="true"/>
+        <property class="ptolemy.data.expr.Parameter" name="preemptive" value="true"/>
+        <property class="ptolemy.data.expr.Parameter" name="defaultTransition" value="false"/>
+        <property class="ptolemy.data.expr.Parameter" name="nondeterministic" value="false"/>
+        <property class="ptolemy.kernel.util.StringAttribute" name="refinementName"/>
+        <property class="ptolemy.kernel.util.StringAttribute" name="guardExpression" value=""/>
+        <property class="ptolemy.domains.fsm.kernel.OutputActionsAttribute" name="outputActions" value=""/>
+      </relation>
+      <link port="SetSpeed16139149.outgoingPort" relation="5195164"/>
+      <link port="SetSpeed30214280.incomingPort" relation="5195164"/>
+      <relation name="12245160">
+        <property class="ptolemy.kernel.util.StringAttribute" name="guardExpression"/>
+        <property class="ptolemy.domains.fsm.kernel.OutputActionsAttribute" name="outputActions"/>
+        <property class="ptolemy.domains.fsm.kernel.CommitActionsAttribute" name="setActions"/>
+        <property class="ptolemy.data.expr.Parameter" name="reset" value="true"/>
+        <property class="ptolemy.data.expr.Parameter" name="preemptive" value="true"/>
+        <property class="ptolemy.data.expr.Parameter" name="defaultTransition" value="false"/>
+        <property class="ptolemy.data.expr.Parameter" name="nondeterministic" value="false"/>
+        <property class="ptolemy.kernel.util.StringAttribute" name="refinementName"/>
+        <property class="ptolemy.kernel.util.StringAttribute" name="guardExpression" value=""/>
+        <property class="ptolemy.domains.fsm.kernel.OutputActionsAttribute" name="outputActions" value=""/>
+      </relation>
+      <link port="SetSpeed30214280.outgoingPort" relation="12245160"/>
+      <link port="SetSpeed9883409.incomingPort" relation="12245160"/>
     </entity>
   </entity>
 </entity>

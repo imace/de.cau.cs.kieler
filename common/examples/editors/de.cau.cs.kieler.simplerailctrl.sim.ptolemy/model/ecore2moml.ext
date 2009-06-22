@@ -85,11 +85,9 @@ create EntityType this createModelRailwayIOActor():
 //-----------------------------------------------------------------------------
 
 //create ALL threads, i.e., start w/ initial-nodes
-int createThreads(List[simplerailctrl::Node] nodes,
+Void createThreads(List[simplerailctrl::Node] nodes,
 				   EntityType mainEntity):
   let currentNode = nodes.last():
-  dump(currentNode.metaType.name) ->
-  dump(currentNode.initial.toString()) ->
   if (currentNode.initial) then mainEntity.entity.add(
   						 					createThread(currentNode,
   											nodes.size)) ->
@@ -104,7 +102,7 @@ create EntityType this createThread(simplerailctrl::Node initialNode,
 		p1.setName("_tableauFactory") ->
 		p1.setClass("ptolemy.vergil.fsm.modal.ModalTableauFactory") ->
 	this.property.add(p1) ->
-   	this.setName(initialNode.metaType.name + "_region_" + number) ->
+   	this.setName("Region" + hash(initialNode)) ->
   	this.setClass1("ptolemy.domains.fsm.modal.ModalModel") ->
   	//first add ports
 	this.port.add(createModelPort(true,false,"contact","arrayType(int,48)")) ->
@@ -128,8 +126,9 @@ create EntityType this createThreadRefinement(simplerailctrl::Node initialNode):
 	this.port.add(createModelRefinementPort(true,true,"tracks","")) ->
 	this.port.add(createModelRefinementPort(true,true,"points","")) ->
 	this.port.add(createModelRefinementPort(true,true,"signals","")) ->
+	//first add initial node
+	createSimpleStateEntity(this, initialNode) ->
   	//then iterated all inner states
-  	dump("THREAD" + initialNode.metaType.name) ->
 	createInnerStates(this, initialNode, initialNode.outTransitions)
 ;
 
@@ -137,20 +136,17 @@ create EntityType this createThreadRefinement(simplerailctrl::Node initialNode):
 //--                    C R E A T E     S T A T E S                          --
 //-----------------------------------------------------------------------------
 
-int createInnerStates(EntityType modalController,
+Void createInnerStates(EntityType modalController,
 					  simplerailctrl::Node sourceState,
 					  List[simplerailctrl::Transition] transitionList) :
 	let currentTransition = transitionList.last():
-	let doneDestinationState = currentTransition.destination.initial:
+	let doneDestinationState = isMarked(currentTransition.destination):
 	createSimpleStateEntity(modalController, currentTransition.destination) ->
 	//first look up other target states (of this source state)
 	if (transitionList.size > 1) then 
 		createInnerStates(modalController, sourceState, transitionList.withoutLast()) ->
 	//then create transitions to these
-		//addTransition(modalController,
-		//			  sourceState,
-		//			  currentTransition, 
-		//			  "Transition"+transitionList.size) ->
+	addTransition(modalController, currentTransition) ->
 	//then go on with the target state (as new source state)
 	if ((!doneDestinationState) &&
 	    (currentTransition.destination.outTransitions.size > 0)) then
@@ -167,40 +163,72 @@ Void dump(String s) :
 	JAVA de.cau.cs.kieler.simplerailctrl.sim.ptolemy.oaw.XtendJava.dump(java.lang.String)
 ;
 
-//do some java console output for debugging purpose 
+//get hash value of an object to identify it 
 String hash(simplerailctrl::Node node) :
 	JAVA de.cau.cs.kieler.simplerailctrl.sim.ptolemy.oaw.XtendJava.hash(simplerailctrl.Node)
 ;
+//get hash value of an object to identify it 
+String hash(simplerailctrl::Transition transition) :
+	JAVA de.cau.cs.kieler.simplerailctrl.sim.ptolemy.oaw.XtendJava.hash(simplerailctrl.Transition)
+;
+
+//do some java console output for debugging purpose 
+Void markState(simplerailctrl::Node node) :
+	JAVA de.cau.cs.kieler.simplerailctrl.sim.ptolemy.oaw.XtendJava.markState(simplerailctrl.Node)
+;
+
+//do some java console output for debugging purpose 
+boolean isMarked(simplerailctrl::Node node) :
+	JAVA de.cau.cs.kieler.simplerailctrl.sim.ptolemy.oaw.XtendJava.isMarked(simplerailctrl.Node)
+;
+
+//compute trigger in java 
+String buildTrigger(simplerailctrl::Transition transition) :
+	JAVA de.cau.cs.kieler.simplerailctrl.sim.ptolemy.oaw.XtendJava.buildTrigger(simplerailctrl.Transition)
+;
+//compute emission in java 
+String buildEmission(simplerailctrl::Transition transition) :
+	JAVA de.cau.cs.kieler.simplerailctrl.sim.ptolemy.oaw.XtendJava.buildEmission(simplerailctrl.Transition)
+;
+
+
+String getMetaType(simplerailctrl::Node state) :
+	 switch (state.metaType.name) {
+ 		case "simplerailctrl::SetSpeed" : "SetSpeed"
+ 		case "simplerailctrl::SetPoint" : "SetPoint"
+ 		case "simplerailctrl::SetSignal" : "SetSignal"
+    	default : ""
+ 	} 		 
+;    
+
 
 //create SimpleState == State-Component 
 boolean createSimpleStateEntity(EntityType baseEntity,
 								simplerailctrl::Node state):
 	let newState = new EntityType:
-	let done = state.initial:
-	if (state.metaType.name.matches("simplerailctrl::SetSpeed")) then newState.setName("SetSpeed") ->
-	if (state.metaType.name.matches("simplerailctrl::SetPoint")) then newState.setName("SetPoint") ->
-	if (state.metaType.name.matches("simplerailctrl::SetSignal")) then newState.setName("SetSignal") ->
+	let markedBefore = isMarked(state):
+	newState.setName(getMetaType(state)+hash(state)) ->
   	newState.setClass1("ptolemy.domains.fsm.kernel.State") ->
-	if (!state.initial) then baseEntity.entity.add(newState) ->
+	if (!markedBefore) then baseEntity.entity.add(newState) ->
 	//this inicates that we are done with this state//
-	dump(hash(state)) -> 
-    state.setInitial(true) ->
-  	done
+	markState(state) ->
+  	markedBefore
 ;
 
 
 //create a Transition
-int addTransition(	EntityType baseEntity,
-					simplerailctrl::Node sourceState,
-					simplerailctrl::Transition transition, 
-					String name) :
+Void addTransition(	EntityType baseEntity,
+					simplerailctrl::Transition transition) :
 	let link1 = new LinkType:
 	let link2 = new LinkType:
-	link1.setPort(name + ".outgoingPort") ->
-	link1.setRelation(name) ->
-	link2.setPort(name + ".incomingPort") ->
-	link2.setRelation(name) ->
-	baseEntity.relation.add(createRelation(name, transition)) ->
+	let sourceNode = (Node)transition.eContainer:
+	let targetNode = transition.destination:
+	let transitionName = hash(transition):
+	link1.setPort(getMetaType(sourceNode) + hash(sourceNode) + ".outgoingPort") ->
+	link1.setRelation(transitionName) ->
+	link2.setPort(getMetaType(targetNode) + hash(targetNode) + ".incomingPort") ->
+	link2.setRelation(transitionName) ->
+	baseEntity.relation.add(createRelation(transitionName, transition)) ->
 	baseEntity.link.add(link1) ->
 	baseEntity.link.add(link2) 
 ;
@@ -244,10 +272,29 @@ create RelationType this createRelation(String name,
 	this.property.add(p5) ->
 	this.property.add(p6) ->
 	this.property.add(p7) ->
-	this.property.add(p8)
-	//addTrigger(this, transition) ->
-	//addEmission(this, transition)
+	this.property.add(p8) ->
+	addTrigger(this, transition) ->
+	addEmission(this, transition)
 ;
+
+//create guardExpression
+Void addTrigger(RelationType relation, simplerailctrl::Transition transition) :
+	let p1 = new PropertyType:
+	p1.setName("guardExpression") ->
+	p1.setClass("ptolemy.kernel.util.StringAttribute") ->
+	p1.setValue(buildTrigger(transition)) ->
+	relation.property.add(p1)
+;
+
+//create outputActions
+Void addEmission(RelationType relation, simplerailctrl::Transition transition) :
+	let p1 = new PropertyType:
+	p1.setName("outputActions") ->
+	p1.setClass("ptolemy.domains.fsm.kernel.OutputActionsAttribute") ->
+	p1.setValue(buildEmission(transition)) ->
+	relation.property.add(p1) 
+;
+
 
 //int connectEntities(EntityType baseEntity,
 //					EntityType entity1,
