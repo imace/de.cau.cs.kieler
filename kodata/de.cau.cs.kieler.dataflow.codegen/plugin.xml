@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            category="de.cau.cs.kieler.commands.category"
+            categoryId="de.cau.cs.kieler.commands.category"
+            defaultHandler="de.cau.cs.kieler.dataflow.codegen.LustreGenerator"
+            description="Generate Lustre code"
+            id="de.cau.cs.kieler.dataflow.codegen.GenLustre"
+            name="GenLustre">
+      </command>
+   </extension>
+   <extension
+         id="de.cau.cs.kieler.contextMenu"
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="popup:org.eclipse.ui.popup.any?after=additions">
+         <command
+               commandId="de.cau.cs.kieler.dataflow.codegen.GenLustre"
+               label="generate Lustre"
+               mnemonic="generate Lustre"
+               style="push"
+               tooltip="generate Lustre code for current Diagram">
+            <visibleWhen
+                  checkEnabled="true">
+            </visibleWhen>
+         </command>
+      </menuContribution>
+   </extension>
+
+</plugin>
