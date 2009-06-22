@@ -30,6 +30,10 @@ public class XtendJava {
 		return ""+myTransition.hashCode();
 	}
 
+	public final static String hash(String aString) {
+		return ""+aString.hashCode();
+	}
+	
 	//-------------------------------------------------------------------------
 	
 	//-------------------------------------------------------------------------
@@ -38,7 +42,7 @@ public class XtendJava {
 		String myTrigger = "";
 		if (myTransition.eClass().getName().equals("EventWait")) {
 			EventWait event = (EventWait)myTransition;
-			myTrigger = "count > "+event.getSeconds();
+			myTrigger = "count > 25*"+event.getSeconds();
 		}
 		if (myTransition.eClass().getName().equals("EventContact")) {
 			EventContact event = (EventContact)myTransition;
@@ -68,10 +72,10 @@ public class XtendJava {
 
 	//-------------------------------------------------------------------------
 
-	public final static String buildEmission(Transition myTransition) {
+	public final static String buildEmission(Node myNode) {
 		String myEmission = "";
-		if (myTransition.getDestination().eClass().getName().equals("SetSpeed")) {
-			SetSpeed setSpeed = (SetSpeed)myTransition.getDestination();
+		if (myNode.eClass().getName().equals("SetSpeed")) {
+			SetSpeed setSpeed = (SetSpeed)myNode;
 			int speed = setSpeed.getSpeed();
 			int motormode = setSpeed.getDirection().getValue();
 			EList trackList = setSpeed.getTrack();
@@ -79,26 +83,33 @@ public class XtendJava {
 			for (int c = 0; c < trackList.size(); c++) {
 				if (c > 0) myEmission += ",";
 				int track = ((TRACK)trackList.get(c)).getValue();
+				//myEmission += "track"+track+"={speed="+speed+"}";
 				myEmission += "track"+track+"={speed="+speed+", motormode="+motormode+"}";
 			}
 			myEmission += "};";
+			myEmission += "signals={signal12345={lights=0}};";
+			myEmission += "points={point12345={turn=0}}";
+			//myEmission += "tracks={track12345={speed=0, motormode=0}}";
 		}
 
-		if (myTransition.getDestination().eClass().getName().equals("SetPoint")) {
-			SetPoint setPoint = (SetPoint)myTransition.getDestination();
+		if (myNode.eClass().getName().equals("SetPoint")) {
+			SetPoint setPoint = (SetPoint)myNode;
 			int turn = setPoint.getDirection().getValue();
 			EList pointList = setPoint.getPoint();
 			myEmission += "points={";
 			for (int c = 0; c < pointList.size(); c++) {
 				if (c > 0) myEmission += ",";
-				int point = ((POINT)pointList.get(c)).getValue();
+				int point = ((POINT)pointList.get(c)).getValue()+1;
 				myEmission += "point"+point+"={turn="+turn+"}";
 			}
 			myEmission += "};";
+			myEmission += "signals={signal12345={lights=0}};";
+			//myEmission += "points={point12345={turn=0}}";
+			myEmission += "tracks={track12345={speed=0, motormode=0}}";
 		}
 
-		if (myTransition.getDestination().eClass().getName().equals("SetSignal")) {
-			SetSignal setSignal = (SetSignal)myTransition.getDestination();
+		if (myNode.eClass().getName().equals("SetSignal")) {
+			SetSignal setSignal = (SetSignal)myNode;
 			int color = setSignal.getColor().getValue();
 			boolean position0 = false;
 			boolean position1 = false;
@@ -124,6 +135,9 @@ public class XtendJava {
 				}
 			}
 			myEmission += "};";
+//			myEmission += "signals={signal12345={lights=0}}";
+			myEmission += "points={point12345={turn=0}};";
+			myEmission += "tracks={track12345={speed=0, motormode=0}}";
 		}
 		
 		return myEmission;
