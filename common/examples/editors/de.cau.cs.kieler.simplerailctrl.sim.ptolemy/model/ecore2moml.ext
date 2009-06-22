@@ -126,8 +126,16 @@ create EntityType this createThreadRefinement(simplerailctrl::Node initialNode):
 	this.port.add(createModelRefinementPort(true,true,"tracks","")) ->
 	this.port.add(createModelRefinementPort(true,true,"points","")) ->
 	this.port.add(createModelRefinementPort(true,true,"signals","")) ->
-	//first add initial node
+	//first add ptolemy initial node
+	createInitialStateEntity(this) ->
+	//then create first default transition
+	addInitialTransition(this,
+						"initial", 
+						getMetaType(initialNode) + hash(initialNode)) ->
+	//then add emf initial node
 	createSimpleStateEntity(this, initialNode) ->
+	//then add count paramter (for counting seconds in a simple state)
+	this.property.add(createCountParamter()) ->	
   	//then iterated all inner states
 	createInnerStates(this, initialNode, initialNode.outTransitions)
 ;
@@ -182,6 +190,8 @@ boolean isMarked(simplerailctrl::Node node) :
 	JAVA de.cau.cs.kieler.simplerailctrl.sim.ptolemy.oaw.XtendJava.isMarked(simplerailctrl.Node)
 ;
 
+//-------------------------------------------------------------------------
+
 //compute trigger in java 
 String buildTrigger(simplerailctrl::Transition transition) :
 	JAVA de.cau.cs.kieler.simplerailctrl.sim.ptolemy.oaw.XtendJava.buildTrigger(simplerailctrl.Transition)
@@ -191,6 +201,7 @@ String buildEmission(simplerailctrl::Transition transition) :
 	JAVA de.cau.cs.kieler.simplerailctrl.sim.ptolemy.oaw.XtendJava.buildEmission(simplerailctrl.Transition)
 ;
 
+//-------------------------------------------------------------------------
 
 String getMetaType(simplerailctrl::Node state) :
 	 switch (state.metaType.name) {
@@ -201,6 +212,7 @@ String getMetaType(simplerailctrl::Node state) :
  	} 		 
 ;    
 
+//-------------------------------------------------------------------------
 
 //create SimpleState == State-Component 
 boolean createSimpleStateEntity(EntityType baseEntity,
@@ -210,11 +222,20 @@ boolean createSimpleStateEntity(EntityType baseEntity,
 	newState.setName(getMetaType(state)+hash(state)) ->
   	newState.setClass1("ptolemy.domains.fsm.kernel.State") ->
 	if (!markedBefore) then baseEntity.entity.add(newState) ->
+	if (!markedBefore) then addSelfTransition(baseEntity, state) ->
 	//this inicates that we are done with this state//
 	markState(state) ->
   	markedBefore
 ;
+//create SimpleState == State-Component 
+Void createInitialStateEntity(EntityType baseEntity):
+	let newState = new EntityType:
+	newState.setName("initial") ->
+  	newState.setClass1("ptolemy.domains.fsm.kernel.State") ->
+	baseEntity.entity.add(newState)
+;
 
+//-------------------------------------------------------------------------
 
 //create a Transition
 Void addTransition(	EntityType baseEntity,
@@ -233,9 +254,54 @@ Void addTransition(	EntityType baseEntity,
 	baseEntity.link.add(link2) 
 ;
 
+Void addSelfTransition( EntityType baseEntity,
+						simplerailctrl::Node node) :
+	let link1 = new LinkType:
+	let link2 = new LinkType:
+	let transitionName = hash(node):
+	let relation = createRelation(transitionName,true,false,false):
+	link1.setPort(getMetaType(node) + hash(node) + ".outgoingPort") ->
+	link1.setRelation(transitionName) ->
+	link2.setPort(getMetaType(node) + hash(node) + ".incomingPort") ->
+	link2.setRelation(transitionName) ->
+	addSetAction(relation, "count = count + 1") ->
+	baseEntity.relation.add(relation) ->
+	baseEntity.link.add(link1) ->
+	baseEntity.link.add(link2) 
+;
+
+
+Void addInitialTransition( EntityType baseEntity,
+						String sourceState, 
+						String targetState) :
+	let link1 = new LinkType:
+	let link2 = new LinkType:
+	let transitionName = "initialTransition":
+	let relation = createRelation(transitionName,true,false,false):
+	link1.setPort(sourceState + ".outgoingPort") ->
+	link1.setRelation(transitionName) ->
+	link2.setPort(targetState + ".incomingPort") ->
+	link2.setRelation(transitionName) ->
+	addSetAction(relation, "count = 0") ->
+	baseEntity.relation.add(relation) ->
+	baseEntity.link.add(link1) ->
+	baseEntity.link.add(link2) 
+;
+
 //create a Relation Type
-create RelationType this createRelation(String name,
-										simplerailctrl::Transition transition):
+RelationType createRelation(String name,
+							simplerailctrl::Transition transition):
+ 	let relation = createRelation(name,false,false,true):										
+	addTrigger(relation, transition) ->
+	addSetAction(relation, "count = 0") ->
+	addEmission(relation, transition) ->
+	relation
+										
+;										
+create RelationType this createRelation(String name, 
+										boolean def,
+										boolean preemptive,
+										boolean reset):
 	let p1 = new PropertyType:
 	let p2 = new PropertyType:
 	let p3 = new PropertyType:
@@ -252,13 +318,13 @@ create RelationType this createRelation(String name,
 		p3.setClass("ptolemy.domains.fsm.kernel.CommitActionsAttribute") ->
 		p4.setName("reset") ->
 		p4.setClass("ptolemy.data.expr.Parameter") ->
-		p4.setValue("true")->
+		(reset) ? p4.setValue("true") : p4.setValue("false")->
 		p5.setName("preemptive") ->
 		p5.setClass("ptolemy.data.expr.Parameter") ->
-		p5.setValue("true")->
+		(preemptive) ? p5.setValue("true") : p5.setValue("false") ->
 		p6.setName("defaultTransition") ->
 		p6.setClass("ptolemy.data.expr.Parameter") ->
-		p6.setValue("false") -> //defaultTransition is NOT "normal termination" !!!
+		(def) ? p6.setValue("true") : p6.setValue("false") -> //defaultTransition is NOT "normal termination" !!!
 		p7.setName("nondeterministic") ->
 		p7.setClass("ptolemy.data.expr.Parameter") ->
 		p7.setValue("false") ->
@@ -272,9 +338,7 @@ create RelationType this createRelation(String name,
 	this.property.add(p5) ->
 	this.property.add(p6) ->
 	this.property.add(p7) ->
-	this.property.add(p8) ->
-	addTrigger(this, transition) ->
-	addEmission(this, transition)
+	this.property.add(p8)
 ;
 
 //create guardExpression
@@ -295,6 +359,14 @@ Void addEmission(RelationType relation, simplerailctrl::Transition transition) :
 	relation.property.add(p1) 
 ;
 
+//create setActions
+Void addSetAction(RelationType relation, String value) :
+	let p1 = new PropertyType:
+	p1.setName("setActions") ->
+	p1.setClass("ptolemy.domains.fsm.kernel.CommitActionsAttribute") ->
+	p1.setValue(value) ->
+	relation.property.add(p1) 
+;
 
 //int connectEntities(EntityType baseEntity,
 //					EntityType entity1,
@@ -361,4 +433,25 @@ create PortType this createModelRefinementPort(boolean input,
 	if (!type.matches("")) then this.property.add(prop1) ->
 	if (output) then this.property.add(prop2) ->
 	if (input) then this.property.add(prop3)
+;
+
+
+//count parameter (for counting seconds)
+create PropertyType this createCountParamter(): 
+	let prop1 = new PropertyType:
+	let prop1b = new PropertyType:
+	let prop2 = new PropertyType:
+	this.setClass("ptolemy.data.expr.Parameter") ->
+	this.setName("count") ->
+	this.setValue("0") ->
+	prop1.setClass("ptolemy.vergil.icon.ValueIcon") ->
+	prop1.setName("_icon") ->
+	prop1b.setClass("ptolemy.actor.gui.ColorAttribute") ->
+	prop1b.setName("_color") ->
+	prop1b.setValue("{0.0, 0.0, 1.0, 1.0}") ->
+	prop2.setClass("ptolemy.kernel.util.SingletonConfigurableAttribute") ->
+	prop2.setName("_smallIconDescription") ->
+	prop1.property.add(prop1b) ->
+	this.property.add(prop1) ->
+	this.property.add(prop2)
 ;
