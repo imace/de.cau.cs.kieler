@@ -24,13 +24,16 @@
 	<!-- perform transformation -->
 	<component class="oaw.xtend.XtendComponent">
 		<metaModel id="emfmm" class="oaw.type.emf.EmfMetaModel">
-			<metaModelFile value="${emfmetamodel}" />
+			<metaModelPackage value="simplerailctrl.SimplerailctrlPackage"/>
+			<!-- <metaModelFile value="${emfmetamodel}" /> -->
 		</metaModel>
 		<metaModel id="ptomm" class="oaw.type.emf.EmfMetaModel">
 			<metaModelPackage value="Moml.MomlPackage" /> 
 			<!-- <metaModelPackage value="Moml.MomlPackage" />  -->
 			<!-- <metaModelFile value="${ptometamodel}" /> -->
 		</metaModel>
+		<!--<metaModel id="javamm" class="org.openarchitectureware.type.impl.java.JavaMetaModel">
+		</metaModel>  -->
 		<invoke value="ecore2moml::transform(emfmodel)" />
 		<outputSlot value="ptomodel"/>
 	</component>

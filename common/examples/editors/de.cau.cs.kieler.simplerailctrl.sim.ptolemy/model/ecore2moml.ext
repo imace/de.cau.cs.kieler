@@ -67,32 +67,16 @@ create PropertyType this createFSMDirector():
 
 //create a "ModelRailwayIO" 
 create EntityType this createModelRailwayIOActor():
-	let p1 = new PortType:
-	let prop1 = new PropertyType:
-	let prop1b = new PropertyType:
-	let p2 = new PortType:
-	let prop2 = new PropertyType:
-	let prop2b = new PropertyType:
     this.setName("ModelRailwayIO") ->
 	this.setClass1("ptolemy.actor.lib.io.ModelRailwayIO") ->
-	p1.setClass("ptolemy.actor.TypedIOPort") ->
-	p1.setName("contact") ->
-	prop1.setClass("ptolemy.actor.TypeAttribute") ->
-	prop1.setName("_type") ->
-	prop1.setValue("arrayType(int,48)") ->
-	prop1b.setName("output") ->
-	p2.setClass("ptolemy.actor.TypedIOPort") ->
-	p2.setName("occupied") ->
-	prop2.setClass("ptolemy.actor.TypeAttribute") ->
-	prop2.setName("_type") ->
-	prop2.setValue("arrayType(int,48)") ->
-	prop2b.setName("output") ->
-	p1.property.add(prop1) ->
-	p1.property.add(prop1b) ->
-	p2.property.add(prop2) ->
-	p2.property.add(prop2b) ->
-	this.port.add(p1) ->
-	this.port.add(p2)
+	this.port.add(createPort(false, 
+								true, 
+								"contact",
+								"arrayType(int,48)")) ->
+	this.port.add(createPort(false, 
+								true, 
+								"occupied",
+								"arrayType(int,48)"))
 ;
 
 
@@ -104,9 +88,11 @@ create EntityType this createModelRailwayIOActor():
 int createThreads(List[simplerailctrl::Node] nodes,
 				   EntityType mainEntity):
   let currentNode = nodes.last():
-  currentNode.initial ? mainEntity.entity.add(
-  						 	createThread(currentNode,
-  							nodes.size)) : null ->
+  dump(currentNode.metaType.name) ->
+  dump(currentNode.initial.toString()) ->
+  if (currentNode.initial) then mainEntity.entity.add(
+  						 					createThread(currentNode,
+  											nodes.size)) ->
   if (nodes.size > 1) then createThreads(nodes.withoutLast(),
   									mainEntity)
 ;
@@ -120,8 +106,12 @@ create EntityType this createThread(simplerailctrl::Node initialNode,
 	this.property.add(p1) ->
    	this.setName(initialNode.metaType.name + "_region_" + number) ->
   	this.setClass1("ptolemy.domains.fsm.modal.ModalModel") ->
-  	//first add signals
-  	//...
+  	//first add ports
+	this.port.add(createModelPort(true,false,"contact","arrayType(int,48)")) ->
+	this.port.add(createModelPort(true,false,"occupied","arrayType(int,48)")) ->
+	this.port.add(createModelPort(false,true,"tracks","{track={speed=int}}")) ->
+	this.port.add(createModelPort(false,true,"points","{point={turn=int}}")) ->
+	this.port.add(createModelPort(false,true,"signals","{signals={lights=int}}")) ->
   	//then create simple states and macro state declarations
    	this.entity.add(createThreadRefinement(initialNode))
    	//then add macro state refinements (for all macro states)
@@ -131,10 +121,197 @@ create EntityType this createThread(simplerailctrl::Node initialNode,
 //create thread refinement (ModalController)
 create EntityType this createThreadRefinement(simplerailctrl::Node initialNode):
    	this.setName("_Controller") ->
-  	this.setClass1("ptolemy.domains.fsm.modal.ModalController")
-  	//first add signals
-	//..  	
-  	//then iterated all states
-	//..
+  	this.setClass1("ptolemy.domains.fsm.modal.ModalController") ->
+  	//first add ports
+	this.port.add(createModelRefinementPort(true,false,"contact","arrayType(int,48)")) ->
+	this.port.add(createModelRefinementPort(true,false,"occupied","arrayType(int,48)")) ->
+	this.port.add(createModelRefinementPort(true,true,"tracks","")) ->
+	this.port.add(createModelRefinementPort(true,true,"points","")) ->
+	this.port.add(createModelRefinementPort(true,true,"signals","")) ->
+  	//then iterated all inner states
+  	dump("THREAD" + initialNode.metaType.name) ->
+	createInnerStates(this, initialNode, initialNode.outTransitions)
 ;
 
+//-----------------------------------------------------------------------------
+//--                    C R E A T E     S T A T E S                          --
+//-----------------------------------------------------------------------------
+
+int createInnerStates(EntityType modalController,
+					  simplerailctrl::Node sourceState,
+					  List[simplerailctrl::Transition] transitionList) :
+	let currentTransition = transitionList.last():
+	let doneDestinationState = currentTransition.destination.initial:
+	createSimpleStateEntity(modalController, currentTransition.destination) ->
+	//first look up other target states (of this source state)
+	if (transitionList.size > 1) then 
+		createInnerStates(modalController, sourceState, transitionList.withoutLast()) ->
+	//then create transitions to these
+		//addTransition(modalController,
+		//			  sourceState,
+		//			  currentTransition, 
+		//			  "Transition"+transitionList.size) ->
+	//then go on with the target state (as new source state)
+	if ((!doneDestinationState) &&
+	    (currentTransition.destination.outTransitions.size > 0)) then
+		createInnerStates(modalController, currentTransition.destination, currentTransition.destination.outTransitions)
+;					  
+
+
+//-----------------------------------------------------------------------------
+//--           H E L P E R      M O M L     C R E A T I O N                  --
+//-----------------------------------------------------------------------------
+
+//do some java console output for debugging purpose 
+Void dump(String s) :
+	JAVA de.cau.cs.kieler.simplerailctrl.sim.ptolemy.oaw.XtendJava.dump(java.lang.String)
+;
+
+//do some java console output for debugging purpose 
+String hash(simplerailctrl::Node node) :
+	JAVA de.cau.cs.kieler.simplerailctrl.sim.ptolemy.oaw.XtendJava.hash(simplerailctrl.Node)
+;
+
+//create SimpleState == State-Component 
+boolean createSimpleStateEntity(EntityType baseEntity,
+								simplerailctrl::Node state):
+	let newState = new EntityType:
+	let done = state.initial:
+	if (state.metaType.name.matches("simplerailctrl::SetSpeed")) then newState.setName("SetSpeed") ->
+	if (state.metaType.name.matches("simplerailctrl::SetPoint")) then newState.setName("SetPoint") ->
+	if (state.metaType.name.matches("simplerailctrl::SetSignal")) then newState.setName("SetSignal") ->
+  	newState.setClass1("ptolemy.domains.fsm.kernel.State") ->
+	if (!state.initial) then baseEntity.entity.add(newState) ->
+	//this inicates that we are done with this state//
+	dump(hash(state)) -> 
+    state.setInitial(true) ->
+  	done
+;
+
+
+//create a Transition
+int addTransition(	EntityType baseEntity,
+					simplerailctrl::Node sourceState,
+					simplerailctrl::Transition transition, 
+					String name) :
+	let link1 = new LinkType:
+	let link2 = new LinkType:
+	link1.setPort(name + ".outgoingPort") ->
+	link1.setRelation(name) ->
+	link2.setPort(name + ".incomingPort") ->
+	link2.setRelation(name) ->
+	baseEntity.relation.add(createRelation(name, transition)) ->
+	baseEntity.link.add(link1) ->
+	baseEntity.link.add(link2) 
+;
+
+//create a Relation Type
+create RelationType this createRelation(String name,
+										simplerailctrl::Transition transition):
+	let p1 = new PropertyType:
+	let p2 = new PropertyType:
+	let p3 = new PropertyType:
+	let p4 = new PropertyType:
+	let p5 = new PropertyType:
+	let p6 = new PropertyType:
+	let p7 = new PropertyType:
+	let p8 = new PropertyType:
+		p1.setName("guardExpression") ->
+		p1.setClass("ptolemy.kernel.util.StringAttribute") ->
+		p2.setName("outputActions") ->
+		p2.setClass("ptolemy.domains.fsm.kernel.OutputActionsAttribute") ->
+		p3.setName("setActions") ->
+		p3.setClass("ptolemy.domains.fsm.kernel.CommitActionsAttribute") ->
+		p4.setName("reset") ->
+		p4.setClass("ptolemy.data.expr.Parameter") ->
+		p4.setValue("true")->
+		p5.setName("preemptive") ->
+		p5.setClass("ptolemy.data.expr.Parameter") ->
+		p5.setValue("true")->
+		p6.setName("defaultTransition") ->
+		p6.setClass("ptolemy.data.expr.Parameter") ->
+		p6.setValue("false") -> //defaultTransition is NOT "normal termination" !!!
+		p7.setName("nondeterministic") ->
+		p7.setClass("ptolemy.data.expr.Parameter") ->
+		p7.setValue("false") ->
+		p8.setName("refinementName") ->
+		p8.setClass("ptolemy.kernel.util.StringAttribute") ->
+    this.setName(name) ->
+	this.property.add(p1) ->
+	this.property.add(p2) ->
+	this.property.add(p3) ->
+	this.property.add(p4) ->
+	this.property.add(p5) ->
+	this.property.add(p6) ->
+	this.property.add(p7) ->
+	this.property.add(p8)
+	//addTrigger(this, transition) ->
+	//addEmission(this, transition)
+;
+
+//int connectEntities(EntityType baseEntity,
+//					EntityType entity1,
+//					EntityType entity2) :
+// null					
+//;
+
+//normal port of an Actor
+create PortType this createPort(boolean input, 
+								boolean output, 
+								String name,
+								String type):
+	let prop1 = new PropertyType:
+	let prop2 = new PropertyType:
+	let prop3 = new PropertyType:
+	this.setClass("ptolemy.actor.TypedIOPort") ->
+	this.setName(name) ->
+	prop1.setClass("ptolemy.actor.TypeAttribute") ->
+	prop1.setName("_type") ->
+	prop1.setValue(type) ->
+	prop2.setName("output") ->
+	prop3.setName("input") ->
+	if (!type.matches("")) then this.property.add(prop1) ->
+	if (output) then this.property.add(prop2) ->
+	if (input) then this.property.add(prop3)
+;
+
+
+//port of a ModelModel
+create PortType this createModelPort(boolean input,
+									 boolean output,
+									 String name,
+									 String type): 
+	let prop1 = new PropertyType:
+	let prop2 = new PropertyType:
+	let prop3 = new PropertyType:
+	this.setClass("ptolemy.domains.fsm.modal.ModalPort") ->
+	this.setName(name) ->
+	prop1.setClass("ptolemy.actor.TypeAttribute") ->
+	prop1.setName("_type") ->
+	prop1.setValue(type) ->
+	prop2.setName("output") ->
+	prop3.setName("input") ->
+	if (!type.matches("")) then this.property.add(prop1) ->
+	if (output) then this.property.add(prop2) ->
+	if (input) then this.property.add(prop3)
+;
+
+//port of a ModalController
+create PortType this createModelRefinementPort(boolean input,
+									 		   boolean output,
+									     	   String name,
+									 		   String type): 
+	let prop1 = new PropertyType:
+	let prop2 = new PropertyType:
+	let prop3 = new PropertyType:
+	this.setClass("ptolemy.domains.fsm.modal.RefinementPort") ->
+	this.setName(name) ->
+	prop1.setClass("ptolemy.actor.TypeAttribute") ->
+	prop1.setName("_type") ->
+	prop1.setValue(type) ->
+	prop2.setName("output") ->
+	prop3.setName("input") ->
+	if (!type.matches("")) then this.property.add(prop1) ->
+	if (output) then this.property.add(prop2) ->
+	if (input) then this.property.add(prop3)
+;

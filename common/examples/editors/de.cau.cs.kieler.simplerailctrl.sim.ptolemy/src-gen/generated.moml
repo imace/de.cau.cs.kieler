@@ -19,6 +19,55 @@
   </entity>
   <entity class="ptolemy.domains.fsm.modal.ModalModel" name="simplerailctrl::SetPoint_region_2">
     <property class="ptolemy.vergil.fsm.modal.ModalTableauFactory" name="_tableauFactory"/>
-    <entity class="ptolemy.domains.fsm.modal.ModalController" name="_Controller"/>
+    <entity class="ptolemy.domains.fsm.modal.ModalController" name="_Controller">
+      <entity class="ptolemy.domains.fsm.kernel.State" name="SetSpeed"/>
+      <entity class="ptolemy.domains.fsm.kernel.State" name="SetSpeed"/>
+      <entity class="ptolemy.domains.fsm.kernel.State" name="SetSpeed"/>
+    </entity>
+  </entity>
+  <entity class="ptolemy.domains.fsm.modal.ModalModel" name="simplerailctrl::SetSpeed_region_1">
+    <property class="ptolemy.vergil.fsm.modal.ModalTableauFactory" name="_tableauFactory"/>
+    <port class="ptolemy.domains.fsm.modal.ModalPort" name="contact">
+      <property class="ptolemy.actor.TypeAttribute" name="_type" value="arrayType(int,48)"/>
+      <property name="input"/>
+    </port>
+    <port class="ptolemy.domains.fsm.modal.ModalPort" name="occupied">
+      <property class="ptolemy.actor.TypeAttribute" name="_type" value="arrayType(int,48)"/>
+      <property name="input"/>
+    </port>
+    <port class="ptolemy.domains.fsm.modal.ModalPort" name="tracks">
+      <property class="ptolemy.actor.TypeAttribute" name="_type" value="{track={speed=int}}"/>
+      <property name="output"/>
+    </port>
+    <port class="ptolemy.domains.fsm.modal.ModalPort" name="points">
+      <property class="ptolemy.actor.TypeAttribute" name="_type" value="{point={turn=int}}"/>
+      <property name="output"/>
+    </port>
+    <port class="ptolemy.domains.fsm.modal.ModalPort" name="signals">
+      <property class="ptolemy.actor.TypeAttribute" name="_type" value="{signals={lights=int}}"/>
+      <property name="output"/>
+    </port>
+    <entity class="ptolemy.domains.fsm.modal.ModalController" name="_Controller">
+      <port class="ptolemy.domains.fsm.modal.RefinementPort" name="contact">
+        <property class="ptolemy.actor.TypeAttribute" name="_type" value="arrayType(int,48)"/>
+        <property name="input"/>
+      </port>
+      <port class="ptolemy.domains.fsm.modal.RefinementPort" name="occupied">
+        <property class="ptolemy.actor.TypeAttribute" name="_type" value="arrayType(int,48)"/>
+        <property name="input"/>
+      </port>
+      <port class="ptolemy.domains.fsm.modal.RefinementPort" name="tracks">
+        <property name="output"/>
+        <property name="input"/>
+      </port>
+      <port class="ptolemy.domains.fsm.modal.RefinementPort" name="points">
+        <property name="output"/>
+        <property name="input"/>
+      </port>
+      <port class="ptolemy.domains.fsm.modal.RefinementPort" name="signals">
+        <property name="output"/>
+        <property name="input"/>
+      </port>
+    </entity>
   </entity>
 </entity>
