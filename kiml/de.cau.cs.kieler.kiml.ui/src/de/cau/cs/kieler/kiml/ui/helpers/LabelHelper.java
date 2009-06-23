@@ -24,7 +24,7 @@ import org.eclipse.gmf.runtime.draw2d.ui.geometry.PointListUtilities;
  * 
  * @author haf
  */
-public class KimlLabelHelper {
+public class LabelHelper {
 
         /**
          * Calculates the label offset from the reference point given the label bounds.  

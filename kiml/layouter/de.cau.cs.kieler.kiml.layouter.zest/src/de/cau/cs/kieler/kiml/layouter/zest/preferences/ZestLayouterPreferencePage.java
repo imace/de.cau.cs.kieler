@@ -1,5 +1,6 @@
 package de.cau.cs.kieler.kiml.layouter.zest.preferences;
 
+import org.eclipse.jface.preference.FieldEditorPreferencePage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -9,8 +10,6 @@ import org.eclipse.ui.IWorkbenchPreferencePage;
 
 import de.cau.cs.kieler.core.ui.util.FloatFieldEditor;
 import de.cau.cs.kieler.kiml.layouter.zest.Activator;
-import de.cau.cs.kieler.kiml.layouter.zest.ZestAlgorithmWrapper;
-import de.cau.cs.kieler.kiml.ui.preferences.LayouterCollectionPreferencePage;
 
 
 /**
@@ -18,7 +17,7 @@ import de.cau.cs.kieler.kiml.ui.preferences.LayouterCollectionPreferencePage;
  * 
  * @author msp
  */
-public class ZestLayouterPreferencePage extends LayouterCollectionPreferencePage
+public class ZestLayouterPreferencePage extends FieldEditorPreferencePage
         implements IWorkbenchPreferencePage {
 
 	/** scale factor to use for the size of each parent node */
@@ -29,8 +28,6 @@ public class ZestLayouterPreferencePage extends LayouterCollectionPreferencePage
 	 * @see de.cau.cs.kieler.kiml.ui.AbstractMultiLayouterPreferencePage#createFieldEditors()
 	 */
 	public void createFieldEditors() {
-	    super.createFieldEditors();
-
 		// options group
 		Group optionsGroup = new Group(this.getFieldEditorParent(), SWT.NONE);
 		optionsGroup.setText("General Options:");
@@ -53,7 +50,6 @@ public class ZestLayouterPreferencePage extends LayouterCollectionPreferencePage
      */
     public void init(IWorkbench workbench) {
         setPreferenceStore(Activator.getDefault().getPreferenceStore());
-        init(ZestAlgorithmWrapper.COLLECTION_NAME);
     }
 
 }

@@ -9,10 +9,9 @@
  *******************************************************************************/
 package de.cau.cs.kieler.kiml.layouter.graphviz.preferences;
 
-import kiel.layouter.graphviz.GraphvizLayoutProviderNames;
-
 import org.eclipse.jface.preference.BooleanFieldEditor;
 import org.eclipse.jface.preference.DirectoryFieldEditor;
+import org.eclipse.jface.preference.FieldEditorPreferencePage;
 import org.eclipse.jface.preference.FileFieldEditor;
 import org.eclipse.jface.preference.IntegerFieldEditor;
 import org.eclipse.swt.SWT;
@@ -24,7 +23,6 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
 import de.cau.cs.kieler.kiml.layouter.graphviz.Activator;
-import de.cau.cs.kieler.kiml.ui.preferences.LayouterCollectionPreferencePage;
 
 
 /**
@@ -36,7 +34,7 @@ import de.cau.cs.kieler.kiml.ui.preferences.LayouterCollectionPreferencePage;
  * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
  */
 public class GraphvizPreferencePage extends
-		LayouterCollectionPreferencePage implements
+		FieldEditorPreferencePage implements
 		IWorkbenchPreferencePage {
 
 	public static final String ID = "de.cau.cs.kieler.kiml.layouter.graphviz.preferences.GraphvizPreferencePage";
@@ -45,8 +43,6 @@ public class GraphvizPreferencePage extends
 	 * Creates the field editors for the Graphviz preferences.
 	 */
 	public void createFieldEditors() {
-		super.createFieldEditors();
-
 		/* define gl as GridLayout globally once and for all */
 		GridLayout gl = null;
 
@@ -121,7 +117,6 @@ public class GraphvizPreferencePage extends
 	 */
 	public void init(IWorkbench workbench) {
         setPreferenceStore(Activator.getDefault().getPreferenceStore());
-        init(GraphvizLayoutProviderNames.LAYOUT_PROVIDER_COLLECTION_ID);
 	}
 
 }

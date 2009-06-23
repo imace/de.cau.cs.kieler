@@ -15,16 +15,13 @@ package de.cau.cs.kieler.kiml.ui.layout;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
-import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.Platform;
-import org.eclipse.core.runtime.preferences.IEclipsePreferences;
-import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.ui.statushandlers.StatusManager;
 
-import de.cau.cs.kieler.core.ui.KielerPreferenceStore;
 import de.cau.cs.kieler.kiml.layout.services.ILayoutListener;
 import de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider;
-import de.cau.cs.kieler.kiml.layout.services.KimlLayoutServices;
+import de.cau.cs.kieler.kiml.layout.services.LayoutProviderData;
+import de.cau.cs.kieler.kiml.layout.services.LayoutServices;
 import de.cau.cs.kieler.kiml.ui.KimlUiPlugin;
 
 /**
@@ -40,77 +37,103 @@ public class LayoutServiceBuilder {
 	 */
 	public static void buildLayoutServices() {
 		// create instance of layout service holder class
-		new KimlLayoutServices(new KielerPreferenceStore(KimlUiPlugin
-				.getDefault().getPreferenceStore()));
-		// build layout services
-		loadAvailableLayouters();
-		loadAvailableListeners();
+		LayoutServices.INSTANCE = new LayoutServices();
+		// build layout services for all extension points
+		loadLayoutProviderExtensions();
+		loadLayoutListenerExtensions();
+		loadLayoutInfoExtensions();
 	}
 	
 	/**
-	 * Does the actual loading of the layout providers, which need to register
-	 * themselves through the kimlLayoutProvider extension point.
+	 * Loads and registers all layout providers from the extension point.
 	 */
-	private static void loadAvailableLayouters() {
-
-		IExtensionRegistry reg = Platform.getExtensionRegistry();
-		IConfigurationElement[] extensions = reg
-				.getConfigurationElementsFor(AbstractLayoutProvider.EXTENSION_POINT_ID);
+	private static void loadLayoutProviderExtensions() {
+		IConfigurationElement[] extensions = Platform.getExtensionRegistry()
+				.getConfigurationElementsFor(LayoutServices.EXTP_ID_LAYOUT_PROVIDERS);
 
 		for (IConfigurationElement element : extensions) {
-			try {
-				AbstractLayoutProvider layoutProvider = (AbstractLayoutProvider) element
-						.createExecutableExtension(AbstractLayoutProvider.ATTRIBUTE_CLASS);
-				/*
-				 * try to load every layout provider available on the system,
-				 * but ...
-				 */
-				if (layoutProvider != null) {
-					/*
-					 * ... disable those, which were disabled by the user. This
-					 * is set in the respective preference store of the user. As
-					 * this function (loadAvailableLayouters) is performed just
-					 * once during startup, Emma has to load all the layout
-					 * provider nevertheless, but then takes a look in the
-					 * preference store.
-					 */
-					String pluginName = element.getDeclaringExtension()
-							.getContributor().getName();
-					IEclipsePreferences pref = new InstanceScope()
-							.getNode(pluginName);
-					boolean state = pref.getBoolean(layoutProvider
-							.getName(), true);
-					layoutProvider.setEnabled(state);
-					KimlLayoutServices.getInstance().addLayoutProvider(
-							layoutProvider);
-				}
-			} catch (CoreException exception) {
-				StatusManager.getManager().handle(exception, KimlUiPlugin.PLUGIN_ID);
-			}
+		    if (LayoutServices.ELEMENT_LAYOUT_PROVIDER.equals(element.getName())) {
+	            try {
+			        // register a layout provider from the extension
+    				AbstractLayoutProvider layoutProvider = (AbstractLayoutProvider)element
+    						.createExecutableExtension(LayoutServices.ATTRIBUTE_CLASS);
+    				if (layoutProvider != null) {
+    				    LayoutProviderData providerData = new LayoutProviderData();
+    				    providerData.instance = layoutProvider;
+    				    providerData.id = element.getAttribute(LayoutServices.ATTRIBUTE_ID);
+    				    providerData.name = element.getAttribute(LayoutServices.ATTRIBUTE_NAME);
+    				    providerData.type = element.getAttribute(LayoutServices.ATTRIBUTE_TYPE);
+    				    providerData.collection = element.getAttribute(LayoutServices.ATTRIBUTE_COLLECTION);
+    				    for (IConfigurationElement child : element.getChildren()) {
+    				        if (LayoutServices.ELEMENT_KNOWN_OPTION.equals(child.getName())) {
+    				            String option = child.getAttribute(LayoutServices.ATTRIBUTE_OPTION);
+    				            if (option != null)
+    				                providerData.knownOptions.add(option);
+    				        }
+    				        else if (LayoutServices.ELEMENT_SUPPORTED_DIAGRAM.equals(child.getName())) {
+    				            String type = child.getAttribute(LayoutServices.ATTRIBUTE_TYPE);
+    				            if (type != null)
+    				                providerData.supportedDiagrams.add(type);
+    				        }
+    				    }
+    					LayoutServices.INSTANCE.addLayoutProvider(providerData);
+    				}
+    			} catch (CoreException exception) {
+    				StatusManager.getManager().handle(exception, KimlUiPlugin.PLUGIN_ID);
+    			}
+		    }
+		    else if (LayoutServices.ELEMENT_LAYOUT_TYPE.equals(element.getName())) {
+		        // register a layout type from the extension
+		        LayoutServices.INSTANCE.addLayoutType(
+		                element.getAttribute(LayoutServices.ATTRIBUTE_ID),
+		                element.getAttribute(LayoutServices.ATTRIBUTE_NAME));
+		    }
+		    else if (LayoutServices.ELEMENT_COLLECTION.equals(element.getName())) {
+		        // TODO collections are not supported yet 
+		    }
+		    else if (LayoutServices.ELEMENT_LAYOUT_OPTION.equals(element.getName())) {
+		        // TODO layout options are not supported yet
+		    }
 		}
 	}
 	
 	/**
-	 * Does the actual loading of the layout listeners, which need to register
-	 * themselves through the kimlLayoutListener extension point.
+	 * Loads and registers all layout listeners from the extension point.
 	 */
-	private static void loadAvailableListeners() {
-		IExtensionRegistry reg = Platform.getExtensionRegistry();
-		IConfigurationElement[] extensions = reg
-				.getConfigurationElementsFor(ILayoutListener.EXTENSION_POINT_ID);
+	private static void loadLayoutListenerExtensions() {
+		IConfigurationElement[] extensions = Platform.getExtensionRegistry()
+				.getConfigurationElementsFor(LayoutServices.EXTP_ID_LAYOUT_LISTENERS);
 
 		for (IConfigurationElement element : extensions) {
-			try {
-				ILayoutListener layoutListener = (ILayoutListener) element
-						.createExecutableExtension(ILayoutListener.ATTRIBUTE_CLASS);
-				if (layoutListener != null) {
-					KimlLayoutServices.getInstance().addLayoutListener(
-							layoutListener);
-				}
-			} catch (CoreException exception) {
-				StatusManager.getManager().handle(exception, KimlUiPlugin.PLUGIN_ID);
-			}
+		    if (LayoutServices.ELEMENT_LAYOUT_LISTENER.equals(element.getName())) {
+    			try {
+    				ILayoutListener layoutListener = (ILayoutListener) element
+    						.createExecutableExtension(LayoutServices.ATTRIBUTE_CLASS);
+    				if (layoutListener != null) {
+    					LayoutServices.INSTANCE.addLayoutListener(layoutListener);
+    				}
+    			} catch (CoreException exception) {
+    				StatusManager.getManager().handle(exception, KimlUiPlugin.PLUGIN_ID);
+    			}
+		    }
 		}
 	}
+	
+	/**
+     * Loads and registers all layout information from the extension point.
+     */
+    private static void loadLayoutInfoExtensions() {
+        IConfigurationElement[] extensions = Platform.getExtensionRegistry()
+                .getConfigurationElementsFor(LayoutServices.EXTP_ID_LAYOUT_INFO);
+
+        for (IConfigurationElement element : extensions) {
+            if (LayoutServices.ELEMENT_ELEMENT_TYPE.equals(element.getName())) {
+                // TODO element types are not supported yet
+            }
+            else if (LayoutServices.ELEMENT_BINDING.equals(element.getName())) {
+                // TODO bindings are not supported yet
+            }
+        }
+    }
 	
 }

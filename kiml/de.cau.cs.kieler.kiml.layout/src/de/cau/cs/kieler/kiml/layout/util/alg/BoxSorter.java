@@ -21,7 +21,7 @@ import java.util.List;
 import de.cau.cs.kieler.core.alg.AbstractAlgorithm;
 import de.cau.cs.kieler.core.kgraph.KNode;
 import de.cau.cs.kieler.kiml.layout.klayoutdata.KShapeLayout;
-import de.cau.cs.kieler.kiml.layout.util.BoxLayoutProvider;
+import de.cau.cs.kieler.kiml.layout.options.LayoutOptions;
 import de.cau.cs.kieler.kiml.layout.util.KimlLayoutUtil;
 
 /**
@@ -47,9 +47,9 @@ public class BoxSorter extends AbstractAlgorithm {
         Collections.sort(sortedBoxes, new Comparator<KNode>() {
             public int compare(KNode child1, KNode child2) {
                 KShapeLayout layout1 = KimlLayoutUtil.getShapeLayout(child1);
-                int prio1 = BoxLayoutProvider.getPriority(layout1);
+                int prio1 = LayoutOptions.getPriority(layout1);
                 KShapeLayout layout2 = KimlLayoutUtil.getShapeLayout(child2);
-                int prio2 = BoxLayoutProvider.getPriority(layout2);
+                int prio2 = LayoutOptions.getPriority(layout2);
                 if (prio1 > prio2)
                     return -1;
                 else if (prio1 < prio2)

@@ -15,8 +15,8 @@ import org.eclipse.ui.statushandlers.StatusManager;
 import de.cau.cs.kieler.core.KielerException;
 import de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider;
 import de.cau.cs.kieler.kiml.ui.KimlUiPlugin;
-import de.cau.cs.kieler.kiml.ui.helpers.KimlGMFLayoutHintHelper;
 import de.cau.cs.kieler.kiml.ui.layout.DiagramLayouter;
+import de.cau.cs.kieler.kiml.ui.layout.GmfLayoutHints;
 import de.cau.cs.kieler.kiml.ui.views.LayoutView;
 
 /**
@@ -72,7 +72,8 @@ public class DeepLayoutActionDelegate implements IViewActionDelegate {
      */
     private void deepApplyAll() {
         try {
-            IEditorPart editor = PlatformUI.getWorkbench()
+            // FIXME instead of overwriting the layouter for all nodes, define general inheritance rules for layout options
+            /*IEditorPart editor = PlatformUI.getWorkbench()
                     .getActiveWorkbenchWindow().getActivePage()
                     .getActiveEditor();
             if (editor instanceof DiagramEditor) {
@@ -82,7 +83,7 @@ public class DeepLayoutActionDelegate implements IViewActionDelegate {
                 // set layouter type for all edit parts
                 AbstractLayoutProvider layouter = view.getSelectedLayouter();
                 if (layouter != null)
-                    KimlGMFLayoutHintHelper.setAllContainedElementsLayoutHints(
+                    GmfLayoutHints.setAllContainedElementsLayoutHints(
                             dep, layouter.getType(), layouter.getName());
 
                 // perform layout
@@ -91,7 +92,7 @@ public class DeepLayoutActionDelegate implements IViewActionDelegate {
                 throw new KielerException(
                         "No GMF diagram editor is open. Make sure the diagram editor is open and made with GMF.",
                         KielerException.Type.LAYOUT_NOT_APPLICABLE);
-            }
+            }*/
 
         } catch (Exception e) {
             Status myStatus = new Status(IStatus.ERROR, KimlUiPlugin.PLUGIN_ID,

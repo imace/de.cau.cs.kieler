@@ -25,7 +25,6 @@ import de.cau.cs.kieler.core.slimgraph.KSlimGraph;
 import de.cau.cs.kieler.kiml.layout.klayoutdata.KInsets;
 import de.cau.cs.kieler.kiml.layout.klayoutdata.KShapeLayout;
 import de.cau.cs.kieler.kiml.layout.options.LayoutOptions;
-import de.cau.cs.kieler.kiml.layout.options.LayoutType;
 import de.cau.cs.kieler.kiml.layout.options.PortConstraints;
 import de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider;
 import de.cau.cs.kieler.kiml.layout.util.KimlLayoutUtil;
@@ -151,26 +150,5 @@ public class OrthogonalDataflowLayoutProvider extends
 		LayoutOptions.setPortConstraints(parentLayout,
 		        PortConstraints.FIXED_POS);
 	}
-
-    /* (non-Javadoc)
-     * @see de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider#getCollection()
-     */
-    public String getCollection() {
-        return COLLECTION_NAME;
-    }
-
-    /* (non-Javadoc)
-     * @see de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider#getName()
-     */
-    public String getName() {
-        return LAYOUTER_NAME;
-    }
-
-    /* (non-Javadoc)
-     * @see de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider#getType()
-     */
-    public LayoutType getType() {
-        return LayoutType.ORTHOGONAL;
-    }
 
 }

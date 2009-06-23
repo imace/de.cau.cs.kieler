@@ -34,7 +34,6 @@ import de.cau.cs.kieler.kiml.layout.klayoutdata.KLayoutData;
 import de.cau.cs.kieler.kiml.layout.klayoutdata.KPoint;
 import de.cau.cs.kieler.kiml.layout.options.LayoutDirection;
 import de.cau.cs.kieler.kiml.layout.options.LayoutOptions;
-import de.cau.cs.kieler.kiml.layout.options.LayoutType;
 import de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider;
 import de.cau.cs.kieler.kiml.layout.util.GraphConverter;
 import de.cau.cs.kieler.kiml.layout.util.KimlLayoutUtil;
@@ -291,26 +290,5 @@ public class HierarchicalDataflowLayoutProvider extends
 			edgeLayout.setTargetPoint(sourcePoint);
 		}
 	}
-
-    /* (non-Javadoc)
-     * @see de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider#getCollection()
-     */
-    public String getCollection() {
-        return COLLECTION_NAME;
-    }
-
-    /* (non-Javadoc)
-     * @see de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider#getName()
-     */
-    public String getName() {
-        return LAYOUTER_NAME;
-    }
-
-    /* (non-Javadoc)
-     * @see de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider#getType()
-     */
-    public LayoutType getType() {
-        return LayoutType.LAYERED;
-    }
 	
 }

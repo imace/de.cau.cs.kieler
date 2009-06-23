@@ -37,8 +37,8 @@ import de.cau.cs.kieler.kiml.layout.options.LayoutDirection;
 import de.cau.cs.kieler.kiml.layout.options.LayoutOptions;
 import de.cau.cs.kieler.kiml.layout.options.PortConstraints;
 import de.cau.cs.kieler.kiml.layout.util.KimlLayoutUtil;
-import de.cau.cs.kieler.kiml.ui.helpers.KimlGMFLayoutHintHelper;
 import de.cau.cs.kieler.kiml.ui.layout.AbstractLayoutGraphBuilder;
+import de.cau.cs.kieler.kiml.ui.layout.GmfLayoutHints;
 
 public class DataFlowLayoutGraphBuilder extends AbstractLayoutGraphBuilder {
 
@@ -86,15 +86,12 @@ public class DataFlowLayoutGraphBuilder extends AbstractLayoutGraphBuilder {
 				? LayoutDirection.VERTICAL
 				: LayoutDirection.HORIZONTAL;
 		if (layoutRootPart instanceof DataflowModelEditPart) {
-			layoutGraph = KimlLayoutUtil.createInitializedNode();
 			DataflowModelEditPart modelPart = (DataflowModelEditPart)layoutRootPart;
 			// set the top node's layout
 			KShapeLayout topGroupLayout = KimlLayoutUtil.getShapeLayout(layoutGraph);
 			createLayout(topGroupLayout, modelPart.getFigure());
-			LayoutOptions.setLayouterName(topGroupLayout, KimlGMFLayoutHintHelper
-					.getContainedElementsLayouterName(modelPart));
-			LayoutOptions.setLayoutType(topGroupLayout, KimlGMFLayoutHintHelper
-					.getContainedElementsLayoutType(modelPart));
+			LayoutOptions.setLayoutHint(topGroupLayout, GmfLayoutHints
+					.getStringValue(modelPart, LayoutOptions.LAYOUT_HINT));
 			LayoutOptions.setLayoutDirection(topGroupLayout, layoutDirection);
 			layoutGraph.getLabel().setText(modelPart
 			        .getDiagramView().getName());
@@ -206,10 +203,8 @@ public class DataFlowLayoutGraphBuilder extends AbstractLayoutGraphBuilder {
 		insets.setRight(INSET_RIGHT);
 		insets.setTop(INSET_TOP + DEFAULT_LABEL_HEIGHT);
 		insets.setBottom(INSET_BOTTOM);
-		LayoutOptions.setLayouterName(nodeLayout, KimlGMFLayoutHintHelper
-				.getContainedElementsLayouterName(boxEditPart));
-		LayoutOptions.setLayoutType(nodeLayout, KimlGMFLayoutHintHelper
-				.getContainedElementsLayoutType(boxEditPart));
+		LayoutOptions.setLayoutHint(nodeLayout, GmfLayoutHints
+				.getStringValue(boxEditPart, LayoutOptions.LAYOUT_HINT));
 		LayoutOptions.setLayoutDirection(nodeLayout, layoutDirection);
 		// switch layout direction if needed
 		if (alternateHVPref) {

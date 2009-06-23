@@ -13,7 +13,7 @@
  */
 package de.cau.cs.kieler.kiml.ui.layout;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -25,10 +25,8 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.statushandlers.StatusManager;
 
 import de.cau.cs.kieler.core.ui.KielerProgressMonitor;
-import de.cau.cs.kieler.kiml.layout.services.AbstractLayouterEngine;
-import de.cau.cs.kieler.kiml.layout.services.KimlLayoutServices;
+import de.cau.cs.kieler.kiml.layout.services.LayoutServices;
 import de.cau.cs.kieler.kiml.layout.services.RecursiveLayouterEngine;
-import de.cau.cs.kieler.kiml.layout.util.KimlLayoutPreferenceConstants;
 import de.cau.cs.kieler.kiml.ui.KimlUiPlugin;
 
 /**
@@ -48,60 +46,16 @@ public final class DiagramLayouter {
 	/** static List of Error Messages, such that they can be 
 	 * created from within other threads and handled later on from another thread.
 	 */
-	private static List<IStatus> stati = new ArrayList<IStatus>();;
+	private static List<IStatus> stati = new LinkedList<IStatus>();
 	/** the layouter engine used to layout diagrams */
-    private static AbstractLayouterEngine layouterEngine = null;
+    private static RecursiveLayouterEngine layouterEngine = new RecursiveLayouterEngine();
 	
 	/** duration of animation for diagram layout */
 	// TODO export duration of animation (e.g. make it user definable)
 	private final static int ANIMATION_TIME = 1000;
 	
 	/**
-	 * The wrapper method to get a layout for a diagram. Performs several steps.
-	 * 
-	 * @param target
-	 *            The object which should be laid out. Is typically an
-	 *            IEditorPart or a StructuredSelection of EditParts
-	 * @param animate
-	 *            If true, animation will be used for diagram layout
-	 * @param createJob
-	 *            If true, diagram layout will be performed in a separate job
-	 */
-	public static void layout(Object target, boolean animate,
-			boolean createJob) {
-		// fetches editor id
-		String editorID = PlatformUI.getWorkbench().getActiveWorkbenchWindow()
-				.getActivePage().getActiveEditor().getEditorSite().getId();
-
-		// uses standard layout function with active editor and one run
-		layout(target, editorID, animate, createJob, 1);
-	}
-
-	/**
-	 * The wrapper method to get a layout for a diagram. Performs several steps.
-	 * 
-	 * @param target
-	 *            The object which should be laid out. Is typically an
-	 *            IEditorPart or a StructuredSelection of EditParts
-	 * @param animate
-	 *            If true, animation will be used for diagram layout
-	 * @param createJob
-	 *            If true, diagram layout will be performed in a separate job
-	 * @param runs
-	 *            Number of runs to perform
-	 */
-	public static void layout(Object target, boolean animate,
-			boolean createJob, int runs) {
-		// fetches editor id
-		String editorID = PlatformUI.getWorkbench().getActiveWorkbenchWindow()
-				.getActivePage().getActiveEditor().getEditorSite().getId();
-
-		// uses standard layout function with active editor
-		layout(target, editorID, animate, createJob, runs);
-	}
-
-	/**
-	 * The wrapper method to get a layout for a diagram. Performs several steps.
+	 * Performs layout for a diagram.
 	 * 
 	 * @param target
 	 *            The object which should be laid out. Is typically an
@@ -110,105 +64,42 @@ public final class DiagramLayouter {
 	 *            The ID of the editor for the diagram/target to be laid out
 	 * @param animate
 	 *            If true, animation will be used for diagram layout
-	 * @param createJob
-	 *            If true, diagram layout will be performed in a separate job
-	 */
-	public static void layout(Object target, String editorID,
-			boolean animate, boolean createJob) {
-		// uses standard layout function with provided editor
-		layout(target, editorID, animate, createJob, 1);
-	}
-
-	/**
-	 * The wrapper method to get a layout for a diagram. Performs several steps.
-	 * 
-	 * @param target
-	 *            The object which should be laid out. Is typically an
-	 *            IEditorPart or a StructuredSelection of EditParts
-	 * @param editorID
-	 *            The ID of the editor for the diagram/target to be laid out
-	 * @param animate
-	 *            If true, animation will be used for diagram layout
-	 * @param createJob
-	 *            If true, diagram layout will be performed in a separate job
-	 * @param runs
-	 *            Number of times the layout should be applied (workaround)
 	 */
 	public static void layout(final Object target, final String editorID,
-			final boolean animate, boolean createJob, final int runs) {
-// FIXME performing layout in a job does not work properly
-//		if (createJob) {
-//			Job layoutJob = new Job("Diagram layout") {
-//				protected IStatus run(IProgressMonitor monitor) {
-//					IStatus status = layout(target, editorID, animate, runs,
-//							new KielerProgressMonitor(monitor));
-//					try {
-//						if (animate) {
-//							IProgressService progressService = PlatformUI
-//									.getWorkbench().getProgressService();
-//							progressService.runInUI(progressService,
-//									new IRunnableWithProgress() {
-//								public void run(IProgressMonitor monitor) {
-//									Animation.run(ANIMATION_TIME);
-//								}
-//							}, this.getRule());
-//						}
-//					} catch (Exception exception) {
-//						Status logStatus = new Status(IStatus.ERROR, KimlUiPlugin.PLUGIN_ID,
-//								"Could not run animation thread.", exception);
-//						StatusManager.getManager().handle(logStatus, StatusManager.LOG);
-//					}
-//					if (status == null)
-//						return new Status(IStatus.INFO, KimlUiPlugin.PLUGIN_ID,
-//									0, "OK", null);
-//					else
-//						return status;
-//				}
-//			};
-//			IProgressMonitor monitor = Job.getJobManager().createProgressGroup();
-//			layoutJob.setProgressGroup(monitor, 100);
-//			layoutJob.setPriority(Job.INTERACTIVE);
-//			layoutJob.setUser(true);
-//			layoutJob.schedule();
-//		}
-//		else {
-			try {
-				PlatformUI.getWorkbench().getProgressService().run(false, false,
-						new IRunnableWithProgress() {
-					public void run(IProgressMonitor monitor) {
-						// perform layout and add the result as a status to the 
-						// static status list such it can be handled from the original
-						// thread below.
-						IStatus status = layout(target, editorID, animate, runs,
-								new KielerProgressMonitor(monitor));
-						if (status != null)
-							DiagramLayouter.stati.add(status);
-					}
-				});
-				if (animate)
-					Animation.run(ANIMATION_TIME);
-			}
-			catch (Exception exception) {
-				Status status = new Status(IStatus.ERROR, KimlUiPlugin.PLUGIN_ID,
-						"Failed to perform diagram layout.", exception);
+			final boolean animate) {
+		try {
+			PlatformUI.getWorkbench().getProgressService().run(false, false,
+					new IRunnableWithProgress() {
+				public void run(IProgressMonitor monitor) {
+					// perform layout and add the result as a status to the 
+					// static status list such it can be handled from the original
+					// thread below.
+					IStatus status = layout(target, editorID, animate,
+							new KielerProgressMonitor(monitor));
+					if (status != null)
+						DiagramLayouter.stati.add(status);
+				}
+			});
+			if (animate)
+				Animation.run(ANIMATION_TIME);
+		}
+		catch (Exception exception) {
+		    stati.add(new Status(IStatus.ERROR, KimlUiPlugin.PLUGIN_ID,
+					"Failed to perform diagram layout.", exception));
+		}
+		// handle errors from the diagram layout thread
+		if (!stati.isEmpty()) {
+			for (IStatus status : stati) { 
 				StatusManager.getManager().handle(status, StatusManager.SHOW);
 				StatusManager.getManager().handle(status, StatusManager.LOG);
 			}
-			// handle errors from the Progress monitor thread
-			if (stati != null && !stati.isEmpty()) {
-				for (IStatus status : stati) { 
-					StatusManager.getManager().handle(status, StatusManager.SHOW);
-					StatusManager.getManager().handle(status, StatusManager.LOG);
-				}
-				stati.clear();
-			}
-				
-//		}
+			stati.clear();
+		}
 	}
 
 	
 	/**
-	 * The wrapper method to get a layout for a diagram. Performs several steps.
+	 * Performs layout for a diagram.
 	 * 
 	 * @param target
 	 *            The object which should be laid out. Is typically an
@@ -217,20 +108,17 @@ public final class DiagramLayouter {
 	 *            The ID of the editor for the diagram/target to be laid out
 	 * @param animate
 	 *            If true, animation will be used for diagram layout
-	 * @param runs
-	 *            Number of times the layout should be applied (workaround)
 	 * @param progressMonitor monitor used to keep track of layout progress
 	 * @return a status if diagram layout failed
 	 */
 	private static IStatus layout(Object target, String editorID, boolean animate,
-			int runs, KielerProgressMonitor progressMonitor) {
+			KielerProgressMonitor progressMonitor) {
 		KimlLayoutInformation layoutInformation = null;
 		try {
 			progressMonitor.begin("Diagram layout", 100);
 			
 			// fetches layout graph builder for the provided editor
-			AbstractLayoutGraphBuilder layoutGraphBuilder = LayoutGraphBuilders
-					.getInstance().getLayoutGraphBuilder(editorID);
+			AbstractLayoutGraphBuilder layoutGraphBuilder = new GenericLayoutGraphBuilder();
 
 			// transforms the diagram into the KLayoutGraph and also use the
 			// mappings
@@ -238,44 +126,24 @@ public final class DiagramLayouter {
 			progressMonitor.worked(5);
 
 			// notifies layout listeners about the layout request
-			KimlLayoutServices.getInstance().layoutRequested(
+			LayoutServices.INSTANCE.layoutRequested(
 					layoutInformation.layoutGraph);
-
-			// chooses the default layout engine
-			if (layouterEngine == null)
-			    layouterEngine = new RecursiveLayouterEngine();
 
 			// does the layout with the layout graph
 			layouterEngine.layout(layoutInformation.layoutGraph,
 					progressMonitor.subTask(90));
 
 			// fetches layout graph applier for the provided editor
-			AbstractLayoutGraphApplier layoutGraphApplier = LayoutGraphAppliers
-					.getInstance().getLayoutGraphAppliers(editorID);
+			AbstractLayoutGraphApplier layoutGraphApplier = new GenericLayoutGraphApplier();
 
 			if (animate)
 				Animation.markBegin();
 			// and applies layout to model
 			layoutGraphApplier.applyLayoutGraph(layoutInformation);
 
-			/** WORKAROUND START **/
-			// handle multiple layout runs, that is appliance of layout through
-			// GEF commands, just the appliance is the layout is performed
-			// multiple times, not the computation of the layout et al.
-			int workaroundRuns = runsWorkaround();
-			if (runs < workaroundRuns)
-				runs = workaroundRuns;
-			if (runs > 4)
-				runs = 4; // should not need more than 4 in any case
-			for (; runs > 1; runs--) {
-				layoutInformation.layoutRootPart.getViewer().flush();
-				layoutGraphApplier.applyLayoutGraph(layoutInformation);
-			}
-			/** WORKAROUND END **/
-			
 			progressMonitor.done();
 			// notifies layout listeners about the performed layout
-			KimlLayoutServices.getInstance().layoutPerformed(
+			LayoutServices.INSTANCE.layoutPerformed(
 					layoutInformation.layoutGraph, progressMonitor);
 			return null;
 			
@@ -283,8 +151,8 @@ public final class DiagramLayouter {
 			String message = "Failed to perform diagram layout.";
 			if (layouterEngine != null
 					&& layouterEngine.getLastLayoutProvider() != null)
-				message += " ("
-						+ layouterEngine.getLastLayoutProvider().getName() + ")";
+				message += " ("	+ layouterEngine.getLastLayoutProvider()
+						.getClass().getSimpleName() + ")";
 			Status status = new Status(IStatus.ERROR,
 					KimlUiPlugin.PLUGIN_ID, message, exception);
 			return status;
@@ -293,32 +161,5 @@ public final class DiagramLayouter {
 			progressMonitor.done();
 		}
 	}
-
-	/**
-	 * Computes the number of layout runs necessary according to the currently
-	 * active options.
-	 * 
-	 * @return The number of layout runs to perform depending on the options set
-	 *         in the preference page
-	 */
-	private static int runsWorkaround() {
-		boolean prefMultipleLayoutRuns = KimlUiPlugin
-				.getDefault()
-				.getPreferenceStore()
-				.getBoolean(
-						KimlLayoutPreferenceConstants.PREF_DIAGRAMLAYOUTERS_MULTIPLE_LAYOUT_RUNS);
-		boolean prefUseGMFLabelLocation = KimlUiPlugin
-				.getDefault()
-				.getPreferenceStore()
-				.getBoolean(
-						KimlLayoutPreferenceConstants.PREF_DIAGRAMLAYOUTERS_USE_GMF_TO_LAYOUT_CONNECTION_LABELS);
-
-		if (!prefMultipleLayoutRuns)
-			return 1;
-		else if (prefMultipleLayoutRuns && prefUseGMFLabelLocation)
-			return 2;
-		else
-			return 3;
-	}
-
+	
 }

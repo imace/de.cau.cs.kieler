@@ -23,10 +23,10 @@
       </view>
    </extension>
    <extension
-         point="de.cau.cs.kieler.kiml.layout.kimlLayoutListener">
-      <kimlLayoutListener
+         point="de.cau.cs.kieler.kiml.layout.layoutListeners">
+      <layoutListener
             class="de.cau.cs.kieler.kiml.viewer.ViewLayoutListener">
-      </kimlLayoutListener>
+      </layoutListener>
    </extension>
 
 </plugin>

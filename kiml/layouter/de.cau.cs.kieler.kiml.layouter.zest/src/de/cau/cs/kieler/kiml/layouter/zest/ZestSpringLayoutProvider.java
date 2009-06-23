@@ -5,7 +5,6 @@ import org.eclipse.zest.layouts.algorithms.SpringLayoutAlgorithm;
 import de.cau.cs.kieler.core.KielerException;
 import de.cau.cs.kieler.core.alg.IKielerProgressMonitor;
 import de.cau.cs.kieler.core.kgraph.KNode;
-import de.cau.cs.kieler.kiml.layout.options.LayoutType;
 import de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider;
 
 
@@ -29,26 +28,5 @@ public class ZestSpringLayoutProvider extends AbstractLayoutProvider {
 		ZestAlgorithmWrapper wrapper = new ZestAlgorithmWrapper(springAlgo);
 		wrapper.doLayout(layoutNode, progressMonitor);
 	}
-
-    /* (non-Javadoc)
-     * @see de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider#getCollection()
-     */
-    public String getCollection() {
-        return ZestAlgorithmWrapper.COLLECTION_NAME;
-    }
-
-    /* (non-Javadoc)
-     * @see de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider#getName()
-     */
-    public String getName() {
-        return LAYOUTER_NAME;
-    }
-
-    /* (non-Javadoc)
-     * @see de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider#getType()
-     */
-    public LayoutType getType() {
-        return LayoutType.FORCE;
-    }
 
 }

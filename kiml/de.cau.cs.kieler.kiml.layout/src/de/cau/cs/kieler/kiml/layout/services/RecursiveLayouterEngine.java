@@ -25,8 +25,7 @@ import de.cau.cs.kieler.core.kgraph.KNode;
  * 
  * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
  */
-public class RecursiveLayouterEngine extends
-		AbstractLayouterEngine {
+public class RecursiveLayouterEngine {
 
 	/** the last used layout provider */
 	private AbstractLayoutProvider lastLayoutProvider;
@@ -60,7 +59,8 @@ public class RecursiveLayouterEngine extends
 	            layoutRecursively(child, progressMonitor);
 	        }
 		    
-			lastLayoutProvider = layoutServices.getLayoutProvider(layoutNode);
+			lastLayoutProvider = LayoutServices.INSTANCE
+			        .getLayoutProvider(layoutNode);
 			lastLayoutProvider.doLayout(layoutNode,
 					progressMonitor.subTask(layoutNode.getChildren().size()));
 		}

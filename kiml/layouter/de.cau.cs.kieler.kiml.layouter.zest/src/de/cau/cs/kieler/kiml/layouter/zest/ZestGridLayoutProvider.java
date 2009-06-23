@@ -5,7 +5,6 @@ import org.eclipse.zest.layouts.algorithms.GridLayoutAlgorithm;
 import de.cau.cs.kieler.core.KielerException;
 import de.cau.cs.kieler.core.alg.IKielerProgressMonitor;
 import de.cau.cs.kieler.core.kgraph.KNode;
-import de.cau.cs.kieler.kiml.layout.options.LayoutType;
 import de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider;
 
 
@@ -28,26 +27,5 @@ public class ZestGridLayoutProvider extends AbstractLayoutProvider {
 				new GridLayoutAlgorithm());
 		wrapper.doLayout(layoutNode, progressMonitor);
 	}
-
-    /* (non-Javadoc)
-     * @see de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider#getCollection()
-     */
-    public String getCollection() {
-        return ZestAlgorithmWrapper.COLLECTION_NAME;
-    }
-
-    /* (non-Javadoc)
-     * @see de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider#getName()
-     */
-    public String getName() {
-        return LAYOUTER_NAME;
-    }
-
-    /* (non-Javadoc)
-     * @see de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider#getType()
-     */
-    public LayoutType getType() {
-        return LayoutType.OTHER;
-    }
 
 }

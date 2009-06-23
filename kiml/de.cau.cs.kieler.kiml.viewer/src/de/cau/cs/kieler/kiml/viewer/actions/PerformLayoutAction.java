@@ -24,7 +24,7 @@ import org.eclipse.ui.statushandlers.StatusManager;
 
 import de.cau.cs.kieler.core.kgraph.KNode;
 import de.cau.cs.kieler.core.ui.KielerProgressMonitor;
-import de.cau.cs.kieler.kiml.layout.services.KimlLayoutServices;
+import de.cau.cs.kieler.kiml.layout.services.LayoutServices;
 import de.cau.cs.kieler.kiml.layout.services.RecursiveLayouterEngine;
 import de.cau.cs.kieler.kiml.ui.layout.LayoutServiceBuilder;
 import de.cau.cs.kieler.kiml.viewer.KimlViewerPlugin;
@@ -72,7 +72,7 @@ public class PerformLayoutAction extends Action {
             view.setLayoutGraph(layoutGraph, LayoutGraphView.PRE);
             
             // get a layouter engine for layout
-            if (KimlLayoutServices.getInstance() == null)
+            if (LayoutServices.INSTANCE == null)
                 LayoutServiceBuilder.buildLayoutServices();
             final RecursiveLayouterEngine layouterEngine = new RecursiveLayouterEngine();
             
@@ -90,7 +90,7 @@ public class PerformLayoutAction extends Action {
                         } catch (Throwable throwable) {
                             String message = "Failed to perform layout.";
                             if (layouterEngine.getLastLayoutProvider() != null)
-                                message += " (" + layouterEngine.getLastLayoutProvider().getName() + ")";
+                                message += " (" + layouterEngine.getLastLayoutProvider().toString() + ")";
                             handleError(throwable, message);
                         }
                     }

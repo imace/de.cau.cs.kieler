@@ -16,14 +16,5 @@
             class="de.cau.cs.kieler.kiml.layouter.zest.preferences.PreferenceInitializer">
       </initializer>
    </extension>
-   <extension
-         point="de.cau.cs.kieler.kiml.layout.kimlLayoutProvider">
-      <kimlLayoutProvider
-            class="de.cau.cs.kieler.kiml.layouter.zest.ZestSpringLayoutProvider">
-      </kimlLayoutProvider>
-      <kimlLayoutProvider
-            class="de.cau.cs.kieler.kiml.layouter.zest.ZestGridLayoutProvider">
-      </kimlLayoutProvider>
-   </extension>
 
 </plugin>

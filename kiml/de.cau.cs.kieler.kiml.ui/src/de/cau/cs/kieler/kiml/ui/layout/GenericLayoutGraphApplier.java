@@ -63,10 +63,8 @@ import de.cau.cs.kieler.core.kgraph.KPort;
 import de.cau.cs.kieler.kiml.layout.klayoutdata.KEdgeLayout;
 import de.cau.cs.kieler.kiml.layout.klayoutdata.KPoint;
 import de.cau.cs.kieler.kiml.layout.klayoutdata.KShapeLayout;
-import de.cau.cs.kieler.kiml.layout.util.KimlLayoutPreferenceConstants;
 import de.cau.cs.kieler.kiml.layout.util.KimlLayoutUtil;
-import de.cau.cs.kieler.kiml.ui.KimlUiPlugin;
-import de.cau.cs.kieler.kiml.ui.helpers.KimlLabelHelper;
+import de.cau.cs.kieler.kiml.ui.helpers.LabelHelper;
 import de.cau.cs.kieler.kiml.ui.policies.LayoutEditPolicy;
 
 /**
@@ -477,7 +475,7 @@ public class GenericLayoutGraphApplier extends
                 targetBounds.x = newLocation.x;
                 targetBounds.y = newLocation.y;
                 // get the new relative location
-                Point normalPoint = KimlLabelHelper
+                Point normalPoint = LabelHelper
                         .offsetFromRelativeCoordinate(labelFigure,
                                 targetBounds, parentBendPoints, refPoint);
                 // manually create a SetBoundsCommand
@@ -546,18 +544,9 @@ public class GenericLayoutGraphApplier extends
      */
     protected void updatePreferences() {
 
-        /* fetch preferences */
-        prefUseGMFLabelLocation = KimlUiPlugin
-                .getDefault()
-                .getPreferenceStore()
-                .getBoolean(
-                        KimlLayoutPreferenceConstants.PREF_DIAGRAMLAYOUTERS_USE_GMF_TO_LAYOUT_CONNECTION_LABELS);
-
-        prefSmoothTransitions = KimlUiPlugin
-                .getDefault()
-                .getPreferenceStore()
-                .getBoolean(
-                        KimlLayoutPreferenceConstants.PREF_DIAGRAMLAYOUTERS_SMOOTHEN_EDGES);
+        // FIXME no preferences here!
+        prefUseGMFLabelLocation = false;
+        prefSmoothTransitions = false;
 
     }
 

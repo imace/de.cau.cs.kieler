@@ -31,11 +31,10 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.views.properties.tabbed.ITabbedPropertyConstants;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 
-import de.cau.cs.kieler.kiml.layout.options.LayoutType;
 import de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider;
-import de.cau.cs.kieler.kiml.layout.services.KimlLayoutServices;
-import de.cau.cs.kieler.kiml.ui.helpers.KimlGMFLayoutHintHelper;
+import de.cau.cs.kieler.kiml.layout.services.LayoutServices;
 import de.cau.cs.kieler.kiml.ui.layout.DiagramLayouter;
+import de.cau.cs.kieler.kiml.ui.layout.GmfLayoutHints;
 
 /**
  * The section displaying the Kiml Layout Hints in a tab in the properties view.
@@ -122,12 +121,13 @@ public class KimlLayoutTypePropertySection extends
 	 * Handles the removal of layout hints.
 	 */
 	private void handleRemoveAllHints() {
-		if (eObjectList.size() == 1) {
-			KimlGMFLayoutHintHelper.unsetAllContainedElementsLayoutHints(e2Gep
+	    // FIXME not supported
+		/*if (eObjectList.size() == 1) {
+			GmfLayoutHints.unsetAllContainedElementsLayoutHints(e2Gep
 					.get(eObject));
 
 			performLayout();
-		}
+		}*/
 	}
 
 	/**
@@ -147,17 +147,19 @@ public class KimlLayoutTypePropertySection extends
 			String stringValue = (String) value;
 			GraphicalEditPart editPart = getSemanticEditPart();
 			/* here Emma has a concrete layout provider */
+			/*
 			if (stringValue.substring(0, 2).equals("  ")) {
-				AbstractLayoutProvider layouter = KimlLayoutServices.getInstance()
+				AbstractLayoutProvider layouter = LayoutServices.getInstance()
 						.getLayoutProvider(stringValue.trim());
-				KimlGMFLayoutHintHelper.setAllContainedElementsLayoutHints(
+				GmfLayoutHints.setAllContainedElementsLayoutHints(
 						editPart, layouter.getType(), layouter.getName());
-			}
+			}*/
 			/* she has just a layout type */
+			/*
 			else {
-				KimlGMFLayoutHintHelper.setAllContainedElementsLayoutHints(
+				GmfLayoutHints.setAllContainedElementsLayoutHints(
 						editPart, (LayoutType.fromString(stringValue)), "");
-			}
+			}*/
 
 			performLayout();
 		}
@@ -179,19 +181,21 @@ public class KimlLayoutTypePropertySection extends
 			String stringValue = (String) value;
 			GraphicalEditPart editPart = getSemanticEditPart();
 			/* here Emma has a concrete layout provider */
+			/*
 			if (stringValue.substring(0, 2).equals("  ")) {
-			    AbstractLayoutProvider layouter = KimlLayoutServices.getInstance()
+			    AbstractLayoutProvider layouter = LayoutServices.getInstance()
 						.getLayoutProvider(stringValue.trim());
-				KimlGMFLayoutHintHelper.setContainedElementsLayoutHint(
+				GmfLayoutHints.setContainedElementsLayoutHint(
 						editPart, layouter.getType(), layouter.getName());
-			}
+			}*/
 			/* she has just a layout type */
+			/*
 			else {
-				KimlGMFLayoutHintHelper
+				GmfLayoutHints
 						.unsetContainedElementsLayoutHint(editPart);
-				KimlGMFLayoutHintHelper.setContainedElementsLayoutType(
+				GmfLayoutHints.setContainedElementsLayoutType(
 						editPart, (LayoutType.fromString(stringValue)));
-			}
+			}*/
 			performLayout();
 		}
 	}
@@ -200,8 +204,8 @@ public class KimlLayoutTypePropertySection extends
 	 * Is called when the layout hint was changed and performs a new layout.
 	 */
 	private void performLayout() {
-		DiagramLayouter.layout(getSemanticEditPart().getRoot().getViewer()
-				.getContents(), true, true);
+		/*DiagramLayouter.layout(getSemanticEditPart().getRoot().getViewer()
+				.getContents(), true, true);*/
 	}
 
 	/**
@@ -245,14 +249,14 @@ public class KimlLayoutTypePropertySection extends
 	 * @see org.eclipse.ui.examples.views.properties.tabbed.hockeyleague.ui.properties.sections.AbstractEnumerationPropertySection#getFeatureAsText()
 	 */
 	protected String getFeatureAsText() {
-		String layouterName = KimlGMFLayoutHintHelper
+		/*String layouterName = GmfLayoutHints
 				.getContainedElementsLayouterName(e2Gep.get(eObject));
 		if (layouterName != null && !layouterName.equals("")) {
 			return "  " + layouterName;
 		} else {
-			return KimlGMFLayoutHintHelper.getContainedElementsLayoutType(
+			return GmfLayoutHints.getContainedElementsLayoutType(
 					e2Gep.get(eObject)).toString();
-		}
+		}*/return "";
 	}
 
 	/**
@@ -285,34 +289,34 @@ public class KimlLayoutTypePropertySection extends
 		ArrayList<String> valueList = new ArrayList<String>();
 
 		/* make sure default is always on the list */
-		valueList.add(LayoutType.OTHER.toString());
+		//valueList.add(LayoutType.OTHER.toString());
 
 		/*
 		 * iterate through layout types and add the type as some kind of parent
 		 * section, and then add all the layout providers for this type
 		 */
-		for (LayoutType value : LayoutType.values()) {
+		/*for (LayoutType value : LayoutType.values()) {
 
 			/* add parent section delimiter */
-			valueList.add(value.toString());
+			/*valueList.add(value.toString());
 			boolean somethingAdded = false;
-			for (AbstractLayoutProvider layouter : KimlLayoutServices.getInstance()
-					.getEnabledProviders()) {
+			for (AbstractLayoutProvider layouter : LayoutServices.getInstance()
+					.getEnabledProviders()) {*/
 				/* add the layout provider with some indentation */
-				if (layouter.getType().equals(value)) {
+				/*if (layouter.getType().equals(value)) {
 					valueList.add("  " + layouter.getName());
 					somethingAdded = true;
 				}
-			}
+			}*/
 
 			/*
 			 * if no layout provider for the current layout type was added,
 			 * removed this parent section
 			 */
-			if (!somethingAdded) {
+			/*if (!somethingAdded) {
 				valueList.remove(valueList.size() - 1);
 			}
-		}
+		}*/
 
 		return valueList.toArray(new String[] {});
 	}

@@ -12,7 +12,6 @@ package kiel.layouter.graphviz;
 import de.cau.cs.kieler.core.KielerException;
 import de.cau.cs.kieler.core.alg.IKielerProgressMonitor;
 import de.cau.cs.kieler.core.kgraph.KNode;
-import de.cau.cs.kieler.kiml.layout.options.LayoutType;
 import de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider;
 
 /**
@@ -31,7 +30,6 @@ public class NeatoLayoutProvider extends AbstractLayoutProvider {
 
 	/* some Strings used here */
 	private final String LAYOUT_PROVIDER_NAME = GraphvizLayoutProviderNames.GRAPHVIZ_NEATO;
-	private final LayoutType LAYOUT_PROVIDER_LAYOUT_TYPE = LayoutType.RADIAL;
 
 	/* real GraphViz layouter Emma uses to do the layout */
 	private GraphvizLayouter graphvizLayouter = null;
@@ -47,24 +45,4 @@ public class NeatoLayoutProvider extends AbstractLayoutProvider {
 		graphvizLayouter.visit(layoutNode, progressMonitor);
 	}
 
-    /* (non-Javadoc)
-     * @see de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider#getCollection()
-     */
-    public String getCollection() {
-        return GraphvizLayoutProviderNames.LAYOUT_PROVIDER_COLLECTION_ID;
-    }
-
-    /* (non-Javadoc)
-     * @see de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider#getName()
-     */
-    public String getName() {
-        return LAYOUT_PROVIDER_NAME;
-    }
-
-    /* (non-Javadoc)
-     * @see de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider#getType()
-     */
-    public LayoutType getType() {
-        return LAYOUT_PROVIDER_LAYOUT_TYPE;
-    }
 }

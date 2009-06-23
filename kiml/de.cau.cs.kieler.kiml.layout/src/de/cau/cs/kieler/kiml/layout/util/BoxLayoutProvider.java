@@ -18,13 +18,9 @@ import java.util.List;
 import de.cau.cs.kieler.core.KielerException;
 import de.cau.cs.kieler.core.alg.IKielerProgressMonitor;
 import de.cau.cs.kieler.core.kgraph.KFloatOption;
-import de.cau.cs.kieler.core.kgraph.KGraphFactory;
-import de.cau.cs.kieler.core.kgraph.KIntOption;
 import de.cau.cs.kieler.core.kgraph.KNode;
 import de.cau.cs.kieler.core.kgraph.KOption;
-import de.cau.cs.kieler.kiml.layout.klayoutdata.KLayoutData;
 import de.cau.cs.kieler.kiml.layout.options.LayoutOptions;
-import de.cau.cs.kieler.kiml.layout.options.LayoutType;
 import de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider;
 import de.cau.cs.kieler.kiml.layout.util.alg.BoxPlacer;
 import de.cau.cs.kieler.kiml.layout.util.alg.BoxSorter;
@@ -37,51 +33,8 @@ import de.cau.cs.kieler.kiml.layout.util.alg.BoxSorter;
  */
 public class BoxLayoutProvider extends AbstractLayoutProvider {
 
-    /** collection name for utility layout providers */
-    public static final String COLLECTION_NAME = "Utility";
-    /** name of this layout provider */
-    public static final String LAYOUTER_NAME = "Box Layout";
-    /** layout option for priority of nodes */
-    public static final String PRIORITY_OPTION = "box.priority";
-    
     /** default value for spacing between boxes */
     private final static float DEFAULT_SPACING = 15.0f;
-    
-    /**
-     * Sets the priority of the given layout data. Nodes with higher
-     * assigned priorities are placed before nodes with lower
-     * priority. Default for nodes with no priority is 0.
-     * 
-     * @param layoutData layout data to process
-     * @param priority priority value for the corresponding node
-     */
-    public static void setPriority(KLayoutData layoutData,
-            int priority) {
-        KIntOption priorityOption = (KIntOption)layoutData.getOption(
-                PRIORITY_OPTION);
-        if (priorityOption == null) {
-            priorityOption = KGraphFactory.eINSTANCE.createKIntOption();
-            priorityOption.setKey(PRIORITY_OPTION);
-            layoutData.getOptions().add(priorityOption);
-        }
-        priorityOption.setValue(priority);
-    }
-    
-    /**
-     * Retrieves the assigned priority value for a given layout
-     * data.
-     * 
-     * @param layoutData layout data to process
-     * @return the assigned priority, or 0 if no priority is assigned
-     */
-    public static int getPriority(KLayoutData layoutData) {
-        KIntOption priorityOption = (KIntOption)layoutData.getOption(
-                PRIORITY_OPTION);
-        if (priorityOption == null)
-            return 0;
-        else
-            return priorityOption.getValue();
-    }
     
     /** the algorithm used to sort boxes */
     private BoxSorter boxSorter = new BoxSorter();
@@ -115,25 +68,4 @@ public class BoxLayoutProvider extends AbstractLayoutProvider {
         progressMonitor.done();
     }
     
-    /* (non-Javadoc)
-     * @see de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider#getCollection()
-     */
-    public String getCollection() {
-        return COLLECTION_NAME;
-    }
-
-    /* (non-Javadoc)
-     * @see de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider#getName()
-     */
-    public String getName() {
-        return LAYOUTER_NAME;
-    }
-
-    /* (non-Javadoc)
-     * @see de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider#getType()
-     */
-    public LayoutType getType() {
-        return LayoutType.OTHER;
-    }
-
 }

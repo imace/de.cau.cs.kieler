@@ -30,7 +30,6 @@ import org.eclipse.gmf.runtime.diagram.ui.editparts.LabelEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeCompartmentEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
-import org.eclipse.jface.preference.IPreferenceStore;
 
 import de.cau.cs.kieler.core.kgraph.KEdge;
 import de.cau.cs.kieler.core.kgraph.KLabel;
@@ -39,10 +38,7 @@ import de.cau.cs.kieler.kiml.layout.klayoutdata.KInsets;
 import de.cau.cs.kieler.kiml.layout.klayoutdata.KShapeLayout;
 import de.cau.cs.kieler.kiml.layout.options.EdgeLabelPlacement;
 import de.cau.cs.kieler.kiml.layout.options.LayoutOptions;
-import de.cau.cs.kieler.kiml.layout.options.LayoutType;
 import de.cau.cs.kieler.kiml.layout.util.KimlLayoutUtil;
-import de.cau.cs.kieler.kiml.ui.KimlUiPlugin;
-import de.cau.cs.kieler.kiml.ui.helpers.KimlGMFLayoutHintHelper;
 
 /**
  * A generic implementation of the {@link GenericLayoutGraphBuilder}.
@@ -53,12 +49,7 @@ import de.cau.cs.kieler.kiml.ui.helpers.KimlGMFLayoutHintHelper;
 public class GenericLayoutGraphBuilder extends
 		AbstractLayoutGraphBuilder {
 
-	/* preference setting */
-	private int prefInsetsTop = 0;
-	private int prefInsetsLeft = 0;
-	private int prefInsetsBottom = 0;
-	private int prefInsetsRight = 0;
-
+    /** map of edit parts to nodes in the layout graph */
 	private Map<GraphicalEditPart, KNode> graphicalEditPart2LayoutNode = new HashMap<GraphicalEditPart, KNode>();
 
 	/*
@@ -70,35 +61,30 @@ public class GenericLayoutGraphBuilder extends
 	 */
 	@Override
 	protected void doBuildLayoutGraph() {
-
 		if (layoutRootPart instanceof NodeEditPart) {
 			NodeEditPart rootEditPart = (NodeEditPart) layoutRootPart;
 			KShapeLayout shapeLayout = KimlLayoutUtil.getShapeLayout(layoutGraph);
 
-			/* set location */
-			shapeLayout.setXpos(rootEditPart.getFigure().getBounds().x);
-			shapeLayout.setYpos(rootEditPart.getFigure().getBounds().y);
+			// set location and size
+			Rectangle rootBounds = rootEditPart.getFigure().getBounds();
+			shapeLayout.setXpos(rootBounds.x);
+			shapeLayout.setYpos(rootBounds.y);
+			shapeLayout.setHeight(rootBounds.height);
+			shapeLayout.setWidth(rootBounds.width);
 
-			/* set size */
-			shapeLayout.setHeight(rootEditPart.getFigure().getBounds().height);
-			shapeLayout.setWidth(rootEditPart.getFigure().getBounds().width);
-
-			/* set LayouterName and LayoutType if root is ShapeNodeEditPart */
+			// set layout hint if root is ShapeNodeEditPart
 			if (rootEditPart instanceof ShapeNodeEditPart) {
-			    LayoutOptions.setLayouterName(shapeLayout,
-			            KimlGMFLayoutHintHelper.getContainedElementsLayouterName(
-			            (ShapeNodeEditPart) rootEditPart));
-			    			    
-			    LayoutOptions.setLayoutType(shapeLayout,
-						KimlGMFLayoutHintHelper.getContainedElementsLayoutType(
-						(ShapeNodeEditPart) rootEditPart));
+			    LayoutOptions.setLayoutHint(shapeLayout,
+			            GmfLayoutHints.getStringValue(
+			            (ShapeNodeEditPart)rootEditPart,
+			            LayoutOptions.LAYOUT_HINT));
 			}
 
-			/* map the root EditPart to the top KNode */
+			// map the root EditPart to the top KNode
 			graphicalEditPart2LayoutNode.put(rootEditPart, layoutGraph);
 			layoutNode2EditPart.put(layoutGraph, rootEditPart);
 
-			/* wander recursively through the diagram */
+			// wander recursively through the diagram
 			buildLayoutGraphRecursively(rootEditPart, layoutGraph);
 		}
 		/*
@@ -109,15 +95,12 @@ public class GenericLayoutGraphBuilder extends
 			/*
 			 * set information about LayouterName and LayoutType
 			 */
-			LayoutType layoutType = LayoutType.OTHER;
-			String layouterName = "";
-			layoutType = KimlGMFLayoutHintHelper
-					.getContainedElementsLayoutType((org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart) layoutRootPart);
-			layouterName = KimlGMFLayoutHintHelper
-					.getContainedElementsLayouterName((org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart) layoutRootPart);
 			KShapeLayout shapeLayout = KimlLayoutUtil.getShapeLayout(layoutGraph);
-			LayoutOptions.setLayoutType(shapeLayout, layoutType);
-			LayoutOptions.setLayouterName(shapeLayout, layouterName);
+			LayoutOptions.setLayoutHint(shapeLayout, GmfLayoutHints.getStringValue(
+			        (org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart)layoutRootPart,
+			        LayoutOptions.LAYOUT_HINT));
+			layoutGraph.getLabel().setText(((DiagramEditPart)layoutRootPart)
+			        .getDiagramView().getName());
 			graphicalEditPart2LayoutNode.put(layoutRootPart, layoutGraph);
 			layoutNode2EditPart.put(layoutGraph, layoutRootPart);
 			buildLayoutGraphRecursively(layoutRootPart, layoutGraph);
@@ -174,14 +157,9 @@ public class GenericLayoutGraphBuilder extends
 				/*
 				 * set information about LayouterName and LayoutType
 				 */
-				LayoutType layoutType = LayoutType.OTHER;
-				String layouterName = "";
-				layoutType = KimlGMFLayoutHintHelper
-						.getContainedElementsLayoutType((ShapeNodeEditPart) childNodeEditPart);
-				layouterName = KimlGMFLayoutHintHelper
-						.getContainedElementsLayouterName((ShapeNodeEditPart) childNodeEditPart);
-				LayoutOptions.setLayoutType(nodeLayout, layoutType);
-				LayoutOptions.setLayouterName(nodeLayout, layouterName);
+				LayoutOptions.setLayoutHint(nodeLayout, GmfLayoutHints
+				        .getStringValue((ShapeNodeEditPart)childNodeEditPart,
+				        LayoutOptions.LAYOUT_HINT));
 
 				/* add node */
 				currentLayoutNode.getChildren().add(childLayoutNode);
@@ -200,17 +178,18 @@ public class GenericLayoutGraphBuilder extends
 			 * to add to new KNodes. She handles possible insets, which
 			 * may result from labels and other stuff.
 			 */
-			if (obj instanceof ShapeCompartmentEditPart
+			else if (obj instanceof ShapeCompartmentEditPart
 					&& ((ShapeCompartmentEditPart) obj).getChildren().size() != 0) {
 
-			    KShapeLayout parentLayout = KimlLayoutUtil.getShapeLayout(
-			            graphicalEditPart2LayoutNode.get(((GraphicalEditPart)obj)
-			            .getParent()));
-				KInsets parentInsets = LayoutOptions.getInsets(parentLayout);
-				parentInsets.setTop(prefInsetsTop);
-				parentInsets.setLeft(prefInsetsLeft);
-				parentInsets.setBottom(prefInsetsBottom);
-				parentInsets.setRight(prefInsetsRight);
+                // FIXME insets must be set dynamically
+			    //KShapeLayout parentLayout = KimlLayoutUtil.getShapeLayout(
+			    //        graphicalEditPart2LayoutNode.get(((GraphicalEditPart)obj)
+			    //        .getParent()));
+				//KInsets parentInsets = LayoutOptions.getInsets(parentLayout);
+				//parentInsets.setTop(prefInsetsTop);
+				//parentInsets.setLeft(prefInsetsLeft);
+				//parentInsets.setBottom(prefInsetsBottom);
+				//parentInsets.setRight(prefInsetsRight);
 
 				buildLayoutGraphRecursively((GraphicalEditPart) obj,
 						currentLayoutNode);
@@ -221,25 +200,24 @@ public class GenericLayoutGraphBuilder extends
 
 				GraphicalEditPart graphicalEditPart = (GraphicalEditPart) obj;
 				IFigure labelFigure = graphicalEditPart.getFigure();
+				String text = null;
 				if (labelFigure instanceof WrappingLabel) {
-
-					/*
-					 * handling of the label, in most cases a small symbol is
-					 * drawn left to the label. Emma must enlarge the
-					 * label(text), to let the layout provider set the size
-					 * properly.
-					 */
-					String text = ((WrappingLabel) labelFigure).getText();
-
-					graphicalEditPart2LayoutNode.get(
-							graphicalEditPart.getParent()).getLabel().setText(
-							text.concat("XX"));
+					text = ((WrappingLabel) labelFigure).getText();
 				} else if (labelFigure instanceof Label) {
-					String text = ((Label) labelFigure).getText();
-
-					graphicalEditPart2LayoutNode.get(
-							graphicalEditPart.getParent()).getLabel().setText(
-							text.concat("XX"));
+					text = ((Label) labelFigure).getText();
+				}
+				if (text != null) {
+				    KNode parent = graphicalEditPart2LayoutNode.get(
+                            graphicalEditPart.getParent());
+				    KShapeLayout parentLayout = KimlLayoutUtil.getShapeLayout(parent);
+                    KLabel label = parent.getLabel();
+                    label.setText(text);
+                    Rectangle labelBounds = labelFigure.getBounds();
+                    KShapeLayout labelLayout = KimlLayoutUtil.getShapeLayout(label);
+                    labelLayout.setXpos(labelBounds.x - parentLayout.getXpos());
+                    labelLayout.setYpos(labelBounds.y - parentLayout.getYpos());
+                    labelLayout.setWidth(labelFigure.getPreferredSize().width);
+                    labelLayout.setHeight(labelFigure.getPreferredSize().height);
 				}
 			}
 		}

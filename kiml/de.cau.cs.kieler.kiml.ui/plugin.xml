@@ -2,8 +2,6 @@
 <?eclipse version="3.2"?>
 <plugin>
    
-   <extension-point id="kimlLayoutGraphApplier" name="KIML LayoutGraph Applier" schema="schema/kimlLayoutGraphApplier.exsd"/>
-   <extension-point id="kimlLayoutGraphBuilder" name="KIML LayoutGraph Builder" schema="schema/kimlLayoutGraphBuilder.exsd"/>
 
    <extension
          point="org.eclipse.ui.preferencePages">
@@ -144,20 +142,6 @@ point="org.eclipse.ui.menus">
             sequence="M1+K L">
       </key>
    </extension>
- <extension
-       point="de.cau.cs.kieler.kiml.ui.kimlLayoutGraphApplier">
-    <kimlLayoutGraphApplier
-          class="de.cau.cs.kieler.kiml.ui.layout.GenericLayoutGraphApplier"
-          editor_id="*">
-    </kimlLayoutGraphApplier>
- </extension>
- <extension
-       point="de.cau.cs.kieler.kiml.ui.kimlLayoutGraphBuilder">
-    <kimlLayoutGraphBuilder
-          class="de.cau.cs.kieler.kiml.ui.layout.GenericLayoutGraphBuilder"
-          editor_id="*">
-    </kimlLayoutGraphBuilder>
- </extension>
  <extension
        point="org.eclipse.ui.viewActions">
     <viewContribution

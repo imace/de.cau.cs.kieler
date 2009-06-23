@@ -25,55 +25,43 @@ import org.eclipse.ui.handlers.HandlerUtil;
 import de.cau.cs.kieler.kiml.ui.layout.DiagramLayouter;
 
 /**
- * The handler which is responsible to lay out the diagram or parts thereof.
- * <p/>
- * According to the command provided, the handler lays out the whole diagram or
- * just the selected part of it. Handler is called when executing a command,
- * which is set in the plugin.xml file. Animation is enabled.
+ * The handler which is responsible to perform layout.
  * 
  * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
- * @see LayoutAsHandler
- * @see ContributionItemLayoutAs
  */
 public class LayoutHandler extends AbstractHandler implements IHandler {
 
-	/* must be the same String as defined in the plugin.xml under the command */
-	private static final String COMMAND_ID_LAYOUT_ALL = "de.cau.cs.kieler.kiml.ui.command.kimlLayoutAll";
+    /** parameter identifier for the scope of automatic layout */
+    public static final String PARAM_LAYOUT_SCOPE = "de.cau.cs.kieler.kiml.ui.layoutScope";
+    /** value for diagram scope */
+	public static final String VAL_DIAGRAM = "diagram";
+	/** value for selection scope */
+	public static final String VAL_SELECTION = "selection";
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.core.commands.AbstractHandler#execute(org.eclipse.core.commands
-	 * .ExecutionEvent)
+	 * @see org.eclipse.core.commands.AbstractHandler#execute(org.eclipse.core.commands.ExecutionEvent)
 	 */
 	public Object execute(ExecutionEvent event) throws ExecutionException {
-		// get the active editor
-		IEditorPart editorPart = HandlerUtil.getActiveEditor(event);
-	
-		String commandId = event.getCommand().getId();
-
-		/*
-		 * As this handler is activated from a menu, Emma needs to get the
-		 * active menu selection. Just calling selection does not work when
-		 * calling from within a view, for example. If called from a menu in the
-		 * menu bar - not a context menu - Emma needs to use the
-		 * currrentSelection.
-		 */
-		ISelection selection = HandlerUtil.getActiveMenuSelection(event);
-		if (selection == null)
-			selection = HandlerUtil.getCurrentSelection(event);
-
-		/* see what Emma wants to do */
-		if (selection == null
-				|| (selection instanceof IStructuredSelection && ((IStructuredSelection) selection)
-						.size() == 0)
-				|| commandId.equals(COMMAND_ID_LAYOUT_ALL)) {
+		ISelection selection = null;
+		
+		// check parameter for layout scope, default is diagram scope
+		if (event.getParameter(PARAM_LAYOUT_SCOPE).equals(VAL_SELECTION)) {
+		     selection = HandlerUtil.getActiveMenuSelection(event);
+		        if (selection == null)
+		            selection = HandlerUtil.getCurrentSelection(event);
+		}
+		
+		if (selection == null || (selection instanceof IStructuredSelection
+		        && ((IStructuredSelection) selection).size() == 0)) {
 			// start layout process with editor part
-			DiagramLayouter.layout(editorPart, true, true);
+	        IEditorPart editorPart = HandlerUtil.getActiveEditor(event);
+			DiagramLayouter.layout(editorPart, HandlerUtil
+			        .getActiveEditorId(event), true);
 		} else {
 			// start layout process with selection
-			DiagramLayouter.layout(selection, true, true);
+			DiagramLayouter.layout(selection, HandlerUtil
+			        .getActiveEditorId(event), true);
 		}
 
 		return null;

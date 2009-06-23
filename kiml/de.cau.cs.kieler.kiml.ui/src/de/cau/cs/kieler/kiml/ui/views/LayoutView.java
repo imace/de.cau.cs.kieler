@@ -14,25 +14,21 @@
 
 package de.cau.cs.kieler.kiml.ui.views;
 
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.SelectionAdapter;
-import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.FillLayout;
-import org.eclipse.swt.layout.RowLayout;
-import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
-import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.ui.part.ViewPart;
 
 import de.cau.cs.kieler.core.ui.widgets.DefaultItemTree;
-import de.cau.cs.kieler.kiml.layout.options.LayoutType;
 import de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider;
-import de.cau.cs.kieler.kiml.layout.services.KimlLayoutServices;
+import de.cau.cs.kieler.kiml.layout.services.LayoutProviderData;
+import de.cau.cs.kieler.kiml.layout.services.LayoutServices;
 
 /**
  * The LayoutView is the main user interface to the layout capabilities of KIELER.
@@ -55,11 +51,11 @@ public class LayoutView extends ViewPart {
     public void createPartControl(Composite parent) {
         
         // get information about the layouters
-        List<AbstractLayoutProvider> layouters = KimlLayoutServices.getInstance().getEnabledProviders();
-        List<LayoutType> types = new LinkedList<LayoutType>();
-        for (AbstractLayoutProvider provider : layouters) {
-            if (!types.contains(provider.getType()))
-                types.add(provider.getType());
+        Collection<LayoutProviderData> layouters = LayoutServices.INSTANCE.getLayoutProviderData();
+        List<String> types = new LinkedList<String>();
+        for (LayoutProviderData provider : layouters) {
+            if (!types.contains(provider.type))
+                types.add(provider.type);
         }
         
         // create a new composite group and set a SWT layout
@@ -73,14 +69,16 @@ public class LayoutView extends ViewPart {
         layoutTree = new DefaultItemTree(layoutGroup, SWT.BORDER);   
         
         // set the items of the tree according to the installed layouters
-        for (LayoutType layoutType : types) {
+        for (String layoutType : types) {
             TreeItem typeTreeItem = new TreeItem(layoutTree.getTree(), SWT.NONE);
-            typeTreeItem.setText(layoutType.toString());
+            typeTreeItem.setText(LayoutServices.INSTANCE.getLayoutTypeName(layoutType));
+            typeTreeItem.setData(layoutType);
             
-            for (AbstractLayoutProvider layouter : layouters) {
-                if ( layouter.getType().equals(layoutType) ){
+            for (LayoutProviderData layouter : layouters) {
+                if (layouter.type.equals(layoutType) ){
                     TreeItem ti = new TreeItem(typeTreeItem, SWT.NONE);
-                    ti.setText(layouter.getName());
+                    ti.setText(layouter.name);
+                    ti.setData(layouter);
                 }
             }
         }
@@ -108,16 +106,18 @@ public class LayoutView extends ViewPart {
      */
     public AbstractLayoutProvider getSelectedLayouter(){
         TreeItem item = layoutTree.getDeepChecked();
-        if(item != null){
-            String layouterName = item.getText();
-            AbstractLayoutProvider provider = KimlLayoutServices.getInstance()
-                    .getLayoutProvider(layouterName); 
-            if(provider.getName() == null){
-                List<AbstractLayoutProvider> ls = KimlLayoutServices.getInstance().getEnabledProviders(provider.getType());
-                if(ls.size() >= 1)
-                    provider = ls.get(0); // select some layouter from the possible types
+        if (item != null) {
+            if (item.getData() instanceof String) {
+                // select some layouter for the selected type
+                String typeid = (String)item.getData();
+                Collection<LayoutProviderData> providerDatas = LayoutServices.INSTANCE.getLayoutProviderData();
+                for (LayoutProviderData data : providerDatas) {
+                    if (data.type.equals(typeid))
+                        return data.instance;
+                }
             }
-            return provider; 
+            else if (item.getData() instanceof LayoutProviderData)
+                return ((LayoutProviderData)item.getData()).instance; 
         }
         return null;
     }

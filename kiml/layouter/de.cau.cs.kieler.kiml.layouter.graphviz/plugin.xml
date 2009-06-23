@@ -17,23 +17,5 @@
             class="de.cau.cs.kieler.kiml.layouter.graphviz.preferences.PreferenceInitializer">
       </initializer>
    </extension>
-   <extension
-         point="de.cau.cs.kieler.kiml.layout.kimlLayoutProvider">
-      <kimlLayoutProvider
-            class="kiel.layouter.graphviz.CircoLayoutProvider">
-      </kimlLayoutProvider>
-      <kimlLayoutProvider
-            class="kiel.layouter.graphviz.DotLayoutProvider">
-      </kimlLayoutProvider>
-      <kimlLayoutProvider
-            class="kiel.layouter.graphviz.NeatoLayoutProvider">
-      </kimlLayoutProvider>
-      <kimlLayoutProvider
-            class="kiel.layouter.graphviz.TwopiLayoutProvider">
-      </kimlLayoutProvider>
-      <kimlLayoutProvider
-            class="kiel.layouter.graphviz.FdpLayoutProvider">
-      </kimlLayoutProvider>
-   </extension>
 
 </plugin>

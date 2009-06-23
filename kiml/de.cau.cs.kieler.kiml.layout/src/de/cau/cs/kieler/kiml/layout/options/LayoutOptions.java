@@ -33,44 +33,50 @@ import de.cau.cs.kieler.kiml.layout.klayoutdata.KLayoutDataFactory;
  */
 public class LayoutOptions {
 
-    /** layout option key: type of layout method */
-    public final static String LAYOUT_TYPE = "layoutType";
+    /** layout option key: layout hint */
+    public final static String LAYOUT_HINT = "de.cau.cs.kieler.layout.options.layoutHint";
     
     /**
-     * Returns the layout type for a given layout data instance.
+     * Returns the layout hint for a given layout data instance.
      * 
      * @param layoutData layout data for a parent node
-     * @return the layout type for the given layout data
+     * @return the layout hint for the given layout data, or
+     *     the empty string if there is no such option
      */
-    public static LayoutType getLayoutType(KLayoutData layoutData) {
-        KIntOption typeOption = (KIntOption)layoutData.getOption(
-                LAYOUT_TYPE);
-        if (typeOption == null)
-            return LayoutType.OTHER;
-        else
-            return LayoutType.valueOf(typeOption.getValue());
+    public static String getLayoutHint(KLayoutData layoutData) {
+        KStringOption hintOption = (KStringOption)layoutData.getOption(
+                LAYOUT_HINT);
+        if (hintOption == null)
+            return "";
+        else {
+            String typeid = hintOption.getValue();
+            if (typeid == null)
+                return "";
+            else
+                return typeid;
+        }
     }
     
     /**
-     * Sets the layout type for the given layout data instance.
+     * Sets the layout hint for the given layout data instance.
      * 
      * @param layoutData layout data for a parent node
-     * @param layoutType layout type to set
+     * @param layoutHint layout hint to set
      */
-    public static void setLayoutType(KLayoutData layoutData,
-            LayoutType layoutType) {
-        KIntOption typeOption = (KIntOption)layoutData.getOption(
-                LAYOUT_TYPE);
-        if (typeOption == null) {
-            typeOption = KGraphFactory.eINSTANCE.createKIntOption();
-            typeOption.setKey(LAYOUT_TYPE);
-            layoutData.getOptions().add(typeOption);
+    public static void setLayoutHint(KLayoutData layoutData,
+            String layoutHint) {
+        KStringOption hintOption = (KStringOption)layoutData.getOption(
+                LAYOUT_HINT);
+        if (hintOption == null) {
+            hintOption = KGraphFactory.eINSTANCE.createKStringOption();
+            hintOption.setKey(LAYOUT_HINT);
+            layoutData.getOptions().add(hintOption);
         }
-        typeOption.setValue(layoutType.ordinal());
+        hintOption.setValue(layoutHint);
     }
     
     /** layout option key: direction of layout */
-    public final static String LAYOUT_DIRECTION = "layoutDirection";
+    public final static String LAYOUT_DIRECTION = "de.cau.cs.kieler.layout.options.layoutDirection";
     
     /**
      * Returns the layout direction for a given layout data instance.
@@ -106,29 +112,8 @@ public class LayoutOptions {
         directionOption.setValue(layoutDirection.ordinal());
     }
     
-    /** layout option key: name of selected layouter */
-    public final static String LAYOUTER_NAME = "layouterName";
-    
-    /**
-     * Sets the layouter name for the given layout data instance.
-     * 
-     * @param layoutData layout data for a parent node
-     * @param layouterName layouter name to set
-     */
-    public static void setLayouterName(KLayoutData layoutData,
-            String layouterName) {
-        KStringOption nameOption = (KStringOption)layoutData.getOption(
-                LAYOUTER_NAME);
-        if (nameOption == null) {
-            nameOption = KGraphFactory.eINSTANCE.createKStringOption();
-            nameOption.setKey(LAYOUTER_NAME);
-            layoutData.getOptions().add(nameOption);
-        }
-        nameOption.setValue(layouterName);
-    }
-    
     /** layout option key: distance of node contents to the boundary */
-    public final static String INSETS = "insets";
+    public final static String INSETS = "de.cau.cs.kieler.layout.options.insets";
     
     /**
      * Returns the insets for a given layout data instance. If no
@@ -147,7 +132,7 @@ public class LayoutOptions {
     }
     
     /** layout option key: side of a port on its node's boundary */
-    public final static String PORT_SIDE = "portSide";
+    public final static String PORT_SIDE = "de.cau.cs.kieler.layout.options.portSide";
     
     /**
      * Returns the port side for a given layout data instance.
@@ -183,7 +168,7 @@ public class LayoutOptions {
     }
     
     /** layout option key: constraints for port positions */
-    public final static String PORT_CONSTRAINTS = "portConstraints";
+    public final static String PORT_CONSTRAINTS = "de.cau.cs.kieler.layout.options.portConstraints";
 
     /**
      * Returns the port constraints for a given layout data instance.
@@ -219,7 +204,7 @@ public class LayoutOptions {
     }
     
     /** layout option key: rank of a port */
-    public final static String PORT_RANK = "portRank";
+    public final static String PORT_RANK = "de.cau.cs.kieler.layout.options.portRank";
     
     /**
      * Returns the port rank for a given layout data instance.
@@ -256,7 +241,7 @@ public class LayoutOptions {
     }
     
     /** layout option key: placement positions for edge labels */
-    public final static String EDGE_LABEL_PLACEMENT = "edgeLabelPlacement";
+    public final static String EDGE_LABEL_PLACEMENT = "de.cau.cs.kieler.layout.options.edgeLabelPlacement";
     
     /**
      * Returns the edge label placement for a given layout data instance.
@@ -292,7 +277,7 @@ public class LayoutOptions {
     }
     
     /** layout option key: size constraint for nodes */
-    public final static String FIXED_SIZE = "fixedSize";
+    public final static String FIXED_SIZE = "de.cau.cs.kieler.layout.options.fixedSize";
     
     /**
      * Returns whether the fixed size option is active for the
@@ -333,7 +318,7 @@ public class LayoutOptions {
     }
     
     /** layout option key: minimal distance between elements */
-    public final static String MIN_SPACING = "minSpacing";
+    public final static String MIN_SPACING = "de.cau.cs.kieler.layout.options.minSpacing";
     
     /**
      * Returns the minimal spacing for a given layout data instance.
@@ -367,6 +352,43 @@ public class LayoutOptions {
             layoutData.getOptions().add(spacingOption);
         }
         spacingOption.setValue(spacing);
+    }
+    
+    /** layout option key: priority of elements */
+    public static final String PRIORITY = "de.cau.cs.kieler.layout.options.priority";
+    
+    /**
+     * Sets the priority of the given layout data.
+     * 
+     * @param layoutData layout data to process
+     * @param priority priority value for the corresponding graph element
+     */
+    public static void setPriority(KLayoutData layoutData,
+            int priority) {
+        KIntOption priorityOption = (KIntOption)layoutData.getOption(
+                PRIORITY);
+        if (priorityOption == null) {
+            priorityOption = KGraphFactory.eINSTANCE.createKIntOption();
+            priorityOption.setKey(PRIORITY);
+            layoutData.getOptions().add(priorityOption);
+        }
+        priorityOption.setValue(priority);
+    }
+    
+    /**
+     * Retrieves the assigned priority value for a given layout
+     * data.
+     * 
+     * @param layoutData layout data to process
+     * @return the assigned priority, or 0 if no priority is assigned
+     */
+    public static int getPriority(KLayoutData layoutData) {
+        KIntOption priorityOption = (KIntOption)layoutData.getOption(
+                PRIORITY);
+        if (priorityOption == null)
+            return 0;
+        else
+            return priorityOption.getValue();
     }
     
 }

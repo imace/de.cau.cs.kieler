@@ -264,7 +264,7 @@ public class ModelContentMergeDiagramTab extends DiagramGraphicalViewer
 			 * Normally, 3 should be enough, don't know why we need 4.
 			 */
 			DiagramLayouter.layout(getEditPartRegistry().get(diagram),
-					editorID, false, false, 4);
+					editorID, false);
 		}
 
 		/* check if user wants to be able to click on changed Elements */

@@ -82,10 +82,50 @@
       </factory>
    </extension>
    <extension
-         point="de.cau.cs.kieler.kiml.ui.kimlLayoutGraphBuilder">
-      <kimlLayoutGraphBuilder
-            class="dataflow.diagram.layout.services.DataFlowLayoutGraphBuilder"
-            editor_id="dataflow.diagram.part.DataflowDiagramEditorID">
-      </kimlLayoutGraphBuilder>
+         point="de.cau.cs.kieler.kiml.layout.layoutInfo">
+      <binding
+            class="dataflow.diagram.edit.parts.DataflowModelEditPart"
+            type="de.cau.cs.kieler.layout.info.types.dataFlow">
+      </binding>
+      <binding
+            class="dataflow.diagram.edit.parts.BoxBoxCompartmentEditPart"
+            type="de.cau.cs.kieler.layout.info.types.dataFlow">
+      </binding>
+      <binding
+            class="dataflow.diagram.edit.parts.BoxBoxCompartment2EditPart"
+            type="de.cau.cs.kieler.layout.info.types.dataFlow">
+      </binding>
+      <binding
+            class="dataflow.diagram.edit.parts.BoxEditPart"
+            type="de.cau.cs.kieler.layout.info.types.node">
+      </binding>
+      <binding
+            class="dataflow.diagram.edit.parts.Box2EditPart"
+            type="de.cau.cs.kieler.layout.info.types.node">
+      </binding>
+      <binding
+            class="dataflow.diagram.edit.parts.InputPortEditPart"
+            type="de.cau.cs.kieler.layout.info.types.port">
+      </binding>
+      <binding
+            class="dataflow.diagram.edit.parts.OutputPortEditPart"
+            type="de.cau.cs.kieler.layout.info.types.port">
+      </binding>
+      <binding
+            class="dataflow.diagram.edit.parts.BoxNameEditPart"
+            type="de.cau.cs.kieler.layout.info.types.label">
+      </binding>
+      <binding
+            class="dataflow.diagram.edit.parts.BoxName2EditPart"
+            type="de.cau.cs.kieler.layout.info.types.label">
+      </binding>
+      <binding
+            class="dataflow.diagram.edit.parts.InputPortNameEditPart"
+            type="de.cau.cs.kieler.layout.info.types.label">
+      </binding>
+      <binding
+            class="dataflow.diagram.edit.parts.OutputPortNameEditPart"
+            type="de.cau.cs.kieler.layout.info.types.label">
+      </binding>
    </extension>
 </plugin>

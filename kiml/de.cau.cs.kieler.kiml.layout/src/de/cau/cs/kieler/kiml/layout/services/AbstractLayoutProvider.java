@@ -20,7 +20,6 @@ import de.cau.cs.kieler.core.KielerException;
 import de.cau.cs.kieler.core.alg.IKielerProgressMonitor;
 import de.cau.cs.kieler.core.kgraph.KNode;
 import de.cau.cs.kieler.core.kgraph.KOption;
-import de.cau.cs.kieler.kiml.layout.options.LayoutType;
 
 /**
  * A layout provider executes a layout algorithm to layout the child elements of
@@ -28,7 +27,7 @@ import de.cau.cs.kieler.kiml.layout.options.LayoutType;
  * <p>
  * When used in Eclipse, concrete layout providers must register through the
  * {@code kimlLayoutProvider} extension point. All layout providers
- * published to Eclipse this way are collected with the {@link KimlLayoutServices}
+ * published to Eclipse this way are collected with the {@link LayoutServices}
  * singleton.
  * 
  * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
@@ -36,19 +35,6 @@ import de.cau.cs.kieler.kiml.layout.options.LayoutType;
  */
 public abstract class AbstractLayoutProvider {
 
-    /** identifier of the Eclipse extension point for layout providers */
-	public static final String EXTENSION_POINT_ID = "de.cau.cs.kieler.kiml.layout.kimlLayoutProvider";
-	/** name of the 'id' attribute in the extension point */
-	public static final String ATTRIBUTE_ID = "id";
-	/** name of the 'class' attribute in the extension point */
-	public static final String ATTRIBUTE_CLASS = "class";
-	/** name of the 'name' attribute in the extension point */
-	public static final String ATTRIBUTE_NAME = "name";
-	/** name of the 'icon' attribute in the extension point */
-	public static final String ATTRIBUTE_ICON = "icon";
-	
-	/** indicates whether this layout provider is enabled in the UI */
-	private boolean enabled = true;
 	/** list of layout options to use as default */
 	private List<KOption> defaultOptions = new LinkedList<KOption>();
 
@@ -64,47 +50,6 @@ public abstract class AbstractLayoutProvider {
 	public abstract void doLayout(KNode layoutNode,
 			IKielerProgressMonitor progressMonitor) throws KielerException;
 
-	/**
-	 * Returns the name of this layout provider.
-	 * 
-	 * @return the layouter name
-	 */
-	public abstract String getName();
-	
-	/**
-	 * Returns the type of this layout provider.
-	 * 
-	 * @return the layout type
-	 */
-	public abstract LayoutType getType();
-	
-	/**
-	 * Returns the collection name of this layout provider.
-	 * 
-	 * @return the collection name
-	 */
-	public abstract String getCollection();
-
-	/**
-	 * Sets the desired state of the layout provider. Layout Providers can for
-	 * example be turned of in the preference page of each layouter.
-	 * 
-	 * @param state
-	 *            boolean indicating the state to be set
-	 */
-	public final void setEnabled(boolean state) {
-		enabled = state;
-	}
-
-	/**
-	 * Queries the actual enable state of the layout provider.
-	 * 
-	 * @return true if the layouter is enabled
-	 */
-	public final boolean isEnabled() {
-		return enabled;
-	}
-	
 	/**
 	 * Returns the list of default options. This list may be
 	 * arbitrarily modified to set or remove options for the
