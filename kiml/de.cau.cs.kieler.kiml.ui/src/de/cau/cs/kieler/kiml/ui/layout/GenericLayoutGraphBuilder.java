@@ -13,31 +13,37 @@
  */
 package de.cau.cs.kieler.kiml.ui.layout;
 
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
 
 import org.eclipse.draw2d.ConnectionLocator;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.Label;
-import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.gef.ConnectionEditPart;
+import org.eclipse.gef.EditPart;
 import org.eclipse.gef.GraphicalEditPart;
 import org.eclipse.gef.NodeEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.CompartmentEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.IBorderItemEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.LabelEditPart;
-import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeCompartmentEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
 
 import de.cau.cs.kieler.core.kgraph.KEdge;
 import de.cau.cs.kieler.core.kgraph.KLabel;
 import de.cau.cs.kieler.core.kgraph.KNode;
-import de.cau.cs.kieler.kiml.layout.klayoutdata.KInsets;
+import de.cau.cs.kieler.core.kgraph.KPort;
+import de.cau.cs.kieler.kiml.layout.klayoutdata.KEdgeLayout;
+import de.cau.cs.kieler.kiml.layout.klayoutdata.KPoint;
 import de.cau.cs.kieler.kiml.layout.klayoutdata.KShapeLayout;
 import de.cau.cs.kieler.kiml.layout.options.EdgeLabelPlacement;
+import de.cau.cs.kieler.kiml.layout.options.LayoutDirection;
 import de.cau.cs.kieler.kiml.layout.options.LayoutOptions;
+import de.cau.cs.kieler.kiml.layout.options.PortConstraints;
+import de.cau.cs.kieler.kiml.layout.services.LayoutServices;
 import de.cau.cs.kieler.kiml.layout.util.KimlLayoutUtil;
 
 /**
@@ -51,6 +57,8 @@ public class GenericLayoutGraphBuilder extends
 
     /** map of edit parts to nodes in the layout graph */
 	private Map<GraphicalEditPart, KNode> graphicalEditPart2LayoutNode = new HashMap<GraphicalEditPart, KNode>();
+	private Map<GraphicalEditPart, KPort> editPart2PortMap = new HashMap<GraphicalEditPart, KPort>();
+    private LinkedList<ConnectionEditPart> connections = new LinkedList<ConnectionEditPart>();
 
 	/*
 	 * (non-Javadoc)
@@ -72,14 +80,6 @@ public class GenericLayoutGraphBuilder extends
 			shapeLayout.setHeight(rootBounds.height);
 			shapeLayout.setWidth(rootBounds.width);
 
-			// set layout hint if root is ShapeNodeEditPart
-			if (rootEditPart instanceof ShapeNodeEditPart) {
-			    LayoutOptions.setLayoutHint(shapeLayout,
-			            GmfLayoutHints.getStringValue(
-			            (ShapeNodeEditPart)rootEditPart,
-			            LayoutOptions.LAYOUT_HINT));
-			}
-
 			// map the root EditPart to the top KNode
 			graphicalEditPart2LayoutNode.put(rootEditPart, layoutGraph);
 			layoutNode2EditPart.put(layoutGraph, rootEditPart);
@@ -95,16 +95,18 @@ public class GenericLayoutGraphBuilder extends
 			/*
 			 * set information about LayouterName and LayoutType
 			 */
-			KShapeLayout shapeLayout = KimlLayoutUtil.getShapeLayout(layoutGraph);
-			LayoutOptions.setLayoutHint(shapeLayout, GmfLayoutHints.getStringValue(
-			        (org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart)layoutRootPart,
-			        LayoutOptions.LAYOUT_HINT));
 			layoutGraph.getLabel().setText(((DiagramEditPart)layoutRootPart)
 			        .getDiagramView().getName());
 			graphicalEditPart2LayoutNode.put(layoutRootPart, layoutGraph);
 			layoutNode2EditPart.put(layoutGraph, layoutRootPart);
 			buildLayoutGraphRecursively(layoutRootPart, layoutGraph);
 		}
+		
+	    /*
+         * Finally process all the connections, as Emma has build all the needed
+         * KNodes which act as source and target.
+         */
+        processConnections();
 	}
 
 	/**
@@ -114,72 +116,72 @@ public class GenericLayoutGraphBuilder extends
 	 *            The GraphicalEditPart which children will be processed
 	 * @param currentLayoutNode
 	 *            The corresponding KNode
+	 * @return true if the constructed node has child nodes
 	 */
-	private void buildLayoutGraphRecursively(GraphicalEditPart currentEditPart,
+	private boolean buildLayoutGraphRecursively(GraphicalEditPart currentEditPart,
 			KNode currentLayoutNode) {
-
-		/*
-		 * List to save the information about the connection. Connection can
-		 * only be added, when source AND target state is in the KLayoutGraph,
-		 * so process the connection when all sub states of a region have been
-		 * added.
-		 */
-		ArrayList<ConnectionEditPart> connections = new ArrayList<ConnectionEditPart>();
-
+	    boolean hasChildNodes = false;
 		/* iterate through the children of the element */
 		for (Object obj : currentEditPart.getChildren()) {
 
-			/* if true, Emma has a real EditPart with contents. */
-			if (obj instanceof NodeEditPart) {
-
-				NodeEditPart childNodeEditPart = (NodeEditPart) obj;
-				KNode childLayoutNode = KimlLayoutUtil
-						.createInitializedNode();
-				Rectangle childBounds = childNodeEditPart.getFigure()
-						.getBounds();
-				KShapeLayout nodeLayout = KimlLayoutUtil.getShapeLayout(childLayoutNode);
-
-				/* store all the connections to process them later */
-				for (Object conn : childNodeEditPart.getTargetConnections()) {
-					if (conn instanceof ConnectionEditPart) {
-						connections.add((ConnectionEditPart) conn);
-					}
-				}
-
-				/* set location */
-				nodeLayout.setXpos(childBounds.x);
-				nodeLayout.setYpos(childBounds.y);
-
-				/* set size */
-				nodeLayout.setHeight(childBounds.height);
-				nodeLayout.setWidth(childBounds.width);
-
-				/*
-				 * set information about LayouterName and LayoutType
-				 */
-				LayoutOptions.setLayoutHint(nodeLayout, GmfLayoutHints
-				        .getStringValue((ShapeNodeEditPart)childNodeEditPart,
-				        LayoutOptions.LAYOUT_HINT));
-
-				/* add node */
-				currentLayoutNode.getChildren().add(childLayoutNode);
-
-				/* keep track of mapping between elements */
-				graphicalEditPart2LayoutNode.put(childNodeEditPart,
-						childLayoutNode);
-				layoutNode2EditPart.put(childLayoutNode, childNodeEditPart);
-
-				/* and process the child as new current */
-				buildLayoutGraphRecursively(childNodeEditPart, childLayoutNode);
-			}
-
+		    // process ports
+		    if (obj instanceof IBorderItemEditPart) {
+		        IBorderItemEditPart borderItem = (IBorderItemEditPart)obj;
+                KPort port = KimlLayoutUtil.createInitializedPort();
+                layoutPort2EditPart.put(port, borderItem);
+                editPart2PortMap.put(borderItem, port);
+                // FIXME how do we determine the port type?!?
+                //port.setType(borderItem instanceof InputPortEditPart
+                //        ? KPortType.INPUT : KPortType.OUTPUT);
+                port.setNode(currentLayoutNode);
+                // set the port's layout, relative to the node position
+                KShapeLayout portLayout = KimlLayoutUtil.getShapeLayout(port);
+                Rectangle portBounds = borderItem.getFigure().getBounds();
+                KShapeLayout nodeLayout = KimlLayoutUtil.getShapeLayout(currentLayoutNode);
+                portLayout.setXpos(portBounds.x - nodeLayout.getXpos());
+                portLayout.setYpos(portBounds.y - nodeLayout.getYpos());
+                portLayout.setWidth(portBounds.width);
+                portLayout.setHeight(portBounds.height);
+                
+                // store all the connections to process them later
+                for (Object connectionObj : borderItem.getTargetConnections()) {
+                    if (connectionObj instanceof ConnectionEditPart) {
+                        connections.add((ConnectionEditPart)connectionObj);
+                    }
+                }
+                
+                // set the port label
+                for (Object portChildObj : borderItem.getChildren()) {
+                    if (portChildObj instanceof GraphicalEditPart) {
+                        IFigure labelFigure = ((GraphicalEditPart)portChildObj).getFigure();
+                        String text = null;
+                        if (labelFigure instanceof WrappingLabel) {
+                            text = ((WrappingLabel) labelFigure).getText();
+                        } else if (labelFigure instanceof Label) {
+                            text = ((Label) labelFigure).getText();
+                        }
+                        if (text != null) {
+                            KLabel portLabel = port.getLabel();
+                            portLabel.setText(text);
+                            // set the port label's layout
+                            KShapeLayout labelLayout = KimlLayoutUtil.getShapeLayout(portLabel);
+                            float xoffset = nodeLayout.getXpos() + portLayout.getXpos();
+                            float yoffset = nodeLayout.getYpos() + portLayout.getYpos();
+                            labelLayout.setXpos(labelFigure.getBounds().x - xoffset);
+                            labelLayout.setYpos(labelFigure.getBounds().y - yoffset);
+                            labelLayout.setWidth(labelFigure.getPreferredSize().width);
+                            labelLayout.setHeight(labelFigure.getPreferredSize().height);
+                        }
+                    }
+                }
+		    }
 			/*
 			 * If it is ShapeCompartmentEditPart, Emma needs the children of it
 			 * to add to new KNodes. She handles possible insets, which
 			 * may result from labels and other stuff.
 			 */
-			else if (obj instanceof ShapeCompartmentEditPart
-					&& ((ShapeCompartmentEditPart) obj).getChildren().size() != 0) {
+			else if (obj instanceof CompartmentEditPart
+					&& ((CompartmentEditPart) obj).getChildren().size() != 0) {
 
                 // FIXME insets must be set dynamically
 			    //KShapeLayout parentLayout = KimlLayoutUtil.getShapeLayout(
@@ -191,12 +193,48 @@ public class GenericLayoutGraphBuilder extends
 				//parentInsets.setBottom(prefInsetsBottom);
 				//parentInsets.setRight(prefInsetsRight);
 
-				buildLayoutGraphRecursively((GraphicalEditPart) obj,
+				hasChildNodes |= buildLayoutGraphRecursively((GraphicalEditPart) obj,
 						currentLayoutNode);
-
 			}
+            /* if true, Emma has a real EditPart with contents. */
+            else if (obj instanceof NodeEditPart) {
+
+                NodeEditPart childNodeEditPart = (NodeEditPart) obj;
+                KNode childLayoutNode = KimlLayoutUtil
+                        .createInitializedNode();
+                Rectangle childBounds = childNodeEditPart.getFigure()
+                        .getBounds();
+                KShapeLayout nodeLayout = KimlLayoutUtil.getShapeLayout(childLayoutNode);
+
+                /* store all the connections to process them later */
+                for (Object conn : childNodeEditPart.getTargetConnections()) {
+                    if (conn instanceof ConnectionEditPart) {
+                        connections.add((ConnectionEditPart) conn);
+                    }
+                }
+
+                /* set location */
+                nodeLayout.setXpos(childBounds.x);
+                nodeLayout.setYpos(childBounds.y);
+
+                /* set size */
+                nodeLayout.setHeight(childBounds.height);
+                nodeLayout.setWidth(childBounds.width);
+
+                /* add node */
+                currentLayoutNode.getChildren().add(childLayoutNode);
+
+                /* keep track of mapping between elements */
+                graphicalEditPart2LayoutNode.put(childNodeEditPart,
+                        childLayoutNode);
+                layoutNode2EditPart.put(childLayoutNode, childNodeEditPart);
+
+                hasChildNodes = true;
+                /* and process the child as new current */
+                buildLayoutGraphRecursively(childNodeEditPart, childLayoutNode);
+            }
 			/* label handling */
-			if (obj instanceof GraphicalEditPart) {
+            else if (obj instanceof GraphicalEditPart) {
 
 				GraphicalEditPart graphicalEditPart = (GraphicalEditPart) obj;
 				IFigure labelFigure = graphicalEditPart.getFigure();
@@ -221,11 +259,29 @@ public class GenericLayoutGraphBuilder extends
 				}
 			}
 		}
-		/*
-		 * Finally process all the connections, as Emma has build all the needed
-		 * KNodes which act as source and target.
-		 */
-		processConnections(connections);
+		
+		// set layout options for the parent node
+        // TODO make this customizable
+        KShapeLayout nodeLayout = KimlLayoutUtil.getShapeLayout(currentLayoutNode);
+		if (hasChildNodes) {
+		    GraphicalEditPart parentEditPart = layoutNode2EditPart.get(currentLayoutNode);
+		    if (parentEditPart instanceof ShapeNodeEditPart) {
+		        String layoutHint = GmfLayoutHints.getStringValue(
+                        (ShapeNodeEditPart)layoutNode2EditPart.get(currentLayoutNode),
+                        LayoutOptions.LAYOUT_HINT);
+		        if (layoutHint == null)
+		            layoutHint = LayoutServices.INSTANCE.getDiagramTypeFor(currentEditPart.getClass());
+		        if (layoutHint != null)
+		            LayoutOptions.setLayoutHint(nodeLayout, layoutHint);
+		    }
+            LayoutOptions.setLayoutDirection(nodeLayout, LayoutDirection.HORIZONTAL);
+            LayoutOptions.setPortConstraints(nodeLayout, PortConstraints.FREE_PORTS);
+		}
+		else {
+		    LayoutOptions.setPortConstraints(nodeLayout, PortConstraints.FIXED_POS);
+		    LayoutOptions.setFixedSize(nodeLayout, true);
+		}
+		return hasChildNodes;
 	}
 
 	/**
@@ -236,7 +292,7 @@ public class GenericLayoutGraphBuilder extends
 	 * @param connections
 	 *            The connections that were build for a certain Node before.
 	 */
-	private void processConnections(ArrayList<ConnectionEditPart> connections) {
+	private void processConnections() {
 
 		/* iterate through all the connections of an compartment element */
 		for (ConnectionEditPart connection : connections) {
@@ -247,11 +303,64 @@ public class GenericLayoutGraphBuilder extends
 			 * EOppositeReference of EMF.
 			 */
 			KEdge edge = KimlLayoutUtil.createInitializedEdge();
-			edge.setSource(graphicalEditPart2LayoutNode.get(connection
-					.getSource()));
-			edge.setTarget(graphicalEditPart2LayoutNode.get(connection
-					.getTarget()));
+            KNode sourceNode, targetNode;
+            KPort sourcePort = null, targetPort = null;
+			
+            EditPart sourceObj = connection.getSource();
+			if (sourceObj instanceof IBorderItemEditPart) {
+			    sourcePort = editPart2PortMap.get(sourceObj);
+			    if (sourcePort == null) continue;
+			    edge.setSourcePort(sourcePort);
+			    sourcePort.getEdges().add(edge);
+			    sourceNode = sourcePort.getNode();
+			}
+			else
+			    sourceNode = graphicalEditPart2LayoutNode.get(sourceObj);
+			
+			EditPart targetObj = connection.getTarget();
+			if (targetObj instanceof IBorderItemEditPart) {
+			    targetPort = editPart2PortMap.get(targetObj);
+			    if (targetPort == null) continue;
+			    edge.setTargetPort(targetPort);
+			    targetPort.getEdges().add(edge);
+			    targetNode = targetPort.getNode();
+			}
+			else
+			    targetNode = graphicalEditPart2LayoutNode.get(targetObj);
+			
+            if (sourceNode == null || targetNode == null) continue;
+			
+			edge.setSource(sourceNode);
+			edge.setTarget(targetNode);
 			layoutEdge2EditPart.put(edge, connection);
+			
+		     KEdgeLayout edgeLayout = KimlLayoutUtil.getEdgeLayout(edge);
+		     KPoint sourcePoint = edgeLayout.getSourcePoint();
+		     KShapeLayout sourceLayout = KimlLayoutUtil.getShapeLayout(sourceNode);
+		     if (sourcePort != null) {
+    		     KShapeLayout sourcePortLayout = KimlLayoutUtil.getShapeLayout(sourcePort);
+    		     sourcePoint.setX(sourcePortLayout.getXpos()
+    		             + sourcePortLayout.getWidth() / 2 + sourceLayout.getXpos());
+    		     sourcePoint.setY(sourcePortLayout.getYpos()
+    		             + sourcePortLayout.getHeight() / 2 + sourceLayout.getYpos());
+		     }
+		     else {
+		         sourcePoint.setX(sourceLayout.getXpos() + sourceLayout.getWidth() / 2);
+		         sourcePoint.setY(sourceLayout.getYpos() + sourceLayout.getHeight() / 2);
+		     }
+		     KPoint targetPoint = edgeLayout.getTargetPoint();
+		     KShapeLayout targetLayout = KimlLayoutUtil.getShapeLayout(targetNode);
+		     if (targetPort != null) {
+    		     KShapeLayout targetPortLayout = KimlLayoutUtil.getShapeLayout(targetPort);
+    		     targetPoint.setX(targetPortLayout.getXpos()
+    		             + targetPortLayout.getWidth() / 2 + targetLayout.getXpos());
+    		     targetPoint.setY(targetPortLayout.getYpos()
+    		             + targetPortLayout.getHeight() / 2 + targetLayout.getYpos());
+		     }
+		     else {
+		         targetPoint.setX(targetLayout.getXpos() + targetLayout.getWidth() / 2);
+                 targetPoint.setY(targetLayout.getYpos() + targetLayout.getHeight() / 2);
+		     }
 
 			/*
 			 * Process the label, at the moment 3 are hard coded.
@@ -267,8 +376,7 @@ public class GenericLayoutGraphBuilder extends
 			for (Object obj : connection.getChildren()) {
 				if (obj instanceof LabelEditPart) {
 					LabelEditPart labelEditPart = (LabelEditPart) obj;
-					Dimension labelSize = labelEditPart.getFigure()
-									.getBounds().getSize();
+					Rectangle labelBounds = labelEditPart.getFigure().getBounds();
 
 					// head label
 					if (labelEditPart.getKeyPoint() == ConnectionLocator.SOURCE) {
@@ -284,8 +392,10 @@ public class GenericLayoutGraphBuilder extends
 							KShapeLayout labelLayout = KimlLayoutUtil.getShapeLayout(hLabel);
 							LayoutOptions.setEdgeLabelPlacement(labelLayout,
 									EdgeLabelPlacement.HEAD);
-							labelLayout.setWidth(labelSize.width);
-							labelLayout.setHeight(labelSize.height);
+							labelLayout.setXpos(labelBounds.x);
+							labelLayout.setYpos(labelBounds.y);
+							labelLayout.setWidth(labelBounds.width);
+							labelLayout.setHeight(labelBounds.height);
 							hLabel.setText(headLabel);
 							edge.getLabels().add(hLabel);
 							edgeLabel2EditPart.put(hLabel, labelEditPart);
@@ -306,8 +416,10 @@ public class GenericLayoutGraphBuilder extends
 							KShapeLayout labelLayout = KimlLayoutUtil.getShapeLayout(mLabel);
                             LayoutOptions.setEdgeLabelPlacement(labelLayout,
 									EdgeLabelPlacement.CENTER);
-                            labelLayout.setWidth(labelSize.width);
-                            labelLayout.setHeight(labelSize.height);
+                            labelLayout.setXpos(labelBounds.x);
+                            labelLayout.setYpos(labelBounds.y);
+                            labelLayout.setWidth(labelBounds.width);
+                            labelLayout.setHeight(labelBounds.height);
                             mLabel.setText(midLabel);
 							edge.getLabels().add(mLabel);
 							edgeLabel2EditPart.put(mLabel, labelEditPart);
@@ -328,8 +440,10 @@ public class GenericLayoutGraphBuilder extends
 							KShapeLayout labelLayout = KimlLayoutUtil.getShapeLayout(tLabel);
                             LayoutOptions.setEdgeLabelPlacement(labelLayout,
 									EdgeLabelPlacement.TAIL);
-                            labelLayout.setWidth(labelSize.width);
-                            labelLayout.setHeight(labelSize.height);
+                            labelLayout.setXpos(labelBounds.x);
+                            labelLayout.setYpos(labelBounds.y);
+                            labelLayout.setWidth(labelBounds.width);
+                            labelLayout.setHeight(labelBounds.height);
                             tLabel.setText(tailLabel);
 							edge.getLabels().add(tLabel);
 							edgeLabel2EditPart.put(tLabel, labelEditPart);

@@ -32,6 +32,9 @@ import de.cau.cs.kieler.kiml.ui.KimlUiPlugin;
  */
 public class LayoutServiceBuilder {
 
+    /** default name for layout providers for which no name is given */
+    public static final String DEFAULT_PROVIDER_NAME = "<Unnamed Layouter>";
+    
 	/**
 	 * Build the layout services.
 	 */
@@ -61,24 +64,32 @@ public class LayoutServiceBuilder {
     				    LayoutProviderData providerData = new LayoutProviderData();
     				    providerData.instance = layoutProvider;
     				    providerData.id = element.getAttribute(LayoutServices.ATTRIBUTE_ID);
+    				    if (providerData.id == null) continue;
     				    providerData.name = element.getAttribute(LayoutServices.ATTRIBUTE_NAME);
+    				    if (providerData.name == null)
+    				        providerData.name = DEFAULT_PROVIDER_NAME;
     				    providerData.type = element.getAttribute(LayoutServices.ATTRIBUTE_TYPE);
+    				    if (providerData.type == null)
+    				        providerData.type = "";
     				    providerData.collection = element.getAttribute(LayoutServices.ATTRIBUTE_COLLECTION);
+    				    if (providerData.collection == null)
+    				        providerData.collection = "";
     				    for (IConfigurationElement child : element.getChildren()) {
     				        if (LayoutServices.ELEMENT_KNOWN_OPTION.equals(child.getName())) {
     				            String option = child.getAttribute(LayoutServices.ATTRIBUTE_OPTION);
-    				            if (option != null)
+    				            if (option != null && option.length() > 0)
     				                providerData.knownOptions.add(option);
     				        }
     				        else if (LayoutServices.ELEMENT_SUPPORTED_DIAGRAM.equals(child.getName())) {
     				            String type = child.getAttribute(LayoutServices.ATTRIBUTE_TYPE);
-    				            if (type != null)
+    				            if (type != null && type.length() > 0)
     				                providerData.supportedDiagrams.add(type);
     				        }
     				    }
     					LayoutServices.INSTANCE.addLayoutProvider(providerData);
     				}
-    			} catch (CoreException exception) {
+    			}
+	            catch (CoreException exception) {
     				StatusManager.getManager().handle(exception, KimlUiPlugin.PLUGIN_ID);
     			}
 		    }
@@ -112,7 +123,8 @@ public class LayoutServiceBuilder {
     				if (layoutListener != null) {
     					LayoutServices.INSTANCE.addLayoutListener(layoutListener);
     				}
-    			} catch (CoreException exception) {
+    			}
+    			catch (CoreException exception) {
     				StatusManager.getManager().handle(exception, KimlUiPlugin.PLUGIN_ID);
     			}
 		    }
@@ -127,11 +139,20 @@ public class LayoutServiceBuilder {
                 .getConfigurationElementsFor(LayoutServices.EXTP_ID_LAYOUT_INFO);
 
         for (IConfigurationElement element : extensions) {
-            if (LayoutServices.ELEMENT_ELEMENT_TYPE.equals(element.getName())) {
-                // TODO element types are not supported yet
+            if (LayoutServices.ELEMENT_DIAGRAM_TYPE.equals(element.getName())) {
+                // TODO diagram types are not supported yet
             }
             else if (LayoutServices.ELEMENT_BINDING.equals(element.getName())) {
-                // TODO bindings are not supported yet
+//                try {
+//                    Object editPart = element.createExecutableExtension(LayoutServices.ATTRIBUTE_CLASS);
+//                    if (editPart != null) {
+//                        LayoutServices.INSTANCE.addEditPartBinding(editPart.getClass(),
+//                                element.getAttribute(LayoutServices.ATTRIBUTE_TYPE));
+//                    }
+//                }
+//                catch (CoreException exception) {
+//                    StatusManager.getManager().handle(exception, KimlUiPlugin.PLUGIN_ID);
+//                }
             }
         }
     }

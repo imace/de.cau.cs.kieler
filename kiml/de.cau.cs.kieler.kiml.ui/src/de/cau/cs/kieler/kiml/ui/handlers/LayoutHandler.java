@@ -46,7 +46,8 @@ public class LayoutHandler extends AbstractHandler implements IHandler {
 		ISelection selection = null;
 		
 		// check parameter for layout scope, default is diagram scope
-		if (event.getParameter(PARAM_LAYOUT_SCOPE).equals(VAL_SELECTION)) {
+		String layoutScope = event.getParameter(PARAM_LAYOUT_SCOPE);
+		if (layoutScope != null && layoutScope.equals(VAL_SELECTION)) {
 		     selection = HandlerUtil.getActiveMenuSelection(event);
 		        if (selection == null)
 		            selection = HandlerUtil.getCurrentSelection(event);

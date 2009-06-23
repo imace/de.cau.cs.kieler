@@ -75,38 +75,26 @@
    </extension>
    <extension
          point="de.cau.cs.kieler.kiml.layout.layoutInfo">
-      <elementType
-            id="de.cau.cs.kieler.layout.info.types.node"
-            name="Node">
-      </elementType>
-      <elementType
-            id="de.cau.cs.kieler.layout.info.types.port"
-            name="Port">
-      </elementType>
-      <elementType
-            id="de.cau.cs.kieler.layout.info.types.label"
-            name="Label">
-      </elementType>
-      <elementType
+      <diagramType
             id="de.cau.cs.kieler.layout.info.types.stateMachine"
             name="State Machine">
-      </elementType>
-      <elementType
+      </diagramType>
+      <diagramType
             id="de.cau.cs.kieler.layout.info.types.dataFlow"
             name="Data Flow Diagram">
-      </elementType>
-      <elementType
+      </diagramType>
+      <diagramType
             id="de.cau.cs.kieler.layout.info.types.classDiagram"
             name="Class Diagram">
-      </elementType>
-      <elementType
+      </diagramType>
+      <diagramType
             id="de.cau.cs.kieler.layout.info.types.boxes"
             name="Unconnected Boxes">
-      </elementType>
-      <elementType
+      </diagramType>
+      <diagramType
             id="de.cau.cs.kieler.layout.info.types.regions"
             name="Flexible Regions">
-      </elementType>
+      </diagramType>
    </extension>
 
 </plugin>

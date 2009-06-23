@@ -14,7 +14,7 @@
 package de.cau.cs.kieler.kiml.ui.layout;
 
 import org.eclipse.emf.transaction.RecordingCommand;
-import org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.notation.DoubleValueStyle;
 import org.eclipse.gmf.runtime.notation.IntValueStyle;
 import org.eclipse.gmf.runtime.notation.NamedStyle;
@@ -37,9 +37,9 @@ public class GmfLayoutHints {
 	 * @param editPart edit part
 	 * @param id identifier of the layout option
 	 * @return a string value for the corresponding layout option, or
-	 *     the empty string if there is no such value
+	 *     {@code null} if there is no such value
 	 */
-	public static String getStringValue(GraphicalEditPart editPart,
+	public static String getStringValue(IGraphicalEditPart editPart,
 	        String id) {
 		NamedStyle namedStyle = (NamedStyle) (editPart
 				.getNotationView().getNamedStyle(NotationPackage.eINSTANCE
@@ -47,7 +47,7 @@ public class GmfLayoutHints {
 
 		if (namedStyle instanceof StringValueStyle)
 			return ((StringValueStyle)namedStyle).getStringValue();
-		else return "";
+		else return null;
 	}
 
 	/**
@@ -57,17 +57,17 @@ public class GmfLayoutHints {
 	 * @param editPart edit part
 	 * @param id identifier of the layout option
 	 * @return an integer value for the corresponding layout option,
-	 *     or 0 if there is no such value
+	 *     or {@code null} if there is no such value
 	 */
-	public static int getIntValue(GraphicalEditPart editPart,
+	public static Integer getIntValue(IGraphicalEditPart editPart,
 	        String id) {
         NamedStyle namedStyle = (NamedStyle) (editPart
                 .getNotationView().getNamedStyle(NotationPackage.eINSTANCE
                 .getStringValueStyle(), id));
 
         if (namedStyle instanceof IntValueStyle)
-            return ((IntValueStyle)namedStyle).getIntValue();
-        else return 0;
+            return Integer.valueOf(((IntValueStyle)namedStyle).getIntValue());
+        else return null;
 	}
 	
 	/**
@@ -77,17 +77,17 @@ public class GmfLayoutHints {
 	 * @param editPart edit part
 	 * @param id identifier of the layout option
 	 * @return a double value for the corresponding layout option,
-	 *     or 0.0 if there is no such value
+	 *     or {@code null} if there is no such value
 	 */
-	public static double getDoubleValue(GraphicalEditPart editPart,
+	public static Double getDoubleValue(IGraphicalEditPart editPart,
             String id) {
         NamedStyle namedStyle = (NamedStyle) (editPart
                 .getNotationView().getNamedStyle(NotationPackage.eINSTANCE
                 .getStringValueStyle(), id));
 
         if (namedStyle instanceof DoubleValueStyle)
-            return ((DoubleValueStyle)namedStyle).getDoubleValue();
-        else return 0.0;
+            return Double.valueOf(((DoubleValueStyle)namedStyle).getDoubleValue());
+        else return null;
     }
 
 	/**
@@ -98,7 +98,7 @@ public class GmfLayoutHints {
 	 * @param id identifier of the layout option
 	 * @param value the new value
 	 */
-	public static void setValue(final GraphicalEditPart editPart,
+	public static void setValue(final IGraphicalEditPart editPart,
 	        final String id, final String value) {
 		final NamedStyle namedStyle = (NamedStyle) (editPart
 				.getNotationView().getNamedStyle(NotationPackage.eINSTANCE
@@ -141,7 +141,7 @@ public class GmfLayoutHints {
 	 * @param id identifier of the layout option
 	 * @param value the new value
 	 */
-	public static void setValue(final GraphicalEditPart editPart,
+	public static void setValue(final IGraphicalEditPart editPart,
             final String id, final int value) {
         final NamedStyle namedStyle = (NamedStyle) (editPart
                 .getNotationView().getNamedStyle(NotationPackage.eINSTANCE
@@ -184,7 +184,7 @@ public class GmfLayoutHints {
      * @param id identifier for the layout option
      * @param value the new value
      */
-    public static void setValue(final GraphicalEditPart editPart,
+    public static void setValue(final IGraphicalEditPart editPart,
             final String id, final double value) {
         final NamedStyle namedStyle = (NamedStyle) (editPart
                 .getNotationView().getNamedStyle(NotationPackage.eINSTANCE

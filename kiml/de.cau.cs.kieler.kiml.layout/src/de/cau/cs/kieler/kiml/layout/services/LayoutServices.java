@@ -15,6 +15,7 @@ package de.cau.cs.kieler.kiml.layout.services;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -39,37 +40,37 @@ public class LayoutServices {
     public static final String EXTP_ID_LAYOUT_LISTENERS = "de.cau.cs.kieler.kiml.layout.layoutListeners";
     /** identifier of the extension point for layout info */
     public static final String EXTP_ID_LAYOUT_INFO = "de.cau.cs.kieler.kiml.layout.layoutInfo";
-    /** name of the 'layoutProvider' element in the extension point */
+    /** name of the 'layoutProvider' element in the 'layout providers' extension point */
     public static final String ELEMENT_LAYOUT_PROVIDER = "layoutProvider";
-    /** name of the 'layoutType' element in the extension point */
+    /** name of the 'layoutType' element in the 'layout providers' extension point */
     public static final String ELEMENT_LAYOUT_TYPE = "layoutType";
-    /** name of the 'collection' element in the extension point */
+    /** name of the 'collection' element in the 'layout providers' extension point */
     public static final String ELEMENT_COLLECTION = "collection";
-    /** name of the 'layoutOption' element in the extension point */
+    /** name of the 'layoutOption' element in the 'layout providers' extension point */
     public static final String ELEMENT_LAYOUT_OPTION = "layoutOption";
-    /** name of the 'knownOption' element in the extension point */
+    /** name of the 'knownOption' element in the 'layout providers' extension point */
     public static final String ELEMENT_KNOWN_OPTION = "knownOption";
-    /** name of the 'supportedDiagram' element in the extension point */
+    /** name of the 'supportedDiagram' element in the 'layout providers' extension point */
     public static final String ELEMENT_SUPPORTED_DIAGRAM = "supportedDiagram";
-    /** name of the 'elementType' element in the extension point */
-    public static final String ELEMENT_ELEMENT_TYPE = "elementType";
-    /** name of the 'binding' element in the extension point */
+    /** name of the 'diagramType' element in the 'layout info' extension point */
+    public static final String ELEMENT_DIAGRAM_TYPE = "diagramType";
+    /** name of the 'binding' element in the 'layout info' extension point */
     public static final String ELEMENT_BINDING = "binding";
-    /** name of the 'layoutListener' element in the extension point */
+    /** name of the 'layoutListener' element in the 'layout listeners' extension point */
     public static final String ELEMENT_LAYOUT_LISTENER = "layoutListener";
-    /** name of the 'id' attribute in the extension point */
+    /** name of the 'id' attribute in the extension points */
     public static final String ATTRIBUTE_ID = "id";
-    /** name of the 'class' attribute in the extension point */
+    /** name of the 'class' attribute in the extension points */
     public static final String ATTRIBUTE_CLASS = "class";
-    /** name of the 'name' attribute in the extension point */
+    /** name of the 'name' attribute in the extension points */
     public static final String ATTRIBUTE_NAME = "name";
-    /** name of the 'type' attribute in the extension point */
+    /** name of the 'type' attribute in the extension points */
     public static final String ATTRIBUTE_TYPE = "type";
-    /** name of the 'collection' attribute in the extension point */
+    /** name of the 'collection' attribute in the extension points */
     public static final String ATTRIBUTE_COLLECTION = "collection";
-    /** name of the 'description' attribute in the extension point */
+    /** name of the 'description' attribute in the extension points */
     public static final String ATTRIBUTE_DESCRIPTION = "description";
-    /** name of the 'option' attribute in the extension point */
+    /** name of the 'option' attribute in the extension points */
     public static final String ATTRIBUTE_OPTION = "option";
 
     
@@ -82,8 +83,11 @@ public class LayoutServices {
 	private Map<String, LayoutProviderData> layoutProviderMap
 			= new LinkedHashMap<String, LayoutProviderData>();
 	/** mapping of layout type identifiers to their names */
-	private Map<String, String> layoutTypeMap
-	        = new HashMap<String, String>();
+	private Map<String, String> layoutTypeMap = new HashMap<String, String>();
+	///** mapping of diagram type identifiers to their names */
+	//private Map<String, String> diagramTypeMap = new HashMap<String, String>();
+	/** mapping of graphical edit parts to associated diagram types */
+	private Map<Class<?>, String> editPartBindingMap = new HashMap<Class<?>, String>();
 
 	/**
 	 * Adds the given layout listener to the list of registered listeners.
@@ -187,13 +191,19 @@ public class LayoutServices {
 	    if (providerData != null)
 	        return providerData.instance;
 	    
-	    // try to get a provider of specific type
-	    for (LayoutProviderData data : layoutProviderMap.values()) {
-	        if (data.type.equals(layoutHint))
-	            return data.instance;
+	    // look for an appropriate provider
+	    Iterator<LayoutProviderData> providerIter = layoutProviderMap.values().iterator();
+	    while (providerIter.hasNext()) {
+	        providerData = providerIter.next();
+	        if (providerData.type.equals(layoutHint)
+	                || providerData.supportedDiagrams.contains(layoutHint))
+	            return providerData.instance;
 	    }
 		
-		return layoutProviderMap.values().iterator().next().instance;
+	    // no appropriate provider was found: return the last one
+	    if (providerData != null)
+	        return providerData.instance;
+	    else return null;
 	}
 	
 	/**
@@ -211,10 +221,34 @@ public class LayoutServices {
 	 * Returns the name of the layout type with given identifier.
 	 * 
 	 * @param id identifier of the type
-	 * @return readable name of the type
+	 * @return readable name of the type, or {@code null} if the layout type is
+	 *     not registered
 	 */
 	public String getLayoutTypeName(String id) {
 	    return layoutTypeMap.get(id);
+	}
+	
+	/**
+	 * Registers the given edit part with the diagram type.
+	 * 
+	 * @param editPartType class of edit parts to register
+	 * @param diagramType identifier of the associated diagram type
+	 */
+	public void addEditPartBinding(Class<?> editPartType, String diagramType) {
+	    if (editPartType != null && diagramType != null) {
+	        editPartBindingMap.put(editPartType, diagramType);
+	    }
+	}
+	
+	/**
+	 * Returns the identifier of the diagram type associated with the given edit part.
+	 * 
+	 * @param editPartType class of edit part
+	 * @return identifier of the associated diagram type, or {@code null} if the edit part
+	 *     type is not registered
+	 */
+	public String getDiagramTypeFor(Class<?> editPartType) {
+	    return editPartBindingMap.get(editPartType);
 	}
 	
 }
