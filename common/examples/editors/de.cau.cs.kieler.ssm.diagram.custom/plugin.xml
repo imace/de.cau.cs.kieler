@@ -68,12 +68,5 @@
               "de.cau.cs.kieler.kiml.ui.provider.IKimlLabelProvider">
       </factory>
    </extension>
-   <extension
-         point="de.cau.cs.kieler.kiml.ui.kimlLayoutGraphBuilder">
-      <kimlLayoutGraphBuilder
-            class="ssm.diagram.custom.kiml.layout.SSMLayoutGraphBuilder"
-            editor_id="de.cau.cs.kieler.ssm.diagram.part.SafeStateMachineDiagramEditorID">
-      </kimlLayoutGraphBuilder>
-   </extension>
 
 </plugin>
