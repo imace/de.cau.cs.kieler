@@ -2,6 +2,35 @@
 <?eclipse version="3.2"?>
 <plugin>
    <extension
+         point="de.cau.cs.kieler.kiml.layout.layoutProviders">
+      <collection
+            id="de.cau.cs.kieler.klodd.collection"
+            name="KIELER Dataflow Layouters">
+      </collection>
+      <layoutProvider
+            class="de.cau.cs.kieler.klodd.hierarchical.HierarchicalDataflowLayoutProvider"
+            collection="de.cau.cs.kieler.klodd.collection"
+            id="de.cau.cs.kieler.klodd.hierarchical"
+            name="KLoDD Hierarchical"
+            type="de.cau.cs.kieler.layout.types.layered">
+         <supportedDiagram
+               type="de.cau.cs.kieler.layout.info.types.dataFlow">
+         </supportedDiagram>
+         <knownOption
+               option="de.cau.cs.kieler.layout.options.fixedSize">
+         </knownOption>
+         <knownOption
+               option="de.cau.cs.kieler.layout.options.layoutDirection">
+         </knownOption>
+         <knownOption
+               option="de.cau.cs.kieler.layout.options.minSpacing">
+         </knownOption>
+         <knownOption
+               option="de.cau.cs.kieler.layout.options.portConstraints">
+         </knownOption>
+      </layoutProvider>
+   </extension>
+   <extension
          point="org.eclipse.ui.preferencePages">
       <page
             category="de.cau.cs.kieler.kiml.ui.preferences.layout"
@@ -16,5 +45,5 @@
             class="de.cau.cs.kieler.klodd.ui.preferences.PreferenceInitializer">
       </initializer>
    </extension>
-
+   
 </plugin>

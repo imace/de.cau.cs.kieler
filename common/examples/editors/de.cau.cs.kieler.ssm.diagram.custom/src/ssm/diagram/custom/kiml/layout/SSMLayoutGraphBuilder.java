@@ -33,10 +33,9 @@ import de.cau.cs.kieler.kiml.layout.klayoutdata.KShapeLayout;
 import de.cau.cs.kieler.kiml.layout.options.EdgeLabelPlacement;
 import de.cau.cs.kieler.kiml.layout.options.LayoutDirection;
 import de.cau.cs.kieler.kiml.layout.options.LayoutOptions;
-import de.cau.cs.kieler.kiml.layout.options.LayoutType;
 import de.cau.cs.kieler.kiml.layout.util.KimlLayoutUtil;
-import de.cau.cs.kieler.kiml.ui.helpers.KimlGMFLayoutHintHelper;
 import de.cau.cs.kieler.kiml.ui.layout.AbstractLayoutGraphBuilder;
+import de.cau.cs.kieler.kiml.ui.layout.GmfLayoutHints;
 import de.cau.cs.kieler.ssm.diagram.edit.parts.CompositeState2EditPart;
 import de.cau.cs.kieler.ssm.diagram.edit.parts.CompositeStateCompositeStateCompartment2EditPart;
 import de.cau.cs.kieler.ssm.diagram.edit.parts.CompositeStateCompositeStateCompartmentEditPart;
@@ -359,15 +358,10 @@ public class SSMLayoutGraphBuilder extends AbstractLayoutGraphBuilder {
 	 */
 	private void processLayoutHints(GraphicalEditPart currentEditPart,
 			KNode currentLayoutNode) {
-		LayoutType layoutType = LayoutType.OTHER;
-		String layouterName = "";
 		KShapeLayout nodeLayout = KimlLayoutUtil.getShapeLayout(currentLayoutNode);
-		layoutType = KimlGMFLayoutHintHelper
-				.getContainedElementsLayoutType((org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart) currentEditPart);
-		layouterName = KimlGMFLayoutHintHelper
-				.getContainedElementsLayouterName((org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart) currentEditPart);
-		LayoutOptions.setLayoutType(nodeLayout, layoutType);
-		LayoutOptions.setLayouterName(nodeLayout, layouterName);
+		LayoutOptions.setLayoutHint(nodeLayout, GmfLayoutHints.getStringValue(
+		        (org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart)currentEditPart,
+		        LayoutOptions.LAYOUT_HINT));
 
 		/* attach top inset to compensate the label of a CompositeState */
 		if (currentEditPart.getClass().equals(CompositeState2EditPart.class)
