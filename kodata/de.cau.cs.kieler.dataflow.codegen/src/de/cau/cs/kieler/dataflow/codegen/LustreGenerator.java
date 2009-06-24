@@ -1,3 +1,16 @@
+/******************************************************************************
+ * KIELER - Kiel Integrated Environment for Layout for the Eclipse RCP
+ *
+ * http://www.informatik.uni-kiel.de/rtsys/kieler/
+ * 
+ * Copyright ${year} by
+ * + Christian-Albrechts-University of Kiel
+ *   + Department of Computer Science
+ *     + Real-Time and Embedded Systems Group
+ * 
+ * This code is provided under the terms of the Eclipse Public License (EPL).
+ * See the file epl-v10.html for the license text.
+ ******************************************************************************/
 package de.cau.cs.kieler.dataflow.codegen;
 
 import java.util.HashMap;
@@ -15,6 +28,10 @@ import org.eclipse.ui.part.FileEditorInput;
 import org.openarchitectureware.workflow.WorkflowRunner;
 import org.openarchitectureware.workflow.monitor.NullProgressMonitor;
 
+import dataflow.Box;
+import dataflow.impl.BoxImpl;
+
+
 public class LustreGenerator extends AbstractHandler implements IHandler {
 
 	@Override
@@ -25,14 +42,15 @@ public class LustreGenerator extends AbstractHandler implements IHandler {
 		if(ed.isDirty()){
 		    ed.doSave(null);
 		}
+		
 		//String model = Activator.getDefault().  ed.getEditorInput().getName();
 		FileEditorInput uri = (FileEditorInput)ed.getEditorInput();
                 String model = "file:" + uri.getURI().getRawPath();
-                if(model.endsWith("_diagram")){
-                    model=model.substring(0, model.length()-8);
-                }
-                System.out.println("model= "+ model);
-                
+            if(model.endsWith("_diagram")){
+                model=model.substring(0, model.length()-8);
+            }
+            System.out.println("model= "+ model);
+        //      BoxImpl b = new BoxImpl();
 	        Map<String,String> properties = new HashMap<String,String>();
 	        Map<String, Object> slotContents = new HashMap<String, Object>();
 	        
@@ -46,8 +64,8 @@ public class LustreGenerator extends AbstractHandler implements IHandler {
                 WorkflowRunner runner = new WorkflowRunner();  
                 
                 //System.out.println("Log to: " + runner.getWorkflowLogFileName());
-               String generator = "src/generator.oaw";
-                //generator = "/home/ctr/shared/kieler/trunk/kodata/de.cau.cs.kieler.dataflow.codegen/src/generator.oaw";
+           String generator = "src/generator.oaw";
+            //generator = "/home/ctr/shared/kieler/trunk/kodata/de.cau.cs.kieler.dataflow.codegen/src/generator.oaw";
 		Log logger = LogFactoryImpl.getLog(runner.getClass());
 		logger.fatal("Test");
                 boolean success = runner.run(generator,

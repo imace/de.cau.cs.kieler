@@ -15,18 +15,19 @@
 		<modelSlot value="model" />
 	</component>
 
-	<!-- check model -->
-	<!--<component class="oaw.check.CheckComponent">
+	<!-- check model 
+	<component class="oaw.check.CheckComponent">
 		<metaModel id="mm"
 			class="org.eclipse.m2t.type.emf.EmfRegistryMetaModel"/>
 		<checkFile value="metamodel::Checks" />
 		<emfAllChildrenSlot value="model" />
-	</component> -->
+	</component>-->
 
 	<!--  generate code -->
 	<component class="org.openarchitectureware.xpand2.Generator">
 		<metaModel class = "oaw.type.emf.EmfMetaModel">
-		 <metaModelFile value ="src/metamodel/Dataflow.ecore"/>
+		<metaModelPackage value="dataflow.DataflowPackage"/>
+		 <!--<metaModelFile value ="de.cau.cs.kieler.dataflow.model.Dataflow.ecore"/>-->
 		</metaModel>
 		<expand
 			value="template::Template::main FOR model" />
