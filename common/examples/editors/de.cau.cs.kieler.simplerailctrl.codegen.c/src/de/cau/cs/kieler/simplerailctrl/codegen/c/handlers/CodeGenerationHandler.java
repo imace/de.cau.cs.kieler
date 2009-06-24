@@ -60,7 +60,7 @@ public class CodeGenerationHandler extends AbstractHandler {
         Map<String,String> properties = new HashMap<String,String>();
         Map<String, Object> slotContents = new HashMap<String, Object>();
         
-        String WorkflowFile = "model/workflow.oaw";
+        String WorkflowFile = "model/workflowM2T.oaw";
 		properties.put("model", ModelFile);
 		properties.put("metamodel", "SimpleRailCtrl.ecore");
 		properties.put("src-gen", GenFolder); 
