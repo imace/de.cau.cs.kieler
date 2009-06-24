@@ -28,6 +28,7 @@ import org.eclipse.gef.NodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.CompartmentEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IBorderItemEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.LabelEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
@@ -265,15 +266,17 @@ public class GenericLayoutGraphBuilder extends
         KShapeLayout nodeLayout = KimlLayoutUtil.getShapeLayout(currentLayoutNode);
 		if (hasChildNodes) {
 		    GraphicalEditPart parentEditPart = layoutNode2EditPart.get(currentLayoutNode);
-		    if (parentEditPart instanceof ShapeNodeEditPart) {
-		        String layoutHint = GmfLayoutHints.getStringValue(
-                        (ShapeNodeEditPart)layoutNode2EditPart.get(currentLayoutNode),
+    		if (parentEditPart instanceof IGraphicalEditPart) {
+    	        String layoutHint = GmfLayoutHints.getStringValue(
+                        (IGraphicalEditPart)parentEditPart,
                         LayoutOptions.LAYOUT_HINT);
-		        if (layoutHint == null)
-		            layoutHint = LayoutServices.INSTANCE.getDiagramTypeFor(currentEditPart.getClass());
-		        if (layoutHint != null)
-		            LayoutOptions.setLayoutHint(nodeLayout, layoutHint);
-		    }
+    	        if (layoutHint != null)
+    	            LayoutOptions.setLayoutHint(nodeLayout, layoutHint);
+    	        String diagramType = LayoutServices.INSTANCE.getDiagramTypeFor(
+    	                currentEditPart.getClass());
+    	        if (diagramType != null)
+    	            LayoutOptions.setDiagramType(nodeLayout, diagramType);
+    		}
             LayoutOptions.setLayoutDirection(nodeLayout, LayoutDirection.HORIZONTAL);
             LayoutOptions.setPortConstraints(nodeLayout, PortConstraints.FREE_PORTS);
 		}

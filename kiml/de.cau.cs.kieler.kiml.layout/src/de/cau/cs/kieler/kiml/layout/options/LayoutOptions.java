@@ -41,20 +41,15 @@ public class LayoutOptions {
      * 
      * @param layoutData layout data for a parent node
      * @return the layout hint for the given layout data, or
-     *     the empty string if there is no such option
+     *     {@code null} if there is no such option
      */
     public static String getLayoutHint(KLayoutData layoutData) {
         KStringOption hintOption = (KStringOption)layoutData.getOption(
                 LAYOUT_HINT);
         if (hintOption == null)
-            return "";
-        else {
-            String typeid = hintOption.getValue();
-            if (typeid == null)
-                return "";
-            else
-                return typeid;
-        }
+            return null;
+        else
+            return hintOption.getValue();
     }
     
     /**
@@ -73,6 +68,43 @@ public class LayoutOptions {
             layoutData.getOptions().add(hintOption);
         }
         hintOption.setValue(layoutHint);
+    }
+    
+    /** layout option key: diagram type */
+    public final static String DIAGRAM_TYPE = "de.cau.cs.kieler.layout.options.diagramType";
+    
+    /**
+     * Returns the diagram type for a given layout data instance.
+     * 
+     * @param layoutData layout data for a parent node
+     * @return the diagram type for the given layout data, or
+     *     {@code null} if there is no such option
+     */
+    public static String getDiagramType(KLayoutData layoutData) {
+        KStringOption typeOption = (KStringOption)layoutData.getOption(
+                DIAGRAM_TYPE);
+        if (typeOption == null)
+            return null;
+        else
+            return typeOption.getValue();
+    }
+    
+    /**
+     * Sets the diagram type for the given layout data instance.
+     * 
+     * @param layoutData layout data for a parent node
+     * @param diagramType diagram type to set
+     */
+    public static void setDiagramType(KLayoutData layoutData,
+            String diagramType) {
+        KStringOption typeOption = (KStringOption)layoutData.getOption(
+                DIAGRAM_TYPE);
+        if (typeOption == null) {
+            typeOption = KGraphFactory.eINSTANCE.createKStringOption();
+            typeOption.setKey(DIAGRAM_TYPE);
+            layoutData.getOptions().add(typeOption);
+        }
+        typeOption.setValue(diagramType);
     }
     
     /** layout option key: direction of layout */

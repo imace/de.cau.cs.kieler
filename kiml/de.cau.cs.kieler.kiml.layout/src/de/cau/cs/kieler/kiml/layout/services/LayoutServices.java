@@ -23,6 +23,7 @@ import java.util.Map;
 
 import de.cau.cs.kieler.core.alg.IKielerProgressMonitor;
 import de.cau.cs.kieler.core.kgraph.KNode;
+import de.cau.cs.kieler.kiml.layout.klayoutdata.KShapeLayout;
 import de.cau.cs.kieler.kiml.layout.options.LayoutOptions;
 import de.cau.cs.kieler.kiml.layout.util.KimlLayoutUtil;
 
@@ -34,44 +35,8 @@ import de.cau.cs.kieler.kiml.layout.util.KimlLayoutUtil;
  */
 public class LayoutServices {
 
-    /** identifier of the extension point for layout providers */
-    public static final String EXTP_ID_LAYOUT_PROVIDERS = "de.cau.cs.kieler.kiml.layout.layoutProviders";
-    /** identifier of the extension point for layout listeners */
-    public static final String EXTP_ID_LAYOUT_LISTENERS = "de.cau.cs.kieler.kiml.layout.layoutListeners";
-    /** identifier of the extension point for layout info */
-    public static final String EXTP_ID_LAYOUT_INFO = "de.cau.cs.kieler.kiml.layout.layoutInfo";
-    /** name of the 'layoutProvider' element in the 'layout providers' extension point */
-    public static final String ELEMENT_LAYOUT_PROVIDER = "layoutProvider";
-    /** name of the 'layoutType' element in the 'layout providers' extension point */
-    public static final String ELEMENT_LAYOUT_TYPE = "layoutType";
-    /** name of the 'collection' element in the 'layout providers' extension point */
-    public static final String ELEMENT_COLLECTION = "collection";
-    /** name of the 'layoutOption' element in the 'layout providers' extension point */
-    public static final String ELEMENT_LAYOUT_OPTION = "layoutOption";
-    /** name of the 'knownOption' element in the 'layout providers' extension point */
-    public static final String ELEMENT_KNOWN_OPTION = "knownOption";
-    /** name of the 'supportedDiagram' element in the 'layout providers' extension point */
-    public static final String ELEMENT_SUPPORTED_DIAGRAM = "supportedDiagram";
-    /** name of the 'diagramType' element in the 'layout info' extension point */
-    public static final String ELEMENT_DIAGRAM_TYPE = "diagramType";
-    /** name of the 'binding' element in the 'layout info' extension point */
-    public static final String ELEMENT_BINDING = "binding";
-    /** name of the 'layoutListener' element in the 'layout listeners' extension point */
-    public static final String ELEMENT_LAYOUT_LISTENER = "layoutListener";
-    /** name of the 'id' attribute in the extension points */
-    public static final String ATTRIBUTE_ID = "id";
-    /** name of the 'class' attribute in the extension points */
-    public static final String ATTRIBUTE_CLASS = "class";
-    /** name of the 'name' attribute in the extension points */
-    public static final String ATTRIBUTE_NAME = "name";
-    /** name of the 'type' attribute in the extension points */
-    public static final String ATTRIBUTE_TYPE = "type";
-    /** name of the 'collection' attribute in the extension points */
-    public static final String ATTRIBUTE_COLLECTION = "collection";
-    /** name of the 'description' attribute in the extension points */
-    public static final String ATTRIBUTE_DESCRIPTION = "description";
-    /** name of the 'option' attribute in the extension points */
-    public static final String ATTRIBUTE_OPTION = "option";
+    /** identifier of the 'general' diagram type, which applies to all diagrams */
+    public static final String DIAGRAM_TYPE_GENERAL = "de.cau.cs.kieler.layout.info.types.general";
 
     
 	/** the singleton instance */
@@ -84,8 +49,10 @@ public class LayoutServices {
 			= new LinkedHashMap<String, LayoutProviderData>();
 	/** mapping of layout type identifiers to their names */
 	private Map<String, String> layoutTypeMap = new HashMap<String, String>();
-	///** mapping of diagram type identifiers to their names */
-	//private Map<String, String> diagramTypeMap = new HashMap<String, String>();
+	/** mapping of collection identifiers to their names */
+	private Map<String, String> collectionMap = new HashMap<String, String>();
+	/** mapping of diagram type identifiers to their names */
+	private Map<String, String> diagramTypeMap = new HashMap<String, String>();
 	/** mapping of graphical edit parts to associated diagram types */
 	private Map<Class<?>, String> editPartBindingMap = new HashMap<Class<?>, String>();
 
@@ -184,26 +151,16 @@ public class LayoutServices {
 	 * @return
 	 */
 	public AbstractLayoutProvider getLayoutProvider(KNode layoutNode) {
-	    String layoutHint = LayoutOptions.getLayoutHint(
-	            KimlLayoutUtil.getShapeLayout(layoutNode));
+	    KShapeLayout nodeLayout = KimlLayoutUtil.getShapeLayout(layoutNode);
+	    String layoutHint = LayoutOptions.getLayoutHint(nodeLayout);
 	    // try to get a specific provider for the given node
 	    LayoutProviderData providerData = layoutProviderMap.get(layoutHint);
 	    if (providerData != null)
 	        return providerData.instance;
-	    
-	    // look for an appropriate provider
-	    Iterator<LayoutProviderData> providerIter = layoutProviderMap.values().iterator();
-	    while (providerIter.hasNext()) {
-	        providerData = providerIter.next();
-	        if (providerData.type.equals(layoutHint)
-	                || providerData.supportedDiagrams.contains(layoutHint))
-	            return providerData.instance;
-	    }
-		
-	    // no appropriate provider was found: return the last one
-	    if (providerData != null)
-	        return providerData.instance;
-	    else return null;
+
+	    // find the most appropriate provider from the layout type and diagram type
+	    String diagramType = LayoutOptions.getDiagramType(nodeLayout);
+	    return findAppropriateProvider(layoutHint, diagramType);
 	}
 	
 	/**
@@ -249,6 +206,130 @@ public class LayoutServices {
 	 */
 	public String getDiagramTypeFor(Class<?> editPartType) {
 	    return editPartBindingMap.get(editPartType);
+	}
+	
+	public void addCollection(String id, String name) {
+	    if (id != null && name != null)
+	        collectionMap.put(id, name);
+	}
+	
+	public String getCollectionName(String id) {
+	    return collectionMap.get(id);
+	}
+	
+	public void addDiagramType(String id, String name) {
+	    if (id != null && name != null)
+	        diagramTypeMap.put(id, name);
+	}
+	
+	public String getDiagramTypeName(String id) {
+	    return diagramTypeMap.get(id);
+	}
+	
+	private AbstractLayoutProvider findAppropriateProvider(String layoutType, String diagramType) {
+        boolean givenLayoutType = layoutTypeMap.containsKey(layoutType);
+        Iterator<LayoutProviderData> providerIter = layoutProviderMap.values().iterator();
+        AbstractLayoutProvider bestProvider = null;
+        int bestPrio = LayoutProviderData.MIN_SUPPORT_PRIORITY;
+        boolean matchesLayoutType = false, matchesDiagramType = false,
+                matchesGeneralDiagram = false;
+        // look for an appropriate provider and return the best one
+        while (providerIter.hasNext()) {
+            LayoutProviderData providerData = providerIter.next();
+            int currentPrio = providerData.getSupportedPriority(diagramType);
+            if (matchesLayoutType) {
+                if (providerData.type.equals(layoutType)) {
+                    if (matchesDiagramType) {
+                        if (currentPrio > bestPrio) {
+                            bestProvider = providerData.instance;
+                            bestPrio = currentPrio;
+                        }
+                    }
+                    else {
+                        if (currentPrio > LayoutProviderData.MIN_SUPPORT_PRIORITY) {
+                            bestProvider = providerData.instance;
+                            bestPrio = currentPrio;
+                            matchesDiagramType = true;
+                            matchesGeneralDiagram = false;
+                        }
+                        else {
+                            currentPrio = providerData.getSupportedPriority(DIAGRAM_TYPE_GENERAL);
+                            if (matchesGeneralDiagram) {
+                                if (currentPrio > bestPrio) {
+                                    bestProvider = providerData.instance;
+                                    bestPrio = currentPrio;
+                                }
+                            }
+                            else {
+                                if (currentPrio > LayoutProviderData.MIN_SUPPORT_PRIORITY) {
+                                    bestProvider = providerData.instance;
+                                    bestPrio = currentPrio;
+                                    matchesGeneralDiagram = true;
+                                }
+                                else if (bestProvider == null)
+                                    bestProvider = providerData.instance;
+                            }
+                        }
+                    }
+                }
+            }
+            else {
+                if (providerData.type.equals(layoutType)) {
+                    bestProvider = providerData.instance;
+                    matchesLayoutType = true;
+                    if (currentPrio > LayoutProviderData.MIN_SUPPORT_PRIORITY) {
+                        bestPrio = currentPrio;
+                        matchesDiagramType = true;
+                        matchesGeneralDiagram = false;
+                    }
+                    else {
+                        matchesDiagramType = false;
+                        currentPrio = providerData.getSupportedPriority(DIAGRAM_TYPE_GENERAL);
+                        if (currentPrio > LayoutProviderData.MIN_SUPPORT_PRIORITY) {
+                            bestPrio = currentPrio;
+                            matchesGeneralDiagram = true;
+                        }
+                        else
+                            matchesGeneralDiagram = false;
+                    }
+                }
+                else {
+                    if (matchesDiagramType) {
+                        if (currentPrio > bestPrio) {
+                            bestProvider = providerData.instance;
+                            bestPrio = currentPrio;
+                        }
+                    }
+                    else {
+                        if (currentPrio > LayoutProviderData.MIN_SUPPORT_PRIORITY) {
+                            bestProvider = providerData.instance;
+                            bestPrio = currentPrio;
+                            matchesDiagramType = true;
+                            matchesGeneralDiagram = false;
+                        }
+                        else {
+                            currentPrio = providerData.getSupportedPriority(DIAGRAM_TYPE_GENERAL);
+                            if (matchesGeneralDiagram) {
+                                if (currentPrio > bestPrio) {
+                                    bestProvider = providerData.instance;
+                                    bestPrio = currentPrio;
+                                }
+                            }
+                            else {
+                                if (currentPrio > LayoutProviderData.MIN_SUPPORT_PRIORITY) {
+                                    bestProvider = providerData.instance;
+                                    bestPrio = currentPrio;
+                                    matchesGeneralDiagram = true;
+                                }
+                                else if (bestProvider == null)
+                                    bestProvider = providerData.instance;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return bestProvider;
 	}
 	
 }

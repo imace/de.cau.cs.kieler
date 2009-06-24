@@ -15,7 +15,9 @@ package de.cau.cs.kieler.kiml.ui.layout;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.ui.statushandlers.StatusManager;
 
 import de.cau.cs.kieler.kiml.layout.services.ILayoutListener;
@@ -32,6 +34,47 @@ import de.cau.cs.kieler.kiml.ui.KimlUiPlugin;
  */
 public class LayoutServiceBuilder {
 
+    /** identifier of the extension point for layout providers */
+    public static final String EXTP_ID_LAYOUT_PROVIDERS = "de.cau.cs.kieler.kiml.layout.layoutProviders";
+    /** identifier of the extension point for layout listeners */
+    public static final String EXTP_ID_LAYOUT_LISTENERS = "de.cau.cs.kieler.kiml.layout.layoutListeners";
+    /** identifier of the extension point for layout info */
+    public static final String EXTP_ID_LAYOUT_INFO = "de.cau.cs.kieler.kiml.layout.layoutInfo";
+    /** name of the 'layoutProvider' element in the 'layout providers' extension point */
+    public static final String ELEMENT_LAYOUT_PROVIDER = "layoutProvider";
+    /** name of the 'layoutType' element in the 'layout providers' extension point */
+    public static final String ELEMENT_LAYOUT_TYPE = "layoutType";
+    /** name of the 'collection' element in the 'layout providers' extension point */
+    public static final String ELEMENT_COLLECTION = "collection";
+    /** name of the 'layoutOption' element in the 'layout providers' extension point */
+    public static final String ELEMENT_LAYOUT_OPTION = "layoutOption";
+    /** name of the 'knownOption' element in the 'layout providers' extension point */
+    public static final String ELEMENT_KNOWN_OPTION = "knownOption";
+    /** name of the 'supportedDiagram' element in the 'layout providers' extension point */
+    public static final String ELEMENT_SUPPORTED_DIAGRAM = "supportedDiagram";
+    /** name of the 'diagramType' element in the 'layout info' extension point */
+    public static final String ELEMENT_DIAGRAM_TYPE = "diagramType";
+    /** name of the 'binding' element in the 'layout info' extension point */
+    public static final String ELEMENT_BINDING = "binding";
+    /** name of the 'layoutListener' element in the 'layout listeners' extension point */
+    public static final String ELEMENT_LAYOUT_LISTENER = "layoutListener";
+    /** name of the 'id' attribute in the extension points */
+    public static final String ATTRIBUTE_ID = "id";
+    /** name of the 'class' attribute in the extension points */
+    public static final String ATTRIBUTE_CLASS = "class";
+    /** name of the 'name' attribute in the extension points */
+    public static final String ATTRIBUTE_NAME = "name";
+    /** name of the 'type' attribute in the extension points */
+    public static final String ATTRIBUTE_TYPE = "type";
+    /** name of the 'collection' attribute in the extension points */
+    public static final String ATTRIBUTE_COLLECTION = "collection";
+    /** name of the 'description' attribute in the extension points */
+    public static final String ATTRIBUTE_DESCRIPTION = "description";
+    /** name of the 'option' attribute in the extension points */
+    public static final String ATTRIBUTE_OPTION = "option";
+    /** name of the 'priority' attribute in the extension points */
+    public static final String ATTRIBUTE_PRIORITY = "priority";
+    
     /** default name for layout providers for which no name is given */
     public static final String DEFAULT_PROVIDER_NAME = "<Unnamed Layouter>";
     
@@ -52,38 +95,45 @@ public class LayoutServiceBuilder {
 	 */
 	private static void loadLayoutProviderExtensions() {
 		IConfigurationElement[] extensions = Platform.getExtensionRegistry()
-				.getConfigurationElementsFor(LayoutServices.EXTP_ID_LAYOUT_PROVIDERS);
+				.getConfigurationElementsFor(EXTP_ID_LAYOUT_PROVIDERS);
 
 		for (IConfigurationElement element : extensions) {
-		    if (LayoutServices.ELEMENT_LAYOUT_PROVIDER.equals(element.getName())) {
+		    if (ELEMENT_LAYOUT_PROVIDER.equals(element.getName())) {
 	            try {
 			        // register a layout provider from the extension
     				AbstractLayoutProvider layoutProvider = (AbstractLayoutProvider)element
-    						.createExecutableExtension(LayoutServices.ATTRIBUTE_CLASS);
+    						.createExecutableExtension(ATTRIBUTE_CLASS);
     				if (layoutProvider != null) {
     				    LayoutProviderData providerData = new LayoutProviderData();
     				    providerData.instance = layoutProvider;
-    				    providerData.id = element.getAttribute(LayoutServices.ATTRIBUTE_ID);
+    				    providerData.id = element.getAttribute(ATTRIBUTE_ID);
     				    if (providerData.id == null) continue;
-    				    providerData.name = element.getAttribute(LayoutServices.ATTRIBUTE_NAME);
+    				    providerData.name = element.getAttribute(ATTRIBUTE_NAME);
     				    if (providerData.name == null)
     				        providerData.name = DEFAULT_PROVIDER_NAME;
-    				    providerData.type = element.getAttribute(LayoutServices.ATTRIBUTE_TYPE);
+    				    providerData.type = element.getAttribute(ATTRIBUTE_TYPE);
     				    if (providerData.type == null)
     				        providerData.type = "";
-    				    providerData.collection = element.getAttribute(LayoutServices.ATTRIBUTE_COLLECTION);
+    				    providerData.collection = element.getAttribute(ATTRIBUTE_COLLECTION);
     				    if (providerData.collection == null)
     				        providerData.collection = "";
     				    for (IConfigurationElement child : element.getChildren()) {
-    				        if (LayoutServices.ELEMENT_KNOWN_OPTION.equals(child.getName())) {
-    				            String option = child.getAttribute(LayoutServices.ATTRIBUTE_OPTION);
+    				        if (ELEMENT_KNOWN_OPTION.equals(child.getName())) {
+    				            String option = child.getAttribute(ATTRIBUTE_OPTION);
     				            if (option != null && option.length() > 0)
     				                providerData.knownOptions.add(option);
     				        }
-    				        else if (LayoutServices.ELEMENT_SUPPORTED_DIAGRAM.equals(child.getName())) {
-    				            String type = child.getAttribute(LayoutServices.ATTRIBUTE_TYPE);
-    				            if (type != null && type.length() > 0)
-    				                providerData.supportedDiagrams.add(type);
+    				        else if (ELEMENT_SUPPORTED_DIAGRAM.equals(child.getName())) {
+    				            String type = child.getAttribute(ATTRIBUTE_TYPE);
+    				            String priority = child.getAttribute(ATTRIBUTE_PRIORITY);
+    				            try {
+    				                providerData.addSupportedDiagram(type,
+    				                        Integer.parseInt(priority));
+    				            } catch (NumberFormatException exception) {
+    			                    IStatus status = new Status(IStatus.WARNING, KimlUiPlugin.PLUGIN_ID, 0,
+    			                            "Failed to parse 'priority' attribute in 'supportedDiagram' element.", exception);
+    			                    StatusManager.getManager().handle(status);
+    				            }
     				        }
     				    }
     					LayoutServices.INSTANCE.addLayoutProvider(providerData);
@@ -93,16 +143,16 @@ public class LayoutServiceBuilder {
     				StatusManager.getManager().handle(exception, KimlUiPlugin.PLUGIN_ID);
     			}
 		    }
-		    else if (LayoutServices.ELEMENT_LAYOUT_TYPE.equals(element.getName())) {
+		    else if (ELEMENT_LAYOUT_TYPE.equals(element.getName())) {
 		        // register a layout type from the extension
 		        LayoutServices.INSTANCE.addLayoutType(
-		                element.getAttribute(LayoutServices.ATTRIBUTE_ID),
-		                element.getAttribute(LayoutServices.ATTRIBUTE_NAME));
+		                element.getAttribute(ATTRIBUTE_ID),
+		                element.getAttribute(ATTRIBUTE_NAME));
 		    }
-		    else if (LayoutServices.ELEMENT_COLLECTION.equals(element.getName())) {
+		    else if (ELEMENT_COLLECTION.equals(element.getName())) {
 		        // TODO collections are not supported yet 
 		    }
-		    else if (LayoutServices.ELEMENT_LAYOUT_OPTION.equals(element.getName())) {
+		    else if (ELEMENT_LAYOUT_OPTION.equals(element.getName())) {
 		        // TODO layout options are not supported yet
 		    }
 		}
@@ -113,13 +163,13 @@ public class LayoutServiceBuilder {
 	 */
 	private static void loadLayoutListenerExtensions() {
 		IConfigurationElement[] extensions = Platform.getExtensionRegistry()
-				.getConfigurationElementsFor(LayoutServices.EXTP_ID_LAYOUT_LISTENERS);
+				.getConfigurationElementsFor(EXTP_ID_LAYOUT_LISTENERS);
 
 		for (IConfigurationElement element : extensions) {
-		    if (LayoutServices.ELEMENT_LAYOUT_LISTENER.equals(element.getName())) {
+		    if (ELEMENT_LAYOUT_LISTENER.equals(element.getName())) {
     			try {
     				ILayoutListener layoutListener = (ILayoutListener) element
-    						.createExecutableExtension(LayoutServices.ATTRIBUTE_CLASS);
+    						.createExecutableExtension(ATTRIBUTE_CLASS);
     				if (layoutListener != null) {
     					LayoutServices.INSTANCE.addLayoutListener(layoutListener);
     				}
@@ -136,23 +186,27 @@ public class LayoutServiceBuilder {
      */
     private static void loadLayoutInfoExtensions() {
         IConfigurationElement[] extensions = Platform.getExtensionRegistry()
-                .getConfigurationElementsFor(LayoutServices.EXTP_ID_LAYOUT_INFO);
+                .getConfigurationElementsFor(EXTP_ID_LAYOUT_INFO);
 
         for (IConfigurationElement element : extensions) {
-            if (LayoutServices.ELEMENT_DIAGRAM_TYPE.equals(element.getName())) {
+            if (ELEMENT_DIAGRAM_TYPE.equals(element.getName())) {
                 // TODO diagram types are not supported yet
             }
-            else if (LayoutServices.ELEMENT_BINDING.equals(element.getName())) {
-//                try {
-//                    Object editPart = element.createExecutableExtension(LayoutServices.ATTRIBUTE_CLASS);
-//                    if (editPart != null) {
-//                        LayoutServices.INSTANCE.addEditPartBinding(editPart.getClass(),
-//                                element.getAttribute(LayoutServices.ATTRIBUTE_TYPE));
-//                    }
-//                }
-//                catch (CoreException exception) {
-//                    StatusManager.getManager().handle(exception, KimlUiPlugin.PLUGIN_ID);
-//                }
+            else if (ELEMENT_BINDING.equals(element.getName())) {
+                try {
+                    String typeName = element.getAttribute(ATTRIBUTE_CLASS);
+                    if (typeName != null) {
+                        Class<?> editPartType = Platform.getBundle(
+                                element.getContributor().getName()).loadClass(typeName);
+                        LayoutServices.INSTANCE.addEditPartBinding(editPartType,
+                                element.getAttribute(ATTRIBUTE_TYPE));
+                    }
+                }
+                catch (Exception exception) {
+                    IStatus status = new Status(IStatus.WARNING, KimlUiPlugin.PLUGIN_ID, 0,
+                            "Failed to load 'binding' element from extension point.", exception);
+                    StatusManager.getManager().handle(status);
+                }
             }
         }
     }

@@ -22,6 +22,13 @@ import java.util.List;
  */
 public class LayoutProviderData {
 
+    public static final int MIN_SUPPORT_PRIORITY = Integer.MIN_VALUE >> 1;
+    
+    private static class SupportedDiagram {
+        String type;
+        int priority = 0;
+    }
+    
     public String id;
     
     public String name;
@@ -34,6 +41,25 @@ public class LayoutProviderData {
     
     public List<String> knownOptions = new LinkedList<String>();
     
-    public List<String> supportedDiagrams = new LinkedList<String>();
+    public List<SupportedDiagram> supportedDiagrams = new LinkedList<SupportedDiagram>();
+
+    public void addSupportedDiagram(String diagramType, int priority) {
+        if (diagramType != null) {
+            SupportedDiagram newSupported = new SupportedDiagram();
+            newSupported.type = diagramType;
+            newSupported.priority = priority;
+            supportedDiagrams.add(newSupported);
+        }
+    }
+    
+    public int getSupportedPriority(String diagramType) {
+        if (diagramType != null) {
+            for (SupportedDiagram supportedDiagram : supportedDiagrams) {
+                if (diagramType.equals(supportedDiagram.type))
+                    return supportedDiagram.priority;
+            }
+        }
+        return MIN_SUPPORT_PRIORITY;
+    }
     
 }

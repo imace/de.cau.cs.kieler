@@ -218,6 +218,13 @@ Layout providers can be grouped using collections, and they can be given a type 
                </appInfo>
             </annotation>
          </attribute>
+         <attribute name="priority" type="string">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+         </attribute>
       </complexType>
    </element>
 
