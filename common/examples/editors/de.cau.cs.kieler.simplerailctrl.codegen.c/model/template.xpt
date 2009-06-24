@@ -82,6 +82,13 @@ int localLOCK«i.counter1-» = 0;
    «ENDIF-»
 «ENDFOREACH-»
 
+«FOREACH nodes AS n ITERATOR i-»
+   «IF n.initial-»
+int localTERMINATED«i.counter1-» = 0;   
+   «ENDIF-»
+«ENDFOREACH-»
+
+
 struct railway_system *railway;
 
 //synchronous getcontact and trackused functions
@@ -151,13 +158,22 @@ void* ThreadFunctionMaster(void* port)
 {
   int track;
   while (!MasterShutdown) {
+   		//do not wait for terminated threads
+«FOREACH nodes AS n ITERATOR i-»
+   «IF n.initial-»
+   			if (localTERMINATED«i.counter1-») {
+			   localLOCK«i.counter1-» = 1;   
+			}
+   «ENDIF-»
+«ENDFOREACH-»
+  
   		//wait for all localTicks to be increased
   		if («FOREACH nodes AS n ITERATOR i-»«IF n.initial-»(localLOCK«i.counter1-» == 1)&&«ENDIF-»«ENDFOREACH-»(1)) {
 			//fill ContactMem and OccupiedMem array
 			for (track = 0; track < 48; track++) {
  			  ContactMem[track][0] = getcontact(railway,track,FIRST,1);
  			  ContactMem[track][1] = getcontact(railway,track,SECOND,1);
- 			  OccupiedMem[track] = trackused_sync(railway,track);
+ 			  OccupiedMem[track] = trackused(railway,track);
 			}
 
   			//increase a tick counter (useless)
@@ -318,6 +334,8 @@ void* ThreadFunction«i.counter1-»(void* port)
                     //escape if not outtransitions
                     if (!outtransition) {
 	 	                if (DEBUGCONTROLLER) printf("Final state - terminating thread.\n");
+						//set localTERMINATED := 1 (so that we not wait on this thread in any next macro-tick any more)
+		          		localTERMINATED«i.counter1-» = 1;   
 						return (void *)1;
                     }//end if
                     	          
