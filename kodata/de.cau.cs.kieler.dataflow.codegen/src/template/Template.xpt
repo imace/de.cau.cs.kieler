@@ -4,83 +4,51 @@
 
 «DEFINE main FOR DataflowModel»
 	«FILE (name==null?"Dummy":name) + ".lus"»
+«FOREACH boxes AS box-»«box.init()-»«ENDFOREACH-»	
+«FOREACH boxes AS box-»«box.initIO()-»«ENDFOREACH-»	
 node «name» (
-«FOREACH boxes AS box-»
-   «IF box.name.startsWith("INPUT")-»
-     «FOREACH box.outputs AS out-»
-     «IF !isDefined(out.name)»«out.name»: int; «ENDIF»
-     «ENDFOREACH-» 
-   «ENDIF-» 
+«FOREACH getInputs() AS input-»
+  «input»: int; 
 «ENDFOREACH-»
 ) returns (
-«FOREACH boxes AS box-»
-   «IF box.name.startsWith("OUTPUT")-» 
-    «FOREACH box.inputs AS in-»
-     «IF !isDefined(in.name)»«in.name»: int; «ENDIF»
-     «ENDFOREACH-» 
-   «ENDIF-» 
+«FOREACH getOutputs() AS output-»
+  «output»: int; 
 «ENDFOREACH-»
 );
+«IF hasLocals()-»
 var
-  dummy:int;
- «FOREACH boxes AS box-»
-   «FOREACH box.connections AS con-»
-     «IF !isDefined(con.sourcePort.name) -»  «con.sourcePort.name»: int;
-     «ENDIF-» 
-     «IF !isDefined(con.targetPort.name) -»  «con.targetPort.name»: int;
-     «ENDIF-» 
-   «ENDFOREACH-»
+«FOREACH getLocals() AS local-»
+  «local»: int;  
 «ENDFOREACH-»
+«ENDIF-»
 let	
-  dummy=0;
-  «FOREACH boxes AS box-» 
-    «IF !box.name.startsWith("INPUT_") && box.outputs.size>0-»
-    «EXPAND equation FOR box»
-	«ENDIF-»
-	«FOREACH box.connections AS con-»
-    «IF !con.sourcePort.name.matches(con.targetPort.name)-»
-    «con.targetPort.name» = «con.sourcePort.name»;
-    «ENDIF-»
-  «ENDFOREACH-»
-  «ENDFOREACH-»
+«FOREACH boxes AS box-»«EXPAND equation FOR box-»«ENDFOREACH-»
 tel		
   «FOREACH boxes AS box-»
     «IF box.boxes.size>0-»
     «EXPAND node FOR box»
-    «ENDIF»
+    «ENDIF-»
   «ENDFOREACH-»
-	«ENDFILE»
+	«ENDFILE-»
 «ENDDEFINE»
 
 «DEFINE node FOR Box»
-node «name» («FOREACH inputs AS in -»«in.name» : int; «ENDFOREACH-») returns («FOREACH outputs AS out-»«out.name» : int; «ENDFOREACH-»)
+node «name» («FOREACH inputs AS in -»«in.getName()» : int; «ENDFOREACH-») returns («FOREACH outputs AS out-»«out.getName()» : int; «ENDFOREACH-»)
+«IF this.hasLocals()-»
 var
-  dummy: int;
-   «FOREACH boxes AS box-»
-   «FOREACH box.connections AS con-»
-     «IF !isDefined(con.sourcePort.name) -»  «con.sourcePort.name»: int;
-     «ENDIF-» 
-     «IF !isDefined(con.targetPort.name) -»  «con.targetPort.name»: int;
-     «ENDIF-» 
-   «ENDFOREACH-»
+«FOREACH this.getLocals() AS local-»
+  «local»: int;
 «ENDFOREACH-»
+«ENDIF-»
 let
-  dummy = 0;
-    «FOREACH boxes AS box-» 
-    «EXPAND equation FOR box»
-	«FOREACH box.connections AS con-»
-    «IF !con.sourcePort.name.matches(con.targetPort.name)-»
-    «con.targetPort.name» = «con.sourcePort.name»;
-    «ENDIF-»
-  «ENDFOREACH-»
+  «FOREACH boxes AS box-» 
+  «EXPAND equation FOR box-»
   «ENDFOREACH-»
 tel
 «ENDDEFINE»
 
-«DEFINE equation FOR Box»
-		( «FOREACH outputs AS out SEPARATOR ","-» «out.name»«ENDFOREACH-») = «IF name.startsWith("+") || name.startsWith("-") || name.startsWith("*")  -»«inputs.get(0).name» «name» «inputs.get(1).name»;
-		«ELSEIF inputs.size==0-»«name»;
-		«ELSE-»«name» ( «FOREACH inputs AS in SEPARATOR "," -» «in.name» «ENDFOREACH-» );
-		«ENDIF-»
-
+«DEFINE equation FOR Box-»	(«FOREACH outputs AS out SEPARATOR ", "-»«out.name-»«ENDFOREACH-») = «IF name.startsWith("+") || name.startsWith("-") || name.startsWith("*")  -»«inputs.get(0).getName()» «name» «inputs.get(1).getName()»;
+	«ELSEIF inputs.size==0-»«name»;
+	«ELSE-»«name» («FOREACH inputs AS in SEPARATOR ", "-»«in.getName()-»«ENDFOREACH-»);
+	«ENDIF-»
 «ENDDEFINE»
