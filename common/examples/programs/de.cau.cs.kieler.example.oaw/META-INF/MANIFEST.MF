@@ -1,9 +1,15 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Oaw Plug-in
-Bundle-SymbolicName: de.cau.cs.kieler.example.oaw.gen;singleton:=true
-Bundle-Version: 0.1.0
-Require-Bundle: org.eclipse.ui,
- org.openarchitectureware.dependencies;bundle-version="4.3.1",
- de.cau.cs.kieler.example.oaw;bundle-version="1.0.0"
+Bundle-Name: %pluginName
+Bundle-SymbolicName: de.cau.cs.kieler.example.oaw;singleton:=true
+Bundle-Version: 1.0.0
+Bundle-ClassPath: .
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Export-Package: mymodel,
+ mymodel.impl,
+ mymodel.util
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.ecore;visibility:=reexport
+Bundle-ActivationPolicy: lazy
