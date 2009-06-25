@@ -13,11 +13,14 @@
  */
 package de.cau.cs.kieler.kiml.ui.layout;
 
+import java.util.Collection;
+
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.ui.statushandlers.StatusManager;
 
 import de.cau.cs.kieler.kiml.layout.services.ILayoutListener;
@@ -25,6 +28,7 @@ import de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider;
 import de.cau.cs.kieler.kiml.layout.services.LayoutProviderData;
 import de.cau.cs.kieler.kiml.layout.services.LayoutServices;
 import de.cau.cs.kieler.kiml.ui.KimlUiPlugin;
+import de.cau.cs.kieler.kiml.ui.preferences.LayoutPreferencePage;
 
 /**
  * This class is responsible for reading all extension point elements
@@ -88,6 +92,8 @@ public class LayoutServiceBuilder {
 		loadLayoutProviderExtensions();
 		loadLayoutListenerExtensions();
 		loadLayoutInfoExtensions();
+		// load preferences for KIML
+		LoadPreferences();
 	}
 	
 	/**
@@ -121,13 +127,13 @@ public class LayoutServiceBuilder {
     				        if (ELEMENT_KNOWN_OPTION.equals(child.getName())) {
     				            String option = child.getAttribute(ATTRIBUTE_OPTION);
     				            if (option != null && option.length() > 0)
-    				                providerData.knownOptions.add(option);
+    				                providerData.setOption(option, true);
     				        }
     				        else if (ELEMENT_SUPPORTED_DIAGRAM.equals(child.getName())) {
     				            String type = child.getAttribute(ATTRIBUTE_TYPE);
     				            String priority = child.getAttribute(ATTRIBUTE_PRIORITY);
     				            try {
-    				                providerData.addSupportedDiagram(type,
+    				                providerData.setDiagramSupport(type,
     				                        Integer.parseInt(priority));
     				            } catch (NumberFormatException exception) {
     			                    IStatus status = new Status(IStatus.WARNING, KimlUiPlugin.PLUGIN_ID, 0,
@@ -150,7 +156,10 @@ public class LayoutServiceBuilder {
 		                element.getAttribute(ATTRIBUTE_NAME));
 		    }
 		    else if (ELEMENT_COLLECTION.equals(element.getName())) {
-		        // TODO collections are not supported yet 
+		        // register a collection from the extension
+		        LayoutServices.INSTANCE.addCollection(
+		                element.getAttribute(ATTRIBUTE_ID),
+		                element.getAttribute(ATTRIBUTE_NAME));
 		    }
 		    else if (ELEMENT_LAYOUT_OPTION.equals(element.getName())) {
 		        // TODO layout options are not supported yet
@@ -167,6 +176,7 @@ public class LayoutServiceBuilder {
 
 		for (IConfigurationElement element : extensions) {
 		    if (ELEMENT_LAYOUT_LISTENER.equals(element.getName())) {
+		        // register a layout listener from the extension
     			try {
     				ILayoutListener layoutListener = (ILayoutListener) element
     						.createExecutableExtension(ATTRIBUTE_CLASS);
@@ -190,9 +200,13 @@ public class LayoutServiceBuilder {
 
         for (IConfigurationElement element : extensions) {
             if (ELEMENT_DIAGRAM_TYPE.equals(element.getName())) {
-                // TODO diagram types are not supported yet
+                // register a diagram type from the extension
+                LayoutServices.INSTANCE.addDiagramType(
+                        element.getAttribute(ATTRIBUTE_ID),
+                        element.getAttribute(ATTRIBUTE_NAME));
             }
             else if (ELEMENT_BINDING.equals(element.getName())) {
+                // register a binding from the extension
                 try {
                     String typeName = element.getAttribute(ATTRIBUTE_CLASS);
                     if (typeName != null) {
@@ -206,6 +220,23 @@ public class LayoutServiceBuilder {
                     IStatus status = new Status(IStatus.WARNING, KimlUiPlugin.PLUGIN_ID, 0,
                             "Failed to load 'binding' element from extension point.", exception);
                     StatusManager.getManager().handle(status);
+                }
+            }
+        }
+    }
+    
+    /**
+     * Loads preferences for KIML.
+     */
+    private static void LoadPreferences() {
+        IPreferenceStore preferenceStore = KimlUiPlugin.getDefault().getPreferenceStore();
+        Collection<LayoutProviderData> layoutProviderData = LayoutServices.INSTANCE.getLayoutProviderData();
+        Collection<String> diagramTypes = LayoutServices.INSTANCE.getDiagramTypes();
+        for (LayoutProviderData data : layoutProviderData) {
+            for (String diagramType : diagramTypes) {
+                String preference = LayoutPreferencePage.getPreference(data.id, diagramType);
+                if (preferenceStore.contains(preference)) {
+                    data.setDiagramSupport(diagramType, preferenceStore.getInt(preference));
                 }
             }
         }

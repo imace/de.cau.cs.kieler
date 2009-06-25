@@ -52,7 +52,7 @@ public class LayoutServices {
 	/** mapping of collection identifiers to their names */
 	private Map<String, String> collectionMap = new HashMap<String, String>();
 	/** mapping of diagram type identifiers to their names */
-	private Map<String, String> diagramTypeMap = new HashMap<String, String>();
+	private Map<String, String> diagramTypeMap = new LinkedHashMap<String, String>();
 	/** mapping of graphical edit parts to associated diagram types */
 	private Map<Class<?>, String> editPartBindingMap = new HashMap<Class<?>, String>();
 
@@ -130,9 +130,9 @@ public class LayoutServices {
 	 * @param id layout provider identifier
 	 * @return the corresponding layout provider data
 	 */
-	//public LayoutProviderData getLayoutProviderData(String id) {
-	//    return layoutProviderMap.get(id);
-	//}
+	public LayoutProviderData getLayoutProviderData(String id) {
+	    return layoutProviderMap.get(id);
+	}
 
 	/**
 	 * Returns a data collection for all registered layout providers.
@@ -226,11 +226,15 @@ public class LayoutServices {
 	    return diagramTypeMap.get(id);
 	}
 	
+	public Collection<String> getDiagramTypes() {
+	    return diagramTypeMap.keySet();
+	}
+	
 	private AbstractLayoutProvider findAppropriateProvider(String layoutType, String diagramType) {
         boolean givenLayoutType = layoutTypeMap.containsKey(layoutType);
         Iterator<LayoutProviderData> providerIter = layoutProviderMap.values().iterator();
         AbstractLayoutProvider bestProvider = null;
-        int bestPrio = LayoutProviderData.MIN_SUPPORT_PRIORITY;
+        int bestPrio = LayoutProviderData.MIN_PRIORITY;
         boolean matchesLayoutType = false, matchesDiagramType = false,
                 matchesGeneralDiagram = false;
         // look for an appropriate provider and return the best one
@@ -246,7 +250,7 @@ public class LayoutServices {
                         }
                     }
                     else {
-                        if (currentPrio > LayoutProviderData.MIN_SUPPORT_PRIORITY) {
+                        if (currentPrio > LayoutProviderData.MIN_PRIORITY) {
                             bestProvider = providerData.instance;
                             bestPrio = currentPrio;
                             matchesDiagramType = true;
@@ -261,7 +265,7 @@ public class LayoutServices {
                                 }
                             }
                             else {
-                                if (currentPrio > LayoutProviderData.MIN_SUPPORT_PRIORITY) {
+                                if (currentPrio > LayoutProviderData.MIN_PRIORITY) {
                                     bestProvider = providerData.instance;
                                     bestPrio = currentPrio;
                                     matchesGeneralDiagram = true;
@@ -277,7 +281,7 @@ public class LayoutServices {
                 if (providerData.type.equals(layoutType)) {
                     bestProvider = providerData.instance;
                     matchesLayoutType = true;
-                    if (currentPrio > LayoutProviderData.MIN_SUPPORT_PRIORITY) {
+                    if (currentPrio > LayoutProviderData.MIN_PRIORITY) {
                         bestPrio = currentPrio;
                         matchesDiagramType = true;
                         matchesGeneralDiagram = false;
@@ -285,7 +289,7 @@ public class LayoutServices {
                     else {
                         matchesDiagramType = false;
                         currentPrio = providerData.getSupportedPriority(DIAGRAM_TYPE_GENERAL);
-                        if (currentPrio > LayoutProviderData.MIN_SUPPORT_PRIORITY) {
+                        if (currentPrio > LayoutProviderData.MIN_PRIORITY) {
                             bestPrio = currentPrio;
                             matchesGeneralDiagram = true;
                         }
@@ -301,7 +305,7 @@ public class LayoutServices {
                         }
                     }
                     else {
-                        if (currentPrio > LayoutProviderData.MIN_SUPPORT_PRIORITY) {
+                        if (currentPrio > LayoutProviderData.MIN_PRIORITY) {
                             bestProvider = providerData.instance;
                             bestPrio = currentPrio;
                             matchesDiagramType = true;
@@ -316,7 +320,7 @@ public class LayoutServices {
                                 }
                             }
                             else {
-                                if (currentPrio > LayoutProviderData.MIN_SUPPORT_PRIORITY) {
+                                if (currentPrio > LayoutProviderData.MIN_PRIORITY) {
                                     bestProvider = providerData.instance;
                                     bestPrio = currentPrio;
                                     matchesGeneralDiagram = true;
