@@ -14,6 +14,18 @@ public class XtendJava {
 	}
 
 	//-------------------------------------------------------------------------
+	public final static String createListValue(EObject item) {
+		   if (item.eClass().getName().equals("MyList")) {
+			   //THIS CAUSES AN ERROR BECAUSE BECAUSE OF DYNAMIC EMF//
+			   //SEE:
+			   //www.ibm.com/developerworks/library/os-eclipse-dynamicemf/
+			   
+			   //MyList myList = (MyList)item;
+		   }
+		   return "LIST";
+	}
+		
+	//-------------------------------------------------------------------------
 	// create (more complex) list serialization
 	public final static String createListValue(MyList item) {
 		String returnString = "";

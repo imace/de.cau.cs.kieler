@@ -38,6 +38,7 @@ String createIntValue(mymodel::MyInt intData) :
 ;   
 
 String createListValue(mymodel::MyList list) :
-   "LIST TO COMPLEX :("
-;   
+   JAVA de.cau.cs.kieler.example.oaw.gen.XtendJava.createListValue(org.eclipse.emf.ecore.EObject)
+;
+
 		

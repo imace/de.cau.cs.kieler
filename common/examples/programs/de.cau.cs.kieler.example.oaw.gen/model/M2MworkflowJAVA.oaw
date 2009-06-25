@@ -34,7 +34,7 @@
 			<metaModelPackage value="simple.SimplePackage" />
 			<!-- <metaModelFile value="${dstmetamodel}" />  -->
 		</metaModel>
-		<invoke value="M2Mtransformation2::transform(source)" />
+		<invoke value="M2MtransformationJAVA::transform(source)" />
 		<outputSlot value="target"/>
 	</component>
 

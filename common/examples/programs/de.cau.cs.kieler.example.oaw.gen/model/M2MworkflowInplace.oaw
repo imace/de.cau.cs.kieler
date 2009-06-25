@@ -8,7 +8,7 @@
 
 	<!-- set up EMF for standalone execution -->
 	<bean class="org.eclipse.mwe.emf.StandaloneSetup" >
-		<registerGeneratedEPackage value="simple.SimplePackage" />
+		<registerGeneratedEPackage value="mymodel.MymodelPackage" />
 		<platformUri value=".."/>
 	</bean>
 	
@@ -23,24 +23,16 @@
 	<!-- perform transformation -->
 	<component class="oaw.xtend.XtendComponent">
 		<metaModel class="oaw.type.emf.EmfMetaModel">
-			<!-- <metaModelPackage value="mymodel.MymodelPackage"/> -->
-			<metaModelFile value="${srcmetamodel}" />
+			<metaModelPackage value="mymodel.MymodelPackage"/>
+			<!-- <metaModelFile value="${srcmetamodel}" /> -->
 		</metaModel>
-		<metaModel class="oaw.type.emf.EmfMetaModel">
-			<!-- <metaModelPackage value="simple.SimplePackage" />  -->
-			<metaModelFile value="${dstmetamodel}" />
-		</metaModel>
-		<!--<metaModel id="javamm" class="org.openarchitectureware.type.impl.java.JavaMetaModel">
-		</metaModel>  -->
-		<invoke value="M2Mtransformation1::transform(source)" />
-		<outputSlot value="target"/>
+		<invoke value="M2MtransformationInplace::transform(source)" />
 	</component>
 
-	<!-- store model -->
+	<!-- store model -->  
 	<component class="org.eclipse.mwe.emf.Writer">
-		<uri value="${target}" />
-		<modelSlot value="target"/>
+		<uri value="${source}" />
+		<modelSlot value="source"/>
 	</component>
-		
 
 </workflow>
