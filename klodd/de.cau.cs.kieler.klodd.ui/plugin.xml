@@ -3,13 +3,9 @@
 <plugin>
    <extension
          point="de.cau.cs.kieler.kiml.layout.layoutProviders">
-      <collection
-            id="de.cau.cs.kieler.klodd.collection"
-            name="KIELER Dataflow Layouters">
-      </collection>
       <layoutProvider
             class="de.cau.cs.kieler.klodd.hierarchical.HierarchicalDataflowLayoutProvider"
-            collection="de.cau.cs.kieler.klodd.collection"
+            category="de.cau.cs.kieler.layouter.category"
             id="de.cau.cs.kieler.klodd.hierarchical"
             name="KLoDD Hierarchical"
             type="de.cau.cs.kieler.layout.types.layered">

@@ -35,7 +35,6 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		IPreferenceStore store = KloddUIPlugin.getDefault().getPreferenceStore();
 
 		// initialize options for hierarchical layout
-		store.setDefault(HierarchicalDataflowLayoutProvider.LAYOUTER_NAME, true);
 		store.setDefault(HierarchicalDataflowLayoutProvider.PREF_CYCLE_REM,
 				HierarchicalDataflowLayoutProvider.VAL_GREEDY_CYCLE_REM);
 		store.setDefault(HierarchicalDataflowLayoutProvider.PREF_LAYER_ASS,
@@ -45,8 +44,6 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		store.setDefault(HierarchicalDataflowLayoutProvider.PREF_CROSSRED_PASSES,
 		        HierarchicalDataflowLayoutProvider.DEF_CROSSRED_PASSES);
 		store.setDefault(HierarchicalDataflowLayoutProvider.PREF_BALANCE_VS_SIZE, true);
-		// initialize options for orthogonal layout
-		store.setDefault(OrthogonalDataflowLayoutProvider.LAYOUTER_NAME, true);
 	}
 
 }
