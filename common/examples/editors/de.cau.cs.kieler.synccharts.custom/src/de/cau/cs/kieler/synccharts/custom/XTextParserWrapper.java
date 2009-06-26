@@ -51,13 +51,13 @@ public class XTextParserWrapper implements IParser {
 			if (((EObjectAdapter) element).getRealObject() instanceof Action) {
 				Action action = (Action) (((EObjectAdapter) element).getRealObject());
 				if (action.getTriggersAndEffects() != null) {
-					return action.getTriggersAndEffects();
+					return action.getTriggersAndEffects().replace("INVALID: ", "");
 				}
 			}
 			else if (((EObjectAdapter) element).getRealObject() instanceof SuspensionTrigger) {
 				SuspensionTrigger suspensionTrigger = (SuspensionTrigger) (((EObjectAdapter) element).getRealObject());
 				if (suspensionTrigger.getTrigger() != null) {
-					return suspensionTrigger.getTrigger();
+					return suspensionTrigger.getTrigger().replace("INVALID: ", "");
 				}
 			}
 		}
