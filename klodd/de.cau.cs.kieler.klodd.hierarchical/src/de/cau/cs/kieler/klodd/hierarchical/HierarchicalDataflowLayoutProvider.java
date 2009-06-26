@@ -49,11 +49,6 @@ import de.cau.cs.kieler.klodd.hierarchical.structures.LayeredGraph;
 public class HierarchicalDataflowLayoutProvider extends
 		AbstractLayoutProvider {
 	
-	/** displayed name of this layout provider */
-	public static final String LAYOUTER_NAME = "KLoDD Hierarchical";
-	/** name of the KLoDD layouters collection */
-	public static final String COLLECTION_NAME = "KLoDD Layouters";
-	
 	/** default value for minimal distance */
 	public static final float DEF_MIN_DIST = 15.0f; 
 	/** preference identifier for cycle remover module */

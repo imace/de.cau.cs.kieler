@@ -15,8 +15,6 @@ import de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider;
  */
 public class ZestSpringLayoutProvider extends AbstractLayoutProvider {
 	
-	public static final String LAYOUTER_NAME = "Zest Spring Layout";
-
 	/*
 	 * (non-Javadoc)
 	 * @see de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider#doLayout(de.cau.cs.kieler.core.kgraph.KNode, de.cau.cs.kieler.core.alg.IKielerProgressMonitor)

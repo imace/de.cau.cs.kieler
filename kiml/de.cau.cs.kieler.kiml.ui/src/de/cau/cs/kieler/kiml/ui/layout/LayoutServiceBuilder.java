@@ -13,7 +13,9 @@
  */
 package de.cau.cs.kieler.kiml.ui.layout;
 
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
@@ -48,8 +50,8 @@ public class LayoutServiceBuilder {
     public static final String ELEMENT_LAYOUT_PROVIDER = "layoutProvider";
     /** name of the 'layoutType' element in the 'layout providers' extension point */
     public static final String ELEMENT_LAYOUT_TYPE = "layoutType";
-    /** name of the 'collection' element in the 'layout providers' extension point */
-    public static final String ELEMENT_COLLECTION = "collection";
+    /** name of the 'category' element in the 'layout providers' extension point */
+    public static final String ELEMENT_CATEGORY = "category";
     /** name of the 'layoutOption' element in the 'layout providers' extension point */
     public static final String ELEMENT_LAYOUT_OPTION = "layoutOption";
     /** name of the 'knownOption' element in the 'layout providers' extension point */
@@ -70,8 +72,8 @@ public class LayoutServiceBuilder {
     public static final String ATTRIBUTE_NAME = "name";
     /** name of the 'type' attribute in the extension points */
     public static final String ATTRIBUTE_TYPE = "type";
-    /** name of the 'collection' attribute in the extension points */
-    public static final String ATTRIBUTE_COLLECTION = "collection";
+    /** name of the 'category' attribute in the extension points */
+    public static final String ATTRIBUTE_COLLECTION = "category";
     /** name of the 'description' attribute in the extension points */
     public static final String ATTRIBUTE_DESCRIPTION = "description";
     /** name of the 'option' attribute in the extension points */
@@ -94,6 +96,47 @@ public class LayoutServiceBuilder {
 		loadLayoutInfoExtensions();
 		// load preferences for KIML
 		LoadPreferences();
+	}
+	
+	/**
+	 * Fills the given table of priorities with data from the extension point.
+	 * The number of rows in the table must be equal to the number of layout
+	 * providers, and the number of columns must be equal to the number of
+	 * diagram types.
+	 * 
+	 * @param priorityData two dimensional array that is filled with data
+	 * @param layoutProviders array of layout provider identifiers
+	 * @param diagramTypes array of diagram type identifiers
+	 */
+	public static void readSupportPriorities(int[][] priorityData,
+	        String[] layoutProviders, String[] diagramTypes) {
+	    List<String> layoutProviderList = Arrays.asList(layoutProviders);
+	    List<String> diagramTypesList = Arrays.asList(diagramTypes);
+	    for (int i = 0; i < layoutProviders.length; i++)
+	        Arrays.fill(priorityData[i], LayoutProviderData.MIN_PRIORITY);
+	    
+        IConfigurationElement[] extensions = Platform.getExtensionRegistry()
+                .getConfigurationElementsFor(EXTP_ID_LAYOUT_PROVIDERS);
+        for (IConfigurationElement element : extensions) {
+            if (ELEMENT_LAYOUT_PROVIDER.equals(element.getName())) {
+                int providerIndex = layoutProviderList.indexOf(
+                        element.getAttribute(ATTRIBUTE_ID));
+                if (providerIndex >= 0) {
+                    for (IConfigurationElement child : element.getChildren()) {
+                        if (ELEMENT_SUPPORTED_DIAGRAM.equals(child.getName())) {
+                            int typeIndex = diagramTypesList.indexOf(
+                                    child.getAttribute(ATTRIBUTE_TYPE));
+                            if (typeIndex >= 0) {
+                                String priority = child.getAttribute(ATTRIBUTE_PRIORITY);
+                                try {
+                                   priorityData[providerIndex][typeIndex] = Integer.parseInt(priority);
+                                } catch (NumberFormatException exception) {}
+                            }
+                        }
+                    }
+                }
+            }
+        }
 	}
 	
 	/**
@@ -120,9 +163,9 @@ public class LayoutServiceBuilder {
     				    providerData.type = element.getAttribute(ATTRIBUTE_TYPE);
     				    if (providerData.type == null)
     				        providerData.type = "";
-    				    providerData.collection = element.getAttribute(ATTRIBUTE_COLLECTION);
-    				    if (providerData.collection == null)
-    				        providerData.collection = "";
+    				    providerData.category = element.getAttribute(ATTRIBUTE_COLLECTION);
+    				    if (providerData.category == null)
+    				        providerData.category = "";
     				    for (IConfigurationElement child : element.getChildren()) {
     				        if (ELEMENT_KNOWN_OPTION.equals(child.getName())) {
     				            String option = child.getAttribute(ATTRIBUTE_OPTION);
@@ -155,9 +198,9 @@ public class LayoutServiceBuilder {
 		                element.getAttribute(ATTRIBUTE_ID),
 		                element.getAttribute(ATTRIBUTE_NAME));
 		    }
-		    else if (ELEMENT_COLLECTION.equals(element.getName())) {
-		        // register a collection from the extension
-		        LayoutServices.INSTANCE.addCollection(
+		    else if (ELEMENT_CATEGORY.equals(element.getName())) {
+		        // register a category from the extension
+		        LayoutServices.INSTANCE.addCategory(
 		                element.getAttribute(ATTRIBUTE_ID),
 		                element.getAttribute(ATTRIBUTE_NAME));
 		    }

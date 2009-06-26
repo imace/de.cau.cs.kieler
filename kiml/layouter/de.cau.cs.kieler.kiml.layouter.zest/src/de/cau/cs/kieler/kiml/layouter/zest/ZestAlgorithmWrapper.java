@@ -30,9 +30,6 @@ import de.cau.cs.kieler.kiml.layouter.zest.preferences.ZestLayouterPreferencePag
  */
 public class ZestAlgorithmWrapper {
 	
-	/** Name of the Zest layout algorithms collection */
-	public static final String COLLECTION_NAME = "Zest Layout Algorithms";
-	
 	// value added to the size of each parent node
 	private static final float SIZE_ADDITION = 20.0f;
 	

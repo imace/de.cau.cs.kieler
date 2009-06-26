@@ -49,8 +49,8 @@ public class LayoutServices {
 			= new LinkedHashMap<String, LayoutProviderData>();
 	/** mapping of layout type identifiers to their names */
 	private Map<String, String> layoutTypeMap = new HashMap<String, String>();
-	/** mapping of collection identifiers to their names */
-	private Map<String, String> collectionMap = new HashMap<String, String>();
+	/** mapping of category identifiers to their names */
+	private Map<String, String> categoryMap = new HashMap<String, String>();
 	/** mapping of diagram type identifiers to their names */
 	private Map<String, String> diagramTypeMap = new LinkedHashMap<String, String>();
 	/** mapping of graphical edit parts to associated diagram types */
@@ -135,9 +135,9 @@ public class LayoutServices {
 	}
 
 	/**
-	 * Returns a data collection for all registered layout providers.
+	 * Returns a data category for all registered layout providers.
 	 * 
-	 * @return collection of registered layout providers
+	 * @return category of registered layout providers
 	 */
     public Collection<LayoutProviderData> getLayoutProviderData() {
         return layoutProviderMap.values();
@@ -167,7 +167,7 @@ public class LayoutServices {
 	 * Registers the given layout type.
 	 * 
 	 * @param id identifier of the type
-	 * @param name readable name of the type
+	 * @param name user friendly name of the type
 	 */
 	public void addLayoutType(String id, String name) {
 	    if (id != null && name != null)
@@ -178,7 +178,7 @@ public class LayoutServices {
 	 * Returns the name of the layout type with given identifier.
 	 * 
 	 * @param id identifier of the type
-	 * @return readable name of the type, or {@code null} if the layout type is
+	 * @return user friendly name of the type, or {@code null} if the layout type is
 	 *     not registered
 	 */
 	public String getLayoutTypeName(String id) {
@@ -208,30 +208,67 @@ public class LayoutServices {
 	    return editPartBindingMap.get(editPartType);
 	}
 	
-	public void addCollection(String id, String name) {
+	/**
+	 * Registers the given category.
+	 * 
+	 * @param id identifier of the category
+	 * @param name user friendly name of the category
+	 */
+	public void addCategory(String id, String name) {
 	    if (id != null && name != null)
-	        collectionMap.put(id, name);
+	        categoryMap.put(id, name);
 	}
 	
-	public String getCollectionName(String id) {
-	    return collectionMap.get(id);
+	/**
+	 * Returns the name of the given category.
+	 * 
+	 * @param id identifier of the category
+	 * @return user friendly name of the category
+	 */
+	public String getCategoryName(String id) {
+	    return categoryMap.get(id);
 	}
 	
+	/**
+	 * Registers the given diagram type.
+	 * 
+	 * @param id identifier of the diagram type
+	 * @param name user friendly name of the diagram type
+	 */
 	public void addDiagramType(String id, String name) {
 	    if (id != null && name != null)
 	        diagramTypeMap.put(id, name);
 	}
-	
+
+	/**
+	 * Returns the name of the given diagram type.
+	 * 
+	 * @param id identifier of the diagram type
+	 * @return user friendly name of the diagram type
+	 */
 	public String getDiagramTypeName(String id) {
 	    return diagramTypeMap.get(id);
 	}
 	
+	/**
+	 * Returns a collection of registered diagram types.
+	 * 
+	 * @return the registered diagram types
+	 */
 	public Collection<String> getDiagramTypes() {
 	    return diagramTypeMap.keySet();
 	}
 	
+	/**
+	 * Determines an appropriate layout provider for the given layout type and
+	 * diagram type.
+	 * 
+	 * @param layoutType hint about the layout type to choose, or {@code null}
+	 *     if no specific layout type is selected
+	 * @param diagramType identifier of the diagram type that is to be layouted
+	 * @return an instance of a suitable layout provider
+	 */
 	private AbstractLayoutProvider findAppropriateProvider(String layoutType, String diagramType) {
-        boolean givenLayoutType = layoutTypeMap.containsKey(layoutType);
         Iterator<LayoutProviderData> providerIter = layoutProviderMap.values().iterator();
         AbstractLayoutProvider bestProvider = null;
         int bestPrio = LayoutProviderData.MIN_PRIORITY;

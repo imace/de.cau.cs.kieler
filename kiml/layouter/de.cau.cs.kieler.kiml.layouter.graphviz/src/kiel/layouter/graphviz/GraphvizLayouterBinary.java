@@ -140,21 +140,11 @@ public class GraphvizLayouterBinary implements GraphvizLayouter {
 	private int prefPadY = 15;
 
 	/* holds the String denoting the desired layouter of the GraphViz suite */
-	private String layouterName;
+	private String command;
 	
 	/* holds the path to the dotExecutable. Will be read from the preferences */
 	private String dotExecutable;
-	private String dotArgument = GraphvizLayoutProviderNames.COMMAND_PARAMETER+GraphvizLayoutProviderNames.DOT_COMMAND;
-
-	/**
-	 * Creates a new KIML GraphViz layouter using the dot layout engine. Loads
-	 * the preference values.
-	 * 
-	 */
-	public GraphvizLayouterBinary() {
-		layouterName = GraphvizLayoutProviderNames.GRAPHVIZ_DOT;
-		init();
-	}
+	private String dotArgument = GraphvizLayouter.COMMAND_PARAMETER+GraphvizLayouter.DOT_COMMAND;
 
 	/**
 	 * Creates a new KIML GraphViz layouter with the specified concrete GraphViz
@@ -164,9 +154,9 @@ public class GraphvizLayouterBinary implements GraphvizLayouter {
 	 *            A String denoting the layouter. Must be one of those declared
 	 *            in {@link GraphvizLayoutProviderNames}.
 	 */
-	public GraphvizLayouterBinary(String layoutProviderName) {
-		layouterName = layoutProviderName;
+	public GraphvizLayouterBinary(String command) {
 		init();
+		this.command = command;
 	}
 	
 	private void init(){
@@ -237,25 +227,7 @@ public class GraphvizLayouterBinary implements GraphvizLayouter {
 		
 		
 		/* pick up desired layouter */
-		if (layouterName.equals(GraphvizLayoutProviderNames.GRAPHVIZ_CIRCO)) {
-			dotArgument = GraphvizLayoutProviderNames.COMMAND_PARAMETER 
-			               + GraphvizLayoutProviderNames.CIRCO_COMMAND;
-		} else if (layouterName
-				.equals(GraphvizLayoutProviderNames.GRAPHVIZ_NEATO)) {
-			dotArgument = GraphvizLayoutProviderNames.COMMAND_PARAMETER 
-            			   + GraphvizLayoutProviderNames.NEATO_COMMAND;
-		} else if (layouterName
-				.equals(GraphvizLayoutProviderNames.GRAPHVIZ_TWOPI)) {
-			dotArgument  = GraphvizLayoutProviderNames.COMMAND_PARAMETER 
-            + GraphvizLayoutProviderNames.TWOPI_COMMAND;
-		} else if (layouterName
-				.equals(GraphvizLayoutProviderNames.GRAPHVIZ_FDP)) {
-			dotArgument  = GraphvizLayoutProviderNames.COMMAND_PARAMETER 
-            + GraphvizLayoutProviderNames.FDP_COMMAND;
-		} else {
-			dotArgument  = GraphvizLayoutProviderNames.COMMAND_PARAMETER 
-            + GraphvizLayoutProviderNames.DOT_COMMAND;
-		}
+		dotArgument = GraphvizLayouter.COMMAND_PARAMETER + command;
 
 		PrintWriter debugOut = null;
 		FileWriter fw = null;

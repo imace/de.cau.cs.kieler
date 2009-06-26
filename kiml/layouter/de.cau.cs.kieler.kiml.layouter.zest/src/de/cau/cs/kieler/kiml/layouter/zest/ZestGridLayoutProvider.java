@@ -14,8 +14,6 @@ import de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider;
  * @author msp
  */
 public class ZestGridLayoutProvider extends AbstractLayoutProvider {
-
-	public static final String LAYOUTER_NAME = "Zest Grid Layout";
 	
 	/*
 	 * (non-Javadoc)

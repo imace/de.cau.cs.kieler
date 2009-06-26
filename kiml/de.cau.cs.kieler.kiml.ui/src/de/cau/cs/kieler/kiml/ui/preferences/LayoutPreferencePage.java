@@ -14,19 +14,16 @@
 package de.cau.cs.kieler.kiml.ui.preferences;
 
 import java.util.Collection;
+import java.util.StringTokenizer;
 
 import org.eclipse.jface.preference.PreferencePage;
 import org.eclipse.jface.viewers.CellEditor;
-import org.eclipse.jface.viewers.CheckboxCellEditor;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TextCellEditor;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
-import org.eclipse.swt.events.ModifyEvent;
-import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Group;
@@ -54,9 +51,7 @@ public class LayoutPreferencePage extends PreferencePage
     /** array of diagram type identifiers */
     private String[] diagramTypes;
     /** data matrix: rows represent layout providers, columns represent diagram types */
-    private PriorityTableProvider.DataEntry[][] data;
-    /** the combo box used to select layout providers */
-    private Combo layoutersCombo;
+    private int[][] data;
     /** the table viewer used to display priorities */
     private TableViewer priorityTableViewer;
     
@@ -87,71 +82,60 @@ public class LayoutPreferencePage extends PreferencePage
         Group prioritesGroup = new Group(parent, SWT.NONE);
         prioritesGroup.setText("Priorities of Layouters");
         
-        // construct the combo box to select a layouter
-        layoutersCombo = new Combo(prioritesGroup, SWT.DROP_DOWN | SWT.READ_ONLY);
         Collection<LayoutProviderData> layoutProviderData = LayoutServices
                 .INSTANCE.getLayoutProviderData();
         int layoutProviderCount = layoutProviderData.size();
         diagramTypes = LayoutServices.INSTANCE.getDiagramTypes().toArray(new String[0]);
-        String[] comboEntries = new String[layoutProviderCount];
         providerIds = new String[layoutProviderCount];
-        data = new PriorityTableProvider.DataEntry
-                [layoutProviderCount][diagramTypes.length];
+        data = new int[layoutProviderCount][diagramTypes.length];
+        PriorityTableProvider.DataEntry[] tableEntries = new PriorityTableProvider
+                .DataEntry[layoutProviderCount];
         int i = 0;
         for (LayoutProviderData providerData : layoutProviderData) {
-            String collectionName = LayoutServices.INSTANCE.getCollectionName(providerData.collection);
-            if (collectionName != null)
-                comboEntries[i] = providerData.name + " (" + collectionName + ")";
-            else
-                comboEntries[i] = providerData.name;
             providerIds[i] = providerData.id;
+            tableEntries[i] = new PriorityTableProvider.DataEntry();
+            tableEntries[i].layouterName = providerData.name;
+            tableEntries[i].priorities = data[i];
             for (int j = 0; j < diagramTypes.length; j++) {
-                data[i][j] = new PriorityTableProvider.DataEntry();
-                data[i][j].diagramTypeName = LayoutServices.INSTANCE
-                        .getDiagramTypeName(diagramTypes[j]);
+                data[i][j] = providerData.getSupportedPriority(diagramTypes[j]);
             }
             i++;
         }
-        layoutersCombo.setItems(comboEntries);
-        layoutersCombo.select(0);
         
         // construct the priorities table
         Label tableHeaderLabel = new Label(prioritesGroup, SWT.NONE);
-        tableHeaderLabel.setText("Priorities of the selected layouter:");
+        tableHeaderLabel.setText("");
         ScrolledComposite scrolledComposite = new ScrolledComposite(prioritesGroup, SWT.BORDER);
         Table prioritiesTable = new Table(scrolledComposite, SWT.HIDE_SELECTION);
         scrolledComposite.setContent(prioritiesTable);
-        TableColumn column0 =  new TableColumn(prioritiesTable, SWT.NONE);
-        column0.setText("Diagram Type");
-        column0.setResizable(true);;
-        TableColumn column1 =  new TableColumn(prioritiesTable, SWT.NONE);
-        column1.setText("Supported");
-        column1.setResizable(true);
-        TableColumn column2 =  new TableColumn(prioritiesTable, SWT.NONE, 2);
-        column2.setText("Priority");
-        column2.setResizable(true);
+        TableColumn[] columns = new TableColumn[diagramTypes.length + 1];
+        columns[0] =  new TableColumn(prioritiesTable, SWT.NONE);
+        columns[0].setText("Layouter");
+        for (int j = 0; j < diagramTypes.length; j++) {
+            columns[j+1] = new TableColumn(prioritiesTable, SWT.NONE);
+            String diagramTypeName = LayoutServices.INSTANCE.getDiagramTypeName(diagramTypes[j]);
+            columns[j+1].setText(getAbbrev(diagramTypeName));
+            columns[j+1].setToolTipText(diagramTypeName);
+        }
         prioritiesTable.setHeaderVisible(true);
-        prioritiesTable.setSize(300, 200);
+        prioritiesTable.setSize(500, 300);
         priorityTableViewer = new TableViewer(prioritiesTable);
-        priorityTableViewer.setColumnProperties(new String[] {
-            PriorityTableProvider.DIAGRAM_PROPERTY,
-            PriorityTableProvider.SUPPORTED_PROPERTY,
-            PriorityTableProvider.PRIORITY_PROPERTY
-        });
+        String[] columnProperties = new String[diagramTypes.length + 1];
+        CellEditor[] cellEditors = new CellEditor[diagramTypes.length + 1];
+        columnProperties[0] = PriorityTableProvider.LAYOUTERS_PROPERTY;
+        for (int j = 0; j < diagramTypes.length; j++) {
+            columnProperties[j+1] = Integer.toString(j);
+            cellEditors[j+1] = new TextCellEditor(prioritiesTable);
+        }
+        priorityTableViewer.setColumnProperties(columnProperties);
         PriorityTableProvider tableProvider = new PriorityTableProvider(priorityTableViewer);
         priorityTableViewer.setContentProvider(tableProvider);
         priorityTableViewer.setLabelProvider(tableProvider);
-        CellEditor[] editors = new CellEditor[3];
-        editors[1] = new CheckboxCellEditor(prioritiesTable);
-        editors[2] = new TextCellEditor(prioritiesTable);
-        priorityTableViewer.setCellEditors(editors);
+        priorityTableViewer.setCellEditors(cellEditors);
         priorityTableViewer.setCellModifier(tableProvider);
-        layoutersCombo.addModifyListener(new ModifyListener() {
-            public void modifyText(ModifyEvent e) {
-                priorityTableViewer.setInput(data[layoutersCombo.getSelectionIndex()]);
-            }
-        });
-        priorityTableViewer.setInput(data[0]);
+        priorityTableViewer.setInput(tableEntries);
+        for (TableColumn column : columns)
+            column.pack();
         
         prioritesGroup.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false,
                 false, 1, 1));
@@ -159,12 +143,19 @@ public class LayoutPreferencePage extends PreferencePage
         gridLayout.marginWidth = 15;
         gridLayout.marginHeight = 10;
         prioritesGroup.setLayout(gridLayout);
-        
-        loadData();
-        column0.pack();
-        column1.pack();
-        column2.pack();
         return prioritesGroup;
+    }
+    
+    private String getAbbrev(String diagramType) {
+        if (diagramType.length() <= 7)
+            return diagramType;
+        else {
+            StringBuffer abbrev = new StringBuffer();
+            StringTokenizer tokenizer = new StringTokenizer(diagramType);
+            while (tokenizer.hasMoreTokens())
+                abbrev.append(tokenizer.nextToken().charAt(0));
+            return abbrev.toString();
+        }
     }
 
     /* (non-Javadoc)
@@ -181,7 +172,6 @@ public class LayoutPreferencePage extends PreferencePage
     protected void performDefaults() {
         // FIXME currently the default values given by the extension points are not available after user changes have been stored
         super.performDefaults();
-        loadData();
     }
     
     /*
@@ -195,24 +185,8 @@ public class LayoutPreferencePage extends PreferencePage
             for (int j = 0; j < diagramTypes.length; j++) {
                 int oldPriority = providerData.getSupportedPriority(
                         diagramTypes[j]);
-                boolean updateNeeded = false;
-                int newPriority = 0;
-                if (oldPriority == LayoutProviderData.MIN_PRIORITY
-                        && data[i][j].supported) {
-                    newPriority = data[i][j].priority;
-                    updateNeeded = true;
-                }
-                else if (oldPriority > LayoutProviderData.MIN_PRIORITY
-                        && !data[i][j].supported) {
-                    newPriority = LayoutProviderData.MIN_PRIORITY;
-                    updateNeeded = true;
-                }
-                else if (oldPriority > LayoutProviderData.MIN_PRIORITY
-                        && data[i][j].supported && oldPriority != data[i][j].priority) {
-                    newPriority = data[i][j].priority;
-                    updateNeeded = true;
-                }
-                if (updateNeeded) {
+                int newPriority = data[i][j];
+                if (oldPriority != newPriority) {
                     providerData.setDiagramSupport(diagramTypes[j], newPriority);
                     String preference = getPreference(providerData.id, diagramTypes[j]);
                     getPreferenceStore().setValue(preference, newPriority);
@@ -220,25 +194,6 @@ public class LayoutPreferencePage extends PreferencePage
             }
         }
         return true;
-    }
-    
-    /**
-     * Loads the internal data form the layout services.
-     */
-    private void loadData() {
-        for (int i = 0; i < providerIds.length; i++) {
-            LayoutProviderData providerData = LayoutServices.INSTANCE
-                    .getLayoutProviderData(providerIds[i]);
-            for (int j = 0; j < diagramTypes.length; j++) {
-                int supportedPriority = providerData.getSupportedPriority(
-                        diagramTypes[j]);
-                data[i][j].supported = supportedPriority
-                        > LayoutProviderData.MIN_PRIORITY;
-                data[i][j].priority = data[i][j].supported
-                        ? supportedPriority : 0;
-            }
-        }
-        priorityTableViewer.refresh();
     }
 
 }

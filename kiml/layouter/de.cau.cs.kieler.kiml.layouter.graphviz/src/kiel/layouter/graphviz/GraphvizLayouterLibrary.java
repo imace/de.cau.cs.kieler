@@ -91,17 +91,7 @@ public class GraphvizLayouterLibrary implements GraphvizLayouter{
 	private int prefPadY = 15;
 
 	/* holds the String denoting the desired layouter of the GraphViz suite */
-	private String layouterName;
-
-	/**
-	 * Creates a new KIML GraphViz layouter using the dot layout engine. Loads
-	 * the preference values.
-	 * 
-	 */
-	public GraphvizLayouterLibrary() {
-		layouterName = GraphvizLayoutProviderNames.GRAPHVIZ_DOT;
-		GraphvizAPI.initialize();
-	}
+	private String command;
 
 	/**
 	 * Creates a new KIML GraphViz layouter with the specified concrete GraphViz
@@ -111,8 +101,8 @@ public class GraphvizLayouterLibrary implements GraphvizLayouter{
 	 *            A String denoting the layouter. Must be one of those declared
 	 *            in {@link GraphvizLayoutProviderNames}.
 	 */
-	public GraphvizLayouterLibrary(String layoutProviderName) {
-		layouterName = layoutProviderName;
+	public GraphvizLayouterLibrary(String command) {
+		this.command = command;
 		GraphvizAPI.initialize();
 	}
 
@@ -167,19 +157,19 @@ public class GraphvizLayouterLibrary implements GraphvizLayouter{
 		progressMonitor.worked(5);
 
 		/* pick up desired layouter */
-		if (layouterName.equals(GraphvizLayoutProviderNames.GRAPHVIZ_CIRCO)) {
+		if (command.equals(GraphvizLayouter.CIRCO_COMMAND)) {
 			GraphvizAPI.doCircoLayout(graphvizGraph);
 			GraphvizAPI.attachAttributes(graphvizGraph);
 			mapGraphviz2LayoutNode(layoutNode);
 			GraphvizAPI.circoCleanup(graphvizGraph);
-		} else if (layouterName
-				.equals(GraphvizLayoutProviderNames.GRAPHVIZ_NEATO)) {
+		} else if (command
+				.equals(GraphvizLayouter.NEATO_COMMAND)) {
 			GraphvizAPI.doNeatoLayout(graphvizGraph);
 			GraphvizAPI.attachAttributes(graphvizGraph);
 			mapGraphviz2LayoutNode(layoutNode);
 			GraphvizAPI.neatoCleanup(graphvizGraph);
-		} else if (layouterName
-				.equals(GraphvizLayoutProviderNames.GRAPHVIZ_TWOPI)) {
+		} else if (command
+				.equals(GraphvizLayouter.TWOPI_COMMAND)) {
 			GraphvizAPI.doTwopiLayout(graphvizGraph);
 			GraphvizAPI.attachAttributes(graphvizGraph);
 			mapGraphviz2LayoutNode(layoutNode);

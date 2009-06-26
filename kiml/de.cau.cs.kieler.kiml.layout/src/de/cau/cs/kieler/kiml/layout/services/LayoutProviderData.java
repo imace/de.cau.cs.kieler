@@ -25,7 +25,7 @@ import java.util.ListIterator;
 public class LayoutProviderData {
 
     /** the minimal allowed priority value; values less or equal to this value are treated as 'not supported' */
-    public static final int MIN_PRIORITY = Integer.MIN_VALUE >> 1;
+    public static final int MIN_PRIORITY = Integer.MIN_VALUE >> 2;
 
     /** internal data type for storage of supported diagram information */
     private static class SupportedDiagram {
@@ -43,8 +43,8 @@ public class LayoutProviderData {
     public AbstractLayoutProvider instance;
     /** layout type identifier */
     public String type = "";
-    /** collection identifier */
-    public String collection = "";
+    /** category identifier */
+    public String category = "";
     
     /** list of known layout options */
     private List<String> knownOptions = new LinkedList<String>();

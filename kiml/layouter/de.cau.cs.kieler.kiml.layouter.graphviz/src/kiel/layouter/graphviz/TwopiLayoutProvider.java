@@ -28,9 +28,6 @@ import de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider;
  */
 public class TwopiLayoutProvider extends AbstractLayoutProvider {
 
-	/* some Strings used here */
-	private final String LAYOUT_PROVIDER_NAME = GraphvizLayoutProviderNames.GRAPHVIZ_TWOPI;
-
 	/* real GraphViz layouter Emma uses to do the layout */
 	private GraphvizLayouter graphvizLayouter = null;
 
@@ -41,7 +38,7 @@ public class TwopiLayoutProvider extends AbstractLayoutProvider {
 	public void doLayout(KNode layoutNode,
 			IKielerProgressMonitor progressMonitor) throws KielerException {
 		if (graphvizLayouter == null)
-			graphvizLayouter = new GraphvizLayouterBinary(LAYOUT_PROVIDER_NAME);
+			graphvizLayouter = new GraphvizLayouterBinary(GraphvizLayouter.TWOPI_COMMAND);
 		graphvizLayouter.visit(layoutNode, progressMonitor);
 	}
 

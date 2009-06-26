@@ -6,8 +6,13 @@
    <extension-point id="layoutInfo" name="Layout Info" schema="schema/layoutInfo.exsd"/>
    <extension
          point="de.cau.cs.kieler.kiml.layout.layoutProviders">
+      <category
+            id="de.cau.cs.kieler.layouter.category"
+            name="KIELER">
+      </category>
       <layoutProvider
             class="de.cau.cs.kieler.kiml.layout.util.BoxLayoutProvider"
+            category="de.cau.cs.kieler.layouter.category"
             id="de.cau.cs.kieler.kiml.layouter.boxLayout"
             name="Box Layout">
          <supportedDiagram
@@ -35,7 +40,11 @@
       </layoutType>
       <layoutType
             id="de.cau.cs.kieler.layout.types.circle"
-            name="Circle">
+            name="Circular">
+      </layoutType>
+      <layoutType
+            id="de.cau.cs.kieler.layout.types.radial"
+            name="Radial">
       </layoutType>
       <layoutOption
             description="Defines where an edge label shall be placed: at the source, center, or target"
@@ -95,10 +104,6 @@
       <diagramType
             id="de.cau.cs.kieler.layout.info.types.boxes"
             name="Unconnected Boxes">
-      </diagramType>
-      <diagramType
-            id="de.cau.cs.kieler.layout.info.types.regions"
-            name="Flexible Regions">
       </diagramType>
    </extension>
 

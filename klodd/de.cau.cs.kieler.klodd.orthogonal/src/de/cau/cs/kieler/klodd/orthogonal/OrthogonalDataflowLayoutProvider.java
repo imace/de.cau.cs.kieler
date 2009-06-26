@@ -41,11 +41,6 @@ import de.cau.cs.kieler.klodd.orthogonal.structures.TSMGraph;
 public class OrthogonalDataflowLayoutProvider extends
 		AbstractLayoutProvider {
 
-	/** displayed name of this layout provider */
-	public static final String LAYOUTER_NAME = "KLoDD Orthogonal";
-	/** name of the KLoDD layouters collection */
-	public static final String COLLECTION_NAME = "KLoDD Layouters";
-	
 	/** default value for minimal distance */
 	public static final float DEF_MIN_DIST = 15.0f;
 	

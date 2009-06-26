@@ -9,8 +9,6 @@
  *******************************************************************************/
 package de.cau.cs.kieler.kiml.layouter.graphviz.preferences;
 
-import kiel.layouter.graphviz.GraphvizLayoutProviderNames;
-
 import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
 import org.eclipse.jface.preference.IPreferenceStore;
 
@@ -33,12 +31,6 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 	 */
 	public void initializeDefaultPreferences() {
 		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
-
-		/* initialize the layout providers */
-		store.setDefault(GraphvizLayoutProviderNames.GRAPHVIZ_CIRCO, true);
-		store.setDefault(GraphvizLayoutProviderNames.GRAPHVIZ_DOT, true);
-		store.setDefault(GraphvizLayoutProviderNames.GRAPHVIZ_NEATO, true);
-		store.setDefault(GraphvizLayoutProviderNames.GRAPHVIZ_TWOPI, true);
 
 		/* initialize defaults */
 		store.setDefault(PreferenceConstants.PREF_GRAPHVIZ_PADDING_X, 15);

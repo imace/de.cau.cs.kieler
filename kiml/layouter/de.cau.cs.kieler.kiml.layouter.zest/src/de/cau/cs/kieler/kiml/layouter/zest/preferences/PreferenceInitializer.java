@@ -21,10 +21,6 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 	public void initializeDefaultPreferences() {
 		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
 		
-		/* initialize the layout providers */
-		store.setDefault(ZestSpringLayoutProvider.LAYOUTER_NAME, true);
-		store.setDefault(ZestGridLayoutProvider.LAYOUTER_NAME, true);
-		
 		/* initialize the layout options */
 		store.setDefault(ZestLayouterPreferencePage.PREF_SCALE_BASE, 40.0f);
 	}
