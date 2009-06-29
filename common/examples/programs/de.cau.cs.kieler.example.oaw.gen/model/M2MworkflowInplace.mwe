@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<workflow>
+	<property name="source" value="platform:/resource/de.cau.cs.kieler.example.oaw.gen/My.mymodel" />
+	<property name="target" value="src-gen/generated.simple" />
+
+	<!-- set up EMF for standalone execution -->
+	<bean class="org.eclipse.emf.mwe.utils.StandaloneSetup" >
+		<registerGeneratedEPackage value="simple.SimplePackage" />
+		<registerGeneratedEPackage value="mymodel.MymodelPackage" />
+		<platformUri value=".."/>
+	</bean>
+	
+	<!-- load model and store it in slot 'source' -->
+	<component class="org.eclipse.emf.mwe.utils.Reader">
+	    <uri value="${source}" />
+		<modelSlot value="source" />
+	</component>
+	
+	
+	<!-- perform transformation -->
+	<component class="org.eclipse.xtend.XtendComponent">
+		<metaModel id="mm"
+			class="org.eclipse.xtend.typesystem.emf.EmfRegistryMetaModel"/>
+		<invoke value="M2MtransformationInplace::transform(source)" />
+	</component>
+
+	<!-- store model -->  
+	<component class="org.eclipse.emf.mwe.utils.Writer">
+		<uri value="${source}" />
+		<modelSlot value="source"/>
+	</component>
+
+</workflow>
