@@ -23,17 +23,21 @@ create EntityType this createBaseEntity(simplerailctrl::RailController rc):
    	//create delays
    	this.entity.add(createDelay("delayContact")) ->
    	this.entity.add(createDelay("delayOccupied")) ->
+   	//create ModelRailwayMerges
+    this.entity.add(createModelRailwayMerge("mergeTracks")) ->   	
+    this.entity.add(createModelRailwayMerge("mergePoints")) ->   	
+    this.entity.add(createModelRailwayMerge("mergeSignals")) ->   	
    	//connect top level actors
-   	this.relation.add(createVertexRelation("contactsGLOBAL")) ->
+  	this.relation.add(createVertexRelation("contactsGLOBAL")) ->
    	this.relation.add(createVertexRelation("occupiedGLOBAL")) ->
  	connectActors(this, "ModelRailwayIO.contact", "delayContact.input", "delayContactRelation") ->  	
  	connectActors(this, "ModelRailwayIO.occupied", "delayOccupied.input", "delayOccupiedRelation") ->
+ 	connectActors(this, "ModelRailwayIO.tracks", "mergeTracks.output", "mergeTracksRelation") ->  	
+ 	connectActors(this, "ModelRailwayIO.points", "mergePoints.output", "mergePointsRelation") ->  	
+ 	connectActors(this, "ModelRailwayIO.signals", "mergeSignals.output", "mergeSignalsRelation") ->  	
  	this.link.add(createPlainLink("delayContact.output", "contactsGLOBAL")) -> 
- 	this.link.add(createPlainLink("delayOccupied.output", "occupiedGLOBAL")) 
+ 	this.link.add(createPlainLink("delayOccupied.output", "occupiedGLOBAL"))
 ;
-// 	connectActors(this, "ModelRailwayIO.tracks", "signalGLOBAL", "signalsRelation")  	
-// 	connectActors(this, "ModelRailwayIO.points", "signalGLOBAL", "signalsRelation")  	
-// 	connectActors(this, "ModelRailwayIO.signals", "signalGLOBAL", "signalsRelation")  	
 
 
 create RelationType this createVertexRelation(String relationName) :
@@ -80,7 +84,7 @@ create PropertyType this createMainSRDirector():
 	this.property.add(p4)
 ;
 
-//create a "FSM Director" (for a region component)
+//create a "FSM Director" (for a Thread component)
 create PropertyType this createFSMDirector():
     this.setName("directorClass") ->
     this.setValue("ptolemy.domains.fsm.kernel.FSMDirector") ->
@@ -89,13 +93,13 @@ create PropertyType this createFSMDirector():
 
 
 //-----------------------------------------------------------------------------
-//--                 C R E A T E     MODEL RAILWAY IO                        --
+//--         C R E A T E     MODEL RAILWAY IO / DELAY / MERGE                --
 //-----------------------------------------------------------------------------
 
 //create a "ModelRailwayIO" 
 create EntityType this createModelRailwayIOActor():
     this.setName("ModelRailwayIO") ->
-	this.setClass1("ptolemy.actor.lib.io.ModelRailwayIO") ->
+	this.setClass1("ptolemy.actor.kiel.ModelRailwayIO") ->
 	this.port.add(createPort(false, 
 								true, 
 								"contact",
@@ -104,6 +108,12 @@ create EntityType this createModelRailwayIOActor():
 								true, 
 								"occupied",
 								"arrayType(int,48)"))
+;
+
+
+create EntityType this createModelRailwayMerge(String name) :
+	this.setClass1("ptolemy.actor.kiel.ModelRailwayMerge") ->
+	this.setName(name)
 ;
 
 //create a "NonStrictDelay" (for array, int, 42) 
@@ -126,38 +136,44 @@ create EntityType this createDelay(String name):
 Void createThreads(List[simplerailctrl::Node] nodes,
 				   EntityType mainEntity):
   let currentNode = nodes.last():
+  let threadId = hash(currentNode):
   //create thread
   if (currentNode.initial) then mainEntity.entity.add(
   						 					createThread(currentNode,
-  											nodes.size)) ->
-  //connect thread incoming to GLOBAL
-  if (currentNode.initial) then 
-  	mainEntity.link.add(createPlainLink("Region" + hash(currentNode)+".contact", "contactsGLOBAL")) ->
-  if (currentNode.initial) then 
-  	mainEntity.link.add(createPlainLink("Region" + hash(currentNode)+".occupied", "occupiedGLOBAL")) ->
-  //FIXME: connect thread directly to outgoing
-  if (currentNode.initial) then connectActors(mainEntity,
-		   			   "ModelRailwayIO.tracks",
-			 		   "Region" + hash(currentNode)+".tracks",
-			 		   "trackControlRelation") ->
-  if (currentNode.initial) then connectActors(mainEntity,
-		   			   "ModelRailwayIO.points",
-			 		   "Region" + hash(currentNode)+".points",
-			 		   "pointControlRelation") ->
-  if (currentNode.initial) then connectActors(mainEntity,
-		   			   "ModelRailwayIO.signals",
-			 		   "Region" + hash(currentNode)+".signals",
-			 		   "signalsControlRelation") ->
+  														 threadId)) ->
+  if (currentNode.initial) then connectThread(mainEntity, currentNode, threadId) ->
 
   if (nodes.size > 1) then createThreads(nodes.withoutLast(),
   									mainEntity)
+;  									
+
+  
+Void connectThread(EntityType mainEntity,
+					simplerailctrl::Node initialNode, 
+									String threadId):    														 
+  //connect thread incoming to GLOBAL
+  	mainEntity.link.add(createPlainLink("Thread" + threadId+".contact", "contactsGLOBAL")) ->
+  	mainEntity.link.add(createPlainLink("Thread" + threadId+".occupied", "occupiedGLOBAL")) ->
+  //FIXME: connect thread directly to outgoing
+  connectModalModel(mainEntity,
+		   			   "mergeTracks.input",
+			 		   "Thread" + threadId+".tracks",
+			 		   "mergeTracksRelation"+threadId) ->
+  connectModalModel(mainEntity,
+		   			   "mergePoints.input",
+			 		   "Thread" + threadId+".points",
+			 		   "mergePointsRelation"+threadId) ->
+  connectModalModel(mainEntity,
+		   			   "mergeSignals.input",
+			 		   "Thread" + threadId+".signals",
+			 		   "mergeSignalsRelation"+threadId)
 ;
 
 //create a thread (ModalModel)
 create EntityType this createThread(simplerailctrl::Node initialNode, 
-											  int number):
+									String threadId):
 	let p1 = new PropertyType:
-	let threadName = "Region" + hash(initialNode):
+	let threadName = "Thread" + threadId:
 		p1.setName("_tableauFactory") ->
 		p1.setClass("ptolemy.vergil.fsm.modal.ModalTableauFactory") ->
 	this.property.add(p1) ->
@@ -170,17 +186,18 @@ create EntityType this createThread(simplerailctrl::Node initialNode,
 	this.port.add(createModelPort(false,true,"points","")) ->
 	this.port.add(createModelPort(false,true,"signals","")) ->
   	//then create simple states 
-   	this.entity.add(createThreadRefinement(initialNode)) ->
+   	this.entity.add(createThreadRefinement(initialNode, threadId)) ->
    	//add connecting ports
- 	connectModalModel(this, "_Controller.contact", "contact", "contactRelation") ->  	
- 	connectModalModel(this, "_Controller.occupied", "occupied", "occupiedRelation") ->  	
- 	connectModalModel(this, "_Controller.tracks", "tracks", "tracksRelation") ->  	
- 	connectModalModel(this, "_Controller.points", "points", "pointsRelation") ->  	
- 	connectModalModel(this, "_Controller.signals", "signals", "signalsRelation")  	
+ 	connectModalModel(this, "_Controller.contact", "contact", "contactRelation") ->   
+ 	connectModalModel(this, "_Controller.occupied" , "occupied", "occupiedRelation") ->  	
+ 	connectModalModel(this, "_Controller.tracks" , "tracks", "tracksRelation") ->   	
+ 	connectModalModel(this, "_Controller.points" , "points", "pointsRelation") ->  	
+ 	connectModalModel(this, "_Controller.signals" , "signals", "signalsRelation")
 ;
 
 //create thread refinement (ModalController)
-create EntityType this createThreadRefinement(simplerailctrl::Node initialNode):
+create EntityType this createThreadRefinement(simplerailctrl::Node initialNode,
+											  String threadId):
    	this.setName("_Controller") ->
   	this.setClass1("ptolemy.domains.fsm.modal.ModalController") ->
   	//first add ports
@@ -199,8 +216,9 @@ create EntityType this createThreadRefinement(simplerailctrl::Node initialNode):
 	createSimpleStateEntity(this, initialNode) ->
 	//then add count paramter (for counting seconds in a simple state)
 	this.property.add(createCountParamter()) ->	
-  	//then iterated all inner states
-	createInnerStates(this, initialNode, initialNode.outTransitions)
+  	//then iterated all inner states (if there are any connected!)
+  	if (initialNode.outTransitions.size > 0) then
+		createInnerStates(this, initialNode, initialNode.outTransitions)
 ;
 
 //-----------------------------------------------------------------------------
@@ -394,17 +412,19 @@ Void addLink(EntityType baseEntity,
 //create a Relation Type
 RelationType createRelation(String name,
 							simplerailctrl::Transition transition):
- 	let relation = createRelation(name,false,false,true):										
+ 	let relation = createRelation(name,false,false,true):
 	addTrigger(relation, transition) ->
 	addSetAction(relation, "count = 0") ->
 	addEmission(relation, (Node)transition.destination) ->
 	relation
 										
-;										
-create RelationType this createRelation(String name, 
-										boolean def,
-										boolean preemptive,
-										boolean reset):
+;					
+					
+RelationType createRelation(String name, 
+							boolean def,
+							boolean preemptive,
+							boolean reset):
+	let relation = new RelationType:
 	let p1 = new PropertyType:
 	let p2 = new PropertyType:
 	let p3 = new PropertyType:
@@ -433,15 +453,16 @@ create RelationType this createRelation(String name,
 		p7.setValue("false") ->
 		p8.setName("refinementName") ->
 		p8.setClass("ptolemy.kernel.util.StringAttribute") ->
-    this.setName(name) ->
-	this.property.add(p1) ->
-	this.property.add(p2) ->
-	this.property.add(p3) ->
-	this.property.add(p4) ->
-	this.property.add(p5) ->
-	this.property.add(p6) ->
-	this.property.add(p7) ->
-	this.property.add(p8)
+    relation.setName(name) ->
+	relation.property.add(p1) ->
+	relation.property.add(p2) ->
+	relation.property.add(p3) ->
+	relation.property.add(p4) ->
+	relation.property.add(p5) ->
+	relation.property.add(p6) ->
+	relation.property.add(p7) ->
+	relation.property.add(p8) ->
+	relation
 ;
 
 //create guardExpression
@@ -480,75 +501,82 @@ Void addSetAction(RelationType relation, String value) :
 //;
 
 //normal port of an Actor
-create PortType this createPort(boolean input, 
+PortType createPort(boolean input, 
 								boolean output, 
 								String name,
 								String type):
+	let port = new PortType:
 	let prop1 = new PropertyType:
 	let prop2 = new PropertyType:
 	let prop3 = new PropertyType:
-	this.setClass("ptolemy.actor.TypedIOPort") ->
-	this.setName(name) ->
+	port.setClass("ptolemy.actor.TypedIOPort") ->
+	port.setName(name) ->
 	prop1.setClass("ptolemy.actor.TypeAttribute") ->
 	prop1.setName("_type") ->
 	prop1.setValue(type) ->
 	prop2.setName("output") ->
 	prop3.setName("input") ->
-	if (!type.matches("")) then this.property.add(prop1) ->
-	if (output) then this.property.add(prop2) ->
-	if (input) then this.property.add(prop3)
+	if (!type.matches("")) then port.property.add(prop1) ->
+	if (output) then port.property.add(prop2) ->
+	if (input) then port.property.add(prop3) ->
+	port
 ;
 
 
 //port of a ModelModel
-create PortType this createModelPort(boolean input,
-									 boolean output,
-									 String name,
-									 String type): 
+PortType createModelPort(boolean input,
+						 boolean output,
+						 String name,
+						 String type): 
+	let port = new PortType:
 	let prop1 = new PropertyType:
 	let prop2 = new PropertyType:
 	let prop3 = new PropertyType:
-	this.setClass("ptolemy.domains.fsm.modal.ModalPort") ->
-	this.setName(name) ->
+	port.setClass("ptolemy.domains.fsm.modal.ModalPort") ->
+	port.setName(name) ->
 	prop1.setClass("ptolemy.actor.TypeAttribute") ->
 	prop1.setName("_type") ->
 	prop1.setValue(type) ->
 	prop2.setName("output") ->
 	prop3.setName("input") ->
-	if (!type.matches("")) then this.property.add(prop1) ->
-	if (output) then this.property.add(prop2) ->
-	if (input) then this.property.add(prop3)
+	if (!type.matches("")) then port.property.add(prop1) ->
+	if (output) then port.property.add(prop2) ->
+	if (input) then port.property.add(prop3) ->
+	port
 ;
 
 //port of a ModalController
-create PortType this createModelRefinementPort(boolean input,
+PortType createModelRefinementPort(boolean input,
 									 		   boolean output,
 									     	   String name,
 									 		   String type): 
+	let port = new PortType:
 	let prop1 = new PropertyType:
 	let prop2 = new PropertyType:
 	let prop3 = new PropertyType:
-	this.setClass("ptolemy.domains.fsm.modal.RefinementPort") ->
-	this.setName(name) ->
+	port.setClass("ptolemy.domains.fsm.modal.RefinementPort") ->
+	port.setName(name) ->
 	prop1.setClass("ptolemy.actor.TypeAttribute") ->
 	prop1.setName("_type") ->
 	prop1.setValue(type) ->
 	prop2.setName("output") ->
 	prop3.setName("input") ->
-	if (!type.matches("")) then this.property.add(prop1) ->
-	if (output) then this.property.add(prop2) ->
-	if (input) then this.property.add(prop3)
+	if (!type.matches("")) then port.property.add(prop1) ->
+	if (output) then port.property.add(prop2) ->
+	if (input) then port.property.add(prop3) ->
+	port
 ;
 
 
 //count parameter (for counting seconds)
-create PropertyType this createCountParamter(): 
+PropertyType createCountParamter():
+    let property = new PropertyType: 
 	let prop1 = new PropertyType:
 	let prop1b = new PropertyType:
 	let prop2 = new PropertyType:
-	this.setClass("ptolemy.data.expr.Parameter") ->
-	this.setName("count") ->
-	this.setValue("0") ->
+	property.setClass("ptolemy.data.expr.Parameter") ->
+	property.setName("count") ->
+	property.setValue("0") ->
 	prop1.setClass("ptolemy.vergil.icon.ValueIcon") ->
 	prop1.setName("_icon") ->
 	prop1b.setClass("ptolemy.actor.gui.ColorAttribute") ->
@@ -557,6 +585,7 @@ create PropertyType this createCountParamter():
 	prop2.setClass("ptolemy.kernel.util.SingletonConfigurableAttribute") ->
 	prop2.setName("_smallIconDescription") ->
 	prop1.property.add(prop1b) ->
-	this.property.add(prop1) ->
-	this.property.add(prop2)
+	property.property.add(prop1) ->
+	property.property.add(prop2) ->
+	property
 ;
