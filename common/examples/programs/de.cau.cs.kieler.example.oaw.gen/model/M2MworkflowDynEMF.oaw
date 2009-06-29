@@ -1,4 +1,9 @@
 <?xml version="1.0"?>
+<!--
+Require-Bundle: 
+ org.openarchitectureware.dependencies;bundle-version="4.3.1"
+-->
+
 <workflow>
 	<property name="srcmetamodel" value="platform:/resource/de.cau.cs.kieler.example.oaw/model/mymodel.ecore" />
 	<property name="dstmetamodel" value="platform:/resource/de.cau.cs.kieler.example.oaw/model/simple.ecore" />
@@ -15,7 +20,6 @@
 	<!-- load model and store it in slot 'source' -->
 	<component class="org.eclipse.mwe.emf.Reader">
 	    <uri value="${source}" />
-		<!-- <uri value="platform:/resource/${source}" />  -->
 		<modelSlot value="source" />
 	</component>
 	
@@ -30,8 +34,6 @@
 			<!-- <metaModelPackage value="simple.SimplePackage" />  -->
 			<metaModelFile value="${dstmetamodel}" />
 		</metaModel>
-		<!--<metaModel id="javamm" class="org.openarchitectureware.type.impl.java.JavaMetaModel">
-		</metaModel>  -->
 		<invoke value="M2MtransformationDynEMF::transform(source)" />
 		<outputSlot value="target"/>
 	</component>

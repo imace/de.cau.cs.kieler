@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!--
-Require-Bundle: org.eclipse.ui,
+Require-Bundle:
  org.eclipse.emf.mwe.core;bundle-version="0.7.0",
  org.eclipse.emf.mwe.utils;bundle-version="0.7.0",
  org.eclipse.xpand;bundle-version="0.7.0",
@@ -32,7 +32,7 @@ Require-Bundle: org.eclipse.ui,
 	<metaModel class="org.eclipse.xtend.typesystem.emf.EmfRegistryMetaModel" />
     <metaModel id='mm' class='org.eclipse.xtend.typesystem.emf.EmfRegistryMetaModel' />  
 		 <expand
-			value="model::M2Ttemplate::main2 FOR model" />
+			value="model::M2Ttemplate::main FOR model" />
 		<outlet path="${src-gen}" />
         
 	</component>

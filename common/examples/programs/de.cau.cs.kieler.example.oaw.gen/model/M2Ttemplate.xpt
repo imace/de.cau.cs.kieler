@@ -1,6 +1,6 @@
 «IMPORT mymodel»
 
-«DEFINE main2 FOR MyDataModel-»
+«DEFINE main FOR MyDataModel-»
 	«FILE "My.c"-»
 
 /* ==========================================================================

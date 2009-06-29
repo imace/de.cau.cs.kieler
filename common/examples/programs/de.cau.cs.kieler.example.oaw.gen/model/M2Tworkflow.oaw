@@ -1,4 +1,9 @@
 <?xml version="1.0"?>
+<!--
+Require-Bundle: 
+ org.openarchitectureware.dependencies;bundle-version="4.3.1"
+-->
+
 <workflow>
 	<property name="metamodel" value="platform:/resource/de.cau.cs.kieler.example.oaw/model/mymodel.ecore" />
 	<property name="model" value="platform:/resource/de.cau.cs.kieler.example.oaw.gen/My.mymodel" />
@@ -11,9 +16,7 @@
 
 	<!-- load model and store it in slot 'model' -->
 	<component class="org.eclipse.mwe.emf.Reader">
-        <!--   <uri value="platform:/resource/${model}" />   -->  
     	<uri value="${model}" /> 
-		<!-- <uri value="platform:/resource/${model}" />  -->
 		<modelSlot value="model" />
 	</component>
 

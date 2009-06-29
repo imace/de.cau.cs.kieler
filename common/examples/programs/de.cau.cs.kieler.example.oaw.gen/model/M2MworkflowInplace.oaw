@@ -1,4 +1,9 @@
 <?xml version="1.0"?>
+<!--
+Require-Bundle: 
+ org.openarchitectureware.dependencies;bundle-version="4.3.1"
+-->
+
 <workflow>
 	<property name="source" value="platform:/resource/de.cau.cs.kieler.example.oaw.gen/My.mymodel" />
 	<property name="target" value="src-gen/generated.simple" />
@@ -12,7 +17,6 @@
 	<!-- load model and store it in slot 'source' -->
 	<component class="org.eclipse.mwe.emf.Reader">
 	    <uri value="${source}" />
-		<!-- <uri value="platform:/resource/${source}" />  -->
 		<modelSlot value="source" />
 	</component>
 	
@@ -21,7 +25,6 @@
 	<component class="oaw.xtend.XtendComponent">
 		<metaModel class="oaw.type.emf.EmfMetaModel">
 			<metaModelPackage value="mymodel.MymodelPackage"/>
-			<!-- <metaModelFile value="${srcmetamodel}" /> -->
 		</metaModel>
 		<invoke value="M2MtransformationInplace::transform(source)" />
 	</component>
