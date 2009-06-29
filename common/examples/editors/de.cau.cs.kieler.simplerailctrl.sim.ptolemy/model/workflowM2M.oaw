@@ -3,7 +3,7 @@
 	<property name="emfmetamodel" value="platform:/resource/de.cau.cs.kieler.simplerailctrl.sim.ptolemy/model/simplerailctrl.ecore" />
 	<property name="ptometamodel" value="platform:/resource/de.cau.cs.kieler.simplerailctrl.sim.ptolemy/model/moml.ecore" />
 	
-	<property name="emfmodel" value="platform:/resource/de.cau.cs.kieler.simplerailctrl.sim.ptolemy/default.simplerailctrl" />
+	<property name="emfmodel" value="platform:/resource/de.cau.cs.kieler.simplerailctrl.sim.ptolemy/dual.simplerailctrl" />
 	<property name="momlmodel" value="src-gen/generated.moml" />
 
 	<!-- set up EMF for standalone execution -->
