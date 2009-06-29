@@ -1,8 +1,5 @@
 <?xml version="1.0"?>
 <workflow>
-	<property name="srcmetamodel" value="platform:/resource/de.cau.cs.kieler.example.oaw/model/mymodel.ecore" />
-	<property name="dstmetamodel" value="platform:/resource/de.cau.cs.kieler.example.oaw/model/simple.ecore" />
-	
 	<property name="source" value="platform:/resource/de.cau.cs.kieler.example.oaw.gen/My.mymodel" />
 	<property name="target" value="src-gen/generated.simple" />
 

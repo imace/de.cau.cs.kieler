@@ -12,7 +12,6 @@ Require-Bundle: org.eclipse.ui,
  -->
  
 <workflow>
-	<property name="metamodel" value="platform:/resource/de.cau.cs.kieler.example.oaw/model/mymodel.ecore" />
 	<property name="model" value="platform:/resource/de.cau.cs.kieler.example.oaw.gen/My.mymodel" />
 	<property name="src-gen" value="src-gen" />
 	
@@ -22,24 +21,15 @@ Require-Bundle: org.eclipse.ui,
 		<platformUri value=".."/>
 	</bean>
 	 
-
 	<!-- load model and store it in slot 'model' -->
-	<!--  <component class="org.eclipse.mwe.emf.Reader"> -->
 	<component class="org.eclipse.emf.mwe.utils.Reader">
-        <!--   <uri value="platform:/resource/${model}" />   -->  
     	<uri value="${model}" /> 
-		<!-- <uri value="platform:/resource/${model}" />  -->
 		<modelSlot value="model" />
 	</component>
 
 	<!--  generate code <metaModelFile value="${metamodel}" /> -->
-	<!--  <component class="org.openarchitectureware.xpand2.Generator">  -->
 	<component class="org.eclipse.xpand2.Generator">
-	<!-- <metaModel class="oaw.type.emf.EmfMetaModel"> -->
-	<metaModel class="org.eclipse.xtend.typesystem.emf.EmfRegistryMetaModel">
-		<!-- <metaModelFile value="${metamodel}" /> -->
-	</metaModel>
-    <!-- <metaModel id='mm' class='org.eclipse.m2t.type.emf.EmfRegistryMetaModel' />  -->  
+	<metaModel class="org.eclipse.xtend.typesystem.emf.EmfRegistryMetaModel" />
     <metaModel id='mm' class='org.eclipse.xtend.typesystem.emf.EmfRegistryMetaModel' />  
 		 <expand
 			value="model::M2Ttemplate::main2 FOR model" />
