@@ -38,6 +38,7 @@ import de.cau.cs.kieler.core.kgraph.KLabel;
 import de.cau.cs.kieler.core.kgraph.KNode;
 import de.cau.cs.kieler.core.kgraph.KPort;
 import de.cau.cs.kieler.kiml.layout.klayoutdata.KEdgeLayout;
+import de.cau.cs.kieler.kiml.layout.klayoutdata.KInsets;
 import de.cau.cs.kieler.kiml.layout.klayoutdata.KPoint;
 import de.cau.cs.kieler.kiml.layout.klayoutdata.KShapeLayout;
 import de.cau.cs.kieler.kiml.layout.options.EdgeLabelPlacement;
@@ -86,7 +87,7 @@ public class GenericLayoutGraphBuilder extends
 			layoutNode2EditPart.put(layoutGraph, rootEditPart);
 
 			// wander recursively through the diagram
-			buildLayoutGraphRecursively(rootEditPart, layoutGraph);
+			buildLayoutGraphRecursively(rootEditPart, layoutGraph, 0.0f, 0.0f);
 		}
 		/*
 		 * if the rootPart was a complete Diagram, that is when clicked into the
@@ -100,7 +101,7 @@ public class GenericLayoutGraphBuilder extends
 			        .getDiagramView().getName());
 			graphicalEditPart2LayoutNode.put(layoutRootPart, layoutGraph);
 			layoutNode2EditPart.put(layoutGraph, layoutRootPart);
-			buildLayoutGraphRecursively(layoutRootPart, layoutGraph);
+			buildLayoutGraphRecursively(layoutRootPart, layoutGraph, 0.0f, 0.0f);
 		}
 		
 	    /*
@@ -117,11 +118,10 @@ public class GenericLayoutGraphBuilder extends
 	 *            The GraphicalEditPart which children will be processed
 	 * @param currentLayoutNode
 	 *            The corresponding KNode
-	 * @return true if the constructed node has child nodes
 	 */
-	private boolean buildLayoutGraphRecursively(GraphicalEditPart currentEditPart,
-			KNode currentLayoutNode) {
-	    boolean hasChildNodes = false;
+	private void buildLayoutGraphRecursively(GraphicalEditPart currentEditPart,
+			KNode currentLayoutNode, float insetTop, float insetLeft) {
+	    boolean hasChildNodes = false, hasChildCompartments = false;
 		/* iterate through the children of the element */
 		for (Object obj : currentEditPart.getChildren()) {
 
@@ -184,18 +184,13 @@ public class GenericLayoutGraphBuilder extends
 			else if (obj instanceof CompartmentEditPart
 					&& ((CompartmentEditPart) obj).getChildren().size() != 0) {
 
-                // FIXME insets must be set dynamically
-			    //KShapeLayout parentLayout = KimlLayoutUtil.getShapeLayout(
-			    //        graphicalEditPart2LayoutNode.get(((GraphicalEditPart)obj)
-			    //        .getParent()));
-				//KInsets parentInsets = LayoutOptions.getInsets(parentLayout);
-				//parentInsets.setTop(prefInsetsTop);
-				//parentInsets.setLeft(prefInsetsLeft);
-				//parentInsets.setBottom(prefInsetsBottom);
-				//parentInsets.setRight(prefInsetsRight);
-
-				hasChildNodes |= buildLayoutGraphRecursively((GraphicalEditPart) obj,
-						currentLayoutNode);
+			    hasChildCompartments = true;
+			    GraphicalEditPart compartment = (GraphicalEditPart)obj;
+			    Rectangle parentBounds = currentEditPart.getFigure().getBounds();
+			    Rectangle compartmentBounds = compartment.getFigure().getBounds();
+				buildLayoutGraphRecursively(compartment, currentLayoutNode,
+				        compartmentBounds.y - parentBounds.y,
+				        compartmentBounds.x - parentBounds.x);
 			}
             /* if true, Emma has a real EditPart with contents. */
             else if (obj instanceof NodeEditPart) {
@@ -232,7 +227,8 @@ public class GenericLayoutGraphBuilder extends
 
                 hasChildNodes = true;
                 /* and process the child as new current */
-                buildLayoutGraphRecursively(childNodeEditPart, childLayoutNode);
+                buildLayoutGraphRecursively(childNodeEditPart,
+                        childLayoutNode, 0.0f, 0.0f);
             }
 			/* label handling */
             else if (obj instanceof GraphicalEditPart) {
@@ -279,12 +275,16 @@ public class GenericLayoutGraphBuilder extends
     		}
             LayoutOptions.setLayoutDirection(nodeLayout, LayoutDirection.HORIZONTAL);
             LayoutOptions.setPortConstraints(nodeLayout, PortConstraints.FREE_PORTS);
+            KInsets insets = LayoutOptions.getInsets(nodeLayout);
+            insets.setTop(insetTop);
+            insets.setLeft(insetLeft);
+            insets.setRight(insetLeft);
+            insets.setBottom(insetLeft);
 		}
-		else {
+		else if (!hasChildCompartments){
 		    LayoutOptions.setPortConstraints(nodeLayout, PortConstraints.FIXED_POS);
 		    LayoutOptions.setFixedSize(nodeLayout, true);
 		}
-		return hasChildNodes;
 	}
 
 	/**

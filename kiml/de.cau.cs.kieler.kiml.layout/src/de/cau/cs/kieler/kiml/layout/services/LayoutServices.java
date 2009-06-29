@@ -147,8 +147,9 @@ public class LayoutServices {
 	 * Returns the most appropriate layout provider for the given
 	 * node.
 	 * 
-	 * @param layoutNode
-	 * @return
+	 * @param layoutNode node for which a layout provider is requested
+	 * @return a layout provider instance that fits the layout hints for
+	 *     the given node
 	 */
 	public AbstractLayoutProvider getLayoutProvider(KNode layoutNode) {
 	    KShapeLayout nodeLayout = KimlLayoutUtil.getShapeLayout(layoutNode);
@@ -160,7 +161,7 @@ public class LayoutServices {
 
 	    // find the most appropriate provider from the layout type and diagram type
 	    String diagramType = LayoutOptions.getDiagramType(nodeLayout);
-	    return findAppropriateProvider(layoutHint, diagramType);
+	    return findAppropriateProvider(layoutHint, diagramType).instance;
 	}
 	
 	/**
@@ -266,11 +267,11 @@ public class LayoutServices {
 	 * @param layoutType hint about the layout type to choose, or {@code null}
 	 *     if no specific layout type is selected
 	 * @param diagramType identifier of the diagram type that is to be layouted
-	 * @return an instance of a suitable layout provider
+	 * @return data instance for the most appropriate layout provider
 	 */
-	private AbstractLayoutProvider findAppropriateProvider(String layoutType, String diagramType) {
+	private LayoutProviderData findAppropriateProvider(String layoutType, String diagramType) {
         Iterator<LayoutProviderData> providerIter = layoutProviderMap.values().iterator();
-        AbstractLayoutProvider bestProvider = null;
+        LayoutProviderData bestProvider = null;
         int bestPrio = LayoutProviderData.MIN_PRIORITY;
         boolean matchesLayoutType = false, matchesDiagramType = false,
                 matchesGeneralDiagram = false;
@@ -282,13 +283,13 @@ public class LayoutServices {
                 if (providerData.type.equals(layoutType)) {
                     if (matchesDiagramType) {
                         if (currentPrio > bestPrio) {
-                            bestProvider = providerData.instance;
+                            bestProvider = providerData;
                             bestPrio = currentPrio;
                         }
                     }
                     else {
                         if (currentPrio > LayoutProviderData.MIN_PRIORITY) {
-                            bestProvider = providerData.instance;
+                            bestProvider = providerData;
                             bestPrio = currentPrio;
                             matchesDiagramType = true;
                             matchesGeneralDiagram = false;
@@ -297,18 +298,18 @@ public class LayoutServices {
                             currentPrio = providerData.getSupportedPriority(DIAGRAM_TYPE_GENERAL);
                             if (matchesGeneralDiagram) {
                                 if (currentPrio > bestPrio) {
-                                    bestProvider = providerData.instance;
+                                    bestProvider = providerData;
                                     bestPrio = currentPrio;
                                 }
                             }
                             else {
                                 if (currentPrio > LayoutProviderData.MIN_PRIORITY) {
-                                    bestProvider = providerData.instance;
+                                    bestProvider = providerData;
                                     bestPrio = currentPrio;
                                     matchesGeneralDiagram = true;
                                 }
                                 else if (bestProvider == null)
-                                    bestProvider = providerData.instance;
+                                    bestProvider = providerData;
                             }
                         }
                     }
@@ -316,7 +317,7 @@ public class LayoutServices {
             }
             else {
                 if (providerData.type.equals(layoutType)) {
-                    bestProvider = providerData.instance;
+                    bestProvider = providerData;
                     matchesLayoutType = true;
                     if (currentPrio > LayoutProviderData.MIN_PRIORITY) {
                         bestPrio = currentPrio;
@@ -337,13 +338,13 @@ public class LayoutServices {
                 else {
                     if (matchesDiagramType) {
                         if (currentPrio > bestPrio) {
-                            bestProvider = providerData.instance;
+                            bestProvider = providerData;
                             bestPrio = currentPrio;
                         }
                     }
                     else {
                         if (currentPrio > LayoutProviderData.MIN_PRIORITY) {
-                            bestProvider = providerData.instance;
+                            bestProvider = providerData;
                             bestPrio = currentPrio;
                             matchesDiagramType = true;
                             matchesGeneralDiagram = false;
@@ -352,18 +353,18 @@ public class LayoutServices {
                             currentPrio = providerData.getSupportedPriority(DIAGRAM_TYPE_GENERAL);
                             if (matchesGeneralDiagram) {
                                 if (currentPrio > bestPrio) {
-                                    bestProvider = providerData.instance;
+                                    bestProvider = providerData;
                                     bestPrio = currentPrio;
                                 }
                             }
                             else {
                                 if (currentPrio > LayoutProviderData.MIN_PRIORITY) {
-                                    bestProvider = providerData.instance;
+                                    bestProvider = providerData;
                                     bestPrio = currentPrio;
                                     matchesGeneralDiagram = true;
                                 }
                                 else if (bestProvider == null)
-                                    bestProvider = providerData.instance;
+                                    bestProvider = providerData;
                             }
                         }
                     }

@@ -21,7 +21,6 @@ import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TextCellEditor;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
@@ -36,6 +35,7 @@ import org.eclipse.ui.IWorkbenchPreferencePage;
 import de.cau.cs.kieler.kiml.layout.services.LayoutProviderData;
 import de.cau.cs.kieler.kiml.layout.services.LayoutServices;
 import de.cau.cs.kieler.kiml.ui.KimlUiPlugin;
+import de.cau.cs.kieler.kiml.ui.layout.LayoutServiceBuilder;
 
 
 /**
@@ -52,8 +52,8 @@ public class LayoutPreferencePage extends PreferencePage
     private String[] diagramTypes;
     /** data matrix: rows represent layout providers, columns represent diagram types */
     private int[][] data;
-    /** the table viewer used to display priorities */
-    private TableViewer priorityTableViewer;
+    /** the provider class that manages content of the priority table */
+    private PriorityTableProvider tableProvider;
     
 	/**
 	 * Creates the layout preference page.
@@ -90,12 +90,14 @@ public class LayoutPreferencePage extends PreferencePage
         data = new int[layoutProviderCount][diagramTypes.length];
         PriorityTableProvider.DataEntry[] tableEntries = new PriorityTableProvider
                 .DataEntry[layoutProviderCount];
+        String[] layouterNames = new String[layoutProviderCount];
         int i = 0;
         for (LayoutProviderData providerData : layoutProviderData) {
             providerIds[i] = providerData.id;
             tableEntries[i] = new PriorityTableProvider.DataEntry();
-            tableEntries[i].layouterName = providerData.name;
+            tableEntries[i].layouterIndex = i;
             tableEntries[i].priorities = data[i];
+            layouterNames[i] = providerData.name;
             for (int j = 0; j < diagramTypes.length; j++) {
                 data[i][j] = providerData.getSupportedPriority(diagramTypes[j]);
             }
@@ -103,11 +105,9 @@ public class LayoutPreferencePage extends PreferencePage
         }
         
         // construct the priorities table
-        Label tableHeaderLabel = new Label(prioritesGroup, SWT.NONE);
-        tableHeaderLabel.setText("");
-        ScrolledComposite scrolledComposite = new ScrolledComposite(prioritesGroup, SWT.BORDER);
-        Table prioritiesTable = new Table(scrolledComposite, SWT.HIDE_SELECTION);
-        scrolledComposite.setContent(prioritiesTable);
+        Label tableHeaderLabel = new Label(prioritesGroup, SWT.WRAP);
+        tableHeaderLabel.setText("Configure which diagram types are supported by each layouter. The Layouter with highest priority for a diagram type is highlighted with a blue circle. No priority value means the diagram type is not supported by that layouter.");
+        Table prioritiesTable = new Table(prioritesGroup, SWT.BORDER);
         TableColumn[] columns = new TableColumn[diagramTypes.length + 1];
         columns[0] =  new TableColumn(prioritiesTable, SWT.NONE);
         columns[0].setText("Layouter");
@@ -118,8 +118,7 @@ public class LayoutPreferencePage extends PreferencePage
             columns[j+1].setToolTipText(diagramTypeName);
         }
         prioritiesTable.setHeaderVisible(true);
-        prioritiesTable.setSize(500, 300);
-        priorityTableViewer = new TableViewer(prioritiesTable);
+        TableViewer priorityTableViewer = new TableViewer(prioritiesTable);
         String[] columnProperties = new String[diagramTypes.length + 1];
         CellEditor[] cellEditors = new CellEditor[diagramTypes.length + 1];
         columnProperties[0] = PriorityTableProvider.LAYOUTERS_PROPERTY;
@@ -128,7 +127,8 @@ public class LayoutPreferencePage extends PreferencePage
             cellEditors[j+1] = new TextCellEditor(prioritiesTable);
         }
         priorityTableViewer.setColumnProperties(columnProperties);
-        PriorityTableProvider tableProvider = new PriorityTableProvider(priorityTableViewer);
+        tableProvider = new PriorityTableProvider(
+                priorityTableViewer, data, layouterNames);
         priorityTableViewer.setContentProvider(tableProvider);
         priorityTableViewer.setLabelProvider(tableProvider);
         priorityTableViewer.setCellEditors(cellEditors);
@@ -136,13 +136,11 @@ public class LayoutPreferencePage extends PreferencePage
         priorityTableViewer.setInput(tableEntries);
         for (TableColumn column : columns)
             column.pack();
+        prioritiesTable.pack();
         
-        prioritesGroup.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false,
-                false, 1, 1));
-        GridLayout gridLayout = new GridLayout(1, false);
-        gridLayout.marginWidth = 15;
-        gridLayout.marginHeight = 10;
-        prioritesGroup.setLayout(gridLayout);
+        prioritesGroup.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true,
+                false, 1, 2));
+        prioritesGroup.setLayout(new GridLayout(1, false));
         return prioritesGroup;
     }
     
@@ -170,8 +168,9 @@ public class LayoutPreferencePage extends PreferencePage
      * @see org.eclipse.jface.preference.PreferencePage#performDefaults()
      */
     protected void performDefaults() {
-        // FIXME currently the default values given by the extension points are not available after user changes have been stored
         super.performDefaults();
+        LayoutServiceBuilder.readSupportPriorities(data, providerIds, diagramTypes);
+        tableProvider.refresh();
     }
     
     /*

@@ -46,16 +46,15 @@ public class BoxPlacer extends AbstractAlgorithm {
     public void placeBoxes(List<KNode> sortedBoxes,
             KNode parentNode, float spacing) {
         getMonitor().begin("Box placement", 1);
-        KShapeLayout parentLayout = KimlLayoutUtil.getShapeLayout(parentNode);
-        KInsets insets = LayoutOptions.getInsets(parentLayout);
         
         // do place the boxes
-        placeBoxes(sortedBoxes, insets.getLeft(), insets.getRight(),
-                spacing);
+        placeBoxes(sortedBoxes, spacing);
         
         // adjust parent size
-        parentLayout.setWidth(parentWidth + insets.getRight());
-        parentLayout.setHeight(parentHeight + insets.getBottom());
+        KShapeLayout parentLayout = KimlLayoutUtil.getShapeLayout(parentNode);
+        KInsets insets = LayoutOptions.getInsets(parentLayout);
+        parentLayout.setWidth(insets.getLeft() + parentWidth + insets.getRight());
+        parentLayout.setHeight(insets.getTop() + parentHeight + insets.getBottom());
         
         getMonitor().done();
     }
@@ -65,14 +64,10 @@ public class BoxPlacer extends AbstractAlgorithm {
      * their order in the list.
      * 
      * @param sortedBoxes sorted list of boxes
-     * @param offsetX horizontal offset for placement
-     * @param offsetY vertical offset for placement
      * @param minSpacing minimal spacing between elements
      */
-    private void placeBoxes(List<KNode> sortedBoxes,
-            float offsetX, float offsetY, float minSpacing) {
-        parentWidth = offsetX + minSpacing;
-        parentHeight = offsetY + minSpacing;
+    private void placeBoxes(List<KNode> sortedBoxes, float minSpacing) {
+        parentWidth = 0.0f;
         // determine the maximal width
         float maxWidth = 0.0f;
         for (KNode box : sortedBoxes) {
@@ -83,16 +78,14 @@ public class BoxPlacer extends AbstractAlgorithm {
         
         // place nodes iteratively
         // TODO make this placement more intelligent
-        float xpos = offsetX + minSpacing,
-            ypos = offsetY + minSpacing,
-            nextYpos = ypos;
+        float xpos = minSpacing, ypos = minSpacing, nextYpos = ypos;
         for (KNode box : sortedBoxes) {
             KShapeLayout boxLayout = KimlLayoutUtil.getShapeLayout(box);
             float width = boxLayout.getWidth();
             float height = boxLayout.getHeight();
             if (xpos + width > maxWidth * MAX_BROADEN) {
                 // place box into the next row
-                xpos = offsetX + minSpacing;
+                xpos = minSpacing;
                 ypos = nextYpos + minSpacing;
             }
             boxLayout.setXpos(xpos);
