@@ -15,15 +15,14 @@ package de.cau.cs.kieler.kiml.layout.options;
 
 import java.util.ListIterator;
 
-import de.cau.cs.kieler.core.kgraph.KFloatOption;
-import de.cau.cs.kieler.core.kgraph.KGraphFactory;
-import de.cau.cs.kieler.core.kgraph.KIntOption;
-import de.cau.cs.kieler.core.kgraph.KObjectOption;
-import de.cau.cs.kieler.core.kgraph.KOption;
-import de.cau.cs.kieler.core.kgraph.KStringOption;
+import de.cau.cs.kieler.kiml.layout.klayoutdata.KFloatOption;
 import de.cau.cs.kieler.kiml.layout.klayoutdata.KInsets;
+import de.cau.cs.kieler.kiml.layout.klayoutdata.KIntOption;
 import de.cau.cs.kieler.kiml.layout.klayoutdata.KLayoutData;
 import de.cau.cs.kieler.kiml.layout.klayoutdata.KLayoutDataFactory;
+import de.cau.cs.kieler.kiml.layout.klayoutdata.KObjectOption;
+import de.cau.cs.kieler.kiml.layout.klayoutdata.KOption;
+import de.cau.cs.kieler.kiml.layout.klayoutdata.KStringOption;
 
 /**
  * Definition of layout options and utility methods to get and set these
@@ -63,7 +62,7 @@ public class LayoutOptions {
         KStringOption hintOption = (KStringOption)layoutData.getOption(
                 LAYOUT_HINT);
         if (hintOption == null) {
-            hintOption = KGraphFactory.eINSTANCE.createKStringOption();
+            hintOption = KLayoutDataFactory.eINSTANCE.createKStringOption();
             hintOption.setKey(LAYOUT_HINT);
             layoutData.getOptions().add(hintOption);
         }
@@ -100,7 +99,7 @@ public class LayoutOptions {
         KStringOption typeOption = (KStringOption)layoutData.getOption(
                 DIAGRAM_TYPE);
         if (typeOption == null) {
-            typeOption = KGraphFactory.eINSTANCE.createKStringOption();
+            typeOption = KLayoutDataFactory.eINSTANCE.createKStringOption();
             typeOption.setKey(DIAGRAM_TYPE);
             layoutData.getOptions().add(typeOption);
         }
@@ -137,7 +136,7 @@ public class LayoutOptions {
         KIntOption directionOption = (KIntOption)layoutData.getOption(
                 LAYOUT_DIRECTION);
         if (directionOption == null) {
-            directionOption = KGraphFactory.eINSTANCE.createKIntOption();
+            directionOption = KLayoutDataFactory.eINSTANCE.createKIntOption();
             directionOption.setKey(LAYOUT_DIRECTION);
             layoutData.getOptions().add(directionOption);
         }
@@ -192,7 +191,7 @@ public class LayoutOptions {
         KIntOption sideOption = (KIntOption)layoutData.getOption(
                 PORT_SIDE);
         if (sideOption == null) {
-            sideOption = KGraphFactory.eINSTANCE.createKIntOption();
+            sideOption = KLayoutDataFactory.eINSTANCE.createKIntOption();
             sideOption.setKey(PORT_SIDE);
             layoutData.getOptions().add(sideOption);
         }
@@ -228,7 +227,7 @@ public class LayoutOptions {
         KIntOption constraintsOption = (KIntOption)layoutData.getOption(
                 PORT_CONSTRAINTS);
         if (constraintsOption == null) {
-            constraintsOption = KGraphFactory.eINSTANCE.createKIntOption();
+            constraintsOption = KLayoutDataFactory.eINSTANCE.createKIntOption();
             constraintsOption.setKey(PORT_CONSTRAINTS);
             layoutData.getOptions().add(constraintsOption);
         }
@@ -265,7 +264,7 @@ public class LayoutOptions {
         KIntOption rankOption = (KIntOption)layoutData.getOption(
                 PORT_RANK);
         if (rankOption == null) {
-            rankOption = KGraphFactory.eINSTANCE.createKIntOption();
+            rankOption = KLayoutDataFactory.eINSTANCE.createKIntOption();
             rankOption.setKey(PORT_RANK);
             layoutData.getOptions().add(rankOption);
         }
@@ -301,7 +300,7 @@ public class LayoutOptions {
         KIntOption placementOption = (KIntOption)layoutData.getOption(
                 EDGE_LABEL_PLACEMENT);
         if (placementOption == null) {
-            placementOption = KGraphFactory.eINSTANCE.createKIntOption();
+            placementOption = KLayoutDataFactory.eINSTANCE.createKIntOption();
             placementOption.setKey(EDGE_LABEL_PLACEMENT);
             layoutData.getOptions().add(placementOption);
         }
@@ -335,7 +334,7 @@ public class LayoutOptions {
         if (fixedSize) {
             KOption sizeOption = layoutData.getOption(FIXED_SIZE);
             if (sizeOption == null) {
-                sizeOption = KGraphFactory.eINSTANCE.createKOption();
+                sizeOption = KLayoutDataFactory.eINSTANCE.createKOption();
                 sizeOption.setKey(FIXED_SIZE);
                 layoutData.getOptions().add(sizeOption);
             }
@@ -379,7 +378,7 @@ public class LayoutOptions {
         KFloatOption spacingOption = (KFloatOption)layoutData.getOption(
                 MIN_SPACING);
         if (spacingOption == null) {
-            spacingOption = KGraphFactory.eINSTANCE.createKFloatOption();
+            spacingOption = KLayoutDataFactory.eINSTANCE.createKFloatOption();
             spacingOption.setKey(MIN_SPACING);
             layoutData.getOptions().add(spacingOption);
         }
@@ -400,7 +399,7 @@ public class LayoutOptions {
         KIntOption priorityOption = (KIntOption)layoutData.getOption(
                 PRIORITY);
         if (priorityOption == null) {
-            priorityOption = KGraphFactory.eINSTANCE.createKIntOption();
+            priorityOption = KLayoutDataFactory.eINSTANCE.createKIntOption();
             priorityOption.setKey(PRIORITY);
             layoutData.getOptions().add(priorityOption);
         }

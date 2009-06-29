@@ -256,6 +256,182 @@ public interface KLayoutDataPackage extends EPackage {
 
 
     /**
+     * The meta object id for the '{@link de.cau.cs.kieler.kiml.layout.klayoutdata.impl.KOptionImpl <em>KOption</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see de.cau.cs.kieler.kiml.layout.klayoutdata.impl.KOptionImpl
+     * @see de.cau.cs.kieler.kiml.layout.klayoutdata.impl.KLayoutDataPackageImpl#getKOption()
+     * @generated
+     */
+    int KOPTION = 4;
+
+    /**
+     * The feature id for the '<em><b>Key</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int KOPTION__KEY = 0;
+
+    /**
+     * The number of structural features of the '<em>KOption</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int KOPTION_FEATURE_COUNT = 1;
+
+    /**
+     * The meta object id for the '{@link de.cau.cs.kieler.kiml.layout.klayoutdata.impl.KStringOptionImpl <em>KString Option</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see de.cau.cs.kieler.kiml.layout.klayoutdata.impl.KStringOptionImpl
+     * @see de.cau.cs.kieler.kiml.layout.klayoutdata.impl.KLayoutDataPackageImpl#getKStringOption()
+     * @generated
+     */
+    int KSTRING_OPTION = 5;
+
+    /**
+     * The feature id for the '<em><b>Key</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int KSTRING_OPTION__KEY = KOPTION__KEY;
+
+    /**
+     * The feature id for the '<em><b>Value</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int KSTRING_OPTION__VALUE = KOPTION_FEATURE_COUNT + 0;
+
+    /**
+     * The number of structural features of the '<em>KString Option</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int KSTRING_OPTION_FEATURE_COUNT = KOPTION_FEATURE_COUNT + 1;
+
+    /**
+     * The meta object id for the '{@link de.cau.cs.kieler.kiml.layout.klayoutdata.impl.KIntOptionImpl <em>KInt Option</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see de.cau.cs.kieler.kiml.layout.klayoutdata.impl.KIntOptionImpl
+     * @see de.cau.cs.kieler.kiml.layout.klayoutdata.impl.KLayoutDataPackageImpl#getKIntOption()
+     * @generated
+     */
+    int KINT_OPTION = 6;
+
+    /**
+     * The feature id for the '<em><b>Key</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int KINT_OPTION__KEY = KOPTION__KEY;
+
+    /**
+     * The feature id for the '<em><b>Value</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int KINT_OPTION__VALUE = KOPTION_FEATURE_COUNT + 0;
+
+    /**
+     * The number of structural features of the '<em>KInt Option</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int KINT_OPTION_FEATURE_COUNT = KOPTION_FEATURE_COUNT + 1;
+
+    /**
+     * The meta object id for the '{@link de.cau.cs.kieler.kiml.layout.klayoutdata.impl.KFloatOptionImpl <em>KFloat Option</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see de.cau.cs.kieler.kiml.layout.klayoutdata.impl.KFloatOptionImpl
+     * @see de.cau.cs.kieler.kiml.layout.klayoutdata.impl.KLayoutDataPackageImpl#getKFloatOption()
+     * @generated
+     */
+    int KFLOAT_OPTION = 7;
+
+    /**
+     * The feature id for the '<em><b>Key</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int KFLOAT_OPTION__KEY = KOPTION__KEY;
+
+    /**
+     * The feature id for the '<em><b>Value</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int KFLOAT_OPTION__VALUE = KOPTION_FEATURE_COUNT + 0;
+
+    /**
+     * The number of structural features of the '<em>KFloat Option</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int KFLOAT_OPTION_FEATURE_COUNT = KOPTION_FEATURE_COUNT + 1;
+
+    /**
+     * The meta object id for the '{@link de.cau.cs.kieler.kiml.layout.klayoutdata.impl.KObjectOptionImpl <em>KObject Option</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see de.cau.cs.kieler.kiml.layout.klayoutdata.impl.KObjectOptionImpl
+     * @see de.cau.cs.kieler.kiml.layout.klayoutdata.impl.KLayoutDataPackageImpl#getKObjectOption()
+     * @generated
+     */
+    int KOBJECT_OPTION = 8;
+
+    /**
+     * The feature id for the '<em><b>Key</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int KOBJECT_OPTION__KEY = KOPTION__KEY;
+
+    /**
+     * The feature id for the '<em><b>Value</b></em>' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int KOBJECT_OPTION__VALUE = KOPTION_FEATURE_COUNT + 0;
+
+    /**
+     * The number of structural features of the '<em>KObject Option</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int KOBJECT_OPTION_FEATURE_COUNT = KOPTION_FEATURE_COUNT + 1;
+
+    /**
      * The meta object id for the '{@link de.cau.cs.kieler.kiml.layout.klayoutdata.impl.KInsetsImpl <em>KInsets</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -263,7 +439,7 @@ public interface KLayoutDataPackage extends EPackage {
      * @see de.cau.cs.kieler.kiml.layout.klayoutdata.impl.KLayoutDataPackageImpl#getKInsets()
      * @generated
      */
-    int KINSETS = 4;
+    int KINSETS = 9;
 
     /**
      * The feature id for the '<em><b>Top</b></em>' attribute.
@@ -462,6 +638,111 @@ public interface KLayoutDataPackage extends EPackage {
     EAttribute getKPoint_Y();
 
     /**
+     * Returns the meta object for class '{@link de.cau.cs.kieler.kiml.layout.klayoutdata.KOption <em>KOption</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for class '<em>KOption</em>'.
+     * @see de.cau.cs.kieler.kiml.layout.klayoutdata.KOption
+     * @generated
+     */
+    EClass getKOption();
+
+    /**
+     * Returns the meta object for the attribute '{@link de.cau.cs.kieler.kiml.layout.klayoutdata.KOption#getKey <em>Key</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>Key</em>'.
+     * @see de.cau.cs.kieler.kiml.layout.klayoutdata.KOption#getKey()
+     * @see #getKOption()
+     * @generated
+     */
+    EAttribute getKOption_Key();
+
+    /**
+     * Returns the meta object for class '{@link de.cau.cs.kieler.kiml.layout.klayoutdata.KStringOption <em>KString Option</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for class '<em>KString Option</em>'.
+     * @see de.cau.cs.kieler.kiml.layout.klayoutdata.KStringOption
+     * @generated
+     */
+    EClass getKStringOption();
+
+    /**
+     * Returns the meta object for the attribute '{@link de.cau.cs.kieler.kiml.layout.klayoutdata.KStringOption#getValue <em>Value</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>Value</em>'.
+     * @see de.cau.cs.kieler.kiml.layout.klayoutdata.KStringOption#getValue()
+     * @see #getKStringOption()
+     * @generated
+     */
+    EAttribute getKStringOption_Value();
+
+    /**
+     * Returns the meta object for class '{@link de.cau.cs.kieler.kiml.layout.klayoutdata.KIntOption <em>KInt Option</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for class '<em>KInt Option</em>'.
+     * @see de.cau.cs.kieler.kiml.layout.klayoutdata.KIntOption
+     * @generated
+     */
+    EClass getKIntOption();
+
+    /**
+     * Returns the meta object for the attribute '{@link de.cau.cs.kieler.kiml.layout.klayoutdata.KIntOption#getValue <em>Value</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>Value</em>'.
+     * @see de.cau.cs.kieler.kiml.layout.klayoutdata.KIntOption#getValue()
+     * @see #getKIntOption()
+     * @generated
+     */
+    EAttribute getKIntOption_Value();
+
+    /**
+     * Returns the meta object for class '{@link de.cau.cs.kieler.kiml.layout.klayoutdata.KFloatOption <em>KFloat Option</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for class '<em>KFloat Option</em>'.
+     * @see de.cau.cs.kieler.kiml.layout.klayoutdata.KFloatOption
+     * @generated
+     */
+    EClass getKFloatOption();
+
+    /**
+     * Returns the meta object for the attribute '{@link de.cau.cs.kieler.kiml.layout.klayoutdata.KFloatOption#getValue <em>Value</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>Value</em>'.
+     * @see de.cau.cs.kieler.kiml.layout.klayoutdata.KFloatOption#getValue()
+     * @see #getKFloatOption()
+     * @generated
+     */
+    EAttribute getKFloatOption_Value();
+
+    /**
+     * Returns the meta object for class '{@link de.cau.cs.kieler.kiml.layout.klayoutdata.KObjectOption <em>KObject Option</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for class '<em>KObject Option</em>'.
+     * @see de.cau.cs.kieler.kiml.layout.klayoutdata.KObjectOption
+     * @generated
+     */
+    EClass getKObjectOption();
+
+    /**
+     * Returns the meta object for the containment reference '{@link de.cau.cs.kieler.kiml.layout.klayoutdata.KObjectOption#getValue <em>Value</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the containment reference '<em>Value</em>'.
+     * @see de.cau.cs.kieler.kiml.layout.klayoutdata.KObjectOption#getValue()
+     * @see #getKObjectOption()
+     * @generated
+     */
+    EReference getKObjectOption_Value();
+
+    /**
      * Returns the meta object for class '{@link de.cau.cs.kieler.kiml.layout.klayoutdata.KInsets <em>KInsets</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -656,6 +937,96 @@ public interface KLayoutDataPackage extends EPackage {
          * @generated
          */
         EAttribute KPOINT__Y = eINSTANCE.getKPoint_Y();
+
+        /**
+         * The meta object literal for the '{@link de.cau.cs.kieler.kiml.layout.klayoutdata.impl.KOptionImpl <em>KOption</em>}' class.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @see de.cau.cs.kieler.kiml.layout.klayoutdata.impl.KOptionImpl
+         * @see de.cau.cs.kieler.kiml.layout.klayoutdata.impl.KLayoutDataPackageImpl#getKOption()
+         * @generated
+         */
+        EClass KOPTION = eINSTANCE.getKOption();
+
+        /**
+         * The meta object literal for the '<em><b>Key</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute KOPTION__KEY = eINSTANCE.getKOption_Key();
+
+        /**
+         * The meta object literal for the '{@link de.cau.cs.kieler.kiml.layout.klayoutdata.impl.KStringOptionImpl <em>KString Option</em>}' class.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @see de.cau.cs.kieler.kiml.layout.klayoutdata.impl.KStringOptionImpl
+         * @see de.cau.cs.kieler.kiml.layout.klayoutdata.impl.KLayoutDataPackageImpl#getKStringOption()
+         * @generated
+         */
+        EClass KSTRING_OPTION = eINSTANCE.getKStringOption();
+
+        /**
+         * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute KSTRING_OPTION__VALUE = eINSTANCE.getKStringOption_Value();
+
+        /**
+         * The meta object literal for the '{@link de.cau.cs.kieler.kiml.layout.klayoutdata.impl.KIntOptionImpl <em>KInt Option</em>}' class.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @see de.cau.cs.kieler.kiml.layout.klayoutdata.impl.KIntOptionImpl
+         * @see de.cau.cs.kieler.kiml.layout.klayoutdata.impl.KLayoutDataPackageImpl#getKIntOption()
+         * @generated
+         */
+        EClass KINT_OPTION = eINSTANCE.getKIntOption();
+
+        /**
+         * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute KINT_OPTION__VALUE = eINSTANCE.getKIntOption_Value();
+
+        /**
+         * The meta object literal for the '{@link de.cau.cs.kieler.kiml.layout.klayoutdata.impl.KFloatOptionImpl <em>KFloat Option</em>}' class.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @see de.cau.cs.kieler.kiml.layout.klayoutdata.impl.KFloatOptionImpl
+         * @see de.cau.cs.kieler.kiml.layout.klayoutdata.impl.KLayoutDataPackageImpl#getKFloatOption()
+         * @generated
+         */
+        EClass KFLOAT_OPTION = eINSTANCE.getKFloatOption();
+
+        /**
+         * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute KFLOAT_OPTION__VALUE = eINSTANCE.getKFloatOption_Value();
+
+        /**
+         * The meta object literal for the '{@link de.cau.cs.kieler.kiml.layout.klayoutdata.impl.KObjectOptionImpl <em>KObject Option</em>}' class.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @see de.cau.cs.kieler.kiml.layout.klayoutdata.impl.KObjectOptionImpl
+         * @see de.cau.cs.kieler.kiml.layout.klayoutdata.impl.KLayoutDataPackageImpl#getKObjectOption()
+         * @generated
+         */
+        EClass KOBJECT_OPTION = eINSTANCE.getKObjectOption();
+
+        /**
+         * The meta object literal for the '<em><b>Value</b></em>' containment reference feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EReference KOBJECT_OPTION__VALUE = eINSTANCE.getKObjectOption_Value();
 
         /**
          * The meta object literal for the '{@link de.cau.cs.kieler.kiml.layout.klayoutdata.impl.KInsetsImpl <em>KInsets</em>}' class.

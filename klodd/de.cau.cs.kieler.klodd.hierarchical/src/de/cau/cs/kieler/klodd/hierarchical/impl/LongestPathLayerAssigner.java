@@ -19,9 +19,9 @@ import de.cau.cs.kieler.core.alg.AbstractAlgorithm;
 import de.cau.cs.kieler.core.kgraph.KGraphElement;
 import de.cau.cs.kieler.core.kgraph.KNode;
 import de.cau.cs.kieler.core.kgraph.KPort;
-import de.cau.cs.kieler.core.kgraph.KPortType;
 import de.cau.cs.kieler.core.slimgraph.KSlimGraph;
 import de.cau.cs.kieler.core.slimgraph.KSlimNode;
+import de.cau.cs.kieler.kiml.layout.util.KimlLayoutUtil;
 import de.cau.cs.kieler.klodd.hierarchical.modules.ILayerAssigner;
 import de.cau.cs.kieler.klodd.hierarchical.structures.*;
 
@@ -94,7 +94,7 @@ public class LongestPathLayerAssigner extends AbstractAlgorithm implements
 		}
 		else if (node.object instanceof KPort) {
 			KPort port = (KPort)node.object;
-			if (port.getType() == KPortType.INPUT) {
+			if (KimlLayoutUtil.calcFlow(port) < 0) {
 				layeredGraph.putFront(port, 0, node);
 				return Layer.UNDEF_HEIGHT;
 			}

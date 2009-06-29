@@ -15,54 +15,48 @@
  */
 package de.cau.cs.kieler.kiml.layout.klayoutdata.impl;
 
-import de.cau.cs.kieler.kiml.layout.klayoutdata.KLayoutData;
 import de.cau.cs.kieler.kiml.layout.klayoutdata.KLayoutDataPackage;
+import de.cau.cs.kieler.kiml.layout.klayoutdata.KObjectOption;
 
-import de.cau.cs.kieler.kiml.layout.klayoutdata.KOption;
-import java.util.Collection;
-
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
-import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>KLayout Data</b></em>'.
+ * An implementation of the model object '<em><b>KObject Option</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link de.cau.cs.kieler.kiml.layout.klayoutdata.impl.KLayoutDataImpl#getOptions <em>Options</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.kiml.layout.klayoutdata.impl.KObjectOptionImpl#getValue <em>Value</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public abstract class KLayoutDataImpl extends EObjectImpl implements KLayoutData {
+public class KObjectOptionImpl extends KOptionImpl implements KObjectOption {
     /**
-     * The cached value of the '{@link #getOptions() <em>Options</em>}' containment reference list.
+     * The cached value of the '{@link #getValue() <em>Value</em>}' containment reference.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getOptions()
+     * @see #getValue()
      * @generated
      * @ordered
      */
-    protected EList<KOption> options;
+    protected EObject value;
 
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    protected KLayoutDataImpl() {
+    protected KObjectOptionImpl() {
         super();
     }
 
@@ -73,7 +67,7 @@ public abstract class KLayoutDataImpl extends EObjectImpl implements KLayoutData
      */
     @Override
     protected EClass eStaticClass() {
-        return KLayoutDataPackage.Literals.KLAYOUT_DATA;
+        return KLayoutDataPackage.Literals.KOBJECT_OPTION;
     }
 
     /**
@@ -81,26 +75,42 @@ public abstract class KLayoutDataImpl extends EObjectImpl implements KLayoutData
      * <!-- end-user-doc -->
      * @generated
      */
-    public EList<KOption> getOptions() {
-        if (options == null) {
-            options = new EObjectContainmentEList<KOption>(KOption.class, this, KLayoutDataPackage.KLAYOUT_DATA__OPTIONS);
-        }
-        return options;
+    public EObject getValue() {
+        return value;
     }
 
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated NOT
+     * @generated
      */
-    public KOption getOption(String key) {
-        if (key != null) {
-            for (KOption option : getOptions()) {
-                if (key.equals(option.getKey()))
-                    return option;
-            }
+    public NotificationChain basicSetValue(EObject newValue, NotificationChain msgs) {
+        EObject oldValue = value;
+        value = newValue;
+        if (eNotificationRequired()) {
+            ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, KLayoutDataPackage.KOBJECT_OPTION__VALUE, oldValue, newValue);
+            if (msgs == null) msgs = notification; else msgs.add(notification);
         }
-        return null;
+        return msgs;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public void setValue(EObject newValue) {
+        if (newValue != value) {
+            NotificationChain msgs = null;
+            if (value != null)
+                msgs = ((InternalEObject)value).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - KLayoutDataPackage.KOBJECT_OPTION__VALUE, null, msgs);
+            if (newValue != null)
+                msgs = ((InternalEObject)newValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - KLayoutDataPackage.KOBJECT_OPTION__VALUE, null, msgs);
+            msgs = basicSetValue(newValue, msgs);
+            if (msgs != null) msgs.dispatch();
+        }
+        else if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, KLayoutDataPackage.KOBJECT_OPTION__VALUE, newValue, newValue));
     }
 
     /**
@@ -111,8 +121,8 @@ public abstract class KLayoutDataImpl extends EObjectImpl implements KLayoutData
     @Override
     public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
         switch (featureID) {
-            case KLayoutDataPackage.KLAYOUT_DATA__OPTIONS:
-                return ((InternalEList<?>)getOptions()).basicRemove(otherEnd, msgs);
+            case KLayoutDataPackage.KOBJECT_OPTION__VALUE:
+                return basicSetValue(null, msgs);
         }
         return super.eInverseRemove(otherEnd, featureID, msgs);
     }
@@ -125,8 +135,8 @@ public abstract class KLayoutDataImpl extends EObjectImpl implements KLayoutData
     @Override
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
         switch (featureID) {
-            case KLayoutDataPackage.KLAYOUT_DATA__OPTIONS:
-                return getOptions();
+            case KLayoutDataPackage.KOBJECT_OPTION__VALUE:
+                return getValue();
         }
         return super.eGet(featureID, resolve, coreType);
     }
@@ -136,13 +146,11 @@ public abstract class KLayoutDataImpl extends EObjectImpl implements KLayoutData
      * <!-- end-user-doc -->
      * @generated
      */
-    @SuppressWarnings("unchecked")
     @Override
     public void eSet(int featureID, Object newValue) {
         switch (featureID) {
-            case KLayoutDataPackage.KLAYOUT_DATA__OPTIONS:
-                getOptions().clear();
-                getOptions().addAll((Collection<? extends KOption>)newValue);
+            case KLayoutDataPackage.KOBJECT_OPTION__VALUE:
+                setValue((EObject)newValue);
                 return;
         }
         super.eSet(featureID, newValue);
@@ -156,8 +164,8 @@ public abstract class KLayoutDataImpl extends EObjectImpl implements KLayoutData
     @Override
     public void eUnset(int featureID) {
         switch (featureID) {
-            case KLayoutDataPackage.KLAYOUT_DATA__OPTIONS:
-                getOptions().clear();
+            case KLayoutDataPackage.KOBJECT_OPTION__VALUE:
+                setValue((EObject)null);
                 return;
         }
         super.eUnset(featureID);
@@ -171,10 +179,10 @@ public abstract class KLayoutDataImpl extends EObjectImpl implements KLayoutData
     @Override
     public boolean eIsSet(int featureID) {
         switch (featureID) {
-            case KLayoutDataPackage.KLAYOUT_DATA__OPTIONS:
-                return options != null && !options.isEmpty();
+            case KLayoutDataPackage.KOBJECT_OPTION__VALUE:
+                return value != null;
         }
         return super.eIsSet(featureID);
     }
 
-} //KLayoutDataImpl
+} //KObjectOptionImpl

@@ -27,7 +27,6 @@ import de.cau.cs.kieler.core.kgraph.KEdge;
 import de.cau.cs.kieler.core.kgraph.KLabel;
 import de.cau.cs.kieler.core.kgraph.KNode;
 import de.cau.cs.kieler.core.kgraph.KPort;
-import de.cau.cs.kieler.core.kgraph.KPortType;
 import de.cau.cs.kieler.kiml.layout.klayoutdata.KEdgeLayout;
 import de.cau.cs.kieler.kiml.layout.klayoutdata.KInsets;
 import de.cau.cs.kieler.kiml.layout.klayoutdata.KLayoutDataFactory;
@@ -225,8 +224,6 @@ public class DataFlowLayoutGraphBuilder extends AbstractLayoutGraphBuilder {
 				KPort port = KimlLayoutUtil.createInitializedPort();
 				layoutPort2EditPart.put(port, borderItem);
 				borderItem2PortMapping.put(borderItem, port);
-				port.setType(borderItem instanceof InputPortEditPart
-				        ? KPortType.INPUT : KPortType.OUTPUT);
 				port.setNode(childNode);
 				// set the port's layout
 				KShapeLayout portLayout = KimlLayoutUtil.getShapeLayout(port);
@@ -303,29 +300,29 @@ public class DataFlowLayoutGraphBuilder extends AbstractLayoutGraphBuilder {
 								.get(connectionEditPart.getTarget());
 						if (port2 != null) {
 							// add the new edge according to its type
-							if (port1.getType() == KPortType.OUTPUT
-									&& port2.getType() == KPortType.INPUT) {
-								if (processExternal
-										&& port1.getNode().getParent() == port2
-												.getNode().getParent()) {
-									addEdge(port1, port2, connectionEditPart,
-											EdgeHierarchyType.OP_TO_OP);
-								}
-							} else if (port1.getType() == KPortType.INPUT
-									&& port2.getType() == KPortType.INPUT) {
-								if (port1.getNode() == port2.getNode().getParent()) {
-									addEdge(port1, port2, connectionEditPart,
-											EdgeHierarchyType.INPUT_TO_OP);
-								}
-							} else if (port1.getType() == KPortType.OUTPUT
-									&& port2.getType() == KPortType.OUTPUT) {
-								if (processExternal
-										&& port1.getNode().getParent() == port2
-												.getNode()) {
-									addEdge(port1, port2, connectionEditPart,
-											EdgeHierarchyType.OP_TO_OUTPUT);
-								}
-							}
+//							if (port1.getType() == KPortType.OUTPUT
+//									&& port2.getType() == KPortType.INPUT) {
+//								if (processExternal
+//										&& port1.getNode().getParent() == port2
+//												.getNode().getParent()) {
+//									addEdge(port1, port2, connectionEditPart,
+//											EdgeHierarchyType.OP_TO_OP);
+//								}
+//							} else if (port1.getType() == KPortType.INPUT
+//									&& port2.getType() == KPortType.INPUT) {
+//								if (port1.getNode() == port2.getNode().getParent()) {
+//									addEdge(port1, port2, connectionEditPart,
+//											EdgeHierarchyType.INPUT_TO_OP);
+//								}
+//							} else if (port1.getType() == KPortType.OUTPUT
+//									&& port2.getType() == KPortType.OUTPUT) {
+//								if (processExternal
+//										&& port1.getNode().getParent() == port2
+//												.getNode()) {
+//									addEdge(port1, port2, connectionEditPart,
+//											EdgeHierarchyType.OP_TO_OUTPUT);
+//								}
+//							}
 						}
 					}
 				}

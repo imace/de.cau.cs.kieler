@@ -15,54 +15,56 @@
  */
 package de.cau.cs.kieler.kiml.layout.klayoutdata.impl;
 
-import de.cau.cs.kieler.kiml.layout.klayoutdata.KLayoutData;
 import de.cau.cs.kieler.kiml.layout.klayoutdata.KLayoutDataPackage;
-
 import de.cau.cs.kieler.kiml.layout.klayoutdata.KOption;
-import java.util.Collection;
 
-import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
 
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>KLayout Data</b></em>'.
+ * An implementation of the model object '<em><b>KOption</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link de.cau.cs.kieler.kiml.layout.klayoutdata.impl.KLayoutDataImpl#getOptions <em>Options</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.kiml.layout.klayoutdata.impl.KOptionImpl#getKey <em>Key</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public abstract class KLayoutDataImpl extends EObjectImpl implements KLayoutData {
+public class KOptionImpl extends EObjectImpl implements KOption {
     /**
-     * The cached value of the '{@link #getOptions() <em>Options</em>}' containment reference list.
+     * The default value of the '{@link #getKey() <em>Key</em>}' attribute.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getOptions()
+     * @see #getKey()
      * @generated
      * @ordered
      */
-    protected EList<KOption> options;
+    protected static final String KEY_EDEFAULT = null;
+
+    /**
+     * The cached value of the '{@link #getKey() <em>Key</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getKey()
+     * @generated
+     * @ordered
+     */
+    protected String key = KEY_EDEFAULT;
 
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    protected KLayoutDataImpl() {
+    protected KOptionImpl() {
         super();
     }
 
@@ -73,7 +75,7 @@ public abstract class KLayoutDataImpl extends EObjectImpl implements KLayoutData
      */
     @Override
     protected EClass eStaticClass() {
-        return KLayoutDataPackage.Literals.KLAYOUT_DATA;
+        return KLayoutDataPackage.Literals.KOPTION;
     }
 
     /**
@@ -81,26 +83,8 @@ public abstract class KLayoutDataImpl extends EObjectImpl implements KLayoutData
      * <!-- end-user-doc -->
      * @generated
      */
-    public EList<KOption> getOptions() {
-        if (options == null) {
-            options = new EObjectContainmentEList<KOption>(KOption.class, this, KLayoutDataPackage.KLAYOUT_DATA__OPTIONS);
-        }
-        return options;
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated NOT
-     */
-    public KOption getOption(String key) {
-        if (key != null) {
-            for (KOption option : getOptions()) {
-                if (key.equals(option.getKey()))
-                    return option;
-            }
-        }
-        return null;
+    public String getKey() {
+        return key;
     }
 
     /**
@@ -108,13 +92,11 @@ public abstract class KLayoutDataImpl extends EObjectImpl implements KLayoutData
      * <!-- end-user-doc -->
      * @generated
      */
-    @Override
-    public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-        switch (featureID) {
-            case KLayoutDataPackage.KLAYOUT_DATA__OPTIONS:
-                return ((InternalEList<?>)getOptions()).basicRemove(otherEnd, msgs);
-        }
-        return super.eInverseRemove(otherEnd, featureID, msgs);
+    public void setKey(String newKey) {
+        String oldKey = key;
+        key = newKey;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, KLayoutDataPackage.KOPTION__KEY, oldKey, key));
     }
 
     /**
@@ -125,8 +107,8 @@ public abstract class KLayoutDataImpl extends EObjectImpl implements KLayoutData
     @Override
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
         switch (featureID) {
-            case KLayoutDataPackage.KLAYOUT_DATA__OPTIONS:
-                return getOptions();
+            case KLayoutDataPackage.KOPTION__KEY:
+                return getKey();
         }
         return super.eGet(featureID, resolve, coreType);
     }
@@ -136,13 +118,11 @@ public abstract class KLayoutDataImpl extends EObjectImpl implements KLayoutData
      * <!-- end-user-doc -->
      * @generated
      */
-    @SuppressWarnings("unchecked")
     @Override
     public void eSet(int featureID, Object newValue) {
         switch (featureID) {
-            case KLayoutDataPackage.KLAYOUT_DATA__OPTIONS:
-                getOptions().clear();
-                getOptions().addAll((Collection<? extends KOption>)newValue);
+            case KLayoutDataPackage.KOPTION__KEY:
+                setKey((String)newValue);
                 return;
         }
         super.eSet(featureID, newValue);
@@ -156,8 +136,8 @@ public abstract class KLayoutDataImpl extends EObjectImpl implements KLayoutData
     @Override
     public void eUnset(int featureID) {
         switch (featureID) {
-            case KLayoutDataPackage.KLAYOUT_DATA__OPTIONS:
-                getOptions().clear();
+            case KLayoutDataPackage.KOPTION__KEY:
+                setKey(KEY_EDEFAULT);
                 return;
         }
         super.eUnset(featureID);
@@ -171,10 +151,26 @@ public abstract class KLayoutDataImpl extends EObjectImpl implements KLayoutData
     @Override
     public boolean eIsSet(int featureID) {
         switch (featureID) {
-            case KLayoutDataPackage.KLAYOUT_DATA__OPTIONS:
-                return options != null && !options.isEmpty();
+            case KLayoutDataPackage.KOPTION__KEY:
+                return KEY_EDEFAULT == null ? key != null : !KEY_EDEFAULT.equals(key);
         }
         return super.eIsSet(featureID);
     }
 
-} //KLayoutDataImpl
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public String toString() {
+        if (eIsProxy()) return super.toString();
+
+        StringBuffer result = new StringBuffer(super.toString());
+        result.append(" (key: ");
+        result.append(key);
+        result.append(')');
+        return result.toString();
+    }
+
+} //KOptionImpl

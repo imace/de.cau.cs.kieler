@@ -22,14 +22,13 @@ import de.cau.cs.kieler.core.kgraph.KGraphElement;
 import de.cau.cs.kieler.core.kgraph.KGraphFactory;
 import de.cau.cs.kieler.core.kgraph.KLabel;
 import de.cau.cs.kieler.core.kgraph.KNode;
-import de.cau.cs.kieler.core.kgraph.KObjectOption;
 import de.cau.cs.kieler.core.kgraph.KPort;
-import de.cau.cs.kieler.core.kgraph.KPortType;
 import de.cau.cs.kieler.kiml.layout.klayoutdata.KEdgeLayout;
 import de.cau.cs.kieler.kiml.layout.klayoutdata.KInsets;
 import de.cau.cs.kieler.kiml.layout.klayoutdata.KLayoutData;
 import de.cau.cs.kieler.kiml.layout.klayoutdata.KLayoutDataFactory;
 import de.cau.cs.kieler.kiml.layout.klayoutdata.KLayoutDataPackage;
+import de.cau.cs.kieler.kiml.layout.klayoutdata.KObjectOption;
 import de.cau.cs.kieler.kiml.layout.klayoutdata.KPoint;
 import de.cau.cs.kieler.kiml.layout.klayoutdata.KShapeLayout;
 import de.cau.cs.kieler.kiml.layout.options.LayoutDirection;
@@ -135,7 +134,7 @@ public class KimlLayoutUtil {
 		layoutNode.setLabel(nodeLabel);
         KShapeLayout layout = KLayoutDataFactory.eINSTANCE.createKShapeLayout();
         KInsets insets = KLayoutDataFactory.eINSTANCE.createKInsets();
-		KObjectOption insetsOption = KGraphFactory.eINSTANCE.createKObjectOption();
+		KObjectOption insetsOption = KLayoutDataFactory.eINSTANCE.createKObjectOption();
 		insetsOption.setKey(LayoutOptions.INSETS);
 		insetsOption.setValue(insets);
 		layout.getOptions().add(insetsOption);
@@ -219,21 +218,19 @@ public class KimlLayoutUtil {
                 && relx < nodeWidth / 2 - 3)
             return PortSide.NORTH;
 
-        // determine port placement from port type
+        // determine port placement from the incident edges
         if (layoutDirection == LayoutDirection.VERTICAL) {
-            switch (port.getType()) {
-            case INPUT:
-                return PortSide.NORTH;
-            case OUTPUT:
+            int flow = calcFlow(port);
+            if (flow > 0)
                 return PortSide.SOUTH;
-            }
+            if (flow < 0)
+                return PortSide.NORTH;
         } else {
-            switch (port.getType()) {
-            case INPUT:
-                return PortSide.WEST;
-            case OUTPUT:
+            int flow = calcFlow(port);
+            if (flow > 0)
                 return PortSide.EAST;
-            }
+            if (flow < 0)
+                return PortSide.WEST;
         }
         return PortSide.UNDEFINED;
     }
@@ -328,14 +325,14 @@ public class KimlLayoutUtil {
             if (layoutDirection == LayoutDirection.VERTICAL) {
                 for (KPort port : node.getPorts()) {
                     LayoutOptions.setPortSide(getShapeLayout(port),
-                            port.getType() == KPortType.INPUT ? PortSide.NORTH
+                            calcFlow(port) < 0 ? PortSide.NORTH
                             : PortSide.SOUTH);
                 }
             }
             else {
                 for (KPort port : node.getPorts()) {
                     LayoutOptions.setPortSide(getShapeLayout(port),
-                            port.getType() == KPortType.INPUT ? PortSide.WEST
+                            calcFlow(port) < 0 ? PortSide.WEST
                             : PortSide.EAST);
                 }
             }
@@ -455,6 +452,30 @@ public class KimlLayoutUtil {
                 portLayout.setYpos(portLayout.getYpos() + newHeight - oldHeight);
             }
         }
+    }
+    
+    /**
+     * Determines the flow of the given port, that is the difference
+     * between the number of outgoing edges and the number of incoming
+     * edges. Edges that span different hierarchies are not counted.
+     * 
+     * @param port port for which the flow shall be calculated
+     * @return difference between number of outgoing and incoming edges
+     */
+    public static int calcFlow(KPort port) {
+        int flow = 0;
+        for (KEdge edge : port.getEdges()) {
+            KPort sourcePort = edge.getSourcePort();
+            KPort targetPort = edge.getTargetPort();
+            if (sourcePort != null && targetPort != null
+                    && sourcePort.getNode().getParent() == targetPort.getNode().getParent()) {
+                if (edge.getSourcePort() == port)
+                    flow++;
+                if (edge.getTargetPort() == port)
+                    flow--;
+            }
+        }
+        return flow;
     }
 
 }

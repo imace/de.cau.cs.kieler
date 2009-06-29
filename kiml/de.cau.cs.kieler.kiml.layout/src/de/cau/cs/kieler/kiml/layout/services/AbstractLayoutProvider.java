@@ -19,7 +19,7 @@ import java.util.List;
 import de.cau.cs.kieler.core.KielerException;
 import de.cau.cs.kieler.core.alg.IKielerProgressMonitor;
 import de.cau.cs.kieler.core.kgraph.KNode;
-import de.cau.cs.kieler.core.kgraph.KOption;
+import de.cau.cs.kieler.kiml.layout.klayoutdata.KOption;
 
 /**
  * A layout provider executes a layout algorithm to layout the child elements of

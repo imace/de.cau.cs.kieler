@@ -26,8 +26,6 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 
 import org.eclipse.emf.ecore.EObject;
 
-import org.eclipse.gmf.runtime.notation.Style;
-
 /**
  * <!-- begin-user-doc -->
  * The <b>Adapter Factory</b> for the model.
@@ -101,12 +99,28 @@ public class KLayoutDataAdapterFactory extends AdapterFactoryImpl {
                 return createKPointAdapter();
             }
             @Override
-            public Adapter caseKInsets(KInsets object) {
-                return createKInsetsAdapter();
+            public Adapter caseKOption(KOption object) {
+                return createKOptionAdapter();
             }
             @Override
-            public Adapter caseStyle(Style object) {
-                return createStyleAdapter();
+            public Adapter caseKStringOption(KStringOption object) {
+                return createKStringOptionAdapter();
+            }
+            @Override
+            public Adapter caseKIntOption(KIntOption object) {
+                return createKIntOptionAdapter();
+            }
+            @Override
+            public Adapter caseKFloatOption(KFloatOption object) {
+                return createKFloatOptionAdapter();
+            }
+            @Override
+            public Adapter caseKObjectOption(KObjectOption object) {
+                return createKObjectOptionAdapter();
+            }
+            @Override
+            public Adapter caseKInsets(KInsets object) {
+                return createKInsetsAdapter();
             }
             @Override
             public Adapter caseKGraphData(KGraphData object) {
@@ -189,6 +203,76 @@ public class KLayoutDataAdapterFactory extends AdapterFactoryImpl {
     }
 
     /**
+     * Creates a new adapter for an object of class '{@link de.cau.cs.kieler.kiml.layout.klayoutdata.KOption <em>KOption</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see de.cau.cs.kieler.kiml.layout.klayoutdata.KOption
+     * @generated
+     */
+    public Adapter createKOptionAdapter() {
+        return null;
+    }
+
+    /**
+     * Creates a new adapter for an object of class '{@link de.cau.cs.kieler.kiml.layout.klayoutdata.KStringOption <em>KString Option</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see de.cau.cs.kieler.kiml.layout.klayoutdata.KStringOption
+     * @generated
+     */
+    public Adapter createKStringOptionAdapter() {
+        return null;
+    }
+
+    /**
+     * Creates a new adapter for an object of class '{@link de.cau.cs.kieler.kiml.layout.klayoutdata.KIntOption <em>KInt Option</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see de.cau.cs.kieler.kiml.layout.klayoutdata.KIntOption
+     * @generated
+     */
+    public Adapter createKIntOptionAdapter() {
+        return null;
+    }
+
+    /**
+     * Creates a new adapter for an object of class '{@link de.cau.cs.kieler.kiml.layout.klayoutdata.KFloatOption <em>KFloat Option</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see de.cau.cs.kieler.kiml.layout.klayoutdata.KFloatOption
+     * @generated
+     */
+    public Adapter createKFloatOptionAdapter() {
+        return null;
+    }
+
+    /**
+     * Creates a new adapter for an object of class '{@link de.cau.cs.kieler.kiml.layout.klayoutdata.KObjectOption <em>KObject Option</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see de.cau.cs.kieler.kiml.layout.klayoutdata.KObjectOption
+     * @generated
+     */
+    public Adapter createKObjectOptionAdapter() {
+        return null;
+    }
+
+    /**
      * Creates a new adapter for an object of class '{@link de.cau.cs.kieler.kiml.layout.klayoutdata.KInsets <em>KInsets</em>}'.
      * <!-- begin-user-doc -->
      * This default implementation returns null so that we can easily ignore cases;
@@ -199,20 +283,6 @@ public class KLayoutDataAdapterFactory extends AdapterFactoryImpl {
      * @generated
      */
     public Adapter createKInsetsAdapter() {
-        return null;
-    }
-
-    /**
-     * Creates a new adapter for an object of class '{@link org.eclipse.gmf.runtime.notation.Style <em>Style</em>}'.
-     * <!-- begin-user-doc -->
-     * This default implementation returns null so that we can easily ignore cases;
-     * it's useful to ignore a case when inheritance will catch all the cases anyway.
-     * <!-- end-user-doc -->
-     * @return the new adapter.
-     * @see org.eclipse.gmf.runtime.notation.Style
-     * @generated
-     */
-    public Adapter createStyleAdapter() {
         return null;
     }
 

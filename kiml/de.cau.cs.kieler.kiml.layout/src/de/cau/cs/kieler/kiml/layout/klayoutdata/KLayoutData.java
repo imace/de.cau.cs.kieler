@@ -16,7 +16,6 @@
 package de.cau.cs.kieler.kiml.layout.klayoutdata;
 
 import de.cau.cs.kieler.core.kgraph.KGraphData;
-import de.cau.cs.kieler.core.kgraph.KOption;
 
 import org.eclipse.emf.common.util.EList;
 
@@ -42,7 +41,7 @@ import org.eclipse.emf.common.util.EList;
 public interface KLayoutData extends KGraphData {
     /**
      * Returns the value of the '<em><b>Options</b></em>' containment reference list.
-     * The list contents are of type {@link de.cau.cs.kieler.core.kgraph.KOption}.
+     * The list contents are of type {@link de.cau.cs.kieler.kiml.layout.klayoutdata.KOption}.
      * <!-- begin-user-doc -->
      * <p>
      * Layout options specify how a layout algorithm shall handle the related
