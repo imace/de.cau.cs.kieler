@@ -2,22 +2,12 @@
 <?eclipse version="3.2"?>
 <plugin>
 
-   <extension
-         point="org.eclipse.help.toc">
-      <toc
-            file="toc.xml">
-      </toc>
-      <toc
-            file="testToc.xml"
-            primary="true">
-      </toc>
-   </extension>
    
    <extension point="org.eclipse.ui.commands">
 	  <category name="SyncCharts" description="Commands related to SyncChart diagrams." id="org.eclipse.gmf.category.synccharts"/>
 	  <command
          categoryId="org.eclipse.gmf.category.synccharts"
-         defaultHandler="de.cau.cs.kieler.synccharts.custom.handlers.AddToStateHandler"
+         defaultHandler="de.cau.cs.kieler.synccharts.diagram.custom.handlers.AddToStateHandler"
          description="Adds a new OnEntryAction"
          id="de.cau.cs.kieler.synccharts.custom.contextMenu.addEntryAction"
          name="Add OnEntryAction">
@@ -29,7 +19,7 @@
 	  </command>
 	  <command
          categoryId="org.eclipse.gmf.category.synccharts"
-         defaultHandler="de.cau.cs.kieler.synccharts.custom.handlers.AddToStateHandler"
+         defaultHandler="de.cau.cs.kieler.synccharts.diagram.custom.handlers.AddToStateHandler"
          description="Adds a new OnInsideAction"
          id="de.cau.cs.kieler.synccharts.custom.contextMenu.addInsideAction"
          name="Add OnInsideAction">
@@ -41,7 +31,7 @@
 	  </command>
 	  <command
          categoryId="org.eclipse.gmf.category.synccharts"
-         defaultHandler="de.cau.cs.kieler.synccharts.custom.handlers.AddToStateHandler"
+         defaultHandler="de.cau.cs.kieler.synccharts.diagram.custom.handlers.AddToStateHandler"
          description="Adds a new OnExitAction"
          id="de.cau.cs.kieler.synccharts.custom.contextMenu.addExitAction"
          name="Add OnExitAction">
@@ -53,7 +43,7 @@
 	  </command>
 	  <command
          categoryId="org.eclipse.gmf.category.synccharts"
-         defaultHandler="de.cau.cs.kieler.synccharts.custom.handlers.AddToStateHandler"
+         defaultHandler="de.cau.cs.kieler.synccharts.diagram.custom.handlers.AddToStateHandler"
          description="Adds a new Signal"
          id="de.cau.cs.kieler.synccharts.custom.contextMenu.addSignal"
          name="Add Signal">
@@ -65,7 +55,7 @@
 	  </command>
 	  <command
          categoryId="org.eclipse.gmf.category.synccharts"
-         defaultHandler="de.cau.cs.kieler.synccharts.custom.handlers.AddToStateHandler"
+         defaultHandler="de.cau.cs.kieler.synccharts.diagram.custom.handlers.AddToStateHandler"
          description="Adds a new Variable"
          id="de.cau.cs.kieler.synccharts.custom.contextMenu.addVariable"
          name="Add Variable">
@@ -77,7 +67,7 @@
 	  </command>
 	  <command
          categoryId="org.eclipse.gmf.category.synccharts"
-         defaultHandler="de.cau.cs.kieler.synccharts.custom.handlers.AddToStateHandler"
+         defaultHandler="de.cau.cs.kieler.synccharts.diagram.custom.handlers.AddToStateHandler"
          description="Adds a new SuspensionTrigger"
          id="de.cau.cs.kieler.synccharts.custom.contextMenu.addSuspensionTrigger"
          name="Add SuspensionTrigger">
@@ -89,7 +79,7 @@
 	  </command>
 	  <command
          categoryId="org.eclipse.gmf.category.synccharts"
-         defaultHandler="de.cau.cs.kieler.synccharts.custom.handlers.AddToStateHandler"
+         defaultHandler="de.cau.cs.kieler.synccharts.diagram.custom.handlers.AddToStateHandler"
          description="Adds a new Region"
          id="de.cau.cs.kieler.synccharts.custom.contextMenu.addRegion"
          name="Add Region">
@@ -101,7 +91,7 @@
 	  </command>
 	  <command
          categoryId="org.eclipse.gmf.category.synccharts"
-         defaultHandler="de.cau.cs.kieler.synccharts.custom.handlers.AddStateHandler"
+         defaultHandler="de.cau.cs.kieler.synccharts.diagram.custom.handlers.AddStateHandler"
          description="Adds a new State"
          id="de.cau.cs.kieler.synccharts.custom.contextMenu.addState"
          name="Add State">
@@ -334,6 +324,25 @@
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
             sequence="M1+M3+V">
       </key>
+   </extension>
+   <extension
+         point="de.cau.cs.kieler.kiml.layout.layoutInfo">
+      <binding
+            class="de.cau.cs.kieler.synccharts.diagram.edit.parts.RegionEditPart"
+            type="de.cau.cs.kieler.layout.info.types.stateMachine">
+      </binding>
+      <binding
+            class="de.cau.cs.kieler.synccharts.diagram.edit.parts.RegionStateCompartmentEditPart"
+            type="de.cau.cs.kieler.layout.info.types.stateMachine">
+      </binding>
+      <binding
+            class="de.cau.cs.kieler.synccharts.diagram.edit.parts.StateRegionCompartmentEditPart"
+            type="de.cau.cs.kieler.layout.info.types.boxes">
+      </binding>
+      <binding
+            class="de.cau.cs.kieler.synccharts.diagram.edit.parts.StateRegionCompartment2EditPart"
+            type="de.cau.cs.kieler.layout.info.types.boxes">
+      </binding>
    </extension>
 
 </plugin>
