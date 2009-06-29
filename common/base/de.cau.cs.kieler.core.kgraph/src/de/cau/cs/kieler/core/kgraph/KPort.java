@@ -30,7 +30,6 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link de.cau.cs.kieler.core.kgraph.KPort#getNode <em>Node</em>}</li>
  *   <li>{@link de.cau.cs.kieler.core.kgraph.KPort#getEdges <em>Edges</em>}</li>
  *   <li>{@link de.cau.cs.kieler.core.kgraph.KPort#getLabel <em>Label</em>}</li>
- *   <li>{@link de.cau.cs.kieler.core.kgraph.KPort#getType <em>Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -109,33 +108,5 @@ public interface KPort extends KGraphElement {
      * @generated
      */
     void setLabel(KLabel value);
-
-    /**
-     * Returns the value of the '<em><b>Type</b></em>' attribute.
-     * The literals are from the enumeration {@link de.cau.cs.kieler.core.kgraph.KPortType}.
-     * <!-- begin-user-doc -->
-     * <p>
-     * Ports may be either input or output type.
-     * </p>
-     * <!-- end-user-doc -->
-     * @return the value of the '<em>Type</em>' attribute.
-     * @see de.cau.cs.kieler.core.kgraph.KPortType
-     * @see #setType(KPortType)
-     * @see de.cau.cs.kieler.core.kgraph.KGraphPackage#getKPort_Type()
-     * @model
-     * @generated
-     */
-    KPortType getType();
-
-    /**
-     * Sets the value of the '{@link de.cau.cs.kieler.core.kgraph.KPort#getType <em>Type</em>}' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @param value the new value of the '<em>Type</em>' attribute.
-     * @see de.cau.cs.kieler.core.kgraph.KPortType
-     * @see #getType()
-     * @generated
-     */
-    void setType(KPortType value);
 
 } // KPort

@@ -15,7 +15,7 @@
  */
 package de.cau.cs.kieler.core.kgraph;
 
-import org.eclipse.gmf.runtime.notation.Style;
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -29,5 +29,5 @@ import org.eclipse.gmf.runtime.notation.Style;
  * @model interface="true" abstract="true"
  * @generated
  */
-public interface KGraphData extends Style {
+public interface KGraphData extends EObject {
 } // KGraphData

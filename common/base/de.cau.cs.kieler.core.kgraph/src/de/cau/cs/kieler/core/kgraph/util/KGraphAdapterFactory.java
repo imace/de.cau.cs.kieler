@@ -25,8 +25,6 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.EObject;
 
-import org.eclipse.gmf.runtime.notation.Style;
-
 /**
  * <!-- begin-user-doc -->
  * The <b>Adapter Factory</b> for the model.
@@ -108,32 +106,8 @@ public class KGraphAdapterFactory extends AdapterFactoryImpl {
                 return createKLabelAdapter();
             }
             @Override
-            public Adapter caseKOption(KOption object) {
-                return createKOptionAdapter();
-            }
-            @Override
-            public Adapter caseKStringOption(KStringOption object) {
-                return createKStringOptionAdapter();
-            }
-            @Override
-            public Adapter caseKIntOption(KIntOption object) {
-                return createKIntOptionAdapter();
-            }
-            @Override
-            public Adapter caseKFloatOption(KFloatOption object) {
-                return createKFloatOptionAdapter();
-            }
-            @Override
-            public Adapter caseKObjectOption(KObjectOption object) {
-                return createKObjectOptionAdapter();
-            }
-            @Override
             public Adapter caseEModelElement(EModelElement object) {
                 return createEModelElementAdapter();
-            }
-            @Override
-            public Adapter caseStyle(Style object) {
-                return createStyleAdapter();
             }
             @Override
             public Adapter defaultCase(EObject object) {
@@ -240,76 +214,6 @@ public class KGraphAdapterFactory extends AdapterFactoryImpl {
     }
 
     /**
-     * Creates a new adapter for an object of class '{@link de.cau.cs.kieler.core.kgraph.KOption <em>KOption</em>}'.
-     * <!-- begin-user-doc -->
-     * This default implementation returns null so that we can easily ignore cases;
-     * it's useful to ignore a case when inheritance will catch all the cases anyway.
-     * <!-- end-user-doc -->
-     * @return the new adapter.
-     * @see de.cau.cs.kieler.core.kgraph.KOption
-     * @generated
-     */
-    public Adapter createKOptionAdapter() {
-        return null;
-    }
-
-    /**
-     * Creates a new adapter for an object of class '{@link de.cau.cs.kieler.core.kgraph.KStringOption <em>KString Option</em>}'.
-     * <!-- begin-user-doc -->
-     * This default implementation returns null so that we can easily ignore cases;
-     * it's useful to ignore a case when inheritance will catch all the cases anyway.
-     * <!-- end-user-doc -->
-     * @return the new adapter.
-     * @see de.cau.cs.kieler.core.kgraph.KStringOption
-     * @generated
-     */
-    public Adapter createKStringOptionAdapter() {
-        return null;
-    }
-
-    /**
-     * Creates a new adapter for an object of class '{@link de.cau.cs.kieler.core.kgraph.KIntOption <em>KInt Option</em>}'.
-     * <!-- begin-user-doc -->
-     * This default implementation returns null so that we can easily ignore cases;
-     * it's useful to ignore a case when inheritance will catch all the cases anyway.
-     * <!-- end-user-doc -->
-     * @return the new adapter.
-     * @see de.cau.cs.kieler.core.kgraph.KIntOption
-     * @generated
-     */
-    public Adapter createKIntOptionAdapter() {
-        return null;
-    }
-
-    /**
-     * Creates a new adapter for an object of class '{@link de.cau.cs.kieler.core.kgraph.KFloatOption <em>KFloat Option</em>}'.
-     * <!-- begin-user-doc -->
-     * This default implementation returns null so that we can easily ignore cases;
-     * it's useful to ignore a case when inheritance will catch all the cases anyway.
-     * <!-- end-user-doc -->
-     * @return the new adapter.
-     * @see de.cau.cs.kieler.core.kgraph.KFloatOption
-     * @generated
-     */
-    public Adapter createKFloatOptionAdapter() {
-        return null;
-    }
-
-    /**
-     * Creates a new adapter for an object of class '{@link de.cau.cs.kieler.core.kgraph.KObjectOption <em>KObject Option</em>}'.
-     * <!-- begin-user-doc -->
-     * This default implementation returns null so that we can easily ignore cases;
-     * it's useful to ignore a case when inheritance will catch all the cases anyway.
-     * <!-- end-user-doc -->
-     * @return the new adapter.
-     * @see de.cau.cs.kieler.core.kgraph.KObjectOption
-     * @generated
-     */
-    public Adapter createKObjectOptionAdapter() {
-        return null;
-    }
-
-    /**
      * Creates a new adapter for an object of class '{@link org.eclipse.emf.ecore.EModelElement <em>EModel Element</em>}'.
      * <!-- begin-user-doc -->
      * This default implementation returns null so that we can easily ignore cases;
@@ -320,20 +224,6 @@ public class KGraphAdapterFactory extends AdapterFactoryImpl {
      * @generated
      */
     public Adapter createEModelElementAdapter() {
-        return null;
-    }
-
-    /**
-     * Creates a new adapter for an object of class '{@link org.eclipse.gmf.runtime.notation.Style <em>Style</em>}'.
-     * <!-- begin-user-doc -->
-     * This default implementation returns null so that we can easily ignore cases;
-     * it's useful to ignore a case when inheritance will catch all the cases anyway.
-     * <!-- end-user-doc -->
-     * @return the new adapter.
-     * @see org.eclipse.gmf.runtime.notation.Style
-     * @generated
-     */
-    public Adapter createStyleAdapter() {
         return null;
     }
 

@@ -71,51 +71,6 @@ public interface KGraphFactory extends EFactory {
     KLabel createKLabel();
 
     /**
-     * Returns a new object of class '<em>KOption</em>'.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @return a new object of class '<em>KOption</em>'.
-     * @generated
-     */
-    KOption createKOption();
-
-    /**
-     * Returns a new object of class '<em>KString Option</em>'.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @return a new object of class '<em>KString Option</em>'.
-     * @generated
-     */
-    KStringOption createKStringOption();
-
-    /**
-     * Returns a new object of class '<em>KInt Option</em>'.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @return a new object of class '<em>KInt Option</em>'.
-     * @generated
-     */
-    KIntOption createKIntOption();
-
-    /**
-     * Returns a new object of class '<em>KFloat Option</em>'.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @return a new object of class '<em>KFloat Option</em>'.
-     * @generated
-     */
-    KFloatOption createKFloatOption();
-
-    /**
-     * Returns a new object of class '<em>KObject Option</em>'.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @return a new object of class '<em>KObject Option</em>'.
-     * @generated
-     */
-    KObjectOption createKObjectOption();
-
-    /**
      * Returns the package supported by this factory.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->

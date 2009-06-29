@@ -20,7 +20,6 @@ import de.cau.cs.kieler.core.kgraph.KGraphPackage;
 import de.cau.cs.kieler.core.kgraph.KLabel;
 import de.cau.cs.kieler.core.kgraph.KNode;
 import de.cau.cs.kieler.core.kgraph.KPort;
-import de.cau.cs.kieler.core.kgraph.KPortType;
 
 import java.util.Collection;
 
@@ -47,7 +46,6 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  *   <li>{@link de.cau.cs.kieler.core.kgraph.impl.KPortImpl#getNode <em>Node</em>}</li>
  *   <li>{@link de.cau.cs.kieler.core.kgraph.impl.KPortImpl#getEdges <em>Edges</em>}</li>
  *   <li>{@link de.cau.cs.kieler.core.kgraph.impl.KPortImpl#getLabel <em>Label</em>}</li>
- *   <li>{@link de.cau.cs.kieler.core.kgraph.impl.KPortImpl#getType <em>Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -73,26 +71,6 @@ public class KPortImpl extends KGraphElementImpl implements KPort {
      * @ordered
      */
     protected KLabel label;
-
-    /**
-     * The default value of the '{@link #getType() <em>Type</em>}' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see #getType()
-     * @generated
-     * @ordered
-     */
-    protected static final KPortType TYPE_EDEFAULT = KPortType.UNDEFINED;
-
-    /**
-     * The cached value of the '{@link #getType() <em>Type</em>}' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see #getType()
-     * @generated
-     * @ordered
-     */
-    protected KPortType type = TYPE_EDEFAULT;
 
     /**
      * <!-- begin-user-doc -->
@@ -214,27 +192,6 @@ public class KPortImpl extends KGraphElementImpl implements KPort {
      * <!-- end-user-doc -->
      * @generated
      */
-    public KPortType getType() {
-        return type;
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public void setType(KPortType newType) {
-        KPortType oldType = type;
-        type = newType == null ? TYPE_EDEFAULT : newType;
-        if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, KGraphPackage.KPORT__TYPE, oldType, type));
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
     @Override
     public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
         switch (featureID) {
@@ -290,8 +247,6 @@ public class KPortImpl extends KGraphElementImpl implements KPort {
                 return getEdges();
             case KGraphPackage.KPORT__LABEL:
                 return getLabel();
-            case KGraphPackage.KPORT__TYPE:
-                return getType();
         }
         return super.eGet(featureID, resolve, coreType);
     }
@@ -315,9 +270,6 @@ public class KPortImpl extends KGraphElementImpl implements KPort {
             case KGraphPackage.KPORT__LABEL:
                 setLabel((KLabel)newValue);
                 return;
-            case KGraphPackage.KPORT__TYPE:
-                setType((KPortType)newValue);
-                return;
         }
         super.eSet(featureID, newValue);
     }
@@ -339,9 +291,6 @@ public class KPortImpl extends KGraphElementImpl implements KPort {
             case KGraphPackage.KPORT__LABEL:
                 setLabel((KLabel)null);
                 return;
-            case KGraphPackage.KPORT__TYPE:
-                setType(TYPE_EDEFAULT);
-                return;
         }
         super.eUnset(featureID);
     }
@@ -360,26 +309,8 @@ public class KPortImpl extends KGraphElementImpl implements KPort {
                 return edges != null && !edges.isEmpty();
             case KGraphPackage.KPORT__LABEL:
                 return label != null;
-            case KGraphPackage.KPORT__TYPE:
-                return type != TYPE_EDEFAULT;
         }
         return super.eIsSet(featureID);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    @Override
-    public String toString() {
-        if (eIsProxy()) return super.toString();
-
-        StringBuffer result = new StringBuffer(super.toString());
-        result.append(" (type: ");
-        result.append(type);
-        result.append(')');
-        return result.toString();
     }
 
 } //KPortImpl

@@ -23,8 +23,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.EObject;
 
-import org.eclipse.gmf.runtime.notation.Style;
-
 /**
  * <!-- begin-user-doc -->
  * The <b>Switch</b> for the model's inheritance hierarchy.
@@ -109,7 +107,6 @@ public class KGraphSwitch<T> {
             case KGraphPackage.KGRAPH_DATA: {
                 KGraphData kGraphData = (KGraphData)theEObject;
                 T result = caseKGraphData(kGraphData);
-                if (result == null) result = caseStyle(kGraphData);
                 if (result == null) result = defaultCase(theEObject);
                 return result;
             }
@@ -142,40 +139,6 @@ public class KGraphSwitch<T> {
                 T result = caseKLabel(kLabel);
                 if (result == null) result = caseKGraphElement(kLabel);
                 if (result == null) result = caseEModelElement(kLabel);
-                if (result == null) result = defaultCase(theEObject);
-                return result;
-            }
-            case KGraphPackage.KOPTION: {
-                KOption kOption = (KOption)theEObject;
-                T result = caseKOption(kOption);
-                if (result == null) result = defaultCase(theEObject);
-                return result;
-            }
-            case KGraphPackage.KSTRING_OPTION: {
-                KStringOption kStringOption = (KStringOption)theEObject;
-                T result = caseKStringOption(kStringOption);
-                if (result == null) result = caseKOption(kStringOption);
-                if (result == null) result = defaultCase(theEObject);
-                return result;
-            }
-            case KGraphPackage.KINT_OPTION: {
-                KIntOption kIntOption = (KIntOption)theEObject;
-                T result = caseKIntOption(kIntOption);
-                if (result == null) result = caseKOption(kIntOption);
-                if (result == null) result = defaultCase(theEObject);
-                return result;
-            }
-            case KGraphPackage.KFLOAT_OPTION: {
-                KFloatOption kFloatOption = (KFloatOption)theEObject;
-                T result = caseKFloatOption(kFloatOption);
-                if (result == null) result = caseKOption(kFloatOption);
-                if (result == null) result = defaultCase(theEObject);
-                return result;
-            }
-            case KGraphPackage.KOBJECT_OPTION: {
-                KObjectOption kObjectOption = (KObjectOption)theEObject;
-                T result = caseKObjectOption(kObjectOption);
-                if (result == null) result = caseKOption(kObjectOption);
                 if (result == null) result = defaultCase(theEObject);
                 return result;
             }
@@ -274,81 +237,6 @@ public class KGraphSwitch<T> {
     }
 
     /**
-     * Returns the result of interpreting the object as an instance of '<em>KOption</em>'.
-     * <!-- begin-user-doc -->
-     * This implementation returns null;
-     * returning a non-null result will terminate the switch.
-     * <!-- end-user-doc -->
-     * @param object the target of the switch.
-     * @return the result of interpreting the object as an instance of '<em>KOption</em>'.
-     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-     * @generated
-     */
-    public T caseKOption(KOption object) {
-        return null;
-    }
-
-    /**
-     * Returns the result of interpreting the object as an instance of '<em>KString Option</em>'.
-     * <!-- begin-user-doc -->
-     * This implementation returns null;
-     * returning a non-null result will terminate the switch.
-     * <!-- end-user-doc -->
-     * @param object the target of the switch.
-     * @return the result of interpreting the object as an instance of '<em>KString Option</em>'.
-     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-     * @generated
-     */
-    public T caseKStringOption(KStringOption object) {
-        return null;
-    }
-
-    /**
-     * Returns the result of interpreting the object as an instance of '<em>KInt Option</em>'.
-     * <!-- begin-user-doc -->
-     * This implementation returns null;
-     * returning a non-null result will terminate the switch.
-     * <!-- end-user-doc -->
-     * @param object the target of the switch.
-     * @return the result of interpreting the object as an instance of '<em>KInt Option</em>'.
-     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-     * @generated
-     */
-    public T caseKIntOption(KIntOption object) {
-        return null;
-    }
-
-    /**
-     * Returns the result of interpreting the object as an instance of '<em>KFloat Option</em>'.
-     * <!-- begin-user-doc -->
-     * This implementation returns null;
-     * returning a non-null result will terminate the switch.
-     * <!-- end-user-doc -->
-     * @param object the target of the switch.
-     * @return the result of interpreting the object as an instance of '<em>KFloat Option</em>'.
-     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-     * @generated
-     */
-    public T caseKFloatOption(KFloatOption object) {
-        return null;
-    }
-
-    /**
-     * Returns the result of interpreting the object as an instance of '<em>KObject Option</em>'.
-     * <!-- begin-user-doc -->
-     * This implementation returns null;
-     * returning a non-null result will terminate the switch.
-     * <!-- end-user-doc -->
-     * @param object the target of the switch.
-     * @return the result of interpreting the object as an instance of '<em>KObject Option</em>'.
-     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-     * @generated
-     */
-    public T caseKObjectOption(KObjectOption object) {
-        return null;
-    }
-
-    /**
      * Returns the result of interpreting the object as an instance of '<em>EModel Element</em>'.
      * <!-- begin-user-doc -->
      * This implementation returns null;
@@ -360,21 +248,6 @@ public class KGraphSwitch<T> {
      * @generated
      */
     public T caseEModelElement(EModelElement object) {
-        return null;
-    }
-
-    /**
-     * Returns the result of interpreting the object as an instance of '<em>Style</em>'.
-     * <!-- begin-user-doc -->
-     * This implementation returns null;
-     * returning a non-null result will terminate the switch.
-     * <!-- end-user-doc -->
-     * @param object the target of the switch.
-     * @return the result of interpreting the object as an instance of '<em>Style</em>'.
-     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-     * @generated
-     */
-    public T caseStyle(Style object) {
         return null;
     }
 

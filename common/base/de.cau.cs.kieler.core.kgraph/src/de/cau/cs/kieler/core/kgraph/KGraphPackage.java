@@ -17,12 +17,9 @@ package de.cau.cs.kieler.core.kgraph;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcorePackage;
-
-import org.eclipse.gmf.runtime.notation.NotationPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -126,7 +123,7 @@ public interface KGraphPackage extends EPackage {
      * @generated
      * @ordered
      */
-    int KGRAPH_DATA_FEATURE_COUNT = NotationPackage.STYLE_FEATURE_COUNT + 0;
+    int KGRAPH_DATA_FEATURE_COUNT = 0;
 
     /**
      * The meta object id for the '{@link de.cau.cs.kieler.core.kgraph.impl.KNodeImpl <em>KNode</em>}' class.
@@ -357,22 +354,13 @@ public interface KGraphPackage extends EPackage {
     int KPORT__LABEL = KGRAPH_ELEMENT_FEATURE_COUNT + 2;
 
     /**
-     * The feature id for the '<em><b>Type</b></em>' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     * @ordered
-     */
-    int KPORT__TYPE = KGRAPH_ELEMENT_FEATURE_COUNT + 3;
-
-    /**
      * The number of structural features of the '<em>KPort</em>' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      * @ordered
      */
-    int KPORT_FEATURE_COUNT = KGRAPH_ELEMENT_FEATURE_COUNT + 4;
+    int KPORT_FEATURE_COUNT = KGRAPH_ELEMENT_FEATURE_COUNT + 3;
 
     /**
      * The meta object id for the '{@link de.cau.cs.kieler.core.kgraph.impl.KLabelImpl <em>KLabel</em>}' class.
@@ -428,193 +416,6 @@ public interface KGraphPackage extends EPackage {
      * @ordered
      */
     int KLABEL_FEATURE_COUNT = KGRAPH_ELEMENT_FEATURE_COUNT + 2;
-
-    /**
-     * The meta object id for the '{@link de.cau.cs.kieler.core.kgraph.impl.KOptionImpl <em>KOption</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see de.cau.cs.kieler.core.kgraph.impl.KOptionImpl
-     * @see de.cau.cs.kieler.core.kgraph.impl.KGraphPackageImpl#getKOption()
-     * @generated
-     */
-    int KOPTION = 6;
-
-    /**
-     * The feature id for the '<em><b>Key</b></em>' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     * @ordered
-     */
-    int KOPTION__KEY = 0;
-
-    /**
-     * The number of structural features of the '<em>KOption</em>' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     * @ordered
-     */
-    int KOPTION_FEATURE_COUNT = 1;
-
-    /**
-     * The meta object id for the '{@link de.cau.cs.kieler.core.kgraph.impl.KStringOptionImpl <em>KString Option</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see de.cau.cs.kieler.core.kgraph.impl.KStringOptionImpl
-     * @see de.cau.cs.kieler.core.kgraph.impl.KGraphPackageImpl#getKStringOption()
-     * @generated
-     */
-    int KSTRING_OPTION = 7;
-
-    /**
-     * The feature id for the '<em><b>Key</b></em>' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     * @ordered
-     */
-    int KSTRING_OPTION__KEY = KOPTION__KEY;
-
-    /**
-     * The feature id for the '<em><b>Value</b></em>' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     * @ordered
-     */
-    int KSTRING_OPTION__VALUE = KOPTION_FEATURE_COUNT + 0;
-
-    /**
-     * The number of structural features of the '<em>KString Option</em>' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     * @ordered
-     */
-    int KSTRING_OPTION_FEATURE_COUNT = KOPTION_FEATURE_COUNT + 1;
-
-    /**
-     * The meta object id for the '{@link de.cau.cs.kieler.core.kgraph.impl.KIntOptionImpl <em>KInt Option</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see de.cau.cs.kieler.core.kgraph.impl.KIntOptionImpl
-     * @see de.cau.cs.kieler.core.kgraph.impl.KGraphPackageImpl#getKIntOption()
-     * @generated
-     */
-    int KINT_OPTION = 8;
-
-    /**
-     * The feature id for the '<em><b>Key</b></em>' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     * @ordered
-     */
-    int KINT_OPTION__KEY = KOPTION__KEY;
-
-    /**
-     * The feature id for the '<em><b>Value</b></em>' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     * @ordered
-     */
-    int KINT_OPTION__VALUE = KOPTION_FEATURE_COUNT + 0;
-
-    /**
-     * The number of structural features of the '<em>KInt Option</em>' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     * @ordered
-     */
-    int KINT_OPTION_FEATURE_COUNT = KOPTION_FEATURE_COUNT + 1;
-
-    /**
-     * The meta object id for the '{@link de.cau.cs.kieler.core.kgraph.impl.KFloatOptionImpl <em>KFloat Option</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see de.cau.cs.kieler.core.kgraph.impl.KFloatOptionImpl
-     * @see de.cau.cs.kieler.core.kgraph.impl.KGraphPackageImpl#getKFloatOption()
-     * @generated
-     */
-    int KFLOAT_OPTION = 9;
-
-    /**
-     * The feature id for the '<em><b>Key</b></em>' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     * @ordered
-     */
-    int KFLOAT_OPTION__KEY = KOPTION__KEY;
-
-    /**
-     * The feature id for the '<em><b>Value</b></em>' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     * @ordered
-     */
-    int KFLOAT_OPTION__VALUE = KOPTION_FEATURE_COUNT + 0;
-
-    /**
-     * The number of structural features of the '<em>KFloat Option</em>' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     * @ordered
-     */
-    int KFLOAT_OPTION_FEATURE_COUNT = KOPTION_FEATURE_COUNT + 1;
-
-    /**
-     * The meta object id for the '{@link de.cau.cs.kieler.core.kgraph.impl.KObjectOptionImpl <em>KObject Option</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see de.cau.cs.kieler.core.kgraph.impl.KObjectOptionImpl
-     * @see de.cau.cs.kieler.core.kgraph.impl.KGraphPackageImpl#getKObjectOption()
-     * @generated
-     */
-    int KOBJECT_OPTION = 10;
-
-    /**
-     * The feature id for the '<em><b>Key</b></em>' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     * @ordered
-     */
-    int KOBJECT_OPTION__KEY = KOPTION__KEY;
-
-    /**
-     * The feature id for the '<em><b>Value</b></em>' containment reference.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     * @ordered
-     */
-    int KOBJECT_OPTION__VALUE = KOPTION_FEATURE_COUNT + 0;
-
-    /**
-     * The number of structural features of the '<em>KObject Option</em>' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     * @ordered
-     */
-    int KOBJECT_OPTION_FEATURE_COUNT = KOPTION_FEATURE_COUNT + 1;
-
-    /**
-     * The meta object id for the '{@link de.cau.cs.kieler.core.kgraph.KPortType <em>KPort Type</em>}' enum.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see de.cau.cs.kieler.core.kgraph.KPortType
-     * @see de.cau.cs.kieler.core.kgraph.impl.KGraphPackageImpl#getKPortType()
-     * @generated
-     */
-    int KPORT_TYPE = 11;
-
 
     /**
      * Returns the meta object for class '{@link de.cau.cs.kieler.core.kgraph.KGraphElement <em>Element</em>}'.
@@ -832,17 +633,6 @@ public interface KGraphPackage extends EPackage {
     EReference getKPort_Label();
 
     /**
-     * Returns the meta object for the attribute '{@link de.cau.cs.kieler.core.kgraph.KPort#getType <em>Type</em>}'.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @return the meta object for the attribute '<em>Type</em>'.
-     * @see de.cau.cs.kieler.core.kgraph.KPort#getType()
-     * @see #getKPort()
-     * @generated
-     */
-    EAttribute getKPort_Type();
-
-    /**
      * Returns the meta object for class '{@link de.cau.cs.kieler.core.kgraph.KLabel <em>KLabel</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -873,121 +663,6 @@ public interface KGraphPackage extends EPackage {
      * @generated
      */
     EReference getKLabel_Parent();
-
-    /**
-     * Returns the meta object for class '{@link de.cau.cs.kieler.core.kgraph.KOption <em>KOption</em>}'.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @return the meta object for class '<em>KOption</em>'.
-     * @see de.cau.cs.kieler.core.kgraph.KOption
-     * @generated
-     */
-    EClass getKOption();
-
-    /**
-     * Returns the meta object for the attribute '{@link de.cau.cs.kieler.core.kgraph.KOption#getKey <em>Key</em>}'.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @return the meta object for the attribute '<em>Key</em>'.
-     * @see de.cau.cs.kieler.core.kgraph.KOption#getKey()
-     * @see #getKOption()
-     * @generated
-     */
-    EAttribute getKOption_Key();
-
-    /**
-     * Returns the meta object for class '{@link de.cau.cs.kieler.core.kgraph.KStringOption <em>KString Option</em>}'.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @return the meta object for class '<em>KString Option</em>'.
-     * @see de.cau.cs.kieler.core.kgraph.KStringOption
-     * @generated
-     */
-    EClass getKStringOption();
-
-    /**
-     * Returns the meta object for the attribute '{@link de.cau.cs.kieler.core.kgraph.KStringOption#getValue <em>Value</em>}'.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @return the meta object for the attribute '<em>Value</em>'.
-     * @see de.cau.cs.kieler.core.kgraph.KStringOption#getValue()
-     * @see #getKStringOption()
-     * @generated
-     */
-    EAttribute getKStringOption_Value();
-
-    /**
-     * Returns the meta object for class '{@link de.cau.cs.kieler.core.kgraph.KIntOption <em>KInt Option</em>}'.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @return the meta object for class '<em>KInt Option</em>'.
-     * @see de.cau.cs.kieler.core.kgraph.KIntOption
-     * @generated
-     */
-    EClass getKIntOption();
-
-    /**
-     * Returns the meta object for the attribute '{@link de.cau.cs.kieler.core.kgraph.KIntOption#getValue <em>Value</em>}'.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @return the meta object for the attribute '<em>Value</em>'.
-     * @see de.cau.cs.kieler.core.kgraph.KIntOption#getValue()
-     * @see #getKIntOption()
-     * @generated
-     */
-    EAttribute getKIntOption_Value();
-
-    /**
-     * Returns the meta object for class '{@link de.cau.cs.kieler.core.kgraph.KFloatOption <em>KFloat Option</em>}'.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @return the meta object for class '<em>KFloat Option</em>'.
-     * @see de.cau.cs.kieler.core.kgraph.KFloatOption
-     * @generated
-     */
-    EClass getKFloatOption();
-
-    /**
-     * Returns the meta object for the attribute '{@link de.cau.cs.kieler.core.kgraph.KFloatOption#getValue <em>Value</em>}'.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @return the meta object for the attribute '<em>Value</em>'.
-     * @see de.cau.cs.kieler.core.kgraph.KFloatOption#getValue()
-     * @see #getKFloatOption()
-     * @generated
-     */
-    EAttribute getKFloatOption_Value();
-
-    /**
-     * Returns the meta object for class '{@link de.cau.cs.kieler.core.kgraph.KObjectOption <em>KObject Option</em>}'.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @return the meta object for class '<em>KObject Option</em>'.
-     * @see de.cau.cs.kieler.core.kgraph.KObjectOption
-     * @generated
-     */
-    EClass getKObjectOption();
-
-    /**
-     * Returns the meta object for the containment reference '{@link de.cau.cs.kieler.core.kgraph.KObjectOption#getValue <em>Value</em>}'.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @return the meta object for the containment reference '<em>Value</em>'.
-     * @see de.cau.cs.kieler.core.kgraph.KObjectOption#getValue()
-     * @see #getKObjectOption()
-     * @generated
-     */
-    EReference getKObjectOption_Value();
-
-    /**
-     * Returns the meta object for enum '{@link de.cau.cs.kieler.core.kgraph.KPortType <em>KPort Type</em>}'.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @return the meta object for enum '<em>KPort Type</em>'.
-     * @see de.cau.cs.kieler.core.kgraph.KPortType
-     * @generated
-     */
-    EEnum getKPortType();
 
     /**
      * Returns the factory that creates the instances of the model.
@@ -1182,14 +857,6 @@ public interface KGraphPackage extends EPackage {
         EReference KPORT__LABEL = eINSTANCE.getKPort_Label();
 
         /**
-         * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
-         * <!-- begin-user-doc -->
-         * <!-- end-user-doc -->
-         * @generated
-         */
-        EAttribute KPORT__TYPE = eINSTANCE.getKPort_Type();
-
-        /**
          * The meta object literal for the '{@link de.cau.cs.kieler.core.kgraph.impl.KLabelImpl <em>KLabel</em>}' class.
          * <!-- begin-user-doc -->
          * <!-- end-user-doc -->
@@ -1214,106 +881,6 @@ public interface KGraphPackage extends EPackage {
          * @generated
          */
         EReference KLABEL__PARENT = eINSTANCE.getKLabel_Parent();
-
-        /**
-         * The meta object literal for the '{@link de.cau.cs.kieler.core.kgraph.impl.KOptionImpl <em>KOption</em>}' class.
-         * <!-- begin-user-doc -->
-         * <!-- end-user-doc -->
-         * @see de.cau.cs.kieler.core.kgraph.impl.KOptionImpl
-         * @see de.cau.cs.kieler.core.kgraph.impl.KGraphPackageImpl#getKOption()
-         * @generated
-         */
-        EClass KOPTION = eINSTANCE.getKOption();
-
-        /**
-         * The meta object literal for the '<em><b>Key</b></em>' attribute feature.
-         * <!-- begin-user-doc -->
-         * <!-- end-user-doc -->
-         * @generated
-         */
-        EAttribute KOPTION__KEY = eINSTANCE.getKOption_Key();
-
-        /**
-         * The meta object literal for the '{@link de.cau.cs.kieler.core.kgraph.impl.KStringOptionImpl <em>KString Option</em>}' class.
-         * <!-- begin-user-doc -->
-         * <!-- end-user-doc -->
-         * @see de.cau.cs.kieler.core.kgraph.impl.KStringOptionImpl
-         * @see de.cau.cs.kieler.core.kgraph.impl.KGraphPackageImpl#getKStringOption()
-         * @generated
-         */
-        EClass KSTRING_OPTION = eINSTANCE.getKStringOption();
-
-        /**
-         * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
-         * <!-- begin-user-doc -->
-         * <!-- end-user-doc -->
-         * @generated
-         */
-        EAttribute KSTRING_OPTION__VALUE = eINSTANCE.getKStringOption_Value();
-
-        /**
-         * The meta object literal for the '{@link de.cau.cs.kieler.core.kgraph.impl.KIntOptionImpl <em>KInt Option</em>}' class.
-         * <!-- begin-user-doc -->
-         * <!-- end-user-doc -->
-         * @see de.cau.cs.kieler.core.kgraph.impl.KIntOptionImpl
-         * @see de.cau.cs.kieler.core.kgraph.impl.KGraphPackageImpl#getKIntOption()
-         * @generated
-         */
-        EClass KINT_OPTION = eINSTANCE.getKIntOption();
-
-        /**
-         * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
-         * <!-- begin-user-doc -->
-         * <!-- end-user-doc -->
-         * @generated
-         */
-        EAttribute KINT_OPTION__VALUE = eINSTANCE.getKIntOption_Value();
-
-        /**
-         * The meta object literal for the '{@link de.cau.cs.kieler.core.kgraph.impl.KFloatOptionImpl <em>KFloat Option</em>}' class.
-         * <!-- begin-user-doc -->
-         * <!-- end-user-doc -->
-         * @see de.cau.cs.kieler.core.kgraph.impl.KFloatOptionImpl
-         * @see de.cau.cs.kieler.core.kgraph.impl.KGraphPackageImpl#getKFloatOption()
-         * @generated
-         */
-        EClass KFLOAT_OPTION = eINSTANCE.getKFloatOption();
-
-        /**
-         * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
-         * <!-- begin-user-doc -->
-         * <!-- end-user-doc -->
-         * @generated
-         */
-        EAttribute KFLOAT_OPTION__VALUE = eINSTANCE.getKFloatOption_Value();
-
-        /**
-         * The meta object literal for the '{@link de.cau.cs.kieler.core.kgraph.impl.KObjectOptionImpl <em>KObject Option</em>}' class.
-         * <!-- begin-user-doc -->
-         * <!-- end-user-doc -->
-         * @see de.cau.cs.kieler.core.kgraph.impl.KObjectOptionImpl
-         * @see de.cau.cs.kieler.core.kgraph.impl.KGraphPackageImpl#getKObjectOption()
-         * @generated
-         */
-        EClass KOBJECT_OPTION = eINSTANCE.getKObjectOption();
-
-        /**
-         * The meta object literal for the '<em><b>Value</b></em>' containment reference feature.
-         * <!-- begin-user-doc -->
-         * <!-- end-user-doc -->
-         * @generated
-         */
-        EReference KOBJECT_OPTION__VALUE = eINSTANCE.getKObjectOption_Value();
-
-        /**
-         * The meta object literal for the '{@link de.cau.cs.kieler.core.kgraph.KPortType <em>KPort Type</em>}' enum.
-         * <!-- begin-user-doc -->
-         * <!-- end-user-doc -->
-         * @see de.cau.cs.kieler.core.kgraph.KPortType
-         * @see de.cau.cs.kieler.core.kgraph.impl.KGraphPackageImpl#getKPortType()
-         * @generated
-         */
-        EEnum KPORT_TYPE = eINSTANCE.getKPortType();
 
     }
 

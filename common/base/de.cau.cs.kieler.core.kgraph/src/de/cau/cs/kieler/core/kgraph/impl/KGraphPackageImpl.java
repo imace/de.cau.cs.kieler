@@ -16,31 +16,22 @@
 package de.cau.cs.kieler.core.kgraph.impl;
 
 import de.cau.cs.kieler.core.kgraph.KEdge;
-import de.cau.cs.kieler.core.kgraph.KFloatOption;
 import de.cau.cs.kieler.core.kgraph.KGraphData;
 import de.cau.cs.kieler.core.kgraph.KGraphElement;
 import de.cau.cs.kieler.core.kgraph.KGraphFactory;
 import de.cau.cs.kieler.core.kgraph.KGraphPackage;
-import de.cau.cs.kieler.core.kgraph.KIntOption;
 import de.cau.cs.kieler.core.kgraph.KLabel;
 import de.cau.cs.kieler.core.kgraph.KNode;
-import de.cau.cs.kieler.core.kgraph.KObjectOption;
-import de.cau.cs.kieler.core.kgraph.KOption;
 import de.cau.cs.kieler.core.kgraph.KPort;
-import de.cau.cs.kieler.core.kgraph.KPortType;
-import de.cau.cs.kieler.core.kgraph.KStringOption;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcorePackage;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
-import org.eclipse.gmf.runtime.notation.NotationPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -90,48 +81,6 @@ public class KGraphPackageImpl extends EPackageImpl implements KGraphPackage {
      * @generated
      */
     private EClass kLabelEClass = null;
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    private EClass kOptionEClass = null;
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    private EClass kStringOptionEClass = null;
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    private EClass kIntOptionEClass = null;
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    private EClass kFloatOptionEClass = null;
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    private EClass kObjectOptionEClass = null;
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    private EEnum kPortTypeEEnum = null;
 
     /**
      * Creates an instance of the model <b>Package</b>, registered with
@@ -190,7 +139,7 @@ public class KGraphPackageImpl extends EPackageImpl implements KGraphPackage {
         isInited = true;
 
         // Initialize simple dependencies
-        NotationPackage.eINSTANCE.eClass();
+        EcorePackage.eINSTANCE.eClass();
 
         // Create package meta-data objects
         theKGraphPackage.createPackageContents();
@@ -389,15 +338,6 @@ public class KGraphPackageImpl extends EPackageImpl implements KGraphPackage {
      * <!-- end-user-doc -->
      * @generated
      */
-    public EAttribute getKPort_Type() {
-        return (EAttribute)kPortEClass.getEStructuralFeatures().get(3);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
     public EClass getKLabel() {
         return kLabelEClass;
     }
@@ -418,105 +358,6 @@ public class KGraphPackageImpl extends EPackageImpl implements KGraphPackage {
      */
     public EReference getKLabel_Parent() {
         return (EReference)kLabelEClass.getEStructuralFeatures().get(1);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public EClass getKOption() {
-        return kOptionEClass;
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public EAttribute getKOption_Key() {
-        return (EAttribute)kOptionEClass.getEStructuralFeatures().get(0);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public EClass getKStringOption() {
-        return kStringOptionEClass;
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public EAttribute getKStringOption_Value() {
-        return (EAttribute)kStringOptionEClass.getEStructuralFeatures().get(0);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public EClass getKIntOption() {
-        return kIntOptionEClass;
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public EAttribute getKIntOption_Value() {
-        return (EAttribute)kIntOptionEClass.getEStructuralFeatures().get(0);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public EClass getKFloatOption() {
-        return kFloatOptionEClass;
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public EAttribute getKFloatOption_Value() {
-        return (EAttribute)kFloatOptionEClass.getEStructuralFeatures().get(0);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public EClass getKObjectOption() {
-        return kObjectOptionEClass;
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public EReference getKObjectOption_Value() {
-        return (EReference)kObjectOptionEClass.getEStructuralFeatures().get(0);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public EEnum getKPortType() {
-        return kPortTypeEEnum;
     }
 
     /**
@@ -571,29 +412,10 @@ public class KGraphPackageImpl extends EPackageImpl implements KGraphPackage {
         createEReference(kPortEClass, KPORT__NODE);
         createEReference(kPortEClass, KPORT__EDGES);
         createEReference(kPortEClass, KPORT__LABEL);
-        createEAttribute(kPortEClass, KPORT__TYPE);
 
         kLabelEClass = createEClass(KLABEL);
         createEAttribute(kLabelEClass, KLABEL__TEXT);
         createEReference(kLabelEClass, KLABEL__PARENT);
-
-        kOptionEClass = createEClass(KOPTION);
-        createEAttribute(kOptionEClass, KOPTION__KEY);
-
-        kStringOptionEClass = createEClass(KSTRING_OPTION);
-        createEAttribute(kStringOptionEClass, KSTRING_OPTION__VALUE);
-
-        kIntOptionEClass = createEClass(KINT_OPTION);
-        createEAttribute(kIntOptionEClass, KINT_OPTION__VALUE);
-
-        kFloatOptionEClass = createEClass(KFLOAT_OPTION);
-        createEAttribute(kFloatOptionEClass, KFLOAT_OPTION__VALUE);
-
-        kObjectOptionEClass = createEClass(KOBJECT_OPTION);
-        createEReference(kObjectOptionEClass, KOBJECT_OPTION__VALUE);
-
-        // Create enums
-        kPortTypeEEnum = createEEnum(KPORT_TYPE);
     }
 
     /**
@@ -621,7 +443,6 @@ public class KGraphPackageImpl extends EPackageImpl implements KGraphPackage {
 
         // Obtain other dependent packages
         EcorePackage theEcorePackage = (EcorePackage)EPackage.Registry.INSTANCE.getEPackage(EcorePackage.eNS_URI);
-        NotationPackage theNotationPackage = (NotationPackage)EPackage.Registry.INSTANCE.getEPackage(NotationPackage.eNS_URI);
 
         // Create type parameters
 
@@ -629,15 +450,10 @@ public class KGraphPackageImpl extends EPackageImpl implements KGraphPackage {
 
         // Add supertypes to classes
         kGraphElementEClass.getESuperTypes().add(theEcorePackage.getEModelElement());
-        kGraphDataEClass.getESuperTypes().add(theNotationPackage.getStyle());
         kNodeEClass.getESuperTypes().add(this.getKGraphElement());
         kEdgeEClass.getESuperTypes().add(this.getKGraphElement());
         kPortEClass.getESuperTypes().add(this.getKGraphElement());
         kLabelEClass.getESuperTypes().add(this.getKGraphElement());
-        kStringOptionEClass.getESuperTypes().add(this.getKOption());
-        kIntOptionEClass.getESuperTypes().add(this.getKOption());
-        kFloatOptionEClass.getESuperTypes().add(this.getKOption());
-        kObjectOptionEClass.getESuperTypes().add(this.getKOption());
 
         // Initialize classes and features; add operations and parameters
         initEClass(kGraphElementEClass, KGraphElement.class, "KGraphElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -667,32 +483,10 @@ public class KGraphPackageImpl extends EPackageImpl implements KGraphPackage {
         initEReference(getKPort_Node(), this.getKNode(), this.getKNode_Ports(), "node", null, 1, 1, KPort.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEReference(getKPort_Edges(), this.getKEdge(), null, "edges", null, 0, -1, KPort.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEReference(getKPort_Label(), this.getKLabel(), null, "label", null, 0, 1, KPort.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getKPort_Type(), this.getKPortType(), "type", null, 0, 1, KPort.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
         initEClass(kLabelEClass, KLabel.class, "KLabel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
         initEAttribute(getKLabel_Text(), theEcorePackage.getEString(), "text", null, 1, 1, KLabel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEReference(getKLabel_Parent(), this.getKGraphElement(), null, "parent", null, 1, 1, KLabel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(kOptionEClass, KOption.class, "KOption", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getKOption_Key(), theEcorePackage.getEString(), "key", null, 0, 1, KOption.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(kStringOptionEClass, KStringOption.class, "KStringOption", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getKStringOption_Value(), theEcorePackage.getEString(), "value", "", 0, 1, KStringOption.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(kIntOptionEClass, KIntOption.class, "KIntOption", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getKIntOption_Value(), theEcorePackage.getEInt(), "value", null, 0, 1, KIntOption.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(kFloatOptionEClass, KFloatOption.class, "KFloatOption", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getKFloatOption_Value(), theEcorePackage.getEFloat(), "value", null, 0, 1, KFloatOption.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(kObjectOptionEClass, KObjectOption.class, "KObjectOption", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEReference(getKObjectOption_Value(), theEcorePackage.getEObject(), null, "value", null, 1, 1, KObjectOption.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        // Initialize enums and add enum literals
-        initEEnum(kPortTypeEEnum, KPortType.class, "KPortType");
-        addEEnumLiteral(kPortTypeEEnum, KPortType.UNDEFINED);
-        addEEnumLiteral(kPortTypeEEnum, KPortType.INPUT);
-        addEEnumLiteral(kPortTypeEEnum, KPortType.OUTPUT);
 
         // Create resource
         createResource(eNS_URI);
