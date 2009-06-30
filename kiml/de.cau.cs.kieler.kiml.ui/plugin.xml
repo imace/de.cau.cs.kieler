@@ -168,6 +168,15 @@ point="org.eclipse.ui.menus">
        </action>
     </viewContribution>
  </extension>
+ <extension
+       point="org.eclipse.gmf.runtime.diagram.ui.editpolicyProviders">
+    <editpolicyProvider
+          class="de.cau.cs.kieler.kiml.ui.layout.ApplyLayoutEditPolicyProvider">
+       <Priority
+             name="Lowest">
+       </Priority>
+    </editpolicyProvider>
+ </extension>
  
    
 </plugin>

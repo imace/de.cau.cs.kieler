@@ -19,17 +19,24 @@ import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.editpolicies.AbstractEditPolicy;
 
 /**
- * @author haf
- *
+ * Edit policy used to apply layout.
+ * 
+ * @author haf, msp
+ * @see org.eclipse.gmf.runtime.diagram.ui.editpolicies.XYLayoutEditPolicy
+ * @see org.eclipse.gmf.runtime.diagram.ui.editpolicies.ConnectionBendpointEditPolicy
+ * @see org.eclipse.gmf.runtime.diagram.ui.editpolicies.GraphicalNodeEditPolicy
  */
 public class ApplyLayoutEditPolicy extends AbstractEditPolicy {
 
+    /** the key used to install an <i>apply layout</i> edit policy  */
+    public static final String APPLY_LAYOUT_ROLE = "ApplyLayoutEditPolicy";
+    
     /* (non-Javadoc)
      * @see org.eclipse.gef.editpolicies.AbstractEditPolicy#understandsRequest(org.eclipse.gef.Request)
      */
     @Override
     public boolean understandsRequest(Request req) {
-        return (req instanceof ApplyLayoutRequest);
+        return (ApplyLayoutRequest.REQ_APPLY_LAYOUT.equals(req.getType()));
     }
     
     /* (non-Javadoc)
@@ -37,7 +44,11 @@ public class ApplyLayoutEditPolicy extends AbstractEditPolicy {
      */
     @Override
     public Command getCommand(Request request) {
-        // TODO Auto-generated method stub
-        return super.getCommand(request);
+        if (ApplyLayoutRequest.REQ_APPLY_LAYOUT.equals(request.getType())) {
+            return null;
+        }
+        else
+            return super.getCommand(request);
     }
+    
 }

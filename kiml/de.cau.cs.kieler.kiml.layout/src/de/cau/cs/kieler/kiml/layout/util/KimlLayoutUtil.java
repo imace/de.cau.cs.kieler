@@ -102,25 +102,39 @@ public class KimlLayoutUtil {
     }
     
     /**
-     * Returns shape layout data for a given graph element.
+     * Returns shape layout data for a given graph element. If there is
+     * no registered shape layout for the element, a new shape layout is
+     * created and registered.
      * 
      * @param graphElement the graph element
      * @return related shape layout data
      */
     public static KShapeLayout getShapeLayout(KGraphElement graphElement) {
-        return (KShapeLayout)graphElement.getData(KLayoutDataPackage
+        KShapeLayout layoutData = (KShapeLayout)graphElement.getData(KLayoutDataPackage
                 .eINSTANCE.getKShapeLayout());
+        if (layoutData == null) {
+            layoutData = KLayoutDataFactory.eINSTANCE.createKShapeLayout();
+            graphElement.getData().add(layoutData);
+        }
+        return layoutData;
     }
     
     /**
-     * Returns edge layout data for a given graph element.
+     * Returns edge layout data for a given graph element. If there is
+     * no registered edge layout for the element, a new edge layout is
+     * created and registered.
      * 
      * @param graphElement the graph element
      * @return related edge layout data
      */
     public static KEdgeLayout getEdgeLayout(KGraphElement graphElement) {
-        return (KEdgeLayout)graphElement.getData(KLayoutDataPackage
+        KEdgeLayout layoutData =  (KEdgeLayout)graphElement.getData(KLayoutDataPackage
                 .eINSTANCE.getKEdgeLayout());
+        if (layoutData == null) {
+            layoutData = KLayoutDataFactory.eINSTANCE.createKEdgeLayout();
+            graphElement.getData().add(layoutData);
+        }
+        return layoutData;
     }
     
 	/**

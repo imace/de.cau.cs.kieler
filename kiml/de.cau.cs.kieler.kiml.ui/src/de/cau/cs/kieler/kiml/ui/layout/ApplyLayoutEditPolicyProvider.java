@@ -15,7 +15,6 @@
 package de.cau.cs.kieler.kiml.ui.layout;
 
 import org.eclipse.gef.EditPart;
-import org.eclipse.gef.EditPolicy;
 import org.eclipse.gmf.runtime.common.core.service.AbstractProvider;
 import org.eclipse.gmf.runtime.common.core.service.IOperation;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
@@ -23,16 +22,18 @@ import org.eclipse.gmf.runtime.diagram.ui.services.editpolicy.CreateEditPolicies
 import org.eclipse.gmf.runtime.diagram.ui.services.editpolicy.IEditPolicyProvider;
 
 /**
+ * The edit policy provider for the <i>apply layout</i> edit policy.
+ * 
  * @author haf
- *
  */
 public class ApplyLayoutEditPolicyProvider extends AbstractProvider implements
         IEditPolicyProvider {
 
-    ApplyLayoutEditPolicy applyLayoutEditPolicy;
+    /** the edit policy used to apply layout on GFM diagrams */
+    private ApplyLayoutEditPolicy applyLayoutEditPolicy;
     
     /**
-     * 
+     * Creates an edit policy provider to apply layout.
      */
     public ApplyLayoutEditPolicyProvider() {
         applyLayoutEditPolicy = new ApplyLayoutEditPolicy();
@@ -42,8 +43,9 @@ public class ApplyLayoutEditPolicyProvider extends AbstractProvider implements
      * @see org.eclipse.gmf.runtime.diagram.ui.services.editpolicy.IEditPolicyProvider#createEditPolicies(org.eclipse.gef.EditPart)
      */
     public void createEditPolicies(EditPart editPart) {
-        if(editPart instanceof DiagramEditPart){
-            editPart.installEditPolicy(EditPolicy.LAYOUT_ROLE, applyLayoutEditPolicy);
+        if (editPart instanceof DiagramEditPart) {
+            editPart.installEditPolicy(ApplyLayoutEditPolicy.APPLY_LAYOUT_ROLE,
+                    applyLayoutEditPolicy);
         }
     }
 

@@ -34,6 +34,7 @@ import org.eclipse.gmf.runtime.notation.View;
  * An edit policy used for the automatic layout of diagram parts.
  * 
  * @author msp
+ * @see org.eclipse.gmf.runtime.diagram.ui.editpolicies.ConnectionBendpointEditPolicy
  */
 public class LayoutEditPolicy extends GraphicalEditPolicy {
 
