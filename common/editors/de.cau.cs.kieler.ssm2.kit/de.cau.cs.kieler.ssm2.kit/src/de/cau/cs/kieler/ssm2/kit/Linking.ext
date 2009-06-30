@@ -1,9 +1,0 @@
-import kit;
-
-extension de::cau::cs::kieler::ssm2::kit::Extensions;
-extension de::cau::cs::kieler::ssm2::kit::GenLinking reexport;
-
-/*
- * If you need more sophisticated linking semantic just overwrite the linking extensions here and add your own logic.
- * Have a look at the generated de::cau::cs::kieler::ssm2::kit::GenLinking (typically located in src-gen)
- */
