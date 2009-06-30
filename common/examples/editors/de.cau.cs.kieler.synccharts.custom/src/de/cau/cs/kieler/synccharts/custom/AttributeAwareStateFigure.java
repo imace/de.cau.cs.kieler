@@ -189,9 +189,9 @@ public class AttributeAwareStateFigure extends AttributeAwareFigure {
 							// Empty compartments are not considered 
 							if ((getName((ShapeCompartmentFigure) child).equals("Signal:") && (!containsSignals))
 									|| (getName((ShapeCompartmentFigure) child).equals("Variable:") && (!containsVariables))
-									|| (getName((ShapeCompartmentFigure) child).equals("OnEntryActions:") && (!containsEntryActions))
-									|| (getName((ShapeCompartmentFigure) child).equals("OnInsideActions:") && (!containsInnerActions))
-									|| (getName((ShapeCompartmentFigure) child).equals("OnExitActions:") && (!containsExitActions))
+									|| (getName((ShapeCompartmentFigure) child).equals("OnEntryAction:") && (!containsEntryActions))
+									|| (getName((ShapeCompartmentFigure) child).equals("OnInsideAction:") && (!containsInnerActions))
+									|| (getName((ShapeCompartmentFigure) child).equals("OnExitAction:") && (!containsExitActions))
 									|| (getName((ShapeCompartmentFigure) child).equals("Suspend:") && (!containsSuspensionTrigger))
 									|| (getName((ShapeCompartmentFigure) child).equals("RegionCompartment") && (!containsRegions))) {
 								prefHeight -= childFigure.getPreferredSize().height;
