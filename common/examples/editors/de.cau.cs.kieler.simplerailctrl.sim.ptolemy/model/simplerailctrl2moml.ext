@@ -1,8 +1,22 @@
+/******************************************************************************
+ * KIELER - Kiel Integrated Environment for Layout for the Eclipse RCP
+ *
+ * http://www.informatik.uni-kiel.de/rtsys/kieler/
+ * 
+ * Copyright 2009 by
+ * + Christian-Albrechts-University of Kiel
+ *   + Department of Computer Science
+ *     + Real-Time and Embedded Systems Group
+ * 
+ * This code is provided under the terms of the Eclipse Public License (EPL).
+ * See the file epl-v10.html for the license text.
+ * 
+ *****************************************************************************/
 import simplerailctrl;
 import Moml;
 
 //-----------------------------------------------------------------------------
-//-- S I M P L E R A I L C T R L - 2 - P T O     T R A N S F O R M A T I O N --
+//-- S I M P L E R A I L C T R L - 2 - M O M L   T R A N S F O R M A T I O N --
 //-----------------------------------------------------------------------------
 
 //start model transformation here
@@ -30,11 +44,21 @@ create EntityType this createBaseEntity(simplerailctrl::RailController rc):
    	//connect top level actors
   	this.relation.add(createVertexRelation("contactsGLOBAL")) ->
    	this.relation.add(createVertexRelation("occupiedGLOBAL")) ->
- 	connectActors(this, "ModelRailwayIO.contact", "delayContact.input", "delayContactRelation") ->  	
- 	connectActors(this, "ModelRailwayIO.occupied", "delayOccupied.input", "delayOccupiedRelation") ->
- 	connectActors(this, "ModelRailwayIO.tracks", "mergeTracks.output", "mergeTracksRelation") ->  	
- 	connectActors(this, "ModelRailwayIO.points", "mergePoints.output", "mergePointsRelation") ->  	
- 	connectActors(this, "ModelRailwayIO.signals", "mergeSignals.output", "mergeSignalsRelation") ->
+ 	connectActors(this, "ModelRailwayIO.contact", 
+ 						"delayContact.input", 
+ 						"delayContactRelation") ->  	
+ 	connectActors(this, "ModelRailwayIO.occupied", 
+ 						"delayOccupied.input", 
+ 						"delayOccupiedRelation") ->
+ 	connectActors(this, "ModelRailwayIO.tracks", 
+ 						"mergeTracks.output", 
+ 						"mergeTracksRelation") ->  	
+ 	connectActors(this, "ModelRailwayIO.points", 
+ 						"mergePoints.output", 
+ 						"mergePointsRelation") ->  	
+ 	connectActors(this, "ModelRailwayIO.signals", 
+ 						"mergeSignals.output", 
+ 						"mergeSignalsRelation") ->
 	addLink(this, "delayContact.output", "contactsGLOBAL") ->
 	addLink(this, "delayOccupied.output", "occupiedGLOBAL")
 ;
@@ -44,7 +68,7 @@ create EntityType this createBaseEntity(simplerailctrl::RailController rc):
 //--                 C R E A T E     D I R E C T O R S                       --
 //-----------------------------------------------------------------------------
 
-//create outer most "SR Director" (ticks every seconds)
+//create outer most "SR Director" (ticks 100times every seconds)
 create PropertyType this createMainSRDirector():
 	let p1 = new PropertyType:
 	let p2 = new PropertyType:
@@ -107,7 +131,12 @@ create EntityType this createDelay(String name):
 	let p1 = new PropertyType:
     this.setName(name) ->
 	this.setClass1("ptolemy.domains.sr.lib.NonStrictDelay") ->
-	p1.setValue("{-1,-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1}") ->
+	p1.setValue("{-1, -1, -1, -1, -1, -1, -1, -1, " +
+				 "-1, -1, -1, -1, -1, -1, -1, -1, " +
+				 "-1, -1, -1, -1, -1, -1, -1, -1, " +
+				 "-1, -1, -1, -1, -1, -1, -1, -1, " + 
+				 "-1, -1, -1, -1, -1, -1, -1, -1, " + 
+				 "-1, -1, -1, -1, -1, -1, -1, -1}") ->
 	p1.setClass("ptolemy.data.expr.Parameter") ->
 	p1.setName("initialValue") ->
 	this.property.add(p1)
@@ -127,7 +156,9 @@ Void createThreads(List[simplerailctrl::Node] nodes,
   if (currentNode.initial) then mainEntity.entity.add(
   						 					createThread(currentNode,
   														 threadId)) ->
-  if (currentNode.initial) then connectThread(mainEntity, currentNode, threadId) ->
+  if (currentNode.initial) then connectThread(mainEntity, 
+  											  currentNode, 
+  											  threadId) ->
 
   if (nodes.size > 1) then createThreads(nodes.withoutLast(),
   									mainEntity)
@@ -173,11 +204,16 @@ create EntityType this createThread(simplerailctrl::Node initialNode,
   	//then create simple states 
    	this.entity.add(createThreadRefinement(initialNode, threadId)) ->
    	//add connecting ports
- 	connectModalModel(this, "_Controller.contact", "contact", "contactRelation") ->   
- 	connectModalModel(this, "_Controller.occupied" , "occupied", "occupiedRelation") ->  	
- 	connectModalModel(this, "_Controller.tracks" , "tracks", "tracksRelation") ->   	
- 	connectModalModel(this, "_Controller.points" , "points", "pointsRelation") ->  	
- 	connectModalModel(this, "_Controller.signals" , "signals", "signalsRelation")
+ 	connectModalModel(this, "_Controller.contact", "contact", 
+ 							"contactRelation") ->   
+ 	connectModalModel(this, "_Controller.occupied" , "occupied", 
+ 							"occupiedRelation") ->  	
+ 	connectModalModel(this, "_Controller.tracks" , "tracks", 
+ 							"tracksRelation") ->   	
+ 	connectModalModel(this, "_Controller.points" , "points", 
+ 							"pointsRelation") ->  	
+ 	connectModalModel(this, "_Controller.signals" , "signals", 
+ 							"signalsRelation")
 ;
 
 //create thread refinement (ModalController)
@@ -186,8 +222,10 @@ create EntityType this createThreadRefinement(simplerailctrl::Node initialNode,
    	this.setName("_Controller") ->
   	this.setClass1("ptolemy.domains.fsm.modal.ModalController") ->
   	//first add ports
-	this.port.add(createModelRefinementPort(true,false,"contact","arrayType(int,48)")) ->
-	this.port.add(createModelRefinementPort(true,false,"occupied","arrayType(int,48)")) ->
+	this.port.add(createModelRefinementPort(true,false,"contact",
+											"arrayType(int,48)")) ->
+	this.port.add(createModelRefinementPort(true,false,"occupied",
+											"arrayType(int,48)")) ->
 	this.port.add(createModelRefinementPort(true,true,"tracks","")) ->
 	this.port.add(createModelRefinementPort(true,true,"points","")) ->
 	this.port.add(createModelRefinementPort(true,true,"signals","")) ->
@@ -219,13 +257,17 @@ Void createInnerStates(EntityType modalController,
 	createSimpleStateEntity(modalController, currentTransition.destination) ->
 	//first look up other target states (of this source state)
 	if (transitionList.size > 1) then 
-		createInnerStates(modalController, sourceState, transitionList.withoutLast()) ->
+		createInnerStates(modalController, 
+						  sourceState, 
+						  transitionList.withoutLast()) ->
 	//then create transitions to these
 	addTransition(modalController, currentTransition) ->
 	//then go on with the target state (as new source state)
 	if ((!doneDestinationState) &&
 	    (currentTransition.destination.outTransitions.size > 0)) then
-		createInnerStates(modalController, currentTransition.destination, currentTransition.destination.outTransitions)
+		createInnerStates(modalController, 
+						  currentTransition.destination, 
+						  currentTransition.destination.outTransitions)
 ;					  
 
 
@@ -235,41 +277,49 @@ Void createInnerStates(EntityType modalController,
 
 //do some java console output for debugging purpose 
 Void dump(String s) :
-	JAVA de.cau.cs.kieler.simplerailctrl.sim.ptolemy.oaw.XtendJava.dump(java.lang.String)
+	JAVA de.cau.cs.kieler.simplerailctrl.sim.ptolemy.oaw.XtendJava.
+			dump(java.lang.String)
 ;
 
 //get hash value of an object to identify it 
 String hash(simplerailctrl::Node node) :
-	JAVA de.cau.cs.kieler.simplerailctrl.sim.ptolemy.oaw.XtendJava.hash(simplerailctrl.Node)
+	JAVA de.cau.cs.kieler.simplerailctrl.sim.ptolemy.oaw.XtendJava.
+			hash(simplerailctrl.Node)
 ;
 //get hash value of an object to identify it 
 String hash(simplerailctrl::Transition transition) :
-	JAVA de.cau.cs.kieler.simplerailctrl.sim.ptolemy.oaw.XtendJava.hash(simplerailctrl.Transition)
+	JAVA de.cau.cs.kieler.simplerailctrl.sim.ptolemy.oaw.XtendJava.
+			hash(simplerailctrl.Transition)
 ;
 //get hash value of a string 
 String hash(String s) :
-	JAVA de.cau.cs.kieler.simplerailctrl.sim.ptolemy.oaw.XtendJava.hash(java.lang.String)
+	JAVA de.cau.cs.kieler.simplerailctrl.sim.ptolemy.oaw.XtendJava.
+			hash(java.lang.String)
 ;
 
 //mark the node as visited (we do not want to create him twice) 
 Void markState(simplerailctrl::Node node) :
-	JAVA de.cau.cs.kieler.simplerailctrl.sim.ptolemy.oaw.XtendJava.markState(simplerailctrl.Node)
+	JAVA de.cau.cs.kieler.simplerailctrl.sim.ptolemy.oaw.XtendJava.
+			markState(simplerailctrl.Node)
 ;
 
 //lookup if the node was already visited (and hence created in the new model) 
 boolean isMarked(simplerailctrl::Node node) :
-	JAVA de.cau.cs.kieler.simplerailctrl.sim.ptolemy.oaw.XtendJava.isMarked(simplerailctrl.Node)
+	JAVA de.cau.cs.kieler.simplerailctrl.sim.ptolemy.oaw.XtendJava.
+			isMarked(simplerailctrl.Node)
 ;
 
 //-------------------------------------------------------------------------
 
 //compute trigger in java 
 String buildTrigger(simplerailctrl::Transition transition) :
-	JAVA de.cau.cs.kieler.simplerailctrl.sim.ptolemy.oaw.XtendJava.buildTrigger(simplerailctrl.Transition)
+	JAVA de.cau.cs.kieler.simplerailctrl.sim.ptolemy.oaw.XtendJava.
+			buildTrigger(simplerailctrl.Transition)
 ;
 //compute emission in java 
 String buildEmission(simplerailctrl::Node node) :
-	JAVA de.cau.cs.kieler.simplerailctrl.sim.ptolemy.oaw.XtendJava.buildEmission(simplerailctrl.Node)
+	JAVA de.cau.cs.kieler.simplerailctrl.sim.ptolemy.oaw.XtendJava.
+			buildEmission(simplerailctrl.Node)
 ;
 
 //-------------------------------------------------------------------------
@@ -337,8 +387,12 @@ Void addSelfTransition( EntityType baseEntity,
 	let relation = createRelation(transitionName,true,false,false):
 	addSetAction(relation, "count = count + 1") ->
 	baseEntity.relation.add(relation) ->
-	addLink(baseEntity, getMetaType(node) + hash(node) + ".outgoingPort", transitionName) ->
-	addLink(baseEntity, getMetaType(node) + hash(node) + ".incomingPort", transitionName)
+	addLink(baseEntity, 
+			getMetaType(node) + hash(node) + ".outgoingPort",
+			transitionName) ->
+	addLink(baseEntity, 
+			getMetaType(node) + hash(node) + ".incomingPort", 
+			transitionName)
 ;
 
 //create initial->state transition (simple states)
@@ -350,8 +404,12 @@ Void addInitialTransition( EntityType baseEntity,
 	addSetAction(relation, "count = 0") ->
 	addEmission(relation, targetNode) ->
 	baseEntity.relation.add(relation) ->
-	addLink(baseEntity, sourceState + ".outgoingPort", transitionName) ->
-	addLink(baseEntity, getMetaType(targetNode) + hash(targetNode) + ".incomingPort", transitionName)
+	addLink(baseEntity, 
+			sourceState + ".outgoingPort", 
+			transitionName) ->
+	addLink(baseEntity, 
+			getMetaType(targetNode) + hash(targetNode) + ".incomingPort", 
+			transitionName)
 ;
 
 //connect threads/ModalModel
@@ -441,9 +499,10 @@ RelationType createRelation(String name,
 		p5.setName("preemptive") ->
 		p5.setClass("ptolemy.data.expr.Parameter") ->
 		(preemptive) ? p5.setValue("true") : p5.setValue("false") ->
+		//defaultTransition is NOT "normal termination" !!!
 		p6.setName("defaultTransition") ->
 		p6.setClass("ptolemy.data.expr.Parameter") ->
-		(def) ? p6.setValue("true") : p6.setValue("false") -> //defaultTransition is NOT "normal termination" !!!
+		(def) ? p6.setValue("true") : p6.setValue("false") -> 
 		p7.setName("nondeterministic") ->
 		p7.setClass("ptolemy.data.expr.Parameter") ->
 		p7.setValue("false") ->
