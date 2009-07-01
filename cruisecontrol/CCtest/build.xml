@@ -108,6 +108,7 @@
 	<target name="build.jars" depends="init" description="Compile classes and build nested jars for the plug-in: CCtest.">
 		<available property="@dot" file="${build.result.folder}/@dot"/>
 		<antcall target="@dot"/>
+		<javadoc sourcepath="src" destdir="javadoc"/>
 	</target>
 
 	<target name="build.sources" depends="init">
