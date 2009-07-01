@@ -2,6 +2,7 @@
 <?eclipse version="3.2"?>
 <plugin>
    <extension-point id="de.cau.cs.kieler.sim.kiem.dataproducer" name="de.cau.cs.kieler.sim.kiem.dataproducer" schema="schema/de.cau.cs.kieler.sim.kiem.dataproducer.exsd"/>
+   <extension-point id="de.cau.cs.kieler.sim.kiem.dataconsumer" name="de.cau.cs.kieler.sim.kiem.dataconsumer" schema="schema/de.cau.cs.kieler.sim.kiem.dataconsumer.exsd"/>
    <extension
          point="org.eclipse.ui.views">
       <category
@@ -28,18 +29,6 @@
                relative="org.eclipse.ui.views.TaskList">
          </view>
       </perspectiveExtension>
-   </extension>
-   <extension
-         point="org.eclipse.ui.commands">
-      <category
-            id="de.cau.cs.kieler.views.category"
-            name="Sample Category">
-      </category>
-      <command
-            categoryId="de.cau.cs.kieler.sim.kiem.commands.category"
-            id="de.cau.cs.kieler.sim.kiem.commands.sampleCommand"
-            name="Sample Command">
-      </command>
    </extension>
    <extension
          point="org.eclipse.ui.handlers">

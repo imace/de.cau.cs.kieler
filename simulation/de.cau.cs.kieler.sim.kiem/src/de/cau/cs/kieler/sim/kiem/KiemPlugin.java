@@ -24,12 +24,16 @@ public class KiemPlugin extends AbstractUIPlugin {
 	
 	// List of available dataProducers
 	List<DataProducer> dataProducerList;
+	
+	// this is the selected+initialized DataProducer
+	public DataProducer currentDataProducer;
 
 	/**
 	 * The constructor
 	 */
 	public KiemPlugin() {
 		dataProducerList = this.getDataProducerList();
+		currentDataProducer = null;
 	}
 
 	/*

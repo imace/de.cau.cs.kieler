@@ -5,7 +5,7 @@ import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExecutableExtension;
 
 
-public abstract class DataProducer implements IExecutableExtension {
+public abstract class DataProducer implements IExecutableExtension, DataProducerInterface {
 	
 	private String name;
 	private String ModelFile;
@@ -23,15 +23,8 @@ public abstract class DataProducer implements IExecutableExtension {
 		return ModelFile;
 	}
 	
-	public void InitializeExecution() {
-	}
-
 	public void setModelFile(String ModelFile) {
 		this.ModelFile = ModelFile;
-		return;
-	}
-	
-	public void MakeStep() {
 		return;
 	}
 	

@@ -198,22 +198,30 @@ public class KiemView extends ViewPart {
 		}
 		return null;
 	}
+	
+	private DataProducer initDataProducer() {
+		if (KiemPlugin.getDefault().currentDataProducer != null) return KiemPlugin.getDefault().currentDataProducer;
+		try {
+			ISelection selection = viewer.getSelection();
+			Object obj = ((IStructuredSelection)selection).getFirstElement();
+			
+			KiemPlugin.getDefault().currentDataProducer = getDataProducer((String)obj);
+			String ModelFile = getModelFile();
+			KiemPlugin.getDefault().currentDataProducer.ExecutionInitialize(ModelFile);
+		} catch(Exception e) {
+			//e.printStackTrace();
+			showMessage("Please select a DataProducer!");
+			KiemPlugin.getDefault().currentDataProducer = null;
+		}
+		return KiemPlugin.getDefault().currentDataProducer;
+	}
+	
 
 	private void makeActions() {
 		action0 = new Action() {
 			public void run() {
-				try {
-					ISelection selection = viewer.getSelection();
-					Object obj = ((IStructuredSelection)selection).getFirstElement();
-					
-					DataProducer dataProducer = getDataProducer((String)obj);
-					String ModelFile = getModelFile();
-					dataProducer.setModelFile(ModelFile);
-					dataProducer.InitializeExecution();
-				} catch(Exception e) {
-					e.printStackTrace();
-					showMessage("Please select a DataProducer!");
-				}
+				DataProducer dataProducer = initDataProducer();
+				dataProducer.ExecutionStep();
 			}
 		};
 		action0.setText("Step");
@@ -222,7 +230,8 @@ public class KiemView extends ViewPart {
 
 		action1 = new Action() {
 			public void run() {
-				showMessage("Model simulation play");
+				DataProducer dataProducer = initDataProducer();
+				dataProducer.ExecutionPlay();
 			}
 		};
 		action1.setText("Play");
@@ -232,7 +241,8 @@ public class KiemView extends ViewPart {
 		
 		action2 = new Action() {
 			public void run() {
-				showMessage("Pause simulation");
+				DataProducer dataProducer = initDataProducer();
+				dataProducer.ExecutionPause();
 			}
 		};
 		action2.setText("Pause");
@@ -241,7 +251,10 @@ public class KiemView extends ViewPart {
 
 		action3 = new Action() {
 			public void run() {
-				showMessage("Stop simulation");
+				DataProducer dataProducer = initDataProducer();
+				dataProducer.ExecutionStop();
+				//reset dataproducer - next time new init
+				KiemPlugin.getDefault().currentDataProducer = null;
 			}
 		};
 		action3.setText("Stop");
