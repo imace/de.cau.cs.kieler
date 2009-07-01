@@ -20,7 +20,7 @@
     </property>
     <property name="_vergilCenter" class="ptolemy.data.expr.ExpertParameter" value="{300.0, 200.0}">
     </property>
-    <entity name="KielerIO" class="ptolemy.actor.lib.io.KielerIO">
+    <entity name="KielerIO" class="ptolemy.actor.kiel.KielerIO">
         <property name="present" class="ptolemy.data.expr.Parameter" value="false">
         </property>
         <doc>KIELER I/O connector</doc>

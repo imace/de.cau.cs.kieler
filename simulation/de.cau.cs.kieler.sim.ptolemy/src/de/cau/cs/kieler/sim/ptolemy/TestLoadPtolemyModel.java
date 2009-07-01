@@ -31,6 +31,7 @@ import ptolemy.data.IntToken;
 import ptolemy.kernel.util.NamedObj;
 import ptolemy.moml.MoMLParser;
 import ptolemy.actor.lib.io.*;
+import ptolemy.actor.kiel.*;
 
 /**
  * Simple Test class that calls a Ptolemy MoML parser to create

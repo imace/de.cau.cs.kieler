@@ -20,7 +20,16 @@ public class DataProducerExample extends DataProducer {
 	public DataProducerExample() {
 	}
 
-	public void InitializeExecution() {
+	public static String getPluginFolder() {
+	        if(_pluginFolder == null) {
+	            _pluginFolder = Platform.getBundle("de.cau.cs.kieler.sim.ptolemy").getLocation();// .toFile();// .resolve(url);
+	            _pluginFolder = _pluginFolder.replace("initial@reference:", "");
+	        }
+	        return _pluginFolder;
+	 }
+	 
+	public void ExecutionInitialize() {
+		// TODO Auto-generated method stub
 		String PluginRoot = DataProducerExample.getPluginFolder();
 		String PtolemyModel = PluginRoot + "src-gen/generated.moml";
 		
@@ -38,7 +47,7 @@ public class DataProducerExample extends DataProducer {
 		System.out.println("M2M transformation - starting...");
 		
         if (new WorkflowRunner().run(WorkflowFile , 
-        		new oAwMonitor(), properties, slotContents)) {
+        		null, properties, slotContents)) {
         	System.out.println("M2M transformation - completed.");
         }
         else {
@@ -56,82 +65,32 @@ public class DataProducerExample extends DataProducer {
 		catch(Exception e) {
 			e.printStackTrace();
 		}//end catch
-		
-
 	}
-	
-	 public static String getPluginFolder() {
-	        if(_pluginFolder == null) {
-	            _pluginFolder = Platform.getBundle("de.cau.cs.kieler.sim.ptolemy").getLocation();// .toFile();// .resolve(url);
-	            _pluginFolder = _pluginFolder.replace("initial@reference:", "");
-	        }
-	        return _pluginFolder;
-	 }
-	 
-	 //-------------------------------------------------------------------
-	 class oAwMonitor implements ProgressMonitor {
 
-		public void beginTask(String name, int totalWork) {
-			// TODO Auto-generated method stub
-			
-		}
+	public void ExecutionPause() {
+		// TODO Auto-generated method stub
+		
+	}
 
-		public void done() {
-			// TODO Auto-generated method stub
-			
-		}
+	public void ExecutionPlay() {
+		// TODO Auto-generated method stub
+		
+	}
 
-		public void finished(Object element, Object context) {
-			// TODO Auto-generated method stub
-			
-		}
+	public void ExecutionStep() {
+		// TODO Auto-generated method stub
+		
+	}
 
-		public void internalWorked(double work) {
-			// TODO Auto-generated method stub
-			
-		}
+	public void ExecutionStop() {
+		// TODO Auto-generated method stub
+		
+	}
 
-		public boolean isCanceled() {
-			// TODO Auto-generated method stub
-			return false;
-		}
-
-		public void postTask(Object element, Object context) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		public void preTask(Object element, Object context) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		public void setCanceled(boolean value) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		public void setTaskName(String name) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		public void started(Object element, Object context) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		public void subTask(String name) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		public void worked(int work) {
-			// TODO Auto-generated method stub
-			
-		}
-		 
-	 }
+	public void ExecutionInitialize(String ModelFile) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 }
