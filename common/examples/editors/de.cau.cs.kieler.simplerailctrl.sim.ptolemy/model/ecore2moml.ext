@@ -34,25 +34,11 @@ create EntityType this createBaseEntity(simplerailctrl::RailController rc):
  	connectActors(this, "ModelRailwayIO.occupied", "delayOccupied.input", "delayOccupiedRelation") ->
  	connectActors(this, "ModelRailwayIO.tracks", "mergeTracks.output", "mergeTracksRelation") ->  	
  	connectActors(this, "ModelRailwayIO.points", "mergePoints.output", "mergePointsRelation") ->  	
- 	connectActors(this, "ModelRailwayIO.signals", "mergeSignals.output", "mergeSignalsRelation") ->  	
- 	this.link.add(createPlainLink("delayContact.output", "contactsGLOBAL")) -> 
- 	this.link.add(createPlainLink("delayOccupied.output", "occupiedGLOBAL"))
+ 	connectActors(this, "ModelRailwayIO.signals", "mergeSignals.output", "mergeSignalsRelation") ->
+	addLink(this, "delayContact.output", "contactsGLOBAL") ->
+	addLink(this, "delayOccupied.output", "occupiedGLOBAL")
 ;
 
-
-create RelationType this createVertexRelation(String relationName) :
-   let v = new VertexType:
-   v.setName(hash(relationName)) ->
-   v.setValue("[0.0,0.0]") ->
-   this.vertex.add(v) ->
-   this.setClass("ptolemy.actor.TypedIORelation") ->
-   this.setName(relationName)
-;
-create LinkType this createPlainLink(String portName,
-									 String relationName) :
-   this.setPort(portName) ->
-   this.setRelation(relationName)
-;
 
 //-----------------------------------------------------------------------------
 //--                 C R E A T E     D I R E C T O R S                       --
@@ -96,7 +82,7 @@ create PropertyType this createFSMDirector():
 //--         C R E A T E     MODEL RAILWAY IO / DELAY / MERGE                --
 //-----------------------------------------------------------------------------
 
-//create a "ModelRailwayIO" 
+//create one ModelRailwayIO 
 create EntityType this createModelRailwayIOActor():
     this.setName("ModelRailwayIO") ->
 	this.setClass1("ptolemy.actor.kiel.ModelRailwayIO") ->
@@ -110,13 +96,13 @@ create EntityType this createModelRailwayIOActor():
 								"arrayType(int,48)"))
 ;
 
-
+//create ModelRailwayMerge (for each thread)
 create EntityType this createModelRailwayMerge(String name) :
 	this.setClass1("ptolemy.actor.kiel.ModelRailwayMerge") ->
 	this.setName(name)
 ;
 
-//create a "NonStrictDelay" (for array, int, 42) 
+//create a NonStrictDelay (for array, int, 42) 
 create EntityType this createDelay(String name):
 	let p1 = new PropertyType:
     this.setName(name) ->
@@ -152,9 +138,8 @@ Void connectThread(EntityType mainEntity,
 					simplerailctrl::Node initialNode, 
 									String threadId):    														 
   //connect thread incoming to GLOBAL
-  	mainEntity.link.add(createPlainLink("Thread" + threadId+".contact", "contactsGLOBAL")) ->
-  	mainEntity.link.add(createPlainLink("Thread" + threadId+".occupied", "occupiedGLOBAL")) ->
-  //FIXME: connect thread directly to outgoing
+  addLink(mainEntity, "Thread" + threadId+".contact", "contactsGLOBAL") ->
+  addLink(mainEntity, "Thread" + threadId+".occupied", "occupiedGLOBAL") ->
   connectModalModel(mainEntity,
 		   			   "mergeTracks.input",
 			 		   "Thread" + threadId+".tracks",
@@ -221,6 +206,7 @@ create EntityType this createThreadRefinement(simplerailctrl::Node initialNode,
 		createInnerStates(this, initialNode, initialNode.outTransitions)
 ;
 
+
 //-----------------------------------------------------------------------------
 //--                    C R E A T E     S T A T E S                          --
 //-----------------------------------------------------------------------------
@@ -244,7 +230,7 @@ Void createInnerStates(EntityType modalController,
 
 
 //-----------------------------------------------------------------------------
-//--           H E L P E R      M O M L     C R E A T I O N                  --
+//--                            H E L P E R S                                --
 //-----------------------------------------------------------------------------
 
 //do some java console output for debugging purpose 
@@ -265,12 +251,12 @@ String hash(String s) :
 	JAVA de.cau.cs.kieler.simplerailctrl.sim.ptolemy.oaw.XtendJava.hash(java.lang.String)
 ;
 
-//do some java console output for debugging purpose 
+//mark the node as visited (we do not want to create him twice) 
 Void markState(simplerailctrl::Node node) :
 	JAVA de.cau.cs.kieler.simplerailctrl.sim.ptolemy.oaw.XtendJava.markState(simplerailctrl.Node)
 ;
 
-//do some java console output for debugging purpose 
+//lookup if the node was already visited (and hence created in the new model) 
 boolean isMarked(simplerailctrl::Node node) :
 	JAVA de.cau.cs.kieler.simplerailctrl.sim.ptolemy.oaw.XtendJava.isMarked(simplerailctrl.Node)
 ;
@@ -288,6 +274,7 @@ String buildEmission(simplerailctrl::Node node) :
 
 //-------------------------------------------------------------------------
 
+//for a node get the action-type
 String getMetaType(simplerailctrl::Node state) :
 	 switch (state.metaType.name) {
  		case "simplerailctrl::SetSpeed" : "SetSpeed"
@@ -297,6 +284,9 @@ String getMetaType(simplerailctrl::Node state) :
  	} 		 
 ;    
 
+
+//-------------------------------------------------------------------------
+//--                          S T A T E S                                -- 
 //-------------------------------------------------------------------------
 
 //create SimpleState == State-Component 
@@ -320,9 +310,12 @@ Void createInitialStateEntity(EntityType baseEntity):
 	baseEntity.entity.add(newState)
 ;
 
+
+//-------------------------------------------------------------------------
+//--                         T R A N S I T I O N S                       -- 
 //-------------------------------------------------------------------------
 
-//create a State-State transition
+//create a state2state transition (simple states)
 Void addTransition(	EntityType baseEntity,
 					simplerailctrl::Transition transition) :
 	let sourceNode = (Node)transition.eContainer:
@@ -337,7 +330,7 @@ Void addTransition(	EntityType baseEntity,
 		    transitionName)
 ;
 
-//create State-Self transition
+//create state-self transition (simple states)
 Void addSelfTransition( EntityType baseEntity,
 						simplerailctrl::Node node) :
 	let transitionName = hash(node):
@@ -348,7 +341,7 @@ Void addSelfTransition( EntityType baseEntity,
 	addLink(baseEntity, getMetaType(node) + hash(node) + ".incomingPort", transitionName)
 ;
 
-//create initial->State transition
+//create initial->state transition (simple states)
 Void addInitialTransition( EntityType baseEntity,
 						String sourceState, 
 						Node targetNode) :
@@ -361,7 +354,7 @@ Void addInitialTransition( EntityType baseEntity,
 	addLink(baseEntity, getMetaType(targetNode) + hash(targetNode) + ".incomingPort", transitionName)
 ;
 
-//Connect threads/ModalModel
+//connect threads/ModalModel
 Void connectModalModel(EntityType baseEntity,
 		   			   String portName1,
 			 		   String portName2,
@@ -379,26 +372,20 @@ Void connectModalModel(EntityType baseEntity,
   addLink(baseEntity, portName2, relationName)
 ;
 
-//Connect top level actors
+//connect top level actors
 Void connectActors(EntityType baseEntity,
 		   			   String portName1,
 			 		   String portName2,
 			 		   String relationName) :
   let relation = new RelationType:										
-  let p = new PropertyType:
   relation.setClass("ptolemy.actor.TypedIORelation") ->
   relation.setName(relationName) ->
-  p.setName("width") ->
-  p.setClass("ptolemy.data.expr.Parameter") ->
-  p.setValue("1") ->
-//  relation.property.add(p) ->
   baseEntity.relation.add(relation) ->
   addLink(baseEntity, portName1, relationName) ->
   addLink(baseEntity, portName2, relationName)
 ;
 
-
-//add a Link
+//create a Link between a port and a relation
 Void addLink(EntityType baseEntity,
 			 String portName,
 			 String relationName) :
@@ -408,8 +395,18 @@ Void addLink(EntityType baseEntity,
 	baseEntity.link.add(link)
 ;			 
 
+//create a relation w/ a vertex
+create RelationType this createVertexRelation(String relationName) :
+   let v = new VertexType:
+   v.setName(hash(relationName)) ->
+   v.setValue("[0.0,0.0]") ->
+   this.vertex.add(v) ->
+   this.setClass("ptolemy.actor.TypedIORelation") ->
+   this.setName(relationName)
+;
 
-//create a Relation Type
+					
+//create a relation (for a state2state transition)
 RelationType createRelation(String name,
 							simplerailctrl::Transition transition):
  	let relation = createRelation(name,false,false,true):
@@ -417,9 +414,8 @@ RelationType createRelation(String name,
 	addSetAction(relation, "count = 0") ->
 	addEmission(relation, (Node)transition.destination) ->
 	relation
-										
-;					
-					
+;	
+//create a relation (without action/emission, just set name,...)			
 RelationType createRelation(String name, 
 							boolean def,
 							boolean preemptive,
@@ -465,9 +461,10 @@ RelationType createRelation(String name,
 	relation
 ;
 
-//create guardExpression
+//create guardExpression (for a relation)
 Void addTrigger(RelationType relation, simplerailctrl::Transition transition) :
 	let p1 = new PropertyType:
+	//buildTrigger -> JAVA escape
 	let value = buildTrigger(transition):
 	p1.setName("guardExpression") ->
 	p1.setClass("ptolemy.kernel.util.StringAttribute") ->
@@ -475,9 +472,10 @@ Void addTrigger(RelationType relation, simplerailctrl::Transition transition) :
 	if (!value.matches("")) then relation.property.add(p1) 
 ;
 
-//create outputActions
+//create outputActions (for a relation)
 Void addEmission(RelationType relation, simplerailctrl::Node node) :
 	let p1 = new PropertyType:
+	//buildEmission -> JAVA escape
 	let value = buildEmission(node):
 	p1.setName("outputActions") ->
 	p1.setClass("ptolemy.domains.fsm.kernel.OutputActionsAttribute") ->
@@ -494,13 +492,7 @@ Void addSetAction(RelationType relation, String value) :
 	relation.property.add(p1) 
 ;
 
-//int connectEntities(EntityType baseEntity,
-//					EntityType entity1,
-//					EntityType entity2) :
-// null					
-//;
-
-//normal port of an Actor
+//create normal port of an actor
 PortType createPort(boolean input, 
 								boolean output, 
 								String name,
@@ -522,8 +514,7 @@ PortType createPort(boolean input,
 	port
 ;
 
-
-//port of a ModelModel
+//create port of a ModelModel
 PortType createModelPort(boolean input,
 						 boolean output,
 						 String name,
@@ -566,7 +557,6 @@ PortType createModelRefinementPort(boolean input,
 	if (input) then port.property.add(prop3) ->
 	port
 ;
-
 
 //count parameter (for counting seconds)
 PropertyType createCountParamter():
