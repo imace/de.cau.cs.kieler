@@ -21,13 +21,12 @@ import org.eclipse.draw2d.ConnectionLocator;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.Label;
 import org.eclipse.draw2d.geometry.Rectangle;
-import org.eclipse.gef.ConnectionEditPart;
 import org.eclipse.gef.EditPart;
-import org.eclipse.gef.GraphicalEditPart;
-import org.eclipse.gef.NodeEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.AbstractBorderItemEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.CompartmentEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.ConnectionEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
-import org.eclipse.gmf.runtime.diagram.ui.editparts.IBorderItemEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.LabelEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
@@ -71,8 +70,8 @@ public class GenericLayoutGraphBuilder extends
 	 */
 	@Override
 	protected void doBuildLayoutGraph() {
-		if (layoutRootPart instanceof NodeEditPart) {
-			NodeEditPart rootEditPart = (NodeEditPart) layoutRootPart;
+		if (layoutRootPart instanceof ShapeNodeEditPart) {
+			ShapeNodeEditPart rootEditPart = (ShapeNodeEditPart) layoutRootPart;
 			KShapeLayout shapeLayout = KimlLayoutUtil.getShapeLayout(layoutGraph);
 
 			// set location and size
@@ -94,9 +93,9 @@ public class GenericLayoutGraphBuilder extends
 		 * empty diagram background space, start with its children.
 		 */
 		else if (layoutRootPart instanceof DiagramEditPart) {
-			/*
-			 * set information about LayouterName and LayoutType
-			 */
+		    KShapeLayout shapeLayout = KimlLayoutUtil.getShapeLayout(layoutGraph);
+		    shapeLayout.setWidth(layoutRootPart.getFigure().getBounds().width);
+		    shapeLayout.setHeight(layoutRootPart.getFigure().getBounds().height);
 			layoutGraph.getLabel().setText(((DiagramEditPart)layoutRootPart)
 			        .getDiagramView().getName());
 			graphicalEditPart2LayoutNode.put(layoutRootPart, layoutGraph);
@@ -126,14 +125,11 @@ public class GenericLayoutGraphBuilder extends
 		for (Object obj : currentEditPart.getChildren()) {
 
 		    // process ports
-		    if (obj instanceof IBorderItemEditPart) {
-		        IBorderItemEditPart borderItem = (IBorderItemEditPart)obj;
+		    if (obj instanceof AbstractBorderItemEditPart) {
+		        AbstractBorderItemEditPart borderItem = (AbstractBorderItemEditPart)obj;
                 KPort port = KimlLayoutUtil.createInitializedPort();
                 layoutPort2EditPart.put(port, borderItem);
                 editPart2PortMap.put(borderItem, port);
-                // FIXME how do we determine the port type?!?
-                //port.setType(borderItem instanceof InputPortEditPart
-                //        ? KPortType.INPUT : KPortType.OUTPUT);
                 port.setNode(currentLayoutNode);
                 // set the port's layout, relative to the node position
                 KShapeLayout portLayout = KimlLayoutUtil.getShapeLayout(port);
@@ -193,9 +189,9 @@ public class GenericLayoutGraphBuilder extends
 				        compartmentBounds.x - parentBounds.x);
 			}
             /* if true, Emma has a real EditPart with contents. */
-            else if (obj instanceof NodeEditPart) {
+            else if (obj instanceof ShapeNodeEditPart) {
 
-                NodeEditPart childNodeEditPart = (NodeEditPart) obj;
+                ShapeNodeEditPart childNodeEditPart = (ShapeNodeEditPart) obj;
                 KNode childLayoutNode = KimlLayoutUtil
                         .createInitializedNode();
                 Rectangle childBounds = childNodeEditPart.getFigure()
@@ -310,7 +306,7 @@ public class GenericLayoutGraphBuilder extends
             KPort sourcePort = null, targetPort = null;
 			
             EditPart sourceObj = connection.getSource();
-			if (sourceObj instanceof IBorderItemEditPart) {
+			if (sourceObj instanceof AbstractBorderItemEditPart) {
 			    sourcePort = editPart2PortMap.get(sourceObj);
 			    if (sourcePort == null) continue;
 			    edge.setSourcePort(sourcePort);
@@ -321,7 +317,7 @@ public class GenericLayoutGraphBuilder extends
 			    sourceNode = graphicalEditPart2LayoutNode.get(sourceObj);
 			
 			EditPart targetObj = connection.getTarget();
-			if (targetObj instanceof IBorderItemEditPart) {
+			if (targetObj instanceof AbstractBorderItemEditPart) {
 			    targetPort = editPart2PortMap.get(targetObj);
 			    if (targetPort == null) continue;
 			    edge.setTargetPort(targetPort);

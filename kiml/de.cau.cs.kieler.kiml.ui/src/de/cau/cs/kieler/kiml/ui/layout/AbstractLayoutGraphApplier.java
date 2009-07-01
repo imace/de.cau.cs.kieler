@@ -17,9 +17,10 @@ import java.util.Map;
 
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.geometry.Point;
-import org.eclipse.gef.ConnectionEditPart;
-import org.eclipse.gef.GraphicalEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.ConnectionEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.LabelEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 
 import de.cau.cs.kieler.core.kgraph.KEdge;
 import de.cau.cs.kieler.core.kgraph.KLabel;
@@ -58,7 +59,7 @@ public abstract class AbstractLayoutGraphApplier {
 	/* the mappings of KGraph LAYOUT elements to EditParts */
 	protected Map<KNode, GraphicalEditPart> layoutNode2EditPart;
 	protected Map<KEdge, ConnectionEditPart> layoutEdge2EditPart;
-	protected Map<KPort, GraphicalEditPart> layoutPort2EditPart;
+	protected Map<KPort, ShapeNodeEditPart> layoutPort2EditPart;
 
 	/* the mappings of KGraph LABEL elements to LabelEditParts */
 	protected Map<KLabel, LabelEditPart> nodeLabel2EditPart;

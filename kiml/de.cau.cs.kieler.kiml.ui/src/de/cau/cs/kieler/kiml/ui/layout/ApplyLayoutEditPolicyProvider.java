@@ -29,23 +29,13 @@ import org.eclipse.gmf.runtime.diagram.ui.services.editpolicy.IEditPolicyProvide
 public class ApplyLayoutEditPolicyProvider extends AbstractProvider implements
         IEditPolicyProvider {
 
-    /** the edit policy used to apply layout on GFM diagrams */
-    private ApplyLayoutEditPolicy applyLayoutEditPolicy;
-    
-    /**
-     * Creates an edit policy provider to apply layout.
-     */
-    public ApplyLayoutEditPolicyProvider() {
-        applyLayoutEditPolicy = new ApplyLayoutEditPolicy();
-    }
-
     /* (non-Javadoc)
      * @see org.eclipse.gmf.runtime.diagram.ui.services.editpolicy.IEditPolicyProvider#createEditPolicies(org.eclipse.gef.EditPart)
      */
     public void createEditPolicies(EditPart editPart) {
         if (editPart instanceof DiagramEditPart) {
             editPart.installEditPolicy(ApplyLayoutEditPolicy.APPLY_LAYOUT_ROLE,
-                    applyLayoutEditPolicy);
+                    new ApplyLayoutEditPolicy());
         }
     }
 

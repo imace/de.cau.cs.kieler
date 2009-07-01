@@ -16,7 +16,6 @@ package de.cau.cs.kieler.kiml.ui.layout;
 
 import org.eclipse.draw2d.ConnectionLayer;
 import org.eclipse.gef.EditPart;
-import org.eclipse.gef.RequestConstants;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.commands.CommandStack;
 import org.eclipse.gef.editparts.ScalableFreeformRootEditPart;
@@ -61,8 +60,10 @@ public class GenericSingleCommandLayoutGraphApplier extends AbstractLayoutGraphA
         // the request will be filled with the new layout specification
         // piece by piece in the following
         applyLayoutRequest = new ApplyLayoutRequest();
-        // the type is not important for us but may not be null
-        applyLayoutRequest.setType(RequestConstants.REQ_ALIGN);
+        applyLayoutRequest.setNodeMap(layoutNode2EditPart);
+        applyLayoutRequest.setEdgeMap(layoutEdge2EditPart);
+        applyLayoutRequest.setPortMap(layoutPort2EditPart);
+        applyLayoutRequest.setEdgeLabelMap(edgeLabel2EditPart);
         
         // create a new GEF Command from the Request we just set up
         // the command is received from a custom ApplyLayoutEditPolicy that is
@@ -73,6 +74,7 @@ public class GenericSingleCommandLayoutGraphApplier extends AbstractLayoutGraphA
         Command applyLayoutCommand = diagramEditPart.getCommand(applyLayoutRequest);
         
         /* gets the diagram command stack */
+        // FIXME the root part does not provide a command stack
         DiagramCommandStack commandStack = null;
         Object adapter = sfrep.getAdapter(CommandStack.class);
         if (adapter instanceof DiagramCommandStack) {

@@ -134,7 +134,7 @@ public final class DiagramLayouter {
 					progressMonitor.subTask(90));
 
 			// fetches layout graph applier for the provided editor
-			AbstractLayoutGraphApplier layoutGraphApplier = new GenericLayoutGraphApplier();
+			AbstractLayoutGraphApplier layoutGraphApplier = new GenericSingleCommandLayoutGraphApplier();
 
 			if (animate)
 				Animation.markBegin();

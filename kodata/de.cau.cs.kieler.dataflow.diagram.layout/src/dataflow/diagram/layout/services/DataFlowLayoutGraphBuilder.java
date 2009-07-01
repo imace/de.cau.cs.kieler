@@ -5,13 +5,13 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.draw2d.IFigure;
-import org.eclipse.gef.ConnectionEditPart;
 import org.eclipse.gef.EditPart;
-import org.eclipse.gef.GraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.AbstractBorderedShapeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.BorderedBorderItemEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.CompartmentEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.ConnectionEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramRootEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ITextAwareEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.LabelEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeCompartmentEditPart;
@@ -420,10 +420,10 @@ public class DataFlowLayoutGraphBuilder extends AbstractLayoutGraphBuilder {
 				// InputPortNameEditPart, OutputPortNameEditPart
 				root = (GraphicalEditPart) root.getParent().getParent();
 			}
-			else if (root instanceof DiagramRootEditPart) {
-				// RenderedDiagramRootEditPart
-				root = (GraphicalEditPart) ((DiagramRootEditPart)root).getContents();
-			}
+//			else if (root instanceof DiagramRootEditPart) {
+//				// RenderedDiagramRootEditPart
+//				root = (GraphicalEditPart) ((DiagramRootEditPart)root).getContents();
+//			}
 		}
 		return root;
 	}

@@ -15,9 +15,10 @@ package de.cau.cs.kieler.kiml.ui.layout;
 
 import java.util.Map;
 
-import org.eclipse.gef.ConnectionEditPart;
-import org.eclipse.gef.GraphicalEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.ConnectionEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.LabelEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 
 import de.cau.cs.kieler.core.kgraph.KEdge;
 import de.cau.cs.kieler.core.kgraph.KLabel;
@@ -39,7 +40,7 @@ public final class KimlLayoutInformation {
 
 	public Map<KNode, GraphicalEditPart> layoutNode2EditPart;
 	public Map<KEdge, ConnectionEditPart> layoutEdge2EditPart;
-	public Map<KPort, GraphicalEditPart> layoutPort2EditPart;
+	public Map<KPort, ShapeNodeEditPart> layoutPort2EditPart;
 
 	public Map<KLabel, LabelEditPart> nodeLabel2EditPart;
 	public Map<KLabel, LabelEditPart> edgeLabel2EditPart;

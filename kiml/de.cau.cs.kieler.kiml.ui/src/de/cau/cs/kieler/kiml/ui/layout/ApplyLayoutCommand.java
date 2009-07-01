@@ -21,21 +21,21 @@ import java.util.List;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.draw2d.geometry.Dimension;
+import org.eclipse.draw2d.geometry.Point;
+import org.eclipse.draw2d.geometry.PointList;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.gmf.runtime.common.core.command.CommandResult;
 import org.eclipse.gmf.runtime.diagram.core.util.ViewUtil;
 import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand;
 import org.eclipse.gmf.runtime.notation.Edge;
+import org.eclipse.gmf.runtime.notation.IdentityAnchor;
+import org.eclipse.gmf.runtime.notation.NotationFactory;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.RelativeBendpoints;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.gmf.runtime.notation.datatype.RelativeBendpoint;
 
-import de.cau.cs.kieler.core.util.Pair;
-import de.cau.cs.kieler.kiml.layout.klayoutdata.KEdgeLayout;
-import de.cau.cs.kieler.kiml.layout.klayoutdata.KLayoutData;
-import de.cau.cs.kieler.kiml.layout.klayoutdata.KPoint;
-import de.cau.cs.kieler.kiml.layout.klayoutdata.KShapeLayout;
 
 /**
  * Command used to apply layout.
@@ -47,10 +47,28 @@ import de.cau.cs.kieler.kiml.layout.klayoutdata.KShapeLayout;
  */
 public class ApplyLayoutCommand extends AbstractTransactionalCommand {
 
+    /** layout data for node shapes */
+    private class ShapeLayoutData {
+        View view;
+        Point location;
+        Dimension size;
+    }
+    
+    /** layout data for edges */
+    private class EdgeLayoutData {
+        Edge edge;
+        PointList bends;
+        String sourceTerminal;
+        String targetTerminal;
+    }
+    
     /** adapter for the view of the base diagram */
     private IAdaptable diagramViewAdapter;
-    /** list of views with associated layout data */
-    private List<Pair<View, KLayoutData>> layoutDataList = new LinkedList<Pair<View, KLayoutData>>();
+    /** list of shape layouts to be applied to nodes */
+    private List<ShapeLayoutData> shapeLayouts = new LinkedList<ShapeLayoutData>();
+    /** list of edge layouts to be applied to edges */
+    private List<EdgeLayoutData> edgeLayouts = new LinkedList<EdgeLayoutData>();
+    
     
     /**
      * Creates a command to apply layout.
@@ -66,13 +84,42 @@ public class ApplyLayoutCommand extends AbstractTransactionalCommand {
     }
     
     /**
-     * Adds the given layout data as new layout for the given view.
+     * Adds the given shape layout data to this command.
      * 
      * @param view view from the GMF notation model
-     * @param layoutData new layout data for the view
+     * @param location new location for the view, or {@code null} if the
+     *     location shall not be changed
+     * @param size new size for the view, or {@code null} if the size
+     *     shall not be changed
      */
-    public void addLayoutData(View view, KLayoutData layoutData) {
-        layoutDataList.add(new Pair<View, KLayoutData>(view, layoutData));
+    public void addShapeLayout(View view, Point location, Dimension size) {
+        assert view != null;
+        ShapeLayoutData layout = new ShapeLayoutData();
+        layout.view = view;
+        layout.location = location;
+        layout.size = size;
+        shapeLayouts.add(layout);
+    }
+    
+    /**
+     * Adds the given edge layout data to this command.
+     * 
+     * @param edge edge from the GMF notation model
+     * @param bends list of bend points for the edge, or {@code null}
+     *     if the bend points shall not be changed
+     * @param sourceTerminal new source terminal, encoded as string, or
+     *     {@code null} if the source terminal shall not be changed
+     * @param targetTerminal new target terminal, encoded as string, or
+     *     {@code null} if the target terminal shall not be changed
+     */
+    public void addEdgeLayout(Edge edge, PointList bends, String sourceTerminal,
+            String targetTerminal) {
+        assert edge != null;
+        EdgeLayoutData layout = new EdgeLayoutData();
+        layout.edge = edge;
+        layout.bends = bends;
+        layout.sourceTerminal = sourceTerminal;
+        layout.targetTerminal = targetTerminal;
     }
 
     /* (non-Javadoc)
@@ -81,41 +128,64 @@ public class ApplyLayoutCommand extends AbstractTransactionalCommand {
     @Override
     protected CommandResult doExecuteWithResult(IProgressMonitor monitor,
             IAdaptable info) throws ExecutionException {
-        for (Pair<View, KLayoutData> layoutPair : layoutDataList) {
-            if (layoutPair.second instanceof KShapeLayout) {
-                View view = layoutPair.first;
-                KShapeLayout shapeLayout = (KShapeLayout)layoutPair.second;
-                // set new location of the element
-                ViewUtil.setStructuralFeatureValue(view, NotationPackage.eINSTANCE.getLocation_X(),
-                        new Integer(Math.round(shapeLayout.getXpos())));
-                ViewUtil.setStructuralFeatureValue(view, NotationPackage.eINSTANCE.getLocation_Y(),
-                        new Integer(Math.round(shapeLayout.getYpos())));
-                // set new size of the element
-                ViewUtil.setStructuralFeatureValue(view, NotationPackage.eINSTANCE.getSize_Width(),
-                        new Integer(Math.round(shapeLayout.getWidth())));
-                ViewUtil.setStructuralFeatureValue(view, NotationPackage.eINSTANCE.getSize_Height(),
-                        new Integer(Math.round(shapeLayout.getHeight())));
+        // process shape layout data
+        for (ShapeLayoutData shapeLayout : shapeLayouts) {
+            // set new location of the element
+            if (shapeLayout.location != null) {
+                ViewUtil.setStructuralFeatureValue(shapeLayout.view, NotationPackage.eINSTANCE.getLocation_X(),
+                        new Integer(Math.round(shapeLayout.location.x)));
+                ViewUtil.setStructuralFeatureValue(shapeLayout.view, NotationPackage.eINSTANCE.getLocation_Y(),
+                        new Integer(Math.round(shapeLayout.location.y)));
             }
-            else if (layoutPair.second instanceof KEdgeLayout) {
-                Edge edge = (Edge)layoutPair.first;
-                KEdgeLayout edgeLayout = (KEdgeLayout)layoutPair.second;
-                // set new bend points of the edge
-                List<RelativeBendpoint> newBendpoints = new ArrayList<RelativeBendpoint>(
-                        edgeLayout.getBendPoints().size());
-                KPoint sourcePoint = edgeLayout.getSourcePoint();
-                KPoint targetPoint = edgeLayout.getTargetPoint();
-                for (KPoint bendPoint : edgeLayout.getBendPoints()) {
-                    newBendpoints.add(new RelativeBendpoint(
-                            Math.round(bendPoint.getX() - sourcePoint.getX()),
-                            Math.round(bendPoint.getY() - sourcePoint.getY()),
-                            Math.round(bendPoint.getX() - targetPoint.getX()),
-                            Math.round(bendPoint.getY() - targetPoint.getY())));
-                }
-                RelativeBendpoints points = (RelativeBendpoints) edge.getBendpoints();
-                points.setPoints(newBendpoints);
-                // set new anchor points of the edge
+            // set new size of the element
+            if (shapeLayout.size != null) {
+                ViewUtil.setStructuralFeatureValue(shapeLayout.view, NotationPackage.eINSTANCE.getSize_Width(),
+                        new Integer(Math.round(shapeLayout.size.width)));
+                ViewUtil.setStructuralFeatureValue(shapeLayout.view, NotationPackage.eINSTANCE.getSize_Height(),
+                        new Integer(Math.round(shapeLayout.size.height)));
             }
         }
+        shapeLayouts.clear();
+        
+        // process edge layout data
+        for (EdgeLayoutData edgeLayout : edgeLayouts) {
+            // set new bend points of the edge
+            if (edgeLayout.bends != null) {
+                List<RelativeBendpoint> newBendpoints = new ArrayList<RelativeBendpoint>(
+                        edgeLayout.bends.size());
+                Point sourcePoint = edgeLayout.bends.getFirstPoint();
+                Point targetPoint = edgeLayout.bends.getLastPoint();
+                for (int i = 0; i < edgeLayout.bends.size(); i++) {
+                    Point bend = edgeLayout.bends.getPoint(i);
+                    newBendpoints.add(new RelativeBendpoint(
+                            Math.round(bend.x - sourcePoint.x),
+                            Math.round(bend.y - sourcePoint.y),
+                            Math.round(bend.x - targetPoint.x),
+                            Math.round(bend.y - targetPoint.y)));
+                }
+                RelativeBendpoints points = (RelativeBendpoints)edgeLayout.edge.getBendpoints();
+                points.setPoints(newBendpoints);
+            }
+            // set new source anchor point of the edge
+            if (edgeLayout.sourceTerminal != null) {
+                IdentityAnchor anchor = (IdentityAnchor)edgeLayout.edge.getSourceAnchor();
+                if (anchor == null) {
+                    anchor = NotationFactory.eINSTANCE.createIdentityAnchor();
+                    edgeLayout.edge.setSourceAnchor(anchor);
+                }
+                anchor.setId(edgeLayout.sourceTerminal);
+            }
+            // set new target anchor point of the edge
+            if (edgeLayout.targetTerminal != null) {
+                IdentityAnchor anchor = (IdentityAnchor)edgeLayout.edge.getTargetAnchor();
+                if (anchor == null) {
+                    anchor = NotationFactory.eINSTANCE.createIdentityAnchor();
+                    edgeLayout.edge.setTargetAnchor(anchor);
+                }
+                anchor.setId(edgeLayout.targetTerminal);
+            }
+        }
+        edgeLayouts.clear();
         
         return CommandResult.newOKCommandResult();
     }

@@ -17,12 +17,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
-import org.eclipse.gef.GraphicalEditPart;
-import org.eclipse.gef.NodeEditPart;
-import org.eclipse.gef.ConnectionEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.CompartmentEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.ConnectionEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.LabelEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditor;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramGraphicalViewer;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -67,7 +68,7 @@ public abstract class AbstractLayoutGraphBuilder {
 	/* the mappings of KLayoutGraph LAYOUT elements to EditParts */
 	protected Map<KNode, GraphicalEditPart> layoutNode2EditPart = new HashMap<KNode, GraphicalEditPart>();
 	protected Map<KEdge, ConnectionEditPart> layoutEdge2EditPart = new HashMap<KEdge, ConnectionEditPart>();
-	protected Map<KPort, GraphicalEditPart> layoutPort2EditPart = new HashMap<KPort, GraphicalEditPart>();
+	protected Map<KPort, ShapeNodeEditPart> layoutPort2EditPart = new HashMap<KPort, ShapeNodeEditPart>();
 
 	/* the mappings of KLayoutGraph LABEL elements to LabelEditParts */
 	protected Map<KLabel, LabelEditPart> nodeLabel2EditPart = new HashMap<KLabel, LabelEditPart>();
@@ -169,8 +170,8 @@ public abstract class AbstractLayoutGraphBuilder {
 			Object selectedObject = selection.getFirstElement();
 			// if just one element was selected, use this, if NodeEditPart
 			if (selection.size() == 1) {
-				if (selectedObject instanceof NodeEditPart) {
-					root = (NodeEditPart) selectedObject;
+				if (selectedObject instanceof ShapeNodeEditPart) {
+					root = (ShapeNodeEditPart) selectedObject;
 				} else if (selectedObject instanceof DiagramEditPart) {
 					root = (GraphicalEditPart) ((DiagramEditPart) selectedObject).getViewer().getContents();
 				} else if (selectedObject instanceof CompartmentEditPart) {
@@ -211,8 +212,8 @@ public abstract class AbstractLayoutGraphBuilder {
 	private GraphicalEditPart findParentNode(Object current) {
 		if (current instanceof GraphicalEditPart) {
 			GraphicalEditPart aep = (GraphicalEditPart) current;
-			if (aep.getParent() instanceof NodeEditPart)
-				return (NodeEditPart) aep.getParent();
+			if (aep.getParent() instanceof ShapeNodeEditPart)
+				return (ShapeNodeEditPart) aep.getParent();
 			else {
 				GraphicalEditPart parent = findParentNode(aep.getParent());
 				if (parent == null) {
