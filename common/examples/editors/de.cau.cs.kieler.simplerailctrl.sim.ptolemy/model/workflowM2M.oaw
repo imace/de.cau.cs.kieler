@@ -34,7 +34,7 @@
 		</metaModel>
 		<!--<metaModel id="javamm" class="org.openarchitectureware.type.impl.java.JavaMetaModel">
 		</metaModel>  -->
-		<invoke value="ecore2moml::transform(emfmodel)" />
+		<invoke value="simplerailctrl2moml::transform(emfmodel)" />
 		<outputSlot value="ptomodel"/>
 	</component>
 

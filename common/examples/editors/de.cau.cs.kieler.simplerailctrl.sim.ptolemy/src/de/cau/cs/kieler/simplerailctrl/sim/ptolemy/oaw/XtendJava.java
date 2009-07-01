@@ -87,6 +87,7 @@ public class XtendJava {
 				myEmission += "track"+track+"={speed="+speed+", motormode="+motormode+"}";
 			}
 			myEmission += "};";
+			if (trackList.size() == 0) myEmission = "tracks={track12345={speed=0, motormode=0}};";
 			myEmission += "signals={signal12345={lights=0}};";
 			myEmission += "points={point12345={turn=0}}";
 			//myEmission += "tracks={track12345={speed=0, motormode=0}}";
@@ -99,10 +100,11 @@ public class XtendJava {
 			myEmission += "points={";
 			for (int c = 0; c < pointList.size(); c++) {
 				if (c > 0) myEmission += ",";
-				int point = ((POINT)pointList.get(c)).getValue()+1;
+				int point = ((POINT)pointList.get(c)).ordinal();
 				myEmission += "point"+point+"={turn="+turn+"}";
 			}
 			myEmission += "};";
+			if (pointList.size() == 0) myEmission = "points={point12345={turn=0}};";
 			myEmission += "signals={signal12345={lights=0}};";
 			//myEmission += "points={point12345={turn=0}}";
 			myEmission += "tracks={track12345={speed=0, motormode=0}}";
@@ -135,7 +137,8 @@ public class XtendJava {
 				}
 			}
 			myEmission += "};";
-//			myEmission += "signals={signal12345={lights=0}}";
+			if (trackList.size() == 0) myEmission = "signals={signal12345={lights=0}};";
+			//myEmission += "signals={signal12345={lights=0}}";
 			myEmission += "points={point12345={turn=0}};";
 			myEmission += "tracks={track12345={speed=0, motormode=0}}";
 		}

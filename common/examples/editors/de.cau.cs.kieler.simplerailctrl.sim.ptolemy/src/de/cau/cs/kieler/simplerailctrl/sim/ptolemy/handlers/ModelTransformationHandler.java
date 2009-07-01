@@ -56,7 +56,6 @@ public class ModelTransformationHandler extends AbstractHandler {
 		String PluginRoot = ModelTransformationHandler.getPluginFolder();
 		String PtolemyModel = "file:/" + PluginRoot + "src-gen/generated.moml";
 
-		
 		// M2M transformation here //
         Map<String,String> properties = new HashMap<String,String>();
         Map<String, Object> slotContents = new HashMap<String, Object>();
