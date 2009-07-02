@@ -23,6 +23,7 @@ import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramRootEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramCommandStack;
 import org.eclipse.swt.SWT;
+import org.eclipse.ui.PlatformUI;
 
 /**
  * @author haf
@@ -76,7 +77,8 @@ public class GenericSingleCommandLayoutGraphApplier extends AbstractLayoutGraphA
         /* gets the diagram command stack */
         // FIXME the root part does not provide a command stack
         DiagramCommandStack commandStack = null;
-        Object adapter = sfrep.getAdapter(CommandStack.class);
+        Object adapter = PlatformUI.getWorkbench().getActiveWorkbenchWindow()
+                .getActivePage().getActiveEditor().getAdapter(CommandStack.class);
         if (adapter instanceof DiagramCommandStack) {
             commandStack = (DiagramCommandStack) adapter;
         } else {

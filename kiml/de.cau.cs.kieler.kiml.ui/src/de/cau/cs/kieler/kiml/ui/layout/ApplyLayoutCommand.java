@@ -120,6 +120,7 @@ public class ApplyLayoutCommand extends AbstractTransactionalCommand {
         layout.bends = bends;
         layout.sourceTerminal = sourceTerminal;
         layout.targetTerminal = targetTerminal;
+        edgeLayouts.add(layout);
     }
 
     /* (non-Javadoc)

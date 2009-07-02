@@ -471,7 +471,8 @@ public class KimlLayoutUtil {
     /**
      * Determines the flow of the given port, that is the difference
      * between the number of outgoing edges and the number of incoming
-     * edges. Edges that span different hierarchies are not counted.
+     * edges. Edges that connect to descendant nodes are counted in their
+     * reverse direction.
      * 
      * @param port port for which the flow shall be calculated
      * @return difference between number of outgoing and incoming edges
@@ -481,15 +482,43 @@ public class KimlLayoutUtil {
         for (KEdge edge : port.getEdges()) {
             KPort sourcePort = edge.getSourcePort();
             KPort targetPort = edge.getTargetPort();
-            if (sourcePort != null && targetPort != null
-                    && sourcePort.getNode().getParent() == targetPort.getNode().getParent()) {
-                if (edge.getSourcePort() == port)
-                    flow++;
-                if (edge.getTargetPort() == port)
-                    flow--;
+            if (sourcePort != null && targetPort != null) {
+                KPort otherPort = sourcePort;
+                if (otherPort == port)
+                    otherPort = targetPort;
+                if (isDescendant(otherPort.getNode(), port.getNode())) {
+                    if (sourcePort == port)
+                        flow--;
+                    if (targetPort == port)
+                        flow++;
+                }
+                else {
+                    if (sourcePort == port)
+                        flow++;
+                    if (targetPort == port)
+                        flow--;
+                }
             }
         }
         return flow;
+    }
+    
+    /**
+     * Determines whether the given child node is a descendant of the parent
+     * node.
+     * 
+     * @param child a child node
+     * @param parent a parent node
+     * @return true if {@code child} is a direct or indirect child of {@code parent}
+     */
+    public static boolean isDescendant(KNode child, KNode parent) {
+        KNode current = child;
+        while (current.getParent() != null) {
+            current = current.getParent();
+            if (current == parent)
+                return true;
+        }
+        return false;
     }
 
 }

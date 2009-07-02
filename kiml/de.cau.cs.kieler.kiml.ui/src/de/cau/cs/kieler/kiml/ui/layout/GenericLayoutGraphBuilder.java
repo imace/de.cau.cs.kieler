@@ -14,12 +14,15 @@
 package de.cau.cs.kieler.kiml.ui.layout;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
 
 import org.eclipse.draw2d.ConnectionLocator;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.Label;
+import org.eclipse.draw2d.ScrollPane;
+import org.eclipse.draw2d.geometry.Insets;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.AbstractBorderItemEditPart;
@@ -183,10 +186,24 @@ public class GenericLayoutGraphBuilder extends
 			    hasChildCompartments = true;
 			    GraphicalEditPart compartment = (GraphicalEditPart)obj;
 			    Rectangle parentBounds = currentEditPart.getFigure().getBounds();
-			    Rectangle compartmentBounds = compartment.getFigure().getBounds();
+			    IFigure compartmentFigure = compartment.getFigure();
+			    Rectangle compartmentBounds = compartmentFigure.getBounds();
+			    Insets compartmentInsets = compartmentFigure.getInsets();
+			    int compartmentTopInset = compartmentInsets.top;
+			    int compartmentLeftInset = compartmentInsets.left;
+			    Iterator<?> figureIter = compartmentFigure.getChildren().iterator();
+			    while (figureIter.hasNext()) {
+			        Object next = figureIter.next();
+			        if (next instanceof ScrollPane) {
+			            Insets scrollPaneInsets = ((IFigure)next).getInsets();
+			            compartmentTopInset += scrollPaneInsets.top;
+			            compartmentLeftInset += scrollPaneInsets.left;
+			            break;
+			        }
+			    }
 				buildLayoutGraphRecursively(compartment, currentLayoutNode,
-				        compartmentBounds.y - parentBounds.y,
-				        compartmentBounds.x - parentBounds.x);
+				        compartmentBounds.y - parentBounds.y + compartmentTopInset,
+				        compartmentBounds.x - parentBounds.x + compartmentLeftInset);
 			}
             /* if true, Emma has a real EditPart with contents. */
             else if (obj instanceof ShapeNodeEditPart) {
