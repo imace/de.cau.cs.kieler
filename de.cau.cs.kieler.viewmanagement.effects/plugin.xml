@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="de.cau.cs.kieler.viewmanagement.effects">
+      <effect
+            class="DefaultTestEffect"
+            name="de.cau.cs.kieler.viewmanagement.effects.defaulttest">
+      </effect>
+   </extension>
+
+</plugin>
