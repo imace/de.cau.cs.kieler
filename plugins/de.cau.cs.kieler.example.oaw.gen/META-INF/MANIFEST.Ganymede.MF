@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+  
+
+
+  
+
+  <head>
+    <title>
+      /trunk/plugins/de.cau.cs.kieler.example.oaw.gen/META-INF/MANIFEST.MF –
+      KIELER: Kiel Integrated Environment for Layout for the Eclipse RichClientPlatform
+    </title>
+        <link rel="search" href="/trac/kieler/search" />
+        <link rel="help" href="/trac/kieler/wiki/TracGuide" />
+        <link rel="alternate" href="/trac/kieler/export/1304/trunk/plugins/de.cau.cs.kieler.example.oaw.gen/META-INF/MANIFEST.MF" type="text/plain" title="Original Format" />
+        <link rel="up" href="/trac/kieler/browser/trunk/plugins/de.cau.cs.kieler.example.oaw.gen/META-INF" title="Parent directory" />
+        <link rel="start" href="/trac/kieler/wiki" />
+        <link rel="stylesheet" href="/trac/kieler/chrome/common/css/trac.css" type="text/css" /><link rel="stylesheet" href="/trac/kieler/chrome/common/css/code.css" type="text/css" /><link rel="stylesheet" href="/trac/kieler/pygments/trac.css" type="text/css" /><link rel="stylesheet" href="/trac/kieler/chrome/common/css/browser.css" type="text/css" />
+        <link rel="shortcut icon" href="/trac/kieler/chrome/common/trac.ico" type="image/x-icon" />
+        <link rel="icon" href="/trac/kieler/chrome/common/trac.ico" type="image/x-icon" />
+      <link type="application/opensearchdescription+xml" rel="search" href="/trac/kieler/search/opensearch" title="Search KIELER: Kiel Integrated Environment for Layout for the Eclipse RichClientPlatform" />
+    <script type="text/javascript" src="/trac/kieler/chrome/common/js/jquery.js"></script><script type="text/javascript" src="/trac/kieler/chrome/common/js/trac.js"></script><script type="text/javascript" src="/trac/kieler/chrome/common/js/search.js"></script>
+    <!--[if lt IE 7]>
+    <script type="text/javascript" src="/trac/kieler/chrome/common/js/ie_pre7_hacks.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      jQuery(document).ready(function($) {
+        $("#jumploc input").hide();
+        $("#jumploc select").change(function () {
+          this.parentNode.parentNode.submit();
+        })
+      });
+    </script>
+  </head>
+  <body>
+    <div id="banner">
+      <div id="header">
+        <a id="logo" href="http://www.informatik.uni-kiel.de/rtsys/"><img src="http://rtsys.informatik.uni-kiel.de/trac/kieler/browser/trunk/common/doc/images/kieler-trac-logo.png?format=raw" alt="KIELER: Kiel Integrated Environment for Layout for the Eclipse RichClientPlatform" /></a>
+      </div>
+      <form id="search" action="/trac/kieler/search" method="get">
+        <div>
+          <label for="proj-search">Search:</label>
+          <input type="text" id="proj-search" name="q" size="18" value="" />
+          <input type="submit" value="Search" />
+        </div>
+      </form>
+      <div id="metanav" class="nav">
+    <ul>
+      <li class="first">logged in as cmot</li><li><a href="/trac/kieler/logout">Logout</a></li><li><a href="/trac/kieler/wiki/TracGuide">Help/Guide</a></li><li><a href="/trac/kieler/about">About Trac</a></li><li class="last"><a href="/trac/kieler/prefs">Preferences</a></li>
+    </ul>
+  </div>
+    </div>
+    <div id="mainnav" class="nav">
+    <ul>
+      <li class="first"><a href="/trac/kieler/wiki">Wiki</a></li><li><a href="/trac/kieler/timeline">Timeline</a></li><li><a href="/trac/kieler/roadmap">Roadmap</a></li><li class="active"><a href="/trac/kieler/browser">Browse Source</a></li><li><a href="/trac/kieler/report">View Tickets</a></li><li><a href="/trac/kieler/newticket">New Ticket</a></li><li class="last"><a href="/trac/kieler/search">Search</a></li>
+    </ul>
+  </div>
+    <div id="main">
+      <div id="ctxtnav" class="nav">
+        <h2>Context Navigation</h2>
+          <ul>
+            <li class="first "><a href="/trac/kieler/changeset/1222/trunk/common/examples/programs/de.cau.cs.kieler.example.oaw.gen/META-INF/MANIFEST.MF">Last Change</a></li><li><a href="/trac/kieler/browser/trunk/common/examples/programs/de.cau.cs.kieler.example.oaw.gen/META-INF/MANIFEST.MF?annotate=blame&amp;rev=1222" title="Annotate each line with the last changed revision (this can be time consuming...)">Annotate</a></li><li class="last"><a href="/trac/kieler/log/trunk/plugins/de.cau.cs.kieler.example.oaw.gen/META-INF/MANIFEST.MF">Revision Log</a></li>
+          </ul>
+        <hr />
+      </div>
+    <div id="content" class="browser">
+      <h1>
+    <a class="pathentry first" title="Go to root directory" href="/trac/kieler/browser">root</a><span class="pathentry sep">/</span><a class="pathentry" title="View trunk" href="/trac/kieler/browser/trunk">trunk</a><span class="pathentry sep">/</span><a class="pathentry" title="View plugins" href="/trac/kieler/browser/trunk/plugins">plugins</a><span class="pathentry sep">/</span><a class="pathentry" title="View de.cau.cs.kieler.example.oaw.gen" href="/trac/kieler/browser/trunk/plugins/de.cau.cs.kieler.example.oaw.gen">de.cau.cs.kieler.example.oaw.gen</a><span class="pathentry sep">/</span><a class="pathentry" title="View META-INF" href="/trac/kieler/browser/trunk/plugins/de.cau.cs.kieler.example.oaw.gen/META-INF">META-INF</a><span class="pathentry sep">/</span><a class="pathentry" title="View MANIFEST.MF" href="/trac/kieler/browser/trunk/plugins/de.cau.cs.kieler.example.oaw.gen/META-INF/MANIFEST.MF">MANIFEST.MF</a>
+    <br style="clear: both" />
+  </h1>
+      <div id="jumprev">
+        <form action="" method="get">
+          <div>
+            <label for="rev">
+              View revision:</label>
+            <input type="text" id="rev" name="rev" size="6" />
+          </div>
+        </form>
+      </div>
+      <div id="jumploc">
+        <form action="" method="get">
+          <div class="buttons">
+            <label for="preselected">Visit:</label>
+            <select id="preselected" name="preselected">
+              <option selected="selected"></option>
+              <optgroup label="branches">
+                <option value="/trac/kieler/browser/trunk">trunk</option><option value="/trac/kieler/browser/branches/branchingTest">branches/branchingTest</option>
+              </optgroup><optgroup label="tags">
+                <option value="/trac/kieler/browser/tags/klodd-0.1.0?rev=1018">tags/klodd-0.1.0</option><option value="/trac/kieler/browser/tags/klodd-0.2.0?rev=1067">tags/klodd-0.2.0</option>
+              </optgroup>
+            </select>
+            <input type="submit" value="Go!" title="Jump to the chosen preselected path" />
+          </div>
+        </form>
+      </div>
+      <table id="info" summary="Revision info">
+        <tr>
+          <th scope="col">
+            Revision <a href="/trac/kieler/changeset/1222">1222</a>, <span title="359 bytes">359 bytes</span>
+            (checked in by cmot, <a class="timeline" href="/trac/kieler/timeline?from=2009-06-25T18%3A22%3A21Z%2B0200&amp;precision=second" title="2009-06-25T18:22:21Z+0200 in Timeline">8 days</a> ago)
+          </th>
+        </tr>
+        <tr>
+          <td class="message searchable">
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <ul class="props">
+              <li>
+                  Property <strong>svn:mime-type</strong> set to
+                    <em><code>text/plain</code></em>
+              </li>
+            </ul>
+          </td>
+        </tr>
+      </table>
+      <div id="preview" class="searchable">
+    <table class="code"><thead><tr><th class="lineno" title="Line numbers">Line</th><th class="content"> </th></tr></thead><tbody><tr><th id="L1"><a href="#L1">1</a></th><td>Manifest-Version: 1.0</td></tr><tr><th id="L2"><a href="#L2">2</a></th><td>Bundle-ManifestVersion: 2</td></tr><tr><th id="L3"><a href="#L3">3</a></th><td>Bundle-Name: Oaw Plug-in</td></tr><tr><th id="L4"><a href="#L4">4</a></th><td>Bundle-SymbolicName: de.cau.cs.kieler.example.oaw.gen;singleton:=true</td></tr><tr><th id="L5"><a href="#L5">5</a></th><td>Bundle-Version: 0.1.0</td></tr><tr><th id="L6"><a href="#L6">6</a></th><td>Require-Bundle: org.eclipse.ui,</td></tr><tr><th id="L7"><a href="#L7">7</a></th><td> org.openarchitectureware.dependencies;bundle-version="4.3.1",</td></tr><tr><th id="L8"><a href="#L8">8</a></th><td> de.cau.cs.kieler.example.oaw;bundle-version="1.0.0"</td></tr><tr><th id="L9"><a href="#L9">9</a></th><td>Bundle-RequiredExecutionEnvironment: J2SE-1.5</td></tr></tbody></table>
+      </div>
+      <div id="help">
+        <strong>Note:</strong> See <a href="/trac/kieler/wiki/TracBrowser">TracBrowser</a>
+        for help on using the browser.
+      </div>
+      <div id="anydiff">
+        <form action="/trac/kieler/diff" method="get">
+          <div class="buttons">
+            <input type="hidden" name="new_path" value="/trunk/plugins/de.cau.cs.kieler.example.oaw.gen/META-INF/MANIFEST.MF" />
+            <input type="hidden" name="old_path" value="/trunk/plugins/de.cau.cs.kieler.example.oaw.gen/META-INF/MANIFEST.MF" />
+            <input type="hidden" name="new_rev" value="1222" />
+            <input type="hidden" name="old_rev" value="1222" />
+            <input type="submit" value="View changes..." title="Select paths and revs for Diff" />
+          </div>
+        </form>
+      </div>
+    </div>
+    <div id="altlinks">
+      <h3>Download in other formats:</h3>
+      <ul>
+        <li class="last first">
+          <a rel="nofollow" href="/trac/kieler/export/1304/trunk/plugins/de.cau.cs.kieler.example.oaw.gen/META-INF/MANIFEST.MF">Original Format</a>
+        </li>
+      </ul>
+    </div>
+    </div>
+    <div id="footer" lang="en" xml:lang="en"><hr />
+      <a id="tracpowered" href="http://trac.edgewall.org/"><img src="/trac/kieler/chrome/common/trac_logo_mini.png" height="30" width="107" alt="Trac Powered" /></a>
+      <p class="left">
+        Powered by <a href="/trac/kieler/about"><strong>Trac 0.11.1</strong></a><br />
+        By <a href="http://www.edgewall.org/">Edgewall Software</a>.
+      </p>
+      <p class="right">Christian-Albrechts University of Kiel <br/> <a href="http://www.informatik.uni-kiel.de/rtsys/">Realtime Systems/Embedded Systems Group</a></p>
+    </div>
+  </body>
+</html>
