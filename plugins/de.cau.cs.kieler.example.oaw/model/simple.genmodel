@@ -9,11 +9,9 @@
     <genClasses ecoreClass="simple.ecore#//SimpleModel">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference simple.ecore#//SimpleModel/items"/>
     </genClasses>
-    <genClasses ecoreClass="simple.ecore#//Key"/>
-    <genClasses ecoreClass="simple.ecore#//Value"/>
     <genClasses ecoreClass="simple.ecore#//Data">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference simple.ecore#//Data/value"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference simple.ecore#//Data/key"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simple.ecore#//Data/key"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simple.ecore#//Data/value"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

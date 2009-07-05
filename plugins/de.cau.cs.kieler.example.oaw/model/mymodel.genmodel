@@ -11,20 +11,22 @@
       <genEnumLiterals ecoreEnumLiteral="mymodel.ecore#//myConstValue/E"/>
       <genEnumLiterals ecoreEnumLiteral="mymodel.ecore#//myConstValue/NULL"/>
     </genEnums>
-    <genClasses ecoreClass="mymodel.ecore#//myString">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mymodel.ecore#//myString/Text"/>
+    <genClasses ecoreClass="mymodel.ecore#//MyString">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mymodel.ecore#//MyString/text"/>
     </genClasses>
-    <genClasses ecoreClass="mymodel.ecore#//myInt">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mymodel.ecore#//myInt/Value"/>
+    <genClasses ecoreClass="mymodel.ecore#//MyInt">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mymodel.ecore#//MyInt/value"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="mymodel.ecore#//myData">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mymodel.ecore#//myData/Name"/>
+    <genClasses image="false" ecoreClass="mymodel.ecore#//MyData"/>
+    <genClasses ecoreClass="mymodel.ecore#//MyConst">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mymodel.ecore#//MyConst/value"/>
     </genClasses>
-    <genClasses ecoreClass="mymodel.ecore#//myConst">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mymodel.ecore#//myConst/Value"/>
+    <genClasses ecoreClass="mymodel.ecore#//MyList">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mymodel.ecore#//MyList/items"/>
     </genClasses>
-    <genClasses ecoreClass="mymodel.ecore#//myList">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mymodel.ecore#//myList/Elements"/>
+    <genClasses ecoreClass="mymodel.ecore#//MyDataModel">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference mymodel.ecore#//MyDataModel/items"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute mymodel.ecore#//MyDataModel/name"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>
