@@ -65,13 +65,8 @@ public class SampleHandler extends AbstractHandler {
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		IWorkbenchWindow window = HandlerUtil.getActiveWorkbenchWindowChecked(event);
 	    
-        // We need the DiagramEditor:
-        IEditorPart ep = HandlerUtil.getActiveEditor(event);
-        
         ISelection selection = window.getWorkbench().getActiveWorkbenchWindow().getSelectionService().getSelection();
-        
         String inputModel = extractSelection(selection).getFullPath().toString();
-        
         
         System.out.println(inputModel);
         
@@ -89,15 +84,19 @@ public class SampleHandler extends AbstractHandler {
 
         //Outlet
         Outlet outlet = new Outlet();
-        outlet.setPath("c:\\");
+        //outlet.setPath("\\src-gen");
+        outlet.setPath("/example/");
+        outlet.setOverwrite(true);
         
         //Generator
         Generator generator = new Generator();
+        //generator.setGenPath("\\src-gen");
         generator.addMetaModel(metaModel);
         generator.addOutlet(outlet);
         
         generator.setExpand("model::M2Ttemplate::main FOR model");
-        
+
+        //workflow
         WorkflowContext wfx = new WorkflowContextDefaultImpl();
         Issues issues = new org.eclipse.emf.mwe.core.issues.IssuesImpl();
         NullProgressMonitor monitor = new NullProgressMonitor();
@@ -107,7 +106,6 @@ public class SampleHandler extends AbstractHandler {
         workflow.invoke(wfx, monitor, issues);
         
         System.out.print(generator.getLogMessage());
-        
         System.out.print(issues.getInfos());
         System.out.print(issues.getIssues());
         System.out.print(issues.getWarnings());
