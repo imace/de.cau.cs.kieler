@@ -84,8 +84,8 @@ public class SampleHandler extends AbstractHandler {
 
         //Outlet
         Outlet outlet = new Outlet();
-        //outlet.setPath("\\src-gen");
-        outlet.setPath("/example/");
+        //outlet.setPath("c:/src-gen");
+        outlet.setPath("/folder/");
         outlet.setOverwrite(true);
         
         //Generator
@@ -106,10 +106,14 @@ public class SampleHandler extends AbstractHandler {
         workflow.invoke(wfx, monitor, issues);
         
         System.out.print(generator.getLogMessage());
-        System.out.print(issues.getInfos());
-        System.out.print(issues.getIssues());
-        System.out.print(issues.getWarnings());
-        System.out.print(issues.getErrors().toString());
+        for (int c = 0; c < issues.getInfos().length; c++)
+        	System.out.print(issues.getInfos()[c].getMessage());
+        for (int c = 0; c < issues.getIssues().length; c++)
+        	System.out.print(issues.getIssues()[c].getMessage());
+        for (int c = 0; c < issues.getWarnings().length; c++)
+        	System.out.print(issues.getWarnings()[c].getMessage());
+        for (int c = 0; c < issues.getErrors().length; c++)
+        	System.out.print(issues.getErrors()[c].getMessage());
         
         //EMF writer
         //Writer emfWriter = new Writer();
