@@ -86,6 +86,10 @@
    <extension
          point="de.cau.cs.kieler.kiml.layout.layoutInfo">
       <diagramType
+            id="de.cau.cs.kieler.layout.info.types.nolayout"
+            name="No Layout">
+      </diagramType>
+      <diagramType
             id="de.cau.cs.kieler.layout.info.types.general"
             name="General">
       </diagramType>

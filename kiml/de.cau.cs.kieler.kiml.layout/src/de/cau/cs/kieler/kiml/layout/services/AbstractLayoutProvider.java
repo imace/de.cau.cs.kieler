@@ -31,7 +31,6 @@ import de.cau.cs.kieler.kiml.layout.klayoutdata.KOption;
  * singleton.
  * 
  * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
- * @see NullLayoutProvider
  */
 public abstract class AbstractLayoutProvider {
 

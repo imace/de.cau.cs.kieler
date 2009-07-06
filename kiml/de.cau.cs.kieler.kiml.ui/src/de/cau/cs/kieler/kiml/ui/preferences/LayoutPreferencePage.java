@@ -35,6 +35,7 @@ import org.eclipse.ui.IWorkbenchPreferencePage;
 import de.cau.cs.kieler.kiml.layout.services.LayoutProviderData;
 import de.cau.cs.kieler.kiml.layout.services.LayoutServices;
 import de.cau.cs.kieler.kiml.ui.KimlUiPlugin;
+import de.cau.cs.kieler.kiml.ui.Messages;
 import de.cau.cs.kieler.kiml.ui.layout.LayoutServiceBuilder;
 
 
@@ -60,7 +61,7 @@ public class LayoutPreferencePage extends PreferencePage
 	 */
 	public LayoutPreferencePage() {
 		super();
-		setDescription("Preferences for the KIELER Infrastructure for Meta Layout.");
+		setDescription(Messages.getString("kiml.ui.0")); //$NON-NLS-1$
 	}
 	
 	/**
@@ -72,7 +73,7 @@ public class LayoutPreferencePage extends PreferencePage
 	 * @return a preference name for the supported priority value
 	 */
 	public static String getPreference(String layoutProvider, String diagramType) {
-	    return layoutProvider + "-" + diagramType;
+	    return layoutProvider + "-" + diagramType; //$NON-NLS-1$
 	}
 
     /* (non-Javadoc)
@@ -80,7 +81,7 @@ public class LayoutPreferencePage extends PreferencePage
      */
     protected Control createContents(Composite parent) {
         Group prioritesGroup = new Group(parent, SWT.NONE);
-        prioritesGroup.setText("Priorities of Layouters");
+        prioritesGroup.setText(Messages.getString("kiml.ui.2")); //$NON-NLS-1$
         
         Collection<LayoutProviderData> layoutProviderData = LayoutServices
                 .INSTANCE.getLayoutProviderData();
@@ -106,11 +107,11 @@ public class LayoutPreferencePage extends PreferencePage
         
         // construct the priorities table
         Label tableHeaderLabel = new Label(prioritesGroup, SWT.WRAP);
-        tableHeaderLabel.setText("Configure which diagram types are supported by each layouter. The Layouter with highest priority for a diagram type is highlighted with a blue circle. No priority value means the diagram type is not supported by that layouter.");
+        tableHeaderLabel.setText(Messages.getString("kiml.ui.3")); //$NON-NLS-1$
         Table prioritiesTable = new Table(prioritesGroup, SWT.BORDER);
         TableColumn[] columns = new TableColumn[diagramTypes.length + 1];
         columns[0] =  new TableColumn(prioritiesTable, SWT.NONE);
-        columns[0].setText("Layouter");
+        columns[0].setText(Messages.getString("kiml.ui.4")); //$NON-NLS-1$
         for (int j = 0; j < diagramTypes.length; j++) {
             columns[j+1] = new TableColumn(prioritiesTable, SWT.NONE);
             String diagramTypeName = LayoutServices.INSTANCE.getDiagramTypeName(diagramTypes[j]);

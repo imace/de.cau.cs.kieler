@@ -2,31 +2,17 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %Bundle-Name.0
 Bundle-SymbolicName: de.cau.cs.kieler.kiml.ui;singleton:=true
-Bundle-Version: 1.0.0
+Bundle-Version: 0.1.0
 Bundle-Activator: de.cau.cs.kieler.kiml.ui.KimlUiPlugin
 Bundle-Vendor: %Bundle-Vendor.0
 Bundle-Localization: plugin
-Export-Package: de.cau.cs.kieler.kiml.ui,
- de.cau.cs.kieler.kiml.ui.layout,
- de.cau.cs.kieler.kiml.ui.preferences,
- de.cau.cs.kieler.kiml.ui.properties.tabbed.sections,
- de.cau.cs.kieler.kiml.ui.provider
-Require-Bundle: org.eclipse.ui,
- org.eclipse.core.runtime,
- org.eclipse.gmf.runtime.common.ui.services,
- org.eclipse.gmf.runtime.common.ui.action.ide,
- org.eclipse.gmf.runtime.diagram.ui.providers,
- org.eclipse.gmf.runtime.diagram.ui.actions,
+Export-Package: de.cau.cs.kieler.kiml.ui.layout
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.ui,
  org.eclipse.gef,
  org.eclipse.gmf.runtime.diagram.ui,
- org.eclipse.emf.edit.ui,
- org.eclipse.core.resources,
- org.eclipse.gmf.runtime.diagram.ui.resources.editor,
- org.eclipse.gmf.runtime.diagram.ui.resources.editor.ide,
  de.cau.cs.kieler.core,
  de.cau.cs.kieler.core.ui,
- de.cau.cs.kieler.kiml.layout,
- org.eclipse.gmf.runtime.diagram.ui.properties,
- org.junit
+ de.cau.cs.kieler.kiml.layout
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy

@@ -634,32 +634,38 @@ public class LayerElement {
 			
 			if (forward) {
 				for (LayerConnection connection : incoming) {
-					List<Integer> portList = connectionRankMap.get(connection.getTargetPort());
-					if (connection.getSourcePort() != null) {
-						// the source is a node or a port
-						portList.add(Integer.valueOf(connection.getSourceElement()
-							.getPortRank(connection.getSourcePort(), forward)
-							+ connection.getSourceElement().rank));
-					}
-					else {
-						// the source is an edge
-						portList.add(Integer.valueOf(connection.getSourceElement().rank));
-					}
+				    KPort targetPort = connection.getTargetPort();
+				    if (targetPort != null) {
+    					List<Integer> portList = connectionRankMap.get(targetPort);
+    					if (connection.getSourcePort() != null) {
+    						// the source is a node or a port
+    						portList.add(Integer.valueOf(connection.getSourceElement()
+    							.getPortRank(connection.getSourcePort(), forward)
+    							+ connection.getSourceElement().rank));
+    					}
+    					else {
+    						// the source is an edge
+    						portList.add(Integer.valueOf(connection.getSourceElement().rank));
+    					}
+				    }
 				}
 			}
 			else {
 				for (LayerConnection connection : outgoing) {
-					List<Integer> portList = connectionRankMap.get(connection.getSourcePort());
-					if (connection.getTargetPort() != null) {
-						// the target is a node or a port
-						portList.add(Integer.valueOf(connection.getTargetElement()
-							.getPortRank(connection.getTargetPort(), forward)
-							+ connection.getTargetElement().rank));
-					}
-					else {
-						// the target is an edge
-						portList.add(Integer.valueOf(connection.getTargetElement().rank));
-					}
+				    KPort sourcePort = connection.getSourcePort();
+				    if (sourcePort != null) {
+    					List<Integer> portList = connectionRankMap.get(sourcePort);
+    					if (connection.getTargetPort() != null) {
+    						// the target is a node or a port
+    						portList.add(Integer.valueOf(connection.getTargetElement()
+    							.getPortRank(connection.getTargetPort(), forward)
+    							+ connection.getTargetElement().rank));
+    					}
+    					else {
+    						// the target is an edge
+    						portList.add(Integer.valueOf(connection.getTargetElement().rank));
+    					}
+				    }
 				}
 			}
 			

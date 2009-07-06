@@ -37,7 +37,8 @@ public class LayoutServices {
 
     /** identifier of the 'general' diagram type, which applies to all diagrams */
     public static final String DIAGRAM_TYPE_GENERAL = "de.cau.cs.kieler.layout.info.types.general";
-
+    /** identifier of the 'nolayout' diagram type, for which no automatic layout must be applied */
+    public static final String DIAGRAM_TYPE_NOLAYOUT = "de.cau.cs.kieler.layout.info.types.nolayout";
     
 	/** the singleton instance */
 	public static LayoutServices INSTANCE = null;
@@ -237,7 +238,7 @@ public class LayoutServices {
 	 * @param name user friendly name of the diagram type
 	 */
 	public void addDiagramType(String id, String name) {
-	    if (id != null && name != null)
+	    if (id != null && name != null && !DIAGRAM_TYPE_NOLAYOUT.equals(id))
 	        diagramTypeMap.put(id, name);
 	}
 

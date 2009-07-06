@@ -20,18 +20,6 @@
    </extension>
 
    <extension
-         point="org.eclipse.ui.views">
-      <view
-            allowMultiple="false"
-            category="de.cau.cs.kieler.views.category"
-            class="de.cau.cs.kieler.kiml.ui.views.LayoutView"
-            icon="icons/kieler-arrange.png"
-            id="de.cau.cs.kieler.kiml.ui.views.layout"
-            name="%view.name.0"
-            restorable="true">
-      </view>
-   </extension>
-   <extension
          point="org.eclipse.ui.commands">
       <command
             categoryId="de.cau.cs.kieler.commands.category"
@@ -145,32 +133,6 @@ point="org.eclipse.ui.menus">
             sequence="M1+K L">
       </key>
    </extension>
- <extension
-       point="org.eclipse.ui.viewActions">
-    <viewContribution
-          id="de.cau.cs.kieler.kiml.ui.views.layout.action"
-          targetID="de.cau.cs.kieler.kiml.ui.views.layout">
-       <action
-             class="de.cau.cs.kieler.kiml.ui.handlers.DeepLayoutActionDelegate"
-             icon="icons/kieler-arrange.png"
-             id="de.cau.cs.kieler.kiml.ui.layoutview.deepapply"
-             label="Apply All"
-             style="push"
-             toolbarPath="layout"
-             tooltip="Applies options to all graphical elements and triggers layout.">
-       </action>
-       <action
-             class="de.cau.cs.kieler.kiml.ui.handlers.DeepLayoutActionDelegate"
-             icon="icons/obj16/expand_collapse.gif"
-             id="de.cau.cs.kieler.kiml.ui.layoutview.expand"
-             label="Expand/Collapse"
-             state="false"
-             style="toggle"
-             toolbarPath="layout"
-             tooltip="Expand/Collapse the list of layouters">
-       </action>
-    </viewContribution>
- </extension>
  <extension
        point="org.eclipse.gmf.runtime.diagram.ui.editpolicyProviders">
     <editpolicyProvider
