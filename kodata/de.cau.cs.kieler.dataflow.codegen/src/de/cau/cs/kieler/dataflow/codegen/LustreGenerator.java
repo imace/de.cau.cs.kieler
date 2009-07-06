@@ -22,32 +22,39 @@ import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.IHandler;
+import org.eclipse.mwe.emf.Reader;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.ui.part.FileEditorInput;
+import org.openarchitectureware.type.emf.EmfMetaModel;
+import org.openarchitectureware.workflow.Workflow;
+import org.openarchitectureware.workflow.WorkflowContext;
+import org.openarchitectureware.workflow.WorkflowContextDefaultImpl;
 import org.openarchitectureware.workflow.WorkflowRunner;
+import org.openarchitectureware.workflow.issues.Issues;
+import org.openarchitectureware.workflow.issues.IssuesImpl;
 import org.openarchitectureware.workflow.monitor.NullProgressMonitor;
-
+import org.openarchitectureware.xpand2.Generator;
+import org.openarchitectureware.xpand2.output.Outlet;
 
 public class LustreGenerator extends AbstractHandler implements IHandler {
 
     @Override
     public Object execute(ExecutionEvent event) throws ExecutionException {
         IEditorPart ed = HandlerUtil.getActiveEditor(event);
-       /* if(ed.isDirty()){
-            ed.doSave(new NullProgressMonitor());
+        /* if(ed.isDirty()){
+        ed.doSave(new NullProgressMonitor());
         }*/
 
-        FileEditorInput uri = (FileEditorInput)ed.getEditorInput();
+        FileEditorInput uri = (FileEditorInput) ed.getEditorInput();
         String model = "file:" + uri.getURI().getRawPath();
-        if(model.endsWith("_diagram")){
-            model=model.substring(0, model.length()-8);
+        if (model.endsWith("_diagram")) {
+            model = model.substring(0, model.length() - 8);
         }
-        Map<String,String> properties = new HashMap<String,String>();
+        Map<String, String> properties = new HashMap<String, String>();
         Map<String, Object> slotContents = new HashMap<String, Object>();
 
-
-        System.out.println(Activator.getDefault().getStateLocation());
+        /*System.out.println(Activator.getDefault().getStateLocation());
         properties.put("model", model);
         properties.put("src-gen", ".") ;
 
@@ -56,18 +63,53 @@ public class LustreGenerator extends AbstractHandler implements IHandler {
 
         String generator = "src/generator.oaw";
         Log logger = LogFactoryImpl.getLog(runner.getClass());
-        logger.fatal("Model=" + model);
-        boolean success = runner.run(generator,
-                new NullProgressMonitor(),    
-                properties, 
-                slotContents);  
+        logger.fatal("Model=" + model);*/
+        // Workflow
+        Workflow workflow = new Workflow();
 
-        if(success){
+        // EMF reader
+        Reader emfReader = new Reader();
+        emfReader.setUri(model);
+        emfReader.setModelSlot("model");
+
+        // Meta model
+        EmfMetaModel metaModel = new EmfMetaModel(
+                dataflow.DataflowPackage.eINSTANCE);
+
+        // Outlet
+        Outlet outlet = new Outlet();
+        outlet.setPath(".");
+
+        // Generator
+        Generator generator = new Generator();
+        generator.addMetaModel(metaModel);
+        generator.addOutlet(outlet);
+
+        generator.setExpand("template::Template::main FOR model");
+
+        WorkflowContext wfx = new WorkflowContextDefaultImpl();
+        Issues issues = new IssuesImpl();
+        NullProgressMonitor monitor = new NullProgressMonitor();
+
+        workflow.addComponent(emfReader);
+        workflow.addComponent(generator);
+        workflow.invoke(wfx, monitor, issues);
+
+        System.out.print(generator.getLogMessage());
+
+        // System.out.print(issues. .getInfos());
+        // System.out.print(issues.getIssues());
+        if (issues.getWarnings().length > 0) {
+            System.out.print(issues.getWarnings());
+        }
+        if (issues.hasErrors()) {
+            System.out.print(issues.getErrors().toString());
+        }
+        if (!issues.hasErrors()) {
             System.out.println("Code generation complete");
-        }else{
+        } else {
             System.out.println("Code generation failed");
         }
-
 
         return null;
     }
