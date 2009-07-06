@@ -15,7 +15,7 @@ import org.eclipse.ui.statushandlers.StatusManager;
 import de.cau.cs.kieler.core.KielerException;
 import de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider;
 import de.cau.cs.kieler.kiml.ui.KimlUiPlugin;
-import de.cau.cs.kieler.kiml.ui.layout.DiagramLayouter;
+import de.cau.cs.kieler.kiml.ui.layout.DiagramLayoutManager;
 import de.cau.cs.kieler.kiml.ui.layout.GmfLayoutHints;
 import de.cau.cs.kieler.kiml.ui.views.LayoutView;
 
@@ -87,7 +87,7 @@ public class DeepLayoutActionDelegate implements IViewActionDelegate {
                             dep, layouter.getType(), layouter.getName());
 
                 // perform layout
-                DiagramLayouter.layout(editor, true, true, 1);
+                DiagramLayoutManager.layout(editor, true, true, 1);
             } else {
                 throw new KielerException(
                         "No GMF diagram editor is open. Make sure the diagram editor is open and made with GMF.",

@@ -15,6 +15,7 @@ package de.cau.cs.kieler.kiml.ui.layout;
 
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.Map;
 
@@ -25,6 +26,8 @@ import org.eclipse.draw2d.ScrollPane;
 import org.eclipse.draw2d.geometry.Insets;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.gef.EditPart;
+import org.eclipse.gef.commands.Command;
+import org.eclipse.gef.commands.CommandStack;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.AbstractBorderItemEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.CompartmentEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ConnectionEditPart;
@@ -33,7 +36,10 @@ import org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.LabelEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramCommandStack;
+import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditor;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
+import org.eclipse.ui.IEditorPart;
 
 import de.cau.cs.kieler.core.kgraph.KEdge;
 import de.cau.cs.kieler.core.kgraph.KLabel;
@@ -51,28 +57,131 @@ import de.cau.cs.kieler.kiml.layout.services.LayoutServices;
 import de.cau.cs.kieler.kiml.layout.util.KimlLayoutUtil;
 
 /**
- * A generic implementation of the {@link GenericLayoutGraphBuilder}.
+ * A generic implementation of the {@link GmfDiagramLayoutManager}.
  * 
- * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
- * 
+ * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>,
+ *     msp
  */
-public class GenericLayoutGraphBuilder extends
-		AbstractLayoutGraphBuilder {
+public class GmfDiagramLayoutManager extends DiagramLayoutManager {
+
+    /* the mappings of KLayoutGraph LAYOUT elements to EditParts */
+    private Map<KNode, GraphicalEditPart> node2EditPartMap = new LinkedHashMap<KNode, GraphicalEditPart>();
+    private Map<KEdge, ConnectionEditPart> edge2EditPartMap = new LinkedHashMap<KEdge, ConnectionEditPart>();
+    private Map<KPort, ShapeNodeEditPart> port2EditPartMap = new LinkedHashMap<KPort, ShapeNodeEditPart>();
+    private Map<KLabel, LabelEditPart> edgeLabel2EditPartMap = new LinkedHashMap<KLabel, LabelEditPart>();
 
     /** map of edit parts to nodes in the layout graph */
-	private Map<GraphicalEditPart, KNode> graphicalEditPart2LayoutNode = new HashMap<GraphicalEditPart, KNode>();
-	private Map<GraphicalEditPart, KPort> editPart2PortMap = new HashMap<GraphicalEditPart, KPort>();
+    private Map<GraphicalEditPart, KNode> editPart2NodeMap = new HashMap<GraphicalEditPart, KNode>();
+    private Map<GraphicalEditPart, KPort> editPart2PortMap = new HashMap<GraphicalEditPart, KPort>();
     private LinkedList<ConnectionEditPart> connections = new LinkedList<ConnectionEditPart>();
+    
+    private DiagramEditor diagramEditorPart;
+    private DiagramEditPart diagramEditPart;
+    
+    /*
+     * (non-Javadoc)
+     * @see de.cau.cs.kieler.kiml.ui.layout.DiagramLayoutManager#supports(org.eclipse.ui.IEditorPart)
+     */
+    protected boolean supports(IEditorPart editorPart) {
+        return editorPart instanceof DiagramEditor;
+    }
 
-	/*
-	 * (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * @see de.cau.cs.kieler.kiml.ui.layout.DiagramLayoutManager#supports(org.eclipse.gef.EditPart)
+     */
+    protected boolean supports(EditPart editPart) {
+        return editPart instanceof IGraphicalEditPart;
+    }
+    
+    /*
+     * (non-Javadoc)
+     * @see de.cau.cs.kieler.kiml.ui.layout.DiagramLayoutManager#buildLayoutGraph(org.eclipse.ui.IEditorPart, org.eclipse.gef.EditPart)
+     */
+    protected KNode buildLayoutGraph(IEditorPart editorPart, EditPart editPart) {
+        node2EditPartMap.clear();
+        edge2EditPartMap.clear();
+        port2EditPartMap.clear();
+        edgeLabel2EditPartMap.clear();
+        editPart2NodeMap.clear();
+        editPart2PortMap.clear();
+        connections.clear();
+        
+        // choose the layout root edit part
+        GraphicalEditPart layoutRootPart = null;
+        if (editPart instanceof ShapeNodeEditPart || editPart instanceof DiagramEditPart)
+            layoutRootPart = (GraphicalEditPart) editPart;
+        else {
+            if (editPart instanceof IGraphicalEditPart)
+                layoutRootPart = ((IGraphicalEditPart)editPart).getTopGraphicEditPart();
+            if (!(layoutRootPart instanceof ShapeNodeEditPart)
+                    && editorPart instanceof DiagramEditor) {
+                DiagramEditor diagramEditor = (DiagramEditor) editorPart;
+                EditPart contentEditPart = diagramEditor.getDiagramGraphicalViewer().getContents();
+                if (contentEditPart instanceof GraphicalEditPart)
+                    layoutRootPart = (GraphicalEditPart) contentEditPart;
+                else
+                    layoutRootPart = null;
+            }
+        }
+        if (layoutRootPart == null)
+            throw new UnsupportedOperationException("Not supported by this layout manager: Editor "
+                    + editorPart + ", Edit part " + editPart);
+        
+        // find the diagram edit part
+        EditPart ep = layoutRootPart;
+        while (ep != null && !(ep instanceof DiagramEditPart)){
+            ep = ep.getParent();
+        }
+        diagramEditPart = (DiagramEditPart)ep;
+        
+        return doBuildLayoutGraph(layoutRootPart);
+    }
+    
+    /*
+     * (non-Javadoc)
+     * @see de.cau.cs.kieler.kiml.ui.layout.DiagramLayoutManager#applyLayout()
+     */
+    protected void applyLayout() {
+        // create a new GEF Request to change the layout
+        // the request will be filled with the new layout specification
+        // piece by piece in the following
+        ApplyLayoutRequest applyLayoutRequest = new ApplyLayoutRequest();
+        for (KNode knode : node2EditPartMap.keySet())
+            applyLayoutRequest.addElement(knode, node2EditPartMap.get(knode));
+        for (KEdge kedge : edge2EditPartMap.keySet())
+            applyLayoutRequest.addElement(kedge, edge2EditPartMap.get(kedge));
+        for (KPort kport : port2EditPartMap.keySet())
+            applyLayoutRequest.addElement(kport, port2EditPartMap.get(kport));
+        for (KLabel klabel : edgeLabel2EditPartMap.keySet())
+            applyLayoutRequest.addElement(klabel, edgeLabel2EditPartMap.get(klabel));
+        
+        // create a new GEF Command from the Request we just set up
+        // the command is received from a custom GmfLayoutEditPolicy that is
+        // registered with the DiagramEditPart. So we get the command from
+        // the diagram. This way we only have exactly one Request/Command pair which
+        // should result in massive performance gains.
+        Command applyLayoutCommand = diagramEditPart.getCommand(applyLayoutRequest);
+        
+        /* gets the diagram command stack */
+        DiagramCommandStack commandStack = null;
+        if (diagramEditorPart != null) {
+            Object adapter = diagramEditorPart.getAdapter(CommandStack.class);
+            if (adapter instanceof DiagramCommandStack)
+                commandStack = (DiagramCommandStack) adapter;
+        }
+        if (commandStack == null)
+            commandStack = new DiagramCommandStack(null);
+        commandStack.execute(applyLayoutCommand);
+    }
+
+	/**
 	 * 
-	 * @see
-	 * de.cau.cs.kieler.kiml.ui.layout.AbstractLayoutGraphBuilder
-	 * #doBuildLayoutGraph()
+	 * @param layoutRootPart
+	 * @return
 	 */
-	@Override
-	protected void doBuildLayoutGraph() {
+	private KNode doBuildLayoutGraph(GraphicalEditPart layoutRootPart) {
+        KNode layoutGraph = KimlLayoutUtil.createInitializedNode();
 		if (layoutRootPart instanceof ShapeNodeEditPart) {
 			ShapeNodeEditPart rootEditPart = (ShapeNodeEditPart) layoutRootPart;
 			KShapeLayout shapeLayout = KimlLayoutUtil.getShapeLayout(layoutGraph);
@@ -85,8 +194,8 @@ public class GenericLayoutGraphBuilder extends
 			shapeLayout.setWidth(rootBounds.width);
 
 			// map the root EditPart to the top KNode
-			graphicalEditPart2LayoutNode.put(rootEditPart, layoutGraph);
-			layoutNode2EditPart.put(layoutGraph, rootEditPart);
+			editPart2NodeMap.put(rootEditPart, layoutGraph);
+			node2EditPartMap.put(layoutGraph, rootEditPart);
 
 			// wander recursively through the diagram
 			buildLayoutGraphRecursively(rootEditPart, layoutGraph, 0.0f, 0.0f);
@@ -101,16 +210,20 @@ public class GenericLayoutGraphBuilder extends
 		    shapeLayout.setHeight(layoutRootPart.getFigure().getBounds().height);
 			layoutGraph.getLabel().setText(((DiagramEditPart)layoutRootPart)
 			        .getDiagramView().getName());
-			graphicalEditPart2LayoutNode.put(layoutRootPart, layoutGraph);
-			layoutNode2EditPart.put(layoutGraph, layoutRootPart);
+			editPart2NodeMap.put(layoutRootPart, layoutGraph);
+			node2EditPartMap.put(layoutGraph, layoutRootPart);
 			buildLayoutGraphRecursively(layoutRootPart, layoutGraph, 0.0f, 0.0f);
 		}
+		else throw new UnsupportedOperationException("Not supported by this layout manager: "
+		        + layoutRootPart);
 		
 	    /*
          * Finally process all the connections, as Emma has build all the needed
          * KNodes which act as source and target.
          */
         processConnections();
+        
+        return layoutGraph;
 	}
 
 	/**
@@ -131,7 +244,7 @@ public class GenericLayoutGraphBuilder extends
 		    if (obj instanceof AbstractBorderItemEditPart) {
 		        AbstractBorderItemEditPart borderItem = (AbstractBorderItemEditPart)obj;
                 KPort port = KimlLayoutUtil.createInitializedPort();
-                layoutPort2EditPart.put(port, borderItem);
+                port2EditPartMap.put(port, borderItem);
                 editPart2PortMap.put(borderItem, port);
                 port.setNode(currentLayoutNode);
                 // set the port's layout, relative to the node position
@@ -234,9 +347,9 @@ public class GenericLayoutGraphBuilder extends
                 currentLayoutNode.getChildren().add(childLayoutNode);
 
                 /* keep track of mapping between elements */
-                graphicalEditPart2LayoutNode.put(childNodeEditPart,
+                editPart2NodeMap.put(childNodeEditPart,
                         childLayoutNode);
-                layoutNode2EditPart.put(childLayoutNode, childNodeEditPart);
+                node2EditPartMap.put(childLayoutNode, childNodeEditPart);
 
                 hasChildNodes = true;
                 /* and process the child as new current */
@@ -255,7 +368,7 @@ public class GenericLayoutGraphBuilder extends
 					text = ((Label) labelFigure).getText();
 				}
 				if (text != null) {
-				    KNode parent = graphicalEditPart2LayoutNode.get(
+				    KNode parent = editPart2NodeMap.get(
                             graphicalEditPart.getParent());
 				    KShapeLayout parentLayout = KimlLayoutUtil.getShapeLayout(parent);
                     KLabel label = parent.getLabel();
@@ -274,7 +387,7 @@ public class GenericLayoutGraphBuilder extends
         // TODO make this customizable
         KShapeLayout nodeLayout = KimlLayoutUtil.getShapeLayout(currentLayoutNode);
 		if (hasChildNodes) {
-		    GraphicalEditPart parentEditPart = layoutNode2EditPart.get(currentLayoutNode);
+		    GraphicalEditPart parentEditPart = node2EditPartMap.get(currentLayoutNode);
     		if (parentEditPart instanceof IGraphicalEditPart) {
     	        String layoutHint = GmfLayoutHints.getStringValue(
                         (IGraphicalEditPart)parentEditPart,
@@ -331,7 +444,7 @@ public class GenericLayoutGraphBuilder extends
 			    sourceNode = sourcePort.getNode();
 			}
 			else
-			    sourceNode = graphicalEditPart2LayoutNode.get(sourceObj);
+			    sourceNode = editPart2NodeMap.get(sourceObj);
 			
 			EditPart targetObj = connection.getTarget();
 			if (targetObj instanceof AbstractBorderItemEditPart) {
@@ -342,13 +455,13 @@ public class GenericLayoutGraphBuilder extends
 			    targetNode = targetPort.getNode();
 			}
 			else
-			    targetNode = graphicalEditPart2LayoutNode.get(targetObj);
+			    targetNode = editPart2NodeMap.get(targetObj);
 			
             if (sourceNode == null || targetNode == null) continue;
 			
 			edge.setSource(sourceNode);
 			edge.setTarget(targetNode);
-			layoutEdge2EditPart.put(edge, connection);
+			edge2EditPartMap.put(edge, connection);
 			
 		     KEdgeLayout edgeLayout = KimlLayoutUtil.getEdgeLayout(edge);
 		     KPoint sourcePoint = edgeLayout.getSourcePoint();
@@ -414,7 +527,7 @@ public class GenericLayoutGraphBuilder extends
 							labelLayout.setHeight(labelBounds.height);
 							hLabel.setText(headLabel);
 							edge.getLabels().add(hLabel);
-							edgeLabel2EditPart.put(hLabel, labelEditPart);
+							edgeLabel2EditPartMap.put(hLabel, labelEditPart);
 						}
 					}
 
@@ -438,7 +551,7 @@ public class GenericLayoutGraphBuilder extends
                             labelLayout.setHeight(labelBounds.height);
                             mLabel.setText(midLabel);
 							edge.getLabels().add(mLabel);
-							edgeLabel2EditPart.put(mLabel, labelEditPart);
+							edgeLabel2EditPartMap.put(mLabel, labelEditPart);
 						}
 					}
 
@@ -462,30 +575,12 @@ public class GenericLayoutGraphBuilder extends
                             labelLayout.setHeight(labelBounds.height);
                             tLabel.setText(tailLabel);
 							edge.getLabels().add(tLabel);
-							edgeLabel2EditPart.put(tLabel, labelEditPart);
+							edgeLabel2EditPartMap.put(tLabel, labelEditPart);
 						}
 					}
 				}
 			}
 		}
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * de.cau.cs.kieler.kiml.ui.layout.AbstractLayoutGraphBuilder
-	 * #resetCustomMaps()
-	 */
-	@Override
-	protected void resetCustomMaps() {
-		graphicalEditPart2LayoutNode.clear();
-	}
-
-    /* (non-Javadoc)
-     * @see de.cau.cs.kieler.kiml.ui.layout.AbstractLayoutGraphBuilder#updatePreferences()
-     */
-    protected void updatePreferences() {
-    }
 
 }

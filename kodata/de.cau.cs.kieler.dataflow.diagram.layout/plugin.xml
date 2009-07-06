@@ -54,26 +54,6 @@
       </initializer>
    </extension>
    <extension
-         point="org.eclipse.gmf.runtime.diagram.ui.editpolicyProviders">
-      <editpolicyProvider
-            class="dataflow.diagram.layout.services.DataflowLayoutEditPolicyProvider">
-         <Priority
-               name="Lowest">
-         </Priority>
-         <object
-               class="dataflow.diagram.edit.parts.InputPortEditPart(de.cau.cs.kieler.dataflow.diagram)"
-               id="dataflow.diagram.layout.inputPortObject">
-         </object>
-         <object
-               class="dataflow.diagram.edit.parts.OutputPortEditPart(de.cau.cs.kieler.dataflow.diagram)"
-               id="dataflow.diagram.layout.outputPortObject">
-         </object>
-         <context
-               editparts="dataflow.diagram.layout.inputPortObject,dataflow.diagram.layout.outputPortObject">
-         </context>
-      </editpolicyProvider>
-   </extension>
-   <extension
          point="org.eclipse.emf.edit.itemProviderAdapterFactories">
       <factory
             class="dataflow.diagram.layout.kimllabelprovider.KimlDataflowItemProviderAdapterFactory"

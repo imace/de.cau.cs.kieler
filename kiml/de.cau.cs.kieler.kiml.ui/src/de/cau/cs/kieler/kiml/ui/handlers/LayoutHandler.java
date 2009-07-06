@@ -17,12 +17,13 @@ import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.IHandler;
+import org.eclipse.gef.EditPart;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.handlers.HandlerUtil;
 
-import de.cau.cs.kieler.kiml.ui.layout.DiagramLayouter;
+import de.cau.cs.kieler.kiml.ui.layout.DiagramLayoutManager;
 
 /**
  * The handler which is responsible to perform layout.
@@ -53,17 +54,16 @@ public class LayoutHandler extends AbstractHandler implements IHandler {
 		            selection = HandlerUtil.getCurrentSelection(event);
 		}
 		
-		if (selection == null || (selection instanceof IStructuredSelection
-		        && ((IStructuredSelection) selection).size() == 0)) {
-			// start layout process with editor part
-	        IEditorPart editorPart = HandlerUtil.getActiveEditor(event);
-			DiagramLayouter.layout(editorPart, HandlerUtil
-			        .getActiveEditorId(event), true);
-		} else {
-			// start layout process with selection
-			DiagramLayouter.layout(selection, HandlerUtil
-			        .getActiveEditorId(event), true);
+        IEditorPart editorPart = HandlerUtil.getActiveEditor(event);
+		if (selection instanceof IStructuredSelection && !selection.isEmpty()) {
+		    IStructuredSelection structuredSelection = (IStructuredSelection) selection;
+		    EditPart selectedElement = null;
+		    if (structuredSelection.getFirstElement() instanceof EditPart)
+		        selectedElement = (EditPart)structuredSelection.getFirstElement();
+    		DiagramLayoutManager.layout(editorPart, selectedElement, true);
 		}
+		else
+		    DiagramLayoutManager.layout(editorPart, null, true);
 
 		return null;
 	}

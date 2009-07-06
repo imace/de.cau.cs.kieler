@@ -107,6 +107,9 @@ point="org.eclipse.ui.menus">
                      definitionId="de.cau.cs.kieler.expression.diagramSelected">
                </reference>
             </not>
+            <count
+                  value="1">
+            </count>
          </and>
       </visibleWhen>
       <parameter
@@ -171,7 +174,7 @@ point="org.eclipse.ui.menus">
  <extension
        point="org.eclipse.gmf.runtime.diagram.ui.editpolicyProviders">
     <editpolicyProvider
-          class="de.cau.cs.kieler.kiml.ui.layout.ApplyLayoutEditPolicyProvider">
+          class="de.cau.cs.kieler.kiml.ui.layout.LayoutEditPolicyProvider">
        <Priority
              name="Lowest">
        </Priority>

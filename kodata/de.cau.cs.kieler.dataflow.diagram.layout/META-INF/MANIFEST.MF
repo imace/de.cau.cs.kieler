@@ -14,11 +14,4 @@ Require-Bundle: org.eclipse.core.runtime;bundle-version="3.4.0",
  de.cau.cs.kieler.kiml.ui
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: dataflow.diagram.layout.DataflowDiagramLayoutPlugin
-Export-Package: dataflow.diagram.layout.services;
-  uses:="org.eclipse.gmf.runtime.diagram.ui.services.editpolicy,
-   org.eclipse.jface.viewers,
-   de.cau.cs.kieler.kiml.layout.services,
-   de.cau.cs.kieler.kiml.layout.KimlLayoutGraph,
-   org.eclipse.gmf.runtime.common.core.service,
-   org.eclipse.gef"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5

@@ -88,7 +88,7 @@ public class LayoutServiceBuilder {
 	 * Build the layout services.
 	 */
 	public static void buildLayoutServices() {
-		// create instance of layout service holder class
+		// create instance of the layout service holder class
 		LayoutServices.INSTANCE = new LayoutServices();
 		// build layout services for all extension points
 		loadLayoutProviderExtensions();
@@ -96,6 +96,8 @@ public class LayoutServiceBuilder {
 		loadLayoutInfoExtensions();
 		// load preferences for KIML
 		LoadPreferences();
+		// register an instance of the GMF diagram layout manager
+		DiagramLayoutManager.registerManager(new GmfDiagramLayoutManager());
 	}
 	
 	/**

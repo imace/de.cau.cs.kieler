@@ -45,7 +45,7 @@ import org.eclipse.gmf.runtime.notation.datatype.RelativeBendpoint;
  * @see org.eclipse.gmf.runtime.diagram.ui.internal.commands.SetConnectionBendpointsCommand
  * @see org.eclipse.gmf.runtime.diagram.core.commands.SetConnectionAnchorsCommand
  */
-public class ApplyLayoutCommand extends AbstractTransactionalCommand {
+public class GmfLayoutCommand extends AbstractTransactionalCommand {
 
     /** layout data for node shapes */
     private class ShapeLayoutData {
@@ -77,7 +77,7 @@ public class ApplyLayoutCommand extends AbstractTransactionalCommand {
      * @param label the command label
      * @param adapter an adapter to the {@code View} of the base diagram
      */
-    public ApplyLayoutCommand(TransactionalEditingDomain domain, String label,
+    public GmfLayoutCommand(TransactionalEditingDomain domain, String label,
             IAdaptable adapter) {
         super(domain, label, null);
         this.diagramViewAdapter = adapter;
