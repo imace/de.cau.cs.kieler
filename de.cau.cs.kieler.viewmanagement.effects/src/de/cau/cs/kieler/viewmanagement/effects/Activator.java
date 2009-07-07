@@ -1,4 +1,4 @@
-package de.cau.kieler.viewmanagement.effects;
+package de.cau.cs.kieler.viewmanagement.effects;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;

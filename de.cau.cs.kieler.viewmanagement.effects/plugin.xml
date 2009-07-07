@@ -4,8 +4,12 @@
    <extension
          point="de.cau.cs.kieler.viewmanagement.effects">
       <effect
-            class="DefaultTestEffect"
+            class="de.cau.cs.kieler.viewmanagement.effects.DefaultTestEffect"
             name="de.cau.cs.kieler.viewmanagement.effects.defaulttest">
+      </effect>
+      <effect
+            class="de.cau.cs.kieler.viewmanagement.effects.HighlightEffect"
+            name="de.cau.cs.kieler.viewmanagement.effects.highlight">
       </effect>
    </extension>
 
