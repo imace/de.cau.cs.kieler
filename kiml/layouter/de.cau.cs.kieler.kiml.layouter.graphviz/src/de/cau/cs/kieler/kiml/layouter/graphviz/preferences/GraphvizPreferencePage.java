@@ -41,6 +41,13 @@ public class GraphvizPreferencePage extends
 	public static final String ID = "de.cau.cs.kieler.kiml.layouter.graphviz.preferences.GraphvizPreferencePage";
 	
 	/**
+	 * Creates a graphniz preference page.
+	 */
+	public GraphvizPreferencePage() {
+	    super(GRID);
+	}
+	
+	/**
 	 * Creates the field editors for the Graphviz preferences.
 	 */
 	public void createFieldEditors() {

@@ -23,6 +23,13 @@ public class ZestLayouterPreferencePage extends FieldEditorPreferencePage
 	/** scale factor to use for the size of each parent node */
 	public static final String PREF_SCALE_BASE = "zest.scale_base";
 
+	/**
+	 * Creates a Zest preference page.
+	 */
+	public ZestLayouterPreferencePage() {
+	    super(GRID);
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * @see de.cau.cs.kieler.kiml.ui.AbstractMultiLayouterPreferencePage#createFieldEditors()
