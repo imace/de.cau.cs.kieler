@@ -3,11 +3,11 @@
  */
 package de.cau.cs.kieler.viewmanagement;
 
-import java.util.Map;
 
+import org.eclipse.core.commands.AbstractHandler;
+import org.eclipse.core.commands.ExecutionEvent;
+import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.IHandler;
-import org.eclipse.ui.commands.AbstractHandler;
-import org.eclipse.ui.commands.ExecutionException;
 
 /**
  * @author nbe
@@ -22,15 +22,13 @@ public class ActivateVMHandler extends AbstractHandler implements IHandler {
 		// TODO Auto-generated constructor stub
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.ui.commands.IHandler#execute(java.util.Map)
-	 */
-	@Override
-	public Object execute(Map parameterValuesByName) throws ExecutionException {
-		// TODO Auto-generated method stub
-		
-		System.out.println("Now on");
-		return null;
-	}
+    /* (non-Javadoc)
+     * @see org.eclipse.core.commands.IHandler#execute(org.eclipse.core.commands.ExecutionEvent)
+     */
+    public Object execute(ExecutionEvent event) throws ExecutionException {
+        // TODO Auto-generated method stub
+        System.out.println("Now on");
+        return null;
+    }
 
 }
