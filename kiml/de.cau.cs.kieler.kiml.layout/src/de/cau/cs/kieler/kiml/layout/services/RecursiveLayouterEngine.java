@@ -30,23 +30,25 @@ public class RecursiveLayouterEngine {
 	/** the last used layout provider */
 	private AbstractLayoutProvider lastLayoutProvider;
 	
-	/*
-	 * (non-Javadoc)
-	 * @see de.cau.cs.kieler.kiml.layout.services.AbstractLayouterEngine#layout(de.cau.cs.kieler.core.kgraph.KNode, de.cau.cs.kieler.core.alg.IKielerProgressMonitor)
+	/**
+	 * Performs recursive layout on the given layout graph.
+	 * 
+	 * @param layoutGraph instance of a layout graph
+	 * @param progressMonitor monitor to which progress of the layout algorithms is reported
+	 * @throws KielerException if a layout algorithm fails
 	 */
 	public void layout(KNode layoutGraph,
 			IKielerProgressMonitor progressMonitor) throws KielerException {
 		lastLayoutProvider = null;
 		int nodeCount = countNodes(layoutGraph);
 		progressMonitor.begin("Recursive graph layout", nodeCount);
-		if (layoutGraph != null)
-			layoutRecursively(layoutGraph, progressMonitor);
+		layoutRecursively(layoutGraph, progressMonitor);
 		progressMonitor.done();
 	}
 
 	/**
 	 * Recursive function to enable layout of hierarchy. The leafs are laid
-	 * out first to use the size information gained in the level above.
+	 * out first to use their layout information in the levels above.
 	 * 
 	 * @param layoutNode the node with children to be laid out
 	 * @param progressMonitor monitor used to keep track of progress
@@ -82,9 +84,12 @@ public class RecursiveLayouterEngine {
 		return count;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see de.cau.cs.kieler.kiml.layout.services.AbstractLayouterEngine#getLastLayoutProvider()
+	/**
+	 * Returns the last layout provider that was used by the layouter engine.
+	 * This can be used to check the source of error if an exception is caught
+	 * during layout.
+	 * 
+	 * @return the last used layout provider, or {@code null} if there is none
 	 */
 	public AbstractLayoutProvider getLastLayoutProvider() {
 		return lastLayoutProvider;

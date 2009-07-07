@@ -26,9 +26,9 @@ import org.eclipse.ui.handlers.HandlerUtil;
 import de.cau.cs.kieler.kiml.ui.layout.DiagramLayoutManager;
 
 /**
- * The handler which is responsible to perform layout.
+ * The handler which is responsible to perform layout in a graphical diagram.
  * 
- * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
+ * @author <a href="mailto:msp@informatik.uni-kiel.de">Miro Sp&ouml;nemann</a>
  */
 public class LayoutHandler extends AbstractHandler implements IHandler {
 
@@ -56,6 +56,7 @@ public class LayoutHandler extends AbstractHandler implements IHandler {
 		
         IEditorPart editorPart = HandlerUtil.getActiveEditor(event);
 		if (selection instanceof IStructuredSelection && !selection.isEmpty()) {
+		    // perform layout with the given selection
 		    IStructuredSelection structuredSelection = (IStructuredSelection) selection;
 		    EditPart selectedElement = null;
 		    if (structuredSelection.getFirstElement() instanceof EditPart)
@@ -63,6 +64,7 @@ public class LayoutHandler extends AbstractHandler implements IHandler {
     		DiagramLayoutManager.layout(editorPart, selectedElement, true);
 		}
 		else
+		    // perform layout on the whole diagram
 		    DiagramLayoutManager.layout(editorPart, null, true);
 
 		return null;

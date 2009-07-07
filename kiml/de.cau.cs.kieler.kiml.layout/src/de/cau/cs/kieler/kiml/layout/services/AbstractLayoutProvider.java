@@ -25,10 +25,10 @@ import de.cau.cs.kieler.kiml.layout.klayoutdata.KOption;
  * A layout provider executes a layout algorithm to layout the child elements of
  * a node.
  * <p>
- * When used in Eclipse, concrete layout providers must register through the
- * {@code kimlLayoutProvider} extension point. All layout providers
- * published to Eclipse this way are collected with the {@link LayoutServices}
- * singleton.
+ * When used in Eclipse, layout providers must register through the
+ * {@code layoutProviders} extension point. All layout providers
+ * published to Eclipse this way are collected in the {@link LayoutServices}
+ * singleton, provided the UI plugin is loaded.
  * 
  * @author <a href="mailto:ars@informatik.uni-kiel.de">Arne Schipper</a>
  */
@@ -43,8 +43,7 @@ public abstract class AbstractLayoutProvider {
 	 * 
 	 * @param layoutNode the parent node which should be laid out
 	 * @param progressMonitor progress monitor used to keep track of progress
-	 * @throws KielerException if the method fails to perform layout for
-	 *     some reason, which should be specified in the exception
+	 * @throws KielerException if the method fails to perform layout
 	 */
 	public abstract void doLayout(KNode layoutNode,
 			IKielerProgressMonitor progressMonitor) throws KielerException;

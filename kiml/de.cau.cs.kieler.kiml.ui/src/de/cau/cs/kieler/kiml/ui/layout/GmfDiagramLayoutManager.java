@@ -236,7 +236,7 @@ public class GmfDiagramLayoutManager extends DiagramLayoutManager {
 	 */
 	private void buildLayoutGraphRecursively(GraphicalEditPart currentEditPart,
 			KNode currentLayoutNode, float insetTop, float insetLeft) {
-	    boolean hasChildNodes = false, hasChildCompartments = false;
+	    boolean hasChildNodes = false, hasChildCompartments = false, hasPorts = false;
 		/* iterate through the children of the element */
 		for (Object obj : currentEditPart.getChildren()) {
 
@@ -255,6 +255,7 @@ public class GmfDiagramLayoutManager extends DiagramLayoutManager {
                 portLayout.setYpos(portBounds.y - nodeLayout.getYpos());
                 portLayout.setWidth(portBounds.width);
                 portLayout.setHeight(portBounds.height);
+                hasPorts = true;
                 
                 // store all the connections to process them later
                 for (Object connectionObj : borderItem.getTargetConnections()) {
@@ -403,7 +404,6 @@ public class GmfDiagramLayoutManager extends DiagramLayoutManager {
     	            LayoutOptions.setDiagramType(nodeLayout, diagramType);
     		}
             LayoutOptions.setLayoutDirection(nodeLayout, LayoutDirection.HORIZONTAL);
-            LayoutOptions.setPortConstraints(nodeLayout, PortConstraints.FREE_PORTS);
             KInsets insets = LayoutOptions.getInsets(nodeLayout);
             insets.setTop(insetTop);
             insets.setLeft(insetLeft);
@@ -411,8 +411,12 @@ public class GmfDiagramLayoutManager extends DiagramLayoutManager {
             insets.setBottom(insetLeft);
 		}
 		else if (!hasChildCompartments){
-		    LayoutOptions.setPortConstraints(nodeLayout, PortConstraints.FIXED_POS);
+		    if (hasPorts)
+		        LayoutOptions.setPortConstraints(nodeLayout, PortConstraints.FIXED_POS);
 		    LayoutOptions.setFixedSize(nodeLayout, true);
+		}
+		else if (hasPorts) {
+            LayoutOptions.setPortConstraints(nodeLayout, PortConstraints.FREE_PORTS);
 		}
 	}
 

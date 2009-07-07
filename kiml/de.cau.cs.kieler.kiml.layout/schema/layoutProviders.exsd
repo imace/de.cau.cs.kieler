@@ -6,9 +6,9 @@
          <meta.schema plugin="de.cau.cs.kieler.kiml.layout" id="layoutProviders" name="Layout Providers"/>
       </appInfo>
       <documentation>
-         The Layout Providers extension point allows plug-ins to add new layout providers to be used within the KIELER Infrastructure for Meta Layout. Layout providers are algorithms that automatically compute layout information for an instance of the KGraph data structure.
+         The Layout Providers extension point allows plug-ins to add new layout providers to be used within the KIELER Infrastructure for Meta Layout. Layout providers are algorithms that automatically compute layout information for an instance of the &lt;code&gt;KGraph&lt;/code&gt; data structure.
 &lt;p&gt;
-Layout providers can be grouped using collections, and they can be given a type to describe the basic approach of the implemented algorithm.
+Layout providers can be grouped using categories, and they can be given a type to describe the basic approach of the implemented algorithm. Furthermore, a layout provider can declare which diagrams it supports and which layout options it understands. All this data is gathered to decide at runtime which layout provider should be used to layout a specific diagram, and which options to set for that provider.
       </documentation>
    </annotation>
 
@@ -28,21 +28,21 @@ Layout providers can be grouped using collections, and they can be given a type 
          <attribute name="point" type="string" use="required">
             <annotation>
                <documentation>
-                  
+                  de.cau.cs.kieler.kiml.layout.layoutProviders
                </documentation>
             </annotation>
          </attribute>
          <attribute name="id" type="string">
             <annotation>
                <documentation>
-                  
+                  An optional identifier of the extension instance.
                </documentation>
             </annotation>
          </attribute>
          <attribute name="name" type="string">
             <annotation>
                <documentation>
-                  
+                  An optional name of the extension instance.
                </documentation>
                <appInfo>
                   <meta.attribute translatable="true"/>
@@ -53,6 +53,11 @@ Layout providers can be grouped using collections, and they can be given a type 
    </element>
 
    <element name="layoutProvider">
+      <annotation>
+         <documentation>
+            A layout provider, that is an implementation of a layout algorithm that is able to process the &lt;code&gt;KGraph&lt;/code&gt; data structure. A library that provides multiple different layout algorithms should create one &lt;code&gt;layoutProvider&lt;/code&gt; element for each algorithm.
+         </documentation>
+      </annotation>
       <complexType>
          <sequence minOccurs="0" maxOccurs="unbounded">
             <element ref="knownOption"/>
@@ -61,14 +66,14 @@ Layout providers can be grouped using collections, and they can be given a type 
          <attribute name="id" type="string" use="required">
             <annotation>
                <documentation>
-                  
+                  A unique identifier for this layout provider. It is recommended that the identifier be prefixed by the plug-in name, to guarantee uniqueness.
                </documentation>
             </annotation>
          </attribute>
          <attribute name="name" type="string" use="required">
             <annotation>
                <documentation>
-                  
+                  A user friendly name of this layout provider, to be displayed in the UI.
                </documentation>
                <appInfo>
                   <meta.attribute translatable="true"/>
@@ -78,7 +83,7 @@ Layout providers can be grouped using collections, and they can be given a type 
          <attribute name="class" type="string" use="required">
             <annotation>
                <documentation>
-                  Implementing class of the layout provider, must extend &lt;samp&gt;de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider&lt;/samp&gt;
+                  Implementing class of the layout provider, must extend &lt;code&gt;de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider&lt;/code&gt;.
                </documentation>
                <appInfo>
                   <meta.attribute kind="java" basedOn="de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider:"/>
@@ -88,7 +93,7 @@ Layout providers can be grouped using collections, and they can be given a type 
          <attribute name="type" type="string">
             <annotation>
                <documentation>
-                  
+                  Identifier of a layout type, which can be defined using the &lt;code&gt;layoutType&lt;/code&gt; element. Layout types describe the general kind of layout algorithm that is implemented by that provider.
                </documentation>
                <appInfo>
                   <meta.attribute kind="identifier" basedOn="de.cau.cs.kieler.kiml.layout.layoutProviders/layoutType/@id"/>
@@ -98,7 +103,7 @@ Layout providers can be grouped using collections, and they can be given a type 
          <attribute name="category" type="string">
             <annotation>
                <documentation>
-                  
+                  Identifier of a category, which can be defined using the &lt;code&gt;category&lt;/code&gt; element. Categories are used to group layout providers.
                </documentation>
                <appInfo>
                   <meta.attribute kind="identifier" basedOn="de.cau.cs.kieler.kiml.layout.layoutProviders/category/@id"/>
@@ -109,18 +114,25 @@ Layout providers can be grouped using collections, and they can be given a type 
    </element>
 
    <element name="layoutType">
+      <annotation>
+         <documentation>
+            A layout type, that is a general kind of layout algorithm. Layout types are used to give the user an idea of the expected results of a layout algorithm. For example, an algorithm that follows the &lt;i&gt;layered&lt;/i&gt; approach is expected to produce layouts in which most edges are oriented in a common direction.
+&lt;p&gt;
+Apart from a set of default layout types offered by KIML, new layout providers are free to define their own layout types.
+         </documentation>
+      </annotation>
       <complexType>
          <attribute name="id" type="string" use="required">
             <annotation>
                <documentation>
-                  
+                  A unique identifier for this layout type. It is recommended that the identifier be prefixed by the plug-in name, to guarantee uniqueness.
                </documentation>
             </annotation>
          </attribute>
          <attribute name="name" type="string" use="required">
             <annotation>
                <documentation>
-                  
+                  A user friendly name of the layout type, to be displayed in the UI.
                </documentation>
                <appInfo>
                   <meta.attribute translatable="true"/>
@@ -131,18 +143,23 @@ Layout providers can be grouped using collections, and they can be given a type 
    </element>
 
    <element name="category">
+      <annotation>
+         <documentation>
+            A layout provider category, used to group layout providers. For example, all layout algorithms of a specific library could be grouped with a common category.
+         </documentation>
+      </annotation>
       <complexType>
          <attribute name="id" type="string" use="required">
             <annotation>
                <documentation>
-                  
+                  A unique identifier for this category. It is recommended that the identifier be prefixed by the plug-in name, to guarantee uniqueness.
                </documentation>
             </annotation>
          </attribute>
          <attribute name="name" type="string" use="required">
             <annotation>
                <documentation>
-                  
+                  A user friendly name of this category, to be displayed in the UI.
                </documentation>
                <appInfo>
                   <meta.attribute translatable="true"/>
@@ -153,25 +170,30 @@ Layout providers can be grouped using collections, and they can be given a type 
    </element>
 
    <element name="layoutOption">
+      <annotation>
+         <documentation>
+            An option that can be passed to a layout provider. Layout options can be used to modify the behavior of layout algorithms. Apart from a set of default layout options offered by KIML, layout providers are free to define their own layout options.
+         </documentation>
+      </annotation>
       <complexType>
          <attribute name="id" type="string" use="required">
             <annotation>
                <documentation>
-                  
+                  A unique identifier for this layout option. It is recommended that the identifier be prefixed by the plug-in name, to guarantee uniqueness.
                </documentation>
             </annotation>
          </attribute>
          <attribute name="type" type="string" use="required">
             <annotation>
                <documentation>
-                  
+                  Defines the data type of this option; must be either &lt;code&gt;boolean&lt;/code&gt;, &lt;code&gt;string&lt;/code&gt;, &lt;code&gt;int&lt;/code&gt;, &lt;code&gt;float&lt;/code&gt;, or &lt;code&gt;object&lt;/code&gt;.
                </documentation>
             </annotation>
          </attribute>
          <attribute name="name" type="string" use="required">
             <annotation>
                <documentation>
-                  
+                  A user friendly name of this layout option, to be displayed in the UI.
                </documentation>
                <appInfo>
                   <meta.attribute translatable="true"/>
@@ -181,7 +203,7 @@ Layout providers can be grouped using collections, and they can be given a type 
          <attribute name="description" type="string">
             <annotation>
                <documentation>
-                  
+                  A user friendly description of this layout option, to be displayed in the UI. The description should contain all information needed to understand what this option does.
                </documentation>
                <appInfo>
                   <meta.attribute translatable="true"/>
@@ -192,11 +214,16 @@ Layout providers can be grouped using collections, and they can be given a type 
    </element>
 
    <element name="knownOption">
+      <annotation>
+         <documentation>
+            Declares that the layout provider knows the option referenced by an identifier. Only the known options of a layout provider can be modified by the user.
+         </documentation>
+      </annotation>
       <complexType>
          <attribute name="option" type="string" use="required">
             <annotation>
                <documentation>
-                  
+                  Identifier of a layout option, which can be defined using the &lt;code&gt;layoutOption&lt;/code&gt; element.
                </documentation>
                <appInfo>
                   <meta.attribute kind="identifier" basedOn="de.cau.cs.kieler.kiml.layout.layoutProviders/layoutOption/@id"/>
@@ -207,11 +234,16 @@ Layout providers can be grouped using collections, and they can be given a type 
    </element>
 
    <element name="supportedDiagram">
+      <annotation>
+         <documentation>
+            Declares that the layout provider supports the diagram referenced by an identifier. If a layout provider supports a specific diagram type and it has the highest priority for that type, it is always chosen as the default layout provider for diagrams of that type. These priorities can be changed in the UI at runtime.
+         </documentation>
+      </annotation>
       <complexType>
          <attribute name="type" type="string" use="required">
             <annotation>
                <documentation>
-                  
+                  Identifier of a diagram type, which can be defined using the &lt;code&gt;diagramType&lt;/code&gt; element of the &lt;code&gt;layoutInfo&lt;/code&gt; extension point. Diagram types are used to classify diagrams with respect to their layout.
                </documentation>
                <appInfo>
                   <meta.attribute kind="identifier" basedOn="de.cau.cs.kieler.kiml.layout.layoutInfo/diagramType/@id"/>
@@ -221,7 +253,7 @@ Layout providers can be grouped using collections, and they can be given a type 
          <attribute name="priority" type="string">
             <annotation>
                <documentation>
-                  
+                  An integer value that defines the relative priority of the layout provider for this diagram type. The layout provider with highest priority is chosen as the default provider for that type.
                </documentation>
             </annotation>
          </attribute>
@@ -242,8 +274,35 @@ Layout providers can be grouped using collections, and they can be given a type 
          <meta.section type="examples"/>
       </appInfo>
       <documentation>
-         The following is an example for the Layout Providers extension point:
-TODO
+         The following is an example for a layout provider extension:
+&lt;pre&gt;
+   &lt;extension
+         point=&quot;de.cau.cs.kieler.kiml.layout.layoutProviders&quot;&gt;
+      &lt;layoutProvider
+            class=&quot;de.cau.cs.kieler.klodd.hierarchical.HierarchicalDataflowLayoutProvider&quot;
+            category=&quot;de.cau.cs.kieler.layouter.category&quot;
+            id=&quot;de.cau.cs.kieler.klodd.hierarchical&quot;
+            name=&quot;KLoDD Hierarchical&quot;
+            type=&quot;de.cau.cs.kieler.layout.types.layered&quot;&gt;
+         &lt;supportedDiagram
+               priority=&quot;10&quot;
+               type=&quot;de.cau.cs.kieler.layout.info.types.dataFlow&quot;&gt;
+         &lt;/supportedDiagram&gt;
+         &lt;knownOption
+               option=&quot;de.cau.cs.kieler.layout.options.fixedSize&quot;&gt;
+         &lt;/knownOption&gt;
+         &lt;knownOption
+               option=&quot;de.cau.cs.kieler.layout.options.layoutDirection&quot;&gt;
+         &lt;/knownOption&gt;
+         &lt;knownOption
+               option=&quot;de.cau.cs.kieler.layout.options.minSpacing&quot;&gt;
+         &lt;/knownOption&gt;
+         &lt;knownOption
+               option=&quot;de.cau.cs.kieler.layout.options.portConstraints&quot;&gt;
+         &lt;/knownOption&gt;
+      &lt;/layoutProvider&gt;
+   &lt;/extension&gt;
+&lt;/pre&gt;
       </documentation>
    </annotation>
 
@@ -252,8 +311,9 @@ TODO
          <meta.section type="apiinfo"/>
       </appInfo>
       <documentation>
-         The value of the attribute class must represent a fully qualified name of a class that extends
-&lt;samp&gt;de.cau.cs.kieler.kiml.layout.services.AbstractLayoutProvider&lt;/samp&gt;.
+         All data that is contributed to this extension point is gathered in the singleton class &lt;code&gt;de.cau.cs.kieler.kiml.layout.services.LayoutServices&lt;/code&gt;. This is the point where registered data can be read at runtime.
+&lt;p&gt;
+&lt;b&gt;NOTE:&lt;/b&gt; The extension point is read out by the &lt;code&gt;de.cau.cs.kieler.kiml.ui&lt;/code&gt; plug-in, &lt;em&gt;not&lt;/em&gt; by &lt;code&gt;de.cau.cs.kieler.kiml.layout&lt;/code&gt;.
       </documentation>
    </annotation>
 

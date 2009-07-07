@@ -11,21 +11,32 @@
  * This code is provided under the terms of the Eclipse Public License (EPL).
  * See the file epl-v10.html for the license text.
  */
-package de.cau.cs.kieler.kiml.layout.services;
+package de.cau.cs.kieler.core.util;
 
 /**
- * TODO
+ * Object that may contain another object, inspired by the Haskell type <i>Maybe</i>.
  * 
  * @author <a href="mailto:msp@informatik.uni-kiel.de">Miro Sp&ouml;nemann</a>
  */
-public class LayoutOptionData {
+public class Maybe<T> {
 
-    public String id;
+    /** the contained object, which may be {@code null} */
+    public T object;
     
-    public String type;
+    /**
+     * Creates a maybe without an object.
+     */
+    public Maybe() {
+        this.object = null;
+    }
     
-    public String name;
-    
-    public String description;
+    /**
+     * Creates a maybe with the given object.
+     * 
+     * @param object the object to contain
+     */
+    public Maybe(T object) {
+        this.object = object;
+    }
     
 }

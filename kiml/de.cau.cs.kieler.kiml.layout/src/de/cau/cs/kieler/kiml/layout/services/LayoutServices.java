@@ -28,8 +28,8 @@ import de.cau.cs.kieler.kiml.layout.options.LayoutOptions;
 import de.cau.cs.kieler.kiml.layout.util.KimlLayoutUtil;
 
 /**
- * Main class for access to the layout services <em>layout provider</em> and
- * <em>layout listener</em>.
+ * Singleton class for access to the KIML layout services. This class is used globally
+ * to retrieve appropriate layout providers for a layout graph instance.
  * 
  * @author <a href="mailto:msp@informatik.uni-kiel.de">Miro Sp&ouml;nemann</a>
  */
@@ -136,9 +136,9 @@ public class LayoutServices {
 	}
 
 	/**
-	 * Returns a data category for all registered layout providers.
+	 * Returns a data collection for all registered layout providers.
 	 * 
-	 * @return category of registered layout providers
+	 * @return collection of registered layout providers
 	 */
     public Collection<LayoutProviderData> getLayoutProviderData() {
         return layoutProviderMap.values();
@@ -232,7 +232,10 @@ public class LayoutServices {
 	}
 	
 	/**
-	 * Registers the given diagram type.
+	 * Registers the given diagram type. Diagram types with
+	 * {@link DIAGRAM_TYPE_NOLAYOUT} as identifier are rejected, since this
+	 * is a special value used to indicate that a diagram part shall not
+	 * be layouted at all.
 	 * 
 	 * @param id identifier of the diagram type
 	 * @param name user friendly name of the diagram type

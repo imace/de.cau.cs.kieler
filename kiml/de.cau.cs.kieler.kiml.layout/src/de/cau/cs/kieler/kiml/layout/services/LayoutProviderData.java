@@ -18,13 +18,13 @@ import java.util.List;
 import java.util.ListIterator;
 
 /**
- * Data type used to store information on a layout provider.
+ * Data type used to store information for a layout provider.
  * 
  * @author <a href="mailto:msp@informatik.uni-kiel.de">Miro Sp&ouml;nemann</a>
  */
 public class LayoutProviderData {
 
-    /** the minimal allowed priority value; values less or equal to this value are treated as 'not supported' */
+    /** The minimal allowed priority value. Values less or equal to this value are treated as 'not supported'. */
     public static final int MIN_PRIORITY = Integer.MIN_VALUE >> 2;
 
     /** internal data type for storage of supported diagram information */

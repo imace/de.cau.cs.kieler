@@ -24,9 +24,9 @@ import de.cau.cs.kieler.core.kgraph.KGraphElement;
 import de.cau.cs.kieler.core.util.Pair;
 
 /**
- * Request used to apply layout.
+ * Request for automatic layout on a set of edit parts of a diagram.
  * 
- * @author haf, msp
+ * @author <a href="mailto:msp@informatik.uni-kiel.de">Miro Sp&ouml;nemann</a>
  */
 public class ApplyLayoutRequest extends Request {
 
