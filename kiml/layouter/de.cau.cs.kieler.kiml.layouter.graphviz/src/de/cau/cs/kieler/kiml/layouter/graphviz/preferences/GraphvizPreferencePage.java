@@ -14,6 +14,7 @@ import org.eclipse.jface.preference.DirectoryFieldEditor;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
 import org.eclipse.jface.preference.FileFieldEditor;
 import org.eclipse.jface.preference.IntegerFieldEditor;
+import org.eclipse.jface.preference.StringFieldEditor;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -88,7 +89,7 @@ public class GraphvizPreferencePage extends
 
 		/* executable group */
 		Group executable = new Group(this.getFieldEditorParent(), SWT.NONE);
-		debug.setText("Executable:");
+		executable.setText("Executable:");
 
 		FileFieldEditor dotExecutable = new FileFieldEditor(
 				PreferenceConstants.PREF_GRAPHVIZ_EXECUTABLE,
@@ -101,7 +102,8 @@ public class GraphvizPreferencePage extends
 		gl.marginWidth = 15;
 		gl.marginHeight = 10;
 		executable.setLayout(gl);
-				
+		
+			
 		/* now add all the stuff */
 		addField(padx);
 		addField(pady);
@@ -109,6 +111,9 @@ public class GraphvizPreferencePage extends
 		addField(enableDebug);
 		addField(debugDir);
 		addField(dotExecutable);
+		
+		//addField(neatoExec);
+		//addField(neatoGraph);
 	}
 
 	/*
