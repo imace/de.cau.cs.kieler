@@ -1,4 +1,4 @@
-package de.cau.kieler.viewmanagement.triggers;
+package de.cau.cs.kieler.viewmanagement.triggers;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;

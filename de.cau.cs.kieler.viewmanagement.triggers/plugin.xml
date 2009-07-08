@@ -3,6 +3,10 @@
 <plugin>
    <extension
          point="de.cau.cs.kieler.viewmanagement.triggers">
+      <trigger
+            class="de.cau.cs.kieler.viewmanagement.triggers.SelectionTrigger"
+            name="de.cau.cs.kieler.viewmanagement.triggers.selection">
+      </trigger>
    </extension>
 
 </plugin>

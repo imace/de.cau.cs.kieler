@@ -28,6 +28,10 @@ public class ActivateVMHandler extends AbstractHandler implements IHandler {
     public Object execute(ExecutionEvent event) throws ExecutionException {
         // TODO Auto-generated method stub
         System.out.println("Now on");
+        
+        // do something!
+        RunLogic myRunLogic = new RunLogic();
+        myRunLogic.registerListeners();
         return null;
     }
 
