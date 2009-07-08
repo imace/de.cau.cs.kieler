@@ -7,6 +7,7 @@
    <extension
          point="org.eclipse.ui.commands">
       <command
+            categoryId="de.cau.cs.kieler.commands.category"
             defaultHandler="de.cau.cs.kieler.viewmanagement.ActivateVMHandler"
             id="de.cau.cs.kieler.viewmanagement.activateVM"
             name="Activate VM">
