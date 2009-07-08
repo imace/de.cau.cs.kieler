@@ -169,7 +169,7 @@
     <children xmi:type="notation:Node" xmi:id="_DndwIGSqEd6MNsbfD08XYg" type="4012">
       <layoutConstraint xmi:type="notation:Location" xmi:id="_DndwIWSqEd6MNsbfD08XYg" x="-5" y="13"/>
     </children>
-    <styles xmi:type="notation:ConnectorStyle" xmi:id="_DndJFWSqEd6MNsbfD08XYg" lineColor="0"/>
+    <styles xmi:type="notation:ConnectorStyle" xmi:id="_DndJFWSqEd6MNsbfD08XYg" smoothness="Normal" lineColor="0"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_DndJFmSqEd6MNsbfD08XYg" fontName="Sans" fontHeight="10"/>
     <element xmi:type="ecore:EReference" href="kgraph.ecore#//KNode/outgoingEdges"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_DndJF2SqEd6MNsbfD08XYg" points="[22, 41, -170, -180]$[70, 132, -122, -89]$[142, 185, -50, -36]"/>
