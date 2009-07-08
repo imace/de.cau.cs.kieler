@@ -158,11 +158,11 @@ public abstract class DiagramLayoutManager {
 			applyLayout();
 			
 			// notify layout listeners about the performed layout
+            progressMonitor.done();
 			LayoutServices.INSTANCE.layoutPerformed(layoutGraph, progressMonitor);
 
 			// return a positive status including graph size
 			int graphSize = countNodes(layoutGraph);
-            progressMonitor.done();
 			return new Status(IStatus.OK, KimlUiPlugin.PLUGIN_ID, graphSize, null, null);
 			
 		} catch (Throwable exception) {

@@ -59,9 +59,9 @@ public class ExecutionLabelProvider extends LabelProvider {
 			String baseText = monitor.getTaskName() + ": ";
 			double time = monitor.getExecutionTime();
 			if (time >= 1.0)
-				return baseText + Double.toString(time) + " s";
+				return baseText + String.format("%1$.3f s", time);
 			else
-				return baseText + Double.toString(time * 1000) + " ms";
+				return baseText + String.format("%1$.3f ms", time * 1000);
 		}
 		else return null;
 	}
