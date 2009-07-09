@@ -2,8 +2,8 @@
 <gmfgen:GenEditorGenerator xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:gmfgen="http://www.eclipse.org/gmf/2008/GenModel" diagramFileExtension="syncchart"
-    domainFileExtension="syncchartmodel"
+    xmlns:gmfgen="http://www.eclipse.org/gmf/2008/GenModel" diagramFileExtension="syncchart_diagram"
+    domainFileExtension="syncchart"
     dynamicTemplates="true"
     templateDirectory="de.cau.cs.kieler.synccharts/gmf-templates/">
   <diagram
@@ -842,6 +842,7 @@
     </preferencePages>
   </diagram>
   <plugin
+      provider="Christian-Albrechts-University of Kiel"
       version="0.1.0">
     <requiredPlugins>de.cau.cs.kieler.synccharts.custom</requiredPlugins>
   </plugin>
