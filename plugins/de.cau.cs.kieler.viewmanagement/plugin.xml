@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension-point id="de.cau.cs.kieler.viewmanagement.effects" name="effects" schema="schema/de.cau.cs.kieler.viewmanagement.effects.exsd"/>
+   <extension-point id="de.cau.cs.kieler.viewmanagement.triggers" name="triggers" schema="schema/de.cau.cs.kieler.viewmanagement.triggers.exsd"/>
+   <extension-point id="de.cau.cs.kieler.viewmanagement.combination" name="combination" schema="schema/de.cau.cs.kieler.viewmanagement.combination.exsd"/>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            categoryId="de.cau.cs.kieler.commands.category"
+            defaultHandler="de.cau.cs.kieler.viewmanagement.ActivateVMHandler"
+            id="de.cau.cs.kieler.viewmanagement.activateVM"
+            name="Activate VM">
+         <commandParameter
+               id="de.cau.cs.kieler.viewmanagement.commandParameter1"
+               name="name"
+               optional="true">
+         </commandParameter>
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="toolbar:org.eclipse.ui.main.toolbar?after=additions">
+         <toolbar
+               id="de.cau.cs.kieler.viewmanagement.activateVMToolbar">
+            <command
+                  commandId="de.cau.cs.kieler.viewmanagement.activateVM"
+                  id="de.cau.cs.kieler.viewmanagement.activateVM"
+                  style="toggle"
+                  tooltip="Activate View Management">
+            </command>
+         </toolbar>
+      </menuContribution>
+   </extension>
+
+
+</plugin>
