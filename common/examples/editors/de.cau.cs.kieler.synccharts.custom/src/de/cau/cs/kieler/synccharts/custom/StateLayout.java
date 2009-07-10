@@ -47,11 +47,11 @@ public class StateLayout extends ConstrainedToolbarLayout {
 			EObject modelElement = ((AttributeAwareFigure) parent).getModelElement();
 			if (modelElement instanceof State) {
 				State state = (State) modelElement;
+				retrieveContents(state);
 				if (isSimple(state)) {
 					simpleLayout(parent, children, x, y ,height, width);
 				}
 				else {
-					retrieveContents(state);
 					complexLayout(parent, children, x, y ,height, width);
 				}
 			}
@@ -116,6 +116,7 @@ public class StateLayout extends ConstrainedToolbarLayout {
 							|| (getName((ShapeCompartmentFigure) child).equals("OnExitAction:") && (!containsExitActions))
 							|| (getName((ShapeCompartmentFigure) child).equals("Suspend:") && (!containsSuspensionTrigger))
 							|| (getName((ShapeCompartmentFigure) child).equals("RegionCompartment") && (!containsRegions))) {
+						newWidth = 0;
 						newHeight = 0;
 					}
 					// Make title label invisible if the compartment is not a region compartment and has only the title label as content
