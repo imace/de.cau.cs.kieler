@@ -170,10 +170,10 @@ public class AttributeAwareStateFigure extends AttributeAwareFigure {
 			
 			if (isSimple(state)) {
 				if (children.get(0) instanceof WrappingLabel) {
-					return new Dimension(((WrappingLabel) children.get(0)).getPreferredSize(hint, hint2).width, 40);
+					return new Dimension(((WrappingLabel) children.get(0)).getPreferredSize().width, 40);
 				}
 				else {
-					return new Dimension(super.getMinimumSize(hint, hint2).width, 40);
+					return new Dimension(40, 40);
 				}
 			} else {
 				
