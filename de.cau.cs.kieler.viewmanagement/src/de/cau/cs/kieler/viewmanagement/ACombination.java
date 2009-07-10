@@ -18,6 +18,12 @@ package de.cau.cs.kieler.viewmanagement;
  * @author haf
  *
  */
-public class ACombination {
+public class ACombination implements ITriggerListener{
+
+	@Override
+	public void notifyTrigger(TriggerEvent triggerEvent) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
