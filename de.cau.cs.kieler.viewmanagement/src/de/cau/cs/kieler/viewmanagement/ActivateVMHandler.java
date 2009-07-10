@@ -30,7 +30,8 @@ public class ActivateVMHandler extends AbstractHandler implements IHandler {
 
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		// TODO Auto-generated method stub
-		
+		RunLogic myRunLogic = new RunLogic();
+        myRunLogic.registerListeners();
 		//Determine state of Toggle Button
 		Object trigger = event.getTrigger();
 		boolean checked = false;
@@ -41,11 +42,12 @@ public class ActivateVMHandler extends AbstractHandler implements IHandler {
 		}
 		if (checked){
 		System.out.println("Now VM is on");
-		RunLogic myRunLogic = new RunLogic();
-        myRunLogic.registerListeners();
+		
+       
         }
 		else 
 			System.out.println("VM is off");
+		
 		return null;
 	}
 

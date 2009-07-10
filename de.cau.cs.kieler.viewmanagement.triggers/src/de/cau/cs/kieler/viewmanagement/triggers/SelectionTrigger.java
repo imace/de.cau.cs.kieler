@@ -23,14 +23,21 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PlatformUI;
 
 import de.cau.cs.kieler.viewmanagement.ATrigger;
+import de.cau.cs.kieler.viewmanagement.TriggerEvent;
+import de.cau.cs.kieler.viewmanagement.TriggerEventObject;
 import de.cau.cs.kieler.viewmanagement.combination.SelectionHighlightCombination;
 
 /**
  * @author haf
  *
  */
+
+
+
+
 public class SelectionTrigger extends ATrigger implements ISelectionListener {
 
+	TriggerEventObject selectionEvent;
     public SelectionTrigger() {
         // register this as a listener to the Eclipse selection service
         PlatformUI.getWorkbench().getActiveWorkbenchWindow().getSelectionService().addSelectionListener(this);
@@ -42,14 +49,21 @@ public class SelectionTrigger extends ATrigger implements ISelectionListener {
      * @see org.eclipse.ui.ISelectionListener#selectionChanged(org.eclipse.ui.IWorkbenchPart, org.eclipse.jface.viewers.ISelection)
      */
     public void selectionChanged(IWorkbenchPart part, ISelection selection) {
-        System.out.println("Whoohoo, something was selected: "+part + " " + selection);
+        //System.out.println("Whoohoo, something was selected: "+part + " " + selection);
         
         // do something meaningful for testing
         // FIXME: solve this through some listener pattern or someway else more generic
         if(selection instanceof IStructuredSelection){
             Object selectedObject = ((IStructuredSelection) selection).getFirstElement();
-            if( selectedObject instanceof ShapeEditPart )
-            SelectionHighlightCombination.doSomething( (ShapeEditPart) selectedObject);
+         
+		
+			if( selectedObject instanceof ShapeEditPart )
+				  
+			selectionEvent.setAffectedObject((String) selectedObject);
+            	
+			notifyTrigger(selectionEvent);   	
+            	
+            //SelectionHighlightCombination.doSomething( (ShapeEditPart) selectedObject);
         }
     }
     

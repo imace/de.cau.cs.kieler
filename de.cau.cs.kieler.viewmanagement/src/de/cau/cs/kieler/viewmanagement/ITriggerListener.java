@@ -4,7 +4,7 @@ import java.util.EventListener;
 
 public interface ITriggerListener extends EventListener{
 
-	void notifyTrigger(TriggerEvent triggerEvent);
+	void notifyTrigger(TriggerEventObject triggerEvent);
 	
 
 }

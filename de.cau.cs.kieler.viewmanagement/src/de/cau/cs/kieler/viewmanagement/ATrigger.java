@@ -19,10 +19,10 @@ public abstract class ATrigger {
     	triggerListeners.remove(ITriggerListener.class, triggerlistener);
     }
     
-    protected synchronized void notifyTrigger (TriggerEvent triggerEvent){
+    protected synchronized void notifyTrigger (TriggerEventObject selectionEvent){
     	
     	for (ITriggerListener l : triggerListeners.getListeners(ITriggerListener.class))
-    		l.notifyTrigger (triggerEvent);
+    		l.notifyTrigger (selectionEvent);
     }
     
     /**
