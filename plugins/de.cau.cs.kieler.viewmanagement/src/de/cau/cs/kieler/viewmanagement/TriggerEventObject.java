@@ -5,7 +5,7 @@ import java.util.Map;
 public class TriggerEventObject {
 	
 	private boolean triggerToggle;
-	private String affectedObject;
+	private Object affectedObject;
 	private  Map <String, String> parameters;
 
 
@@ -19,7 +19,7 @@ public void setTriggerToggle(boolean newToggle){
 	
 }
 
-public String getAffectedObject(){
+public Object getAffectedObject(){
 	return affectedObject;
 }
 
