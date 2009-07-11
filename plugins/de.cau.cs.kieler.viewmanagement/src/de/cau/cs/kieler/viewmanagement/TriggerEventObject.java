@@ -23,7 +23,7 @@ public Object getAffectedObject(){
 	return affectedObject;
 }
 
-public void setAffectedObject(String newObject){
+public void setAffectedObject(Object newObject){
 	affectedObject= newObject;
 	
 }

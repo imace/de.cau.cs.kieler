@@ -38,6 +38,7 @@ import de.cau.cs.kieler.viewmanagement.combination.SelectionHighlightCombination
 public class SelectionTrigger extends ATrigger implements ISelectionListener {
 
 	TriggerEventObject selectionEvent;
+	Object currentSelection;
     public SelectionTrigger() {
         // register this as a listener to the Eclipse selection service
         PlatformUI.getWorkbench().getActiveWorkbenchWindow().getSelectionService().addSelectionListener(this);
@@ -55,15 +56,25 @@ public class SelectionTrigger extends ATrigger implements ISelectionListener {
         // FIXME: solve this through some listener pattern or someway else more generic
         if(selection instanceof IStructuredSelection){
             Object selectedObject = ((IStructuredSelection) selection).getFirstElement();
+            
          
 		
-			if( selectedObject instanceof ShapeEditPart )
-				  
-			selectionEvent.setAffectedObject((String) selectedObject);
-            	
+			if( selectedObject instanceof ShapeEditPart ){
+			currentSelection = selectedObject;
+			selectionEvent.setTriggerToggle(false);
+			notifyTrigger(selectionEvent);
+			
+			selectionEvent.setAffectedObject(selectedObject);
+			selectionEvent.setTriggerToggle(true);
+            
 			notifyTrigger(selectionEvent);   	
             	
             //SelectionHighlightCombination.doSomething( (ShapeEditPart) selectedObject);
+        }
+			else 
+			{selectionEvent.setTriggerToggle(false);
+			notifyTrigger(selectionEvent);
+			}
         }
     }
     
