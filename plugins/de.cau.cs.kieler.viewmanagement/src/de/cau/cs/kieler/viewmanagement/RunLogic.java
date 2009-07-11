@@ -29,7 +29,7 @@ public class RunLogic {
         this.readCombinations();
         
         // print all available extensions
-        this.printExtensions();
+        //this.printExtensions();
         return;
     }
 
@@ -86,7 +86,7 @@ public class RunLogic {
         }
     }
 
-    private void printExtensions(){
+   /* private void printExtensions(){
         for (AEffect myEffect : this.effects) {
             System.out.println("Effect: "+myEffect);
         }
@@ -97,6 +97,7 @@ public class RunLogic {
             System.out.println("Combination: "+myCombo);
         }
     }
+    */
     
     
     

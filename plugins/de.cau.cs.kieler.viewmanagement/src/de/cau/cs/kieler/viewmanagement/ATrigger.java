@@ -5,16 +5,16 @@ import javax.swing.event.EventListenerList;
 public abstract class ATrigger {
 
 	
-	//Observable here
+	
     private EventListenerList triggerListener = new EventListenerList();
     
     
-    public void addTriggerListeners (ITriggerListener triggerlistener)
+    public void addTriggerListener (ITriggerListener triggerlistener)
     {
     	triggerListener.add(ITriggerListener.class, triggerlistener);
     }
     
-    public void removeTriggerListeners (ITriggerListener triggerlistener){
+    public void removeTriggerListener (ITriggerListener triggerlistener){
     	
     	triggerListener.remove(ITriggerListener.class, triggerlistener);
     }
@@ -23,6 +23,7 @@ public abstract class ATrigger {
     	
     	for (ITriggerListener l : triggerListener.getListeners(ITriggerListener.class))
     		l.notifyTrigger (selectionEvent);
+    
     }
     
     /**
