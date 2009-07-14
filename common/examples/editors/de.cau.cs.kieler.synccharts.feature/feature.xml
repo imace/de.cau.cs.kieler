@@ -159,21 +159,21 @@ This Agreement is governed by the laws of the State of New York and the intellec
    </requires>
 
    <plugin
-         id="de.cau.cs.kieler.synccharts"
+         id="de.cau.cs.kieler.synccharts.model"
          download-size="0"
          install-size="0"
-         version="0.1.0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="de.cau.cs.kieler.synccharts.edit"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
          unpack="false"/>
 
    <plugin
          id="de.cau.cs.kieler.synccharts.custom"
-         download-size="0"
-         install-size="0"
-         version="0.1.0"
-         unpack="false"/>
-
-   <plugin
-         id="de.cau.cs.kieler.synccharts.custom.contextMenu"
          download-size="0"
          install-size="0"
          version="0.1.0"
@@ -208,7 +208,7 @@ This Agreement is governed by the laws of the State of New York and the intellec
          unpack="false"/>
 
    <plugin
-         id="de.cau.cs.kieler.synccharts.edit"
+         id="de.cau.cs.kieler.synccharts.diagram.custom"
          download-size="0"
          install-size="0"
          version="0.1.0"
