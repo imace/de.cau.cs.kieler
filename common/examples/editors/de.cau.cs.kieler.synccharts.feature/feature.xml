@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="de.cau.cs.kieler.synccharts.feature"
+      id="de.cau.cs.kieler.synccharts"
       label="KIELER Synccharts Editor"
       version="0.1.0"
       provider-name="Christian-Albrechts-Universität zu Kiel">
@@ -188,20 +188,6 @@ This Agreement is governed by the laws of the State of New York and the intellec
 
    <plugin
          id="de.cau.cs.kieler.synccharts.dsl"
-         download-size="0"
-         install-size="0"
-         version="0.1.0"
-         unpack="false"/>
-
-   <plugin
-         id="de.cau.cs.kieler.synccharts.dsl.editor"
-         download-size="0"
-         install-size="0"
-         version="0.1.0"
-         unpack="false"/>
-
-   <plugin
-         id="de.cau.cs.kieler.synccharts.dsl.generator"
          download-size="0"
          install-size="0"
          version="0.1.0"
