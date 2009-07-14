@@ -1,4 +1,4 @@
-// $ANTLR 3.0 ..//de.cau.cs.kieler.synccharts.dsl/src-gen/de/cau/cs/kieler/synccharts/dsl/parser/scdsl.g 2009-05-28 15:54:01
+// $ANTLR 3.0 ..//de.cau.cs.kieler.synccharts.dsl/src-gen/de/cau/cs/kieler/synccharts/dsl/parser/scdsl.g 2009-07-14 16:49:46
 
 package de.cau.cs.kieler.synccharts.dsl.parser;
 
@@ -275,7 +275,7 @@ public class scdslParser extends Parser {
                     	      if (temp_Emission != null) {
                     	        hasContent = true;
                     	        ptm.setModelElement(temp_Emission);
-                    	        factory.add(result,"emissions",convert(temp_Emission),false);
+                    	        factory.add(result,"effects",convert(temp_Emission),false);
                     	        ptm.ruleFinished(temp_Emission);
                     	      } else {
                     	        ptm.destroyNode();
@@ -305,7 +305,7 @@ public class scdslParser extends Parser {
                     	      if (temp_Assignment != null) {
                     	        hasContent = true;
                     	        ptm.setModelElement(temp_Assignment);
-                    	        factory.add(result,"assignments",convert(temp_Assignment),false);
+                    	        factory.add(result,"effects",convert(temp_Assignment),false);
                     	        ptm.ruleFinished(temp_Assignment);
                     	      } else {
                     	        ptm.destroyNode();

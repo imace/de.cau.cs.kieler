@@ -5,7 +5,7 @@ importMetamodel "http://www.informatik.uni-kiel.de/rtsys/synccharts" as syncchar
 
 Action [synccharts::Action] :
 
-	(trigger=Expression)? ("/" (emissions+=Emission | assignments+=Assignment)*)?; 
+	(trigger=Expression)? ("/" (effects+=Emission | effects+=Assignment)*)?; 
 		
 Expression [synccharts::Expression] :
 

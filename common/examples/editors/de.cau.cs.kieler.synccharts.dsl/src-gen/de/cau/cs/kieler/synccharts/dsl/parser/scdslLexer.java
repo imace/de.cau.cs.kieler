@@ -1,4 +1,4 @@
-// $ANTLR 3.0 ..//de.cau.cs.kieler.synccharts.dsl/src-gen/de/cau/cs/kieler/synccharts/dsl/parser/scdsl.g 2009-05-28 15:54:01
+// $ANTLR 3.0 ..//de.cau.cs.kieler.synccharts.dsl/src-gen/de/cau/cs/kieler/synccharts/dsl/parser/scdsl.g 2009-07-14 16:49:46
 
 package de.cau.cs.kieler.synccharts.dsl.parser;
 

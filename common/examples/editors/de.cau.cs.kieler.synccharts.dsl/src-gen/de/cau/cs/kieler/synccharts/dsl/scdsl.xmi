@@ -10,10 +10,10 @@
       <children xsi:type="org.openarchitectureware.xtext:Group" cardinality="OPTIONAL">
         <children xsi:type="org.openarchitectureware.xtext:Keyword" value="/"/>
         <children xsi:type="org.openarchitectureware.xtext:Alternatives" cardinality="ANY">
-          <alternatives xsi:type="org.openarchitectureware.xtext:Assignment" feature="emissions" operator="ADD">
+          <alternatives xsi:type="org.openarchitectureware.xtext:Assignment" feature="effects" operator="ADD">
             <token xsi:type="org.openarchitectureware.xtext:RuleName" name="Emission"/>
           </alternatives>
-          <alternatives xsi:type="org.openarchitectureware.xtext:Assignment" feature="assignments" operator="ADD">
+          <alternatives xsi:type="org.openarchitectureware.xtext:Assignment" feature="effects" operator="ADD">
             <token xsi:type="org.openarchitectureware.xtext:RuleName" name="Assignment"/>
           </alternatives>
         </children>

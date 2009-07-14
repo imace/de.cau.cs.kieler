@@ -138,7 +138,7 @@ ruleExpression{if (temp_Expression != null) {
 ruleEmission{if (temp_Emission != null) {
   hasContent = true;
   ptm.setModelElement(temp_Emission);
-  factory.add($result,"emissions",convert(temp_Emission),false);
+  factory.add($result,"effects",convert(temp_Emission),false);
   ptm.ruleFinished(temp_Emission);
 } else {
   ptm.destroyNode();
@@ -150,7 +150,7 @@ ruleEmission{if (temp_Emission != null) {
 ruleAssignment{if (temp_Assignment != null) {
   hasContent = true;
   ptm.setModelElement(temp_Assignment);
-  factory.add($result,"assignments",convert(temp_Assignment),false);
+  factory.add($result,"effects",convert(temp_Assignment),false);
   ptm.ruleFinished(temp_Assignment);
 } else {
   ptm.destroyNode();
