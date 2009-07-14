@@ -25,5 +25,17 @@
          </checkFile>
       </metaModel>
    </extension>
+   <extension
+         id="product"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="org.eclipse.ui.ide.workbench"
+            name="Synccharts">
+         <property
+               name="appName"
+               value="Synccharts">
+         </property>
+      </product>
+   </extension>
 
 </plugin>

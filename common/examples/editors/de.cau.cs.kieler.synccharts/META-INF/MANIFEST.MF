@@ -6,9 +6,6 @@ Bundle-Version: 0.1.0
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Export-Package: de.cau.cs.kieler.synccharts,
- de.cau.cs.kieler.synccharts.impl,
- de.cau.cs.kieler.synccharts.util
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
  org.openarchitectureware.workflow;bundle-version="4.3.1",
