@@ -34,8 +34,8 @@ public class ScdslUtilities extends AbstractLanguageUtilities {
 	List<String> r = new ArrayList<String>();
 	{
 		r.add("not");
-		r.add("or");
 		r.add("<=");
+		r.add("or");
 		r.add("*");
 		r.add("+");
 		r.add("?");
