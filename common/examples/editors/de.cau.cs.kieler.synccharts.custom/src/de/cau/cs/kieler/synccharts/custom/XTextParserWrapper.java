@@ -17,6 +17,7 @@ import org.openarchitectureware.xtext.parser.parsetree.Node;
 import de.cau.cs.kieler.synccharts.Action;
 import de.cau.cs.kieler.synccharts.Assignment;
 import de.cau.cs.kieler.synccharts.ComplexExpression;
+import de.cau.cs.kieler.synccharts.Effect;
 import de.cau.cs.kieler.synccharts.Emission;
 import de.cau.cs.kieler.synccharts.Expression;
 import de.cau.cs.kieler.synccharts.Region;
@@ -230,16 +231,24 @@ public class XTextParserWrapper implements IParser {
 	private EList<Signal> getSignals(Action action) {
 		EList<Signal> signals = getSignals(action.getTrigger());
 		EList<Signal> tempSignals;
-		for (Emission e : action.getEmissions()) {
+//		for (Emission e : action.getEmissions()) {
+//			tempSignals = getSignals(e);
+//			for (Signal s : tempSignals) {
+//				if (!signals.contains(s)) {
+//					signals.add(s);
+//				}
+//			}
+//		}
+//		for (Assignment a : action.getAssignments()) {
+//			tempSignals = getSignals(a);
+//			for (Signal s : tempSignals) {
+//				if (!signals.contains(s)) {
+//					signals.add(s);
+//				}
+//			}
+//		}
+		for (Effect e : action.getEffects()) {
 			tempSignals = getSignals(e);
-			for (Signal s : tempSignals) {
-				if (!signals.contains(s)) {
-					signals.add(s);
-				}
-			}
-		}
-		for (Assignment a : action.getAssignments()) {
-			tempSignals = getSignals(a);
 			for (Signal s : tempSignals) {
 				if (!signals.contains(s)) {
 					signals.add(s);
@@ -249,6 +258,16 @@ public class XTextParserWrapper implements IParser {
 		return signals;
 	}
 	
+	private EList<Signal> getSignals(Effect e) {
+		if (e instanceof Emission) {
+			return getSignals(((Emission) e));
+		}
+		else if (e instanceof Assignment) {
+			return getSignals(((Assignment) e));
+		}
+		return null;
+	}
+
 	private EList<Signal> getSignals(Expression expression) {
 		if (expression instanceof SignalReference)
 			return getSignals((SignalReference)expression);

@@ -17,6 +17,7 @@ import org.openarchitectureware.xtext.parser.parsetree.Node;
 import de.cau.cs.kieler.synccharts.Action;
 import de.cau.cs.kieler.synccharts.Assignment;
 import de.cau.cs.kieler.synccharts.ComplexExpression;
+import de.cau.cs.kieler.synccharts.Effect;
 import de.cau.cs.kieler.synccharts.Emission;
 import de.cau.cs.kieler.synccharts.Expression;
 import de.cau.cs.kieler.synccharts.Region;
@@ -65,16 +66,18 @@ public class XTextParseCommand extends AbstractTransactionalCommand {
 				// already been defined within the parent state
 				if (newAction == null) {
 					action.setTrigger(null);
-					action.getEmissions().clear();
-					action.getAssignments().clear();
+					//action.getEmissions().clear();
+					//action.getAssignments().clear();
+					action.getEffects().clear();
 					action.setTriggersAndEffects("");
 					return CommandResult.newOKCommandResult();
 				}
 				
 				if (!checkSignals(action, newAction)) {
 					action.setTrigger(null);
-					action.getEmissions().clear();
-					action.getAssignments().clear();
+					//action.getEmissions().clear();
+					//action.getAssignments().clear();
+					action.getEffects().clear();
 					action.setTriggersAndEffects("INVALID: " + string);
 					return CommandResult.newErrorCommandResult("The action contains invalid signals!");					
 				}
@@ -83,15 +86,20 @@ public class XTextParseCommand extends AbstractTransactionalCommand {
 				// into the SSM model
 				action.setTrigger(newAction.getTrigger());
 				action.setTriggersAndEffects(string);
-				action.getEmissions().clear();
-				action.getAssignments().clear();
-				int numEmissions = newAction.getEmissions().size();
-				int numAssignments = newAction.getAssignments().size();
-				for (int i = 0; i < numEmissions; i++) {
-					action.getEmissions().add(newAction.getEmissions().get(i));
-				}
-				for (int i = 0; i < numAssignments; i++) {
-					action.getAssignments().add(newAction.getAssignments().get(i));
+				//action.getEmissions().clear();
+				//action.getAssignments().clear();
+				action.getEffects().clear();
+//				int numEmissions = newAction.getEmissions().size();
+//				int numAssignments = newAction.getAssignments().size();
+//				for (int i = 0; i < numEmissions; i++) {
+//					action.getEmissions().add(newAction.getEmissions().get(i));
+//				}
+//				for (int i = 0; i < numAssignments; i++) {
+//					action.getAssignments().add(newAction.getAssignments().get(i));
+//				}
+				int numEffects = newAction.getEffects().size();
+				for (int i = 0; i < numEffects; i++) {
+					action.getEffects().add(newAction.getEffects().get(i));
 				}
 			}
 			else if ((element != null) && (element instanceof EObjectAdapter) && (((EObjectAdapter)element).getRealObject() instanceof SuspensionTrigger)) {
@@ -113,8 +121,9 @@ public class XTextParseCommand extends AbstractTransactionalCommand {
 				}
 				
 				if (!checkSignals(suspensionTrigger, expression, newExpression)
-					|| (newAction.getEmissions().size() > 0)
-					|| (newAction.getAssignments().size() > 0)) {
+					//|| (newAction.getEmissions().size() > 0)
+					//|| (newAction.getAssignments().size() > 0)) {
+					|| (newAction.getEffects().size() > 0)) {
 					suspensionTrigger.setExpression(null);
 					suspensionTrigger.setTrigger("INVALID: " + string);
 					return CommandResult.newErrorCommandResult("The Expression contains invalid signals or other invalid characters!");					
@@ -202,8 +211,9 @@ public class XTextParseCommand extends AbstractTransactionalCommand {
 	// Methods to forward signal pointers
 	private void forwardSignals(Action action, Signal signal) {
 		Expression trigger = action.getTrigger();
-		EList<Emission> emissions = action.getEmissions();
-		EList<Assignment> assignments = action.getAssignments();
+		//EList<Emission> emissions = action.getEmissions();
+		//EList<Assignment> assignments = action.getAssignments();
+		EList<Effect> effects = action.getEffects();
 		
 		if ((trigger instanceof SignalReference) && (((Signal) ((SignalReference) trigger).getSignal()).getName().equals(signal.getName()))) {
 			SignalReference sigRef = (SignalReference) trigger;
@@ -213,22 +223,35 @@ public class XTextParseCommand extends AbstractTransactionalCommand {
 			setSignal((ComplexExpression) trigger, signal);
 		}
 		
-		for (Emission emission : emissions) {
-			if (emission.getSignal().getName().equals(signal.getName())) {
-				emission.setSignal(signal);
+		for (Effect effect : effects) {
+			if (effect instanceof Emission) {
+				Emission emission = (Emission) effect;
+				if (emission.getSignal().getName().equals(signal.getName())) {
+					emission.setSignal(signal);
+				}
+			} else if (effect instanceof Assignment) {
+				Assignment assignment = (Assignment) effect;
+				Expression expression = assignment.getExpression();
+				if ((expression instanceof SignalReference) && ((Signal) ((SignalReference) expression).getSignal()).getName().equals(signal.getName())) {
+					SignalReference sigRef = (SignalReference) assignment.getExpression();
+					sigRef.setSignal(signal);
+				}
+				else if (expression instanceof ComplexExpression) {
+					setSignal((ComplexExpression) expression, signal);
+				}
 			}
 		}
 		
-		for (Assignment assignment : assignments) {
-			Expression expression = assignment.getExpression();
-			if ((expression instanceof SignalReference) && ((Signal) ((SignalReference) expression).getSignal()).getName().equals(signal.getName())) {
-				SignalReference sigRef = (SignalReference) assignment.getExpression();
-				sigRef.setSignal(signal);
-			}
-			else if (expression instanceof ComplexExpression) {
-				setSignal((ComplexExpression) expression, signal);
-			}
-		}
+//		for (Assignment assignment : assignments) {
+//			Expression expression = assignment.getExpression();
+//			if ((expression instanceof SignalReference) && ((Signal) ((SignalReference) expression).getSignal()).getName().equals(signal.getName())) {
+//				SignalReference sigRef = (SignalReference) assignment.getExpression();
+//				sigRef.setSignal(signal);
+//			}
+//			else if (expression instanceof ComplexExpression) {
+//				setSignal((ComplexExpression) expression, signal);
+//			}
+//		}
 	}
 	
 	// Methods to forward signal pointers
@@ -279,7 +302,29 @@ public class XTextParseCommand extends AbstractTransactionalCommand {
 			signals = new BasicEList<Signal>();
 		}
 		EList<Signal> tempSignals;
-		for (Emission e : action.getEmissions()) {
+//		for (Emission e : action.getEmissions()) {
+//			tempSignals = getSignals(e);
+//			if (tempSignals == null) {
+//				tempSignals = new BasicEList<Signal>();
+//			}
+//			for (Signal s : tempSignals) {
+//				if (!signals.contains(s)) {
+//					signals.add(s);
+//				}
+//			}
+//		}
+//		for (Assignment a : action.getAssignments()) {
+//			tempSignals = getSignals(a);
+//			if (tempSignals == null) {
+//				tempSignals = new BasicEList<Signal>();
+//			}
+//			for (Signal s : tempSignals) {
+//				if (!signals.contains(s)) {
+//					signals.add(s);
+//				}
+//			}
+//		}
+		for (Effect e : action.getEffects()) {
 			tempSignals = getSignals(e);
 			if (tempSignals == null) {
 				tempSignals = new BasicEList<Signal>();
@@ -290,18 +335,17 @@ public class XTextParseCommand extends AbstractTransactionalCommand {
 				}
 			}
 		}
-		for (Assignment a : action.getAssignments()) {
-			tempSignals = getSignals(a);
-			if (tempSignals == null) {
-				tempSignals = new BasicEList<Signal>();
-			}
-			for (Signal s : tempSignals) {
-				if (!signals.contains(s)) {
-					signals.add(s);
-				}
-			}
-		}
 		return signals;
+	}
+	
+	private EList<Signal> getSignals(Effect e) {
+		if (e instanceof Emission) {
+			return getSignals(((Emission) e));
+		}
+		else if (e instanceof Assignment) {
+			return getSignals(((Assignment) e));
+		}
+		return null;
 	}
 	
 	private EList<Signal> getSignals(Expression expression) {
