@@ -31,7 +31,7 @@ public abstract class ACombination implements ITriggerListener{
 	List<ATrigger> triggers;
     List<AEffect> effects;
     ATrigger t;
-    List<ATrigger> trigToEv;
+    List<ATrigger> triggersToEvaluate;
     
     public abstract boolean evaluate(TriggerEventObject triggerEvent);
 
@@ -40,11 +40,19 @@ public abstract class ACombination implements ITriggerListener{
     public abstract List<ATrigger> getTriggers();
 
 	public void initialize() {
-		trigToEv=getTriggers();
-		for (int i=0; i<trigToEv.size();i++){
-			ATrigger a = trigToEv.get(i);
+		triggersToEvaluate=getTriggers();
+		for (int i=0; i<triggersToEvaluate.size();i++){
+			ATrigger a = triggersToEvaluate.get(i);
 			a.addTriggerListener(this);
 		}
+	}
+	
+	public void finalize (){
+		triggersToEvaluate=getTriggers();
+		for (int i=0; i<triggersToEvaluate.size();i++){
+			ATrigger a = triggersToEvaluate.get(i);
+			a.removeTriggerListener(this);
+	}
 	}
 	
 	

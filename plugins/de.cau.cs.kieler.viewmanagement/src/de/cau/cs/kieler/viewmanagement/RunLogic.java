@@ -35,6 +35,20 @@ public class RunLogic {
         // this.printExtensions();
         return;
     }
+    
+    public void unregisterListeners() {
+		System.out.println("Unregistering");
+		this.readEffects();
+        this.readTriggers();
+        this.readCombinations();
+        
+        for (ACombination oneCombination : combos) {
+            oneCombination.initialize();
+        
+    	return;
+        }
+	}
+
 
     /**
      * Read all entries for the trigger extension point and add all trigger
@@ -109,6 +123,7 @@ public class RunLogic {
         return null;
     }
 
+	
     /*
      * private void printExtensions(){ for (AEffect myEffect : this.effects) {
      * System.out.println("Effect: "+myEffect); } for (ATrigger myTrigger :

@@ -37,13 +37,18 @@ public class ActivateVMHandler extends AbstractHandler implements IHandler {
             if (widget instanceof ToolItem)
                 checked = ((ToolItem) widget).getSelection();
         }
+        RunLogic myRunLogic = new RunLogic();
         if (checked) {
             System.out.println("Now VM is on");
-            RunLogic myRunLogic = new RunLogic();
-            myRunLogic.registerListeners();
-        } else
-            System.out.println("VM is off");
-            // FIXME: unregister listeners and so on
+            
+           myRunLogic.registerListeners();
+        } else{
+        	myRunLogic.unregisterListeners();
+        	System.out.println("VM is off");
+        	
+        }
+            
+            
         return null;
     }
 
