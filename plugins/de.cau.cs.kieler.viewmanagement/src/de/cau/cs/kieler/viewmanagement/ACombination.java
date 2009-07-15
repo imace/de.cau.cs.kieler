@@ -91,7 +91,6 @@ public class ACombination implements ITriggerListener{
 	            }
 	        }
 
-	@Override
 	public void notifyTrigger(TriggerEventObject triggerEvent) {
 		// TODO Auto-generated method stub
 		

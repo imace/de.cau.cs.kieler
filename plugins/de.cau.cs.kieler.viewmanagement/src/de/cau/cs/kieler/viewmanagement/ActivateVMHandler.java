@@ -26,9 +26,6 @@ public class ActivateVMHandler extends AbstractHandler implements IHandler {
 		// TODO Auto-generated constructor stub
 	}
 
-
-
-	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		// TODO Auto-generated method stub
 		
