@@ -40,14 +40,25 @@ public class ACombination {
 		this.readEffects();
 	}
 	
-	public boolean evaluate() {
+	public void evaluate() {
 		evresult=false;
+		/*What does evaluate read? CombinationObject needed?
+		 * Needs list of triggers that need to be true to fire, rather a list of TriggerEventObjects.
+		 * How to access the listeners here?
+		 * Also needs List of effects that should then be executed
+		 * Additionally a boolean expression should be there. 
+		 */
+		if (evresult)
+			execute();
 		
-		return evresult;
+		
 		
 	}
 	
 	public void execute (){
+		/*
+		 * Needs a list of Effects and affected objects
+		 */
 		
 		
 	}

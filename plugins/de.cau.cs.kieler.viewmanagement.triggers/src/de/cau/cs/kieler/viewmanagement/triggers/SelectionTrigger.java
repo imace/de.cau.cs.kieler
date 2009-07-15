@@ -60,10 +60,13 @@ public class SelectionTrigger extends ATrigger implements ISelectionListener {
          
 		
 			if( selectedObject instanceof ShapeEditPart ){
-			//currentSelection = selectedObject;
-			//
-			selectionEvent.setTriggerToggle(false);
-			notifyTrigger(selectionEvent);
+				if (currentSelection != null){
+					selectionEvent.setTriggerToggle(false);
+					selectionEvent.setAffectedObject(currentSelection);
+					notifyTrigger(selectionEvent);
+			}
+				currentSelection=selectedObject;
+			
 			
 			selectionEvent.setAffectedObject(selectedObject);
 			selectionEvent.setTriggerToggle(true);
@@ -73,9 +76,12 @@ public class SelectionTrigger extends ATrigger implements ISelectionListener {
             //SelectionHighlightCombination.doSomething( (ShapeEditPart) selectedObject);
         }
 			else 
-			{
+			{ 
+				if (currentSelection != null){
 				selectionEvent.setTriggerToggle(false);
+				selectionEvent.setAffectedObject(currentSelection);
 				notifyTrigger(selectionEvent);
+				}
 			}
         }
     }
