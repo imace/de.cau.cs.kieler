@@ -21,7 +21,9 @@ import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeEditPart;
 
 import de.cau.cs.kieler.viewmanagement.ACombination;
 import de.cau.cs.kieler.viewmanagement.AEffect;
+import de.cau.cs.kieler.viewmanagement.ATrigger;
 import de.cau.cs.kieler.viewmanagement.effects.HighlightEffect;
+import de.cau.cs.kieler.viewmanagement.*;
 
 /**
  * @author haf
@@ -30,12 +32,14 @@ import de.cau.cs.kieler.viewmanagement.effects.HighlightEffect;
 public class SelectionHighlightCombination extends ACombination{
 
     static HighlightEffect effect;
-    List <String> myTriggers;
-    String st =  "SelectionTrigger";
+    List<ATrigger> myTriggers;
+    ATrigger st =  
     
+    
+   
     	@Override
-    	public List<String> getTriggers(){
-    		myTriggers.add(st);
+    	public List<ATrigger> getTriggers(){
+    		 myTriggers.add(st);
     	return myTriggers;
     	
     	

@@ -31,12 +31,14 @@ public class ACombination implements ITriggerListener{
 	List<ATrigger> triggers;
     List<AEffect> effects;
     ATrigger t;
-    List<String> trigToEv;
+    List<ATrigger> trigToEv;
+    
 
 	public void initialize() {
 		trigToEv=getTriggers();
 		for (int i=0; i<trigToEv.size();i++){
-			this.addTriggerListener;
+			ATrigger a = trigToEv.get(i);
+			a.addTriggerListener(this);
 			
 		}
 	}
@@ -95,7 +97,7 @@ public class ACombination implements ITriggerListener{
 		
 	}
 	
-	public List<String> getTriggers() {
+	public List<ATrigger> getTriggers() {
 		return null;
 		
 		// TODO Auto-generated method stub
