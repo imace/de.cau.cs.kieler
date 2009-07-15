@@ -25,71 +25,71 @@ import org.eclipse.ui.PlatformUI;
 import de.cau.cs.kieler.viewmanagement.ATrigger;
 import de.cau.cs.kieler.viewmanagement.TriggerEvent;
 import de.cau.cs.kieler.viewmanagement.TriggerEventObject;
-import de.cau.cs.kieler.viewmanagement.combination.SelectionHighlightCombination;
 
 /**
  * @author haf
- *
+ * 
  */
-
-
-
 
 public class SelectionTrigger extends ATrigger implements ISelectionListener {
 
-	TriggerEventObject selectionEvent;
-	Object currentSelection;
+    TriggerEventObject selectionEvent;
+    Object currentSelection;
+
     public SelectionTrigger() {
         // register this as a listener to the Eclipse selection service
-        PlatformUI.getWorkbench().getActiveWorkbenchWindow().getSelectionService().addSelectionListener(this);
+        PlatformUI.getWorkbench().getActiveWorkbenchWindow()
+                .getSelectionService().addSelectionListener(this);
     }
 
-    /* Method will be called whenever the selection in Eclipse has changed.
+    /*
+     * Method will be called whenever the selection in Eclipse has changed.
      * 
      * (non-Javadoc)
-     * @see org.eclipse.ui.ISelectionListener#selectionChanged(org.eclipse.ui.IWorkbenchPart, org.eclipse.jface.viewers.ISelection)
+     * 
+     * @seeorg.eclipse.ui.ISelectionListener#selectionChanged(org.eclipse.ui.
+     * IWorkbenchPart, org.eclipse.jface.viewers.ISelection)
      */
     public void selectionChanged(IWorkbenchPart part, ISelection selection) {
-        //System.out.println("Whoohoo, something was selected: "+part + " " + selection);
-        
-        // do something meaningful for testing
-        // FIXME: solve this through some listener pattern or someway else more generic
-        if(selection instanceof IStructuredSelection){
-            Object selectedObject = ((IStructuredSelection) selection).getFirstElement();
-            
-         
-		
-			if( selectedObject instanceof ShapeEditPart ){
-				if (currentSelection != null){
-					selectionEvent.setTriggerToggle(false);
-					selectionEvent.setAffectedObject(currentSelection);
-					notifyTrigger(selectionEvent);
-			}
-				currentSelection=selectedObject;
-			
-			
-			selectionEvent.setAffectedObject(selectedObject);
-			selectionEvent.setTriggerToggle(true);
-            
-			notifyTrigger(selectionEvent);   	
-            	
-            //SelectionHighlightCombination.doSomething( (ShapeEditPart) selectedObject);
-        }
-			else 
-			{ 
-				if (currentSelection != null){
-				selectionEvent.setTriggerToggle(false);
-				selectionEvent.setAffectedObject(currentSelection);
-				notifyTrigger(selectionEvent);
-				}
-			}
-        }
-    }
-    
-    public void finalize(){
-        // unregister this as listener
-        PlatformUI.getWorkbench().getActiveWorkbenchWindow().getSelectionService().removeSelectionListener(this);
-    }
-    
-}
+        // System.out.println("Whoohoo, something was selected: "+part + " " +
+        // selection);
 
+        // do something meaningful for testing
+        // FIXME: solve this through some listener pattern or someway else more
+        // generic
+        if (selection instanceof IStructuredSelection) {
+            this.selectionEvent = new TriggerEventObject();
+            Object selectedObject = ((IStructuredSelection) selection)
+                    .getFirstElement();
+            if (selectedObject instanceof ShapeEditPart) {
+                if (currentSelection != null) {
+                    selectionEvent.setTriggerToggle(false);
+                    selectionEvent.setAffectedObject(currentSelection);
+                    notifyTrigger(selectionEvent);
+                }
+                currentSelection = selectedObject;
+
+                selectionEvent.setAffectedObject(selectedObject);
+                selectionEvent.setTriggerToggle(true);
+
+                notifyTrigger(selectionEvent);
+
+                // SelectionHighlightCombination.doSomething( (ShapeEditPart)
+                // selectedObject);
+            } else {
+                if (currentSelection != null) {
+                    selectionEvent.setTriggerToggle(false);
+                    selectionEvent.setAffectedObject(currentSelection);
+                    notifyTrigger(selectionEvent);
+                }
+            }
+        }
+    }
+
+    public void finalize() {
+        // unregister this as listener
+        PlatformUI.getWorkbench().getActiveWorkbenchWindow()
+                .getSelectionService().removeSelectionListener(this);
+    }
+
+}

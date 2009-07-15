@@ -4,10 +4,7 @@ import javax.swing.event.EventListenerList;
 
 public abstract class ATrigger {
 
-	
-	
     private EventListenerList triggerListener = new EventListenerList();
-    
     
     public void addTriggerListener (ITriggerListener triggerlistener)
     {
@@ -15,7 +12,6 @@ public abstract class ATrigger {
     }
     
     public void removeTriggerListener (ITriggerListener triggerlistener){
-    	
     	triggerListener.remove(ITriggerListener.class, triggerlistener);
     }
     

@@ -25,7 +25,7 @@ import org.eclipse.core.runtime.Platform;
  * @author haf
  *
  */
-public class ACombination implements ITriggerListener{
+public abstract class ACombination implements ITriggerListener{
 
 	private boolean evresult;
 	List<ATrigger> triggers;
@@ -33,75 +33,30 @@ public class ACombination implements ITriggerListener{
     ATrigger t;
     List<ATrigger> trigToEv;
     
+    public abstract boolean evaluate(TriggerEventObject triggerEvent);
+
+    public abstract void execute();
+
+    public abstract List<ATrigger> getTriggers();
 
 	public void initialize() {
 		trigToEv=getTriggers();
 		for (int i=0; i<trigToEv.size();i++){
 			ATrigger a = trigToEv.get(i);
 			a.addTriggerListener(this);
-			
 		}
 	}
 	
-	public void evaluate() {
-		evresult=false;
-		/*What does evaluate read? CombinationObject needed?
-		 * Needs list of triggers that need to be true to fire, rather a list of TriggerEventObjects.
-		 * How to access the listeners here?
-		 * Also needs List of effects that should then be executed
-		 * Additionally a boolean expression should be there. 
-		 */
-		if (evresult)
-			execute();
-		
-		
-		
-	}
 	
-	public void execute (){
-		/*
-		 * Needs a list of Effects and affected objects
-		 */
-		
-		
-	}
-	
-	 private void readTriggers() {
-	        IConfigurationElement[] myExtensions = Platform.getExtensionRegistry()
-	                .getConfigurationElementsFor(
-	                        "de.cau.cs.kieler.viewmanagement.triggers");
-	        for (int i = 0; i < myExtensions.length; i++) {
-	        	
-	        	/*
-	        	ITriggerListener newlistener = (ITriggerListener) myExtensions[i];
-	        	t.addTriggerListener(newlistener);
-	        	*/
-	        }
-	    }
-	 
-
-
-	private void readEffects() {
-	        IConfigurationElement[] myExtensions = Platform.getExtensionRegistry()
-	                .getConfigurationElementsFor(
-	                        "de.cau.cs.kieler.viewmanagement.effects");
-	        for (int i = 0; i < myExtensions.length; i++) {
-	        	
-	            
-	            }
-	        }
-
 	public void notifyTrigger(TriggerEventObject triggerEvent) {
-		// TODO Auto-generated method stub
-		
+	    // this is called whenever trigger want to notify
+	    
+	    // call evaluate in concrete combo
+	    if( this.evaluate(triggerEvent) ) 
+	        this.execute();
+	    
 	}
 	
-	public List<ATrigger> getTriggers() {
-		return null;
-		
-		// TODO Auto-generated method stub
-		
-	}
 
 }
 

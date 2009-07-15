@@ -15,36 +15,36 @@ import org.eclipse.ui.menus.CommandContributionItem;
 
 /**
  * @author nbe
- *
+ * 
  */
 public class ActivateVMHandler extends AbstractHandler implements IHandler {
 
-	/**
+    /**
 	 * 
 	 */
-	public ActivateVMHandler() {
-		// TODO Auto-generated constructor stub
-	}
+    public ActivateVMHandler() {
+        // TODO Auto-generated constructor stub
+    }
 
-	public Object execute(ExecutionEvent event) throws ExecutionException {
-		// TODO Auto-generated method stub
-		
-		//Determine state of Toggle Button
-		Object trigger = event.getTrigger();
-		boolean checked = false;
-		if (trigger instanceof Event){
-			Object widget = ((Event)trigger).widget;
-			if (widget instanceof ToolItem)
-				checked = ((ToolItem) widget).getSelection();
-		}
-		if (checked){
-		System.out.println("Now VM is on");
-		RunLogic myRunLogic = new RunLogic();
-        myRunLogic.registerListeners();
+    public Object execute(ExecutionEvent event) throws ExecutionException {
+        // TODO Auto-generated method stub
+
+        // Determine state of Toggle Button
+        Object trigger = event.getTrigger();
+        boolean checked = false;
+        if (trigger instanceof Event) {
+            Object widget = ((Event) trigger).widget;
+            if (widget instanceof ToolItem)
+                checked = ((ToolItem) widget).getSelection();
         }
-		else 
-			System.out.println("VM is off");
-		return null;
-	}
+        if (checked) {
+            System.out.println("Now VM is on");
+            RunLogic myRunLogic = new RunLogic();
+            myRunLogic.registerListeners();
+        } else
+            System.out.println("VM is off");
+            // FIXME: unregister listeners and so on
+        return null;
+    }
 
 }

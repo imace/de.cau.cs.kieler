@@ -12,12 +12,12 @@ public class RunLogic {
     // Local references to all triggers, effects and combos
     List<ATrigger> triggers;
     List<AEffect> effects;
-    List combos; // FIXME: set type
+    List<ACombination> combos; // FIXME: set type
 
     public void init() {
         triggers = new ArrayList<ATrigger>();
         effects = new ArrayList<AEffect>();
-        combos = new ArrayList(); // FIXME: set type
+        combos = new ArrayList<ACombination>();
     }
 
     public void registerListeners() {
@@ -27,15 +27,18 @@ public class RunLogic {
         this.readEffects();
         this.readTriggers();
         this.readCombinations();
-        
+
+        for (ACombination oneCombination : combos) {
+            oneCombination.initialize();
+        }        
         // print all available extensions
-        //this.printExtensions();
+        // this.printExtensions();
         return;
     }
 
     /**
-     * Read all entries for the trigger extension point and
-     * add all trigger implementations to out local list of triggers.
+     * Read all entries for the trigger extension point and add all trigger
+     * implementations to out local list of triggers.
      */
     private void readTriggers() {
         IConfigurationElement[] myExtensions = Platform.getExtensionRegistry()
@@ -76,7 +79,7 @@ public class RunLogic {
         for (int i = 0; i < myExtensions.length; i++) {
             try {
                 // FIXME: add meaningful type
-                Object myCombo = myExtensions[i]
+                ACombination myCombo = (ACombination)myExtensions[i]
                         .createExecutableExtension("class");
                 this.combos.add(myCombo);
             } catch (CoreException e) {
@@ -86,19 +89,31 @@ public class RunLogic {
         }
     }
 
-   /* private void printExtensions(){
-        for (AEffect myEffect : this.effects) {
-            System.out.println("Effect: "+myEffect);
+    public static ATrigger getTrigger(String name) {
+        IConfigurationElement[] myExtensions = Platform.getExtensionRegistry()
+                .getConfigurationElementsFor(
+                        "de.cau.cs.kieler.viewmanagement.triggers");
+        for (int i = 0; i < myExtensions.length; i++) {
+            try {
+                String attribute = myExtensions[i].getAttribute("name");
+                if( attribute.equals(name)){
+                    ATrigger myTrigger = (ATrigger) myExtensions[i]
+                                                                 .createExecutableExtension("class");
+                    return myTrigger;
+                }
+            } catch (CoreException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
         }
-        for (ATrigger myTrigger : this.triggers) {
-            System.out.println("Trigger: "+myTrigger);
-        }
-        for (Object myCombo : this.combos) {
-            System.out.println("Combination: "+myCombo);
-        }
+        return null;
     }
-    */
-    
-    
-    
+
+    /*
+     * private void printExtensions(){ for (AEffect myEffect : this.effects) {
+     * System.out.println("Effect: "+myEffect); } for (ATrigger myTrigger :
+     * this.triggers) { System.out.println("Trigger: "+myTrigger); } for (Object
+     * myCombo : this.combos) { System.out.println("Combination: "+myCombo); } }
+     */
+
 }
