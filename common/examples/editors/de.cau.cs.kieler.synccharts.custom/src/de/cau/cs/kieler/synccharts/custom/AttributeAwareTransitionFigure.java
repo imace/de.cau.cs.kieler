@@ -95,6 +95,7 @@ public class AttributeAwareTransitionFigure extends AttributeAwareConnection {
 	private RotatableDecoration createWeakAbortionDecoration() {
 		PolygonDecoration pointDecoration = new PolygonDecoration();
 		pointDecoration.setForegroundColor(ColorConstants.black);
+		pointDecoration.setBackgroundColor(ColorConstants.black);
 		PointList pointDecorationPoints = new PointList();
 		pointDecorationPoints.addPoint(0, 0);
 		pointDecoration.setTemplate(pointDecorationPoints);
@@ -118,6 +119,7 @@ public class AttributeAwareTransitionFigure extends AttributeAwareConnection {
 		PolylineDecoration arrowDecoration = new PolylineDecoration();
 		arrowDecoration.setLineWidth(2);
 		arrowDecoration.setForegroundColor(ColorConstants.black);
+		arrowDecoration.setBackgroundColor(ColorConstants.black);
 		PointList arrowDecorationPoints = new PointList();
 		arrowDecorationPoints.addPoint(-2, 2);
 		arrowDecorationPoints.addPoint(0, 0);
@@ -130,7 +132,7 @@ public class AttributeAwareTransitionFigure extends AttributeAwareConnection {
 		HistoryDecoration historyDecoration = new HistoryDecoration();
 		historyDecoration.setLineWidth(2);
 		historyDecoration.setForegroundColor(ColorConstants.black);
-		historyDecoration.setForegroundColor(ColorConstants.gray);
+		historyDecoration.setBackgroundColor(ColorConstants.gray);
 		PointList historyDecorationPoints = new PointList();
 		historyDecorationPoints.addPoint(1, 2);
 		historyDecorationPoints.addPoint(-1, -2);
