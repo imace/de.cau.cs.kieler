@@ -14,6 +14,8 @@
  *****************************************************************************/
 package de.cau.cs.kieler.viewmanagement.combination;
 
+import java.util.List;
+
 import org.eclipse.gef.EditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeEditPart;
 
@@ -28,9 +30,19 @@ import de.cau.cs.kieler.viewmanagement.effects.HighlightEffect;
 public class SelectionHighlightCombination extends ACombination{
 
     static HighlightEffect effect;
+    List <String> myTriggers;
+    String st =  "SelectionTrigger";
+    
+    	@Override
+    	public List<String> getTriggers(){
+    		myTriggers.add(st);
+    	return myTriggers;
+    	
+    	
+    }
     
  // just a test to trigger some effect
-    public static void doSomething(ShapeEditPart target){
+   /* public static void doSomething(ShapeEditPart target){
         // if there is still something highlighted, remove it
         if(effect != null){
             effect.undo();
@@ -40,5 +52,6 @@ public class SelectionHighlightCombination extends ACombination{
         effect.setTarget(target);
         effect.execute();
     }
+    */
     
 }

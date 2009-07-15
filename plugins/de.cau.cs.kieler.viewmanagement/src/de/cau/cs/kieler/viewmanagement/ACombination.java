@@ -25,19 +25,20 @@ import org.eclipse.core.runtime.Platform;
  * @author haf
  *
  */
-public class ACombination {
+public class ACombination implements ITriggerListener{
 
 	private boolean evresult;
 	List<ATrigger> triggers;
     List<AEffect> effects;
     ATrigger t;
+    List<String> trigToEv;
 
 	public void initialize() {
-		triggers = new ArrayList<ATrigger>();
-		effects = new ArrayList<AEffect>();
-		
-		this.readTriggers();
-		this.readEffects();
+		trigToEv=getTriggers();
+		for (int i=0; i<trigToEv.size();i++){
+			this.addTriggerListener;
+			
+		}
 	}
 	
 	public void evaluate() {
@@ -69,8 +70,10 @@ public class ACombination {
 	                        "de.cau.cs.kieler.viewmanagement.triggers");
 	        for (int i = 0; i < myExtensions.length; i++) {
 	        	
+	        	/*
 	        	ITriggerListener newlistener = (ITriggerListener) myExtensions[i];
 	        	t.addTriggerListener(newlistener);
+	        	*/
 	        }
 	    }
 	 
@@ -85,6 +88,19 @@ public class ACombination {
 	            
 	            }
 	        }
+
+	@Override
+	public void notifyTrigger(TriggerEventObject triggerEvent) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	public List<String> getTriggers() {
+		return null;
+		
+		// TODO Auto-generated method stub
+		
+	}
 
 }
 
