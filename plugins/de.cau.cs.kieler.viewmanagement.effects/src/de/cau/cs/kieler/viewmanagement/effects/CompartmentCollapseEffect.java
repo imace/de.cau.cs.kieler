@@ -29,16 +29,15 @@ public class CompartmentCollapseEffect extends AEffect {
     	
     	if (selectedFigure instanceof ShapeEditPart){
     		
-    	}
+    	
     		
-        // search a layer we can draw on        
-        RootEditPart rootEP = objectToHighlight.getRoot();
+        
         
         View view = objectToHighlight.getNotationView();
         DrawerStyle drawerStyle = (DrawerStyle) view.getStyle(NotationPackage.eINSTANCE.getDrawerStyle());
         if (drawerStyle != null)
         	drawerStyle.setCollapsed(true);
-        	
+    	
         /*
          
             IFigure layer = ((RenderedDiagramRootEditPart) rootEP).getLayer(RenderedDiagramRootEditPart.FEEDBACK_LAYER);
@@ -49,6 +48,7 @@ public class CompartmentCollapseEffect extends AEffect {
         
         
         System.out.println("Highlight");
+    	}
     }
 
     /**
