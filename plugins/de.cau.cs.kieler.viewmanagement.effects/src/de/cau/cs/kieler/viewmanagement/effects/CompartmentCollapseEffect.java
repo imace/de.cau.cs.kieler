@@ -36,6 +36,21 @@ public class CompartmentCollapseEffect extends AEffect {
     	System.out.println("CompInit!");
     	if (selectedFigure instanceof DefaultSizeNodeFigure)
     		{
+    			for (int i = 0; i < 10; i++) {
+    				IFigure childFigure = selectedFigure;
+    				for(int j=0; j< childFigure.getChildren().size(); j++){
+    						IFigure	tempFigure = (IFigure) childFigure.getChildren().get(j);
+    					if ( tempFigure instanceof ShapeCompartmentFigure){
+    						ShapeCompartmentFigure collapseFigure = (ShapeCompartmentFigure) tempFigure;
+    						collapseFigure.collapse();
+    					}
+    						
+    					else childFigure= tempFigure;
+    				}
+					
+				}
+					
+				}
     			 List children= selectedFigure.getChildren();
     			 
     		ResizableCompartmentFigure compartmentFigure = (ResizableCompartmentFigure) selectedFigure;
@@ -55,7 +70,7 @@ public class CompartmentCollapseEffect extends AEffect {
         
         
         System.out.println("HighlightCompartment");
-    	}
+    	
     }
 
     /**
