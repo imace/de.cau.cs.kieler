@@ -1,0 +1,63 @@
+package de.cau.cs.kieler.viewmanagement.combination;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.eclipse.gef.EditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeEditPart;
+
+import de.cau.cs.kieler.viewmanagement.ACombination;
+import de.cau.cs.kieler.viewmanagement.AEffect;
+import de.cau.cs.kieler.viewmanagement.ATrigger;
+import de.cau.cs.kieler.viewmanagement.effects.CompartmentCollapseEffect;
+import de.cau.cs.kieler.viewmanagement.triggers.SelectionTrigger;
+import de.cau.cs.kieler.viewmanagement.*;
+
+/**
+ * @author haf
+ * 
+ */
+public class SelectionCollapseCombination extends ACombination {
+
+    CompartmentCollapseEffect effect;
+    SelectionTrigger st;
+    
+    ShapeEditPart objectToHighlight;
+
+    @Override
+    public List<ATrigger> getTriggers() {
+        this.st = (SelectionTrigger)RunLogic.getTrigger("SelectionTrigger");
+        List<ATrigger> myTriggers = new ArrayList<ATrigger>();
+        myTriggers.add(st);
+        return myTriggers;
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see de.cau.cs.kieler.viewmanagement.ACombination#evaluate()
+     */
+    @Override
+    public boolean evaluate(TriggerEventObject triggerEvent) {
+        Object affectedObject = triggerEvent.getAffectedObject();
+        if( affectedObject instanceof ShapeEditPart ){
+            this.objectToHighlight = (ShapeEditPart) affectedObject;
+            return true; // FIXME: only true under certain conditions
+        }
+        else
+            return false;
+    }
+
+    /* (non-Javadoc)
+     * @see de.cau.cs.kieler.viewmanagement.ACombination#execute()
+     */
+    @Override
+    public void execute() {
+        if ( effect == null )
+            effect = new CompartmentCollapseEffect();
+        effect.setTarget(this.objectToHighlight);
+        effect.execute();
+    }
+
+
+}
