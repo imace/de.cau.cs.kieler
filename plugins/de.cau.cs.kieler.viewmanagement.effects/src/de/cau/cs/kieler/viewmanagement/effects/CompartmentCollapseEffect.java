@@ -3,6 +3,7 @@ package de.cau.cs.kieler.viewmanagement.effects;
 
 
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.gef.RootEditPart;
@@ -22,6 +23,8 @@ import de.cau.cs.kieler.viewmanagement.AEffect;
 public class CompartmentCollapseEffect extends AEffect {
 
     ShapeEditPart objectToHighlight;
+    Map <String, String> objectParameters;
+	
    
     
     // default constructor is always called by Eclipse... 
@@ -34,7 +37,16 @@ public class CompartmentCollapseEffect extends AEffect {
     public void execute() {
     	IFigure selectedFigure =  objectToHighlight.getFigure();
     	System.out.println("CompInit!");
-    	if (selectedFigure instanceof DefaultSizeNodeFigure)
+    	int length = getCollapseableComponents().length;
+    	List<?> collapsedComponents;
+    	ResizableCompartmentFigure [][]componentsToCollapse= getCollapseableComponents();
+    	if (objectParameters.get("depth")==null)
+    		for (int i=0; i < componentsToCollapse.length; i++ )
+    			for (int j=0; j < componentsToCollapse.length; j++)
+    				collapsedComponents.add((componentsToCollapse[i][j]));				
+			}
+    	
+    	/*if (selectedFigure instanceof DefaultSizeNodeFigure)
     		{
     			for (int i = 0; i < 10; i++) {
     				IFigure childFigure = selectedFigure;
@@ -42,6 +54,7 @@ public class CompartmentCollapseEffect extends AEffect {
     						IFigure	tempFigure = (IFigure) childFigure.getChildren().get(j);
     					if ( tempFigure instanceof ShapeCompartmentFigure){
     						ShapeCompartmentFigure collapseFigure = (ShapeCompartmentFigure) tempFigure;
+    						//TODO Save Elements before collapsing for undo, change to ResizableCompartmentFigure
     						collapseFigure.collapse();
     					}
     						
@@ -53,24 +66,17 @@ public class CompartmentCollapseEffect extends AEffect {
 				}
     			 List children= selectedFigure.getChildren();
     			 
-    		ResizableCompartmentFigure compartmentFigure = (ResizableCompartmentFigure) selectedFigure;
-    			//compartmentFigure.g
-    			//compartmentFigure.setCollapsed();
+    			 */
+    			 
+    
     
     		
   
     	
-        /*
-         
-            IFigure layer = ((RenderedDiagramRootEditPart) rootEP).getLayer(RenderedDiagramRootEditPart.FEEDBACK_LAYER);
-
-            // get Figure to the EditPart
-            IFigure selectedFigure = objectToHighlight.getFigure();
-            */
+       
         
         
-        System.out.println("HighlightCompartment");
-    	
+     
     }
 
     /**
@@ -80,11 +86,42 @@ public class CompartmentCollapseEffect extends AEffect {
         
     }
     
+    public ResizableCompartmentFigure[][] getCollapseableComponents(){
+    	IFigure selectedFigure =  objectToHighlight.getFigure();
+    	ResizableCompartmentFigure [][]collapseableComponents = new ResizableCompartmentFigure [20][];
+    	int i = 0,j =0;
+    	List<?> childrenList;
+    	if (selectedFigure instanceof ResizableCompartmentFigure){
+    		collapseableComponents[i][j]= (ResizableCompartmentFigure) selectedFigure;
+    		i++;
+    	}
+    	
+    		childrenList = selectedFigure.getChildren();
+    		while (childrenList.get(j)!= null){
+    			if (childrenList.get(j)instanceof ResizableCompartmentFigure)
+    				collapseableComponents[i][j]= (ResizableCompartmentFigure) childrenList.get(j);
+    			j++;
+    		}
+    	
+    	
+    	
+    	return collapseableComponents;
+    	
+    	
+    	
+    }
+    
     /**
      * @param target
      */
     public void setTarget(ShapeEditPart target) {
         this.objectToHighlight = target;
     }
+
+	@Override
+	public void setParameters(Map<String, String> parameters) {
+		this.objectParameters = parameters;
+		
+	}
 
 }

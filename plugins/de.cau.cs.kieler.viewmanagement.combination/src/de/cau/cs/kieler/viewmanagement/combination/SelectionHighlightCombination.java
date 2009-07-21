@@ -16,6 +16,7 @@ package de.cau.cs.kieler.viewmanagement.combination;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.gef.EditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeEditPart;
@@ -37,6 +38,7 @@ public class SelectionHighlightCombination extends ACombination {
     SelectionTrigger st;
     
     ShapeEditPart objectToHighlight;
+    Map <String, String> objectParameters;
 
     @Override
     public List<ATrigger> getTriggers() {
@@ -56,6 +58,7 @@ public class SelectionHighlightCombination extends ACombination {
         Object affectedObject = triggerEvent.getAffectedObject();
         if( affectedObject instanceof ShapeEditPart ){
             this.objectToHighlight = (ShapeEditPart) affectedObject;
+            this.objectParameters = triggerEvent.getParameters();
             return true; // FIXME: only true under certain conditions
         }
         else
@@ -70,8 +73,11 @@ public class SelectionHighlightCombination extends ACombination {
         if ( effect == null )
             effect = new HighlightEffect();
         effect.setTarget(this.objectToHighlight);
+        effect.setParameters(this.objectParameters);
         effect.execute();
     }
+    
+    
 
 
 }

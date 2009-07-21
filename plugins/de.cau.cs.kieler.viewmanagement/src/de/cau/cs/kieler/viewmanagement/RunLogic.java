@@ -42,13 +42,13 @@ public class RunLogic {
         this.readTriggers();
         this.readCombinations();
         
-        for (ACombination oneCombination : combos) {
-            oneCombination.initialize();
+        for (ACombination oneCombination : combos)
+            oneCombination.finalize();
+        for (ATrigger oneTrigger : triggers)
+        	oneTrigger.finalize();
         
-    	return;
+        return;
         }
-	}
-
 
     /**
      * Read all entries for the trigger extension point and add all trigger

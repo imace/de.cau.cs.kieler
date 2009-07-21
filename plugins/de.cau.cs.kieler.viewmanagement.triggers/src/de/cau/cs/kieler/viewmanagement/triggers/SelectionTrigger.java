@@ -27,7 +27,7 @@ import de.cau.cs.kieler.viewmanagement.TriggerEvent;
 import de.cau.cs.kieler.viewmanagement.TriggerEventObject;
 
 /**
- * @author haf
+ * @author nbe
  * 
  */
 
@@ -51,12 +51,7 @@ public class SelectionTrigger extends ATrigger implements ISelectionListener {
      * IWorkbenchPart, org.eclipse.jface.viewers.ISelection)
      */
     public void selectionChanged(IWorkbenchPart part, ISelection selection) {
-        // System.out.println("Whoohoo, something was selected: "+part + " " +
-        // selection);
-
-        // do something meaningful for testing
-        // FIXME: solve this through some listener pattern or someway else more
-        // generic
+       
         if (selection instanceof IStructuredSelection) {
             this.selectionEvent = new TriggerEventObject();
             Object selectedObject = ((IStructuredSelection) selection)

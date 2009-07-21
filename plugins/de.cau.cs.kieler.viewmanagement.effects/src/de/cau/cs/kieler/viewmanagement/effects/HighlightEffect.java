@@ -1,5 +1,7 @@
 package de.cau.cs.kieler.viewmanagement.effects;
 
+import java.util.Map;
+
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.RectangleFigure;
@@ -72,5 +74,11 @@ public class HighlightEffect extends AEffect {
     public void setTarget(ShapeEditPart target) {
         this.objectToHighlight = target;
     }
+
+	@Override
+	public void setParameters(Map<String, String> parameters) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
