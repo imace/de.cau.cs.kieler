@@ -15,15 +15,18 @@ public abstract class ATrigger {
     	triggerListener.remove(ITriggerListener.class, triggerlistener);
     }
     
-    protected synchronized void notifyTrigger (TriggerEventObject selectionEvent){
+    protected synchronized void notifyTrigger (TriggerEventObject triggerEvent){
     	
     	for (ITriggerListener l : triggerListener.getListeners(ITriggerListener.class))
-    		l.notifyTrigger (selectionEvent);
+    		l.notifyTrigger (triggerEvent);
     
     }
+    
     
     /**
      * Release all system resources for this object.
      */
     public abstract void finalize();
+    	
+    
 }

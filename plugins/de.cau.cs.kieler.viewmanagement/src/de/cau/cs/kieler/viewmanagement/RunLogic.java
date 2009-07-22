@@ -12,7 +12,7 @@ public class RunLogic {
     // Local references to all triggers, effects and combos
     List<ATrigger> triggers;
     List<AEffect> effects;
-    List<ACombination> combos; // FIXME: set type
+    List<ACombination> combos; 
 
     public void init() {
         triggers = new ArrayList<ATrigger>();
@@ -38,9 +38,11 @@ public class RunLogic {
     
     public void unregisterListeners() {
 		System.out.println("Unregistering");
+		this.init();
 		this.readEffects();
         this.readTriggers();
         this.readCombinations();
+		
         
         for (ACombination oneCombination : combos)
             oneCombination.finalize();
@@ -92,7 +94,7 @@ public class RunLogic {
                         "de.cau.cs.kieler.viewmanagement.combination");
         for (int i = 0; i < myExtensions.length; i++) {
             try {
-                // FIXME: add meaningful type
+                
                 ACombination myCombo = (ACombination)myExtensions[i]
                         .createExecutableExtension("class");
                 this.combos.add(myCombo);
