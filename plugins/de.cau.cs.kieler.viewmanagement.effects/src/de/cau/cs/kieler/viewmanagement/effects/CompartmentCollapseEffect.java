@@ -2,6 +2,7 @@ package de.cau.cs.kieler.viewmanagement.effects;
 
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -23,8 +24,7 @@ import de.cau.cs.kieler.viewmanagement.AEffect;
 public class CompartmentCollapseEffect extends AEffect {
 
     ShapeEditPart objectToHighlight;
-    Map <String, String> objectParameters;
-	
+    //List<IFigure> resizableFigures = new ArrayList<IFigure>();
    
     
     // default constructor is always called by Eclipse... 
@@ -37,78 +37,46 @@ public class CompartmentCollapseEffect extends AEffect {
     public void execute() {
     	IFigure selectedFigure =  objectToHighlight.getFigure();
     	System.out.println("CompInit!");
-    	int length = getCollapseableComponents().length;
-    	List<?> collapsedComponents;
-    	ResizableCompartmentFigure [][]componentsToCollapse= getCollapseableComponents();
-    	if (objectParameters.get("depth")==null)
-    		for (int i=0; i < componentsToCollapse.length; i++ )
-    			for (int j=0; j < componentsToCollapse.length; j++)
-    				collapsedComponents.add((componentsToCollapse[i][j]));				
-			}
+    	List<IFigure> resizableFigures = new ArrayList<IFigure>();
+    	getResizeableCompartments(selectedFigure, resizableFigures);
+    	List <IFigure> collapsedComps =  new ArrayList<IFigure>();
+    	//Here could be added some more refined method, like collapsing only some objects
+    	for(int i=0; i<resizableFigures.size(); i++){
+    		ResizableCompartmentFigure tempfig = (ResizableCompartmentFigure) resizableFigures.get(i);
+    		collapsedComps.add(tempfig);
+    		tempfig.collapse();
+    		}
+    	//This is what undo could look like...
+    	/* for (int i=0; i<collapsedComps.size(); i++){
+    		ResizableCompartmentFigure tempfig = (ResizableCompartmentFigure) collapsedComps.get(i);
+    		tempfig.expand();
+    	}
+    	*/	
     	
-    	/*if (selectedFigure instanceof DefaultSizeNodeFigure)
-    		{
-    			for (int i = 0; i < 10; i++) {
-    				IFigure childFigure = selectedFigure;
-    				for(int j=0; j< childFigure.getChildren().size(); j++){
-    						IFigure	tempFigure = (IFigure) childFigure.getChildren().get(j);
-    					if ( tempFigure instanceof ShapeCompartmentFigure){
-    						ShapeCompartmentFigure collapseFigure = (ShapeCompartmentFigure) tempFigure;
-    						//TODO Save Elements before collapsing for undo, change to ResizableCompartmentFigure
-    						collapseFigure.collapse();
-    					}
-    						
-    					else childFigure= tempFigure;
-    				}
-					
-				}
-					
-				}
-    			 List children= selectedFigure.getChildren();
-    			 
-    			 */
-    			 
-    
-    
-    		
-  
-    	
-       
-        
-        
-     
     }
+    
+    public void getResizeableCompartments(IFigure f, List<IFigure> resizableFigures){
+    	
+    	
+    	if (f instanceof ResizableCompartmentFigure){
+    		resizableFigures.add(f);
+    		//((ResizableCompartmentFigure) f).collapse();
+    	}
+    	List childList = f.getChildren();
+    	for(int i=0;  i<f.getChildren().size(); i++)
+    		getResizeableCompartments((IFigure) f.getChildren().get(i), resizableFigures);
+    		
+    		
+    	
+		return;
+	}
 
     /**
      * Undo the effect. Here the highlighting will be removed.
      */
     public void undo(){
+    	
         
-    }
-    
-    public ResizableCompartmentFigure[][] getCollapseableComponents(){
-    	IFigure selectedFigure =  objectToHighlight.getFigure();
-    	ResizableCompartmentFigure [][]collapseableComponents = new ResizableCompartmentFigure [20][];
-    	int i = 0,j =0;
-    	List<?> childrenList;
-    	if (selectedFigure instanceof ResizableCompartmentFigure){
-    		collapseableComponents[i][j]= (ResizableCompartmentFigure) selectedFigure;
-    		i++;
-    	}
-    	
-    		childrenList = selectedFigure.getChildren();
-    		while (childrenList.get(j)!= null){
-    			if (childrenList.get(j)instanceof ResizableCompartmentFigure)
-    				collapseableComponents[i][j]= (ResizableCompartmentFigure) childrenList.get(j);
-    			j++;
-    		}
-    	
-    	
-    	
-    	return collapseableComponents;
-    	
-    	
-    	
     }
     
     /**
@@ -120,7 +88,7 @@ public class CompartmentCollapseEffect extends AEffect {
 
 	@Override
 	public void setParameters(Map<String, String> parameters) {
-		this.objectParameters = parameters;
+		// TODO Auto-generated method stub
 		
 	}
 

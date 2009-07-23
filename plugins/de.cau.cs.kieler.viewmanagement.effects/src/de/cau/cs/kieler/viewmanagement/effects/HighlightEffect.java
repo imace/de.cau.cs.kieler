@@ -1,5 +1,6 @@
 package de.cau.cs.kieler.viewmanagement.effects;
 
+import java.awt.Point;
 import java.util.Map;
 
 import org.eclipse.draw2d.ColorConstants;
@@ -12,6 +13,10 @@ import org.eclipse.gef.RootEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramGraphicalViewer;
 import org.eclipse.gmf.runtime.diagram.ui.render.editparts.RenderedDiagramRootEditPart;
+import org.eclipse.swt.widgets.Canvas;
+import org.eclipse.swt.widgets.ScrollBar;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.PlatformUI;
 
 import de.cau.cs.kieler.viewmanagement.AEffect;
 
@@ -31,6 +36,7 @@ public class HighlightEffect extends AEffect {
         highlightFigure.setOutline(true);
         highlightFigure.setOutlineXOR(false);
         highlightFigure.setOpaque(false);
+        
     }
     
     @Override
@@ -41,17 +47,26 @@ public class HighlightEffect extends AEffect {
         
         if(rootEP instanceof RenderedDiagramRootEditPart){
             IFigure layer = ((RenderedDiagramRootEditPart) rootEP).getLayer(RenderedDiagramRootEditPart.FEEDBACK_LAYER);
-
+            RenderedDiagramRootEditPart renderedRootEP = (RenderedDiagramRootEditPart) rootEP;
+            
             // get Figure to the EditPart
+           
             IFigure selectedFigure = objectToHighlight.getFigure();
+            
             // get same bounds as the selected figure ...
             Rectangle bounds = selectedFigure.getBounds().getCopy();
             // ... but in absolute coordinates
-            selectedFigure.translateToAbsolute(bounds);
+            System.out.println(bounds);
+            bounds.scale(renderedRootEP.getZoomManager().getZoom());
+            System.out.println(bounds);
+            //selectedFigure.translateToAbsolute(bounds);
+            
+                   
             
             // set the bounds of the Figure that will do the highlighting
-            highlightFigure.setBounds(bounds);
             
+            highlightFigure.setBounds(bounds);
+            System.out.println(highlightFigure.getBounds() +  " "+bounds);
             // add the new highlight figure to the layer
             layer.add(highlightFigure);
             
