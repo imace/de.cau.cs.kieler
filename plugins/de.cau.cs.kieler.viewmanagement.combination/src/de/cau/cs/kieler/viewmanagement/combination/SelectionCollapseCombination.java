@@ -44,8 +44,8 @@ public class SelectionCollapseCombination extends ACombination {
         Object affectedObject = triggerEvent.getAffectedObject();
         if( affectedObject instanceof ShapeEditPart ){
             this.objectToHighlight = (ShapeEditPart) affectedObject;
-            this.objectParameters.put("depth", null);
-            return true; // FIXME: only true under certain conditions
+            //this.objectParameters.put("depth", null);
+            return false; // FIXME: only true under certain conditions
         }
         else
             return false;

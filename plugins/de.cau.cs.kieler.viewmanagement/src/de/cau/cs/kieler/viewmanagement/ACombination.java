@@ -52,7 +52,7 @@ public abstract class ACombination implements ITriggerListener{
 		for (int i=0; i<triggersToEvaluate.size();i++){
 			ATrigger a = triggersToEvaluate.get(i);
 			a.removeTriggerListener(this);
-			a.finalize();
+			
 			
 	}
 	}

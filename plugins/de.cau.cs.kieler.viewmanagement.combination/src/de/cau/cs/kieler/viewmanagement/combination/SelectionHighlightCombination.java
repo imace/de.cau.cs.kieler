@@ -57,7 +57,7 @@ public class SelectionHighlightCombination extends ACombination {
     public boolean evaluate(TriggerEventObject triggerEvent) {
         Object affectedObject = triggerEvent.getAffectedObject();
         if( affectedObject instanceof ShapeEditPart ){
-            this.objectToHighlight = (ShapeEditPart) affectedObject;
+            this.objectToHighlight = (ShapeEditPart)affectedObject;
             this.objectParameters = triggerEvent.getParameters();
             return true; // FIXME: only true under certain conditions
         }
