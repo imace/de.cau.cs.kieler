@@ -7,6 +7,14 @@
             class="de.cau.cs.kieler.viewmanagement.combination.SelectionHighlightCombination"
             name="SelectHighlight">
       </combination>
+      <combination
+            class="de.cau.cs.kieler.viewmanagement.combination.SelectionCollapseCombination"
+            name="CollapseHighlight">
+      </combination>
+      <combination
+            class="de.cau.cs.kieler.viewmanagement.combination.SelectionExpandCombination"
+            name="ExpandHighlight">
+      </combination>
    </extension>
 
 </plugin>

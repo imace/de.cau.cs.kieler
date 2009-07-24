@@ -15,7 +15,7 @@ import de.cau.cs.kieler.viewmanagement.triggers.SelectionTrigger;
 import de.cau.cs.kieler.viewmanagement.*;
 
 /**
- * @author haf
+ * @author nbe
  * 
  */
 public class SelectionCollapseCombination extends ACombination {

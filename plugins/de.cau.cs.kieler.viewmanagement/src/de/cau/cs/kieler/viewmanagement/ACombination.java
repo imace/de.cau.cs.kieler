@@ -22,7 +22,7 @@ import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
 
 /**
- * @author haf
+ * @author nbe
  *
  */
 public abstract class ACombination implements ITriggerListener{

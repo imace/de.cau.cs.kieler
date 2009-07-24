@@ -11,6 +11,14 @@
             class="de.cau.cs.kieler.viewmanagement.effects.HighlightEffect"
             name="de.cau.cs.kieler.viewmanagement.effects.highlight">
       </effect>
+      <effect
+            class="de.cau.cs.kieler.viewmanagement.effects.CompartmentCollapseEffect"
+            name="de.cau.cs.kieler.viewmanagement.effects.compartmentcollapse">
+      </effect>
+      <effect
+            class="de.cau.cs.kieler.viewmanagement.effects.CompartmentExpandEffect"
+            name="de.cau.cs.kieler.viewmanagement.effects.compartmentexpand">
+      </effect>
    </extension>
 
 </plugin>

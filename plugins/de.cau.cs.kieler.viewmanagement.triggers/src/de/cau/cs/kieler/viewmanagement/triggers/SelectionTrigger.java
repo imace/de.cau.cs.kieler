@@ -14,6 +14,7 @@
  *****************************************************************************/
 package de.cau.cs.kieler.viewmanagement.triggers;
 
+import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeEditPart;
 import org.eclipse.jface.viewers.ISelection;
@@ -61,9 +62,10 @@ public class SelectionTrigger extends ATrigger implements ISelectionListener {
                     selectionEvent.setTriggerToggle(false);
                     selectionEvent.setAffectedObject(currentSelection);
                     notifyTrigger(selectionEvent);
+                    
                 }
                 currentSelection = selectedObject;
-
+                Point point = ((ShapeEditPart) selectedObject).getLocation();
                 selectionEvent.setAffectedObject(selectedObject);
                 selectionEvent.setTriggerToggle(true);
 
