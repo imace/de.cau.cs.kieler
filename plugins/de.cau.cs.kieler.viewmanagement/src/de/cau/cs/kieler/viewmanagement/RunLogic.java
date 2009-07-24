@@ -7,7 +7,20 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
 
-public class RunLogic {
+public final class RunLogic {
+	
+	private static RunLogic runlogic;
+		
+	private RunLogic(){
+		
+	}
+	
+	public static synchronized RunLogic getInstance(){
+		if (runlogic == null)
+			runlogic = new RunLogic();
+		return runlogic;
+	}
+
 
     // Local references to all triggers, effects and combos
     List<ATrigger> triggers;
