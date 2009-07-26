@@ -4,18 +4,18 @@ import java.util.Map;
 
 public class TriggerEventObject {
 	
-	private boolean triggerToggle;
+	private boolean triggerActive;
 	private Object affectedObject;
 	private  Map <String, String> parameters;
 
 
 
 public boolean getTriggerToggle(){
-	return triggerToggle;
+	return triggerActive;
 }
 
-public void setTriggerToggle(boolean newToggle){
-	triggerToggle=newToggle;
+public void setTriggerActive(boolean newToggle){
+	triggerActive=newToggle;
 	
 }
 

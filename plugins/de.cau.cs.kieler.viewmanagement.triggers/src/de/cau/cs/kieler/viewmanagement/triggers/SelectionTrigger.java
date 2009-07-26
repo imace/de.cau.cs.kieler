@@ -14,6 +14,8 @@
  *****************************************************************************/
 package de.cau.cs.kieler.viewmanagement.triggers;
 
+import java.util.List;
+
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeEditPart;
@@ -24,6 +26,7 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PlatformUI;
 
 import de.cau.cs.kieler.viewmanagement.ATrigger;
+import de.cau.cs.kieler.viewmanagement.RunLogic;
 import de.cau.cs.kieler.viewmanagement.TriggerEvent;
 import de.cau.cs.kieler.viewmanagement.TriggerEventObject;
 
@@ -32,11 +35,16 @@ import de.cau.cs.kieler.viewmanagement.TriggerEventObject;
  * 
  */
 
-public class SelectionTrigger extends ATrigger implements ISelectionListener {
+public final class SelectionTrigger extends ATrigger implements ISelectionListener {
 
+	
     TriggerEventObject selectionEvent;
     Object currentSelection;
+    
+    
 
+   
+    
     public SelectionTrigger() {
         // register this as a listener to the Eclipse selection service
         PlatformUI.getWorkbench().getActiveWorkbenchWindow()
@@ -55,11 +63,13 @@ public class SelectionTrigger extends ATrigger implements ISelectionListener {
        
         if (selection instanceof IStructuredSelection) {
             this.selectionEvent = new TriggerEventObject();
-            Object selectedObject = ((IStructuredSelection) selection)
-                    .getFirstElement();
+            List<?> selectionList = ((IStructuredSelection)selection).toList();
+            Object selectedObject = selectionList.get(0);
+            //Object selectedObject = ((IStructuredSelection) selection)
+              //      .getFirstElement();
             if (selectedObject instanceof ShapeEditPart) {
                 if (currentSelection != null) {
-                    selectionEvent.setTriggerToggle(false);
+                    selectionEvent.setTriggerActive(false);
                     selectionEvent.setAffectedObject(currentSelection);
                     notifyTrigger(selectionEvent);
                     
@@ -67,7 +77,7 @@ public class SelectionTrigger extends ATrigger implements ISelectionListener {
                 currentSelection = selectedObject;
                 Point point = ((ShapeEditPart) selectedObject).getLocation();
                 selectionEvent.setAffectedObject(selectedObject);
-                selectionEvent.setTriggerToggle(true);
+                selectionEvent.setTriggerActive(true);
 
                 notifyTrigger(selectionEvent);
 
@@ -75,7 +85,7 @@ public class SelectionTrigger extends ATrigger implements ISelectionListener {
                 // selectedObject);
             } else {
                 if (currentSelection != null) {
-                    selectionEvent.setTriggerToggle(false);
+                    selectionEvent.setTriggerActive(false);
                     selectionEvent.setAffectedObject(currentSelection);
                     notifyTrigger(selectionEvent);
                 }

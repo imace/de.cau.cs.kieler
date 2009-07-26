@@ -6,6 +6,8 @@ import java.util.Map;
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.RectangleFigure;
+import org.eclipse.draw2d.Viewport;
+import org.eclipse.draw2d.geometry.PrecisionRectangle;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPartViewer;
@@ -53,13 +55,30 @@ public class HighlightEffect extends AEffect {
            
             IFigure selectedFigure = objectToHighlight.getFigure();
             
+
+            
             // get same bounds as the selected figure ...
             Rectangle bounds = selectedFigure.getBounds().getCopy();
             // ... but in absolute coordinates
             System.out.println(bounds);
-            bounds.scale(renderedRootEP.getZoomManager().getZoom());
+            //bounds.scale(renderedRootEP.getZoomManager().getZoom());
             System.out.println(bounds);
-            //selectedFigure.translateToAbsolute(bounds);
+            selectedFigure.translateToAbsolute(bounds);
+            
+            IFigure parentFigure = selectedFigure.getParent();
+            while( parentFigure != null ) {
+             if(parentFigure instanceof Viewport) {
+               Viewport viewport = (Viewport)parentFigure;
+               bounds.translate(
+                     viewport.getHorizontalRangeModel().getValue(),
+                     viewport.getVerticalRangeModel().getValue());
+               parentFigure = null;
+             }
+             else {
+               parentFigure = parentFigure.getParent();
+             }
+            } 
+            
             
                    
             
