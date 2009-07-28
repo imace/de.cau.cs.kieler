@@ -49,7 +49,7 @@ public class HighlightEffect extends AEffect {
         
         if(rootEP instanceof RenderedDiagramRootEditPart){
             IFigure layer = ((RenderedDiagramRootEditPart) rootEP).getLayer(RenderedDiagramRootEditPart.FEEDBACK_LAYER);
-            RenderedDiagramRootEditPart renderedRootEP = (RenderedDiagramRootEditPart) rootEP;
+            
             
             // get Figure to the EditPart
            
@@ -61,22 +61,22 @@ public class HighlightEffect extends AEffect {
             Rectangle bounds = selectedFigure.getBounds().getCopy();
             // ... but in absolute coordinates
             System.out.println(bounds);
-            //bounds.scale(renderedRootEP.getZoomManager().getZoom());
+            
             System.out.println(bounds);
             selectedFigure.translateToAbsolute(bounds);
-            
-            IFigure parentFigure = selectedFigure.getParent();
+           // get the top-most Viewport to determine the scroll value and apply for correction 
+           IFigure parentFigure = selectedFigure.getParent();
             while( parentFigure != null ) {
              if(parentFigure instanceof Viewport) {
                Viewport viewport = (Viewport)parentFigure;
                bounds.translate(
                      viewport.getHorizontalRangeModel().getValue(),
                      viewport.getVerticalRangeModel().getValue());
-               parentFigure = null;
+               
              }
-             else {
+             
                parentFigure = parentFigure.getParent();
-             }
+             
             } 
             
             

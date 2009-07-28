@@ -35,8 +35,12 @@ import de.cau.cs.kieler.viewmanagement.TriggerEventObject;
  * 
  */
 
-public final class SelectionTrigger extends ATrigger implements ISelectionListener {
+public class SelectionTrigger extends ATrigger implements ISelectionListener {
 
+
+	
+	
+	
 	
     TriggerEventObject selectionEvent;
     Object currentSelection;
@@ -47,7 +51,8 @@ public final class SelectionTrigger extends ATrigger implements ISelectionListen
     
     public SelectionTrigger() {
         // register this as a listener to the Eclipse selection service
-        PlatformUI.getWorkbench().getActiveWorkbenchWindow()
+    	
+    	PlatformUI.getWorkbench().getActiveWorkbenchWindow()
                 .getSelectionService().addSelectionListener(this);
     }
 

@@ -26,6 +26,8 @@ public final class RunLogic {
     List<ATrigger> triggers;
     List<AEffect> effects;
     List<ACombination> combos; 
+    
+   
 
     public void init() {
         triggers = new ArrayList<ATrigger>();
@@ -40,6 +42,8 @@ public final class RunLogic {
         this.readEffects();
         this.readTriggers();
         this.readCombinations();
+        
+        
 
         for (ACombination oneCombination : combos) {
             oneCombination.initialize();
@@ -51,10 +55,10 @@ public final class RunLogic {
     
     public void unregisterListeners() {
 		System.out.println("Unregistering");
-		this.init();
-		this.readEffects();
-        this.readTriggers();
-        this.readCombinations();
+		//this.init();
+		//this.readEffects();
+        //this.readTriggers();
+        //this.readCombinations();
 		
         
         for (ACombination oneCombination : combos)
@@ -128,6 +132,7 @@ public final class RunLogic {
                 if( attribute.equals(name)){
                     ATrigger myTrigger = (ATrigger) myExtensions[i]
                                                                  .createExecutableExtension("class");
+                   
                     return myTrigger;
                 }
             } catch (CoreException e) {
@@ -137,6 +142,24 @@ public final class RunLogic {
         }
         return null;
     }
+    
+    /*public static  ATrigger getTrigger(String name){
+    	 ATrigger myTrigger = null;
+    	for(int i=0; i<triggers2.size(); i++){
+    		ATrigger test= triggers2.get(i);
+    		
+			if(triggers2.get(i).toString().equals(name))
+    			myTrigger= triggers2.get(i);
+			
+    	}
+		return myTrigger;
+     
+   
+    			
+    		
+    	
+    }*/
+    
 
 	
     /*
