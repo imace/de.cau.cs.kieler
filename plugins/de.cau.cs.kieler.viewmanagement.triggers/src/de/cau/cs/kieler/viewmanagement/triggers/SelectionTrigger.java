@@ -21,6 +21,8 @@ import org.eclipse.gef.EditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeEditPart;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.ui.IPageListener;
+import org.eclipse.ui.IPerspectiveListener;
 import org.eclipse.ui.ISelectionListener;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PlatformUI;
@@ -54,6 +56,7 @@ public class SelectionTrigger extends ATrigger implements ISelectionListener {
     	
     	PlatformUI.getWorkbench().getActiveWorkbenchWindow()
                 .getSelectionService().addSelectionListener(this);
+    	
     }
 
     /*

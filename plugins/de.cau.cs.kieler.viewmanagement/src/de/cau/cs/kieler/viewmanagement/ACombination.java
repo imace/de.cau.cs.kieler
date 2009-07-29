@@ -33,6 +33,7 @@ public abstract class ACombination implements ITriggerListener{
     ATrigger t;
     List<ATrigger> triggersToEvaluate;
     
+    
     public abstract boolean evaluate(TriggerEventObject triggerEvent);
 
     public abstract void execute();
