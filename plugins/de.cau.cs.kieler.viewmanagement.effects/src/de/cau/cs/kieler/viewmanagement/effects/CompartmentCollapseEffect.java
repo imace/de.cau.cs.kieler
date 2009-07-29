@@ -92,4 +92,10 @@ public class CompartmentCollapseEffect extends AEffect {
 		
 	}
 
+	@Override
+	public void setActive(boolean effectActive) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

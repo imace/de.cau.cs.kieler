@@ -63,5 +63,11 @@ public class SelectionExpandCombination extends ACombination {
         effect.execute();
     }
 
+	@Override
+	public void undoLastEffect() {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }

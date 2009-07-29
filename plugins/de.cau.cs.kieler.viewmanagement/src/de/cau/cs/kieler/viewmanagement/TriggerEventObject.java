@@ -10,12 +10,12 @@ public class TriggerEventObject {
 
 
 
-public boolean getTriggerToggle(){
+public boolean getTriggerState(){
 	return triggerActive;
 }
 
-public void setTriggerActive(boolean newToggle){
-	triggerActive=newToggle;
+public void setTriggerActive(boolean newState){
+	triggerActive=newState;
 	
 }
 

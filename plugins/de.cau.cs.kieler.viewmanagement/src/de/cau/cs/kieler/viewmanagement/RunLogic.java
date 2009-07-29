@@ -22,7 +22,7 @@ public final class RunLogic {
 	}
 
 
-    // Local references to all triggers, effects and combos
+    static // Local references to all triggers, effects and combos
     List<ATrigger> triggers;
     List<AEffect> effects;
     List<ACombination> combos; 
@@ -81,7 +81,7 @@ public final class RunLogic {
             try {
                 ATrigger myTrigger = (ATrigger) myExtensions[i]
                         .createExecutableExtension("class");
-                this.triggers.add(myTrigger);
+                RunLogic.triggers.add(myTrigger);
             } catch (CoreException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
@@ -126,39 +126,18 @@ public final class RunLogic {
         IConfigurationElement[] myExtensions = Platform.getExtensionRegistry()
                 .getConfigurationElementsFor(
                         "de.cau.cs.kieler.viewmanagement.triggers");
+        ATrigger myTrigger = null;
         for (int i = 0; i < myExtensions.length; i++) {
-            try {
-                String attribute = myExtensions[i].getAttribute("name");
-                if( attribute.equals(name)){
-                    ATrigger myTrigger = (ATrigger) myExtensions[i]
-                                                                 .createExecutableExtension("class");
-                   
-                    return myTrigger;
-                }
-            } catch (CoreException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
+            String attribute = myExtensions[i].getAttribute("name");
+			if( attribute.equals(name)){
+			     myTrigger = triggers.get(i);
+			    
+			}
         }
-        return null;
+       
+		return myTrigger; 
     }
-    
-    /*public static  ATrigger getTrigger(String name){
-    	 ATrigger myTrigger = null;
-    	for(int i=0; i<triggers2.size(); i++){
-    		ATrigger test= triggers2.get(i);
-    		
-			if(triggers2.get(i).toString().equals(name))
-    			myTrigger= triggers2.get(i);
-			
-    	}
-		return myTrigger;
-     
    
-    			
-    		
-    	
-    }*/
     
 
 	

@@ -80,7 +80,7 @@ public class SelectionTrigger extends ATrigger implements ISelectionListener {
                     
                 }
                 currentSelection = selectedObject;
-                Point point = ((ShapeEditPart) selectedObject).getLocation();
+                
                 selectionEvent.setAffectedObject(selectedObject);
                 selectionEvent.setTriggerActive(true);
 

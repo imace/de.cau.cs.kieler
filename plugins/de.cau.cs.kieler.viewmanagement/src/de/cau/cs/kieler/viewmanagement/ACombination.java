@@ -38,6 +38,8 @@ public abstract class ACombination implements ITriggerListener{
     public abstract void execute();
 
     public abstract List<ATrigger> getTriggers();
+    
+    public abstract void undoLastEffect();
 
 	public void initialize() {
 		triggersToEvaluate=getTriggers();
@@ -48,6 +50,7 @@ public abstract class ACombination implements ITriggerListener{
 	}
 	
 	public void finalize (){
+		undoLastEffect();
 		triggersToEvaluate=getTriggers();
 		for (int i=0; i<triggersToEvaluate.size();i++){
 			ATrigger a = triggersToEvaluate.get(i);

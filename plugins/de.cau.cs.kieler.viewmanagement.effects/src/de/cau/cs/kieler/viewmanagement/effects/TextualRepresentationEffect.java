@@ -32,6 +32,11 @@ public class TextualRepresentationEffect extends AEffect{
 		this.objectToHighlight = target;
 		
 	}
+	@Override
+	public void setActive(boolean effectActive) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 
 }

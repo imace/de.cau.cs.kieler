@@ -39,6 +39,7 @@ public class SelectionHighlightCombination extends ACombination {
     
     ShapeEditPart objectToHighlight;
     Map <String, String> objectParameters;
+    boolean triggerActive;
 
     @Override
     public List<ATrigger> getTriggers() {
@@ -59,6 +60,7 @@ public class SelectionHighlightCombination extends ACombination {
         if( affectedObject instanceof ShapeEditPart ){
             this.objectToHighlight = (ShapeEditPart)affectedObject;
             this.objectParameters = triggerEvent.getParameters();
+            this.triggerActive = triggerEvent.getTriggerState();
             return true; // FIXME: only true under certain conditions
         }
         else
@@ -74,8 +76,16 @@ public class SelectionHighlightCombination extends ACombination {
             effect = new HighlightEffect();
         effect.setTarget(this.objectToHighlight);
         effect.setParameters(this.objectParameters);
+        effect.setActive(this.triggerActive);
         effect.execute();
+        
     }
+
+	@Override
+	public void undoLastEffect() {
+		effect.undo();
+		
+	}
     
     
 

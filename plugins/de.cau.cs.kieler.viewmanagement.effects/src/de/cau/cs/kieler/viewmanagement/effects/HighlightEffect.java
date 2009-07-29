@@ -26,6 +26,7 @@ public class HighlightEffect extends AEffect {
 
     ShapeEditPart objectToHighlight;
     RectangleFigure highlightFigure;
+    boolean highlightActive;
     
     // default constructor is always called by Eclipse... 
     public HighlightEffect() {
@@ -41,7 +42,7 @@ public class HighlightEffect extends AEffect {
         
     }
     
-    @Override
+    
     public void execute() {
         
         // search a layer we can draw on        
@@ -87,7 +88,9 @@ public class HighlightEffect extends AEffect {
             highlightFigure.setBounds(bounds);
             System.out.println(highlightFigure.getBounds() +  " "+bounds);
             // add the new highlight figure to the layer
+          
             layer.add(highlightFigure);
+            
             
             // schedule a repaint of the feedback layer
             layer.invalidate();
@@ -109,9 +112,16 @@ public class HighlightEffect extends AEffect {
         this.objectToHighlight = target;
     }
 
-	@Override
+	
 	public void setParameters(Map<String, String> parameters) {
 		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void setActive(boolean effectActive) {
+		this.highlightActive= effectActive;
 		
 	}
 

@@ -14,4 +14,6 @@ public abstract class AEffect {
 	public abstract void setTarget(ShapeEditPart target);
 		
 	public abstract void setParameters(Map <String, String> parameters);
+	
+	public abstract void setActive(boolean effectActive);
 }

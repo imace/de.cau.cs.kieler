@@ -26,7 +26,7 @@ public class SelectionCollapseCombination extends ACombination {
     ShapeEditPart objectToHighlight;
     Map <String, String> objectParameters;
 
-    @Override
+   
     public List<ATrigger> getTriggers() {
         this.st = (SelectionTrigger)RunLogic.getTrigger("SelectionTrigger");
         List<ATrigger> myTriggers = new ArrayList<ATrigger>();
@@ -39,7 +39,7 @@ public class SelectionCollapseCombination extends ACombination {
      * 
      * @see de.cau.cs.kieler.viewmanagement.ACombination#evaluate()
      */
-    @Override
+   
     public boolean evaluate(TriggerEventObject triggerEvent) {
         Object affectedObject = triggerEvent.getAffectedObject();
         if( affectedObject instanceof ShapeEditPart ){
@@ -54,7 +54,7 @@ public class SelectionCollapseCombination extends ACombination {
     /* (non-Javadoc)
      * @see de.cau.cs.kieler.viewmanagement.ACombination#execute()
      */
-    @Override
+   
     public void execute() {
         if ( effect == null )
             effect = new CompartmentCollapseEffect();
@@ -62,6 +62,12 @@ public class SelectionCollapseCombination extends ACombination {
         effect.setParameters(objectParameters);
         effect.execute();
     }
+
+	@Override
+	public void undoLastEffect() {
+		// TODO Auto-generated method stub
+		
+	}
 
 
 }
