@@ -50,7 +50,17 @@ public class HighlightEffect extends AEffect {
         
         if(rootEP instanceof RenderedDiagramRootEditPart){
             IFigure layer = ((RenderedDiagramRootEditPart) rootEP).getLayer(RenderedDiagramRootEditPart.FEEDBACK_LAYER);
-            
+            IFigure guideLayer = ((RenderedDiagramRootEditPart) rootEP).getLayer(RenderedDiagramRootEditPart.GUIDE_LAYER);
+            IFigure connectionLayer = ((RenderedDiagramRootEditPart) rootEP).getLayer(RenderedDiagramRootEditPart.CONNECTION_LAYER);
+            IFigure decoprintLayer = ((RenderedDiagramRootEditPart) rootEP).getLayer(RenderedDiagramRootEditPart.DECORATION_PRINTABLE_LAYER);
+            IFigure decounprintLayer = ((RenderedDiagramRootEditPart) rootEP).getLayer(RenderedDiagramRootEditPart.DECORATION_UNPRINTABLE_LAYER);
+            IFigure gridLayer = ((RenderedDiagramRootEditPart) rootEP).getLayer(RenderedDiagramRootEditPart.GRID_LAYER);
+            IFigure handleLayer = ((RenderedDiagramRootEditPart) rootEP).getLayer(RenderedDiagramRootEditPart.HANDLE_LAYER);
+            IFigure primaryLayer = ((RenderedDiagramRootEditPart) rootEP).getLayer(RenderedDiagramRootEditPart.PRIMARY_LAYER);
+            IFigure feedBackLayer = ((RenderedDiagramRootEditPart) rootEP).getLayer(RenderedDiagramRootEditPart.FEEDBACK_LAYER);
+            IFigure scaledFBLayer = ((RenderedDiagramRootEditPart) rootEP).getLayer(RenderedDiagramRootEditPart.SCALED_FEEDBACK_LAYER);
+            IFigure printableLayers = ((RenderedDiagramRootEditPart) rootEP).getLayer(RenderedDiagramRootEditPart.PRINTABLE_LAYERS);
+            IFigure scaleableLayers = ((RenderedDiagramRootEditPart) rootEP).getLayer(RenderedDiagramRootEditPart.SCALABLE_LAYERS);
             
             // get Figure to the EditPart
            
@@ -64,8 +74,10 @@ public class HighlightEffect extends AEffect {
             System.out.println(bounds);
             
             System.out.println(bounds);
+            
             selectedFigure.translateToAbsolute(bounds);
-           // get the top-most Viewport to determine the scroll value and apply for correction 
+            bounds.scale(((RenderedDiagramRootEditPart) rootEP).getZoomManager().getZoom());
+            //get the top-most Viewport to determine the scroll value and apply for correction 
            IFigure parentFigure = selectedFigure.getParent();
             while( parentFigure != null ) {
              if(parentFigure instanceof Viewport) {
@@ -86,7 +98,7 @@ public class HighlightEffect extends AEffect {
             // set the bounds of the Figure that will do the highlighting
             
             highlightFigure.setBounds(bounds);
-            System.out.println(highlightFigure.getBounds() +  " "+bounds);
+//            System.out.println(highlightFigure.getBounds() +  " "+bounds);
             // add the new highlight figure to the layer
           
             layer.add(highlightFigure);

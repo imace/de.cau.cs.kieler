@@ -27,11 +27,12 @@ import org.eclipse.core.runtime.Platform;
  */
 public abstract class ACombination implements ITriggerListener{
 
-	private boolean evresult;
+	//private boolean evresult;
 	List<ATrigger> triggers;
     List<AEffect> effects;
     ATrigger t;
     List<ATrigger> triggersToEvaluate;
+    boolean comboActive;
     
     
     public abstract boolean evaluate(TriggerEventObject triggerEvent);
@@ -41,6 +42,14 @@ public abstract class ACombination implements ITriggerListener{
     public abstract List<ATrigger> getTriggers();
     
     public abstract void undoLastEffect();
+    
+    public boolean getActive(){
+    	return comboActive;
+    }
+//    Activate or deactivate a combo
+    public void setActive(boolean active){
+    	this.comboActive= active;
+    }
 
 	public void initialize() {
 		triggersToEvaluate=getTriggers();
