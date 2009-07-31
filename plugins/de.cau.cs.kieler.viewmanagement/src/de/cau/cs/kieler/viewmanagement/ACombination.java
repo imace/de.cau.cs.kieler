@@ -32,7 +32,7 @@ public abstract class ACombination implements ITriggerListener{
     List<AEffect> effects;
     ATrigger t;
     List<ATrigger> triggersToEvaluate;
-    boolean comboActive;
+    private boolean comboActive;
     
     
     public abstract boolean evaluate(TriggerEventObject triggerEvent);

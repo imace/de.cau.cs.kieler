@@ -44,10 +44,10 @@ public final class RunLogic {
         this.readCombinations();
 //        FOR TESTING: Activate all available combos (Should be set by user/other module later)
         for (ACombination oneCombination : combos)
-        	oneCombination.comboActive=true;
+        	oneCombination.setActive(true);
 
         for (ACombination oneCombination : combos) {
-        	if (oneCombination.comboActive) //initialize only combos set to active
+        	if (oneCombination.getActive()) //initialize only combos set to active
             oneCombination.initialize();
         }        
         // print all available extensions
@@ -64,7 +64,7 @@ public final class RunLogic {
 		
         
         for (ACombination oneCombination : combos)
-        	if(oneCombination.comboActive) //finalize only combos that were active
+        	if(oneCombination.getActive()) //finalize only combos that were active
             oneCombination.finalize();
         for (ATrigger oneTrigger : triggers)
         	oneTrigger.finalize();

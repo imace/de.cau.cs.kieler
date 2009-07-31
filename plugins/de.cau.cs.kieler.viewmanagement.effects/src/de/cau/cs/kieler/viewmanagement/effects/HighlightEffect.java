@@ -71,9 +71,9 @@ public class HighlightEffect extends AEffect {
             // get same bounds as the selected figure ...
             Rectangle bounds = selectedFigure.getBounds().getCopy();
             // ... but in absolute coordinates
-            System.out.println(bounds);
-            
-            System.out.println(bounds);
+//            System.out.println(bounds);
+//            
+//            System.out.println(bounds);
             
             selectedFigure.translateToAbsolute(bounds);
             bounds.scale(((RenderedDiagramRootEditPart) rootEP).getZoomManager().getZoom());
