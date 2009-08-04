@@ -15,5 +15,5 @@ public abstract class AEffect {
 		
 	public abstract void setParameters(Map <String, String> parameters);
 	
-	public abstract void setActive(boolean effectActive);
+	//public abstract void setActive(boolean effectActive);
 }

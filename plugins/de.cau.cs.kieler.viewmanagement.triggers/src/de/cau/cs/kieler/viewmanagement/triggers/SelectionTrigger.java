@@ -78,13 +78,13 @@ public class SelectionTrigger extends ATrigger implements ISelectionListener {
             if (selectedObject instanceof ShapeEditPart) {
                 if (currentSelection != null) {
                     selectionEvent.setTriggerActive(false);
-                    selectionEvent.setAffectedObject(currentSelection);
+                    selectionEvent.setAffectedObject(translateToURI(currentSelection));
                     notifyTrigger(selectionEvent);
                     
                 }
                 currentSelection = selectedObject;
                 
-                selectionEvent.setAffectedObject(selectedObject);
+                selectionEvent.setAffectedObject(translateToURI(selectedObject));
                 selectionEvent.setTriggerActive(true);
 
                 notifyTrigger(selectionEvent);
@@ -94,7 +94,7 @@ public class SelectionTrigger extends ATrigger implements ISelectionListener {
             } else {
                 if (currentSelection != null) {
                     selectionEvent.setTriggerActive(false);
-                    selectionEvent.setAffectedObject(currentSelection);
+                    selectionEvent.setAffectedObject(translateToURI(currentSelection));
                     notifyTrigger(selectionEvent);
                 }
             }

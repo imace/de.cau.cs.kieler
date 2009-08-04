@@ -5,7 +5,7 @@ import java.util.Map;
 public class TriggerEventObject {
 	
 	private boolean triggerActive;
-	private Object affectedObject;
+	private String affectedObject;
 	private  Map <String, String> parameters;
 
 
@@ -23,7 +23,7 @@ public Object getAffectedObject(){
 	return affectedObject;
 }
 
-public void setAffectedObject(Object newObject){
+public void setAffectedObject(String newObject){
 	affectedObject= newObject;
 	
 }

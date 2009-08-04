@@ -1,10 +1,17 @@
 package de.cau.cs.kieler.viewmanagement;
 
+import java.util.HashMap;
+
+
 import javax.swing.event.EventListenerList;
+import javax.swing.text.View;
+
+import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeEditPart;
 
 public abstract class ATrigger {
 
     private EventListenerList triggerListener = new EventListenerList();
+    
     
     public void addTriggerListener (ITriggerListener triggerlistener)
     {
@@ -22,7 +29,17 @@ public abstract class ATrigger {
     
     }
     
-    
+    public String translateToURI(Object sourceObject){
+    	if (sourceObject instanceof ShapeEditPart){
+    	String result= null;
+    	View view = (View) ((ShapeEditPart) sourceObject).getModel();
+    	EObject modelElement = view.getElement();
+    	result = modelElement.eResource().getEObject((ShapeEditPart)sourceObject).toString();
+		return result;
+    	}
+    	
+    }
+   
     /**
      * Release all system resources for this object.
      */

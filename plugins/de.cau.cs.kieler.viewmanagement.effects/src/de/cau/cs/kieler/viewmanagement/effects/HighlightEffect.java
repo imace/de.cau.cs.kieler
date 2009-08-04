@@ -19,6 +19,7 @@ import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.ScrollBar;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.swt.graphics.Color;
 
 import de.cau.cs.kieler.viewmanagement.AEffect;
 
@@ -26,14 +27,16 @@ public class HighlightEffect extends AEffect {
 
     ShapeEditPart objectToHighlight;
     RectangleFigure highlightFigure;
-    boolean highlightActive;
+    //boolean highlightActive;
+    int lineWidth= 0;
+    Color color = ColorConstants.red;
     
     // default constructor is always called by Eclipse... 
     public HighlightEffect() {
         // configure the figure that should be used for highlighting.
         this.highlightFigure = new RectangleFigure();
-        highlightFigure.setLineWidth(4);
-        highlightFigure.setForegroundColor(ColorConstants.red);
+        highlightFigure.setLineWidth(lineWidth);
+        highlightFigure.setForegroundColor(color);
         highlightFigure.setFill(false);
         highlightFigure.setFillXOR(false);
         highlightFigure.setOutline(true);
@@ -65,6 +68,7 @@ public class HighlightEffect extends AEffect {
             // get Figure to the EditPart
            
             IFigure selectedFigure = objectToHighlight.getFigure();
+            
             
 
             
@@ -131,10 +135,15 @@ public class HighlightEffect extends AEffect {
 	}
 
 
-	@Override
-	public void setActive(boolean effectActive) {
-		this.highlightActive= effectActive;
-		
+	
+//	public void setActive(boolean effectActive) {
+//		this.highlightActive= effectActive;
+//		
+//	}
+	public void setHighlightFigure(int width, Color lineColor){
+		lineWidth=width;
+		color=lineColor;
 	}
+	
 
 }

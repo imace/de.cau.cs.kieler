@@ -20,6 +20,7 @@ import java.util.List;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeEditPart;
 
 /**
  * @author nbe
@@ -33,6 +34,7 @@ public abstract class ACombination implements ITriggerListener{
     ATrigger t;
     List<ATrigger> triggersToEvaluate;
     private boolean comboActive;
+    private HashMap<String,EditPart> cachedEditParts;
     
     
     public abstract boolean evaluate(TriggerEventObject triggerEvent);
@@ -79,6 +81,48 @@ public abstract class ACombination implements ITriggerListener{
 	        this.execute();
 	    
 	}
+	
+
+	public EditPart getEditPart(String elementURIFragment,                                                                    
+			EditPart parent) {
+			            if (cachedEditParts == null) {
+			                // if hashmap is not initialized, create it
+			                    cachedEditParts = new HashMap<String,EditPart>();
+			            }
+			            else {
+			                //try to get from hashmap first
+			                    if (cachedEditParts.containsKey(elementURIFragment))
+			                            return cachedEditParts.get(elementURIFragment);
+			            }
+			            
+			        List children = parent.getChildren();
+			        for (Object child : children) {
+			            if (child instanceof ShapeEditPart) {
+			                View view = (View) ((ShapeEditPart) child).getModel();
+			                EObject modelElement = view.getElement();
+			                            if (modelElement.equals(
+			                                    modelElement.eResource()
+			                                .getEObject(elementURIFragment))) {
+			                        //cache for later calls
+			                        cachedEditParts.put(
+			                                        elementURIFragment,
+			                                        (ShapeEditPart) child);
+			                        return (ShapeEditPart) child;
+			                            }
+			                            
+			            }
+			            // if node was not found yet, search recursively
+			            if (child instanceof EditPart) {
+			                EditPart result = getEditPart(elementURIFragment,
+			                                                   (EditPart) child);
+			                if (result != null) {
+			                    return result;
+			                }
+			            }
+			        }
+			        // we did not find anything in this trunk
+			        return null;
+			    }
 	
 
 }
