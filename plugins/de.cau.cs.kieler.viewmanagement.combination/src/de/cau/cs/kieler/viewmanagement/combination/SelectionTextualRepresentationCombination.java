@@ -62,7 +62,7 @@ public class SelectionTextualRepresentationCombination extends ACombination {
             effect = new HighlightEffect();
         effect.setTarget(this.objectToHighlight);
         effect.setParameters(this.objectParameters);
-        effect.setActive(this.triggerActive);
+        //effect.setActive(this.triggerActive);
         effect.execute();
         
     }

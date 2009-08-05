@@ -87,10 +87,10 @@ public class CompartmentExpandEffect extends AEffect {
 		
 	}
 
-	@Override
-	public void setActive(boolean effectActive) {
-		// TODO Auto-generated method stub
-		
-	}
+//	@Override
+//	public void setActive(boolean effectActive) {
+//		// TODO Auto-generated method stub
+//		
+//	}
 
 }
