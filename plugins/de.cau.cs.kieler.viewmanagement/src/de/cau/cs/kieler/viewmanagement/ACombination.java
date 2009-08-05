@@ -15,8 +15,14 @@
 package de.cau.cs.kieler.viewmanagement;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
+import javax.swing.text.View;
+
+
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.gef.EditPart;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
@@ -99,7 +105,7 @@ public abstract class ACombination implements ITriggerListener{
 			        for (Object child : children) {
 			            if (child instanceof ShapeEditPart) {
 			                View view = (View) ((ShapeEditPart) child).getModel();
-			                EObject modelElement = view.getElement();
+			                EObject modelElement = (EObject) view.getElement();
 			                            if (modelElement.equals(
 			                                    modelElement.eResource()
 			                                .getEObject(elementURIFragment))) {
