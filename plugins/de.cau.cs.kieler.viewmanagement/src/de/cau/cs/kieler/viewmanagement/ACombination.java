@@ -110,7 +110,7 @@ public abstract class ACombination implements ITriggerListener{
     
 	
 
-	public EditPart getEditPart(String elementURIFragment,                                                                    
+	public EditPart translateToEditPart(String elementURIFragment,                                                                    
 			EditPart parent) {
 		
 			            if (cachedEditParts == null) {
@@ -141,7 +141,7 @@ public abstract class ACombination implements ITriggerListener{
 			            }
 			            // if node was not found yet, search recursively
 			            if (child instanceof EditPart) {
-			                EditPart result = getEditPart(elementURIFragment,
+			                EditPart result = translateToEditPart(elementURIFragment,
 			                                                   (EditPart) child);
 			                if (result != null) {
 			                    return result;
