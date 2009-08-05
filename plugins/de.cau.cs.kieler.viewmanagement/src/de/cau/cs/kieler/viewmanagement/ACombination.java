@@ -14,12 +14,17 @@
  *****************************************************************************/
 package de.cau.cs.kieler.viewmanagement;
 
+
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.gef.EditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditor;
+import org.eclipse.gmf.runtime.notation.View;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
-import javax.swing.text.View;
-
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gef.EditPart;
@@ -91,6 +96,7 @@ public abstract class ACombination implements ITriggerListener{
 
 	public EditPart getEditPart(String elementURIFragment,                                                                    
 			EditPart parent) {
+		
 			            if (cachedEditParts == null) {
 			                // if hashmap is not initialized, create it
 			                    cachedEditParts = new HashMap<String,EditPart>();
