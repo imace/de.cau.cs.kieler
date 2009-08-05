@@ -4,14 +4,17 @@ import java.util.HashMap;
 
 
 import javax.swing.event.EventListenerList;
-import javax.swing.text.View;
 
+
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.gef.EditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeEditPart;
+import org.eclipse.gmf.runtime.notation.View;
 
 public abstract class ATrigger {
 
     private EventListenerList triggerListener = new EventListenerList();
-    
+    private String result;
     
     public void addTriggerListener (ITriggerListener triggerlistener)
     {
@@ -28,15 +31,17 @@ public abstract class ATrigger {
     		l.notifyTrigger (triggerEvent);
     
     }
-    
+    //returns URIFragment for given object
     public String translateToURI(Object sourceObject){
     	if (sourceObject instanceof ShapeEditPart){
-    	String result= null;
+    
     	View view = (View) ((ShapeEditPart) sourceObject).getModel();
     	EObject modelElement = view.getElement();
-    	result = modelElement.eResource().getEObject((ShapeEditPart)sourceObject).toString();
-		return result;
+    	result = modelElement.eResource().getURIFragment(modelElement);
+    	
     	}
+		return result;
+		
     	
     }
    
