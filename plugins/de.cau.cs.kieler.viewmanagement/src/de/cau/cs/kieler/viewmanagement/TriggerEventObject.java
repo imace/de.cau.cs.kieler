@@ -19,7 +19,7 @@ public void setTriggerActive(boolean newState){
 	
 }
 
-public Object getAffectedObject(){
+public String getAffectedObject(){
 	return affectedObject;
 }
 

@@ -56,7 +56,8 @@ public class SelectionHighlightCombination extends ACombination {
      */
     @Override
     public boolean evaluate(TriggerEventObject triggerEvent) {
-        Object affectedObject = triggerEvent.getAffectedObject();
+        EditPart parent= getRootEPAsParent();
+		EditPart affectedObject = getEditPart(triggerEvent.getAffectedObject(), parent);
         if( affectedObject instanceof ShapeEditPart ){
             this.objectToHighlight = (ShapeEditPart)affectedObject;
             this.objectParameters = triggerEvent.getParameters();
