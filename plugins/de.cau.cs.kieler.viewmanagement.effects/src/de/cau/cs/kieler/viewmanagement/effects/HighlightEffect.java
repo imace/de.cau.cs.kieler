@@ -43,6 +43,7 @@ public class HighlightEffect extends AEffect {
         highlightFigure.setOutlineXOR(false);
         highlightFigure.setOpaque(false);
         
+        
     }
     
     

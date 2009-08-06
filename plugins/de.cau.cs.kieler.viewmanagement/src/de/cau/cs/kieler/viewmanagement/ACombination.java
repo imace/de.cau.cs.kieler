@@ -51,7 +51,7 @@ public abstract class ACombination implements ITriggerListener{
     private boolean comboActive;
     private HashMap<String,EditPart> cachedEditParts;
     EditPart rootEP;
-    
+    public EditPart parent = null;
     
     public abstract boolean evaluate(TriggerEventObject triggerEvent);
 
@@ -109,10 +109,11 @@ public abstract class ACombination implements ITriggerListener{
             }
     
 	
-
+//parent may be null
 	public EditPart translateToEditPart(String elementURIFragment,                                                                    
 			EditPart parent) {
-		
+			if (parent==null)
+				parent= getRootEPAsParent();
 			            if (cachedEditParts == null) {
 			                // if hashmap is not initialized, create it
 			                    cachedEditParts = new HashMap<String,EditPart>();
