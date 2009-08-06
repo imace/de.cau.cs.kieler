@@ -130,7 +130,7 @@ public class HighlightEffect extends AEffect {
     }
 
 	
-	public void setParameters(Map<String, String> parameters) {
+	public void setParameters(Object objectParameters) {
 		// TODO Auto-generated method stub
 		
 	}

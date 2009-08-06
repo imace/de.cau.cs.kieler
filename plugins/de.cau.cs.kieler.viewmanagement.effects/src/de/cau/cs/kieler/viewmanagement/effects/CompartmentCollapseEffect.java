@@ -87,7 +87,7 @@ public class CompartmentCollapseEffect extends AEffect {
     }
 
 	@Override
-	public void setParameters(Map<String, String> parameters) {
+	public void setParameters(Object parameters) {
 		// TODO Auto-generated method stub
 		
 	}

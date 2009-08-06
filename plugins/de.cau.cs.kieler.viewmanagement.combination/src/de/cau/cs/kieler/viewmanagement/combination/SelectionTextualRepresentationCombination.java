@@ -24,7 +24,7 @@ public class SelectionTextualRepresentationCombination extends ACombination {
     SelectionTrigger st;
     
     ShapeEditPart objectToHighlight;
-    Map <String, String> objectParameters;
+    Object objectParameters;
     boolean triggerActive;
 
     @Override

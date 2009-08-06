@@ -111,8 +111,9 @@ public class TextualRepresentationEffect extends AEffect {
     }
 
 	
-	public void setParameters(Map<String, String> parameters) {
-		highlightFigure.setText(parameters.get(0));
+	public void setParameters(Object parameters) {
+		String textParameters= (String) parameters;
+		highlightFigure.setText(textParameters);
 		
 	}
 

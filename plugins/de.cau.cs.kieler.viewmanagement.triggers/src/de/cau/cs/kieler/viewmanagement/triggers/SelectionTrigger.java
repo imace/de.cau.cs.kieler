@@ -95,6 +95,7 @@ public class SelectionTrigger extends ATrigger implements ISelectionListener {
                 if (currentSelection != null) {
                     selectionEvent.setTriggerActive(false);
                     selectionEvent.setAffectedObject(translateToURI(currentSelection));
+                   
                     notifyTrigger(selectionEvent);
                 }
             }

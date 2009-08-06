@@ -6,7 +6,7 @@ public class TriggerEventObject {
 	
 	private boolean triggerActive;
 	private String affectedObject;
-	private  Map <String, String> parameters;
+	private  Object parameters;
 
 
 
@@ -28,11 +28,11 @@ public void setAffectedObject(String newObject){
 	
 }
 
-public Map <String, String> getParameters(){
+public Object getParameters(){
 	return parameters;
 	
 }
-public void setParameters (Map <String, String> newParameters){
+public void setParameters (Object newParameters){
 	parameters = newParameters;
 }
 

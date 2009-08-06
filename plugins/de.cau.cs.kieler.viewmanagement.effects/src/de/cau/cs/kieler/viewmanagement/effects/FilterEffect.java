@@ -62,7 +62,7 @@ public class FilterEffect extends AEffect {
     }
 
 	
-	public void setParameters(Map<String, String> parameters) {
+	public void setParameters(Object parameters) {
 		// TODO Auto-generated method stub
 		
 	}
