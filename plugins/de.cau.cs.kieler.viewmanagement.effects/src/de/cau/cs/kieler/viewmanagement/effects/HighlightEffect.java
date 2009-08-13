@@ -1,13 +1,13 @@
 package de.cau.cs.kieler.viewmanagement.effects;
 
-import java.awt.Point;
-import java.util.Map;
+
+
 
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.RectangleFigure;
 import org.eclipse.draw2d.Viewport;
-import org.eclipse.draw2d.geometry.PrecisionRectangle;
+
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPartViewer;
@@ -15,9 +15,6 @@ import org.eclipse.gef.RootEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramGraphicalViewer;
 import org.eclipse.gmf.runtime.diagram.ui.render.editparts.RenderedDiagramRootEditPart;
-import org.eclipse.swt.widgets.Canvas;
-import org.eclipse.swt.widgets.ScrollBar;
-import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.swt.graphics.Color;
 
@@ -28,8 +25,8 @@ public class HighlightEffect extends AEffect {
     ShapeEditPart objectToHighlight;
     RectangleFigure highlightFigure;
     //boolean highlightActive;
-    int lineWidth= 0;
-    Color color = ColorConstants.red;
+    int lineWidth=3; 
+    Color color= ColorConstants.blue;
     
     // default constructor is always called by Eclipse... 
     public HighlightEffect() {
@@ -65,10 +62,14 @@ public class HighlightEffect extends AEffect {
             IFigure scaledFBLayer = ((RenderedDiagramRootEditPart) rootEP).getLayer(RenderedDiagramRootEditPart.SCALED_FEEDBACK_LAYER);
             IFigure printableLayers = ((RenderedDiagramRootEditPart) rootEP).getLayer(RenderedDiagramRootEditPart.PRINTABLE_LAYERS);
             IFigure scaleableLayers = ((RenderedDiagramRootEditPart) rootEP).getLayer(RenderedDiagramRootEditPart.SCALABLE_LAYERS);
-            
+            IFigure pagebreaksLayer = ((RenderedDiagramRootEditPart) rootEP).getLayer(RenderedDiagramRootEditPart.PAGE_BREAKS_LAYER);
+           
             // get Figure to the EditPart
            
             IFigure selectedFigure = objectToHighlight.getFigure();
+            
+            highlightFigure.setLineWidth(lineWidth);
+            highlightFigure.setForegroundColor(color);
             
             
 
@@ -76,9 +77,7 @@ public class HighlightEffect extends AEffect {
             // get same bounds as the selected figure ...
             Rectangle bounds = selectedFigure.getBounds().getCopy();
             // ... but in absolute coordinates
-//            System.out.println(bounds);
-//            
-//            System.out.println(bounds);
+
             
             selectedFigure.translateToAbsolute(bounds);
             bounds.scale(((RenderedDiagramRootEditPart) rootEP).getZoomManager().getZoom());
@@ -142,9 +141,15 @@ public class HighlightEffect extends AEffect {
 //		
 //	}
 	public void setHighlightFigure(int width, Color lineColor){
-		lineWidth=width;
-		color=lineColor;
+		this.lineWidth = width;
+		this.color=lineColor;
 	}
 	
+//	public  Color getHighlightColor(){
+//		return color;
+//	}
+//	public int getHighlightLine(){
+//		return lineWidth;
+//	}
 
 }

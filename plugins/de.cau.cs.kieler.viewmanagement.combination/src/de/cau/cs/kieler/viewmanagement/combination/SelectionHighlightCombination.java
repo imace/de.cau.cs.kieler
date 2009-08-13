@@ -18,8 +18,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeEditPart;
+import org.eclipse.swt.graphics.Color;
 
 import de.cau.cs.kieler.viewmanagement.ACombination;
 import de.cau.cs.kieler.viewmanagement.AEffect;
@@ -40,6 +42,8 @@ public class SelectionHighlightCombination extends ACombination {
     ShapeEditPart objectToHighlight;
     Object objectParameters;
     boolean triggerActive;
+    Color lineColor = ColorConstants.red;
+    int linewidth = 10;
 
     @Override
     public List<ATrigger> getTriggers() {
@@ -62,6 +66,7 @@ public class SelectionHighlightCombination extends ACombination {
             this.objectToHighlight = (ShapeEditPart)affectedObject;
             this.objectParameters = triggerEvent.getParameters();
             this.triggerActive = triggerEvent.getTriggerState();
+            
             return true; // FIXME: only true under certain conditions
         }
         else
@@ -75,8 +80,10 @@ public class SelectionHighlightCombination extends ACombination {
     public void execute() {
         if ( effect == null )
             effect = new HighlightEffect();
+        
         effect.setTarget(this.objectToHighlight);
         effect.setParameters(this.objectParameters);
+//        effect.setHighlightFigure(10, ColorConstants.red);
         //effect.setActive(this.triggerActive);
         effect.execute();
         
@@ -86,6 +93,11 @@ public class SelectionHighlightCombination extends ACombination {
 	public void undoLastEffect() {
 		effect.undo();
 		
+	}
+	
+	public void setHighlightEffect(Color newcolor, int newlinewidth){
+		lineColor= newcolor;
+		linewidth= newlinewidth;
 	}
     
     
