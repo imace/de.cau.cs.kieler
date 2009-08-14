@@ -1,0 +1,81 @@
+\documentclass[notes,handout]{beamer}
+\usetheme{Malmoe}
+
+\usepackage{pgf,pgfarrows,pgfnodes,pgfautomata,pgfheaps,pgfshade}
+\usepackage{amsmath,amssymb}
+\usepackage[latin1]{inputenc}
+\usepackage{wasysym}
+\usepackage[english]{babel}
+\usepackage{color}
+\usepackage{listings}
+\usepackage{bibgerm}
+\usepackage{xcolor}
+\usepackage{fancybox}
+\usepackage{times}
+\usepackage{courier}
+
+\bibliographystyle{acm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%       MODIFY  FOOTLINE      %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\defbeamertemplate*{footline}{infolines theme}
+{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.32\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+    \usebeamerfont{author in head/foot}\insertshortauthor
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.58\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+    \usebeamerfont{title in head/foot}\insertshorttitle
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.1\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    %\usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em}
+    \insertframenumber{} / \inserttotalframenumber\hspace*{2ex} 
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{Model Execution and Meta Layout in Eclipse}
+\subtitle{Snapshots of the KIELER Project}
+\author[Eclipse Summit 2009]{Christian~Motika and Miro~Sp\"onemann}
+\institute{
+  Real-Time Systems and Embedded Systems Group\\
+  Department of Computer Science\\
+  % Faculty of Engineering\\
+  Christian-Albrechts-Universit\"at zu Kiel, Germany
+}
+\date{
+\begin{tabular}[h]{l l}
+   \parbox{0.30\textwidth}{
+   			{\includegraphics[scale=0.50]{./images/kiem-logo.png}}
+   }
+   \parbox{0.90\textwidth}{   
+				Eclipse Summit, 08/27/2009
+   }
+\end{tabular}
+}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\part{Model Execution in Eclipse}
+\title[Model Execution in Eclipse]{}
+
+\frame{
+  \huge Part I: Model Execution in Eclipse
+}
+
+\include{kiem-cmot-handout}
+
+\part{Meta Layout of Graphical Models}
+\title[Meta Layout of Graphical Models]{}
+\frame{
+  \huge Part II: Meta Layout of Graphical Models
+}
+
+\include{kiml-msp}
+
+\end{document}

@@ -1,7 +1,7 @@
 % $Header: /cvsroot/latex-beamer/latex-beamer/examples/beamerexample1.tex,v 1.47 2004/11/04 15:43:51 tantau Exp $
 
 %%% FOR PRESENTATION
-\documentclass{beamer}
+%\documentclass{beamer}
 %%%\documentclass[notes]{beamer}
 %%% FOR HANDOUT
 %\documentclass[notes,handout]{beamer}
@@ -25,8 +25,8 @@
 
 %\mode<presentation>
 %{
-  \usetheme{Malmoe} %Luebeck
-  \usefonttheme[onlysmall]{structurebold}
+  %\usetheme{Malmoe} %Luebeck
+  %\usefonttheme[onlysmall]{structurebold}
   %\setbeamertemplate{background canvas}[vertical shading][bottom=gray!5,top=gray!5]
   %\usecolortheme{dolphin}
 %}
@@ -34,19 +34,19 @@
 %\setbeamercolor{math text}{fg=green!50!black}
 %\setbeamercolor{normal text in math text}{parent=math text}
 
-\usepackage{pgf,pgfarrows,pgfnodes,pgfautomata,pgfheaps,pgfshade}
-\usepackage{amsmath,amssymb}
-\usepackage[latin1]{inputenc}
-\usepackage{wasysym}
+%\usepackage{pgf,pgfarrows,pgfnodes,pgfautomata,pgfheaps,pgfshade}
+%\usepackage{amsmath,amssymb}
+%\usepackage[latin1]{inputenc}
+%\usepackage{wasysym}
 %\usepackage{colortbl}
-\usepackage[english]{babel}
-\usepackage{color}
-\usepackage{listings}         % Auflistung von Ausschnitten von Programm-Code
-\usepackage{bibgerm}
-\bibliographystyle{acm}
+%\usepackage[english]{babel}
+%\usepackage{color}
+%\usepackage{listings}         % Auflistung von Ausschnitten von Programm-Code
+%\usepackage{bibgerm}
+%\bibliographystyle{acm}
 
-\usepackage{xcolor}     %for listings
-\usepackage{fancybox} 
+%\usepackage{xcolor}     %for listings
+%\usepackage{fancybox} 
 
 %\usepackage{pgfpages}
 %\pgfpagelayout{2 on 1}[a4paper,border shrink=5mm,landscape]
@@ -54,53 +54,52 @@
 %\usepackage{lmodern}
 %\usepackage[T1]{fontenc} 
 
-\usepackage{times}
+%\usepackage{times}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%       MODIFY  FOOTLINE      %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\defbeamertemplate*{footline}{infolines theme}
-{
-  \leavevmode%
-  \hbox{%
-  \begin{beamercolorbox}[wd=.32\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
-    \usebeamerfont{author in head/foot}\insertshortauthor
-  \end{beamercolorbox}%
-  \begin{beamercolorbox}[wd=.58\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
-    \usebeamerfont{title in head/foot}\insertshorttitle
-  \end{beamercolorbox}%
-  \begin{beamercolorbox}[wd=.1\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
-    %\usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em}
-    \insertframenumber{} / \inserttotalframenumber\hspace*{2ex} 
-  \end{beamercolorbox}}%
-  \vskip0pt%
-}
+%\defbeamertemplate*{footline}{infolines theme}
+%{
+%  \leavevmode%
+%  \hbox{%
+%  \begin{beamercolorbox}[wd=.32\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+%    \usebeamerfont{author in head/foot}\insertshortauthor
+%  \end{beamercolorbox}%
+%  \begin{beamercolorbox}[wd=.58\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+%    \usebeamerfont{title in head/foot}\insertshorttitle
+%  \end{beamercolorbox}%
+%  \begin{beamercolorbox}[wd=.1\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+%    %\usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em}
+%    \insertframenumber{} / \inserttotalframenumber\hspace*{2ex} 
+%  \end{beamercolorbox}}%
+%  \vskip0pt%
+%}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\title[Model Execution in Eclipse]{
-Model Execution in Eclipse}
-\subtitle[KIELER Execution Manager]{KIELER Execution Manager}
-\author[Eclipse Summit 2009]{%
-  Christian~Motika}
-\institute[\myshortinstitute]{
-  Real-Time Systems and Embedded Systems Group\\
-  Department of Computer Science\\
+%\title[Model Execution in Eclipse]{Model Execution in Eclipse}
+%\subtitle[KIELER Execution Manager]{KIELER Execution Manager}
+%\author[Eclipse Summit 2009]{%
+%  Christian~Motika}
+%\institute[\myshortinstitute]{
+%  Real-Time Systems and Embedded Systems Group\\
+%  Department of Computer Science\\
   % Faculty of Engineering\\
-  Christian-Albrechts-Universit\"at zu Kiel, Germany
-}
-\date[Eclipse Summit 2009]{
-\begin{tabular}[h]{l l}
-   \parbox{0.30\textwidth}{
-   			{\includegraphics[scale=0.50]{./images/kiem-logo.png}}
-   }
-   \parbox{0.90\textwidth}{   
-				Eclipse Summit, 08/27/2009
-   }
-\end{tabular}
-}
+%  Christian-Albrechts-Universit\"at zu Kiel, Germany
+%}
+%\date[Eclipse Summit 2009]{
+%\begin{tabular}[h]{l l}
+%   \parbox{0.30\textwidth}{
+%   			{\includegraphics[scale=0.50]{./images/kiem-logo.png}}
+%   }
+%   \parbox{0.90\textwidth}{   
+%				Eclipse Summit, 08/27/2009
+%   }
+%\end{tabular}
+%}
 
-\subject{Model Execution in Eclipse}
+%\subject{Model Execution in Eclipse}
 
 %%% some new commands %%%
 \newcommand{\BRED}[1]{\textbf{\textcolor[rgb]{0.50,0.00,0.00}{#1}}}
@@ -111,7 +110,7 @@ Model Execution in Eclipse}
 \newcommand{\BLUE}[1]{\textcolor[rgb]{0.192,0.204,0.709}{#1}}
 
 %% font Courier for the (programming) code
-\usepackage{courier}
+%\usepackage{courier}
 %% new command \code{text}
 \newcommand{\code}[1]{{\fontfamily{pcr}\selectfont #1}}
 %% new command for quotations
@@ -173,16 +172,16 @@ Model Execution in Eclipse}
 
 %\setbeamerfont*{normaltext}{size=\scriptsize, series=\bfseries}
 
-\begin{document}
+%\begin{document}
 %standard font for slides
 \small
 
 %set the background image
 \BackgroundPicture{images/kiembackground1.png}
 
-\part<presentation>{Main Talk}
-\frame{\titlepage}
-\note{} 
+%\part<presentation>{Main Talk}
+%\frame{\titlepage}
+%\note{}
 
 \section*{Introduction}
 
@@ -518,35 +517,40 @@ Model Execution in Eclipse}
 						 \item \RED{KIELER Execution Manager} seamlessly integrates execution into the Eclipse RCP
         \end{itemize}
 \end{frame}
-%\note{} 
+%\note{}
 
 \subsection<presentation>[To Go Further]{To Go Further}
 %%%%%%%%%%%%%%%%%%%% Folie 20 %%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
   \frametitle<presentation>[To Go Further]{To Go Further}
-\normalsize
-\bibliography{kiem-cmot}  
+  \normalsize
+  \bibliography{kiem-cmot}
+  \invisible{
+    \tiny
+    \cite{www:kieler}
+    \cite{www:ptolemy}
+  }
 \end{frame}
-%\note{} 
+%\note{}
 
-\subsection<presentation>[The End]{The End}
+%\subsection<presentation>[The End]{The End}
 %%%%%%%%%%%%%%%%%%%% Folie 21 %%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-  \frametitle<presentation>[Thank you!]{}
-  \begin{center} 
-      \textbf{\Large Thank you for your attention and participation!}
-\\$ $\\
-      \textbf{\normalsize \BLUE{Any questions or suggestions?}} \\
-\invisible{
-\tiny
-\cite{www:kieler}
-\cite{www:ptolemy}
-}       
-      
-  \end{center}
-\end{frame}
+%\begin{frame}
+%  \frametitle<presentation>[Thank you!]{}
+%  \begin{center} 
+%      \textbf{\Large Thank you for your attention and participation!}
+%\\$ $\\
+%      \textbf{\normalsize \BLUE{Any questions or suggestions?}} \\
+%\invisible{
+%\tiny
+%\cite{www:kieler}
+%\cite{www:ptolemy}
+%}       
+%      
+%  \end{center}
+%\end{frame}
 %\note{} 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\end{document}
+%\end{document}
 
