@@ -16,6 +16,14 @@
 
 \bibliographystyle{acm}
 
+ \newcommand\BackgroundPicture[1]{%
+    \setbeamertemplate{background}{%
+    \parbox[c][\paperheight]{\paperwidth}{%
+        \vfill \hfill
+ \includegraphics[width=0.8\paperwidth,height=0.8\paperheight]{#1}
+         \hfill \vfill
+      }}}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%       MODIFY  FOOTLINE      %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -59,6 +67,9 @@
 
 \begin{document}
 
+%set the background image
+\BackgroundPicture{images/kiembackground1.png}
+
 \frame{\titlepage}
 
 \part{Model Execution in Eclipse}
@@ -70,7 +81,7 @@
   \end{center}
 }
 
-\include{kiem-cmot}
+\include{kiem-cmot-handout}
 
 \part{Meta Layout of Graphical Models}
 \title[Meta Layout of Graphical Models]{}
