@@ -25,8 +25,8 @@
 
 %\mode<presentation>
 %{
-%  \usetheme{Malmoe} %Luebeck
-%  \usefonttheme[onlysmall]{structurebold}
+  %\usetheme{Malmoe} %Luebeck
+  %\usefonttheme[onlysmall]{structurebold}
   %\setbeamertemplate{background canvas}[vertical shading][bottom=gray!5,top=gray!5]
   %\usecolortheme{dolphin}
 %}
@@ -85,7 +85,7 @@
 %\institute[\myshortinstitute]{
 %  Real-Time Systems and Embedded Systems Group\\
 %  Department of Computer Science\\
-%  % Faculty of Engineering\\
+  % Faculty of Engineering\\
 %  Christian-Albrechts-Universit\"at zu Kiel, Germany
 %}
 %\date[Eclipse Summit 2009]{
@@ -181,7 +181,7 @@
 
 %\part<presentation>{Main Talk}
 %\frame{\titlepage}
-%\note{} 
+%\note{}
 
 \section*{Introduction}
 
@@ -193,12 +193,50 @@
   \frametitle{Motivation}
   \begin{block}{}
     \begin{itemize}
-	      \item \RED{EMF and GMF} are great frameworks for modeling in \RED{Eclipse}.
+	      \item \RED{EMF and GMF} are great frameworks for modeling in \RED{Eclipse}
 	      \pause
 	      \item Model implementations, model and diagram editors, ...
 	      \pause
-	      \item Also desired: Simulation runs
-	      \pause	
+	      \item Modeling:
+					\begin{enumerate}
+							\item Structural models 
+							\begin{itemize}
+									\item E.g., class diagrams, component diagrams, ...
+							\end{itemize}
+							\pause
+							\item Behavioral models
+							\begin{itemize}
+									\item E.g., flow charts, state machines, data flow models, ...
+							\end{itemize}
+					\end{enumerate}
+    \end{itemize}
+  \end{block}
+\end{frame}
+%\note{} 
+
+
+
+%%%%%%%%%%%%%%%%%%%% Folie 2 %%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+  \frametitle{Motivation (cont'd)}
+  \begin{block}{}
+\begin{center}
+   \fbox{\parbox{100mm}{
+   \normalsize{
+\emph{System models} are virtual as opposed to physical systems
+}}}
+\end{center}
+\small
+\pause
+    \begin{itemize}
+	      \item System models
+						\begin{itemize}
+							\item Generate code or documentation
+							\item System analysis and verification
+							\item Simulation runs
+							\item ...
+						\end{itemize}
+	      \pause
 	      \item \textbf{Idea:} Flexible definition of semantics and swapping out of simulation computation 
 	      \pause	
 	      \item \textbf{Solution proposed:} \RED{KIELER Execution Manager}
@@ -208,8 +246,9 @@
 %\note{} 
 
 
+
 \subsection<presentation>[Overview]{Overview}
-%%%%%%%%%%%%%%%%%%%% Folie 2 %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%% Folie 3 %%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
   \frametitle{Overview}
     \begin{itemize}
@@ -236,7 +275,7 @@
 \section[KIELER Execution Manager]{KIELER Execution Manager}
 
 \subsection[DataComponents]{DataComponents}
-%%%%%%%%%%%%%%%%%%%% Folie 3 %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%% Folie 4 %%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
   \frametitle{KIEM Components}
 			\includegraphics[scale=0.30]{images/kiem.png}
@@ -245,14 +284,14 @@
 
 
 \subsection[GUI And Threads]{GUI And Threads}
-%%%%%%%%%%%%%%%%%%%% Folie 4 %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%% Folie 5 %%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
   \frametitle{KIEM GUI and Threads}
   			\begin{tabular}[h]{l r}
 			   \parbox{0.56\textwidth}{
 			\only<1>{\includegraphics[scale=0.41]{images/kiem-view.png}}
-%HANDOUT			\only<2>{\includegraphics[scale=0.27]{images/kiem-threads.png}}
-%HANDOUT			\only<3->{\includegraphics[scale=0.41]{images/kiem-view.png}}
+%			\only<2>{\includegraphics[scale=0.27]{images/kiem-threads.png}}
+%			\only<3->{\includegraphics[scale=0.41]{images/kiem-view.png}}
 			}
    			\parbox{0.44\textwidth}{   
 \begin{itemize}
@@ -274,7 +313,7 @@
 
 
 \subsection[Interface]{Interface}
-%%%%%%%%%%%%%%%%%%%% Folie 5 %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%% Folie 6 %%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
   \frametitle{Simple Interface}
   \begin{center} 
@@ -284,7 +323,7 @@
 %\note{} 
 
 \begin{frame}
-%%%%%%%%%%%%%%%%%%%% Folie 6 %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%% Folie 7 %%%%%%%%%%%%%%%%%%%%%%%%
   \frametitle{Flexible Extensions}
   \begin{center} 
 				\listingjava \showlisting{code/Extensions.java}{Java} 
@@ -294,7 +333,7 @@
 
 
 \section[Use Case: Ptolemy]{Use Case: Ptolemy}
-%%%%%%%%%%%%%%%%%%%% Folie 7 %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%% Folie 8 %%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
   \frametitle{Overview}
     \begin{itemize}
@@ -315,7 +354,7 @@
 \end{frame}
 %\note{} 
 
-%%%%%%%%%%%%%%%%%%%% Folie 8 %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%% Folie 9 %%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
   \frametitle{What is Ptolemy?}
   
@@ -340,7 +379,7 @@
 
 
 \subsection[M2M Transformation]{M2M Transformation}
-%%%%%%%%%%%%%%%%%%%% Folie 9 %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%% Folie 10 %%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
   \frametitle{Ptolemy EMF Model}
   	\begin{tabular}[h]{l r}
@@ -371,10 +410,10 @@
 
 
 \subsection[Simulation Engine]{Simulation Engine}
-%%%%%%%%%%%%%%%%%%%% Folie 10 %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%% Folie 11 %%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
   \frametitle{Simulation with Ptolemy}
-%HANDOUT  		\only<1>{\includegraphics[scale=0.32]{images/KlePtoOverview.png} }
+ % 		\only<1>{\includegraphics[scale=0.32]{images/KlePtoOverview.png} }
   		\only<2>{\includegraphics[scale=0.32]{images/KlePtoOverview2.png} }
   \end{frame}
 %\note{} 
@@ -382,7 +421,7 @@
 
 
 \section*{Use Case: Model Railway}
-%%%%%%%%%%%%%%%%%%%% Folie 11 %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%% Folie 12 %%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
   \frametitle{Overview}
     \begin{itemize}
@@ -405,7 +444,7 @@
 
 
 \subsection<presentation>[Installation]{Installation}
-%%%%%%%%%%%%%%%%%%%% Folie 12 %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%% Folie 13 %%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
   \frametitle{Installation}
       \begin{figure}[t]
@@ -424,7 +463,7 @@
 
 
 
-%%%%%%%%%%%%%%%%%%%% Folie 13 %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%% Folie 14 %%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
   \frametitle{Track Layout}
   \hspace{0.8cm}~\includegraphics[scale=0.20]{images/tracksystem.jpg}
@@ -433,25 +472,14 @@
 
 \BackgroundPicture{images/nokiembackground.jpg}
 
-%%%%%%%%%%%%%%%%%%%% Folie 14 %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%% Folie 15 %%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
   \frametitle{Train Movement}
-%HANDOUT \only<1>{\hspace{0.8cm}~\includegraphics[scale=0.12]{images/segment-trains.png} }
-\only<2>{\hspace{0.8cm}~\includegraphics[scale=0.12]{images/segment-trains2.png} }
+\hspace{1.5cm}~\includegraphics[scale=0.09]{images/segment-trains3.png}
 \begin{itemize}
   \item Several track segments individually controlled 
   \pause
-  \item Sensors allow detection of instantaneous train positions 
-\end{itemize}
-  \end{frame}
-%\note{} 
-
-%%%%%%%%%%%%%%%%%%%% Folie 15 %%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-  \frametitle{Train Movement (cont'd)}
-\hspace{0.8cm}~\includegraphics[scale=0.12]{images/segment-trains3.png}
-\begin{itemize}
-  \item Computers get sensor information and control voltage
+  \item Computers get sensor information (instantaneous train positions) and control voltage
   \pause
 	\begin{itemize}
 		  \item $\Rightarrow$ Actions: \includegraphics[scale=0.8]{images/SetSpeed.png} SetSpeed, \includegraphics[scale=0.8]{images/SetPoint.png} SetPoint
@@ -517,7 +545,7 @@
 						 \item \RED{KIELER Execution Manager} seamlessly integrates execution into the Eclipse RCP
         \end{itemize}
 \end{frame}
-%\note{} 
+%\note{}
 
 \subsection<presentation>[To Go Further]{To Go Further}
 %%%%%%%%%%%%%%%%%%%% Folie 20 %%%%%%%%%%%%%%%%%%%%%%%%
@@ -546,7 +574,7 @@
 %\cite{www:kieler}
 %\cite{www:ptolemy}
 %}       
-      
+%      
 %  \end{center}
 %\end{frame}
 %\note{} 
