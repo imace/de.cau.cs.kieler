@@ -79,6 +79,7 @@ public class SelectionTrigger extends ATrigger implements ISelectionListener {
                 if (currentSelection != null) {
                     selectionEvent.setTriggerActive(false);
                     selectionEvent.setAffectedObject(translateToURI(currentSelection));
+                    //selectionEvent.setParameters("Test");
                     notifyTrigger(selectionEvent);
                     
                 }
@@ -95,7 +96,7 @@ public class SelectionTrigger extends ATrigger implements ISelectionListener {
                 if (currentSelection != null) {
                     selectionEvent.setTriggerActive(false);
                     selectionEvent.setAffectedObject(translateToURI(currentSelection));
-                   
+                    selectionEvent.setParameters("Test");
                     notifyTrigger(selectionEvent);
                 }
             }

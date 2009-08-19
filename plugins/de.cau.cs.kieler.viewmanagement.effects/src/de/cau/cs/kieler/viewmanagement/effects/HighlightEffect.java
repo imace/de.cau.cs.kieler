@@ -26,7 +26,7 @@ public class HighlightEffect extends AEffect {
     RectangleFigure highlightFigure;
     //boolean highlightActive;
     int lineWidth=3; 
-    Color color= ColorConstants.blue;
+    Color color= ColorConstants.red;
     
     // default constructor is always called by Eclipse... 
     public HighlightEffect() {

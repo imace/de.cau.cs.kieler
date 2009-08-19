@@ -15,6 +15,10 @@
             class="de.cau.cs.kieler.viewmanagement.combination.SelectionExpandCombination"
             name="ExpandHighlight">
       </combination>
+      <combination
+            class="de.cau.cs.kieler.viewmanagement.combination.SelectionTextualRepresentationCombination"
+            name="SelectTextual">
+      </combination>
    </extension>
 
 </plugin>

@@ -11,6 +11,7 @@ import de.cau.cs.kieler.viewmanagement.ACombination;
 import de.cau.cs.kieler.viewmanagement.AEffect;
 import de.cau.cs.kieler.viewmanagement.ATrigger;
 import de.cau.cs.kieler.viewmanagement.effects.HighlightEffect;
+import de.cau.cs.kieler.viewmanagement.effects.TextualRepresentationEffect;
 import de.cau.cs.kieler.viewmanagement.triggers.SelectionTrigger;
 import de.cau.cs.kieler.viewmanagement.*;
 
@@ -20,7 +21,7 @@ import de.cau.cs.kieler.viewmanagement.*;
  */
 public class SelectionTextualRepresentationCombination extends ACombination {
 
-    HighlightEffect effect;
+    TextualRepresentationEffect effect;
     SelectionTrigger st;
     
     ShapeEditPart objectToHighlight;
@@ -42,7 +43,7 @@ public class SelectionTextualRepresentationCombination extends ACombination {
      */
     @Override
     public boolean evaluate(TriggerEventObject triggerEvent) {
-        Object affectedObject = triggerEvent.getAffectedObject();
+    	EditPart affectedObject = translateToEditPart(triggerEvent.getAffectedObject(), parent);
         if( affectedObject instanceof ShapeEditPart ){
             this.objectToHighlight = (ShapeEditPart)affectedObject;
             this.objectParameters = triggerEvent.getParameters();
@@ -59,7 +60,7 @@ public class SelectionTextualRepresentationCombination extends ACombination {
     @Override
     public void execute() {
         if ( effect == null )
-            effect = new HighlightEffect();
+            effect = new TextualRepresentationEffect();
         effect.setTarget(this.objectToHighlight);
         effect.setParameters(this.objectParameters);
         //effect.setActive(this.triggerActive);

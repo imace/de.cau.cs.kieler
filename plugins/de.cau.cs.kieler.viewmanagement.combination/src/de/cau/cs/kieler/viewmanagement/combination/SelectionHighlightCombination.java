@@ -83,7 +83,7 @@ public class SelectionHighlightCombination extends ACombination {
         
         effect.setTarget(this.objectToHighlight);
         effect.setParameters(this.objectParameters);
-//        effect.setHighlightFigure(10, ColorConstants.red);
+//        effect.setHighlightFigure(10, ColorConstants.blue);
         //effect.setActive(this.triggerActive);
         effect.execute();
         

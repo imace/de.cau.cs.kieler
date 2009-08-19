@@ -25,7 +25,8 @@ public final class RunLogic {
     static // Local references to all triggers, effects and combos
     List<ATrigger> triggers;
     List<AEffect> effects;
-    List<ACombination> combos; 
+    List<ACombination> combos;
+    List<String> activeCombos;
     
    
 
@@ -33,6 +34,10 @@ public final class RunLogic {
         triggers = new ArrayList<ATrigger>();
         effects = new ArrayList<AEffect>();
         combos = new ArrayList<ACombination>();
+        activeCombos = new ArrayList<String>();
+//        For now, manually add the Combinations that should be active here. Later it'd be better to do this with a table.
+        activeCombos.add("de.cau.cs.kieler.viewmanagement.combination.SelectionHighlightCombination");
+        activeCombos.add("de.cau.cs.kieler.viewmanagement.combination.SelectionTextualRepresentationCombination");
     }
 
     public void registerListeners() {
@@ -42,9 +47,15 @@ public final class RunLogic {
         this.readEffects();
         this.readTriggers();
         this.readCombinations();
-//        FOR TESTING: Activate all available combos (Should be set by user/other module later)
-        for (ACombination oneCombination : combos)
-        	oneCombination.setActive(true);
+
+	
+		
+        for (ACombination oneCombination : combos){
+//        	String test = oneCombination.getClass().getCanonicalName();
+        for(String comboToCheck : activeCombos)
+        	if (oneCombination.getClass().getCanonicalName().equals(comboToCheck));
+        		oneCombination.setActive(true);
+        }
 
         for (ACombination oneCombination : combos) {
         	if (oneCombination.getActive()) //initialize only combos set to active

@@ -45,7 +45,7 @@ public class SelectionExpandCombination extends ACombination {
         if( affectedObject instanceof ShapeEditPart ){
             this.objectToHighlight = (ShapeEditPart) affectedObject;
             //this.objectParameters.put("depth", null);
-            return false; // FIXME: only true under certain conditions
+            return true; // FIXME: only true under certain conditions
         }
         else
             return false;
