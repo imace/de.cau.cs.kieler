@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/de.cau.cs.kieler.xtext.example/src-gen"
+    editDirectory="/de.cau.cs.kieler.xtext.example.edit/src" editorDirectory="/de.cau.cs.kieler.xtext.example.editor/src"
+    modelPluginID="de.cau.cs.kieler.xtext.example" forceOverwrite="true" modelName="Example"
+    updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    complianceLevel="5.0" copyrightFields="false" editPluginID="de.cau.cs.kieler.xtext.example.edit"
+    editorPluginID="de.cau.cs.kieler.xtext.example.editor">
+  <genPackages prefix="Example" basePackage="de.cau.cs.kieler.xtext" disposableProviderFactory="true"
+      ecorePackage="Example.ecore#/">
+    <genClasses ecoreClass="Example.ecore#//Model">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Example.ecore#//Model/signals"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Example.ecore#//Model/action"/>
+    </genClasses>
+    <genClasses ecoreClass="Example.ecore#//Action">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Example.ecore#//Action/triggers"/>
+    </genClasses>
+    <genClasses ecoreClass="Example.ecore#//Signal">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Example.ecore#//Signal/name"/>
+    </genClasses>
+    <genClasses ecoreClass="Example.ecore#//SignalReference">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Example.ecore#//SignalReference/signal"/>
+    </genClasses>
+    <genClasses ecoreClass="Example.ecore#//Expression">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Example.ecore#//Expression/operator"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Example.ecore#//Expression/subExpressions"/>
+    </genClasses>
+    <genClasses ecoreClass="Example.ecore#//Operation"/>
+  </genPackages>
+</genmodel:GenModel>
