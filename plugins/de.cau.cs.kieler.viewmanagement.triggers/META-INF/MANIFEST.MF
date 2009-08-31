@@ -1,14 +1,16 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Triggers Plug-in
+Bundle-Name: KIELER Viewmanagement default Triggers
 Bundle-SymbolicName: de.cau.cs.kieler.viewmanagement.triggers;singleton:=true
-Bundle-Version: 1.0.0
+Bundle-Version: 0.1.0.vqualifier
 Bundle-Activator: de.cau.cs.kieler.viewmanagement.triggers.Activator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.gef,
- org.eclipse.gmf.runtime.diagram.ui
+ org.eclipse.gmf.runtime.diagram.ui,
+ de.cau.cs.kieler.synccharts.viewmanagement
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Import-Package: de.cau.cs.kieler.viewmanagement
 Export-Package: de.cau.cs.kieler.viewmanagement.triggers
+Bundle-Vendor: Christian-Albrechts-Universität zu Kiel
