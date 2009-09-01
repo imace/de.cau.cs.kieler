@@ -55,8 +55,9 @@ public final class RunLogic {
         combos = new ArrayList<ACombination>();
         activeCombos = new ArrayList<String>();
 //        For now, manually add the Combinations that should be active here. Later it'd be better to do this with a table.
-        activeCombos.add("de.cau.cs.kieler.viewmanagement.combination.SelectionHighlightCombination");
+        //activeCombos.add("de.cau.cs.kieler.viewmanagement.combination.SelectionHighlightCombination");
         //activeCombos.add("de.cau.cs.kieler.viewmanagement.combination.SelectionTextualRepresentationCombination");
+        activeCombos.add("de.cau.cs.kieler.viewmanagement.combination.SelectionFilterCombination");
     }
 
     public void registerListeners() {

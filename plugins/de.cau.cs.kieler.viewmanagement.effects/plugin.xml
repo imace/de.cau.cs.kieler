@@ -23,6 +23,10 @@
             class="de.cau.cs.kieler.viewmanagement.effects.TextualRepresentationEffect"
             name="de.cau.cs.kieler.viewmanagement.effects.textualrepresentation">
       </effect>
+      <effect
+            class="de.cau.cs.kieler.viewmanagement.effects.FilterEffect"
+            name="de.cau.cs.kieler.viewmanagement.effects.filtereffect">
+      </effect>
    </extension>
 
 </plugin>

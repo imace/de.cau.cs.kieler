@@ -38,7 +38,7 @@ public class SelectionCollapseCombination extends ACombination {
     SelectionTrigger st;
     
     ShapeEditPart objectToHighlight;
-    Map <String, String> objectParameters;
+    String objectParameters;
 
    
     public List<ATrigger> getTriggers() {
