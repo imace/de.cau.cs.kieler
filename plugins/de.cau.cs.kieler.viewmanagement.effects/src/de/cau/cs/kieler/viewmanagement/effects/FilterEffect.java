@@ -14,26 +14,10 @@
  *****************************************************************************/
 package de.cau.cs.kieler.viewmanagement.effects;
 
-import java.awt.Point;
-import java.util.Map;
 
-import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.IFigure;
-import org.eclipse.draw2d.RectangleFigure;
-import org.eclipse.draw2d.Viewport;
-import org.eclipse.draw2d.geometry.PrecisionRectangle;
-import org.eclipse.draw2d.geometry.Rectangle;
-import org.eclipse.gef.EditPart;
-import org.eclipse.gef.EditPartViewer;
-import org.eclipse.gef.RootEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeEditPart;
-import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramGraphicalViewer;
-import org.eclipse.gmf.runtime.diagram.ui.render.editparts.RenderedDiagramRootEditPart;
-import org.eclipse.swt.widgets.Canvas;
-import org.eclipse.swt.widgets.ScrollBar;
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.ui.PlatformUI;
-import org.eclipse.swt.graphics.Color;
+
 
 import de.cau.cs.kieler.viewmanagement.AEffect;
 
@@ -48,6 +32,9 @@ public class FilterEffect extends AEffect {
     IFigure undoFigure;
     boolean filterActive;
    
+    /**
+     * default constructor
+     */
     public FilterEffect() {
        
     }

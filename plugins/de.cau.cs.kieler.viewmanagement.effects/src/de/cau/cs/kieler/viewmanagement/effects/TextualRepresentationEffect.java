@@ -14,28 +14,15 @@
  *****************************************************************************/
 package de.cau.cs.kieler.viewmanagement.effects;
 
-import java.awt.Point;
-import java.util.Map;
-
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.Label;
 import org.eclipse.draw2d.PositionConstants;
-import org.eclipse.draw2d.RectangleFigure;
 import org.eclipse.draw2d.Viewport;
-import org.eclipse.draw2d.geometry.PrecisionRectangle;
 import org.eclipse.draw2d.geometry.Rectangle;
-import org.eclipse.gef.EditPart;
-import org.eclipse.gef.EditPartViewer;
 import org.eclipse.gef.RootEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeEditPart;
-import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramGraphicalViewer;
 import org.eclipse.gmf.runtime.diagram.ui.render.editparts.RenderedDiagramRootEditPart;
-import org.eclipse.swt.widgets.Canvas;
-import org.eclipse.swt.widgets.ScrollBar;
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.ui.PlatformUI;
-
 import de.cau.cs.kieler.viewmanagement.AEffect;
 
 /**
@@ -45,17 +32,17 @@ import de.cau.cs.kieler.viewmanagement.AEffect;
 
 public class TextualRepresentationEffect extends AEffect {
 
-    ShapeEditPart objectToHighlight;
+    ShapeEditPart objectToText;
     Object objectParameters;
-    //String textToAdd;
     Label textualFigure;
   
     
    
+   
     public TextualRepresentationEffect() {
        
         this.textualFigure = new Label();
-        //textualFigure.setTextPlacement(PositionConstants.RIGHT);
+       
         textualFigure.setTextAlignment(PositionConstants.ALWAYS_RIGHT);
        
         textualFigure.setForegroundColor(ColorConstants.blue);
@@ -66,30 +53,36 @@ public class TextualRepresentationEffect extends AEffect {
     public void execute() {
         
               
-        RootEditPart rootEP = objectToHighlight.getRoot();
+        RootEditPart rootEP = objectToText.getRoot();
         
         if(rootEP instanceof RenderedDiagramRootEditPart){
             IFigure layer = ((RenderedDiagramRootEditPart) rootEP).getLayer(RenderedDiagramRootEditPart.FEEDBACK_LAYER);
-            IFigure selectedFigure = objectToHighlight.getFigure();
+            IFigure selectedFigure = objectToText.getFigure();
             Rectangle bounds = selectedFigure.getBounds().getCopy();
             
             selectedFigure.translateToAbsolute(bounds);
-            //bounds.scale(((RenderedDiagramRootEditPart) rootEP).getZoomManager().getZoom());
-             
+            //translateToAbsolute is really bothersome, can't cope with either scrolling or zooming
+            selectedFigure.translateToAbsolute(bounds);
+            double zoomValue = ((RenderedDiagramRootEditPart) rootEP).getZoomManager().getZoom();
+            //Add correction for Zooming-related translation error
+             bounds.scale(1/zoomValue);
+             //get the top-most Viewport to determine the scroll value and apply for correction
+             //this still has a zooming-related error in it, another corretion is needed
            IFigure parentFigure = selectedFigure.getParent();
-            while( parentFigure != null ) {
-             if(parentFigure instanceof Viewport) {
-               Viewport viewport = (Viewport)parentFigure;
-               bounds.translate(
-                     viewport.getHorizontalRangeModel().getValue(),
-                     viewport.getVerticalRangeModel().getValue());
-               }
-             
-               parentFigure = parentFigure.getParent();
-             
-            } 
+             while( parentFigure != null ) {
+              if(parentFigure instanceof Viewport) {
+                Viewport viewport = (Viewport)parentFigure;
+                bounds.translate(
+                      (int) ((1/zoomValue)*viewport.getHorizontalRangeModel().getValue()),
+                      (int) ((1/zoomValue)*viewport.getVerticalRangeModel().getValue()));
+                
+              }
+              
+                parentFigure = parentFigure.getParent();
+              
+             } 
 //            Little adjustment to not paint it over the figure. Should be done somehow better
-            //bounds.width = bounds.width+25;
+            bounds.width = bounds.width+25;
             textualFigure.setText((String) objectParameters);
             textualFigure.setBounds(bounds);
 
@@ -111,21 +104,17 @@ public class TextualRepresentationEffect extends AEffect {
      * @param target
      */
     public void setTarget(ShapeEditPart target) {
-        this.objectToHighlight = target;
+        this.objectToText = target;
     }
 
 	
 	public void setParameters(Object parameters) {
-		this.objectParameters= parameters;
-		//textualFigure.setText(textParameters);
+		
+		
 		
 	}
 
 
-	
-//	public void setActive(boolean effectActive) {
-//		this.highlightActive= effectActive;
-//		
-//	}
+
 
 }

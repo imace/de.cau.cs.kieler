@@ -18,21 +18,9 @@ package de.cau.cs.kieler.viewmanagement.effects;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-
 import org.eclipse.draw2d.IFigure;
-import org.eclipse.gef.RootEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.figures.ResizableCompartmentFigure;
-import org.eclipse.gmf.runtime.diagram.ui.figures.ShapeCompartmentFigure;
-import org.eclipse.gmf.runtime.diagram.ui.render.editparts.RenderedDiagramRootEditPart;
-import org.eclipse.gmf.runtime.gef.ui.figures.DefaultSizeNodeFigure;
-import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
-import org.eclipse.gmf.runtime.notation.DrawerStyle;
-import org.eclipse.gmf.runtime.notation.NotationPackage;
-import org.eclipse.gmf.runtime.notation.Style;
-import org.eclipse.gmf.runtime.notation.View;
-
 import de.cau.cs.kieler.viewmanagement.AEffect;
 
 /**
@@ -42,11 +30,14 @@ import de.cau.cs.kieler.viewmanagement.AEffect;
 
 public class CompartmentCollapseEffect extends AEffect {
 
-    ShapeEditPart objectToHighlight;
-    //List<IFigure> resizableFigures = new ArrayList<IFigure>();
+    ShapeEditPart objectToCollapse;
+
    
     
-    // default constructor is always called by Eclipse... 
+ 
+    /**
+     * default constructor
+     */
     public CompartmentCollapseEffect() {
        
         
@@ -54,7 +45,7 @@ public class CompartmentCollapseEffect extends AEffect {
     
     @Override
     public void execute() {
-    	IFigure selectedFigure =  objectToHighlight.getFigure();
+    	IFigure selectedFigure =  objectToCollapse.getFigure();
     	System.out.println("CompInit!");
     	List<IFigure> resizableFigures = new ArrayList<IFigure>();
     	getResizeableCompartments(selectedFigure, resizableFigures);
@@ -74,6 +65,10 @@ public class CompartmentCollapseEffect extends AEffect {
     	
     }
     
+    /**
+     * @param f
+     * @param resizableFigures
+     */
     public void getResizeableCompartments(IFigure f, List<IFigure> resizableFigures){
     	
     	
@@ -102,7 +97,7 @@ public class CompartmentCollapseEffect extends AEffect {
      * @param target
      */
     public void setTarget(ShapeEditPart target) {
-        this.objectToHighlight = target;
+        this.objectToCollapse = target;
     }
 
 	@Override
@@ -111,10 +106,6 @@ public class CompartmentCollapseEffect extends AEffect {
 		
 	}
 
-//	@Override
-//	public void setActive(boolean effectActive) {
-//		// TODO Auto-generated method stub
-//		
-//	}
+
 
 }

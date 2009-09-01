@@ -13,10 +13,9 @@
  * 
  *****************************************************************************/
 package de.cau.cs.kieler.viewmanagement.effects;
-import java.util.Map;
+
 
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeEditPart;
-
 import de.cau.cs.kieler.viewmanagement.AEffect;
 
 /**
@@ -26,6 +25,9 @@ import de.cau.cs.kieler.viewmanagement.AEffect;
 
 public class DefaultTestEffect extends AEffect {
 
+	/**
+	 * default constructor
+	 */
 	public DefaultTestEffect() {
 		// TODO Auto-generated constructor stub
 	}
@@ -48,10 +50,6 @@ public class DefaultTestEffect extends AEffect {
 		
 	}
 
-//	@Override
-//	public void setActive(boolean effectActive) {
-//		// TODO Auto-generated method stub
-//		
-//	}
+
 
 }

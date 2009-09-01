@@ -27,7 +27,10 @@ import org.osgi.framework.BundleContext;
  */
 public class Activator extends AbstractUIPlugin {
 
-	// The plug-in ID
+	
+	/**
+	 * The plug-in ID
+	 */
 	public static final String PLUGIN_ID = "de.cau.kieler.viewmanagement.effects";
 
 	// The shared instance
