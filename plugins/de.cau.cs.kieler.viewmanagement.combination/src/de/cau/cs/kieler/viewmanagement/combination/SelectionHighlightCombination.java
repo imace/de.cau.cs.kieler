@@ -16,15 +16,11 @@ package de.cau.cs.kieler.viewmanagement.combination;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeEditPart;
 import org.eclipse.swt.graphics.Color;
-
 import de.cau.cs.kieler.viewmanagement.ACombination;
-import de.cau.cs.kieler.viewmanagement.AEffect;
 import de.cau.cs.kieler.viewmanagement.ATrigger;
 import de.cau.cs.kieler.viewmanagement.effects.HighlightEffect;
 import de.cau.cs.kieler.viewmanagement.triggers.SelectionTrigger;
@@ -83,8 +79,6 @@ public class SelectionHighlightCombination extends ACombination {
         
         effect.setTarget(this.objectToHighlight);
         effect.setParameters(this.objectParameters);
-//        effect.setHighlightFigure(10, ColorConstants.blue);
-        //effect.setActive(this.triggerActive);
         effect.execute();
         
     }
@@ -95,6 +89,10 @@ public class SelectionHighlightCombination extends ACombination {
 		
 	}
 	
+	/**
+	 * @param newcolor Color that the HighlightEffect should be changed to
+	 * @param newlinewidth Linewidth that the HighlightEffect should be changed to
+	 */
 	public void setHighlightEffect(Color newcolor, int newlinewidth){
 		lineColor= newcolor;
 		linewidth= newlinewidth;

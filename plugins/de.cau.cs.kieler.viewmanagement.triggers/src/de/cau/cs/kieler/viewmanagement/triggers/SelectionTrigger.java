@@ -15,21 +15,13 @@
 package de.cau.cs.kieler.viewmanagement.triggers;
 
 import java.util.List;
-
-import org.eclipse.draw2d.geometry.Point;
-import org.eclipse.gef.EditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeEditPart;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.ui.IPageListener;
-import org.eclipse.ui.IPerspectiveListener;
 import org.eclipse.ui.ISelectionListener;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PlatformUI;
-
 import de.cau.cs.kieler.viewmanagement.ATrigger;
-import de.cau.cs.kieler.viewmanagement.RunLogic;
-import de.cau.cs.kieler.viewmanagement.TriggerEvent;
 import de.cau.cs.kieler.viewmanagement.TriggerEventObject;
 
 /**
@@ -51,6 +43,9 @@ public class SelectionTrigger extends ATrigger implements ISelectionListener {
 
    
     
+    /**
+     * Sends Object(s) selected in workbench to listeners
+     */
     public SelectionTrigger() {
         // register this as a listener to the Eclipse selection service
     	

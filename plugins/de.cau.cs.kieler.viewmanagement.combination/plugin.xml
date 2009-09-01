@@ -23,6 +23,14 @@
             class="de.cau.cs.kieler.viewmanagement.combination.SelectionFilterCombination"
             name="FilterCombination">
       </combination>
+      <combination
+            class="de.cau.cs.kieler.viewmanagement.combination.SelectionLayoutCombination"
+            name="LayoutCombination">
+      </combination>
+      <combination
+            class="de.cau.cs.kieler.viewmanagement.combination.SelectionZoomCombination"
+            name="ZoomCombination">
+      </combination>
    </extension>
 
 </plugin>
