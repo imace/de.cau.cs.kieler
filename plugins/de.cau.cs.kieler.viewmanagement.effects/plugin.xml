@@ -27,6 +27,14 @@
             class="de.cau.cs.kieler.viewmanagement.effects.FilterEffect"
             name="de.cau.cs.kieler.viewmanagement.effects.filtereffect">
       </effect>
+      <effect
+            class="de.cau.cs.kieler.viewmanagement.effects.LayoutEffect"
+            name="de.cau.cs.kieler.viewmanagement.effects.layouteffect">
+      </effect>
+      <effect
+            class="de.cau.cs.kieler.viewmanagement.effects.ZoomEffect"
+            name="de.cau.cs.kieler.viewmanagement.effects.zoomeffect">
+      </effect>
    </extension>
 
 </plugin>

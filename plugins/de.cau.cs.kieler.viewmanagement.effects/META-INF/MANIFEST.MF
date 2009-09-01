@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: KIELER Viewmanagement default effects
 Bundle-SymbolicName: de.cau.cs.kieler.viewmanagement.effects;singleton:=true
-Bundle-Version: 0.1.0.vqualifier
+Bundle-Version: 1.0.0
 Bundle-Activator: de.cau.cs.kieler.viewmanagement.effects.Activator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
