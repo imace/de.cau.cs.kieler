@@ -16,13 +16,24 @@
    inkscape:version="0.46"
    sodipodi:docbase="/home/haf/shared/kieler/trunk/common/doc/images"
    sodipodi:docname="kieler-splash-v1.svg"
-   inkscape:export-filename="/home/msp/shared/kieler/doc/images/kieler-splash-v1.png"
-   inkscape:export-xdpi="179.55992"
-   inkscape:export-ydpi="179.55992"
+   inkscape:export-filename="/Users/haf/shared/kieler/workspace_3.5/de.cau.cs.kieler.core.ui/splash.bmp.png"
+   inkscape:export-xdpi="179.88715"
+   inkscape:export-ydpi="179.88715"
    inkscape:output_extension="org.inkscape.output.svg.inkscape"
    version="1.0">
   <defs
      id="defs4">
+    <linearGradient
+       id="linearGradient3335">
+      <stop
+         id="stop3337"
+         offset="0"
+         style="stop-color:#323232;stop-opacity:1;" />
+      <stop
+         id="stop3339"
+         offset="1"
+         style="stop-color:#89898a;stop-opacity:1;" />
+    </linearGradient>
     <linearGradient
        id="linearGradient3508">
       <stop
@@ -261,6 +272,17 @@
          stdDeviation="2.2811746"
          id="feGaussianBlur7406" />
     </filter>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3335"
+       id="linearGradient3343"
+       x1="-0.5"
+       y1="82.654602"
+       x2="250.40038"
+       y2="82.654602"
+       gradientUnits="userSpaceOnUse"
+       spreadMethod="pad"
+       gradientTransform="matrix(0.6529434,0,0,1.5004052,-188.39832,25.140904)" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -273,14 +295,14 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="4"
-     inkscape:cx="115.18939"
+     inkscape:cx="141.9744"
      inkscape:cy="83.224785"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      inkscape:window-width="1272"
      inkscape:window-height="945"
-     inkscape:window-x="1280"
-     inkscape:window-y="0"
+     inkscape:window-x="6"
+     inkscape:window-y="30"
      showgrid="false" />
   <metadata
      id="metadata7">
@@ -299,18 +321,18 @@
      id="layer1"
      transform="translate(-23.8311,-24.2833)">
     <rect
-       style="opacity:1;fill:#fffffa;fill-opacity:1;fill-rule:nonzero;stroke:#f0f0f0;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;stroke-linejoin:round;stroke-linecap:round"
+       style="opacity:1;fill:#fffffa;fill-opacity:1;fill-rule:nonzero;stroke:url(#linearGradient3343);stroke-width:1.97957528;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect3578"
-       width="249.90038"
-       height="165.40685"
-       x="0"
-       y="-0.04881829"
-       rx="0.30279118"
-       ry="0.69955355"
+       width="163.17079"
+       height="248.17726"
+       x="-188.3983"
+       y="25.067656"
+       rx="0.19770549"
+       ry="1.0496137"
        inkscape:export-filename="/home/schm/studienarbeit/logosvn/images/kieler-splash18.png"
        inkscape:export-xdpi="178.47824"
        inkscape:export-ydpi="178.47824"
-       transform="translate(23.8311,24.2833)" />
+       transform="matrix(0,-1,1,0,0,0)" />
     <g
        style="fill:#e6e6e6;fill-opacity:1"
        id="g2672"
