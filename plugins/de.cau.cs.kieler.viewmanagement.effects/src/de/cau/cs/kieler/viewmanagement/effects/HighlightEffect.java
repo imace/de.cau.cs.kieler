@@ -1,5 +1,23 @@
+/******************************************************************************
+ * KIELER - Kiel Integrated Environment for Layout for the Eclipse RCP
+ *
+ * http://www.informatik.uni-kiel.de/rtsys/kieler/
+ * 
+ * Copyright 2009 by
+ * + Christian-Albrechts-University of Kiel
+ *   + Department of Computer Science
+ *     + Real-Time and Embedded Systems Group
+ * 
+ * This code is provided under the terms of the Eclipse Public License (EPL).
+ * See the file epl-v10.html for the license text.
+ * 
+ *****************************************************************************/
 package de.cau.cs.kieler.viewmanagement.effects;
 
+/**
+ * @author nbe
+ * 
+ */
 
 
 
@@ -50,7 +68,7 @@ public class HighlightEffect extends AEffect {
         RootEditPart rootEP = objectToHighlight.getRoot();
         
         if(rootEP instanceof RenderedDiagramRootEditPart){
-            IFigure layer = ((RenderedDiagramRootEditPart) rootEP).getLayer(RenderedDiagramRootEditPart.FEEDBACK_LAYER);
+            //IFigure layer = ((RenderedDiagramRootEditPart) rootEP).getLayer(RenderedDiagramRootEditPart.FEEDBACK_LAYER);
             IFigure guideLayer = ((RenderedDiagramRootEditPart) rootEP).getLayer(RenderedDiagramRootEditPart.GUIDE_LAYER);
             IFigure connectionLayer = ((RenderedDiagramRootEditPart) rootEP).getLayer(RenderedDiagramRootEditPart.CONNECTION_LAYER);
             IFigure decoprintLayer = ((RenderedDiagramRootEditPart) rootEP).getLayer(RenderedDiagramRootEditPart.DECORATION_PRINTABLE_LAYER);
@@ -62,7 +80,7 @@ public class HighlightEffect extends AEffect {
             IFigure scaledFBLayer = ((RenderedDiagramRootEditPart) rootEP).getLayer(RenderedDiagramRootEditPart.SCALED_FEEDBACK_LAYER);
             IFigure printableLayers = ((RenderedDiagramRootEditPart) rootEP).getLayer(RenderedDiagramRootEditPart.PRINTABLE_LAYERS);
             IFigure scaleableLayers = ((RenderedDiagramRootEditPart) rootEP).getLayer(RenderedDiagramRootEditPart.SCALABLE_LAYERS);
-            IFigure pagebreaksLayer = ((RenderedDiagramRootEditPart) rootEP).getLayer(RenderedDiagramRootEditPart.PAGE_BREAKS_LAYER);
+            IFigure layer = ((RenderedDiagramRootEditPart) rootEP).getLayer(RenderedDiagramRootEditPart.PAGE_BREAKS_LAYER);
            
             // get Figure to the EditPart
            
@@ -78,17 +96,20 @@ public class HighlightEffect extends AEffect {
             Rectangle bounds = selectedFigure.getBounds().getCopy();
             // ... but in absolute coordinates
 
-            
-            selectedFigure.translateToAbsolute(bounds);
-            bounds.scale(((RenderedDiagramRootEditPart) rootEP).getZoomManager().getZoom());
-            //get the top-most Viewport to determine the scroll value and apply for correction 
-           IFigure parentFigure = selectedFigure.getParent();
+            //translateToAbsolute is really bothersome, can't cope with either scrolling or zooming
+           selectedFigure.translateToAbsolute(bounds);
+           double zoomValue = ((RenderedDiagramRootEditPart) rootEP).getZoomManager().getZoom();
+           //Add correction for Zooming-related translation error
+            bounds.scale(1/zoomValue);
+            //get the top-most Viewport to determine the scroll value and apply for correction
+            //this still has a zooming-related error in it, another corretion is needed
+          IFigure parentFigure = selectedFigure.getParent();
             while( parentFigure != null ) {
              if(parentFigure instanceof Viewport) {
                Viewport viewport = (Viewport)parentFigure;
                bounds.translate(
-                     viewport.getHorizontalRangeModel().getValue(),
-                     viewport.getVerticalRangeModel().getValue());
+                     (int) ((1/zoomValue)*viewport.getHorizontalRangeModel().getValue()),
+                     (int) ((1/zoomValue)*viewport.getVerticalRangeModel().getValue()));
                
              }
              
@@ -111,7 +132,7 @@ public class HighlightEffect extends AEffect {
             // schedule a repaint of the feedback layer
             layer.invalidate();
         }
-        System.out.println("Highlight");
+        //System.out.println("Highlight");
     }
 
     /**

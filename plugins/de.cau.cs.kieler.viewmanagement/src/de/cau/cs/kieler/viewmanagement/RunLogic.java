@@ -1,3 +1,17 @@
+/******************************************************************************
+ * KIELER - Kiel Integrated Environment for Layout for the Eclipse RCP
+ *
+ * http://www.informatik.uni-kiel.de/rtsys/kieler/
+ * 
+ * Copyright 2009 by
+ * + Christian-Albrechts-University of Kiel
+ *   + Department of Computer Science
+ *     + Real-Time and Embedded Systems Group
+ * 
+ * This code is provided under the terms of the Eclipse Public License (EPL).
+ * See the file epl-v10.html for the license text.
+ * 
+ *****************************************************************************/
 package de.cau.cs.kieler.viewmanagement;
 
 import java.util.ArrayList;
@@ -6,6 +20,11 @@ import java.util.List;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
+
+/**
+ * @author nbe
+ *
+ */
 
 public final class RunLogic {
 	
@@ -37,7 +56,7 @@ public final class RunLogic {
         activeCombos = new ArrayList<String>();
 //        For now, manually add the Combinations that should be active here. Later it'd be better to do this with a table.
         activeCombos.add("de.cau.cs.kieler.viewmanagement.combination.SelectionHighlightCombination");
-        activeCombos.add("de.cau.cs.kieler.viewmanagement.combination.SelectionTextualRepresentationCombination");
+        //activeCombos.add("de.cau.cs.kieler.viewmanagement.combination.SelectionTextualRepresentationCombination");
     }
 
     public void registerListeners() {
@@ -53,7 +72,7 @@ public final class RunLogic {
         for (ACombination oneCombination : combos){
 //        	String test = oneCombination.getClass().getCanonicalName();
         for(String comboToCheck : activeCombos)
-        	if (oneCombination.getClass().getCanonicalName().equals(comboToCheck));
+        	if (oneCombination.getClass().getCanonicalName().equals(comboToCheck))
         		oneCombination.setActive(true);
         }
 

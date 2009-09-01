@@ -48,7 +48,7 @@ public abstract class ACombination implements ITriggerListener{
     List<AEffect> effects;
     ATrigger t;
     List<ATrigger> triggersToEvaluate;
-    private boolean comboActive;
+    private boolean comboActive=false;
     private HashMap<String,EditPart> cachedEditParts;
     EditPart rootEP;
     public EditPart parent = null;

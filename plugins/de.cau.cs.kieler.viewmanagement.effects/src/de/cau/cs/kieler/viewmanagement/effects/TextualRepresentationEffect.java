@@ -1,3 +1,17 @@
+/******************************************************************************
+ * KIELER - Kiel Integrated Environment for Layout for the Eclipse RCP
+ *
+ * http://www.informatik.uni-kiel.de/rtsys/kieler/
+ * 
+ * Copyright 2009 by
+ * + Christian-Albrechts-University of Kiel
+ *   + Department of Computer Science
+ *     + Real-Time and Embedded Systems Group
+ * 
+ * This code is provided under the terms of the Eclipse Public License (EPL).
+ * See the file epl-v10.html for the license text.
+ * 
+ *****************************************************************************/
 package de.cau.cs.kieler.viewmanagement.effects;
 
 import java.awt.Point;
@@ -24,11 +38,16 @@ import org.eclipse.ui.PlatformUI;
 
 import de.cau.cs.kieler.viewmanagement.AEffect;
 
+/**
+ * @author nbe
+ * 
+ */
+
 public class TextualRepresentationEffect extends AEffect {
 
     ShapeEditPart objectToHighlight;
     Object objectParameters;
-    String textToAdd;
+    //String textToAdd;
     Label textualFigure;
   
     
@@ -39,7 +58,7 @@ public class TextualRepresentationEffect extends AEffect {
         //textualFigure.setTextPlacement(PositionConstants.RIGHT);
         textualFigure.setTextAlignment(PositionConstants.ALWAYS_RIGHT);
        
-        textualFigure.setForegroundColor(ColorConstants.red);
+        textualFigure.setForegroundColor(ColorConstants.blue);
         
     }
     
@@ -55,7 +74,7 @@ public class TextualRepresentationEffect extends AEffect {
             Rectangle bounds = selectedFigure.getBounds().getCopy();
             
             selectedFigure.translateToAbsolute(bounds);
-            bounds.scale(((RenderedDiagramRootEditPart) rootEP).getZoomManager().getZoom());
+            //bounds.scale(((RenderedDiagramRootEditPart) rootEP).getZoomManager().getZoom());
              
            IFigure parentFigure = selectedFigure.getParent();
             while( parentFigure != null ) {
@@ -70,7 +89,7 @@ public class TextualRepresentationEffect extends AEffect {
              
             } 
 //            Little adjustment to not paint it over the figure. Should be done somehow better
-            bounds.width = bounds.width+25;
+            //bounds.width = bounds.width+25;
             textualFigure.setText((String) objectParameters);
             textualFigure.setBounds(bounds);
 

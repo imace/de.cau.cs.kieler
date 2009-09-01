@@ -67,7 +67,7 @@ public class SelectionHighlightCombination extends ACombination {
             this.objectParameters = triggerEvent.getParameters();
             this.triggerActive = triggerEvent.getTriggerState();
             
-            return true; // FIXME: only true under certain conditions
+            return true; 
         }
         else
             return false;
