@@ -8,9 +8,8 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.gef,
  org.eclipse.gmf.runtime.diagram.ui,
- de.cau.cs.kieler.synccharts.viewmanagement
+ de.cau.cs.kieler.viewmanagement;bundle-version="0.1.0"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Import-Package: de.cau.cs.kieler.viewmanagement
 Export-Package: de.cau.cs.kieler.viewmanagement.triggers
 Bundle-Vendor: Christian-Albrechts-Universität zu Kiel
