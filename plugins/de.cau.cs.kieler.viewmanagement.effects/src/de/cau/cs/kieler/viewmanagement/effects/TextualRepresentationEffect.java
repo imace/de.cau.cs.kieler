@@ -20,6 +20,7 @@ import org.eclipse.draw2d.Label;
 import org.eclipse.draw2d.PositionConstants;
 import org.eclipse.draw2d.Viewport;
 import org.eclipse.draw2d.geometry.Rectangle;
+import org.eclipse.gef.EditPart;
 import org.eclipse.gef.RootEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.render.editparts.RenderedDiagramRootEditPart;
@@ -103,8 +104,8 @@ public class TextualRepresentationEffect extends AEffect {
     /**
      * @param target
      */
-    public void setTarget(ShapeEditPart target) {
-        this.objectToText = target;
+    public void setTarget(EditPart target) {
+        this.objectToText = (ShapeEditPart) target;
     }
 
 	

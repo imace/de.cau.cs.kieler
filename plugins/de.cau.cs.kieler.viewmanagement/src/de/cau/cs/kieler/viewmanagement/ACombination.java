@@ -17,7 +17,6 @@ package de.cau.cs.kieler.viewmanagement;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gef.EditPart;
-import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditor;
 import org.eclipse.gmf.runtime.notation.View;
 import java.util.HashMap;
@@ -31,7 +30,7 @@ import org.eclipse.ui.PlatformUI;
  */
 public abstract class ACombination implements ITriggerListener{
 
-	//private boolean evresult;
+
 	List<ATrigger> triggers;
     List<AEffect> effects;
     ATrigger t;
@@ -86,8 +85,6 @@ public abstract class ACombination implements ITriggerListener{
 	    
 	}
 	public EditPart getRootEPAsParent(){
-		
-	            
 		IEditorPart editor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
 		        if (editor instanceof DiagramEditor) {
                     rootEP= ((DiagramEditor) editor)
@@ -114,8 +111,8 @@ public abstract class ACombination implements ITriggerListener{
 			            
 			        List children = parent.getChildren();
 			        for (Object child : children) {
-			            if (child instanceof ShapeEditPart) {
-			                View view = (View) ((ShapeEditPart) child).getModel();
+			            if (child instanceof EditPart) {
+			                View view = (View) ((EditPart) child).getModel();
 			                EObject modelElement = (EObject) view.getElement();
 			                            if (modelElement.equals(
 			                                    modelElement.eResource()
@@ -123,8 +120,8 @@ public abstract class ACombination implements ITriggerListener{
 			                        //cache for later calls
 			                        cachedEditParts.put(
 			                                        elementURIFragment,
-			                                        (ShapeEditPart) child);
-			                        return (ShapeEditPart) child;
+			                                        (EditPart) child);
+			                        return (EditPart) child;
 			                            }
 			                            
 			            }

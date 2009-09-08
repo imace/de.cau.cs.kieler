@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.draw2d.IFigure;
+import org.eclipse.gef.EditPart;
 import org.eclipse.gef.RootEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.figures.ResizableCompartmentFigure;
@@ -96,8 +97,8 @@ public class CompartmentExpandEffect extends AEffect {
     /**
      * @param target
      */
-    public void setTarget(ShapeEditPart target) {
-        this.objectToExpand = target;
+    public void setTarget(EditPart target) {
+        this.objectToExpand = (ShapeEditPart) target;
     }
 
 	@Override

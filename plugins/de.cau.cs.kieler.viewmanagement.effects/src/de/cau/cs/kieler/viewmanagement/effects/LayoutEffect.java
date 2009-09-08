@@ -14,6 +14,7 @@
  *****************************************************************************/
 package de.cau.cs.kieler.viewmanagement.effects;
 import org.eclipse.draw2d.Label;
+import org.eclipse.gef.EditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeEditPart;
 import de.cau.cs.kieler.kiml.ui.layout.*;
 import de.cau.cs.kieler.viewmanagement.AEffect;
@@ -51,8 +52,8 @@ public class LayoutEffect extends AEffect{
 	}
 
 	
-	public void setTarget(ShapeEditPart target) {
-		this.objectToLayout = target;
+	public void setTarget(EditPart target) {
+		this.objectToLayout = (ShapeEditPart) target;
 		
 	}
 

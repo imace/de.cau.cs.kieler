@@ -52,9 +52,9 @@ public abstract class ATrigger {
     }
     //returns URIFragment for given object
     public String translateToURI(Object sourceObject){
-    	if (sourceObject instanceof ShapeEditPart){
+    	if (sourceObject instanceof EditPart){
     
-    	View view = (View) ((ShapeEditPart) sourceObject).getModel();
+    	View view = (View) ((EditPart) sourceObject).getModel();
     	EObject modelElement = view.getElement();
     	result = modelElement.eResource().getURIFragment(modelElement);
     	

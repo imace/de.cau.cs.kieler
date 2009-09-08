@@ -19,6 +19,7 @@ package de.cau.cs.kieler.viewmanagement.effects;
 import java.util.ArrayList;
 import java.util.List;
 import org.eclipse.draw2d.IFigure;
+import org.eclipse.gef.EditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.figures.ResizableCompartmentFigure;
 import de.cau.cs.kieler.viewmanagement.AEffect;
@@ -96,8 +97,8 @@ public class CompartmentCollapseEffect extends AEffect {
     /**
      * @param target
      */
-    public void setTarget(ShapeEditPart target) {
-        this.objectToCollapse = target;
+    public void setTarget(EditPart target) {
+        this.objectToCollapse = (ShapeEditPart) target;
     }
 
 	@Override

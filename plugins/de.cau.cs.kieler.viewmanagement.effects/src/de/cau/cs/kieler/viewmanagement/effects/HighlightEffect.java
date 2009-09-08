@@ -21,6 +21,7 @@ import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.RectangleFigure;
 import org.eclipse.draw2d.Viewport;
 import org.eclipse.draw2d.geometry.Rectangle;
+import org.eclipse.gef.EditPart;
 import org.eclipse.gef.RootEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.render.editparts.RenderedDiagramRootEditPart;
@@ -142,8 +143,8 @@ public class HighlightEffect extends AEffect {
     /**
      * @param target
      */
-    public void setTarget(ShapeEditPart target) {
-        this.objectToHighlight = target;
+    public void setTarget(EditPart target) {
+        this.objectToHighlight = (ShapeEditPart) target;
     }
 
 	

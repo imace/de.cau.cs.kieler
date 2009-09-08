@@ -16,6 +16,7 @@ package de.cau.cs.kieler.viewmanagement.effects;
 
 
 import org.eclipse.draw2d.IFigure;
+import org.eclipse.gef.EditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeEditPart;
 
 
@@ -63,8 +64,8 @@ public class FilterEffect extends AEffect {
     /**
      * @param target
      */
-    public void setTarget(ShapeEditPart target) {
-        this.objectToHighlight = target;
+    public void setTarget(EditPart target) {
+        this.objectToHighlight = (ShapeEditPart) target;
     }
 
 	

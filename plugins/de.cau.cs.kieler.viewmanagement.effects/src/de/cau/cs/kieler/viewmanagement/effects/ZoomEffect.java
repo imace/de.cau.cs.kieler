@@ -16,6 +16,7 @@ package de.cau.cs.kieler.viewmanagement.effects;
 
 
 
+import org.eclipse.gef.EditPart;
 import org.eclipse.gef.editparts.ZoomManager;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeEditPart;
@@ -55,8 +56,8 @@ public class ZoomEffect extends AEffect {
 	}
 
 	@Override
-	public void setTarget(ShapeEditPart target) {
-		this.objectToZoom = target;
+	public void setTarget(EditPart target) {
+		this.objectToZoom = (ShapeEditPart) target;
 		
 	}
 

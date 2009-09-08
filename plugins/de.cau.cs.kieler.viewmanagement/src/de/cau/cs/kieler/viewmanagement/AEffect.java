@@ -15,6 +15,7 @@
 package de.cau.cs.kieler.viewmanagement;
 
 
+import org.eclipse.gef.EditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeEditPart;
 /**
  * @author nbe
@@ -27,7 +28,7 @@ public abstract class AEffect {
 	
 	public abstract void execute();
 	
-	public abstract void setTarget(ShapeEditPart target);
+	public abstract void setTarget(EditPart target);
 		
 	public abstract void setParameters(Object parameters);
 	

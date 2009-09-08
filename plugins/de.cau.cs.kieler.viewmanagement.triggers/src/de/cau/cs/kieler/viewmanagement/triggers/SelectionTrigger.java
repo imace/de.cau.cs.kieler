@@ -15,6 +15,8 @@
 package de.cau.cs.kieler.viewmanagement.triggers;
 
 import java.util.List;
+
+import org.eclipse.gef.EditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeEditPart;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -68,30 +70,23 @@ public class SelectionTrigger extends ATrigger implements ISelectionListener {
             this.selectionEvent = new TriggerEventObject();
             List<?> selectionList = ((IStructuredSelection)selection).toList();
             Object selectedObject = selectionList.get(0);
-            //Object selectedObject = ((IStructuredSelection) selection)
-              //      .getFirstElement();
-            if (selectedObject instanceof ShapeEditPart) {
+            if (selectedObject instanceof EditPart) {
                 if (currentSelection != null) {
                     selectionEvent.setTriggerActive(false);
                     selectionEvent.setAffectedObject(translateToURI(currentSelection));
-                    //selectionEvent.setParameters("Test");
                     notifyTrigger(selectionEvent);
                     
                 }
                 currentSelection = selectedObject;
-                
                 selectionEvent.setAffectedObject(translateToURI(selectedObject));
                 selectionEvent.setTriggerActive(true);
-
                 notifyTrigger(selectionEvent);
 
-                // SelectionHighlightCombination.doSomething( (ShapeEditPart)
-                // selectedObject);
+  
             } else {
                 if (currentSelection != null) {
                     selectionEvent.setTriggerActive(false);
                     selectionEvent.setAffectedObject(translateToURI(currentSelection));
-                    selectionEvent.setParameters("Test");
                     notifyTrigger(selectionEvent);
                 }
             }

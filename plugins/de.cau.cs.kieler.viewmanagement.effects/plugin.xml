@@ -35,6 +35,10 @@
             class="de.cau.cs.kieler.viewmanagement.effects.ZoomEffect"
             name="de.cau.cs.kieler.viewmanagement.effects.zoomeffect">
       </effect>
+      <effect
+            class="de.cau.cs.kieler.viewmanagement.effects.ShapeHighlightEffect"
+            name="de.cau.cs.kieler.viewmanagement.effects.shapehighlighteffect">
+      </effect>
    </extension>
 
 </plugin>

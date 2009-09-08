@@ -15,7 +15,7 @@
 package de.cau.cs.kieler.viewmanagement.effects;
 
 
-import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeEditPart;
+import org.eclipse.gef.EditPart;
 import de.cau.cs.kieler.viewmanagement.AEffect;
 
 /**
@@ -45,7 +45,7 @@ public class DefaultTestEffect extends AEffect {
 	}
 
 	@Override
-	public void setTarget(ShapeEditPart target) {
+	public void setTarget(EditPart target) {
 		// TODO Auto-generated method stub
 		
 	}
