@@ -35,6 +35,10 @@
             class="de.cau.cs.kieler.viewmanagement.combination.SelectionShapeHighlightCombination"
             name="ShapeHighlight">
       </combination>
+      <combination
+            class="de.cau.cs.kieler.viewmanagement.combination.SelectionZoomAndScrollToCombination"
+            name="ZoomAndScrollToCombination">
+      </combination>
    </extension>
 
 </plugin>

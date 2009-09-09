@@ -25,7 +25,7 @@
       </effect>
       <effect
             class="de.cau.cs.kieler.viewmanagement.effects.FilterEffect"
-            name="de.cau.cs.kieler.viewmanagement.effects.filtereffect">
+            name="de.cau.cs.kieler.viewmanagement.effects.zoomandscrolltoeffect">
       </effect>
       <effect
             class="de.cau.cs.kieler.viewmanagement.effects.LayoutEffect"
@@ -38,6 +38,10 @@
       <effect
             class="de.cau.cs.kieler.viewmanagement.effects.ShapeHighlightEffect"
             name="de.cau.cs.kieler.viewmanagement.effects.shapehighlighteffect">
+      </effect>
+      <effect
+            class="de.cau.cs.kieler.viewmanagement.effects.ZoomAndScrollToEffect"
+            name="de.cau.cs.kieler.viewmanagement.effects.effect1">
       </effect>
    </extension>
 

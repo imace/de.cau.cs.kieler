@@ -23,7 +23,7 @@ import org.eclipse.swt.graphics.Color;
 import de.cau.cs.kieler.viewmanagement.ACombination;
 import de.cau.cs.kieler.viewmanagement.ATrigger;
 import de.cau.cs.kieler.viewmanagement.effects.HighlightEffect;
-import de.cau.cs.kieler.viewmanagement.effects.ShapeHighlightEffect;
+import de.cau.cs.kieler.viewmanagement.effects.ZoomAndScrollToEffect;
 import de.cau.cs.kieler.viewmanagement.triggers.SelectionTrigger;
 import de.cau.cs.kieler.viewmanagement.*;
 
@@ -31,12 +31,12 @@ import de.cau.cs.kieler.viewmanagement.*;
  * @author nbe
  * 
  */
-public class SelectionShapeHighlightCombination extends ACombination {
+public class SelectionZoomAndScrollToCombination extends ACombination {
 
-    ShapeHighlightEffect effect;
+    ZoomAndScrollToEffect effect;
     SelectionTrigger st;
     
-    EditPart objectToHighlight;
+    ShapeEditPart objectToHighlight;
     Object objectParameters;
     boolean triggerActive;
     Color lineColor = ColorConstants.red;
@@ -58,10 +58,9 @@ public class SelectionShapeHighlightCombination extends ACombination {
     @Override
     public boolean evaluate(TriggerEventObject triggerEvent) {
       //parent may be set if wanted. Will else be RootEP 
-    	parent =(EditPart) triggerEvent.getParameters();
 		EditPart affectedObject = translateToEditPart(triggerEvent.getAffectedObject(), parent);
-        if( affectedObject instanceof EditPart ){
-            this.objectToHighlight = (EditPart)affectedObject;
+        if( affectedObject instanceof ShapeEditPart ){
+            this.objectToHighlight = (ShapeEditPart)affectedObject;
             this.objectParameters = triggerEvent.getParameters();
             this.triggerActive = triggerEvent.getTriggerState();
             
@@ -77,7 +76,7 @@ public class SelectionShapeHighlightCombination extends ACombination {
     @Override
     public void execute() {
         if ( effect == null )
-            effect = new ShapeHighlightEffect();
+            effect = new ZoomAndScrollToEffect();
         
         effect.setTarget(this.objectToHighlight);
         effect.setParameters(this.objectParameters);
@@ -87,18 +86,11 @@ public class SelectionShapeHighlightCombination extends ACombination {
 
 	@Override
 	public void undoLastEffect() {
-		effect.undo();
+		
 		
 	}
 	
-	/**
-	 * @param newcolor Color that the HighlightEffect should be changed to
-	 * @param newlinewidth Linewidth that the HighlightEffect should be changed to
-	 */
-	public void setHighlightEffect(Color newcolor, int newlinewidth){
-		lineColor= newcolor;
-		linewidth= newlinewidth;
-	}
+
     
     
 
