@@ -58,6 +58,7 @@ public class SelectionZoomAndScrollToCombination extends ACombination {
     @Override
     public boolean evaluate(TriggerEventObject triggerEvent) {
       //parent may be set if wanted. Will else be RootEP 
+    	if (triggerEvent.getTriggerState()){
 		EditPart affectedObject = translateToEditPart(triggerEvent.getAffectedObject(), parent);
         if( affectedObject instanceof ShapeEditPart ){
             this.objectToHighlight = (ShapeEditPart)affectedObject;
@@ -66,8 +67,12 @@ public class SelectionZoomAndScrollToCombination extends ACombination {
             
             return true; 
         }
+        
         else
             return false;
+    	}
+    	else
+    		return false;
     }
 
     /* (non-Javadoc)

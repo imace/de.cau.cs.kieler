@@ -16,16 +16,15 @@ package de.cau.cs.kieler.viewmanagement.effects;
 
 
 
-import org.eclipse.draw2d.ColorConstants;
+
 import org.eclipse.draw2d.IFigure;
-import org.eclipse.draw2d.RectangleFigure;
 import org.eclipse.draw2d.Viewport;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.RootEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.render.editparts.RenderedDiagramRootEditPart;
-import org.eclipse.swt.graphics.Color;
+
 
 import de.cau.cs.kieler.viewmanagement.AEffect;
 
@@ -36,10 +35,10 @@ import de.cau.cs.kieler.viewmanagement.AEffect;
 public class ZoomAndScrollToEffect extends AEffect {
 
     ShapeEditPart objectToHighlight;
-    RectangleFigure highlightFigure;
+    int offset = 25;
+
    
-    int lineWidth=3; 
-    Color color= ColorConstants.red;
+    
     
     
     /**
@@ -55,77 +54,58 @@ public class ZoomAndScrollToEffect extends AEffect {
     
     public void execute() {
         
-        // search a layer we can draw on        
+          
         RootEditPart rootEP = objectToHighlight.getRoot();
-        
-     
-            // get Figure to the EditPart
            
             IFigure selectedFigure = objectToHighlight.getFigure();
-            
-//            highlightFigure.setLineWidth(lineWidth);
-//            highlightFigure.setForegroundColor(color);
-            
-            
 
             
-            // get same bounds as the selected figure ...
             Rectangle bounds = selectedFigure.getBounds().getCopy();
-            int height = 340;
-            double zoomFactor = height/bounds.height;
-            // ... but in absolute coordinates
+            Viewport viewport = null;
+            IFigure parentFigure = selectedFigure.getParent();
+             while( parentFigure != null ) {
+              if(parentFigure instanceof Viewport) {
+                viewport = (Viewport)parentFigure;
+                
 
-            //translateToAbsolute is really bothersome, can't cope with either scrolling or zooming
+              }
+              parentFigure = parentFigure.getParent();
+ 			
+             }
+             bounds.height= bounds.height+offset;
+             bounds.width= bounds.width+offset;
+             double maxHeight = viewport.getBounds().height;
+             double maxWidth = viewport.getBounds().width;
+           
+            double zoomFactor1 = maxHeight/bounds.height;
+            double zoomFactor2 = maxWidth/bounds.width;
+            
+            double zoomFactor;
+			if (zoomFactor1 < zoomFactor2)
+            	 zoomFactor = zoomFactor1;
+			else zoomFactor = zoomFactor2;
+         
+
+           
            selectedFigure.translateToAbsolute(bounds);
            double zoomValue = ((RenderedDiagramRootEditPart) rootEP).getZoomManager().getZoom();
-           zoomValue = zoomValue+zoomFactor;
-           ((RenderedDiagramRootEditPart) rootEP).getZoomManager().setZoom(zoomValue);
-           //Add correction for Zooming-related translation error
-            bounds.scale(1/zoomValue);
-            //get the top-most Viewport to determine the scroll value and apply for correction
-            //this still has a zooming-related error in it, another corretion is needed
-           Viewport viewport = null;
-          IFigure parentFigure = selectedFigure.getParent();
-            while( parentFigure != null ) {
-             if(parentFigure instanceof Viewport) {
-               viewport = (Viewport)parentFigure;
-               
+           double newZoomValue = zoomFactor;
+           ((RenderedDiagramRootEditPart) rootEP).getZoomManager().setZoom(newZoomValue);
+           
+            bounds.scale(1/newZoomValue);
+           
+           
 
-             }
-             parentFigure = parentFigure.getParent();
-			
-            }
+            
             int horValue = viewport.getHorizontalRangeModel().getValue();
             int verValue = viewport.getVerticalRangeModel().getValue();
             viewport.getHorizontalRangeModel().setValue(bounds.x);
             viewport.getVerticalRangeModel().setValue(bounds.y);
            
-//               bounds.translate(
-//                     (int) ((1/zoomValue)*viewport.getHorizontalRangeModel().getValue()),
-//                     (int) ((1/zoomValue)*viewport.getVerticalRangeModel().getValue()));
-//               
-//             }
-             
-//               parentFigure = parentFigure.getParent();
              
             } 
             
-            
-                   
-            
-            // set the bounds of the Figure that will do the highlighting
-            
-//            highlightFigure.setBounds(bounds);
-//            System.out.println(highlightFigure.getBounds() +  " "+bounds);
-            // add the new highlight figure to the layer
-          
-            
-            
-            
-            // schedule a repaint of the feedback layer
-//            layer.invalidate();
-//        }
-        //System.out.println("Highlight");
+
     
 
     /**
@@ -144,7 +124,11 @@ public class ZoomAndScrollToEffect extends AEffect {
 
 	
 	public void setParameters(Object objectParameters) {
-		// TODO Auto-generated method stub
+		
+		
+		
+		 
+		
 		
 	}
 
