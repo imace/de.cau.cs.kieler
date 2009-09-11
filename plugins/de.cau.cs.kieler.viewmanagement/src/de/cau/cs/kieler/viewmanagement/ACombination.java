@@ -23,12 +23,16 @@ import java.util.HashMap;
 import java.util.List;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PlatformUI;
-
+import org.eclipse.gef.EditPart;
+import org.eclipse.gef.RootEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.render.editparts.RenderedDiagramRootEditPart;
 /**
  * @author nbe
  *
  */
 public abstract class ACombination implements ITriggerListener{
+
 
 
 	List<ATrigger> triggers;
@@ -99,6 +103,10 @@ public abstract class ACombination implements ITriggerListener{
 			EditPart parent) {
 			if (parent==null)
 				parent= getRootEPAsParent();
+			
+				
+			
+				
 			            if (cachedEditParts == null) {
 			                // if hashmap is not initialized, create it
 			                    cachedEditParts = new HashMap<String,EditPart>();

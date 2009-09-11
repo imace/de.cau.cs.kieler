@@ -13,5 +13,6 @@ Require-Bundle: org.eclipse.ui,
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: de.cau.cs.kieler.viewmanagement
-Import-Package: org.eclipse.gmf.runtime.diagram.ui.editparts
+Import-Package: org.eclipse.gmf.runtime.diagram.ui.editparts,
+ org.eclipse.gmf.runtime.diagram.ui.render.editparts
 Bundle-Vendor: Christian-Albrechts-Universität zu Kiel

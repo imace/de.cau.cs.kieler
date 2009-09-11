@@ -58,6 +58,7 @@ public abstract class ATrigger {
     	EObject modelElement = view.getElement();
     	result = modelElement.eResource().getURIFragment(modelElement);
     	
+    	
     	}
 		return result;
 		

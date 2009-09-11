@@ -58,10 +58,10 @@ public class SelectionShapeHighlightCombination extends ACombination {
     @Override
     public boolean evaluate(TriggerEventObject triggerEvent) {
       //parent may be set if wanted. Will else be RootEP 
-    	parent =(EditPart) triggerEvent.getParameters();
-		EditPart affectedObject = translateToEditPart(triggerEvent.getAffectedObject(), parent);
+    	EditPart affectedObject =(EditPart) triggerEvent.getParameters();
+//		EditPart affectedObject = translateToEditPart(triggerEvent.getAffectedObject(), parent);
         if( affectedObject instanceof EditPart ){
-            this.objectToHighlight = (EditPart)affectedObject;
+            this.objectToHighlight = affectedObject;
             this.objectParameters = triggerEvent.getParameters();
             this.triggerActive = triggerEvent.getTriggerState();
             
