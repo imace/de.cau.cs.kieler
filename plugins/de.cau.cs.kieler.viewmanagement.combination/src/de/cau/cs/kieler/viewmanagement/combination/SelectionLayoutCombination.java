@@ -16,8 +16,10 @@ package de.cau.cs.kieler.viewmanagement.combination;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.eclipse.gef.EditPart;
-import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeEditPart;
+import org.eclipse.ui.IEditorPart;
+
 import de.cau.cs.kieler.viewmanagement.ACombination;
 import de.cau.cs.kieler.viewmanagement.ATrigger;
 import de.cau.cs.kieler.viewmanagement.RunLogic;
@@ -25,74 +27,68 @@ import de.cau.cs.kieler.viewmanagement.TriggerEventObject;
 import de.cau.cs.kieler.viewmanagement.effects.LayoutEffect;
 import de.cau.cs.kieler.viewmanagement.triggers.SelectionTrigger;
 
-
 /**
- * @author nbe
- * 
+ * The combination that is used to perform auto layout
+ * @author Michael Matzen
+ *
  */
-
 public class SelectionLayoutCombination extends ACombination {
-
-	LayoutEffect effect;
-	SelectionTrigger st;
-    ShapeEditPart objectToLayout;
-    Object objectParameters;
-    boolean triggerActive;
- 
-
-    @Override
-    public List<ATrigger> getTriggers() {
-        this.st = (SelectionTrigger)RunLogic.getTrigger("SelectionTrigger");
-        List<ATrigger> myTriggers = new ArrayList<ATrigger>();
-        myTriggers.add(st);
-        return myTriggers;
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see de.cau.cs.kieler.viewmanagement.ACombination#evaluate()
+    
+    SelectionTrigger trigger; //the auto layout trigger
+    LayoutEffect effect; //the auto layout effect
+    EditPart targetEditPart; //the shape edit part that is used as a target for the layout action
+    IEditorPart activeEditorPart; //the active editor part 
+    
+    /**
+     * Evaluates a trigger event
      */
     @Override
     public boolean evaluate(TriggerEventObject triggerEvent) {
-      //parent may be set if wanted. Will else be RootEP 
-		EditPart affectedObject = translateToEditPart(triggerEvent.getAffectedObject(), parent);
-        if( affectedObject instanceof ShapeEditPart ){
-            this.objectToLayout = (ShapeEditPart)affectedObject;
-            this.objectParameters = triggerEvent.getParameters();
-            this.triggerActive = triggerEvent.getTriggerState();
+        EditPart affectedObject = translateToEditPart(triggerEvent
+                .getAffectedObject(), parent);
+        if (affectedObject instanceof EditPart) {
+            this.targetEditPart = (EditPart)affectedObject;
+            //Add editorPart if supplied
+            if (triggerEvent.getParameters() instanceof IEditorPart)
+                this.activeEditorPart = (IEditorPart) triggerEvent.getParameters();
             
-            return true; 
-        }
-        else
+            return true;
+        } else
             return false;
     }
 
-    /* (non-Javadoc)
-     * @see de.cau.cs.kieler.viewmanagement.ACombination#execute()
+    /**
+     * Executes the combination by starting the effect
      */
     @Override
     public void execute() {
-        if ( effect == null )
+        if (effect == null)
             effect = new LayoutEffect();
-        
-        effect.setTarget(this.objectToLayout);
-        effect.setParameters(this.objectParameters);
+        effect.setTarget( targetEditPart );
+        effect.setParameters(activeEditorPart);
         effect.execute();
         
     }
 
-	@Override
-	public void undoLastEffect() {
-		// TODO Auto-generated method stub
-		
-	}
+    /**
+     * Returns the list of triggers
+     */
+    @Override
+    public List<ATrigger> getTriggers() {
+        this.trigger = (SelectionTrigger) RunLogic
+                .getTrigger("SelectionTrigger");
+        List<ATrigger> triggerList = new ArrayList<ATrigger>();
+        triggerList.add(trigger);
+        return triggerList;
+    }
 
-
-
-
-    
-    
-
+    /**
+     * Undo the last effect, this is unused because
+     * the 'undo' is done by the layout command framework
+     */
+    @Override
+    public void undoLastEffect() {
+        //nothing we can undo here
+    }
 
 }
