@@ -58,10 +58,10 @@ public final class RunLogic {
 //        activeCombos.add("de.cau.cs.kieler.viewmanagement.combination.SelectionHighlightCombination");
         //activeCombos.add("de.cau.cs.kieler.viewmanagement.combination.SelectionTextualRepresentationCombination");
         //activeCombos.add("de.cau.cs.kieler.viewmanagement.combination.SelectionFilterCombination");
-        //activeCombos.add("de.cau.cs.kieler.viewmanagement.combination.SelectionLayoutCombination");
+        activeCombos.add("de.cau.cs.kieler.viewmanagement.combination.SelectionLayoutCombination");
       //activeCombos.add("de.cau.cs.kieler.viewmanagement.combination.SelectionZoomCombination");
 //        activeCombos.add("de.cau.cs.kieler.viewmanagement.combination.SelectionShapeHighlightCombination");
-        activeCombos.add("de.cau.cs.kieler.viewmanagement.combination.SelectionZoomAndScrollToCombination");
+//        activeCombos.add("de.cau.cs.kieler.viewmanagement.combination.SelectionZoomAndScrollToCombination");
     }
 
     public void registerListeners() {

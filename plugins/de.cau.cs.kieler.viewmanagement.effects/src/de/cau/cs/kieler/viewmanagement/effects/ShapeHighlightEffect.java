@@ -71,6 +71,7 @@ public class ShapeHighlightEffect extends AEffect {
 //            bounds.width=bounds.width+20;
 //            figure.setBounds(bounds);
             Color fgcolor = figure.getForegroundColor();
+            figure.repaint();
             
             
 

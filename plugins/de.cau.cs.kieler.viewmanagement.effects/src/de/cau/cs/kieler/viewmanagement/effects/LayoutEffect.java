@@ -16,6 +16,7 @@ package de.cau.cs.kieler.viewmanagement.effects;
 
 import org.eclipse.gef.EditPart;
 import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.PlatformUI;
 
 import de.cau.cs.kieler.kiml.ui.layout.DiagramLayoutManager;
 import de.cau.cs.kieler.viewmanagement.AEffect;
@@ -56,6 +57,7 @@ public class LayoutEffect extends AEffect {
     @Override
     public void setTarget(EditPart target) {
         this.editPart = (EditPart) target;
+        this.editorPart=PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
     }
 
 }

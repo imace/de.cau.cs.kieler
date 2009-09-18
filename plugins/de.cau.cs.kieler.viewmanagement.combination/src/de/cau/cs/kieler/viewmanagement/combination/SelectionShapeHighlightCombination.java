@@ -22,7 +22,6 @@ import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeEditPart;
 import org.eclipse.swt.graphics.Color;
 import de.cau.cs.kieler.viewmanagement.ACombination;
 import de.cau.cs.kieler.viewmanagement.ATrigger;
-import de.cau.cs.kieler.viewmanagement.effects.HighlightEffect;
 import de.cau.cs.kieler.viewmanagement.effects.ShapeHighlightEffect;
 import de.cau.cs.kieler.viewmanagement.triggers.SelectionTrigger;
 import de.cau.cs.kieler.viewmanagement.*;
@@ -58,6 +57,7 @@ public class SelectionShapeHighlightCombination extends ACombination {
     @Override
     public boolean evaluate(TriggerEventObject triggerEvent) {
       //parent may be set if wanted. Will else be RootEP 
+    	//BAD Since the translation does not work, the transitionEditPart will be delivered through parameters.
     	EditPart affectedObject =(EditPart) triggerEvent.getParameters();
 //		EditPart affectedObject = translateToEditPart(triggerEvent.getAffectedObject(), parent);
         if( affectedObject instanceof EditPart ){
