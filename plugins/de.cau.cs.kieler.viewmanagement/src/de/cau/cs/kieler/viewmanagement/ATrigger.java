@@ -34,6 +34,7 @@ public abstract class ATrigger {
 
     private EventListenerList triggerListener = new EventListenerList();
     private String result;
+    private EObject result2;
     
     public void addTriggerListener (ITriggerListener triggerlistener)
     {
@@ -64,11 +65,25 @@ public abstract class ATrigger {
 		
     	
     }
+    public EObject translateToEObject(Object sourceObject){
+    	if (sourceObject instanceof EditPart){
+    
+    	View view = (View) ((EditPart) sourceObject).getModel();
+    	result2 = view.getElement();
+
+    	
+    	
+    	}
+		return result2;
+		
+    	
+    }
    
     /**
      * Release all system resources for this object.
      */
-    public abstract void finalize();
+    public void finalize() {
+	}
     	
     
 }

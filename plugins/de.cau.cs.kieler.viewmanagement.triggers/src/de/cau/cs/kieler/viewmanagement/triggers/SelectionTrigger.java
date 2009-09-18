@@ -16,6 +16,7 @@ package de.cau.cs.kieler.viewmanagement.triggers;
 
 import java.util.List;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ConnectionEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeEditPart;
@@ -80,19 +81,17 @@ public class SelectionTrigger extends ATrigger implements ISelectionListener {
                 if (currentSelection != null) {
                     selectionEvent.setTriggerActive(false);
                     selectionEvent.setAffectedObject(translateToURI(currentSelection));
-//                    selectionEvent.setParameters(((EditPart)currentSelection).getParent());
-//                    EditPart copy = null;
-    				if (currentSelection instanceof ConnectionEditPart)
-                    	  selectionEvent.setParameters((ConnectionEditPart)currentSelection); 
-    				
-//    						EditPart RP = copy.getRoot();
-//                    	  EditPart parent = copy.getParent();
+
+//    				if (currentSelection instanceof ConnectionEditPart)
+//                    	  selectionEvent.setParameters((ConnectionEditPart)currentSelection); 
+//    				
                         notifyTrigger(selectionEvent);
                     notifyTrigger(selectionEvent);
                     
                 }
                 currentSelection = selectedObject;
                 selectionEvent.setAffectedObject(translateToURI(selectedObject));
+//                EObject etest = translateToEObject(currentSelection);
                 selectionEvent.setTriggerActive(true);
                 notifyTrigger(selectionEvent);
 
@@ -101,6 +100,7 @@ public class SelectionTrigger extends ATrigger implements ISelectionListener {
                 if (currentSelection != null) {
                     selectionEvent.setTriggerActive(false);
                     selectionEvent.setAffectedObject(translateToURI(currentSelection));
+                    EObject etest = translateToEObject(currentSelection);
                   Object copy = null;
 				if (currentSelection instanceof ConnectionEditPart)
                 	  copy = currentSelection;

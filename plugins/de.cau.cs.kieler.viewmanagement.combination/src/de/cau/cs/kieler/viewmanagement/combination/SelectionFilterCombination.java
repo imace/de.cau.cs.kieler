@@ -43,7 +43,7 @@ public class SelectionFilterCombination extends ACombination {
 
 	FilterEffect effect;
 	SelectionTrigger st;
-    ShapeEditPart objectToFilter;
+    ShapeEditPart affectedObject;
     Object objectParameters;
     boolean triggerActive;
  
@@ -66,7 +66,7 @@ public class SelectionFilterCombination extends ACombination {
       //parent may be set if wanted. Will else be RootEP 
 		EditPart affectedObject = translateToEditPart(triggerEvent.getAffectedObject(), parent);
         if( affectedObject instanceof ShapeEditPart ){
-            this.objectToFilter = (ShapeEditPart)affectedObject;
+            this.affectedObject = (ShapeEditPart)affectedObject;
             this.objectParameters = triggerEvent.getParameters();
             this.triggerActive = triggerEvent.getTriggerState();
             
@@ -84,7 +84,7 @@ public class SelectionFilterCombination extends ACombination {
         if ( effect == null )
             effect = new FilterEffect();
         
-        effect.setTarget(this.objectToFilter);
+        effect.setTarget(this.affectedObject);
         effect.setParameters(this.objectParameters);
         effect.execute();
         

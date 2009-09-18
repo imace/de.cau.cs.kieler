@@ -41,7 +41,11 @@
       </effect>
       <effect
             class="de.cau.cs.kieler.viewmanagement.effects.ZoomAndScrollToEffect"
-            name="de.cau.cs.kieler.viewmanagement.effects.effect1">
+            name="de.cau.cs.kieler.viewmanagement.effects.zoomandscrolltoeffect">
+      </effect>
+      <effect
+            class="de.cau.cs.kieler.viewmanagement.effects.UnFilterEffect"
+            name="de.cau.cs.kieler.viewmanagement.effects.unfiltereffect">
       </effect>
    </extension>
 

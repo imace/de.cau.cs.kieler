@@ -50,7 +50,8 @@ public abstract class ACombination implements ITriggerListener{
 
     public abstract List<ATrigger> getTriggers();
     
-    public abstract void undoLastEffect();
+    public void undoLastEffect() {
+	}
     
     public boolean getActive(){
     	return comboActive;

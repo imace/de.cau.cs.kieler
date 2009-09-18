@@ -12,54 +12,38 @@
  * See the file epl-v10.html for the license text.
  * 
  *****************************************************************************/
+
 package de.cau.cs.kieler.viewmanagement.effects;
-
-
-import org.eclipse.draw2d.IFigure;
-import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeEditPart;
-
-
-import de.cau.cs.kieler.viewmanagement.AEffect;
 
 /**
  * @author nbe
  * 
  */
 
-public class FilterEffect extends AEffect {
+import org.eclipse.draw2d.IFigure;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeEditPart;
 
+import de.cau.cs.kieler.viewmanagement.AEffect;
+
+public class UnFilterEffect extends AEffect {
+
+	public UnFilterEffect(){
+		
+	}
 	
+	@Override
+	public void execute() {
+		IFigure selectedFigure = ((ShapeEditPart)this.affectedObject).getFigure();
 
-    IFigure undoFigure;
+        
+        if (selectedFigure.isVisible()){
+        	
+        
+        	selectedFigure.setVisible(true);
+        }
+		
+	}
 
-    /**
-     * default constructor
-     */
-    public FilterEffect() {
-       
-    }
-    
-    
-    public void execute() {
-    			IFigure selectedFigure = ((ShapeEditPart)this.affectedObject).getFigure();
 
-            
-            if (selectedFigure.isVisible()){
-            	undoFigure=selectedFigure;
-            
-            	selectedFigure.setVisible(false);
-            }
-          
-    
-    }
-    /**
-     * Undo the effect. 
-     */
-    public void undo(){
-        if((undoFigure!=null)&& !undoFigure.isVisible())
-        	undoFigure.setVisible(true);
-    }
-	
-	
 
 }
