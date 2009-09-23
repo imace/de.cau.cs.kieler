@@ -78,7 +78,7 @@ public class VMControl extends ViewPart {
         private void createColumns(DataTableViewer viewer) {
     		String[] titles = { "Active", "Combination" };
     		String[] toolTip = { "Status of Combination", "Name of Combination"};
-    		int[] bounds = {50, 400};
+    		int[] bounds = {42, 450};
     		
     		for (int i = 0; i < titles.length; i++) {
     			TreeViewerColumn column = new TreeViewerColumn(viewer, SWT.NONE);

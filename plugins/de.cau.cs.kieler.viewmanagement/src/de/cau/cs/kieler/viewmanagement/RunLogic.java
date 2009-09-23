@@ -100,11 +100,17 @@ public final class RunLogic {
 	
 		
         
-        for (ACombination oneCombination : combos)
-        	if(oneCombination.getActive()) //finalize only combos that were active
-            oneCombination.finalize();
+        for (ACombination oneCombination : combos){
+        	TableDataList.getInstance().remove(oneCombination.getClass().getCanonicalName());
+        			
+        	if(oneCombination.getActive()) //finalize only combos that were active	
+        		oneCombination.finalize();
+        	TableDataList.getInstance().updateViewAsync();
+        	}
         for (ATrigger oneTrigger : triggers)
         	oneTrigger.finalize();
+        
+//        TableDataList.getInstance().add(new TableData(TableDataList.getInstance(), myCombo.getActive(), myCombo.getClass().getCanonicalName()));
         
         return;
         }
