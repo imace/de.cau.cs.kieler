@@ -33,6 +33,16 @@
          </toolbar>
       </menuContribution>
    </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            category="de.cau.cs.kieler"
+            class="de.cau.cs.kieler.viewmanagement.VMControl"
+            id="de.cau.cs.kieler.viewmanagement.VMControl"
+            name="VM Control"
+            restorable="true">
+      </view>
+   </extension>
 
 
 </plugin>
