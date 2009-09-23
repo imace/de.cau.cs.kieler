@@ -60,13 +60,14 @@ public class TableDataLabelProvider implements ITableLabelProvider {
 	 */
 	public Image getColumnImage(Object element, int columnIndex) {
 		TableData tableData = (TableData) element;
-		if (columnIndex == 1) {
+		if (columnIndex == 0) {
 ////			if (!tableData.isPermanent()) {
-				if (tableData.isPresent())
+				if (tableData.isComboActive())
 					return CHECKED;
-		}
+		
 				else 
 					return UNCHECKED;
+		}
 //				else
 //					return null;
 ////			}
@@ -98,12 +99,12 @@ public class TableDataLabelProvider implements ITableLabelProvider {
 		case 0 :  // NOT_VISIBLE_COLUMN
 			return ""; 
 		case 1 :  // PRESENT_COLUMN
-			return ""; 
+			return tableData.getComboName();
 		case 2 : // KEY_COLUMN
 ////			if (tableData.isModified())
 ////				return "*"+tableData.getKey();
 //			else
-				return tableData.getKey();
+				return tableData.getComboName();
 		case 3 : // VALUE_COLUMN 
 //			return tableData.getValue();
 		default :

@@ -97,8 +97,8 @@ public class TableDataList {
 	 * @param tableData the TableData entry
 	 */
 	public void add(TableData tableData) {
-		if (contains(tableData.getKey()))
-			remove(tableData.getKey());
+		if (contains(tableData.getComboName()))
+			remove(tableData.getComboName());
 		tableDataList.add(tableData);
 	}
 	
@@ -113,7 +113,7 @@ public class TableDataList {
 	 */
 	public TableData get(String key) {
 		for (int c = 0; c < tableDataList.size(); c++) {
-			if (tableDataList.get(c).getKey().equals(key))
+			if (tableDataList.get(c).getComboName().equals(key))
 				return tableDataList.get(c);
 		}
 		return null;
@@ -160,7 +160,7 @@ public class TableDataList {
 	public boolean containsOther(String key, 
 								 TableData tableData) {
 		for (int c = 0; c < tableDataList.size(); c++) {
-			if ((tableDataList.get(c).getKey().equals(key))
+			if ((tableDataList.get(c).getComboName().equals(key))
 				&&(tableData != tableDataList.get(c)))
 				return true;
 		}
@@ -176,7 +176,7 @@ public class TableDataList {
 	 */
 	public void remove(String key) {
 		for (int c = 0; c < tableDataList.size(); c++) {
-			if (tableDataList.get(c).getKey().equals(key)) {
+			if (tableDataList.get(c).getComboName().equals(key)) {
 				tableDataList.remove(c);
 			}
 		}

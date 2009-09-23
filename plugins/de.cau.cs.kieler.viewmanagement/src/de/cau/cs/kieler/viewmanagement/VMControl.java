@@ -43,7 +43,7 @@ public class VMControl extends ViewPart {
  		createViewer(parent);
  		viewer.setInput(new TableDataList(viewer));
 // 		hookSideEffectActions();
- 		hookContextMenu();
+// 		hookContextMenu();
 // 		contributeToActionBars();
 // 		updateEnabled();			
  	}
@@ -70,7 +70,7 @@ public class VMControl extends ViewPart {
 
         private void createColumns(DataTableViewer viewer) {
     		String[] titles = { "Active", "Combination" };
-    		String[] toolTip = { "Active/Inactive", "Name of Combination"};
+    		String[] toolTip = { "Status of Combination", "Name of Combination"};
     		int[] bounds = {52, 350};
     		
     		for (int i = 0; i < titles.length; i++) {
@@ -90,18 +90,18 @@ public class VMControl extends ViewPart {
     		tree.setLinesVisible(true);
     	}
         
-        private void hookContextMenu() {
-    		MenuManager menuMgr = new MenuManager("#PopupMenu");
-    		menuMgr.setRemoveAllWhenShown(true);
-    		menuMgr.addMenuListener(new IMenuListener() {
-    			public void menuAboutToShow(IMenuManager manager) {
-//    				buildContextMenu(manager);
-    			}
-    		});
-    		Menu menu = menuMgr.createContextMenu(viewer.getControl());
-    		viewer.getControl().setMenu(menu);
-    		getSite().registerContextMenu(menuMgr, viewer);
-    	}
+//        private void hookContextMenu() {
+//    		MenuManager menuMgr = new MenuManager("#PopupMenu");
+//    		menuMgr.setRemoveAllWhenShown(true);
+//    		menuMgr.addMenuListener(new IMenuListener() {
+//    			public void menuAboutToShow(IMenuManager manager) {
+////    				buildContextMenu(manager);
+//    			}
+//    		});
+//    		Menu menu = menuMgr.createContextMenu(viewer.getControl());
+//    		viewer.getControl().setMenu(menu);
+//    		getSite().registerContextMenu(menuMgr, viewer);
+//    	}
         
 //        private void buildContextMenu(IMenuManager manager) {
 ////    		manager.add(getActionSignal());

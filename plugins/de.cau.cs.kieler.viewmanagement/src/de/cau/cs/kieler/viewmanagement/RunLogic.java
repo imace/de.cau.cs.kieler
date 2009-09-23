@@ -53,11 +53,14 @@ public final class RunLogic {
         triggers = new ArrayList<ATrigger>();
         effects = new ArrayList<AEffect>();
         combos = new ArrayList<ACombination>();
+//        TableDataList.getInstance().add(new TableData(TableDataList.getInstance(), true, "test", "well..."));
+//        TableDataList.getInstance().add(new TableData(TableDataList.getInstance(), false, "Test"));
+        TableDataList.getInstance().updateViewAsync();
         activeCombos = new ArrayList<String>();
 //        For now, manually add the Combinations that should be active here. Later it'd be better to do this with a table.
 //        activeCombos.add("de.cau.cs.kieler.viewmanagement.combination.SelectionHighlightCombination");
         //activeCombos.add("de.cau.cs.kieler.viewmanagement.combination.SelectionTextualRepresentationCombination");
-        activeCombos.add("de.cau.cs.kieler.viewmanagement.combination.SelectionFilterCombination");
+//        activeCombos.add("de.cau.cs.kieler.viewmanagement.combination.SelectionFilterCombination");
 //        activeCombos.add("de.cau.cs.kieler.viewmanagement.combination.SelectionLayoutCombination");
       //activeCombos.add("de.cau.cs.kieler.viewmanagement.combination.SelectionZoomCombination");
 //        activeCombos.add("de.cau.cs.kieler.viewmanagement.combination.SelectionShapeHighlightCombination");
@@ -71,13 +74,15 @@ public final class RunLogic {
         this.readEffects();
         this.readTriggers();
         this.readCombinations();
+        TableDataList.getInstance().updateViewAsync();
 
 	
 		
         for (ACombination oneCombination : combos){
-//        	String test = oneCombination.getClass().getCanonicalName();
+
         for(String comboToCheck : activeCombos)
         	if (oneCombination.getClass().getCanonicalName().equals(comboToCheck))
+        		
         		oneCombination.setActive(true);
         }
 
@@ -92,10 +97,7 @@ public final class RunLogic {
     
     public void unregisterListeners() {
 		System.out.println("Unregistering");
-		//this.init();
-		//this.readEffects();
-        //this.readTriggers();
-        //this.readCombinations();
+	
 		
         
         for (ACombination oneCombination : combos)
@@ -153,6 +155,8 @@ public final class RunLogic {
                 ACombination myCombo = (ACombination)myExtensions[i]
                         .createExecutableExtension("class");
                 this.combos.add(myCombo);
+                TableDataList.getInstance().add(new TableData(TableDataList.getInstance(), myCombo.getActive(), myCombo.getClass().getCanonicalName()));
+                TableDataList.getInstance().updateViewAsync();
             } catch (CoreException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();

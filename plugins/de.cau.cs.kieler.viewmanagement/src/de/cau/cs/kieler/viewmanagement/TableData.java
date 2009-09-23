@@ -28,10 +28,11 @@ public class TableData {
 	private TableDataList tableDataList;
 	
 
-	private boolean active;
+	private boolean comboActive;
 	
 	/** The key of the entry. */
-	private String  key;
+	private String  comboName;
+	
 	
 	
 	
@@ -53,11 +54,11 @@ public class TableData {
 	 * 
 	 * @param parentTableDataList the parent TableDataList
 	 */
-	public TableData(TableDataList parentTableDataList) {
-		this.tableDataList = parentTableDataList;
-		this.active = false;
-			this.key = "";
-	}
+//	public TableData(TableDataList parentTableDataList) {
+//		this.tableDataList = parentTableDataList;
+//		this.comboActive = false;
+//			this.comboName = "";
+//	}
 	
 	//-------------------------------------------------------------------------
 
@@ -67,14 +68,14 @@ public class TableData {
 	 * @param parentTableDataList the parent TableDataList
 	 * @param key the key of the entry
 	 */
-	public TableData(TableDataList parentTableDataList, 
-					 String key) {
-		this.tableDataList = parentTableDataList;
-		this.active = false;
-		
-		this.key = key;
-
-	}
+//	public TableData(TableDataList parentTableDataList, 
+//					 String key) {
+//		this.tableDataList = parentTableDataList;
+//		this.comboActive = false;
+//		
+//		this.comboName = key;
+//
+//	}
 	
 	//-------------------------------------------------------------------------
 
@@ -85,13 +86,13 @@ public class TableData {
 	 * @param key the key of the entry
 	 * @param value the value of the entry
 	 */
-	public TableData(TableDataList parentTableDataList, 
-			         String key, 
-			         String value) {
+	public TableData(TableDataList parentTableDataList,boolean comboActive, 
+			         String comboName 
+			         ) {
 		this.tableDataList = parentTableDataList;
-		this.active = false;
+		this.comboActive = comboActive;
 	
-		this.key = key;
+		this.comboName = comboName;
 	
 	}
 	
@@ -105,15 +106,15 @@ public class TableData {
 	 * @param key the key of the entry
 	 * @param value the value of the entry
 	 */
-	public TableData(TableDataList parentTableDataList, 
-					 boolean present, 
-					 String key, 
-					 String value) {
-		this.tableDataList = parentTableDataList;
-		this.active = present;
-		this.key = key;
-
-	}
+//	public TableData(TableDataList parentTableDataList, 
+//					 boolean present, 
+//					 String key, 
+//					 String value) {
+//		this.tableDataList = parentTableDataList;
+//		this.comboActive = present;
+//		this.comboName = key;
+//
+//	}
 
 	//-------------------------------------------------------------------------
 
@@ -126,17 +127,17 @@ public class TableData {
 	 * @param key the key of the entry
 	 * @param value the value of the entry
 	 */
-	public TableData(TableDataList parentTableDataList, 
-			 boolean present, 
-			 boolean signal,
-			 String key, 
-			 String value) {
-		this.tableDataList = parentTableDataList;
-		this.active = present;
-
-		this.key = key;
-
-	}
+//	public TableData(TableDataList parentTableDataList, 
+//			 boolean present, 
+//			 boolean signal,
+//			 String key, 
+//			 String value) {
+//		this.tableDataList = parentTableDataList;
+//		this.comboActive = present;
+//
+//		this.comboName = key;
+//
+//	}
 	
 	//-------------------------------------------------------------------------
 
@@ -156,8 +157,8 @@ public class TableData {
 	 * 
 	 * @return the key
 	 */
-	public String getKey() {
-		return this.key;
+	public String getComboName() {
+		return this.comboName;
 	}
 
 	//-------------------------------------------------------------------------
@@ -176,17 +177,17 @@ public class TableData {
 	/**
 	 * Sets the key of the entry.
 	 * 
-	 * @param key the new key
+	 * @param comboName the new key
 	 * 
 	 * @throws Exception the exception if the key already exists in the parent
 	 * 			         TableDataList
 	 */
-//	public void setKey(String key) throws Exception {
-//		//only set the key if unique
-//		if (this.tableDataList.containsOther(key, this))
-//			throw new Exception("The key '"+key+"' already exists!");
-//		this.key = key;
-//	}
+	public void setKey(String comboName) throws Exception {
+		//only set the key if unique
+		if (this.tableDataList.containsOther(comboName, this))
+			throw new Exception("The key '"+comboName+"' already exists!");
+		this.comboName = comboName;
+	}
 //	
 	//-------------------------------------------------------------------------
 
@@ -195,8 +196,8 @@ public class TableData {
 	 * 
 	 * @param present the new present
 	 */
-	public void setPresent(boolean present) {
-		this.active = present;
+	public void setComboActive(boolean active) {
+		this.comboActive = active;
 	}
 	
 	//-------------------------------------------------------------------------
@@ -206,9 +207,9 @@ public class TableData {
 	 * 
 	 * @return true, if signal is present
 	 */
-	public boolean isPresent() {
+	public boolean isComboActive() {
 		//return present flag if signal AND present 
-		return (this.active);
+		return (this.comboActive);
 	}
 
 	//-------------------------------------------------------------------------
