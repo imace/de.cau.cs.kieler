@@ -104,11 +104,11 @@ public class TableDataLabelProvider implements ITableLabelProvider {
 ////			if (tableData.isModified())
 ////				return "*"+tableData.getKey();
 //			else
-				return tableData.getComboName();
-		case 3 : // VALUE_COLUMN 
-//			return tableData.getValue();
+//				return tableData.getComboName();
+//		case 3 : // VALUE_COLUMN 
+////			return tableData.getValue();
 		default :
-			throw new RuntimeException("columnIndex out of bounds (4)");
+			throw new RuntimeException("columnIndex out of bounds (2)");
 		}
 	}
 

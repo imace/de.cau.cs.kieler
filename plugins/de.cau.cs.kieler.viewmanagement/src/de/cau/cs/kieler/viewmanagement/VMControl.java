@@ -21,14 +21,18 @@ import org.eclipse.ui.part.ViewPart;
 
 
 
+
+
+
+
 public class VMControl extends ViewPart {
 
 
-        
+        private static VMControl vmControl;
         DataTableViewer viewer;
 
      public VMControl() {
-                super();
+               vmControl = this;
               
         }
 
@@ -37,6 +41,9 @@ public class VMControl extends ViewPart {
             
         }
 
+ 	public static VMControl getInstance() {
+		return vmControl;
+	}
 
      @Override
      public void createPartControl(Composite parent) {
@@ -71,7 +78,7 @@ public class VMControl extends ViewPart {
         private void createColumns(DataTableViewer viewer) {
     		String[] titles = { "Active", "Combination" };
     		String[] toolTip = { "Status of Combination", "Name of Combination"};
-    		int[] bounds = {52, 350};
+    		int[] bounds = {50, 400};
     		
     		for (int i = 0; i < titles.length; i++) {
     			TreeViewerColumn column = new TreeViewerColumn(viewer, SWT.NONE);
@@ -82,8 +89,8 @@ public class VMControl extends ViewPart {
     			column.getColumn().setMoveable(true);
     			if (i == 0)
     				column.getColumn().setResizable(false);
-//    			else
-//    				column.setEditingSupport(new TableDataEditing(viewer, i));
+    			else
+    				column.setEditingSupport(new TableDataEditing(viewer, i));
     		}
     		Tree tree = viewer.getTree();
     		tree.setHeaderVisible(true);
@@ -124,7 +131,34 @@ public class VMControl extends ViewPart {
 //    	}
 
 		
-        
+//        private void updateEnabled() {
+//    		Object obj = ((org.eclipse.jface.viewers.StructuredSelection)viewer.getSelection()).getFirstElement();
+//    		if (obj == null) {
+//    			//no object selected
+////    			getActionDelete().setEnabled(false);
+////    			getActionPermanent().setEnabled(false);
+////    			getActionSignal().setEnabled(false);
+//    		}
+//    		else {
+//    			//object selected
+//    			getActionDelete().setEnabled(true);
+//    			getActionPermanent().setEnabled(true);
+//    			getActionSignal().setEnabled(true);
+//    			if (((TableData)obj).isPermanent()) {
+//    				actionPermanent.setChecked(true);
+//    			}
+//    			else {
+//    				actionPermanent.setChecked(false);
+//    			}
+//    			if (((TableData)obj).isSignal()) {
+//    				actionSignal.setChecked(true);
+//    			}
+//    			else {
+//    				actionSignal.setChecked(false);
+//    			}
+//    		}
+//    		
+//    	}        
         /**
          * @see WorkbenchPart#setFocus()
          */

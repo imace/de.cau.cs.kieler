@@ -21,6 +21,7 @@ package de.cau.cs.kieler.viewmanagement;
  * and a value String expression.
  * 
  * @author Christian Motika - cmot AT informatik.uni-kiel.de
+ * @changed nbe
  */
 public class TableData {
 
