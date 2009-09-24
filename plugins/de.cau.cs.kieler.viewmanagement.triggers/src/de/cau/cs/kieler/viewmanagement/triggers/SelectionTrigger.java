@@ -22,6 +22,7 @@ import org.eclipse.gmf.runtime.diagram.ui.editparts.ConnectionEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeEditPart;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.TreeSelection;
 import org.eclipse.ui.ISelectionListener;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PlatformUI;
@@ -73,10 +74,13 @@ public class SelectionTrigger extends ATrigger implements ISelectionListener {
      */
     public void selectionChanged(IWorkbenchPart part, ISelection selection) {
        
-        if (selection instanceof IStructuredSelection) {
+        if ((selection instanceof IStructuredSelection) && !(selection instanceof TreeSelection)) {
             this.selectionEvent = new TriggerEventObject();
             List<?> selectionList = ((IStructuredSelection)selection).toList();
-            Object selectedObject = selectionList.get(0);
+            Object selectedObject;
+			
+				selectedObject = selectionList.get(0);
+			
             if (selectedObject instanceof EditPart) {
                 if (currentSelection != null) {
                     selectionEvent.setTriggerActive(false);
