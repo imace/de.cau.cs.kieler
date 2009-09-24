@@ -138,16 +138,35 @@ public class TableDataEditing extends EditingSupport {
 
 	//-------------------------------------------------------------------------
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.jface.viewers.EditingSupport#setValue(java.lang.Object, java.lang.Object)
-	 */
-	@Override
 	protected void setValue(Object element, Object value) {
 		TableData tableData = (TableData) element;
 
 		switch (this.columnIndex) {
 		case 0:
-			tableData.setComboActive(Boolean.getBoolean((String) value));
+			if (value.toString().equals("true")){
+				tableData.setComboActive(true);
+				if (element instanceof TableData){
+					TableData data = (TableData)element;
+					String comboToActivate = data.getComboName();
+					RunLogic.getInstance().activeCombos.add(comboToActivate);
+					for (ACombination oneCombination : (RunLogic.getInstance().combos)){
+						if (oneCombination.getClass().getCanonicalName().equals(comboToActivate))
+							oneCombination.initialize();
+					}
+				}
+			}
+			else {
+				tableData.setComboActive(false);
+				if (element instanceof TableData){
+					TableData data = (TableData)element;
+					String comboToActivate = data.getComboName();
+					RunLogic.getInstance().activeCombos.add(comboToActivate);
+					for (ACombination oneCombination : (RunLogic.getInstance().combos)){
+						if (oneCombination.getClass().getCanonicalName().equals(comboToActivate))
+							oneCombination.finalize();
+					}
+				}
+			}
 			break;
 		case 1:
 //			try {

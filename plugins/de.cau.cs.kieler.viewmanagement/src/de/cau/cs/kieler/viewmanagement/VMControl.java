@@ -87,10 +87,10 @@ public class VMControl extends ViewPart {
     			column.getColumn().setToolTipText(toolTip[i]);
     			column.getColumn().setResizable(true);
     			column.getColumn().setMoveable(true);
-    			if (i == 0)
+    			if (i == 0){
     				column.getColumn().setResizable(false);
-    			else
     				column.setEditingSupport(new TableDataEditing(viewer, i));
+    			}
     		}
     		Tree tree = viewer.getTree();
     		tree.setHeaderVisible(true);

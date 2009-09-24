@@ -53,8 +53,7 @@ public final class RunLogic {
         triggers = new ArrayList<ATrigger>();
         effects = new ArrayList<AEffect>();
         combos = new ArrayList<ACombination>();
-//        TableDataList.getInstance().add(new TableData(TableDataList.getInstance(), true, "test", "well..."));
-//        TableDataList.getInstance().add(new TableData(TableDataList.getInstance(), false, "Test"));
+
         TableDataList.getInstance().updateViewAsync();
         activeCombos = new ArrayList<String>();
 //        For now, manually add the Combinations that should be active here. Later it'd be better to do this with a table.
