@@ -7,6 +7,10 @@
             class="de.cau.cs.kieler.viewmanagement.triggers.SelectionTrigger"
             name="SelectionTrigger">
       </trigger>
+      <trigger
+            class="de.cau.cs.kieler.viewmanagement.triggers.LayoutTrigger"
+            name="LayoutTrigger">
+      </trigger>
    </extension>
 
 </plugin>

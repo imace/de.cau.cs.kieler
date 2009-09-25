@@ -39,6 +39,10 @@
             class="de.cau.cs.kieler.viewmanagement.combination.SelectionZoomAndScrollToCombination"
             name="ZoomAndScrollToCombination">
       </combination>
+      <combination
+            class="de.cau.cs.kieler.viewmanagement.combination.ManualLayoutCombination"
+            name="ManualLayoutCombination">
+      </combination>
    </extension>
 
 </plugin>

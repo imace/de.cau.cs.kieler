@@ -27,7 +27,8 @@ import de.cau.cs.kieler.viewmanagement.TriggerEventObject;
 public class LayoutTrigger extends ATrigger {
 
     TriggerEventObject triggerEvent; //the trigger event object 
-
+    
+    
     /**
      * Called by a client to perform an auto layout 
      * @param editPart The active edit part 
