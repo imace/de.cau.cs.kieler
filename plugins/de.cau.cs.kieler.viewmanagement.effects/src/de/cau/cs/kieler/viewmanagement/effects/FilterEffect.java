@@ -56,8 +56,8 @@ public class FilterEffect extends AEffect {
      * Undo the effect. 
      */
     public void undo(){
-        if((undoFigure!=null)&& !undoFigure.isVisible())
-        	undoFigure.setVisible(true);
+        if((this.undoFigure!=null)&& (!this.undoFigure.isVisible()))
+        	this.undoFigure.setVisible(true);
     }
 	
 	

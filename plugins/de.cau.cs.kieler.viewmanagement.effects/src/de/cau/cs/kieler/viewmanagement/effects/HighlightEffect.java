@@ -77,7 +77,7 @@ public class HighlightEffect extends AEffect {
 //            IFigure feedBackLayer = ((RenderedDiagramRootEditPart) rootEP).getLayer(RenderedDiagramRootEditPart.FEEDBACK_LAYER);
 //            IFigure scaledFBLayer = ((RenderedDiagramRootEditPart) rootEP).getLayer(RenderedDiagramRootEditPart.SCALED_FEEDBACK_LAYER);
 //            IFigure printableLayers = ((RenderedDiagramRootEditPart) rootEP).getLayer(RenderedDiagramRootEditPart.PRINTABLE_LAYERS);
-//            IFigure scaleableLayers = ((RenderedDiagramRootEditPart) rootEP).getLayer(RenderedDiagramRootEditPart.SCALABLE_LAYERS);
+        	IFigure scaleableLayers = ((RenderedDiagramRootEditPart) rootEP).getLayer(RenderedDiagramRootEditPart.SCALABLE_LAYERS);
             IFigure layer = ((RenderedDiagramRootEditPart) rootEP).getLayer(RenderedDiagramRootEditPart.PAGE_BREAKS_LAYER);
            
             // get Figure to the EditPart

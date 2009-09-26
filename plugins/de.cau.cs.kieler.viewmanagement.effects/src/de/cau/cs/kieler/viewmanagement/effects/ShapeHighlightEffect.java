@@ -92,9 +92,9 @@ public class ShapeHighlightEffect extends AEffect {
     /**
      * Undo the effect. Here the highlighting will be removed.
      */
-    public void undo(){
-        
-    }
+//    public void undo(){
+//        
+//    }
     
     /**
      * @param target

@@ -90,7 +90,7 @@ public final class RunLogic {
             oneCombination.initialize();
         }        
         // print all available extensions
-        // this.printExtensions();
+//         this.printExtensions();
         return;
     }
     
@@ -188,11 +188,10 @@ public final class RunLogic {
     
 
 	
-    /*
-     * private void printExtensions(){ for (AEffect myEffect : this.effects) {
-     * System.out.println("Effect: "+myEffect); } for (ATrigger myTrigger :
-     * this.triggers) { System.out.println("Trigger: "+myTrigger); } for (Object
-     * myCombo : this.combos) { System.out.println("Combination: "+myCombo); } }
-     */
+//     private void printExtensions(){ for (AEffect myEffect : this.effects) {
+//      System.out.println("Effect: "+myEffect); } for (ATrigger myTrigger :
+//      this.triggers) { System.out.println("Trigger: "+myTrigger); } for (Object
+//     myCombo : this.combos) { System.out.println("Combination: "+myCombo); } }
+
 
 }

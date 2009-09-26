@@ -85,11 +85,7 @@ public class SelectionShapeHighlightCombination extends ACombination {
         
     }
 
-	@Override
-	public void undoLastEffect() {
-		effect.undo();
-		
-	}
+
 	
 	/**
 	 * @param newcolor Color that the HighlightEffect should be changed to
