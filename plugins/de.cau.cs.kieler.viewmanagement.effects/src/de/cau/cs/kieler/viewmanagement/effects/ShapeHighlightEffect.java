@@ -19,6 +19,7 @@ package de.cau.cs.kieler.viewmanagement.effects;
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.RectangleFigure;
+import org.eclipse.draw2d.Shape;
 import org.eclipse.draw2d.Viewport;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.gef.EditPart;
@@ -31,6 +32,7 @@ import org.eclipse.gef.EditPart;
 import org.eclipse.gef.RootEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.render.editparts.RenderedDiagramRootEditPart;
+import org.eclipse.gmf.runtime.gef.ui.figures.DefaultSizeNodeFigure;
 
 import de.cau.cs.kieler.viewmanagement.AEffect;
 
@@ -43,8 +45,13 @@ public class ShapeHighlightEffect extends AEffect {
     EditPart objectToHighlight;
    
    
-    int lineWidth=3; 
     Color color= ColorConstants.red;
+    Color backColor = ColorConstants.white;
+
+    Boolean originalOpaque;
+    Color originalColorForeground;
+    Color originalColorBackground;
+    int originalLineWidth;
     
     
     /**
@@ -60,11 +67,25 @@ public class ShapeHighlightEffect extends AEffect {
     
     public void execute() {
         
-        
-            objectToHighlight.getRoot();
-            IFigure  figure = ((GraphicalEditPart)objectToHighlight).getFigure();
-            figure.setForegroundColor(ColorConstants.red);
-            figure.setBackgroundColor(ColorConstants.red);
+        objectToHighlight.getRoot();
+        IFigure  figure = ((GraphicalEditPart)objectToHighlight).getFigure();
+        if (figure instanceof DefaultSizeNodeFigure) {
+        	figure = (IFigure)figure.getChildren().get(0);
+        }
+    	
+    	if (this.originalColorForeground == null)
+    		this.originalColorForeground = figure.getForegroundColor();
+    	if (this.originalColorBackground == null)
+    		this.originalColorBackground = figure.getBackgroundColor();
+        if (this.originalOpaque == null)
+        	this.originalOpaque = figure.isOpaque();
+    	
+            figure.setForegroundColor(this.color);
+            //figure.setBackgroundColor(this.backColor);
+          if (figure instanceof Shape) {
+        	  ((Shape)figure).setFill(true);
+          }
+            figure.setOpaque(true);
            
 //            Rectangle bounds = figure.getBounds();
 //            bounds.height=bounds.height+20;
@@ -92,6 +113,22 @@ public class ShapeHighlightEffect extends AEffect {
     /**
      * Undo the effect. Here the highlighting will be removed.
      */
+    public void undo(){
+    	//undo the highlight colors
+        objectToHighlight.getRoot();
+        IFigure  figure = ((GraphicalEditPart)objectToHighlight).getFigure();
+        if (figure instanceof DefaultSizeNodeFigure) {
+        	figure = (IFigure)figure.getChildren().get(0);
+        }
+        figure.setForegroundColor(originalColorForeground);
+        figure.setOpaque(this.originalOpaque);
+        figure.setBackgroundColor(originalColorBackground);
+
+        figure.repaint();
+        //reset backup date
+        originalColorForeground = null;
+        originalColorBackground = null;
+    }
 //    public void undo(){
 //        
 //    }
@@ -120,9 +157,9 @@ public class ShapeHighlightEffect extends AEffect {
 	 * @param width
 	 * @param lineColor
 	 */
-	public void setHighlightFigure(int width, Color lineColor){
-		this.lineWidth = width;
+	public void setColors(Color lineColor, Color backgroundColor){
 		this.color=lineColor;
+		this.backColor = backgroundColor;
 	}
 	
 //	public  Color getHighlightColor(){
