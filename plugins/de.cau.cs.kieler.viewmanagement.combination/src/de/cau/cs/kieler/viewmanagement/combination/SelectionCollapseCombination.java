@@ -55,11 +55,11 @@ public class SelectionCollapseCombination extends ACombination {
      */
    
     public boolean evaluate(TriggerEventObject triggerEvent) {
-        Object affectedObject = triggerEvent.getAffectedObject();
+    	EditPart affectedObject = translateToEditPart(triggerEvent.getAffectedObject(), parent);
         if( affectedObject instanceof ShapeEditPart ){
             this.objectToHighlight = (ShapeEditPart) affectedObject;
             //this.objectParameters.put("depth", null);
-            //apply better method to turn this off or on
+            
             return true; 
            
         }

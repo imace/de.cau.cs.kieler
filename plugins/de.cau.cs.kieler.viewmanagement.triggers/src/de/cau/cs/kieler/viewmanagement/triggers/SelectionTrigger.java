@@ -85,17 +85,13 @@ public class SelectionTrigger extends ATrigger implements ISelectionListener {
                 if (currentSelection != null) {
                     selectionEvent.setTriggerActive(false);
                     selectionEvent.setAffectedObject(translateToURI(currentSelection));
-
-//    				if (currentSelection instanceof ConnectionEditPart)
-//                    	  selectionEvent.setParameters((ConnectionEditPart)currentSelection); 
-//    				
-                        notifyTrigger(selectionEvent);
+                    selectionEvent.setParameters("Test");   				
                     notifyTrigger(selectionEvent);
                     
                 }
                 currentSelection = selectedObject;
                 selectionEvent.setAffectedObject(translateToURI(selectedObject));
-//                EObject etest = translateToEObject(currentSelection);
+                selectionEvent.setParameters("Test");  
                 selectionEvent.setTriggerActive(true);
                 notifyTrigger(selectionEvent);
 
@@ -104,6 +100,8 @@ public class SelectionTrigger extends ATrigger implements ISelectionListener {
                 if (currentSelection != null) {
                     selectionEvent.setTriggerActive(false);
                     selectionEvent.setAffectedObject(translateToURI(currentSelection));
+                    selectionEvent.setParameters("Test");
+
                     EObject etest = translateToEObject(currentSelection);
                   Object copy = null;
 				if (currentSelection instanceof ConnectionEditPart)
@@ -116,7 +114,7 @@ public class SelectionTrigger extends ATrigger implements ISelectionListener {
     }
 
     public void finalize() {
-        // unregister this as listener
+      
         PlatformUI.getWorkbench().getActiveWorkbenchWindow()
                 .getSelectionService().removeSelectionListener(this);
     }

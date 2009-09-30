@@ -55,7 +55,7 @@ public class SelectionExpandCombination extends ACombination {
      */
     @Override
     public boolean evaluate(TriggerEventObject triggerEvent) {
-        Object affectedObject = triggerEvent.getAffectedObject();
+    	EditPart affectedObject = translateToEditPart(triggerEvent.getAffectedObject(), parent);
         if( affectedObject instanceof ShapeEditPart ){
             this.objectToHighlight = (ShapeEditPart) affectedObject;
             //this.objectParameters.put("depth", null);

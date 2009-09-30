@@ -38,6 +38,7 @@ public class VMControl extends ViewPart {
 
      public void init(IViewSite site) throws PartInitException {
                 super.init(site);
+                
             
         }
 
