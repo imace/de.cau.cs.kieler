@@ -42,12 +42,5 @@ public class LayoutTrigger extends ATrigger {
         notifyTrigger(triggerEvent);
     }
     
-    /**
-     * This has to be implemented but is useless here
-     * FIXME: FindBugs does not like this 
-     */
-    public void finalize()
-    {
-        //have to implement this, but it's useless here
-    }
+    
 }
