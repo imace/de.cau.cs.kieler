@@ -16,6 +16,9 @@ package de.cau.cs.kieler.viewmanagement.effects;
 
 import org.eclipse.gef.EditPart;
 import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.IEditorReference;
+import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 
 import de.cau.cs.kieler.kiml.ui.layout.DiagramLayoutManager;
@@ -34,11 +37,20 @@ public class LayoutEffect extends AEffect {
 
     /**
      * Performs auto layout by simply calling the layout method from
-     * {@link DiagramLayoutManager}
+     * {@link DiagramLayoutManager}. It must be called in a safe thread, because
+     * it changes the notation model and hence must go through the EMF transaction
+     * mechanism. When this execute is called from a weird thread, e.g. when
+     * the notation model is in a read-only context, you might otherwise get an
+     * IllegalStateException. So here layout is called from within the 
+     * display thread.
      */
     @Override
     public void execute() {
-        DiagramLayoutManager.layout(editorPart, editPart, true, false);
+        final IWorkbench workbench = PlatformUI.getWorkbench();
+        workbench.getDisplay().asyncExec(new Runnable() {
+          public void run() {
+              DiagramLayoutManager.layout(editorPart, editPart, true, false);
+          }});
     }
 
     /**
