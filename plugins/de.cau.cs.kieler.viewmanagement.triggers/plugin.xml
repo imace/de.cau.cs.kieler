@@ -11,6 +11,17 @@
             class="de.cau.cs.kieler.viewmanagement.triggers.LayoutTrigger"
             name="LayoutTrigger">
       </trigger>
+      <trigger
+            class="de.cau.cs.kieler.viewmanagement.triggers.CollapseExpandTrigger"
+            description="Notifies about collapse and expand of compartments."
+            name="CollapseExpandTrigger">
+      </trigger>
+   </extension>
+   <extension
+         point="org.eclipse.ui.startup">
+      <startup
+            class="de.cau.cs.kieler.viewmanagement.triggers.DiagramListener">
+      </startup>
    </extension>
 
 </plugin>

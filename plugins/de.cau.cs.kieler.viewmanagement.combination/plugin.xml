@@ -43,6 +43,11 @@
             class="de.cau.cs.kieler.viewmanagement.combination.ManualLayoutCombination"
             name="ManualLayoutCombination">
       </combination>
+      <combination
+            class="de.cau.cs.kieler.viewmanagement.combination.CollapseLayoutCombination"
+            description="Calls automatic layout whenever compartments get collapsed or expanded."
+            name="CollapseLayoutCombination">
+      </combination>
    </extension>
 
 </plugin>
