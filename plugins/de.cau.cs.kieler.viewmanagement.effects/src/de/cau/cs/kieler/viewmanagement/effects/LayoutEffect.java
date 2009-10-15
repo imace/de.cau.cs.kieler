@@ -47,7 +47,7 @@ public class LayoutEffect extends AEffect {
     @Override
     public void execute() {
         final IWorkbench workbench = PlatformUI.getWorkbench();
-        workbench.getDisplay().asyncExec(new Runnable() {
+        workbench.getDisplay().syncExec(new Runnable() {
           public void run() {
               DiagramLayoutManager.layout(editorPart, editPart, true, false);
           }});

@@ -11,13 +11,22 @@ import de.cau.cs.kieler.viewmanagement.ATrigger;
 import de.cau.cs.kieler.viewmanagement.RunLogic;
 import de.cau.cs.kieler.viewmanagement.TriggerEventObject;
 import de.cau.cs.kieler.viewmanagement.effects.LayoutEffect;
+import de.cau.cs.kieler.viewmanagement.effects.ZoomEffect;
 import de.cau.cs.kieler.viewmanagement.triggers.LayoutTrigger;
 import de.cau.cs.kieler.viewmanagement.triggers.SelectionTrigger;
 
+/**
+ * 
+ * haf: added Zoom to fit effect
+ * 
+ * @author mim
+ * 
+ */
 public class ManualLayoutCombination extends ACombination {
     
     LayoutTrigger trigger; //the auto layout trigger
     LayoutEffect effect; //the auto layout effect
+    ZoomEffect zoomEffect; // the zoom effect
     EditPart targetEditPart; //the shape edit part that is used as a target for the layout action
     IEditorPart activeEditorPart; //the active editor part 
     
@@ -50,6 +59,9 @@ public class ManualLayoutCombination extends ACombination {
         effect.setParameters(activeEditorPart);
         effect.execute();
         
+        if(zoomEffect == null)
+            zoomEffect = new ZoomEffect();
+        zoomEffect.execute();
     }
 
     /**
