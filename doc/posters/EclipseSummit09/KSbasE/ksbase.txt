@@ -28,8 +28,8 @@ Hier entweder pseudo-xml:
 
  <transformations>
   addChoice (transformation)
-	name=”Add Choice”
-	transformation=”addChoice”
+	name=Add Choice
+	transformation=addChoice
 	keyboardShortcut=M1+K C
  </transformations>
 
@@ -52,6 +52,7 @@ oder mit Screenshots aus dem extension point editor:
 3. Executing in Eclipse
 [IMAGE = img/ksbase_sample_source.png]
 [Transition "Keyboard Shortcut / Menu Contribution" ]
+An der Transition, sollte m�glichst noch 'model transformation' dran stehn.
 [IMAGE = img/ksbase_sample_target.png] 
 
 
