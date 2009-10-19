@@ -1,60 +1,15 @@
-1. In-place model2model transformations (Xtend)
+Structure Based Editing:
 
-Void addChoice(State source):
-let choice = new State:
-let opt1 = new State:
-let opt2 = new State:
+- Improve editing of graphical models by using model transformations
+	for arbitrary operations.
+- Generic interface for GMF diagram editors.
+(- Executed via menus or keyboard shortcuts.)
 
-choice.setType
-	(StateType::CONDITIONAL) 
+ 
+Screenshots:
+ ksbase_sample_source.png
+ ksbase_sample_target.png
+ 
+ ksbase_dataflow_source.png
+ ksbase_dataflow_target.png
 
-connectStates(source,choice) 
-connectStates(choice,opt1) 
-connectStates(choice,opt2) 
-
-source.parentRegion.
-	innerStates.add(choice) 
-source.parentRegion.
-	innerStates.add(opt1) 
-source.parentRegion.
-	innerStates.add(opt2)
-
-
-2. Configuration with extension points
-
-Hier entweder pseudo-xml:
-
-<configuration>
-
- <transformations>
-  addChoice (transformation)
-	name=Add Choice
-	transformation=addChoice
-	keyboardShortcut=M1+K C
- </transformations>
-
- <menuContribution>
-  menu:eclipse.ui.main.menu
-  	AddChoice (transformationCommand)
-  toolbar:eclipse.ui.main.toolbar
-   	AddChoice (transformationCommand)
-  popup:eclipse.ui.popup.any
-   	AddChoice (transformationCommand)
- </menuContribution>
-
-</configuration>
-
-oder mit Screenshots aus dem extension point editor:
-[IMAGE = img/ext_point1.png]
-[IMAGE = img/ext_point2.png]
-
-
-3. Executing in Eclipse
-[IMAGE = img/ksbase_sample_source.png]
-[Transition "Keyboard Shortcut / Menu Contribution" ]
-An der Transition, sollte möglichst noch 'model transformation' dran stehn.
-[IMAGE = img/ksbase_sample_target.png] 
-
-
-KÃ¶nnte dann z.B. so aussehen wie in 'ksbase.pdf'. 
-Ist aber vielleicht n bissel viel Text? 
