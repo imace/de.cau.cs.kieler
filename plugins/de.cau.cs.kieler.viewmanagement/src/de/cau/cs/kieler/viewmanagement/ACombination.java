@@ -1,5 +1,5 @@
 /******************************************************************************
- * KIELER - Kiel Integrated Environment for Layout Eclipse RichClient
+ * KIELER - Kiel Integrated Environment for Layout for the Eclipse RCP
  *
  * http://www.informatik.uni-kiel.de/rtsys/kieler/
  * 
@@ -10,8 +10,7 @@
  * 
  * This code is provided under the terms of the Eclipse Public License (EPL).
  * See the file epl-v10.html for the license text.
- * 
- *****************************************************************************/
+ ******************************************************************************/
 package de.cau.cs.kieler.viewmanagement;
 
 
@@ -53,7 +52,7 @@ public abstract class ACombination implements ITriggerListener{
     public void undoLastEffect() {
 	}
     
-    public boolean getActive(){
+    	public boolean getActive(){
     	return comboActive;
     }
 //    Activate or deactivate a combo
@@ -75,9 +74,17 @@ public abstract class ACombination implements ITriggerListener{
 		for (int i=0; i<triggersToEvaluate.size();i++){
 			ATrigger a = triggersToEvaluate.get(i);
 			a.removeTriggerListener(this);
-			
-			
+		}
 	}
+	
+	
+	/**
+	 * Reset hashed edit parts. This is when reusing combination for e.g., a different editor.
+	 * (added by cmot)
+	 */
+	protected void resetHashedEditParts() {
+		if (this.cachedEditParts != null)
+				this.cachedEditParts.clear();
 	}
 	
 	
