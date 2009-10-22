@@ -16,9 +16,7 @@ package de.cau.cs.kieler.viewmanagement.effects;
 
 import org.eclipse.gef.EditPart;
 import org.eclipse.ui.IEditorPart;
-import org.eclipse.ui.IEditorReference;
 import org.eclipse.ui.IWorkbench;
-import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 
 import de.cau.cs.kieler.kiml.ui.layout.DiagramLayoutManager;
@@ -47,7 +45,7 @@ public class LayoutEffect extends AEffect {
     @Override
     public void execute() {
         final IWorkbench workbench = PlatformUI.getWorkbench();
-        workbench.getDisplay().asyncExec(new Runnable() {
+        workbench.getDisplay().syncExec(new Runnable() {
           public void run() {
               DiagramLayoutManager.layout(editorPart, editPart, true, false);
           }});
