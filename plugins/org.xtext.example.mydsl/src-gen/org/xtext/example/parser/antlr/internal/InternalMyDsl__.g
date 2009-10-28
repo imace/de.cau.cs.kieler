@@ -17,25 +17,25 @@ T17 : 'property' ;
 T18 : ':' ;
 T19 : '[]' ;
 
-// $ANTLR src "../org.xtext.example.mydsl/src-gen/org/xtext/example/parser/antlr/internal/InternalMyDsl.g" 444
+// $ANTLR src "../org.xtext.example.mydsl/src-gen/org/xtext/example/parser/antlr/internal/InternalMyDsl.g" 445
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
-// $ANTLR src "../org.xtext.example.mydsl/src-gen/org/xtext/example/parser/antlr/internal/InternalMyDsl.g" 446
+// $ANTLR src "../org.xtext.example.mydsl/src-gen/org/xtext/example/parser/antlr/internal/InternalMyDsl.g" 447
 RULE_INT : ('0'..'9')+;
 
-// $ANTLR src "../org.xtext.example.mydsl/src-gen/org/xtext/example/parser/antlr/internal/InternalMyDsl.g" 448
+// $ANTLR src "../org.xtext.example.mydsl/src-gen/org/xtext/example/parser/antlr/internal/InternalMyDsl.g" 449
 RULE_STRING : ('"' ('\\' ('b'|'t'|'n'|'f'|'r'|'"'|'\''|'\\')|~(('\\'|'"')))* '"'|'\'' ('\\' ('b'|'t'|'n'|'f'|'r'|'"'|'\''|'\\')|~(('\\'|'\'')))* '\'');
 
-// $ANTLR src "../org.xtext.example.mydsl/src-gen/org/xtext/example/parser/antlr/internal/InternalMyDsl.g" 450
+// $ANTLR src "../org.xtext.example.mydsl/src-gen/org/xtext/example/parser/antlr/internal/InternalMyDsl.g" 451
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
 
-// $ANTLR src "../org.xtext.example.mydsl/src-gen/org/xtext/example/parser/antlr/internal/InternalMyDsl.g" 452
+// $ANTLR src "../org.xtext.example.mydsl/src-gen/org/xtext/example/parser/antlr/internal/InternalMyDsl.g" 453
 RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
 
-// $ANTLR src "../org.xtext.example.mydsl/src-gen/org/xtext/example/parser/antlr/internal/InternalMyDsl.g" 454
+// $ANTLR src "../org.xtext.example.mydsl/src-gen/org/xtext/example/parser/antlr/internal/InternalMyDsl.g" 455
 RULE_WS : (' '|'\t'|'\r'|'\n')+;
 
-// $ANTLR src "../org.xtext.example.mydsl/src-gen/org/xtext/example/parser/antlr/internal/InternalMyDsl.g" 456
+// $ANTLR src "../org.xtext.example.mydsl/src-gen/org/xtext/example/parser/antlr/internal/InternalMyDsl.g" 457
 RULE_ANY_OTHER : .;
 
 
