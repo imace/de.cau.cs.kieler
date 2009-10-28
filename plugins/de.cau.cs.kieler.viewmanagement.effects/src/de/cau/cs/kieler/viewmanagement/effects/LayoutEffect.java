@@ -43,30 +43,30 @@ public class LayoutEffect extends AEffect {
      * display thread.
      */
     @Override
-    public void execute() {
+    public final void execute() {
         final IWorkbench workbench = PlatformUI.getWorkbench();
         workbench.getDisplay().asyncExec(new Runnable() {
           public void run() {
               DiagramLayoutManager.layout(editorPart, editPart, true, false);
-          }});
+          } } );
     }
 
     /**
      * Sets the effect parameters. In this special case the parameter is an
      * IEditorPart
      */
-    @Override
-    public void setParameters(Object parameters) {
-        if (parameters instanceof IEditorPart)
+ 
+    public final void setParameters(final Object parameters) {
+        if (parameters instanceof IEditorPart) {
             this.editorPart = (IEditorPart) parameters;
+        }
     }
 
     /**
      * Sets the target ShapeEditPart
      */
     @Override
-    public void setTarget(EditPart target) {
-        this.editPart = (EditPart) target;
+    public final void setTarget(final EditPart target) {
         this.editorPart=PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
     }
 
