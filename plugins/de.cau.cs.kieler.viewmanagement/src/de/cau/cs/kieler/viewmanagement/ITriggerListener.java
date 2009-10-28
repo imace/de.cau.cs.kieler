@@ -18,18 +18,11 @@ import java.util.EventListener;
 
 /**
  * @author nbe
- *
+ * 
  */
 
-public interface ITriggerListener extends EventListener{
+public interface ITriggerListener extends EventListener {
 
-	void notifyTrigger(TriggerEventObject triggerEvent);
-
-	
-	
-	
-	
-	
+    void notifyTrigger(TriggerEventObject triggerEvent);
 
 }
-

@@ -17,12 +17,9 @@ package de.cau.cs.kieler.viewmanagement.combination;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
 import org.eclipse.gef.EditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeEditPart;
-
 import de.cau.cs.kieler.viewmanagement.ACombination;
-import de.cau.cs.kieler.viewmanagement.AEffect;
 import de.cau.cs.kieler.viewmanagement.ATrigger;
 import de.cau.cs.kieler.viewmanagement.effects.CompartmentExpandEffect;
 import de.cau.cs.kieler.viewmanagement.triggers.SelectionTrigger;
@@ -36,13 +33,13 @@ public class SelectionExpandCombination extends ACombination {
 
     CompartmentExpandEffect effect;
     SelectionTrigger st;
-    
+
     ShapeEditPart objectToHighlight;
-    Map <String, String> objectParameters;
+    Map<String, String> objectParameters;
 
     @Override
     public List<ATrigger> getTriggers() {
-        this.st = (SelectionTrigger)RunLogic.getTrigger("SelectionTrigger");
+        this.st = (SelectionTrigger) RunLogic.getTrigger("SelectionTrigger");
         List<ATrigger> myTriggers = new ArrayList<ATrigger>();
         myTriggers.add(st);
         return myTriggers;
@@ -55,33 +52,26 @@ public class SelectionExpandCombination extends ACombination {
      */
     @Override
     public boolean evaluate(TriggerEventObject triggerEvent) {
-    	EditPart affectedObject = translateToEditPart(triggerEvent.getAffectedObject(), parent);
-        if( affectedObject instanceof ShapeEditPart ){
+        EditPart affectedObject = translateToEditPart(triggerEvent.getAffectedObject(), parent);
+        if (affectedObject instanceof ShapeEditPart) {
             this.objectToHighlight = (ShapeEditPart) affectedObject;
-            //this.objectParameters.put("depth", null);
             return true;
-        }
-        else
+        } else
             return false;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see de.cau.cs.kieler.viewmanagement.ACombination#execute()
      */
     @Override
     public void execute() {
-        if ( effect == null )
+        if (effect == null)
             effect = new CompartmentExpandEffect();
         effect.setTarget(this.objectToHighlight);
         effect.setParameters(objectParameters);
         effect.execute();
     }
-
-	@Override
-	public void undoLastEffect() {
-		// TODO Auto-generated method stub
-		
-	}
-
 
 }

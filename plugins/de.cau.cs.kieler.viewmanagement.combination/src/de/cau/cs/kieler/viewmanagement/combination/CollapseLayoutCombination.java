@@ -9,7 +9,7 @@ import de.cau.cs.kieler.viewmanagement.RunLogic;
 import de.cau.cs.kieler.viewmanagement.TriggerEventObject;
 import de.cau.cs.kieler.viewmanagement.effects.LayoutEffect;
 import de.cau.cs.kieler.viewmanagement.triggers.CollapseExpandTrigger;
-import de.cau.cs.kieler.viewmanagement.triggers.SelectionTrigger;
+
 
 public class CollapseLayoutCombination extends ACombination {
 
@@ -17,7 +17,7 @@ public class CollapseLayoutCombination extends ACombination {
    
     
     public CollapseLayoutCombination() {
-        // TODO Auto-generated constructor stub
+      
     }
 
     @Override

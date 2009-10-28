@@ -53,15 +53,20 @@ public abstract class ATrigger {
     }
     //returns URIFragment for given object
     public String translateToURI(Object sourceObject){
-    	if (sourceObject instanceof EditPart){
-    
-    	View view = (View) ((EditPart) sourceObject).getModel();
-    	EObject modelElement = view.getElement();
-    	result = modelElement.eResource().getURIFragment(modelElement);
-    	
-    	
-    	}
-		return result;
+    	try {
+			if (sourceObject instanceof EditPart){
+   
+			View view = (View) ((EditPart) sourceObject).getModel();
+			EObject modelElement = view.getElement();
+			result = modelElement.eResource().getURIFragment(modelElement);
+			
+			
+			}
+			return result;
+		} catch (Exception e) {
+			/*If we can't find something we don't want to do anything*/
+			return null;
+		}
 		
     	
     }

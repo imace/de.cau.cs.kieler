@@ -22,7 +22,6 @@ import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeEditPart;
 import org.eclipse.swt.graphics.Color;
 import de.cau.cs.kieler.viewmanagement.ACombination;
 import de.cau.cs.kieler.viewmanagement.ATrigger;
-import de.cau.cs.kieler.viewmanagement.effects.HighlightEffect;
 import de.cau.cs.kieler.viewmanagement.effects.ZoomAndScrollToEffect;
 import de.cau.cs.kieler.viewmanagement.triggers.SelectionTrigger;
 import de.cau.cs.kieler.viewmanagement.*;
@@ -35,7 +34,7 @@ public class SelectionZoomAndScrollToCombination extends ACombination {
 
     ZoomAndScrollToEffect effect;
     SelectionTrigger st;
-    
+
     ShapeEditPart objectToHighlight;
     Object objectParameters;
     boolean triggerActive;
@@ -44,7 +43,7 @@ public class SelectionZoomAndScrollToCombination extends ACombination {
 
     @Override
     public List<ATrigger> getTriggers() {
-        this.st = (SelectionTrigger)RunLogic.getTrigger("SelectionTrigger");
+        this.st = (SelectionTrigger) RunLogic.getTrigger("SelectionTrigger");
         List<ATrigger> myTriggers = new ArrayList<ATrigger>();
         myTriggers.add(st);
         return myTriggers;
@@ -57,47 +56,37 @@ public class SelectionZoomAndScrollToCombination extends ACombination {
      */
     @Override
     public boolean evaluate(TriggerEventObject triggerEvent) {
-      //parent may be set if wanted. Will else be RootEP 
-    	if (triggerEvent.getTriggerState()){
-		EditPart affectedObject = translateToEditPart(triggerEvent.getAffectedObject(), parent);
-        if( affectedObject instanceof ShapeEditPart ){
-            this.objectToHighlight = (ShapeEditPart)affectedObject;
-            this.objectParameters = triggerEvent.getParameters();
-            this.triggerActive = triggerEvent.getTriggerState();
-            
-            return true; 
-        }
-        
-        else
+        // parent may be set if wanted. Will else be RootEP
+        if (triggerEvent.getTriggerState()) {
+            EditPart affectedObject = translateToEditPart(triggerEvent.getAffectedObject(), parent);
+            if (affectedObject instanceof ShapeEditPart) {
+                this.objectToHighlight = (ShapeEditPart) affectedObject;
+                this.objectParameters = triggerEvent.getParameters();
+                this.triggerActive = triggerEvent.getTriggerState();
+
+                return true;
+            }
+
+            else
+                return false;
+        } else
             return false;
-    	}
-    	else
-    		return false;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see de.cau.cs.kieler.viewmanagement.ACombination#execute()
      */
     @Override
     public void execute() {
-        if ( effect == null )
+        if (effect == null)
             effect = new ZoomAndScrollToEffect();
-        
+
         effect.setTarget(this.objectToHighlight);
         effect.setParameters(this.objectParameters);
         effect.execute();
-        
+
     }
-
-	@Override
-	public void undoLastEffect() {
-		
-		
-	}
-	
-
-    
-    
-
 
 }

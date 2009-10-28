@@ -14,15 +14,13 @@
  *****************************************************************************/
 package de.cau.cs.kieler.viewmanagement;
 
-import java.util.Map;
-
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.IHandler;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.ToolItem;
-import org.eclipse.ui.menus.CommandContributionItem;
+
 
 /**
  * @author nbe
@@ -30,15 +28,13 @@ import org.eclipse.ui.menus.CommandContributionItem;
  */
 public class ActivateVMHandler extends AbstractHandler implements IHandler {
 
-    /**
-	 * 
-	 */
+ 
     public ActivateVMHandler() {
-        // TODO Auto-generated constructor stub
+      
     }
 
     public Object execute(ExecutionEvent event) throws ExecutionException {
-        // TODO Auto-generated method stub
+      
 
         // Determine state of Toggle Button
         Object trigger = event.getTrigger();

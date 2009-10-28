@@ -19,153 +19,141 @@ import org.eclipse.ui.IWorkbenchActionConstants;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.part.ViewPart;
 
-
-
-
-
-
-
 public class VMControl extends ViewPart {
 
+    private static VMControl vmControl;
+    DataTableViewer viewer;
 
-        private static VMControl vmControl;
-        DataTableViewer viewer;
+    public VMControl() {
+        vmControl = this;
 
-     public VMControl() {
-               vmControl = this;
-              
+    }
+
+    public void init(IViewSite site) throws PartInitException {
+        super.init(site);
+
+    }
+
+    public static VMControl getInstance() {
+        return vmControl;
+    }
+
+    @Override
+    public void createPartControl(Composite parent) {
+        createViewer(parent);
+        viewer.setInput(new TableDataList(viewer));
+        // hookSideEffectActions();
+        // hookContextMenu();
+        // contributeToActionBars();
+        // updateEnabled();
+    }
+
+    private void createViewer(Composite parent) {
+        viewer = new DataTableViewer(parent, SWT.HIDE_SELECTION | SWT.MULTI | SWT.H_SCROLL
+                | SWT.V_SCROLL | SWT.FULL_SELECTION);
+        createColumns(viewer);
+        viewer.setContentProvider(new TableDataContentProvider());
+        viewer.setLabelProvider(new TableDataLabelProvider());
+        // viewer.getControl().addKeyListener(new KeyListener(){
+        // public void keyPressed(KeyEvent e) {
+        // //if user pressed delete
+        // if (e.keyCode == 127) {
+        // getActionDelete().run();
+        // }
+        // }
+        // public void keyReleased(KeyEvent e) {
+        // }
+    };
+
+    private void createColumns(DataTableViewer viewer) {
+        String[] titles = { "Active", "Combination" };
+        String[] toolTip = { "Status of Combination", "Name of Combination" };
+        int[] bounds = { 45, 450 };
+
+        for (int i = 0; i < titles.length; i++) {
+            TreeViewerColumn column = new TreeViewerColumn(viewer, SWT.NONE);
+            column.getColumn().setText(titles[i]);
+            column.getColumn().setWidth(bounds[i]);
+            column.getColumn().setToolTipText(toolTip[i]);
+            column.getColumn().setResizable(true);
+            column.getColumn().setMoveable(true);
+            if (i == 0) {
+                column.getColumn().setResizable(false);
+                column.setEditingSupport(new TableDataEditing(viewer, i));
+            }
         }
+        Tree tree = viewer.getTree();
+        tree.setHeaderVisible(true);
+        tree.setLinesVisible(true);
+    }
 
-     public void init(IViewSite site) throws PartInitException {
-                super.init(site);
-                
-            
-        }
+    // private void hookContextMenu() {
+    // MenuManager menuMgr = new MenuManager("#PopupMenu");
+    // menuMgr.setRemoveAllWhenShown(true);
+    // menuMgr.addMenuListener(new IMenuListener() {
+    // public void menuAboutToShow(IMenuManager manager) {
+    // // buildContextMenu(manager);
+    // }
+    // });
+    // Menu menu = menuMgr.createContextMenu(viewer.getControl());
+    // viewer.getControl().setMenu(menu);
+    // getSite().registerContextMenu(menuMgr, viewer);
+    // }
 
- 	public static VMControl getInstance() {
-		return vmControl;
-	}
+    // private void buildContextMenu(IMenuManager manager) {
+    // // manager.add(getActionSignal());
+    // // manager.add(getActionPermanent());
+    // manager.add(new Separator());
+    // // manager.add(getActionAdd());
+    // // manager.add(getActionDelete());
+    // // Other plug-ins can contribute there actions here
+    // manager.add(new Separator(IWorkbenchActionConstants.MB_ADDITIONS));
+    // }
+    //        
+    // private void contributeToActionBars() {
+    // IActionBars bars = getViewSite().getActionBars();
+    // IToolBarManager toolBarManager = bars.getToolBarManager();
+    // // toolBarManager.add(getActionAdd());
+    // // toolBarManager.add(getActionDelete());
+    // toolBarManager.add(new Separator());
+    // // toolBarManager.add(getActionSignal());
+    // // toolBarManager.add(getActionPermanent());
+    // }
 
-     @Override
-     public void createPartControl(Composite parent) {
- 		createViewer(parent);
- 		viewer.setInput(new TableDataList(viewer));
-// 		hookSideEffectActions();
-// 		hookContextMenu();
-// 		contributeToActionBars();
-// 		updateEnabled();			
- 	}
-  
-            
-        private void createViewer(Composite parent) {
-		viewer = new DataTableViewer(parent,SWT.HIDE_SELECTION |
-				SWT.MULTI | SWT.H_SCROLL
-				| SWT.V_SCROLL | SWT.FULL_SELECTION);
-		createColumns(viewer);
-		viewer.setContentProvider(new TableDataContentProvider());
-		viewer.setLabelProvider(new TableDataLabelProvider());
-//		viewer.getControl().addKeyListener(new KeyListener(){
-//			public void keyPressed(KeyEvent e) {
-//				//if user pressed delete
-//				if (e.keyCode == 127) {
-//					getActionDelete().run();
-//				}
-//			}
-//			public void keyReleased(KeyEvent e) {
-//			}
-		};
-	
+    // private void updateEnabled() {
+    // Object obj =
+    // ((org.eclipse.jface.viewers.StructuredSelection)viewer.getSelection()).getFirstElement();
+    // if (obj == null) {
+    // //no object selected
+    // // getActionDelete().setEnabled(false);
+    // // getActionPermanent().setEnabled(false);
+    // // getActionSignal().setEnabled(false);
+    // }
+    // else {
+    // //object selected
+    // getActionDelete().setEnabled(true);
+    // getActionPermanent().setEnabled(true);
+    // getActionSignal().setEnabled(true);
+    // if (((TableData)obj).isPermanent()) {
+    // actionPermanent.setChecked(true);
+    // }
+    // else {
+    // actionPermanent.setChecked(false);
+    // }
+    // if (((TableData)obj).isSignal()) {
+    // actionSignal.setChecked(true);
+    // }
+    // else {
+    // actionSignal.setChecked(false);
+    // }
+    // }
+    //    		
+    // }
+    /**
+     * @see WorkbenchPart#setFocus()
+     */
+    public void setFocus() {
+        viewer.getControl().setFocus();
+    }
 
-        private void createColumns(DataTableViewer viewer) {
-    		String[] titles = { "Active", "Combination" };
-    		String[] toolTip = { "Status of Combination", "Name of Combination"};
-    		int[] bounds = {42, 450};
-    		
-    		for (int i = 0; i < titles.length; i++) {
-    			TreeViewerColumn column = new TreeViewerColumn(viewer, SWT.NONE);
-    			column.getColumn().setText(titles[i]);
-    			column.getColumn().setWidth(bounds[i]);
-    			column.getColumn().setToolTipText(toolTip[i]);
-    			column.getColumn().setResizable(true);
-    			column.getColumn().setMoveable(true);
-    			if (i == 0){
-    				column.getColumn().setResizable(false);
-    				column.setEditingSupport(new TableDataEditing(viewer, i));
-    			}
-    		}
-    		Tree tree = viewer.getTree();
-    		tree.setHeaderVisible(true);
-    		tree.setLinesVisible(true);
-    	}
-        
-//        private void hookContextMenu() {
-//    		MenuManager menuMgr = new MenuManager("#PopupMenu");
-//    		menuMgr.setRemoveAllWhenShown(true);
-//    		menuMgr.addMenuListener(new IMenuListener() {
-//    			public void menuAboutToShow(IMenuManager manager) {
-////    				buildContextMenu(manager);
-//    			}
-//    		});
-//    		Menu menu = menuMgr.createContextMenu(viewer.getControl());
-//    		viewer.getControl().setMenu(menu);
-//    		getSite().registerContextMenu(menuMgr, viewer);
-//    	}
-        
-//        private void buildContextMenu(IMenuManager manager) {
-////    		manager.add(getActionSignal());
-////   		manager.add(getActionPermanent());
-//    		manager.add(new Separator());
-////    		manager.add(getActionAdd());
-////    		manager.add(getActionDelete());
-//    		// Other plug-ins can contribute there actions here
-//    		manager.add(new Separator(IWorkbenchActionConstants.MB_ADDITIONS));
-//    	}
-//        
-//        private void contributeToActionBars() {
-//    		IActionBars bars = getViewSite().getActionBars();
-//    		IToolBarManager toolBarManager = bars.getToolBarManager();
-////    		toolBarManager.add(getActionAdd());
-////    		toolBarManager.add(getActionDelete());
-//    		toolBarManager.add(new Separator());
-////    		toolBarManager.add(getActionSignal());
-////    		toolBarManager.add(getActionPermanent());
-//    	}
-
-		
-//        private void updateEnabled() {
-//    		Object obj = ((org.eclipse.jface.viewers.StructuredSelection)viewer.getSelection()).getFirstElement();
-//    		if (obj == null) {
-//    			//no object selected
-////    			getActionDelete().setEnabled(false);
-////    			getActionPermanent().setEnabled(false);
-////    			getActionSignal().setEnabled(false);
-//    		}
-//    		else {
-//    			//object selected
-//    			getActionDelete().setEnabled(true);
-//    			getActionPermanent().setEnabled(true);
-//    			getActionSignal().setEnabled(true);
-//    			if (((TableData)obj).isPermanent()) {
-//    				actionPermanent.setChecked(true);
-//    			}
-//    			else {
-//    				actionPermanent.setChecked(false);
-//    			}
-//    			if (((TableData)obj).isSignal()) {
-//    				actionSignal.setChecked(true);
-//    			}
-//    			else {
-//    				actionSignal.setChecked(false);
-//    			}
-//    		}
-//    		
-//    	}        
-        /**
-         * @see WorkbenchPart#setFocus()
-         */
-        public void setFocus(){ 
-                viewer.getControl().setFocus();
-        }
-        
 }
-	

@@ -19,7 +19,6 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ConnectionEditPart;
-import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeEditPart;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.TreeSelection;
@@ -28,11 +27,7 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PlatformUI;
 import de.cau.cs.kieler.viewmanagement.ATrigger;
 import de.cau.cs.kieler.viewmanagement.TriggerEventObject;
-import org.eclipse.gef.EditPart;
-import org.eclipse.gef.RootEditPart;
 
-import org.eclipse.gef.EditPartFactory;
-import org.eclipse.gmf.runtime.diagram.ui.render.editparts.RenderedDiagramRootEditPart;
 
 /**
  * @author nbe
@@ -41,27 +36,18 @@ import org.eclipse.gmf.runtime.diagram.ui.render.editparts.RenderedDiagramRootEd
 
 public class SelectionTrigger extends ATrigger implements ISelectionListener {
 
-
-	
-	
-	
-	
     TriggerEventObject selectionEvent;
     Object currentSelection;
-    
-    
 
-   
-    
     /**
      * Sends Object(s) selected in workbench to listeners
      */
     public SelectionTrigger() {
         // register this as a listener to the Eclipse selection service
-    	
-    	PlatformUI.getWorkbench().getActiveWorkbenchWindow()
-                .getSelectionService().addSelectionListener(this);
-    	
+
+        PlatformUI.getWorkbench().getActiveWorkbenchWindow().getSelectionService()
+                .addSelectionListener(this);
+
     }
 
     /*
@@ -69,54 +55,55 @@ public class SelectionTrigger extends ATrigger implements ISelectionListener {
      * 
      * (non-Javadoc)
      * 
-     * @seeorg.eclipse.ui.ISelectionListener#selectionChanged(org.eclipse.ui.
-     * IWorkbenchPart, org.eclipse.jface.viewers.ISelection)
+     * @seeorg.eclipse.ui.ISelectionListener#selectionChanged(org.eclipse.ui. IWorkbenchPart,
+     * org.eclipse.jface.viewers.ISelection)
      */
     public void selectionChanged(IWorkbenchPart part, ISelection selection) {
-       
+
         if ((selection instanceof IStructuredSelection) && !(selection instanceof TreeSelection)) {
             this.selectionEvent = new TriggerEventObject();
-            List<?> selectionList = ((IStructuredSelection)selection).toList();
+            List<?> selectionList = ((IStructuredSelection) selection).toList();
             Object selectedObject;
-			
-				selectedObject = selectionList.get(0);
-			
-            if (selectedObject instanceof EditPart) {
-                if (currentSelection != null) {
-                    selectionEvent.setTriggerActive(false);
-                    selectionEvent.setAffectedObject(translateToURI(currentSelection));
-                    selectionEvent.setParameters("Test");   				
-                    notifyTrigger(selectionEvent);
-                    
-                }
-                currentSelection = selectedObject;
-                selectionEvent.setAffectedObject(translateToURI(selectedObject));
-                selectionEvent.setParameters("Test");  
-                selectionEvent.setTriggerActive(true);
-                notifyTrigger(selectionEvent);
 
-  
-            } else {
-                if (currentSelection != null) {
-                    selectionEvent.setTriggerActive(false);
-                    selectionEvent.setAffectedObject(translateToURI(currentSelection));
+            if (!(selectionList.isEmpty())) {
+                selectedObject = selectionList.get(0);
+
+                if (selectedObject instanceof EditPart) {
+                    if (currentSelection != null) {
+                        selectionEvent.setTriggerActive(false);
+                        selectionEvent.setAffectedObject(translateToURI(currentSelection));
+                        selectionEvent.setParameters("Test");
+                        notifyTrigger(selectionEvent);
+
+                    }
+                    currentSelection = selectedObject;
+                    selectionEvent.setAffectedObject(translateToURI(selectedObject));
                     selectionEvent.setParameters("Test");
-
-                    EObject etest = translateToEObject(currentSelection);
-                  Object copy = null;
-				if (currentSelection instanceof ConnectionEditPart)
-                	  copy = currentSelection;
-                	  EditPart parent = ((ConnectionEditPart)copy).getParent();
+                    selectionEvent.setTriggerActive(true);
                     notifyTrigger(selectionEvent);
+
+                } else {
+                    if (currentSelection != null) {
+                        selectionEvent.setTriggerActive(false);
+                        selectionEvent.setAffectedObject(translateToURI(currentSelection));
+                        selectionEvent.setParameters("Test");
+
+                        EObject etest = translateToEObject(currentSelection);
+                        Object copy = null;
+                        if (currentSelection instanceof ConnectionEditPart)
+                            copy = currentSelection;
+                        EditPart parent = ((ConnectionEditPart) copy).getParent();
+                        notifyTrigger(selectionEvent);
+                    }
                 }
             }
         }
     }
 
     public void finalize() {
-      
-        PlatformUI.getWorkbench().getActiveWorkbenchWindow()
-                .getSelectionService().removeSelectionListener(this);
+
+        PlatformUI.getWorkbench().getActiveWorkbenchWindow().getSelectionService()
+                .removeSelectionListener(this);
     }
 
 }

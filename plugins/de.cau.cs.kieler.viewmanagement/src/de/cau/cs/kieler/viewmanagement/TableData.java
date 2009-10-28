@@ -15,270 +15,285 @@
 package de.cau.cs.kieler.viewmanagement;
 
 /**
- * The class TableData implements a single data entry that represents
- * a variable or signal within the data table. If it is a signal, then
- * it can be present or absent. An entry always contains of a key
- * and a value String expression.
+ * The class TableData implements a single data entry that represents a variable or signal within
+ * the data table. If it is a signal, then it can be present or absent. An entry always contains of
+ * a key and a value String expression.
  * 
  * @author Christian Motika - cmot AT informatik.uni-kiel.de
  * @author nbe
  */
 public class TableData {
 
-	/** The parent TableDataList the entry contains to. */
-	private TableDataList tableDataList;
-	
+    /* The parent TableDataList the entry contains to. */
+    private TableDataList tableDataList;
 
-	private boolean comboActive;
-	
-	/** The key of the entry. */
-	private String  comboName;
-	
-	
-	
-	
-	//-------------------------------------------------------------------------
+    private boolean comboActive;
 
-	/**
-	 * Gets the parent TableDataList.
-	 * 
-	 * @return the parent TableDataList
-	 */
-	public TableDataList getParentTableDataList() {
-		return tableDataList;
-	}
-	
-	//-------------------------------------------------------------------------
+    /** The key of the entry. */
+    private String comboName;
 
-	/**
-	 * Instantiates a new TableData entry.
-	 * 
-	 * @param parentTableDataList the parent TableDataList
-	 */
-//	public TableData(TableDataList parentTableDataList) {
-//		this.tableDataList = parentTableDataList;
-//		this.comboActive = false;
-//			this.comboName = "";
-//	}
-	
-	//-------------------------------------------------------------------------
+    // ---------------------------------------------------------------------
 
-	/**
-	 * Instantiates a new TableData entry.
-	 * 
-	 * @param parentTableDataList the parent TableDataList
-	 * @param key the key of the entry
-	 */
-//	public TableData(TableDataList parentTableDataList, 
-//					 String key) {
-//		this.tableDataList = parentTableDataList;
-//		this.comboActive = false;
-//		
-//		this.comboName = key;
-//
-//	}
-	
-	//-------------------------------------------------------------------------
+    /**
+     * Gets the parent TableDataList.
+     * 
+     * @return the parent TableDataList
+     */
+    public TableDataList getParentTableDataList() {
+        return tableDataList;
+    }
 
-	/**
-	 * Instantiates a new TableData entry.
-	 * 
-	 * @param parentTableDataList the parent TableDataList
-	 * @param key the key of the entry
-	 * @param value the value of the entry
-	 */
-	public TableData(TableDataList parentTableDataList,boolean comboActive, 
-			         String comboName 
-			         ) {
-		this.tableDataList = parentTableDataList;
-		this.comboActive = comboActive;
-	
-		this.comboName = comboName;
-	
-	}
-	
-	//-------------------------------------------------------------------------
+    // ---------------------------------------------------------------------
 
-	/**
-	 * Instantiates a new TableData.
-	 * 
-	 * @param parentTableDataList the parent TableDataList
-	 * @param present the present flag of the entry
-	 * @param key the key of the entry
-	 * @param value the value of the entry
-	 */
-//	public TableData(TableDataList parentTableDataList, 
-//					 boolean present, 
-//					 String key, 
-//					 String value) {
-//		this.tableDataList = parentTableDataList;
-//		this.comboActive = present;
-//		this.comboName = key;
-//
-//	}
+    /**
+     * Instantiates a new TableData entry.
+     * 
+     * @param parentTableDataList
+     *            the parent TableDataList
+     */
+    // public TableData(TableDataList parentTableDataList) {
+    // this.tableDataList = parentTableDataList;
+    // this.comboActive = false;
+    // this.comboName = "";
+    // }
 
-	//-------------------------------------------------------------------------
+    // ---------------------------------------------------------------------
 
-	/**
-	 * Instantiates a new TableData.
-	 * 
-	 * @param parentTableDataList the parent TableDataList
-	 * @param present the present flag of the entry
-	 * @param signal the signal flag of the entry
-	 * @param key the key of the entry
-	 * @param value the value of the entry
-	 */
-//	public TableData(TableDataList parentTableDataList, 
-//			 boolean present, 
-//			 boolean signal,
-//			 String key, 
-//			 String value) {
-//		this.tableDataList = parentTableDataList;
-//		this.comboActive = present;
-//
-//		this.comboName = key;
-//
-//	}
-	
-	//-------------------------------------------------------------------------
+    /**
+     * Instantiates a new TableData entry.
+     * 
+     * @param parentTableDataList
+     *            the parent TableDataList
+     * @param key
+     *            the key of the entry
+     */
+    // public TableData(TableDataList parentTableDataList,
+    // String key) {
+    // this.tableDataList = parentTableDataList;
+    // this.comboActive = false;
+    //
+    // this.comboName = key;
+    //
+    // }
 
-	/**
-	 * Gets the value of the entry.
-	 * 
-	 * @return the value
-	 */
-//	public String getValue() {
-//		return this.value;
-//	}
-	
-	//-------------------------------------------------------------------------
+    // ---------------------------------------------------------------------
 
-	/**
-	 * Gets the key of the entry.
-	 * 
-	 * @return the key
-	 */
-	public String getComboName() {
-		return this.comboName;
-	}
+    /**
+     * Instantiates a new TableData entry.
+     * 
+     * @param parentTableDataList
+     *            the parent TableDataList
+     * @param key
+     *            the key of the entry
+     * @param value
+     *            the value of the entry
+     */
+    public TableData(TableDataList parentTableDataList, boolean comboActive, String comboName) {
+        this.tableDataList = parentTableDataList;
+        this.comboActive = comboActive;
 
-	//-------------------------------------------------------------------------
+        this.comboName = comboName;
 
-	/**
-	 * Sets the value of the entry.
-	 * 
-	 * @param value the new value
-	 */
-//	public void setValue(String value) {
-//		this.value = value;
-//	}
-//	
-	//-------------------------------------------------------------------------
+    }
 
-	/**
-	 * Sets the key of the entry.
-	 * 
-	 * @param comboName the new key
-	 * 
-	 * @throws Exception the exception if the key already exists in the parent
-	 * 			         TableDataList
-	 */
-	public void setKey(String comboName) throws Exception {
-		//only set the key if unique
-		if (this.tableDataList.containsOther(comboName, this))
-			throw new Exception("The key '"+comboName+"' already exists!");
-		this.comboName = comboName;
-	}
-//	
-	//-------------------------------------------------------------------------
+    // ---------------------------------------------------------------------
 
-	/**
-	 * Sets the present flag (for signal entries only).
-	 * 
-	 * @param present the new present
-	 */
-	public void setComboActive(boolean active) {
-		this.comboActive = active;
-	}
-	
-	//-------------------------------------------------------------------------
+    /**
+     * Instantiates a new TableData.
+     * 
+     * @param parentTableDataList
+     *            the parent TableDataList
+     * @param present
+     *            the present flag of the entry
+     * @param key
+     *            the key of the entry
+     * @param value
+     *            the value of the entry
+     */
+    // public TableData(TableDataList parentTableDataList,
+    // boolean present,
+    // String key,
+    // String value) {
+    // this.tableDataList = parentTableDataList;
+    // this.comboActive = present;
+    // this.comboName = key;
+    //
+    // }
 
-	/**
-	 * Checks whether the signal is present (for signal entries only).
-	 * 
-	 * @return true, if signal is present
-	 */
-	public boolean isComboActive() {
-		//return present flag if signal AND present 
-		return (this.comboActive);
-	}
+    // ---------------------------------------------------------------------
 
-	//-------------------------------------------------------------------------
+    /**
+     * Instantiates a new TableData.
+     * 
+     * @param parentTableDataList
+     *            the parent TableDataList
+     * @param present
+     *            the present flag of the entry
+     * @param signal
+     *            the signal flag of the entry
+     * @param key
+     *            the key of the entry
+     * @param value
+     *            the value of the entry
+     */
+    // public TableData(TableDataList parentTableDataList,
+    // boolean present,
+    // boolean signal,
+    // String key,
+    // String value) {
+    // this.tableDataList = parentTableDataList;
+    // this.comboActive = present;
+    //
+    // this.comboName = key;
+    //
+    // }
 
-	/**
-	 * Sets the signal flag of an entry.
-	 * 
-	 * @param signal true, if entry is a signal
-	 */
-//	public void setSignal(boolean signal) {
-//		this.signal = signal;
-//	}
-	
-	//-------------------------------------------------------------------------
+    // ---------------------------------------------------------------------
 
-	/**
-	 * Checks whether the entry is a signal.
-	 * 
-	 * @return true, if entry is a signal
-	 */
-//	public boolean isSignal() {
-//		//return signal 
-//		return this.signal;
-//	}
-//	
-	//-------------------------------------------------------------------------
+    /**
+     * Gets the value of the entry.
+     * 
+     * @return the value
+     */
+    // public String getValue() {
+    // return this.value;
+    // }
 
-	/**
-	 * Sets the modified flag of an entry.
-	 * 
-	 * @param modified true, if entry was modified
-	 */
-//	public void setModified(boolean modified) {
-//		this.modified = modified;
-//	}
-	
-	//-------------------------------------------------------------------------
+    // ---------------------------------------------------------------------
 
-	/**
-	 * Checks whether entry is flagged as modified.
-	 * 
-	 * @return true, entry is modified
-	 */
-//	public boolean isModified() {
-//		//return modified flag if modified OR permanent 
-//		return (this.modified || this.permanent);
-//	}
+    /**
+     * Gets the key of the entry.
+     * 
+     * @return the key
+     */
+    public String getComboName() {
+        return this.comboName;
+    }
 
-	//-------------------------------------------------------------------------
+    // ---------------------------------------------------------------------
 
-	/**
-	 * Sets the permanent flag of an entry.
-	 * 
-	 * @param permanent true, if entry is permanent
-	 */
-//	public void setPermanent(boolean permanent) {
-//		this.permanent = permanent;
-//	}
-//	
-	//-------------------------------------------------------------------------
+    /**
+     * Sets the value of the entry.
+     * 
+     * @param value
+     *            the new value
+     */
+    // public void setValue(String value) {
+    // this.value = value;
+    // }
+    //
+    // ---------------------------------------------------------------------
 
-	/**
-	 * Checks whether entry is flagged as permanent.
-	 * 
-	 * @return true, if entry is permanent
-	 */
-//	public boolean isPermanent() {
-//		return this.permanent;
-//	}
-	
+    /**
+     * Sets the key of the entry.
+     * 
+     * @param comboName
+     *            the new key
+     * 
+     * @throws Exception
+     *             the exception if the key already exists in the parent TableDataList
+     */
+    public void setKey(String comboName) throws Exception {
+        // only set the key if unique
+        if (this.tableDataList.containsOther(comboName, this))
+            throw new Exception("The key '" + comboName + "' already exists!");
+        this.comboName = comboName;
+    }
+
+    //
+    // ---------------------------------------------------------------------
+
+    /**
+     * Sets the present flag (for signal entries only).
+     * 
+     * @param present
+     *            the new present
+     */
+    public void setComboActive(boolean active) {
+        this.comboActive = active;
+    }
+
+    // ---------------------------------------------------------------------
+
+    /**
+     * Checks whether the signal is present (for signal entries only).
+     * 
+     * @return true, if signal is present
+     */
+    public boolean isComboActive() {
+        // return present flag if signal AND present
+        return (this.comboActive);
+    }
+
+    // ---------------------------------------------------------------------
+
+    /**
+     * Sets the signal flag of an entry.
+     * 
+     * @param signal
+     *            true, if entry is a signal
+     */
+    // public void setSignal(boolean signal) {
+    // this.signal = signal;
+    // }
+
+    // ---------------------------------------------------------------------
+
+    /**
+     * Checks whether the entry is a signal.
+     * 
+     * @return true, if entry is a signal
+     */
+    // public boolean isSignal() {
+    // //return signal
+    // return this.signal;
+    // }
+    //
+    // ---------------------------------------------------------------------
+
+    /**
+     * Sets the modified flag of an entry.
+     * 
+     * @param modified
+     *            true, if entry was modified
+     */
+    // public void setModified(boolean modified) {
+    // this.modified = modified;
+    // }
+
+    // ---------------------------------------------------------------------
+
+    /**
+     * Checks whether entry is flagged as modified.
+     * 
+     * @return true, entry is modified
+     */
+    // public boolean isModified() {
+    // //return modified flag if modified OR permanent
+    // return (this.modified || this.permanent);
+    // }
+
+    // ---------------------------------------------------------------------
+
+    /**
+     * Sets the permanent flag of an entry.
+     * 
+     * @param permanent
+     *            true, if entry is permanent
+     */
+    // public void setPermanent(boolean permanent) {
+    // this.permanent = permanent;
+    // }
+    //
+    // ---------------------------------------------------------------------
+
+    /**
+     * Checks whether entry is flagged as permanent.
+     * 
+     * @return true, if entry is permanent
+     */
+    // public boolean isPermanent() {
+    // return this.permanent;
+    // }
+
 }

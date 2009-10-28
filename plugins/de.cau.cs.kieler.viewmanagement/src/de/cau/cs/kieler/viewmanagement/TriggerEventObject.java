@@ -1,6 +1,6 @@
 package de.cau.cs.kieler.viewmanagement;
 
-import java.util.Map;
+
 
 public class TriggerEventObject {
 	

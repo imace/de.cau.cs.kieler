@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.gef.EditPart;
-import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeEditPart;
 import org.eclipse.swt.graphics.Color;
 import de.cau.cs.kieler.viewmanagement.ACombination;
 import de.cau.cs.kieler.viewmanagement.ATrigger;

@@ -14,35 +14,31 @@
  *****************************************************************************/
 package de.cau.cs.kieler.viewmanagement;
 
-
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gef.EditPart;
-import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeEditPart;
+
 /**
  * @author nbe
- *
+ * 
  */
 
 public abstract class AEffect {
 
+    protected EditPart affectedObject;
 
-	
-	protected EditPart affectedObject;
-	public abstract void execute();
-	
-	public  void setTarget(EditPart target) {
-		this.affectedObject = target;
-	}
-		
-	public void setParameters(Object parameters) {
-	}
-	public EditPart translateToEditPart (EObject input){
-		
-		
-		return null;
-		
-	}
-	
-	
+    public abstract void execute();
+
+    public void setTarget(EditPart target) {
+        this.affectedObject = target;
+    }
+
+    public void setParameters(Object parameters) {
+    }
+
+    public EditPart translateToEditPart(EObject input) {
+
+        return null;
+
+    }
+
 }
