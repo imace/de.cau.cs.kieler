@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:synccharts="http://kieler.cs.cau.de/synccharts" xmi:id="_fpxs0MS8Ed62Ofs4tpaFdQ" type="Synccharts" measurementUnit="Pixel">
+  <children xmi:type="notation:Shape" xmi:id="_frAb4MS8Ed62Ofs4tpaFdQ" type="2001" fontName="Lucida Grande" fontHeight="11" lineColor="0">
+    <children xmi:type="notation:DecorationNode" xmi:id="_frAb4sS8Ed62Ofs4tpaFdQ" type="5008"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_frAb48S8Ed62Ofs4tpaFdQ" type="7001" collapsed="true">
+      <children xmi:type="notation:Shape" xmi:id="_frEtUMS8Ed62Ofs4tpaFdQ" type="3003" fontName="Lucida Grande" fontHeight="11" lineColor="0">
+        <children xmi:type="notation:DecorationNode" xmi:id="_frEtUsS8Ed62Ofs4tpaFdQ" type="5001"/>
+        <element xmi:type="synccharts:Signal" href="rvh_Thread.kixs#forked"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_frEtUcS8Ed62Ofs4tpaFdQ"/>
+      </children>
+      <children xmi:type="notation:Shape" xmi:id="_frFUYMS8Ed62Ofs4tpaFdQ" type="3003" fontName="Lucida Grande" fontHeight="11" lineColor="0">
+        <children xmi:type="notation:DecorationNode" xmi:id="_frFUYsS8Ed62Ofs4tpaFdQ" type="5001"/>
+        <element xmi:type="synccharts:Signal" href="rvh_Thread.kixs#joined"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_frFUYcS8Ed62Ofs4tpaFdQ" x="10" y="10"/>
+      </children>
+      <children xmi:type="notation:Shape" xmi:id="_frFUY8S8Ed62Ofs4tpaFdQ" type="3003" fontName="Lucida Grande" fontHeight="11" lineColor="0">
+        <children xmi:type="notation:DecorationNode" xmi:id="_frFUZcS8Ed62Ofs4tpaFdQ" type="5001"/>
+        <element xmi:type="synccharts:Signal" href="rvh_Thread.kixs#instrClk"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_frFUZMS8Ed62Ofs4tpaFdQ" x="20" y="20"/>
+      </children>
+      <children xmi:type="notation:Shape" xmi:id="_frFUZsS8Ed62Ofs4tpaFdQ" type="3003" fontName="Lucida Grande" fontHeight="11" lineColor="0">
+        <children xmi:type="notation:DecorationNode" xmi:id="_frF7cMS8Ed62Ofs4tpaFdQ" type="5001"/>
+        <element xmi:type="synccharts:Signal" href="rvh_Thread.kixs#schedule"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_frFUZ8S8Ed62Ofs4tpaFdQ" x="30" y="30"/>
+      </children>
+      <children xmi:type="notation:Shape" xmi:id="_frF7ccS8Ed62Ofs4tpaFdQ" type="3003" fontName="Lucida Grande" fontHeight="11" lineColor="0">
+        <children xmi:type="notation:DecorationNode" xmi:id="_frF7c8S8Ed62Ofs4tpaFdQ" type="5001"/>
+        <element xmi:type="synccharts:Signal" href="rvh_Thread.kixs#startTick"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_frF7csS8Ed62Ofs4tpaFdQ" x="40" y="40"/>
+      </children>
+      <children xmi:type="notation:Shape" xmi:id="_frF7dMS8Ed62Ofs4tpaFdQ" type="3003" fontName="Lucida Grande" fontHeight="11" lineColor="0">
+        <children xmi:type="notation:DecorationNode" xmi:id="_frGigMS8Ed62Ofs4tpaFdQ" type="5001"/>
+        <element xmi:type="synccharts:Signal" href="rvh_Thread.kixs#delay"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_frF7dcS8Ed62Ofs4tpaFdQ" x="50" y="50"/>
+      </children>
+      <children xmi:type="notation:Shape" xmi:id="_hE8N0MS9Ed62Ofs4tpaFdQ" type="3003" fontName="Lucida Grande" fontHeight="11" lineColor="0">
+        <children xmi:type="notation:DecorationNode" xmi:id="_hE8N0sS9Ed62Ofs4tpaFdQ" type="5001"/>
+        <element xmi:type="synccharts:Signal" href="rvh_Thread.kixs#noneActive"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_hE8N0cS9Ed62Ofs4tpaFdQ" x="371" y="7"/>
+      </children>
+    </children>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_frAb5MS8Ed62Ofs4tpaFdQ" type="7002"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_frBC8MS8Ed62Ofs4tpaFdQ" type="7003"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_frBC8cS8Ed62Ofs4tpaFdQ" type="7004"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_frBC8sS8Ed62Ofs4tpaFdQ" type="7005"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_frBC88S8Ed62Ofs4tpaFdQ" type="7006">
+      <children xmi:type="notation:Shape" xmi:id="_frMCEMS8Ed62Ofs4tpaFdQ" type="3001" fontName="Lucida Grande" fontHeight="11" lineColor="0">
+        <children xmi:type="notation:BasicCompartment" xmi:id="_frMpIMS8Ed62Ofs4tpaFdQ" type="7008">
+          <children xmi:type="notation:Shape" xmi:id="_frN3QMS8Ed62Ofs4tpaFdQ" type="3002" fontName="Lucida Grande" fontHeight="11" lineColor="0">
+            <children xmi:type="notation:DecorationNode" xmi:id="_frN3QsS8Ed62Ofs4tpaFdQ" type="5007"/>
+            <children xmi:type="notation:BasicCompartment" xmi:id="_frN3Q8S8Ed62Ofs4tpaFdQ" type="7009"/>
+            <children xmi:type="notation:BasicCompartment" xmi:id="_frN3RMS8Ed62Ofs4tpaFdQ" type="7010"/>
+            <children xmi:type="notation:BasicCompartment" xmi:id="_frN3RcS8Ed62Ofs4tpaFdQ" type="7011"/>
+            <children xmi:type="notation:BasicCompartment" xmi:id="_frN3RsS8Ed62Ofs4tpaFdQ" type="7012"/>
+            <children xmi:type="notation:BasicCompartment" xmi:id="_frN3R8S8Ed62Ofs4tpaFdQ" type="7013"/>
+            <children xmi:type="notation:BasicCompartment" xmi:id="_frN3SMS8Ed62Ofs4tpaFdQ" type="7014"/>
+            <element xmi:type="synccharts:State" href="rvh_Thread.kixs#//@innerStates.0/@regions.0/@innerStates.0"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_frN3QcS8Ed62Ofs4tpaFdQ" x="17" y="98"/>
+          </children>
+          <children xmi:type="notation:Shape" xmi:id="_frOeUMS8Ed62Ofs4tpaFdQ" type="3002" fontName="Lucida Grande" fontHeight="11" lineColor="0">
+            <children xmi:type="notation:DecorationNode" xmi:id="_frOeUsS8Ed62Ofs4tpaFdQ" type="5007"/>
+            <children xmi:type="notation:BasicCompartment" xmi:id="_frOeU8S8Ed62Ofs4tpaFdQ" type="7009"/>
+            <children xmi:type="notation:BasicCompartment" xmi:id="_frOeVMS8Ed62Ofs4tpaFdQ" type="7010"/>
+            <children xmi:type="notation:BasicCompartment" xmi:id="_frOeVcS8Ed62Ofs4tpaFdQ" type="7011"/>
+            <children xmi:type="notation:BasicCompartment" xmi:id="_frOeVsS8Ed62Ofs4tpaFdQ" type="7012"/>
+            <children xmi:type="notation:BasicCompartment" xmi:id="_frOeV8S8Ed62Ofs4tpaFdQ" type="7013"/>
+            <children xmi:type="notation:BasicCompartment" xmi:id="_frOeWMS8Ed62Ofs4tpaFdQ" type="7014">
+              <children xmi:type="notation:Shape" xmi:id="_frVMAMS8Ed62Ofs4tpaFdQ" type="3001" fontName="Lucida Grande" fontHeight="11" lineColor="0">
+                <children xmi:type="notation:BasicCompartment" xmi:id="_frVMAsS8Ed62Ofs4tpaFdQ" type="7008">
+                  <children xmi:type="notation:Shape" xmi:id="_frWaIMS8Ed62Ofs4tpaFdQ" type="3002" fontName="Lucida Grande" fontHeight="11" lineColor="0">
+                    <children xmi:type="notation:DecorationNode" xmi:id="_frXBMMS8Ed62Ofs4tpaFdQ" type="5007"/>
+                    <children xmi:type="notation:BasicCompartment" xmi:id="_frXBMcS8Ed62Ofs4tpaFdQ" type="7009"/>
+                    <children xmi:type="notation:BasicCompartment" xmi:id="_frXBMsS8Ed62Ofs4tpaFdQ" type="7010"/>
+                    <children xmi:type="notation:BasicCompartment" xmi:id="_frXBM8S8Ed62Ofs4tpaFdQ" type="7011"/>
+                    <children xmi:type="notation:BasicCompartment" xmi:id="_frXBNMS8Ed62Ofs4tpaFdQ" type="7012"/>
+                    <children xmi:type="notation:BasicCompartment" xmi:id="_frXBNcS8Ed62Ofs4tpaFdQ" type="7013"/>
+                    <children xmi:type="notation:BasicCompartment" xmi:id="_frXBNsS8Ed62Ofs4tpaFdQ" type="7014">
+                      <children xmi:type="notation:Shape" xmi:id="_frarkMS8Ed62Ofs4tpaFdQ" type="3001" fontName="Lucida Grande" fontHeight="11" lineColor="0">
+                        <children xmi:type="notation:BasicCompartment" xmi:id="_frarksS8Ed62Ofs4tpaFdQ" type="7008">
+                          <children xmi:type="notation:Shape" xmi:id="_frcgwMS8Ed62Ofs4tpaFdQ" type="3002" fontName="Lucida Grande" fontHeight="11" lineColor="0">
+                            <children xmi:type="notation:DecorationNode" xmi:id="_frcgwsS8Ed62Ofs4tpaFdQ" type="5007"/>
+                            <children xmi:type="notation:BasicCompartment" xmi:id="_frcgw8S8Ed62Ofs4tpaFdQ" type="7009"/>
+                            <children xmi:type="notation:BasicCompartment" xmi:id="_frdH0MS8Ed62Ofs4tpaFdQ" type="7010"/>
+                            <children xmi:type="notation:BasicCompartment" xmi:id="_frdH0cS8Ed62Ofs4tpaFdQ" type="7011"/>
+                            <children xmi:type="notation:BasicCompartment" xmi:id="_frdH0sS8Ed62Ofs4tpaFdQ" type="7012"/>
+                            <children xmi:type="notation:BasicCompartment" xmi:id="_frdH08S8Ed62Ofs4tpaFdQ" type="7013"/>
+                            <children xmi:type="notation:BasicCompartment" xmi:id="_frdH1MS8Ed62Ofs4tpaFdQ" type="7014"/>
+                            <element xmi:type="synccharts:State" href="rvh_Thread.kixs#//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.0/@regions.0/@innerStates.0"/>
+                            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_frcgwcS8Ed62Ofs4tpaFdQ" x="16" y="21"/>
+                          </children>
+                          <children xmi:type="notation:Shape" xmi:id="_frdH1cS8Ed62Ofs4tpaFdQ" type="3002" fontName="Lucida Grande" fontHeight="11" lineColor="0">
+                            <children xmi:type="notation:DecorationNode" xmi:id="_frdH18S8Ed62Ofs4tpaFdQ" type="5007"/>
+                            <children xmi:type="notation:BasicCompartment" xmi:id="_frdH2MS8Ed62Ofs4tpaFdQ" type="7009"/>
+                            <children xmi:type="notation:BasicCompartment" xmi:id="_frdH2cS8Ed62Ofs4tpaFdQ" type="7010"/>
+                            <children xmi:type="notation:BasicCompartment" xmi:id="_frdH2sS8Ed62Ofs4tpaFdQ" type="7011"/>
+                            <children xmi:type="notation:BasicCompartment" xmi:id="_frdu4MS8Ed62Ofs4tpaFdQ" type="7012"/>
+                            <children xmi:type="notation:BasicCompartment" xmi:id="_frdu4cS8Ed62Ofs4tpaFdQ" type="7013"/>
+                            <children xmi:type="notation:BasicCompartment" xmi:id="_frdu4sS8Ed62Ofs4tpaFdQ" type="7014"/>
+                            <element xmi:type="synccharts:State" href="rvh_Thread.kixs#//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.0/@regions.0/@innerStates.1"/>
+                            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_frdH1sS8Ed62Ofs4tpaFdQ" x="256" y="21"/>
+                          </children>
+                        </children>
+                        <element xmi:type="synccharts:Region" href="rvh_Thread.kixs#//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.0/@regions.0"/>
+                        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_frarkcS8Ed62Ofs4tpaFdQ" x="1" y="1" width="360" height="78"/>
+                      </children>
+                    </children>
+                    <element xmi:type="synccharts:State" href="rvh_Thread.kixs#//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.0"/>
+                    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_frWaIcS8Ed62Ofs4tpaFdQ" x="16" y="16" width="374" height="116"/>
+                  </children>
+                  <children xmi:type="notation:Shape" xmi:id="_frXBN8S8Ed62Ofs4tpaFdQ" type="3002" fontName="Lucida Grande" fontHeight="11" lineColor="0">
+                    <children xmi:type="notation:DecorationNode" xmi:id="_frXBOcS8Ed62Ofs4tpaFdQ" type="5007"/>
+                    <children xmi:type="notation:BasicCompartment" xmi:id="_frXBOsS8Ed62Ofs4tpaFdQ" type="7009"/>
+                    <children xmi:type="notation:BasicCompartment" xmi:id="_frXoQMS8Ed62Ofs4tpaFdQ" type="7010"/>
+                    <children xmi:type="notation:BasicCompartment" xmi:id="_frXoQcS8Ed62Ofs4tpaFdQ" type="7011"/>
+                    <children xmi:type="notation:BasicCompartment" xmi:id="_frXoQsS8Ed62Ofs4tpaFdQ" type="7012"/>
+                    <children xmi:type="notation:BasicCompartment" xmi:id="_frXoQ8S8Ed62Ofs4tpaFdQ" type="7013"/>
+                    <children xmi:type="notation:BasicCompartment" xmi:id="_frXoRMS8Ed62Ofs4tpaFdQ" type="7014"/>
+                    <element xmi:type="synccharts:State" href="rvh_Thread.kixs#//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.1"/>
+                    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_frXBOMS8Ed62Ofs4tpaFdQ" x="467" y="58"/>
+                  </children>
+                </children>
+                <element xmi:type="synccharts:Region" href="rvh_Thread.kixs#//@innerStates.0/@regions.0/@innerStates.1/@regions.0"/>
+                <layoutConstraint xmi:type="notation:Bounds" xmi:id="_frVMAcS8Ed62Ofs4tpaFdQ" x="1" y="1" width="558" height="158"/>
+              </children>
+            </children>
+            <element xmi:type="synccharts:State" href="rvh_Thread.kixs#//@innerStates.0/@regions.0/@innerStates.1"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_frOeUcS8Ed62Ofs4tpaFdQ" x="154" y="16" width="572" height="196"/>
+          </children>
+        </children>
+        <element xmi:type="synccharts:Region" href="rvh_Thread.kixs#//@innerStates.0/@regions.0"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_frMCEcS8Ed62Ofs4tpaFdQ" x="1" y="1" width="752" height="238"/>
+      </children>
+    </children>
+    <element xmi:type="synccharts:State" href="rvh_Thread.kixs#//@innerStates.0"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_frAb4cS8Ed62Ofs4tpaFdQ" x="15" y="15" width="766" height="279"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_fpxs0cS8Ed62Ofs4tpaFdQ"/>
+  <element xmi:type="synccharts:Region" href="rvh_Thread.kixs#/"/>
+  <edges xmi:type="notation:Connector" xmi:id="_frwCwMS8Ed62Ofs4tpaFdQ" type="4001" source="_frN3QMS8Ed62Ofs4tpaFdQ" target="_frOeUMS8Ed62Ofs4tpaFdQ" lineColor="0">
+    <children xmi:type="notation:DecorationNode" xmi:id="_frwp0MS8Ed62Ofs4tpaFdQ" type="6001">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_frwp0cS8Ed62Ofs4tpaFdQ" x="-3" y="10"/>
+    </children>
+    <styles xmi:type="notation:FontStyle" xmi:id="_frwCwcS8Ed62Ofs4tpaFdQ" fontName="Lucida Grande" fontHeight="11"/>
+    <element xmi:type="synccharts:Transition" href="rvh_Thread.kixs#//@innerStates.0/@regions.0/@innerStates.0/@outgoingTransitions.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_frwCwsS8Ed62Ofs4tpaFdQ" points="[0, 0, -68, 0]$[19, 0, -49, 0]$[42, 0, -26, 0]$[68, 0, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_hKtUEsS8Ed62Ofs4tpaFdQ" id="(1.0000000000000002,0.5333333333333333)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_hKtUE8S8Ed62Ofs4tpaFdQ" id="(0.0,0.5)"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_fryfAMS8Ed62Ofs4tpaFdQ" type="4001" source="_frOeUMS8Ed62Ofs4tpaFdQ" target="_frN3QMS8Ed62Ofs4tpaFdQ" lineColor="0">
+    <children xmi:type="notation:DecorationNode" xmi:id="_frzGEsS8Ed62Ofs4tpaFdQ" type="6001">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_frzGE8S8Ed62Ofs4tpaFdQ" x="-1" y="-5"/>
+    </children>
+    <styles xmi:type="notation:FontStyle" xmi:id="_frzGEMS8Ed62Ofs4tpaFdQ" fontName="Lucida Grande" fontHeight="11"/>
+    <element xmi:type="synccharts:Transition" href="rvh_Thread.kixs#//@innerStates.0/@regions.0/@innerStates.1/@outgoingTransitions.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_frzGEcS8Ed62Ofs4tpaFdQ" points="[0, 0, 68, -3]$[-6, 0, 62, -3]$[-11, 0, 57, -3]$[-16, 0, 52, -3]$[-29, -1, 39, -4]$[-39, -2, 29, -5]$[-52, 0, 16, -3]$[-58, 1, 10, -2]$[-63, 2, 5, -1]$[-68, 3, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_hKtUEMS8Ed62Ofs4tpaFdQ" id="(0.0,0.42346938775510207)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_hKtUEcS8Ed62Ofs4tpaFdQ" id="(1.0000000000000002,0.13333333333333333)"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_fr07QMS8Ed62Ofs4tpaFdQ" type="4001" source="_frWaIMS8Ed62Ofs4tpaFdQ" target="_frXBN8S8Ed62Ofs4tpaFdQ" lineColor="0">
+    <children xmi:type="notation:DecorationNode" xmi:id="_fr1iUMS8Ed62Ofs4tpaFdQ" type="6001">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_fr1iUcS8Ed62Ofs4tpaFdQ" x="-2" y="8"/>
+    </children>
+    <styles xmi:type="notation:FontStyle" xmi:id="_fr07QcS8Ed62Ofs4tpaFdQ" fontName="Lucida Grande" fontHeight="11"/>
+    <element xmi:type="synccharts:Transition" href="rvh_Thread.kixs#//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.0/@outgoingTransitions.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_fr07QsS8Ed62Ofs4tpaFdQ" points="[0, 0, -78, 0]$[29, 0, -49, 0]$[55, 0, -23, 0]$[78, 0, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_hKt7JsS8Ed62Ofs4tpaFdQ" id="(1.0,0.5)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_hKt7J8S8Ed62Ofs4tpaFdQ" id="(0.015625,0.5333333333333333)"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_fr5MsMS8Ed62Ofs4tpaFdQ" type="4001" source="_frcgwMS8Ed62Ofs4tpaFdQ" target="_frdH1cS8Ed62Ofs4tpaFdQ" lineColor="0">
+    <children xmi:type="notation:DecorationNode" xmi:id="_fr5Ms8S8Ed62Ofs4tpaFdQ" type="6001">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_fr5MtMS8Ed62Ofs4tpaFdQ" x="4" y="9"/>
+    </children>
+    <styles xmi:type="notation:FontStyle" xmi:id="_fr5MscS8Ed62Ofs4tpaFdQ" fontName="Lucida Grande" fontHeight="11"/>
+    <element xmi:type="synccharts:Transition" href="rvh_Thread.kixs#//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.0/@regions.0/@innerStates.0/@outgoingTransitions.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_fr5MssS8Ed62Ofs4tpaFdQ" points="[4, 0, -159, 0]$[161, 0, -2, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_hKt7JMS8Ed62Ofs4tpaFdQ" id="(0.9518072289156626,0.7666666666666667)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_hKt7JcS8Ed62Ofs4tpaFdQ" id="(0.025974025974025976,0.7666666666666667)"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_fr83EMS8Ed62Ofs4tpaFdQ" type="4001" source="_frdH1cS8Ed62Ofs4tpaFdQ" target="_frcgwMS8Ed62Ofs4tpaFdQ" lineColor="0">
+    <children xmi:type="notation:DecorationNode" xmi:id="_fr83E8S8Ed62Ofs4tpaFdQ" type="6001">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_fr83FMS8Ed62Ofs4tpaFdQ" x="5" y="-17"/>
+    </children>
+    <styles xmi:type="notation:FontStyle" xmi:id="_fr83EcS8Ed62Ofs4tpaFdQ" fontName="Lucida Grande" fontHeight="11"/>
+    <element xmi:type="synccharts:Transition" href="rvh_Thread.kixs#//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.0/@regions.0/@innerStates.1/@outgoingTransitions.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_fr83EsS8Ed62Ofs4tpaFdQ" points="[0, 0, 156, 0]$[-6, -1, 150, -1]$[-11, -2, 145, -2]$[-16, -3, 140, -3]$[-60, -8, 96, -8]$[-96, -8, 60, -8]$[-140, -3, 16, -3]$[-146, -2, 10, -2]$[-151, -1, 5, -1]$[-156, 0, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_hKt7IsS8Ed62Ofs4tpaFdQ" id="(0.0,0.13333333333333333)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_hKt7I8S8Ed62Ofs4tpaFdQ" id="(1.0,0.13333333333333333)"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_fr_6YMS8Ed62Ofs4tpaFdQ" type="4001" source="_frXBN8S8Ed62Ofs4tpaFdQ" target="_frWaIMS8Ed62Ofs4tpaFdQ" lineColor="0">
+    <children xmi:type="notation:DecorationNode" xmi:id="_fr_6Y8S8Ed62Ofs4tpaFdQ" type="6001">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_fsAhcMS8Ed62Ofs4tpaFdQ" x="4" y="-10"/>
+    </children>
+    <styles xmi:type="notation:FontStyle" xmi:id="_fr_6YcS8Ed62Ofs4tpaFdQ" fontName="Lucida Grande" fontHeight="11"/>
+    <element xmi:type="synccharts:Transition" href="rvh_Thread.kixs#//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.1/@outgoingTransitions.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_fr_6YsS8Ed62Ofs4tpaFdQ" points="[0, 0, 78, 8]$[-6, -1, 72, 7]$[-11, -2, 67, 6]$[-16, -3, 62, 5]$[-37, -6, 41, 2]$[-58, -7, 20, 1]$[-78, -8, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_hKt7IMS8Ed62Ofs4tpaFdQ" id="(0.015625,0.13333333333333333)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_hKt7IcS8Ed62Ofs4tpaFdQ" id="(1.0,0.32758620689655166)"/>
+  </edges>
+</notation:Diagram>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<synccharts:Region xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:synccharts="http://kieler.cs.cau.de/synccharts">
+  <innerStates id="ABRO" label="Thread">
+    <signals name="forked" hostType="" isInput="true"/>
+    <signals name="joined" initialValue="" hostType="" isInput="true"/>
+    <signals name="instrClk" isInput="true"/>
+    <signals name="schedule" isInput="true"/>
+    <signals name="startTick" isInput="true"/>
+    <signals name="delay" isInput="true"/>
+    <signals name="noneActive"/>
+    <regions>
+      <innerStates id="S0" label="disabled" isInitial="true">
+        <outgoingTransitions triggersAndEffects="forked" priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.1">
+          <trigger xsi:type="synccharts:SignalReference" signal="forked"/>
+        </outgoingTransitions>
+      </innerStates>
+      <innerStates id="S1" label="enabled">
+        <regions>
+          <innerStates id="S0" label="active" isInitial="true">
+            <regions>
+              <innerStates id="S0" label="preempted" isInitial="true">
+                <outgoingTransitions triggersAndEffects="instrClk and schedule" priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.0/@regions.0/@innerStates.1">
+                  <trigger xsi:type="synccharts:ComplexExpression" operator="and">
+                    <subExpressions xsi:type="synccharts:SignalReference" signal="instrClk"/>
+                    <subExpressions xsi:type="synccharts:SignalReference" signal="schedule"/>
+                  </trigger>
+                </outgoingTransitions>
+              </innerStates>
+              <innerStates id="S1" label="executing">
+                <outgoingTransitions triggersAndEffects="instrClk and not schedule" priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.0/@regions.0/@innerStates.0">
+                  <trigger xsi:type="synccharts:ComplexExpression" operator="and">
+                    <subExpressions xsi:type="synccharts:SignalReference" signal="instrClk"/>
+                    <subExpressions xsi:type="synccharts:ComplexExpression" operator="not">
+                      <subExpressions xsi:type="synccharts:SignalReference" signal="schedule"/>
+                    </subExpressions>
+                  </trigger>
+                </outgoingTransitions>
+              </innerStates>
+            </regions>
+            <outgoingTransitions triggersAndEffects="delay" priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.1">
+              <trigger xsi:type="synccharts:SignalReference" signal="delay"/>
+            </outgoingTransitions>
+          </innerStates>
+          <innerStates id="S1" label="inactive">
+            <outgoingTransitions triggersAndEffects="startTick" priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.0">
+              <trigger xsi:type="synccharts:SignalReference" signal="startTick"/>
+            </outgoingTransitions>
+          </innerStates>
+        </regions>
+        <outgoingTransitions triggersAndEffects="joined" priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.0">
+          <trigger xsi:type="synccharts:SignalReference" signal="joined"/>
+        </outgoingTransitions>
+      </innerStates>
+    </regions>
+  </innerStates>
+</synccharts:Region>

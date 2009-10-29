@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<synccharts:Region xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:synccharts="http://kieler.cs.cau.de/synccharts">
+  <innerStates id="S0" label="Program" bodyText="">
+    <signals name="mainFork"/>
+    <signals name="noneActive"/>
+    <signals name="startTick"/>
+    <signals name="noneEnabled"/>
+    <signals name="threadSchedule"/>
+    <signals name="instrClock"/>
+    <regions>
+      <innerStates id="S0" label="init" isInitial="true" bodyText="">
+        <outgoingTransitions triggersAndEffects="mainFork" priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.1">
+          <trigger xsi:type="synccharts:SignalReference" signal="mainFork"/>
+        </outgoingTransitions>
+      </innerStates>
+      <innerStates id="S1" label="running">
+        <regions>
+          <innerStates id="S0" label="select_thread" isInitial="true">
+            <outgoingTransitions triggersAndEffects="threadSchedule" priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.1">
+              <trigger xsi:type="synccharts:SignalReference" signal="threadSchedule"/>
+            </outgoingTransitions>
+          </innerStates>
+          <innerStates id="S1" label="run_thread">
+            <outgoingTransitions triggersAndEffects="instrClock" priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.0">
+              <trigger xsi:type="synccharts:SignalReference" signal="instrClock"/>
+            </outgoingTransitions>
+          </innerStates>
+        </regions>
+        <outgoingTransitions triggersAndEffects="noneEnabled" priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.2">
+          <trigger xsi:type="synccharts:SignalReference" signal="noneEnabled"/>
+        </outgoingTransitions>
+        <outgoingTransitions triggersAndEffects="noneActive / startTick" priority="2" targetState="//@innerStates.0/@regions.0/@innerStates.1">
+          <effects xsi:type="synccharts:Emission" signal="startTick"/>
+          <trigger xsi:type="synccharts:SignalReference" signal="noneActive"/>
+        </outgoingTransitions>
+      </innerStates>
+      <innerStates id="S2" label="terminated"/>
+    </regions>
+  </innerStates>
+</synccharts:Region>
