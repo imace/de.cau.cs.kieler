@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/de.cau.cs.kieler.cakefeed/src"
+    modelPluginID="de.cau.cs.kieler.cakefeed" modelName="Cakefeed" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="5.0" copyrightFields="false">
+  <foreignModel>cakefeed.ecore</foreignModel>
+  <genPackages prefix="Cakefeed" disposableProviderFactory="true" ecorePackage="cakefeed.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="cakefeed.ecore#//PortType">
+      <genEnumLiterals ecoreEnumLiteral="cakefeed.ecore#//PortType/BYTE"/>
+      <genEnumLiterals ecoreEnumLiteral="cakefeed.ecore#//PortType/DT"/>
+      <genEnumLiterals ecoreEnumLiteral="cakefeed.ecore#//PortType/LREAL"/>
+      <genEnumLiterals ecoreEnumLiteral="cakefeed.ecore#//PortType/UINT"/>
+      <genEnumLiterals ecoreEnumLiteral="cakefeed.ecore#//PortType/LINT"/>
+      <genEnumLiterals ecoreEnumLiteral="cakefeed.ecore#//PortType/BOOL"/>
+      <genEnumLiterals ecoreEnumLiteral="cakefeed.ecore#//PortType/DATE_AND_TIME"/>
+      <genEnumLiterals ecoreEnumLiteral="cakefeed.ecore#//PortType/INT"/>
+      <genEnumLiterals ecoreEnumLiteral="cakefeed.ecore#//PortType/SINT"/>
+      <genEnumLiterals ecoreEnumLiteral="cakefeed.ecore#//PortType/LWORD"/>
+      <genEnumLiterals ecoreEnumLiteral="cakefeed.ecore#//PortType/COLOR"/>
+      <genEnumLiterals ecoreEnumLiteral="cakefeed.ecore#//PortType/WORD"/>
+      <genEnumLiterals ecoreEnumLiteral="cakefeed.ecore#//PortType/REAL"/>
+      <genEnumLiterals ecoreEnumLiteral="cakefeed.ecore#//PortType/TIME"/>
+      <genEnumLiterals ecoreEnumLiteral="cakefeed.ecore#//PortType/TOD"/>
+      <genEnumLiterals ecoreEnumLiteral="cakefeed.ecore#//PortType/ANY"/>
+      <genEnumLiterals ecoreEnumLiteral="cakefeed.ecore#//PortType/DWORD"/>
+      <genEnumLiterals ecoreEnumLiteral="cakefeed.ecore#//PortType/UDINT"/>
+      <genEnumLiterals ecoreEnumLiteral="cakefeed.ecore#//PortType/USINT"/>
+      <genEnumLiterals ecoreEnumLiteral="cakefeed.ecore#//PortType/TIME_OF_DAY"/>
+      <genEnumLiterals ecoreEnumLiteral="cakefeed.ecore#//PortType/WSTRING"/>
+      <genEnumLiterals ecoreEnumLiteral="cakefeed.ecore#//PortType/DINT"/>
+      <genEnumLiterals ecoreEnumLiteral="cakefeed.ecore#//PortType/DATE"/>
+      <genEnumLiterals ecoreEnumLiteral="cakefeed.ecore#//PortType/ULINT"/>
+      <genEnumLiterals ecoreEnumLiteral="cakefeed.ecore#//PortType/VSTYLE"/>
+      <genEnumLiterals ecoreEnumLiteral="cakefeed.ecore#//PortType/ARRAY"/>
+      <genEnumLiterals ecoreEnumLiteral="cakefeed.ecore#//PortType/STRING"/>
+    </genEnums>
+    <genClasses ecoreClass="cakefeed.ecore#//Application">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute cakefeed.ecore#//Application/applicationName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//Application/functionBlocksInstances"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//Application/connections"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="cakefeed.ecore#//FunctionBlock">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute cakefeed.ecore#//FunctionBlock/typeName"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference cakefeed.ecore#//FunctionBlock/parentLibrary"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//FunctionBlock/inputEventPorts"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//FunctionBlock/outputEventPorts"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//FunctionBlock/inputDataPorts"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//FunctionBlock/outputDataPorts"/>
+    </genClasses>
+    <genClasses ecoreClass="cakefeed.ecore#//BasicFunctionBlock">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//BasicFunctionBlock/executionControlChart"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cakefeed.ecore#//BasicFunctionBlock/algorithms"/>
+    </genClasses>
+    <genClasses ecoreClass="cakefeed.ecore#//CompositeFunctionBlock">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//CompositeFunctionBlock/compositeNetwork"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cakefeed.ecore#//CompositeFunctionBlock/serviceSequence"/>
+    </genClasses>
+    <genClasses ecoreClass="cakefeed.ecore#//ServiceInterfaceFunctionBlock">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cakefeed.ecore#//ServiceInterfaceFunctionBlock/serviceSequence"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="cakefeed.ecore#//FunctionBlockInstance">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference cakefeed.ecore#//FunctionBlockInstance/parentApplication"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute cakefeed.ecore#//FunctionBlockInstance/instanceName"/>
+    </genClasses>
+    <genClasses ecoreClass="cakefeed.ecore#//BasicFunctionBlockInstance"/>
+    <genClasses ecoreClass="cakefeed.ecore#//CompositeFunctionBlockInstance"/>
+    <genClasses ecoreClass="cakefeed.ecore#//ServiceInterfaceFunctionBlockInstance"/>
+    <genClasses ecoreClass="cakefeed.ecore#//Connection">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference cakefeed.ecore#//Connection/parentApplication"/>
+    </genClasses>
+    <genClasses ecoreClass="cakefeed.ecore#//EventConnection">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cakefeed.ecore#//EventConnection/sourceEventPort"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cakefeed.ecore#//EventConnection/targetEventPort"/>
+    </genClasses>
+    <genClasses ecoreClass="cakefeed.ecore#//DataConnection">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cakefeed.ecore#//DataConnection/sourceDataPort"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cakefeed.ecore#//DataConnection/targetDataPort"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="cakefeed.ecore#//Port">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute cakefeed.ecore#//Port/portName"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="cakefeed.ecore#//EventPort"/>
+    <genClasses image="false" ecoreClass="cakefeed.ecore#//DataPort">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute cakefeed.ecore#//DataPort/portType"/>
+    </genClasses>
+    <genClasses ecoreClass="cakefeed.ecore#//InputEventPort">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference cakefeed.ecore#//InputEventPort/parentFunctionBlock"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cakefeed.ecore#//InputEventPort/eventConnections"/>
+    </genClasses>
+    <genClasses ecoreClass="cakefeed.ecore#//OutputEventPort">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference cakefeed.ecore#//OutputEventPort/parentFunctionBlock"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cakefeed.ecore#//OutputEventPort/eventConnections"/>
+    </genClasses>
+    <genClasses ecoreClass="cakefeed.ecore#//InputDataPort">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference cakefeed.ecore#//InputDataPort/parentFunctionBlock"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cakefeed.ecore#//InputDataPort/eventConnections"/>
+    </genClasses>
+    <genClasses ecoreClass="cakefeed.ecore#//OutputDataPort">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference cakefeed.ecore#//OutputDataPort/parentFunctionBlock"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cakefeed.ecore#//OutputDataPort/eventConnections"/>
+    </genClasses>
+    <genClasses ecoreClass="cakefeed.ecore#//Algorithm">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference cakefeed.ecore#//Algorithm/parentLibrary"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute cakefeed.ecore#//Algorithm/algorithmName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute cakefeed.ecore#//Algorithm/algorithmLanguage"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute cakefeed.ecore#//Algorithm/algorithmSourceCode"/>
+    </genClasses>
+    <genClasses ecoreClass="cakefeed.ecore#//ExecutionControlChart">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference cakefeed.ecore#//ExecutionControlChart/parentBasicFunctionBlock"/>
+    </genClasses>
+    <genClasses ecoreClass="cakefeed.ecore#//CompositeNetwork">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference cakefeed.ecore#//CompositeNetwork/parentCompositeFunctionBlock"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//CompositeNetwork/inputEvents"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//CompositeNetwork/outputEvents"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//CompositeNetwork/inputData"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//CompositeNetwork/outputData"/>
+    </genClasses>
+    <genClasses ecoreClass="cakefeed.ecore#//ServiceSequence">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference cakefeed.ecore#//ServiceSequence/parentLibrary"/>
+    </genClasses>
+    <genClasses ecoreClass="cakefeed.ecore#//Library">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//Library/functionBlocks"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//Library/algorithms"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//Library/serviceSequences"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
