@@ -918,13 +918,22 @@ public interface CakefeedPackage extends EPackage {
 	int EVENT_CONNECTION__TARGET_EVENT_PORT = CONNECTION_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Associations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EVENT_CONNECTION__ASSOCIATIONS = CONNECTION_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Event Connection</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT_CONNECTION_FEATURE_COUNT = CONNECTION_FEATURE_COUNT + 2;
+	int EVENT_CONNECTION_FEATURE_COUNT = CONNECTION_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link cakefeed.impl.DataConnectionImpl <em>Data Connection</em>}' class.
@@ -964,13 +973,22 @@ public interface CakefeedPackage extends EPackage {
 	int DATA_CONNECTION__TARGET_DATA_PORT = CONNECTION_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Associations</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_CONNECTION__ASSOCIATIONS = CONNECTION_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Data Connection</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_CONNECTION_FEATURE_COUNT = CONNECTION_FEATURE_COUNT + 2;
+	int DATA_CONNECTION_FEATURE_COUNT = CONNECTION_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link cakefeed.impl.PortImpl <em>Port</em>}' class.
@@ -1516,6 +1534,117 @@ public interface CakefeedPackage extends EPackage {
 	int LIBRARY_FEATURE_COUNT = 3;
 
 	/**
+	 * The meta object id for the '{@link cakefeed.impl.AssociationImpl <em>Association</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see cakefeed.impl.AssociationImpl
+	 * @see cakefeed.impl.CakefeedPackageImpl#getAssociation()
+	 * @generated
+	 */
+	int ASSOCIATION = 24;
+
+	/**
+	 * The feature id for the '<em><b>Parent Event Connection</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSOCIATION__PARENT_EVENT_CONNECTION = 0;
+
+	/**
+	 * The feature id for the '<em><b>Associated Data Connection</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSOCIATION__ASSOCIATED_DATA_CONNECTION = 1;
+
+	/**
+	 * The number of structural features of the '<em>Association</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSOCIATION_FEATURE_COUNT = 2;
+
+	/**
+	 * The meta object id for the '{@link cakefeed.impl.InputAssociationImpl <em>Input Association</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see cakefeed.impl.InputAssociationImpl
+	 * @see cakefeed.impl.CakefeedPackageImpl#getInputAssociation()
+	 * @generated
+	 */
+	int INPUT_ASSOCIATION = 25;
+
+	/**
+	 * The feature id for the '<em><b>Parent Event Connection</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_ASSOCIATION__PARENT_EVENT_CONNECTION = ASSOCIATION__PARENT_EVENT_CONNECTION;
+
+	/**
+	 * The feature id for the '<em><b>Associated Data Connection</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_ASSOCIATION__ASSOCIATED_DATA_CONNECTION = ASSOCIATION__ASSOCIATED_DATA_CONNECTION;
+
+	/**
+	 * The number of structural features of the '<em>Input Association</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_ASSOCIATION_FEATURE_COUNT = ASSOCIATION_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link cakefeed.impl.OutputAssociationImpl <em>Output Association</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see cakefeed.impl.OutputAssociationImpl
+	 * @see cakefeed.impl.CakefeedPackageImpl#getOutputAssociation()
+	 * @generated
+	 */
+	int OUTPUT_ASSOCIATION = 26;
+
+	/**
+	 * The feature id for the '<em><b>Parent Event Connection</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OUTPUT_ASSOCIATION__PARENT_EVENT_CONNECTION = ASSOCIATION__PARENT_EVENT_CONNECTION;
+
+	/**
+	 * The feature id for the '<em><b>Associated Data Connection</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OUTPUT_ASSOCIATION__ASSOCIATED_DATA_CONNECTION = ASSOCIATION__ASSOCIATED_DATA_CONNECTION;
+
+	/**
+	 * The number of structural features of the '<em>Output Association</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OUTPUT_ASSOCIATION_FEATURE_COUNT = ASSOCIATION_FEATURE_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link cakefeed.PortType <em>Port Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1523,7 +1652,7 @@ public interface CakefeedPackage extends EPackage {
 	 * @see cakefeed.impl.CakefeedPackageImpl#getPortType()
 	 * @generated
 	 */
-	int PORT_TYPE = 24;
+	int PORT_TYPE = 27;
 
 
 	/**
@@ -1846,6 +1975,17 @@ public interface CakefeedPackage extends EPackage {
 	EReference getEventConnection_TargetEventPort();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link cakefeed.EventConnection#getAssociations <em>Associations</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Associations</em>'.
+	 * @see cakefeed.EventConnection#getAssociations()
+	 * @see #getEventConnection()
+	 * @generated
+	 */
+	EReference getEventConnection_Associations();
+
+	/**
 	 * Returns the meta object for class '{@link cakefeed.DataConnection <em>Data Connection</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1876,6 +2016,17 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getDataConnection_TargetDataPort();
+
+	/**
+	 * Returns the meta object for the reference list '{@link cakefeed.DataConnection#getAssociations <em>Associations</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Associations</em>'.
+	 * @see cakefeed.DataConnection#getAssociations()
+	 * @see #getDataConnection()
+	 * @generated
+	 */
+	EReference getDataConnection_Associations();
 
 	/**
 	 * Returns the meta object for class '{@link cakefeed.Port <em>Port</em>}'.
@@ -2262,6 +2413,58 @@ public interface CakefeedPackage extends EPackage {
 	EReference getLibrary_ServiceSequences();
 
 	/**
+	 * Returns the meta object for class '{@link cakefeed.Association <em>Association</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Association</em>'.
+	 * @see cakefeed.Association
+	 * @generated
+	 */
+	EClass getAssociation();
+
+	/**
+	 * Returns the meta object for the container reference '{@link cakefeed.Association#getParentEventConnection <em>Parent Event Connection</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Parent Event Connection</em>'.
+	 * @see cakefeed.Association#getParentEventConnection()
+	 * @see #getAssociation()
+	 * @generated
+	 */
+	EReference getAssociation_ParentEventConnection();
+
+	/**
+	 * Returns the meta object for the reference list '{@link cakefeed.Association#getAssociatedDataConnection <em>Associated Data Connection</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Associated Data Connection</em>'.
+	 * @see cakefeed.Association#getAssociatedDataConnection()
+	 * @see #getAssociation()
+	 * @generated
+	 */
+	EReference getAssociation_AssociatedDataConnection();
+
+	/**
+	 * Returns the meta object for class '{@link cakefeed.InputAssociation <em>Input Association</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Input Association</em>'.
+	 * @see cakefeed.InputAssociation
+	 * @generated
+	 */
+	EClass getInputAssociation();
+
+	/**
+	 * Returns the meta object for class '{@link cakefeed.OutputAssociation <em>Output Association</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Output Association</em>'.
+	 * @see cakefeed.OutputAssociation
+	 * @generated
+	 */
+	EClass getOutputAssociation();
+
+	/**
 	 * Returns the meta object for enum '{@link cakefeed.PortType <em>Port Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2556,6 +2759,14 @@ public interface CakefeedPackage extends EPackage {
 		EReference EVENT_CONNECTION__TARGET_EVENT_PORT = eINSTANCE.getEventConnection_TargetEventPort();
 
 		/**
+		 * The meta object literal for the '<em><b>Associations</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EVENT_CONNECTION__ASSOCIATIONS = eINSTANCE.getEventConnection_Associations();
+
+		/**
 		 * The meta object literal for the '{@link cakefeed.impl.DataConnectionImpl <em>Data Connection</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2580,6 +2791,14 @@ public interface CakefeedPackage extends EPackage {
 		 * @generated
 		 */
 		EReference DATA_CONNECTION__TARGET_DATA_PORT = eINSTANCE.getDataConnection_TargetDataPort();
+
+		/**
+		 * The meta object literal for the '<em><b>Associations</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DATA_CONNECTION__ASSOCIATIONS = eINSTANCE.getDataConnection_Associations();
 
 		/**
 		 * The meta object literal for the '{@link cakefeed.impl.PortImpl <em>Port</em>}' class.
@@ -2892,6 +3111,52 @@ public interface CakefeedPackage extends EPackage {
 		 * @generated
 		 */
 		EReference LIBRARY__SERVICE_SEQUENCES = eINSTANCE.getLibrary_ServiceSequences();
+
+		/**
+		 * The meta object literal for the '{@link cakefeed.impl.AssociationImpl <em>Association</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see cakefeed.impl.AssociationImpl
+		 * @see cakefeed.impl.CakefeedPackageImpl#getAssociation()
+		 * @generated
+		 */
+		EClass ASSOCIATION = eINSTANCE.getAssociation();
+
+		/**
+		 * The meta object literal for the '<em><b>Parent Event Connection</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ASSOCIATION__PARENT_EVENT_CONNECTION = eINSTANCE.getAssociation_ParentEventConnection();
+
+		/**
+		 * The meta object literal for the '<em><b>Associated Data Connection</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ASSOCIATION__ASSOCIATED_DATA_CONNECTION = eINSTANCE.getAssociation_AssociatedDataConnection();
+
+		/**
+		 * The meta object literal for the '{@link cakefeed.impl.InputAssociationImpl <em>Input Association</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see cakefeed.impl.InputAssociationImpl
+		 * @see cakefeed.impl.CakefeedPackageImpl#getInputAssociation()
+		 * @generated
+		 */
+		EClass INPUT_ASSOCIATION = eINSTANCE.getInputAssociation();
+
+		/**
+		 * The meta object literal for the '{@link cakefeed.impl.OutputAssociationImpl <em>Output Association</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see cakefeed.impl.OutputAssociationImpl
+		 * @see cakefeed.impl.CakefeedPackageImpl#getOutputAssociation()
+		 * @generated
+		 */
+		EClass OUTPUT_ASSOCIATION = eINSTANCE.getOutputAssociation();
 
 		/**
 		 * The meta object literal for the '{@link cakefeed.PortType <em>Port Type</em>}' enum.

@@ -6,6 +6,7 @@
  */
 package cakefeed;
 
+import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -17,6 +18,7 @@ package cakefeed;
  * <ul>
  *   <li>{@link cakefeed.DataConnection#getSourceDataPort <em>Source Data Port</em>}</li>
  *   <li>{@link cakefeed.DataConnection#getTargetDataPort <em>Target Data Port</em>}</li>
+ *   <li>{@link cakefeed.DataConnection#getAssociations <em>Associations</em>}</li>
  * </ul>
  * </p>
  *
@@ -80,5 +82,23 @@ public interface DataConnection extends Connection {
 	 * @generated
 	 */
 	void setTargetDataPort(InputDataPort value);
+
+	/**
+	 * Returns the value of the '<em><b>Associations</b></em>' reference list.
+	 * The list contents are of type {@link cakefeed.Association}.
+	 * It is bidirectional and its opposite is '{@link cakefeed.Association#getAssociatedDataConnection <em>Associated Data Connection</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Associations</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Associations</em>' reference list.
+	 * @see cakefeed.CakefeedPackage#getDataConnection_Associations()
+	 * @see cakefeed.Association#getAssociatedDataConnection
+	 * @model opposite="associatedDataConnection"
+	 * @generated
+	 */
+	EList<Association> getAssociations();
 
 } // DataConnection

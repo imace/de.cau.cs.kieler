@@ -59,12 +59,16 @@
         eType="#//OutputEventPort" eOpposite="#//OutputEventPort/eventConnections"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="targetEventPort" lowerBound="1"
         eType="#//InputEventPort" eOpposite="#//InputEventPort/eventConnections"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="associations" upperBound="-1"
+        eType="#//Association" containment="true" eOpposite="#//Association/parentEventConnection"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DataConnection" eSuperTypes="#//Connection">
     <eStructuralFeatures xsi:type="ecore:EReference" name="sourceDataPort" lowerBound="1"
         eType="#//OutputDataPort" eOpposite="#//OutputDataPort/eventConnections"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="targetDataPort" lowerBound="1"
         eType="#//InputDataPort" eOpposite="#//InputDataPort/eventConnections"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="associations" upperBound="-1"
+        eType="#//Association" eOpposite="#//Association/associatedDataConnection"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Port" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="portName" lowerBound="1"
@@ -137,6 +141,14 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="serviceSequences" upperBound="-1"
         eType="#//ServiceSequence" containment="true" eOpposite="#//ServiceSequence/parentLibrary"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Association">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentEventConnection"
+        lowerBound="1" eType="#//EventConnection" eOpposite="#//EventConnection/associations"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="associatedDataConnection"
+        lowerBound="1" upperBound="-1" eType="#//DataConnection" eOpposite="#//DataConnection/associations"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InputAssociation" eSuperTypes="#//Association"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OutputAssociation" eSuperTypes="#//Association"/>
   <eClassifiers xsi:type="ecore:EEnum" name="PortType">
     <eLiterals name="BYTE"/>
     <eLiterals name="DT" value="1"/>

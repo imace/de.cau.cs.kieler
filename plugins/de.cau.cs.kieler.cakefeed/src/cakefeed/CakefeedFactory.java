@@ -197,6 +197,33 @@ public interface CakefeedFactory extends EFactory {
 	Library createLibrary();
 
 	/**
+	 * Returns a new object of class '<em>Association</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Association</em>'.
+	 * @generated
+	 */
+	Association createAssociation();
+
+	/**
+	 * Returns a new object of class '<em>Input Association</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Input Association</em>'.
+	 * @generated
+	 */
+	InputAssociation createInputAssociation();
+
+	/**
+	 * Returns a new object of class '<em>Output Association</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Output Association</em>'.
+	 * @generated
+	 */
+	OutputAssociation createOutputAssociation();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

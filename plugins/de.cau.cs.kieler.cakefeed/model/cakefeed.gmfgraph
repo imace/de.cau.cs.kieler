@@ -202,6 +202,41 @@
         <template/>
       </actualFigure>
     </descriptors>
+    <descriptors
+        name="AssociationFigureDescriptor">
+      <actualFigure
+          xsi:type="gmfgraph:PolylineConnection"
+          name="AssociationPolylineConnection"
+          sourceDecoration="//@figures.0/@descriptors.10/@actualFigure"
+          targetDecoration="//@figures.0/@descriptors.10/@actualFigure">
+        <foregroundColor
+            xsi:type="gmfgraph:ConstantColor"
+            value="black"/>
+      </actualFigure>
+    </descriptors>
+    <descriptors
+        name="AssociationDecorationFigureDescriptor">
+      <actualFigure
+          xsi:type="gmfgraph:PolygonDecoration"
+          name="AssociationPolygonDecoration"
+          fill="false">
+        <foregroundColor
+            xsi:type="gmfgraph:ConstantColor"
+            value="black"/>
+        <template
+            x="-1"
+            y="1"/>
+        <template
+            x="1"
+            y="1"/>
+        <template
+            x="1"
+            y="-1"/>
+        <template
+            x="-1"
+            y="-1"/>
+      </actualFigure>
+    </descriptors>
   </figures>
   <nodes
       name="FunctionBlockInstanceNode"
@@ -228,6 +263,9 @@
   <connections
       name="DataConnectionConnection"
       figure="DataConnectionFigureDescriptor"/>
+  <connections
+      name="AssociationConnection"
+      figure="AssociationFigureDescriptor"/>
   <labels
       name="FunctionBlockInstanceNameDiagramLabel"
       figure="FunctionBlockInstanceFigureDescriptor"

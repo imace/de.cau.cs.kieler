@@ -438,6 +438,40 @@
         xsi:type="ecore:EReference"
         href="cakefeed.ecore#//DataConnection/targetDataPort"/>
   </links>
+  <links>
+    <domainMetaElement
+        href="cakefeed.ecore#//InputAssociation"/>
+    <containmentFeature
+        href="cakefeed.ecore#//EventConnection/associations"/>
+    <tool
+        xsi:type="gmftool:CreationTool"
+        href="cakefeed.gmftool#//@palette/@tools.0/@tools.5"/>
+    <diagramLink
+        href="cakefeed.gmfgraph#AssociationConnection"/>
+    <sourceMetaFeature
+        xsi:type="ecore:EReference"
+        href="cakefeed.ecore#//Association/parentEventConnection"/>
+    <linkMetaFeature
+        xsi:type="ecore:EReference"
+        href="cakefeed.ecore#//Association/associatedDataConnection"/>
+  </links>
+  <links>
+    <domainMetaElement
+        href="cakefeed.ecore#//OutputAssociation"/>
+    <containmentFeature
+        href="cakefeed.ecore#//EventConnection/associations"/>
+    <tool
+        xsi:type="gmftool:CreationTool"
+        href="cakefeed.gmftool#//@palette/@tools.0/@tools.5"/>
+    <diagramLink
+        href="cakefeed.gmfgraph#AssociationConnection"/>
+    <sourceMetaFeature
+        xsi:type="ecore:EReference"
+        href="cakefeed.ecore#//Association/parentEventConnection"/>
+    <linkMetaFeature
+        xsi:type="ecore:EReference"
+        href="cakefeed.ecore#//Association/associatedDataConnection"/>
+  </links>
   <diagram>
     <diagramCanvas
         href="cakefeed.gmfgraph#Canvas"/>

@@ -6,6 +6,7 @@
  */
 package cakefeed;
 
+import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -17,6 +18,7 @@ package cakefeed;
  * <ul>
  *   <li>{@link cakefeed.EventConnection#getSourceEventPort <em>Source Event Port</em>}</li>
  *   <li>{@link cakefeed.EventConnection#getTargetEventPort <em>Target Event Port</em>}</li>
+ *   <li>{@link cakefeed.EventConnection#getAssociations <em>Associations</em>}</li>
  * </ul>
  * </p>
  *
@@ -80,5 +82,23 @@ public interface EventConnection extends Connection {
 	 * @generated
 	 */
 	void setTargetEventPort(InputEventPort value);
+
+	/**
+	 * Returns the value of the '<em><b>Associations</b></em>' containment reference list.
+	 * The list contents are of type {@link cakefeed.Association}.
+	 * It is bidirectional and its opposite is '{@link cakefeed.Association#getParentEventConnection <em>Parent Event Connection</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Associations</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Associations</em>' containment reference list.
+	 * @see cakefeed.CakefeedPackage#getEventConnection_Associations()
+	 * @see cakefeed.Association#getParentEventConnection
+	 * @model opposite="parentEventConnection" containment="true"
+	 * @generated
+	 */
+	EList<Association> getAssociations();
 
 } // EventConnection

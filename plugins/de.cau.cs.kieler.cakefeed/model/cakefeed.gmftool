@@ -28,6 +28,10 @@
           xsi:type="gmftool:CreationTool"
           title="ConnectionCreationTool"
           description="Create a new Connection"/>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="AssociationCreationTool"
+          description="Create a new Association"/>
     </tools>
   </palette>
 </gmftool:ToolRegistry>

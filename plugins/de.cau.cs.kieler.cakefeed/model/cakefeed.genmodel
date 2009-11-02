@@ -72,10 +72,12 @@
     <genClasses ecoreClass="cakefeed.ecore#//EventConnection">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cakefeed.ecore#//EventConnection/sourceEventPort"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cakefeed.ecore#//EventConnection/targetEventPort"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//EventConnection/associations"/>
     </genClasses>
     <genClasses ecoreClass="cakefeed.ecore#//DataConnection">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cakefeed.ecore#//DataConnection/sourceDataPort"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cakefeed.ecore#//DataConnection/targetDataPort"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cakefeed.ecore#//DataConnection/associations"/>
     </genClasses>
     <genClasses image="false" ecoreClass="cakefeed.ecore#//Port">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute cakefeed.ecore#//Port/portName"/>
@@ -124,5 +126,11 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//Library/algorithms"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//Library/serviceSequences"/>
     </genClasses>
+    <genClasses ecoreClass="cakefeed.ecore#//Association">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference cakefeed.ecore#//Association/parentEventConnection"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cakefeed.ecore#//Association/associatedDataConnection"/>
+    </genClasses>
+    <genClasses ecoreClass="cakefeed.ecore#//InputAssociation"/>
+    <genClasses ecoreClass="cakefeed.ecore#//OutputAssociation"/>
   </genPackages>
 </genmodel:GenModel>
