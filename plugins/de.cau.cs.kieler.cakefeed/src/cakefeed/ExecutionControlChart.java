@@ -26,28 +26,26 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface ExecutionControlChart extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Parent Basic Function Block</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link cakefeed.BasicFunctionBlock#getExecutionControlChart <em>Execution Control Chart</em>}'.
+	 * Returns the value of the '<em><b>Parent Basic Function Block</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Parent Basic Function Block</em>' container reference isn't clear,
+	 * If the meaning of the '<em>Parent Basic Function Block</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Parent Basic Function Block</em>' container reference.
+	 * @return the value of the '<em>Parent Basic Function Block</em>' reference.
 	 * @see #setParentBasicFunctionBlock(BasicFunctionBlock)
 	 * @see cakefeed.CakefeedPackage#getExecutionControlChart_ParentBasicFunctionBlock()
-	 * @see cakefeed.BasicFunctionBlock#getExecutionControlChart
-	 * @model opposite="executionControlChart" required="true" transient="false"
+	 * @model required="true"
 	 * @generated
 	 */
 	BasicFunctionBlock getParentBasicFunctionBlock();
 
 	/**
-	 * Sets the value of the '{@link cakefeed.ExecutionControlChart#getParentBasicFunctionBlock <em>Parent Basic Function Block</em>}' container reference.
+	 * Sets the value of the '{@link cakefeed.ExecutionControlChart#getParentBasicFunctionBlock <em>Parent Basic Function Block</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Parent Basic Function Block</em>' container reference.
+	 * @param value the new value of the '<em>Parent Basic Function Block</em>' reference.
 	 * @see #getParentBasicFunctionBlock()
 	 * @generated
 	 */

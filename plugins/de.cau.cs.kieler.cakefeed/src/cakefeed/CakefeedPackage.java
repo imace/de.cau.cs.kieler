@@ -244,7 +244,7 @@ public interface CakefeedPackage extends EPackage {
 	int BASIC_FUNCTION_BLOCK__OUTPUT_DATA_PORTS = FUNCTION_BLOCK__OUTPUT_DATA_PORTS;
 
 	/**
-	 * The feature id for the '<em><b>Execution Control Chart</b></em>' containment reference.
+	 * The feature id for the '<em><b>Execution Control Chart</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -617,7 +617,7 @@ public interface CakefeedPackage extends EPackage {
 	int BASIC_FUNCTION_BLOCK_INSTANCE__INSTANCE_NAME = FUNCTION_BLOCK_INSTANCE__INSTANCE_NAME;
 
 	/**
-	 * The feature id for the '<em><b>Execution Control Chart</b></em>' containment reference.
+	 * The feature id for the '<em><b>Execution Control Chart</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1351,7 +1351,7 @@ public interface CakefeedPackage extends EPackage {
 	int EXECUTION_CONTROL_CHART = 20;
 
 	/**
-	 * The feature id for the '<em><b>Parent Basic Function Block</b></em>' container reference.
+	 * The feature id for the '<em><b>Parent Basic Function Block</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1785,10 +1785,10 @@ public interface CakefeedPackage extends EPackage {
 	EClass getBasicFunctionBlock();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link cakefeed.BasicFunctionBlock#getExecutionControlChart <em>Execution Control Chart</em>}'.
+	 * Returns the meta object for the reference '{@link cakefeed.BasicFunctionBlock#getExecutionControlChart <em>Execution Control Chart</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Execution Control Chart</em>'.
+	 * @return the meta object for the reference '<em>Execution Control Chart</em>'.
 	 * @see cakefeed.BasicFunctionBlock#getExecutionControlChart()
 	 * @see #getBasicFunctionBlock()
 	 * @generated
@@ -2273,10 +2273,10 @@ public interface CakefeedPackage extends EPackage {
 	EClass getExecutionControlChart();
 
 	/**
-	 * Returns the meta object for the container reference '{@link cakefeed.ExecutionControlChart#getParentBasicFunctionBlock <em>Parent Basic Function Block</em>}'.
+	 * Returns the meta object for the reference '{@link cakefeed.ExecutionControlChart#getParentBasicFunctionBlock <em>Parent Basic Function Block</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Parent Basic Function Block</em>'.
+	 * @return the meta object for the reference '<em>Parent Basic Function Block</em>'.
 	 * @see cakefeed.ExecutionControlChart#getParentBasicFunctionBlock()
 	 * @see #getExecutionControlChart()
 	 * @generated
@@ -2599,7 +2599,7 @@ public interface CakefeedPackage extends EPackage {
 		EClass BASIC_FUNCTION_BLOCK = eINSTANCE.getBasicFunctionBlock();
 
 		/**
-		 * The meta object literal for the '<em><b>Execution Control Chart</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Execution Control Chart</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -3003,7 +3003,7 @@ public interface CakefeedPackage extends EPackage {
 		EClass EXECUTION_CONTROL_CHART = eINSTANCE.getExecutionControlChart();
 
 		/**
-		 * The meta object literal for the '<em><b>Parent Basic Function Block</b></em>' container reference feature.
+		 * The meta object literal for the '<em><b>Parent Basic Function Block</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated

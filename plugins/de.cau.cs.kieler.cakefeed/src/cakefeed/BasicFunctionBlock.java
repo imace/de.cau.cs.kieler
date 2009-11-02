@@ -6,6 +6,8 @@
  */
 package cakefeed;
 
+import de.cau.cs.kieler.synccharts.State;
+
 import org.eclipse.emf.common.util.EList;
 
 /**
@@ -27,32 +29,30 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface BasicFunctionBlock extends FunctionBlock {
 	/**
-	 * Returns the value of the '<em><b>Execution Control Chart</b></em>' containment reference.
-	 * It is bidirectional and its opposite is '{@link cakefeed.ExecutionControlChart#getParentBasicFunctionBlock <em>Parent Basic Function Block</em>}'.
+	 * Returns the value of the '<em><b>Execution Control Chart</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Execution Control Chart</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Execution Control Chart</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Execution Control Chart</em>' containment reference.
-	 * @see #setExecutionControlChart(ExecutionControlChart)
+	 * @return the value of the '<em>Execution Control Chart</em>' reference.
+	 * @see #setExecutionControlChart(State)
 	 * @see cakefeed.CakefeedPackage#getBasicFunctionBlock_ExecutionControlChart()
-	 * @see cakefeed.ExecutionControlChart#getParentBasicFunctionBlock
-	 * @model opposite="parentBasicFunctionBlock" containment="true"
+	 * @model
 	 * @generated
 	 */
-	ExecutionControlChart getExecutionControlChart();
+	State getExecutionControlChart();
 
 	/**
-	 * Sets the value of the '{@link cakefeed.BasicFunctionBlock#getExecutionControlChart <em>Execution Control Chart</em>}' containment reference.
+	 * Sets the value of the '{@link cakefeed.BasicFunctionBlock#getExecutionControlChart <em>Execution Control Chart</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Execution Control Chart</em>' containment reference.
+	 * @param value the new value of the '<em>Execution Control Chart</em>' reference.
 	 * @see #getExecutionControlChart()
 	 * @generated
 	 */
-	void setExecutionControlChart(ExecutionControlChart value);
+	void setExecutionControlChart(State value);
 
 	/**
 	 * Returns the value of the '<em><b>Algorithms</b></em>' reference list.

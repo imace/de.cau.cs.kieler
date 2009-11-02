@@ -27,7 +27,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BasicFunctionBlock" eSuperTypes="#//FunctionBlock">
     <eStructuralFeatures xsi:type="ecore:EReference" name="executionControlChart"
-        eType="#//ExecutionControlChart" containment="true" eOpposite="#//ExecutionControlChart/parentBasicFunctionBlock"/>
+        eType="ecore:EClass ../../de.cau.cs.kieler.synccharts/model/synccharts.ecore#//State"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="algorithms" upperBound="-1"
         eType="#//Algorithm"/>
   </eClassifiers>
@@ -115,7 +115,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ExecutionControlChart">
     <eStructuralFeatures xsi:type="ecore:EReference" name="parentBasicFunctionBlock"
-        lowerBound="1" eType="#//BasicFunctionBlock" eOpposite="#//BasicFunctionBlock/executionControlChart"/>
+        lowerBound="1" eType="#//BasicFunctionBlock"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CompositeNetwork" eSuperTypes="#//Application">
     <eStructuralFeatures xsi:type="ecore:EReference" name="parentCompositeFunctionBlock"

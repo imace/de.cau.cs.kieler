@@ -12,5 +12,7 @@ Export-Package: cakefeed,
  cakefeed.util
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
- org.eclipse.ui;bundle-version="3.5.1"
+ org.eclipse.ui;bundle-version="3.5.1",
+ de.cau.cs.kieler.synccharts;bundle-version="0.1.0",
+ de.cau.cs.kieler.synccharts.model;bundle-version="0.1.0"
 Bundle-ActivationPolicy: lazy
