@@ -80,32 +80,24 @@
         eType="#//FunctionBlock" eOpposite="#//FunctionBlock/inputEventPorts"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="eventConnections" upperBound="-1"
         eType="#//EventConnection" eOpposite="#//EventConnection/targetEventPort"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="inputAssociations" upperBound="-1"
-        eType="#//InputAssociation" eOpposite="#//InputAssociation/associatedInputEventPort"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OutputEventPort" eSuperTypes="#//EventPort">
     <eStructuralFeatures xsi:type="ecore:EReference" name="parentFunctionBlock" lowerBound="1"
         eType="#//FunctionBlock" eOpposite="#//FunctionBlock/outputEventPorts"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="eventConnections" upperBound="-1"
         eType="#//EventConnection" eOpposite="#//EventConnection/sourceEventPort"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="outputAssociations" upperBound="-1"
-        eType="#//OutputAssociation" eOpposite="#//OutputAssociation/associatedOutputEventPort"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="InputDataPort" eSuperTypes="#//DataPort">
     <eStructuralFeatures xsi:type="ecore:EReference" name="parentFunctionBlock" lowerBound="1"
         eType="#//FunctionBlock" eOpposite="#//FunctionBlock/inputDataPorts"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="eventConnections" upperBound="-1"
         eType="#//DataConnection" eOpposite="#//DataConnection/targetDataPort"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="inputAssociations" upperBound="-1"
-        eType="#//InputAssociation" eOpposite="#//InputAssociation/associatedInputDataPort"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OutputDataPort" eSuperTypes="#//DataPort">
     <eStructuralFeatures xsi:type="ecore:EReference" name="parentFunctionBlock" lowerBound="1"
         eType="#//FunctionBlock" eOpposite="#//FunctionBlock/outputDataPorts"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="eventConnections" upperBound="-1"
         eType="#//DataConnection" eOpposite="#//DataConnection/sourceDataPort"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="outputAssociations" upperBound="-1"
-        eType="#//OutputAssociation" eOpposite="#//OutputAssociation/associatedOutputDataPort"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Algorithm">
     <eStructuralFeatures xsi:type="ecore:EReference" name="parentLibrary" lowerBound="1"
@@ -173,18 +165,5 @@
     <eLiterals name="VSTYLE" value="24"/>
     <eLiterals name="ARRAY" value="25"/>
     <eLiterals name="STRING" value="26"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Association"/>
-  <eClassifiers xsi:type="ecore:EClass" name="InputAssociation" eSuperTypes="#//Association">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="associatedInputEventPort"
-        lowerBound="1" eType="#//InputEventPort" eOpposite="#//InputEventPort/inputAssociations"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="associatedInputDataPort"
-        lowerBound="1" eType="#//InputDataPort" eOpposite="#//InputDataPort/inputAssociations"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="OutputAssociation" eSuperTypes="#//Association">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="associatedOutputEventPort"
-        lowerBound="1" eType="#//OutputEventPort" eOpposite="#//OutputEventPort/outputAssociations"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="associatedOutputDataPort"
-        lowerBound="1" eType="#//OutputDataPort" eOpposite="#//OutputDataPort/outputAssociations"/>
   </eClassifiers>
 </ecore:EPackage>

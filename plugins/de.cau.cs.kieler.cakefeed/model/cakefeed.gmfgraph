@@ -202,19 +202,6 @@
         <template/>
       </actualFigure>
     </descriptors>
-    <descriptors
-        name="AssociationFigureDescriptor">
-      <actualFigure
-          xsi:type="gmfgraph:PolylineConnection"
-          name="AssociationPolylineConnection">
-        <foregroundColor
-            xsi:type="gmfgraph:ConstantColor"
-            value="black"/>
-        <backgroundColor
-            xsi:type="gmfgraph:ConstantColor"
-            value="black"/>
-      </actualFigure>
-    </descriptors>
   </figures>
   <nodes
       name="FunctionBlockInstanceNode"
