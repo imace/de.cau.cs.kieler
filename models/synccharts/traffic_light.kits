@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<synccharts:Region xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:synccharts="http://kieler.cs.cau.de/synccharts">
+  <innerStates id="TRAFFIC_LIGHT" label="TRAFFIC_LIGHT">
+    <signals name="Error" isInput="true"/>
+    <signals name="Ok" isInput="true"/>
+    <signals name="Sec" isInput="true"/>
+    <signals name="Pred" isOutput="true"/>
+    <signals name="Pgreen" isOutput="true"/>
+    <signals name="Cred" isOutput="true"/>
+    <signals name="Cyellow" isOutput="true"/>
+    <signals name="Cgreen" isOutput="true"/>
+    <signals name="Pgo"/>
+    <signals name="Pstop"/>
+    <regions>
+      <innerStates id="Normal" label="Normal" isInitial="true">
+        <regions>
+          <innerStates id="Pred" label="Pred" isInitial="true">
+            <outgoingTransitions triggersAndEffects="Pgo / Pgreen" priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.0/@innerStates.1">
+              <effects xsi:type="synccharts:Emission" signal="Pgreen"/>
+              <trigger xsi:type="synccharts:SignalReference" signal="Pgo"/>
+            </outgoingTransitions>
+            <outgoingTransitions triggersAndEffects="/ Pred" priority="2" targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.0/@innerStates.0">
+              <effects xsi:type="synccharts:Emission" signal="Pred"/>
+            </outgoingTransitions>
+          </innerStates>
+          <innerStates id="Pgreen" label="Pgreen">
+            <outgoingTransitions triggersAndEffects="Pstop / Pred" priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.0/@innerStates.0">
+              <effects xsi:type="synccharts:Emission" signal="Pred"/>
+              <trigger xsi:type="synccharts:SignalReference" signal="Pstop"/>
+            </outgoingTransitions>
+            <outgoingTransitions triggersAndEffects="/ Pgreen" priority="2" targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.0/@innerStates.1">
+              <effects xsi:type="synccharts:Emission" signal="Pgreen"/>
+            </outgoingTransitions>
+          </innerStates>
+        </regions>
+        <regions>
+          <innerStates id="Cred" label="Cred" isInitial="true">
+            <outgoingTransitions triggersAndEffects="Sec / Cred" targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.1/@innerStates.3">
+              <effects xsi:type="synccharts:Emission" signal="Cred"/>
+              <trigger xsi:type="synccharts:SignalReference" signal="Sec"/>
+            </outgoingTransitions>
+            <outgoingTransitions triggersAndEffects="/ Cred" priority="2" targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.1/@innerStates.0">
+              <effects xsi:type="synccharts:Emission" signal="Cred"/>
+            </outgoingTransitions>
+          </innerStates>
+          <innerStates id="Cyellow" label="Cyellow">
+            <outgoingTransitions triggersAndEffects="/ Cyellow" priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.1/@innerStates.1">
+              <effects xsi:type="synccharts:Emission" signal="Cyellow"/>
+            </outgoingTransitions>
+            <outgoingTransitions triggersAndEffects="Sec / Cgreen" targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.1/@innerStates.2">
+              <effects xsi:type="synccharts:Emission" signal="Cgreen"/>
+              <trigger xsi:type="synccharts:SignalReference" signal="Sec"/>
+            </outgoingTransitions>
+          </innerStates>
+          <innerStates id="Cgreen" label="Cgreen">
+            <outgoingTransitions triggersAndEffects="Sec / Cgreen" targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.1/@innerStates.5">
+              <effects xsi:type="synccharts:Emission" signal="Cgreen"/>
+              <trigger xsi:type="synccharts:SignalReference" signal="Sec"/>
+            </outgoingTransitions>
+            <outgoingTransitions triggersAndEffects="/ Cgreen" priority="2" targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.1/@innerStates.2">
+              <effects xsi:type="synccharts:Emission" signal="Cgreen"/>
+            </outgoingTransitions>
+          </innerStates>
+          <innerStates id="r1">
+            <outgoingTransitions triggersAndEffects="Sec / Cred" targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.1/@innerStates.4">
+              <effects xsi:type="synccharts:Emission" signal="Cred"/>
+              <trigger xsi:type="synccharts:SignalReference" signal="Sec"/>
+            </outgoingTransitions>
+            <outgoingTransitions triggersAndEffects="/ Cred" priority="2" targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.1/@innerStates.3">
+              <effects xsi:type="synccharts:Emission" signal="Cred"/>
+            </outgoingTransitions>
+          </innerStates>
+          <innerStates id="r2">
+            <outgoingTransitions triggersAndEffects="/ Cred" priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.1/@innerStates.4">
+              <effects xsi:type="synccharts:Emission" signal="Cred"/>
+            </outgoingTransitions>
+            <outgoingTransitions triggersAndEffects="Sec / Cred" targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.1/@innerStates.7">
+              <effects xsi:type="synccharts:Emission" signal="Cred"/>
+              <trigger xsi:type="synccharts:SignalReference" signal="Sec"/>
+            </outgoingTransitions>
+          </innerStates>
+          <innerStates id="g1">
+            <outgoingTransitions triggersAndEffects="/ Cgreen" priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.1/@innerStates.5">
+              <effects xsi:type="synccharts:Emission" signal="Cgreen"/>
+            </outgoingTransitions>
+            <outgoingTransitions triggersAndEffects="Sec / Cgreen" targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.1/@innerStates.6">
+              <effects xsi:type="synccharts:Emission" signal="Cgreen"/>
+              <trigger xsi:type="synccharts:SignalReference" signal="Sec"/>
+            </outgoingTransitions>
+          </innerStates>
+          <innerStates id="g2">
+            <outgoingTransitions triggersAndEffects="/ Cgreen" priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.1/@innerStates.6">
+              <effects xsi:type="synccharts:Emission" signal="Cgreen"/>
+            </outgoingTransitions>
+            <outgoingTransitions triggersAndEffects="Sec / Cred, Pgo" targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.1/@innerStates.0">
+              <effects xsi:type="synccharts:Emission" signal="Cred"/>
+              <effects xsi:type="synccharts:Emission" signal="Pgo"/>
+              <trigger xsi:type="synccharts:SignalReference" signal="Sec"/>
+            </outgoingTransitions>
+          </innerStates>
+          <innerStates id="S0" label="">
+            <outgoingTransitions triggersAndEffects="/ Cred" priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.1/@innerStates.7">
+              <effects xsi:type="synccharts:Emission" signal="Cred"/>
+            </outgoingTransitions>
+            <outgoingTransitions triggersAndEffects="Sec / Cyellow, Pstop" targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.1/@innerStates.1">
+              <effects xsi:type="synccharts:Emission" signal="Cyellow"/>
+              <effects xsi:type="synccharts:Emission" signal="Pstop"/>
+              <trigger xsi:type="synccharts:SignalReference" signal="Sec"/>
+            </outgoingTransitions>
+          </innerStates>
+        </regions>
+        <outgoingTransitions triggersAndEffects="Error / Pred" priority="1" type="STRONGABORT" targetState="//@innerStates.0/@regions.0/@innerStates.1">
+          <effects xsi:type="synccharts:Emission" signal="Pred"/>
+          <trigger xsi:type="synccharts:SignalReference" signal="Error"/>
+        </outgoingTransitions>
+      </innerStates>
+      <innerStates id="Error" label="Error">
+        <regions>
+          <innerStates id="Pred" label="Pred" isInitial="true">
+            <outgoingTransitions triggersAndEffects="/ Pred" priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.0">
+              <effects xsi:type="synccharts:Emission" signal="Pred"/>
+            </outgoingTransitions>
+          </innerStates>
+        </regions>
+        <regions>
+          <innerStates id="Cyellow_on" label="Cyellow_on">
+            <outgoingTransitions triggersAndEffects="Sec" priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.1/@innerStates.1">
+              <trigger xsi:type="synccharts:SignalReference" signal="Sec"/>
+            </outgoingTransitions>
+          </innerStates>
+          <innerStates id="Cyellow_off" label="Cyellow_off" isInitial="true">
+            <outgoingTransitions triggersAndEffects="Sec / Cyellow" priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.1/@innerStates.0">
+              <effects xsi:type="synccharts:Emission" signal="Cyellow"/>
+              <trigger xsi:type="synccharts:SignalReference" signal="Sec"/>
+            </outgoingTransitions>
+          </innerStates>
+        </regions>
+        <outgoingTransitions triggersAndEffects="Ok" priority="1" type="STRONGABORT" targetState="//@innerStates.0/@regions.0/@innerStates.0">
+          <trigger xsi:type="synccharts:SignalReference" signal="Ok"/>
+        </outgoingTransitions>
+      </innerStates>
+    </regions>
+  </innerStates>
+</synccharts:Region>
