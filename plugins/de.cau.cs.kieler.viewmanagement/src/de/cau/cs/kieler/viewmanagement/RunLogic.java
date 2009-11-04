@@ -37,14 +37,16 @@ public final class RunLogic {
     public static synchronized RunLogic getInstance() {
         if (runlogic == null)
             runlogic = new RunLogic();
+
         return runlogic;
     }
 
     static// Local references to all triggers, effects and combos
     List<ATrigger> triggers;
-    List<AEffect> effects;
-    List<ACombination> combos;
+    static List<AEffect> effects;
+    static List<ACombination> combos;
     List<String> activeCombos;
+    private boolean runlogicState;
 
     public void init() {
         triggers = new ArrayList<ATrigger>();
@@ -53,45 +55,36 @@ public final class RunLogic {
 
         TableDataList.getInstance().updateViewAsync();
         activeCombos = new ArrayList<String>();
-        // For now, manually add the Combinations that should be active here. Later it'd be better
-        // to do this with a table.
-        // activeCombos.add("de.cau.cs.kieler.viewmanagement.combination.SelectionHighlightCombination");
-        // activeCombos.add("de.cau.cs.kieler.viewmanagement.combination.SelectionTextualRepresentationCombination");
-        // activeCombos.add("de.cau.cs.kieler.viewmanagement.combination.SelectionFilterCombination");
-        // activeCombos.add("de.cau.cs.kieler.viewmanagement.combination.SelectionLayoutCombination");
-        // activeCombos.add("de.cau.cs.kieler.viewmanagement.combination.SelectionZoomCombination");
-        // activeCombos.add("de.cau.cs.kieler.viewmanagement.combination.SelectionShapeHighlightCombination");
-        // activeCombos.add("de.cau.cs.kieler.viewmanagement.combination.SelectionZoomAndScrollToCombination");
+
     }
 
     public void registerListeners() {
-        System.out.println("Registering");
+        // System.out.println("Registering");
         this.init();
+        runlogicState = true;
         // read all extension points and store results in local lists
         this.readEffects();
         this.readTriggers();
         this.readCombinations();
         TableDataList.getInstance().updateViewAsync();
 
-        for (ACombination oneCombination : combos) {
+        // for (ACombination oneCombination : combos) {
+        //
+        // for (String comboToCheck : activeCombos)
+        // if (oneCombination.getClass().getCanonicalName().equals(comboToCheck))
+        //
+        // oneCombination.setActive(true);
+        // }
 
-            for (String comboToCheck : activeCombos)
-                if (oneCombination.getClass().getCanonicalName().equals(comboToCheck))
+        // for (ACombination oneCombination : combos) {
+        // if (oneCombination.getActive()) // initialize only combos set to active
+        // oneCombination.initialize();
+        // }
 
-                    oneCombination.setActive(true);
-        }
-
-        for (ACombination oneCombination : combos) {
-            if (oneCombination.getActive()) // initialize only combos set to active
-                oneCombination.initialize();
-        }
-        // print all available extensions
-        // this.printExtensions();
         return;
     }
 
     public void unregisterListeners() {
-        System.out.println("Unregistering");
 
         for (ACombination oneCombination : combos) {
             TableDataList.getInstance().remove(oneCombination.getClass().getCanonicalName());
@@ -102,10 +95,7 @@ public final class RunLogic {
         }
         for (ATrigger oneTrigger : triggers)
             oneTrigger.finalize();
-
-        // TableDataList.getInstance().add(new TableData(TableDataList.getInstance(),
-        // myCombo.getActive(), myCombo.getClass().getCanonicalName()));
-
+        runlogicState = false;
         return;
     }
 
@@ -175,10 +165,42 @@ public final class RunLogic {
 
         return myTrigger;
     }
+    
+    public static ACombination getCombination(String name) {
+        IConfigurationElement[] myExtensions = Platform.getExtensionRegistry()
+                .getConfigurationElementsFor("de.cau.cs.kieler.viewmanagement.combination");
+        ACombination myCombination = null;
+        for (int i = 0; i < myExtensions.length; i++) {
+            String attribute = myExtensions[i].getAttribute("name");
+            if (attribute.equals(name)) {
+                myCombination = combos.get(i);
 
-    // private void printExtensions(){ for (AEffect myEffect : this.effects) {
-    // System.out.println("Effect: "+myEffect); } for (ATrigger myTrigger :
-    // this.triggers) { System.out.println("Trigger: "+myTrigger); } for (Object
-    // myCombo : this.combos) { System.out.println("Combination: "+myCombo); } }
+            }
+        }
+
+        return myCombination;
+    }
+    public static AEffect getEffect(String name){
+        IConfigurationElement[] myExtensions = Platform.getExtensionRegistry()
+        .getConfigurationElementsFor("de.cau.cs.kieler.viewmanagement.effects");
+AEffect myEffect = null;
+for (int i = 0; i < myExtensions.length; i++) {
+    String attribute = myExtensions[i].getAttribute("name");
+    if (attribute.equals(name)) {
+        myEffect = effects.get(i);
+
+    }
+}
+
+return myEffect;
+    }
+    
+    public static List<AEffect> getEffects(){
+        return effects;
+    }
+
+    public boolean getRunlogicState() {
+        return runlogicState;
+    }
 
 }

@@ -1,11 +1,14 @@
 package de.cau.cs.kieler.viewmanagement;
 
+import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IMenuListener;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.ListViewer;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TreeViewerColumn;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.KeyEvent;
@@ -19,10 +22,16 @@ import org.eclipse.ui.IWorkbenchActionConstants;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.part.ViewPart;
 
+//import de.cau.cs.kieler.sim.table.TablePlugin;
+//import de.cau.cs.kieler.sim.table.views.TableData;
+//import de.cau.cs.kieler.sim.table.views.TableDataList;
+
 public class VMControl extends ViewPart {
 
     private static VMControl vmControl;
     DataTableViewer viewer;
+    private Action actionNew;
+    private boolean vmState;
 
     public VMControl() {
         vmControl = this;
@@ -44,7 +53,8 @@ public class VMControl extends ViewPart {
         viewer.setInput(new TableDataList(viewer));
         // hookSideEffectActions();
         // hookContextMenu();
-        // contributeToActionBars();
+        contributeToActionBars();
+        
         // updateEnabled();
     }
 
@@ -110,15 +120,15 @@ public class VMControl extends ViewPart {
     // manager.add(new Separator(IWorkbenchActionConstants.MB_ADDITIONS));
     // }
     //        
-    // private void contributeToActionBars() {
-    // IActionBars bars = getViewSite().getActionBars();
-    // IToolBarManager toolBarManager = bars.getToolBarManager();
-    // // toolBarManager.add(getActionAdd());
-    // // toolBarManager.add(getActionDelete());
-    // toolBarManager.add(new Separator());
-    // // toolBarManager.add(getActionSignal());
-    // // toolBarManager.add(getActionPermanent());
-    // }
+     private void contributeToActionBars() {
+     IActionBars bars = getViewSite().getActionBars();
+     IToolBarManager toolBarManager = bars.getToolBarManager();
+      toolBarManager.add(vmOn());
+     // toolBarManager.add(getActionDelete());
+     toolBarManager.add(new Separator());
+     // toolBarManager.add(getActionSignal());
+     // toolBarManager.add(getActionPermanent());
+     }
 
     // private void updateEnabled() {
     // Object obj =
@@ -155,5 +165,21 @@ public class VMControl extends ViewPart {
     public void setFocus() {
         viewer.getControl().setFocus();
     }
+    private Action vmOn() {
+        if (actionNew != null) return actionNew;
+        actionNew = new Action() {
+                public void run() {
+                    if(RunLogic.getInstance().getRunlogicState()==false)
+                       RunLogic.getInstance().registerListeners();
+                    else
+                        RunLogic.getInstance().unregisterListeners();
+                }
+        };
+        actionNew.setText("VM on/off");
+        actionNew.setToolTipText("VM on/off");
+        
+        return actionNew;
+}
+
 
 }

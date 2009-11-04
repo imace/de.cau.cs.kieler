@@ -28,6 +28,7 @@ import org.eclipse.swt.SWT;
  * ongoing editing action. Therefore it needs access to the DataTableViewer.
  * 
  * @author Christian Motika - cmot AT informatik.uni-kiel.de
+ * @modified nbe
  */
 public class TableDataEditing extends EditingSupport {
 
@@ -61,14 +62,9 @@ public class TableDataEditing extends EditingSupport {
             editor = new CheckboxCellEditor(null, SWT.CHECK);
             break;
         case 1:
-            // editor = new CheckboxCellEditor(null, SWT.CHECK | SWT.READ_ONLY);
+            // second column should not be edited
             break;
-        // case 2:
-        // editor = new TextCellEditor(((DataTableViewer) viewer).getTree());
-        // break;
-        // case 3:
-        // editor = new TextCellEditor(((DataTableViewer) viewer).getTree());
-        // break;
+
         default:
             throw new RuntimeException("columnIndex out of bounds (2)");
         }
@@ -84,8 +80,7 @@ public class TableDataEditing extends EditingSupport {
      */
     @Override
     protected boolean canEdit(Object element) {
-        TableData tableData = (TableData) element;
-        // only *NOT* permanent entries are editable
+        /* editing should always be possible */
         return (true);
     }
 
@@ -112,20 +107,9 @@ public class TableDataEditing extends EditingSupport {
     protected Object getValue(Object element) {
         TableData tableData = (TableData) element;
 
-        // table data is being edited and should not be updated by observer
-        // VMControl.getInstance().setCurrentlyEditing(true);
-
         switch (this.columnIndex) {
         case 0:
-            // if (tableData.isSignal()) {
-            // tableData.setModified(true);
-            // if (tableData.isPresent()) {
-            // tableData.setPresent(false);
-            // }
-            // else {
-            // tableData.setPresent(true);
-            // }
-            // }
+
             if (tableData.isComboActive()) {
                 return true;
 
@@ -147,50 +131,40 @@ public class TableDataEditing extends EditingSupport {
 
         switch (this.columnIndex) {
         case 0:
+            // checkbox marked
             if (value.toString().equals("true")) {
                 tableData.setComboActive(true);
                 if (element instanceof TableData) {
                     TableData data = (TableData) element;
                     String comboToActivate = data.getComboName();
+                    // Add combination to activeCombos for later finalization
                     RunLogic.getInstance().activeCombos.add(comboToActivate);
+                    // Search for combination and initialize
                     for (ACombination oneCombination : (RunLogic.getInstance().combos)) {
                         if (oneCombination.getClass().getCanonicalName().equals(comboToActivate))
                             oneCombination.initialize();
                     }
                 }
             } else {
+                // checkbox unmarked
                 tableData.setComboActive(false);
                 if (element instanceof TableData) {
                     TableData data = (TableData) element;
-                    String comboToActivate = data.getComboName();
-                    RunLogic.getInstance().activeCombos.add(comboToActivate);
+                    String comboToDeactivate = data.getComboName();
+                    // Remove combination from list of active combos
+                    RunLogic.getInstance().activeCombos.remove(comboToDeactivate);
+                    // Search for combination and finalize
                     for (ACombination oneCombination : (RunLogic.getInstance().combos)) {
-                        if (oneCombination.getClass().getCanonicalName().equals(comboToActivate))
+                        if (oneCombination.getClass().getCanonicalName().equals(comboToDeactivate))
                             oneCombination.finalize();
                     }
                 }
             }
             break;
         case 1:
-            // try {
-            // String newValue = String.valueOf(value);
-            // if (!tableData.getKey().equals(newValue)) {
-            // // tableData.setModified(true);
-            // }
-            // tableData.setKey(newValue);
-            // }
-            // catch(Exception e) {
-            // e.printStackTrace();
-            // //do not set the key//
-            // }
+
             break;
-        // case 3:
-        // String newValue = String.valueOf(value);
-        // if (!tableData.getValue().equals(newValue)) {
-        // tableData.setModified(true);
-        // }
-        // tableData.setValue(newValue);
-        // break;
+
         default:
             break;
         }
@@ -198,9 +172,6 @@ public class TableDataEditing extends EditingSupport {
         // updates the table
         getViewer().update(element, null);
 
-        // table data is not being edited any more and can be
-        // updated by observer again
-        // VMControl.getInstance().setCurrentlyEditing(false);
     }
 
 }

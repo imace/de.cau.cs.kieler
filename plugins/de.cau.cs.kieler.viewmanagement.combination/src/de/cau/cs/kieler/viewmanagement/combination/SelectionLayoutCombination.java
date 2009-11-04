@@ -44,8 +44,8 @@ public class SelectionLayoutCombination extends ACombination {
      */
     @Override
     public boolean evaluate(TriggerEventObject triggerEvent) {
-        EditPart affectedObject = translateToEditPart(triggerEvent
-                .getAffectedObject(), parent);
+        EditPart affectedObject = getEditPart(triggerEvent
+                .getAffectedObject());
         if (affectedObject instanceof EditPart) {
             this.targetEditPart = (EditPart)affectedObject;
             //Add editorPart if supplied

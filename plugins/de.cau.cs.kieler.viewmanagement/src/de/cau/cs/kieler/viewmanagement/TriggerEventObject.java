@@ -1,11 +1,13 @@
 package de.cau.cs.kieler.viewmanagement;
 
+import org.eclipse.emf.ecore.EObject;
+
 
 
 public class TriggerEventObject {
 	
 	private boolean triggerActive;
-	private String affectedObject;
+	private EObject affectedObject;
 	private  Object parameters;
 
 
@@ -19,12 +21,12 @@ public void setTriggerActive(boolean newState){
 	
 }
 
-public String getAffectedObject(){
+public EObject getAffectedObject(){
 	return affectedObject;
 }
 
-public void setAffectedObject(String newObject){
-	affectedObject= newObject;
+public void setAffectedObject(EObject eObject){
+	affectedObject= eObject;
 	
 }
 

@@ -63,6 +63,7 @@ public class ShapeHighlightEffect extends AEffect {
             this.originalOpaque = figure.isOpaque();
 
         figure.setForegroundColor(this.color);
+        figure.setBackgroundColor(this.backColor);
 
         if (figure instanceof Shape) {
             ((Shape) figure).setFill(true);

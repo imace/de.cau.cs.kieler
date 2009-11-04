@@ -41,7 +41,7 @@ public class CompartmentCollapseEffect extends AEffect {
     @Override
     public void execute() {
         IFigure selectedFigure = objectToCollapse.getFigure();
-        System.out.println("CompInit!");
+
         List<IFigure> resizableFigures = new ArrayList<IFigure>();
         getResizeableCompartments(selectedFigure, resizableFigures);
         List<IFigure> collapsedComps = new ArrayList<IFigure>();

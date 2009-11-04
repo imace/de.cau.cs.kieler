@@ -14,11 +14,11 @@
 
 package de.cau.cs.kieler.viewmanagement;
 
-//import org.eclipse.jface.viewers.IStructuredContentProvider;
+
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
 
-//IStructuredContentProvider
+
 /**
  * The Class TableDataContentProvider.
  * 
@@ -37,17 +37,17 @@ public class TableDataContentProvider implements ITreeContentProvider {
     }
 
     public Object[] getChildren(Object parentElement) {
-        // TODO Auto-generated method stub
+        
         return null;
     }
 
     public Object getParent(Object element) {
-        // TODO Auto-generated method stub
+        
         return null;
     }
 
     public boolean hasChildren(Object element) {
-        // TODO Auto-generated method stub
+        
         return false;
     }
 

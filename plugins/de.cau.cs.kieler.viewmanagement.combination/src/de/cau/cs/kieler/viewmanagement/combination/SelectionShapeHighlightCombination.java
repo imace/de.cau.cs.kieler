@@ -56,9 +56,9 @@ public class SelectionShapeHighlightCombination extends ACombination {
     @Override
     public boolean evaluate(TriggerEventObject triggerEvent) {
       //parent may be set if wanted. Will else be RootEP 
-    	//BAD Since the translation does not work, the transitionEditPart will be delivered through parameters.
-//    	EditPart affectedObject =(EditPart) triggerEvent.getParameters();
-		EditPart affectedObject = translateToEditPart(triggerEvent.getAffectedObject(), parent);
+    	
+
+		EditPart affectedObject = getEditPart(triggerEvent.getAffectedObject());
         if( affectedObject instanceof EditPart ){
             this.objectToHighlight = affectedObject;
             this.objectParameters = triggerEvent.getParameters();

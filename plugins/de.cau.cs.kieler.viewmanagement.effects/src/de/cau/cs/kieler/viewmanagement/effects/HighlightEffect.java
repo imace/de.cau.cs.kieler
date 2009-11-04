@@ -115,7 +115,12 @@ public class HighlightEffect extends AEffect {
      * Undo the effect. Here the highlighting will be removed.
      */
     public void undo() {
-        this.highlightFigure.getParent().remove(this.highlightFigure);
+        try {
+            
+                this.highlightFigure.getParent().remove(this.highlightFigure);
+        } catch (Exception e) {
+         /*invalid highlightFigure may be submitted, in that case there is nothing to remove*/
+        }
     }
 
     /**
@@ -125,15 +130,6 @@ public class HighlightEffect extends AEffect {
         this.objectToHighlight = (ShapeEditPart) target;
     }
 
-    public void setParameters(Object objectParameters) {
-        // TODO Auto-generated method stub
-
-    }
-
-    // public void setActive(boolean effectActive) {
-    // this.highlightActive= effectActive;
-    //		
-    // }
     /**
      * Changes parameters of highlight figure. Will be re-read on every execute() call
      * 
@@ -144,12 +140,5 @@ public class HighlightEffect extends AEffect {
         this.lineWidth = width;
         this.color = lineColor;
     }
-
-    // public Color getHighlightColor(){
-    // return color;
-    // }
-    // public int getHighlightLine(){
-    // return lineWidth;
-    // }
 
 }

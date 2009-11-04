@@ -21,16 +21,7 @@
    <extension
          point="org.eclipse.ui.menus">
       <menuContribution
-            locationURI="toolbar:org.eclipse.ui.main.toolbar?after=additions">
-         <toolbar
-               id="de.cau.cs.kieler.viewmanagement.activateVMToolbar">
-            <command
-                  commandId="de.cau.cs.kieler.viewmanagement.activateVM"
-                  id="de.cau.cs.kieler.viewmanagement.activateVM"
-                  style="toggle"
-                  tooltip="Activate View Management">
-            </command>
-         </toolbar>
+            locationURI="de.cau.cs.kieler.viewmanagement.menuContribution1">
       </menuContribution>
    </extension>
    <extension

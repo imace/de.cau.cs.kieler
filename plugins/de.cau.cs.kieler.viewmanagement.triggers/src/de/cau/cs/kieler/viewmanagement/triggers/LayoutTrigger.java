@@ -37,7 +37,7 @@ public class LayoutTrigger extends ATrigger {
     public void triggerAutoLayout(EditPart editPart, IEditorPart editorPart) {
         triggerEvent = new TriggerEventObject();
         triggerEvent.setTriggerActive(true);
-        triggerEvent.setAffectedObject( translateToURI(editPart) );
+        triggerEvent.setAffectedObject( translateToEObject(editPart) );
         triggerEvent.setParameters(editorPart );
         notifyTrigger(triggerEvent);
     }

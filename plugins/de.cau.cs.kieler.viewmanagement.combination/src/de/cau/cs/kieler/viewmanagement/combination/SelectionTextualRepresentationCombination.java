@@ -52,7 +52,7 @@ public class SelectionTextualRepresentationCombination extends ACombination {
      */
     @Override
     public boolean evaluate(TriggerEventObject triggerEvent) {
-    	EditPart affectedObject = translateToEditPart(triggerEvent.getAffectedObject(), parent);
+    	EditPart affectedObject = getEditPart(triggerEvent.getAffectedObject());
         if( affectedObject instanceof ShapeEditPart ){
             this.objectToHighlight = (ShapeEditPart)affectedObject;
             this.objectParameters = triggerEvent.getParameters();

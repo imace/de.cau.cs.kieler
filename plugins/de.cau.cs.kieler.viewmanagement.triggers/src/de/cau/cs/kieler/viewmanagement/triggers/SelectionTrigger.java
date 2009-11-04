@@ -15,10 +15,7 @@
 package de.cau.cs.kieler.viewmanagement.triggers;
 
 import java.util.List;
-
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gef.EditPart;
-import org.eclipse.gmf.runtime.diagram.ui.editparts.ConnectionEditPart;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.TreeSelection;
@@ -27,7 +24,6 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PlatformUI;
 import de.cau.cs.kieler.viewmanagement.ATrigger;
 import de.cau.cs.kieler.viewmanagement.TriggerEventObject;
-
 
 /**
  * @author nbe
@@ -71,13 +67,13 @@ public class SelectionTrigger extends ATrigger implements ISelectionListener {
                 if (selectedObject instanceof EditPart) {
                     if (currentSelection != null) {
                         selectionEvent.setTriggerActive(false);
-                        selectionEvent.setAffectedObject(translateToURI(currentSelection));
+                        selectionEvent.setAffectedObject(translateToEObject(currentSelection));
                         selectionEvent.setParameters("Test");
                         notifyTrigger(selectionEvent);
 
                     }
                     currentSelection = selectedObject;
-                    selectionEvent.setAffectedObject(translateToURI(selectedObject));
+                    selectionEvent.setAffectedObject(translateToEObject(selectedObject));
                     selectionEvent.setParameters("Test");
                     selectionEvent.setTriggerActive(true);
                     notifyTrigger(selectionEvent);
@@ -85,14 +81,9 @@ public class SelectionTrigger extends ATrigger implements ISelectionListener {
                 } else {
                     if (currentSelection != null) {
                         selectionEvent.setTriggerActive(false);
-                        selectionEvent.setAffectedObject(translateToURI(currentSelection));
-                        selectionEvent.setParameters("Test");
-
-                        EObject etest = translateToEObject(currentSelection);
-                        Object copy = null;
-                        if (currentSelection instanceof ConnectionEditPart)
-                            copy = currentSelection;
-                        EditPart parent = ((ConnectionEditPart) copy).getParent();
+                        selectionEvent.setAffectedObject(translateToEObject(currentSelection));
+                        /* The following line is for testing of the TextualRepresentation only */
+                        // selectionEvent.setParameters("Test");
                         notifyTrigger(selectionEvent);
                     }
                 }

@@ -56,7 +56,7 @@ public class SelectionFilterCombination extends ACombination {
     @Override
     public boolean evaluate(TriggerEventObject triggerEvent) {
       //parent may be set if wanted. Will else be RootEP 
-		EditPart affectedObject = translateToEditPart(triggerEvent.getAffectedObject(), parent);
+		EditPart affectedObject = getEditPart(triggerEvent.getAffectedObject());
         if( affectedObject instanceof ShapeEditPart ){
             this.affectedObject = (ShapeEditPart)affectedObject;
             this.objectParameters = triggerEvent.getParameters();

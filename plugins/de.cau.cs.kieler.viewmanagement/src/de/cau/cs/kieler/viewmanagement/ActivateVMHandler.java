@@ -43,6 +43,7 @@ public class ActivateVMHandler extends AbstractHandler implements IHandler {
             Object widget = ((Event) trigger).widget;
             if (widget instanceof ToolItem)
                 checked = ((ToolItem) widget).getSelection();
+            
         }
         //RunLogic myRunLogic = new RunLogic();
         if (checked) {

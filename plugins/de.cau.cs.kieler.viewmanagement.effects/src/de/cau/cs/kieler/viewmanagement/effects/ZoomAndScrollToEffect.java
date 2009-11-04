@@ -34,7 +34,7 @@ public class ZoomAndScrollToEffect extends AEffect {
     int offset = 25;
 
     /**
-     * default constructor, highlighting figure is initially defined here
+     * default constructor, nothing to be done here
      */
     public ZoomAndScrollToEffect() {
 
@@ -72,14 +72,12 @@ public class ZoomAndScrollToEffect extends AEffect {
             zoomFactor = zoomFactor2;
 
         selectedFigure.translateToAbsolute(bounds);
-        double zoomValue = ((RenderedDiagramRootEditPart) rootEP).getZoomManager().getZoom();
+
         double newZoomValue = zoomFactor;
         ((RenderedDiagramRootEditPart) rootEP).getZoomManager().setZoom(newZoomValue);
 
         bounds.scale(1 / newZoomValue);
 
-        int horValue = viewport.getHorizontalRangeModel().getValue();
-        int verValue = viewport.getVerticalRangeModel().getValue();
         viewport.getHorizontalRangeModel().setValue(bounds.x);
         viewport.getVerticalRangeModel().setValue(bounds.y);
 
