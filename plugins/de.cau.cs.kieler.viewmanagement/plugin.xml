@@ -5,6 +5,7 @@
    <extension-point id="de.cau.cs.kieler.viewmanagement.triggers" name="triggers" schema="schema/de.cau.cs.kieler.viewmanagement.triggers.exsd"/>
    <extension-point id="de.cau.cs.kieler.viewmanagement.combination" name="combination" schema="schema/de.cau.cs.kieler.viewmanagement.combination.exsd"/>
    <extension
+         name="Viewmanagement Core"
          point="org.eclipse.ui.commands">
       <command
             categoryId="de.cau.cs.kieler.commands.category"

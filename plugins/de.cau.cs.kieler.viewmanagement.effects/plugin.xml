@@ -2,6 +2,7 @@
 <?eclipse version="3.4"?>
 <plugin>
    <extension
+         name="Viewmanagement Effects"
          point="de.cau.cs.kieler.viewmanagement.effects">
       <effect
             class="de.cau.cs.kieler.viewmanagement.effects.DefaultTestEffect"

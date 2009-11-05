@@ -68,18 +68,9 @@ public final class RunLogic {
         this.readCombinations();
         TableDataList.getInstance().updateViewAsync();
 
-        // for (ACombination oneCombination : combos) {
-        //
-        // for (String comboToCheck : activeCombos)
-        // if (oneCombination.getClass().getCanonicalName().equals(comboToCheck))
-        //
-        // oneCombination.setActive(true);
-        // }
 
-        // for (ACombination oneCombination : combos) {
-        // if (oneCombination.getActive()) // initialize only combos set to active
-        // oneCombination.initialize();
-        // }
+
+
 
         return;
     }
@@ -125,7 +116,7 @@ public final class RunLogic {
         for (int i = 0; i < myExtensions.length; i++) {
             try {
                 AEffect myEffect = (AEffect) myExtensions[i].createExecutableExtension("class");
-                this.effects.add(myEffect);
+                RunLogic.effects.add(myEffect);
             } catch (CoreException e) {
 
                 e.printStackTrace();
@@ -141,7 +132,7 @@ public final class RunLogic {
 
                 ACombination myCombo = (ACombination) myExtensions[i]
                         .createExecutableExtension("class");
-                this.combos.add(myCombo);
+                RunLogic.combos.add(myCombo);
                 TableDataList.getInstance().add(
                         new TableData(TableDataList.getInstance(), myCombo.getActive(), myCombo
                                 .getClass().getCanonicalName()));
@@ -198,8 +189,18 @@ public final class RunLogic {
         return myEffect;
     }
 
-    public static List<AEffect> getEffects() {
-        return effects;
+    public static List<String> getEffects() {
+        List<String> textualEffects;
+        textualEffects = new ArrayList<String>();
+      
+            for (AEffect oneEffect : effects) {
+                String test2 = (oneEffect.getClass().getCanonicalName());
+                textualEffects.add(test2);
+            }
+         
+        
+
+        return textualEffects;
     }
 
     public boolean getRunlogicState() {
