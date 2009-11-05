@@ -150,10 +150,12 @@ public class TableDataEditing extends EditingSupport {
                 tableData.setComboActive(false);
                 if (element instanceof TableData) {
                     TableData data = (TableData) element;
+
                     String comboToDeactivate = data.getComboName();
                     // Remove combination from list of active combos
                     RunLogic.getInstance().activeCombos.remove(comboToDeactivate);
                     // Search for combination and finalize
+
                     for (ACombination oneCombination : (RunLogic.getInstance().combos)) {
                         if (oneCombination.getClass().getCanonicalName().equals(comboToDeactivate))
                             oneCombination.finalize();

@@ -195,6 +195,8 @@ public abstract class ACombination implements ITriggerListener {
         return null;
     }
 
+
+ 
     /**
      * Find an GEF EditPart that corresponds to an semantic model EObject.
      * 
@@ -265,5 +267,6 @@ public abstract class ACombination implements ITriggerListener {
         }
         return null;
     }
+
 
 }

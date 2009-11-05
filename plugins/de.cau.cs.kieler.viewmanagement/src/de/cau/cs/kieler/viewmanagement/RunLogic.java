@@ -95,7 +95,9 @@ public final class RunLogic {
         }
         for (ATrigger oneTrigger : triggers)
             oneTrigger.finalize();
+
         runlogicState = false;
+
         return;
     }
 
@@ -165,7 +167,7 @@ public final class RunLogic {
 
         return myTrigger;
     }
-    
+
     public static ACombination getCombination(String name) {
         IConfigurationElement[] myExtensions = Platform.getExtensionRegistry()
                 .getConfigurationElementsFor("de.cau.cs.kieler.viewmanagement.combination");
@@ -180,22 +182,23 @@ public final class RunLogic {
 
         return myCombination;
     }
-    public static AEffect getEffect(String name){
+
+    public static AEffect getEffect(String name) {
         IConfigurationElement[] myExtensions = Platform.getExtensionRegistry()
-        .getConfigurationElementsFor("de.cau.cs.kieler.viewmanagement.effects");
-AEffect myEffect = null;
-for (int i = 0; i < myExtensions.length; i++) {
-    String attribute = myExtensions[i].getAttribute("name");
-    if (attribute.equals(name)) {
-        myEffect = effects.get(i);
+                .getConfigurationElementsFor("de.cau.cs.kieler.viewmanagement.effects");
+        AEffect myEffect = null;
+        for (int i = 0; i < myExtensions.length; i++) {
+            String attribute = myExtensions[i].getAttribute("name");
+            if (attribute.equals(name)) {
+                myEffect = effects.get(i);
 
-    }
-}
+            }
+        }
 
-return myEffect;
+        return myEffect;
     }
-    
-    public static List<AEffect> getEffects(){
+
+    public static List<AEffect> getEffects() {
         return effects;
     }
 
