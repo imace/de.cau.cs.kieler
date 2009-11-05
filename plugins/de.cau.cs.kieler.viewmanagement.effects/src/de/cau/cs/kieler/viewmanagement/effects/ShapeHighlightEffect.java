@@ -96,7 +96,8 @@ public class ShapeHighlightEffect extends AEffect {
 
 
     /**
-     * @param target
+     * Sets the target object of the effect
+     * @param target the object to be highlighted
      */
     public void setTarget(EditPart target) {
         this.objectToHighlight = target;
@@ -110,12 +111,13 @@ public class ShapeHighlightEffect extends AEffect {
 
     /**
      * Changes parameters of highlight figure. Will be re-read on every execute() call
+     * @param foregroundColor color for the foreground
+     * @param backgroundColor color for the background
      * 
-     * @param width
-     * @param lineColor
+     
      */
-    public void setColors(Color lineColor, Color backgroundColor) {
-        this.color = lineColor;
+    public void setColors(Color foregroundColor, Color backgroundColor) {
+        this.color = foregroundColor;
         this.backColor = backgroundColor;
     }
 

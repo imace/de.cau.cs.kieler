@@ -30,11 +30,19 @@ public abstract class ATrigger {
     private String result;
     private EObject result2;
 
-    public void addTriggerListener(ITriggerListener triggerlistener) {
+    /**
+     * Method to add a listener to a trigger.
+     * @param triggerlistener the listener to be added
+     */
+    public void addTriggerListener(final ITriggerListener triggerlistener) {
         triggerListener.add(ITriggerListener.class, triggerlistener);
     }
 
-    public void removeTriggerListener(ITriggerListener triggerlistener) {
+    /**
+     * Method to remove a listener from a trigger
+     * @param triggerlistener the listener to be removed
+     */
+    public void removeTriggerListener(final ITriggerListener triggerlistener) {
         triggerListener.remove(ITriggerListener.class, triggerlistener);
     }
 
@@ -45,21 +53,28 @@ public abstract class ATrigger {
 
     }
 
+    /**
+     * Method to read the number of listeners on a trigger.
+     * @return number of listeners
+     */
     public int getListenerNumber() {
-        int number = triggerListener.getListenerCount();
+        final int number = triggerListener.getListenerCount();
         return number;
     }
 
-    // returns URIFragment for given object
-    public String translateToURI(Object sourceObject) {
+    /**
+     * Method to translate an EditPart to URIFragment.
+     * @obsolete Use translateToEObejct now
+     * @param sourceObject EditPart that should be translated
+     * @return String with URIFragment, if available
+     */
+    public String translateToURI(final EditPart sourceObject) {
         try {
-            if (sourceObject instanceof EditPart) {
 
-                View view = (View) ((EditPart) sourceObject).getModel();
-                EObject modelElement = view.getElement();
-                result = modelElement.eResource().getURIFragment(modelElement);
+            View view = (View) ((EditPart) sourceObject).getModel();
+            EObject modelElement = view.getElement();
+            result = modelElement.eResource().getURIFragment(modelElement);
 
-            }
             return result;
         } catch (Exception e) {
             /* If we can't find something we don't want to do anything */
@@ -68,13 +83,16 @@ public abstract class ATrigger {
 
     }
 
-    public EObject translateToEObject(EditPart sourceObject) {
-        
+    /**
+     * Method to translate an Editpart to EObject
+     * @param sourceObject EditPart that should be translated
+     * @return EObject that represents the EditPart
+     */
+    public EObject translateToEObject(final EditPart sourceObject) {
 
-            View view = (View) ((EditPart) sourceObject).getModel();
-            result2 = view.getElement();
+        View view = (View) ((EditPart) sourceObject).getModel();
+        result2 = view.getElement();
 
-        
         return result2;
 
     }

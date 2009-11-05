@@ -34,6 +34,10 @@ public final class RunLogic {
 
     }
 
+    /**
+     * Assures that only one instance of the RunLogic is present. 
+     * @return the instance of RunLogic
+     */
     public static synchronized RunLogic getInstance() {
         if (runlogic == null)
             runlogic = new RunLogic();
@@ -41,13 +45,15 @@ public final class RunLogic {
         return runlogic;
     }
 
-    static// Local references to all triggers, effects and combos
-    List<ATrigger> triggers;
+    static List<ATrigger> triggers;
     static List<AEffect> effects;
     static List<ACombination> combos;
     List<String> activeCombos;
     private boolean runlogicState;
 
+    /**
+     * Initializes lists to be used to store available components
+     */
     public void init() {
         triggers = new ArrayList<ATrigger>();
         effects = new ArrayList<AEffect>();
@@ -58,11 +64,14 @@ public final class RunLogic {
 
     }
 
+    /**
+     * Method to start the Viewmanagement. Reads all available effects, triggers and combinations, sets the runLogicState. 
+     */
     public void registerListeners() {
-        // System.out.println("Registering");
+        
         this.init();
         runlogicState = true;
-        // read all extension points and store results in local lists
+        
         this.readEffects();
         this.readTriggers();
         this.readCombinations();
@@ -75,16 +84,20 @@ public final class RunLogic {
         return;
     }
 
+    /**
+     * Method to stop the Viewmanagement. Removes combinations from the VM Table, calls finalize() for active combos
+     * and finalize for active triggers. Sets status runLogicState.
+     */
     public void unregisterListeners() {
 
-        for (ACombination oneCombination : combos) {
+        for (final ACombination oneCombination : combos) {
             TableDataList.getInstance().remove(oneCombination.getClass().getCanonicalName());
 
             if (oneCombination.getActive()) // finalize only combos that were active
                 oneCombination.finalize();
             TableDataList.getInstance().updateViewAsync();
         }
-        for (ATrigger oneTrigger : triggers)
+        for (final ATrigger oneTrigger : triggers)
             oneTrigger.finalize();
 
         runlogicState = false;
@@ -92,10 +105,7 @@ public final class RunLogic {
         return;
     }
 
-    /**
-     * Read all entries for the trigger extension point and add all trigger implementations to out
-     * local list of triggers.
-     */
+    
     private void readTriggers() {
         IConfigurationElement[] myExtensions = Platform.getExtensionRegistry()
                 .getConfigurationElementsFor("de.cau.cs.kieler.viewmanagement.triggers");
@@ -144,7 +154,13 @@ public final class RunLogic {
         }
     }
 
-    public static ATrigger getTrigger(String name) {
+    /**
+     * Returns a trigger from list triggers that matches the given name in the argument. Since a direct comparison on
+     * the elements of triggers is not possible there will be searched for position in the list
+     * @param name name of trigger to be searched for
+     * @return instance of searched trigger
+     */
+    public static ATrigger getTrigger(final String name) {
         IConfigurationElement[] myExtensions = Platform.getExtensionRegistry()
                 .getConfigurationElementsFor("de.cau.cs.kieler.viewmanagement.triggers");
         ATrigger myTrigger = null;
@@ -159,7 +175,13 @@ public final class RunLogic {
         return myTrigger;
     }
 
-    public static ACombination getCombination(String name) {
+    /**
+     * Returns a combination from list combos that matches the given name in the argument. Since a direct comparison on
+     * the elements of combos is not possible there will be searched for position in the list
+     * @param name name of the combination to be searched for
+     * @return instance of searched combination
+     */
+    public static ACombination getCombination(final String name) {
         IConfigurationElement[] myExtensions = Platform.getExtensionRegistry()
                 .getConfigurationElementsFor("de.cau.cs.kieler.viewmanagement.combination");
         ACombination myCombination = null;
@@ -174,7 +196,13 @@ public final class RunLogic {
         return myCombination;
     }
 
-    public static AEffect getEffect(String name) {
+    /**
+     * Returns an effect from list effects that matches the given name in the argument. Since a direct comparison on
+     * the elements of effects is not possible there will be searched for position in the list
+     * @param name of the effect to be searched for
+     * @return instance of searched trigger
+     */
+    public static AEffect getEffect(final String name) {
         IConfigurationElement[] myExtensions = Platform.getExtensionRegistry()
                 .getConfigurationElementsFor("de.cau.cs.kieler.viewmanagement.effects");
         AEffect myEffect = null;
@@ -189,12 +217,16 @@ public final class RunLogic {
         return myEffect;
     }
 
+    /**
+     * Gives a list of Strings of available effects names
+     * @return list of Strings of available effect names
+     */
     public static List<String> getEffects() {
         List<String> textualEffects;
         textualEffects = new ArrayList<String>();
       
-            for (AEffect oneEffect : effects) {
-                String test2 = (oneEffect.getClass().getCanonicalName());
+            for (final AEffect oneEffect : effects) {
+                final String test2 = (oneEffect.getClass().getCanonicalName());
                 textualEffects.add(test2);
             }
          
@@ -203,6 +235,10 @@ public final class RunLogic {
         return textualEffects;
     }
 
+    /**
+     * Returns the state of the RunLogic, true for on, false for off
+     * @return the state of the RunLogic
+     */
     public boolean getRunlogicState() {
         return runlogicState;
     }

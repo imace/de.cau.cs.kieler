@@ -25,12 +25,21 @@ public class TriggerEvent extends EventObject{
 	private TriggerEventObject triggerEvent;
 	
 	
-	public TriggerEvent (Object source, TriggerEventObject triggerEvent){
+	/**
+	 * Object that is exchanged between the components of the ViewManagement
+	 * @param source where the event stems from
+	 * @param triggerEvent the actual object
+	 */
+	public TriggerEvent (final Object source, final TriggerEventObject triggerEvent){
 		super(source);
 		
 	this.triggerEvent = triggerEvent;
 		
 	}
+/**
+ * Returns the TriggerEventObject
+ * @return the TriggerEventObject
+ */
 public TriggerEventObject getTriggerEvent(){
 	return triggerEvent;
 }

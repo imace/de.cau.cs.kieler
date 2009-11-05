@@ -198,14 +198,14 @@ public abstract class ACombination implements ITriggerListener {
 
  
     /**
-     * Find an GEF EditPart that corresponds to an semantic model EObject.
+     * Find an GEF EditPart that corresponds to an semantic model EObject. A Hashmap is used to cache already found 
+     * objects for better performance.
      * 
      * @param eObject
      *            the semantic object
      * @return the corresponding EditPart
      * 
-     *         TODO: search of transition edit parts iterates all edit parts and will take linear
-     *         time. You should improve this, by maybe build a local cache hash map
+     
      */
     public EditPart getEditPart(EObject eObject) {
         if (cachedEditParts2 == null) {
