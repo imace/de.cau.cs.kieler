@@ -39,7 +39,7 @@ public class SelectionHighlightCombination extends ACombination {
     Object objectParameters;
     boolean triggerActive;
     Color lineColor = ColorConstants.red;
-    int linewidth = 10;
+    int linewidth = 5;
 
     @Override
     public List<ATrigger> getTriggers() {

@@ -68,13 +68,13 @@ public abstract class ATrigger {
 
     }
 
-    public EObject translateToEObject(Object sourceObject) {
-        if (sourceObject instanceof EditPart) {
+    public EObject translateToEObject(EditPart sourceObject) {
+        
 
             View view = (View) ((EditPart) sourceObject).getModel();
             result2 = view.getElement();
 
-        }
+        
         return result2;
 
     }

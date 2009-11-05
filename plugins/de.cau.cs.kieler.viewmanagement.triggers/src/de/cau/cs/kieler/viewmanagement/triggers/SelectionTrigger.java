@@ -67,13 +67,13 @@ public class SelectionTrigger extends ATrigger implements ISelectionListener {
                 if (selectedObject instanceof EditPart) {
                     if (currentSelection != null) {
                         selectionEvent.setTriggerActive(false);
-                        selectionEvent.setAffectedObject(translateToEObject(currentSelection));
+                        selectionEvent.setAffectedObject(translateToEObject((EditPart) currentSelection));
                         selectionEvent.setParameters("Test");
                         notifyTrigger(selectionEvent);
 
                     }
                     currentSelection = selectedObject;
-                    selectionEvent.setAffectedObject(translateToEObject(selectedObject));
+                    selectionEvent.setAffectedObject(translateToEObject((EditPart) selectedObject));
                     selectionEvent.setParameters("Test");
                     selectionEvent.setTriggerActive(true);
                     notifyTrigger(selectionEvent);
@@ -81,7 +81,7 @@ public class SelectionTrigger extends ATrigger implements ISelectionListener {
                 } else {
                     if (currentSelection != null) {
                         selectionEvent.setTriggerActive(false);
-                        selectionEvent.setAffectedObject(translateToEObject(currentSelection));
+                        selectionEvent.setAffectedObject(translateToEObject((EditPart) currentSelection));
                         /* The following line is for testing of the TextualRepresentation only */
                         // selectionEvent.setParameters("Test");
                         notifyTrigger(selectionEvent);
