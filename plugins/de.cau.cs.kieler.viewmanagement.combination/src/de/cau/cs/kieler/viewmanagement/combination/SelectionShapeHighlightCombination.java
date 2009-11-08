@@ -26,8 +26,9 @@ import de.cau.cs.kieler.viewmanagement.triggers.SelectionTrigger;
 import de.cau.cs.kieler.viewmanagement.*;
 
 /**
- * @author nbe
- * 
+ * @author nbe Combination that highlights the affected object by drawing its shape in lineColor (by
+ *         default red). Listens to SelectionTrigger so the object selected in the editor will get
+ *         highlighted.
  */
 public class SelectionShapeHighlightCombination extends ACombination {
 
@@ -39,7 +40,6 @@ public class SelectionShapeHighlightCombination extends ACombination {
     boolean triggerActive;
     Color lineColor = ColorConstants.red;
 
-  
     public List<ATrigger> getTriggers() {
         this.st = (SelectionTrigger) RunLogic.getTrigger("SelectionTrigger");
         List<ATrigger> myTriggers = new ArrayList<ATrigger>();
@@ -74,8 +74,7 @@ public class SelectionShapeHighlightCombination extends ACombination {
     public void execute() {
         if (this.triggerActive == false)
             effect.undo();
-        else 
-        {
+        else {
             if (effect == null)
                 effect = new ShapeHighlightEffect();
 
@@ -86,7 +85,5 @@ public class SelectionShapeHighlightCombination extends ACombination {
         }
 
     }
-
-
 
 }

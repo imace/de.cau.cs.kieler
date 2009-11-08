@@ -25,21 +25,21 @@ import de.cau.cs.kieler.viewmanagement.triggers.SelectionTrigger;
 import de.cau.cs.kieler.viewmanagement.*;
 
 /**
- * @author nbe
- * 
+ * @author nbe Combination that displays text next to the affected object. The text is delivered
+ *         through the parameters. Listens to the SelectionTrigger, so objects selected in the
+ *         editor will get a text object.
  */
 public class SelectionTextualRepresentationCombination extends ACombination {
 
     TextualRepresentationEffect effect;
     SelectionTrigger st;
-    
+
     ShapeEditPart objectToHighlight;
     Object objectParameters;
 
-
     @Override
     public List<ATrigger> getTriggers() {
-        this.st = (SelectionTrigger)RunLogic.getTrigger("SelectionTrigger");
+        this.st = (SelectionTrigger) RunLogic.getTrigger("SelectionTrigger");
         List<ATrigger> myTriggers = new ArrayList<ATrigger>();
         myTriggers.add(st);
         return myTriggers;
@@ -52,38 +52,36 @@ public class SelectionTextualRepresentationCombination extends ACombination {
      */
     @Override
     public boolean evaluate(TriggerEventObject triggerEvent) {
-    	EditPart affectedObject = getEditPart(triggerEvent.getAffectedObject());
-        if( affectedObject instanceof ShapeEditPart ){
-            this.objectToHighlight = (ShapeEditPart)affectedObject;
+        EditPart affectedObject = getEditPart(triggerEvent.getAffectedObject());
+        if (affectedObject instanceof ShapeEditPart) {
+            this.objectToHighlight = (ShapeEditPart) affectedObject;
             this.objectParameters = triggerEvent.getParameters();
 
-            return true; 
-        }
-        else
+            return true;
+        } else
             return false;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see de.cau.cs.kieler.viewmanagement.ACombination#execute()
      */
     @Override
     public void execute() {
-        if ( effect == null )
+        if (effect == null)
             effect = new TextualRepresentationEffect();
         effect.setTarget(this.objectToHighlight);
         effect.setParameters(this.objectParameters);
-        //effect.setActive(this.triggerActive);
+        // effect.setActive(this.triggerActive);
         effect.execute();
-        
+
     }
 
-	@Override
-	public void undoLastEffect() {
-		effect.undo();
-		
-	}
-    
-    
+    @Override
+    public void undoLastEffect() {
+        effect.undo();
 
+    }
 
 }

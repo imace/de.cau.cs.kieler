@@ -25,22 +25,21 @@ import de.cau.cs.kieler.viewmanagement.triggers.SelectionTrigger;
 import de.cau.cs.kieler.viewmanagement.*;
 
 /**
- * @author nbe
- * 
+ * @author nbe Combination that performs a zoom-to-fit operation in order to display the whole
+ *         diagram in the editor. Listens to the SelectionTrigger, so selecting an arbitrary object
+ *         in the editor will result in that effect.
  */
 public class SelectionZoomCombination extends ACombination {
 
     ZoomEffect effect;
     SelectionTrigger st;
-    
+
     ShapeEditPart objectToZoom;
     Object objectParameters;
 
-   
-
     @Override
     public List<ATrigger> getTriggers() {
-        this.st = (SelectionTrigger)RunLogic.getTrigger("SelectionTrigger");
+        this.st = (SelectionTrigger) RunLogic.getTrigger("SelectionTrigger");
         List<ATrigger> myTriggers = new ArrayList<ATrigger>();
         myTriggers.add(st);
         return myTriggers;
@@ -53,44 +52,37 @@ public class SelectionZoomCombination extends ACombination {
      */
     @Override
     public boolean evaluate(TriggerEventObject triggerEvent) {
-      //parent may be set if wanted. Will else be RootEP 
-		EditPart affectedObject = getEditPart(triggerEvent.getAffectedObject());
-        if( affectedObject instanceof ShapeEditPart ){
-            this.objectToZoom = (ShapeEditPart)affectedObject;
+        // parent may be set if wanted. Will else be RootEP
+        EditPart affectedObject = getEditPart(triggerEvent.getAffectedObject());
+        if (affectedObject instanceof ShapeEditPart) {
+            this.objectToZoom = (ShapeEditPart) affectedObject;
             this.objectParameters = triggerEvent.getParameters();
 
-            
-            return true; 
-        }
-        else
+            return true;
+        } else
             return false;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see de.cau.cs.kieler.viewmanagement.ACombination#execute()
      */
     @Override
     public void execute() {
-        if ( effect == null )
+        if (effect == null)
             effect = new ZoomEffect();
-        
+
         effect.setTarget(this.objectToZoom);
         effect.setParameters(this.objectParameters);
         effect.execute();
-        
+
     }
 
-	@Override
-	public void undoLastEffect() {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public void undoLastEffect() {
+        // TODO Auto-generated method stub
 
-
-
-
-    
-    
-
+    }
 
 }

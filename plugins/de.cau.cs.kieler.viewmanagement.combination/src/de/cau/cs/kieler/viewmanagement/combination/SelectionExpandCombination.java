@@ -25,8 +25,9 @@ import de.cau.cs.kieler.viewmanagement.triggers.SelectionTrigger;
 import de.cau.cs.kieler.viewmanagement.*;
 
 /**
- * @author nbe
- * 
+ * @author nbe Combination that expands the affected object and all its children (if expanable).
+ *         Listens to SelectionTrigger, the affected object will be the one that gets selected in
+ *         the editor.
  */
 public class SelectionExpandCombination extends ACombination {
 

@@ -27,8 +27,9 @@ import de.cau.cs.kieler.viewmanagement.effects.UnFilterEffect;
 import de.cau.cs.kieler.viewmanagement.triggers.SelectionTrigger;
 
 /**
- * @author nbe
- *
+ * @author nbe Combination that unhides object that were previously hidden, e.g. by the
+ *         SelectionFilterCombination. Listens to SelectionTrigger, so objects selected in the
+ *         editor will become visible again.
  */
 public class SelectionUnFilterCombination extends ACombination {
 
@@ -37,9 +38,6 @@ public class SelectionUnFilterCombination extends ACombination {
     ShapeEditPart affectedObject;
     Object objectParameters;
 
-
-    
-    
     @Override
     public boolean evaluate(final TriggerEventObject triggerEvent) {
         final EditPart affectedObject = getEditPart(triggerEvent.getAffectedObject());
@@ -47,11 +45,10 @@ public class SelectionUnFilterCombination extends ACombination {
             this.affectedObject = (ShapeEditPart) affectedObject;
             this.objectParameters = triggerEvent.getParameters();
 
-
             return true;
         } else
             return false;
-        
+
     }
 
     @Override

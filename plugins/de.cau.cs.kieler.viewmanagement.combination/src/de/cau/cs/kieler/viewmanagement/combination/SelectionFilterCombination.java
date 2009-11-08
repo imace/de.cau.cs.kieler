@@ -28,6 +28,8 @@ import de.cau.cs.kieler.viewmanagement.triggers.SelectionTrigger;
 /**
  * @author nbe
  * 
+ *         Combination that filters the affected object. Listens to SelectionTrigger, the affected
+ *         object will be the one that gets selected in the editor.
  */
 
 public class SelectionFilterCombination extends ACombination {
@@ -37,8 +39,6 @@ public class SelectionFilterCombination extends ACombination {
     ShapeEditPart affectedObject;
     Object objectParameters;
 
-
-    @Override
     public List<ATrigger> getTriggers() {
         this.st = (SelectionTrigger) RunLogic.getTrigger("SelectionTrigger");
         List<ATrigger> myTriggers = new ArrayList<ATrigger>();
@@ -51,14 +51,13 @@ public class SelectionFilterCombination extends ACombination {
      * 
      * @see de.cau.cs.kieler.viewmanagement.ACombination#evaluate()
      */
-   
+
     public boolean evaluate(TriggerEventObject triggerEvent) {
-       
+
         EditPart affectedObject = getEditPart(triggerEvent.getAffectedObject());
         if (affectedObject instanceof ShapeEditPart) {
             this.affectedObject = (ShapeEditPart) affectedObject;
             this.objectParameters = triggerEvent.getParameters();
-
 
             return true;
         } else
@@ -70,7 +69,7 @@ public class SelectionFilterCombination extends ACombination {
      * 
      * @see de.cau.cs.kieler.viewmanagement.ACombination#execute()
      */
-   
+
     public void execute() {
         if (effect == null)
             effect = new FilterEffect();

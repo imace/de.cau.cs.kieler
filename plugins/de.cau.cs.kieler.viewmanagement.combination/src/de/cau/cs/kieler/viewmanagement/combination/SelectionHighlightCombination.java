@@ -27,14 +27,15 @@ import de.cau.cs.kieler.viewmanagement.triggers.SelectionTrigger;
 import de.cau.cs.kieler.viewmanagement.*;
 
 /**
- * @author nbe
- * 
+ * @author nbe Combination that highlights the affected object by drawing a rectangle around it.
+ *         Listens to the SelectionTrigger, so the selected object in the editor will get
+ *         highlighted.
  */
 public class SelectionHighlightCombination extends ACombination {
 
     HighlightEffect effect;
     SelectionTrigger st;
-    
+
     ShapeEditPart objectToHighlight;
     Object objectParameters;
 
@@ -43,7 +44,7 @@ public class SelectionHighlightCombination extends ACombination {
 
     @Override
     public List<ATrigger> getTriggers() {
-        this.st = (SelectionTrigger)RunLogic.getTrigger("SelectionTrigger");
+        this.st = (SelectionTrigger) RunLogic.getTrigger("SelectionTrigger");
         List<ATrigger> myTriggers = new ArrayList<ATrigger>();
         myTriggers.add(st);
         return myTriggers;
@@ -56,52 +57,49 @@ public class SelectionHighlightCombination extends ACombination {
      */
     @Override
     public boolean evaluate(TriggerEventObject triggerEvent) {
-      
-		EditPart affectedObject = getEditPart(triggerEvent.getAffectedObject());
-        if( affectedObject instanceof ShapeEditPart ){
-            this.objectToHighlight = (ShapeEditPart)affectedObject;
+
+        EditPart affectedObject = getEditPart(triggerEvent.getAffectedObject());
+        if (affectedObject instanceof ShapeEditPart) {
+            this.objectToHighlight = (ShapeEditPart) affectedObject;
             this.objectParameters = triggerEvent.getParameters();
 
-            
-            return true; 
-        }
-        else
+            return true;
+        } else
             return false;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see de.cau.cs.kieler.viewmanagement.ACombination#execute()
      */
     @Override
     public void execute() {
-        if ( effect == null )
+        if (effect == null)
             effect = new HighlightEffect();
-        
+
         effect.setTarget(this.objectToHighlight);
         effect.setParameters(this.objectParameters);
         effect.setHighlightFigure(linewidth, lineColor);
         effect.execute();
-        
-        
+
     }
 
-	
-	public void undoLastEffect() {
-	    if(effect!=null)
-		effect.undo();
-		
-	}
-	
-	/**
-	 * @param newcolor Color that the HighlightEffect should be changed to
-	 * @param newlinewidth Linewidth that the HighlightEffect should be changed to
-	 */
-	public void setHighlightEffect(Color newcolor, int newlinewidth){
-		lineColor= newcolor;
-		linewidth= newlinewidth;
-	}
-    
-    
+    public void undoLastEffect() {
+        if (effect != null)
+            effect.undo();
 
+    }
+
+    /**
+     * @param newcolor
+     *            Color that the HighlightEffect should be changed to
+     * @param newlinewidth
+     *            Linewidth that the HighlightEffect should be changed to
+     */
+    public void setHighlightEffect(Color newcolor, int newlinewidth) {
+        lineColor = newcolor;
+        linewidth = newlinewidth;
+    }
 
 }

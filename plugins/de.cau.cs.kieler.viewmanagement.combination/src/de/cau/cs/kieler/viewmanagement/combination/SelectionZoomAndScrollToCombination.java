@@ -16,10 +16,8 @@ package de.cau.cs.kieler.viewmanagement.combination;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeEditPart;
-import org.eclipse.swt.graphics.Color;
 import de.cau.cs.kieler.viewmanagement.ACombination;
 import de.cau.cs.kieler.viewmanagement.ATrigger;
 import de.cau.cs.kieler.viewmanagement.effects.ZoomAndScrollToEffect;
@@ -27,8 +25,9 @@ import de.cau.cs.kieler.viewmanagement.triggers.SelectionTrigger;
 import de.cau.cs.kieler.viewmanagement.*;
 
 /**
- * @author nbe
- * 
+ * @author nbe Combination that performs a focus on the affected object by scrolling to its location
+ *         and zooming in on it. Listens to SelectionTrigger so objects selected in the editor will
+ *         be focused.
  */
 public class SelectionZoomAndScrollToCombination extends ACombination {
 
@@ -37,8 +36,6 @@ public class SelectionZoomAndScrollToCombination extends ACombination {
 
     ShapeEditPart objectToHighlight;
     Object objectParameters;
-
-   
 
     @Override
     public List<ATrigger> getTriggers() {
@@ -61,7 +58,6 @@ public class SelectionZoomAndScrollToCombination extends ACombination {
             if (affectedObject instanceof ShapeEditPart) {
                 this.objectToHighlight = (ShapeEditPart) affectedObject;
                 this.objectParameters = triggerEvent.getParameters();
-
 
                 return true;
             }
