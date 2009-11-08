@@ -25,8 +25,8 @@ import org.eclipse.gmf.runtime.gef.ui.figures.DefaultSizeNodeFigure;
 import de.cau.cs.kieler.viewmanagement.AEffect;
 
 /**
- * @author nbe
- * 
+ * @author nbe The ShapeHighLightEffect will modify the affected object itself by changing its
+ *         colors.
  */
 public class ShapeHighlightEffect extends AEffect {
 
@@ -39,9 +39,8 @@ public class ShapeHighlightEffect extends AEffect {
     Color originalColorForeground;
     Color originalColorBackground;
 
-
     /**
-     * default constructor, highlighting figure is initially defined here
+     * default constructor, nothing done here
      */
     public ShapeHighlightEffect() {
 
@@ -54,14 +53,14 @@ public class ShapeHighlightEffect extends AEffect {
         if (figure instanceof DefaultSizeNodeFigure) {
             figure = (IFigure) figure.getChildren().get(0);
         }
-
+        // save current values for later undo
         if (this.originalColorForeground == null)
             this.originalColorForeground = figure.getForegroundColor();
         if (this.originalColorBackground == null)
             this.originalColorBackground = figure.getBackgroundColor();
         if (this.originalOpaque == null)
             this.originalOpaque = figure.isOpaque();
-
+        // set new colors
         figure.setForegroundColor(this.color);
         figure.setBackgroundColor(this.backColor);
 
@@ -69,7 +68,7 @@ public class ShapeHighlightEffect extends AEffect {
             ((Shape) figure).setFill(true);
         }
         figure.setOpaque(true);
-
+        // schedule repaint to make changes visible
         figure.repaint();
 
     }
@@ -84,43 +83,43 @@ public class ShapeHighlightEffect extends AEffect {
         if (figure instanceof DefaultSizeNodeFigure) {
             figure = (IFigure) figure.getChildren().get(0);
         }
+        // apply saved original colors
         figure.setForegroundColor(originalColorForeground);
         figure.setOpaque(this.originalOpaque);
         figure.setBackgroundColor(originalColorBackground);
-
+        // schedule repaint to make changes visible
         figure.repaint();
         // reset backup date
         originalColorForeground = null;
         originalColorBackground = null;
     }
 
-
     /**
      * Sets the target object of the effect
-     * @param target the object to be highlighted
+     * 
+     * @param target
+     *            the object to be highlighted
      */
     public void setTarget(EditPart target) {
         this.objectToHighlight = target;
     }
 
     public void setParameters(Object objectParameters) {
-        
 
     }
 
-
     /**
      * Changes parameters of highlight figure. Will be re-read on every execute() call
-     * @param foregroundColor color for the foreground
-     * @param backgroundColor color for the background
      * 
-     
+     * @param foregroundColor
+     *            color for the foreground
+     * @param backgroundColor
+     *            color for the background
+     * 
      */
     public void setColors(Color foregroundColor, Color backgroundColor) {
         this.color = foregroundColor;
         this.backColor = backgroundColor;
     }
-
-
 
 }

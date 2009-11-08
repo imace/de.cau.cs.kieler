@@ -28,8 +28,7 @@ import org.eclipse.swt.graphics.Color;
 import de.cau.cs.kieler.viewmanagement.AEffect;
 
 /**
- * @author nbe
- * 
+ * @author nbe The HighlightEffect draws a rectangle around the affected object.
  */
 public class HighlightEffect extends AEffect {
 
@@ -40,7 +39,8 @@ public class HighlightEffect extends AEffect {
     Color color = ColorConstants.red;
 
     /**
-     * default constructor, highlighting figure is initially defined here
+     * default constructor, highlighting figure is initially defined here by setting up the figure
+     * itself, the line width, color etc.
      */
     public HighlightEffect() {
 
@@ -57,7 +57,7 @@ public class HighlightEffect extends AEffect {
 
     public void execute() {
 
-        // search a layer we can draw on
+        // get the layer on which to draw the effect
         RootEditPart rootEP = objectToHighlight.getRoot();
 
         if (rootEP instanceof RenderedDiagramRootEditPart) {
@@ -68,7 +68,7 @@ public class HighlightEffect extends AEffect {
             // get Figure to the EditPart
 
             IFigure selectedFigure = objectToHighlight.getFigure();
-
+            // set line width and color in order to apply changes made after initialization
             highlightFigure.setLineWidth(lineWidth);
             highlightFigure.setForegroundColor(color);
 
@@ -100,7 +100,7 @@ public class HighlightEffect extends AEffect {
             // set the bounds of the Figure that will do the highlighting
 
             highlightFigure.setBounds(bounds);
-           
+
             // add the new highlight figure to the layer
 
             layer.add(highlightFigure);
@@ -108,7 +108,7 @@ public class HighlightEffect extends AEffect {
             // schedule a repaint of the feedback layer
             layer.invalidate();
         }
-     
+
     }
 
     /**
@@ -116,16 +116,18 @@ public class HighlightEffect extends AEffect {
      */
     public void undo() {
         try {
-            
-                this.highlightFigure.getParent().remove(this.highlightFigure);
+
+            this.highlightFigure.getParent().remove(this.highlightFigure);
         } catch (Exception e) {
-         /*invalid highlightFigure may be submitted, in that case there is nothing to remove*/
+            /* invalid highlightFigure may be submitted, in that case there is nothing to remove */
         }
     }
 
     /**
      * Sets the target of the effect
-     * @param target the target
+     * 
+     * @param target
+     *            the target
      */
     public void setTarget(EditPart target) {
         this.objectToHighlight = (ShapeEditPart) target;
@@ -134,8 +136,10 @@ public class HighlightEffect extends AEffect {
     /**
      * Changes parameters of highlight figure. Will be re-read on every execute() call.
      * 
-     * @param width the width of the of the highlight figure
-     * @param lineColor the color of the line of the highlight figure
+     * @param width
+     *            the width of the of the highlight figure
+     * @param lineColor
+     *            the color of the line of the highlight figure
      */
     public void setHighlightFigure(int width, Color lineColor) {
         this.lineWidth = width;

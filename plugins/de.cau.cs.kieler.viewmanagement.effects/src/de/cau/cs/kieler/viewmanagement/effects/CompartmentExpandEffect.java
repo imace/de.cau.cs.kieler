@@ -52,7 +52,7 @@ public class CompartmentExpandEffect extends AEffect {
     	IFigure selectedFigure =  objectToExpand.getFigure();
     	List<IFigure> resizableFigures = new ArrayList<IFigure>();
     	getResizeableCompartments(selectedFigure, resizableFigures);
-    	//Here could be added some more refined method, like collapsing only some objects
+    	
     	for(int i=0; i<resizableFigures.size(); i++){
     		ResizableCompartmentFigure tempfig = (ResizableCompartmentFigure) resizableFigures.get(i);
     		

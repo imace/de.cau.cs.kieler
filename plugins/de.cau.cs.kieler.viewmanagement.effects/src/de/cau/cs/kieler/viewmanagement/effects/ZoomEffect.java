@@ -23,21 +23,22 @@ import org.eclipse.ui.PlatformUI;
 import de.cau.cs.kieler.viewmanagement.AEffect;
 
 /**
- * @author nbe 
- * The ZoomEffect performs a Zoom-To-Fit action on the current editor.
+ * @author nbe The ZoomEffect performs a Zoom-To-Fit action on the current editor.
  */
 public class ZoomEffect extends AEffect {
 
     ZoomManager zoomManager;
 
     public void execute() {
+        // get active editor
         IEditorPart editor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage()
                 .getActiveEditor();
         if (editor instanceof DiagramEditor) {
+            // get its zoom manager
             DiagramEditPart diagramEdit = ((DiagramEditor) editor).getDiagramEditPart();
             zoomManager = ((RenderedDiagramRootEditPart) diagramEdit.getRoot()).getZoomManager();
         }
-
+        // set zoom to zoom-to-fit value
         zoomManager.setZoomAsText(ZoomManager.FIT_ALL);
 
     }

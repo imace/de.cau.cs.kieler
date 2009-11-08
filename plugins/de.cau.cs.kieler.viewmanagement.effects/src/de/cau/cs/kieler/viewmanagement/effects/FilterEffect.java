@@ -29,7 +29,7 @@ public class FilterEffect extends AEffect {
     IFigure undoFigure;
 
     /**
-     * The filter effect hides the affected object
+     * The filter effect hides the affected object.
      */
     public FilterEffect() {
 

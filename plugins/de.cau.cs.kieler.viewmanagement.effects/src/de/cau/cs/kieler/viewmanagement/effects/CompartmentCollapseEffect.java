@@ -32,21 +32,22 @@ public class CompartmentCollapseEffect extends AEffect {
     ShapeEditPart objectToCollapse;
 
     /**
-     * Default constructor of the collapse effect. Will take the target and determine whether it or any of tis children
-     * are collapseable (of type ResizeableCompartmentFigure) and then collapse them. 
+     * Default constructor of the collapse effect. Will take the target and determine whether it or
+     * any of tis children are collapseable (of type ResizeableCompartmentFigure) and then collapse
+     * them.
      */
     public CompartmentCollapseEffect() {
 
     }
 
-   
     public void execute() {
         IFigure selectedFigure = objectToCollapse.getFigure();
 
         List<IFigure> resizableFigures = new ArrayList<IFigure>();
+        // determine which of the objects is actually resizeable
         getResizeableCompartments(selectedFigure, resizableFigures);
         List<IFigure> collapsedComps = new ArrayList<IFigure>();
-       
+        // collapse the objects
         for (int i = 0; i < resizableFigures.size(); i++) {
             ResizableCompartmentFigure tempfig = (ResizableCompartmentFigure) resizableFigures
                     .get(i);
@@ -57,9 +58,13 @@ public class CompartmentCollapseEffect extends AEffect {
     }
 
     /**
-     * Method to search for resizeable compartments. Examines not only the given figure, but also its children.
-     * @param f the initial figure to be examined
-     * @param resizableFigures list of resizeable compartments
+     * Method to search recursively for resizeable compartments. Examines not only the given figure, but also
+     * its children.
+     * 
+     * @param f
+     *            the initial figure to be examined
+     * @param resizableFigures
+     *            list of resizeable compartments
      */
     public void getResizeableCompartments(IFigure f, List<IFigure> resizableFigures) {
 
@@ -74,16 +79,14 @@ public class CompartmentCollapseEffect extends AEffect {
         return;
     }
 
-
-
     /**
      * Sets the target of the effect
-     * @param target the target
+     * 
+     * @param target
+     *            the target
      */
     public void setTarget(EditPart target) {
         this.objectToCollapse = (ShapeEditPart) target;
     }
-
-
 
 }
