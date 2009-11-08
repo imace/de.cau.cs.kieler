@@ -120,11 +120,16 @@ public abstract class ACombination implements ITriggerListener {
     /**
      * Reset hashed edit parts. This is when reusing combination for e.g., a different editor.
      * (added by cmot)
+     * 
+     * This method is needed if you want to use the visualization effect for different
+     * editors (after another). Reset of EditPartCache is necessary. (cmot, 09.11.09)
+     * 
      */
-    // protected void resetHashedEditParts() {
-    // if (this.cachedEditParts != null)
-    // this.cachedEditParts.clear();
-    // }
+     protected void resetHashedEditParts() {
+         if (this.cachedEditParts != null)
+             this.cachedEditParts.clear();
+     }
+     
     /**
      * This method is called whenever a trigger the combination is listening to has a new event
      */
