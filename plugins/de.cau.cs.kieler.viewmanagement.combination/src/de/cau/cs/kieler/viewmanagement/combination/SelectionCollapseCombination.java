@@ -31,13 +31,13 @@ import de.cau.cs.kieler.viewmanagement.*;
  */
 public class SelectionCollapseCombination extends ACombination {
 
-    CompartmentCollapseEffect effect;
-    SelectionTrigger st;
+    private CompartmentCollapseEffect effect;
+    private SelectionTrigger st;
 
-    ShapeEditPart objectToCollapse;
+    private ShapeEditPart objectToCollapse;
 
     // return triggers of interest, SelectionTrigger in this case
-    public List<ATrigger> getTriggers() {
+    public final List<ATrigger> getTriggers() {
         this.st = (SelectionTrigger) RunLogic.getTrigger("SelectionTrigger");
         List<ATrigger> myTriggers = new ArrayList<ATrigger>();
         myTriggers.add(st);
@@ -50,15 +50,16 @@ public class SelectionCollapseCombination extends ACombination {
      * @see de.cau.cs.kieler.viewmanagement.ACombination#evaluate()
      */
 
-    public boolean evaluate(TriggerEventObject triggerEvent) {
+    public final boolean evaluate(final TriggerEventObject triggerEvent) {
         EditPart affectedObject = getEditPart(triggerEvent.getAffectedObject());
         if (affectedObject instanceof ShapeEditPart) {
             this.objectToCollapse = (ShapeEditPart) affectedObject;
 
             return true;
 
-        } else
+        } else {
             return false;
+        }
     }
 
     /*
@@ -67,9 +68,10 @@ public class SelectionCollapseCombination extends ACombination {
      * @see de.cau.cs.kieler.viewmanagement.ACombination#execute()
      */
 
-    public void execute() {
-        if (effect == null)
+    public final void execute() {
+        if (effect == null) {
             effect = new CompartmentCollapseEffect();
+        }
         effect.setTarget(this.objectToCollapse);
         effect.execute();
     }

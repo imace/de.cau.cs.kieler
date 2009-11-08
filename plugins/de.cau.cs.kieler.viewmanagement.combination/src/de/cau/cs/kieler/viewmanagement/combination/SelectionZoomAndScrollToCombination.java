@@ -25,20 +25,22 @@ import de.cau.cs.kieler.viewmanagement.triggers.SelectionTrigger;
 import de.cau.cs.kieler.viewmanagement.*;
 
 /**
- * @author nbe Combination that performs a focus on the affected object by scrolling to its location
- *         and zooming in on it. Listens to SelectionTrigger so objects selected in the editor will
- *         be focused.
+ * @author nbe
+ * 
+ *         Combination that performs a focus on the affected object by scrolling to its location and
+ *         zooming in on it. Listens to SelectionTrigger so objects selected in the editor will be
+ *         focused.
  */
 public class SelectionZoomAndScrollToCombination extends ACombination {
 
-    ZoomAndScrollToEffect effect;
-    SelectionTrigger st;
+    private ZoomAndScrollToEffect effect;
+    private SelectionTrigger st;
 
-    ShapeEditPart objectToHighlight;
-    Object objectParameters;
+    private ShapeEditPart objectToHighlight;
+    private Object objectParameters;
 
     @Override
-    public List<ATrigger> getTriggers() {
+    public final List<ATrigger> getTriggers() {
         this.st = (SelectionTrigger) RunLogic.getTrigger("SelectionTrigger");
         List<ATrigger> myTriggers = new ArrayList<ATrigger>();
         myTriggers.add(st);
@@ -51,7 +53,7 @@ public class SelectionZoomAndScrollToCombination extends ACombination {
      * @see de.cau.cs.kieler.viewmanagement.ACombination#evaluate()
      */
     @Override
-    public boolean evaluate(TriggerEventObject triggerEvent) {
+    public final boolean evaluate(final TriggerEventObject triggerEvent) {
         // parent may be set if wanted. Will else be RootEP
         if (triggerEvent.getTriggerState()) {
             EditPart affectedObject = getEditPart(triggerEvent.getAffectedObject());
@@ -59,13 +61,12 @@ public class SelectionZoomAndScrollToCombination extends ACombination {
                 this.objectToHighlight = (ShapeEditPart) affectedObject;
                 this.objectParameters = triggerEvent.getParameters();
 
-                return true;
-            }
-
-            else
+                return true;} else {
                 return false;
-        } else
+            }
+        } else {
             return false;
+        }
     }
 
     /*
@@ -74,9 +75,10 @@ public class SelectionZoomAndScrollToCombination extends ACombination {
      * @see de.cau.cs.kieler.viewmanagement.ACombination#execute()
      */
     @Override
-    public void execute() {
-        if (effect == null)
+    public final void execute() {
+        if (effect == null) {
             effect = new ZoomAndScrollToEffect();
+        }
 
         effect.setTarget(this.objectToHighlight);
         effect.setParameters(this.objectParameters);

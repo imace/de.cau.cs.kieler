@@ -28,7 +28,7 @@ import org.eclipse.swt.SWT;
  * ongoing editing action. Therefore it needs access to the DataTableViewer.
  * 
  * @author Christian Motika - cmot AT informatik.uni-kiel.de
- * @modified nbe
+ * @author modified nbe
  */
 public class TableDataEditing extends EditingSupport {
 

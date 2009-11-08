@@ -30,14 +30,14 @@ import de.cau.cs.kieler.viewmanagement.AEffect;
  */
 public class ShapeHighlightEffect extends AEffect {
 
-    EditPart objectToHighlight;
+    private EditPart objectToHighlight;
 
-    Color color = ColorConstants.red;
-    Color backColor = ColorConstants.white;
+    private Color color = ColorConstants.red;
+    private Color backColor = ColorConstants.white;
 
-    Boolean originalOpaque;
-    Color originalColorForeground;
-    Color originalColorBackground;
+    private Boolean originalOpaque;
+    private Color originalColorForeground;
+    private Color originalColorBackground;
 
     /**
      * default constructor, nothing done here
@@ -46,7 +46,7 @@ public class ShapeHighlightEffect extends AEffect {
 
     }
 
-    public void execute() {
+    public final void execute() {
 
         objectToHighlight.getRoot();
         IFigure figure = ((GraphicalEditPart) objectToHighlight).getFigure();
@@ -54,12 +54,15 @@ public class ShapeHighlightEffect extends AEffect {
             figure = (IFigure) figure.getChildren().get(0);
         }
         // save current values for later undo
-        if (this.originalColorForeground == null)
+        if (this.originalColorForeground == null) {
             this.originalColorForeground = figure.getForegroundColor();
-        if (this.originalColorBackground == null)
+        }
+        if (this.originalColorBackground == null) {
             this.originalColorBackground = figure.getBackgroundColor();
-        if (this.originalOpaque == null)
+        }
+        if (this.originalOpaque == null) {
             this.originalOpaque = figure.isOpaque();
+        }
         // set new colors
         figure.setForegroundColor(this.color);
         figure.setBackgroundColor(this.backColor);
@@ -76,7 +79,7 @@ public class ShapeHighlightEffect extends AEffect {
     /**
      * Undo the effect. Here the highlighting will be removed.
      */
-    public void undo() {
+    public final void undo() {
         // undo the highlight colors
         objectToHighlight.getRoot();
         IFigure figure = ((GraphicalEditPart) objectToHighlight).getFigure();
@@ -100,11 +103,11 @@ public class ShapeHighlightEffect extends AEffect {
      * @param target
      *            the object to be highlighted
      */
-    public void setTarget(EditPart target) {
+    public final void setTarget(EditPart target) {
         this.objectToHighlight = target;
     }
 
-    public void setParameters(Object objectParameters) {
+    public void setParameters(final Object objectParameters) {
 
     }
 
@@ -117,7 +120,7 @@ public class ShapeHighlightEffect extends AEffect {
      *            color for the background
      * 
      */
-    public void setColors(Color foregroundColor, Color backgroundColor) {
+    public final void setColors(final Color foregroundColor, final Color backgroundColor) {
         this.color = foregroundColor;
         this.backColor = backgroundColor;
     }

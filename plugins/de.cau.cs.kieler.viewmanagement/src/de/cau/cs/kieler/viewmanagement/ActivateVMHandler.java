@@ -43,8 +43,9 @@ public class ActivateVMHandler extends AbstractHandler implements IHandler {
         boolean checked = false;
         if (trigger instanceof Event) {
             Object widget = ((Event) trigger).widget;
-            if (widget instanceof ToolItem)
+            if (widget instanceof ToolItem) {
                 checked = ((ToolItem) widget).getSelection();
+            }
 
         }
         // If the button is pressed, initialize the Viewmanagement.

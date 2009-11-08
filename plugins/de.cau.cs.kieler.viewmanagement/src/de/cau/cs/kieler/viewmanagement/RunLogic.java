@@ -41,8 +41,9 @@ public final class RunLogic {
      */
     public static synchronized RunLogic getInstance() {
         // if there is no instance of the RunLogic, create one
-        if (runlogic == null)
+        if (runlogic == null) {
             runlogic = new RunLogic();
+        }
 
         return runlogic;
     }
@@ -98,8 +99,9 @@ public final class RunLogic {
         for (final ACombination oneCombination : combos) {
             TableDataList.getInstance().remove(oneCombination.getClass().getCanonicalName());
             // finalize only combos that were active
-            if (oneCombination.getActive())
+            if (oneCombination.getActive()) {
                 oneCombination.finalize();
+            }
             // update the VM Control table
             TableDataList.getInstance().updateViewAsync();
         }

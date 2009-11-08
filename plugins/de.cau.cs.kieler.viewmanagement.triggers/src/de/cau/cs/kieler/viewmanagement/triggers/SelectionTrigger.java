@@ -26,15 +26,16 @@ import de.cau.cs.kieler.viewmanagement.ATrigger;
 import de.cau.cs.kieler.viewmanagement.TriggerEventObject;
 
 /**
- * @author nbe The SelectionTrigger will listen to the selection service provided by Eclipse itself
- *         and send the currently selected object to its listeners. Will fire upon changes in
- *         selection.
+ * @author nbe
+ * 
+ *         The SelectionTrigger will listen to the selection service provided by Eclipse itself and
+ *         send the currently selected object to its listeners. Will fire upon changes in selection.
  */
 
 public class SelectionTrigger extends ATrigger implements ISelectionListener {
 
-    TriggerEventObject selectionEvent;
-    Object currentSelection;
+    private TriggerEventObject selectionEvent;
+    private Object currentSelection;
 
     /**
      * Sends Object(s) selected in workbench to listeners
@@ -55,7 +56,7 @@ public class SelectionTrigger extends ATrigger implements ISelectionListener {
      * @seeorg.eclipse.ui.ISelectionListener#selectionChanged(org.eclipse.ui. IWorkbenchPart,
      * org.eclipse.jface.viewers.ISelection)
      */
-    public void selectionChanged(IWorkbenchPart part, ISelection selection) {
+    public final void selectionChanged(final IWorkbenchPart part, ISelection selection) {
         // check whether this is a proper selection that can be used for View Management
         if ((selection instanceof IStructuredSelection) && !(selection instanceof TreeSelection)) {
             // create new TriggerEventObject
@@ -101,7 +102,7 @@ public class SelectionTrigger extends ATrigger implements ISelectionListener {
         }
     }
 
-    public void finalize() {
+    public final void finalize() {
         // remove as listener from selection service
         PlatformUI.getWorkbench().getActiveWorkbenchWindow().getSelectionService()
                 .removeSelectionListener(this);

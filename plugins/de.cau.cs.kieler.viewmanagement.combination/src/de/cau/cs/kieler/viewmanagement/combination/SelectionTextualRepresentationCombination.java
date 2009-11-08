@@ -25,20 +25,22 @@ import de.cau.cs.kieler.viewmanagement.triggers.SelectionTrigger;
 import de.cau.cs.kieler.viewmanagement.*;
 
 /**
- * @author nbe Combination that displays text next to the affected object. The text is delivered
- *         through the parameters. Listens to the SelectionTrigger, so objects selected in the
- *         editor will get a text object.
+ * @author nbe
+ * 
+ *         Combination that displays text next to the affected object. The text is delivered through
+ *         the parameters. Listens to the SelectionTrigger, so objects selected in the editor will
+ *         get a text object.
  */
 public class SelectionTextualRepresentationCombination extends ACombination {
 
-    TextualRepresentationEffect effect;
-    SelectionTrigger st;
+    private TextualRepresentationEffect effect;
+    private SelectionTrigger st;
 
-    ShapeEditPart objectToHighlight;
-    Object objectParameters;
+    private ShapeEditPart objectToHighlight;
+    private Object objectParameters;
 
     @Override
-    public List<ATrigger> getTriggers() {
+    public final List<ATrigger> getTriggers() {
         this.st = (SelectionTrigger) RunLogic.getTrigger("SelectionTrigger");
         List<ATrigger> myTriggers = new ArrayList<ATrigger>();
         myTriggers.add(st);
@@ -51,15 +53,16 @@ public class SelectionTextualRepresentationCombination extends ACombination {
      * @see de.cau.cs.kieler.viewmanagement.ACombination#evaluate()
      */
     @Override
-    public boolean evaluate(TriggerEventObject triggerEvent) {
+    public final boolean evaluate(final TriggerEventObject triggerEvent) {
         EditPart affectedObject = getEditPart(triggerEvent.getAffectedObject());
         if (affectedObject instanceof ShapeEditPart) {
             this.objectToHighlight = (ShapeEditPart) affectedObject;
             this.objectParameters = triggerEvent.getParameters();
 
             return true;
-        } else
+        } else {
             return false;
+        }
     }
 
     /*
@@ -68,9 +71,10 @@ public class SelectionTextualRepresentationCombination extends ACombination {
      * @see de.cau.cs.kieler.viewmanagement.ACombination#execute()
      */
     @Override
-    public void execute() {
-        if (effect == null)
+    public final void execute() {
+        if (effect == null) {
             effect = new TextualRepresentationEffect();
+        }
         effect.setTarget(this.objectToHighlight);
         effect.setParameters(this.objectParameters);
         // effect.setActive(this.triggerActive);
@@ -79,7 +83,7 @@ public class SelectionTextualRepresentationCombination extends ACombination {
     }
 
     @Override
-    public void undoLastEffect() {
+    public final void undoLastEffect() {
         effect.undo();
 
     }

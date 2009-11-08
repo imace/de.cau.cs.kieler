@@ -37,7 +37,7 @@ public abstract class ATrigger {
      * @param triggerlistener
      *            the listener to be added
      */
-    public void addTriggerListener(final ITriggerListener triggerlistener) {
+    public final void addTriggerListener(final ITriggerListener triggerlistener) {
         triggerListener.add(ITriggerListener.class, triggerlistener);
     }
 
@@ -47,12 +47,12 @@ public abstract class ATrigger {
      * @param triggerlistener
      *            the listener to be removed
      */
-    public void removeTriggerListener(final ITriggerListener triggerlistener) {
+    public final void removeTriggerListener(final ITriggerListener triggerlistener) {
         triggerListener.remove(ITriggerListener.class, triggerlistener);
     }
 
     // notifies all listeners on the listener list with the triggerEvent
-    protected synchronized void notifyTrigger(TriggerEventObject triggerEvent) {
+    protected final synchronized void notifyTrigger(final TriggerEventObject triggerEvent) {
 
         for (ITriggerListener l : triggerListener.getListeners(ITriggerListener.class))
             l.notifyTrigger(triggerEvent);

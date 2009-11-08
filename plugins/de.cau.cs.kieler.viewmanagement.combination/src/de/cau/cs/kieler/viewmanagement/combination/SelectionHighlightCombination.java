@@ -27,23 +27,24 @@ import de.cau.cs.kieler.viewmanagement.triggers.SelectionTrigger;
 import de.cau.cs.kieler.viewmanagement.*;
 
 /**
- * @author nbe Combination that highlights the affected object by drawing a rectangle around it.
- *         Listens to the SelectionTrigger, so the selected object in the editor will get
- *         highlighted.
+ * @author nbe
+ * 
+ *         Combination that highlights the affected object by drawing a rectangle around it. Listens
+ *         to the SelectionTrigger, so the selected object in the editor will get highlighted.
  */
 public class SelectionHighlightCombination extends ACombination {
 
-    HighlightEffect effect;
-    SelectionTrigger st;
+    private HighlightEffect effect;
+    private SelectionTrigger st;
 
-    ShapeEditPart objectToHighlight;
-    Object objectParameters;
+    private ShapeEditPart objectToHighlight;
+    private Object objectParameters;
 
-    Color lineColor = ColorConstants.red;
-    int linewidth = 5;
+    private Color lineColor = ColorConstants.red;
+    private int linewidth = 5;
 
     @Override
-    public List<ATrigger> getTriggers() {
+    public final List<ATrigger> getTriggers() {
         this.st = (SelectionTrigger) RunLogic.getTrigger("SelectionTrigger");
         List<ATrigger> myTriggers = new ArrayList<ATrigger>();
         myTriggers.add(st);
@@ -56,7 +57,7 @@ public class SelectionHighlightCombination extends ACombination {
      * @see de.cau.cs.kieler.viewmanagement.ACombination#evaluate()
      */
     @Override
-    public boolean evaluate(TriggerEventObject triggerEvent) {
+    public final boolean evaluate(final TriggerEventObject triggerEvent) {
 
         EditPart affectedObject = getEditPart(triggerEvent.getAffectedObject());
         if (affectedObject instanceof ShapeEditPart) {
@@ -74,9 +75,10 @@ public class SelectionHighlightCombination extends ACombination {
      * @see de.cau.cs.kieler.viewmanagement.ACombination#execute()
      */
     @Override
-    public void execute() {
-        if (effect == null)
+    public final void execute() {
+        if (effect == null) {
             effect = new HighlightEffect();
+        }
 
         effect.setTarget(this.objectToHighlight);
         effect.setParameters(this.objectParameters);
@@ -85,7 +87,7 @@ public class SelectionHighlightCombination extends ACombination {
 
     }
 
-    public void undoLastEffect() {
+    public final void undoLastEffect() {
         if (effect != null)
             effect.undo();
 

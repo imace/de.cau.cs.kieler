@@ -19,7 +19,7 @@ package de.cau.cs.kieler.viewmanagement;
  * table. A combination can be active or not and has a String that represents its name.
  * 
  * @author Christian Motika - cmot AT informatik.uni-kiel.de
- * @modified nbe
+ * @author  modified nbe
  */
 public class TableData {
 

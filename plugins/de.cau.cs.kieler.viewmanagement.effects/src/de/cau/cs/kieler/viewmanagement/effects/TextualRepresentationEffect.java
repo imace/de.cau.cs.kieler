@@ -35,9 +35,9 @@ import de.cau.cs.kieler.viewmanagement.AEffect;
 
 public class TextualRepresentationEffect extends AEffect {
 
-    ShapeEditPart objectToText;
-    Object objectParameters;
-    Label textualFigure;
+    private ShapeEditPart objectToText;
+    private Object objectParameters;
+    private Label textualFigure;
 
     /**
      * default constructor, the effect is initalized here
@@ -52,7 +52,7 @@ public class TextualRepresentationEffect extends AEffect {
 
     }
 
-    public void execute() {
+    public final void execute() {
 
         RootEditPart rootEP = objectToText.getRoot();
         // get layer to draw effect on
@@ -100,7 +100,7 @@ public class TextualRepresentationEffect extends AEffect {
     /**
      * Undo the effect. Here the effect will be removed.
      */
-    public void undo() {
+    public final void undo() {
         this.textualFigure.getParent().remove(this.textualFigure);
     }
 
@@ -110,11 +110,11 @@ public class TextualRepresentationEffect extends AEffect {
      * @param target
      *            the target
      */
-    public void setTarget(EditPart target) {
+    public final void setTarget(EditPart target) {
         this.objectToText = (ShapeEditPart) target;
     }
 
-    public void setParameters(Object parameters) {
+    public final void setParameters(final Object parameters) {
         objectParameters = parameters;
 
     }

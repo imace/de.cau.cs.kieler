@@ -31,7 +31,7 @@ import org.eclipse.ui.PlatformUI;
  */
 public abstract class ACombination implements ITriggerListener {
 
-    List<ATrigger> triggersToEvaluate;
+    private List<ATrigger> triggersToEvaluate;
     private boolean comboActive = false;
     private HashMap<String, EditPart> cachedEditParts;
     private HashMap<EObject, EditPart> cachedEditParts2;
@@ -71,7 +71,7 @@ public abstract class ACombination implements ITriggerListener {
     /**
      * @return Status of the combination, active or not
      */
-    public boolean getActive() {
+    public final boolean getActive() {
         return comboActive;
     }
 
@@ -81,14 +81,14 @@ public abstract class ACombination implements ITriggerListener {
      * @param active
      *            new status
      */
-    public void setActive(final boolean active) {
+    public final void setActive(final boolean active) {
         this.comboActive = active;
     }
 
     /**
      * Initializes the combination and registers it as listener to the triggers of interest.
      */
-    public void initialize() {
+    public final void initialize() {
         // get triggers of interest
         triggersToEvaluate = getTriggers();
         // remove as listener from those triggers
@@ -103,7 +103,7 @@ public abstract class ACombination implements ITriggerListener {
      * Finalizes the combination, removes it as listener from its triggers.
      * 
      */
-    public void finalize() {
+    public final void finalize() {
         // this will remove remaining effects, if needed
         undoLastEffect();
         // get triggers of interest
@@ -128,11 +128,12 @@ public abstract class ACombination implements ITriggerListener {
     /**
      * This method is called whenever a trigger the combination is listening to has a new event
      */
-    public void notifyTrigger(TriggerEventObject triggerEvent) {
+    public final void notifyTrigger(TriggerEventObject triggerEvent) {
 
         // call evaluate in concrete combo
-        if (this.evaluate(triggerEvent))
+        if (this.evaluate(triggerEvent)) {
             this.execute();
+        }
 
     }
 
@@ -141,7 +142,7 @@ public abstract class ACombination implements ITriggerListener {
      * 
      * @return rootEP, result of the search
      */
-    public EditPart getRootEPAsParent() {
+    public final EditPart getRootEPAsParent() {
         EditPart rootEP = null;
         // get active editor
         final IEditorPart editor = PlatformUI.getWorkbench().getActiveWorkbenchWindow()
@@ -170,7 +171,7 @@ public abstract class ACombination implements ITriggerListener {
      * @return the result of the search, in case of success the corresponding EditPart, otherwise
      *         null
      */
-    public EditPart translateToEditPart(final String elementURIFragment, EditPart parent) {
+    public final EditPart translateToEditPart(final String elementURIFragment, EditPart parent) {
         if (parent == null)
             parent = getRootEPAsParent();
 
@@ -179,8 +180,9 @@ public abstract class ACombination implements ITriggerListener {
             cachedEditParts = new HashMap<String, EditPart>();
         } else {
             // try to get from hashmap first
-            if (cachedEditParts.containsKey(elementURIFragment))
+            if (cachedEditParts.containsKey(elementURIFragment)) {
                 return cachedEditParts.get(elementURIFragment);
+            }
         }
 
         List<?> children = parent.getChildren();
@@ -221,14 +223,15 @@ public abstract class ACombination implements ITriggerListener {
      * @return the corresponding EditPart
      * 
      */
-    public EditPart getEditPart(EObject eObject) {
+    public final EditPart getEditPart(EObject eObject) {
         if (cachedEditParts2 == null) {
             // if hashmap is not initialized, create it
             cachedEditParts2 = new HashMap<EObject, EditPart>();
         } else {
             // try to get from hashmap first
-            if (cachedEditParts2.containsKey(eObject))
+            if (cachedEditParts2.containsKey(eObject)) {
                 return cachedEditParts2.get(eObject);
+            }
         }
 
         try {
@@ -236,8 +239,9 @@ public abstract class ACombination implements ITriggerListener {
                     .getActiveWorkbenchWindow().getActivePage().getActiveEditor();
             DiagramEditPart dep = editor.getDiagramEditPart();
             EditPart editPart = dep.findEditPart(dep, eObject);
-            if (editPart == null)
+            if (editPart == null) {
                 dep.getViewer().getEditPartRegistry().get(eObject);
+            }
             // have to search registry manually
             if (editPart == null) {
                 @SuppressWarnings("unchecked")

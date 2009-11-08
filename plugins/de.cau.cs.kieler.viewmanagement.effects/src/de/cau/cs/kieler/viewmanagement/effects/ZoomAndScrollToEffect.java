@@ -33,10 +33,10 @@ import de.cau.cs.kieler.viewmanagement.AEffect;
  */
 public class ZoomAndScrollToEffect extends AEffect {
 
-    ShapeEditPart objectToHighlight;
+    private ShapeEditPart objectToHighlight;
     // offset is used to move the object somewhat away from the border of the editor,
     // the value is arbitrary and should be set in a better way
-    int offset = 25;
+    private int offset = 25;
 
     /**
      * default constructor, nothing to be done here
@@ -45,7 +45,7 @@ public class ZoomAndScrollToEffect extends AEffect {
 
     }
 
-    public void execute() {
+    public final void execute() {
 
         // determine bounds of the object that should be focused on
         RootEditPart rootEP = objectToHighlight.getRoot();
@@ -74,10 +74,11 @@ public class ZoomAndScrollToEffect extends AEffect {
         double zoomFactor2 = maxWidth / bounds.width;
 
         double zoomFactor;
-        if (zoomFactor1 < zoomFactor2)
+        if (zoomFactor1 < zoomFactor2) {
             zoomFactor = zoomFactor1;
-        else
+        } else {
             zoomFactor = zoomFactor2;
+        }
         // set zoom factor
         selectedFigure.translateToAbsolute(bounds);
         double newZoomValue = zoomFactor;
@@ -97,7 +98,7 @@ public class ZoomAndScrollToEffect extends AEffect {
      * @param target
      *            the target
      */
-    public void setTarget(EditPart target) {
+    public final void setTarget(EditPart target) {
         this.objectToHighlight = (ShapeEditPart) target;
     }
 

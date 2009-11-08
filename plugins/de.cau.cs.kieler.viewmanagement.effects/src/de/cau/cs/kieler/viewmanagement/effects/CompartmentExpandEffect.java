@@ -33,7 +33,7 @@ import de.cau.cs.kieler.viewmanagement.AEffect;
 
 public class CompartmentExpandEffect extends AEffect {
 
-    ShapeEditPart objectToExpand;
+    private ShapeEditPart objectToExpand;
     //List<IFigure> resizableFigures = new ArrayList<IFigure>();
    
     
@@ -48,7 +48,7 @@ public class CompartmentExpandEffect extends AEffect {
     }
     
     @Override
-    public void execute() {
+    public final void execute() {
     	IFigure selectedFigure =  objectToExpand.getFigure();
     	List<IFigure> resizableFigures = new ArrayList<IFigure>();
     	getResizeableCompartments(selectedFigure, resizableFigures);
@@ -67,7 +67,7 @@ public class CompartmentExpandEffect extends AEffect {
      * @param f the initial figure to be examined
      * @param resizableFigures list of resizeable compartments
      */
-    public void getResizeableCompartments(final IFigure f, final List<IFigure> resizableFigures){
+    public final void getResizeableCompartments(final IFigure f, final List<IFigure> resizableFigures){
     	
     	
     	if (f instanceof ResizableCompartmentFigure){
@@ -89,7 +89,7 @@ public class CompartmentExpandEffect extends AEffect {
      * Sets the target of the effect
      * @param target the target
      */
-    public void setTarget(EditPart target) {
+    public final void setTarget(EditPart target) {
         this.objectToExpand = (ShapeEditPart) target;
     }
 

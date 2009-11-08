@@ -25,19 +25,21 @@ import de.cau.cs.kieler.viewmanagement.triggers.SelectionTrigger;
 import de.cau.cs.kieler.viewmanagement.*;
 
 /**
- * @author nbe Combination that expands the affected object and all its children (if expanable).
- *         Listens to SelectionTrigger, the affected object will be the one that gets selected in
- *         the editor.
+ * @author nbe
+ * 
+ *         Combination that expands the affected object and all its children (if expanable). Listens
+ *         to SelectionTrigger, the affected object will be the one that gets selected in the
+ *         editor.
  */
 public class SelectionExpandCombination extends ACombination {
 
-    CompartmentExpandEffect effect;
-    SelectionTrigger st;
+    private CompartmentExpandEffect effect;
+    private SelectionTrigger st;
 
-    ShapeEditPart objectToHighlight;
+    private ShapeEditPart objectToHighlight;
 
     @Override
-    public List<ATrigger> getTriggers() {
+    public final List<ATrigger> getTriggers() {
         this.st = (SelectionTrigger) RunLogic.getTrigger("SelectionTrigger");
         List<ATrigger> myTriggers = new ArrayList<ATrigger>();
         myTriggers.add(st);
@@ -50,13 +52,14 @@ public class SelectionExpandCombination extends ACombination {
      * @see de.cau.cs.kieler.viewmanagement.ACombination#evaluate()
      */
     @Override
-    public boolean evaluate(TriggerEventObject triggerEvent) {
+    public boolean evaluate(final TriggerEventObject triggerEvent) {
         EditPart affectedObject = getEditPart(triggerEvent.getAffectedObject());
         if (affectedObject instanceof ShapeEditPart) {
             this.objectToHighlight = (ShapeEditPart) affectedObject;
             return true;
-        } else
+        } else {
             return false;
+        }
     }
 
     /*
@@ -65,9 +68,10 @@ public class SelectionExpandCombination extends ACombination {
      * @see de.cau.cs.kieler.viewmanagement.ACombination#execute()
      */
     @Override
-    public void execute() {
-        if (effect == null)
+    public final void execute() {
+        if (effect == null) {
             effect = new CompartmentExpandEffect();
+        }
         effect.setTarget(this.objectToHighlight);
         effect.execute();
     }

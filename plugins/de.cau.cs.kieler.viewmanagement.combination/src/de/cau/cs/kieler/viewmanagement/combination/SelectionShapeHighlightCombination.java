@@ -26,21 +26,23 @@ import de.cau.cs.kieler.viewmanagement.triggers.SelectionTrigger;
 import de.cau.cs.kieler.viewmanagement.*;
 
 /**
- * @author nbe Combination that highlights the affected object by drawing its shape in lineColor (by
+ * @author nbe
+ * 
+ *         Combination that highlights the affected object by drawing its shape in lineColor (by
  *         default red). Listens to SelectionTrigger so the object selected in the editor will get
  *         highlighted.
  */
 public class SelectionShapeHighlightCombination extends ACombination {
 
-    ShapeHighlightEffect effect;
-    SelectionTrigger st;
+    private ShapeHighlightEffect effect;
+    private SelectionTrigger st;
 
-    EditPart objectToHighlight;
-    Object objectParameters;
-    boolean triggerActive;
-    Color lineColor = ColorConstants.red;
+    private EditPart objectToHighlight;
+    private Object objectParameters;
+    private boolean triggerActive;
+    private Color lineColor = ColorConstants.red;
 
-    public List<ATrigger> getTriggers() {
+    public final List<ATrigger> getTriggers() {
         this.st = (SelectionTrigger) RunLogic.getTrigger("SelectionTrigger");
         List<ATrigger> myTriggers = new ArrayList<ATrigger>();
         myTriggers.add(st);
@@ -53,7 +55,7 @@ public class SelectionShapeHighlightCombination extends ACombination {
      * @see de.cau.cs.kieler.viewmanagement.ACombination#evaluate()
      */
     @Override
-    public boolean evaluate(TriggerEventObject triggerEvent) {
+    public final boolean evaluate(final TriggerEventObject triggerEvent) {
         // parent may be set if wanted. Will else be RootEP
 
         EditPart affectedObject = getEditPart(triggerEvent.getAffectedObject());
@@ -71,12 +73,13 @@ public class SelectionShapeHighlightCombination extends ACombination {
      * @see de.cau.cs.kieler.viewmanagement.ACombination#execute()
      */
     @Override
-    public void execute() {
-        if (this.triggerActive == false)
+    public final void execute() {
+        if (this.triggerActive == false) {
             effect.undo();
-        else {
-            if (effect == null)
+        } else {
+            if (effect == null) {
                 effect = new ShapeHighlightEffect();
+            }
 
             effect.setTarget(this.objectToHighlight);
             effect.setParameters(this.objectParameters);

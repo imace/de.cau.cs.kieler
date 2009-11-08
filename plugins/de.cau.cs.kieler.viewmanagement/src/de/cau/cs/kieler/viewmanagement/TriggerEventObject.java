@@ -1,3 +1,17 @@
+/*
+ * KIELER - Kiel Integrated Environment for Layout Eclipse RichClient
+ *
+ * http://www.informatik.uni-kiel.de/rtsys/kieler/
+ * 
+ * Copyright 2009 by
+ * + Christian-Albrechts-University of Kiel
+ *   + Department of Computer Science
+ *     + Real-Time and Embedded Systems Group
+ * 
+ * This code is provided under the terms of the Eclipse Public License (EPL).
+ * See the file epl-v10.html for the license text.
+ * 
+ *****************************************************************************/
 package de.cau.cs.kieler.viewmanagement;
 
 import org.eclipse.emf.ecore.EObject;
@@ -26,7 +40,7 @@ public class TriggerEventObject {
      * 
      * @return the state
      */
-    public boolean getTriggerState() {
+    public final boolean getTriggerState() {
         return triggerActive;
     }
 
@@ -36,7 +50,7 @@ public class TriggerEventObject {
      * @param newState
      *            the new state
      */
-    public void setTriggerActive(final boolean newState) {
+    public final void setTriggerActive(final boolean newState) {
         triggerActive = newState;
 
     }
@@ -47,7 +61,7 @@ public class TriggerEventObject {
      * 
      * @return the affectedObject
      */
-    public EObject getAffectedObject() {
+    public final EObject getAffectedObject() {
         return affectedObject;
     }
 
@@ -57,7 +71,7 @@ public class TriggerEventObject {
      * @param eObject
      *            the new affectedObject
      */
-    public void setAffectedObject(final EObject eObject) {
+    public final void setAffectedObject(final EObject eObject) {
         affectedObject = eObject;
 
     }
@@ -69,7 +83,7 @@ public class TriggerEventObject {
      * 
      * @return the parameters
      */
-    public Object getParameters() {
+    public final Object getParameters() {
         return parameters;
 
     }
@@ -80,7 +94,7 @@ public class TriggerEventObject {
      * @param newParameters
      *            the new parameters
      */
-    public void setParameters(final Object newParameters) {
+    public final void setParameters(final Object newParameters) {
         parameters = newParameters;
     }
 

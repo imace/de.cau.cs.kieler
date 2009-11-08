@@ -24,27 +24,27 @@ import org.eclipse.jface.viewers.Viewer;
  */
 public class TableDataContentProvider implements ITreeContentProvider {
 
-    public Object[] getElements(Object inputElement) {
+    public final Object[] getElements(final Object inputElement) {
         return ((TableDataList) inputElement).getArray();
     }
 
     public void dispose() {
     }
 
-    public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
+    public final void inputChanged(final Viewer viewer, final Object oldInput, final Object newInput) {
     }
 
-    public Object[] getChildren(Object parentElement) {
+    public final Object[] getChildren(final Object parentElement) {
 
         return null;
     }
 
-    public Object getParent(Object element) {
+    public final Object getParent(final Object element) {
 
         return null;
     }
 
-    public boolean hasChildren(Object element) {
+    public final boolean hasChildren(final Object element) {
 
         return false;
     }

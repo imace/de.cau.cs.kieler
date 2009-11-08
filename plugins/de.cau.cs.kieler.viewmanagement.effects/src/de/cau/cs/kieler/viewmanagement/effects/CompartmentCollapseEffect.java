@@ -29,7 +29,7 @@ import de.cau.cs.kieler.viewmanagement.AEffect;
 
 public class CompartmentCollapseEffect extends AEffect {
 
-    ShapeEditPart objectToCollapse;
+    private ShapeEditPart objectToCollapse;
 
     /**
      * Default constructor of the collapse effect. Will take the target and determine whether it or
@@ -40,7 +40,7 @@ public class CompartmentCollapseEffect extends AEffect {
 
     }
 
-    public void execute() {
+    public final void execute() {
         IFigure selectedFigure = objectToCollapse.getFigure();
 
         List<IFigure> resizableFigures = new ArrayList<IFigure>();
@@ -66,15 +66,16 @@ public class CompartmentCollapseEffect extends AEffect {
      * @param resizableFigures
      *            list of resizeable compartments
      */
-    public void getResizeableCompartments(IFigure f, List<IFigure> resizableFigures) {
+    public final void getResizeableCompartments(final IFigure f, final List<IFigure> resizableFigures) {
 
         if (f instanceof ResizableCompartmentFigure) {
             resizableFigures.add(f);
 
         }
 
-        for (int i = 0; i < f.getChildren().size(); i++)
+        for (int i = 0; i < f.getChildren().size(); i++) {
             getResizeableCompartments((IFigure) f.getChildren().get(i), resizableFigures);
+        }
 
         return;
     }
@@ -85,7 +86,7 @@ public class CompartmentCollapseEffect extends AEffect {
      * @param target
      *            the target
      */
-    public void setTarget(EditPart target) {
+    public final void setTarget(EditPart target) {
         this.objectToCollapse = (ShapeEditPart) target;
     }
 

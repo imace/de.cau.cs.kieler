@@ -25,20 +25,22 @@ import de.cau.cs.kieler.viewmanagement.triggers.SelectionTrigger;
 import de.cau.cs.kieler.viewmanagement.*;
 
 /**
- * @author nbe Combination that performs a zoom-to-fit operation in order to display the whole
- *         diagram in the editor. Listens to the SelectionTrigger, so selecting an arbitrary object
- *         in the editor will result in that effect.
+ * @author nbe
+ * 
+ *         Combination that performs a zoom-to-fit operation in order to display the whole diagram
+ *         in the editor. Listens to the SelectionTrigger, so selecting an arbitrary object in the
+ *         editor will result in that effect.
  */
 public class SelectionZoomCombination extends ACombination {
 
-    ZoomEffect effect;
-    SelectionTrigger st;
+    private ZoomEffect effect;
+    private SelectionTrigger st;
 
-    ShapeEditPart objectToZoom;
-    Object objectParameters;
+    private ShapeEditPart objectToZoom;
+    private Object objectParameters;
 
     @Override
-    public List<ATrigger> getTriggers() {
+    public final List<ATrigger> getTriggers() {
         this.st = (SelectionTrigger) RunLogic.getTrigger("SelectionTrigger");
         List<ATrigger> myTriggers = new ArrayList<ATrigger>();
         myTriggers.add(st);
@@ -51,7 +53,7 @@ public class SelectionZoomCombination extends ACombination {
      * @see de.cau.cs.kieler.viewmanagement.ACombination#evaluate()
      */
     @Override
-    public boolean evaluate(TriggerEventObject triggerEvent) {
+    public final boolean evaluate(final TriggerEventObject triggerEvent) {
         // parent may be set if wanted. Will else be RootEP
         EditPart affectedObject = getEditPart(triggerEvent.getAffectedObject());
         if (affectedObject instanceof ShapeEditPart) {
@@ -59,8 +61,9 @@ public class SelectionZoomCombination extends ACombination {
             this.objectParameters = triggerEvent.getParameters();
 
             return true;
-        } else
+        } else {
             return false;
+        }
     }
 
     /*
@@ -69,9 +72,10 @@ public class SelectionZoomCombination extends ACombination {
      * @see de.cau.cs.kieler.viewmanagement.ACombination#execute()
      */
     @Override
-    public void execute() {
-        if (effect == null)
+    public final void execute() {
+        if (effect == null) {
             effect = new ZoomEffect();
+        }
 
         effect.setTarget(this.objectToZoom);
         effect.setParameters(this.objectParameters);

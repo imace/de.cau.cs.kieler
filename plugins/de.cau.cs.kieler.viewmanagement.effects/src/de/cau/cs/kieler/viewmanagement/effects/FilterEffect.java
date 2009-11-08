@@ -26,7 +26,7 @@ import de.cau.cs.kieler.viewmanagement.AEffect;
 
 public class FilterEffect extends AEffect {
 
-    IFigure undoFigure;
+    private IFigure undoFigure;
 
     /**
      * The filter effect hides the affected object.
@@ -35,7 +35,7 @@ public class FilterEffect extends AEffect {
 
     }
 
-    public void execute() {
+    public final void execute() {
         IFigure selectedFigure = ((ShapeEditPart) this.affectedObject).getFigure();
 
         if (selectedFigure.isVisible()) {
@@ -49,10 +49,11 @@ public class FilterEffect extends AEffect {
     /**
      * Undo the effect.
      */
-    public void undo() {
-        if ((this.undoFigure != null))
-            // && (!this.undoFigure.isVisible()))
+    public final void undo() {
+        if ((this.undoFigure != null)) {
+            
             this.undoFigure.setVisible(true);
+        }
     }
 
 }

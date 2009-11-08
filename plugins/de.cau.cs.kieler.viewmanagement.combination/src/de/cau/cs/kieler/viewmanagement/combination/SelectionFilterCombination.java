@@ -34,12 +34,12 @@ import de.cau.cs.kieler.viewmanagement.triggers.SelectionTrigger;
 
 public class SelectionFilterCombination extends ACombination {
 
-    FilterEffect effect;
-    SelectionTrigger st;
-    ShapeEditPart affectedObject;
-    Object objectParameters;
+    private FilterEffect effect;
+    private SelectionTrigger st;
+    private ShapeEditPart affectedObject;
+    private Object objectParameters;
 
-    public List<ATrigger> getTriggers() {
+    public final List<ATrigger> getTriggers() {
         this.st = (SelectionTrigger) RunLogic.getTrigger("SelectionTrigger");
         List<ATrigger> myTriggers = new ArrayList<ATrigger>();
         myTriggers.add(st);
@@ -52,7 +52,7 @@ public class SelectionFilterCombination extends ACombination {
      * @see de.cau.cs.kieler.viewmanagement.ACombination#evaluate()
      */
 
-    public boolean evaluate(TriggerEventObject triggerEvent) {
+    public final boolean evaluate(final TriggerEventObject triggerEvent) {
 
         EditPart affectedObject = getEditPart(triggerEvent.getAffectedObject());
         if (affectedObject instanceof ShapeEditPart) {
@@ -70,9 +70,10 @@ public class SelectionFilterCombination extends ACombination {
      * @see de.cau.cs.kieler.viewmanagement.ACombination#execute()
      */
 
-    public void execute() {
-        if (effect == null)
+    public final void execute() {
+        if (effect == null) {
             effect = new FilterEffect();
+        }
 
         effect.setTarget(this.affectedObject);
         effect.setParameters(this.objectParameters);

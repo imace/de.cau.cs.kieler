@@ -27,34 +27,38 @@ import de.cau.cs.kieler.viewmanagement.effects.UnFilterEffect;
 import de.cau.cs.kieler.viewmanagement.triggers.SelectionTrigger;
 
 /**
- * @author nbe Combination that unhides object that were previously hidden, e.g. by the
+ * @author nbe
+ * 
+ *         Combination that unhides object that were previously hidden, e.g. by the
  *         SelectionFilterCombination. Listens to SelectionTrigger, so objects selected in the
  *         editor will become visible again.
  */
 public class SelectionUnFilterCombination extends ACombination {
 
-    UnFilterEffect effect;
-    SelectionTrigger st;
-    ShapeEditPart affectedObject;
-    Object objectParameters;
+    private UnFilterEffect effect;
+    private SelectionTrigger st;
+    private ShapeEditPart affectedObject;
+    private Object objectParameters;
 
     @Override
-    public boolean evaluate(final TriggerEventObject triggerEvent) {
+    public final boolean evaluate(final TriggerEventObject triggerEvent) {
         final EditPart affectedObject = getEditPart(triggerEvent.getAffectedObject());
         if (affectedObject instanceof ShapeEditPart) {
             this.affectedObject = (ShapeEditPart) affectedObject;
             this.objectParameters = triggerEvent.getParameters();
 
             return true;
-        } else
+        } else {
             return false;
+        }
 
     }
 
     @Override
-    public void execute() {
-        if (effect == null)
+    public final void execute() {
+        if (effect == null) {
             effect = new UnFilterEffect();
+        }
 
         effect.setTarget(this.affectedObject);
         effect.setParameters(this.objectParameters);
@@ -63,7 +67,7 @@ public class SelectionUnFilterCombination extends ACombination {
     }
 
     @Override
-    public List<ATrigger> getTriggers() {
+    public final List<ATrigger> getTriggers() {
         this.st = (SelectionTrigger) RunLogic.getTrigger("SelectionTrigger");
         final List<ATrigger> myTriggers = new ArrayList<ATrigger>();
         myTriggers.add(st);

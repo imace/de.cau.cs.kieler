@@ -32,11 +32,11 @@ import de.cau.cs.kieler.viewmanagement.AEffect;
  */
 public class HighlightEffect extends AEffect {
 
-    ShapeEditPart objectToHighlight;
-    RectangleFigure highlightFigure;
+    private ShapeEditPart objectToHighlight;
+    private RectangleFigure highlightFigure;
 
-    int lineWidth = 3;
-    Color color = ColorConstants.red;
+    private int lineWidth = 3;
+    private Color color = ColorConstants.red;
 
     /**
      * default constructor, highlighting figure is initially defined here by setting up the figure
@@ -55,7 +55,7 @@ public class HighlightEffect extends AEffect {
 
     }
 
-    public void execute() {
+    public final void execute() {
 
         // get the layer on which to draw the effect
         RootEditPart rootEP = objectToHighlight.getRoot();
@@ -114,7 +114,7 @@ public class HighlightEffect extends AEffect {
     /**
      * Undo the effect. Here the highlighting will be removed.
      */
-    public void undo() {
+    public final void undo() {
         try {
 
             this.highlightFigure.getParent().remove(this.highlightFigure);
@@ -129,7 +129,7 @@ public class HighlightEffect extends AEffect {
      * @param target
      *            the target
      */
-    public void setTarget(EditPart target) {
+    public final void setTarget(EditPart target) {
         this.objectToHighlight = (ShapeEditPart) target;
     }
 
@@ -141,7 +141,7 @@ public class HighlightEffect extends AEffect {
      * @param lineColor
      *            the color of the line of the highlight figure
      */
-    public void setHighlightFigure(int width, Color lineColor) {
+    public final void setHighlightFigure(final int width, final Color lineColor) {
         this.lineWidth = width;
         this.color = lineColor;
     }
