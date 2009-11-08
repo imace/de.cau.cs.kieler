@@ -38,7 +38,7 @@ public class ShapeHighlightEffect extends AEffect {
     Boolean originalOpaque;
     Color originalColorForeground;
     Color originalColorBackground;
-    int originalLineWidth;
+
 
     /**
      * default constructor, highlighting figure is initially defined here

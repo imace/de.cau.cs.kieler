@@ -33,16 +33,15 @@ public class SelectionShapeHighlightCombination extends ACombination {
 
     ShapeHighlightEffect effect;
     SelectionTrigger st;
-    
+
     EditPart objectToHighlight;
     Object objectParameters;
     boolean triggerActive;
     Color lineColor = ColorConstants.red;
-    int linewidth = 10;
 
-    @Override
+  
     public List<ATrigger> getTriggers() {
-        this.st = (SelectionTrigger)RunLogic.getTrigger("SelectionTrigger");
+        this.st = (SelectionTrigger) RunLogic.getTrigger("SelectionTrigger");
         List<ATrigger> myTriggers = new ArrayList<ATrigger>();
         myTriggers.add(st);
         return myTriggers;
@@ -55,51 +54,39 @@ public class SelectionShapeHighlightCombination extends ACombination {
      */
     @Override
     public boolean evaluate(TriggerEventObject triggerEvent) {
-      //parent may be set if wanted. Will else be RootEP 
-    	
+        // parent may be set if wanted. Will else be RootEP
 
-		EditPart affectedObject = getEditPart(triggerEvent.getAffectedObject());
-        if( affectedObject instanceof EditPart ){
-            this.objectToHighlight = affectedObject;
-            this.objectParameters = triggerEvent.getParameters();
-            this.triggerActive = triggerEvent.getTriggerState();
-            
-            return true; 
-        }
-        else
-            return false;
+        EditPart affectedObject = getEditPart(triggerEvent.getAffectedObject());
+
+        this.objectToHighlight = affectedObject;
+        this.objectParameters = triggerEvent.getParameters();
+        this.triggerActive = triggerEvent.getTriggerState();
+
+        return true;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see de.cau.cs.kieler.viewmanagement.ACombination#execute()
      */
     @Override
     public void execute() {
-        if (this.triggerActive==false)
+        if (this.triggerActive == false)
             effect.undo();
-        else{
-        if ( effect == null )
-            effect = new ShapeHighlightEffect();
-        
-        effect.setTarget(this.objectToHighlight);
-        effect.setParameters(this.objectParameters);
-        effect.execute();
+        else 
+        {
+            if (effect == null)
+                effect = new ShapeHighlightEffect();
+
+            effect.setTarget(this.objectToHighlight);
+            effect.setParameters(this.objectParameters);
+            effect.execute();
+            effect.setColors(lineColor, null);
         }
-        
+
     }
 
-
-	
-	/**
-	 * @param newcolor Color that the HighlightEffect should be changed to
-	 * @param newlinewidth Linewidth that the HighlightEffect should be changed to
-	 */
-	public void setHighlightEffect(Color newcolor, int newlinewidth){
-		lineColor= newcolor;
-		linewidth= newlinewidth;
-	}
-    
-    
 
 
 }

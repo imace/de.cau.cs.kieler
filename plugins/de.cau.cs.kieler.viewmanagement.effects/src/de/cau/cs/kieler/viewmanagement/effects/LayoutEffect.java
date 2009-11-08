@@ -30,7 +30,7 @@ import de.cau.cs.kieler.viewmanagement.AEffect;
  */
 public class LayoutEffect extends AEffect {
 
-    EditPart editPart; // the edit part for the auto layout method
+//    EditPart editPart; // the edit part for the auto layout method
     IEditorPart editorPart; // the editor part for the auto layout method
 
     /**
@@ -47,7 +47,7 @@ public class LayoutEffect extends AEffect {
         final IWorkbench workbench = PlatformUI.getWorkbench();
         workbench.getDisplay().asyncExec(new Runnable() {
           public void run() {
-              DiagramLayoutManager.layout(editorPart, editPart, true, false);
+              DiagramLayoutManager.layout(editorPart, null, true, false);
           } } );
     }
 

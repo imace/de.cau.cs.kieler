@@ -35,7 +35,7 @@ public class SelectionTextualRepresentationCombination extends ACombination {
     
     ShapeEditPart objectToHighlight;
     Object objectParameters;
-    boolean triggerActive;
+
 
     @Override
     public List<ATrigger> getTriggers() {
@@ -56,7 +56,7 @@ public class SelectionTextualRepresentationCombination extends ACombination {
         if( affectedObject instanceof ShapeEditPart ){
             this.objectToHighlight = (ShapeEditPart)affectedObject;
             this.objectParameters = triggerEvent.getParameters();
-            this.triggerActive = triggerEvent.getTriggerState();
+
             return true; 
         }
         else

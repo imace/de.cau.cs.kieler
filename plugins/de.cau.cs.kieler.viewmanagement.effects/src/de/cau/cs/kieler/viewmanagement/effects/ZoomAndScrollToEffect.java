@@ -34,7 +34,10 @@ public class ZoomAndScrollToEffect extends AEffect {
     int offset = 25;
 
     /**
-     * default constructor, nothing to be done here
+     * The ZoomAndScrollToEffect scrolls to the affectedObject and zooms in, in order to enlarge it
+     * as much as possible. The limit is the maximum zoom value (4.00), zoom values larger than that
+     * will be ignored.
+     * 
      */
     public ZoomAndScrollToEffect() {
 
@@ -84,21 +87,13 @@ public class ZoomAndScrollToEffect extends AEffect {
     }
 
     /**
-     * Undo the effect. Here the highlighting will be removed.
-     */
-    public void undo() {
-
-    }
-
-    /**
+     * Sets the target of the effect
+     * 
      * @param target
+     *            the target
      */
     public void setTarget(EditPart target) {
         this.objectToHighlight = (ShapeEditPart) target;
-    }
-
-    public void setParameters(Object objectParameters) {
-
     }
 
 }

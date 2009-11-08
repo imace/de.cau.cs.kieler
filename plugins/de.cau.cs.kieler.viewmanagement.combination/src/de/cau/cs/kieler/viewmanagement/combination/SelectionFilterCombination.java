@@ -25,7 +25,6 @@ import de.cau.cs.kieler.viewmanagement.TriggerEventObject;
 import de.cau.cs.kieler.viewmanagement.effects.FilterEffect;
 import de.cau.cs.kieler.viewmanagement.triggers.SelectionTrigger;
 
-
 /**
  * @author nbe
  * 
@@ -33,16 +32,15 @@ import de.cau.cs.kieler.viewmanagement.triggers.SelectionTrigger;
 
 public class SelectionFilterCombination extends ACombination {
 
-	FilterEffect effect;
-	SelectionTrigger st;
+    FilterEffect effect;
+    SelectionTrigger st;
     ShapeEditPart affectedObject;
     Object objectParameters;
-    boolean triggerActive;
- 
+
 
     @Override
     public List<ATrigger> getTriggers() {
-        this.st = (SelectionTrigger)RunLogic.getTrigger("SelectionTrigger");
+        this.st = (SelectionTrigger) RunLogic.getTrigger("SelectionTrigger");
         List<ATrigger> myTriggers = new ArrayList<ATrigger>();
         myTriggers.add(st);
         return myTriggers;
@@ -53,39 +51,34 @@ public class SelectionFilterCombination extends ACombination {
      * 
      * @see de.cau.cs.kieler.viewmanagement.ACombination#evaluate()
      */
-    @Override
+   
     public boolean evaluate(TriggerEventObject triggerEvent) {
-      //parent may be set if wanted. Will else be RootEP 
-		EditPart affectedObject = getEditPart(triggerEvent.getAffectedObject());
-        if( affectedObject instanceof ShapeEditPart ){
-            this.affectedObject = (ShapeEditPart)affectedObject;
+       
+        EditPart affectedObject = getEditPart(triggerEvent.getAffectedObject());
+        if (affectedObject instanceof ShapeEditPart) {
+            this.affectedObject = (ShapeEditPart) affectedObject;
             this.objectParameters = triggerEvent.getParameters();
-            this.triggerActive = triggerEvent.getTriggerState();
-            
-            return true; 
-        }
-        else
+
+
+            return true;
+        } else
             return false;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see de.cau.cs.kieler.viewmanagement.ACombination#execute()
      */
-    @Override
+   
     public void execute() {
-        if ( effect == null )
+        if (effect == null)
             effect = new FilterEffect();
-        
+
         effect.setTarget(this.affectedObject);
         effect.setParameters(this.objectParameters);
         effect.execute();
-        
+
     }
-
-
-
-    
-    
-
 
 }

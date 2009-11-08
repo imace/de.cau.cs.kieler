@@ -14,10 +14,8 @@
 
 package de.cau.cs.kieler.viewmanagement;
 
-
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
-
 
 /**
  * The Class TableDataContentProvider.
@@ -37,17 +35,17 @@ public class TableDataContentProvider implements ITreeContentProvider {
     }
 
     public Object[] getChildren(Object parentElement) {
-        
+
         return null;
     }
 
     public Object getParent(Object element) {
-        
+
         return null;
     }
 
     public boolean hasChildren(Object element) {
-        
+
         return false;
     }
 

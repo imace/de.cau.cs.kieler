@@ -100,7 +100,7 @@ public class HighlightEffect extends AEffect {
             // set the bounds of the Figure that will do the highlighting
 
             highlightFigure.setBounds(bounds);
-            // System.out.println(highlightFigure.getBounds() + " "+bounds);
+           
             // add the new highlight figure to the layer
 
             layer.add(highlightFigure);
@@ -108,7 +108,7 @@ public class HighlightEffect extends AEffect {
             // schedule a repaint of the feedback layer
             layer.invalidate();
         }
-        // System.out.println("Highlight");
+     
     }
 
     /**
@@ -124,17 +124,18 @@ public class HighlightEffect extends AEffect {
     }
 
     /**
-     * @param target
+     * Sets the target of the effect
+     * @param target the target
      */
     public void setTarget(EditPart target) {
         this.objectToHighlight = (ShapeEditPart) target;
     }
 
     /**
-     * Changes parameters of highlight figure. Will be re-read on every execute() call
+     * Changes parameters of highlight figure. Will be re-read on every execute() call.
      * 
-     * @param width
-     * @param lineColor
+     * @param width the width of the of the highlight figure
+     * @param lineColor the color of the line of the highlight figure
      */
     public void setHighlightFigure(int width, Color lineColor) {
         this.lineWidth = width;

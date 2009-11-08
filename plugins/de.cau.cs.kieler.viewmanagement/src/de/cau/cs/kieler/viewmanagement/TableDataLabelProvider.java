@@ -20,132 +20,109 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 
 /**
- * The class TableDataLabelProvider provides the labels and images
- * for the content of an TableData entry within the table ViewPart.
+ * The class TableDataLabelProvider provides the labels and images for the content of an TableData
+ * entry within the table ViewPart.
  * 
  * @author Christian Motika - cmot AT informatik.uni-kiel.de
+ * @modified nbe
  */
 public class TableDataLabelProvider implements ITableLabelProvider {
 
-	// define icons
-	/** The Constant CHECKED. */
-	private static final Image CHECKED = AbstractUIPlugin
-			.imageDescriptorFromPlugin("de.cau.cs.kieler.viewmanagement",
-					"icons/checked.png").createImage();
-	
-//	/** The Constant CHECKED_DISABLED. */
-//	private static final Image CHECKED_DISABLED = AbstractUIPlugin
-//			.imageDescriptorFromPlugin("de.cau.cs.kieler.sim.table",
-//					"icons/checkedDisabled.png").createImage();
-//	
-	/** The Constant UNCHECKED. */
-	private static final Image UNCHECKED = AbstractUIPlugin
-			.imageDescriptorFromPlugin("de.cau.cs.kieler.viewmanagement",
-					"icons/unchecked.png").createImage();
-	
-//	/** The Constant UNCHECKED_DISABLED. */
-//	private static final Image UNCHECKED_DISABLED = AbstractUIPlugin
-//			.imageDescriptorFromPlugin("de.cau.cs.kieler.sim.table",
-//					"icons/uncheckedDisabled.png").createImage();
-//	
-//	/** The Constant PERMANENT. */
-//	private static final Image PERMANENT = AbstractUIPlugin
-//			.imageDescriptorFromPlugin("de.cau.cs.kieler.sim.table",
-//					"icons/permanent.png").createImage();
+    // define icons
+    /** The Constant CHECKED. */
+    private static final Image CHECKED = AbstractUIPlugin.imageDescriptorFromPlugin(
+            "de.cau.cs.kieler.viewmanagement", "icons/checked.png").createImage();
 
-	//-------------------------------------------------------------------------
+    /** The Constant UNCHECKED. */
+    private static final Image UNCHECKED = AbstractUIPlugin.imageDescriptorFromPlugin(
+            "de.cau.cs.kieler.viewmanagement", "icons/unchecked.png").createImage();
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.jface.viewers.ITableLabelProvider#getColumnImage(java.lang.Object, int)
-	 */
-	public Image getColumnImage(Object element, int columnIndex) {
-		TableData tableData = (TableData) element;
-		if (columnIndex == 0) {
-////			if (!tableData.isPermanent()) {
-				if (tableData.isComboActive())
-					return CHECKED;
-		
-				else 
-					return UNCHECKED;
-		}
-//				else
-//					return null;
-////			}
-//			else {
-//				if (tableData.isPresent())
-//					return CHECKED_DISABLED;
-//				else if (tableData.isSignal())
-//					return UNCHECKED_DISABLED;
-//				else
-//					return null;
-//			}
-//		}
-//		if (columnIndex == 2) {
-//			if (tableData.isPermanent()) {
-//				return PERMANENT;
-//			}
-//		}
-		return null;
-	}
+    // -------------------------------------------------------------------------
 
-	//-------------------------------------------------------------------------
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.eclipse.jface.viewers.ITableLabelProvider#getColumnImage(java.lang.Object, int)
+     */
+    public Image getColumnImage(Object element, int columnIndex) {
+        TableData tableData = (TableData) element;
+        if (columnIndex == 0) {
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.jface.viewers.ITableLabelProvider#getColumnText(java.lang.Object, int)
-	 */
-	public String getColumnText(Object element, int columnIndex) {
-		TableData tableData = (TableData) element;
-		switch (columnIndex) {
-		case 0 :  // NOT_VISIBLE_COLUMN
-			return ""; 
-		case 1 :  // PRESENT_COLUMN
-			return tableData.getComboName();
-		case 2 : // KEY_COLUMN
-////			if (tableData.isModified())
-////				return "*"+tableData.getKey();
-//			else
-//				return tableData.getComboName();
-//		case 3 : // VALUE_COLUMN 
-////			return tableData.getValue();
-		default :
-			throw new RuntimeException("columnIndex out of bounds (2)");
-		}
-	}
+            if (tableData.isComboActive())
+                return CHECKED;
 
-	//-------------------------------------------------------------------------
+            else
+                return UNCHECKED;
+        }
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.jface.viewers.IBaseLabelProvider#addListener(org.eclipse.jface.viewers.ILabelProviderListener)
-	 */
-	public void addListener(ILabelProviderListener listener) {
-		//noop
-	}
-	
-	//-------------------------------------------------------------------------
-	
-	/* (non-Javadoc)
-	 * @see org.eclipse.jface.viewers.IBaseLabelProvider#dispose()
-	 */
-	public void dispose() {
-		//noop
-	}
+        return null;
+    }
 
-	//-------------------------------------------------------------------------
+    // -------------------------------------------------------------------------
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.jface.viewers.IBaseLabelProvider#isLabelProperty(java.lang.Object, java.lang.String)
-	 */
-	public boolean isLabelProperty(Object element, String property) {
-		return false;
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.eclipse.jface.viewers.ITableLabelProvider#getColumnText(java.lang.Object, int)
+     */
+    public String getColumnText(Object element, int columnIndex) {
+        TableData tableData = (TableData) element;
+        switch (columnIndex) {
+        case 0: // active column
+            return "";
+        case 1: // name column
+            return tableData.getComboName();
 
-	//-------------------------------------------------------------------------
+        default:
+            throw new RuntimeException("columnIndex out of bounds (2)");
+        }
+    }
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.jface.viewers.IBaseLabelProvider#removeListener(org.eclipse.jface.viewers.ILabelProviderListener)
-	 */
-	public void removeListener(ILabelProviderListener listener) {
-		//noop
-	}
+    // -------------------------------------------------------------------------
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @seeorg.eclipse.jface.viewers.IBaseLabelProvider#addListener(org.eclipse.jface.viewers.
+     * ILabelProviderListener)
+     */
+    public void addListener(ILabelProviderListener listener) {
+        // noop
+    }
+
+    // -------------------------------------------------------------------------
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.eclipse.jface.viewers.IBaseLabelProvider#dispose()
+     */
+    public void dispose() {
+        // noop
+    }
+
+    // -------------------------------------------------------------------------
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.eclipse.jface.viewers.IBaseLabelProvider#isLabelProperty(java.lang.Object,
+     * java.lang.String)
+     */
+    public boolean isLabelProperty(Object element, String property) {
+        return false;
+    }
+
+    // -------------------------------------------------------------------------
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @seeorg.eclipse.jface.viewers.IBaseLabelProvider#removeListener(org.eclipse.jface.viewers.
+     * ILabelProviderListener)
+     */
+    public void removeListener(ILabelProviderListener listener) {
+        // noop
+    }
 
 }

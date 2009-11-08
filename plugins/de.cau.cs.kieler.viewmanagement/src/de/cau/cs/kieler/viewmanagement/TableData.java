@@ -15,12 +15,11 @@
 package de.cau.cs.kieler.viewmanagement;
 
 /**
- * The class TableData implements a single data entry that represents combination
- * within the data table. A combination can be active or not and has a String that
- * represents its name.
- *
+ * The class TableData implements a single data entry that represents combination within the data
+ * table. A combination can be active or not and has a String that represents its name.
+ * 
  * @author Christian Motika - cmot AT informatik.uni-kiel.de
- * @author modified by nbe
+ * @modified nbe
  */
 public class TableData {
 
@@ -36,19 +35,18 @@ public class TableData {
 
     /**
      * Gets the parent TableDataList.
-     *
+     * 
      * @return the parent TableDataList
      */
     public final TableDataList getParentTableDataList() {
         return tableDataList;
     }
 
-
     // ---------------------------------------------------------------------
 
     /**
      * Instantiates a new TableData entry.
-     *
+     * 
      * @param parentTableDataList
      *            the parent TableDataList
      * @param comboActive
@@ -56,16 +54,13 @@ public class TableData {
      * @param comboName
      *            name of the combination
      */
-    public TableData(TableDataList parentTableDataList, boolean comboActive,
-            String comboName) {
+    public TableData(TableDataList parentTableDataList, boolean comboActive, String comboName) {
         this.tableDataList = parentTableDataList;
         this.comboActive = comboActive;
 
         this.comboName = comboName;
 
     }
-
-  
 
     /**
      * Gets the key of the entry.
@@ -76,44 +71,37 @@ public class TableData {
         return this.comboName;
     }
 
-
-
     /**
      * Sets the key of the entry.
-     *
+     * 
      * @param comboName
      *            the new key
-     *
+     * 
      * @throws Exception
-     *             the exception if the key already exists in 
-     *             the parent TableDataList
+     *             the exception if the key already exists in the parent TableDataList
      */
-
 
     /**
      * Sets the active flag for the combination.
-     *
+     * 
      * @param active
      *            active state of the combination
      */
     public void setComboActive(final boolean active) {
         this.comboActive = active;
-        
+
     }
 
     // ---------------------------------------------------------------------
 
     /**
      * Checks whether the combination is active
-     *
+     * 
      * @return true, if combination is active
      */
     public final boolean isComboActive() {
 
         return (this.comboActive);
     }
-
-
-
 
 }

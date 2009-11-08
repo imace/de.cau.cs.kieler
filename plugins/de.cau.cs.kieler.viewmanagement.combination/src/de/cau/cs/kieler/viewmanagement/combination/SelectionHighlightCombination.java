@@ -37,7 +37,7 @@ public class SelectionHighlightCombination extends ACombination {
     
     ShapeEditPart objectToHighlight;
     Object objectParameters;
-    boolean triggerActive;
+
     Color lineColor = ColorConstants.red;
     int linewidth = 5;
 
@@ -61,7 +61,7 @@ public class SelectionHighlightCombination extends ACombination {
         if( affectedObject instanceof ShapeEditPart ){
             this.objectToHighlight = (ShapeEditPart)affectedObject;
             this.objectParameters = triggerEvent.getParameters();
-            this.triggerActive = triggerEvent.getTriggerState();
+
             
             return true; 
         }
@@ -85,8 +85,9 @@ public class SelectionHighlightCombination extends ACombination {
         
     }
 
-	@Override
+	
 	public void undoLastEffect() {
+	    if(effect!=null)
 		effect.undo();
 		
 	}

@@ -29,32 +29,30 @@ import de.cau.cs.kieler.viewmanagement.triggers.SelectionTrigger;
 
 /**
  * The combination that is used to perform auto layout
+ * 
  * @author Michael Matzen
- *
+ * 
  */
 public class SelectionLayoutCombination extends ACombination {
-    
-    SelectionTrigger trigger; //the auto layout trigger
-    LayoutEffect effect; //the auto layout effect
-    EditPart targetEditPart; //the shape edit part that is used as a target for the layout action
-    IEditorPart activeEditorPart; //the active editor part 
-    
+
+    SelectionTrigger trigger; // the auto layout trigger
+    LayoutEffect effect; // the auto layout effect
+    EditPart targetEditPart; // the shape edit part that is used as a target for the layout action
+    IEditorPart activeEditorPart; // the active editor part
+
     /**
      * Evaluates a trigger event
      */
     @Override
     public boolean evaluate(TriggerEventObject triggerEvent) {
-        EditPart affectedObject = getEditPart(triggerEvent
-                .getAffectedObject());
-        if (affectedObject instanceof EditPart) {
-            this.targetEditPart = (EditPart)affectedObject;
-            //Add editorPart if supplied
-            if (triggerEvent.getParameters() instanceof IEditorPart)
-                this.activeEditorPart = (IEditorPart) triggerEvent.getParameters();
-            
-            return true;
-        } else
-            return false;
+        EditPart affectedObject = getEditPart(triggerEvent.getAffectedObject());
+
+        this.targetEditPart = (EditPart) affectedObject;
+        // Add editorPart if supplied
+        if (triggerEvent.getParameters() instanceof IEditorPart)
+            this.activeEditorPart = (IEditorPart) triggerEvent.getParameters();
+
+        return true;
     }
 
     /**
@@ -64,10 +62,10 @@ public class SelectionLayoutCombination extends ACombination {
     public void execute() {
         if (effect == null)
             effect = new LayoutEffect();
-        effect.setTarget( targetEditPart );
+        effect.setTarget(targetEditPart);
         effect.setParameters(activeEditorPart);
         effect.execute();
-        
+
     }
 
     /**
@@ -75,20 +73,19 @@ public class SelectionLayoutCombination extends ACombination {
      */
     @Override
     public List<ATrigger> getTriggers() {
-        this.trigger = (SelectionTrigger) RunLogic
-                .getTrigger("SelectionTrigger");
+        this.trigger = (SelectionTrigger) RunLogic.getTrigger("SelectionTrigger");
         List<ATrigger> triggerList = new ArrayList<ATrigger>();
         triggerList.add(trigger);
         return triggerList;
     }
 
     /**
-     * Undo the last effect, this is unused because
-     * the 'undo' is done by the layout command framework
+     * Undo the last effect, this is unused because the 'undo' is done by the layout command
+     * framework
      */
     @Override
     public void undoLastEffect() {
-        //nothing we can undo here
+        // nothing we can undo here
     }
 
 }

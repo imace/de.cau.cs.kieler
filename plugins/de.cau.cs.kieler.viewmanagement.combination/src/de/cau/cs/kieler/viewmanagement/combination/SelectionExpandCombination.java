@@ -16,7 +16,6 @@ package de.cau.cs.kieler.viewmanagement.combination;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeEditPart;
 import de.cau.cs.kieler.viewmanagement.ACombination;
@@ -35,7 +34,6 @@ public class SelectionExpandCombination extends ACombination {
     SelectionTrigger st;
 
     ShapeEditPart objectToHighlight;
-    Map<String, String> objectParameters;
 
     @Override
     public List<ATrigger> getTriggers() {
@@ -70,7 +68,6 @@ public class SelectionExpandCombination extends ACombination {
         if (effect == null)
             effect = new CompartmentExpandEffect();
         effect.setTarget(this.objectToHighlight);
-        effect.setParameters(objectParameters);
         effect.execute();
     }
 

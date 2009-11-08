@@ -14,51 +14,32 @@
  *****************************************************************************/
 package de.cau.cs.kieler.viewmanagement.effects;
 
-
-
-import org.eclipse.gef.EditPart;
 import org.eclipse.gef.editparts.ZoomManager;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
-import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditor;
 import org.eclipse.gmf.runtime.diagram.ui.render.editparts.RenderedDiagramRootEditPart;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PlatformUI;
-
 import de.cau.cs.kieler.viewmanagement.AEffect;
 
 /**
- * @author nbe
- * 
+ * @author nbe 
+ * The ZoomEffect performs a Zoom-To-Fit action on the current editor.
  */
 public class ZoomEffect extends AEffect {
 
-	
-	  ShapeEditPart objectToZoom;
-	  Object objectParameters;
-	  ZoomManager zoomManager;
-	public void execute() {
-		IEditorPart editor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
-		 if (editor instanceof DiagramEditor) {
-             DiagramEditPart diagramEdit=  ((DiagramEditor) editor)
-                     .getDiagramEditPart();
-             zoomManager= ((RenderedDiagramRootEditPart)diagramEdit.getRoot()).getZoomManager();
-         }
-		 	
-		 zoomManager.setZoomAsText(ZoomManager.FIT_ALL);
-		 
-	}
+    ZoomManager zoomManager;
 
-	@Override
-	public void setParameters(Object parameters) {
-		this.objectParameters= parameters;
-		
-	}
+    public void execute() {
+        IEditorPart editor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage()
+                .getActiveEditor();
+        if (editor instanceof DiagramEditor) {
+            DiagramEditPart diagramEdit = ((DiagramEditor) editor).getDiagramEditPart();
+            zoomManager = ((RenderedDiagramRootEditPart) diagramEdit.getRoot()).getZoomManager();
+        }
 
-	@Override
-	public void setTarget(EditPart target) {
-		this.objectToZoom = (ShapeEditPart) target;
-		
-	}
+        zoomManager.setZoomAsText(ZoomManager.FIT_ALL);
+
+    }
 
 }

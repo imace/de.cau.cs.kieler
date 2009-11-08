@@ -23,6 +23,12 @@ import java.util.EventListener;
 
 public interface ITriggerListener extends EventListener {
 
+    /**
+     * Notifies all listeners registered with the TriggerEventObject when the trigger fires.
+     * 
+     * @param triggerEvent
+     *            the object to be delivered
+     */
     void notifyTrigger(TriggerEventObject triggerEvent);
 
 }

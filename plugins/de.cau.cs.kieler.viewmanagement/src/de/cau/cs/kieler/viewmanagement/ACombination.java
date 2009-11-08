@@ -35,35 +35,35 @@ public abstract class ACombination implements ITriggerListener {
     private boolean comboActive = false;
     private HashMap<String, EditPart> cachedEditParts;
     private HashMap<EObject, EditPart> cachedEditParts2;
-    EditPart rootEP;
-    /**
-     * General parent element to be used for translation to EditParts.
-     */
-    public EditPart parent = null;
 
     /**
-     * Abstract method to evaluate certain conditions choosen by the developer
-     * that should delay or trigger the execution of the combination.  
-     * @param triggerEvent delivered by a trigger, contains necessary information 
-     * for the combination 
+     * Abstract method to evaluate certain conditions chosen by the developer that should delay or
+     * trigger the execution of the combination.
+     * 
+     * @param triggerEvent
+     *            delivered by a trigger, contains necessary information for the combination
      * @return true if combination should be executed, false otherwise.
      */
     public abstract boolean evaluate(TriggerEventObject triggerEvent);
 
     /**
-     * Abstract method to execute the combination. Creation of desired effects and their setup
-     * is to be done here.
+     * Abstract method to execute the combination. Creation of desired effects and their setup is to
+     * be done here.
      */
     public abstract void execute();
 
     /**
-     * Abstract method that returns the triggers that are of importance for this combination.
+     * Abstract method that returns the triggers that are of importance for this combination. Will
+     * be used when initializing or finalizing the combination and then register it as listeners to
+     * the triggers returned in the list.
+     * 
      * @return List of triggers to be observed
      */
     public abstract List<ATrigger> getTriggers();
 
     /**
-     * Removes the last effect when shutting down the Viewmanagement, if needed.
+     * Removes the last effect when shutting down the View Management, if needed. In that case, it
+     * should be overridden.
      */
     public void undoLastEffect() {
     }
@@ -75,10 +75,11 @@ public abstract class ACombination implements ITriggerListener {
         return comboActive;
     }
 
-    
     /**
      * Sets the status of the combination
-     * @param active new status
+     * 
+     * @param active
+     *            new status
      */
     public void setActive(final boolean active) {
         this.comboActive = active;
@@ -88,42 +89,46 @@ public abstract class ACombination implements ITriggerListener {
      * Initializes the combination and registers it as listener to the triggers of interest.
      */
     public void initialize() {
+        // get triggers of interest
         triggersToEvaluate = getTriggers();
+        // remove as listener from those triggers
         for (int i = 0; i < triggersToEvaluate.size(); i++) {
             final ATrigger a = triggersToEvaluate.get(i);
             a.addTriggerListener(this);
         }
+
     }
 
     /**
-     * Finalizes the combination, removes it as listener from its triggers and
-     * also finalizes the trigger if it is its last listener.
+     * Finalizes the combination, removes it as listener from its triggers.
+     * 
      */
     public void finalize() {
+        // this will remove remaining effects, if needed
         undoLastEffect();
+        // get triggers of interest
         triggersToEvaluate = getTriggers();
+        // remove as listener from those triggers
         for (int i = 0; i < triggersToEvaluate.size(); i++) {
             ATrigger a = triggersToEvaluate.get(i);
             a.removeTriggerListener(this);
-            if (a.getListenerNumber() == 0) {
-                a.finalize();
-            }
+
         }
+
     }
 
     /**
      * Reset hashed edit parts. This is when reusing combination for e.g., a different editor.
      * (added by cmot)
      */
-    protected void resetHashedEditParts() {
-        if (this.cachedEditParts != null)
-            this.cachedEditParts.clear();
-    }
-/**
- * This method is called whenever a trigger the combination is listening to has a new event
- */
+    // protected void resetHashedEditParts() {
+    // if (this.cachedEditParts != null)
+    // this.cachedEditParts.clear();
+    // }
+    /**
+     * This method is called whenever a trigger the combination is listening to has a new event
+     */
     public void notifyTrigger(TriggerEventObject triggerEvent) {
-        
 
         // call evaluate in concrete combo
         if (this.evaluate(triggerEvent))
@@ -132,30 +137,38 @@ public abstract class ACombination implements ITriggerListener {
     }
 
     /**
-     * Helper method for translateToEditPart to get a parent element
-     *  from which to start the search 
+     * Helper method for translateToEditPart to get a parent element from which to start the search
+     * 
      * @return rootEP, result of the search
      */
     public EditPart getRootEPAsParent() {
-        final IEditorPart editor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage()
-                .getActiveEditor();
+        EditPart rootEP = null;
+        // get active editor
+        final IEditorPart editor = PlatformUI.getWorkbench().getActiveWorkbenchWindow()
+                .getActivePage().getActiveEditor();
         if (editor instanceof DiagramEditor) {
+            // get root edit part of that editor
             rootEP = ((DiagramEditor) editor).getDiagramEditPart();
         }
         return rootEP;
     }
 
-    
     /**
-     * Translation method to convert the elementURIFragment to EditPart. Called by a 
-     * combination to convert a value given by a trigger to give it to a trigger. 
-     * A Hashmap is used to cache search results for later use. 
-     * @param elementURIFragment given e.g. by a trigger 
-     * @param parent element from which to start the search. Can be specified if known 
-     * in order to speed up the search, but may be null. Then it'll be replaced by the 
-     * rootEditPart by calling getRootEPAsParent
-     * @return the result of the search, in case of success the corresponding EditPart,
-     *  otherwise null
+     * Translation method to convert the elementURIFragment to EditPart. Called by a combination to
+     * convert a value given by a trigger to give it to a trigger. A Hashmap is used to cache search
+     * results for later use. Note: This addressing method is discouraged and should not be used
+     * anymore. Use EObjects and their addressing methods instead.
+     * 
+     * @author cmot
+     * 
+     * @param elementURIFragment
+     *            given e.g. by a trigger
+     * @param parent
+     *            element from which to start the search. Can be specified if known in order to
+     *            speed up the search, but may be null. Then it'll be replaced by the rootEditPart
+     *            by calling getRootEPAsParent
+     * @return the result of the search, in case of success the corresponding EditPart, otherwise
+     *         null
      */
     public EditPart translateToEditPart(final String elementURIFragment, EditPart parent) {
         if (parent == null)
@@ -171,7 +184,7 @@ public abstract class ACombination implements ITriggerListener {
         }
 
         List<?> children = parent.getChildren();
-        //search list of children for item with matching URIFragment
+        // search list of children for item with matching URIFragment
         for (Object child : children) {
             if (child instanceof EditPart) {
                 View view = (View) ((EditPart) child).getModel();
@@ -195,17 +208,18 @@ public abstract class ACombination implements ITriggerListener {
         return null;
     }
 
-
- 
     /**
-     * Find an GEF EditPart that corresponds to an semantic model EObject. A Hashmap is used to cache already found 
-     * objects for better performance.
+     * Find an GEF EditPart that corresponds to an semantic model EObject. A Hashmap is used to
+     * cache already found objects for better performance. EObjects are used to address objects that
+     * are exchanged between the plugins of the View Management as well as other plugins. EObjects
+     * provide the ability for semantical addressing of other objects such as children of an object
+     * or similar cases.
      * 
+     * @author haf
      * @param eObject
      *            the semantic object
      * @return the corresponding EditPart
      * 
-     
      */
     public EditPart getEditPart(EObject eObject) {
         if (cachedEditParts2 == null) {
@@ -216,7 +230,7 @@ public abstract class ACombination implements ITriggerListener {
             if (cachedEditParts2.containsKey(eObject))
                 return cachedEditParts2.get(eObject);
         }
-        
+
         try {
             DiagramEditor editor = (DiagramEditor) PlatformUI.getWorkbench()
                     .getActiveWorkbenchWindow().getActivePage().getActiveEditor();
@@ -267,6 +281,5 @@ public abstract class ACombination implements ITriggerListener {
         }
         return null;
     }
-
 
 }

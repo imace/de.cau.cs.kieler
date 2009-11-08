@@ -25,25 +25,28 @@ import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeEditPart;
 
 import de.cau.cs.kieler.viewmanagement.AEffect;
 
+/**
+ * @author nbe
+ * 
+ */
 public class UnFilterEffect extends AEffect {
 
-	public UnFilterEffect(){
-		
-	}
-	
-	@Override
-	public void execute() {
-		IFigure selectedFigure = ((ShapeEditPart)this.affectedObject).getFigure();
+    /**
+     * The UnFilterEffect makes objects visible again that were earlier hidden by the FilterEffect.
+     */
+    public UnFilterEffect() {
 
-        
-        if (selectedFigure.isVisible()){
-        	
-        
-        	selectedFigure.setVisible(true);
+    }
+
+    @Override
+    public void execute() {
+        final IFigure selectedFigure = ((ShapeEditPart) this.affectedObject).getFigure();
+
+        if (selectedFigure.isVisible()) {
+
+            selectedFigure.setVisible(true);
         }
-		
-	}
 
-
+    }
 
 }

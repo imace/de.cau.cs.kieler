@@ -34,7 +34,7 @@ public class SelectionCollapseCombination extends ACombination {
     SelectionTrigger st;
 
     ShapeEditPart objectToHighlight;
-    String objectParameters;
+
 
     public List<ATrigger> getTriggers() {
         this.st = (SelectionTrigger) RunLogic.getTrigger("SelectionTrigger");
@@ -71,7 +71,6 @@ public class SelectionCollapseCombination extends ACombination {
         if (effect == null)
             effect = new CompartmentCollapseEffect();
         effect.setTarget(this.objectToHighlight);
-        effect.setParameters(objectParameters);
         effect.execute();
     }
 

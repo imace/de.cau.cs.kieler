@@ -32,20 +32,21 @@ public class CompartmentCollapseEffect extends AEffect {
     ShapeEditPart objectToCollapse;
 
     /**
-     * default constructor
+     * Default constructor of the collapse effect. Will take the target and determine whether it or any of tis children
+     * are collapseable (of type ResizeableCompartmentFigure) and then collapse them. 
      */
     public CompartmentCollapseEffect() {
 
     }
 
-    @Override
+   
     public void execute() {
         IFigure selectedFigure = objectToCollapse.getFigure();
 
         List<IFigure> resizableFigures = new ArrayList<IFigure>();
         getResizeableCompartments(selectedFigure, resizableFigures);
         List<IFigure> collapsedComps = new ArrayList<IFigure>();
-        // Here could be added some more refined method, like collapsing only some objects
+       
         for (int i = 0; i < resizableFigures.size(); i++) {
             ResizableCompartmentFigure tempfig = (ResizableCompartmentFigure) resizableFigures
                     .get(i);
@@ -56,8 +57,9 @@ public class CompartmentCollapseEffect extends AEffect {
     }
 
     /**
-     * @param f
-     * @param resizableFigures
+     * Method to search for resizeable compartments. Examines not only the given figure, but also its children.
+     * @param f the initial figure to be examined
+     * @param resizableFigures list of resizeable compartments
      */
     public void getResizeableCompartments(IFigure f, List<IFigure> resizableFigures) {
 
@@ -72,24 +74,16 @@ public class CompartmentCollapseEffect extends AEffect {
         return;
     }
 
-    /**
-     * Undo the effect. Here the highlighting will be removed.
-     */
-    public void undo() {
 
-    }
 
     /**
-     * @param target
+     * Sets the target of the effect
+     * @param target the target
      */
     public void setTarget(EditPart target) {
         this.objectToCollapse = (ShapeEditPart) target;
     }
 
-    @Override
-    public void setParameters(Object parameters) {
-        // TODO Auto-generated method stub
 
-    }
 
 }

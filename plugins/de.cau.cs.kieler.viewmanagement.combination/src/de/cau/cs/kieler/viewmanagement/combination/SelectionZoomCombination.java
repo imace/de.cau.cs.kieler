@@ -35,7 +35,7 @@ public class SelectionZoomCombination extends ACombination {
     
     ShapeEditPart objectToZoom;
     Object objectParameters;
-    boolean triggerActive;
+
    
 
     @Override
@@ -58,7 +58,7 @@ public class SelectionZoomCombination extends ACombination {
         if( affectedObject instanceof ShapeEditPart ){
             this.objectToZoom = (ShapeEditPart)affectedObject;
             this.objectParameters = triggerEvent.getParameters();
-            this.triggerActive = triggerEvent.getTriggerState();
+
             
             return true; 
         }

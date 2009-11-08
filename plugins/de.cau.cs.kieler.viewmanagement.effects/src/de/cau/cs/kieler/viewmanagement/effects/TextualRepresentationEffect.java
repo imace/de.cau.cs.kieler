@@ -40,12 +40,16 @@ public class TextualRepresentationEffect extends AEffect {
     
    
    
+    /**
+     * The textual representation effect adds a text figure to the affectedObject. 
+     * The content of the text is delivered through the parameters.
+     */
     public TextualRepresentationEffect() {
        
         this.textualFigure = new Label();
        
         textualFigure.setTextAlignment(PositionConstants.ALWAYS_RIGHT);
-       
+        textualFigure.setText(null);
         textualFigure.setForegroundColor(ColorConstants.blue);
         
     }
@@ -102,7 +106,8 @@ public class TextualRepresentationEffect extends AEffect {
     }
     
     /**
-     * @param target
+     * Sets the target of the effect
+     * @param target the target
      */
     public void setTarget(EditPart target) {
         this.objectToText = (ShapeEditPart) target;
@@ -110,7 +115,7 @@ public class TextualRepresentationEffect extends AEffect {
 
 	
 	public void setParameters(Object parameters) {
-		
+		objectParameters = parameters;
 		
 		
 	}

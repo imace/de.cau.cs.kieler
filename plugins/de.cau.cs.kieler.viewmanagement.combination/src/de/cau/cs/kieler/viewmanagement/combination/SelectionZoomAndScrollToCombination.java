@@ -37,9 +37,8 @@ public class SelectionZoomAndScrollToCombination extends ACombination {
 
     ShapeEditPart objectToHighlight;
     Object objectParameters;
-    boolean triggerActive;
-    Color lineColor = ColorConstants.red;
-    int linewidth = 10;
+
+   
 
     @Override
     public List<ATrigger> getTriggers() {
@@ -62,7 +61,7 @@ public class SelectionZoomAndScrollToCombination extends ACombination {
             if (affectedObject instanceof ShapeEditPart) {
                 this.objectToHighlight = (ShapeEditPart) affectedObject;
                 this.objectParameters = triggerEvent.getParameters();
-                this.triggerActive = triggerEvent.getTriggerState();
+
 
                 return true;
             }

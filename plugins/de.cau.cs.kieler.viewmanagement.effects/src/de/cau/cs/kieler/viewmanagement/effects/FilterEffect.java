@@ -14,10 +14,8 @@
  *****************************************************************************/
 package de.cau.cs.kieler.viewmanagement.effects;
 
-
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeEditPart;
-
 
 import de.cau.cs.kieler.viewmanagement.AEffect;
 
@@ -28,38 +26,33 @@ import de.cau.cs.kieler.viewmanagement.AEffect;
 
 public class FilterEffect extends AEffect {
 
-	
-
     IFigure undoFigure;
 
     /**
-     * default constructor
+     * The filter effect hides the affected object
      */
     public FilterEffect() {
-       
-    }
-    
-    
-    public void execute() {
-    			IFigure selectedFigure = ((ShapeEditPart)this.affectedObject).getFigure();
 
-            
-            if (selectedFigure.isVisible()){
-            	undoFigure=selectedFigure;
-            
-            	selectedFigure.setVisible(false);
-            }
-          
-    
     }
+
+    public void execute() {
+        IFigure selectedFigure = ((ShapeEditPart) this.affectedObject).getFigure();
+
+        if (selectedFigure.isVisible()) {
+            undoFigure = selectedFigure;
+
+            selectedFigure.setVisible(false);
+        }
+
+    }
+
     /**
-     * Undo the effect. 
+     * Undo the effect.
      */
-    public void undo(){
-        if((this.undoFigure!=null)&& (!this.undoFigure.isVisible()))
-        	this.undoFigure.setVisible(true);
+    public void undo() {
+        if ((this.undoFigure != null))
+            // && (!this.undoFigure.isVisible()))
+            this.undoFigure.setVisible(true);
     }
-	
-	
 
 }

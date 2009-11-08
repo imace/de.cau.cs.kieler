@@ -38,8 +38,8 @@ public class TableDataEditing extends EditingSupport {
     /** The column index. */
     private int columnIndex;
 
-    /** The DataTableViewer to set the currently editing flag. */
-    DataTableViewer viewer;
+
+
 
     // -------------------------------------------------------------------------
 
@@ -54,7 +54,7 @@ public class TableDataEditing extends EditingSupport {
     public TableDataEditing(DataTableViewer viewer, int columnIndex) {
         super(viewer);
 
-        this.viewer = viewer;
+
 
         // Create the correct editor based on the column index
         switch (columnIndex) {
@@ -126,6 +126,7 @@ public class TableDataEditing extends EditingSupport {
 
     // -------------------------------------------------------------------------
 
+    @SuppressWarnings("static-access")
     protected void setValue(Object element, Object value) {
         TableData tableData = (TableData) element;
 

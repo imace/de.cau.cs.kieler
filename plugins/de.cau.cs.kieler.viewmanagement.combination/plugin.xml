@@ -49,6 +49,10 @@
             description="Calls automatic layout whenever compartments get collapsed or expanded."
             name="CollapseLayoutCombination">
       </combination>
+      <combination
+            class="de.cau.cs.kieler.viewmanagement.combination.SelectionUnFilterCombination"
+            name="UnFilterCombination">
+      </combination>
    </extension>
 
 </plugin>

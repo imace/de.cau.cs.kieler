@@ -28,7 +28,7 @@ import de.cau.cs.kieler.viewmanagement.AEffect;
 
 /**
  * @author nbe
- * 
+ *
  */
 
 public class CompartmentExpandEffect extends AEffect {
@@ -38,6 +38,10 @@ public class CompartmentExpandEffect extends AEffect {
    
     
     // default constructor is always called by Eclipse... 
+    /**
+     * Default constructor of the expand effect. Will take the target and determine whether it or any of tis children
+     * are expandable (of type ResizeableCompartmentFigure) and then expand them.
+     */
     public CompartmentExpandEffect() {
        
         
@@ -46,7 +50,6 @@ public class CompartmentExpandEffect extends AEffect {
     @Override
     public void execute() {
     	IFigure selectedFigure =  objectToExpand.getFigure();
-    	System.out.println("CompInit!");
     	List<IFigure> resizableFigures = new ArrayList<IFigure>();
     	getResizeableCompartments(selectedFigure, resizableFigures);
     	//Here could be added some more refined method, like collapsing only some objects
@@ -59,12 +62,17 @@ public class CompartmentExpandEffect extends AEffect {
     	
     }
     
-    public void getResizeableCompartments(IFigure f, List<IFigure> resizableFigures){
+    /**
+     * Method to search for resizeable compartments. Examines not only the given figure, but also its children.
+     * @param f the initial figure to be examined
+     * @param resizableFigures list of resizeable compartments
+     */
+    public void getResizeableCompartments(final IFigure f, final List<IFigure> resizableFigures){
     	
     	
     	if (f instanceof ResizableCompartmentFigure){
     		resizableFigures.add(f);
-    		//((ResizableCompartmentFigure) f).collapse();
+    		
     	}
     	
     	for(int i=0;  i<f.getChildren().size(); i++)
@@ -75,26 +83,17 @@ public class CompartmentExpandEffect extends AEffect {
 		return;
 	}
 
-    /**
-     * Undo the effect. Here the highlighting will be removed.
-     */
-    public void undo(){
-    	
-        
-    }
+
     
     /**
-     * @param target
+     * Sets the target of the effect
+     * @param target the target
      */
     public void setTarget(EditPart target) {
         this.objectToExpand = (ShapeEditPart) target;
     }
 
-	@Override
-	public void setParameters(Object parameters) {
-		// TODO Auto-generated method stub
-		
-	}
+
 
 
 

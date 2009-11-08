@@ -21,20 +21,22 @@ import org.eclipse.core.commands.IHandler;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.ToolItem;
 
-
 /**
  * @author nbe
  * 
  */
 public class ActivateVMHandler extends AbstractHandler implements IHandler {
 
- 
+    /**
+     * Method used to activate the VM using a button in the toolbar.
+     * 
+     * @deprecated should not be used anymore
+     */
     public ActivateVMHandler() {
-      
+
     }
 
     public Object execute(ExecutionEvent event) throws ExecutionException {
-      
 
         // Determine state of Toggle Button
         Object trigger = event.getTrigger();
@@ -43,20 +45,20 @@ public class ActivateVMHandler extends AbstractHandler implements IHandler {
             Object widget = ((Event) trigger).widget;
             if (widget instanceof ToolItem)
                 checked = ((ToolItem) widget).getSelection();
-            
+
         }
-        //RunLogic myRunLogic = new RunLogic();
+        // If the button is pressed, initialize the Viewmanagement.
         if (checked) {
             System.out.println("Now VM is on");
-            
-           RunLogic.getInstance().registerListeners();
-        } else{
-        	RunLogic.getInstance().unregisterListeners();
-        	System.out.println("VM is off");
-        	
+
+            RunLogic.getInstance().registerListeners();
+            // else finalize it
+        } else {
+            RunLogic.getInstance().unregisterListeners();
+            System.out.println("VM is off");
+
         }
-            
-            
+
         return null;
     }
 

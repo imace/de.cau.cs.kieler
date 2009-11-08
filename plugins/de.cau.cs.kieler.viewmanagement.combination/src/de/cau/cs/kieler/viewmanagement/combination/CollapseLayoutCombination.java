@@ -10,14 +10,10 @@ import de.cau.cs.kieler.viewmanagement.TriggerEventObject;
 import de.cau.cs.kieler.viewmanagement.effects.LayoutEffect;
 import de.cau.cs.kieler.viewmanagement.triggers.CollapseExpandTrigger;
 
-
 public class CollapseLayoutCombination extends ACombination {
 
-
-   
-    
     public CollapseLayoutCombination() {
-      
+
     }
 
     @Override
@@ -35,7 +31,7 @@ public class CollapseLayoutCombination extends ACombination {
 
     @Override
     public List<ATrigger> getTriggers() {
-        ATrigger ct = (CollapseExpandTrigger)RunLogic.getTrigger("CollapseExpandTrigger");
+        ATrigger ct = (CollapseExpandTrigger) RunLogic.getTrigger("CollapseExpandTrigger");
         List<ATrigger> myTriggers = new ArrayList<ATrigger>();
         myTriggers.add(ct);
         return myTriggers;

@@ -37,15 +37,13 @@ public class ManualLayoutCombination extends ACombination {
     public boolean evaluate(TriggerEventObject triggerEvent) {
         EditPart affectedObject = getEditPart(triggerEvent
                 .getAffectedObject());
-        if (affectedObject instanceof EditPart) {
+       
             this.targetEditPart = (EditPart)affectedObject;
             //Add editorPart if supplied
             if (triggerEvent.getParameters() instanceof IEditorPart)
                 this.activeEditorPart = (IEditorPart) triggerEvent.getParameters();
             
             return true;
-        } else
-            return false;
     }
 
     /**

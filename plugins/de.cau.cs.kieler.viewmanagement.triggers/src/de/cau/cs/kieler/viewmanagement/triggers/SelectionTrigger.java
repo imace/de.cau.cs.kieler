@@ -95,6 +95,7 @@ public class SelectionTrigger extends ATrigger implements ISelectionListener {
 
         PlatformUI.getWorkbench().getActiveWorkbenchWindow().getSelectionService()
                 .removeSelectionListener(this);
+        super.finalize();
     }
 
 }
