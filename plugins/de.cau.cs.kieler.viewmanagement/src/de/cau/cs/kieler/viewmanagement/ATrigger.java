@@ -52,7 +52,7 @@ public abstract class ATrigger {
     }
 
     // notifies all listeners on the listener list with the triggerEvent
-    protected final synchronized void notifyTrigger(final TriggerEventObject triggerEvent) {
+    protected synchronized void notifyTrigger(final TriggerEventObject triggerEvent) {
 
         for (ITriggerListener l : triggerListener.getListeners(ITriggerListener.class))
             l.notifyTrigger(triggerEvent);
