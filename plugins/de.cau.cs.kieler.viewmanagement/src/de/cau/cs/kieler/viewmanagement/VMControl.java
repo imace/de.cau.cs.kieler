@@ -28,8 +28,7 @@ import org.eclipse.ui.part.ViewPart;
 import org.eclipse.ui.part.WorkbenchPart;
 
 /**
- * @author cmot
- * @modified nbe
+ * @author nbe
  * 
  */
 public class VMControl extends ViewPart {
