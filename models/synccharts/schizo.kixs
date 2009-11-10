@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<synccharts:Region xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:synccharts="http://kieler.cs.cau.de/synccharts">
+  <innerStates id="S0" label="Schizo">
+    <signals name="S_ON" isOutput="true"/>
+    <signals name="S_OFF" isOutput="true"/>
+    <regions>
+      <innerStates id="S" label="S" isInitial="true">
+        <signals name="S"/>
+        <regions>
+          <innerStates id="S" label="S" isInitial="true">
+            <outgoingTransitions triggersAndEffects="# not S / S_OFF" isImmediate="true" priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.0/@innerStates.1">
+              <effects xsi:type="synccharts:Emission" signal="S_OFF"/>
+              <trigger xsi:type="synccharts:ComplexExpression" operator="not">
+                <subExpressions xsi:type="synccharts:SignalReference" signal="S"/>
+              </trigger>
+            </outgoingTransitions>
+            <outgoingTransitions triggersAndEffects="# S / S_ON" isImmediate="true" targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.0/@innerStates.1">
+              <effects xsi:type="synccharts:Emission" signal="S_ON"/>
+              <trigger xsi:type="synccharts:SignalReference" signal="S"/>
+            </outgoingTransitions>
+          </innerStates>
+          <innerStates id="S1" label="S1">
+            <outgoingTransitions triggersAndEffects="/ S" targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.0/@innerStates.2">
+              <effects xsi:type="synccharts:Emission" signal="S"/>
+            </outgoingTransitions>
+          </innerStates>
+          <innerStates id="S2">
+            <outgoingTransitions triggersAndEffects="# S / S_ON" isImmediate="true" targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.0/@innerStates.3">
+              <effects xsi:type="synccharts:Emission" signal="S_ON"/>
+              <trigger xsi:type="synccharts:SignalReference" signal="S"/>
+            </outgoingTransitions>
+            <outgoingTransitions triggersAndEffects="# not S / S_OFF" isImmediate="true" priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.0/@innerStates.3">
+              <effects xsi:type="synccharts:Emission" signal="S_OFF"/>
+              <trigger xsi:type="synccharts:ComplexExpression" operator="not">
+                <subExpressions xsi:type="synccharts:SignalReference" signal="S"/>
+              </trigger>
+            </outgoingTransitions>
+          </innerStates>
+          <innerStates id="S3" isFinal="true"/>
+        </regions>
+        <outgoingTransitions priority="1" type="NORMALTERMINATION" targetState="//@innerStates.0/@regions.0/@innerStates.0"/>
+      </innerStates>
+    </regions>
+  </innerStates>
+</synccharts:Region>

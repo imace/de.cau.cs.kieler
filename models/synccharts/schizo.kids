@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:synccharts="http://kieler.cs.cau.de/synccharts" xmi:id="_s6sQ4M3eEd60B5Yro8TtNQ" type="Synccharts" measurementUnit="Pixel">
+  <children xmi:type="notation:Shape" xmi:id="_s7-DQM3eEd60B5Yro8TtNQ" type="2001" fontName="Sans" fontHeight="10" lineColor="0">
+    <children xmi:type="notation:DecorationNode" xmi:id="_s7-DQs3eEd60B5Yro8TtNQ" type="5008"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_s7-DQ83eEd60B5Yro8TtNQ" type="7001"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_s7-DRM3eEd60B5Yro8TtNQ" type="7002"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_s7-DRc3eEd60B5Yro8TtNQ" type="7003"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_s7-DRs3eEd60B5Yro8TtNQ" type="7004"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_s7-DR83eEd60B5Yro8TtNQ" type="7005"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_s7-DSM3eEd60B5Yro8TtNQ" type="7006">
+      <children xmi:type="notation:Shape" xmi:id="_s8GmIM3eEd60B5Yro8TtNQ" type="3001" fontName="Sans" fontHeight="10" lineColor="0">
+        <children xmi:type="notation:BasicCompartment" xmi:id="_s8GmIs3eEd60B5Yro8TtNQ" type="7008">
+          <children xmi:type="notation:Shape" xmi:id="_s8HNMM3eEd60B5Yro8TtNQ" type="3002" fontName="Sans" fontHeight="10" lineColor="0">
+            <children xmi:type="notation:DecorationNode" xmi:id="_s8HNMs3eEd60B5Yro8TtNQ" type="5007"/>
+            <children xmi:type="notation:BasicCompartment" xmi:id="_s8HNM83eEd60B5Yro8TtNQ" type="7009">
+              <children xmi:type="notation:Shape" xmi:id="_EFWZoM3fEd60B5Yro8TtNQ" type="3003" fontName="Sans" fontHeight="10" lineColor="0">
+                <children xmi:type="notation:DecorationNode" xmi:id="_EFWZos3fEd60B5Yro8TtNQ" type="5001"/>
+                <element xmi:type="synccharts:Signal" href="schizo.kixs#S"/>
+                <layoutConstraint xmi:type="notation:Bounds" xmi:id="_EFWZoc3fEd60B5Yro8TtNQ" x="78" y="8"/>
+              </children>
+            </children>
+            <children xmi:type="notation:BasicCompartment" xmi:id="_s8HNNM3eEd60B5Yro8TtNQ" type="7010"/>
+            <children xmi:type="notation:BasicCompartment" xmi:id="_s8HNNc3eEd60B5Yro8TtNQ" type="7011"/>
+            <children xmi:type="notation:BasicCompartment" xmi:id="_s8HNNs3eEd60B5Yro8TtNQ" type="7012"/>
+            <children xmi:type="notation:BasicCompartment" xmi:id="_s8HNN83eEd60B5Yro8TtNQ" type="7013"/>
+            <children xmi:type="notation:BasicCompartment" xmi:id="_s8HNOM3eEd60B5Yro8TtNQ" type="7014">
+              <children xmi:type="notation:Shape" xmi:id="_s8IbUM3eEd60B5Yro8TtNQ" type="3001" fontName="Sans" fontHeight="10" lineColor="0">
+                <children xmi:type="notation:BasicCompartment" xmi:id="_s8IbUs3eEd60B5Yro8TtNQ" type="7008">
+                  <children xmi:type="notation:Shape" xmi:id="_s8JCYM3eEd60B5Yro8TtNQ" type="3002" fontName="Sans" fontHeight="10" lineColor="0">
+                    <children xmi:type="notation:DecorationNode" xmi:id="_s8JCYs3eEd60B5Yro8TtNQ" type="5007"/>
+                    <children xmi:type="notation:BasicCompartment" xmi:id="_s8JCY83eEd60B5Yro8TtNQ" type="7009"/>
+                    <children xmi:type="notation:BasicCompartment" xmi:id="_s8JCZM3eEd60B5Yro8TtNQ" type="7010"/>
+                    <children xmi:type="notation:BasicCompartment" xmi:id="_s8JCZc3eEd60B5Yro8TtNQ" type="7011"/>
+                    <children xmi:type="notation:BasicCompartment" xmi:id="_s8JCZs3eEd60B5Yro8TtNQ" type="7012"/>
+                    <children xmi:type="notation:BasicCompartment" xmi:id="_s8JCZ83eEd60B5Yro8TtNQ" type="7013"/>
+                    <children xmi:type="notation:BasicCompartment" xmi:id="_s8JCaM3eEd60B5Yro8TtNQ" type="7014"/>
+                    <element xmi:type="synccharts:State" href="schizo.kixs#//@innerStates.0/@regions.0/@innerStates.0/@regions.0/@innerStates.0"/>
+                    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_s8JCYc3eEd60B5Yro8TtNQ" x="7" y="8"/>
+                  </children>
+                  <children xmi:type="notation:Shape" xmi:id="_s8JCac3eEd60B5Yro8TtNQ" type="3002" fontName="Sans" fontHeight="10" lineColor="0">
+                    <children xmi:type="notation:DecorationNode" xmi:id="_s8JCa83eEd60B5Yro8TtNQ" type="5007"/>
+                    <children xmi:type="notation:BasicCompartment" xmi:id="_s8JCbM3eEd60B5Yro8TtNQ" type="7009"/>
+                    <children xmi:type="notation:BasicCompartment" xmi:id="_s8JCbc3eEd60B5Yro8TtNQ" type="7010"/>
+                    <children xmi:type="notation:BasicCompartment" xmi:id="_s8JCbs3eEd60B5Yro8TtNQ" type="7011"/>
+                    <children xmi:type="notation:BasicCompartment" xmi:id="_s8JCb83eEd60B5Yro8TtNQ" type="7012"/>
+                    <children xmi:type="notation:BasicCompartment" xmi:id="_s8JCcM3eEd60B5Yro8TtNQ" type="7013"/>
+                    <children xmi:type="notation:BasicCompartment" xmi:id="_s8JCcc3eEd60B5Yro8TtNQ" type="7014"/>
+                    <element xmi:type="synccharts:State" href="schizo.kixs#//@innerStates.0/@regions.0/@innerStates.0/@regions.0/@innerStates.1"/>
+                    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_s8JCas3eEd60B5Yro8TtNQ" x="190" y="8"/>
+                  </children>
+                  <children xmi:type="notation:Shape" xmi:id="_s8JCcs3eEd60B5Yro8TtNQ" type="3002" fontName="Sans" fontHeight="10" lineColor="0">
+                    <children xmi:type="notation:DecorationNode" xmi:id="_s8JpcM3eEd60B5Yro8TtNQ" type="5007"/>
+                    <children xmi:type="notation:BasicCompartment" xmi:id="_s8Jpcc3eEd60B5Yro8TtNQ" type="7009"/>
+                    <children xmi:type="notation:BasicCompartment" xmi:id="_s8Jpcs3eEd60B5Yro8TtNQ" type="7010"/>
+                    <children xmi:type="notation:BasicCompartment" xmi:id="_s8Jpc83eEd60B5Yro8TtNQ" type="7011"/>
+                    <children xmi:type="notation:BasicCompartment" xmi:id="_s8JpdM3eEd60B5Yro8TtNQ" type="7012"/>
+                    <children xmi:type="notation:BasicCompartment" xmi:id="_s8Jpdc3eEd60B5Yro8TtNQ" type="7013"/>
+                    <children xmi:type="notation:BasicCompartment" xmi:id="_s8Jpds3eEd60B5Yro8TtNQ" type="7014"/>
+                    <element xmi:type="synccharts:State" href="schizo.kixs#//@innerStates.0/@regions.0/@innerStates.0/@regions.0/@innerStates.2"/>
+                    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_s8JCc83eEd60B5Yro8TtNQ" x="283" y="8"/>
+                  </children>
+                  <children xmi:type="notation:Shape" xmi:id="_s8Jpd83eEd60B5Yro8TtNQ" type="3002" fontName="Sans" fontHeight="10" lineColor="0">
+                    <children xmi:type="notation:DecorationNode" xmi:id="_s8Jpec3eEd60B5Yro8TtNQ" type="5007"/>
+                    <children xmi:type="notation:BasicCompartment" xmi:id="_s8Jpes3eEd60B5Yro8TtNQ" type="7009"/>
+                    <children xmi:type="notation:BasicCompartment" xmi:id="_s8Jpe83eEd60B5Yro8TtNQ" type="7010"/>
+                    <children xmi:type="notation:BasicCompartment" xmi:id="_s8JpfM3eEd60B5Yro8TtNQ" type="7011"/>
+                    <children xmi:type="notation:BasicCompartment" xmi:id="_s8Jpfc3eEd60B5Yro8TtNQ" type="7012"/>
+                    <children xmi:type="notation:BasicCompartment" xmi:id="_s8Jpfs3eEd60B5Yro8TtNQ" type="7013"/>
+                    <children xmi:type="notation:BasicCompartment" xmi:id="_s8Jpf83eEd60B5Yro8TtNQ" type="7014"/>
+                    <element xmi:type="synccharts:State" href="schizo.kixs#//@innerStates.0/@regions.0/@innerStates.0/@regions.0/@innerStates.3"/>
+                    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_s8JpeM3eEd60B5Yro8TtNQ" x="465" y="8"/>
+                  </children>
+                </children>
+                <element xmi:type="synccharts:Region" href="schizo.kixs#//@innerStates.0/@regions.0/@innerStates.0/@regions.0"/>
+                <layoutConstraint xmi:type="notation:Bounds" xmi:id="_s8IbUc3eEd60B5Yro8TtNQ" x="1" y="1" width="514" height="78"/>
+              </children>
+            </children>
+            <element xmi:type="synccharts:State" href="schizo.kixs#//@innerStates.0/@regions.0/@innerStates.0"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_s8HNMc3eEd60B5Yro8TtNQ" x="8" y="25" width="528" height="118"/>
+          </children>
+        </children>
+        <element xmi:type="synccharts:Region" href="schizo.kixs#//@innerStates.0/@regions.0"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_s8GmIc3eEd60B5Yro8TtNQ" x="1" y="1" width="554" height="162"/>
+      </children>
+    </children>
+    <element xmi:type="synccharts:State" href="schizo.kixs#//@innerStates.0"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_s7-DQc3eEd60B5Yro8TtNQ" x="7" y="8" width="568" height="230"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_s6sQ4c3eEd60B5Yro8TtNQ"/>
+  <element xmi:type="synccharts:Region" href="schizo.kixs#/"/>
+  <edges xmi:type="notation:Connector" xmi:id="_s8Q-MM3eEd60B5Yro8TtNQ" type="4001" source="_s8HNMM3eEd60B5Yro8TtNQ" target="_s8HNMM3eEd60B5Yro8TtNQ" lineColor="0">
+    <children xmi:type="notation:DecorationNode" xmi:id="_s8Q-M83eEd60B5Yro8TtNQ" type="6001">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_s8Q-NM3eEd60B5Yro8TtNQ" y="40"/>
+    </children>
+    <styles xmi:type="notation:FontStyle" xmi:id="_s8Q-Mc3eEd60B5Yro8TtNQ" fontName="Sans" fontHeight="10"/>
+    <element xmi:type="synccharts:Transition" href="schizo.kixs#//@innerStates.0/@regions.0/@innerStates.0/@outgoingTransitions.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_s8Q-Ms3eEd60B5Yro8TtNQ" points="[0, 0, -186, 0]$[18, -10, -168, -10]$[49, -16, -137, -16]$[93, -18, -93, -18]$[136, -16, -50, -16]$[167, -10, -19, -10]$[186, 0, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_tXVwoM3eEd60B5Yro8TtNQ" id="(0.32386363636363635,0.00847457627118644)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_tXVwoc3eEd60B5Yro8TtNQ" id="(0.6761363636363636,0.00847457627118644)"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_s8SMUM3eEd60B5Yro8TtNQ" type="4001" source="_s8JCYM3eEd60B5Yro8TtNQ" target="_s8JCac3eEd60B5Yro8TtNQ" lineColor="0">
+    <children xmi:type="notation:DecorationNode" xmi:id="_s8SMU83eEd60B5Yro8TtNQ" type="6001">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_s8SMVM3eEd60B5Yro8TtNQ" x="-1" y="-9"/>
+    </children>
+    <styles xmi:type="notation:FontStyle" xmi:id="_s8SMUc3eEd60B5Yro8TtNQ" fontName="Sans" fontHeight="10"/>
+    <element xmi:type="synccharts:Transition" href="schizo.kixs#//@innerStates.0/@regions.0/@innerStates.0/@regions.0/@innerStates.0/@outgoingTransitions.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_s8SMUs3eEd60B5Yro8TtNQ" points="[0, 0, -152, 0]$[46, 0, -106, 0]$[103, 0, -49, 0]$[152, 0, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_tXWXsM3eEd60B5Yro8TtNQ" id="(1.0,0.5333333333333333)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_tXWXsc3eEd60B5Yro8TtNQ" id="(0.0,0.5333333333333333)"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_s8UBgM3eEd60B5Yro8TtNQ" type="4001" source="_s8JCYM3eEd60B5Yro8TtNQ" target="_s8JCac3eEd60B5Yro8TtNQ" lineColor="0">
+    <children xmi:type="notation:DecorationNode" xmi:id="_s8UBg83eEd60B5Yro8TtNQ" type="6001">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_s8UBhM3eEd60B5Yro8TtNQ" y="-19"/>
+    </children>
+    <styles xmi:type="notation:FontStyle" xmi:id="_s8UBgc3eEd60B5Yro8TtNQ" fontName="Sans" fontHeight="10"/>
+    <element xmi:type="synccharts:Transition" href="schizo.kixs#//@innerStates.0/@regions.0/@innerStates.0/@regions.0/@innerStates.0/@outgoingTransitions.1"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_s8UBgs3eEd60B5Yro8TtNQ" points="[0, 0, -152, -1]$[5, 3, -147, 2]$[10, 6, -142, 5]$[16, 8, -136, 7]$[58, 17, -94, 16]$[93, 17, -59, 16]$[136, 8, -16, 7]$[141, 6, -11, 5]$[146, 3, -6, 2]$[152, 1, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_tXWXss3eEd60B5Yro8TtNQ" id="(1.0,0.9666666666666667)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_tXWXs83eEd60B5Yro8TtNQ" id="(0.0,1.0)"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_s8UokM3eEd60B5Yro8TtNQ" type="4001" source="_s8JCac3eEd60B5Yro8TtNQ" target="_s8JCcs3eEd60B5Yro8TtNQ" lineColor="0">
+    <children xmi:type="notation:DecorationNode" xmi:id="_s8Uok83eEd60B5Yro8TtNQ" type="6001">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_s8UolM3eEd60B5Yro8TtNQ" y="-9"/>
+    </children>
+    <styles xmi:type="notation:FontStyle" xmi:id="_s8Uokc3eEd60B5Yro8TtNQ" fontName="Sans" fontHeight="10"/>
+    <element xmi:type="synccharts:Transition" href="schizo.kixs#//@innerStates.0/@regions.0/@innerStates.0/@regions.0/@innerStates.1/@outgoingTransitions.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_s8Uoks3eEd60B5Yro8TtNQ" points="[0, 0, -58, 0]$[19, 0, -39, 0]$[39, 0, -19, 0]$[58, 0, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_tXWXtM3eEd60B5Yro8TtNQ" id="(1.0,0.5333333333333333)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_tXWXtc3eEd60B5Yro8TtNQ" id="(0.03333333333333333,0.5333333333333333)"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_s8V2sM3eEd60B5Yro8TtNQ" type="4001" source="_s8JCcs3eEd60B5Yro8TtNQ" target="_s8Jpd83eEd60B5Yro8TtNQ" lineColor="0">
+    <children xmi:type="notation:DecorationNode" xmi:id="_s8V2s83eEd60B5Yro8TtNQ" type="6001">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_s8V2tM3eEd60B5Yro8TtNQ" y="-9"/>
+    </children>
+    <styles xmi:type="notation:FontStyle" xmi:id="_s8V2sc3eEd60B5Yro8TtNQ" fontName="Sans" fontHeight="10"/>
+    <element xmi:type="synccharts:Transition" href="schizo.kixs#//@innerStates.0/@regions.0/@innerStates.0/@regions.0/@innerStates.2/@outgoingTransitions.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_s8V2ss3eEd60B5Yro8TtNQ" points="[0, 0, -152, 0]$[47, 0, -105, 0]$[105, 0, -47, 0]$[152, 0, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_tXWXts3eEd60B5Yro8TtNQ" id="(1.0,0.5333333333333333)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_tXWXt83eEd60B5Yro8TtNQ" id="(0.03333333333333333,0.5333333333333333)"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_s8WdwM3eEd60B5Yro8TtNQ" type="4001" source="_s8JCcs3eEd60B5Yro8TtNQ" target="_s8Jpd83eEd60B5Yro8TtNQ" lineColor="0">
+    <children xmi:type="notation:DecorationNode" xmi:id="_s8Wdw83eEd60B5Yro8TtNQ" type="6001">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_s8WdxM3eEd60B5Yro8TtNQ" x="-1" y="-20"/>
+    </children>
+    <styles xmi:type="notation:FontStyle" xmi:id="_s8Wdwc3eEd60B5Yro8TtNQ" fontName="Sans" fontHeight="10"/>
+    <element xmi:type="synccharts:Transition" href="schizo.kixs#//@innerStates.0/@regions.0/@innerStates.0/@regions.0/@innerStates.2/@outgoingTransitions.1"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_s8Wdws3eEd60B5Yro8TtNQ" points="[0, 0, -152, 0]$[5, 3, -147, 3]$[10, 6, -142, 6]$[16, 8, -136, 8]$[58, 18, -94, 18]$[94, 18, -58, 18]$[136, 8, -16, 8]$[141, 6, -11, 6]$[146, 3, -6, 3]$[152, 0, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_tXWXuM3eEd60B5Yro8TtNQ" id="(1.0,0.9666666666666667)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_tXWXuc3eEd60B5Yro8TtNQ" id="(0.03333333333333333,0.9666666666666667)"/>
+  </edges>
+</notation:Diagram>
