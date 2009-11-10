@@ -123,11 +123,14 @@ public abstract class ACombination implements ITriggerListener {
      * 
      * This method is needed if you want to use the visualization effect for different
      * editors (after another). Reset of EditPartCache is necessary. (cmot, 09.11.09)
+     * Added a reset of the second cache. (cmot, 10.11.09)
      * 
      */
      protected void resetHashedEditParts() {
          if (this.cachedEditParts != null)
              this.cachedEditParts.clear();
+         if (this.cachedEditParts2 != null)
+             this.cachedEditParts2.clear();
      }
      
     /**
