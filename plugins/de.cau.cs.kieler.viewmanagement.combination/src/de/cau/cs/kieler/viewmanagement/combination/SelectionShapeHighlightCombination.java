@@ -89,4 +89,11 @@ public class SelectionShapeHighlightCombination extends ACombination {
 
     }
 
+    public final void undoEffects() {
+        if (effect != null) {
+
+            effect.undo();
+        }
+    }
+
 }
