@@ -84,7 +84,7 @@ public class SelectionLayoutCombination extends ACombination {
      * framework
      */
     @Override
-    public void undoLastEffect() {
+    public void undoEffects() {
         // nothing we can undo here
     }
 

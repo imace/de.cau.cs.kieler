@@ -66,13 +66,13 @@ public abstract class ACombination implements ITriggerListener {
      * 
      * @return List of triggers to be observed
      */
-    public abstract List<ATrigger> getTriggers();
+    protected abstract List<ATrigger> getTriggers();
 
     /**
      * Removes the last effect when shutting down the View Management, if needed. In that case, it
      * should be overridden.
      */
-    public void undoLastEffect() {
+    public void undoEffects() {
     }
 
     /**
@@ -112,7 +112,7 @@ public abstract class ACombination implements ITriggerListener {
      */
     public final void finalize() {
         // this will remove remaining effects, if needed
-        undoLastEffect();
+        undoEffects();
         // get triggers of interest
         triggersToEvaluate = getTriggers();
         // remove as listener from those triggers

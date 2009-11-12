@@ -10,11 +10,11 @@
       </combination>
       <combination
             class="de.cau.cs.kieler.viewmanagement.combination.SelectionCollapseCombination"
-            name="CollapseHighlight">
+            name="SelectCollapse">
       </combination>
       <combination
             class="de.cau.cs.kieler.viewmanagement.combination.SelectionExpandCombination"
-            name="ExpandHighlight">
+            name="SelectExpand">
       </combination>
       <combination
             class="de.cau.cs.kieler.viewmanagement.combination.SelectionTextualRepresentationCombination"
@@ -22,23 +22,23 @@
       </combination>
       <combination
             class="de.cau.cs.kieler.viewmanagement.combination.SelectionFilterCombination"
-            name="FilterCombination">
+            name="SelectFilter">
       </combination>
       <combination
             class="de.cau.cs.kieler.viewmanagement.combination.SelectionLayoutCombination"
-            name="LayoutCombination">
+            name="SelectLayout">
       </combination>
       <combination
             class="de.cau.cs.kieler.viewmanagement.combination.SelectionZoomCombination"
-            name="ZoomCombination">
+            name="SelectZoomToFit">
       </combination>
       <combination
             class="de.cau.cs.kieler.viewmanagement.combination.SelectionShapeHighlightCombination"
-            name="ShapeHighlight">
+            name="SelectShapeHighlight">
       </combination>
       <combination
             class="de.cau.cs.kieler.viewmanagement.combination.SelectionZoomAndScrollToCombination"
-            name="ZoomAndScrollToCombination">
+            name="SelectZoomAndScrollTo">
       </combination>
       <combination
             class="de.cau.cs.kieler.viewmanagement.combination.ManualLayoutCombination"
@@ -51,7 +51,7 @@
       </combination>
       <combination
             class="de.cau.cs.kieler.viewmanagement.combination.SelectionUnFilterCombination"
-            name="UnFilterCombination">
+            name="SelectUnFilter">
       </combination>
    </extension>
 

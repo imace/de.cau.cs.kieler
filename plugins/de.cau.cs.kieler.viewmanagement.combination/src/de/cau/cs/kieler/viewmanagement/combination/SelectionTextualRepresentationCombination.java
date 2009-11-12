@@ -83,7 +83,7 @@ public class SelectionTextualRepresentationCombination extends ACombination {
     }
 
     @Override
-    public final void undoLastEffect() {
+    public final void undoEffects() {
         effect.undo();
 
     }

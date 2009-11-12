@@ -5,21 +5,6 @@
    <extension-point id="de.cau.cs.kieler.viewmanagement.triggers" name="triggers" schema="schema/de.cau.cs.kieler.viewmanagement.triggers.exsd"/>
    <extension-point id="de.cau.cs.kieler.viewmanagement.combination" name="combination" schema="schema/de.cau.cs.kieler.viewmanagement.combination.exsd"/>
    <extension
-         name="Viewmanagement Core"
-         point="org.eclipse.ui.commands">
-      <command
-            categoryId="de.cau.cs.kieler.commands.category"
-            defaultHandler="de.cau.cs.kieler.viewmanagement.ActivateVMHandler"
-            id="de.cau.cs.kieler.viewmanagement.activateVM"
-            name="Activate VM">
-         <commandParameter
-               id="de.cau.cs.kieler.viewmanagement.commandParameter1"
-               name="name"
-               optional="true">
-         </commandParameter>
-      </command>
-   </extension>
-   <extension
          point="org.eclipse.ui.menus">
       <menuContribution
             locationURI="de.cau.cs.kieler.viewmanagement.menuContribution1">

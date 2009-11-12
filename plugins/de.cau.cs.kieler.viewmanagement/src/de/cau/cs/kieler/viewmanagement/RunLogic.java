@@ -15,73 +15,77 @@
 package de.cau.cs.kieler.viewmanagement;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
 
 /**
- * The RunLogic is the central administration of the view management. It keeps track of all the available components,
- * triggers, effects and combinations. On startup, it reads all of them and makes instances available to the other
- * components. It can also be asked to give an instance of a specified component, using e.g. the getTrigger method.
- * Finally it provides with finalize() a way to simply shut down the view management.
+ * The RunLogic is the central administration of the view management. It keeps track of all the
+ * available components, triggers, effects and combinations. On startup, it reads all of them and
+ * makes instances available to the other components. It can also be asked to give an instance of a
+ * specified component, using e.g. the getTrigger method. Finally it provides with finalize() a way
+ * to simply shut down the view management.
+ * 
  * @author nbe
  * 
  */
 
 public final class RunLogic {
+    // string constants
     private static final String effectspath = "de.cau.cs.kieler.viewmanagement.effects";
-
     private static final String combopath = "de.cau.cs.kieler.viewmanagement.combination";
-
     private static final String triggerpath = "de.cau.cs.kieler.viewmanagement.triggers";
 
     // there should be only one RunLogic at a time
-    private static RunLogic runlogic=new RunLogic();
+    private static RunLogic runlogic = new RunLogic();
 
+    /**
+     * Constructor initializes only the used lists.
+     */
     private RunLogic() {
-
         init();
-
-
     }
 
     /**
-     * Assures that only one instance of the RunLogic is present.
+     * Returns the instance of the RunLogic.
      * 
      * @return the instance of RunLogic
      */
     public static synchronized RunLogic getInstance() {
-        // if there is no instance of the RunLogic, create one
-
 
         return runlogic;
     }
 
-   /**
-    * lists instances of all available triggers
-    */
-    private List<ATrigger> triggers;
-
     /**
-     * lists instances of all available effects
+     * Lists instances of all available triggers.
      */
-    private List<AEffect> effects;
+    private HashMap<String, ATrigger> triggers;
 
     /**
-     * lists instances of all available combinations
+     * Lists instances of all available effects.
      */
-    private List<ACombination> combos;
+    private HashMap<String, AEffect> effects;
 
     /**
-     * keeps track of the combos that have been activated in order to shut them down cleanly if needed.
+     * Lists instances of all available combinations.
+     */
+    private HashMap<String, ACombination> combos;
+
+    /**
+     * keeps track of the combos that have been activated in order to shut them down cleanly if
+     * needed.
      */
     List<String> activeCombos;
 
     /**
-     * indicates the status of the RunLogic. Is used to determine the action of the toggle button in the 
-     * VM Control view.
+     * indicates the status of the RunLogic. Is used to determine the action of the toggle button in
+     * the VM Control view.
      */
     private boolean state;
 
@@ -89,9 +93,9 @@ public final class RunLogic {
      * Initializes lists to be used to store available components
      */
     public void init() {
-        setTriggers(new ArrayList<ATrigger>());
-        setEffects(new ArrayList<AEffect>());
-        setCombos(new ArrayList<ACombination>());
+        setTriggers(new HashMap<String, ATrigger>());
+        setEffects(new HashMap<String, AEffect>());
+        setCombos(new HashMap<String, ACombination>());
         // update the table in the VM Control view that displays all available combinations
         TableDataList.getInstance().updateViewAsync();
         activeCombos = new ArrayList<String>();
@@ -104,11 +108,11 @@ public final class RunLogic {
      */
     public void registerListeners() {
 
-
         triggers.clear();
         combos.clear();
         effects.clear();
         activeCombos.clear();
+
 
         // set indication that the RunLogic is running (This is needed to determine the action of
         // the VM on/off button in the VM Control view)
@@ -128,19 +132,37 @@ public final class RunLogic {
      * for active combos and finalize for active triggers. Sets status runLogicState.
      */
     public void unregisterListeners() {
-        // remove all entries in the VM Control view
-        for (final ACombination oneCombination : getCombos()) {
-            TableDataList.getInstance().remove(oneCombination.getClass().getCanonicalName());
-            // finalize only combos that were active
-            if (oneCombination.getActive()) {
-                oneCombination.finalize();
-            }
+        Set<String> test2 = getCombos().keySet();
+        Collection<ACombination> test3 = getCombos().values();
+        Iterator<ACombination> i3 = test3.iterator();
+        Iterator<String> i2 = test2.iterator();
+        while (i2.hasNext()) {
+            TableDataList.getInstance().remove(i2.next());
+        }
+        while(i3.hasNext()){
+        if (i3.next().getActive()){
+            i3.next().finalize();
+        }
+        }
+            
+//            // while
+//            // remove all entries in the VM Control view
+//             for (final ACombination oneCombination : getCombos()) {
+//             TableDataList.getInstance().remove(oneCombination.getClass().getCanonicalName());
+//             // finalize only combos that were active
+//             if (oneCombination.getActive()) {
+//             oneCombination.finalize();
+//             }
             // update the VM Control table
             TableDataList.getInstance().updateViewAsync();
-        }
+        
         // finalize the triggers
-        for (final ATrigger oneTrigger : getTriggers())
-            oneTrigger.finalize();
+        Set<String> t = triggers.keySet();
+        Iterator<String> i = t.iterator();
+        while (i.hasNext()) {
+            triggers.get(i.next()).finalize();
+        }
+        
         // indicate that the RunLogic is now off (This is needed to determine the action of
         // the VM on/off button in the VM Control view)
         state = false;
@@ -148,15 +170,20 @@ public final class RunLogic {
         return;
     }
 
-    // searches the registry for triggers and creates an instance of each. Adds them to the triggers
-    // list to make them available
+    /**
+     * searches the registry for triggers and creates an instance of each. Adds them to the triggers
+     * list to make them available
+     */
+
     private void readTriggers() {
         IConfigurationElement[] myExtensions = Platform.getExtensionRegistry()
-                .getConfigurationElementsFor("de.cau.cs.kieler.viewmanagement.triggers");
+                .getConfigurationElementsFor(triggerpath);
         for (int i = 0; i < myExtensions.length; i++) {
+
             try {
                 ATrigger myTrigger = (ATrigger) myExtensions[i].createExecutableExtension("class");
-                getTriggers().add(myTrigger);
+
+                getTriggers().put(myExtensions[i].getAttribute("name"), myTrigger);
             } catch (CoreException e) {
 
                 e.printStackTrace();
@@ -164,15 +191,19 @@ public final class RunLogic {
         }
     }
 
-    // searches the registry for effects and creates an instance of each. Adds them to the effects
-    // list to make them available
+    /**
+     * searches the registry for effects and creates an instance of each. Adds them to the effects
+     * list to make them available
+     */
+
     private void readEffects() {
         IConfigurationElement[] myExtensions = Platform.getExtensionRegistry()
-                .getConfigurationElementsFor("de.cau.cs.kieler.viewmanagement.effects");
+                .getConfigurationElementsFor(effectspath);
         for (int i = 0; i < myExtensions.length; i++) {
             try {
                 AEffect myEffect = (AEffect) myExtensions[i].createExecutableExtension("class");
-                getEffects().add(myEffect);
+
+                effects.put(myExtensions[i].getAttribute("name"), myEffect);
             } catch (CoreException e) {
 
                 e.printStackTrace();
@@ -180,22 +211,24 @@ public final class RunLogic {
         }
     }
 
-    // searches the registry for triggers and creates an instance of each. Adds them to the triggers
-    // list to make them available. Also creates new TableData entires and adds the combinations to
-    // the table in the VM Control view. Finally updates the table to make them visible.
+    /**
+     * searches the registry for triggers and creates an instance of each. Adds them to the triggers
+     * list to make them available. Also creates new TableData entires and adds the combinations to
+     * the table in the VM Control view. Finally updates the table to make them visible.
+     **/
     private void readCombinations() {
         IConfigurationElement[] myExtensions = Platform.getExtensionRegistry()
-                .getConfigurationElementsFor("de.cau.cs.kieler.viewmanagement.combination");
+                .getConfigurationElementsFor(combopath);
         for (int i = 0; i < myExtensions.length; i++) {
             try {
 
                 ACombination myCombo = (ACombination) myExtensions[i]
                         .createExecutableExtension("class");
-                getCombos().add(myCombo);
+                getCombos().put(myExtensions[i].getAttribute("name"), myCombo);
                 // add an entry tp the TableDataList for each combo
                 TableDataList.getInstance().add(
-                        new TableData(TableDataList.getInstance(), myCombo.getActive(), myCombo
-                                .getClass().getCanonicalName()));
+                        new TableData(TableDataList.getInstance(), myCombo.getActive(),
+                                myExtensions[i].getAttribute("name")));
                 // update the table
                 TableDataList.getInstance().updateViewAsync();
             } catch (CoreException e) {
@@ -206,73 +239,41 @@ public final class RunLogic {
     }
 
     /**
-     * Returns a trigger from list triggers that matches the given name in the argument. Since a
-     * direct comparison on the elements of triggers is not possible there will be searched for
-     * position in the list
+     * Returns a trigger from list triggers that matches the given name in the argument. 
      * 
      * @param name
      *            name of trigger to be searched for
      * @return instance of searched trigger
      */
     public ATrigger getTrigger(final String name) {
-        IConfigurationElement[] myExtensions = Platform.getExtensionRegistry()
-                .getConfigurationElementsFor(triggerpath);
-        ATrigger myTrigger = null;
-        for (int i = 0; i < myExtensions.length; i++) {
-            String attribute = myExtensions[i].getAttribute("name");
-            if (attribute.equals(name)) {
-                myTrigger = getTriggers().get(i);
 
-            }
-        }
-
+        ATrigger myTrigger = getTriggers().get(name);
         return myTrigger;
     }
 
     /**
-     * Returns a combination from list combos that matches the given name in the argument. Since a
-     * direct comparison on the elements of combos is not possible there will be searched for
-     * position in the list
+     * Returns a combination from list combos that matches the given name in the argument. 
      * 
      * @param name
      *            name of the combination to be searched for
      * @return instance of searched combination
      */
     public ACombination getCombination(final String name) {
-        IConfigurationElement[] myExtensions = Platform.getExtensionRegistry()
-                .getConfigurationElementsFor(combopath);
-        ACombination myCombination = null;
-        for (int i = 0; i < myExtensions.length; i++) {
-            String attribute = myExtensions[i].getAttribute("name");
-            if (attribute.equals(name)) {
-                myCombination = getCombos().get(i);
-
-            }
-        }
+        ACombination myCombination = getCombos().get(name);
 
         return myCombination;
     }
 
     /**
-     * Returns an effect from list effects that matches the given name in the argument. Since a
-     * direct comparison on the elements of effects is not possible there will be searched for
-     * position in the list
+     * Returns an effect from list effects that matches the given name in the argument. 
      * 
      * @param name
      *            of the effect to be searched for
      * @return instance of searched trigger
      */
     public AEffect getEffect(final String name) {
-        IConfigurationElement[] myExtensions = Platform.getExtensionRegistry()
-                .getConfigurationElementsFor(effectspath);
-        AEffect myEffect = null;
-        for (int i = 0; i < myExtensions.length; i++) {
-            String attribute = myExtensions[i].getAttribute("name");
-            if (attribute.equals(name)) {
-                myEffect = getEffects().get(i);
 
-            }
-        }
+        AEffect myEffect = getEffects().get(name);
 
         return myEffect;
     }
@@ -286,9 +287,10 @@ public final class RunLogic {
         List<String> textualEffects;
         textualEffects = new ArrayList<String>();
 
-        for (final AEffect oneEffect : getEffects()) {
-            final String name = (oneEffect.getClass().getCanonicalName());
-            textualEffects.add(name);
+        Set<String> s = getTriggers().keySet();
+        Iterator<String> i = s.iterator();
+        while (i.hasNext()) {
+            textualEffects.add(i.next());
         }
 
         return textualEffects;
@@ -305,47 +307,48 @@ public final class RunLogic {
     }
 
     /**
-     * @param triggers the triggers to set
+     * @param triggers
+     *            the triggers to set
      */
-    private void setTriggers(List<ATrigger> triggers) {
+    private void setTriggers(HashMap<String, ATrigger> triggers) {
         this.triggers = triggers;
     }
 
     /**
      * @return the triggers
      */
-    private List<ATrigger> getTriggers() {
+    private HashMap<String, ATrigger> getTriggers() {
         return triggers;
     }
 
     /**
-     * @param effects the effects to set
+     * @param hashMap
+     *            the effects to set
      */
-    private void setEffects(List<AEffect> effects) {
-        this.effects = effects;
+    private void setEffects(HashMap<String, AEffect> hashMap) {
+        this.effects = hashMap;
     }
 
     /**
      * @return the effects
      */
-    private List<AEffect> getEffects() {
+    HashMap<String, AEffect> getEffects() {
         return effects;
     }
 
     /**
-     * @param combos the combos to set
+     * @param hashMap
+     *            the combos to set
      */
-    private void setCombos(List<ACombination> combos) {
-        this.combos = combos;
+    private void setCombos(HashMap<String, ACombination> hashMap) {
+        this.combos = hashMap;
     }
 
     /**
      * @return the combos
      */
-    List<ACombination> getCombos() {
+    HashMap<String, ACombination> getCombos() {
         return combos;
     }
-
-
 
 }

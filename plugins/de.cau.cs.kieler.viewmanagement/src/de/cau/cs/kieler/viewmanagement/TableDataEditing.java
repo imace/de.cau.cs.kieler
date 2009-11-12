@@ -14,6 +14,8 @@
 
 package de.cau.cs.kieler.viewmanagement;
 
+import java.util.HashMap;
+
 import org.eclipse.jface.viewers.EditingSupport;
 import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jface.viewers.CheckboxCellEditor;
@@ -38,9 +40,6 @@ public class TableDataEditing extends EditingSupport {
     /** The column index. */
     private int columnIndex;
 
-
-
-
     // -------------------------------------------------------------------------
 
     /**
@@ -53,8 +52,6 @@ public class TableDataEditing extends EditingSupport {
      */
     public TableDataEditing(DataTableViewer viewer, int columnIndex) {
         super(viewer);
-
-
 
         // Create the correct editor based on the column index
         switch (columnIndex) {
@@ -126,7 +123,6 @@ public class TableDataEditing extends EditingSupport {
 
     // -------------------------------------------------------------------------
 
-    @SuppressWarnings("static-access")
     protected void setValue(Object element, Object value) {
         TableData tableData = (TableData) element;
 
@@ -139,13 +135,16 @@ public class TableDataEditing extends EditingSupport {
                     TableData data = (TableData) element;
                     String comboToActivate = data.getComboName();
                     // Add combination to activeCombos for later finalization
-                    RunLogic.getInstance().activeCombos.add(comboToActivate);
+                    // RunLogic.getInstance().activeCombos.add(comboToActivate);
                     // Search for combination and initialize
-                    for (ACombination oneCombination : (RunLogic.getInstance().getCombos())) {
-                        if (oneCombination.getClass().getCanonicalName().equals(comboToActivate))
-                            oneCombination.initialize();
+
+                    ACombination c = RunLogic.getInstance().getCombos().get(comboToActivate);
+                    if (c != null) {
+                        c.initialize();
                     }
+
                 }
+
             } else {
                 // checkbox unmarked
                 tableData.setComboActive(false);
@@ -154,15 +153,16 @@ public class TableDataEditing extends EditingSupport {
 
                     String comboToDeactivate = data.getComboName();
                     // Remove combination from list of active combos
-                    RunLogic.getInstance().activeCombos.remove(comboToDeactivate);
+                    // RunLogic.getInstance().activeCombos.remove(comboToDeactivate);
                     // Search for combination and finalize
-
-                    for (ACombination oneCombination : (RunLogic.getInstance().getCombos())) {
-                        if (oneCombination.getClass().getCanonicalName().equals(comboToDeactivate))
-                            oneCombination.finalize();
+                    ACombination c = RunLogic.getInstance().getCombos().get(comboToDeactivate);
+                    if (c != null) {
+                        c.finalize();
                     }
+
                 }
             }
+
             break;
         case 1:
 

@@ -79,7 +79,7 @@ public class ManualLayoutCombination extends ACombination {
      * the 'undo' is done by the layout command framework
      */
     @Override
-    public void undoLastEffect() {
+    public void undoEffects() {
         //nothing we can undo here
     }
 

@@ -87,7 +87,7 @@ public class SelectionHighlightCombination extends ACombination {
 
     }
 
-    public final void undoLastEffect() {
+    public final void undoEffects() {
         if (effect != null)
             effect.undo();
 

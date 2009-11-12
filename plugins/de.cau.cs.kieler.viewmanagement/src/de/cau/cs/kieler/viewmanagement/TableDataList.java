@@ -106,8 +106,9 @@ public class TableDataList {
      */
     public TableData get(String key) {
         for (int c = 0; c < tableDataList.size(); c++) {
-            if (tableDataList.get(c).getComboName().equals(key))
+            if (tableDataList.get(c).getComboName().equals(key)) {
                 return tableDataList.get(c);
+            }
         }
         return null;
     }

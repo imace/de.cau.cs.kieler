@@ -84,7 +84,7 @@ public class SelectionZoomCombination extends ACombination {
     }
 
     @Override
-    public void undoLastEffect() {
+    public void undoEffects() {
         // TODO Auto-generated method stub
 
     }
