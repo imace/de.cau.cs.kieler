@@ -15,8 +15,6 @@
 
 package de.cau.cs.kieler.viewmanagement.effects;
 
-
-
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeEditPart;
 import de.cau.cs.kieler.viewmanagement.AEffect;
@@ -24,7 +22,8 @@ import de.cau.cs.kieler.viewmanagement.AEffect;
 /**
  * @author nbe
  * 
- * The UnFilterEffect makes objects visible again that were earlier hidden by the FilterEffect.
+ *         The UnFilterEffect makes objects visible again that were earlier hidden by the
+ *         FilterEffect.
  */
 public class UnFilterEffect extends AEffect {
 

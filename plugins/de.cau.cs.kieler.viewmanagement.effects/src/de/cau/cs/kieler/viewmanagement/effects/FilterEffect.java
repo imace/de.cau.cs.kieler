@@ -20,6 +20,8 @@ import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeEditPart;
 import de.cau.cs.kieler.viewmanagement.AEffect;
 
 /**
+ * The filter effect hides the affected object.
+ * 
  * @author nbe
  * 
  */
@@ -29,7 +31,7 @@ public class FilterEffect extends AEffect {
     private IFigure undoFigure;
 
     /**
-     * The filter effect hides the affected object.
+     * default constructor, nothing to be done here
      */
     public FilterEffect() {
 
@@ -51,7 +53,7 @@ public class FilterEffect extends AEffect {
      */
     public final void undo() {
         if ((this.undoFigure != null)) {
-            
+
             this.undoFigure.setVisible(true);
         }
     }

@@ -53,15 +53,19 @@ public class SelectionFilterCombination extends ACombination {
      */
 
     public final boolean evaluate(final TriggerEventObject triggerEvent) {
+        if (triggerEvent.getTriggerState() == true) {
+            EditPart affectedObject = getEditPart(triggerEvent.getAffectedObject());
+            if (affectedObject instanceof ShapeEditPart) {
+                this.affectedObject = (ShapeEditPart) affectedObject;
+                this.objectParameters = triggerEvent.getParameters();
 
-        EditPart affectedObject = getEditPart(triggerEvent.getAffectedObject());
-        if (affectedObject instanceof ShapeEditPart) {
-            this.affectedObject = (ShapeEditPart) affectedObject;
-            this.objectParameters = triggerEvent.getParameters();
-
+            } else {
+                return false;
+            }
             return true;
-        } else
-            return false;
+        }
+        return false;
+        
     }
 
     /*
@@ -71,6 +75,7 @@ public class SelectionFilterCombination extends ACombination {
      */
 
     public final void execute() {
+       
         if (effect == null) {
             effect = new FilterEffect();
         }
@@ -79,6 +84,13 @@ public class SelectionFilterCombination extends ACombination {
         effect.setParameters(this.objectParameters);
         effect.execute();
 
+    }
+
+    public final void undoEffects() {
+        if (effect != null) {
+
+            effect.undo();
+        }
     }
 
 }

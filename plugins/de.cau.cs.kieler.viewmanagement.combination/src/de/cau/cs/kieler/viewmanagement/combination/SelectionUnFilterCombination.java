@@ -42,15 +42,18 @@ public class SelectionUnFilterCombination extends ACombination {
 
     @Override
     public final boolean evaluate(final TriggerEventObject triggerEvent) {
-        final EditPart affectedObject = getEditPart(triggerEvent.getAffectedObject());
-        if (affectedObject instanceof ShapeEditPart) {
-            this.affectedObject = (ShapeEditPart) affectedObject;
-            this.objectParameters = triggerEvent.getParameters();
+        if (triggerEvent.getTriggerState() == true) {
+            EditPart affectedObject = getEditPart(triggerEvent.getAffectedObject());
+            if (affectedObject instanceof ShapeEditPart) {
+                this.affectedObject = (ShapeEditPart) affectedObject;
+                this.objectParameters = triggerEvent.getParameters();
 
+            } else {
+                return false;
+            }
             return true;
-        } else {
-            return false;
         }
+        return false;
 
     }
 
