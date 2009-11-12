@@ -12,7 +12,7 @@
  * See the file epl-v10.html for the license text.
  * 
  *****************************************************************************/
-package de.cau.cs.kieler.viewmanagement;
+package de.cau.cs.kieler.viewmanagement.view;
 
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IToolBarManager;
@@ -27,6 +27,8 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.part.ViewPart;
 import org.eclipse.ui.part.WorkbenchPart;
 
+import de.cau.cs.kieler.viewmanagement.RunLogic;
+
 /**
  * Creates a new view "VM Control" to manually actuate the view management and its combinations. Will display a view
  * with a toggle button to turn the view management on or off. When on, it will list all the available combinations
@@ -36,9 +38,9 @@ import org.eclipse.ui.part.WorkbenchPart;
  * 
  * 
  */
-public class VMControl extends ViewPart {
+public class VMControlView extends ViewPart {
 
-    private static VMControl vmControl;
+    private static VMControlView vmControl;
     DataTableViewer viewer;
     private Action actionNew;
 
@@ -47,7 +49,7 @@ public class VMControl extends ViewPart {
      * together with their status. It provides also manual control over the single combinations as
      * well as the whole View Management.
      */
-    public VMControl() {
+    public VMControlView() {
         vmControl = this;
 
     }
@@ -62,7 +64,7 @@ public class VMControl extends ViewPart {
      * 
      * @return the instance
      */
-    public VMControl getInstance() {
+    public VMControlView getInstance() {
         return vmControl;
     }
 

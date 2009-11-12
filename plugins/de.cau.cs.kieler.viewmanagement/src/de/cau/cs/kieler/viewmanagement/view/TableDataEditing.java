@@ -12,7 +12,7 @@
  * See the file epl-v10.html for the license text.
  */
 
-package de.cau.cs.kieler.viewmanagement;
+package de.cau.cs.kieler.viewmanagement.view;
 
 import java.util.HashMap;
 
@@ -20,6 +20,9 @@ import org.eclipse.jface.viewers.EditingSupport;
 import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jface.viewers.CheckboxCellEditor;
 import org.eclipse.swt.SWT;
+
+import de.cau.cs.kieler.viewmanagement.ACombination;
+import de.cau.cs.kieler.viewmanagement.RunLogic;
 
 /**
  * The class TableDataEditing implements the editing support for DataTable entries of the table.

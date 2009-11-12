@@ -27,7 +27,7 @@ import org.eclipse.gef.EditPart;
 
 public abstract class AEffect {
 
-    protected EditPart affectedObject;
+    private EditPart affectedObject;
 
     /**
      * Abstract method to execute a specific effect. Must be implemented by the developer of the
@@ -43,7 +43,7 @@ public abstract class AEffect {
      *            the target of the effect
      */
     public void setTarget(final EditPart target) {
-        this.affectedObject = target;
+        this.affectedObject= target;
     }
 
     /**
@@ -55,6 +55,15 @@ public abstract class AEffect {
      *            the parameters
      */
     public void setParameters(final Object parameters) {
+    }
+
+  
+
+    /**
+     * @return the affectedObject
+     */
+    protected EditPart getAffectedObject() {
+        return affectedObject;
     }
 
 }

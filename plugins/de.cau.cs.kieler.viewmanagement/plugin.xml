@@ -14,7 +14,7 @@
          point="org.eclipse.ui.views">
       <view
             category="de.cau.cs.kieler"
-            class="de.cau.cs.kieler.viewmanagement.VMControl"
+            class="de.cau.cs.kieler.viewmanagement.view.VMControlView"
             id="de.cau.cs.kieler.viewmanagement.VMControl"
             name="VM Control"
             restorable="true">

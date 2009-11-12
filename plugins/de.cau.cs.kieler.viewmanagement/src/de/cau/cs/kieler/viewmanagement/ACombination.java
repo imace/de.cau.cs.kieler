@@ -26,12 +26,15 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PlatformUI;
 
 /**
- * Abstract definition of a combination. The combination connects triggers and effects and is itself a triggerlsitener.
- * Triggers will call its notifyTrigger() to inform a listening combination about a new event. The combination will
- * then receive a TriggerEventObject with information. A combination has two main methods, evaluate() and execute().
- * evaluate() should determine whether or not the combination should be executed. Here e.g. a number of triggers could
- * be connected or other conditions considered before executing. execute will be called if evaluate returns true.
- * execute() is the place where the desired effects should be initialized, set up and finally executed themselves. 
+ * Abstract definition of a combination. The combination connects triggers and effects and is itself
+ * a triggerlsitener. Triggers will call its notifyTrigger() to inform a listening combination about
+ * a new event. The combination will then receive a TriggerEventObject with information. A
+ * combination has two main methods, evaluate() and execute(). evaluate() should determine whether
+ * or not the combination should be executed. Here e.g. a number of triggers could be connected or
+ * other conditions considered before executing. execute will be called if evaluate returns true.
+ * execute() is the place where the desired effects should be initialized, set up and finally
+ * executed themselves.
+ * 
  * @author nbe
  * 
  * 
@@ -78,7 +81,7 @@ public abstract class ACombination implements ITriggerListener {
     /**
      * @return Status of the combination, active or not
      */
-    public final boolean getActive() {
+    public final boolean isActive() {
         return comboActive;
     }
 
@@ -98,7 +101,7 @@ public abstract class ACombination implements ITriggerListener {
     public final void initialize() {
         // get triggers of interest
         triggersToEvaluate = getTriggers();
-        // remove as listener from those triggers
+        // add as listener from those triggers
         for (int i = 0; i < triggersToEvaluate.size(); i++) {
             final ATrigger a = triggersToEvaluate.get(i);
             a.addListener(this);
@@ -128,20 +131,20 @@ public abstract class ACombination implements ITriggerListener {
      * Reset hashed edit parts. This is when reusing combination for e.g., a different editor.
      * (added by cmot)
      * 
-     * This method is needed if you want to use the visualization effect for different
-     * editors (after another). Reset of EditPartCache is necessary. (cmot, 09.11.09)
-     * Added a reset of the second cache. (cmot, 10.11.09)
+     * This method is needed if you want to use the visualization effect for different editors
+     * (after another). Reset of EditPartCache is necessary. (cmot, 09.11.09) Added a reset of the
+     * second cache. (cmot, 10.11.09)
      * 
      */
-     protected void resetHashedEditParts() {
-         if (this.cachedEditParts != null)
-             this.cachedEditParts.clear();
-         if (this.cachedEditParts2 != null)
-             this.cachedEditParts2.clear();
-     }
-     
+    protected void resetHashedEditParts() {
+        if (this.cachedEditParts != null)
+            this.cachedEditParts.clear();
+        if (this.cachedEditParts2 != null)
+            this.cachedEditParts2.clear();
+    }
+
     /**
-     * This method is called whenever a trigger the combination is listening to has a new event
+     * This is called whenever a trigger the combination is listening to has a new event
      */
     public final void notifyTrigger(TriggerEventObject triggerEvent) {
 
@@ -157,7 +160,7 @@ public abstract class ACombination implements ITriggerListener {
      * 
      * @return rootEP, result of the search
      */
-    public final EditPart getRootEPAsParent() {
+    public static final EditPart getRootEPAsParent() {
         EditPart rootEP = null;
         // get active editor
         final IEditorPart editor = PlatformUI.getWorkbench().getActiveWorkbenchWindow()
@@ -185,6 +188,8 @@ public abstract class ACombination implements ITriggerListener {
      *            by calling getRootEPAsParent
      * @return the result of the search, in case of success the corresponding EditPart, otherwise
      *         null
+     * @deprecated with this method, adressing of transitions is not possible. Adressing should be
+     *             done with EObjects. Use getEditPart(EObject eObject) instead.
      */
     public final EditPart translateToEditPart(final String elementURIFragment, EditPart parent) {
         if (parent == null)

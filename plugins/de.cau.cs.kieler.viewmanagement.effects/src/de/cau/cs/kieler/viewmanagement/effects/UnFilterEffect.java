@@ -37,7 +37,7 @@ public class UnFilterEffect extends AEffect {
 
     @Override
     public final void execute() {
-        final IFigure selectedFigure = ((ShapeEditPart) this.affectedObject).getFigure();
+        final IFigure selectedFigure = ((ShapeEditPart) this.getAffectedObject()).getFigure();
 
         if (selectedFigure.isVisible()) {
 

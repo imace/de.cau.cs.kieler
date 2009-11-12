@@ -36,7 +36,7 @@ public class FilterEffect extends AEffect {
     }
 
     public final void execute() {
-        IFigure selectedFigure = ((ShapeEditPart) this.affectedObject).getFigure();
+        IFigure selectedFigure = ((ShapeEditPart) this.getAffectedObject()).getFigure();
 
         if (selectedFigure.isVisible()) {
             undoFigure = selectedFigure;

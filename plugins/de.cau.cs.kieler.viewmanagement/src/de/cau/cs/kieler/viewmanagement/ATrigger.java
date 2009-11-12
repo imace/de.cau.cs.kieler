@@ -32,7 +32,7 @@ public abstract class ATrigger {
     private EventListenerList triggerListener = new EventListenerList();
     
     /**
-     * Method to add a listener to a trigger. It will be notified with a TriggerEventObject in case
+     * Adds a listener to a trigger. It will be notified with a TriggerEventObject in case
      * the trigger fires.
      * 
      * @param triggerlistener
@@ -43,7 +43,7 @@ public abstract class ATrigger {
     }
 
     /**
-     * Method to remove a listener from a trigger
+     * Removes a listener from a trigger
      * 
      * @param triggerlistener
      *            the listener to be removed
@@ -52,7 +52,10 @@ public abstract class ATrigger {
         triggerListener.remove(ITriggerListener.class, triggerlistener);
     }
 
-    // notifies all listeners on the listener list with the triggerEvent
+    /**
+     * Notifies all listeners with the triggerEvent when an event occurs
+     * @param triggerEvent the object all listeners receive on occurrence of an event
+     */
     protected synchronized void notifyTrigger(final TriggerEventObject triggerEvent) {
 
         for (ITriggerListener l : triggerListener.getListeners(ITriggerListener.class))
@@ -71,7 +74,7 @@ public abstract class ATrigger {
     }
 
     /**
-     * Method to translate an EditPart to URIFragment. Note: To address the objects, URIFragments
+     * Translates an EditPart to URIFragment. Note: To address the objects, URIFragments
      * should no longer be used. Addressing with EObjects provides a much better functionality, such
      * as sematical addressing, addressing of TransitionEditParts.
      * 
@@ -79,7 +82,7 @@ public abstract class ATrigger {
      *            EditPart that should be translated
      * @return String with URIFragment, if available
      */
-    public String translateToURI(final EditPart sourceObject) {
+    public final String translateToURI(final EditPart sourceObject) {
         try {
             // get the view to the sourceObject
             View view = (View)  sourceObject.getModel();
@@ -97,7 +100,7 @@ public abstract class ATrigger {
     }
 
     /**
-     * Method to translate an Editpart to EObject. This should be used instead of addressing with
+     * Translates an Editpart to EObject. This should be used instead of addressing with
      * URIFragements. EObjects are used to exchange the objects that are t be affected by effects of
      * the View Management between the plugins of the View Management or other plugins.
      * 
@@ -105,7 +108,7 @@ public abstract class ATrigger {
      *            EditPart that should be translated
      * @return EObject that represents the EditPart
      */
-    public EObject translateToEObject(final EditPart sourceObject) {
+    public final EObject translateToEObject(final EditPart sourceObject) {
         // get the view to the sourceObject
         View view = (View) sourceObject.getModel();
         // get the corresponding model element.

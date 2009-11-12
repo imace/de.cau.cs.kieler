@@ -25,6 +25,9 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
 
+import de.cau.cs.kieler.viewmanagement.view.TableData;
+import de.cau.cs.kieler.viewmanagement.view.TableDataList;
+
 /**
  * The RunLogic is the central administration of the view management. It keeps track of all the
  * available components, triggers, effects and combinations. On startup, it reads all of them and
@@ -113,7 +116,6 @@ public final class RunLogic {
         effects.clear();
         activeCombos.clear();
 
-
         // set indication that the RunLogic is running (This is needed to determine the action of
         // the VM on/off button in the VM Control view)
         state = true;
@@ -132,37 +134,31 @@ public final class RunLogic {
      * for active combos and finalize for active triggers. Sets status runLogicState.
      */
     public void unregisterListeners() {
-        Set<String> test2 = getCombos().keySet();
-        Collection<ACombination> test3 = getCombos().values();
-        Iterator<ACombination> i3 = test3.iterator();
-        Iterator<String> i2 = test2.iterator();
+
+        
+        Iterator<ACombination> i3 = getCombos().values().iterator();
+        Iterator<String> i2 = getCombos().keySet().iterator();
+        //Remove entries from VM Control table
         while (i2.hasNext()) {
             TableDataList.getInstance().remove(i2.next());
         }
-        while(i3.hasNext()){
-        if (i3.next().getActive()){
-            i3.next().finalize();
+        //finalize combos, if they are active
+        while (i3.hasNext()) {
+            if (i3.next().isActive()) {
+                i3.next().finalize();
+            }
         }
-        }
-            
-//            // while
-//            // remove all entries in the VM Control view
-//             for (final ACombination oneCombination : getCombos()) {
-//             TableDataList.getInstance().remove(oneCombination.getClass().getCanonicalName());
-//             // finalize only combos that were active
-//             if (oneCombination.getActive()) {
-//             oneCombination.finalize();
-//             }
-            // update the VM Control table
-            TableDataList.getInstance().updateViewAsync();
-        
+
+        // update the VM Control table
+        TableDataList.getInstance().updateViewAsync();
+
         // finalize the triggers
         Set<String> t = triggers.keySet();
         Iterator<String> i = t.iterator();
         while (i.hasNext()) {
             triggers.get(i.next()).finalize();
         }
-        
+
         // indicate that the RunLogic is now off (This is needed to determine the action of
         // the VM on/off button in the VM Control view)
         state = false;
@@ -227,7 +223,7 @@ public final class RunLogic {
                 getCombos().put(myExtensions[i].getAttribute("name"), myCombo);
                 // add an entry tp the TableDataList for each combo
                 TableDataList.getInstance().add(
-                        new TableData(TableDataList.getInstance(), myCombo.getActive(),
+                        new TableData(TableDataList.getInstance(), myCombo.isActive(),
                                 myExtensions[i].getAttribute("name")));
                 // update the table
                 TableDataList.getInstance().updateViewAsync();
@@ -239,7 +235,7 @@ public final class RunLogic {
     }
 
     /**
-     * Returns a trigger from list triggers that matches the given name in the argument. 
+     * Returns a trigger from list triggers that matches the given name in the argument.
      * 
      * @param name
      *            name of trigger to be searched for
@@ -252,7 +248,7 @@ public final class RunLogic {
     }
 
     /**
-     * Returns a combination from list combos that matches the given name in the argument. 
+     * Returns a combination from list combos that matches the given name in the argument.
      * 
      * @param name
      *            name of the combination to be searched for
@@ -265,7 +261,7 @@ public final class RunLogic {
     }
 
     /**
-     * Returns an effect from list effects that matches the given name in the argument. 
+     * Returns an effect from list effects that matches the given name in the argument.
      * 
      * @param name
      *            of the effect to be searched for
@@ -347,7 +343,7 @@ public final class RunLogic {
     /**
      * @return the combos
      */
-    HashMap<String, ACombination> getCombos() {
+    public HashMap<String, ACombination> getCombos() {
         return combos;
     }
 
