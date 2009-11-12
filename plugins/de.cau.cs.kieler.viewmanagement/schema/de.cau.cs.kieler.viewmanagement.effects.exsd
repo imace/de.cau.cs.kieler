@@ -6,7 +6,9 @@
          <meta.schema plugin="de.cau.cs.kieler.viewmanagement" id="de.cau.cs.kieler.viewmanagement.effects" name="effects"/>
       </appinfo>
       <documentation>
-         [Enter description of this extension point.]
+         Here visual effects can be registered. An effect has to extend AEffect.
+Effects always have an affected object of some sort which is related to the visual effect, e.g. should be highlighted, layouted and so on. Optional parameters carry additional information, e.g. text to be displayed, setup data for the effect (colour, line width).
+The effect has a main method execute() where the actual work of creating, setting up and placing the effect is done.
       </documentation>
    </annotation>
 
@@ -76,41 +78,21 @@
       </complexType>
    </element>
 
-   <annotation>
-      <appinfo>
-         <meta.section type="since"/>
-      </appinfo>
-      <documentation>
-         [Enter the first release in which this extension point appears.]
-      </documentation>
-   </annotation>
+
+
+
 
    <annotation>
       <appinfo>
-         <meta.section type="examples"/>
+         <meta.section type="copyright"/>
       </appinfo>
       <documentation>
-         [Enter extension point usage example here.]
+         Copyright 2008 by&lt;br&gt;
+&amp;nbsp;+ Christian-Albrechts-University of Kiel&lt;br&gt;
+&amp;nbsp;&amp;nbsp;&amp;nbsp;+ Department of Computer Science&lt;br&gt;
+&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;+ Real-Time and Embedded Systems Group&lt;br&gt;
+This program and the accompanying materials are made available under the terms of the Eclipse Public License (EPL) which accompanies this distribution, and is available at &lt;a href=&quot;http://www.eclipse.org/legal/epl-v10.html&quot;&gt;http://www.eclipse.org/legal/epl-v10.html&lt;/a&gt;.
       </documentation>
    </annotation>
-
-   <annotation>
-      <appinfo>
-         <meta.section type="apiinfo"/>
-      </appinfo>
-      <documentation>
-         [Enter API information here.]
-      </documentation>
-   </annotation>
-
-   <annotation>
-      <appinfo>
-         <meta.section type="implementation"/>
-      </appinfo>
-      <documentation>
-         [Enter information about supplied implementation of this extension point.]
-      </documentation>
-   </annotation>
-
 
 </schema>

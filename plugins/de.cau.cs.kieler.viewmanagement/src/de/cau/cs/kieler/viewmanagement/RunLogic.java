@@ -22,11 +22,21 @@ import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
 
 /**
+ * The RunLogic is the central administration of the view management. It keeps track of all the available components,
+ * triggers, effects and combinations. On startup, it reads all of them and makes instances available to the other
+ * components. It can also be asked to give an instance of a specified component, using e.g. the getTrigger method.
+ * Finally it provides with finalize() a way to simply shut down the view management.
  * @author nbe
  * 
  */
 
 public final class RunLogic {
+    private static final String effectspath = "de.cau.cs.kieler.viewmanagement.effects";
+
+    private static final String combopath = "de.cau.cs.kieler.viewmanagement.combination";
+
+    private static final String triggerpath = "de.cau.cs.kieler.viewmanagement.triggers";
+
     // there should be only one RunLogic at a time
     private static RunLogic runlogic;
 
@@ -48,22 +58,39 @@ public final class RunLogic {
         return runlogic;
     }
 
-    // Lists of the components of the View Management
-    static List<ATrigger> triggers;
-    static List<AEffect> effects;
-    static List<ACombination> combos;
-    // keeps track of active combinations in order to finalize them once the RunLogic is shutting
-    // down
+   /**
+    * lists instances of all available triggers
+    */
+    private static List<ATrigger> triggers;
+
+    /**
+     * lists instances of all available effects
+     */
+    private static List<AEffect> effects;
+
+    /**
+     * lists instances of all available combinations
+     */
+    private static List<ACombination> combos;
+
+    /**
+     * keeps track of the combos that have been activated in order to shut them down cleanly if needed.
+     */
     List<String> activeCombos;
-    private boolean runlogicState;
+
+    /**
+     * indicates the status of the RunLogic. Is used to determine the action of the toggle button in the 
+     * VM Control view.
+     */
+    private boolean state;
 
     /**
      * Initializes lists to be used to store available components
      */
     public void init() {
-        triggers = new ArrayList<ATrigger>();
-        effects = new ArrayList<AEffect>();
-        combos = new ArrayList<ACombination>();
+        setTriggers(new ArrayList<ATrigger>());
+        setEffects(new ArrayList<AEffect>());
+        setCombos(new ArrayList<ACombination>());
         // update the table in the VM Control view that displays all available combinations
         TableDataList.getInstance().updateViewAsync();
         activeCombos = new ArrayList<String>();
@@ -79,7 +106,7 @@ public final class RunLogic {
         this.init();
         // set indication that the RunLogic is running (This is needed to determine the action of
         // the VM on/off button in the VM Control view)
-        runlogicState = true;
+        state = true;
         // read available effects, triggers and combinations
         this.readEffects();
         this.readTriggers();
@@ -96,7 +123,7 @@ public final class RunLogic {
      */
     public void unregisterListeners() {
         // remove all entries in the VM Control view
-        for (final ACombination oneCombination : combos) {
+        for (final ACombination oneCombination : getCombos()) {
             TableDataList.getInstance().remove(oneCombination.getClass().getCanonicalName());
             // finalize only combos that were active
             if (oneCombination.getActive()) {
@@ -106,11 +133,11 @@ public final class RunLogic {
             TableDataList.getInstance().updateViewAsync();
         }
         // finalize the triggers
-        for (final ATrigger oneTrigger : triggers)
+        for (final ATrigger oneTrigger : getTriggers())
             oneTrigger.finalize();
         // indicate that the RunLogic is now off (This is needed to determine the action of
         // the VM on/off button in the VM Control view)
-        runlogicState = false;
+        state = false;
 
         return;
     }
@@ -123,7 +150,7 @@ public final class RunLogic {
         for (int i = 0; i < myExtensions.length; i++) {
             try {
                 ATrigger myTrigger = (ATrigger) myExtensions[i].createExecutableExtension("class");
-                RunLogic.triggers.add(myTrigger);
+                RunLogic.getTriggers().add(myTrigger);
             } catch (CoreException e) {
 
                 e.printStackTrace();
@@ -139,7 +166,7 @@ public final class RunLogic {
         for (int i = 0; i < myExtensions.length; i++) {
             try {
                 AEffect myEffect = (AEffect) myExtensions[i].createExecutableExtension("class");
-                RunLogic.effects.add(myEffect);
+                RunLogic.getEffects().add(myEffect);
             } catch (CoreException e) {
 
                 e.printStackTrace();
@@ -158,7 +185,7 @@ public final class RunLogic {
 
                 ACombination myCombo = (ACombination) myExtensions[i]
                         .createExecutableExtension("class");
-                RunLogic.combos.add(myCombo);
+                RunLogic.getCombos().add(myCombo);
                 // add an entry tp the TableDataList for each combo
                 TableDataList.getInstance().add(
                         new TableData(TableDataList.getInstance(), myCombo.getActive(), myCombo
@@ -183,12 +210,12 @@ public final class RunLogic {
      */
     public static ATrigger getTrigger(final String name) {
         IConfigurationElement[] myExtensions = Platform.getExtensionRegistry()
-                .getConfigurationElementsFor("de.cau.cs.kieler.viewmanagement.triggers");
+                .getConfigurationElementsFor(triggerpath);
         ATrigger myTrigger = null;
         for (int i = 0; i < myExtensions.length; i++) {
             String attribute = myExtensions[i].getAttribute("name");
             if (attribute.equals(name)) {
-                myTrigger = triggers.get(i);
+                myTrigger = getTriggers().get(i);
 
             }
         }
@@ -207,12 +234,12 @@ public final class RunLogic {
      */
     public static ACombination getCombination(final String name) {
         IConfigurationElement[] myExtensions = Platform.getExtensionRegistry()
-                .getConfigurationElementsFor("de.cau.cs.kieler.viewmanagement.combination");
+                .getConfigurationElementsFor(combopath);
         ACombination myCombination = null;
         for (int i = 0; i < myExtensions.length; i++) {
             String attribute = myExtensions[i].getAttribute("name");
             if (attribute.equals(name)) {
-                myCombination = combos.get(i);
+                myCombination = getCombos().get(i);
 
             }
         }
@@ -231,12 +258,12 @@ public final class RunLogic {
      */
     public static AEffect getEffect(final String name) {
         IConfigurationElement[] myExtensions = Platform.getExtensionRegistry()
-                .getConfigurationElementsFor("de.cau.cs.kieler.viewmanagement.effects");
+                .getConfigurationElementsFor(effectspath);
         AEffect myEffect = null;
         for (int i = 0; i < myExtensions.length; i++) {
             String attribute = myExtensions[i].getAttribute("name");
             if (attribute.equals(name)) {
-                myEffect = effects.get(i);
+                myEffect = getEffects().get(i);
 
             }
         }
@@ -249,13 +276,13 @@ public final class RunLogic {
      * 
      * @return list of Strings of available effect names
      */
-    public static List<String> getEffects() {
+    public static List<String> getEffectsAsText() {
         List<String> textualEffects;
         textualEffects = new ArrayList<String>();
 
-        for (final AEffect oneEffect : effects) {
-            final String test2 = (oneEffect.getClass().getCanonicalName());
-            textualEffects.add(test2);
+        for (final AEffect oneEffect : getEffects()) {
+            final String name = (oneEffect.getClass().getCanonicalName());
+            textualEffects.add(name);
         }
 
         return textualEffects;
@@ -267,8 +294,50 @@ public final class RunLogic {
      * 
      * @return the state of the RunLogic
      */
-    public boolean getRunlogicState() {
-        return runlogicState;
+    public boolean getState() {
+        return state;
+    }
+
+    /**
+     * @param triggers the triggers to set
+     */
+    static void setTriggers(List<ATrigger> triggers) {
+        RunLogic.triggers = triggers;
+    }
+
+    /**
+     * @return the triggers
+     */
+    static List<ATrigger> getTriggers() {
+        return triggers;
+    }
+
+    /**
+     * @param effects the effects to set
+     */
+    static void setEffects(List<AEffect> effects) {
+        RunLogic.effects = effects;
+    }
+
+    /**
+     * @return the effects
+     */
+    static List<AEffect> getEffects() {
+        return effects;
+    }
+
+    /**
+     * @param combos the combos to set
+     */
+    static void setCombos(List<ACombination> combos) {
+        RunLogic.combos = combos;
+    }
+
+    /**
+     * @return the combos
+     */
+    static List<ACombination> getCombos() {
+        return combos;
     }
 
 }

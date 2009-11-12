@@ -6,7 +6,7 @@
          <meta.schema plugin="de.cau.cs.kieler.viewmanagement" id="de.cau.cs.kieler.viewmanagement.triggers" name="triggers"/>
       </appinfo>
       <documentation>
-         [Enter description of this extension point.]
+         This is the extension point for triggers. A trigger will generate an event or receive an external event. It will then wrap up the relevant information in a TriggerEventObject which consists of three objects, triggerActive, affectedObject and parameters. The first is a flag to indicate whether the event just occured and is still valid or just disappeared and is now invalid. The second object, affectedObject is to specify the object that should later be associated with an effect. Finally parameters may optionally transfer additional information that is needed in the following combination or effect.
       </documentation>
    </annotation>
 
@@ -76,41 +76,21 @@
       </complexType>
    </element>
 
-   <annotation>
-      <appinfo>
-         <meta.section type="since"/>
-      </appinfo>
-      <documentation>
-         [Enter the first release in which this extension point appears.]
-      </documentation>
-   </annotation>
+
+
+
 
    <annotation>
       <appinfo>
-         <meta.section type="examples"/>
+         <meta.section type="copyright"/>
       </appinfo>
       <documentation>
-         [Enter extension point usage example here.]
+         Copyright 2008 by&lt;br&gt;
+&amp;nbsp;+ Christian-Albrechts-University of Kiel&lt;br&gt;
+&amp;nbsp;&amp;nbsp;&amp;nbsp;+ Department of Computer Science&lt;br&gt;
+&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;+ Real-Time and Embedded Systems Group&lt;br&gt;
+This program and the accompanying materials are made available under the terms of the Eclipse Public License (EPL) which accompanies this distribution, and is available at &lt;a href=&quot;http://www.eclipse.org/legal/epl-v10.html&quot;&gt;http://www.eclipse.org/legal/epl-v10.html&lt;/a&gt;.
       </documentation>
    </annotation>
-
-   <annotation>
-      <appinfo>
-         <meta.section type="apiinfo"/>
-      </appinfo>
-      <documentation>
-         [Enter API information here.]
-      </documentation>
-   </annotation>
-
-   <annotation>
-      <appinfo>
-         <meta.section type="implementation"/>
-      </appinfo>
-      <documentation>
-         [Enter information about supplied implementation of this extension point.]
-      </documentation>
-   </annotation>
-
 
 </schema>

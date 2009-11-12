@@ -141,7 +141,7 @@ public class TableDataEditing extends EditingSupport {
                     // Add combination to activeCombos for later finalization
                     RunLogic.getInstance().activeCombos.add(comboToActivate);
                     // Search for combination and initialize
-                    for (ACombination oneCombination : (RunLogic.getInstance().combos)) {
+                    for (ACombination oneCombination : (RunLogic.getInstance().getCombos())) {
                         if (oneCombination.getClass().getCanonicalName().equals(comboToActivate))
                             oneCombination.initialize();
                     }
@@ -157,7 +157,7 @@ public class TableDataEditing extends EditingSupport {
                     RunLogic.getInstance().activeCombos.remove(comboToDeactivate);
                     // Search for combination and finalize
 
-                    for (ACombination oneCombination : (RunLogic.getInstance().combos)) {
+                    for (ACombination oneCombination : (RunLogic.getInstance().getCombos())) {
                         if (oneCombination.getClass().getCanonicalName().equals(comboToDeactivate))
                             oneCombination.finalize();
                     }

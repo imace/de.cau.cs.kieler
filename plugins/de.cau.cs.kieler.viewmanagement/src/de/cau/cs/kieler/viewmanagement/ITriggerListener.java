@@ -17,6 +17,7 @@ package de.cau.cs.kieler.viewmanagement;
 import java.util.EventListener;
 
 /**
+ * Interface of a TriggerListener which uses the EventListener
  * @author nbe
  * 
  */

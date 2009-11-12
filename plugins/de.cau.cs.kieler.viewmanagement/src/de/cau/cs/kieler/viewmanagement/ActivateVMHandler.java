@@ -22,15 +22,17 @@ import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.ToolItem;
 
 /**
+ * Handler to activate or deactivate the VM.
  * @author nbe
+ * @deprecated was replaced by a nicer toggle button in the VMControl view.
  * 
  */
 public class ActivateVMHandler extends AbstractHandler implements IHandler {
 
     /**
-     * Method used to activate the VM using a button in the toolbar.
+     * Was used to activate the VM with a button in the toolbar.
      * 
-     * @deprecated should not be used anymore
+     * 
      */
     public ActivateVMHandler() {
 

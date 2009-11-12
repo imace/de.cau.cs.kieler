@@ -17,6 +17,10 @@ package de.cau.cs.kieler.viewmanagement;
 import org.eclipse.gef.EditPart;
 
 /**
+ * Abstract definition of an effect. An effect is a visual alteration of the affectedObject in order to make
+ * it more appealing or useful to the human observer. It has one main method, execute(). Here, the effect will
+ * be e.g. set up (colours, line width and so on) placed and painted. Methods setTarget and setParameters are there
+ * to set the target of the effect (or affectedObject) and parameters (e.g. text to be displayed).  
  * @author nbe
  * 
  */

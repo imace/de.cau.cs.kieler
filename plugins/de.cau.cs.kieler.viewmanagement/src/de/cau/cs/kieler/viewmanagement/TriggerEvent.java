@@ -17,6 +17,7 @@ package de.cau.cs.kieler.viewmanagement;
 import java.util.EventObject;
 
 /**
+ * Base to the TriggerEventObject which is exchanged between the components of the view management.
  * @author nbe
  * 
  */

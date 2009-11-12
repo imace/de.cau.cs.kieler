@@ -26,7 +26,14 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PlatformUI;
 
 /**
+ * Abstract definition of a combination. The combination connects triggers and effects and is itself a triggerlsitener.
+ * Triggers will call its notifyTrigger() to inform a listening combination about a new event. The combination will
+ * then receive a TriggerEventObject with information. A combination has two main methods, evaluate() and execute().
+ * evaluate() should determine whether or not the combination should be executed. Here e.g. a number of triggers could
+ * be connected or other conditions considered before executing. execute will be called if evaluate returns true.
+ * execute() is the place where the desired effects should be initialized, set up and finally executed themselves. 
  * @author nbe
+ * 
  * 
  */
 public abstract class ACombination implements ITriggerListener {

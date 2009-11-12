@@ -20,6 +20,9 @@ import org.eclipse.gef.EditPart;
 import org.eclipse.gmf.runtime.notation.View;
 
 /**
+ * Abstract definition of a trigger. A trigger can have listeners which it will notify whenever an event occurs.
+ * An event may be external (the trigger being a listener itself) or internal with the trigger generating events.
+ * These events need to be packaged in an TriggerEventObject which will then will be argument for the notify method. 
  * @author nbe
  * 
  */
