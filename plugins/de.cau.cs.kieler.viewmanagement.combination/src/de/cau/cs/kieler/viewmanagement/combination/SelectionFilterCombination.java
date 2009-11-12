@@ -40,7 +40,7 @@ public class SelectionFilterCombination extends ACombination {
     private Object objectParameters;
 
     public final List<ATrigger> getTriggers() {
-        this.st = (SelectionTrigger) RunLogic.getTrigger("SelectionTrigger");
+        this.st = (SelectionTrigger) RunLogic.getInstance().getTrigger("SelectionTrigger");
         List<ATrigger> myTriggers = new ArrayList<ATrigger>();
         myTriggers.add(st);
         return myTriggers;

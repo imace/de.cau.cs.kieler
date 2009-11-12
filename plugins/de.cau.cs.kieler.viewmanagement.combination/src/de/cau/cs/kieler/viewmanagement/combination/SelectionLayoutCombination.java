@@ -73,7 +73,7 @@ public class SelectionLayoutCombination extends ACombination {
      */
     @Override
     public List<ATrigger> getTriggers() {
-        this.trigger = (SelectionTrigger) RunLogic.getTrigger("SelectionTrigger");
+        this.trigger = (SelectionTrigger) RunLogic.getInstance().getTrigger("SelectionTrigger");
         List<ATrigger> triggerList = new ArrayList<ATrigger>();
         triggerList.add(trigger);
         return triggerList;

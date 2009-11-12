@@ -101,7 +101,7 @@ public abstract class ACombination implements ITriggerListener {
         // remove as listener from those triggers
         for (int i = 0; i < triggersToEvaluate.size(); i++) {
             final ATrigger a = triggersToEvaluate.get(i);
-            a.addTriggerListener(this);
+            a.addListener(this);
         }
 
     }
@@ -118,7 +118,7 @@ public abstract class ACombination implements ITriggerListener {
         // remove as listener from those triggers
         for (int i = 0; i < triggersToEvaluate.size(); i++) {
             ATrigger a = triggersToEvaluate.get(i);
-            a.removeTriggerListener(this);
+            a.removeListener(this);
 
         }
 

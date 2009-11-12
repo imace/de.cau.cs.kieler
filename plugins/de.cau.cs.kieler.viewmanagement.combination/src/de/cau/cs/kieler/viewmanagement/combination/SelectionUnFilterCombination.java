@@ -68,7 +68,7 @@ public class SelectionUnFilterCombination extends ACombination {
 
     @Override
     public final List<ATrigger> getTriggers() {
-        this.st = (SelectionTrigger) RunLogic.getTrigger("SelectionTrigger");
+        this.st = (SelectionTrigger) RunLogic.getInstance().getTrigger("SelectionTrigger");
         final List<ATrigger> myTriggers = new ArrayList<ATrigger>();
         myTriggers.add(st);
         return myTriggers;

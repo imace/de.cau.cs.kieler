@@ -119,7 +119,7 @@ public class DiagramListener implements IPartListener, IStartup, ResourceSetList
                 if(((EAttributeImpl) feature).getName().equals("collapsed")){
                     Object notifier = notification.getNotifier();
                     Object element = ((View) notifier).getElement();
-                    CollapseExpandTrigger trigger = (CollapseExpandTrigger)RunLogic.getTrigger("CollapseExpandTrigger");
+                    CollapseExpandTrigger trigger = (CollapseExpandTrigger)RunLogic.getInstance().getTrigger("CollapseExpandTrigger");
                     trigger.notifyCollapse((EObject)element);
                 }
             }catch(Exception e){ /*nothing*/}

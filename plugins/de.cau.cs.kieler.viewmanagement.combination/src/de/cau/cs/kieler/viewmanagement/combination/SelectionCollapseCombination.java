@@ -38,7 +38,7 @@ public class SelectionCollapseCombination extends ACombination {
 
     // return triggers of interest, SelectionTrigger in this case
     public final List<ATrigger> getTriggers() {
-        this.st = (SelectionTrigger) RunLogic.getTrigger("SelectionTrigger");
+        this.st = (SelectionTrigger) RunLogic.getInstance().getTrigger("SelectionTrigger");
         List<ATrigger> myTriggers = new ArrayList<ATrigger>();
         myTriggers.add(st);
         return myTriggers;

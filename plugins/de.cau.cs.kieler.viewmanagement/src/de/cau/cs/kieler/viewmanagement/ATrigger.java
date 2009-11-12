@@ -30,9 +30,7 @@ import org.eclipse.gmf.runtime.notation.View;
 public abstract class ATrigger {
 
     private EventListenerList triggerListener = new EventListenerList();
-    private String result;
-    private EObject result2;
-
+    
     /**
      * Method to add a listener to a trigger. It will be notified with a TriggerEventObject in case
      * the trigger fires.
@@ -40,7 +38,7 @@ public abstract class ATrigger {
      * @param triggerlistener
      *            the listener to be added
      */
-    public final void addTriggerListener(final ITriggerListener triggerlistener) {
+    public final void addListener(final ITriggerListener triggerlistener) {
         triggerListener.add(ITriggerListener.class, triggerlistener);
     }
 
@@ -50,7 +48,7 @@ public abstract class ATrigger {
      * @param triggerlistener
      *            the listener to be removed
      */
-    public final void removeTriggerListener(final ITriggerListener triggerlistener) {
+    public final void removeListener(final ITriggerListener triggerlistener) {
         triggerListener.remove(ITriggerListener.class, triggerlistener);
     }
 
@@ -67,7 +65,7 @@ public abstract class ATrigger {
      * 
      * @return number of listeners
      */
-    public int getListenerNumber() {
+    public int getListenerQuantity() {
         final int number = triggerListener.getListenerCount();
         return number;
     }
@@ -84,11 +82,11 @@ public abstract class ATrigger {
     public String translateToURI(final EditPart sourceObject) {
         try {
             // get the view to the sourceObject
-            View view = (View) ((EditPart) sourceObject).getModel();
+            View view = (View)  sourceObject.getModel();
             // get the corresponding EObject
             EObject modelElement = view.getElement();
             // read its URIFragment
-            result = modelElement.eResource().getURIFragment(modelElement);
+            String result = modelElement.eResource().getURIFragment(modelElement);
 
             return result;
         } catch (Exception e) {
@@ -109,11 +107,11 @@ public abstract class ATrigger {
      */
     public EObject translateToEObject(final EditPart sourceObject) {
         // get the view to the sourceObject
-        View view = (View) ((EditPart) sourceObject).getModel();
+        View view = (View) sourceObject.getModel();
         // get the corresponding model element.
-        result2 = view.getElement();
+        EObject result = view.getElement();
 
-        return result2;
+        return result;
 
     }
 

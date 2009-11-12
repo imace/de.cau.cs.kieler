@@ -31,7 +31,7 @@ public class CollapseLayoutCombination extends ACombination {
 
     @Override
     public List<ATrigger> getTriggers() {
-        ATrigger ct = (CollapseExpandTrigger) RunLogic.getTrigger("CollapseExpandTrigger");
+        ATrigger ct = (CollapseExpandTrigger) RunLogic.getInstance().getTrigger("CollapseExpandTrigger");
         List<ATrigger> myTriggers = new ArrayList<ATrigger>();
         myTriggers.add(ct);
         return myTriggers;

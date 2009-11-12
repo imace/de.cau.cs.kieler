@@ -67,7 +67,7 @@ public class ManualLayoutCombination extends ACombination {
      */
     @Override
     public List<ATrigger> getTriggers() {
-        this.trigger = (LayoutTrigger) RunLogic
+        this.trigger = (LayoutTrigger) RunLogic.getInstance()
                 .getTrigger("LayoutTrigger");
         List<ATrigger> triggerList = new ArrayList<ATrigger>();
         triggerList.add(trigger);
