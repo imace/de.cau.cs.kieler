@@ -41,7 +41,8 @@ public final class RunLogic {
     private static RunLogic runlogic;
 
     private RunLogic() {
-
+        runlogic = new RunLogic();
+        init();
     }
 
     /**
@@ -51,9 +52,7 @@ public final class RunLogic {
      */
     public static synchronized RunLogic getInstance() {
         // if there is no instance of the RunLogic, create one
-        if (runlogic == null) {
-            runlogic = new RunLogic();
-        }
+    
 
         return runlogic;
     }
@@ -103,7 +102,10 @@ public final class RunLogic {
      */
     public void registerListeners() {
 
-        this.init();
+        triggers.clear();
+        combos.clear();
+        effects.clear();
+        activeCombos.clear();
         // set indication that the RunLogic is running (This is needed to determine the action of
         // the VM on/off button in the VM Control view)
         state = true;
