@@ -28,7 +28,12 @@ import org.eclipse.ui.part.ViewPart;
 import org.eclipse.ui.part.WorkbenchPart;
 
 /**
- * @author nbe
+ * Creates a new view "VM Control" to manually actuate the view management and its combinations. Will display a view
+ * with a toggle button to turn the view management on or off. When on, it will list all the available combinations
+ * and provide the ability to turn them on and off individually and on the fly by setting a checkbox infront of ot.
+ * @author cmot
+ * @author modified nbe
+ * 
  * 
  */
 public class VMControl extends ViewPart {
@@ -124,7 +129,7 @@ public class VMControl extends ViewPart {
             return actionNew;
         actionNew = new Action() {
             public void run() {
-                if (RunLogic.getInstance().getRunlogicState() == false)
+                if (RunLogic.getInstance().getState() == false)
                     RunLogic.getInstance().registerListeners();
                 else
                     RunLogic.getInstance().unregisterListeners();

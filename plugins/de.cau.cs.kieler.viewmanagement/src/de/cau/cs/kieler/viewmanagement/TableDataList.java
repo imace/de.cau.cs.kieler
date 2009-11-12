@@ -24,7 +24,8 @@ import org.eclipse.swt.widgets.Display;
  * DataTableViewer. This list is modified by the producer and observer DataComponent.
  * 
  * @author Christian Motika - cmot AT informatik.uni-kiel.de
- * @author nbe
+ * @author modified nbe
+ * 
  */
 public class TableDataList {
 

@@ -24,7 +24,8 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
  * entry within the table ViewPart.
  * 
  * @author Christian Motika - cmot AT informatik.uni-kiel.de
- * @author nbe
+ * @author modified nbe
+ *
  */
 public class TableDataLabelProvider implements ITableLabelProvider {
 
