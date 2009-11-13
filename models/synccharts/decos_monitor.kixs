@@ -3,9 +3,9 @@
   <innerStates id="S0" label="SCU_Monitor">
     <signals name="INIT_LEFT"/>
     <signals name="INIT_RIGHT"/>
-    <signals name="RESET"/>
-    <signals name="TIMER"/>
-    <signals name="DRVCOMMAND"/>
+    <signals name="RESET" isInput="true"/>
+    <signals name="TIMER" isInput="true"/>
+    <signals name="DRVCOMMAND" isInput="true"/>
     <signals name="DRIVE"/>
     <signals name="HOLD1_RDY"/>
     <signals name="HOLD2_RDY"/>
@@ -17,11 +17,11 @@
     <signals name="ONEMOT2"/>
     <signals name="HOLD"/>
     <signals name="EMERGENCY"/>
-    <signals name="FAIL_BRAKE"/>
-    <signals name="FAIL_ACTUATOR"/>
-    <signals name="EXCEED"/>
-    <signals name="EXCEED_A"/>
-    <signals name="EXCEED_B"/>
+    <signals name="FAIL_BRAKE" isInput="true"/>
+    <signals name="FAIL_ACTUATOR" isInput="true"/>
+    <signals name="EXCEED" isInput="true"/>
+    <signals name="EXCEED_A" isInput="true"/>
+    <signals name="EXCEED_B" isInput="true"/>
     <regions>
       <innerStates id="S" label="global_power_off" isInitial="true">
         <outgoingTransitions triggersAndEffects="not RESET / INIT_LEFT" targetState="//@innerStates.0/@regions.0/@innerStates.1">
@@ -214,13 +214,17 @@
               <innerStates id="S0" label="drive_mode">
                 <regions>
                   <innerStates id="S" label="init" isInitial="true">
-                    <outgoingTransitions triggersAndEffects="TIMER" targetState="//@innerStates.0/@regions.1/@innerStates.1/@regions.0/@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.1">
+                    <outgoingTransitions triggersAndEffects="TIMER / DRV1_RDY" targetState="//@innerStates.0/@regions.1/@innerStates.1/@regions.0/@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.1">
+                      <effects xsi:type="synccharts:Emission" signal="DRV1_RDY"/>
                       <trigger xsi:type="synccharts:SignalReference" signal="TIMER"/>
                     </outgoingTransitions>
                   </innerStates>
                   <innerStates id="C1" label="C1">
-                    <outgoingTransitions priority="1" targetState="//@innerStates.0/@regions.1/@innerStates.1/@regions.0/@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.2"/>
-                    <outgoingTransitions triggersAndEffects="FAIL_ACTUATOR" targetState="//@innerStates.0/@regions.1/@innerStates.1/@regions.0/@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.3">
+                    <outgoingTransitions triggersAndEffects="/ TWOMOT1" priority="1" targetState="//@innerStates.0/@regions.1/@innerStates.1/@regions.0/@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.2">
+                      <effects xsi:type="synccharts:Emission" signal="TWOMOT1"/>
+                    </outgoingTransitions>
+                    <outgoingTransitions triggersAndEffects="FAIL_ACTUATOR / ONEMOT1" targetState="//@innerStates.0/@regions.1/@innerStates.1/@regions.0/@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.3">
+                      <effects xsi:type="synccharts:Emission" signal="ONEMOT1"/>
                       <trigger xsi:type="synccharts:SignalReference" signal="FAIL_ACTUATOR"/>
                     </outgoingTransitions>
                   </innerStates>
@@ -270,7 +274,9 @@
                       <innerStates id="S2" label="breakage_b_shaft_ppum" isFinal="true"/>
                       <innerStates id="S3" label="failure_controller_a" isFinal="true"/>
                     </regions>
-                    <outgoingTransitions type="NORMALTERMINATION" targetState="//@innerStates.0/@regions.1/@innerStates.1/@regions.0/@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.3"/>
+                    <outgoingTransitions triggersAndEffects="/ ONEMOT1" type="NORMALTERMINATION" targetState="//@innerStates.0/@regions.1/@innerStates.1/@regions.0/@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.3">
+                      <effects xsi:type="synccharts:Emission" signal="ONEMOT1"/>
+                    </outgoingTransitions>
                   </innerStates>
                   <innerStates id="S1" label="one_motor">
                     <regions>
