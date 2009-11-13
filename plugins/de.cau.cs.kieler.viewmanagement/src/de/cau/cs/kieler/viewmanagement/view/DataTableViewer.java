@@ -36,7 +36,7 @@ public class DataTableViewer extends TreeViewer {
      * @param style
      *            the style
      */
-    public DataTableViewer(final Composite parent, int style) {
+    public DataTableViewer(final Composite parent, final int style) {
         super(parent, style);
     }
 

@@ -14,11 +14,8 @@
  *****************************************************************************/
 package de.cau.cs.kieler.viewmanagement.effects;
 
-
-
 import java.util.ArrayList;
 import java.util.List;
-
 
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.gef.EditPart;
@@ -27,74 +24,73 @@ import org.eclipse.gmf.runtime.diagram.ui.figures.ResizableCompartmentFigure;
 import de.cau.cs.kieler.viewmanagement.AEffect;
 
 /**
+ * Effect that expands all compartments that are expandable, starting from the given object and
+ * searching through all its children as well.
+ * 
  * @author nbe
- *
+ * 
  */
 
 public class CompartmentExpandEffect extends AEffect {
 
     private ShapeEditPart objectToExpand;
-    //List<IFigure> resizableFigures = new ArrayList<IFigure>();
-   
-    
-    // default constructor is always called by Eclipse... 
+
     /**
-     * Default constructor of the expand effect. Will take the target and determine whether it or any of tis children
-     * are expandable (of type ResizeableCompartmentFigure) and then expand them.
+     * Default constructor of the expand effect. Will take the target and determine whether it or
+     * any of tis children are expandable (of type ResizeableCompartmentFigure) and then expand
+     * them.
      */
     public CompartmentExpandEffect() {
-       
-        
+
     }
-    
+
     @Override
     public final void execute() {
-    	IFigure selectedFigure =  objectToExpand.getFigure();
-    	List<IFigure> resizableFigures = new ArrayList<IFigure>();
-    	getResizeableCompartments(selectedFigure, resizableFigures);
-    	
-    	for(int i=0; i<resizableFigures.size(); i++){
-    		ResizableCompartmentFigure tempfig = (ResizableCompartmentFigure) resizableFigures.get(i);
-    		
-    		tempfig.expand();
-    		}
-    	
-    	
+        IFigure selectedFigure = objectToExpand.getFigure();
+        List<IFigure> resizableFigures = new ArrayList<IFigure>();
+        getResizeableCompartments(selectedFigure, resizableFigures);
+
+        for (int i = 0; i < resizableFigures.size(); i++) {
+            ResizableCompartmentFigure tempfig = (ResizableCompartmentFigure) resizableFigures
+                    .get(i);
+
+            tempfig.expand();
+        }
+
     }
-    
+
     /**
-     * Method to search for resizeable compartments. Examines not only the given figure, but also its children.
-     * @param f the initial figure to be examined
-     * @param resizableFigures list of resizeable compartments
+     * Method to search for resizeable compartments. Examines not only the given figure, but also
+     * its children.
+     * 
+     * @param f
+     *            the initial figure to be examined
+     * @param resizableFigures
+     *            list of resizeable compartments
      */
-    public final void getResizeableCompartments(final IFigure f, final List<IFigure> resizableFigures){
-    	
-    	
-    	if (f instanceof ResizableCompartmentFigure){
-    		resizableFigures.add(f);
-    		
-    	}
-    	
-    	for(int i=0;  i<f.getChildren().size(); i++)
-    		getResizeableCompartments((IFigure) f.getChildren().get(i), resizableFigures);
-    		
-    		
-    	
-		return;
-	}
+    public final void getResizeableCompartments(final IFigure f,
+            final List<IFigure> resizableFigures) {
 
+        if (f instanceof ResizableCompartmentFigure) {
+            resizableFigures.add(f);
 
-    
+        }
+
+        for (int i = 0; i < f.getChildren().size(); i++) {
+            getResizeableCompartments((IFigure) f.getChildren().get(i), resizableFigures);
+        }
+
+        return;
+    }
+
     /**
      * Sets the target of the effect
-     * @param target the target
+     * 
+     * @param target
+     *            the target
      */
-    public final void setTarget(EditPart target) {
+    public final void setTarget(final EditPart target) {
         this.objectToExpand = (ShapeEditPart) target;
     }
-
-
-
-
 
 }

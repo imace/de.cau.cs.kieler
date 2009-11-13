@@ -46,7 +46,7 @@ public class TriggerEvent extends EventObject {
      * 
      * @return the TriggerEventObject
      */
-    public TriggerEventObject getTriggerEvent() {
+    public final TriggerEventObject getTriggerEvent() {
         return triggerEvent;
     }
 

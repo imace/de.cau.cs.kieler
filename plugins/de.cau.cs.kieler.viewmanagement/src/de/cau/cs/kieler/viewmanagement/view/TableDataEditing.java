@@ -14,8 +14,6 @@
 
 package de.cau.cs.kieler.viewmanagement.view;
 
-import java.util.HashMap;
-
 import org.eclipse.jface.viewers.EditingSupport;
 import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jface.viewers.CheckboxCellEditor;
@@ -53,7 +51,7 @@ public class TableDataEditing extends EditingSupport {
      * @param columnIndex
      *            the column index
      */
-    public TableDataEditing(DataTableViewer viewer, int columnIndex) {
+    public TableDataEditing(final DataTableViewer viewer, final int columnIndex) {
         super(viewer);
 
         // Create the correct editor based on the column index
@@ -79,7 +77,7 @@ public class TableDataEditing extends EditingSupport {
      * @see org.eclipse.jface.viewers.EditingSupport#canEdit(java.lang.Object)
      */
     @Override
-    protected boolean canEdit(Object element) {
+    protected final boolean canEdit(final Object element) {
         /* editing should always be possible */
         return (true);
     }
@@ -92,7 +90,7 @@ public class TableDataEditing extends EditingSupport {
      * @see org.eclipse.jface.viewers.EditingSupport#getCellEditor(java.lang.Object)
      */
     @Override
-    protected CellEditor getCellEditor(Object element) {
+    protected final CellEditor getCellEditor(final Object element) {
         return editor;
     }
 
@@ -104,7 +102,7 @@ public class TableDataEditing extends EditingSupport {
      * @see org.eclipse.jface.viewers.EditingSupport#getValue(java.lang.Object)
      */
     @Override
-    protected Object getValue(Object element) {
+    protected final Object getValue(Object element) {
         TableData tableData = (TableData) element;
 
         switch (this.columnIndex) {
@@ -113,8 +111,9 @@ public class TableDataEditing extends EditingSupport {
             if (tableData.isComboActive()) {
                 return true;
 
-            } else
+            } else {
                 return false;
+            }
 
         case 1:
             break;

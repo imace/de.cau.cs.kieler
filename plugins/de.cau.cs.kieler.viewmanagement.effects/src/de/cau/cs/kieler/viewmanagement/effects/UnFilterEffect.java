@@ -16,6 +16,7 @@
 package de.cau.cs.kieler.viewmanagement.effects;
 
 import org.eclipse.draw2d.IFigure;
+import org.eclipse.gef.EditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeEditPart;
 import de.cau.cs.kieler.viewmanagement.AEffect;
 
@@ -27,6 +28,7 @@ import de.cau.cs.kieler.viewmanagement.AEffect;
  */
 public class UnFilterEffect extends AEffect {
 
+    private ShapeEditPart objectToUnFilter;
     /**
      * default constructor, nothing to be done here.
      */
@@ -34,15 +36,24 @@ public class UnFilterEffect extends AEffect {
 
     }
 
-    @Override
+    /**
+     * Executes the unfilter effect. Will get the figure of objectToFilter and set it to visible.
+     */
     public final void execute() {
-        final IFigure selectedFigure = ((ShapeEditPart) this.getAffectedObject()).getFigure();
+        final IFigure selectedFigure = ((ShapeEditPart) objectToUnFilter).getFigure();
 
         if (selectedFigure.isVisible()) {
 
             selectedFigure.setVisible(true);
         }
 
+    }
+    /**
+     * Sets the target of the effect
+     * @param target the target
+     */
+    public final void setTarget(final EditPart target) {
+        this.objectToUnFilter = (ShapeEditPart) target;
     }
 
 }

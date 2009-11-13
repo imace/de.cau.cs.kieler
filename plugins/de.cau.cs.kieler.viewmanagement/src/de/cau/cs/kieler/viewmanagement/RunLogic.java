@@ -40,10 +40,10 @@ import de.cau.cs.kieler.viewmanagement.view.TableDataList;
  */
 
 public final class RunLogic {
-    // string constants
-    private static final String effectspath = "de.cau.cs.kieler.viewmanagement.effects";
-    private static final String combopath = "de.cau.cs.kieler.viewmanagement.combination";
-    private static final String triggerpath = "de.cau.cs.kieler.viewmanagement.triggers";
+    // string constants UPPERCASE
+    private static final String EFFECTSPATH = "de.cau.cs.kieler.viewmanagement.effects";
+    private static final String COMBOPATH = "de.cau.cs.kieler.viewmanagement.combination";
+    private static final String TRIGGERPATH = "de.cau.cs.kieler.viewmanagement.triggers";
 
     // there should be only one RunLogic at a time
     private static RunLogic runlogic = new RunLogic();
@@ -93,12 +93,13 @@ public final class RunLogic {
     private boolean state;
 
     /**
-     * Initializes lists to be used to store available components
+     * Initializes lists to be used to store available components no getter/setter in class remove
+     * setter
      */
     public void init() {
-        setTriggers(new HashMap<String, ATrigger>());
-        setEffects(new HashMap<String, AEffect>());
-        setCombos(new HashMap<String, ACombination>());
+        triggers = (new HashMap<String, ATrigger>());
+        effects = (new HashMap<String, AEffect>());
+        combos = (new HashMap<String, ACombination>());
         // update the table in the VM Control view that displays all available combinations
         TableDataList.getInstance().updateViewAsync();
         activeCombos = new ArrayList<String>();
@@ -135,14 +136,13 @@ public final class RunLogic {
      */
     public void unregisterListeners() {
 
-        
         Iterator<ACombination> i3 = getCombos().values().iterator();
         Iterator<String> i2 = getCombos().keySet().iterator();
-        //Remove entries from VM Control table
+        // Remove entries from VM Control table
         while (i2.hasNext()) {
             TableDataList.getInstance().remove(i2.next());
         }
-        //finalize combos, if they are active
+        // finalize combos, if they are active
         while (i3.hasNext()) {
             if (i3.next().isActive()) {
                 i3.next().finalize();
@@ -173,7 +173,7 @@ public final class RunLogic {
 
     private void readTriggers() {
         IConfigurationElement[] myExtensions = Platform.getExtensionRegistry()
-                .getConfigurationElementsFor(triggerpath);
+                .getConfigurationElementsFor(TRIGGERPATH);
         for (int i = 0; i < myExtensions.length; i++) {
 
             try {
@@ -194,7 +194,7 @@ public final class RunLogic {
 
     private void readEffects() {
         IConfigurationElement[] myExtensions = Platform.getExtensionRegistry()
-                .getConfigurationElementsFor(effectspath);
+                .getConfigurationElementsFor(EFFECTSPATH);
         for (int i = 0; i < myExtensions.length; i++) {
             try {
                 AEffect myEffect = (AEffect) myExtensions[i].createExecutableExtension("class");
@@ -214,7 +214,7 @@ public final class RunLogic {
      **/
     private void readCombinations() {
         IConfigurationElement[] myExtensions = Platform.getExtensionRegistry()
-                .getConfigurationElementsFor(combopath);
+                .getConfigurationElementsFor(COMBOPATH);
         for (int i = 0; i < myExtensions.length; i++) {
             try {
 
@@ -303,14 +303,6 @@ public final class RunLogic {
     }
 
     /**
-     * @param triggers
-     *            the triggers to set
-     */
-    private void setTriggers(HashMap<String, ATrigger> triggers) {
-        this.triggers = triggers;
-    }
-
-    /**
      * @return the triggers
      */
     private HashMap<String, ATrigger> getTriggers() {
@@ -318,26 +310,10 @@ public final class RunLogic {
     }
 
     /**
-     * @param hashMap
-     *            the effects to set
-     */
-    private void setEffects(HashMap<String, AEffect> hashMap) {
-        this.effects = hashMap;
-    }
-
-    /**
      * @return the effects
      */
     HashMap<String, AEffect> getEffects() {
         return effects;
-    }
-
-    /**
-     * @param hashMap
-     *            the combos to set
-     */
-    private void setCombos(HashMap<String, ACombination> hashMap) {
-        this.combos = hashMap;
     }
 
     /**

@@ -45,15 +45,15 @@ public class TableDataLabelProvider implements ITableLabelProvider {
      * 
      * @see org.eclipse.jface.viewers.ITableLabelProvider#getColumnImage(java.lang.Object, int)
      */
-    public Image getColumnImage(Object element, int columnIndex) {
+    public final Image getColumnImage(final Object element, final int columnIndex) {
         TableData tableData = (TableData) element;
         if (columnIndex == 0) {
 
-            if (tableData.isComboActive())
+            if (tableData.isComboActive()) {
                 return CHECKED;
-
-            else
+            } else {
                 return UNCHECKED;
+            }
         }
 
         return null;
@@ -66,7 +66,7 @@ public class TableDataLabelProvider implements ITableLabelProvider {
      * 
      * @see org.eclipse.jface.viewers.ITableLabelProvider#getColumnText(java.lang.Object, int)
      */
-    public String getColumnText(Object element, int columnIndex) {
+    public final String getColumnText(final Object element, final int columnIndex) {
         TableData tableData = (TableData) element;
         switch (columnIndex) {
         case 0: // active column
@@ -84,7 +84,7 @@ public class TableDataLabelProvider implements ITableLabelProvider {
     /*
      * (non-Javadoc)
      * 
-     * @seeorg.eclipse.jface.viewers.IBaseLabelProvider#addListener(org.eclipse.jface.viewers.
+     * @see org.eclipse.jface.viewers.IBaseLabelProvider#addListener(org.eclipse.jface.viewers.
      * ILabelProviderListener)
      */
     public void addListener(ILabelProviderListener listener) {
@@ -110,7 +110,7 @@ public class TableDataLabelProvider implements ITableLabelProvider {
      * @see org.eclipse.jface.viewers.IBaseLabelProvider#isLabelProperty(java.lang.Object,
      * java.lang.String)
      */
-    public boolean isLabelProperty(Object element, String property) {
+    public final boolean isLabelProperty(final Object element, final String property) {
         return false;
     }
 
@@ -122,7 +122,7 @@ public class TableDataLabelProvider implements ITableLabelProvider {
      * @seeorg.eclipse.jface.viewers.IBaseLabelProvider#removeListener(org.eclipse.jface.viewers.
      * ILabelProviderListener)
      */
-    public void removeListener(ILabelProviderListener listener) {
+    public final void removeListener(final ILabelProviderListener listener) {
         // noop
     }
 

@@ -15,6 +15,7 @@
 package de.cau.cs.kieler.viewmanagement.effects;
 
 import org.eclipse.draw2d.IFigure;
+import org.eclipse.gef.EditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeEditPart;
 
 import de.cau.cs.kieler.viewmanagement.AEffect;
@@ -29,6 +30,7 @@ import de.cau.cs.kieler.viewmanagement.AEffect;
 public class FilterEffect extends AEffect {
 
     private IFigure undoFigure;
+    private ShapeEditPart objectToFilter;
 
     /**
      * default constructor, nothing to be done here
@@ -37,8 +39,11 @@ public class FilterEffect extends AEffect {
 
     }
 
+    /**
+     * executes the filter effect. Will get the figure of objectToFilter and set it to invisible.
+     */
     public final void execute() {
-        IFigure selectedFigure = ((ShapeEditPart) this.getAffectedObject()).getFigure();
+        IFigure selectedFigure = ((ShapeEditPart) objectToFilter).getFigure();
 
         if (selectedFigure.isVisible()) {
             undoFigure = selectedFigure;
@@ -56,6 +61,16 @@ public class FilterEffect extends AEffect {
 
             this.undoFigure.setVisible(true);
         }
+    }
+
+    /**
+     * Sets the target of the effect.
+     * 
+     * @param target
+     *            the target
+     */
+    public final void setTarget(final EditPart target) {
+        this.objectToFilter = (ShapeEditPart) target;
     }
 
 }

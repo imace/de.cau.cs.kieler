@@ -28,7 +28,9 @@ import org.eclipse.swt.graphics.Color;
 import de.cau.cs.kieler.viewmanagement.AEffect;
 
 /**
- * @author nbe The HighlightEffect draws a rectangle around the affected object.
+ * @author nbe 
+ * 
+ * The HighlightEffect draws a rectangle around the affected object.
  */
 public class HighlightEffect extends AEffect {
 

@@ -65,8 +65,9 @@ public class SelectionHighlightCombination extends ACombination {
             this.objectParameters = triggerEvent.getParameters();
 
             return true;
-        } else
+        } else {
             return false;
+        }
     }
 
     /*

@@ -25,7 +25,9 @@ import de.cau.cs.kieler.viewmanagement.triggers.SelectionTrigger;
 import de.cau.cs.kieler.viewmanagement.*;
 
 /**
- * @author nbe Combination that collapses the affected object and all its children (if collapsible).
+ * @author nbe
+ * 
+ *         Combination that collapses the affected object and all its children (if collapsible).
  *         Listens to SelectionTrigger, the affected object will be the one that gets selected in
  *         the editor.
  */
@@ -36,7 +38,7 @@ public class SelectionCollapseCombination extends ACombination {
 
     private ShapeEditPart objectToCollapse;
 
-    // return triggers of interest, SelectionTrigger in this case
+    @Override
     public final List<ATrigger> getTriggers() {
         this.st = (SelectionTrigger) RunLogic.getInstance().getTrigger("SelectionTrigger");
         List<ATrigger> myTriggers = new ArrayList<ATrigger>();

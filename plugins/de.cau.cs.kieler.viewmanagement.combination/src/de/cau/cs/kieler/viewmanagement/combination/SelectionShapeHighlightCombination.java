@@ -42,6 +42,7 @@ public class SelectionShapeHighlightCombination extends ACombination {
     private boolean triggerActive;
     private Color lineColor = ColorConstants.red;
 
+    @Override
     public final List<ATrigger> getTriggers() {
         this.st = (SelectionTrigger) RunLogic.getInstance().getTrigger("SelectionTrigger");
         List<ATrigger> myTriggers = new ArrayList<ATrigger>();
@@ -89,6 +90,7 @@ public class SelectionShapeHighlightCombination extends ACombination {
 
     }
 
+    @Override
     public final void undoEffects() {
         if (effect != null) {
 

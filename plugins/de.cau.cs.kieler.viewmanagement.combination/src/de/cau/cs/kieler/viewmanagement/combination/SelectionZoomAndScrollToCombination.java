@@ -61,7 +61,8 @@ public class SelectionZoomAndScrollToCombination extends ACombination {
                 this.objectToHighlight = (ShapeEditPart) affectedObject;
                 this.objectParameters = triggerEvent.getParameters();
 
-                return true;} else {
+                return true;
+            } else {
                 return false;
             }
         } else {

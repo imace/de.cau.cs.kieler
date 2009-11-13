@@ -46,7 +46,7 @@ public class TableDataList {
      * @param viewer
      *            the parent tree table viewer for refreshes
      */
-    public TableDataList(DataTableViewer viewer) {
+    public TableDataList(final DataTableViewer viewer) {
         this.viewer = viewer;
         tableDataList = new ArrayList<TableData>();
         instance = this;
@@ -62,7 +62,7 @@ public class TableDataList {
      * 
      * @return the index
      */
-    public int indexOf(TableData tableData) {
+    public final int indexOf(final TableData tableData) {
         return tableDataList.indexOf(tableData);
     }
 
@@ -71,7 +71,7 @@ public class TableDataList {
     /**
      * Updates the view of the parent tree table viewer asynchronously.
      */
-    public void updateViewAsync() {
+    public final void updateViewAsync() {
         // asynchronously update the table
         Display.getDefault().asyncExec(new Runnable() {
             public void run() {
@@ -88,9 +88,10 @@ public class TableDataList {
      * @param tableData
      *            the TableData entry
      */
-    public void add(TableData tableData) {
-        if (contains(tableData.getComboName()))
+    public final void add(final TableData tableData) {
+        if (contains(tableData.getComboName())) {
             remove(tableData.getComboName());
+        }
         tableDataList.add(tableData);
     }
 
@@ -104,7 +105,7 @@ public class TableDataList {
      * 
      * @return the TableData entry
      */
-    public TableData get(String key) {
+    public final TableData get(final String key) {
         for (int c = 0; c < tableDataList.size(); c++) {
             if (tableDataList.get(c).getComboName().equals(key)) {
                 return tableDataList.get(c);
@@ -123,7 +124,7 @@ public class TableDataList {
      * 
      * @return the TableData entry
      */
-    public TableData get(int index) {
+    public final TableData get(final int index) {
         return tableDataList.get(index);
     }
 
@@ -137,7 +138,7 @@ public class TableDataList {
      * 
      * @return true, if list contains that TableData entry
      */
-    public boolean contains(String key) {
+    public final boolean contains(final String key) {
         return (get(key) != null);
     }
 
@@ -154,11 +155,12 @@ public class TableDataList {
      * 
      * @return true, if list contains another TableData entry
      */
-    public boolean containsOther(String key, TableData tableData) {
+    public final boolean containsOther(final String key, final TableData tableData) {
         for (int c = 0; c < tableDataList.size(); c++) {
             if ((tableDataList.get(c).getComboName().equals(key))
-                    && (tableData != tableDataList.get(c)))
+                    && (tableData != tableDataList.get(c))) {
                 return true;
+            }
         }
         return false;
     }
@@ -200,7 +202,7 @@ public class TableDataList {
      * 
      * @return the size
      */
-    public int size() {
+    public final int size() {
         return tableDataList.size();
     }
 
@@ -211,8 +213,8 @@ public class TableDataList {
      * 
      * @return the TableData[] array
      */
-    public TableData[] getArray() {
-        TableData array[] = new TableData[this.size()];
+    public final TableData[] getArray() {
+        TableData[] array = new TableData[this.size()];
         for (int c = 0; c < this.size(); c++) {
             array[c] = this.get(c);
         }

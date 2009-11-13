@@ -54,7 +54,7 @@ public class VMControlView extends ViewPart {
 
     }
 
-    public void init(final IViewSite site) throws PartInitException {
+    public final void init(final IViewSite site) throws PartInitException {
         super.init(site);
 
     }
@@ -64,11 +64,11 @@ public class VMControlView extends ViewPart {
      * 
      * @return the instance
      */
-    public VMControlView getInstance() {
+    public final VMControlView getInstance() {
         return vmControl;
     }
 
-    public void createPartControl(final Composite parent) {
+    public final void createPartControl(final Composite parent) {
         createViewer(parent);
         viewer.setInput(new TableDataList(viewer));
 
@@ -121,20 +121,22 @@ public class VMControlView extends ViewPart {
     /**
      * @see WorkbenchPart#setFocus()
      */
-    public void setFocus() {
+    public final void setFocus() {
         viewer.getControl().setFocus();
     }
 
     // define an action to turn the View Management on or off
     private Action vmOn() {
-        if (actionNew != null)
+        if (actionNew != null) {
             return actionNew;
+        }
         actionNew = new Action() {
             public void run() {
-                if (RunLogic.getInstance().getState() == false)
+                if (RunLogic.getInstance().getState() == false) {
                     RunLogic.getInstance().registerListeners();
-                else
+                } else {
                     RunLogic.getInstance().unregisterListeners();
+                }
             }
         };
         actionNew.setText("VM on/off");

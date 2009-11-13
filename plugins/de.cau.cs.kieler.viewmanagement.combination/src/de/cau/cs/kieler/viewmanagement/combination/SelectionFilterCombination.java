@@ -39,6 +39,7 @@ public class SelectionFilterCombination extends ACombination {
     private ShapeEditPart affectedObject;
     private Object objectParameters;
 
+    @Override
     public final List<ATrigger> getTriggers() {
         this.st = (SelectionTrigger) RunLogic.getInstance().getTrigger("SelectionTrigger");
         List<ATrigger> myTriggers = new ArrayList<ATrigger>();
@@ -51,7 +52,7 @@ public class SelectionFilterCombination extends ACombination {
      * 
      * @see de.cau.cs.kieler.viewmanagement.ACombination#evaluate()
      */
-
+    @Override
     public final boolean evaluate(final TriggerEventObject triggerEvent) {
         if (triggerEvent.getTriggerState() == true) {
             EditPart affectedObject = getEditPart(triggerEvent.getAffectedObject());
@@ -65,7 +66,7 @@ public class SelectionFilterCombination extends ACombination {
             return true;
         }
         return false;
-        
+
     }
 
     /*
@@ -73,9 +74,9 @@ public class SelectionFilterCombination extends ACombination {
      * 
      * @see de.cau.cs.kieler.viewmanagement.ACombination#execute()
      */
-
+    @Override
     public final void execute() {
-       
+
         if (effect == null) {
             effect = new FilterEffect();
         }

@@ -23,6 +23,9 @@ import org.eclipse.gmf.runtime.diagram.ui.figures.ResizableCompartmentFigure;
 import de.cau.cs.kieler.viewmanagement.AEffect;
 
 /**
+ * Effect that collapses all compartments that are collapsable, starting from the given object and
+ * searching through all its children as well.
+ * 
  * @author nbe
  * 
  */
@@ -40,6 +43,7 @@ public class CompartmentCollapseEffect extends AEffect {
 
     }
 
+    @Override
     public final void execute() {
         IFigure selectedFigure = objectToCollapse.getFigure();
 
@@ -58,15 +62,16 @@ public class CompartmentCollapseEffect extends AEffect {
     }
 
     /**
-     * Method to search recursively for resizeable compartments. Examines not only the given figure, but also
-     * its children.
+     * Method to search recursively for resizeable compartments. Examines not only the given figure,
+     * but also its children.
      * 
      * @param f
      *            the initial figure to be examined
      * @param resizableFigures
      *            list of resizeable compartments
      */
-    public final void getResizeableCompartments(final IFigure f, final List<IFigure> resizableFigures) {
+    public final void getResizeableCompartments(final IFigure f,
+            final List<IFigure> resizableFigures) {
 
         if (f instanceof ResizableCompartmentFigure) {
             resizableFigures.add(f);
@@ -86,7 +91,7 @@ public class CompartmentCollapseEffect extends AEffect {
      * @param target
      *            the target
      */
-    public final void setTarget(EditPart target) {
+    public final void setTarget(final EditPart target) {
         this.objectToCollapse = (ShapeEditPart) target;
     }
 

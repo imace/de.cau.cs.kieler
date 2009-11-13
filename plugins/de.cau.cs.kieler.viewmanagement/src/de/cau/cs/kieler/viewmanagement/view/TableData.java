@@ -54,7 +54,7 @@ public class TableData {
      * @param comboName
      *            name of the combination
      */
-    public TableData(TableDataList parentTableDataList, boolean comboActive, String comboName) {
+    public TableData(final TableDataList parentTableDataList, final boolean comboActive, final String comboName) {
         this.tableDataList = parentTableDataList;
         this.comboActive = comboActive;
 

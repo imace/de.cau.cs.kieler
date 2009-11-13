@@ -25,8 +25,9 @@ import org.eclipse.gmf.runtime.gef.ui.figures.DefaultSizeNodeFigure;
 import de.cau.cs.kieler.viewmanagement.AEffect;
 
 /**
- * @author nbe The ShapeHighLightEffect will modify the affected object itself by changing its
- *         colors.
+ * @author nbe
+ * 
+ *         The ShapeHighLightEffect will modify the affected object itself by changing its colors.
  */
 public class ShapeHighlightEffect extends AEffect {
 
@@ -40,12 +41,16 @@ public class ShapeHighlightEffect extends AEffect {
     private Color originalColorBackground;
 
     /**
-     * default constructor, nothing done here
+     * default constructor, nothing done here.
      */
     public ShapeHighlightEffect() {
 
     }
 
+    /**
+     * executes the ShapeHighlightEffect. Here the figure of the objectToHighlight be modified. The original
+     * values are saved for undo.
+     */
     public final void execute() {
 
         objectToHighlight.getRoot();
@@ -103,10 +108,14 @@ public class ShapeHighlightEffect extends AEffect {
      * @param target
      *            the object to be highlighted
      */
-    public final void setTarget(EditPart target) {
+    public final void setTarget(final EditPart target) {
         this.objectToHighlight = target;
     }
 
+    /**
+     * sets the parameters of the effect
+     * @param objectParameters the parameters
+     */
     public void setParameters(final Object objectParameters) {
 
     }
