@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/simple.LibraryElement/src"
+    editDirectory="/simple.LibraryElement.edit/src" editorDirectory="/simple.LibraryElement.editor/src"
+    modelPluginID="simple.LibraryElement" modelName="LibraryElement" importerID="org.eclipse.xsd.ecore.importer"
+    complianceLevel="5.0" copyrightFields="false" editPluginID="simple.LibraryElement.edit"
+    editorPluginID="simple.LibraryElement.editor">
+  <foreignModel>LibraryElement.xsd</foreignModel>
+  <genPackages prefix="LibraryElement" resource="XML" disposableProviderFactory="true"
+      ecorePackage="LibraryElement.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="LibraryElement.ecore#//LanguageType">
+      <genEnumLiterals ecoreEnumLiteral="LibraryElement.ecore#//LanguageType/Java"/>
+      <genEnumLiterals ecoreEnumLiteral="LibraryElement.ecore#//LanguageType/Cpp"/>
+      <genEnumLiterals ecoreEnumLiteral="LibraryElement.ecore#//LanguageType/C"/>
+      <genEnumLiterals ecoreEnumLiteral="LibraryElement.ecore#//LanguageType/Other"/>
+    </genEnums>
+    <genDataTypes ecoreDataType="LibraryElement.ecore#//LanguageTypeObject"/>
+    <genClasses ecoreClass="LibraryElement.ecore#//AdapterConnectionsType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//AdapterConnectionsType/connection"/>
+    </genClasses>
+    <genClasses ecoreClass="LibraryElement.ecore#//AdapterDeclarationType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//AdapterDeclarationType/parameter"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//AdapterDeclarationType/comment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//AdapterDeclarationType/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//AdapterDeclarationType/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//AdapterDeclarationType/x"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//AdapterDeclarationType/y"/>
+    </genClasses>
+    <genClasses ecoreClass="LibraryElement.ecore#//AdapterTypeType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//AdapterTypeType/identification"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//AdapterTypeType/versionInfo"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//AdapterTypeType/compilerInfo"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//AdapterTypeType/interfaceList"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//AdapterTypeType/service"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//AdapterTypeType/comment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//AdapterTypeType/name"/>
+    </genClasses>
+    <genClasses ecoreClass="LibraryElement.ecore#//AlgorithmType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//AlgorithmType/fBD"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//AlgorithmType/sT"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//AlgorithmType/lD"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//AlgorithmType/other"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//AlgorithmType/comment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//AlgorithmType/name"/>
+    </genClasses>
+    <genClasses ecoreClass="LibraryElement.ecore#//ApplicationType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//ApplicationType/fBNetwork"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//ApplicationType/comment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//ApplicationType/name"/>
+    </genClasses>
+    <genClasses ecoreClass="LibraryElement.ecore#//BasicFBType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//BasicFBType/internalVars"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//BasicFBType/eCC"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//BasicFBType/hCECC"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//BasicFBType/algorithm"/>
+    </genClasses>
+    <genClasses ecoreClass="LibraryElement.ecore#//CompilerInfoType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//CompilerInfoType/compiler"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//CompilerInfoType/classdef"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//CompilerInfoType/header"/>
+    </genClasses>
+    <genClasses ecoreClass="LibraryElement.ecore#//CompilerType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//CompilerType/language"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//CompilerType/product"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//CompilerType/vendor"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//CompilerType/version"/>
+    </genClasses>
+    <genClasses ecoreClass="LibraryElement.ecore#//ConnectionType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//ConnectionType/comment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//ConnectionType/destination"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//ConnectionType/dx1"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//ConnectionType/dx2"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//ConnectionType/dy"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//ConnectionType/source"/>
+    </genClasses>
+    <genClasses ecoreClass="LibraryElement.ecore#//DataConnectionsType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//DataConnectionsType/connection"/>
+    </genClasses>
+    <genClasses ecoreClass="LibraryElement.ecore#//DeviceType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//DeviceType/parameter"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//DeviceType/resource"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//DeviceType/fBNetwork"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//DeviceType/comment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//DeviceType/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//DeviceType/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//DeviceType/x"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//DeviceType/y"/>
+    </genClasses>
+    <genClasses ecoreClass="LibraryElement.ecore#//DeviceTypeType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//DeviceTypeType/identification"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//DeviceTypeType/versionInfo"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//DeviceTypeType/compilerInfo"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//DeviceTypeType/varDeclaration"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//DeviceTypeType/resourceTypeName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//DeviceTypeType/resource"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//DeviceTypeType/fBNetwork"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//DeviceTypeType/comment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//DeviceTypeType/name"/>
+    </genClasses>
+    <genClasses ecoreClass="LibraryElement.ecore#//DocumentRoot">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//DocumentRoot/mixed"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference LibraryElement.ecore#//DocumentRoot/xMLNSPrefixMap"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference LibraryElement.ecore#//DocumentRoot/xSISchemaLocation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//DocumentRoot/adapterConnections"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//DocumentRoot/adapterDeclaration"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//DocumentRoot/adapterType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//DocumentRoot/algorithm"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//DocumentRoot/application"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//DocumentRoot/basicFB"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//DocumentRoot/compiler"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//DocumentRoot/compilerInfo"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//DocumentRoot/connection"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//DocumentRoot/dataConnections"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//DocumentRoot/device"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//DocumentRoot/deviceType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//DocumentRoot/eCAction"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//DocumentRoot/eCC"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//DocumentRoot/eCState"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//DocumentRoot/eCTransition"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//DocumentRoot/event"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//DocumentRoot/eventConnections"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//DocumentRoot/eventInputs"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//DocumentRoot/eventOutputs"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//DocumentRoot/fB"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//DocumentRoot/fBD"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//DocumentRoot/fBNetwork"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//DocumentRoot/fBType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//DocumentRoot/fBTypeName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//DocumentRoot/hCECC"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//DocumentRoot/hCECCRelation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//DocumentRoot/identification"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//DocumentRoot/inputPrimitive"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//DocumentRoot/inputVars"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//DocumentRoot/interfaceList"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//DocumentRoot/internalVars"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//DocumentRoot/lD"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//DocumentRoot/link"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//DocumentRoot/mapping"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//DocumentRoot/other"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//DocumentRoot/outputPrimitive"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//DocumentRoot/outputVars"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//DocumentRoot/parameter"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//DocumentRoot/plugs"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//DocumentRoot/resource"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//DocumentRoot/resourceType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//DocumentRoot/resourceTypeName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//DocumentRoot/rung"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//DocumentRoot/segment"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//DocumentRoot/service"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//DocumentRoot/serviceSequence"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//DocumentRoot/serviceTransaction"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//DocumentRoot/sockets"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//DocumentRoot/sT"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//DocumentRoot/subApp"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//DocumentRoot/subAppEvent"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//DocumentRoot/subAppEventInputs"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//DocumentRoot/subAppEventOutputs"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//DocumentRoot/subAppInterfaceList"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//DocumentRoot/subAppNetwork"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//DocumentRoot/subAppType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//DocumentRoot/system"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//DocumentRoot/varDeclaration"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//DocumentRoot/versionInfo"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//DocumentRoot/with"/>
+    </genClasses>
+    <genClasses ecoreClass="LibraryElement.ecore#//ECActionType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//ECActionType/algorithm"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//ECActionType/output"/>
+    </genClasses>
+    <genClasses ecoreClass="LibraryElement.ecore#//ECCType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//ECCType/eCState"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//ECCType/eCTransition"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//ECCType/name"/>
+    </genClasses>
+    <genClasses ecoreClass="LibraryElement.ecore#//ECStateType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//ECStateType/eCAction"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//ECStateType/comment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//ECStateType/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//ECStateType/x"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//ECStateType/y"/>
+    </genClasses>
+    <genClasses ecoreClass="LibraryElement.ecore#//ECTransitionType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//ECTransitionType/comment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//ECTransitionType/condition"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//ECTransitionType/destination"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//ECTransitionType/source"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//ECTransitionType/x"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//ECTransitionType/y"/>
+    </genClasses>
+    <genClasses ecoreClass="LibraryElement.ecore#//EventConnectionsType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//EventConnectionsType/connection"/>
+    </genClasses>
+    <genClasses ecoreClass="LibraryElement.ecore#//EventInputsType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//EventInputsType/event"/>
+    </genClasses>
+    <genClasses ecoreClass="LibraryElement.ecore#//EventOutputsType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//EventOutputsType/event"/>
+    </genClasses>
+    <genClasses ecoreClass="LibraryElement.ecore#//EventType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//EventType/with"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//EventType/comment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//EventType/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//EventType/type"/>
+    </genClasses>
+    <genClasses ecoreClass="LibraryElement.ecore#//FBDType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//FBDType/fB"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//FBDType/dataConnections"/>
+    </genClasses>
+    <genClasses ecoreClass="LibraryElement.ecore#//FBNetworkType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//FBNetworkType/fB"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//FBNetworkType/eventConnections"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//FBNetworkType/dataConnections"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//FBNetworkType/adapterConnections"/>
+    </genClasses>
+    <genClasses ecoreClass="LibraryElement.ecore#//FBType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//FBType/parameter"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//FBType/comment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//FBType/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//FBType/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//FBType/x"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//FBType/y"/>
+    </genClasses>
+    <genClasses ecoreClass="LibraryElement.ecore#//FBTypeNameType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//FBTypeNameType/name"/>
+    </genClasses>
+    <genClasses ecoreClass="LibraryElement.ecore#//FBTypeType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//FBTypeType/identification"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//FBTypeType/versionInfo"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//FBTypeType/compilerInfo"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//FBTypeType/interfaceList"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//FBTypeType/basicFB"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//FBTypeType/fBNetwork"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//FBTypeType/service"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//FBTypeType/comment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//FBTypeType/name"/>
+    </genClasses>
+    <genClasses ecoreClass="LibraryElement.ecore#//HCECCRelationType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//HCECCRelationType/comment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//HCECCRelationType/destination"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//HCECCRelationType/relation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//HCECCRelationType/source"/>
+    </genClasses>
+    <genClasses ecoreClass="LibraryElement.ecore#//HCECCType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//HCECCType/group"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference LibraryElement.ecore#//HCECCType/eCC"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference LibraryElement.ecore#//HCECCType/hCECCRelation"/>
+    </genClasses>
+    <genClasses ecoreClass="LibraryElement.ecore#//IdentificationType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//IdentificationType/applicationDomain"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//IdentificationType/classification"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//IdentificationType/description"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//IdentificationType/function"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//IdentificationType/standard"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//IdentificationType/type"/>
+    </genClasses>
+    <genClasses ecoreClass="LibraryElement.ecore#//InputPrimitiveType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//InputPrimitiveType/event"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//InputPrimitiveType/interface"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//InputPrimitiveType/parameters"/>
+    </genClasses>
+    <genClasses ecoreClass="LibraryElement.ecore#//InputVarsType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//InputVarsType/varDeclaration"/>
+    </genClasses>
+    <genClasses ecoreClass="LibraryElement.ecore#//InterfaceListType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//InterfaceListType/eventInputs"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//InterfaceListType/eventOutputs"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//InterfaceListType/inputVars"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//InterfaceListType/outputVars"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//InterfaceListType/sockets"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//InterfaceListType/plugs"/>
+    </genClasses>
+    <genClasses ecoreClass="LibraryElement.ecore#//InternalVarsType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//InternalVarsType/varDeclaration"/>
+    </genClasses>
+    <genClasses ecoreClass="LibraryElement.ecore#//LDType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//LDType/rung"/>
+    </genClasses>
+    <genClasses ecoreClass="LibraryElement.ecore#//LinkType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//LinkType/parameter"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//LinkType/comment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//LinkType/commResource"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//LinkType/segmentName"/>
+    </genClasses>
+    <genClasses ecoreClass="LibraryElement.ecore#//MappingType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//MappingType/from"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//MappingType/to"/>
+    </genClasses>
+    <genClasses ecoreClass="LibraryElement.ecore#//OtherType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//OtherType/language"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//OtherType/prototype"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//OtherType/text"/>
+    </genClasses>
+    <genClasses ecoreClass="LibraryElement.ecore#//OutputPrimitiveType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//OutputPrimitiveType/event"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//OutputPrimitiveType/interface"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//OutputPrimitiveType/parameters"/>
+    </genClasses>
+    <genClasses ecoreClass="LibraryElement.ecore#//OutputVarsType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//OutputVarsType/varDeclaration"/>
+    </genClasses>
+    <genClasses ecoreClass="LibraryElement.ecore#//ParameterType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//ParameterType/comment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//ParameterType/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//ParameterType/value"/>
+    </genClasses>
+    <genClasses ecoreClass="LibraryElement.ecore#//PlugsType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//PlugsType/adapterDeclaration"/>
+    </genClasses>
+    <genClasses ecoreClass="LibraryElement.ecore#//ResourceType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//ResourceType/parameter"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//ResourceType/fBNetwork"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//ResourceType/comment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//ResourceType/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//ResourceType/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//ResourceType/x"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//ResourceType/y"/>
+    </genClasses>
+    <genClasses ecoreClass="LibraryElement.ecore#//ResourceTypeNameType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//ResourceTypeNameType/name"/>
+    </genClasses>
+    <genClasses ecoreClass="LibraryElement.ecore#//ResourceTypeType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//ResourceTypeType/identification"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//ResourceTypeType/versionInfo"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//ResourceTypeType/compilerInfo"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//ResourceTypeType/fBTypeName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//ResourceTypeType/varDeclaration"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//ResourceTypeType/fBNetwork"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//ResourceTypeType/comment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//ResourceTypeType/name"/>
+    </genClasses>
+    <genClasses ecoreClass="LibraryElement.ecore#//RungType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//RungType/comment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//RungType/expression"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//RungType/output"/>
+    </genClasses>
+    <genClasses ecoreClass="LibraryElement.ecore#//SegmentType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//SegmentType/parameter"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//SegmentType/comment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//SegmentType/dx1"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//SegmentType/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//SegmentType/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//SegmentType/x"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//SegmentType/y"/>
+    </genClasses>
+    <genClasses ecoreClass="LibraryElement.ecore#//ServiceSequenceType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//ServiceSequenceType/serviceTransaction"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//ServiceSequenceType/comment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//ServiceSequenceType/name"/>
+    </genClasses>
+    <genClasses ecoreClass="LibraryElement.ecore#//ServiceTransactionType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//ServiceTransactionType/inputPrimitive"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//ServiceTransactionType/outputPrimitive"/>
+    </genClasses>
+    <genClasses ecoreClass="LibraryElement.ecore#//ServiceType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//ServiceType/serviceSequence"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//ServiceType/comment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//ServiceType/leftInterface"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//ServiceType/rightInterface"/>
+    </genClasses>
+    <genClasses ecoreClass="LibraryElement.ecore#//SocketsType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//SocketsType/adapterDeclaration"/>
+    </genClasses>
+    <genClasses ecoreClass="LibraryElement.ecore#//STType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//STType/text"/>
+    </genClasses>
+    <genClasses ecoreClass="LibraryElement.ecore#//SubAppEventInputsType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//SubAppEventInputsType/subAppEvent"/>
+    </genClasses>
+    <genClasses ecoreClass="LibraryElement.ecore#//SubAppEventOutputsType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//SubAppEventOutputsType/subAppEvent"/>
+    </genClasses>
+    <genClasses ecoreClass="LibraryElement.ecore#//SubAppEventType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//SubAppEventType/comment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//SubAppEventType/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//SubAppEventType/type"/>
+    </genClasses>
+    <genClasses ecoreClass="LibraryElement.ecore#//SubAppInterfaceListType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//SubAppInterfaceListType/subAppEventInputs"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//SubAppInterfaceListType/subAppEventOutputs"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//SubAppInterfaceListType/inputVars"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//SubAppInterfaceListType/outputVars"/>
+    </genClasses>
+    <genClasses ecoreClass="LibraryElement.ecore#//SubAppNetworkType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//SubAppNetworkType/subApp"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//SubAppNetworkType/fB"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//SubAppNetworkType/eventConnections"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//SubAppNetworkType/dataConnections"/>
+    </genClasses>
+    <genClasses ecoreClass="LibraryElement.ecore#//SubAppType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//SubAppType/comment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//SubAppType/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//SubAppType/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//SubAppType/x"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//SubAppType/y"/>
+    </genClasses>
+    <genClasses ecoreClass="LibraryElement.ecore#//SubAppTypeType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//SubAppTypeType/identification"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//SubAppTypeType/versionInfo"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//SubAppTypeType/compilerInfo"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//SubAppTypeType/subAppInterfaceList"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//SubAppTypeType/subAppNetwork"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//SubAppTypeType/comment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//SubAppTypeType/name"/>
+    </genClasses>
+    <genClasses ecoreClass="LibraryElement.ecore#//SystemType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//SystemType/identification"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//SystemType/versionInfo"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//SystemType/application"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//SystemType/device"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//SystemType/mapping"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//SystemType/segment"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LibraryElement.ecore#//SystemType/link"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//SystemType/comment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//SystemType/name"/>
+    </genClasses>
+    <genClasses ecoreClass="LibraryElement.ecore#//VarDeclarationType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//VarDeclarationType/arraySize"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//VarDeclarationType/comment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//VarDeclarationType/initialValue"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//VarDeclarationType/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//VarDeclarationType/type"/>
+    </genClasses>
+    <genClasses ecoreClass="LibraryElement.ecore#//VersionInfoType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//VersionInfoType/author"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//VersionInfoType/date"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//VersionInfoType/organization"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//VersionInfoType/remarks"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//VersionInfoType/version"/>
+    </genClasses>
+    <genClasses ecoreClass="LibraryElement.ecore#//WithType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LibraryElement.ecore#//WithType/var"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
