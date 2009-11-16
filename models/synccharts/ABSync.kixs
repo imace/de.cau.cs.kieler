@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<synccharts:Region xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:synccharts="http://kieler.cs.cau.de/synccharts">
+  <innerStates id="S0" label="ABSync">
+    <signals name="A" isInput="true"/>
+    <signals name="B" isInput="true"/>
+    <signals name="Reset" isInput="true"/>
+    <signals name="arm"/>
+    <signals name="disarm"/>
+    <signals name="AB" isOutput="true"/>
+    <regions>
+      <innerStates id="S0" label="Detection" isInitial="true">
+        <regions>
+          <innerStates id="S0" label="WautAandB" isInitial="true">
+            <regions>
+              <innerStates id="S0" label="wA" isInitial="true">
+                <outgoingTransitions triggersAndEffects="A / arm" priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.0/@innerStates.0/@regions.0/@innerStates.1">
+                  <effects xsi:type="synccharts:Emission" signal="arm"/>
+                  <trigger xsi:type="synccharts:SignalReference" signal="A"/>
+                </outgoingTransitions>
+              </innerStates>
+              <innerStates id="S1" label="dA" isFinal="true"/>
+            </regions>
+            <regions>
+              <innerStates id="S0" label="wB" isInitial="true">
+                <outgoingTransitions triggersAndEffects="B / arm" priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.0/@innerStates.0/@regions.1/@innerStates.1">
+                  <effects xsi:type="synccharts:Emission" signal="arm"/>
+                  <trigger xsi:type="synccharts:SignalReference" signal="B"/>
+                </outgoingTransitions>
+              </innerStates>
+              <innerStates id="S1" label="dB" isFinal="true"/>
+            </regions>
+            <outgoingTransitions triggersAndEffects="/AB" priority="1" type="NORMALTERMINATION" targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.0/@innerStates.1">
+              <effects xsi:type="synccharts:Emission" signal="AB"/>
+            </outgoingTransitions>
+          </innerStates>
+          <innerStates id="S1" label="done"/>
+        </regions>
+        <regions>
+          <innerStates id="S0" label="idle" isInitial="true">
+            <outgoingTransitions triggersAndEffects="arm" priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.1/@innerStates.1">
+              <trigger xsi:type="synccharts:SignalReference" signal="arm"/>
+            </outgoingTransitions>
+          </innerStates>
+          <innerStates id="S1" label="Timer">
+            <regions>
+              <innerStates id="S0" label="cnt1" isInitial="true">
+                <outgoingTransitions triggersAndEffects="" priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.1/@innerStates.1/@regions.0/@innerStates.1"/>
+              </innerStates>
+              <innerStates id="S1" label="cnt2">
+                <outgoingTransitions triggersAndEffects="/ disarm" priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.1/@innerStates.1/@regions.0/@innerStates.2">
+                  <effects xsi:type="synccharts:Emission" signal="disarm"/>
+                </outgoingTransitions>
+              </innerStates>
+              <innerStates id="S2" label="end"/>
+            </regions>
+          </innerStates>
+        </regions>
+        <outgoingTransitions triggersAndEffects="Reset" priority="1" type="STRONGABORT" targetState="//@innerStates.0/@regions.0/@innerStates.0">
+          <trigger xsi:type="synccharts:SignalReference" signal="Reset"/>
+        </outgoingTransitions>
+        <outgoingTransitions triggersAndEffects="disarm" priority="2" targetState="//@innerStates.0/@regions.0/@innerStates.0">
+          <trigger xsi:type="synccharts:SignalReference" signal="disarm"/>
+        </outgoingTransitions>
+      </innerStates>
+    </regions>
+  </innerStates>
+</synccharts:Region>
