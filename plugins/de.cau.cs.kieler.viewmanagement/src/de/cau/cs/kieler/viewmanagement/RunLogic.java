@@ -283,7 +283,7 @@ public final class RunLogic {
         List<String> textualEffects;
         textualEffects = new ArrayList<String>();
 
-        Set<String> s = getTriggers().keySet();
+        Set<String> s = getEffects().keySet();
         Iterator<String> i = s.iterator();
         while (i.hasNext()) {
             textualEffects.add(i.next());
