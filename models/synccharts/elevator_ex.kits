@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<synccharts:Region xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:synccharts="http://kieler.cs.cau.de/synccharts">
+  <innerStates id="Elevator" label="Elevator">
+    <signals name="ButtonUp" isInput="true"/>
+    <signals name="ButtonDown" isInput="true"/>
+    <signals name="AlarmLamp" isOutput="true"/>
+    <signals name="ButtonAlarm" isInput="true"/>
+    <signals name="door"/>
+    <signals name="IsUp" isInput="true"/>
+    <signals name="IsDown" isInput="true"/>
+    <signals name="Second" isInput="true"/>
+    <signals name="MoveDown" isOutput="true"/>
+    <signals name="MoveUp" isOutput="true"/>
+    <signals name="BackToNormal"/>
+    <regions>
+      <innerStates id="normal" label="normal" isInitial="true">
+        <regions>
+          <innerStates id="floor2" label="floor2">
+            <outgoingTransitions triggersAndEffects="ButtonDown / door" priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.0/@innerStates.2">
+              <effects xsi:type="synccharts:Emission" signal="door"/>
+              <trigger xsi:type="synccharts:SignalReference" signal="ButtonDown"/>
+            </outgoingTransitions>
+          </innerStates>
+          <innerStates id="floor1" label="floor1" isInitial="true">
+            <outgoingTransitions triggersAndEffects="ButtonUp / door" priority="2" targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.0/@innerStates.3">
+              <effects xsi:type="synccharts:Emission" signal="door"/>
+              <trigger xsi:type="synccharts:SignalReference" signal="ButtonUp"/>
+            </outgoingTransitions>
+          </innerStates>
+          <innerStates id="down" label="move_down">
+            <outgoingTransitions triggersAndEffects="IsDown / door" priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.0/@innerStates.1">
+              <effects xsi:type="synccharts:Emission" signal="door"/>
+              <trigger xsi:type="synccharts:SignalReference" signal="IsDown"/>
+            </outgoingTransitions>
+            <outgoingTransitions triggersAndEffects="/ MoveDown" priority="2" targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.0/@innerStates.2">
+              <effects xsi:type="synccharts:Emission" signal="MoveDown"/>
+            </outgoingTransitions>
+          </innerStates>
+          <innerStates id="up" label="move_up">
+            <outgoingTransitions triggersAndEffects="IsUp / door" priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.0/@innerStates.0">
+              <effects xsi:type="synccharts:Emission" signal="door"/>
+              <trigger xsi:type="synccharts:SignalReference" signal="IsUp"/>
+            </outgoingTransitions>
+            <outgoingTransitions triggersAndEffects="/ MoveUp" priority="2" targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.0/@innerStates.3">
+              <effects xsi:type="synccharts:Emission" signal="MoveUp"/>
+            </outgoingTransitions>
+          </innerStates>
+        </regions>
+        <regions>
+          <innerStates id="door_open" label="door_open" isInitial="true">
+            <outgoingTransitions triggersAndEffects="door" priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.1/@innerStates.1">
+              <trigger xsi:type="synccharts:SignalReference" signal="door"/>
+            </outgoingTransitions>
+          </innerStates>
+          <innerStates id="door_closed" label="door_closed">
+            <outgoingTransitions triggersAndEffects="door" priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.1/@innerStates.0">
+              <trigger xsi:type="synccharts:SignalReference" signal="door"/>
+            </outgoingTransitions>
+          </innerStates>
+        </regions>
+        <outgoingTransitions triggersAndEffects="ButtonAlarm" priority="1" type="STRONGABORT" targetState="//@innerStates.0/@regions.0/@innerStates.1">
+          <trigger xsi:type="synccharts:SignalReference" signal="ButtonAlarm"/>
+        </outgoingTransitions>
+      </innerStates>
+      <innerStates id="error" label="error">
+        <regions>
+          <innerStates id="sustain_alarm" label="lamp_off" isInitial="true">
+            <outgoingTransitions triggersAndEffects="Second / AlarmLamp" priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.1">
+              <effects xsi:type="synccharts:Emission" signal="AlarmLamp"/>
+              <trigger xsi:type="synccharts:SignalReference" signal="Second"/>
+            </outgoingTransitions>
+          </innerStates>
+          <innerStates id="S0" label="lamp_on">
+            <outgoingTransitions triggersAndEffects="/ AlarmLamp" priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.1">
+              <effects xsi:type="synccharts:Emission" signal="AlarmLamp"/>
+            </outgoingTransitions>
+            <outgoingTransitions triggersAndEffects="Second" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.0">
+              <trigger xsi:type="synccharts:SignalReference" signal="Second"/>
+            </outgoingTransitions>
+          </innerStates>
+        </regions>
+        <regions>
+          <innerStates id="S0" label="c1" isInitial="true">
+            <outgoingTransitions triggersAndEffects="Second" priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.1/@innerStates.1">
+              <trigger xsi:type="synccharts:SignalReference" signal="Second"/>
+            </outgoingTransitions>
+          </innerStates>
+          <innerStates id="S1" label="c2">
+            <outgoingTransitions triggersAndEffects="Second" priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.1/@innerStates.2">
+              <trigger xsi:type="synccharts:SignalReference" signal="Second"/>
+            </outgoingTransitions>
+          </innerStates>
+          <innerStates id="S2" label="c3">
+            <outgoingTransitions triggersAndEffects="Second" priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.1/@innerStates.3">
+              <trigger xsi:type="synccharts:SignalReference" signal="Second"/>
+            </outgoingTransitions>
+          </innerStates>
+          <innerStates id="S3" label="c4">
+            <outgoingTransitions triggersAndEffects="Second" priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.1/@innerStates.4">
+              <trigger xsi:type="synccharts:SignalReference" signal="Second"/>
+            </outgoingTransitions>
+          </innerStates>
+          <innerStates id="S4" label="c5">
+            <outgoingTransitions triggersAndEffects="Second / BackToNormal" priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.1/@innerStates.5">
+              <effects xsi:type="synccharts:Emission" signal="BackToNormal"/>
+              <trigger xsi:type="synccharts:SignalReference" signal="Second"/>
+            </outgoingTransitions>
+          </innerStates>
+          <innerStates id="S5" label="back_to_normal"/>
+        </regions>
+        <outgoingTransitions triggersAndEffects="BackToNormal" priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.0" isHistory="true">
+          <trigger xsi:type="synccharts:SignalReference" signal="BackToNormal"/>
+        </outgoingTransitions>
+      </innerStates>
+    </regions>
+  </innerStates>
+</synccharts:Region>
