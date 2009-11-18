@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Package xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:id="_IJQVodQOEd6QH9aYY2_t0g">
+  <elementImport xmi:id="_IOVp8NQOEd6QH9aYY2_t0g">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+  </elementImport>
+  <elementImport xmi:id="_IOZUUNQOEd6QH9aYY2_t0g">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+  </elementImport>
+  <elementImport xmi:id="_IOZ7YNQOEd6QH9aYY2_t0g">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#UnlimitedNatural"/>
+  </elementImport>
+  <elementImport xmi:id="_IOZ7YdQOEd6QH9aYY2_t0g">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+  </elementImport>
+  <packagedElement xmi:type="uml:StateMachine" xmi:id="_KQ7MwNQOEd6QH9aYY2_t0g" name="StateMachine">
+    <region xmi:id="_KSCAANQOEd6QH9aYY2_t0g" name="Region">
+      <subvertex xmi:type="uml:Pseudostate" xmi:id="_LvSBINQOEd6QH9aYY2_t0g"/>
+      <subvertex xmi:type="uml:State" xmi:id="_MQLHsNQOEd6QH9aYY2_t0g" name="State1"/>
+      <subvertex xmi:type="uml:State" xmi:id="_SGT0oNQOEd6QH9aYY2_t0g" name="State2">
+        <region xmi:id="_SGk6YNQOEd6QH9aYY2_t0g" name="Region">
+          <subvertex xmi:type="uml:Pseudostate" xmi:id="_d52UINQOEd6QH9aYY2_t0g"/>
+          <subvertex xmi:type="uml:State" xmi:id="_eq-2INQOEd6QH9aYY2_t0g" name="State3"/>
+          <transition xmi:id="_j4s4MNQOEd6QH9aYY2_t0g" source="_d52UINQOEd6QH9aYY2_t0g" target="_eq-2INQOEd6QH9aYY2_t0g"/>
+        </region>
+      </subvertex>
+      <transition xmi:id="_NV6AsNQOEd6QH9aYY2_t0g" source="_LvSBINQOEd6QH9aYY2_t0g" target="_MQLHsNQOEd6QH9aYY2_t0g"/>
+      <transition xmi:id="_Umn1QNQOEd6QH9aYY2_t0g" source="_MQLHsNQOEd6QH9aYY2_t0g" target="_SGT0oNQOEd6QH9aYY2_t0g"/>
+    </region>
+  </packagedElement>
+  <packagedElement xmi:type="uml:StateMachine" xmi:id="_3pe7ENQOEd6QH9aYY2_t0g" name="StateMachine">
+    <region xmi:id="_3pe7EdQOEd6QH9aYY2_t0g" name="Region">
+      <subvertex xmi:type="uml:Pseudostate" xmi:id="_3pe7EtQOEd6QH9aYY2_t0g"/>
+      <subvertex xmi:type="uml:State" xmi:id="_3pe7E9QOEd6QH9aYY2_t0g" name="State1"/>
+      <transition xmi:id="_3pfiI9QOEd6QH9aYY2_t0g" source="_3pe7EtQOEd6QH9aYY2_t0g" target="_3pe7E9QOEd6QH9aYY2_t0g"/>
+    </region>
+  </packagedElement>
+</uml:Package>
