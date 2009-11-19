@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<synccharts:Region xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:synccharts="http://kieler.cs.cau.de/synccharts">
+  <innerStates id="S0" label="logical_correct">
+    <signals name="A"/>
+    <signals name="B"/>
+    <regions>
+      <innerStates id="S0" label="s1" isInitial="true">
+        <outgoingTransitions triggersAndEffects="A / A" priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.1">
+          <effects xsi:type="synccharts:Emission" signal="A"/>
+          <trigger xsi:type="synccharts:SignalReference" signal="A"/>
+        </outgoingTransitions>
+      </innerStates>
+      <innerStates id="S1" label="s2"/>
+    </regions>
+    <regions>
+      <innerStates id="S0" label="s3" isInitial="true">
+        <outgoingTransitions triggersAndEffects="A and not B / B" priority="1" targetState="//@innerStates.0/@regions.1/@innerStates.1">
+          <effects xsi:type="synccharts:Emission" signal="B"/>
+          <trigger xsi:type="synccharts:ComplexExpression" operator="and">
+            <subExpressions xsi:type="synccharts:SignalReference" signal="A"/>
+            <subExpressions xsi:type="synccharts:ComplexExpression" operator="not">
+              <subExpressions xsi:type="synccharts:SignalReference" signal="B"/>
+            </subExpressions>
+          </trigger>
+        </outgoingTransitions>
+      </innerStates>
+      <innerStates id="S1" label="s4"/>
+    </regions>
+  </innerStates>
+</synccharts:Region>
