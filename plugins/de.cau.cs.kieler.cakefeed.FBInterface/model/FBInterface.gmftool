@@ -10,6 +10,26 @@
         title="ToolGroup">
       <tools
           xsi:type="gmftool:CreationTool"
+          title="BasicFunctionBlockCreationTool"
+          description="Create a new Basic Function Block"/>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="CompositeFunctionBlockCreationTool"
+          description="Create a new Composite Function Block"/>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="ServiceInterfaceFunctionBlockCreationTool"
+          description="Create a new Service Interface Function Block"/>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="PortCreationTool"
+          description="Create a new Port"/>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="AssociationCreationTool"
+          description="Create a new Association"/>
+      <tools
+          xsi:type="gmftool:CreationTool"
           title="BasicFunctionBlockInstanceCreationTool"
           description="Create a new Basic Function Block Instance"/>
       <tools
@@ -22,19 +42,12 @@
           description="Create a new Service Interface Function Block Instance"/>
       <tools
           xsi:type="gmftool:CreationTool"
-          title="PortCreationTool"
-          description="Create a new Port"/>
-      <tools
-          xsi:type="gmftool:CreationTool"
-          title="AssociationCreationTool"
-          description="Create a new Association"/>
-      <tools
-          xsi:type="gmftool:CreationTool"
-          title="ConnectionCreationTool"/>
-      <tools
-          xsi:type="gmftool:CreationTool"
           title="OutsidePortCreationTool"
           description="Create a new Outside Port"/>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="ConnectionCreationTool"
+          description="Create a new Connection"/>
     </tools>
   </palette>
 </gmftool:ToolRegistry>

@@ -70,7 +70,7 @@
             dy="15"/>
         <children
             xsi:type="gmfgraph:Label"
-            name="PortNameLabel"/>
+            name="IEPortNameLabel"/>
         <children
             xsi:type="gmfgraph:Rectangle"
             name="BlackRectangle">
@@ -111,7 +111,7 @@
         </children>
       </actualFigure>
       <accessors
-          accessor="getPortNameLabel"
+          accessor="getIEPortNameLabel"
           figure="//@figures.0/@descriptors.1/@actualFigure/@children.0"/>
     </descriptors>
     <descriptors
@@ -170,10 +170,10 @@
         </children>
         <children
             xsi:type="gmfgraph:Label"
-            name="PortNameLabel"/>
+            name="OEPortNameLabel"/>
       </actualFigure>
       <accessors
-          accessor="getPortNameLabel"
+          accessor="getOEPortNameLabel"
           figure="//@figures.0/@descriptors.2/@actualFigure/@children.2"/>
     </descriptors>
     <descriptors
@@ -194,7 +194,7 @@
             dy="15"/>
         <children
             xsi:type="gmfgraph:Label"
-            name="PortNameLabel"/>
+            name="IDPortNameLabel"/>
         <children
             xsi:type="gmfgraph:Rectangle"
             name="BlackRectangle">
@@ -235,7 +235,7 @@
         </children>
       </actualFigure>
       <accessors
-          accessor="getPortNameLabel"
+          accessor="getIDPortNameLabel"
           figure="//@figures.0/@descriptors.3/@actualFigure/@children.0"/>
     </descriptors>
     <descriptors
@@ -294,10 +294,10 @@
         </children>
         <children
             xsi:type="gmfgraph:Label"
-            name="PortNameLabel"/>
+            name="ODPortNameLabel"/>
       </actualFigure>
       <accessors
-          accessor="getPortNameLabel"
+          accessor="getODPortNameLabel"
           figure="//@figures.0/@descriptors.4/@actualFigure/@children.2"/>
     </descriptors>
     <descriptors
@@ -490,11 +490,171 @@
         </children>
       </actualFigure>
       <accessors
-          accessor="getFunctionBlockTypeNameLabel"
+          accessor="getFunctionBlockInstanceTypeNameLabel"
           figure="//@figures.0/@descriptors.13/@actualFigure/@children.2/@children.0"/>
       <accessors
           accessor="getFunctionBlockInstanceNameLabel"
           figure="//@figures.0/@descriptors.13/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors
+        name="OutsideInputEventPortFigureDescriptor">
+      <actualFigure
+          xsi:type="gmfgraph:Rectangle"
+          name="PortRectangle"
+          outline="false"
+          fill="false">
+        <layout
+            xsi:type="gmfgraph:FlowLayout"
+            forceSingleLine="true"
+            minorAlignment="CENTER"
+            majorSpacing="0"
+            minorSpacing="0"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="OIEPortNameLabel"/>
+        <children
+            xsi:type="gmfgraph:Rectangle"
+            name="RedRectangle">
+          <foregroundColor
+              xsi:type="gmfgraph:ConstantColor"
+              value="red"/>
+          <backgroundColor
+              xsi:type="gmfgraph:ConstantColor"
+              value="red"/>
+          <maximumSize
+              dx="5"
+              dy="5"/>
+          <minimumSize
+              dx="5"
+              dy="5"/>
+          <preferredSize
+              dx="5"
+              dy="5"/>
+        </children>
+      </actualFigure>
+      <accessors
+          accessor="getOIEPortNameLabel"
+          figure="//@figures.0/@descriptors.14/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors
+        name="OutsideInputDataPortFigureDescriptor">
+      <actualFigure
+          xsi:type="gmfgraph:Rectangle"
+          name="PortRectangle"
+          outline="false"
+          fill="false">
+        <layout
+            xsi:type="gmfgraph:FlowLayout"
+            forceSingleLine="true"
+            minorAlignment="CENTER"
+            majorSpacing="0"
+            minorSpacing="0"/>
+        <children
+            xsi:type="gmfgraph:Rectangle"
+            name="RedRectangle">
+          <foregroundColor
+              xsi:type="gmfgraph:ConstantColor"
+              value="red"/>
+          <backgroundColor
+              xsi:type="gmfgraph:ConstantColor"
+              value="red"/>
+          <maximumSize
+              dx="5"
+              dy="5"/>
+          <minimumSize
+              dx="5"
+              dy="5"/>
+          <preferredSize
+              dx="5"
+              dy="5"/>
+        </children>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="OIDPortNameLabel"/>
+      </actualFigure>
+      <accessors
+          accessor="getOIDPortNameLabel"
+          figure="//@figures.0/@descriptors.15/@actualFigure/@children.1"/>
+    </descriptors>
+    <descriptors
+        name="OutsideOutputEventPortFigureDescriptor">
+      <actualFigure
+          xsi:type="gmfgraph:Rectangle"
+          name="PortRectangle"
+          outline="false"
+          fill="false">
+        <layout
+            xsi:type="gmfgraph:FlowLayout"
+            forceSingleLine="true"
+            minorAlignment="CENTER"
+            majorSpacing="0"
+            minorSpacing="0"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="OOEPortNameLabel"/>
+        <children
+            xsi:type="gmfgraph:Rectangle"
+            name="BlueRectangle">
+          <foregroundColor
+              xsi:type="gmfgraph:ConstantColor"
+              value="blue"/>
+          <backgroundColor
+              xsi:type="gmfgraph:ConstantColor"
+              value="blue"/>
+          <maximumSize
+              dx="5"
+              dy="5"/>
+          <minimumSize
+              dx="5"
+              dy="5"/>
+          <preferredSize
+              dx="5"
+              dy="5"/>
+        </children>
+      </actualFigure>
+      <accessors
+          accessor="getOOEPortNameLabel"
+          figure="//@figures.0/@descriptors.16/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors
+        name="OutsideOutputDataPortFigureDescriptor">
+      <actualFigure
+          xsi:type="gmfgraph:Rectangle"
+          name="PortRectangle"
+          outline="false"
+          fill="false">
+        <layout
+            xsi:type="gmfgraph:FlowLayout"
+            forceSingleLine="true"
+            minorAlignment="CENTER"
+            majorSpacing="0"
+            minorSpacing="0"/>
+        <children
+            xsi:type="gmfgraph:Rectangle"
+            name="BlueRectangle">
+          <foregroundColor
+              xsi:type="gmfgraph:ConstantColor"
+              value="blue"/>
+          <backgroundColor
+              xsi:type="gmfgraph:ConstantColor"
+              value="blue"/>
+          <maximumSize
+              dx="5"
+              dy="5"/>
+          <minimumSize
+              dx="5"
+              dy="5"/>
+          <preferredSize
+              dx="5"
+              dy="5"/>
+        </children>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="OODPortNameLabel"/>
+      </actualFigure>
+      <accessors
+          accessor="getOODPortNameLabel"
+          figure="//@figures.0/@descriptors.17/@actualFigure/@children.1"/>
     </descriptors>
   </figures>
   <nodes
@@ -519,6 +679,18 @@
   <nodes
       name="FunctionBlockInstanceNode"
       figure="FunctionBlockInstanceFigureDescriptor"/>
+  <nodes
+      name="OutsideInputEventPortNode"
+      figure="OutsideInputEventPortFigureDescriptor"/>
+  <nodes
+      name="OutsideInputDataPortNode"
+      figure="OutsideInputDataPortFigureDescriptor"/>
+  <nodes
+      name="OutsideOutputEventPortNode"
+      figure="OutsideOutputEventPortFigureDescriptor"/>
+  <nodes
+      name="OutsideOutputDataPortNode"
+      figure="OutsideOutputDataPortFigureDescriptor"/>
   <connections
       name="EventConnectionConnection"
       figure="EventConnectionFigureDescriptor"/>
@@ -535,11 +707,11 @@
   <labels
       name="InputEventPortNameDiagramLabel"
       figure="InputEventPortFigureDescriptor"
-      accessor="//@figures.0/@descriptors.2/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.1/@accessors.0"/>
   <labels
       name="OutputEventPortNameDiagramLabel"
       figure="OutputEventPortFigureDescriptor"
-      accessor="//@figures.0/@descriptors.1/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.2/@accessors.0"/>
   <labels
       name="InputDataPortNameDiagramLabel"
       figure="InputDataPortFigureDescriptor"
@@ -548,4 +720,28 @@
       name="OutputDataPortNameDiagramLabel"
       figure="OutputDataPortFigureDescriptor"
       accessor="//@figures.0/@descriptors.4/@accessors.0"/>
+  <labels
+      name="FunctionBlockInstanceNameDiagramLabel"
+      figure="FunctionBlockInstanceFigureDescriptor"
+      accessor="//@figures.0/@descriptors.13/@accessors.1"/>
+  <labels
+      name="FunctionBlockInstanceTypeDiagramLabel"
+      figure="FunctionBlockInstanceFigureDescriptor"
+      accessor="//@figures.0/@descriptors.13/@accessors.0"/>
+  <labels
+      name="OutsideInputEventPortNameDiagramLabel"
+      figure="OutsideInputEventPortFigureDescriptor"
+      accessor="//@figures.0/@descriptors.14/@accessors.0"/>
+  <labels
+      name="OutsideInputDataPortNameDiagramLabel"
+      figure="OutsideInputDataPortFigureDescriptor"
+      accessor="//@figures.0/@descriptors.15/@accessors.0"/>
+  <labels
+      name="OutsideOutputEventPortNameDiagramLabel"
+      figure="OutsideOutputEventPortFigureDescriptor"
+      accessor="//@figures.0/@descriptors.16/@accessors.0"/>
+  <labels
+      name="OutsideOutputDataPortNameDiagramLabel"
+      figure="OutsideOutputDataPortFigureDescriptor"
+      accessor="//@figures.0/@descriptors.17/@accessors.0"/>
 </gmfgraph:Canvas>
