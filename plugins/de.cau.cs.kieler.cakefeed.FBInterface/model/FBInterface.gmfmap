@@ -89,7 +89,7 @@
           <labelMappings
               xsi:type="gmfmap:FeatureLabelMapping">
             <diagramLabel
-                href="FBInterface.gmfgraph#InputEventPortNameDiagramLabel"/>
+                href="FBInterface.gmfgraph#OutputEventPortNameDiagramLabel"/>
             <features
                 href="FBInterface.ecore#//Port/portName"/>
             <editableFeatures
@@ -114,7 +114,7 @@
           <labelMappings
               xsi:type="gmfmap:FeatureLabelMapping">
             <diagramLabel
-                href="FBInterface.gmfgraph#InputDataPortNameDiagramLabel"/>
+                href="FBInterface.gmfgraph#OutputDataPortNameDiagramLabel"/>
             <features
                 href="FBInterface.ecore#//Port/portName"/>
             <editableFeatures
@@ -213,7 +213,7 @@
           <labelMappings
               xsi:type="gmfmap:FeatureLabelMapping">
             <diagramLabel
-                href="FBInterface.gmfgraph#InputEventPortNameDiagramLabel"/>
+                href="FBInterface.gmfgraph#OutputEventPortNameDiagramLabel"/>
             <features
                 href="FBInterface.ecore#//Port/portName"/>
             <editableFeatures
@@ -238,7 +238,7 @@
           <labelMappings
               xsi:type="gmfmap:FeatureLabelMapping">
             <diagramLabel
-                href="FBInterface.gmfgraph#InputDataPortNameDiagramLabel"/>
+                href="FBInterface.gmfgraph#OutputDataPortNameDiagramLabel"/>
             <features
                 href="FBInterface.ecore#//Port/portName"/>
             <editableFeatures
@@ -337,7 +337,7 @@
           <labelMappings
               xsi:type="gmfmap:FeatureLabelMapping">
             <diagramLabel
-                href="FBInterface.gmfgraph#InputEventPortNameDiagramLabel"/>
+                href="FBInterface.gmfgraph#OutputEventPortNameDiagramLabel"/>
             <features
                 href="FBInterface.ecore#//Port/portName"/>
             <editableFeatures
@@ -362,7 +362,7 @@
           <labelMappings
               xsi:type="gmfmap:FeatureLabelMapping">
             <diagramLabel
-                href="FBInterface.gmfgraph#InputDataPortNameDiagramLabel"/>
+                href="FBInterface.gmfgraph#OutputDataPortNameDiagramLabel"/>
             <features
                 href="FBInterface.ecore#//Port/portName"/>
             <editableFeatures
