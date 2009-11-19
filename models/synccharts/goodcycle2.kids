@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:synccharts="http://kieler.cs.cau.de/synccharts" xmi:id="_rb1tENUMEd6oW_bzNsGTxw" type="Synccharts" measurementUnit="Pixel">
+  <children xmi:type="notation:Shape" xmi:id="_rchpkNUMEd6oW_bzNsGTxw" type="2001" fontHeight="8" lineColor="0">
+    <children xmi:type="notation:DecorationNode" xmi:id="_rchpktUMEd6oW_bzNsGTxw" type="5008"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_rchpk9UMEd6oW_bzNsGTxw" type="7001">
+      <children xmi:type="notation:Shape" xmi:id="_rckF0NUMEd6oW_bzNsGTxw" type="3003" fontHeight="8" lineColor="0">
+        <children xmi:type="notation:DecorationNode" xmi:id="_rcks4dUMEd6oW_bzNsGTxw" type="5001"/>
+        <element xmi:type="synccharts:Signal" href="goodcycle2.kixs#A"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_rcks4NUMEd6oW_bzNsGTxw"/>
+      </children>
+      <children xmi:type="notation:Shape" xmi:id="_rcks4tUMEd6oW_bzNsGTxw" type="3003" fontHeight="8" lineColor="0">
+        <children xmi:type="notation:DecorationNode" xmi:id="_rcks5NUMEd6oW_bzNsGTxw" type="5001"/>
+        <element xmi:type="synccharts:Signal" href="goodcycle2.kixs#B"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_rcks49UMEd6oW_bzNsGTxw" x="10" y="10"/>
+      </children>
+      <children xmi:type="notation:Shape" xmi:id="_sWRVANUMEd6oW_bzNsGTxw" type="3003" fontHeight="8" lineColor="0">
+        <children xmi:type="notation:DecorationNode" xmi:id="_sWRVAtUMEd6oW_bzNsGTxw" type="5001"/>
+        <element xmi:type="synccharts:Signal" href="goodcycle2.kixs#I"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_sWRVAdUMEd6oW_bzNsGTxw" x="111" y="7"/>
+      </children>
+    </children>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_rchplNUMEd6oW_bzNsGTxw" type="7002"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_rchpldUMEd6oW_bzNsGTxw" type="7003"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_rchpltUMEd6oW_bzNsGTxw" type="7004"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_rchpl9UMEd6oW_bzNsGTxw" type="7005"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_rciQoNUMEd6oW_bzNsGTxw" type="7006">
+      <children xmi:type="notation:Shape" xmi:id="_rcnJINUMEd6oW_bzNsGTxw" type="3001" fontHeight="8" lineColor="0">
+        <children xmi:type="notation:BasicCompartment" xmi:id="_rcnJItUMEd6oW_bzNsGTxw" type="7008">
+          <children xmi:type="notation:Shape" xmi:id="_rco-UNUMEd6oW_bzNsGTxw" type="3002" fontHeight="8" lineColor="0">
+            <children xmi:type="notation:DecorationNode" xmi:id="_rco-UtUMEd6oW_bzNsGTxw" type="5007"/>
+            <children xmi:type="notation:BasicCompartment" xmi:id="_rcplYNUMEd6oW_bzNsGTxw" type="7009"/>
+            <children xmi:type="notation:BasicCompartment" xmi:id="_rcplYdUMEd6oW_bzNsGTxw" type="7010"/>
+            <children xmi:type="notation:BasicCompartment" xmi:id="_rcplYtUMEd6oW_bzNsGTxw" type="7011"/>
+            <children xmi:type="notation:BasicCompartment" xmi:id="_rcplY9UMEd6oW_bzNsGTxw" type="7012"/>
+            <children xmi:type="notation:BasicCompartment" xmi:id="_rcplZNUMEd6oW_bzNsGTxw" type="7013"/>
+            <children xmi:type="notation:BasicCompartment" xmi:id="_rcplZdUMEd6oW_bzNsGTxw" type="7014"/>
+            <element xmi:type="synccharts:State" href="goodcycle2.kixs#//@innerStates.0/@regions.0/@innerStates.0"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_rco-UdUMEd6oW_bzNsGTxw" x="17" y="7"/>
+          </children>
+          <children xmi:type="notation:Shape" xmi:id="_rcplZtUMEd6oW_bzNsGTxw" type="3002" fontHeight="8" lineColor="0">
+            <children xmi:type="notation:DecorationNode" xmi:id="_rcqMcNUMEd6oW_bzNsGTxw" type="5007"/>
+            <children xmi:type="notation:BasicCompartment" xmi:id="_rcqMcdUMEd6oW_bzNsGTxw" type="7009"/>
+            <children xmi:type="notation:BasicCompartment" xmi:id="_rcqMctUMEd6oW_bzNsGTxw" type="7010"/>
+            <children xmi:type="notation:BasicCompartment" xmi:id="_rcqMc9UMEd6oW_bzNsGTxw" type="7011"/>
+            <children xmi:type="notation:BasicCompartment" xmi:id="_rcqMdNUMEd6oW_bzNsGTxw" type="7012"/>
+            <children xmi:type="notation:BasicCompartment" xmi:id="_rcqMddUMEd6oW_bzNsGTxw" type="7013"/>
+            <children xmi:type="notation:BasicCompartment" xmi:id="_rcqMdtUMEd6oW_bzNsGTxw" type="7014"/>
+            <element xmi:type="synccharts:State" href="goodcycle2.kixs#//@innerStates.0/@regions.0/@innerStates.1"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_rcplZ9UMEd6oW_bzNsGTxw" x="137" y="7"/>
+          </children>
+        </children>
+        <element xmi:type="synccharts:Region" href="goodcycle2.kixs#//@innerStates.0/@regions.0"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_rcnJIdUMEd6oW_bzNsGTxw" x="1" y="1" width="196" height="55"/>
+      </children>
+      <children xmi:type="notation:Shape" xmi:id="_rcnwMNUMEd6oW_bzNsGTxw" type="3001" fontHeight="8" lineColor="0">
+        <children xmi:type="notation:BasicCompartment" xmi:id="_rcnwMtUMEd6oW_bzNsGTxw" type="7008">
+          <children xmi:type="notation:Shape" xmi:id="_rcvE8NUMEd6oW_bzNsGTxw" type="3002" fontHeight="8" lineColor="0">
+            <children xmi:type="notation:DecorationNode" xmi:id="_rcvE8tUMEd6oW_bzNsGTxw" type="5007"/>
+            <children xmi:type="notation:BasicCompartment" xmi:id="_rcvE89UMEd6oW_bzNsGTxw" type="7009"/>
+            <children xmi:type="notation:BasicCompartment" xmi:id="_rcvE9NUMEd6oW_bzNsGTxw" type="7010"/>
+            <children xmi:type="notation:BasicCompartment" xmi:id="_rcvE9dUMEd6oW_bzNsGTxw" type="7011"/>
+            <children xmi:type="notation:BasicCompartment" xmi:id="_rcvsANUMEd6oW_bzNsGTxw" type="7012"/>
+            <children xmi:type="notation:BasicCompartment" xmi:id="_rcvsAdUMEd6oW_bzNsGTxw" type="7013"/>
+            <children xmi:type="notation:BasicCompartment" xmi:id="_rcvsAtUMEd6oW_bzNsGTxw" type="7014"/>
+            <element xmi:type="synccharts:State" href="goodcycle2.kixs#//@innerStates.0/@regions.1/@innerStates.0"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_rcvE8dUMEd6oW_bzNsGTxw" x="8" y="7"/>
+          </children>
+          <children xmi:type="notation:Shape" xmi:id="_rcvsA9UMEd6oW_bzNsGTxw" type="3002" fontHeight="8" lineColor="0">
+            <children xmi:type="notation:DecorationNode" xmi:id="_rcvsBdUMEd6oW_bzNsGTxw" type="5007"/>
+            <children xmi:type="notation:BasicCompartment" xmi:id="_rcvsBtUMEd6oW_bzNsGTxw" type="7009"/>
+            <children xmi:type="notation:BasicCompartment" xmi:id="_rcvsB9UMEd6oW_bzNsGTxw" type="7010"/>
+            <children xmi:type="notation:BasicCompartment" xmi:id="_rcwTENUMEd6oW_bzNsGTxw" type="7011"/>
+            <children xmi:type="notation:BasicCompartment" xmi:id="_rcwTEdUMEd6oW_bzNsGTxw" type="7012"/>
+            <children xmi:type="notation:BasicCompartment" xmi:id="_rcwTEtUMEd6oW_bzNsGTxw" type="7013"/>
+            <children xmi:type="notation:BasicCompartment" xmi:id="_rcwTE9UMEd6oW_bzNsGTxw" type="7014"/>
+            <element xmi:type="synccharts:State" href="goodcycle2.kixs#//@innerStates.0/@regions.1/@innerStates.1"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_rcvsBNUMEd6oW_bzNsGTxw" x="146" y="7"/>
+          </children>
+        </children>
+        <element xmi:type="synccharts:Region" href="goodcycle2.kixs#//@innerStates.0/@regions.1"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_rcnwMdUMEd6oW_bzNsGTxw" x="1" y="57" width="196" height="55"/>
+      </children>
+    </children>
+    <element xmi:type="synccharts:State" href="goodcycle2.kixs#//@innerStates.0"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_rchpkdUMEd6oW_bzNsGTxw" x="7" y="7" width="210" height="172"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_rb1tEdUMEd6oW_bzNsGTxw"/>
+  <element xmi:type="synccharts:Region" href="goodcycle2.kixs#/"/>
+  <edges xmi:type="notation:Connector" xmi:id="_rc7SMNUMEd6oW_bzNsGTxw" type="4001" source="_rco-UNUMEd6oW_bzNsGTxw" target="_rcplZtUMEd6oW_bzNsGTxw" lineColor="0">
+    <children xmi:type="notation:DecorationNode" xmi:id="_rc75QNUMEd6oW_bzNsGTxw" type="6001">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_rc75QdUMEd6oW_bzNsGTxw" x="-1" y="-7"/>
+    </children>
+    <styles xmi:type="notation:FontStyle" xmi:id="_rc7SMdUMEd6oW_bzNsGTxw" fontHeight="8"/>
+    <element xmi:type="synccharts:Transition" href="goodcycle2.kixs#//@innerStates.0/@regions.0/@innerStates.0/@outgoingTransitions.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_rc7SMtUMEd6oW_bzNsGTxw" points="[0, 0, -89, 0]$[28, 0, -61, 0]$[61, 0, -28, 0]$[89, 0, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ruIW8NUMEd6oW_bzNsGTxw" id="(1.0221935395271546,0.5333333333333333)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ruIW8dUMEd6oW_bzNsGTxw" id="(0.009999921244959678,0.5333333333333333)"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_rc9ucNUMEd6oW_bzNsGTxw" type="4001" source="_rcvE8NUMEd6oW_bzNsGTxw" target="_rcvsA9UMEd6oW_bzNsGTxw" lineColor="0">
+    <children xmi:type="notation:DecorationNode" xmi:id="_rc9uc9UMEd6oW_bzNsGTxw" type="6001">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_rc-VgNUMEd6oW_bzNsGTxw" y="-7"/>
+    </children>
+    <styles xmi:type="notation:FontStyle" xmi:id="_rc9ucdUMEd6oW_bzNsGTxw" fontHeight="8"/>
+    <element xmi:type="synccharts:Transition" href="goodcycle2.kixs#//@innerStates.0/@regions.1/@innerStates.0/@outgoingTransitions.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_rc9uctUMEd6oW_bzNsGTxw" points="[0, 0, -107, 0]$[34, 0, -73, 0]$[73, 0, -34, 0]$[107, 0, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ruI-ANUMEd6oW_bzNsGTxw" id="(1.0181290411180066,0.5333333333333333)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ruI-AdUMEd6oW_bzNsGTxw" id="(0.009032218686995967,0.5333333333333333)"/>
+  </edges>
+</notation:Diagram>
