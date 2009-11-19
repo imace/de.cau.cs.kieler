@@ -1,4 +1,4 @@
-package de.cau.cs.kieler.cakefeed.fbinterface;
+package de.cau.cs.kieler.cakefeed.activator;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
