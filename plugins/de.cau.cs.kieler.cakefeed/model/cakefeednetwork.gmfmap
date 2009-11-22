@@ -49,7 +49,7 @@
           <labelMappings
               xsi:type="gmfmap:FeatureLabelMapping">
             <diagramLabel
-                href="cakefeed.gmfgraph#InputEventPortNameDiagramLabel"/>
+                href="cakefeed.gmfgraph#OutsideInputEventPortNameDiagramLabel"/>
             <features
                 href="cakefeed.ecore#//Port/portName"/>
             <editableFeatures
@@ -59,7 +59,7 @@
               xsi:type="gmftool:CreationTool"
               href="cakefeednetwork.gmftool#//@palette/@tools.0/@tools.3"/>
           <diagramNode
-              href="cakefeed.gmfgraph#InputEventPortNode"/>
+              href="cakefeed.gmfgraph#NetworkInputEventPortNode"/>
         </ownedChild>
       </children>
       <children
@@ -74,7 +74,7 @@
           <labelMappings
               xsi:type="gmfmap:FeatureLabelMapping">
             <diagramLabel
-                href="cakefeed.gmfgraph#InputDataPortNameDiagramLabel"/>
+                href="cakefeed.gmfgraph#OutsideInputDataPortNameDiagramLabel"/>
             <features
                 href="cakefeed.ecore#//Port/portName"/>
             <editableFeatures
@@ -84,7 +84,7 @@
               xsi:type="gmftool:CreationTool"
               href="cakefeednetwork.gmftool#//@palette/@tools.0/@tools.3"/>
           <diagramNode
-              href="cakefeed.gmfgraph#InputDataPortNode"/>
+              href="cakefeed.gmfgraph#NetworkInputDataPortNode"/>
         </ownedChild>
       </children>
       <children
@@ -99,7 +99,7 @@
           <labelMappings
               xsi:type="gmfmap:FeatureLabelMapping">
             <diagramLabel
-                href="cakefeed.gmfgraph#OutputEventPortNameDiagramLabel"/>
+                href="cakefeed.gmfgraph#OutsideOutputEventPortNameDiagramLabel"/>
             <features
                 href="cakefeed.ecore#//Port/portName"/>
             <editableFeatures
@@ -109,7 +109,7 @@
               xsi:type="gmftool:CreationTool"
               href="cakefeednetwork.gmftool#//@palette/@tools.0/@tools.3"/>
           <diagramNode
-              href="cakefeed.gmfgraph#OutputEventPortNode"/>
+              href="cakefeed.gmfgraph#NetworkOutputEventPortNode"/>
         </ownedChild>
       </children>
       <children
@@ -124,7 +124,7 @@
           <labelMappings
               xsi:type="gmfmap:FeatureLabelMapping">
             <diagramLabel
-                href="cakefeed.gmfgraph#OutputDataPortNameDiagramLabel"/>
+                href="cakefeed.gmfgraph#OutsideOutputDataPortNameDiagramLabel"/>
             <features
                 href="cakefeed.ecore#//Port/portName"/>
             <editableFeatures
@@ -134,7 +134,7 @@
               xsi:type="gmftool:CreationTool"
               href="cakefeednetwork.gmftool#//@palette/@tools.0/@tools.3"/>
           <diagramNode
-              href="cakefeed.gmfgraph#OutputDataPortNode"/>
+              href="cakefeed.gmfgraph#NetworkOutputDataPortNode"/>
         </ownedChild>
       </children>
     </ownedChild>
@@ -183,7 +183,7 @@
           <labelMappings
               xsi:type="gmfmap:FeatureLabelMapping">
             <diagramLabel
-                href="cakefeed.gmfgraph#InputEventPortNameDiagramLabel"/>
+                href="cakefeed.gmfgraph#OutsideInputEventPortNameDiagramLabel"/>
             <features
                 href="cakefeed.ecore#//Port/portName"/>
             <editableFeatures
@@ -193,7 +193,7 @@
               xsi:type="gmftool:CreationTool"
               href="cakefeednetwork.gmftool#//@palette/@tools.0/@tools.3"/>
           <diagramNode
-              href="cakefeed.gmfgraph#InputEventPortNode"/>
+              href="cakefeed.gmfgraph#NetworkInputEventPortNode"/>
         </ownedChild>
       </children>
       <children
@@ -208,7 +208,7 @@
           <labelMappings
               xsi:type="gmfmap:FeatureLabelMapping">
             <diagramLabel
-                href="cakefeed.gmfgraph#InputDataPortNameDiagramLabel"/>
+                href="cakefeed.gmfgraph#OutsideInputDataPortNameDiagramLabel"/>
             <features
                 href="cakefeed.ecore#//Port/portName"/>
             <editableFeatures
@@ -218,7 +218,7 @@
               xsi:type="gmftool:CreationTool"
               href="cakefeednetwork.gmftool#//@palette/@tools.0/@tools.3"/>
           <diagramNode
-              href="cakefeed.gmfgraph#InputDataPortNode"/>
+              href="cakefeed.gmfgraph#NetworkInputDataPortNode"/>
         </ownedChild>
       </children>
       <children
@@ -233,7 +233,7 @@
           <labelMappings
               xsi:type="gmfmap:FeatureLabelMapping">
             <diagramLabel
-                href="cakefeed.gmfgraph#OutputEventPortNameDiagramLabel"/>
+                href="cakefeed.gmfgraph#OutsideOutputEventPortNameDiagramLabel"/>
             <features
                 href="cakefeed.ecore#//Port/portName"/>
             <editableFeatures
@@ -243,7 +243,7 @@
               xsi:type="gmftool:CreationTool"
               href="cakefeednetwork.gmftool#//@palette/@tools.0/@tools.3"/>
           <diagramNode
-              href="cakefeed.gmfgraph#OutputEventPortNode"/>
+              href="cakefeed.gmfgraph#NetworkOutputEventPortNode"/>
         </ownedChild>
       </children>
       <children
@@ -258,7 +258,7 @@
           <labelMappings
               xsi:type="gmfmap:FeatureLabelMapping">
             <diagramLabel
-                href="cakefeed.gmfgraph#OutputDataPortNameDiagramLabel"/>
+                href="cakefeed.gmfgraph#OutsideOutputDataPortNameDiagramLabel"/>
             <features
                 href="cakefeed.ecore#//Port/portName"/>
             <editableFeatures
@@ -268,7 +268,7 @@
               xsi:type="gmftool:CreationTool"
               href="cakefeednetwork.gmftool#//@palette/@tools.0/@tools.3"/>
           <diagramNode
-              href="cakefeed.gmfgraph#OutputDataPortNode"/>
+              href="cakefeed.gmfgraph#NetworkOutputDataPortNode"/>
         </ownedChild>
       </children>
     </ownedChild>
@@ -317,7 +317,7 @@
           <labelMappings
               xsi:type="gmfmap:FeatureLabelMapping">
             <diagramLabel
-                href="cakefeed.gmfgraph#InputEventPortNameDiagramLabel"/>
+                href="cakefeed.gmfgraph#OutsideInputEventPortNameDiagramLabel"/>
             <features
                 href="cakefeed.ecore#//Port/portName"/>
             <editableFeatures
@@ -327,7 +327,7 @@
               xsi:type="gmftool:CreationTool"
               href="cakefeednetwork.gmftool#//@palette/@tools.0/@tools.3"/>
           <diagramNode
-              href="cakefeed.gmfgraph#InputEventPortNode"/>
+              href="cakefeed.gmfgraph#NetworkInputEventPortNode"/>
         </ownedChild>
       </children>
       <children
@@ -342,7 +342,7 @@
           <labelMappings
               xsi:type="gmfmap:FeatureLabelMapping">
             <diagramLabel
-                href="cakefeed.gmfgraph#InputDataPortNameDiagramLabel"/>
+                href="cakefeed.gmfgraph#OutsideInputDataPortNameDiagramLabel"/>
             <features
                 href="cakefeed.ecore#//Port/portName"/>
             <editableFeatures
@@ -352,7 +352,7 @@
               xsi:type="gmftool:CreationTool"
               href="cakefeednetwork.gmftool#//@palette/@tools.0/@tools.3"/>
           <diagramNode
-              href="cakefeed.gmfgraph#InputDataPortNode"/>
+              href="cakefeed.gmfgraph#NetworkInputDataPortNode"/>
         </ownedChild>
       </children>
       <children
@@ -367,7 +367,7 @@
           <labelMappings
               xsi:type="gmfmap:FeatureLabelMapping">
             <diagramLabel
-                href="cakefeed.gmfgraph#OutputEventPortNameDiagramLabel"/>
+                href="cakefeed.gmfgraph#OutsideOutputEventPortNameDiagramLabel"/>
             <features
                 href="cakefeed.ecore#//Port/portName"/>
             <editableFeatures
@@ -377,7 +377,7 @@
               xsi:type="gmftool:CreationTool"
               href="cakefeednetwork.gmftool#//@palette/@tools.0/@tools.3"/>
           <diagramNode
-              href="cakefeed.gmfgraph#OutputEventPortNode"/>
+              href="cakefeed.gmfgraph#NetworkOutputEventPortNode"/>
         </ownedChild>
       </children>
       <children
@@ -392,7 +392,7 @@
           <labelMappings
               xsi:type="gmfmap:FeatureLabelMapping">
             <diagramLabel
-                href="cakefeed.gmfgraph#OutputDataPortNameDiagramLabel"/>
+                href="cakefeed.gmfgraph#OutsideOutputDataPortNameDiagramLabel"/>
             <features
                 href="cakefeed.ecore#//Port/portName"/>
             <editableFeatures
@@ -402,7 +402,7 @@
               xsi:type="gmftool:CreationTool"
               href="cakefeednetwork.gmftool#//@palette/@tools.0/@tools.3"/>
           <diagramNode
-              href="cakefeed.gmfgraph#OutputDataPortNode"/>
+              href="cakefeed.gmfgraph#NetworkOutputDataPortNode"/>
         </ownedChild>
       </children>
     </ownedChild>
