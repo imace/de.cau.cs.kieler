@@ -180,4 +180,10 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="functionBlock" lowerBound="1"
         eType="#//FunctionBlock" containment="true" eOpposite="#//FunctionBlock/parentInterface"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Library">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="types" upperBound="-1"
+        eType="#//FunctionBlock" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="algorithms" upperBound="-1"
+        eType="#//Algorithm" containment="true"/>
+  </eClassifiers>
 </ecore:EPackage>

@@ -27,6 +27,7 @@ import cakefeed.InputAssociation;
 import cakefeed.InputDataPort;
 import cakefeed.InputEventPort;
 import cakefeed.Interface;
+import cakefeed.Library;
 import cakefeed.OutputAssociation;
 import cakefeed.OutputDataPort;
 import cakefeed.OutputEventPort;
@@ -234,6 +235,13 @@ public class CakefeedPackageImpl extends EPackageImpl implements CakefeedPackage
 	 * @generated
 	 */
 	private EClass interfaceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass libraryEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1004,6 +1012,33 @@ public class CakefeedPackageImpl extends EPackageImpl implements CakefeedPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getLibrary() {
+		return libraryEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getLibrary_Types() {
+		return (EReference)libraryEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getLibrary_Algorithms() {
+		return (EReference)libraryEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getPortType() {
 		return portTypeEEnum;
 	}
@@ -1138,6 +1173,10 @@ public class CakefeedPackageImpl extends EPackageImpl implements CakefeedPackage
 
 		interfaceEClass = createEClass(INTERFACE);
 		createEReference(interfaceEClass, INTERFACE__FUNCTION_BLOCK);
+
+		libraryEClass = createEClass(LIBRARY);
+		createEReference(libraryEClass, LIBRARY__TYPES);
+		createEReference(libraryEClass, LIBRARY__ALGORITHMS);
 
 		// Create enums
 		portTypeEEnum = createEEnum(PORT_TYPE);
@@ -1299,6 +1338,10 @@ public class CakefeedPackageImpl extends EPackageImpl implements CakefeedPackage
 
 		initEClass(interfaceEClass, Interface.class, "Interface", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getInterface_FunctionBlock(), this.getFunctionBlock(), this.getFunctionBlock_ParentInterface(), "functionBlock", null, 1, 1, Interface.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(libraryEClass, Library.class, "Library", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getLibrary_Types(), this.getFunctionBlock(), null, "types", null, 0, -1, Library.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getLibrary_Algorithms(), this.getAlgorithm(), null, "algorithms", null, 0, -1, Library.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(portTypeEEnum, PortType.class, "PortType");

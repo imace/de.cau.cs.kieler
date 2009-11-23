@@ -135,5 +135,9 @@
     <genClasses ecoreClass="cakefeed.ecore#//Interface">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//Interface/functionBlock"/>
     </genClasses>
+    <genClasses ecoreClass="cakefeed.ecore#//Library">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//Library/types"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//Library/algorithms"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>

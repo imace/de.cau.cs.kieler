@@ -82,6 +82,7 @@ public class CakefeedFactoryImpl extends EFactoryImpl implements CakefeedFactory
 			case CakefeedPackage.INPUT_ASSOCIATION: return createInputAssociation();
 			case CakefeedPackage.OUTPUT_ASSOCIATION: return createOutputAssociation();
 			case CakefeedPackage.INTERFACE: return createInterface();
+			case CakefeedPackage.LIBRARY: return createLibrary();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -325,6 +326,16 @@ public class CakefeedFactoryImpl extends EFactoryImpl implements CakefeedFactory
 	public Interface createInterface() {
 		InterfaceImpl interface_ = new InterfaceImpl();
 		return interface_;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Library createLibrary() {
+		LibraryImpl library = new LibraryImpl();
+		return library;
 	}
 
 	/**

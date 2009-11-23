@@ -1608,6 +1608,43 @@ public interface CakefeedPackage extends EPackage {
 	int INTERFACE_FEATURE_COUNT = 1;
 
 	/**
+	 * The meta object id for the '{@link cakefeed.impl.LibraryImpl <em>Library</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see cakefeed.impl.LibraryImpl
+	 * @see cakefeed.impl.CakefeedPackageImpl#getLibrary()
+	 * @generated
+	 */
+	int LIBRARY = 26;
+
+	/**
+	 * The feature id for the '<em><b>Types</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIBRARY__TYPES = 0;
+
+	/**
+	 * The feature id for the '<em><b>Algorithms</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIBRARY__ALGORITHMS = 1;
+
+	/**
+	 * The number of structural features of the '<em>Library</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIBRARY_FEATURE_COUNT = 2;
+
+	/**
 	 * The meta object id for the '{@link cakefeed.PortType <em>Port Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1615,7 +1652,7 @@ public interface CakefeedPackage extends EPackage {
 	 * @see cakefeed.impl.CakefeedPackageImpl#getPortType()
 	 * @generated
 	 */
-	int PORT_TYPE = 26;
+	int PORT_TYPE = 27;
 
 
 	/**
@@ -2440,6 +2477,38 @@ public interface CakefeedPackage extends EPackage {
 	EReference getInterface_FunctionBlock();
 
 	/**
+	 * Returns the meta object for class '{@link cakefeed.Library <em>Library</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Library</em>'.
+	 * @see cakefeed.Library
+	 * @generated
+	 */
+	EClass getLibrary();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link cakefeed.Library#getTypes <em>Types</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Types</em>'.
+	 * @see cakefeed.Library#getTypes()
+	 * @see #getLibrary()
+	 * @generated
+	 */
+	EReference getLibrary_Types();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link cakefeed.Library#getAlgorithms <em>Algorithms</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Algorithms</em>'.
+	 * @see cakefeed.Library#getAlgorithms()
+	 * @see #getLibrary()
+	 * @generated
+	 */
+	EReference getLibrary_Algorithms();
+
+	/**
 	 * Returns the meta object for enum '{@link cakefeed.PortType <em>Port Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3138,6 +3207,32 @@ public interface CakefeedPackage extends EPackage {
 		 * @generated
 		 */
 		EReference INTERFACE__FUNCTION_BLOCK = eINSTANCE.getInterface_FunctionBlock();
+
+		/**
+		 * The meta object literal for the '{@link cakefeed.impl.LibraryImpl <em>Library</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see cakefeed.impl.LibraryImpl
+		 * @see cakefeed.impl.CakefeedPackageImpl#getLibrary()
+		 * @generated
+		 */
+		EClass LIBRARY = eINSTANCE.getLibrary();
+
+		/**
+		 * The meta object literal for the '<em><b>Types</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference LIBRARY__TYPES = eINSTANCE.getLibrary_Types();
+
+		/**
+		 * The meta object literal for the '<em><b>Algorithms</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference LIBRARY__ALGORITHMS = eINSTANCE.getLibrary_Algorithms();
 
 		/**
 		 * The meta object literal for the '{@link cakefeed.PortType <em>Port Type</em>}' enum.
