@@ -124,14 +124,14 @@
   <eClassifiers xsi:type="ecore:EClass" name="CompositeNetwork" eSuperTypes="#//Application">
     <eStructuralFeatures xsi:type="ecore:EReference" name="parentCompositeFunctionBlock"
         lowerBound="1" eType="#//CompositeFunctionBlock" eOpposite="#//CompositeFunctionBlock/compositeNetwork"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="inputEvents" eType="#//OutputEventPort"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="outputEvents" eType="#//InputEventPort"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="inputData" eType="#//OutputDataPort"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="outputData" eType="#//InputDataPort"
-        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inputEvents" upperBound="-1"
+        eType="#//OutputEventPort" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outputEvents" upperBound="-1"
+        eType="#//InputEventPort" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inputData" upperBound="-1"
+        eType="#//OutputDataPort" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outputData" upperBound="-1"
+        eType="#//InputDataPort" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ServiceSequence"/>
   <eClassifiers xsi:type="ecore:EClass" name="Association"/>
