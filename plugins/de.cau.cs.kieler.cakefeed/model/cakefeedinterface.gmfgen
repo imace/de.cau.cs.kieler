@@ -2,7 +2,8 @@
 <gmfgen:GenEditorGenerator xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:gmfgen="http://www.eclipse.org/gmf/2009/GenModel" diagramFileExtension="cakefeed_interface">
+    xmlns:gmfgen="http://www.eclipse.org/gmf/2009/GenModel" modelID="CakefeedInterface"
+    diagramFileExtension="cakefeed_interface">
   <diagram
       visualID="1000"
       editPartClassName="InterfaceEditPart"
@@ -888,7 +889,8 @@
     <requiredPlugins>org.eclipse.draw2d</requiredPlugins>
     <requiredPlugins>org.eclipse.gmf.runtime.draw2d.ui</requiredPlugins>
   </plugin>
-  <editor/>
+  <editor
+      iD="cakefeed.diagram.part.CakefeedInterfaceDiagramEditorID"/>
   <navigator>
     <childReferences
         child="//@diagram"/>
