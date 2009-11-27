@@ -23,7 +23,13 @@
           </children>
           <children xmi:type="notation:Shape" xmi:id="_Tpr1SdtIEd6DT_OqzZG0jw" type="3002" fontName="Sans" fontHeight="10" lineColor="0">
             <children xmi:type="notation:DecorationNode" xmi:id="_Tpr1S9tIEd6DT_OqzZG0jw" type="5007"/>
-            <children xmi:type="notation:BasicCompartment" xmi:id="_Tpr1TNtIEd6DT_OqzZG0jw" type="7009"/>
+            <children xmi:type="notation:BasicCompartment" xmi:id="_Tpr1TNtIEd6DT_OqzZG0jw" type="7009">
+              <children xmi:type="notation:Shape" xmi:id="_tMoOkNtJEd6DT_OqzZG0jw" type="3003" fontName="Sans" fontHeight="10" lineColor="0">
+                <children xmi:type="notation:DecorationNode" xmi:id="_tMo1oNtJEd6DT_OqzZG0jw" type="5001"/>
+                <element xmi:type="synccharts:Signal" href="chain.kixs#B"/>
+                <layoutConstraint xmi:type="notation:Bounds" xmi:id="_tMoOkdtJEd6DT_OqzZG0jw" x="78" y="8"/>
+              </children>
+            </children>
             <children xmi:type="notation:BasicCompartment" xmi:id="_Tpr1TdtIEd6DT_OqzZG0jw" type="7010"/>
             <children xmi:type="notation:BasicCompartment" xmi:id="_Tpr1TttIEd6DT_OqzZG0jw" type="7011"/>
             <children xmi:type="notation:BasicCompartment" xmi:id="_Tpr1T9tIEd6DT_OqzZG0jw" type="7012"/>

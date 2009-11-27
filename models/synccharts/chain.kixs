@@ -11,6 +11,7 @@
         <outgoingTransitions targetState="//@innerStates.0/@regions.0/@innerStates.1"/>
       </innerStates>
       <innerStates id="S0">
+        <signals name="B"/>
         <regions>
           <innerStates id="S0" isInitial="true">
             <outgoingTransitions triggersAndEffects="A / B" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.1">
