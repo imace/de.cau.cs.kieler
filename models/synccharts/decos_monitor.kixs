@@ -127,8 +127,7 @@
                             <subExpressions xsi:type="synccharts:SignalReference" signal="EXCEED"/>
                           </trigger>
                         </outgoingTransitions>
-                        <outgoingTransitions triggersAndEffects="EXCEED_A or EXCEED_B / abort" priority="1" targetState="//@innerStates.0/@regions.1/@innerStates.1/@regions.0/@innerStates.0/@regions.0/@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.2">
-                          <effects xsi:type="synccharts:Emission" signal="abort"/>
+                        <outgoingTransitions triggersAndEffects="EXCEED_A or EXCEED_B" priority="1" targetState="//@innerStates.0/@regions.1/@innerStates.1/@regions.0/@innerStates.0/@regions.0/@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.2">
                           <trigger xsi:type="synccharts:ComplexExpression" operator="or">
                             <subExpressions xsi:type="synccharts:SignalReference" signal="EXCEED_A"/>
                             <subExpressions xsi:type="synccharts:SignalReference" signal="EXCEED_B"/>
@@ -136,13 +135,9 @@
                         </outgoingTransitions>
                       </innerStates>
                       <innerStates id="S0" label="fail_act_brake"/>
-                      <innerStates id="S1" isFinal="true">
-                        <outgoingTransitions triggersAndEffects="/ abort" priority="1" targetState="//@innerStates.0/@regions.1/@innerStates.1/@regions.0/@innerStates.0/@regions.0/@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.2">
-                          <effects xsi:type="synccharts:Emission" signal="abort"/>
-                        </outgoingTransitions>
-                      </innerStates>
+                      <innerStates id="S1" isFinal="true"/>
                     </regions>
-                    <outgoingTransitions triggersAndEffects="abort / HOLD1_RDY" targetState="//@innerStates.0/@regions.1/@innerStates.1/@regions.0/@innerStates.0/@regions.0/@innerStates.0/@regions.0/@innerStates.2">
+                    <outgoingTransitions triggersAndEffects="abort / HOLD1_RDY" type="NORMALTERMINATION" targetState="//@innerStates.0/@regions.1/@innerStates.1/@regions.0/@innerStates.0/@regions.0/@innerStates.0/@regions.0/@innerStates.2">
                       <effects xsi:type="synccharts:Emission" signal="HOLD1_RDY"/>
                       <trigger xsi:type="synccharts:SignalReference" signal="abort"/>
                     </outgoingTransitions>
@@ -182,10 +177,7 @@
                       <innerStates id="S1" label="motor_fault_b" isFinal="true"/>
                       <innerStates id="S2" label="cs_breakage" isFinal="true"/>
                     </regions>
-                    <outgoingTransitions triggersAndEffects="" priority="1" type="NORMALTERMINATION" targetState="//@innerStates.0/@regions.1/@innerStates.1/@regions.0/@innerStates.0/@regions.0/@innerStates.0/@regions.0/@innerStates.3"/>
-                  </innerStates>
-                  <innerStates id="S2">
-                    <outgoingTransitions triggersAndEffects="/ EMERGENCY" priority="1" targetState="//@innerStates.0/@regions.1/@innerStates.1/@regions.0/@innerStates.0/@regions.0/@innerStates.0/@regions.0/@innerStates.2">
+                    <outgoingTransitions triggersAndEffects="/ EMERGENCY" priority="1" type="NORMALTERMINATION" targetState="//@innerStates.0/@regions.1/@innerStates.1/@regions.0/@innerStates.0/@regions.0/@innerStates.0/@regions.0/@innerStates.2">
                       <effects xsi:type="synccharts:Emission" signal="EMERGENCY"/>
                     </outgoingTransitions>
                   </innerStates>
@@ -255,7 +247,9 @@
                       <innerStates id="S2" label="breakage_b_shaft_ppum" isFinal="true"/>
                       <innerStates id="S3" label="failure_controller_a" isFinal="true"/>
                     </regions>
-                    <outgoingTransitions triggersAndEffects="" priority="1" type="NORMALTERMINATION" targetState="//@innerStates.0/@regions.1/@innerStates.1/@regions.0/@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.4"/>
+                    <outgoingTransitions triggersAndEffects="/ ONEMOT1" priority="1" type="NORMALTERMINATION" targetState="//@innerStates.0/@regions.1/@innerStates.1/@regions.0/@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.3">
+                      <effects xsi:type="synccharts:Emission" signal="ONEMOT1"/>
+                    </outgoingTransitions>
                   </innerStates>
                   <innerStates id="S1" label="one_motor">
                     <regions>
@@ -289,15 +283,7 @@
                       <innerStates id="S2" label="break_a_or_cs_or_jam" isFinal="true"/>
                       <innerStates id="S3" label="break_b_or_cs_or_jam" isFinal="true"/>
                     </regions>
-                    <outgoingTransitions triggersAndEffects="" priority="1" type="NORMALTERMINATION" targetState="//@innerStates.0/@regions.1/@innerStates.1/@regions.0/@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.5"/>
-                  </innerStates>
-                  <innerStates id="S2">
-                    <outgoingTransitions triggersAndEffects="/ ONEMOT1" priority="1" targetState="//@innerStates.0/@regions.1/@innerStates.1/@regions.0/@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.3">
-                      <effects xsi:type="synccharts:Emission" signal="ONEMOT1"/>
-                    </outgoingTransitions>
-                  </innerStates>
-                  <innerStates id="S3">
-                    <outgoingTransitions triggersAndEffects="/ EMERGENCY" priority="1" targetState="//@innerStates.0/@regions.1/@innerStates.1/@regions.0/@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.3">
+                    <outgoingTransitions triggersAndEffects="/ EMERGENCY" priority="1" type="NORMALTERMINATION" targetState="//@innerStates.0/@regions.1/@innerStates.1/@regions.0/@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.3">
                       <effects xsi:type="synccharts:Emission" signal="EMERGENCY"/>
                     </outgoingTransitions>
                   </innerStates>
