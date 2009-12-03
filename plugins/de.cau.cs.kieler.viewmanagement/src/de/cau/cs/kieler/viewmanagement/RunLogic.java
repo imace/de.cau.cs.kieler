@@ -15,7 +15,6 @@
 package de.cau.cs.kieler.viewmanagement;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -29,11 +28,12 @@ import de.cau.cs.kieler.viewmanagement.view.TableData;
 import de.cau.cs.kieler.viewmanagement.view.TableDataList;
 
 /**
- * The RunLogic is the central administration of the view management. It keeps track of all the
- * available components, triggers, effects and combinations. On startup, it reads all of them and
- * makes instances available to the other components. It can also be asked to give an instance of a
- * specified component, using e.g. the getTrigger method. Finally it provides with finalize() a way
- * to simply shut down the view management.
+ * The RunLogic is the central administration of the view management. It keeps
+ * track of all the available components, triggers, effects and combinations. On
+ * startup, it reads all of them and makes instances available to the other
+ * components. It can also be asked to give an instance of a specified
+ * component, using e.g. the getTrigger method. Finally it provides with
+ * finalize() a way to simply shut down the view management.
  * 
  * @author nbe
  * 
@@ -81,34 +81,37 @@ public final class RunLogic {
     private HashMap<String, ACombination> combos;
 
     /**
-     * keeps track of the combos that have been activated in order to shut them down cleanly if
-     * needed.
+     * keeps track of the combos that have been activated in order to shut them
+     * down cleanly if needed.
      */
     List<String> activeCombos;
 
     /**
-     * indicates the status of the RunLogic. Is used to determine the action of the toggle button in
-     * the VM Control view.
+     * indicates the status of the RunLogic. Is used to determine the action of
+     * the toggle button in the VM Control view.
      */
     private boolean state;
 
     /**
-     * Initializes lists to be used to store available components no getter/setter in class remove
-     * setter
+     * Initializes lists to be used to store available components no
+     * getter/setter in class remove setter
      */
     public void init() {
         triggers = (new HashMap<String, ATrigger>());
         effects = (new HashMap<String, AEffect>());
         combos = (new HashMap<String, ACombination>());
-        // update the table in the VM Control view that displays all available combinations
-        TableDataList.getInstance().updateViewAsync();
+        // update the table in the VM Control view that displays all available
+        // combinations
+        if (TableDataList.getInstance() != null) {
+            TableDataList.getInstance().updateViewAsync();
+        }
         activeCombos = new ArrayList<String>();
 
     }
 
     /**
-     * Method to start the Viewmanagement. Reads all available effects, triggers and combinations,
-     * sets the runLogicState.
+     * Method to start the Viewmanagement. Reads all available effects, triggers
+     * and combinations, sets the runLogicState.
      */
     public void registerListeners() {
 
@@ -117,22 +120,26 @@ public final class RunLogic {
         effects.clear();
         activeCombos.clear();
 
-        // set indication that the RunLogic is running (This is needed to determine the action of
+        // set indication that the RunLogic is running (This is needed to
+        // determine the action of
         // the VM on/off button in the VM Control view)
         state = true;
         // read available effects, triggers and combinations
         this.readEffects();
         this.readTriggers();
         this.readCombinations();
-        // update the table in the VM Control view once more
-        TableDataList.getInstance().updateViewAsync();
+        if (TableDataList.getInstance() != null) {
+            // update the table in the VM Control view once more
+            TableDataList.getInstance().updateViewAsync();
+        }
 
         return;
     }
 
     /**
-     * Method to stop the Viewmanagement. Removes combinations from the VM Table, calls finalize()
-     * for active combos and finalize for active triggers. Sets status runLogicState.
+     * Method to stop the Viewmanagement. Removes combinations from the VM
+     * Table, calls finalize() for active combos and finalize for active
+     * triggers. Sets status runLogicState.
      */
     public void unregisterListeners() {
 
@@ -159,7 +166,8 @@ public final class RunLogic {
             triggers.get(i.next()).finalize();
         }
 
-        // indicate that the RunLogic is now off (This is needed to determine the action of
+        // indicate that the RunLogic is now off (This is needed to determine
+        // the action of
         // the VM on/off button in the VM Control view)
         state = false;
 
@@ -167,13 +175,13 @@ public final class RunLogic {
     }
 
     /**
-     * searches the registry for triggers and creates an instance of each. Adds them to the triggers
-     * list to make them available
+     * searches the registry for triggers and creates an instance of each. Adds
+     * them to the triggers list to make them available
      */
 
     private void readTriggers() {
-        IConfigurationElement[] myExtensions = Platform.getExtensionRegistry()
-                .getConfigurationElementsFor(TRIGGERPATH);
+        IConfigurationElement[] myExtensions =
+                Platform.getExtensionRegistry().getConfigurationElementsFor(TRIGGERPATH);
         for (int i = 0; i < myExtensions.length; i++) {
 
             try {
@@ -188,13 +196,13 @@ public final class RunLogic {
     }
 
     /**
-     * searches the registry for effects and creates an instance of each. Adds them to the effects
-     * list to make them available
+     * searches the registry for effects and creates an instance of each. Adds
+     * them to the effects list to make them available
      */
 
     private void readEffects() {
-        IConfigurationElement[] myExtensions = Platform.getExtensionRegistry()
-                .getConfigurationElementsFor(EFFECTSPATH);
+        IConfigurationElement[] myExtensions =
+                Platform.getExtensionRegistry().getConfigurationElementsFor(EFFECTSPATH);
         for (int i = 0; i < myExtensions.length; i++) {
             try {
                 AEffect myEffect = (AEffect) myExtensions[i].createExecutableExtension("class");
@@ -208,25 +216,29 @@ public final class RunLogic {
     }
 
     /**
-     * searches the registry for triggers and creates an instance of each. Adds them to the triggers
-     * list to make them available. Also creates new TableData entires and adds the combinations to
-     * the table in the VM Control view. Finally updates the table to make them visible.
+     * searches the registry for triggers and creates an instance of each. Adds
+     * them to the triggers list to make them available. Also creates new
+     * TableData entires and adds the combinations to the table in the VM
+     * Control view. Finally updates the table to make them visible.
      **/
     private void readCombinations() {
-        IConfigurationElement[] myExtensions = Platform.getExtensionRegistry()
-                .getConfigurationElementsFor(COMBOPATH);
+        IConfigurationElement[] myExtensions =
+                Platform.getExtensionRegistry().getConfigurationElementsFor(COMBOPATH);
         for (int i = 0; i < myExtensions.length; i++) {
             try {
 
-                ACombination myCombo = (ACombination) myExtensions[i]
-                        .createExecutableExtension("class");
+                ACombination myCombo =
+                        (ACombination) myExtensions[i].createExecutableExtension("class");
                 getCombos().put(myExtensions[i].getAttribute("name"), myCombo);
                 // add an entry tp the TableDataList for each combo
-                TableDataList.getInstance().add(
-                        new TableData(TableDataList.getInstance(), myCombo.isActive(),
-                                myExtensions[i].getAttribute("name")));
-                // update the table
-                TableDataList.getInstance().updateViewAsync();
+                if (TableDataList.getInstance() != null) {
+                    TableDataList.getInstance().add(
+                            new TableData(
+                                    TableDataList.getInstance(), myCombo.isActive(),
+                                    myExtensions[i].getAttribute("name")));
+                    // update the table
+                    TableDataList.getInstance().updateViewAsync();
+                }
             } catch (CoreException e) {
 
                 e.printStackTrace();
@@ -235,7 +247,8 @@ public final class RunLogic {
     }
 
     /**
-     * Returns a trigger from list triggers that matches the given name in the argument.
+     * Returns a trigger from list triggers that matches the given name in the
+     * argument.
      * 
      * @param name
      *            name of trigger to be searched for
@@ -248,7 +261,8 @@ public final class RunLogic {
     }
 
     /**
-     * Returns a combination from list combos that matches the given name in the argument.
+     * Returns a combination from list combos that matches the given name in the
+     * argument.
      * 
      * @param name
      *            name of the combination to be searched for
@@ -261,7 +275,8 @@ public final class RunLogic {
     }
 
     /**
-     * Returns an effect from list effects that matches the given name in the argument.
+     * Returns an effect from list effects that matches the given name in the
+     * argument.
      * 
      * @param name
      *            of the effect to be searched for
@@ -293,8 +308,8 @@ public final class RunLogic {
     }
 
     /**
-     * Returns the state of the RunLogic, true for on, false for off. This is used to determine the
-     * next action of the button in the VM Control view.
+     * Returns the state of the RunLogic, true for on, false for off. This is
+     * used to determine the next action of the button in the VM Control view.
      * 
      * @return the state of the RunLogic
      */
