@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.commands">
+      <category
+            description="Commands related to CAKeFEED Function Block diagrams."
+            id="org.eclipse.gmf.category.cakefeed"
+            name="CAKeFEED">
+      </category>
+      <command
+            categoryId="org.eclipse.gmf.category.cakefeed"
+            defaultHandler="de.cau.cs.kieler.cakefeed.diagram.custom.handlers.AddToTypeHandler"
+            description="Adds a new Input Event"
+            id="de.cau.cs.kieler.cakefeed.custom.contextMenu.addInputEvent"
+            name="Add Input Event">
+         <commandParameter
+               id="de.cau.cs.kieler.cakefeed.custom.parameters.type"
+               name="Type"
+               optional="true">
+         </commandParameter>
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="popup:org.eclipse.gmf.runtime.diagram.ui.DiagramEditorContextMenu?after=addGroup">
+         <command
+               commandId="de.cau.cs.kieler.cakefeed.custom.contextMenu.addInputEvent"
+               label="Add Input Event"
+               style="push"
+               tooltip="Add an Input Event to the type&apos;s interface">
+            <parameter
+                  name="de.cau.cs.kieler.cakefeed.custom.parameters.type"
+                  value="InputEvent">
+            </parameter>
+            <visibleWhen
+                  checkEnabled="false">
+               <reference
+                     definitionId="de.cau.cs.kieler.cakefeed.custom.expressions.typePart">
+               </reference>
+            </visibleWhen>
+         </command>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.core.expressions.definitions">
+      <definition
+            id="de.cau.cs.kieler.cakefeed.custom.expressions.typePart">
+         <iterate
+               ifEmpty="false"
+               operator="and">
+            <or>
+               <instanceof
+                     value="bfbtype.diagram.edit.parts.BFBTypeEditPart">
+               </instanceof></or>
+         </iterate>
+      </definition>
+   </extension>
+
+</plugin>
