@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="cfbtype"
+    nsURI="http://kieler.cs.cau.de/cakefeed/cfbtype" nsPrefix="cfbtype">
+  <eClassifiers xsi:type="ecore:EClass" name="CFBType" eSuperTypes="system.ecore#//FBType">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="FBNetwork" lowerBound="1"
+        eType="ecore:EClass system.ecore#//FBNetwork" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Service" eType="ecore:EClass adaptertype.ecore#//Service"
+        containment="true"/>
+  </eClassifiers>
+</ecore:EPackage>

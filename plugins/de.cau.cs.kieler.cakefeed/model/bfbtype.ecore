@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="bfbtype"
+    nsURI="http://kieler.cs.cau.de/cakefeed/bfbtype" nsPrefix="bfbtype">
+  <eClassifiers xsi:type="ecore:EClass" name="BFBType" eSuperTypes="system.ecore#//FBType">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="BasicFB" lowerBound="1"
+        eType="#//BasicFB" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Service" eType="ecore:EClass adaptertype.ecore#//Service"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BasicFB">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="InternalVars" eType="#//InternalVars"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ECC" eType="#//ECC" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="HCECC" eType="#//HCECC"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Algorithm" upperBound="-1"
+        eType="#//Algorithm" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InternalVars">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="VarDeclaration" lowerBound="1"
+        upperBound="-1" eType="ecore:EClass system.ecore#//VarDeclaration" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ECC">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ECTransition" lowerBound="1"
+        upperBound="-1" eType="#//ECTransition" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ECState" upperBound="-1"
+        eType="#//ECState" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="HCECC">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ECC" upperBound="-1" eType="#//ECC"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="HCECCRelation" upperBound="-1"
+        eType="#//HCECCRelation" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Algorithm">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="FBD" eType="#//FBD" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ST" eType="#//ST" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="LD" eType="#//LD" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Other" eType="#//Other"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Comment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ECState">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ECAction" upperBound="-1"
+        eType="#//ECAction" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Comment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ECTransition">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Comment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Condition" lowerBound="1"
+        eType="ecore:EClass system.ecore#//InputEvent"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Destination" lowerBound="1"
+        eType="#//ECState"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Source" lowerBound="1"
+        eType="#//ECState"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="HCECCRelation">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Comment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Relation" lowerBound="1"
+        eType="#//ECCRelation"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="HCECCParallelRelation" eSuperTypes="#//HCECCRelation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Destination" lowerBound="1"
+        eType="#//ECC"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Source" lowerBound="1"
+        eType="#//ECC"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="HCECCRefinementRelation" eSuperTypes="#//HCECCRelation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Destination" lowerBound="1"
+        eType="#//ECC"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Source" lowerBound="1"
+        eType="#//ECState"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FBD">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="FB" lowerBound="1" upperBound="-1"
+        eType="ecore:EClass system.ecore#//FB" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="DataConnections" lowerBound="1"
+        eType="ecore:EClass system.ecore#//DataConnections" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ST">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Text" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LD">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Rung" lowerBound="1" upperBound="-1"
+        eType="#//Rung" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Other">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Language" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Prototype" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Text" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ECAction">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Algorithm" eType="#//Algorithm"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Output" eType="ecore:EClass system.ecore#//OutputEvent"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ECCRelation">
+    <eLiterals name="Parallel"/>
+    <eLiterals name="Refine" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Rung">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Comment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Expression" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Output" lowerBound="1"
+        eType="ecore:EClass system.ecore#//OutputEvent"/>
+  </eClassifiers>
+</ecore:EPackage>

@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/zxsd/src"
+    modelPluginID="zxsd" modelName="FunctionBlock" importerID="org.eclipse.xsd.ecore.importer"
+    complianceLevel="6.0" copyrightFields="false">
+  <foreignModel>FunctionBlock.xsd</foreignModel>
+  <genPackages prefix="FunctionBlock" resource="XML" disposableProviderFactory="true"
+      ecorePackage="FunctionBlock.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="FunctionBlock.ecore#//LanguageType">
+      <genEnumLiterals ecoreEnumLiteral="FunctionBlock.ecore#//LanguageType/Java"/>
+      <genEnumLiterals ecoreEnumLiteral="FunctionBlock.ecore#//LanguageType/Cpp"/>
+      <genEnumLiterals ecoreEnumLiteral="FunctionBlock.ecore#//LanguageType/C"/>
+      <genEnumLiterals ecoreEnumLiteral="FunctionBlock.ecore#//LanguageType/Other"/>
+    </genEnums>
+    <genDataTypes ecoreDataType="FunctionBlock.ecore#//LanguageTypeObject"/>
+    <genClasses ecoreClass="FunctionBlock.ecore#//AdapterConnectionsType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//AdapterConnectionsType/connection"/>
+    </genClasses>
+    <genClasses ecoreClass="FunctionBlock.ecore#//AdapterDeclarationType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//AdapterDeclarationType/parameter"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//AdapterDeclarationType/comment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//AdapterDeclarationType/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//AdapterDeclarationType/type"/>
+    </genClasses>
+    <genClasses ecoreClass="FunctionBlock.ecore#//AdapterTypeType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//AdapterTypeType/identification"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//AdapterTypeType/versionInfo"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//AdapterTypeType/compilerInfo"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//AdapterTypeType/interfaceList"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//AdapterTypeType/service"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//AdapterTypeType/comment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//AdapterTypeType/name"/>
+    </genClasses>
+    <genClasses ecoreClass="FunctionBlock.ecore#//AlgorithmType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//AlgorithmType/fBD"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//AlgorithmType/sT"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//AlgorithmType/lD"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//AlgorithmType/other"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//AlgorithmType/comment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//AlgorithmType/name"/>
+    </genClasses>
+    <genClasses ecoreClass="FunctionBlock.ecore#//ApplicationType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//ApplicationType/fBNetwork"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//ApplicationType/comment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//ApplicationType/name"/>
+    </genClasses>
+    <genClasses ecoreClass="FunctionBlock.ecore#//BasicFBType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//BasicFBType/internalVars"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//BasicFBType/eCC"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//BasicFBType/hCECC"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//BasicFBType/algorithm"/>
+    </genClasses>
+    <genClasses ecoreClass="FunctionBlock.ecore#//CompilerInfoType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//CompilerInfoType/compiler"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//CompilerInfoType/classdef"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//CompilerInfoType/header"/>
+    </genClasses>
+    <genClasses ecoreClass="FunctionBlock.ecore#//CompilerType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//CompilerType/language"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//CompilerType/product"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//CompilerType/vendor"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//CompilerType/version"/>
+    </genClasses>
+    <genClasses ecoreClass="FunctionBlock.ecore#//ConnectionType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//ConnectionType/comment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//ConnectionType/destination"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//ConnectionType/dx1"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//ConnectionType/dx2"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//ConnectionType/dy"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//ConnectionType/source"/>
+    </genClasses>
+    <genClasses ecoreClass="FunctionBlock.ecore#//DataConnectionsType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//DataConnectionsType/connection"/>
+    </genClasses>
+    <genClasses ecoreClass="FunctionBlock.ecore#//DeviceType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//DeviceType/parameter"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//DeviceType/resource"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//DeviceType/fBNetwork"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//DeviceType/comment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//DeviceType/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//DeviceType/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//DeviceType/x"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//DeviceType/y"/>
+    </genClasses>
+    <genClasses ecoreClass="FunctionBlock.ecore#//DeviceTypeType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//DeviceTypeType/identification"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//DeviceTypeType/versionInfo"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//DeviceTypeType/compilerInfo"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//DeviceTypeType/varDeclaration"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//DeviceTypeType/resourceTypeName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//DeviceTypeType/resource"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//DeviceTypeType/fBNetwork"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//DeviceTypeType/comment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//DeviceTypeType/name"/>
+    </genClasses>
+    <genClasses ecoreClass="FunctionBlock.ecore#//DocumentRoot">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//DocumentRoot/mixed"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference FunctionBlock.ecore#//DocumentRoot/xMLNSPrefixMap"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference FunctionBlock.ecore#//DocumentRoot/xSISchemaLocation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//DocumentRoot/adapterConnections"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//DocumentRoot/adapterDeclaration"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//DocumentRoot/adapterType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//DocumentRoot/algorithm"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//DocumentRoot/application"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//DocumentRoot/basicFB"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//DocumentRoot/compiler"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//DocumentRoot/compilerInfo"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//DocumentRoot/connection"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//DocumentRoot/dataConnections"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//DocumentRoot/device"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//DocumentRoot/deviceType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//DocumentRoot/eCAction"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//DocumentRoot/eCC"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//DocumentRoot/eCState"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//DocumentRoot/eCTransition"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//DocumentRoot/event"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//DocumentRoot/eventConnections"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//DocumentRoot/eventInputs"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//DocumentRoot/eventOutputs"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//DocumentRoot/fB"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//DocumentRoot/fBD"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//DocumentRoot/fBNetwork"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//DocumentRoot/fBType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//DocumentRoot/fBTypeName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//DocumentRoot/hCECC"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//DocumentRoot/hCECCRelation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//DocumentRoot/identification"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//DocumentRoot/inputPrimitive"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//DocumentRoot/inputVars"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//DocumentRoot/interfaceList"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//DocumentRoot/internalVars"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//DocumentRoot/lD"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//DocumentRoot/link"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//DocumentRoot/mapping"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//DocumentRoot/other"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//DocumentRoot/outputPrimitive"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//DocumentRoot/outputVars"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//DocumentRoot/parameter"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//DocumentRoot/plugs"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//DocumentRoot/resource"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//DocumentRoot/resourceType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//DocumentRoot/resourceTypeName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//DocumentRoot/rung"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//DocumentRoot/segment"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//DocumentRoot/service"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//DocumentRoot/serviceSequence"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//DocumentRoot/serviceTransaction"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//DocumentRoot/sockets"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//DocumentRoot/sT"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//DocumentRoot/subApp"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//DocumentRoot/subAppEvent"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//DocumentRoot/subAppEventInputs"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//DocumentRoot/subAppEventOutputs"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//DocumentRoot/subAppInterfaceList"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//DocumentRoot/subAppNetwork"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//DocumentRoot/subAppType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//DocumentRoot/system"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//DocumentRoot/varDeclaration"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//DocumentRoot/versionInfo"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//DocumentRoot/with"/>
+    </genClasses>
+    <genClasses ecoreClass="FunctionBlock.ecore#//ECActionType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//ECActionType/algorithm"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//ECActionType/output"/>
+    </genClasses>
+    <genClasses ecoreClass="FunctionBlock.ecore#//ECCType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//ECCType/eCState"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//ECCType/eCTransition"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//ECCType/name"/>
+    </genClasses>
+    <genClasses ecoreClass="FunctionBlock.ecore#//ECStateType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//ECStateType/eCAction"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//ECStateType/comment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//ECStateType/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//ECStateType/x"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//ECStateType/y"/>
+    </genClasses>
+    <genClasses ecoreClass="FunctionBlock.ecore#//ECTransitionType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//ECTransitionType/comment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//ECTransitionType/condition"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//ECTransitionType/destination"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//ECTransitionType/source"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//ECTransitionType/x"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//ECTransitionType/y"/>
+    </genClasses>
+    <genClasses ecoreClass="FunctionBlock.ecore#//EventConnectionsType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//EventConnectionsType/connection"/>
+    </genClasses>
+    <genClasses ecoreClass="FunctionBlock.ecore#//EventInputsType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//EventInputsType/event"/>
+    </genClasses>
+    <genClasses ecoreClass="FunctionBlock.ecore#//EventOutputsType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//EventOutputsType/event"/>
+    </genClasses>
+    <genClasses ecoreClass="FunctionBlock.ecore#//EventType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//EventType/with"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//EventType/comment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//EventType/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//EventType/type"/>
+    </genClasses>
+    <genClasses ecoreClass="FunctionBlock.ecore#//FBDType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//FBDType/fB"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//FBDType/dataConnections"/>
+    </genClasses>
+    <genClasses ecoreClass="FunctionBlock.ecore#//FBNetworkType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//FBNetworkType/mixed"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference FunctionBlock.ecore#//FBNetworkType/fB"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference FunctionBlock.ecore#//FBNetworkType/eventConnections"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference FunctionBlock.ecore#//FBNetworkType/dataConnections"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference FunctionBlock.ecore#//FBNetworkType/adapterConnections"/>
+    </genClasses>
+    <genClasses ecoreClass="FunctionBlock.ecore#//FBType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//FBType/parameter"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//FBType/comment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//FBType/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//FBType/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//FBType/x"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//FBType/y"/>
+    </genClasses>
+    <genClasses ecoreClass="FunctionBlock.ecore#//FBTypeNameType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//FBTypeNameType/name"/>
+    </genClasses>
+    <genClasses ecoreClass="FunctionBlock.ecore#//FBTypeType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//FBTypeType/identification"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//FBTypeType/versionInfo"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//FBTypeType/compilerInfo"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//FBTypeType/interfaceList"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//FBTypeType/basicFB"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//FBTypeType/fBNetwork"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//FBTypeType/service"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//FBTypeType/comment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//FBTypeType/name"/>
+    </genClasses>
+    <genClasses ecoreClass="FunctionBlock.ecore#//HCECCRelationType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//HCECCRelationType/comment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//HCECCRelationType/destination"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//HCECCRelationType/relation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//HCECCRelationType/source"/>
+    </genClasses>
+    <genClasses ecoreClass="FunctionBlock.ecore#//HCECCType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//HCECCType/group"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference FunctionBlock.ecore#//HCECCType/eCC"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference FunctionBlock.ecore#//HCECCType/hCECCRelation"/>
+    </genClasses>
+    <genClasses ecoreClass="FunctionBlock.ecore#//IdentificationType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//IdentificationType/applicationDomain"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//IdentificationType/classification"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//IdentificationType/description"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//IdentificationType/function"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//IdentificationType/standard"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//IdentificationType/type"/>
+    </genClasses>
+    <genClasses ecoreClass="FunctionBlock.ecore#//InputPrimitiveType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//InputPrimitiveType/event"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//InputPrimitiveType/interface"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//InputPrimitiveType/parameters"/>
+    </genClasses>
+    <genClasses ecoreClass="FunctionBlock.ecore#//InputVarsType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//InputVarsType/varDeclaration"/>
+    </genClasses>
+    <genClasses ecoreClass="FunctionBlock.ecore#//InterfaceListType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//InterfaceListType/mixed"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference FunctionBlock.ecore#//InterfaceListType/eventInputs"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference FunctionBlock.ecore#//InterfaceListType/eventOutputs"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference FunctionBlock.ecore#//InterfaceListType/inputVars"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference FunctionBlock.ecore#//InterfaceListType/outputVars"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference FunctionBlock.ecore#//InterfaceListType/sockets"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference FunctionBlock.ecore#//InterfaceListType/plugs"/>
+    </genClasses>
+    <genClasses ecoreClass="FunctionBlock.ecore#//InternalVarsType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//InternalVarsType/varDeclaration"/>
+    </genClasses>
+    <genClasses ecoreClass="FunctionBlock.ecore#//LDType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//LDType/rung"/>
+    </genClasses>
+    <genClasses ecoreClass="FunctionBlock.ecore#//LinkType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//LinkType/parameter"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//LinkType/comment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//LinkType/commResource"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//LinkType/segmentName"/>
+    </genClasses>
+    <genClasses ecoreClass="FunctionBlock.ecore#//MappingType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//MappingType/from"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//MappingType/to"/>
+    </genClasses>
+    <genClasses ecoreClass="FunctionBlock.ecore#//OtherType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//OtherType/language"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//OtherType/prototype"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//OtherType/text"/>
+    </genClasses>
+    <genClasses ecoreClass="FunctionBlock.ecore#//OutputPrimitiveType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//OutputPrimitiveType/event"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//OutputPrimitiveType/interface"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//OutputPrimitiveType/parameters"/>
+    </genClasses>
+    <genClasses ecoreClass="FunctionBlock.ecore#//OutputVarsType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//OutputVarsType/varDeclaration"/>
+    </genClasses>
+    <genClasses ecoreClass="FunctionBlock.ecore#//ParameterType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//ParameterType/comment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//ParameterType/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//ParameterType/value"/>
+    </genClasses>
+    <genClasses ecoreClass="FunctionBlock.ecore#//PlugsType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//PlugsType/adapterDeclaration"/>
+    </genClasses>
+    <genClasses ecoreClass="FunctionBlock.ecore#//ResourceType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//ResourceType/parameter"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//ResourceType/fBNetwork"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//ResourceType/comment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//ResourceType/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//ResourceType/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//ResourceType/x"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//ResourceType/y"/>
+    </genClasses>
+    <genClasses ecoreClass="FunctionBlock.ecore#//ResourceTypeNameType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//ResourceTypeNameType/name"/>
+    </genClasses>
+    <genClasses ecoreClass="FunctionBlock.ecore#//ResourceTypeType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//ResourceTypeType/identification"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//ResourceTypeType/versionInfo"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//ResourceTypeType/compilerInfo"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//ResourceTypeType/fBTypeName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//ResourceTypeType/varDeclaration"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//ResourceTypeType/fBNetwork"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//ResourceTypeType/comment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//ResourceTypeType/name"/>
+    </genClasses>
+    <genClasses ecoreClass="FunctionBlock.ecore#//RungType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//RungType/comment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//RungType/expression"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//RungType/output"/>
+    </genClasses>
+    <genClasses ecoreClass="FunctionBlock.ecore#//SegmentType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//SegmentType/parameter"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//SegmentType/comment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//SegmentType/dx1"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//SegmentType/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//SegmentType/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//SegmentType/x"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//SegmentType/y"/>
+    </genClasses>
+    <genClasses ecoreClass="FunctionBlock.ecore#//ServiceSequenceType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//ServiceSequenceType/serviceTransaction"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//ServiceSequenceType/comment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//ServiceSequenceType/name"/>
+    </genClasses>
+    <genClasses ecoreClass="FunctionBlock.ecore#//ServiceTransactionType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//ServiceTransactionType/mixed"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference FunctionBlock.ecore#//ServiceTransactionType/inputPrimitive"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference FunctionBlock.ecore#//ServiceTransactionType/outputPrimitive"/>
+    </genClasses>
+    <genClasses ecoreClass="FunctionBlock.ecore#//ServiceType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//ServiceType/serviceSequence"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//ServiceType/comment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//ServiceType/leftInterface"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//ServiceType/rightInterface"/>
+    </genClasses>
+    <genClasses ecoreClass="FunctionBlock.ecore#//SocketsType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//SocketsType/adapterDeclaration"/>
+    </genClasses>
+    <genClasses ecoreClass="FunctionBlock.ecore#//STType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//STType/text"/>
+    </genClasses>
+    <genClasses ecoreClass="FunctionBlock.ecore#//SubAppEventInputsType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//SubAppEventInputsType/subAppEvent"/>
+    </genClasses>
+    <genClasses ecoreClass="FunctionBlock.ecore#//SubAppEventOutputsType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//SubAppEventOutputsType/subAppEvent"/>
+    </genClasses>
+    <genClasses ecoreClass="FunctionBlock.ecore#//SubAppEventType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//SubAppEventType/comment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//SubAppEventType/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//SubAppEventType/type"/>
+    </genClasses>
+    <genClasses ecoreClass="FunctionBlock.ecore#//SubAppInterfaceListType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//SubAppInterfaceListType/subAppEventInputs"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//SubAppInterfaceListType/subAppEventOutputs"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//SubAppInterfaceListType/inputVars"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//SubAppInterfaceListType/outputVars"/>
+    </genClasses>
+    <genClasses ecoreClass="FunctionBlock.ecore#//SubAppNetworkType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//SubAppNetworkType/subApp"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//SubAppNetworkType/fB"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//SubAppNetworkType/eventConnections"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//SubAppNetworkType/dataConnections"/>
+    </genClasses>
+    <genClasses ecoreClass="FunctionBlock.ecore#//SubAppType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//SubAppType/comment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//SubAppType/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//SubAppType/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//SubAppType/x"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//SubAppType/y"/>
+    </genClasses>
+    <genClasses ecoreClass="FunctionBlock.ecore#//SubAppTypeType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//SubAppTypeType/identification"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//SubAppTypeType/versionInfo"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//SubAppTypeType/compilerInfo"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//SubAppTypeType/subAppInterfaceList"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//SubAppTypeType/subAppNetwork"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//SubAppTypeType/comment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//SubAppTypeType/name"/>
+    </genClasses>
+    <genClasses ecoreClass="FunctionBlock.ecore#//SystemType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//SystemType/identification"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//SystemType/versionInfo"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//SystemType/application"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//SystemType/device"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//SystemType/mapping"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//SystemType/segment"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionBlock.ecore#//SystemType/link"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//SystemType/comment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//SystemType/name"/>
+    </genClasses>
+    <genClasses ecoreClass="FunctionBlock.ecore#//VarDeclarationType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//VarDeclarationType/arraySize"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//VarDeclarationType/comment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//VarDeclarationType/initialValue"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//VarDeclarationType/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//VarDeclarationType/type"/>
+    </genClasses>
+    <genClasses ecoreClass="FunctionBlock.ecore#//VersionInfoType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//VersionInfoType/author"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//VersionInfoType/date"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//VersionInfoType/organization"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//VersionInfoType/remarks"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//VersionInfoType/version"/>
+    </genClasses>
+    <genClasses ecoreClass="FunctionBlock.ecore#//WithType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionBlock.ecore#//WithType/var"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
