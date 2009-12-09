@@ -80,8 +80,8 @@ public class AddToTypeHandler extends AbstractHandler implements IHandler {
     
     private static final String VAL_INPUT_EVENT = "InputEvent";
     private static final String VAL_OUTPUT_EVENT = "OutputEvent";
-    private static final String VAL_INPUT_VAR_DECL = "InputVarDecl";
-    private static final String VAL_OUTPUT_VAR_DECL = "OutputVarDecl";
+    private static final String VAL_INPUT_VAR_DECL = "InputVarDeclaration";
+    private static final String VAL_OUTPUT_VAR_DECL = "OutputVarDeclaration";
     private static final String VAL_ECC = "ECC";
     private static final String VAL_HCECC = "HCECC";
     private static final String VAL_ALGORITHM = "Algorithm";
