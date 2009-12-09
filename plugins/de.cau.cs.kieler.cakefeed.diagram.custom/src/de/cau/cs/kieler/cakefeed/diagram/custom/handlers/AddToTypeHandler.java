@@ -21,6 +21,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
@@ -28,6 +29,7 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.IHandler;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPartViewer;
 import org.eclipse.gef.Request;
@@ -64,6 +66,8 @@ import system.SystemFactory;
 
 import bfbtype.diagram.providers.BfbtypeElementTypes;
 
+import org.eclipse.emf.common.util.EList;
+
 /**
  * Handler that adds an element to a specific element.
  * 
@@ -84,8 +88,8 @@ public class AddToTypeHandler extends AbstractHandler implements IHandler {
     private static final String VAL_ECTRANSITION = "ECTransition";
     private static final String VAL_ECSTATE = "ECState";
     private static final String VAL_ECACTION = "ECAction";
-    private static final String VAL_HCECC_PAR_RELATION = "HCECCParRelation";
-    private static final String VAL_HCECC_REF_RELATION = "HCECCRefRelation";
+    private static final String VAL_HCECC_PAR_RELATION = "HCECCParallelRelation";
+    private static final String VAL_HCECC_REF_RELATION = "HCECCRefinementRelation";
     private static final String VAL_FBD = "FBD";
     private static final String VAL_ST = "ST";
     private static final String VAL_LD = "LD";
@@ -447,7 +451,7 @@ public class AddToTypeHandler extends AbstractHandler implements IHandler {
         if (selection != null && type != null) {
 		
         	// get class hierarchy, depending on TYPE_PARAM
-        	List<List<Class<?>>> hierarchy = hierarchyMapping.get(TYPE_PARAM);
+        	List<List<Class<?>>> hierarchy = hierarchyMapping.get(type);
         	
         	// search selection for an object which is 
         	// an instance of a class in the hierarchy
@@ -456,7 +460,7 @@ public class AddToTypeHandler extends AbstractHandler implements IHandler {
         		// if one has been found and has no parent in the selection
         		// then create a new object in it
 				if (objectMatchesClassInHierarchy(object, hierarchy ) && objectHasNoParentInSelection(object, selection)) {
-					insertNewElementInContainer(TYPE_PARAM, object);
+					insertNewElementInContainer(type, object);
 				}
 			}
         	
@@ -483,18 +487,32 @@ public class AddToTypeHandler extends AbstractHandler implements IHandler {
 		
 		if (object instanceof GraphicalEditPart) {
 			GraphicalEditPart editPart = (GraphicalEditPart) object;
-			if (hasFeatureOfType(editPart, paramMapping.get(typeParam))) {
-				createElement(typeMapping.get(typeParam), editPart);
+			if (hasFeatureOfType(editPart, /*paramMapping.get(*/typeParam/*)*/)) {
+				if (getCompartmentOf(editPart) != null) {
+					createElement(typeMapping.get(typeParam), getCompartmentOf(editPart));
+				}
 			}
-			else {
-				insertNewElementInContainer(typeParam, editPart.getParent());
+			else { // hier alle children durchsuchen! Abbruchbedingung? waere oberstes if
+				for (Object child : editPart.getChildren()) {
+					insertNewElementInContainer(typeParam, child);
+				}
+				
 			}
 		}
 	}
 
-	private boolean hasFeatureOfType(GraphicalEditPart editPart, Class<?> class1) {
-		Field[] fields = editPart.getModel().getClass().getFields();
-		Method[] methods = editPart.getModel().getClass().getMethods();
+	private GraphicalEditPart getCompartmentOf(GraphicalEditPart editPart) {
+		for (Object child : editPart.getChildren()) {
+			if (child instanceof ShapeCompartmentEditPart){
+				return (ShapeCompartmentEditPart) child;
+			}
+		}
+		return null;
+	}
+
+	private boolean hasFeatureOfType(GraphicalEditPart editPart, String typeParam) {
+		/*Field[] fields = ((View)(editPart.getModel())).getElement().getClass().getFields();
+		Method[] methods = ((View)(editPart.getModel())).getElement().getClass().getMethods();
 		
 		for (Field field : fields) {
 			if (field.getType().equals(class1)) {
@@ -503,7 +521,16 @@ public class AddToTypeHandler extends AbstractHandler implements IHandler {
 		}
 		
 		for (Method method : methods) {
-			if (method.getReturnType().equals(class1)) {
+			if ((method.getReturnType().equals(class1)) 
+					|| (method.getReturnType().equals(EList.class)
+							&& method.getReturnType().)) {
+				return true;
+			}
+		}*/
+		EObject element = ((View)editPart.getModel()).getElement();
+		EList<EReference> references = element.eClass().getEReferences();
+		for (EReference eReference : references) {
+			if (eReference.getEType().getName().equals(typeParam)) {
 				return true;
 			}
 		}
