@@ -2681,13 +2681,40 @@ public interface CakefeedPackage extends EPackage {
 	int CFB_TYPE__PLUGS = FB_TYPE__PLUGS;
 
 	/**
-	 * The feature id for the '<em><b>FB Network</b></em>' containment reference.
+	 * The feature id for the '<em><b>FB</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CFB_TYPE__FB_NETWORK = FB_TYPE_FEATURE_COUNT + 0;
+	int CFB_TYPE__FB = FB_TYPE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Event Connections</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CFB_TYPE__EVENT_CONNECTIONS = FB_TYPE_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Data Connections</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CFB_TYPE__DATA_CONNECTIONS = FB_TYPE_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Adapter Connections</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CFB_TYPE__ADAPTER_CONNECTIONS = FB_TYPE_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Service</b></em>' containment reference.
@@ -2696,7 +2723,7 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CFB_TYPE__SERVICE = FB_TYPE_FEATURE_COUNT + 1;
+	int CFB_TYPE__SERVICE = FB_TYPE_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>CFB Type</em>' class.
@@ -2705,7 +2732,7 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CFB_TYPE_FEATURE_COUNT = FB_TYPE_FEATURE_COUNT + 2;
+	int CFB_TYPE_FEATURE_COUNT = FB_TYPE_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link de.cau.cs.kieler.cakefeed.impl.DeviceTypeImpl <em>Device Type</em>}' class.
@@ -4975,15 +5002,48 @@ public interface CakefeedPackage extends EPackage {
 	EClass getCFBType();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link de.cau.cs.kieler.cakefeed.CFBType#getFBNetwork <em>FB Network</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.cau.cs.kieler.cakefeed.CFBType#getFB <em>FB</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>FB Network</em>'.
-	 * @see de.cau.cs.kieler.cakefeed.CFBType#getFBNetwork()
+	 * @return the meta object for the containment reference list '<em>FB</em>'.
+	 * @see de.cau.cs.kieler.cakefeed.CFBType#getFB()
 	 * @see #getCFBType()
 	 * @generated
 	 */
-	EReference getCFBType_FBNetwork();
+	EReference getCFBType_FB();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link de.cau.cs.kieler.cakefeed.CFBType#getEventConnections <em>Event Connections</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Event Connections</em>'.
+	 * @see de.cau.cs.kieler.cakefeed.CFBType#getEventConnections()
+	 * @see #getCFBType()
+	 * @generated
+	 */
+	EReference getCFBType_EventConnections();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link de.cau.cs.kieler.cakefeed.CFBType#getDataConnections <em>Data Connections</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Data Connections</em>'.
+	 * @see de.cau.cs.kieler.cakefeed.CFBType#getDataConnections()
+	 * @see #getCFBType()
+	 * @generated
+	 */
+	EReference getCFBType_DataConnections();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link de.cau.cs.kieler.cakefeed.CFBType#getAdapterConnections <em>Adapter Connections</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Adapter Connections</em>'.
+	 * @see de.cau.cs.kieler.cakefeed.CFBType#getAdapterConnections()
+	 * @see #getCFBType()
+	 * @generated
+	 */
+	EReference getCFBType_AdapterConnections();
 
 	/**
 	 * Returns the meta object for the containment reference '{@link de.cau.cs.kieler.cakefeed.CFBType#getService <em>Service</em>}'.
@@ -6870,12 +6930,36 @@ public interface CakefeedPackage extends EPackage {
 		EClass CFB_TYPE = eINSTANCE.getCFBType();
 
 		/**
-		 * The meta object literal for the '<em><b>FB Network</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>FB</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CFB_TYPE__FB_NETWORK = eINSTANCE.getCFBType_FBNetwork();
+		EReference CFB_TYPE__FB = eINSTANCE.getCFBType_FB();
+
+		/**
+		 * The meta object literal for the '<em><b>Event Connections</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CFB_TYPE__EVENT_CONNECTIONS = eINSTANCE.getCFBType_EventConnections();
+
+		/**
+		 * The meta object literal for the '<em><b>Data Connections</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CFB_TYPE__DATA_CONNECTIONS = eINSTANCE.getCFBType_DataConnections();
+
+		/**
+		 * The meta object literal for the '<em><b>Adapter Connections</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CFB_TYPE__ADAPTER_CONNECTIONS = eINSTANCE.getCFBType_AdapterConnections();
 
 		/**
 		 * The meta object literal for the '<em><b>Service</b></em>' containment reference feature.

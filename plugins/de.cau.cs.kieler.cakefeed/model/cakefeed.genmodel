@@ -269,7 +269,10 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cakefeed.ecore#//Rung/Output"/>
     </genClasses>
     <genClasses ecoreClass="cakefeed.ecore#//CFBType">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//CFBType/FBNetwork"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//CFBType/FB"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//CFBType/EventConnections"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//CFBType/DataConnections"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//CFBType/AdapterConnections"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//CFBType/Service"/>
     </genClasses>
     <genClasses ecoreClass="cakefeed.ecore#//DeviceType">

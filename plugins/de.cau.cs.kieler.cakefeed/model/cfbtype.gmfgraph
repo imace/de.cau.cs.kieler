@@ -54,12 +54,6 @@
           name="Rectangle"/>
     </descriptors>
     <descriptors
-        name="FBNetworkFigureDescriptor">
-      <actualFigure
-          xsi:type="gmfgraph:Rectangle"
-          name="Rectangle"/>
-    </descriptors>
-    <descriptors
         name="EventConnectionFigureDescriptor">
       <actualFigure
           xsi:type="gmfgraph:PolylineConnection"
@@ -90,9 +84,6 @@
   <nodes
       name="FBNode"
       figure="FBFigureDescriptor"/>
-  <nodes
-      name="FBNetworkNode"
-      figure="FBNetworkFigureDescriptor"/>
   <connections
       name="EventConnectionConnection"
       figure="EventConnectionFigureDescriptor"/>
@@ -109,6 +100,6 @@
       name="CFBTypeCompartment"
       figure="CFBTypeFigureDescriptor"/>
   <compartments
-      name="FBNetworkCompartment"
-      figure="FBNetworkFigureDescriptor"/>
+      name="FBCompartment"
+      figure="FBFigureDescriptor"/>
 </gmfgraph:Canvas>

@@ -339,8 +339,14 @@
         eType="#//OutputEvent"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CFBType" eSuperTypes="#//FBType">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="FBNetwork" lowerBound="1"
-        eType="#//FBNetwork" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="FB" upperBound="-1" eType="#//FB"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="EventConnections" upperBound="-1"
+        eType="#//EventConnection" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="DataConnections" upperBound="-1"
+        eType="#//DataConnection" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="AdapterConnections" upperBound="-1"
+        eType="#//AdapterConnection" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="Service" eType="#//Service"
         containment="true"/>
   </eClassifiers>

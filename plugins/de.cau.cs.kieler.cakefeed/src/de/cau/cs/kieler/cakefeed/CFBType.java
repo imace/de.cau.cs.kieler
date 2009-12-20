@@ -6,6 +6,7 @@
  */
 package de.cau.cs.kieler.cakefeed;
 
+import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -15,7 +16,10 @@ package de.cau.cs.kieler.cakefeed;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link de.cau.cs.kieler.cakefeed.CFBType#getFBNetwork <em>FB Network</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.cakefeed.CFBType#getFB <em>FB</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.cakefeed.CFBType#getEventConnections <em>Event Connections</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.cakefeed.CFBType#getDataConnections <em>Data Connections</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.cakefeed.CFBType#getAdapterConnections <em>Adapter Connections</em>}</li>
  *   <li>{@link de.cau.cs.kieler.cakefeed.CFBType#getService <em>Service</em>}</li>
  * </ul>
  * </p>
@@ -26,30 +30,68 @@ package de.cau.cs.kieler.cakefeed;
  */
 public interface CFBType extends FBType {
 	/**
-	 * Returns the value of the '<em><b>FB Network</b></em>' containment reference.
+	 * Returns the value of the '<em><b>FB</b></em>' containment reference list.
+	 * The list contents are of type {@link de.cau.cs.kieler.cakefeed.FB}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>FB Network</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>FB</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>FB Network</em>' containment reference.
-	 * @see #setFBNetwork(FBNetwork)
-	 * @see de.cau.cs.kieler.cakefeed.CakefeedPackage#getCFBType_FBNetwork()
-	 * @model containment="true" required="true"
+	 * @return the value of the '<em>FB</em>' containment reference list.
+	 * @see de.cau.cs.kieler.cakefeed.CakefeedPackage#getCFBType_FB()
+	 * @model containment="true"
 	 * @generated
 	 */
-	FBNetwork getFBNetwork();
+	EList<FB> getFB();
 
 	/**
-	 * Sets the value of the '{@link de.cau.cs.kieler.cakefeed.CFBType#getFBNetwork <em>FB Network</em>}' containment reference.
+	 * Returns the value of the '<em><b>Event Connections</b></em>' containment reference list.
+	 * The list contents are of type {@link de.cau.cs.kieler.cakefeed.EventConnection}.
 	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Event Connections</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>FB Network</em>' containment reference.
-	 * @see #getFBNetwork()
+	 * @return the value of the '<em>Event Connections</em>' containment reference list.
+	 * @see de.cau.cs.kieler.cakefeed.CakefeedPackage#getCFBType_EventConnections()
+	 * @model containment="true"
 	 * @generated
 	 */
-	void setFBNetwork(FBNetwork value);
+	EList<EventConnection> getEventConnections();
+
+	/**
+	 * Returns the value of the '<em><b>Data Connections</b></em>' containment reference list.
+	 * The list contents are of type {@link de.cau.cs.kieler.cakefeed.DataConnection}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Data Connections</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Data Connections</em>' containment reference list.
+	 * @see de.cau.cs.kieler.cakefeed.CakefeedPackage#getCFBType_DataConnections()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<DataConnection> getDataConnections();
+
+	/**
+	 * Returns the value of the '<em><b>Adapter Connections</b></em>' containment reference list.
+	 * The list contents are of type {@link de.cau.cs.kieler.cakefeed.AdapterConnection}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Adapter Connections</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Adapter Connections</em>' containment reference list.
+	 * @see de.cau.cs.kieler.cakefeed.CakefeedPackage#getCFBType_AdapterConnections()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<AdapterConnection> getAdapterConnections();
 
 	/**
 	 * Returns the value of the '<em><b>Service</b></em>' containment reference.

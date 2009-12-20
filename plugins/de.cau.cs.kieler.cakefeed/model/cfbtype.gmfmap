@@ -90,38 +90,20 @@
           compartment="//@nodes.0/@ownedChild/@compartments.0"
           referencedChild="//@nodes.0/@ownedChild/@children.4/@ownedChild">
         <containmentFeature
-            href="cakefeed.ecore#//CFBType/FBNetwork"/>
+            href="cakefeed.ecore#//CFBType/FB"/>
         <childrenFeature
-            href="cakefeed.ecore#//CFBType/FBNetwork"/>
+            href="cakefeed.ecore#//CFBType/FB"/>
         <ownedChild>
           <domainMetaElement
-              href="cakefeed.ecore#//FBNetwork"/>
+              href="cakefeed.ecore#//FB"/>
           <tool
               xsi:type="gmftool:CreationTool"
               href="cfbtype.gmftool#//@palette/@tools.0/@tools.2/@tools.0"/>
           <diagramNode
-              href="cfbtype.gmfgraph#FBNetworkNode"/>
-          <children
-              compartment="//@nodes.0/@ownedChild/@children.4/@ownedChild/@compartments.0"
-              referencedChild="//@nodes.0/@ownedChild/@children.4/@ownedChild/@children.0/@ownedChild">
-            <containmentFeature
-                href="cakefeed.ecore#//FBNetwork/FB"/>
-            <childrenFeature
-                href="cakefeed.ecore#//FBNetwork/FB"/>
-            <ownedChild>
-              <domainMetaElement
-                  href="cakefeed.ecore#//FB"/>
-              <tool
-                  xsi:type="gmftool:CreationTool"
-                  href="cfbtype.gmftool#//@palette/@tools.0/@tools.2/@tools.1"/>
-              <diagramNode
-                  href="cfbtype.gmfgraph#FBNode"/>
-            </ownedChild>
-          </children>
-          <compartments
-              children="//@nodes.0/@ownedChild/@children.4/@ownedChild/@children.0">
+              href="cfbtype.gmfgraph#FBNode"/>
+          <compartments>
             <compartment
-                href="cfbtype.gmfgraph#FBNetworkCompartment"/>
+                href="cfbtype.gmfgraph#FBCompartment"/>
           </compartments>
         </ownedChild>
       </children>
@@ -173,7 +155,7 @@
         href="cakefeed.ecore#//FBNetwork/EventConnections"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="cfbtype.gmftool#//@palette/@tools.0/@tools.2/@tools.2"/>
+        href="cfbtype.gmftool#//@palette/@tools.0/@tools.2/@tools.1"/>
     <diagramLink
         href="cfbtype.gmfgraph#EventConnectionConnection"/>
     <sourceMetaFeature
@@ -190,7 +172,7 @@
         href="cakefeed.ecore#//FBNetwork/DataConnections"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="cfbtype.gmftool#//@palette/@tools.0/@tools.2/@tools.2"/>
+        href="cfbtype.gmftool#//@palette/@tools.0/@tools.2/@tools.1"/>
     <diagramLink
         href="cfbtype.gmfgraph#DataConnectionConnection"/>
     <sourceMetaFeature

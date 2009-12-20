@@ -123,39 +123,14 @@
       </modelFacet>
     </childNodes>
     <childNodes
-        visualID="3005"
-        editPartClassName="FBNetworkEditPart"
-        itemSemanticEditPolicyClassName="FBNetworkItemSemanticEditPolicy"
-        canonicalEditPolicyClassName="FBNetworkCanonicalEditPolicy"
-        compartments="//@diagram/@compartments.1"
-        graphicalNodeEditPolicyClassName="FBNetworkGraphicalNodeEditPolicy"
-        createCommandClassName="FBNetworkCreateCommand"
-        containers="//@diagram/@compartments.0">
-      <diagramRunTimeClass
-          href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
-      <elementType
-          xsi:type="gmfgen:MetamodelType"
-          editHelperClassName="FBNetworkEditHelper"/>
-      <viewmap
-          xsi:type="gmfgen:FigureViewmap"
-          figureQualifiedClassName="org.eclipse.draw2d.RectangleFigure"/>
-      <modelFacet>
-        <metaClass
-            href="cakefeed.genmodel#//cakefeed/FBNetwork"/>
-        <containmentMetaFeature
-            href="cakefeed.genmodel#//cakefeed/CFBType/FBNetwork"/>
-        <childMetaFeature
-            href="cakefeed.genmodel#//cakefeed/CFBType/FBNetwork"/>
-      </modelFacet>
-    </childNodes>
-    <childNodes
-        visualID="3006"
+        visualID="3007"
         editPartClassName="FBEditPart"
         itemSemanticEditPolicyClassName="FBItemSemanticEditPolicy"
         canonicalEditPolicyClassName="FBCanonicalEditPolicy"
+        compartments="//@diagram/@compartments.1"
         graphicalNodeEditPolicyClassName="FBGraphicalNodeEditPolicy"
         createCommandClassName="FBCreateCommand"
-        containers="//@diagram/@compartments.1">
+        containers="//@diagram/@compartments.0">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <elementType
@@ -168,9 +143,9 @@
         <metaClass
             href="cakefeed.genmodel#//cakefeed/FB"/>
         <containmentMetaFeature
-            href="cakefeed.genmodel#//cakefeed/FBNetwork/FB"/>
+            href="cakefeed.genmodel#//cakefeed/CFBType/FB"/>
         <childMetaFeature
-            href="cakefeed.genmodel#//cakefeed/FBNetwork/FB"/>
+            href="cakefeed.genmodel#//cakefeed/CFBType/FB"/>
       </modelFacet>
     </childNodes>
     <topLevelNodes
@@ -328,12 +303,11 @@
           figureQualifiedClassName="org.eclipse.draw2d.RectangleFigure"/>
     </compartments>
     <compartments
-        visualID="7002"
-        editPartClassName="FBNetworkFBNetworkCompartmentEditPart"
-        itemSemanticEditPolicyClassName="FBNetworkFBNetworkCompartmentItemSemanticEditPolicy"
-        canonicalEditPolicyClassName="FBNetworkFBNetworkCompartmentCanonicalEditPolicy"
-        childNodes="//@diagram/@childNodes.5"
-        title="FBNetworkCompartment"
+        visualID="7003"
+        editPartClassName="FBFBCompartmentEditPart"
+        itemSemanticEditPolicyClassName="FBFBCompartmentItemSemanticEditPolicy"
+        canonicalEditPolicyClassName="FBFBCompartmentCanonicalEditPolicy"
+        title="FBCompartment"
         canCollapse="false"
         needsTitle="false"
         node="//@diagram/@childNodes.4"
@@ -372,12 +346,8 @@
             title="Composite Network">
           <entries
               xsi:type="gmfgen:ToolEntry"
-              title="FBNetwork"
-              genNodes="//@diagram/@childNodes.4"/>
-          <entries
-              xsi:type="gmfgen:ToolEntry"
               title="FB"
-              genNodes="//@diagram/@childNodes.5"/>
+              genNodes="//@diagram/@childNodes.4"/>
           <entries
               xsi:type="gmfgen:ToolEntry"
               title="Connection"
@@ -432,9 +402,6 @@
     <childReferences
         parent="//@diagram/@topLevelNodes.0"
         child="//@diagram/@childNodes.3"/>
-    <childReferences
-        parent="//@diagram/@childNodes.4"
-        child="//@diagram/@childNodes.5"/>
     <childReferences
         parent="//@diagram/@topLevelNodes.0"
         child="//@diagram/@childNodes.4"/>
