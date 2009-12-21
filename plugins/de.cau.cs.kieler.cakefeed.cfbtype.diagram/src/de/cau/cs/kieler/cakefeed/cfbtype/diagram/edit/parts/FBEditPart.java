@@ -217,6 +217,7 @@ public class FBEditPart extends ShapeNodeEditPart {
 	 */
 	// This method is called when properties of the FB have been changed
 	protected void handleNotificationEvent(Notification notification) {
+		super.handleNotificationEvent(notification);
 		if (notification != null) {
 			Object feat = notification.getFeature();
 			if ((feat != null) && (feat instanceof EReferenceImpl)) {
