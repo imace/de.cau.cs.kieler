@@ -49,10 +49,10 @@
 				blackRect.setBackgroundColor(org.eclipse.draw2d.ColorConstants.black);
 				result.getContentPane().add(blackRect);
 			}
-			«REM» Add a type name label if is an FBCompartment «ENDREM»
+			«REM» Add a type name label if it is an FBCompartment «ENDREM»
 			org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel typeName = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();
 			typeName.setForegroundColor(org.eclipse.draw2d.ColorConstants.black);
-			result.getContentPane().add(typeName, 0);
+			result.getContentPane().add(typeName);
 			«REM» Give BFBType, CFBType, and FB compartments a custom layout «ENDREM» 
 			«IF self.editPartClassName = "BFBTypeBFBTypeCompartmentEditPart"-»
 				result.getContentPane().setLayoutManager(new FBCompartmentLayout());

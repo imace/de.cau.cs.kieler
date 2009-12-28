@@ -133,7 +133,7 @@
 		        	newBounds.y = ctrlRect.getBounds().height;
 		        	newBounds.width = fBWidth - 40;
 		        	newBounds.height = calculateTypeRectHeight();
-		        	ctrlRect.setBounds(newBounds);
+		        	typeRect.setBounds(newBounds);
 		        }
 		        if (dataRect != null) {
 		        	newBounds.x = 0;
