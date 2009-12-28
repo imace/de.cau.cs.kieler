@@ -1,0 +1,70 @@
+﻿/*
+ * Copyright (c) 2006, 2009 Borland Software Corporation
+ * 
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Dmitry Stadnik (Borland) - initial API and implementation
+ *    Alexander Shatalin (Borland) - initial API and implementation
+ */
+
+«IMPORT 'http://www.eclipse.org/gmf/2009/GenModel'»
+«EXTENSION xpt::diagram::editparts::Utils»
+
+«DEFINE createFigure FOR gmfgen::GenCompartment-»
+	«IF not needsTitle-»
+		«REM»By default titles are shown even if there are no TitleStyle, we need to switch it off«ENDREM»«-»
+		«EXPAND xpt::Common::generatedMemberComment»
+		public org.eclipse.draw2d.IFigure createFigure() {
+			org.eclipse.gmf.runtime.diagram.ui.figures.ResizableCompartmentFigure result = (org.eclipse.gmf.runtime.diagram.ui.figures.ResizableCompartmentFigure) super.createFigure();
+			result.setTitleVisibility(false);
+		«REM» Make compartment borders invisible «ENDREM»
+			«REM» Object border = result.getBorder();
+			if (border instanceof org.eclipse.draw2d.LineBorder) {
+				org.eclipse.draw2d.LineBorder lineBorder = ((org.eclipse.draw2d.LineBorder) border);
+				lineBorder.setWidth(2);
+				lineBorder.setColor(org.eclipse.draw2d.ColorConstants.black); 
+			} «ENDREM»
+			result.setBorder(null);
+		«REM» Add five decoration rectangles to BFBType, CFBType, and FB compartments «ENDREM»
+		«IF self.editPartClassName != "FBDFBDCompartmentEditPart"-»
+			org.eclipse.draw2d.RoundedRectangle ctrlRect = new org.eclipse.draw2d.RoundedRectangle();
+			ctrlRect.setForegroundColor(org.eclipse.draw2d.ColorConstants.black);
+			ctrlRect.setBackgroundColor(org.eclipse.draw2d.ColorConstants.lightGray);
+			result.getContentPane().add(ctrlRect);
+			org.eclipse.draw2d.RoundedRectangle dataRect = new org.eclipse.draw2d.RoundedRectangle();
+			dataRect.setForegroundColor(org.eclipse.draw2d.ColorConstants.black);
+			dataRect.setBackgroundColor(org.eclipse.draw2d.ColorConstants.lightGray);
+			result.getContentPane().add(dataRect);
+			org.eclipse.draw2d.RectangleFigure typeRect = new org.eclipse.draw2d.RectangleFigure();
+			typeRect.setForegroundColor(org.eclipse.draw2d.ColorConstants.lightGray);
+			typeRect.setBackgroundColor(org.eclipse.draw2d.ColorConstants.lightGray);
+			result.getContentPane().add(typeRect);
+			for (int i = 0; i < 2; i++) {
+				org.eclipse.draw2d.RectangleFigure blackRect = new org.eclipse.draw2d.RectangleFigure();
+				blackRect.setForegroundColor(org.eclipse.draw2d.ColorConstants.black);
+				blackRect.setBackgroundColor(org.eclipse.draw2d.ColorConstants.black);
+				result.getContentPane().add(blackRect);
+			}
+			«REM» Add a type name label if is an FBCompartment «ENDREM»
+			org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel typeName = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();
+			typeName.setForegroundColor(org.eclipse.draw2d.ColorConstants.black);
+			result.getContentPane().add(typeName, 0);
+			«REM» Give BFBType, CFBType, and FB compartments a custom layout «ENDREM» 
+			«IF self.editPartClassName = "BFBTypeBFBTypeCompartmentEditPart"-»
+				result.getContentPane().setLayoutManager(new FBCompartmentLayout());
+			«ENDIF-»
+			«IF self.editPartClassName = "CFBTypeCFBTypeCompartmentEditPart"-»
+				result.getContentPane().setLayoutManager(new FBCompartmentLayout());
+			«ENDIF-»
+			«IF self.editPartClassName = "FBFBCompartmentEditPart"-»
+				result.getContentPane().setLayoutManager(new FBCompartmentLayout());
+			«ENDIF-»
+		«ENDIF-»
+			return result;
+		}
+	«ENDIF-»
+«ENDDEFINE»

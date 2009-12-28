@@ -1,0 +1,474 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="cakefeed"
+    nsURI="http://kieler.cs.cau.de/cakefeed/" nsPrefix="cakefeed">
+  <eClassifiers xsi:type="ecore:EClass" name="System">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Identification" eType="#//Identification"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="VersionInfo" lowerBound="1"
+        upperBound="-1" eType="#//VersionInfo" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Application" upperBound="-1"
+        eType="#//Application" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Device" lowerBound="1"
+        upperBound="-1" eType="#//Device" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Mapping" upperBound="-1"
+        eType="#//Mapping"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Segment" upperBound="-1"
+        eType="#//Segment"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Link" upperBound="-1" eType="#//Link"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Comment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Identification">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ApplicationDomain" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Classification" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Function" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Standard" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VersionInfo">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Author" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Date" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Organisation" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Remarks" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Version" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Application">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="FBNetwork" lowerBound="1"
+        eType="#//FBNetwork"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Comment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FBNetwork">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="FBs" upperBound="-1" eType="#//FB"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="EventConnections" upperBound="-1"
+        eType="#//EventConnection" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="DataConnections" upperBound="-1"
+        eType="#//DataConnection" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="AdapterConnections" upperBound="-1"
+        eType="#//AdapterConnection" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Device">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Parameter" upperBound="-1"
+        eType="#//Parameter" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Resource" upperBound="-1"
+        eType="#//Resource" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="FBNetwork" eType="#//FBNetwork"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Type" lowerBound="1" eType="#//DeviceType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Comment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Mapping">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="From" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="To" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Segment">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Parameter" upperBound="-1"
+        eType="#//Parameter" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Type" lowerBound="1" eType="#//SegmentType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Comment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Link"/>
+  <eClassifiers xsi:type="ecore:EClass" name="FB">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Parameter" upperBound="-1"
+        eType="#//Parameter" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Type" lowerBound="1" eType="#//FBType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Comment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="InputEvents" upperBound="-1"
+        eType="#//FBInputEvent" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="OutputEvents" upperBound="-1"
+        eType="#//FBOutputEvent" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="InputVars" upperBound="-1"
+        eType="#//FBInputVar" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="OutputVars" upperBound="-1"
+        eType="#//FBOutputVar" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Parameter">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Value" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Comment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Resource">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Parameter" upperBound="-1"
+        eType="#//Parameter" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="FBNetwork" eType="#//FBNetwork"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Type" lowerBound="1" eType="#//ResourceType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Comment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="SegmentType">
+    <eLiterals name="LocalHost"/>
+    <eLiterals name="LocalBus" value="1"/>
+    <eLiterals name="Ethernet" value="2"/>
+    <eLiterals name="DeviceNet" value="3"/>
+    <eLiterals name="ControlNet" value="4"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FBType" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Identification" eType="#//Identification"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="VersionInfo" lowerBound="1"
+        upperBound="-1" eType="#//VersionInfo" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="CompilerInfo" eType="#//CompilerInfo"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Comment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="InputEvents" upperBound="-1"
+        eType="#//IFInputEvent" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="OutputEvents" upperBound="-1"
+        eType="#//IFOutputEvent" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="InputVars" upperBound="-1"
+        eType="#//IFInputVar" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="OutputVars" upperBound="-1"
+        eType="#//IFOutputVar" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Sockets" upperBound="-1"
+        eType="#//Socket" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Plugs" upperBound="-1"
+        eType="#//Plug" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Connection" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Comment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EventConnection" abstract="true" eSuperTypes="#//Connection"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DataConnection" abstract="true" eSuperTypes="#//Connection"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CompilerInfo">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Compiler" upperBound="-1"
+        eType="#//Compiler" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="classdef" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="header" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IFIFEventConnection" eSuperTypes="#//EventConnection">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Destination" lowerBound="1"
+        eType="#//IFOutputEvent"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Source" lowerBound="1"
+        eType="#//IFInputEvent"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IFIFDataConnection" eSuperTypes="#//DataConnection">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Destination" lowerBound="1"
+        eType="#//IFOutputVar"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Source" lowerBound="1"
+        eType="#//IFInputVar"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IFFBEventConnection" eSuperTypes="#//EventConnection">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Destination" lowerBound="1"
+        eType="#//FBInputEvent"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Source" lowerBound="1"
+        eType="#//IFInputEvent"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IFFBDataConnection" eSuperTypes="#//DataConnection">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Destination" lowerBound="1"
+        eType="#//FBInputVar"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Source" lowerBound="1"
+        eType="#//IFInputVar"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FBIFEventConnection" eSuperTypes="#//EventConnection">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Destination" lowerBound="1"
+        eType="#//IFOutputEvent"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Source" lowerBound="1"
+        eType="#//FBOutputEvent"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FBIFDataConnection" eSuperTypes="#//DataConnection">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Destination" lowerBound="1"
+        eType="#//IFOutputVar"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Source" lowerBound="1"
+        eType="#//FBOutputVar"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FBFBEventConnection" eSuperTypes="#//EventConnection">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Destination" lowerBound="1"
+        eType="#//FBInputEvent"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Source" lowerBound="1"
+        eType="#//FBOutputEvent"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FBFBDataConnection" eSuperTypes="#//DataConnection">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Destination" lowerBound="1"
+        eType="#//FBInputVar"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Source" lowerBound="1"
+        eType="#//FBOutputVar"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IFIVDataConnection" eSuperTypes="#//DataConnection">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Destination" lowerBound="1"
+        eType="#//InternalVar"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Source" lowerBound="1"
+        eType="#//IFInputVar"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IVIFDataConnection" eSuperTypes="#//DataConnection">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Destination" lowerBound="1"
+        eType="#//IFOutputVar"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Source" lowerBound="1"
+        eType="#//InternalVar"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FBIVDataConnection" eSuperTypes="#//DataConnection">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Destination" lowerBound="1"
+        eType="#//InternalVar"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Source" lowerBound="1"
+        eType="#//FBOutputVar"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IVFBDataConnection" eSuperTypes="#//DataConnection">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Destination" lowerBound="1"
+        eType="#//FBInputVar"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Source" lowerBound="1"
+        eType="#//InternalVar"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IVIVDataConnection" eSuperTypes="#//DataConnection">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Destination" lowerBound="1"
+        eType="#//InternalVar"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Source" lowerBound="1"
+        eType="#//InternalVar"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AdapterConnection" eSuperTypes="#//Connection"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Event" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Comment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IFInputEvent" eSuperTypes="#//Event">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="With" upperBound="-1" eType="#//InputWith"
+        containment="true" eOpposite="#//InputWith/parentInputEvent"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FBInputEvent" eSuperTypes="#//Event"/>
+  <eClassifiers xsi:type="ecore:EClass" name="IFOutputEvent" eSuperTypes="#//Event">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="With" upperBound="-1" eType="#//OutputWith"
+        containment="true" eOpposite="#//OutputWith/parentOutputEvent"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FBOutputEvent" eSuperTypes="#//Event"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Var" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ArraySize" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="InitialValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Type" lowerBound="1" eType="#//VarType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Comment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IFInputVar" eSuperTypes="#//Var"/>
+  <eClassifiers xsi:type="ecore:EClass" name="FBInputVar" eSuperTypes="#//Var"/>
+  <eClassifiers xsi:type="ecore:EClass" name="IFOutputVar" eSuperTypes="#//Var"/>
+  <eClassifiers xsi:type="ecore:EClass" name="FBOutputVar" eSuperTypes="#//Var"/>
+  <eClassifiers xsi:type="ecore:EClass" name="InternalVar" eSuperTypes="#//Var"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Compiler">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Language" lowerBound="1"
+        eType="#//Language"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Product" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Vendor" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Version" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Language">
+    <eLiterals name="Java"/>
+    <eLiterals name="Cpp" value="1"/>
+    <eLiterals name="C" value="2"/>
+    <eLiterals name="Other" value="3"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="With" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="InputWith" eSuperTypes="#//With">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentInputEvent" lowerBound="1"
+        eType="#//IFInputEvent" eOpposite="#//IFInputEvent/With"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="With" lowerBound="1" eType="#//IFInputVar"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OutputWith" eSuperTypes="#//With">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentOutputEvent" lowerBound="1"
+        eType="#//IFOutputEvent" eOpposite="#//IFOutputEvent/With"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="With" lowerBound="1" eType="#//IFOutputVar"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="VarType">
+    <eLiterals name="BYTE"/>
+    <eLiterals name="DT" value="1"/>
+    <eLiterals name="LREAL" value="2"/>
+    <eLiterals name="UINT" value="3"/>
+    <eLiterals name="LINT" value="4"/>
+    <eLiterals name="BOOL" value="5"/>
+    <eLiterals name="DATE_AND_TIME" value="6"/>
+    <eLiterals name="INT" value="7"/>
+    <eLiterals name="SINT" value="8"/>
+    <eLiterals name="LWORD" value="9"/>
+    <eLiterals name="COLOR" value="10"/>
+    <eLiterals name="WORD" value="11"/>
+    <eLiterals name="REAL" value="12"/>
+    <eLiterals name="TIME" value="13"/>
+    <eLiterals name="TOD" value="14"/>
+    <eLiterals name="ANY" value="15"/>
+    <eLiterals name="DWORD" value="16"/>
+    <eLiterals name="UDINT" value="17"/>
+    <eLiterals name="USINT" value="18"/>
+    <eLiterals name="TIME_OF_DAY" value="19"/>
+    <eLiterals name="WSTRING" value="20"/>
+    <eLiterals name="DINT" value="21"/>
+    <eLiterals name="DATE" value="22"/>
+    <eLiterals name="ULINT" value="23"/>
+    <eLiterals name="VSTYLE" value="24"/>
+    <eLiterals name="ARRAY" value="25"/>
+    <eLiterals name="STRING" value="26"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Adapter" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Parameter" upperBound="-1"
+        eType="#//Parameter" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Type" lowerBound="1" eType="#//AdapterType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Comment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Socket" eSuperTypes="#//Adapter"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Plug" eSuperTypes="#//Adapter"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AdapterType">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Identification" eType="#//Identification"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="VersionInfo" lowerBound="1"
+        upperBound="-1" eType="#//VersionInfo" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="CompilerInfo" eType="#//CompilerInfo"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Service" eType="#//Service"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Comment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="InputEvents" upperBound="-1"
+        eType="#//IFInputEvent" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="OutputEvents" upperBound="-1"
+        eType="#//IFOutputEvent" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="InputVars" upperBound="-1"
+        eType="#//IFInputVar" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="OutputVars" upperBound="-1"
+        eType="#//IFOutputVar" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Sockets" upperBound="-1"
+        eType="#//Adapter" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Plugs" upperBound="-1"
+        eType="#//Adapter" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Service">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ServiceSequence" lowerBound="1"
+        upperBound="-1" eType="#//ServiceSequence" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Comment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="RightInterface" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="LeftInterface" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ServiceSequence">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ServiceTransaction" upperBound="-1"
+        eType="#//ServiceTransaction" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Comment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ServiceTransaction">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="InputPrimitive" eType="#//InputPrimitive"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="OutputPrimitive" upperBound="-1"
+        eType="#//OutputPrimitive" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Primitive" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Event" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Interface" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Parameters" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InputPrimitive" eSuperTypes="#//Primitive"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OutputPrimitive" eSuperTypes="#//Primitive"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BFBType" eSuperTypes="#//FBType">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Service" eType="#//Service"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="SyncChart" eType="ecore:EClass ../../de.cau.cs.kieler.synccharts/model/synccharts.ecore#//State"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="InternalVars" upperBound="-1"
+        eType="#//InternalVar" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="FBDs" upperBound="-1" eType="#//FBD"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="STs" upperBound="-1" eType="#//ST"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="LDs" upperBound="-1" eType="#//LD"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="OtherAlgorithms" upperBound="-1"
+        eType="#//Other" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FBD">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="FBs" lowerBound="1" upperBound="-1"
+        eType="#//FB" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="DataConnections" upperBound="-1"
+        eType="#//FBFBDataConnection" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Comment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ST">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Text" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Comment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LD">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Rung" lowerBound="1" upperBound="-1"
+        eType="#//Rung" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Comment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Other">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Language" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Prototype" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Text" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Comment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Rung">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Comment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Expression" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Output" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CFBType" eSuperTypes="#//FBType">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="FBs" upperBound="-1" eType="#//FB"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="EventConnections" upperBound="-1"
+        eType="#//EventConnection" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="DataConnections" upperBound="-1"
+        eType="#//DataConnection" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="AdapterConnections" upperBound="-1"
+        eType="#//AdapterConnection" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Service" eType="#//Service"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DeviceType">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Identification" eType="#//Identification"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="VersionInfo" lowerBound="1"
+        upperBound="-1" eType="#//VersionInfo" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="CompilerInfo" eType="#//CompilerInfo"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="VarDeclarations" upperBound="-1"
+        eType="#//InternalVar" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Resources" upperBound="-1"
+        eType="#//Resource" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="FBNetwork" eType="#//FBNetwork"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ResourceNames" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Comment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ResourceType">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Identification" eType="#//Identification"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="VersionInfo" lowerBound="1"
+        upperBound="-1" eType="#//VersionInfo" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="CompilerInfo" eType="#//CompilerInfo"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="VarDeclarations" upperBound="-1"
+        eType="#//InternalVar" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="FBNetwork" lowerBound="1"
+        eType="#//FBNetwork"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="FBNames" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Comment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BFBDiagram">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="BFBType" lowerBound="1"
+        eType="#//BFBType" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CFBDiagram">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="CFBType" lowerBound="1"
+        eType="#//CFBType" containment="true"/>
+  </eClassifiers>
+</ecore:EPackage>
