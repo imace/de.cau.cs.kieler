@@ -1,0 +1,26 @@
+import cakefeed;
+import functionblock;
+
+Void bfbxml2gmf(functionblock::FBType oldbfbtype):
+ let newbfbtype = new cakefeed::BFBType:
+;
+
+Void bfbgmf2xml(cakefeed::BFBType oldbfbtype):
+ 
+;
+
+Void cfbxml2gmf(functionblock.FBType oldcfbtype):
+ 
+;
+
+Void cfbgmf2xml(cakefeed::CFBType oldcfbtype):
+ 
+;
+
+Void applicationxml2gmf(functionblock.Application oldapplication):
+ 
+;
+
+Void applicationgmf2xml(cakefeed::Application oldapplication):
+ 
+;
