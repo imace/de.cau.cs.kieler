@@ -15,6 +15,11 @@
             uri="http://kieler.cs.cau.de/cakefeed/"
             class="de.cau.cs.kieler.cakefeed.CakefeedPackage"
             genModel="model/cakefeed.genmodel"/>
+      <package
+            class="de.cau.cs.kieler.functionblock.FunctionblockPackage"
+            genModel="model/functionblock.genmodel"
+            uri="http://kieler.cs.cau.de/functionblock/">
+      </package>
    </extension>
 
 </plugin>
