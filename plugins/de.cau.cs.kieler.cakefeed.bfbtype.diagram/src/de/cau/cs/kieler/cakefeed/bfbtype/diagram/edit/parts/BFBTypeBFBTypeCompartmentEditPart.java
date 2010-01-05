@@ -12,11 +12,16 @@ import org.eclipse.draw2d.RoundedRectangle;
 import org.eclipse.draw2d.XYLayout;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.gef.EditPart;
+import org.eclipse.gef.GraphicalEditPart;
+import org.eclipse.gef.Request;
+import org.eclipse.gef.commands.Command;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeCompartmentEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.CreationEditPolicy;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.DragDropEditPolicy;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
 import org.eclipse.gmf.runtime.diagram.ui.figures.ResizableCompartmentFigure;
+import org.eclipse.gmf.runtime.diagram.ui.requests.ZOrderRequest;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.ConstrainedToolbarLayout;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
 import org.eclipse.gmf.runtime.gef.ui.figures.DefaultSizeNodeFigure;
@@ -73,19 +78,48 @@ public class BFBTypeBFBTypeCompartmentEditPart extends ShapeCompartmentEditPart 
 		typeRect.setForegroundColor(ColorConstants.lightGray);
 		typeRect.setBackgroundColor(ColorConstants.lightGray);
 		result.getContentPane().add(typeRect);
+		RectangleFigure[] blackRects = new RectangleFigure[2];
 		for (int i = 0; i < 2; i++) {
-			RectangleFigure blackRect = new RectangleFigure();
-			blackRect.setForegroundColor(ColorConstants.black);
-			blackRect.setBackgroundColor(ColorConstants.black);
-			result.getContentPane().add(blackRect);
+			blackRects[i] = new RectangleFigure();
+			blackRects[i].setForegroundColor(ColorConstants.black);
+			blackRects[i].setBackgroundColor(ColorConstants.black);
+			result.getContentPane().add(blackRects[i]);
 		}
 
 		WrappingLabel typeName = new WrappingLabel();
 		typeName.setForegroundColor(ColorConstants.black);
 		result.getContentPane().add(typeName);
+		
+		//EditParts anordnen
+		ArrayList<EditPart> partsToOrder = new ArrayList<EditPart>();
+		partsToOrder.add(getEditPartFromFigure(ctrlRect));
+		partsToOrder.add(getEditPartFromFigure(typeRect));
+		partsToOrder.add(getEditPartFromFigure(dataRect));
+		partsToOrder.add(getEditPartFromFigure(blackRects[0]));
+		partsToOrder.add(getEditPartFromFigure(blackRects[1]));
+		ZOrderRequest orderReq = new ZOrderRequest("REQ_SEND_TO_BACK");
+		orderReq.setPartsToOrder(partsToOrder);
+		Command orderCom = this.getCommand(orderReq);
+		this.getDiagramEditDomain().getDiagramCommandStack().execute(orderCom);
 
 		result.getContentPane().setLayoutManager(new FBCompartmentLayout());
 		return result;
+	}
+
+	private EditPart getEditPartFromFigure(IFigure figure) {
+		//for (Object obj1 : this.getChildren()) {
+		//	if (obj1 instanceof )
+		//}
+		for (Object obj2 : this.getChildren()) {
+			if (obj2 instanceof GraphicalEditPart) {
+				GraphicalEditPart eP = (GraphicalEditPart)obj2;
+				IFigure fig = eP.getFigure();
+				if (fig == figure) {
+					return eP;
+				}
+			}
+		}
+		return null;
 	}
 
 	/**
@@ -152,7 +186,7 @@ public class BFBTypeBFBTypeCompartmentEditPart extends ShapeCompartmentEditPart 
 			
 			// Search children for specific figures and store their references
 			List<IFigure> children = parent.getChildren();
-			sort(children);
+			// sort(children);
 			for (IFigure c : children) {
 				if (c instanceof WrappingLabel) {
 					typeNameLabel = (WrappingLabel) c;
