@@ -1,26 +1,30 @@
 import cakefeed;
 import functionblock;
 
-Void bfbxml2gmf(functionblock::FBType oldbfbtype):
- let newbfbtype = new cakefeed::BFBType:
+Void bfbxml2gmf(functionblock::FBType fbtype):
+ let bfbdiag = new cakefeed::BFBDiagram:
+ let bfbtype = new cakefeed::BFBType:
+ let name = fbtype.name():
+ bfbdiag.setBFBType(bfbtype) ->
+ bfbtype.setName(name)
 ;
 
-Void bfbgmf2xml(cakefeed::BFBType oldbfbtype):
+Void bfbgmf2xml(cakefeed::BFBType bfbtype):
  
 ;
 
-Void cfbxml2gmf(functionblock.FBType oldcfbtype):
+Void cfbxml2gmf(functionblock::FBType fbtype):
  
 ;
 
-Void cfbgmf2xml(cakefeed::CFBType oldcfbtype):
+Void cfbgmf2xml(cakefeed::CFBType cfbtype):
  
 ;
 
-Void applicationxml2gmf(functionblock.Application oldapplication):
+Void applicationxml2gmf(functionblock::FBNetwork fbnetwork):
  
 ;
 
-Void applicationgmf2xml(cakefeed::Application oldapplication):
+Void applicationgmf2xml(cakefeed::FBNetwork fbnetwork):
  
 ;
