@@ -6,6 +6,7 @@ Void bfbxml2gmf(functionblocks::FBType fbtype):
  let bfbtype = new cakefeed::BFBType:
  let name = fbtype.name():
  bfbdiag.setBFBType(bfbtype) ->
+ bfbtype.setName(name) ->
  bfbtype.setName(name)
 ;
 
