@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id$
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="de.cau.cs.kieler.cakefeed.presentation.CakefeedModelWizardID"
+            name="%_UI_CakefeedModelWizard_label"
+            class="de.cau.cs.kieler.cakefeed.presentation.CakefeedModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/CakefeedModelFile.gif">
+         <description>%_UI_CakefeedModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <editor
+            id="de.cau.cs.kieler.cakefeed.presentation.CakefeedEditorID"
+            name="%_UI_CakefeedEditor_label"
+            icon="icons/full/obj16/CakefeedModelFile.gif"
+            extensions="cakefeed"
+            class="de.cau.cs.kieler.cakefeed.presentation.CakefeedEditor"
+            contributorClass="de.cau.cs.kieler.cakefeed.presentation.CakefeedActionBarContributor">
+      </editor>
+   </extension>
+
+</plugin>

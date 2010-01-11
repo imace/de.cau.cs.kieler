@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: de.cau.cs.kieler.cakefeed.custom
+Bundle-SymbolicName: de.cau.cs.kieler.cakefeed.custom
+Bundle-Version: 0.1.0.qualifier
+Bundle-Activator: de.cau.cs.kieler.cakefeed.custom.Activator
+Bundle-Vendor: Christian-Albrechts-University of Kiel
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
