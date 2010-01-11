@@ -1,5 +1,7 @@
 package de.cau.cs.kieler.cakefeed.custom;
 
-public class IFIEFigure {
+import org.eclipse.draw2d.Figure;
+
+public class IFIEFigure extends Figure {
 
 }

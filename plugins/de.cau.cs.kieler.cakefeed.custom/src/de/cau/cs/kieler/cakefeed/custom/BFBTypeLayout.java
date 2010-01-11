@@ -4,7 +4,7 @@ import org.eclipse.draw2d.AbstractHintLayout;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.geometry.Dimension;
 
-public class FBLayout extends AbstractHintLayout {
+public class BFBTypeLayout extends AbstractHintLayout {
 
 	@Override
 	protected Dimension calculatePreferredSize(IFigure container, int wHint,

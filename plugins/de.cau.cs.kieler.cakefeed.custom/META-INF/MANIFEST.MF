@@ -6,6 +6,8 @@ Bundle-Version: 0.1.0.qualifier
 Bundle-Activator: de.cau.cs.kieler.cakefeed.custom.Activator
 Bundle-Vendor: Christian-Albrechts-University of Kiel
 Require-Bundle: org.eclipse.ui,
- org.eclipse.core.runtime
+ org.eclipse.core.runtime,
+ org.eclipse.draw2d;bundle-version="3.5.1"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
+Export-Package: de.cau.cs.kieler.cakefeed.custom
