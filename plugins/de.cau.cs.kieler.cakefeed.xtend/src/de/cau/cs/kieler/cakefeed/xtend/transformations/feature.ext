@@ -1,7 +1,7 @@
 import cakefeed;
-import functionblock;
+import functionblocks;
 
-Void bfbxml2gmf(functionblock::FBType fbtype):
+Void bfbxml2gmf(functionblocks::FBType fbtype):
  let bfbdiag = new cakefeed::BFBDiagram:
  let bfbtype = new cakefeed::BFBType:
  let name = fbtype.name():
