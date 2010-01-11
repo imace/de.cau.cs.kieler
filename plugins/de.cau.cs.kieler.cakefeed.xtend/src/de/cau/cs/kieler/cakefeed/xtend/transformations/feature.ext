@@ -21,10 +21,10 @@ Void cfbgmf2xml(cakefeed::CFBType cfbtype):
  
 ;
 
-Void applicationxml2gmf(functionblock::FBNetwork fbnetwork):
+Void fbnetworkxml2gmf(functionblock::FBNetwork fbnetwork):
  
 ;
 
-Void applicationgmf2xml(cakefeed::FBNetwork fbnetwork):
+Void fbnetworkgmf2xml(cakefeed::FBNetwork fbnetwork):
  
 ;
