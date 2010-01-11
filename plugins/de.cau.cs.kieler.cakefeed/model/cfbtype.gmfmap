@@ -7,20 +7,20 @@
     xmlns:gmftool="http://www.eclipse.org/gmf/2005/ToolDefinition">
   <nodes>
     <containmentFeature
-        href="cakefeed.ecore#//CFBDiagram/CFBType"/>
+        href="cakefeed.ecore#//CFBDiagram/cFBType"/>
     <childrenFeature
-        href="cakefeed.ecore#//CFBDiagram/CFBType"/>
+        href="cakefeed.ecore#//CFBDiagram/cFBType"/>
     <ownedChild>
       <domainMetaElement
           href="cakefeed.ecore#//CFBType"/>
       <labelMappings
           xsi:type="gmfmap:FeatureLabelMapping">
         <diagramLabel
-            href="cfbtype.gmfgraph#CFBTypeNameLabel"/>
+            href="bfbtype.gmfgraph#BFBTypeNameLabel"/>
         <features
-            href="cakefeed.ecore#//FBType/Name"/>
+            href="cakefeed.ecore#//NamedAndCommented/name"/>
         <editableFeatures
-            href="cakefeed.ecore#//FBType/Name"/>
+            href="cakefeed.ecore#//NamedAndCommented/name"/>
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
@@ -28,23 +28,20 @@
       <diagramNode
           href="cfbtype.gmfgraph#CFBTypeNode"/>
       <children
-          compartment="//@nodes.0/@ownedChild/@compartments.0"
           referencedChild="//@nodes.0/@ownedChild/@children.0/@ownedChild">
         <containmentFeature
-            href="cakefeed.ecore#//FBType/InputEvents"/>
-        <childrenFeature
-            href="cakefeed.ecore#//FBType/InputEvents"/>
+            href="cakefeed.ecore#//FBInterface/inputEvents"/>
         <ownedChild>
           <domainMetaElement
               href="cakefeed.ecore#//IFInputEvent"/>
           <labelMappings
               xsi:type="gmfmap:FeatureLabelMapping">
             <diagramLabel
-                href="cfbtype.gmfgraph#IFInputEventNameLabel"/>
+                href="bfbtype.gmfgraph#NameLabelLeft"/>
             <features
-                href="cakefeed.ecore#//Event/Name"/>
+                href="cakefeed.ecore#//NamedAndCommented/name"/>
             <editableFeatures
-                href="cakefeed.ecore#//Event/Name"/>
+                href="cakefeed.ecore#//NamedAndCommented/name"/>
           </labelMappings>
           <tool
               xsi:type="gmftool:CreationTool"
@@ -54,23 +51,20 @@
         </ownedChild>
       </children>
       <children
-          compartment="//@nodes.0/@ownedChild/@compartments.0"
           referencedChild="//@nodes.0/@ownedChild/@children.1/@ownedChild">
         <containmentFeature
-            href="cakefeed.ecore#//FBType/OutputEvents"/>
-        <childrenFeature
-            href="cakefeed.ecore#//FBType/OutputEvents"/>
+            href="cakefeed.ecore#//FBInterface/outputEvents"/>
         <ownedChild>
           <domainMetaElement
               href="cakefeed.ecore#//IFOutputEvent"/>
           <labelMappings
               xsi:type="gmfmap:FeatureLabelMapping">
             <diagramLabel
-                href="cfbtype.gmfgraph#IFOutputEventNameLabel"/>
+                href="bfbtype.gmfgraph#NameLabelRight"/>
             <features
-                href="cakefeed.ecore#//Event/Name"/>
+                href="cakefeed.ecore#//NamedAndCommented/name"/>
             <editableFeatures
-                href="cakefeed.ecore#//Event/Name"/>
+                href="cakefeed.ecore#//NamedAndCommented/name"/>
           </labelMappings>
           <tool
               xsi:type="gmftool:CreationTool"
@@ -80,23 +74,20 @@
         </ownedChild>
       </children>
       <children
-          compartment="//@nodes.0/@ownedChild/@compartments.0"
           referencedChild="//@nodes.0/@ownedChild/@children.2/@ownedChild">
         <containmentFeature
-            href="cakefeed.ecore#//FBType/InputVars"/>
-        <childrenFeature
-            href="cakefeed.ecore#//FBType/InputVars"/>
+            href="cakefeed.ecore#//FBInterface/inputVars"/>
         <ownedChild>
           <domainMetaElement
               href="cakefeed.ecore#//IFInputVar"/>
           <labelMappings
               xsi:type="gmfmap:FeatureLabelMapping">
             <diagramLabel
-                href="cfbtype.gmfgraph#IFInputVarNameLabel"/>
+                href="bfbtype.gmfgraph#NameLabelLeft"/>
             <features
-                href="cakefeed.ecore#//Var/Name"/>
+                href="cakefeed.ecore#//NamedAndCommented/name"/>
             <editableFeatures
-                href="cakefeed.ecore#//Var/Name"/>
+                href="cakefeed.ecore#//NamedAndCommented/name"/>
           </labelMappings>
           <tool
               xsi:type="gmftool:CreationTool"
@@ -106,23 +97,20 @@
         </ownedChild>
       </children>
       <children
-          compartment="//@nodes.0/@ownedChild/@compartments.0"
           referencedChild="//@nodes.0/@ownedChild/@children.3/@ownedChild">
         <containmentFeature
-            href="cakefeed.ecore#//FBType/OutputVars"/>
-        <childrenFeature
-            href="cakefeed.ecore#//FBType/OutputVars"/>
+            href="cakefeed.ecore#//FBInterface/outputVars"/>
         <ownedChild>
           <domainMetaElement
               href="cakefeed.ecore#//IFOutputVar"/>
           <labelMappings
               xsi:type="gmfmap:FeatureLabelMapping">
             <diagramLabel
-                href="cfbtype.gmfgraph#IFOutputVarNameLabel"/>
+                href="bfbtype.gmfgraph#NameLabelRight"/>
             <features
-                href="cakefeed.ecore#//Var/Name"/>
+                href="cakefeed.ecore#//NamedAndCommented/name"/>
             <editableFeatures
-                href="cakefeed.ecore#//Var/Name"/>
+                href="cakefeed.ecore#//NamedAndCommented/name"/>
           </labelMappings>
           <tool
               xsi:type="gmftool:CreationTool"
@@ -135,20 +123,23 @@
           compartment="//@nodes.0/@ownedChild/@compartments.0"
           referencedChild="//@nodes.0/@ownedChild/@children.4/@ownedChild">
         <containmentFeature
-            href="cakefeed.ecore#//CFBType/FBs"/>
-        <childrenFeature
-            href="cakefeed.ecore#//CFBType/FBs"/>
+            href="cakefeed.ecore#//FBNetwork/fBs"/>
         <ownedChild>
           <domainMetaElement
               href="cakefeed.ecore#//FB"/>
           <labelMappings
               xsi:type="gmfmap:FeatureLabelMapping">
             <diagramLabel
-                href="cfbtype.gmfgraph#FBInstanceNameLabel"/>
+                href="bfbtype.gmfgraph#FBInstanceNameLabel"/>
             <features
-                href="cakefeed.ecore#//FB/Name"/>
+                href="cakefeed.ecore#//NamedAndCommented/name"/>
             <editableFeatures
-                href="cakefeed.ecore#//FB/Name"/>
+                href="cakefeed.ecore#//NamedAndCommented/name"/>
+          </labelMappings>
+          <labelMappings
+              readOnly="true">
+            <diagramLabel
+                href="bfbtype.gmfgraph#FBTypeNameLabel"/>
           </labelMappings>
           <tool
               xsi:type="gmftool:CreationTool"
@@ -156,23 +147,20 @@
           <diagramNode
               href="cfbtype.gmfgraph#FBNode"/>
           <children
-              compartment="//@nodes.0/@ownedChild/@children.4/@ownedChild/@compartments.0"
               referencedChild="//@nodes.0/@ownedChild/@children.4/@ownedChild/@children.0/@ownedChild">
             <containmentFeature
-                href="cakefeed.ecore#//FB/InputEvents"/>
-            <childrenFeature
-                href="cakefeed.ecore#//FB/InputEvents"/>
+                href="cakefeed.ecore#//FB/inputEvents"/>
             <ownedChild>
               <domainMetaElement
                   href="cakefeed.ecore#//FBInputEvent"/>
               <labelMappings
                   xsi:type="gmfmap:FeatureLabelMapping">
                 <diagramLabel
-                    href="cfbtype.gmfgraph#FBInputEventNameLabel"/>
+                    href="bfbtype.gmfgraph#NameLabelRight"/>
                 <features
-                    href="cakefeed.ecore#//Event/Name"/>
+                    href="cakefeed.ecore#//NamedAndCommented/name"/>
                 <editableFeatures
-                    href="cakefeed.ecore#//Event/Name"/>
+                    href="cakefeed.ecore#//NamedAndCommented/name"/>
               </labelMappings>
               <tool
                   xsi:type="gmftool:CreationTool"
@@ -182,23 +170,20 @@
             </ownedChild>
           </children>
           <children
-              compartment="//@nodes.0/@ownedChild/@children.4/@ownedChild/@compartments.0"
               referencedChild="//@nodes.0/@ownedChild/@children.4/@ownedChild/@children.1/@ownedChild">
             <containmentFeature
-                href="cakefeed.ecore#//FB/OutputEvents"/>
-            <childrenFeature
-                href="cakefeed.ecore#//FB/OutputEvents"/>
+                href="cakefeed.ecore#//FB/outputEvents"/>
             <ownedChild>
               <domainMetaElement
                   href="cakefeed.ecore#//FBOutputEvent"/>
               <labelMappings
                   xsi:type="gmfmap:FeatureLabelMapping">
                 <diagramLabel
-                    href="cfbtype.gmfgraph#FBOutputEventNameLabel"/>
+                    href="bfbtype.gmfgraph#NameLabelLeft"/>
                 <features
-                    href="cakefeed.ecore#//Event/Name"/>
+                    href="cakefeed.ecore#//NamedAndCommented/name"/>
                 <editableFeatures
-                    href="cakefeed.ecore#//Event/Name"/>
+                    href="cakefeed.ecore#//NamedAndCommented/name"/>
               </labelMappings>
               <tool
                   xsi:type="gmftool:CreationTool"
@@ -208,23 +193,20 @@
             </ownedChild>
           </children>
           <children
-              compartment="//@nodes.0/@ownedChild/@children.4/@ownedChild/@compartments.0"
               referencedChild="//@nodes.0/@ownedChild/@children.4/@ownedChild/@children.2/@ownedChild">
             <containmentFeature
-                href="cakefeed.ecore#//FB/InputVars"/>
-            <childrenFeature
-                href="cakefeed.ecore#//FB/InputVars"/>
+                href="cakefeed.ecore#//FB/inputVars"/>
             <ownedChild>
               <domainMetaElement
                   href="cakefeed.ecore#//FBInputVar"/>
               <labelMappings
                   xsi:type="gmfmap:FeatureLabelMapping">
                 <diagramLabel
-                    href="cfbtype.gmfgraph#FBInputVarNameLabel"/>
+                    href="bfbtype.gmfgraph#NameLabelRight"/>
                 <features
-                    href="cakefeed.ecore#//Var/Name"/>
+                    href="cakefeed.ecore#//NamedAndCommented/name"/>
                 <editableFeatures
-                    href="cakefeed.ecore#//Var/Name"/>
+                    href="cakefeed.ecore#//NamedAndCommented/name"/>
               </labelMappings>
               <tool
                   xsi:type="gmftool:CreationTool"
@@ -234,23 +216,20 @@
             </ownedChild>
           </children>
           <children
-              compartment="//@nodes.0/@ownedChild/@children.4/@ownedChild/@compartments.0"
               referencedChild="//@nodes.0/@ownedChild/@children.4/@ownedChild/@children.3/@ownedChild">
             <containmentFeature
-                href="cakefeed.ecore#//FB/OutputVars"/>
-            <childrenFeature
-                href="cakefeed.ecore#//FB/OutputVars"/>
+                href="cakefeed.ecore#//FB/outputVars"/>
             <ownedChild>
               <domainMetaElement
                   href="cakefeed.ecore#//FBOutputVar"/>
               <labelMappings
                   xsi:type="gmfmap:FeatureLabelMapping">
                 <diagramLabel
-                    href="cfbtype.gmfgraph#FBOutputVarNameLabel"/>
+                    href="bfbtype.gmfgraph#NameLabelLeft"/>
                 <features
-                    href="cakefeed.ecore#//Var/Name"/>
+                    href="cakefeed.ecore#//NamedAndCommented/name"/>
                 <editableFeatures
-                    href="cakefeed.ecore#//Var/Name"/>
+                    href="cakefeed.ecore#//NamedAndCommented/name"/>
               </labelMappings>
               <tool
                   xsi:type="gmftool:CreationTool"
@@ -259,15 +238,10 @@
                   href="cfbtype.gmfgraph#FBOutputVarNode"/>
             </ownedChild>
           </children>
-          <compartments
-              children="//@nodes.0/@ownedChild/@children.4/@ownedChild/@children.0 //@nodes.0/@ownedChild/@children.4/@ownedChild/@children.1 //@nodes.0/@ownedChild/@children.4/@ownedChild/@children.2 //@nodes.0/@ownedChild/@children.4/@ownedChild/@children.3">
-            <compartment
-                href="cfbtype.gmfgraph#FBCompartment"/>
-          </compartments>
         </ownedChild>
       </children>
       <compartments
-          children="//@nodes.0/@ownedChild/@children.0 //@nodes.0/@ownedChild/@children.1 //@nodes.0/@ownedChild/@children.2 //@nodes.0/@ownedChild/@children.3 //@nodes.0/@ownedChild/@children.4">
+          children="//@nodes.0/@ownedChild/@children.4">
         <compartment
             href="cfbtype.gmfgraph#CFBTypeCompartment"/>
       </compartments>
@@ -277,7 +251,7 @@
     <domainMetaElement
         href="cakefeed.ecore#//InputWith"/>
     <containmentFeature
-        href="cakefeed.ecore#//IFInputEvent/With"/>
+        href="cakefeed.ecore#//IFInputEvent/with"/>
     <tool
         xsi:type="gmftool:CreationTool"
         href="cfbtype.gmftool#//@palette/@tools.0/@tools.1/@tools.2"/>
@@ -288,13 +262,13 @@
         href="cakefeed.ecore#//InputWith/parentInputEvent"/>
     <linkMetaFeature
         xsi:type="ecore:EReference"
-        href="cakefeed.ecore#//InputWith/With"/>
+        href="cakefeed.ecore#//InputWith/parentInputEvent"/>
   </links>
   <links>
     <domainMetaElement
         href="cakefeed.ecore#//OutputWith"/>
     <containmentFeature
-        href="cakefeed.ecore#//IFOutputEvent/With"/>
+        href="cakefeed.ecore#//IFOutputEvent/with"/>
     <tool
         xsi:type="gmftool:CreationTool"
         href="cfbtype.gmftool#//@palette/@tools.0/@tools.1/@tools.2"/>
@@ -305,13 +279,13 @@
         href="cakefeed.ecore#//OutputWith/parentOutputEvent"/>
     <linkMetaFeature
         xsi:type="ecore:EReference"
-        href="cakefeed.ecore#//OutputWith/With"/>
+        href="cakefeed.ecore#//OutputWith/with"/>
   </links>
   <links>
     <domainMetaElement
         href="cakefeed.ecore#//IFIFEventConnection"/>
     <containmentFeature
-        href="cakefeed.ecore#//CFBType/EventConnections"/>
+        href="cakefeed.ecore#//FBNetwork/eventConnections"/>
     <tool
         xsi:type="gmftool:CreationTool"
         href="cfbtype.gmftool#//@palette/@tools.0/@tools.2/@tools.1"/>
@@ -319,16 +293,16 @@
         href="cfbtype.gmfgraph#EventConnectionConnection"/>
     <sourceMetaFeature
         xsi:type="ecore:EReference"
-        href="cakefeed.ecore#//IFIFEventConnection/Source"/>
+        href="cakefeed.ecore#//IFIFEventConnection/source"/>
     <linkMetaFeature
         xsi:type="ecore:EReference"
-        href="cakefeed.ecore#//IFIFEventConnection/Destination"/>
+        href="cakefeed.ecore#//IFIFEventConnection/destination"/>
   </links>
   <links>
     <domainMetaElement
         href="cakefeed.ecore#//IFFBEventConnection"/>
     <containmentFeature
-        href="cakefeed.ecore#//CFBType/EventConnections"/>
+        href="cakefeed.ecore#//FBNetwork/eventConnections"/>
     <tool
         xsi:type="gmftool:CreationTool"
         href="cfbtype.gmftool#//@palette/@tools.0/@tools.2/@tools.1"/>
@@ -336,16 +310,16 @@
         href="cfbtype.gmfgraph#EventConnectionConnection"/>
     <sourceMetaFeature
         xsi:type="ecore:EReference"
-        href="cakefeed.ecore#//IFFBEventConnection/Source"/>
+        href="cakefeed.ecore#//IFFBEventConnection/source"/>
     <linkMetaFeature
         xsi:type="ecore:EReference"
-        href="cakefeed.ecore#//IFFBEventConnection/Destination"/>
+        href="cakefeed.ecore#//IFFBEventConnection/destination"/>
   </links>
   <links>
     <domainMetaElement
         href="cakefeed.ecore#//FBIFEventConnection"/>
     <containmentFeature
-        href="cakefeed.ecore#//CFBType/EventConnections"/>
+        href="cakefeed.ecore#//FBNetwork/eventConnections"/>
     <tool
         xsi:type="gmftool:CreationTool"
         href="cfbtype.gmftool#//@palette/@tools.0/@tools.2/@tools.1"/>
@@ -353,16 +327,16 @@
         href="cfbtype.gmfgraph#EventConnectionConnection"/>
     <sourceMetaFeature
         xsi:type="ecore:EReference"
-        href="cakefeed.ecore#//FBIFEventConnection/Source"/>
+        href="cakefeed.ecore#//FBIFEventConnection/source"/>
     <linkMetaFeature
         xsi:type="ecore:EReference"
-        href="cakefeed.ecore#//FBIFEventConnection/Destination"/>
+        href="cakefeed.ecore#//FBIFEventConnection/destination"/>
   </links>
   <links>
     <domainMetaElement
         href="cakefeed.ecore#//FBFBEventConnection"/>
     <containmentFeature
-        href="cakefeed.ecore#//CFBType/EventConnections"/>
+        href="cakefeed.ecore#//FBNetwork/eventConnections"/>
     <tool
         xsi:type="gmftool:CreationTool"
         href="cfbtype.gmftool#//@palette/@tools.0/@tools.2/@tools.1"/>
@@ -370,16 +344,16 @@
         href="cfbtype.gmfgraph#EventConnectionConnection"/>
     <sourceMetaFeature
         xsi:type="ecore:EReference"
-        href="cakefeed.ecore#//FBFBEventConnection/Source"/>
+        href="cakefeed.ecore#//FBFBEventConnection/source"/>
     <linkMetaFeature
         xsi:type="ecore:EReference"
-        href="cakefeed.ecore#//FBFBEventConnection/Destination"/>
+        href="cakefeed.ecore#//FBFBEventConnection/destination"/>
   </links>
   <links>
     <domainMetaElement
         href="cakefeed.ecore#//IFIFDataConnection"/>
     <containmentFeature
-        href="cakefeed.ecore#//CFBType/DataConnections"/>
+        href="cakefeed.ecore#//FBNetwork/dataConnections"/>
     <tool
         xsi:type="gmftool:CreationTool"
         href="cfbtype.gmftool#//@palette/@tools.0/@tools.2/@tools.1"/>
@@ -387,16 +361,16 @@
         href="cfbtype.gmfgraph#DataConnectionConnection"/>
     <sourceMetaFeature
         xsi:type="ecore:EReference"
-        href="cakefeed.ecore#//IFIFDataConnection/Source"/>
+        href="cakefeed.ecore#//IFIFDataConnection/source"/>
     <linkMetaFeature
         xsi:type="ecore:EReference"
-        href="cakefeed.ecore#//IFIFDataConnection/Destination"/>
+        href="cakefeed.ecore#//IFIFDataConnection/destination"/>
   </links>
   <links>
     <domainMetaElement
         href="cakefeed.ecore#//IFFBDataConnection"/>
     <containmentFeature
-        href="cakefeed.ecore#//CFBType/DataConnections"/>
+        href="cakefeed.ecore#//FBNetwork/dataConnections"/>
     <tool
         xsi:type="gmftool:CreationTool"
         href="cfbtype.gmftool#//@palette/@tools.0/@tools.2/@tools.1"/>
@@ -404,16 +378,16 @@
         href="cfbtype.gmfgraph#DataConnectionConnection"/>
     <sourceMetaFeature
         xsi:type="ecore:EReference"
-        href="cakefeed.ecore#//IFFBDataConnection/Source"/>
+        href="cakefeed.ecore#//IFFBDataConnection/source"/>
     <linkMetaFeature
         xsi:type="ecore:EReference"
-        href="cakefeed.ecore#//IFFBDataConnection/Destination"/>
+        href="cakefeed.ecore#//IFFBDataConnection/destination"/>
   </links>
   <links>
     <domainMetaElement
         href="cakefeed.ecore#//FBIFDataConnection"/>
     <containmentFeature
-        href="cakefeed.ecore#//CFBType/DataConnections"/>
+        href="cakefeed.ecore#//FBNetwork/dataConnections"/>
     <tool
         xsi:type="gmftool:CreationTool"
         href="cfbtype.gmftool#//@palette/@tools.0/@tools.2/@tools.1"/>
@@ -421,16 +395,16 @@
         href="cfbtype.gmfgraph#DataConnectionConnection"/>
     <sourceMetaFeature
         xsi:type="ecore:EReference"
-        href="cakefeed.ecore#//FBIFDataConnection/Source"/>
+        href="cakefeed.ecore#//FBIFDataConnection/source"/>
     <linkMetaFeature
         xsi:type="ecore:EReference"
-        href="cakefeed.ecore#//FBIFDataConnection/Destination"/>
+        href="cakefeed.ecore#//FBIFDataConnection/destination"/>
   </links>
   <links>
     <domainMetaElement
         href="cakefeed.ecore#//FBFBDataConnection"/>
     <containmentFeature
-        href="cakefeed.ecore#//CFBType/DataConnections"/>
+        href="cakefeed.ecore#//FBNetwork/dataConnections"/>
     <tool
         xsi:type="gmftool:CreationTool"
         href="cfbtype.gmftool#//@palette/@tools.0/@tools.2/@tools.1"/>
@@ -438,10 +412,10 @@
         href="cfbtype.gmfgraph#DataConnectionConnection"/>
     <sourceMetaFeature
         xsi:type="ecore:EReference"
-        href="cakefeed.ecore#//FBFBDataConnection/Source"/>
+        href="cakefeed.ecore#//FBFBDataConnection/source"/>
     <linkMetaFeature
         xsi:type="ecore:EReference"
-        href="cakefeed.ecore#//FBFBDataConnection/Destination"/>
+        href="cakefeed.ecore#//FBFBDataConnection/destination"/>
   </links>
   <diagram>
     <diagramCanvas

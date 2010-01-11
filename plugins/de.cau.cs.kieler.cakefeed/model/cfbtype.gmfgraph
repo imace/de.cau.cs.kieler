@@ -6,373 +6,22 @@
   <figures
       name="CFBTypeFigureGallery">
     <descriptors
-        name="CFBTypeFigureDescriptor">
-      <actualFigure
-          xsi:type="gmfgraph:Rectangle"
-          name="InvisibleRectangle"
-          outline="false"
-          fill="false">
-        <layout
-            xsi:type="gmfgraph:FlowLayout"
-            vertical="true"
-            forceSingleLine="true"
-            minorAlignment="CENTER"
-            majorSpacing="0"
-            minorSpacing="0"/>
-        <children
-            xsi:type="gmfgraph:Label"
-            name="CFBTypeNameLabel"/>
-      </actualFigure>
-      <accessors
-          figure="//@figures.0/@descriptors.0/@actualFigure/@children.0"/>
-    </descriptors>
-    <descriptors
-        name="IFInputEventFigureDescriptor">
-      <actualFigure
-          xsi:type="gmfgraph:Rectangle"
-          name="InvisibleRectangle"
-          outline="false"
-          fill="false">
-        <layout
-            xsi:type="gmfgraph:FlowLayout"
-            forceSingleLine="true"
-            minorAlignment="CENTER"
-            majorSpacing="0"
-            minorSpacing="0"/>
-        <children
-            xsi:type="gmfgraph:Label"
-            name="IFIELabel"/>
-        <children
-            xsi:type="gmfgraph:Rectangle"
-            name="BlackRectangle">
-          <foregroundColor
-              xsi:type="gmfgraph:ConstantColor"
-              value="black"/>
-          <backgroundColor
-              xsi:type="gmfgraph:ConstantColor"
-              value="black"/>
-          <minimumSize
-              dx="30"
-              dy="1"/>
-          <preferredSize
-              dx="60"
-              dy="1"/>
-        </children>
-        <children
-            xsi:type="gmfgraph:Rectangle"
-            name="RedRectangle">
-          <foregroundColor
-              xsi:type="gmfgraph:ConstantColor"
-              value="red"/>
-          <backgroundColor
-              xsi:type="gmfgraph:ConstantColor"
-              value="red"/>
-          <maximumSize
-              dx="6"
-              dy="6"/>
-          <minimumSize
-              dx="6"
-              dy="6"/>
-          <preferredSize
-              dx="6"
-              dy="6"/>
-        </children>
-      </actualFigure>
-      <accessors
-          figure="//@figures.0/@descriptors.1/@actualFigure/@children.0"/>
-    </descriptors>
-    <descriptors
-        name="IFOutputEventFigureDescriptor">
-      <actualFigure
-          xsi:type="gmfgraph:Rectangle"
-          name="InvisibleRectangle"
-          outline="false"
-          fill="false">
-        <layout
-            xsi:type="gmfgraph:LayoutRef"
-            actual="//@figures.0/@descriptors.1/@actualFigure/@layout"/>
-        <children
-            xsi:type="gmfgraph:FigureRef"
-            figure="//@figures.0/@descriptors.1/@actualFigure/@children.2"/>
-        <children
-            xsi:type="gmfgraph:FigureRef"
-            figure="//@figures.0/@descriptors.1/@actualFigure/@children.1"/>
-        <children
-            xsi:type="gmfgraph:Label"
-            name="IFOELabel"
-            text=""/>
-      </actualFigure>
-      <accessors
-          figure="//@figures.0/@descriptors.2/@actualFigure/@children.2"/>
-    </descriptors>
-    <descriptors
-        name="IFInputVarFigureDescriptor">
-      <actualFigure
-          xsi:type="gmfgraph:Rectangle"
-          name="InvisibleRectangle"
-          outline="false"
-          fill="false">
-        <layout
-            xsi:type="gmfgraph:LayoutRef"
-            actual="//@figures.0/@descriptors.1/@actualFigure/@layout"/>
-        <children
-            xsi:type="gmfgraph:Label"
-            name="IFIVLabel"
-            text=""/>
-        <children
-            xsi:type="gmfgraph:FigureRef"
-            figure="//@figures.0/@descriptors.1/@actualFigure/@children.1"/>
-        <children
-            xsi:type="gmfgraph:Rectangle"
-            name="BlueRectangle">
-          <foregroundColor
-              xsi:type="gmfgraph:ConstantColor"
-              value="blue"/>
-          <backgroundColor
-              xsi:type="gmfgraph:ConstantColor"
-              value="blue"/>
-          <maximumSize
-              dx="6"
-              dy="6"/>
-          <minimumSize
-              dx="6"
-              dy="6"/>
-          <preferredSize
-              dx="6"
-              dy="6"/>
-        </children>
-      </actualFigure>
-      <accessors
-          figure="//@figures.0/@descriptors.3/@actualFigure/@children.0"/>
-    </descriptors>
-    <descriptors
-        name="IFOutputVarFigureDescriptor">
-      <actualFigure
-          xsi:type="gmfgraph:Rectangle"
-          name="InvisibleRectangle"
-          outline="false"
-          fill="false">
-        <layout
-            xsi:type="gmfgraph:LayoutRef"
-            actual="//@figures.0/@descriptors.1/@actualFigure/@layout"/>
-        <children
-            xsi:type="gmfgraph:FigureRef"
-            figure="//@figures.0/@descriptors.3/@actualFigure/@children.2"/>
-        <children
-            xsi:type="gmfgraph:FigureRef"
-            figure="//@figures.0/@descriptors.1/@actualFigure/@children.1"/>
-        <children
-            xsi:type="gmfgraph:Label"
-            name="IFOVLabel"/>
-      </actualFigure>
-      <accessors
-          figure="//@figures.0/@descriptors.4/@actualFigure/@children.2"/>
-    </descriptors>
-    <descriptors
-        name="FBInputEventFigureDescriptor">
-      <actualFigure
-          xsi:type="gmfgraph:Rectangle"
-          name="InvisibleRectangle"
-          outline="false"
-          fill="false">
-        <layout
-            xsi:type="gmfgraph:LayoutRef"
-            actual="//@figures.0/@descriptors.1/@actualFigure/@layout"/>
-        <children
-            xsi:type="gmfgraph:FigureRef"
-            figure="//@figures.0/@descriptors.1/@actualFigure/@children.2"/>
-        <children
-            xsi:type="gmfgraph:Label"
-            name="FBIELabel"/>
-      </actualFigure>
-      <accessors
-          figure="//@figures.0/@descriptors.5/@actualFigure/@children.1"/>
-    </descriptors>
-    <descriptors
-        name="FBOutputEventFigureDescriptor">
-      <actualFigure
-          xsi:type="gmfgraph:Rectangle"
-          name="InvisibleRectangle"
-          outline="false"
-          fill="false">
-        <layout
-            xsi:type="gmfgraph:LayoutRef"
-            actual="//@figures.0/@descriptors.1/@actualFigure/@layout"/>
-        <children
-            xsi:type="gmfgraph:Label"
-            name="FBOELabel"/>
-        <children
-            xsi:type="gmfgraph:FigureRef"
-            figure="//@figures.0/@descriptors.1/@actualFigure/@children.2"/>
-      </actualFigure>
-      <accessors
-          figure="//@figures.0/@descriptors.6/@actualFigure/@children.0"/>
-    </descriptors>
-    <descriptors
-        name="FBInputVarFigureDescriptor">
-      <actualFigure
-          xsi:type="gmfgraph:Rectangle"
-          name="InvisibleRectangle"
-          outline="false"
-          fill="false">
-        <layout
-            xsi:type="gmfgraph:LayoutRef"
-            actual="//@figures.0/@descriptors.1/@actualFigure/@layout"/>
-        <children
-            xsi:type="gmfgraph:FigureRef"
-            figure="//@figures.0/@descriptors.3/@actualFigure/@children.2"/>
-        <children
-            xsi:type="gmfgraph:Label"
-            name="FBIVLabel"/>
-      </actualFigure>
-      <accessors
-          figure="//@figures.0/@descriptors.7/@actualFigure/@children.1"/>
-    </descriptors>
-    <descriptors
-        name="FBOutputVarFigureDescriptor">
-      <actualFigure
-          xsi:type="gmfgraph:Rectangle"
-          name="InvisibleRectangle"
-          outline="false"
-          fill="false">
-        <layout
-            xsi:type="gmfgraph:LayoutRef"
-            actual="//@figures.0/@descriptors.1/@actualFigure/@layout"/>
-        <children
-            xsi:type="gmfgraph:Label"
-            name="FBOVLabel"/>
-        <children
-            xsi:type="gmfgraph:FigureRef"
-            figure="//@figures.0/@descriptors.3/@actualFigure/@children.2"/>
-      </actualFigure>
-      <accessors
-          figure="//@figures.0/@descriptors.8/@actualFigure/@children.0"/>
-    </descriptors>
-    <descriptors
-        name="InputWithFigureDescriptor">
-      <actualFigure
-          xsi:type="gmfgraph:PolylineConnection"
-          name="BlackPolylineConnection"
-          sourceDecoration="//@figures.0/@descriptors.18/@actualFigure"
-          targetDecoration="//@figures.0/@descriptors.18/@actualFigure">
-        <foregroundColor
-            xsi:type="gmfgraph:ConstantColor"
-            value="black"/>
-        <backgroundColor
-            xsi:type="gmfgraph:ConstantColor"
-            value="black"/>
-      </actualFigure>
-    </descriptors>
-    <descriptors
-        name="OutputWithFigureDescriptor">
-      <actualFigure
-          xsi:type="gmfgraph:PolylineConnection"
-          name="BlackPolylineConnection"
-          sourceDecoration="//@figures.0/@descriptors.18/@actualFigure"
-          targetDecoration="//@figures.0/@descriptors.18/@actualFigure">
-        <foregroundColor
-            xsi:type="gmfgraph:ConstantColor"
-            value="black"/>
-        <backgroundColor
-            xsi:type="gmfgraph:ConstantColor"
-            value="black"/>
-      </actualFigure>
-    </descriptors>
-    <descriptors
-        name="FBFigureDescriptor">
-      <actualFigure
-          xsi:type="gmfgraph:Rectangle"
-          name="InvisibleRectangle"
-          outline="false"
-          fill="false">
-        <layout
-            xsi:type="gmfgraph:LayoutRef"
-            actual="//@figures.0/@descriptors.0/@actualFigure/@layout"/>
-        <children
-            xsi:type="gmfgraph:Label"
-            name="FBInstanceNameLabel"/>
-      </actualFigure>
-      <accessors
-          figure="//@figures.0/@descriptors.11/@actualFigure/@children.0"/>
-      <accessors/>
-    </descriptors>
-    <descriptors
         name="EventConnectionFigureDescriptor">
       <actualFigure
           xsi:type="gmfgraph:PolylineConnection"
-          name="RedPolylineConnection"
-          sourceDecoration="//@figures.0/@descriptors.14/@actualFigure"
-          targetDecoration="//@figures.0/@descriptors.15/@actualFigure">
-        <foregroundColor
-            xsi:type="gmfgraph:ConstantColor"
-            value="red"/>
-        <backgroundColor
-            xsi:type="gmfgraph:ConstantColor"
-            value="red"/>
-      </actualFigure>
-    </descriptors>
-    <descriptors
-        name="DataConnectionFigureDescriptor">
-      <actualFigure
-          xsi:type="gmfgraph:PolylineConnection"
-          name="BluePolylineConnection"
-          sourceDecoration="//@figures.0/@descriptors.16/@actualFigure"
-          targetDecoration="//@figures.0/@descriptors.17/@actualFigure">
+          name="BluePolylineConnection">
         <foregroundColor
             xsi:type="gmfgraph:ConstantColor"
             value="blue"/>
         <backgroundColor
             xsi:type="gmfgraph:ConstantColor"
             value="blue"/>
-      </actualFigure>
-    </descriptors>
-    <descriptors
-        name="RedTriangleDecoration">
-      <actualFigure
-          xsi:type="gmfgraph:PolygonDecoration"
-          name="RedTriangle">
-        <foregroundColor
-            xsi:type="gmfgraph:ConstantColor"
-            value="red"/>
-        <backgroundColor
-            xsi:type="gmfgraph:ConstantColor"
-            value="red"/>
-        <template
-            x="-1"
-            y="1"/>
-        <template
-            x="1"/>
-        <template
-            x="-1"
-            y="-1"/>
-      </actualFigure>
-    </descriptors>
-    <descriptors
-        name="RedTriangleDecorationRev">
-      <actualFigure
-          xsi:type="gmfgraph:PolygonDecoration"
-          name="RedTriangleReverse">
-        <foregroundColor
-            xsi:type="gmfgraph:ConstantColor"
-            value="red"/>
-        <backgroundColor
-            xsi:type="gmfgraph:ConstantColor"
-            value="red"/>
-        <template
-            x="1"
-            y="1"/>
-        <template
-            x="-1"/>
-        <template
-            x="1"
-            y="-1"/>
       </actualFigure>
     </descriptors>
     <descriptors
         name="BlueTriangleDecoration">
       <actualFigure
-          xsi:type="gmfgraph:PolygonDecoration"
-          name="BlueTriangle">
+          xsi:type="gmfgraph:PolygonDecoration">
         <foregroundColor
             xsi:type="gmfgraph:ConstantColor"
             value="blue"/>
@@ -392,8 +41,7 @@
     <descriptors
         name="BlueTriangleDecorationRev">
       <actualFigure
-          xsi:type="gmfgraph:PolygonDecoration"
-          name="BlueTriangleReverse">
+          xsi:type="gmfgraph:PolygonDecoration">
         <foregroundColor
             xsi:type="gmfgraph:ConstantColor"
             value="blue"/>
@@ -410,128 +58,133 @@
             y="-1"/>
       </actualFigure>
     </descriptors>
-    <descriptors
-        name="BlackRectangleDecoration">
-      <actualFigure
-          xsi:type="gmfgraph:PolygonDecoration"
-          name="BlackRectangle">
-        <foregroundColor
-            xsi:type="gmfgraph:ConstantColor"
-            value="black"/>
-        <backgroundColor
-            xsi:type="gmfgraph:ConstantColor"
-            value="black"/>
-        <template
-            x="-1"
-            y="1"/>
-        <template
-            x="1"
-            y="1"/>
-        <template
-            x="1"
-            y="-1"/>
-        <template
-            x="-1"
-            y="-1"/>
-      </actualFigure>
-    </descriptors>
   </figures>
   <nodes
-      name="CFBTypeNode"
-      figure="CFBTypeFigureDescriptor"/>
+      name="CFBTypeNode">
+    <figure
+        href="bfbtype.gmfgraph#BFBTypeFigureDescriptor"/>
+  </nodes>
   <nodes
       name="IFInputEventNode"
-      figure="IFInputEventFigureDescriptor"/>
+      resizeConstraint="NONE"
+      affixedParentSide="WEST">
+    <figure
+        href="bfbtype.gmfgraph#IFInputEventFigureDescriptor"/>
+  </nodes>
   <nodes
       name="IFOutputEventNode"
-      figure="IFOutputEventFigureDescriptor"/>
+      resizeConstraint="NONE"
+      affixedParentSide="EAST">
+    <figure
+        href="bfbtype.gmfgraph#IFOutputEventFigureDescriptor"/>
+  </nodes>
   <nodes
       name="IFInputVarNode"
-      figure="IFInputVarFigureDescriptor"/>
+      resizeConstraint="NONE"
+      affixedParentSide="WEST">
+    <figure
+        href="bfbtype.gmfgraph#IFInputVarFigureDescriptor"/>
+  </nodes>
   <nodes
       name="IFOutputVarNode"
-      figure="IFOutputVarFigureDescriptor"/>
+      resizeConstraint="NONE"
+      affixedParentSide="EAST">
+    <figure
+        href="bfbtype.gmfgraph#IFOutputVarFigureDescriptor"/>
+  </nodes>
   <nodes
       name="FBInputEventNode"
-      figure="FBInputEventFigureDescriptor"/>
+      resizeConstraint="NONE"
+      affixedParentSide="WEST">
+    <figure
+        href="bfbtype.gmfgraph#FBEventFigureDescriptor"/>
+  </nodes>
   <nodes
       name="FBOutputEventNode"
-      figure="FBOutputEventFigureDescriptor"/>
+      resizeConstraint="NONE"
+      affixedParentSide="EAST">
+    <figure
+        href="bfbtype.gmfgraph#FBEventFigureDescriptor"/>
+  </nodes>
   <nodes
       name="FBInputVarNode"
-      figure="FBInputVarFigureDescriptor"/>
+      resizeConstraint="NONE"
+      affixedParentSide="WEST">
+    <figure
+        href="bfbtype.gmfgraph#FBVarFigureDescriptor"/>
+  </nodes>
   <nodes
       name="FBOutputVarNode"
-      figure="FBOutputVarFigureDescriptor"/>
+      resizeConstraint="NONE"
+      affixedParentSide="EAST">
+    <figure
+        href="bfbtype.gmfgraph#FBVarFigureDescriptor"/>
+  </nodes>
   <nodes
-      name="FBNode"
-      figure="FBFigureDescriptor"/>
+      name="FBNode">
+    <figure
+        href="bfbtype.gmfgraph#FBFigureDescriptor"/>
+  </nodes>
   <connections
       name="EventConnectionConnection"
       figure="EventConnectionFigureDescriptor"/>
   <connections
-      name="DataConnectionConnection"
-      figure="DataConnectionFigureDescriptor"/>
+      name="DataConnectionConnection">
+    <figure
+        href="bfbtype.gmfgraph#DataConnectionFigureDescriptor"/>
+  </connections>
   <connections
-      name="InputWithConnection"
-      figure="InputWithFigureDescriptor"/>
+      name="InputWithConnection">
+    <figure
+        href="bfbtype.gmfgraph#WithFigureDescriptor"/>
+  </connections>
   <connections
-      name="OutputWithConnection"
-      figure="OutputWithFigureDescriptor"/>
+      name="OutputWithConnection">
+    <figure
+        href="bfbtype.gmfgraph#WithFigureDescriptor"/>
+  </connections>
   <compartments
       name="CFBTypeCompartment"
-      figure="CFBTypeFigureDescriptor"/>
+      collapsible="true">
+    <figure
+        href="bfbtype.gmfgraph#CompartmentFigureDescriptor"/>
+  </compartments>
   <compartments
       name="FBCompartment"
-      figure="FBFigureDescriptor"/>
+      collapsible="true">
+    <figure
+        href="bfbtype.gmfgraph#CompartmentFigureDescriptor"/>
+  </compartments>
   <labels
-      name="IFInputEventNameLabel"
-      figure="IFInputEventFigureDescriptor"
-      elementIcon="false"
-      accessor="//@figures.0/@descriptors.1/@accessors.0"/>
+      name="NameLabelLeft"
+      resizeConstraint="NONE"
+      affixedParentSide="WEST"
+      elementIcon="false">
+    <figure
+        href="bfbtype.gmfgraph#LabelFigureDescriptor"/>
+  </labels>
   <labels
-      name="IFOutputEventNameLabel"
-      figure="IFOutputEventFigureDescriptor"
-      elementIcon="false"
-      accessor="//@figures.0/@descriptors.2/@accessors.0"/>
-  <labels
-      name="IFInputVarNameLabel"
-      figure="IFInputVarFigureDescriptor"
-      elementIcon="false"
-      accessor="//@figures.0/@descriptors.3/@accessors.0"/>
-  <labels
-      name="IFOutputVarNameLabel"
-      figure="IFOutputVarFigureDescriptor"
-      elementIcon="false"
-      accessor="//@figures.0/@descriptors.4/@accessors.0"/>
-  <labels
-      name="FBInputEventNameLabel"
-      figure="FBInputEventFigureDescriptor"
-      elementIcon="false"
-      accessor="//@figures.0/@descriptors.5/@accessors.0"/>
-  <labels
-      name="FBOutputEventNameLabel"
-      figure="FBOutputEventFigureDescriptor"
-      elementIcon="false"
-      accessor="//@figures.0/@descriptors.6/@accessors.0"/>
-  <labels
-      name="FBInputVarNameLabel"
-      figure="FBInputVarFigureDescriptor"
-      elementIcon="false"
-      accessor="//@figures.0/@descriptors.7/@accessors.0"/>
-  <labels
-      name="FBOutputVarNameLabel"
-      figure="FBOutputVarFigureDescriptor"
-      elementIcon="false"
-      accessor="//@figures.0/@descriptors.8/@accessors.0"/>
-  <labels
-      name="CFBTypeNameLabel"
-      figure="CFBTypeFigureDescriptor"
-      elementIcon="false"
-      accessor="//@figures.0/@descriptors.0/@accessors.0"/>
+      name="NameLabelRight"
+      resizeConstraint="NONE"
+      affixedParentSide="EAST"
+      elementIcon="false">
+    <figure
+        href="bfbtype.gmfgraph#LabelFigureDescriptor"/>
+  </labels>
   <labels
       name="FBInstanceNameLabel"
-      figure="FBFigureDescriptor"
-      elementIcon="false"
-      accessor="//@figures.0/@descriptors.11/@accessors.0"/>
+      elementIcon="false">
+    <figure
+        href="bfbtype.gmfgraph#FBFigureDescriptor"/>
+    <accessor
+        href="bfbtype.gmfgraph#//@figures.0/@descriptors.11/@accessors.0"/>
+  </labels>
+  <labels
+      name="FBTypeNameLabel"
+      elementIcon="false">
+    <figure
+        href="bfbtype.gmfgraph#FBFigureDescriptor"/>
+    <accessor
+        href="bfbtype.gmfgraph#//@figures.0/@descriptors.11/@accessors.1"/>
+  </labels>
 </gmfgraph:Canvas>

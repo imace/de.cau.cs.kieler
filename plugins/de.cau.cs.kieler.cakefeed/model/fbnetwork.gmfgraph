@@ -3,29 +3,37 @@
     xmlns:xmi="http://www.omg.org/XMI"
     xmlns:gmfgraph="http://www.eclipse.org/gmf/2006/GraphicalDefinition" name="FBNetworkCanvas">
   <nodes
-      name="FBInputEventNode">
+      name="FBInputEventNode"
+      resizeConstraint="NONE"
+      affixedParentSide="WEST">
     <figure
-        href="cfbtype.gmfgraph#FBInputEventFigureDescriptor"/>
+        href="bfbtype.gmfgraph#FBEventFigureDescriptor"/>
   </nodes>
   <nodes
-      name="FBOutputEventNode">
+      name="FBOutputEventNode"
+      resizeConstraint="NONE"
+      affixedParentSide="EAST">
     <figure
-        href="cfbtype.gmfgraph#FBOutputEventFigureDescriptor"/>
+        href="bfbtype.gmfgraph#FBEventFigureDescriptor"/>
   </nodes>
   <nodes
-      name="FBInputVarNode">
+      name="FBInputVarNode"
+      resizeConstraint="NONE"
+      affixedParentSide="WEST">
     <figure
-        href="cfbtype.gmfgraph#FBInputVarFigureDescriptor"/>
+        href="bfbtype.gmfgraph#FBVarFigureDescriptor"/>
   </nodes>
   <nodes
-      name="FBOutputVarNode">
+      name="FBOutputVarNode"
+      resizeConstraint="NONE"
+      affixedParentSide="EAST">
     <figure
-        href="cfbtype.gmfgraph#FBOutputVarFigureDescriptor"/>
+        href="bfbtype.gmfgraph#FBVarFigureDescriptor"/>
   </nodes>
   <nodes
       name="FBNode">
     <figure
-        href="cfbtype.gmfgraph#FBFigureDescriptor"/>
+        href="bfbtype.gmfgraph#FBFigureDescriptor"/>
   </nodes>
   <connections
       name="EventConnectionConnection">
@@ -35,46 +43,44 @@
   <connections
       name="DataConnectionConnection">
     <figure
-        href="cfbtype.gmfgraph#DataConnectionFigureDescriptor"/>
+        href="bfbtype.gmfgraph#DataConnectionFigureDescriptor"/>
   </connections>
   <compartments
-      name="FBCompartment">
+      name="FBCompartment"
+      collapsible="true">
     <figure
-        href="cfbtype.gmfgraph#FBFigureDescriptor"/>
+        href="bfbtype.gmfgraph#CompartmentFigureDescriptor"/>
   </compartments>
   <labels
-      name="FBInputEventNameLabel">
+      name="NameLabelLeft"
+      resizeConstraint="NONE"
+      affixedParentSide="WEST"
+      elementIcon="false">
     <figure
-        href="cfbtype.gmfgraph#FBInputEventFigureDescriptor"/>
-    <accessor
-        href="cfbtype.gmfgraph#//@figures.0/@descriptors.5/@accessors.0"/>
+        href="bfbtype.gmfgraph#LabelFigureDescriptor"/>
   </labels>
   <labels
-      name="FBOutputEventNameLabel">
+      name="NameLabelRight"
+      resizeConstraint="NONE"
+      affixedParentSide="EAST"
+      elementIcon="false">
     <figure
-        href="cfbtype.gmfgraph#FBOutputEventFigureDescriptor"/>
-    <accessor
-        href="cfbtype.gmfgraph#//@figures.0/@descriptors.6/@accessors.0"/>
+        href="bfbtype.gmfgraph#LabelFigureDescriptor"/>
   </labels>
   <labels
-      name="FBInputVarNameLabel">
+      name="FBInstanceNameLabel"
+      elementIcon="false">
     <figure
-        href="cfbtype.gmfgraph#FBInputVarFigureDescriptor"/>
+        href="bfbtype.gmfgraph#FBFigureDescriptor"/>
     <accessor
-        href="cfbtype.gmfgraph#//@figures.0/@descriptors.7/@accessors.0"/>
+        href="bfbtype.gmfgraph#//@figures.0/@descriptors.11/@accessors.0"/>
   </labels>
   <labels
-      name="FBOutputVarNameLabel">
+      name="FBTypeNameLabel"
+      elementIcon="false">
     <figure
-        href="cfbtype.gmfgraph#FBOutputVarFigureDescriptor"/>
+        href="bfbtype.gmfgraph#FBFigureDescriptor"/>
     <accessor
-        href="cfbtype.gmfgraph#//@figures.0/@descriptors.8/@accessors.0"/>
-  </labels>
-  <labels
-      name="FBInstanceNameLabel">
-    <figure
-        href="cfbtype.gmfgraph#FBFigureDescriptor"/>
-    <accessor
-        href="cfbtype.gmfgraph#//@figures.0/@descriptors.11/@accessors.0"/>
+        href="bfbtype.gmfgraph#//@figures.0/@descriptors.11/@accessors.1"/>
   </labels>
 </gmfgraph:Canvas>
