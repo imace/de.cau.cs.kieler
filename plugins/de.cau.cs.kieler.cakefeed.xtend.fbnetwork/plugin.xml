@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="de.cau.cs.kieler.ksbase.configurations">
+      <configuration
+            XtendFile="src/de.cau.cs.kieler.cakefeed.xtend.transformations/feature.ext"
+            contextId="de.cau.cs.kieler.cakefeed.fbnetwork.diagram.ui.diagramContext"
+            editorId="de.cau.cs.kieler.cakefeed.fbnetwork.diagram.part.CakefeedDiagramEditorID"
+            packageName="de.cau.cs.kieler.cakefeed.CakefeedPackage">
+         <menus>
+            <menuContribution
+                  locationURI="popup:org.eclipse.gmf.runtime.diagram.ui.DiagramEditorContextMenu?after=addGroup">
+               <transformationCommand
+                     transformationId="de.cau.cs.kieler.cakefeed.import">
+               </transformationCommand>
+               <transformationCommand
+                     transformationId="de.cau.cs.kieler.cakefeed.export">
+               </transformationCommand>
+            </menuContribution>
+         </menus>
+         <transformations>
+            <transformation
+                  name="Import"
+                  transformation="fbnetworkxml2gmf"
+                  transformationId="de.cau.cs.kieler.cakefeed.import">
+            </transformation>
+            <transformation
+                  name="Export"
+                  transformation="fbnetworkgmf2xml"
+                  transformationId="de.cau.cs.kieler.cakefeed.export">
+            </transformation>
+         </transformations>
+         <commandHandler
+               class="de.cau.cs.kieler.cakefeed.xtend.handler.CakefeedTransformationCommandHandler">
+         </commandHandler>
+      </configuration>
+   </extension>
+
+</plugin>
