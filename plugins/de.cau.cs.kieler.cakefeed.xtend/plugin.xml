@@ -2,39 +2,44 @@
 <?eclipse version="3.4"?>
 <plugin>
    <extension
-         point="de.cau.cs.kieler.ksbase.configurations">
-      <configuration
-            XtendFile="src/de.cau.cs.kieler.cakefeed.ksbase.transformations/feature.ext"
-            contextId="de.cau.cs.kieler.cakefeed.bfbtype.diagram.ui.diagramContext"
-            editorId="de.cau.cs.kieler.cakefeed.bfbtype.diagram.part.CakefeedDiagramEditorID"
-            packageName="de.cau.cs.kieler.cakefeed.CakefeedPackage">
-         <menus>
-            <menuContribution
-                  locationURI="popup:org.eclipse.gmf.runtime.diagram.ui.DiagramEditorContextMenu?after=addGroup">
-               <transformationCommand
-                     transformationId="de.cau.cs.kieler.cakefeed.import">
-               </transformationCommand>
-               <transformationCommand
-                     transformationId="de.cau.cs.kieler.cakefeed.export">
-               </transformationCommand>
-            </menuContribution>
-         </menus>
-         <transformations>
-            <transformation
-                  name="Import"
-                  transformation="BFBxml2gmf"
-                  transformationId="de.cau.cs.kieler.cakefeed.import">
-            </transformation>
-            <transformation
-                  name="Export"
-                  transformation="BFBgmf2xml"
-                  transformationId="de.cau.cs.kieler.cakefeed.export">
-            </transformation>
-         </transformations>
-         <commandHandler
-               class="de.cau.cs.kieler.cakefeed.xtend.handler.CakefeedTransformationCommandHandler">
-         </commandHandler>
-      </configuration>
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="popup:org.eclipse.gmf.runtime.diagram.ui.DiagramEditorContextMenu?after=addGroup">
+         <command
+               commandId="de.cau.cs.kieler.cakefeed.xtend.import"
+               label="Import"
+               style="push"
+               tooltip="Import FunctionBlocks which are stored in XML format.">
+         </command>
+         <command
+               commandId="de.cau.cs.kieler.cakefeed.xtend.export"
+               label="Export"
+               style="push"
+               tooltip="Export FunctionBlocks to XML format.">
+         </command>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <category
+            description="Commands related to CAKeFEED diagrams."
+            id="org.eclipse.gmf.category.cakefeed"
+            name="CAKeFEED">
+      </category>
+      <command
+            categoryId="org.eclipse.gmf.category.cakefeed"
+            defaultHandler="de.cau.cs.kieler.cakefeed.xtend.handler.CakefeedTransformationCommandHandler"
+            description="Imports FunctionBlocks which are stored in XML format."
+            id="de.cau.cs.kieler.cakefeed.ImportAction"
+            name="Import">
+      </command>
+      <command
+            categoryId="org.eclipse.gmf.category.cakefeed"
+            defaultHandler="de.cau.cs.kieler.cakefeed.xtend.handler.CakefeedTransformationCommandHandler"
+            description="Exports FunctionBlocks to XML format."
+            id="de.cau.cs.kieler.cakefeed.ExportAction"
+            name="Export">
+      </command>
    </extension>
 
 </plugin>
