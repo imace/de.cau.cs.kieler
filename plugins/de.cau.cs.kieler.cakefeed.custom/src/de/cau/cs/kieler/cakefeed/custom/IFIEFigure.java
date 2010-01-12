@@ -1,7 +1,12 @@
 package de.cau.cs.kieler.cakefeed.custom;
 
-import org.eclipse.draw2d.Figure;
 
-public class IFIEFigure extends Figure {
+public class IFIEFigure extends PortFigure {
 
+	public IFIEFigure() {
+		reverse = false;
+		this.setForegroundColor(org.eclipse.draw2d.ColorConstants.black);
+		this.setBackgroundColor(org.eclipse.draw2d.ColorConstants.blue);
+	}
+	
 }
