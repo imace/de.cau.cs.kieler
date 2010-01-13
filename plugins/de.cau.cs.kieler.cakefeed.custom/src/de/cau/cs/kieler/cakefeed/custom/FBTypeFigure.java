@@ -7,6 +7,7 @@ import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
+import org.eclipse.emf.common.notify.impl.NotificationImpl;
 import org.eclipse.emf.ecore.EObject;
 
 import de.cau.cs.kieler.cakefeed.FBType;
@@ -16,6 +17,24 @@ public class FBTypeFigure extends Shape implements Adapter {
 	protected EObject modelElement;
 	protected int numOfEvents;
 	protected int numOfVars;
+	
+	public FBTypeFigure() {
+		super();
+		notifyChanged(new NotificationImpl(0, false, false)); 
+			// Notification is not important
+	}
+	
+	public EObject getModelElement() {
+		return modelElement;
+	}
+	
+	public int getNumOfEvents() {
+		return numOfEvents;
+	}
+	
+	public int getNumOfVars() {
+		return numOfVars;
+	}
 	
 	@Override
 	protected void fillShape(Graphics graphics) {

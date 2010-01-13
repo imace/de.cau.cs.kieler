@@ -11,6 +11,10 @@ public class PortFigure extends Shape {
 	protected final int portWidth = 6;
 	protected final int portHeight = 6;
 	
+	public PortFigure() {
+		super();
+	}
+	
 	@Override
 	protected void fillShape(Graphics graphics) {
 		graphics.fillRectangle(computePortBounds(getBounds()));
