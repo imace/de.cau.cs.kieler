@@ -26,8 +26,8 @@
 				}
 			}«ENDIF»;
 			«REM» added conditional setting of adapter target «ENDREM»
-			if (primaryShape instanceof de.cau.cs.kieler.core.ui.figures.IAttributeAwareFigure) {
-				((de.cau.cs.kieler.core.ui.figures.IAttributeAwareFigure) primaryShape).listenTo(this.getNotationView().getElement());
+			if (primaryShape instanceof de.cau.cs.kieler.cakefeed.custom.FBTypeFigure) {
+				((de.cau.cs.kieler.cakefeed.custom.FBTypeFigure) primaryShape).listenTo(this.getNotationView().getElement());
 			}
 			return primaryShape;
 		}
@@ -41,8 +41,8 @@
 	protected org.eclipse.draw2d.IFigure createNodeShape() {
 		org.eclipse.draw2d.IFigure figure = new «className»();
 		«REM» added conditional setting of adapter target «ENDREM»
-		if (figure instanceof de.cau.cs.kieler.core.ui.figures.IAttributeAwareFigure) {
-			((de.cau.cs.kieler.core.ui.figures.IAttributeAwareFigure) figure).listenTo(this.getNotationView().getElement());
+		if (figure instanceof de.cau.cs.kieler.cakefeed.custom.FBTypeFigure) {
+			((de.cau.cs.kieler.cakefeed.custom.FBTypeFigure) figure).listenTo(this.getNotationView().getElement());
 		}
 		«IF node.childNodes->size() > 0 and node.getLayoutType() = gmfgen::ViewmapLayoutType::XY_LAYOUT-»
  		figure.setUseLocalCoordinates(true);

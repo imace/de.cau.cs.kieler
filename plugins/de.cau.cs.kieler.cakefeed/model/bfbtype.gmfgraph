@@ -14,6 +14,14 @@
         <layout
             xsi:type="gmfgraph:CustomLayout"
             qualifiedClassName="de.cau.cs.kieler.cakefeed.custom.FBTypeLayout"/>
+        <border
+            xsi:type="gmfgraph:MarginBorder">
+          <insets
+              top="5"
+              left="5"
+              bottom="5"
+              right="5"/>
+        </border>
         <children
             xsi:type="gmfgraph:Label"
             name="BFBTypeNameLabel"/>
@@ -189,6 +197,14 @@
         <layout
             xsi:type="gmfgraph:CustomLayout"
             qualifiedClassName="de.cau.cs.kieler.cakefeed.custom.FBLayout"/>
+        <border
+            xsi:type="gmfgraph:MarginBorder">
+          <insets
+              top="5"
+              left="5"
+              bottom="5"
+              right="5"/>
+        </border>
         <children
             xsi:type="gmfgraph:Label"
             name="FBInstanceNameLabel"/>
