@@ -1,12 +1,14 @@
 package de.cau.cs.kieler.cakefeed.custom;
 
+import org.eclipse.draw2d.ColorConstants;
+
 public class IFOEFigure extends PortFigure{
 
 	public IFOEFigure() {
 		super();
 		reverse = true;
-		this.setForegroundColor(org.eclipse.draw2d.ColorConstants.black);
-		this.setBackgroundColor(org.eclipse.draw2d.ColorConstants.red);
+		this.fgrdcolor = ColorConstants.black;
+		this.bgrdcolor = ColorConstants.red;
 	}
 	
 }

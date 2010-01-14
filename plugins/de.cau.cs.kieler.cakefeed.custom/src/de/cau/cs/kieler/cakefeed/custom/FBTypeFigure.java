@@ -46,25 +46,32 @@ public class FBTypeFigure extends Shape implements Adapter {
 
 	private PointList computePoints(Rectangle bounds) {
 		int s = numOfEvents + numOfVars + 1;
-		int h0 = bounds.height / s * (numOfEvents);
-		int h1 = bounds.height / s * (numOfEvents + 1);
-		int o = bounds.width / 6;
-		int w0 = bounds.width - o;
-		int w1 = bounds.x + o;
+		
+		int w = bounds.width;
+		int h = bounds.height;
+		
+		int x0 = bounds.x;
+		int y0 = bounds.y;
+		int x1 = x0 + w / 10;
+		int y1 = y0 + h / s * numOfEvents;
+		int x2 = x0 + w - w / 10;
+		int y2 = y0 + h / s * (numOfEvents + 1);
+		int x3 = x0 + w;
+		int y3 = y0 + h;
 		
 		PointList pointList = new PointList();
-		pointList.addPoint(bounds.x, bounds.y);
-		pointList.addPoint(bounds.width, bounds.y);
-		pointList.addPoint(bounds.width, h0);
-		pointList.addPoint(w0, h0);
-		pointList.addPoint(w0, h1);
-		pointList.addPoint(bounds.width, h1);
-		pointList.addPoint(bounds.width, bounds.height);
-		pointList.addPoint(bounds.x, bounds.height);
-		pointList.addPoint(bounds.x, h1);
-		pointList.addPoint(w1, h1);
-		pointList.addPoint(w1, h0);
-		pointList.addPoint(bounds.x, h0);
+		pointList.addPoint(x0, y0);
+		pointList.addPoint(x3, y0);
+		pointList.addPoint(x3, y1);
+		pointList.addPoint(x2, y1);
+		pointList.addPoint(x2, y2);
+		pointList.addPoint(x3, y2);
+		pointList.addPoint(x3, y3);
+		pointList.addPoint(x0, y3);
+		pointList.addPoint(x0, y2);
+		pointList.addPoint(x1, y2);
+		pointList.addPoint(x1, y1);
+		pointList.addPoint(x0, y1);
 		return pointList;
 	}
 
