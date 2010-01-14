@@ -72,7 +72,7 @@
           name="RedRectangle">
         <foregroundColor
             xsi:type="gmfgraph:ConstantColor"
-            value="red"/>
+            value="black"/>
         <backgroundColor
             xsi:type="gmfgraph:ConstantColor"
             value="red"/>
@@ -90,7 +90,7 @@
           name="BlueRectangle">
         <foregroundColor
             xsi:type="gmfgraph:ConstantColor"
-            value="blue"/>
+            value="black"/>
         <backgroundColor
             xsi:type="gmfgraph:ConstantColor"
             value="blue"/>
@@ -269,12 +269,10 @@
             xsi:type="gmfgraph:ConstantColor"
             value="blue"/>
         <template
-            x="1"
             y="1"/>
         <template
             x="-1"/>
         <template
-            x="1"
             y="-1"/>
       </actualFigure>
     </descriptors>
@@ -292,8 +290,7 @@
         <template
             x="-1"
             y="1"/>
-        <template
-            x="1"/>
+        <template/>
         <template
             x="-1"
             y="-1"/>
