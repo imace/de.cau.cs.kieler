@@ -36,132 +36,83 @@
 			if ((feat != null) && (feat instanceof org.eclipse.emf.ecore.impl.EReferenceImpl)) {
 				org.eclipse.emf.ecore.impl.EReferenceImpl ref = (org.eclipse.emf.ecore.impl.EReferenceImpl)feat;
 				String name = ref.getName();
-				if ((name != null) && (name.equals("Type"))) {
+				if ((name != null) && (name.equals("type"))) {
 					Object newValue = notification.getNewValue();
 					if ((newValue != null)
 						&& ((newValue instanceof de.cau.cs.kieler.cakefeed.impl.CFBTypeImpl) 
 							|| (newValue instanceof de.cau.cs.kieler.cakefeed.impl.BFBTypeImpl))) {
 						
-						org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeCompartmentEditPart compartment = null;
 						java.util.List children = this.getChildren();
-						for (Object c : children) {
-							if (c instanceof org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeCompartmentEditPart) {
-								compartment = (org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeCompartmentEditPart)c;
-							}
+						
+						org.eclipse.emf.common.util.EList inputEvents = null;
+						org.eclipse.emf.common.util.EList outputEvents = null;
+						org.eclipse.emf.common.util.EList inputVars = null;
+						org.eclipse.emf.common.util.EList outputVars = null;
+						
+						de.cau.cs.kieler.cakefeed.impl.FBTypeImpl t = (de.cau.cs.kieler.cakefeed.impl.FBTypeImpl)newValue;
+						
+						org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel typeNameLabel = null;
+						
+						if (newValue instanceof de.cau.cs.kieler.cakefeed.impl.CFBTypeImpl) {
+							de.cau.cs.kieler.cakefeed.impl.CFBTypeImpl type = (de.cau.cs.kieler.cakefeed.impl.CFBTypeImpl)newValue;
+							inputEvents = type.getInputEvents();
+							outputEvents = type.getOutputEvents();
+							inputVars = type.getInputVars();
+							outputVars = type.getOutputVars();
+						}
+						else {
+							de.cau.cs.kieler.cakefeed.impl.BFBTypeImpl type = (de.cau.cs.kieler.cakefeed.impl.BFBTypeImpl)newValue;
+							inputEvents = type.getInputEvents();
+							outputEvents = type.getOutputEvents();
+							inputVars = type.getInputVars();
+							outputVars = type.getOutputVars();
 						}
 						
-						if (compartment != null) {
-							org.eclipse.emf.common.util.EList inputEvents = null;
-							org.eclipse.emf.common.util.EList outputEvents = null;
-							org.eclipse.emf.common.util.EList inputVars = null;
-							org.eclipse.emf.common.util.EList outputVars = null;
+						// Delete old Events and Vars
+						de.cau.cs.kieler.cakefeed.FB fB = (de.cau.cs.kieler.cakefeed.FB)((org.eclipse.gmf.runtime.notation.View)this.getModel()).getElement();
+						
+						this.getDiagramEditDomain().getDiagramCommandStack().execute(
+							new FBDeleteEventsAndVarsCommand("deleteEventsAndVariables", fB));
+						// End of Delete old Events and Vars
+						
+						if ((inputEvents != null) 
+							&& (outputEvents != null) 
+							&& (inputVars != null) 
+							&& (outputVars != null)) {
+							org.eclipse.emf.common.util.EList[] lists = new org.eclipse.emf.common.util.EList[4];
+							lists[0] = inputEvents;
+							lists[1] = outputEvents;
+							lists[2] = inputVars;
+							lists[3] = outputVars;
 							
-							de.cau.cs.kieler.cakefeed.impl.FBTypeImpl t = (de.cau.cs.kieler.cakefeed.impl.FBTypeImpl)newValue;
-							
-							org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel typeNameLabel = null;
-							for (Object o : compartment.getChildren()) {
-								if (o instanceof org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel) {
-									typeNameLabel = (org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel)o;
-									typeNameLabel.setText(t.getName());
-								}
-							}
-							
-							if (newValue instanceof de.cau.cs.kieler.cakefeed.impl.CFBTypeImpl) {
-								de.cau.cs.kieler.cakefeed.impl.CFBTypeImpl type = (de.cau.cs.kieler.cakefeed.impl.CFBTypeImpl)newValue;
-								inputEvents = type.getInputEvents();
-								outputEvents = type.getOutputEvents();
-								inputVars = type.getInputVars();
-								outputVars = type.getOutputVars();
-							}
-							else {
-								de.cau.cs.kieler.cakefeed.impl.BFBTypeImpl type = (de.cau.cs.kieler.cakefeed.impl.BFBTypeImpl)newValue;
-								inputEvents = type.getInputEvents();
-								outputEvents = type.getOutputEvents();
-								inputVars = type.getInputVars();
-								outputVars = type.getOutputVars();
-							}
-							
-							// Delete old Events and Vars
-							de.cau.cs.kieler.cakefeed.FB fB = (de.cau.cs.kieler.cakefeed.FB)((org.eclipse.gmf.runtime.notation.View)this.getModel()).getElement();
-							
-							
-							compartment.getDiagramEditDomain().getDiagramCommandStack().execute(
-								new FBDeleteEventsAndVarsCommand("deleteEventsAndVariables", fB));
-							
-							/*EList[] oldLists = new EList[4];
-							oldLists[0] = fB.getInputEvents();
-							oldLists[1] = fB.getOutputEvents();
-							oldLists[2] = fB.getInputVars();
-							oldLists[3] = fB.getOutputVars();*/
-							
-							//--------new try
-							/*
-							EList<FBInputEvent> emptyFBIEList = new BasicEList<FBInputEvent>();
-							EList<FBOutputEvent> emptyFBOEList = new BasicEList<FBOutputEvent>();
-							EList<FBInputVar> emptyFBIVList = new BasicEList<FBInputVar>();
-							EList<FBOutputVar> emptyFBOVList = new BasicEList<FBOutputVar>();
-							
-							ChangeChildPropertyValueRequest deleteFBIERequest = new ChangeChildPropertyValueRequest("", "", emptyFBIEList, "");
-							ChangeChildPropertyValueRequest deleteFBOERequest = new ChangeChildPropertyValueRequest("", "", emptyFBOEList, "");
-							ChangeChildPropertyValueRequest deleteFBIVRequest = new ChangeChildPropertyValueRequest("", "", emptyFBIVList, "");
-							ChangeChildPropertyValueRequest deleteFBOVRequest = new ChangeChildPropertyValueRequest("", "", emptyFBOVList, "");
-							*/
-							//--------end of new try
-							
-							/*for (int i = 0; i < 4; i++) {
-								EList<EObject> l = oldLists[i];
-								for (EObject o : l) {
-									//Request deleteRequest = null;
-									//Command deleteCmd = compartment.getCommand(deleteRequest);
-									compartment.getDiagramEditDomain().getDiagramCommandStack().execute(
-											new Command("deleteEventsAndVariables") {
-												protected void doExecute() {
-													// delete o
-													
-												}
-											});
-								}
-							}*/
-							// End of Delete old Events and Vars
-							
-							if ((inputEvents != null) 
-								&& (outputEvents != null) 
-								&& (inputVars != null) 
-								&& (outputVars != null)) {
-								org.eclipse.emf.common.util.EList[] lists = new org.eclipse.emf.common.util.EList[4];
-								lists[0] = inputEvents;
-								lists[1] = outputEvents;
-								lists[2] = inputVars;
-								lists[3] = outputVars;
-								
-								for (int i = 0; i < 4; i++) {
-									org.eclipse.emf.common.util.EList<org.eclipse.emf.ecore.EObject> list = lists[i];
-									for (org.eclipse.emf.ecore.EObject o : list) {
-										org.eclipse.gmf.runtime.emf.type.core.IElementType elementType = null;
-										if (o instanceof de.cau.cs.kieler.cakefeed.IFInputEvent) {
-											elementType = de.cau.cs.kieler.cakefeed.bfbtype.diagram.providers.CakefeedElementTypes.FBInputEvent_3020;
-										}
-										else if (o instanceof de.cau.cs.kieler.cakefeed.IFOutputEvent) {
-											elementType = de.cau.cs.kieler.cakefeed.bfbtype.diagram.providers.CakefeedElementTypes.FBOutputEvent_3021;
-										}
-										else if (o instanceof de.cau.cs.kieler.cakefeed.IFInputVar) {
-											elementType = de.cau.cs.kieler.cakefeed.bfbtype.diagram.providers.CakefeedElementTypes.FBInputVar_3022;
-										}
-										else if (o instanceof de.cau.cs.kieler.cakefeed.IFOutputVar) {
-											elementType = de.cau.cs.kieler.cakefeed.bfbtype.diagram.providers.CakefeedElementTypes.FBOutputVar_3023;
-										}
-										if ((compartment != null) && (elementType != null)) {
-											org.eclipse.gmf.runtime.diagram.ui.requests.CreateViewRequest createRequest = org.eclipse.gmf.runtime.diagram.ui.requests.CreateViewRequestFactory.getCreateShapeRequest(elementType, this.getDiagramPreferencesHint());
-											org.eclipse.gef.commands.Command createCmd = compartment.getCommand(createRequest);
-											compartment.getDiagramEditDomain().getDiagramCommandStack().execute(createCmd);									
-										}
+							for (int i = 0; i < 4; i++) {
+								org.eclipse.emf.common.util.EList<org.eclipse.emf.ecore.EObject> list = lists[i];
+								for (org.eclipse.emf.ecore.EObject o : list) {
+									org.eclipse.gmf.runtime.emf.type.core.IElementType elementType = null;
+									if (o instanceof de.cau.cs.kieler.cakefeed.IFInputEvent) {
+										elementType = de.cau.cs.kieler.cakefeed.bfbtype.diagram.providers.CakefeedElementTypes.FBInputEvent_3031;
+									}
+									else if (o instanceof de.cau.cs.kieler.cakefeed.IFOutputEvent) {
+										elementType = de.cau.cs.kieler.cakefeed.bfbtype.diagram.providers.CakefeedElementTypes.FBOutputEvent_3032;
+									}
+									else if (o instanceof de.cau.cs.kieler.cakefeed.IFInputVar) {
+										elementType = de.cau.cs.kieler.cakefeed.bfbtype.diagram.providers.CakefeedElementTypes.FBInputVar_3033;
+									}
+									else if (o instanceof de.cau.cs.kieler.cakefeed.IFOutputVar) {
+										elementType = de.cau.cs.kieler.cakefeed.bfbtype.diagram.providers.CakefeedElementTypes.FBOutputVar_3034;
+									}
+									if (elementType != null) {
+										org.eclipse.gmf.runtime.diagram.ui.requests.CreateViewRequest createRequest = org.eclipse.gmf.runtime.diagram.ui.requests.CreateViewRequestFactory.getCreateShapeRequest(elementType, this.getDiagramPreferencesHint());
+										org.eclipse.gef.commands.Command createCmd = this.getCommand(createRequest);
+										this.getDiagramEditDomain().getDiagramCommandStack().execute(createCmd);									
 									}
 								}
-								// Adapt Events and Variables
-								compartment.getDiagramEditDomain().getDiagramCommandStack().execute(
-										new FBAdaptEventsAndVarsCommand("adaptEventsAndVariables", fB, t));
 							}
-						}	
+							// Adapt Events and Variables
+							this.getDiagramEditDomain().getDiagramCommandStack().execute(
+									new FBAdaptEventsAndVarsCommand("adaptEventsAndVariables", fB, t));
+						}
+						
 					}
 				}
 			}

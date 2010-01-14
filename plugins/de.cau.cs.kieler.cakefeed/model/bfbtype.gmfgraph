@@ -69,13 +69,13 @@
         name="FBEventFigureDescriptor">
       <actualFigure
           xsi:type="gmfgraph:Rectangle"
-          name="BlueRectangle">
+          name="RedRectangle">
         <foregroundColor
             xsi:type="gmfgraph:ConstantColor"
-            value="blue"/>
+            value="red"/>
         <backgroundColor
             xsi:type="gmfgraph:ConstantColor"
-            value="blue"/>
+            value="red"/>
         <preferredSize
             dx="6"
             dy="6"/>
@@ -87,13 +87,13 @@
         name="FBVarFigureDescriptor">
       <actualFigure
           xsi:type="gmfgraph:Rectangle"
-          name="RedRectangle">
+          name="BlueRectangle">
         <foregroundColor
             xsi:type="gmfgraph:ConstantColor"
-            value="red"/>
+            value="blue"/>
         <backgroundColor
             xsi:type="gmfgraph:ConstantColor"
-            value="red"/>
+            value="blue"/>
         <preferredSize
             dx="6"
             dy="6"/>
@@ -258,37 +258,16 @@
       </actualFigure>
     </descriptors>
     <descriptors
-        name="RedTriangleDecoration">
+        name="BlueTriangleDecoration">
       <actualFigure
           xsi:type="gmfgraph:PolygonDecoration"
-          name="RedTriangle">
+          name="BlueTriangle">
         <foregroundColor
             xsi:type="gmfgraph:ConstantColor"
-            value="red"/>
+            value="blue"/>
         <backgroundColor
             xsi:type="gmfgraph:ConstantColor"
-            value="red"/>
-        <template
-            x="-1"
-            y="1"/>
-        <template
-            x="1"/>
-        <template
-            x="-1"
-            y="-1"/>
-      </actualFigure>
-    </descriptors>
-    <descriptors
-        name="RedTriangleDecorationRev">
-      <actualFigure
-          xsi:type="gmfgraph:PolygonDecoration"
-          name="RedTriangleReverse">
-        <foregroundColor
-            xsi:type="gmfgraph:ConstantColor"
-            value="red"/>
-        <backgroundColor
-            xsi:type="gmfgraph:ConstantColor"
-            value="red"/>
+            value="blue"/>
         <template
             x="1"
             y="1"/>
@@ -300,18 +279,39 @@
       </actualFigure>
     </descriptors>
     <descriptors
+        name="BlueTriangleDecorationRev">
+      <actualFigure
+          xsi:type="gmfgraph:PolygonDecoration"
+          name="BlueTriangleRev">
+        <foregroundColor
+            xsi:type="gmfgraph:ConstantColor"
+            value="blue"/>
+        <backgroundColor
+            xsi:type="gmfgraph:ConstantColor"
+            value="blue"/>
+        <template
+            x="-1"
+            y="1"/>
+        <template
+            x="1"/>
+        <template
+            x="-1"
+            y="-1"/>
+      </actualFigure>
+    </descriptors>
+    <descriptors
         name="DataConnectionFigureDescriptor">
       <actualFigure
           xsi:type="gmfgraph:PolylineConnection"
-          name="RedPolylineConnection"
+          name="BluePolylineConnection"
           sourceDecoration="//@figures.0/@descriptors.14/@actualFigure"
           targetDecoration="//@figures.0/@descriptors.15/@actualFigure">
         <foregroundColor
             xsi:type="gmfgraph:ConstantColor"
-            value="red"/>
+            value="blue"/>
         <backgroundColor
             xsi:type="gmfgraph:ConstantColor"
-            value="red"/>
+            value="blue"/>
       </actualFigure>
     </descriptors>
     <descriptors
