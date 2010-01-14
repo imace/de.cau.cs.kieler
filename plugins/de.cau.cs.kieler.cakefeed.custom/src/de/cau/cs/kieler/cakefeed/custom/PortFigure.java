@@ -17,6 +17,7 @@ public class PortFigure extends Shape {
 	
 	public PortFigure() {
 		super();
+		this.setPreferredSize(36, 6);
 	}
 	
 	@Override
