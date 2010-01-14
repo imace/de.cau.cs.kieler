@@ -4,15 +4,17 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:gmfgen="http://www.eclipse.org/gmf/2009/GenModel" packageNamePrefix="de.cau.cs.kieler.cakefeed.fbnetwork.diagram"
     modelID="FBNetwork"
+    diagramFileExtension="fbnetwork_diagram"
     domainFileExtension="fbnetwork"
     dynamicTemplates="true"
-    templateDirectory="de.cau.cs.kieler.cakefeed/gmf-templates/">
+    templateDirectory="de.cau.cs.kieler.cakefeed/gmf-templates">
   <diagram
       visualID="1000"
       editPartClassName="FBNetworkEditPart"
       itemSemanticEditPolicyClassName="FBNetworkItemSemanticEditPolicy"
       canonicalEditPolicyClassName="FBNetworkCanonicalEditPolicy"
       iconProviderPriority="Low"
+      creationWizardCategoryID="de.cau.cs.kieler"
       validationProviderPriority="Low">
     <diagramRunTimeClass
         href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Diagram"/>
@@ -443,7 +445,11 @@
     </preferencePages>
   </diagram>
   <plugin
-      iD="de.cau.cs.kieler.cakefeed.fbnetwork.diagram">
+      iD="de.cau.cs.kieler.cakefeed.fbnetwork.diagram"
+      name="FBNetwork Diagram Editor"
+      provider="Christian-Albrechts-University of Kiel"
+      version="0.1.0.qualifier"
+      printingEnabled="true">
     <requiredPlugins>org.eclipse.draw2d</requiredPlugins>
     <requiredPlugins>org.eclipse.gmf.runtime.draw2d.ui</requiredPlugins>
     <requiredPlugins>de.cau.cs.kieler.cakefeed.custom</requiredPlugins>

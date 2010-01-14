@@ -143,6 +143,7 @@
         </ownedChild>
       </children>
       <children
+          compartment="//@nodes.0/@ownedChild/@compartments.0"
           referencedChild="//@nodes.0/@ownedChild/@children.5/@ownedChild">
         <containmentFeature
             href="cakefeed.ecore#//BFBType/functionBlockDiagrams"/>
@@ -355,7 +356,7 @@
         </ownedChild>
       </children>
       <compartments
-          children="//@nodes.0/@ownedChild/@children.6 //@nodes.0/@ownedChild/@children.7 //@nodes.0/@ownedChild/@children.8">
+          children="//@nodes.0/@ownedChild/@children.6 //@nodes.0/@ownedChild/@children.7 //@nodes.0/@ownedChild/@children.8 //@nodes.0/@ownedChild/@children.5">
         <compartment
             href="bfbtype.gmfgraph#BFBTypeCompartment"/>
       </compartments>

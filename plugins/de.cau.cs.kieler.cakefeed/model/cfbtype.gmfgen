@@ -4,15 +4,17 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:gmfgen="http://www.eclipse.org/gmf/2009/GenModel" packageNamePrefix="de.cau.cs.kieler.cakefeed.cfbtype.diagram"
     modelID="CFBType"
+    diagramFileExtension="cfbtype_diagram"
     domainFileExtension="cfbtype"
     dynamicTemplates="true"
-    templateDirectory="de.cau.cs.kieler.cakefeed/gmf-templates/">
+    templateDirectory="de.cau.cs.kieler.cakefeed/gmf-templates">
   <diagram
       visualID="1000"
       editPartClassName="CFBDiagramEditPart"
       itemSemanticEditPolicyClassName="CFBDiagramItemSemanticEditPolicy"
       canonicalEditPolicyClassName="CFBDiagramCanonicalEditPolicy"
       iconProviderPriority="Low"
+      creationWizardCategoryID="de.cau.cs.kieler"
       validationProviderPriority="Low">
     <diagramRunTimeClass
         href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Diagram"/>
@@ -629,7 +631,7 @@
         <sourceMetaFeature
             href="cakefeed.genmodel#//cakefeed/InputWith/parentInputEvent"/>
         <targetMetaFeature
-            href="cakefeed.genmodel#//cakefeed/InputWith/parentInputEvent"/>
+            href="cakefeed.genmodel#//cakefeed/InputWith/with"/>
       </modelFacet>
     </links>
     <links
@@ -1019,7 +1021,11 @@
     </preferencePages>
   </diagram>
   <plugin
-      iD="de.cau.cs.kieler.cakefeed.cfbtype.diagram">
+      iD="de.cau.cs.kieler.cakefeed.cfbtype.diagram"
+      name="CFBType Diagram Editor"
+      provider="Christian-Albrechts-University of Kiel"
+      version="0.1.0.qualifier"
+      printingEnabled="true">
     <requiredPlugins>org.eclipse.draw2d</requiredPlugins>
     <requiredPlugins>org.eclipse.gmf.runtime.draw2d.ui</requiredPlugins>
     <requiredPlugins>de.cau.cs.kieler.cakefeed.custom</requiredPlugins>
@@ -1065,12 +1071,12 @@
         groupIcon="icons/linksNavigatorGroup.gif"/>
     <childReferences
         parent="//@diagram/@links.0"
-        child="//@diagram/@childNodes.0"
+        child="//@diagram/@childNodes.2"
         referenceType="out_target"
         groupName="target"
         groupIcon="icons/linkTargetNavigatorGroup.gif"/>
     <childReferences
-        parent="//@diagram/@childNodes.0"
+        parent="//@diagram/@childNodes.2"
         child="//@diagram/@links.0"
         referenceType="in_source"
         groupName="incoming links"

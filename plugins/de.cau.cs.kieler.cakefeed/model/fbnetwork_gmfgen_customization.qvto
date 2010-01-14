@@ -1,0 +1,38 @@
+modeltype GMFGEN uses gmfgen('http://www.eclipse.org/gmf/2009/GenModel');
+
+transformation FBNetworkCustomization(inout gmfgen:GMFGEN);
+
+main() {
+	var model := gmfgen.rootObjects()![GenEditorGenerator];
+	
+	model.dynamicTemplates :=true;
+	model.templateDirectory := "de.cau.cs.kieler.cakefeed/gmf-templates";
+	model.sameFileForDiagramAndModel := false;
+	
+	model.packageNamePrefix := "de.cau.cs.kieler.cakefeed.fbnetwork.diagram";
+	model.modelID := "FBNetwork";
+	
+	model.domainFileExtension := "fbnetwork";
+	model.diagramFileExtension := "fbnetwork_diagram";
+	
+	model.plugin.iD := "de.cau.cs.kieler.cakefeed.fbnetwork.diagram";
+	model.plugin.requiredPlugins += "de.cau.cs.kieler.cakefeed.custom";
+	model.plugin.version := "0.1.0.qualifier";
+	model.plugin.provider := "Christian-Albrechts-University of Kiel";
+	model.plugin.name := "FBNetwork Diagram Editor";
+	model.plugin.printingEnabled := true;
+	
+	model.diagram.creationWizardCategoryID := "de.cau.cs.kieler";
+	
+	model.diagram.allSubobjectsOfType(GenCompartment)[GenCompartment] ->map compartmentSettings();
+
+}
+
+mapping inout GenCompartment::compartmentSettings(){
+
+	self.canCollapse := true;
+	self.hideIfEmpty := true;
+	self.listLayout := false;
+	self.needsTitle := false;
+	
+}

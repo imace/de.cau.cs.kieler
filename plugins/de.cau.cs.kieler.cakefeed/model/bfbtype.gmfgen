@@ -4,15 +4,17 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:gmfgen="http://www.eclipse.org/gmf/2009/GenModel" packageNamePrefix="de.cau.cs.kieler.cakefeed.bfbtype.diagram"
     modelID="BFBType"
+    diagramFileExtension="bfbtype_diagram"
     domainFileExtension="bfbtype"
     dynamicTemplates="true"
-    templateDirectory="de.cau.cs.kieler.cakefeed/gmf-templates/">
+    templateDirectory="de.cau.cs.kieler.cakefeed/gmf-templates">
   <diagram
       visualID="1000"
       editPartClassName="BFBDiagramEditPart"
       itemSemanticEditPolicyClassName="BFBDiagramItemSemanticEditPolicy"
       canonicalEditPolicyClassName="BFBDiagramCanonicalEditPolicy"
       iconProviderPriority="Low"
+      creationWizardCategoryID="de.cau.cs.kieler"
       validationProviderPriority="Low">
     <diagramRunTimeClass
         href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Diagram"/>
@@ -307,7 +309,7 @@
         compartments="//@diagram/@compartments.1"
         graphicalNodeEditPolicyClassName="FBDGraphicalNodeEditPolicy"
         createCommandClassName="FBDCreateCommand"
-        containers="//@diagram/@topLevelNodes.0">
+        containers="//@diagram/@compartments.0">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <elementType
@@ -798,7 +800,7 @@
         editPartClassName="BFBTypeEditPart"
         itemSemanticEditPolicyClassName="BFBTypeItemSemanticEditPolicy"
         canonicalEditPolicyClassName="BFBTypeCanonicalEditPolicy"
-        childNodes="//@diagram/@childNodes.0 //@diagram/@childNodes.1 //@diagram/@childNodes.2 //@diagram/@childNodes.3 //@diagram/@childNodes.4 //@diagram/@childNodes.5"
+        childNodes="//@diagram/@childNodes.0 //@diagram/@childNodes.1 //@diagram/@childNodes.2 //@diagram/@childNodes.3 //@diagram/@childNodes.4"
         compartments="//@diagram/@compartments.0"
         graphicalNodeEditPolicyClassName="BFBTypeGraphicalNodeEditPolicy"
         createCommandClassName="BFBTypeCreateCommand">
@@ -946,7 +948,7 @@
         editPartClassName="BFBTypeBFBTypeCompartmentEditPart"
         itemSemanticEditPolicyClassName="BFBTypeBFBTypeCompartmentItemSemanticEditPolicy"
         canonicalEditPolicyClassName="BFBTypeBFBTypeCompartmentCanonicalEditPolicy"
-        childNodes="//@diagram/@childNodes.11 //@diagram/@childNodes.12 //@diagram/@childNodes.13"
+        childNodes="//@diagram/@childNodes.5 //@diagram/@childNodes.11 //@diagram/@childNodes.12 //@diagram/@childNodes.13"
         title="BFBTypeCompartment"
         needsTitle="false"
         node="//@diagram/@topLevelNodes.0"
@@ -1043,7 +1045,11 @@
     </preferencePages>
   </diagram>
   <plugin
-      iD="de.cau.cs.kieler.cakefeed.bfbtype.diagram">
+      iD="de.cau.cs.kieler.cakefeed.bfbtype.diagram"
+      name="BFBType Diagram Editor"
+      provider="Christian-Albrechts-University of Kiel"
+      version="0.1.0.qualifier"
+      printingEnabled="true">
     <requiredPlugins>org.eclipse.draw2d</requiredPlugins>
     <requiredPlugins>org.eclipse.gmf.runtime.draw2d.ui</requiredPlugins>
     <requiredPlugins>de.cau.cs.kieler.cakefeed.custom</requiredPlugins>
