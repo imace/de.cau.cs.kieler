@@ -7,7 +7,7 @@ public class IFIVFigure extends PortFigure {
 		super();
 		reverse = false;
 		this.setForegroundColor(org.eclipse.draw2d.ColorConstants.black);
-		this.setBackgroundColor(org.eclipse.draw2d.ColorConstants.red);
+		this.setBackgroundColor(org.eclipse.draw2d.ColorConstants.blue);
 	}
 	
 }
