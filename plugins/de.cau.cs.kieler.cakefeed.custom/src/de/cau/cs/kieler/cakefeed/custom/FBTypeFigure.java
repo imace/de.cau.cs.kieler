@@ -1,5 +1,6 @@
 package de.cau.cs.kieler.cakefeed.custom;
 
+import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.Shape;
 import org.eclipse.draw2d.geometry.PointList;
@@ -20,8 +21,8 @@ public class FBTypeFigure extends Shape implements Adapter {
 	
 	public FBTypeFigure() {
 		super();
-		notifyChanged(new NotificationImpl(0, false, false)); 
-			// Notification is not important
+		numOfEvents = 1;
+		numOfVars = 1;
 	}
 	
 	public EObject getModelElement() {
@@ -38,6 +39,7 @@ public class FBTypeFigure extends Shape implements Adapter {
 	
 	@Override
 	protected void fillShape(Graphics graphics) {
+		this.setBackgroundColor(ColorConstants.lightGray);
 		PointList points = computePoints(getBounds());
 		graphics.drawPolygon(points);
 	}
@@ -68,6 +70,8 @@ public class FBTypeFigure extends Shape implements Adapter {
 
 	@Override
 	protected void outlineShape(Graphics graphics) {
+		this.setForegroundColor(ColorConstants.black);
+		
 		float lineInset = Math.max(1.0f, getLineWidthFloat()) / 2.0f;
 	    int inset1 = (int)Math.floor(lineInset);
 	    int inset2 = (int)Math.ceil(lineInset);
