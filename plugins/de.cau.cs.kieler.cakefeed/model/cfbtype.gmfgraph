@@ -27,7 +27,7 @@
           name="RedTriangle">
         <foregroundColor
             xsi:type="gmfgraph:ConstantColor"
-            value="red"/>
+            value="black"/>
         <backgroundColor
             xsi:type="gmfgraph:ConstantColor"
             value="red"/>
@@ -46,7 +46,7 @@
           name="RedTriangleRev">
         <foregroundColor
             xsi:type="gmfgraph:ConstantColor"
-            value="red"/>
+            value="black"/>
         <backgroundColor
             xsi:type="gmfgraph:ConstantColor"
             value="red"/>
