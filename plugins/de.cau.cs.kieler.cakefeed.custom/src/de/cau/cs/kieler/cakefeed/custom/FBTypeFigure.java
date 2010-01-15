@@ -1,6 +1,7 @@
 package de.cau.cs.kieler.cakefeed.custom;
 
 import org.eclipse.draw2d.ColorConstants;
+import org.eclipse.draw2d.Figure;
 import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.Shape;
 import org.eclipse.draw2d.geometry.PointList;
@@ -8,22 +9,30 @@ import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
-import org.eclipse.emf.common.notify.impl.NotificationImpl;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-
 import de.cau.cs.kieler.cakefeed.FB;
 import de.cau.cs.kieler.cakefeed.FBType;
+import de.cau.cs.kieler.cakefeed.IFInputEvent;
+import de.cau.cs.kieler.cakefeed.IFOutputEvent;
+import de.cau.cs.kieler.cakefeed.InputWith;
+import de.cau.cs.kieler.cakefeed.OutputWith;
 
 public class FBTypeFigure extends Shape implements Adapter {
 
 	protected EObject modelElement;
 	protected int numOfEvents;
 	protected int numOfVars;
+	protected int maxInputWiths;
+	protected int maxOutputWiths;
 	
 	public FBTypeFigure() {
 		super();
 		numOfEvents = 1;
 		numOfVars = 1;
+		maxInputWiths = 1;
+		maxOutputWiths = 1;
+		
 	}
 	
 	public EObject getModelElement() {
@@ -36,6 +45,14 @@ public class FBTypeFigure extends Shape implements Adapter {
 	
 	public int getNumOfVars() {
 		return numOfVars;
+	}
+	
+	public int getMaxInputWiths() {
+		return maxInputWiths;
+	}
+	
+	public int getMaxOutputWiths() {
+		return maxOutputWiths;
 	}
 	
 	@Override
@@ -118,8 +135,42 @@ public class FBTypeFigure extends Shape implements Adapter {
 			numOfEvents = Math.max(numOfEvents, 1);
 			numOfVars = Math.max(fbtype.getInputVars().size(), fbtype.getOutputVars().size());
 			numOfVars = Math.max(numOfVars, 1);
+			
+			maxInputWiths = 1;
+			int curInputWiths;
+			for (IFInputEvent ie : fbtype.getInputEvents()) {
+				curInputWiths = 0;
+				EList<InputWith> with = ie.getWith();
+				if (with != null) {
+					curInputWiths += with.size();
+				}
+				if (curInputWiths > maxInputWiths) {
+					maxInputWiths = curInputWiths;
+				}
+			}
+			
+			maxOutputWiths = 1;
+			int curOutputWiths;
+			for (IFOutputEvent oe : fbtype.getOutputEvents()) {
+				curOutputWiths = 0;
+				EList<OutputWith> with = oe.getWith();
+				if (with != null) {
+					curOutputWiths += with.size();
+				}
+				if (curOutputWiths > maxInputWiths) {
+					maxInputWiths = curOutputWiths;
+				}
+			}
 		}
+		// test
+		//this.layout();
 		this.repaint();
+		//for (Object c : this.getChildren()) {
+		//	if (c instanceof Figure) {
+		//		((Figure)c).repaint();
+		//	}
+		//}
+		// end test
 	}
 
 	@Override
