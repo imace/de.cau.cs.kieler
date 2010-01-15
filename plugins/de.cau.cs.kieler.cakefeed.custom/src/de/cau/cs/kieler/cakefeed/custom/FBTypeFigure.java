@@ -11,6 +11,7 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.NotificationImpl;
 import org.eclipse.emf.ecore.EObject;
 
+import de.cau.cs.kieler.cakefeed.FB;
 import de.cau.cs.kieler.cakefeed.FBType;
 
 public class FBTypeFigure extends Shape implements Adapter {
@@ -106,8 +107,13 @@ public class FBTypeFigure extends Shape implements Adapter {
 
 	@Override
 	public void notifyChanged(Notification notification) {
-		if (modelElement instanceof FBType) {
-			FBType fbtype = (FBType)modelElement;
+		if ((modelElement instanceof FBType) || (modelElement instanceof FB)) {
+			FBType fbtype = null;
+			if (modelElement instanceof FBType) {
+				fbtype = (FBType)modelElement;
+			} else {
+				fbtype = (FBType)((FB)modelElement).getType();
+			}
 			numOfEvents = Math.max(fbtype.getInputEvents().size(), fbtype.getOutputEvents().size());
 			numOfEvents = Math.max(numOfEvents, 1);
 			numOfVars = Math.max(fbtype.getInputVars().size(), fbtype.getOutputVars().size());
