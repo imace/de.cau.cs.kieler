@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<synccharts:Region xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:synccharts="http://kieler.cs.cau.de/synccharts">
+  <innerStates id="transitions_and_signals" label="transitions_and_signals">
+    <signals name="I1" isInput="true"/>
+    <signals name="I2" isInput="true"/>
+    <regions>
+      <innerStates id="s1" label="s1" isInitial="true">
+        <outgoingTransitions triggersAndEffects="I1 and I2" priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.1">
+          <trigger xsi:type="synccharts:ComplexExpression" operator="and">
+            <subExpressions xsi:type="synccharts:SignalReference" signal="I1"/>
+            <subExpressions xsi:type="synccharts:SignalReference" signal="I2"/>
+          </trigger>
+        </outgoingTransitions>
+        <outgoingTransitions triggersAndEffects="I1" priority="2" targetState="//@innerStates.0/@regions.0/@innerStates.2">
+          <trigger xsi:type="synccharts:SignalReference" signal="I1"/>
+        </outgoingTransitions>
+        <outgoingTransitions triggersAndEffects="" priority="3" targetState="//@innerStates.0/@regions.0/@innerStates.3"/>
+      </innerStates>
+      <innerStates id="s2" label="s2"/>
+      <innerStates id="s3" label="s3"/>
+      <innerStates id="s4" label="s4"/>
+    </regions>
+  </innerStates>
+</synccharts:Region>
