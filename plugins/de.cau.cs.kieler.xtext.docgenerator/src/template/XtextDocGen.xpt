@@ -1,0 +1,9 @@
+«IMPORT xtext»
+«IMPORT synccharts»
+
+«DEFINE main FOR Grammar»
+	«FILE Grammar.name+".html"»
+	«Grammar.name»
+	«ENDFILE» 
+	
+«ENDDEFINE » 
