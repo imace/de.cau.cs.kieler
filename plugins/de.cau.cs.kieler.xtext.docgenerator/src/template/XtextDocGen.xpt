@@ -3,6 +3,7 @@
 
 «DEFINE main FOR Grammar»
 	«FILE this.name+".html"»
+	<html><body>
 	<h2>Xtext Grammar</h2>
 	<h1>«this.name»</h1>
 	
@@ -12,7 +13,7 @@
 		«EXPAND documentRule FOR rule»
 	«ENDFOREACH»
 	</dl>
-	
+	</body></html>
 	«ENDFILE» 
 	
 «ENDDEFINE » 
