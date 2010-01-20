@@ -2,8 +2,92 @@
 «IMPORT synccharts»
 
 «DEFINE main FOR Grammar»
-	«FILE Grammar.name+".html"»
-	«Grammar.name»
+	«FILE this.name+".html"»
+	<h2>Xtext Grammar</h2>
+	<h1>«this.name»</h1>
+	
+	<h3>Production Rules</h3>
+	
+	<dl>
+	«FOREACH this.rules AS rule»
+		«EXPAND documentRule FOR rule»
+	«ENDFOREACH»
+	</dl>
+	
 	«ENDFILE» 
 	
 «ENDDEFINE » 
+
+«DEFINE documentRule FOR AbstractRule»
+	<dt><b><i>
+	«EXPAND title FOR this»
+	</b></i></dt>
+	<dd>
+	«EXPAND alternative FOR this.alternatives»
+	</dd><br/>
+«ENDDEFINE»
+
+«DEFINE title FOR AbstractRule» 
+	«this.name»:
+«ENDDEFINE»
+
+«DEFINE title FOR TerminalRule»
+	Term «this.name»:
+«ENDDEFINE»
+
+«DEFINE title FOR EnumRule»
+	Enum «this.name»: 
+«ENDDEFINE»
+
+«DEFINE alternatives FOR List[emf::EObject]»
+	«FOREACH this AS a»
+		«EXPAND alternative FOR a»
+	«ENDFOREACH»
+«ENDDEFINE»
+
+«DEFINE alternative FOR emf::EObject»
+	«this»
+«ENDDEFINE»
+
+«DEFINE alternative FOR Keyword»
+	'«this.value»'«this.cardinality»
+«ENDDEFINE»
+
+«DEFINE alternative FOR RuleCall»
+	«this.rule.name»«this.cardinality-» 
+«ENDDEFINE»
+
+«DEFINE alternative FOR Group»
+	«REM»Write parantheses only if there is more than one element
+	     and the group is not the topmost (i.e. child of a rule)«ENDREM»
+	«IF !AbstractRule.isInstance(this.eContainer) && this.eContents.size>1»(«ENDIF»
+	«EXPAND alternatives FOR this.eContents»
+	«IF !AbstractRule.isInstance(this.eContainer) && this.eContents.size>1»)«ENDIF»
+	«this.cardinality»
+«ENDDEFINE»
+
+«DEFINE alternative FOR Assignment»
+	«EXPAND alternative FOR this.terminal»«this.cardinality»
+«ENDDEFINE»
+
+«DEFINE alternative FOR CrossReference»
+	[«this.type.classifier.name»]
+«ENDDEFINE»
+
+«DEFINE alternative FOR Alternatives»
+	«FOREACH this.eContents AS a SEPARATOR '|'»
+		«EXPAND alternative FOR a»
+	«ENDFOREACH»
+«ENDDEFINE»
+
+«DEFINE alternative FOR CharacterRange»
+ [«EXPAND alternative FOR this.left»-«EXPAND alternative FOR this.right»] 
+«ENDDEFINE»
+
+«DEFINE alternative FOR Action»
+«ENDDEFINE»
+
+«DEFINE alternative FOR EnumLiteralDeclaration»
+	«EXPAND alternative FOR this.literal»
+«ENDDEFINE»
+
