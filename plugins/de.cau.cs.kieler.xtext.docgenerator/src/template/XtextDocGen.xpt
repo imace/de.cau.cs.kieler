@@ -7,7 +7,6 @@
 	<h1>«this.name»</h1>
 	
 	<h3>Production Rules</h3>
-	
 	<dl>
 	«FOREACH this.rules AS rule»
 		«EXPAND documentRule FOR rule»
