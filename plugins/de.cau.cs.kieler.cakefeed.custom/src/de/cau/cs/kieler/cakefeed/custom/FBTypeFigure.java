@@ -131,35 +131,40 @@ public class FBTypeFigure extends Shape implements Adapter {
 			} else {
 				fbtype = (FBType)((FB)modelElement).getType();
 			}
-			numOfEvents = Math.max(fbtype.getInputEvents().size(), fbtype.getOutputEvents().size());
-			numOfEvents = Math.max(numOfEvents, 1);
-			numOfVars = Math.max(fbtype.getInputVars().size(), fbtype.getOutputVars().size());
-			numOfVars = Math.max(numOfVars, 1);
+			if (fbtype != null) {
+				numOfEvents = Math.max(fbtype.getInputEvents().size(), fbtype.getOutputEvents().size());
+				numOfEvents = Math.max(numOfEvents, 1);
+				numOfVars = Math.max(fbtype.getInputVars().size(), fbtype.getOutputVars().size());
+				numOfVars = Math.max(numOfVars, 1);
 			
-			maxInputWiths = 1;
-			int curInputWiths;
-			for (IFInputEvent ie : fbtype.getInputEvents()) {
-				curInputWiths = 0;
-				EList<InputWith> with = ie.getWith();
-				if (with != null) {
-					curInputWiths += with.size();
+				maxInputWiths = 1;
+				int curInputWiths;
+				for (IFInputEvent ie : fbtype.getInputEvents()) {
+					curInputWiths = 0;
+					EList<InputWith> with = ie.getWith();
+					if (with != null) {
+						curInputWiths += with.size();
+					}
+					if (curInputWiths > maxInputWiths) {
+						maxInputWiths = curInputWiths;
+					}
 				}
-				if (curInputWiths > maxInputWiths) {
-					maxInputWiths = curInputWiths;
+				
+				maxOutputWiths = 1;
+				int curOutputWiths;
+				for (IFOutputEvent oe : fbtype.getOutputEvents()) {
+					curOutputWiths = 0;
+					EList<OutputWith> with = oe.getWith();
+					if (with != null) {
+						curOutputWiths += with.size();
+					}
+					if (curOutputWiths > maxInputWiths) {
+						maxInputWiths = curOutputWiths;
+					}
 				}
-			}
-			
-			maxOutputWiths = 1;
-			int curOutputWiths;
-			for (IFOutputEvent oe : fbtype.getOutputEvents()) {
-				curOutputWiths = 0;
-				EList<OutputWith> with = oe.getWith();
-				if (with != null) {
-					curOutputWiths += with.size();
-				}
-				if (curOutputWiths > maxInputWiths) {
-					maxInputWiths = curOutputWiths;
-				}
+			} else {
+				numOfEvents = 1;
+				numOfVars = 1;
 			}
 		}
 		// test
