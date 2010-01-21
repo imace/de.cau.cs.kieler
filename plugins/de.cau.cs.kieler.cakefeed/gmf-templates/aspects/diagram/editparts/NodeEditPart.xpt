@@ -68,12 +68,13 @@
 							outputVars = type.getOutputVars();
 						}
 						
-						// Delete old Events and Vars
 						de.cau.cs.kieler.cakefeed.FB fB = (de.cau.cs.kieler.cakefeed.FB)((org.eclipse.gmf.runtime.notation.View)this.getModel()).getElement();
 						
-						this.getDiagramEditDomain().getDiagramCommandStack().execute(
-							new FBDeleteEventsAndVarsCommand("deleteEventsAndVariables", fB));
-						// End of Delete old Events and Vars
+						// Delete old Events and Vars			
+						deleteEventsAndVars(fB);
+						
+						// Delete Connections connected to this FB
+						clearConnections(fB);
 						
 						if ((inputEvents != null) 
 							&& (outputEvents != null) 
@@ -90,16 +91,48 @@
 								for (org.eclipse.emf.ecore.EObject o : list) {
 									org.eclipse.gmf.runtime.emf.type.core.IElementType elementType = null;
 									if (o instanceof de.cau.cs.kieler.cakefeed.IFInputEvent) {
+										«IF self.getEditPartQualifiedClassName() = "de.cau.cs.kieler.cakefeed.bfbtype.diagram.edit.parts.FBEditPart"-»
 										elementType = de.cau.cs.kieler.cakefeed.bfbtype.diagram.providers.CakefeedElementTypes.FBInputEvent_3031;
+										«ENDIF-»
+										«IF self.getEditPartQualifiedClassName() = "de.cau.cs.kieler.cakefeed.cfbtype.diagram.edit.parts.FBEditPart"-»
+										elementType = de.cau.cs.kieler.cakefeed.cfbtype.diagram.providers.CakefeedElementTypes.FBInputEvent_3026;
+										«ENDIF-»
+										«IF self.getEditPartQualifiedClassName() = "de.cau.cs.kieler.cakefeed.fbnetwork.diagram.edit.parts.FBEditPart"-»
+										elementType = de.cau.cs.kieler.cakefeed.fbnetwork.diagram.providers.CakefeedElementTypes.FBInputEvent_3001;
+										«ENDIF-»
 									}
 									else if (o instanceof de.cau.cs.kieler.cakefeed.IFOutputEvent) {
+										«IF self.getEditPartQualifiedClassName() = "de.cau.cs.kieler.cakefeed.bfbtype.diagram.edit.parts.FBEditPart"-»
 										elementType = de.cau.cs.kieler.cakefeed.bfbtype.diagram.providers.CakefeedElementTypes.FBOutputEvent_3032;
+										«ENDIF-»
+										«IF self.getEditPartQualifiedClassName() = "de.cau.cs.kieler.cakefeed.cfbtype.diagram.edit.parts.FBEditPart"-»
+										elementType = de.cau.cs.kieler.cakefeed.cfbtype.diagram.providers.CakefeedElementTypes.FBOutputEvent_3027;
+										«ENDIF-»
+										«IF self.getEditPartQualifiedClassName() = "de.cau.cs.kieler.cakefeed.fbnetwork.diagram.edit.parts.FBEditPart"-»
+										elementType = de.cau.cs.kieler.cakefeed.fbnetwork.diagram.providers.CakefeedElementTypes.FBOutputEvent_3002;
+										«ENDIF-»
 									}
 									else if (o instanceof de.cau.cs.kieler.cakefeed.IFInputVar) {
+										«IF self.getEditPartQualifiedClassName() = "de.cau.cs.kieler.cakefeed.bfbtype.diagram.edit.parts.FBEditPart"-»
 										elementType = de.cau.cs.kieler.cakefeed.bfbtype.diagram.providers.CakefeedElementTypes.FBInputVar_3033;
+										«ENDIF-»
+										«IF self.getEditPartQualifiedClassName() = "de.cau.cs.kieler.cakefeed.cfbtype.diagram.edit.parts.FBEditPart"-»
+										elementType = de.cau.cs.kieler.cakefeed.cfbtype.diagram.providers.CakefeedElementTypes.FBInputVar_3028;
+										«ENDIF-»
+										«IF self.getEditPartQualifiedClassName() = "de.cau.cs.kieler.cakefeed.fbnetwork.diagram.edit.parts.FBEditPart"-»
+										elementType = de.cau.cs.kieler.cakefeed.fbnetwork.diagram.providers.CakefeedElementTypes.FBInputVar_3003;
+										«ENDIF-»
 									}
 									else if (o instanceof de.cau.cs.kieler.cakefeed.IFOutputVar) {
+										«IF self.getEditPartQualifiedClassName() = "de.cau.cs.kieler.cakefeed.bfbtype.diagram.edit.parts.FBEditPart"-»
 										elementType = de.cau.cs.kieler.cakefeed.bfbtype.diagram.providers.CakefeedElementTypes.FBOutputVar_3034;
+										«ENDIF-»
+										«IF self.getEditPartQualifiedClassName() = "de.cau.cs.kieler.cakefeed.cfbtype.diagram.edit.parts.FBEditPart"-»
+										elementType = de.cau.cs.kieler.cakefeed.cfbtype.diagram.providers.CakefeedElementTypes.FBOutputVar_3029;
+										«ENDIF-»
+										«IF self.getEditPartQualifiedClassName() = "de.cau.cs.kieler.cakefeed.fbnetwork.diagram.edit.parts.FBEditPart"-»
+										elementType = de.cau.cs.kieler.cakefeed.fbnetwork.diagram.providers.CakefeedElementTypes.FBOutputVar_3004;
+										«ENDIF-»
 									}
 									if (elementType != null) {
 										org.eclipse.gmf.runtime.diagram.ui.requests.CreateViewRequest createRequest = org.eclipse.gmf.runtime.diagram.ui.requests.CreateViewRequestFactory.getCreateShapeRequest(elementType, this.getDiagramPreferencesHint());
@@ -113,10 +146,25 @@
 									new FBAdaptEventsAndVarsCommand("adaptEventsAndVariables", fB, t));
 						}
 						
+					} else {
+						de.cau.cs.kieler.cakefeed.FB fB = (de.cau.cs.kieler.cakefeed.FB) ((org.eclipse.gmf.runtime.notation.View) this
+								.getModel()).getElement();
+						deleteEventsAndVars(fB);
+						clearConnections(fB);
 					}
 				}
 			}
 		}
+	}
+
+	private void deleteEventsAndVars(de.cau.cs.kieler.cakefeed.FB fB) {
+		this.getDiagramEditDomain().getDiagramCommandStack().execute(
+							new FBDeleteEventsAndVarsCommand("deleteEventsAndVariables", fB));
+	}
+
+	private void clearConnections(de.cau.cs.kieler.cakefeed.FB fB) {
+		this.getDiagramEditDomain()
+		.getDiagramCommandStack().execute(new ClearConnectionsCommand("clearConnections", fB));
 	}
 
 	public class FBCommand extends org.eclipse.gef.commands.Command {
@@ -127,6 +175,24 @@
 			super(label);
 			functionBlock = fB;
 		}
+	}
+
+	public class ClearConnectionsCommand extends FBCommand {
+
+		public ClearConnectionsCommand(String label, 
+				de.cau.cs.kieler.cakefeed.FB fB) {
+			super(label, fB);
+		}	
+			
+		public void execute() {
+			org.eclipse.emf.ecore.EObject container = functionBlock.eContainer();
+			if (container instanceof de.cau.cs.kieler.cakefeed.FBNetwork) {
+				de.cau.cs.kieler.cakefeed.FBNetwork fBNetwork = (de.cau.cs.kieler.cakefeed.FBNetwork)container;
+				fBNetwork.getEventConnections().clear();
+				fBNetwork.getDataConnections().clear();				
+			}
+		}
+		
 	}
 	
 	public class FBDeleteEventsAndVarsCommand extends FBCommand {
