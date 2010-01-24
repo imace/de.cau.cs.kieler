@@ -17,8 +17,9 @@ import de.cau.cs.kieler.cakefeed.IFInputEvent;
 import de.cau.cs.kieler.cakefeed.IFOutputEvent;
 import de.cau.cs.kieler.cakefeed.InputWith;
 import de.cau.cs.kieler.cakefeed.OutputWith;
+import de.cau.cs.kieler.core.ui.figures.IAttributeAwareFigure;
 
-public class FBTypeFigure extends Shape implements Adapter {
+public class FBTypeFigure extends Shape implements Adapter, IAttributeAwareFigure {
 
 	protected EObject modelElement;
 	protected int numOfEvents;
