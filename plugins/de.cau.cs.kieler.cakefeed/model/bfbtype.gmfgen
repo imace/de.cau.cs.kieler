@@ -1053,6 +1053,7 @@
     <requiredPlugins>org.eclipse.draw2d</requiredPlugins>
     <requiredPlugins>org.eclipse.gmf.runtime.draw2d.ui</requiredPlugins>
     <requiredPlugins>de.cau.cs.kieler.cakefeed.custom</requiredPlugins>
+    <requiredPlugins>de.cau.cs.kieler.core.ui</requiredPlugins>
   </plugin>
   <editor/>
   <navigator>
