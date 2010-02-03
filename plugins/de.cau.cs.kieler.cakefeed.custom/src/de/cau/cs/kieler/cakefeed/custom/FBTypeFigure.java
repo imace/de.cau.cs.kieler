@@ -26,6 +26,8 @@ public class FBTypeFigure extends Shape implements Adapter, IAttributeAwareFigur
 	protected int numOfVars;
 	protected int maxInputWiths;
 	protected int maxOutputWiths;
+	protected Rectangle ctrlRectangle;
+	protected Rectangle dataRectangle;
 	
 	public FBTypeFigure() {
 		super();
@@ -107,9 +109,22 @@ public class FBTypeFigure extends Shape implements Adapter, IAttributeAwareFigur
 	    r.y += inset1; 
 	    r.width -= inset1 + inset2;
 	    r.height -= inset1 + inset2;
-	    
-	    PointList points = computePoints(r);
+		
+		PointList points = computePoints(r);
 		graphics.fillPolygon(points);
+	}
+
+	private Rectangle getCorrectBounds() {
+		float lineInset = Math.max(1.0f, getLineWidthFloat()) / 2.0f;
+	    int inset1 = (int)Math.floor(lineInset);
+	    int inset2 = (int)Math.ceil(lineInset);
+
+	    Rectangle r = Rectangle.SINGLETON.setBounds(getBounds());
+	    r.x += inset1 ; 
+	    r.y += inset1; 
+	    r.width -= inset1 + inset2;
+	    r.height -= inset1 + inset2;
+		return r;
 	}
 
 	@Override
@@ -168,15 +183,21 @@ public class FBTypeFigure extends Shape implements Adapter, IAttributeAwareFigur
 				numOfVars = 1;
 			}
 		}
-		// test
-		//this.layout();
+		//this.computeRectangles();
 		this.repaint();
-		//for (Object c : this.getChildren()) {
-		//	if (c instanceof Figure) {
-		//		((Figure)c).repaint();
-		//	}
-		//}
-		// end test
+	}
+
+	private void computeRectangles() {
+		PointList points = computePoints(getCorrectBounds());
+		ctrlRectangle.x = points.getPoint(0).x;
+		ctrlRectangle.y = points.getPoint(0).y;
+		ctrlRectangle.width = points.getPoint(2).x - points.getPoint(0).x;
+		ctrlRectangle.height = points.getPoint(2).y - points.getPoint(0).y;
+		
+		dataRectangle.x = points.getPoint(8).x;
+		dataRectangle.y = points.getPoint(8).y;
+		dataRectangle.width = points.getPoint(6).x - points.getPoint(8).x;
+		dataRectangle.height = points.getPoint(6).y - points.getPoint(8).y;
 	}
 
 	@Override
@@ -190,6 +211,14 @@ public class FBTypeFigure extends Shape implements Adapter, IAttributeAwareFigur
         }
         modelElement = object;
         modelElement.eAdapters().add(this);  
+    }
+    
+    public Rectangle getCtrlRectangle() {
+    	return ctrlRectangle;
+    }
+    
+    public Rectangle getDataRectangle() {
+    	return dataRectangle;
     }
 
 }
