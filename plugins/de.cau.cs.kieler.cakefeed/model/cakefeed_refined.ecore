@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="cakefeed"
+    nsURI="http://kieler.cs.cau.de/cakefeed/" nsPrefix="cakefeed">
+  <eClassifiers xsi:type="ecore:EClass" name="FunctionBlockType" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inputEvents" upperBound="-1"
+        eType="#//Event" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outputEvents" upperBound="-1"
+        eType="#//Event" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inputVars" upperBound="-1"
+        eType="#//Var" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outputVars" upperBound="-1"
+        eType="#//Var" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isBasic" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="syncChart" eType="ecore:EClass ../../de.cau.cs.kieler.synccharts/model/synccharts.ecore#//State"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="algorithms" upperBound="-1"
+        eType="#//Algorithm" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isComposite" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="functionBlockTypes" upperBound="-1"
+        eType="#//FunctionBlockType" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fBs" upperBound="-1" eType="#//FunctionBlock"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eventConnections" upperBound="-1"
+        eType="#//Connection" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dataConnections" upperBound="-1"
+        eType="#//Connection" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="comment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FunctionBlock">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="#//FunctionBlockType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inputEvents" upperBound="-1"
+        eType="#//Event" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outputEvents" upperBound="-1"
+        eType="#//Event" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inputVars" upperBound="-1"
+        eType="#//Var" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outputVars" upperBound="-1"
+        eType="#//Var" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="comment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Connection" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="comment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="destination" lowerBound="1"
+        eType="#//Connectable"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+        eType="#//Connectable"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Connectable"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Event" abstract="true" eSuperTypes="#//Connectable">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="with" upperBound="-1" eType="#//Var"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="comment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Var" abstract="true" eSuperTypes="#//Connectable">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="arraySize" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="initialValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1" eType="#//VarType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="comment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Algorithm">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="language" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="prototype" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="text" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="comment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="VarType">
+    <eLiterals name="BYTE"/>
+    <eLiterals name="DT" value="1"/>
+    <eLiterals name="LREAL" value="2"/>
+    <eLiterals name="UINT" value="3"/>
+    <eLiterals name="LINT" value="4"/>
+    <eLiterals name="BOOL" value="5"/>
+    <eLiterals name="DATE_AND_TIME" value="6"/>
+    <eLiterals name="INT" value="7"/>
+    <eLiterals name="SINT" value="8"/>
+    <eLiterals name="LWORD" value="9"/>
+    <eLiterals name="COLOR" value="10"/>
+    <eLiterals name="WORD" value="11"/>
+    <eLiterals name="REAL" value="12"/>
+    <eLiterals name="TIME" value="13"/>
+    <eLiterals name="TOD" value="14"/>
+    <eLiterals name="ANY" value="15"/>
+    <eLiterals name="DWORD" value="16"/>
+    <eLiterals name="UDINT" value="17"/>
+    <eLiterals name="USINT" value="18"/>
+    <eLiterals name="TIME_OF_DAY" value="19"/>
+    <eLiterals name="WSTRING" value="20"/>
+    <eLiterals name="DINT" value="21"/>
+    <eLiterals name="DATE" value="22"/>
+    <eLiterals name="ULINT" value="23"/>
+    <eLiterals name="VSTYLE" value="24"/>
+    <eLiterals name="ARRAY" value="25"/>
+    <eLiterals name="STRING" value="26"/>
+  </eClassifiers>
+</ecore:EPackage>
