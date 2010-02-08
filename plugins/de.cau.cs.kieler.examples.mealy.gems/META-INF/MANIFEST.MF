@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: MealyMachine Plug-in
-Bundle-SymbolicName: edu.unikiel.rtsys.gems.mealy.mealymachine;singleton:=true
+Bundle-SymbolicName: de.cau.cs.kieler.examples.mealy.gems;singleton:=true
 Bundle-Version: 1.0.0
 Bundle-Activator: de.cau.cs.kieler.gems.mealy.mealymachine.MealyMachinePlugin
 Bundle-Vendor: GEMS
