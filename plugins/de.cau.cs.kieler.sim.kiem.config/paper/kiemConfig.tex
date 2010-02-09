@@ -4,8 +4,8 @@
  \item own plugin for modularity, reuse of old code, no interference with other plugins
 \end{itemize}
 
-\section{Implementation of extension point}
-\subsection{The implementing classes}
+\section{Extension Point Implementation}
+\subsection{Implementing Classes}
 \begin{itemize}
  \item toolbar provider: link to contribution manager, forward array of contributions
  \item configuration provider: link to configuration manager, forward requests
@@ -13,20 +13,20 @@
     listen to load/save events, can be disabled when KIEMConf is about to trigger load/save
 \end{itemize}
 
-\subsection{Manager classes}
+\subsection{Manager Classes}
 \begin{itemize}
  \item bundled control behavior 
  \item no cluttering up the main activator class
  \item singleton pattern
 \end{itemize}
-\subsubsection{Abstract manager superclass}
+\subsubsection{Abstract Manager Superclass}
 \begin{itemize}
  \item provides methods that all managers need
  \item load/save through the plugins preference store
  \item add/remove/notify listeners
 \end{itemize}
 
-\subsubsection{Schedule manager}
+\subsubsection{Schedule Manager}
 \begin{itemize}
  \item all schedule data
  \item track recently used schedule Ids
@@ -35,7 +35,7 @@
  \item handle user load/save events
 \end{itemize}
 
-\subsubsection{Configuration manager}
+\subsubsection{Configuration Manager}
 \begin{itemize}
  \item manages current/default configuration, supply filtered lists for preference components
  \item find current configuration and wrapper in data component wrapper list 
@@ -61,13 +61,13 @@
  \item default editors 
 \end{itemize}
 
-\subsubsection{other managers}
+\subsubsection{Other Managers}
 \begin{itemize}
  \item contribution manager: create combos, save visibility
  \item property usage manager: track all keys where default config should be used rather than current
 \end{itemize}
 
-\subsection{Utility and Data classes}
+\subsection{Utility and Data Classes}
 
 \subsubsection{ConfigDataComponent}
 \begin{itemize}
@@ -87,7 +87,7 @@
  \item getting/setting supported priority, adding/removing editors
 \end{itemize}
 
-\subsubsection{other data classes}
+\subsubsection{Other Data Classes}
 \begin{itemize}
  \item EditorDefinition: holds editorname, editorId pair gotten from plugin definition
  \item KiemConfigEvent: for event dispatching

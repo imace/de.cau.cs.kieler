@@ -1,7 +1,7 @@
 \chapter{Problem Statement}
 \label{chapter:AutoTask}
 
-In order to do validations or recording automatically in a batch like mode, 
+In order to do validations or recording automatically in a batch-like mode, 
 the Execution Manager needs to be extended by an Eclipse Plug-in that some kind of 
 remote controls it (API) and has/supports for example: 
 \begin{itemize}
@@ -23,9 +23,17 @@ should be tested with a one or more execution files and several trace files.
 % ask ctr for screenshot of directory perhaps
 
 The problem can be broken down in 4 parts which are explained in detail in
-the following sections.
+the following sections:
+\begin{enumerate}
+ \item The setup of an automated run by the user.
+ \item The input of all the necessary information.
+ \item The control flow of the automated run.
+ \item The gathering of information after the run has finished and the display 
+of that information.
+\end{enumerate}
 
-\section{Setting up an Automated Run}
+
+\section{Setting up a Run}
 \label{section:AutoTaskSetup}
 The first objective is to find an easy way for the user to efficiently set up an
 automated run. This involves selecting the model files and execution files
@@ -35,8 +43,8 @@ needed for the automation as well as entering initial properties.
 \label{section:AutoTaskInput}
 The second objective is to enable the components to receive inputs.
 Each component should receive all information it needs prior to each execution
-run in order to move away from having to hard code the locations of model files
-and trace files into the component.
+run in order to make the components more dynamic. This mechanism would ensure
+that components can be written in a more generic way than is currently possible.
 We will have to define an API for this information passing process as well as
 an API to trigger an automated execution from other plug-ins.
 
@@ -53,7 +61,7 @@ involve the following:
 \end{enumerate}
 
 
-\section{Output of the results of the execution}
+\section{Output execution results}
 \label{section:AutoTaskOutput}
 The last objective is to display the information in a meaningful way.
 This should involve at least two methods of output:

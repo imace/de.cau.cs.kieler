@@ -3,8 +3,53 @@
 - handles the setup, control flow and display of automated execution
 - consists of 3 parts explained in detail below
 - wizard, manager, view
-\section{The wizard}
-\subsection{File selection page}
+
+\section{Automated Component}
+An automated component is any DataComponent that wants to interact with
+the automated execution plug-in. As seen in the diagram automated components
+have to implement three methods:
+
+\subsection{provideProperties()}
+This method enables components to receive information prior to each execution
+run. The list is implemented as an array of key, value pairs stored inside
+KiemProperty objects.
+At the every least the list contains the location of the model file and the
+index of the currently running iteration (that is how many time the current
+model has already been executed with the current execution file).
+This allows components to load additional files that are always in the
+same path as the execution file and determine which of those to load
+based on the iteration index.
+
+\subsection{wantAnotherStep()}
+This method is called after every step of the execution manager.
+All components are asked if they want to perform another step and if
+one components answers with TRUE the execution manager will perform another
+step.
+This makes it unnecessary to know the exact number of steps needed for
+the execution before the execution starts.
+
+\subsection{wantsAnotherRun()}
+This method is the equivalent for the wantAnotherStep() method in the context
+of entire execution runs.
+After no component wants to perform another step all components are asked
+if they want to perform another run. If one component answers with TRUE
+the entire simulation is stopped and then started again with the same
+model file and execution file but an incremented iteration index.
+This can for example be used to execute the same model with a different
+set of trace files by just naming the trace files the same way as the
+model files with a number at the end.
+
+\section{Automated Producer}
+This interface extends the AutomatedComponent interface.
+In addition to the inherited methods it provided one additional method.
+This method is called after an iteration has finished and asks the components
+if they want to publish any information about the results of their execution.
+This information is gathered by the plug-in and the accumulated results
+are either passed to the calling plug-in or displayed in the
+specially designed view (see chapter about the view).
+
+\section{Automation Wizard}
+\subsection{File Selection Page}
 - wizard is used to set up the execution run
 - extends ResourceImportWizard for displaying a folder/file structure for selecting files from
 - easily usuable, select whole folders, filter file types
@@ -14,22 +59,22 @@ and restore it on load
 - for simplicity assume that files ending .execution are execution files and all other selected
 ones are model files, wizard can not check if valid since formats are not known
 - only allow user to proceed if at least one execution and one model file is selected
-\subsection{Property Setting page}
+\subsection{Property Setting Page}
 - set up the additional arguments passed to the execution
 - simple adding and removing of key, value pairs
 - same as file page, on close results are saved to preference store and restored for initial
 selection on next open
-\subsection{Processing the information}
+\subsection{Information Processing}
 - gather execution files and model files from file selection page
 - gather properties from property page
 - store information for next open
 - invoke the execution manager
 
-\section{The Execution manager and job}
+\section{Automation manager and Automation Job}
 - handles control flow during the automation
 - takes information from either call through the API or wizard
 
-\subsection{Execution Manager}
+\subsection{Automation Manager}
 - handles the overall control flow
 - takes the execution files, model files and properties as argument
 - if progress monitor is registered it is informed about the progress of the evaluation
@@ -60,13 +105,13 @@ selection on next open
 
 
 
-\subsection{Execution Job}
+\subsection{Automation Job}
 - workbenchjob with progressmonitor
 - used to display the progress in the progress view and a dialog with progress bar
 - long running task, doesn't want to block the rest of the workbench 
 - triggers execution in the manager
 
-\section{The View}
+\section{Automation View}
 - displays the information in a structured way
 - start a new table for each execution file
 - one row for each iteration with each model file

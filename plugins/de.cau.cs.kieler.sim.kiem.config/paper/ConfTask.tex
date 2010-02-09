@@ -1,7 +1,7 @@
 \chapter{Problem Statement}
 \label{chapter:ConfTask}
 The objective of this project is to improve the configurability of the
-\ac{KIEM} as outlined in the Diploma-thesis by Christian Motika \cite{cmot-dt}:
+Execution Manager as outlined in the diploma-thesis by Christian Motika \cite{cmot-dt}:
 \begin{quote}
  \ac{KIEM} currently does not have a preference page to save
 additional settings like DataComponent timeouts. Also execution schedulings
@@ -39,10 +39,12 @@ This should be implemented in a way that doesn't clutter up the current user int
 The different properties stored in each execution file might sometimes not suit the users current needs
 and he might want to use a default value for some properties without having to manually set them
 in each new configuration.
-The solution could be implemented in a preference page that contains the following:
+The solution could be implemented using the preference mechanism provided by Eclipse.
 \begin{enumerate}
- \item a way to set the default properties for all \ac{KIEM} properties and possibly for user defined properties as well.
- \item a way to set which of these properties should override the value stored in the execution file and which
+ \item There should be a way to set the default properties for all Execution Manager properties 
+and possibly for user defined properties as well.
+ \item It should be possible for the user to set up which of these properties should override 
+the value stored in the execution file and which
 should only be used if the execution file doesn't contain one.
 \end{enumerate}
 
@@ -61,8 +63,8 @@ opened documents are placed there not just execution files.
 This problem leads to the in the following tasks:
 \begin{enumerate}
  \item Finding a way to track recently used execution files and make it easier for the user to
-load them without having to locate them inside his workspace.
- \item In addition to tracking recently used execution files the user might want to have a way to have a list
+load them without the need to locate them inside his workspace.
+ \item In addition to tracking recently used execution files the user might want to have a way to get a list
 of execution files that work for the currently active editor. This list should be sorted with the most likely
 candidates at the top to allow less experienced users to select an execution file that will most likely work.
 \end{enumerate}

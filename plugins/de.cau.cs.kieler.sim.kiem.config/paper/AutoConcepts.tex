@@ -1,7 +1,7 @@
 \chapter{Concepts}
 \label{chapter:AutoConcepts}
 
-\section{Setting up an Automated Run}
+\section{Setting up a Run}
 \label{section:AutoConceptsSetup}
 There are several possibilities of how to solve the problem of accumulating
 large amounts of information prior to a long running action.
@@ -20,16 +20,16 @@ amount of files used.
  \item It is not very intuitive and the user has to know the exact syntax that the execution needs.
 \end{itemize}
 
-A far easier approach is the selection of the files through the use of a dialog.
-Here the first option is to write a new Dialog from scratch. While this option
+Another approach is the selection of the files through a dialog.
+Here the first option is to write a new dialog from scratch. While this option
 ensures flexibility since only the elements that are really needed are on it in
-exactly the way they are needed it has also a few downsides:
+exactly the way they are needed some disadvantages come along:
 \begin{itemize}
  \item It involves a lot of work since every widget has to be manually placed on the dialog.
  \item It involves even more work to get the layout of the dialog just right.
 \end{itemize}
 
-The easiest way it to use one of the dialogs provided by Eclipse specifically the wizard type dialog.
+A more comprehensive approach would be to use one of the dialogs provided by Eclipse specifically the wizard type dialog.
 Eclipse itself uses a host of wizards as explained in [ref here].
 The wizard has several advantages over the other methods explained here:
 \begin{itemize}
@@ -41,20 +41,19 @@ The wizard has several advantages over the other methods explained here:
 
 \section{Input for the Automation}
 \label{section:AutoConceptsInput}
-In order to input information into the DataComponents the first decision has to be in
-what form the information will be supplied.
-The chosen form is that of a list of key, value pairs. It allows for the most
+In order to send information to the DataComponents the first decision must consider the
+form of the information that will be supplied.
+The chosen form is that of a list of key, value pairs. It allows for most
 flexiblility while still being very generic and simple to read and write on.
 This list of properties will at least include the path to the model file in order
 for components to be executed with several different model files without having
 to alter the code between runs.
 
-The next question is how the components will get the information.
-
-The first possibility would be to have the component ask the plug-in for the information
+The next decision involves how the components are getting the information.The first possibility 
+would be to have the component ask the plug-in for the information
 in question. The upside of this would be that components are sure to get all the information
 they need before the execution can start since they can keep asking for it. However this would
-likely mean that the component would have to ask multiple times as they cannot know when
+likely mean that the component has to poll multiple times as it has no knowledge about when
 the required information will be available which constitutes additional workload. Furthermore
 this situation would likely mean that multiple components might request information
 at the same time. This means that there would be the need for substantial synchronization mechanisms
@@ -78,10 +77,9 @@ a chance to provide some information for the display in the next step. This info
 will be gathered in the same form and way as described in [ref to pref section].
 
 
-\section{Output of the results of the execution}
+\section{Output execution results}
 \label{section:AutoConceptsOutput}
-On the subject of displaying the information again several options
-are available.
+On the subject of displaying the information several options are available.
 
 
 The last objective is to display the information in a meaningful way.

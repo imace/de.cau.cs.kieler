@@ -5,27 +5,27 @@ the help of the Eclipse plug-in technology described in chapter \ref{chapter:Con
 
 \section{Configurations}
 \label{section:ConfConceptsConf}
-The first approach to saving additional configuration information in the execution files would
+The first approach to save additional configuration information in the execution files would
 be to actually modify the format of those files and write the information into them.
 This would most likely be the easiest approach but would destroy backward compatibility of
 those files since the basic \ac{KIEM} would not know how to deal with the modified files.
-The approach taken in this thesis is based on the list of DataComponents.
 
-Each execution file carries a list of its own DataComponents and their properties to ensure
+The approach taken in this thesis is based on the list of DataComponents. Each execution file 
+carries a list of its own DataComponents and their properties to ensure
 that the component are properly initialized the next time the execution is loaded. That list
-can be loaded even if there are DataComponents contained in it that are not in the current
-runtime configuration. The \ac{KIEM} will just show a warning but load the rest of the execution
-anyway. 
+can be loaded even if there are DataComponents contained in it that are not present in the current
+runtime configuration. The \ac{KIEM} will show a warning indicating that it doesn't know the given
+component but proceed toload the rest of the execution. 
 
 These DataComponents basically just carry a list of KiemProperties which are
-just (key, value) pairs. This makes them ideal for storing simple information like the value
+basically (key, value) pairs. Hence, they are suited well for storing simple information like the value
 of a text field.
 
-To solve our problem we will just construct a new type of DataComponent and register it through
+To solve the problem a new type of DataComponent will have to be constructed and registered through
 the extension point in the \ac{KIEM}. This ensures that the component can be added to any execution
 file. The \ac{KIEM} ensures that all properties contained in our component will be saved with
-the execution file and loaded the next time the file is opened. All we have to do is
-find our component inside the DataComponent list, get the properties saved inside it
+the execution file and loaded the next time the file is opened. After that the configuration plug-in has 
+find the component inside the DataComponent list, get the properties saved inside it
 and set them inside the \ac{KIEM}.
 
 % \begin{itemize}
@@ -58,7 +58,7 @@ and their editors. For that we will adapt the LayoutPreferencePage by Miro Sp\"o
 as seen in Figure \ref{fig:MSPLayoutPreferencePage} where we will just replace the 
 layouts with the list of registered schedules.
 
-In order to sort the schedules that match the currently opened editor they will
+For the purpose of sorting the schedules that match the currently opened editor they will
 need to have user defined priorities which can be easily set up with the table
 shown above.
 

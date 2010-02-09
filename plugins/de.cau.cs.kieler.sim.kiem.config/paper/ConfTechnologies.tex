@@ -12,7 +12,7 @@
 \index{Eclipse}
 - KIELER part of Eclipse framework
 
-- Jave IDE but also lots of other languages (C++, Latex, ...)
+- Java IDE but also lots of other languages (C++, Latex, ...)
 
 - can build other IDEs with it
 
@@ -20,19 +20,19 @@
 
 \subsection{Plug-ins}
 \index{Plug-in}
-- \ac{KIEM} itself is a plugin, this work plugin dependant on \ac{KIEM}
+- \ac{KIEM} itself is a plug-in, this work plug-in dependent on \ac{KIEM}
 
 - different components of an \ac{IDE} 
 
-- can operate by themselves or depending on other plugins
+- can operate by themselves or depending on other plug-ins
 
-- in addition to \ac{API} of each plugin: extension point mechanism
+- in addition to \ac{API} of each plug-in: extension point mechanism
 
-- extension points to interact with other plugins
+- extension points to interact with other plug-ins
 
-- extension point mechanism used by runtime environment to check which plugins to load
+- extension point mechanism used by runtime environment to check which plug-ins to load
 
-- plugins can be used to plug into the standart Eclipse feature
+- plug-ins can be used to plug into the standard Eclipse feature
 \subsubsection{Extension point mechanism}
 \label{section:ConfTechnologyExtension}
 \index{Extension point}
@@ -40,15 +40,15 @@
 
 \subsection{Preference Pages}
 \index{Preference Page}
-- One of the plugins used in this work in that fashion is the org.eclipse.ui.preferencePage
-plugin. It is used to create new preference pages at a specific location inside the
-normal tree of preference pages accessable through Window>Preferences.
+- One of the plug-ins used in this work in that fashion is the \emph{org.eclipse.ui.preferencePage}
+plug-in. It is used to create new preference pages at a specific location inside the
+normal tree of preference pages accessible through Window>Preferences.
 The programmer only has to take care of the contents of the actual page and not worry
-about addional buttons or integrating it into the PreferenceDialog.
+about additional buttons or integrating it into the PreferenceDialog.
 
 \subsubsection{Preference Store}
-- Closely coupled with the preference pages is the eclipse preference store. It is
+- Closely coupled with the preference pages is the Eclipse preference store. It is
 basically a text file for each plug-in where the plug-in can deposit simple Strings
 under a given key to ensure that information is kept between execution runs.
 
-For addional information about eclipse see www.eclipse.org or literature \cite{eclipsePlugins}
+For additional information about eclipse see the official Eclipse website\footnote{www.eclipse.org} or literature \cite{eclipsePlugins}
