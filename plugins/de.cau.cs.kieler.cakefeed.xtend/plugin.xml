@@ -28,16 +28,16 @@
       </category>
       <command
             categoryId="org.eclipse.gmf.category.cakefeed"
-            defaultHandler="de.cau.cs.kieler.cakefeed.xtend.handler.CakefeedTransformationCommandHandler"
+            defaultHandler="de.cau.cs.kieler.cakefeed.xtend.handler.ImportHandler"
             description="Imports FunctionBlocks which are stored in XML format."
-            id="de.cau.cs.kieler.cakefeed.ImportAction"
+            id="de.cau.cs.kieler.cakefeed.xtend.import"
             name="Import">
       </command>
       <command
             categoryId="org.eclipse.gmf.category.cakefeed"
-            defaultHandler="de.cau.cs.kieler.cakefeed.xtend.handler.CakefeedTransformationCommandHandler"
+            defaultHandler="de.cau.cs.kieler.cakefeed.xtend.handler.ExportHandler"
             description="Exports FunctionBlocks to XML format."
-            id="de.cau.cs.kieler.cakefeed.ExportAction"
+            id="de.cau.cs.kieler.cakefeed.xtend.export"
             name="Export">
       </command>
    </extension>

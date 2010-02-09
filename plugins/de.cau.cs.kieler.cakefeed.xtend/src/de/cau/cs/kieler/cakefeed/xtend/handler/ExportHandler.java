@@ -8,7 +8,6 @@ import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.IHandler;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.gmf.runtime.common.core.command.CommandResult;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.CanonicalEditPolicy;
 import org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramGraphicalViewer;
@@ -16,15 +15,11 @@ import org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramWorkbenchPart;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PlatformUI;
-import org.eclipse.xtend.typesystem.emf.EcoreUtil2;
-import org.eclipse.xtend.typesystem.emf.EmfMetaModel;
 
-import de.cau.cs.kieler.cakefeed.BFBType;
-import de.cau.cs.kieler.cakefeed.CFBType;
-import de.cau.cs.kieler.cakefeed.FBNetwork;
-import de.cau.cs.kieler.cakefeed.bfbtype.diagram.edit.parts.BFBTypeEditPart;
-import de.cau.cs.kieler.cakefeed.cfbtype.diagram.edit.parts.CFBTypeEditPart;
-import de.cau.cs.kieler.cakefeed.fbnetwork.diagram.edit.parts.FBNetworkEditPart;
+import de.cau.cs.kieler.cakefeed.BFBDiagram;
+import de.cau.cs.kieler.cakefeed.CFBDiagram;
+import de.cau.cs.kieler.cakefeed.impl.BFBDiagramImpl;
+import de.cau.cs.kieler.cakefeed.impl.CFBDiagramImpl;
 import de.cau.cs.kieler.core.model.transformation.xtend.XtendTransformationFramework;
 
 public class ExportHandler extends AbstractHandler implements IHandler {
@@ -42,26 +37,34 @@ public class ExportHandler extends AbstractHandler implements IHandler {
                             .getElement();
 
          
-            EPackage pack = EcoreUtil2.getEPackageByClassName(????);
-            EmfMetaModel metaModel = new EmfMetaModel(pack);
+            //EPackage pack = EcoreUtil2.getEPackageByClassName("de.cau.cs.kieler.cakefeed.CakefeedPackage");
+            //EmfMetaModel metaModel = new EmfMetaModel(pack);
+            String cakefeedModel = "de.cau.cs.kieler.cakefeed.CakefeedPackage";
+            String functionblocksModel = "de.cau.cs.kieler.functionblocks.FunctionblocksPackage";
+            String[] metaModels = {cakefeedModel, functionblocksModel};
             
             Object[] parameters = new Object[1];
-            parameters[0] = obj;
             
             String fileName = "feature.ext";
             String operation = null;
             
             XtendTransformationFramework xtend = new XtendTransformationFramework();
             
-            if (obj instanceof BFBType) {
-            	operation = "bfbgmf2xml";
-            }else if (obj instanceof CFBType) {
-            	operation = "cfbgmf2xml";
-            }else if (obj instanceof FBNetwork) {
-            	operation = "fbnetworkgmf2xml";
+            EObject obj2 = null;
+            if (obj instanceof BFBDiagramImpl) {
+            	obj2 = (BFBDiagram)obj;
+            	operation = "BFBDiagramToFBType";
+            }else if (obj instanceof CFBDiagramImpl) {
+            	obj2 = (CFBDiagram)obj;
+            	operation = "CFBDiagramToFBType";
+            }else if (true) {
+            	operation = "";
             }
             
-            xtend.initializeTransformation(fileName, operation, metaModel, parameters);
+            parameters[0] = obj2;
+            
+            xtend.setParameters(parameters);
+            xtend.initializeTransformation(fileName, operation, metaModels);
             xtend.executeTransformation();
             
             List<?> editPolicies = CanonicalEditPolicy.getRegisteredEditPolicies(obj);

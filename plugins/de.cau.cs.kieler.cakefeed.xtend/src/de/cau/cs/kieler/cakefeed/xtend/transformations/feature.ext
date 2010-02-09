@@ -1,10 +1,28 @@
 import cakefeed;
 import functionblocks;
 
-create BFBDiagram toBFBDiagram(functionblocks::FBType fbtype):
- this.setBFBType(fbtype.toBFBType()) //Diese Methode (setBFBType) findet er!
+create functionblocks::FBType this BFBDiagramToFBType(cakefeed::BFBDiagram bfbdiagram):
+ this.setName((java.lang.String)(bfbdiagram.bFBType.name))
+; 
+
+create functionblocks::FBType this CFBDiagramToFBType(cakefeed::CFBDiagram cfbdiagram):
+ this.setName((java.lang.String)(cfbdiagram.cFBType.name))
 ;
 
-create BFBType toBFBType(functionblocks::FBType fbtype):
- this.setName(fbtype.name) //Diese (setName) aber nicht!
+create functionblocks::FBType this BFBTypeToFBType(cakefeed::BFBType bfbtype):
+ this.setName((java.lang.String)(bfbtype.name))
+; 
+
+create functionblocks::FBType this CFBTypeToFBType(cakefeed::CFBType cfbtype):
+ this.setName((java.lang.String)(cfbtype.name))
+;
+
+//--------------------------------------------------------------------------------------
+
+create cakefeed::BFBDiagram this FBTypeToBFBDiagram(functionblocks::FBType fbtype):
+ this.setBFBType(fbtype.FBTypeToBFBType())
+;
+
+create cakefeed::BFBType this FBTypeToBFBType(functionblocks::FBType fbtype):
+ this.setName((java.lang.String)(fbtype.name))
 ; 
