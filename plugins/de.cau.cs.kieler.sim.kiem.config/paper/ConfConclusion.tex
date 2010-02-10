@@ -1,13 +1,40 @@
 \chapter{Conclusion}
-\label{chapter:Conclusion}
+\label{chapter:ConfConclusion}
+As stated in Chapter \ref{chapter:ConfTask} the problem consists of two parts:
+\begin{enumerate}
+ \item Find a way to add configurations to the existing execution files. Additionally find
+a way to allow the user the set up default preferences.
+ \item Make it easier to load previously saved schedules without having to locate
+the execution file in the workspace.
+\end{enumerate}
+The following sections will summarize the results and provide some ideas for
+future work.
+
 \section{Results}
 \begin{itemize}
  \item problems solved
 \end{itemize}
 
-\section{Further improvements}
-\begin{itemize}
- \item allow Objects (Serializable) to be saved
- \item improve dynamic layout
- \item refactore entire execution manager to use the runtime mechanism
-\end{itemize}
+\section{Further Improvements}
+Although all initial goals of this thesis were more than met there are still
+some features that could not be added due to the lack of time.
+\subsection*{Eclipse Runtime Mechanism}
+The Eclipse framework provides a very comprehensive system to run different
+modules. This is used to execute Java programs or to start a new Eclipse application
+but there are a variety of other applications as well.
+
+The entire Execution Manager could be refactored into using that runtime mechanism instead
+of setting up a run through the now present \ac{KIEM} view. This means that the table
+that shows the DataComponents has to be moved to a new runtime page. 
+
+The controls for pausing, resuming, stopping and stepping through the execution have to
+be moved somewhere else as well, possibly the DataTable.
+
+\subsection*{Improve Storage Options}
+Currently DataComponents as well as the preference mechanism only allow the use of
+Strings to store the preferences. This means that all primitive data types can more
+or less be stored by conversion to a String. However more complex objects can't be stored
+without serializing them into a String and parsing them again on load.
+
+A future project could try to find a way to overcome that limitation by allowing
+objects that implement the Serializable interface to be stored as well.

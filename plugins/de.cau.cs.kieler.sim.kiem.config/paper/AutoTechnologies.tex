@@ -6,7 +6,7 @@ thesis (see Chapter \ref{chapter:ConfTechnology}) other Eclipse
 technologies will be used as well.
 
 The next sections will describe the technologies and give some
-examples of their usage in the standart Eclipse application.
+examples of their usage in the standard Eclipse application.
 The technologies described here are the following:
 \begin{description}
  \item The Job: The Eclipse Job is a mechanism for very long running tasks.
@@ -17,10 +17,11 @@ The technologies described here are the following:
 \section{The Job}
 \label{section:AutoTechJob}
 
-The Job API is specifically designed to accommodate very long running
-tasks which makes it perfect for our purposes since an execution
-run with several model files and hundreds of trace files might
-a whole night.
+The Eclipse Job \ac{API} provides the means to schedule very long running tasks.
+It uses a Thread to run the actual task and contains a ProgressMonitor to show
+the progress of the task. Since it is a task that can run independently of the
+current state of the workspace it can also be run in the back ground if the user
+desires it.
 An example for the use of jobs in the normal Eclipse architecture
 is the SVN commit operation seen in Figure \ref{fig:SVNCommit}.
 
@@ -32,22 +33,17 @@ is the SVN commit operation seen in Figure \ref{fig:SVNCommit}.
   \label{fig:SVNCommit}
 \end{figure}
 
-
-
 \section{Eclipse Wizards}
 \label{section:AutoTechWizards}
-To allow the user to set up the execution run we will be using the
-Eclipse Wizard API.
 Wizards are used to guide the user through the process of creating complex items by taking
 the information in a structured way and then generating the item from it.
 One example inside the Eclipse Architecture is the Java Class Creation Wizard (see Figure \ref{fig:ClassWizard})
-In theory it is possible to just open a text file and enter all the information manually.
+In theory it is possible to open a text file and enter all the information manually.
 However if the wizard is used the user only has to select the class he wants to extend
 and the interfaces he wants to implement, activate one check box and then the wizard will
 create the class body, all required methods and comments for each element (see Listing \ref{fig:classCreationGenerated})
 This makes it very easy for even inexperienced users to create new classes without knowing
 the exact syntax.
-
 
 \begin{figure}[ClassWizard]
   \centering
@@ -56,7 +52,6 @@ the exact syntax.
   {The Class Creation Wizard\protect}
   \label{fig:ClassWizard}
 \end{figure}
-
 
 \lstset{
   language=Java,
@@ -73,36 +68,36 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 
 public class MyClass extends ControlContribution 
-  implements Runnable {
+   implements Runnable {
 
-    /**
-     * Creates a new MyClass.java.
-     * 
-     * @param id
-     */
-    public MyClass(String id) {
-        super(id);
-    }
+   /**
+    * Creates a new MyClass.java.
+    * 
+    * @param id
+    */
+   public MyClass(String id) {
+      super(id);
+   }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected Control createControl(Composite parent) {
-        return null;
-    }
+   /**
+    * {@inheritDoc}
+    */
+   @Override
+   protected Control createControl(Composite parent) {
+      return null;
+   }
 
-    /**
-     * {@inheritDoc}
-     */
-    public void run() {
-    }
+   /**
+    * {@inheritDoc}
+    */
+   public void run() {
+   }
 
-    /**
-     * @param args
-     */
-    public static void main(String[] args) {
-    }
+   /**
+    * @param args
+    */
+   public static void main(String[] args) {
+   }
 }
 \end{lstlisting}
 

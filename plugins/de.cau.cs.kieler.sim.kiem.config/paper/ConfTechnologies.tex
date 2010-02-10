@@ -34,11 +34,12 @@
 
 - plug-ins can be used to plug into the standard Eclipse feature
 \subsubsection{Extension point mechanism}
-\label{section:ConfTechnologyExtension}
+\label{section:TechExtension}
 \index{Extension point}
 
 
 \subsection{Preference Pages}
+\label{section:TechPreferencePage}
 \index{Preference Page}
 - One of the plug-ins used in this work in that fashion is the \emph{org.eclipse.ui.preferencePage}
 plug-in. It is used to create new preference pages at a specific location inside the
@@ -47,6 +48,7 @@ The programmer only has to take care of the contents of the actual page and not 
 about additional buttons or integrating it into the PreferenceDialog.
 
 \subsubsection{Preference Store}
+\label{section:TechPreferenceStore}
 - Closely coupled with the preference pages is the Eclipse preference store. It is
 basically a text file for each plug-in where the plug-in can deposit simple Strings
 under a given key to ensure that information is kept between execution runs.

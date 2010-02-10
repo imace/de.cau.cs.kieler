@@ -11,28 +11,27 @@ It may improve the usability further to allow the user to customize execution
 schedulings for specific diagram types. An interface for these kind of settings
 could be realized as an Eclipse preference page.
 \end{quote}
-This will be explained in more detail in the following sections.
+
+This task will be explained in more detail in this chapter. It will start by introducing 
+solutions to the problem of how save the new configuration properties into the existing 
+execution files. In addition the chapter will explain ways to enable the user to set up a 
+series of default configurations. The last section of this chapter will explore 
+possibilities of how to make it easier to load previously saved schedules.
+
 \section{Configurations}
-Currently every property in the \ac{KIEM} has a hard coded default value. There is a text box
+Currently every property in the Execution Manager has a hard coded default value. There is a text box
 for setting the aimed step duration for the currently loaded execution file but that value
-is lost once a new execution is loaded.
-To solve this problem an extension to the \ac{KIEM} should attempt to provide the following:
+is lost once a new execution file is loaded.
+To solve this problem an extension to the Execution Manager should attempt to provide the following:
 \begin{enumerate}
  \item Find a way that execution files can store values like the aimed step duration and the timeout.
 This mechanism should be implemented in a way that ensures that old files can be upgraded and new
-files are still valid in instances of the \ac{KIEM} that don't use the configuration plug-in.
- \item Find a way to load the configurations into the different parts of the \ac{KIEM} as soon as an
+files are still valid in instances of the Execution Manager that don't use the configuration plug-in.
+ \item Find a way to load the configurations into the different parts of the Execution Manager as soon as an
 execution file is loaded from the file system.
  \item Ensure that the user can edit all properties and maybe even create his own custom properties.
 This should be implemented in a way that doesn't clutter up the current user interface too much.
 \end{enumerate}
-
-%\begin{itemize}
-% \item different configurable elements in KIEM (Timeout, Aimed step duration)
-% \item currently hard coded
-% \item way that an .execution file can carry their own configuration without making old files invalid
-% \item load/save configurations
-%\end{itemize}
 
 \subsection{Default Configuration}
 \index{Default Configuration}
@@ -48,12 +47,6 @@ the value stored in the execution file and which
 should only be used if the execution file doesn't contain one.
 \end{enumerate}
 
-%\begin{itemize}
-% \item don't want to set properties on every current configurations
-% \item default values configurable through a preference page
-% \item override values used in a configuration with defaults
-%\end{itemize}
-
 \section{Easier configuration loading}
 The last objective of this thesis is to make it easier to load execution files.
 Currently all execution files are stored in the workspace at a place of the users choice. In a very
@@ -68,10 +61,3 @@ load them without the need to locate them inside his workspace.
 of execution files that work for the currently active editor. This list should be sorted with the most likely
 candidates at the top to allow less experienced users to select an execution file that will most likely work.
 \end{enumerate}
-
-
-%\begin{itemize}
-% \item track recently used schedules
-% \item load most recently used schedule on startup
-% \item display filtered list based on currently active editors
-%\end{itemize}

@@ -9,11 +9,11 @@ The first possibility would be to have the user enter the paths to the
 necessary files in text files, parse those files and start a run with
 the parsed information. While this is a good method for performing
 static runs from a console environment it has several disadvantages
-inside the GUI of an Eclipse RCA:
+inside the \ac{GUI} of an Eclipse \ac{RCA}:
 \begin{itemize}
  \item Manually entered file names in a text file are prone to have erroneous information.
 It is very hard to manually enter the correct file name of any file and the entered location
-only works on one OS. Aside from that it takes a long time to manually enter the possible wast
+only works on one \ac{OS}. Aside from that it takes a long time to manually enter the possible vast
 amount of files used.
  \item There is no way to quickly adjust the file if other models or execution files should be used.
  \item It also means more files cluttering up the workspace.
@@ -30,7 +30,7 @@ exactly the way they are needed some disadvantages come along:
 \end{itemize}
 
 A more comprehensive approach would be to use one of the dialogs provided by Eclipse specifically the wizard type dialog.
-Eclipse itself uses a host of wizards as explained in [ref here].
+Eclipse itself uses a host of wizards as explained in Section \ref{section:AutoTechWizards}.
 The wizard has several advantages over the other methods explained here:
 \begin{itemize}
  \item Even inexperienced users can be guided to set up a valid execution run.
@@ -41,11 +41,11 @@ The wizard has several advantages over the other methods explained here:
 
 \section{Input for the Automation}
 \label{section:AutoConceptsInput}
-In order to send information to the DataComponents the first decision must consider the
-form of the information that will be supplied.
-The chosen form is that of a list of key, value pairs. It allows for most
+In order to send information to the DataComponents (see Section \ref{section:IntroDataComponent})
+the first decision must consider the form of the information that will be supplied.
+The chosen form is that of a list of (key, value) pairs. It allows for most
 flexibility while still being very generic and simple to read and write on.
-This list of properties will at least include the path to the model file in order
+This list of properties will at least include the path to the model file (see Section \ref{section:IntroModelFile}) in order
 for components to be executed with several different model files without having
 to alter the code between runs.
 
@@ -65,12 +65,12 @@ that a run is started in any event and keeps communication between the component
 
 \section{Automate the execution}
 \label{section:AutoConceptsExecution}
-Automating the execution itself requires the plug-in to interact with the KIEM.
-There is already an API defined for loading an execution file by supplying a path so that
+Automating the execution itself requires the plug-in to interact with the Execution Manager.
+There is already an \ac{API} defined for loading an execution file by supplying a path so that
 is what will be used in this project.
-Then it is necessary to initialize the execution and step through it using the API
-methods provided in the Execution. For this the EventListener extension point of the 
-KIEM can also be used in order to determine when a step has finished executing and
+Then it is necessary to initialize the execution and step through it using the \ac{API}
+methods provided in the Execution Manager. For this the EventListener extension point (see Section \ref{section:EventListener}) of the 
+Execution Manager can also be used in order to determine when a step has finished executing and
 a new one can be dispatched.
 After the execution is finished all components should be called again to be given
 a chance to provide information for the display in the next step. This information

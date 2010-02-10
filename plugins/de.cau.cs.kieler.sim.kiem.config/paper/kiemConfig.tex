@@ -1,13 +1,13 @@
 \chapter{KiemConfigurationPlugin}
 \label{chapter:KiemConfig}
 \begin{itemize}
- \item own plugin for modularity, reuse of old code, no interference with other plugins
+ \item own plug in for modularity, reuse of old code, no interference with other plug ins
 \end{itemize}
 
 \section{Extension Point Implementation}
 \subsection{Implementing Classes}
 \begin{itemize}
- \item toolbar provider: link to contribution manager, forward array of contributions
+ \item tool bar provider: link to contribution manager, forward array of contributions
  \item configuration provider: link to configuration manager, forward requests
  \item event listener: handles events received by the configData component 
     listen to load/save events, can be disabled when KIEMConf is about to trigger load/save
@@ -22,7 +22,7 @@
 \subsubsection{Abstract Manager Superclass}
 \begin{itemize}
  \item provides methods that all managers need
- \item load/save through the plugins preference store
+ \item load/save through the plug ins preference store
  \item add/remove/notify listeners
 \end{itemize}
 
@@ -125,7 +125,7 @@ in the corresponding combo box.
   \centering
   \includegraphics[scale=.5]{UMLMostRecentList.jpg}
   \caption[MostRecentlyUsedList]%
-  {MostRecentlyUsedList\protect\footnotemark}
+  {MostRecentlyUsedList\protect}
   \label{fig:MostRecentlyUsedList}
 \end{figure}
 
@@ -159,13 +159,13 @@ passes the new list of selected items back to the PropertyUsageManager.
   \centering
   \includegraphics[scale=.5]{PropertyUsageDialog.jpg}
   \caption[Property Usage Dialog]%
-  {The Property Usage Dialog\protect\footnotemark}
+  {The Property Usage Dialog\protect}
   \label{fig:PropertyUsageDialog}
 \end{figure}
 
 \subsection{Scheduling page}
 This preference page is used to manage the schedules and the editors that they belong to.
-This page is basicly a modified version of the LayoutPrioritiesPage by msp.
+This page is basically a modified version of the LayoutPrioritiesPage by msp.
 
 \begin{itemize}
  \item table with schedules / editors and their priorities
@@ -198,6 +198,6 @@ that takes a list of editor ids and returns the one selected by the user.
   \centering
   \includegraphics[width=1\textwidth]{EditorSelectionDialog.jpg}
   \caption[Editor Selection Dialog]%
-  {The Editor Selection Dialog\protect\footnotemark}
+  {The Editor Selection Dialog\protect}
   \label{fig:EditorSelectionDialog}
 \end{figure}

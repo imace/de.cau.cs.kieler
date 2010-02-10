@@ -1,11 +1,11 @@
 \chapter{The Automated Executions Plug-in}
-- new plugin
+- new plug in
 - handles the setup, control flow and display of automated execution
 - consists of 3 parts explained in detail below
 - wizard, manager, view
 
 \section{Automated Component}
-An automated component is any DataComponent that wants to interact with
+An automated component is any DataComponent (see Section \ref{section:IntroDataComponent}) that wants to interact with
 the automated execution plug-in. As seen in the diagram automated components
 have to implement three methods:
 
@@ -20,24 +20,19 @@ This allows components to load additional files that are always in the
 same path as the execution file and determine which of those to load
 based on the iteration index.
 
-\subsection{wantAnotherStep()}
-This method is called after every step of the execution manager.
-All components are asked if they want to perform another step and if
-one components answers with TRUE the execution manager will perform another
-step.
-This makes it unnecessary to know the exact number of steps needed for
-the execution before the execution starts.
+\subsection{int wantMoreSteps()}
+This method is called before the Automation Manager performs the first step.
+All components will be asked how many steps they are likely to need for their
+execution run. The maximum of these values will be taken and the execution
+will perform the requested number of steps. After that the components
+will be asked again and so on. The process stops when all components
+answer with zero.
 
-\subsection{wantsAnotherRun()}
-This method is the equivalent for the wantAnotherStep() method in the context
-of entire execution runs.
-After no component wants to perform another step all components are asked
-if they want to perform another run. If one component answers with TRUE
-the entire simulation is stopped and then started again with the same
-model file and execution file but an incremented iteration index.
-This can for example be used to execute the same model with a different
-set of trace files by just naming the trace files the same way as the
-model files with a number at the end.
+\subsection{int wantsMoreRuns()}
+This method works analog to the wantMoreSteps() method in the context
+of entire execution runs. It is used to determine how many iterations
+should be performed with the given combination of execution file and model
+file.
 
 \section{Automated Producer}
 This interface extends the AutomatedComponent interface.
@@ -52,7 +47,7 @@ specially designed view (see chapter about the view).
 \subsection{File Selection Page}
 - wizard is used to set up the execution run
 - extends ResourceImportWizard for displaying a folder/file structure for selecting files from
-- easily usuable, select whole folders, filter file types
+- easily usable, select whole folders, filter file types
 - can be given an initial selection, on close will save the selection, store it in preference store
 and restore it on load
 - additional dialog for selecting execution files that are not in the workspace but imported
@@ -118,7 +113,7 @@ selection on next open
  - prerequisite needed here: always the same outputs throughout the entire execution file
 - first columns display model file name, iteration index and current status
 
-\subsection{Toolbar}
+\subsection{Tool bar}
 - button to start the wizard
 - button for clearing the view
 - text field showing the step that was just processed
