@@ -1,4 +1,25 @@
 
+\makeatletter
+\@ifundefined{float@listhead}{}{%
+    \renewcommand*{\lstlistoflistings}{%
+        \begingroup
+    	    \if@twocolumn
+                \@restonecoltrue\onecolumn
+            \else
+                \@restonecolfalse
+            \fi
+            \float@listhead{\lstlistlistingname}%
+            \setlength{\parskip}{\z@}%
+            \setlength{\parindent}{\z@}%
+            \setlength{\parfillskip}{\z@ \@plus 1fil}%
+            \@starttoc{lol}%
+            \if@restonecol\twocolumn\fi
+        \endgroup
+    }%
+}
+\makeatother
+
+
 %% Inhaltsverzeichnis
 \tableofcontents
 
@@ -9,8 +30,7 @@
 \listoffigures
 
 %% Verzeichnis der Auflistungen
-% \lstlistoflistings
-
+\lstlistoflistings
 
 %% Verzeichnis der Abk�rzungen
 \input{abbreviations}

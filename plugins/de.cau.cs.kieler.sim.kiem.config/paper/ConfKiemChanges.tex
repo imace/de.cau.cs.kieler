@@ -177,21 +177,23 @@ still able to fall back on hard-coded default values if no configuration plug-in
 \begin{lstlisting}
 public int getAimedStepDuration() {
    int result = this.aimedStepDuration;
-   Integer value = getIntegerValueFromProviders(AIMED_STEP_DURATION_ID);
+   Integer value = getIntegerValueFromProviders
+      (AIMED_STEP_DURATION_ID);
    if (value != null) {
       result = value;
    }
    return result;
 }
 
-public void setAimedStepDuration(final int aimedStepDurationi) {
-   this.aimedStepDuration = aimedStepDurationi;
+public void setAimedStepDuration(final int stepParam) {
+   this.aimedStepDuration = stepParam;
    // if executing, also update current delay
    if (execution != null) {
-      this.execution.setAimedStepDuration(aimedStepDuration);
+      this.execution.setAimedStepDuration(stepParam);
    }
    this.getKIEMViewInstance().updateViewAsync();
-   notifyConfigurationProviders(AIMED_STEP_DURATION_ID, aimedStepDurationi + "");
+   notifyConfigurationProviders
+      (AIMED_STEP_DURATION_ID, stepParam + "");
 }
 \end{lstlisting}
 
@@ -218,8 +220,8 @@ completion of the loading operation.
   label=fig:openFileMethod,
 }
 \begin{lstlisting}
-public void openFile(final IPath executionFile, final boolean readOnly) 
-   throws IOException {
+public void openFile(final IPath executionFile, 
+   final boolean readOnly) throws IOException {
    String fileString = executionFile.toOSString();
    final InputStream inputStream;
    
@@ -229,9 +231,11 @@ public void openFile(final IPath executionFile, final boolean readOnly)
       URL pathUrl = new URL(urlPath);
       inputStream = pathUrl.openStream();
    } else {
-      URI fileURI = URI.createPlatformResourceURI(fileString, true);
+      URI fileURI = 
+         URI.createPlatformResourceURI(fileString, true);
       // resolve relative workspace paths
-      URIConverter uriConverter = new ExtensibleURIConverterImpl();
+      URIConverter uriConverter = 
+         new ExtensibleURIConverterImpl();
       inputStream = uriConverter.createInputStream(fileURI);
    }
 
