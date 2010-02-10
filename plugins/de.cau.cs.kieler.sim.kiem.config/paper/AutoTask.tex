@@ -1,28 +1,26 @@
 \chapter{Problem Statement}
 \label{chapter:AutoTask}
+The objective of this project is to find a way to automate the execution
+runs of the Execution Manager as described by Christian Motika in his
+diploma-thesis\cite{cmot-dt}.
 
-In order to do validations or recording automatically in a batch-like mode, 
-the Execution Manager needs to be extended by an Eclipse Plug-in that some kind of 
-remote controls it (API) and has/supports for example: 
-\begin{itemize}
- \item An own eclipse view (GUI) 
- \item Loading and saving batch files 
- \item Some way to specify batch jobs (e.g., a special notation language) 
- \item Possibly a way to do all this from the command line
-\end{itemize}
-
-
-Currently the KIEM works in a way that you select an execution file and then
-press play. The components then have to gather all information they need
-themselves like model files, trace files and so on. The execution runs until
+Currently the Execution manager works in a way that the user manually sets up
+a new execution run or loads a saved execution file. The components then have 
+to gather all information they need themselves like model files, trace files and so on.
+Since there is no generic way to do that, this information is either hard-coded into
+the components or entered manually through the properties.
+After that the user has to manually control the execution. The execution runs until
 the user or a component stops it. The user then has to manually set up another
 execution run, possibly even rewriting his components if the model files
-and trace files are hard coded.
+and trace files are hard-coded or manually change the properties.
 This is very unsatisfactory if you have a large number of model files that
-should be tested with a one or more execution files and several trace files.
-% ask ctr for screenshot of directory perhaps
+should be tested with a one or more execution files and possibly hundreds of trace files
+(see Figure ).
+% ask ctr for screen shot of directory perhaps
+Performing runs like that manually is completely out of the question as even
+with the automation in place it would take several hours.
 
-The problem can be broken down in 4 parts which are explained in detail in
+The task resulting from this problem can be broken down in 4 parts which are explained in detail in
 the following sections:
 \begin{enumerate}
  \item The setup of an automated run by the user.
@@ -31,7 +29,6 @@ the following sections:
  \item The gathering of information after the run has finished and the display 
 of that information.
 \end{enumerate}
-
 
 \section{Setting up a Run}
 \label{section:AutoTaskSetup}
@@ -45,19 +42,19 @@ The second objective is to enable the components to receive inputs.
 Each component should receive all information it needs prior to each execution
 run in order to make the components more dynamic. This mechanism would ensure
 that components can be written in a more generic way than is currently possible.
-We will have to define an API for this information passing process as well as
-an API to trigger an automated execution from other plug-ins.
+We will have to define an \ac{API} for this information passing process as well as
+an \ac{API} to trigger an automated execution from other plug-ins.
 
 
 \section{Automate the execution}
 \label{section:AutoTaskExecution}
-The third objective is to automate the process of execution itself. This would
+The third objective is to automate the control flow of the execution itself. This would
 involve the following:
 \begin{enumerate}
-  \item loading an execution file
-  \item stepping the execution to the required step
-  \item gather the information produced by the components
-  \item properly shut down the execution so that a new one can be started
+  \item Loading the desired execution files, model files and trace files.
+  \item Determining how many steps should be performed and running the execution up the desired step.
+  \item Gathering the information produced by the components.
+  \item Properly shut down the execution so that a new one can be started.
 \end{enumerate}
 
 
@@ -67,8 +64,8 @@ The last objective is to display the information in a meaningful way.
 This should involve at least two methods of output:
 \begin{enumerate}
   \item A formatted string possibly in an XML fashion that can be parsed and
-  used by other plug-ins for automatic analysis.
-  \item Some graphic component that will display the information in way that is
+  used by other plug-ins for automated analysis.
+  \item Some graphic component that will display the information in a way that is
   easy to read for most users.
 \end{enumerate}
 

@@ -44,7 +44,7 @@ The wizard has several advantages over the other methods explained here:
 In order to send information to the DataComponents the first decision must consider the
 form of the information that will be supplied.
 The chosen form is that of a list of key, value pairs. It allows for most
-flexiblility while still being very generic and simple to read and write on.
+flexibility while still being very generic and simple to read and write on.
 This list of properties will at least include the path to the model file in order
 for components to be executed with several different model files without having
 to alter the code between runs.
@@ -68,25 +68,33 @@ that a run is started in any event and keeps communication between the component
 Automating the execution itself requires the plug-in to interact with the KIEM.
 There is already an API defined for loading an execution file by supplying a path so that
 is what will be used in this project.
-Then it is neccasary to initialize the execution and step through it using the API
+Then it is necessary to initialize the execution and step through it using the API
 methods provided in the Execution. For this the EventListener extension point of the 
 KIEM can also be used in order to determine when a step has finished executing and
 a new one can be dispatched.
 After the execution is finished all components should be called again to be given
-a chance to provide some information for the display in the next step. This information
-will be gathered in the same form and way as described in [ref to pref section].
+a chance to provide information for the display in the next step. This information
+will be gathered in the same form and way as described in Section \ref{section:AutoConceptsInput}.
 
 
 \section{Output execution results}
 \label{section:AutoConceptsOutput}
 On the subject of displaying the information several options are available.
 
+The first option would be to open a dialog once the execution has finished
+and display the results in a tabular manner. This has the advantage that the
+users attention is immediately caught when the run finishes. However pop-up boxes
+should be used only when something very important happens and only with small messages
+as they tend to interrupt the users work flow. Aside from that the user might want
+to look at the results from the execution and compare them with the actual model.
+An opened dialog is usually something sitting in front of the rest of the \ac{IDE}
+and that user wants to get rid of as fast as possible.
 
-The last objective is to display the information in a meaningful way.
-This should involve at least two methods of output:
-\begin{enumerate}
-  \item A formatted string possibly in an XML fashion that can be parsed and
-  used by other plug-ins for automatic analysis.
-  \item Some graphic component that will display the information in way that is
-  easy to read for most users.
-\end{enumerate}
+The option taken in this project will utilize the view mechanism provided by Eclipse. %ref to description of view
+This approach ensures that the user can place the displayed results where he wants them to be.
+It also makes it possible for the user to run an execution multiple times and compare the
+results by having them displayed in multiple views or next to each other in the same view.
+Another advantage of the view concept is that it provides a tool bar for adding actions.
+The user might want to control the automated run during its execution or interact with
+the displayed results. While a static dialog would have difficulties providing the control elements
+for those actions a view can easily display them in the tool bar.

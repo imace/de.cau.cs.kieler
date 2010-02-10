@@ -1,14 +1,11 @@
 \chapter{Code changes in KIEMPlugin}
 \label{chapter:AutoKiemChanges}
-\begin{itemize}
- \item interfaces and API changes to allow access to execution
- \item changes to load values rather than hard coded defaults
-\end{itemize}
+In order for the \ac{KIEMAuto} to operate successfully there were
+no changes necessary beyond the ones described in Chapter \ref{chapter:KiemChanges}.
 
-\section{Schema files and Interfaces}
-\begin{itemize}
- \item event listener mentioned in part I, for listening to KIEM execution
- events
- \item interfaces added to KIEM itself to avoid components breaking when
- automated plug-in is not loaded
-\end{itemize}
+The \ac{KIEMAuto} makes use of the event listener extension point 
+(see Section \ref{section:EventListener}) in order to get 
+notified about events occurring during the current execution run.
+
+It also uses the tool bar contributor extension point (see Section \ref{section:ToolbarContributionProvider})
+to add new control elements to the Execution Managers tool bar.

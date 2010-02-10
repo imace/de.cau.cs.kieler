@@ -21,7 +21,7 @@
 \contentsline {section}{\numberline {5.1}Schema files and Interfaces}{13}{section.5.1}
 \contentsline {subsection}{\numberline {5.1.1}Toolbar Contribution Provider}{13}{subsection.5.1.1}
 \contentsline {subsection}{\numberline {5.1.2}Configuration provider}{15}{subsection.5.1.2}
-\contentsline {subsection}{\numberline {5.1.3}Event Manager}{15}{subsection.5.1.3}
+\contentsline {subsection}{\numberline {5.1.3}Event Listener}{15}{subsection.5.1.3}
 \contentsline {section}{\numberline {5.2}KIEMPlugin.java}{16}{section.5.2}
 \contentsline {section}{\numberline {5.3}KIEMView}{16}{section.5.3}
 \contentsline {chapter}{\numberline {6}KiemConfigurationPlugin}{19}{chapter.6}
@@ -48,12 +48,12 @@
 \contentsline {section}{\numberline {7.1}Results}{27}{section.7.1}
 \contentsline {section}{\numberline {7.2}Further improvements}{27}{section.7.2}
 \contentsline {part}{\numberline {II}Automated Execution}{29}{part.2}
-\contentsline {chapter}{\numberline {8}Used technologies}{31}{chapter.8}
+\contentsline {chapter}{\numberline {8}Used Technologies}{31}{chapter.8}
 \contentsline {section}{\numberline {8.1}Eclipse WorkbenchJob API}{31}{section.8.1}
 \contentsline {section}{\numberline {8.2}Eclipse Wizards}{31}{section.8.2}
 \contentsline {chapter}{\numberline {9}Problem Statement}{35}{chapter.9}
 \contentsline {section}{\numberline {9.1}Setting up a Run}{35}{section.9.1}
-\contentsline {section}{\numberline {9.2}Input for the Automation}{36}{section.9.2}
+\contentsline {section}{\numberline {9.2}Input for the Automation}{35}{section.9.2}
 \contentsline {section}{\numberline {9.3}Automate the execution}{36}{section.9.3}
 \contentsline {section}{\numberline {9.4}Output execution results}{36}{section.9.4}
 \contentsline {chapter}{\numberline {10}Concepts}{37}{chapter.10}
@@ -62,7 +62,6 @@
 \contentsline {section}{\numberline {10.3}Automate the execution}{38}{section.10.3}
 \contentsline {section}{\numberline {10.4}Output execution results}{38}{section.10.4}
 \contentsline {chapter}{\numberline {11}Code changes in KIEMPlugin}{41}{chapter.11}
-\contentsline {section}{\numberline {11.1}Schema files and Interfaces}{41}{section.11.1}
 \contentsline {chapter}{\numberline {12}The Automated Executions Plug-in}{43}{chapter.12}
 \contentsline {section}{\numberline {12.1}Automated Component}{43}{section.12.1}
 \contentsline {subsection}{\numberline {12.1.1}provideProperties()}{43}{subsection.12.1.1}
