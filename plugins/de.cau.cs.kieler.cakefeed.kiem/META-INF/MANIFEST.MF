@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: de.cau.cs.kieler.cakefeed.kiem
+Bundle-SymbolicName: de.cau.cs.kieler.cakefeed.kiem;singleton:=true
+Bundle-Version: 0.1.0
+Bundle-Activator: de.cau.cs.kieler.cakefeed.kiem.Activator
+Bundle-Vendor: Christian-Albrechts-University of Kiel
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ de.cau.cs.kieler.sim.kiem;bundle-version="0.1.0",
+ org.json;bundle-version="0.1.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
