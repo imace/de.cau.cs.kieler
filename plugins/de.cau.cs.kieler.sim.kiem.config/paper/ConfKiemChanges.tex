@@ -122,20 +122,17 @@ on any event that happens inside the Execution Manager.
   \label{fig:UMLEventListener}
 \end{figure}
 
-The semantics of the methods will be explained in detail in the following two subsections.
-
-\subsubsection*{provideEventOfInterest()}
-This method is directly derived from the method with the same name in the AbstractDataComponent class
-of the \ac{KIEM} plug-in. It is called by the EventManager to determine which events the implementing
-class is interested in. This is done to improve efficiency and not flooding components with events
-they are not interested in.
+\begin{description}
+ \item \textbf{int provideEventOfInterest()} : This method is directly derived from the method with 
+the same name in the AbstractDataComponent class of the \ac{KIEM} plug-in. It is called by the
+EventManager to determine which events the implementing class is interested in.
+This is done to improve efficiency and not flooding components with events they are not interested in.
 
 Based on the response, the EventManager puts the component into lists along with the DataComponentWrappers
 already inside.
-\subsubsection*{notifyEvent(KiemEvent event)}
-This method is called by the EventManager when something happens inside the Execution Manager that the implementing
-classes might be interested in.
-
+ \item \textbf{void notifyEvent(KiemEvent event)} : This method is called by the EventManager when 
+something happens inside the Execution Manager that the implementing classes might be interested in.
+\end{description}
 
 \section{KIEMPlugin.java}
 \label{section:ConfChangesKiemPlugin}
@@ -147,55 +144,32 @@ most of the adjustments were made here.
 The following methods were added to communicate with the plug-ins registered through
 the ConfigurationProvider extension point (see Section \ref{section:ConfigurationProvider}).
 \begin{description}
- \item {notifyConfigurationProviders(String propertyId, String value)} : This method can be called by any class
+ \item \textbf{notifyConfigurationProviders(String propertyId, String value)} : This method can be called by any class
 inside the Execution Manager itself. It should be called when the user changes a property through any of
 the elements on the \ac{GUI}. The method will then inform all listeners that the property identified by the
 given identifier was changed to the new value.
- \item {String getPropertyValueFromProviders(String propertyId)} : This method allows the Execution Manager to
+ \item \textbf{String getPropertyValueFromProviders(String propertyId)} : This method allows the Execution Manager to
 retrieve a previously saved value. The \ac{KIEM} will ask all plug-ins registered on the extension point if they
 can provide a value for the given identifier. Plug-ins that can't provide the value will indicate this by throwing
 an Exception. The \ac{KIEM} will then take the first value he receives without getting an Exception and assign it
 to the internal property.
- \item {Integer getIntegerValueFromProviders(final String propertyId)} : This method is a convenience method for
+ \item \textbf{Integer getIntegerValueFromProviders(final String propertyId)} : This method is a convenience method for
 the one described above. It will try to parse an integer from the retrieved String and return it or return null
 if no integer could be parsed.
 \end{description}
 
 \subsection{Getters and Setters}
 An example for the use of the methods described in the last section can be found in the Getters and Setters for
-the different properties in the Execution Manager (for an example see Figure \ref{fig:getterAndSetter}). 
+the different properties in the Execution Manager (for an example see Figure \ref{list:getterAndSetter}). 
 These were changed in order to use the new methods but are
 still able to fall back on hard-coded default values if no configuration plug-in is registered.
 
-\lstset{
-  language=Java,
-  frame=shadowbox, 
-  rulesepcolor=\color{blue},
-  caption=The modified Getter and Setter for the step duration,
-  label=fig:getterAndSetter,
-}
-\begin{lstlisting}
-public int getAimedStepDuration() {
-   int result = this.aimedStepDuration;
-   Integer value = getIntegerValueFromProviders
-      (AIMED_STEP_DURATION_ID);
-   if (value != null) {
-      result = value;
-   }
-   return result;
-}
-
-public void setAimedStepDuration(final int stepParam) {
-   this.aimedStepDuration = stepParam;
-   // if executing, also update current delay
-   if (execution != null) {
-      this.execution.setAimedStepDuration(stepParam);
-   }
-   this.getKIEMViewInstance().updateViewAsync();
-   notifyConfigurationProviders
-      (AIMED_STEP_DURATION_ID, stepParam + "");
-}
-\end{lstlisting}
+\listingjava
+\showlistingex{code/getterSetter.txt}
+{Java}
+{Example of modified Getter and Setter}
+{list:getterAndSetter}
+{t}
 
 
 \subsection{Open File}
@@ -206,42 +180,19 @@ missing execution files before the load enters the UIThread. This was necessary 
 the callers of the method to catch the resulting exception.
 The method also had to be modified in order to be able to take files that are not inside the workspace
 but were added through an extension point. The changed part of the openFile method is shown in 
-Listing \ref{fig:openFileMethod}.
+Listing \ref{list:openFileMethod}.
 The last change to that method concerns the event listener. When the user opens a file through the
 Eclipse workspace without using the \ac{KIEMConfig} plug-in the plug-in still has to be informed.
 This happens through the use of the Event Manager that notifies all listeners upon the successful
 completion of the loading operation.
 
-\lstset{
-  language=Java,
-  frame=shadowbox, 
-  rulesepcolor=\color{blue},
-  caption=The head of the openFile method,
-  label=fig:openFileMethod,
-}
-\begin{lstlisting}
-public void openFile(final IPath executionFile, 
-   final boolean readOnly) throws IOException {
-   String fileString = executionFile.toOSString();
-   final InputStream inputStream;
-   
-   if (fileString.startsWith("bundleentry:/")) {
-      String urlPath = fileString.replaceFirst
-         ("bundleentry:/", "bundleentry://");
-      URL pathUrl = new URL(urlPath);
-      inputStream = pathUrl.openStream();
-   } else {
-      URI fileURI = 
-         URI.createPlatformResourceURI(fileString, true);
-      // resolve relative workspace paths
-      URIConverter uriConverter = 
-         new ExtensibleURIConverterImpl();
-      inputStream = uriConverter.createInputStream(fileURI);
-   }
+\listingjava
+\showlistingex{code/openFile.txt}
+{Java}
+{The head of the modified openFile() method}
+{list:openFileMethod}
+{t}
 
-   Display.getDefault().syncExec(new Runnable() {
-   ...
-\end{lstlisting}
 
 \section{KIEMView}
 \label{section:ConfChangesKiemView}

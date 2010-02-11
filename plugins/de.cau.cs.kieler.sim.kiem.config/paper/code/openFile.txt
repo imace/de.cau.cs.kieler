@@ -1,0 +1,21 @@
+public void openFile(final IPath executionFile, 
+   final boolean readOnly) throws IOException {
+   String fileString = executionFile.toOSString();
+   final InputStream inputStream;
+   
+   if (fileString.startsWith("bundleentry:/")) {
+      String urlPath = fileString.replaceFirst
+         ("bundleentry:/", "bundleentry://");
+      URL pathUrl = new URL(urlPath);
+      inputStream = pathUrl.openStream();
+   } else {
+      URI fileURI = 
+         URI.createPlatformResourceURI(fileString, true);
+      // resolve relative workspace paths
+      URIConverter uriConverter = 
+         new ExtensibleURIConverterImpl();
+      inputStream = uriConverter.createInputStream(fileURI);
+   }
+
+   Display.getDefault().syncExec(new Runnable() {
+   ...

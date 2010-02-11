@@ -1,0 +1,20 @@
+public int getAimedStepDuration() {
+   int result = this.aimedStepDuration;
+   Integer value = getIntegerValueFromProviders
+      (AIMED_STEP_DURATION_ID);
+   if (value != null) {
+      result = value;
+   }
+   return result;
+}
+
+public void setAimedStepDuration(final int stepParam) {
+   this.aimedStepDuration = stepParam;
+   // if executing, also update current delay
+   if (execution != null) {
+      this.execution.setAimedStepDuration(stepParam);
+   }
+   this.getKIEMViewInstance().updateViewAsync();
+   notifyConfigurationProviders
+      (AIMED_STEP_DURATION_ID, stepParam + "");
+}

@@ -1,41 +1,235 @@
-\chapter{KiemConfigurationPlugin}
+\chapter{Kiem Configuration Plug-in}
 \label{chapter:KiemConfig}
+This chapter describes the contents and functionality of the newly created
+plug-in to solve the problems described in Chapter \ref{chapter:ConfTask}.
+A new plug-in was created in order to improve modularity within the \ac{KIELER} framework.
+Putting the code into the \ac{KIEM} plug-in itself would have meant that
+there would have been no way to separate the two projects.
+
+The sections in this chapter describe the different parts of the \ac{KIEMConfig} plug-in.
+The whole plug-in is structured according to the Model-View-Controller pattern.
+The first section will describe the data storing classes which constitute the model.
+The second section will describe the different manager classes which are essentially the
+controller of the entire plug-in. This section will also look at the \ac{API} that the
+\ac{KIEMConfig} plug-in provides to other plug-ins.
+The last section will describe the classes that render the preference pages and other
+view elements.
+
+\section{Data Classes and Utilities - the Model}
+\label{section:ConfModel}
+This section will describe the different classes that are responsible for storing all
+data that the plug-in needs at runtime.
+
+
+\subsection{ConfigDataComponent}
+\label{section:ConfigDataComponent}
+\index{ConfigDataComponent}
+This extension to the AbstractDataComponent of the \ac{KIEM} is responsible for solving
+the problem described in Section \ref{section:ConfTaskConfig} and implements the behavior
+described in Section \ref{section:ConfConceptsConf}. The component is a DataComponent
+like all others used in the \ac{KIEM}. It is registered through the extension point
+that allows new DataComponents to appear in the list of available components.
+However unlike the usual DataComponent that is responsible for simulating a model during
+an execution run its main function is to store the configuration of the \ac{KIEM}.
+
+Like all other DataComponents the ConfigDataComponent contains an array of
+KIEMProperties. These properties contain a String key which should be non-null and unique and 
+a value which can be of various types. However for the purpose of storing configuration
+elements only the String value will be used.
+
+The new DataComponent also provides additional methods in order to make accessing and manipulatin the
+array more convenient:
+\begin{description}
+ \item \textbf{KiemProperty findProperty(String key)} : This method iterates through the array and attempts
+to find the KiemProperty that has exactly the provided key. Since the keys are assumed to be unique the first
+match is returned by this method. If there is no property with the given key the method will throw
+an Exception.
+ \item \textbf{void removeProperty(String key)} : This method attempts to remove the property identified by
+the given key from the array. It does this by converting the array to a list, locating and removing the
+specified property and then converting the list back to an array. This procedure may not be as efficient
+as manually constructing the new array but it still performes the operation in linear time. Furthermore
+it makes the method easier to understand than the alternative.
+ \item \textbf{KiemProperty updateProperty(String key, String value)} : This method updates the property 
+identified by the key with a new value. It first checks if the property already exists and if it does its value
+is updated. If a property with the specified key doesn't exist a new one is created and the provided value
+stored inside.
+\end{description}
+
+In addition to those methods the ConfigDataComponent also keeps a reference to its DataComponentWrapper (see Section
+\ref{section:IntroDataComponentWrapper}). This is necessary in order to retrieve the properties from the wrapper
+right after the execution file was loaded and to write them back into the wrapper before the file is saved.
+
+TODO:
 \begin{itemize}
- \item own plug in for modularity, reuse of old code, no interference with other plug ins
+ \item can be added and removed by the user to update old files or downgrade new ones
+ \item used as current/default configuration
 \end{itemize}
 
-\section{Extension Point Implementation}
-\subsection{Implementing Classes}
+\subsection{EditorDefinition}
+\label{section:EditorDefinition}
+\index{EditorDefinition}
+The EditorDefinition class is responsible for storing information about the editors that are known to
+the \ac{KIEMConfig}. Each instance of this class stores the information about a single editor. This is
+necessary in order to successfully operate a list of execution files that work for the currently active
+editor.
+\begin{description}
+ \item \textbf{String editorId} : The identifier for the given editor. This attribute is a unique non-null String
+by which any editor can be identified. For example the standard Java editor has the id \textit{org.eclipse.jdt.ui.CompilationUnitEditor}.
+ \item \textbf{String name} : The name of the editor. This is the human readable name given to the editor
+by the plug-in that defines the editor. Storing this attribute may seem redundant since the names of
+the editors can be retrieved through an Eclipse mechanism if the editor id is known. However there is no
+guarantee that a previously saved editor id exists in the currently active application in which case the name
+of the editor can't be retrieved.
+ \item \textbf{boolean isLocked} : This attribute is responsible for showing that the editor can not be removed.
+The reason that an editor might become read only will be explained in Section \ref{section:DefaultSchedule}.
+\end{description}
+
+\subsection{ScheduleData}
+\label{section:ScheduleData}
+\index{ScheduleData}
+The ScheduleData class is responsible for tracking the different execution files that are known
+to the \ac{KIEMConfig}. A ScheduleData object is the representation of a single execution file. 
+These objects are used to main he lists of recently used schedules and of those that match the 
+currently opened editor. It contains the following attributes:
 \begin{itemize}
- \item tool bar provider: link to contribution manager, forward array of contributions
- \item configuration provider: link to configuration manager, forward requests
- \item event listener: handles events received by the configData component 
-    listen to load/save events, can be disabled when KIEMConf is about to trigger load/save
+ \item The most important attribute is the path at which the execution file that this instance
+should represent is located. The path is used to trigger the loading of the file inside
+the Execution Manager. It is also used to determine whether a newly loaded execution file
+is already known. The path also doubles as the unique identifier for the schedule since there
+can't be two files at the same physical location.
+\item The ScheduleData object also stores a list of priorities for all known editors. This is
+necessary in order to determine whether or not a given schedule can be used with the currently
+opened editor and which position it should have in an ordered list. To make accessing and manipulating
+this list easier it simply uses an instance of the ConfigDataComponent. The component already has
+methods for accessing the array inside and can be easily stored and loaded.
+ \item Like the EditorDescription a ScheduleData also contains a boolean \textbf{isLocked}. ScheduleData
+object with that attribute set to \textit{true} can't be modified or removed (see Section \ref{section:DefaultSchedule}).
 \end{itemize}
 
-\subsection{Manager Classes}
+MAYBE TODO:
 \begin{itemize}
- \item bundled control behavior 
- \item no cluttering up the main activator class
- \item singleton pattern
+ \item getting/setting supported priority, adding/removing editors
 \end{itemize}
-\subsubsection{Abstract Manager Superclass}
+
+\subsection{Tools}
+\label{section:Tools}
+The Tools class holds a host of useful methods and attributes that are used in various parts of the plug-in.
+
+\subsubsection{Attributes}
+\label{section:ToolsAttributes}
+First of all it contains messages and tooltips that are used in more than one class.
+This ensures that the appearance of the different messages is unified across the entire plug-in. It also
+makes it easy to change these messages or combine different partial messages to new ones.
+
+The class also holds the different identifiers for the properties that are used in the plug-in. This is done
+to avoid bugs due to mistyping an identifier which is likely to happen if it is stored in two different places.
+
+\subsubsection{Methods for Parsing and Serialization}
+\label{section:ToolsMethodsParsing}
+All of the manager classes in the \ac{KIEMConfig} need to save their properties into the Eclipse preference store.
+In order to have the information stored in a structured way an XML like format was chosen. As this requires the keys and values
+to be formatted in a certain way the Tools class provides methods to format the Strings in the required way.
+\begin{description}
+ \item \textbf{String putValue(String key, String value} : Converts the (key, value) pair into a formatted String for saving
+into the Eclipse preference store. The resulting String has the following format: 
+\textit{<[key]>[value]</[key]>}.
+ \item \textbf{String putProperty(KiemProperty property} : Convenience method for transforming a KiemProperty object into a
+formatted String. This method exists because most of the items serialized in this way are of that type. The resulting String
+has the following format: \textit{<KIEM_PROPERTY> <Key> [property.key] </Key> <Value> [property.value] </Value> </KIEM_PROPERTY>}.
+\end{description}
+
+The methods described above provide all the necessary facilities for the \ac{KIEMConfig} to save its preferences
+into the Eclipse preference store. In order to retrieve these properties the Tools class provides another set of
+methods. These methods take an input String and try to parse the saved properties.
+\begin{description}
+ \item \textbf{String getValue(String key, String input)} : This method retrieves the value enclosed by tags with
+the given key. The retrieved value can either be an atomic String that can directly be assigned to a property or
+another series of values enclosed in their tags. The method will always look for the outermost tags inside the
+input String. The method returns null if there are no tags with the provided key inside the input String.
+ \item \textbf{KiemProperty getKiemProperty(String input)} : This convenience method tries to retrieve the 
+(key, value) pair that constitutes a KiemProperty object from an input String.
+ \item \textbf{String[] getValueList(String key, String input)} : Since there sometimes is the need to store an entire
+list of entities the Tools class provides a method to convert an entire list back to the individual Strings.
+The method iterates over the input String and extracts all elements that are enclosed in tags with the specified key.
+\end{description}
+
+
+\subsubsection{Methods for Dialogs}
+\label{section:ToolsMethodsDialogs}
+The Tools class also contains methods for easily displaying error and warning dialogs.
+These methods take the information, add the own plug-in id and forward the information to the 
+error handling facilities inside the Execution Manager itself.
+
+
+\subsection{MostRecentCollection}
+\label{section:MostRecentCollection}
+The MostRecentCollection is a new collection type that is can be used for simulating the 
+behavior found in 'Open recent' menu item of almost any text editing application.
+To avoid the list growing too long it can be given a maximum capacity. After that capacity
+is reached the oldest entry will be deleted when a new one enters the list.
+The default implementation of the collection uses an ArrayList to store the data but any
+other list works as well. Most operations are directly delegating to the operations of the 
+underlying List. 
+The only exception is the add(item : T) method that works in a different way:
+\begin{enumerate}
+ \item It checks if the item is already in the list and removes it. This is done to ensure
+that already added items don't appear twice in the list.
+ \item It adds the item at the highest index to the end of the list and increments the index of all other items.
+ \item The element at the head of the list is overridden by the new item.
+ \item Optionally the last item is removed if the list has grown beyond the capacity.
+\end{enumerate}
+The collection also provides an additional method that is used to replace an item in
+the list by another one. This is used when files are renamed and the name of the ScheduleData inside
+the list has to be updated.
+
+This collection is used to track the most recently used schedules and display them
+in the corresponding ComboBox.
+
+
+
+\section{Manager Class - the Controller}
+\label{section:ConfController}
+The manager classes are responsible for the control flow inside the plug-in. They gather information
+from the view, the Eclipse preference store and the Execution Manager and create and update a
+model using the classes described in Section \ref{section:ConfModel}. There are multiple managers
+each with a different task:
 \begin{itemize}
- \item provides methods that all managers need
+ \item The \textbf{Configuration Manager} is responsible for maintaining the configuration saved in
+each execution file and the default configuration saved in the preferences store.
+ \item The \textbf{Schedule Manager} is responsible for keeping track of the different
+execution files and updating the information inside the ScheduleData objects.
+ \item The task of the \textbf{Editor Manager} is to
+\end{itemize}
+
+
+
+\subsection{Abstract Manager}
+\label{section:AbstractManager}
+All of the managers share some common features that each of them must provide. Some of those
+features are handled almost the same or exactly the same in each manager. This lead to the creation
+of an abstract super class for all managers that takes care of the basic tasks.
+
+The first task is to allow other classes to register as a listener to the manager. Some of the classes
+in the \ac{KIEMConfig} have to perform updates when a value inside the model changes. It is the managers
+responsibility to inform the listeners when such a change was completed successfully.
+
+The second task is to provide the subclasses with facilities to easily access the Eclipse Preference Store.
+Whenever a value is requested by any part of the controller or another plug-in and a manager didn't access
+the preference store yet it has to gain access to the store and retrieve the information belonging to it.
+Furthermore when the user explicitly wants to save the preferences or the workbench is shutting down the
+data contained in the model has to be saved into the Eclipse Preference Store. The Abstract Manager provides
+some methods seen in Figure \ref{fig:AbstractManagerUML}. (For an example of a saved configuration see Appendix \ref{section:AppendixSavedConf}).
+
+
+TODO:
+\begin{itemize}
  \item load/save through the plug ins preference store
  \item add/remove/notify listeners
 \end{itemize}
 
-\subsubsection{Schedule Manager}
-\begin{itemize}
- \item all schedule data
- \item track recently used schedule Ids
- \item ask KIEMPlugin to load a saved schedule, deal with error
- \item add/remove schedules, update schedule priorities
- \item handle user load/save events
-\end{itemize}
-
-\subsubsection{Configuration Manager}
+\subsection{Configuration Manager}
+\label{section:ConfigurationManager}
+\index{Configuration Manager}
 \begin{itemize}
  \item manages current/default configuration, supply filtered lists for preference components
  \item find current configuration and wrapper in data component wrapper list 
@@ -54,82 +248,47 @@
  \item restore default values
 \end{itemize}
 
-\subsubsection{Editor Manager}
+\subsection{Schedule Manager}
+\label{section:ScheduleManager}
+\index{Schedule Manager}
+\begin{itemize}
+ \item all schedule data
+ \item track recently used schedule Ids
+ \item ask KIEMPlugin to load a saved schedule, deal with error
+ \item add/remove schedules, update schedule priorities
+ \item handle user load/save events
+\end{itemize}
+
+
+\subsection{Editor Manager}
+\label{section:EditorManager}
+\index{Editor Manager}
 \begin{itemize}
  \item all editor definitions
  \item add/remove/find editors
  \item default editors 
 \end{itemize}
 
-\subsubsection{Other Managers}
+\subsection{Contribution Manager}
+\label{section:ContributionManager}
+\index{Contribution Manager}
+contribution manager: create combos, save visibility
+
+\subsection{Property Usage Manager}
+\label{section:Property Usage Manager}
+\index{Property Usage Manager}
+property usage manager: track all keys where default config should be used rather than current
+
+
+\subsection{Implementing Classes}
 \begin{itemize}
- \item contribution manager: create combos, save visibility
- \item property usage manager: track all keys where default config should be used rather than current
+ \item tool bar provider: link to contribution manager, forward array of contributions
+ \item configuration provider: link to configuration manager, forward requests
+ \item event listener: handles events received by the configData component 
+    listen to load/save events, can be disabled when KIEMConf is about to trigger load/save
 \end{itemize}
 
-\subsection{Utility and Data Classes}
-
-\subsubsection{ConfigDataComponent}
-\begin{itemize}
- \item extends AbstractDataComponent from KIEM, registers through extension point
- \item can be added and removed by the user to update old files or downgrade new ones
- \item contains an array of KIEMProperty (key, value pairs)
- \item contains methods to more easily modify the properties (update, remove, add, find)
- \item used as current/default configuration
- \item reference to wrapper file to get serialized properties and set for serialization
- \item delegate events received from the Kiem Event Manager
-\end{itemize}
-
-\subsubsection{ScheduleData}
-\begin{itemize}
- \item tracks one specific .execution file
- \item contains file location and list of priorities of supported editors
- \item getting/setting supported priority, adding/removing editors
-\end{itemize}
-
-\subsubsection{Other Data Classes}
-\begin{itemize}
- \item EditorDefinition: holds editorname, editorId pair gotten from plugin definition
- \item KiemConfigEvent: for event dispatching
- \item Wrapper classes: type safety, prevent null values
-\end{itemize}
-
-\subsubsection{Tools}
-\begin{itemize}
- \item Tools class:
-  \begin{itemize}
-    \item holds a lot of Strings used in multiple classes
-    \item methods for converting array to list and back
-    \item displaying error dialog
-  \end{itemize}
- \item MostRecentlyUsedList: list for tracking recent uses, adds new elements at index 0, pushes down rest, pulls element already in list to top
-\end{itemize}
-\subsubsection*{MostRecentlyUsedList}
-The MostRecentlyUsedList \ref{fig:MostRecentlyUsedList} is a new list type that is can be used for simulating the 
-behavior found in 'Open recent' menu item of almost any text editing application.
-To avoid the list growing too long it can be given a maximum capacity. After that capacity
-is reached the oldest entry will be deleted when a new one enters the list.
-The data of the list is stored in an ArrayList with an initial capacity of the maximum
-capacity of the list. Most operations are directly delegating to the operations of the 
-underlying ArrayList. 
-The only exception is the add(item : T) method that works in a different way:
-\begin{enumerate}
- \item check if the item is already in the list and remove it
- \item add the last item at the end of the list and increment the index of all other items
- \item set the first index to the newly added item 
- \item remove the last item if the list has grown beyond the capacity
-\end{enumerate}
-This list is used to track the most recently used schedules and display them
-in the corresponding combo box.
-\begin{figure}[MostRecentlyUsedList]
-  \centering
-  \includegraphics[scale=.5]{UMLMostRecentList.jpg}
-  \caption[MostRecentlyUsedList]%
-  {MostRecentlyUsedList\protect}
-  \label{fig:MostRecentlyUsedList}
-\end{figure}
-
-\section{Preference pages}
+\section{Preference Pages - the View}
 \begin{itemize}
  \item place to easily configure settings, all KIELER preferences in one place
  \item integrated into eclipse look and feel
@@ -201,3 +360,8 @@ that takes a list of editor ids and returns the one selected by the user.
   {The Editor Selection Dialog\protect}
   \label{fig:EditorSelectionDialog}
 \end{figure}
+
+\subsection{Default Schedule}
+\label{section:DefaultSchedule}
+\index{Default Schedule}
+\index{Extension point}
