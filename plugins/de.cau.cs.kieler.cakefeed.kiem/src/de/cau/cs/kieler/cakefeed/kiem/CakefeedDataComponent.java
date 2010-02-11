@@ -8,9 +8,11 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.gef.EditPart;
 import org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramWorkbenchPart;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 import org.json.JSONObject;
 import org.w3c.dom.Document;
@@ -93,11 +95,14 @@ public class CakefeedDataComponent extends JSONObjectDataComponent implements IJ
 	private void highlightTransitions(String fBName,
 			List<String> sourceStateNames, List<String> destinationStateNames) {
 		// TODO Auto-generated method stub
-		IEditorPart activeEditor = PlatformUI.getWorkbench().getWorkbenchWindows()[0].getActivePage().getActiveEditor();
-		if (activeEditor instanceof IDiagramWorkbenchPart) {
-			EObject obj = ((View) ((IDiagramWorkbenchPart) activeEditor).getDiagramEditPart()
-        				.getModel()).getElement();
-			System.out.println("WINDOW");
+		IWorkbenchWindow[] windows = PlatformUI.getWorkbench().getWorkbenchWindows();
+		for (int i = 0; i < windows.length; i++) {
+			IEditorPart activeEditor = windows[i].getActivePage().getActiveEditor();
+			if (activeEditor instanceof IDiagramWorkbenchPart) {
+				EditPart editPart = ((IDiagramWorkbenchPart) activeEditor).getDiagramEditPart();
+				System.out.println("OK");
+				// falls bfb, cfb, oder fbnetwork, kram raussuchen und highlighten.
+			}
 		}
 	}
 
