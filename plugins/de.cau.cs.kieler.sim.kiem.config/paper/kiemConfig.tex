@@ -37,7 +37,7 @@ KIEMProperties. These properties contain a String key which should be non-null a
 a value which can be of various types. However for the purpose of storing configuration
 elements only the String value will be used.
 
-The new DataComponent also provides additional methods in order to make accessing and manipulatin the
+The new DataComponent also provides additional methods in order to make accessing and manipulating the
 array more convenient:
 \begin{description}
  \item \textbf{KiemProperty findProperty(String key)} : This method iterates through the array and attempts
@@ -47,7 +47,7 @@ an Exception.
  \item \textbf{void removeProperty(String key)} : This method attempts to remove the property identified by
 the given key from the array. It does this by converting the array to a list, locating and removing the
 specified property and then converting the list back to an array. This procedure may not be as efficient
-as manually constructing the new array but it still performes the operation in linear time. Furthermore
+as manually constructing the new array but it still performs the operation in linear time. Furthermore
 it makes the method easier to understand than the alternative.
  \item \textbf{KiemProperty updateProperty(String key, String value)} : This method updates the property 
 identified by the key with a new value. It first checks if the property already exists and if it does its value
@@ -59,11 +59,15 @@ In addition to those methods the ConfigDataComponent also keeps a reference to i
 \ref{section:IntroDataComponentWrapper}). This is necessary in order to retrieve the properties from the wrapper
 right after the execution file was loaded and to write them back into the wrapper before the file is saved.
 
-TODO:
-\begin{itemize}
- \item can be added and removed by the user to update old files or downgrade new ones
- \item used as current/default configuration
-\end{itemize}
+The ConfigDataComponent is not only used to store the properties of the currently active configuration that each
+execution file carries. However it is also used to store the default configuration that is saved in the Eclipse
+preference store. This is done because both instances are closely linked and have the same requirements
+(see Section \ref{section:CurrentConfiguration}).
+
+The default behavior of the Configuration Manager is to add a new ConfigDataComponent to each execution file
+that it encounters. However as this feature can be turned off the user also has can upgrade old files or
+downgrade new ones by manually adding and removing the ConfigDataComponent.
+
 
 \subsection{EditorDefinition}
 \label{section:EditorDefinition}
@@ -106,18 +110,13 @@ methods for accessing the array inside and can be easily stored and loaded.
 object with that attribute set to \textit{true} can't be modified or removed (see Section \ref{section:DefaultSchedule}).
 \end{itemize}
 
-MAYBE TODO:
-\begin{itemize}
- \item getting/setting supported priority, adding/removing editors
-\end{itemize}
-
 \subsection{Tools}
 \label{section:Tools}
 The Tools class holds a host of useful methods and attributes that are used in various parts of the plug-in.
 
 \subsubsection{Attributes}
 \label{section:ToolsAttributes}
-First of all it contains messages and tooltips that are used in more than one class.
+First of all it contains messages and tool tips that are used in more than one class.
 This ensures that the appearance of the different messages is unified across the entire plug-in. It also
 makes it easy to change these messages or combine different partial messages to new ones.
 
@@ -129,13 +128,16 @@ to avoid bugs due to mistyping an identifier which is likely to happen if it is 
 All of the manager classes in the \ac{KIEMConfig} need to save their properties into the Eclipse preference store.
 In order to have the information stored in a structured way an XML like format was chosen. As this requires the keys and values
 to be formatted in a certain way the Tools class provides methods to format the Strings in the required way.
+\lstset{
+backgroundcolor=,
+}
 \begin{description}
  \item \textbf{String putValue(String key, String value} : Converts the (key, value) pair into a formatted String for saving
 into the Eclipse preference store. The resulting String has the following format: 
-\textit{<[key]>[value]</[key]>}.
+\lstinline|<[key]>[value]</[key]>|.
  \item \textbf{String putProperty(KiemProperty property} : Convenience method for transforming a KiemProperty object into a
 formatted String. This method exists because most of the items serialized in this way are of that type. The resulting String
-has the following format: \textit{<KIEM_PROPERTY> <Key> [property.key] </Key> <Value> [property.value] </Value> </KIEM_PROPERTY>}.
+has the following format: \lstinline|<KIEM_PROPERTY><Key>[property.key]</Key><Value>[property.value]</Value></KIEM_PROPERTY>|.
 \end{description}
 
 The methods described above provide all the necessary facilities for the \ac{KIEMConfig} to save its preferences
@@ -226,26 +228,88 @@ saved configuration see Appendix \ref{section:AppendixSavedConf}).
 \label{section:ConfigurationManager}
 \index{Configuration Manager}
 The Configuration Manager basically handles all the problems described in Section \ref{section:ConfTaskConfig}.
+This means that the Configuration Manager has two responsibilities:
+\begin{enumerate}
+ \item It manages the configuration contained in the currently opened execution file and all properties contained in
+it. It is also responsible for deciding whether or not the preferences stored in that configuration should be used
+or the default preferences instead.
+ \item It manages the default configuration that the user can access and modify through the preference pages 
+(see Section \ref{section:ConfView}). For all of the predefined properties it also has to hold and manage the 
+hard-coded default values.
+\end{enumerate}
+
+\subsubsection{Currently Loaded Configuration}
+\label{section:CurrentConfiguration}
+\index{Current Configuration}
+The first thing the Configuration Manager has to do when a request for the value of a property is made
+is to locate the ConfigDataComponent that contains the property. 
+
+It first takes a look at the list of keys where the default configuration should be used. If this is the case the task is quite simple
+and the default configuration is loaded from the preference store and used. If the current configuration
+should be used the task is a little more difficult. The Configuration Manager then has to look at the
+DataComponentWrapperList inside the Execution Manager where all components for the currently opened
+execution file are stored. If the list already contains a wrapper with the ConfigDataComponent inside
+that component is used. Otherwise a new ConfigDataComponent is created, initialized with the default values
+from the default configuration and then added to the list of the current execution file. Since this feature
+can be disabled by the user the Configuration Manager can encounter execution files that have no ConfigDataComponent
+or where the component simply doesn't contain the requested value. In this case the default configuration has
+to be used.
+
+If the default configuration couldn't supply a value the last possibility is that the caller passed a non-null default 
+value for the given property. In this case the default value is returned to the caller. 
+
+If no value could be retrieved in the way described above there is no way to get a valid value for the requested key. 
+In this case the Configuration Manager notifies the caller through an exception of these circumstances.
+
+However if the value was expected in the current configuration but not found the Configuration Manager assumes 
+that it should have been in there. To remedy that situation the Configuration Manager will try to add a new property 
+to the current configuration with the value that the method will return (either the one retrieved from the default 
+configuration or the default supplied by the caller).
 
 
-TODO:
-\begin{itemize}
- \item manages current/default configuration, supply filtered lists for preference components
- \item find current configuration and wrapper in data component wrapper list 
- \item get values for properties (where to look, ignored keys, save to current when found)
-  \begin{itemize}
-   \item check if there is a current configuration, check if the key is not on the ignored key list, try to find in current configuration
-   \item on failure: try to find in default configuration, update current configuration, return found value
-   \item on failure: if default value supplied, update default configuration, update current configuration, return default value
-   \item on failure: throw exception
-  \end{itemize}
- \item add/remove properties, update values
- \begin{itemize}
-  \item try to update saved values
-  \item if it doesn't exist create it
- \end{itemize}
- \item restore default values
-\end{itemize}
+\subsubsection{Default Configuration}
+\label{section:DefaultConfiguration}
+\index{Default Configuration}
+
+The first responsibility of the Configuration Manager with respects to the default configuration is to manage
+the hard-coded default values. The whole idea of the \ac{KIEMConfig} is to avoid using hard-coded values
+and retrieve user defined values. However the Execution Manager and the \ac{KIEMConfig} rely on certain values
+to be present and even though the user is encouraged to change them they still have to be present before the user
+enters them for the first time. Furthermore the user may want to revert back to sensible default values which
+should be provided by the plug-in itself.
+
+This means that the plug-in contains a list of hard-coded default values for the needed properties.
+It also supplies methods to access these properties and restore the default values by writing their values
+into the default configuration.
+
+\lstset{
+backgroundcolor=,
+}
+The next feature that the default configuration supplies has to do with adding new ConfigDataComponents to the
+list inside the Execution Manager. Since the Configuration Manager knows which properties will be taken from
+the current configuration it can already make sure that the component contains some value. This is done
+through calling \lstinline|void initWithDefaults(AbstractDataComponent dataComponent)| with the newly created component.
+This causes the default values for all properties that are likely to be taken from the current configuration to
+be added to it.
+
+The Configuration Manager also supplies different views on the default configuration. 
+\begin{enumerate}
+ \item \textbf{KiemProperty[] getDefaultConfig().getProperties()} : This method simply returns all properties
+stored in the default configuration. This is the list actually written to the Eclipse preference store.
+ \item \textbf{KiemProperty[] getInternalDefaultProperties()} : This method returns the list of properties that
+are needed to operate the Execution Manager and the \ac{KIEMConfig}. The motivation for this method is that
+the keys and types for these values are already known. That means that a view that modifies these properties
+can be designed in a more user-friendly way than would have been possible otherwise. Furthermore the Configuration 
+Manager is guaranteed to have hard-coded default values for these properties.
+ \item \textbf{KiemProperty[] getExternalDefaultProperties()} : This method returns the complement of the internal
+properties with respect to the entirety of the default properties. These properties are those that the user defined
+himself.
+\end{enumerate}
+However neither of the last two lists will return the default editor as that falls into the responsibility of
+the Editor Manager which is described below.
+
+The Configuration Manager also supplies methods to add new properties to the default configuration, remove properties
+and update the value of specific property.
 
 \subsection{Schedule Manager}
 \label{section:ScheduleManager}
@@ -253,11 +317,12 @@ TODO:
 The Schedule Manager is the second of the two large managers. It is responsible for managing the
 ScheduleData object, the execution files and provide the methods for solving the problem described
 in Section \ref{section:ConfTaskEasyLoading}. These responsibilities can be broken down into
-different parts:
+six different parts:
 \begin{enumerate}
  \item Gather the different types of lists of schedules.
  \item Manage the different ScheduleData objects and provide methods to add, remove and change
 them.
+ \item Deal with loads and saves triggered through the normal workspace interface.
  \item Provide a means to trigger the loading of an execution file in the Execution Manager.
  \item Track the locations of the execution files if the user modifies them.
  \item Loading the default schedules.
@@ -294,14 +359,83 @@ be removed from the list as they are no longer valid.
 This feature will be described in detail at the end of Section \ref{section:DefaultSchedule}.
 \end{description}
 
-\subsubsection{Schedule Management}
-\label{section:ScheduleManagement}
+
+\subsubsection{Listen to User Events}
+\label{section:UserEvents}
+It has to be assumed that the user creates his own schedules and saves and loads them through the workspace explorer.
+Since the Schedule Manager should attempt to track all available execution files it has to be informed about
+these changes and act on the notification. In order to get notified the Event Listener extension point
+of the Execution Manager is used (see Section \ref{section:EventListener}). The listener will dispatch and event
+that contains the location of any saved or loaded execution file as soon as the user performs the corresponding action.
+When the Schedule Manager receives such an event it will perform the following steps:
+\begin{enumerate}
+ \item Try to find a schedule with the provided location. If a schedule can be found there is nothing to be
+done and the method skips to the last step.
+ \item If no schedule was found with the given location a new one has to created. In order for that the method
+first has to check if there is an active editor and if the editor is known to the Schedule Manager. If that is
+the case the method skips ahead to step 4.
+ \item If the editor is unknown it is created. If no editor is active the default editor will be used.
+ \item The new schedule is created with the editor determined in the previous steps. Since it is assumed that
+the created schedule works with the currently active editor a default priority is inside to that editor in the
+newly created schedule.
+ \item Since the file operation constitutes a use of the given schedule the list of recently used schedules has
+to be updated. The used schedule will be added to the top or moved to the top if it's already inside.
+\end{enumerate}
+
 
 \subsubsection{Open a Schedule}
 \label{section:OpenSchedule}
+The Schedule Manager also provides a way to trigger a load in the Execution Manager. This is
+done through the modified method described in Section \ref{section:ConfKiemOpenFile}. The reason for this
+is that the Schedule Manager may try to load schedules where the files no longer exist or that the 
+Execution Manager is unable to load. The method mentioned above will throw Exceptions in order to perform
+the caller of these circumstances and the Schedule Manager will inform its callers.
+
+As described in the last section the Schedule Manager will be informed of a load through the Event Listener
+interface and will act on it. However if the load is triggered by the Schedule Manager itself that behavior
+would not be desirable. To avoid the Schedule Manager informing itself the method makes sure that the next
+event indicating a loaded file will be ignored.
+
+Since the load triggered by the Schedule Manager constitutes an access to that file the associated schedule
+is added to the list of recently used schedules. Furthermore all listeners on the Schedule Manager will
+be notified since view updates may be necessary.
+
 
 \subsubsection{Tracking Execution Files}
 \label{section:TrackingExecutionFiles}
+As described above new schedules will be created when the user manually loads or saved an execution file.
+However in some cases the user may also choose to remove, rename or move execution files. Since the Schedule Manager
+relies on the path of the execution file to load the schedules it runs into trouble if the path is changed outside
+its control.
+
+The only solution in this case is to prompt the user to select a new path for an execution file that is no
+longer at the expected location. An alternative would be to simply delete the schedule and all assigned priorities.
+
+\lstset{
+backgroundcolor=,
+}
+
+However if the user performs a remove, rename or move through the context menu inside the Eclipse workspace window
+Eclipse itself provides a way to get notified of these changes. Any class can register themselves as listener
+by calling : 
+\lstinline|RefactoringCore.getHistoryService().addHistoryListener(IRefactoringHistoryListener listener)|.
+Whenever the removal, renaming or moving of a file completes all listeners will be notified through a call to
+\lstinline|void historyNotification(RefactoringHistoryEvent event)|. The event contains different information
+based on the type of the operation. Depending on the type of operation that was performed the Schedule Manager
+takes one of the following actions:
+\begin{description}
+ \item \textbf{Delete} : One or more files were deleted by the user. In this case the event contains the list
+of files that was deleted. Since the user has no more use for the deleted files he probably has no use for
+the schedule and the saved priorities as well. The Schedule Manager attempts to find the ScheduleData object
+associated with the given file and removes it.
+ \item \textbf{Rename} : The user changed the name of a file. The event provides the old file name and the 
+new name of the file. In order to keep track of the file the Schedule Manager tries to find the ScheduleData
+associated with the old file name and changes the name to the new file.
+ \item \textbf{Move} : One or more files were moved by the user to a new location. The event contains the list
+of files that were moved and the destination path. The Schedule Manager tries to find a Schedule for each
+of the files involved and changes its name to reflect the new location.
+\end{description}
+
 
 \subsubsection{Default Schedule}
 \label{section:DefaultSchedule}
@@ -311,29 +445,24 @@ An additional requirement that came up through the development of this project w
 be desirable to provide the user with an initial set of execution files that are not located inside
 the users workspace.
 
-For that purpose the new extension point seen in Figure \ref{fig:DefaultSchedule} was created.
-\begin{figure}[Default Schedule]
-  \centering
-  \includegraphics[scale=0.33]{DefaultSchedule.jpg}
-  \caption[The Default Schedule extension point]%
-  {The Default Schedule extension point with example\protect}
-  \label{fig:DefaultSchedule}
-\end{figure}
+For that purpose the new extension point seen in Listing \ref{list:DefaultSchedule} was created.
+\listingxml
+\showlistingex{code/defaultSchedule.txt}
+{XML}
+{Example implementation of the Default Schedule extension point.}
+{list:DefaultSchedule}
+{t}
 
 As soon as the Schedule Manager loads the schedules from the Eclipse preference store it also triggers
 a load from the components registered on this extension point. The new schedule will be constructed with
-the location provided through the corresponding field in the extension point. When a programmer decides
-to provide the user with a default schedule he also has to provide an editor for that schedule
-The extension point takes location of the execution file which will be assigned to an 
+the location provided through the corresponding field in the extension point. After that the Schedule Manager
+iterates through the list of child elements of a given execution file and adds all the editors and their
+priorities to the schedule and the Editor Manager.
 
-TODO:
-\begin{itemize}
- \item all schedule data
- \item track recently used schedule Ids
- \item ask KIEMPlugin to load a saved schedule, deal with error
- \item add/remove schedules, update schedule priorities
- \item handle user load/save events
-\end{itemize}
+Since the schedules and editors added in this way are supposed to be a kind of factory defaults they are not
+supposed to be removed or changed. The Schedule Manager sets a field in both the newly created ScheduleData
+objects and the EditorDefinitions. It is the responsibility of the different view elements not to modify
+entities marked in this way.
 
 
 \subsection{Editor Manager}
@@ -401,9 +530,6 @@ view which causes the method in the extension point to be called which then rece
 \end{itemize}
 \end{enumerate}
 
-MAYBE TODO:
-Advanced user mode
-
 
 \subsection{Property Usage Manager}
 \label{section:Property Usage Manager}
@@ -419,36 +545,61 @@ class when the user changes the preferences on which properties should be in it.
 is also stored and loaded through the use of the facilities in the Abstract Manager.
 
 
-\subsection{Implementing Classes}
-\begin{itemize}
- \item tool bar provider: link to contribution manager, forward array of contributions
- \item configuration provider: link to configuration manager, forward requests
- \item event listener: handles events received by the configData component 
-    listen to load/save events, can be disabled when KIEMConf is about to trigger load/save
-\end{itemize}
-
 \section{Preference Pages - the View}
-\begin{itemize}
- \item place to easily configure settings, all KIELER preferences in one place
- \item integrated into eclipse look and feel
-\end{itemize}
+\label{section:ConfView}
+The view part of this project mostly consists of the preference pages for setting up the different
+aspects of the \ac{KIEMConfig}. These preference pages use the technology described in Section
+\ref{section:TechPreferencePage} which integrates them into the rest of the preference page
+framework. The root page for the Execution Manager is added into the already existing tree
+of preference pages for the rest of \ac{KIELER} in order to make them easier to find.
 
-\subsection{Configuration page}
-\begin{itemize}
- \item changing default configuration for internal properties
- \item check boxes for changing visibility of the combos
-\end{itemize}
+\subsection{Configuration Page}
+\label{section:ConfigurationPage}
+\index{Configuration Page}
+\begin{figure}[Configuration Page]
+  \centering
+  \includegraphics[scale=.45]{ConfigurationPage.jpg}
+  \caption[The main preference page of the Execution Manager]%
+  {The main preference page of the Execution Manager\protect}
+  \label{fig:ConfigurationPage}
+\end{figure}
+On the main preference page of the Execution Manager shown in Figure \ref{fig:ConfigurationPage} the user can
+set up most of the default properties. The user can also change the visibility of the ComboBoxes that display
+the recently used and matching schedules. The last CheckBox is for enabling the advanced user mode.
 
-\subsubsection{User defined properties page}
-\begin{itemize}
- \item adding/removing properties
- \item modified from msp, table view with providers
-\end{itemize}
+In the normal user mode the ConfigDataComponent described in Section \ref{section:ConfigDataComponent} is
+not visible to the user. It is also automatically added to any new file that is loaded into the Execution Manager.
+While this behavior is fine for the average user an advanced user may want to have a little more control. An advantage
+of having the component visible is that the user can reinitialize the current configuration with the values in
+the default configuration by removing and adding the component in the list.
 
-\subsubsection{Property usage dialog}
-This dialog shown in figure \ref{fig:PropertyUsageDialog} is used for selecting which properties should always be taken
-from the default configuration rather than the configuration component contained
-in every .execution file.
+
+\subsubsection{User-Defined Properties Page}
+\label{section:UserDefinedPropertiesPage}
+\begin{figure}[User-Defined Properties Page]
+  \centering
+  \includegraphics[scale=.5]{UserPropertiesPage.jpg}
+  \caption[The page for defining custom properties]%
+  {The page for defining custom properties\protect}
+  \label{fig:UserDefinedPropertiesPage}
+\end{figure}
+Since there is a page to modify the internal properties of the Execution Manager there also exists a
+preference page where the user can define, edit and remove his own properties (see Figure \ref{fig:UserDefinedPropertiesPage}). 
+These properties can then be accessed by any DataComponent (or any other plug-in) through the \ac{KIEMConfig}'s \ac{API}.
+
+Since not much can be said about the nature of the user defined properties there is no real format that
+can be chosen for an individual property. Thus all properties are simply displayed in a table with a 
+key and a value column. 
+
+The user is only allowed to edit the value column of previously defined properties. This restriction is
+necessary to keep the user from accidentaly changing keys that are required by another users DataComponent.
+
+However the user can remove a property that is no longer needed or define his own properties with a custom key.
+
+\subsubsection{Property Usage Dialog}
+Both of the previously described pages contain a button for accessing the Property Usage Dialog.
+This dialog (see figure \ref{fig:PropertyUsageDialog}) is used for selecting which properties should always be taken
+from the default configuration rather than the configuration component contained in every .execution file.
 The dialog used for this is a ListSelectionDialog which just receives the list of
 all keys as input and the list of PropertyKeys from the PropertyUsageManager as default selection.
 After the user is finished with selecting attributes and hit the 'Ok' Button the dialog
@@ -461,9 +612,19 @@ passes the new list of selected items back to the PropertyUsageManager.
   \label{fig:PropertyUsageDialog}
 \end{figure}
 
-\subsection{Scheduling page}
-This preference page is used to manage the schedules and the editors that they belong to.
-This page is basically a modified version of the LayoutPrioritiesPage by msp.
+\subsection{Scheduling Page}
+\label{section:SchedulingPage}
+\index{Scheduling Page}
+\begin{figure}[Scheduling Page]
+  \centering
+  \includegraphics[scale=.45]{SchedulePage.jpg}
+  \caption[The page for managing the schedules and editors]%
+  {The page for managing the schedules and editors\protect}
+  \label{fig:SchedulePage}
+\end{figure}
+This preference page (see Figure \ref{fig:SchedulePage} is used to manage the schedules and the editors that they belong to.
+As mentionend in Section \ref{section:ConfConceptsDefaultConf} this page is basically a modified version 
+of the LayoutPrioritiesPage by Miro Sp\"onemann (see Figure \ref{fig:MSPLayoutPreferencePage}).
 
 \begin{itemize}
  \item table with schedules / editors and their priorities
@@ -472,7 +633,16 @@ This page is basically a modified version of the LayoutPrioritiesPage by msp.
  \item add/remove editors, remove schedules, selecting default editor
 \end{itemize}
 
-\subsubsection{Adding and removing editors, Selecting a default editor}
+\subsubsection{Adding and Removing Editors, Selecting a Default Editor}
+
+\begin{figure}[EditorSelectionDialog]
+  \centering
+  \includegraphics[width=1\textwidth]{EditorSelectionDialog.jpg}
+  \caption[Editor Selection Dialog]%
+  {The Editor Selection Dialog\protect}
+  \label{fig:EditorSelectionDialog}
+\end{figure}
+
 On the scheduling preference page there are routines for adding and removing
 editors as well as selecting a default editor.
 All of these actions use the same basic method for displaying an ElementListSelectionDialog \ref{fig:EditorSelectionDialog}
@@ -488,17 +658,11 @@ that takes a list of editor ids and returns the one selected by the user.
  editor is then set as default editor. The default editor is used when there is no currently active editor on the workbench.
   It is used:
   \begin{enumerate}
-   \item to determine which editors to show in the Matching combo box.
+   \item to determine which editors to show in the ComboBox showing the schedules that work for the active editor.
    \item when a new schedule is created as an editor id.
   \end{enumerate}
 \end{itemize}
-\begin{figure}[EditorSelectionDialog]
-  \centering
-  \includegraphics[width=1\textwidth]{EditorSelectionDialog.jpg}
-  \caption[Editor Selection Dialog]%
-  {The Editor Selection Dialog\protect}
-  \label{fig:EditorSelectionDialog}
-\end{figure}
+
 
 \subsection{Configuration Selector}
 \label{section:ConfigurationSelector}

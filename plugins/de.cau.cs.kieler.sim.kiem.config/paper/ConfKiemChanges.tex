@@ -66,14 +66,14 @@ is no guarantee on the order in which the extending plug-ins are asked.
 Figure \ref{fig:ToolbarWithContributions} shows the Execution Manager tool bar with the two combo boxes belonging to \ac{KIEMConfig}
 contributed through the extension point. Figure \ref{fig:ToolbarWithoutContributions} shows the same tool bar without
 the contributions.
-\begin{figure}[ToolbarWithContributions]
+\begin{figure}[Toolbar With Contributions]
   \centering
   \includegraphics[scale=.4]{ToolbarWithContributions.jpg}
   \caption[The Execution Managers Tool bar with two contributed ComboBoxes]%
   {The Execution Managers Tool bar with two contributed ComboBoxes\protect}
   \label{fig:ToolbarWithContributions}
 \end{figure}
-\begin{figure}[ToolbarWithoutContributions]
+\begin{figure}[Toolbar Without Contributions]
   \centering
   \includegraphics[scale=.4]{ToolbarWithoutContributions.jpg}
   \caption[The Execution Managers Tool bar without contributions]%
@@ -145,16 +145,22 @@ most of the adjustments were made here.
 The following methods were added to communicate with the plug-ins registered through
 the ConfigurationProvider extension point (see Section \ref{section:ConfigurationProvider}).
 \begin{description}
- \item \textbf{notifyConfigurationProviders(String propertyId, String value)} : This method can be called by any class
+ \item \textbf{notifyConfigurationProviders(String propertyId, String value)} : 
+
+This method can be called by any class
 inside the Execution Manager itself. It should be called when the user changes a property through any of
 the elements on the \ac{GUI}. The method will then inform all listeners that the property identified by the
 given identifier was changed to the new value.
- \item \textbf{String getPropertyValueFromProviders(String propertyId)} : This method allows the Execution Manager to
+ \item \textbf{String getPropertyValueFromProviders(String propertyId)} : 
+
+This method allows the Execution Manager to
 retrieve a previously saved value. The \ac{KIEM} will ask all plug-ins registered on the extension point if they
 can provide a value for the given identifier. Plug-ins that can't provide the value will indicate this by throwing
 an Exception. The \ac{KIEM} will then take the first value he receives without getting an Exception and assign it
 to the internal property.
- \item \textbf{Integer getIntegerValueFromProviders(final String propertyId)} : This method is a convenience method for
+ \item \textbf{Integer getIntegerValueFromProviders(final String propertyId)} : 
+
+This method is a convenience method for
 the one described above. It will try to parse an integer from the retrieved String and return it or return null
 if no integer could be parsed.
 \end{description}
@@ -174,6 +180,7 @@ still able to fall back on hard-coded default values if no configuration plug-in
 
 
 \subsection{Open File}
+\label{section:ConfKiemOpenFile}
 The method that takes care of loading an execution file was split. This was done to allow
 other plug-ins to pass an IPath object directly to the method and perform a load of that file without
 having to go through the \ac{UI}. This method was also shifted around a little in order to detect

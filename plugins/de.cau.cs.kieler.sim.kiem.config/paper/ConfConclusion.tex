@@ -38,3 +38,12 @@ without serializing them into a String and parsing them again on load.
 
 A future project could try to find a way to overcome that limitation by allowing
 objects that implement the Serializable interface to be stored as well.
+
+\subsection*{Use Advanced KiemPropertyTypes}
+Currently the \ac{KIEMConfig} can only handle KiemProperties of the basic type that
+contains a String value. However there is a whole range of different KiemPropertyTypes
+such as integer, files or choice. An enhancement to the \ac{KIEMConfig} would be to
+utilize the full potential of these types.
+
+This would mean rewriting much of the already existing code and completely refining
+the page where the user can define their properties.
