@@ -7,8 +7,13 @@ import java.util.List;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.eclipse.draw2d.ColorConstants;
+import org.eclipse.draw2d.IFigure;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gef.EditPart;
+import org.eclipse.gef.GraphicalEditPart;
+import org.eclipse.gef.editparts.AbstractConnectionEditPart;
+import org.eclipse.gef.editparts.AbstractGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramWorkbenchPart;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.ui.IEditorPart;
@@ -20,17 +25,26 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import de.cau.cs.kieler.cakefeed.FB;
+import de.cau.cs.kieler.cakefeed.FBType;
+import de.cau.cs.kieler.cakefeed.NamedAndCommented;
+import de.cau.cs.kieler.cakefeed.fbnetwork.diagram.edit.parts.FBNetworkEditPart;
 import de.cau.cs.kieler.sim.kiem.IJSONObjectDataComponent;
 import de.cau.cs.kieler.sim.kiem.JSONObjectDataComponent;
 import de.cau.cs.kieler.sim.kiem.KiemExecutionException;
 import de.cau.cs.kieler.sim.kiem.KiemInitializationException;
 import de.cau.cs.kieler.sim.kiem.properties.KiemProperty;
 import de.cau.cs.kieler.sim.kiem.properties.KiemPropertyTypeWorkspaceFile;
+import de.cau.cs.kieler.synccharts.Transition;
+import de.cau.cs.kieler.synccharts.diagram.edit.parts.RegionEditPart;
+import de.cau.cs.kieler.synccharts.diagram.edit.parts.State2EditPart;
+import de.cau.cs.kieler.synccharts.diagram.edit.parts.StateEditPart;
+import de.cau.cs.kieler.synccharts.diagram.edit.parts.TransitionEditPart;
 
 public class CakefeedDataComponent extends JSONObjectDataComponent implements IJSONObjectDataComponent {
 
-	Document trace;
-	int currentTick;
+	protected Document trace;
+	protected int currentTick;
 	
 	@Override
 	public void initialize() throws KiemInitializationException {
@@ -89,26 +103,145 @@ public class CakefeedDataComponent extends JSONObjectDataComponent implements IJ
 				}
 			}
 		}
-		return null;
+		return new JSONObject();
 	}
 	
 	private void highlightTransitions(String fBName,
 			List<String> sourceStateNames, List<String> destinationStateNames) {
-		// TODO Auto-generated method stub
 		IWorkbenchWindow[] windows = PlatformUI.getWorkbench().getWorkbenchWindows();
 		for (int i = 0; i < windows.length; i++) {
 			IEditorPart activeEditor = windows[i].getActivePage().getActiveEditor();
 			if (activeEditor instanceof IDiagramWorkbenchPart) {
 				EditPart editPart = ((IDiagramWorkbenchPart) activeEditor).getDiagramEditPart();
-				System.out.println("OK");
-				// falls bfb, cfb, oder fbnetwork, kram raussuchen und highlighten.
+				if (editPart instanceof RegionEditPart) {
+					List<EditPart> transitionEditParts = getTransitionEditParts(editPart);
+					for (EditPart tEP : transitionEditParts) {
+						EObject object = ((View)(tEP.getModel())).getElement();
+						if (object instanceof Transition) {
+							Transition transition = (Transition)object;
+							if (!sourceStateNames.isEmpty() && !destinationStateNames.isEmpty()
+								&& (transition.getSourceState() != null)
+								&& (transition.getTargetState() != null)
+								&& (transition.getSourceState().getId() != null)
+								&& (transition.getTargetState().getId() != null)
+								&& transition.getSourceState().getId().equals(sourceStateNames.get(0))
+								&& transition.getTargetState().getId().equals(destinationStateNames.get(0))) {
+								if (tEP instanceof TransitionEditPart) {
+									IFigure tF = ((TransitionEditPart)tEP).getFigure();
+									tF.setForegroundColor(ColorConstants.lightGreen);
+									tF.setBackgroundColor(ColorConstants.lightGreen);
+									tF.repaint();
+								}
+							}
+						}
+					}
+				}
 			}
 		}
 	}
 
+	@SuppressWarnings("unchecked")
+	private List<EditPart> getTransitionEditParts(EditPart editPart) {
+		List<EditPart> transitionEditParts = new ArrayList<EditPart>();
+		List<Object> children = editPart.getChildren();
+		for (Object c : children) {
+			if (c instanceof EditPart) {
+				if (c instanceof StateEditPart) {
+					StateEditPart sEP = (StateEditPart)c;
+					transitionEditParts.addAll(sEP.getSourceConnections());
+				} else if (c instanceof State2EditPart) {
+					State2EditPart sEP = (State2EditPart)c;
+					transitionEditParts.addAll(sEP.getSourceConnections());
+				}
+				else if (c instanceof TransitionEditPart) {
+					transitionEditParts.add((EditPart)c);
+				}
+				transitionEditParts.addAll(getTransitionEditParts((EditPart)c));
+			}
+		}
+		return transitionEditParts;
+	}
+
 	private void highlightSignals(String fBName, List<String> signalNames) {
-		// TODO Auto-generated method stub
-		
+		IWorkbenchWindow[] windows = PlatformUI.getWorkbench().getWorkbenchWindows();
+		for (int i = 0; i < windows.length; i++) {
+			IEditorPart activeEditor = windows[i].getActivePage().getActiveEditor();
+			if (activeEditor instanceof IDiagramWorkbenchPart) {
+				EditPart editPart = ((IDiagramWorkbenchPart) activeEditor).getDiagramEditPart();
+				if ((editPart instanceof FBNetworkEditPart)) {
+					List<EditPart> signalEditParts = getSignalEditParts(editPart, fBName);
+					List<EditPart> connectionEditParts = getConnectionEditParts(editPart);
+					List<EditPart> connectionsToHighlight = new ArrayList<EditPart>();
+					for (EditPart cEP : connectionEditParts) {
+						if (cEP instanceof AbstractConnectionEditPart) {
+							AbstractConnectionEditPart aCEP = (AbstractConnectionEditPart)cEP;
+							if ((signalEditParts.contains(aCEP.getSource())) && (signalEditParts.contains(aCEP.getTarget()))) {
+								connectionsToHighlight.add(cEP);
+							}
+						}
+					}
+					for (EditPart cEP2 : connectionsToHighlight) {
+						if (cEP2 instanceof GraphicalEditPart) {
+							IFigure cF = ((GraphicalEditPart)cEP2).getFigure();
+							cF.setForegroundColor(ColorConstants.lightGreen);
+							cF.setBackgroundColor(ColorConstants.lightGreen);
+							cF.repaint();
+						}
+					}
+				}
+			}
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	private List<EditPart> getConnectionEditParts(EditPart editPart) {
+		List<EditPart> connectionEditParts = new ArrayList<EditPart>();
+		List<Object> children = editPart.getChildren();
+		for (Object c : children) {
+			if (c instanceof AbstractGraphicalEditPart) {
+				connectionEditParts.addAll(((AbstractGraphicalEditPart)c).getSourceConnections());
+			}
+			connectionEditParts.addAll(getConnectionEditParts((EditPart)c));
+		}
+		return connectionEditParts;
+	}
+
+	@SuppressWarnings("unchecked")
+	private List<EditPart> getSignalEditParts(EditPart editPart, String fBName) {
+		List<EditPart> signalEditParts = new ArrayList<EditPart>();
+		List<Object> children = editPart.getChildren();
+		for (Object c : children) {
+			if (c instanceof EditPart) {
+				if ((c instanceof de.cau.cs.kieler.cakefeed.bfbtype.diagram.edit.parts.IFInputEventEditPart)
+						|| (c instanceof de.cau.cs.kieler.cakefeed.bfbtype.diagram.edit.parts.IFOutputEventEditPart)
+						|| (c instanceof de.cau.cs.kieler.cakefeed.bfbtype.diagram.edit.parts.IFInputVarEditPart)
+						|| (c instanceof de.cau.cs.kieler.cakefeed.bfbtype.diagram.edit.parts.IFOutputVarEditPart)
+						|| (c instanceof de.cau.cs.kieler.cakefeed.bfbtype.diagram.edit.parts.FBInputEventEditPart)
+						|| (c instanceof de.cau.cs.kieler.cakefeed.bfbtype.diagram.edit.parts.FBOutputEventEditPart)
+						|| (c instanceof de.cau.cs.kieler.cakefeed.bfbtype.diagram.edit.parts.FBInputVarEditPart)
+						|| (c instanceof de.cau.cs.kieler.cakefeed.bfbtype.diagram.edit.parts.FBOutputVarEditPart)
+						|| (c instanceof de.cau.cs.kieler.cakefeed.cfbtype.diagram.edit.parts.IFInputEventEditPart)
+						|| (c instanceof de.cau.cs.kieler.cakefeed.cfbtype.diagram.edit.parts.IFOutputEventEditPart)
+						|| (c instanceof de.cau.cs.kieler.cakefeed.cfbtype.diagram.edit.parts.IFInputVarEditPart)
+						|| (c instanceof de.cau.cs.kieler.cakefeed.cfbtype.diagram.edit.parts.IFOutputVarEditPart)
+						|| (c instanceof de.cau.cs.kieler.cakefeed.cfbtype.diagram.edit.parts.FBInputEventEditPart)
+						|| (c instanceof de.cau.cs.kieler.cakefeed.cfbtype.diagram.edit.parts.FBOutputEventEditPart)
+						|| (c instanceof de.cau.cs.kieler.cakefeed.cfbtype.diagram.edit.parts.FBInputVarEditPart)
+						|| (c instanceof de.cau.cs.kieler.cakefeed.cfbtype.diagram.edit.parts.FBOutputVarEditPart)
+						|| (c instanceof de.cau.cs.kieler.cakefeed.fbnetwork.diagram.edit.parts.FBInputEventEditPart)
+						|| (c instanceof de.cau.cs.kieler.cakefeed.fbnetwork.diagram.edit.parts.FBOutputEventEditPart)
+						|| (c instanceof de.cau.cs.kieler.cakefeed.fbnetwork.diagram.edit.parts.FBInputVarEditPart)
+						|| (c instanceof de.cau.cs.kieler.cakefeed.fbnetwork.diagram.edit.parts.FBOutputVarEditPart)) {
+					EObject element = ((View)((EditPart)c).getModel()).getElement();
+					EObject container = element.eContainer();
+					if (((container instanceof FBType) || (container instanceof FB)) && (((NamedAndCommented)container).getName().equals(fBName))) {
+						signalEditParts.add((EditPart)c);
+					}
+				}
+				signalEditParts.addAll(getSignalEditParts((EditPart)c, fBName));
+			}
+		}
+		return signalEditParts;
 	}
 
 	private List<String> getChildrenNames(Element elem, String type) {
@@ -147,10 +280,8 @@ public class CakefeedDataComponent extends JSONObjectDataComponent implements IJ
 
 	protected void read(String fileName) {
 		try {
-			//IWorkspace workspace = ResourcesPlugin.getWorkspace();
-			//IWorkspaceRoot root = workspace.getRoot();
-			//IPath location = root.getLocation();
-			
+			  // TODO absoluten pfad
+			  // TODO xml von andre korrigieren lassen
 			  File file = new File(/*fileName*/"C:\\Documents and Settings\\msch165\\Desktop\\CAKeFEED\\demo\\environmentcruise.rmc");
 			  DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			  DocumentBuilder db = dbf.newDocumentBuilder();
