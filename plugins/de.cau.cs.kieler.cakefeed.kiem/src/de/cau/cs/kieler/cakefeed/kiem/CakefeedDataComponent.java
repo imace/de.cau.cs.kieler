@@ -16,6 +16,7 @@ import org.eclipse.gef.editparts.AbstractConnectionEditPart;
 import org.eclipse.gef.editparts.AbstractGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramWorkbenchPart;
 import org.eclipse.gmf.runtime.notation.View;
+import org.eclipse.swt.graphics.Color;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
@@ -25,6 +26,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import de.cau.cs.kieler.cakefeed.DataConnection;
+import de.cau.cs.kieler.cakefeed.EventConnection;
 import de.cau.cs.kieler.cakefeed.FB;
 import de.cau.cs.kieler.cakefeed.FBType;
 import de.cau.cs.kieler.cakefeed.NamedAndCommented;
@@ -43,13 +46,15 @@ import de.cau.cs.kieler.synccharts.diagram.edit.parts.TransitionEditPart;
 
 public class CakefeedDataComponent extends JSONObjectDataComponent implements IJSONObjectDataComponent {
 
-	protected Document trace;
-	protected int currentTick;
+	protected Document trace = null;
+	protected int currentTick = -1;
+	protected List<EditPart> lastChanged = new ArrayList<EditPart>();
 	
 	@Override
 	public void initialize() throws KiemInitializationException {
-		trace = null;
-		currentTick = -1;
+		//trace = null;
+		//currentTick = -1;
+		//lastChanged = new ArrayList<EditPart>();
 		read(getProperties()[0].getValue());
 	}
 
@@ -85,6 +90,8 @@ public class CakefeedDataComponent extends JSONObjectDataComponent implements IJ
 		} else if (currentTick > 0) {
 			currentTick--;
 		}
+		clearHighlights();
+		lastChanged.clear();
 		Element tick = getTick(currentTick, trace.getDocumentElement());
 		if (tick != null) {
 			NodeList children = tick.getChildNodes();
@@ -97,7 +104,7 @@ public class CakefeedDataComponent extends JSONObjectDataComponent implements IJ
 						List<String> signalNames = getChildrenNames(e, "Signal");
 						List<String> sourceStateNames = getChildrenNames(e, "SourceState");
 						List<String> destinationStateNames = getChildrenNames(e, "DestinationState");
-						highlightSignals(fBName, signalNames);
+						highlightConnections(fBName, signalNames);
 						highlightTransitions(fBName, sourceStateNames, destinationStateNames);
 					}
 				}
@@ -106,6 +113,31 @@ public class CakefeedDataComponent extends JSONObjectDataComponent implements IJ
 		return new JSONObject();
 	}
 	
+	private void clearHighlights() {
+		// TODO Auto-generated method stub
+		for (EditPart editPart : lastChanged) {
+			if (editPart instanceof GraphicalEditPart) {
+				EObject object = ((View)(editPart.getModel())).getElement();
+				IFigure figure = ((GraphicalEditPart)editPart).getFigure();
+				Color fGC = null;
+				Color bGC = null;
+				if (object instanceof Transition) {
+					fGC = ColorConstants.black;
+					bGC = ColorConstants.black;
+				} else if (object instanceof EventConnection) {
+					fGC = ColorConstants.red;
+					bGC = ColorConstants.red;
+				} else if (object instanceof DataConnection) {
+					fGC = ColorConstants.blue;
+					bGC = ColorConstants.blue;
+				}
+				figure.setForegroundColor(fGC);
+				figure.setBackgroundColor(bGC);
+				figure.repaint();
+			}
+		}
+	}
+
 	private void highlightTransitions(String fBName,
 			List<String> sourceStateNames, List<String> destinationStateNames) {
 		IWorkbenchWindow[] windows = PlatformUI.getWorkbench().getWorkbenchWindows();
@@ -131,6 +163,7 @@ public class CakefeedDataComponent extends JSONObjectDataComponent implements IJ
 									tF.setForegroundColor(ColorConstants.lightGreen);
 									tF.setBackgroundColor(ColorConstants.lightGreen);
 									tF.repaint();
+									this.lastChanged.add(tEP);
 								}
 							}
 						}
@@ -162,7 +195,7 @@ public class CakefeedDataComponent extends JSONObjectDataComponent implements IJ
 		return transitionEditParts;
 	}
 
-	private void highlightSignals(String fBName, List<String> signalNames) {
+	private void highlightConnections(String fBName, List<String> signalNames) {
 		IWorkbenchWindow[] windows = PlatformUI.getWorkbench().getWorkbenchWindows();
 		for (int i = 0; i < windows.length; i++) {
 			IEditorPart activeEditor = windows[i].getActivePage().getActiveEditor();
@@ -186,6 +219,7 @@ public class CakefeedDataComponent extends JSONObjectDataComponent implements IJ
 							cF.setForegroundColor(ColorConstants.lightGreen);
 							cF.setBackgroundColor(ColorConstants.lightGreen);
 							cF.repaint();
+							this.lastChanged.add(cEP2);
 						}
 					}
 				}
