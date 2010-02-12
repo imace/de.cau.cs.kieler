@@ -120,7 +120,7 @@ emphstyle=\bfseries\color[rgb]{0.482,0,0.323}
 
 \frontmatter
 \maketitle
-% \assertion
+\assertion
 % \include{abstract}
 \include{indexes}
 % \include{acronyms}
@@ -145,15 +145,16 @@ emphstyle=\bfseries\color[rgb]{0.482,0,0.323}
 \include{AutoConclusion}
 
 
-
+\setcounter{secnumdepth}{0}
 \appendix
 
 \backmatter
+\include{appendix}
 %\include{glossary}
 \include{index}
 \include{bibliography}
 %\include{manual}
-\include{appendix}
+
 
 
 \end{document}

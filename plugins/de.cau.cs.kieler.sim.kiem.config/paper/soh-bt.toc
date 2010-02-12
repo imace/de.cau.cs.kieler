@@ -44,52 +44,60 @@
 \contentsline {section}{\numberline {6.2}Manager Class - the Controller}{23}{section.6.2}
 \contentsline {subsection}{\numberline {6.2.1}Abstract Manager}{23}{subsection.6.2.1}
 \contentsline {subsection}{\numberline {6.2.2}Configuration Manager}{24}{subsection.6.2.2}
-\contentsline {subsection}{\numberline {6.2.3}Schedule Manager}{25}{subsection.6.2.3}
-\contentsline {subsection}{\numberline {6.2.4}Editor Manager}{25}{subsection.6.2.4}
-\contentsline {subsection}{\numberline {6.2.5}Contribution Manager}{25}{subsection.6.2.5}
-\contentsline {subsection}{\numberline {6.2.6}Property Usage Manager}{25}{subsection.6.2.6}
-\contentsline {subsection}{\numberline {6.2.7}Implementing Classes}{25}{subsection.6.2.7}
-\contentsline {section}{\numberline {6.3}Preference Pages - the View}{25}{section.6.3}
-\contentsline {subsection}{\numberline {6.3.1}Configuration page}{25}{subsection.6.3.1}
-\contentsline {subsubsection}{User defined properties page}{26}{section*.11}
-\contentsline {subsubsection}{Property usage dialog}{26}{section*.12}
-\contentsline {subsection}{\numberline {6.3.2}Scheduling page}{26}{subsection.6.3.2}
-\contentsline {subsubsection}{Adding and removing editors, Selecting a default editor}{27}{section*.13}
-\contentsline {subsection}{\numberline {6.3.3}Default Schedule}{27}{subsection.6.3.3}
-\contentsline {chapter}{\numberline {7}Conclusion}{29}{chapter.7}
-\contentsline {section}{\numberline {7.1}Results}{29}{section.7.1}
-\contentsline {section}{\numberline {7.2}Further Improvements}{29}{section.7.2}
-\contentsline {part}{\numberline {II}Automated Execution}{31}{part.2}
-\contentsline {chapter}{\numberline {8}Used Technologies}{33}{chapter.8}
-\contentsline {section}{\numberline {8.1}The Job}{33}{section.8.1}
-\contentsline {section}{\numberline {8.2}Eclipse Wizards}{33}{section.8.2}
-\contentsline {chapter}{\numberline {9}Problem Statement}{37}{chapter.9}
-\contentsline {section}{\numberline {9.1}Setting up a Run}{37}{section.9.1}
-\contentsline {section}{\numberline {9.2}Input for the Automation}{37}{section.9.2}
-\contentsline {section}{\numberline {9.3}Automate the execution}{38}{section.9.3}
-\contentsline {section}{\numberline {9.4}Output execution results}{38}{section.9.4}
-\contentsline {chapter}{\numberline {10}Concepts}{39}{chapter.10}
-\contentsline {section}{\numberline {10.1}Setting up a Run}{39}{section.10.1}
-\contentsline {section}{\numberline {10.2}Input for the Automation}{40}{section.10.2}
-\contentsline {section}{\numberline {10.3}Automate the execution}{40}{section.10.3}
-\contentsline {section}{\numberline {10.4}Output execution results}{40}{section.10.4}
-\contentsline {chapter}{\numberline {11}Code changes in KIEMPlugin}{43}{chapter.11}
-\contentsline {chapter}{\numberline {12}The Automated Executions Plug-in}{45}{chapter.12}
-\contentsline {section}{\numberline {12.1}Automated Component}{45}{section.12.1}
-\contentsline {subsection}{\numberline {12.1.1}provideProperties()}{45}{subsection.12.1.1}
-\contentsline {subsection}{\numberline {12.1.2}int wantMoreSteps()}{45}{subsection.12.1.2}
-\contentsline {subsection}{\numberline {12.1.3}int wantsMoreRuns()}{45}{subsection.12.1.3}
-\contentsline {section}{\numberline {12.2}Automated Producer}{45}{section.12.2}
-\contentsline {section}{\numberline {12.3}Automation Wizard}{46}{section.12.3}
-\contentsline {subsection}{\numberline {12.3.1}File Selection Page}{46}{subsection.12.3.1}
-\contentsline {subsection}{\numberline {12.3.2}Property Setting Page}{46}{subsection.12.3.2}
-\contentsline {subsection}{\numberline {12.3.3}Information Processing}{46}{subsection.12.3.3}
-\contentsline {section}{\numberline {12.4}Automation manager and Automation Job}{46}{section.12.4}
-\contentsline {subsection}{\numberline {12.4.1}Automation Manager}{46}{subsection.12.4.1}
-\contentsline {subsection}{\numberline {12.4.2}Automation Job}{47}{subsection.12.4.2}
-\contentsline {section}{\numberline {12.5}Automation View}{47}{section.12.5}
-\contentsline {subsection}{\numberline {12.5.1}Tool bar}{48}{subsection.12.5.1}
-\contentsline {chapter}{\numberline {13}Conclusion}{49}{chapter.13}
-\contentsline {section}{\numberline {13.1}Results}{49}{section.13.1}
-\contentsline {section}{\numberline {13.2}Further improvements}{49}{section.13.2}
-\contentsline {chapter}{Bibliography}{53}{appendix*.17}
+\contentsline {subsection}{\numberline {6.2.3}Schedule Manager}{24}{subsection.6.2.3}
+\contentsline {subsubsection}{Provide the Schedule Lists}{25}{section*.11}
+\contentsline {subsubsection}{Schedule Management}{26}{section*.12}
+\contentsline {subsubsection}{Open a Schedule}{26}{section*.13}
+\contentsline {subsubsection}{Tracking Execution Files}{26}{section*.14}
+\contentsline {subsubsection}{Default Schedule}{26}{section*.15}
+\contentsline {subsection}{\numberline {6.2.4}Editor Manager}{26}{subsection.6.2.4}
+\contentsline {subsubsection}{Default Editor}{27}{section*.16}
+\contentsline {subsection}{\numberline {6.2.5}Contribution Manager}{27}{subsection.6.2.5}
+\contentsline {subsection}{\numberline {6.2.6}Property Usage Manager}{28}{subsection.6.2.6}
+\contentsline {subsection}{\numberline {6.2.7}Implementing Classes}{28}{subsection.6.2.7}
+\contentsline {section}{\numberline {6.3}Preference Pages - the View}{28}{section.6.3}
+\contentsline {subsection}{\numberline {6.3.1}Configuration page}{28}{subsection.6.3.1}
+\contentsline {subsubsection}{User defined properties page}{29}{section*.17}
+\contentsline {subsubsection}{Property usage dialog}{29}{section*.18}
+\contentsline {subsection}{\numberline {6.3.2}Scheduling page}{29}{subsection.6.3.2}
+\contentsline {subsubsection}{Adding and removing editors, Selecting a default editor}{30}{section*.19}
+\contentsline {subsection}{\numberline {6.3.3}Configuration Selector}{30}{subsection.6.3.3}
+\contentsline {chapter}{\numberline {7}Conclusion}{33}{chapter.7}
+\contentsline {section}{\numberline {7.1}Results}{33}{section.7.1}
+\contentsline {section}{\numberline {7.2}Further Improvements}{33}{section.7.2}
+\contentsline {part}{\numberline {II}Automated Execution}{35}{part.2}
+\contentsline {chapter}{\numberline {8}Used Technologies}{37}{chapter.8}
+\contentsline {section}{\numberline {8.1}The Job}{37}{section.8.1}
+\contentsline {section}{\numberline {8.2}Eclipse Wizards}{37}{section.8.2}
+\contentsline {chapter}{\numberline {9}Problem Statement}{41}{chapter.9}
+\contentsline {section}{\numberline {9.1}Setting up a Run}{41}{section.9.1}
+\contentsline {section}{\numberline {9.2}Input for the Automation}{41}{section.9.2}
+\contentsline {section}{\numberline {9.3}Automate the execution}{42}{section.9.3}
+\contentsline {section}{\numberline {9.4}Output execution results}{42}{section.9.4}
+\contentsline {chapter}{\numberline {10}Concepts}{43}{chapter.10}
+\contentsline {section}{\numberline {10.1}Setting up a Run}{43}{section.10.1}
+\contentsline {section}{\numberline {10.2}Input for the Automation}{44}{section.10.2}
+\contentsline {section}{\numberline {10.3}Automate the execution}{44}{section.10.3}
+\contentsline {section}{\numberline {10.4}Output execution results}{44}{section.10.4}
+\contentsline {chapter}{\numberline {11}Code changes in KIEMPlugin}{47}{chapter.11}
+\contentsline {chapter}{\numberline {12}The Automated Executions Plug-in}{49}{chapter.12}
+\contentsline {section}{\numberline {12.1}Automated Component}{49}{section.12.1}
+\contentsline {subsection}{\numberline {12.1.1}provideProperties()}{49}{subsection.12.1.1}
+\contentsline {subsection}{\numberline {12.1.2}int wantMoreSteps()}{49}{subsection.12.1.2}
+\contentsline {subsection}{\numberline {12.1.3}int wantsMoreRuns()}{49}{subsection.12.1.3}
+\contentsline {section}{\numberline {12.2}Automated Producer}{49}{section.12.2}
+\contentsline {section}{\numberline {12.3}Automation Wizard}{50}{section.12.3}
+\contentsline {subsection}{\numberline {12.3.1}File Selection Page}{50}{subsection.12.3.1}
+\contentsline {subsection}{\numberline {12.3.2}Property Setting Page}{50}{subsection.12.3.2}
+\contentsline {subsection}{\numberline {12.3.3}Information Processing}{50}{subsection.12.3.3}
+\contentsline {section}{\numberline {12.4}Automation manager and Automation Job}{50}{section.12.4}
+\contentsline {subsection}{\numberline {12.4.1}Automation Manager}{50}{subsection.12.4.1}
+\contentsline {subsection}{\numberline {12.4.2}Automation Job}{51}{subsection.12.4.2}
+\contentsline {section}{\numberline {12.5}Automation View}{51}{section.12.5}
+\contentsline {subsection}{\numberline {12.5.1}Tool bar}{52}{subsection.12.5.1}
+\contentsline {chapter}{\numberline {13}Conclusion}{53}{chapter.13}
+\contentsline {section}{\numberline {13.1}Results}{53}{section.13.1}
+\contentsline {section}{\numberline {13.2}Further improvements}{53}{section.13.2}
+\contentsline {chapter}{Appendix}{55}{appendix*.22}
+\contentsline {section}{Appendix A}{55}{section*.23}
+\contentsline {chapter}{Bibliography}{59}{appendix*.25}

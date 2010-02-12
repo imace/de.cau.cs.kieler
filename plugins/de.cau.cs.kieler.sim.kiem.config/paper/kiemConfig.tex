@@ -207,7 +207,8 @@ execution files and updating the information inside the ScheduleData objects.
 \label{section:AbstractManager}
 All of the managers share some common features that each of them must provide. Some of those
 features are handled almost the same or exactly the same in each manager. This lead to the creation
-of an abstract super class for all managers that takes care of the basic tasks.
+of an abstract super class for all managers (see Figure  %\ref{fig:AbstractManagerUML}) 
+that takes care of the basic tasks.
 
 The first task is to allow other classes to register as a listener to the manager. Some of the classes
 in the \ac{KIEMConfig} have to perform updates when a value inside the model changes. It is the managers
@@ -217,19 +218,17 @@ The second task is to provide the subclasses with facilities to easily access th
 Whenever a value is requested by any part of the controller or another plug-in and a manager didn't access
 the preference store yet it has to gain access to the store and retrieve the information belonging to it.
 Furthermore when the user explicitly wants to save the preferences or the workbench is shutting down the
-data contained in the model has to be saved into the Eclipse Preference Store. The Abstract Manager provides
-some methods seen in Figure \ref{fig:AbstractManagerUML}. (For an example of a saved configuration see Appendix \ref{section:AppendixSavedConf}).
+data contained in the model has to be saved into the Eclipse Preference Store. For an example of a 
+saved configuration see Appendix \ref{section:AppendixSavedConf}).
 
-
-TODO:
-\begin{itemize}
- \item load/save through the plug ins preference store
- \item add/remove/notify listeners
-\end{itemize}
 
 \subsection{Configuration Manager}
 \label{section:ConfigurationManager}
 \index{Configuration Manager}
+The Configuration Manager basically handles all the problems described in Section \ref{section:ConfTaskConfig}.
+
+
+TODO:
 \begin{itemize}
  \item manages current/default configuration, supply filtered lists for preference components
  \item find current configuration and wrapper in data component wrapper list 
@@ -251,6 +250,83 @@ TODO:
 \subsection{Schedule Manager}
 \label{section:ScheduleManager}
 \index{Schedule Manager}
+The Schedule Manager is the second of the two large managers. It is responsible for managing the
+ScheduleData object, the execution files and provide the methods for solving the problem described
+in Section \ref{section:ConfTaskEasyLoading}. These responsibilities can be broken down into
+different parts:
+\begin{enumerate}
+ \item Gather the different types of lists of schedules.
+ \item Manage the different ScheduleData objects and provide methods to add, remove and change
+them.
+ \item Provide a means to trigger the loading of an execution file in the Execution Manager.
+ \item Track the locations of the execution files if the user modifies them.
+ \item Loading the default schedules.
+\end{enumerate}
+
+
+\subsubsection{Provide the Schedule Lists}
+\label{section:ProvideScheduleLists}
+The Schedule Manager stores all ScheduleData objects in one list that is saved and loaded through
+the abstract super class. However different components of the \ac{KIEMConfig} or other plug-ins 
+need different views on that list. Some components may not want to display all schedules or have
+the list sorted in a certain way. To provide these different views the Schedule Manager contains
+several methods:
+\begin{description}
+ \item \textbf{List<ScheduleData> getAllSchedules()} : Returns the list of all schedules. This
+method triggers a load through the super class if no load has been performed yet. It also triggers
+a load of the default schedules described at the end of Section \ref{section:DefaultSchedule}.
+ \item \textbf{List<ScheduleData> getMatchingSchedules(String editorID, String editorName)} :
+This method is responsible for constructing the list that will be displayed in the ComboBox that
+shows the list of schedules matching the currently active editor. First it tries to find an
+EditorDefinition with the given editor id. If that fails a new EditorDefinition is created and
+added it to the list of known editors. After that the method searches through the list of
+all schedules and extracts those that have a positive priority for the given editor. The list
+is then sorted  and returned with the editor with the highest priority appearing at the lowest index.
+ \item \textbf{List<ScheduleData> getRecentSchedules()} : This method constructs the list of 
+recently used schedules. This list is used in another ComboBox to allow the user to easily load
+his last used schedules. In order to realize this feature the Schedule Manager keeps a list of
+all execution file locations that were recently accessed using the list described in Section
+\ref{section:MostRecentCollection}. When the method is called it iterates over the list of locations
+and tries to find a schedule for each location. Schedules that match a location in that list are 
+added to the resulting list. Entries in the list of locations where no schedule can be found will
+be removed from the list as they are no longer valid.
+ \item \textbf{List<ScheduleData> getImportedSchedules()} : Returns the list of default schedules.
+This feature will be described in detail at the end of Section \ref{section:DefaultSchedule}.
+\end{description}
+
+\subsubsection{Schedule Management}
+\label{section:ScheduleManagement}
+
+\subsubsection{Open a Schedule}
+\label{section:OpenSchedule}
+
+\subsubsection{Tracking Execution Files}
+\label{section:TrackingExecutionFiles}
+
+\subsubsection{Default Schedule}
+\label{section:DefaultSchedule}
+\index{Default Schedule}
+\index{Extension point}
+An additional requirement that came up through the development of this project was that it would
+be desirable to provide the user with an initial set of execution files that are not located inside
+the users workspace.
+
+For that purpose the new extension point seen in Figure \ref{fig:DefaultSchedule} was created.
+\begin{figure}[Default Schedule]
+  \centering
+  \includegraphics[scale=0.33]{DefaultSchedule.jpg}
+  \caption[The Default Schedule extension point]%
+  {The Default Schedule extension point with example\protect}
+  \label{fig:DefaultSchedule}
+\end{figure}
+
+As soon as the Schedule Manager loads the schedules from the Eclipse preference store it also triggers
+a load from the components registered on this extension point. The new schedule will be constructed with
+the location provided through the corresponding field in the extension point. When a programmer decides
+to provide the user with a default schedule he also has to provide an editor for that schedule
+The extension point takes location of the execution file which will be assigned to an 
+
+TODO:
 \begin{itemize}
  \item all schedule data
  \item track recently used schedule Ids
@@ -263,21 +339,84 @@ TODO:
 \subsection{Editor Manager}
 \label{section:EditorManager}
 \index{Editor Manager}
-\begin{itemize}
- \item all editor definitions
- \item add/remove/find editors
- \item default editors 
-\end{itemize}
+As described in Section \ref{section:EditorDefinition} the editor names and editor ids have to be saved
+since they might not be available in the current runtime environment. The Editor Manager is responsible
+for managing the list of all known editors. It also contains facilities around the default editor.
+
+\begin{description}
+ \item \textbf{EditorDefinition addEditor(EditorDefinition editor} : Adds a new editor to list of 
+editors and return the added editor. If an editor with that editor id already exists in the list it is
+not added to prevent duplicates. In this case the already existing editor is returned instead. Since
+some methods may want to work on the editor that was just added they can work on the returned reference
+instead of having to perform a find to get the correct object.
+ \item \textbf{EditorDefinition findEditorById(String id)} : This method searches through the list
+of available editors to retrieve the editor with the given id. Since editors ids are assumed to be
+unique the first match is returned. This method is for example used to build the list of schedules that
+work with the currently active editor.
+ \item \textbf{void removeEditor(EditorDefinition editor)} : At some point the user may decide that
+one of the editors is no longer used. In this case the editor is simply removed from the list of
+available editors. However if the removed editor is the default editor (see Section \ref{section:DefaultEditor})
+the method also has to choose a new default editor. The editor of choice for simplicity is the first
+editor in the list. If the last editor is removed a hard-coded default editor is restored.
+\end{description}
+
+When the user is finished changing the editors the manager can use the facilities in the super class to
+write the list of known editors to the Eclipse preference store.
+
+
+\subsubsection{Default Editor}
+\label{section:DefaultEditor}
+\index{Default Editor}
+The \ac{KIEMConfig} contains a facility for showing the list of schedules that match the currently active
+editor. However there may be situations no editor is opened. Since the user should be able to keep working
+with his schedules in this situation there is the need to define a default editor. This editor will be assumed open 
+when in fact no editor is active.
+
+Although the actual storing of the default editor happens inside the Configuration Manager the Editor Manager
+still supplies facilities to get and set the default editor. This arrangement is more intuitive than having
+the methods inside the Configuration Manager.
+
 
 \subsection{Contribution Manager}
 \label{section:ContributionManager}
 \index{Contribution Manager}
-contribution manager: create combos, save visibility
+The Contribution Manager is responsible for maintaining the view elements (see Section \ref{section:ConfigurationSelector}) 
+that are not part of any of the preference pages. To accomplish this the manager has two tasks:
+\begin{enumerate}
+ \item The manager must create the view elements and store them. As described in Section 
+\ref{section:ToolbarContributionProvider} the Execution Manager will ask the \ac{KIEMConfig}
+for the list of items it wants to contribute to the tool bar. The manager then has to 
+create the list with the saved view elements and forward it through the extension point.
+ \item As the user might want to hide the new elements the Contribution Manager also has to 
+keep track of the visibility of the elements. Showing and hiding the components is realized
+in the following way:
+\begin{itemize}
+ \item When the Execution Manager requests the list of control contributions the Contribution Manager
+checks whether or not the given view element should be visible. If it should not be shown on the tool bar
+it is not added to the list and thus never reaches the tool bar.
+ \item When the user changes the visibility of a given view element the manager first updates its own
+representation of that information and triggers a save into the Eclipse preference store through the use
+of the facilities in the super class. After that the manager triggers a refresh in the Execution Manager
+view which causes the method in the extension point to be called which then receives the changed list.
+\end{itemize}
+\end{enumerate}
+
+MAYBE TODO:
+Advanced user mode
+
 
 \subsection{Property Usage Manager}
 \label{section:Property Usage Manager}
 \index{Property Usage Manager}
-property usage manager: track all keys where default config should be used rather than current
+As described in Section \ref{section:ConfTaskDefaultConfig} the user might not want to use
+the properties saved in the currently loaded execution file but rather the default values
+entered through the preference page. The Property Usage Manager is responsible enabling
+the Configuration Manager to realize this feature.
+
+To accomplish this task the manager contains a list of property keys for those values
+that should be taken from the default configuration. The list can be changed by any other
+class when the user changes the preferences on which properties should be in it. The list
+is also stored and loaded through the use of the facilities in the Abstract Manager.
 
 
 \subsection{Implementing Classes}
@@ -361,7 +500,7 @@ that takes a list of editor ids and returns the one selected by the user.
   \label{fig:EditorSelectionDialog}
 \end{figure}
 
-\subsection{Default Schedule}
-\label{section:DefaultSchedule}
-\index{Default Schedule}
-\index{Extension point}
+\subsection{Configuration Selector}
+\label{section:ConfigurationSelector}
+\index{Configuration Selector}
+
