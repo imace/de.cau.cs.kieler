@@ -1,0 +1,1055 @@
+
+	<html><body>
+	<h2>Xtext Grammar</h2>
+	<h1>de.cau.cs.kieler.synccharts.interfacedeclparser.InterfaceDecl</h1>
+	
+	<h3>Production Rules</h3>
+	<dl>
+	
+		
+	<dt><b><i>
+	 
+	StateExtend:
+
+	</b></i></dt>
+	<dd>
+	
+	
+		
+	
+	(
+	
+	
+		
+	'input'
+
+	
+		
+	
+	InputSignals
+
+	
+
+	)
+	
+
+	|
+		
+	
+	(
+	
+	
+		
+	'output'
+
+	
+		
+	
+	OutputSignals
+
+	
+
+	)
+	
+
+	|
+		
+	
+	(
+	
+	
+		
+	'input'
+
+	
+		
+	'output'
+
+	
+		
+	
+	InOutputSignals
+
+	
+
+	)
+	
+
+	|
+		
+	
+	(
+	
+	
+		
+	'signal'
+
+	
+		
+	
+	Signals
+
+	
+
+	)
+	
+
+	|
+		
+	
+	RegionSignalDec
+
+	
+
+	</dd><br/>
+
+	
+		
+	<dt><b><i>
+	 
+	RegionSignalDec:
+
+	</b></i></dt>
+	<dd>
+	
+	
+	
+	
+	
+		
+	
+	[Region]
+
+
+	
+		
+	':'
+
+	
+		
+	
+		
+	
+	(
+	
+	
+		
+	'var'
+
+	
+		
+	
+	Variable
+
+	
+		
+	
+	(
+	
+	
+		
+	','
+
+	
+		
+	
+	Variable
+
+	
+
+	)
+	*
+
+	
+
+	)
+	
+
+	|
+		
+	
+	(
+	
+	
+		
+	'signal'
+
+	
+		
+	
+	Signal
+
+	
+		
+	
+	(
+	
+	
+		
+	','
+
+	
+		
+	
+	Signal
+
+	
+
+	)
+	*
+
+	
+
+	)
+	
+
+	
+
+	
+		
+	
+		
+	
+	(
+	
+	
+		
+	','
+
+	
+		
+	'var'
+
+	
+		
+	
+	Variable
+
+	
+		
+	
+	(
+	
+	
+		
+	','
+
+	
+		
+	
+	Variable
+
+	
+
+	)
+	*
+
+	
+
+	)
+	
+
+	|
+		
+	
+	(
+	
+	
+		
+	','
+
+	
+		
+	'signal'
+
+	
+		
+	
+	Signal
+
+	
+		
+	
+	(
+	
+	
+		
+	','
+
+	
+		
+	
+	Signal
+
+	
+
+	)
+	*
+
+	
+
+	)
+	
+
+	
+
+	
+		
+	';'
+
+	
+
+	
+	
+
+	</dd><br/>
+
+	
+		
+	<dt><b><i>
+	 
+	Signals:
+
+	</b></i></dt>
+	<dd>
+	
+	
+	
+	
+	
+		
+	
+	(
+	
+	
+		
+	
+	Signal
+
+	
+		
+	
+	(
+	
+	
+		
+	','
+
+	
+		
+	
+	Signal
+
+	
+
+	)
+	*
+
+	
+
+	)
+	
+
+	
+		
+	';'
+
+	
+
+	
+	
+
+	</dd><br/>
+
+	
+		
+	<dt><b><i>
+	 
+	InputSignals:
+
+	</b></i></dt>
+	<dd>
+	
+	
+	
+	
+	
+		
+	
+	(
+	
+	
+		
+	
+	Signal
+
+	
+		
+	
+	(
+	
+	
+		
+	','
+
+	
+		
+	
+	Signal
+
+	
+
+	)
+	*
+
+	
+
+	)
+	
+
+	
+		
+	';'
+
+	
+
+	
+	
+
+	</dd><br/>
+
+	
+		
+	<dt><b><i>
+	 
+	OutputSignals:
+
+	</b></i></dt>
+	<dd>
+	
+	
+	
+	
+	
+		
+	
+	(
+	
+	
+		
+	
+	Signal
+
+	
+		
+	
+	(
+	
+	
+		
+	','
+
+	
+		
+	
+	Signal
+
+	
+
+	)
+	*
+
+	
+
+	)
+	
+
+	
+		
+	';'
+
+	
+
+	
+	
+
+	</dd><br/>
+
+	
+		
+	<dt><b><i>
+	 
+	InOutputSignals:
+
+	</b></i></dt>
+	<dd>
+	
+	
+	
+	
+	
+		
+	
+	(
+	
+	
+		
+	
+	Signal
+
+	
+		
+	
+	(
+	
+	
+		
+	','
+
+	
+		
+	
+	Signal
+
+	
+
+	)
+	*
+
+	
+
+	)
+	
+
+	
+		
+	';'
+
+	
+
+	
+	
+
+	</dd><br/>
+
+	
+		
+	<dt><b><i>
+	 
+	Signal:
+
+	</b></i></dt>
+	<dd>
+	
+	
+		
+	
+	ID
+
+	|
+		
+	
+	(
+	
+	
+		
+	
+	ID
+
+	
+		
+	
+	(
+	
+	
+		
+	':='
+
+	
+		
+	
+	STRING
+
+	
+
+	)
+	
+
+	
+
+	)
+	
+
+	|
+		
+	
+	(
+	
+	
+		
+	
+	ID
+
+	
+		
+	
+	(
+	
+	
+		
+	':='
+
+	
+		
+	
+	STRING
+
+	
+
+	)
+	
+
+	
+		
+	
+	ValueType
+
+	
+
+	)
+	
+
+	|
+		
+	
+	(
+	
+	
+		
+	
+	ID
+
+	
+		
+	
+	(
+	
+	
+		
+	':='
+
+	
+		
+	
+	STRING
+
+	
+
+	)
+	
+
+	
+		
+	
+	(
+	
+	
+		
+	'combine'
+
+	
+		
+	
+	ValueType
+
+	
+		
+	'with'
+
+	
+		
+	
+	CombineOperator
+
+	
+
+	)
+	
+
+	
+
+	)
+	
+
+	|
+		
+	
+	(
+	
+	
+		
+	
+	ID
+
+	
+		
+	
+	(
+	
+	
+		
+	':='
+
+	
+		
+	
+	STRING
+
+	
+
+	)
+	
+
+	
+		
+	
+	STRING
+
+	
+
+	)
+	
+
+	|
+		
+	
+	(
+	
+	
+		
+	
+	ID
+
+	
+		
+	
+	(
+	
+	
+		
+	':='
+
+	
+		
+	
+	STRING
+
+	
+
+	)
+	
+
+	
+		
+	
+	(
+	
+	
+		
+	'combine'
+
+	
+		
+	
+	STRING
+
+	
+		
+	'with'
+
+	
+		
+	
+	STRING
+
+	
+
+	)
+	
+
+	
+
+	)
+	
+
+	|
+		
+	
+	(
+	
+	
+		
+	
+	ID
+
+	
+		
+	
+	(
+	
+	
+		
+	'combine'
+
+	
+		
+	
+	ValueType
+
+	
+		
+	'with'
+
+	
+		
+	
+	CombineOperator
+
+	
+
+	)
+	
+
+	
+
+	)
+	
+
+	|
+		
+	
+	(
+	
+	
+		
+	
+	ID
+
+	
+		
+	
+	(
+	
+	
+		
+	'combine'
+
+	
+		
+	
+	STRING
+
+	
+		
+	'with'
+
+	
+		
+	
+	STRING
+
+	
+
+	)
+	
+
+	
+
+	)
+	
+
+	
+
+	</dd><br/>
+
+	
+		
+	<dt><b><i>
+	 
+	Variable:
+
+	</b></i></dt>
+	<dd>
+	
+	
+	
+	
+	
+		
+	
+	ID
+
+	
+		
+	
+	(
+	
+	
+		
+	':='
+
+	
+		
+	
+	STRING
+
+	
+
+	)
+	?
+
+	
+		
+	
+	ValueType?
+
+	
+		
+	
+	(
+	
+	
+		
+	'host'
+
+	
+		
+	
+	STRING
+
+	
+
+	)
+	?
+
+	
+
+	
+	
+
+	</dd><br/>
+
+	
+		
+	<dt><b><i>
+	
+	Enum ValueType: 
+
+	</b></i></dt>
+	<dd>
+	
+	
+		
+	
+	'PURE'
+
+
+	|
+		
+	
+	'BOOL'
+
+
+	|
+		
+	
+	'UNSIGNED'
+
+
+	|
+		
+	
+	'INT'
+
+
+	|
+		
+	
+	'FLOAT'
+
+
+	|
+		
+	
+	'HOST'
+
+
+	
+
+	</dd><br/>
+
+	
+		
+	<dt><b><i>
+	
+	Enum CombineOperator: 
+
+	</b></i></dt>
+	<dd>
+	
+	
+		
+	
+	'NONE'
+
+
+	|
+		
+	
+	'+'
+
+
+	|
+		
+	
+	'*'
+
+
+	|
+		
+	
+	'max'
+
+
+	|
+		
+	
+	'min'
+
+
+	|
+		
+	
+	'or'
+
+
+	|
+		
+	
+	'and'
+
+
+	|
+		
+	
+	'host'
+
+
+	
+
+	</dd><br/>
+
+	
+	</dl>
+	</body></html>
+	
