@@ -1,6 +1,7 @@
 package de.cau.cs.kieler.cakefeed.kiem;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,6 +38,7 @@ import de.cau.cs.kieler.sim.kiem.JSONObjectDataComponent;
 import de.cau.cs.kieler.sim.kiem.KiemExecutionException;
 import de.cau.cs.kieler.sim.kiem.KiemInitializationException;
 import de.cau.cs.kieler.sim.kiem.properties.KiemProperty;
+import de.cau.cs.kieler.sim.kiem.properties.KiemPropertyTypeFile;
 import de.cau.cs.kieler.sim.kiem.properties.KiemPropertyTypeWorkspaceFile;
 import de.cau.cs.kieler.synccharts.Transition;
 import de.cau.cs.kieler.synccharts.diagram.edit.parts.RegionEditPart;
@@ -52,6 +54,15 @@ public class CakefeedDataComponent extends JSONObjectDataComponent implements IJ
 	
 	@Override
 	public void initialize() throws KiemInitializationException {
+		//String path = "";
+		//try {
+		//	path = (org.eclipse.core.runtime.FileLocator
+		//			.toFileURL(Activator.getDefault().getBundle().getResource(
+		//			getProperties()[0].getValue()))).toString();
+		//} catch (IOException e) {
+		//	System.out.println("File could not be read!");
+		//	e.printStackTrace();
+		//}
 		//trace = null;
 		//currentTick = -1;
 		//lastChanged = new ArrayList<EditPart>();
@@ -319,7 +330,7 @@ public class CakefeedDataComponent extends JSONObjectDataComponent implements IJ
 		try {
 			  // TODO absoluten pfad
 			  // TODO xml von andre korrigieren lassen
-			  File file = new File(/*fileName*/"C:\\Documents and Settings\\msch165\\Desktop\\CAKeFEED\\demo\\environmentcruise.rmc");
+			  File file = new File(fileName/*"C:\\Documents and Settings\\msch165\\Desktop\\CAKeFEED\\demo\\environmentcruise.rmc"*/);
 			  DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			  DocumentBuilder db = dbf.newDocumentBuilder();
 			  Document doc = db.parse(file);
@@ -355,8 +366,8 @@ public class CakefeedDataComponent extends JSONObjectDataComponent implements IJ
     public KiemProperty[] provideProperties() {
         // CHECKSTYLEOFF MagicNumber
         KiemProperty[] properties = new KiemProperty[1];
-        properties[0] = new KiemProperty("Counter Example", new KiemPropertyTypeWorkspaceFile(),
-                "/nothing.txt");
+        properties[0] = new KiemProperty("Counter Example", new KiemPropertyTypeFile(),
+                "C:\\CounterExample.txt");
         // CHECKSTYLEON MagicNumber
         return properties;
     }
