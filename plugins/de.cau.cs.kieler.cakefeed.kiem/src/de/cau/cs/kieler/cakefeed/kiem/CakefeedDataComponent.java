@@ -85,13 +85,13 @@ public class CakefeedDataComponent extends JSONObjectDataComponent implements IJ
 
 	@Override
 	public JSONObject step(JSONObject jSONObject) throws KiemExecutionException {
+		clearHighlights();
+		lastChanged.clear();
 		if (!isHistoryStep()) {
 			currentTick++;
 		} else if (currentTick > 0) {
 			currentTick--;
 		}
-		clearHighlights();
-		lastChanged.clear();
 		Element tick = getTick(currentTick, trace.getDocumentElement());
 		if (tick != null) {
 			NodeList children = tick.getChildNodes();
@@ -114,7 +114,6 @@ public class CakefeedDataComponent extends JSONObjectDataComponent implements IJ
 	}
 	
 	private void clearHighlights() {
-		// TODO Auto-generated method stub
 		for (EditPart editPart : lastChanged) {
 			if (editPart instanceof GraphicalEditPart) {
 				EObject object = ((View)(editPart.getModel())).getElement();
@@ -297,19 +296,23 @@ public class CakefeedDataComponent extends JSONObjectDataComponent implements IJ
 	}
 
 	private Element getTick(int tick, Element elem) {
+		Element result = null;
 		String name = elem.getNodeName();
 		if (name.equals("Tick") && elem.hasAttribute("Id") && (elem.getAttribute("Id").equals(""+ tick +""))) {
-			return elem;
+			result = elem;
 		} else {
 			NodeList children = elem.getChildNodes();
 			for (int i = 0; i < children.getLength(); i++) {
 				Node child = children.item(i);
 				if (child instanceof Element) {
-					return getTick(tick, (Element)child);
+					Element newResult = getTick(tick, (Element)child);
+					if (newResult != null) {
+						result = newResult;
+					}
 				}
 			}
-			return null;
 		}
+		return result;
 	}
 
 	protected void read(String fileName) {
