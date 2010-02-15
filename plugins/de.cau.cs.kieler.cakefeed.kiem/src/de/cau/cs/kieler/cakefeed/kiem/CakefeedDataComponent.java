@@ -328,7 +328,6 @@ public class CakefeedDataComponent extends JSONObjectDataComponent implements IJ
 
 	protected void read(String fileName) {
 		try {
-			  // TODO absoluten pfad
 			  // TODO xml von andre korrigieren lassen
 			  File file = new File(fileName/*"C:\\Documents and Settings\\msch165\\Desktop\\CAKeFEED\\demo\\environmentcruise.rmc"*/);
 			  DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
