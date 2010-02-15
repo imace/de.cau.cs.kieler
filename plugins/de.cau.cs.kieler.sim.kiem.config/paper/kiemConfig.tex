@@ -1,4 +1,4 @@
-\chapter{Kiem Configuration Plug-in}
+\chapter{\ac{KIEMConfig} Plug-in}
 \label{chapter:KiemConfig}
 This chapter describes the contents and functionality of the newly created
 plug-in to solve the problems described in Chapter \ref{chapter:ConfTask}.
@@ -126,7 +126,7 @@ to avoid bugs due to mistyping an identifier which is likely to happen if it is 
 \subsubsection{Methods for Parsing and Serialization}
 \label{section:ToolsMethodsParsing}
 All of the manager classes in the \ac{KIEMConfig} need to save their properties into the Eclipse preference store.
-In order to have the information stored in a structured way an XML like format was chosen. As this requires the keys and values
+In order to have the information stored in a structured way an \ac{XML} like format was chosen. As this requires the keys and values
 to be formatted in a certain way the Tools class provides methods to format the Strings in the required way.
 \lstset{
 backgroundcolor=,
@@ -509,7 +509,7 @@ the methods inside the Configuration Manager.
 \subsection{Contribution Manager}
 \label{section:ContributionManager}
 \index{Contribution Manager}
-The Contribution Manager is responsible for maintaining the view elements (see Section \ref{section:ConfigurationSelector}) 
+The Contribution Manager is responsible for maintaining the view elements (see Section \ref{section:ScheduleSelector}) 
 that are not part of any of the preference pages. To accomplish this the manager has two tasks:
 \begin{enumerate}
  \item The manager must create the view elements and store them. As described in Section 
@@ -558,7 +558,7 @@ of preference pages for the rest of \ac{KIELER} in order to make them easier to 
 \index{Configuration Page}
 \begin{figure}[Configuration Page]
   \centering
-  \includegraphics[scale=.45]{ConfigurationPage.jpg}
+  \includegraphics[scale=.45]{ConfigurationPage.png}
   \caption[The main preference page of the Execution Manager]%
   {The main preference page of the Execution Manager\protect}
   \label{fig:ConfigurationPage}
@@ -578,7 +578,7 @@ the default configuration by removing and adding the component in the list.
 \label{section:UserDefinedPropertiesPage}
 \begin{figure}[User-Defined Properties Page]
   \centering
-  \includegraphics[scale=.5]{UserPropertiesPage.jpg}
+  \includegraphics[scale=.5]{UserPropertiesPage.png}
   \caption[The page for defining custom properties]%
   {The page for defining custom properties\protect}
   \label{fig:UserDefinedPropertiesPage}
@@ -592,7 +592,7 @@ can be chosen for an individual property. Thus all properties are simply display
 key and a value column. 
 
 The user is only allowed to edit the value column of previously defined properties. This restriction is
-necessary to keep the user from accidentaly changing keys that are required by another users DataComponent.
+necessary to keep the user from accidentally changing keys that are required by another users DataComponent.
 
 However the user can remove a property that is no longer needed or define his own properties with a custom key.
 
@@ -606,7 +606,7 @@ After the user is finished with selecting attributes and hit the 'Ok' Button the
 passes the new list of selected items back to the PropertyUsageManager.
 \begin{figure}[PropertyUsageDialog]
   \centering
-  \includegraphics[scale=.5]{PropertyUsageDialog.jpg}
+  \includegraphics[scale=.5]{PropertyUsageDialog.png}
   \caption[Property Usage Dialog]%
   {The Property Usage Dialog\protect}
   \label{fig:PropertyUsageDialog}
@@ -623,21 +623,34 @@ passes the new list of selected items back to the PropertyUsageManager.
   \label{fig:SchedulePage}
 \end{figure}
 This preference page (see Figure \ref{fig:SchedulePage} is used to manage the schedules and the editors that they belong to.
-As mentionend in Section \ref{section:ConfConceptsDefaultConf} this page is basically a modified version 
+As mentioned in Section \ref{section:ConfConceptsDefaultConf} this page is basically a modified version 
 of the LayoutPrioritiesPage by Miro Sp\"onemann (see Figure \ref{fig:MSPLayoutPreferencePage}).
 
-\begin{itemize}
- \item table with schedules / editors and their priorities
- \item modified from msp , editors = diagram types, schedules = layouters
- \item modify priorities
- \item add/remove editors, remove schedules, selecting default editor
-\end{itemize}
+The page is divided into two parts. The top part shows the table, the bottom part the buttons for manipulating
+the table entries.
+
+The table column headers show the abbreviated names of the editors (the tool tip of each header will show the full name). 
+Each column represents the priorities that the different schedules have for this particular editor. When the editor is
+active in the workbench view the list of matching schedules will be sorted in the order of these priorities. The user
+can directly edit these properties in the table. For easier readability the best schedule for each editor is marked
+with a dot and the table is sortable by clicking any of the column headers.
+
+The editors and schedules that have a padlock next to their name are the ones imported through the default schedule 
+extension point described in Section \ref{section:DefaultSchedule}. These editors and schedules are not supposed
+to be edited or removed since they represent a factory default setting. The view realizes this by graying out the 
+corresponding buttons when an imported schedule is selected.
+
+All other schedules can be removed by simply clicking the appropriate button. The button for editing the location
+of a schedule opens a dialog showing the currently active workspace and allows the user to select a new
+execution file that should be associated with the selected schedule. This feature is necessary in case the user
+moves a schedule through his file browser instead of the refactoring facilities on the workbench.
+
+The editor marked with the dot is the default editor (see Section \ref{section:DefaultEditor}.
 
 \subsubsection{Adding and Removing Editors, Selecting a Default Editor}
-
 \begin{figure}[EditorSelectionDialog]
   \centering
-  \includegraphics[width=1\textwidth]{EditorSelectionDialog.jpg}
+  \includegraphics[scale=.5]{EditorSelectionDialog.jpg}
   \caption[Editor Selection Dialog]%
   {The Editor Selection Dialog\protect}
   \label{fig:EditorSelectionDialog}
@@ -653,18 +666,33 @@ that takes a list of editor ids and returns the one selected by the user.
  \item The editor removal dialog gets a list of all editors currently available for 
  assignment of support properties. The editor selected by the user is removed from the table.
  It is also removed from all schedules. This is done to prevent the schedule objects from growing
- to monstrous size over time when editors are getting added and removed.
+ to unnecessarily large size over time when editors are getting added and removed.
  \item The default editor selection dialog gets the same list as the removal dialog. The selected
- editor is then set as default editor. The default editor is used when there is no currently active editor on the workbench.
-  It is used:
-  \begin{enumerate}
-   \item to determine which editors to show in the ComboBox showing the schedules that work for the active editor.
-   \item when a new schedule is created as an editor id.
-  \end{enumerate}
+ editor is then set as default editor. 
 \end{itemize}
 
 
-\subsection{Configuration Selector}
-\label{section:ConfigurationSelector}
-\index{Configuration Selector}
+\subsection{Schedule Selector}
+\label{section:ScheduleSelector}
+\index{Schedule Selector}
+\begin{figure}[Schedule Selector]
+  \centering
+  \includegraphics[scale=.5]{ScheduleSelector.jpg}
+  \caption[The Schedule Selection ComboBoxes]%
+  {The Schedule Selection ComboBoxes\protect}
+  \label{fig:ScheduleSelector}
+\end{figure}
+The Schedule Selector is the only view element isn't shown on the preference pages. It is used
+to construct and manage the two ComboBoxes for loading schedules that are known to
+the \ac{KIEMConfig}. Each of the two ComboBoxes seen in Figure \ref{fig:ScheduleSelector} has its own task.
+\begin{description}
+ \item \textbf{The Matching Selector} : This ComboBox displays the schedules that can be used with
+the currently active editor. The list is sorted by the priorities assigned through the preference page.
+It displays a header showing its purpose in order to distinguish it from the other ComboBox.
+ \item \textbf{The Recently Used Selector} : This ComboBox displays the list of recently used schedules.
+The list is ordered in the same order that the schedules have been accessed through the Execution Manager.
+The maximum size of the list can be configured through the preference page. The ComboBox displays the name
+of the currently loaded execution file regardless of how it was loaded. This was done because up till now 
+there actually was no way to tell which execution file was loaded in the Execution Manager.
+\end{description}
 

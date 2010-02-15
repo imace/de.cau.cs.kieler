@@ -3,21 +3,36 @@
 
 \chapter{Introduction}
 \label{chapter:introduction}
+The purpose of this thesis consists of two parts. The first part is to find an easier way and
+more flexible way to deal with execution files in the \ac{KIELER} Execution Manager. The second part
+is to find an easy way to automatically do long execution runs inside the \ac{KIEM}.
+
 \section{KIELER Framework}
-\label{sec:intro/Kieler}
-\begin{itemize}
- \item layouter, structure based editing
- \item synccharts
- \item simulater
- \item execution manager
-\end{itemize}
+\label{sec:introKieler}
+\index{KIELER}
+Since the project is part of the \ac{KIELER}\footnote{\url{http://www.informatik.uni-kiel.de/rtsys/kieler/}}
+framework a short introduction is in order.
+
+\ac{KIELER} is an open-source project for model design, simulation and analysis. 
+
+It contains facilities to edit different types of graphical models (e.g. synccharts) and has several
+tools to make the editing easier. The \ac{KSBasE}\footnote{\url{http://rtsys.informatik.uni-kiel.de/trac/kieler/wiki/Projects/KSBasE}} 
+project for example contains several features where the user can edit successor states to already existing states in the diagram or
+adding new inner states without having to perform all the necessary actions himself. Another 
+project\footnote{\ac{KIML} - \url{http://rtsys.informatik.uni-kiel.de/trac/kieler/wiki/Projects/KIML}}
+automatically layouts any diagram with a variety of algorithms in order to improve readability.
+
+The \ac{KIELER} Execution Manager described in the next section is used for simulating the
+model files created by \ac{KIELER}.
 
 \subsection{Model Files}
 \label{section:IntroModelFile}
 \index{Model file}
+A model file contains the behavior of 
 
 \section{The KIELER Execution Manager}
-\label{sec:intro/Kiem}
+\label{sec:introKiem}
+\index{KIEM}
 Execution Manager is used in KIELER as a framework to plug-in DataComponents for various tasks. Examples are:
 \begin{itemize}
  \item Simulation Engines
@@ -32,13 +47,6 @@ These DataComponents can be executed using a graphical user interface (GUI).
 The scheduling order can also be defined by this GUI as well as other settings like a step/tick duration and properties of DataComponents.
 For information about \ac{KIEM} see the wiki\footnote{\url{http://rtsys.informatik.uni-kiel.de/trac/kieler/wiki/Projects/KIEM}}.
 
-\subsection{DataComponents}
-\label{section:IntroDataComponent}
-\index{DataComponent}
-
-\subsubsection{DataComponentWrappers}
-\label{section:IntroDataComponentWrapper}
-
 \subsection{Execution}
 \label{section:IntroExecution}
 \index{Execution file}
@@ -46,19 +54,36 @@ For information about \ac{KIEM} see the wiki\footnote{\url{http://rtsys.informat
 \index{Schedule}
 
 
+\subsection{DataComponents}
+\label{section:IntroDataComponent}
+\index{DataComponent}
+A DataComponent is an entity that has a specific task during a the course of an execution. The
+DataComponents are scheduled in a specific order and can either receive or produce information or both. 
+During each step of the execution each DataComponent is asked to perform their computations for the step.
+
+\subsubsection{DataComponentWrappers}
+\label{section:IntroDataComponentWrapper}
+
+
+
+
 
 \section{Outline of this Document}
-\label{sec:intro/Outline}
+\label{sec:introOutline}
 The first part of this document is about the implemention of the Configuration plugin for the \ac{KIEM}.
 The second part discusses the implementation of the Automated Execution plugin for the \ac{KIEM}. Both
 parts will have the same structure described below.
-Each part starts with a detailed outline of the problems that are to be solved by this thesis.
-The next section introduces technologies used to solve the problem.
-After that there will be a section about the concepts of how to solve the problem and some
+
+Each part starts with a brief introduction into the technologies used to solve the problem.
+
+The next chapter contains a detailed outline of the problems that are to be solved by this thesis.
+
+The following chapter describes the concepts of how to solve the problem and some
 design decisions that were made at a very early stage in the development.
+
 Sections 5 and 6 are about the actual implementation with section 5 outlining the changes
-that were made to the \ac{KIEM} plug-in itself and section 6 describing the newly created
-\ac{KIEMConfig} plug-in.
+that were made to the \ac{KIEM} plug-in itself and section 6 describing the newly created plug-ins.
+
 The final section of each part will summarize the results of the thesis and outline
 a few projects that could be based on it.
 

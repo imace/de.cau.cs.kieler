@@ -65,6 +65,20 @@ that a run is started in any event and keeps communication between the component
 
 \section{Automate the execution}
 \label{section:AutoConceptsExecution}
+As a basic control flow for the automation the following procedure is chosen:
+\begin{enumerate}
+ \item The automation will iterate over all supplied execution files. These are likely the most time consuming
+to load which means loading an execution file multiple times should be avoided.
+ \item With each execution file the automation will iterate over all model files. Model files are costly to load
+as well however each load of an execution file would mean that all DataComponents would not be able to store their
+saved properties either way which in turn means they would have to reload the model anyway. For this reason the model
+files will be loaded once for every execution file.
+ \item With each model file the automation will perform multiple runs. That means starting a run in the execution manager
+and performing a certain number of steps and the stopping the execution again. With each run the components get the chance
+to execute a few steps with different properties, for example trace files. These runs will be called iterations from this
+point forward.
+\end{enumerate}
+
 Automating the execution itself requires the plug-in to interact with the Execution Manager.
 There is already an \ac{API} defined for loading an execution file by supplying a path so that
 is what will be used in this project.
@@ -90,7 +104,7 @@ to look at the results from the execution and compare them with the actual model
 An opened dialog is usually something sitting in front of the rest of the \ac{IDE}
 and that user wants to get rid of as fast as possible.
 
-The option taken in this project will utilize the view mechanism provided by Eclipse. %ref to description of view
+The option taken in this project will utilize the view mechanism provided by Eclipse.
 This approach ensures that the user can place the displayed results where he wants them to be.
 It also makes it possible for the user to run an execution multiple times and compare the
 results by having them displayed in multiple views or next to each other in the same view.
