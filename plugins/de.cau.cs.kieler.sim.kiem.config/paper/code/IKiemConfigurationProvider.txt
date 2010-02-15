@@ -1,0 +1,27 @@
+public interface IKiemConfigurationProvider {
+
+    /**
+     * Ask the component to give a new value for the property specified by the
+     * id. If multiple components are registered on this extension point only
+     * the first value that was successfully retrieved will be used. All other
+     * providers will not be asked.
+     * 
+     * @param propertyId
+     *            the id of the property to change.
+     * @return the new value of the property.
+     * @throws KiemPropertyException
+     *             if the propertyId was not found.
+     */
+    String changeProperty(String propertyId) throws KiemPropertyException;
+
+    /**
+     * Notify the listener that the user changed the property specified by the
+     * id.
+     * 
+     * @param propertyId
+     *            the id of the property.
+     * @param value
+     *            the new value of the property.
+     */
+    void propertyChanged(String propertyId, String value);
+}

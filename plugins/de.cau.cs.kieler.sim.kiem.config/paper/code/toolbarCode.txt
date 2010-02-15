@@ -1,0 +1,55 @@
+    /**
+     * Builds the local tool bar for the KiemView part.
+     */
+    private void buildLocalToolBar() {
+        IActionBars bars = getViewSite().getActionBars();
+        IToolBarManager manager = bars.getToolBarManager();
+        // first remove all entries
+        manager.removeAll();
+
+        // call soh's extension point
+        addExternalContributions(manager);
+
+        manager.add(getActionUp());
+        manager.add(getActionDown());
+        manager.add(new Separator());
+        manager.add(getAimedStepDurationTextField());
+        manager.add(getStepTextField());
+        manager.add(new Separator());
+        manager.add(getActionStepBack());
+
+        [...]
+    }
+    
+    /**
+     * Add components contributed by other plugins through the
+     * ToolBarContributor extension point.
+     * 
+     * author soh
+     * @param manager the manager where to add the components
+     */
+    private void addExternalContributions(final IToolBarManager manager) {
+        IConfigurationElement[] contributors = Platform.getExtensionRegistry()
+                .getConfigurationElementsFor(
+                        "de.cau.cs.kieler.sim.kiem.toolbarContributor");
+
+        for (IConfigurationElement element : contributors) {
+            try {
+                IKiemToolbarContributor contributor = (IKiemToolbarContributor) (element
+                        .createExecutableExtension("class"));
+
+                ControlContribution[] contributions = contributor
+                        .provideToolbarContributions(null);
+
+                if (contributions != null) {
+                    for (ControlContribution contribution : contributions) {
+                        if (contribution != null) {
+                            manager.add(contribution);
+                        }
+                    }
+                }
+            } catch (CoreException e0) {
+                e0.printStackTrace();
+            }
+        }
+    }

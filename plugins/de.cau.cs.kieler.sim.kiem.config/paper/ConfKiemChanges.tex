@@ -41,18 +41,17 @@ This means that the order of the native Execution Manager buttons is always the 
 same place. It also means that the Execution Manager can choose to ignore contributions if the
 tool bar gets too crowded.
 \end{enumerate}
-\begin{figure}[IToolbarContributor]
-  \centering
-  \includegraphics[scale=.3]{IKiemToolbarContributor.jpg}
-  \caption[The interface for Tool bar Contribution Providers]%
-  {The interface for Tool bar Contribution Providers\protect}
-  \label{fig:IToolbarContributor}
-\end{figure}
+\listingjava
+\showlistingex{code/IKiemToolbarContributor.txt}
+{Java}
+{The interface for Tool bar Contribution Providers}
+{list:IToolbarContributor}
+{t}
 
 The schema file for components that want to add contributions to the tool bar is quite simple.
-It only requires them to implement the interface shown in figure \ref{fig:IToolbarContributor}.
+It only requires them to implement the interface shown in Listing \ref{list:IToolbarContributor}.
 The implementing class provides an array with all ControlContributions they want to add to the tool bar.
-A ControlContribution for a tool bar can be almost any widget like Labels, Buttons, ComboBoxes, ....
+A ControlContribution for a tool bar can be almost any widget like for example Labels, Buttons or ComboBoxes.
 
 When the Execution Manager starts to build the views tool bar it will perform the following steps:
 \begin{enumerate}
@@ -81,9 +80,16 @@ the contributions.
   \label{fig:ToolbarWithoutContributions}
 \end{figure}
 
-\subsection{Configuration provider}
+\subsection{Configuration Provider}
 \label{section:ConfigurationProvider}
 \index{Configuration Provider}
+\listingjava
+\showlistingex{code/IKiemConfigurationProvider.txt}
+{Java}
+{The Interface of the Configuration Provider}
+{list:IKiemConfigurationProvider}
+{t}
+
 The purpose of the configuration provider is to allow internal attributes of the
 Execution Manager to be stored in another plug in. 
 
@@ -93,35 +99,48 @@ plug-ins that provide values for properties and not all plug-ins may have the va
 a property needed by the Execution Manager. Through the plug-in mechanism the \ac{KIEM}
 can ask all providers for values and choose the one he would like to use.
 
-\begin{figure}[Configuration Provider Interface]
-  \centering
-  \includegraphics[scale=0.3]{IKiemConfigurationProvider.png}
-  \caption[The Interface of the Configuration Provider]%
-  {The Interface of the Configuration Provider\protect}
-  \label{fig:UMLConfigurationProvider}
-\end{figure}
-
-The two methods from the interface shown in Figure \ref{fig:UMLConfigurationProvider} work
+The two methods from the interface shown in Listing \ref{list:IKiemConfigurationProvider} work
 in the following way:
+
+\begin{description}
+ \item \textbf{String changeProperty(String propertyId) throws KiemPropertyException} :
+
+This method will be called by the Execution Manager whenever a property has to be loaded where
+other plug-ins are encouraged to provide their value. When a plug-in is asked for a value it
+can do one of two things:
+ \begin{enumerate}
+  \item It can either provide a value for the property. Any value is acceptable here, even \textit{null}.
+If one plug-in provides any value at all the other plug-ins will not be asked. The reason behind this arrangement
+is that the Execution Manager most likely can't decide which value has more validity anyway if more than one
+plug-in answers.
+  \item If it can not provide a value the declared Exception should be thrown in which case the Execution
+Manager will move to the next plug-in. The reason for not using the \textit{null} value to encode no valid value
+is that \textit{null} might be the intended value.
+ \end{enumerate}
+
+ \item \textbf{void propertyChanged(String propertyId, String value)} :
+
+Notifies all listeners that a property was changed somewhere in the Execution Manager. This will be called for example
+when the user changes the step duration through the input field on the Execution Managers tool bar.
+\end{description}
 
 \subsection{Event Listener}
 \label{section:EventListener}
 \index{Event Listener}
+\listingjava
+\showlistingex{code/IKiemEventListener.txt}
+{Java}
+{The Interface of the Event Listener}
+{list:IKiemEventListener}
+{t}
+
 The main purpose of the Event Manager is to inform DataComponents of events
 happening in the Execution Manager during execution. This behavior has been modified to include 
 events that occur while the execution is not running. This modification lead to the 
 creation of another extension point in order to allow other plug-ins to be notified
 on any of these events as well. The classes implementing the interface 
-(see Figure \ref{fig:UMLEventListener}) required by this extension point will be notified
+(see List \ref{list:IKiemEventListener}) required by this extension point will be notified
 on any event that happens inside the Execution Manager.
-
-\begin{figure}[Event Listener Interface]
-  \centering
-  \includegraphics[scale=0.3]{IKiemEventListener.png}
-  \caption[The Interface of the Event Listener]%
-  {The Interface of the Event Listener\protect}
-  \label{fig:UMLEventListener}
-\end{figure}
 
 \begin{description}
  \item \textbf{int provideEventOfInterest()} : This method is directly derived from the method with 
@@ -166,25 +185,30 @@ if no integer could be parsed.
 \end{description}
 
 \subsection{Getters and Setters}
-An example for the use of the methods described in the last section can be found in the Getters and Setters for
-the different properties in the Execution Manager (for an example see Figure \ref{list:getterAndSetter}). 
-These were changed in order to use the new methods but are
-still able to fall back on hard-coded default values if no configuration plug-in is registered.
-
 \listingjava
 \showlistingex{code/getterSetter.txt}
 {Java}
 {Example of modified Getter and Setter}
 {list:getterAndSetter}
 {t}
+An example for the use of the methods described in the last section can be found in the Getters and Setters for
+the different properties in the Execution Manager (for an example see Figure \ref{list:getterAndSetter}). 
+These were changed in order to use the new methods but are
+still able to fall back on hard-coded default values if no configuration plug-in is registered.
 
 
 \subsection{Open File}
 \label{section:ConfKiemOpenFile}
+\listingjava
+\showlistingex{code/openFile.txt}
+{Java}
+{The head of the modified openFile() method}
+{list:openFileMethod}
+{t}
 The method that takes care of loading an execution file was split. This was done to allow
 other plug-ins to pass an IPath object directly to the method and perform a load of that file without
 having to go through the \ac{UI}. This method was also shifted around a little in order to detect
-missing execution files before the load enters the UIThread. This was necessary to make is possible for
+missing execution files before the load enters the \ac{UI}Thread. This was necessary to make is possible for
 the callers of the method to catch the resulting exception.
 The method also had to be modified in order to be able to take files that are not inside the workspace
 but were added through an extension point. The changed part of the openFile method is shown in 
@@ -194,13 +218,6 @@ Eclipse workspace without using the \ac{KIEMConfig} plug-in the plug-in still ha
 This happens through the use of the Event Manager that notifies all listeners upon the successful
 completion of the loading operation.
 
-\listingjava
-\showlistingex{code/openFile.txt}
-{Java}
-{The head of the modified openFile() method}
-{list:openFileMethod}
-{t}
-
 
 \section{KIEMView}
 \label{section:ConfChangesKiemView}
@@ -208,8 +225,8 @@ The changes described in Section \ref{section:ConfChangesKiemPlugin} were mostly
 configuration management and loading of new execution files. This section will mostly deal with the changes
 that were necessary to enable the adding of new items to the tool bar.
 
-\begin{itemize}
- \item changes to tool bar creation
- \item provide means to set view as dirty when changes happen
- \item refresh method to reload values, not needed before because no change except by user
-\end{itemize}
+The tool bar of the Execution Manager is created programmatically instead of through the use of the
+corresponding Eclipse extension point. This means that the only way to place additional controls onto the tool bar
+is to modify the code in order to make use of the Toolbar Contribution Provider extension point described
+in Section \ref{section:ToolbarContributionProvider}. For the full code of the modified method see
+List \ref{list:AppendixToolbarCode} in the appendix.

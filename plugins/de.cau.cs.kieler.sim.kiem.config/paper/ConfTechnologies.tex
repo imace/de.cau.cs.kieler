@@ -73,14 +73,10 @@ A plug-in that wants to add their functionality to an already existing plug-in
 through the use of an extension point has to provide the mandatory attributes defined in the 
 specifications.
 
-\listingjava
-\lstset{
-backgroundcolor=,
-}
 Eclipse itself already provides many extension points to extend the functionality of the workbench.
 For example, if a plug-in wants to add a new editor to the workbench it has to extend the 
-\lstinline|org.eclipse.ui.editors| extension point. It then has to provide an identifier and a name
-as well as a class that implements the \lstinline|org.eclipse.ui.IEditorPart| interface. It can also specify an
+\textit{org.eclipse.ui.editors} extension point. It then has to provide an identifier and a name
+as well as a class that implements the \textit{org.eclipse.ui.IEditorPart} interface. It can also specify an
 icon and a file extension for files which should be opened with the new editor.
 
 When an Eclipse application is started with this plug-in Eclipse will automatically make sure that the new editor
@@ -90,8 +86,10 @@ itself without worrying about it being added at all the necessary places inside 
 \subsection{Preference Pages}
 \label{section:TechPreferencePage}
 \index{Preference Page}
-Another plug-ins used in this project in that fashion is the \lstinline|org.eclipse.ui.preferencePage|
-plug-in. It is used to create new preference pages at a specific location inside the
+A special example of plug-in usage within the Eclipse framework itself is the 
+
+\textit{org.eclipse.ui.preferencePage} plug-in. 
+It is used to create new preference pages at a specific location inside the
 normal tree of preference pages accessible through Window->Preferences.
 The programmer only has to take care of the contents of the actual page and not worry
 about additional buttons or integrating it into the PreferenceDialog.
