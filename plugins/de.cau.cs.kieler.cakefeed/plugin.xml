@@ -16,5 +16,14 @@
             class="de.cau.cs.kieler.cakefeed.CakefeedPackage"
             genModel="model/cakefeed.genmodel"/>
    </extension>
+   <extension
+         point="org.eclipse.xtend.typesystem.emf.checks">
+      <metaModel
+            nsURI="http://kieler.cs.cau.de/cakefeed/">
+         <checkFile
+               path="model/cakefeed.chk">
+         </checkFile>
+      </metaModel>
+   </extension>
 
 </plugin>
