@@ -2,19 +2,19 @@ import cakefeed;
 import functionblocks;
 
 create functionblocks::FBType this BFBDiagramToFBType(cakefeed::BFBDiagram bfbdiagram):
- this.setName((java.lang.String)(bfbdiagram.bFBType.name))
+ this.setName(bfbdiagram.bFBType.name)
 ; 
 
 create functionblocks::FBType this CFBDiagramToFBType(cakefeed::CFBDiagram cfbdiagram):
- this.setName((java.lang.String)(cfbdiagram.cFBType.name))
+ this.setName(cfbdiagram.cFBType.name)
 ;
 
 create functionblocks::FBType this BFBTypeToFBType(cakefeed::BFBType bfbtype):
- this.setName((java.lang.String)(bfbtype.name))
+ this.setName(bfbtype.name)
 ; 
 
 create functionblocks::FBType this CFBTypeToFBType(cakefeed::CFBType cfbtype):
- this.setName((java.lang.String)(cfbtype.name))
+ this.setName(cfbtype.name)
 ;
 
 //--------------------------------------------------------------------------------------
@@ -24,5 +24,5 @@ create cakefeed::BFBDiagram this FBTypeToBFBDiagram(functionblocks::FBType fbtyp
 ;
 
 create cakefeed::BFBType this FBTypeToBFBType(functionblocks::FBType fbtype):
- this.setName((java.lang.String)(fbtype.name))
+ this.setName(fbtype.name)
 ; 

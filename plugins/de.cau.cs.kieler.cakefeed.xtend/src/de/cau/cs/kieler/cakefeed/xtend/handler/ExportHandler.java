@@ -7,6 +7,7 @@ import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.IHandler;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gmf.runtime.common.core.command.CommandResult;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.CanonicalEditPolicy;
@@ -45,7 +46,15 @@ public class ExportHandler extends AbstractHandler implements IHandler {
             
             Object[] parameters = new Object[1];
             
-            String fileName = "feature.ext";
+            // URI TEST
+            //URI uri = URI.createURI("platform:plugin//de.cau.cs.kieler.cakefeed.xtend//transformations//feature.ext");
+            // END URI TEST
+            
+            String fileName = "C:\\Documents and Settings\\msch165\\Desktop\\eclipse workspace\\de.cau.cs.kieler.cakefeed.xtend\\src\\de\\cau\\cs\\kieler\\cakefeed\\xtend\\transformations\\feature.ext";
+            				  /*"..\\transformations\\feature.ext"*/
+            				  /*"platform:plugin//de.cau.cs.kieler.cakefeed.xtend//transformations//feature.ext"*/
+            					//uri.toString();
+            					//"platform:plugin//de//cau//cs//kieler//cakefeed//xtend//transformations//feature.ext";
             String operation = null;
             
             XtendTransformationFramework xtend = new XtendTransformationFramework();
