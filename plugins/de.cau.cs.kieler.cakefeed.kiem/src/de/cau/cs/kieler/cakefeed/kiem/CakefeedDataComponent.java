@@ -28,13 +28,16 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import de.cau.cs.kieler.cakefeed.DataConnection;
+import de.cau.cs.kieler.cakefeed.Event;
 import de.cau.cs.kieler.cakefeed.EventConnection;
 import de.cau.cs.kieler.cakefeed.FB;
 import de.cau.cs.kieler.cakefeed.FBType;
 import de.cau.cs.kieler.cakefeed.NamedAndCommented;
+import de.cau.cs.kieler.cakefeed.Var;
 import de.cau.cs.kieler.cakefeed.fbnetwork.diagram.edit.parts.FBNetworkEditPart;
 import de.cau.cs.kieler.sim.kiem.IJSONObjectDataComponent;
 import de.cau.cs.kieler.sim.kiem.JSONObjectDataComponent;
+import de.cau.cs.kieler.sim.kiem.KiemEvent;
 import de.cau.cs.kieler.sim.kiem.KiemExecutionException;
 import de.cau.cs.kieler.sim.kiem.KiemInitializationException;
 import de.cau.cs.kieler.sim.kiem.properties.KiemProperty;
@@ -51,6 +54,7 @@ public class CakefeedDataComponent extends JSONObjectDataComponent implements IJ
 	protected Document trace = null;
 	protected int currentTick = -1;
 	protected List<EditPart> lastChanged = new ArrayList<EditPart>();
+	protected boolean backwards = false;
 	
 	@Override
 	public void initialize() throws KiemInitializationException {
@@ -98,7 +102,7 @@ public class CakefeedDataComponent extends JSONObjectDataComponent implements IJ
 	public JSONObject step(JSONObject jSONObject) throws KiemExecutionException {
 		clearHighlights();
 		lastChanged.clear();
-		if (!isHistoryStep()) {
+		if (!backwards) {
 			currentTick++;
 		} else if (currentTick > 0) {
 			currentTick--;
@@ -212,13 +216,13 @@ public class CakefeedDataComponent extends JSONObjectDataComponent implements IJ
 			if (activeEditor instanceof IDiagramWorkbenchPart) {
 				EditPart editPart = ((IDiagramWorkbenchPart) activeEditor).getDiagramEditPart();
 				if ((editPart instanceof FBNetworkEditPart)) {
-					List<EditPart> signalEditParts = getSignalEditParts(editPart, fBName);
+					List<EditPart> signalEditParts = getSignalEditParts(editPart, fBName, signalNames);
 					List<EditPart> connectionEditParts = getConnectionEditParts(editPart);
 					List<EditPart> connectionsToHighlight = new ArrayList<EditPart>();
 					for (EditPart cEP : connectionEditParts) {
 						if (cEP instanceof AbstractConnectionEditPart) {
 							AbstractConnectionEditPart aCEP = (AbstractConnectionEditPart)cEP;
-							if ((signalEditParts.contains(aCEP.getSource())) && (signalEditParts.contains(aCEP.getTarget()))) {
+							if ((signalEditParts.contains(aCEP.getSource())) /*&& (signalEditParts.contains(aCEP.getTarget()))*/) {
 								connectionsToHighlight.add(cEP);
 							}
 						}
@@ -251,7 +255,7 @@ public class CakefeedDataComponent extends JSONObjectDataComponent implements IJ
 	}
 
 	@SuppressWarnings("unchecked")
-	private List<EditPart> getSignalEditParts(EditPart editPart, String fBName) {
+	private List<EditPart> getSignalEditParts(EditPart editPart, String fBName, List<String> signalNames) {
 		List<EditPart> signalEditParts = new ArrayList<EditPart>();
 		List<Object> children = editPart.getChildren();
 		for (Object c : children) {
@@ -278,14 +282,34 @@ public class CakefeedDataComponent extends JSONObjectDataComponent implements IJ
 						|| (c instanceof de.cau.cs.kieler.cakefeed.fbnetwork.diagram.edit.parts.FBOutputVarEditPart)) {
 					EObject element = ((View)((EditPart)c).getModel()).getElement();
 					EObject container = element.eContainer();
-					if (((container instanceof FBType) || (container instanceof FB)) && (((NamedAndCommented)container).getName().equals(fBName))) {
+					String name = null;
+					if (element instanceof Event) {
+						name = ((Event)element).getName();
+					} else if (element instanceof Var) {
+						name = ((Var)element).getName();
+					}
+					if (((container instanceof FBType) || (container instanceof FB)) 
+							&& (((NamedAndCommented)container).getName().equals(fBName))
+							&& nameIsValid(name, signalNames)) {
 						signalEditParts.add((EditPart)c);
 					}
 				}
-				signalEditParts.addAll(getSignalEditParts((EditPart)c, fBName));
+				signalEditParts.addAll(getSignalEditParts((EditPart)c, fBName, signalNames));
 			}
 		}
 		return signalEditParts;
+	}
+
+	private boolean nameIsValid(String name, List<String> signalNames) {
+		boolean valid = false;
+		if (name != null) {
+			for (String string : signalNames) {
+				if (string.equals(name)) {
+					valid = true;
+				}
+			}
+		}
+		return valid;
 	}
 
 	private List<String> getChildrenNames(Element elem, String type) {
@@ -371,4 +395,21 @@ public class CakefeedDataComponent extends JSONObjectDataComponent implements IJ
         return properties;
     }
 
+	@Override
+	public KiemEvent provideEventOfInterest() {
+		int[] events = {KiemEvent.CMD_STEP, KiemEvent.CMD_STEP_BACK};
+        KiemEvent event = new KiemEvent(events);
+        //System.out.println(event.getEventCodesAsList());
+        return (event);
+	}
+	
+	@Override
+	public void notifyEvent(KiemEvent event) {
+		int[] codes = event.getEventCodes();
+		if (codes[0] == 2) {
+			backwards = false;
+		} else if (codes[0] == 3) {
+			backwards = true;
+		}
+	}
 }
