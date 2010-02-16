@@ -1,0 +1,14 @@
+krep[krep]
+"Model file","Iteration","Status","Finished on step","Krep:Est. Reaction Time","Krep:Reaction Time","Trace Compare:valid"
+"/krep/abro.kasm","0","Done","6","19","{2/ 1/3}","true"
+"/krep/abro.kasm","1","Done","13","19","{2/ 2/3}","true"
+"/krep/abro.kasm","2","Aborted","4","19","{2/ 2/3}","false"
+"/krep/abro.kasm","3","Done","7","19","{2/ 2/3}","true"
+"/krep/abro.kasm","4","Done","13","19","{2/ 2/3}","true"
+"/krep/runner.kasm","0","Done","11","19","{2/ 2/3}","false"
+"/krep/runner.kasm","1","Done","7","19","{2/ 2/3}","true"
+"/krep/runner.kasm","2","Aborted","4","19","{2/ 2/3}","false"
+"/krep/runner.kasm","3","Done","12","19","{2/ 2/3}","true"
+"/krep/runner.kasm","4","Failed","","","",""
+"/krep/runner.kasm","5","Aborted","0","19","{2/ 2/3}","false"
+

@@ -32,7 +32,6 @@
         IConfigurationElement[] contributors = Platform.getExtensionRegistry()
                 .getConfigurationElementsFor(
                         "de.cau.cs.kieler.sim.kiem.toolbarContributor");
-
         for (IConfigurationElement element : contributors) {
             try {
                 IKiemToolbarContributor contributor = (IKiemToolbarContributor) (element

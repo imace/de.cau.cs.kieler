@@ -44,10 +44,9 @@ tool bar gets too crowded.
 \listingjava
 \showlistingex{code/IKiemToolbarContributor.txt}
 {Java}
-{The interface for Tool bar Contribution Providers}
+{The interface for ToolbarContributionProviders}
 {list:IToolbarContributor}
 {t}
-
 The schema file for components that want to add contributions to the tool bar is quite simple.
 It only requires them to implement the interface shown in Listing \ref{list:IToolbarContributor}.
 The implementing class provides an array with all ControlContributions they want to add to the tool bar.
@@ -65,14 +64,14 @@ is no guarantee on the order in which the extending plug-ins are asked.
 Figure \ref{fig:ToolbarWithContributions} shows the Execution Manager tool bar with the two combo boxes belonging to \ac{KIEMConfig}
 contributed through the extension point. Figure \ref{fig:ToolbarWithoutContributions} shows the same tool bar without
 the contributions.
-\begin{figure}[Toolbar With Contributions]
+\begin{figure}[H]
   \centering
   \includegraphics[scale=.4]{ToolbarWithContributions.jpg}
   \caption[The Execution Managers Tool bar with two contributed ComboBoxes]%
   {The Execution Managers Tool bar with two contributed ComboBoxes\protect}
   \label{fig:ToolbarWithContributions}
 \end{figure}
-\begin{figure}[Toolbar Without Contributions]
+\begin{figure}[H]
   \centering
   \includegraphics[scale=.4]{ToolbarWithoutContributions.jpg}
   \caption[The Execution Managers Tool bar without contributions]%
@@ -89,7 +88,6 @@ the contributions.
 {The Interface of the Configuration Provider}
 {list:IKiemConfigurationProvider}
 {t}
-
 The purpose of the configuration provider is to allow internal attributes of the
 Execution Manager to be stored in another plug in. 
 
@@ -133,7 +131,6 @@ when the user changes the step duration through the input field on the Execution
 {The Interface of the Event Listener}
 {list:IKiemEventListener}
 {t}
-
 The main purpose of the Event Manager is to inform DataComponents of events
 happening in the Execution Manager during execution. This behavior has been modified to include 
 events that occur while the execution is not running. This modification lead to the 
@@ -228,5 +225,5 @@ that were necessary to enable the adding of new items to the tool bar.
 The tool bar of the Execution Manager is created programmatically instead of through the use of the
 corresponding Eclipse extension point. This means that the only way to place additional controls onto the tool bar
 is to modify the code in order to make use of the Toolbar Contribution Provider extension point described
-in Section \ref{section:ToolbarContributionProvider}. For the full code of the modified method see
-List \ref{list:AppendixToolbarCode} in the appendix.
+in Section \ref{section:ToolbarContributionProvider}. For the full code of the modified method see the
+Appendix.

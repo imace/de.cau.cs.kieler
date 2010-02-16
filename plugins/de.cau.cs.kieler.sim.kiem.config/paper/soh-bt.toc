@@ -1,103 +1,105 @@
+\select@language {english}
 \contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}
 \contentsline {section}{\numberline {1.1}KIELER Framework}{1}{section.1.1}
 \contentsline {subsection}{\numberline {1.1.1}Model Files}{1}{subsection.1.1.1}
 \contentsline {section}{\numberline {1.2}The KIELER Execution Manager}{1}{section.1.2}
-\contentsline {subsection}{\numberline {1.2.1}Execution}{2}{subsection.1.2.1}
-\contentsline {subsection}{\numberline {1.2.2}DataComponents}{2}{subsection.1.2.2}
-\contentsline {subsubsection}{DataComponentWrappers}{2}{section*.5}
+\contentsline {subsection}{\numberline {1.2.1}DataComponents}{2}{subsection.1.2.1}
+\contentsline {subsubsection}{DataComponentWrappers}{2}{section*.6}
+\contentsline {subsection}{\numberline {1.2.2}Execution}{2}{subsection.1.2.2}
 \contentsline {section}{\numberline {1.3}Outline of this Document}{2}{section.1.3}
-\contentsline {part}{\numberline {I}Configuration Management}{3}{part.1}
-\contentsline {chapter}{\numberline {2}Used Technologies}{5}{chapter.2}
-\contentsline {section}{\numberline {2.1}Eclipse}{5}{section.2.1}
-\contentsline {subsection}{\numberline {2.1.1}Plug-ins}{5}{subsection.2.1.1}
-\contentsline {subsubsection}{Extension Point Mechanism}{6}{section*.6}
-\contentsline {subsection}{\numberline {2.1.2}Preference Pages}{7}{subsection.2.1.2}
-\contentsline {subsubsection}{Preference Store}{7}{section*.7}
-\contentsline {chapter}{\numberline {3}Problem Statement}{9}{chapter.3}
-\contentsline {section}{\numberline {3.1}Configurations}{9}{section.3.1}
-\contentsline {subsection}{\numberline {3.1.1}Default Configuration}{10}{subsection.3.1.1}
-\contentsline {section}{\numberline {3.2}Easier Configuration Loading}{10}{section.3.2}
-\contentsline {chapter}{\numberline {4}Concepts}{11}{chapter.4}
-\contentsline {section}{\numberline {4.1}Configurations}{11}{section.4.1}
-\contentsline {subsection}{\numberline {4.1.1}Default Configuration}{12}{subsection.4.1.1}
-\contentsline {section}{\numberline {4.2}Easier Configuration Loading}{13}{section.4.2}
-\contentsline {chapter}{\numberline {5}Code Changes in the Execution Manager}{15}{chapter.5}
-\contentsline {section}{\numberline {5.1}Schema Files and Interfaces}{15}{section.5.1}
-\contentsline {subsection}{\numberline {5.1.1}Toolbar Contribution Provider}{15}{subsection.5.1.1}
-\contentsline {subsection}{\numberline {5.1.2}Configuration Provider}{17}{subsection.5.1.2}
-\contentsline {subsection}{\numberline {5.1.3}Event Listener}{18}{subsection.5.1.3}
-\contentsline {section}{\numberline {5.2}KIEMPlugin.java}{18}{section.5.2}
-\contentsline {subsection}{\numberline {5.2.1}Listener}{19}{subsection.5.2.1}
-\contentsline {subsection}{\numberline {5.2.2}Getters and Setters}{20}{subsection.5.2.2}
-\contentsline {subsection}{\numberline {5.2.3}Open File}{20}{subsection.5.2.3}
-\contentsline {section}{\numberline {5.3}KIEMView}{21}{section.5.3}
-\contentsline {chapter}{\numberline {6}The KIEMConfig plug-in}{23}{chapter.6}
-\contentsline {section}{\numberline {6.1}Data Classes and Utilities - the Model}{23}{section.6.1}
-\contentsline {subsection}{\numberline {6.1.1}ConfigDataComponent}{23}{subsection.6.1.1}
-\contentsline {subsection}{\numberline {6.1.2}EditorDefinition}{24}{subsection.6.1.2}
-\contentsline {subsection}{\numberline {6.1.3}ScheduleData}{25}{subsection.6.1.3}
-\contentsline {subsection}{\numberline {6.1.4}Tools}{25}{subsection.6.1.4}
-\contentsline {subsubsection}{Attributes}{25}{section*.8}
-\contentsline {subsubsection}{Methods for Parsing and Serialization}{26}{section*.9}
-\contentsline {subsubsection}{Methods for Dialogs}{26}{section*.10}
-\contentsline {subsection}{\numberline {6.1.5}MostRecentCollection}{27}{subsection.6.1.5}
-\contentsline {section}{\numberline {6.2}Manager Class - the Controller}{27}{section.6.2}
-\contentsline {subsection}{\numberline {6.2.1}Abstract Manager}{27}{subsection.6.2.1}
-\contentsline {subsection}{\numberline {6.2.2}Configuration Manager}{28}{subsection.6.2.2}
-\contentsline {subsubsection}{Currently Loaded Configuration}{28}{section*.11}
-\contentsline {subsubsection}{Default Configuration}{29}{section*.12}
-\contentsline {subsection}{\numberline {6.2.3}Schedule Manager}{30}{subsection.6.2.3}
-\contentsline {subsubsection}{Provide the Schedule Lists}{30}{section*.13}
-\contentsline {subsubsection}{Listen to User Events}{31}{section*.14}
-\contentsline {subsubsection}{Open a Schedule}{32}{section*.15}
-\contentsline {subsubsection}{Tracking Execution Files}{32}{section*.16}
-\contentsline {subsubsection}{Default Schedule}{33}{section*.17}
-\contentsline {subsection}{\numberline {6.2.4}Editor Manager}{34}{subsection.6.2.4}
-\contentsline {subsubsection}{Default Editor}{34}{section*.18}
-\contentsline {subsection}{\numberline {6.2.5}Contribution Manager}{35}{subsection.6.2.5}
-\contentsline {subsection}{\numberline {6.2.6}Property Usage Manager}{35}{subsection.6.2.6}
-\contentsline {section}{\numberline {6.3}Preference Pages - the View}{35}{section.6.3}
-\contentsline {subsection}{\numberline {6.3.1}Configuration Page}{36}{subsection.6.3.1}
-\contentsline {subsubsection}{User-Defined Properties Page}{36}{section*.19}
-\contentsline {subsubsection}{Property Usage Dialog}{38}{section*.20}
-\contentsline {subsection}{\numberline {6.3.2}Scheduling Page}{38}{subsection.6.3.2}
-\contentsline {subsubsection}{Adding and Removing Editors, Selecting a Default Editor}{40}{section*.21}
-\contentsline {subsection}{\numberline {6.3.3}Schedule Selector}{41}{subsection.6.3.3}
-\contentsline {chapter}{\numberline {7}Conclusion}{43}{chapter.7}
-\contentsline {section}{\numberline {7.1}Results}{43}{section.7.1}
-\contentsline {section}{\numberline {7.2}Further Improvements}{43}{section.7.2}
-\contentsline {part}{\numberline {II}Automated Execution}{45}{part.2}
-\contentsline {chapter}{\numberline {8}Used Technologies}{47}{chapter.8}
-\contentsline {section}{\numberline {8.1}The Job}{47}{section.8.1}
-\contentsline {section}{\numberline {8.2}Eclipse Wizards}{47}{section.8.2}
-\contentsline {chapter}{\numberline {9}Problem Statement}{51}{chapter.9}
-\contentsline {section}{\numberline {9.1}Setting up a Run}{51}{section.9.1}
-\contentsline {section}{\numberline {9.2}Input for the Automation}{51}{section.9.2}
-\contentsline {section}{\numberline {9.3}Automate the Execution}{52}{section.9.3}
-\contentsline {section}{\numberline {9.4}Output Execution Results}{52}{section.9.4}
-\contentsline {chapter}{\numberline {10}Concepts}{53}{chapter.10}
-\contentsline {section}{\numberline {10.1}Setting up a Run}{53}{section.10.1}
-\contentsline {section}{\numberline {10.2}Input for the Automation}{54}{section.10.2}
-\contentsline {section}{\numberline {10.3}Automate the Execution}{54}{section.10.3}
-\contentsline {section}{\numberline {10.4}Output Execution Results}{55}{section.10.4}
-\contentsline {chapter}{\numberline {11}Code Changes in the Execution Manager}{57}{chapter.11}
-\contentsline {chapter}{\numberline {12}The Automated Executions Plug-in}{59}{chapter.12}
-\contentsline {section}{\numberline {12.1}Automation Setup - The Wizard}{59}{section.12.1}
-\contentsline {subsection}{\numberline {12.1.1}File Selection Page}{59}{subsection.12.1.1}
-\contentsline {subsection}{\numberline {12.1.2}Property Setting Page}{61}{subsection.12.1.2}
-\contentsline {subsection}{\numberline {12.1.3}Information Processing}{62}{subsection.12.1.3}
-\contentsline {section}{\numberline {12.2}Automation Input}{62}{section.12.2}
-\contentsline {subsection}{\numberline {12.2.1}Automated Component}{62}{subsection.12.2.1}
-\contentsline {subsection}{\numberline {12.2.2}Automated Producer}{63}{subsection.12.2.2}
-\contentsline {section}{\numberline {12.3}The Automated Run}{63}{section.12.3}
-\contentsline {subsection}{\numberline {12.3.1}Automation Job}{64}{subsection.12.3.1}
-\contentsline {subsection}{\numberline {12.3.2}Automation Manager}{64}{subsection.12.3.2}
-\contentsline {subsubsection}{Modified Error Handler}{65}{section*.25}
-\contentsline {section}{\numberline {12.4}Automation View}{67}{section.12.4}
-\contentsline {subsection}{\numberline {12.4.1}Tool bar}{67}{subsection.12.4.1}
-\contentsline {subsection}{\numberline {12.4.2}Exporting Results}{68}{subsection.12.4.2}
-\contentsline {chapter}{\numberline {13}Conclusion}{69}{chapter.13}
-\contentsline {section}{\numberline {13.1}Results}{69}{section.13.1}
-\contentsline {section}{\numberline {13.2}Further Improvements}{69}{section.13.2}
-\contentsline {chapter}{Appendix}{71}{appendix*.26}
-\contentsline {chapter}{Bibliography}{77}{appendix*.28}
+\contentsline {part}{\numberline {I}Configuration Management}{5}{part.1}
+\contentsline {chapter}{\numberline {2}Used Technologies}{7}{chapter.2}
+\contentsline {section}{\numberline {2.1}Eclipse}{7}{section.2.1}
+\contentsline {subsection}{\numberline {2.1.1}Plug-ins}{9}{subsection.2.1.1}
+\contentsline {subsubsection}{Extension Point Mechanism}{9}{section*.7}
+\contentsline {subsection}{\numberline {2.1.2}Preference Pages}{10}{subsection.2.1.2}
+\contentsline {subsubsection}{Preference Store}{10}{section*.8}
+\contentsline {chapter}{\numberline {3}Problem Statement}{11}{chapter.3}
+\contentsline {section}{\numberline {3.1}Configurations}{11}{section.3.1}
+\contentsline {subsection}{\numberline {3.1.1}Default Configuration}{12}{subsection.3.1.1}
+\contentsline {section}{\numberline {3.2}Easier Configuration Loading}{12}{section.3.2}
+\contentsline {chapter}{\numberline {4}Concepts}{13}{chapter.4}
+\contentsline {section}{\numberline {4.1}Configurations}{13}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}Default Configuration}{14}{subsection.4.1.1}
+\contentsline {section}{\numberline {4.2}Easier Configuration Loading}{15}{section.4.2}
+\contentsline {chapter}{\numberline {5}Code Changes in the Execution Manager}{17}{chapter.5}
+\contentsline {section}{\numberline {5.1}Schema Files and Interfaces}{17}{section.5.1}
+\contentsline {subsection}{\numberline {5.1.1}Toolbar Contribution Provider}{17}{subsection.5.1.1}
+\contentsline {subsection}{\numberline {5.1.2}Configuration Provider}{19}{subsection.5.1.2}
+\contentsline {subsection}{\numberline {5.1.3}Event Listener}{20}{subsection.5.1.3}
+\contentsline {section}{\numberline {5.2}KIEMPlugin.java}{20}{section.5.2}
+\contentsline {subsection}{\numberline {5.2.1}Listener}{21}{subsection.5.2.1}
+\contentsline {subsection}{\numberline {5.2.2}Getters and Setters}{22}{subsection.5.2.2}
+\contentsline {subsection}{\numberline {5.2.3}Open File}{22}{subsection.5.2.3}
+\contentsline {section}{\numberline {5.3}KIEMView}{23}{section.5.3}
+\contentsline {chapter}{\numberline {6}The KIEMConfig plug-in}{25}{chapter.6}
+\contentsline {section}{\numberline {6.1}Data Classes and Utilities - the Model}{25}{section.6.1}
+\contentsline {subsection}{\numberline {6.1.1}ConfigDataComponent}{25}{subsection.6.1.1}
+\contentsline {subsection}{\numberline {6.1.2}EditorDefinition}{26}{subsection.6.1.2}
+\contentsline {subsection}{\numberline {6.1.3}ScheduleData}{27}{subsection.6.1.3}
+\contentsline {subsection}{\numberline {6.1.4}Tools}{27}{subsection.6.1.4}
+\contentsline {subsubsection}{Attributes}{27}{section*.9}
+\contentsline {subsubsection}{Methods for Parsing and Serialization}{28}{section*.10}
+\contentsline {subsubsection}{Methods for Dialogs}{28}{section*.11}
+\contentsline {subsection}{\numberline {6.1.5}MostRecentCollection}{29}{subsection.6.1.5}
+\contentsline {section}{\numberline {6.2}Manager Class - the Controller}{29}{section.6.2}
+\contentsline {subsection}{\numberline {6.2.1}Abstract Manager}{29}{subsection.6.2.1}
+\contentsline {subsection}{\numberline {6.2.2}Configuration Manager}{30}{subsection.6.2.2}
+\contentsline {subsubsection}{Currently Loaded Configuration}{30}{section*.12}
+\contentsline {subsubsection}{Default Configuration}{31}{section*.13}
+\contentsline {subsection}{\numberline {6.2.3}Schedule Manager}{32}{subsection.6.2.3}
+\contentsline {subsubsection}{Provide the Schedule Lists}{32}{section*.14}
+\contentsline {subsubsection}{Listen to User Events}{33}{section*.15}
+\contentsline {subsubsection}{Open a Schedule}{34}{section*.16}
+\contentsline {subsubsection}{Tracking Execution Files}{34}{section*.17}
+\contentsline {subsubsection}{Default Schedule}{35}{section*.18}
+\contentsline {subsection}{\numberline {6.2.4}Editor Manager}{36}{subsection.6.2.4}
+\contentsline {subsubsection}{Default Editor}{36}{section*.19}
+\contentsline {subsection}{\numberline {6.2.5}Contribution Manager}{37}{subsection.6.2.5}
+\contentsline {subsection}{\numberline {6.2.6}Property Usage Manager}{37}{subsection.6.2.6}
+\contentsline {section}{\numberline {6.3}Preference Pages - the View}{37}{section.6.3}
+\contentsline {subsection}{\numberline {6.3.1}Configuration Page}{38}{subsection.6.3.1}
+\contentsline {subsubsection}{User-Defined Properties Page}{38}{section*.20}
+\contentsline {subsubsection}{Property Usage Dialog}{39}{section*.21}
+\contentsline {subsection}{\numberline {6.3.2}Scheduling Page}{39}{subsection.6.3.2}
+\contentsline {subsubsection}{Adding and Removing Editors, Selecting a Default Editor}{42}{section*.22}
+\contentsline {subsection}{\numberline {6.3.3}Schedule Selector}{42}{subsection.6.3.3}
+\contentsline {chapter}{\numberline {7}Conclusion}{45}{chapter.7}
+\contentsline {section}{\numberline {7.1}Results}{45}{section.7.1}
+\contentsline {section}{\numberline {7.2}Further Improvements}{45}{section.7.2}
+\contentsline {part}{\numberline {II}Automated Execution}{47}{part.2}
+\contentsline {chapter}{\numberline {8}Used Technologies}{49}{chapter.8}
+\contentsline {section}{\numberline {8.1}The Job}{49}{section.8.1}
+\contentsline {section}{\numberline {8.2}Eclipse Wizards}{49}{section.8.2}
+\contentsline {chapter}{\numberline {9}Problem Statement}{53}{chapter.9}
+\contentsline {section}{\numberline {9.1}Setting up a Run}{53}{section.9.1}
+\contentsline {section}{\numberline {9.2}Input for the Automation}{53}{section.9.2}
+\contentsline {section}{\numberline {9.3}Automate the Execution}{54}{section.9.3}
+\contentsline {section}{\numberline {9.4}Output Execution Results}{54}{section.9.4}
+\contentsline {chapter}{\numberline {10}Concepts}{55}{chapter.10}
+\contentsline {section}{\numberline {10.1}Setting up a Run}{55}{section.10.1}
+\contentsline {section}{\numberline {10.2}Input for the Automation}{56}{section.10.2}
+\contentsline {section}{\numberline {10.3}Automate the Execution}{56}{section.10.3}
+\contentsline {section}{\numberline {10.4}Output Execution Results}{57}{section.10.4}
+\contentsline {chapter}{\numberline {11}Code Changes in the Execution Manager}{59}{chapter.11}
+\contentsline {chapter}{\numberline {12}The Automated Executions Plug-in}{61}{chapter.12}
+\contentsline {section}{\numberline {12.1}Automation Setup - The Wizard}{61}{section.12.1}
+\contentsline {subsection}{\numberline {12.1.1}File Selection Page}{61}{subsection.12.1.1}
+\contentsline {subsection}{\numberline {12.1.2}Property Setting Page}{63}{subsection.12.1.2}
+\contentsline {subsection}{\numberline {12.1.3}Information Processing}{64}{subsection.12.1.3}
+\contentsline {section}{\numberline {12.2}Automation Input}{64}{section.12.2}
+\contentsline {subsection}{\numberline {12.2.1}Automated Component}{64}{subsection.12.2.1}
+\contentsline {subsection}{\numberline {12.2.2}Automated Producer}{65}{subsection.12.2.2}
+\contentsline {section}{\numberline {12.3}The Automated Run}{65}{section.12.3}
+\contentsline {subsection}{\numberline {12.3.1}Automation Job}{66}{subsection.12.3.1}
+\contentsline {subsection}{\numberline {12.3.2}Automation Manager}{66}{subsection.12.3.2}
+\contentsline {subsection}{\numberline {12.3.3}Cancel Manager}{71}{subsection.12.3.3}
+\contentsline {subsection}{\numberline {12.3.4}Modified Error Handler}{72}{subsection.12.3.4}
+\contentsline {section}{\numberline {12.4}Automation View}{73}{section.12.4}
+\contentsline {subsection}{\numberline {12.4.1}Tool bar}{75}{subsection.12.4.1}
+\contentsline {subsection}{\numberline {12.4.2}Exporting Results}{76}{subsection.12.4.2}
+\contentsline {chapter}{\numberline {13}Conclusion}{79}{chapter.13}
+\contentsline {section}{\numberline {13.1}Results}{79}{section.13.1}
+\contentsline {section}{\numberline {13.2}Further Improvements}{79}{section.13.2}
+\contentsline {chapter}{Appendix}{81}{appendix*.26}
+\contentsline {chapter}{Bibliography}{87}{appendix*.28}
