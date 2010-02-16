@@ -37,7 +37,7 @@ public interface Mapping extends EObject {
 	 * @return the value of the '<em>From</em>' attribute.
 	 * @see #setFrom(String)
 	 * @see de.cau.cs.kieler.functionblocks.FunctionblocksPackage#getMapping_From()
-	 * @model dataType="org.eclipse.emf.ecore.xml.type.String" required="true"
+	 * @model required="true"
 	 *        extendedMetaData="kind='attribute' name='From' namespace='##targetNamespace'"
 	 * @generated
 	 */
@@ -64,7 +64,7 @@ public interface Mapping extends EObject {
 	 * @return the value of the '<em>To</em>' attribute.
 	 * @see #setTo(String)
 	 * @see de.cau.cs.kieler.functionblocks.FunctionblocksPackage#getMapping_To()
-	 * @model dataType="org.eclipse.emf.ecore.xml.type.String" required="true"
+	 * @model required="true"
 	 *        extendedMetaData="kind='attribute' name='To' namespace='##targetNamespace'"
 	 * @generated
 	 */

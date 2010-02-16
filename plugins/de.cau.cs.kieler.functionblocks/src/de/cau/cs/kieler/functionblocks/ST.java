@@ -36,7 +36,7 @@ public interface ST extends EObject {
 	 * @return the value of the '<em>Text</em>' attribute.
 	 * @see #setText(String)
 	 * @see de.cau.cs.kieler.functionblocks.FunctionblocksPackage#getST_Text()
-	 * @model dataType="org.eclipse.emf.ecore.xml.type.String" required="true"
+	 * @model required="true"
 	 *        extendedMetaData="kind='attribute' name='Text' namespace='##targetNamespace'"
 	 * @generated
 	 */

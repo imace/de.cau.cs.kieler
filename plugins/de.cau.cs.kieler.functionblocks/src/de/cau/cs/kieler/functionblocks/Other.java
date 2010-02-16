@@ -38,7 +38,7 @@ public interface Other extends EObject {
 	 * @return the value of the '<em>Language</em>' attribute.
 	 * @see #setLanguage(String)
 	 * @see de.cau.cs.kieler.functionblocks.FunctionblocksPackage#getOther_Language()
-	 * @model dataType="org.eclipse.emf.ecore.xml.type.String" required="true"
+	 * @model required="true"
 	 *        extendedMetaData="kind='attribute' name='Language' namespace='##targetNamespace'"
 	 * @generated
 	 */
@@ -65,7 +65,7 @@ public interface Other extends EObject {
 	 * @return the value of the '<em>Prototype</em>' attribute.
 	 * @see #setPrototype(String)
 	 * @see de.cau.cs.kieler.functionblocks.FunctionblocksPackage#getOther_Prototype()
-	 * @model dataType="org.eclipse.emf.ecore.xml.type.String" required="true"
+	 * @model required="true"
 	 *        extendedMetaData="kind='attribute' name='Prototype' namespace='##targetNamespace'"
 	 * @generated
 	 */
@@ -92,7 +92,7 @@ public interface Other extends EObject {
 	 * @return the value of the '<em>Text</em>' attribute.
 	 * @see #setText(String)
 	 * @see de.cau.cs.kieler.functionblocks.FunctionblocksPackage#getOther_Text()
-	 * @model dataType="org.eclipse.emf.ecore.xml.type.String" required="true"
+	 * @model required="true"
 	 *        extendedMetaData="kind='attribute' name='Text' namespace='##targetNamespace'"
 	 * @generated
 	 */

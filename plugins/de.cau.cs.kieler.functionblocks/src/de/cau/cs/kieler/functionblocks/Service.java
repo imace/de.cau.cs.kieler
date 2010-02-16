@@ -57,8 +57,7 @@ public interface Service extends EObject {
 	 * @return the value of the '<em>Comment</em>' attribute.
 	 * @see #setComment(String)
 	 * @see de.cau.cs.kieler.functionblocks.FunctionblocksPackage#getService_Comment()
-	 * @model dataType="org.eclipse.emf.ecore.xml.type.String"
-	 *        extendedMetaData="kind='attribute' name='Comment' namespace='##targetNamespace'"
+	 * @model extendedMetaData="kind='attribute' name='Comment' namespace='##targetNamespace'"
 	 * @generated
 	 */
 	String getComment();
@@ -84,7 +83,7 @@ public interface Service extends EObject {
 	 * @return the value of the '<em>Left Interface</em>' attribute.
 	 * @see #setLeftInterface(String)
 	 * @see de.cau.cs.kieler.functionblocks.FunctionblocksPackage#getService_LeftInterface()
-	 * @model dataType="org.eclipse.emf.ecore.xml.type.String" required="true"
+	 * @model required="true"
 	 *        extendedMetaData="kind='attribute' name='LeftInterface' namespace='##targetNamespace'"
 	 * @generated
 	 */
@@ -111,7 +110,7 @@ public interface Service extends EObject {
 	 * @return the value of the '<em>Right Interface</em>' attribute.
 	 * @see #setRightInterface(String)
 	 * @see de.cau.cs.kieler.functionblocks.FunctionblocksPackage#getService_RightInterface()
-	 * @model dataType="org.eclipse.emf.ecore.xml.type.String" required="true"
+	 * @model required="true"
 	 *        extendedMetaData="kind='attribute' name='RightInterface' namespace='##targetNamespace'"
 	 * @generated
 	 */

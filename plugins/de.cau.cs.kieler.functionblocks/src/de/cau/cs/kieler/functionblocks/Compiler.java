@@ -96,7 +96,7 @@ public interface Compiler extends EObject {
 	 * @return the value of the '<em>Product</em>' attribute.
 	 * @see #setProduct(String)
 	 * @see de.cau.cs.kieler.functionblocks.FunctionblocksPackage#getCompiler_Product()
-	 * @model dataType="org.eclipse.emf.ecore.xml.type.String" required="true"
+	 * @model required="true"
 	 *        extendedMetaData="kind='attribute' name='Product' namespace='##targetNamespace'"
 	 * @generated
 	 */
@@ -123,7 +123,7 @@ public interface Compiler extends EObject {
 	 * @return the value of the '<em>Vendor</em>' attribute.
 	 * @see #setVendor(String)
 	 * @see de.cau.cs.kieler.functionblocks.FunctionblocksPackage#getCompiler_Vendor()
-	 * @model dataType="org.eclipse.emf.ecore.xml.type.String" required="true"
+	 * @model required="true"
 	 *        extendedMetaData="kind='attribute' name='Vendor' namespace='##targetNamespace'"
 	 * @generated
 	 */
@@ -150,7 +150,7 @@ public interface Compiler extends EObject {
 	 * @return the value of the '<em>Version</em>' attribute.
 	 * @see #setVersion(String)
 	 * @see de.cau.cs.kieler.functionblocks.FunctionblocksPackage#getCompiler_Version()
-	 * @model dataType="org.eclipse.emf.ecore.xml.type.String" required="true"
+	 * @model required="true"
 	 *        extendedMetaData="kind='attribute' name='Version' namespace='##targetNamespace'"
 	 * @generated
 	 */

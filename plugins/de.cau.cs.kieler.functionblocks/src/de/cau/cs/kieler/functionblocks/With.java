@@ -36,7 +36,7 @@ public interface With extends EObject {
 	 * @return the value of the '<em>Var</em>' attribute.
 	 * @see #setVar(String)
 	 * @see de.cau.cs.kieler.functionblocks.FunctionblocksPackage#getWith_Var()
-	 * @model dataType="org.eclipse.emf.ecore.xml.type.String" required="true"
+	 * @model required="true"
 	 *        extendedMetaData="kind='attribute' name='Var' namespace='##targetNamespace'"
 	 * @generated
 	 */

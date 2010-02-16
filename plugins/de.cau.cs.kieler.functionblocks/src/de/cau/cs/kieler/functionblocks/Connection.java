@@ -41,8 +41,7 @@ public interface Connection extends EObject {
 	 * @return the value of the '<em>Comment</em>' attribute.
 	 * @see #setComment(String)
 	 * @see de.cau.cs.kieler.functionblocks.FunctionblocksPackage#getConnection_Comment()
-	 * @model dataType="org.eclipse.emf.ecore.xml.type.String"
-	 *        extendedMetaData="kind='attribute' name='Comment' namespace='##targetNamespace'"
+	 * @model extendedMetaData="kind='attribute' name='Comment' namespace='##targetNamespace'"
 	 * @generated
 	 */
 	String getComment();
@@ -68,7 +67,7 @@ public interface Connection extends EObject {
 	 * @return the value of the '<em>Destination</em>' attribute.
 	 * @see #setDestination(String)
 	 * @see de.cau.cs.kieler.functionblocks.FunctionblocksPackage#getConnection_Destination()
-	 * @model dataType="org.eclipse.emf.ecore.xml.type.String" required="true"
+	 * @model required="true"
 	 *        extendedMetaData="kind='attribute' name='Destination' namespace='##targetNamespace'"
 	 * @generated
 	 */
@@ -95,8 +94,7 @@ public interface Connection extends EObject {
 	 * @return the value of the '<em>Dx1</em>' attribute.
 	 * @see #setDx1(String)
 	 * @see de.cau.cs.kieler.functionblocks.FunctionblocksPackage#getConnection_Dx1()
-	 * @model dataType="org.eclipse.emf.ecore.xml.type.String"
-	 *        extendedMetaData="kind='attribute' name='dx1' namespace='##targetNamespace'"
+	 * @model extendedMetaData="kind='attribute' name='dx1' namespace='##targetNamespace'"
 	 * @generated
 	 */
 	String getDx1();
@@ -122,8 +120,7 @@ public interface Connection extends EObject {
 	 * @return the value of the '<em>Dx2</em>' attribute.
 	 * @see #setDx2(String)
 	 * @see de.cau.cs.kieler.functionblocks.FunctionblocksPackage#getConnection_Dx2()
-	 * @model dataType="org.eclipse.emf.ecore.xml.type.String"
-	 *        extendedMetaData="kind='attribute' name='dx2' namespace='##targetNamespace'"
+	 * @model extendedMetaData="kind='attribute' name='dx2' namespace='##targetNamespace'"
 	 * @generated
 	 */
 	String getDx2();
@@ -149,8 +146,7 @@ public interface Connection extends EObject {
 	 * @return the value of the '<em>Dy</em>' attribute.
 	 * @see #setDy(String)
 	 * @see de.cau.cs.kieler.functionblocks.FunctionblocksPackage#getConnection_Dy()
-	 * @model dataType="org.eclipse.emf.ecore.xml.type.String"
-	 *        extendedMetaData="kind='attribute' name='dy' namespace='##targetNamespace'"
+	 * @model extendedMetaData="kind='attribute' name='dy' namespace='##targetNamespace'"
 	 * @generated
 	 */
 	String getDy();
@@ -176,7 +172,7 @@ public interface Connection extends EObject {
 	 * @return the value of the '<em>Source</em>' attribute.
 	 * @see #setSource(String)
 	 * @see de.cau.cs.kieler.functionblocks.FunctionblocksPackage#getConnection_Source()
-	 * @model dataType="org.eclipse.emf.ecore.xml.type.String" required="true"
+	 * @model required="true"
 	 *        extendedMetaData="kind='attribute' name='Source' namespace='##targetNamespace'"
 	 * @generated
 	 */

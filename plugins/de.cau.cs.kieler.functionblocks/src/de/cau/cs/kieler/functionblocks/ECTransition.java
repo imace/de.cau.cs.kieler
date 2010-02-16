@@ -41,8 +41,7 @@ public interface ECTransition extends EObject {
 	 * @return the value of the '<em>Comment</em>' attribute.
 	 * @see #setComment(String)
 	 * @see de.cau.cs.kieler.functionblocks.FunctionblocksPackage#getECTransition_Comment()
-	 * @model dataType="org.eclipse.emf.ecore.xml.type.String"
-	 *        extendedMetaData="kind='attribute' name='Comment' namespace='##targetNamespace'"
+	 * @model extendedMetaData="kind='attribute' name='Comment' namespace='##targetNamespace'"
 	 * @generated
 	 */
 	String getComment();
@@ -68,7 +67,7 @@ public interface ECTransition extends EObject {
 	 * @return the value of the '<em>Condition</em>' attribute.
 	 * @see #setCondition(String)
 	 * @see de.cau.cs.kieler.functionblocks.FunctionblocksPackage#getECTransition_Condition()
-	 * @model dataType="org.eclipse.emf.ecore.xml.type.String" required="true"
+	 * @model required="true"
 	 *        extendedMetaData="kind='attribute' name='Condition' namespace='##targetNamespace'"
 	 * @generated
 	 */
@@ -95,7 +94,7 @@ public interface ECTransition extends EObject {
 	 * @return the value of the '<em>Destination</em>' attribute.
 	 * @see #setDestination(String)
 	 * @see de.cau.cs.kieler.functionblocks.FunctionblocksPackage#getECTransition_Destination()
-	 * @model dataType="org.eclipse.emf.ecore.xml.type.String" required="true"
+	 * @model required="true"
 	 *        extendedMetaData="kind='attribute' name='Destination' namespace='##targetNamespace'"
 	 * @generated
 	 */
@@ -122,7 +121,7 @@ public interface ECTransition extends EObject {
 	 * @return the value of the '<em>Source</em>' attribute.
 	 * @see #setSource(String)
 	 * @see de.cau.cs.kieler.functionblocks.FunctionblocksPackage#getECTransition_Source()
-	 * @model dataType="org.eclipse.emf.ecore.xml.type.String" required="true"
+	 * @model required="true"
 	 *        extendedMetaData="kind='attribute' name='Source' namespace='##targetNamespace'"
 	 * @generated
 	 */
@@ -149,8 +148,7 @@ public interface ECTransition extends EObject {
 	 * @return the value of the '<em>X</em>' attribute.
 	 * @see #setX(String)
 	 * @see de.cau.cs.kieler.functionblocks.FunctionblocksPackage#getECTransition_X()
-	 * @model dataType="org.eclipse.emf.ecore.xml.type.String"
-	 *        extendedMetaData="kind='attribute' name='x' namespace='##targetNamespace'"
+	 * @model extendedMetaData="kind='attribute' name='x' namespace='##targetNamespace'"
 	 * @generated
 	 */
 	String getX();
@@ -176,8 +174,7 @@ public interface ECTransition extends EObject {
 	 * @return the value of the '<em>Y</em>' attribute.
 	 * @see #setY(String)
 	 * @see de.cau.cs.kieler.functionblocks.FunctionblocksPackage#getECTransition_Y()
-	 * @model dataType="org.eclipse.emf.ecore.xml.type.String"
-	 *        extendedMetaData="kind='attribute' name='y' namespace='##targetNamespace'"
+	 * @model extendedMetaData="kind='attribute' name='y' namespace='##targetNamespace'"
 	 * @generated
 	 */
 	String getY();

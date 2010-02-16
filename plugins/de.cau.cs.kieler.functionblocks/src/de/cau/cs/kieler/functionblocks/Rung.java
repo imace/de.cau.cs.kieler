@@ -38,8 +38,7 @@ public interface Rung extends EObject {
 	 * @return the value of the '<em>Comment</em>' attribute.
 	 * @see #setComment(String)
 	 * @see de.cau.cs.kieler.functionblocks.FunctionblocksPackage#getRung_Comment()
-	 * @model dataType="org.eclipse.emf.ecore.xml.type.String"
-	 *        extendedMetaData="kind='attribute' name='Comment' namespace='##targetNamespace'"
+	 * @model extendedMetaData="kind='attribute' name='Comment' namespace='##targetNamespace'"
 	 * @generated
 	 */
 	String getComment();
@@ -65,7 +64,7 @@ public interface Rung extends EObject {
 	 * @return the value of the '<em>Expression</em>' attribute.
 	 * @see #setExpression(String)
 	 * @see de.cau.cs.kieler.functionblocks.FunctionblocksPackage#getRung_Expression()
-	 * @model dataType="org.eclipse.emf.ecore.xml.type.String" required="true"
+	 * @model required="true"
 	 *        extendedMetaData="kind='attribute' name='Expression' namespace='##targetNamespace'"
 	 * @generated
 	 */
@@ -92,7 +91,7 @@ public interface Rung extends EObject {
 	 * @return the value of the '<em>Output</em>' attribute.
 	 * @see #setOutput(String)
 	 * @see de.cau.cs.kieler.functionblocks.FunctionblocksPackage#getRung_Output()
-	 * @model dataType="org.eclipse.emf.ecore.xml.type.String" required="true"
+	 * @model required="true"
 	 *        extendedMetaData="kind='attribute' name='Output' namespace='##targetNamespace'"
 	 * @generated
 	 */

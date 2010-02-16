@@ -56,8 +56,7 @@ public interface CompilerInfo extends EObject {
 	 * @return the value of the '<em>Classdef</em>' attribute.
 	 * @see #setClassdef(String)
 	 * @see de.cau.cs.kieler.functionblocks.FunctionblocksPackage#getCompilerInfo_Classdef()
-	 * @model dataType="org.eclipse.emf.ecore.xml.type.String"
-	 *        extendedMetaData="kind='attribute' name='classdef' namespace='##targetNamespace'"
+	 * @model extendedMetaData="kind='attribute' name='classdef' namespace='##targetNamespace'"
 	 * @generated
 	 */
 	String getClassdef();
@@ -83,8 +82,7 @@ public interface CompilerInfo extends EObject {
 	 * @return the value of the '<em>Header</em>' attribute.
 	 * @see #setHeader(String)
 	 * @see de.cau.cs.kieler.functionblocks.FunctionblocksPackage#getCompilerInfo_Header()
-	 * @model dataType="org.eclipse.emf.ecore.xml.type.String"
-	 *        extendedMetaData="kind='attribute' name='header' namespace='##targetNamespace'"
+	 * @model extendedMetaData="kind='attribute' name='header' namespace='##targetNamespace'"
 	 * @generated
 	 */
 	String getHeader();

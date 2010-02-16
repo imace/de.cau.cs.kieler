@@ -41,8 +41,7 @@ public interface Identification extends EObject {
 	 * @return the value of the '<em>Application Domain</em>' attribute.
 	 * @see #setApplicationDomain(String)
 	 * @see de.cau.cs.kieler.functionblocks.FunctionblocksPackage#getIdentification_ApplicationDomain()
-	 * @model dataType="org.eclipse.emf.ecore.xml.type.String"
-	 *        extendedMetaData="kind='attribute' name='ApplicationDomain' namespace='##targetNamespace'"
+	 * @model extendedMetaData="kind='attribute' name='ApplicationDomain' namespace='##targetNamespace'"
 	 * @generated
 	 */
 	String getApplicationDomain();
@@ -68,8 +67,7 @@ public interface Identification extends EObject {
 	 * @return the value of the '<em>Classification</em>' attribute.
 	 * @see #setClassification(String)
 	 * @see de.cau.cs.kieler.functionblocks.FunctionblocksPackage#getIdentification_Classification()
-	 * @model dataType="org.eclipse.emf.ecore.xml.type.String"
-	 *        extendedMetaData="kind='attribute' name='Classification' namespace='##targetNamespace'"
+	 * @model extendedMetaData="kind='attribute' name='Classification' namespace='##targetNamespace'"
 	 * @generated
 	 */
 	String getClassification();
@@ -95,8 +93,7 @@ public interface Identification extends EObject {
 	 * @return the value of the '<em>Description</em>' attribute.
 	 * @see #setDescription(String)
 	 * @see de.cau.cs.kieler.functionblocks.FunctionblocksPackage#getIdentification_Description()
-	 * @model dataType="org.eclipse.emf.ecore.xml.type.String"
-	 *        extendedMetaData="kind='attribute' name='Description' namespace='##targetNamespace'"
+	 * @model extendedMetaData="kind='attribute' name='Description' namespace='##targetNamespace'"
 	 * @generated
 	 */
 	String getDescription();
@@ -122,8 +119,7 @@ public interface Identification extends EObject {
 	 * @return the value of the '<em>Function</em>' attribute.
 	 * @see #setFunction(String)
 	 * @see de.cau.cs.kieler.functionblocks.FunctionblocksPackage#getIdentification_Function()
-	 * @model dataType="org.eclipse.emf.ecore.xml.type.String"
-	 *        extendedMetaData="kind='attribute' name='Function' namespace='##targetNamespace'"
+	 * @model extendedMetaData="kind='attribute' name='Function' namespace='##targetNamespace'"
 	 * @generated
 	 */
 	String getFunction();
@@ -149,8 +145,7 @@ public interface Identification extends EObject {
 	 * @return the value of the '<em>Standard</em>' attribute.
 	 * @see #setStandard(String)
 	 * @see de.cau.cs.kieler.functionblocks.FunctionblocksPackage#getIdentification_Standard()
-	 * @model dataType="org.eclipse.emf.ecore.xml.type.String"
-	 *        extendedMetaData="kind='attribute' name='Standard' namespace='##targetNamespace'"
+	 * @model extendedMetaData="kind='attribute' name='Standard' namespace='##targetNamespace'"
 	 * @generated
 	 */
 	String getStandard();
@@ -176,8 +171,7 @@ public interface Identification extends EObject {
 	 * @return the value of the '<em>Type</em>' attribute.
 	 * @see #setType(String)
 	 * @see de.cau.cs.kieler.functionblocks.FunctionblocksPackage#getIdentification_Type()
-	 * @model dataType="org.eclipse.emf.ecore.xml.type.String"
-	 *        extendedMetaData="kind='attribute' name='Type' namespace='##targetNamespace'"
+	 * @model extendedMetaData="kind='attribute' name='Type' namespace='##targetNamespace'"
 	 * @generated
 	 */
 	String getType();

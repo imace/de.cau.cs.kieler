@@ -40,7 +40,7 @@ public interface VersionInfo extends EObject {
 	 * @return the value of the '<em>Author</em>' attribute.
 	 * @see #setAuthor(String)
 	 * @see de.cau.cs.kieler.functionblocks.FunctionblocksPackage#getVersionInfo_Author()
-	 * @model dataType="org.eclipse.emf.ecore.xml.type.String" required="true"
+	 * @model required="true"
 	 *        extendedMetaData="kind='attribute' name='Author' namespace='##targetNamespace'"
 	 * @generated
 	 */
@@ -67,7 +67,7 @@ public interface VersionInfo extends EObject {
 	 * @return the value of the '<em>Date</em>' attribute.
 	 * @see #setDate(String)
 	 * @see de.cau.cs.kieler.functionblocks.FunctionblocksPackage#getVersionInfo_Date()
-	 * @model dataType="org.eclipse.emf.ecore.xml.type.String" required="true"
+	 * @model required="true"
 	 *        extendedMetaData="kind='attribute' name='Date' namespace='##targetNamespace'"
 	 * @generated
 	 */
@@ -94,7 +94,7 @@ public interface VersionInfo extends EObject {
 	 * @return the value of the '<em>Organization</em>' attribute.
 	 * @see #setOrganization(String)
 	 * @see de.cau.cs.kieler.functionblocks.FunctionblocksPackage#getVersionInfo_Organization()
-	 * @model dataType="org.eclipse.emf.ecore.xml.type.String" required="true"
+	 * @model required="true"
 	 *        extendedMetaData="kind='attribute' name='Organization' namespace='##targetNamespace'"
 	 * @generated
 	 */
@@ -121,8 +121,7 @@ public interface VersionInfo extends EObject {
 	 * @return the value of the '<em>Remarks</em>' attribute.
 	 * @see #setRemarks(String)
 	 * @see de.cau.cs.kieler.functionblocks.FunctionblocksPackage#getVersionInfo_Remarks()
-	 * @model dataType="org.eclipse.emf.ecore.xml.type.String"
-	 *        extendedMetaData="kind='attribute' name='Remarks' namespace='##targetNamespace'"
+	 * @model extendedMetaData="kind='attribute' name='Remarks' namespace='##targetNamespace'"
 	 * @generated
 	 */
 	String getRemarks();
@@ -148,7 +147,7 @@ public interface VersionInfo extends EObject {
 	 * @return the value of the '<em>Version</em>' attribute.
 	 * @see #setVersion(String)
 	 * @see de.cau.cs.kieler.functionblocks.FunctionblocksPackage#getVersionInfo_Version()
-	 * @model dataType="org.eclipse.emf.ecore.xml.type.String" required="true"
+	 * @model required="true"
 	 *        extendedMetaData="kind='attribute' name='Version' namespace='##targetNamespace'"
 	 * @generated
 	 */

@@ -36,7 +36,7 @@ public interface FBTypeName extends EObject {
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
 	 * @see de.cau.cs.kieler.functionblocks.FunctionblocksPackage#getFBTypeName_Name()
-	 * @model dataType="org.eclipse.emf.ecore.xml.type.String" required="true"
+	 * @model required="true"
 	 *        extendedMetaData="kind='attribute' name='Name' namespace='##targetNamespace'"
 	 * @generated
 	 */

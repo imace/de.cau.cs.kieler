@@ -40,8 +40,7 @@ public interface VarDeclaration extends EObject {
 	 * @return the value of the '<em>Array Size</em>' attribute.
 	 * @see #setArraySize(String)
 	 * @see de.cau.cs.kieler.functionblocks.FunctionblocksPackage#getVarDeclaration_ArraySize()
-	 * @model dataType="org.eclipse.emf.ecore.xml.type.String"
-	 *        extendedMetaData="kind='attribute' name='ArraySize' namespace='##targetNamespace'"
+	 * @model extendedMetaData="kind='attribute' name='ArraySize' namespace='##targetNamespace'"
 	 * @generated
 	 */
 	String getArraySize();
@@ -67,8 +66,7 @@ public interface VarDeclaration extends EObject {
 	 * @return the value of the '<em>Comment</em>' attribute.
 	 * @see #setComment(String)
 	 * @see de.cau.cs.kieler.functionblocks.FunctionblocksPackage#getVarDeclaration_Comment()
-	 * @model dataType="org.eclipse.emf.ecore.xml.type.String"
-	 *        extendedMetaData="kind='attribute' name='Comment' namespace='##targetNamespace'"
+	 * @model extendedMetaData="kind='attribute' name='Comment' namespace='##targetNamespace'"
 	 * @generated
 	 */
 	String getComment();
@@ -94,8 +92,7 @@ public interface VarDeclaration extends EObject {
 	 * @return the value of the '<em>Initial Value</em>' attribute.
 	 * @see #setInitialValue(String)
 	 * @see de.cau.cs.kieler.functionblocks.FunctionblocksPackage#getVarDeclaration_InitialValue()
-	 * @model dataType="org.eclipse.emf.ecore.xml.type.String"
-	 *        extendedMetaData="kind='attribute' name='InitialValue' namespace='##targetNamespace'"
+	 * @model extendedMetaData="kind='attribute' name='InitialValue' namespace='##targetNamespace'"
 	 * @generated
 	 */
 	String getInitialValue();
@@ -121,7 +118,7 @@ public interface VarDeclaration extends EObject {
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
 	 * @see de.cau.cs.kieler.functionblocks.FunctionblocksPackage#getVarDeclaration_Name()
-	 * @model dataType="org.eclipse.emf.ecore.xml.type.String" required="true"
+	 * @model required="true"
 	 *        extendedMetaData="kind='attribute' name='Name' namespace='##targetNamespace'"
 	 * @generated
 	 */
@@ -148,7 +145,7 @@ public interface VarDeclaration extends EObject {
 	 * @return the value of the '<em>Type</em>' attribute.
 	 * @see #setType(String)
 	 * @see de.cau.cs.kieler.functionblocks.FunctionblocksPackage#getVarDeclaration_Type()
-	 * @model dataType="org.eclipse.emf.ecore.xml.type.String" required="true"
+	 * @model required="true"
 	 *        extendedMetaData="kind='attribute' name='Type' namespace='##targetNamespace'"
 	 * @generated
 	 */

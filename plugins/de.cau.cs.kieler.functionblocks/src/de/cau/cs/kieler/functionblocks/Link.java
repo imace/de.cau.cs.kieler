@@ -57,8 +57,7 @@ public interface Link extends EObject {
 	 * @return the value of the '<em>Comment</em>' attribute.
 	 * @see #setComment(String)
 	 * @see de.cau.cs.kieler.functionblocks.FunctionblocksPackage#getLink_Comment()
-	 * @model dataType="org.eclipse.emf.ecore.xml.type.String"
-	 *        extendedMetaData="kind='attribute' name='Comment' namespace='##targetNamespace'"
+	 * @model extendedMetaData="kind='attribute' name='Comment' namespace='##targetNamespace'"
 	 * @generated
 	 */
 	String getComment();
@@ -84,7 +83,7 @@ public interface Link extends EObject {
 	 * @return the value of the '<em>Comm Resource</em>' attribute.
 	 * @see #setCommResource(String)
 	 * @see de.cau.cs.kieler.functionblocks.FunctionblocksPackage#getLink_CommResource()
-	 * @model dataType="org.eclipse.emf.ecore.xml.type.String" required="true"
+	 * @model required="true"
 	 *        extendedMetaData="kind='attribute' name='CommResource' namespace='##targetNamespace'"
 	 * @generated
 	 */
@@ -111,7 +110,7 @@ public interface Link extends EObject {
 	 * @return the value of the '<em>Segment Name</em>' attribute.
 	 * @see #setSegmentName(String)
 	 * @see de.cau.cs.kieler.functionblocks.FunctionblocksPackage#getLink_SegmentName()
-	 * @model dataType="org.eclipse.emf.ecore.xml.type.String" required="true"
+	 * @model required="true"
 	 *        extendedMetaData="kind='attribute' name='SegmentName' namespace='##targetNamespace'"
 	 * @generated
 	 */

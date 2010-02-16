@@ -38,7 +38,7 @@ public interface InputPrimitive extends EObject {
 	 * @return the value of the '<em>Event</em>' attribute.
 	 * @see #setEvent(String)
 	 * @see de.cau.cs.kieler.functionblocks.FunctionblocksPackage#getInputPrimitive_Event()
-	 * @model dataType="org.eclipse.emf.ecore.xml.type.String" required="true"
+	 * @model required="true"
 	 *        extendedMetaData="kind='attribute' name='Event' namespace='##targetNamespace'"
 	 * @generated
 	 */
@@ -65,7 +65,7 @@ public interface InputPrimitive extends EObject {
 	 * @return the value of the '<em>Interface</em>' attribute.
 	 * @see #setInterface(String)
 	 * @see de.cau.cs.kieler.functionblocks.FunctionblocksPackage#getInputPrimitive_Interface()
-	 * @model dataType="org.eclipse.emf.ecore.xml.type.String" required="true"
+	 * @model required="true"
 	 *        extendedMetaData="kind='attribute' name='Interface' namespace='##targetNamespace'"
 	 * @generated
 	 */
@@ -92,8 +92,7 @@ public interface InputPrimitive extends EObject {
 	 * @return the value of the '<em>Parameters</em>' attribute.
 	 * @see #setParameters(String)
 	 * @see de.cau.cs.kieler.functionblocks.FunctionblocksPackage#getInputPrimitive_Parameters()
-	 * @model dataType="org.eclipse.emf.ecore.xml.type.String"
-	 *        extendedMetaData="kind='attribute' name='Parameters' namespace='##targetNamespace'"
+	 * @model extendedMetaData="kind='attribute' name='Parameters' namespace='##targetNamespace'"
 	 * @generated
 	 */
 	String getParameters();

@@ -72,8 +72,7 @@ public interface ECC extends EObject {
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
 	 * @see de.cau.cs.kieler.functionblocks.FunctionblocksPackage#getECC_Name()
-	 * @model dataType="org.eclipse.emf.ecore.xml.type.String"
-	 *        extendedMetaData="kind='attribute' name='Name' namespace='##targetNamespace'"
+	 * @model extendedMetaData="kind='attribute' name='Name' namespace='##targetNamespace'"
 	 * @generated
 	 */
 	String getName();

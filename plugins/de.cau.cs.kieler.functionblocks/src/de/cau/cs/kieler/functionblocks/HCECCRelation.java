@@ -39,8 +39,7 @@ public interface HCECCRelation extends EObject {
 	 * @return the value of the '<em>Comment</em>' attribute.
 	 * @see #setComment(String)
 	 * @see de.cau.cs.kieler.functionblocks.FunctionblocksPackage#getHCECCRelation_Comment()
-	 * @model dataType="org.eclipse.emf.ecore.xml.type.String"
-	 *        extendedMetaData="kind='attribute' name='Comment' namespace='##targetNamespace'"
+	 * @model extendedMetaData="kind='attribute' name='Comment' namespace='##targetNamespace'"
 	 * @generated
 	 */
 	String getComment();
@@ -66,7 +65,7 @@ public interface HCECCRelation extends EObject {
 	 * @return the value of the '<em>Destination</em>' attribute.
 	 * @see #setDestination(String)
 	 * @see de.cau.cs.kieler.functionblocks.FunctionblocksPackage#getHCECCRelation_Destination()
-	 * @model dataType="org.eclipse.emf.ecore.xml.type.String" required="true"
+	 * @model required="true"
 	 *        extendedMetaData="kind='attribute' name='Destination' namespace='##targetNamespace'"
 	 * @generated
 	 */
@@ -93,7 +92,7 @@ public interface HCECCRelation extends EObject {
 	 * @return the value of the '<em>Relation</em>' attribute.
 	 * @see #setRelation(String)
 	 * @see de.cau.cs.kieler.functionblocks.FunctionblocksPackage#getHCECCRelation_Relation()
-	 * @model dataType="org.eclipse.emf.ecore.xml.type.String" required="true"
+	 * @model required="true"
 	 *        extendedMetaData="kind='attribute' name='Relation' namespace='##targetNamespace'"
 	 * @generated
 	 */
@@ -120,7 +119,7 @@ public interface HCECCRelation extends EObject {
 	 * @return the value of the '<em>Source</em>' attribute.
 	 * @see #setSource(String)
 	 * @see de.cau.cs.kieler.functionblocks.FunctionblocksPackage#getHCECCRelation_Source()
-	 * @model dataType="org.eclipse.emf.ecore.xml.type.String" required="true"
+	 * @model required="true"
 	 *        extendedMetaData="kind='attribute' name='Source' namespace='##targetNamespace'"
 	 * @generated
 	 */

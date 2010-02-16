@@ -37,8 +37,7 @@ public interface ECAction extends EObject {
 	 * @return the value of the '<em>Algorithm</em>' attribute.
 	 * @see #setAlgorithm(String)
 	 * @see de.cau.cs.kieler.functionblocks.FunctionblocksPackage#getECAction_Algorithm()
-	 * @model dataType="org.eclipse.emf.ecore.xml.type.String"
-	 *        extendedMetaData="kind='attribute' name='Algorithm' namespace='##targetNamespace'"
+	 * @model extendedMetaData="kind='attribute' name='Algorithm' namespace='##targetNamespace'"
 	 * @generated
 	 */
 	String getAlgorithm();
@@ -64,8 +63,7 @@ public interface ECAction extends EObject {
 	 * @return the value of the '<em>Output</em>' attribute.
 	 * @see #setOutput(String)
 	 * @see de.cau.cs.kieler.functionblocks.FunctionblocksPackage#getECAction_Output()
-	 * @model dataType="org.eclipse.emf.ecore.xml.type.String"
-	 *        extendedMetaData="kind='attribute' name='Output' namespace='##targetNamespace'"
+	 * @model extendedMetaData="kind='attribute' name='Output' namespace='##targetNamespace'"
 	 * @generated
 	 */
 	String getOutput();
