@@ -1,0 +1,156 @@
+/**
+ * <copyright>
+ * </copyright>
+ *
+ * $Id$
+ */
+package de.cau.cs.kieler.functionblocks.impl;
+
+import de.cau.cs.kieler.functionblocks.AdapterDeclaration;
+import de.cau.cs.kieler.functionblocks.FunctionblocksPackage;
+import de.cau.cs.kieler.functionblocks.Sockets;
+
+import java.util.Collection;
+
+import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
+
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+
+import org.eclipse.emf.ecore.impl.EObjectImpl;
+
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+
+/**
+ * <!-- begin-user-doc -->
+ * An implementation of the model object '<em><b>Sockets</b></em>'.
+ * <!-- end-user-doc -->
+ * <p>
+ * The following features are implemented:
+ * <ul>
+ *   <li>{@link de.cau.cs.kieler.functionblocks.impl.SocketsImpl#getAdapterDeclaration <em>Adapter Declaration</em>}</li>
+ * </ul>
+ * </p>
+ *
+ * @generated
+ */
+public class SocketsImpl extends EObjectImpl implements Sockets {
+	/**
+	 * The cached value of the '{@link #getAdapterDeclaration() <em>Adapter Declaration</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAdapterDeclaration()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<AdapterDeclaration> adapterDeclaration;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected SocketsImpl() {
+		super();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return FunctionblocksPackage.Literals.SOCKETS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<AdapterDeclaration> getAdapterDeclaration() {
+		if (adapterDeclaration == null) {
+			adapterDeclaration = new EObjectContainmentEList<AdapterDeclaration>(AdapterDeclaration.class, this, FunctionblocksPackage.SOCKETS__ADAPTER_DECLARATION);
+		}
+		return adapterDeclaration;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case FunctionblocksPackage.SOCKETS__ADAPTER_DECLARATION:
+				return ((InternalEList<?>)getAdapterDeclaration()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
+			case FunctionblocksPackage.SOCKETS__ADAPTER_DECLARATION:
+				return getAdapterDeclaration();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
+			case FunctionblocksPackage.SOCKETS__ADAPTER_DECLARATION:
+				getAdapterDeclaration().clear();
+				getAdapterDeclaration().addAll((Collection<? extends AdapterDeclaration>)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID) {
+		switch (featureID) {
+			case FunctionblocksPackage.SOCKETS__ADAPTER_DECLARATION:
+				getAdapterDeclaration().clear();
+				return;
+		}
+		super.eUnset(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
+			case FunctionblocksPackage.SOCKETS__ADAPTER_DECLARATION:
+				return adapterDeclaration != null && !adapterDeclaration.isEmpty();
+		}
+		return super.eIsSet(featureID);
+	}
+
+} //SocketsImpl
