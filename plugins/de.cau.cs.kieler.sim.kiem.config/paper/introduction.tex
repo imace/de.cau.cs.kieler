@@ -1,92 +1,45 @@
 \chapter{Introduction}
 \label{chapter:introduction}
 The purpose of this thesis consists of two parts. The first part is to find an easier way and
-more flexible way to deal with execution files in the \ac{KIELER} Execution Manager. The second part
+more flexible way to deal with execution files in the \ac{KIELER} Execution Manager (see Section
+\ref{section:introKiem}). The second part
 is to find an easy way to automatically do long execution runs inside the \ac{KIEM}.
 
 \section{KIELER Framework}
-\label{sec:introKieler}
+\label{section:introKieler}
 \index{KIELER}
 Since the project is part of the \ac{KIELER}\footnote{\url{http://www.informatik.uni-kiel.de/rtsys/kieler/}}
 framework a short introduction is in order.
 
-\ac{KIELER} is an open-source project for model design, simulation and analysis. 
+\ac{KIELER} is an open-source project for model design, simulation and analysis. It is developed 
+by the Real-Time and Embedded Systems Group\footnote{\url{http://www.informatik.uni-kiel.de/rtsys/}}
+of the Department of Computer Science\footnote{\url{http://www.informatik.uni-kiel.de}}
+of the \ac{CAU}\footnote{\url{http://www.uni-kiel.de}}.
 
 It contains facilities to edit different types of graphical models (e.g. synccharts) and has several
 tools to make the editing easier. The \ac{KSBasE}\footnote{\url{http://rtsys.informatik.uni-kiel.de/trac/kieler/wiki/Projects/KSBasE}} 
 project for example contains several features where the user can edit successor states to already existing states in the diagram or
 adding new inner states without having to perform all the necessary actions himself. Another 
-project\footnote{\ac{KIML} - \url{http://rtsys.informatik.uni-kiel.de/trac/kieler/wiki/Projects/KIML}}
+project\footnote{\url{http://rtsys.informatik.uni-kiel.de/trac/kieler/wiki/Projects/KIML}}
 automatically layouts any diagram with a variety of algorithms in order to improve readability.
 
 The \ac{KIELER} Execution Manager described in the next section is used for simulating the
 model files created by \ac{KIELER}.
 
-\subsection{Model Files}
-\label{section:IntroModelFile}
-\index{Model file}
-A model file can be any file that contains the structure and behavior of a semantic entity.
-
-\section{The KIELER Execution Manager}
-\label{sec:introKiem}
-\index{KIEM}
-Execution Manager is used in KIELER as a framework to plug-in DataComponents for various tasks. Examples are:
-\begin{itemize}
- \item Simulation Engines
- \item Model Visualizers
- \item Environment Visualizers
- \item Validators
- \item User Input Facilities
- \item Trace Recording Facilities 
-\end{itemize}
-
-These DataComponents can be executed using a graphical user interface (GUI). 
-The scheduling order can also be defined by this GUI as well as other settings like a step/tick duration and properties of DataComponents.
-For information about \ac{KIEM} see the wiki\footnote{\url{http://rtsys.informatik.uni-kiel.de/trac/kieler/wiki/Projects/KIEM}}.
-
-\subsection{DataComponents}
-\label{section:IntroDataComponent}
-\index{DataComponent}
-A DataComponent is an entity that has a specific task during a the course of an execution. The
-DataComponents are scheduled in a specific order and can either receive or produce information or both. 
-During each step of the execution each DataComponent is asked to perform their computations for the step.
-
-\subsubsection{DataComponentWrappers}
-\label{section:IntroDataComponentWrapper}
-\index{DataComponentWrapper}
-A DataComponentWrapper is an object that wrapps around a DataComponent that is contained in the schedule
-of an execution file.
-
-
-\subsection{Execution}
-\label{section:IntroExecution}
-\index{Execution file}
-\index{Execution}
-\index{Schedule}
-The files used by the Execution Manager are called \textit{execution files}. These files contain 
-the list of DataComponents with all internal data and the specific order. That list is called a
-\textit{schedule}. The schedule can be used to start an \textit{execution} in the Execution Manager.
-An execution consists of a initialization, stepping and wrap-up.
-
 
 \section{Outline of this Document}
-\label{sec:introOutline}
-The first part of this document is about the implemention of the Configuration plugin for the \ac{KIEM}.
-The second part discusses the implementation of the Automated Execution plugin for the \ac{KIEM}. Both
-parts will have the same structure described below.
+\label{section:introOutline}
+The first part of this document is about the implemention of the \ac{KIEMConfig} plug-in.
 
-Each part starts with a brief introduction into the technologies used to solve the problem.
+It starts with an introduction into the technologies that were used to solve the problem as well
+as an overview of similar projects. The part continues with a detailed description of the problem
+followed by a chapter about a conceptual solution to those problems. The next chapter is about the
+modifications that had to be made to the existing Execution Manager. In the following chapter a detailed
+description of the implementation of the new features will be given. The last chapter will summarize
+the results of this thesis and outline a few projects that could follow up on it.
 
-The next chapter contains a detailed outline of the problems that are to be solved by this thesis.
-
-The following chapter describes the concepts of how to solve the problem and some
-design decisions that were made at a very early stage in the development.
-
-Sections 5 and 6 are about the actual implementation with section 5 outlining the changes
-that were made to the \ac{KIEM} plug-in itself and section 6 describing the newly created plug-ins.
-
-The final section of each part will summarize the results of the thesis and outline
-a few projects that could be based on it.
+The second part discusses the implementation of the \ac{KIEMAuto} plug-in. It follows the same structure
+as the first part.
 
 
 %%% Local Variables: 

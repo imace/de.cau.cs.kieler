@@ -187,8 +187,6 @@ the list has to be updated.
 This collection is used to track the most recently used schedules and display them
 in the corresponding ComboBox.
 
-
-
 \section{Manager Class - the Controller}
 \label{section:ConfController}
 The manager classes are responsible for the control flow inside the plug-in. They gather information
@@ -200,10 +198,12 @@ each with a different task:
 each execution file and the default configuration saved in the preferences store.
  \item The \textbf{Schedule Manager} is responsible for keeping track of the different
 execution files and updating the information inside the ScheduleData objects.
- \item The task of the \textbf{Editor Manager} is to
+ \item The task of the \textbf{Editor Manager} is to keep track of the different known editors.
+ \item The \textbf{ContributionManager} is used to manage the controls that are placed on the 
+tool bar in the Execution Manager.
+ \item The \textbf{PropertyUsageManager} is responsible for managing the keys of those
+properties where the default configuration is used rather than the current configuration.
 \end{itemize}
-
-
 
 \subsection{Abstract Manager}
 \label{section:AbstractManager}
@@ -547,6 +547,7 @@ is also stored and loaded through the use of the facilities in the Abstract Mana
 
 \section{Preference Pages - the View}
 \label{section:ConfView}
+\index{Preference Page}
 The view part of this project mostly consists of the preference pages for setting up the different
 aspects of the \ac{KIEMConfig}. These preference pages use the technology described in Section
 \ref{section:TechPreferencePage} which integrates them into the rest of the preference page
@@ -648,6 +649,7 @@ moves a schedule through his file browser instead of the refactoring facilities 
 The editor marked with the dot is the default editor (see Section \ref{section:DefaultEditor}.
 
 \subsubsection{Adding and Removing Editors, Selecting a Default Editor}
+\index{Default Editor}
 \begin{figure}
   \centering
   \includegraphics[scale=.4]{EditorSelectionDialog.jpg}
