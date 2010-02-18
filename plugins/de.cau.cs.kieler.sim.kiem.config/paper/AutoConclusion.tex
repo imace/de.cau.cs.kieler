@@ -12,17 +12,61 @@ future work.
 
 \section{Results}
 \label{section:AutoResults}
-\begin{itemize}
- \item setup using the wizard
- \item input using new interfaces
- \item control flow with job mechanism
- \item output using a view with tables and methods to export
-\end{itemize}
+The first objective of the project was to solve the set up of an automated run
+by the user. The initial idea of using a script-based approach and providing the
+necessary files as lists in text files was not pursued. Instead a more user-friendly
+solution was found through the use of a wizard. 
+
+The next objective was to find a way to input information into the DataComponents
+in order for them to be designed in a more generic way. This was achieved by
+designing new interfaces that allow components to receive a list of properties
+prior to each part of the automated execution.
+
+The main part of the task involved creating a manager that guided the control flow
+of an automated execution. The Automation Manager described in Section \ref{section:AutomationManager}
+loads all the necessary files, sets up the different outputs, steps through the
+execution to the desired step and includes error management facilities as well.
+
+The last part was to find a user-friendly way to display the information generated
+by the automated execution. The problem was solved by creating a view that displayed
+the information in a set of tables. These tables are structured in a way to easily
+compare the results of different model files and iterations. To allow use of the 
+generated tables in another context methods were implemented in order to allow
+the generation of external formats (namely \ac{CSV} and \LaTeX).
 
 
-\section{Further Improvements}
+\section{Future Work}
 \label{section:AutoImprovements}
-\begin{itemize}
- \item allow the user to select which columns to export/display
- \item implement macro step support as soon as KIEM does
-\end{itemize}
+Although all initial objectives were achieved there is still room for additional
+improvements. These improvements which could be the subject of further study will
+be explained in this section.
+
+\subsection{Scripting}
+Currently the automated execution can be triggered through
+the use of a wizard and will run inside the Eclipse workbench and display the results
+in a graphical view. 
+
+In order to allow other plug-ins or external applications to trigger
+an automated execution an interface would have to be defined. This could involve the 
+creation of a scripting language that passes all the needed parameters to the automated
+execution. It would also involve retrieving those results and importing them into the 
+calling application.
+
+The existing code already supports most of the requested features however there is no
+interface to access those features from outside of Java.
+
+\subsection{Exports}
+Currently the only possibility to use the collected data in
+another application is by exporting the entire table into \ac{CSV} or \LaTeX .
+
+This process could be improved, for example by allowing the user to select the table columns
+and rows that he wants to export instead of exporting the entire table. Furthermore
+export to additional formats could be implemented. It could even be possible to interface
+the entire automation with a database application or remote system.
+
+\section{Summary}
+All in all the initial problem of providing a framework for setting up automated execution runs
+was solved. 
+
+Further testing and use of these features may however reveal new ways that the
+plug-in can extend its functionality.
