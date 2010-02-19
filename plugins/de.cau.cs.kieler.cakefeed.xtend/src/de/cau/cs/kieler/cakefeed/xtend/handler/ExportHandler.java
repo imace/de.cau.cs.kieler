@@ -50,11 +50,9 @@ public class ExportHandler extends AbstractHandler implements IHandler {
             //URI uri = URI.createURI("platform:plugin//de.cau.cs.kieler.cakefeed.xtend//transformations//feature.ext");
             // END URI TEST
             
+            // HAUKE SAGT: URI.createPlatformPluginURI("/de.cau.cs.kieler.cakefeed.xtend/transformations/feature.ext",true);
+            // MICHA SAGT: platform:/resource/de.cau.cs.kieler.cakefeed.xtend//transformations/feature.ext
             String fileName = "C:\\Documents and Settings\\msch165\\Desktop\\eclipse workspace\\de.cau.cs.kieler.cakefeed.xtend\\src\\de\\cau\\cs\\kieler\\cakefeed\\xtend\\transformations\\feature.ext";
-            				  /*"..\\transformations\\feature.ext"*/
-            				  /*"platform:plugin//de.cau.cs.kieler.cakefeed.xtend//transformations//feature.ext"*/
-            					//uri.toString();
-            					//"platform:plugin//de//cau//cs//kieler//cakefeed//xtend//transformations//feature.ext";
             String operation = null;
             
             XtendTransformationFramework xtend = new XtendTransformationFramework();
@@ -74,7 +72,7 @@ public class ExportHandler extends AbstractHandler implements IHandler {
             
             xtend.setParameters(parameters);
             xtend.initializeTransformation(fileName, operation, metaModels);
-            xtend.executeTransformation();
+            Object result = xtend.executeTransformation();
             
             List<?> editPolicies = CanonicalEditPolicy.getRegisteredEditPolicies(obj);
             for (Iterator<?> it = editPolicies.iterator(); it.hasNext();) {
