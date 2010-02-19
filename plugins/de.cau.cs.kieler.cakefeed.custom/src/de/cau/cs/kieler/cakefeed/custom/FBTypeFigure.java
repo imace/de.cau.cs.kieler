@@ -35,6 +35,9 @@ public class FBTypeFigure extends Shape implements Adapter, IAttributeAwareFigur
 		numOfVars = 1;
 		maxInputWiths = 1;
 		maxOutputWiths = 1;
+		ctrlRectangle = new Rectangle();
+		dataRectangle = new Rectangle();
+		computeRectangles();
 		
 	}
 	
@@ -183,7 +186,7 @@ public class FBTypeFigure extends Shape implements Adapter, IAttributeAwareFigur
 				numOfVars = 1;
 			}
 		}
-		//this.computeRectangles();
+		this.computeRectangles();
 		this.repaint();
 	}
 
