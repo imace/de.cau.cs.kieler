@@ -76,3 +76,42 @@
 	//FIXME: workaround for #154536
 	result.getBounds().setSize(result.getPreferredSize());
 «ENDDEFINE»
+
+«DEFINE addFixedChild FOR gmfgen::GenNode-»
+	«EXPAND xpt::Common::generatedMemberComment»
+	protected boolean addFixedChild(org.eclipse.gef.EditPart childEditPart) {
+«FOREACH getInnerFixedLabels(self) AS label»«LET label.viewmap.oclAsType(gmfgen::ParentAssignedViewmap) AS childViewmap-»
+		if (childEditPart instanceof «label.getEditPartQualifiedClassName()») {
+			((«label.getEditPartQualifiedClassName()») childEditPart).«EXPAND impl::diagram::editparts::TextAware::labelSetterName FOR childViewmap»(getPrimaryShape().«childViewmap.getterName»());
+			return true;
+		}
+«ENDLET»«ENDFOREACH-»
+«FOREACH getPinnedCompartments(self) AS compartment»«LET compartment.viewmap.oclAsType(gmfgen::ParentAssignedViewmap) AS childViewmap-»
+		if (childEditPart instanceof «compartment.getEditPartQualifiedClassName()») {
+			org.eclipse.draw2d.IFigure pane = getPrimaryShape().«childViewmap.getterName»();
+			setupContentPane(pane); // FIXME each comparment should handle his content pane in his own way 
+			pane.add(((«compartment.getEditPartQualifiedClassName()») childEditPart).getFigure());
+			return true;
+		}	
+«ENDLET»«ENDFOREACH-»
+«FOREACH getSideAffixedChildren(self) AS child-»
+		if (childEditPart instanceof «child.getEditPartQualifiedClassName()») {
+			org.eclipse.gmf.runtime.diagram.ui.figures.BorderItemLocator locator = 
+			«REM»Changed locator«ENDREM»
+			«IF self.editPartClassName = "FBEditPart"-»
+			new de.cau.cs.kieler.cakefeed.custom.CakefeedBorderItemLocator(getMainFigure(), org.eclipse.draw2d.PositionConstants.«child.preferredSideName», getCtrl(childEditPart), getInput(childEditPart));
+			«ELSEIF self.editPartClassName = "BFBTypeEditPart"-»
+			new de.cau.cs.kieler.cakefeed.custom.CakefeedBorderItemLocator(getMainFigure(), org.eclipse.draw2d.PositionConstants.«child.preferredSideName», getCtrl(childEditPart), getInput(childEditPart));
+			«ELSEIF self.editPartClassName = "CFBTypeEditPart"-»
+			new de.cau.cs.kieler.cakefeed.custom.CakefeedBorderItemLocator(getMainFigure(), org.eclipse.draw2d.PositionConstants.«child.preferredSideName», getCtrl(childEditPart), getInput(childEditPart));
+			«ELSE-»
+			new org.eclipse.gmf.runtime.diagram.ui.figures.BorderItemLocator(getMainFigure(), org.eclipse.draw2d.PositionConstants.«child.preferredSideName»);
+			«ENDIF-»
+			«REM»End changed locator«ENDREM»
+			getBorderedFigure().getBorderItemContainer().add(((«child.getEditPartQualifiedClassName()») childEditPart).getFigure(), locator);
+			return true;
+		}
+«ENDFOREACH-»
+		return false;
+	}
+«ENDDEFINE»

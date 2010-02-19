@@ -273,4 +273,73 @@
 		}
 	}
 	«ENDIF-»
+	«IF self.editPartClassName = "FBEditPart"-»
+	protected boolean getCtrl(org.eclipse.gef.EditPart editPart) {
+		if ((editPart instanceof FBInputEventEditPart)
+			|| (editPart instanceof FBOutputEventEditPart)
+			) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	protected boolean getInput(org.eclipse.gef.EditPart editPart) {
+		if ((editPart instanceof FBInputEventEditPart)
+			|| (editPart instanceof FBInputVarEditPart)
+			) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	«ELSEIF self.editPartClassName = "BFBTypeEditPart"-»
+	protected boolean getCtrl(org.eclipse.gef.EditPart editPart) {
+		if ((editPart instanceof IFInputEventEditPart)
+			|| (editPart instanceof IFOutputEventEditPart)
+			|| (editPart instanceof FBInputEventEditPart)
+			|| (editPart instanceof FBOutputEventEditPart)
+			) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	protected boolean getInput(org.eclipse.gef.EditPart editPart) {
+		if ((editPart instanceof IFInputEventEditPart)
+			|| (editPart instanceof IFInputVarEditPart)
+			|| (editPart instanceof FBInputEventEditPart)
+			|| (editPart instanceof FBInputVarEditPart)
+			) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	«ELSEIF self.editPartClassName = "CFBTypeEditPart"-»
+	protected boolean getCtrl(org.eclipse.gef.EditPart editPart) {
+		if ((editPart instanceof IFInputEventEditPart)
+			|| (editPart instanceof IFOutputEventEditPart)
+			|| (editPart instanceof FBInputEventEditPart)
+			|| (editPart instanceof FBOutputEventEditPart)
+			) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	protected boolean getInput(org.eclipse.gef.EditPart editPart) {
+		if ((editPart instanceof IFInputEventEditPart)
+			|| (editPart instanceof IFInputVarEditPart)
+			|| (editPart instanceof FBInputEventEditPart)
+			|| (editPart instanceof FBInputVarEditPart)
+			) {
+			return true;
+		} else {
+			return false;
+		}
+	}	
+	«ENDIF-»
 «ENDDEFINE»
