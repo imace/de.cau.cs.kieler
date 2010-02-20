@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg height="238" version="1.1" width="417" xmlns="http://www.w3.org/2000/svg">
+<rect fill="#ffffff" height="210" stroke="#ffffff" stroke-width="1" width="389" x="14" y="14"/>
+<rect fill="#ffffff" height="0" stroke="#ffffff" stroke-width="1" width="389" x="14" y="14"/>
+<rect fill="none" height="0" stroke="#000000" stroke-width="1" width="389" x="14" y="14"/>
+<rect fill="#ffffff" height="22" stroke="#ffffff" stroke-width="1" width="389" x="14" y="14"/>
+<text font-family="Dialog" font-size="12" font-style="italic" x="18" y="29">
+de::cau::cs::kieler::sim::kiem::config::managers::AbstractManager</text>
+<rect fill="#ffffff" height="163" stroke="#ffffff" stroke-width="1" width="389" x="14" y="60"/>
+<line fill="#000000" stroke="#000000" stroke-width="1" x1="14" x2="402" y1="60" y2="60"/>
+<text font-family="Dialog" font-size="12" x="17" y="76">
+&lt;&lt;create&gt;&gt; AbstractManager()</text>
+<line fill="#000000" stroke="#000000" stroke-width="1" x1="17" x2="101" y1="92" y2="92"/>
+<text font-family="Dialog" font-size="12" x="17" y="91">
+saveAll() : void</text>
+<text font-family="Dialog" font-size="12" x="17" y="106">
+addEventListener(listener : IKiemConfigEventListener) : void</text>
+<text font-family="Dialog" font-size="12" x="17" y="121">
+removeEventListener(listener : IKiemConfigEventListener) : void</text>
+<text font-family="Dialog" font-size="12" x="17" y="136">
+notifyListeners(event : KiemConfigEvent) : void</text>
+<text font-family="Dialog" font-size="12" x="17" y="151">
+load(key : String,defaultValue : String) : String</text>
+<text font-family="Dialog" font-size="12" x="17" y="166">
+remove(key : String) : void</text>
+<text font-family="Dialog" font-size="12" x="17" y="181">
+save(key : String,value : String) : void</text>
+<text font-family="Dialog" font-size="12" font-style="italic" x="17" y="196">
+load() : void</text>
+<text font-family="Dialog" font-size="12" font-style="italic" x="17" y="211">
+save() : void</text>
+<rect fill="#ffffff" height="24" stroke="#ffffff" stroke-width="1" width="389" x="14" y="36"/>
+<line fill="#000000" stroke="#000000" stroke-width="1" x1="14" x2="402" y1="36" y2="36"/>
+<text font-family="Dialog" font-size="12" x="17" y="52">
+listeners : List</text>
+<rect fill="none" height="210" stroke="#000000" stroke-width="1" width="389" x="14" y="14"/>
+</svg>

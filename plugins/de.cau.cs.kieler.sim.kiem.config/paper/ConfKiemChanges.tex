@@ -1,7 +1,7 @@
 \chapter{Code Changes in the Execution Manager}
 \label{chapter:KiemChanges}
 Although the project attempts to realize most of the objectives without
-changing the Execution Manager itself minimal adaptations were necessary.
+changing the Execution Manager itself, minimal adaptations were necessary.
 This mostly involves adding new methods to the \ac{API} in order to
 gain access to previously hidden properties.
 
@@ -14,9 +14,9 @@ and won't break any plug-ins relying on the old implementation.
 
 \section{Schema Files and Interfaces}
 \index{Extension point}
-In order to provide additional functionality for other plug-ins we choose the extension
-point mechanism described in Section \ref{section:ConfTechExtension}. This is done
-is order to retain the old functionality of the plug-in while on the other hand giving
+In order to provide additional functionality for other plug-ins the extension
+point mechanismdescribed in Section \ref{section:ConfTechExtension} was chosen. The reason
+for this choice is to retain the old functionality of the plug-in while on the other hand giving
 options to ask extending plug-ins for their contributions. 
 
 The extension points are described in more details in the next sections. They consist
@@ -38,7 +38,7 @@ through a predefined Eclipse extension point would require major code changes an
 have major drawbacks.
  \item A programmatic approach gives control over the contributions to the Execution Manager.
 This means that the order of the native Execution Manager buttons is always the same and in the
-same place. It also means that the Execution Manager can choose to ignore contributions if the
+same place. It also has the added benefit that the Execution Manager can choose to ignore contributions if the
 tool bar gets too crowded.
 \end{enumerate}
 \listingjava
@@ -51,6 +51,9 @@ The schema file for components that want to add contributions to the tool bar is
 It only requires them to implement the interface shown in Listing \ref{list:IToolbarContributor}.
 The implementing class provides an array with all ControlContributions they want to add to the tool bar.
 A ControlContribution for a tool bar can be almost any widget like for example Labels, Buttons or ComboBoxes.
+Instead (or in additionally) it can also provide an array of Actions. Actions are of a more simple nature
+than ControlContributions. An Action can only be some kind of Button which either has an icon or a text label.
+However unlike ControlContributions, Actions can also be added to menus.
 
 When the Execution Manager starts to build the views tool bar it will perform the following steps:
 \begin{enumerate}
@@ -100,27 +103,27 @@ can ask all providers for values and choose the one he would like to use.
 The two methods from the interface shown in Listing \ref{list:IKiemConfigurationProvider} work
 in the following way:
 
-\begin{description}
+\begin{itemize}
  \item \textbf{String changeProperty(String propertyId) throws KiemPropertyException} :
 
 This method will be called by the Execution Manager whenever a property has to be loaded where
 other plug-ins are encouraged to provide their value. When a plug-in is asked for a value it
-can do one of two things:
+can respond in one of two ways:
  \begin{enumerate}
   \item It can either provide a value for the property. Any value is acceptable here, even \textit{null}.
 If one plug-in provides any value at all the other plug-ins will not be asked. The reason behind this arrangement
-is that the Execution Manager most likely can't decide which value has more validity anyway if more than one
-plug-in answers.
+is that the Execution Manager most can't decide which value has more validity if more than one
+plug-in gives a valid answer.
   \item If it can not provide a value the declared Exception should be thrown in which case the Execution
-Manager will move to the next plug-in. The reason for not using the \textit{null} value to encode no valid value
-is that \textit{null} might be the intended value.
+Manager will move to the next plug-in. It would also be possible to encode a non-existing value as \textit{null}.
+However this arrangement was not chosen because \textit{null} might be the intended value.
  \end{enumerate}
 
  \item \textbf{void propertyChanged(String propertyId, String value)} :
 
 Notifies all listeners that a property was changed somewhere in the Execution Manager. This will be called for example
 when the user changes the step duration through the input field on the Execution Managers tool bar.
-\end{description}
+\end{itemize}
 
 \subsection{Event Listener}
 \label{section:EventListener}
@@ -131,36 +134,41 @@ when the user changes the step duration through the input field on the Execution
 {The Interface of the Event Listener}
 {list:IKiemEventListener}
 {t}
-The main purpose of the Event Manager is to inform DataComponents of events
+The main function of the Event Manager is to inform DataComponents of events
 happening in the Execution Manager during execution. This behavior has been modified to include 
-events that occur while the execution is not running. This modification lead to the 
+events that occur while the execution is not running. This modification has lead to the 
 creation of another extension point in order to allow other plug-ins to be notified
-on any of these events as well. The classes implementing the interface 
-(see List \ref{list:IKiemEventListener}) required by this extension point will be notified
-on any event that happens inside the Execution Manager.
+on any of these events as well. The classes implementing the interface\footnote{Listing \ref{list:IKiemEventListener}} 
+required by this extension point will be notified on any event that happens inside the Execution Manager.
 
-\begin{description}
+\begin{itemize}
  \item \textbf{int provideEventOfInterest()} : This method is directly derived from the method with 
 the same name in the AbstractDataComponent class of the \ac{KIEM} plug-in. It is called by the
 EventManager to determine which events the implementing class is interested in.
-This is done to improve efficiency and not flooding components with events they are not interested in.
+This improves efficiency since components are not flooded with events they are not interested in anyway.
 
 Based on the response, the EventManager puts the component into lists along with the DataComponentWrappers
 already inside.
  \item \textbf{void notifyEvent(KiemEvent event)} : This method is called by the EventManager when 
-something happens inside the Execution Manager that the implementing classes might be interested in.
-\end{description}
+something happens inside the Execution Manager that the implementing classes might be interested in. An
+implementation example is shown in Listing \ref{list:EventListener}.
+\end{itemize}
+\listingjava
+\showlistingex{code/eventListener.txt}
+{Java}
+{Code example for the Event Listener.}
+{list:EventListener}
+{t}
 
 \section{KIEMPlugin.java}
 \label{section:ConfChangesKiemPlugin}
-The main Activator class contains almost the entire \ac{API} of the \ac{KIEM}.
-Therefore any additions to that has to performed in this class which means that
-most of the adjustments were made here.
+\textit{KIEMPlugin.java} serves as the root class of the Execution Manager and contains almost the entire \ac{API}.
+Therefore all additions to the the \ac{KIEM}s \ac{API} were made here.
 
 \subsection{Listener}
 The following methods were added to communicate with the plug-ins registered through
-the ConfigurationProvider extension point (see Section \ref{section:ConfigurationProvider}).
-\begin{description}
+the ConfigurationProvider extension point\footnote{Section \ref{section:ConfigurationProvider}}.
+\begin{itemize}
  \item \textbf{notifyConfigurationProviders(String propertyId, String value)} : 
 
 This method can be called by any class
@@ -176,10 +184,10 @@ an Exception. The \ac{KIEM} will then take the first value he receives without g
 to the internal property.
  \item \textbf{Integer getIntegerValueFromProviders(final String propertyId)} : 
 
-This method is a convenience method for
-the one described above. It will try to parse an integer from the retrieved String and return it or return null
-if no integer could be parsed.
-\end{description}
+This method is a convenience method for the one described above. 
+It will try to parse an integer from the retrieved String. If successful it will be returned otherwise
+\textit{null} will be returned.
+\end{itemize}
 
 \subsection{Getters and Setters}
 \listingjava
@@ -188,8 +196,9 @@ if no integer could be parsed.
 {Example of modified Getter and Setter}
 {list:getterAndSetter}
 {t}
-An example for the use of the methods described in the last section can be found in the Getters and Setters for
-the different properties in the Execution Manager (for an example see Figure \ref{list:getterAndSetter}). 
+An example for the use of the methods described in the last section can be found in the 
+Getters and Setters\footnote{Figure \ref{list:getterAndSetter}} for
+the different properties in the Execution Manager. 
 These were changed in order to use the new methods but are
 still able to fall back on hard-coded default values if no configuration plug-in is registered.
 
@@ -222,8 +231,8 @@ The changes described in Section \ref{section:ConfChangesKiemPlugin} were mostly
 configuration management and loading of new execution files. This section will mostly deal with the changes
 that were necessary to enable the adding of new items to the tool bar.
 
-The tool bar of the Execution Manager is created in a programmatic way instead of through the use of the
+The tool bar of the Execution Manager is created in a programmatic way instead the
 corresponding Eclipse extension point. This means that the only way to place additional controls onto the tool bar
 is to modify the code in order to make use of the Toolbar Contribution Provider extension point described
-in Section \ref{section:ToolbarContributionProvider}. For the full code of the modified method see the
-Appendix.
+in Section \ref{section:ToolbarContributionProvider}. For the full code of the modified method see 
+Listing \ref{list:AppendixToolbarCode} in the Appendix.

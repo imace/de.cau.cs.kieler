@@ -2,8 +2,9 @@
 \label{chapter:ConfTechnology}
 Before the problem can be explained the technologies in question
 and the terminology that is used in the rest of this document is in order must first be introduced. This should
-only serve as a brief outline since a full explanation goes beyond the scope of this
-thesis.
+only serve as a brief outline since a full explanation goes beyond the scope of this thesis.
+
+In addition to these technologies a section about some related work is included in this chapter.
 
 \section{Eclipse}
 \label{section:ConfTechEclipse}
@@ -11,8 +12,8 @@ thesis.
 Since the \ac{KIELER} project and thus the Execution Manager is build upon the 
 Eclipse framework a short introduction into Eclipse is necessary.
 
-The basic function of Eclipse is as an \ac{IDE} for Java. It provides
-a host of facilities that makes it easier for the user to create their own Java applications.
+The basic function of Eclipse is as \textit{the} \ac{IDE} for Java. It provides
+a host of facilities that makes it easier for the user to create their own Java Applications.
 A few examples for these facilities are:
 \begin{itemize}
  \item Syntax highlighting to make the source code easier to read.
@@ -22,8 +23,8 @@ and make it easier to write code.
  \item Several wizards for class creation and other tasks.
 \end{itemize}
 
-However since Eclipse is an open-source project there are also plug-ins (see Section 
-\ref{section:ConfTechPlugins}) for variety of other things. 
+However since Eclipse is an open-source project there are also plug-ins\footnote{Section 
+\ref{section:ConfTechPlugins}} for variety of other things. 
 For example the language isn't limited to Java. There are also plug-ins
 for C++, \LaTeX, Visual Basic and several other programming languages.
 
@@ -45,14 +46,14 @@ different editors and views.
  \item The files that the user operates on are located in the Eclipse \textit{workspace}. 
  \item An \textit{editor} is a component that allows the user to display, enter and modify information.
 Editors are used to modify a specific file type. There can usually be multiple instances of the same editor.
-An example for an editor would be the Java editor which is used to create and edit Java source files.
+An example for an editor would be the Java Editor which is used to create and edit Java Source Files.
  \item An Eclipse \textit{view} is the other component located on the workbench. Views are only used to
 display content that was created elsewhere. Unlike editors there is usually only one instance of any view.
 One of the views shown in the figure is the class outline view. It shows all methods and attributes of the 
 Java class in the currently active editor.
 \end{itemize}
 
-For additional information about eclipse see the official Eclipse website\footnote{www.eclipse.org} or literature \cite{eclipsePlugins}.
+For additional information about Eclipse see the official Eclipse website\footnote{www.eclipse.org} or literature \cite{eclipsePlugins}.
 
 \subsection{Plug-ins}
 \label{section:ConfTechPlugins}
@@ -60,7 +61,7 @@ For additional information about eclipse see the official Eclipse website\footno
 The building blocks of any Eclipse application are the so called \textit{plug-ins}. They
 consist of any number of Java classes and additional meta information. The Java classes
 describe the behavior of the plug-in and define its \ac{API}. The meta information is not written
-in Java but uses an \ac{XML} notation instead. The meta information contains the following
+in Java but uses an \ac{XML}\footnote{\url{http://www.w3.org/XML/}} notation instead. The meta information contains the following
 information:
 \begin{itemize}
  \item What other plug-ins does the plug-in depend on? This information is necessary to determine
@@ -78,7 +79,8 @@ plug-ins that can be exchanged at will.
 
 Eclipse can not only be used to create plug-ins that can be used in an Eclipse
 instance but can also compile a set of plug-ins into a standalone application - the so
-called \ac{RCA}. This \ac{RCA} contains a minimal set of plug-ins to provide the Eclipse
+called \ac{RCA}\footnote{\url{http://wiki.eclipse.org/index.php/Rich_Client_Platform}}. 
+This \ac{RCA} contains a minimal set of plug-ins to provide the Eclipse
 look-and-feel and the plug-ins created by the user.
 
 \subsubsection{Extension Point Mechanism}
@@ -108,11 +110,18 @@ itself without worrying about it being added at all the necessary places inside 
 \subsection{Preference Pages}
 \label{section:TechPreferencePage}
 \index{Preference Page}
+\begin{figure}
+  \centering
+  \includegraphics[scale=.3]{PreferencePage.png}
+  \caption[An example for a preference page.]%
+  {An example for a preference page.\protect}
+  \label{fig:PreferencePage}
+\end{figure}
 A special example of plug-in usage within the Eclipse framework itself is the 
 
 \textit{org.eclipse.ui.preferencePage} plug-in. 
-It is used to create new preference pages at a specific location inside the
-normal tree of preference pages accessible through Window->Preferences.
+It is used to create new preference pages\footnote{Figure \ref{fig:PreferencePage}}
+at a specific location inside the normal tree of preference pages accessible through Window->Preferences.
 The programmer only has to take care of the contents of the actual page and not worry
 about additional buttons or integrating it into the PreferenceDialog.
 
@@ -120,7 +129,9 @@ about additional buttons or integrating it into the PreferenceDialog.
 \label{section:TechPreferenceStore}
 Closely coupled with the preference pages is the Eclipse preference store. It is
 basically a text file for each plug-in where the plug-in can deposit simple Strings
-under a given key to ensure that information is kept between execution runs.
+under a given key to ensure that information is kept between execution runs. For
+an example of the use of the preference store see Listing \ref{list:AppendixSavedConf}
+in the Appendix.
 
 \section{The KIELER Execution Manager}
 \label{section:introKiem}
@@ -129,11 +140,12 @@ under a given key to ensure that information is kept between execution runs.
   \centering
   \includegraphics[scale=.3]{KIEMOriginal.jpeg}
   \caption[The Execution Manager during a simulation.]%
-  {The Execution Manager during a simulation.\protect}
+  {The Execution Manager during a simulation. [image taken from \cite{cmot-dt}]\protect}
   \label{fig:KIEMOriginal}
 \end{figure}
+
 Execution Manager shown in Figure \ref{fig:KIEMOriginal} is used in \ac{KIELER} as a framework 
-to plug-in DataComponents (see Section \ref{section:IntroDataComponent}) for various tasks. Examples are:
+to plug-in DataComponents\footnote{Section \ref{section:IntroDataComponent}} for various tasks. Examples are:
 \begin{itemize}
  \item Simulation Engines
  \item Model Visualizers
@@ -183,7 +195,7 @@ An execution consists of a initialization, stepping and wrap-up.
 \index{Model file}
 \begin{figure}
   \centering
-  \includegraphics[scale=.8]{abro.pdf}
+  \includegraphics[scale=.9]{abro.pdf}
   \caption[An example for a simple syncchart diagram.]%
   {An example for a simple syncchart diagram.\protect}
   \label{fig:abro}
@@ -195,8 +207,8 @@ them here.
 A model file can be any file that contains the structure and behavior of a semantic entity. This can be something as
 simple as a text file containing a list of elements in a certain order. Most model files that are used in
 the \ac{KIELER} project are diagrams that consist of nodes and links. These \textit{synccharts} are build in
-a hierarchical structure and are therefore stored as a tree of different elements. For an example of a simple
-syncchart see Figure \ref{fig:abro}.
+a hierarchical structure and are therefore stored as a tree of different elements. An example for a simple
+syncchart diagram is shown in Figure \ref{fig:abro}.
 
 \section{Related Work}
 \label{section:RelatedWork}

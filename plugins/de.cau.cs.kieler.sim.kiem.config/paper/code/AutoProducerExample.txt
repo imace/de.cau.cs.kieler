@@ -1,0 +1,7 @@
+public List<KiemProperty> produceInformation() {
+    List<KiemProperty> res = new LinkedList<KiemProperty>();
+    res.add(new KiemProperty("Est. Reaction Time", assembler.getTickLen()));
+    res.add(new KiemProperty("Reaction Time", "{" + minRT + "/ "
+        + (steps == 0 ? 0 : rt / steps) + "/" + maxRT + "}"));
+    return res;
+}

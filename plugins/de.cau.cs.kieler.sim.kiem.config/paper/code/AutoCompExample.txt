@@ -1,0 +1,25 @@
+public void setParameters(List<KiemProperty> properties) {
+    String model = null;
+    for (KiemProperty p : properties) {
+        if (p.getKey().equals(MODEL_FILE)) {
+            model = p.getValue();
+        }
+    }
+    if (model != null) {
+        modelFile = Path.fromOSString(model);
+    }
+}
+
+public int wantsMoreRuns() {
+    return traceFileList.size() - currentIterationIndex;
+}
+
+public int wantsMoreSteps() {
+    return traceList.hasNext() ? 1 : 0;
+}
+
+private static final String[] SUPPORTED_FILES = {"strl", "kixs"};
+
+public String[] getSupportedExtensions() {
+    return SUPPORTED_FILES;
+}

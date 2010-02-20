@@ -31,7 +31,7 @@ amount of files used.
 Another approach is the selection of the files through a dialog.
 Here the first option is to write a new dialog from scratch. While this option
 ensures flexibility since only the elements that are really needed are on it in
-exactly the way they are needed some disadvantages come along:
+exactly the way they are needed there are still some disadvantages:
 \begin{itemize}
  \item It involves a lot of work since every widget has to be manually placed on the dialog.
  \item It involves even more work to get the layout of the dialog just right.
@@ -39,7 +39,7 @@ exactly the way they are needed some disadvantages come along:
 
 A more comprehensive approach would be to use one of the dialogs provided by Eclipse specifically the wizard type dialog.
 Eclipse itself uses a host of wizards as explained in Section \ref{section:AutoTechWizards}.
-The wizard has several advantages over the other methods explained here:
+The wizard has several advantages over the other methods explained above:
 \index{Wizard}
 \begin{itemize}
  \item Even inexperienced users can be guided to set up a valid execution run.
@@ -51,11 +51,11 @@ The wizard has several advantages over the other methods explained here:
 \section{Input for the Automation}
 \label{section:AutoConceptsInput}
 \index{DataComponent}
-In order to send information to the DataComponents (see Section \ref{section:IntroDataComponent})
+In order to send information to the DataComponents\footnote{Section \ref{section:IntroDataComponent}}
 the first decision must consider the form of the information that will be supplied.
-The chosen form is that of a list of (key, value) pairs. It allows for most
+The chosen form is that of a list of (key, value) pairs. This format supplies the greatest
 flexibility while still being very generic and simple to read and write on.
-This list of properties will at least include the path to the model file (see Section \ref{section:IntroModelFile}) in order
+This list of properties will at least include the path to the model file\footnote{Section \ref{section:IntroModelFile}} in order
 for components to be executed with several different model files without having
 to alter the code between runs.
 
@@ -93,7 +93,7 @@ Automating the execution itself requires the plug-in to interact with the Execut
 There is already an \ac{API} defined for loading an execution file by supplying a path so that
 is what will be used in this project.
 Then it is necessary to initialize the execution and step through it using the \ac{API}
-methods provided in the Execution Manager. For this the EventListener extension point (see Section \ref{section:EventListener}) of the 
+methods provided in the Execution Manager. For this the EventListener extension point\footnote{Section \ref{section:EventListener}} of the 
 Execution Manager can also be used in order to determine when a step has finished executing and
 a new one can be dispatched.
 After the execution is finished all components should be called again to be given

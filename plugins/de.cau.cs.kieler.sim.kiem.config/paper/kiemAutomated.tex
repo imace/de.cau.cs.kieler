@@ -2,8 +2,8 @@
 This chapter describes the Automated Execution plug-in that is responsible for handling
 the setup, control flow and display of an automated execution run.
 Although the plug-in is structured according to the model-view-controller pattern this
-is not the structure that this chapter will to describe it. Instead this chapter will
-follow the structure already used in the previous chapters. Which means the chapter will
+is not the structure that this chapter will use to describe it. Instead this chapter will
+follow the structure already used in the previous chapters. This means that the chapter will
 consist of four parts:
 \begin{enumerate}
  \item The setup of an automated execution run with a description of the wizard.
@@ -78,7 +78,7 @@ model file is selected. Otherwise an error marker will be displayed in the page 
 \label{section:PropertySettingPage}
 \begin{figure}
   \centering
-  \includegraphics[scale=.4]{PropertySettingPage.png}
+  \includegraphics[scale=.5]{PropertySettingPage.png}
   \caption[The Wizard Page for setting up user defined properties.]%
   {The Wizard Page for setting up user defined properties.\protect}
   \label{fig:PropertySettingPage}
@@ -123,10 +123,16 @@ had to be created in order to interact with the components.
 \subsection{Automated Component}
 \label{section:AutomatedComponent}
 \index{Automated Component}
-An automated component is any DataComponent (see Section \ref{section:IntroDataComponent}) that wants to interact with
+\listingjava
+\showlistingex{code/AutoCompExample.txt}
+{Java}
+{Implementation example of an Automated Component.}
+{list:AutoCompExample}
+{t}
+An automated component is any DataComponent\footnote{Section \ref{section:IntroDataComponent}} that wants to interact with
 the automated execution plug-in. An automated component has to provide the following methods:
 
-\begin{description}
+\begin{itemize}
  \item \textbf{String[] getSupportedExtensions()} :
 
 This method is used in order to avoid the automated run encountering errors while trying to
@@ -165,28 +171,39 @@ This method works analog to the wantsMoreSteps() method in the context
 of entire execution runs. It is used to determine how many iterations
 should be performed with the given combination of execution file and model
 file.
-\end{description}
+\end{itemize}
+
+To illustrate the usage of the methods described above an implementation example
+is shown in Listing \ref{list:AutoCompExample}.
 
 \subsection{Automated Producer}
 \label{section:AutomatedProducer}
-This interface extends the AutomatedComponent interface.
+\listingjava
+\showlistingex{code/AutoProducerExample.txt}
+{Java}
+{Implementation example of an Automated Producer.}
+{list:AutoProducerExample}
+{t}
+The Automated Producer interface extends the AutomatedComponent interface.
 In addition to the inherited methods it provided one additional method.
 
-\begin{description}
+\begin{itemize}
  \item \textbf{List<KiemProperty> produceInformation()} : 
-
 This method is called after an iteration has finished and asks the components
 if they want to publish any information about the results of their execution.
 This information is gathered by the plug-in and the accumulated results
 are either passed to the calling plug-in or displayed in the
-specially designed view (see Section \ref{section:AutoView}).
+specially designed view\footnote{Section \ref{section:AutoView}}.
 
 The component is free to publish any amount of information using any of the 
 different KiemProperty types. However the number and order of the properties
 in the list has to stay the same through all iterations with one execution file.
 This restriction is necessary in order to be able to build one large table
 rather than many small ones.
-\end{description}
+\end{itemize}
+
+An example for the implementation of an Automated Producer can be seen in
+Listing \ref{list:AutoProducerExample}. 
 
 
 \section{The Automated Run}
@@ -213,7 +230,15 @@ run of the automation.
 \subsection{Automation Job}
 \label{section:AutomationJob}
 \index{Automation Job}
-The Automation Job is used to run the automated execution in. As a WorkbenchJob it can execute parallel
+\begin{figure}
+  \centering
+  \includegraphics[scale=.6]{AutomationJob.png}
+  \caption[The Automation Job showing the progress of an automated run.]%
+  {The Automation Job showing the progress of an automated run.\protect}
+  \label{fig:AutomationJob}
+\end{figure}
+The Automation Job shown in Figure \ref{fig:AutomationJob} is used to run the automated execution in. 
+As a WorkbenchJob it can execute parallel
 to the normal operation of the \ac{GUI} without blocking it. It also comes with a progress monitor that
 is updated by the Automation Manager through the course of the automated execution. Since an automated run
 can take a very long time the user can also tell the job to run in the background while still being able
@@ -237,7 +262,12 @@ run based on the available information. During the run the Automation Manager al
 that will be displayed as results by the view.
 
 \begin{enumerate}
- \item \label{item:initiateProgressMonitor} The Automation Manager starts by initializing the 
+ \item \label{item:initiateProgressMonitor} \textbf{Initiate Progress Monitor} :
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=.9]{/longEnum/step1.pdf}
+\end{figure}
+The Automation Manager starts by initializing the 
 progress monitor that displays the progress of the automated execution. 
 The displayed message of the monitor is set up and the total length of the execution is 
 calculated in order for the progress bar to be displayed.
@@ -248,35 +278,65 @@ progress monitor will display a progress bar that advances with each completed m
 However this method would be meaningless if only one execution file and one model file
 are used. In this case the progress bar will just show that progress is occurring at all.
 
- \item \label{item:saveOpenedFile} In this step the Automation Manager stores the path
+ \item \label{item:saveOpenedFile} \textbf{Save Current Execution File} :
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=.9]{/longEnum/step2.pdf}
+\end{figure}
+In this step the Automation Manager stores the path
 of the execution file that is currently opened inside the Execution Manager. The reason for this
 is that the user might want to continue working on that file after the automated execution
 has finished. If the file wasn't stored he would be left with the last execution file
 that the automated run simulates. The file is restored in Step \ref{item:restoreFile}.
 
- \item \label{item:initiateCancelManager} The next step is to initiate the Cancel Manager
+ \item \label{item:initiateCancelManager} \textbf{Initiate CancelManager} :
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=.9]{/longEnum/step3.pdf}
+\end{figure}
+The next step is to initiate the Cancel Manager
 described in Section \ref{section:CancelManager}. This also involves registering as listener on the 
-modified ErrorHandler (see Section \ref{section:ErrorHandler}) to prevent any Exception
+modified ErrorHandler\footnote{Section \ref{section:ErrorHandler}} to prevent any Exception
 from interfering with the automated run.
 
- \item \label{item:checkExecutionFile} Since all parameters for the automated execution
+ \item \label{item:checkExecutionFile} \textbf{Check Execution File} :
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=.9]{/longEnum/step4.pdf}
+\end{figure}
+Since all parameters for the automated execution
 have been set up now the Automation Manager can start working on the first execution file. The first
 thing to do here is to open the execution file inside the Execution Manager. If this fails the automation
 writes an entry into the error log and proceeds to the next execution file. Otherwise it proceeds to the
 next step. If all execution files have finished the automation will skip to Step \ref{item:automationDone}.
 
- \item \label{item:setupExecutionFile} The next step is to initiate all variables that are needed
+ \item \label{item:setupExecutionFile} \textbf{Execution File Setup} :
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=.9]{/longEnum/step5.pdf}
+\end{figure}
+The next step is to initiate all variables that are needed
 for the currently active execution file. The manager first asks the view to create a new table to
 display the results that the execution will produce. After that all components will be asked
-for the list of model file extensions that they support (see Section \ref{section:AutomatedComponent}).
+for the list of model file extensions that they support\footnote{Section \ref{section:AutomatedComponent}}.
 
- \item \label{item:checkModelFile} With the information about the supported model file extensions
+ \item \label{item:checkModelFile} \textbf{Check Model File} :
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=.9]{/longEnum/step6.pdf}
+\end{figure}
+With the information about the supported model file extensions
 gathered in the previous step the automation can start to examine the first model file. If any component
 in the current execution file supports the given model file the automation proceeds to the next step.
 Otherwise it skips to the next model file. If all model files on the current execution file
 have finished it will proceed to Step \ref{item:checkExecutionFile} with the next execution file.
 
- \item \label{item:notifyObservers} The first thing that happens when the Automated Manager decides
+ \item \label{item:notifyObservers} \textbf{Notify Observers} :
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=.9]{/longEnum/step7.pdf}
+\end{figure}
+The first thing that happens when the Automated Manager decides
 that a model file should be simulated is that all Automated Components will be notified with the
 list of parameters. 
 
@@ -287,7 +347,12 @@ may choose to write information back into the list in order to communicate with 
 components. Therefore the list will be passed to all components twice if the size changed
 between after the first notification.
 
- \item \label{item:askForRuns} Since the components now have all the necessary information for
+ \item \label{item:askForRuns} \textbf{Number of Runs} :
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=.9]{/longEnum/step8.pdf}
+\end{figure}
+Since the components now have all the necessary information for
 the first iteration they might already be able to approximate how many iterations they want to
 execute. Therefore all components will be asked through the methods provided in the interface
 and the maximum value used.
@@ -299,16 +364,26 @@ the automation will continue on Step \ref{item:checkModelFile} with the next mod
 If any component answers with a non-zero value the automation will move to the next step and
 perform at least that many iterations, baring user cancellation of course.
 
- \item \label{item:checkIteration} Since set up of the model file has now finished the 
+ \item \label{item:checkIteration} \textbf{Check Iteration} :
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=.9]{/longEnum/step9.pdf}
+\end{figure}
+Since set up of the model file has now finished the 
 automation now checks if an iteration should be executed. It first checks whether the
 number of remaining iterations has reached zero in which case no component requested
 another run. It then checks whether the current model file was skipped through the 
-Cancel Manager (see Section \ref{section:CancelManager}). If both checks turn out to 
+Cancel Manager\footnote{Section \ref{section:CancelManager}}. If both checks turn out to 
 be negative it proceeds to the next step after decrementing the amount of remaining
 iterations. If one of the checks hold true it continues on Step \ref{item:checkModelFile}
 with the next model file.
 
- \item \label{item:setupIteration} In this step the Automation Manager sets up all 
+ \item \label{item:setupIteration} \textbf{Iteration Setup} :
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=.9]{/longEnum/step10.pdf}
+\end{figure}
+In this step the Automation Manager sets up all 
 parameters that are needed for the current iteration.
 
 It starts by updating the text in the progress monitor in order to reflect the
@@ -316,8 +391,8 @@ current status of the automation. The displayed text shows the current model fil
 and execution file, the iteration index and how many iterations are to be expected
 based on the value retrieved from the components.
 
-After that the manager adds a new row to the resulting table inside the view (see Section
-\ref{section:AutoView}). This has to be done at this stage in order to show the 
+After that the manager adds a new row to the resulting table inside the view\footnote{Section
+\ref{section:AutoView}}. This has to be done at this stage in order to show the 
 status of the currently executing iteration before it has finished.
 
 Before the execution can proceed the components first have to be passed the list
@@ -327,7 +402,12 @@ the same method as described in Step \ref{item:notifyObservers}.
 After all the preparations have been completed the automation proceeds to the next
 step.
  
- \item \label{item:initExecution} The next step is to access the Execution Manager
+ \item \label{item:initExecution} \textbf{Initialize Execution} :
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=.9]{/longEnum/step11.pdf}
+\end{figure}
+The next step is to access the Execution Manager
 itself in order to initialize the execution. The Execution Manager will set up all
 DataComponents and create the thread in which the execution is run.
 
@@ -337,23 +417,38 @@ by the Execution Manager itself if the execution file can be loaded but not exec
 
 If the initialization was successful the Automation Manager continue to the next step.
 
- \item \label{item:askForSteps1} Before the automated execution can begin to step through
+ \item \label{item:askForSteps1} \textbf{Initial Number of Steps} :
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=.9]{/longEnum/step12.pdf}
+\end{figure}
+Before the automated execution can begin to step through
 the execution it has to ask the components if any steps should be performed. Due to some results
 from previous iterations the components might decide that they don't need to simulate a particular
 trace file, for example. In this case they need an opportunity to notify the Automation Manager
 of these circumstances which will be done in this step.
 
 The Automation Manager will ask each Automated Component how many steps they expect to
-need for their execution (see Section \ref{section:AutomatedComponent}). The maximum of
+need for their execution\footnote{Section \ref{section:AutomatedComponent}}. The maximum of
 all components will be taken and at least that many steps will be performed before asking again.
 
- \item \label{item:checkExecution} With the information of the previous step the Automated Manager
+ \item \label{item:checkExecution} \textbf{Check Execution} :
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=.9]{/longEnum/step13.pdf}
+\end{figure}
+With the information of the previous step the Automated Manager
 will determine whether or not the execution should resume. It first checks if the number of requested
 steps has reached zero. After that it checks if the Cancel Manager requests a cancellation
 of the current iteration. If one of these conditions hold true the automation will skip to
 Step \ref{item:IterationWrapup}. Otherwise it will continue to the next step.
 
- \item \label{item:performStep} The Automation is now ready to perform a step in the Execution Manager.
+ \item \label{item:performStep} \textbf{Perform a Step} :
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=.9]{/longEnum/step14.pdf}
+\end{figure}
+The Automation is now ready to perform a step in the Execution Manager.
 However it first resets the timeout in the monitoring thread inside the Cancel Manager. The thread will
 abort the current step if the timeout is reached.
 
@@ -370,7 +465,12 @@ through the extension point described in Section \ref{section:EventListener}. In
 the automation proceeds to the next step.
   \end{itemize}
 
- \item \label{item:askForSteps2} After the step was successfully executed the Automation Manager has
+ \item \label{item:askForSteps2} \textbf{Number of Steps} :
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=.9]{/longEnum/step15.pdf}
+\end{figure}
+After the step was successfully executed the Automation Manager has
 to check if more steps should be performed. If at this stage the number of remaining steps has
 reached zero and the iteration was not canceled by the Cancel Manager the Automated Manager will
 ask all Automated Components how many more steps they need to perform (see Step \ref{item:askForSteps1}).
@@ -378,23 +478,33 @@ ask all Automated Components how many more steps they need to perform (see Step 
 If more steps should be performed the Automation Manager will proceed to Step \ref{item:checkExecution}. Otherwise
 the current iteration will be paused and wrapped up in the next step.
 
- \item \label{item:IterationWrapup} This phase will be executed if the iteration was completed successfully
+ \item \label{item:IterationWrapup} \textbf{Iteration Wrapup} :
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=.9]{/longEnum/step16.pdf}
+\end{figure}
+This phase will be executed if the iteration was completed successfully
 or an error occurred. In any case some wrap-up has to be performed in order to allow the next iteration to
 be performed or to tidily shut down the entire execution.
 
 The cleanup will start by terminating the thread that watches for timeouts during the currently executing
 step and user cancellations. This has to be done because the wrap-up code should not be interrupted.
 
-After that all Automated Producers (see Section \ref{section:AutomatedProducer}) will be asked to
+After that all Automated Producers\footnote{Section \ref{section:AutomatedProducer}} will be asked to
 publish their results. The accumulated results together with the index of the last step will be
-forwarded to the view in order to update the table (see Section \ref{section:AutoView}).
+forwarded to the view in order to update the table\footnote{Section \ref{section:AutoView}}.
 
 As soon as the results were retrieved from all components the current execution inside the Execution
 Manager is no longer needed. The Automation Manager triggers the synchronous stop of the paused 
 execution. This will cause the Execution Manager to terminate all worker threads and get ready for 
 the next execution that has to be run.
 
- \item \label{item:iterationDone} If the iteration completed without an error the status will be
+ \item \label{item:iterationDone} \textbf{Iteration Finished} :
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=.9]{/longEnum/step17.pdf}
+\end{figure}
+If the iteration completed without an error the status will be
 set to ``Done''. If the counter for the remaining iterations has reached zero the components will
 be asked if they want to perform more iterations by the same method as in Step \ref{item:askForRuns}.
 
@@ -402,18 +512,33 @@ If more iterations should be performed the iteration index is incremented and th
 to Step \ref{item:checkIteration}. Otherwise the Automation Manager proceeds to finishing the 
 current model file in the next step.
 
- \item \label{item:modelFileDone} Since all iterations for the current model file have been finished
+ \item \label{item:modelFileDone} \textbf{Model File Finished} :
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=.9]{/longEnum/step18.pdf}
+\end{figure}
+Since all iterations for the current model file have been finished
 the automation will perform the progress monitor of that fact which will cause a progress bar to
 advance.
 
 If there are more model files to simulate under the current execution file the automation will
 return to Step \ref{item:checkModelFile}.
 
- item \label{item:executionFileDone} At this point the automation has finished with the last model file
+ \item \label{item:executionFileDone} \textbf{Execution File Finished} :
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=.9]{/longEnum/step19.pdf}
+\end{figure}
+At this point the automation has finished with the last model file
 under the current execution file. If there are more execution files to be loaded the Automated Manager
 will return to Step \ref{item:checkExecutionFile}.
 
- \item \label{item:automationDone} Since the entire automated execution has now finished another wrap-up
+ \item \label{item:automationDone} \textbf{Automation Finished} :
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=.9]{/longEnum/step20.pdf}
+\end{figure}
+Since the entire automated execution has now finished another wrap-up
 stage has to be initiated. 
 
 First the Automation Manager will remove the listener on the ErrorHandler that was added on Step
@@ -424,13 +549,18 @@ avoided.
 After that the progress monitor will be informed that the job was finished. This will cause the 
 dialog to disappear.
 
- \item \label{item:restoreFile} The last thing to do before the Automation Job can terminate is
+ \item \label{item:restoreFile} \textbf{Restore Saved File} :
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=.9]{/longEnum/step21.pdf}
+\end{figure}
+The last thing to do before the Automation Job can terminate is
 that the file stored in Step \ref{item:saveOpenedFile} is opened in the Execution Manager. This is
 done in order to allow the user to continue his previous work.
 \end{enumerate}
 
 After the Automation Manager has finished the entire automated execution the user can look at
-the complete results in the view or export them into an external format (see Section \ref{section:AutoView}).
+the complete results in the view or export them into an external format\footnote{Section \ref{section:AutoView}}.
 
 \subsection{Cancel Manager}
 \label{section:CancelManager}
@@ -448,7 +578,7 @@ chosen because no cleanup could be performed and it would make skipping only cer
 Skipping only certain parts of the entire automation is necessary in case an error occurs
 or the user wants to skip a certain model file, for example, because it was added by mistake.
 The Cancel Manager provides the following cancellation option which are supported by
-actions on the tool bar (see Section \ref{section:AutoToolbar}):
+actions on the tool bar\footnote{Section \ref{section:AutoToolbar}}:
 \begin{enumerate}
  \item \textbf{Skip iteration} : During an automated run the user might realize that an
 iteration has somehow locked up or isn't aborting because the components keep requesting more
@@ -583,7 +713,7 @@ components a shared table would look more confusing than helpful.
   \label{fig:AutoToolbar}
 \end{figure}
 The tool bar on the Automation View contains several actions for controlling the automated 
-execution before, during and after its run (see Figure \ref{fig:AutoToolbar}).
+execution before, during and after its run\footnote{Figure \ref{fig:AutoToolbar}}.
 The different controls have the following functionality (left-to-right):
 \begin{enumerate}
  \item \textbf{Current Step Field} : During the automated run this field displays the
@@ -600,7 +730,7 @@ is realized through this button.
 Automation Wizard. The button exists both here and on the Execution Manager's tool bar
 in order to allow easy access to the automation.
  \item The next four buttons are used for performing one of the skipping actions supported
-by the Cancel Manager (see Section \ref{section:CancelManager}):
+by the Cancel Manager\footnote{Section \ref{section:CancelManager}}:
 
 \includegraphics{stopIteration.png} Perform a deferred termination of the current 
 iteration and proceed to the next index.
@@ -640,7 +770,7 @@ Since the exported files are supposed to be used in other applications as well t
 % required packages:
 % \usepackage{multicol}
 % \usepackage{multirow}
-\begin{table}[b]
+\begin{table}[t]
 \begin{tabular}{| l | p{1.2cm} | p{1.2cm} | p{1.2cm} | p{1cm} | p{1.4cm} | p{0.5cm} | } \hline
 \multicolumn{4}{|c|}{}
  & \multicolumn{2}{c|}{Krep}
@@ -667,3 +797,31 @@ Model file & Iteration & Status & Finished on step & Est. Reaction Time & Reacti
 To illustrate the results of such a transformation the table shown in Figure \ref{fig:AutoView} is
 transformed in both formats. The resulting \ac{CSV} file can be seen in Listing \ref{list:CSVExample}. The same
 results exported to \LaTeX can be viewed in Table \ref{table:LatexExample}.
+
+\section{Application Examples}
+This section gives some examples of the capabilities of the automated execution plug-in.
+
+\subsection{Application in Teaching}
+One of the possible applications of the newly created plug-in can be found in the context of teaching itself.
+A group of students may receive the task to create a synccharts model that implements a certain functionality.
+The instructor would then have to manually look at each model and check it does indeed conform to the 
+specifications. If the group of students is sufficiently large this could take a long time.
+
+However with the \ac{KIEMAuto} plug-in the instructor only has to define a set of trace files which are then
+used to test the different functionality. The entire evaluation of the students models can then be achieved
+in a matter of minutes with minimal interaction from the instructor.
+
+\subsection{Application in Artificial Intelligence}
+Another application could be in the field of \ac{AI} specifically in the training of an \ac{ANN}. \ac{ANN}s
+are basically build like the human brain. They consist of a net of synapses with each synapse triggering
+connected synapses when a certain condition arises. This training is usually realized by providing a set
+of inputs with the expected outputs and feed them into the \ac{ANN}. The network then runs the inputs through
+its net of synapses and compares the created outputs to the expected ones. After that the network will then
+adjust the conditions at which the synapses trigger their neighbors in order to match the expected outputs.
+This process continues until the \ac{ANN} has received sufficient training and can more or less reliably
+generate correct outputs for inputs which don't exactly match the training inputs.
+
+This process could easily be automated through the use of the \ac{KIEMAuto} plug-in. A DataComponent has to
+be implemented which manages a \ac{ANN} it receives in the form of a model file. The only thing to do would
+be to run the trace files through the model file during the automated execution and adjust the model file
+after each iteration. 
