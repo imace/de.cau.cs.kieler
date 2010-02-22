@@ -32,10 +32,10 @@ public class CakefeedPortLabelLocator extends BorderItemLocator {
 		if (portFigure != null) {
 			int x = 0;
 			if (input) {
-				x = portFigure.getBounds().x + portFigure.getBounds().width;
+				x = portFigure.getBounds().x + portFigure.getBounds().width + 10;
 			}
 			else {
-				x = portFigure.getBounds().x - newLocation.width;
+				x = portFigure.getBounds().x - newLocation.width - 10;
 			}
 			newLocation.x = x;
 			newLocation.y = portFigure.getBounds().y + (portFigure.getBounds().height
