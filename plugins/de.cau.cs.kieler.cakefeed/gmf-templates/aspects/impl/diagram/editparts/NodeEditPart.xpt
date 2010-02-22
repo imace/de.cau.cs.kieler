@@ -125,23 +125,31 @@
 				«REM»Changed locator«ENDREM»
 				«IF self.editPartClassName = "IFInputEventEditPart"-»
 				new de.cau.cs.kieler.cakefeed.custom.CakefeedPortLabelLocator(getMainFigure(), org.eclipse.draw2d.PositionConstants.SOUTH, true);
+				locator.setBorderItemOffset(new org.eclipse.draw2d.geometry.Dimension(-10, -10));
 				«ELSEIF self.editPartClassName = "IFOutputEventEditPart"-»
 				new de.cau.cs.kieler.cakefeed.custom.CakefeedPortLabelLocator(getMainFigure(), org.eclipse.draw2d.PositionConstants.SOUTH, false);
+				locator.setBorderItemOffset(new org.eclipse.draw2d.geometry.Dimension(-10, -10));
 				«ELSEIF self.editPartClassName = "IFInputVarEditPart"-»
 				new de.cau.cs.kieler.cakefeed.custom.CakefeedPortLabelLocator(getMainFigure(), org.eclipse.draw2d.PositionConstants.SOUTH, true);
+				locator.setBorderItemOffset(new org.eclipse.draw2d.geometry.Dimension(-10, -10));
 				«ELSEIF self.editPartClassName = "IFOutputVarEditPart"-»
 				new de.cau.cs.kieler.cakefeed.custom.CakefeedPortLabelLocator(getMainFigure(), org.eclipse.draw2d.PositionConstants.SOUTH, false);
+				locator.setBorderItemOffset(new org.eclipse.draw2d.geometry.Dimension(-10, -10));
 				«ELSEIF self.editPartClassName = "FBInputEventEditPart"-»
 				new de.cau.cs.kieler.cakefeed.custom.CakefeedPortLabelLocator(getMainFigure(), org.eclipse.draw2d.PositionConstants.SOUTH, true);
+				locator.setBorderItemOffset(new org.eclipse.draw2d.geometry.Dimension(-10, -10));
 				«ELSEIF self.editPartClassName = "FBOutputEventEditPart"-»
 				new de.cau.cs.kieler.cakefeed.custom.CakefeedPortLabelLocator(getMainFigure(), org.eclipse.draw2d.PositionConstants.SOUTH, false);
+				locator.setBorderItemOffset(new org.eclipse.draw2d.geometry.Dimension(-10, -10));
 				«ELSEIF self.editPartClassName = "FBInputVarEditPart"-»
 				new de.cau.cs.kieler.cakefeed.custom.CakefeedPortLabelLocator(getMainFigure(), org.eclipse.draw2d.PositionConstants.SOUTH, true);
+				locator.setBorderItemOffset(new org.eclipse.draw2d.geometry.Dimension(-10, -10));
 				«ELSEIF self.editPartClassName = "FBOutputVarEditPart"-»
 				new de.cau.cs.kieler.cakefeed.custom.CakefeedPortLabelLocator(getMainFigure(), org.eclipse.draw2d.PositionConstants.SOUTH, false);
+				locator.setBorderItemOffset(new org.eclipse.draw2d.geometry.Dimension(-10, -10));
 				«ELSE-»
 				new org.eclipse.gmf.runtime.diagram.ui.figures.BorderItemLocator(getMainFigure(), org.eclipse.draw2d.PositionConstants.SOUTH);
-				locator.setBorderItemOffset(new org.eclipse.draw2d.geometry.Dimension(-20, -20));
+				locator.setBorderItemOffset(new org.eclipse.draw2d.geometry.Dimension(-10, -10));
 				«ENDIF-»
 				«REM»Changed locator«ENDREM»
 				borderItemContainer.add(borderItemEditPart.getFigure(), locator);
