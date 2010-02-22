@@ -1,7 +1,6 @@
 package de.cau.cs.kieler.cakefeed.custom;
 
 import org.eclipse.draw2d.ColorConstants;
-import org.eclipse.draw2d.Figure;
 import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.Shape;
 import org.eclipse.draw2d.geometry.PointList;
@@ -11,6 +10,11 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.gmf.runtime.diagram.ui.l10n.DiagramColorRegistry;
+import org.eclipse.swt.graphics.Device;
+import org.eclipse.swt.graphics.RGB;
+import org.eclipse.swt.graphics.Color;
+
 import de.cau.cs.kieler.cakefeed.FB;
 import de.cau.cs.kieler.cakefeed.FBType;
 import de.cau.cs.kieler.cakefeed.IFInputEvent;
@@ -63,7 +67,8 @@ public class FBTypeFigure extends Shape implements Adapter, IAttributeAwareFigur
 	
 	@Override
 	protected void fillShape(Graphics graphics) {
-		this.setBackgroundColor(ColorConstants.lightGray);
+		RGB greyblue = new RGB(200, 200, 255);
+		this.setBackgroundColor(DiagramColorRegistry.getInstance().getColor(greyblue));
 		PointList points = computePoints(getBounds());
 		graphics.drawPolygon(points);
 	}
