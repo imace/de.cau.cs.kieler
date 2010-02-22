@@ -1,21 +1,53 @@
 package de.cau.cs.kieler.cakefeed.custom;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.draw2d.AbstractHintLayout;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.StackLayout;
-import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Rectangle;
-import org.eclipse.gmf.runtime.diagram.ui.figures.BorderedNodeFigure;
-import org.eclipse.gmf.runtime.diagram.ui.figures.ResizableCompartmentFigure;
-import org.eclipse.gmf.runtime.diagram.ui.internal.figures.BorderItemContainerFigure;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
-import org.eclipse.gmf.runtime.gef.ui.figures.DefaultSizeNodeFigure;
 
-public class FBTypeLayout extends StackLayout {}
+public class FBTypeLayout extends StackLayout {
 
+	@Override
+	public void layout(IFigure container) {
+		if (!container.isVisible()) {
+			return;
+		}
+		if (container instanceof FBTypeFigure) {
+			super.layout(container);
+			FBTypeFigure fBTypeFigure = (FBTypeFigure)container;
+			WrappingLabel nameLabel = getLabel(container);
+			Rectangle newBounds = new Rectangle();
+			fBTypeFigure.computeRectangles();
+			newBounds.x = fBTypeFigure.getCtrlRectangle().x
+						  + (fBTypeFigure.getCtrlRectangle().width 
+							 - nameLabel.getPreferredSize().width) / 2;
+			newBounds.y = fBTypeFigure.getCtrlRectangle().y 
+						  + fBTypeFigure.getCtrlRectangle().height
+						  + (fBTypeFigure.getDataRectangle().y 
+							 - fBTypeFigure.getCtrlRectangle().y 
+							 - fBTypeFigure.getCtrlRectangle().height) / 2
+						  - nameLabel.getPreferredSize().height / 2;
+			newBounds.width = nameLabel.getPreferredSize().width;
+			newBounds.height = nameLabel.getPreferredSize().height;
+			nameLabel.setBounds(newBounds);
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	private WrappingLabel getLabel(IFigure container) {
+		WrappingLabel label = null;
+		List<IFigure> children = container.getChildren();
+		for (IFigure child : children) {
+			if (child instanceof WrappingLabel) {
+				label = (WrappingLabel)child;
+			}
+		}
+		return label;
+	}
+}
+	
 /*public class FBTypeLayout extends AbstractHintLayout {
 
 	protected List<IFigure> inputEventFigures;

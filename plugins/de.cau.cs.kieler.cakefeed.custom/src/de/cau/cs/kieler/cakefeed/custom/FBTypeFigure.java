@@ -195,7 +195,7 @@ public class FBTypeFigure extends Shape implements Adapter, IAttributeAwareFigur
 		this.repaint();
 	}
 
-	private void computeRectangles() {
+	public void computeRectangles() {
 		PointList points = computePoints(getCorrectBounds());
 		ctrlRectangle.x = points.getPoint(0).x;
 		ctrlRectangle.y = points.getPoint(0).y;
