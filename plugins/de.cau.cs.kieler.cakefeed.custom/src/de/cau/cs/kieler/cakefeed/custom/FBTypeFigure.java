@@ -70,7 +70,7 @@ public class FBTypeFigure extends Shape implements Adapter, IAttributeAwareFigur
 		RGB greyblue = new RGB(200, 200, 255);
 		this.setBackgroundColor(DiagramColorRegistry.getInstance().getColor(greyblue));
 		PointList points = computePoints(getBounds());
-		graphics.drawPolygon(points);
+		graphics.fillPolygon(points);
 	}
 
 	private PointList computePoints(Rectangle bounds) {
@@ -90,13 +90,13 @@ public class FBTypeFigure extends Shape implements Adapter, IAttributeAwareFigur
 		
 		PointList pointList = new PointList();
 		pointList.addPoint(x0, y0);
-		pointList.addPoint(x3, y0);
-		pointList.addPoint(x3, y1);
+		pointList.addPoint(x3-1, y0);
+		pointList.addPoint(x3-1, y1);
 		pointList.addPoint(x2, y1);
 		pointList.addPoint(x2, y2);
-		pointList.addPoint(x3, y2);
-		pointList.addPoint(x3, y3);
-		pointList.addPoint(x0, y3);
+		pointList.addPoint(x3-1, y2);
+		pointList.addPoint(x3-1, y3-1);
+		pointList.addPoint(x0, y3-1);
 		pointList.addPoint(x0, y2);
 		pointList.addPoint(x1, y2);
 		pointList.addPoint(x1, y1);
@@ -107,32 +107,8 @@ public class FBTypeFigure extends Shape implements Adapter, IAttributeAwareFigur
 	@Override
 	protected void outlineShape(Graphics graphics) {
 		this.setForegroundColor(ColorConstants.black);
-		
-		float lineInset = Math.max(1.0f, getLineWidthFloat()) / 2.0f;
-	    int inset1 = (int)Math.floor(lineInset);
-	    int inset2 = (int)Math.ceil(lineInset);
-
-	    Rectangle r = Rectangle.SINGLETON.setBounds(getBounds());
-	    r.x += inset1 ; 
-	    r.y += inset1; 
-	    r.width -= inset1 + inset2;
-	    r.height -= inset1 + inset2;
-		
-		PointList points = computePoints(r);
-		graphics.fillPolygon(points);
-	}
-
-	private Rectangle getCorrectBounds() {
-		float lineInset = Math.max(1.0f, getLineWidthFloat()) / 2.0f;
-	    int inset1 = (int)Math.floor(lineInset);
-	    int inset2 = (int)Math.ceil(lineInset);
-
-	    Rectangle r = Rectangle.SINGLETON.setBounds(getBounds());
-	    r.x += inset1 ; 
-	    r.y += inset1; 
-	    r.width -= inset1 + inset2;
-	    r.height -= inset1 + inset2;
-		return r;
+		PointList points = computePoints(getBounds()); //test
+		graphics.drawPolygon(points);
 	}
 
 	@Override
@@ -196,7 +172,7 @@ public class FBTypeFigure extends Shape implements Adapter, IAttributeAwareFigur
 	}
 
 	public void computeRectangles() {
-		PointList points = computePoints(getCorrectBounds());
+		PointList points = computePoints(/*getCorrectBounds()*/getBounds());
 		ctrlRectangle.x = points.getPoint(0).x;
 		ctrlRectangle.y = points.getPoint(0).y;
 		ctrlRectangle.width = points.getPoint(2).x - points.getPoint(0).x;
