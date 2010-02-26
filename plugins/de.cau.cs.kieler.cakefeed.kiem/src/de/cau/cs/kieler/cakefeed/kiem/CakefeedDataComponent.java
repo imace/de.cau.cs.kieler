@@ -30,11 +30,11 @@ import org.w3c.dom.NodeList;
 import de.cau.cs.kieler.cakefeed.DataConnection;
 import de.cau.cs.kieler.cakefeed.Event;
 import de.cau.cs.kieler.cakefeed.EventConnection;
-import de.cau.cs.kieler.cakefeed.FB;
-import de.cau.cs.kieler.cakefeed.FBType;
+import de.cau.cs.kieler.cakefeed.FunctionBlock;
+import de.cau.cs.kieler.cakefeed.FunctionBlockType;
 import de.cau.cs.kieler.cakefeed.NamedAndCommented;
 import de.cau.cs.kieler.cakefeed.Var;
-import de.cau.cs.kieler.cakefeed.fbnetwork.diagram.edit.parts.FBNetworkEditPart;
+import de.cau.cs.kieler.cakefeed.fbnetwork.diagram.edit.parts.FunctionBlockNetworkEditPart;
 import de.cau.cs.kieler.sim.kiem.IJSONObjectDataComponent;
 import de.cau.cs.kieler.sim.kiem.JSONObjectDataComponent;
 import de.cau.cs.kieler.sim.kiem.KiemEvent;
@@ -215,7 +215,7 @@ public class CakefeedDataComponent extends JSONObjectDataComponent implements IJ
 			IEditorPart activeEditor = windows[i].getActivePage().getActiveEditor();
 			if (activeEditor instanceof IDiagramWorkbenchPart) {
 				EditPart editPart = ((IDiagramWorkbenchPart) activeEditor).getDiagramEditPart();
-				if ((editPart instanceof FBNetworkEditPart)) {
+				if ((editPart instanceof FunctionBlockNetworkEditPart)) {
 					List<EditPart> signalEditParts = getSignalEditParts(editPart, fBName, signalNames);
 					List<EditPart> connectionEditParts = getConnectionEditParts(editPart);
 					List<EditPart> connectionsToHighlight = new ArrayList<EditPart>();
@@ -288,7 +288,7 @@ public class CakefeedDataComponent extends JSONObjectDataComponent implements IJ
 					} else if (element instanceof Var) {
 						name = ((Var)element).getName();
 					}
-					if (((container instanceof FBType) || (container instanceof FB)) 
+					if (((container instanceof FunctionBlockType) || (container instanceof FunctionBlock)) 
 							&& (((NamedAndCommented)container).getName().equals(fBName))
 							&& nameIsValid(name, signalNames)) {
 						signalEditParts.add((EditPart)c);
