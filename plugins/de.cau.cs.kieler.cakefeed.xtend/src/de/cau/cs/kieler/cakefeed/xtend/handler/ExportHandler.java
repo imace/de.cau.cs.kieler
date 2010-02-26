@@ -1,5 +1,6 @@
 package de.cau.cs.kieler.cakefeed.xtend.handler;
 
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 
@@ -9,6 +10,9 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.IHandler;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.gmf.runtime.common.core.command.CommandResult;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.CanonicalEditPolicy;
 import org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramGraphicalViewer;
@@ -17,11 +21,13 @@ import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PlatformUI;
 
-import de.cau.cs.kieler.cakefeed.BFBDiagram;
-import de.cau.cs.kieler.cakefeed.CFBDiagram;
-import de.cau.cs.kieler.cakefeed.impl.BFBDiagramImpl;
-import de.cau.cs.kieler.cakefeed.impl.CFBDiagramImpl;
+import de.cau.cs.kieler.cakefeed.BasicFunctionBlockDiagram;
+import de.cau.cs.kieler.cakefeed.CompositeFunctionBlockDiagram;
+import de.cau.cs.kieler.cakefeed.impl.BasicFunctionBlockDiagramImpl;
+import de.cau.cs.kieler.cakefeed.impl.CompositeFunctionBlockDiagramImpl;
+import de.cau.cs.kieler.cakefeed.impl.FunctionBlockNetworkImpl;
 import de.cau.cs.kieler.core.model.transformation.xtend.XtendTransformationFramework;
+import de.cau.cs.kieler.functionblocks.FunctionblocksPackage;
 
 public class ExportHandler extends AbstractHandler implements IHandler {
 
@@ -58,14 +64,14 @@ public class ExportHandler extends AbstractHandler implements IHandler {
             XtendTransformationFramework xtend = new XtendTransformationFramework();
             
             EObject obj2 = null;
-            if (obj instanceof BFBDiagramImpl) {
-            	obj2 = (BFBDiagram)obj;
+            if (obj instanceof BasicFunctionBlockDiagramImpl) {
+            	obj2 = (BasicFunctionBlockDiagram)obj;
             	operation = "BFBDiagramToFBType";
-            }else if (obj instanceof CFBDiagramImpl) {
-            	obj2 = (CFBDiagram)obj;
+            }else if (obj instanceof CompositeFunctionBlockDiagramImpl) {
+            	obj2 = (CompositeFunctionBlockDiagram)obj;
             	operation = "CFBDiagramToFBType";
-            }else if (true) {
-            	operation = "";
+            }else if (obj instanceof FunctionBlockNetworkImpl) {
+            	operation = "CFBNetworkToFFBNetwork";
             }
             
             parameters[0] = obj2;
@@ -73,7 +79,10 @@ public class ExportHandler extends AbstractHandler implements IHandler {
             xtend.setParameters(parameters);
             xtend.initializeTransformation(fileName, operation, metaModels);
             Object result = xtend.executeTransformation();
-            
+            if (/*(obj instanceof EObject) && */(result instanceof EObject)) {
+            	//String resourceName = ((EObject)obj).eResource().getURI().;
+            	write(/*resourceName*/"C:/Documents and Settings/msch165/Desktop/CAKeFEED/demo/out.xml", (EObject)result);
+            }
             List<?> editPolicies = CanonicalEditPolicy.getRegisteredEditPolicies(obj);
             for (Iterator<?> it = editPolicies.iterator(); it.hasNext();) {
 
@@ -88,4 +97,18 @@ public class ExportHandler extends AbstractHandler implements IHandler {
         }
         return CommandResult.newOKCommandResult();
 	}
+	
+	public void write(String fileName, EObject root) {
+		ResourceSet resourceSet = new ResourceSetImpl();
+		resourceSet.getPackageRegistry().put(FunctionblocksPackage.eNS_URI, FunctionblocksPackage.eINSTANCE);
+		try {
+			Resource resource = resourceSet.createResource(URI.createFileURI(fileName));
+			resource.getContents().add(root);
+			resource.save(null);
+		}
+		catch (IOException exception) {
+			exception.printStackTrace();
+		}
+	}
+
 }

@@ -1,28 +1,399 @@
 import cakefeed;
 import functionblocks;
+import synccharts;
 
-create functionblocks::FBType this BFBDiagramToFBType(cakefeed::BFBDiagram bfbdiagram):
- this.setName(bfbdiagram.bFBType.name)
-; 
+//Export BFB
+//------------------------------------------------------------------------------------------
 
-create functionblocks::FBType this CFBDiagramToFBType(cakefeed::CFBDiagram cfbdiagram):
- this.setName(cfbdiagram.cFBType.name)
+create functionblocks::FBType this BFBDiagramToFBType(cakefeed::BasicFunctionBlockDiagram bfbdiagram):
+ this.setName(bfbdiagram.bFBType.name) ->
+ this.setComment(bfbdiagram.bFBType.comment) ->
+ this.setInterfaceList(EventsAndVarsToInterfaceList(bfbdiagram.bFBType)) ->
+ this.setBasicFB(SyncChartAndAlgorithmsToBasicFB(bfbdiagram.bFBType))
 ;
 
-create functionblocks::FBType this BFBTypeToFBType(cakefeed::BFBType bfbtype):
- this.setName(bfbtype.name)
-; 
-
-create functionblocks::FBType this CFBTypeToFBType(cakefeed::CFBType cfbtype):
- this.setName(cfbtype.name)
+create functionblocks::BasicFB this SyncChartAndAlgorithmsToBasicFB(cakefeed::BasicFunctionBlockType bfbtype):
+ this.setInternalVars(CInternalVarToFInternalVars(bfbtype)) ->
+ this.algorithm.addAll(bfbtype.functionBlockDiagrams.FBDToAlgorithm()) ->
+ this.algorithm.addAll(bfbtype.structuredTexts.STToAlgorithm()) ->
+ this.algorithm.addAll(bfbtype.ladderDiagrams.LDToAlgorithm()) ->
+ this.algorithm.addAll(bfbtype.otherAlgorithms.OtherToAlgorithm()) //->
+ //this.setHCECC(bfbtype.syncChart.SyncChartToHCECC())
 ;
 
-//--------------------------------------------------------------------------------------
+create functionblocks::InternalVars this CInternalVarToFInternalVars(cakefeed::BasicFunctionBlockType bfbtype):
+ this.varDeclaration.addAll(bfbtype.internalVars.InternalVarToVarDeclaration())
+;
 
-create cakefeed::BFBDiagram this FBTypeToBFBDiagram(functionblocks::FBType fbtype):
+create functionblocks::Algorithm this FBDToAlgorithm(cakefeed::FunctionBlockDiagram fbd):
+ this.setFBD(fbd.CFBDToFFBD())
+;
+
+create functionblocks::Algorithm this STToAlgorithm(cakefeed::StructuredText st):
+ this.setST(st.CSTToFST())
+;
+
+create functionblocks::Algorithm this LDToAlgorithm(cakefeed::LadderDiagram ld):
+ this.setLD(ld.CLDToFLD())
+;
+
+create functionblocks::Algorithm this OtherToAlgorithm(cakefeed::OtherAlgorithm other):
+ this.setOther(other.COtherToFOther())
+;
+
+create functionblocks::VarDeclaration this InternalVarToVarDeclaration(cakefeed::InternalVar internalvar):
+ this.setArraySize(internalvar.arraySize.toString()) ->
+ this.setComment(internalvar.comment) ->
+ this.setInitialValue(internalvar.initialValue) ->
+ this.setName(internalvar.name) ->
+ this.setType(internalvar.type.toString())
+;
+
+create functionblocks::FBD this CFBDToFFBD(cakefeed::FunctionBlockDiagram fbd):
+ this.fB.addAll(fbd.fBs.CFBToFFB()) ->
+ this.setDataConnections(fbd.CDataConnectionsToFDataConnections())
+;
+
+create functionblocks::ST this CSTToFST(cakefeed::StructuredText st):
+ this.setText(st.text)
+;
+
+create functionblocks::LD this CLDToFLD(cakefeed::LadderDiagram ld):
+ this.rung.addAll(ld.rungs.CRungToFRung())
+;
+
+create functionblocks::Other this COtherToFOther(cakefeed::OtherAlgorithm other):
+ this.setLanguage(other.language) ->
+ this.setPrototype(other.prototype) ->
+ this.setText(other.text)
+;
+
+create functionblocks::FB this CFBToFFB(cakefeed::FunctionBlock fb):
+ this.setComment(fb.comment) ->
+ this.setName(fb.name) ->
+ this.setType(fb.type.name)
+;
+
+create functionblocks::DataConnections this CDataConnectionsToFDataConnections(cakefeed::FunctionBlockDiagram fbd):
+ this.connection.addAll(fbd.dataConnections.DataConnectionToConnection())
+;
+
+create functionblocks::Rung this CRungToFRung(cakefeed::Rung rung):
+ this.setComment(rung.comment) ->
+ this.setExpression(rung.expression) ->
+ this.setOutput(rung.output)
+;
+
+create functionblocks::Connection this /*IFIF*/DataConnectionToConnection(cakefeed::IFIFDataConnection dc):
+ this.setComment(dc.comment) ->
+ this.setDestination(dc.destination.name) ->
+ this.setSource(dc.source.name)
+;
+
+create functionblocks::Connection this /*IFFB*/DataConnectionToConnection(cakefeed::IFFBDataConnection dc):
+ this.setComment(dc.comment) ->
+ this.setDestination(dc.destination.name) ->
+ this.setSource(dc.source.name)
+;
+
+create functionblocks::Connection this /*FBIF*/DataConnectionToConnection(cakefeed::FBIFDataConnection dc):
+ this.setComment(dc.comment) ->
+ this.setDestination(dc.destination.name) ->
+ this.setSource(dc.source.name)
+;
+
+create functionblocks::Connection this /*FBFB*/DataConnectionToConnection(cakefeed::FBFBDataConnection dc):
+ this.setComment(dc.comment) ->
+ this.setDestination(dc.destination.name) ->
+ this.setSource(dc.source.name)
+;
+
+create functionblocks::Connection this /*IFIV*/DataConnectionToConnection(cakefeed::IFIVDataConnection dc):
+ this.setComment(dc.comment) ->
+ this.setDestination(dc.destination.name) ->
+ this.setSource(dc.source.name)
+;
+
+create functionblocks::Connection this /*IVIF*/DataConnectionToConnection(cakefeed::IVIFDataConnection dc):
+ this.setComment(dc.comment) ->
+ this.setDestination(dc.destination.name) ->
+ this.setSource(dc.source.name)
+;
+
+create functionblocks::Connection this /*FBIV*/DataConnectionToConnection(cakefeed::FBIVDataConnection dc):
+ this.setComment(dc.comment) ->
+ this.setDestination(dc.destination.name) ->
+ this.setSource(dc.source.name)
+;
+
+create functionblocks::Connection this /*IVFB*/DataConnectionToConnection(cakefeed::IVFBDataConnection dc):
+ this.setComment(dc.comment) ->
+ this.setDestination(dc.destination.name) ->
+ this.setSource(dc.source.name)
+;
+
+create functionblocks::Connection this /*IVIV*/DataConnectionToConnection(cakefeed::IVIVDataConnection dc):
+ this.setComment(dc.comment) ->
+ this.setDestination(dc.destination.name) ->
+ this.setSource(dc.source.name)
+;
+
+create functionblocks::InterfaceList this EventsAndVarsToInterfaceList(cakefeed::FunctionBlockType fbtype):
+ this.setEventInputs(InputEventsToEventInputs(fbtype)) ->
+ this.setEventOutputs(OutputEventsToEventOutputs(fbtype)) ->
+ this.setInputVars(CInputVarsToFInputVars(fbtype)) ->
+ this.setOutputVars(COutputVarsToFOutputVars(fbtype))
+; 
+
+create functionblocks::EventInputs this InputEventsToEventInputs(cakefeed::FunctionBlockType fbtype):
+ this.event.addAll(fbtype.inputEvents.IFInputEventToEvent())
+;
+
+create functionblocks::EventOutputs this OutputEventsToEventOutputs(cakefeed::FunctionBlockType fbtype):
+ this.event.addAll(fbtype.outputEvents.IFOutputEventToEvent())
+;
+
+create functionblocks::InputVars this CInputVarsToFInputVars(cakefeed::FunctionBlockType fbtype):
+ this.varDeclaration.addAll(fbtype.inputVars.IFInputVarToVarDeclaration())
+;
+
+create functionblocks::OutputVars this COutputVarsToFOutputVars(cakefeed::FunctionBlockType fbtype):
+ this.varDeclaration.addAll(fbtype.outputVars.IFOutputVarToVarDeclaration())
+;
+
+create functionblocks::Event this IFInputEventToEvent(cakefeed::IFInputEvent ifinputevent):
+ this.setName(ifinputevent.name) ->
+ this.setType(ifinputevent.type) ->
+ this.setComment(ifinputevent.comment) ->
+ this.with.addAll(ifinputevent.with.InputWithToWith())
+;
+
+create functionblocks::Event this IFOutputEventToEvent(cakefeed::IFOutputEvent ifoutputevent):
+ this.setName(ifoutputevent.name) ->
+ this.setType(ifoutputevent.type) ->
+ this.setComment(ifoutputevent.comment) ->
+ this.with.addAll(ifoutputevent.with.OutputWithToWith())
+;
+
+create functionblocks::VarDeclaration this IFInputVarToVarDeclaration(cakefeed::IFInputVar ifinputvar):
+ this.setName(ifinputvar.name) ->
+ this.setType(ifinputvar.type.toString()) ->
+ this.setInitialValue(ifinputvar.initialValue) ->
+ this.setArraySize(ifinputvar.arraySize.toString()) ->
+ this.setComment(ifinputvar.comment)
+;
+
+create functionblocks::VarDeclaration this IFOutputVarToVarDeclaration(cakefeed::IFOutputVar ifoutputvar):
+ this.setName(ifoutputvar.name) ->
+ this.setType(ifoutputvar.type.toString()) ->
+ this.setInitialValue(ifoutputvar.initialValue) ->
+ this.setArraySize(ifoutputvar.arraySize.toString()) ->
+ this.setComment(ifoutputvar.comment)
+;
+
+create functionblocks::With this InputWithToWith(cakefeed::InputWith inputwith):
+ this.setVar(inputwith.with.name)
+;
+
+create functionblocks::With this OutputWithToWith(cakefeed::OutputWith outputwith):
+ this.setVar(outputwith.with.name)
+;
+
+//Export CFB
+//------------------------------------------------------------------------------------------
+
+create functionblocks::FBType this CFBDiagramToFBType(cakefeed::CompositeFunctionBlockDiagram cfbdiagram):
+ this.setName(cfbdiagram.cFBType.name) ->
+ this.setComment(cfbdiagram.cFBType.comment) ->
+ this.setInterfaceList(EventsAndVarsToInterfaceList(cfbdiagram.cFBType)) ->
+ this.setFBNetwork(cfbdiagram.cFBType.CFBNetworkToFFBNetwork())
+;
+
+//Export FBNetwork
+//------------------------------------------------------------------------------------------
+
+create functionblocks::FBNetwork this CFBNetworkToFFBNetwork(cakefeed::FunctionBlockNetwork cfbnetwork):
+ this.fB.addAll(cfbnetwork.fBs.CFBToFFB()) ->
+ this.setDataConnections(cfbnetwork.CDataConnectionsToFDataConnections()) ->
+ this.setEventConnections(cfbnetwork.CEventConnectionsToFEventConnections())
+;
+
+create functionblocks::DataConnections this CDataConnectionsToFDataConnections(cakefeed::FunctionBlockNetwork fbnetwork):
+ this.connection.addAll(fbnetwork.dataConnections.DataConnectionToConnection())
+;
+
+create functionblocks::EventConnections this CEventConnectionsToFEventConnections(cakefeed::FunctionBlockNetwork fbnetwork):
+ this.connection.addAll(fbnetwork.eventConnections.EventConnectionToConnection())
+;
+
+// workaround
+//create functionblocks::Connection this DataConnectionToConnection(cakefeed::DataConnection dc):
+// (dc.isInstance(cakefeed::IFIFDataConnection)) ? DataConnectionToConnection((cakefeed::IFIFDataConnection)dc) : null
+//;
+
+create functionblocks::Connection this /*IFIF*/EventConnectionToConnection(cakefeed::IFIFEventConnection ec):
+ this.setComment(ec.comment) ->
+ this.setDestination(ec.destination.name) ->
+ this.setSource(ec.source.name)
+;
+
+create functionblocks::Connection this /*IFFB*/EventConnectionToConnection(cakefeed::IFFBEventConnection ec):
+ this.setComment(ec.comment) ->
+ this.setDestination(ec.destination.name) ->
+ this.setSource(ec.source.name)
+;
+
+create functionblocks::Connection this /*FBIF*/EventConnectionToConnection(cakefeed::FBIFEventConnection ec):
+ this.setComment(ec.comment) ->
+ this.setDestination(ec.destination.name) ->
+ this.setSource(ec.source.name)
+;
+
+create functionblocks::Connection this /*FBFB*/EventConnectionToConnection(cakefeed::FBFBEventConnection ec):
+ this.setComment(ec.comment) ->
+ this.setDestination(ec.destination.name) ->
+ this.setSource(ec.source.name)
+;
+
+
+//Import BFB
+//------------------------------------------------------------------------------------------
+
+create cakefeed::BasicFunctionBlockDiagram this FBTypeToBFBDiagram(functionblocks::FBType fbtype):
  this.setBFBType(fbtype.FBTypeToBFBType())
 ;
 
-create cakefeed::BFBType this FBTypeToBFBType(functionblocks::FBType fbtype):
- this.setName(fbtype.name)
-; 
+create cakefeed::BasicFunctionBlockType this FBTypeToBFBType(functionblocks::FBType fbtype):
+ this.setComment(fbtype.comment) ->
+ this.setName(fbtype.name) ->
+ this.functionBlockDiagrams.addAll(fbtype.basicFB.algorithm.typeSelect(functionblocks::FBD).FFBDToCFBD()) ->
+ this.inputEvents.addAll(fbtype.interfaceList.eventInputs.event.EventToIFInputEvent()) ->
+ this.inputVars.addAll(fbtype.interfaceList.inputVars.varDeclaration.VarDeclarationToIFInputVar()) ->
+ this.internalVars.addAll(fbtype.basicFB.internalVars.varDeclaration.VarDeclarationToInternalVar()) ->
+ this.ladderDiagrams.addAll(fbtype.basicFB.algorithm.typeSelect(functionblocks::LD).FLDToCLD()) ->
+ this.otherAlgorithms.addAll(fbtype.basicFB.algorithm.typeSelect(functionblocks::Other).FOtherToCOther()) ->
+ this.outputEvents.addAll(fbtype.interfaceList.eventOutputs.event.EventToIFOutputEvent()) ->
+ this.outputVars.addAll(fbtype.interfaceList.outputVars.varDeclaration.VarDeclarationToIFOutputVar()) ->
+ this.structuredTexts.addAll(fbtype.basicFB.algorithm.typeSelect(functionblocks::ST).FSTToCST())
+;
+
+create cakefeed::FunctionBlockDiagram this FFBDToCFBD(functionblocks::FBD fbd):
+ this.fBs.addAll(fbd.fB.FFBToCFB()) ->
+ this.dataConnections.addAll(fbd.dataConnections.connection.ConnectionToFBFBDataConnection())
+;
+
+create cakefeed::IFInputEvent this EventToIFInputEvent(functionblocks::Event event):
+ this.setComment(event.comment) ->
+ this.setName(event.name) ->
+ this.setType(event.type) ->
+ this.with.addAll(event.with.FWithToInputWith())
+;
+
+create cakefeed::IFInputVar this VarDeclarationToIFInputVar(functionblocks::VarDeclaration vd):
+ this.setArraySize(vd.arraySize.asInteger()) ->
+ this.setComment(vd.comment) ->
+ this.setInitialValue(vd.initialValue) ->
+ this.setName(vd.name) ->
+ this.setType(vd.type.StringToCType()) // Muss String in Type umwandeln!
+;
+
+create cakefeed::InternalVar this VarDeclarationToInternalVar(functionblocks::VarDeclaration vd):
+ this.setArraySize(vd.arraySize.asInteger()) ->
+ this.setComment(vd.comment) ->
+ this.setInitialValue(vd.initialValue) ->
+ this.setName(vd.name) ->
+ this.setType(vd.type.StringToCType()) // Muss String in Type umwandeln!
+;
+
+create cakefeed::LadderDiagram this FLDToCLD(functionblocks::LD ld):
+ this.rungs.addAll(ld.rung.FRungToCRung())
+;
+
+create cakefeed::OtherAlgorithm this FOtherToCOther(functionblocks::Other other):
+ this.setLanguage(other.language) ->
+ this.setPrototype(other.prototype) ->
+ this.setText(other.text)
+;
+
+create cakefeed::IFOutputEvent this EventToIFOutputEvent(functionblocks::Event event):
+ this.setComment(event.comment) ->
+ this.setName(event.name) ->
+ this.setType(event.type) ->
+ this.with.addAll(event.with.FWithToOutputWith())
+;
+
+create cakefeed::IFOutputVar this VarDeclarationToIFOutputVar(functionblocks::VarDeclaration vd):
+ this.setArraySize(vd.arraySize.asInteger()) ->
+ this.setComment(vd.comment) ->
+ this.setInitialValue(vd.initialValue) ->
+ this.setName(vd.name) ->
+ this.setType(vd.type.StringToCType()) // Muss String in Type umwandeln!
+;
+
+create cakefeed::StructuredText this FSTToCST(functionblocks::ST st):
+ this.setText(st.text)
+;
+
+create cakefeed::FunctionBlock this FFBToCFB(functionblocks::FB fb):
+ this.setComment(fb.comment) ->
+ this.inputEvents.addAll(fb.type.StringToFFBType().eventInputs.event.EventToFBInputEvent) -> // Muss String in FBType umwandeln!
+ this.inputVars.addAll(fb.type.StringToFFBType().inputVars.varDeclaration.VarDeclarationToFBInputVar) -> // Muss String in FBType umwandeln!
+ this.setName(fb.name) ->
+ this.outputEvents.addAll(fb.type.StringToFFBType().eventOutputs.event.EventToFBOutputEvent) -> // Muss String in FBType umwandeln!
+ this.outputVars.addAll(fb.type.StringToFFBType().outputVars.varDeclaration.VarDeclarationToFBOutputVar) -> // Muss String in FBType umwandeln!
+ this.setType(fb.type.StringToCFBType()) // Muss String in FBType umwandeln!
+;
+
+create cakefeed::FBFBDataConnection this ConnectionToFBFBDataConnection(functionblocks::Connection connection):
+ this.setComment(connection.comment) ->
+ this.setDestination(connection.destination.StringToFBInputVar()) -> // Muss String in Port umwandeln!
+ this.setSource(connection.source.StringToFBOutputVar) // Muss String in Port umwandeln!
+;
+
+create cakefeed::InputWith this FWithToInputWith(functionblocks::With with):
+ this.setWith(with.var.StringToIFInputVar()) // Muss String in Port umwandeln!
+;
+
+create cakefeed::Rung this FRungToCRung(functionblocks::Rung rung):
+ this.setComment(rung.comment) ->
+ this.setExpression(rung.expression) ->
+ this.setOutput(rung.output)
+;
+
+create cakefeed::OutputWith this FWithToOutputWith(functionblocks::With with):
+ this.setWith(with.var.StringToIFOutputVar()) // Muss String in Port umwandeln!
+;
+
+//Import CFB
+//------------------------------------------------------------------------------------------
+
+create cakefeed::CompositeFunctionBlockDiagram this FBTypeToCFBDiagram(functionblocks::FBType fbtype):
+ this.setCFBType(fbtype.FBTypeToCFBType())
+;
+
+create cakefeed::CompositeFunctionBlockType this FBTypeToCFBType(functionblocks::FBType fbtype):
+ this.setComment(fbtype.comment) ->
+ this.setName(fbtype.name) ->
+ this.inputEvents.addAll(fbtype.interfaceList.eventInputs.event.EventToIFInputEvent()) ->
+ this.inputVars.addAll(fbtype.interfaceList.inputVars.varDeclaration.VarDeclarationToIFInputVar()) ->
+ this.outputEvents.addAll(fbtype.interfaceList.eventOutputs.event.EventToIFOutputEvent()) ->
+ this.outputVars.addAll(fbtype.interfaceList.outputVars.varDeclaration.VarDeclarationToIFOutputVar()) ->
+ this.fBs.addAll(fbtype.fBNetwork.fB.FFBToCFB()) ->
+ this.eventConnections.addAll(fbtype.fBNetwork.eventConnections.connection.ConnectionToEventConnection()) -> // Hier muss ich die Connection zur richtigen Connection (IFIF/IFFB/usw.) machen
+ this.dataConnections.addAll(fbtype.fBNetwork.dataConnections.connection.ConnectionToDataConnection()) // Hier muss ich die Connection zur richtigen Connection (IFIF/IFFB/usw.) machen
+;
+
+//Import FBNetwork
+//------------------------------------------------------------------------------------------
+
+create cakefeed::FunctionBlockNetwork this FFBNetworkToCFBNetwork(functionblocks::FBNetwork fbnetwork):
+ this.fBs.addAll(fbnetwork.fB.FFBToCFB()) ->
+ this.eventConnections.addAll(fbnetwork.eventConnections.connection.ConnectionToFBFBEventConnection()) ->
+ this.dataConnections.addAll(fbnetwork.dataConnections.connection.ConnectionToFBFBDataConnection())
+;
+
+create cakefeed::FBFBDataConnection this ConnectionToFBFBEventConnection(functionblocks::Connection connection):
+ this.setComment(connection.comment) ->
+ this.setDestination(connection.destination.StringToFBInputEvent()) -> // Muss String in Port umwandeln!
+ this.setSource(connection.source.StringToFBOutputEvent) // Muss String in Port umwandeln!
+;
