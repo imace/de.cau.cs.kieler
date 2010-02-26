@@ -15,8 +15,8 @@ import org.eclipse.swt.graphics.Device;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.graphics.Color;
 
-import de.cau.cs.kieler.cakefeed.FB;
-import de.cau.cs.kieler.cakefeed.FBType;
+import de.cau.cs.kieler.cakefeed.FunctionBlock;
+import de.cau.cs.kieler.cakefeed.FunctionBlockType;
 import de.cau.cs.kieler.cakefeed.IFInputEvent;
 import de.cau.cs.kieler.cakefeed.IFOutputEvent;
 import de.cau.cs.kieler.cakefeed.InputWith;
@@ -124,12 +124,12 @@ public class FBTypeFigure extends Shape implements Adapter, IAttributeAwareFigur
 
 	@Override
 	public void notifyChanged(Notification notification) {
-		if ((modelElement instanceof FBType) || (modelElement instanceof FB)) {
-			FBType fbtype = null;
-			if (modelElement instanceof FBType) {
-				fbtype = (FBType)modelElement;
+		if ((modelElement instanceof FunctionBlockType) || (modelElement instanceof FunctionBlock)) {
+			FunctionBlockType fbtype = null;
+			if (modelElement instanceof FunctionBlockType) {
+				fbtype = (FunctionBlockType)modelElement;
 			} else {
-				fbtype = (FBType)((FB)modelElement).getType();
+				fbtype = (FunctionBlockType)((FunctionBlock)modelElement).getType();
 			}
 			if (fbtype != null) {
 				numOfEvents = Math.max(fbtype.getInputEvents().size(), fbtype.getOutputEvents().size());
