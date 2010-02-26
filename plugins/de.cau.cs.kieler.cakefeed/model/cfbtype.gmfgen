@@ -10,27 +10,28 @@
     templateDirectory="de.cau.cs.kieler.cakefeed/gmf-templates">
   <diagram
       visualID="1000"
-      editPartClassName="CFBDiagramEditPart"
-      itemSemanticEditPolicyClassName="CFBDiagramItemSemanticEditPolicy"
-      canonicalEditPolicyClassName="CFBDiagramCanonicalEditPolicy"
+      editPartClassName="CompositeFunctionBlockDiagramEditPart"
+      itemSemanticEditPolicyClassName="CompositeFunctionBlockDiagramItemSemanticEditPolicy"
+      canonicalEditPolicyClassName="CompositeFunctionBlockDiagramCanonicalEditPolicy"
       iconProviderPriority="Low"
       creationWizardCategoryID="de.cau.cs.kieler"
       validationProviderPriority="Low"
       validationEnabled="true"
-      validationDecorators="true">
+      validationDecorators="true"
+      liveValidationUIFeedback="true">
     <diagramRunTimeClass
         href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Diagram"/>
     <elementType
         xsi:type="gmfgen:MetamodelType"
-        editHelperClassName="CFBDiagramEditHelper"/>
+        editHelperClassName="CompositeFunctionBlockDiagramEditHelper"/>
     <viewmap
         xsi:type="gmfgen:FigureViewmap"
         figureQualifiedClassName="org.eclipse.draw2d.FreeformLayer"/>
     <domainDiagramElement
-        href="cakefeed.genmodel#//cakefeed/CFBDiagram"/>
+        href="cakefeed.genmodel#//cakefeed/CompositeFunctionBlockDiagram"/>
     <childNodes
         xsi:type="gmfgen:GenChildSideAffixedNode"
-        visualID="3021"
+        visualID="3030"
         editPartClassName="IFInputEventEditPart"
         itemSemanticEditPolicyClassName="IFInputEventItemSemanticEditPolicy"
         canonicalEditPolicyClassName="IFInputEventCanonicalEditPolicy"
@@ -53,13 +54,13 @@
         <metaClass
             href="cakefeed.genmodel#//cakefeed/IFInputEvent"/>
         <containmentMetaFeature
-            href="cakefeed.genmodel#//cakefeed/FBInterface/inputEvents"/>
+            href="cakefeed.genmodel#//cakefeed/FunctionBlockInterface/inputEvents"/>
         <childMetaFeature
-            href="cakefeed.genmodel#//cakefeed/FBInterface/inputEvents"/>
+            href="cakefeed.genmodel#//cakefeed/FunctionBlockInterface/inputEvents"/>
       </modelFacet>
       <labels
           xsi:type="gmfgen:GenExternalNodeLabel"
-          visualID="5009"
+          visualID="5020"
           editPartClassName="IFInputEventNameEditPart"
           itemSemanticEditPolicyClassName="IFInputEventNameItemSemanticEditPolicy">
         <diagramRunTimeClass
@@ -84,7 +85,7 @@
     </childNodes>
     <childNodes
         xsi:type="gmfgen:GenChildSideAffixedNode"
-        visualID="3022"
+        visualID="3031"
         editPartClassName="IFOutputEventEditPart"
         itemSemanticEditPolicyClassName="IFOutputEventItemSemanticEditPolicy"
         canonicalEditPolicyClassName="IFOutputEventCanonicalEditPolicy"
@@ -107,13 +108,13 @@
         <metaClass
             href="cakefeed.genmodel#//cakefeed/IFOutputEvent"/>
         <containmentMetaFeature
-            href="cakefeed.genmodel#//cakefeed/FBInterface/outputEvents"/>
+            href="cakefeed.genmodel#//cakefeed/FunctionBlockInterface/outputEvents"/>
         <childMetaFeature
-            href="cakefeed.genmodel#//cakefeed/FBInterface/outputEvents"/>
+            href="cakefeed.genmodel#//cakefeed/FunctionBlockInterface/outputEvents"/>
       </modelFacet>
       <labels
           xsi:type="gmfgen:GenExternalNodeLabel"
-          visualID="5010"
+          visualID="5021"
           editPartClassName="IFOutputEventNameEditPart"
           itemSemanticEditPolicyClassName="IFOutputEventNameItemSemanticEditPolicy">
         <diagramRunTimeClass
@@ -138,7 +139,7 @@
     </childNodes>
     <childNodes
         xsi:type="gmfgen:GenChildSideAffixedNode"
-        visualID="3023"
+        visualID="3032"
         editPartClassName="IFInputVarEditPart"
         itemSemanticEditPolicyClassName="IFInputVarItemSemanticEditPolicy"
         canonicalEditPolicyClassName="IFInputVarCanonicalEditPolicy"
@@ -161,13 +162,13 @@
         <metaClass
             href="cakefeed.genmodel#//cakefeed/IFInputVar"/>
         <containmentMetaFeature
-            href="cakefeed.genmodel#//cakefeed/FBInterface/inputVars"/>
+            href="cakefeed.genmodel#//cakefeed/FunctionBlockInterface/inputVars"/>
         <childMetaFeature
-            href="cakefeed.genmodel#//cakefeed/FBInterface/inputVars"/>
+            href="cakefeed.genmodel#//cakefeed/FunctionBlockInterface/inputVars"/>
       </modelFacet>
       <labels
           xsi:type="gmfgen:GenExternalNodeLabel"
-          visualID="5011"
+          visualID="5022"
           editPartClassName="IFInputVarNameEditPart"
           itemSemanticEditPolicyClassName="IFInputVarNameItemSemanticEditPolicy">
         <diagramRunTimeClass
@@ -192,7 +193,7 @@
     </childNodes>
     <childNodes
         xsi:type="gmfgen:GenChildSideAffixedNode"
-        visualID="3024"
+        visualID="3033"
         editPartClassName="IFOutputVarEditPart"
         itemSemanticEditPolicyClassName="IFOutputVarItemSemanticEditPolicy"
         canonicalEditPolicyClassName="IFOutputVarCanonicalEditPolicy"
@@ -215,13 +216,13 @@
         <metaClass
             href="cakefeed.genmodel#//cakefeed/IFOutputVar"/>
         <containmentMetaFeature
-            href="cakefeed.genmodel#//cakefeed/FBInterface/outputVars"/>
+            href="cakefeed.genmodel#//cakefeed/FunctionBlockInterface/outputVars"/>
         <childMetaFeature
-            href="cakefeed.genmodel#//cakefeed/FBInterface/outputVars"/>
+            href="cakefeed.genmodel#//cakefeed/FunctionBlockInterface/outputVars"/>
       </modelFacet>
       <labels
           xsi:type="gmfgen:GenExternalNodeLabel"
-          visualID="5012"
+          visualID="5023"
           editPartClassName="IFOutputVarNameEditPart"
           itemSemanticEditPolicyClassName="IFOutputVarNameItemSemanticEditPolicy">
         <diagramRunTimeClass
@@ -245,35 +246,35 @@
       </labels>
     </childNodes>
     <childNodes
-        visualID="3025"
-        editPartClassName="FBEditPart"
-        itemSemanticEditPolicyClassName="FBItemSemanticEditPolicy"
-        canonicalEditPolicyClassName="FBCanonicalEditPolicy"
+        visualID="3034"
+        editPartClassName="FunctionBlockEditPart"
+        itemSemanticEditPolicyClassName="FunctionBlockItemSemanticEditPolicy"
+        canonicalEditPolicyClassName="FunctionBlockCanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.5 //@diagram/@childNodes.6 //@diagram/@childNodes.7 //@diagram/@childNodes.8"
-        graphicalNodeEditPolicyClassName="FBGraphicalNodeEditPolicy"
-        createCommandClassName="FBCreateCommand"
+        graphicalNodeEditPolicyClassName="FunctionBlockGraphicalNodeEditPolicy"
+        createCommandClassName="FunctionBlockCreateCommand"
         containers="//@diagram/@compartments.0">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <elementType
           xsi:type="gmfgen:MetamodelType"
-          editHelperClassName="FBEditHelper"/>
+          editHelperClassName="FunctionBlockEditHelper"/>
       <viewmap
           xsi:type="gmfgen:InnerClassViewmap"
           className="FBFigureDescriptor"
           classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class FBFigureDescriptor extends de.cau.cs.kieler.cakefeed.custom.FBFigure {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureFBInstanceNameLabel; &#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureFBTypeNameLabel; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public FBFigureDescriptor() {&#xA;&#x9;&#x9;&#xA;&#x9;de.cau.cs.kieler.cakefeed.custom.FBLayout layoutThis = new de.cau.cs.kieler.cakefeed.custom.FBLayout();&#xA;&#xA;&#xA;&#x9;this.setLayoutManager(layoutThis);&#xA;&#xA;&#x9;&#x9;&#xA;&#xA;this.setBorder(new org.eclipse.draw2d.MarginBorder(getMapMode().DPtoLP(5)&#xA;, getMapMode().DPtoLP(5)&#xA;, getMapMode().DPtoLP(5)&#xA;, getMapMode().DPtoLP(5)&#xA;));&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureFBInstanceNameLabel = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureFBInstanceNameLabel.setText(&quot;&quot;);&#xA;&#xA;this.add(fFigureFBInstanceNameLabel);&#xA;&#xA;&#xA;&#xA;fFigureFBTypeNameLabel = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureFBTypeNameLabel.setText(&quot;&quot;);&#xA;&#xA;this.add(fFigureFBTypeNameLabel);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private boolean myUseLocalCoordinates = false;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected boolean useLocalCoordinates() {&#xA;&#x9;&#x9;return myUseLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#xA;&#x9;&#x9;myUseLocalCoordinates = useLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureFBInstanceNameLabel() {&#xA;&#x9;&#x9;return fFigureFBInstanceNameLabel;&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureFBTypeNameLabel() {&#xA;&#x9;&#x9;return fFigureFBTypeNameLabel;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;"/>
       <modelFacet>
         <metaClass
-            href="cakefeed.genmodel#//cakefeed/FB"/>
+            href="cakefeed.genmodel#//cakefeed/FunctionBlock"/>
         <containmentMetaFeature
-            href="cakefeed.genmodel#//cakefeed/FBNetwork/fBs"/>
+            href="cakefeed.genmodel#//cakefeed/FunctionBlockNetwork/fBs"/>
         <childMetaFeature
-            href="cakefeed.genmodel#//cakefeed/FBNetwork/fBs"/>
+            href="cakefeed.genmodel#//cakefeed/FunctionBlockNetwork/fBs"/>
       </modelFacet>
       <labels
-          visualID="5017"
-          editPartClassName="FBNameEditPart"
-          itemSemanticEditPolicyClassName="FBNameItemSemanticEditPolicy">
+          visualID="5028"
+          editPartClassName="FunctionBlockNameEditPart"
+          itemSemanticEditPolicyClassName="FunctionBlockNameItemSemanticEditPolicy">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap
@@ -290,7 +291,7 @@
         </modelFacet>
       </labels>
       <labels
-          visualID="5018"
+          visualID="5029"
           editPartClassName="WrappingLabelEditPart"
           itemSemanticEditPolicyClassName="WrappingLabelItemSemanticEditPolicy"
           readOnly="true">
@@ -306,7 +307,7 @@
     </childNodes>
     <childNodes
         xsi:type="gmfgen:GenChildSideAffixedNode"
-        visualID="3026"
+        visualID="3035"
         editPartClassName="FBInputEventEditPart"
         itemSemanticEditPolicyClassName="FBInputEventItemSemanticEditPolicy"
         canonicalEditPolicyClassName="FBInputEventCanonicalEditPolicy"
@@ -338,13 +339,13 @@
         <metaClass
             href="cakefeed.genmodel#//cakefeed/FBInputEvent"/>
         <containmentMetaFeature
-            href="cakefeed.genmodel#//cakefeed/FB/inputEvents"/>
+            href="cakefeed.genmodel#//cakefeed/FunctionBlock/inputEvents"/>
         <childMetaFeature
-            href="cakefeed.genmodel#//cakefeed/FB/inputEvents"/>
+            href="cakefeed.genmodel#//cakefeed/FunctionBlock/inputEvents"/>
       </modelFacet>
       <labels
           xsi:type="gmfgen:GenExternalNodeLabel"
-          visualID="5013"
+          visualID="5024"
           editPartClassName="FBInputEventNameEditPart"
           itemSemanticEditPolicyClassName="FBInputEventNameItemSemanticEditPolicy">
         <diagramRunTimeClass
@@ -369,7 +370,7 @@
     </childNodes>
     <childNodes
         xsi:type="gmfgen:GenChildSideAffixedNode"
-        visualID="3027"
+        visualID="3036"
         editPartClassName="FBOutputEventEditPart"
         itemSemanticEditPolicyClassName="FBOutputEventItemSemanticEditPolicy"
         canonicalEditPolicyClassName="FBOutputEventCanonicalEditPolicy"
@@ -401,13 +402,13 @@
         <metaClass
             href="cakefeed.genmodel#//cakefeed/FBOutputEvent"/>
         <containmentMetaFeature
-            href="cakefeed.genmodel#//cakefeed/FB/outputEvents"/>
+            href="cakefeed.genmodel#//cakefeed/FunctionBlock/outputEvents"/>
         <childMetaFeature
-            href="cakefeed.genmodel#//cakefeed/FB/outputEvents"/>
+            href="cakefeed.genmodel#//cakefeed/FunctionBlock/outputEvents"/>
       </modelFacet>
       <labels
           xsi:type="gmfgen:GenExternalNodeLabel"
-          visualID="5014"
+          visualID="5025"
           editPartClassName="FBOutputEventNameEditPart"
           itemSemanticEditPolicyClassName="FBOutputEventNameItemSemanticEditPolicy">
         <diagramRunTimeClass
@@ -432,7 +433,7 @@
     </childNodes>
     <childNodes
         xsi:type="gmfgen:GenChildSideAffixedNode"
-        visualID="3028"
+        visualID="3037"
         editPartClassName="FBInputVarEditPart"
         itemSemanticEditPolicyClassName="FBInputVarItemSemanticEditPolicy"
         canonicalEditPolicyClassName="FBInputVarCanonicalEditPolicy"
@@ -464,13 +465,13 @@
         <metaClass
             href="cakefeed.genmodel#//cakefeed/FBInputVar"/>
         <containmentMetaFeature
-            href="cakefeed.genmodel#//cakefeed/FB/inputVars"/>
+            href="cakefeed.genmodel#//cakefeed/FunctionBlock/inputVars"/>
         <childMetaFeature
-            href="cakefeed.genmodel#//cakefeed/FB/inputVars"/>
+            href="cakefeed.genmodel#//cakefeed/FunctionBlock/inputVars"/>
       </modelFacet>
       <labels
           xsi:type="gmfgen:GenExternalNodeLabel"
-          visualID="5015"
+          visualID="5026"
           editPartClassName="FBInputVarNameEditPart"
           itemSemanticEditPolicyClassName="FBInputVarNameItemSemanticEditPolicy">
         <diagramRunTimeClass
@@ -495,7 +496,7 @@
     </childNodes>
     <childNodes
         xsi:type="gmfgen:GenChildSideAffixedNode"
-        visualID="3029"
+        visualID="3038"
         editPartClassName="FBOutputVarEditPart"
         itemSemanticEditPolicyClassName="FBOutputVarItemSemanticEditPolicy"
         canonicalEditPolicyClassName="FBOutputVarCanonicalEditPolicy"
@@ -527,13 +528,13 @@
         <metaClass
             href="cakefeed.genmodel#//cakefeed/FBOutputVar"/>
         <containmentMetaFeature
-            href="cakefeed.genmodel#//cakefeed/FB/outputVars"/>
+            href="cakefeed.genmodel#//cakefeed/FunctionBlock/outputVars"/>
         <childMetaFeature
-            href="cakefeed.genmodel#//cakefeed/FB/outputVars"/>
+            href="cakefeed.genmodel#//cakefeed/FunctionBlock/outputVars"/>
       </modelFacet>
       <labels
           xsi:type="gmfgen:GenExternalNodeLabel"
-          visualID="5016"
+          visualID="5027"
           editPartClassName="FBOutputVarNameEditPart"
           itemSemanticEditPolicyClassName="FBOutputVarNameItemSemanticEditPolicy">
         <diagramRunTimeClass
@@ -557,35 +558,35 @@
       </labels>
     </childNodes>
     <topLevelNodes
-        visualID="2002"
-        editPartClassName="CFBTypeEditPart"
-        itemSemanticEditPolicyClassName="CFBTypeItemSemanticEditPolicy"
-        canonicalEditPolicyClassName="CFBTypeCanonicalEditPolicy"
+        visualID="2003"
+        editPartClassName="CompositeFunctionBlockTypeEditPart"
+        itemSemanticEditPolicyClassName="CompositeFunctionBlockTypeItemSemanticEditPolicy"
+        canonicalEditPolicyClassName="CompositeFunctionBlockTypeCanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.0 //@diagram/@childNodes.1 //@diagram/@childNodes.2 //@diagram/@childNodes.3"
         compartments="//@diagram/@compartments.0"
-        graphicalNodeEditPolicyClassName="CFBTypeGraphicalNodeEditPolicy"
-        createCommandClassName="CFBTypeCreateCommand">
+        graphicalNodeEditPolicyClassName="CompositeFunctionBlockTypeGraphicalNodeEditPolicy"
+        createCommandClassName="CompositeFunctionBlockTypeCreateCommand">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <elementType
           xsi:type="gmfgen:MetamodelType"
-          editHelperClassName="CFBTypeEditHelper"/>
+          editHelperClassName="CompositeFunctionBlockTypeEditHelper"/>
       <viewmap
           xsi:type="gmfgen:InnerClassViewmap"
           className="BFBTypeFigureDescriptor"
           classBody="&#xA;/**&#xA; * @generated&#xA; */&#xA;public class BFBTypeFigureDescriptor extends de.cau.cs.kieler.cakefeed.custom.FBTypeFigure {&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureBFBTypeNameLabel; &#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public BFBTypeFigureDescriptor() {&#xA;&#x9;&#x9;&#xA;&#x9;de.cau.cs.kieler.cakefeed.custom.FBTypeLayout layoutThis = new de.cau.cs.kieler.cakefeed.custom.FBTypeLayout();&#xA;&#xA;&#xA;&#x9;this.setLayoutManager(layoutThis);&#xA;&#xA;&#x9;&#x9;&#xA;&#xA;this.setBorder(new org.eclipse.draw2d.MarginBorder(getMapMode().DPtoLP(5)&#xA;, getMapMode().DPtoLP(5)&#xA;, getMapMode().DPtoLP(5)&#xA;, getMapMode().DPtoLP(5)&#xA;));&#xA;&#x9;&#x9;createContents();&#xA;&#x9;}&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private void createContents(){&#xA;&#xA;&#xA;fFigureBFBTypeNameLabel = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#xA;fFigureBFBTypeNameLabel.setText(&quot;&quot;);&#xA;&#xA;this.add(fFigureBFBTypeNameLabel);&#xA;&#xA;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;private boolean myUseLocalCoordinates = false;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected boolean useLocalCoordinates() {&#xA;&#x9;&#x9;return myUseLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#xA;&#x9;&#x9;myUseLocalCoordinates = useLocalCoordinates;&#xA;&#x9;}&#xA;&#xA;&#xA;&#xA;&#x9;/**&#xA;&#x9; * @generated&#xA;&#x9; */&#xA;&#x9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureBFBTypeNameLabel() {&#xA;&#x9;&#x9;return fFigureBFBTypeNameLabel;&#xA;&#x9;}&#xA;&#xA;&#xA;}&#xA;&#xA;"/>
       <modelFacet>
         <metaClass
-            href="cakefeed.genmodel#//cakefeed/CFBType"/>
+            href="cakefeed.genmodel#//cakefeed/CompositeFunctionBlockType"/>
         <containmentMetaFeature
-            href="cakefeed.genmodel#//cakefeed/CFBDiagram/cFBType"/>
+            href="cakefeed.genmodel#//cakefeed/CompositeFunctionBlockDiagram/cFBType"/>
         <childMetaFeature
-            href="cakefeed.genmodel#//cakefeed/CFBDiagram/cFBType"/>
+            href="cakefeed.genmodel#//cakefeed/CompositeFunctionBlockDiagram/cFBType"/>
       </modelFacet>
       <labels
-          visualID="5019"
-          editPartClassName="CFBTypeNameEditPart"
-          itemSemanticEditPolicyClassName="CFBTypeNameItemSemanticEditPolicy">
+          visualID="5030"
+          editPartClassName="CompositeFunctionBlockTypeNameEditPart"
+          itemSemanticEditPolicyClassName="CompositeFunctionBlockTypeNameItemSemanticEditPolicy">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap
@@ -695,9 +696,9 @@
         <metaClass
             href="cakefeed.genmodel#//cakefeed/IFIFEventConnection"/>
         <containmentMetaFeature
-            href="cakefeed.genmodel#//cakefeed/FBNetwork/eventConnections"/>
+            href="cakefeed.genmodel#//cakefeed/FunctionBlockNetwork/eventConnections"/>
         <childMetaFeature
-            href="cakefeed.genmodel#//cakefeed/FBNetwork/eventConnections"/>
+            href="cakefeed.genmodel#//cakefeed/FunctionBlockNetwork/eventConnections"/>
         <sourceMetaFeature
             href="cakefeed.genmodel#//cakefeed/IFIFEventConnection/source"/>
         <targetMetaFeature
@@ -729,9 +730,9 @@
         <metaClass
             href="cakefeed.genmodel#//cakefeed/IFFBEventConnection"/>
         <containmentMetaFeature
-            href="cakefeed.genmodel#//cakefeed/FBNetwork/eventConnections"/>
+            href="cakefeed.genmodel#//cakefeed/FunctionBlockNetwork/eventConnections"/>
         <childMetaFeature
-            href="cakefeed.genmodel#//cakefeed/FBNetwork/eventConnections"/>
+            href="cakefeed.genmodel#//cakefeed/FunctionBlockNetwork/eventConnections"/>
         <sourceMetaFeature
             href="cakefeed.genmodel#//cakefeed/IFFBEventConnection/source"/>
         <targetMetaFeature
@@ -763,9 +764,9 @@
         <metaClass
             href="cakefeed.genmodel#//cakefeed/FBIFEventConnection"/>
         <containmentMetaFeature
-            href="cakefeed.genmodel#//cakefeed/FBNetwork/eventConnections"/>
+            href="cakefeed.genmodel#//cakefeed/FunctionBlockNetwork/eventConnections"/>
         <childMetaFeature
-            href="cakefeed.genmodel#//cakefeed/FBNetwork/eventConnections"/>
+            href="cakefeed.genmodel#//cakefeed/FunctionBlockNetwork/eventConnections"/>
         <sourceMetaFeature
             href="cakefeed.genmodel#//cakefeed/FBIFEventConnection/source"/>
         <targetMetaFeature
@@ -797,9 +798,9 @@
         <metaClass
             href="cakefeed.genmodel#//cakefeed/FBFBEventConnection"/>
         <containmentMetaFeature
-            href="cakefeed.genmodel#//cakefeed/FBNetwork/eventConnections"/>
+            href="cakefeed.genmodel#//cakefeed/FunctionBlockNetwork/eventConnections"/>
         <childMetaFeature
-            href="cakefeed.genmodel#//cakefeed/FBNetwork/eventConnections"/>
+            href="cakefeed.genmodel#//cakefeed/FunctionBlockNetwork/eventConnections"/>
         <sourceMetaFeature
             href="cakefeed.genmodel#//cakefeed/FBFBEventConnection/source"/>
         <targetMetaFeature
@@ -831,9 +832,9 @@
         <metaClass
             href="cakefeed.genmodel#//cakefeed/IFIFDataConnection"/>
         <containmentMetaFeature
-            href="cakefeed.genmodel#//cakefeed/FBNetwork/dataConnections"/>
+            href="cakefeed.genmodel#//cakefeed/FunctionBlockNetwork/dataConnections"/>
         <childMetaFeature
-            href="cakefeed.genmodel#//cakefeed/FBNetwork/dataConnections"/>
+            href="cakefeed.genmodel#//cakefeed/FunctionBlockNetwork/dataConnections"/>
         <sourceMetaFeature
             href="cakefeed.genmodel#//cakefeed/IFIFDataConnection/source"/>
         <targetMetaFeature
@@ -865,9 +866,9 @@
         <metaClass
             href="cakefeed.genmodel#//cakefeed/IFFBDataConnection"/>
         <containmentMetaFeature
-            href="cakefeed.genmodel#//cakefeed/FBNetwork/dataConnections"/>
+            href="cakefeed.genmodel#//cakefeed/FunctionBlockNetwork/dataConnections"/>
         <childMetaFeature
-            href="cakefeed.genmodel#//cakefeed/FBNetwork/dataConnections"/>
+            href="cakefeed.genmodel#//cakefeed/FunctionBlockNetwork/dataConnections"/>
         <sourceMetaFeature
             href="cakefeed.genmodel#//cakefeed/IFFBDataConnection/source"/>
         <targetMetaFeature
@@ -899,9 +900,9 @@
         <metaClass
             href="cakefeed.genmodel#//cakefeed/FBIFDataConnection"/>
         <containmentMetaFeature
-            href="cakefeed.genmodel#//cakefeed/FBNetwork/dataConnections"/>
+            href="cakefeed.genmodel#//cakefeed/FunctionBlockNetwork/dataConnections"/>
         <childMetaFeature
-            href="cakefeed.genmodel#//cakefeed/FBNetwork/dataConnections"/>
+            href="cakefeed.genmodel#//cakefeed/FunctionBlockNetwork/dataConnections"/>
         <sourceMetaFeature
             href="cakefeed.genmodel#//cakefeed/FBIFDataConnection/source"/>
         <targetMetaFeature
@@ -933,9 +934,9 @@
         <metaClass
             href="cakefeed.genmodel#//cakefeed/FBFBDataConnection"/>
         <containmentMetaFeature
-            href="cakefeed.genmodel#//cakefeed/FBNetwork/dataConnections"/>
+            href="cakefeed.genmodel#//cakefeed/FunctionBlockNetwork/dataConnections"/>
         <childMetaFeature
-            href="cakefeed.genmodel#//cakefeed/FBNetwork/dataConnections"/>
+            href="cakefeed.genmodel#//cakefeed/FunctionBlockNetwork/dataConnections"/>
         <sourceMetaFeature
             href="cakefeed.genmodel#//cakefeed/FBFBDataConnection/source"/>
         <targetMetaFeature
@@ -943,10 +944,10 @@
       </modelFacet>
     </links>
     <compartments
-        visualID="7005"
-        editPartClassName="CFBTypeCFBTypeCompartmentEditPart"
-        itemSemanticEditPolicyClassName="CFBTypeCFBTypeCompartmentItemSemanticEditPolicy"
-        canonicalEditPolicyClassName="CFBTypeCFBTypeCompartmentCanonicalEditPolicy"
+        visualID="7006"
+        editPartClassName="CompositeFunctionBlockTypeCFBTypeCompartmentEditPart"
+        itemSemanticEditPolicyClassName="CompositeFunctionBlockTypeCFBTypeCompartmentItemSemanticEditPolicy"
+        canonicalEditPolicyClassName="CompositeFunctionBlockTypeCFBTypeCompartmentCanonicalEditPolicy"
         childNodes="//@diagram/@childNodes.4"
         title="CFBTypeCompartment"
         needsTitle="false"

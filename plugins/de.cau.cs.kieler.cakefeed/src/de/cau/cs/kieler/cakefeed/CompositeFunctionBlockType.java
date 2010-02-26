@@ -9,21 +9,21 @@ package de.cau.cs.kieler.cakefeed;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Adapter Type</b></em>'.
+ * A representation of the model object '<em><b>Composite Function Block Type</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link de.cau.cs.kieler.cakefeed.AdapterType#getService <em>Service</em>}</li>
+ *   <li>{@link de.cau.cs.kieler.cakefeed.CompositeFunctionBlockType#getService <em>Service</em>}</li>
  * </ul>
  * </p>
  *
- * @see de.cau.cs.kieler.cakefeed.CakefeedPackage#getAdapterType()
+ * @see de.cau.cs.kieler.cakefeed.CakefeedPackage#getCompositeFunctionBlockType()
  * @model
  * @generated
  */
-public interface AdapterType extends Compilable, NamedAndCommented, FunctionBlockInterface {
+public interface CompositeFunctionBlockType extends FunctionBlockType, FunctionBlockNetwork {
 	/**
 	 * Returns the value of the '<em><b>Service</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
@@ -34,14 +34,14 @@ public interface AdapterType extends Compilable, NamedAndCommented, FunctionBloc
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Service</em>' containment reference.
 	 * @see #setService(Service)
-	 * @see de.cau.cs.kieler.cakefeed.CakefeedPackage#getAdapterType_Service()
+	 * @see de.cau.cs.kieler.cakefeed.CakefeedPackage#getCompositeFunctionBlockType_Service()
 	 * @model containment="true"
 	 * @generated
 	 */
 	Service getService();
 
 	/**
-	 * Sets the value of the '{@link de.cau.cs.kieler.cakefeed.AdapterType#getService <em>Service</em>}' containment reference.
+	 * Sets the value of the '{@link de.cau.cs.kieler.cakefeed.CompositeFunctionBlockType#getService <em>Service</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Service</em>' containment reference.
@@ -50,4 +50,4 @@ public interface AdapterType extends Compilable, NamedAndCommented, FunctionBloc
 	 */
 	void setService(Service value);
 
-} // AdapterType
+} // CompositeFunctionBlockType

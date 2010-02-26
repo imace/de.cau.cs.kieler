@@ -418,14 +418,32 @@ public interface CakefeedPackage extends EPackage {
 	int APPLICATION_FEATURE_COUNT = NAMED_AND_COMMENTED_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link de.cau.cs.kieler.cakefeed.impl.FBNetworkImpl <em>FB Network</em>}' class.
+	 * The meta object id for the '{@link de.cau.cs.kieler.cakefeed.impl.FunctionBlockNetworkImpl <em>Function Block Network</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.cau.cs.kieler.cakefeed.impl.FBNetworkImpl
-	 * @see de.cau.cs.kieler.cakefeed.impl.CakefeedPackageImpl#getFBNetwork()
+	 * @see de.cau.cs.kieler.cakefeed.impl.FunctionBlockNetworkImpl
+	 * @see de.cau.cs.kieler.cakefeed.impl.CakefeedPackageImpl#getFunctionBlockNetwork()
 	 * @generated
 	 */
-	int FB_NETWORK = 4;
+	int FUNCTION_BLOCK_NETWORK = 4;
+
+	/**
+	 * The feature id for the '<em><b>Comment</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FUNCTION_BLOCK_NETWORK__COMMENT = NAMED_AND_COMMENTED__COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FUNCTION_BLOCK_NETWORK__NAME = NAMED_AND_COMMENTED__NAME;
 
 	/**
 	 * The feature id for the '<em><b>FBs</b></em>' containment reference list.
@@ -434,7 +452,7 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FB_NETWORK__FBS = 0;
+	int FUNCTION_BLOCK_NETWORK__FBS = NAMED_AND_COMMENTED_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Event Connections</b></em>' containment reference list.
@@ -443,7 +461,7 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FB_NETWORK__EVENT_CONNECTIONS = 1;
+	int FUNCTION_BLOCK_NETWORK__EVENT_CONNECTIONS = NAMED_AND_COMMENTED_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Data Connections</b></em>' containment reference list.
@@ -452,7 +470,7 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FB_NETWORK__DATA_CONNECTIONS = 2;
+	int FUNCTION_BLOCK_NETWORK__DATA_CONNECTIONS = NAMED_AND_COMMENTED_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Adapter Connections</b></em>' containment reference list.
@@ -461,16 +479,16 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FB_NETWORK__ADAPTER_CONNECTIONS = 3;
+	int FUNCTION_BLOCK_NETWORK__ADAPTER_CONNECTIONS = NAMED_AND_COMMENTED_FEATURE_COUNT + 3;
 
 	/**
-	 * The number of structural features of the '<em>FB Network</em>' class.
+	 * The number of structural features of the '<em>Function Block Network</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FB_NETWORK_FEATURE_COUNT = 4;
+	int FUNCTION_BLOCK_NETWORK_FEATURE_COUNT = NAMED_AND_COMMENTED_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link de.cau.cs.kieler.cakefeed.impl.DeviceImpl <em>Device</em>}' class.
@@ -693,14 +711,14 @@ public interface CakefeedPackage extends EPackage {
 	int LINK_FEATURE_COUNT = 4;
 
 	/**
-	 * The meta object id for the '{@link de.cau.cs.kieler.cakefeed.impl.FBImpl <em>FB</em>}' class.
+	 * The meta object id for the '{@link de.cau.cs.kieler.cakefeed.impl.FunctionBlockImpl <em>Function Block</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.cau.cs.kieler.cakefeed.impl.FBImpl
-	 * @see de.cau.cs.kieler.cakefeed.impl.CakefeedPackageImpl#getFB()
+	 * @see de.cau.cs.kieler.cakefeed.impl.FunctionBlockImpl
+	 * @see de.cau.cs.kieler.cakefeed.impl.CakefeedPackageImpl#getFunctionBlock()
 	 * @generated
 	 */
-	int FB = 9;
+	int FUNCTION_BLOCK = 9;
 
 	/**
 	 * The feature id for the '<em><b>Comment</b></em>' attribute.
@@ -709,7 +727,7 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FB__COMMENT = NAMED_AND_COMMENTED__COMMENT;
+	int FUNCTION_BLOCK__COMMENT = NAMED_AND_COMMENTED__COMMENT;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -718,7 +736,7 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FB__NAME = NAMED_AND_COMMENTED__NAME;
+	int FUNCTION_BLOCK__NAME = NAMED_AND_COMMENTED__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -727,7 +745,7 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FB__PARAMETERS = NAMED_AND_COMMENTED_FEATURE_COUNT + 0;
+	int FUNCTION_BLOCK__PARAMETERS = NAMED_AND_COMMENTED_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -736,7 +754,7 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FB__TYPE = NAMED_AND_COMMENTED_FEATURE_COUNT + 1;
+	int FUNCTION_BLOCK__TYPE = NAMED_AND_COMMENTED_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Input Events</b></em>' containment reference list.
@@ -745,7 +763,7 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FB__INPUT_EVENTS = NAMED_AND_COMMENTED_FEATURE_COUNT + 2;
+	int FUNCTION_BLOCK__INPUT_EVENTS = NAMED_AND_COMMENTED_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Output Events</b></em>' containment reference list.
@@ -754,7 +772,7 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FB__OUTPUT_EVENTS = NAMED_AND_COMMENTED_FEATURE_COUNT + 3;
+	int FUNCTION_BLOCK__OUTPUT_EVENTS = NAMED_AND_COMMENTED_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Input Vars</b></em>' containment reference list.
@@ -763,7 +781,7 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FB__INPUT_VARS = NAMED_AND_COMMENTED_FEATURE_COUNT + 4;
+	int FUNCTION_BLOCK__INPUT_VARS = NAMED_AND_COMMENTED_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Output Vars</b></em>' containment reference list.
@@ -772,26 +790,26 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FB__OUTPUT_VARS = NAMED_AND_COMMENTED_FEATURE_COUNT + 5;
+	int FUNCTION_BLOCK__OUTPUT_VARS = NAMED_AND_COMMENTED_FEATURE_COUNT + 5;
 
 	/**
-	 * The number of structural features of the '<em>FB</em>' class.
+	 * The number of structural features of the '<em>Function Block</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FB_FEATURE_COUNT = NAMED_AND_COMMENTED_FEATURE_COUNT + 6;
+	int FUNCTION_BLOCK_FEATURE_COUNT = NAMED_AND_COMMENTED_FEATURE_COUNT + 6;
 
 	/**
-	 * The meta object id for the '{@link de.cau.cs.kieler.cakefeed.impl.FBInterfaceImpl <em>FB Interface</em>}' class.
+	 * The meta object id for the '{@link de.cau.cs.kieler.cakefeed.impl.FunctionBlockInterfaceImpl <em>Function Block Interface</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.cau.cs.kieler.cakefeed.impl.FBInterfaceImpl
-	 * @see de.cau.cs.kieler.cakefeed.impl.CakefeedPackageImpl#getFBInterface()
+	 * @see de.cau.cs.kieler.cakefeed.impl.FunctionBlockInterfaceImpl
+	 * @see de.cau.cs.kieler.cakefeed.impl.CakefeedPackageImpl#getFunctionBlockInterface()
 	 * @generated
 	 */
-	int FB_INTERFACE = 10;
+	int FUNCTION_BLOCK_INTERFACE = 10;
 
 	/**
 	 * The feature id for the '<em><b>Input Events</b></em>' containment reference list.
@@ -800,7 +818,7 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FB_INTERFACE__INPUT_EVENTS = 0;
+	int FUNCTION_BLOCK_INTERFACE__INPUT_EVENTS = 0;
 
 	/**
 	 * The feature id for the '<em><b>Output Events</b></em>' containment reference list.
@@ -809,7 +827,7 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FB_INTERFACE__OUTPUT_EVENTS = 1;
+	int FUNCTION_BLOCK_INTERFACE__OUTPUT_EVENTS = 1;
 
 	/**
 	 * The feature id for the '<em><b>Input Vars</b></em>' containment reference list.
@@ -818,7 +836,7 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FB_INTERFACE__INPUT_VARS = 2;
+	int FUNCTION_BLOCK_INTERFACE__INPUT_VARS = 2;
 
 	/**
 	 * The feature id for the '<em><b>Output Vars</b></em>' containment reference list.
@@ -827,7 +845,7 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FB_INTERFACE__OUTPUT_VARS = 3;
+	int FUNCTION_BLOCK_INTERFACE__OUTPUT_VARS = 3;
 
 	/**
 	 * The feature id for the '<em><b>Sockets</b></em>' containment reference list.
@@ -836,7 +854,7 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FB_INTERFACE__SOCKETS = 4;
+	int FUNCTION_BLOCK_INTERFACE__SOCKETS = 4;
 
 	/**
 	 * The feature id for the '<em><b>Plugs</b></em>' containment reference list.
@@ -845,16 +863,16 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FB_INTERFACE__PLUGS = 5;
+	int FUNCTION_BLOCK_INTERFACE__PLUGS = 5;
 
 	/**
-	 * The number of structural features of the '<em>FB Interface</em>' class.
+	 * The number of structural features of the '<em>Function Block Interface</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FB_INTERFACE_FEATURE_COUNT = 6;
+	int FUNCTION_BLOCK_INTERFACE_FEATURE_COUNT = 6;
 
 	/**
 	 * The meta object id for the '{@link de.cau.cs.kieler.cakefeed.impl.ParameterImpl <em>Parameter</em>}' class.
@@ -1013,14 +1031,14 @@ public interface CakefeedPackage extends EPackage {
 	int COMPILABLE_FEATURE_COUNT = IDENTIFIABLE_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link de.cau.cs.kieler.cakefeed.impl.FBTypeImpl <em>FB Type</em>}' class.
+	 * The meta object id for the '{@link de.cau.cs.kieler.cakefeed.impl.FunctionBlockTypeImpl <em>Function Block Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.cau.cs.kieler.cakefeed.impl.FBTypeImpl
-	 * @see de.cau.cs.kieler.cakefeed.impl.CakefeedPackageImpl#getFBType()
+	 * @see de.cau.cs.kieler.cakefeed.impl.FunctionBlockTypeImpl
+	 * @see de.cau.cs.kieler.cakefeed.impl.CakefeedPackageImpl#getFunctionBlockType()
 	 * @generated
 	 */
-	int FB_TYPE = 13;
+	int FUNCTION_BLOCK_TYPE = 13;
 
 	/**
 	 * The feature id for the '<em><b>Identification</b></em>' containment reference.
@@ -1029,7 +1047,7 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FB_TYPE__IDENTIFICATION = COMPILABLE__IDENTIFICATION;
+	int FUNCTION_BLOCK_TYPE__IDENTIFICATION = COMPILABLE__IDENTIFICATION;
 
 	/**
 	 * The feature id for the '<em><b>Version Infos</b></em>' containment reference list.
@@ -1038,7 +1056,7 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FB_TYPE__VERSION_INFOS = COMPILABLE__VERSION_INFOS;
+	int FUNCTION_BLOCK_TYPE__VERSION_INFOS = COMPILABLE__VERSION_INFOS;
 
 	/**
 	 * The feature id for the '<em><b>Compiler Info</b></em>' containment reference.
@@ -1047,7 +1065,7 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FB_TYPE__COMPILER_INFO = COMPILABLE__COMPILER_INFO;
+	int FUNCTION_BLOCK_TYPE__COMPILER_INFO = COMPILABLE__COMPILER_INFO;
 
 	/**
 	 * The feature id for the '<em><b>Comment</b></em>' attribute.
@@ -1056,7 +1074,7 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FB_TYPE__COMMENT = COMPILABLE_FEATURE_COUNT + 0;
+	int FUNCTION_BLOCK_TYPE__COMMENT = COMPILABLE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1065,7 +1083,7 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FB_TYPE__NAME = COMPILABLE_FEATURE_COUNT + 1;
+	int FUNCTION_BLOCK_TYPE__NAME = COMPILABLE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Input Events</b></em>' containment reference list.
@@ -1074,7 +1092,7 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FB_TYPE__INPUT_EVENTS = COMPILABLE_FEATURE_COUNT + 2;
+	int FUNCTION_BLOCK_TYPE__INPUT_EVENTS = COMPILABLE_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Output Events</b></em>' containment reference list.
@@ -1083,7 +1101,7 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FB_TYPE__OUTPUT_EVENTS = COMPILABLE_FEATURE_COUNT + 3;
+	int FUNCTION_BLOCK_TYPE__OUTPUT_EVENTS = COMPILABLE_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Input Vars</b></em>' containment reference list.
@@ -1092,7 +1110,7 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FB_TYPE__INPUT_VARS = COMPILABLE_FEATURE_COUNT + 4;
+	int FUNCTION_BLOCK_TYPE__INPUT_VARS = COMPILABLE_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Output Vars</b></em>' containment reference list.
@@ -1101,7 +1119,7 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FB_TYPE__OUTPUT_VARS = COMPILABLE_FEATURE_COUNT + 5;
+	int FUNCTION_BLOCK_TYPE__OUTPUT_VARS = COMPILABLE_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Sockets</b></em>' containment reference list.
@@ -1110,7 +1128,7 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FB_TYPE__SOCKETS = COMPILABLE_FEATURE_COUNT + 6;
+	int FUNCTION_BLOCK_TYPE__SOCKETS = COMPILABLE_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Plugs</b></em>' containment reference list.
@@ -1119,16 +1137,16 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FB_TYPE__PLUGS = COMPILABLE_FEATURE_COUNT + 7;
+	int FUNCTION_BLOCK_TYPE__PLUGS = COMPILABLE_FEATURE_COUNT + 7;
 
 	/**
-	 * The number of structural features of the '<em>FB Type</em>' class.
+	 * The number of structural features of the '<em>Function Block Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FB_TYPE_FEATURE_COUNT = COMPILABLE_FEATURE_COUNT + 8;
+	int FUNCTION_BLOCK_TYPE_FEATURE_COUNT = COMPILABLE_FEATURE_COUNT + 8;
 
 	/**
 	 * The meta object id for the '{@link de.cau.cs.kieler.cakefeed.impl.ConnectionImpl <em>Connection</em>}' class.
@@ -3235,14 +3253,14 @@ public interface CakefeedPackage extends EPackage {
 	int OUTPUT_PRIMITIVE_FEATURE_COUNT = PRIMITIVE_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link de.cau.cs.kieler.cakefeed.impl.BFBTypeImpl <em>BFB Type</em>}' class.
+	 * The meta object id for the '{@link de.cau.cs.kieler.cakefeed.impl.BasicFunctionBlockTypeImpl <em>Basic Function Block Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.cau.cs.kieler.cakefeed.impl.BFBTypeImpl
-	 * @see de.cau.cs.kieler.cakefeed.impl.CakefeedPackageImpl#getBFBType()
+	 * @see de.cau.cs.kieler.cakefeed.impl.BasicFunctionBlockTypeImpl
+	 * @see de.cau.cs.kieler.cakefeed.impl.CakefeedPackageImpl#getBasicFunctionBlockType()
 	 * @generated
 	 */
-	int BFB_TYPE = 57;
+	int BASIC_FUNCTION_BLOCK_TYPE = 57;
 
 	/**
 	 * The feature id for the '<em><b>Identification</b></em>' containment reference.
@@ -3251,7 +3269,7 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BFB_TYPE__IDENTIFICATION = FB_TYPE__IDENTIFICATION;
+	int BASIC_FUNCTION_BLOCK_TYPE__IDENTIFICATION = FUNCTION_BLOCK_TYPE__IDENTIFICATION;
 
 	/**
 	 * The feature id for the '<em><b>Version Infos</b></em>' containment reference list.
@@ -3260,7 +3278,7 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BFB_TYPE__VERSION_INFOS = FB_TYPE__VERSION_INFOS;
+	int BASIC_FUNCTION_BLOCK_TYPE__VERSION_INFOS = FUNCTION_BLOCK_TYPE__VERSION_INFOS;
 
 	/**
 	 * The feature id for the '<em><b>Compiler Info</b></em>' containment reference.
@@ -3269,7 +3287,7 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BFB_TYPE__COMPILER_INFO = FB_TYPE__COMPILER_INFO;
+	int BASIC_FUNCTION_BLOCK_TYPE__COMPILER_INFO = FUNCTION_BLOCK_TYPE__COMPILER_INFO;
 
 	/**
 	 * The feature id for the '<em><b>Comment</b></em>' attribute.
@@ -3278,7 +3296,7 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BFB_TYPE__COMMENT = FB_TYPE__COMMENT;
+	int BASIC_FUNCTION_BLOCK_TYPE__COMMENT = FUNCTION_BLOCK_TYPE__COMMENT;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3287,7 +3305,7 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BFB_TYPE__NAME = FB_TYPE__NAME;
+	int BASIC_FUNCTION_BLOCK_TYPE__NAME = FUNCTION_BLOCK_TYPE__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Input Events</b></em>' containment reference list.
@@ -3296,7 +3314,7 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BFB_TYPE__INPUT_EVENTS = FB_TYPE__INPUT_EVENTS;
+	int BASIC_FUNCTION_BLOCK_TYPE__INPUT_EVENTS = FUNCTION_BLOCK_TYPE__INPUT_EVENTS;
 
 	/**
 	 * The feature id for the '<em><b>Output Events</b></em>' containment reference list.
@@ -3305,7 +3323,7 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BFB_TYPE__OUTPUT_EVENTS = FB_TYPE__OUTPUT_EVENTS;
+	int BASIC_FUNCTION_BLOCK_TYPE__OUTPUT_EVENTS = FUNCTION_BLOCK_TYPE__OUTPUT_EVENTS;
 
 	/**
 	 * The feature id for the '<em><b>Input Vars</b></em>' containment reference list.
@@ -3314,7 +3332,7 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BFB_TYPE__INPUT_VARS = FB_TYPE__INPUT_VARS;
+	int BASIC_FUNCTION_BLOCK_TYPE__INPUT_VARS = FUNCTION_BLOCK_TYPE__INPUT_VARS;
 
 	/**
 	 * The feature id for the '<em><b>Output Vars</b></em>' containment reference list.
@@ -3323,7 +3341,7 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BFB_TYPE__OUTPUT_VARS = FB_TYPE__OUTPUT_VARS;
+	int BASIC_FUNCTION_BLOCK_TYPE__OUTPUT_VARS = FUNCTION_BLOCK_TYPE__OUTPUT_VARS;
 
 	/**
 	 * The feature id for the '<em><b>Sockets</b></em>' containment reference list.
@@ -3332,7 +3350,7 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BFB_TYPE__SOCKETS = FB_TYPE__SOCKETS;
+	int BASIC_FUNCTION_BLOCK_TYPE__SOCKETS = FUNCTION_BLOCK_TYPE__SOCKETS;
 
 	/**
 	 * The feature id for the '<em><b>Plugs</b></em>' containment reference list.
@@ -3341,7 +3359,7 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BFB_TYPE__PLUGS = FB_TYPE__PLUGS;
+	int BASIC_FUNCTION_BLOCK_TYPE__PLUGS = FUNCTION_BLOCK_TYPE__PLUGS;
 
 	/**
 	 * The feature id for the '<em><b>Service</b></em>' containment reference.
@@ -3350,7 +3368,7 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BFB_TYPE__SERVICE = FB_TYPE_FEATURE_COUNT + 0;
+	int BASIC_FUNCTION_BLOCK_TYPE__SERVICE = FUNCTION_BLOCK_TYPE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Sync Chart</b></em>' reference.
@@ -3359,7 +3377,7 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BFB_TYPE__SYNC_CHART = FB_TYPE_FEATURE_COUNT + 1;
+	int BASIC_FUNCTION_BLOCK_TYPE__SYNC_CHART = FUNCTION_BLOCK_TYPE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Internal Vars</b></em>' containment reference list.
@@ -3368,7 +3386,7 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BFB_TYPE__INTERNAL_VARS = FB_TYPE_FEATURE_COUNT + 2;
+	int BASIC_FUNCTION_BLOCK_TYPE__INTERNAL_VARS = FUNCTION_BLOCK_TYPE_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Function Block Diagrams</b></em>' containment reference list.
@@ -3377,16 +3395,16 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BFB_TYPE__FUNCTION_BLOCK_DIAGRAMS = FB_TYPE_FEATURE_COUNT + 3;
+	int BASIC_FUNCTION_BLOCK_TYPE__FUNCTION_BLOCK_DIAGRAMS = FUNCTION_BLOCK_TYPE_FEATURE_COUNT + 3;
 
 	/**
-	 * The feature id for the '<em><b>STs</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Structured Texts</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BFB_TYPE__STS = FB_TYPE_FEATURE_COUNT + 4;
+	int BASIC_FUNCTION_BLOCK_TYPE__STRUCTURED_TEXTS = FUNCTION_BLOCK_TYPE_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Ladder Diagrams</b></em>' containment reference list.
@@ -3395,7 +3413,7 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BFB_TYPE__LADDER_DIAGRAMS = FB_TYPE_FEATURE_COUNT + 5;
+	int BASIC_FUNCTION_BLOCK_TYPE__LADDER_DIAGRAMS = FUNCTION_BLOCK_TYPE_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Other Algorithms</b></em>' containment reference list.
@@ -3404,26 +3422,26 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BFB_TYPE__OTHER_ALGORITHMS = FB_TYPE_FEATURE_COUNT + 6;
+	int BASIC_FUNCTION_BLOCK_TYPE__OTHER_ALGORITHMS = FUNCTION_BLOCK_TYPE_FEATURE_COUNT + 6;
 
 	/**
-	 * The number of structural features of the '<em>BFB Type</em>' class.
+	 * The number of structural features of the '<em>Basic Function Block Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BFB_TYPE_FEATURE_COUNT = FB_TYPE_FEATURE_COUNT + 7;
+	int BASIC_FUNCTION_BLOCK_TYPE_FEATURE_COUNT = FUNCTION_BLOCK_TYPE_FEATURE_COUNT + 7;
 
 	/**
-	 * The meta object id for the '{@link de.cau.cs.kieler.cakefeed.impl.FBDImpl <em>FBD</em>}' class.
+	 * The meta object id for the '{@link de.cau.cs.kieler.cakefeed.impl.FunctionBlockDiagramImpl <em>Function Block Diagram</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.cau.cs.kieler.cakefeed.impl.FBDImpl
-	 * @see de.cau.cs.kieler.cakefeed.impl.CakefeedPackageImpl#getFBD()
+	 * @see de.cau.cs.kieler.cakefeed.impl.FunctionBlockDiagramImpl
+	 * @see de.cau.cs.kieler.cakefeed.impl.CakefeedPackageImpl#getFunctionBlockDiagram()
 	 * @generated
 	 */
-	int FBD = 58;
+	int FUNCTION_BLOCK_DIAGRAM = 58;
 
 	/**
 	 * The feature id for the '<em><b>Comment</b></em>' attribute.
@@ -3432,7 +3450,7 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FBD__COMMENT = NAMED_AND_COMMENTED__COMMENT;
+	int FUNCTION_BLOCK_DIAGRAM__COMMENT = NAMED_AND_COMMENTED__COMMENT;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3441,7 +3459,7 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FBD__NAME = NAMED_AND_COMMENTED__NAME;
+	int FUNCTION_BLOCK_DIAGRAM__NAME = NAMED_AND_COMMENTED__NAME;
 
 	/**
 	 * The feature id for the '<em><b>FBs</b></em>' containment reference list.
@@ -3450,7 +3468,7 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FBD__FBS = NAMED_AND_COMMENTED_FEATURE_COUNT + 0;
+	int FUNCTION_BLOCK_DIAGRAM__FBS = NAMED_AND_COMMENTED_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Data Connections</b></em>' containment reference list.
@@ -3459,26 +3477,26 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FBD__DATA_CONNECTIONS = NAMED_AND_COMMENTED_FEATURE_COUNT + 1;
+	int FUNCTION_BLOCK_DIAGRAM__DATA_CONNECTIONS = NAMED_AND_COMMENTED_FEATURE_COUNT + 1;
 
 	/**
-	 * The number of structural features of the '<em>FBD</em>' class.
+	 * The number of structural features of the '<em>Function Block Diagram</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FBD_FEATURE_COUNT = NAMED_AND_COMMENTED_FEATURE_COUNT + 2;
+	int FUNCTION_BLOCK_DIAGRAM_FEATURE_COUNT = NAMED_AND_COMMENTED_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link de.cau.cs.kieler.cakefeed.impl.STImpl <em>ST</em>}' class.
+	 * The meta object id for the '{@link de.cau.cs.kieler.cakefeed.impl.StructuredTextImpl <em>Structured Text</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.cau.cs.kieler.cakefeed.impl.STImpl
-	 * @see de.cau.cs.kieler.cakefeed.impl.CakefeedPackageImpl#getST()
+	 * @see de.cau.cs.kieler.cakefeed.impl.StructuredTextImpl
+	 * @see de.cau.cs.kieler.cakefeed.impl.CakefeedPackageImpl#getStructuredText()
 	 * @generated
 	 */
-	int ST = 59;
+	int STRUCTURED_TEXT = 59;
 
 	/**
 	 * The feature id for the '<em><b>Comment</b></em>' attribute.
@@ -3487,7 +3505,7 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ST__COMMENT = NAMED_AND_COMMENTED__COMMENT;
+	int STRUCTURED_TEXT__COMMENT = NAMED_AND_COMMENTED__COMMENT;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3496,7 +3514,7 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ST__NAME = NAMED_AND_COMMENTED__NAME;
+	int STRUCTURED_TEXT__NAME = NAMED_AND_COMMENTED__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Text</b></em>' attribute.
@@ -3505,26 +3523,26 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ST__TEXT = NAMED_AND_COMMENTED_FEATURE_COUNT + 0;
+	int STRUCTURED_TEXT__TEXT = NAMED_AND_COMMENTED_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the '<em>ST</em>' class.
+	 * The number of structural features of the '<em>Structured Text</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ST_FEATURE_COUNT = NAMED_AND_COMMENTED_FEATURE_COUNT + 1;
+	int STRUCTURED_TEXT_FEATURE_COUNT = NAMED_AND_COMMENTED_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link de.cau.cs.kieler.cakefeed.impl.LDImpl <em>LD</em>}' class.
+	 * The meta object id for the '{@link de.cau.cs.kieler.cakefeed.impl.LadderDiagramImpl <em>Ladder Diagram</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.cau.cs.kieler.cakefeed.impl.LDImpl
-	 * @see de.cau.cs.kieler.cakefeed.impl.CakefeedPackageImpl#getLD()
+	 * @see de.cau.cs.kieler.cakefeed.impl.LadderDiagramImpl
+	 * @see de.cau.cs.kieler.cakefeed.impl.CakefeedPackageImpl#getLadderDiagram()
 	 * @generated
 	 */
-	int LD = 60;
+	int LADDER_DIAGRAM = 60;
 
 	/**
 	 * The feature id for the '<em><b>Comment</b></em>' attribute.
@@ -3533,7 +3551,7 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LD__COMMENT = NAMED_AND_COMMENTED__COMMENT;
+	int LADDER_DIAGRAM__COMMENT = NAMED_AND_COMMENTED__COMMENT;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3542,7 +3560,7 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LD__NAME = NAMED_AND_COMMENTED__NAME;
+	int LADDER_DIAGRAM__NAME = NAMED_AND_COMMENTED__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Rungs</b></em>' containment reference list.
@@ -3551,26 +3569,26 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LD__RUNGS = NAMED_AND_COMMENTED_FEATURE_COUNT + 0;
+	int LADDER_DIAGRAM__RUNGS = NAMED_AND_COMMENTED_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the '<em>LD</em>' class.
+	 * The number of structural features of the '<em>Ladder Diagram</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LD_FEATURE_COUNT = NAMED_AND_COMMENTED_FEATURE_COUNT + 1;
+	int LADDER_DIAGRAM_FEATURE_COUNT = NAMED_AND_COMMENTED_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link de.cau.cs.kieler.cakefeed.impl.OtherImpl <em>Other</em>}' class.
+	 * The meta object id for the '{@link de.cau.cs.kieler.cakefeed.impl.OtherAlgorithmImpl <em>Other Algorithm</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.cau.cs.kieler.cakefeed.impl.OtherImpl
-	 * @see de.cau.cs.kieler.cakefeed.impl.CakefeedPackageImpl#getOther()
+	 * @see de.cau.cs.kieler.cakefeed.impl.OtherAlgorithmImpl
+	 * @see de.cau.cs.kieler.cakefeed.impl.CakefeedPackageImpl#getOtherAlgorithm()
 	 * @generated
 	 */
-	int OTHER = 61;
+	int OTHER_ALGORITHM = 61;
 
 	/**
 	 * The feature id for the '<em><b>Comment</b></em>' attribute.
@@ -3579,7 +3597,7 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OTHER__COMMENT = NAMED_AND_COMMENTED__COMMENT;
+	int OTHER_ALGORITHM__COMMENT = NAMED_AND_COMMENTED__COMMENT;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3588,7 +3606,7 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OTHER__NAME = NAMED_AND_COMMENTED__NAME;
+	int OTHER_ALGORITHM__NAME = NAMED_AND_COMMENTED__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Language</b></em>' attribute.
@@ -3597,7 +3615,7 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OTHER__LANGUAGE = NAMED_AND_COMMENTED_FEATURE_COUNT + 0;
+	int OTHER_ALGORITHM__LANGUAGE = NAMED_AND_COMMENTED_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Prototype</b></em>' attribute.
@@ -3606,7 +3624,7 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OTHER__PROTOTYPE = NAMED_AND_COMMENTED_FEATURE_COUNT + 1;
+	int OTHER_ALGORITHM__PROTOTYPE = NAMED_AND_COMMENTED_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Text</b></em>' attribute.
@@ -3615,16 +3633,16 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OTHER__TEXT = NAMED_AND_COMMENTED_FEATURE_COUNT + 2;
+	int OTHER_ALGORITHM__TEXT = NAMED_AND_COMMENTED_FEATURE_COUNT + 2;
 
 	/**
-	 * The number of structural features of the '<em>Other</em>' class.
+	 * The number of structural features of the '<em>Other Algorithm</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OTHER_FEATURE_COUNT = NAMED_AND_COMMENTED_FEATURE_COUNT + 3;
+	int OTHER_ALGORITHM_FEATURE_COUNT = NAMED_AND_COMMENTED_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link de.cau.cs.kieler.cakefeed.impl.RungImpl <em>Rung</em>}' class.
@@ -3673,14 +3691,14 @@ public interface CakefeedPackage extends EPackage {
 	int RUNG_FEATURE_COUNT = 3;
 
 	/**
-	 * The meta object id for the '{@link de.cau.cs.kieler.cakefeed.impl.CFBTypeImpl <em>CFB Type</em>}' class.
+	 * The meta object id for the '{@link de.cau.cs.kieler.cakefeed.impl.CompositeFunctionBlockTypeImpl <em>Composite Function Block Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.cau.cs.kieler.cakefeed.impl.CFBTypeImpl
-	 * @see de.cau.cs.kieler.cakefeed.impl.CakefeedPackageImpl#getCFBType()
+	 * @see de.cau.cs.kieler.cakefeed.impl.CompositeFunctionBlockTypeImpl
+	 * @see de.cau.cs.kieler.cakefeed.impl.CakefeedPackageImpl#getCompositeFunctionBlockType()
 	 * @generated
 	 */
-	int CFB_TYPE = 63;
+	int COMPOSITE_FUNCTION_BLOCK_TYPE = 63;
 
 	/**
 	 * The feature id for the '<em><b>Identification</b></em>' containment reference.
@@ -3689,7 +3707,7 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CFB_TYPE__IDENTIFICATION = FB_TYPE__IDENTIFICATION;
+	int COMPOSITE_FUNCTION_BLOCK_TYPE__IDENTIFICATION = FUNCTION_BLOCK_TYPE__IDENTIFICATION;
 
 	/**
 	 * The feature id for the '<em><b>Version Infos</b></em>' containment reference list.
@@ -3698,7 +3716,7 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CFB_TYPE__VERSION_INFOS = FB_TYPE__VERSION_INFOS;
+	int COMPOSITE_FUNCTION_BLOCK_TYPE__VERSION_INFOS = FUNCTION_BLOCK_TYPE__VERSION_INFOS;
 
 	/**
 	 * The feature id for the '<em><b>Compiler Info</b></em>' containment reference.
@@ -3707,7 +3725,7 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CFB_TYPE__COMPILER_INFO = FB_TYPE__COMPILER_INFO;
+	int COMPOSITE_FUNCTION_BLOCK_TYPE__COMPILER_INFO = FUNCTION_BLOCK_TYPE__COMPILER_INFO;
 
 	/**
 	 * The feature id for the '<em><b>Comment</b></em>' attribute.
@@ -3716,7 +3734,7 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CFB_TYPE__COMMENT = FB_TYPE__COMMENT;
+	int COMPOSITE_FUNCTION_BLOCK_TYPE__COMMENT = FUNCTION_BLOCK_TYPE__COMMENT;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3725,7 +3743,7 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CFB_TYPE__NAME = FB_TYPE__NAME;
+	int COMPOSITE_FUNCTION_BLOCK_TYPE__NAME = FUNCTION_BLOCK_TYPE__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Input Events</b></em>' containment reference list.
@@ -3734,7 +3752,7 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CFB_TYPE__INPUT_EVENTS = FB_TYPE__INPUT_EVENTS;
+	int COMPOSITE_FUNCTION_BLOCK_TYPE__INPUT_EVENTS = FUNCTION_BLOCK_TYPE__INPUT_EVENTS;
 
 	/**
 	 * The feature id for the '<em><b>Output Events</b></em>' containment reference list.
@@ -3743,7 +3761,7 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CFB_TYPE__OUTPUT_EVENTS = FB_TYPE__OUTPUT_EVENTS;
+	int COMPOSITE_FUNCTION_BLOCK_TYPE__OUTPUT_EVENTS = FUNCTION_BLOCK_TYPE__OUTPUT_EVENTS;
 
 	/**
 	 * The feature id for the '<em><b>Input Vars</b></em>' containment reference list.
@@ -3752,7 +3770,7 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CFB_TYPE__INPUT_VARS = FB_TYPE__INPUT_VARS;
+	int COMPOSITE_FUNCTION_BLOCK_TYPE__INPUT_VARS = FUNCTION_BLOCK_TYPE__INPUT_VARS;
 
 	/**
 	 * The feature id for the '<em><b>Output Vars</b></em>' containment reference list.
@@ -3761,7 +3779,7 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CFB_TYPE__OUTPUT_VARS = FB_TYPE__OUTPUT_VARS;
+	int COMPOSITE_FUNCTION_BLOCK_TYPE__OUTPUT_VARS = FUNCTION_BLOCK_TYPE__OUTPUT_VARS;
 
 	/**
 	 * The feature id for the '<em><b>Sockets</b></em>' containment reference list.
@@ -3770,7 +3788,7 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CFB_TYPE__SOCKETS = FB_TYPE__SOCKETS;
+	int COMPOSITE_FUNCTION_BLOCK_TYPE__SOCKETS = FUNCTION_BLOCK_TYPE__SOCKETS;
 
 	/**
 	 * The feature id for the '<em><b>Plugs</b></em>' containment reference list.
@@ -3779,7 +3797,7 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CFB_TYPE__PLUGS = FB_TYPE__PLUGS;
+	int COMPOSITE_FUNCTION_BLOCK_TYPE__PLUGS = FUNCTION_BLOCK_TYPE__PLUGS;
 
 	/**
 	 * The feature id for the '<em><b>FBs</b></em>' containment reference list.
@@ -3788,7 +3806,7 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CFB_TYPE__FBS = FB_TYPE_FEATURE_COUNT + 0;
+	int COMPOSITE_FUNCTION_BLOCK_TYPE__FBS = FUNCTION_BLOCK_TYPE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Event Connections</b></em>' containment reference list.
@@ -3797,7 +3815,7 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CFB_TYPE__EVENT_CONNECTIONS = FB_TYPE_FEATURE_COUNT + 1;
+	int COMPOSITE_FUNCTION_BLOCK_TYPE__EVENT_CONNECTIONS = FUNCTION_BLOCK_TYPE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Data Connections</b></em>' containment reference list.
@@ -3806,7 +3824,7 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CFB_TYPE__DATA_CONNECTIONS = FB_TYPE_FEATURE_COUNT + 2;
+	int COMPOSITE_FUNCTION_BLOCK_TYPE__DATA_CONNECTIONS = FUNCTION_BLOCK_TYPE_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Adapter Connections</b></em>' containment reference list.
@@ -3815,7 +3833,7 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CFB_TYPE__ADAPTER_CONNECTIONS = FB_TYPE_FEATURE_COUNT + 3;
+	int COMPOSITE_FUNCTION_BLOCK_TYPE__ADAPTER_CONNECTIONS = FUNCTION_BLOCK_TYPE_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Service</b></em>' containment reference.
@@ -3824,16 +3842,16 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CFB_TYPE__SERVICE = FB_TYPE_FEATURE_COUNT + 4;
+	int COMPOSITE_FUNCTION_BLOCK_TYPE__SERVICE = FUNCTION_BLOCK_TYPE_FEATURE_COUNT + 4;
 
 	/**
-	 * The number of structural features of the '<em>CFB Type</em>' class.
+	 * The number of structural features of the '<em>Composite Function Block Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CFB_TYPE_FEATURE_COUNT = FB_TYPE_FEATURE_COUNT + 5;
+	int COMPOSITE_FUNCTION_BLOCK_TYPE_FEATURE_COUNT = FUNCTION_BLOCK_TYPE_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link de.cau.cs.kieler.cakefeed.impl.DeviceTypeImpl <em>Device Type</em>}' class.
@@ -4027,14 +4045,14 @@ public interface CakefeedPackage extends EPackage {
 	int RESOURCE_TYPE_FEATURE_COUNT = COMPILABLE_FEATURE_COUNT + 5;
 
 	/**
-	 * The meta object id for the '{@link de.cau.cs.kieler.cakefeed.impl.BFBDiagramImpl <em>BFB Diagram</em>}' class.
+	 * The meta object id for the '{@link de.cau.cs.kieler.cakefeed.impl.BasicFunctionBlockDiagramImpl <em>Basic Function Block Diagram</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.cau.cs.kieler.cakefeed.impl.BFBDiagramImpl
-	 * @see de.cau.cs.kieler.cakefeed.impl.CakefeedPackageImpl#getBFBDiagram()
+	 * @see de.cau.cs.kieler.cakefeed.impl.BasicFunctionBlockDiagramImpl
+	 * @see de.cau.cs.kieler.cakefeed.impl.CakefeedPackageImpl#getBasicFunctionBlockDiagram()
 	 * @generated
 	 */
-	int BFB_DIAGRAM = 66;
+	int BASIC_FUNCTION_BLOCK_DIAGRAM = 66;
 
 	/**
 	 * The feature id for the '<em><b>BFB Type</b></em>' containment reference.
@@ -4043,26 +4061,26 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BFB_DIAGRAM__BFB_TYPE = 0;
+	int BASIC_FUNCTION_BLOCK_DIAGRAM__BFB_TYPE = 0;
 
 	/**
-	 * The number of structural features of the '<em>BFB Diagram</em>' class.
+	 * The number of structural features of the '<em>Basic Function Block Diagram</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BFB_DIAGRAM_FEATURE_COUNT = 1;
+	int BASIC_FUNCTION_BLOCK_DIAGRAM_FEATURE_COUNT = 1;
 
 	/**
-	 * The meta object id for the '{@link de.cau.cs.kieler.cakefeed.impl.CFBDiagramImpl <em>CFB Diagram</em>}' class.
+	 * The meta object id for the '{@link de.cau.cs.kieler.cakefeed.impl.CompositeFunctionBlockDiagramImpl <em>Composite Function Block Diagram</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.cau.cs.kieler.cakefeed.impl.CFBDiagramImpl
-	 * @see de.cau.cs.kieler.cakefeed.impl.CakefeedPackageImpl#getCFBDiagram()
+	 * @see de.cau.cs.kieler.cakefeed.impl.CompositeFunctionBlockDiagramImpl
+	 * @see de.cau.cs.kieler.cakefeed.impl.CakefeedPackageImpl#getCompositeFunctionBlockDiagram()
 	 * @generated
 	 */
-	int CFB_DIAGRAM = 67;
+	int COMPOSITE_FUNCTION_BLOCK_DIAGRAM = 67;
 
 	/**
 	 * The feature id for the '<em><b>CFB Type</b></em>' containment reference.
@@ -4071,16 +4089,16 @@ public interface CakefeedPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CFB_DIAGRAM__CFB_TYPE = 0;
+	int COMPOSITE_FUNCTION_BLOCK_DIAGRAM__CFB_TYPE = 0;
 
 	/**
-	 * The number of structural features of the '<em>CFB Diagram</em>' class.
+	 * The number of structural features of the '<em>Composite Function Block Diagram</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CFB_DIAGRAM_FEATURE_COUNT = 1;
+	int COMPOSITE_FUNCTION_BLOCK_DIAGRAM_FEATURE_COUNT = 1;
 
 	/**
 	 * The meta object id for the '{@link de.cau.cs.kieler.cakefeed.SegmentType <em>Segment Type</em>}' enum.
@@ -4341,58 +4359,58 @@ public interface CakefeedPackage extends EPackage {
 	EReference getApplication_FBNetwork();
 
 	/**
-	 * Returns the meta object for class '{@link de.cau.cs.kieler.cakefeed.FBNetwork <em>FB Network</em>}'.
+	 * Returns the meta object for class '{@link de.cau.cs.kieler.cakefeed.FunctionBlockNetwork <em>Function Block Network</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>FB Network</em>'.
-	 * @see de.cau.cs.kieler.cakefeed.FBNetwork
+	 * @return the meta object for class '<em>Function Block Network</em>'.
+	 * @see de.cau.cs.kieler.cakefeed.FunctionBlockNetwork
 	 * @generated
 	 */
-	EClass getFBNetwork();
+	EClass getFunctionBlockNetwork();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link de.cau.cs.kieler.cakefeed.FBNetwork#getFBs <em>FBs</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.cau.cs.kieler.cakefeed.FunctionBlockNetwork#getFBs <em>FBs</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>FBs</em>'.
-	 * @see de.cau.cs.kieler.cakefeed.FBNetwork#getFBs()
-	 * @see #getFBNetwork()
+	 * @see de.cau.cs.kieler.cakefeed.FunctionBlockNetwork#getFBs()
+	 * @see #getFunctionBlockNetwork()
 	 * @generated
 	 */
-	EReference getFBNetwork_FBs();
+	EReference getFunctionBlockNetwork_FBs();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link de.cau.cs.kieler.cakefeed.FBNetwork#getEventConnections <em>Event Connections</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.cau.cs.kieler.cakefeed.FunctionBlockNetwork#getEventConnections <em>Event Connections</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Event Connections</em>'.
-	 * @see de.cau.cs.kieler.cakefeed.FBNetwork#getEventConnections()
-	 * @see #getFBNetwork()
+	 * @see de.cau.cs.kieler.cakefeed.FunctionBlockNetwork#getEventConnections()
+	 * @see #getFunctionBlockNetwork()
 	 * @generated
 	 */
-	EReference getFBNetwork_EventConnections();
+	EReference getFunctionBlockNetwork_EventConnections();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link de.cau.cs.kieler.cakefeed.FBNetwork#getDataConnections <em>Data Connections</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.cau.cs.kieler.cakefeed.FunctionBlockNetwork#getDataConnections <em>Data Connections</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Data Connections</em>'.
-	 * @see de.cau.cs.kieler.cakefeed.FBNetwork#getDataConnections()
-	 * @see #getFBNetwork()
+	 * @see de.cau.cs.kieler.cakefeed.FunctionBlockNetwork#getDataConnections()
+	 * @see #getFunctionBlockNetwork()
 	 * @generated
 	 */
-	EReference getFBNetwork_DataConnections();
+	EReference getFunctionBlockNetwork_DataConnections();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link de.cau.cs.kieler.cakefeed.FBNetwork#getAdapterConnections <em>Adapter Connections</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.cau.cs.kieler.cakefeed.FunctionBlockNetwork#getAdapterConnections <em>Adapter Connections</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Adapter Connections</em>'.
-	 * @see de.cau.cs.kieler.cakefeed.FBNetwork#getAdapterConnections()
-	 * @see #getFBNetwork()
+	 * @see de.cau.cs.kieler.cakefeed.FunctionBlockNetwork#getAdapterConnections()
+	 * @see #getFunctionBlockNetwork()
 	 * @generated
 	 */
-	EReference getFBNetwork_AdapterConnections();
+	EReference getFunctionBlockNetwork_AdapterConnections();
 
 	/**
 	 * Returns the meta object for class '{@link de.cau.cs.kieler.cakefeed.Device <em>Device</em>}'.
@@ -4567,156 +4585,156 @@ public interface CakefeedPackage extends EPackage {
 	EAttribute getLink_SegmentName();
 
 	/**
-	 * Returns the meta object for class '{@link de.cau.cs.kieler.cakefeed.FB <em>FB</em>}'.
+	 * Returns the meta object for class '{@link de.cau.cs.kieler.cakefeed.FunctionBlock <em>Function Block</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>FB</em>'.
-	 * @see de.cau.cs.kieler.cakefeed.FB
+	 * @return the meta object for class '<em>Function Block</em>'.
+	 * @see de.cau.cs.kieler.cakefeed.FunctionBlock
 	 * @generated
 	 */
-	EClass getFB();
+	EClass getFunctionBlock();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link de.cau.cs.kieler.cakefeed.FB#getParameters <em>Parameters</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.cau.cs.kieler.cakefeed.FunctionBlock#getParameters <em>Parameters</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Parameters</em>'.
-	 * @see de.cau.cs.kieler.cakefeed.FB#getParameters()
-	 * @see #getFB()
+	 * @see de.cau.cs.kieler.cakefeed.FunctionBlock#getParameters()
+	 * @see #getFunctionBlock()
 	 * @generated
 	 */
-	EReference getFB_Parameters();
+	EReference getFunctionBlock_Parameters();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.cau.cs.kieler.cakefeed.FB#getType <em>Type</em>}'.
+	 * Returns the meta object for the reference '{@link de.cau.cs.kieler.cakefeed.FunctionBlock#getType <em>Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Type</em>'.
-	 * @see de.cau.cs.kieler.cakefeed.FB#getType()
-	 * @see #getFB()
+	 * @see de.cau.cs.kieler.cakefeed.FunctionBlock#getType()
+	 * @see #getFunctionBlock()
 	 * @generated
 	 */
-	EReference getFB_Type();
+	EReference getFunctionBlock_Type();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link de.cau.cs.kieler.cakefeed.FB#getInputEvents <em>Input Events</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.cau.cs.kieler.cakefeed.FunctionBlock#getInputEvents <em>Input Events</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Input Events</em>'.
-	 * @see de.cau.cs.kieler.cakefeed.FB#getInputEvents()
-	 * @see #getFB()
+	 * @see de.cau.cs.kieler.cakefeed.FunctionBlock#getInputEvents()
+	 * @see #getFunctionBlock()
 	 * @generated
 	 */
-	EReference getFB_InputEvents();
+	EReference getFunctionBlock_InputEvents();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link de.cau.cs.kieler.cakefeed.FB#getOutputEvents <em>Output Events</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.cau.cs.kieler.cakefeed.FunctionBlock#getOutputEvents <em>Output Events</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Output Events</em>'.
-	 * @see de.cau.cs.kieler.cakefeed.FB#getOutputEvents()
-	 * @see #getFB()
+	 * @see de.cau.cs.kieler.cakefeed.FunctionBlock#getOutputEvents()
+	 * @see #getFunctionBlock()
 	 * @generated
 	 */
-	EReference getFB_OutputEvents();
+	EReference getFunctionBlock_OutputEvents();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link de.cau.cs.kieler.cakefeed.FB#getInputVars <em>Input Vars</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.cau.cs.kieler.cakefeed.FunctionBlock#getInputVars <em>Input Vars</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Input Vars</em>'.
-	 * @see de.cau.cs.kieler.cakefeed.FB#getInputVars()
-	 * @see #getFB()
+	 * @see de.cau.cs.kieler.cakefeed.FunctionBlock#getInputVars()
+	 * @see #getFunctionBlock()
 	 * @generated
 	 */
-	EReference getFB_InputVars();
+	EReference getFunctionBlock_InputVars();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link de.cau.cs.kieler.cakefeed.FB#getOutputVars <em>Output Vars</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.cau.cs.kieler.cakefeed.FunctionBlock#getOutputVars <em>Output Vars</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Output Vars</em>'.
-	 * @see de.cau.cs.kieler.cakefeed.FB#getOutputVars()
-	 * @see #getFB()
+	 * @see de.cau.cs.kieler.cakefeed.FunctionBlock#getOutputVars()
+	 * @see #getFunctionBlock()
 	 * @generated
 	 */
-	EReference getFB_OutputVars();
+	EReference getFunctionBlock_OutputVars();
 
 	/**
-	 * Returns the meta object for class '{@link de.cau.cs.kieler.cakefeed.FBInterface <em>FB Interface</em>}'.
+	 * Returns the meta object for class '{@link de.cau.cs.kieler.cakefeed.FunctionBlockInterface <em>Function Block Interface</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>FB Interface</em>'.
-	 * @see de.cau.cs.kieler.cakefeed.FBInterface
+	 * @return the meta object for class '<em>Function Block Interface</em>'.
+	 * @see de.cau.cs.kieler.cakefeed.FunctionBlockInterface
 	 * @generated
 	 */
-	EClass getFBInterface();
+	EClass getFunctionBlockInterface();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link de.cau.cs.kieler.cakefeed.FBInterface#getInputEvents <em>Input Events</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.cau.cs.kieler.cakefeed.FunctionBlockInterface#getInputEvents <em>Input Events</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Input Events</em>'.
-	 * @see de.cau.cs.kieler.cakefeed.FBInterface#getInputEvents()
-	 * @see #getFBInterface()
+	 * @see de.cau.cs.kieler.cakefeed.FunctionBlockInterface#getInputEvents()
+	 * @see #getFunctionBlockInterface()
 	 * @generated
 	 */
-	EReference getFBInterface_InputEvents();
+	EReference getFunctionBlockInterface_InputEvents();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link de.cau.cs.kieler.cakefeed.FBInterface#getOutputEvents <em>Output Events</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.cau.cs.kieler.cakefeed.FunctionBlockInterface#getOutputEvents <em>Output Events</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Output Events</em>'.
-	 * @see de.cau.cs.kieler.cakefeed.FBInterface#getOutputEvents()
-	 * @see #getFBInterface()
+	 * @see de.cau.cs.kieler.cakefeed.FunctionBlockInterface#getOutputEvents()
+	 * @see #getFunctionBlockInterface()
 	 * @generated
 	 */
-	EReference getFBInterface_OutputEvents();
+	EReference getFunctionBlockInterface_OutputEvents();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link de.cau.cs.kieler.cakefeed.FBInterface#getInputVars <em>Input Vars</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.cau.cs.kieler.cakefeed.FunctionBlockInterface#getInputVars <em>Input Vars</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Input Vars</em>'.
-	 * @see de.cau.cs.kieler.cakefeed.FBInterface#getInputVars()
-	 * @see #getFBInterface()
+	 * @see de.cau.cs.kieler.cakefeed.FunctionBlockInterface#getInputVars()
+	 * @see #getFunctionBlockInterface()
 	 * @generated
 	 */
-	EReference getFBInterface_InputVars();
+	EReference getFunctionBlockInterface_InputVars();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link de.cau.cs.kieler.cakefeed.FBInterface#getOutputVars <em>Output Vars</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.cau.cs.kieler.cakefeed.FunctionBlockInterface#getOutputVars <em>Output Vars</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Output Vars</em>'.
-	 * @see de.cau.cs.kieler.cakefeed.FBInterface#getOutputVars()
-	 * @see #getFBInterface()
+	 * @see de.cau.cs.kieler.cakefeed.FunctionBlockInterface#getOutputVars()
+	 * @see #getFunctionBlockInterface()
 	 * @generated
 	 */
-	EReference getFBInterface_OutputVars();
+	EReference getFunctionBlockInterface_OutputVars();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link de.cau.cs.kieler.cakefeed.FBInterface#getSockets <em>Sockets</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.cau.cs.kieler.cakefeed.FunctionBlockInterface#getSockets <em>Sockets</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Sockets</em>'.
-	 * @see de.cau.cs.kieler.cakefeed.FBInterface#getSockets()
-	 * @see #getFBInterface()
+	 * @see de.cau.cs.kieler.cakefeed.FunctionBlockInterface#getSockets()
+	 * @see #getFunctionBlockInterface()
 	 * @generated
 	 */
-	EReference getFBInterface_Sockets();
+	EReference getFunctionBlockInterface_Sockets();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link de.cau.cs.kieler.cakefeed.FBInterface#getPlugs <em>Plugs</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.cau.cs.kieler.cakefeed.FunctionBlockInterface#getPlugs <em>Plugs</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Plugs</em>'.
-	 * @see de.cau.cs.kieler.cakefeed.FBInterface#getPlugs()
-	 * @see #getFBInterface()
+	 * @see de.cau.cs.kieler.cakefeed.FunctionBlockInterface#getPlugs()
+	 * @see #getFunctionBlockInterface()
 	 * @generated
 	 */
-	EReference getFBInterface_Plugs();
+	EReference getFunctionBlockInterface_Plugs();
 
 	/**
 	 * Returns the meta object for class '{@link de.cau.cs.kieler.cakefeed.Parameter <em>Parameter</em>}'.
@@ -4783,14 +4801,14 @@ public interface CakefeedPackage extends EPackage {
 	EReference getResource_Type();
 
 	/**
-	 * Returns the meta object for class '{@link de.cau.cs.kieler.cakefeed.FBType <em>FB Type</em>}'.
+	 * Returns the meta object for class '{@link de.cau.cs.kieler.cakefeed.FunctionBlockType <em>Function Block Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>FB Type</em>'.
-	 * @see de.cau.cs.kieler.cakefeed.FBType
+	 * @return the meta object for class '<em>Function Block Type</em>'.
+	 * @see de.cau.cs.kieler.cakefeed.FunctionBlockType
 	 * @generated
 	 */
-	EClass getFBType();
+	EClass getFunctionBlockType();
 
 	/**
 	 * Returns the meta object for class '{@link de.cau.cs.kieler.cakefeed.Connection <em>Connection</em>}'.
@@ -5850,208 +5868,208 @@ public interface CakefeedPackage extends EPackage {
 	EClass getOutputPrimitive();
 
 	/**
-	 * Returns the meta object for class '{@link de.cau.cs.kieler.cakefeed.BFBType <em>BFB Type</em>}'.
+	 * Returns the meta object for class '{@link de.cau.cs.kieler.cakefeed.BasicFunctionBlockType <em>Basic Function Block Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>BFB Type</em>'.
-	 * @see de.cau.cs.kieler.cakefeed.BFBType
+	 * @return the meta object for class '<em>Basic Function Block Type</em>'.
+	 * @see de.cau.cs.kieler.cakefeed.BasicFunctionBlockType
 	 * @generated
 	 */
-	EClass getBFBType();
+	EClass getBasicFunctionBlockType();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link de.cau.cs.kieler.cakefeed.BFBType#getService <em>Service</em>}'.
+	 * Returns the meta object for the containment reference '{@link de.cau.cs.kieler.cakefeed.BasicFunctionBlockType#getService <em>Service</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Service</em>'.
-	 * @see de.cau.cs.kieler.cakefeed.BFBType#getService()
-	 * @see #getBFBType()
+	 * @see de.cau.cs.kieler.cakefeed.BasicFunctionBlockType#getService()
+	 * @see #getBasicFunctionBlockType()
 	 * @generated
 	 */
-	EReference getBFBType_Service();
+	EReference getBasicFunctionBlockType_Service();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.cau.cs.kieler.cakefeed.BFBType#getSyncChart <em>Sync Chart</em>}'.
+	 * Returns the meta object for the reference '{@link de.cau.cs.kieler.cakefeed.BasicFunctionBlockType#getSyncChart <em>Sync Chart</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Sync Chart</em>'.
-	 * @see de.cau.cs.kieler.cakefeed.BFBType#getSyncChart()
-	 * @see #getBFBType()
+	 * @see de.cau.cs.kieler.cakefeed.BasicFunctionBlockType#getSyncChart()
+	 * @see #getBasicFunctionBlockType()
 	 * @generated
 	 */
-	EReference getBFBType_SyncChart();
+	EReference getBasicFunctionBlockType_SyncChart();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link de.cau.cs.kieler.cakefeed.BFBType#getInternalVars <em>Internal Vars</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.cau.cs.kieler.cakefeed.BasicFunctionBlockType#getInternalVars <em>Internal Vars</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Internal Vars</em>'.
-	 * @see de.cau.cs.kieler.cakefeed.BFBType#getInternalVars()
-	 * @see #getBFBType()
+	 * @see de.cau.cs.kieler.cakefeed.BasicFunctionBlockType#getInternalVars()
+	 * @see #getBasicFunctionBlockType()
 	 * @generated
 	 */
-	EReference getBFBType_InternalVars();
+	EReference getBasicFunctionBlockType_InternalVars();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link de.cau.cs.kieler.cakefeed.BFBType#getFunctionBlockDiagrams <em>Function Block Diagrams</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.cau.cs.kieler.cakefeed.BasicFunctionBlockType#getFunctionBlockDiagrams <em>Function Block Diagrams</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Function Block Diagrams</em>'.
-	 * @see de.cau.cs.kieler.cakefeed.BFBType#getFunctionBlockDiagrams()
-	 * @see #getBFBType()
+	 * @see de.cau.cs.kieler.cakefeed.BasicFunctionBlockType#getFunctionBlockDiagrams()
+	 * @see #getBasicFunctionBlockType()
 	 * @generated
 	 */
-	EReference getBFBType_FunctionBlockDiagrams();
+	EReference getBasicFunctionBlockType_FunctionBlockDiagrams();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link de.cau.cs.kieler.cakefeed.BFBType#getSTs <em>STs</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.cau.cs.kieler.cakefeed.BasicFunctionBlockType#getStructuredTexts <em>Structured Texts</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>STs</em>'.
-	 * @see de.cau.cs.kieler.cakefeed.BFBType#getSTs()
-	 * @see #getBFBType()
+	 * @return the meta object for the containment reference list '<em>Structured Texts</em>'.
+	 * @see de.cau.cs.kieler.cakefeed.BasicFunctionBlockType#getStructuredTexts()
+	 * @see #getBasicFunctionBlockType()
 	 * @generated
 	 */
-	EReference getBFBType_STs();
+	EReference getBasicFunctionBlockType_StructuredTexts();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link de.cau.cs.kieler.cakefeed.BFBType#getLadderDiagrams <em>Ladder Diagrams</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.cau.cs.kieler.cakefeed.BasicFunctionBlockType#getLadderDiagrams <em>Ladder Diagrams</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Ladder Diagrams</em>'.
-	 * @see de.cau.cs.kieler.cakefeed.BFBType#getLadderDiagrams()
-	 * @see #getBFBType()
+	 * @see de.cau.cs.kieler.cakefeed.BasicFunctionBlockType#getLadderDiagrams()
+	 * @see #getBasicFunctionBlockType()
 	 * @generated
 	 */
-	EReference getBFBType_LadderDiagrams();
+	EReference getBasicFunctionBlockType_LadderDiagrams();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link de.cau.cs.kieler.cakefeed.BFBType#getOtherAlgorithms <em>Other Algorithms</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.cau.cs.kieler.cakefeed.BasicFunctionBlockType#getOtherAlgorithms <em>Other Algorithms</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Other Algorithms</em>'.
-	 * @see de.cau.cs.kieler.cakefeed.BFBType#getOtherAlgorithms()
-	 * @see #getBFBType()
+	 * @see de.cau.cs.kieler.cakefeed.BasicFunctionBlockType#getOtherAlgorithms()
+	 * @see #getBasicFunctionBlockType()
 	 * @generated
 	 */
-	EReference getBFBType_OtherAlgorithms();
+	EReference getBasicFunctionBlockType_OtherAlgorithms();
 
 	/**
-	 * Returns the meta object for class '{@link de.cau.cs.kieler.cakefeed.FBD <em>FBD</em>}'.
+	 * Returns the meta object for class '{@link de.cau.cs.kieler.cakefeed.FunctionBlockDiagram <em>Function Block Diagram</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>FBD</em>'.
-	 * @see de.cau.cs.kieler.cakefeed.FBD
+	 * @return the meta object for class '<em>Function Block Diagram</em>'.
+	 * @see de.cau.cs.kieler.cakefeed.FunctionBlockDiagram
 	 * @generated
 	 */
-	EClass getFBD();
+	EClass getFunctionBlockDiagram();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link de.cau.cs.kieler.cakefeed.FBD#getFBs <em>FBs</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.cau.cs.kieler.cakefeed.FunctionBlockDiagram#getFBs <em>FBs</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>FBs</em>'.
-	 * @see de.cau.cs.kieler.cakefeed.FBD#getFBs()
-	 * @see #getFBD()
+	 * @see de.cau.cs.kieler.cakefeed.FunctionBlockDiagram#getFBs()
+	 * @see #getFunctionBlockDiagram()
 	 * @generated
 	 */
-	EReference getFBD_FBs();
+	EReference getFunctionBlockDiagram_FBs();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link de.cau.cs.kieler.cakefeed.FBD#getDataConnections <em>Data Connections</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.cau.cs.kieler.cakefeed.FunctionBlockDiagram#getDataConnections <em>Data Connections</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Data Connections</em>'.
-	 * @see de.cau.cs.kieler.cakefeed.FBD#getDataConnections()
-	 * @see #getFBD()
+	 * @see de.cau.cs.kieler.cakefeed.FunctionBlockDiagram#getDataConnections()
+	 * @see #getFunctionBlockDiagram()
 	 * @generated
 	 */
-	EReference getFBD_DataConnections();
+	EReference getFunctionBlockDiagram_DataConnections();
 
 	/**
-	 * Returns the meta object for class '{@link de.cau.cs.kieler.cakefeed.ST <em>ST</em>}'.
+	 * Returns the meta object for class '{@link de.cau.cs.kieler.cakefeed.StructuredText <em>Structured Text</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>ST</em>'.
-	 * @see de.cau.cs.kieler.cakefeed.ST
+	 * @return the meta object for class '<em>Structured Text</em>'.
+	 * @see de.cau.cs.kieler.cakefeed.StructuredText
 	 * @generated
 	 */
-	EClass getST();
+	EClass getStructuredText();
 
 	/**
-	 * Returns the meta object for the attribute '{@link de.cau.cs.kieler.cakefeed.ST#getText <em>Text</em>}'.
+	 * Returns the meta object for the attribute '{@link de.cau.cs.kieler.cakefeed.StructuredText#getText <em>Text</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Text</em>'.
-	 * @see de.cau.cs.kieler.cakefeed.ST#getText()
-	 * @see #getST()
+	 * @see de.cau.cs.kieler.cakefeed.StructuredText#getText()
+	 * @see #getStructuredText()
 	 * @generated
 	 */
-	EAttribute getST_Text();
+	EAttribute getStructuredText_Text();
 
 	/**
-	 * Returns the meta object for class '{@link de.cau.cs.kieler.cakefeed.LD <em>LD</em>}'.
+	 * Returns the meta object for class '{@link de.cau.cs.kieler.cakefeed.LadderDiagram <em>Ladder Diagram</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>LD</em>'.
-	 * @see de.cau.cs.kieler.cakefeed.LD
+	 * @return the meta object for class '<em>Ladder Diagram</em>'.
+	 * @see de.cau.cs.kieler.cakefeed.LadderDiagram
 	 * @generated
 	 */
-	EClass getLD();
+	EClass getLadderDiagram();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link de.cau.cs.kieler.cakefeed.LD#getRungs <em>Rungs</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.cau.cs.kieler.cakefeed.LadderDiagram#getRungs <em>Rungs</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Rungs</em>'.
-	 * @see de.cau.cs.kieler.cakefeed.LD#getRungs()
-	 * @see #getLD()
+	 * @see de.cau.cs.kieler.cakefeed.LadderDiagram#getRungs()
+	 * @see #getLadderDiagram()
 	 * @generated
 	 */
-	EReference getLD_Rungs();
+	EReference getLadderDiagram_Rungs();
 
 	/**
-	 * Returns the meta object for class '{@link de.cau.cs.kieler.cakefeed.Other <em>Other</em>}'.
+	 * Returns the meta object for class '{@link de.cau.cs.kieler.cakefeed.OtherAlgorithm <em>Other Algorithm</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Other</em>'.
-	 * @see de.cau.cs.kieler.cakefeed.Other
+	 * @return the meta object for class '<em>Other Algorithm</em>'.
+	 * @see de.cau.cs.kieler.cakefeed.OtherAlgorithm
 	 * @generated
 	 */
-	EClass getOther();
+	EClass getOtherAlgorithm();
 
 	/**
-	 * Returns the meta object for the attribute '{@link de.cau.cs.kieler.cakefeed.Other#getLanguage <em>Language</em>}'.
+	 * Returns the meta object for the attribute '{@link de.cau.cs.kieler.cakefeed.OtherAlgorithm#getLanguage <em>Language</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Language</em>'.
-	 * @see de.cau.cs.kieler.cakefeed.Other#getLanguage()
-	 * @see #getOther()
+	 * @see de.cau.cs.kieler.cakefeed.OtherAlgorithm#getLanguage()
+	 * @see #getOtherAlgorithm()
 	 * @generated
 	 */
-	EAttribute getOther_Language();
+	EAttribute getOtherAlgorithm_Language();
 
 	/**
-	 * Returns the meta object for the attribute '{@link de.cau.cs.kieler.cakefeed.Other#getPrototype <em>Prototype</em>}'.
+	 * Returns the meta object for the attribute '{@link de.cau.cs.kieler.cakefeed.OtherAlgorithm#getPrototype <em>Prototype</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Prototype</em>'.
-	 * @see de.cau.cs.kieler.cakefeed.Other#getPrototype()
-	 * @see #getOther()
+	 * @see de.cau.cs.kieler.cakefeed.OtherAlgorithm#getPrototype()
+	 * @see #getOtherAlgorithm()
 	 * @generated
 	 */
-	EAttribute getOther_Prototype();
+	EAttribute getOtherAlgorithm_Prototype();
 
 	/**
-	 * Returns the meta object for the attribute '{@link de.cau.cs.kieler.cakefeed.Other#getText <em>Text</em>}'.
+	 * Returns the meta object for the attribute '{@link de.cau.cs.kieler.cakefeed.OtherAlgorithm#getText <em>Text</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Text</em>'.
-	 * @see de.cau.cs.kieler.cakefeed.Other#getText()
-	 * @see #getOther()
+	 * @see de.cau.cs.kieler.cakefeed.OtherAlgorithm#getText()
+	 * @see #getOtherAlgorithm()
 	 * @generated
 	 */
-	EAttribute getOther_Text();
+	EAttribute getOtherAlgorithm_Text();
 
 	/**
 	 * Returns the meta object for class '{@link de.cau.cs.kieler.cakefeed.Rung <em>Rung</em>}'.
@@ -6097,25 +6115,25 @@ public interface CakefeedPackage extends EPackage {
 	EAttribute getRung_Output();
 
 	/**
-	 * Returns the meta object for class '{@link de.cau.cs.kieler.cakefeed.CFBType <em>CFB Type</em>}'.
+	 * Returns the meta object for class '{@link de.cau.cs.kieler.cakefeed.CompositeFunctionBlockType <em>Composite Function Block Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>CFB Type</em>'.
-	 * @see de.cau.cs.kieler.cakefeed.CFBType
+	 * @return the meta object for class '<em>Composite Function Block Type</em>'.
+	 * @see de.cau.cs.kieler.cakefeed.CompositeFunctionBlockType
 	 * @generated
 	 */
-	EClass getCFBType();
+	EClass getCompositeFunctionBlockType();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link de.cau.cs.kieler.cakefeed.CFBType#getService <em>Service</em>}'.
+	 * Returns the meta object for the containment reference '{@link de.cau.cs.kieler.cakefeed.CompositeFunctionBlockType#getService <em>Service</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Service</em>'.
-	 * @see de.cau.cs.kieler.cakefeed.CFBType#getService()
-	 * @see #getCFBType()
+	 * @see de.cau.cs.kieler.cakefeed.CompositeFunctionBlockType#getService()
+	 * @see #getCompositeFunctionBlockType()
 	 * @generated
 	 */
-	EReference getCFBType_Service();
+	EReference getCompositeFunctionBlockType_Service();
 
 	/**
 	 * Returns the meta object for class '{@link de.cau.cs.kieler.cakefeed.DeviceType <em>Device Type</em>}'.
@@ -6215,46 +6233,46 @@ public interface CakefeedPackage extends EPackage {
 	EAttribute getResourceType_FBNames();
 
 	/**
-	 * Returns the meta object for class '{@link de.cau.cs.kieler.cakefeed.BFBDiagram <em>BFB Diagram</em>}'.
+	 * Returns the meta object for class '{@link de.cau.cs.kieler.cakefeed.BasicFunctionBlockDiagram <em>Basic Function Block Diagram</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>BFB Diagram</em>'.
-	 * @see de.cau.cs.kieler.cakefeed.BFBDiagram
+	 * @return the meta object for class '<em>Basic Function Block Diagram</em>'.
+	 * @see de.cau.cs.kieler.cakefeed.BasicFunctionBlockDiagram
 	 * @generated
 	 */
-	EClass getBFBDiagram();
+	EClass getBasicFunctionBlockDiagram();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link de.cau.cs.kieler.cakefeed.BFBDiagram#getBFBType <em>BFB Type</em>}'.
+	 * Returns the meta object for the containment reference '{@link de.cau.cs.kieler.cakefeed.BasicFunctionBlockDiagram#getBFBType <em>BFB Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>BFB Type</em>'.
-	 * @see de.cau.cs.kieler.cakefeed.BFBDiagram#getBFBType()
-	 * @see #getBFBDiagram()
+	 * @see de.cau.cs.kieler.cakefeed.BasicFunctionBlockDiagram#getBFBType()
+	 * @see #getBasicFunctionBlockDiagram()
 	 * @generated
 	 */
-	EReference getBFBDiagram_BFBType();
+	EReference getBasicFunctionBlockDiagram_BFBType();
 
 	/**
-	 * Returns the meta object for class '{@link de.cau.cs.kieler.cakefeed.CFBDiagram <em>CFB Diagram</em>}'.
+	 * Returns the meta object for class '{@link de.cau.cs.kieler.cakefeed.CompositeFunctionBlockDiagram <em>Composite Function Block Diagram</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>CFB Diagram</em>'.
-	 * @see de.cau.cs.kieler.cakefeed.CFBDiagram
+	 * @return the meta object for class '<em>Composite Function Block Diagram</em>'.
+	 * @see de.cau.cs.kieler.cakefeed.CompositeFunctionBlockDiagram
 	 * @generated
 	 */
-	EClass getCFBDiagram();
+	EClass getCompositeFunctionBlockDiagram();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link de.cau.cs.kieler.cakefeed.CFBDiagram#getCFBType <em>CFB Type</em>}'.
+	 * Returns the meta object for the containment reference '{@link de.cau.cs.kieler.cakefeed.CompositeFunctionBlockDiagram#getCFBType <em>CFB Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>CFB Type</em>'.
-	 * @see de.cau.cs.kieler.cakefeed.CFBDiagram#getCFBType()
-	 * @see #getCFBDiagram()
+	 * @see de.cau.cs.kieler.cakefeed.CompositeFunctionBlockDiagram#getCFBType()
+	 * @see #getCompositeFunctionBlockDiagram()
 	 * @generated
 	 */
-	EReference getCFBDiagram_CFBType();
+	EReference getCompositeFunctionBlockDiagram_CFBType();
 
 	/**
 	 * Returns the meta object for class '{@link de.cau.cs.kieler.cakefeed.NamedAndCommented <em>Named And Commented</em>}'.
@@ -6570,14 +6588,14 @@ public interface CakefeedPackage extends EPackage {
 		EReference APPLICATION__FB_NETWORK = eINSTANCE.getApplication_FBNetwork();
 
 		/**
-		 * The meta object literal for the '{@link de.cau.cs.kieler.cakefeed.impl.FBNetworkImpl <em>FB Network</em>}' class.
+		 * The meta object literal for the '{@link de.cau.cs.kieler.cakefeed.impl.FunctionBlockNetworkImpl <em>Function Block Network</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.cau.cs.kieler.cakefeed.impl.FBNetworkImpl
-		 * @see de.cau.cs.kieler.cakefeed.impl.CakefeedPackageImpl#getFBNetwork()
+		 * @see de.cau.cs.kieler.cakefeed.impl.FunctionBlockNetworkImpl
+		 * @see de.cau.cs.kieler.cakefeed.impl.CakefeedPackageImpl#getFunctionBlockNetwork()
 		 * @generated
 		 */
-		EClass FB_NETWORK = eINSTANCE.getFBNetwork();
+		EClass FUNCTION_BLOCK_NETWORK = eINSTANCE.getFunctionBlockNetwork();
 
 		/**
 		 * The meta object literal for the '<em><b>FBs</b></em>' containment reference list feature.
@@ -6585,7 +6603,7 @@ public interface CakefeedPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference FB_NETWORK__FBS = eINSTANCE.getFBNetwork_FBs();
+		EReference FUNCTION_BLOCK_NETWORK__FBS = eINSTANCE.getFunctionBlockNetwork_FBs();
 
 		/**
 		 * The meta object literal for the '<em><b>Event Connections</b></em>' containment reference list feature.
@@ -6593,7 +6611,7 @@ public interface CakefeedPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference FB_NETWORK__EVENT_CONNECTIONS = eINSTANCE.getFBNetwork_EventConnections();
+		EReference FUNCTION_BLOCK_NETWORK__EVENT_CONNECTIONS = eINSTANCE.getFunctionBlockNetwork_EventConnections();
 
 		/**
 		 * The meta object literal for the '<em><b>Data Connections</b></em>' containment reference list feature.
@@ -6601,7 +6619,7 @@ public interface CakefeedPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference FB_NETWORK__DATA_CONNECTIONS = eINSTANCE.getFBNetwork_DataConnections();
+		EReference FUNCTION_BLOCK_NETWORK__DATA_CONNECTIONS = eINSTANCE.getFunctionBlockNetwork_DataConnections();
 
 		/**
 		 * The meta object literal for the '<em><b>Adapter Connections</b></em>' containment reference list feature.
@@ -6609,7 +6627,7 @@ public interface CakefeedPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference FB_NETWORK__ADAPTER_CONNECTIONS = eINSTANCE.getFBNetwork_AdapterConnections();
+		EReference FUNCTION_BLOCK_NETWORK__ADAPTER_CONNECTIONS = eINSTANCE.getFunctionBlockNetwork_AdapterConnections();
 
 		/**
 		 * The meta object literal for the '{@link de.cau.cs.kieler.cakefeed.impl.DeviceImpl <em>Device</em>}' class.
@@ -6748,14 +6766,14 @@ public interface CakefeedPackage extends EPackage {
 		EAttribute LINK__SEGMENT_NAME = eINSTANCE.getLink_SegmentName();
 
 		/**
-		 * The meta object literal for the '{@link de.cau.cs.kieler.cakefeed.impl.FBImpl <em>FB</em>}' class.
+		 * The meta object literal for the '{@link de.cau.cs.kieler.cakefeed.impl.FunctionBlockImpl <em>Function Block</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.cau.cs.kieler.cakefeed.impl.FBImpl
-		 * @see de.cau.cs.kieler.cakefeed.impl.CakefeedPackageImpl#getFB()
+		 * @see de.cau.cs.kieler.cakefeed.impl.FunctionBlockImpl
+		 * @see de.cau.cs.kieler.cakefeed.impl.CakefeedPackageImpl#getFunctionBlock()
 		 * @generated
 		 */
-		EClass FB = eINSTANCE.getFB();
+		EClass FUNCTION_BLOCK = eINSTANCE.getFunctionBlock();
 
 		/**
 		 * The meta object literal for the '<em><b>Parameters</b></em>' containment reference list feature.
@@ -6763,7 +6781,7 @@ public interface CakefeedPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference FB__PARAMETERS = eINSTANCE.getFB_Parameters();
+		EReference FUNCTION_BLOCK__PARAMETERS = eINSTANCE.getFunctionBlock_Parameters();
 
 		/**
 		 * The meta object literal for the '<em><b>Type</b></em>' reference feature.
@@ -6771,7 +6789,7 @@ public interface CakefeedPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference FB__TYPE = eINSTANCE.getFB_Type();
+		EReference FUNCTION_BLOCK__TYPE = eINSTANCE.getFunctionBlock_Type();
 
 		/**
 		 * The meta object literal for the '<em><b>Input Events</b></em>' containment reference list feature.
@@ -6779,7 +6797,7 @@ public interface CakefeedPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference FB__INPUT_EVENTS = eINSTANCE.getFB_InputEvents();
+		EReference FUNCTION_BLOCK__INPUT_EVENTS = eINSTANCE.getFunctionBlock_InputEvents();
 
 		/**
 		 * The meta object literal for the '<em><b>Output Events</b></em>' containment reference list feature.
@@ -6787,7 +6805,7 @@ public interface CakefeedPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference FB__OUTPUT_EVENTS = eINSTANCE.getFB_OutputEvents();
+		EReference FUNCTION_BLOCK__OUTPUT_EVENTS = eINSTANCE.getFunctionBlock_OutputEvents();
 
 		/**
 		 * The meta object literal for the '<em><b>Input Vars</b></em>' containment reference list feature.
@@ -6795,7 +6813,7 @@ public interface CakefeedPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference FB__INPUT_VARS = eINSTANCE.getFB_InputVars();
+		EReference FUNCTION_BLOCK__INPUT_VARS = eINSTANCE.getFunctionBlock_InputVars();
 
 		/**
 		 * The meta object literal for the '<em><b>Output Vars</b></em>' containment reference list feature.
@@ -6803,17 +6821,17 @@ public interface CakefeedPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference FB__OUTPUT_VARS = eINSTANCE.getFB_OutputVars();
+		EReference FUNCTION_BLOCK__OUTPUT_VARS = eINSTANCE.getFunctionBlock_OutputVars();
 
 		/**
-		 * The meta object literal for the '{@link de.cau.cs.kieler.cakefeed.impl.FBInterfaceImpl <em>FB Interface</em>}' class.
+		 * The meta object literal for the '{@link de.cau.cs.kieler.cakefeed.impl.FunctionBlockInterfaceImpl <em>Function Block Interface</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.cau.cs.kieler.cakefeed.impl.FBInterfaceImpl
-		 * @see de.cau.cs.kieler.cakefeed.impl.CakefeedPackageImpl#getFBInterface()
+		 * @see de.cau.cs.kieler.cakefeed.impl.FunctionBlockInterfaceImpl
+		 * @see de.cau.cs.kieler.cakefeed.impl.CakefeedPackageImpl#getFunctionBlockInterface()
 		 * @generated
 		 */
-		EClass FB_INTERFACE = eINSTANCE.getFBInterface();
+		EClass FUNCTION_BLOCK_INTERFACE = eINSTANCE.getFunctionBlockInterface();
 
 		/**
 		 * The meta object literal for the '<em><b>Input Events</b></em>' containment reference list feature.
@@ -6821,7 +6839,7 @@ public interface CakefeedPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference FB_INTERFACE__INPUT_EVENTS = eINSTANCE.getFBInterface_InputEvents();
+		EReference FUNCTION_BLOCK_INTERFACE__INPUT_EVENTS = eINSTANCE.getFunctionBlockInterface_InputEvents();
 
 		/**
 		 * The meta object literal for the '<em><b>Output Events</b></em>' containment reference list feature.
@@ -6829,7 +6847,7 @@ public interface CakefeedPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference FB_INTERFACE__OUTPUT_EVENTS = eINSTANCE.getFBInterface_OutputEvents();
+		EReference FUNCTION_BLOCK_INTERFACE__OUTPUT_EVENTS = eINSTANCE.getFunctionBlockInterface_OutputEvents();
 
 		/**
 		 * The meta object literal for the '<em><b>Input Vars</b></em>' containment reference list feature.
@@ -6837,7 +6855,7 @@ public interface CakefeedPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference FB_INTERFACE__INPUT_VARS = eINSTANCE.getFBInterface_InputVars();
+		EReference FUNCTION_BLOCK_INTERFACE__INPUT_VARS = eINSTANCE.getFunctionBlockInterface_InputVars();
 
 		/**
 		 * The meta object literal for the '<em><b>Output Vars</b></em>' containment reference list feature.
@@ -6845,7 +6863,7 @@ public interface CakefeedPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference FB_INTERFACE__OUTPUT_VARS = eINSTANCE.getFBInterface_OutputVars();
+		EReference FUNCTION_BLOCK_INTERFACE__OUTPUT_VARS = eINSTANCE.getFunctionBlockInterface_OutputVars();
 
 		/**
 		 * The meta object literal for the '<em><b>Sockets</b></em>' containment reference list feature.
@@ -6853,7 +6871,7 @@ public interface CakefeedPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference FB_INTERFACE__SOCKETS = eINSTANCE.getFBInterface_Sockets();
+		EReference FUNCTION_BLOCK_INTERFACE__SOCKETS = eINSTANCE.getFunctionBlockInterface_Sockets();
 
 		/**
 		 * The meta object literal for the '<em><b>Plugs</b></em>' containment reference list feature.
@@ -6861,7 +6879,7 @@ public interface CakefeedPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference FB_INTERFACE__PLUGS = eINSTANCE.getFBInterface_Plugs();
+		EReference FUNCTION_BLOCK_INTERFACE__PLUGS = eINSTANCE.getFunctionBlockInterface_Plugs();
 
 		/**
 		 * The meta object literal for the '{@link de.cau.cs.kieler.cakefeed.impl.ParameterImpl <em>Parameter</em>}' class.
@@ -6916,14 +6934,14 @@ public interface CakefeedPackage extends EPackage {
 		EReference RESOURCE__TYPE = eINSTANCE.getResource_Type();
 
 		/**
-		 * The meta object literal for the '{@link de.cau.cs.kieler.cakefeed.impl.FBTypeImpl <em>FB Type</em>}' class.
+		 * The meta object literal for the '{@link de.cau.cs.kieler.cakefeed.impl.FunctionBlockTypeImpl <em>Function Block Type</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.cau.cs.kieler.cakefeed.impl.FBTypeImpl
-		 * @see de.cau.cs.kieler.cakefeed.impl.CakefeedPackageImpl#getFBType()
+		 * @see de.cau.cs.kieler.cakefeed.impl.FunctionBlockTypeImpl
+		 * @see de.cau.cs.kieler.cakefeed.impl.CakefeedPackageImpl#getFunctionBlockType()
 		 * @generated
 		 */
-		EClass FB_TYPE = eINSTANCE.getFBType();
+		EClass FUNCTION_BLOCK_TYPE = eINSTANCE.getFunctionBlockType();
 
 		/**
 		 * The meta object literal for the '{@link de.cau.cs.kieler.cakefeed.impl.ConnectionImpl <em>Connection</em>}' class.
@@ -7812,14 +7830,14 @@ public interface CakefeedPackage extends EPackage {
 		EClass OUTPUT_PRIMITIVE = eINSTANCE.getOutputPrimitive();
 
 		/**
-		 * The meta object literal for the '{@link de.cau.cs.kieler.cakefeed.impl.BFBTypeImpl <em>BFB Type</em>}' class.
+		 * The meta object literal for the '{@link de.cau.cs.kieler.cakefeed.impl.BasicFunctionBlockTypeImpl <em>Basic Function Block Type</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.cau.cs.kieler.cakefeed.impl.BFBTypeImpl
-		 * @see de.cau.cs.kieler.cakefeed.impl.CakefeedPackageImpl#getBFBType()
+		 * @see de.cau.cs.kieler.cakefeed.impl.BasicFunctionBlockTypeImpl
+		 * @see de.cau.cs.kieler.cakefeed.impl.CakefeedPackageImpl#getBasicFunctionBlockType()
 		 * @generated
 		 */
-		EClass BFB_TYPE = eINSTANCE.getBFBType();
+		EClass BASIC_FUNCTION_BLOCK_TYPE = eINSTANCE.getBasicFunctionBlockType();
 
 		/**
 		 * The meta object literal for the '<em><b>Service</b></em>' containment reference feature.
@@ -7827,7 +7845,7 @@ public interface CakefeedPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference BFB_TYPE__SERVICE = eINSTANCE.getBFBType_Service();
+		EReference BASIC_FUNCTION_BLOCK_TYPE__SERVICE = eINSTANCE.getBasicFunctionBlockType_Service();
 
 		/**
 		 * The meta object literal for the '<em><b>Sync Chart</b></em>' reference feature.
@@ -7835,7 +7853,7 @@ public interface CakefeedPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference BFB_TYPE__SYNC_CHART = eINSTANCE.getBFBType_SyncChart();
+		EReference BASIC_FUNCTION_BLOCK_TYPE__SYNC_CHART = eINSTANCE.getBasicFunctionBlockType_SyncChart();
 
 		/**
 		 * The meta object literal for the '<em><b>Internal Vars</b></em>' containment reference list feature.
@@ -7843,7 +7861,7 @@ public interface CakefeedPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference BFB_TYPE__INTERNAL_VARS = eINSTANCE.getBFBType_InternalVars();
+		EReference BASIC_FUNCTION_BLOCK_TYPE__INTERNAL_VARS = eINSTANCE.getBasicFunctionBlockType_InternalVars();
 
 		/**
 		 * The meta object literal for the '<em><b>Function Block Diagrams</b></em>' containment reference list feature.
@@ -7851,15 +7869,15 @@ public interface CakefeedPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference BFB_TYPE__FUNCTION_BLOCK_DIAGRAMS = eINSTANCE.getBFBType_FunctionBlockDiagrams();
+		EReference BASIC_FUNCTION_BLOCK_TYPE__FUNCTION_BLOCK_DIAGRAMS = eINSTANCE.getBasicFunctionBlockType_FunctionBlockDiagrams();
 
 		/**
-		 * The meta object literal for the '<em><b>STs</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Structured Texts</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference BFB_TYPE__STS = eINSTANCE.getBFBType_STs();
+		EReference BASIC_FUNCTION_BLOCK_TYPE__STRUCTURED_TEXTS = eINSTANCE.getBasicFunctionBlockType_StructuredTexts();
 
 		/**
 		 * The meta object literal for the '<em><b>Ladder Diagrams</b></em>' containment reference list feature.
@@ -7867,7 +7885,7 @@ public interface CakefeedPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference BFB_TYPE__LADDER_DIAGRAMS = eINSTANCE.getBFBType_LadderDiagrams();
+		EReference BASIC_FUNCTION_BLOCK_TYPE__LADDER_DIAGRAMS = eINSTANCE.getBasicFunctionBlockType_LadderDiagrams();
 
 		/**
 		 * The meta object literal for the '<em><b>Other Algorithms</b></em>' containment reference list feature.
@@ -7875,17 +7893,17 @@ public interface CakefeedPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference BFB_TYPE__OTHER_ALGORITHMS = eINSTANCE.getBFBType_OtherAlgorithms();
+		EReference BASIC_FUNCTION_BLOCK_TYPE__OTHER_ALGORITHMS = eINSTANCE.getBasicFunctionBlockType_OtherAlgorithms();
 
 		/**
-		 * The meta object literal for the '{@link de.cau.cs.kieler.cakefeed.impl.FBDImpl <em>FBD</em>}' class.
+		 * The meta object literal for the '{@link de.cau.cs.kieler.cakefeed.impl.FunctionBlockDiagramImpl <em>Function Block Diagram</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.cau.cs.kieler.cakefeed.impl.FBDImpl
-		 * @see de.cau.cs.kieler.cakefeed.impl.CakefeedPackageImpl#getFBD()
+		 * @see de.cau.cs.kieler.cakefeed.impl.FunctionBlockDiagramImpl
+		 * @see de.cau.cs.kieler.cakefeed.impl.CakefeedPackageImpl#getFunctionBlockDiagram()
 		 * @generated
 		 */
-		EClass FBD = eINSTANCE.getFBD();
+		EClass FUNCTION_BLOCK_DIAGRAM = eINSTANCE.getFunctionBlockDiagram();
 
 		/**
 		 * The meta object literal for the '<em><b>FBs</b></em>' containment reference list feature.
@@ -7893,7 +7911,7 @@ public interface CakefeedPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference FBD__FBS = eINSTANCE.getFBD_FBs();
+		EReference FUNCTION_BLOCK_DIAGRAM__FBS = eINSTANCE.getFunctionBlockDiagram_FBs();
 
 		/**
 		 * The meta object literal for the '<em><b>Data Connections</b></em>' containment reference list feature.
@@ -7901,17 +7919,17 @@ public interface CakefeedPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference FBD__DATA_CONNECTIONS = eINSTANCE.getFBD_DataConnections();
+		EReference FUNCTION_BLOCK_DIAGRAM__DATA_CONNECTIONS = eINSTANCE.getFunctionBlockDiagram_DataConnections();
 
 		/**
-		 * The meta object literal for the '{@link de.cau.cs.kieler.cakefeed.impl.STImpl <em>ST</em>}' class.
+		 * The meta object literal for the '{@link de.cau.cs.kieler.cakefeed.impl.StructuredTextImpl <em>Structured Text</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.cau.cs.kieler.cakefeed.impl.STImpl
-		 * @see de.cau.cs.kieler.cakefeed.impl.CakefeedPackageImpl#getST()
+		 * @see de.cau.cs.kieler.cakefeed.impl.StructuredTextImpl
+		 * @see de.cau.cs.kieler.cakefeed.impl.CakefeedPackageImpl#getStructuredText()
 		 * @generated
 		 */
-		EClass ST = eINSTANCE.getST();
+		EClass STRUCTURED_TEXT = eINSTANCE.getStructuredText();
 
 		/**
 		 * The meta object literal for the '<em><b>Text</b></em>' attribute feature.
@@ -7919,17 +7937,17 @@ public interface CakefeedPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute ST__TEXT = eINSTANCE.getST_Text();
+		EAttribute STRUCTURED_TEXT__TEXT = eINSTANCE.getStructuredText_Text();
 
 		/**
-		 * The meta object literal for the '{@link de.cau.cs.kieler.cakefeed.impl.LDImpl <em>LD</em>}' class.
+		 * The meta object literal for the '{@link de.cau.cs.kieler.cakefeed.impl.LadderDiagramImpl <em>Ladder Diagram</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.cau.cs.kieler.cakefeed.impl.LDImpl
-		 * @see de.cau.cs.kieler.cakefeed.impl.CakefeedPackageImpl#getLD()
+		 * @see de.cau.cs.kieler.cakefeed.impl.LadderDiagramImpl
+		 * @see de.cau.cs.kieler.cakefeed.impl.CakefeedPackageImpl#getLadderDiagram()
 		 * @generated
 		 */
-		EClass LD = eINSTANCE.getLD();
+		EClass LADDER_DIAGRAM = eINSTANCE.getLadderDiagram();
 
 		/**
 		 * The meta object literal for the '<em><b>Rungs</b></em>' containment reference list feature.
@@ -7937,17 +7955,17 @@ public interface CakefeedPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference LD__RUNGS = eINSTANCE.getLD_Rungs();
+		EReference LADDER_DIAGRAM__RUNGS = eINSTANCE.getLadderDiagram_Rungs();
 
 		/**
-		 * The meta object literal for the '{@link de.cau.cs.kieler.cakefeed.impl.OtherImpl <em>Other</em>}' class.
+		 * The meta object literal for the '{@link de.cau.cs.kieler.cakefeed.impl.OtherAlgorithmImpl <em>Other Algorithm</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.cau.cs.kieler.cakefeed.impl.OtherImpl
-		 * @see de.cau.cs.kieler.cakefeed.impl.CakefeedPackageImpl#getOther()
+		 * @see de.cau.cs.kieler.cakefeed.impl.OtherAlgorithmImpl
+		 * @see de.cau.cs.kieler.cakefeed.impl.CakefeedPackageImpl#getOtherAlgorithm()
 		 * @generated
 		 */
-		EClass OTHER = eINSTANCE.getOther();
+		EClass OTHER_ALGORITHM = eINSTANCE.getOtherAlgorithm();
 
 		/**
 		 * The meta object literal for the '<em><b>Language</b></em>' attribute feature.
@@ -7955,7 +7973,7 @@ public interface CakefeedPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute OTHER__LANGUAGE = eINSTANCE.getOther_Language();
+		EAttribute OTHER_ALGORITHM__LANGUAGE = eINSTANCE.getOtherAlgorithm_Language();
 
 		/**
 		 * The meta object literal for the '<em><b>Prototype</b></em>' attribute feature.
@@ -7963,7 +7981,7 @@ public interface CakefeedPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute OTHER__PROTOTYPE = eINSTANCE.getOther_Prototype();
+		EAttribute OTHER_ALGORITHM__PROTOTYPE = eINSTANCE.getOtherAlgorithm_Prototype();
 
 		/**
 		 * The meta object literal for the '<em><b>Text</b></em>' attribute feature.
@@ -7971,7 +7989,7 @@ public interface CakefeedPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute OTHER__TEXT = eINSTANCE.getOther_Text();
+		EAttribute OTHER_ALGORITHM__TEXT = eINSTANCE.getOtherAlgorithm_Text();
 
 		/**
 		 * The meta object literal for the '{@link de.cau.cs.kieler.cakefeed.impl.RungImpl <em>Rung</em>}' class.
@@ -8008,14 +8026,14 @@ public interface CakefeedPackage extends EPackage {
 		EAttribute RUNG__OUTPUT = eINSTANCE.getRung_Output();
 
 		/**
-		 * The meta object literal for the '{@link de.cau.cs.kieler.cakefeed.impl.CFBTypeImpl <em>CFB Type</em>}' class.
+		 * The meta object literal for the '{@link de.cau.cs.kieler.cakefeed.impl.CompositeFunctionBlockTypeImpl <em>Composite Function Block Type</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.cau.cs.kieler.cakefeed.impl.CFBTypeImpl
-		 * @see de.cau.cs.kieler.cakefeed.impl.CakefeedPackageImpl#getCFBType()
+		 * @see de.cau.cs.kieler.cakefeed.impl.CompositeFunctionBlockTypeImpl
+		 * @see de.cau.cs.kieler.cakefeed.impl.CakefeedPackageImpl#getCompositeFunctionBlockType()
 		 * @generated
 		 */
-		EClass CFB_TYPE = eINSTANCE.getCFBType();
+		EClass COMPOSITE_FUNCTION_BLOCK_TYPE = eINSTANCE.getCompositeFunctionBlockType();
 
 		/**
 		 * The meta object literal for the '<em><b>Service</b></em>' containment reference feature.
@@ -8023,7 +8041,7 @@ public interface CakefeedPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CFB_TYPE__SERVICE = eINSTANCE.getCFBType_Service();
+		EReference COMPOSITE_FUNCTION_BLOCK_TYPE__SERVICE = eINSTANCE.getCompositeFunctionBlockType_Service();
 
 		/**
 		 * The meta object literal for the '{@link de.cau.cs.kieler.cakefeed.impl.DeviceTypeImpl <em>Device Type</em>}' class.
@@ -8102,14 +8120,14 @@ public interface CakefeedPackage extends EPackage {
 		EAttribute RESOURCE_TYPE__FB_NAMES = eINSTANCE.getResourceType_FBNames();
 
 		/**
-		 * The meta object literal for the '{@link de.cau.cs.kieler.cakefeed.impl.BFBDiagramImpl <em>BFB Diagram</em>}' class.
+		 * The meta object literal for the '{@link de.cau.cs.kieler.cakefeed.impl.BasicFunctionBlockDiagramImpl <em>Basic Function Block Diagram</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.cau.cs.kieler.cakefeed.impl.BFBDiagramImpl
-		 * @see de.cau.cs.kieler.cakefeed.impl.CakefeedPackageImpl#getBFBDiagram()
+		 * @see de.cau.cs.kieler.cakefeed.impl.BasicFunctionBlockDiagramImpl
+		 * @see de.cau.cs.kieler.cakefeed.impl.CakefeedPackageImpl#getBasicFunctionBlockDiagram()
 		 * @generated
 		 */
-		EClass BFB_DIAGRAM = eINSTANCE.getBFBDiagram();
+		EClass BASIC_FUNCTION_BLOCK_DIAGRAM = eINSTANCE.getBasicFunctionBlockDiagram();
 
 		/**
 		 * The meta object literal for the '<em><b>BFB Type</b></em>' containment reference feature.
@@ -8117,17 +8135,17 @@ public interface CakefeedPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference BFB_DIAGRAM__BFB_TYPE = eINSTANCE.getBFBDiagram_BFBType();
+		EReference BASIC_FUNCTION_BLOCK_DIAGRAM__BFB_TYPE = eINSTANCE.getBasicFunctionBlockDiagram_BFBType();
 
 		/**
-		 * The meta object literal for the '{@link de.cau.cs.kieler.cakefeed.impl.CFBDiagramImpl <em>CFB Diagram</em>}' class.
+		 * The meta object literal for the '{@link de.cau.cs.kieler.cakefeed.impl.CompositeFunctionBlockDiagramImpl <em>Composite Function Block Diagram</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.cau.cs.kieler.cakefeed.impl.CFBDiagramImpl
-		 * @see de.cau.cs.kieler.cakefeed.impl.CakefeedPackageImpl#getCFBDiagram()
+		 * @see de.cau.cs.kieler.cakefeed.impl.CompositeFunctionBlockDiagramImpl
+		 * @see de.cau.cs.kieler.cakefeed.impl.CakefeedPackageImpl#getCompositeFunctionBlockDiagram()
 		 * @generated
 		 */
-		EClass CFB_DIAGRAM = eINSTANCE.getCFBDiagram();
+		EClass COMPOSITE_FUNCTION_BLOCK_DIAGRAM = eINSTANCE.getCompositeFunctionBlockDiagram();
 
 		/**
 		 * The meta object literal for the '<em><b>CFB Type</b></em>' containment reference feature.
@@ -8135,7 +8153,7 @@ public interface CakefeedPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CFB_DIAGRAM__CFB_TYPE = eINSTANCE.getCFBDiagram_CFBType();
+		EReference COMPOSITE_FUNCTION_BLOCK_DIAGRAM__CFB_TYPE = eINSTANCE.getCompositeFunctionBlockDiagram_CFBType();
 
 		/**
 		 * The meta object literal for the '{@link de.cau.cs.kieler.cakefeed.impl.NamedAndCommentedImpl <em>Named And Commented</em>}' class.

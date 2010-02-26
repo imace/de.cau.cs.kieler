@@ -23,6 +23,10 @@ main() {
 	model.plugin.name := "FBNetwork Diagram Editor";
 	model.plugin.printingEnabled := true;
 	
+	model.diagram.liveValidationUIFeedback := true;
+	model.diagram.validationDecorators := true;
+	model.diagram.validationEnabled := true;
+	
 	model.diagram.creationWizardCategoryID := "de.cau.cs.kieler";
 	
 	model.diagram.allSubobjectsOfType(GenCompartment)[GenCompartment] ->map compartmentSettings();

@@ -52,12 +52,12 @@ public interface ResourceType extends Compilable, NamedAndCommented {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>FB Network</em>' reference.
-	 * @see #setFBNetwork(FBNetwork)
+	 * @see #setFBNetwork(FunctionBlockNetwork)
 	 * @see de.cau.cs.kieler.cakefeed.CakefeedPackage#getResourceType_FBNetwork()
 	 * @model required="true"
 	 * @generated
 	 */
-	FBNetwork getFBNetwork();
+	FunctionBlockNetwork getFBNetwork();
 
 	/**
 	 * Sets the value of the '{@link de.cau.cs.kieler.cakefeed.ResourceType#getFBNetwork <em>FB Network</em>}' reference.
@@ -67,7 +67,7 @@ public interface ResourceType extends Compilable, NamedAndCommented {
 	 * @see #getFBNetwork()
 	 * @generated
 	 */
-	void setFBNetwork(FBNetwork value);
+	void setFBNetwork(FunctionBlockNetwork value);
 
 	/**
 	 * Returns the value of the '<em><b>FB Names</b></em>' attribute list.

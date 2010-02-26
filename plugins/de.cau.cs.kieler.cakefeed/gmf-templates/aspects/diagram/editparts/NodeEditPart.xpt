@@ -16,7 +16,7 @@
 «EXTENSION xpt::diagram::editparts::Utils»
 
 «DEFINE additions FOR gmfgen::GenNode-»
-	«IF self.editPartClassName = "FBEditPart"-»
+	«IF self.editPartClassName = "FunctionBlockEditPart"-»
 	/**
 	 * @generated NOT
 	 *
@@ -39,8 +39,8 @@
 				if ((name != null) && (name.equals("type"))) {
 					Object newValue = notification.getNewValue();
 					if ((newValue != null)
-						&& ((newValue instanceof de.cau.cs.kieler.cakefeed.impl.CFBTypeImpl) 
-							|| (newValue instanceof de.cau.cs.kieler.cakefeed.impl.BFBTypeImpl))) {
+						&& ((newValue instanceof de.cau.cs.kieler.cakefeed.impl.CompositeFunctionBlockTypeImpl) 
+							|| (newValue instanceof de.cau.cs.kieler.cakefeed.impl.BasicFunctionBlockTypeImpl))) {
 						
 						java.util.List children = this.getChildren();
 						
@@ -49,26 +49,26 @@
 						org.eclipse.emf.common.util.EList inputVars = null;
 						org.eclipse.emf.common.util.EList outputVars = null;
 						
-						de.cau.cs.kieler.cakefeed.impl.FBTypeImpl t = (de.cau.cs.kieler.cakefeed.impl.FBTypeImpl)newValue;
+						de.cau.cs.kieler.cakefeed.impl.FunctionBlockTypeImpl t = (de.cau.cs.kieler.cakefeed.impl.FunctionBlockTypeImpl)newValue;
 						
 						org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel typeNameLabel = null;
 						
-						if (newValue instanceof de.cau.cs.kieler.cakefeed.impl.CFBTypeImpl) {
-							de.cau.cs.kieler.cakefeed.impl.CFBTypeImpl type = (de.cau.cs.kieler.cakefeed.impl.CFBTypeImpl)newValue;
+						if (newValue instanceof de.cau.cs.kieler.cakefeed.impl.CompositeFunctionBlockTypeImpl) {
+							de.cau.cs.kieler.cakefeed.impl.CompositeFunctionBlockTypeImpl type = (de.cau.cs.kieler.cakefeed.impl.CompositeFunctionBlockTypeImpl)newValue;
 							inputEvents = type.getInputEvents();
 							outputEvents = type.getOutputEvents();
 							inputVars = type.getInputVars();
 							outputVars = type.getOutputVars();
 						}
 						else {
-							de.cau.cs.kieler.cakefeed.impl.BFBTypeImpl type = (de.cau.cs.kieler.cakefeed.impl.BFBTypeImpl)newValue;
+							de.cau.cs.kieler.cakefeed.impl.BasicFunctionBlockTypeImpl type = (de.cau.cs.kieler.cakefeed.impl.BasicFunctionBlockTypeImpl)newValue;
 							inputEvents = type.getInputEvents();
 							outputEvents = type.getOutputEvents();
 							inputVars = type.getInputVars();
 							outputVars = type.getOutputVars();
 						}
 						
-						de.cau.cs.kieler.cakefeed.FB fB = (de.cau.cs.kieler.cakefeed.FB)((org.eclipse.gmf.runtime.notation.View)this.getModel()).getElement();
+						de.cau.cs.kieler.cakefeed.FunctionBlock fB = (de.cau.cs.kieler.cakefeed.FunctionBlock)((org.eclipse.gmf.runtime.notation.View)this.getModel()).getElement();
 						
 						// Delete old Events and Vars			
 						deleteEventsAndVars(fB);
@@ -91,47 +91,47 @@
 								for (org.eclipse.emf.ecore.EObject o : list) {
 									org.eclipse.gmf.runtime.emf.type.core.IElementType elementType = null;
 									if (o instanceof de.cau.cs.kieler.cakefeed.IFInputEvent) {
-										«IF self.getEditPartQualifiedClassName() = "de.cau.cs.kieler.cakefeed.bfbtype.diagram.edit.parts.FBEditPart"-»
-										elementType = de.cau.cs.kieler.cakefeed.bfbtype.diagram.providers.CakefeedElementTypes.FBInputEvent_3031;
+										«IF self.getEditPartQualifiedClassName() = "de.cau.cs.kieler.cakefeed.bfbtype.diagram.edit.parts.FunctionBlockEditPart"-»
+										elementType = de.cau.cs.kieler.cakefeed.bfbtype.diagram.providers.CakefeedElementTypes.FBInputEvent_3045;
 										«ENDIF-»
-										«IF self.getEditPartQualifiedClassName() = "de.cau.cs.kieler.cakefeed.cfbtype.diagram.edit.parts.FBEditPart"-»
-										elementType = de.cau.cs.kieler.cakefeed.cfbtype.diagram.providers.CakefeedElementTypes.FBInputEvent_3026;
+										«IF self.getEditPartQualifiedClassName() = "de.cau.cs.kieler.cakefeed.cfbtype.diagram.edit.parts.FunctionBlockEditPart"-»
+										elementType = de.cau.cs.kieler.cakefeed.cfbtype.diagram.providers.CakefeedElementTypes.FBInputEvent_3035;
 										«ENDIF-»
-										«IF self.getEditPartQualifiedClassName() = "de.cau.cs.kieler.cakefeed.fbnetwork.diagram.edit.parts.FBEditPart"-»
-										elementType = de.cau.cs.kieler.cakefeed.fbnetwork.diagram.providers.CakefeedElementTypes.FBInputEvent_3001;
+										«IF self.getEditPartQualifiedClassName() = "de.cau.cs.kieler.cakefeed.fbnetwork.diagram.edit.parts.FunctionBlockEditPart"-»
+										elementType = de.cau.cs.kieler.cakefeed.fbnetwork.diagram.providers.CakefeedElementTypes.FBInputEvent_3005;
 										«ENDIF-»
 									}
 									else if (o instanceof de.cau.cs.kieler.cakefeed.IFOutputEvent) {
-										«IF self.getEditPartQualifiedClassName() = "de.cau.cs.kieler.cakefeed.bfbtype.diagram.edit.parts.FBEditPart"-»
-										elementType = de.cau.cs.kieler.cakefeed.bfbtype.diagram.providers.CakefeedElementTypes.FBOutputEvent_3032;
+										«IF self.getEditPartQualifiedClassName() = "de.cau.cs.kieler.cakefeed.bfbtype.diagram.edit.parts.FunctionBlockEditPart"-»
+										elementType = de.cau.cs.kieler.cakefeed.bfbtype.diagram.providers.CakefeedElementTypes.FBOutputEvent_3046;
 										«ENDIF-»
-										«IF self.getEditPartQualifiedClassName() = "de.cau.cs.kieler.cakefeed.cfbtype.diagram.edit.parts.FBEditPart"-»
-										elementType = de.cau.cs.kieler.cakefeed.cfbtype.diagram.providers.CakefeedElementTypes.FBOutputEvent_3027;
+										«IF self.getEditPartQualifiedClassName() = "de.cau.cs.kieler.cakefeed.cfbtype.diagram.edit.parts.FunctionBlockEditPart"-»
+										elementType = de.cau.cs.kieler.cakefeed.cfbtype.diagram.providers.CakefeedElementTypes.FBOutputEvent_3036;
 										«ENDIF-»
-										«IF self.getEditPartQualifiedClassName() = "de.cau.cs.kieler.cakefeed.fbnetwork.diagram.edit.parts.FBEditPart"-»
-										elementType = de.cau.cs.kieler.cakefeed.fbnetwork.diagram.providers.CakefeedElementTypes.FBOutputEvent_3002;
+										«IF self.getEditPartQualifiedClassName() = "de.cau.cs.kieler.cakefeed.fbnetwork.diagram.edit.parts.FunctionBlockEditPart"-»
+										elementType = de.cau.cs.kieler.cakefeed.fbnetwork.diagram.providers.CakefeedElementTypes.FBOutputEvent_3006;
 										«ENDIF-»
 									}
 									else if (o instanceof de.cau.cs.kieler.cakefeed.IFInputVar) {
-										«IF self.getEditPartQualifiedClassName() = "de.cau.cs.kieler.cakefeed.bfbtype.diagram.edit.parts.FBEditPart"-»
-										elementType = de.cau.cs.kieler.cakefeed.bfbtype.diagram.providers.CakefeedElementTypes.FBInputVar_3033;
+										«IF self.getEditPartQualifiedClassName() = "de.cau.cs.kieler.cakefeed.bfbtype.diagram.edit.parts.FunctionBlockEditPart"-»
+										elementType = de.cau.cs.kieler.cakefeed.bfbtype.diagram.providers.CakefeedElementTypes.FBInputVar_3047;
 										«ENDIF-»
-										«IF self.getEditPartQualifiedClassName() = "de.cau.cs.kieler.cakefeed.cfbtype.diagram.edit.parts.FBEditPart"-»
-										elementType = de.cau.cs.kieler.cakefeed.cfbtype.diagram.providers.CakefeedElementTypes.FBInputVar_3028;
+										«IF self.getEditPartQualifiedClassName() = "de.cau.cs.kieler.cakefeed.cfbtype.diagram.edit.parts.FunctionBlockEditPart"-»
+										elementType = de.cau.cs.kieler.cakefeed.cfbtype.diagram.providers.CakefeedElementTypes.FBInputVar_3037;
 										«ENDIF-»
-										«IF self.getEditPartQualifiedClassName() = "de.cau.cs.kieler.cakefeed.fbnetwork.diagram.edit.parts.FBEditPart"-»
-										elementType = de.cau.cs.kieler.cakefeed.fbnetwork.diagram.providers.CakefeedElementTypes.FBInputVar_3003;
+										«IF self.getEditPartQualifiedClassName() = "de.cau.cs.kieler.cakefeed.fbnetwork.diagram.edit.parts.FunctionBlockEditPart"-»
+										elementType = de.cau.cs.kieler.cakefeed.fbnetwork.diagram.providers.CakefeedElementTypes.FBInputVar_3007;
 										«ENDIF-»
 									}
 									else if (o instanceof de.cau.cs.kieler.cakefeed.IFOutputVar) {
-										«IF self.getEditPartQualifiedClassName() = "de.cau.cs.kieler.cakefeed.bfbtype.diagram.edit.parts.FBEditPart"-»
-										elementType = de.cau.cs.kieler.cakefeed.bfbtype.diagram.providers.CakefeedElementTypes.FBOutputVar_3034;
+										«IF self.getEditPartQualifiedClassName() = "de.cau.cs.kieler.cakefeed.bfbtype.diagram.edit.parts.FunctionBlockEditPart"-»
+										elementType = de.cau.cs.kieler.cakefeed.bfbtype.diagram.providers.CakefeedElementTypes.FBOutputVar_3048;
 										«ENDIF-»
-										«IF self.getEditPartQualifiedClassName() = "de.cau.cs.kieler.cakefeed.cfbtype.diagram.edit.parts.FBEditPart"-»
-										elementType = de.cau.cs.kieler.cakefeed.cfbtype.diagram.providers.CakefeedElementTypes.FBOutputVar_3029;
+										«IF self.getEditPartQualifiedClassName() = "de.cau.cs.kieler.cakefeed.cfbtype.diagram.edit.parts.FunctionBlockEditPart"-»
+										elementType = de.cau.cs.kieler.cakefeed.cfbtype.diagram.providers.CakefeedElementTypes.FBOutputVar_3038;
 										«ENDIF-»
-										«IF self.getEditPartQualifiedClassName() = "de.cau.cs.kieler.cakefeed.fbnetwork.diagram.edit.parts.FBEditPart"-»
-										elementType = de.cau.cs.kieler.cakefeed.fbnetwork.diagram.providers.CakefeedElementTypes.FBOutputVar_3004;
+										«IF self.getEditPartQualifiedClassName() = "de.cau.cs.kieler.cakefeed.fbnetwork.diagram.edit.parts.FunctionBlockEditPart"-»
+										elementType = de.cau.cs.kieler.cakefeed.fbnetwork.diagram.providers.CakefeedElementTypes.FBOutputVar_3008;
 										«ENDIF-»
 									}
 									if (elementType != null) {
@@ -147,7 +147,7 @@
 						}
 						
 					} else {
-						de.cau.cs.kieler.cakefeed.FB fB = (de.cau.cs.kieler.cakefeed.FB) ((org.eclipse.gmf.runtime.notation.View) this
+						de.cau.cs.kieler.cakefeed.FunctionBlock fB = (de.cau.cs.kieler.cakefeed.FunctionBlock) ((org.eclipse.gmf.runtime.notation.View) this
 								.getModel()).getElement();
 						deleteEventsAndVars(fB);
 						clearConnections(fB);
@@ -157,21 +157,21 @@
 		}
 	}
 
-	private void deleteEventsAndVars(de.cau.cs.kieler.cakefeed.FB fB) {
+	private void deleteEventsAndVars(de.cau.cs.kieler.cakefeed.FunctionBlock fB) {
 		this.getDiagramEditDomain().getDiagramCommandStack().execute(
 							new FBDeleteEventsAndVarsCommand("deleteEventsAndVariables", fB));
 	}
 
-	private void clearConnections(de.cau.cs.kieler.cakefeed.FB fB) {
+	private void clearConnections(de.cau.cs.kieler.cakefeed.FunctionBlock fB) {
 		this.getDiagramEditDomain()
 		.getDiagramCommandStack().execute(new ClearConnectionsCommand("clearConnections", fB));
 	}
 
 	public class FBCommand extends org.eclipse.gef.commands.Command {
 
-		protected de.cau.cs.kieler.cakefeed.FB functionBlock;
+		protected de.cau.cs.kieler.cakefeed.FunctionBlock functionBlock;
 		
-		public FBCommand (String label, de.cau.cs.kieler.cakefeed.FB fB) {
+		public FBCommand (String label, de.cau.cs.kieler.cakefeed.FunctionBlock fB) {
 			super(label);
 			functionBlock = fB;
 		}
@@ -180,14 +180,14 @@
 	public class ClearConnectionsCommand extends FBCommand {
 
 		public ClearConnectionsCommand(String label, 
-				de.cau.cs.kieler.cakefeed.FB fB) {
+				de.cau.cs.kieler.cakefeed.FunctionBlock fB) {
 			super(label, fB);
 		}	
 			
 		public void execute() {
 			org.eclipse.emf.ecore.EObject container = functionBlock.eContainer();
-			if (container instanceof de.cau.cs.kieler.cakefeed.FBNetwork) {
-				de.cau.cs.kieler.cakefeed.FBNetwork fBNetwork = (de.cau.cs.kieler.cakefeed.FBNetwork)container;
+			if (container instanceof de.cau.cs.kieler.cakefeed.FunctionBlockNetwork) {
+				de.cau.cs.kieler.cakefeed.FunctionBlockNetwork fBNetwork = (de.cau.cs.kieler.cakefeed.FunctionBlockNetwork)container;
 				fBNetwork.getEventConnections().clear();
 				fBNetwork.getDataConnections().clear();				
 			}
@@ -197,7 +197,7 @@
 	
 	public class FBDeleteEventsAndVarsCommand extends FBCommand {
 
-		public FBDeleteEventsAndVarsCommand(String label, de.cau.cs.kieler.cakefeed.FB fB) {
+		public FBDeleteEventsAndVarsCommand(String label, de.cau.cs.kieler.cakefeed.FunctionBlock fB) {
 			super(label, fB);
 		}
 		
@@ -219,13 +219,13 @@
 
 	public class FBAdaptEventsAndVarsCommand extends FBCommand {
 
-		protected de.cau.cs.kieler.cakefeed.FBType functionBlockType;
+		protected de.cau.cs.kieler.cakefeed.FunctionBlockType functionBlockType;
 		
-		public FBAdaptEventsAndVarsCommand(String label, de.cau.cs.kieler.cakefeed.FB fB) {
+		public FBAdaptEventsAndVarsCommand(String label, de.cau.cs.kieler.cakefeed.FunctionBlock fB) {
 			super(label, fB);
 		}
 
-		public FBAdaptEventsAndVarsCommand(String label, de.cau.cs.kieler.cakefeed.FB fB, de.cau.cs.kieler.cakefeed.FBType fBType) {
+		public FBAdaptEventsAndVarsCommand(String label, de.cau.cs.kieler.cakefeed.FunctionBlock fB, de.cau.cs.kieler.cakefeed.FunctionBlockType fBType) {
 			super(label, fB);
 			functionBlockType = fBType;
 		}
@@ -273,7 +273,7 @@
 		}
 	}
 	«ENDIF-»
-	«IF self.editPartClassName = "FBEditPart"-»
+	«IF self.editPartClassName = "FunctionBlockEditPart"-»
 	protected boolean getCtrl(org.eclipse.gef.EditPart editPart) {
 		if ((editPart instanceof FBInputEventEditPart)
 			|| (editPart instanceof FBOutputEventEditPart)
@@ -293,7 +293,7 @@
 			return false;
 		}
 	}
-	«ELSEIF self.editPartClassName = "BFBTypeEditPart"-»
+	«ELSEIF self.editPartClassName = "BasicFunctionBlockTypeEditPart"-»
 	protected boolean getCtrl(org.eclipse.gef.EditPart editPart) {
 		if ((editPart instanceof IFInputEventEditPart)
 			|| (editPart instanceof IFOutputEventEditPart)
@@ -317,7 +317,7 @@
 			return false;
 		}
 	}
-	«ELSEIF self.editPartClassName = "CFBTypeEditPart"-»
+	«ELSEIF self.editPartClassName = "CompositeFunctionBlockTypeEditPart"-»
 	protected boolean getCtrl(org.eclipse.gef.EditPart editPart) {
 		if ((editPart instanceof IFInputEventEditPart)
 			|| (editPart instanceof IFOutputEventEditPart)

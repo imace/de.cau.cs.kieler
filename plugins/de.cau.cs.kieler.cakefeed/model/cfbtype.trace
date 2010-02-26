@@ -1,111 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<trace:TraceModel xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI"
-    xmlns:trace="http://www.eclipse.org/gmf/2006/Trace">
-  <nodeTraces
-      visualID="2002"
-      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://kieler.cs.cau.de/cakefeed/' and _eClass_.name = 'CFBType') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://kieler.cs.cau.de/cakefeed/' and _eClass_.name = 'CFBDiagram') and _containmentMF_.name = 'cFBType')">
-    <nodeLabelTraces
-        visualID="5019"
-        queryText="true"/>
-    <compartmentTraces
-        visualID="7005"
-        queryText="true"/>
+<trace:TraceModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:trace="http://www.eclipse.org/gmf/2006/Trace">
+  <nodeTraces visualID="2003" queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://kieler.cs.cau.de/cakefeed/' and _eClass_.name = 'CompositeFunctionBlockType') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://kieler.cs.cau.de/cakefeed/' and _eClass_.name = 'CompositeFunctionBlockDiagram') and _containmentMF_.name = 'cFBType')">
+    <nodeLabelTraces visualID="5030" queryText="true"/>
+    <compartmentTraces visualID="7006" queryText="true"/>
   </nodeTraces>
-  <childNodeTraces
-      visualID="3021"
-      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://kieler.cs.cau.de/cakefeed/' and _eClass_.name = 'IFInputEvent') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://kieler.cs.cau.de/cakefeed/' and _eClass_.name = 'FBInterface') and _containmentMF_.name = 'inputEvents')">
-    <nodeLabelTraces
-        visualID="5009"
-        queryText="true"/>
+  <childNodeTraces visualID="3030" queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://kieler.cs.cau.de/cakefeed/' and _eClass_.name = 'IFInputEvent') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://kieler.cs.cau.de/cakefeed/' and _eClass_.name = 'FunctionBlockInterface') and _containmentMF_.name = 'inputEvents')">
+    <nodeLabelTraces visualID="5020" queryText="true"/>
   </childNodeTraces>
-  <childNodeTraces
-      visualID="3022"
-      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://kieler.cs.cau.de/cakefeed/' and _eClass_.name = 'IFOutputEvent') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://kieler.cs.cau.de/cakefeed/' and _eClass_.name = 'FBInterface') and _containmentMF_.name = 'outputEvents')">
-    <nodeLabelTraces
-        visualID="5010"
-        queryText="true"/>
+  <childNodeTraces visualID="3031" queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://kieler.cs.cau.de/cakefeed/' and _eClass_.name = 'IFOutputEvent') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://kieler.cs.cau.de/cakefeed/' and _eClass_.name = 'FunctionBlockInterface') and _containmentMF_.name = 'outputEvents')">
+    <nodeLabelTraces visualID="5021" queryText="true"/>
   </childNodeTraces>
-  <childNodeTraces
-      visualID="3023"
-      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://kieler.cs.cau.de/cakefeed/' and _eClass_.name = 'IFInputVar') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://kieler.cs.cau.de/cakefeed/' and _eClass_.name = 'FBInterface') and _containmentMF_.name = 'inputVars')">
-    <nodeLabelTraces
-        visualID="5011"
-        queryText="true"/>
+  <childNodeTraces visualID="3032" queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://kieler.cs.cau.de/cakefeed/' and _eClass_.name = 'IFInputVar') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://kieler.cs.cau.de/cakefeed/' and _eClass_.name = 'FunctionBlockInterface') and _containmentMF_.name = 'inputVars')">
+    <nodeLabelTraces visualID="5022" queryText="true"/>
   </childNodeTraces>
-  <childNodeTraces
-      visualID="3024"
-      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://kieler.cs.cau.de/cakefeed/' and _eClass_.name = 'IFOutputVar') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://kieler.cs.cau.de/cakefeed/' and _eClass_.name = 'FBInterface') and _containmentMF_.name = 'outputVars')">
-    <nodeLabelTraces
-        visualID="5012"
-        queryText="true"/>
+  <childNodeTraces visualID="3033" queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://kieler.cs.cau.de/cakefeed/' and _eClass_.name = 'IFOutputVar') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://kieler.cs.cau.de/cakefeed/' and _eClass_.name = 'FunctionBlockInterface') and _containmentMF_.name = 'outputVars')">
+    <nodeLabelTraces visualID="5023" queryText="true"/>
   </childNodeTraces>
-  <childNodeTraces
-      visualID="3025"
-      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://kieler.cs.cau.de/cakefeed/' and _eClass_.name = 'FB') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://kieler.cs.cau.de/cakefeed/' and _eClass_.name = 'FBNetwork') and _containmentMF_.name = 'fBs')">
-    <nodeLabelTraces
-        visualID="5017"
-        queryText="true"/>
-    <nodeLabelTraces
-        visualID="5018"
-        queryText="true"/>
+  <childNodeTraces visualID="3034" queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://kieler.cs.cau.de/cakefeed/' and _eClass_.name = 'FunctionBlock') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://kieler.cs.cau.de/cakefeed/' and _eClass_.name = 'FunctionBlockNetwork') and _containmentMF_.name = 'fBs')">
+    <nodeLabelTraces visualID="5028" queryText="true"/>
+    <nodeLabelTraces visualID="5029" queryText="true"/>
   </childNodeTraces>
-  <childNodeTraces
-      visualID="3026"
-      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://kieler.cs.cau.de/cakefeed/' and _eClass_.name = 'FBInputEvent') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://kieler.cs.cau.de/cakefeed/' and _eClass_.name = 'FB') and _containmentMF_.name = 'inputEvents')">
-    <nodeLabelTraces
-        visualID="5013"
-        queryText="true"/>
+  <childNodeTraces visualID="3035" queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://kieler.cs.cau.de/cakefeed/' and _eClass_.name = 'FBInputEvent') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://kieler.cs.cau.de/cakefeed/' and _eClass_.name = 'FunctionBlock') and _containmentMF_.name = 'inputEvents')">
+    <nodeLabelTraces visualID="5024" queryText="true"/>
   </childNodeTraces>
-  <childNodeTraces
-      visualID="3027"
-      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://kieler.cs.cau.de/cakefeed/' and _eClass_.name = 'FBOutputEvent') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://kieler.cs.cau.de/cakefeed/' and _eClass_.name = 'FB') and _containmentMF_.name = 'outputEvents')">
-    <nodeLabelTraces
-        visualID="5014"
-        queryText="true"/>
+  <childNodeTraces visualID="3036" queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://kieler.cs.cau.de/cakefeed/' and _eClass_.name = 'FBOutputEvent') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://kieler.cs.cau.de/cakefeed/' and _eClass_.name = 'FunctionBlock') and _containmentMF_.name = 'outputEvents')">
+    <nodeLabelTraces visualID="5025" queryText="true"/>
   </childNodeTraces>
-  <childNodeTraces
-      visualID="3028"
-      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://kieler.cs.cau.de/cakefeed/' and _eClass_.name = 'FBInputVar') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://kieler.cs.cau.de/cakefeed/' and _eClass_.name = 'FB') and _containmentMF_.name = 'inputVars')">
-    <nodeLabelTraces
-        visualID="5015"
-        queryText="true"/>
+  <childNodeTraces visualID="3037" queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://kieler.cs.cau.de/cakefeed/' and _eClass_.name = 'FBInputVar') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://kieler.cs.cau.de/cakefeed/' and _eClass_.name = 'FunctionBlock') and _containmentMF_.name = 'inputVars')">
+    <nodeLabelTraces visualID="5026" queryText="true"/>
   </childNodeTraces>
-  <childNodeTraces
-      visualID="3029"
-      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://kieler.cs.cau.de/cakefeed/' and _eClass_.name = 'FBOutputVar') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://kieler.cs.cau.de/cakefeed/' and _eClass_.name = 'FB') and _containmentMF_.name = 'outputVars')">
-    <nodeLabelTraces
-        visualID="5016"
-        queryText="true"/>
+  <childNodeTraces visualID="3038" queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://kieler.cs.cau.de/cakefeed/' and _eClass_.name = 'FBOutputVar') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://kieler.cs.cau.de/cakefeed/' and _eClass_.name = 'FunctionBlock') and _containmentMF_.name = 'outputVars')">
+    <nodeLabelTraces visualID="5027" queryText="true"/>
   </childNodeTraces>
-  <linkTraces
-      visualID="4001"
-      queryText="modelFacet.oclIsKindOf(gmfgen::TypeLinkModelFacet) and (let _eClass_:ecore::EClass = modelFacet.oclAsType(gmfgen::TypeLinkModelFacet).metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://kieler.cs.cau.de/cakefeed/' and _eClass_.name = 'InputWith')"/>
-  <linkTraces
-      visualID="4002"
-      queryText="modelFacet.oclIsKindOf(gmfgen::TypeLinkModelFacet) and (let _eClass_:ecore::EClass = modelFacet.oclAsType(gmfgen::TypeLinkModelFacet).metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://kieler.cs.cau.de/cakefeed/' and _eClass_.name = 'OutputWith')"/>
-  <linkTraces
-      visualID="4007"
-      queryText="modelFacet.oclIsKindOf(gmfgen::TypeLinkModelFacet) and (let _eClass_:ecore::EClass = modelFacet.oclAsType(gmfgen::TypeLinkModelFacet).metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://kieler.cs.cau.de/cakefeed/' and _eClass_.name = 'IFIFEventConnection')"/>
-  <linkTraces
-      visualID="4008"
-      queryText="modelFacet.oclIsKindOf(gmfgen::TypeLinkModelFacet) and (let _eClass_:ecore::EClass = modelFacet.oclAsType(gmfgen::TypeLinkModelFacet).metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://kieler.cs.cau.de/cakefeed/' and _eClass_.name = 'IFFBEventConnection')"/>
-  <linkTraces
-      visualID="4009"
-      queryText="modelFacet.oclIsKindOf(gmfgen::TypeLinkModelFacet) and (let _eClass_:ecore::EClass = modelFacet.oclAsType(gmfgen::TypeLinkModelFacet).metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://kieler.cs.cau.de/cakefeed/' and _eClass_.name = 'FBIFEventConnection')"/>
-  <linkTraces
-      visualID="4010"
-      queryText="modelFacet.oclIsKindOf(gmfgen::TypeLinkModelFacet) and (let _eClass_:ecore::EClass = modelFacet.oclAsType(gmfgen::TypeLinkModelFacet).metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://kieler.cs.cau.de/cakefeed/' and _eClass_.name = 'FBFBEventConnection')"/>
-  <linkTraces
-      visualID="4011"
-      queryText="modelFacet.oclIsKindOf(gmfgen::TypeLinkModelFacet) and (let _eClass_:ecore::EClass = modelFacet.oclAsType(gmfgen::TypeLinkModelFacet).metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://kieler.cs.cau.de/cakefeed/' and _eClass_.name = 'IFIFDataConnection')"/>
-  <linkTraces
-      visualID="4012"
-      queryText="modelFacet.oclIsKindOf(gmfgen::TypeLinkModelFacet) and (let _eClass_:ecore::EClass = modelFacet.oclAsType(gmfgen::TypeLinkModelFacet).metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://kieler.cs.cau.de/cakefeed/' and _eClass_.name = 'IFFBDataConnection')"/>
-  <linkTraces
-      visualID="4013"
-      queryText="modelFacet.oclIsKindOf(gmfgen::TypeLinkModelFacet) and (let _eClass_:ecore::EClass = modelFacet.oclAsType(gmfgen::TypeLinkModelFacet).metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://kieler.cs.cau.de/cakefeed/' and _eClass_.name = 'FBIFDataConnection')"/>
-  <linkTraces
-      visualID="4014"
-      queryText="modelFacet.oclIsKindOf(gmfgen::TypeLinkModelFacet) and (let _eClass_:ecore::EClass = modelFacet.oclAsType(gmfgen::TypeLinkModelFacet).metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://kieler.cs.cau.de/cakefeed/' and _eClass_.name = 'FBFBDataConnection')"/>
+  <linkTraces visualID="4001" queryText="modelFacet.oclIsKindOf(gmfgen::TypeLinkModelFacet) and (let _eClass_:ecore::EClass = modelFacet.oclAsType(gmfgen::TypeLinkModelFacet).metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://kieler.cs.cau.de/cakefeed/' and _eClass_.name = 'InputWith')"/>
+  <linkTraces visualID="4002" queryText="modelFacet.oclIsKindOf(gmfgen::TypeLinkModelFacet) and (let _eClass_:ecore::EClass = modelFacet.oclAsType(gmfgen::TypeLinkModelFacet).metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://kieler.cs.cau.de/cakefeed/' and _eClass_.name = 'OutputWith')"/>
+  <linkTraces visualID="4007" queryText="modelFacet.oclIsKindOf(gmfgen::TypeLinkModelFacet) and (let _eClass_:ecore::EClass = modelFacet.oclAsType(gmfgen::TypeLinkModelFacet).metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://kieler.cs.cau.de/cakefeed/' and _eClass_.name = 'IFIFEventConnection')"/>
+  <linkTraces visualID="4008" queryText="modelFacet.oclIsKindOf(gmfgen::TypeLinkModelFacet) and (let _eClass_:ecore::EClass = modelFacet.oclAsType(gmfgen::TypeLinkModelFacet).metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://kieler.cs.cau.de/cakefeed/' and _eClass_.name = 'IFFBEventConnection')"/>
+  <linkTraces visualID="4009" queryText="modelFacet.oclIsKindOf(gmfgen::TypeLinkModelFacet) and (let _eClass_:ecore::EClass = modelFacet.oclAsType(gmfgen::TypeLinkModelFacet).metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://kieler.cs.cau.de/cakefeed/' and _eClass_.name = 'FBIFEventConnection')"/>
+  <linkTraces visualID="4010" queryText="modelFacet.oclIsKindOf(gmfgen::TypeLinkModelFacet) and (let _eClass_:ecore::EClass = modelFacet.oclAsType(gmfgen::TypeLinkModelFacet).metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://kieler.cs.cau.de/cakefeed/' and _eClass_.name = 'FBFBEventConnection')"/>
+  <linkTraces visualID="4011" queryText="modelFacet.oclIsKindOf(gmfgen::TypeLinkModelFacet) and (let _eClass_:ecore::EClass = modelFacet.oclAsType(gmfgen::TypeLinkModelFacet).metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://kieler.cs.cau.de/cakefeed/' and _eClass_.name = 'IFIFDataConnection')"/>
+  <linkTraces visualID="4012" queryText="modelFacet.oclIsKindOf(gmfgen::TypeLinkModelFacet) and (let _eClass_:ecore::EClass = modelFacet.oclAsType(gmfgen::TypeLinkModelFacet).metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://kieler.cs.cau.de/cakefeed/' and _eClass_.name = 'IFFBDataConnection')"/>
+  <linkTraces visualID="4013" queryText="modelFacet.oclIsKindOf(gmfgen::TypeLinkModelFacet) and (let _eClass_:ecore::EClass = modelFacet.oclAsType(gmfgen::TypeLinkModelFacet).metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://kieler.cs.cau.de/cakefeed/' and _eClass_.name = 'FBIFDataConnection')"/>
+  <linkTraces visualID="4014" queryText="modelFacet.oclIsKindOf(gmfgen::TypeLinkModelFacet) and (let _eClass_:ecore::EClass = modelFacet.oclAsType(gmfgen::TypeLinkModelFacet).metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://kieler.cs.cau.de/cakefeed/' and _eClass_.name = 'FBFBDataConnection')"/>
 </trace:TraceModel>

@@ -98,11 +98,11 @@
 		if (childEditPart instanceof «child.getEditPartQualifiedClassName()») {
 			org.eclipse.gmf.runtime.diagram.ui.figures.BorderItemLocator locator = 
 			«REM»Changed locator«ENDREM»
-			«IF self.editPartClassName = "FBEditPart"-»
+			«IF self.editPartClassName = "FunctionBlockEditPart"-»
 			new de.cau.cs.kieler.cakefeed.custom.CakefeedBorderItemLocator(getMainFigure(), org.eclipse.draw2d.PositionConstants.«child.preferredSideName», getCtrl(childEditPart), getInput(childEditPart));
-			«ELSEIF self.editPartClassName = "BFBTypeEditPart"-»
+			«ELSEIF self.editPartClassName = "BasicFunctionBlockTypeEditPart"-»
 			new de.cau.cs.kieler.cakefeed.custom.CakefeedBorderItemLocator(getMainFigure(), org.eclipse.draw2d.PositionConstants.«child.preferredSideName», getCtrl(childEditPart), getInput(childEditPart));
-			«ELSEIF self.editPartClassName = "CFBTypeEditPart"-»
+			«ELSEIF self.editPartClassName = "CompositeFunctionBlockTypeEditPart"-»
 			new de.cau.cs.kieler.cakefeed.custom.CakefeedBorderItemLocator(getMainFigure(), org.eclipse.draw2d.PositionConstants.«child.preferredSideName», getCtrl(childEditPart), getInput(childEditPart));
 			«ELSE-»
 			new org.eclipse.gmf.runtime.diagram.ui.figures.BorderItemLocator(getMainFigure(), org.eclipse.draw2d.PositionConstants.«child.preferredSideName»);

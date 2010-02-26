@@ -7,12 +7,12 @@
     xmlns:gmftool="http://www.eclipse.org/gmf/2005/ToolDefinition">
   <nodes>
     <containmentFeature
-        href="cakefeed.ecore#//BFBDiagram/bFBType"/>
+        href="cakefeed.ecore#//BasicFunctionBlockDiagram/bFBType"/>
     <childrenFeature
-        href="cakefeed.ecore#//BFBDiagram/bFBType"/>
+        href="cakefeed.ecore#//BasicFunctionBlockDiagram/bFBType"/>
     <ownedChild>
       <domainMetaElement
-          href="cakefeed.ecore#//BFBType"/>
+          href="cakefeed.ecore#//BasicFunctionBlockType"/>
       <labelMappings
           xsi:type="gmfmap:FeatureLabelMapping">
         <diagramLabel
@@ -30,7 +30,9 @@
       <children
           referencedChild="//@nodes.0/@ownedChild/@children.0/@ownedChild">
         <containmentFeature
-            href="cakefeed.ecore#//FBInterface/inputEvents"/>
+            href="cakefeed.ecore#//FunctionBlockInterface/inputEvents"/>
+        <childrenFeature
+            href="cakefeed.ecore#//FunctionBlockInterface/inputEvents"/>
         <ownedChild>
           <domainMetaElement
               href="cakefeed.ecore#//IFInputEvent"/>
@@ -53,7 +55,9 @@
       <children
           referencedChild="//@nodes.0/@ownedChild/@children.1/@ownedChild">
         <containmentFeature
-            href="cakefeed.ecore#//FBInterface/outputEvents"/>
+            href="cakefeed.ecore#//FunctionBlockInterface/outputEvents"/>
+        <childrenFeature
+            href="cakefeed.ecore#//FunctionBlockInterface/outputEvents"/>
         <ownedChild>
           <domainMetaElement
               href="cakefeed.ecore#//IFOutputEvent"/>
@@ -76,7 +80,9 @@
       <children
           referencedChild="//@nodes.0/@ownedChild/@children.2/@ownedChild">
         <containmentFeature
-            href="cakefeed.ecore#//FBInterface/inputVars"/>
+            href="cakefeed.ecore#//FunctionBlockInterface/inputVars"/>
+        <childrenFeature
+            href="cakefeed.ecore#//FunctionBlockInterface/inputVars"/>
         <ownedChild>
           <domainMetaElement
               href="cakefeed.ecore#//IFInputVar"/>
@@ -99,7 +105,9 @@
       <children
           referencedChild="//@nodes.0/@ownedChild/@children.3/@ownedChild">
         <containmentFeature
-            href="cakefeed.ecore#//FBInterface/outputVars"/>
+            href="cakefeed.ecore#//FunctionBlockInterface/outputVars"/>
+        <childrenFeature
+            href="cakefeed.ecore#//FunctionBlockInterface/outputVars"/>
         <ownedChild>
           <domainMetaElement
               href="cakefeed.ecore#//IFOutputVar"/>
@@ -122,7 +130,9 @@
       <children
           referencedChild="//@nodes.0/@ownedChild/@children.4/@ownedChild">
         <containmentFeature
-            href="cakefeed.ecore#//BFBType/internalVars"/>
+            href="cakefeed.ecore#//BasicFunctionBlockType/internalVars"/>
+        <childrenFeature
+            href="cakefeed.ecore#//BasicFunctionBlockType/internalVars"/>
         <ownedChild>
           <domainMetaElement
               href="cakefeed.ecore#//InternalVar"/>
@@ -146,10 +156,12 @@
           compartment="//@nodes.0/@ownedChild/@compartments.0"
           referencedChild="//@nodes.0/@ownedChild/@children.5/@ownedChild">
         <containmentFeature
-            href="cakefeed.ecore#//BFBType/functionBlockDiagrams"/>
+            href="cakefeed.ecore#//BasicFunctionBlockType/functionBlockDiagrams"/>
+        <childrenFeature
+            href="cakefeed.ecore#//BasicFunctionBlockType/functionBlockDiagrams"/>
         <ownedChild>
           <domainMetaElement
-              href="cakefeed.ecore#//FBD"/>
+              href="cakefeed.ecore#//FunctionBlockDiagram"/>
           <tool
               xsi:type="gmftool:CreationTool"
               href="bfbtype.gmftool#//@palette/@tools.0/@tools.2/@tools.0"/>
@@ -159,10 +171,12 @@
               compartment="//@nodes.0/@ownedChild/@children.5/@ownedChild/@compartments.0"
               referencedChild="//@nodes.0/@ownedChild/@children.5/@ownedChild/@children.0/@ownedChild">
             <containmentFeature
-                href="cakefeed.ecore#//FBD/fBs"/>
+                href="cakefeed.ecore#//FunctionBlockDiagram/fBs"/>
+            <childrenFeature
+                href="cakefeed.ecore#//FunctionBlockDiagram/fBs"/>
             <ownedChild>
               <domainMetaElement
-                  href="cakefeed.ecore#//FB"/>
+                  href="cakefeed.ecore#//FunctionBlock"/>
               <labelMappings
                   xsi:type="gmfmap:FeatureLabelMapping">
                 <diagramLabel
@@ -185,7 +199,9 @@
               <children
                   referencedChild="//@nodes.0/@ownedChild/@children.0/@ownedChild">
                 <containmentFeature
-                    href="cakefeed.ecore#//FB/inputEvents"/>
+                    href="cakefeed.ecore#//FunctionBlock/inputEvents"/>
+                <childrenFeature
+                    href="cakefeed.ecore#//FunctionBlock/inputEvents"/>
                 <ownedChild>
                   <domainMetaElement
                       href="cakefeed.ecore#//FBInputEvent"/>
@@ -208,7 +224,9 @@
               <children
                   referencedChild="//@nodes.0/@ownedChild/@children.1/@ownedChild">
                 <containmentFeature
-                    href="cakefeed.ecore#//FB/outputEvents"/>
+                    href="cakefeed.ecore#//FunctionBlock/outputEvents"/>
+                <childrenFeature
+                    href="cakefeed.ecore#//FunctionBlock/outputEvents"/>
                 <ownedChild>
                   <domainMetaElement
                       href="cakefeed.ecore#//FBOutputEvent"/>
@@ -231,7 +249,9 @@
               <children
                   referencedChild="//@nodes.0/@ownedChild/@children.2/@ownedChild">
                 <containmentFeature
-                    href="cakefeed.ecore#//FB/inputVars"/>
+                    href="cakefeed.ecore#//FunctionBlock/inputVars"/>
+                <childrenFeature
+                    href="cakefeed.ecore#//FunctionBlock/inputVars"/>
                 <ownedChild>
                   <domainMetaElement
                       href="cakefeed.ecore#//FBInputVar"/>
@@ -254,7 +274,9 @@
               <children
                   referencedChild="//@nodes.0/@ownedChild/@children.3/@ownedChild">
                 <containmentFeature
-                    href="cakefeed.ecore#//FB/outputVars"/>
+                    href="cakefeed.ecore#//FunctionBlock/outputVars"/>
+                <childrenFeature
+                    href="cakefeed.ecore#//FunctionBlock/outputVars"/>
                 <ownedChild>
                   <domainMetaElement
                       href="cakefeed.ecore#//FBOutputVar"/>
@@ -287,10 +309,12 @@
           compartment="//@nodes.0/@ownedChild/@compartments.0"
           referencedChild="//@nodes.0/@ownedChild/@children.6/@ownedChild">
         <containmentFeature
-            href="cakefeed.ecore#//BFBType/sTs"/>
+            href="cakefeed.ecore#//BasicFunctionBlockType/structuredTexts"/>
+        <childrenFeature
+            href="cakefeed.ecore#//BasicFunctionBlockType/structuredTexts"/>
         <ownedChild>
           <domainMetaElement
-              href="cakefeed.ecore#//ST"/>
+              href="cakefeed.ecore#//StructuredText"/>
           <labelMappings
               xsi:type="gmfmap:FeatureLabelMapping">
             <diagramLabel
@@ -311,10 +335,12 @@
           compartment="//@nodes.0/@ownedChild/@compartments.0"
           referencedChild="//@nodes.0/@ownedChild/@children.7/@ownedChild">
         <containmentFeature
-            href="cakefeed.ecore#//BFBType/ladderDiagrams"/>
+            href="cakefeed.ecore#//BasicFunctionBlockType/ladderDiagrams"/>
+        <childrenFeature
+            href="cakefeed.ecore#//BasicFunctionBlockType/ladderDiagrams"/>
         <ownedChild>
           <domainMetaElement
-              href="cakefeed.ecore#//LD"/>
+              href="cakefeed.ecore#//LadderDiagram"/>
           <labelMappings
               xsi:type="gmfmap:FeatureLabelMapping">
             <diagramLabel
@@ -335,10 +361,12 @@
           compartment="//@nodes.0/@ownedChild/@compartments.0"
           referencedChild="//@nodes.0/@ownedChild/@children.8/@ownedChild">
         <containmentFeature
-            href="cakefeed.ecore#//BFBType/otherAlgorithms"/>
+            href="cakefeed.ecore#//BasicFunctionBlockType/otherAlgorithms"/>
+        <childrenFeature
+            href="cakefeed.ecore#//BasicFunctionBlockType/otherAlgorithms"/>
         <ownedChild>
           <domainMetaElement
-              href="cakefeed.ecore#//Other"/>
+              href="cakefeed.ecore#//OtherAlgorithm"/>
           <labelMappings
               xsi:type="gmfmap:FeatureLabelMapping">
             <diagramLabel
@@ -400,7 +428,7 @@
     <domainMetaElement
         href="cakefeed.ecore#//FBFBDataConnection"/>
     <containmentFeature
-        href="cakefeed.ecore#//FBD/dataConnections"/>
+        href="cakefeed.ecore#//FunctionBlockDiagram/dataConnections"/>
     <tool
         xsi:type="gmftool:CreationTool"
         href="bfbtype.gmftool#//@palette/@tools.0/@tools.2/@tools.2"/>
@@ -419,7 +447,7 @@
     <domainModel
         href="cakefeed.ecore#/"/>
     <domainMetaElement
-        href="cakefeed.ecore#//BFBDiagram"/>
+        href="cakefeed.ecore#//BasicFunctionBlockDiagram"/>
     <palette
         href="bfbtype.gmftool#//@palette"/>
   </diagram>

@@ -1,7 +1,7 @@
 import cakefeed;
 
 // ECCs
-context BFBType if (syncChart != null) ERROR "Signals in SyncChart have to correspond to events in Basic Function Block Type!" :
+context BasicFunctionBlockType if (syncChart != null) ERROR "Signals in SyncChart have to correspond to events in Basic Function Block Type!" :
 	syncChart.signals.forAll(s| ((s.isInput == false) && (s.isOutput == false))
 								|| (s.isInput && (this.inputEvents.exists(e| (e.name.matches(s.name))))
 									&& (s.isOutput == false)

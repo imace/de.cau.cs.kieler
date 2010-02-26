@@ -69,12 +69,12 @@ public interface DeviceType extends Compilable, NamedAndCommented {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>FB Network</em>' reference.
-	 * @see #setFBNetwork(FBNetwork)
+	 * @see #setFBNetwork(FunctionBlockNetwork)
 	 * @see de.cau.cs.kieler.cakefeed.CakefeedPackage#getDeviceType_FBNetwork()
 	 * @model
 	 * @generated
 	 */
-	FBNetwork getFBNetwork();
+	FunctionBlockNetwork getFBNetwork();
 
 	/**
 	 * Sets the value of the '{@link de.cau.cs.kieler.cakefeed.DeviceType#getFBNetwork <em>FB Network</em>}' reference.
@@ -84,7 +84,7 @@ public interface DeviceType extends Compilable, NamedAndCommented {
 	 * @see #getFBNetwork()
 	 * @generated
 	 */
-	void setFBNetwork(FBNetwork value);
+	void setFBNetwork(FunctionBlockNetwork value);
 
 	/**
 	 * Returns the value of the '<em><b>Resource Names</b></em>' attribute list.

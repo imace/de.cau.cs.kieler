@@ -74,11 +74,11 @@
     <genClasses ecoreClass="cakefeed.ecore#//Application">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cakefeed.ecore#//Application/fBNetwork"/>
     </genClasses>
-    <genClasses ecoreClass="cakefeed.ecore#//FBNetwork">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//FBNetwork/fBs"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//FBNetwork/eventConnections"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//FBNetwork/dataConnections"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//FBNetwork/adapterConnections"/>
+    <genClasses ecoreClass="cakefeed.ecore#//FunctionBlockNetwork">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//FunctionBlockNetwork/fBs"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//FunctionBlockNetwork/eventConnections"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//FunctionBlockNetwork/dataConnections"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//FunctionBlockNetwork/adapterConnections"/>
     </genClasses>
     <genClasses ecoreClass="cakefeed.ecore#//Device">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//Device/parameters"/>
@@ -100,21 +100,21 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute cakefeed.ecore#//Link/commResource"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute cakefeed.ecore#//Link/segmentName"/>
     </genClasses>
-    <genClasses ecoreClass="cakefeed.ecore#//FB">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//FB/parameters"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cakefeed.ecore#//FB/type"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//FB/inputEvents"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//FB/outputEvents"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//FB/inputVars"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//FB/outputVars"/>
+    <genClasses ecoreClass="cakefeed.ecore#//FunctionBlock">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//FunctionBlock/parameters"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cakefeed.ecore#//FunctionBlock/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//FunctionBlock/inputEvents"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//FunctionBlock/outputEvents"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//FunctionBlock/inputVars"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//FunctionBlock/outputVars"/>
     </genClasses>
-    <genClasses ecoreClass="cakefeed.ecore#//FBInterface">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//FBInterface/inputEvents"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//FBInterface/outputEvents"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//FBInterface/inputVars"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//FBInterface/outputVars"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//FBInterface/sockets"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//FBInterface/plugs"/>
+    <genClasses ecoreClass="cakefeed.ecore#//FunctionBlockInterface">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//FunctionBlockInterface/inputEvents"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//FunctionBlockInterface/outputEvents"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//FunctionBlockInterface/inputVars"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//FunctionBlockInterface/outputVars"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//FunctionBlockInterface/sockets"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//FunctionBlockInterface/plugs"/>
     </genClasses>
     <genClasses ecoreClass="cakefeed.ecore#//Parameter">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute cakefeed.ecore#//Parameter/value"/>
@@ -124,7 +124,7 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cakefeed.ecore#//Resource/fBNetwork"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cakefeed.ecore#//Resource/type"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="cakefeed.ecore#//FBType"/>
+    <genClasses image="false" ecoreClass="cakefeed.ecore#//FunctionBlockType"/>
     <genClasses image="false" ecoreClass="cakefeed.ecore#//Connection">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute cakefeed.ecore#//Connection/comment"/>
     </genClasses>
@@ -253,37 +253,37 @@
     </genClasses>
     <genClasses ecoreClass="cakefeed.ecore#//InputPrimitive"/>
     <genClasses ecoreClass="cakefeed.ecore#//OutputPrimitive"/>
-    <genClasses ecoreClass="cakefeed.ecore#//BFBType">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//BFBType/service"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cakefeed.ecore#//BFBType/syncChart"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//BFBType/internalVars"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//BFBType/functionBlockDiagrams"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//BFBType/sTs"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//BFBType/ladderDiagrams"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//BFBType/otherAlgorithms"/>
+    <genClasses ecoreClass="cakefeed.ecore#//BasicFunctionBlockType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//BasicFunctionBlockType/service"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cakefeed.ecore#//BasicFunctionBlockType/syncChart"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//BasicFunctionBlockType/internalVars"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//BasicFunctionBlockType/functionBlockDiagrams"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//BasicFunctionBlockType/structuredTexts"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//BasicFunctionBlockType/ladderDiagrams"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//BasicFunctionBlockType/otherAlgorithms"/>
     </genClasses>
-    <genClasses ecoreClass="cakefeed.ecore#//FBD">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//FBD/fBs"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//FBD/dataConnections"/>
+    <genClasses ecoreClass="cakefeed.ecore#//FunctionBlockDiagram">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//FunctionBlockDiagram/fBs"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//FunctionBlockDiagram/dataConnections"/>
     </genClasses>
-    <genClasses ecoreClass="cakefeed.ecore#//ST">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute cakefeed.ecore#//ST/text"/>
+    <genClasses ecoreClass="cakefeed.ecore#//StructuredText">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute cakefeed.ecore#//StructuredText/text"/>
     </genClasses>
-    <genClasses ecoreClass="cakefeed.ecore#//LD">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//LD/rungs"/>
+    <genClasses ecoreClass="cakefeed.ecore#//LadderDiagram">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//LadderDiagram/rungs"/>
     </genClasses>
-    <genClasses ecoreClass="cakefeed.ecore#//Other">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute cakefeed.ecore#//Other/language"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute cakefeed.ecore#//Other/prototype"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute cakefeed.ecore#//Other/text"/>
+    <genClasses ecoreClass="cakefeed.ecore#//OtherAlgorithm">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute cakefeed.ecore#//OtherAlgorithm/language"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute cakefeed.ecore#//OtherAlgorithm/prototype"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute cakefeed.ecore#//OtherAlgorithm/text"/>
     </genClasses>
     <genClasses ecoreClass="cakefeed.ecore#//Rung">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute cakefeed.ecore#//Rung/comment"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute cakefeed.ecore#//Rung/expression"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute cakefeed.ecore#//Rung/output"/>
     </genClasses>
-    <genClasses ecoreClass="cakefeed.ecore#//CFBType">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//CFBType/service"/>
+    <genClasses ecoreClass="cakefeed.ecore#//CompositeFunctionBlockType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//CompositeFunctionBlockType/service"/>
     </genClasses>
     <genClasses ecoreClass="cakefeed.ecore#//DeviceType">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//DeviceType/varDeclarations"/>
@@ -296,11 +296,11 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cakefeed.ecore#//ResourceType/fBNetwork"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute cakefeed.ecore#//ResourceType/fBNames"/>
     </genClasses>
-    <genClasses ecoreClass="cakefeed.ecore#//BFBDiagram">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//BFBDiagram/bFBType"/>
+    <genClasses ecoreClass="cakefeed.ecore#//BasicFunctionBlockDiagram">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//BasicFunctionBlockDiagram/bFBType"/>
     </genClasses>
-    <genClasses ecoreClass="cakefeed.ecore#//CFBDiagram">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//CFBDiagram/cFBType"/>
+    <genClasses ecoreClass="cakefeed.ecore#//CompositeFunctionBlockDiagram">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cakefeed.ecore#//CompositeFunctionBlockDiagram/cFBType"/>
     </genClasses>
     <genClasses ecoreClass="cakefeed.ecore#//NamedAndCommented">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute cakefeed.ecore#//NamedAndCommented/comment"/>

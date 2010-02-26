@@ -35,10 +35,10 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Application" eSuperTypes="#//NamedAndCommented">
     <eStructuralFeatures xsi:type="ecore:EReference" name="fBNetwork" lowerBound="1"
-        eType="#//FBNetwork"/>
+        eType="#//FunctionBlockNetwork"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="FBNetwork">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="fBs" upperBound="-1" eType="#//FB"
+  <eClassifiers xsi:type="ecore:EClass" name="FunctionBlockNetwork" eSuperTypes="#//NamedAndCommented">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fBs" upperBound="-1" eType="#//FunctionBlock"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="eventConnections" upperBound="-1"
         eType="#//EventConnection" containment="true"/>
@@ -52,7 +52,7 @@
         eType="#//Parameter" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="resources" upperBound="-1"
         eType="#//Resource" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="fBNetwork" eType="#//FBNetwork"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fBNetwork" eType="#//FunctionBlockNetwork"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="#//DeviceType"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Mapping">
@@ -72,10 +72,10 @@
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="segmentName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="FB" eSuperTypes="#//NamedAndCommented">
+  <eClassifiers xsi:type="ecore:EClass" name="FunctionBlock" eSuperTypes="#//NamedAndCommented">
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
         eType="#//Parameter" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="#//FBType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="#//FunctionBlockType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="inputEvents" upperBound="-1"
         eType="#//FBInputEvent" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="outputEvents" upperBound="-1"
@@ -85,7 +85,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="outputVars" upperBound="-1"
         eType="#//FBOutputVar" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="FBInterface">
+  <eClassifiers xsi:type="ecore:EClass" name="FunctionBlockInterface">
     <eStructuralFeatures xsi:type="ecore:EReference" name="inputEvents" upperBound="-1"
         eType="#//IFInputEvent" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="outputEvents" upperBound="-1"
@@ -105,7 +105,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="Resource" eSuperTypes="#//NamedAndCommented">
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
         eType="#//Parameter" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="fBNetwork" eType="#//FBNetwork"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fBNetwork" eType="#//FunctionBlockNetwork"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="#//ResourceType"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="SegmentType">
@@ -115,7 +115,7 @@
     <eLiterals name="DeviceNet" value="3"/>
     <eLiterals name="ControlNet" value="4"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="FBType" abstract="true" eSuperTypes="#//Compilable #//NamedAndCommented #//FBInterface"/>
+  <eClassifiers xsi:type="ecore:EClass" name="FunctionBlockType" abstract="true" eSuperTypes="#//Compilable #//NamedAndCommented #//FunctionBlockInterface"/>
   <eClassifiers xsi:type="ecore:EClass" name="Connection" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="comment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
@@ -292,7 +292,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Socket" eSuperTypes="#//Adapter"/>
   <eClassifiers xsi:type="ecore:EClass" name="Plug" eSuperTypes="#//Adapter"/>
-  <eClassifiers xsi:type="ecore:EClass" name="AdapterType" eSuperTypes="#//Compilable #//NamedAndCommented #//FBInterface">
+  <eClassifiers xsi:type="ecore:EClass" name="AdapterType" eSuperTypes="#//Compilable #//NamedAndCommented #//FunctionBlockInterface">
     <eStructuralFeatures xsi:type="ecore:EReference" name="service" eType="#//Service"
         containment="true"/>
   </eClassifiers>
@@ -323,35 +323,35 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="InputPrimitive" eSuperTypes="#//Primitive"/>
   <eClassifiers xsi:type="ecore:EClass" name="OutputPrimitive" eSuperTypes="#//Primitive"/>
-  <eClassifiers xsi:type="ecore:EClass" name="BFBType" eSuperTypes="#//FBType">
+  <eClassifiers xsi:type="ecore:EClass" name="BasicFunctionBlockType" eSuperTypes="#//FunctionBlockType">
     <eStructuralFeatures xsi:type="ecore:EReference" name="service" eType="#//Service"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="syncChart" eType="ecore:EClass ../../de.cau.cs.kieler.synccharts/model/synccharts.ecore#//State"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="internalVars" upperBound="-1"
         eType="#//InternalVar" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="functionBlockDiagrams"
-        upperBound="-1" eType="#//FBD" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="sTs" upperBound="-1" eType="#//ST"
-        containment="true"/>
+        upperBound="-1" eType="#//FunctionBlockDiagram" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="structuredTexts" upperBound="-1"
+        eType="#//StructuredText" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ladderDiagrams" upperBound="-1"
-        eType="#//LD" containment="true"/>
+        eType="#//LadderDiagram" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="otherAlgorithms" upperBound="-1"
-        eType="#//Other" containment="true"/>
+        eType="#//OtherAlgorithm" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="FBD" eSuperTypes="#//NamedAndCommented">
+  <eClassifiers xsi:type="ecore:EClass" name="FunctionBlockDiagram" eSuperTypes="#//NamedAndCommented">
     <eStructuralFeatures xsi:type="ecore:EReference" name="fBs" lowerBound="1" upperBound="-1"
-        eType="#//FB" containment="true"/>
+        eType="#//FunctionBlock" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="dataConnections" upperBound="-1"
         eType="#//FBFBDataConnection" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ST" eSuperTypes="#//NamedAndCommented">
+  <eClassifiers xsi:type="ecore:EClass" name="StructuredText" eSuperTypes="#//NamedAndCommented">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="text" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="LD" eSuperTypes="#//NamedAndCommented">
+  <eClassifiers xsi:type="ecore:EClass" name="LadderDiagram" eSuperTypes="#//NamedAndCommented">
     <eStructuralFeatures xsi:type="ecore:EReference" name="rungs" lowerBound="1" upperBound="-1"
         eType="#//Rung" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Other" eSuperTypes="#//NamedAndCommented">
+  <eClassifiers xsi:type="ecore:EClass" name="OtherAlgorithm" eSuperTypes="#//NamedAndCommented">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="language" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="prototype" lowerBound="1"
@@ -365,7 +365,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="output" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="CFBType" eSuperTypes="#//FBType #//FBNetwork">
+  <eClassifiers xsi:type="ecore:EClass" name="CompositeFunctionBlockType" eSuperTypes="#//FunctionBlockType #//FunctionBlockNetwork">
     <eStructuralFeatures xsi:type="ecore:EReference" name="service" eType="#//Service"
         containment="true"/>
   </eClassifiers>
@@ -374,7 +374,7 @@
         eType="#//InternalVar" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="resources" upperBound="-1"
         eType="#//Resource" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="fBNetwork" eType="#//FBNetwork"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fBNetwork" eType="#//FunctionBlockNetwork"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="resourceNames" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
@@ -382,17 +382,17 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="varDeclarations" upperBound="-1"
         eType="#//InternalVar" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="fBNetwork" lowerBound="1"
-        eType="#//FBNetwork"/>
+        eType="#//FunctionBlockNetwork"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="fBNames" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="BFBDiagram">
+  <eClassifiers xsi:type="ecore:EClass" name="BasicFunctionBlockDiagram">
     <eStructuralFeatures xsi:type="ecore:EReference" name="bFBType" lowerBound="1"
-        eType="#//BFBType" containment="true"/>
+        eType="#//BasicFunctionBlockType" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="CFBDiagram">
+  <eClassifiers xsi:type="ecore:EClass" name="CompositeFunctionBlockDiagram">
     <eStructuralFeatures xsi:type="ecore:EReference" name="cFBType" lowerBound="1"
-        eType="#//CFBType" containment="true"/>
+        eType="#//CompositeFunctionBlockType" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NamedAndCommented">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="comment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

@@ -62,13 +62,13 @@ public interface CakefeedFactory extends EFactory {
 	Application createApplication();
 
 	/**
-	 * Returns a new object of class '<em>FB Network</em>'.
+	 * Returns a new object of class '<em>Function Block Network</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>FB Network</em>'.
+	 * @return a new object of class '<em>Function Block Network</em>'.
 	 * @generated
 	 */
-	FBNetwork createFBNetwork();
+	FunctionBlockNetwork createFunctionBlockNetwork();
 
 	/**
 	 * Returns a new object of class '<em>Device</em>'.
@@ -107,22 +107,22 @@ public interface CakefeedFactory extends EFactory {
 	Link createLink();
 
 	/**
-	 * Returns a new object of class '<em>FB</em>'.
+	 * Returns a new object of class '<em>Function Block</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>FB</em>'.
+	 * @return a new object of class '<em>Function Block</em>'.
 	 * @generated
 	 */
-	FB createFB();
+	FunctionBlock createFunctionBlock();
 
 	/**
-	 * Returns a new object of class '<em>FB Interface</em>'.
+	 * Returns a new object of class '<em>Function Block Interface</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>FB Interface</em>'.
+	 * @return a new object of class '<em>Function Block Interface</em>'.
 	 * @generated
 	 */
-	FBInterface createFBInterface();
+	FunctionBlockInterface createFunctionBlockInterface();
 
 	/**
 	 * Returns a new object of class '<em>Parameter</em>'.
@@ -458,49 +458,49 @@ public interface CakefeedFactory extends EFactory {
 	OutputPrimitive createOutputPrimitive();
 
 	/**
-	 * Returns a new object of class '<em>BFB Type</em>'.
+	 * Returns a new object of class '<em>Basic Function Block Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>BFB Type</em>'.
+	 * @return a new object of class '<em>Basic Function Block Type</em>'.
 	 * @generated
 	 */
-	BFBType createBFBType();
+	BasicFunctionBlockType createBasicFunctionBlockType();
 
 	/**
-	 * Returns a new object of class '<em>FBD</em>'.
+	 * Returns a new object of class '<em>Function Block Diagram</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>FBD</em>'.
+	 * @return a new object of class '<em>Function Block Diagram</em>'.
 	 * @generated
 	 */
-	FBD createFBD();
+	FunctionBlockDiagram createFunctionBlockDiagram();
 
 	/**
-	 * Returns a new object of class '<em>ST</em>'.
+	 * Returns a new object of class '<em>Structured Text</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>ST</em>'.
+	 * @return a new object of class '<em>Structured Text</em>'.
 	 * @generated
 	 */
-	ST createST();
+	StructuredText createStructuredText();
 
 	/**
-	 * Returns a new object of class '<em>LD</em>'.
+	 * Returns a new object of class '<em>Ladder Diagram</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>LD</em>'.
+	 * @return a new object of class '<em>Ladder Diagram</em>'.
 	 * @generated
 	 */
-	LD createLD();
+	LadderDiagram createLadderDiagram();
 
 	/**
-	 * Returns a new object of class '<em>Other</em>'.
+	 * Returns a new object of class '<em>Other Algorithm</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Other</em>'.
+	 * @return a new object of class '<em>Other Algorithm</em>'.
 	 * @generated
 	 */
-	Other createOther();
+	OtherAlgorithm createOtherAlgorithm();
 
 	/**
 	 * Returns a new object of class '<em>Rung</em>'.
@@ -512,13 +512,13 @@ public interface CakefeedFactory extends EFactory {
 	Rung createRung();
 
 	/**
-	 * Returns a new object of class '<em>CFB Type</em>'.
+	 * Returns a new object of class '<em>Composite Function Block Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>CFB Type</em>'.
+	 * @return a new object of class '<em>Composite Function Block Type</em>'.
 	 * @generated
 	 */
-	CFBType createCFBType();
+	CompositeFunctionBlockType createCompositeFunctionBlockType();
 
 	/**
 	 * Returns a new object of class '<em>Device Type</em>'.
@@ -539,22 +539,22 @@ public interface CakefeedFactory extends EFactory {
 	ResourceType createResourceType();
 
 	/**
-	 * Returns a new object of class '<em>BFB Diagram</em>'.
+	 * Returns a new object of class '<em>Basic Function Block Diagram</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>BFB Diagram</em>'.
+	 * @return a new object of class '<em>Basic Function Block Diagram</em>'.
 	 * @generated
 	 */
-	BFBDiagram createBFBDiagram();
+	BasicFunctionBlockDiagram createBasicFunctionBlockDiagram();
 
 	/**
-	 * Returns a new object of class '<em>CFB Diagram</em>'.
+	 * Returns a new object of class '<em>Composite Function Block Diagram</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>CFB Diagram</em>'.
+	 * @return a new object of class '<em>Composite Function Block Diagram</em>'.
 	 * @generated
 	 */
-	CFBDiagram createCFBDiagram();
+	CompositeFunctionBlockDiagram createCompositeFunctionBlockDiagram();
 
 	/**
 	 * Returns a new object of class '<em>Named And Commented</em>'.
