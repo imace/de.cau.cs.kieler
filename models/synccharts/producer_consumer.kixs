@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<synccharts:Region xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:synccharts="http://kieler.cs.cau.de/synccharts">
+  <innerStates id="PCO" label="PCO" interfaceDeclaration="signal BUF := &quot;0&quot; UNSIGNED;&#xA;R0: var k := &quot;0&quot; UNSIGNED;">
+    <signals name="BUF" type="UNSIGNED" initialValue="0"/>
+    <regions id="R0">
+      <innerStates id="Initial" label="Initial" isInitial="true">
+        <outgoingTransitions priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.1"/>
+      </innerStates>
+      <innerStates id="Parent" label="Parent" interfaceDeclaration="Producer: var i := &quot;0&quot;  UNSIGNED;&#xA;Consumer: var j := &quot;0&quot; UNSIGNED, tmp := &quot;0&quot; UNSIGNED, var arr := &quot;0&quot; HOST;&#xA;Observer: var fd := &quot;0&quot; UNSIGNED;">
+        <regions id="Producer">
+          <innerStates id="Initial" label="Initial" isInitial="true">
+            <outgoingTransitions priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.1"/>
+          </innerStates>
+          <innerStates id="_S0" label="">
+            <outgoingTransitions triggersAndEffects="/ BUF(i), i:=i + 1" priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.1">
+              <effects xsi:type="synccharts:Emission" signal="BUF">
+                <newValue xsi:type="synccharts:VariableReference" variable="i"/>
+              </effects>
+              <effects xsi:type="synccharts:Assignment" variable="i">
+                <expression xsi:type="synccharts:ComplexExpression" operator="+">
+                  <subExpressions xsi:type="synccharts:VariableReference" variable="i"/>
+                  <subExpressions xsi:type="synccharts:IntValue" value="1"/>
+                </expression>
+              </effects>
+            </outgoingTransitions>
+          </innerStates>
+          <variables name="i" type="UNSIGNED" initialValue="0"/>
+        </regions>
+        <regions id="Consumer">
+          <innerStates id="Initial" label="Initial" isInitial="true">
+            <outgoingTransitions priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.1/@innerStates.1"/>
+          </innerStates>
+          <innerStates id="_S0" label="">
+            <outgoingTransitions triggersAndEffects="/ tmp:=? BUF, &quot;arr[j mod 8] :=tmp&quot;, j:=j + 1" priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.1/@innerStates.1">
+              <effects xsi:type="synccharts:Assignment" variable="tmp">
+                <expression xsi:type="synccharts:ComplexExpression" operator="?">
+                  <subExpressions xsi:type="synccharts:SignalReference" signal="BUF"/>
+                </expression>
+              </effects>
+              <effects xsi:type="synccharts:HostCode" code="arr[j mod 8] :=tmp"/>
+              <effects xsi:type="synccharts:Assignment" variable="j">
+                <expression xsi:type="synccharts:ComplexExpression" operator="+">
+                  <subExpressions xsi:type="synccharts:VariableReference" variable="j"/>
+                  <subExpressions xsi:type="synccharts:IntValue" value="1"/>
+                </expression>
+              </effects>
+            </outgoingTransitions>
+          </innerStates>
+          <variables name="j" type="UNSIGNED" initialValue="0"/>
+          <variables name="tmp" type="UNSIGNED" initialValue="0"/>
+          <variables name="arr" type="HOST" initialValue="0"/>
+        </regions>
+        <regions id="Observer">
+          <innerStates id="Initial" label="Initial" isInitial="true">
+            <outgoingTransitions priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.2/@innerStates.1"/>
+          </innerStates>
+          <innerStates id="_S0" label="">
+            <outgoingTransitions triggersAndEffects="/ fd:=? BUF, k:=k + 1" priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.2/@innerStates.1">
+              <effects xsi:type="synccharts:Assignment" variable="fd">
+                <expression xsi:type="synccharts:ComplexExpression" operator="?">
+                  <subExpressions xsi:type="synccharts:SignalReference" signal="BUF"/>
+                </expression>
+              </effects>
+              <effects xsi:type="synccharts:Assignment" variable="k">
+                <expression xsi:type="synccharts:ComplexExpression" operator="+">
+                  <subExpressions xsi:type="synccharts:VariableReference" variable="k"/>
+                  <subExpressions xsi:type="synccharts:IntValue" value="1"/>
+                </expression>
+              </effects>
+            </outgoingTransitions>
+          </innerStates>
+          <variables name="fd" type="UNSIGNED" initialValue="0"/>
+        </regions>
+        <outgoingTransitions triggersAndEffects="k = 20" priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.2">
+          <trigger xsi:type="synccharts:ComplexExpression">
+            <subExpressions xsi:type="synccharts:VariableReference" variable="k"/>
+            <subExpressions xsi:type="synccharts:IntValue" value="20"/>
+          </trigger>
+        </outgoingTransitions>
+        <outgoingTransitions triggersAndEffects="? BUF = 10" priority="2" targetState="//@innerStates.0/@regions.0/@innerStates.1">
+          <trigger xsi:type="synccharts:ComplexExpression">
+            <subExpressions xsi:type="synccharts:ComplexExpression" operator="?">
+              <subExpressions xsi:type="synccharts:SignalReference" signal="BUF"/>
+            </subExpressions>
+            <subExpressions xsi:type="synccharts:IntValue" value="10"/>
+          </trigger>
+        </outgoingTransitions>
+      </innerStates>
+      <innerStates id="_S0" label="" isFinal="true"/>
+      <variables name="k" type="UNSIGNED" initialValue="0"/>
+    </regions>
+  </innerStates>
+</synccharts:Region>
