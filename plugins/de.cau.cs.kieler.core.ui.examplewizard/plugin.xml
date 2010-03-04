@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension-point id="examples" name="de.cau.cs.kieler.core.ui.examplewizard.examples" schema="schema/de.cau.cs.kieler.core.ui.examplewizard.examples.exsd"/>
+
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <category
+            name="KIELER"
+            id="de.cau.cs.kieler.core.ui.examplewizard">
+      </category>
+      <wizard
+            name="KIELER Example Wizard"
+            icon="resources/icons/sample.gif"
+            category="de.cau.cs.kieler.core.ui.examplewizard"
+            class="de.cau.cs.kieler.core.ui.examplewizard.wizard.ExampleNewWizard"
+            id="de.cau.cs.kieler.core.ui.examplewizard.wizard.ExampleNewWizard">
+      </wizard>
+   </extension>
+
+</plugin>
