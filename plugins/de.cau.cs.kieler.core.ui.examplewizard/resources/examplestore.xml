@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Created with Liquid XML Studio Developer Edition (Trial) 8.0.8.2044 (http://www.liquid-technologies.com) -->
+<Examples xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="C:\Users\Vertigo\kieler\de.cau.cs.kieler.core.ui.examplewizard\resources\examplesstore.xsd">
+	<Example>
+		<ID>example</ID>
+		<Name>Test Example</Name>
+		<PackageName>example</PackageName>
+		<PluginID Version="someversion">someid</PluginID>
+		<Version>201002274536</Version>
+		<Description>This is a Test Example</Description>
+		<File>
+			<FileName>Test1.txt</FileName>
+			<ShowInEditor>true</ShowInEditor>
+		</File>
+		<File>
+			<FileName>Test2.txt</FileName>
+			<ShowInEditor>false</ShowInEditor>
+		</File>
+		<File>
+			<FileName>Test3.txt</FileName>
+			<ShowInEditor>true</ShowInEditor>
+		</File>
+	</Example>
+	<Example>
+		<ID>string</ID>
+		<Name>string</Name>
+		<PackageName>string</PackageName>
+		<PluginID Version="string">string</PluginID>
+		<Version>string</Version>
+		<File>
+			<FileName>string</FileName>
+			<ShowInEditor>false</ShowInEditor>
+		</File>
+		<File>
+			<FileName>string</FileName>
+			<TargetFolder>string</TargetFolder>
+			<ShowInEditor>1</ShowInEditor>
+		</File>
+		<File>
+			<FileName>string</FileName>
+			<TargetFolder>string</TargetFolder>
+			<ShowInEditor>0</ShowInEditor>
+		</File>
+		<Category>string</Category>
+	</Example>
+	<Example>
+		<ID>string</ID>
+		<Name>string</Name>
+		<PackageName>string</PackageName>
+		<PluginID Version="string">string</PluginID>
+		<Version>string</Version>
+	</Example>
+	<Example>
+		<ID>string</ID>
+		<Name>string</Name>
+		<PackageName>string</PackageName>
+		<PluginID Version="string">string</PluginID>
+		<Version>string</Version>
+		<File>
+			<FileName>string</FileName>
+			<TargetFolder>string</TargetFolder>
+			<ShowInEditor>false</ShowInEditor>
+		</File>
+		<File>
+			<FileName>string</FileName>
+			<TargetFolder>string</TargetFolder>
+			<ShowInEditor>true</ShowInEditor>
+		</File>
+		<File>
+			<FileName>string</FileName>
+			<ShowInEditor>false</ShowInEditor>
+		</File>
+		<File>
+			<FileName>string</FileName>
+			<ShowInEditor>0</ShowInEditor>
+		</File>
+	</Example>
+</Examples>

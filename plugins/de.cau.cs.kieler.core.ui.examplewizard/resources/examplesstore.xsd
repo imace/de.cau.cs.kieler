@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--Created with Liquid XML Studio Developer Edition (Trial) 8.0.8.2044 (http://www.liquid-technologies.com)-->
+<xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="Examples">
+		<xs:complexType>
+			<xs:sequence minOccurs="0" maxOccurs="unbounded">
+				<xs:element name="Example">
+					<xs:complexType>
+						<xs:complexContent>
+							<xs:extension base="ExampleType" />
+						</xs:complexContent>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="ExampleType">
+		<xs:sequence>
+			<xs:element name="ID" type="xs:string" />
+			<xs:element name="Name" type="xs:string" />
+			<xs:element name="PackageName" type="xs:string" />
+			<xs:element name="PluginID">
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="xs:string">
+							<xs:attribute name="Version" type="xs:string" use="optional" />
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Version" type="xs:string" />
+			<xs:element minOccurs="0" name="Description" type="xs:string" />
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="File" type="FileType" />
+			<xs:element minOccurs="0" name="Category" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FileType">
+		<xs:sequence>
+			<xs:element name="FileName" type="xs:string" />
+			<xs:element minOccurs="0" name="TargetFolder" type="xs:string" />
+			<xs:element name="ShowInEditor" type="xs:boolean" />
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>
