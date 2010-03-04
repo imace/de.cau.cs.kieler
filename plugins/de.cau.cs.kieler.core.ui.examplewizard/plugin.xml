@@ -17,5 +17,32 @@
             id="de.cau.cs.kieler.core.ui.examplewizard.wizard.ExampleNewWizard">
       </wizard>
    </extension>
+   <extension
+         point="de.cau.cs.kieler.core.ui.examplewizard.examples">
+      <example
+            action="de.cau.cs.kieler.core.ui.examplewizard.util.TestAction"
+            category="test"
+            description="This is a TestExample"
+            id="de.cau.cs.kieler.core.ui.examplewizard.example"
+            name="example name"
+            package="resources/example_0.0.0.zip"
+            pluginid="de.cau.cs.kieler.core.ui.examplewizard"
+            pluginversion="0.0.0"
+            version="0.0.0">
+         <file
+               name="test1.txt"
+               showineditor="true">
+         </file>
+         <file
+               folder="test"
+               name="test2.txt"
+               showineditor="true">
+         </file>
+         <file
+               name="test3.txt"
+               showineditor="true">
+         </file>
+      </example>
+   </extension>
 
 </plugin>

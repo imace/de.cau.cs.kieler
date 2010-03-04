@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/de.cau.cs.kieler.core.ui.examplewizard/src"
+    modelPluginID="de.cau.cs.kieler.core.ui.examplewizard" modelName="Test" importerID="org.eclipse.xsd.ecore.importer"
+    complianceLevel="6.0" copyrightFields="false">
+  <foreignModel>../resources/examplesstore.xsd</foreignModel>
+  <genPackages prefix="Examplesstore" resource="XML" disposableProviderFactory="true"
+      ecorePackage="Examplesstore.ecore#/">
+    <genClasses ecoreClass="Examplesstore.ecore#//DocumentRoot">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EAttribute Examplesstore.ecore#//DocumentRoot/mixed"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Examplesstore.ecore#//DocumentRoot/xMLNSPrefixMap"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Examplesstore.ecore#//DocumentRoot/xSISchemaLocation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Examplesstore.ecore#//DocumentRoot/examples"/>
+    </genClasses>
+    <genClasses ecoreClass="Examplesstore.ecore#//ExamplesType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute Examplesstore.ecore#//ExamplesType/group"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Examplesstore.ecore#//ExamplesType/example"/>
+    </genClasses>
+    <genClasses ecoreClass="Examplesstore.ecore#//ExampleType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Examplesstore.ecore#//ExampleType/iD"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Examplesstore.ecore#//ExampleType/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Examplesstore.ecore#//ExampleType/packageName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Examplesstore.ecore#//ExampleType/pluginID"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Examplesstore.ecore#//ExampleType/version"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Examplesstore.ecore#//ExampleType/description"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Examplesstore.ecore#//ExampleType/file"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Examplesstore.ecore#//ExampleType/category"/>
+    </genClasses>
+    <genClasses ecoreClass="Examplesstore.ecore#//ExampleType1"/>
+    <genClasses ecoreClass="Examplesstore.ecore#//FileType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Examplesstore.ecore#//FileType/fileName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Examplesstore.ecore#//FileType/targetFolder"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Examplesstore.ecore#//FileType/showInEditor"/>
+    </genClasses>
+    <genClasses ecoreClass="Examplesstore.ecore#//PluginIDType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Examplesstore.ecore#//PluginIDType/value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Examplesstore.ecore#//PluginIDType/version"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

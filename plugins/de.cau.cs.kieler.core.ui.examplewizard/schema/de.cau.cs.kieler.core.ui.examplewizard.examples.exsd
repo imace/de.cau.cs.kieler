@@ -48,6 +48,11 @@
    </element>
 
    <element name="example">
+      <annotation>
+         <documentation>
+            An example to install into a project in the workspace.
+         </documentation>
+      </annotation>
       <complexType>
          <sequence minOccurs="0" maxOccurs="unbounded">
             <element ref="file"/>
@@ -55,14 +60,21 @@
          <attribute name="id" type="string" use="required">
             <annotation>
                <documentation>
-                  
+                  The id for this example.
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="version" type="string" use="required">
+            <annotation>
+               <documentation>
+                  The version of this plugin. A legal version should look like &apos;n.n.n&apos; where n is positive Integer.
                </documentation>
             </annotation>
          </attribute>
          <attribute name="name" type="string" use="required">
             <annotation>
                <documentation>
-                  
+                  A name for the example.
                </documentation>
                <appinfo>
                   <meta.attribute translatable="true"/>
@@ -72,7 +84,7 @@
          <attribute name="description" type="string">
             <annotation>
                <documentation>
-                  
+                  A description for this example.
                </documentation>
                <appinfo>
                   <meta.attribute translatable="true"/>
@@ -82,10 +94,41 @@
          <attribute name="action" type="string">
             <annotation>
                <documentation>
-                  
+                  An action to perform after copying the files into the project. The action must be available in an associated plugin.
                </documentation>
                <appinfo>
                   <meta.attribute kind="java" basedOn=":de.cau.cs.kieler.core.ui.examplewizard.wizard.IExampleAction"/>
+               </appinfo>
+            </annotation>
+         </attribute>
+         <attribute name="category" type="string">
+            <annotation>
+               <documentation>
+                  A category for the examples /* not yet implemented */.
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="pluginid" type="string" use="required">
+            <annotation>
+               <documentation>
+                  The id of the plugin to which this example is associated.
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="pluginversion" type="string" use="required">
+            <annotation>
+               <documentation>
+                  The minimum version of the plugin needed to show the example. The form for the example should be n.n.n where in is non-negative integer. So 0.0.0 is minimum version and means that this example can run with every version of the example.
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="package" type="string" use="required">
+            <annotation>
+               <documentation>
+                  A path where to find the package inside the storage.
+               </documentation>
+               <appinfo>
+                  <meta.attribute kind="resource"/>
                </appinfo>
             </annotation>
          </attribute>
@@ -93,21 +136,30 @@
    </element>
 
    <element name="file">
+      <annotation>
+         <documentation>
+            A list of files which will be copied to the example project.
+         </documentation>
+      </annotation>
       <complexType>
-         <attribute name="location" type="string" use="required">
+         <attribute name="name" type="string" use="required">
             <annotation>
                <documentation>
-                  
+                  The name of the file, with extension. To install to the example project. Only enter the name of the file no path.
                </documentation>
-               <appinfo>
-                  <meta.attribute kind="resource"/>
-               </appinfo>
             </annotation>
          </attribute>
-         <attribute name="showInDefaultEditor" type="boolean" use="required">
+         <attribute name="showineditor" type="boolean" use="required">
             <annotation>
                <documentation>
-                  
+                  Should this file be opened in it&apos;s default editor after installing the example.
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="folder" type="string">
+            <annotation>
+               <documentation>
+                  A folder in the new project where to install the file.
                </documentation>
             </annotation>
          </attribute>

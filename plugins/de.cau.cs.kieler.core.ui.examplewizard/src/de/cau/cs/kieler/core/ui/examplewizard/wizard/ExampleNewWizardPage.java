@@ -104,8 +104,8 @@ public class ExampleNewWizardPage extends WizardPage {
 	 * Tests if the current workbench selection is a suitable container to use.
 	 */
 	private void initialize() {
-		installedExamples = ExampleExtensionPointDataRetriever.INSTANCE
-				.getExamples();
+		//installedExamples = ExampleExtensionPointDataRetriever.INSTANCE
+		//		.getExamples();
 		onlineExamples = ExampleOnlineDataRetriever.INSTANCE.getExamples();
 		
 		bundles = new ArrayList<Bundle>();

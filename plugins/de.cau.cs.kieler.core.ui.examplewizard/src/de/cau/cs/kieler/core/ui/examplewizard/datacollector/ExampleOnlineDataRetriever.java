@@ -1,7 +1,7 @@
 package de.cau.cs.kieler.core.ui.examplewizard.datacollector;
 
-import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,17 +17,20 @@ import org.xml.sax.SAXException;
 
 import de.cau.cs.kieler.core.ui.examplewizard.util.Example;
 import de.cau.cs.kieler.core.ui.examplewizard.util.ExampleFile;
+import de.cau.cs.kieler.core.ui.examplewizard.util.IExampleAction;
 
 /**
  * The class extracts the example information from the online storage file.
  * 
  * @author omi
  */
-public class ExampleOnlineDataRetriever implements IDataRetriever{
+public class ExampleOnlineDataRetriever implements IDataRetriever {
 
 	/** URL for the container xml file. */
-	private static final String URL = "/resources/examplestore.xml";
-
+	private static final String URL = "http://www.rabe.bplaced.net/examplestore/plugin.xml";
+	
+//	private static final URL url = new URL(URL);
+	
 	/** Singleton instance of this class */
 	public static final ExampleOnlineDataRetriever INSTANCE = new ExampleOnlineDataRetriever();
 
@@ -43,8 +46,10 @@ public class ExampleOnlineDataRetriever implements IDataRetriever{
 			DocumentBuilderFactory factory = DocumentBuilderFactory
 					.newInstance();
 			DocumentBuilder builder = factory.newDocumentBuilder();
-			Document document = builder.parse(new File(URL));
-			NodeList examples = document.getElementsByTagName("Example");
+			URL url = new URL(URL);
+			Document document = builder.parse(url.openStream());
+			NodeList examples = document.getElementsByTagName("example");
+			System.out.println(examples.getLength());
 			for (int i = 0; i < examples.getLength(); i++) {
 				Node example = examples.item(i);
 				String id = null;
@@ -55,46 +60,61 @@ public class ExampleOnlineDataRetriever implements IDataRetriever{
 				String version = null;
 				String description = null;
 				String category = null;
-				List<ExampleFile> files = new ArrayList<ExampleFile>();
-				NodeList elements = example.getChildNodes();
-				for (int j = 0; j < elements.getLength(); j++) {
-					Node element = elements.item(j);
+				String action = null;
+				Node node = null;
+				NamedNodeMap map = example.getAttributes();
+				node = map.getNamedItem("id");
+				if(node != null) {
+					id = node.getNodeValue();
+				}
+				node = map.getNamedItem("name");
+				if(node!= null) {
+					name = node.getNodeValue();
+				}
+				node = map.getNamedItem("packagename");
+				if(node!= null) {
+					packageName = node.getNodeValue();
+				}
+				node = map.getNamedItem("pluginid");
+				if(node!= null) {
+					pluginID = node.getNodeValue();
+				}
+				node = map.getNamedItem("pluginversion");
+				if(node!= null) {
+					pluginVersion = node.getNodeValue();
+				}
+				node = map.getNamedItem("version");
+				if(node!= null) {
+					version = node.getNodeValue();
+				}
+				node = map.getNamedItem("description");
+				if(node!= null) {
+					description = node.getNodeValue();
+				}
+				node = map.getNamedItem("category");
+				if(node!= null) {
+					category = node.getNodeValue();
+				}
+				node = map.getNamedItem("action");
+				if(node!= null) {
+					action = node.getNodeValue();
+				}
 
-					if (element.equals("ID")) {
-						id = element.getNodeValue();
-					}
-					if (element.equals("Name")) {
-						name = element.getNodeValue();
-					}
-					if (element.equals("PackageName")) {
-						packageName = element.getNodeValue();
-					}
-					if (element.equals("PluginID")) {
-						pluginID = element.getNodeValue();
-						NamedNodeMap attributes = element.getAttributes();
-						pluginVersion = attributes.getNamedItem("Version")
-								.getNodeValue();
-					}
-					if (element.equals("Version")) {
-						version = element.getNodeValue();
-					}
-					if (element.equals("Description")) {
-						description = element.getNodeValue();
-					}
-					if (element.equals("File")) {
+			}
+					if (element.equals("file")) {
 						NodeList list = element.getChildNodes();
 						for (int k = 0; k < list.getLength(); k++) {
 							Node node = list.item(k);
 							String fileName = null;
 							String target = null;
 							Boolean showInEditor = null;
-							if (node.equals("FileName")) {
+							if (node.equals("fileName")) {
 								fileName = node.getNodeValue();
 							}
-							if (node.equals("TargetFolder")) {
+							if (node.equals("folder")) {
 								target = node.getNodeValue();
 							}
-							if (node.equals("ShowInEditor")) {
+							if (node.equals("showineditor")) {
 								showInEditor = Boolean.parseBoolean(node
 										.getNodeValue());
 							}
@@ -105,7 +125,7 @@ public class ExampleOnlineDataRetriever implements IDataRetriever{
 							}
 						}
 					}
-					if (element.equals("Category")) {
+					if (element.equals("category")) {
 						category = element.getNodeValue();
 					}
 				}
@@ -131,7 +151,9 @@ public class ExampleOnlineDataRetriever implements IDataRetriever{
 		}
 	}
 
-	/** (non-Javadoc)
+	/**
+	 * (non-Javadoc)
+	 * 
 	 * @see de.cau.cs.kieler.core.ui.examplewizard.datacollector.IDataRetriever#getExamples()
 	 */
 	public List<Example> getExamples() {
@@ -144,8 +166,8 @@ public class ExampleOnlineDataRetriever implements IDataRetriever{
 	public Example getExampleById(String id) {
 		// TODO think about versions
 		Example example = null;
-		for(Example temp:this.examples) {
-			if(temp.getId().equals(id)) {
+		for (Example temp : this.examples) {
+			if (temp.getId().equals(id)) {
 				example = temp;
 			}
 		}
@@ -158,7 +180,7 @@ public class ExampleOnlineDataRetriever implements IDataRetriever{
 	public List<String> getExampleIds() {
 		// TODO think about versions
 		List<String> ids = new ArrayList<String>();
-		for(Example example : this.examples) {
+		for (Example example : this.examples) {
 			ids.add(example.getId());
 		}
 		return ids;
@@ -169,8 +191,8 @@ public class ExampleOnlineDataRetriever implements IDataRetriever{
 	 */
 	public List<Example> getExamplesByPluginId(String pluginId) {
 		List<Example> examples = new ArrayList<Example>();
-		for(Example example : this.examples) {
-			if(example.getPluginId().equals(pluginId)) {
+		for (Example example : this.examples) {
+			if (example.getPluginId().equals(pluginId)) {
 				examples.add(example);
 			}
 		}
@@ -182,9 +204,9 @@ public class ExampleOnlineDataRetriever implements IDataRetriever{
 	 */
 	public List<String> getPluginIds() {
 		List<String> ids = new ArrayList<String>();
-		for(Example example : this.examples) {
+		for (Example example : this.examples) {
 			String id = example.getPluginId();
-			if(!ids.contains(id)) {
+			if (!ids.contains(id)) {
 				ids.add(id);
 			}
 		}
