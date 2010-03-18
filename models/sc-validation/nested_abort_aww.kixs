@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<synccharts:Region xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:synccharts="http://kieler.cs.cau.de/synccharts">
+  <innerStates id="nested_abort_aww" label="nested_abort_aww">
+    <signals name="E" isOutput="true"/>
+    <signals name="F" isOutput="true"/>
+    <signals name="G" isOutput="true"/>
+    <signals name="H" isOutput="true"/>
+    <signals name="A" isInput="true"/>
+    <signals name="B" isInput="true"/>
+    <signals name="C" isInput="true"/>
+    <signals name="D" isInput="true"/>
+    <regions id="main">
+      <innerStates id="init0" label="I" isInitial="true">
+        <outgoingTransitions triggersAndEffects="#" isImmediate="true" targetState="//@innerStates.0/@regions.0/@innerStates.1"/>
+      </innerStates>
+      <innerStates id="StatementList47state" label="StatementList47state">
+        <regions id="R0">
+          <innerStates id="init1" label="I" isInitial="true">
+            <outgoingTransitions triggersAndEffects="#" isImmediate="true" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.1"/>
+          </innerStates>
+          <innerStates id="StatementList51state" label="StatementList51state">
+            <regions id="R0">
+              <innerStates id="init2" label="I" isInitial="true">
+                <outgoingTransitions triggersAndEffects="#" isImmediate="true" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.1/@regions.0/@innerStates.1"/>
+              </innerStates>
+              <innerStates id="StatementList55state" label="StatementList55state">
+                <regions id="R0">
+                  <innerStates id="init3" label="I" isInitial="true">
+                    <outgoingTransitions triggersAndEffects="#" isImmediate="true" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.1/@regions.0/@innerStates.1/@regions.0/@innerStates.1"/>
+                  </innerStates>
+                  <innerStates id="49" label="49">
+                    <outgoingTransitions triggersAndEffects="D / E" type="STRONGABORT" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.1/@regions.0/@innerStates.1/@regions.0/@innerStates.2">
+                      <effects xsi:type="synccharts:Emission" signal="E"/>
+                      <trigger xsi:type="synccharts:SignalReference" signal="D"/>
+                    </outgoingTransitions>
+                  </innerStates>
+                  <innerStates id="78" label="78" isFinal="true"/>
+                </regions>
+                <outgoingTransitions triggersAndEffects="C / F" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.1/@regions.0/@innerStates.3">
+                  <effects xsi:type="synccharts:Emission" signal="F"/>
+                  <trigger xsi:type="synccharts:SignalReference" signal="C"/>
+                </outgoingTransitions>
+                <outgoingTransitions triggersAndEffects="/ F" priority="1" type="NORMALTERMINATION" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.1/@regions.0/@innerStates.3">
+                  <effects xsi:type="synccharts:Emission" signal="F"/>
+                </outgoingTransitions>
+              </innerStates>
+              <innerStates id="176" label="176" isFinal="true"/>
+              <innerStates id="147" label="147">
+                <outgoingTransitions triggersAndEffects="D / E" type="STRONGABORT" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.1/@regions.0/@innerStates.2">
+                  <effects xsi:type="synccharts:Emission" signal="E"/>
+                  <trigger xsi:type="synccharts:SignalReference" signal="D"/>
+                </outgoingTransitions>
+              </innerStates>
+            </regions>
+            <outgoingTransitions triggersAndEffects="B" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.3">
+              <trigger xsi:type="synccharts:SignalReference" signal="B"/>
+            </outgoingTransitions>
+            <outgoingTransitions priority="1" type="NORMALTERMINATION" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.3"/>
+          </innerStates>
+          <innerStates id="254" label="254" isFinal="true"/>
+          <innerStates id="225" label="225">
+            <outgoingTransitions triggersAndEffects="D / G" type="STRONGABORT" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.2">
+              <effects xsi:type="synccharts:Emission" signal="G"/>
+              <trigger xsi:type="synccharts:SignalReference" signal="D"/>
+            </outgoingTransitions>
+          </innerStates>
+        </regions>
+        <outgoingTransitions triggersAndEffects="A / H" type="STRONGABORT" targetState="//@innerStates.0/@regions.0/@innerStates.2">
+          <effects xsi:type="synccharts:Emission" signal="H"/>
+          <trigger xsi:type="synccharts:SignalReference" signal="A"/>
+        </outgoingTransitions>
+        <outgoingTransitions triggersAndEffects="/ H" priority="1" type="NORMALTERMINATION" targetState="//@innerStates.0/@regions.0/@innerStates.2">
+          <effects xsi:type="synccharts:Emission" signal="H"/>
+        </outgoingTransitions>
+      </innerStates>
+      <innerStates id="323" label="323"/>
+    </regions>
+  </innerStates>
+</synccharts:Region>

@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<synccharts:Region xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:synccharts="http://kieler.cs.cau.de/synccharts">
+  <innerStates id="WW_button" label="WW_button">
+    <signals name="WATCH_MODE_COMMAND" isOutput="true"/>
+    <signals name="ENTER_SET_WATCH_MODE_COMMAND" isOutput="true"/>
+    <signals name="SET_WATCH_COMMAND" isOutput="true"/>
+    <signals name="NEXT_WATCH_TIME_POSITION_COMMAND" isOutput="true"/>
+    <signals name="EXIT_SET_WATCH_MODE_COMMAND" isOutput="true"/>
+    <signals name="TOGGLE_24H_MODE_COMMAND" isOutput="true"/>
+    <signals name="TOGGLE_CHIME_COMMAND" isOutput="true"/>
+    <signals name="STOPWATCH_MODE_COMMAND" isOutput="true"/>
+    <signals name="START_STOP_COMMAND" isOutput="true"/>
+    <signals name="LAP_COMMAND" isOutput="true"/>
+    <signals name="ALARM_MODE_COMMAND" isOutput="true"/>
+    <signals name="ENTER_SET_ALARM_MODE_COMMAND" isOutput="true"/>
+    <signals name="SET_ALARM_COMMAND" isOutput="true"/>
+    <signals name="NEXT_ALARM_TIME_POSITION_COMMAND" isOutput="true"/>
+    <signals name="EXIT_SET_ALARM_MODE_COMMAND" isOutput="true"/>
+    <signals name="TOGGLE_ALARM_COMMAND" isOutput="true"/>
+    <signals name="STOP_ALARM_BEEP_COMMAND" isOutput="true"/>
+    <signals name="UL" isInput="true"/>
+    <signals name="UR" isInput="true"/>
+    <signals name="LL" isInput="true"/>
+    <signals name="LR" isInput="true"/>
+    <regions id="main">
+      <innerStates id="init0" label="I" isInitial="true">
+        <outgoingTransitions triggersAndEffects="#" isImmediate="true" targetState="//@innerStates.0/@regions.0/@innerStates.1"/>
+      </innerStates>
+      <innerStates id="ParallelStatementList56state" label="ParallelStatementList56state">
+        <regions id="R0">
+          <innerStates id="init1" label="I" isInitial="true">
+            <outgoingTransitions triggersAndEffects="#" isImmediate="true" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.1"/>
+          </innerStates>
+          <innerStates id="7" label="7" type="CONDITIONAL">
+            <outgoingTransitions triggersAndEffects="/ WATCH_MODE_COMMAND" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.2">
+              <effects xsi:type="synccharts:Emission" signal="WATCH_MODE_COMMAND"/>
+            </outgoingTransitions>
+          </innerStates>
+          <innerStates id="Trap60state" label="Trap60state">
+            <signals name="WATCH_AND_SET_WATCH_MODE_"/>
+            <signals name="haltTrap60_"/>
+            <regions id="R0">
+              <innerStates id="33" label="33"/>
+              <innerStates id="29" label="29" isFinal="true"/>
+              <innerStates id="Loop61state" label="Loop61state">
+                <regions id="R0">
+                  <innerStates id="init2" label="I" isInitial="true">
+                    <outgoingTransitions triggersAndEffects="#" isImmediate="true" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.2/@regions.0/@innerStates.2/@regions.0/@innerStates.1"/>
+                  </innerStates>
+                  <innerStates id="ParallelStatementList67state" label="ParallelStatementList67state">
+                    <regions id="R0">
+                      <innerStates id="init5" label="I" isInitial="true">
+                        <outgoingTransitions triggersAndEffects="#" isImmediate="true" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.2/@regions.0/@innerStates.2/@regions.0/@innerStates.1/@regions.0/@innerStates.1"/>
+                      </innerStates>
+                      <innerStates id="58" label="58">
+                        <outgoingTransitions triggersAndEffects="LL / WATCH_AND_SET_WATCH_MODE_" type="STRONGABORT" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.2/@regions.0/@innerStates.2/@regions.0/@innerStates.1/@regions.0/@innerStates.2">
+                          <effects xsi:type="synccharts:Emission" signal="WATCH_AND_SET_WATCH_MODE_"/>
+                          <trigger xsi:type="synccharts:SignalReference" signal="LL"/>
+                        </outgoingTransitions>
+                      </innerStates>
+                      <innerStates id="63" label="63"/>
+                    </regions>
+                    <regions id="R1">
+                      <innerStates id="init6" label="I" isInitial="true">
+                        <outgoingTransitions triggersAndEffects="#" isImmediate="true" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.2/@regions.0/@innerStates.2/@regions.0/@innerStates.1/@regions.1/@innerStates.1"/>
+                      </innerStates>
+                      <innerStates id="103" label="103">
+                        <outgoingTransitions triggersAndEffects="LR" type="STRONGABORT" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.2/@regions.0/@innerStates.2/@regions.0/@innerStates.1/@regions.1/@innerStates.2">
+                          <trigger xsi:type="synccharts:SignalReference" signal="LR"/>
+                        </outgoingTransitions>
+                      </innerStates>
+                      <innerStates id="107" label="107" type="CONDITIONAL">
+                        <outgoingTransitions triggersAndEffects="/ TOGGLE_24H_MODE_COMMAND" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.2/@regions.0/@innerStates.2/@regions.0/@innerStates.1/@regions.1/@innerStates.3">
+                          <effects xsi:type="synccharts:Emission" signal="TOGGLE_24H_MODE_COMMAND"/>
+                        </outgoingTransitions>
+                      </innerStates>
+                      <innerStates id="108" label="108">
+                        <outgoingTransitions triggersAndEffects="LR" type="STRONGABORT" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.2/@regions.0/@innerStates.2/@regions.0/@innerStates.1/@regions.1/@innerStates.2">
+                          <trigger xsi:type="synccharts:SignalReference" signal="LR"/>
+                        </outgoingTransitions>
+                      </innerStates>
+                    </regions>
+                    <outgoingTransitions triggersAndEffects="UL / ENTER_SET_WATCH_MODE_COMMAND" type="STRONGABORT" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.2/@regions.0/@innerStates.2/@regions.0/@innerStates.2">
+                      <effects xsi:type="synccharts:Emission" signal="ENTER_SET_WATCH_MODE_COMMAND"/>
+                      <trigger xsi:type="synccharts:SignalReference" signal="UL"/>
+                    </outgoingTransitions>
+                  </innerStates>
+                  <innerStates id="ParallelStatementList80state" label="ParallelStatementList80state">
+                    <regions id="R0">
+                      <innerStates id="init3" label="I" isInitial="true">
+                        <outgoingTransitions triggersAndEffects="#" isImmediate="true" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.2/@regions.0/@innerStates.2/@regions.0/@innerStates.2/@regions.0/@innerStates.1"/>
+                      </innerStates>
+                      <innerStates id="217" label="217">
+                        <outgoingTransitions triggersAndEffects="LL" type="STRONGABORT" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.2/@regions.0/@innerStates.2/@regions.0/@innerStates.2/@regions.0/@innerStates.2">
+                          <trigger xsi:type="synccharts:SignalReference" signal="LL"/>
+                        </outgoingTransitions>
+                      </innerStates>
+                      <innerStates id="221" label="221" type="CONDITIONAL">
+                        <outgoingTransitions triggersAndEffects="/ NEXT_WATCH_TIME_POSITION_COMMAND" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.2/@regions.0/@innerStates.2/@regions.0/@innerStates.2/@regions.0/@innerStates.3">
+                          <effects xsi:type="synccharts:Emission" signal="NEXT_WATCH_TIME_POSITION_COMMAND"/>
+                        </outgoingTransitions>
+                      </innerStates>
+                      <innerStates id="222" label="222">
+                        <outgoingTransitions triggersAndEffects="LL" type="STRONGABORT" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.2/@regions.0/@innerStates.2/@regions.0/@innerStates.2/@regions.0/@innerStates.2">
+                          <trigger xsi:type="synccharts:SignalReference" signal="LL"/>
+                        </outgoingTransitions>
+                      </innerStates>
+                    </regions>
+                    <regions id="R1">
+                      <innerStates id="init4" label="I" isInitial="true">
+                        <outgoingTransitions triggersAndEffects="#" isImmediate="true" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.2/@regions.0/@innerStates.2/@regions.0/@innerStates.2/@regions.1/@innerStates.1"/>
+                      </innerStates>
+                      <innerStates id="268" label="268">
+                        <outgoingTransitions triggersAndEffects="LR" type="STRONGABORT" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.2/@regions.0/@innerStates.2/@regions.0/@innerStates.2/@regions.1/@innerStates.2">
+                          <trigger xsi:type="synccharts:SignalReference" signal="LR"/>
+                        </outgoingTransitions>
+                      </innerStates>
+                      <innerStates id="272" label="272" type="CONDITIONAL">
+                        <outgoingTransitions triggersAndEffects="/ SET_WATCH_COMMAND" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.2/@regions.0/@innerStates.2/@regions.0/@innerStates.2/@regions.1/@innerStates.3">
+                          <effects xsi:type="synccharts:Emission" signal="SET_WATCH_COMMAND"/>
+                        </outgoingTransitions>
+                      </innerStates>
+                      <innerStates id="273" label="273">
+                        <outgoingTransitions triggersAndEffects="LR" type="STRONGABORT" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.2/@regions.0/@innerStates.2/@regions.0/@innerStates.2/@regions.1/@innerStates.2">
+                          <trigger xsi:type="synccharts:SignalReference" signal="LR"/>
+                        </outgoingTransitions>
+                      </innerStates>
+                    </regions>
+                    <outgoingTransitions triggersAndEffects="UL / EXIT_SET_WATCH_MODE_COMMAND" type="STRONGABORT" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.2/@regions.0/@innerStates.2/@regions.0/@innerStates.1">
+                      <effects xsi:type="synccharts:Emission" signal="EXIT_SET_WATCH_MODE_COMMAND"/>
+                      <trigger xsi:type="synccharts:SignalReference" signal="UL"/>
+                    </outgoingTransitions>
+                  </innerStates>
+                </regions>
+                <outgoingTransitions triggersAndEffects="# haltTrap60_" isImmediate="true" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.2/@regions.0/@innerStates.0">
+                  <trigger xsi:type="synccharts:SignalReference" signal="haltTrap60_"/>
+                </outgoingTransitions>
+                <outgoingTransitions triggersAndEffects="# WATCH_AND_SET_WATCH_MODE_" isImmediate="true" priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.2/@regions.0/@innerStates.1">
+                  <trigger xsi:type="synccharts:SignalReference" signal="WATCH_AND_SET_WATCH_MODE_"/>
+                </outgoingTransitions>
+              </innerStates>
+              <innerStates id="init7" label="I" isInitial="true">
+                <outgoingTransitions triggersAndEffects="#" isImmediate="true" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.2/@regions.0/@innerStates.2"/>
+              </innerStates>
+            </regions>
+            <outgoingTransitions triggersAndEffects="/ STOPWATCH_MODE_COMMAND" type="NORMALTERMINATION" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.3">
+              <effects xsi:type="synccharts:Emission" signal="STOPWATCH_MODE_COMMAND"/>
+            </outgoingTransitions>
+          </innerStates>
+          <innerStates id="ParallelStatementList93state" label="ParallelStatementList93state">
+            <regions id="R0">
+              <innerStates id="init8" label="I" isInitial="true">
+                <outgoingTransitions triggersAndEffects="#" isImmediate="true" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.3/@regions.0/@innerStates.1"/>
+              </innerStates>
+              <innerStates id="447" label="447">
+                <outgoingTransitions triggersAndEffects="LR" type="STRONGABORT" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.3/@regions.0/@innerStates.2">
+                  <trigger xsi:type="synccharts:SignalReference" signal="LR"/>
+                </outgoingTransitions>
+              </innerStates>
+              <innerStates id="451" label="451" type="CONDITIONAL">
+                <outgoingTransitions triggersAndEffects="/ START_STOP_COMMAND" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.3/@regions.0/@innerStates.3">
+                  <effects xsi:type="synccharts:Emission" signal="START_STOP_COMMAND"/>
+                </outgoingTransitions>
+              </innerStates>
+              <innerStates id="452" label="452">
+                <outgoingTransitions triggersAndEffects="LR" type="STRONGABORT" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.3/@regions.0/@innerStates.2">
+                  <trigger xsi:type="synccharts:SignalReference" signal="LR"/>
+                </outgoingTransitions>
+              </innerStates>
+            </regions>
+            <regions id="R1">
+              <innerStates id="init9" label="I" isInitial="true">
+                <outgoingTransitions triggersAndEffects="#" isImmediate="true" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.3/@regions.1/@innerStates.1"/>
+              </innerStates>
+              <innerStates id="498" label="498">
+                <outgoingTransitions triggersAndEffects="UR" type="STRONGABORT" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.3/@regions.1/@innerStates.2">
+                  <trigger xsi:type="synccharts:SignalReference" signal="UR"/>
+                </outgoingTransitions>
+              </innerStates>
+              <innerStates id="502" label="502" type="CONDITIONAL">
+                <outgoingTransitions triggersAndEffects="/ LAP_COMMAND" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.3/@regions.1/@innerStates.3">
+                  <effects xsi:type="synccharts:Emission" signal="LAP_COMMAND"/>
+                </outgoingTransitions>
+              </innerStates>
+              <innerStates id="503" label="503">
+                <outgoingTransitions triggersAndEffects="UR" type="STRONGABORT" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.3/@regions.1/@innerStates.2">
+                  <trigger xsi:type="synccharts:SignalReference" signal="UR"/>
+                </outgoingTransitions>
+              </innerStates>
+            </regions>
+            <outgoingTransitions triggersAndEffects="LL" type="STRONGABORT" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.4">
+              <trigger xsi:type="synccharts:SignalReference" signal="LL"/>
+            </outgoingTransitions>
+          </innerStates>
+          <innerStates id="Trap100state" label="Trap100state">
+            <signals name="ALARM_AND_SET_ALARM_MODE_"/>
+            <signals name="haltTrap100_"/>
+            <regions id="R0">
+              <innerStates id="582" label="582"/>
+              <innerStates id="578" label="578" isFinal="true"/>
+              <innerStates id="StatementList101state" label="StatementList101state">
+                <regions id="R0">
+                  <innerStates id="init10" label="I" isInitial="true">
+                    <outgoingTransitions triggersAndEffects="#  / ALARM_MODE_COMMAND" isImmediate="true" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.4/@regions.0/@innerStates.2/@regions.0/@innerStates.1">
+                      <effects xsi:type="synccharts:Emission" signal="ALARM_MODE_COMMAND"/>
+                    </outgoingTransitions>
+                  </innerStates>
+                  <innerStates id="ParallelStatementList108state" label="ParallelStatementList108state">
+                    <regions id="R0">
+                      <innerStates id="init13" label="I" isInitial="true">
+                        <outgoingTransitions triggersAndEffects="#" isImmediate="true" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.4/@regions.0/@innerStates.2/@regions.0/@innerStates.1/@regions.0/@innerStates.1"/>
+                      </innerStates>
+                      <innerStates id="628" label="628">
+                        <outgoingTransitions triggersAndEffects="LL / ALARM_AND_SET_ALARM_MODE_" type="STRONGABORT" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.4/@regions.0/@innerStates.2/@regions.0/@innerStates.1/@regions.0/@innerStates.2">
+                          <effects xsi:type="synccharts:Emission" signal="ALARM_AND_SET_ALARM_MODE_"/>
+                          <trigger xsi:type="synccharts:SignalReference" signal="LL"/>
+                        </outgoingTransitions>
+                      </innerStates>
+                      <innerStates id="633" label="633"/>
+                    </regions>
+                    <regions id="R1">
+                      <innerStates id="init14" label="I" isInitial="true">
+                        <outgoingTransitions triggersAndEffects="#" isImmediate="true" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.4/@regions.0/@innerStates.2/@regions.0/@innerStates.1/@regions.1/@innerStates.1"/>
+                      </innerStates>
+                      <innerStates id="673" label="673">
+                        <outgoingTransitions triggersAndEffects="LR" type="STRONGABORT" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.4/@regions.0/@innerStates.2/@regions.0/@innerStates.1/@regions.1/@innerStates.2">
+                          <trigger xsi:type="synccharts:SignalReference" signal="LR"/>
+                        </outgoingTransitions>
+                      </innerStates>
+                      <innerStates id="677" label="677" type="CONDITIONAL">
+                        <outgoingTransitions triggersAndEffects="/ TOGGLE_CHIME_COMMAND" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.4/@regions.0/@innerStates.2/@regions.0/@innerStates.1/@regions.1/@innerStates.3">
+                          <effects xsi:type="synccharts:Emission" signal="TOGGLE_CHIME_COMMAND"/>
+                        </outgoingTransitions>
+                      </innerStates>
+                      <innerStates id="678" label="678">
+                        <outgoingTransitions triggersAndEffects="LR" type="STRONGABORT" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.4/@regions.0/@innerStates.2/@regions.0/@innerStates.1/@regions.1/@innerStates.2">
+                          <trigger xsi:type="synccharts:SignalReference" signal="LR"/>
+                        </outgoingTransitions>
+                      </innerStates>
+                    </regions>
+                    <regions id="R2">
+                      <innerStates id="init15" label="I" isInitial="true">
+                        <outgoingTransitions triggersAndEffects="#" isImmediate="true" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.4/@regions.0/@innerStates.2/@regions.0/@innerStates.1/@regions.2/@innerStates.1"/>
+                      </innerStates>
+                      <innerStates id="724" label="724">
+                        <outgoingTransitions triggersAndEffects="UR" type="STRONGABORT" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.4/@regions.0/@innerStates.2/@regions.0/@innerStates.1/@regions.2/@innerStates.2">
+                          <trigger xsi:type="synccharts:SignalReference" signal="UR"/>
+                        </outgoingTransitions>
+                      </innerStates>
+                      <innerStates id="728" label="728" type="CONDITIONAL">
+                        <outgoingTransitions triggersAndEffects="/ TOGGLE_ALARM_COMMAND" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.4/@regions.0/@innerStates.2/@regions.0/@innerStates.1/@regions.2/@innerStates.3">
+                          <effects xsi:type="synccharts:Emission" signal="TOGGLE_ALARM_COMMAND"/>
+                        </outgoingTransitions>
+                      </innerStates>
+                      <innerStates id="729" label="729">
+                        <outgoingTransitions triggersAndEffects="UR" type="STRONGABORT" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.4/@regions.0/@innerStates.2/@regions.0/@innerStates.1/@regions.2/@innerStates.2">
+                          <trigger xsi:type="synccharts:SignalReference" signal="UR"/>
+                        </outgoingTransitions>
+                      </innerStates>
+                    </regions>
+                    <outgoingTransitions triggersAndEffects="UL / ENTER_SET_ALARM_MODE_COMMAND" type="STRONGABORT" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.4/@regions.0/@innerStates.2/@regions.0/@innerStates.2">
+                      <effects xsi:type="synccharts:Emission" signal="ENTER_SET_ALARM_MODE_COMMAND"/>
+                      <trigger xsi:type="synccharts:SignalReference" signal="UL"/>
+                    </outgoingTransitions>
+                  </innerStates>
+                  <innerStates id="ParallelStatementList124state" label="ParallelStatementList124state">
+                    <regions id="R0">
+                      <innerStates id="init11" label="I" isInitial="true">
+                        <outgoingTransitions triggersAndEffects="#" isImmediate="true" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.4/@regions.0/@innerStates.2/@regions.0/@innerStates.2/@regions.0/@innerStates.1"/>
+                      </innerStates>
+                      <innerStates id="839" label="839">
+                        <outgoingTransitions triggersAndEffects="LL" type="STRONGABORT" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.4/@regions.0/@innerStates.2/@regions.0/@innerStates.2/@regions.0/@innerStates.2">
+                          <trigger xsi:type="synccharts:SignalReference" signal="LL"/>
+                        </outgoingTransitions>
+                      </innerStates>
+                      <innerStates id="843" label="843" type="CONDITIONAL">
+                        <outgoingTransitions triggersAndEffects="/ NEXT_ALARM_TIME_POSITION_COMMAND" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.4/@regions.0/@innerStates.2/@regions.0/@innerStates.2/@regions.0/@innerStates.3">
+                          <effects xsi:type="synccharts:Emission" signal="NEXT_ALARM_TIME_POSITION_COMMAND"/>
+                        </outgoingTransitions>
+                      </innerStates>
+                      <innerStates id="844" label="844">
+                        <outgoingTransitions triggersAndEffects="LL" type="STRONGABORT" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.4/@regions.0/@innerStates.2/@regions.0/@innerStates.2/@regions.0/@innerStates.2">
+                          <trigger xsi:type="synccharts:SignalReference" signal="LL"/>
+                        </outgoingTransitions>
+                      </innerStates>
+                    </regions>
+                    <regions id="R1">
+                      <innerStates id="init12" label="I" isInitial="true">
+                        <outgoingTransitions triggersAndEffects="#" isImmediate="true" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.4/@regions.0/@innerStates.2/@regions.0/@innerStates.2/@regions.1/@innerStates.1"/>
+                      </innerStates>
+                      <innerStates id="890" label="890">
+                        <outgoingTransitions triggersAndEffects="LR" type="STRONGABORT" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.4/@regions.0/@innerStates.2/@regions.0/@innerStates.2/@regions.1/@innerStates.2">
+                          <trigger xsi:type="synccharts:SignalReference" signal="LR"/>
+                        </outgoingTransitions>
+                      </innerStates>
+                      <innerStates id="894" label="894" type="CONDITIONAL">
+                        <outgoingTransitions triggersAndEffects="/ SET_ALARM_COMMAND" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.4/@regions.0/@innerStates.2/@regions.0/@innerStates.2/@regions.1/@innerStates.3">
+                          <effects xsi:type="synccharts:Emission" signal="SET_ALARM_COMMAND"/>
+                        </outgoingTransitions>
+                      </innerStates>
+                      <innerStates id="895" label="895">
+                        <outgoingTransitions triggersAndEffects="LR" type="STRONGABORT" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.4/@regions.0/@innerStates.2/@regions.0/@innerStates.2/@regions.1/@innerStates.2">
+                          <trigger xsi:type="synccharts:SignalReference" signal="LR"/>
+                        </outgoingTransitions>
+                      </innerStates>
+                    </regions>
+                    <outgoingTransitions triggersAndEffects="UL / EXIT_SET_ALARM_MODE_COMMAND" type="STRONGABORT" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.4/@regions.0/@innerStates.2/@regions.0/@innerStates.1">
+                      <effects xsi:type="synccharts:Emission" signal="EXIT_SET_ALARM_MODE_COMMAND"/>
+                      <trigger xsi:type="synccharts:SignalReference" signal="UL"/>
+                    </outgoingTransitions>
+                  </innerStates>
+                </regions>
+                <outgoingTransitions triggersAndEffects="# haltTrap100_" isImmediate="true" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.4/@regions.0/@innerStates.0">
+                  <trigger xsi:type="synccharts:SignalReference" signal="haltTrap100_"/>
+                </outgoingTransitions>
+                <outgoingTransitions triggersAndEffects="# ALARM_AND_SET_ALARM_MODE_" isImmediate="true" priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.4/@regions.0/@innerStates.1">
+                  <trigger xsi:type="synccharts:SignalReference" signal="ALARM_AND_SET_ALARM_MODE_"/>
+                </outgoingTransitions>
+              </innerStates>
+              <innerStates id="init16" label="I" isInitial="true">
+                <outgoingTransitions triggersAndEffects="#" isImmediate="true" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.4/@regions.0/@innerStates.2"/>
+              </innerStates>
+            </regions>
+            <outgoingTransitions type="NORMALTERMINATION" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.1"/>
+          </innerStates>
+        </regions>
+        <regions id="R1">
+          <innerStates id="init17" label="I" isInitial="true">
+            <outgoingTransitions triggersAndEffects="#" isImmediate="true" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.1/@innerStates.1"/>
+          </innerStates>
+          <innerStates id="1072" label="1072">
+            <outgoingTransitions triggersAndEffects="UR" type="STRONGABORT" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.1/@innerStates.2">
+              <trigger xsi:type="synccharts:SignalReference" signal="UR"/>
+            </outgoingTransitions>
+          </innerStates>
+          <innerStates id="1076" label="1076" type="CONDITIONAL">
+            <outgoingTransitions triggersAndEffects="/ STOP_ALARM_BEEP_COMMAND" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.1/@innerStates.3">
+              <effects xsi:type="synccharts:Emission" signal="STOP_ALARM_BEEP_COMMAND"/>
+            </outgoingTransitions>
+          </innerStates>
+          <innerStates id="1077" label="1077">
+            <outgoingTransitions triggersAndEffects="UR" type="STRONGABORT" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.1/@innerStates.2">
+              <trigger xsi:type="synccharts:SignalReference" signal="UR"/>
+            </outgoingTransitions>
+          </innerStates>
+        </regions>
+      </innerStates>
+    </regions>
+  </innerStates>
+</synccharts:Region>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<synccharts:Region xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:synccharts="http://kieler.cs.cau.de/synccharts">
+  <innerStates id="Module_ReactorControl" label="Module_ReactorControl">
+    <signals name="PullOutRods" isOutput="true"/>
+    <signals name="PushInRods" isOutput="true"/>
+    <signals name="Start" isInput="true"/>
+    <signals name="OverHeated" isInput="true"/>
+    <signals name="CooledDown" isInput="true"/>
+    <signals name="unsafe"/>
+    <regions id="main">
+      <innerStates id="init0" label="I" isInitial="true">
+        <outgoingTransitions triggersAndEffects="#" isImmediate="true" targetState="//@innerStates.0/@regions.0/@innerStates.1"/>
+      </innerStates>
+      <innerStates id="ParallelStatementList40state" label="ParallelStatementList40state">
+        <regions id="R0">
+          <innerStates id="init1" label="I" isInitial="true">
+            <outgoingTransitions triggersAndEffects="#" isImmediate="true" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.1"/>
+          </innerStates>
+          <innerStates id="Await43state" label="Await43state">
+            <regions id="R0">
+              <innerStates id="init2" label="I" isInitial="true">
+                <outgoingTransitions triggersAndEffects="#" isImmediate="true" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.1/@regions.0/@innerStates.1"/>
+              </innerStates>
+              <innerStates id="18" label="18">
+                <outgoingTransitions triggersAndEffects="Start / PullOutRods" type="STRONGABORT" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.1/@regions.0/@innerStates.2">
+                  <effects xsi:type="synccharts:Emission" signal="PullOutRods"/>
+                  <trigger xsi:type="synccharts:SignalReference" signal="Start"/>
+                </outgoingTransitions>
+              </innerStates>
+              <innerStates id="23" label="23" isFinal="true"/>
+            </regions>
+            <outgoingTransitions triggersAndEffects="unsafe" type="STRONGABORT" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.1">
+              <trigger xsi:type="synccharts:SignalReference" signal="unsafe"/>
+            </outgoingTransitions>
+          </innerStates>
+        </regions>
+        <regions id="R1">
+          <innerStates id="init3" label="I" isInitial="true">
+            <outgoingTransitions triggersAndEffects="#" isImmediate="true" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.1/@innerStates.1"/>
+          </innerStates>
+          <innerStates id="94" label="94">
+            <outgoingTransitions triggersAndEffects="# unsafe / PushInRods" isImmediate="true" type="STRONGABORT" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.1/@innerStates.2">
+              <effects xsi:type="synccharts:Emission" signal="PushInRods"/>
+              <trigger xsi:type="synccharts:SignalReference" signal="unsafe"/>
+            </outgoingTransitions>
+          </innerStates>
+          <innerStates id="134" label="134">
+            <outgoingTransitions triggersAndEffects="not unsafe" type="STRONGABORT" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.1/@innerStates.1">
+              <trigger xsi:type="synccharts:ComplexExpression" operator="not">
+                <subExpressions xsi:type="synccharts:SignalReference" signal="unsafe"/>
+              </trigger>
+            </outgoingTransitions>
+          </innerStates>
+        </regions>
+        <regions id="R2">
+          <innerStates id="init4" label="I" isInitial="true">
+            <outgoingTransitions triggersAndEffects="#" isImmediate="true" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.2/@innerStates.1"/>
+          </innerStates>
+          <innerStates id="193" label="193">
+            <outgoingTransitions triggersAndEffects="# OverHeated" isImmediate="true" type="STRONGABORT" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.2/@innerStates.2">
+              <trigger xsi:type="synccharts:SignalReference" signal="OverHeated"/>
+            </outgoingTransitions>
+          </innerStates>
+          <innerStates id="Sustain68state" label="Sustain68state">
+            <regions id="R0">
+              <innerStates id="init5" label="I" isInitial="true">
+                <outgoingTransitions triggersAndEffects="#  / unsafe" isImmediate="true" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.2/@innerStates.2/@regions.0/@innerStates.1">
+                  <effects xsi:type="synccharts:Emission" signal="unsafe"/>
+                </outgoingTransitions>
+              </innerStates>
+              <innerStates id="227" label="227">
+                <outgoingTransitions triggersAndEffects="/ unsafe" type="STRONGABORT" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.2/@innerStates.2/@regions.0/@innerStates.1">
+                  <effects xsi:type="synccharts:Emission" signal="unsafe"/>
+                </outgoingTransitions>
+              </innerStates>
+            </regions>
+            <outgoingTransitions triggersAndEffects="CooledDown" type="STRONGABORT" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.2/@innerStates.1">
+              <trigger xsi:type="synccharts:SignalReference" signal="CooledDown"/>
+            </outgoingTransitions>
+          </innerStates>
+        </regions>
+      </innerStates>
+    </regions>
+  </innerStates>
+</synccharts:Region>
