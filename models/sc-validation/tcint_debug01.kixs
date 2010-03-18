@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<synccharts:Region xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:synccharts="http://kieler.cs.cau.de/synccharts">
+  <innerStates id="Module_tcint_debug01" label="Module_tcint_debug01">
+    <signals name="R" isOutput="true"/>
+    <signals name="S" isOutput="true"/>
+    <signals name="T" isOutput="true"/>
+    <signals name="U" isOutput="true"/>
+    <signals name="V" isOutput="true"/>
+    <signals name="W" isOutput="true"/>
+    <signals name="A" isInput="true"/>
+    <signals name="B" isInput="true"/>
+    <signals name="C" isInput="true"/>
+    <signals name="D" isInput="true"/>
+    <signals name="E" isInput="true"/>
+    <signals name="F" isInput="true"/>
+    <signals name="T_"/>
+    <signals name="haltTrap46_"/>
+    <regions>
+      <innerStates id="10" label="10"/>
+      <innerStates id="6" label="6" isFinal="true"/>
+      <innerStates id="ParallelStatementList47state" label="ParallelStatementList47state">
+        <regions id="R0">
+          <innerStates id="init0" label="I" isInitial="true">
+            <outgoingTransitions triggersAndEffects="#" isImmediate="true" targetState="//@innerStates.0/@regions.0/@innerStates.2/@regions.0/@innerStates.1"/>
+          </innerStates>
+          <innerStates id="20" label="20" isFinal="true"/>
+        </regions>
+        <regions id="R1">
+          <innerStates id="init1" label="I" isInitial="true">
+            <outgoingTransitions triggersAndEffects="#  / R" isImmediate="true" targetState="//@innerStates.0/@regions.0/@innerStates.2/@regions.1/@innerStates.1">
+              <effects xsi:type="synccharts:Emission" signal="R"/>
+            </outgoingTransitions>
+          </innerStates>
+          <innerStates id="ParallelStatementList51state" label="ParallelStatementList51state">
+            <regions id="R0">
+              <innerStates id="init2" label="I" isInitial="true">
+                <outgoingTransitions triggersAndEffects="#" isImmediate="true" targetState="//@innerStates.0/@regions.0/@innerStates.2/@regions.1/@innerStates.1/@regions.0/@innerStates.1"/>
+              </innerStates>
+              <innerStates id="67" label="67">
+                <outgoingTransitions triggersAndEffects="/ T_" type="STRONGABORT" targetState="//@innerStates.0/@regions.0/@innerStates.2/@regions.1/@innerStates.1/@regions.0/@innerStates.2">
+                  <effects xsi:type="synccharts:Emission" signal="T_"/>
+                </outgoingTransitions>
+              </innerStates>
+              <innerStates id="95" label="95"/>
+            </regions>
+            <regions id="R1">
+              <innerStates id="init3" label="I" isInitial="true">
+                <outgoingTransitions triggersAndEffects="#" isImmediate="true" targetState="//@innerStates.0/@regions.0/@innerStates.2/@regions.1/@innerStates.1/@regions.1/@innerStates.1"/>
+              </innerStates>
+              <innerStates id="129" label="129" isFinal="true"/>
+            </regions>
+          </innerStates>
+        </regions>
+        <outgoingTransitions triggersAndEffects="# haltTrap46_" isImmediate="true" targetState="//@innerStates.0/@regions.0/@innerStates.0">
+          <trigger xsi:type="synccharts:SignalReference" signal="haltTrap46_"/>
+        </outgoingTransitions>
+        <outgoingTransitions triggersAndEffects="# T_" isImmediate="true" priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.1">
+          <trigger xsi:type="synccharts:SignalReference" signal="T_"/>
+        </outgoingTransitions>
+      </innerStates>
+      <innerStates id="init4" label="I" isInitial="true">
+        <outgoingTransitions triggersAndEffects="#" isImmediate="true" targetState="//@innerStates.0/@regions.0/@innerStates.2"/>
+      </innerStates>
+    </regions>
+  </innerStates>
+</synccharts:Region>
