@@ -173,13 +173,13 @@ public class ExampleManagerDialog extends Window implements SelectionListener {
 		TableColumn updateColumn3 = new TableColumn(table, SWT.NONE);
 		updateColumn3.setWidth(100);
 		updateColumn3.setText("Plug-In");
-
+/*
 		TableColumn column4 = new TableColumn(table, SWT.NONE);
 		column4.setWidth(250);
 		column4.setText("Description");
 
 		initTableData();
-
+*/
 		// Add
 		TabItem addTab = new TabItem(tabFolder, SWT.NULL);
 		addTab.setText("Add");
