@@ -19,7 +19,9 @@ import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditor;
 import org.eclipse.gmf.runtime.diagram.ui.render.editparts.RenderedDiagramRootEditPart;
 import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.PlatformUI;
+
 import de.cau.cs.kieler.viewmanagement.AEffect;
 
 /**
@@ -29,20 +31,24 @@ import de.cau.cs.kieler.viewmanagement.AEffect;
  */
 public class ZoomEffect extends AEffect {
 
-    private ZoomManager zoomManager;
-
+    /**
+     * Enqueue zooming for the GUI thread. 
+     */
     public final void execute() {
         // get active editor
-        IEditorPart editor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage()
-                .getActiveEditor();
+        IWorkbench workbench = PlatformUI.getWorkbench();
+        IEditorPart editor = workbench.getActiveWorkbenchWindow().getActivePage().getActiveEditor();
         if (editor instanceof DiagramEditor) {
             // get its zoom manager
             DiagramEditPart diagramEdit = ((DiagramEditor) editor).getDiagramEditPart();
-            zoomManager = ((RenderedDiagramRootEditPart) diagramEdit.getRoot()).getZoomManager();
+            final ZoomManager zoomManager = ((RenderedDiagramRootEditPart) diagramEdit.getRoot())
+                    .getZoomManager();
+            // use GUI thread to honor the order of effects
+            workbench.getDisplay().asyncExec(new Runnable() {
+                public void run() {
+                    zoomManager.setZoomAsText(ZoomManager.FIT_ALL);
+                }
+            });
         }
-        // set zoom to zoom-to-fit value
-        zoomManager.setZoomAsText(ZoomManager.FIT_ALL);
-
     }
-
 }
