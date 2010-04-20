@@ -27,7 +27,8 @@ import de.cau.cs.kieler.viewmanagement.AEffect;
 /**
  * @author nbe
  * 
- *         The ShapeHighLightEffect will modify the affected object itself by changing its colors.
+ *         The ShapeHighLightEffect will modify the affected object itself by
+ *         changing its colors.
  */
 public class ShapeHighlightEffect extends AEffect {
 
@@ -48,8 +49,8 @@ public class ShapeHighlightEffect extends AEffect {
     }
 
     /**
-     * executes the ShapeHighlightEffect. Here the figure of the objectToHighlight be modified. The original
-     * values are saved for undo.
+     * executes the ShapeHighlightEffect. Here the figure of the
+     * objectToHighlight be modified. The original values are saved for undo.
      */
     public final void execute() {
 
@@ -69,15 +70,17 @@ public class ShapeHighlightEffect extends AEffect {
             this.originalOpaque = figure.isOpaque();
         }
         // set new colors - if they are <> null
-        if (this.color != null)
+        if (this.color != null) {
             figure.setForegroundColor(this.color);
-        if (this.backColor != null)
+        }
+        if (this.backColor != null) {
             figure.setBackgroundColor(this.backColor);
+        }
 
         if (figure instanceof Shape) {
             ((Shape) figure).setFill(true);
         }
-        figure.setOpaque(true);
+        // figure.setOpaque(true); // avoid blocking labels etc layered behind the state
         // schedule repaint to make changes visible
         figure.repaint();
 
@@ -105,7 +108,7 @@ public class ShapeHighlightEffect extends AEffect {
     }
 
     /**
-     * Sets the target object of the effect
+     * Sets the target object of the effect.
      * 
      * @param target
      *            the object to be highlighted
@@ -115,15 +118,18 @@ public class ShapeHighlightEffect extends AEffect {
     }
 
     /**
-     * sets the parameters of the effect
-     * @param objectParameters the parameters
+     * Sets the parameters of the effect.
+     * 
+     * @param objectParameters
+     *            the parameters
      */
     public void setParameters(final Object objectParameters) {
 
     }
 
     /**
-     * Changes parameters of highlight figure. Will be re-read on every execute() call
+     * Changes parameters of highlight figure. Will be re-read on every
+     * execute() call
      * 
      * @param foregroundColor
      *            color for the foreground
