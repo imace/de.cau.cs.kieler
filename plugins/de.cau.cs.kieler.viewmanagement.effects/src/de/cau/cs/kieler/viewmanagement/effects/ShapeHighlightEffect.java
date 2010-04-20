@@ -20,6 +20,7 @@ import org.eclipse.draw2d.Shape;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.GraphicalEditPart;
 import org.eclipse.swt.graphics.Color;
+import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
 import org.eclipse.gmf.runtime.gef.ui.figures.DefaultSizeNodeFigure;
 
 import de.cau.cs.kieler.viewmanagement.AEffect;
@@ -53,6 +54,9 @@ public class ShapeHighlightEffect extends AEffect {
      * objectToHighlight be modified. The original values are saved for undo.
      */
     public final void execute() {
+        if (objectToHighlight == null) {
+            return; // nothing to execute for an unknown object
+        }
 
         objectToHighlight.getRoot();
         IFigure figure = ((GraphicalEditPart) objectToHighlight).getFigure();
@@ -72,6 +76,12 @@ public class ShapeHighlightEffect extends AEffect {
         // set new colors - if they are <> null
         if (this.color != null) {
             figure.setForegroundColor(this.color);
+            // Hack to avoid changing label colors recursively, collides with custom spline highlighting
+            for (Object child : figure.getChildren()) {
+                if (child instanceof WrappingLabel) {
+                    ((WrappingLabel) child).setForegroundColor(originalColorForeground);
+                }
+            }
         }
         if (this.backColor != null) {
             figure.setBackgroundColor(this.backColor);
@@ -90,6 +100,9 @@ public class ShapeHighlightEffect extends AEffect {
      * Undo the effect. Here the highlighting will be removed.
      */
     public final void undo() {
+        if (objectToHighlight == null) {
+            return; // nothing to undo for an unknown object
+        }
         // undo the highlight colors
         objectToHighlight.getRoot();
         IFigure figure = ((GraphicalEditPart) objectToHighlight).getFigure();

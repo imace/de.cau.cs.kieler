@@ -75,8 +75,10 @@ public class SelectionShapeHighlightCombination extends ACombination {
      */
     @Override
     public final void execute() {
-        if (this.triggerActive == false) {
-            effect.undo();
+        if (!triggerActive) {
+            if (effect != null) {
+                effect.undo();
+            }
         } else {
             if (effect == null) {
                 effect = new ShapeHighlightEffect();
