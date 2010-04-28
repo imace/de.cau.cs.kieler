@@ -1,8 +1,0 @@
-import metamodel1;
-import metamodel2;
-
-create metamodel1::Class1 this Class1ToClass2(metamodel2::Class2 input):
- this.setName(input.Name) ->
- this.setType(input.Type) ->
- this.setComment(input.Comment)
-;

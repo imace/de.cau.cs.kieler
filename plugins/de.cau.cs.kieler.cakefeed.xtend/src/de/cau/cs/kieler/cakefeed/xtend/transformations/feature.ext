@@ -219,11 +219,11 @@ create functionblocks::FBNetwork this CFBNetworkToFFBNetwork(cakefeed::FunctionB
 ;
 
 create functionblocks::DataConnections this CDataConnectionsToFDataConnections(cakefeed::FunctionBlockNetwork fbnetwork):
- this.connection.addAll(fbnetwork.dataConnections.DataConnectionToConnection())
+// this.connection.addAll(fbnetwork.dataConnections.DataConnectionToConnection())
 ;
 
 create functionblocks::EventConnections this CEventConnectionsToFEventConnections(cakefeed::FunctionBlockNetwork fbnetwork):
- this.connection.addAll(fbnetwork.eventConnections.EventConnectionToConnection())
+// this.connection.addAll(fbnetwork.eventConnections.EventConnectionToConnection())
 ;
 
 // workaround
@@ -294,7 +294,7 @@ create cakefeed::IFInputVar this VarDeclarationToIFInputVar(functionblocks::VarD
  this.setComment(vd.comment) ->
  this.setInitialValue(vd.initialValue) ->
  this.setName(vd.name) ->
- this.setType(vd.type.StringToCType()) // Muss String in Type umwandeln!
+// this.setType(vd.type.StringToCType()) // Muss String in Type umwandeln!
 ;
 
 create cakefeed::InternalVar this VarDeclarationToInternalVar(functionblocks::VarDeclaration vd):
@@ -302,7 +302,7 @@ create cakefeed::InternalVar this VarDeclarationToInternalVar(functionblocks::Va
  this.setComment(vd.comment) ->
  this.setInitialValue(vd.initialValue) ->
  this.setName(vd.name) ->
- this.setType(vd.type.StringToCType()) // Muss String in Type umwandeln!
+// this.setType(vd.type.StringToCType()) // Muss String in Type umwandeln!
 ;
 
 create cakefeed::LadderDiagram this FLDToCLD(functionblocks::LD ld):
@@ -327,7 +327,7 @@ create cakefeed::IFOutputVar this VarDeclarationToIFOutputVar(functionblocks::Va
  this.setComment(vd.comment) ->
  this.setInitialValue(vd.initialValue) ->
  this.setName(vd.name) ->
- this.setType(vd.type.StringToCType()) // Muss String in Type umwandeln!
+// this.setType(vd.type.StringToCType()) // Muss String in Type umwandeln!
 ;
 
 create cakefeed::StructuredText this FSTToCST(functionblocks::ST st):
@@ -336,22 +336,22 @@ create cakefeed::StructuredText this FSTToCST(functionblocks::ST st):
 
 create cakefeed::FunctionBlock this FFBToCFB(functionblocks::FB fb):
  this.setComment(fb.comment) ->
- this.inputEvents.addAll(fb.type.StringToFFBType().eventInputs.event.EventToFBInputEvent) -> // Muss String in FBType umwandeln!
- this.inputVars.addAll(fb.type.StringToFFBType().inputVars.varDeclaration.VarDeclarationToFBInputVar) -> // Muss String in FBType umwandeln!
+// this.inputEvents.addAll(fb.type.StringToFFBType().eventInputs.event.EventToFBInputEvent) -> // Muss String in FBType umwandeln!
+// this.inputVars.addAll(fb.type.StringToFFBType().inputVars.varDeclaration.VarDeclarationToFBInputVar) -> // Muss String in FBType umwandeln!
  this.setName(fb.name) ->
- this.outputEvents.addAll(fb.type.StringToFFBType().eventOutputs.event.EventToFBOutputEvent) -> // Muss String in FBType umwandeln!
- this.outputVars.addAll(fb.type.StringToFFBType().outputVars.varDeclaration.VarDeclarationToFBOutputVar) -> // Muss String in FBType umwandeln!
- this.setType(fb.type.StringToCFBType()) // Muss String in FBType umwandeln!
+// this.outputEvents.addAll(fb.type.StringToFFBType().eventOutputs.event.EventToFBOutputEvent) -> // Muss String in FBType umwandeln!
+// this.outputVars.addAll(fb.type.StringToFFBType().outputVars.varDeclaration.VarDeclarationToFBOutputVar) -> // Muss String in FBType umwandeln!
+// this.setType(fb.type.StringToCFBType()) // Muss String in FBType umwandeln!
 ;
 
 create cakefeed::FBFBDataConnection this ConnectionToFBFBDataConnection(functionblocks::Connection connection):
  this.setComment(connection.comment) ->
- this.setDestination(connection.destination.StringToFBInputVar()) -> // Muss String in Port umwandeln!
- this.setSource(connection.source.StringToFBOutputVar) // Muss String in Port umwandeln!
+// this.setDestination(connection.destination.StringToFBInputVar()) -> // Muss String in Port umwandeln!
+// this.setSource(connection.source.StringToFBOutputVar) // Muss String in Port umwandeln!
 ;
 
 create cakefeed::InputWith this FWithToInputWith(functionblocks::With with):
- this.setWith(with.var.StringToIFInputVar()) // Muss String in Port umwandeln!
+// this.setWith(with.var.StringToIFInputVar()) // Muss String in Port umwandeln!
 ;
 
 create cakefeed::Rung this FRungToCRung(functionblocks::Rung rung):
@@ -361,7 +361,7 @@ create cakefeed::Rung this FRungToCRung(functionblocks::Rung rung):
 ;
 
 create cakefeed::OutputWith this FWithToOutputWith(functionblocks::With with):
- this.setWith(with.var.StringToIFOutputVar()) // Muss String in Port umwandeln!
+// this.setWith(with.var.StringToIFOutputVar()) // Muss String in Port umwandeln!
 ;
 
 //Import CFB
@@ -379,8 +379,8 @@ create cakefeed::CompositeFunctionBlockType this FBTypeToCFBType(functionblocks:
  this.outputEvents.addAll(fbtype.interfaceList.eventOutputs.event.EventToIFOutputEvent()) ->
  this.outputVars.addAll(fbtype.interfaceList.outputVars.varDeclaration.VarDeclarationToIFOutputVar()) ->
  this.fBs.addAll(fbtype.fBNetwork.fB.FFBToCFB()) ->
- this.eventConnections.addAll(fbtype.fBNetwork.eventConnections.connection.ConnectionToEventConnection()) -> // Hier muss ich die Connection zur richtigen Connection (IFIF/IFFB/usw.) machen
- this.dataConnections.addAll(fbtype.fBNetwork.dataConnections.connection.ConnectionToDataConnection()) // Hier muss ich die Connection zur richtigen Connection (IFIF/IFFB/usw.) machen
+// this.eventConnections.addAll(fbtype.fBNetwork.eventConnections.connection.ConnectionToEventConnection()) -> // Hier muss ich die Connection zur richtigen Connection (IFIF/IFFB/usw.) machen
+// this.dataConnections.addAll(fbtype.fBNetwork.dataConnections.connection.ConnectionToDataConnection()) // Hier muss ich die Connection zur richtigen Connection (IFIF/IFFB/usw.) machen
 ;
 
 //Import FBNetwork
@@ -394,6 +394,6 @@ create cakefeed::FunctionBlockNetwork this FFBNetworkToCFBNetwork(functionblocks
 
 create cakefeed::FBFBDataConnection this ConnectionToFBFBEventConnection(functionblocks::Connection connection):
  this.setComment(connection.comment) ->
- this.setDestination(connection.destination.StringToFBInputEvent()) -> // Muss String in Port umwandeln!
- this.setSource(connection.source.StringToFBOutputEvent) // Muss String in Port umwandeln!
+// this.setDestination(connection.destination.StringToFBInputEvent()) -> // Muss String in Port umwandeln!
+// this.setSource(connection.source.StringToFBOutputEvent) // Muss String in Port umwandeln!
 ;
