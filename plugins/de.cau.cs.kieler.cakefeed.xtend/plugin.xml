@@ -41,5 +41,39 @@
             name="Export">
       </command>
    </extension>
+   <extension
+         point="org.eclipse.ui.importWizards">
+      <category
+            id="de.cau.cs.kieler.cakefeed.xtend.importWizards.sampleCategory"
+            name="Sample File Import">
+      </category>
+      <wizard
+            category="de.cau.cs.kieler.cakefeed.xtend.importWizards.sampleCategory"
+            class="de.cau.cs.kieler.cakefeed.xtend.importWizards.ImportWizard"
+            icon="icons/sample.gif"
+            id="de.cau.cs.kieler.cakefeed.xtend.importWizards.ImportWizard"
+            name="Import File">
+         <description>
+            Import a file from the local file system into the workspace.
+         </description>
+      </wizard>
+   </extension>
+   <extension
+         point="org.eclipse.ui.exportWizards">
+      <category
+            id="de.cau.cs.kieler.cakefeed.xtend.exportWizards.sampleCategory"
+            name="Sample File Export">
+      </category>
+      <wizard
+            category="de.cau.cs.kieler.cakefeed.xtend.exportWizards.sampleCategory"
+            class="de.cau.cs.kieler.cakefeed.xtend.exportWizards.ExportWizard"
+            icon="icons/sample.gif"
+            id="de.cau.cs.kieler.cakefeed.xtend.exportWizards.ExportWizard"
+            name="Export File">
+         <description>
+            Import a file from the local file system into the workspace.
+         </description>
+      </wizard>
+   </extension>
 
 </plugin>
