@@ -2,28 +2,28 @@
 
 module test : 
 input A,B,E;
-input C := 0 : combine int with func1; 
-  % todo: allow standard operators like +,*
+input C := -50 : combine int with *;
   % todo: in transformation the function name is not correctly printed
 
 function func1 (a,b): integer ; 
-procedure proc1 (a,b)(c,d); % todo: two lists are not distinguishable
+procedure proc1 (a,b)(c,d);
 
 await [A and (not B or C)]; % todo: allow tick in expressions
 await tick;
 
-% todo precedence rules for value expressions and boolean expressions are wrong
-if(?C=27 and 33 > 20 or not 20 > 44) then emit A else emit B end if;
+% todo: ?C=27  gets a strange operator hierarchy. Data Minus carries op AND pre
+if(not ?C=27 and 33 > 20 or not 20 > 44) then emit A else emit B end if;
 
-% todo precedence rules for arithmetic expressions are wrong
-emit C(27 + 5 * ?B);
+emit C(27 mod 2 + 5 * ?B);
 
+% todo: check whether "left" and "right" attributes are correctly set
+% problem: in simple reflective editor and in generated tree editor these are not visible
+% in xtend these seem to be available
 if(func1(?C,?B)<5) then halt else nothing end if;
 
 var v1, v2 : integer % todo: variable definitions are not transformed
-in 
-call :=func1(?B,?C); % todo: the := is veeery wrong
-%call proc1(v1,v2)(v1,v2); % todo: does not work! (only expects functions)
+in  
+call proc1(v1,v2)(4+3,v2); 
 end var;
 
 signal E,F in
