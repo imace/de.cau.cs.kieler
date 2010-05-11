@@ -16,27 +16,31 @@ package de.cau.cs.kieler.viewmanagement.combination;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.eclipse.gef.EditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeEditPart;
+
 import de.cau.cs.kieler.viewmanagement.ACombination;
 import de.cau.cs.kieler.viewmanagement.ATrigger;
-import de.cau.cs.kieler.viewmanagement.effects.CompartmentExpandEffect;
+import de.cau.cs.kieler.viewmanagement.RunLogic;
+import de.cau.cs.kieler.viewmanagement.TriggerEventObject;
+import de.cau.cs.kieler.viewmanagement.effects.CompartmentCollapseEffect;
+import de.cau.cs.kieler.viewmanagement.effects.CompartmentCollapseExpandEffect;
 import de.cau.cs.kieler.viewmanagement.triggers.SelectionTrigger;
-import de.cau.cs.kieler.viewmanagement.*;
 
 /**
  * @author nbe
  * 
- *         Combination that expands the affected object and all its children (if expanable). Listens
- *         to SelectionTrigger, the affected object will be the one that gets selected in the
- *         editor.
+ *         Combination that collapses the affected object and all its children (if collapsible).
+ *         Listens to SelectionTrigger, the affected object will be the one that gets selected in
+ *         the editor.
  */
-public class SelectionExpandCombination extends ACombination {
+public class SelectionCollapseExpandCombination extends ACombination {
 
-    private CompartmentExpandEffect effect;
+    private CompartmentCollapseExpandEffect effect;
     private SelectionTrigger st;
 
-    private ShapeEditPart objectToHighlight;
+    private ShapeEditPart objectToCollapse;
 
     @Override
     public final List<ATrigger> getTriggers() {
@@ -51,12 +55,14 @@ public class SelectionExpandCombination extends ACombination {
      * 
      * @see de.cau.cs.kieler.viewmanagement.ACombination#evaluate()
      */
-    @Override
+
     public final boolean evaluate(final TriggerEventObject triggerEvent) {
         EditPart affectedObject = getEditPart(triggerEvent.getAffectedObject());
         if (affectedObject instanceof ShapeEditPart) {
-            this.objectToHighlight = (ShapeEditPart) affectedObject;
+            this.objectToCollapse = (ShapeEditPart) affectedObject;
+
             return true;
+
         } else {
             return false;
         }
@@ -67,12 +73,12 @@ public class SelectionExpandCombination extends ACombination {
      * 
      * @see de.cau.cs.kieler.viewmanagement.ACombination#execute()
      */
-    @Override
+
     public final void execute() {
         if (effect == null) {
-            effect = new CompartmentExpandEffect();
+            effect = new CompartmentCollapseExpandEffect();
         }
-        effect.setTarget(this.objectToHighlight);
+        effect.setTarget(this.objectToCollapse);
         effect.execute();
     }
 

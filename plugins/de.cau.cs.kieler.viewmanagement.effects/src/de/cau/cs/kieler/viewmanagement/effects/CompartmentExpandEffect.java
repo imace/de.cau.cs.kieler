@@ -21,6 +21,10 @@ import org.eclipse.draw2d.IFigure;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.figures.ResizableCompartmentFigure;
+import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.PlatformUI;
+
+import de.cau.cs.kieler.kiml.ui.layout.DiagramLayoutManager;
 import de.cau.cs.kieler.viewmanagement.AEffect;
 
 /**
@@ -46,19 +50,40 @@ public class CompartmentExpandEffect extends AEffect {
 
     @Override
     public final void execute() {
-        IFigure selectedFigure = objectToExpand.getFigure();
-        List<IFigure> resizableFigures = new ArrayList<IFigure>();
-        getResizeableCompartments(selectedFigure, resizableFigures);
-
-        for (int i = 0; i < resizableFigures.size(); i++) {
-            ResizableCompartmentFigure tempfig = (ResizableCompartmentFigure) resizableFigures
-                    .get(i);
-
-            tempfig.expand();
-        }
-
+        this.setExpand(true);
     }
+    
+    public final void undo() {
+		this.setExpand(false);
 
+	}
+
+    public final void setExpand(boolean expand){
+//    	IFigure selectedFigure = objectToExpand.getFigure();
+//        List<IFigure> resizableFigures = new ArrayList<IFigure>();
+//        getResizeableCompartments(selectedFigure, resizableFigures);
+//
+//        for (int i = 0; i < resizableFigures.size(); i++) {
+//            ResizableCompartmentFigure tempfig = (ResizableCompartmentFigure) resizableFigures
+//                    .get(i);
+//            expandInUIThread(tempfig, expand);
+//        }
+    	
+    }
+    
+    private void expandInUIThread(final ResizableCompartmentFigure fig, final boolean expand){
+    	  final IWorkbench workbench = PlatformUI.getWorkbench();
+          workbench.getDisplay().asyncExec(new Runnable() {
+            public void run() {
+            	if(expand){
+                	fig.expand();
+                }
+                else{
+                	fig.collapse();
+                }
+            } } );
+    }
+    
     /**
      * Method to search for resizeable compartments. Examines not only the given figure, but also
      * its children.
@@ -82,7 +107,7 @@ public class CompartmentExpandEffect extends AEffect {
 
         return;
     }
-
+    
     /**
      * Sets the target of the effect
      * 

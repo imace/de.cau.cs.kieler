@@ -14,41 +14,36 @@
  *****************************************************************************/
 package de.cau.cs.kieler.viewmanagement.effects;
 
-import org.eclipse.gef.editparts.ZoomManager;
-import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
-import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditor;
-import org.eclipse.gmf.runtime.diagram.ui.render.editparts.RenderedDiagramRootEditPart;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.PlatformUI;
 
+import de.cau.cs.kieler.core.ui.handler.ZoomToFitHandler;
 import de.cau.cs.kieler.viewmanagement.AEffect;
 
 /**
- * @author nbe
+ * @author haf
  * 
  *         The ZoomEffect performs a Zoom-To-Fit action on the current editor.
  */
 public class ZoomEffect extends AEffect {
 
     /**
-     * Enqueue zooming for the GUI thread. 
+     * Enqueue zooming for the GUI thread.
      */
     public final void execute() {
         // get active editor
         IWorkbench workbench = PlatformUI.getWorkbench();
-        IEditorPart editor = workbench.getActiveWorkbenchWindow().getActivePage().getActiveEditor();
-        if (editor instanceof DiagramEditor) {
-            // get its zoom manager
-            DiagramEditPart diagramEdit = ((DiagramEditor) editor).getDiagramEditPart();
-            final ZoomManager zoomManager = ((RenderedDiagramRootEditPart) diagramEdit.getRoot())
-                    .getZoomManager();
-            // use GUI thread to honor the order of effects
-            workbench.getDisplay().asyncExec(new Runnable() {
-                public void run() {
-                    zoomManager.setZoomAsText(ZoomManager.FIT_ALL);
-                }
-            });
-        }
+
+        final IEditorPart editor = workbench.getActiveWorkbenchWindow().getActivePage()
+                .getActiveEditor();
+
+        // use GUI thread to honor the order of effects
+        workbench.getDisplay().asyncExec(new Runnable() {
+            public void run() {
+                ZoomToFitHandler.zoomToFitAllNodes(editor);
+                ZoomToFitHandler.resetViewLocation(editor);
+            }
+        });
     }
 }

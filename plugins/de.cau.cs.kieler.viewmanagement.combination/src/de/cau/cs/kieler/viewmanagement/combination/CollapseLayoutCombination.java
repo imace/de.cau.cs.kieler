@@ -8,6 +8,7 @@ import de.cau.cs.kieler.viewmanagement.ATrigger;
 import de.cau.cs.kieler.viewmanagement.RunLogic;
 import de.cau.cs.kieler.viewmanagement.TriggerEventObject;
 import de.cau.cs.kieler.viewmanagement.effects.LayoutEffect;
+import de.cau.cs.kieler.viewmanagement.effects.ZoomEffect;
 import de.cau.cs.kieler.viewmanagement.triggers.CollapseExpandTrigger;
 
 public class CollapseLayoutCombination extends ACombination {
@@ -27,11 +28,15 @@ public class CollapseLayoutCombination extends ACombination {
         // the layouter should layout the whole diagram
         layoutEffect.setTarget(this.getRootEPAsParent());
         layoutEffect.execute();
+        
+        ZoomEffect zoomEffect = new ZoomEffect();
+        zoomEffect.execute();
     }
 
     @Override
     public List<ATrigger> getTriggers() {
-        ATrigger ct = (CollapseExpandTrigger) RunLogic.getInstance().getTrigger("CollapseExpandTrigger");
+        ATrigger ct = (CollapseExpandTrigger) RunLogic.getInstance().getTrigger(
+                "CollapseExpandTrigger");
         List<ATrigger> myTriggers = new ArrayList<ATrigger>();
         myTriggers.add(ct);
         return myTriggers;

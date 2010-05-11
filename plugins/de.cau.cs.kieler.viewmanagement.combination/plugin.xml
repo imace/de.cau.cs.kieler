@@ -9,12 +9,8 @@
             name="SelectHighlight">
       </combination>
       <combination
-            class="de.cau.cs.kieler.viewmanagement.combination.SelectionCollapseCombination"
+            class="de.cau.cs.kieler.viewmanagement.combination.SelectionCollapseExpandCombination"
             name="SelectCollapse">
-      </combination>
-      <combination
-            class="de.cau.cs.kieler.viewmanagement.combination.SelectionExpandCombination"
-            name="SelectExpand">
       </combination>
       <combination
             class="de.cau.cs.kieler.viewmanagement.combination.SelectionTextualRepresentationCombination"
