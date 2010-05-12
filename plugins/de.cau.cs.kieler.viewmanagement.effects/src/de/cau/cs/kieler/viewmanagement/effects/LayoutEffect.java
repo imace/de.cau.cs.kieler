@@ -19,6 +19,7 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.PlatformUI;
 
+import de.cau.cs.kieler.core.ui.util.EditorUtils;
 import de.cau.cs.kieler.kiml.ui.layout.DiagramLayoutManager;
 import de.cau.cs.kieler.viewmanagement.AEffect;
 
@@ -47,6 +48,10 @@ public class LayoutEffect extends AEffect {
         final IWorkbench workbench = PlatformUI.getWorkbench();
         workbench.getDisplay().asyncExec(new Runnable() {
           public void run() {
+              if(editorPart == null){
+                  // if no editor is set, the active editor will be taken.
+                  editorPart = EditorUtils.getLastActiveEditor();
+              }
               DiagramLayoutManager.layout(editorPart, null, true, false);
           } } );
     }

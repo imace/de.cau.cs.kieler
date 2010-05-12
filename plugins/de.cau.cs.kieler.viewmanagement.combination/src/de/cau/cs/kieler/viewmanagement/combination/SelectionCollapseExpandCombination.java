@@ -76,7 +76,7 @@ public class SelectionCollapseExpandCombination extends ACombination {
 
     public final void execute() {
         if (effect == null) {
-            effect = new CompartmentCollapseExpandEffect();
+            effect = new CompartmentCollapseExpandEffect(1);
         }
         effect.setTarget(this.objectToCollapse);
         effect.execute();

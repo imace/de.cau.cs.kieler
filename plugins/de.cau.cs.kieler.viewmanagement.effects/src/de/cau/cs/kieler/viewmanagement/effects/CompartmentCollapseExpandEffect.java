@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.emf.workspace.AbstractEMFOperation;
+import org.eclipse.gef.EditPart;
 import org.eclipse.gef.GraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.core.util.ViewUtil;
 import org.eclipse.gmf.runtime.emf.core.util.PackageUtil;
@@ -30,6 +31,16 @@ import de.cau.cs.kieler.viewmanagement.AEffect;
  */
 public class CompartmentCollapseExpandEffect extends AEffect {
 
+    private int compartmentLevel = 0;
+
+    /**
+     * The compartment level gives the hierarchy to which to search for compartments to collapse.
+     * @param theCompartmentLevel hierarchy level. 0 means only exactly the given EditPart.
+     */
+    public CompartmentCollapseExpandEffect(final int theCompartmentLevel) {
+        this.compartmentLevel = theCompartmentLevel;
+    }
+
     @Override
     public void execute() {
         if (this.getAffectedObject() instanceof GraphicalEditPart) {
@@ -37,7 +48,7 @@ public class CompartmentCollapseExpandEffect extends AEffect {
                 GraphicalEditPart ep = (GraphicalEditPart) this.getAffectedObject();
                 setCollapsed(ep, true);
                 ep.refresh();
-                
+
             } catch (KielerModelException e) {
                 // TODO: log
                 e.printStackTrace();
@@ -68,9 +79,10 @@ public class CompartmentCollapseExpandEffect extends AEffect {
      *            the input editPart
      * @param value
      *            true iff should get collapsed, false if expanded
-     * @throws KielerModelException 
+     * @throws KielerModelException
      */
-    private static void setCollapsed(final GraphicalEditPart editPart, final boolean value) throws KielerModelException {
+    private void setCollapsed(final GraphicalEditPart editPart, final boolean value)
+            throws KielerModelException {
         final View view = (View) editPart.getModel();
         try {
             final TransactionalEditingDomain domain = TransactionUtil.getEditingDomain(view);
@@ -79,20 +91,21 @@ public class CompartmentCollapseExpandEffect extends AEffect {
                     "Viewmanagement set collapsed state") {
 
                 @Override
-                protected IStatus doExecute(IProgressMonitor monitor, IAdaptable info)
+                protected IStatus doExecute(final IProgressMonitor monitor, final IAdaptable info)
                         throws ExecutionException {
 
-                    List<BasicCompartment> compartments = getNestedCompartments(view);
+                    List<BasicCompartment> compartments = getNestedCompartments(view, compartmentLevel);
                     for (BasicCompartment compartment : compartments) {
-                        ViewUtil.setStructuralFeatureValue(compartment,NotationPackage.eINSTANCE.getDrawerStyle_Collapsed()
-                                , value);
+                        ViewUtil.setStructuralFeatureValue(compartment, NotationPackage.eINSTANCE
+                                .getDrawerStyle_Collapsed(), value);
                     }
                     return Status.OK_STATUS;
                 }
             };
             op.execute(null, null);
         } catch (ExecutionException e0) {
-            throw new KielerModelException("Could change collapsed state of compartments.", view.getElement(), e0);
+            throw new KielerModelException("Could change collapsed state of compartments.", view
+                    .getElement(), e0);
         }
     }
 
@@ -104,21 +117,30 @@ public class CompartmentCollapseExpandEffect extends AEffect {
      * 
      * @param view
      *            input view where search is started
+     * @param level
+     *            how deep to go into hierarchy: 0 will return only the view itself if it is a compartment
      * @return a List of all compartments of the view
      */
-    private static List<BasicCompartment> getNestedCompartments(View view) {
+    private static List<BasicCompartment> getNestedCompartments(final View view, final int level) {
         List<BasicCompartment> compartments = new ArrayList<BasicCompartment>();
         if (view instanceof BasicCompartment) {
             compartments.add((BasicCompartment) view);
         }
         // recursively call method for all children
-        List<?> childViews = view.getChildren();
-        for (Object child : childViews) {
-            if (child instanceof View) {
-                compartments.addAll(getNestedCompartments((View) child));
+        if (level > 0) {
+            List<?> childViews = view.getChildren();
+            for (Object child : childViews) {
+                if (child instanceof View) {
+                    compartments.addAll(getNestedCompartments((View) child, (level - 1)));
+                }
             }
         }
         return compartments;
     }
 
+    @Override
+    public void setTarget(final EditPart target) {
+        // TODO Auto-generated method stub
+        super.setTarget(target);
+    }
 }
