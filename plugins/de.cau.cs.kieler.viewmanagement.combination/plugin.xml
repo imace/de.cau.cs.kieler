@@ -10,7 +10,8 @@
       </combination>
       <combination
             class="de.cau.cs.kieler.viewmanagement.combination.SelectionCollapseExpandCombination"
-            name="SelectCollapse">
+            description="Collapses or expands a selected compartment."
+            name="SelectExpandCollapse">
       </combination>
       <combination
             class="de.cau.cs.kieler.viewmanagement.combination.SelectionTextualRepresentationCombination"
