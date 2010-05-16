@@ -19,6 +19,7 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.PlatformUI;
 
 import de.cau.cs.kieler.core.ui.handler.ZoomToFitHandler;
+import de.cau.cs.kieler.core.ui.util.EditorUtils;
 import de.cau.cs.kieler.viewmanagement.AEffect;
 
 /**
@@ -32,15 +33,11 @@ public class ZoomEffect extends AEffect {
      * Enqueue zooming for the GUI thread.
      */
     public final void execute() {
-        // get active editor
         IWorkbench workbench = PlatformUI.getWorkbench();
-
-        final IEditorPart editor = workbench.getActiveWorkbenchWindow().getActivePage()
-                .getActiveEditor();
-
         // use GUI thread to honor the order of effects
         workbench.getDisplay().asyncExec(new Runnable() {
             public void run() {
+                final IEditorPart editor = EditorUtils.getLastActiveEditor();
                 ZoomToFitHandler.zoomToFitAllNodes(editor);
                 ZoomToFitHandler.resetViewLocation(editor);
             }

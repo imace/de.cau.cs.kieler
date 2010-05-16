@@ -12,11 +12,19 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.emf.workspace.AbstractEMFOperation;
+import org.eclipse.gef.EditDomain;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.GraphicalEditPart;
+import org.eclipse.gef.commands.Command;
 import org.eclipse.gmf.runtime.diagram.core.util.ViewUtil;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.IResizableCompartmentEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.internal.properties.Properties;
+import org.eclipse.gmf.runtime.diagram.ui.internal.tools.CompartmentCollapseTracker;
+import org.eclipse.gmf.runtime.diagram.ui.l10n.DiagramUIMessages;
+import org.eclipse.gmf.runtime.diagram.ui.requests.ChangePropertyValueRequest;
 import org.eclipse.gmf.runtime.emf.core.util.PackageUtil;
 import org.eclipse.gmf.runtime.notation.BasicCompartment;
+import org.eclipse.gmf.runtime.notation.DrawerStyle;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.View;
 
@@ -45,13 +53,15 @@ public class CompartmentCollapseExpandEffect extends AEffect {
     public void execute() {
         if (this.getAffectedObject() instanceof GraphicalEditPart) {
             try {
-                GraphicalEditPart ep = (GraphicalEditPart) this.getAffectedObject();
+                IResizableCompartmentEditPart ep = (IResizableCompartmentEditPart) this.getAffectedObject();
                 setCollapsed(ep, true);
-                ep.refresh();
+                //ep.refresh();
 
             } catch (KielerModelException e) {
                 // TODO: log
                 e.printStackTrace();
+            } catch (ClassCastException e1){
+                e1.printStackTrace();
             }
         }
     }
@@ -62,27 +72,25 @@ public class CompartmentCollapseExpandEffect extends AEffect {
     public void undo() {
         if (this.getAffectedObject() instanceof GraphicalEditPart) {
             try {
-                GraphicalEditPart ep = (GraphicalEditPart) this.getAffectedObject();
+                IResizableCompartmentEditPart ep = (IResizableCompartmentEditPart) this.getAffectedObject();
                 setCollapsed(ep, false);
-                ep.refresh();
+                //ep.refresh();
             } catch (KielerModelException e) {
                 // TODO: log
                 e.printStackTrace();
+            } catch (ClassCastException e1){
+                e1.printStackTrace();
             }
         }
     }
 
-    /**
-     * Set the collapsed state of all compartments---including nested ones.
-     * 
-     * @param editPart
-     *            the input editPart
-     * @param value
-     *            true iff should get collapsed, false if expanded
-     * @throws KielerModelException
-     */
-    private void setCollapsed(final GraphicalEditPart editPart, final boolean value)
+ 
+ /*  The following works but performance is quite slow. It correctly collapses but it takes
+  *  some serious amount of time until connections get hidden/visible. 
+  * 
+      private void setCollapsed(final GraphicalEditPart editPart, final boolean value)
             throws KielerModelException {
+        
         final View view = (View) editPart.getModel();
         try {
             final TransactionalEditingDomain domain = TransactionUtil.getEditingDomain(view);
@@ -107,6 +115,21 @@ public class CompartmentCollapseExpandEffect extends AEffect {
             throw new KielerModelException("Could change collapsed state of compartments.", view
                     .getElement(), e0);
         }
+    }
+*/    
+    /**
+     * Set the collapsed state of the given compartment.
+     * 
+     * @param editPart
+     *            the input editPart
+     * @param value
+     *            true iff should get collapsed, false if expanded
+     * @throws KielerModelException
+     */
+    private void setCollapsed(final IResizableCompartmentEditPart editPart, final boolean value)
+    throws KielerModelException {
+        CompartmentCollapseTrackerEx tracker = new CompartmentCollapseTrackerEx(editPart);
+        tracker.setCollapsed(value);
     }
 
     /**
@@ -142,5 +165,29 @@ public class CompartmentCollapseExpandEffect extends AEffect {
     public void setTarget(final EditPart target) {
         // TODO Auto-generated method stub
         super.setTarget(target);
+    }
+    
+    /**
+     * Inner class that takes care about the concrete collapse command. Extends
+     * the official CompartmentCollapseTracker that is also used for the manual 
+     * collapsing with the mouse. 
+     * 
+     * FIXME: This might be some overhead as the tracker is a quite heavy tool.
+     * 
+     * @author haf
+     *
+     */
+    class CompartmentCollapseTrackerEx extends CompartmentCollapseTracker{
+
+        public CompartmentCollapseTrackerEx(IResizableCompartmentEditPart compartmentEditPart) {
+            super(compartmentEditPart);
+            this.setEditDomain((EditDomain) compartmentEditPart.getDiagramEditDomain());
+        }
+        
+        void setCollapsed(boolean value){
+            setCurrentCommand(getCommand(value));
+            executeCurrentCommand();
+        }
+        
     }
 }

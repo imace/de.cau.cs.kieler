@@ -46,7 +46,7 @@ public class LayoutEffect extends AEffect {
     @Override
     public final void execute() {
         final IWorkbench workbench = PlatformUI.getWorkbench();
-        workbench.getDisplay().asyncExec(new Runnable() {
+        workbench.getDisplay().syncExec(new Runnable() {
           public void run() {
               if(editorPart == null){
                   // if no editor is set, the active editor will be taken.
