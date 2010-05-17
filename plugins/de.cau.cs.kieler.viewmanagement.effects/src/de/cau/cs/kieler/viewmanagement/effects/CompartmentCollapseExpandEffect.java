@@ -51,7 +51,7 @@ public class CompartmentCollapseExpandEffect extends AEffect {
 
     @Override
     public void execute() {
-        if (this.getAffectedObject() instanceof GraphicalEditPart) {
+        if (this.getAffectedObject() instanceof IResizableCompartmentEditPart) {
             try {
                 IResizableCompartmentEditPart ep = (IResizableCompartmentEditPart) this.getAffectedObject();
                 setCollapsed(ep, true);
@@ -60,9 +60,7 @@ public class CompartmentCollapseExpandEffect extends AEffect {
             } catch (KielerModelException e) {
                 // TODO: log
                 e.printStackTrace();
-            } catch (ClassCastException e1){
-                e1.printStackTrace();
-            }
+            } 
         }
     }
 
