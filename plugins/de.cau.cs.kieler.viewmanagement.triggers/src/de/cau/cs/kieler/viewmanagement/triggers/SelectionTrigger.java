@@ -102,11 +102,11 @@ public class SelectionTrigger extends ATrigger implements ISelectionListener {
         }
     }
 
-    public final void finalize() {
+    public final void wrapup() {
         // remove as listener from selection service
         PlatformUI.getWorkbench().getActiveWorkbenchWindow().getSelectionService()
                 .removeSelectionListener(this);
-        super.finalize();
+        super.wrapup();
     }
 
 }

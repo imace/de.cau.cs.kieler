@@ -113,7 +113,7 @@ public abstract class ACombination implements ITriggerListener {
      * Finalizes the combination, removes it as listener from its triggers.
      * 
      */
-    public final void finalize() {
+    public final void wrapup() {
         // this will remove remaining effects, if needed
         undoEffects();
         // get triggers of interest

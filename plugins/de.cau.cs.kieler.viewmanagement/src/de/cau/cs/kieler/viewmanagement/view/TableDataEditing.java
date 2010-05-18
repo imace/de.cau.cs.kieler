@@ -159,7 +159,7 @@ public class TableDataEditing extends EditingSupport {
                     // Search for combination and finalize
                     ACombination c = RunLogic.getInstance().getCombos().get(comboToDeactivate);
                     if (c != null) {
-                        c.finalize();
+                        c.wrapup();
                     }
 
                 }

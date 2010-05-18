@@ -84,7 +84,7 @@ public final class RunLogic {
      * keeps track of the combos that have been activated in order to shut them
      * down cleanly if needed.
      */
-    List<String> activeCombos;
+    //private List<String> activeCombos;
 
     /**
      * indicates the status of the RunLogic. Is used to determine the action of
@@ -94,7 +94,7 @@ public final class RunLogic {
 
     /**
      * Initializes lists to be used to store available components no
-     * getter/setter in class remove setter
+     * getter/setter in class remove setter.
      */
     public void init() {
         triggers = (new HashMap<String, ATrigger>());
@@ -105,7 +105,7 @@ public final class RunLogic {
         if (TableDataList.getInstance() != null) {
             TableDataList.getInstance().updateViewAsync();
         }
-        activeCombos = new ArrayList<String>();
+        //activeCombos = new ArrayList<String>();
 
     }
 
@@ -118,7 +118,7 @@ public final class RunLogic {
         triggers.clear();
         combos.clear();
         effects.clear();
-        activeCombos.clear();
+        //activeCombos.clear();
 
         // set indication that the RunLogic is running (This is needed to
         // determine the action of
@@ -152,7 +152,7 @@ public final class RunLogic {
         // finalize combos, if they are active
         while (i3.hasNext()) {
             if (i3.next().isActive()) {
-                i3.next().finalize();
+                i3.next().wrapup();
             }
         }
 
@@ -163,7 +163,7 @@ public final class RunLogic {
         Set<String> t = triggers.keySet();
         Iterator<String> i = t.iterator();
         while (i.hasNext()) {
-            triggers.get(i.next()).finalize();
+            triggers.get(i.next()).wrapup();
         }
 
         // indicate that the RunLogic is now off (This is needed to determine

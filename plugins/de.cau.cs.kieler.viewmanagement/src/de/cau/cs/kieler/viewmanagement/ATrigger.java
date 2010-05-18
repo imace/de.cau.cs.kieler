@@ -121,7 +121,7 @@ public abstract class ATrigger {
     /**
      * Release all system resources for this object.
      */
-    public void finalize() {
+    public void wrapup() {
 
     }
 
