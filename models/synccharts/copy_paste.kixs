@@ -8,13 +8,13 @@
     <regions id="State_to_State">
       <innerStates id="Copy" label="Copy" isInitial="true">
         <regions id="R0">
-          <innerStates id="S" label="S" isInitial="true"/>
+          <innerStates id="S" label="S"/>
         </regions>
         <outgoingTransitions priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.1"/>
       </innerStates>
       <innerStates id="Paste" label="Paste">
         <regions id="R0">
-          <innerStates id="_S0" label="" isInitial="true">
+          <innerStates id="_S0" label="">
             <outgoingTransitions triggersAndEffects="A and B" priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.1">
               <trigger xsi:type="synccharts:ComplexExpression" operator="and">
                 <subExpressions xsi:type="synccharts:SignalReference" signal="A"/>
@@ -43,12 +43,12 @@
     <regions id="Regions_to_States">
       <innerStates id="Copy" label="Copy" isInitial="true">
         <regions id="R0">
-          <innerStates id="_S0" label="" isInitial="true">
+          <innerStates id="_S0" label="">
             <regions id="S1">
-              <innerStates id="_S0" label="" isInitial="true"/>
+              <innerStates id="_S0" label=""/>
             </regions>
             <regions id="S2">
-              <innerStates id="_S0" label="" isInitial="true"/>
+              <innerStates id="_S0" label=""/>
             </regions>
           </innerStates>
         </regions>
@@ -67,19 +67,19 @@
         <regions id="R0">
           <innerStates id="T1" label="T1">
             <regions id="S1">
-              <innerStates id="_S0" label="" isInitial="true"/>
+              <innerStates id="_S0" label=""/>
             </regions>
             <regions id="S2">
-              <innerStates id="_S0" label="" isInitial="true"/>
+              <innerStates id="_S0" label=""/>
             </regions>
             <outgoingTransitions priority="1" targetState="//@innerStates.0/@regions.1/@innerStates.2/@regions.0/@innerStates.1"/>
           </innerStates>
           <innerStates id="T2" label="T2">
             <regions id="S1">
-              <innerStates id="_S0" label="" isInitial="true"/>
+              <innerStates id="_S0" label=""/>
             </regions>
             <regions id="S2">
-              <innerStates id="_S0" label="" isInitial="true"/>
+              <innerStates id="_S0" label=""/>
             </regions>
           </innerStates>
         </regions>
@@ -88,7 +88,7 @@
     <regions id="Transitions_to_State">
       <innerStates id="Copy" label="Copy" isInitial="true">
         <regions id="S1">
-          <innerStates id="_S0" label="" isInitial="true">
+          <innerStates id="_S0" label="">
             <outgoingTransitions triggersAndEffects="S" priority="1" targetState="//@innerStates.0/@regions.2/@innerStates.0/@regions.0/@innerStates.1">
               <trigger xsi:type="synccharts:SignalReference" signal="S"/>
             </outgoingTransitions>
@@ -103,13 +103,13 @@
       </innerStates>
       <innerStates id="Paste" label="Paste">
         <regions id="R0">
-          <innerStates id="T" label="T" isInitial="true"/>
+          <innerStates id="T" label="T"/>
         </regions>
         <outgoingTransitions priority="1" targetState="//@innerStates.0/@regions.2/@innerStates.2"/>
       </innerStates>
       <innerStates id="Result" label="Result" isFinal="true">
         <regions id="R0">
-          <innerStates id="T" label="T" isInitial="true">
+          <innerStates id="T" label="T">
             <outgoingTransitions triggersAndEffects="S" priority="1" targetState="//@innerStates.0/@regions.2/@innerStates.2/@regions.0/@innerStates.0">
               <trigger xsi:type="synccharts:SignalReference" signal="S"/>
             </outgoingTransitions>
@@ -123,7 +123,7 @@
     <regions id="States_to_States">
       <innerStates id="Copy" label="Copy" isInitial="true">
         <regions id="S1">
-          <innerStates id="S1" label="S1" isInitial="true">
+          <innerStates id="S1" label="S1">
             <outgoingTransitions triggersAndEffects="" priority="1" targetState="//@innerStates.0/@regions.3/@innerStates.0/@regions.0/@innerStates.1"/>
           </innerStates>
           <innerStates id="S2" label="S2"/>
@@ -132,7 +132,7 @@
       </innerStates>
       <innerStates id="Paste" label="Paste">
         <regions id="R0">
-          <innerStates id="T1" label="T1" isInitial="true">
+          <innerStates id="T1" label="T1">
             <outgoingTransitions priority="1" targetState="//@innerStates.0/@regions.3/@innerStates.1/@regions.0/@innerStates.1"/>
           </innerStates>
           <innerStates id="T2" label="T2">
@@ -143,11 +143,11 @@
       </innerStates>
       <innerStates id="Result" label="Result" isFinal="true">
         <regions id="R0">
-          <innerStates id="S1" label="S1" isInitial="true">
+          <innerStates id="S1" label="S1">
             <outgoingTransitions triggersAndEffects="" priority="1" targetState="//@innerStates.0/@regions.3/@innerStates.2/@regions.0/@innerStates.1"/>
           </innerStates>
           <innerStates id="S2" label="S2"/>
-          <innerStates id="S1" label="S1" isInitial="true">
+          <innerStates id="S1" label="S1">
             <outgoingTransitions triggersAndEffects="" priority="1" targetState="//@innerStates.0/@regions.3/@innerStates.2/@regions.0/@innerStates.3"/>
           </innerStates>
           <innerStates id="S2" label="S2"/>
@@ -157,7 +157,7 @@
     <regions id="Transitions_to_Transitions">
       <innerStates id="Copy" label="Copy" isInitial="true">
         <regions id="S1">
-          <innerStates id="_S5" label="" isInitial="true">
+          <innerStates id="_S5" label="">
             <outgoingTransitions triggersAndEffects="S and A" priority="1" targetState="//@innerStates.0/@regions.4/@innerStates.0/@regions.0/@innerStates.1">
               <trigger xsi:type="synccharts:ComplexExpression" operator="and">
                 <subExpressions xsi:type="synccharts:SignalReference" signal="S"/>
@@ -178,7 +178,7 @@
       </innerStates>
       <innerStates id="Paste" label="Paste">
         <regions id="S1">
-          <innerStates id="_S6" label="" isInitial="true">
+          <innerStates id="_S6" label="">
             <outgoingTransitions triggersAndEffects="T and A" priority="1" targetState="//@innerStates.0/@regions.4/@innerStates.1/@regions.0/@innerStates.1">
               <trigger xsi:type="synccharts:ComplexExpression" operator="and">
                 <subExpressions xsi:type="synccharts:SignalReference" signal="T"/>
@@ -199,7 +199,7 @@
       </innerStates>
       <innerStates id="Result" label="Result" isFinal="true">
         <regions id="S1">
-          <innerStates id="_S8" label="" isInitial="true">
+          <innerStates id="_S8" label="">
             <outgoingTransitions triggersAndEffects="S and A" priority="1" targetState="//@innerStates.0/@regions.4/@innerStates.2/@regions.0/@innerStates.1">
               <trigger xsi:type="synccharts:ComplexExpression" operator="and">
                 <subExpressions xsi:type="synccharts:SignalReference" signal="S"/>
@@ -233,18 +233,15 @@
     <regions id="State_to_Transition">
       <innerStates id="Copy" label="Copy" isInitial="true">
         <regions id="R0">
-          <innerStates id="S" label="S" isInitial="true"/>
+          <innerStates id="S" label="S"/>
         </regions>
         <outgoingTransitions priority="1" targetState="//@innerStates.0/@regions.5/@innerStates.1"/>
       </innerStates>
       <innerStates id="Paste" label="Paste">
         <regions id="R0">
-          <innerStates id="_S0" label="" isInitial="true">
-            <outgoingTransitions triggersAndEffects="A and B" priority="1" targetState="//@innerStates.0/@regions.5/@innerStates.1/@regions.0/@innerStates.1">
-              <trigger xsi:type="synccharts:ComplexExpression" operator="and">
-                <subExpressions xsi:type="synccharts:SignalReference" signal="A"/>
-                <subExpressions xsi:type="synccharts:SignalReference" signal="B"/>
-              </trigger>
+          <innerStates id="_S0" label="">
+            <outgoingTransitions triggersAndEffects="T" priority="1" targetState="//@innerStates.0/@regions.5/@innerStates.1/@regions.0/@innerStates.1">
+              <trigger xsi:type="synccharts:SignalReference" signal="T"/>
             </outgoingTransitions>
           </innerStates>
           <innerStates id="_S1" label=""/>
@@ -253,16 +250,13 @@
       </innerStates>
       <innerStates id="Result" label="Result" isFinal="true">
         <regions id="R0">
-          <innerStates id="_S2" label="" isInitial="true">
-            <outgoingTransitions triggersAndEffects="A and B" priority="1" targetState="//@innerStates.0/@regions.5/@innerStates.2/@regions.0/@innerStates.2">
-              <trigger xsi:type="synccharts:ComplexExpression" operator="and">
-                <subExpressions xsi:type="synccharts:SignalReference" signal="A"/>
-                <subExpressions xsi:type="synccharts:SignalReference" signal="B"/>
-              </trigger>
+          <innerStates id="_S2" label="">
+            <outgoingTransitions triggersAndEffects="T" priority="1" targetState="//@innerStates.0/@regions.5/@innerStates.2/@regions.0/@innerStates.2">
+              <trigger xsi:type="synccharts:SignalReference" signal="T"/>
             </outgoingTransitions>
           </innerStates>
           <innerStates id="_S3" label=""/>
-          <innerStates id="S" label="S" isInitial="true">
+          <innerStates id="S" label="S">
             <outgoingTransitions priority="1" targetState="//@innerStates.0/@regions.5/@innerStates.2/@regions.0/@innerStates.1"/>
           </innerStates>
         </regions>
@@ -271,7 +265,7 @@
     <regions id="States_to_Transition">
       <innerStates id="Copy" label="Copy" isInitial="true">
         <regions id="R0">
-          <innerStates id="S1" label="S1" isInitial="true">
+          <innerStates id="S1" label="S1">
             <outgoingTransitions priority="1" targetState="//@innerStates.0/@regions.6/@innerStates.0/@regions.0/@innerStates.1"/>
           </innerStates>
           <innerStates id="S2" label="S2">
@@ -282,12 +276,9 @@
       </innerStates>
       <innerStates id="Paste" label="Paste">
         <regions id="R0">
-          <innerStates id="_S0" label="" isInitial="true">
-            <outgoingTransitions triggersAndEffects="A and B" priority="1" targetState="//@innerStates.0/@regions.6/@innerStates.1/@regions.0/@innerStates.1">
-              <trigger xsi:type="synccharts:ComplexExpression" operator="and">
-                <subExpressions xsi:type="synccharts:SignalReference" signal="A"/>
-                <subExpressions xsi:type="synccharts:SignalReference" signal="B"/>
-              </trigger>
+          <innerStates id="_S0" label="">
+            <outgoingTransitions triggersAndEffects="T" priority="1" targetState="//@innerStates.0/@regions.6/@innerStates.1/@regions.0/@innerStates.1">
+              <trigger xsi:type="synccharts:SignalReference" signal="T"/>
             </outgoingTransitions>
           </innerStates>
           <innerStates id="_S1" label=""/>
@@ -296,18 +287,15 @@
       </innerStates>
       <innerStates id="Result" label="Result" isFinal="true">
         <regions id="R0">
-          <innerStates id="_S2" label="" isInitial="true">
-            <outgoingTransitions triggersAndEffects="A and B" priority="1" targetState="//@innerStates.0/@regions.6/@innerStates.2/@regions.0/@innerStates.2">
-              <trigger xsi:type="synccharts:ComplexExpression" operator="and">
-                <subExpressions xsi:type="synccharts:SignalReference" signal="A"/>
-                <subExpressions xsi:type="synccharts:SignalReference" signal="B"/>
-              </trigger>
+          <innerStates id="_S2" label="">
+            <outgoingTransitions triggersAndEffects="T" priority="1" targetState="//@innerStates.0/@regions.6/@innerStates.2/@regions.0/@innerStates.2">
+              <trigger xsi:type="synccharts:SignalReference" signal="T"/>
             </outgoingTransitions>
           </innerStates>
           <innerStates id="_S3" label=""/>
           <innerStates id="S0" label="S0">
             <regions>
-              <innerStates id="S1" label="S1" isInitial="true">
+              <innerStates id="S1" label="S1">
                 <outgoingTransitions priority="1" targetState="//@innerStates.0/@regions.6/@innerStates.2/@regions.0/@innerStates.2/@regions.0/@innerStates.1"/>
               </innerStates>
               <innerStates id="S2" label="S2">
@@ -322,7 +310,7 @@
     <regions id="Transitions_to_2_States">
       <innerStates id="Copy" label="Copy" isInitial="true">
         <regions id="S1">
-          <innerStates id="_S5" label="" isInitial="true">
+          <innerStates id="_S5" label="">
             <outgoingTransitions triggersAndEffects="S and A" priority="1" targetState="//@innerStates.0/@regions.7/@innerStates.0/@regions.0/@innerStates.1">
               <trigger xsi:type="synccharts:ComplexExpression" operator="and">
                 <subExpressions xsi:type="synccharts:SignalReference" signal="S"/>
@@ -343,15 +331,15 @@
       </innerStates>
       <innerStates id="Paste" label="Paste">
         <regions id="S1">
-          <innerStates id="T1" label="T1" isInitial="true"/>
           <innerStates id="T2" label="T2"/>
+          <innerStates id="T1" label="T1"/>
         </regions>
         <outgoingTransitions priority="1" targetState="//@innerStates.0/@regions.7/@innerStates.2"/>
       </innerStates>
       <innerStates id="Result" label="Result" isFinal="true">
         <regions id="S1">
-          <innerStates id="T1" label="T1" isInitial="true"/>
-          <innerStates id="T2" label="T2">
+          <innerStates id="T2" label="T2"/>
+          <innerStates id="T1" label="T1">
             <outgoingTransitions triggersAndEffects="S or B" priority="1" targetState="//@innerStates.0/@regions.7/@innerStates.2/@regions.0/@innerStates.0">
               <trigger xsi:type="synccharts:ComplexExpression" operator="or">
                 <subExpressions xsi:type="synccharts:SignalReference" signal="S"/>
