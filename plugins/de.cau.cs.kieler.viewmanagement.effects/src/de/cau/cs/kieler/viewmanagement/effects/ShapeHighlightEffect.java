@@ -23,6 +23,7 @@ import org.eclipse.swt.graphics.Color;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
 import org.eclipse.gmf.runtime.gef.ui.figures.DefaultSizeNodeFigure;
 
+import de.cau.cs.kieler.core.ui.figures.RoundedRectangleFigure;
 import de.cau.cs.kieler.viewmanagement.AEffect;
 
 /**
@@ -60,6 +61,20 @@ public class ShapeHighlightEffect extends AEffect {
 
         objectToHighlight.getRoot();
         IFigure figure = ((GraphicalEditPart) objectToHighlight).getFigure();
+        
+        // workaround: look inside new RoundedRectangleFigure if any and find the first children
+        //             this is our originla figure
+        // sorry for the quick hack (cmot)
+        if (figure instanceof RoundedRectangleFigure) {
+            RoundedRectangleFigure rrf = ((RoundedRectangleFigure) figure);
+            if (rrf.getChildren().size() > 0) {
+                Object firstChild = rrf.getChildren().get(0);
+                if (firstChild instanceof IFigure) {
+                    figure = (IFigure)firstChild;
+                }
+            }
+        }
+        
         if (figure instanceof DefaultSizeNodeFigure) {
             figure = (IFigure) figure.getChildren().get(0);
         }
@@ -90,6 +105,8 @@ public class ShapeHighlightEffect extends AEffect {
         if (figure instanceof Shape) {
             ((Shape) figure).setFill(true);
         }
+        
+        
         // figure.setOpaque(true); // avoid blocking labels etc layered behind the state
         // schedule repaint to make changes visible
         figure.repaint();
@@ -106,6 +123,20 @@ public class ShapeHighlightEffect extends AEffect {
         // undo the highlight colors
         objectToHighlight.getRoot();
         IFigure figure = ((GraphicalEditPart) objectToHighlight).getFigure();
+        
+        // workaround: look inside new RoundedRectangleFigure if any and find the first children
+        //             this is our originla figure
+        // sorry for the quick hack (cmot)
+        if (figure instanceof RoundedRectangleFigure) {
+            RoundedRectangleFigure rrf = ((RoundedRectangleFigure) figure);
+            if (rrf.getChildren().size() > 0) {
+                Object firstChild = rrf.getChildren().get(0);
+                if (firstChild instanceof IFigure) {
+                    figure = (IFigure)firstChild;
+                }
+            }
+        }
+        
         if (figure instanceof DefaultSizeNodeFigure) {
             figure = (IFigure) figure.getChildren().get(0);
         }
