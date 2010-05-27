@@ -24,7 +24,6 @@ import de.cau.cs.kieler.viewmanagement.ACombination;
 import de.cau.cs.kieler.viewmanagement.ATrigger;
 import de.cau.cs.kieler.viewmanagement.RunLogic;
 import de.cau.cs.kieler.viewmanagement.TriggerEventObject;
-import de.cau.cs.kieler.viewmanagement.effects.CompartmentCollapseEffect;
 import de.cau.cs.kieler.viewmanagement.effects.CompartmentCollapseExpandEffect;
 import de.cau.cs.kieler.viewmanagement.triggers.SelectionTrigger;
 
