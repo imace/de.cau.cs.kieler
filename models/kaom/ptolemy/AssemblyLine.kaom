@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="ASCII"?>
+<kaom:Actor xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kaom="http://kieler.cs.cau.de/KAOM" xsi:schemaLocation="http://kieler.cs.cau.de/KAOM java://de.cau.cs.kieler.kaom.KaomPackage" name="AssemblyLine">
+  <annotationMap key="_createdBy">
+    <value xsi:type="kaom:StringAnnotation" text="8.0.beta"/>
+  </annotationMap>
+  <annotationMap key="DE Director">
+    <value xsi:type="kaom:StringAnnotation"/>
+  </annotationMap>
+  <annotationMap key="_windowProperties">
+    <value xsi:type="kaom:StringAnnotation" text="{bounds={359, 69, 743, 704}, maximized=false}"/>
+  </annotationMap>
+  <annotationMap key="_vergilSize">
+    <value xsi:type="kaom:StringAnnotation" text="[530, 594]"/>
+  </annotationMap>
+  <annotationMap key="_vergilZoomFactor">
+    <value xsi:type="kaom:StringAnnotation" text="1.0"/>
+  </annotationMap>
+  <annotationMap key="_vergilCenter">
+    <value xsi:type="kaom:StringAnnotation" text="{265.0, 297.0}"/>
+  </annotationMap>
+  <annotationMap key="Annotation">
+    <value xsi:type="kaom:StringAnnotation"/>
+  </annotationMap>
+  <annotationMap key="Annotation2">
+    <value xsi:type="kaom:StringAnnotation"/>
+  </annotationMap>
+  <annotationMap key="RTMaudeCodeGenerator">
+    <value xsi:type="kaom:StringAnnotation"/>
+  </annotationMap>
+  <childEntities xsi:type="kaom:Actor" name="Jobs">
+    <annotationMap key="period">
+      <value xsi:type="kaom:StringAnnotation" text="Infinity"/>
+    </annotationMap>
+    <annotationMap key="offsets">
+      <value xsi:type="kaom:StringAnnotation" text="{5.0, 7.0, 30.0, 32.0}"/>
+    </annotationMap>
+    <annotationMap key="values">
+      <value xsi:type="kaom:StringAnnotation" text="{4, 10, 1, 5}"/>
+    </annotationMap>
+    <annotationMap key="_location">
+      <value xsi:type="kaom:StringAnnotation" text="[47.5, 42.5]"/>
+    </annotationMap>
+  </childEntities>
+  <childEntities xsi:type="kaom:Actor" name="StationsFinishedTimes">
+    <annotationMap key="fillOnWrapup">
+      <value xsi:type="kaom:StringAnnotation" text="true"/>
+    </annotationMap>
+    <annotationMap key="legend">
+      <value xsi:type="kaom:StringAnnotation" text="Station 1,Station 2, Station 3"/>
+    </annotationMap>
+    <annotationMap key="_windowProperties">
+      <value xsi:type="kaom:StringAnnotation" text="{bounds={517, 499, 450, 220}, maximized=false}"/>
+    </annotationMap>
+    <annotationMap key="_plotSize">
+      <value xsi:type="kaom:StringAnnotation" text="[450, 176]"/>
+    </annotationMap>
+    <annotationMap key="_location">
+      <value xsi:type="kaom:StringAnnotation" text="[355.0, 265.0]"/>
+    </annotationMap>
+  </childEntities>
+  <childEntities xsi:type="kaom:Actor" name="ServiceTimes2">
+    <annotationMap key="indexes">
+      <value xsi:type="kaom:StringAnnotation" text="{0, 1, 2, 3}"/>
+    </annotationMap>
+    <annotationMap key="values">
+      <value xsi:type="kaom:StringAnnotation" text="{12, 15, 2, 7}"/>
+    </annotationMap>
+    <annotationMap key="_location">
+      <value xsi:type="kaom:StringAnnotation" text="[65.0, 225.0]"/>
+    </annotationMap>
+  </childEntities>
+  <childEntities xsi:type="kaom:Actor" name="ServiceTimes3">
+    <annotationMap key="indexes">
+      <value xsi:type="kaom:StringAnnotation" text="{0, 1, 2, 3}"/>
+    </annotationMap>
+    <annotationMap key="values">
+      <value xsi:type="kaom:StringAnnotation" text="{2, 3, 1, 4}"/>
+    </annotationMap>
+    <annotationMap key="_location">
+      <value xsi:type="kaom:StringAnnotation" text="[65.0, 310.0]"/>
+    </annotationMap>
+  </childEntities>
+  <childEntities xsi:type="kaom:Actor" name="JobArrivedTime">
+    <annotationMap key="fillOnWrapup">
+      <value xsi:type="kaom:StringAnnotation" text="true"/>
+    </annotationMap>
+    <annotationMap key="_windowProperties">
+      <value xsi:type="kaom:StringAnnotation" text="{bounds={69, 500, 434, 220}, maximized=false}"/>
+    </annotationMap>
+    <annotationMap key="_plotSize">
+      <value xsi:type="kaom:StringAnnotation" text="[434, 176]"/>
+    </annotationMap>
+    <annotationMap key="_location">
+      <value xsi:type="kaom:StringAnnotation" text="[362.5, 97.5]"/>
+    </annotationMap>
+  </childEntities>
+  <childEntities xsi:type="kaom:Actor" name="ServiceTimes1">
+    <annotationMap key="indexes">
+      <value xsi:type="kaom:StringAnnotation" text="{0, 1, 2, 3}"/>
+    </annotationMap>
+    <annotationMap key="values">
+      <value xsi:type="kaom:StringAnnotation" text="{4, 10, 1, 5}"/>
+    </annotationMap>
+    <annotationMap key="_location">
+      <value xsi:type="kaom:StringAnnotation" text="[65.0, 150.0]"/>
+    </annotationMap>
+  </childEntities>
+  <childEntities xsi:type="kaom:Actor" name="CurrentTime">
+    <annotationMap key="_location">
+      <value xsi:type="kaom:StringAnnotation" text="[227.5, 97.5]"/>
+    </annotationMap>
+  </childEntities>
+  <childEntities xsi:type="kaom:Actor" name="Station1">
+    <annotationMap key="value">
+      <value xsi:type="kaom:StringAnnotation" text="1"/>
+    </annotationMap>
+    <annotationMap key="_location">
+      <value xsi:type="kaom:StringAnnotation" text="{165.0, 150.0}"/>
+    </annotationMap>
+  </childEntities>
+  <childEntities xsi:type="kaom:Actor" name="Station2">
+    <annotationMap key="value">
+      <value xsi:type="kaom:StringAnnotation" text="2"/>
+    </annotationMap>
+    <annotationMap key="_location">
+      <value xsi:type="kaom:StringAnnotation" text="{165.0, 225.0}"/>
+    </annotationMap>
+  </childEntities>
+  <childEntities xsi:type="kaom:Actor" name="Station3">
+    <annotationMap key="value">
+      <value xsi:type="kaom:StringAnnotation" text="3"/>
+    </annotationMap>
+    <annotationMap key="_location">
+      <value xsi:type="kaom:StringAnnotation" text="{165.0, 310.0}"/>
+    </annotationMap>
+  </childEntities>
+</kaom:Actor>
