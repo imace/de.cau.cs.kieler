@@ -1,23 +1,23 @@
-<?xml version="1.0" encoding="ASCII"?>
-<kaom:State xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kaom="http://kieler.cs.cau.de/KAOM" xsi:schemaLocation="http://kieler.cs.cau.de/KAOM java://de.cau.cs.kieler.kaom.KaomPackage">
+<?xml version="1.0" encoding="UTF-8"?>
+<kaom:State xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kaom="http://kieler.cs.cau.de/KAOM">
   <childEntities xsi:type="kaom:Actor" name="Stack">
     <annotationMap key="Annotation">
       <value xsi:type="kaom:StringAnnotation"/>
     </annotationMap>
     <annotationMap key="_createdBy">
-      <value xsi:type="kaom:StringAnnotation" text="8.0.beta"/>
+      <value xsi:type="kaom:StringAnnotation" value="8.0.beta"/>
     </annotationMap>
     <annotationMap key="_windowProperties">
-      <value xsi:type="kaom:StringAnnotation" text="{bounds={1, 22, 1153, 615}, maximized=false}"/>
+      <value xsi:type="kaom:StringAnnotation" value="{bounds={1, 22, 1153, 615}, maximized=false}"/>
     </annotationMap>
     <annotationMap key="_vergilSize">
-      <value xsi:type="kaom:StringAnnotation" text="[940, 505]"/>
+      <value xsi:type="kaom:StringAnnotation" value="[940, 505]"/>
     </annotationMap>
     <annotationMap key="_vergilZoomFactor">
-      <value xsi:type="kaom:StringAnnotation" text="1.0"/>
+      <value xsi:type="kaom:StringAnnotation" value="1.0"/>
     </annotationMap>
     <annotationMap key="_vergilCenter">
-      <value xsi:type="kaom:StringAnnotation" text="{470.0, 252.5}"/>
+      <value xsi:type="kaom:StringAnnotation" value="{470.0, 252.5}"/>
     </annotationMap>
     <annotationMap key="PN Director">
       <value xsi:type="kaom:StringAnnotation"/>
@@ -30,19 +30,19 @@
     </annotationMap>
     <childEntities xsi:type="kaom:Actor" name="StackCounter">
       <annotationMap key="_location">
-        <value xsi:type="kaom:StringAnnotation" text="{340.0, 265.0}"/>
+        <value xsi:type="kaom:StringAnnotation" value="{340.0, 265.0}"/>
       </annotationMap>
       <annotationMap key="_windowProperties">
-        <value xsi:type="kaom:StringAnnotation" text="{bounds={0, 22, 1172, 863}, maximized=false}"/>
+        <value xsi:type="kaom:StringAnnotation" value="{bounds={0, 22, 1172, 863}, maximized=false}"/>
       </annotationMap>
       <annotationMap key="_vergilSize">
-        <value xsi:type="kaom:StringAnnotation" text="[959, 753]"/>
+        <value xsi:type="kaom:StringAnnotation" value="[959, 753]"/>
       </annotationMap>
       <annotationMap key="_vergilZoomFactor">
-        <value xsi:type="kaom:StringAnnotation" text="1.0"/>
+        <value xsi:type="kaom:StringAnnotation" value="1.0"/>
       </annotationMap>
       <annotationMap key="_vergilCenter">
-        <value xsi:type="kaom:StringAnnotation" text="{479.5, 376.5}"/>
+        <value xsi:type="kaom:StringAnnotation" value="{479.5, 376.5}"/>
       </annotationMap>
       <annotationMap key="Annotation">
         <value xsi:type="kaom:StringAnnotation"/>
@@ -52,134 +52,202 @@
       </annotationMap>
       <childEntities xsi:type="kaom:Actor" name="BooleanSelect">
         <annotationMap key="_location">
-          <value xsi:type="kaom:StringAnnotation" text="[335.5, 475.0]"/>
+          <value xsi:type="kaom:StringAnnotation" value="[335.5, 475.0]"/>
         </annotationMap>
-        <childPorts outgoingLinks="//@childEntities.0/@childEntities.0/@childLinks.4" name="trueInput"/>
-        <childPorts outgoingLinks="//@childEntities.0/@childEntities.0/@childLinks.5" name="falseInput"/>
-        <childPorts outgoingLinks="//@childEntities.0/@childEntities.0/@childLinks.6" name="control"/>
-        <childPorts outgoingLinks="//@childEntities.0/@childEntities.0/@childLinks.7" name="output"/>
+        <childPorts outgoingLinks="//@childEntities.0/@childEntities.0/@childLinks.4" name="trueInput">
+          <annotationMap key="isInput">
+            <value xsi:type="kaom:BooleanAnnotation" value="true"/>
+          </annotationMap>
+        </childPorts>
+        <childPorts outgoingLinks="//@childEntities.0/@childEntities.0/@childLinks.5" name="falseInput">
+          <annotationMap key="isInput">
+            <value xsi:type="kaom:BooleanAnnotation" value="true"/>
+          </annotationMap>
+        </childPorts>
+        <childPorts outgoingLinks="//@childEntities.0/@childEntities.0/@childLinks.6" name="control">
+          <annotationMap key="isInput">
+            <value xsi:type="kaom:BooleanAnnotation" value="true"/>
+          </annotationMap>
+        </childPorts>
+        <childPorts outgoingLinks="//@childEntities.0/@childEntities.0/@childLinks.7" name="output">
+          <annotationMap key="isOutput">
+            <value xsi:type="kaom:BooleanAnnotation" value="true"/>
+          </annotationMap>
+        </childPorts>
       </childEntities>
       <childEntities xsi:type="kaom:Actor" name="BooleanSwitch">
         <annotationMap key="_location">
-          <value xsi:type="kaom:StringAnnotation" text="[730.0, 475.0]"/>
+          <value xsi:type="kaom:StringAnnotation" value="[730.0, 475.0]"/>
         </annotationMap>
-        <childPorts outgoingLinks="//@childEntities.0/@childEntities.0/@childLinks.8" name="input"/>
-        <childPorts outgoingLinks="//@childEntities.0/@childEntities.0/@childLinks.9" name="control"/>
-        <childPorts outgoingLinks="//@childEntities.0/@childEntities.0/@childLinks.10" name="trueOutput"/>
-        <childPorts outgoingLinks="//@childEntities.0/@childEntities.0/@childLinks.11" name="falseOutput"/>
+        <childPorts outgoingLinks="//@childEntities.0/@childEntities.0/@childLinks.8" name="input">
+          <annotationMap key="isInput">
+            <value xsi:type="kaom:BooleanAnnotation" value="true"/>
+          </annotationMap>
+        </childPorts>
+        <childPorts outgoingLinks="//@childEntities.0/@childEntities.0/@childLinks.9" name="control">
+          <annotationMap key="isInput">
+            <value xsi:type="kaom:BooleanAnnotation" value="true"/>
+          </annotationMap>
+        </childPorts>
+        <childPorts outgoingLinks="//@childEntities.0/@childEntities.0/@childLinks.10" name="trueOutput">
+          <annotationMap key="isOutput">
+            <value xsi:type="kaom:BooleanAnnotation" value="true"/>
+          </annotationMap>
+        </childPorts>
+        <childPorts outgoingLinks="//@childEntities.0/@childEntities.0/@childLinks.11" name="falseOutput">
+          <annotationMap key="isOutput">
+            <value xsi:type="kaom:BooleanAnnotation" value="true"/>
+          </annotationMap>
+        </childPorts>
       </childEntities>
       <childEntities xsi:type="kaom:Actor" name="Discard">
         <annotationMap key="_hideName">
-          <value xsi:type="kaom:StringAnnotation" text="true"/>
+          <value xsi:type="kaom:StringAnnotation" value="true"/>
         </annotationMap>
         <annotationMap key="_location">
-          <value xsi:type="kaom:StringAnnotation" text="[840.0, 535.0]"/>
+          <value xsi:type="kaom:StringAnnotation" value="[840.0, 535.0]"/>
         </annotationMap>
-        <childPorts outgoingLinks="//@childEntities.0/@childEntities.0/@childLinks.12" name="input"/>
+        <childPorts outgoingLinks="//@childEntities.0/@childEntities.0/@childLinks.12" name="input">
+          <annotationMap key="isInput">
+            <value xsi:type="kaom:BooleanAnnotation" value="true"/>
+          </annotationMap>
+        </childPorts>
       </childEntities>
       <childEntities xsi:type="kaom:Actor" name="SampleDelay">
         <annotationMap key="initialOutputs">
-          <value xsi:type="kaom:StringAnnotation" text="{true}"/>
+          <value xsi:type="kaom:StringAnnotation" value="{true}"/>
         </annotationMap>
         <annotationMap key="_icon">
           <value xsi:type="kaom:StringAnnotation"/>
         </annotationMap>
         <annotationMap key="_location">
-          <value xsi:type="kaom:StringAnnotation" text="[435.0, 475.0]"/>
+          <value xsi:type="kaom:StringAnnotation" value="[435.0, 475.0]"/>
         </annotationMap>
         <childPorts outgoingLinks="//@childEntities.0/@childEntities.0/@childLinks.13" name="input"/>
         <childPorts outgoingLinks="//@childEntities.0/@childEntities.0/@childLinks.14" name="output"/>
       </childEntities>
       <childEntities xsi:type="kaom:Actor" name="BooleanSelect2">
         <annotationMap key="_location">
-          <value xsi:type="kaom:StringAnnotation" text="[185.0, 615.0]"/>
+          <value xsi:type="kaom:StringAnnotation" value="[185.0, 615.0]"/>
         </annotationMap>
-        <childPorts outgoingLinks="//@childEntities.0/@childEntities.0/@childLinks.15" name="trueInput"/>
-        <childPorts outgoingLinks="//@childEntities.0/@childEntities.0/@childLinks.16" name="falseInput"/>
-        <childPorts outgoingLinks="//@childEntities.0/@childEntities.0/@childLinks.17" name="control"/>
-        <childPorts outgoingLinks="//@childEntities.0/@childEntities.0/@childLinks.18" name="output"/>
+        <childPorts outgoingLinks="//@childEntities.0/@childEntities.0/@childLinks.15" name="trueInput">
+          <annotationMap key="isInput">
+            <value xsi:type="kaom:BooleanAnnotation" value="true"/>
+          </annotationMap>
+        </childPorts>
+        <childPorts outgoingLinks="//@childEntities.0/@childEntities.0/@childLinks.16" name="falseInput">
+          <annotationMap key="isInput">
+            <value xsi:type="kaom:BooleanAnnotation" value="true"/>
+          </annotationMap>
+        </childPorts>
+        <childPorts outgoingLinks="//@childEntities.0/@childEntities.0/@childLinks.17" name="control">
+          <annotationMap key="isInput">
+            <value xsi:type="kaom:BooleanAnnotation" value="true"/>
+          </annotationMap>
+        </childPorts>
+        <childPorts outgoingLinks="//@childEntities.0/@childEntities.0/@childLinks.18" name="output">
+          <annotationMap key="isOutput">
+            <value xsi:type="kaom:BooleanAnnotation" value="true"/>
+          </annotationMap>
+        </childPorts>
       </childEntities>
       <childEntities xsi:type="kaom:Actor" name="BooleanSelect3">
         <annotationMap key="_location">
-          <value xsi:type="kaom:StringAnnotation" text="[435.0, 565.0]"/>
+          <value xsi:type="kaom:StringAnnotation" value="[435.0, 565.0]"/>
         </annotationMap>
-        <childPorts outgoingLinks="//@childEntities.0/@childEntities.0/@childLinks.19" name="trueInput"/>
-        <childPorts outgoingLinks="//@childEntities.0/@childEntities.0/@childLinks.20" name="falseInput"/>
-        <childPorts outgoingLinks="//@childEntities.0/@childEntities.0/@childLinks.21" name="control"/>
-        <childPorts outgoingLinks="//@childEntities.0/@childEntities.0/@childLinks.22" name="output"/>
+        <childPorts outgoingLinks="//@childEntities.0/@childEntities.0/@childLinks.19" name="trueInput">
+          <annotationMap key="isInput">
+            <value xsi:type="kaom:BooleanAnnotation" value="true"/>
+          </annotationMap>
+        </childPorts>
+        <childPorts outgoingLinks="//@childEntities.0/@childEntities.0/@childLinks.20" name="falseInput">
+          <annotationMap key="isInput">
+            <value xsi:type="kaom:BooleanAnnotation" value="true"/>
+          </annotationMap>
+        </childPorts>
+        <childPorts outgoingLinks="//@childEntities.0/@childEntities.0/@childLinks.21" name="control">
+          <annotationMap key="isInput">
+            <value xsi:type="kaom:BooleanAnnotation" value="true"/>
+          </annotationMap>
+        </childPorts>
+        <childPorts outgoingLinks="//@childEntities.0/@childEntities.0/@childLinks.22" name="output">
+          <annotationMap key="isOutput">
+            <value xsi:type="kaom:BooleanAnnotation" value="true"/>
+          </annotationMap>
+        </childPorts>
       </childEntities>
       <childEntities xsi:type="kaom:Actor" name="LogicFunction">
         <annotationMap key="function">
-          <value xsi:type="kaom:StringAnnotation" text="or"/>
+          <value xsi:type="kaom:StringAnnotation" value="or"/>
         </annotationMap>
         <annotationMap key="_icon">
           <value xsi:type="kaom:StringAnnotation"/>
         </annotationMap>
         <annotationMap key="_location">
-          <value xsi:type="kaom:StringAnnotation" text="[675.0, 565.0]"/>
+          <value xsi:type="kaom:StringAnnotation" value="[675.0, 565.0]"/>
         </annotationMap>
         <childPorts outgoingLinks="//@childEntities.0/@childEntities.0/@childLinks.23 //@childEntities.0/@childEntities.0/@childLinks.24" name="input"/>
         <childPorts outgoingLinks="//@childEntities.0/@childEntities.0/@childLinks.25" name="output"/>
       </childEntities>
       <childEntities xsi:type="kaom:Actor" name="SampleDelay2">
         <annotationMap key="initialOutputs">
-          <value xsi:type="kaom:StringAnnotation" text="{true}"/>
+          <value xsi:type="kaom:StringAnnotation" value="{true}"/>
         </annotationMap>
         <annotationMap key="_icon">
           <value xsi:type="kaom:StringAnnotation"/>
         </annotationMap>
         <annotationMap key="_location">
-          <value xsi:type="kaom:StringAnnotation" text="[535.0, 565.0]"/>
+          <value xsi:type="kaom:StringAnnotation" value="[535.0, 565.0]"/>
         </annotationMap>
         <childPorts outgoingLinks="//@childEntities.0/@childEntities.0/@childLinks.26" name="input"/>
         <childPorts outgoingLinks="//@childEntities.0/@childEntities.0/@childLinks.27" name="output"/>
       </childEntities>
       <childEntities xsi:type="kaom:Actor" name="CondConst1">
         <annotationMap key="_location">
-          <value xsi:type="kaom:StringAnnotation" text="[215.0, 465.0]"/>
+          <value xsi:type="kaom:StringAnnotation" value="[215.0, 465.0]"/>
         </annotationMap>
         <annotationMap key="value">
-          <value xsi:type="kaom:StringAnnotation" text="false"/>
+          <value xsi:type="kaom:StringAnnotation" value="false"/>
         </annotationMap>
         <childPorts outgoingLinks="//@childEntities.0/@childEntities.0/@childLinks.28" name="condition"/>
         <childPorts outgoingLinks="//@childEntities.0/@childEntities.0/@childLinks.29" name="value"/>
       </childEntities>
       <childEntities xsi:type="kaom:Actor" name="LogicalNot">
         <annotationMap key="_location">
-          <value xsi:type="kaom:StringAnnotation" text="[30.0, 645.0]"/>
+          <value xsi:type="kaom:StringAnnotation" value="[30.0, 645.0]"/>
         </annotationMap>
         <childPorts outgoingLinks="//@childEntities.0/@childEntities.0/@childLinks.30" name="input"/>
         <childPorts outgoingLinks="//@childEntities.0/@childEntities.0/@childLinks.31" name="output"/>
       </childEntities>
       <childEntities xsi:type="kaom:Actor" name="CondConst2">
         <annotationMap key="_location">
-          <value xsi:type="kaom:StringAnnotation" text="[105.0, 645.0]"/>
+          <value xsi:type="kaom:StringAnnotation" value="[105.0, 645.0]"/>
         </annotationMap>
         <annotationMap key="value">
-          <value xsi:type="kaom:StringAnnotation" text="false"/>
+          <value xsi:type="kaom:StringAnnotation" value="false"/>
         </annotationMap>
         <childPorts outgoingLinks="//@childEntities.0/@childEntities.0/@childLinks.32" name="condition"/>
         <childPorts outgoingLinks="//@childEntities.0/@childEntities.0/@childLinks.33" name="value"/>
       </childEntities>
       <childEntities xsi:type="kaom:Actor" name="CondConst3">
         <annotationMap key="_location">
-          <value xsi:type="kaom:StringAnnotation" text="[360.0, 660.0]"/>
+          <value xsi:type="kaom:StringAnnotation" value="[360.0, 660.0]"/>
         </annotationMap>
         <annotationMap key="value">
-          <value xsi:type="kaom:StringAnnotation" text="true"/>
+          <value xsi:type="kaom:StringAnnotation" value="true"/>
         </annotationMap>
         <annotationMap key="_flipPortsHorizontal">
-          <value xsi:type="kaom:StringAnnotation" text="true"/>
+          <value xsi:type="kaom:StringAnnotation" value="true"/>
         </annotationMap>
         <childPorts outgoingLinks="//@childEntities.0/@childEntities.0/@childLinks.34" name="condition"/>
         <childPorts outgoingLinks="//@childEntities.0/@childEntities.0/@childLinks.35" name="value"/>
       </childEntities>
       <childEntities xsi:type="kaom:Actor" name="LogicalNot2">
         <annotationMap key="_location">
-          <value xsi:type="kaom:StringAnnotation" text="[535.0, 660.0]"/>
+          <value xsi:type="kaom:StringAnnotation" value="[535.0, 660.0]"/>
         </annotationMap>
         <annotationMap key="_flipPortsHorizontal">
-          <value xsi:type="kaom:StringAnnotation" text="true"/>
+          <value xsi:type="kaom:StringAnnotation" value="true"/>
         </annotationMap>
         <childPorts outgoingLinks="//@childEntities.0/@childEntities.0/@childLinks.36" name="input"/>
         <childPorts outgoingLinks="//@childEntities.0/@childEntities.0/@childLinks.37" name="output"/>
@@ -226,82 +294,82 @@
       <childLinks name="link" source="//@childEntities.0/@childEntities.0/@childRelations.4" target="//@childEntities.0/@childEntities.0/@childRelations.14"/>
       <childRelations incomingLinks="//@childEntities.0/@childEntities.0/@childLinks.11 //@childEntities.0/@childEntities.0/@childLinks.12" name="relation4">
         <annotationMap key="width">
-          <value xsi:type="kaom:StringAnnotation" text="1"/>
+          <value xsi:type="kaom:StringAnnotation" value="1"/>
         </annotationMap>
       </childRelations>
       <childRelations outgoingLinks="//@childEntities.0/@childEntities.0/@childLinks.38" incomingLinks="//@childEntities.0/@childEntities.0/@childLinks.5" name="relation5">
         <annotationMap key="width">
-          <value xsi:type="kaom:StringAnnotation" text="1"/>
+          <value xsi:type="kaom:StringAnnotation" value="1"/>
         </annotationMap>
       </childRelations>
       <childRelations incomingLinks="//@childEntities.0/@childEntities.0/@childLinks.10 //@childEntities.0/@childEntities.0/@childLinks.38" name="relation6">
         <annotationMap key="width">
-          <value xsi:type="kaom:StringAnnotation" text="1"/>
+          <value xsi:type="kaom:StringAnnotation" value="1"/>
         </annotationMap>
       </childRelations>
       <childRelations incomingLinks="//@childEntities.0/@childEntities.0/@childLinks.7 //@childEntities.0/@childEntities.0/@childLinks.13" name="relation3">
         <annotationMap key="width">
-          <value xsi:type="kaom:StringAnnotation" text="1"/>
+          <value xsi:type="kaom:StringAnnotation" value="1"/>
         </annotationMap>
       </childRelations>
       <childRelations outgoingLinks="//@childEntities.0/@childEntities.0/@childLinks.39" incomingLinks="//@childEntities.0/@childEntities.0/@childLinks.8 //@childEntities.0/@childEntities.0/@childLinks.14 //@childEntities.0/@childEntities.0/@childLinks.23" name="relation">
         <annotationMap key="width">
-          <value xsi:type="kaom:StringAnnotation" text="1"/>
+          <value xsi:type="kaom:StringAnnotation" value="1"/>
         </annotationMap>
       </childRelations>
       <childRelations incomingLinks="//@childEntities.0/@childEntities.0/@childLinks.15 //@childEntities.0/@childEntities.0/@childLinks.19" name="relation7">
         <annotationMap key="width">
-          <value xsi:type="kaom:StringAnnotation" text="1"/>
+          <value xsi:type="kaom:StringAnnotation" value="1"/>
         </annotationMap>
       </childRelations>
       <childRelations incomingLinks="//@childEntities.0/@childEntities.0/@childLinks.22 //@childEntities.0/@childEntities.0/@childLinks.26" name="relation13">
         <annotationMap key="width">
-          <value xsi:type="kaom:StringAnnotation" text="1"/>
+          <value xsi:type="kaom:StringAnnotation" value="1"/>
         </annotationMap>
       </childRelations>
       <childRelations incomingLinks="//@childEntities.0/@childEntities.0/@childLinks.24 //@childEntities.0/@childEntities.0/@childLinks.27" name="relation8">
         <annotationMap key="width">
-          <value xsi:type="kaom:StringAnnotation" text="1"/>
+          <value xsi:type="kaom:StringAnnotation" value="1"/>
         </annotationMap>
       </childRelations>
       <childRelations incomingLinks="//@childEntities.0/@childEntities.0/@childLinks.4 //@childEntities.0/@childEntities.0/@childLinks.29" name="relation2">
         <annotationMap key="width">
-          <value xsi:type="kaom:StringAnnotation" text="1"/>
+          <value xsi:type="kaom:StringAnnotation" value="1"/>
         </annotationMap>
       </childRelations>
       <childRelations incomingLinks="//@childEntities.0/@childEntities.0/@childLinks.6 //@childEntities.0/@childEntities.0/@childLinks.18 //@childEntities.0/@childEntities.0/@childLinks.28" name="relation14">
         <annotationMap key="width">
-          <value xsi:type="kaom:StringAnnotation" text="1"/>
+          <value xsi:type="kaom:StringAnnotation" value="1"/>
         </annotationMap>
       </childRelations>
       <childRelations incomingLinks="//@childEntities.0/@childEntities.0/@childLinks.16 //@childEntities.0/@childEntities.0/@childLinks.33" name="relation10">
         <annotationMap key="width">
-          <value xsi:type="kaom:StringAnnotation" text="1"/>
+          <value xsi:type="kaom:StringAnnotation" value="1"/>
         </annotationMap>
       </childRelations>
       <childRelations incomingLinks="//@childEntities.0/@childEntities.0/@childLinks.31 //@childEntities.0/@childEntities.0/@childLinks.32" name="relation11">
         <annotationMap key="width">
-          <value xsi:type="kaom:StringAnnotation" text="1"/>
+          <value xsi:type="kaom:StringAnnotation" value="1"/>
         </annotationMap>
       </childRelations>
       <childRelations incomingLinks="//@childEntities.0/@childEntities.0/@childLinks.20 //@childEntities.0/@childEntities.0/@childLinks.35" name="relation9">
         <annotationMap key="width">
-          <value xsi:type="kaom:StringAnnotation" text="1"/>
+          <value xsi:type="kaom:StringAnnotation" value="1"/>
         </annotationMap>
       </childRelations>
       <childRelations incomingLinks="//@childEntities.0/@childEntities.0/@childLinks.34 //@childEntities.0/@childEntities.0/@childLinks.37" name="relation16">
         <annotationMap key="width">
-          <value xsi:type="kaom:StringAnnotation" text="1"/>
+          <value xsi:type="kaom:StringAnnotation" value="1"/>
         </annotationMap>
       </childRelations>
       <childRelations incomingLinks="//@childEntities.0/@childEntities.0/@childLinks.17 //@childEntities.0/@childEntities.0/@childLinks.21 //@childEntities.0/@childEntities.0/@childLinks.30 //@childEntities.0/@childEntities.0/@childLinks.36 //@childEntities.0/@childEntities.0/@childLinks.39" name="relation15">
         <annotationMap key="width">
-          <value xsi:type="kaom:StringAnnotation" text="1"/>
+          <value xsi:type="kaom:StringAnnotation" value="1"/>
         </annotationMap>
       </childRelations>
       <childRelations incomingLinks="//@childEntities.0/@childEntities.0/@childLinks.9 //@childEntities.0/@childEntities.0/@childLinks.25" name="relation12">
         <annotationMap key="width">
-          <value xsi:type="kaom:StringAnnotation" text="1"/>
+          <value xsi:type="kaom:StringAnnotation" value="1"/>
         </annotationMap>
       </childRelations>
       <childPorts outgoingLinks="//@childEntities.0/@childLinks.0" name="push"/>
@@ -310,97 +378,171 @@
     </childEntities>
     <childEntities xsi:type="kaom:Actor" name="Sequence">
       <annotationMap key="values">
-        <value xsi:type="kaom:StringAnnotation" text="{true, true, true, false, false, false, false, true, true, false, true, false, false}"/>
+        <value xsi:type="kaom:StringAnnotation" value="{true, true, true, false, false, false, false, true, true, false, true, false, false}"/>
       </annotationMap>
       <annotationMap key="repeat">
-        <value xsi:type="kaom:StringAnnotation" text="false"/>
+        <value xsi:type="kaom:StringAnnotation" value="false"/>
       </annotationMap>
       <annotationMap key="_location">
-        <value xsi:type="kaom:StringAnnotation" text="[210.0, 190.0]"/>
+        <value xsi:type="kaom:StringAnnotation" value="[210.0, 190.0]"/>
       </annotationMap>
-      <childPorts outgoingLinks="//@childEntities.0/@childLinks.3" name="output"/>
+      <childPorts name="enable">
+        <annotationMap key="isInput">
+          <value xsi:type="kaom:BooleanAnnotation" value="true"/>
+        </annotationMap>
+      </childPorts>
+      <childPorts outgoingLinks="//@childEntities.0/@childLinks.3" name="output">
+        <annotationMap key="isOutput">
+          <value xsi:type="kaom:BooleanAnnotation" value="true"/>
+        </annotationMap>
+      </childPorts>
     </childEntities>
     <childEntities xsi:type="kaom:Actor" name="Display2">
       <annotationMap key="_windowProperties">
-        <value xsi:type="kaom:StringAnnotation" text="{bounds={906, 498, 497, 390}, maximized=false}"/>
+        <value xsi:type="kaom:StringAnnotation" value="{bounds={906, 498, 497, 390}, maximized=false}"/>
       </annotationMap>
       <annotationMap key="_paneSize">
-        <value xsi:type="kaom:StringAnnotation" text="[497, 346]"/>
+        <value xsi:type="kaom:StringAnnotation" value="[497, 346]"/>
       </annotationMap>
       <annotationMap key="title">
-        <value xsi:type="kaom:StringAnnotation" text="Popped"/>
+        <value xsi:type="kaom:StringAnnotation" value="Popped"/>
       </annotationMap>
       <annotationMap key="_location">
-        <value xsi:type="kaom:StringAnnotation" text="[820.0, 245.0]"/>
+        <value xsi:type="kaom:StringAnnotation" value="[820.0, 245.0]"/>
       </annotationMap>
       <childPorts outgoingLinks="//@childEntities.0/@childLinks.4" name="input"/>
     </childEntities>
     <childEntities xsi:type="kaom:Actor" name="Ramp">
       <annotationMap key="firingCountLimit">
-        <value xsi:type="kaom:StringAnnotation" text="NONE"/>
+        <value xsi:type="kaom:StringAnnotation" value="NONE"/>
       </annotationMap>
       <annotationMap key="_location">
-        <value xsi:type="kaom:StringAnnotation" text="[435.0, 150.0]"/>
+        <value xsi:type="kaom:StringAnnotation" value="[435.0, 150.0]"/>
       </annotationMap>
-      <childPorts outgoingLinks="//@childEntities.0/@childLinks.5" name="output"/>
-      <childPorts outgoingLinks="//@childEntities.0/@childLinks.6" name="trigger"/>
+      <childPorts outgoingLinks="//@childEntities.0/@childLinks.6" name="trigger">
+        <annotationMap key="isInput">
+          <value xsi:type="kaom:BooleanAnnotation" value="true"/>
+        </annotationMap>
+      </childPorts>
+      <childPorts name="step">
+        <annotationMap key="isInput">
+          <value xsi:type="kaom:BooleanAnnotation" value="true"/>
+        </annotationMap>
+      </childPorts>
+      <childPorts outgoingLinks="//@childEntities.0/@childLinks.5" name="output">
+        <annotationMap key="isOutput">
+          <value xsi:type="kaom:BooleanAnnotation" value="true"/>
+        </annotationMap>
+      </childPorts>
     </childEntities>
     <childEntities xsi:type="kaom:Actor" name="BooleanSelect">
       <annotationMap key="_location">
-        <value xsi:type="kaom:StringAnnotation" text="[545.0, 160.0]"/>
+        <value xsi:type="kaom:StringAnnotation" value="[545.0, 160.0]"/>
       </annotationMap>
-      <childPorts outgoingLinks="//@childEntities.0/@childLinks.7" name="trueInput"/>
-      <childPorts outgoingLinks="//@childEntities.0/@childLinks.8" name="falseInput"/>
-      <childPorts outgoingLinks="//@childEntities.0/@childLinks.9" name="control"/>
-      <childPorts outgoingLinks="//@childEntities.0/@childLinks.10" name="output"/>
+      <childPorts outgoingLinks="//@childEntities.0/@childLinks.7" name="trueInput">
+        <annotationMap key="isInput">
+          <value xsi:type="kaom:BooleanAnnotation" value="true"/>
+        </annotationMap>
+      </childPorts>
+      <childPorts outgoingLinks="//@childEntities.0/@childLinks.8" name="falseInput">
+        <annotationMap key="isInput">
+          <value xsi:type="kaom:BooleanAnnotation" value="true"/>
+        </annotationMap>
+      </childPorts>
+      <childPorts outgoingLinks="//@childEntities.0/@childLinks.9" name="control">
+        <annotationMap key="isInput">
+          <value xsi:type="kaom:BooleanAnnotation" value="true"/>
+        </annotationMap>
+      </childPorts>
+      <childPorts outgoingLinks="//@childEntities.0/@childLinks.10" name="output">
+        <annotationMap key="isOutput">
+          <value xsi:type="kaom:BooleanAnnotation" value="true"/>
+        </annotationMap>
+      </childPorts>
     </childEntities>
     <childEntities xsi:type="kaom:Actor" name="BooleanSwitch">
       <annotationMap key="_location">
-        <value xsi:type="kaom:StringAnnotation" text="[735.0, 160.0]"/>
+        <value xsi:type="kaom:StringAnnotation" value="[735.0, 160.0]"/>
       </annotationMap>
-      <childPorts outgoingLinks="//@childEntities.0/@childLinks.11" name="input"/>
-      <childPorts outgoingLinks="//@childEntities.0/@childLinks.12" name="control"/>
-      <childPorts outgoingLinks="//@childEntities.0/@childLinks.13" name="trueOutput"/>
-      <childPorts outgoingLinks="//@childEntities.0/@childLinks.14" name="falseOutput"/>
+      <childPorts outgoingLinks="//@childEntities.0/@childLinks.11" name="input">
+        <annotationMap key="isInput">
+          <value xsi:type="kaom:BooleanAnnotation" value="true"/>
+        </annotationMap>
+      </childPorts>
+      <childPorts outgoingLinks="//@childEntities.0/@childLinks.12" name="control">
+        <annotationMap key="isInput">
+          <value xsi:type="kaom:BooleanAnnotation" value="true"/>
+        </annotationMap>
+      </childPorts>
+      <childPorts outgoingLinks="//@childEntities.0/@childLinks.13" name="trueOutput">
+        <annotationMap key="isOutput">
+          <value xsi:type="kaom:BooleanAnnotation" value="true"/>
+        </annotationMap>
+      </childPorts>
+      <childPorts outgoingLinks="//@childEntities.0/@childLinks.14" name="falseOutput">
+        <annotationMap key="isOutput">
+          <value xsi:type="kaom:BooleanAnnotation" value="true"/>
+        </annotationMap>
+      </childPorts>
     </childEntities>
     <childEntities xsi:type="kaom:Actor" name="SampleDelay">
       <annotationMap key="initialOutputs">
-        <value xsi:type="kaom:StringAnnotation" text="{-1}"/>
+        <value xsi:type="kaom:StringAnnotation" value="{-1}"/>
       </annotationMap>
       <annotationMap key="_icon">
         <value xsi:type="kaom:StringAnnotation"/>
       </annotationMap>
       <annotationMap key="_location">
-        <value xsi:type="kaom:StringAnnotation" text="[640.0, 160.0]"/>
+        <value xsi:type="kaom:StringAnnotation" value="[640.0, 160.0]"/>
       </annotationMap>
       <childPorts outgoingLinks="//@childEntities.0/@childLinks.15" name="input"/>
       <childPorts outgoingLinks="//@childEntities.0/@childLinks.16" name="output"/>
     </childEntities>
     <childEntities xsi:type="kaom:Actor" name="BooleanSwitch2">
       <annotationMap key="_location">
-        <value xsi:type="kaom:StringAnnotation" text="[295.0, 150.0]"/>
+        <value xsi:type="kaom:StringAnnotation" value="[295.0, 150.0]"/>
       </annotationMap>
-      <childPorts outgoingLinks="//@childEntities.0/@childLinks.17" name="input"/>
-      <childPorts outgoingLinks="//@childEntities.0/@childLinks.18" name="control"/>
-      <childPorts outgoingLinks="//@childEntities.0/@childLinks.19" name="trueOutput"/>
-      <childPorts outgoingLinks="//@childEntities.0/@childLinks.20" name="falseOutput"/>
+      <childPorts outgoingLinks="//@childEntities.0/@childLinks.17" name="input">
+        <annotationMap key="isInput">
+          <value xsi:type="kaom:BooleanAnnotation" value="true"/>
+        </annotationMap>
+      </childPorts>
+      <childPorts outgoingLinks="//@childEntities.0/@childLinks.18" name="control">
+        <annotationMap key="isInput">
+          <value xsi:type="kaom:BooleanAnnotation" value="true"/>
+        </annotationMap>
+      </childPorts>
+      <childPorts outgoingLinks="//@childEntities.0/@childLinks.19" name="trueOutput">
+        <annotationMap key="isOutput">
+          <value xsi:type="kaom:BooleanAnnotation" value="true"/>
+        </annotationMap>
+      </childPorts>
+      <childPorts outgoingLinks="//@childEntities.0/@childLinks.20" name="falseOutput">
+        <annotationMap key="isOutput">
+          <value xsi:type="kaom:BooleanAnnotation" value="true"/>
+        </annotationMap>
+      </childPorts>
     </childEntities>
     <childEntities xsi:type="kaom:Actor" name="Discard">
       <annotationMap key="_hideName">
-        <value xsi:type="kaom:StringAnnotation" text="true"/>
+        <value xsi:type="kaom:StringAnnotation" value="true"/>
       </annotationMap>
       <annotationMap key="_location">
-        <value xsi:type="kaom:StringAnnotation" text="[345.0, 200.0]"/>
+        <value xsi:type="kaom:StringAnnotation" value="[345.0, 200.0]"/>
       </annotationMap>
-      <childPorts outgoingLinks="//@childEntities.0/@childLinks.21" name="input"/>
+      <childPorts outgoingLinks="//@childEntities.0/@childLinks.21" name="input">
+        <annotationMap key="isInput">
+          <value xsi:type="kaom:BooleanAnnotation" value="true"/>
+        </annotationMap>
+      </childPorts>
     </childEntities>
     <childLinks name="link" source="//@childEntities.0/@childEntities.0/@childPorts.0" target="//@childEntities.0/@childRelations.4"/>
     <childLinks name="link" source="//@childEntities.0/@childEntities.0/@childPorts.1" target="//@childEntities.0/@childRelations.7"/>
     <childLinks name="link" source="//@childEntities.0/@childEntities.0/@childPorts.2" target="//@childEntities.0/@childRelations.8"/>
-    <childLinks name="link" source="//@childEntities.0/@childEntities.1/@childPorts.0" target="//@childEntities.0/@childRelations.4"/>
+    <childLinks name="link" source="//@childEntities.0/@childEntities.1/@childPorts.1" target="//@childEntities.0/@childRelations.4"/>
     <childLinks name="link" source="//@childEntities.0/@childEntities.2/@childPorts.0" target="//@childEntities.0/@childRelations.9"/>
-    <childLinks name="link" source="//@childEntities.0/@childEntities.3/@childPorts.0" target="//@childEntities.0/@childRelations.6"/>
-    <childLinks name="link" source="//@childEntities.0/@childEntities.3/@childPorts.1" target="//@childEntities.0/@childRelations.10"/>
+    <childLinks name="link" source="//@childEntities.0/@childEntities.3/@childPorts.2" target="//@childEntities.0/@childRelations.6"/>
+    <childLinks name="link" source="//@childEntities.0/@childEntities.3/@childPorts.0" target="//@childEntities.0/@childRelations.10"/>
     <childLinks name="link" source="//@childEntities.0/@childEntities.4/@childPorts.0" target="//@childEntities.0/@childRelations.6"/>
     <childLinks name="link" source="//@childEntities.0/@childEntities.4/@childPorts.1" target="//@childEntities.0/@childRelations.0"/>
     <childLinks name="link" source="//@childEntities.0/@childEntities.4/@childPorts.2" target="//@childEntities.0/@childRelations.7"/>
@@ -419,57 +561,57 @@
     <childLinks name="link" source="//@childEntities.0/@childRelations.0" target="//@childEntities.0/@childRelations.1"/>
     <childRelations outgoingLinks="//@childEntities.0/@childLinks.22" incomingLinks="//@childEntities.0/@childLinks.8" name="relation8">
       <annotationMap key="width">
-        <value xsi:type="kaom:StringAnnotation" text="1"/>
+        <value xsi:type="kaom:StringAnnotation" value="1"/>
       </annotationMap>
     </childRelations>
     <childRelations incomingLinks="//@childEntities.0/@childLinks.13 //@childEntities.0/@childLinks.22" name="relation9">
       <annotationMap key="width">
-        <value xsi:type="kaom:StringAnnotation" text="1"/>
+        <value xsi:type="kaom:StringAnnotation" value="1"/>
       </annotationMap>
     </childRelations>
     <childRelations incomingLinks="//@childEntities.0/@childLinks.10 //@childEntities.0/@childLinks.15" name="relation10">
       <annotationMap key="width">
-        <value xsi:type="kaom:StringAnnotation" text="1"/>
+        <value xsi:type="kaom:StringAnnotation" value="1"/>
       </annotationMap>
     </childRelations>
     <childRelations incomingLinks="//@childEntities.0/@childLinks.11 //@childEntities.0/@childLinks.16" name="relation11">
       <annotationMap key="width">
-        <value xsi:type="kaom:StringAnnotation" text="1"/>
+        <value xsi:type="kaom:StringAnnotation" value="1"/>
       </annotationMap>
     </childRelations>
     <childRelations incomingLinks="//@childEntities.0/@childLinks.0 //@childEntities.0/@childLinks.3 //@childEntities.0/@childLinks.17 //@childEntities.0/@childLinks.18" name="relation12">
       <annotationMap key="width">
-        <value xsi:type="kaom:StringAnnotation" text="1"/>
+        <value xsi:type="kaom:StringAnnotation" value="1"/>
       </annotationMap>
     </childRelations>
     <childRelations incomingLinks="//@childEntities.0/@childLinks.20 //@childEntities.0/@childLinks.21" name="relation14">
       <annotationMap key="width">
-        <value xsi:type="kaom:StringAnnotation" text="1"/>
+        <value xsi:type="kaom:StringAnnotation" value="1"/>
       </annotationMap>
     </childRelations>
     <childRelations incomingLinks="//@childEntities.0/@childLinks.5 //@childEntities.0/@childLinks.7" name="relation5">
       <annotationMap key="width">
-        <value xsi:type="kaom:StringAnnotation" text="1"/>
+        <value xsi:type="kaom:StringAnnotation" value="1"/>
       </annotationMap>
     </childRelations>
     <childRelations incomingLinks="//@childEntities.0/@childLinks.1 //@childEntities.0/@childLinks.9" name="relation2">
       <annotationMap key="width">
-        <value xsi:type="kaom:StringAnnotation" text="1"/>
+        <value xsi:type="kaom:StringAnnotation" value="1"/>
       </annotationMap>
     </childRelations>
     <childRelations incomingLinks="//@childEntities.0/@childLinks.2 //@childEntities.0/@childLinks.12" name="relation">
       <annotationMap key="width">
-        <value xsi:type="kaom:StringAnnotation" text="1"/>
+        <value xsi:type="kaom:StringAnnotation" value="1"/>
       </annotationMap>
     </childRelations>
     <childRelations incomingLinks="//@childEntities.0/@childLinks.4 //@childEntities.0/@childLinks.14" name="relation3">
       <annotationMap key="width">
-        <value xsi:type="kaom:StringAnnotation" text="1"/>
+        <value xsi:type="kaom:StringAnnotation" value="1"/>
       </annotationMap>
     </childRelations>
     <childRelations incomingLinks="//@childEntities.0/@childLinks.6 //@childEntities.0/@childLinks.19" name="relation4">
       <annotationMap key="width">
-        <value xsi:type="kaom:StringAnnotation" text="1"/>
+        <value xsi:type="kaom:StringAnnotation" value="1"/>
       </annotationMap>
     </childRelations>
   </childEntities>
