@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:kaom="http://kieler.cs.cau.de/KAOM" xmlns:klayoutdata="http://kieler.cs.cau.de/KLayoutData" xmlns:layoutoptions="http://kieler.cs.cau.de/LayoutOptions" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmi:id="_qp_zgGw1Ed-cxZ72VtFdGQ" type="Kaom" measurementUnit="Pixel">
-  <styles xmi:type="notation:DiagramStyle" xmi:id="_qp_zgWw1Ed-cxZ72VtFdGQ"/>
-  <styles xmi:type="layoutoptions:LayoutOptionStyle" xmi:id="_vIRVoGw1Ed-cxZ72VtFdGQ">
-    <options xmi:type="klayoutdata:KStringOption" xmi:id="_vJUegGw1Ed-cxZ72VtFdGQ" key="de.cau.cs.kieler.layout.options.layoutHint" default="true" value="de.cau.cs.kieler.klodd.hierarchical"/>
-  </styles>
-  <element xmi:type="kaom:State" href="Stack.kaom#/"/>
-</notation:Diagram>
