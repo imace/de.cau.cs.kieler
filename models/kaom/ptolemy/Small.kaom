@@ -1,10 +1,21 @@
-<?xml version="1.0" encoding="ASCII"?>
-<kaom:Entity xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kaom="http://kieler.cs.cau.de/KAOM" xsi:schemaLocation="http://kieler.cs.cau.de/KAOM java://de.cau.cs.kieler.kaom.KaomPackage" name="">
-  <annotations xsi:type="kaom:StringAnnotation" name="_createdBy" value="8.0.beta"/>
-  <annotations xsi:type="kaom:StringAnnotation" name="DE Director"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<kaom:Entity xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kaom="http://kieler.cs.cau.de/KAOM" name="">
+  <annotations xsi:type="kaom:StringAnnotation" name="_createdBy" value="8.0.beta">
+    <annotations xsi:type="kaom:StringAnnotation" name="ptolemyClass" value="ptolemy.kernel.attributes.VersionAttribute"/>
+  </annotations>
   <childEntities name="Const">
-    <annotations xsi:type="kaom:StringAnnotation" name="_icon"/>
-    <annotations xsi:type="kaom:StringAnnotation" name="_location" value="{95, 125}"/>
+    <annotations xsi:type="kaom:StringAnnotation" name="_icon">
+      <annotations xsi:type="kaom:StringAnnotation" name="ptolemyClass" value="ptolemy.vergil.icon.BoxedValueIcon"/>
+      <annotations xsi:type="kaom:StringAnnotation" name="attributeName" value="value">
+        <annotations xsi:type="kaom:StringAnnotation" name="ptolemyClass" value="ptolemy.kernel.util.StringAttribute"/>
+      </annotations>
+      <annotations xsi:type="kaom:StringAnnotation" name="displayWidth" value="60">
+        <annotations xsi:type="kaom:StringAnnotation" name="ptolemyClass" value="ptolemy.data.expr.Parameter"/>
+      </annotations>
+    </annotations>
+    <annotations xsi:type="kaom:StringAnnotation" name="_location" value="{95, 125}">
+      <annotations xsi:type="kaom:StringAnnotation" name="ptolemyClass" value="ptolemy.kernel.util.Location"/>
+    </annotations>
     <childPorts name="trigger">
       <annotations xsi:type="kaom:BooleanAnnotation" name="isInput" value="true"/>
     </childPorts>
@@ -13,7 +24,9 @@
     </childPorts>
   </childEntities>
   <childEntities name="Ramp">
-    <annotations xsi:type="kaom:StringAnnotation" name="_location" value="[90.0, 200.0]"/>
+    <annotations xsi:type="kaom:StringAnnotation" name="_location" value="[90.0, 200.0]">
+      <annotations xsi:type="kaom:StringAnnotation" name="ptolemyClass" value="ptolemy.kernel.util.Location"/>
+    </annotations>
     <childPorts name="trigger">
       <annotations xsi:type="kaom:BooleanAnnotation" name="isInput" value="true"/>
     </childPorts>
@@ -25,9 +38,13 @@
     </childPorts>
   </childEntities>
   <childEntities name="Discard">
-    <annotations xsi:type="kaom:StringAnnotation" name="_hideName" value="true"/>
-    <annotations xsi:type="kaom:StringAnnotation" name="_location" value="{410, 205}"/>
-    <childPorts name="input" incomingLinks="//@childLinks.2 //@childLinks.5">
+    <annotations xsi:type="kaom:StringAnnotation" name="_hideName" value="true">
+      <annotations xsi:type="kaom:StringAnnotation" name="ptolemyClass" value="ptolemy.data.expr.SingletonParameter"/>
+    </annotations>
+    <annotations xsi:type="kaom:StringAnnotation" name="_location" value="{410, 205}">
+      <annotations xsi:type="kaom:StringAnnotation" name="ptolemyClass" value="ptolemy.kernel.util.Location"/>
+    </annotations>
+    <childPorts name="input" incomingLinks="//@childLinks.2">
       <annotations xsi:type="kaom:BooleanAnnotation" name="isInput" value="true"/>
     </childPorts>
     <childPorts name="input">
@@ -35,63 +52,68 @@
     </childPorts>
   </childEntities>
   <childEntities name="CompositeActor">
-    <annotations xsi:type="kaom:StringAnnotation" name="_location" value="{240, 160}"/>
+    <annotations xsi:type="kaom:StringAnnotation" name="_location" value="{240, 160}">
+      <annotations xsi:type="kaom:StringAnnotation" name="ptolemyClass" value="ptolemy.kernel.util.Location"/>
+    </annotations>
     <childEntities name="AddSubtract">
-      <annotations xsi:type="kaom:StringAnnotation" name="_location" value="{225, 195}"/>
-      <childPorts name="plus" incomingLinks="//@childEntities.3/@childLinks.3">
+      <annotations xsi:type="kaom:StringAnnotation" name="_location" value="{225, 195}">
+        <annotations xsi:type="kaom:StringAnnotation" name="ptolemyClass" value="ptolemy.kernel.util.Location"/>
+      </annotations>
+      <childPorts name="plus" incomingLinks="//@childEntities.3/@childLinks.0">
         <annotations xsi:type="kaom:BooleanAnnotation" name="isInput" value="true"/>
       </childPorts>
-      <childPorts name="minus" incomingLinks="//@childEntities.3/@childLinks.4">
+      <childPorts name="minus" incomingLinks="//@childEntities.3/@childLinks.2">
+        <annotations xsi:type="kaom:BooleanAnnotation" name="isInput" value="true"/>
+      </childPorts>
+      <childPorts name="output" outgoingLinks="//@childEntities.3/@childLinks.3">
+        <annotations xsi:type="kaom:BooleanAnnotation" name="isOutput" value="true"/>
+      </childPorts>
+    </childEntities>
+    <childEntities name="MultiplyDivide">
+      <annotations xsi:type="kaom:StringAnnotation" name="_location" value="{375, 230}">
+        <annotations xsi:type="kaom:StringAnnotation" name="ptolemyClass" value="ptolemy.kernel.util.Location"/>
+      </annotations>
+      <childPorts name="multiply" incomingLinks="//@childEntities.3/@childLinks.4 //@childEntities.3/@childLinks.3">
+        <annotations xsi:type="kaom:BooleanAnnotation" name="isInput" value="true"/>
+      </childPorts>
+      <childPorts name="divide">
         <annotations xsi:type="kaom:BooleanAnnotation" name="isInput" value="true"/>
       </childPorts>
       <childPorts name="output" outgoingLinks="//@childEntities.3/@childLinks.5">
         <annotations xsi:type="kaom:BooleanAnnotation" name="isOutput" value="true"/>
       </childPorts>
     </childEntities>
-    <childEntities name="MultiplyDivide">
-      <annotations xsi:type="kaom:StringAnnotation" name="_location" value="{375, 230}"/>
-      <childPorts name="multiply" incomingLinks="//@childEntities.3/@childLinks.6 //@childEntities.3/@childLinks.7">
-        <annotations xsi:type="kaom:BooleanAnnotation" name="isInput" value="true"/>
-      </childPorts>
-      <childPorts name="divide">
-        <annotations xsi:type="kaom:BooleanAnnotation" name="isInput" value="true"/>
-      </childPorts>
-      <childPorts name="output" outgoingLinks="//@childEntities.3/@childLinks.8">
-        <annotations xsi:type="kaom:BooleanAnnotation" name="isOutput" value="true"/>
-      </childPorts>
-    </childEntities>
-    <childLinks name="link" source="//@childEntities.3/@childPorts.0" target="//@childEntities.3/@childRelations.0"/>
-    <childLinks name="link" source="//@childEntities.3/@childPorts.1" target="//@childEntities.3/@childRelations.2"/>
-    <childLinks name="link" source="//@childEntities.3/@childRelations.3" target="//@childEntities.3/@childPorts.2"/>
-    <childLinks name="link" source="//@childEntities.3/@childRelations.0" target="//@childEntities.3/@childEntities.0/@childPorts.0"/>
-    <childLinks name="link" source="//@childEntities.3/@childRelations.2" target="//@childEntities.3/@childEntities.0/@childPorts.1"/>
-    <childLinks name="link" source="//@childEntities.3/@childEntities.0/@childPorts.2" target="//@childEntities.3/@childRelations.1"/>
-    <childLinks name="link" source="//@childEntities.3/@childRelations.1" target="//@childEntities.3/@childEntities.1/@childPorts.0"/>
-    <childLinks name="link" source="//@childEntities.3/@childRelations.2" target="//@childEntities.3/@childEntities.1/@childPorts.0"/>
-    <childLinks name="link" source="//@childEntities.3/@childEntities.1/@childPorts.2" target="//@childEntities.3/@childRelations.3"/>
-    <childPorts name="port" outgoingLinks="//@childEntities.3/@childLinks.0" incomingLinks="//@childLinks.3 //@childLinks.0">
+    <childLinks source="//@childEntities.3/@childPorts.0" target="//@childEntities.3/@childEntities.0/@childPorts.0"/>
+    <childLinks source="//@childEntities.3/@childPorts.1" target="//@childEntities.3/@childRelations.0"/>
+    <childLinks source="//@childEntities.3/@childRelations.0" target="//@childEntities.3/@childEntities.0/@childPorts.1"/>
+    <childLinks source="//@childEntities.3/@childEntities.0/@childPorts.2" target="//@childEntities.3/@childEntities.1/@childPorts.0"/>
+    <childLinks source="//@childEntities.3/@childRelations.0" target="//@childEntities.3/@childEntities.1/@childPorts.0"/>
+    <childLinks source="//@childEntities.3/@childEntities.1/@childPorts.2" target="//@childEntities.3/@childPorts.2"/>
+    <childPorts name="port" outgoingLinks="//@childEntities.3/@childLinks.0" incomingLinks="//@childLinks.0">
       <annotations xsi:type="kaom:BooleanAnnotation" name="isInput" value="true"/>
     </childPorts>
-    <childPorts name="port2" outgoingLinks="//@childEntities.3/@childLinks.1" incomingLinks="//@childLinks.4 //@childLinks.1">
+    <childPorts name="port2" outgoingLinks="//@childEntities.3/@childLinks.1" incomingLinks="//@childLinks.1">
       <annotations xsi:type="kaom:BooleanAnnotation" name="isInput" value="true"/>
     </childPorts>
-    <childPorts name="port3" outgoingLinks="//@childLinks.5" incomingLinks="//@childEntities.3/@childLinks.2">
+    <childPorts name="port3" outgoingLinks="//@childLinks.2" incomingLinks="//@childEntities.3/@childLinks.5">
       <annotations xsi:type="kaom:BooleanAnnotation" name="isOutput" value="true"/>
     </childPorts>
-    <childRelations name="relation" outgoingLinks="//@childEntities.3/@childLinks.3" incomingLinks="//@childEntities.3/@childLinks.0"/>
-    <childRelations name="relation3" outgoingLinks="//@childEntities.3/@childLinks.6" incomingLinks="//@childEntities.3/@childLinks.5"/>
-    <childRelations name="relation4" outgoingLinks="//@childEntities.3/@childLinks.4 //@childEntities.3/@childLinks.7" incomingLinks="//@childEntities.3/@childLinks.1">
-      <annotations xsi:type="kaom:StringAnnotation" name="width" value="-1"/>
+    <childRelations name="relation4" outgoingLinks="//@childEntities.3/@childLinks.2 //@childEntities.3/@childLinks.4" incomingLinks="//@childEntities.3/@childLinks.1">
+      <annotations xsi:type="kaom:StringAnnotation" name="width" value="-1">
+        <annotations xsi:type="kaom:StringAnnotation" name="ptolemyClass" value="ptolemy.data.expr.Parameter"/>
+      </annotations>
     </childRelations>
-    <childRelations name="relation2" outgoingLinks="//@childEntities.3/@childLinks.2" incomingLinks="//@childEntities.3/@childLinks.8"/>
   </childEntities>
-  <childLinks name="link" source="//@childEntities.0/@childPorts.1" target="//@childEntities.3/@childPorts.0"/>
-  <childLinks name="link" source="//@childEntities.1/@childPorts.2" target="//@childEntities.3/@childPorts.1"/>
-  <childLinks name="link" source="//@childRelations.2" target="//@childEntities.2/@childPorts.0"/>
-  <childLinks name="link" source="//@childRelations.1" target="//@childEntities.3/@childPorts.0"/>
-  <childLinks name="link" source="//@childRelations.0" target="//@childEntities.3/@childPorts.1"/>
-  <childLinks name="link" source="//@childEntities.3/@childPorts.2" target="//@childEntities.2/@childPorts.0"/>
-  <childRelations name="relation" outgoingLinks="//@childLinks.4"/>
-  <childRelations name="relation2" outgoingLinks="//@childLinks.3"/>
-  <childRelations name="relation3" outgoingLinks="//@childLinks.2"/>
+  <childEntities name="DE Director">
+    <annotations name="annotationNode"/>
+    <annotations xsi:type="kaom:StringAnnotation" name="DE Director">
+      <annotations xsi:type="kaom:StringAnnotation" name="ptolemyClass" value="ptolemy.domains.de.kernel.DEDirector"/>
+      <annotations xsi:type="kaom:StringAnnotation" name="_location" value="{70, 45}">
+        <annotations xsi:type="kaom:StringAnnotation" name="ptolemyClass" value="ptolemy.kernel.util.Location"/>
+      </annotations>
+    </annotations>
+  </childEntities>
+  <childLinks source="//@childEntities.0/@childPorts.1" target="//@childEntities.3/@childPorts.0"/>
+  <childLinks source="//@childEntities.1/@childPorts.2" target="//@childEntities.3/@childPorts.1"/>
+  <childLinks source="//@childEntities.3/@childPorts.2" target="//@childEntities.2/@childPorts.0"/>
 </kaom:Entity>
