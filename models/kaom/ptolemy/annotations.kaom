@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="ASCII"?>
+<kaom:Entity xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ann="http://kieler.cs.cau.de/annotations" xmlns:kaom="http://kieler.cs.cau.de/KAOM" xsi:schemaLocation="http://kieler.cs.cau.de/annotations java://de.cau.cs.kieler.annotations.AnnotationsPackage http://kieler.cs.cau.de/KAOM java://de.cau.cs.kieler.kaom.KaomPackage" name="dgd">
+  <annotations xsi:type="ann:StringAnnotation" name="_createdBy" value="8.0.beta">
+    <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.kernel.attributes.VersionAttribute"/>
+  </annotations>
+  <annotations xsi:type="ann:StringAnnotation" name="ModelID">
+    <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.vergil.kernel.attributes.IDAttribute"/>
+    <annotations xsi:type="ann:StringAnnotation" name="created" value="Jun 1, 2010 4:30:54 PM">
+      <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.kernel.util.StringAttribute"/>
+    </annotations>
+    <annotations xsi:type="ann:StringAnnotation" name="lastUpdated" value="Jun 1, 2010 4:30:54 PM">
+      <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.kernel.util.StringAttribute"/>
+    </annotations>
+    <annotations xsi:type="ann:StringAnnotation" name="author" value="haf">
+      <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.kernel.util.StringAttribute"/>
+    </annotations>
+    <annotations xsi:type="ann:StringAnnotation" name="_location" value="[180.0, 255.0]">
+      <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.kernel.util.Location"/>
+    </annotations>
+  </annotations>
+  <annotations xsi:type="ann:StringAnnotation" name="_hideName" value="false">
+    <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.data.expr.SingletonParameter"/>
+  </annotations>
+  <annotations xsi:type="ann:StringAnnotation" name="Parameter" value="5">
+    <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.data.expr.Parameter"/>
+    <annotations xsi:type="ann:StringAnnotation" name="_hideName">
+      <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.kernel.util.SingletonAttribute"/>
+    </annotations>
+    <annotations xsi:type="ann:StringAnnotation" name="_icon">
+      <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.vergil.icon.ValueIcon"/>
+      <annotations xsi:type="ann:StringAnnotation" name="_color" value="{0.0, 0.0, 1.0, 1.0}">
+        <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.actor.gui.ColorAttribute"/>
+      </annotations>
+    </annotations>
+    <annotations xsi:type="ann:StringAnnotation" name="_smallIconDescription">
+      <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.kernel.util.SingletonConfigurableAttribute"/>
+    </annotations>
+    <annotations xsi:type="ann:StringAnnotation" name="_editorFactory">
+      <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.vergil.toolbox.VisibleParameterEditorFactory"/>
+    </annotations>
+    <annotations xsi:type="ann:StringAnnotation" name="_location" value="{275, 35}">
+      <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.kernel.util.Location"/>
+    </annotations>
+  </annotations>
+  <annotations xsi:type="ann:StringAnnotation" name="StringParameter" value="tsd">
+    <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.data.expr.StringParameter"/>
+    <annotations xsi:type="ann:StringAnnotation" name="_hideName">
+      <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.kernel.util.SingletonAttribute"/>
+    </annotations>
+    <annotations xsi:type="ann:StringAnnotation" name="_icon">
+      <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.vergil.icon.ValueIcon"/>
+      <annotations xsi:type="ann:StringAnnotation" name="_color" value="{1.0, 0.0, 0.0, 1.0}">
+        <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.actor.gui.ColorAttribute"/>
+      </annotations>
+    </annotations>
+    <annotations xsi:type="ann:StringAnnotation" name="_smallIconDescription">
+      <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.kernel.util.SingletonConfigurableAttribute"/>
+    </annotations>
+    <annotations xsi:type="ann:StringAnnotation" name="_editorFactory">
+      <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.vergil.toolbox.VisibleParameterEditorFactory"/>
+    </annotations>
+    <annotations xsi:type="ann:StringAnnotation" name="_location" value="[275.0, 55.0]">
+      <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.kernel.util.Location"/>
+    </annotations>
+  </annotations>
+  <annotations xsi:type="ann:StringAnnotation" name="NameParameter" value="dgd">
+    <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.data.expr.NameParameter"/>
+    <annotations xsi:type="ann:StringAnnotation" name="_hideName">
+      <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.kernel.util.SingletonAttribute"/>
+    </annotations>
+    <annotations xsi:type="ann:StringAnnotation" name="_icon">
+      <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.vergil.icon.ValueIcon"/>
+      <annotations xsi:type="ann:StringAnnotation" name="_color" value="{0.9,0.5,0.1,1.0}">
+        <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.actor.gui.ColorAttribute"/>
+      </annotations>
+    </annotations>
+    <annotations xsi:type="ann:StringAnnotation" name="_smallIconDescription">
+      <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.kernel.util.SingletonConfigurableAttribute"/>
+    </annotations>
+    <annotations xsi:type="ann:StringAnnotation" name="_editorFactory">
+      <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.vergil.toolbox.VisibleParameterEditorFactory"/>
+    </annotations>
+    <annotations xsi:type="ann:StringAnnotation" name="_location" value="[275.0, 75.0]">
+      <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.kernel.util.Location"/>
+    </annotations>
+  </annotations>
+  <annotations xsi:type="ann:StringAnnotation" name="FileParameter" value="ddfdf">
+    <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.data.expr.FileParameter"/>
+    <annotations xsi:type="ann:StringAnnotation" name="_hideName">
+      <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.kernel.util.SingletonAttribute"/>
+    </annotations>
+    <annotations xsi:type="ann:StringAnnotation" name="_icon">
+      <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.vergil.icon.ValueIcon"/>
+      <annotations xsi:type="ann:StringAnnotation" name="_color" value="{0.0, 1.0, 0.0, 1.0}">
+        <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.actor.gui.ColorAttribute"/>
+      </annotations>
+    </annotations>
+    <annotations xsi:type="ann:StringAnnotation" name="_smallIconDescription">
+      <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.kernel.util.SingletonConfigurableAttribute"/>
+    </annotations>
+    <annotations xsi:type="ann:StringAnnotation" name="_editorFactory">
+      <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.vergil.toolbox.VisibleParameterEditorFactory"/>
+    </annotations>
+    <annotations xsi:type="ann:StringAnnotation" name="_location" value="[445.0, 35.0]">
+      <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.kernel.util.Location"/>
+    </annotations>
+  </annotations>
+  <annotations xsi:type="ann:StringAnnotation" name="ColorAttribute" value="">
+    <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.actor.gui.ColorAttribute"/>
+    <annotations xsi:type="ann:StringAnnotation" name="_hideName">
+      <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.kernel.util.SingletonAttribute"/>
+    </annotations>
+    <annotations xsi:type="ann:StringAnnotation" name="_icon">
+      <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.vergil.icon.ValueIcon"/>
+      <annotations xsi:type="ann:StringAnnotation" name="_color" value="{1.0, 0.0, 1.0, 1.0}">
+        <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.actor.gui.ColorAttribute"/>
+      </annotations>
+    </annotations>
+    <annotations xsi:type="ann:StringAnnotation" name="_smallIconDescription">
+      <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.kernel.util.SingletonConfigurableAttribute"/>
+    </annotations>
+    <annotations xsi:type="ann:StringAnnotation" name="_editorFactory">
+      <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.vergil.toolbox.VisibleParameterEditorFactory"/>
+    </annotations>
+    <annotations xsi:type="ann:StringAnnotation" name="_location" value="[445.0, 55.0]">
+      <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.kernel.util.Location"/>
+    </annotations>
+  </annotations>
+  <annotations xsi:type="ann:StringAnnotation" name="IntRangeParameter" value="50">
+    <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.actor.parameters.IntRangeParameter"/>
+    <annotations xsi:type="ann:StringAnnotation" name="_location" value="[385.0, 210.0]">
+      <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.kernel.util.Location"/>
+    </annotations>
+  </annotations>
+  <annotations xsi:type="ann:StringAnnotation" name="SharedParameter" value="">
+    <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.actor.parameters.SharedParameter"/>
+    <annotations xsi:type="ann:StringAnnotation" name="_hideName">
+      <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.kernel.util.SingletonAttribute"/>
+    </annotations>
+    <annotations xsi:type="ann:StringAnnotation" name="_icon">
+      <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.vergil.icon.ValueIcon"/>
+      <annotations xsi:type="ann:StringAnnotation" name="_color" value="{1.0, 0.0, 0.0, 1.0}">
+        <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.actor.gui.ColorAttribute"/>
+      </annotations>
+    </annotations>
+    <annotations xsi:type="ann:StringAnnotation" name="_smallIconDescription">
+      <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.kernel.util.SingletonConfigurableAttribute"/>
+    </annotations>
+    <annotations xsi:type="ann:StringAnnotation" name="_editorFactory">
+      <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.vergil.toolbox.VisibleParameterEditorFactory"/>
+    </annotations>
+    <annotations xsi:type="ann:StringAnnotation" name="_location" value="[445.0, 75.0]">
+      <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.kernel.util.Location"/>
+    </annotations>
+  </annotations>
+  <annotations xsi:type="ann:StringAnnotation" name="PortParameter" value="">
+    <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.actor.parameters.PortParameter"/>
+    <annotations xsi:type="ann:StringAnnotation" name="_hideName">
+      <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.kernel.util.SingletonAttribute"/>
+    </annotations>
+    <annotations xsi:type="ann:StringAnnotation" name="_icon">
+      <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.vergil.icon.ValueIcon"/>
+    </annotations>
+    <annotations xsi:type="ann:StringAnnotation" name="_iconDescription">
+      <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.kernel.util.SingletonConfigurableAttribute"/>
+    </annotations>
+    <annotations xsi:type="ann:StringAnnotation" name="_smallIconDescription">
+      <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.kernel.util.SingletonConfigurableAttribute"/>
+    </annotations>
+    <annotations xsi:type="ann:StringAnnotation" name="_editorFactory">
+      <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.vergil.toolbox.VisibleParameterEditorFactory"/>
+    </annotations>
+    <annotations xsi:type="ann:StringAnnotation" name="_location" value="[470.0, 110.0]">
+      <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.kernel.util.Location"/>
+    </annotations>
+  </annotations>
+  <annotations xsi:type="ann:StringAnnotation" name="FilePortParameter" value="">
+    <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.actor.parameters.FilePortParameter"/>
+    <annotations xsi:type="ann:StringAnnotation" name="_hideName">
+      <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.kernel.util.SingletonAttribute"/>
+    </annotations>
+    <annotations xsi:type="ann:StringAnnotation" name="_icon">
+      <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.vergil.icon.ValueIcon"/>
+    </annotations>
+    <annotations xsi:type="ann:StringAnnotation" name="_iconDescription">
+      <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.kernel.util.SingletonConfigurableAttribute"/>
+    </annotations>
+    <annotations xsi:type="ann:StringAnnotation" name="_smallIconDescription">
+      <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.kernel.util.SingletonConfigurableAttribute"/>
+    </annotations>
+    <annotations xsi:type="ann:StringAnnotation" name="_editorFactory">
+      <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.vergil.toolbox.VisibleParameterEditorFactory"/>
+    </annotations>
+    <annotations xsi:type="ann:StringAnnotation" name="_location" value="[470.0, 145.0]">
+      <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.kernel.util.Location"/>
+    </annotations>
+  </annotations>
+  <annotations xsi:type="ann:StringAnnotation" name="RequireVersion" value="8.0.beta">
+    <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.kernel.attributes.RequireVersion"/>
+    <annotations xsi:type="ann:StringAnnotation" name="_hideName">
+      <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.kernel.util.SingletonAttribute"/>
+    </annotations>
+    <annotations xsi:type="ann:StringAnnotation" name="_icon">
+      <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.vergil.icon.ValueIcon"/>
+    </annotations>
+    <annotations xsi:type="ann:StringAnnotation" name="_smallIconDescription">
+      <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.kernel.util.SingletonConfigurableAttribute"/>
+    </annotations>
+    <annotations xsi:type="ann:StringAnnotation" name="_location" value="[355.0, 250.0]">
+      <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.kernel.util.Location"/>
+    </annotations>
+  </annotations>
+  <annotations xsi:type="ann:StringAnnotation" name="ScopeExtendingAttribute">
+    <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.data.expr.ScopeExtendingAttribute"/>
+    <annotations xsi:type="ann:StringAnnotation" name="_iconDescription">
+      <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.kernel.util.SingletonConfigurableAttribute"/>
+    </annotations>
+    <annotations xsi:type="ann:StringAnnotation" name="_location" value="[65.0, 340.0]">
+      <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.kernel.util.Location"/>
+    </annotations>
+  </annotations>
+  <annotations xsi:type="ann:StringAnnotation" name="ParameterSet">
+    <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.actor.parameters.ParameterSet"/>
+    <annotations xsi:type="ann:StringAnnotation" name="_editorFactory">
+      <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.actor.gui.FileOrURLEditorFactory"/>
+    </annotations>
+    <annotations xsi:type="ann:StringAnnotation" name="_iconDescription">
+      <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.kernel.util.SingletonConfigurableAttribute"/>
+    </annotations>
+    <annotations xsi:type="ann:StringAnnotation" name="_location" value="[225.0, 340.0]">
+      <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.kernel.util.Location"/>
+    </annotations>
+  </annotations>
+  <annotations xsi:type="ann:StringAnnotation" name="Priority" value="0">
+    <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.actor.parameters.Priority"/>
+    <annotations xsi:type="ann:StringAnnotation" name="_hideName">
+      <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.kernel.util.SingletonAttribute"/>
+    </annotations>
+    <annotations xsi:type="ann:StringAnnotation" name="_icon">
+      <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.vergil.icon.ValueIcon"/>
+      <annotations xsi:type="ann:StringAnnotation" name="_color" value="{0.0, 0.0, 1.0, 1.0}">
+        <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.actor.gui.ColorAttribute"/>
+      </annotations>
+    </annotations>
+    <annotations xsi:type="ann:StringAnnotation" name="_smallIconDescription">
+      <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.kernel.util.SingletonConfigurableAttribute"/>
+    </annotations>
+    <annotations xsi:type="ann:StringAnnotation" name="_editorFactory">
+      <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.vergil.toolbox.VisibleParameterEditorFactory"/>
+    </annotations>
+    <annotations xsi:type="ann:StringAnnotation" name="_location" value="[450.0, 170.0]">
+      <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.kernel.util.Location"/>
+    </annotations>
+  </annotations>
+  <annotations xsi:type="ann:StringAnnotation" name="DocViewerAttribute">
+    <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.kernel.util.SingletonAttribute"/>
+    <annotations xsi:type="ann:StringAnnotation" name="DocAttribute">
+      <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.vergil.basic.DocAttribute"/>
+      <annotations xsi:type="ann:StringAnnotation" name="description" value="To edit the documentation that appears&#xA;when the user double clicks on this icon,&#xA;right click on the _background_ of the model and select&#xA;Documentation->Customize Documentation.&#xA;The description you are currently editing&#xA;will not appear when the user double clicks on the Documentation icon.">
+        <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.kernel.util.StringAttribute"/>
+      </annotations>
+    </annotations>
+    <annotations xsi:type="ann:StringAnnotation" name="viewer">
+      <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.vergil.basic.DocViewerFactory"/>
+    </annotations>
+    <annotations xsi:type="ann:StringAnnotation" name="_hideName">
+      <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.kernel.util.SingletonAttribute"/>
+    </annotations>
+    <annotations xsi:type="ann:StringAnnotation" name="_iconDescription">
+      <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.kernel.util.SingletonConfigurableAttribute"/>
+    </annotations>
+    <annotations xsi:type="ann:StringAnnotation" name="_location" value="[70.0, 165.0]">
+      <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.kernel.util.Location"/>
+    </annotations>
+  </annotations>
+  <annotations xsi:type="ann:StringAnnotation" name="LocalPreferences">
+    <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.actor.gui.PtolemyPreferences"/>
+    <annotations xsi:type="ann:StringAnnotation" name="_location" value="[200.0, 155.0]">
+      <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.kernel.util.Location"/>
+    </annotations>
+  </annotations>
+  <childEntities name="Discard">
+    <annotations xsi:type="ann:StringAnnotation" name="_hideName" value="true">
+      <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.data.expr.SingletonParameter"/>
+    </annotations>
+    <annotations xsi:type="ann:StringAnnotation" name="_location" value="[370.0, 135.0]">
+      <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.kernel.util.Location"/>
+    </annotations>
+    <childPorts name="input" incomingLinks="//@childLinks.0">
+      <annotations xsi:type="ann:BooleanAnnotation" name="isInput" value="true"/>
+    </childPorts>
+    <childPorts name="input">
+      <annotations xsi:type="ann:BooleanAnnotation" name="isInput" value="true"/>
+    </childPorts>
+  </childEntities>
+  <childEntities name="Const">
+    <annotations xsi:type="ann:StringAnnotation" name="_icon">
+      <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.vergil.icon.BoxedValueIcon"/>
+      <annotations xsi:type="ann:StringAnnotation" name="attributeName" value="value">
+        <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.kernel.util.StringAttribute"/>
+      </annotations>
+      <annotations xsi:type="ann:StringAnnotation" name="displayWidth" value="60">
+        <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.data.expr.Parameter"/>
+      </annotations>
+    </annotations>
+    <annotations xsi:type="ann:StringAnnotation" name="_location" value="{95, 120}">
+      <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.kernel.util.Location"/>
+    </annotations>
+    <childPorts name="trigger">
+      <annotations xsi:type="ann:BooleanAnnotation" name="isInput" value="true"/>
+    </childPorts>
+    <childPorts name="output" outgoingLinks="//@childLinks.1">
+      <annotations xsi:type="ann:BooleanAnnotation" name="isOutput" value="true"/>
+    </childPorts>
+  </childEntities>
+  <childEntities name="PN Director">
+    <annotations name="annotationNode"/>
+    <annotations xsi:type="ann:StringAnnotation" name="PN Director">
+      <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.domains.pn.kernel.PNDirector"/>
+      <annotations xsi:type="ann:StringAnnotation" name="_location" value="{70, 50}">
+        <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.kernel.util.Location"/>
+      </annotations>
+    </annotations>
+  </childEntities>
+  <childEntities name="TextAnnotation">
+    <annotations name="annotationNode"/>
+    <annotations xsi:type="ann:StringAnnotation" name="Annotation">
+      <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.vergil.kernel.attributes.TextAttribute"/>
+      <annotations xsi:type="ann:StringAnnotation" name="text" value="TextAnnotation">
+        <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.kernel.util.StringAttribute"/>
+      </annotations>
+      <annotations xsi:type="ann:StringAnnotation" name="_location" value="[30.0, 180.0]">
+        <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.kernel.util.Location"/>
+      </annotations>
+    </annotations>
+  </childEntities>
+  <childLinks source="//@childRelations.0" target="//@childEntities.0/@childPorts.0"/>
+  <childLinks source="//@childEntities.1/@childPorts.1" target="//@childRelations.1"/>
+  <childLinks source="//@childRelations.0" target="//@childRelations.1">
+    <annotations name="undirected"/>
+  </childLinks>
+  <childPorts name="PortParameter">
+    <annotations xsi:type="ann:BooleanAnnotation" name="isInput" value="true"/>
+  </childPorts>
+  <childPorts name="FilePortParameter">
+    <annotations xsi:type="ann:BooleanAnnotation" name="isInput" value="true"/>
+  </childPorts>
+  <childRelations name="relation2" outgoingLinks="//@childLinks.2 //@childLinks.0"/>
+  <childRelations name="relation3" incomingLinks="//@childLinks.2 //@childLinks.1"/>
+</kaom:Entity>
