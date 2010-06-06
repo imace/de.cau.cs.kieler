@@ -43,6 +43,14 @@
                showineditor="true">
          </file>
       </example>
+      <example
+            id="de.cau.cs.kieler.core.ui.examplewizard.example1"
+            name="name"
+            package="de.cau.cs.kieler.core.ui.examplewizard.example1"
+            pluginid="de.cau.cs.kieler.core.ui.examplewizard.example1"
+            pluginversion="de.cau.cs.kieler.core.ui.examplewizard.example1"
+            version="de.cau.cs.kieler.core.ui.examplewizard.example1">
+      </example>
    </extension>
    <extension
          point="org.eclipse.ui.actionSets">
