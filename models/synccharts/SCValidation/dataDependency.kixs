@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<synccharts:Region xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:synccharts="http://kieler.cs.cau.de/synccharts/0.2">
+  <innerStates id="_S0" label="S0" bodyText="">
+    <signals name="I" initialValue="" isInput="true"/>
+    <signals name="O" isOutput="true"/>
+    <signals name="S"/>
+    <regions id="R1">
+      <innerStates id="Init1" label="Init1" isInitial="true">
+        <regions id="R0">
+          <innerStates id="I1" label="I1" isInitial="true">
+            <outgoingTransitions label="I / S" priority="1" DUMMY_targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.0/@innerStates.1">
+              <effects xsi:type="synccharts:Emission" signal="S"/>
+              <trigger xsi:type="synccharts:SignalReference" signal="I"/>
+            </outgoingTransitions>
+          </innerStates>
+          <innerStates id="F1" label="F1"/>
+        </regions>
+      </innerStates>
+    </regions>
+    <regions id="R0">
+      <innerStates id="Init2" label="Init2" isInitial="true">
+        <regions id="R0">
+          <innerStates id="I2" label="I2" isInitial="true">
+            <outgoingTransitions label="S / O" priority="1" DUMMY_targetState="//@innerStates.0/@regions.1/@innerStates.0/@regions.0/@innerStates.1">
+              <effects xsi:type="synccharts:Emission" signal="O"/>
+              <trigger xsi:type="synccharts:SignalReference" signal="S"/>
+            </outgoingTransitions>
+          </innerStates>
+          <innerStates id="F2" label="F2"/>
+        </regions>
+      </innerStates>
+    </regions>
+  </innerStates>
+</synccharts:Region>

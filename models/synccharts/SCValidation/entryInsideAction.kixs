@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<synccharts:Region xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:synccharts="http://kieler.cs.cau.de/synccharts/0.2">
+  <innerStates id="SyncChart" label="SyncChart">
+    <signals name="s1" isInput="true"/>
+    <signals name="s2" isInput="true"/>
+    <signals name="s3" isInput="true"/>
+    <signals name="s4" isInput="true"/>
+    <signals name="O" isOutput="true"/>
+    <signals name="OEntry" isOutput="true"/>
+    <signals name="OInside" isOutput="true"/>
+    <regions>
+      <innerStates id="H" label="H">
+        <regions>
+          <innerStates id="I" label="I" isInitial="true">
+            <outgoingTransitions label="#  / O" isImmediate="true" priority="1" DUMMY_targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.0/@innerStates.1">
+              <effects xsi:type="synccharts:Emission" signal="O"/>
+            </outgoingTransitions>
+          </innerStates>
+          <innerStates id="F" label="F"/>
+        </regions>
+        <entryActions label="/ OEntry">
+          <effects xsi:type="synccharts:Emission" signal="OEntry"/>
+        </entryActions>
+        <innerActions label="/ OInside">
+          <effects xsi:type="synccharts:Emission" signal="OInside"/>
+        </innerActions>
+        <outgoingTransitions label="# s1" isImmediate="true" priority="1" type="STRONGABORT" DUMMY_targetState="//@innerStates.0/@regions.0/@innerStates.1">
+          <trigger xsi:type="synccharts:SignalReference" signal="s1"/>
+        </outgoingTransitions>
+        <outgoingTransitions label="s2" priority="2" type="STRONGABORT" DUMMY_targetState="//@innerStates.0/@regions.0/@innerStates.2">
+          <trigger xsi:type="synccharts:SignalReference" signal="s2"/>
+        </outgoingTransitions>
+        <outgoingTransitions label="# s3" isImmediate="true" priority="3" DUMMY_targetState="//@innerStates.0/@regions.0/@innerStates.3">
+          <trigger xsi:type="synccharts:SignalReference" signal="s3"/>
+        </outgoingTransitions>
+        <outgoingTransitions label="s4" priority="4" DUMMY_targetState="//@innerStates.0/@regions.0/@innerStates.4">
+          <trigger xsi:type="synccharts:SignalReference" signal="s4"/>
+        </outgoingTransitions>
+      </innerStates>
+      <innerStates id="S1" label="S1"/>
+      <innerStates id="S2" label="S2"/>
+      <innerStates id="S3" label="S3"/>
+      <innerStates id="S4" label="S4"/>
+      <innerStates id="Start" label="Start" isInitial="true">
+        <outgoingTransitions DUMMY_targetState="//@innerStates.0/@regions.0/@innerStates.0"/>
+      </innerStates>
+    </regions>
+  </innerStates>
+</synccharts:Region>

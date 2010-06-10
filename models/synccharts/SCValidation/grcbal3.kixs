@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<synccharts:Region xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:synccharts="http://kieler.cs.cau.de/synccharts/0.2">
+  <innerStates id="grcbal3" label="grcbal3" interfaceDeclaration="input A;&#xA;output B, C, D, E;&#xA;signal T_, haltTrap39_;">
+    <signals name="A" isInput="true"/>
+    <signals name="B" isOutput="true"/>
+    <signals name="C" isOutput="true"/>
+    <signals name="D" isOutput="true"/>
+    <signals name="E" isOutput="true"/>
+    <signals name="T_"/>
+    <signals name="haltTrap39_"/>
+    <regions id="R0">
+      <innerStates id="Initial" label="Initial" isInitial="true">
+        <regions id="R0">
+          <innerStates id="I0" label="I0" isInitial="true">
+            <outgoingTransitions label="#" isImmediate="true" priority="1" DUMMY_targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.0/@innerStates.1"/>
+          </innerStates>
+          <innerStates id="C01" label="C01" type="CONDITIONAL">
+            <outgoingTransitions label="# A / B" isImmediate="true" priority="1" DUMMY_targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.0/@innerStates.2">
+              <effects xsi:type="synccharts:Emission" signal="B"/>
+              <trigger xsi:type="synccharts:SignalReference" signal="A"/>
+            </outgoingTransitions>
+            <outgoingTransitions label="#" isImmediate="true" priority="2" DUMMY_targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.0/@innerStates.5"/>
+          </innerStates>
+          <innerStates id="C02" label="C02" type="CONDITIONAL">
+            <outgoingTransitions label="# C / D" isImmediate="true" priority="1" DUMMY_targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.0/@innerStates.3">
+              <effects xsi:type="synccharts:Emission" signal="D"/>
+              <trigger xsi:type="synccharts:SignalReference" signal="C"/>
+            </outgoingTransitions>
+            <outgoingTransitions label="#" isImmediate="true" priority="2" DUMMY_targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.0/@innerStates.3"/>
+          </innerStates>
+          <innerStates id="C03" label="C03" type="CONDITIONAL">
+            <outgoingTransitions label="# E / T_" isImmediate="true" priority="1" DUMMY_targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.0/@innerStates.4">
+              <effects xsi:type="synccharts:Emission" signal="T_"/>
+              <trigger xsi:type="synccharts:SignalReference" signal="E"/>
+            </outgoingTransitions>
+            <outgoingTransitions label="#" isImmediate="true" priority="2" DUMMY_targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.0/@innerStates.5"/>
+          </innerStates>
+          <innerStates id="S1" label="S1"/>
+          <innerStates id="S2" label="S2">
+            <outgoingTransitions label="/ B" priority="1" DUMMY_targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.0/@innerStates.6">
+              <effects xsi:type="synccharts:Emission" signal="B"/>
+            </outgoingTransitions>
+          </innerStates>
+          <innerStates id="F0" label="F0" isFinal="true"/>
+        </regions>
+        <regions id="R1">
+          <innerStates id="I1" label="I1" isInitial="true">
+            <outgoingTransitions label="#" isImmediate="true" priority="1" DUMMY_targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.1/@innerStates.1"/>
+          </innerStates>
+          <innerStates id="C1" label="C1" type="CONDITIONAL">
+            <outgoingTransitions label="# B / C" isImmediate="true" priority="1" DUMMY_targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.1/@innerStates.2">
+              <effects xsi:type="synccharts:Emission" signal="C"/>
+              <trigger xsi:type="synccharts:SignalReference" signal="B"/>
+            </outgoingTransitions>
+            <outgoingTransitions label="#" isImmediate="true" priority="2" DUMMY_targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.1/@innerStates.2"/>
+          </innerStates>
+          <innerStates id="F1" label="F1" isFinal="true"/>
+        </regions>
+        <regions id="R2">
+          <innerStates id="I2" label="I2" isInitial="true">
+            <outgoingTransitions label="#" isImmediate="true" priority="1" DUMMY_targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.2/@innerStates.1"/>
+          </innerStates>
+          <innerStates id="C2" label="C2" type="CONDITIONAL">
+            <outgoingTransitions label="# D / E" isImmediate="true" priority="1" DUMMY_targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.2/@innerStates.2">
+              <effects xsi:type="synccharts:Emission" signal="E"/>
+              <trigger xsi:type="synccharts:SignalReference" signal="D"/>
+            </outgoingTransitions>
+            <outgoingTransitions label="#" isImmediate="true" priority="2" DUMMY_targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.2/@innerStates.2"/>
+          </innerStates>
+          <innerStates id="F2" label="F2" isFinal="true"/>
+        </regions>
+        <outgoingTransitions label="# haltTrap39_" isImmediate="true" priority="1" DUMMY_targetState="//@innerStates.0/@regions.0/@innerStates.1">
+          <trigger xsi:type="synccharts:SignalReference" signal="haltTrap39_"/>
+        </outgoingTransitions>
+        <outgoingTransitions label="# T_" isImmediate="true" priority="2" DUMMY_targetState="//@innerStates.0/@regions.0/@innerStates.2">
+          <trigger xsi:type="synccharts:SignalReference" signal="T_"/>
+        </outgoingTransitions>
+        <outgoingTransitions priority="3" type="NORMALTERMINATION" DUMMY_targetState="//@innerStates.0/@regions.0/@innerStates.2"/>
+      </innerStates>
+      <innerStates id="S3" label="S3"/>
+      <innerStates id="S4" label="S4"/>
+    </regions>
+  </innerStates>
+</synccharts:Region>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<synccharts:Region xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:synccharts="http://kieler.cs.cau.de/synccharts/0.2">
+  <innerStates id="filteredsr" label="filteredsr" interfaceDeclaration="input S, R;">
+    <signals name="S" isInput="true"/>
+    <signals name="R" isInput="true"/>
+    <signals name="ON" isOutput="true"/>
+    <signals name="OFF" isOutput="true"/>
+    <regions id="R0">
+      <innerStates id="off" label="off" isInitial="true" incomingTransitions="//@innerStates.0/@regions.0/@innerStates.1/@outgoingTransitions.0">
+        <innerActions label="/ OFF">
+          <effects xsi:type="synccharts:Emission" signal="OFF"/>
+        </innerActions>
+        <outgoingTransitions label="S and pre (S)" priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.1">
+          <trigger xsi:type="synccharts:OperatorExpression" operator="and">
+            <subExpressions xsi:type="synccharts:SignalReference" signal="S"/>
+            <subExpressions xsi:type="synccharts:OperatorExpression" operator="pre">
+              <subExpressions xsi:type="synccharts:SignalReference" signal="S"/>
+            </subExpressions>
+          </trigger>
+        </outgoingTransitions>
+      </innerStates>
+      <innerStates id="on" label="on" incomingTransitions="//@innerStates.0/@regions.0/@innerStates.0/@outgoingTransitions.0">
+        <innerActions label="/ ON">
+          <effects xsi:type="synccharts:Emission" signal="ON"/>
+        </innerActions>
+        <outgoingTransitions label="R and pre (R)" priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.0">
+          <trigger xsi:type="synccharts:OperatorExpression" operator="and">
+            <subExpressions xsi:type="synccharts:SignalReference" signal="R"/>
+            <subExpressions xsi:type="synccharts:OperatorExpression" operator="pre">
+              <subExpressions xsi:type="synccharts:SignalReference" signal="R"/>
+            </subExpressions>
+          </trigger>
+        </outgoingTransitions>
+      </innerStates>
+    </regions>
+  </innerStates>
+</synccharts:Region>
