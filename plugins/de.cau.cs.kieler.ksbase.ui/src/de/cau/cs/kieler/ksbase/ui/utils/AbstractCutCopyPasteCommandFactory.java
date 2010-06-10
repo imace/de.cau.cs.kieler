@@ -11,7 +11,7 @@
  * This code is provided under the terms of the Eclipse Public License (EPL).
  * See the file epl-v10.html for the license text.
  */
-package de.cau.cs.kieler.synccharts.diagram.custom.commands;
+package de.cau.cs.kieler.ksbase.ui.utils;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -48,39 +48,28 @@ import org.osgi.framework.Bundle;
 import de.cau.cs.kieler.core.model.transformation.ITransformationFramework;
 import de.cau.cs.kieler.core.model.transformation.xtend.XtendTransformationFramework;
 import de.cau.cs.kieler.core.model.util.ModelingUtil;
-import de.cau.cs.kieler.kiml.ui.layout.DiagramLayoutManager;
+import de.cau.cs.kieler.core.ui.handler.ICutCopyPasteCommandFactory;
 import de.cau.cs.kieler.ksbase.ui.handler.TransformationCommand;
-import de.cau.cs.kieler.synccharts.Region;
-import de.cau.cs.kieler.synccharts.State;
-import de.cau.cs.kieler.synccharts.Transition;
-import de.cau.cs.kieler.synccharts.diagram.custom.SyncchartsDiagramCustomPlugin;
 
 /**
  * Creates the cut, copy and paste commands from ksbase.
  * 
  * @author soh
  */
-public final class CommandFactory {
-
-    /** The transformation file. */
-    private static final String FILE = "/transformations/feature.ext";
-
-    /** The base package of the underlying meta model. */
-    private static final String MODEL = "de.cau.cs.kieler.synccharts.SyncchartsPackage";
+public abstract class AbstractCutCopyPasteCommandFactory implements
+        ICutCopyPasteCommandFactory {
 
     /** The transformation FRAMEWORK. */
     private static final ITransformationFramework FRAMEWORK = new XtendTransformationFramework();
 
     /** The path of the transformation file. */
-    private static String filePath = null;
+    private String filePath = null;
 
     /** The last selection. */
-    private static List<EObject> lastSelection;
+    private List<EObject> lastSelection;
 
-    /** Constructor. */
-    private CommandFactory() {
-
-    }
+    /** The instance of the job. */
+    private static WorkerJob jobInstance = null;
 
     /**
      * Build a new copy command.
@@ -91,7 +80,7 @@ public final class CommandFactory {
      *            the selection
      * @return the command
      */
-    public static ICommand buildCopyCommand(final IDiagramWorkbenchPart part,
+    public ICommand buildCopyCommand(final IDiagramWorkbenchPart part,
             final List<EObject> selection) {
         return buildCommand(part, selection, "Copy");
     }
@@ -105,7 +94,7 @@ public final class CommandFactory {
      *            the selection
      * @return the command
      */
-    public static ICommand buildCutCommand(final IDiagramWorkbenchPart part,
+    public ICommand buildCutCommand(final IDiagramWorkbenchPart part,
             final List<EObject> selection) {
         return buildCommand(part, selection, "Cut");
     }
@@ -119,10 +108,24 @@ public final class CommandFactory {
      *            the selection
      * @return the command
      */
-    public static ICommand buildPasteCommand(final IDiagramWorkbenchPart part,
+    public ICommand buildPasteCommand(final IDiagramWorkbenchPart part,
             final List<EObject> selection) {
         return buildCommand(part, selection, "Paste");
     }
+
+    /**
+     * Getter for the transformation file. e.g.: /transformations/feature.ext
+     * 
+     * @return the file
+     */
+    protected abstract String getFile();
+
+    /**
+     * Getter for the bundle of the plugin where the file is located.
+     * 
+     * @return the bundle
+     */
+    protected abstract Bundle getBundle();
 
     /**
      * Build a command.
@@ -135,16 +138,16 @@ public final class CommandFactory {
      *            the label and name of the transformation
      * @return the command
      */
-    private static ICommand buildCommand(final IDiagramWorkbenchPart part,
+    private ICommand buildCommand(final IDiagramWorkbenchPart part,
             final List<EObject> selection, final String label) {
         lastSelection = selection;
 
-        Bundle bundle = SyncchartsDiagramCustomPlugin.instance.getBundle();
+        Bundle bundle = getBundle();
         InputStream inStream = null;
         StringBuffer contentBuffer = new StringBuffer();
         try {
             if (bundle != null) {
-                URL urlPath = bundle.getEntry(FILE);
+                URL urlPath = bundle.getEntry(getFile());
                 // Parse transformation file to read transformations and
                 // parameters now:
                 if (urlPath != null) {
@@ -194,74 +197,62 @@ public final class CommandFactory {
         }
         TransformationCommandWithAutoLayout result = null;
         if (part instanceof DiagramEditor) {
-            if (WorkerJob.instance != null) {
-                WorkerJob.instance.cancel();
+            if (jobInstance != null) {
+                jobInstance.cancel();
             }
             DiagramEditor editor = (DiagramEditor) part;
             TransactionalEditingDomain transDomain = editor.getEditingDomain();
 
             result = new TransformationCommandWithAutoLayout(transDomain, label);
 
-            if (selection.size() > 1) {
-
-                boolean hasStateList = false;
-                boolean hasRegionList = false;
-                boolean hasTransitionList = false;
-                List<String> pureMapping = new LinkedList<String>();
-
-                for (int i = 0; i < selection.size(); i++) {
-                    EObject obj = selection.get(i);
-                    if (obj instanceof State) {
-                        pureMapping.add("State");
-                        hasStateList = true;
-                    } else if (obj instanceof Region) {
-                        pureMapping.add("Region");
-                        hasRegionList = true;
-                    } else if (obj instanceof Transition) {
-                        pureMapping.add("Transition");
-                        hasTransitionList = true;
-                    }
-                }
-
-                List<String[]> possibleMappings = new LinkedList<String[]>();
-                if (hasStateList) {
-                    String[] array = { "List[State]" };
-                    possibleMappings.add(array);
-                } else if (hasRegionList) {
-                    String[] array = { "List[Region]" };
-                    possibleMappings.add(array);
-                } else if (hasTransitionList) {
-                    String[] array = { "List[Transition]" };
-                    possibleMappings.add(array);
-                }
-
-                if (label.equals("Paste")) {
-                    possibleMappings.add(pureMapping
-                            .toArray(new String[pureMapping.size()]));
-                } else {
-                    String[] array = { "List[Object]" };
-                    possibleMappings.add(array);
-                }
-
-                for (String[] s : possibleMappings) {
-                    List<Object> mappedSelection = FRAMEWORK
-                            .createParameterMapping(selection, s);
-                    if (mappedSelection != null
-                            && result.initialize(editor, mappedSelection, label
-                                    .toLowerCase(), filePath, MODEL, FRAMEWORK)) {
-                        break;
-                    }
-                }
-            } else {
-                List<Object> list = new LinkedList<Object>();
-                list.add(selection.get(0));
-                result.initialize(editor, list, label.toLowerCase(), filePath,
-                        MODEL, FRAMEWORK);
-            }
+            initializeTransformationCommand(result, editor, selection, label,
+                    filePath, getModel(), FRAMEWORK);
         }
-
         return result;
     }
+
+    /**
+     * Initialize the transformation command.
+     * 
+     * The implementing method is responsible for calling result.initialize()
+     * 
+     * @param result
+     *            the command
+     * @param editor
+     *            the editor
+     * @param selection
+     *            the current selection
+     * @param label
+     *            the command label
+     * @param filePathParam
+     *            the file path
+     * @param modelParam
+     *            the model
+     * @param framework
+     *            the framework
+     */
+    protected abstract void initializeTransformationCommand(
+            final TransformationCommand result, final DiagramEditor editor,
+            final List<EObject> selection, final String label,
+            final String filePathParam, final String modelParam,
+            final ITransformationFramework framework);
+
+    /**
+     * Get the path to the model package. e.g.:
+     * de.cau.cs.kieler.synccharts.SyncchartsPackage
+     * 
+     * @return the model package
+     */
+    protected abstract String getModel();
+
+    /**
+     * Perform actions after the operation has finished.
+     * 
+     * @param monitor
+     *            a progress monitor
+     */
+    protected abstract void performPostOperationActions(
+            final IProgressMonitor monitor);
 
     /**
      * This transformation command performs an auto layout some time after the
@@ -269,7 +260,7 @@ public final class CommandFactory {
      * 
      * @author soh
      */
-    private static class TransformationCommandWithAutoLayout extends
+    private class TransformationCommandWithAutoLayout extends
             TransformationCommand {
 
         /** The label. */
@@ -309,19 +300,16 @@ public final class CommandFactory {
      * 
      * @author soh
      */
-    private static class WorkerJob extends Job {
-
-        /** The instance of the job. */
-        static WorkerJob instance = null;
+    private class WorkerJob extends Job {
 
         /**
-         * Creates a new CommandFactory.java.
+         * Creates a new AbstractCutCopyPasteCommandFactory.java.
          * 
          * @param name
          */
         public WorkerJob() {
             super("Autolayout");
-            instance = this;
+            jobInstance = this;
         }
 
         /**
@@ -329,21 +317,7 @@ public final class CommandFactory {
          */
         @Override
         protected IStatus run(final IProgressMonitor monitor) {
-            SyncchartsDiagramCustomPlugin.instance.getDisplay().syncExec(
-                    new Runnable() {
-
-                        public void run() {
-                            IEditorPart editorPart = SyncchartsDiagramCustomPlugin.instance
-                                    .getActiveEditorPart();
-                            if (editorPart != null) {
-                                refreshEditPolicies(editorPart);
-
-                                DiagramLayoutManager.layout(editorPart, null,
-                                        true, false);
-                            }
-                        }
-
-                    });
+            performPostOperationActions(monitor);
             return new Status(IStatus.OK,
                     "de.cau.cs.kieler.synccharts.diagram.custom", "Layout done");
         }
@@ -355,7 +329,7 @@ public final class CommandFactory {
      * @param editorPart
      *            the editor
      */
-    private static void refreshEditPolicies(final IEditorPart editorPart) {
+    protected void refreshEditPolicies(final IEditorPart editorPart) {
         if (editorPart instanceof IDiagramWorkbenchPart) {
             IDiagramWorkbenchPart part = (IDiagramWorkbenchPart) editorPart;
             if (lastSelection != null) {
@@ -377,7 +351,7 @@ public final class CommandFactory {
      * @param sel
      *            the element
      */
-    private static void refreshPolicy(final EObject sel) {
+    private void refreshPolicy(final EObject sel) {
         EditPart editPart = ModelingUtil.getEditPart(sel);
         // get all registered edit parts in order to get transitions as well
         Collection<?> parts = editPart.getViewer().getEditPartRegistry()
