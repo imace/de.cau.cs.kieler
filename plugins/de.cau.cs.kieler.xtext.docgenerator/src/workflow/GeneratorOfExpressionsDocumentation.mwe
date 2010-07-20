@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <workflow>
 
-	<property name="model" value="ActionLabel.xtext" />
+	<property name="model" value="Expressions.xtext" />
 	<property name="modelPath" value="de.cau.cs.kieler.xtext.docgenerator/src/" />
 	<property name="src-gen" value="src-gen" />
 	<property name="profiling-gen" value="profiling" />

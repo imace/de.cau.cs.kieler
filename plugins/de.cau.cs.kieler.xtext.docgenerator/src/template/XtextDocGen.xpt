@@ -71,7 +71,7 @@
 «ENDDEFINE»
 
 «DEFINE alternative FOR CrossReference»
-	[«this.type.classifier.name»]
+	[«this.type.classifier.name»]«this.cardinality»
 «ENDDEFINE»
 
 «DEFINE alternative FOR Alternatives»
@@ -81,13 +81,13 @@
 «ENDDEFINE»
 
 «DEFINE alternative FOR CharacterRange»
- [«EXPAND alternative FOR this.left»-«EXPAND alternative FOR this.right»] 
+ [«EXPAND alternative FOR this.left»-«EXPAND alternative FOR this.right»]«this.cardinality»
 «ENDDEFINE»
 
 «DEFINE alternative FOR Action»
 «ENDDEFINE»
 
 «DEFINE alternative FOR EnumLiteralDeclaration»
-	«EXPAND alternative FOR this.literal»
+	«EXPAND alternative FOR this.literal»«this.cardinality»
 «ENDDEFINE»
 

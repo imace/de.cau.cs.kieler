@@ -1,0 +1,1367 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"><html>
+<head>
+
+<style type="text/css">
+
+body {
+	font-family:"Lucida Grande",arial,verdana,helvetica,sans-serif;
+	font-size:10pt;
+	font-size-adjust:none;
+	font-style:normal;
+	font-variant:normal;
+	font-weight:normal;
+	text-align:left;
+	color: #333333;
+}
+
+a {
+	color: #333333;
+	text-decoration: underline;
+}
+
+a:hover {
+	background-color: black;
+	color: white;
+	text-decoration: none;
+}
+
+* {
+	margin:0;
+	padding:0;
+}
+
+
+thead tr {
+	background:#91BAE5;
+	font-weight:bold;
+	line-height:10px;
+}
+
+
+
+thead th {
+	background:#000000 none repeat scroll 0 0;
+	border-right:1px solid #333333;
+	color:#FFFFFF;
+	font-size:10px;
+	padding:9px 6px;
+	text-align:center;
+}
+
+tr.emphasize {
+	font-weight:bold;
+	background-color: #F0F0F0
+}
+
+
+tbody tr:hover {
+	background: #91BAE5;
+}
+
+tr.separator {
+	background: #C0C0C0;
+	font-size: 2px;
+}
+
+tr.separator td {
+	padding:1px;
+}	
+
+tr.separator:hover {
+	background: #C0C0C0;
+}
+
+
+tbody tr:hover td {
+	border-right:1px solid #607B97;
+}
+
+tbody td {
+	border-right:1px solid #C0C0C0;
+	border-bottom:1px solid #C0C0C0;
+	padding:6px;
+	vertical-align:baseline;
+}
+
+td.number {
+	text-align:right;
+}
+
+td.call {
+	padding-left: 0.1em;
+	padding-right: 0.1em;
+	text-align: center;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+table {
+	margin-bottom: 1em;
+}	
+
+</style>
+</head>
+<body>
+<h1>Profiling Results</h1>
+<p>
+This profiler result is an adaption of the
+<a href="http://www.cs.utah.edu/dept/old/texinfo/as/gprof.html">GNU GProf format</a>
+and has been produced with the <a href="http://help.eclipse.org/galileo/topic/org.eclipse.xpand.doc/help/ch01.html">Xpand/Xtend profiler</a>.
+Please note that the measured results depend on the <a href="#runtime_configuration">runtime configuration</a> 
+the templates, checks, and/or expressions have been executed on.
+</p>
+<h2>Flat Profile</h2>
+<p>
+The following table shows the totals of different measured values.
+<a href="http://www.cs.utah.edu/dept/old/texinfo/as/gprof.html#SEC5">Use these numbers</a> to get a first impression of the execution times. 
+</p>
+
+
+
+<table width="100%" cellspacing="0" cellpadding="0">
+<thead>
+<tr>
+	<th>% time</th>
+	<th><abbr title="Cumulative seconds">cum.<br/>sec.</abbr></th>
+	<th><abbr title="self seconds">self sec.</abbr></th>
+	<th>calls</th>
+	<th>self ms/call</th>
+	<th>total ms/call</th>
+	<th>name</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td class="number">
+ 52.83
+</td>
+<td class="number">
+     0.29
+</td>
+<td class="number">
+    0.29
+</td>
+
+<td colspan="3" />
+<td>
+<a name="flat_XPD_template__XtextDocGen__main_FOR_Grammar" href="#callgraph_XPD_template__XtextDocGen__main_FOR_Grammar" title="Show in call graph table">XPD template::XtextDocGen::main FOR Grammar</a>
+</td>
+
+</tr>
+<tr>
+<td class="number">
+ 17.39
+</td>
+<td class="number">
+     0.39
+</td>
+<td class="number">
+    0.10
+</td>
+
+
+<td class="number">
+      34
+</td>
+<td class="number">
+    2.82
+</td>
+<td class="number">
+    2.82
+</td>
+<td>
+<a name="flat_XPD_template__XtextDocGen__alternative_FOR_Group__cycle___" href="#callgraph_XPD_template__XtextDocGen__alternative_FOR_Group__cycle___" title="Show in call graph table">XPD template::XtextDocGen::alternative FOR Group</a>
+</td>
+
+</tr>
+<tr>
+<td class="number">
+  8.05
+</td>
+<td class="number">
+     0.43
+</td>
+<td class="number">
+    0.04
+</td>
+
+
+<td class="number">
+      34
+</td>
+<td class="number">
+    1.31
+</td>
+<td class="number">
+    1.45
+</td>
+<td>
+<a name="flat_XPD_template__XtextDocGen__alternatives_FOR_List_emf__EObject___cycle___" href="#callgraph_XPD_template__XtextDocGen__alternatives_FOR_List_emf__EObject___cycle___" title="Show in call graph table">XPD template::XtextDocGen::alternatives FOR List[emf::EObject]</a>
+</td>
+
+</tr>
+<tr>
+<td class="number">
+  6.50
+</td>
+<td class="number">
+     0.47
+</td>
+<td class="number">
+    0.04
+</td>
+
+
+<td class="number">
+      43
+</td>
+<td class="number">
+    0.83
+</td>
+<td class="number">
+    6.05
+</td>
+<td>
+<a name="flat_XPD_template__XtextDocGen__documentRule_FOR_AbstractRule" href="#callgraph_XPD_template__XtextDocGen__documentRule_FOR_AbstractRule" title="Show in call graph table">XPD template::XtextDocGen::documentRule FOR AbstractRule</a>
+</td>
+
+</tr>
+<tr>
+<td class="number">
+  5.86
+</td>
+<td class="number">
+     0.50
+</td>
+<td class="number">
+    0.03
+</td>
+
+
+<td class="number">
+      18
+</td>
+<td class="number">
+    1.80
+</td>
+<td class="number">
+    3.18
+</td>
+<td>
+<a name="flat_XPD_template__XtextDocGen__alternative_FOR_Alternatives__cycle___" href="#callgraph_XPD_template__XtextDocGen__alternative_FOR_Alternatives__cycle___" title="Show in call graph table">XPD template::XtextDocGen::alternative FOR Alternatives</a>
+</td>
+
+</tr>
+<tr>
+<td class="number">
+  3.95
+</td>
+<td class="number">
+     0.52
+</td>
+<td class="number">
+    0.02
+</td>
+
+
+<td class="number">
+      47
+</td>
+<td class="number">
+    0.46
+</td>
+<td class="number">
+    0.53
+</td>
+<td>
+<a name="flat_XPD_template__XtextDocGen__alternative_FOR_EnumLiteralDeclaration" href="#callgraph_XPD_template__XtextDocGen__alternative_FOR_EnumLiteralDeclaration" title="Show in call graph table">XPD template::XtextDocGen::alternative FOR EnumLiteralDeclaration</a>
+</td>
+
+</tr>
+<tr>
+<td class="number">
+  2.25
+</td>
+<td class="number">
+     0.53
+</td>
+<td class="number">
+    0.01
+</td>
+
+
+<td class="number">
+      31
+</td>
+<td class="number">
+    0.40
+</td>
+<td class="number">
+    0.56
+</td>
+<td>
+<a name="flat_XPD_template__XtextDocGen__alternative_FOR_Assignment__cycle___" href="#callgraph_XPD_template__XtextDocGen__alternative_FOR_Assignment__cycle___" title="Show in call graph table">XPD template::XtextDocGen::alternative FOR Assignment</a>
+</td>
+
+</tr>
+<tr>
+<td class="number">
+  1.27
+</td>
+<td class="number">
+     0.54
+</td>
+<td class="number">
+    0.01
+</td>
+
+
+<td class="number">
+      69
+</td>
+<td class="number">
+    0.10
+</td>
+<td class="number">
+    0.10
+</td>
+<td>
+<a name="flat_XPD_template__XtextDocGen__alternative_FOR_RuleCall" href="#callgraph_XPD_template__XtextDocGen__alternative_FOR_RuleCall" title="Show in call graph table">XPD template::XtextDocGen::alternative FOR RuleCall</a>
+</td>
+
+</tr>
+<tr>
+<td class="number">
+  1.00
+</td>
+<td class="number">
+     0.55
+</td>
+<td class="number">
+    0.01
+</td>
+
+
+<td class="number">
+      79
+</td>
+<td class="number">
+    0.07
+</td>
+<td class="number">
+    0.07
+</td>
+<td>
+<a name="flat_XPD_template__XtextDocGen__alternative_FOR_Keyword" href="#callgraph_XPD_template__XtextDocGen__alternative_FOR_Keyword" title="Show in call graph table">XPD template::XtextDocGen::alternative FOR Keyword</a>
+</td>
+
+</tr>
+<tr>
+<td class="number">
+  0.36
+</td>
+<td class="number">
+     0.55
+</td>
+<td class="number">
+    0.00
+</td>
+
+
+<td class="number">
+       2
+</td>
+<td class="number">
+    1.01
+</td>
+<td class="number">
+    1.01
+</td>
+<td>
+<a name="flat_XPD_template__XtextDocGen__alternative_FOR_CrossReference" href="#callgraph_XPD_template__XtextDocGen__alternative_FOR_CrossReference" title="Show in call graph table">XPD template::XtextDocGen::alternative FOR CrossReference</a>
+</td>
+
+</tr>
+<tr>
+<td class="number">
+  0.23
+</td>
+<td class="number">
+     0.55
+</td>
+<td class="number">
+    0.00
+</td>
+
+
+<td class="number">
+      27
+</td>
+<td class="number">
+    0.05
+</td>
+<td class="number">
+    0.05
+</td>
+<td>
+<a name="flat_XPD_template__XtextDocGen__title_FOR_AbstractRule" href="#callgraph_XPD_template__XtextDocGen__title_FOR_AbstractRule" title="Show in call graph table">XPD template::XtextDocGen::title FOR AbstractRule</a>
+</td>
+
+</tr>
+<tr>
+<td class="number">
+  0.17
+</td>
+<td class="number">
+     0.55
+</td>
+<td class="number">
+    0.00
+</td>
+
+
+<td class="number">
+       1
+</td>
+<td class="number">
+    0.93
+</td>
+<td class="number">
+    1.05
+</td>
+<td>
+<a name="flat_XPD_template__XtextDocGen__alternative_FOR_CharacterRange" href="#callgraph_XPD_template__XtextDocGen__alternative_FOR_CharacterRange" title="Show in call graph table">XPD template::XtextDocGen::alternative FOR CharacterRange</a>
+</td>
+
+</tr>
+<tr>
+<td class="number">
+  0.10
+</td>
+<td class="number">
+     0.55
+</td>
+<td class="number">
+    0.00
+</td>
+
+
+<td class="number">
+      13
+</td>
+<td class="number">
+    0.04
+</td>
+<td class="number">
+    0.04
+</td>
+<td>
+<a name="flat_XPD_template__XtextDocGen__title_FOR_EnumRule" href="#callgraph_XPD_template__XtextDocGen__title_FOR_EnumRule" title="Show in call graph table">XPD template::XtextDocGen::title FOR EnumRule</a>
+</td>
+
+</tr>
+<tr>
+<td class="number">
+  0.02
+</td>
+<td class="number">
+     0.55
+</td>
+<td class="number">
+    0.00
+</td>
+
+
+<td class="number">
+       3
+</td>
+<td class="number">
+    0.04
+</td>
+<td class="number">
+    0.04
+</td>
+<td>
+<a name="flat_XPD_template__XtextDocGen__title_FOR_TerminalRule" href="#callgraph_XPD_template__XtextDocGen__title_FOR_TerminalRule" title="Show in call graph table">XPD template::XtextDocGen::title FOR TerminalRule</a>
+</td>
+
+</tr>
+<tr>
+<td class="number">
+  0.01
+</td>
+<td class="number">
+     0.55
+</td>
+<td class="number">
+    0.00
+</td>
+
+
+<td class="number">
+       6
+</td>
+<td class="number">
+    0.01
+</td>
+<td class="number">
+    0.01
+</td>
+<td>
+<a name="flat_XPD_template__XtextDocGen__alternative_FOR_Action" href="#callgraph_XPD_template__XtextDocGen__alternative_FOR_Action" title="Show in call graph table">XPD template::XtextDocGen::alternative FOR Action</a>
+</td>
+
+</tr>
+
+</tbody>
+</table>
+
+
+
+<h2>Call Graph</h2>
+<p>
+The following table represents the 
+<a href="http://www.cs.utah.edu/dept/old/texinfo/as/gprof.html#SEC6">
+call graph table similar to GProf</a>.
+The call graph shows how much time was spent in each function and its children.
+From this information, you can find functions that, 
+while they themselves may not have used much time, 
+called other functions that did use unusual amounts of time.    
+</p>
+<table width="100%" cellspacing="0" cellpadding="0">
+<thead>
+<tr>
+	<th>#</th>
+	<th>% time</th>
+	<th><abbr title="Seconds spend in this function iteself">self</abbr></th>
+	<th><abbr title="Seconds spend in calls from this function">children</abbr></th>
+	<th colspan="3">called</th>
+	<th colspan="2">name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="7"/>
+<td>&lt;spontaneous&gt;</td>
+</tr>
+<tr class="emphasize">
+<td>[1]   </td>
+<td class="number">100.0</td>
+<td class="number">   0.29</td>
+<td class="number">   0.26</td>
+<td colspan="3"/>
+
+<td><a name="callgraph_XPD_template__XtextDocGen__main_FOR_Grammar" href="#flat_XPD_template__XtextDocGen__main_FOR_Grammar" title="Show in flat profile table">
+	XPD template::XtextDocGen::main FOR Grammar [1]
+</a></td>
+
+</tr>
+<tr>
+<td colspan="2"/>
+<td class="number">   0.04</td>
+<td class="number">   0.22</td>
+<td class="number">     43</td><td class="call">/</td><td>     43</td>
+<td><a href="#callgraph_XPD_template__XtextDocGen__documentRule_FOR_AbstractRule" title="Show in call graph table">
+	XPD template::XtextDocGen::documentRule FOR AbstractRule
+</a></td>
+
+</tr>
+<tr class="separator"><td colspan="8"/></tr>
+</tbody>
+<tbody>
+<tr>
+<td colspan="2"/>
+<td class="number">   0.04</td>
+<td class="number">   0.22</td>
+<td class="number">     43</td><td class="call">/</td><td>     43</td>
+<td><a href="#callgraph_XPD_template__XtextDocGen__main_FOR_Grammar" title="Show in call graph table">
+	XPD template::XtextDocGen::main FOR Grammar [1]
+</a></td>
+
+</tr>
+<tr class="emphasize">
+<td>[2]   </td>
+<td class="number"> 47.2</td>
+<td class="number">   0.04</td>
+<td class="number">   0.22</td>
+<td class="number">     43</td><td colspan="2"/>
+
+<td><a name="callgraph_XPD_template__XtextDocGen__documentRule_FOR_AbstractRule" href="#flat_XPD_template__XtextDocGen__documentRule_FOR_AbstractRule" title="Show in flat profile table">
+	XPD template::XtextDocGen::documentRule FOR AbstractRule [2]
+</a></td>
+
+</tr>
+<tr>
+<td colspan="2"/>
+<td class="number">   0.00</td>
+<td class="number">   0.00</td>
+<td class="number">     27</td><td class="call">/</td><td>     27</td>
+<td><a href="#callgraph_XPD_template__XtextDocGen__title_FOR_AbstractRule" title="Show in call graph table">
+	XPD template::XtextDocGen::title FOR AbstractRule
+</a></td>
+
+</tr>
+<tr>
+<td colspan="2"/>
+<td class="number">   0.04</td>
+<td class="number">   0.00</td>
+<td class="number">     14</td><td class="call">/</td><td>     34</td>
+<td><a href="#callgraph_XPD_template__XtextDocGen__alternative_FOR_Group__cycle___" title="Show in call graph table">
+	XPD template::XtextDocGen::alternative FOR Group &lt;cycle 1&gt;
+</a></td>
+
+</tr>
+<tr>
+<td colspan="2"/>
+<td class="number">   0.00</td>
+<td class="number">   0.00</td>
+<td class="number">      5</td><td class="call">/</td><td>     31</td>
+<td><a href="#callgraph_XPD_template__XtextDocGen__alternative_FOR_Assignment__cycle___" title="Show in call graph table">
+	XPD template::XtextDocGen::alternative FOR Assignment &lt;cycle 1&gt;
+</a></td>
+
+</tr>
+<tr>
+<td colspan="2"/>
+<td class="number">   0.00</td>
+<td class="number">   0.00</td>
+<td class="number">      3</td><td class="call">/</td><td>      3</td>
+<td><a href="#callgraph_XPD_template__XtextDocGen__title_FOR_TerminalRule" title="Show in call graph table">
+	XPD template::XtextDocGen::title FOR TerminalRule
+</a></td>
+
+</tr>
+<tr>
+<td colspan="2"/>
+<td class="number">   0.03</td>
+<td class="number">   0.02</td>
+<td class="number">     15</td><td class="call">/</td><td>     18</td>
+<td><a href="#callgraph_XPD_template__XtextDocGen__alternative_FOR_Alternatives__cycle___" title="Show in call graph table">
+	XPD template::XtextDocGen::alternative FOR Alternatives &lt;cycle 1&gt;
+</a></td>
+
+</tr>
+<tr>
+<td colspan="2"/>
+<td class="number">   0.00</td>
+<td class="number">   0.00</td>
+<td class="number">      2</td><td class="call">/</td><td>     69</td>
+<td><a href="#callgraph_XPD_template__XtextDocGen__alternative_FOR_RuleCall" title="Show in call graph table">
+	XPD template::XtextDocGen::alternative FOR RuleCall
+</a></td>
+
+</tr>
+<tr>
+<td colspan="2"/>
+<td class="number">   0.00</td>
+<td class="number">   0.00</td>
+<td class="number">     13</td><td class="call">/</td><td>     13</td>
+<td><a href="#callgraph_XPD_template__XtextDocGen__title_FOR_EnumRule" title="Show in call graph table">
+	XPD template::XtextDocGen::title FOR EnumRule
+</a></td>
+
+</tr>
+<tr>
+<td colspan="2"/>
+<td class="number">   0.00</td>
+<td class="number">   0.00</td>
+<td class="number">      7</td><td class="call">/</td><td>     47</td>
+<td><a href="#callgraph_XPD_template__XtextDocGen__alternative_FOR_EnumLiteralDeclaration" title="Show in call graph table">
+	XPD template::XtextDocGen::alternative FOR EnumLiteralDeclaration
+</a></td>
+
+</tr>
+<tr class="separator"><td colspan="8"/></tr>
+</tbody>
+<tbody>
+<tr class="emphasize">
+<td>[3]   </td>
+<td class="number"> 39.8</td>
+<td class="number">   0.19</td>
+<td class="number">   0.03</td>
+<td class="number">     34</td><td class="call">+</td><td>     83</td>
+<td>&lt;cycle 1 as a whole&gt; [3]</td>
+</tr>
+
+
+<tr>
+<td colspan="2"/>
+<td class="number">   0.06</td>
+<td class="number">   0.00</td>
+<td colspan="2"/><td>     20</td>
+<td><a href="#callgraph_XPD_template__XtextDocGen__alternative_FOR_Group__cycle___" title="Show in call graph table">
+	XPD template::XtextDocGen::alternative FOR Group &lt;cycle 1&gt; [4]
+</a></td>
+</tr>
+
+<tr>
+<td colspan="2"/>
+<td class="number">   0.04</td>
+<td class="number">   0.00</td>
+<td colspan="2"/><td>     34</td>
+<td><a href="#callgraph_XPD_template__XtextDocGen__alternatives_FOR_List_emf__EObject___cycle___" title="Show in call graph table">
+	XPD template::XtextDocGen::alternatives FOR List[emf::EObject] &lt;cycle 1&gt; [6]
+</a></td>
+</tr>
+
+<tr>
+<td colspan="2"/>
+<td class="number">   0.01</td>
+<td class="number">   0.00</td>
+<td colspan="2"/><td>     26</td>
+<td><a href="#callgraph_XPD_template__XtextDocGen__alternative_FOR_Assignment__cycle___" title="Show in call graph table">
+	XPD template::XtextDocGen::alternative FOR Assignment &lt;cycle 1&gt; [8]
+</a></td>
+</tr>
+
+<tr>
+<td colspan="2"/>
+<td class="number">   0.01</td>
+<td class="number">   0.00</td>
+<td colspan="2"/><td>      3</td>
+<td><a href="#callgraph_XPD_template__XtextDocGen__alternative_FOR_Alternatives__cycle___" title="Show in call graph table">
+	XPD template::XtextDocGen::alternative FOR Alternatives &lt;cycle 1&gt; [5]
+</a></td>
+</tr>
+<tr class="separator"><td colspan="8"/></tr>
+</tbody>
+<tbody>
+<tr>
+<td colspan="2"/>
+<td class="number">   0.08</td>
+<td class="number">   0.01</td>
+<td class="number">     14</td><td class="call">/</td><td>     34</td>
+<td><a href="#callgraph_XPD_template__XtextDocGen__documentRule_FOR_AbstractRule" title="Show in call graph table">
+	XPD template::XtextDocGen::documentRule FOR AbstractRule [2]
+</a></td>
+
+</tr>
+<tr>
+<td colspan="2"/>
+<td colspan="2"/>
+<td class="number">     12</td><td class="call">/</td><td>     34</td>
+<td><a href="#callgraph_XPD_template__XtextDocGen__alternatives_FOR_List_emf__EObject___cycle___" title="Show in call graph table">
+	XPD template::XtextDocGen::alternatives FOR List[emf::EObject] <cycle 1> [6]
+</a></td>
+
+</tr>
+<tr>
+<td colspan="2"/>
+<td colspan="2"/>
+<td class="number">      8</td><td class="call">/</td><td>     34</td>
+<td><a href="#callgraph_XPD_template__XtextDocGen__alternative_FOR_Alternatives__cycle___" title="Show in call graph table">
+	XPD template::XtextDocGen::alternative FOR Alternatives <cycle 1> [5]
+</a></td>
+
+</tr>
+<tr class="emphasize">
+<td>[4]   </td>
+<td class="number"> 17.4</td>
+<td class="number">   0.10</td>
+<td class="number">   0.00</td>
+<td class="number">     34</td><td colspan="2"/>
+
+<td><a name="callgraph_XPD_template__XtextDocGen__alternative_FOR_Group__cycle___" href="#flat_XPD_template__XtextDocGen__alternative_FOR_Group__cycle___" title="Show in flat profile table">
+	XPD template::XtextDocGen::alternative FOR Group &lt;cycle 1&gt; [4]
+</a></td>
+
+</tr>
+<tr>
+<td colspan="2"/>
+<td colspan="2"/>
+<td class="number">     34</td><td class="call">/</td><td>     34</td>
+<td><a href="#callgraph_XPD_template__XtextDocGen__alternatives_FOR_List_emf__EObject___cycle___" title="Show in call graph table">
+	XPD template::XtextDocGen::alternatives FOR List[emf::EObject] &lt;cycle 1&gt;
+</a></td>
+
+</tr>
+<tr class="separator"><td colspan="8"/></tr>
+</tbody>
+<tbody>
+<tr>
+<td colspan="2"/>
+<td class="number">   0.15</td>
+<td class="number">   0.03</td>
+<td class="number">     15</td><td class="call">/</td><td>     18</td>
+<td><a href="#callgraph_XPD_template__XtextDocGen__documentRule_FOR_AbstractRule" title="Show in call graph table">
+	XPD template::XtextDocGen::documentRule FOR AbstractRule [2]
+</a></td>
+
+</tr>
+<tr>
+<td colspan="2"/>
+<td colspan="2"/>
+<td class="number">      2</td><td class="call">/</td><td>     18</td>
+<td><a href="#callgraph_XPD_template__XtextDocGen__alternatives_FOR_List_emf__EObject___cycle___" title="Show in call graph table">
+	XPD template::XtextDocGen::alternatives FOR List[emf::EObject] <cycle 1> [6]
+</a></td>
+
+</tr>
+<tr>
+<td colspan="2"/>
+<td colspan="2"/>
+<td class="number">      1</td><td class="call">/</td><td>     18</td>
+<td><a href="#callgraph_XPD_template__XtextDocGen__alternative_FOR_Assignment__cycle___" title="Show in call graph table">
+	XPD template::XtextDocGen::alternative FOR Assignment <cycle 1> [8]
+</a></td>
+
+</tr>
+<tr class="emphasize">
+<td>[5]   </td>
+<td class="number"> 10.4</td>
+<td class="number">   0.03</td>
+<td class="number">   0.02</td>
+<td class="number">     18</td><td colspan="2"/>
+
+<td><a name="callgraph_XPD_template__XtextDocGen__alternative_FOR_Alternatives__cycle___" href="#flat_XPD_template__XtextDocGen__alternative_FOR_Alternatives__cycle___" title="Show in flat profile table">
+	XPD template::XtextDocGen::alternative FOR Alternatives &lt;cycle 1&gt; [5]
+</a></td>
+
+</tr>
+<tr>
+<td colspan="2"/>
+<td class="number">   0.00</td>
+<td class="number">   0.00</td>
+<td class="number">     23</td><td class="call">/</td><td>     69</td>
+<td><a href="#callgraph_XPD_template__XtextDocGen__alternative_FOR_RuleCall" title="Show in call graph table">
+	XPD template::XtextDocGen::alternative FOR RuleCall
+</a></td>
+
+</tr>
+<tr>
+<td colspan="2"/>
+<td colspan="2"/>
+<td class="number">      8</td><td class="call">/</td><td>     34</td>
+<td><a href="#callgraph_XPD_template__XtextDocGen__alternative_FOR_Group__cycle___" title="Show in call graph table">
+	XPD template::XtextDocGen::alternative FOR Group &lt;cycle 1&gt;
+</a></td>
+
+</tr>
+<tr>
+<td colspan="2"/>
+<td class="number">   0.00</td>
+<td class="number">   0.00</td>
+<td class="number">      4</td><td class="call">/</td><td>     79</td>
+<td><a href="#callgraph_XPD_template__XtextDocGen__alternative_FOR_Keyword" title="Show in call graph table">
+	XPD template::XtextDocGen::alternative FOR Keyword
+</a></td>
+
+</tr>
+<tr>
+<td colspan="2"/>
+<td class="number">   0.02</td>
+<td class="number">   0.00</td>
+<td class="number">     40</td><td class="call">/</td><td>     47</td>
+<td><a href="#callgraph_XPD_template__XtextDocGen__alternative_FOR_EnumLiteralDeclaration" title="Show in call graph table">
+	XPD template::XtextDocGen::alternative FOR EnumLiteralDeclaration
+</a></td>
+
+</tr>
+<tr class="separator"><td colspan="8"/></tr>
+</tbody>
+<tbody>
+<tr>
+<td colspan="2"/>
+<td colspan="2"/>
+<td class="number">     34</td><td class="call">/</td><td>     34</td>
+<td><a href="#callgraph_XPD_template__XtextDocGen__alternative_FOR_Group__cycle___" title="Show in call graph table">
+	XPD template::XtextDocGen::alternative FOR Group <cycle 1> [4]
+</a></td>
+
+</tr>
+<tr class="emphasize">
+<td>[6]   </td>
+<td class="number">  8.9</td>
+<td class="number">   0.04</td>
+<td class="number">   0.00</td>
+<td class="number">     34</td><td colspan="2"/>
+
+<td><a name="callgraph_XPD_template__XtextDocGen__alternatives_FOR_List_emf__EObject___cycle___" href="#flat_XPD_template__XtextDocGen__alternatives_FOR_List_emf__EObject___cycle___" title="Show in flat profile table">
+	XPD template::XtextDocGen::alternatives FOR List[emf::EObject] &lt;cycle 1&gt; [6]
+</a></td>
+
+</tr>
+<tr>
+<td colspan="2"/>
+<td colspan="2"/>
+<td class="number">     26</td><td class="call">/</td><td>     31</td>
+<td><a href="#callgraph_XPD_template__XtextDocGen__alternative_FOR_Assignment__cycle___" title="Show in call graph table">
+	XPD template::XtextDocGen::alternative FOR Assignment &lt;cycle 1&gt;
+</a></td>
+
+</tr>
+<tr>
+<td colspan="2"/>
+<td colspan="2"/>
+<td class="number">     12</td><td class="call">/</td><td>     34</td>
+<td><a href="#callgraph_XPD_template__XtextDocGen__alternative_FOR_Group__cycle___" title="Show in call graph table">
+	XPD template::XtextDocGen::alternative FOR Group &lt;cycle 1&gt;
+</a></td>
+
+</tr>
+<tr>
+<td colspan="2"/>
+<td class="number">   0.00</td>
+<td class="number">   0.00</td>
+<td class="number">     26</td><td class="call">/</td><td>     79</td>
+<td><a href="#callgraph_XPD_template__XtextDocGen__alternative_FOR_Keyword" title="Show in call graph table">
+	XPD template::XtextDocGen::alternative FOR Keyword
+</a></td>
+
+</tr>
+<tr>
+<td colspan="2"/>
+<td class="number">   0.00</td>
+<td class="number">   0.00</td>
+<td class="number">      1</td><td class="call">/</td><td>      1</td>
+<td><a href="#callgraph_XPD_template__XtextDocGen__alternative_FOR_CharacterRange" title="Show in call graph table">
+	XPD template::XtextDocGen::alternative FOR CharacterRange
+</a></td>
+
+</tr>
+<tr>
+<td colspan="2"/>
+<td colspan="2"/>
+<td class="number">      2</td><td class="call">/</td><td>     18</td>
+<td><a href="#callgraph_XPD_template__XtextDocGen__alternative_FOR_Alternatives__cycle___" title="Show in call graph table">
+	XPD template::XtextDocGen::alternative FOR Alternatives &lt;cycle 1&gt;
+</a></td>
+
+</tr>
+<tr>
+<td colspan="2"/>
+<td class="number">   0.00</td>
+<td class="number">   0.00</td>
+<td class="number">     16</td><td class="call">/</td><td>     69</td>
+<td><a href="#callgraph_XPD_template__XtextDocGen__alternative_FOR_RuleCall" title="Show in call graph table">
+	XPD template::XtextDocGen::alternative FOR RuleCall
+</a></td>
+
+</tr>
+<tr>
+<td colspan="2"/>
+<td class="number">   0.00</td>
+<td class="number">   0.00</td>
+<td class="number">      6</td><td class="call">/</td><td>      6</td>
+<td><a href="#callgraph_XPD_template__XtextDocGen__alternative_FOR_Action" title="Show in call graph table">
+	XPD template::XtextDocGen::alternative FOR Action
+</a></td>
+
+</tr>
+<tr class="separator"><td colspan="8"/></tr>
+</tbody>
+<tbody>
+<tr>
+<td colspan="2"/>
+<td class="number">   0.02</td>
+<td class="number">   0.00</td>
+<td class="number">     40</td><td class="call">/</td><td>     47</td>
+<td><a href="#callgraph_XPD_template__XtextDocGen__alternative_FOR_Alternatives__cycle___" title="Show in call graph table">
+	XPD template::XtextDocGen::alternative FOR Alternatives <cycle 1> [5]
+</a></td>
+
+</tr>
+<tr>
+<td colspan="2"/>
+<td class="number">   0.00</td>
+<td class="number">   0.00</td>
+<td class="number">      7</td><td class="call">/</td><td>     47</td>
+<td><a href="#callgraph_XPD_template__XtextDocGen__documentRule_FOR_AbstractRule" title="Show in call graph table">
+	XPD template::XtextDocGen::documentRule FOR AbstractRule [2]
+</a></td>
+
+</tr>
+<tr class="emphasize">
+<td>[7]   </td>
+<td class="number">  4.5</td>
+<td class="number">   0.02</td>
+<td class="number">   0.00</td>
+<td class="number">     47</td><td colspan="2"/>
+
+<td><a name="callgraph_XPD_template__XtextDocGen__alternative_FOR_EnumLiteralDeclaration" href="#flat_XPD_template__XtextDocGen__alternative_FOR_EnumLiteralDeclaration" title="Show in flat profile table">
+	XPD template::XtextDocGen::alternative FOR EnumLiteralDeclaration [7]
+</a></td>
+
+</tr>
+<tr>
+<td colspan="2"/>
+<td class="number">   0.00</td>
+<td class="number">   0.00</td>
+<td class="number">     47</td><td class="call">/</td><td>     79</td>
+<td><a href="#callgraph_XPD_template__XtextDocGen__alternative_FOR_Keyword" title="Show in call graph table">
+	XPD template::XtextDocGen::alternative FOR Keyword
+</a></td>
+
+</tr>
+<tr class="separator"><td colspan="8"/></tr>
+</tbody>
+<tbody>
+<tr>
+<td colspan="2"/>
+<td colspan="2"/>
+<td class="number">     26</td><td class="call">/</td><td>     31</td>
+<td><a href="#callgraph_XPD_template__XtextDocGen__alternatives_FOR_List_emf__EObject___cycle___" title="Show in call graph table">
+	XPD template::XtextDocGen::alternatives FOR List[emf::EObject] <cycle 1> [6]
+</a></td>
+
+</tr>
+<tr>
+<td colspan="2"/>
+<td class="number">   0.03</td>
+<td class="number">   0.01</td>
+<td class="number">      5</td><td class="call">/</td><td>     31</td>
+<td><a href="#callgraph_XPD_template__XtextDocGen__documentRule_FOR_AbstractRule" title="Show in call graph table">
+	XPD template::XtextDocGen::documentRule FOR AbstractRule [2]
+</a></td>
+
+</tr>
+<tr class="emphasize">
+<td>[8]   </td>
+<td class="number">  3.1</td>
+<td class="number">   0.01</td>
+<td class="number">   0.00</td>
+<td class="number">     31</td><td colspan="2"/>
+
+<td><a name="callgraph_XPD_template__XtextDocGen__alternative_FOR_Assignment__cycle___" href="#flat_XPD_template__XtextDocGen__alternative_FOR_Assignment__cycle___" title="Show in flat profile table">
+	XPD template::XtextDocGen::alternative FOR Assignment &lt;cycle 1&gt; [8]
+</a></td>
+
+</tr>
+<tr>
+<td colspan="2"/>
+<td class="number">   0.00</td>
+<td class="number">   0.00</td>
+<td class="number">      2</td><td class="call">/</td><td>      2</td>
+<td><a href="#callgraph_XPD_template__XtextDocGen__alternative_FOR_CrossReference" title="Show in call graph table">
+	XPD template::XtextDocGen::alternative FOR CrossReference
+</a></td>
+
+</tr>
+<tr>
+<td colspan="2"/>
+<td class="number">   0.00</td>
+<td class="number">   0.00</td>
+<td class="number">     28</td><td class="call">/</td><td>     69</td>
+<td><a href="#callgraph_XPD_template__XtextDocGen__alternative_FOR_RuleCall" title="Show in call graph table">
+	XPD template::XtextDocGen::alternative FOR RuleCall
+</a></td>
+
+</tr>
+<tr>
+<td colspan="2"/>
+<td colspan="2"/>
+<td class="number">      1</td><td class="call">/</td><td>     18</td>
+<td><a href="#callgraph_XPD_template__XtextDocGen__alternative_FOR_Alternatives__cycle___" title="Show in call graph table">
+	XPD template::XtextDocGen::alternative FOR Alternatives &lt;cycle 1&gt;
+</a></td>
+
+</tr>
+<tr class="separator"><td colspan="8"/></tr>
+</tbody>
+<tbody>
+<tr>
+<td colspan="2"/>
+<td class="number">   0.00</td>
+<td class="number">   0.00</td>
+<td class="number">     28</td><td class="call">/</td><td>     69</td>
+<td><a href="#callgraph_XPD_template__XtextDocGen__alternative_FOR_Assignment__cycle___" title="Show in call graph table">
+	XPD template::XtextDocGen::alternative FOR Assignment <cycle 1> [8]
+</a></td>
+
+</tr>
+<tr>
+<td colspan="2"/>
+<td class="number">   0.00</td>
+<td class="number">   0.00</td>
+<td class="number">     23</td><td class="call">/</td><td>     69</td>
+<td><a href="#callgraph_XPD_template__XtextDocGen__alternative_FOR_Alternatives__cycle___" title="Show in call graph table">
+	XPD template::XtextDocGen::alternative FOR Alternatives <cycle 1> [5]
+</a></td>
+
+</tr>
+<tr>
+<td colspan="2"/>
+<td class="number">   0.00</td>
+<td class="number">   0.00</td>
+<td class="number">     16</td><td class="call">/</td><td>     69</td>
+<td><a href="#callgraph_XPD_template__XtextDocGen__alternatives_FOR_List_emf__EObject___cycle___" title="Show in call graph table">
+	XPD template::XtextDocGen::alternatives FOR List[emf::EObject] <cycle 1> [6]
+</a></td>
+
+</tr>
+<tr>
+<td colspan="2"/>
+<td class="number">   0.00</td>
+<td class="number">   0.00</td>
+<td class="number">      2</td><td class="call">/</td><td>     69</td>
+<td><a href="#callgraph_XPD_template__XtextDocGen__documentRule_FOR_AbstractRule" title="Show in call graph table">
+	XPD template::XtextDocGen::documentRule FOR AbstractRule [2]
+</a></td>
+
+</tr>
+<tr class="emphasize">
+<td>[9]   </td>
+<td class="number">  1.3</td>
+<td class="number">   0.01</td>
+<td class="number">   0.00</td>
+<td class="number">     69</td><td colspan="2"/>
+
+<td><a name="callgraph_XPD_template__XtextDocGen__alternative_FOR_RuleCall" href="#flat_XPD_template__XtextDocGen__alternative_FOR_RuleCall" title="Show in flat profile table">
+	XPD template::XtextDocGen::alternative FOR RuleCall [9]
+</a></td>
+
+</tr>
+<tr class="separator"><td colspan="8"/></tr>
+</tbody>
+<tbody>
+<tr>
+<td colspan="2"/>
+<td class="number">   0.00</td>
+<td class="number">   0.00</td>
+<td class="number">     26</td><td class="call">/</td><td>     79</td>
+<td><a href="#callgraph_XPD_template__XtextDocGen__alternatives_FOR_List_emf__EObject___cycle___" title="Show in call graph table">
+	XPD template::XtextDocGen::alternatives FOR List[emf::EObject] <cycle 1> [6]
+</a></td>
+
+</tr>
+<tr>
+<td colspan="2"/>
+<td class="number">   0.00</td>
+<td class="number">   0.00</td>
+<td class="number">      2</td><td class="call">/</td><td>     79</td>
+<td><a href="#callgraph_XPD_template__XtextDocGen__alternative_FOR_CharacterRange" title="Show in call graph table">
+	XPD template::XtextDocGen::alternative FOR CharacterRange [13]
+</a></td>
+
+</tr>
+<tr>
+<td colspan="2"/>
+<td class="number">   0.00</td>
+<td class="number">   0.00</td>
+<td class="number">      4</td><td class="call">/</td><td>     79</td>
+<td><a href="#callgraph_XPD_template__XtextDocGen__alternative_FOR_Alternatives__cycle___" title="Show in call graph table">
+	XPD template::XtextDocGen::alternative FOR Alternatives <cycle 1> [5]
+</a></td>
+
+</tr>
+<tr>
+<td colspan="2"/>
+<td class="number">   0.00</td>
+<td class="number">   0.00</td>
+<td class="number">     47</td><td class="call">/</td><td>     79</td>
+<td><a href="#callgraph_XPD_template__XtextDocGen__alternative_FOR_EnumLiteralDeclaration" title="Show in call graph table">
+	XPD template::XtextDocGen::alternative FOR EnumLiteralDeclaration [7]
+</a></td>
+
+</tr>
+<tr class="emphasize">
+<td>[10]  </td>
+<td class="number">  1.0</td>
+<td class="number">   0.01</td>
+<td class="number">   0.00</td>
+<td class="number">     79</td><td colspan="2"/>
+
+<td><a name="callgraph_XPD_template__XtextDocGen__alternative_FOR_Keyword" href="#flat_XPD_template__XtextDocGen__alternative_FOR_Keyword" title="Show in flat profile table">
+	XPD template::XtextDocGen::alternative FOR Keyword [10]
+</a></td>
+
+</tr>
+<tr class="separator"><td colspan="8"/></tr>
+</tbody>
+<tbody>
+<tr>
+<td colspan="2"/>
+<td class="number">   0.00</td>
+<td class="number">   0.00</td>
+<td class="number">      2</td><td class="call">/</td><td>      2</td>
+<td><a href="#callgraph_XPD_template__XtextDocGen__alternative_FOR_Assignment__cycle___" title="Show in call graph table">
+	XPD template::XtextDocGen::alternative FOR Assignment <cycle 1> [8]
+</a></td>
+
+</tr>
+<tr class="emphasize">
+<td>[11]  </td>
+<td class="number">  0.4</td>
+<td class="number">   0.00</td>
+<td class="number">   0.00</td>
+<td class="number">      2</td><td colspan="2"/>
+
+<td><a name="callgraph_XPD_template__XtextDocGen__alternative_FOR_CrossReference" href="#flat_XPD_template__XtextDocGen__alternative_FOR_CrossReference" title="Show in flat profile table">
+	XPD template::XtextDocGen::alternative FOR CrossReference [11]
+</a></td>
+
+</tr>
+<tr class="separator"><td colspan="8"/></tr>
+</tbody>
+<tbody>
+<tr>
+<td colspan="2"/>
+<td class="number">   0.00</td>
+<td class="number">   0.00</td>
+<td class="number">     27</td><td class="call">/</td><td>     27</td>
+<td><a href="#callgraph_XPD_template__XtextDocGen__documentRule_FOR_AbstractRule" title="Show in call graph table">
+	XPD template::XtextDocGen::documentRule FOR AbstractRule [2]
+</a></td>
+
+</tr>
+<tr class="emphasize">
+<td>[12]  </td>
+<td class="number">  0.2</td>
+<td class="number">   0.00</td>
+<td class="number">   0.00</td>
+<td class="number">     27</td><td colspan="2"/>
+
+<td><a name="callgraph_XPD_template__XtextDocGen__title_FOR_AbstractRule" href="#flat_XPD_template__XtextDocGen__title_FOR_AbstractRule" title="Show in flat profile table">
+	XPD template::XtextDocGen::title FOR AbstractRule [12]
+</a></td>
+
+</tr>
+<tr class="separator"><td colspan="8"/></tr>
+</tbody>
+<tbody>
+<tr>
+<td colspan="2"/>
+<td class="number">   0.00</td>
+<td class="number">   0.00</td>
+<td class="number">      1</td><td class="call">/</td><td>      1</td>
+<td><a href="#callgraph_XPD_template__XtextDocGen__alternatives_FOR_List_emf__EObject___cycle___" title="Show in call graph table">
+	XPD template::XtextDocGen::alternatives FOR List[emf::EObject] <cycle 1> [6]
+</a></td>
+
+</tr>
+<tr class="emphasize">
+<td>[13]  </td>
+<td class="number">  0.2</td>
+<td class="number">   0.00</td>
+<td class="number">   0.00</td>
+<td class="number">      1</td><td colspan="2"/>
+
+<td><a name="callgraph_XPD_template__XtextDocGen__alternative_FOR_CharacterRange" href="#flat_XPD_template__XtextDocGen__alternative_FOR_CharacterRange" title="Show in flat profile table">
+	XPD template::XtextDocGen::alternative FOR CharacterRange [13]
+</a></td>
+
+</tr>
+<tr>
+<td colspan="2"/>
+<td class="number">   0.00</td>
+<td class="number">   0.00</td>
+<td class="number">      2</td><td class="call">/</td><td>     79</td>
+<td><a href="#callgraph_XPD_template__XtextDocGen__alternative_FOR_Keyword" title="Show in call graph table">
+	XPD template::XtextDocGen::alternative FOR Keyword
+</a></td>
+
+</tr>
+<tr class="separator"><td colspan="8"/></tr>
+</tbody>
+<tbody>
+<tr>
+<td colspan="2"/>
+<td class="number">   0.00</td>
+<td class="number">   0.00</td>
+<td class="number">     13</td><td class="call">/</td><td>     13</td>
+<td><a href="#callgraph_XPD_template__XtextDocGen__documentRule_FOR_AbstractRule" title="Show in call graph table">
+	XPD template::XtextDocGen::documentRule FOR AbstractRule [2]
+</a></td>
+
+</tr>
+<tr class="emphasize">
+<td>[14]  </td>
+<td class="number">  0.1</td>
+<td class="number">   0.00</td>
+<td class="number">   0.00</td>
+<td class="number">     13</td><td colspan="2"/>
+
+<td><a name="callgraph_XPD_template__XtextDocGen__title_FOR_EnumRule" href="#flat_XPD_template__XtextDocGen__title_FOR_EnumRule" title="Show in flat profile table">
+	XPD template::XtextDocGen::title FOR EnumRule [14]
+</a></td>
+
+</tr>
+<tr class="separator"><td colspan="8"/></tr>
+</tbody>
+<tbody>
+<tr>
+<td colspan="2"/>
+<td class="number">   0.00</td>
+<td class="number">   0.00</td>
+<td class="number">      3</td><td class="call">/</td><td>      3</td>
+<td><a href="#callgraph_XPD_template__XtextDocGen__documentRule_FOR_AbstractRule" title="Show in call graph table">
+	XPD template::XtextDocGen::documentRule FOR AbstractRule [2]
+</a></td>
+
+</tr>
+<tr class="emphasize">
+<td>[15]  </td>
+<td class="number">  0.0</td>
+<td class="number">   0.00</td>
+<td class="number">   0.00</td>
+<td class="number">      3</td><td colspan="2"/>
+
+<td><a name="callgraph_XPD_template__XtextDocGen__title_FOR_TerminalRule" href="#flat_XPD_template__XtextDocGen__title_FOR_TerminalRule" title="Show in flat profile table">
+	XPD template::XtextDocGen::title FOR TerminalRule [15]
+</a></td>
+
+</tr>
+<tr class="separator"><td colspan="8"/></tr>
+</tbody>
+<tbody>
+<tr>
+<td colspan="2"/>
+<td class="number">   0.00</td>
+<td class="number">   0.00</td>
+<td class="number">      6</td><td class="call">/</td><td>      6</td>
+<td><a href="#callgraph_XPD_template__XtextDocGen__alternatives_FOR_List_emf__EObject___cycle___" title="Show in call graph table">
+	XPD template::XtextDocGen::alternatives FOR List[emf::EObject] <cycle 1> [6]
+</a></td>
+
+</tr>
+<tr class="emphasize">
+<td>[16]  </td>
+<td class="number">  0.0</td>
+<td class="number">   0.00</td>
+<td class="number">   0.00</td>
+<td class="number">      6</td><td colspan="2"/>
+
+<td><a name="callgraph_XPD_template__XtextDocGen__alternative_FOR_Action" href="#flat_XPD_template__XtextDocGen__alternative_FOR_Action" title="Show in flat profile table">
+	XPD template::XtextDocGen::alternative FOR Action [16]
+</a></td>
+
+</tr>
+<tr class="separator"><td colspan="8"/></tr>
+</tbody>
+
+</table>
+
+
+<h2>Runtime Configuration</h2><a name="runtime_configuration"></a>
+<p>
+The above results are measured against the system time and may vary per execution.
+Since the runtime configuration and dimensions such as 
+processor clock or heap size greatly influence the execution time you also might consider
+improving the configuration to improve the results.
+This sections may give you some hints to do so.
+</p><p> 
+Unfortunately, this report will only provide the following values so far:
+</p>
+<table>
+	<tbody>
+	<tr>
+	<th>Used Memory</th>
+	<td>40 MB</td>
+	<td>Please note that this value has been measured at the time of generating this report.</td>
+	</tr>
+	<tr>
+	<th>Max Heapsize</th>
+	<td>252 MB</td>
+	<td/>
+	</tr>
+	</tbody>
+</table>
+
+
+</body></html>
+
