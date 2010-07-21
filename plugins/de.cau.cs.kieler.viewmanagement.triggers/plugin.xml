@@ -17,6 +17,11 @@
             description="Notifies about collapse and expand of compartments."
             name="CollapseExpandTrigger">
       </trigger>
+      <trigger
+            class="de.cau.cs.kieler.viewmanagement.triggers.ElementDeletedTrigger"
+            description="Notifies the listeners that an element has been deleted from an ecore model."
+            name="ElementDeletedTrigger">
+      </trigger>
    </extension>
    <extension
          point="org.eclipse.ui.startup">

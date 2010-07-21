@@ -50,6 +50,10 @@
             class="de.cau.cs.kieler.viewmanagement.combination.SelectionUnFilterCombination"
             name="SelectUnFilter">
       </combination>
+      <combination
+            class="de.cau.cs.kieler.viewmanagement.combination.DeleteLayoutCombination"
+            name="DeleteLayoutCombination">
+      </combination>
    </extension>
 
 </plugin>

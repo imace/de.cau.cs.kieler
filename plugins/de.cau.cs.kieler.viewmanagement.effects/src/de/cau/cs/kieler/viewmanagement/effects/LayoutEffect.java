@@ -55,8 +55,8 @@ public class LayoutEffect extends AEffect {
                     // if no editor is set, the active editor will be taken.
                     editorPart = EditorUtils.getLastActiveEditor();
                 }
-                EclipseLayoutServices.getInstance().layout(editorPart, null,
-                        true, false);
+                EclipseLayoutServices.getInstance().layout(editorPart,
+                        getAffectedObject(), true, false);
             }
         });
     }
@@ -78,6 +78,7 @@ public class LayoutEffect extends AEffect {
      */
     @Override
     public final void setTarget(final EditPart target) {
+        super.setTarget(target);
         IWorkbenchWindow window = PlatformUI.getWorkbench()
                 .getActiveWorkbenchWindow();
         if (window != null) {
