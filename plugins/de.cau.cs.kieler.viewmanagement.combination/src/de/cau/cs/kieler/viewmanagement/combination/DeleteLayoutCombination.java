@@ -17,6 +17,10 @@ package de.cau.cs.kieler.viewmanagement.combination;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.gef.EditPart;
 import org.eclipse.ui.IEditorPart;
 
@@ -28,9 +32,10 @@ import de.cau.cs.kieler.viewmanagement.effects.LayoutEffect;
 import de.cau.cs.kieler.viewmanagement.triggers.ElementDeletedTrigger;
 
 /**
- * The combination that is used to perform auto layout
+ * The combination that is used to perform auto layout on model element
+ * deletion.
  * 
- * @author Michael Matzen
+ * @author soh
  * 
  */
 public class DeleteLayoutCombination extends ACombination {
@@ -41,8 +46,12 @@ public class DeleteLayoutCombination extends ACombination {
                              // the layout action
     IEditorPart activeEditorPart; // the active editor part
 
+    private Job layoutJob = null;
+
     /**
-     * Evaluates a trigger event
+     * Evaluates a trigger event.
+     * 
+     * {@inheritDoc}
      */
     @Override
     public boolean evaluate(final TriggerEventObject triggerEvent) {
@@ -57,8 +66,10 @@ public class DeleteLayoutCombination extends ACombination {
         return true;
     }
 
+    private static final int LAYOUT_DELAY = 1000;
+
     /**
-     * Executes the combination by starting the effect
+     * Executes the combination by starting the effect.
      */
     @Override
     public void execute() {
@@ -67,12 +78,24 @@ public class DeleteLayoutCombination extends ACombination {
         }
         effect.setTarget(targetEditPart);
         effect.setParameters(activeEditorPart);
-        effect.execute();
 
+        if (layoutJob == null) {
+            layoutJob = new Job("") {
+                @Override
+                protected IStatus run(final IProgressMonitor monitor) {
+                    effect.execute();
+                    return Status.OK_STATUS;
+                }
+            };
+        }
+        layoutJob.cancel();
+        layoutJob.schedule(LAYOUT_DELAY);
     }
 
     /**
-     * Returns the list of triggers
+     * Returns the list of triggers.
+     * 
+     * @return the list of trigger.
      */
     @Override
     public List<ATrigger> getTriggers() {
@@ -85,7 +108,7 @@ public class DeleteLayoutCombination extends ACombination {
 
     /**
      * Undo the last effect, this is unused because the 'undo' is done by the
-     * layout command framework
+     * layout command framework.
      */
     @Override
     public void undoEffects() {
