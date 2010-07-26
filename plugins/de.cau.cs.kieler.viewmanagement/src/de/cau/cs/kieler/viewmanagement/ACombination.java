@@ -93,6 +93,12 @@ public abstract class ACombination implements ITriggerListener {
      */
     public final void setActive(final boolean active) {
         this.comboActive = active;
+        if(active){
+            this.initialize();
+        }
+        else{
+            this.wrapup();
+        }
     }
 
     /**
