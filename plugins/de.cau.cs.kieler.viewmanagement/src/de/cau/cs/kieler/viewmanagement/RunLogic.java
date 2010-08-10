@@ -45,7 +45,7 @@ public final class RunLogic {
     private static final String TRIGGERPATH = "de.cau.cs.kieler.viewmanagement.triggers";
 
     // there should be only one RunLogic at a time
-    private static RunLogic runlogic = new RunLogic();
+    private static RunLogic runlogic;
 
     /**
      * Constructor initializes only the used lists.
@@ -60,7 +60,10 @@ public final class RunLogic {
      * @return the instance of RunLogic
      */
     public static synchronized RunLogic getInstance() {
-
+    	if(runlogic == null){
+    		runlogic = new RunLogic();
+    		runlogic.registerListeners();
+    	}
         return runlogic;
     }
 
@@ -105,7 +108,6 @@ public final class RunLogic {
             TableDataList.getInstance().updateViewAsync();
         }
         // activeCombos = new ArrayList<String>();
-
     }
 
     /**

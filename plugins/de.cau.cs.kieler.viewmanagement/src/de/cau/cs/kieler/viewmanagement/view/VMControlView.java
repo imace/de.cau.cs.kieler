@@ -70,7 +70,9 @@ public class VMControlView extends ViewPart {
 
     public final void createPartControl(final Composite parent) {
         createViewer(parent);
-        viewer.setInput(new TableDataList(viewer));
+        TableDataList table = TableDataList.getInstance();
+        table.viewer = viewer;
+        viewer.setInput(table);
 
         contributeToActionBars();
 
@@ -123,6 +125,7 @@ public class VMControlView extends ViewPart {
      */
     public final void setFocus() {
         viewer.getControl().setFocus();
+        viewer.refresh();
     }
 
     // define an action to turn the View Management on or off
@@ -130,17 +133,18 @@ public class VMControlView extends ViewPart {
         if (actionNew != null) {
             return actionNew;
         }
-        actionNew = new Action() {
+        actionNew = new Action("VM on", Action.AS_CHECK_BOX) {
             public void run() {
-                if (RunLogic.getInstance().getState() == false) {
+                if (!RunLogic.getInstance().getState()) {
                     RunLogic.getInstance().registerListeners();
                 } else {
                     RunLogic.getInstance().unregisterListeners();
                 }
             }
         };
-        actionNew.setText("VM on/off");
-        actionNew.setToolTipText("VM on/off");
+        actionNew.setToolTipText("Toggle View Management on or off.");
+        
+        actionNew.setChecked(RunLogic.getInstance().getState());
 
         return actionNew;
     }

@@ -43,8 +43,14 @@ public class SelectionTrigger extends ATrigger implements ISelectionListener {
     public SelectionTrigger() {
         // register this as a listener to the Eclipse selection service
 
-        PlatformUI.getWorkbench().getActiveWorkbenchWindow().getSelectionService()
+    	// FIXME: On Eclipse Startup, this will be null and hence the Selection Trigger
+    	// is not correctly initialized
+        try{
+    	PlatformUI.getWorkbench().getActiveWorkbenchWindow().getSelectionService()
                 .addSelectionListener(this);
+        }catch(NullPointerException e){
+        	/* FIXME: this should be done smarter! */
+        }
 
     }
 
