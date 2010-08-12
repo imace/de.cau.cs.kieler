@@ -14,6 +14,8 @@
  *****************************************************************************/
 package de.cau.cs.kieler.viewmanagement;
 
+import java.util.ArrayList;
+
 import javax.swing.event.EventListenerList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gef.EditPart;
@@ -29,7 +31,7 @@ import org.eclipse.gmf.runtime.notation.View;
 
 public abstract class ATrigger {
 
-    private EventListenerList triggerListener = new EventListenerList();
+    private ArrayList<ITriggerListener> triggerListeners = new ArrayList<ITriggerListener>();
     
     /**
      * Adds a listener to a trigger. It will be notified with a TriggerEventObject in case
@@ -39,7 +41,10 @@ public abstract class ATrigger {
      *            the listener to be added
      */
     public final void addListener(final ITriggerListener triggerlistener) {
-        triggerListener.add(ITriggerListener.class, triggerlistener);
+        // don't register a listener twice
+        if(!triggerListeners.contains(triggerlistener)){
+            triggerListeners.add(triggerlistener);
+        }
     }
 
     /**
@@ -49,7 +54,7 @@ public abstract class ATrigger {
      *            the listener to be removed
      */
     public final void removeListener(final ITriggerListener triggerlistener) {
-        triggerListener.remove(ITriggerListener.class, triggerlistener);
+        triggerListeners.remove(triggerlistener);
     }
 
     /**
@@ -58,7 +63,7 @@ public abstract class ATrigger {
      */
     protected synchronized void notifyTrigger(final TriggerEventObject triggerEvent) {
 
-        for (ITriggerListener l : triggerListener.getListeners(ITriggerListener.class))
+        for (ITriggerListener l : triggerListeners)
             l.notifyTrigger(triggerEvent);
 
     }
@@ -69,8 +74,7 @@ public abstract class ATrigger {
      * @return number of listeners
      */
     public int getListenerQuantity() {
-        final int number = triggerListener.getListenerCount();
-        return number;
+        return triggerListeners.size();
     }
 
     /**

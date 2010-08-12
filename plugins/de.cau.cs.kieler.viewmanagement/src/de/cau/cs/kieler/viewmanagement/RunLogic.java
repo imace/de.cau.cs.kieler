@@ -60,10 +60,10 @@ public final class RunLogic {
      * @return the instance of RunLogic
      */
     public static synchronized RunLogic getInstance() {
-    	if(runlogic == null){
-    		runlogic = new RunLogic();
-    		runlogic.registerListeners();
-    	}
+        if (runlogic == null) {
+            runlogic = new RunLogic();
+            runlogic.registerListeners();
+        }
         return runlogic;
     }
 
@@ -229,17 +229,19 @@ public final class RunLogic {
             .getConfigurationElementsFor(COMBOPATH);
         for (int i = 0; i < myExtensions.length; i++) {
             try {
-
-                ACombination myCombo = (ACombination) myExtensions[i]
-                    .createExecutableExtension("class");
-                getCombos().put(myExtensions[i].getAttribute("name"), myCombo);
-                // add an entry tp the TableDataList for each combo
-                if (TableDataList.getInstance() != null) {
-                    TableDataList.getInstance().add(
-                        new TableData(TableDataList.getInstance(), myCombo.isActive(),
-                            myExtensions[i].getAttribute("name")));
-                    // update the table
-                    TableDataList.getInstance().updateViewAsync();
+                String comboName = myExtensions[i].getAttribute("name");
+                if (!getCombos().containsKey(comboName)) { // only do this once if it has been added before
+                    ACombination myCombo = (ACombination) myExtensions[i]
+                        .createExecutableExtension("class");
+                    getCombos().put(comboName, myCombo);
+                    // add an entry tp the TableDataList for each combo
+                    if (TableDataList.getInstance() != null) {
+                        TableDataList.getInstance().add(
+                            new TableData(TableDataList.getInstance(), myCombo.isActive(),
+                                myExtensions[i].getAttribute("name")));
+                        // update the table
+                        TableDataList.getInstance().updateViewAsync();
+                    }
                 }
             } catch (CoreException e) {
 
