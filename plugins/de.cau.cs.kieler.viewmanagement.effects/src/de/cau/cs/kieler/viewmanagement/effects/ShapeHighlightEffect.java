@@ -85,7 +85,6 @@ public class ShapeHighlightEffect extends AEffect {
                 }
             }
         }
-
         
         if (figure instanceof DefaultSizeNodeFigure) {
             figure = (IFigure) figure.getChildren().get(0);
@@ -143,6 +142,16 @@ public class ShapeHighlightEffect extends AEffect {
             RoundedRectangleFigure rrf = ((RoundedRectangleFigure) figure);
             if (rrf.getChildren().size() > 0) {
                 Object firstChild = rrf.getChildren().get(0);
+                if (firstChild instanceof IFigure) {
+                    figure = (IFigure)firstChild;
+                }
+            }
+        }
+        
+        if (figure instanceof BorderedNodeFigure) {
+            BorderedNodeFigure bnf = ((BorderedNodeFigure) figure);
+            if (bnf.getChildren().size() > 0) {
+                Object firstChild = bnf.getChildren().get(0);
                 if (firstChild instanceof IFigure) {
                     figure = (IFigure)firstChild;
                 }
