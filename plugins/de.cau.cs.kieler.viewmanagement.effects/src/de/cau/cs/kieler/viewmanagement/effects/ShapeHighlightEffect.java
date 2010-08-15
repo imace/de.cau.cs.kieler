@@ -20,6 +20,7 @@ import org.eclipse.draw2d.Shape;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.GraphicalEditPart;
 import org.eclipse.swt.graphics.Color;
+import org.eclipse.gmf.runtime.diagram.ui.figures.BorderedNodeFigure;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
 import org.eclipse.gmf.runtime.gef.ui.figures.DefaultSizeNodeFigure;
 
@@ -74,6 +75,17 @@ public class ShapeHighlightEffect extends AEffect {
                 }
             }
         }
+        
+        if (figure instanceof BorderedNodeFigure) {
+            BorderedNodeFigure bnf = ((BorderedNodeFigure) figure);
+            if (bnf.getChildren().size() > 0) {
+                Object firstChild = bnf.getChildren().get(0);
+                if (firstChild instanceof IFigure) {
+                    figure = (IFigure)firstChild;
+                }
+            }
+        }
+
         
         if (figure instanceof DefaultSizeNodeFigure) {
             figure = (IFigure) figure.getChildren().get(0);
