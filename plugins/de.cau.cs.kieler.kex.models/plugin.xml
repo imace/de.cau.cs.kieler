@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="de.cau.cs.kieler.kex">
+      <category
+            id="de.cau.cs.kieler.dataflow">
+      </category>
+      <category
+            id="de.cau.cs.kieler.syncchart">
+      </category>
+      <example
+            description="Has to be filled."
+            head_resource="dataflow/Flight.dataflow_diagram"
+            id="de.cau.cs.kieler.dataflow.flight"
+            name="Flight"
+            version="1.0">
+         <example_resource
+               resource="dataflow/Flight.dataflow_diagram">
+         </example_resource>
+         <category
+               id="de.cau.cs.kieler.dataflow">
+         </category>
+      </example>
+      <example
+            description="Standard Example"
+            head_resource="synccharts/abro.kids"
+            id="de.cau.cs.kieler.kex.synccharts.abro"
+            name="ABRO"
+            version="1.0">
+         <example_resource
+               resource="synccharts/abro.kids">
+         </example_resource>
+         <example_resource
+               resource="synccharts/abro.kixs">
+         </example_resource>
+         <category
+               id="de.cau.cs.kieler.syncchart">
+         </category>
+      </example>
+   </extension>
+
+</plugin>
