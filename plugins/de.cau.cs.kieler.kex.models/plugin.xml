@@ -15,7 +15,7 @@
             title="Dataflow Suite"
             version="1.0">
          <category
-               id="de.cau.cs.kieler.kex.dataflow">
+               id="de.cau.cs.kieler.dataflow">
          </category>
          <example_resource
                direct_open="false"
@@ -46,13 +46,13 @@
       <example
             author="pkl"
             contact="pkl@informatik.uni-kiel.de"
-            description="This is the standard example ABRO for synccharts editors"
+            description="This is the standard example ABRO for synccharts editor."
             generation_date="Fri Jul 07 09:05:16 CEST 2010"
             root_directory="synccharts/"
             title="ABRO"
             version="1.0">
          <category
-               id="de.cau.cs.kieler.kex.models.category3">
+               id="de.cau.cs.kieler.syncchart">
          </category>
          <example_resource
                direct_open="false"
