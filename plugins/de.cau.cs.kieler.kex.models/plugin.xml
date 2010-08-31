@@ -5,19 +5,70 @@
       </category>
       <category id="de.cau.cs.kieler.syncchart">
       </category>
-      <example contact="pkl@informatik.uni-kiel.de" description="Has to be filled." head_file="dataflow/Flight.dataflow_diagram" id="de.cau.cs.kieler.dataflow.flight" name="Flight" root_resource="dataflow/" version="1.0">
-         <example_resource resource="dataflow/Flight.dataflow_diagram">
-         </example_resource>
-         <category id="de.cau.cs.kieler.dataflow">
+      <example
+            author="pkl"
+            contact="pkl@informatik.uni-kiel.de"
+            description="This is a suite of all known dataflow diagrams examples in KIELER."
+            generation_date="Fri Jul 07 09:05:16 CEST 2010"
+            overview_pic="dataflow/testPic1.jpg"
+            root_directory="/"
+            title="Dataflow Suite"
+            version="1.0">
+         <category
+               id="de.cau.cs.kieler.kex.dataflow">
          </category>
+         <example_resource
+               direct_open="false"
+               local_path="dataflow/"
+               resource_type="folder">
+         </example_resource>
+         <example_resource
+               direct_open="true"
+               local_path="dataflow/Flight.dataflow_diagram"
+               resource_type="file">
+         </example_resource>
+         <example_resource
+               direct_open="true"
+               local_path="dataflow/Orthogonal.dataflow_diagram"
+               resource_type="file">
+         </example_resource>
+         <example_resource
+               direct_open="true"
+               local_path="dataflow/Pendulum.dataflow_diagram"
+               resource_type="file">
+         </example_resource>
+         <example_resource
+               direct_open="true"
+               local_path="dataflow/PrimeNumber.dataflow_diagram"
+               resource_type="file">
+         </example_resource>
       </example>
-      <example contact="pkl@informatik.uni-kiel.de" description="Standard Example" head_file="synccharts/abro.kids" id="de.cau.cs.kieler.kex.synccharts.abro" name="ABRO" root_resource="synccharts/" version="1.0">
-         <example_resource resource="synccharts/abro.kids">
-         </example_resource>
-         <example_resource resource="synccharts/abro.kixs">
-         </example_resource>
-         <category id="de.cau.cs.kieler.syncchart">
+      <example
+            author="pkl"
+            contact="pkl@informatik.uni-kiel.de"
+            description="This is the standard example ABRO for synccharts editors"
+            generation_date="Fri Jul 07 09:05:16 CEST 2010"
+            root_directory="synccharts/"
+            title="ABRO"
+            version="1.0">
+         <category
+               id="de.cau.cs.kieler.kex.models.category3">
          </category>
+         <example_resource
+               direct_open="false"
+               local_path="synccharts/abro/"
+               resource_type="folder">
+         </example_resource>
+         <example_resource
+               direct_open="true"
+               local_path="synccharts/abro/abro.kids"
+               resource_type="file">
+         </example_resource>
+         <example_resource
+               direct_open="false"
+               local_path="synccharts/abro/abro.kixs"
+               resource_type="file">
+         </example_resource>
       </example></extension>
 
 </plugin>
