@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><?eclipse version="3.4"?>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?eclipse version="3.4"?>
 <plugin>
    <extension point="de.cau.cs.kieler.kex">
       <category id="de.cau.cs.kieler.dataflow">
@@ -12,9 +13,8 @@
             generation_date="Fri Jul 07 09:05:16 CEST 2010"
             overview_pic="dataflow/testPic1.jpg"
             root_directory="/"
-            title="Dataflow Suite"
-            version="1.0">
-         <category
+            title="Dataflow Suite">
+          <category
                id="de.cau.cs.kieler.dataflow">
          </category>
          <example_resource
@@ -69,6 +69,7 @@
                local_path="synccharts/abro/abro.kixs"
                resource_type="file">
          </example_resource>
-      </example></extension>
+      </example>
+	</extension>
 
 </plugin>
