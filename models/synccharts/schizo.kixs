@@ -1,45 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<synccharts:Region xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:synccharts="http://kieler.cs.cau.de/synccharts">
-  <innerStates id="S0" label="Schizo">
+<synccharts:Region xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:expressions="http://kieler.cs.cau.de/expressions/0.1.2" xmlns:synccharts="http://kieler.cs.cau.de/synccharts/0.2.3" id="_R">
+  <states id="Schizo" label="Schizo">
     <signals name="S_ON" isOutput="true"/>
     <signals name="S_OFF" isOutput="true"/>
-    <regions>
-      <innerStates id="S" label="S" isInitial="true">
+    <regions id="_R0">
+      <states id="S" label="S" isInitial="true" incomingTransitions="//@states.0/@regions.0/@states.0/@outgoingTransitions.0">
         <signals name="S"/>
-        <regions>
-          <innerStates id="S" label="S" isInitial="true">
-            <outgoingTransitions triggersAndEffects="# not S / S_OFF" isImmediate="true" priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.0/@innerStates.1">
-              <effects xsi:type="synccharts:Emission" signal="S_OFF"/>
-              <trigger xsi:type="synccharts:ComplexExpression" operator="not">
-                <subExpressions xsi:type="synccharts:SignalReference" signal="S"/>
+        <regions id="_R0">
+          <states id="S" label="S" isInitial="true">
+            <outgoingTransitions isImmediate="true" label="# S / S_ON" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.0/@states.1">
+              <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.0"/>
+              <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.0/@signals.0"/>
+            </outgoingTransitions>
+            <outgoingTransitions isImmediate="true" label="# not S / S_OFF" priority="2" targetState="//@states.0/@regions.0/@states.0/@regions.0/@states.1">
+              <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.1"/>
+              <trigger xsi:type="expressions:OperatorExpression" operator="not">
+                <subExpressions xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.0/@signals.0"/>
               </trigger>
             </outgoingTransitions>
-            <outgoingTransitions triggersAndEffects="# S / S_ON" isImmediate="true" targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.0/@innerStates.1">
-              <effects xsi:type="synccharts:Emission" signal="S_ON"/>
-              <trigger xsi:type="synccharts:SignalReference" signal="S"/>
+          </states>
+          <states id="S1" label="S1" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.0/@states.0/@outgoingTransitions.0 //@states.0/@regions.0/@states.0/@regions.0/@states.0/@outgoingTransitions.1">
+            <outgoingTransitions label="/ S" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.0/@states.2">
+              <effects xsi:type="synccharts:Emission" signal="//@states.0/@regions.0/@states.0/@signals.0"/>
             </outgoingTransitions>
-          </innerStates>
-          <innerStates id="S1" label="S1">
-            <outgoingTransitions triggersAndEffects="/ S" targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.0/@innerStates.2">
-              <effects xsi:type="synccharts:Emission" signal="S"/>
+          </states>
+          <states id="_S0" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.0/@states.1/@outgoingTransitions.0">
+            <outgoingTransitions isImmediate="true" label="# S / S_ON" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.0/@states.3">
+              <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.0"/>
+              <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.0/@signals.0"/>
             </outgoingTransitions>
-          </innerStates>
-          <innerStates id="S2">
-            <outgoingTransitions triggersAndEffects="# S / S_ON" isImmediate="true" targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.0/@innerStates.3">
-              <effects xsi:type="synccharts:Emission" signal="S_ON"/>
-              <trigger xsi:type="synccharts:SignalReference" signal="S"/>
-            </outgoingTransitions>
-            <outgoingTransitions triggersAndEffects="# not S / S_OFF" isImmediate="true" priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.0/@innerStates.3">
-              <effects xsi:type="synccharts:Emission" signal="S_OFF"/>
-              <trigger xsi:type="synccharts:ComplexExpression" operator="not">
-                <subExpressions xsi:type="synccharts:SignalReference" signal="S"/>
+            <outgoingTransitions isImmediate="true" label="# not S / S_OFF" priority="2" targetState="//@states.0/@regions.0/@states.0/@regions.0/@states.3">
+              <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.1"/>
+              <trigger xsi:type="expressions:OperatorExpression" operator="not">
+                <subExpressions xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.0/@signals.0"/>
               </trigger>
             </outgoingTransitions>
-          </innerStates>
-          <innerStates id="S3" isFinal="true"/>
+          </states>
+          <states id="_S1" isFinal="true" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.0/@states.2/@outgoingTransitions.1 //@states.0/@regions.0/@states.0/@regions.0/@states.2/@outgoingTransitions.0"/>
         </regions>
-        <outgoingTransitions priority="1" type="NORMALTERMINATION" targetState="//@innerStates.0/@regions.0/@innerStates.0"/>
-      </innerStates>
+        <outgoingTransitions priority="1" type="NORMALTERMINATION" targetState="//@states.0/@regions.0/@states.0"/>
+      </states>
     </regions>
-  </innerStates>
+  </states>
 </synccharts:Region>

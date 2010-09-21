@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<synccharts:Region xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:synccharts="http://kieler.cs.cau.de/synccharts/0.2">
-  <innerStates id="ReflexGame" label="ReflexGame">
+<synccharts:Region xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:expressions="http://kieler.cs.cau.de/expressions/0.1.2" xmlns:synccharts="http://kieler.cs.cau.de/synccharts/0.2.3">
+  <states id="ReflexGame" label="ReflexGame">
     <signals name="On_Off" isInput="true"/>
     <signals name="Coin" isInput="true"/>
     <signals name="Ready" isInput="true"/>
@@ -10,118 +10,118 @@
     <signals name="Go" isOutput="true"/>
     <signals name="Display" type="int" initialValue="0" hostType="" isOutput="true"/>
     <regions id="R0">
-      <innerStates id="Initial" label="Initial" isInitial="true" incomingTransitions="//@innerStates.0/@regions.0/@innerStates.1/@outgoingTransitions.0">
-        <outgoingTransitions label="On_Off" priority="1" type="STRONGABORT" targetState="//@innerStates.0/@regions.0/@innerStates.1">
-          <trigger xsi:type="synccharts:SignalReference" signal="On_Off"/>
+      <states id="Initial" label="Initial" isInitial="true" incomingTransitions="//@states.0/@regions.0/@states.1/@outgoingTransitions.0">
+        <outgoingTransitions label="On_Off" priority="1" type="STRONGABORT" targetState="//@states.0/@regions.0/@states.1">
+          <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.0"/>
         </outgoingTransitions>
-      </innerStates>
-      <innerStates id="On" label="On" incomingTransitions="//@innerStates.0/@regions.0/@innerStates.0/@outgoingTransitions.0">
+      </states>
+      <states id="On" label="On" incomingTransitions="//@states.0/@regions.0/@states.0/@outgoingTransitions.0">
         <signals name="ReflexTime" type="int" initialValue="0"/>
         <regions id="R0">
-          <innerStates id="GameOver" label="GameOver" isInitial="true" incomingTransitions="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.2/@outgoingTransitions.0">
+          <states id="GameOver" label="GameOver" isInitial="true" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.0/@states.2/@outgoingTransitions.0">
             <regions id="R0">
-              <innerStates id="Initial" label="Initial" isInitial="true">
-                <outgoingTransitions isImmediate="true" label="#  / GameOver, Display(0)" priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.0/@regions.0/@innerStates.1">
-                  <effects xsi:type="synccharts:Emission" signal="GameOver"/>
-                  <effects xsi:type="synccharts:Emission" signal="Display">
-                    <newValue xsi:type="synccharts:IntValue" value="0"/>
+              <states id="Initial" label="Initial" isInitial="true">
+                <outgoingTransitions isImmediate="true" label="#  / GameOver, Display(0)" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.0/@states.0/@regions.0/@states.1">
+                  <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.5"/>
+                  <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.7">
+                    <newValue xsi:type="expressions:IntValue" value="0"/>
                   </effects>
                 </outgoingTransitions>
-              </innerStates>
-              <innerStates id="S0" label="S0" incomingTransitions="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.0/@regions.0/@innerStates.1/@outgoingTransitions.0 //@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.0/@regions.0/@innerStates.0/@outgoingTransitions.0">
-                <outgoingTransitions label="/ GameOver, Display(0)" priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.0/@regions.0/@innerStates.1">
-                  <effects xsi:type="synccharts:Emission" signal="GameOver"/>
-                  <effects xsi:type="synccharts:Emission" signal="Display">
-                    <newValue xsi:type="synccharts:IntValue" value="0"/>
+              </states>
+              <states id="S0" label="S0" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.0/@states.0/@regions.0/@states.1/@outgoingTransitions.0 //@states.0/@regions.0/@states.1/@regions.0/@states.0/@regions.0/@states.0/@outgoingTransitions.0">
+                <outgoingTransitions label="/ GameOver, Display(0)" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.0/@states.0/@regions.0/@states.1">
+                  <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.5"/>
+                  <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.7">
+                    <newValue xsi:type="expressions:IntValue" value="0"/>
                   </effects>
                 </outgoingTransitions>
-              </innerStates>
+              </states>
             </regions>
-            <outgoingTransitions label="Coin" priority="1" type="STRONGABORT" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.1">
-              <trigger xsi:type="synccharts:SignalReference" signal="Coin"/>
+            <outgoingTransitions label="Coin" priority="1" type="STRONGABORT" targetState="//@states.0/@regions.0/@states.1/@regions.0/@states.1">
+              <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.1"/>
             </outgoingTransitions>
-          </innerStates>
-          <innerStates id="Game" label="Game" incomingTransitions="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.0/@outgoingTransitions.0">
+          </states>
+          <states id="Game" label="Game" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.0/@states.0/@outgoingTransitions.0">
             <signals name="MeasureDone"/>
             <regions id="R0">
-              <innerStates id="Measure" label="Measure" isInitial="true">
+              <states id="Measure" label="Measure" isInitial="true">
                 <regions id="R0">
-                  <innerStates id="Initial" label="Initial" isInitial="true">
-                    <outgoingTransitions label="Ready" priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.1/@regions.0/@innerStates.0/@regions.0/@innerStates.1">
-                      <trigger xsi:type="synccharts:SignalReference" signal="Ready"/>
+                  <states id="Initial" label="Initial" isInitial="true">
+                    <outgoingTransitions label="Ready" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.0/@states.0/@regions.0/@states.1">
+                      <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.2"/>
                     </outgoingTransitions>
-                  </innerStates>
-                  <innerStates id="S0" label="S0" incomingTransitions="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.1/@regions.0/@innerStates.0/@regions.0/@innerStates.0/@outgoingTransitions.0">
-                    <outgoingTransitions label="Ms" priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.1/@regions.0/@innerStates.0/@regions.0/@innerStates.2">
-                      <trigger xsi:type="synccharts:SignalReference" signal="Ms"/>
+                  </states>
+                  <states id="S0" label="S0" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.0/@states.0/@regions.0/@states.0/@outgoingTransitions.0">
+                    <outgoingTransitions label="Ms" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.0/@states.0/@regions.0/@states.2">
+                      <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.4"/>
                     </outgoingTransitions>
-                  </innerStates>
-                  <innerStates id="Wait" label="Wait" incomingTransitions="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.1/@regions.0/@innerStates.0/@regions.0/@innerStates.1/@outgoingTransitions.0">
+                  </states>
+                  <states id="Wait" label="Wait" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.0/@states.0/@regions.0/@states.1/@outgoingTransitions.0">
                     <regions id="R0">
-                      <innerStates id="Initial" label="Initial" isInitial="true">
-                        <outgoingTransitions isImmediate="true" label="#  / Go" priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.1/@regions.0/@innerStates.0/@regions.0/@innerStates.2/@regions.0/@innerStates.1">
-                          <effects xsi:type="synccharts:Emission" signal="Go"/>
+                      <states id="Initial" label="Initial" isInitial="true">
+                        <outgoingTransitions isImmediate="true" label="#  / Go" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1">
+                          <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.6"/>
                         </outgoingTransitions>
-                      </innerStates>
-                      <innerStates id="S0" label="S0" type="CONDITIONAL" incomingTransitions="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.1/@regions.0/@innerStates.0/@regions.0/@innerStates.2/@regions.0/@innerStates.2/@outgoingTransitions.0 //@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.1/@regions.0/@innerStates.0/@regions.0/@innerStates.2/@regions.0/@innerStates.0/@outgoingTransitions.0">
-                        <outgoingTransitions isImmediate="true" label="# Ms / ReflexTime(pre (? ReflexTime) + 1)" priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.1/@regions.0/@innerStates.0/@regions.0/@innerStates.2/@regions.0/@innerStates.2">
-                          <effects xsi:type="synccharts:Emission" signal="ReflexTime">
-                            <newValue xsi:type="synccharts:OperatorExpression" operator="+">
-                              <subExpressions xsi:type="synccharts:OperatorExpression" operator="pre">
-                                <subExpressions xsi:type="synccharts:OperatorExpression" operator="?">
-                                  <subExpressions xsi:type="synccharts:SignalReference" signal="ReflexTime"/>
+                      </states>
+                      <states id="S0" label="S0" type="CONDITIONAL" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.2/@outgoingTransitions.0 //@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@outgoingTransitions.0">
+                        <outgoingTransitions isImmediate="true" label="# Ms / ReflexTime(pre(?ReflexTime) + 1)" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.2">
+                          <effects xsi:type="synccharts:Emission" signal="//@states.0/@regions.0/@states.1/@signals.0">
+                            <newValue xsi:type="expressions:OperatorExpression" operator="+">
+                              <subExpressions xsi:type="expressions:OperatorExpression" operator="pre">
+                                <subExpressions xsi:type="expressions:OperatorExpression" operator="?">
+                                  <subExpressions xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.1/@signals.0"/>
                                 </subExpressions>
                               </subExpressions>
-                              <subExpressions xsi:type="synccharts:IntValue" value="1"/>
+                              <subExpressions xsi:type="expressions:IntValue" value="1"/>
                             </newValue>
                           </effects>
-                          <trigger xsi:type="synccharts:SignalReference" signal="Ms"/>
+                          <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.4"/>
                         </outgoingTransitions>
-                        <outgoingTransitions isImmediate="true" label="#" priority="2" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.1/@regions.0/@innerStates.0/@regions.0/@innerStates.2/@regions.0/@innerStates.2"/>
-                      </innerStates>
-                      <innerStates id="S1" label="S1" incomingTransitions="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.1/@regions.0/@innerStates.0/@regions.0/@innerStates.2/@regions.0/@innerStates.1/@outgoingTransitions.1 //@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.1/@regions.0/@innerStates.0/@regions.0/@innerStates.2/@regions.0/@innerStates.1/@outgoingTransitions.0">
-                        <outgoingTransitions label="/ Go" priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.1/@regions.0/@innerStates.0/@regions.0/@innerStates.2/@regions.0/@innerStates.1">
-                          <effects xsi:type="synccharts:Emission" signal="Go"/>
+                        <outgoingTransitions isImmediate="true" label="#" priority="2" targetState="//@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.2"/>
+                      </states>
+                      <states id="S1" label="S1" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@outgoingTransitions.1 //@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@outgoingTransitions.0">
+                        <outgoingTransitions label="/ Go" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1">
+                          <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.6"/>
                         </outgoingTransitions>
-                      </innerStates>
+                      </states>
                     </regions>
-                    <outgoingTransitions label="Stop / Display(? ReflexTime)" priority="1" type="STRONGABORT" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.1/@regions.0/@innerStates.0/@regions.0/@innerStates.3">
-                      <effects xsi:type="synccharts:Emission" signal="Display">
-                        <newValue xsi:type="synccharts:OperatorExpression" operator="?">
-                          <subExpressions xsi:type="synccharts:SignalReference" signal="ReflexTime"/>
+                    <outgoingTransitions label="Stop / Display(?ReflexTime)" priority="1" type="STRONGABORT" targetState="//@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.0/@states.0/@regions.0/@states.3">
+                      <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.7">
+                        <newValue xsi:type="expressions:OperatorExpression" operator="?">
+                          <subExpressions xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.1/@signals.0"/>
                         </newValue>
                       </effects>
-                      <trigger xsi:type="synccharts:SignalReference" signal="Stop"/>
+                      <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.3"/>
                     </outgoingTransitions>
-                  </innerStates>
-                  <innerStates id="S2" label="S2" incomingTransitions="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.1/@regions.0/@innerStates.0/@regions.0/@innerStates.2/@outgoingTransitions.0">
-                    <outgoingTransitions label="/ MeasureDone" priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.1/@regions.0/@innerStates.0/@regions.0/@innerStates.4">
-                      <effects xsi:type="synccharts:Emission" signal="MeasureDone"/>
+                  </states>
+                  <states id="S2" label="S2" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.0/@states.0/@regions.0/@states.2/@outgoingTransitions.0">
+                    <outgoingTransitions label="/ MeasureDone" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.0/@states.0/@regions.0/@states.4">
+                      <effects xsi:type="synccharts:Emission" signal="//@states.0/@regions.0/@states.1/@regions.0/@states.1/@signals.0"/>
                     </outgoingTransitions>
-                  </innerStates>
-                  <innerStates id="S3" label="S3" incomingTransitions="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.1/@regions.0/@innerStates.0/@regions.0/@innerStates.3/@outgoingTransitions.0"/>
+                  </states>
+                  <states id="S3" label="S3" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.0/@states.0/@regions.0/@states.3/@outgoingTransitions.0"/>
                 </regions>
-                <outgoingTransitions label="MeasureDone" priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.1/@regions.0/@innerStates.1">
-                  <trigger xsi:type="synccharts:SignalReference" signal="MeasureDone"/>
+                <outgoingTransitions label="MeasureDone" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.0/@states.1">
+                  <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.1/@regions.0/@states.1/@signals.0"/>
                 </outgoingTransitions>
-              </innerStates>
-              <innerStates id="S0" label="S0" incomingTransitions="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.1/@regions.0/@innerStates.0/@outgoingTransitions.0">
-                <outgoingTransitions label="Ms" priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.1/@regions.0/@innerStates.2">
-                  <trigger xsi:type="synccharts:SignalReference" signal="Ms"/>
+              </states>
+              <states id="S0" label="S0" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.0/@states.0/@outgoingTransitions.0">
+                <outgoingTransitions label="Ms" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.0/@states.2">
+                  <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.4"/>
                 </outgoingTransitions>
-              </innerStates>
-              <innerStates id="S1" label="S1" isFinal="true" incomingTransitions="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.1/@regions.0/@innerStates.1/@outgoingTransitions.0"/>
+              </states>
+              <states id="S1" label="S1" isFinal="true" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.0/@states.1/@outgoingTransitions.0"/>
             </regions>
-            <outgoingTransitions priority="1" type="NORMALTERMINATION" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.2"/>
-          </innerStates>
-          <innerStates id="Pause" label="Pause" incomingTransitions="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.1/@outgoingTransitions.0">
-            <outgoingTransitions priority="1" type="STRONGABORT" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.0"/>
-          </innerStates>
+            <outgoingTransitions priority="1" type="NORMALTERMINATION" targetState="//@states.0/@regions.0/@states.1/@regions.0/@states.2"/>
+          </states>
+          <states id="Pause" label="Pause" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.0/@states.1/@outgoingTransitions.0">
+            <outgoingTransitions priority="1" type="STRONGABORT" targetState="//@states.0/@regions.0/@states.1/@regions.0/@states.0"/>
+          </states>
         </regions>
-        <outgoingTransitions label="On_Off" priority="1" type="STRONGABORT" targetState="//@innerStates.0/@regions.0/@innerStates.0">
-          <trigger xsi:type="synccharts:SignalReference" signal="On_Off"/>
+        <outgoingTransitions label="On_Off" priority="1" type="STRONGABORT" targetState="//@states.0/@regions.0/@states.0">
+          <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.0"/>
         </outgoingTransitions>
-      </innerStates>
+      </states>
     </regions>
-  </innerStates>
+  </states>
 </synccharts:Region>

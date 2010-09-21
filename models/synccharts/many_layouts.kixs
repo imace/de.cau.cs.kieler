@@ -1,231 +1,231 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<synccharts:Region xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:synccharts="http://kieler.cs.cau.de/synccharts">
-  <innerStates id="MetaLayout" label="MetaLayout">
-    <regions id="GraphViz">
-      <innerStates id="Twopi" label="Twopi" isInitial="true">
-        <regions id="R0">
-          <innerStates id="_S0" label="" isInitial="true">
-            <outgoingTransitions priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.0/@innerStates.1"/>
-            <outgoingTransitions priority="2" targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.0/@innerStates.4"/>
-            <outgoingTransitions priority="3" targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.0/@innerStates.5"/>
-          </innerStates>
-          <innerStates id="_S2" label="">
-            <outgoingTransitions priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.0/@innerStates.2"/>
-            <outgoingTransitions priority="2" targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.0/@innerStates.3"/>
-          </innerStates>
-          <innerStates id="_S4" label=""/>
-          <innerStates id="_S3" label=""/>
-          <innerStates id="_S1" label=""/>
-          <innerStates id="_S5" label="">
-            <outgoingTransitions priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.0/@innerStates.2"/>
-          </innerStates>
+<synccharts:Region xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:synccharts="http://kieler.cs.cau.de/synccharts/0.2.3" id="_R">
+  <states id="MetaLayout" label="MetaLayout">
+    <regions id="GraphViz" label="GraphViz">
+      <states id="Twopi" label="Twopi" isInitial="true">
+        <regions id="R0" label="R0">
+          <states id="_S6" label="" isInitial="true">
+            <outgoingTransitions priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.0/@states.1"/>
+            <outgoingTransitions priority="2" targetState="//@states.0/@regions.0/@states.0/@regions.0/@states.4"/>
+            <outgoingTransitions priority="3" targetState="//@states.0/@regions.0/@states.0/@regions.0/@states.5"/>
+          </states>
+          <states id="_S7" label="" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.0/@states.0/@outgoingTransitions.0">
+            <outgoingTransitions priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.0/@states.2"/>
+            <outgoingTransitions priority="2" targetState="//@states.0/@regions.0/@states.0/@regions.0/@states.3"/>
+          </states>
+          <states id="_S8" label="" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.0/@states.5/@outgoingTransitions.0 //@states.0/@regions.0/@states.0/@regions.0/@states.1/@outgoingTransitions.0"/>
+          <states id="_S9" label="" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.0/@states.1/@outgoingTransitions.1"/>
+          <states id="_S10" label="" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.0/@states.0/@outgoingTransitions.1"/>
+          <states id="_S11" label="" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.0/@states.0/@outgoingTransitions.2">
+            <outgoingTransitions priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.0/@states.2"/>
+          </states>
         </regions>
-      </innerStates>
-      <innerStates id="Circo" label="Circo" isInitial="true">
-        <regions id="R0">
-          <innerStates id="_S0" label="" isInitial="true">
-            <outgoingTransitions priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.1"/>
-          </innerStates>
-          <innerStates id="_S5" label="">
-            <outgoingTransitions priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.3"/>
-          </innerStates>
-          <innerStates id="_S4" label="">
-            <outgoingTransitions priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.0"/>
-          </innerStates>
-          <innerStates id="_S1" label="">
-            <outgoingTransitions targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.4"/>
-          </innerStates>
-          <innerStates id="_S2" label="">
-            <outgoingTransitions targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.5"/>
-          </innerStates>
-          <innerStates id="_S3" label="">
-            <outgoingTransitions targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.2"/>
-          </innerStates>
+      </states>
+      <states id="Circo" label="Circo" isInitial="true">
+        <regions id="R0" label="R0">
+          <states id="_S6" label="" isInitial="true" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.0/@states.2/@outgoingTransitions.0">
+            <outgoingTransitions priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.0/@states.1"/>
+          </states>
+          <states id="_S7" label="" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.0/@states.0/@outgoingTransitions.0">
+            <outgoingTransitions priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.0/@states.3"/>
+          </states>
+          <states id="_S8" label="" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.0/@states.5/@outgoingTransitions.0">
+            <outgoingTransitions priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.0/@states.0"/>
+          </states>
+          <states id="_S9" label="" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.0/@states.1/@outgoingTransitions.0">
+            <outgoingTransitions priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.0/@states.4"/>
+          </states>
+          <states id="_S10" label="" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.0/@states.3/@outgoingTransitions.0">
+            <outgoingTransitions priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.0/@states.5"/>
+          </states>
+          <states id="_S11" label="" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.0/@states.4/@outgoingTransitions.0">
+            <outgoingTransitions priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.0/@states.2"/>
+          </states>
         </regions>
-      </innerStates>
-      <innerStates id="FDP" label="FDP" isInitial="true">
-        <regions id="R0">
-          <innerStates id="_S0" label="" isInitial="true">
-            <outgoingTransitions priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.2/@regions.0/@innerStates.1"/>
-            <outgoingTransitions priority="2" targetState="//@innerStates.0/@regions.0/@innerStates.2/@regions.0/@innerStates.2"/>
-            <outgoingTransitions priority="3" targetState="//@innerStates.0/@regions.0/@innerStates.2/@regions.0/@innerStates.3"/>
-            <outgoingTransitions priority="4" targetState="//@innerStates.0/@regions.0/@innerStates.2/@regions.0/@innerStates.4"/>
-          </innerStates>
-          <innerStates id="_" label=" ">
-            <outgoingTransitions priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.2/@regions.0/@innerStates.5"/>
-          </innerStates>
-          <innerStates id="_S4" label=""/>
-          <innerStates id="_S1" label=""/>
-          <innerStates id="_S3" label="">
-            <outgoingTransitions priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.2/@regions.0/@innerStates.2"/>
-          </innerStates>
-          <innerStates id="_S2" label="">
-            <outgoingTransitions priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.2/@regions.0/@innerStates.4"/>
-          </innerStates>
+      </states>
+      <states id="FDP" label="FDP" isInitial="true">
+        <regions id="R0" label="R0">
+          <states id="_S5" label="" isInitial="true">
+            <outgoingTransitions priority="1" targetState="//@states.0/@regions.0/@states.2/@regions.0/@states.1"/>
+            <outgoingTransitions priority="2" targetState="//@states.0/@regions.0/@states.2/@regions.0/@states.2"/>
+            <outgoingTransitions priority="3" targetState="//@states.0/@regions.0/@states.2/@regions.0/@states.3"/>
+            <outgoingTransitions priority="4" targetState="//@states.0/@regions.0/@states.2/@regions.0/@states.4"/>
+          </states>
+          <states id="_S6" label=" " incomingTransitions="//@states.0/@regions.0/@states.2/@regions.0/@states.0/@outgoingTransitions.0">
+            <outgoingTransitions priority="1" targetState="//@states.0/@regions.0/@states.2/@regions.0/@states.5"/>
+          </states>
+          <states id="_S7" label="" incomingTransitions="//@states.0/@regions.0/@states.2/@regions.0/@states.0/@outgoingTransitions.1 //@states.0/@regions.0/@states.2/@regions.0/@states.4/@outgoingTransitions.0"/>
+          <states id="_S8" label="" incomingTransitions="//@states.0/@regions.0/@states.2/@regions.0/@states.0/@outgoingTransitions.2"/>
+          <states id="_S9" label="" incomingTransitions="//@states.0/@regions.0/@states.2/@regions.0/@states.0/@outgoingTransitions.3 //@states.0/@regions.0/@states.2/@regions.0/@states.5/@outgoingTransitions.0">
+            <outgoingTransitions priority="1" targetState="//@states.0/@regions.0/@states.2/@regions.0/@states.2"/>
+          </states>
+          <states id="_S10" label="" incomingTransitions="//@states.0/@regions.0/@states.2/@regions.0/@states.1/@outgoingTransitions.0">
+            <outgoingTransitions priority="1" targetState="//@states.0/@regions.0/@states.2/@regions.0/@states.4"/>
+          </states>
         </regions>
-      </innerStates>
-      <innerStates id="Neato" label="Neato" isInitial="true">
-        <regions id="R0">
-          <innerStates id="_S0" label="" isInitial="true">
-            <outgoingTransitions priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.3/@regions.0/@innerStates.1"/>
-          </innerStates>
-          <innerStates id="_S4" label="">
-            <outgoingTransitions priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.3/@regions.0/@innerStates.2"/>
-            <outgoingTransitions priority="2" targetState="//@innerStates.0/@regions.0/@innerStates.3/@regions.0/@innerStates.3"/>
-            <outgoingTransitions priority="3" targetState="//@innerStates.0/@regions.0/@innerStates.3/@regions.0/@innerStates.4"/>
-            <outgoingTransitions priority="4" targetState="//@innerStates.0/@regions.0/@innerStates.3/@regions.0/@innerStates.6"/>
-          </innerStates>
-          <innerStates id="_S3" label="">
-            <outgoingTransitions priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.3/@regions.0/@innerStates.5"/>
-          </innerStates>
-          <innerStates id="_S2" label=""/>
-          <innerStates id="_S6" label="">
-            <outgoingTransitions priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.3/@regions.0/@innerStates.2"/>
-            <outgoingTransitions priority="2" targetState="//@innerStates.0/@regions.0/@innerStates.3/@regions.0/@innerStates.0"/>
-          </innerStates>
-          <innerStates id="_S5" label=""/>
-          <innerStates id="_S1" label=""/>
+      </states>
+      <states id="Neato" label="Neato" isInitial="true">
+        <regions id="R0" label="R0">
+          <states id="_S7" label="" isInitial="true" incomingTransitions="//@states.0/@regions.0/@states.3/@regions.0/@states.4/@outgoingTransitions.1">
+            <outgoingTransitions priority="1" targetState="//@states.0/@regions.0/@states.3/@regions.0/@states.1"/>
+          </states>
+          <states id="_S8" label="" incomingTransitions="//@states.0/@regions.0/@states.3/@regions.0/@states.0/@outgoingTransitions.0">
+            <outgoingTransitions priority="1" targetState="//@states.0/@regions.0/@states.3/@regions.0/@states.2"/>
+            <outgoingTransitions priority="2" targetState="//@states.0/@regions.0/@states.3/@regions.0/@states.3"/>
+            <outgoingTransitions priority="3" targetState="//@states.0/@regions.0/@states.3/@regions.0/@states.4"/>
+            <outgoingTransitions priority="4" targetState="//@states.0/@regions.0/@states.3/@regions.0/@states.6"/>
+          </states>
+          <states id="_S9" label="" incomingTransitions="//@states.0/@regions.0/@states.3/@regions.0/@states.4/@outgoingTransitions.0 //@states.0/@regions.0/@states.3/@regions.0/@states.1/@outgoingTransitions.0">
+            <outgoingTransitions priority="1" targetState="//@states.0/@regions.0/@states.3/@regions.0/@states.5"/>
+          </states>
+          <states id="_S10" label="" incomingTransitions="//@states.0/@regions.0/@states.3/@regions.0/@states.1/@outgoingTransitions.1"/>
+          <states id="_S11" label="" incomingTransitions="//@states.0/@regions.0/@states.3/@regions.0/@states.1/@outgoingTransitions.2">
+            <outgoingTransitions priority="1" targetState="//@states.0/@regions.0/@states.3/@regions.0/@states.2"/>
+            <outgoingTransitions priority="2" targetState="//@states.0/@regions.0/@states.3/@regions.0/@states.0"/>
+          </states>
+          <states id="_S12" label="" incomingTransitions="//@states.0/@regions.0/@states.3/@regions.0/@states.2/@outgoingTransitions.0"/>
+          <states id="_S13" label="" incomingTransitions="//@states.0/@regions.0/@states.3/@regions.0/@states.1/@outgoingTransitions.3"/>
         </regions>
-      </innerStates>
-      <innerStates id="Dot" label="Dot" isInitial="true">
-        <regions id="R0">
-          <innerStates id="_S0" label="" isInitial="true">
-            <outgoingTransitions priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.4/@regions.0/@innerStates.1"/>
-            <outgoingTransitions priority="2" targetState="//@innerStates.0/@regions.0/@innerStates.4/@regions.0/@innerStates.3"/>
-            <outgoingTransitions priority="3" targetState="//@innerStates.0/@regions.0/@innerStates.4/@regions.0/@innerStates.5"/>
-          </innerStates>
-          <innerStates id="_S1" label="">
-            <outgoingTransitions priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.4/@regions.0/@innerStates.2"/>
-          </innerStates>
-          <innerStates id="_S2" label="">
-            <outgoingTransitions priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.4/@regions.0/@innerStates.4"/>
-          </innerStates>
-          <innerStates id="_S3" label="">
-            <outgoingTransitions priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.4/@regions.0/@innerStates.4"/>
-          </innerStates>
-          <innerStates id="_S5" label=""/>
-          <innerStates id="_S4" label="">
-            <outgoingTransitions priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.4/@regions.0/@innerStates.3"/>
-            <outgoingTransitions priority="2" targetState="//@innerStates.0/@regions.0/@innerStates.4/@regions.0/@innerStates.4"/>
-          </innerStates>
+      </states>
+      <states id="Dot" label="Dot" isInitial="true">
+        <regions id="R0" label="R0">
+          <states id="_S6" label="" isInitial="true">
+            <outgoingTransitions priority="1" targetState="//@states.0/@regions.0/@states.4/@regions.0/@states.1"/>
+            <outgoingTransitions priority="2" targetState="//@states.0/@regions.0/@states.4/@regions.0/@states.3"/>
+            <outgoingTransitions priority="3" targetState="//@states.0/@regions.0/@states.4/@regions.0/@states.5"/>
+          </states>
+          <states id="_S7" label="" incomingTransitions="//@states.0/@regions.0/@states.4/@regions.0/@states.0/@outgoingTransitions.0">
+            <outgoingTransitions priority="1" targetState="//@states.0/@regions.0/@states.4/@regions.0/@states.2"/>
+          </states>
+          <states id="_S8" label="" incomingTransitions="//@states.0/@regions.0/@states.4/@regions.0/@states.1/@outgoingTransitions.0">
+            <outgoingTransitions priority="1" targetState="//@states.0/@regions.0/@states.4/@regions.0/@states.4"/>
+          </states>
+          <states id="_S9" label="" incomingTransitions="//@states.0/@regions.0/@states.4/@regions.0/@states.5/@outgoingTransitions.0 //@states.0/@regions.0/@states.4/@regions.0/@states.0/@outgoingTransitions.1">
+            <outgoingTransitions priority="1" targetState="//@states.0/@regions.0/@states.4/@regions.0/@states.4"/>
+          </states>
+          <states id="_S10" label="" incomingTransitions="//@states.0/@regions.0/@states.4/@regions.0/@states.5/@outgoingTransitions.1 //@states.0/@regions.0/@states.4/@regions.0/@states.2/@outgoingTransitions.0 //@states.0/@regions.0/@states.4/@regions.0/@states.3/@outgoingTransitions.0"/>
+          <states id="_S11" label="" incomingTransitions="//@states.0/@regions.0/@states.4/@regions.0/@states.0/@outgoingTransitions.2">
+            <outgoingTransitions priority="1" targetState="//@states.0/@regions.0/@states.4/@regions.0/@states.3"/>
+            <outgoingTransitions priority="2" targetState="//@states.0/@regions.0/@states.4/@regions.0/@states.4"/>
+          </states>
         </regions>
-      </innerStates>
+      </states>
     </regions>
-    <regions id="OGDF">
-      <innerStates id="Sugiyama" label="Sugiyama" isInitial="true">
-        <regions id="R0">
-          <innerStates id="_S0" label="" isInitial="true">
-            <outgoingTransitions priority="1" targetState="//@innerStates.0/@regions.1/@innerStates.0/@regions.0/@innerStates.1"/>
-            <outgoingTransitions priority="2" targetState="//@innerStates.0/@regions.1/@innerStates.0/@regions.0/@innerStates.4"/>
-          </innerStates>
-          <innerStates id="_S2" label="">
-            <outgoingTransitions priority="1" targetState="//@innerStates.0/@regions.1/@innerStates.0/@regions.0/@innerStates.2"/>
-          </innerStates>
-          <innerStates id="_S6" label="">
-            <outgoingTransitions priority="1" targetState="//@innerStates.0/@regions.1/@innerStates.0/@regions.0/@innerStates.3"/>
-            <outgoingTransitions priority="2" targetState="//@innerStates.0/@regions.1/@innerStates.0/@regions.0/@innerStates.5"/>
-          </innerStates>
-          <innerStates id="_S5" label="">
-            <outgoingTransitions priority="1" targetState="//@innerStates.0/@regions.1/@innerStates.0/@regions.0/@innerStates.5"/>
-          </innerStates>
-          <innerStates id="_S1" label="">
-            <outgoingTransitions priority="1" targetState="//@innerStates.0/@regions.1/@innerStates.0/@regions.0/@innerStates.3"/>
-            <outgoingTransitions priority="2" targetState="//@innerStates.0/@regions.1/@innerStates.0/@regions.0/@innerStates.6"/>
-          </innerStates>
-          <innerStates id="_S8" label=""/>
-          <innerStates id="_S3" label="">
-            <outgoingTransitions priority="1" targetState="//@innerStates.0/@regions.1/@innerStates.0/@regions.0/@innerStates.7"/>
-          </innerStates>
-          <innerStates id="_S4" label="">
-            <outgoingTransitions priority="1" targetState="//@innerStates.0/@regions.1/@innerStates.0/@regions.0/@innerStates.5"/>
-            <outgoingTransitions priority="2" targetState="//@innerStates.0/@regions.1/@innerStates.0/@regions.0/@innerStates.8"/>
-          </innerStates>
-          <innerStates id="_S7" label="">
-            <outgoingTransitions priority="1" targetState="//@innerStates.0/@regions.1/@innerStates.0/@regions.0/@innerStates.5"/>
-          </innerStates>
+    <regions id="OGDF" label="OGDF">
+      <states id="Sugiyama" label="Sugiyama" isInitial="true">
+        <regions id="R0" label="R0">
+          <states id="_S9" label="" isInitial="true">
+            <outgoingTransitions priority="1" targetState="//@states.0/@regions.1/@states.0/@regions.0/@states.1"/>
+            <outgoingTransitions priority="2" targetState="//@states.0/@regions.1/@states.0/@regions.0/@states.4"/>
+          </states>
+          <states id="_S10" label="" incomingTransitions="//@states.0/@regions.1/@states.0/@regions.0/@states.0/@outgoingTransitions.0">
+            <outgoingTransitions priority="1" targetState="//@states.0/@regions.1/@states.0/@regions.0/@states.2"/>
+          </states>
+          <states id="_S11" label="" incomingTransitions="//@states.0/@regions.1/@states.0/@regions.0/@states.1/@outgoingTransitions.0">
+            <outgoingTransitions priority="1" targetState="//@states.0/@regions.1/@states.0/@regions.0/@states.3"/>
+            <outgoingTransitions priority="2" targetState="//@states.0/@regions.1/@states.0/@regions.0/@states.5"/>
+          </states>
+          <states id="_S12" label="" incomingTransitions="//@states.0/@regions.1/@states.0/@regions.0/@states.4/@outgoingTransitions.0 //@states.0/@regions.1/@states.0/@regions.0/@states.2/@outgoingTransitions.0">
+            <outgoingTransitions priority="1" targetState="//@states.0/@regions.1/@states.0/@regions.0/@states.5"/>
+          </states>
+          <states id="_S13" label="" incomingTransitions="//@states.0/@regions.1/@states.0/@regions.0/@states.0/@outgoingTransitions.1">
+            <outgoingTransitions priority="1" targetState="//@states.0/@regions.1/@states.0/@regions.0/@states.3"/>
+            <outgoingTransitions priority="2" targetState="//@states.0/@regions.1/@states.0/@regions.0/@states.6"/>
+          </states>
+          <states id="_S14" label="" incomingTransitions="//@states.0/@regions.1/@states.0/@regions.0/@states.2/@outgoingTransitions.1 //@states.0/@regions.1/@states.0/@regions.0/@states.7/@outgoingTransitions.0 //@states.0/@regions.1/@states.0/@regions.0/@states.3/@outgoingTransitions.0 //@states.0/@regions.1/@states.0/@regions.0/@states.8/@outgoingTransitions.0"/>
+          <states id="_S15" label="" incomingTransitions="//@states.0/@regions.1/@states.0/@regions.0/@states.4/@outgoingTransitions.1">
+            <outgoingTransitions priority="1" targetState="//@states.0/@regions.1/@states.0/@regions.0/@states.7"/>
+          </states>
+          <states id="_S16" label="" incomingTransitions="//@states.0/@regions.1/@states.0/@regions.0/@states.6/@outgoingTransitions.0">
+            <outgoingTransitions priority="1" targetState="//@states.0/@regions.1/@states.0/@regions.0/@states.5"/>
+            <outgoingTransitions priority="2" targetState="//@states.0/@regions.1/@states.0/@regions.0/@states.8"/>
+          </states>
+          <states id="_S17" label="" incomingTransitions="//@states.0/@regions.1/@states.0/@regions.0/@states.7/@outgoingTransitions.1">
+            <outgoingTransitions priority="1" targetState="//@states.0/@regions.1/@states.0/@regions.0/@states.5"/>
+          </states>
         </regions>
-      </innerStates>
-      <innerStates id="Planarization" label="Planarization" isInitial="true">
-        <regions id="R0">
-          <innerStates id="_S0" label="" isInitial="true">
-            <outgoingTransitions priority="1" targetState="//@innerStates.0/@regions.1/@innerStates.1/@regions.0/@innerStates.1"/>
-          </innerStates>
-          <innerStates id="_S2" label="">
-            <outgoingTransitions priority="1" targetState="//@innerStates.0/@regions.1/@innerStates.1/@regions.0/@innerStates.2"/>
-            <outgoingTransitions priority="2" targetState="//@innerStates.0/@regions.1/@innerStates.1/@regions.0/@innerStates.3"/>
-            <outgoingTransitions priority="3" targetState="//@innerStates.0/@regions.1/@innerStates.1/@regions.0/@innerStates.4"/>
-          </innerStates>
-          <innerStates id="_S3" label="">
-            <outgoingTransitions priority="1" targetState="//@innerStates.0/@regions.1/@innerStates.1/@regions.0/@innerStates.6"/>
-            <outgoingTransitions priority="2" targetState="//@innerStates.0/@regions.1/@innerStates.1/@regions.0/@innerStates.0"/>
-            <outgoingTransitions priority="3" targetState="//@innerStates.0/@regions.1/@innerStates.1/@regions.0/@innerStates.5"/>
-          </innerStates>
-          <innerStates id="_S1" label="">
-            <outgoingTransitions priority="1" targetState="//@innerStates.0/@regions.1/@innerStates.1/@regions.0/@innerStates.4"/>
-            <outgoingTransitions priority="2" targetState="//@innerStates.0/@regions.1/@innerStates.1/@regions.0/@innerStates.0"/>
-          </innerStates>
-          <innerStates id="_S4" label="">
-            <outgoingTransitions priority="1" targetState="//@innerStates.0/@regions.1/@innerStates.1/@regions.0/@innerStates.0"/>
-            <outgoingTransitions priority="2" targetState="//@innerStates.0/@regions.1/@innerStates.1/@regions.0/@innerStates.5"/>
-          </innerStates>
-          <innerStates id="_S5" label=""/>
-          <innerStates id="_S6" label="">
-            <outgoingTransitions priority="1" targetState="//@innerStates.0/@regions.1/@innerStates.1/@regions.0/@innerStates.5"/>
-            <outgoingTransitions priority="2" targetState="//@innerStates.0/@regions.1/@innerStates.1/@regions.0/@innerStates.7"/>
-          </innerStates>
-          <innerStates id="_S7" label="">
-            <outgoingTransitions priority="1" targetState="//@innerStates.0/@regions.1/@innerStates.1/@regions.0/@innerStates.4"/>
-          </innerStates>
+      </states>
+      <states id="Planarization" label="Planarization" isInitial="true">
+        <regions id="R0" label="R0">
+          <states id="_S8" label="" isInitial="true" incomingTransitions="//@states.0/@regions.1/@states.1/@regions.0/@states.2/@outgoingTransitions.1 //@states.0/@regions.1/@states.1/@regions.0/@states.4/@outgoingTransitions.0 //@states.0/@regions.1/@states.1/@regions.0/@states.3/@outgoingTransitions.1">
+            <outgoingTransitions priority="1" targetState="//@states.0/@regions.1/@states.1/@regions.0/@states.1"/>
+          </states>
+          <states id="_S9" label="" incomingTransitions="//@states.0/@regions.1/@states.1/@regions.0/@states.0/@outgoingTransitions.0">
+            <outgoingTransitions priority="1" targetState="//@states.0/@regions.1/@states.1/@regions.0/@states.2"/>
+            <outgoingTransitions priority="2" targetState="//@states.0/@regions.1/@states.1/@regions.0/@states.3"/>
+            <outgoingTransitions priority="3" targetState="//@states.0/@regions.1/@states.1/@regions.0/@states.4"/>
+          </states>
+          <states id="_S10" label="" incomingTransitions="//@states.0/@regions.1/@states.1/@regions.0/@states.1/@outgoingTransitions.0">
+            <outgoingTransitions priority="1" targetState="//@states.0/@regions.1/@states.1/@regions.0/@states.6"/>
+            <outgoingTransitions priority="2" targetState="//@states.0/@regions.1/@states.1/@regions.0/@states.0"/>
+            <outgoingTransitions priority="3" targetState="//@states.0/@regions.1/@states.1/@regions.0/@states.5"/>
+          </states>
+          <states id="_S11" label="" incomingTransitions="//@states.0/@regions.1/@states.1/@regions.0/@states.1/@outgoingTransitions.1">
+            <outgoingTransitions priority="1" targetState="//@states.0/@regions.1/@states.1/@regions.0/@states.4"/>
+            <outgoingTransitions priority="2" targetState="//@states.0/@regions.1/@states.1/@regions.0/@states.0"/>
+          </states>
+          <states id="_S12" label="" incomingTransitions="//@states.0/@regions.1/@states.1/@regions.0/@states.7/@outgoingTransitions.0 //@states.0/@regions.1/@states.1/@regions.0/@states.3/@outgoingTransitions.0 //@states.0/@regions.1/@states.1/@regions.0/@states.1/@outgoingTransitions.2">
+            <outgoingTransitions priority="1" targetState="//@states.0/@regions.1/@states.1/@regions.0/@states.0"/>
+            <outgoingTransitions priority="2" targetState="//@states.0/@regions.1/@states.1/@regions.0/@states.5"/>
+          </states>
+          <states id="_S13" label="" incomingTransitions="//@states.0/@regions.1/@states.1/@regions.0/@states.2/@outgoingTransitions.2 //@states.0/@regions.1/@states.1/@regions.0/@states.4/@outgoingTransitions.1 //@states.0/@regions.1/@states.1/@regions.0/@states.6/@outgoingTransitions.0"/>
+          <states id="_S14" label="" incomingTransitions="//@states.0/@regions.1/@states.1/@regions.0/@states.2/@outgoingTransitions.0">
+            <outgoingTransitions priority="1" targetState="//@states.0/@regions.1/@states.1/@regions.0/@states.5"/>
+            <outgoingTransitions priority="2" targetState="//@states.0/@regions.1/@states.1/@regions.0/@states.7"/>
+          </states>
+          <states id="_S15" label="" incomingTransitions="//@states.0/@regions.1/@states.1/@regions.0/@states.6/@outgoingTransitions.1">
+            <outgoingTransitions priority="1" targetState="//@states.0/@regions.1/@states.1/@regions.0/@states.4"/>
+          </states>
         </regions>
-      </innerStates>
+      </states>
     </regions>
-    <regions id="Java">
-      <innerStates id="KIELER_layered" label="KIELER layered" isInitial="true">
-        <regions id="R0">
-          <innerStates id="_S0" label="" isInitial="true">
-            <outgoingTransitions priority="1" targetState="//@innerStates.0/@regions.2/@innerStates.0/@regions.0/@innerStates.1"/>
-            <outgoingTransitions priority="2" targetState="//@innerStates.0/@regions.2/@innerStates.0/@regions.0/@innerStates.4"/>
-            <outgoingTransitions priority="3" targetState="//@innerStates.0/@regions.2/@innerStates.0/@regions.0/@innerStates.5"/>
-          </innerStates>
-          <innerStates id="_S1" label="">
-            <outgoingTransitions priority="1" targetState="//@innerStates.0/@regions.2/@innerStates.0/@regions.0/@innerStates.2"/>
-          </innerStates>
-          <innerStates id="_S4" label="">
-            <outgoingTransitions priority="1" targetState="//@innerStates.0/@regions.2/@innerStates.0/@regions.0/@innerStates.3"/>
-          </innerStates>
-          <innerStates id="_S5" label=""/>
-          <innerStates id="_S3" label="">
-            <outgoingTransitions priority="1" targetState="//@innerStates.0/@regions.2/@innerStates.0/@regions.0/@innerStates.3"/>
-          </innerStates>
-          <innerStates id="_S2" label="">
-            <outgoingTransitions priority="1" targetState="//@innerStates.0/@regions.2/@innerStates.0/@regions.0/@innerStates.4"/>
-            <outgoingTransitions priority="2" targetState="//@innerStates.0/@regions.2/@innerStates.0/@regions.0/@innerStates.3"/>
-          </innerStates>
+    <regions id="Java" label="Java">
+      <states id="KIELER layered" label="KIELER layered" isInitial="true">
+        <regions id="R0" label="R0">
+          <states id="_S6" label="" isInitial="true">
+            <outgoingTransitions priority="1" targetState="//@states.0/@regions.2/@states.0/@regions.0/@states.1"/>
+            <outgoingTransitions priority="2" targetState="//@states.0/@regions.2/@states.0/@regions.0/@states.4"/>
+            <outgoingTransitions priority="3" targetState="//@states.0/@regions.2/@states.0/@regions.0/@states.5"/>
+          </states>
+          <states id="_S7" label="" incomingTransitions="//@states.0/@regions.2/@states.0/@regions.0/@states.0/@outgoingTransitions.0">
+            <outgoingTransitions priority="1" targetState="//@states.0/@regions.2/@states.0/@regions.0/@states.2"/>
+          </states>
+          <states id="_S8" label="" incomingTransitions="//@states.0/@regions.2/@states.0/@regions.0/@states.1/@outgoingTransitions.0">
+            <outgoingTransitions priority="1" targetState="//@states.0/@regions.2/@states.0/@regions.0/@states.3"/>
+          </states>
+          <states id="_S9" label="" incomingTransitions="//@states.0/@regions.2/@states.0/@regions.0/@states.4/@outgoingTransitions.0 //@states.0/@regions.2/@states.0/@regions.0/@states.5/@outgoingTransitions.1 //@states.0/@regions.2/@states.0/@regions.0/@states.2/@outgoingTransitions.0"/>
+          <states id="_S10" label="" incomingTransitions="//@states.0/@regions.2/@states.0/@regions.0/@states.5/@outgoingTransitions.0 //@states.0/@regions.2/@states.0/@regions.0/@states.0/@outgoingTransitions.1">
+            <outgoingTransitions priority="1" targetState="//@states.0/@regions.2/@states.0/@regions.0/@states.3"/>
+          </states>
+          <states id="_S11" label="" incomingTransitions="//@states.0/@regions.2/@states.0/@regions.0/@states.0/@outgoingTransitions.2">
+            <outgoingTransitions priority="1" targetState="//@states.0/@regions.2/@states.0/@regions.0/@states.4"/>
+            <outgoingTransitions priority="2" targetState="//@states.0/@regions.2/@states.0/@regions.0/@states.3"/>
+          </states>
         </regions>
-      </innerStates>
-      <innerStates id="Eclipse_GEF_Arrange_All" label="Eclipse GEF Arrange All" isInitial="true">
-        <regions id="R0">
-          <innerStates id="_S0" label="" isInitial="true">
-            <outgoingTransitions priority="1" targetState="//@innerStates.0/@regions.2/@innerStates.1/@regions.0/@innerStates.1"/>
-            <outgoingTransitions priority="2" targetState="//@innerStates.0/@regions.2/@innerStates.1/@regions.0/@innerStates.4"/>
-            <outgoingTransitions priority="3" targetState="//@innerStates.0/@regions.2/@innerStates.1/@regions.0/@innerStates.5"/>
-          </innerStates>
-          <innerStates id="_S1" label="">
-            <outgoingTransitions priority="1" targetState="//@innerStates.0/@regions.2/@innerStates.1/@regions.0/@innerStates.2"/>
-          </innerStates>
-          <innerStates id="_S2" label="">
-            <outgoingTransitions priority="1" targetState="//@innerStates.0/@regions.2/@innerStates.1/@regions.0/@innerStates.3"/>
-          </innerStates>
-          <innerStates id="_S4" label="">
-            <outgoingTransitions priority="1" targetState="//@innerStates.0/@regions.2/@innerStates.1/@regions.0/@innerStates.5"/>
-          </innerStates>
-          <innerStates id="_S3" label="">
-            <outgoingTransitions priority="1" targetState="//@innerStates.0/@regions.2/@innerStates.1/@regions.0/@innerStates.3"/>
-            <outgoingTransitions priority="2" targetState="//@innerStates.0/@regions.2/@innerStates.1/@regions.0/@innerStates.5"/>
-          </innerStates>
-          <innerStates id="_S5" label=""/>
+      </states>
+      <states id="Eclipse GEF Arrange All" label="Eclipse GEF Arrange All" isInitial="true">
+        <regions id="R0" label="R0">
+          <states id="_S6" label="" isInitial="true">
+            <outgoingTransitions priority="1" targetState="//@states.0/@regions.2/@states.1/@regions.0/@states.1"/>
+            <outgoingTransitions priority="2" targetState="//@states.0/@regions.2/@states.1/@regions.0/@states.4"/>
+            <outgoingTransitions priority="3" targetState="//@states.0/@regions.2/@states.1/@regions.0/@states.5"/>
+          </states>
+          <states id="_S7" label="" incomingTransitions="//@states.0/@regions.2/@states.1/@regions.0/@states.0/@outgoingTransitions.0">
+            <outgoingTransitions priority="1" targetState="//@states.0/@regions.2/@states.1/@regions.0/@states.2"/>
+          </states>
+          <states id="_S8" label="" incomingTransitions="//@states.0/@regions.2/@states.1/@regions.0/@states.1/@outgoingTransitions.0">
+            <outgoingTransitions priority="1" targetState="//@states.0/@regions.2/@states.1/@regions.0/@states.3"/>
+          </states>
+          <states id="_S9" label="" incomingTransitions="//@states.0/@regions.2/@states.1/@regions.0/@states.2/@outgoingTransitions.0 //@states.0/@regions.2/@states.1/@regions.0/@states.4/@outgoingTransitions.0">
+            <outgoingTransitions priority="1" targetState="//@states.0/@regions.2/@states.1/@regions.0/@states.5"/>
+          </states>
+          <states id="_S10" label="" incomingTransitions="//@states.0/@regions.2/@states.1/@regions.0/@states.0/@outgoingTransitions.1">
+            <outgoingTransitions priority="1" targetState="//@states.0/@regions.2/@states.1/@regions.0/@states.3"/>
+            <outgoingTransitions priority="2" targetState="//@states.0/@regions.2/@states.1/@regions.0/@states.5"/>
+          </states>
+          <states id="_S11" label="" incomingTransitions="//@states.0/@regions.2/@states.1/@regions.0/@states.0/@outgoingTransitions.2 //@states.0/@regions.2/@states.1/@regions.0/@states.4/@outgoingTransitions.1 //@states.0/@regions.2/@states.1/@regions.0/@states.3/@outgoingTransitions.0"/>
         </regions>
-      </innerStates>
+      </states>
     </regions>
-  </innerStates>
+  </states>
 </synccharts:Region>

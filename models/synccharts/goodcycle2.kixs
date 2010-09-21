@@ -1,34 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<synccharts:Region xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:synccharts="http://kieler.cs.cau.de/synccharts">
-  <innerStates id="S0" label="good_cycle">
+<synccharts:Region xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:expressions="http://kieler.cs.cau.de/expressions/0.1.2" xmlns:synccharts="http://kieler.cs.cau.de/synccharts/0.2.3">
+  <states id="S0" label="good_cycle">
     <signals name="A"/>
     <signals name="B"/>
     <signals name="I" isInput="true"/>
     <regions>
-      <innerStates id="S0" label="s1" isInitial="true">
-        <outgoingTransitions triggersAndEffects="I and A / B" priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.1">
-          <effects xsi:type="synccharts:Emission" signal="B"/>
-          <trigger xsi:type="synccharts:ComplexExpression" operator="and">
-            <subExpressions xsi:type="synccharts:SignalReference" signal="I"/>
-            <subExpressions xsi:type="synccharts:SignalReference" signal="A"/>
+      <states id="S0" label="s1" isInitial="true">
+        <outgoingTransitions label="I and A / B" priority="1" targetState="//@states.0/@regions.0/@states.1">
+          <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.1"/>
+          <trigger xsi:type="expressions:OperatorExpression" operator="and">
+            <subExpressions xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.2"/>
+            <subExpressions xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.0"/>
           </trigger>
         </outgoingTransitions>
-      </innerStates>
-      <innerStates id="S1" label="s2"/>
+      </states>
+      <states id="S1" label="s2" incomingTransitions="//@states.0/@regions.0/@states.0/@outgoingTransitions.0"/>
     </regions>
     <regions>
-      <innerStates id="S0" label="s3" isInitial="true">
-        <outgoingTransitions triggersAndEffects="not I and B / A" priority="1" targetState="//@innerStates.0/@regions.1/@innerStates.1">
-          <effects xsi:type="synccharts:Emission" signal="A"/>
-          <trigger xsi:type="synccharts:ComplexExpression" operator="and">
-            <subExpressions xsi:type="synccharts:ComplexExpression" operator="not">
-              <subExpressions xsi:type="synccharts:SignalReference" signal="I"/>
+      <states id="S0" label="s3" isInitial="true">
+        <outgoingTransitions label="not I and B / A" priority="1" targetState="//@states.0/@regions.1/@states.1">
+          <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.0"/>
+          <trigger xsi:type="expressions:OperatorExpression" operator="and">
+            <subExpressions xsi:type="expressions:OperatorExpression" operator="not">
+              <subExpressions xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.2"/>
             </subExpressions>
-            <subExpressions xsi:type="synccharts:SignalReference" signal="B"/>
+            <subExpressions xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.1"/>
           </trigger>
         </outgoingTransitions>
-      </innerStates>
-      <innerStates id="S1" label="s4"/>
+      </states>
+      <states id="S1" label="s4" incomingTransitions="//@states.0/@regions.1/@states.0/@outgoingTransitions.0"/>
     </regions>
-  </innerStates>
+  </states>
 </synccharts:Region>

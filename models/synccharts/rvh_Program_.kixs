@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<synccharts:Region xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:synccharts="http://kieler.cs.cau.de/synccharts">
-  <innerStates id="S0" label="Program" bodyText="">
+<synccharts:Region xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:expressions="http://kieler.cs.cau.de/expressions/0.1.2" xmlns:synccharts="http://kieler.cs.cau.de/synccharts/0.2.3">
+  <states id="S0" label="Program">
     <signals name="mainFork"/>
     <signals name="noneActive"/>
     <signals name="startTick"/>
@@ -8,33 +8,33 @@
     <signals name="threadSchedule"/>
     <signals name="instrClock"/>
     <regions>
-      <innerStates id="S0" label="init" isInitial="true" bodyText="">
-        <outgoingTransitions triggersAndEffects="mainFork" priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.1">
-          <trigger xsi:type="synccharts:SignalReference" signal="mainFork"/>
+      <states id="S0" label="init" isInitial="true">
+        <outgoingTransitions label="mainFork" priority="1" targetState="//@states.0/@regions.0/@states.1">
+          <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.0"/>
         </outgoingTransitions>
-      </innerStates>
-      <innerStates id="S1" label="running">
+      </states>
+      <states id="S1" label="running" incomingTransitions="//@states.0/@regions.0/@states.1/@outgoingTransitions.1 //@states.0/@regions.0/@states.0/@outgoingTransitions.0">
         <regions>
-          <innerStates id="S0" label="select_thread" isInitial="true">
-            <outgoingTransitions triggersAndEffects="threadSchedule" priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.1">
-              <trigger xsi:type="synccharts:SignalReference" signal="threadSchedule"/>
+          <states id="S0" label="select_thread" isInitial="true" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.0/@states.1/@outgoingTransitions.0">
+            <outgoingTransitions label="threadSchedule" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.0/@states.1">
+              <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.4"/>
             </outgoingTransitions>
-          </innerStates>
-          <innerStates id="S1" label="run_thread">
-            <outgoingTransitions triggersAndEffects="instrClock" priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.0">
-              <trigger xsi:type="synccharts:SignalReference" signal="instrClock"/>
+          </states>
+          <states id="S1" label="run_thread" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.0/@states.0/@outgoingTransitions.0">
+            <outgoingTransitions label="instrClock" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.0/@states.0">
+              <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.5"/>
             </outgoingTransitions>
-          </innerStates>
+          </states>
         </regions>
-        <outgoingTransitions triggersAndEffects="noneEnabled" priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.2">
-          <trigger xsi:type="synccharts:SignalReference" signal="noneEnabled"/>
+        <outgoingTransitions label="noneEnabled" priority="1" targetState="//@states.0/@regions.0/@states.2">
+          <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.3"/>
         </outgoingTransitions>
-        <outgoingTransitions triggersAndEffects="noneActive / startTick" priority="2" targetState="//@innerStates.0/@regions.0/@innerStates.1">
-          <effects xsi:type="synccharts:Emission" signal="startTick"/>
-          <trigger xsi:type="synccharts:SignalReference" signal="noneActive"/>
+        <outgoingTransitions label="noneActive / startTick" priority="2" targetState="//@states.0/@regions.0/@states.1">
+          <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.2"/>
+          <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.1"/>
         </outgoingTransitions>
-      </innerStates>
-      <innerStates id="S2" label="terminated"/>
+      </states>
+      <states id="S2" label="terminated" incomingTransitions="//@states.0/@regions.0/@states.1/@outgoingTransitions.0"/>
     </regions>
-  </innerStates>
+  </states>
 </synccharts:Region>

@@ -1,68 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<synccharts:Region xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:synccharts="http://kieler.cs.cau.de/synccharts">
-  <innerStates id="SyncChart" label="SyncChart">
+<synccharts:Region xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:expressions="http://kieler.cs.cau.de/expressions/0.1.2" xmlns:synccharts="http://kieler.cs.cau.de/synccharts/0.2.3" id="_R">
+  <states id="SyncChart" label="SyncChart">
     <signals name="I" isInput="true"/>
     <signals name="A"/>
     <signals name="B"/>
     <signals name="C"/>
     <signals name="O" isOutput="true"/>
-    <regions>
-      <innerStates id="Initial" label="Initial" isInitial="true">
-        <outgoingTransitions targetState="//@innerStates.0/@regions.0/@innerStates.1"/>
-      </innerStates>
-      <innerStates id="S0">
+    <regions id="_R0">
+      <states id="Initial" label="Initial" isInitial="true">
+        <outgoingTransitions priority="1" targetState="//@states.0/@regions.0/@states.1"/>
+      </states>
+      <states id="_S0" incomingTransitions="//@states.0/@regions.0/@states.0/@outgoingTransitions.0 //@states.0/@regions.0/@states.1/@outgoingTransitions.0">
         <signals name="B"/>
-        <regions>
-          <innerStates id="S0" isInitial="true">
-            <outgoingTransitions triggersAndEffects="A / B" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.1">
-              <effects xsi:type="synccharts:Emission" signal="B"/>
-              <trigger xsi:type="synccharts:SignalReference" signal="A"/>
+        <regions id="_R0">
+          <states id="_S0" isInitial="true">
+            <outgoingTransitions label="A/B" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.0/@states.1">
+              <effects xsi:type="synccharts:Emission" signal="//@states.0/@regions.0/@states.1/@signals.0"/>
+              <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.1"/>
             </outgoingTransitions>
-          </innerStates>
-          <innerStates id="S1" isFinal="true"/>
+          </states>
+          <states id="_S1" isFinal="true" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.0/@states.0/@outgoingTransitions.0"/>
         </regions>
-        <regions>
-          <innerStates id="S" label="S" isInitial="true">
-            <outgoingTransitions triggersAndEffects="B / C" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.1/@innerStates.1">
-              <effects xsi:type="synccharts:Emission" signal="C"/>
-              <trigger xsi:type="synccharts:SignalReference" signal="B"/>
+        <regions id="_R1">
+          <states id="S" label="S" isInitial="true">
+            <outgoingTransitions label="B/C" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.1/@states.1">
+              <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.3"/>
+              <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.1/@signals.0"/>
             </outgoingTransitions>
-          </innerStates>
-          <innerStates id="S0" isFinal="true"/>
+          </states>
+          <states id="_S0" isFinal="true" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.1/@states.0/@outgoingTransitions.0"/>
         </regions>
-        <outgoingTransitions triggersAndEffects="" type="NORMALTERMINATION" targetState="//@innerStates.0/@regions.0/@innerStates.2"/>
-        <outgoingTransitions triggersAndEffects="I" priority="2" targetState="//@innerStates.0/@regions.0/@innerStates.1">
-          <trigger xsi:type="synccharts:SignalReference" signal="I"/>
+        <outgoingTransitions label="I" priority="1" targetState="//@states.0/@regions.0/@states.1">
+          <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.0"/>
         </outgoingTransitions>
-      </innerStates>
-      <innerStates id="S1"/>
+        <outgoingTransitions label="" priority="2" type="NORMALTERMINATION" targetState="//@states.0/@regions.0/@states.2"/>
+      </states>
+      <states id="_S1" incomingTransitions="//@states.0/@regions.0/@states.1/@outgoingTransitions.1"/>
     </regions>
-    <regions>
-      <innerStates id="S" label="S" isInitial="true">
-        <outgoingTransitions triggersAndEffects="I / A" targetState="//@innerStates.0/@regions.1/@innerStates.1">
-          <effects xsi:type="synccharts:Emission" signal="A"/>
-          <trigger xsi:type="synccharts:SignalReference" signal="I"/>
+    <regions id="_R1">
+      <states id="S" label="S" isInitial="true">
+        <outgoingTransitions label="I/A" priority="1" targetState="//@states.0/@regions.1/@states.1">
+          <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.1"/>
+          <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.0"/>
         </outgoingTransitions>
-      </innerStates>
-      <innerStates id="S0"/>
+      </states>
+      <states id="_S0" incomingTransitions="//@states.0/@regions.1/@states.0/@outgoingTransitions.0"/>
     </regions>
-    <regions>
-      <innerStates id="S" label="S" isInitial="true">
-        <outgoingTransitions triggersAndEffects="C / B" targetState="//@innerStates.0/@regions.2/@innerStates.1">
-          <effects xsi:type="synccharts:Emission" signal="B"/>
-          <trigger xsi:type="synccharts:SignalReference" signal="C"/>
+    <regions id="_R2">
+      <states id="S" label="S" isInitial="true">
+        <outgoingTransitions label="C/B" priority="1" targetState="//@states.0/@regions.2/@states.1">
+          <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.2"/>
+          <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.3"/>
         </outgoingTransitions>
-      </innerStates>
-      <innerStates id="S0"/>
+      </states>
+      <states id="_S0" incomingTransitions="//@states.0/@regions.2/@states.0/@outgoingTransitions.0"/>
     </regions>
-    <regions>
-      <innerStates id="S" label="S" isInitial="true">
-        <outgoingTransitions triggersAndEffects="B / O" targetState="//@innerStates.0/@regions.3/@innerStates.1">
-          <effects xsi:type="synccharts:Emission" signal="O"/>
-          <trigger xsi:type="synccharts:SignalReference" signal="B"/>
+    <regions id="_R3">
+      <states id="S" label="S" isInitial="true">
+        <outgoingTransitions label="B/O" priority="1" targetState="//@states.0/@regions.3/@states.1">
+          <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.4"/>
+          <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.2"/>
         </outgoingTransitions>
-      </innerStates>
-      <innerStates id="S0"/>
+      </states>
+      <states id="_S0" incomingTransitions="//@states.0/@regions.3/@states.0/@outgoingTransitions.0"/>
     </regions>
-  </innerStates>
+  </states>
 </synccharts:Region>

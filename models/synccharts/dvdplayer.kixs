@@ -1,67 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<synccharts:Region xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:synccharts="http://kieler.cs.cau.de/synccharts">
-  <innerStates id="S0" label="DVDPlayer">
-    <signals name="POWER"/>
-    <signals name="EJECT"/>
-    <signals name="PLAY"/>
-    <signals name="STOP"/>
-    <signals name="AUDIO"/>
-    <regions>
-      <innerStates id="S" label="Off" isInitial="true">
-        <outgoingTransitions triggersAndEffects="POWER" targetState="//@innerStates.0/@regions.0/@innerStates.1">
-          <trigger xsi:type="synccharts:SignalReference" signal="POWER"/>
+<synccharts:Region xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:expressions="http://kieler.cs.cau.de/expressions/0.1.2" xmlns:synccharts="http://kieler.cs.cau.de/synccharts/0.2.3" id="_R">
+  <states id="DVDPlayer" label="DVDPlayer">
+    <signals name="POWER" isInput="true"/>
+    <signals name="EJECT" isInput="true"/>
+    <signals name="PLAY" isInput="true"/>
+    <signals name="STOP" isInput="true"/>
+    <signals name="AUDIO" isInput="true"/>
+    <regions id="_R0">
+      <states id="Off" label="Off" isInitial="true" incomingTransitions="//@states.0/@regions.0/@states.1/@outgoingTransitions.0">
+        <outgoingTransitions label="POWER" priority="1" targetState="//@states.0/@regions.0/@states.1">
+          <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.0"/>
         </outgoingTransitions>
-      </innerStates>
-      <innerStates id="S0" label="On">
-        <regions>
-          <innerStates id="S" label="OpenTray" isInitial="true">
-            <outgoingTransitions triggersAndEffects="EJECT" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.1">
-              <trigger xsi:type="synccharts:SignalReference" signal="EJECT"/>
+      </states>
+      <states id="On" label="On" incomingTransitions="//@states.0/@regions.0/@states.0/@outgoingTransitions.0">
+        <regions id="_R0">
+          <states id="OpenTray" label="OpenTray" isInitial="true" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.0/@states.1/@outgoingTransitions.0">
+            <outgoingTransitions label="EJECT" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.0/@states.1">
+              <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.1"/>
             </outgoingTransitions>
-          </innerStates>
-          <innerStates id="S0" label="ClosedTray">
-            <regions>
-              <innerStates id="S" label="PAUSE" isInitial="true">
-                <outgoingTransitions triggersAndEffects="PLAY" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.1/@regions.0/@innerStates.1">
-                  <trigger xsi:type="synccharts:SignalReference" signal="PLAY"/>
+          </states>
+          <states id="ClosedTray" label="ClosedTray" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.0/@states.0/@outgoingTransitions.0">
+            <regions id="_R0">
+              <states id="PAUSE" label="PAUSE" isInitial="true" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.0/@states.1/@outgoingTransitions.1">
+                <outgoingTransitions label="PLAY" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.0/@states.1">
+                  <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.2"/>
                 </outgoingTransitions>
-              </innerStates>
-              <innerStates id="S0" label="Play">
-                <outgoingTransitions triggersAndEffects="PLAY" priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.1/@regions.0/@innerStates.0">
-                  <trigger xsi:type="synccharts:SignalReference" signal="PLAY"/>
+              </states>
+              <states id="Playing" label="Playing" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.0/@states.0/@outgoingTransitions.0 //@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.0/@states.2/@outgoingTransitions.0">
+                <outgoingTransitions label="STOP" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.0/@states.2">
+                  <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.3"/>
                 </outgoingTransitions>
-                <outgoingTransitions triggersAndEffects="STOP" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.1/@regions.0/@innerStates.2">
-                  <trigger xsi:type="synccharts:SignalReference" signal="STOP"/>
+                <outgoingTransitions label="PLAY" priority="2" targetState="//@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.0/@states.0">
+                  <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.2"/>
                 </outgoingTransitions>
-              </innerStates>
-              <innerStates id="S1" label="Stop" isFinal="true"/>
+              </states>
+              <states id="Stop" label="Stop" isFinal="true" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.0/@states.1/@outgoingTransitions.0">
+                <outgoingTransitions label="PLAY" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.0/@states.1">
+                  <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.2"/>
+                </outgoingTransitions>
+              </states>
             </regions>
-            <regions>
-              <innerStates id="S" label="English" isInitial="true">
-                <outgoingTransitions triggersAndEffects="AUDIO" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.1/@regions.1/@innerStates.1">
-                  <trigger xsi:type="synccharts:SignalReference" signal="AUDIO"/>
+            <regions id="_R1">
+              <states id="English" label="English" isInitial="true" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.1/@states.5/@outgoingTransitions.0">
+                <outgoingTransitions label="AUDIO" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.1/@states.1">
+                  <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.4"/>
                 </outgoingTransitions>
-              </innerStates>
-              <innerStates id="S0" label="German">
-                <outgoingTransitions triggersAndEffects="AUDIO" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.1/@regions.1/@innerStates.2">
-                  <trigger xsi:type="synccharts:SignalReference" signal="AUDIO"/>
+              </states>
+              <states id="German" label="German" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.1/@states.0/@outgoingTransitions.0">
+                <outgoingTransitions label="AUDIO" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.1/@states.2">
+                  <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.4"/>
                 </outgoingTransitions>
-              </innerStates>
-              <innerStates id="S1" label="French">
-                <outgoingTransitions triggersAndEffects="AUDIO" priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.1/@regions.1/@innerStates.0">
-                  <trigger xsi:type="synccharts:SignalReference" signal="AUDIO"/>
+              </states>
+              <states id="French" label="French" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.1/@states.1/@outgoingTransitions.0">
+                <outgoingTransitions label="AUDIO" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.1/@states.3">
+                  <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.4"/>
                 </outgoingTransitions>
-              </innerStates>
+              </states>
+              <states id="Spanish" label="Spanish" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.1/@states.2/@outgoingTransitions.0">
+                <outgoingTransitions label="AUDIO" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.1/@states.4">
+                  <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.4"/>
+                </outgoingTransitions>
+              </states>
+              <states id="Japanese" label="Japanese" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.1/@states.3/@outgoingTransitions.0">
+                <outgoingTransitions label="AUDIO" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.1/@states.5">
+                  <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.4"/>
+                </outgoingTransitions>
+              </states>
+              <states id="Chinese" label="Chinese" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.1/@states.4/@outgoingTransitions.0">
+                <outgoingTransitions label="AUDIO" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.1/@states.0">
+                  <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.4"/>
+                </outgoingTransitions>
+              </states>
             </regions>
-            <outgoingTransitions triggersAndEffects="EJECT" priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.0">
-              <trigger xsi:type="synccharts:SignalReference" signal="EJECT"/>
+            <outgoingTransitions label="EJECT" priority="1" type="STRONGABORT" targetState="//@states.0/@regions.0/@states.1/@regions.0/@states.0">
+              <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.1"/>
             </outgoingTransitions>
-          </innerStates>
+          </states>
         </regions>
-        <outgoingTransitions triggersAndEffects="POWER" priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.0">
-          <trigger xsi:type="synccharts:SignalReference" signal="POWER"/>
+        <outgoingTransitions label="POWER" priority="1" type="STRONGABORT" targetState="//@states.0/@regions.0/@states.0">
+          <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.0"/>
         </outgoingTransitions>
-      </innerStates>
+      </states>
     </regions>
-  </innerStates>
+  </states>
 </synccharts:Region>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<synccharts:Region xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:synccharts="http://kieler.cs.cau.de/synccharts">
-  <innerStates id="S0" label="TokenRingArbiter">
+<synccharts:Region xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:expressions="http://kieler.cs.cau.de/expressions/0.1.2" xmlns:synccharts="http://kieler.cs.cau.de/synccharts/0.2.3">
+  <states id="S0" label="TokenRingArbiter">
     <signals name="P1"/>
     <signals name="P2"/>
     <signals name="P3"/>
@@ -15,139 +15,139 @@
     <signals name="G3" isOutput="true"/>
     <signals name="InitialToken" isInput="true"/>
     <regions>
-      <innerStates id="S0" label="station2" isInitial="true">
+      <states id="S0" label="station2" isInitial="true">
         <regions>
-          <innerStates id="S0" isInitial="true">
-            <outgoingTransitions triggersAndEffects="R2 and (T2 or P2) / G2" priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.0/@innerStates.0">
-              <effects xsi:type="synccharts:Emission" signal="G2"/>
-              <trigger xsi:type="synccharts:ComplexExpression" operator="and">
-                <subExpressions xsi:type="synccharts:SignalReference" signal="R2"/>
-                <subExpressions xsi:type="synccharts:ComplexExpression" operator="or">
-                  <subExpressions xsi:type="synccharts:SignalReference" signal="T2"/>
-                  <subExpressions xsi:type="synccharts:SignalReference" signal="P2"/>
+          <states id="S0" isInitial="true" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.0/@states.0/@outgoingTransitions.1 //@states.0/@regions.0/@states.0/@regions.0/@states.0/@outgoingTransitions.0">
+            <outgoingTransitions label="R2 and (T2 or P2) / G2" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.0/@states.0">
+              <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.10"/>
+              <trigger xsi:type="expressions:OperatorExpression" operator="and">
+                <subExpressions xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.7"/>
+                <subExpressions xsi:type="expressions:OperatorExpression" operator="or">
+                  <subExpressions xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.4"/>
+                  <subExpressions xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.1"/>
                 </subExpressions>
               </trigger>
             </outgoingTransitions>
-            <outgoingTransitions triggersAndEffects="not R2 and (T2 or P2) / P3" priority="2" targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.0/@innerStates.0">
-              <effects xsi:type="synccharts:Emission" signal="P3"/>
-              <trigger xsi:type="synccharts:ComplexExpression" operator="and">
-                <subExpressions xsi:type="synccharts:ComplexExpression" operator="not">
-                  <subExpressions xsi:type="synccharts:SignalReference" signal="R2"/>
+            <outgoingTransitions label="not R2 and (T2 or P2) / P3" priority="2" targetState="//@states.0/@regions.0/@states.0/@regions.0/@states.0">
+              <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.2"/>
+              <trigger xsi:type="expressions:OperatorExpression" operator="and">
+                <subExpressions xsi:type="expressions:OperatorExpression" operator="not">
+                  <subExpressions xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.7"/>
                 </subExpressions>
-                <subExpressions xsi:type="synccharts:ComplexExpression" operator="or">
-                  <subExpressions xsi:type="synccharts:SignalReference" signal="T2"/>
-                  <subExpressions xsi:type="synccharts:SignalReference" signal="P2"/>
+                <subExpressions xsi:type="expressions:OperatorExpression" operator="or">
+                  <subExpressions xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.4"/>
+                  <subExpressions xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.1"/>
                 </subExpressions>
               </trigger>
             </outgoingTransitions>
-          </innerStates>
+          </states>
         </regions>
         <regions>
-          <innerStates id="S0" isInitial="true">
-            <outgoingTransitions triggersAndEffects="T2" priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.1/@innerStates.1">
-              <trigger xsi:type="synccharts:SignalReference" signal="T2"/>
+          <states id="S0" isInitial="true" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.1/@states.1/@outgoingTransitions.0">
+            <outgoingTransitions label="T2" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.1/@states.1">
+              <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.4"/>
             </outgoingTransitions>
-          </innerStates>
-          <innerStates id="S1">
-            <outgoingTransitions triggersAndEffects="/ T3" priority="1" targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.1/@innerStates.0">
-              <effects xsi:type="synccharts:Emission" signal="T3"/>
+          </states>
+          <states id="S1" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.1/@states.0/@outgoingTransitions.0">
+            <outgoingTransitions label="/ T3" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.1/@states.0">
+              <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.5"/>
             </outgoingTransitions>
-          </innerStates>
+          </states>
         </regions>
-      </innerStates>
+      </states>
     </regions>
     <regions>
-      <innerStates id="S0" label="station3" isInitial="true">
+      <states id="S0" label="station3" isInitial="true">
         <regions>
-          <innerStates id="S0" isInitial="true">
-            <outgoingTransitions triggersAndEffects="R3 and (T3 or P3) / G3" priority="1" targetState="//@innerStates.0/@regions.1/@innerStates.0/@regions.0/@innerStates.0">
-              <effects xsi:type="synccharts:Emission" signal="G3"/>
-              <trigger xsi:type="synccharts:ComplexExpression" operator="and">
-                <subExpressions xsi:type="synccharts:SignalReference" signal="R3"/>
-                <subExpressions xsi:type="synccharts:ComplexExpression" operator="or">
-                  <subExpressions xsi:type="synccharts:SignalReference" signal="T3"/>
-                  <subExpressions xsi:type="synccharts:SignalReference" signal="P3"/>
+          <states id="S0" isInitial="true" incomingTransitions="//@states.0/@regions.1/@states.0/@regions.0/@states.0/@outgoingTransitions.1 //@states.0/@regions.1/@states.0/@regions.0/@states.0/@outgoingTransitions.0">
+            <outgoingTransitions label="R3 and (T3 or P3) / G3" priority="1" targetState="//@states.0/@regions.1/@states.0/@regions.0/@states.0">
+              <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.11"/>
+              <trigger xsi:type="expressions:OperatorExpression" operator="and">
+                <subExpressions xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.8"/>
+                <subExpressions xsi:type="expressions:OperatorExpression" operator="or">
+                  <subExpressions xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.5"/>
+                  <subExpressions xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.2"/>
                 </subExpressions>
               </trigger>
             </outgoingTransitions>
-            <outgoingTransitions triggersAndEffects="not R3 and (T3 or P3) / P1" priority="2" targetState="//@innerStates.0/@regions.1/@innerStates.0/@regions.0/@innerStates.0">
-              <effects xsi:type="synccharts:Emission" signal="P1"/>
-              <trigger xsi:type="synccharts:ComplexExpression" operator="and">
-                <subExpressions xsi:type="synccharts:ComplexExpression" operator="not">
-                  <subExpressions xsi:type="synccharts:SignalReference" signal="R3"/>
+            <outgoingTransitions label="not R3 and (T3 or P3) / P1" priority="2" targetState="//@states.0/@regions.1/@states.0/@regions.0/@states.0">
+              <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.0"/>
+              <trigger xsi:type="expressions:OperatorExpression" operator="and">
+                <subExpressions xsi:type="expressions:OperatorExpression" operator="not">
+                  <subExpressions xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.8"/>
                 </subExpressions>
-                <subExpressions xsi:type="synccharts:ComplexExpression" operator="or">
-                  <subExpressions xsi:type="synccharts:SignalReference" signal="T3"/>
-                  <subExpressions xsi:type="synccharts:SignalReference" signal="P3"/>
+                <subExpressions xsi:type="expressions:OperatorExpression" operator="or">
+                  <subExpressions xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.5"/>
+                  <subExpressions xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.2"/>
                 </subExpressions>
               </trigger>
             </outgoingTransitions>
-          </innerStates>
+          </states>
         </regions>
         <regions>
-          <innerStates id="S0" isInitial="true">
-            <outgoingTransitions triggersAndEffects="T3" priority="1" targetState="//@innerStates.0/@regions.1/@innerStates.0/@regions.1/@innerStates.1">
-              <trigger xsi:type="synccharts:SignalReference" signal="T3"/>
+          <states id="S0" isInitial="true" incomingTransitions="//@states.0/@regions.1/@states.0/@regions.1/@states.1/@outgoingTransitions.0">
+            <outgoingTransitions label="T3" priority="1" targetState="//@states.0/@regions.1/@states.0/@regions.1/@states.1">
+              <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.5"/>
             </outgoingTransitions>
-          </innerStates>
-          <innerStates id="S1">
-            <outgoingTransitions triggersAndEffects="/ T1" priority="1" targetState="//@innerStates.0/@regions.1/@innerStates.0/@regions.1/@innerStates.0">
-              <effects xsi:type="synccharts:Emission" signal="T1"/>
+          </states>
+          <states id="S1" incomingTransitions="//@states.0/@regions.1/@states.0/@regions.1/@states.0/@outgoingTransitions.0">
+            <outgoingTransitions label="/ T1" priority="1" targetState="//@states.0/@regions.1/@states.0/@regions.1/@states.0">
+              <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.3"/>
             </outgoingTransitions>
-          </innerStates>
+          </states>
         </regions>
-      </innerStates>
+      </states>
     </regions>
     <regions>
-      <innerStates id="S0" label="station1" isInitial="true">
+      <states id="S0" label="station1" isInitial="true">
         <regions>
-          <innerStates id="S0" isInitial="true">
-            <outgoingTransitions triggersAndEffects="R1 and ((T1 or InitialToken) or P1) / G1" priority="1" targetState="//@innerStates.0/@regions.2/@innerStates.0/@regions.0/@innerStates.0">
-              <effects xsi:type="synccharts:Emission" signal="G1"/>
-              <trigger xsi:type="synccharts:ComplexExpression" operator="and">
-                <subExpressions xsi:type="synccharts:SignalReference" signal="R1"/>
-                <subExpressions xsi:type="synccharts:ComplexExpression" operator="or">
-                  <subExpressions xsi:type="synccharts:ComplexExpression" operator="or">
-                    <subExpressions xsi:type="synccharts:SignalReference" signal="T1"/>
-                    <subExpressions xsi:type="synccharts:SignalReference" signal="InitialToken"/>
+          <states id="S0" isInitial="true" incomingTransitions="//@states.0/@regions.2/@states.0/@regions.0/@states.0/@outgoingTransitions.0 //@states.0/@regions.2/@states.0/@regions.0/@states.0/@outgoingTransitions.1">
+            <outgoingTransitions label="R1 and ((T1 or InitialToken) or P1) / G1" priority="1" targetState="//@states.0/@regions.2/@states.0/@regions.0/@states.0">
+              <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.9"/>
+              <trigger xsi:type="expressions:OperatorExpression" operator="and">
+                <subExpressions xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.6"/>
+                <subExpressions xsi:type="expressions:OperatorExpression" operator="or">
+                  <subExpressions xsi:type="expressions:OperatorExpression" operator="or">
+                    <subExpressions xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.3"/>
+                    <subExpressions xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.12"/>
                   </subExpressions>
-                  <subExpressions xsi:type="synccharts:SignalReference" signal="P1"/>
+                  <subExpressions xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.0"/>
                 </subExpressions>
               </trigger>
             </outgoingTransitions>
-            <outgoingTransitions triggersAndEffects="not R1 and ((T1 or InitialToken) or P1) / P2" priority="2" targetState="//@innerStates.0/@regions.2/@innerStates.0/@regions.0/@innerStates.0">
-              <effects xsi:type="synccharts:Emission" signal="P2"/>
-              <trigger xsi:type="synccharts:ComplexExpression" operator="and">
-                <subExpressions xsi:type="synccharts:ComplexExpression" operator="not">
-                  <subExpressions xsi:type="synccharts:SignalReference" signal="R1"/>
+            <outgoingTransitions label="not R1 and ((T1 or InitialToken) or P1) / P2" priority="2" targetState="//@states.0/@regions.2/@states.0/@regions.0/@states.0">
+              <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.1"/>
+              <trigger xsi:type="expressions:OperatorExpression" operator="and">
+                <subExpressions xsi:type="expressions:OperatorExpression" operator="not">
+                  <subExpressions xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.6"/>
                 </subExpressions>
-                <subExpressions xsi:type="synccharts:ComplexExpression" operator="or">
-                  <subExpressions xsi:type="synccharts:ComplexExpression" operator="or">
-                    <subExpressions xsi:type="synccharts:SignalReference" signal="T1"/>
-                    <subExpressions xsi:type="synccharts:SignalReference" signal="InitialToken"/>
+                <subExpressions xsi:type="expressions:OperatorExpression" operator="or">
+                  <subExpressions xsi:type="expressions:OperatorExpression" operator="or">
+                    <subExpressions xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.3"/>
+                    <subExpressions xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.12"/>
                   </subExpressions>
-                  <subExpressions xsi:type="synccharts:SignalReference" signal="P1"/>
+                  <subExpressions xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.0"/>
                 </subExpressions>
               </trigger>
             </outgoingTransitions>
-          </innerStates>
+          </states>
         </regions>
         <regions>
-          <innerStates id="S0" isInitial="true">
-            <outgoingTransitions triggersAndEffects="T1 or InitialToken" priority="1" targetState="//@innerStates.0/@regions.2/@innerStates.0/@regions.1/@innerStates.1">
-              <trigger xsi:type="synccharts:ComplexExpression" operator="or">
-                <subExpressions xsi:type="synccharts:SignalReference" signal="T1"/>
-                <subExpressions xsi:type="synccharts:SignalReference" signal="InitialToken"/>
+          <states id="S0" isInitial="true" incomingTransitions="//@states.0/@regions.2/@states.0/@regions.1/@states.1/@outgoingTransitions.0">
+            <outgoingTransitions label="T1 or InitialToken" priority="1" targetState="//@states.0/@regions.2/@states.0/@regions.1/@states.1">
+              <trigger xsi:type="expressions:OperatorExpression" operator="or">
+                <subExpressions xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.3"/>
+                <subExpressions xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.12"/>
               </trigger>
             </outgoingTransitions>
-          </innerStates>
-          <innerStates id="S1">
-            <outgoingTransitions triggersAndEffects="/ T2" priority="1" targetState="//@innerStates.0/@regions.2/@innerStates.0/@regions.1/@innerStates.0">
-              <effects xsi:type="synccharts:Emission" signal="T2"/>
+          </states>
+          <states id="S1" incomingTransitions="//@states.0/@regions.2/@states.0/@regions.1/@states.0/@outgoingTransitions.0">
+            <outgoingTransitions label="/ T2" priority="1" targetState="//@states.0/@regions.2/@states.0/@regions.1/@states.0">
+              <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.4"/>
             </outgoingTransitions>
-          </innerStates>
+          </states>
         </regions>
-      </innerStates>
+      </states>
     </regions>
-  </innerStates>
+  </states>
 </synccharts:Region>

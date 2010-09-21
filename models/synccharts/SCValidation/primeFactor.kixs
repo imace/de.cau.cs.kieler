@@ -1,51 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<synccharts:Region xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:synccharts="http://kieler.cs.cau.de/synccharts/0.2">
-  <innerStates id="primeFactor" label="primeFactor">
+<synccharts:Region xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:expressions="http://kieler.cs.cau.de/expressions/0.1.2" xmlns:synccharts="http://kieler.cs.cau.de/synccharts/0.2.3">
+  <states id="primeFactor" label="primeFactor">
     <signals name="A" isInput="true"/>
     <signals name="B" isInput="true"/>
     <signals name="C" isInput="true"/>
     <signals name="D" isInput="true"/>
     <signals name="V" type="int" initialValue="1" isOutput="true" combineOperator="*" hostCombineOperator=""/>
     <regions id="R0">
-      <innerStates id="S0" label="S0" isInitial="true">
+      <states id="S0" label="S0" isInitial="true" incomingTransitions="//@states.0/@regions.0/@states.0/@outgoingTransitions.0">
         <regions id="R0">
-          <innerStates id="S2" label="S2"/>
-          <innerStates id="S1" label="S1">
-            <outgoingTransitions label="A / V(3)" priority="1" DUMMY_targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.0/@innerStates.1">
-              <effects xsi:type="synccharts:Emission" signal="V">
-                <newValue xsi:type="synccharts:IntValue" value="3"/>
+          <states id="S2" label="S2" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.0/@states.1/@outgoingTransitions.1"/>
+          <states id="S1" label="S1" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.0/@states.2/@outgoingTransitions.0 //@states.0/@regions.0/@states.0/@regions.0/@states.1/@outgoingTransitions.0">
+            <outgoingTransitions label="A / V(3)" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.0/@states.1">
+              <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.4">
+                <newValue xsi:type="expressions:IntValue" value="3"/>
               </effects>
-              <trigger xsi:type="synccharts:SignalReference" signal="A"/>
+              <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.0"/>
             </outgoingTransitions>
-            <outgoingTransitions label="# B / V(5)" isImmediate="true" priority="2" DUMMY_targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.0/@innerStates.0">
-              <effects xsi:type="synccharts:Emission" signal="V">
-                <newValue xsi:type="synccharts:IntValue" value="5"/>
+            <outgoingTransitions isImmediate="true" label="# B / V(5)" priority="2" targetState="//@states.0/@regions.0/@states.0/@regions.0/@states.0">
+              <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.4">
+                <newValue xsi:type="expressions:IntValue" value="5"/>
               </effects>
-              <trigger xsi:type="synccharts:SignalReference" signal="B"/>
+              <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.1"/>
             </outgoingTransitions>
-          </innerStates>
-          <innerStates id="S3" label="S3" isInitial="true">
-            <outgoingTransitions label="#  / V(2)" isImmediate="true" priority="1" DUMMY_targetState="//@innerStates.0/@regions.0/@innerStates.0/@regions.0/@innerStates.1">
-              <effects xsi:type="synccharts:Emission" signal="V">
-                <newValue xsi:type="synccharts:IntValue" value="2"/>
+          </states>
+          <states id="S3" label="S3" isInitial="true">
+            <outgoingTransitions isImmediate="true" label="#  / V(2)" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.0/@states.1">
+              <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.4">
+                <newValue xsi:type="expressions:IntValue" value="2"/>
               </effects>
             </outgoingTransitions>
-          </innerStates>
+          </states>
         </regions>
-        <outgoingTransitions label="C / V(7)" priority="1" DUMMY_targetState="//@innerStates.0/@regions.0/@innerStates.0">
-          <effects xsi:type="synccharts:Emission" signal="V">
-            <newValue xsi:type="synccharts:IntValue" value="7"/>
+        <outgoingTransitions label="C / V(7)" priority="1" targetState="//@states.0/@regions.0/@states.0">
+          <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.4">
+            <newValue xsi:type="expressions:IntValue" value="7"/>
           </effects>
-          <trigger xsi:type="synccharts:SignalReference" signal="C"/>
+          <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.2"/>
         </outgoingTransitions>
-        <outgoingTransitions label="# D / V(11)" isImmediate="true" priority="2" DUMMY_targetState="//@innerStates.0/@regions.0/@innerStates.1">
-          <effects xsi:type="synccharts:Emission" signal="V">
-            <newValue xsi:type="synccharts:IntValue" value="11"/>
+        <outgoingTransitions isImmediate="true" label="# D / V(11)" priority="2" targetState="//@states.0/@regions.0/@states.1">
+          <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.4">
+            <newValue xsi:type="expressions:IntValue" value="11"/>
           </effects>
-          <trigger xsi:type="synccharts:SignalReference" signal="D"/>
+          <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.3"/>
         </outgoingTransitions>
-      </innerStates>
-      <innerStates id="S3" label="S3"/>
+      </states>
+      <states id="S3" label="S3" incomingTransitions="//@states.0/@regions.0/@states.0/@outgoingTransitions.1"/>
     </regions>
-  </innerStates>
+  </states>
 </synccharts:Region>

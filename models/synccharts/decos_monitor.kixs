@@ -21,7 +21,7 @@
     <signals name="abort"/>
     <regions id="R1" label="R1">
       <states id="global_power_off" label="global_power_off" isInitial="true" incomingTransitions="//@states.0/@regions.0/@states.4/@outgoingTransitions.0 //@states.0/@regions.0/@states.3/@outgoingTransitions.0">
-        <outgoingTransitions label="notRESET/INIT_LEFT" priority="1" targetState="//@states.0/@regions.0/@states.1">
+        <outgoingTransitions label="not RESET / INIT_LEFT" priority="1" targetState="//@states.0/@regions.0/@states.1">
           <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.0"/>
           <trigger xsi:type="expressions:OperatorExpression" operator="not">
             <subExpressions xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.2"/>
@@ -29,7 +29,7 @@
         </outgoingTransitions>
       </states>
       <states id="init_left" label="init_left" incomingTransitions="//@states.0/@regions.0/@states.0/@outgoingTransitions.0">
-        <outgoingTransitions label="TIMER/INIT_RIGHT" priority="1" targetState="//@states.0/@regions.0/@states.2">
+        <outgoingTransitions label="TIMER / INIT_RIGHT" priority="1" targetState="//@states.0/@regions.0/@states.2">
           <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.1"/>
           <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.3"/>
         </outgoingTransitions>
@@ -42,7 +42,7 @@
       <states id="operational" label="operational" incomingTransitions="//@states.0/@regions.0/@states.2/@outgoingTransitions.0">
         <regions id="_R0">
           <states id="wait_4_drive_command" label="wait_4_drive_command" isInitial="true" incomingTransitions="//@states.0/@regions.0/@states.3/@regions.0/@states.2/@outgoingTransitions.0 //@states.0/@regions.0/@states.3/@regions.0/@states.3/@outgoingTransitions.0">
-            <outgoingTransitions label="DRVCOMMAND/DRIVE" priority="1" targetState="//@states.0/@regions.0/@states.3/@regions.0/@states.1">
+            <outgoingTransitions label="DRVCOMMAND / DRIVE" priority="1" targetState="//@states.0/@regions.0/@states.3/@regions.0/@states.1">
               <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.5"/>
               <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.4"/>
             </outgoingTransitions>
@@ -70,7 +70,7 @@
             <outgoingTransitions label="HOLD1_RDY" priority="1" targetState="//@states.0/@regions.0/@states.3/@regions.0/@states.0">
               <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.6"/>
             </outgoingTransitions>
-            <outgoingTransitions label="notDRVCOMMAND/HOLD" priority="2" targetState="//@states.0/@regions.0/@states.3/@regions.0/@states.3">
+            <outgoingTransitions label="not DRVCOMMAND / HOLD" priority="2" targetState="//@states.0/@regions.0/@states.3/@regions.0/@states.3">
               <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.10"/>
               <trigger xsi:type="expressions:OperatorExpression" operator="not">
                 <subExpressions xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.4"/>
@@ -109,11 +109,11 @@
               <states id="hold_mode" label="hold_mode" isInitial="true" incomingTransitions="//@states.0/@regions.1/@states.1/@regions.0/@states.0/@regions.0/@states.1/@outgoingTransitions.0">
                 <regions id="_R0">
                   <states id="init" label="init" isInitial="true">
-                    <outgoingTransitions label="FAIL_BRAKE/HOLD1_RDY" priority="1" targetState="//@states.0/@regions.1/@states.1/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.2">
+                    <outgoingTransitions label="FAIL_BRAKE / HOLD1_RDY" priority="1" targetState="//@states.0/@regions.1/@states.1/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.2">
                       <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.6"/>
                       <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.12"/>
                     </outgoingTransitions>
-                    <outgoingTransitions label="TIMER/HOLD1_RDY" priority="2" targetState="//@states.0/@regions.1/@states.1/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.1">
+                    <outgoingTransitions label="TIMER / HOLD1_RDY" priority="2" targetState="//@states.0/@regions.1/@states.1/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.1">
                       <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.6"/>
                       <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.3"/>
                     </outgoingTransitions>
@@ -121,13 +121,13 @@
                   <states id="brake" label="brake" incomingTransitions="//@states.0/@regions.1/@states.1/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.0/@outgoingTransitions.1">
                     <regions id="_R0">
                       <states id="monitor" label="monitor" isInitial="true">
-                        <outgoingTransitions label="FAIL_ACTUATORandEXCEED" priority="1" targetState="//@states.0/@regions.1/@states.1/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.1/@regions.0/@states.1">
+                        <outgoingTransitions label="FAIL_ACTUATOR and EXCEED" priority="1" targetState="//@states.0/@regions.1/@states.1/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.1/@regions.0/@states.1">
                           <trigger xsi:type="expressions:OperatorExpression" operator="and">
                             <subExpressions xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.13"/>
                             <subExpressions xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.14"/>
                           </trigger>
                         </outgoingTransitions>
-                        <outgoingTransitions label="EXCEED_AorEXCEED_B" priority="2" targetState="//@states.0/@regions.1/@states.1/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.1/@regions.0/@states.2">
+                        <outgoingTransitions label="EXCEED_A or EXCEED_B" priority="2" targetState="//@states.0/@regions.1/@states.1/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.1/@regions.0/@states.2">
                           <trigger xsi:type="expressions:OperatorExpression" operator="or">
                             <subExpressions xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.15"/>
                             <subExpressions xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.16"/>
@@ -137,7 +137,7 @@
                       <states id="fail_act_brake" label="fail_act_brake" incomingTransitions="//@states.0/@regions.1/@states.1/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.1/@regions.0/@states.0/@outgoingTransitions.0"/>
                       <states id="_S0" isFinal="true" incomingTransitions="//@states.0/@regions.1/@states.1/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.1/@regions.0/@states.0/@outgoingTransitions.1"/>
                     </regions>
-                    <outgoingTransitions label="/HOLD1_RDY" priority="1" type="NORMALTERMINATION" targetState="//@states.0/@regions.1/@states.1/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.2">
+                    <outgoingTransitions label="/ HOLD1_RDY" priority="1" type="NORMALTERMINATION" targetState="//@states.0/@regions.1/@states.1/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.2">
                       <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.6"/>
                     </outgoingTransitions>
                   </states>
@@ -147,7 +147,7 @@
                         <outgoingTransitions label="TIMER" priority="1" targetState="//@states.0/@regions.1/@states.1/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1">
                           <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.3"/>
                         </outgoingTransitions>
-                        <outgoingTransitions label="TIMER/EMERGENCY" priority="2" targetState="//@states.0/@regions.1/@states.1/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0">
+                        <outgoingTransitions label="TIMER / EMERGENCY" priority="2" targetState="//@states.0/@regions.1/@states.1/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0">
                           <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.11"/>
                           <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.3"/>
                         </outgoingTransitions>
@@ -158,13 +158,13 @@
                         </outgoingTransitions>
                       </states>
                       <states id="C1" label="C1" incomingTransitions="//@states.0/@regions.1/@states.1/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@outgoingTransitions.0">
-                        <outgoingTransitions label="EXCEED_BandEXCEED_A" priority="1" targetState="//@states.0/@regions.1/@states.1/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.3">
+                        <outgoingTransitions label="EXCEED_B and EXCEED_A" priority="1" targetState="//@states.0/@regions.1/@states.1/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.3">
                           <trigger xsi:type="expressions:OperatorExpression" operator="and">
                             <subExpressions xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.16"/>
                             <subExpressions xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.15"/>
                           </trigger>
                         </outgoingTransitions>
-                        <outgoingTransitions label="EXCEED_AandEXCEED_B" priority="2" targetState="//@states.0/@regions.1/@states.1/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.4">
+                        <outgoingTransitions label="EXCEED_A and EXCEED_B" priority="2" targetState="//@states.0/@regions.1/@states.1/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.4">
                           <trigger xsi:type="expressions:OperatorExpression" operator="and">
                             <subExpressions xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.15"/>
                             <subExpressions xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.16"/>
@@ -176,7 +176,7 @@
                       <states id="motor_fault_b" label="motor_fault_b" isFinal="true" incomingTransitions="//@states.0/@regions.1/@states.1/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.2/@outgoingTransitions.1"/>
                       <states id="cs_breakage" label="cs_breakage" isFinal="true" incomingTransitions="//@states.0/@regions.1/@states.1/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.2/@outgoingTransitions.2"/>
                     </regions>
-                    <outgoingTransitions label="/EMERGENCY" priority="1" type="NORMALTERMINATION" targetState="//@states.0/@regions.1/@states.1/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.2">
+                    <outgoingTransitions label="/ EMERGENCY" priority="1" type="NORMALTERMINATION" targetState="//@states.0/@regions.1/@states.1/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.2">
                       <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.11"/>
                     </outgoingTransitions>
                   </states>
@@ -188,17 +188,17 @@
               <states id="drive_mode" label="drive_mode" incomingTransitions="//@states.0/@regions.1/@states.1/@regions.0/@states.0/@regions.0/@states.0/@outgoingTransitions.0">
                 <regions id="_R0">
                   <states id="init" label="init" isInitial="true">
-                    <outgoingTransitions label="TIMER/DRV1_RDY" priority="1" targetState="//@states.0/@regions.1/@states.1/@regions.0/@states.0/@regions.0/@states.1/@regions.0/@states.1">
+                    <outgoingTransitions label="TIMER / DRV1_RDY" priority="1" targetState="//@states.0/@regions.1/@states.1/@regions.0/@states.0/@regions.0/@states.1/@regions.0/@states.1">
                       <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.7"/>
                       <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.3"/>
                     </outgoingTransitions>
                   </states>
                   <states id="C1" label="C1" incomingTransitions="//@states.0/@regions.1/@states.1/@regions.0/@states.0/@regions.0/@states.1/@regions.0/@states.0/@outgoingTransitions.0">
-                    <outgoingTransitions label="FAIL_ACTUATOR/ONEMOT1" priority="1" targetState="//@states.0/@regions.1/@states.1/@regions.0/@states.0/@regions.0/@states.1/@regions.0/@states.3">
+                    <outgoingTransitions label="FAIL_ACTUATOR / ONEMOT1" priority="1" targetState="//@states.0/@regions.1/@states.1/@regions.0/@states.0/@regions.0/@states.1/@regions.0/@states.3">
                       <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.9"/>
                       <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.13"/>
                     </outgoingTransitions>
-                    <outgoingTransitions label="/TWOMOT1" priority="2" targetState="//@states.0/@regions.1/@states.1/@regions.0/@states.0/@regions.0/@states.1/@regions.0/@states.2">
+                    <outgoingTransitions label="/ TWOMOT1" priority="2" targetState="//@states.0/@regions.1/@states.1/@regions.0/@states.0/@regions.0/@states.1/@regions.0/@states.2">
                       <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.8"/>
                     </outgoingTransitions>
                   </states>
@@ -222,7 +222,7 @@
                       </states>
                       <states id="failure_controller_b_" label="failure_controller_b_" isFinal="true" incomingTransitions="//@states.0/@regions.1/@states.1/@regions.0/@states.0/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@outgoingTransitions.1"/>
                       <states id="failure_controller_ab_" label="failure_controller_ab_" incomingTransitions="//@states.0/@regions.1/@states.1/@regions.0/@states.0/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.4/@outgoingTransitions.0 //@states.0/@regions.1/@states.1/@regions.0/@states.0/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@outgoingTransitions.4">
-                        <outgoingTransitions label="/EMERGENCY" priority="1" targetState="//@states.0/@regions.1/@states.1/@regions.0/@states.0/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.4">
+                        <outgoingTransitions label="/ EMERGENCY" priority="1" targetState="//@states.0/@regions.1/@states.1/@regions.0/@states.0/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.4">
                           <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.11"/>
                         </outgoingTransitions>
                       </states>
@@ -238,7 +238,7 @@
                         <outgoingTransitions priority="3" targetState="//@states.0/@regions.1/@states.1/@regions.0/@states.0/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.9"/>
                       </states>
                       <states id="cs_jam" label="cs_jam" incomingTransitions="//@states.0/@regions.1/@states.1/@regions.0/@states.0/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.9/@outgoingTransitions.0 //@states.0/@regions.1/@states.1/@regions.0/@states.0/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.8/@outgoingTransitions.2">
-                        <outgoingTransitions label="/EMERGENCY" priority="1" targetState="//@states.0/@regions.1/@states.1/@regions.0/@states.0/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.9">
+                        <outgoingTransitions label="/ EMERGENCY" priority="1" targetState="//@states.0/@regions.1/@states.1/@regions.0/@states.0/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.9">
                           <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.11"/>
                         </outgoingTransitions>
                       </states>
@@ -246,7 +246,7 @@
                       <states id="breakage_b_shaft_ppum" label="breakage_b_shaft_ppum" isFinal="true" incomingTransitions="//@states.0/@regions.1/@states.1/@regions.0/@states.0/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.8/@outgoingTransitions.1"/>
                       <states id="failure_controller_a" label="failure_controller_a" isFinal="true" incomingTransitions="//@states.0/@regions.1/@states.1/@regions.0/@states.0/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.2/@outgoingTransitions.0"/>
                     </regions>
-                    <outgoingTransitions label="/ONEMOT1" priority="1" type="NORMALTERMINATION" targetState="//@states.0/@regions.1/@states.1/@regions.0/@states.0/@regions.0/@states.1/@regions.0/@states.3">
+                    <outgoingTransitions label="/ ONEMOT1" priority="1" type="NORMALTERMINATION" targetState="//@states.0/@regions.1/@states.1/@regions.0/@states.0/@regions.0/@states.1/@regions.0/@states.3">
                       <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.9"/>
                     </outgoingTransitions>
                   </states>
@@ -256,7 +256,7 @@
                         <outgoingTransitions label="EXCEED" priority="1" targetState="//@states.0/@regions.1/@states.1/@regions.0/@states.0/@regions.0/@states.1/@regions.0/@states.3/@regions.0/@states.1">
                           <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.14"/>
                         </outgoingTransitions>
-                        <outgoingTransitions label="TIMER/EMERGENCY" priority="2" targetState="//@states.0/@regions.1/@states.1/@regions.0/@states.0/@regions.0/@states.1/@regions.0/@states.3/@regions.0/@states.0">
+                        <outgoingTransitions label="TIMER / EMERGENCY" priority="2" targetState="//@states.0/@regions.1/@states.1/@regions.0/@states.0/@regions.0/@states.1/@regions.0/@states.3/@regions.0/@states.0">
                           <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.11"/>
                           <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.3"/>
                         </outgoingTransitions>
@@ -282,7 +282,7 @@
                       <states id="break_a_or_cs_or_jam" label="break_a_or_cs_or_jam" isFinal="true" incomingTransitions="//@states.0/@regions.1/@states.1/@regions.0/@states.0/@regions.0/@states.1/@regions.0/@states.3/@regions.0/@states.2/@outgoingTransitions.2"/>
                       <states id="break_b_or_cs_or_jam" label="break_b_or_cs_or_jam" isFinal="true" incomingTransitions="//@states.0/@regions.1/@states.1/@regions.0/@states.0/@regions.0/@states.1/@regions.0/@states.3/@regions.0/@states.5/@outgoingTransitions.2"/>
                     </regions>
-                    <outgoingTransitions label="/EMERGENCY" priority="1" type="NORMALTERMINATION" targetState="//@states.0/@regions.1/@states.1/@regions.0/@states.0/@regions.0/@states.1/@regions.0/@states.3">
+                    <outgoingTransitions label="/ EMERGENCY" priority="1" type="NORMALTERMINATION" targetState="//@states.0/@regions.1/@states.1/@regions.0/@states.0/@regions.0/@states.1/@regions.0/@states.3">
                       <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.11"/>
                     </outgoingTransitions>
                   </states>

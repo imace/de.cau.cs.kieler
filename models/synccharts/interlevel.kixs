@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<synccharts:Region xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:synccharts="http://kieler.cs.cau.de/synccharts/0.2.3">
+  <states id="interlevel" label="interlevel">
+    <regions id="">
+      <states id="A" label="A" isInitial="true">
+        <regions id="">
+          <states id="A1" label="A1" isInitial="true">
+            <regions id="">
+              <states id="_" isInitial="true">
+                <outgoingTransitions priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.0/@states.1"/>
+              </states>
+            </regions>
+          </states>
+          <states id="_2" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.0/@outgoingTransitions.0"/>
+        </regions>
+      </states>
+    </regions>
+    <regions id="">
+      <states id="B" label="B" isInitial="true">
+        <regions id="">
+          <states id="_" isInitial="true">
+            <outgoingTransitions priority="1" targetState="//@states.0/@regions.1/@states.0/@regions.0/@states.1/@regions.0/@states.0"/>
+          </states>
+          <states id="B1" label="B1">
+            <regions id="">
+              <states id="_" isInitial="true" incomingTransitions="//@states.0/@regions.1/@states.0/@regions.0/@states.0/@outgoingTransitions.0"/>
+            </regions>
+          </states>
+        </regions>
+      </states>
+    </regions>
+    <regions id="">
+      <states id="C" label="C" isInitial="true">
+        <regions id="">
+          <states id="C1" label="C1" isInitial="true">
+            <regions id="">
+              <states id="_" isInitial="true">
+                <outgoingTransitions priority="1" targetState="//@states.0/@regions.2/@states.0/@regions.0/@states.0/@regions.0/@states.1"/>
+              </states>
+              <states id="_2" incomingTransitions="//@states.0/@regions.2/@states.0/@regions.0/@states.0/@regions.0/@states.0/@outgoingTransitions.0">
+                <outgoingTransitions priority="1" targetState="//@states.0/@regions.2/@states.0/@regions.0/@states.1/@regions.0/@states.0/@regions.0/@states.0"/>
+              </states>
+            </regions>
+          </states>
+          <states id="C2" label="C2">
+            <regions id="">
+              <states id="C3" label="C3" isInitial="true">
+                <regions id="">
+                  <states id="_" isInitial="true" incomingTransitions="//@states.0/@regions.2/@states.0/@regions.0/@states.0/@regions.0/@states.1/@outgoingTransitions.0">
+                    <outgoingTransitions priority="1" targetState="//@states.0/@regions.2/@states.0/@regions.0/@states.1/@regions.0/@states.0/@regions.0/@states.1"/>
+                  </states>
+                  <states id="_3" incomingTransitions="//@states.0/@regions.2/@states.0/@regions.0/@states.1/@regions.0/@states.0/@regions.0/@states.0/@outgoingTransitions.0"/>
+                </regions>
+                <outgoingTransitions priority="1" targetState="//@states.0/@regions.2/@states.0/@regions.0/@states.1/@regions.0/@states.1"/>
+              </states>
+              <states id="_" incomingTransitions="//@states.0/@regions.2/@states.0/@regions.0/@states.1/@regions.0/@states.0/@outgoingTransitions.0"/>
+            </regions>
+          </states>
+        </regions>
+      </states>
+    </regions>
+  </states>
+</synccharts:Region>

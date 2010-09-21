@@ -1,285 +1,392 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:klayoutdata="http://kieler.cs.cau.de/KLayoutData" xmlns:layoutoptions="http://kieler.cs.cau.de/LayoutOptions" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:synccharts="http://kieler.cs.cau.de/synccharts" xmi:id="_bvVd0M7_Ed6tGb5Q44XhBQ" type="Synccharts" measurementUnit="Pixel">
-  <children xmi:type="notation:Shape" xmi:id="_h-z30c7_Ed6PsZOe3JaFXA" type="2001" fontName="Lucida Grande" fontHeight="11" lineColor="0">
-    <children xmi:type="notation:DecorationNode" xmi:id="_h-2UEM7_Ed6PsZOe3JaFXA" type="5008"/>
-    <children xmi:type="notation:BasicCompartment" xmi:id="_h-27IM7_Ed6PsZOe3JaFXA" type="7001">
-      <children xmi:type="notation:Shape" xmi:id="_slaqIM7_Ed6PsZOe3JaFXA" type="3003" fontName="Lucida Grande" fontHeight="11" lineColor="0">
-        <children xmi:type="notation:DecorationNode" xmi:id="_slaqIs7_Ed6PsZOe3JaFXA" type="5001"/>
-        <element xmi:type="synccharts:Signal" href="dvdplayer.kixs#POWER"/>
-        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_slaqIc7_Ed6PsZOe3JaFXA" x="69" y="6"/>
-      </children>
-      <children xmi:type="notation:Shape" xmi:id="_U5o74M8AEd6PsZOe3JaFXA" type="3003" fontName="Lucida Grande" fontHeight="11" lineColor="0">
-        <children xmi:type="notation:DecorationNode" xmi:id="_U5pi8M8AEd6PsZOe3JaFXA" type="5001"/>
-        <element xmi:type="synccharts:Signal" href="dvdplayer.kixs#EJECT"/>
-        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_U5o74c8AEd6PsZOe3JaFXA" x="160" y="7"/>
-      </children>
-      <children xmi:type="notation:Shape" xmi:id="_siyXcM8AEd6PsZOe3JaFXA" type="3003" fontName="Lucida Grande" fontHeight="11" lineColor="0">
-        <children xmi:type="notation:DecorationNode" xmi:id="_siyXcs8AEd6PsZOe3JaFXA" type="5001"/>
-        <element xmi:type="synccharts:Signal" href="dvdplayer.kixs#PLAY"/>
-        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_siyXcc8AEd6PsZOe3JaFXA" x="245" y="7"/>
-      </children>
-      <children xmi:type="notation:Shape" xmi:id="_uEurUM8AEd6PsZOe3JaFXA" type="3003" fontName="Lucida Grande" fontHeight="11" lineColor="0">
-        <children xmi:type="notation:DecorationNode" xmi:id="_uEvSYM8AEd6PsZOe3JaFXA" type="5001"/>
-        <element xmi:type="synccharts:Signal" href="dvdplayer.kixs#STOP"/>
-        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_uEurUc8AEd6PsZOe3JaFXA" x="245" y="7"/>
-      </children>
-      <children xmi:type="notation:Shape" xmi:id="_IH1n4M8BEd6PsZOe3JaFXA" type="3003" fontName="Lucida Grande" fontHeight="11" lineColor="0">
-        <children xmi:type="notation:DecorationNode" xmi:id="_IH1n4s8BEd6PsZOe3JaFXA" type="5001"/>
-        <element xmi:type="synccharts:Signal" href="dvdplayer.kixs#AUDIO"/>
-        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_IH1n4c8BEd6PsZOe3JaFXA" x="354" y="7"/>
-      </children>
-    </children>
-    <children xmi:type="notation:BasicCompartment" xmi:id="_h-27Ic7_Ed6PsZOe3JaFXA" type="7002"/>
-    <children xmi:type="notation:BasicCompartment" xmi:id="_h-27Is7_Ed6PsZOe3JaFXA" type="7003"/>
-    <children xmi:type="notation:BasicCompartment" xmi:id="_h-27I87_Ed6PsZOe3JaFXA" type="7004"/>
-    <children xmi:type="notation:BasicCompartment" xmi:id="_h-27JM7_Ed6PsZOe3JaFXA" type="7005"/>
-    <children xmi:type="notation:BasicCompartment" xmi:id="_h-3iMM7_Ed6PsZOe3JaFXA" type="7006">
-      <children xmi:type="notation:Shape" xmi:id="_iDbSEM7_Ed6PsZOe3JaFXA" type="3001" fontName="Lucida Grande" fontHeight="11" lineColor="0">
-        <children xmi:type="notation:BasicCompartment" xmi:id="_iDb5IM7_Ed6PsZOe3JaFXA" type="7008">
-          <children xmi:type="notation:Shape" xmi:id="_iDgxoM7_Ed6PsZOe3JaFXA" type="3002" fontName="Lucida Grande" fontHeight="11" lineColor="0">
-            <children xmi:type="notation:DecorationNode" xmi:id="_iDhYsM7_Ed6PsZOe3JaFXA" type="5007"/>
-            <children xmi:type="notation:BasicCompartment" xmi:id="_iDhYsc7_Ed6PsZOe3JaFXA" type="7009"/>
-            <children xmi:type="notation:BasicCompartment" xmi:id="_iDhYss7_Ed6PsZOe3JaFXA" type="7010"/>
-            <children xmi:type="notation:BasicCompartment" xmi:id="_iDhYs87_Ed6PsZOe3JaFXA" type="7011"/>
-            <children xmi:type="notation:BasicCompartment" xmi:id="_iDhYtM7_Ed6PsZOe3JaFXA" type="7012"/>
-            <children xmi:type="notation:BasicCompartment" xmi:id="_iDhYtc7_Ed6PsZOe3JaFXA" type="7013"/>
-            <children xmi:type="notation:BasicCompartment" xmi:id="_iDh_wM7_Ed6PsZOe3JaFXA" type="7014"/>
-            <element xmi:type="synccharts:State" href="dvdplayer.kixs#//@innerStates.0/@regions.0/@innerStates.0"/>
-            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_iDgxoc7_Ed6PsZOe3JaFXA" x="192" y="7"/>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:layoutoptions="http://kieler.cs.cau.de/LayoutOptions" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:synccharts="http://kieler.cs.cau.de/synccharts/0.2.3" xmi:id="_1KBlwMVjEd-36IW2b4tI2g" type="Synccharts" measurementUnit="Pixel">
+  <children xmi:type="notation:Shape" xmi:id="_1TWg4MVjEd-36IW2b4tI2g" type="2005" fontName="Lucida Grande" fontHeight="11" lineColor="0">
+    <children xmi:type="notation:DecorationNode" xmi:id="_1TXH8MVjEd-36IW2b4tI2g" type="5059"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_1TXH8cVjEd-36IW2b4tI2g" type="5060"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_1TXH8sVjEd-36IW2b4tI2g" type="7054"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_1TXH88VjEd-36IW2b4tI2g" type="7055"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_1TXH9MVjEd-36IW2b4tI2g" type="7056"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_1TXH9cVjEd-36IW2b4tI2g" type="7057"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_1TXH9sVjEd-36IW2b4tI2g" type="7058"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_1TXH98VjEd-36IW2b4tI2g" type="7059">
+      <children xmi:type="notation:Shape" xmi:id="_1TzM0MVjEd-36IW2b4tI2g" type="3039" fontName="Lucida Grande" fontHeight="11" lineColor="0">
+        <children xmi:type="notation:DecorationNode" xmi:id="_1TzM0sVjEd-36IW2b4tI2g" visible="false" type="5058"/>
+        <children xmi:type="notation:BasicCompartment" xmi:id="_1TzM08VjEd-36IW2b4tI2g" type="7060">
+          <children xmi:type="notation:Shape" xmi:id="_1T1CAMVjEd-36IW2b4tI2g" type="3040" fontName="Lucida Grande" fontHeight="11" lineColor="0">
+            <children xmi:type="notation:DecorationNode" xmi:id="_1T1CAsVjEd-36IW2b4tI2g" type="5056"/>
+            <children xmi:type="notation:DecorationNode" xmi:id="_1T1CA8VjEd-36IW2b4tI2g" type="5057"/>
+            <children xmi:type="notation:BasicCompartment" xmi:id="_1T1CBMVjEd-36IW2b4tI2g" type="7061"/>
+            <children xmi:type="notation:BasicCompartment" xmi:id="_1T1CBcVjEd-36IW2b4tI2g" type="7062"/>
+            <children xmi:type="notation:BasicCompartment" xmi:id="_1T1CBsVjEd-36IW2b4tI2g" type="7063"/>
+            <children xmi:type="notation:BasicCompartment" xmi:id="_1T1CB8VjEd-36IW2b4tI2g" type="7064"/>
+            <children xmi:type="notation:BasicCompartment" xmi:id="_1T1CCMVjEd-36IW2b4tI2g" type="7065"/>
+            <children xmi:type="notation:BasicCompartment" xmi:id="_1T1CCcVjEd-36IW2b4tI2g" type="7066"/>
+            <element xmi:type="synccharts:State" href="dvdplayer.kixs#//@states.0/@regions.0/@states.0"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_1T1CAcVjEd-36IW2b4tI2g" x="1" y="193"/>
           </children>
-          <children xmi:type="notation:Shape" xmi:id="_mFrmkM7_Ed6PsZOe3JaFXA" type="3002" fontName="Lucida Grande" fontHeight="11" lineColor="0">
-            <children xmi:type="notation:DecorationNode" xmi:id="_mFrmks7_Ed6PsZOe3JaFXA" type="5007"/>
-            <children xmi:type="notation:BasicCompartment" xmi:id="_mFsNoM7_Ed6PsZOe3JaFXA" type="7009"/>
-            <children xmi:type="notation:BasicCompartment" xmi:id="_mFsNoc7_Ed6PsZOe3JaFXA" type="7010"/>
-            <children xmi:type="notation:BasicCompartment" xmi:id="_mFsNos7_Ed6PsZOe3JaFXA" type="7011"/>
-            <children xmi:type="notation:BasicCompartment" xmi:id="_mFsNo87_Ed6PsZOe3JaFXA" type="7012"/>
-            <children xmi:type="notation:BasicCompartment" xmi:id="_mFsNpM7_Ed6PsZOe3JaFXA" type="7013"/>
-            <children xmi:type="notation:BasicCompartment" xmi:id="_mFsNpc7_Ed6PsZOe3JaFXA" type="7014">
-              <children xmi:type="notation:Shape" xmi:id="_vRxisM7_Ed6PsZOe3JaFXA" type="3001" fontName="Lucida Grande" fontHeight="11" lineColor="0">
-                <children xmi:type="notation:BasicCompartment" xmi:id="_vRyJwM7_Ed6PsZOe3JaFXA" type="7008">
-                  <children xmi:type="notation:Shape" xmi:id="_vR0mAM7_Ed6PsZOe3JaFXA" type="3002" fontName="Lucida Grande" fontHeight="11" lineColor="0">
-                    <children xmi:type="notation:DecorationNode" xmi:id="_vR0mAs7_Ed6PsZOe3JaFXA" type="5007"/>
-                    <children xmi:type="notation:BasicCompartment" xmi:id="_vR0mA87_Ed6PsZOe3JaFXA" type="7009"/>
-                    <children xmi:type="notation:BasicCompartment" xmi:id="_vR0mBM7_Ed6PsZOe3JaFXA" type="7010"/>
-                    <children xmi:type="notation:BasicCompartment" xmi:id="_vR1NEM7_Ed6PsZOe3JaFXA" type="7011"/>
-                    <children xmi:type="notation:BasicCompartment" xmi:id="_vR1NEc7_Ed6PsZOe3JaFXA" type="7012"/>
-                    <children xmi:type="notation:BasicCompartment" xmi:id="_vR1NEs7_Ed6PsZOe3JaFXA" type="7013"/>
-                    <children xmi:type="notation:BasicCompartment" xmi:id="_vR1NE87_Ed6PsZOe3JaFXA" type="7014"/>
-                    <element xmi:type="synccharts:State" href="dvdplayer.kixs#//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.0"/>
-                    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_vR0mAc7_Ed6PsZOe3JaFXA" x="155" y="7"/>
+          <children xmi:type="notation:Shape" xmi:id="_1T1pEMVjEd-36IW2b4tI2g" type="3040" fontName="Lucida Grande" fontHeight="11" lineColor="0">
+            <children xmi:type="notation:DecorationNode" xmi:id="_1T1pEsVjEd-36IW2b4tI2g" type="5056"/>
+            <children xmi:type="notation:DecorationNode" xmi:id="_1T1pE8VjEd-36IW2b4tI2g" type="5057"/>
+            <children xmi:type="notation:BasicCompartment" xmi:id="_1T1pFMVjEd-36IW2b4tI2g" type="7061"/>
+            <children xmi:type="notation:BasicCompartment" xmi:id="_1T1pFcVjEd-36IW2b4tI2g" type="7062"/>
+            <children xmi:type="notation:BasicCompartment" xmi:id="_1T1pFsVjEd-36IW2b4tI2g" type="7063"/>
+            <children xmi:type="notation:BasicCompartment" xmi:id="_1T1pF8VjEd-36IW2b4tI2g" type="7064"/>
+            <children xmi:type="notation:BasicCompartment" xmi:id="_1T1pGMVjEd-36IW2b4tI2g" type="7065"/>
+            <children xmi:type="notation:BasicCompartment" xmi:id="_1T1pGcVjEd-36IW2b4tI2g" type="7066">
+              <children xmi:type="notation:Shape" xmi:id="_1T7IoMVjEd-36IW2b4tI2g" type="3039" fontName="Lucida Grande" fontHeight="11" lineColor="0">
+                <children xmi:type="notation:DecorationNode" xmi:id="_1T7vsMVjEd-36IW2b4tI2g" visible="false" type="5058"/>
+                <children xmi:type="notation:BasicCompartment" xmi:id="_1T7vscVjEd-36IW2b4tI2g" type="7060">
+                  <children xmi:type="notation:Shape" xmi:id="_1T890MVjEd-36IW2b4tI2g" type="3040" fontName="Lucida Grande" fontHeight="11" lineColor="0">
+                    <children xmi:type="notation:DecorationNode" xmi:id="_1T890sVjEd-36IW2b4tI2g" type="5056"/>
+                    <children xmi:type="notation:DecorationNode" xmi:id="_1T8908VjEd-36IW2b4tI2g" type="5057"/>
+                    <children xmi:type="notation:BasicCompartment" xmi:id="_1T891MVjEd-36IW2b4tI2g" type="7061"/>
+                    <children xmi:type="notation:BasicCompartment" xmi:id="_1T891cVjEd-36IW2b4tI2g" type="7062"/>
+                    <children xmi:type="notation:BasicCompartment" xmi:id="_1T891sVjEd-36IW2b4tI2g" type="7063"/>
+                    <children xmi:type="notation:BasicCompartment" xmi:id="_1T9k4MVjEd-36IW2b4tI2g" type="7064"/>
+                    <children xmi:type="notation:BasicCompartment" xmi:id="_1T9k4cVjEd-36IW2b4tI2g" type="7065"/>
+                    <children xmi:type="notation:BasicCompartment" xmi:id="_1T9k4sVjEd-36IW2b4tI2g" type="7066"/>
+                    <element xmi:type="synccharts:State" href="dvdplayer.kixs#//@states.0/@regions.0/@states.1/@regions.0/@states.0"/>
+                    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_1T890cVjEd-36IW2b4tI2g" x="135"/>
                   </children>
-                  <children xmi:type="notation:Shape" xmi:id="_OHJ7cM8AEd6PsZOe3JaFXA" type="3002" fontName="Lucida Grande" fontHeight="11" lineColor="0">
-                    <children xmi:type="notation:DecorationNode" xmi:id="_OHKigM8AEd6PsZOe3JaFXA" type="5007"/>
-                    <children xmi:type="notation:BasicCompartment" xmi:id="_OHKigc8AEd6PsZOe3JaFXA" type="7009"/>
-                    <children xmi:type="notation:BasicCompartment" xmi:id="_OHKigs8AEd6PsZOe3JaFXA" type="7010"/>
-                    <children xmi:type="notation:BasicCompartment" xmi:id="_OHKig88AEd6PsZOe3JaFXA" type="7011"/>
-                    <children xmi:type="notation:BasicCompartment" xmi:id="_OHKihM8AEd6PsZOe3JaFXA" type="7012"/>
-                    <children xmi:type="notation:BasicCompartment" xmi:id="_OHKihc8AEd6PsZOe3JaFXA" type="7013"/>
-                    <children xmi:type="notation:BasicCompartment" xmi:id="_OHKihs8AEd6PsZOe3JaFXA" type="7014">
-                      <children xmi:type="notation:Shape" xmi:id="_kt--YM8AEd6PsZOe3JaFXA" type="3001" fontName="Lucida Grande" fontHeight="11" lineColor="0">
-                        <children xmi:type="notation:BasicCompartment" xmi:id="_kt--Ys8AEd6PsZOe3JaFXA" type="7008">
-                          <children xmi:type="notation:Shape" xmi:id="_kuAzkM8AEd6PsZOe3JaFXA" type="3002" fontName="Lucida Grande" fontHeight="11" lineColor="0">
-                            <children xmi:type="notation:DecorationNode" xmi:id="_kuBaoM8AEd6PsZOe3JaFXA" type="5007"/>
-                            <children xmi:type="notation:BasicCompartment" xmi:id="_kuBaoc8AEd6PsZOe3JaFXA" type="7009"/>
-                            <children xmi:type="notation:BasicCompartment" xmi:id="_kuBaos8AEd6PsZOe3JaFXA" type="7010"/>
-                            <children xmi:type="notation:BasicCompartment" xmi:id="_kuBao88AEd6PsZOe3JaFXA" type="7011"/>
-                            <children xmi:type="notation:BasicCompartment" xmi:id="_kuBapM8AEd6PsZOe3JaFXA" type="7012"/>
-                            <children xmi:type="notation:BasicCompartment" xmi:id="_kuBapc8AEd6PsZOe3JaFXA" type="7013"/>
-                            <children xmi:type="notation:BasicCompartment" xmi:id="_kuBaps8AEd6PsZOe3JaFXA" type="7014"/>
-                            <element xmi:type="synccharts:State" href="dvdplayer.kixs#//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.1/@regions.0/@innerStates.0"/>
-                            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_kuAzkc8AEd6PsZOe3JaFXA" x="32" y="7"/>
+                  <children xmi:type="notation:Shape" xmi:id="_1T9k48VjEd-36IW2b4tI2g" type="3040" fontName="Lucida Grande" fontHeight="11" lineColor="0">
+                    <children xmi:type="notation:DecorationNode" xmi:id="_1T9k5cVjEd-36IW2b4tI2g" type="5056"/>
+                    <children xmi:type="notation:DecorationNode" xmi:id="_1T9k5sVjEd-36IW2b4tI2g" type="5057"/>
+                    <children xmi:type="notation:BasicCompartment" xmi:id="_1T9k58VjEd-36IW2b4tI2g" type="7061"/>
+                    <children xmi:type="notation:BasicCompartment" xmi:id="_1T9k6MVjEd-36IW2b4tI2g" type="7062"/>
+                    <children xmi:type="notation:BasicCompartment" xmi:id="_1T9k6cVjEd-36IW2b4tI2g" type="7063"/>
+                    <children xmi:type="notation:BasicCompartment" xmi:id="_1T9k6sVjEd-36IW2b4tI2g" type="7064"/>
+                    <children xmi:type="notation:BasicCompartment" xmi:id="_1T-L8MVjEd-36IW2b4tI2g" type="7065"/>
+                    <children xmi:type="notation:BasicCompartment" xmi:id="_1T-L8cVjEd-36IW2b4tI2g" type="7066">
+                      <children xmi:type="notation:Shape" xmi:id="_1UQf0MVjEd-36IW2b4tI2g" type="3039" fontName="Lucida Grande" fontHeight="11" lineColor="0">
+                        <children xmi:type="notation:DecorationNode" xmi:id="_1URG4MVjEd-36IW2b4tI2g" type="5058"/>
+                        <children xmi:type="notation:BasicCompartment" xmi:id="_1URG4cVjEd-36IW2b4tI2g" type="7060">
+                          <children xmi:type="notation:Shape" xmi:id="_1US8EMVjEd-36IW2b4tI2g" type="3040" fontName="Lucida Grande" fontHeight="11" lineColor="0">
+                            <children xmi:type="notation:DecorationNode" xmi:id="_1UTjIMVjEd-36IW2b4tI2g" type="5056"/>
+                            <children xmi:type="notation:DecorationNode" xmi:id="_1UTjIcVjEd-36IW2b4tI2g" type="5057"/>
+                            <children xmi:type="notation:BasicCompartment" xmi:id="_1UTjIsVjEd-36IW2b4tI2g" type="7061"/>
+                            <children xmi:type="notation:BasicCompartment" xmi:id="_1UTjI8VjEd-36IW2b4tI2g" type="7062"/>
+                            <children xmi:type="notation:BasicCompartment" xmi:id="_1UTjJMVjEd-36IW2b4tI2g" type="7063"/>
+                            <children xmi:type="notation:BasicCompartment" xmi:id="_1UTjJcVjEd-36IW2b4tI2g" type="7064"/>
+                            <children xmi:type="notation:BasicCompartment" xmi:id="_1UTjJsVjEd-36IW2b4tI2g" type="7065"/>
+                            <children xmi:type="notation:BasicCompartment" xmi:id="_1UTjJ8VjEd-36IW2b4tI2g" type="7066"/>
+                            <element xmi:type="synccharts:State" href="dvdplayer.kixs#//@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.0/@states.0"/>
+                            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_1US8EcVjEd-36IW2b4tI2g" y="4"/>
                           </children>
-                          <children xmi:type="notation:Shape" xmi:id="_mtGWcM8AEd6PsZOe3JaFXA" type="3002" fontName="Lucida Grande" fontHeight="11" lineColor="0">
-                            <children xmi:type="notation:DecorationNode" xmi:id="_mtGWcs8AEd6PsZOe3JaFXA" type="5007"/>
-                            <children xmi:type="notation:BasicCompartment" xmi:id="_mtGWc88AEd6PsZOe3JaFXA" type="7009"/>
-                            <children xmi:type="notation:BasicCompartment" xmi:id="_mtGWdM8AEd6PsZOe3JaFXA" type="7010"/>
-                            <children xmi:type="notation:BasicCompartment" xmi:id="_mtGWdc8AEd6PsZOe3JaFXA" type="7011"/>
-                            <children xmi:type="notation:BasicCompartment" xmi:id="_mtGWds8AEd6PsZOe3JaFXA" type="7012"/>
-                            <children xmi:type="notation:BasicCompartment" xmi:id="_mtG9gM8AEd6PsZOe3JaFXA" type="7013"/>
-                            <children xmi:type="notation:BasicCompartment" xmi:id="_mtG9gc8AEd6PsZOe3JaFXA" type="7014"/>
-                            <element xmi:type="synccharts:State" href="dvdplayer.kixs#//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.1/@regions.0/@innerStates.1"/>
-                            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_mtGWcc8AEd6PsZOe3JaFXA" x="153" y="7"/>
+                          <children xmi:type="notation:Shape" xmi:id="_1UTjKMVjEd-36IW2b4tI2g" type="3040" fontName="Lucida Grande" fontHeight="11" lineColor="0">
+                            <children xmi:type="notation:DecorationNode" xmi:id="_1UUKMMVjEd-36IW2b4tI2g" type="5056"/>
+                            <children xmi:type="notation:DecorationNode" xmi:id="_1UUKMcVjEd-36IW2b4tI2g" type="5057"/>
+                            <children xmi:type="notation:BasicCompartment" xmi:id="_1UUKMsVjEd-36IW2b4tI2g" type="7061"/>
+                            <children xmi:type="notation:BasicCompartment" xmi:id="_1UUKM8VjEd-36IW2b4tI2g" type="7062"/>
+                            <children xmi:type="notation:BasicCompartment" xmi:id="_1UUKNMVjEd-36IW2b4tI2g" type="7063"/>
+                            <children xmi:type="notation:BasicCompartment" xmi:id="_1UUKNcVjEd-36IW2b4tI2g" type="7064"/>
+                            <children xmi:type="notation:BasicCompartment" xmi:id="_1UUKNsVjEd-36IW2b4tI2g" type="7065"/>
+                            <children xmi:type="notation:BasicCompartment" xmi:id="_1UUKN8VjEd-36IW2b4tI2g" type="7066"/>
+                            <element xmi:type="synccharts:State" href="dvdplayer.kixs#//@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.0/@states.1"/>
+                            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_1UTjKcVjEd-36IW2b4tI2g" x="133" y="4"/>
                           </children>
-                          <children xmi:type="notation:Shape" xmi:id="_dvAkoM8BEd6PsZOe3JaFXA" type="3002" fontName="Lucida Grande" fontHeight="11" lineColor="0">
-                            <children xmi:type="notation:DecorationNode" xmi:id="_dvAkos8BEd6PsZOe3JaFXA" type="5007"/>
-                            <children xmi:type="notation:BasicCompartment" xmi:id="_dvBLsM8BEd6PsZOe3JaFXA" type="7009"/>
-                            <children xmi:type="notation:BasicCompartment" xmi:id="_dvBLsc8BEd6PsZOe3JaFXA" type="7010"/>
-                            <children xmi:type="notation:BasicCompartment" xmi:id="_dvBLss8BEd6PsZOe3JaFXA" type="7011"/>
-                            <children xmi:type="notation:BasicCompartment" xmi:id="_dvBLs88BEd6PsZOe3JaFXA" type="7012"/>
-                            <children xmi:type="notation:BasicCompartment" xmi:id="_dvBywM8BEd6PsZOe3JaFXA" type="7013"/>
-                            <children xmi:type="notation:BasicCompartment" xmi:id="_dvBywc8BEd6PsZOe3JaFXA" type="7014"/>
-                            <element xmi:type="synccharts:State" href="dvdplayer.kixs#//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.1/@regions.0/@innerStates.2"/>
-                            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_dvAkoc8BEd6PsZOe3JaFXA" x="266" y="7"/>
+                          <children xmi:type="notation:Shape" xmi:id="_1UUKOMVjEd-36IW2b4tI2g" type="3040" fontName="Lucida Grande" fontHeight="11" lineColor="0">
+                            <children xmi:type="notation:DecorationNode" xmi:id="_1UUxQMVjEd-36IW2b4tI2g" type="5056"/>
+                            <children xmi:type="notation:DecorationNode" xmi:id="_1UUxQcVjEd-36IW2b4tI2g" type="5057"/>
+                            <children xmi:type="notation:BasicCompartment" xmi:id="_1UUxQsVjEd-36IW2b4tI2g" type="7061"/>
+                            <children xmi:type="notation:BasicCompartment" xmi:id="_1UUxQ8VjEd-36IW2b4tI2g" type="7062"/>
+                            <children xmi:type="notation:BasicCompartment" xmi:id="_1UUxRMVjEd-36IW2b4tI2g" type="7063"/>
+                            <children xmi:type="notation:BasicCompartment" xmi:id="_1UUxRcVjEd-36IW2b4tI2g" type="7064"/>
+                            <children xmi:type="notation:BasicCompartment" xmi:id="_1UUxRsVjEd-36IW2b4tI2g" type="7065"/>
+                            <children xmi:type="notation:BasicCompartment" xmi:id="_1UUxR8VjEd-36IW2b4tI2g" type="7066"/>
+                            <element xmi:type="synccharts:State" href="dvdplayer.kixs#//@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.0/@states.2"/>
+                            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_1UUKOcVjEd-36IW2b4tI2g" x="272" y="4"/>
                           </children>
                         </children>
-                        <element xmi:type="synccharts:Region" href="dvdplayer.kixs#//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.1/@regions.0"/>
-                        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_kt--Yc8AEd6PsZOe3JaFXA" x="1" y="1" width="350" height="58"/>
+                        <element xmi:type="synccharts:Region" href="dvdplayer.kixs#//@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.0"/>
+                        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_1UQf0cVjEd-36IW2b4tI2g" x="1" y="1" width="330" height="58"/>
                       </children>
-                      <children xmi:type="notation:Shape" xmi:id="_2MMhsM8AEd6PsZOe3JaFXA" type="3001" fontName="Lucida Grande" fontHeight="11" lineColor="0">
-                        <children xmi:type="notation:BasicCompartment" xmi:id="_2MNIwM8AEd6PsZOe3JaFXA" type="7008">
-                          <children xmi:type="notation:Shape" xmi:id="_2MO98M8AEd6PsZOe3JaFXA" type="3002" fontName="Lucida Grande" fontHeight="11" lineColor="0">
-                            <children xmi:type="notation:DecorationNode" xmi:id="_2MO98s8AEd6PsZOe3JaFXA" type="5007"/>
-                            <children xmi:type="notation:BasicCompartment" xmi:id="_2MO9888AEd6PsZOe3JaFXA" type="7009"/>
-                            <children xmi:type="notation:BasicCompartment" xmi:id="_2MPlAM8AEd6PsZOe3JaFXA" type="7010"/>
-                            <children xmi:type="notation:BasicCompartment" xmi:id="_2MPlAc8AEd6PsZOe3JaFXA" type="7011"/>
-                            <children xmi:type="notation:BasicCompartment" xmi:id="_2MPlAs8AEd6PsZOe3JaFXA" type="7012"/>
-                            <children xmi:type="notation:BasicCompartment" xmi:id="_2MPlA88AEd6PsZOe3JaFXA" type="7013"/>
-                            <children xmi:type="notation:BasicCompartment" xmi:id="_2MPlBM8AEd6PsZOe3JaFXA" type="7014"/>
-                            <element xmi:type="synccharts:State" href="dvdplayer.kixs#//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.1/@regions.1/@innerStates.0"/>
-                            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_2MO98c8AEd6PsZOe3JaFXA" x="7" y="32"/>
+                      <children xmi:type="notation:Shape" xmi:id="_1URG4sVjEd-36IW2b4tI2g" type="3039" fontName="Lucida Grande" fontHeight="11" lineColor="0">
+                        <children xmi:type="notation:DecorationNode" xmi:id="_1URG5MVjEd-36IW2b4tI2g" type="5058"/>
+                        <children xmi:type="notation:BasicCompartment" xmi:id="_1URG5cVjEd-36IW2b4tI2g" type="7060">
+                          <children xmi:type="notation:Shape" xmi:id="_1VIpkMVjEd-36IW2b4tI2g" type="3040" fontName="Lucida Grande" fontHeight="11" lineColor="0">
+                            <children xmi:type="notation:DecorationNode" xmi:id="_1VIpksVjEd-36IW2b4tI2g" type="5056"/>
+                            <children xmi:type="notation:DecorationNode" xmi:id="_1VIpk8VjEd-36IW2b4tI2g" type="5057"/>
+                            <children xmi:type="notation:BasicCompartment" xmi:id="_1VIplMVjEd-36IW2b4tI2g" type="7061"/>
+                            <children xmi:type="notation:BasicCompartment" xmi:id="_1VIplcVjEd-36IW2b4tI2g" type="7062"/>
+                            <children xmi:type="notation:BasicCompartment" xmi:id="_1VIplsVjEd-36IW2b4tI2g" type="7063"/>
+                            <children xmi:type="notation:BasicCompartment" xmi:id="_1VJQoMVjEd-36IW2b4tI2g" type="7064"/>
+                            <children xmi:type="notation:BasicCompartment" xmi:id="_1VJQocVjEd-36IW2b4tI2g" type="7065"/>
+                            <children xmi:type="notation:BasicCompartment" xmi:id="_1VJQosVjEd-36IW2b4tI2g" type="7066"/>
+                            <element xmi:type="synccharts:State" href="dvdplayer.kixs#//@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.1/@states.0"/>
+                            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_1VIpkcVjEd-36IW2b4tI2g" x="169" y="144"/>
                           </children>
-                          <children xmi:type="notation:Shape" xmi:id="_9GKDIM8AEd6PsZOe3JaFXA" type="3002" fontName="Lucida Grande" fontHeight="11" lineColor="0">
-                            <children xmi:type="notation:DecorationNode" xmi:id="_9GKDIs8AEd6PsZOe3JaFXA" type="5007"/>
-                            <children xmi:type="notation:BasicCompartment" xmi:id="_9GKDI88AEd6PsZOe3JaFXA" type="7009"/>
-                            <children xmi:type="notation:BasicCompartment" xmi:id="_9GKDJM8AEd6PsZOe3JaFXA" type="7010"/>
-                            <children xmi:type="notation:BasicCompartment" xmi:id="_9GKDJc8AEd6PsZOe3JaFXA" type="7011"/>
-                            <children xmi:type="notation:BasicCompartment" xmi:id="_9GKqMM8AEd6PsZOe3JaFXA" type="7012"/>
-                            <children xmi:type="notation:BasicCompartment" xmi:id="_9GKqMc8AEd6PsZOe3JaFXA" type="7013"/>
-                            <children xmi:type="notation:BasicCompartment" xmi:id="_9GKqMs8AEd6PsZOe3JaFXA" type="7014"/>
-                            <element xmi:type="synccharts:State" href="dvdplayer.kixs#//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.1/@regions.1/@innerStates.1"/>
-                            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_9GKDIc8AEd6PsZOe3JaFXA" x="141" y="7"/>
+                          <children xmi:type="notation:Shape" xmi:id="_1VJQo8VjEd-36IW2b4tI2g" type="3040" fontName="Lucida Grande" fontHeight="11" lineColor="0">
+                            <children xmi:type="notation:DecorationNode" xmi:id="_1VJQpcVjEd-36IW2b4tI2g" type="5056"/>
+                            <children xmi:type="notation:DecorationNode" xmi:id="_1VJQpsVjEd-36IW2b4tI2g" type="5057"/>
+                            <children xmi:type="notation:BasicCompartment" xmi:id="_1VJQp8VjEd-36IW2b4tI2g" type="7061"/>
+                            <children xmi:type="notation:BasicCompartment" xmi:id="_1VJQqMVjEd-36IW2b4tI2g" type="7062"/>
+                            <children xmi:type="notation:BasicCompartment" xmi:id="_1VJQqcVjEd-36IW2b4tI2g" type="7063"/>
+                            <children xmi:type="notation:BasicCompartment" xmi:id="_1VJ3sMVjEd-36IW2b4tI2g" type="7064"/>
+                            <children xmi:type="notation:BasicCompartment" xmi:id="_1VJ3scVjEd-36IW2b4tI2g" type="7065"/>
+                            <children xmi:type="notation:BasicCompartment" xmi:id="_1VJ3ssVjEd-36IW2b4tI2g" type="7066"/>
+                            <element xmi:type="synccharts:State" href="dvdplayer.kixs#//@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.1/@states.1"/>
+                            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_1VJQpMVjEd-36IW2b4tI2g" x="85" y="144"/>
                           </children>
-                          <children xmi:type="notation:Shape" xmi:id="_Doqt4M8BEd6PsZOe3JaFXA" type="3002" fontName="Lucida Grande" fontHeight="11" lineColor="0">
-                            <children xmi:type="notation:DecorationNode" xmi:id="_Doqt4s8BEd6PsZOe3JaFXA" type="5007"/>
-                            <children xmi:type="notation:BasicCompartment" xmi:id="_Doqt488BEd6PsZOe3JaFXA" type="7009"/>
-                            <children xmi:type="notation:BasicCompartment" xmi:id="_Doqt5M8BEd6PsZOe3JaFXA" type="7010"/>
-                            <children xmi:type="notation:BasicCompartment" xmi:id="_Doqt5c8BEd6PsZOe3JaFXA" type="7011"/>
-                            <children xmi:type="notation:BasicCompartment" xmi:id="_Doqt5s8BEd6PsZOe3JaFXA" type="7012"/>
-                            <children xmi:type="notation:BasicCompartment" xmi:id="_DorU8M8BEd6PsZOe3JaFXA" type="7013"/>
-                            <children xmi:type="notation:BasicCompartment" xmi:id="_DorU8c8BEd6PsZOe3JaFXA" type="7014"/>
-                            <element xmi:type="synccharts:State" href="dvdplayer.kixs#//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.1/@regions.1/@innerStates.2"/>
-                            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Doqt4c8BEd6PsZOe3JaFXA" x="277" y="32"/>
+                          <children xmi:type="notation:Shape" xmi:id="_1VJ3s8VjEd-36IW2b4tI2g" type="3040" fontName="Lucida Grande" fontHeight="11" lineColor="0">
+                            <children xmi:type="notation:DecorationNode" xmi:id="_1VJ3tcVjEd-36IW2b4tI2g" type="5056"/>
+                            <children xmi:type="notation:DecorationNode" xmi:id="_1VJ3tsVjEd-36IW2b4tI2g" type="5057"/>
+                            <children xmi:type="notation:BasicCompartment" xmi:id="_1VJ3t8VjEd-36IW2b4tI2g" type="7061"/>
+                            <children xmi:type="notation:BasicCompartment" xmi:id="_1VJ3uMVjEd-36IW2b4tI2g" type="7062"/>
+                            <children xmi:type="notation:BasicCompartment" xmi:id="_1VJ3ucVjEd-36IW2b4tI2g" type="7063"/>
+                            <children xmi:type="notation:BasicCompartment" xmi:id="_1VJ3usVjEd-36IW2b4tI2g" type="7064"/>
+                            <children xmi:type="notation:BasicCompartment" xmi:id="_1VKewMVjEd-36IW2b4tI2g" type="7065"/>
+                            <children xmi:type="notation:BasicCompartment" xmi:id="_1VKewcVjEd-36IW2b4tI2g" type="7066"/>
+                            <element xmi:type="synccharts:State" href="dvdplayer.kixs#//@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.1/@states.2"/>
+                            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_1VJ3tMVjEd-36IW2b4tI2g" x="47" y="73"/>
+                          </children>
+                          <children xmi:type="notation:Shape" xmi:id="_1VKewsVjEd-36IW2b4tI2g" type="3040" fontName="Lucida Grande" fontHeight="11" lineColor="0">
+                            <children xmi:type="notation:DecorationNode" xmi:id="_1VKexMVjEd-36IW2b4tI2g" type="5056"/>
+                            <children xmi:type="notation:DecorationNode" xmi:id="_1VKexcVjEd-36IW2b4tI2g" type="5057"/>
+                            <children xmi:type="notation:BasicCompartment" xmi:id="_1VKexsVjEd-36IW2b4tI2g" type="7061"/>
+                            <children xmi:type="notation:BasicCompartment" xmi:id="_1VKex8VjEd-36IW2b4tI2g" type="7062"/>
+                            <children xmi:type="notation:BasicCompartment" xmi:id="_1VKeyMVjEd-36IW2b4tI2g" type="7063"/>
+                            <children xmi:type="notation:BasicCompartment" xmi:id="_1VKeycVjEd-36IW2b4tI2g" type="7064"/>
+                            <children xmi:type="notation:BasicCompartment" xmi:id="_1VKeysVjEd-36IW2b4tI2g" type="7065"/>
+                            <children xmi:type="notation:BasicCompartment" xmi:id="_1VLF0MVjEd-36IW2b4tI2g" type="7066"/>
+                            <element xmi:type="synccharts:State" href="dvdplayer.kixs#//@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.1/@states.3"/>
+                            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_1VKew8VjEd-36IW2b4tI2g" x="85" y="2"/>
+                          </children>
+                          <children xmi:type="notation:Shape" xmi:id="_1VLF0cVjEd-36IW2b4tI2g" type="3040" fontName="Lucida Grande" fontHeight="11" lineColor="0">
+                            <children xmi:type="notation:DecorationNode" xmi:id="_1VLF08VjEd-36IW2b4tI2g" type="5056"/>
+                            <children xmi:type="notation:DecorationNode" xmi:id="_1VLF1MVjEd-36IW2b4tI2g" type="5057"/>
+                            <children xmi:type="notation:BasicCompartment" xmi:id="_1VLF1cVjEd-36IW2b4tI2g" type="7061"/>
+                            <children xmi:type="notation:BasicCompartment" xmi:id="_1VLF1sVjEd-36IW2b4tI2g" type="7062"/>
+                            <children xmi:type="notation:BasicCompartment" xmi:id="_1VLF18VjEd-36IW2b4tI2g" type="7063"/>
+                            <children xmi:type="notation:BasicCompartment" xmi:id="_1VLF2MVjEd-36IW2b4tI2g" type="7064"/>
+                            <children xmi:type="notation:BasicCompartment" xmi:id="_1VLF2cVjEd-36IW2b4tI2g" type="7065"/>
+                            <children xmi:type="notation:BasicCompartment" xmi:id="_1VLF2sVjEd-36IW2b4tI2g" type="7066"/>
+                            <element xmi:type="synccharts:State" href="dvdplayer.kixs#//@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.1/@states.4"/>
+                            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_1VLF0sVjEd-36IW2b4tI2g" x="164" y="2"/>
+                          </children>
+                          <children xmi:type="notation:Shape" xmi:id="_1VLs4MVjEd-36IW2b4tI2g" type="3040" fontName="Lucida Grande" fontHeight="11" lineColor="0">
+                            <children xmi:type="notation:DecorationNode" xmi:id="_1VLs4sVjEd-36IW2b4tI2g" type="5056"/>
+                            <children xmi:type="notation:DecorationNode" xmi:id="_1VLs48VjEd-36IW2b4tI2g" type="5057"/>
+                            <children xmi:type="notation:BasicCompartment" xmi:id="_1VLs5MVjEd-36IW2b4tI2g" type="7061"/>
+                            <children xmi:type="notation:BasicCompartment" xmi:id="_1VLs5cVjEd-36IW2b4tI2g" type="7062"/>
+                            <children xmi:type="notation:BasicCompartment" xmi:id="_1VLs5sVjEd-36IW2b4tI2g" type="7063"/>
+                            <children xmi:type="notation:BasicCompartment" xmi:id="_1VLs58VjEd-36IW2b4tI2g" type="7064"/>
+                            <children xmi:type="notation:BasicCompartment" xmi:id="_1VLs6MVjEd-36IW2b4tI2g" type="7065"/>
+                            <children xmi:type="notation:BasicCompartment" xmi:id="_1VLs6cVjEd-36IW2b4tI2g" type="7066"/>
+                            <element xmi:type="synccharts:State" href="dvdplayer.kixs#//@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.1/@states.5"/>
+                            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_1VLs4cVjEd-36IW2b4tI2g" x="208" y="73"/>
                           </children>
                         </children>
-                        <element xmi:type="synccharts:Region" href="dvdplayer.kixs#//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.1/@regions.1"/>
-                        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_2MMhsc8AEd6PsZOe3JaFXA" x="1" y="60" width="350" height="81"/>
+                        <styles xmi:type="layoutoptions:LayoutOptionStyle" xmi:id="_-1dwUMVjEd-36IW2b4tI2g">
+                          <options xmi:type="layoutoptions:KOption" xmi:id="_-1dwUcVjEd-36IW2b4tI2g" key="de.cau.cs.kieler.layout.options.layoutHint" value="de.cau.cs.kieler.kiml.graphviz.circo"/>
+                        </styles>
+                        <element xmi:type="synccharts:Region" href="dvdplayer.kixs#//@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.1"/>
+                        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_1URG48VjEd-36IW2b4tI2g" x="1" y="60" width="330" height="189"/>
                       </children>
                     </children>
-                    <element xmi:type="synccharts:State" href="dvdplayer.kixs#//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.1"/>
-                    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_OHJ7cc8AEd6PsZOe3JaFXA" x="7" y="82" width="364" height="176"/>
+                    <element xmi:type="synccharts:State" href="dvdplayer.kixs#//@states.0/@regions.0/@states.1/@regions.0/@states.1"/>
+                    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_1T9k5MVjEd-36IW2b4tI2g" y="83" width="344" height="284"/>
                   </children>
                 </children>
-                <styles xmi:type="layoutoptions:LayoutOptionStyle" xmi:id="_3XdlgM8BEd6PsZOe3JaFXA">
-                  <options xmi:type="klayoutdata:KIntOption" xmi:id="_3XezoM8BEd6PsZOe3JaFXA" key="de.cau.cs.kieler.layout.options.layoutDirection" value="3"/>
+                <styles xmi:type="layoutoptions:LayoutOptionStyle" xmi:id="_rbNhoMVkEd-36IW2b4tI2g">
+                  <options xmi:type="layoutoptions:KOption" xmi:id="_rbOIsMVkEd-36IW2b4tI2g" key="de.cau.cs.kieler.layout.options.layoutDirection" value="DOWN"/>
                 </styles>
-                <element xmi:type="synccharts:Region" href="dvdplayer.kixs#//@innerStates.0/@regions.0/@innerStates.1/@regions.0"/>
-                <layoutConstraint xmi:type="notation:Bounds" xmi:id="_vRxisc7_Ed6PsZOe3JaFXA" x="1" y="1" width="390" height="276"/>
+                <element xmi:type="synccharts:Region" href="dvdplayer.kixs#//@states.0/@regions.0/@states.1/@regions.0"/>
+                <layoutConstraint xmi:type="notation:Bounds" xmi:id="_1T7IocVjEd-36IW2b4tI2g" x="1" y="1" width="356" height="380"/>
               </children>
             </children>
-            <element xmi:type="synccharts:State" href="dvdplayer.kixs#//@innerStates.0/@regions.0/@innerStates.1"/>
-            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_mFrmkc7_Ed6PsZOe3JaFXA" x="8" y="82" width="404" height="312"/>
+            <element xmi:type="synccharts:State" href="dvdplayer.kixs#//@states.0/@regions.0/@states.1"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_1T1pEcVjEd-36IW2b4tI2g" x="132" width="370" height="416"/>
           </children>
         </children>
-        <styles xmi:type="layoutoptions:LayoutOptionStyle" xmi:id="_1W0jcM8BEd6PsZOe3JaFXA">
-          <options xmi:type="klayoutdata:KIntOption" xmi:id="_1XJ6oM8BEd6PsZOe3JaFXA" key="de.cau.cs.kieler.layout.options.layoutDirection" value="3"/>
-        </styles>
-        <element xmi:type="synccharts:Region" href="dvdplayer.kixs#//@innerStates.0/@regions.0"/>
-        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_iDbSEc7_Ed6PsZOe3JaFXA" x="1" y="1" width="430" height="412"/>
+        <element xmi:type="synccharts:Region" href="dvdplayer.kixs#//@states.0/@regions.0"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_1TzM0cVjEd-36IW2b4tI2g" x="1" y="1" width="514" height="427"/>
       </children>
     </children>
-    <element xmi:type="synccharts:State" href="dvdplayer.kixs#//@innerStates.0"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_h-z30s7_Ed6PsZOe3JaFXA" x="7" y="7" width="444" height="472"/>
+    <element xmi:type="synccharts:State" href="dvdplayer.kixs#//@states.0"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_1TWg4cVjEd-36IW2b4tI2g" x="1" width="528" height="486"/>
   </children>
-  <styles xmi:type="notation:DiagramStyle" xmi:id="_bvVd0c7_Ed6tGb5Q44XhBQ"/>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_1KBlwcVjEd-36IW2b4tI2g"/>
   <element xmi:type="synccharts:Region" href="dvdplayer.kixs#/"/>
-  <edges xmi:type="notation:Connector" xmi:id="_mGQOUM7_Ed6PsZOe3JaFXA" type="4001" source="_iDgxoM7_Ed6PsZOe3JaFXA" target="_mFrmkM7_Ed6PsZOe3JaFXA" lineColor="0">
-    <children xmi:type="notation:DecorationNode" xmi:id="_mGQ1YM7_Ed6PsZOe3JaFXA" type="6001">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_mGQ1Yc7_Ed6PsZOe3JaFXA" x="-3" y="-28"/>
+  <edges xmi:type="notation:Connector" xmi:id="_1YccQMVjEd-36IW2b4tI2g" type="4005" source="_1T1CAMVjEd-36IW2b4tI2g" target="_1T1pEMVjEd-36IW2b4tI2g" lineColor="0">
+    <children xmi:type="notation:DecorationNode" xmi:id="_1YccQ8VjEd-36IW2b4tI2g" type="6009">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_1YccRMVjEd-36IW2b4tI2g" y="-10"/>
     </children>
-    <styles xmi:type="notation:FontStyle" xmi:id="_mGQOUc7_Ed6PsZOe3JaFXA" fontName="Lucida Grande" fontHeight="11"/>
-    <element xmi:type="synccharts:Transition" href="dvdplayer.kixs#//@innerStates.0/@regions.0/@innerStates.0/@outgoingTransitions.0"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_mGQOUs7_Ed6PsZOe3JaFXA" points="[0, 0, 15, -47]$[-7, 5, 8, -42]$[-13, 12, 2, -35]$[-17, 19, -2, -28]$[-18, 23, -3, -24]$[-18, 26, -3, -21]$[-17, 31, -2, -16]$[-17, 36, -2, -11]$[-16, 41, -1, -6]$[-15, 47, 0, 0]"/>
-    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ofRUIM7_Ed6PsZOe3JaFXA" id="(0.0,0.9333333333333333)"/>
-    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ofRUIc7_Ed6PsZOe3JaFXA" id="(0.41831683168316824,0.0)"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_1YdDUMVjEd-36IW2b4tI2g" visible="false" type="6010">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_1YdDUcVjEd-36IW2b4tI2g" x="-5" y="4"/>
+    </children>
+    <styles xmi:type="notation:FontStyle" xmi:id="_1YccQcVjEd-36IW2b4tI2g" fontName="Lucida Grande" fontHeight="11"/>
+    <element xmi:type="synccharts:Transition" href="dvdplayer.kixs#//@states.0/@regions.0/@states.0/@outgoingTransitions.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_1YccQsVjEd-36IW2b4tI2g" points="[0, 0, -92, 0]$[21, 0, -71, 0]$[55, 0, -37, 0]$[92, 0, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_2FUJUsVjEd-36IW2b4tI2g" id="(1.0243077400403147,0.5333333333333333)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_2FUJU8VjEd-36IW2b4tI2g" id="(0.002513493718327779,0.5024038461538461)"/>
   </edges>
-  <edges xmi:type="notation:Connector" xmi:id="_5MzBYM7_Ed6PsZOe3JaFXA" type="4001" source="_mFrmkM7_Ed6PsZOe3JaFXA" target="_iDgxoM7_Ed6PsZOe3JaFXA" lineColor="0">
-    <children xmi:type="notation:DecorationNode" xmi:id="_5MzBY87_Ed6PsZOe3JaFXA" type="6001">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_5MzBZM7_Ed6PsZOe3JaFXA" x="1" y="24"/>
+  <edges xmi:type="notation:Connector" xmi:id="_1YffkMVjEd-36IW2b4tI2g" type="4005" source="_1T1pEMVjEd-36IW2b4tI2g" target="_1T1CAMVjEd-36IW2b4tI2g" lineColor="0">
+    <children xmi:type="notation:DecorationNode" xmi:id="_1YgGoMVjEd-36IW2b4tI2g" type="6009">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_1YgGocVjEd-36IW2b4tI2g" x="-1" y="16"/>
     </children>
-    <styles xmi:type="notation:FontStyle" xmi:id="_5MzBYc7_Ed6PsZOe3JaFXA" fontName="Lucida Grande" fontHeight="11"/>
-    <element xmi:type="synccharts:Transition" href="dvdplayer.kixs#//@innerStates.0/@regions.0/@innerStates.1/@outgoingTransitions.0"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_5MzBYs7_Ed6PsZOe3JaFXA" points="[0, 0, 5, 44]$[0, -6, 5, 38]$[0, -11, 5, 33]$[1, -16, 6, 28]$[1, -20, 6, 24]$[1, -24, 6, 20]$[1, -28, 6, 16]$[-1, -34, 4, 10]$[-3, -39, 2, 5]$[-5, -44, 0, 0]"/>
-    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_5M2rwM7_Ed6PsZOe3JaFXA" id="(0.5321782178217822,0.0)"/>
-    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_6GvhIM7_Ed6PsZOe3JaFXA" id="(0.7222222222222222,1.0)"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_1YgGosVjEd-36IW2b4tI2g" visible="false" type="6010">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_1YgGo8VjEd-36IW2b4tI2g" x="-5" y="4"/>
+    </children>
+    <styles xmi:type="notation:FontStyle" xmi:id="_1YffkcVjEd-36IW2b4tI2g" fontName="Lucida Grande" fontHeight="11"/>
+    <element xmi:type="synccharts:Transition" href="dvdplayer.kixs#//@states.0/@regions.0/@states.1/@outgoingTransitions.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_1YffksVjEd-36IW2b4tI2g" points="[0, 0, 92, 18]$[-26, -1, 66, 17]$[-51, -3, 41, 15]$[-75, -10, 17, 8]$[-81, -12, 11, 6]$[-87, -15, 5, 3]$[-92, -18, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_2FUJUMVjEd-36IW2b4tI2g" id="(0.0019729614257815065,0.5823317307692307)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_2FUJUcVjEd-36IW2b4tI2g" id="(1.0049999921749802,1.0)"/>
   </edges>
-  <edges xmi:type="notation:Connector" xmi:id="_OHTFYM8AEd6PsZOe3JaFXA" type="4001" source="_vR0mAM7_Ed6PsZOe3JaFXA" target="_OHJ7cM8AEd6PsZOe3JaFXA" lineColor="0">
-    <children xmi:type="notation:DecorationNode" xmi:id="_OHTscs8AEd6PsZOe3JaFXA" type="6001">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_OHTsc88AEd6PsZOe3JaFXA" x="-11" y="-22"/>
+  <edges xmi:type="notation:Connector" xmi:id="_1Yii4MVjEd-36IW2b4tI2g" type="4005" source="_1T890MVjEd-36IW2b4tI2g" target="_1T9k48VjEd-36IW2b4tI2g" lineColor="0">
+    <children xmi:type="notation:DecorationNode" xmi:id="_1Yii48VjEd-36IW2b4tI2g" type="6009">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_1Yii5MVjEd-36IW2b4tI2g" x="-13" y="-25"/>
     </children>
-    <styles xmi:type="notation:FontStyle" xmi:id="_OHTscM8AEd6PsZOe3JaFXA" fontName="Lucida Grande" fontHeight="11"/>
-    <element xmi:type="synccharts:Transition" href="dvdplayer.kixs#//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.0/@outgoingTransitions.0"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_OHTscc8AEd6PsZOe3JaFXA" points="[0, 0, 16, -44]$[-4, 5, 12, -39]$[-8, 10, 8, -34]$[-11, 16, 5, -28]$[-15, 25, 1, -19]$[-16, 34, 0, -10]$[-16, 44, 0, 0]"/>
-    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_Py1aIM8AEd6PsZOe3JaFXA" id="(0.2112676056338028,1.0)"/>
-    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_Py2BMM8AEd6PsZOe3JaFXA" id="(0.40384615384615385,0.0)"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_1Yii5cVjEd-36IW2b4tI2g" visible="false" type="6010">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_1Yii5sVjEd-36IW2b4tI2g" x="1" y="2"/>
+    </children>
+    <styles xmi:type="notation:FontStyle" xmi:id="_1Yii4cVjEd-36IW2b4tI2g" fontName="Lucida Grande" fontHeight="11"/>
+    <element xmi:type="synccharts:Transition" href="dvdplayer.kixs#//@states.0/@regions.0/@states.1/@regions.0/@states.0/@outgoingTransitions.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_1Yii4sVjEd-36IW2b4tI2g" points="[0, 0, 21, -52]$[-5, 4, 16, -48]$[-10, 9, 11, -43]$[-12, 16, 9, -36]$[-18, 27, 3, -25]$[-20, 39, 1, -13]$[-21, 52, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_2FUJVsVjEd-36IW2b4tI2g" id="(0.2062161419842698,1.0)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_2FUJV8VjEd-36IW2b4tI2g" id="(0.3755523326785064,0.0014437017306481463)"/>
   </edges>
-  <edges xmi:type="notation:Connector" xmi:id="_W6_voM8AEd6PsZOe3JaFXA" type="4001" source="_OHJ7cM8AEd6PsZOe3JaFXA" target="_vR0mAM7_Ed6PsZOe3JaFXA" lineColor="0">
-    <children xmi:type="notation:DecorationNode" xmi:id="_W6_vo88AEd6PsZOe3JaFXA" type="6001">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_W6_vpM8AEd6PsZOe3JaFXA" x="1" y="20"/>
+  <edges xmi:type="notation:Connector" xmi:id="_1Yk_IMVjEd-36IW2b4tI2g" type="4005" source="_1T9k48VjEd-36IW2b4tI2g" target="_1T890MVjEd-36IW2b4tI2g" lineColor="0">
+    <children xmi:type="notation:DecorationNode" xmi:id="_1Yk_I8VjEd-36IW2b4tI2g" type="6009">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_1Yk_JMVjEd-36IW2b4tI2g" x="8" y="23"/>
     </children>
-    <styles xmi:type="notation:FontStyle" xmi:id="_W6_voc8AEd6PsZOe3JaFXA" fontName="Lucida Grande" fontHeight="11"/>
-    <element xmi:type="synccharts:Transition" href="dvdplayer.kixs#//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.1/@outgoingTransitions.0"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_W6_vos8AEd6PsZOe3JaFXA" points="[0, 0, 7, 44]$[-1, -10, 6, 34]$[-2, -19, 5, 25]$[-2, -28, 5, 16]$[-4, -34, 3, 10]$[-6, -39, 1, 5]$[-7, -44, 0, 0]"/>
-    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_Xpa74M8AEd6PsZOe3JaFXA" id="(0.5384615384615384,0.0)"/>
-    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_Xpa74c8AEd6PsZOe3JaFXA" id="(0.5774647887323944,1.0)"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_1Yk_JcVjEd-36IW2b4tI2g" visible="false" type="6010">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_1Yk_JsVjEd-36IW2b4tI2g" x="1" y="4"/>
+    </children>
+    <styles xmi:type="notation:FontStyle" xmi:id="_1Yk_IcVjEd-36IW2b4tI2g" fontName="Lucida Grande" fontHeight="11"/>
+    <element xmi:type="synccharts:Transition" href="dvdplayer.kixs#//@states.0/@regions.0/@states.1/@regions.0/@states.1/@outgoingTransitions.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_1Yk_IsVjEd-36IW2b4tI2g" points="[0, 0, 5, 52]$[0, -6, 5, 46]$[0, -11, 5, 41]$[1, -16, 6, 36]$[1, -25, 6, 27]$[2, -28, 7, 24]$[1, -36, 6, 16]$[-1, -42, 4, 10]$[-3, -47, 2, 5]$[-5, -52, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_2FUJVMVjEd-36IW2b4tI2g" id="(0.5438953665799876,0.0016197688143018644)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_2FUJVcVjEd-36IW2b4tI2g" id="(0.6360811800570101,1.0)"/>
   </edges>
-  <edges xmi:type="notation:Connector" xmi:id="_mtQHcM8AEd6PsZOe3JaFXA" type="4001" source="_kuAzkM8AEd6PsZOe3JaFXA" target="_mtGWcM8AEd6PsZOe3JaFXA" lineColor="0">
-    <children xmi:type="notation:DecorationNode" xmi:id="_mtQHc88AEd6PsZOe3JaFXA" type="6001">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_mtQugM8AEd6PsZOe3JaFXA" y="-6"/>
+  <edges xmi:type="notation:Connector" xmi:id="_1YnbYMVjEd-36IW2b4tI2g" type="4005" source="_1US8EMVjEd-36IW2b4tI2g" target="_1UTjKMVjEd-36IW2b4tI2g" lineColor="0">
+    <children xmi:type="notation:DecorationNode" xmi:id="_1YnbY8VjEd-36IW2b4tI2g" type="6009">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_1YnbZMVjEd-36IW2b4tI2g" x="-1" y="-9"/>
     </children>
-    <styles xmi:type="notation:FontStyle" xmi:id="_mtQHcc8AEd6PsZOe3JaFXA" fontName="Lucida Grande" fontHeight="11"/>
-    <element xmi:type="synccharts:Transition" href="dvdplayer.kixs#//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.1/@regions.0/@innerStates.0/@outgoingTransitions.0"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_mtQHcs8AEd6PsZOe3JaFXA" points="[0, 0, -68, 0]$[22, 0, -46, 0]$[46, 0, -22, 0]$[68, 0, 0, 0]"/>
-    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_nK00QM8AEd6PsZOe3JaFXA" id="(1.0,0.5333333333333333)"/>
-    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_nK00Qc8AEd6PsZOe3JaFXA" id="(0.0,0.5333333333333333)"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_1YnbZcVjEd-36IW2b4tI2g" visible="false" type="6010">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_1YnbZsVjEd-36IW2b4tI2g" x="-3" y="4"/>
+    </children>
+    <styles xmi:type="notation:FontStyle" xmi:id="_1YnbYcVjEd-36IW2b4tI2g" fontName="Lucida Grande" fontHeight="11"/>
+    <element xmi:type="synccharts:Transition" href="dvdplayer.kixs#//@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.0/@states.0/@outgoingTransitions.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_1YnbYsVjEd-36IW2b4tI2g" points="[0, 0, -75, 0]$[22, 0, -53, 0]$[52, 0, -23, 0]$[75, 0, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_2FUwYsVjEd-36IW2b4tI2g" id="(1.0,0.5333333333333343)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_2FUwY8VjEd-36IW2b4tI2g" id="(0.0,0.5333333333333343)"/>
   </edges>
-  <edges xmi:type="notation:Connector" xmi:id="_u7WxUM8AEd6PsZOe3JaFXA" type="4001" source="_mtGWcM8AEd6PsZOe3JaFXA" target="_kuAzkM8AEd6PsZOe3JaFXA" lineColor="0">
-    <children xmi:type="notation:DecorationNode" xmi:id="_u7XYYM8AEd6PsZOe3JaFXA" type="6001">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_u7XYYc8AEd6PsZOe3JaFXA" y="7"/>
+  <edges xmi:type="notation:Connector" xmi:id="_1Yp3oMVjEd-36IW2b4tI2g" type="4005" source="_1UTjKMVjEd-36IW2b4tI2g" target="_1UUKOMVjEd-36IW2b4tI2g" lineColor="0">
+    <children xmi:type="notation:DecorationNode" xmi:id="_1Yp3o8VjEd-36IW2b4tI2g" type="6009">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_1Yp3pMVjEd-36IW2b4tI2g" y="-9"/>
     </children>
-    <styles xmi:type="notation:FontStyle" xmi:id="_u7WxUc8AEd6PsZOe3JaFXA" fontName="Lucida Grande" fontHeight="11"/>
-    <element xmi:type="synccharts:Transition" href="dvdplayer.kixs#//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.1/@regions.0/@innerStates.1/@outgoingTransitions.0"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_u7WxUs8AEd6PsZOe3JaFXA" points="[0, 0, 68, -1]$[-6, 1, 62, 0]$[-11, 3, 57, 2]$[-16, 5, 52, 4]$[-29, 6, 39, 5]$[-39, 6, 29, 5]$[-52, 5, 16, 4]$[-58, 3, 10, 2]$[-63, 2, 5, 1]$[-68, 1, 0, 0]"/>
-    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_wYfdsM8AEd6PsZOe3JaFXA" id="(0.0,0.8666666666666667)"/>
-    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_wYfdsc8AEd6PsZOe3JaFXA" id="(1.0,0.9)"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_1Yp3pcVjEd-36IW2b4tI2g" type="6010">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_1Yp3psVjEd-36IW2b4tI2g" x="-4" y="4"/>
+    </children>
+    <styles xmi:type="notation:FontStyle" xmi:id="_1Yp3ocVjEd-36IW2b4tI2g" fontName="Lucida Grande" fontHeight="11"/>
+    <element xmi:type="synccharts:Transition" href="dvdplayer.kixs#//@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.0/@states.1/@outgoingTransitions.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_1Yp3osVjEd-36IW2b4tI2g" points="[0, 0, -79, 0]$[24, 0, -55, 0]$[57, 0, -22, 0]$[79, 0, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_2FUwZMVjEd-36IW2b4tI2g" id="(1.0029998779296876,0.5333333333333343)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_2FUwZcVjEd-36IW2b4tI2g" id="(0.021304586659307064,0.5333333333333343)"/>
   </edges>
-  <edges xmi:type="notation:Connector" xmi:id="_9GR-8M8AEd6PsZOe3JaFXA" type="4001" source="_2MO98M8AEd6PsZOe3JaFXA" target="_9GKDIM8AEd6PsZOe3JaFXA" lineColor="0">
-    <children xmi:type="notation:DecorationNode" xmi:id="_9GR-888AEd6PsZOe3JaFXA" type="6001">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_9GR-9M8AEd6PsZOe3JaFXA" x="2" y="-5"/>
+  <edges xmi:type="notation:Connector" xmi:id="_1YsT4MVjEd-36IW2b4tI2g" type="4005" source="_1UTjKMVjEd-36IW2b4tI2g" target="_1US8EMVjEd-36IW2b4tI2g" lineColor="0">
+    <children xmi:type="notation:DecorationNode" xmi:id="_1YsT48VjEd-36IW2b4tI2g" type="6009">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_1YsT5MVjEd-36IW2b4tI2g" x="1" y="14"/>
     </children>
-    <styles xmi:type="notation:FontStyle" xmi:id="_9GR-8c8AEd6PsZOe3JaFXA" fontName="Lucida Grande" fontHeight="11"/>
-    <element xmi:type="synccharts:Transition" href="dvdplayer.kixs#//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.1/@regions.1/@innerStates.0/@outgoingTransitions.0"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_9GR-8s8AEd6PsZOe3JaFXA" points="[0, 0, -74, 14]$[24, -5, -50, 9]$[49, -10, -25, 4]$[74, -14, 0, 0]"/>
-    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_9wn8cM8AEd6PsZOe3JaFXA" id="(1.0,0.36666666666666664)"/>
-    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_9wn8cc8AEd6PsZOe3JaFXA" id="(0.0,0.7333333333333333)"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_1YsT5cVjEd-36IW2b4tI2g" type="6010">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_1Ys68MVjEd-36IW2b4tI2g" x="-4" y="2"/>
+    </children>
+    <styles xmi:type="notation:FontStyle" xmi:id="_1YsT4cVjEd-36IW2b4tI2g" fontName="Lucida Grande" fontHeight="11"/>
+    <element xmi:type="synccharts:Transition" href="dvdplayer.kixs#//@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.0/@states.1/@outgoingTransitions.1"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_1YsT4sVjEd-36IW2b4tI2g" points="[0, 0, 86, 0]$[-7, 3, 79, 3]$[-14, 6, 72, 6]$[-21, 8, 65, 8]$[-41, 12, 45, 12]$[-47, 12, 39, 12]$[-65, 8, 21, 8]$[-72, 6, 14, 6]$[-79, 3, 7, 3]$[-86, 0, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_2FUwYMVjEd-36IW2b4tI2g" id="(0.08349990844726562,1.0)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_2FUwYcVjEd-36IW2b4tI2g" id="(0.9434999738420764,1.0)"/>
   </edges>
-  <edges xmi:type="notation:Connector" xmi:id="_DozQwM8BEd6PsZOe3JaFXA" type="4001" source="_9GKDIM8AEd6PsZOe3JaFXA" target="_Doqt4M8BEd6PsZOe3JaFXA" lineColor="0">
-    <children xmi:type="notation:DecorationNode" xmi:id="_Doz30s8BEd6PsZOe3JaFXA" type="6001">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_Doz3088BEd6PsZOe3JaFXA" x="-4" y="-8"/>
+  <edges xmi:type="notation:Connector" xmi:id="_1YuwIMVjEd-36IW2b4tI2g" type="4005" source="_1VIpkMVjEd-36IW2b4tI2g" target="_1VJQo8VjEd-36IW2b4tI2g" lineColor="0">
+    <children xmi:type="notation:DecorationNode" xmi:id="_1YuwI8VjEd-36IW2b4tI2g" type="6009">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_1YuwJMVjEd-36IW2b4tI2g" y="-9"/>
     </children>
-    <styles xmi:type="notation:FontStyle" xmi:id="_Doz30M8BEd6PsZOe3JaFXA" fontName="Lucida Grande" fontHeight="11"/>
-    <element xmi:type="synccharts:Transition" href="dvdplayer.kixs#//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.1/@regions.1/@innerStates.1/@outgoingTransitions.0"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_Doz30c8BEd6PsZOe3JaFXA" points="[0, 0, -74, -14]$[24, 4, -50, -10]$[50, 9, -24, -5]$[74, 14, 0, 0]"/>
-    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_FuLB0M8BEd6PsZOe3JaFXA" id="(1.0,0.7333333333333333)"/>
-    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_FuLo4M8BEd6PsZOe3JaFXA" id="(0.0,0.36666666666666664)"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_1YuwJcVjEd-36IW2b4tI2g" visible="false" type="6010">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_1YuwJsVjEd-36IW2b4tI2g" x="7" y="4"/>
+    </children>
+    <styles xmi:type="notation:FontStyle" xmi:id="_1YuwIcVjEd-36IW2b4tI2g" fontName="Lucida Grande" fontHeight="11"/>
+    <element xmi:type="synccharts:Transition" href="dvdplayer.kixs#//@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.1/@states.0/@outgoingTransitions.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_1YuwIsVjEd-36IW2b4tI2g" points="[0, 0, 20, 0]$[-7, 0, 13, 0]$[-14, 0, 6, 0]$[-20, 0, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_2FVXcMVjEd-36IW2b4tI2g" id="(0.0031968413806352457,0.5080668131510416)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_2FVXccVjEd-36IW2b4tI2g" id="(1.0036718845367432,0.5080668131510416)"/>
   </edges>
-  <edges xmi:type="notation:Connector" xmi:id="_dvH5YM8BEd6PsZOe3JaFXA" type="4001" source="_mtGWcM8AEd6PsZOe3JaFXA" target="_dvAkoM8BEd6PsZOe3JaFXA" lineColor="0">
-    <children xmi:type="notation:DecorationNode" xmi:id="_dvIgcM8BEd6PsZOe3JaFXA" type="6001">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_dvIgcc8BEd6PsZOe3JaFXA" x="-1" y="-6"/>
+  <edges xmi:type="notation:Connector" xmi:id="_1YxMYMVjEd-36IW2b4tI2g" type="4005" source="_1VJQo8VjEd-36IW2b4tI2g" target="_1VJ3s8VjEd-36IW2b4tI2g" lineColor="0">
+    <children xmi:type="notation:DecorationNode" xmi:id="_1YxMY8VjEd-36IW2b4tI2g" type="6009">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_1YxMZMVjEd-36IW2b4tI2g" x="-1" y="20"/>
     </children>
-    <styles xmi:type="notation:FontStyle" xmi:id="_dvH5Yc8BEd6PsZOe3JaFXA" fontName="Lucida Grande" fontHeight="11"/>
-    <element xmi:type="synccharts:Transition" href="dvdplayer.kixs#//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.1/@regions.0/@innerStates.1/@outgoingTransitions.1"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_dvH5Ys8BEd6PsZOe3JaFXA" points="[0, 0, -70, 0]$[22, 0, -48, 0]$[47, 0, -23, 0]$[70, 0, 0, 0]"/>
-    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_eSHRsM8BEd6PsZOe3JaFXA" id="(1.0,0.5333333333333333)"/>
-    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_eSH4wM8BEd6PsZOe3JaFXA" id="(0.0,0.5333333333333333)"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_1YxMZcVjEd-36IW2b4tI2g" visible="false" type="6010">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_1YxMZsVjEd-36IW2b4tI2g" x="-2" y="3"/>
+    </children>
+    <styles xmi:type="notation:FontStyle" xmi:id="_1YxMYcVjEd-36IW2b4tI2g" fontName="Lucida Grande" fontHeight="11"/>
+    <element xmi:type="synccharts:Transition" href="dvdplayer.kixs#//@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.1/@states.1/@outgoingTransitions.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_1YxMYsVjEd-36IW2b4tI2g" points="[0, 0, 24, 41]$[-7, -12, 17, 29]$[-17, -29, 7, 12]$[-24, -41, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_2FVXcsVjEd-36IW2b4tI2g" id="(0.36685943603515625,0.005300394694012311)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_2FVXc8VjEd-36IW2b4tI2g" id="(0.6520861921639283,1.0060668945312519)"/>
   </edges>
-  <edges xmi:type="notation:Connector" xmi:id="_jYD30M8BEd6PsZOe3JaFXA" type="4001" source="_Doqt4M8BEd6PsZOe3JaFXA" target="_2MO98M8AEd6PsZOe3JaFXA" lineColor="0">
-    <children xmi:type="notation:DecorationNode" xmi:id="_jYEe4M8BEd6PsZOe3JaFXA" type="6001">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_jYEe4c8BEd6PsZOe3JaFXA" x="1" y="7"/>
+  <edges xmi:type="notation:Connector" xmi:id="_1YzBkMVjEd-36IW2b4tI2g" type="4005" source="_1VJ3s8VjEd-36IW2b4tI2g" target="_1VKewsVjEd-36IW2b4tI2g" lineColor="0">
+    <children xmi:type="notation:DecorationNode" xmi:id="_1YzoosVjEd-36IW2b4tI2g" type="6009">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_1Yzoo8VjEd-36IW2b4tI2g" x="-3" y="-18"/>
     </children>
-    <styles xmi:type="notation:FontStyle" xmi:id="_jYD30c8BEd6PsZOe3JaFXA" fontName="Lucida Grande" fontHeight="11"/>
-    <element xmi:type="synccharts:Transition" href="dvdplayer.kixs#//@innerStates.0/@regions.0/@innerStates.1/@regions.0/@innerStates.1/@regions.1/@innerStates.2/@outgoingTransitions.0"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_jYD30s8BEd6PsZOe3JaFXA" points="[0, 0, 210, 0]$[-23, 2, 187, 2]$[-49, 4, 161, 4]$[-74, 6, 136, 6]$[-96, 7, 114, 7]$[-114, 7, 96, 7]$[-136, 6, 74, 6]$[-162, 4, 48, 4]$[-188, 2, 22, 2]$[-210, 0, 0, 0]"/>
-    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_kQIIQM8BEd6PsZOe3JaFXA" id="(0.0,0.6666666666666666)"/>
-    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_kQIvUM8BEd6PsZOe3JaFXA" id="(1.0,0.6666666666666666)"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_1YzopMVjEd-36IW2b4tI2g" visible="false" type="6010">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_1YzopcVjEd-36IW2b4tI2g" x="2" y="4"/>
+    </children>
+    <styles xmi:type="notation:FontStyle" xmi:id="_1YzooMVjEd-36IW2b4tI2g" fontName="Lucida Grande" fontHeight="11"/>
+    <element xmi:type="synccharts:Transition" href="dvdplayer.kixs#//@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.1/@states.2/@outgoingTransitions.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_1YzoocVjEd-36IW2b4tI2g" points="[0, 0, -24, 41]$[7, -13, -17, 28]$[17, -29, -7, 12]$[24, -41, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_2FVXdMVjEd-36IW2b4tI2g" id="(0.6522931066052672,0.0013333638509114584)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_2FVXdcVjEd-36IW2b4tI2g" id="(0.36704683303833097,1.0020001729329426)"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_1Y1d0MVjEd-36IW2b4tI2g" type="4005" source="_1VKewsVjEd-36IW2b4tI2g" target="_1VLF0cVjEd-36IW2b4tI2g" lineColor="0">
+    <children xmi:type="notation:DecorationNode" xmi:id="_1Y2E4MVjEd-36IW2b4tI2g" type="6009">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_1Y2E4cVjEd-36IW2b4tI2g" x="-1" y="9"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_1Y2E4sVjEd-36IW2b4tI2g" visible="false" type="6010">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_1Y2E48VjEd-36IW2b4tI2g" x="7" y="4"/>
+    </children>
+    <styles xmi:type="notation:FontStyle" xmi:id="_1Y1d0cVjEd-36IW2b4tI2g" fontName="Lucida Grande" fontHeight="11"/>
+    <element xmi:type="synccharts:Transition" href="dvdplayer.kixs#//@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.1/@states.3/@outgoingTransitions.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_1Y1d0sVjEd-36IW2b4tI2g" points="[0, 0, -15, 0]$[5, 0, -10, 0]$[10, 0, -5, 0]$[15, 0, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_2FVXdsVjEd-36IW2b4tI2g" id="(1.010077953338623,0.5000001271565755)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_2FVXd8VjEd-36IW2b4tI2g" id="(0.0016427176339293835,0.5000001271565755)"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_1Y36EMVjEd-36IW2b4tI2g" type="4005" source="_1VLF0cVjEd-36IW2b4tI2g" target="_1VLs4MVjEd-36IW2b4tI2g" lineColor="0">
+    <children xmi:type="notation:DecorationNode" xmi:id="_1Y4hIMVjEd-36IW2b4tI2g" type="6009">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_1Y4hIcVjEd-36IW2b4tI2g" x="-2" y="20"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_1Y4hIsVjEd-36IW2b4tI2g" visible="false" type="6010">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_1Y4hI8VjEd-36IW2b4tI2g" x="3" y="4"/>
+    </children>
+    <styles xmi:type="notation:FontStyle" xmi:id="_1Y36EcVjEd-36IW2b4tI2g" fontName="Lucida Grande" fontHeight="11"/>
+    <element xmi:type="synccharts:Transition" href="dvdplayer.kixs#//@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.1/@states.4/@outgoingTransitions.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_1Y36EsVjEd-36IW2b4tI2g" points="[0, 0, -23, -41]$[6, 12, -17, -29]$[16, 29, -7, -12]$[23, 41, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_2FVXeMVjEd-36IW2b4tI2g" id="(0.6287857055664062,1.0026668548584003)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_2FVXecVjEd-36IW2b4tI2g" id="(0.3642308161808894,0.0020001729329427085)"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_1Y69YMVjEd-36IW2b4tI2g" type="4005" source="_1VLs4MVjEd-36IW2b4tI2g" target="_1VIpkMVjEd-36IW2b4tI2g" lineColor="0">
+    <children xmi:type="notation:DecorationNode" xmi:id="_1Y69Y8VjEd-36IW2b4tI2g" type="6009">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_1Y69ZMVjEd-36IW2b4tI2g" x="1" y="20"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_1Y69ZcVjEd-36IW2b4tI2g" visible="false" type="6010">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_1Y69ZsVjEd-36IW2b4tI2g" x="3" y="2"/>
+    </children>
+    <styles xmi:type="notation:FontStyle" xmi:id="_1Y69YcVjEd-36IW2b4tI2g" fontName="Lucida Grande" fontHeight="11"/>
+    <element xmi:type="synccharts:Transition" href="dvdplayer.kixs#//@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.1/@states.5/@outgoingTransitions.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_1Y69YsVjEd-36IW2b4tI2g" points="[0, 0, 23, -41]$[-7, 12, 16, -29]$[-17, 29, 6, -12]$[-23, 41, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_2FUwZsVjEd-36IW2b4tI2g" id="(0.3640768197866595,1.006800079345703)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_2FUwZ8VjEd-36IW2b4tI2g" id="(0.6394263095543042,0.006033325195314395)"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_9WUcUMVkEd-36IW2b4tI2g" type="4005" source="_1UUKOMVjEd-36IW2b4tI2g" target="_1UTjKMVjEd-36IW2b4tI2g" lineColor="0">
+    <children xmi:type="notation:DecorationNode" xmi:id="_9WVDYMVkEd-36IW2b4tI2g" type="6009">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_9WVDYcVkEd-36IW2b4tI2g" x="1" y="13"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_9WVDYsVkEd-36IW2b4tI2g" visible="false" type="6010">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_9WVDY8VkEd-36IW2b4tI2g" x="-3" y="3"/>
+    </children>
+    <styles xmi:type="notation:FontStyle" xmi:id="_9WUcUcVkEd-36IW2b4tI2g" fontName="Lucida Grande" fontHeight="11"/>
+    <element xmi:type="synccharts:Transition" href="dvdplayer.kixs#//@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.0/@states.2/@outgoingTransitions.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_9WUcUsVkEd-36IW2b4tI2g" points="[0, 0, 88, 0]$[-6, 3, 82, 3]$[-12, 6, 76, 6]$[-18, 8, 70, 8]$[-39, 13, 49, 13]$[-46, 12, 42, 12]$[-66, 8, 22, 8]$[-74, 6, 14, 6]$[-81, 3, 7, 3]$[-88, 0, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_9YDhsMVkEd-36IW2b4tI2g" id="(0.0665216860563871,1.0)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_9YDhscVkEd-36IW2b4tI2g" id="(0.9165000915527344,1.0)"/>
   </edges>
 </notation:Diagram>
