@@ -4,7 +4,7 @@
     <signals name="BUF" type="unsigned" initialValue="0"/>
     <regions id="R0" label="R0" DUMMY_id="R0">
       <variables name="k" type="unsigned" initialValue="0"/>
-      <states id="Parent" label="Parent" isInitial="true" incomingTransitions="//@states.0/@regions.0/@states.0/@outgoingTransitions.0">
+      <states id="Parent" label="Parent" isInitial="true" incomingTransitions="//@states.0/@regions.0/@states.0/@outgoingTransitions.1">
         <regions id="Producer" label="Producer" DUMMY_id="Producer">
           <variables name="i" type="unsigned" initialValue="0"/>
           <states id="_S0" label="" isInitial="true" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.0/@states.0/@outgoingTransitions.0">
@@ -45,16 +45,28 @@
         <regions id="Observer" label="Observer" DUMMY_id="Observer">
           <variables name="fd" type="unsigned" initialValue="0"/>
           <states id="_S0" label="" isInitial="true" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.2/@states.0/@outgoingTransitions.0">
-            <outgoingTransitions label="/ fd:=?BUF" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.2/@states.0">
+            <outgoingTransitions label="/ fd:=?BUF, k:=k + 1" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.2/@states.0">
               <effects xsi:type="synccharts:Assignment" variable="//@states.0/@regions.0/@states.0/@regions.2/@variables.0">
                 <expression xsi:type="expressions:OperatorExpression" operator="?">
                   <subExpressions xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.0"/>
                 </expression>
               </effects>
+              <effects xsi:type="synccharts:Assignment" variable="//@states.0/@regions.0/@variables.0">
+                <expression xsi:type="expressions:OperatorExpression" operator="+">
+                  <subExpressions xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@variables.0"/>
+                  <subExpressions xsi:type="expressions:IntValue" value="1"/>
+                </expression>
+              </effects>
             </outgoingTransitions>
           </states>
         </regions>
-        <outgoingTransitions label="?BUF = 10" priority="1" targetState="//@states.0/@regions.0/@states.0">
+        <outgoingTransitions label="k = 20" priority="1" targetState="//@states.0/@regions.0/@states.1">
+          <trigger xsi:type="expressions:OperatorExpression">
+            <subExpressions xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@variables.0"/>
+            <subExpressions xsi:type="expressions:IntValue" value="20"/>
+          </trigger>
+        </outgoingTransitions>
+        <outgoingTransitions label="?BUF = 10" priority="2" targetState="//@states.0/@regions.0/@states.0">
           <trigger xsi:type="expressions:OperatorExpression">
             <subExpressions xsi:type="expressions:OperatorExpression" operator="?">
               <subExpressions xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.0"/>
@@ -63,6 +75,7 @@
           </trigger>
         </outgoingTransitions>
       </states>
+      <states id="_2" label="" isFinal="true" incomingTransitions="//@states.0/@regions.0/@states.0/@outgoingTransitions.0"/>
     </regions>
   </states>
 </synccharts:Region>
