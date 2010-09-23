@@ -1,62 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <synccharts:Region xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:expressions="http://kieler.cs.cau.de/expressions/0.1.2" xmlns:synccharts="http://kieler.cs.cau.de/synccharts/0.2.3">
   <states id="Elevator" label="Elevator">
-    <signals name="up" isInput="true"/>
-    <signals name="down" isInput="true"/>
-    <signals name="error" isInput="true"/>
-    <signals name="alarm" isOutput="true"/>
+    <signals name="BUTTON_UP" isInput="true"/>
+    <signals name="BUTTON_DOWN" isInput="true"/>
+    <signals name="BUTTON_ALARM" isInput="true"/>
+    <signals name="ALARM_LAMP" isOutput="true"/>
+    <signals name="MOVE_UP" isOutput="true"/>
+    <signals name="MOVE_DOWN" isOutput="true"/>
+    <signals name="OPEN_DOOR" isOutput="true"/>
+    <signals name="CLOSE_DOOR" isOutput="true"/>
+    <signals name="IS_UP" isInput="true"/>
+    <signals name="IS_DOWN" isInput="true"/>
     <regions>
       <states id="normal" label="normal" isInitial="true" incomingTransitions="//@states.0/@regions.0/@states.1/@outgoingTransitions.0">
         <signals name="door"/>
         <regions>
           <states id="floor1" label="floor1" isInitial="true" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.0/@states.2/@outgoingTransitions.0">
-            <outgoingTransitions label="up / door" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.0/@states.3">
+            <outgoingTransitions label="BUTTON_UP / door" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.0/@states.3">
               <effects xsi:type="synccharts:Emission" signal="//@states.0/@regions.0/@states.0/@signals.0"/>
               <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.0"/>
             </outgoingTransitions>
           </states>
           <states id="floor22" label="floor2" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.0/@states.3/@outgoingTransitions.0">
-            <outgoingTransitions label="down / door" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.0/@states.2">
+            <outgoingTransitions label="BUTTON_DOWN / door" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.0/@states.2">
               <effects xsi:type="synccharts:Emission" signal="//@states.0/@regions.0/@states.0/@signals.0"/>
               <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.1"/>
             </outgoingTransitions>
           </states>
-          <states id="down" label="down" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.0/@states.1/@outgoingTransitions.0">
-            <outgoingTransitions label="/ door" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.0/@states.0">
+          <states id="down" label="down" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.0/@states.1/@outgoingTransitions.0 //@states.0/@regions.0/@states.0/@regions.0/@states.2/@outgoingTransitions.1">
+            <outgoingTransitions label="IS_DOWN / door" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.0/@states.0">
               <effects xsi:type="synccharts:Emission" signal="//@states.0/@regions.0/@states.0/@signals.0"/>
+              <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.9"/>
+            </outgoingTransitions>
+            <outgoingTransitions label="/ MOVE_DOWN" priority="2" targetState="//@states.0/@regions.0/@states.0/@regions.0/@states.2">
+              <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.5"/>
             </outgoingTransitions>
           </states>
-          <states id="up" label="up" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.0/@states.0/@outgoingTransitions.0">
-            <outgoingTransitions label="/ door" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.0/@states.1">
+          <states id="up" label="up" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.0/@states.0/@outgoingTransitions.0 //@states.0/@regions.0/@states.0/@regions.0/@states.3/@outgoingTransitions.1">
+            <outgoingTransitions label="IS_UP / door" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.0/@states.1">
               <effects xsi:type="synccharts:Emission" signal="//@states.0/@regions.0/@states.0/@signals.0"/>
+              <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.8"/>
+            </outgoingTransitions>
+            <outgoingTransitions label="/ MOVE_UP" priority="2" targetState="//@states.0/@regions.0/@states.0/@regions.0/@states.3">
+              <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.4"/>
             </outgoingTransitions>
           </states>
         </regions>
         <regions>
           <states id="door_open" label="door_open" isInitial="true" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.1/@states.1/@outgoingTransitions.0">
-            <outgoingTransitions label="door" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.1/@states.1">
+            <outgoingTransitions label="door / CLOSE_DOOR" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.1/@states.1">
+              <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.7"/>
               <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.0/@signals.0"/>
             </outgoingTransitions>
           </states>
           <states id="door_closed" label="door_closed" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.1/@states.0/@outgoingTransitions.0">
-            <outgoingTransitions label="door" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.1/@states.0">
+            <outgoingTransitions label="door / OPEN_DOOR" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.1/@states.0">
+              <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.6"/>
               <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.0/@signals.0"/>
             </outgoingTransitions>
           </states>
         </regions>
-        <outgoingTransitions label="error" priority="1" targetState="//@states.0/@regions.0/@states.1">
+        <outgoingTransitions label="BUTTON_ALARM" priority="1" targetState="//@states.0/@regions.0/@states.1">
           <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.2"/>
         </outgoingTransitions>
       </states>
       <states id="error" label="error" incomingTransitions="//@states.0/@regions.0/@states.0/@outgoingTransitions.0">
         <regions>
           <states id="sustain_alarm" label="sustain_alarm" isInitial="true" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.0/@states.0/@outgoingTransitions.0">
-            <outgoingTransitions label="/ alarm" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.0/@states.0">
+            <outgoingTransitions label="/ ALARM_LAMP" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.0/@states.0">
               <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.3"/>
             </outgoingTransitions>
           </states>
         </regions>
-        <outgoingTransitions label="error" priority="1" targetState="//@states.0/@regions.0/@states.0" isHistory="true">
+        <outgoingTransitions label="BUTTON_ALARM" priority="1" targetState="//@states.0/@regions.0/@states.0" isHistory="true">
           <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.2"/>
         </outgoingTransitions>
       </states>
