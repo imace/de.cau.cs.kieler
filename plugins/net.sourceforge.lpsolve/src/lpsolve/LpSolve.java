@@ -266,12 +266,19 @@ public class LpSolve {
      */
     private Object bbNodeUserhandle = null;
 
+    /** Whether the library is already initialized. */
+    private static boolean initialized;
+    
     /**
      * Static initializer to load the stub library
+     * 
+     * @throws UnsatisfiedLinkError if the library is not available for the current platform
      */
-    static {
-        System.loadLibrary("lpsolve55j");
-        init();
+    public static synchronized void initialize() throws UnsatisfiedLinkError {
+        if (!initialized) {
+            System.loadLibrary("lpsolve55j");
+            init();
+        }
     }
 
     /**
@@ -1664,7 +1671,7 @@ public class LpSolve {
      * Stores references to LpSolve objects. The key to this map is the lp_solve lprec pointer
      * value.
      */
-    private static Map lpMap = new HashMap();
+    private static Map<Long, LpSolve> lpMap = new HashMap<Long, LpSolve>();
 
     /**
      * Adds a LpSolve object to the lpMap
@@ -1673,7 +1680,7 @@ public class LpSolve {
      *            the problem to add
      */
     private static synchronized void addLp(LpSolve problem) {
-        lpMap.put(new Long(problem.lp), problem);
+        lpMap.put(problem.lp, problem);
     }
 
     /**
@@ -1684,7 +1691,7 @@ public class LpSolve {
      * @return the LpSolve object or null, if not found
      */
     private static synchronized LpSolve getLp(long lp) {
-        return (LpSolve) lpMap.get(new Long(lp));
+        return lpMap.get(lp);
     }
 
     /**
@@ -1694,7 +1701,7 @@ public class LpSolve {
      *            lprec pointer value
      */
     private static synchronized void removeLp(long lp) {
-        lpMap.remove(new Long(lp));
+        lpMap.remove(lp);
     }
 
 }
