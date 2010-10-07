@@ -307,9 +307,10 @@ on Windows operating systems:
 <li>lp_solve Windows development archive <code>lp_solve_5.5_dev.zip</code> unpacked</li>
 </ul>
 
-Change to the <code>lib/win32</code> directory and edit the file <code>build.bat</code>.
+Change to the <code>lib</code> directory and edit the file <code>build.bat</code>.
 Change the path to the directory where you unpacked the lp_solve Windows
 archive. Run the script to build <code>lpsolve55j.dll</code>.
+The dll will be created in directory win32 or win64 depending on the OS.
 
 
 <h3><a name="build_linux">On Linux</a></h3>
@@ -323,10 +324,11 @@ on Linux operating systems:
 <li>lp_solve Linux development archive <code>lp_solve_5.5_dev.tar.gz</code> unpacked</li>
 </ul>
 
-Change to the <code>lib/linux</code> directory and edit the file <code>build</code>.
+Change to the <code>lib</code> directory and edit the file <code>build</code>.
 Change the paths to the directory where you unpacked the lp_solve linux archive
 and where the JDK is installed.
 Run <code>sh build</code> to build <code>liblpsolve55j.so</code>.
+The dll will be created in directory ux32 or ux64 depending on the OS.
 
 
 <h3><a name="build_mac">On Mac OS X</a></h3>

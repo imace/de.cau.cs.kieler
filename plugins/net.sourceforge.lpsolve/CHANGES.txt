@@ -3,6 +3,12 @@ This file contains the version history of the lp_solve Java wrapper.
 The wrapper has no version numbering of its own but follows the
 version scheme of lp_solve.
 
+5.5.0.14
+--------
+- The build scripts now also generate 64 bit versions in win64 or ux64 directories.
+- build scripts added for unix and tested on unix
+- lpsolve5j.cpp gave some warning about delete on void pointer. Modified.
+
 5.5.0.11
 --------
 - New API resizeLp for lp_solve 5.5.0.11 added
