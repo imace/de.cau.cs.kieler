@@ -1,572 +1,529 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:kaom="http://kieler.cs.cau.de/KAOM" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmi:id="_-pciAG2JEd-G24CFUvkEpw" type="Kaom" measurementUnit="Pixel">
-  <children xmi:type="notation:Node" xmi:id="_-qV54G2JEd-G24CFUvkEpw" type="2001">
-    <children xmi:type="notation:DecorationNode" xmi:id="_-qV55G2JEd-G24CFUvkEpw" type="5004"/>
-    <children xmi:type="notation:BasicCompartment" xmi:id="_-qV55W2JEd-G24CFUvkEpw" type="7001"/>
-    <children xmi:type="notation:Node" xmi:id="_-qfq4G2JEd-G24CFUvkEpw" type="3001">
-      <children xmi:type="notation:DecorationNode" xmi:id="_-qfq5G2JEd-G24CFUvkEpw" type="5001">
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_-qfq5W2JEd-G24CFUvkEpw" y="5"/>
-      </children>
-      <styles xmi:type="notation:DescriptionStyle" xmi:id="_-qfq4W2JEd-G24CFUvkEpw"/>
-      <styles xmi:type="notation:FontStyle" xmi:id="_-qfq4m2JEd-G24CFUvkEpw" fontName="Lucida Grande"/>
-      <element xmi:type="kaom:Port" href="AssemblyLine.kaom#//@childEntities.0/@childPorts.0"/>
-      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-qfq422JEd-G24CFUvkEpw" x="-5" y="17"/>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:kaom="http://kieler.cs.cau.de/KAOM" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmi:id="_zUosgO5XEd-vrZg-kMyseQ" type="Kaom" measurementUnit="Pixel">
+  <children xmi:type="notation:Node" xmi:id="_zV20gO5XEd-vrZg-kMyseQ" type="2001">
+    <children xmi:type="notation:DecorationNode" xmi:id="_zV20hO5XEd-vrZg-kMyseQ" type="5004">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_zV20he5XEd-vrZg-kMyseQ" y="5"/>
     </children>
-    <children xmi:type="notation:Node" xmi:id="_-qfq5m2JEd-G24CFUvkEpw" type="3001">
-      <children xmi:type="notation:DecorationNode" xmi:id="_-qgR8G2JEd-G24CFUvkEpw" type="5001">
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_-qgR8W2JEd-G24CFUvkEpw" y="5"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_zV20hu5XEd-vrZg-kMyseQ" type="7001">
+      <children xmi:type="notation:Node" xmi:id="_zV5QwO5XEd-vrZg-kMyseQ" type="3002">
+        <children xmi:type="notation:DecorationNode" xmi:id="_zV5QxO5XEd-vrZg-kMyseQ" type="5003">
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_zV530O5XEd-vrZg-kMyseQ" y="5"/>
+        </children>
+        <children xmi:type="notation:BasicCompartment" xmi:id="_zV530e5XEd-vrZg-kMyseQ" type="7002"/>
+        <children xmi:type="notation:Node" xmi:id="_zWHTMO5XEd-vrZg-kMyseQ" type="3001">
+          <children xmi:type="notation:DecorationNode" xmi:id="_zWHTNO5XEd-vrZg-kMyseQ" type="5001">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_zWHTNe5XEd-vrZg-kMyseQ" y="5"/>
+          </children>
+          <styles xmi:type="notation:DescriptionStyle" xmi:id="_zWHTMe5XEd-vrZg-kMyseQ"/>
+          <styles xmi:type="notation:FontStyle" xmi:id="_zWHTMu5XEd-vrZg-kMyseQ" fontName="Segoe UI"/>
+          <element xmi:type="kaom:Port" href="AssemblyLine.kaom#//@childEntities.0/@childEntities.0/@childPorts.0"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_zWHTM-5XEd-vrZg-kMyseQ" x="42" y="21"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_zWH6QO5XEd-vrZg-kMyseQ" type="3001">
+          <children xmi:type="notation:DecorationNode" xmi:id="_zWH6RO5XEd-vrZg-kMyseQ" type="5001">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_zWH6Re5XEd-vrZg-kMyseQ" y="5"/>
+          </children>
+          <styles xmi:type="notation:DescriptionStyle" xmi:id="_zWH6Qe5XEd-vrZg-kMyseQ"/>
+          <styles xmi:type="notation:FontStyle" xmi:id="_zWH6Qu5XEd-vrZg-kMyseQ" fontName="Segoe UI"/>
+          <element xmi:type="kaom:Port" href="AssemblyLine.kaom#//@childEntities.0/@childEntities.0/@childPorts.1"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_zWH6Q-5XEd-vrZg-kMyseQ" x="-5" y="21"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_zWH6Ru5XEd-vrZg-kMyseQ" type="3001">
+          <children xmi:type="notation:DecorationNode" xmi:id="_zWH6Su5XEd-vrZg-kMyseQ" type="5001">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_zWH6S-5XEd-vrZg-kMyseQ" y="5"/>
+          </children>
+          <styles xmi:type="notation:DescriptionStyle" xmi:id="_zWH6R-5XEd-vrZg-kMyseQ"/>
+          <styles xmi:type="notation:FontStyle" xmi:id="_zWH6SO5XEd-vrZg-kMyseQ" fontName="Segoe UI"/>
+          <element xmi:type="kaom:Port" href="AssemblyLine.kaom#//@childEntities.0/@childEntities.0/@childPorts.2"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_zWH6Se5XEd-vrZg-kMyseQ" x="-5" y="35"/>
+        </children>
+        <styles xmi:type="notation:DescriptionStyle" xmi:id="_zV5Qwe5XEd-vrZg-kMyseQ"/>
+        <styles xmi:type="notation:FontStyle" xmi:id="_zV5Qwu5XEd-vrZg-kMyseQ" fontName="Segoe UI"/>
+        <element xmi:type="kaom:Entity" href="AssemblyLine.kaom#//@childEntities.0/@childEntities.0"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_zV5Qw-5XEd-vrZg-kMyseQ" x="51" y="56"/>
       </children>
-      <styles xmi:type="notation:DescriptionStyle" xmi:id="_-qfq522JEd-G24CFUvkEpw"/>
-      <styles xmi:type="notation:FontStyle" xmi:id="_-qfq6G2JEd-G24CFUvkEpw" fontName="Lucida Grande"/>
-      <element xmi:type="kaom:Port" href="AssemblyLine.kaom#//@childEntities.0/@childPorts.1"/>
-      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-qfq6W2JEd-G24CFUvkEpw" x="-5" y="31"/>
-    </children>
-    <children xmi:type="notation:Node" xmi:id="_-qgR8m2JEd-G24CFUvkEpw" type="3001">
-      <children xmi:type="notation:DecorationNode" xmi:id="_-qgR9m2JEd-G24CFUvkEpw" type="5001">
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_-qgR922JEd-G24CFUvkEpw" y="5"/>
+      <children xmi:type="notation:Node" xmi:id="_zV530u5XEd-vrZg-kMyseQ" type="3002">
+        <children xmi:type="notation:DecorationNode" xmi:id="_zV531u5XEd-vrZg-kMyseQ" type="5003">
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_zV531-5XEd-vrZg-kMyseQ" y="5"/>
+        </children>
+        <children xmi:type="notation:BasicCompartment" xmi:id="_zV532O5XEd-vrZg-kMyseQ" type="7002"/>
+        <children xmi:type="notation:Node" xmi:id="_zWefkO5XEd-vrZg-kMyseQ" type="3001">
+          <children xmi:type="notation:DecorationNode" xmi:id="_zWeflO5XEd-vrZg-kMyseQ" type="5001">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_zWefle5XEd-vrZg-kMyseQ" y="5"/>
+          </children>
+          <styles xmi:type="notation:DescriptionStyle" xmi:id="_zWefke5XEd-vrZg-kMyseQ"/>
+          <styles xmi:type="notation:FontStyle" xmi:id="_zWefku5XEd-vrZg-kMyseQ" fontName="Segoe UI"/>
+          <element xmi:type="kaom:Port" href="AssemblyLine.kaom#//@childEntities.0/@childEntities.1/@childPorts.0"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_zWefk-5XEd-vrZg-kMyseQ" x="-5" y="21"/>
+        </children>
+        <styles xmi:type="notation:DescriptionStyle" xmi:id="_zV530-5XEd-vrZg-kMyseQ"/>
+        <styles xmi:type="notation:FontStyle" xmi:id="_zV531O5XEd-vrZg-kMyseQ" fontName="Segoe UI"/>
+        <element xmi:type="kaom:Entity" href="AssemblyLine.kaom#//@childEntities.0/@childEntities.1"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_zV531e5XEd-vrZg-kMyseQ" x="1363" y="15"/>
       </children>
-      <styles xmi:type="notation:DescriptionStyle" xmi:id="_-qgR822JEd-G24CFUvkEpw"/>
-      <styles xmi:type="notation:FontStyle" xmi:id="_-qgR9G2JEd-G24CFUvkEpw" fontName="Lucida Grande"/>
-      <element xmi:type="kaom:Port" href="AssemblyLine.kaom#//@childEntities.0/@childPorts.2"/>
-      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-qgR9W2JEd-G24CFUvkEpw" x="1" y="36"/>
+      <children xmi:type="notation:Node" xmi:id="_zV532e5XEd-vrZg-kMyseQ" type="3002">
+        <children xmi:type="notation:DecorationNode" xmi:id="_zV533e5XEd-vrZg-kMyseQ" type="5003">
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_zV533u5XEd-vrZg-kMyseQ" y="5"/>
+        </children>
+        <children xmi:type="notation:BasicCompartment" xmi:id="_zV533-5XEd-vrZg-kMyseQ" type="7002"/>
+        <children xmi:type="notation:Node" xmi:id="_zWnpgO5XEd-vrZg-kMyseQ" type="3001">
+          <children xmi:type="notation:DecorationNode" xmi:id="_zWnphO5XEd-vrZg-kMyseQ" type="5001">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_zWnphe5XEd-vrZg-kMyseQ" y="5"/>
+          </children>
+          <styles xmi:type="notation:DescriptionStyle" xmi:id="_zWnpge5XEd-vrZg-kMyseQ"/>
+          <styles xmi:type="notation:FontStyle" xmi:id="_zWnpgu5XEd-vrZg-kMyseQ" fontName="Segoe UI"/>
+          <element xmi:type="kaom:Port" href="AssemblyLine.kaom#//@childEntities.0/@childEntities.2/@childPorts.0"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_zWnpg-5XEd-vrZg-kMyseQ" x="62" y="21"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_zWnphu5XEd-vrZg-kMyseQ" type="3001">
+          <children xmi:type="notation:DecorationNode" xmi:id="_zWnpiu5XEd-vrZg-kMyseQ" type="5001">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_zWnpi-5XEd-vrZg-kMyseQ" y="5"/>
+          </children>
+          <styles xmi:type="notation:DescriptionStyle" xmi:id="_zWnph-5XEd-vrZg-kMyseQ"/>
+          <styles xmi:type="notation:FontStyle" xmi:id="_zWnpiO5XEd-vrZg-kMyseQ" fontName="Segoe UI"/>
+          <element xmi:type="kaom:Port" href="AssemblyLine.kaom#//@childEntities.0/@childEntities.2/@childPorts.1"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_zWnpie5XEd-vrZg-kMyseQ" x="-5" y="21"/>
+        </children>
+        <styles xmi:type="notation:DescriptionStyle" xmi:id="_zV532u5XEd-vrZg-kMyseQ"/>
+        <styles xmi:type="notation:FontStyle" xmi:id="_zV532-5XEd-vrZg-kMyseQ" fontName="Segoe UI"/>
+        <element xmi:type="kaom:Entity" href="AssemblyLine.kaom#//@childEntities.0/@childEntities.2"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_zV533O5XEd-vrZg-kMyseQ" x="636" y="15"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_zV534O5XEd-vrZg-kMyseQ" type="3002">
+        <children xmi:type="notation:DecorationNode" xmi:id="_zV6e4O5XEd-vrZg-kMyseQ" type="5003">
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_zV6e4e5XEd-vrZg-kMyseQ" y="5"/>
+        </children>
+        <children xmi:type="notation:BasicCompartment" xmi:id="_zV6e4u5XEd-vrZg-kMyseQ" type="7002"/>
+        <children xmi:type="notation:Node" xmi:id="_zWyBkO5XEd-vrZg-kMyseQ" type="3001">
+          <children xmi:type="notation:DecorationNode" xmi:id="_zWyBlO5XEd-vrZg-kMyseQ" type="5001">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_zWyBle5XEd-vrZg-kMyseQ" y="5"/>
+          </children>
+          <styles xmi:type="notation:DescriptionStyle" xmi:id="_zWyBke5XEd-vrZg-kMyseQ"/>
+          <styles xmi:type="notation:FontStyle" xmi:id="_zWyBku5XEd-vrZg-kMyseQ" fontName="Segoe UI"/>
+          <element xmi:type="kaom:Port" href="AssemblyLine.kaom#//@childEntities.0/@childEntities.3/@childPorts.0"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_zWyBk-5XEd-vrZg-kMyseQ" x="62" y="21"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_zWyBlu5XEd-vrZg-kMyseQ" type="3001">
+          <children xmi:type="notation:DecorationNode" xmi:id="_zWyBmu5XEd-vrZg-kMyseQ" type="5001">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_zWyBm-5XEd-vrZg-kMyseQ" y="5"/>
+          </children>
+          <styles xmi:type="notation:DescriptionStyle" xmi:id="_zWyBl-5XEd-vrZg-kMyseQ"/>
+          <styles xmi:type="notation:FontStyle" xmi:id="_zWyBmO5XEd-vrZg-kMyseQ" fontName="Segoe UI"/>
+          <element xmi:type="kaom:Port" href="AssemblyLine.kaom#//@childEntities.0/@childEntities.3/@childPorts.1"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_zWyBme5XEd-vrZg-kMyseQ" x="-5" y="21"/>
+        </children>
+        <styles xmi:type="notation:DescriptionStyle" xmi:id="_zV534e5XEd-vrZg-kMyseQ"/>
+        <styles xmi:type="notation:FontStyle" xmi:id="_zV534u5XEd-vrZg-kMyseQ" fontName="Segoe UI"/>
+        <element xmi:type="kaom:Entity" href="AssemblyLine.kaom#//@childEntities.0/@childEntities.3"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_zV534-5XEd-vrZg-kMyseQ" x="1035" y="15"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_zV6e4-5XEd-vrZg-kMyseQ" type="3002">
+        <children xmi:type="notation:DecorationNode" xmi:id="_zV6e5-5XEd-vrZg-kMyseQ" type="5003">
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_zV6e6O5XEd-vrZg-kMyseQ" y="5"/>
+        </children>
+        <children xmi:type="notation:BasicCompartment" xmi:id="_zV6e6e5XEd-vrZg-kMyseQ" type="7002"/>
+        <children xmi:type="notation:Node" xmi:id="_zW9nwO5XEd-vrZg-kMyseQ" type="3001">
+          <children xmi:type="notation:DecorationNode" xmi:id="_zW-O0O5XEd-vrZg-kMyseQ" type="5001">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_zW-O0e5XEd-vrZg-kMyseQ" y="5"/>
+          </children>
+          <styles xmi:type="notation:DescriptionStyle" xmi:id="_zW9nwe5XEd-vrZg-kMyseQ"/>
+          <styles xmi:type="notation:FontStyle" xmi:id="_zW9nwu5XEd-vrZg-kMyseQ" fontName="Segoe UI"/>
+          <element xmi:type="kaom:Port" href="AssemblyLine.kaom#//@childEntities.0/@childEntities.4/@childPorts.0"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_zW9nw-5XEd-vrZg-kMyseQ" x="-5" y="21"/>
+        </children>
+        <styles xmi:type="notation:DescriptionStyle" xmi:id="_zV6e5O5XEd-vrZg-kMyseQ"/>
+        <styles xmi:type="notation:FontStyle" xmi:id="_zV6e5e5XEd-vrZg-kMyseQ" fontName="Segoe UI"/>
+        <element xmi:type="kaom:Entity" href="AssemblyLine.kaom#//@childEntities.0/@childEntities.4"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_zV6e5u5XEd-vrZg-kMyseQ" x="1357" y="95"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_zV6e6u5XEd-vrZg-kMyseQ" type="3002">
+        <children xmi:type="notation:DecorationNode" xmi:id="_zV6e7u5XEd-vrZg-kMyseQ" type="5003">
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_zV6e7-5XEd-vrZg-kMyseQ" y="5"/>
+        </children>
+        <children xmi:type="notation:BasicCompartment" xmi:id="_zV6e8O5XEd-vrZg-kMyseQ" type="7002"/>
+        <children xmi:type="notation:Node" xmi:id="_zXDuYO5XEd-vrZg-kMyseQ" type="3001">
+          <children xmi:type="notation:DecorationNode" xmi:id="_zXDuZO5XEd-vrZg-kMyseQ" type="5001">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_zXDuZe5XEd-vrZg-kMyseQ" y="5"/>
+          </children>
+          <styles xmi:type="notation:DescriptionStyle" xmi:id="_zXDuYe5XEd-vrZg-kMyseQ"/>
+          <styles xmi:type="notation:FontStyle" xmi:id="_zXDuYu5XEd-vrZg-kMyseQ" fontName="Segoe UI"/>
+          <element xmi:type="kaom:Port" href="AssemblyLine.kaom#//@childEntities.0/@childEntities.5/@childPorts.0"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_zXDuY-5XEd-vrZg-kMyseQ" x="62" y="21"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_zXEVcO5XEd-vrZg-kMyseQ" type="3001">
+          <children xmi:type="notation:DecorationNode" xmi:id="_zXEVdO5XEd-vrZg-kMyseQ" type="5001">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_zXEVde5XEd-vrZg-kMyseQ" y="5"/>
+          </children>
+          <styles xmi:type="notation:DescriptionStyle" xmi:id="_zXEVce5XEd-vrZg-kMyseQ"/>
+          <styles xmi:type="notation:FontStyle" xmi:id="_zXEVcu5XEd-vrZg-kMyseQ" fontName="Segoe UI"/>
+          <element xmi:type="kaom:Port" href="AssemblyLine.kaom#//@childEntities.0/@childEntities.5/@childPorts.1"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_zXEVc-5XEd-vrZg-kMyseQ" x="-5" y="21"/>
+        </children>
+        <styles xmi:type="notation:DescriptionStyle" xmi:id="_zV6e6-5XEd-vrZg-kMyseQ"/>
+        <styles xmi:type="notation:FontStyle" xmi:id="_zV6e7O5XEd-vrZg-kMyseQ" fontName="Segoe UI"/>
+        <element xmi:type="kaom:Entity" href="AssemblyLine.kaom#//@childEntities.0/@childEntities.5"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_zV6e7e5XEd-vrZg-kMyseQ" x="258" y="16"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_zV6e8e5XEd-vrZg-kMyseQ" type="3002">
+        <children xmi:type="notation:DecorationNode" xmi:id="_zV6e9e5XEd-vrZg-kMyseQ" type="5003">
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_zV7F8O5XEd-vrZg-kMyseQ" y="5"/>
+        </children>
+        <children xmi:type="notation:BasicCompartment" xmi:id="_zV7F8e5XEd-vrZg-kMyseQ" type="7002"/>
+        <children xmi:type="notation:Node" xmi:id="_zXU0IO5XEd-vrZg-kMyseQ" type="3001">
+          <children xmi:type="notation:DecorationNode" xmi:id="_zXVbMO5XEd-vrZg-kMyseQ" type="5001">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_zXVbMe5XEd-vrZg-kMyseQ" y="5"/>
+          </children>
+          <styles xmi:type="notation:DescriptionStyle" xmi:id="_zXU0Ie5XEd-vrZg-kMyseQ"/>
+          <styles xmi:type="notation:FontStyle" xmi:id="_zXU0Iu5XEd-vrZg-kMyseQ" fontName="Segoe UI"/>
+          <element xmi:type="kaom:Port" href="AssemblyLine.kaom#//@childEntities.0/@childEntities.6/@childPorts.0"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_zXU0I-5XEd-vrZg-kMyseQ" x="42" y="21"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_zXVbMu5XEd-vrZg-kMyseQ" type="3001">
+          <children xmi:type="notation:DecorationNode" xmi:id="_zXVbNu5XEd-vrZg-kMyseQ" type="5001">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_zXVbN-5XEd-vrZg-kMyseQ" y="5"/>
+          </children>
+          <styles xmi:type="notation:DescriptionStyle" xmi:id="_zXVbM-5XEd-vrZg-kMyseQ"/>
+          <styles xmi:type="notation:FontStyle" xmi:id="_zXVbNO5XEd-vrZg-kMyseQ" fontName="Segoe UI"/>
+          <element xmi:type="kaom:Port" href="AssemblyLine.kaom#//@childEntities.0/@childEntities.6/@childPorts.1"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_zXVbNe5XEd-vrZg-kMyseQ" x="-5" y="21"/>
+        </children>
+        <styles xmi:type="notation:DescriptionStyle" xmi:id="_zV6e8u5XEd-vrZg-kMyseQ"/>
+        <styles xmi:type="notation:FontStyle" xmi:id="_zV6e8-5XEd-vrZg-kMyseQ" fontName="Segoe UI"/>
+        <element xmi:type="kaom:Entity" href="AssemblyLine.kaom#//@childEntities.0/@childEntities.6"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_zV6e9O5XEd-vrZg-kMyseQ" x="268" y="97"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_zV7F8u5XEd-vrZg-kMyseQ" type="3002">
+        <children xmi:type="notation:DecorationNode" xmi:id="_zV7F9u5XEd-vrZg-kMyseQ" type="5003">
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_zV7F9-5XEd-vrZg-kMyseQ" y="5"/>
+        </children>
+        <children xmi:type="notation:BasicCompartment" xmi:id="_zV7F-O5XEd-vrZg-kMyseQ" type="7002"/>
+        <children xmi:type="notation:Node" xmi:id="_zXd-EO5XEd-vrZg-kMyseQ" type="3001">
+          <children xmi:type="notation:DecorationNode" xmi:id="_zXd-FO5XEd-vrZg-kMyseQ" type="5001">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_zXd-Fe5XEd-vrZg-kMyseQ" y="5"/>
+          </children>
+          <styles xmi:type="notation:DescriptionStyle" xmi:id="_zXd-Ee5XEd-vrZg-kMyseQ"/>
+          <styles xmi:type="notation:FontStyle" xmi:id="_zXd-Eu5XEd-vrZg-kMyseQ" fontName="Segoe UI"/>
+          <element xmi:type="kaom:Port" href="AssemblyLine.kaom#//@childEntities.0/@childEntities.7/@childPorts.0"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_zXd-E-5XEd-vrZg-kMyseQ" x="-5" y="15"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_zXelIO5XEd-vrZg-kMyseQ" type="3001">
+          <children xmi:type="notation:DecorationNode" xmi:id="_zXelJO5XEd-vrZg-kMyseQ" type="5001">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_zXelJe5XEd-vrZg-kMyseQ" y="5"/>
+          </children>
+          <styles xmi:type="notation:DescriptionStyle" xmi:id="_zXelIe5XEd-vrZg-kMyseQ"/>
+          <styles xmi:type="notation:FontStyle" xmi:id="_zXelIu5XEd-vrZg-kMyseQ" fontName="Segoe UI"/>
+          <element xmi:type="kaom:Port" href="AssemblyLine.kaom#//@childEntities.0/@childEntities.7/@childPorts.1"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_zXelI-5XEd-vrZg-kMyseQ" x="69" y="15"/>
+        </children>
+        <styles xmi:type="notation:DescriptionStyle" xmi:id="_zV7F8-5XEd-vrZg-kMyseQ"/>
+        <styles xmi:type="notation:FontStyle" xmi:id="_zV7F9O5XEd-vrZg-kMyseQ" fontName="Segoe UI"/>
+        <element xmi:type="kaom:Entity" href="AssemblyLine.kaom#//@childEntities.0/@childEntities.7"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_zV7F9e5XEd-vrZg-kMyseQ" x="408" y="49"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_zV7F-e5XEd-vrZg-kMyseQ" type="3002">
+        <children xmi:type="notation:DecorationNode" xmi:id="_zV7F_e5XEd-vrZg-kMyseQ" type="5003">
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_zV7F_u5XEd-vrZg-kMyseQ" y="5"/>
+        </children>
+        <children xmi:type="notation:BasicCompartment" xmi:id="_zV7F_-5XEd-vrZg-kMyseQ" type="7002"/>
+        <children xmi:type="notation:Node" xmi:id="_zXrZcO5XEd-vrZg-kMyseQ" type="3001">
+          <children xmi:type="notation:DecorationNode" xmi:id="_zXrZdO5XEd-vrZg-kMyseQ" type="5001">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_zXrZde5XEd-vrZg-kMyseQ" y="5"/>
+          </children>
+          <styles xmi:type="notation:DescriptionStyle" xmi:id="_zXrZce5XEd-vrZg-kMyseQ"/>
+          <styles xmi:type="notation:FontStyle" xmi:id="_zXrZcu5XEd-vrZg-kMyseQ" fontName="Segoe UI"/>
+          <element xmi:type="kaom:Port" href="AssemblyLine.kaom#//@childEntities.0/@childEntities.8/@childPorts.0"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_zXrZc-5XEd-vrZg-kMyseQ" x="-5" y="15"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_zXrZdu5XEd-vrZg-kMyseQ" type="3001">
+          <children xmi:type="notation:DecorationNode" xmi:id="_zXrZeu5XEd-vrZg-kMyseQ" type="5001">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_zXrZe-5XEd-vrZg-kMyseQ" y="5"/>
+          </children>
+          <styles xmi:type="notation:DescriptionStyle" xmi:id="_zXrZd-5XEd-vrZg-kMyseQ"/>
+          <styles xmi:type="notation:FontStyle" xmi:id="_zXrZeO5XEd-vrZg-kMyseQ" fontName="Segoe UI"/>
+          <element xmi:type="kaom:Port" href="AssemblyLine.kaom#//@childEntities.0/@childEntities.8/@childPorts.1"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_zXrZee5XEd-vrZg-kMyseQ" x="69" y="15"/>
+        </children>
+        <styles xmi:type="notation:DescriptionStyle" xmi:id="_zV7F-u5XEd-vrZg-kMyseQ"/>
+        <styles xmi:type="notation:FontStyle" xmi:id="_zV7F--5XEd-vrZg-kMyseQ" fontName="Segoe UI"/>
+        <element xmi:type="kaom:Entity" href="AssemblyLine.kaom#//@childEntities.0/@childEntities.8"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_zV7F_O5XEd-vrZg-kMyseQ" x="786" y="28"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_zV7GAO5XEd-vrZg-kMyseQ" type="3002">
+        <children xmi:type="notation:DecorationNode" xmi:id="_zV7GBO5XEd-vrZg-kMyseQ" type="5003">
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_zV7tAO5XEd-vrZg-kMyseQ" y="5"/>
+        </children>
+        <children xmi:type="notation:BasicCompartment" xmi:id="_zV7tAe5XEd-vrZg-kMyseQ" type="7002"/>
+        <children xmi:type="notation:Node" xmi:id="_zXz8UO5XEd-vrZg-kMyseQ" type="3001">
+          <children xmi:type="notation:DecorationNode" xmi:id="_zXz8VO5XEd-vrZg-kMyseQ" type="5001">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_zXz8Ve5XEd-vrZg-kMyseQ" y="5"/>
+          </children>
+          <styles xmi:type="notation:DescriptionStyle" xmi:id="_zXz8Ue5XEd-vrZg-kMyseQ"/>
+          <styles xmi:type="notation:FontStyle" xmi:id="_zXz8Uu5XEd-vrZg-kMyseQ" fontName="Segoe UI"/>
+          <element xmi:type="kaom:Port" href="AssemblyLine.kaom#//@childEntities.0/@childEntities.9/@childPorts.0"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_zXz8U-5XEd-vrZg-kMyseQ" x="-5" y="15"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_zXz8Vu5XEd-vrZg-kMyseQ" type="3001">
+          <children xmi:type="notation:DecorationNode" xmi:id="_zX0jYO5XEd-vrZg-kMyseQ" type="5001">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_zX0jYe5XEd-vrZg-kMyseQ" y="5"/>
+          </children>
+          <styles xmi:type="notation:DescriptionStyle" xmi:id="_zXz8V-5XEd-vrZg-kMyseQ"/>
+          <styles xmi:type="notation:FontStyle" xmi:id="_zXz8WO5XEd-vrZg-kMyseQ" fontName="Segoe UI"/>
+          <element xmi:type="kaom:Port" href="AssemblyLine.kaom#//@childEntities.0/@childEntities.9/@childPorts.1"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_zXz8We5XEd-vrZg-kMyseQ" x="69" y="15"/>
+        </children>
+        <styles xmi:type="notation:DescriptionStyle" xmi:id="_zV7GAe5XEd-vrZg-kMyseQ"/>
+        <styles xmi:type="notation:FontStyle" xmi:id="_zV7GAu5XEd-vrZg-kMyseQ" fontName="Segoe UI"/>
+        <element xmi:type="kaom:Entity" href="AssemblyLine.kaom#//@childEntities.0/@childEntities.9"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_zV7GA-5XEd-vrZg-kMyseQ" x="1185" y="21"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_zV7tAu5XEd-vrZg-kMyseQ" type="3002">
+        <children xmi:type="notation:DecorationNode" xmi:id="_zV7tBu5XEd-vrZg-kMyseQ" type="5003">
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_zV7tB-5XEd-vrZg-kMyseQ" y="5"/>
+        </children>
+        <children xmi:type="notation:BasicCompartment" xmi:id="_zV7tCO5XEd-vrZg-kMyseQ" type="7002"/>
+        <styles xmi:type="notation:DescriptionStyle" xmi:id="_zV7tA-5XEd-vrZg-kMyseQ"/>
+        <styles xmi:type="notation:FontStyle" xmi:id="_zV7tBO5XEd-vrZg-kMyseQ" fontName="Segoe UI"/>
+        <element xmi:type="kaom:Entity" href="AssemblyLine.kaom#//@childEntities.0/@childEntities.10"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_zV7tBe5XEd-vrZg-kMyseQ" x="1464" y="176"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_zV7tCe5XEd-vrZg-kMyseQ" type="3002">
+        <children xmi:type="notation:DecorationNode" xmi:id="_zV7tDe5XEd-vrZg-kMyseQ" type="5003">
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_zV7tDu5XEd-vrZg-kMyseQ" y="5"/>
+        </children>
+        <children xmi:type="notation:BasicCompartment" xmi:id="_zV7tD-5XEd-vrZg-kMyseQ" type="7002"/>
+        <styles xmi:type="notation:DescriptionStyle" xmi:id="_zV7tCu5XEd-vrZg-kMyseQ"/>
+        <styles xmi:type="notation:FontStyle" xmi:id="_zV7tC-5XEd-vrZg-kMyseQ" fontName="Segoe UI"/>
+        <element xmi:type="kaom:Entity" href="AssemblyLine.kaom#//@childEntities.0/@childEntities.11"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_zV7tDO5XEd-vrZg-kMyseQ" x="1495" y="245"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_zV7tEO5XEd-vrZg-kMyseQ" type="3002">
+        <children xmi:type="notation:DecorationNode" xmi:id="_zV8UEO5XEd-vrZg-kMyseQ" type="5003">
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_zV8UEe5XEd-vrZg-kMyseQ" y="5"/>
+        </children>
+        <children xmi:type="notation:BasicCompartment" xmi:id="_zV8UEu5XEd-vrZg-kMyseQ" type="7002"/>
+        <styles xmi:type="notation:DescriptionStyle" xmi:id="_zV7tEe5XEd-vrZg-kMyseQ"/>
+        <styles xmi:type="notation:FontStyle" xmi:id="_zV7tEu5XEd-vrZg-kMyseQ" fontName="Segoe UI"/>
+        <element xmi:type="kaom:Entity" href="AssemblyLine.kaom#//@childEntities.0/@childEntities.12"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_zV7tE-5XEd-vrZg-kMyseQ" x="1494" y="323"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_zV8UE-5XEd-vrZg-kMyseQ" type="3003">
+        <children xmi:type="notation:DecorationNode" xmi:id="_zV8UF-5XEd-vrZg-kMyseQ" type="5002">
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_zV8UGO5XEd-vrZg-kMyseQ" y="5"/>
+        </children>
+        <styles xmi:type="notation:DescriptionStyle" xmi:id="_zV8UFO5XEd-vrZg-kMyseQ"/>
+        <styles xmi:type="notation:FontStyle" xmi:id="_zV8UFe5XEd-vrZg-kMyseQ" fontName="Segoe UI"/>
+        <element xmi:type="kaom:Relation" href="AssemblyLine.kaom#//@childEntities.0/@childRelations.0"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_zV8UFu5XEd-vrZg-kMyseQ" x="547" y="62"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_zV8UGe5XEd-vrZg-kMyseQ" type="3003">
+        <children xmi:type="notation:DecorationNode" xmi:id="_zV8UHe5XEd-vrZg-kMyseQ" type="5002">
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_zV8UHu5XEd-vrZg-kMyseQ" y="5"/>
+        </children>
+        <styles xmi:type="notation:DescriptionStyle" xmi:id="_zV8UGu5XEd-vrZg-kMyseQ"/>
+        <styles xmi:type="notation:FontStyle" xmi:id="_zV8UG-5XEd-vrZg-kMyseQ" fontName="Segoe UI"/>
+        <element xmi:type="kaom:Relation" href="AssemblyLine.kaom#//@childEntities.0/@childRelations.1"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_zV8UHO5XEd-vrZg-kMyseQ" x="928" y="48"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_zV8UH-5XEd-vrZg-kMyseQ" type="3003">
+        <children xmi:type="notation:DecorationNode" xmi:id="_zV8UI-5XEd-vrZg-kMyseQ" type="5002">
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_zV8UJO5XEd-vrZg-kMyseQ" y="5"/>
+        </children>
+        <styles xmi:type="notation:DescriptionStyle" xmi:id="_zV8UIO5XEd-vrZg-kMyseQ"/>
+        <styles xmi:type="notation:FontStyle" xmi:id="_zV8UIe5XEd-vrZg-kMyseQ" fontName="Segoe UI"/>
+        <element xmi:type="kaom:Relation" href="AssemblyLine.kaom#//@childEntities.0/@childRelations.2"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_zV8UIu5XEd-vrZg-kMyseQ" x="166" y="75"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_zV87IO5XEd-vrZg-kMyseQ" type="3003">
+        <children xmi:type="notation:DecorationNode" xmi:id="_zV87JO5XEd-vrZg-kMyseQ" type="5002">
+          <layoutConstraint xmi:type="notation:Location" xmi:id="_zV87Je5XEd-vrZg-kMyseQ" y="5"/>
+        </children>
+        <styles xmi:type="notation:DescriptionStyle" xmi:id="_zV87Ie5XEd-vrZg-kMyseQ"/>
+        <styles xmi:type="notation:FontStyle" xmi:id="_zV87Iu5XEd-vrZg-kMyseQ" fontName="Segoe UI"/>
+        <element xmi:type="kaom:Relation" href="AssemblyLine.kaom#//@childEntities.0/@childRelations.3"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_zV87I-5XEd-vrZg-kMyseQ" x="1213" y="116"/>
+      </children>
     </children>
-    <styles xmi:type="notation:DescriptionStyle" xmi:id="_-qV54W2JEd-G24CFUvkEpw"/>
-    <styles xmi:type="notation:FontStyle" xmi:id="_-qV54m2JEd-G24CFUvkEpw" fontName="Lucida Grande"/>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_zV20ge5XEd-vrZg-kMyseQ"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_zV20gu5XEd-vrZg-kMyseQ" fontName="Segoe UI"/>
     <element xmi:type="kaom:Entity" href="AssemblyLine.kaom#//@childEntities.0"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-qV5422JEd-G24CFUvkEpw" x="102" y="53"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_zV20g-5XEd-vrZg-kMyseQ" x="15" y="15" width="1738" height="415"/>
   </children>
-  <children xmi:type="notation:Node" xmi:id="_-qWg8G2JEd-G24CFUvkEpw" type="2001">
-    <children xmi:type="notation:DecorationNode" xmi:id="_-qWg9G2JEd-G24CFUvkEpw" type="5004"/>
-    <children xmi:type="notation:BasicCompartment" xmi:id="_-qWg9W2JEd-G24CFUvkEpw" type="7001"/>
-    <children xmi:type="notation:Node" xmi:id="_-qj8UG2JEd-G24CFUvkEpw" type="3001">
-      <children xmi:type="notation:DecorationNode" xmi:id="_-qj8VG2JEd-G24CFUvkEpw" type="5001">
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_-qj8VW2JEd-G24CFUvkEpw" y="5"/>
-      </children>
-      <styles xmi:type="notation:DescriptionStyle" xmi:id="_-qj8UW2JEd-G24CFUvkEpw"/>
-      <styles xmi:type="notation:FontStyle" xmi:id="_-qj8Um2JEd-G24CFUvkEpw" fontName="Lucida Grande"/>
-      <element xmi:type="kaom:Port" href="AssemblyLine.kaom#//@childEntities.1/@childPorts.0"/>
-      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-qj8U22JEd-G24CFUvkEpw" x="-5" y="17"/>
-    </children>
-    <styles xmi:type="notation:DescriptionStyle" xmi:id="_-qWg8W2JEd-G24CFUvkEpw"/>
-    <styles xmi:type="notation:FontStyle" xmi:id="_-qWg8m2JEd-G24CFUvkEpw" fontName="Lucida Grande"/>
-    <element xmi:type="kaom:Entity" href="AssemblyLine.kaom#//@childEntities.1"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-qWg822JEd-G24CFUvkEpw" x="35" y="244"/>
-  </children>
-  <children xmi:type="notation:Node" xmi:id="_-qWg9m2JEd-G24CFUvkEpw" type="2001">
-    <children xmi:type="notation:DecorationNode" xmi:id="_-qWg-m2JEd-G24CFUvkEpw" type="5004"/>
-    <children xmi:type="notation:BasicCompartment" xmi:id="_-qWg-22JEd-G24CFUvkEpw" type="7001"/>
-    <children xmi:type="notation:Node" xmi:id="_-qlxgG2JEd-G24CFUvkEpw" type="3001">
-      <children xmi:type="notation:DecorationNode" xmi:id="_-qlxhG2JEd-G24CFUvkEpw" type="5001">
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_-qlxhW2JEd-G24CFUvkEpw" y="5"/>
-      </children>
-      <styles xmi:type="notation:DescriptionStyle" xmi:id="_-qlxgW2JEd-G24CFUvkEpw"/>
-      <styles xmi:type="notation:FontStyle" xmi:id="_-qlxgm2JEd-G24CFUvkEpw" fontName="Lucida Grande"/>
-      <element xmi:type="kaom:Port" href="AssemblyLine.kaom#//@childEntities.2/@childPorts.0"/>
-      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-qlxg22JEd-G24CFUvkEpw" x="-5" y="17"/>
-    </children>
-    <children xmi:type="notation:Node" xmi:id="_-qlxhm2JEd-G24CFUvkEpw" type="3001">
-      <children xmi:type="notation:DecorationNode" xmi:id="_-qmYkG2JEd-G24CFUvkEpw" type="5001">
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_-qmYkW2JEd-G24CFUvkEpw" y="5"/>
-      </children>
-      <styles xmi:type="notation:DescriptionStyle" xmi:id="_-qlxh22JEd-G24CFUvkEpw"/>
-      <styles xmi:type="notation:FontStyle" xmi:id="_-qlxiG2JEd-G24CFUvkEpw" fontName="Lucida Grande"/>
-      <element xmi:type="kaom:Port" href="AssemblyLine.kaom#//@childEntities.2/@childPorts.1"/>
-      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-qlxiW2JEd-G24CFUvkEpw" x="-5" y="31"/>
-    </children>
-    <styles xmi:type="notation:DescriptionStyle" xmi:id="_-qWg922JEd-G24CFUvkEpw"/>
-    <styles xmi:type="notation:FontStyle" xmi:id="_-qWg-G2JEd-G24CFUvkEpw" fontName="Lucida Grande"/>
-    <element xmi:type="kaom:Entity" href="AssemblyLine.kaom#//@childEntities.2"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-qWg-W2JEd-G24CFUvkEpw" x="259" y="241"/>
-  </children>
-  <children xmi:type="notation:Node" xmi:id="_-qWg_G2JEd-G24CFUvkEpw" type="2001">
-    <children xmi:type="notation:DecorationNode" xmi:id="_-qXIAm2JEd-G24CFUvkEpw" type="5004"/>
-    <children xmi:type="notation:BasicCompartment" xmi:id="_-qXIA22JEd-G24CFUvkEpw" type="7001"/>
-    <children xmi:type="notation:Node" xmi:id="_-qo00G2JEd-G24CFUvkEpw" type="3001">
-      <children xmi:type="notation:DecorationNode" xmi:id="_-qo01G2JEd-G24CFUvkEpw" type="5001">
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_-qo01W2JEd-G24CFUvkEpw" y="5"/>
-      </children>
-      <styles xmi:type="notation:DescriptionStyle" xmi:id="_-qo00W2JEd-G24CFUvkEpw"/>
-      <styles xmi:type="notation:FontStyle" xmi:id="_-qo00m2JEd-G24CFUvkEpw" fontName="Lucida Grande"/>
-      <element xmi:type="kaom:Port" href="AssemblyLine.kaom#//@childEntities.3/@childPorts.0"/>
-      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-qo0022JEd-G24CFUvkEpw" x="-5" y="17"/>
-    </children>
-    <children xmi:type="notation:Node" xmi:id="_-qo01m2JEd-G24CFUvkEpw" type="3001">
-      <children xmi:type="notation:DecorationNode" xmi:id="_-qpb4G2JEd-G24CFUvkEpw" type="5001">
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_-qpb4W2JEd-G24CFUvkEpw" y="5"/>
-      </children>
-      <styles xmi:type="notation:DescriptionStyle" xmi:id="_-qo0122JEd-G24CFUvkEpw"/>
-      <styles xmi:type="notation:FontStyle" xmi:id="_-qo02G2JEd-G24CFUvkEpw" fontName="Lucida Grande"/>
-      <element xmi:type="kaom:Port" href="AssemblyLine.kaom#//@childEntities.3/@childPorts.1"/>
-      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-qo02W2JEd-G24CFUvkEpw" x="-5" y="31"/>
-    </children>
-    <styles xmi:type="notation:DescriptionStyle" xmi:id="_-qWg_W2JEd-G24CFUvkEpw"/>
-    <styles xmi:type="notation:FontStyle" xmi:id="_-qXIAG2JEd-G24CFUvkEpw" fontName="Lucida Grande"/>
-    <element xmi:type="kaom:Entity" href="AssemblyLine.kaom#//@childEntities.3"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-qXIAW2JEd-G24CFUvkEpw" x="259" y="413"/>
-  </children>
-  <children xmi:type="notation:Node" xmi:id="_-qXIBG2JEd-G24CFUvkEpw" type="2001">
-    <children xmi:type="notation:DecorationNode" xmi:id="_-qXICG2JEd-G24CFUvkEpw" type="5004"/>
-    <children xmi:type="notation:BasicCompartment" xmi:id="_-qXICW2JEd-G24CFUvkEpw" type="7001"/>
-    <children xmi:type="notation:Node" xmi:id="_-qrREG2JEd-G24CFUvkEpw" type="3001">
-      <children xmi:type="notation:DecorationNode" xmi:id="_-qrRFG2JEd-G24CFUvkEpw" type="5001">
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_-qrRFW2JEd-G24CFUvkEpw" y="5"/>
-      </children>
-      <styles xmi:type="notation:DescriptionStyle" xmi:id="_-qrREW2JEd-G24CFUvkEpw"/>
-      <styles xmi:type="notation:FontStyle" xmi:id="_-qrREm2JEd-G24CFUvkEpw" fontName="Lucida Grande"/>
-      <element xmi:type="kaom:Port" href="AssemblyLine.kaom#//@childEntities.4/@childPorts.0"/>
-      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-qrRE22JEd-G24CFUvkEpw" x="-5" y="17"/>
-    </children>
-    <styles xmi:type="notation:DescriptionStyle" xmi:id="_-qXIBW2JEd-G24CFUvkEpw"/>
-    <styles xmi:type="notation:FontStyle" xmi:id="_-qXIBm2JEd-G24CFUvkEpw" fontName="Lucida Grande"/>
-    <element xmi:type="kaom:Entity" href="AssemblyLine.kaom#//@childEntities.4"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-qXIB22JEd-G24CFUvkEpw" x="257" y="90"/>
-  </children>
-  <children xmi:type="notation:Node" xmi:id="_-qXICm2JEd-G24CFUvkEpw" type="2001">
-    <children xmi:type="notation:DecorationNode" xmi:id="_-qXvEG2JEd-G24CFUvkEpw" type="5004"/>
-    <children xmi:type="notation:BasicCompartment" xmi:id="_-qXvEW2JEd-G24CFUvkEpw" type="7001"/>
-    <children xmi:type="notation:Node" xmi:id="_-qttUG2JEd-G24CFUvkEpw" type="3001">
-      <children xmi:type="notation:DecorationNode" xmi:id="_-qttVG2JEd-G24CFUvkEpw" type="5001">
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_-qttVW2JEd-G24CFUvkEpw" y="5"/>
-      </children>
-      <styles xmi:type="notation:DescriptionStyle" xmi:id="_-qttUW2JEd-G24CFUvkEpw"/>
-      <styles xmi:type="notation:FontStyle" xmi:id="_-qttUm2JEd-G24CFUvkEpw" fontName="Lucida Grande"/>
-      <element xmi:type="kaom:Port" href="AssemblyLine.kaom#//@childEntities.5/@childPorts.0"/>
-      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-qttU22JEd-G24CFUvkEpw" x="-5" y="17"/>
-    </children>
-    <children xmi:type="notation:Node" xmi:id="_-qttVm2JEd-G24CFUvkEpw" type="3001">
-      <children xmi:type="notation:DecorationNode" xmi:id="_-qttWm2JEd-G24CFUvkEpw" type="5001">
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_-qttW22JEd-G24CFUvkEpw" y="5"/>
-      </children>
-      <styles xmi:type="notation:DescriptionStyle" xmi:id="_-qttV22JEd-G24CFUvkEpw"/>
-      <styles xmi:type="notation:FontStyle" xmi:id="_-qttWG2JEd-G24CFUvkEpw" fontName="Lucida Grande"/>
-      <element xmi:type="kaom:Port" href="AssemblyLine.kaom#//@childEntities.5/@childPorts.1"/>
-      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-qttWW2JEd-G24CFUvkEpw" x="-5" y="31"/>
-    </children>
-    <styles xmi:type="notation:DescriptionStyle" xmi:id="_-qXIC22JEd-G24CFUvkEpw"/>
-    <styles xmi:type="notation:FontStyle" xmi:id="_-qXIDG2JEd-G24CFUvkEpw" fontName="Lucida Grande"/>
-    <element xmi:type="kaom:Entity" href="AssemblyLine.kaom#//@childEntities.5"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-qXIDW2JEd-G24CFUvkEpw" x="259" y="166"/>
-  </children>
-  <children xmi:type="notation:Node" xmi:id="_-qXvEm2JEd-G24CFUvkEpw" type="2001">
-    <children xmi:type="notation:DecorationNode" xmi:id="_-qXvFm2JEd-G24CFUvkEpw" type="5004"/>
-    <children xmi:type="notation:BasicCompartment" xmi:id="_-qXvF22JEd-G24CFUvkEpw" type="7001"/>
-    <children xmi:type="notation:Node" xmi:id="_-qwJkG2JEd-G24CFUvkEpw" type="3001">
-      <children xmi:type="notation:DecorationNode" xmi:id="_-qwJlG2JEd-G24CFUvkEpw" type="5001">
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_-qwJlW2JEd-G24CFUvkEpw" y="5"/>
-      </children>
-      <styles xmi:type="notation:DescriptionStyle" xmi:id="_-qwJkW2JEd-G24CFUvkEpw"/>
-      <styles xmi:type="notation:FontStyle" xmi:id="_-qwJkm2JEd-G24CFUvkEpw" fontName="Lucida Grande"/>
-      <element xmi:type="kaom:Port" href="AssemblyLine.kaom#//@childEntities.6/@childPorts.0"/>
-      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-qwJk22JEd-G24CFUvkEpw" x="-5" y="17"/>
-    </children>
-    <children xmi:type="notation:Node" xmi:id="_-qwJlm2JEd-G24CFUvkEpw" type="3001">
-      <children xmi:type="notation:DecorationNode" xmi:id="_-qwwoG2JEd-G24CFUvkEpw" type="5001">
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_-qwwoW2JEd-G24CFUvkEpw" y="5"/>
-      </children>
-      <styles xmi:type="notation:DescriptionStyle" xmi:id="_-qwJl22JEd-G24CFUvkEpw"/>
-      <styles xmi:type="notation:FontStyle" xmi:id="_-qwJmG2JEd-G24CFUvkEpw" fontName="Lucida Grande"/>
-      <element xmi:type="kaom:Port" href="AssemblyLine.kaom#//@childEntities.6/@childPorts.1"/>
-      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-qwJmW2JEd-G24CFUvkEpw" x="-5" y="31"/>
-    </children>
-    <styles xmi:type="notation:DescriptionStyle" xmi:id="_-qXvE22JEd-G24CFUvkEpw"/>
-    <styles xmi:type="notation:FontStyle" xmi:id="_-qXvFG2JEd-G24CFUvkEpw" fontName="Lucida Grande"/>
-    <element xmi:type="kaom:Entity" href="AssemblyLine.kaom#//@childEntities.6"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-qXvFW2JEd-G24CFUvkEpw" x="263" y="15"/>
-  </children>
-  <children xmi:type="notation:Node" xmi:id="_-qXvGG2JEd-G24CFUvkEpw" type="2001">
-    <children xmi:type="notation:DecorationNode" xmi:id="_-qXvHG2JEd-G24CFUvkEpw" type="5004"/>
-    <children xmi:type="notation:BasicCompartment" xmi:id="_-qXvHW2JEd-G24CFUvkEpw" type="7001"/>
-    <children xmi:type="notation:Node" xmi:id="_-qzM4G2JEd-G24CFUvkEpw" type="3001">
-      <children xmi:type="notation:DecorationNode" xmi:id="_-qzM5G2JEd-G24CFUvkEpw" type="5001">
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_-qzM5W2JEd-G24CFUvkEpw" y="5"/>
-      </children>
-      <styles xmi:type="notation:DescriptionStyle" xmi:id="_-qzM4W2JEd-G24CFUvkEpw"/>
-      <styles xmi:type="notation:FontStyle" xmi:id="_-qzM4m2JEd-G24CFUvkEpw" fontName="Lucida Grande"/>
-      <element xmi:type="kaom:Port" href="AssemblyLine.kaom#//@childEntities.7/@childPorts.0"/>
-      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-qzM422JEd-G24CFUvkEpw" x="-5" y="17"/>
-    </children>
-    <children xmi:type="notation:Node" xmi:id="_-qzM5m2JEd-G24CFUvkEpw" type="3001">
-      <children xmi:type="notation:DecorationNode" xmi:id="_-qzM6m2JEd-G24CFUvkEpw" type="5001">
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_-qzM622JEd-G24CFUvkEpw" y="5"/>
-      </children>
-      <styles xmi:type="notation:DescriptionStyle" xmi:id="_-qzM522JEd-G24CFUvkEpw"/>
-      <styles xmi:type="notation:FontStyle" xmi:id="_-qzM6G2JEd-G24CFUvkEpw" fontName="Lucida Grande"/>
-      <element xmi:type="kaom:Port" href="AssemblyLine.kaom#//@childEntities.7/@childPorts.1"/>
-      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-qzM6W2JEd-G24CFUvkEpw" x="-5" y="31"/>
-    </children>
-    <styles xmi:type="notation:DescriptionStyle" xmi:id="_-qXvGW2JEd-G24CFUvkEpw"/>
-    <styles xmi:type="notation:FontStyle" xmi:id="_-qXvGm2JEd-G24CFUvkEpw" fontName="Lucida Grande"/>
-    <element xmi:type="kaom:Entity" href="AssemblyLine.kaom#//@childEntities.7"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-qXvG22JEd-G24CFUvkEpw" x="97" y="169"/>
-  </children>
-  <children xmi:type="notation:Node" xmi:id="_-qYWIG2JEd-G24CFUvkEpw" type="2001">
-    <children xmi:type="notation:DecorationNode" xmi:id="_-qYWJG2JEd-G24CFUvkEpw" type="5004"/>
-    <children xmi:type="notation:BasicCompartment" xmi:id="_-qYWJW2JEd-G24CFUvkEpw" type="7001"/>
-    <children xmi:type="notation:Node" xmi:id="_-q1pIG2JEd-G24CFUvkEpw" type="3001">
-      <children xmi:type="notation:DecorationNode" xmi:id="_-q1pJG2JEd-G24CFUvkEpw" type="5001">
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_-q1pJW2JEd-G24CFUvkEpw" y="5"/>
-      </children>
-      <styles xmi:type="notation:DescriptionStyle" xmi:id="_-q1pIW2JEd-G24CFUvkEpw"/>
-      <styles xmi:type="notation:FontStyle" xmi:id="_-q1pIm2JEd-G24CFUvkEpw" fontName="Lucida Grande"/>
-      <element xmi:type="kaom:Port" href="AssemblyLine.kaom#//@childEntities.8/@childPorts.0"/>
-      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-q1pI22JEd-G24CFUvkEpw" x="-5" y="17"/>
-    </children>
-    <children xmi:type="notation:Node" xmi:id="_-q1pJm2JEd-G24CFUvkEpw" type="3001">
-      <children xmi:type="notation:DecorationNode" xmi:id="_-q2QM22JEd-G24CFUvkEpw" type="5001">
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_-q2QNG2JEd-G24CFUvkEpw" y="5"/>
-      </children>
-      <styles xmi:type="notation:DescriptionStyle" xmi:id="_-q2QMG2JEd-G24CFUvkEpw"/>
-      <styles xmi:type="notation:FontStyle" xmi:id="_-q2QMW2JEd-G24CFUvkEpw" fontName="Lucida Grande"/>
-      <element xmi:type="kaom:Port" href="AssemblyLine.kaom#//@childEntities.8/@childPorts.1"/>
-      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-q2QMm2JEd-G24CFUvkEpw" x="-5" y="31"/>
-    </children>
-    <styles xmi:type="notation:DescriptionStyle" xmi:id="_-qYWIW2JEd-G24CFUvkEpw"/>
-    <styles xmi:type="notation:FontStyle" xmi:id="_-qYWIm2JEd-G24CFUvkEpw" fontName="Lucida Grande"/>
-    <element xmi:type="kaom:Entity" href="AssemblyLine.kaom#//@childEntities.8"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-qYWI22JEd-G24CFUvkEpw" x="97" y="320"/>
-  </children>
-  <children xmi:type="notation:Node" xmi:id="_-qYWJm2JEd-G24CFUvkEpw" type="2001">
-    <children xmi:type="notation:DecorationNode" xmi:id="_-qYWKm2JEd-G24CFUvkEpw" type="5004"/>
-    <children xmi:type="notation:BasicCompartment" xmi:id="_-qYWK22JEd-G24CFUvkEpw" type="7001"/>
-    <children xmi:type="notation:Node" xmi:id="_-q4FYG2JEd-G24CFUvkEpw" type="3001">
-      <children xmi:type="notation:DecorationNode" xmi:id="_-q4sc22JEd-G24CFUvkEpw" type="5001">
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_-q4sdG2JEd-G24CFUvkEpw" y="5"/>
-      </children>
-      <styles xmi:type="notation:DescriptionStyle" xmi:id="_-q4scG2JEd-G24CFUvkEpw"/>
-      <styles xmi:type="notation:FontStyle" xmi:id="_-q4scW2JEd-G24CFUvkEpw" fontName="Lucida Grande"/>
-      <element xmi:type="kaom:Port" href="AssemblyLine.kaom#//@childEntities.9/@childPorts.0"/>
-      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-q4scm2JEd-G24CFUvkEpw" x="-5" y="17"/>
-    </children>
-    <children xmi:type="notation:Node" xmi:id="_-q4sdW2JEd-G24CFUvkEpw" type="3001">
-      <children xmi:type="notation:DecorationNode" xmi:id="_-q4seW2JEd-G24CFUvkEpw" type="5001">
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_-q4sem2JEd-G24CFUvkEpw" y="5"/>
-      </children>
-      <styles xmi:type="notation:DescriptionStyle" xmi:id="_-q4sdm2JEd-G24CFUvkEpw"/>
-      <styles xmi:type="notation:FontStyle" xmi:id="_-q4sd22JEd-G24CFUvkEpw" fontName="Lucida Grande"/>
-      <element xmi:type="kaom:Port" href="AssemblyLine.kaom#//@childEntities.9/@childPorts.1"/>
-      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-q4seG2JEd-G24CFUvkEpw" x="-5" y="31"/>
-    </children>
-    <styles xmi:type="notation:DescriptionStyle" xmi:id="_-qYWJ22JEd-G24CFUvkEpw"/>
-    <styles xmi:type="notation:FontStyle" xmi:id="_-qYWKG2JEd-G24CFUvkEpw" fontName="Lucida Grande"/>
-    <element xmi:type="kaom:Entity" href="AssemblyLine.kaom#//@childEntities.9"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-qYWKW2JEd-G24CFUvkEpw" x="289" y="337"/>
-  </children>
-  <children xmi:type="notation:Node" xmi:id="_-qYWLG2JEd-G24CFUvkEpw" type="2001">
-    <children xmi:type="notation:DecorationNode" xmi:id="_-qY9MG2JEd-G24CFUvkEpw" type="5004"/>
-    <children xmi:type="notation:BasicCompartment" xmi:id="_-qY9MW2JEd-G24CFUvkEpw" type="7001"/>
-    <styles xmi:type="notation:DescriptionStyle" xmi:id="_-qYWLW2JEd-G24CFUvkEpw"/>
-    <styles xmi:type="notation:FontStyle" xmi:id="_-qYWLm2JEd-G24CFUvkEpw" fontName="Lucida Grande"/>
-    <element xmi:type="kaom:Entity" href="AssemblyLine.kaom#//@childEntities.10"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-qYWL22JEd-G24CFUvkEpw" x="2185" y="243"/>
-  </children>
-  <children xmi:type="notation:Node" xmi:id="_-qY9Mm2JEd-G24CFUvkEpw" type="2001">
-    <children xmi:type="notation:DecorationNode" xmi:id="_-qY9Nm2JEd-G24CFUvkEpw" type="5004"/>
-    <children xmi:type="notation:BasicCompartment" xmi:id="_-qY9N22JEd-G24CFUvkEpw" type="7001"/>
-    <styles xmi:type="notation:DescriptionStyle" xmi:id="_-qY9M22JEd-G24CFUvkEpw"/>
-    <styles xmi:type="notation:FontStyle" xmi:id="_-qY9NG2JEd-G24CFUvkEpw" fontName="Lucida Grande"/>
-    <element xmi:type="kaom:Entity" href="AssemblyLine.kaom#//@childEntities.11"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-qY9NW2JEd-G24CFUvkEpw" x="404" y="304"/>
-  </children>
-  <children xmi:type="notation:Node" xmi:id="_-qY9OG2JEd-G24CFUvkEpw" type="2001">
-    <children xmi:type="notation:DecorationNode" xmi:id="_-qZkQG2JEd-G24CFUvkEpw" type="5004"/>
-    <children xmi:type="notation:BasicCompartment" xmi:id="_-qZkQW2JEd-G24CFUvkEpw" type="7001"/>
-    <styles xmi:type="notation:DescriptionStyle" xmi:id="_-qY9OW2JEd-G24CFUvkEpw"/>
-    <styles xmi:type="notation:FontStyle" xmi:id="_-qY9Om2JEd-G24CFUvkEpw" fontName="Lucida Grande"/>
-    <element xmi:type="kaom:Entity" href="AssemblyLine.kaom#//@childEntities.12"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-qY9O22JEd-G24CFUvkEpw" x="2159" y="364"/>
-  </children>
-  <children xmi:type="notation:Node" xmi:id="_-qZkQm2JEd-G24CFUvkEpw" type="2002">
-    <children xmi:type="notation:DecorationNode" xmi:id="_-qZkRm2JEd-G24CFUvkEpw" type="5005">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_-qZkR22JEd-G24CFUvkEpw" y="5"/>
-    </children>
-    <styles xmi:type="notation:DescriptionStyle" xmi:id="_-qZkQ22JEd-G24CFUvkEpw"/>
-    <styles xmi:type="notation:FontStyle" xmi:id="_-qZkRG2JEd-G24CFUvkEpw" fontName="Lucida Grande"/>
-    <element xmi:type="kaom:Relation" href="AssemblyLine.kaom#//@childRelations.0"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-qZkRW2JEd-G24CFUvkEpw" x="197" y="256"/>
-  </children>
-  <children xmi:type="notation:Node" xmi:id="_-qZkSG2JEd-G24CFUvkEpw" type="2002">
-    <children xmi:type="notation:DecorationNode" xmi:id="_-qZkTG2JEd-G24CFUvkEpw" type="5005">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_-qZkTW2JEd-G24CFUvkEpw" y="5"/>
-    </children>
-    <styles xmi:type="notation:DescriptionStyle" xmi:id="_-qZkSW2JEd-G24CFUvkEpw"/>
-    <styles xmi:type="notation:FontStyle" xmi:id="_-qZkSm2JEd-G24CFUvkEpw" fontName="Lucida Grande"/>
-    <element xmi:type="kaom:Relation" href="AssemblyLine.kaom#//@childRelations.1"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-qZkS22JEd-G24CFUvkEpw" x="197" y="428"/>
-  </children>
-  <children xmi:type="notation:Node" xmi:id="_-qaLUG2JEd-G24CFUvkEpw" type="2002">
-    <children xmi:type="notation:DecorationNode" xmi:id="_-qaLVG2JEd-G24CFUvkEpw" type="5005">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_-qaLVW2JEd-G24CFUvkEpw" y="5"/>
-    </children>
-    <styles xmi:type="notation:DescriptionStyle" xmi:id="_-qaLUW2JEd-G24CFUvkEpw"/>
-    <styles xmi:type="notation:FontStyle" xmi:id="_-qaLUm2JEd-G24CFUvkEpw" fontName="Lucida Grande"/>
-    <element xmi:type="kaom:Relation" href="AssemblyLine.kaom#//@childRelations.2"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-qaLU22JEd-G24CFUvkEpw" x="197" y="105"/>
-  </children>
-  <children xmi:type="notation:Node" xmi:id="_-qaLVm2JEd-G24CFUvkEpw" type="2002">
-    <children xmi:type="notation:DecorationNode" xmi:id="_-qaLWm2JEd-G24CFUvkEpw" type="5005">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_-qaLW22JEd-G24CFUvkEpw" y="5"/>
-    </children>
-    <styles xmi:type="notation:DescriptionStyle" xmi:id="_-qaLV22JEd-G24CFUvkEpw"/>
-    <styles xmi:type="notation:FontStyle" xmi:id="_-qaLWG2JEd-G24CFUvkEpw" fontName="Lucida Grande"/>
-    <element xmi:type="kaom:Relation" href="AssemblyLine.kaom#//@childRelations.3"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-qaLWW2JEd-G24CFUvkEpw" x="404" y="152"/>
-  </children>
-  <children xmi:type="notation:Node" xmi:id="_-qaLXG2JEd-G24CFUvkEpw" type="2002">
-    <children xmi:type="notation:DecorationNode" xmi:id="_-qayYG2JEd-G24CFUvkEpw" type="5005">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_-qayYW2JEd-G24CFUvkEpw" y="5"/>
-    </children>
-    <styles xmi:type="notation:DescriptionStyle" xmi:id="_-qaLXW2JEd-G24CFUvkEpw"/>
-    <styles xmi:type="notation:FontStyle" xmi:id="_-qaLXm2JEd-G24CFUvkEpw" fontName="Lucida Grande"/>
-    <element xmi:type="kaom:Relation" href="AssemblyLine.kaom#//@childRelations.4"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-qaLX22JEd-G24CFUvkEpw" x="404" y="182"/>
-  </children>
-  <children xmi:type="notation:Node" xmi:id="_-qayYm2JEd-G24CFUvkEpw" type="2002">
-    <children xmi:type="notation:DecorationNode" xmi:id="_-qayZm2JEd-G24CFUvkEpw" type="5005">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_-qayZ22JEd-G24CFUvkEpw" y="5"/>
-    </children>
-    <styles xmi:type="notation:DescriptionStyle" xmi:id="_-qayY22JEd-G24CFUvkEpw"/>
-    <styles xmi:type="notation:FontStyle" xmi:id="_-qayZG2JEd-G24CFUvkEpw" fontName="Lucida Grande"/>
-    <element xmi:type="kaom:Relation" href="AssemblyLine.kaom#//@childRelations.5"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-qayZW2JEd-G24CFUvkEpw" x="404" y="425"/>
-  </children>
-  <children xmi:type="notation:Node" xmi:id="_-qayaG2JEd-G24CFUvkEpw" type="2002">
-    <children xmi:type="notation:DecorationNode" xmi:id="_-qaybG2JEd-G24CFUvkEpw" type="5005">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_-qbZcG2JEd-G24CFUvkEpw" y="5"/>
-    </children>
-    <styles xmi:type="notation:DescriptionStyle" xmi:id="_-qayaW2JEd-G24CFUvkEpw"/>
-    <styles xmi:type="notation:FontStyle" xmi:id="_-qayam2JEd-G24CFUvkEpw" fontName="Lucida Grande"/>
-    <element xmi:type="kaom:Relation" href="AssemblyLine.kaom#//@childRelations.6"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-qaya22JEd-G24CFUvkEpw" x="404" y="213"/>
-  </children>
-  <children xmi:type="notation:Node" xmi:id="_-qbZcW2JEd-G24CFUvkEpw" type="2002">
-    <children xmi:type="notation:DecorationNode" xmi:id="_-qbZdW2JEd-G24CFUvkEpw" type="5005">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_-qbZdm2JEd-G24CFUvkEpw" y="5"/>
-    </children>
-    <styles xmi:type="notation:DescriptionStyle" xmi:id="_-qbZcm2JEd-G24CFUvkEpw"/>
-    <styles xmi:type="notation:FontStyle" xmi:id="_-qbZc22JEd-G24CFUvkEpw" fontName="Lucida Grande"/>
-    <element xmi:type="kaom:Relation" href="AssemblyLine.kaom#//@childRelations.7"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-qbZdG2JEd-G24CFUvkEpw" x="404" y="115"/>
-  </children>
-  <styles xmi:type="notation:DiagramStyle" xmi:id="_-pdJEG2JEd-G24CFUvkEpw"/>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_zUosge5XEd-vrZg-kMyseQ"/>
   <element xmi:type="kaom:Entity" href="AssemblyLine.kaom#/"/>
-  <edges xmi:type="notation:Edge" xmi:id="_-rFgwG2JEd-G24CFUvkEpw" type="4001" source="_-qgR8m2JEd-G24CFUvkEpw" target="_-qaLUG2JEd-G24CFUvkEpw">
-    <children xmi:type="notation:DecorationNode" xmi:id="_-rFgxG2JEd-G24CFUvkEpw" type="6001">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_-rFgxW2JEd-G24CFUvkEpw" y="40"/>
+  <edges xmi:type="notation:Edge" xmi:id="_zZIK8O5XEd-vrZg-kMyseQ" type="4001" source="_zWHTMO5XEd-vrZg-kMyseQ" target="_zV8UH-5XEd-vrZg-kMyseQ">
+    <children xmi:type="notation:DecorationNode" xmi:id="_zZIyAO5XEd-vrZg-kMyseQ" type="6001">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_zZIyAe5XEd-vrZg-kMyseQ" y="40"/>
     </children>
-    <styles xmi:type="notation:RoutingStyle" xmi:id="_-rFgwW2JEd-G24CFUvkEpw"/>
-    <styles xmi:type="notation:FontStyle" xmi:id="_-rFgwm2JEd-G24CFUvkEpw" fontName="Lucida Grande"/>
-    <element xmi:type="kaom:Link" href="AssemblyLine.kaom#//@childLinks.0"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_-rFgw22JEd-G24CFUvkEpw" points="[0, 0, -91, -15]$[0, 15, -91, 0]$[91, 15, 0, 0]"/>
-    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="__KlgMW2JEd-G24CFUvkEpw" id="(0.5,1.0916671752929688)"/>
-    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_-sSao22JEd-G24CFUvkEpw" id="(0.0,0.5550003051757812)"/>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_zZIK8e5XEd-vrZg-kMyseQ"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_zZIK8u5XEd-vrZg-kMyseQ" fontName="Segoe UI"/>
+    <element xmi:type="kaom:Link" href="AssemblyLine.kaom#//@childEntities.0/@childLinks.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_zZIK8-5XEd-vrZg-kMyseQ" points="[0, 0, -67, 0]$[67, 0, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_z8Z3Je5XEd-vrZg-kMyseQ" id="(1.0,0.6375007629394531)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_z8Z3Ju5XEd-vrZg-kMyseQ" id="(0.0,0.5825004577636719)"/>
   </edges>
-  <edges xmi:type="notation:Edge" xmi:id="_-rHV8G2JEd-G24CFUvkEpw" type="4001" source="_-qj8UG2JEd-G24CFUvkEpw" target="_-qZkQm2JEd-G24CFUvkEpw">
-    <children xmi:type="notation:DecorationNode" xmi:id="_-rHV9G2JEd-G24CFUvkEpw" type="6001">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_-rHV9W2JEd-G24CFUvkEpw" y="40"/>
+  <edges xmi:type="notation:Edge" xmi:id="_zZKnMO5XEd-vrZg-kMyseQ" type="4001" source="_zV8UE-5XEd-vrZg-kMyseQ" target="_zWefkO5XEd-vrZg-kMyseQ">
+    <children xmi:type="notation:DecorationNode" xmi:id="_zZKnNO5XEd-vrZg-kMyseQ" type="6001">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_zZKnNe5XEd-vrZg-kMyseQ" x="345" y="3"/>
     </children>
-    <styles xmi:type="notation:RoutingStyle" xmi:id="_-rHV8W2JEd-G24CFUvkEpw"/>
-    <styles xmi:type="notation:FontStyle" xmi:id="_-rHV8m2JEd-G24CFUvkEpw" fontName="Lucida Grande"/>
-    <element xmi:type="kaom:Link" href="AssemblyLine.kaom#//@childLinks.1"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_-rHV822JEd-G24CFUvkEpw" points="[0, 0, -167, 3]$[-15, 0, -182, 3]$[-15, 35, -182, 38]$[152, 35, -15, 38]$[152, -3, -15, 0]$[167, -3, 0, 0]"/>
-    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="__Kk5I22JEd-G24CFUvkEpw" id="(0.0,0.6166636149088541)"/>
-    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_-sTBsG2JEd-G24CFUvkEpw" id="(0.0,0.56500244140625)"/>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_zZKnMe5XEd-vrZg-kMyseQ"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_zZKnMu5XEd-vrZg-kMyseQ" fontName="Segoe UI"/>
+    <element xmi:type="kaom:Link" href="AssemblyLine.kaom#//@childEntities.0/@childLinks.1"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_zZKnM-5XEd-vrZg-kMyseQ" points="[0, 0, -801, 28]$[28, 0, -773, 28]$[28, 28, -773, 56]$[755, 28, -46, 56]$[755, -28, -46, 0]$[801, -28, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_z8YpAO5XEd-vrZg-kMyseQ" id="(1.0,0.5275001525878906)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_z8YpAe5XEd-vrZg-kMyseQ" id="(0.0,0.5)"/>
   </edges>
-  <edges xmi:type="notation:Edge" xmi:id="_-rODoG2JEd-G24CFUvkEpw" type="4001" source="_-qj8UG2JEd-G24CFUvkEpw" target="_-qZkSG2JEd-G24CFUvkEpw">
-    <children xmi:type="notation:DecorationNode" xmi:id="_-rOqsG2JEd-G24CFUvkEpw" type="6001">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_-rOqsW2JEd-G24CFUvkEpw" y="40"/>
+  <edges xmi:type="notation:Edge" xmi:id="_zZMcYO5XEd-vrZg-kMyseQ" type="4001" source="_zV8UGe5XEd-vrZg-kMyseQ" target="_zWefkO5XEd-vrZg-kMyseQ">
+    <children xmi:type="notation:DecorationNode" xmi:id="_zZMcZO5XEd-vrZg-kMyseQ" type="6001">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_zZMcZe5XEd-vrZg-kMyseQ" x="160" y="3"/>
     </children>
-    <styles xmi:type="notation:RoutingStyle" xmi:id="_-rODoW2JEd-G24CFUvkEpw"/>
-    <styles xmi:type="notation:FontStyle" xmi:id="_-rODom2JEd-G24CFUvkEpw" fontName="Lucida Grande"/>
-    <element xmi:type="kaom:Link" href="AssemblyLine.kaom#//@childLinks.2"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_-rODo22JEd-G24CFUvkEpw" points="[0, 0, -167, -169]$[-15, 0, -182, -169]$[-15, 35, -182, -134]$[152, 35, -15, -134]$[152, 169, -15, 0]$[167, 169, 0, 0]"/>
-    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="__Kk5JW2JEd-G24CFUvkEpw" id="(0.0,0.6166636149088541)"/>
-    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_-sTBsW2JEd-G24CFUvkEpw" id="(0.0,0.529998779296875)"/>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_zZMcYe5XEd-vrZg-kMyseQ"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_zZMcYu5XEd-vrZg-kMyseQ" fontName="Segoe UI"/>
+    <element xmi:type="kaom:Link" href="AssemblyLine.kaom#//@childEntities.0/@childLinks.2"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_zZMcY-5XEd-vrZg-kMyseQ" points="[0, 0, -420, 14]$[46, 0, -374, 14]$[46, 42, -374, 56]$[374, 42, -46, 56]$[374, -14, -46, 0]$[420, -14, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_z8YpAu5XEd-vrZg-kMyseQ" id="(1.0,0.5)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_z8YpA-5XEd-vrZg-kMyseQ" id="(0.0,0.5)"/>
   </edges>
-  <edges xmi:type="notation:Edge" xmi:id="_-rQf4G2JEd-G24CFUvkEpw" type="4001" source="_-qj8UG2JEd-G24CFUvkEpw" target="_-qayaG2JEd-G24CFUvkEpw">
-    <children xmi:type="notation:DecorationNode" xmi:id="_-rQf5G2JEd-G24CFUvkEpw" type="6001">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_-rQf5W2JEd-G24CFUvkEpw" y="40"/>
+  <edges xmi:type="notation:Edge" xmi:id="_zZORkO5XEd-vrZg-kMyseQ" type="4001" source="_zWnpgO5XEd-vrZg-kMyseQ" target="_zXrZcO5XEd-vrZg-kMyseQ">
+    <children xmi:type="notation:DecorationNode" xmi:id="_zZORlO5XEd-vrZg-kMyseQ" type="6001">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_zZORle5XEd-vrZg-kMyseQ" x="5" y="-3"/>
     </children>
-    <styles xmi:type="notation:RoutingStyle" xmi:id="_-rQf4W2JEd-G24CFUvkEpw"/>
-    <styles xmi:type="notation:FontStyle" xmi:id="_-rQf4m2JEd-G24CFUvkEpw" fontName="Lucida Grande"/>
-    <element xmi:type="kaom:Link" href="AssemblyLine.kaom#//@childLinks.3"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_-rQf422JEd-G24CFUvkEpw" points="[0, 0, -374, 46]$[-15, 0, -389, 46]$[-15, 35, -389, 81]$[152, 35, -222, 81]$[152, 53, -222, 99]$[344, 53, -30, 99]$[344, -46, -30, 0]$[374, -46, 0, 0]"/>
-    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="__KmHQm2JEd-G24CFUvkEpw" id="(0.0,0.6166636149088541)"/>
-    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_-sTowm2JEd-G24CFUvkEpw" id="(0.0,0.532501220703125)"/>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_zZORke5XEd-vrZg-kMyseQ"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_zZORku5XEd-vrZg-kMyseQ" fontName="Segoe UI"/>
+    <element xmi:type="kaom:Link" href="AssemblyLine.kaom#//@childEntities.0/@childLinks.3"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_zZORk-5XEd-vrZg-kMyseQ" points="[0, 0, -77, -7]$[37, 0, -40, -7]$[37, 7, -40, 0]$[77, 7, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_z8ZQHO5XEd-vrZg-kMyseQ" id="(1.0,0.5)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_z8ZQHe5XEd-vrZg-kMyseQ" id="(0.0,0.5)"/>
   </edges>
-  <edges xmi:type="notation:Edge" xmi:id="_-rRuAG2JEd-G24CFUvkEpw" type="4001" source="_-qlxhm2JEd-G24CFUvkEpw" target="_-qaLXG2JEd-G24CFUvkEpw">
-    <children xmi:type="notation:DecorationNode" xmi:id="_-rRuBG2JEd-G24CFUvkEpw" type="6001">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_-rSVEG2JEd-G24CFUvkEpw" y="40"/>
+  <edges xmi:type="notation:Edge" xmi:id="_zZQGwO5XEd-vrZg-kMyseQ" type="4001" source="_zV8UE-5XEd-vrZg-kMyseQ" target="_zWnphu5XEd-vrZg-kMyseQ">
+    <children xmi:type="notation:DecorationNode" xmi:id="_zZQt0O5XEd-vrZg-kMyseQ" type="6001">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_zZQt0e5XEd-vrZg-kMyseQ" x="2" y="3"/>
     </children>
-    <styles xmi:type="notation:RoutingStyle" xmi:id="_-rRuAW2JEd-G24CFUvkEpw"/>
-    <styles xmi:type="notation:FontStyle" xmi:id="_-rRuAm2JEd-G24CFUvkEpw" fontName="Lucida Grande"/>
-    <element xmi:type="kaom:Link" href="AssemblyLine.kaom#//@childLinks.4"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_-rRuA22JEd-G24CFUvkEpw" points="[0, 0, -150, 88]$[-15, 0, -165, 88]$[-15, 21, -165, 109]$[105, 21, -45, 109]$[105, -88, -45, 0]$[150, -88, 0, 0]"/>
-    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="__KlgNG2JEd-G24CFUvkEpw" id="(0.08333333333333333,0.60833740234375)"/>
-    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_-sSaom2JEd-G24CFUvkEpw" id="(0.0,0.57750244140625)"/>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_zZQGwe5XEd-vrZg-kMyseQ"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_zZQGwu5XEd-vrZg-kMyseQ" fontName="Segoe UI"/>
+    <element xmi:type="kaom:Link" href="AssemblyLine.kaom#//@childEntities.0/@childLinks.4"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_zZQGw-5XEd-vrZg-kMyseQ" points="[0, 0, -74, 28]$[28, 0, -46, 28]$[28, -28, -46, 0]$[74, -28, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_z8YpBu5XEd-vrZg-kMyseQ" id="(1.0,0.5275001525878906)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_z8YpB-5XEd-vrZg-kMyseQ" id="(0.0,0.5)"/>
   </edges>
-  <edges xmi:type="notation:Edge" xmi:id="_-rTjMG2JEd-G24CFUvkEpw" type="4001" source="_-qZkQm2JEd-G24CFUvkEpw" target="_-qlxgG2JEd-G24CFUvkEpw">
-    <children xmi:type="notation:DecorationNode" xmi:id="_-rTjNG2JEd-G24CFUvkEpw" type="6001">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_-rTjNW2JEd-G24CFUvkEpw" y="40"/>
+  <edges xmi:type="notation:Edge" xmi:id="_zZSjAO5XEd-vrZg-kMyseQ" type="4001" source="_zWyBkO5XEd-vrZg-kMyseQ" target="_zXz8UO5XEd-vrZg-kMyseQ">
+    <children xmi:type="notation:DecorationNode" xmi:id="_zZSjBO5XEd-vrZg-kMyseQ" type="6001">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_zZSjBe5XEd-vrZg-kMyseQ" y="40"/>
     </children>
-    <styles xmi:type="notation:RoutingStyle" xmi:id="_-rTjMW2JEd-G24CFUvkEpw"/>
-    <styles xmi:type="notation:FontStyle" xmi:id="_-rTjMm2JEd-G24CFUvkEpw" fontName="Lucida Grande"/>
-    <element xmi:type="kaom:Link" href="AssemblyLine.kaom#//@childLinks.5"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_-rTjM22JEd-G24CFUvkEpw" points="[0, 0, -47, 0]$[47, 0, 0, 0]"/>
-    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="__KkSEG2JEd-G24CFUvkEpw" id="(1.0,0.56500244140625)"/>
-    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="__KkSEW2JEd-G24CFUvkEpw" id="(0.08333333333333333,0.60833740234375)"/>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_zZSjAe5XEd-vrZg-kMyseQ"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_zZSjAu5XEd-vrZg-kMyseQ" fontName="Segoe UI"/>
+    <element xmi:type="kaom:Link" href="AssemblyLine.kaom#//@childEntities.0/@childLinks.5"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_zZSjA-5XEd-vrZg-kMyseQ" points="[0, 0, -77, 0]$[77, 0, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_z8ZQHu5XEd-vrZg-kMyseQ" id="(1.0,0.5)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_z8Z3IO5XEd-vrZg-kMyseQ" id="(0.0,0.5)"/>
   </edges>
-  <edges xmi:type="notation:Edge" xmi:id="_-rUxUG2JEd-G24CFUvkEpw" type="4001" source="_-qo01m2JEd-G24CFUvkEpw" target="_-qayYm2JEd-G24CFUvkEpw">
-    <children xmi:type="notation:DecorationNode" xmi:id="_-rVYYG2JEd-G24CFUvkEpw" type="6001">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_-rVYYW2JEd-G24CFUvkEpw" y="40"/>
+  <edges xmi:type="notation:Edge" xmi:id="_zZUYMO5XEd-vrZg-kMyseQ" type="4001" source="_zV8UGe5XEd-vrZg-kMyseQ" target="_zWyBlu5XEd-vrZg-kMyseQ">
+    <children xmi:type="notation:DecorationNode" xmi:id="_zZUYNO5XEd-vrZg-kMyseQ" type="6001">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_zZUYNe5XEd-vrZg-kMyseQ" x="4" y="3"/>
     </children>
-    <styles xmi:type="notation:RoutingStyle" xmi:id="_-rUxUW2JEd-G24CFUvkEpw"/>
-    <styles xmi:type="notation:FontStyle" xmi:id="_-rUxUm2JEd-G24CFUvkEpw" fontName="Lucida Grande"/>
-    <element xmi:type="kaom:Link" href="AssemblyLine.kaom#//@childLinks.6"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_-rUxU22JEd-G24CFUvkEpw" points="[0, 0, -150, 17]$[-15, 0, -165, 17]$[-15, 21, -165, 38]$[90, 21, -60, 38]$[90, -17, -60, 0]$[150, -17, 0, 0]"/>
-    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="__KmHQG2JEd-G24CFUvkEpw" id="(0.08333333333333333,0.5499979654947916)"/>
-    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_-sTBsm2JEd-G24CFUvkEpw" id="(0.0,0.5524993896484375)"/>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_zZUYMe5XEd-vrZg-kMyseQ"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_zZUYMu5XEd-vrZg-kMyseQ" fontName="Segoe UI"/>
+    <element xmi:type="kaom:Link" href="AssemblyLine.kaom#//@childEntities.0/@childLinks.6"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_zZUYM-5XEd-vrZg-kMyseQ" points="[0, 0, -92, 14]$[46, 0, -46, 14]$[46, -14, -46, 0]$[92, -14, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_z8ZQEO5XEd-vrZg-kMyseQ" id="(1.0,0.5)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_z8ZQEe5XEd-vrZg-kMyseQ" id="(0.0,0.5)"/>
   </edges>
-  <edges xmi:type="notation:Edge" xmi:id="_-rWmgG2JEd-G24CFUvkEpw" type="4001" source="_-qZkSG2JEd-G24CFUvkEpw" target="_-qo00G2JEd-G24CFUvkEpw">
-    <children xmi:type="notation:DecorationNode" xmi:id="_-rWmhG2JEd-G24CFUvkEpw" type="6001">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_-rWmhW2JEd-G24CFUvkEpw" y="40"/>
+  <edges xmi:type="notation:Edge" xmi:id="_zZWNYO5XEd-vrZg-kMyseQ" type="4001" source="_zV87IO5XEd-vrZg-kMyseQ" target="_zW9nwO5XEd-vrZg-kMyseQ">
+    <children xmi:type="notation:DecorationNode" xmi:id="_zZWNZO5XEd-vrZg-kMyseQ" type="6001">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_zZWNZe5XEd-vrZg-kMyseQ" x="11"/>
     </children>
-    <styles xmi:type="notation:RoutingStyle" xmi:id="_-rWmgW2JEd-G24CFUvkEpw"/>
-    <styles xmi:type="notation:FontStyle" xmi:id="_-rWmgm2JEd-G24CFUvkEpw" fontName="Lucida Grande"/>
-    <element xmi:type="kaom:Link" href="AssemblyLine.kaom#//@childLinks.7"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_-rWmg22JEd-G24CFUvkEpw" points="[0, 0, -47, 0]$[47, 0, 0, 0]"/>
-    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="__KkSEm2JEd-G24CFUvkEpw" id="(1.0,0.529998779296875)"/>
-    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="__KkSE22JEd-G24CFUvkEpw" id="(0.08333333333333333,0.5499979654947916)"/>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_zZWNYe5XEd-vrZg-kMyseQ"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_zZWNYu5XEd-vrZg-kMyseQ" fontName="Segoe UI"/>
+    <element xmi:type="kaom:Link" href="AssemblyLine.kaom#//@childEntities.0/@childLinks.7"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_zZWNY-5XEd-vrZg-kMyseQ" points="[0, 0, -129, 2]$[74, 0, -55, 2]$[74, -2, -55, 0]$[129, -2, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_z8ZQEu5XEd-vrZg-kMyseQ" id="(1.0,0.5100006103515625)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_z8ZQE-5XEd-vrZg-kMyseQ" id="(0.0,0.5916671752929688)"/>
   </edges>
-  <edges xmi:type="notation:Edge" xmi:id="_-rX0oG2JEd-G24CFUvkEpw" type="4001" source="_-qrREG2JEd-G24CFUvkEpw" target="_-qbZcW2JEd-G24CFUvkEpw">
-    <children xmi:type="notation:DecorationNode" xmi:id="_-rYbs22JEd-G24CFUvkEpw" type="6001">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_-rYbtG2JEd-G24CFUvkEpw" y="40"/>
+  <edges xmi:type="notation:Edge" xmi:id="_zZYCkO5XEd-vrZg-kMyseQ" type="4001" source="_zV87IO5XEd-vrZg-kMyseQ" target="_zW9nwO5XEd-vrZg-kMyseQ">
+    <children xmi:type="notation:DecorationNode" xmi:id="_zZYpoO5XEd-vrZg-kMyseQ" type="6001">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_zZYpoe5XEd-vrZg-kMyseQ" x="11"/>
     </children>
-    <styles xmi:type="notation:RoutingStyle" xmi:id="_-rYbsG2JEd-G24CFUvkEpw"/>
-    <styles xmi:type="notation:FontStyle" xmi:id="_-rYbsW2JEd-G24CFUvkEpw" fontName="Lucida Grande"/>
-    <element xmi:type="kaom:Link" href="AssemblyLine.kaom#//@childLinks.8"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_-rYbsm2JEd-G24CFUvkEpw" points="[0, 0, -152, -10]$[-15, 0, -167, -10]$[-15, 35, -167, 25]$[107, 35, -45, 25]$[107, 10, -45, 0]$[152, 10, 0, 0]"/>
-    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="__KmHRG2JEd-G24CFUvkEpw" id="(0.0,0.5916671752929688)"/>
-    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_-sSaoG2JEd-G24CFUvkEpw" id="(0.0,0.5366668701171875)"/>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_zZYCke5XEd-vrZg-kMyseQ"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_zZYCku5XEd-vrZg-kMyseQ" fontName="Segoe UI"/>
+    <element xmi:type="kaom:Link" href="AssemblyLine.kaom#//@childEntities.0/@childLinks.8"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_zZYCk-5XEd-vrZg-kMyseQ" points="[0, 0, -129, 2]$[74, 0, -55, 2]$[74, -2, -55, 0]$[129, -2, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_z8ZQFO5XEd-vrZg-kMyseQ" id="(1.0,0.5100006103515625)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_z8ZQFe5XEd-vrZg-kMyseQ" id="(0.0,0.5916671752929688)"/>
   </edges>
-  <edges xmi:type="notation:Edge" xmi:id="_-rZp0G2JEd-G24CFUvkEpw" type="4001" source="_-qrREG2JEd-G24CFUvkEpw" target="_-qbZcW2JEd-G24CFUvkEpw">
-    <children xmi:type="notation:DecorationNode" xmi:id="_-rZp1G2JEd-G24CFUvkEpw" type="6001">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_-rZp1W2JEd-G24CFUvkEpw" y="40"/>
+  <edges xmi:type="notation:Edge" xmi:id="_zZZ3wO5XEd-vrZg-kMyseQ" type="4001" source="_zXDuYO5XEd-vrZg-kMyseQ" target="_zXd-EO5XEd-vrZg-kMyseQ">
+    <children xmi:type="notation:DecorationNode" xmi:id="_zZae0-5XEd-vrZg-kMyseQ" type="6001">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_zZae1O5XEd-vrZg-kMyseQ" x="15" y="-5"/>
     </children>
-    <styles xmi:type="notation:RoutingStyle" xmi:id="_-rZp0W2JEd-G24CFUvkEpw"/>
-    <styles xmi:type="notation:FontStyle" xmi:id="_-rZp0m2JEd-G24CFUvkEpw" fontName="Lucida Grande"/>
-    <element xmi:type="kaom:Link" href="AssemblyLine.kaom#//@childLinks.9"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_-rZp022JEd-G24CFUvkEpw" points="[0, 0, -152, -10]$[-15, 0, -167, -10]$[-15, 35, -167, 25]$[107, 35, -45, 25]$[107, 10, -45, 0]$[152, 10, 0, 0]"/>
-    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="__KmuUG2JEd-G24CFUvkEpw" id="(0.0,0.5916671752929688)"/>
-    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_-sRzk22JEd-G24CFUvkEpw" id="(0.0,0.5366668701171875)"/>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_zZae0O5XEd-vrZg-kMyseQ"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_zZae0e5XEd-vrZg-kMyseQ" fontName="Segoe UI"/>
+    <element xmi:type="kaom:Link" href="AssemblyLine.kaom#//@childEntities.0/@childLinks.9"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_zZae0u5XEd-vrZg-kMyseQ" points="[0, 0, -77, -27]$[37, 0, -40, -27]$[37, 27, -40, 0]$[77, 27, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_z8ZQGu5XEd-vrZg-kMyseQ" id="(1.0,0.5916671752929688)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_z8ZQG-5XEd-vrZg-kMyseQ" id="(0.0,0.5458335876464844)"/>
   </edges>
-  <edges xmi:type="notation:Edge" xmi:id="_-rbfAG2JEd-G24CFUvkEpw" type="4001" source="_-qttVm2JEd-G24CFUvkEpw" target="_-qaLVm2JEd-G24CFUvkEpw">
-    <children xmi:type="notation:DecorationNode" xmi:id="_-rbfBG2JEd-G24CFUvkEpw" type="6001">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_-rbfBW2JEd-G24CFUvkEpw" y="40"/>
+  <edges xmi:type="notation:Edge" xmi:id="_zZcUAO5XEd-vrZg-kMyseQ" type="4001" source="_zV8UH-5XEd-vrZg-kMyseQ" target="_zXEVcO5XEd-vrZg-kMyseQ">
+    <children xmi:type="notation:DecorationNode" xmi:id="_zZcUBO5XEd-vrZg-kMyseQ" type="6001">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_zZcUBe5XEd-vrZg-kMyseQ" x="10" y="2"/>
     </children>
-    <styles xmi:type="notation:RoutingStyle" xmi:id="_-rbfAW2JEd-G24CFUvkEpw"/>
-    <styles xmi:type="notation:FontStyle" xmi:id="_-rbfAm2JEd-G24CFUvkEpw" fontName="Lucida Grande"/>
-    <element xmi:type="kaom:Link" href="AssemblyLine.kaom#//@childLinks.10"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_-rbfA22JEd-G24CFUvkEpw" points="[0, 0, -150, 43]$[-15, 0, -165, 43]$[-15, 21, -165, 64]$[90, 21, -60, 64]$[90, -43, -60, 0]$[150, -43, 0, 0]"/>
-    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="__KlgMm2JEd-G24CFUvkEpw" id="(0.08333333333333333,0.5166676839192709)"/>
-    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_-sSaoW2JEd-G24CFUvkEpw" id="(0.0,0.5225021362304687)"/>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_zZcUAe5XEd-vrZg-kMyseQ"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_zZcUAu5XEd-vrZg-kMyseQ" fontName="Segoe UI"/>
+    <element xmi:type="kaom:Link" href="AssemblyLine.kaom#//@childEntities.0/@childLinks.10"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_zZcUA-5XEd-vrZg-kMyseQ" points="[0, 0, -77, 40]$[31, 0, -46, 40]$[31, -40, -46, 0]$[77, -40, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_z8ZQFu5XEd-vrZg-kMyseQ" id="(1.0,0.5825004577636719)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_z8ZQF-5XEd-vrZg-kMyseQ" id="(0.0,0.5916671752929688)"/>
   </edges>
-  <edges xmi:type="notation:Edge" xmi:id="_-rctIG2JEd-G24CFUvkEpw" type="4001" source="_-qaLUG2JEd-G24CFUvkEpw" target="_-qttUG2JEd-G24CFUvkEpw">
-    <children xmi:type="notation:DecorationNode" xmi:id="_-rdUMG2JEd-G24CFUvkEpw" type="6001">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_-rdUMW2JEd-G24CFUvkEpw" y="40"/>
+  <edges xmi:type="notation:Edge" xmi:id="_zZeJMO5XEd-vrZg-kMyseQ" type="4001" source="_zXU0IO5XEd-vrZg-kMyseQ" target="_zV87IO5XEd-vrZg-kMyseQ">
+    <children xmi:type="notation:DecorationNode" xmi:id="_zZeJNO5XEd-vrZg-kMyseQ" type="6001">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_zZeJNe5XEd-vrZg-kMyseQ" y="40"/>
     </children>
-    <styles xmi:type="notation:RoutingStyle" xmi:id="_-rctIW2JEd-G24CFUvkEpw"/>
-    <styles xmi:type="notation:FontStyle" xmi:id="_-rctIm2JEd-G24CFUvkEpw" fontName="Lucida Grande"/>
-    <element xmi:type="kaom:Link" href="AssemblyLine.kaom#//@childLinks.11"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_-rctI22JEd-G24CFUvkEpw" points="[0, 0, -47, -76]$[15, 0, -32, -76]$[15, 76, -32, 0]$[47, 76, 0, 0]"/>
-    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="__KkSFG2JEd-G24CFUvkEpw" id="(1.0,0.5550003051757812)"/>
-    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="__Kk5IG2JEd-G24CFUvkEpw" id="(0.08333333333333333,0.5166676839192709)"/>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_zZeJMe5XEd-vrZg-kMyseQ"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_zZeJMu5XEd-vrZg-kMyseQ" fontName="Segoe UI"/>
+    <element xmi:type="kaom:Link" href="AssemblyLine.kaom#//@childEntities.0/@childLinks.11"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_zZeJM-5XEd-vrZg-kMyseQ" points="[0, 0, -903, 0]$[903, 0, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_z8Z3J-5XEd-vrZg-kMyseQ" id="(0.0,0.5166676839192709)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_z8Z3KO5XEd-vrZg-kMyseQ" id="(0.0,0.5100006103515625)"/>
   </edges>
-  <edges xmi:type="notation:Edge" xmi:id="_-reiUG2JEd-G24CFUvkEpw" type="4001" source="_-qwJlm2JEd-G24CFUvkEpw" target="_-qbZcW2JEd-G24CFUvkEpw">
-    <children xmi:type="notation:DecorationNode" xmi:id="_-reiVG2JEd-G24CFUvkEpw" type="6001">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_-reiVW2JEd-G24CFUvkEpw" y="40"/>
+  <edges xmi:type="notation:Edge" xmi:id="_zZf-YO5XEd-vrZg-kMyseQ" type="4001" source="_zV8UH-5XEd-vrZg-kMyseQ" target="_zXVbMu5XEd-vrZg-kMyseQ">
+    <children xmi:type="notation:DecorationNode" xmi:id="_zZf-ZO5XEd-vrZg-kMyseQ" type="6001">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_zZf-Ze5XEd-vrZg-kMyseQ" x="11" y="-2"/>
     </children>
-    <styles xmi:type="notation:RoutingStyle" xmi:id="_-reiUW2JEd-G24CFUvkEpw"/>
-    <styles xmi:type="notation:FontStyle" xmi:id="_-reiUm2JEd-G24CFUvkEpw" fontName="Lucida Grande"/>
-    <element xmi:type="kaom:Link" href="AssemblyLine.kaom#//@childLinks.12"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_-reiU22JEd-G24CFUvkEpw" points="[0, 0, -146, -71]$[-15, 0, -161, -71]$[-15, 21, -161, -50]$[86, 21, -60, -50]$[86, 71, -60, 0]$[146, 71, 0, 0]"/>
-    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="__KmuUW2JEd-G24CFUvkEpw" id="(0.08333333333333333,0.5)"/>
-    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_-sSapG2JEd-G24CFUvkEpw" id="(0.0,0.5366668701171875)"/>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_zZf-Ye5XEd-vrZg-kMyseQ"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_zZf-Yu5XEd-vrZg-kMyseQ" fontName="Segoe UI"/>
+    <element xmi:type="kaom:Link" href="AssemblyLine.kaom#//@childEntities.0/@childLinks.12"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_zZf-Y-5XEd-vrZg-kMyseQ" points="[0, 0, -87, -41]$[31, 0, -56, -41]$[31, 41, -56, 0]$[87, 41, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_z8ZQGO5XEd-vrZg-kMyseQ" id="(1.0,0.5825004577636719)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_z8ZQGe5XEd-vrZg-kMyseQ" id="(0.0,0.5166676839192709)"/>
   </edges>
-  <edges xmi:type="notation:Edge" xmi:id="_-rfwcG2JEd-G24CFUvkEpw" type="4001" source="_-qaLUG2JEd-G24CFUvkEpw" target="_-qwJkG2JEd-G24CFUvkEpw">
-    <children xmi:type="notation:DecorationNode" xmi:id="_-rgXgW2JEd-G24CFUvkEpw" type="6001">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_-rgXgm2JEd-G24CFUvkEpw" y="40"/>
+  <edges xmi:type="notation:Edge" xmi:id="_zZhzkO5XEd-vrZg-kMyseQ" type="4001" source="_zXelIO5XEd-vrZg-kMyseQ" target="_zV8UE-5XEd-vrZg-kMyseQ">
+    <children xmi:type="notation:DecorationNode" xmi:id="_zZhzlO5XEd-vrZg-kMyseQ" type="6001">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_zZhzle5XEd-vrZg-kMyseQ" y="40"/>
     </children>
-    <styles xmi:type="notation:RoutingStyle" xmi:id="_-rfwcW2JEd-G24CFUvkEpw"/>
-    <styles xmi:type="notation:FontStyle" xmi:id="_-rfwcm2JEd-G24CFUvkEpw" fontName="Lucida Grande"/>
-    <element xmi:type="kaom:Link" href="AssemblyLine.kaom#//@childLinks.13"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_-rgXgG2JEd-G24CFUvkEpw" points="[0, 0, -51, 75]$[15, 0, -36, 75]$[15, -75, -36, 0]$[51, -75, 0, 0]"/>
-    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="__Kk5IW2JEd-G24CFUvkEpw" id="(1.0,0.5550003051757812)"/>
-    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="__Kk5Im2JEd-G24CFUvkEpw" id="(0.08333333333333333,0.5)"/>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_zZhzke5XEd-vrZg-kMyseQ"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_zZhzku5XEd-vrZg-kMyseQ" fontName="Segoe UI"/>
+    <element xmi:type="kaom:Link" href="AssemblyLine.kaom#//@childEntities.0/@childLinks.13"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_zZhzk-5XEd-vrZg-kMyseQ" points="[0, 0, -64, 0]$[64, 0, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_z8Z3Ie5XEd-vrZg-kMyseQ" id="(1.0,0.5458335876464844)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_z8Z3Iu5XEd-vrZg-kMyseQ" id="(0.0,0.5275001525878906)"/>
   </edges>
-  <edges xmi:type="notation:Edge" xmi:id="_-rhloG2JEd-G24CFUvkEpw" type="4001" source="_-qzM4G2JEd-G24CFUvkEpw" target="_-qaLVm2JEd-G24CFUvkEpw">
-    <children xmi:type="notation:DecorationNode" xmi:id="_-riMsG2JEd-G24CFUvkEpw" type="6001">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_-riMsW2JEd-G24CFUvkEpw" y="40"/>
+  <edges xmi:type="notation:Edge" xmi:id="_zZjowO5XEd-vrZg-kMyseQ" type="4001" source="_zXrZdu5XEd-vrZg-kMyseQ" target="_zV8UGe5XEd-vrZg-kMyseQ">
+    <children xmi:type="notation:DecorationNode" xmi:id="_zZjoxO5XEd-vrZg-kMyseQ" type="6001">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_zZkP0O5XEd-vrZg-kMyseQ" x="4" y="8"/>
     </children>
-    <styles xmi:type="notation:RoutingStyle" xmi:id="_-rhloW2JEd-G24CFUvkEpw"/>
-    <styles xmi:type="notation:FontStyle" xmi:id="_-rhlom2JEd-G24CFUvkEpw" fontName="Lucida Grande"/>
-    <element xmi:type="kaom:Link" href="AssemblyLine.kaom#//@childLinks.14"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_-rhlo22JEd-G24CFUvkEpw" points="[0, 0, -312, 32]$[-15, 0, -327, 32]$[-15, 35, -327, 67]$[60, 35, -252, 67]$[60, 128, -252, 160]$[282, 128, -30, 160]$[282, -32, -30, 0]$[312, -32, 0, 0]"/>
-    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="__KlgM22JEd-G24CFUvkEpw" id="(0.0,0.5249964396158854)"/>
-    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_-sTowG2JEd-G24CFUvkEpw" id="(0.0,0.5225021362304687)"/>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_zZjowe5XEd-vrZg-kMyseQ"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_zZjowu5XEd-vrZg-kMyseQ" fontName="Segoe UI"/>
+    <element xmi:type="kaom:Link" href="AssemblyLine.kaom#//@childEntities.0/@childLinks.14"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_zZjow-5XEd-vrZg-kMyseQ" points="[0, 0, -67, -7]$[37, 0, -30, -7]$[37, 7, -30, 0]$[67, 7, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_z8Z3I-5XEd-vrZg-kMyseQ" id="(1.0,0.5)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_z8Z3JO5XEd-vrZg-kMyseQ" id="(0.0,0.5)"/>
   </edges>
-  <edges xmi:type="notation:Edge" xmi:id="_-rja0G2JEd-G24CFUvkEpw" type="4001" source="_-qzM5m2JEd-G24CFUvkEpw" target="_-qZkQm2JEd-G24CFUvkEpw">
-    <children xmi:type="notation:DecorationNode" xmi:id="_-rja1G2JEd-G24CFUvkEpw" type="6001">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_-rja1W2JEd-G24CFUvkEpw" y="40"/>
+  <edges xmi:type="notation:Edge" xmi:id="_zZld8O5XEd-vrZg-kMyseQ" type="4001" source="_zXz8Vu5XEd-vrZg-kMyseQ" target="_zWefkO5XEd-vrZg-kMyseQ">
+    <children xmi:type="notation:DecorationNode" xmi:id="_zZmFAO5XEd-vrZg-kMyseQ" type="6001">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_zZmFAe5XEd-vrZg-kMyseQ" y="40"/>
     </children>
-    <styles xmi:type="notation:RoutingStyle" xmi:id="_-rja0W2JEd-G24CFUvkEpw"/>
-    <styles xmi:type="notation:FontStyle" xmi:id="_-rja0m2JEd-G24CFUvkEpw" fontName="Lucida Grande"/>
-    <element xmi:type="kaom:Link" href="AssemblyLine.kaom#//@childLinks.15"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_-rja022JEd-G24CFUvkEpw" points="[0, 0, -105, -58]$[-15, 0, -120, -58]$[-15, 21, -120, -37]$[75, 21, -30, -37]$[75, 58, -30, 0]$[105, 58, 0, 0]"/>
-    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="__Kk5JG2JEd-G24CFUvkEpw" id="(0.0,0.5249964396158854)"/>
-    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_-sTBs22JEd-G24CFUvkEpw" id="(0.0,0.56500244140625)"/>
-  </edges>
-  <edges xmi:type="notation:Edge" xmi:id="_-rko8G2JEd-G24CFUvkEpw" type="4001" source="_-q1pIG2JEd-G24CFUvkEpw" target="_-qaLXG2JEd-G24CFUvkEpw">
-    <children xmi:type="notation:DecorationNode" xmi:id="_-rlQAG2JEd-G24CFUvkEpw" type="6001">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_-rlQAW2JEd-G24CFUvkEpw" y="40"/>
-    </children>
-    <styles xmi:type="notation:RoutingStyle" xmi:id="_-rko8W2JEd-G24CFUvkEpw"/>
-    <styles xmi:type="notation:FontStyle" xmi:id="_-rko8m2JEd-G24CFUvkEpw" fontName="Lucida Grande"/>
-    <element xmi:type="kaom:Link" href="AssemblyLine.kaom#//@childLinks.16"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_-rko822JEd-G24CFUvkEpw" points="[0, 0, -312, 153]$[-15, 0, -327, 153]$[-15, 35, -327, 188]$[60, 35, -252, 188]$[60, -23, -252, 130]$[282, -23, -30, 130]$[282, -153, -30, 0]$[312, -153, 0, 0]"/>
-    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="__KlgNW2JEd-G24CFUvkEpw" id="(0.0,0.5416666666666666)"/>
-    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_-sTowW2JEd-G24CFUvkEpw" id="(0.0,0.57750244140625)"/>
-  </edges>
-  <edges xmi:type="notation:Edge" xmi:id="_-rmeIG2JEd-G24CFUvkEpw" type="4001" source="_-q1pJm2JEd-G24CFUvkEpw" target="_-qZkSG2JEd-G24CFUvkEpw">
-    <children xmi:type="notation:DecorationNode" xmi:id="_-rnFMG2JEd-G24CFUvkEpw" type="6001">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_-rnFMW2JEd-G24CFUvkEpw" y="40"/>
-    </children>
-    <styles xmi:type="notation:RoutingStyle" xmi:id="_-rmeIW2JEd-G24CFUvkEpw"/>
-    <styles xmi:type="notation:FontStyle" xmi:id="_-rmeIm2JEd-G24CFUvkEpw" fontName="Lucida Grande"/>
-    <element xmi:type="kaom:Link" href="AssemblyLine.kaom#//@childLinks.17"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_-rmeI22JEd-G24CFUvkEpw" points="[0, 0, -105, -79]$[-15, 0, -120, -79]$[-15, 21, -120, -58]$[75, 21, -30, -58]$[75, 79, -30, 0]$[105, 79, 0, 0]"/>
-    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="__KlgMG2JEd-G24CFUvkEpw" id="(0.0,0.5416666666666666)"/>
-    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_-sRzkm2JEd-G24CFUvkEpw" id="(0.0,0.529998779296875)"/>
-  </edges>
-  <edges xmi:type="notation:Edge" xmi:id="_-roTUG2JEd-G24CFUvkEpw" type="4001" source="_-q4FYG2JEd-G24CFUvkEpw" target="_-qayYm2JEd-G24CFUvkEpw">
-    <children xmi:type="notation:DecorationNode" xmi:id="_-ro6YG2JEd-G24CFUvkEpw" type="6001">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_-ro6YW2JEd-G24CFUvkEpw" y="40"/>
-    </children>
-    <styles xmi:type="notation:RoutingStyle" xmi:id="_-roTUW2JEd-G24CFUvkEpw"/>
-    <styles xmi:type="notation:FontStyle" xmi:id="_-roTUm2JEd-G24CFUvkEpw" fontName="Lucida Grande"/>
-    <element xmi:type="kaom:Link" href="AssemblyLine.kaom#//@childLinks.18"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_-roTU22JEd-G24CFUvkEpw" points="[0, 0, -120, -73]$[-15, 0, -135, -73]$[-15, 35, -135, -38]$[60, 35, -60, -38]$[60, 73, -60, 0]$[120, 73, 0, 0]"/>
-    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="__KmHQW2JEd-G24CFUvkEpw" id="(0.0,0.625)"/>
-    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_-sRzkW2JEd-G24CFUvkEpw" id="(0.0,0.5524993896484375)"/>
-  </edges>
-  <edges xmi:type="notation:Edge" xmi:id="_-rqIgG2JEd-G24CFUvkEpw" type="4001" source="_-q4sdW2JEd-G24CFUvkEpw" target="_-qayaG2JEd-G24CFUvkEpw">
-    <children xmi:type="notation:DecorationNode" xmi:id="_-rqIhG2JEd-G24CFUvkEpw" type="6001">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_-rqIhW2JEd-G24CFUvkEpw" y="40"/>
-    </children>
-    <styles xmi:type="notation:RoutingStyle" xmi:id="_-rqIgW2JEd-G24CFUvkEpw"/>
-    <styles xmi:type="notation:FontStyle" xmi:id="_-rqIgm2JEd-G24CFUvkEpw" fontName="Lucida Grande"/>
-    <element xmi:type="kaom:Link" href="AssemblyLine.kaom#//@childLinks.19"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_-rqIg22JEd-G24CFUvkEpw" points="[0, 0, -120, 153]$[-15, 0, -135, 153]$[-15, 21, -135, 174]$[105, 21, -15, 174]$[105, -153, -15, 0]$[120, -153, 0, 0]"/>
-    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="__KmHQ22JEd-G24CFUvkEpw" id="(0.0,0.625)"/>
-    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_-sRzkG2JEd-G24CFUvkEpw" id="(0.0,0.532501220703125)"/>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_zZld8e5XEd-vrZg-kMyseQ"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_zZld8u5XEd-vrZg-kMyseQ" fontName="Segoe UI"/>
+    <element xmi:type="kaom:Link" href="AssemblyLine.kaom#//@childEntities.0/@childLinks.15"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_zZld8-5XEd-vrZg-kMyseQ" points="[0, 0, -98, 0]$[98, 0, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_z8YpBO5XEd-vrZg-kMyseQ" id="(1.0,0.5)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_z8YpBe5XEd-vrZg-kMyseQ" id="(0.0,0.5)"/>
   </edges>
 </notation:Diagram>
