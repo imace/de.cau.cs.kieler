@@ -1,0 +1,10 @@
+module awaitModule:
+input A,B;
+output O;
+
+await
+	case pre(A) do emit O
+	case pre(B) do nothing 
+end await
+
+end module
