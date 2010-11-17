@@ -1,0 +1,5 @@
+module everyModule:
+input A;
+	every A do
+		nothing
+	endend module

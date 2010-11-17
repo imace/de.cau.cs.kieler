@@ -1,0 +1,6 @@
+module douptoModule:
+input A;
+do
+	nothing
+upto A
+end module
