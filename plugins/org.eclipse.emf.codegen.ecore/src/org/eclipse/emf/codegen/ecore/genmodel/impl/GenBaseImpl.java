@@ -3361,7 +3361,7 @@ public abstract class GenBaseImpl extends EObjectImpl implements GenBase
           // If it is an unqualified name, we will assume it refers to a type parameter, since we don't support default package.
           //
           String instanceTypeName = eClassifier.getInstanceTypeName();
-          if (instanceTypeName.indexOf('.') == -1)
+          if (instanceTypeName != null && instanceTypeName.indexOf('.') == -1)
           {
             // Strip off the array indices if any.
             //
