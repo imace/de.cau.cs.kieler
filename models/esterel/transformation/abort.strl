@@ -3,5 +3,5 @@ input A,B;
 output O;
 abort 
 	emit O
-	when case pre(A) do emit O
-case pre(B) do nothing end end module
+	when case [A and B] do emit O
+case [A or B] do nothing end end module

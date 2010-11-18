@@ -1,5 +1,6 @@
 module everyModule:
 input A;
-	every A do
+	every [A or pre(A)] do
 		nothing
-	endend module
+	end
+end module
