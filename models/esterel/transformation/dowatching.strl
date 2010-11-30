@@ -1,0 +1,6 @@
+module dowatchingModule:
+input A;
+do
+	nothing
+watching [A and pre(A) or A] timeout nothing end
+end module
