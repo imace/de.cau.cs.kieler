@@ -1,5 +1,0 @@
-module localSignalModule:
-	signal A in 
-			emit A
-	end
-end module

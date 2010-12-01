@@ -1,0 +1,4 @@
+module assignModule:
+	var a : integer in
+		a := 4 + 6 end var 
+end module

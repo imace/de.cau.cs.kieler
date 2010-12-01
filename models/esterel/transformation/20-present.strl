@@ -1,0 +1,8 @@
+module presentModule:
+input A, B, C;
+present 
+	case A do nothing
+	case B do nothing
+	case C do nothing
+end present
+end module

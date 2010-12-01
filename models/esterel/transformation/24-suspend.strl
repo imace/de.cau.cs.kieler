@@ -1,0 +1,6 @@
+module suspendModule:
+input A;
+suspend 
+	nothing 
+when [A and pre(A)]
+end module

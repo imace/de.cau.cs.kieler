@@ -1,0 +1,4 @@
+module sustainModule:
+input A;
+sustain A(5=5)
+end module
