@@ -1,0 +1,8 @@
+module moduleFunctionCall: 
+function f1(integer): integer; 
+output O; 
+var v1 : integer in
+emit O(f1(5)) ;
+v1 := f1(12)
+end var
+end module

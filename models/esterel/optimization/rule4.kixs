@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<synccharts:Region xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:expressions="http://kieler.cs.cau.de/expressions/0.1.2" xmlns:synccharts="http://kieler.cs.cau.de/synccharts/0.2.3">
+<synccharts:Region xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kexpressions="http://kieler.cs.cau.de/kexpressions/0.1.2" xmlns:synccharts="http://kieler.cs.cau.de/synccharts/0.2.4">
   <states id="rule4" label="rule4">
     <signals name="A"/>
     <signals name="B"/>
@@ -7,21 +7,21 @@
       <states id="_" incomingTransitions="//@states.0/@regions.0/@states.4/@outgoingTransitions.0">
         <signals name="Horst"/>
         <outgoingTransitions label="A" priority="1" targetState="//@states.0/@regions.0/@states.1">
-          <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.0"/>
+          <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.0"/>
         </outgoingTransitions>
         <outgoingTransitions label="B" priority="2" targetState="//@states.0/@regions.0/@states.2">
-          <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.1"/>
+          <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.1"/>
         </outgoingTransitions>
         <outgoingTransitions label="A and B" priority="3" targetState="//@states.0/@regions.0/@states.3">
-          <trigger xsi:type="expressions:OperatorExpression" operator="and">
-            <subExpressions xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.0"/>
-            <subExpressions xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.1"/>
+          <trigger xsi:type="kexpressions:OperatorExpression" operator="and">
+            <subExpressions xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.0"/>
+            <subExpressions xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.1"/>
           </trigger>
         </outgoingTransitions>
         <outgoingTransitions label="A or B" priority="4" targetState="//@states.0/@regions.0/@states.5">
-          <trigger xsi:type="expressions:OperatorExpression" operator="or">
-            <subExpressions xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.0"/>
-            <subExpressions xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.1"/>
+          <trigger xsi:type="kexpressions:OperatorExpression" operator="or">
+            <subExpressions xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.0"/>
+            <subExpressions xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.1"/>
           </trigger>
         </outgoingTransitions>
       </states>

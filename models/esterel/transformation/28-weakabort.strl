@@ -1,0 +1,7 @@
+module abortModule:
+input A,B;
+output O;
+weak abort 
+	emit O
+	when case [ A and B ] do emit O
+case [A or B] do nothing end end module

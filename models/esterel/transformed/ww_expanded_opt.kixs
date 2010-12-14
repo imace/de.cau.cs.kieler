@@ -1,109 +1,109 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<synccharts:Region xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:esterel="http://www.cau.de/cs/kieler/esterel/Esterel" xmlns:expressions="http://kieler.cs.cau.de/expressions/0.1.2" xmlns:synccharts="http://kieler.cs.cau.de/synccharts/0.2.3">
+<synccharts:Region xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Esterel="http://www.cau.de/cs/kieler/esterel/Esterel" xmlns:kexpressions="http://kieler.cs.cau.de/kexpressions/0.1.2" xmlns:synccharts="http://kieler.cs.cau.de/synccharts/0.2.4">
   <states id="WRISTWATCH" label="WRISTWATCH">
-    <signals xsi:type="expressions:ISignal" name="UL" isInput="true"/>
-    <signals xsi:type="expressions:ISignal" name="UR" isInput="true"/>
-    <signals xsi:type="expressions:ISignal" name="LL" isInput="true"/>
-    <signals xsi:type="expressions:ISignal" name="LR" isInput="true"/>
-    <signals xsi:type="expressions:ISignal" name="HS" isInput="true"/>
-    <signals xsi:type="expressions:ISignal" name="S" isInput="true"/>
-    <signals xsi:type="expressions:ISignal" name="MAIN_DISPLAY" isOutput="true">
-      <channelDescr xsi:type="esterel:ChannelDescription">
-        <type typeID="MAIN_DISPLAY_TYPE"/>
+    <signals xsi:type="kexpressions:ISignal" name="UL" isInput="true"/>
+    <signals xsi:type="kexpressions:ISignal" name="UR" isInput="true"/>
+    <signals xsi:type="kexpressions:ISignal" name="LL" isInput="true"/>
+    <signals xsi:type="kexpressions:ISignal" name="LR" isInput="true"/>
+    <signals xsi:type="kexpressions:ISignal" name="HS" isInput="true"/>
+    <signals xsi:type="kexpressions:ISignal" name="S" isInput="true"/>
+    <signals xsi:type="kexpressions:ISignal" name="MAIN_DISPLAY" isOutput="true">
+      <channelDescr xsi:type="Esterel:ChannelDescription"> 
+        <type typeID="MAIN_DISPLAY_TYPE"/> 
       </channelDescr>
     </signals>
-    <signals xsi:type="expressions:ISignal" name="MINI_DISPLAY" isOutput="true">
-      <channelDescr xsi:type="esterel:ChannelDescription">
-        <type typeID="MINI_DISPLAY_TYPE"/>
+    <signals xsi:type="kexpressions:ISignal" name="MINI_DISPLAY" isOutput="true">
+      <channelDescr xsi:type="Esterel:ChannelDescription"> 
+        <type typeID="MINI_DISPLAY_TYPE"/> 
       </channelDescr>
     </signals>
-    <signals xsi:type="expressions:ISignal" name="ALPHABETIC_DISPLAY" isOutput="true">
-      <channelDescr xsi:type="esterel:ChannelDescription">
-        <type type="int"/>
+    <signals xsi:type="kexpressions:ISignal" name="ALPHABETIC_DISPLAY" isOutput="true">
+      <channelDescr xsi:type="Esterel:ChannelDescription"> 
+        <type type="int"/> 
       </channelDescr>
     </signals>
-    <signals xsi:type="expressions:ISignal" name="START_ENHANCING" isOutput="true">
-      <channelDescr xsi:type="esterel:ChannelDescription">
-        <type typeID="DISPLAY_POSITION"/>
+    <signals xsi:type="kexpressions:ISignal" name="START_ENHANCING" isOutput="true">
+      <channelDescr xsi:type="Esterel:ChannelDescription"> 
+        <type typeID="DISPLAY_POSITION"/> 
       </channelDescr>
     </signals>
-    <signals xsi:type="expressions:ISignal" name="STOP_ENHANCING" isOutput="true">
-      <channelDescr xsi:type="esterel:ChannelDescription">
-        <type typeID="DISPLAY_POSITION"/>
+    <signals xsi:type="kexpressions:ISignal" name="STOP_ENHANCING" isOutput="true">
+      <channelDescr xsi:type="Esterel:ChannelDescription"> 
+        <type typeID="DISPLAY_POSITION"/> 
       </channelDescr>
     </signals>
-    <signals xsi:type="expressions:ISignal" name="CHIME_STATUS" isOutput="true">
-      <channelDescr xsi:type="esterel:ChannelDescription">
-        <type type="bool"/>
+    <signals xsi:type="kexpressions:ISignal" name="CHIME_STATUS" isOutput="true">
+      <channelDescr xsi:type="Esterel:ChannelDescription"> 
+        <type type="bool"/> 
       </channelDescr>
     </signals>
-    <signals xsi:type="expressions:ISignal" name="STOPWATCH_RUN_STATUS" isOutput="true">
-      <channelDescr xsi:type="esterel:ChannelDescription">
-        <type type="bool"/>
+    <signals xsi:type="kexpressions:ISignal" name="STOPWATCH_RUN_STATUS" isOutput="true">
+      <channelDescr xsi:type="Esterel:ChannelDescription"> 
+        <type type="bool"/> 
       </channelDescr>
     </signals>
-    <signals xsi:type="expressions:ISignal" name="STOPWATCH_LAP_STATUS" isOutput="true">
-      <channelDescr xsi:type="esterel:ChannelDescription">
-        <type type="bool"/>
+    <signals xsi:type="kexpressions:ISignal" name="STOPWATCH_LAP_STATUS" isOutput="true">
+      <channelDescr xsi:type="Esterel:ChannelDescription"> 
+        <type type="bool"/> 
       </channelDescr>
     </signals>
-    <signals xsi:type="expressions:ISignal" name="ALARM_STATUS" isOutput="true">
-      <channelDescr xsi:type="esterel:ChannelDescription">
-        <type type="bool"/>
+    <signals xsi:type="kexpressions:ISignal" name="ALARM_STATUS" isOutput="true">
+      <channelDescr xsi:type="Esterel:ChannelDescription"> 
+        <type type="bool"/> 
       </channelDescr>
     </signals>
-    <signals xsi:type="expressions:ISignal" name="BEEP" isOutput="true"/>
-    <signals xsi:type="expressions:ISignal" name="WATCH_MODE_COMMAND"/>
-    <signals xsi:type="expressions:ISignal" name="STOPWATCH_MODE_COMMAND"/>
-    <signals xsi:type="expressions:ISignal" name="ALARM_MODE_COMMAND"/>
-    <signals xsi:type="expressions:ISignal" name="TOGGLE_24H_MODE_COMMAND"/>
-    <signals xsi:type="expressions:ISignal" name="TOGGLE_CHIME_COMMAND"/>
-    <signals xsi:type="expressions:ISignal" name="ENTER_SET_WATCH_MODE_COMMAND"/>
-    <signals xsi:type="expressions:ISignal" name="SET_WATCH_COMMAND"/>
-    <signals xsi:type="expressions:ISignal" name="NEXT_WATCH_TIME_POSITION_COMMAND"/>
-    <signals xsi:type="expressions:ISignal" name="EXIT_SET_WATCH_MODE_COMMAND"/>
-    <signals xsi:type="expressions:ISignal" name="WATCH_TIME">
-      <channelDescr xsi:type="esterel:ChannelDescription">
-        <type typeID="WATCH_TIME_TYPE"/>
+    <signals xsi:type="kexpressions:ISignal" name="BEEP" isOutput="true"/>
+    <signals xsi:type="kexpressions:ISignal" name="WATCH_MODE_COMMAND"/>
+    <signals xsi:type="kexpressions:ISignal" name="STOPWATCH_MODE_COMMAND"/>
+    <signals xsi:type="kexpressions:ISignal" name="ALARM_MODE_COMMAND"/>
+    <signals xsi:type="kexpressions:ISignal" name="TOGGLE_24H_MODE_COMMAND"/>
+    <signals xsi:type="kexpressions:ISignal" name="TOGGLE_CHIME_COMMAND"/>
+    <signals xsi:type="kexpressions:ISignal" name="ENTER_SET_WATCH_MODE_COMMAND"/>
+    <signals xsi:type="kexpressions:ISignal" name="SET_WATCH_COMMAND"/>
+    <signals xsi:type="kexpressions:ISignal" name="NEXT_WATCH_TIME_POSITION_COMMAND"/>
+    <signals xsi:type="kexpressions:ISignal" name="EXIT_SET_WATCH_MODE_COMMAND"/>
+    <signals xsi:type="kexpressions:ISignal" name="WATCH_TIME">
+      <channelDescr xsi:type="Esterel:ChannelDescription"> 
+        <type typeID="WATCH_TIME_TYPE"/> 
       </channelDescr>
     </signals>
-    <signals xsi:type="expressions:ISignal" name="WATCH_BEING_SET"/>
-    <signals xsi:type="expressions:ISignal" name="WATCH_START_ENHANCING">
-      <channelDescr xsi:type="esterel:ChannelDescription">
-        <type typeID="WATCH_TIME_POSITION"/>
+    <signals xsi:type="kexpressions:ISignal" name="WATCH_BEING_SET"/>
+    <signals xsi:type="kexpressions:ISignal" name="WATCH_START_ENHANCING">
+      <channelDescr xsi:type="Esterel:ChannelDescription"> 
+        <type typeID="WATCH_TIME_POSITION"/> 
       </channelDescr>
     </signals>
-    <signals xsi:type="expressions:ISignal" name="WATCH_STOP_ENHANCING">
-      <channelDescr xsi:type="esterel:ChannelDescription">
-        <type typeID="WATCH_TIME_POSITION"/>
+    <signals xsi:type="kexpressions:ISignal" name="WATCH_STOP_ENHANCING">
+      <channelDescr xsi:type="Esterel:ChannelDescription"> 
+        <type typeID="WATCH_TIME_POSITION"/> 
       </channelDescr>
     </signals>
-    <signals xsi:type="expressions:ISignal" name="START_STOP_COMMAND"/>
-    <signals xsi:type="expressions:ISignal" name="LAP_COMMAND"/>
-    <signals xsi:type="expressions:ISignal" name="STOPWATCH_TIME">
-      <channelDescr xsi:type="esterel:ChannelDescription">
-        <type typeID="STOPWATCH_TIME_TYPE"/>
+    <signals xsi:type="kexpressions:ISignal" name="START_STOP_COMMAND"/>
+    <signals xsi:type="kexpressions:ISignal" name="LAP_COMMAND"/>
+    <signals xsi:type="kexpressions:ISignal" name="STOPWATCH_TIME">
+      <channelDescr xsi:type="Esterel:ChannelDescription"> 
+        <type typeID="STOPWATCH_TIME_TYPE"/> 
       </channelDescr>
     </signals>
-    <signals xsi:type="expressions:ISignal" name="TOGGLE_ALARM_COMMAND"/>
-    <signals xsi:type="expressions:ISignal" name="ENTER_SET_ALARM_MODE_COMMAND"/>
-    <signals xsi:type="expressions:ISignal" name="NEXT_ALARM_TIME_POSITION_COMMAND"/>
-    <signals xsi:type="expressions:ISignal" name="EXIT_SET_ALARM_MODE_COMMAND"/>
-    <signals xsi:type="expressions:ISignal" name="SET_ALARM_COMMAND"/>
-    <signals xsi:type="expressions:ISignal" name="STOP_ALARM_BEEP_COMMAND"/>
-    <signals xsi:type="expressions:ISignal" name="ALARM_TIME">
-      <channelDescr xsi:type="esterel:ChannelDescription">
-        <type typeID="ALARM_TIME_TYPE"/>
+    <signals xsi:type="kexpressions:ISignal" name="TOGGLE_ALARM_COMMAND"/>
+    <signals xsi:type="kexpressions:ISignal" name="ENTER_SET_ALARM_MODE_COMMAND"/>
+    <signals xsi:type="kexpressions:ISignal" name="NEXT_ALARM_TIME_POSITION_COMMAND"/>
+    <signals xsi:type="kexpressions:ISignal" name="EXIT_SET_ALARM_MODE_COMMAND"/>
+    <signals xsi:type="kexpressions:ISignal" name="SET_ALARM_COMMAND"/>
+    <signals xsi:type="kexpressions:ISignal" name="STOP_ALARM_BEEP_COMMAND"/>
+    <signals xsi:type="kexpressions:ISignal" name="ALARM_TIME">
+      <channelDescr xsi:type="Esterel:ChannelDescription"> 
+        <type typeID="ALARM_TIME_TYPE"/> 
       </channelDescr>
     </signals>
-    <signals xsi:type="expressions:ISignal" name="ALARM_START_ENHANCING">
-      <channelDescr xsi:type="esterel:ChannelDescription">
-        <type typeID="ALARM_TIME_POSITION"/>
+    <signals xsi:type="kexpressions:ISignal" name="ALARM_START_ENHANCING">
+      <channelDescr xsi:type="Esterel:ChannelDescription"> 
+        <type typeID="ALARM_TIME_POSITION"/> 
       </channelDescr>
     </signals>
-    <signals xsi:type="expressions:ISignal" name="ALARM_STOP_ENHANCING">
-      <channelDescr xsi:type="esterel:ChannelDescription">
-        <type typeID="ALARM_TIME_POSITION"/>
+    <signals xsi:type="kexpressions:ISignal" name="ALARM_STOP_ENHANCING">
+      <channelDescr xsi:type="Esterel:ChannelDescription"> 
+        <type typeID="ALARM_TIME_POSITION"/> 
       </channelDescr>
     </signals>
     <regions id="">
@@ -113,7 +113,7 @@
             <regions id="">
               <states id="_" isInitial="true">
                 <outgoingTransitions label="WATCH_STOP_ENHANCING" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.1">
-                  <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.28"/>
+                  <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.28"/>
                 </outgoingTransitions>
               </states>
               <states id="Emit_State2" label="Emit State" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.0/@outgoingTransitions.0 //@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.1/@outgoingTransitions.0">
@@ -124,7 +124,7 @@
                   <states id="_2" isFinal="true" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.1/@regions.0/@states.0/@outgoingTransitions.0"/>
                 </regions>
                 <outgoingTransitions label="WATCH_STOP_ENHANCING" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.1">
-                  <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.28"/>
+                  <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.28"/>
                 </outgoingTransitions>
               </states>
             </regions>
@@ -137,14 +137,14 @@
                   <states id="_2" isFinal="true" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.1/@states.0/@regions.0/@states.0/@outgoingTransitions.0"/>
                 </regions>
                 <outgoingTransitions label="WATCH_TIME" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.1/@states.0">
-                  <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.25"/>
+                  <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.25"/>
                 </outgoingTransitions>
               </states>
             </regions>
             <regions id="">
               <states id="_" isInitial="true">
                 <outgoingTransitions label="WATCH_START_ENHANCING" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.2/@states.1">
-                  <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.27"/>
+                  <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.27"/>
                 </outgoingTransitions>
               </states>
               <states id="Emit_State2" label="Emit State" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.2/@states.0/@outgoingTransitions.0 //@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.2/@states.1/@outgoingTransitions.0">
@@ -155,12 +155,12 @@
                   <states id="_2" isFinal="true" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.2/@states.1/@regions.0/@states.0/@outgoingTransitions.0"/>
                 </regions>
                 <outgoingTransitions label="WATCH_START_ENHANCING" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.2/@states.1">
-                  <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.27"/>
+                  <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.27"/>
                 </outgoingTransitions>
               </states>
             </regions>
             <outgoingTransitions label="STOPWATCH_MODE_COMMAND" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.0/@states.1">
-              <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.17"/>
+              <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.17"/>
             </outgoingTransitions>
           </states>
           <states id="Parallel_State2" label="Parallel State" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.0/@states.0/@outgoingTransitions.0">
@@ -173,7 +173,7 @@
                   <states id="_2" isFinal="true" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.0/@states.1/@regions.0/@states.0/@regions.0/@states.0/@outgoingTransitions.0"/>
                 </regions>
                 <outgoingTransitions label="WATCH_TIME" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.0/@states.1/@regions.0/@states.0">
-                  <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.25"/>
+                  <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.25"/>
                 </outgoingTransitions>
               </states>
             </regions>
@@ -191,19 +191,19 @@
                       <states id="_2" isFinal="true" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.0/@states.1/@regions.1/@states.0/@regions.0/@states.1/@regions.0/@states.0/@outgoingTransitions.0"/>
                     </regions>
                     <outgoingTransitions label="STOPWATCH_TIME" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.0/@states.1/@regions.1/@states.0/@regions.0/@states.1">
-                      <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.31"/>
+                      <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.31"/>
                     </outgoingTransitions>
                   </states>
                 </regions>
                 <outgoingTransitions label="ALARM_MODE_COMMAND" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.0/@states.1/@regions.1/@states.1">
-                  <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.18"/>
+                  <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.18"/>
                 </outgoingTransitions>
               </states>
               <states id="Parallel_State2" label="Parallel State" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.0/@states.1/@regions.1/@states.0/@outgoingTransitions.0">
                 <regions id="">
                   <states id="_" isInitial="true">
                     <outgoingTransitions label="ALARM_STOP_ENHANCING" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.0/@states.1/@regions.1/@states.1/@regions.0/@states.1">
-                      <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.40"/>
+                      <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.40"/>
                     </outgoingTransitions>
                   </states>
                   <states id="Emit_State2" label="Emit State" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.0/@states.1/@regions.1/@states.1/@regions.0/@states.0/@outgoingTransitions.0 //@states.0/@regions.0/@states.0/@regions.0/@states.1/@regions.1/@states.1/@regions.0/@states.1/@outgoingTransitions.0">
@@ -214,7 +214,7 @@
                       <states id="_2" isFinal="true" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.0/@states.1/@regions.1/@states.1/@regions.0/@states.1/@regions.0/@states.0/@outgoingTransitions.0"/>
                     </regions>
                     <outgoingTransitions label="ALARM_STOP_ENHANCING" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.0/@states.1/@regions.1/@states.1/@regions.0/@states.1">
-                      <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.40"/>
+                      <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.40"/>
                     </outgoingTransitions>
                   </states>
                 </regions>
@@ -230,14 +230,14 @@
                       <states id="_2" isFinal="true" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.0/@states.1/@regions.1/@states.1/@regions.1/@states.1/@regions.0/@states.0/@outgoingTransitions.0"/>
                     </regions>
                     <outgoingTransitions label="ALARM_TIME" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.0/@states.1/@regions.1/@states.1/@regions.1/@states.1">
-                      <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.38"/>
+                      <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.38"/>
                     </outgoingTransitions>
                   </states>
                 </regions>
                 <regions id="">
                   <states id="_" isInitial="true">
                     <outgoingTransitions label="ALARM_START_ENHANCING" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.0/@states.1/@regions.1/@states.1/@regions.2/@states.1">
-                      <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.39"/>
+                      <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.39"/>
                     </outgoingTransitions>
                   </states>
                   <states id="Emit_State2" label="Emit State" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.0/@states.1/@regions.1/@states.1/@regions.2/@states.0/@outgoingTransitions.0 //@states.0/@regions.0/@states.0/@regions.0/@states.1/@regions.1/@states.1/@regions.2/@states.1/@outgoingTransitions.0">
@@ -248,42 +248,42 @@
                       <states id="_2" isFinal="true" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.0/@states.1/@regions.1/@states.1/@regions.2/@states.1/@regions.0/@states.0/@outgoingTransitions.0"/>
                     </regions>
                     <outgoingTransitions label="ALARM_START_ENHANCING" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.0/@states.1/@regions.1/@states.1/@regions.2/@states.1">
-                      <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.39"/>
+                      <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.39"/>
                     </outgoingTransitions>
                   </states>
                 </regions>
                 <outgoingTransitions label="WATCH_MODE_COMMAND" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.0/@states.1/@regions.1/@states.2">
-                  <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.16"/>
+                  <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.16"/>
                 </outgoingTransitions>
               </states>
               <states id="_" isFinal="true" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.0/@states.1/@regions.1/@states.1/@outgoingTransitions.0"/>
             </regions>
             <outgoingTransitions label="WATCH_MODE_COMMAND" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.0/@states.0">
-              <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.16"/>
+              <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.16"/>
             </outgoingTransitions>
           </states>
         </regions>
         <regions id="">
           <states id="Localsignal_State2" label="Localsignal State" isInitial="true" isFinal="true">
-            <signals xsi:type="expressions:ISignal" name="START_BEEPING"/>
+            <signals xsi:type="kexpressions:ISignal" name="START_BEEPING"/>
             <regions id="">
               <states id="Parallel_State2" label="Parallel State" isInitial="true" isFinal="true">
                 <regions id="">
                   <states id="Localvariable_State2" label="Localvariable State" isInitial="true" isFinal="true">
-                    <variables xsi:type="expressions:IVariable" name="ALARM_TIME">
-                      <expression xsi:type="expressions:ValuedObjectReference">
+                    <variables xsi:type="kexpressions:IVariable" name="ALARM_TIME">
+                      <expression xsi:type="kexpressions:ValuedObjectReference">
                         <valuedObject href="ww_expanded.strl#//@modules.0/@interface/@intConstantDecls.3/@constants.0/@constants.0/@constant"/>
                       </expression>
                     </variables>
-                    <variables xsi:type="expressions:IVariable" name="ALARM_STATUS">
-                      <expression xsi:type="expressions:BooleanValue" value="false"/>
+                    <variables xsi:type="kexpressions:IVariable" name="ALARM_STATUS">
+                      <expression xsi:type="kexpressions:BooleanValue" value="false"/>
                     </variables>
                     <regions id="">
                       <states id="_" isInitial="true">
                         <outgoingTransitions label="#  / ALARM_TIME(ALARM_TIME), ALARM_STATUS(ALARM_STATUS)" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.1/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.2"/>
                       </states>
                       <states id="Localvariable_State2" label="Localvariable State" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.1/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.2/@outgoingTransitions.0">
-                        <variables xsi:type="expressions:IVariable" name="ALARM_TIME_POSITION"/>
+                        <variables xsi:type="kexpressions:IVariable" name="ALARM_TIME_POSITION"/>
                         <regions id="">
                           <states id="Sequence_State2" label="Sequence State" isInitial="true">
                             <regions id="">
@@ -294,9 +294,9 @@
                                 <outgoingTransitions label="SET_ALARM_COMMAND / ALARM_TIME(ALARM_TIME)" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.1/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.1/@regions.0/@states.0/@regions.0/@states.1"/>
                                 <outgoingTransitions label="NEXT_ALARM_TIME_POSITION_COMMAND / ALARM_STOP_ENHANCING(ALARM_TIME_POSITION)" priority="2" targetState="//@states.0/@regions.0/@states.0/@regions.1/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.1/@regions.0/@states.0/@regions.0/@states.2">
                                   <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.40">
-                                    <newValue xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.0/@regions.1/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.1/@variables.0"/>
+                                    <newValue xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.0/@regions.1/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.1/@variables.0"/>
                                   </effects>
-                                  <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.34"/>
+                                  <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.34"/>
                                 </outgoingTransitions>
                               </states>
                               <states id="_" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.1/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.1/@regions.0/@states.0/@regions.0/@states.1/@outgoingTransitions.1">
@@ -305,9 +305,9 @@
                             </regions>
                             <outgoingTransitions label="EXIT_SET_ALARM_MODE_COMMAND / ALARM_STOP_ENHANCING(ALARM_TIME_POSITION)" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.1/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.1/@regions.0/@states.1">
                               <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.40">
-                                <newValue xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.0/@regions.1/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.1/@variables.0"/>
+                                <newValue xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.0/@regions.1/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.1/@variables.0"/>
                               </effects>
-                              <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.35"/>
+                              <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.35"/>
                             </outgoingTransitions>
                           </states>
                           <states id="_" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.1/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.1/@regions.0/@states.0/@outgoingTransitions.0">
@@ -322,10 +322,10 @@
                           <states id="_" isInitial="true" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.1/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@outgoingTransitions.0 //@states.0/@regions.0/@states.0/@regions.1/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@outgoingTransitions.0 //@states.0/@regions.0/@states.0/@regions.1/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.2/@outgoingTransitions.0 //@states.0/@regions.0/@states.0/@regions.1/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.2/@outgoingTransitions.1">
                             <outgoingTransitions label="TOGGLE_24H_MODE_COMMAND / ALARM_TIME(ALARM_TIME)" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.1/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0"/>
                             <outgoingTransitions label="TOGGLE_ALARM_COMMAND" priority="2" targetState="//@states.0/@regions.0/@states.0/@regions.1/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1">
-                              <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.32"/>
+                              <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.32"/>
                             </outgoingTransitions>
                             <outgoingTransitions label="WATCH_TIME" priority="3" targetState="//@states.0/@regions.0/@states.0/@regions.1/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.2">
-                              <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.25"/>
+                              <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.25"/>
                             </outgoingTransitions>
                           </states>
                           <states id="_" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.1/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@outgoingTransitions.1">
@@ -333,13 +333,13 @@
                           </states>
                           <states id="_" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.1/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@outgoingTransitions.2">
                             <outgoingTransitions label="WATCH_BEING_SET" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.1/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0">
-                              <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.26"/>
+                              <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.26"/>
                             </outgoingTransitions>
                             <outgoingTransitions priority="2" targetState="//@states.0/@regions.0/@states.0/@regions.1/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0"/>
                           </states>
                         </regions>
                         <outgoingTransitions label="ENTER_SET_ALARM_MODE_COMMAND" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.1/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.1">
-                          <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.33"/>
+                          <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.33"/>
                         </outgoingTransitions>
                       </states>
                     </regions>
@@ -348,7 +348,7 @@
                 <regions id="">
                   <states id="_" isInitial="true">
                     <outgoingTransitions label="START_BEEPING" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.1/@states.0/@regions.0/@states.0/@regions.1/@states.1">
-                      <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.0/@regions.1/@states.0/@signals.0"/>
+                      <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.0/@regions.1/@states.0/@signals.0"/>
                     </outgoingTransitions>
                   </states>
                   <states id="Dowatching_State2" label="Dowatching State" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.1/@states.0/@regions.0/@states.0/@regions.1/@states.0/@outgoingTransitions.0 //@states.0/@regions.0/@states.0/@regions.1/@states.0/@regions.0/@states.0/@regions.1/@states.1/@outgoingTransitions.0">
@@ -367,25 +367,25 @@
                                   <states id="_2" isFinal="true" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.1/@states.0/@regions.0/@states.0/@regions.1/@states.1/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.0/@outgoingTransitions.0"/>
                                 </regions>
                                 <outgoingTransitions label="S" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.1/@states.0/@regions.0/@states.0/@regions.1/@states.1/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.0">
-                                  <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.5"/>
+                                  <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.5"/>
                                 </outgoingTransitions>
                               </states>
                             </regions>
                             <outgoingTransitions label="STOP_ALARM_BEEP_COMMAND" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.1/@states.0/@regions.0/@states.0/@regions.1/@states.1/@regions.0/@states.0/@regions.0/@states.1">
-                              <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.37"/>
+                              <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.37"/>
                             </outgoingTransitions>
                           </states>
                           <states id="_" isFinal="true" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.1/@states.0/@regions.0/@states.0/@regions.1/@states.1/@regions.0/@states.0/@regions.0/@states.0/@outgoingTransitions.0"/>
                         </regions>
                         <outgoingTransitions label="S" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.1/@states.0/@regions.0/@states.0/@regions.1/@states.1/@regions.0/@states.1">
-                          <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.5"/>
+                          <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.5"/>
                         </outgoingTransitions>
                         <outgoingTransitions priority="2" type="NORMALTERMINATION" targetState="//@states.0/@regions.0/@states.0/@regions.1/@states.0/@regions.0/@states.0/@regions.1/@states.1/@regions.0/@states.1"/>
                       </states>
                       <states id="_2" isFinal="true" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.1/@states.0/@regions.0/@states.0/@regions.1/@states.1/@regions.0/@states.0/@outgoingTransitions.0 //@states.0/@regions.0/@states.0/@regions.1/@states.0/@regions.0/@states.0/@regions.1/@states.1/@regions.0/@states.0/@outgoingTransitions.1"/>
                     </regions>
                     <outgoingTransitions label="START_BEEPING" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.1/@states.0/@regions.0/@states.0/@regions.1/@states.1">
-                      <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.0/@regions.1/@states.0/@signals.0"/>
+                      <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.0/@regions.1/@states.0/@signals.0"/>
                     </outgoingTransitions>
                   </states>
                 </regions>
@@ -395,10 +395,10 @@
         </regions>
         <regions id="">
           <states id="Localsignal_State2" label="Localsignal State" isInitial="true" isFinal="true">
-            <signals xsi:type="expressions:ISignal" name="RESET_STOPWATCH_COMMAND"/>
-            <signals xsi:type="expressions:ISignal" name="BASIC_STOPWATCH_TIME">
-              <channelDescr xsi:type="esterel:ChannelDescription">
-                <type typeID="STOPWATCH_TIME_TYPE"/>
+            <signals xsi:type="kexpressions:ISignal" name="RESET_STOPWATCH_COMMAND"/>
+            <signals xsi:type="kexpressions:ISignal" name="BASIC_STOPWATCH_TIME">
+              <channelDescr xsi:type="Esterel:ChannelDescription"> 
+                <type typeID="STOPWATCH_TIME_TYPE"/> 
               </channelDescr>
             </signals>
             <regions id="">
@@ -407,8 +407,8 @@
                   <states id="Parallel_State2" label="Parallel State" isInitial="true" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.2/@states.0/@regions.0/@states.0/@regions.0/@states.0/@outgoingTransitions.0">
                     <regions id="">
                       <states id="Localvariable_State2" label="Localvariable State" isInitial="true" isFinal="true">
-                        <variables xsi:type="expressions:IVariable" name="STOPWATCH_TIME">
-                          <expression xsi:type="expressions:ValuedObjectReference">
+                        <variables xsi:type="kexpressions:IVariable" name="STOPWATCH_TIME">
+                          <expression xsi:type="kexpressions:ValuedObjectReference">
                             <valuedObject href="ww_expanded.strl#//@modules.0/@interface/@intConstantDecls.2/@constants.0/@constants.0/@constant"/>
                           </expression>
                         </variables>
@@ -416,27 +416,27 @@
                           <states id="_" isInitial="true" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.2/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.2/@outgoingTransitions.0">
                             <outgoingTransitions isImmediate="true" label="#  / STOPWATCH_RUN_STATUS(false), BASIC_STOPWATCH_TIME(STOPWATCH_TIME)" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.2/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.1">
                               <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.12">
-                                <newValue xsi:type="expressions:BooleanValue" value="false"/>
+                                <newValue xsi:type="kexpressions:BooleanValue" value="false"/>
                               </effects>
                               <effects xsi:type="synccharts:Emission" signal="//@states.0/@regions.0/@states.0/@regions.2/@states.0/@signals.1">
-                                <newValue xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.0/@regions.2/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.0/@variables.0"/>
+                                <newValue xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.0/@regions.2/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.0/@variables.0"/>
                               </effects>
                             </outgoingTransitions>
                           </states>
                           <states id="_" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.2/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.0/@outgoingTransitions.0">
                             <outgoingTransitions label="START_STOP_COMMAND / STOPWATCH_RUN_STATUS(true), BEEP" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.2/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.2">
                               <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.12">
-                                <newValue xsi:type="expressions:BooleanValue" value="true"/>
+                                <newValue xsi:type="kexpressions:BooleanValue" value="true"/>
                               </effects>
                               <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.15"/>
-                              <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.29"/>
+                              <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.29"/>
                             </outgoingTransitions>
                           </states>
                           <states id="Every_State2" label="Every State" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.2/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.1/@outgoingTransitions.0">
                             <regions id="">
                               <states id="_" isInitial="true">
                                 <outgoingTransitions label="HS" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.2/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1">
-                                  <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.4"/>
+                                  <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.4"/>
                                 </outgoingTransitions>
                               </states>
                               <states id="Sequence_State2" label="Sequence State" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.2/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@outgoingTransitions.0 //@states.0/@regions.0/@states.0/@regions.2/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@outgoingTransitions.0">
@@ -444,7 +444,7 @@
                                   <states id="_" isInitial="true">
                                     <outgoingTransitions isImmediate="true" label="#  / BASIC_STOPWATCH_TIME(STOPWATCH_TIME), BEEP" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.2/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.1">
                                       <effects xsi:type="synccharts:Emission" signal="//@states.0/@regions.0/@states.0/@regions.2/@states.0/@signals.1">
-                                        <newValue xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.0/@regions.2/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.0/@variables.0"/>
+                                        <newValue xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.0/@regions.2/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.0/@variables.0"/>
                                       </effects>
                                       <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.15"/>
                                     </outgoingTransitions>
@@ -452,13 +452,13 @@
                                   <states id="_2" isFinal="true" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.2/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.0/@outgoingTransitions.0"/>
                                 </regions>
                                 <outgoingTransitions label="HS" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.2/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1">
-                                  <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.4"/>
+                                  <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.4"/>
                                 </outgoingTransitions>
                               </states>
                             </regions>
                             <outgoingTransitions label="START_STOP_COMMAND / BEEP" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.2/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.0">
                               <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.15"/>
-                              <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.29"/>
+                              <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.29"/>
                             </outgoingTransitions>
                           </states>
                         </regions>
@@ -468,7 +468,7 @@
                       <states id="_" isInitial="true" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.2/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.1/@states.2/@outgoingTransitions.0">
                         <outgoingTransitions isImmediate="true" label="#  / STOPWATCH_LAP_STATUS(false)" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.2/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.1/@states.1">
                           <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.13">
-                            <newValue xsi:type="expressions:BooleanValue" value="false"/>
+                            <newValue xsi:type="kexpressions:BooleanValue" value="false"/>
                           </effects>
                         </outgoingTransitions>
                       </states>
@@ -479,8 +479,8 @@
                               <states id="_" isInitial="true">
                                 <outgoingTransitions isImmediate="true" label="#  / STOPWATCH_TIME(?BASIC_STOPWATCH_TIME)" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.2/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.1/@states.1/@regions.0/@states.0/@regions.0/@states.1">
                                   <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.31">
-                                    <newValue xsi:type="expressions:OperatorExpression" operator="?">
-                                      <subExpressions xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.0/@regions.2/@states.0/@signals.1"/>
+                                    <newValue xsi:type="kexpressions:OperatorExpression" operator="?">
+                                      <subExpressions xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.0/@regions.2/@states.0/@signals.1"/>
                                     </newValue>
                                   </effects>
                                 </outgoingTransitions>
@@ -488,25 +488,25 @@
                               <states id="_2" isFinal="true" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.2/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.1/@states.1/@regions.0/@states.0/@regions.0/@states.0/@outgoingTransitions.0"/>
                             </regions>
                             <outgoingTransitions label="BASIC_STOPWATCH_TIME" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.2/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.1/@states.1/@regions.0/@states.0">
-                              <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.0/@regions.2/@states.0/@signals.1"/>
+                              <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.0/@regions.2/@states.0/@signals.1"/>
                             </outgoingTransitions>
                           </states>
                         </regions>
                         <outgoingTransitions label="LAP_COMMAND / STOPWATCH_LAP_STATUS(true)" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.2/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.1/@states.2">
                           <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.13">
-                            <newValue xsi:type="expressions:BooleanValue" value="true"/>
+                            <newValue xsi:type="kexpressions:BooleanValue" value="true"/>
                           </effects>
-                          <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.30"/>
+                          <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.30"/>
                         </outgoingTransitions>
                       </states>
                       <states id="_" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.2/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.1/@states.1/@outgoingTransitions.0">
                         <outgoingTransitions label="LAP_COMMAND" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.2/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.1/@states.0">
-                          <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.30"/>
+                          <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.30"/>
                         </outgoingTransitions>
                       </states>
                     </regions>
                     <outgoingTransitions label="RESET_STOPWATCH_COMMAND" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.2/@states.0/@regions.0/@states.0/@regions.0/@states.0">
-                      <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.0/@regions.2/@states.0/@signals.0"/>
+                      <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.0/@regions.2/@states.0/@signals.0"/>
                     </outgoingTransitions>
                   </states>
                 </regions>
@@ -515,7 +515,7 @@
                     <signals name="traphalt"/>
                     <regions id="">
                       <states id="Localsignal_State2" label="Localsignal State" isInitial="true">
-                        <signals xsi:type="expressions:ISignal" name="STOPWATCH_STOPPED"/>
+                        <signals xsi:type="kexpressions:ISignal" name="STOPWATCH_STOPPED"/>
                         <regions id="">
                           <states id="Parallel_State2" label="Parallel State" isInitial="true" isFinal="true">
                             <regions id="">
@@ -533,19 +533,19 @@
                                   </states>
                                 </regions>
                                 <outgoingTransitions label="START_STOP_COMMAND" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.2/@states.0/@regions.0/@states.0/@regions.1/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.1">
-                                  <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.29"/>
+                                  <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.29"/>
                                 </outgoingTransitions>
                               </states>
                               <states id="_" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.2/@states.0/@regions.0/@states.0/@regions.1/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.0/@outgoingTransitions.0">
                                 <outgoingTransitions label="START_STOP_COMMAND" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.2/@states.0/@regions.0/@states.0/@regions.1/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.0">
-                                  <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.29"/>
+                                  <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.29"/>
                                 </outgoingTransitions>
                               </states>
                             </regions>
                             <regions id="">
                               <states id="_" isInitial="true">
                                 <outgoingTransitions label="LAP_COMMAND" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.2/@states.0/@regions.0/@states.0/@regions.1/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.1/@states.1">
-                                  <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.30"/>
+                                  <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.30"/>
                                 </outgoingTransitions>
                               </states>
                               <states id="_" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.2/@states.0/@regions.0/@states.0/@regions.1/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.1/@states.0/@outgoingTransitions.0">
@@ -556,7 +556,7 @@
                           </states>
                         </regions>
                         <outgoingTransitions isImmediate="true" label="# traphalt" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.2/@states.0/@regions.0/@states.0/@regions.1/@states.0/@regions.0/@states.2">
-                          <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.0/@regions.2/@states.0/@regions.0/@states.0/@regions.1/@states.0/@signals.0"/>
+                          <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.0/@regions.2/@states.0/@regions.0/@states.0/@regions.1/@states.0/@signals.0"/>
                         </outgoingTransitions>
                         <outgoingTransitions label="# or RESET" priority="2" targetState="//@states.0/@regions.0/@states.0/@regions.2/@states.0/@regions.0/@states.0/@regions.1/@states.0/@regions.0/@states.1"/>
                         <outgoingTransitions priority="3" type="NORMALTERMINATION" targetState="//@states.0/@regions.0/@states.0/@regions.2/@states.0/@regions.0/@states.0/@regions.1/@states.0/@regions.0/@states.1"/>
@@ -575,20 +575,20 @@
         </regions>
         <regions id="">
           <states id="Localvariable_State2" label="Localvariable State" isInitial="true" isFinal="true">
-            <variables xsi:type="expressions:IVariable" name="WATCH_TIME">
-              <expression xsi:type="expressions:ValuedObjectReference">
+            <variables xsi:type="kexpressions:IVariable" name="WATCH_TIME">
+              <expression xsi:type="kexpressions:ValuedObjectReference">
                 <valuedObject href="ww_expanded.strl#//@modules.0/@interface/@intConstantDecls.0/@constants.0/@constants.0/@constant"/>
               </expression>
             </variables>
-            <variables xsi:type="expressions:IVariable" name="CHIME_STATUS">
-              <expression xsi:type="expressions:BooleanValue" value="false"/>
+            <variables xsi:type="kexpressions:IVariable" name="CHIME_STATUS">
+              <expression xsi:type="kexpressions:BooleanValue" value="false"/>
             </variables>
             <regions id="">
               <states id="_" isInitial="true">
                 <outgoingTransitions label="#  / WATCH_TIME(WATCH_TIME), CHIME_STATUS(CHIME_STATUS)" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.3/@states.0/@regions.0/@states.2"/>
               </states>
               <states id="Localvariable_State2" label="Localvariable State" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.3/@states.0/@regions.0/@states.2/@outgoingTransitions.0">
-                <variables xsi:type="expressions:IVariable" name="WATCH_TIME_POSITION"/>
+                <variables xsi:type="kexpressions:IVariable" name="WATCH_TIME_POSITION"/>
                 <regions id="">
                   <states id="Sequence_State2" label="Sequence State" isInitial="true">
                     <regions id="">
@@ -600,9 +600,9 @@
                         <outgoingTransitions label="SET_WATCH_COMMAND / WATCH_TIME(WATCH_TIME), WATCH_BEING_SET" priority="2" targetState="//@states.0/@regions.0/@states.0/@regions.3/@states.0/@regions.0/@states.1/@regions.0/@states.0/@regions.0/@states.1"/>
                         <outgoingTransitions label="NEXT_WATCH_TIME_POSITION_COMMAND / WATCH_STOP_ENHANCING(WATCH_TIME_POSITION)" priority="3" targetState="//@states.0/@regions.0/@states.0/@regions.3/@states.0/@regions.0/@states.1/@regions.0/@states.0/@regions.0/@states.2">
                           <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.28">
-                            <newValue xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.0/@regions.3/@states.0/@regions.0/@states.1/@variables.0"/>
+                            <newValue xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.0/@regions.3/@states.0/@regions.0/@states.1/@variables.0"/>
                           </effects>
-                          <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.23"/>
+                          <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.23"/>
                         </outgoingTransitions>
                       </states>
                       <states id="_" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.3/@states.0/@regions.0/@states.1/@regions.0/@states.0/@regions.0/@states.1/@outgoingTransitions.2">
@@ -611,9 +611,9 @@
                     </regions>
                     <outgoingTransitions label="EXIT_SET_WATCH_MODE_COMMAND / WATCH_STOP_ENHANCING(WATCH_TIME_POSITION)" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.3/@states.0/@regions.0/@states.1/@regions.0/@states.1">
                       <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.28">
-                        <newValue xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.0/@regions.3/@states.0/@regions.0/@states.1/@variables.0"/>
+                        <newValue xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.0/@regions.3/@states.0/@regions.0/@states.1/@variables.0"/>
                       </effects>
-                      <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.24"/>
+                      <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.24"/>
                     </outgoingTransitions>
                   </states>
                   <states id="_2" isFinal="true" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.3/@states.0/@regions.0/@states.1/@regions.0/@states.0/@outgoingTransitions.0"/>
@@ -626,7 +626,7 @@
                     <outgoingTransitions label="S / WATCH_TIME(WATCH_TIME), BEEP" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.3/@states.0/@regions.0/@states.2/@regions.0/@states.0"/>
                     <outgoingTransitions label="TOGGLE_24H_MODE_COMMAND / WATCH_TIME(WATCH_TIME)" priority="2" targetState="//@states.0/@regions.0/@states.0/@regions.3/@states.0/@regions.0/@states.2/@regions.0/@states.0"/>
                     <outgoingTransitions label="TOGGLE_CHIME_COMMAND" priority="3" targetState="//@states.0/@regions.0/@states.0/@regions.3/@states.0/@regions.0/@states.2/@regions.0/@states.1">
-                      <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.20"/>
+                      <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.20"/>
                     </outgoingTransitions>
                   </states>
                   <states id="_" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.3/@states.0/@regions.0/@states.2/@regions.0/@states.0/@outgoingTransitions.2">
@@ -634,7 +634,7 @@
                   </states>
                 </regions>
                 <outgoingTransitions label="ENTER_SET_WATCH_MODE_COMMAND" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.3/@states.0/@regions.0/@states.1">
-                  <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.21"/>
+                  <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.21"/>
                 </outgoingTransitions>
               </states>
             </regions>
@@ -656,7 +656,7 @@
                     <regions id="">
                       <states id="_" isInitial="true">
                         <outgoingTransitions label="LR" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.4/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.1/@states.1">
-                          <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.3"/>
+                          <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.3"/>
                         </outgoingTransitions>
                       </states>
                       <states id="Emit_State2" label="Emit State" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.4/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.1/@states.0/@outgoingTransitions.0 //@states.0/@regions.0/@states.0/@regions.4/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.1/@states.1/@outgoingTransitions.0">
@@ -669,20 +669,20 @@
                           <states id="_2" isFinal="true" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.4/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.1/@states.1/@regions.0/@states.0/@outgoingTransitions.0"/>
                         </regions>
                         <outgoingTransitions label="LR" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.4/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.1/@states.1">
-                          <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.3"/>
+                          <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.3"/>
                         </outgoingTransitions>
                       </states>
                     </regions>
                     <outgoingTransitions label="UL / ENTER_SET_WATCH_MODE_COMMAND" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.4/@states.0/@regions.0/@states.0/@regions.0/@states.1">
                       <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.21"/>
-                      <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.0"/>
+                      <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.0"/>
                     </outgoingTransitions>
                   </states>
                   <states id="Parallel_State2" label="Parallel State" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.4/@states.0/@regions.0/@states.0/@regions.0/@states.0/@outgoingTransitions.0">
                     <regions id="">
                       <states id="_" isInitial="true">
                         <outgoingTransitions label="LL" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.4/@states.0/@regions.0/@states.0/@regions.0/@states.1/@regions.0/@states.1">
-                          <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.2"/>
+                          <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.2"/>
                         </outgoingTransitions>
                       </states>
                       <states id="Emit_State2" label="Emit State" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.4/@states.0/@regions.0/@states.0/@regions.0/@states.1/@regions.0/@states.0/@outgoingTransitions.0 //@states.0/@regions.0/@states.0/@regions.4/@states.0/@regions.0/@states.0/@regions.0/@states.1/@regions.0/@states.1/@outgoingTransitions.0">
@@ -695,14 +695,14 @@
                           <states id="_2" isFinal="true" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.4/@states.0/@regions.0/@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.0/@states.0/@outgoingTransitions.0"/>
                         </regions>
                         <outgoingTransitions label="LL" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.4/@states.0/@regions.0/@states.0/@regions.0/@states.1/@regions.0/@states.1">
-                          <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.2"/>
+                          <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.2"/>
                         </outgoingTransitions>
                       </states>
                     </regions>
                     <regions id="">
                       <states id="_" isInitial="true">
                         <outgoingTransitions label="LR" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.4/@states.0/@regions.0/@states.0/@regions.0/@states.1/@regions.1/@states.1">
-                          <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.3"/>
+                          <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.3"/>
                         </outgoingTransitions>
                       </states>
                       <states id="Emit_State2" label="Emit State" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.4/@states.0/@regions.0/@states.0/@regions.0/@states.1/@regions.1/@states.0/@outgoingTransitions.0 //@states.0/@regions.0/@states.0/@regions.4/@states.0/@regions.0/@states.0/@regions.0/@states.1/@regions.1/@states.1/@outgoingTransitions.0">
@@ -715,18 +715,18 @@
                           <states id="_2" isFinal="true" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.4/@states.0/@regions.0/@states.0/@regions.0/@states.1/@regions.1/@states.1/@regions.0/@states.0/@outgoingTransitions.0"/>
                         </regions>
                         <outgoingTransitions label="LR" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.4/@states.0/@regions.0/@states.0/@regions.0/@states.1/@regions.1/@states.1">
-                          <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.3"/>
+                          <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.3"/>
                         </outgoingTransitions>
                       </states>
                     </regions>
                     <outgoingTransitions label="UL / EXIT_SET_WATCH_MODE_COMMAND" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.4/@states.0/@regions.0/@states.0/@regions.0/@states.0">
                       <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.24"/>
-                      <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.0"/>
+                      <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.0"/>
                     </outgoingTransitions>
                   </states>
                 </regions>
                 <outgoingTransitions isImmediate="true" label="# traphalt" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.4/@states.0/@regions.0/@states.1">
-                  <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.0/@regions.4/@states.0/@signals.0"/>
+                  <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.0/@regions.4/@states.0/@signals.0"/>
                 </outgoingTransitions>
                 <outgoingTransitions label="# or WATCH_AND_SET_WATCH_MODE" priority="2" targetState="//@states.0/@regions.0/@states.0/@regions.4/@states.0/@regions.0/@states.2"/>
               </states>
@@ -751,7 +751,7 @@
                     <regions id="">
                       <states id="_" isInitial="true">
                         <outgoingTransitions label="UR" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.4/@states.1/@regions.0/@states.0/@regions.0/@states.1/@regions.0/@states.1">
-                          <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.1"/>
+                          <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.1"/>
                         </outgoingTransitions>
                       </states>
                       <states id="Emit_State2" label="Emit State" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.4/@states.1/@regions.0/@states.0/@regions.0/@states.1/@regions.0/@states.0/@outgoingTransitions.0 //@states.0/@regions.0/@states.0/@regions.4/@states.1/@regions.0/@states.0/@regions.0/@states.1/@regions.0/@states.1/@outgoingTransitions.0">
@@ -764,7 +764,7 @@
                           <states id="_2" isFinal="true" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.4/@states.1/@regions.0/@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.0/@states.0/@outgoingTransitions.0"/>
                         </regions>
                         <outgoingTransitions label="UR" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.4/@states.1/@regions.0/@states.0/@regions.0/@states.1/@regions.0/@states.1">
-                          <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.1"/>
+                          <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.1"/>
                         </outgoingTransitions>
                       </states>
                     </regions>
@@ -777,7 +777,7 @@
                     <regions id="">
                       <states id="_" isInitial="true">
                         <outgoingTransitions label="LR" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.4/@states.1/@regions.0/@states.0/@regions.0/@states.1/@regions.2/@states.1">
-                          <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.3"/>
+                          <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.3"/>
                         </outgoingTransitions>
                       </states>
                       <states id="Emit_State2" label="Emit State" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.4/@states.1/@regions.0/@states.0/@regions.0/@states.1/@regions.2/@states.0/@outgoingTransitions.0 //@states.0/@regions.0/@states.0/@regions.4/@states.1/@regions.0/@states.0/@regions.0/@states.1/@regions.2/@states.1/@outgoingTransitions.0">
@@ -790,20 +790,20 @@
                           <states id="_2" isFinal="true" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.4/@states.1/@regions.0/@states.0/@regions.0/@states.1/@regions.2/@states.1/@regions.0/@states.0/@outgoingTransitions.0"/>
                         </regions>
                         <outgoingTransitions label="LR" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.4/@states.1/@regions.0/@states.0/@regions.0/@states.1/@regions.2/@states.1">
-                          <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.3"/>
+                          <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.3"/>
                         </outgoingTransitions>
                       </states>
                     </regions>
                     <outgoingTransitions label="UL / ENTER_SET_ALARM_MODE_COMMAND" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.4/@states.1/@regions.0/@states.0/@regions.0/@states.2">
                       <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.33"/>
-                      <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.0"/>
+                      <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.0"/>
                     </outgoingTransitions>
                   </states>
                   <states id="Parallel_State2" label="Parallel State" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.4/@states.1/@regions.0/@states.0/@regions.0/@states.1/@outgoingTransitions.0">
                     <regions id="">
                       <states id="_" isInitial="true">
                         <outgoingTransitions label="LL" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.4/@states.1/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1">
-                          <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.2"/>
+                          <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.2"/>
                         </outgoingTransitions>
                       </states>
                       <states id="Emit_State2" label="Emit State" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.4/@states.1/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.0/@outgoingTransitions.0 //@states.0/@regions.0/@states.0/@regions.4/@states.1/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@outgoingTransitions.0">
@@ -816,14 +816,14 @@
                           <states id="_2" isFinal="true" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.4/@states.1/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1/@regions.0/@states.0/@outgoingTransitions.0"/>
                         </regions>
                         <outgoingTransitions label="LL" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.4/@states.1/@regions.0/@states.0/@regions.0/@states.2/@regions.0/@states.1">
-                          <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.2"/>
+                          <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.2"/>
                         </outgoingTransitions>
                       </states>
                     </regions>
                     <regions id="">
                       <states id="_" isInitial="true">
                         <outgoingTransitions label="LR" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.4/@states.1/@regions.0/@states.0/@regions.0/@states.2/@regions.1/@states.1">
-                          <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.3"/>
+                          <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.3"/>
                         </outgoingTransitions>
                       </states>
                       <states id="Emit_State2" label="Emit State" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.4/@states.1/@regions.0/@states.0/@regions.0/@states.2/@regions.1/@states.0/@outgoingTransitions.0 //@states.0/@regions.0/@states.0/@regions.4/@states.1/@regions.0/@states.0/@regions.0/@states.2/@regions.1/@states.1/@outgoingTransitions.0">
@@ -836,18 +836,18 @@
                           <states id="_2" isFinal="true" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.4/@states.1/@regions.0/@states.0/@regions.0/@states.2/@regions.1/@states.1/@regions.0/@states.0/@outgoingTransitions.0"/>
                         </regions>
                         <outgoingTransitions label="LR" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.4/@states.1/@regions.0/@states.0/@regions.0/@states.2/@regions.1/@states.1">
-                          <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.3"/>
+                          <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.3"/>
                         </outgoingTransitions>
                       </states>
                     </regions>
                     <outgoingTransitions label="UL / EXIT_SET_ALARM_MODE_COMMAND" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.4/@states.1/@regions.0/@states.0/@regions.0/@states.1">
                       <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.35"/>
-                      <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.0"/>
+                      <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.0"/>
                     </outgoingTransitions>
                   </states>
                 </regions>
                 <outgoingTransitions isImmediate="true" label="# traphalt" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.4/@states.1/@regions.0/@states.1">
-                  <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.0/@regions.4/@states.1/@signals.0"/>
+                  <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.0/@regions.4/@states.1/@signals.0"/>
                 </outgoingTransitions>
                 <outgoingTransitions label="# or ALARM_AND_SET_ALARM_MODE" priority="2" targetState="//@states.0/@regions.0/@states.0/@regions.4/@states.1/@regions.0/@states.2"/>
               </states>
@@ -865,7 +865,7 @@
             <regions id="">
               <states id="_" isInitial="true">
                 <outgoingTransitions label="LR" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.4/@states.3/@regions.0/@states.1">
-                  <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.3"/>
+                  <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.3"/>
                 </outgoingTransitions>
               </states>
               <states id="Emit_State2" label="Emit State" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.4/@states.3/@regions.0/@states.0/@outgoingTransitions.0 //@states.0/@regions.0/@states.0/@regions.4/@states.3/@regions.0/@states.1/@outgoingTransitions.0">
@@ -878,14 +878,14 @@
                   <states id="_2" isFinal="true" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.4/@states.3/@regions.0/@states.1/@regions.0/@states.0/@outgoingTransitions.0"/>
                 </regions>
                 <outgoingTransitions label="LR" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.4/@states.3/@regions.0/@states.1">
-                  <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.3"/>
+                  <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.3"/>
                 </outgoingTransitions>
               </states>
             </regions>
             <regions id="">
               <states id="_" isInitial="true">
                 <outgoingTransitions label="UR" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.4/@states.3/@regions.1/@states.1">
-                  <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.1"/>
+                  <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.1"/>
                 </outgoingTransitions>
               </states>
               <states id="Emit_State2" label="Emit State" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.4/@states.3/@regions.1/@states.0/@outgoingTransitions.0 //@states.0/@regions.0/@states.0/@regions.4/@states.3/@regions.1/@states.1/@outgoingTransitions.0">
@@ -898,19 +898,19 @@
                   <states id="_2" isFinal="true" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.4/@states.3/@regions.1/@states.1/@regions.0/@states.0/@outgoingTransitions.0"/>
                 </regions>
                 <outgoingTransitions label="UR" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.4/@states.3/@regions.1/@states.1">
-                  <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.1"/>
+                  <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.1"/>
                 </outgoingTransitions>
               </states>
             </regions>
             <outgoingTransitions label="LL" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.4/@states.1">
-              <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.2"/>
+              <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.2"/>
             </outgoingTransitions>
           </states>
         </regions>
         <regions id="">
           <states id="_" isInitial="true">
             <outgoingTransitions label="UR" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.5/@states.1">
-              <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.1"/>
+              <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.1"/>
             </outgoingTransitions>
           </states>
           <states id="Emit_State2" label="Emit State" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.5/@states.0/@outgoingTransitions.0 //@states.0/@regions.0/@states.0/@regions.5/@states.1/@outgoingTransitions.0">
@@ -923,7 +923,7 @@
               <states id="_2" isFinal="true" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.5/@states.1/@regions.0/@states.0/@outgoingTransitions.0"/>
             </regions>
             <outgoingTransitions label="UR" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.5/@states.1">
-              <trigger xsi:type="expressions:ValuedObjectReference" valuedObject="//@states.0/@signals.1"/>
+              <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.1"/>
             </outgoingTransitions>
           </states>
         </regions>
