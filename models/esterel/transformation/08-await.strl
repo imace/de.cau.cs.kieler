@@ -3,8 +3,22 @@ input A,B;
 output O;
 
 await
-	case [A and B] do emit O
-	case immediate B do nothing 
+	case[ A and B ] do 
+		emit O
+	case immediate B do 
+		nothing 
+end await
+
+||
+
+await immediate A do 
+	nothing 
+end await
+
+||
+
+await A do 
+	nothing 
 end await
 
 end module
