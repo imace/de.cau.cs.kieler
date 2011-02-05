@@ -4,5 +4,12 @@ present
 	case A do nothing
 	case B do nothing
 	case C do nothing
+	else nothing 
+end present 
+||
+present
+	A and B then nothing
+	else nothing
 end present
+
 end module
