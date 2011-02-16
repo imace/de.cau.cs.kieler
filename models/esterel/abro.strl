@@ -1,16 +1,16 @@
 module ABRO:
 input A,
-	B,
-	R;
-output O;
+B,
+R; output O;
 loop
 abort
-[
-  await A
-  ||
-  await B
-];
+	[
+		await A  
+		||  
+		await B
+	]; 
 	emit O;
-	halt
+	halt 
 when R 
-end loop.
+end loop 
+end module

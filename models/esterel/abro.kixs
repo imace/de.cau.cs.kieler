@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<synccharts:Region xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:synccharts="http://kieler.cs.cau.de/synccharts/0.2.4">
+  <states id="r0" label="Esterel State" type="TEXTUAL">
+    <bodyReference href="abro.strl#/"/>
+    <bodyText code="module ABRO:&#xD;&#xA;input A,&#xD;&#xA;B,&#xD;&#xA;R; output O;&#xD;&#xA;loop&#xD;&#xA;abort&#xD;&#xA;&#x9;[&#xD;&#xA;&#x9;&#x9;await A  &#xD;&#xA;&#x9;&#x9;||  &#xD;&#xA;&#x9;&#x9;await B&#xD;&#xA;&#x9;]; &#xD;&#xA;&#x9;emit O;&#xD;&#xA;&#x9;halt &#xD;&#xA;when R &#xD;&#xA;end loop &#xD;&#xA;end module"/>
+  </states>
+</synccharts:Region>

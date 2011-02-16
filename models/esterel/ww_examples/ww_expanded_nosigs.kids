@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:kexpressions="http://kieler.cs.cau.de/kexpressions/0.1.2" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:synccharts="http://kieler.cs.cau.de/synccharts/0.2.4" xmi:id="_Cf0mgDkFEeC6-eCM_bXRVg" type="Synccharts" measurementUnit="Pixel">
+  <children xmi:type="notation:Shape" xmi:id="_CmIC0DkFEeC6-eCM_bXRVg" type="2005" fontName="Segoe UI" lineColor="0">
+    <children xmi:type="notation:DecorationNode" xmi:id="_CmIC0jkFEeC6-eCM_bXRVg" type="5059"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_CmIC0zkFEeC6-eCM_bXRVg" type="5060"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_CmIC1DkFEeC6-eCM_bXRVg" type="7054"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_CmIC1TkFEeC6-eCM_bXRVg" type="7055"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_CmIC1jkFEeC6-eCM_bXRVg" type="7056"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_CmIC1zkFEeC6-eCM_bXRVg" type="7057"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_CmIC2DkFEeC6-eCM_bXRVg" type="7058"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_CmIC2TkFEeC6-eCM_bXRVg" type="7059">
+      <children xmi:type="notation:Shape" xmi:id="_CmP-oDkFEeC6-eCM_bXRVg" type="3039" fontName="Segoe UI" lineColor="0">
+        <children xmi:type="notation:DecorationNode" xmi:id="_CmP-ojkFEeC6-eCM_bXRVg" visible="false" type="5058"/>
+        <children xmi:type="notation:BasicCompartment" xmi:id="_CmP-ozkFEeC6-eCM_bXRVg" type="7060">
+          <children xmi:type="notation:Shape" xmi:id="_H9M1MDkFEeC6-eCM_bXRVg" type="3040" fontName="Segoe UI" lineColor="0">
+            <children xmi:type="notation:DecorationNode" xmi:id="_H9NcQDkFEeC6-eCM_bXRVg" type="5056"/>
+            <children xmi:type="notation:DecorationNode" xmi:id="_H9NcQTkFEeC6-eCM_bXRVg" type="5057"/>
+            <children xmi:type="notation:BasicCompartment" xmi:id="_H9NcQjkFEeC6-eCM_bXRVg" type="7061"/>
+            <children xmi:type="notation:BasicCompartment" xmi:id="_H9NcQzkFEeC6-eCM_bXRVg" type="7062"/>
+            <children xmi:type="notation:BasicCompartment" xmi:id="_H9NcRDkFEeC6-eCM_bXRVg" type="7063"/>
+            <children xmi:type="notation:BasicCompartment" xmi:id="_H9NcRTkFEeC6-eCM_bXRVg" type="7064"/>
+            <children xmi:type="notation:BasicCompartment" xmi:id="_H9NcRjkFEeC6-eCM_bXRVg" type="7065"/>
+            <children xmi:type="notation:BasicCompartment" xmi:id="_H9NcRzkFEeC6-eCM_bXRVg" type="7066">
+              <children xmi:type="notation:Shape" xmi:id="_H9OqYDkFEeC6-eCM_bXRVg" type="3046" fontName="Segoe UI" lineColor="0">
+                <children xmi:type="notation:DecorationNode" xmi:id="_H9OqYjkFEeC6-eCM_bXRVg" type="5061"/>
+                <element xmi:type="kexpressions:TextualCode" href="ww_expanded_nosigs.kixs#//@states.0/@regions.0/@states.0/@bodyText.0"/>
+                <layoutConstraint xmi:type="notation:Bounds" xmi:id="_H9OqYTkFEeC6-eCM_bXRVg" x="1" y="1"/>
+              </children>
+            </children>
+            <element xmi:type="synccharts:State" href="ww_expanded_nosigs.kixs#//@states.0/@regions.0/@states.0"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_H9M1MTkFEeC6-eCM_bXRVg" x="66" width="30" height="30"/>
+          </children>
+        </children>
+        <element xmi:type="synccharts:Region" href="ww_expanded_nosigs.kixs#//@states.0/@regions.0"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_CmP-oTkFEeC6-eCM_bXRVg" x="1" y="1" width="174" height="41"/>
+      </children>
+    </children>
+    <element xmi:type="synccharts:State" href="ww_expanded_nosigs.kixs#//@states.0"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_CmIC0TkFEeC6-eCM_bXRVg" x="1" width="188" height="104"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_Cf0mgTkFEeC6-eCM_bXRVg"/>
+  <element xmi:type="synccharts:Region" href="ww_expanded_nosigs.kixs#/"/>
+</notation:Diagram>
