@@ -283,8 +283,8 @@
   </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_UWIlkgLzEeCTrZsU8n6Qdg"/>
   <styles xmi:type="layoutoptions:LayoutOptionStyle" xmi:id="_lLCGIALzEeCTrZsU8n6Qdg">
-    <options xmi:type="layoutoptions:KOption" xmi:id="_lLDUQALzEeCTrZsU8n6Qdg" key="de.cau.cs.kieler.layout.options.layoutHint" value="de.cau.cs.kieler.klay.rail"/>
-    <options xmi:type="layoutoptions:KOption" xmi:id="_i8Q1cAb5EeCTO-OfnXXYbg" key="de.cau.cs.kieler.layout.options.minSpacing" value="60.0"/>
+    <options xmi:type="layoutoptions:KOption" xmi:id="_lLDUQALzEeCTrZsU8n6Qdg" key="de.cau.cs.kieler.algorithm" value="de.cau.cs.kieler.klay.rail"/>
+    <options xmi:type="layoutoptions:KOption" xmi:id="_i8Q1cAb5EeCTO-OfnXXYbg" key="de.cau.cs.kieler.spacing" value="60.0"/>
   </styles>
   <element xmi:type="keg:Node" href="simple_rail.keg#/"/>
   <edges xmi:type="notation:Edge" xmi:id="_gSu6cALzEeCTrZsU8n6Qdg" type="4003" source="_WtfegALzEeCTrZsU8n6Qdg" target="_YjWz8ALzEeCTrZsU8n6Qdg">

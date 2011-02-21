@@ -170,8 +170,8 @@
   </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_rX15gQiMEeCxNshrsq_18g"/>
   <styles xmi:type="layoutoptions:LayoutOptionStyle" xmi:id="_zYLNIAiMEeCxNshrsq_18g">
-    <options xmi:type="layoutoptions:KOption" xmi:id="_zYLNIQiMEeCxNshrsq_18g" key="de.cau.cs.kieler.layout.options.layoutHint" value="de.cau.cs.kieler.klay.rail"/>
-    <options xmi:type="layoutoptions:KOption" xmi:id="_z5NdoAiMEeCxNshrsq_18g" key="de.cau.cs.kieler.layout.options.minSpacing" value="60.0"/>
+    <options xmi:type="layoutoptions:KOption" xmi:id="_zYLNIQiMEeCxNshrsq_18g" key="de.cau.cs.kieler.algorithm" value="de.cau.cs.kieler.klay.rail"/>
+    <options xmi:type="layoutoptions:KOption" xmi:id="_z5NdoAiMEeCxNshrsq_18g" key="de.cau.cs.kieler.spacing" value="60.0"/>
   </styles>
   <element xmi:type="keg:Node" href="eckernfoerde.keg#/"/>
   <edges xmi:type="notation:Edge" xmi:id="_CTxpwAiNEeCxNshrsq_18g" type="4003" source="_xJRsoAiMEeCxNshrsq_18g" target="_3BQMoAiMEeCxNshrsq_18g">

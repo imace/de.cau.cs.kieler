@@ -259,8 +259,8 @@
   </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_WbNXQQh7EeCDncI2-SmxHw"/>
   <styles xmi:type="layoutoptions:LayoutOptionStyle" xmi:id="_X_0koAh7EeCDncI2-SmxHw">
-    <options xmi:type="layoutoptions:KOption" xmi:id="_X_6rQAh7EeCDncI2-SmxHw" key="de.cau.cs.kieler.layout.options.layoutHint" value="de.cau.cs.kieler.klay.rail"/>
-    <options xmi:type="layoutoptions:KOption" xmi:id="_wGEy8Ah7EeCDncI2-SmxHw" key="de.cau.cs.kieler.layout.options.minSpacing" value="60.0"/>
+    <options xmi:type="layoutoptions:KOption" xmi:id="_X_6rQAh7EeCDncI2-SmxHw" key="de.cau.cs.kieler.algorithm" value="de.cau.cs.kieler.klay.rail"/>
+    <options xmi:type="layoutoptions:KOption" xmi:id="_wGEy8Ah7EeCDncI2-SmxHw" key="de.cau.cs.kieler.spacing" value="60.0"/>
   </styles>
   <element xmi:type="keg:Node" href="problem1.keg#/"/>
   <edges xmi:type="notation:Edge" xmi:id="_Wci0AAh7EeCDncI2-SmxHw" type="4003" source="_Wbr4kAh7EeCDncI2-SmxHw" target="_Wbx_AAh7EeCDncI2-SmxHw">

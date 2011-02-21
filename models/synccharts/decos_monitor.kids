@@ -154,7 +154,7 @@
                   </children>
                 </children>
                 <styles xmi:type="layoutoptions:LayoutOptionStyle" xmi:id="_bll1YMS3Ed-0dKiwF4WUbg">
-                  <options xmi:type="layoutoptions:KOption" xmi:id="_bmDvcMS3Ed-0dKiwF4WUbg" key="de.cau.cs.kieler.layout.options.layoutDirection" value="DOWN"/>
+                  <options xmi:type="layoutoptions:KOption" xmi:id="_bmDvcMS3Ed-0dKiwF4WUbg" key="de.cau.cs.kieler.direction" value="DOWN"/>
                 </styles>
                 <element xmi:type="synccharts:Region" href="decos_monitor.kixs#//@states.0/@regions.0/@states.3/@regions.0"/>
                 <layoutConstraint xmi:type="notation:Bounds" xmi:id="_L_JE8cS3Ed-0dKiwF4WUbg" x="1" y="1" width="563" height="370"/>
@@ -392,7 +392,7 @@
                                   </children>
                                 </children>
                                 <styles xmi:type="layoutoptions:LayoutOptionStyle" xmi:id="_es8A0MS3Ed-0dKiwF4WUbg">
-                                  <options xmi:type="layoutoptions:KOption" xmi:id="_es8A0cS3Ed-0dKiwF4WUbg" key="de.cau.cs.kieler.layout.options.layoutDirection" value="DOWN"/>
+                                  <options xmi:type="layoutoptions:KOption" xmi:id="_es8A0cS3Ed-0dKiwF4WUbg" key="de.cau.cs.kieler.direction" value="DOWN"/>
                                 </styles>
                                 <element xmi:type="synccharts:Region" href="decos_monitor.kixs#//@states.0/@regions.1/@states.1/@regions.0/@states.0/@regions.0/@states.0/@regions.0"/>
                                 <layoutConstraint xmi:type="notation:Bounds" xmi:id="_MD1-wcS3Ed-0dKiwF4WUbg" x="1" y="1" width="887" height="452"/>
@@ -755,7 +755,7 @@
                                   </children>
                                 </children>
                                 <styles xmi:type="layoutoptions:LayoutOptionStyle" xmi:id="_gBeK0MS3Ed-0dKiwF4WUbg">
-                                  <options xmi:type="layoutoptions:KOption" xmi:id="_gBeK0cS3Ed-0dKiwF4WUbg" key="de.cau.cs.kieler.layout.options.layoutDirection" value="DOWN"/>
+                                  <options xmi:type="layoutoptions:KOption" xmi:id="_gBeK0cS3Ed-0dKiwF4WUbg" key="de.cau.cs.kieler.direction" value="DOWN"/>
                                 </styles>
                                 <element xmi:type="synccharts:Region" href="decos_monitor.kixs#//@states.0/@regions.1/@states.1/@regions.0/@states.0/@regions.0/@states.1/@regions.0"/>
                                 <layoutConstraint xmi:type="notation:Bounds" xmi:id="_MIIB0cS3Ed-0dKiwF4WUbg" x="1" y="1" width="1056" height="920"/>
@@ -786,7 +786,7 @@
                   </children>
                 </children>
                 <styles xmi:type="layoutoptions:LayoutOptionStyle" xmi:id="_jeVTQMS3Ed-0dKiwF4WUbg">
-                  <options xmi:type="layoutoptions:KOption" xmi:id="_jeVTQcS3Ed-0dKiwF4WUbg" key="de.cau.cs.kieler.layout.options.layoutDirection" value="DOWN"/>
+                  <options xmi:type="layoutoptions:KOption" xmi:id="_jeVTQcS3Ed-0dKiwF4WUbg" key="de.cau.cs.kieler.direction" value="DOWN"/>
                 </styles>
                 <element xmi:type="synccharts:Region" href="decos_monitor.kixs#//@states.0/@regions.1/@states.1/@regions.0"/>
                 <layoutConstraint xmi:type="notation:Bounds" xmi:id="_MDmHIcS3Ed-0dKiwF4WUbg" x="1" y="1" width="2094" height="1097"/>

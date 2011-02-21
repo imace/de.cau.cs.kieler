@@ -50,8 +50,8 @@
                   </children>
                 </children>
                 <styles xmi:type="layoutoptions:LayoutOptionStyle" xmi:id="_l-op0MTYEd-grJSA8qkMAQ">
-                  <options xmi:type="layoutoptions:KOption" xmi:id="_l-op0cTYEd-grJSA8qkMAQ" key="de.cau.cs.kieler.layout.options.layoutDirection" value="RIGHT"/>
-                  <options xmi:type="layoutoptions:KOption" xmi:id="_s6vWoMZUEd-Bjd1Qh0HM8A" key="de.cau.cs.kieler.layout.options.priority" value="2"/>
+                  <options xmi:type="layoutoptions:KOption" xmi:id="_l-op0cTYEd-grJSA8qkMAQ" key="de.cau.cs.kieler.direction" value="RIGHT"/>
+                  <options xmi:type="layoutoptions:KOption" xmi:id="_s6vWoMZUEd-Bjd1Qh0HM8A" key="de.cau.cs.kieler.priority" value="2"/>
                 </styles>
                 <element xmi:type="synccharts:Region" href="traffic_light_2.kixs#//@states.0/@regions.0/@states.0/@regions.0"/>
                 <layoutConstraint xmi:type="notation:Bounds" xmi:id="_dEYrocTYEd-grJSA8qkMAQ" x="1" y="178" width="214" height="58"/>
@@ -109,17 +109,17 @@
                   </children>
                 </children>
                 <styles xmi:type="layoutoptions:LayoutOptionStyle" xmi:id="_pgrZgMViEd-36IW2b4tI2g">
-                  <options xmi:type="layoutoptions:KOption" xmi:id="_pgsAkMViEd-36IW2b4tI2g" key="de.cau.cs.kieler.layout.options.layoutDirection" value="DOWN"/>
-                  <options xmi:type="layoutoptions:KOption" xmi:id="_sNLX8MZSEd-Bjd1Qh0HM8A" key="de.cau.cs.kieler.layout.options.layoutHint" value="de.cau.cs.kieler.kiml.graphviz.circo"/>
-                  <options xmi:type="layoutoptions:KOption" xmi:id="_vZp7AMZSEd-Bjd1Qh0HM8A" key="de.cau.cs.kieler.layout.options.minSpacing" value="40.0"/>
-                  <options xmi:type="layoutoptions:KOption" xmi:id="_vxwnEMZUEd-Bjd1Qh0HM8A" key="de.cau.cs.kieler.layout.options.priority" value="3"/>
+                  <options xmi:type="layoutoptions:KOption" xmi:id="_pgsAkMViEd-36IW2b4tI2g" key="de.cau.cs.kieler.direction" value="DOWN"/>
+                  <options xmi:type="layoutoptions:KOption" xmi:id="_sNLX8MZSEd-Bjd1Qh0HM8A" key="de.cau.cs.kieler.algorithm" value="de.cau.cs.kieler.graphviz.circo"/>
+                  <options xmi:type="layoutoptions:KOption" xmi:id="_vZp7AMZSEd-Bjd1Qh0HM8A" key="de.cau.cs.kieler.spacing" value="40.0"/>
+                  <options xmi:type="layoutoptions:KOption" xmi:id="_vxwnEMZUEd-Bjd1Qh0HM8A" key="de.cau.cs.kieler.priority" value="3"/>
                 </styles>
                 <element xmi:type="synccharts:Region" href="traffic_light_2.kixs#//@states.0/@regions.0/@states.0/@regions.1"/>
                 <layoutConstraint xmi:type="notation:Bounds" xmi:id="_dEZSscTYEd-grJSA8qkMAQ" x="1" y="1" width="214" height="176"/>
               </children>
             </children>
             <styles xmi:type="layoutoptions:LayoutOptionStyle" xmi:id="_kFj0oMViEd-36IW2b4tI2g">
-              <options xmi:type="layoutoptions:KOption" xmi:id="_kFj0ocViEd-36IW2b4tI2g" key="de.cau.cs.kieler.layout.options.aspectRatio" value="1.0"/>
+              <options xmi:type="layoutoptions:KOption" xmi:id="_kFj0ocViEd-36IW2b4tI2g" key="de.cau.cs.kieler.aspectRatio" value="1.0"/>
             </styles>
             <element xmi:type="synccharts:State" href="traffic_light_2.kixs#//@states.0/@regions.0/@states.0"/>
             <layoutConstraint xmi:type="notation:Bounds" xmi:id="_dERW4cTYEd-grJSA8qkMAQ" x="1" width="228" height="271"/>
@@ -150,7 +150,7 @@
                   </children>
                 </children>
                 <styles xmi:type="layoutoptions:LayoutOptionStyle" xmi:id="_5Pd3oMZUEd-Bjd1Qh0HM8A">
-                  <options xmi:type="layoutoptions:KOption" xmi:id="_5Pd3ocZUEd-Bjd1Qh0HM8A" key="de.cau.cs.kieler.layout.options.priority" value="2"/>
+                  <options xmi:type="layoutoptions:KOption" xmi:id="_5Pd3ocZUEd-Bjd1Qh0HM8A" key="de.cau.cs.kieler.priority" value="2"/>
                 </styles>
                 <element xmi:type="synccharts:Region" href="traffic_light_2.kixs#//@states.0/@regions.0/@states.1/@regions.0"/>
                 <layoutConstraint xmi:type="notation:Bounds" xmi:id="_dH1BMcTYEd-grJSA8qkMAQ" x="1" y="125" width="96" height="41"/>
@@ -184,22 +184,22 @@
                   </children>
                 </children>
                 <styles xmi:type="layoutoptions:LayoutOptionStyle" xmi:id="_qLkJkMViEd-36IW2b4tI2g">
-                  <options xmi:type="layoutoptions:KOption" xmi:id="_qLkJkcViEd-36IW2b4tI2g" key="de.cau.cs.kieler.layout.options.layoutDirection" value="DOWN"/>
-                  <options xmi:type="layoutoptions:KOption" xmi:id="_5xKPcMZUEd-Bjd1Qh0HM8A" key="de.cau.cs.kieler.layout.options.priority" value="3"/>
+                  <options xmi:type="layoutoptions:KOption" xmi:id="_qLkJkcViEd-36IW2b4tI2g" key="de.cau.cs.kieler.direction" value="DOWN"/>
+                  <options xmi:type="layoutoptions:KOption" xmi:id="_5xKPcMZUEd-Bjd1Qh0HM8A" key="de.cau.cs.kieler.priority" value="3"/>
                 </styles>
                 <element xmi:type="synccharts:Region" href="traffic_light_2.kixs#//@states.0/@regions.0/@states.1/@regions.1"/>
                 <layoutConstraint xmi:type="notation:Bounds" xmi:id="_dH1oQ8TYEd-grJSA8qkMAQ" x="1" y="1" width="96" height="123"/>
               </children>
             </children>
             <styles xmi:type="layoutoptions:LayoutOptionStyle" xmi:id="_m-3kEMViEd-36IW2b4tI2g">
-              <options xmi:type="layoutoptions:KOption" xmi:id="_m-4LIMViEd-36IW2b4tI2g" key="de.cau.cs.kieler.layout.options.aspectRatio" value="1.0"/>
+              <options xmi:type="layoutoptions:KOption" xmi:id="_m-4LIMViEd-36IW2b4tI2g" key="de.cau.cs.kieler.aspectRatio" value="1.0"/>
             </styles>
             <element xmi:type="synccharts:State" href="traffic_light_2.kixs#//@states.0/@regions.0/@states.1"/>
             <layoutConstraint xmi:type="notation:Bounds" xmi:id="_dER99cTYEd-grJSA8qkMAQ" x="308" y="35" width="110" height="202"/>
           </children>
         </children>
         <styles xmi:type="layoutoptions:LayoutOptionStyle" xmi:id="_4WqKAMTYEd-grJSA8qkMAQ">
-          <options xmi:type="layoutoptions:KOption" xmi:id="_4WqxEMTYEd-grJSA8qkMAQ" key="de.cau.cs.kieler.layout.options.layoutDirection" value="RIGHT"/>
+          <options xmi:type="layoutoptions:KOption" xmi:id="_4WqxEMTYEd-grJSA8qkMAQ" key="de.cau.cs.kieler.direction" value="RIGHT"/>
         </styles>
         <element xmi:type="synccharts:Region" href="traffic_light_2.kixs#//@states.0/@regions.0"/>
         <layoutConstraint xmi:type="notation:Bounds" xmi:id="_dEOTkcTYEd-grJSA8qkMAQ" x="1" y="1" width="430" height="283"/>
@@ -232,8 +232,8 @@
     </children>
     <styles xmi:type="notation:FontStyle" xmi:id="_dLQvscTYEd-grJSA8qkMAQ" fontName="Lucida Grande" fontHeight="11"/>
     <styles xmi:type="layoutoptions:LayoutOptionStyle" xmi:id="_igCL0MVjEd-36IW2b4tI2g">
-      <options xmi:type="layoutoptions:KOption" xmi:id="_igCL0cVjEd-36IW2b4tI2g" key="de.cau.cs.kieler.layout.options.labelSpacing" value="0.2"/>
-      <options xmi:type="layoutoptions:KOption" xmi:id="_jCDTwMVjEd-36IW2b4tI2g" key="de.cau.cs.kieler.kiml.graphviz.options.labelDistance" value="1.0"/>
+      <options xmi:type="layoutoptions:KOption" xmi:id="_igCL0cVjEd-36IW2b4tI2g" key="de.cau.cs.kieler.labelSpacing" value="0.2"/>
+      <options xmi:type="layoutoptions:KOption" xmi:id="_jCDTwMVjEd-36IW2b4tI2g" key="de.cau.cs.kieler.graphviz.labelDistance" value="1.0"/>
     </styles>
     <element xmi:type="synccharts:Transition" href="traffic_light_2.kixs#//@states.0/@regions.0/@states.0/@regions.1/@states.1/@outgoingTransitions.0"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_dLQvssTYEd-grJSA8qkMAQ" points="[0, 0, -35, 36]$[10, -11, -25, 25]$[25, -25, -10, 11]$[35, -36, 0, 0]"/>
@@ -249,8 +249,8 @@
     </children>
     <styles xmi:type="notation:FontStyle" xmi:id="_dLmG4cTYEd-grJSA8qkMAQ" fontName="Lucida Grande" fontHeight="11"/>
     <styles xmi:type="layoutoptions:LayoutOptionStyle" xmi:id="_igDZ8MVjEd-36IW2b4tI2g">
-      <options xmi:type="layoutoptions:KOption" xmi:id="_igDZ8cVjEd-36IW2b4tI2g" key="de.cau.cs.kieler.layout.options.labelSpacing" value="0.2"/>
-      <options xmi:type="layoutoptions:KOption" xmi:id="_jCD60MVjEd-36IW2b4tI2g" key="de.cau.cs.kieler.kiml.graphviz.options.labelDistance" value="1.0"/>
+      <options xmi:type="layoutoptions:KOption" xmi:id="_igDZ8cVjEd-36IW2b4tI2g" key="de.cau.cs.kieler.labelSpacing" value="0.2"/>
+      <options xmi:type="layoutoptions:KOption" xmi:id="_jCD60MVjEd-36IW2b4tI2g" key="de.cau.cs.kieler.graphviz.labelDistance" value="1.0"/>
     </styles>
     <element xmi:type="synccharts:Transition" href="traffic_light_2.kixs#//@states.0/@regions.0/@states.0/@regions.1/@states.2/@outgoingTransitions.0"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_dLmG4sTYEd-grJSA8qkMAQ" points="[0, 0, -36, -35]$[11, 10, -25, -25]$[25, 25, -11, -10]$[36, 35, 0, 0]"/>
@@ -305,8 +305,8 @@
     </children>
     <styles xmi:type="notation:FontStyle" xmi:id="_A4KRAcTZEd-grJSA8qkMAQ" fontName="Lucida Grande" fontHeight="11"/>
     <styles xmi:type="layoutoptions:LayoutOptionStyle" xmi:id="_igA9sMVjEd-36IW2b4tI2g">
-      <options xmi:type="layoutoptions:KOption" xmi:id="_igA9scVjEd-36IW2b4tI2g" key="de.cau.cs.kieler.layout.options.labelSpacing" value="0.2"/>
-      <options xmi:type="layoutoptions:KOption" xmi:id="_jCCFoMVjEd-36IW2b4tI2g" key="de.cau.cs.kieler.kiml.graphviz.options.labelDistance" value="0.2"/>
+      <options xmi:type="layoutoptions:KOption" xmi:id="_igA9scVjEd-36IW2b4tI2g" key="de.cau.cs.kieler.labelSpacing" value="0.2"/>
+      <options xmi:type="layoutoptions:KOption" xmi:id="_jCCFoMVjEd-36IW2b4tI2g" key="de.cau.cs.kieler.graphviz.labelDistance" value="0.2"/>
     </styles>
     <element xmi:type="synccharts:Transition" href="traffic_light_2.kixs#//@states.0/@regions.0/@states.0/@regions.1/@states.0/@outgoingTransitions.0"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_A4KRAsTZEd-grJSA8qkMAQ" points="[0, 0, 36, 36]$[-11, -11, 25, 25]$[-25, -25, 11, 11]$[-36, -36, 0, 0]"/>
@@ -322,8 +322,8 @@
     </children>
     <styles xmi:type="notation:FontStyle" xmi:id="_XV_I8cTZEd-grJSA8qkMAQ" fontName="Lucida Grande" fontHeight="11"/>
     <styles xmi:type="layoutoptions:LayoutOptionStyle" xmi:id="_if_vkMVjEd-36IW2b4tI2g">
-      <options xmi:type="layoutoptions:KOption" xmi:id="_if_vkcVjEd-36IW2b4tI2g" key="de.cau.cs.kieler.layout.options.labelSpacing" value="0.2"/>
-      <options xmi:type="layoutoptions:KOption" xmi:id="_jCBekMVjEd-36IW2b4tI2g" key="de.cau.cs.kieler.kiml.graphviz.options.labelDistance" value="1.0"/>
+      <options xmi:type="layoutoptions:KOption" xmi:id="_if_vkcVjEd-36IW2b4tI2g" key="de.cau.cs.kieler.labelSpacing" value="0.2"/>
+      <options xmi:type="layoutoptions:KOption" xmi:id="_jCBekMVjEd-36IW2b4tI2g" key="de.cau.cs.kieler.graphviz.labelDistance" value="1.0"/>
     </styles>
     <element xmi:type="synccharts:Transition" href="traffic_light_2.kixs#//@states.0/@regions.0/@states.0/@regions.1/@states.3/@outgoingTransitions.0"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_XV_I8sTZEd-grJSA8qkMAQ" points="[0, 0, 36, -35]$[-11, 10, 25, -25]$[-25, 25, 11, -10]$[-36, 35, 0, 0]"/>

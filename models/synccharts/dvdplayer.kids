@@ -177,7 +177,7 @@
                           </children>
                         </children>
                         <styles xmi:type="layoutoptions:LayoutOptionStyle" xmi:id="_-1dwUMVjEd-36IW2b4tI2g">
-                          <options xmi:type="layoutoptions:KOption" xmi:id="_-1dwUcVjEd-36IW2b4tI2g" key="de.cau.cs.kieler.layout.options.layoutHint" value="de.cau.cs.kieler.kiml.graphviz.circo"/>
+                          <options xmi:type="layoutoptions:KOption" xmi:id="_-1dwUcVjEd-36IW2b4tI2g" key="de.cau.cs.kieler.algorithm" value="de.cau.cs.kieler.graphviz.circo"/>
                         </styles>
                         <element xmi:type="synccharts:Region" href="dvdplayer.kixs#//@states.0/@regions.0/@states.1/@regions.0/@states.1/@regions.1"/>
                         <layoutConstraint xmi:type="notation:Bounds" xmi:id="_1URG48VjEd-36IW2b4tI2g" x="1" y="60" width="330" height="189"/>
@@ -188,7 +188,7 @@
                   </children>
                 </children>
                 <styles xmi:type="layoutoptions:LayoutOptionStyle" xmi:id="_rbNhoMVkEd-36IW2b4tI2g">
-                  <options xmi:type="layoutoptions:KOption" xmi:id="_rbOIsMVkEd-36IW2b4tI2g" key="de.cau.cs.kieler.layout.options.layoutDirection" value="DOWN"/>
+                  <options xmi:type="layoutoptions:KOption" xmi:id="_rbOIsMVkEd-36IW2b4tI2g" key="de.cau.cs.kieler.direction" value="DOWN"/>
                 </styles>
                 <element xmi:type="synccharts:Region" href="dvdplayer.kixs#//@states.0/@regions.0/@states.1/@regions.0"/>
                 <layoutConstraint xmi:type="notation:Bounds" xmi:id="_1T7IocVjEd-36IW2b4tI2g" x="1" y="1" width="356" height="380"/>

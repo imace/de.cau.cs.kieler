@@ -170,8 +170,8 @@
   </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_aDp14giBEeCIU8wsxDVZjw"/>
   <styles xmi:type="layoutoptions:LayoutOptionStyle" xmi:id="_fFA28AiBEeCIU8wsxDVZjw">
-    <options xmi:type="layoutoptions:KOption" xmi:id="_fFA28QiBEeCIU8wsxDVZjw" key="de.cau.cs.kieler.layout.options.layoutHint" value="de.cau.cs.kieler.klay.rail"/>
-    <options xmi:type="layoutoptions:KOption" xmi:id="_fc7AoAiBEeCIU8wsxDVZjw" key="de.cau.cs.kieler.layout.options.minSpacing" value="60.0"/>
+    <options xmi:type="layoutoptions:KOption" xmi:id="_fFA28QiBEeCIU8wsxDVZjw" key="de.cau.cs.kieler.algorithm" value="de.cau.cs.kieler.klay.rail"/>
+    <options xmi:type="layoutoptions:KOption" xmi:id="_fc7AoAiBEeCIU8wsxDVZjw" key="de.cau.cs.kieler.spacing" value="60.0"/>
   </styles>
   <element xmi:type="keg:Node" href="turned_and_normal.keg#/"/>
   <edges xmi:type="notation:Edge" xmi:id="_uPyYAAiBEeCIU8wsxDVZjw" type="4003" source="_gZhy0AiBEeCIU8wsxDVZjw" target="_irnxQAiBEeCIU8wsxDVZjw">

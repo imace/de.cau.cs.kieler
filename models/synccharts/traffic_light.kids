@@ -50,7 +50,7 @@
                   </children>
                 </children>
                 <styles xmi:type="layoutoptions:LayoutOptionStyle" xmi:id="_equZUMTCEd-FwtJ2HDVhEg">
-                  <options xmi:type="layoutoptions:KOption" xmi:id="_equZUcTCEd-FwtJ2HDVhEg" key="de.cau.cs.kieler.layout.options.layoutDirection" value="DOWN"/>
+                  <options xmi:type="layoutoptions:KOption" xmi:id="_equZUcTCEd-FwtJ2HDVhEg" key="de.cau.cs.kieler.direction" value="DOWN"/>
                 </styles>
                 <element xmi:type="synccharts:Region" href="traffic_light.kixs#//@states.0/@regions.0/@states.0/@regions.0"/>
                 <layoutConstraint xmi:type="notation:Bounds" xmi:id="_R3ae4cTCEd-FwtJ2HDVhEg" x="1" y="1" width="222" height="615"/>
@@ -156,14 +156,14 @@
                   </children>
                 </children>
                 <styles xmi:type="layoutoptions:LayoutOptionStyle" xmi:id="_cAJMsMViEd-36IW2b4tI2g">
-                  <options xmi:type="layoutoptions:KOption" xmi:id="_cAJMscViEd-36IW2b4tI2g" key="de.cau.cs.kieler.layout.options.layoutDirection" value="DOWN"/>
+                  <options xmi:type="layoutoptions:KOption" xmi:id="_cAJMscViEd-36IW2b4tI2g" key="de.cau.cs.kieler.direction" value="DOWN"/>
                 </styles>
                 <element xmi:type="synccharts:Region" href="traffic_light.kixs#//@states.0/@regions.0/@states.0/@regions.1"/>
                 <layoutConstraint xmi:type="notation:Bounds" xmi:id="_R3bF88TCEd-FwtJ2HDVhEg" x="224" y="1" width="330" height="615"/>
               </children>
             </children>
             <styles xmi:type="layoutoptions:LayoutOptionStyle" xmi:id="_cFAUQMTCEd-FwtJ2HDVhEg">
-              <options xmi:type="layoutoptions:KOption" xmi:id="_cFA7UMTCEd-FwtJ2HDVhEg" key="de.cau.cs.kieler.layout.options.aspectRatio" value="10.0"/>
+              <options xmi:type="layoutoptions:KOption" xmi:id="_cFA7UMTCEd-FwtJ2HDVhEg" key="de.cau.cs.kieler.aspectRatio" value="10.0"/>
             </styles>
             <element xmi:type="synccharts:State" href="traffic_light.kixs#//@states.0/@regions.0/@states.0"/>
             <layoutConstraint xmi:type="notation:Bounds" xmi:id="_R3TxMcTCEd-FwtJ2HDVhEg" width="567" height="651"/>
@@ -225,14 +225,14 @@
                   </children>
                 </children>
                 <styles xmi:type="layoutoptions:LayoutOptionStyle" xmi:id="_f1ftoMViEd-36IW2b4tI2g">
-                  <options xmi:type="layoutoptions:KOption" xmi:id="_f1ftocViEd-36IW2b4tI2g" key="de.cau.cs.kieler.layout.options.layoutDirection" value="DOWN"/>
+                  <options xmi:type="layoutoptions:KOption" xmi:id="_f1ftocViEd-36IW2b4tI2g" key="de.cau.cs.kieler.direction" value="DOWN"/>
                 </styles>
                 <element xmi:type="synccharts:Region" href="traffic_light.kixs#//@states.0/@regions.0/@states.1/@regions.1"/>
                 <layoutConstraint xmi:type="notation:Bounds" xmi:id="_R6oyA8TCEd-FwtJ2HDVhEg" x="67" y="1" width="164" height="123"/>
               </children>
             </children>
             <styles xmi:type="layoutoptions:LayoutOptionStyle" xmi:id="_eGWEMMViEd-36IW2b4tI2g">
-              <options xmi:type="layoutoptions:KOption" xmi:id="_eGWEMcViEd-36IW2b4tI2g" key="de.cau.cs.kieler.layout.options.aspectRatio" value="10.0"/>
+              <options xmi:type="layoutoptions:KOption" xmi:id="_eGWEMcViEd-36IW2b4tI2g" key="de.cau.cs.kieler.aspectRatio" value="10.0"/>
             </styles>
             <element xmi:type="synccharts:State" href="traffic_light.kixs#//@states.0/@regions.0/@states.1"/>
             <layoutConstraint xmi:type="notation:Bounds" xmi:id="_R3U_UsTCEd-FwtJ2HDVhEg" x="696" y="247" width="244" height="159"/>
