@@ -629,14 +629,14 @@
           <childPorts name="angle" incomingLinks="//@childEntities.0/@childEntities.2/@childEntities.1/@childLinks.0">
             <annotations name="input"/>
             <annotations xsi:type="ann:TypedStringAnnotation" name="_type" type="ptolemy.actor.TypeAttribute"/>
-            <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" type="ptolemy.kernel.util.StringAttribute"/>
+            <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="WEST" type="ptolemy.kernel.util.StringAttribute"/>
             <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
             <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
           </childPorts>
           <childPorts name="gain" outgoingLinks="//@childEntities.0/@childEntities.2/@childEntities.1/@childLinks.15">
             <annotations name="output"/>
             <annotations xsi:type="ann:TypedStringAnnotation" name="_type" type="ptolemy.actor.TypeAttribute"/>
-            <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" type="ptolemy.kernel.util.StringAttribute"/>
+            <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="EAST" type="ptolemy.kernel.util.StringAttribute"/>
             <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
             <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
           </childPorts>

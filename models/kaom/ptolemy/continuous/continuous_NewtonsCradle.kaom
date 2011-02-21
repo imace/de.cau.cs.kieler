@@ -390,7 +390,7 @@
             <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="[200.0, 245.0]" type="ptolemy.kernel.util.Location"/>
             <childPorts name="impulse">
               <annotations name="input"/>
-              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" type="ptolemy.kernel.util.StringAttribute"/>
+              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="SOUTH" type="ptolemy.kernel.util.StringAttribute"/>
               <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
             </childPorts>
             <childPorts name="derivative" incomingLinks="//@childEntities.0/@childEntities.0/@childEntities.1/@childEntities.0/@childLinks.10">
@@ -405,7 +405,7 @@
               <annotations name="input"/>
               <annotations xsi:type="ann:TypedStringAnnotation" name="tokenConsumptionRate" type="ptolemy.data.expr.Parameter"/>
               <annotations xsi:type="ann:TypedStringAnnotation" name="_notDraggable" type="ptolemy.data.expr.Parameter"/>
-              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" type="ptolemy.kernel.util.StringAttribute"/>
+              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="SOUTH" type="ptolemy.kernel.util.StringAttribute"/>
               <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
             </childPorts>
           </childEntities>
@@ -416,7 +416,7 @@
             <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="[75.0, 245.0]" type="ptolemy.kernel.util.Location"/>
             <childPorts name="impulse">
               <annotations name="input"/>
-              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" type="ptolemy.kernel.util.StringAttribute"/>
+              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="SOUTH" type="ptolemy.kernel.util.StringAttribute"/>
               <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
             </childPorts>
             <childPorts name="derivative" incomingLinks="//@childEntities.0/@childEntities.0/@childEntities.1/@childEntities.0/@childLinks.2">
@@ -431,7 +431,7 @@
               <annotations name="input"/>
               <annotations xsi:type="ann:TypedStringAnnotation" name="tokenConsumptionRate" type="ptolemy.data.expr.Parameter"/>
               <annotations xsi:type="ann:TypedStringAnnotation" name="_notDraggable" type="ptolemy.data.expr.Parameter"/>
-              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" type="ptolemy.kernel.util.StringAttribute"/>
+              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="SOUTH" type="ptolemy.kernel.util.StringAttribute"/>
               <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
             </childPorts>
           </childEntities>
@@ -945,7 +945,7 @@
             <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="[200.0, 245.0]" type="ptolemy.kernel.util.Location"/>
             <childPorts name="impulse">
               <annotations name="input"/>
-              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" type="ptolemy.kernel.util.StringAttribute"/>
+              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="SOUTH" type="ptolemy.kernel.util.StringAttribute"/>
               <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
             </childPorts>
             <childPorts name="derivative" incomingLinks="//@childEntities.0/@childEntities.1/@childEntities.1/@childEntities.0/@childLinks.10">
@@ -960,7 +960,7 @@
               <annotations name="input"/>
               <annotations xsi:type="ann:TypedStringAnnotation" name="tokenConsumptionRate" type="ptolemy.data.expr.Parameter"/>
               <annotations xsi:type="ann:TypedStringAnnotation" name="_notDraggable" type="ptolemy.data.expr.Parameter"/>
-              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" type="ptolemy.kernel.util.StringAttribute"/>
+              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="SOUTH" type="ptolemy.kernel.util.StringAttribute"/>
               <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
             </childPorts>
           </childEntities>
@@ -971,7 +971,7 @@
             <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="[75.0, 245.0]" type="ptolemy.kernel.util.Location"/>
             <childPorts name="impulse">
               <annotations name="input"/>
-              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" type="ptolemy.kernel.util.StringAttribute"/>
+              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="SOUTH" type="ptolemy.kernel.util.StringAttribute"/>
               <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
             </childPorts>
             <childPorts name="derivative" incomingLinks="//@childEntities.0/@childEntities.1/@childEntities.1/@childEntities.0/@childLinks.2">
@@ -986,7 +986,7 @@
               <annotations name="input"/>
               <annotations xsi:type="ann:TypedStringAnnotation" name="tokenConsumptionRate" type="ptolemy.data.expr.Parameter"/>
               <annotations xsi:type="ann:TypedStringAnnotation" name="_notDraggable" type="ptolemy.data.expr.Parameter"/>
-              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" type="ptolemy.kernel.util.StringAttribute"/>
+              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="SOUTH" type="ptolemy.kernel.util.StringAttribute"/>
               <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
             </childPorts>
           </childEntities>
@@ -1500,7 +1500,7 @@
             <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="[200.0, 245.0]" type="ptolemy.kernel.util.Location"/>
             <childPorts name="impulse">
               <annotations name="input"/>
-              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" type="ptolemy.kernel.util.StringAttribute"/>
+              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="SOUTH" type="ptolemy.kernel.util.StringAttribute"/>
               <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
             </childPorts>
             <childPorts name="derivative" incomingLinks="//@childEntities.0/@childEntities.2/@childEntities.1/@childEntities.0/@childLinks.10">
@@ -1515,7 +1515,7 @@
               <annotations name="input"/>
               <annotations xsi:type="ann:TypedStringAnnotation" name="tokenConsumptionRate" type="ptolemy.data.expr.Parameter"/>
               <annotations xsi:type="ann:TypedStringAnnotation" name="_notDraggable" type="ptolemy.data.expr.Parameter"/>
-              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" type="ptolemy.kernel.util.StringAttribute"/>
+              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="SOUTH" type="ptolemy.kernel.util.StringAttribute"/>
               <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
             </childPorts>
           </childEntities>
@@ -1526,7 +1526,7 @@
             <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="[75.0, 245.0]" type="ptolemy.kernel.util.Location"/>
             <childPorts name="impulse">
               <annotations name="input"/>
-              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" type="ptolemy.kernel.util.StringAttribute"/>
+              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="SOUTH" type="ptolemy.kernel.util.StringAttribute"/>
               <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
             </childPorts>
             <childPorts name="derivative" incomingLinks="//@childEntities.0/@childEntities.2/@childEntities.1/@childEntities.0/@childLinks.2">
@@ -1541,7 +1541,7 @@
               <annotations name="input"/>
               <annotations xsi:type="ann:TypedStringAnnotation" name="tokenConsumptionRate" type="ptolemy.data.expr.Parameter"/>
               <annotations xsi:type="ann:TypedStringAnnotation" name="_notDraggable" type="ptolemy.data.expr.Parameter"/>
-              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" type="ptolemy.kernel.util.StringAttribute"/>
+              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="SOUTH" type="ptolemy.kernel.util.StringAttribute"/>
               <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
             </childPorts>
           </childEntities>

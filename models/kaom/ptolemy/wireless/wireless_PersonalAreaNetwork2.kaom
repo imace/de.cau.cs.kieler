@@ -179,7 +179,7 @@
         <childPorts name="control" incomingLinks="//@childEntities.0/@childEntities.0/@childLinks.14">
           <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
           <annotations name="input"/>
-          <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" type="ptolemy.kernel.util.StringAttribute"/>
+          <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="SOUTH" type="ptolemy.kernel.util.StringAttribute"/>
           <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         </childPorts>
         <childPorts name="trueOutput" outgoingLinks="//@childEntities.0/@childEntities.0/@childLinks.8">
@@ -818,7 +818,7 @@
         <childPorts name="control" incomingLinks="//@childEntities.0/@childEntities.3/@childLinks.15">
           <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
           <annotations name="input"/>
-          <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" type="ptolemy.kernel.util.StringAttribute"/>
+          <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="SOUTH" type="ptolemy.kernel.util.StringAttribute"/>
           <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         </childPorts>
         <childPorts name="trueOutput" outgoingLinks="//@childEntities.0/@childEntities.3/@childLinks.9">
@@ -1160,7 +1160,7 @@
         <childPorts name="control" incomingLinks="//@childEntities.0/@childEntities.4/@childLinks.14">
           <annotations xsi:type="ann:TypedStringAnnotation" name="input"/>
           <annotations name="input"/>
-          <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" type="ptolemy.kernel.util.StringAttribute"/>
+          <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="SOUTH" type="ptolemy.kernel.util.StringAttribute"/>
           <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         </childPorts>
         <childPorts name="trueOutput" outgoingLinks="//@childEntities.0/@childEntities.4/@childLinks.8">

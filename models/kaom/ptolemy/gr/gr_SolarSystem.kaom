@@ -145,7 +145,7 @@
         </childPorts>
         <childPorts name="output">
           <annotations name="output"/>
-          <annotations xsi:type="ann:TypedStringAnnotation" name="_doc" type="ptolemy.moml.Documentation"/>
+          <annotations xsi:type="ann:TypedStringAnnotation" name="_doc" value="Sinusoidal waveform output." type="ptolemy.moml.Documentation"/>
           <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
           <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         </childPorts>
@@ -173,7 +173,7 @@
         </childPorts>
         <childPorts name="output">
           <annotations name="output"/>
-          <annotations xsi:type="ann:TypedStringAnnotation" name="_doc" type="ptolemy.moml.Documentation"/>
+          <annotations xsi:type="ann:TypedStringAnnotation" name="_doc" value="Sinusoidal waveform output." type="ptolemy.moml.Documentation"/>
           <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
           <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         </childPorts>
@@ -233,7 +233,7 @@
         </childPorts>
         <childPorts name="output">
           <annotations name="output"/>
-          <annotations xsi:type="ann:TypedStringAnnotation" name="_doc" type="ptolemy.moml.Documentation"/>
+          <annotations xsi:type="ann:TypedStringAnnotation" name="_doc" value="Sinusoidal waveform output." type="ptolemy.moml.Documentation"/>
           <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
           <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         </childPorts>
@@ -261,7 +261,7 @@
         </childPorts>
         <childPorts name="output">
           <annotations name="output"/>
-          <annotations xsi:type="ann:TypedStringAnnotation" name="_doc" type="ptolemy.moml.Documentation"/>
+          <annotations xsi:type="ann:TypedStringAnnotation" name="_doc" value="Sinusoidal waveform output." type="ptolemy.moml.Documentation"/>
           <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
           <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         </childPorts>
@@ -321,7 +321,7 @@
         </childPorts>
         <childPorts name="output">
           <annotations name="output"/>
-          <annotations xsi:type="ann:TypedStringAnnotation" name="_doc" type="ptolemy.moml.Documentation"/>
+          <annotations xsi:type="ann:TypedStringAnnotation" name="_doc" value="Sinusoidal waveform output." type="ptolemy.moml.Documentation"/>
           <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
           <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         </childPorts>
@@ -349,7 +349,7 @@
         </childPorts>
         <childPorts name="output">
           <annotations name="output"/>
-          <annotations xsi:type="ann:TypedStringAnnotation" name="_doc" type="ptolemy.moml.Documentation"/>
+          <annotations xsi:type="ann:TypedStringAnnotation" name="_doc" value="Sinusoidal waveform output." type="ptolemy.moml.Documentation"/>
           <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
           <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         </childPorts>
@@ -409,7 +409,7 @@
         </childPorts>
         <childPorts name="output">
           <annotations name="output"/>
-          <annotations xsi:type="ann:TypedStringAnnotation" name="_doc" type="ptolemy.moml.Documentation"/>
+          <annotations xsi:type="ann:TypedStringAnnotation" name="_doc" value="Sinusoidal waveform output." type="ptolemy.moml.Documentation"/>
           <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
           <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         </childPorts>
@@ -437,7 +437,7 @@
         </childPorts>
         <childPorts name="output">
           <annotations name="output"/>
-          <annotations xsi:type="ann:TypedStringAnnotation" name="_doc" type="ptolemy.moml.Documentation"/>
+          <annotations xsi:type="ann:TypedStringAnnotation" name="_doc" value="Sinusoidal waveform output." type="ptolemy.moml.Documentation"/>
           <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
           <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         </childPorts>
@@ -497,7 +497,7 @@
         </childPorts>
         <childPorts name="output">
           <annotations name="output"/>
-          <annotations xsi:type="ann:TypedStringAnnotation" name="_doc" type="ptolemy.moml.Documentation"/>
+          <annotations xsi:type="ann:TypedStringAnnotation" name="_doc" value="Sinusoidal waveform output." type="ptolemy.moml.Documentation"/>
           <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
           <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         </childPorts>
@@ -525,7 +525,7 @@
         </childPorts>
         <childPorts name="output">
           <annotations name="output"/>
-          <annotations xsi:type="ann:TypedStringAnnotation" name="_doc" type="ptolemy.moml.Documentation"/>
+          <annotations xsi:type="ann:TypedStringAnnotation" name="_doc" value="Sinusoidal waveform output." type="ptolemy.moml.Documentation"/>
           <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
           <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         </childPorts>
@@ -585,7 +585,7 @@
         </childPorts>
         <childPorts name="output">
           <annotations name="output"/>
-          <annotations xsi:type="ann:TypedStringAnnotation" name="_doc" type="ptolemy.moml.Documentation"/>
+          <annotations xsi:type="ann:TypedStringAnnotation" name="_doc" value="Sinusoidal waveform output." type="ptolemy.moml.Documentation"/>
           <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
           <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         </childPorts>
@@ -613,7 +613,7 @@
         </childPorts>
         <childPorts name="output">
           <annotations name="output"/>
-          <annotations xsi:type="ann:TypedStringAnnotation" name="_doc" type="ptolemy.moml.Documentation"/>
+          <annotations xsi:type="ann:TypedStringAnnotation" name="_doc" value="Sinusoidal waveform output." type="ptolemy.moml.Documentation"/>
           <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
           <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         </childPorts>
@@ -676,7 +676,7 @@
         </childPorts>
         <childPorts name="output">
           <annotations name="output"/>
-          <annotations xsi:type="ann:TypedStringAnnotation" name="_doc" type="ptolemy.moml.Documentation"/>
+          <annotations xsi:type="ann:TypedStringAnnotation" name="_doc" value="Sinusoidal waveform output." type="ptolemy.moml.Documentation"/>
           <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
           <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         </childPorts>
@@ -704,7 +704,7 @@
         </childPorts>
         <childPorts name="output">
           <annotations name="output"/>
-          <annotations xsi:type="ann:TypedStringAnnotation" name="_doc" type="ptolemy.moml.Documentation"/>
+          <annotations xsi:type="ann:TypedStringAnnotation" name="_doc" value="Sinusoidal waveform output." type="ptolemy.moml.Documentation"/>
           <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
           <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         </childPorts>
@@ -764,7 +764,7 @@
         </childPorts>
         <childPorts name="output">
           <annotations name="output"/>
-          <annotations xsi:type="ann:TypedStringAnnotation" name="_doc" type="ptolemy.moml.Documentation"/>
+          <annotations xsi:type="ann:TypedStringAnnotation" name="_doc" value="Sinusoidal waveform output." type="ptolemy.moml.Documentation"/>
           <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
           <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         </childPorts>
@@ -792,7 +792,7 @@
         </childPorts>
         <childPorts name="output">
           <annotations name="output"/>
-          <annotations xsi:type="ann:TypedStringAnnotation" name="_doc" type="ptolemy.moml.Documentation"/>
+          <annotations xsi:type="ann:TypedStringAnnotation" name="_doc" value="Sinusoidal waveform output." type="ptolemy.moml.Documentation"/>
           <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
           <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         </childPorts>
@@ -852,7 +852,7 @@
         </childPorts>
         <childPorts name="output">
           <annotations name="output"/>
-          <annotations xsi:type="ann:TypedStringAnnotation" name="_doc" type="ptolemy.moml.Documentation"/>
+          <annotations xsi:type="ann:TypedStringAnnotation" name="_doc" value="Sinusoidal waveform output." type="ptolemy.moml.Documentation"/>
           <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
           <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         </childPorts>
@@ -880,7 +880,7 @@
         </childPorts>
         <childPorts name="output">
           <annotations name="output"/>
-          <annotations xsi:type="ann:TypedStringAnnotation" name="_doc" type="ptolemy.moml.Documentation"/>
+          <annotations xsi:type="ann:TypedStringAnnotation" name="_doc" value="Sinusoidal waveform output." type="ptolemy.moml.Documentation"/>
           <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
           <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         </childPorts>
@@ -940,7 +940,7 @@
         </childPorts>
         <childPorts name="output">
           <annotations name="output"/>
-          <annotations xsi:type="ann:TypedStringAnnotation" name="_doc" type="ptolemy.moml.Documentation"/>
+          <annotations xsi:type="ann:TypedStringAnnotation" name="_doc" value="Sinusoidal waveform output." type="ptolemy.moml.Documentation"/>
           <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
           <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         </childPorts>
@@ -968,7 +968,7 @@
         </childPorts>
         <childPorts name="output">
           <annotations name="output"/>
-          <annotations xsi:type="ann:TypedStringAnnotation" name="_doc" type="ptolemy.moml.Documentation"/>
+          <annotations xsi:type="ann:TypedStringAnnotation" name="_doc" value="Sinusoidal waveform output." type="ptolemy.moml.Documentation"/>
           <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
           <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         </childPorts>
@@ -1022,7 +1022,7 @@
         </childPorts>
         <childPorts name="output">
           <annotations name="output"/>
-          <annotations xsi:type="ann:TypedStringAnnotation" name="_doc" type="ptolemy.moml.Documentation"/>
+          <annotations xsi:type="ann:TypedStringAnnotation" name="_doc" value="Sinusoidal waveform output." type="ptolemy.moml.Documentation"/>
           <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
           <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         </childPorts>
@@ -1050,7 +1050,7 @@
         </childPorts>
         <childPorts name="output">
           <annotations name="output"/>
-          <annotations xsi:type="ann:TypedStringAnnotation" name="_doc" type="ptolemy.moml.Documentation"/>
+          <annotations xsi:type="ann:TypedStringAnnotation" name="_doc" value="Sinusoidal waveform output." type="ptolemy.moml.Documentation"/>
           <annotations xsi:type="ann:TypedStringAnnotation" name="_location" type="ptolemy.kernel.util.Location"/>
           <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
         </childPorts>

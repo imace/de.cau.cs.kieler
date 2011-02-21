@@ -505,7 +505,7 @@
             </childPorts>
             <childPorts name="control" incomingLinks="//@childEntities.0/@childEntities.7/@childEntities.0/@childEntities.1/@childLinks.19">
               <annotations name="input"/>
-              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" type="ptolemy.kernel.util.StringAttribute"/>
+              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="SOUTH" type="ptolemy.kernel.util.StringAttribute"/>
               <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
             </childPorts>
             <childPorts name="trueOutput">
@@ -1021,7 +1021,7 @@
             </childPorts>
             <childPorts name="control" incomingLinks="//@childEntities.0/@childEntities.7/@childEntities.0/@childEntities.2/@childLinks.15">
               <annotations name="input"/>
-              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" type="ptolemy.kernel.util.StringAttribute"/>
+              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="SOUTH" type="ptolemy.kernel.util.StringAttribute"/>
               <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
             </childPorts>
             <childPorts name="trueOutput">
@@ -1743,7 +1743,7 @@
             </childPorts>
             <childPorts name="control" incomingLinks="//@childEntities.0/@childEntities.7/@childEntities.0/@childEntities.3/@childLinks.38">
               <annotations name="input"/>
-              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" type="ptolemy.kernel.util.StringAttribute"/>
+              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="SOUTH" type="ptolemy.kernel.util.StringAttribute"/>
               <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
             </childPorts>
             <childPorts name="trueOutput" outgoingLinks="//@childEntities.0/@childEntities.7/@childEntities.0/@childEntities.3/@childLinks.37">
@@ -1899,7 +1899,7 @@
             </childPorts>
             <childPorts name="control" incomingLinks="//@childEntities.0/@childEntities.7/@childEntities.0/@childEntities.3/@childLinks.52">
               <annotations name="input"/>
-              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" type="ptolemy.kernel.util.StringAttribute"/>
+              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="SOUTH" type="ptolemy.kernel.util.StringAttribute"/>
               <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
             </childPorts>
             <childPorts name="trueOutput">
@@ -1960,7 +1960,7 @@
             </childPorts>
             <childPorts name="control" incomingLinks="//@childEntities.0/@childEntities.7/@childEntities.0/@childEntities.3/@childLinks.59">
               <annotations name="input"/>
-              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" type="ptolemy.kernel.util.StringAttribute"/>
+              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="SOUTH" type="ptolemy.kernel.util.StringAttribute"/>
               <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
             </childPorts>
             <childPorts name="trueOutput">
@@ -2564,7 +2564,7 @@
             </childPorts>
             <childPorts name="control" incomingLinks="//@childEntities.0/@childEntities.7/@childEntities.0/@childEntities.4/@childLinks.11">
               <annotations name="input"/>
-              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" type="ptolemy.kernel.util.StringAttribute"/>
+              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="SOUTH" type="ptolemy.kernel.util.StringAttribute"/>
               <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
             </childPorts>
             <childPorts name="trueOutput">
@@ -3495,7 +3495,7 @@
             </childPorts>
             <childPorts name="control" incomingLinks="//@childEntities.0/@childEntities.8/@childEntities.0/@childEntities.1/@childLinks.19">
               <annotations name="input"/>
-              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" type="ptolemy.kernel.util.StringAttribute"/>
+              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="SOUTH" type="ptolemy.kernel.util.StringAttribute"/>
               <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
             </childPorts>
             <childPorts name="trueOutput">
@@ -4011,7 +4011,7 @@
             </childPorts>
             <childPorts name="control" incomingLinks="//@childEntities.0/@childEntities.8/@childEntities.0/@childEntities.2/@childLinks.15">
               <annotations name="input"/>
-              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" type="ptolemy.kernel.util.StringAttribute"/>
+              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="SOUTH" type="ptolemy.kernel.util.StringAttribute"/>
               <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
             </childPorts>
             <childPorts name="trueOutput">
@@ -4733,7 +4733,7 @@
             </childPorts>
             <childPorts name="control" incomingLinks="//@childEntities.0/@childEntities.8/@childEntities.0/@childEntities.3/@childLinks.38">
               <annotations name="input"/>
-              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" type="ptolemy.kernel.util.StringAttribute"/>
+              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="SOUTH" type="ptolemy.kernel.util.StringAttribute"/>
               <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
             </childPorts>
             <childPorts name="trueOutput" outgoingLinks="//@childEntities.0/@childEntities.8/@childEntities.0/@childEntities.3/@childLinks.37">
@@ -4889,7 +4889,7 @@
             </childPorts>
             <childPorts name="control" incomingLinks="//@childEntities.0/@childEntities.8/@childEntities.0/@childEntities.3/@childLinks.52">
               <annotations name="input"/>
-              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" type="ptolemy.kernel.util.StringAttribute"/>
+              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="SOUTH" type="ptolemy.kernel.util.StringAttribute"/>
               <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
             </childPorts>
             <childPorts name="trueOutput">
@@ -4950,7 +4950,7 @@
             </childPorts>
             <childPorts name="control" incomingLinks="//@childEntities.0/@childEntities.8/@childEntities.0/@childEntities.3/@childLinks.59">
               <annotations name="input"/>
-              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" type="ptolemy.kernel.util.StringAttribute"/>
+              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="SOUTH" type="ptolemy.kernel.util.StringAttribute"/>
               <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
             </childPorts>
             <childPorts name="trueOutput">
@@ -5554,7 +5554,7 @@
             </childPorts>
             <childPorts name="control" incomingLinks="//@childEntities.0/@childEntities.8/@childEntities.0/@childEntities.4/@childLinks.11">
               <annotations name="input"/>
-              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" type="ptolemy.kernel.util.StringAttribute"/>
+              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="SOUTH" type="ptolemy.kernel.util.StringAttribute"/>
               <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
             </childPorts>
             <childPorts name="trueOutput">
@@ -6485,7 +6485,7 @@
             </childPorts>
             <childPorts name="control" incomingLinks="//@childEntities.0/@childEntities.9/@childEntities.0/@childEntities.1/@childLinks.19">
               <annotations name="input"/>
-              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" type="ptolemy.kernel.util.StringAttribute"/>
+              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="SOUTH" type="ptolemy.kernel.util.StringAttribute"/>
               <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
             </childPorts>
             <childPorts name="trueOutput">
@@ -7001,7 +7001,7 @@
             </childPorts>
             <childPorts name="control" incomingLinks="//@childEntities.0/@childEntities.9/@childEntities.0/@childEntities.2/@childLinks.15">
               <annotations name="input"/>
-              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" type="ptolemy.kernel.util.StringAttribute"/>
+              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="SOUTH" type="ptolemy.kernel.util.StringAttribute"/>
               <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
             </childPorts>
             <childPorts name="trueOutput">
@@ -7723,7 +7723,7 @@
             </childPorts>
             <childPorts name="control" incomingLinks="//@childEntities.0/@childEntities.9/@childEntities.0/@childEntities.3/@childLinks.38">
               <annotations name="input"/>
-              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" type="ptolemy.kernel.util.StringAttribute"/>
+              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="SOUTH" type="ptolemy.kernel.util.StringAttribute"/>
               <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
             </childPorts>
             <childPorts name="trueOutput" outgoingLinks="//@childEntities.0/@childEntities.9/@childEntities.0/@childEntities.3/@childLinks.37">
@@ -7879,7 +7879,7 @@
             </childPorts>
             <childPorts name="control" incomingLinks="//@childEntities.0/@childEntities.9/@childEntities.0/@childEntities.3/@childLinks.52">
               <annotations name="input"/>
-              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" type="ptolemy.kernel.util.StringAttribute"/>
+              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="SOUTH" type="ptolemy.kernel.util.StringAttribute"/>
               <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
             </childPorts>
             <childPorts name="trueOutput">
@@ -7940,7 +7940,7 @@
             </childPorts>
             <childPorts name="control" incomingLinks="//@childEntities.0/@childEntities.9/@childEntities.0/@childEntities.3/@childLinks.59">
               <annotations name="input"/>
-              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" type="ptolemy.kernel.util.StringAttribute"/>
+              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="SOUTH" type="ptolemy.kernel.util.StringAttribute"/>
               <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
             </childPorts>
             <childPorts name="trueOutput">
@@ -8544,7 +8544,7 @@
             </childPorts>
             <childPorts name="control" incomingLinks="//@childEntities.0/@childEntities.9/@childEntities.0/@childEntities.4/@childLinks.11">
               <annotations name="input"/>
-              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" type="ptolemy.kernel.util.StringAttribute"/>
+              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="SOUTH" type="ptolemy.kernel.util.StringAttribute"/>
               <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
             </childPorts>
             <childPorts name="trueOutput">
@@ -9475,7 +9475,7 @@
             </childPorts>
             <childPorts name="control" incomingLinks="//@childEntities.0/@childEntities.10/@childEntities.0/@childEntities.1/@childLinks.19">
               <annotations name="input"/>
-              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" type="ptolemy.kernel.util.StringAttribute"/>
+              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="SOUTH" type="ptolemy.kernel.util.StringAttribute"/>
               <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
             </childPorts>
             <childPorts name="trueOutput">
@@ -9991,7 +9991,7 @@
             </childPorts>
             <childPorts name="control" incomingLinks="//@childEntities.0/@childEntities.10/@childEntities.0/@childEntities.2/@childLinks.15">
               <annotations name="input"/>
-              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" type="ptolemy.kernel.util.StringAttribute"/>
+              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="SOUTH" type="ptolemy.kernel.util.StringAttribute"/>
               <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
             </childPorts>
             <childPorts name="trueOutput">
@@ -10713,7 +10713,7 @@
             </childPorts>
             <childPorts name="control" incomingLinks="//@childEntities.0/@childEntities.10/@childEntities.0/@childEntities.3/@childLinks.38">
               <annotations name="input"/>
-              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" type="ptolemy.kernel.util.StringAttribute"/>
+              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="SOUTH" type="ptolemy.kernel.util.StringAttribute"/>
               <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
             </childPorts>
             <childPorts name="trueOutput" outgoingLinks="//@childEntities.0/@childEntities.10/@childEntities.0/@childEntities.3/@childLinks.37">
@@ -10869,7 +10869,7 @@
             </childPorts>
             <childPorts name="control" incomingLinks="//@childEntities.0/@childEntities.10/@childEntities.0/@childEntities.3/@childLinks.52">
               <annotations name="input"/>
-              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" type="ptolemy.kernel.util.StringAttribute"/>
+              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="SOUTH" type="ptolemy.kernel.util.StringAttribute"/>
               <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
             </childPorts>
             <childPorts name="trueOutput">
@@ -10930,7 +10930,7 @@
             </childPorts>
             <childPorts name="control" incomingLinks="//@childEntities.0/@childEntities.10/@childEntities.0/@childEntities.3/@childLinks.59">
               <annotations name="input"/>
-              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" type="ptolemy.kernel.util.StringAttribute"/>
+              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="SOUTH" type="ptolemy.kernel.util.StringAttribute"/>
               <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
             </childPorts>
             <childPorts name="trueOutput">
@@ -11534,7 +11534,7 @@
             </childPorts>
             <childPorts name="control" incomingLinks="//@childEntities.0/@childEntities.10/@childEntities.0/@childEntities.4/@childLinks.11">
               <annotations name="input"/>
-              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" type="ptolemy.kernel.util.StringAttribute"/>
+              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="SOUTH" type="ptolemy.kernel.util.StringAttribute"/>
               <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
             </childPorts>
             <childPorts name="trueOutput">
@@ -12465,7 +12465,7 @@
             </childPorts>
             <childPorts name="control" incomingLinks="//@childEntities.0/@childEntities.11/@childEntities.0/@childEntities.1/@childLinks.19">
               <annotations name="input"/>
-              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" type="ptolemy.kernel.util.StringAttribute"/>
+              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="SOUTH" type="ptolemy.kernel.util.StringAttribute"/>
               <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
             </childPorts>
             <childPorts name="trueOutput">
@@ -12981,7 +12981,7 @@
             </childPorts>
             <childPorts name="control" incomingLinks="//@childEntities.0/@childEntities.11/@childEntities.0/@childEntities.2/@childLinks.15">
               <annotations name="input"/>
-              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" type="ptolemy.kernel.util.StringAttribute"/>
+              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="SOUTH" type="ptolemy.kernel.util.StringAttribute"/>
               <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
             </childPorts>
             <childPorts name="trueOutput">
@@ -13703,7 +13703,7 @@
             </childPorts>
             <childPorts name="control" incomingLinks="//@childEntities.0/@childEntities.11/@childEntities.0/@childEntities.3/@childLinks.38">
               <annotations name="input"/>
-              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" type="ptolemy.kernel.util.StringAttribute"/>
+              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="SOUTH" type="ptolemy.kernel.util.StringAttribute"/>
               <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
             </childPorts>
             <childPorts name="trueOutput" outgoingLinks="//@childEntities.0/@childEntities.11/@childEntities.0/@childEntities.3/@childLinks.37">
@@ -13859,7 +13859,7 @@
             </childPorts>
             <childPorts name="control" incomingLinks="//@childEntities.0/@childEntities.11/@childEntities.0/@childEntities.3/@childLinks.52">
               <annotations name="input"/>
-              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" type="ptolemy.kernel.util.StringAttribute"/>
+              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="SOUTH" type="ptolemy.kernel.util.StringAttribute"/>
               <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
             </childPorts>
             <childPorts name="trueOutput">
@@ -13920,7 +13920,7 @@
             </childPorts>
             <childPorts name="control" incomingLinks="//@childEntities.0/@childEntities.11/@childEntities.0/@childEntities.3/@childLinks.59">
               <annotations name="input"/>
-              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" type="ptolemy.kernel.util.StringAttribute"/>
+              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="SOUTH" type="ptolemy.kernel.util.StringAttribute"/>
               <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
             </childPorts>
             <childPorts name="trueOutput">
@@ -14524,7 +14524,7 @@
             </childPorts>
             <childPorts name="control" incomingLinks="//@childEntities.0/@childEntities.11/@childEntities.0/@childEntities.4/@childLinks.11">
               <annotations name="input"/>
-              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" type="ptolemy.kernel.util.StringAttribute"/>
+              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="SOUTH" type="ptolemy.kernel.util.StringAttribute"/>
               <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
             </childPorts>
             <childPorts name="trueOutput">
@@ -15509,7 +15509,7 @@
             </childPorts>
             <childPorts name="control" incomingLinks="//@childEntities.0/@childEntities.15/@childEntities.0/@childEntities.1/@childLinks.19">
               <annotations name="input"/>
-              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" type="ptolemy.kernel.util.StringAttribute"/>
+              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="SOUTH" type="ptolemy.kernel.util.StringAttribute"/>
               <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
             </childPorts>
             <childPorts name="trueOutput">
@@ -16025,7 +16025,7 @@
             </childPorts>
             <childPorts name="control" incomingLinks="//@childEntities.0/@childEntities.15/@childEntities.0/@childEntities.2/@childLinks.15">
               <annotations name="input"/>
-              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" type="ptolemy.kernel.util.StringAttribute"/>
+              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="SOUTH" type="ptolemy.kernel.util.StringAttribute"/>
               <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
             </childPorts>
             <childPorts name="trueOutput">
@@ -16747,7 +16747,7 @@
             </childPorts>
             <childPorts name="control" incomingLinks="//@childEntities.0/@childEntities.15/@childEntities.0/@childEntities.3/@childLinks.38">
               <annotations name="input"/>
-              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" type="ptolemy.kernel.util.StringAttribute"/>
+              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="SOUTH" type="ptolemy.kernel.util.StringAttribute"/>
               <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
             </childPorts>
             <childPorts name="trueOutput" outgoingLinks="//@childEntities.0/@childEntities.15/@childEntities.0/@childEntities.3/@childLinks.37">
@@ -16903,7 +16903,7 @@
             </childPorts>
             <childPorts name="control" incomingLinks="//@childEntities.0/@childEntities.15/@childEntities.0/@childEntities.3/@childLinks.52">
               <annotations name="input"/>
-              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" type="ptolemy.kernel.util.StringAttribute"/>
+              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="SOUTH" type="ptolemy.kernel.util.StringAttribute"/>
               <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
             </childPorts>
             <childPorts name="trueOutput">
@@ -16964,7 +16964,7 @@
             </childPorts>
             <childPorts name="control" incomingLinks="//@childEntities.0/@childEntities.15/@childEntities.0/@childEntities.3/@childLinks.59">
               <annotations name="input"/>
-              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" type="ptolemy.kernel.util.StringAttribute"/>
+              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="SOUTH" type="ptolemy.kernel.util.StringAttribute"/>
               <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
             </childPorts>
             <childPorts name="trueOutput">
@@ -17568,7 +17568,7 @@
             </childPorts>
             <childPorts name="control" incomingLinks="//@childEntities.0/@childEntities.15/@childEntities.0/@childEntities.4/@childLinks.11">
               <annotations name="input"/>
-              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" type="ptolemy.kernel.util.StringAttribute"/>
+              <annotations xsi:type="ann:TypedStringAnnotation" name="_cardinal" value="SOUTH" type="ptolemy.kernel.util.StringAttribute"/>
               <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
             </childPorts>
             <childPorts name="trueOutput">
