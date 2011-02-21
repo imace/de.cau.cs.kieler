@@ -2,5 +2,5 @@ module everyModule:
 input A;
 	every [A or pre(A)] do
 		nothing
-	end
+	end every
 end module

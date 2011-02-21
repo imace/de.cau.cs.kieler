@@ -1,4 +1,4 @@
 module sustainModule:
-input A;
-sustain A(5=5)
+input A, B : integer;
+sustain A || sustain B(5)
 end module
