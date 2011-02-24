@@ -1,36 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<synccharts:Region xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:synccharts="http://kieler.cs.cau.de/synccharts/0.2.4">
+<synccharts:Region xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kexpressions="http://kieler.cs.cau.de/kexpressions/0.1.2" xmlns:synccharts="http://kieler.cs.cau.de/synccharts/0.2.4">
   <states id="rule6" label="rule6">
     <signals name="a"/>
     <signals name="b"/>
-    <signals name="c"/>
     <regions id="">
-      <states id="handle" label="handle" incomingTransitions="//@states.0/@regions.0/@states.1/@outgoingTransitions.0 //@states.0/@regions.0/@states.1/@outgoingTransitions.1">
+      <states id="outer" label="outer" isInitial="true" incomingTransitions="//@states.0/@regions.0/@states.1/@outgoingTransitions.0">
+        <outgoingTransitions label="a" priority="1" targetState="//@states.0/@regions.0/@states.1">
+          <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.0"/>
+        </outgoingTransitions>
+        <outgoingTransitions label="a" priority="2" targetState="//@states.0/@regions.0/@states.1">
+          <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.0"/>
+        </outgoingTransitions>
+      </states>
+      <states id="_2" isFinal="true" incomingTransitions="//@states.0/@regions.0/@states.0/@outgoingTransitions.0 //@states.0/@regions.0/@states.0/@outgoingTransitions.1">
         <regions id="">
           <states id="init" label="init" isInitial="true">
-            <outgoingTransitions priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.0/@states.1"/>
-            <outgoingTransitions priority="2" targetState="//@states.0/@regions.0/@states.0/@regions.0/@states.2"/>
-            <outgoingTransitions priority="3" targetState="//@states.0/@regions.0/@states.0/@regions.0/@states.3"/>
-            <outgoingTransitions priority="4" targetState="//@states.0/@regions.0/@states.0/@regions.0/@states.4"/>
+            <outgoingTransitions label="b" priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.0/@states.1">
+              <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.1"/>
+            </outgoingTransitions>
+            <outgoingTransitions label="b" priority="2" targetState="//@states.0/@regions.0/@states.1/@regions.0/@states.2">
+              <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.1"/>
+            </outgoingTransitions>
           </states>
-          <states id="_2" isFinal="true" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.0/@states.0/@outgoingTransitions.0">
+          <states id="simple" label="simple" isFinal="true" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.0/@states.0/@outgoingTransitions.0"/>
+          <states id="macro" label="macro" isFinal="true" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.0/@states.0/@outgoingTransitions.1">
+            <signals name="aab"/>
             <regions id="">
-              <states id="_" isInitial="true"/>
-            </regions>
-          </states>
-          <states id="_3" isFinal="true" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.0/@states.0/@outgoingTransitions.1"/>
-          <states id="_4" isFinal="true" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.0/@states.0/@outgoingTransitions.2"/>
-          <states id="_5" isFinal="true" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.0/@states.0/@outgoingTransitions.3">
-            <regions id="">
-              <states id="_" isInitial="true"/>
+              <states id="_" isFinal="true" incomingTransitions="//@states.0/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.1/@outgoingTransitions.0"/>
+              <states id="_2" isInitial="true">
+                <outgoingTransitions priority="1" targetState="//@states.0/@regions.0/@states.1/@regions.0/@states.2/@regions.0/@states.0"/>
+              </states>
             </regions>
           </states>
         </regions>
-        <outgoingTransitions priority="1" type="NORMALTERMINATION" targetState="//@states.0/@regions.0/@states.1"/>
-      </states>
-      <states id="_2" isInitial="true" incomingTransitions="//@states.0/@regions.0/@states.0/@outgoingTransitions.0">
-        <outgoingTransitions priority="1" targetState="//@states.0/@regions.0/@states.0"/>
-        <outgoingTransitions priority="2" targetState="//@states.0/@regions.0/@states.0"/>
+        <outgoingTransitions label="/ a" priority="1" type="NORMALTERMINATION" targetState="//@states.0/@regions.0/@states.0">
+          <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.0"/>
+        </outgoingTransitions>
       </states>
     </regions>
   </states>
