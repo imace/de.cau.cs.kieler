@@ -1,0 +1,133 @@
+module BACKHOE :
+
+input   BOOM_OUT, BOOM_IN,
+        STICK_OUT, STICK_IN,
+        BUCKET_OUT, BUCKET_IN,
+        LEGS_OUT, LEGS_IN;
+
+relation BOOM_OUT # BOOM_IN;
+relation STICK_OUT # STICK_IN;
+relation BUCKET_OUT # BUCKET_IN;
+relation LEGS_OUT # LEGS_IN;
+
+input   STOP_BUTTON, EXTEND_BUTTON, RETRACT_BUTTON;
+
+input   FSECOND;
+
+output  ALARM_LAMP,
+        DONE_LAMP,
+        CANCEL_LAMP;
+
+output  BOOM_PUSH, BOOM_PULL, BOOM_DRIVE;
+output  STICK_PUSH, STICK_PULL, STICK_DRIVE;
+output  BUCKET_PUSH, BUCKET_PULL, BUCKET_DRIVE;
+output  LEGS_RAISE, LEGS_LOWER, LEGS_STOP;
+
+% Backhoe controller implementation:
+% 0 lower legs
+abort
+  loop
+    signal T in
+    weak abort
+      loop
+        await
+          case immediate STOP_BUTTON do emit LEGS_STOP
+          case immediate EXTEND_BUTTON do emit LEGS_LOWER
+          case immediate RETRACT_BUTTON do emit LEGS_RAISE
+        end await;
+      each [STOP_BUTTON or EXTEND_BUTTON or RETRACT_BUTTON]
+    ||
+      loop
+        abort
+          await 2 FSECOND;
+          emit T; halt
+        when LEGS_IN
+      end loop
+    when T;
+    end signal;
+      emit ALARM_LAMP;
+      emit LEGS_RAISE;
+      await LEGS_IN;
+      await FSECOND;
+
+  end loop
+when LEGS_OUT;
+emit LEGS_STOP;
+emit DONE_LAMP;
+
+%1 Raise stick and bucket
+abort
+  loop
+    abort
+      await EXTEND_BUTTON;
+      abort
+        sustain STICK_PULL || sustain  STICK_DRIVE
+        || sustain BUCKET_PULL || sustain BUCKET_DRIVE
+        || run FLASH
+      when [STICK_OUT and BUCKET_OUT];
+      [sustain BOOM_PUSH || sustain  BOOM_DRIVE]
+    when RETRACT_BUTTON;
+    emit CANCEL_LAMP;
+    abort
+      sustain STICK_PUSH || sustain  STICK_DRIVE
+      || sustain BUCKET_PUSH || sustain BUCKET_DRIVE
+      || sustain BOOM_PUSH || sustain  BOOM_DRIVE
+    when [STICK_IN and BUCKET_IN and BOOM_IN]
+  end loop
+when BOOM_OUT;
+abort
+  sustain STICK_PUSH || sustain STICK_DRIVE
+  || sustain BUCKET_PUSH || sustain BUCKET_DRIVE
+when [STICK_IN and BUCKET_IN];
+await RETRACT_BUTTON;
+abort
+  [sustain BOOM_PULL || sustain BOOM_DRIVE]
+when BOOM_IN
+
+end module
+
+
+module FLASH:
+input FSECOND;
+output ALARM_LAMP: boolean;
+%output ALARM_LAMP;
+
+%   emit ALARM_LAMP(false);
+%   pause;
+%   suspend
+%     sustain ALARM_LAMP(not pre(?ALARM_LAMP));
+%   when [not FSECOND];
+
+    pause;
+    suspend
+      loop
+        emit ALARM_LAMP;
+        pause;
+        pause;
+      end loop;
+    when [not FSECOND];
+
+%trap T in
+%  signal preV_ALARM_LAMP := false : boolean in
+%
+%    emit ALARM_LAMP(false);
+%    pause;
+%    suspend
+%      sustain ALARM_LAMP(not ?preV_ALARM_LAMP);
+%    when [not FSECOND];
+%    exit T
+%  ||
+%    loop
+%      present ALARM_LAMP then
+%        var preval := ?ALARM_LAMP : boolean in
+%          pause;
+%          emit preV_ALARM_LAMP(preval);
+%        end var
+%      else
+%        pause
+%      end
+%    end loop
+%
+%  end signal
+%end trap
+end module

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<synccharts:Region xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kexpressions="http://kieler.cs.cau.de/kexpressions/0.1.2" xmlns:synccharts="http://kieler.cs.cau.de/synccharts/0.2.4">
+  <states id="Oven" label="Oven">
+    <signals xsi:type="kexpressions:ISignal" name="START" isInput="true"/>
+    <signals xsi:type="kexpressions:ISignal" name="STOP" isInput="true"/>
+    <signals xsi:type="kexpressions:ISignal" name="DOOROPEN" isInput="true"/>
+    <signals xsi:type="kexpressions:ISignal" name="MINUTE" isInput="true"/>
+    <signals xsi:type="kexpressions:ISignal" name="HEAT" isOutput="true"/>
+    <signals xsi:type="kexpressions:ISignal" name="LIGHT" isOutput="true"/>
+    <signals xsi:type="kexpressions:ISignal" name="BEEP" isOutput="true"/>
+    <signals xsi:type="kexpressions:ISignal" name="MINUTE2"/>
+    <regions id="">
+      <states id="Parallel_State2" label="Parallel State" isInitial="true">
+        <regions id="">
+          <states id="Trap_State" label="Trap State" isInitial="true" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.0/@states.0/@outgoingTransitions.0">
+            <signals xsi:type="kexpressions:ISignal" name="traphalt0"/>
+            <signals xsi:type="kexpressions:ISignal" name="T"/>
+            <regions id="">
+              <states id="Parallel_State2" label="Parallel State" isInitial="true">
+                <regions id="">
+                  <states id="_" isInitial="true">
+                    <outgoingTransitions label="DOOROPEN" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.1">
+                      <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.2"/>
+                    </outgoingTransitions>
+                  </states>
+                  <states id="Abort_State2" label="Abort State" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.0/@outgoingTransitions.0">
+                    <regions id="">
+                      <states id="Parallel_State2" label="Parallel State" isInitial="true">
+                        <regions id="">
+                          <states id="_" isInitial="true">
+                            <outgoingTransitions label="/ HEAT" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.1/@regions.0/@states.0/@regions.0/@states.1">
+                              <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.4"/>
+                            </outgoingTransitions>
+                          </states>
+                          <states id="_2" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.1/@regions.0/@states.0/@regions.0/@states.0/@outgoingTransitions.0 //@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.1/@regions.0/@states.0/@regions.0/@states.1/@outgoingTransitions.0">
+                            <outgoingTransitions label="/ HEAT" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.1/@regions.0/@states.0/@regions.0/@states.1">
+                              <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.4"/>
+                            </outgoingTransitions>
+                          </states>
+                        </regions>
+                        <regions id="">
+                          <states id="_" isInitial="true">
+                            <outgoingTransitions label="/ LIGHT" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.1/@regions.0/@states.0/@regions.1/@states.1">
+                              <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.5"/>
+                            </outgoingTransitions>
+                          </states>
+                          <states id="_2" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.1/@regions.0/@states.0/@regions.1/@states.0/@outgoingTransitions.0 //@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.1/@regions.0/@states.0/@regions.1/@states.1/@outgoingTransitions.0">
+                            <outgoingTransitions label="/ LIGHT" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.1/@regions.0/@states.0/@regions.1/@states.1">
+                              <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.5"/>
+                            </outgoingTransitions>
+                          </states>
+                        </regions>
+                        <outgoingTransitions label="DOOROPEN or STOP" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.1/@regions.0/@states.1">
+                          <trigger xsi:type="kexpressions:OperatorExpression" operator="or">
+                            <subExpressions xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.2"/>
+                            <subExpressions xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.1"/>
+                          </trigger>
+                        </outgoingTransitions>
+                      </states>
+                      <states id="_2" isFinal="true" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.1/@regions.0/@states.0/@outgoingTransitions.0"/>
+                    </regions>
+                    <outgoingTransitions label="MINUTE2 / BEEP, T" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.2">
+                      <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.6"/>
+                      <effects xsi:type="synccharts:Emission" signal="//@states.0/@regions.0/@states.0/@regions.0/@states.0/@signals.1"/>
+                      <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.7"/>
+                    </outgoingTransitions>
+                    <outgoingTransitions label="/ T" priority="2" type="NORMALTERMINATION" targetState="//@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.2">
+                      <effects xsi:type="synccharts:Emission" signal="//@states.0/@regions.0/@states.0/@regions.0/@states.0/@signals.1"/>
+                    </outgoingTransitions>
+                  </states>
+                  <states id="_2" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.1/@outgoingTransitions.1 //@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.1/@outgoingTransitions.0"/>
+                </regions>
+                <regions id="">
+                  <states id="_" isInitial="true" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.1/@states.1/@outgoingTransitions.0">
+                    <outgoingTransitions label="MINUTE" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.1/@states.1">
+                      <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.3"/>
+                    </outgoingTransitions>
+                  </states>
+                  <states id="_2" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.1/@states.0/@outgoingTransitions.0">
+                    <outgoingTransitions label="MINUTE / MINUTE2" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.1/@states.0">
+                      <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.7"/>
+                      <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.3"/>
+                    </outgoingTransitions>
+                  </states>
+                </regions>
+                <outgoingTransitions label="traphalt0" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.1">
+                  <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.0/@regions.0/@states.0/@signals.0"/>
+                </outgoingTransitions>
+                <outgoingTransitions label="T" priority="2" targetState="//@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.2">
+                  <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@regions.0/@states.0/@regions.0/@states.0/@signals.1"/>
+                </outgoingTransitions>
+              </states>
+              <states id="_2" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.0/@outgoingTransitions.0"/>
+              <states id="Trap_Handler_State" label="Trap Handler State" isFinal="true" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.0/@states.0/@regions.0/@states.0/@outgoingTransitions.1"/>
+            </regions>
+            <outgoingTransitions priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.0/@states.0"/>
+          </states>
+        </regions>
+        <regions id="">
+          <states id="_" isInitial="true">
+            <outgoingTransitions label="DOOROPEN" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.1/@states.1">
+              <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.2"/>
+            </outgoingTransitions>
+          </states>
+          <states id="Abort_State2" label="Abort State" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.1/@states.0/@outgoingTransitions.0 //@states.0/@regions.0/@states.0/@regions.1/@states.1/@outgoingTransitions.0">
+            <regions id="">
+              <states id="Sustain_State2" label="Sustain State" isInitial="true">
+                <regions id="">
+                  <states id="_" isInitial="true">
+                    <outgoingTransitions label="/ LIGHT" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.1/@states.1/@regions.0/@states.0/@regions.0/@states.1">
+                      <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.5"/>
+                    </outgoingTransitions>
+                  </states>
+                  <states id="_2" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.1/@states.1/@regions.0/@states.0/@regions.0/@states.0/@outgoingTransitions.0 //@states.0/@regions.0/@states.0/@regions.1/@states.1/@regions.0/@states.0/@regions.0/@states.1/@outgoingTransitions.0">
+                    <outgoingTransitions label="/ LIGHT" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.1/@states.1/@regions.0/@states.0/@regions.0/@states.1">
+                      <effects xsi:type="synccharts:Emission" signal="//@states.0/@signals.5"/>
+                    </outgoingTransitions>
+                  </states>
+                </regions>
+                <outgoingTransitions label="not DOOROPEN" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.1/@states.1/@regions.0/@states.1">
+                  <trigger xsi:type="kexpressions:OperatorExpression" operator="not">
+                    <subExpressions xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.2"/>
+                  </trigger>
+                </outgoingTransitions>
+              </states>
+              <states id="_2" isFinal="true" incomingTransitions="//@states.0/@regions.0/@states.0/@regions.1/@states.1/@regions.0/@states.0/@outgoingTransitions.0"/>
+            </regions>
+            <outgoingTransitions label="DOOROPEN" priority="1" targetState="//@states.0/@regions.0/@states.0/@regions.1/@states.1">
+              <trigger xsi:type="kexpressions:ValuedObjectReference" valuedObject="//@states.0/@signals.2"/>
+            </outgoingTransitions>
+          </states>
+        </regions>
+      </states>
+    </regions>
+  </states>
+</synccharts:Region>
