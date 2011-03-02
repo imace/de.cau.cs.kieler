@@ -47,6 +47,7 @@ import org.eclipse.swt.widgets.DirectoryDialog;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
+import org.eclipse.swt.widgets.ScrollBar;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.ToolBar;
@@ -56,7 +57,8 @@ import org.eclipse.swt.widgets.ToolItem;
 
 /**
  * The debug window houses controls that allow the user to inspect the debug output
- * produced by Klay Layered.
+ * produced by Klay Layered. This could at some point also support zooming, but that's
+ * not implemented yet.
  * 
  * @author cds
  */
@@ -91,7 +93,7 @@ public class DebugWindow extends Window {
                 // Return a list of .dot files
                 return ((File) inputElement).listFiles(new FileFilter() {
                     public boolean accept(final File file) {
-                        return file.isFile() && file.getName().endsWith(".dot");
+                        return file.isFile() && file.getName().endsWith(".dot"); //$NON-NLS-1$
                     }
                 });
                 
@@ -110,12 +112,12 @@ public class DebugWindow extends Window {
         /**
          * Image for files whose PNG hasn't been created yet.
          */
-        private Image unconverted = KlayDebugViewPlugin.loadImage("notconverted.gif");
+        private Image unconverted = KlayDebugViewPlugin.loadImage("notconverted.gif"); //$NON-NLS-1$
 
         /**
          * Image for files whose PNG is available.
          */
-        private Image converted = KlayDebugViewPlugin.loadImage("converted.gif");
+        private Image converted = KlayDebugViewPlugin.loadImage("converted.gif"); //$NON-NLS-1$
         
         /**
          * {@inheritDoc}
@@ -158,7 +160,7 @@ public class DebugWindow extends Window {
         public Image getImage(final Object element) {
             String path = ((File) element).getPath();
             
-            if (new File(path.substring(0, path.length() - 3) + "png").exists()) {
+            if (new File(path.substring(0, path.length() - 3) + "png").exists()) { //$NON-NLS-1$
                 return converted;
             } else {
                 return unconverted;
@@ -195,12 +197,12 @@ public class DebugWindow extends Window {
     /**
      * Setting for the currently displayed path.
      */
-    private static final String SETT_PATH = "debugWindow.path";
+    private static final String SETT_PATH = "debugWindow.path"; //$NON-NLS-1$
     
     /**
      * Setting for the window bounds.
      */
-    private static final String SETT_BOUNDS = "debugWindow.bounds";
+    private static final String SETT_BOUNDS = "debugWindow.bounds"; //$NON-NLS-1$
     
     /**
      * How much the zoom factor is changed when zooming in or out.
@@ -266,7 +268,7 @@ public class DebugWindow extends Window {
      */
     private void openPathDialog() {
         DirectoryDialog dialog = new DirectoryDialog(getShell());
-        dialog.setMessage("Select the folder where Klay Layered has placed its debug output files.");
+        dialog.setMessage(Messages.DebugWindow_PathDialog_Message);
         dialog.setFilterPath(currentPath);
         
         String newPath = dialog.open();
@@ -283,14 +285,14 @@ public class DebugWindow extends Window {
     private void setPath(final String newPath) {
         String thePath = newPath;
         if (thePath == null) {
-            thePath = "";
+            thePath = ""; //$NON-NLS-1$
         }
         
         // Find the path
         File pathFile = new File(thePath);
         if (!pathFile.isDirectory()) {
             // Error
-            openErrorDialog("The directory could not be opened.");
+            openErrorDialog(Messages.DebugWindow_Error_DirectoryCouldNotBeOpened);
         } else {
             fileTableViewer.setInput(pathFile);
         }
@@ -309,12 +311,13 @@ public class DebugWindow extends Window {
      */
     private void updateImage(final File modelFile) {
         String path = modelFile.getPath();
-        File imageFile = new File(path.substring(0, path.length() - 3) + "png");
+        File imageFile = new File(path.substring(0, path.length() - 3) + "png"); //$NON-NLS-1$
         
         // Check if the image file already exists
         if (!imageFile.exists()) {
             if (!createImage(modelFile, imageFile)) {
                 // If this doesn't work, set image file to null
+                openErrorDialog(Messages.DebugWindow_Error_ImageCreationFailed);
                 imageFile = null;
             }
         }
@@ -356,8 +359,6 @@ public class DebugWindow extends Window {
             zoom = Math.max(0.0f, zoom - ZOOM_DELTA);
         }
         
-        // TODO: Update bounds and stuff
-        
         updateCanvas();
     }
     
@@ -365,10 +366,61 @@ public class DebugWindow extends Window {
      * Redraws the canvas and sets properties on its scroll bars.
      */
     private void updateCanvas() {
+        Rectangle rect = currentImage == null ? new Rectangle(0, 0, 0, 0) : currentImage.getBounds();
+        Rectangle client = imageCanvas.getClientArea();
+        ScrollBar hBar = imageCanvas.getHorizontalBar();
+        ScrollBar vBar = imageCanvas.getVerticalBar();
         
+        hBar.setMaximum(rect.width);
+        vBar.setMaximum(rect.height);
+        hBar.setThumb(Math.min(rect.width, client.width));
+        vBar.setThumb(Math.min(rect.height, client.height));
+        
+        int hPage = rect.width - client.width;
+        int vPage = rect.height - client.height;
+        int hSelection = hBar.getSelection();
+        int vSelection = vBar.getSelection();
+        
+        if (hSelection >= hPage) {
+                if (hPage <= 0) {
+                    hSelection = 0;
+                }
+                origin.x = -hSelection;
+        }
+        
+        if (vSelection >= vPage) {
+                if (vPage <= 0) {
+                    vSelection = 0;
+                }
+                origin.y = -vSelection;
+        }
         
         imageCanvas.redraw();
-        imageCanvas.update();
+    }
+    
+    /**
+     * Handles a change in scroll bar values.
+     * 
+     * @param horizontal {@code true} if it's a change in the horizontal scroll bar.
+     * @param newValue the scroll bar's new value.
+     */
+    private void handleScrollBarChange(final boolean horizontal, final int newValue) {
+        if (currentImage == null) {
+            // Ignore
+            return;
+        }
+        
+        if (horizontal) {
+            int destX = -newValue - origin.x;
+            Rectangle rect = currentImage.getBounds();
+            imageCanvas.scroll(destX, 0, 0, 0, rect.width, rect.height, false);
+            origin.x = -newValue;
+        } else {
+            int destY = -newValue - origin.y;
+            Rectangle rect = currentImage.getBounds();
+            imageCanvas.scroll(0, destY, 0, 0, rect.width, rect.height, false);
+            origin.y = -newValue;
+        }
     }
     
     /**
@@ -381,7 +433,7 @@ public class DebugWindow extends Window {
         
         if (currentImage != null) {
             // Draw image
-            gc.drawImage(currentImage, 0, 0);
+            gc.drawImage(currentImage, origin.x, origin.y);
             imageRect = currentImage.getBounds();
         }
         
@@ -412,9 +464,9 @@ public class DebugWindow extends Window {
      */
     private boolean createImage(final File modelFile, final File imageFile) {
         try {
-            Process p = Runtime.getRuntime().exec("dot -Tpng \""
-                    + modelFile.getCanonicalPath() + "\" -o \""
-                    + imageFile.getCanonicalPath() + "\"");
+            Process p = Runtime.getRuntime().exec("dot -Tpng \"" //$NON-NLS-1$
+                    + modelFile.getCanonicalPath() + "\" -o \"" //$NON-NLS-1$
+                    + imageFile.getCanonicalPath() + "\""); //$NON-NLS-1$
             p.waitFor();
             
             fileTableViewer.update(modelFile, null);
@@ -435,7 +487,7 @@ public class DebugWindow extends Window {
     private void openErrorDialog(final String message) {
         ErrorDialog dialog = new ErrorDialog(
                 getShell()
-                , "Error",
+                , Messages.DebugWindow_Error_Title,
                 message,
                 null,
                 0);
@@ -453,8 +505,8 @@ public class DebugWindow extends Window {
         IDialogSettings dialogSettings = KlayDebugViewPlugin.getDefault().getDialogSettings();
         
         Point size = getShell().getSize();
-        dialogSettings.put(SETT_BOUNDS + ".x", size.x);
-        dialogSettings.put(SETT_BOUNDS + ".y", size.y);
+        dialogSettings.put(SETT_BOUNDS + ".x", size.x); //$NON-NLS-1$
+        dialogSettings.put(SETT_BOUNDS + ".y", size.y); //$NON-NLS-1$
         
         dialogSettings.put(SETT_PATH, currentPath);
     }
@@ -542,7 +594,7 @@ public class DebugWindow extends Window {
         
         // Image Canvas
         imageCanvas = new Canvas(sashForm,
-                SWT.NO_BACKGROUND | SWT.NO_REDRAW_RESIZE | SWT.V_SCROLL | SWT.H_SCROLL);
+                SWT.BORDER | SWT.NO_BACKGROUND | SWT.NO_REDRAW_RESIZE | SWT.V_SCROLL | SWT.H_SCROLL);
         
         // Set sash form weights
         sashForm.setWeights(new int[] {30, 70});
@@ -561,6 +613,24 @@ public class DebugWindow extends Window {
             }
         });
         
+        imageCanvas.addListener(SWT.Resize, new Listener() {
+            public void handleEvent(final Event event) {
+                updateCanvas();
+            }
+        });
+        
+        imageCanvas.getHorizontalBar().addListener(SWT.Selection, new Listener() {
+            public void handleEvent(final Event event) {
+                handleScrollBarChange(true, imageCanvas.getHorizontalBar().getSelection());
+            }
+        });
+        
+        imageCanvas.getVerticalBar().addListener(SWT.Selection, new Listener() {
+            public void handleEvent(final Event event) {
+                handleScrollBarChange(false, imageCanvas.getVerticalBar().getSelection());
+            }
+        });
+        
         // CHECKSTYLEON MagicNumber
     }
     
@@ -575,20 +645,22 @@ public class DebugWindow extends Window {
         
         // Folder Browse Button
         folderBrowseButton = new ToolItem(toolBar, SWT.NULL);
-        folderBrowseButton.setToolTipText("Open...");
-        folderBrowseButton.setImage(KlayDebugViewPlugin.loadImage("open.png"));
+        folderBrowseButton.setToolTipText(Messages.DebugWindow_Toolbar_BrowseFolder_ToolTip);
+        folderBrowseButton.setImage(KlayDebugViewPlugin.loadImage("open.png")); //$NON-NLS-1$
         
         // Separator
         new ToolItem(toolBar, SWT.SEPARATOR);
         
         // Zoom Buttons
         zoomInButton = new ToolItem(toolBar, SWT.NULL);
-        zoomInButton.setToolTipText("Zoom in");
-        zoomInButton.setImage(KlayDebugViewPlugin.loadImage("zoomin.gif"));
+        zoomInButton.setToolTipText(Messages.DebugWindow_Toolbar_ZoomIn_ToolTip);
+        zoomInButton.setImage(KlayDebugViewPlugin.loadImage("zoomin.gif")); //$NON-NLS-1$
+        zoomInButton.setEnabled(false);
 
         zoomOutButton = new ToolItem(toolBar, SWT.NULL);
-        zoomOutButton.setToolTipText("Zoom out");
-        zoomOutButton.setImage(KlayDebugViewPlugin.loadImage("zoomout.gif"));
+        zoomOutButton.setToolTipText(Messages.DebugWindow_Toolbar_ZoomOut_ToolTip);
+        zoomOutButton.setImage(KlayDebugViewPlugin.loadImage("zoomout.gif")); //$NON-NLS-1$
+        zoomOutButton.setEnabled(false);
         
         // Event listeners
         folderBrowseButton.addSelectionListener(new SelectionAdapter() {
@@ -639,7 +711,7 @@ public class DebugWindow extends Window {
     protected void configureShell(final Shell newShell) {
         super.configureShell(newShell);
         
-        newShell.setText("Klay Layered Debug Viewer");
+        newShell.setText(Messages.DebugWindow_Title);
     }
 
     /**
@@ -651,8 +723,8 @@ public class DebugWindow extends Window {
         
         try {
             return new Point(
-                    dialogSettings.getInt(SETT_BOUNDS + ".x"),
-                    dialogSettings.getInt(SETT_BOUNDS + ".y"));
+                    dialogSettings.getInt(SETT_BOUNDS + ".x"), //$NON-NLS-1$
+                    dialogSettings.getInt(SETT_BOUNDS + ".y")); //$NON-NLS-1$
         } catch (NumberFormatException e) {
             return super.getInitialSize();
         }

@@ -26,7 +26,7 @@ import org.eclipse.ui.PlatformUI;
 public class CommandHandler extends AbstractHandler {
     
     /** Command ID of the Open command. */
-    private static final String ID_OPEN = "de.cau.cs.kieler.klay.debugview.open";
+    private static final String ID_OPEN = "de.cau.cs.kieler.klay.debugview.open"; //$NON-NLS-1$
     
 
     /**

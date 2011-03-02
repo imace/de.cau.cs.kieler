@@ -29,7 +29,7 @@ public class KlayDebugViewPlugin extends AbstractUIPlugin {
     public static final String PLUGIN_ID = "de.cau.cs.kieler.klay.debugview"; //$NON-NLS-1$
     
     /** The image folder. */
-    private static final String IMAGE_FOLDER = "images/";
+    private static final String IMAGE_FOLDER = "images/"; //$NON-NLS-1$
 
     // The shared instance
     private static KlayDebugViewPlugin plugin;
