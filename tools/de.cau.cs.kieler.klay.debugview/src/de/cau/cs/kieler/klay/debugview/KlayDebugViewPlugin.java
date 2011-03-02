@@ -13,6 +13,8 @@
  */
 package de.cau.cs.kieler.klay.debugview;
 
+import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
@@ -21,19 +23,22 @@ import org.osgi.framework.BundleContext;
  * 
  * @author cds
  */
-public class Activator extends AbstractUIPlugin {
+public class KlayDebugViewPlugin extends AbstractUIPlugin {
 
     /** The plug-in ID. */
     public static final String PLUGIN_ID = "de.cau.cs.kieler.klay.debugview"; //$NON-NLS-1$
+    
+    /** The image folder. */
+    private static final String IMAGE_FOLDER = "images/";
 
     // The shared instance
-    private static Activator plugin;
+    private static KlayDebugViewPlugin plugin;
     
     
     /**
      * The constructor.
      */
-    public Activator() {
+    public KlayDebugViewPlugin() {
     }
     
 
@@ -58,8 +63,23 @@ public class Activator extends AbstractUIPlugin {
      *
      * @return the shared instance.
      */
-    public static Activator getDefault() {
+    public static KlayDebugViewPlugin getDefault() {
         return plugin;
+    }
+    
+    /**
+     * Loads the image with the given file name. The image must be explicitly disposed.
+     * 
+     * @param fileName the image's file name.
+     * @return the image or {@code null} if it couldn't be found.
+     */
+    public static Image loadImage(final String fileName) {
+        ImageDescriptor descriptor = imageDescriptorFromPlugin(PLUGIN_ID, IMAGE_FOLDER + fileName);
+        if (descriptor != null) {
+            return descriptor.createImage();
+        } else {
+            return null;
+        }
     }
 
 }

@@ -32,7 +32,6 @@ public class CommandHandler extends AbstractHandler {
     /**
      * {@inheritDoc}
      */
-    @Override
     public Object execute(final ExecutionEvent event) throws ExecutionException {
         if (event.getCommand().getId().equals(ID_OPEN)) {
             DebugWindow window = new DebugWindow(

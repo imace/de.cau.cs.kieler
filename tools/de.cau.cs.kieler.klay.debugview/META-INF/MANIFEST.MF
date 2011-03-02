@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-SymbolicName: de.cau.cs.kieler.klay.debugview;singleton:=true
 Bundle-Version: 0.1.0.qualifier
 Bundle-Localization: plugin
-Bundle-Activator: de.cau.cs.kieler.klay.debugview.Activator
+Bundle-Activator: de.cau.cs.kieler.klay.debugview.KlayDebugViewPlugin
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime
 Bundle-ActivationPolicy: lazy
