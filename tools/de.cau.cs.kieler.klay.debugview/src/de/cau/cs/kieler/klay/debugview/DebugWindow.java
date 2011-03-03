@@ -17,6 +17,8 @@ import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
 
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.dialogs.ErrorDialog;
 import org.eclipse.jface.dialogs.IDialogSettings;
 import org.eclipse.jface.viewers.ILabelProvider;
@@ -291,8 +293,12 @@ public class DebugWindow extends Window {
         // Find the path
         File pathFile = new File(thePath);
         if (!pathFile.isDirectory()) {
-            // Error
-            openErrorDialog(Messages.DebugWindow_Error_DirectoryCouldNotBeOpened);
+            if (thePath.length() > 0) {
+                // Error
+                openErrorDialog(Messages.DebugWindow_Error_DirectoryCouldNotBeOpened);
+            }
+            
+            fileTableViewer.setInput(null);
         } else {
             fileTableViewer.setInput(pathFile);
         }
@@ -464,9 +470,15 @@ public class DebugWindow extends Window {
      */
     private boolean createImage(final File modelFile, final File imageFile) {
         try {
-            Process p = Runtime.getRuntime().exec("dot -Tpng \"" //$NON-NLS-1$
-                    + modelFile.getCanonicalPath() + "\" -o \"" //$NON-NLS-1$
-                    + imageFile.getCanonicalPath() + "\""); //$NON-NLS-1$
+            String[] cmdLine = new String[] {
+                    "dot", //$NON-NLS-1$
+                    "-Tpng", //$NON-NLS-1$
+                    modelFile.getCanonicalPath(),
+                    "-o", //$NON-NLS-1$
+                    imageFile.getCanonicalPath()
+            };
+                
+            Process p = Runtime.getRuntime().exec(cmdLine);
             p.waitFor();
             
             fileTableViewer.update(modelFile, null);
@@ -486,11 +498,11 @@ public class DebugWindow extends Window {
      */
     private void openErrorDialog(final String message) {
         ErrorDialog dialog = new ErrorDialog(
-                getShell()
-                , Messages.DebugWindow_Error_Title,
-                message,
+                getShell(),
+                Messages.DebugWindow_Error_Title,
                 null,
-                0);
+                new Status(IStatus.ERROR, KlayDebugViewPlugin.PLUGIN_ID, message),
+                IStatus.ERROR);
         dialog.open();
     }
     
@@ -595,6 +607,10 @@ public class DebugWindow extends Window {
         // Image Canvas
         imageCanvas = new Canvas(sashForm,
                 SWT.BORDER | SWT.NO_BACKGROUND | SWT.NO_REDRAW_RESIZE | SWT.V_SCROLL | SWT.H_SCROLL);
+        imageCanvas.getHorizontalBar().setMaximum(1);
+        imageCanvas.getHorizontalBar().setThumb(1);
+        imageCanvas.getVerticalBar().setMaximum(1);
+        imageCanvas.getVerticalBar().setThumb(1);
         
         // Set sash form weights
         sashForm.setWeights(new int[] {30, 70});
@@ -640,11 +656,12 @@ public class DebugWindow extends Window {
      * @param parent the parent composite.
      */
     private void setupToolBar(final Composite parent) {
-        toolBar = new ToolBar(parent, SWT.FLAT | SWT.HORIZONTAL);
+        toolBar = new ToolBar(parent, SWT.FLAT | SWT.HORIZONTAL | SWT.RIGHT);
         toolBar.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
         
         // Folder Browse Button
         folderBrowseButton = new ToolItem(toolBar, SWT.NULL);
+        folderBrowseButton.setText("Open folder");
         folderBrowseButton.setToolTipText(Messages.DebugWindow_Toolbar_BrowseFolder_ToolTip);
         folderBrowseButton.setImage(KlayDebugViewPlugin.loadImage("open.png")); //$NON-NLS-1$
         
