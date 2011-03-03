@@ -16,18 +16,20 @@ package de.cau.cs.kieler.klay.debugview;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.util.Date;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.dialogs.ErrorDialog;
 import org.eclipse.jface.dialogs.IDialogSettings;
-import org.eclipse.jface.viewers.ILabelProvider;
-import org.eclipse.jface.viewers.ILabelProviderListener;
+import org.eclipse.jface.viewers.ColumnLabelProvider;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredContentProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.TableViewer;
+import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerComparator;
 import org.eclipse.jface.window.Window;
@@ -52,6 +54,7 @@ import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.ScrollBar;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.ToolBar;
 import org.eclipse.swt.widgets.ToolItem;
 
@@ -110,7 +113,17 @@ public class DebugWindow extends Window {
      * 
      * @author cds
      */
-    private static class FileTableLabelProvider implements ILabelProvider {
+    private static class FileTableLabelProvider extends ColumnLabelProvider {
+        /**
+         * The name column.
+         */
+        public static final int COL_NAME = 0;
+        
+        /**
+         * The creation time column.
+         */
+        public static final int COL_CREATED = 1;
+        
         /**
          * Image for files whose PNG hasn't been created yet.
          */
@@ -122,16 +135,27 @@ public class DebugWindow extends Window {
         private Image converted = KlayDebugViewPlugin.loadImage("converted.gif"); //$NON-NLS-1$
         
         /**
-         * {@inheritDoc}
+         * The column to provide labels for.
          */
-        public void addListener(final ILabelProviderListener listener) {
-            // Do nothing.
+        private int column = 0;
+        
+        
+        /**
+         * Creates a new label provider for the given column.
+         * 
+         * @param column the column.
+         */
+        public FileTableLabelProvider(final int column) {
+            this.column = column;
         }
-
+        
+        
         /**
          * {@inheritDoc}
          */
         public void dispose() {
+            super.dispose();
+            
             if (converted != null) {
                 converted.dispose();
             }
@@ -144,28 +168,17 @@ public class DebugWindow extends Window {
         /**
          * {@inheritDoc}
          */
-        public boolean isLabelProperty(final Object element, final String property) {
-            // We don't have property changes
-            return false;
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        public void removeListener(final ILabelProviderListener listener) {
-            // Do nothing.
-        }
-
-        /**
-         * {@inheritDoc}
-         */
         public Image getImage(final Object element) {
-            String path = ((File) element).getPath();
-            
-            if (new File(path.substring(0, path.length() - 3) + "png").exists()) { //$NON-NLS-1$
-                return converted;
+            if (column == COL_NAME) {
+                String path = ((File) element).getPath();
+                
+                if (new File(path.substring(0, path.length() - 3) + "png").exists()) { //$NON-NLS-1$
+                    return converted;
+                } else {
+                    return unconverted;
+                }
             } else {
-                return unconverted;
+                return null;
             }
         }
 
@@ -173,7 +186,16 @@ public class DebugWindow extends Window {
          * {@inheritDoc}
          */
         public String getText(final Object element) {
-            return ((File) element).getName();
+            File file = (File) element;
+            
+            if (column == COL_NAME) {
+                return file.getName();
+            } else if (column == COL_CREATED) {
+                return DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.MEDIUM).format(
+                        new Date(file.lastModified()));
+            } else {
+                return null;
+            }
         }
     }
     
@@ -301,6 +323,11 @@ public class DebugWindow extends Window {
             fileTableViewer.setInput(null);
         } else {
             fileTableViewer.setInput(pathFile);
+        }
+        
+        // Resize the table columns
+        for (TableColumn column : fileTable.getColumns()) {
+            column.pack();
         }
         
         // Show the new path to the user
@@ -597,12 +624,29 @@ public class DebugWindow extends Window {
         
         // Table
         fileTable = new Table(sashForm, SWT.BORDER | SWT.SINGLE | SWT.FULL_SELECTION);
+        fileTable.setHeaderVisible(true);
+        fileTable.setLinesVisible(true);
         
         // Table Viewer
         fileTableViewer = new TableViewer(fileTable);
         fileTableViewer.setContentProvider(new FileTableContentProvider());
-        fileTableViewer.setLabelProvider(new FileTableLabelProvider());
         fileTableViewer.setComparator(new FileViewerComparator());
+        
+        TableViewerColumn nameColumn = new TableViewerColumn(fileTableViewer, SWT.LEFT);
+        nameColumn.getColumn().setText("Name");
+        nameColumn.getColumn().setMoveable(false);
+        nameColumn.getColumn().setResizable(true);
+        nameColumn.getColumn().pack();
+        nameColumn.setLabelProvider(new FileTableLabelProvider(
+                FileTableLabelProvider.COL_NAME));
+        
+        TableViewerColumn createdColumn = new TableViewerColumn(fileTableViewer, SWT.LEFT);
+        createdColumn.getColumn().setText("Last modified");
+        createdColumn.getColumn().setMoveable(false);
+        createdColumn.getColumn().setResizable(true);
+        createdColumn.getColumn().pack();
+        createdColumn.setLabelProvider(new FileTableLabelProvider(
+                FileTableLabelProvider.COL_CREATED));
         
         // Image Canvas
         imageCanvas = new Canvas(sashForm,
