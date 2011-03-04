@@ -633,7 +633,7 @@ public class DebugWindow extends Window {
         fileTableViewer.setComparator(new FileViewerComparator());
         
         TableViewerColumn nameColumn = new TableViewerColumn(fileTableViewer, SWT.LEFT);
-        nameColumn.getColumn().setText("Name");
+        nameColumn.getColumn().setText(Messages.DebugWindow_FileTable_NameColumn_Text);
         nameColumn.getColumn().setMoveable(false);
         nameColumn.getColumn().setResizable(true);
         nameColumn.getColumn().pack();
@@ -641,7 +641,7 @@ public class DebugWindow extends Window {
                 FileTableLabelProvider.COL_NAME));
         
         TableViewerColumn createdColumn = new TableViewerColumn(fileTableViewer, SWT.LEFT);
-        createdColumn.getColumn().setText("Last modified");
+        createdColumn.getColumn().setText(Messages.DebugWindow_FileTable_ModifiedColumn_Text);
         createdColumn.getColumn().setMoveable(false);
         createdColumn.getColumn().setResizable(true);
         createdColumn.getColumn().pack();
@@ -705,7 +705,7 @@ public class DebugWindow extends Window {
         
         // Folder Browse Button
         folderBrowseButton = new ToolItem(toolBar, SWT.NULL);
-        folderBrowseButton.setText("Open folder");
+        folderBrowseButton.setText(Messages.DebugWindow_Toolbar_BrowseFolder_Text);
         folderBrowseButton.setToolTipText(Messages.DebugWindow_Toolbar_BrowseFolder_ToolTip);
         folderBrowseButton.setImage(KlayDebugViewPlugin.loadImage("open.png")); //$NON-NLS-1$
         

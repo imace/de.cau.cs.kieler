@@ -31,8 +31,14 @@ public final class Messages extends NLS {
     public static String DebugWindow_Error_DirectoryCouldNotBeOpened;
     public static String DebugWindow_Error_ImageCreationFailed;
     public static String DebugWindow_Error_Title;
+    public static String DebugWindow_FileTable_ModifiedColumn_Text;
+
+    public static String DebugWindow_FileTable_NameColumn_Text;
+
     public static String DebugWindow_PathDialog_Message;
     public static String DebugWindow_Title;
+    public static String DebugWindow_Toolbar_BrowseFolder_Text;
+
     public static String DebugWindow_Toolbar_BrowseFolder_ToolTip;
     public static String DebugWindow_Toolbar_ZoomIn_ToolTip;
     public static String DebugWindow_Toolbar_ZoomOut_ToolTip;
