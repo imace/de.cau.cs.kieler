@@ -58,6 +58,8 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.ToolBar;
 import org.eclipse.swt.widgets.ToolItem;
 
+import de.cau.cs.kieler.core.ui.util.DragDropScrollHandler;
+
 // CHECKSTYLEOFF MagicNumber
 
 /**
@@ -655,6 +657,7 @@ public class DebugWindow extends Window {
         imageCanvas.getHorizontalBar().setThumb(1);
         imageCanvas.getVerticalBar().setMaximum(1);
         imageCanvas.getVerticalBar().setThumb(1);
+        new DragDropScrollHandler(imageCanvas);
         
         // Set sash form weights
         sashForm.setWeights(new int[] {30, 70});
