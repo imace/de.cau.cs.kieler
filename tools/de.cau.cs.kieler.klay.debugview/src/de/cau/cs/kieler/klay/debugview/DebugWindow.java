@@ -220,6 +220,32 @@ public class DebugWindow extends Window {
         }
     }
     
+    /**
+     * A customized version of the drag drop scroll handler that handles value
+     * change notifications more efficiently.
+     * 
+     * @author cds
+     */
+    private class CustomScrollHandler extends DragDropScrollHandler {
+        
+        /**
+         * Constructs a new instance for the given control.
+         * 
+         * @param control the control.
+         */
+        public CustomScrollHandler(final Scrollable control) {
+            super(control, true);
+        }
+
+        @Override
+        protected void notifiyOfValueChange() {
+            handleScrollBarChange(
+                    getHorizontalBar().getSelection(),
+                    getVerticalBar().getSelection());
+        }
+        
+    }
+    
     
     // CONSTANTS
     /**
@@ -438,25 +464,30 @@ public class DebugWindow extends Window {
     /**
      * Handles a change in scroll bar values.
      * 
-     * @param horizontal {@code true} if it's a change in the horizontal scroll bar.
-     * @param newValue the scroll bar's new value.
+     * @param newHorizontalValue the horizontal scroll bar's new value, or {@code -1} if
+     *                           no change occurred.
+     * @param newVerticalValue the vertical scroll bar's new value, or {@code -1} if
+     *                         no change occurred.
      */
-    private void handleScrollBarChange(final boolean horizontal, final int newValue) {
+    private void handleScrollBarChange(final int newHorizontalValue, final int newVerticalValue) {
+        
         if (currentImage == null) {
             // Ignore
             return;
         }
         
-        if (horizontal) {
-            int destX = -newValue - origin.x;
+        if (newHorizontalValue >= 0) {
+            int destX = -newHorizontalValue - origin.x;
             Rectangle rect = currentImage.getBounds();
             imageCanvas.scroll(destX, 0, 0, 0, rect.width, rect.height, false);
-            origin.x = -newValue;
-        } else {
-            int destY = -newValue - origin.y;
+            origin.x = -newHorizontalValue;
+        }
+        
+        if (newVerticalValue >= 0) {
+            int destY = -newVerticalValue - origin.y;
             Rectangle rect = currentImage.getBounds();
             imageCanvas.scroll(0, destY, 0, 0, rect.width, rect.height, false);
-            origin.y = -newValue;
+            origin.y = -newVerticalValue;
         }
     }
     
@@ -659,7 +690,7 @@ public class DebugWindow extends Window {
         imageCanvas.getHorizontalBar().setThumb(1);
         imageCanvas.getVerticalBar().setMaximum(1);
         imageCanvas.getVerticalBar().setThumb(1);
-        new DragDropScrollHandler(imageCanvas);
+        new CustomScrollHandler(imageCanvas);
         
         // Set sash form weights
         sashForm.setWeights(new int[] {30, 70});
@@ -686,13 +717,13 @@ public class DebugWindow extends Window {
         
         imageCanvas.getHorizontalBar().addListener(SWT.Selection, new Listener() {
             public void handleEvent(final Event event) {
-                handleScrollBarChange(true, imageCanvas.getHorizontalBar().getSelection());
+                handleScrollBarChange(imageCanvas.getHorizontalBar().getSelection(), -1);
             }
         });
         
         imageCanvas.getVerticalBar().addListener(SWT.Selection, new Listener() {
             public void handleEvent(final Event event) {
-                handleScrollBarChange(false, imageCanvas.getVerticalBar().getSelection());
+                handleScrollBarChange(-1, imageCanvas.getVerticalBar().getSelection());
             }
         });
         
