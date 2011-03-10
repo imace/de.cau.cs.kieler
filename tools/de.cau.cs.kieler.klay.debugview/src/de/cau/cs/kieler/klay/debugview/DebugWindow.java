@@ -763,8 +763,8 @@ public class DebugWindow extends Window {
         // Folder Refresh Button
         folderRefreshButton = new ToolItem(toolBar, SWT.NULL);
         folderRefreshButton.setEnabled(false);
-        folderRefreshButton.setToolTipText("Refresh");
-        folderRefreshButton.setImage(KlayDebugViewPlugin.loadImage("refresh.gif"));
+        folderRefreshButton.setToolTipText(Messages.DebugWindow_Toolbar_RefreshFolder_ToolTip);
+        folderRefreshButton.setImage(KlayDebugViewPlugin.loadImage("refresh.gif")); //$NON-NLS-1$
         
         // Separator
         new ToolItem(toolBar, SWT.SEPARATOR);
