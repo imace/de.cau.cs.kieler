@@ -267,6 +267,8 @@ public class DebugWindow extends Window {
     private ToolBar toolBar = null;
     private Image folderBrowseImage = null;
     private ToolItem folderBrowseButton = null;
+    private Image folderRefreshImage = null;
+    private ToolItem folderRefreshButton = null;
     private Image zoomInImage = null;
     private ToolItem zoomInButton = null;
     private Image zoomOutImage = null;
@@ -332,6 +334,13 @@ public class DebugWindow extends Window {
     }
     
     /**
+     * Refreshes the file table.
+     */
+    private void refresh() {
+        setPath(currentPath);
+    }
+    
+    /**
      * Tries to apply the new path.
      * 
      * @param newPath the new path. May be {@code null}.
@@ -344,16 +353,17 @@ public class DebugWindow extends Window {
         
         // Find the path
         File pathFile = new File(thePath);
+        File fileTableInput = null;
         if (!pathFile.isDirectory()) {
             if (thePath.length() > 0) {
                 // Error
                 openErrorDialog(Messages.DebugWindow_Error_DirectoryCouldNotBeOpened);
             }
-            
-            fileTableViewer.setInput(null);
         } else {
-            fileTableViewer.setInput(pathFile);
+            fileTableInput = pathFile;
         }
+        
+        fileTableViewer.setInput(fileTableInput);
         
         // Resize the table columns
         for (TableColumn column : fileTable.getColumns()) {
@@ -362,6 +372,7 @@ public class DebugWindow extends Window {
         
         // Show the new path to the user
         currentPath = thePath;
+        folderRefreshButton.setEnabled(fileTableInput != null);
         statusBar.setText(currentPath);
     }
     
@@ -613,6 +624,10 @@ public class DebugWindow extends Window {
                 folderBrowseImage.dispose();
             }
             
+            if (folderRefreshImage != null) {
+                folderRefreshImage.dispose();
+            }
+            
             if (zoomInImage != null) {
                 zoomInImage.dispose();
             }
@@ -745,6 +760,12 @@ public class DebugWindow extends Window {
         folderBrowseButton.setToolTipText(Messages.DebugWindow_Toolbar_BrowseFolder_ToolTip);
         folderBrowseButton.setImage(KlayDebugViewPlugin.loadImage("open.png")); //$NON-NLS-1$
         
+        // Folder Refresh Button
+        folderRefreshButton = new ToolItem(toolBar, SWT.NULL);
+        folderRefreshButton.setEnabled(false);
+        folderRefreshButton.setToolTipText("Refresh");
+        folderRefreshButton.setImage(KlayDebugViewPlugin.loadImage("refresh.gif"));
+        
         // Separator
         new ToolItem(toolBar, SWT.SEPARATOR);
         
@@ -767,6 +788,16 @@ public class DebugWindow extends Window {
             @Override
             public void widgetSelected(final SelectionEvent e) {
                 openPathDialog();
+            }
+        });
+
+        folderRefreshButton.addSelectionListener(new SelectionAdapter() {
+            /**
+             * {@inheritDoc}
+             */
+            @Override
+            public void widgetSelected(final SelectionEvent e) {
+                refresh();
             }
         });
 
