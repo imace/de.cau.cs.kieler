@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="ASCII"?>
-<kaom:Entity xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ann="http://kieler.cs.cau.de/annotations" xmlns:kaom="http://kieler.cs.cau.de/KAOM" xsi:schemaLocation="http://kieler.cs.cau.de/annotations java://de.cau.cs.kieler.core.annotations.AnnotationsPackage http://kieler.cs.cau.de/KAOM java://de.cau.cs.kieler.kaom.KaomPackage">
+<?xml version="1.0" encoding="UTF-8"?>
+<kaom:Entity xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ann="http://kieler.cs.cau.de/annotations" xmlns:kaom="http://kieler.cs.cau.de/KAOM">
   <childEntities name="ActiveRearSteeringCT">
     <annotations xsi:type="ann:StringAnnotation" name="language" value="ptolemy"/>
     <annotations xsi:type="ann:StringAnnotation" name="ptolemyClass" value="ptolemy.actor.TypedCompositeActor"/>
@@ -10,7 +10,7 @@
     <annotations xsi:type="ann:TypedStringAnnotation" name="_vergilCenter" value="{526.0, 278.5}" type="ptolemy.data.expr.ExpertParameter"/>
     <annotations xsi:type="ann:TypedStringAnnotation" name="Annotation" type="ptolemy.vergil.kernel.attributes.TextAttribute">
       <annotations xsi:type="ann:TypedStringAnnotation" name="textSize" value="14" type="ptolemy.data.expr.Parameter"/>
-      <annotations xsi:type="ann:TypedStringAnnotation" name="text" value="The model consists of the two TDL modules RearActuatorController and&#xA;VehicleDynamics and a subsystem Vehicle that represents the &#xfffd;plant&#xfffd;, &#xA;that is, the relevant aspects of the vehicle that needs to be controlled. &#xA;The TDL module RearActuatorController controls the DC motor of the rear &#xA;axis. The TDL module VehicleDynamics computes the desired value of the &#xA;rear steering angle, based on the following sensor data: the steering &#xA;angle of the front wheels, the car speed (both of which are set by the &#xA;human driver), and the yaw angle of the car." type="ptolemy.kernel.util.StringAttribute"/>
+      <annotations xsi:type="ann:TypedStringAnnotation" name="text" value="The model consists of the two TDL modules RearActuatorController and&#xA;VehicleDynamics and a subsystem Vehicle that represents the �plant�, &#xA;that is, the relevant aspects of the vehicle that needs to be controlled. &#xA;The TDL module RearActuatorController controls the DC motor of the rear &#xA;axis. The TDL module VehicleDynamics computes the desired value of the &#xA;rear steering angle, based on the following sensor data: the steering &#xA;angle of the front wheels, the car speed (both of which are set by the &#xA;human driver), and the yaw angle of the car." type="ptolemy.kernel.util.StringAttribute"/>
       <annotations xsi:type="ann:TypedStringAnnotation" name="_location" value="[70.0, 505.0]" type="ptolemy.kernel.util.Location"/>
       <annotations xsi:type="ann:ReferenceAnnotation" name="attachedTo"/>
     </annotations>
