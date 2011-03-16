@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="de.cau.cs.kieler.sim.kiem.json.datacomponent">
+      <content
+            class="de.cau.cs.kieler.klots.DataComponentObserver"
+            id="de.cau.cs.kieler.klots.DataComponentObserverdatacomponent1"
+            name="NXT Output Observer">
+      </content>
+   </extension>
+   <extension
+         point="de.cau.cs.kieler.sim.kiem.json.datacomponent">
+      <content
+            class="de.cau.cs.kieler.klots.DataComponentProducer"
+            id="de.cau.cs.kieler.klots.DataComponentProducer"
+            name="NXT Signal Input Producer">
+      </content>
+   </extension>
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            class="de.cau.cs.kieler.klots.editor.MultiPageEditor"
+            contributorClass="de.cau.cs.kieler.klots.editor.MultiPageEditorContributor"
+            extensions="js"
+            icon="icons/editor4.gif"
+            id="de.cau.cs.kieler.klots.editor.MultiPageEditor"
+            name="Embedded SJ Editor">
+      </editor>
+   </extension>
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <wizard
+            category="cau.cs.kieler.klots.editor"
+            class="de.cau.cs.kieler.klots.editor.SJProjectNewFileWizard"
+            icon="icons/editor4.gif"
+            id="de.cau.cs.kieler.klots.editor.SJEditorNewFileWizard"
+            name="Embedded JS File">
+      </wizard>
+      <category
+            id="de.cau.cs.kieler.klots.editor"
+            name="SJ Wizards">
+      </category>
+      <wizard
+            category="cau.cs.kieler.klots.editor"
+            class="de.cau.cs.kieler.klots.editor.SJProjectNewSJProjectWizard"
+            icon="icons/editor4.gif"
+            id="de.cau.cs.kieler.klots.editor.SJEditorNewSJProjectWizard"
+            name="Embedded JS Project"
+            project="true">
+      </wizard>
+   </extension>
+</plugin>
