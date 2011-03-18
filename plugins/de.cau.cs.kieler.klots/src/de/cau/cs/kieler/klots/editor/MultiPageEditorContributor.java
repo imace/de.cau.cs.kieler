@@ -1,10 +1,15 @@
 package de.cau.cs.kieler.klots.editor;
 
+import de.cau.cs.kieler.klots.KlotsPlugin;
+
 import org.eclipse.core.runtime.Path;
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.jface.action.*;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.IWorkbenchActionConstants;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.ActionFactory;
@@ -91,10 +96,18 @@ public class MultiPageEditorContributor extends MultiPageEditorActionBarContribu
 		// ------------------ compile and link ----------------------
 		compileAndLink = new Action() {
 			public void run() {
-				
-				String filePath = pathLibrary.getPath();
+				String filePath = "";
+				IEditorPart  editorPart = KlotsPlugin.getDefault().getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
+				if(editorPart != null) {
+					MultiPageEditor e = (MultiPageEditor) editorPart;
+					IFileEditorInput input = (IFileEditorInput)e.getJavaEditor().getEditorInput();
+				    IFile file = input.getFile();
+				    IProject activeProject = file.getProject();
+				    filePath = pathLibrary.getProjectPath( activeProject .getName() );
+				} else {
+					System.out.println("###>>> COMPILE PATH ERROR: No active editor!");
+				}
 				System.out.println("###>>> COMPILE AND LINK FILE PATH: " + filePath);
-				
 				try {
 					Runtime rt = Runtime.getRuntime() ;
 //					Process compile = rt.exec("E:\\iMesh\\PROGRAMME\\saves\\embedded_lejos_new\\compile_src_new.bat") ;
@@ -128,10 +141,18 @@ public class MultiPageEditorContributor extends MultiPageEditorActionBarContribu
 		// --------------------- download to NXT ----------------------
 		downloadToNXT = new Action() {
 			public void run() {
-				
-				String filePath = pathLibrary.getPath();
+				String filePath = "";
+				IEditorPart  editorPart = KlotsPlugin.getDefault().getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
+				if(editorPart != null) {
+					MultiPageEditor e = (MultiPageEditor) editorPart;
+					IFileEditorInput input = (IFileEditorInput)e.getJavaEditor().getEditorInput();
+				    IFile file = input.getFile();
+				    IProject activeProject = file.getProject();
+				    filePath = pathLibrary.getProjectPath( activeProject .getName() );
+				} else {
+					System.out.println("###>>> DOWNLOAD TO NXT PATH ERROR: No active editor!");
+				}
 				System.out.println("###>>> DOWNLOAD TO NXT FILE PATH: " + filePath);
-				
 				try {
 					Runtime rt = Runtime.getRuntime() ;
 //					Process upload = rt.exec("E:\\iMesh\\PROGRAMME\\saves\\embedded_lejos_new\\bin\\upload_bin_new3.bat");

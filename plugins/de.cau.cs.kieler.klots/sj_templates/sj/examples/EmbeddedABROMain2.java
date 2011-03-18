@@ -76,15 +76,15 @@ public class EmbeddedABROMain2 {
 			System.out.println(comm);
 			if( comm.substring(0, 4).equals("STEP") ) {
 				System.out.println("NEXT STEP OK");
-				if( comm.indexOf('A') > 3 ) {
+				if( comm.indexOf('A') > 3 || comm.indexOf('a') > 3 ) {
 					System.out.println("GETTING SIGNAL A");
 					in += "A";
 				}
-				if( comm.indexOf('B') > 3 ) {
+				if( comm.indexOf('B') > 3 || comm.indexOf('b') > 3 ) {
 					System.out.println("GETTING SIGNAL B");
 					in += "B";
 				}
-				if( comm.indexOf('R') > 3 ) {
+				if( comm.indexOf('R') > 3 || comm.indexOf('r') > 3 ) {
 					System.out.println("GETTING SIGNAL R");
 					in += "R";
 				}

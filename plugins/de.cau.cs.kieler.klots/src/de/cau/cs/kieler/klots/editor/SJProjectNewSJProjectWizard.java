@@ -274,10 +274,11 @@ public class SJProjectNewSJProjectWizard extends Wizard implements INewWizard,
 
 			// GET NEW PROJECT PATH
 			IFile file = container.getFile(new Path("./SJProjectNewSJProjectWizard.java"));
-			String s = file.getLocationURI().getPath();
-			s = s.substring(0, s.lastIndexOf('/'));
-			pathLibrary.setPath( new Path(s).toOSString() );
-			System.out.println("###>>> FILE PATH SET TO: " + pathLibrary.getPath());
+			String projectPath = file.getLocationURI().getPath();
+			projectPath = projectPath.substring(0, projectPath.lastIndexOf('/'));
+			String projectName = projectPath.substring( projectPath.lastIndexOf('/')+1, projectPath.length() );
+			pathLibrary.addToLibrary(projectName, new Path(projectPath).toOSString() );
+			System.out.println("###>>> FILE PATH SET TO: " + pathLibrary.getProjectPath(projectName));
 			
 			// ##############################################################
 			

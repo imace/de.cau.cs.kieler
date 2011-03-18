@@ -5,7 +5,7 @@
          point="de.cau.cs.kieler.sim.kiem.json.datacomponent">
       <content
             class="de.cau.cs.kieler.klots.DataComponentObserver"
-            id="de.cau.cs.kieler.klots.DataComponentObserverdatacomponent1"
+            id="de.cau.cs.kieler.klots.DataComponentObserver"
             name="NXT Output Observer">
       </content>
    </extension>
@@ -23,7 +23,7 @@
             class="de.cau.cs.kieler.klots.editor.MultiPageEditor"
             contributorClass="de.cau.cs.kieler.klots.editor.MultiPageEditorContributor"
             extensions="js"
-            icon="icons/editor4.gif"
+            icon="icons/editor5.gif"
             id="de.cau.cs.kieler.klots.editor.MultiPageEditor"
             name="Embedded SJ Editor">
       </editor>
@@ -33,7 +33,7 @@
       <wizard
             category="cau.cs.kieler.klots.editor"
             class="de.cau.cs.kieler.klots.editor.SJProjectNewFileWizard"
-            icon="icons/editor4.gif"
+            icon="icons/editor5.gif"
             id="de.cau.cs.kieler.klots.editor.SJEditorNewFileWizard"
             name="Embedded JS File">
       </wizard>
@@ -44,7 +44,7 @@
       <wizard
             category="cau.cs.kieler.klots.editor"
             class="de.cau.cs.kieler.klots.editor.SJProjectNewSJProjectWizard"
-            icon="icons/editor4.gif"
+            icon="icons/editor5.gif"
             id="de.cau.cs.kieler.klots.editor.SJEditorNewSJProjectWizard"
             name="Embedded JS Project"
             project="true">

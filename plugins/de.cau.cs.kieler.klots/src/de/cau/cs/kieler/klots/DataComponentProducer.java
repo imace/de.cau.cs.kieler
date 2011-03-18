@@ -64,10 +64,10 @@ public class DataComponentProducer extends JSONObjectDataComponent implements
     public JSONObject provideInitialVariables() {
         JSONObject returnObj = new JSONObject();
         try {
-            returnObj.accumulate("A", JSONSignalValues.newValue(false));
-            returnObj.accumulate("B", JSONSignalValues.newValue(false));
-            returnObj.accumulate("R", JSONSignalValues.newValue(false));
-            returnObj.accumulate("O", JSONSignalValues.newValue(false));
+            returnObj.accumulate("a", JSONSignalValues.newValue(false));
+            returnObj.accumulate("b", JSONSignalValues.newValue(false));
+            returnObj.accumulate("r", JSONSignalValues.newValue(false));
+            returnObj.accumulate("o", JSONSignalValues.newValue(false));
         } catch (JSONException e) {
             e.printStackTrace();
         }

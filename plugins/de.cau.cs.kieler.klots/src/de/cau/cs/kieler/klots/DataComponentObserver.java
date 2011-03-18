@@ -10,6 +10,7 @@ package de.cau.cs.kieler.klots;
 //import org.eclipse.ui.PlatformUI;
 //import org.eclipse.ui.part.FileEditorInput;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import de.cau.cs.kieler.sim.kiem.IJSONObjectDataComponent;
@@ -30,7 +31,7 @@ public class DataComponentObserver extends JSONObjectDataComponent implements
 	public void initialize() throws KiemInitializationException {
 		
 		dataPool = InputDataPool.getInstance();
-		dataPool.setBuffer(new StringBuffer("HFSCVBNJHFDXCV:LÖÖPKVXCSXC"));
+//		dataPool.setBuffer(new StringBuffer("------->  EXECUTION TRACE  <-------"));
 
 //		try {
 //			Runtime rt = Runtime.getRuntime() ;
@@ -91,12 +92,14 @@ public class DataComponentObserver extends JSONObjectDataComponent implements
 	public JSONObject step(JSONObject jSONObject) throws KiemExecutionException {
 		
 //		System.out.println("DataComponentObserver -> STEP!");
-//		System.out.println("Message received:");
-//		System.out.println("----------------------------------------------");
-		//System.out.println( comm.receiveMessage() );
-//		System.out.println();
+		StringBuffer buffer = comm.receiveMessage();
+		dataPool.setBuffer(buffer);
 		
-		dataPool.setBuffer(comm.receiveMessage());
+//		try {
+//			return new JSONObject(buffer.toString()); //FIXME: input is an array!!!
+//		} catch (JSONException e) {
+//            e.printStackTrace();
+//        }
 		
 		return null;
 	}

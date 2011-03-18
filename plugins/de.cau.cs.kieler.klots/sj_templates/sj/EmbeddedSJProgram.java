@@ -355,9 +355,17 @@ public abstract class EmbeddedSJProgram<StateLabel extends Enum<?>> {
 
             String signalString = "\"signals\":[";
             for (Signal s : signals) {
-                signalString += s.toJSONString();
+            
+            	// ############################################################### //
+            	// FIXME: Entries in JSON-Arrays must be comma separated! 
+                // signalString += s.toJSONString();
+            // }
+            // signalString += "]";
+            	signalString += s.toJSONString() + ",";
             }
-            signalString += "]";
+            signalString = signalString.substring(0, signalString.length()-1) + "]";
+            // ############################################################### //
+            
             logger.log(SIGNALS, signalString);
         }
 
@@ -367,9 +375,17 @@ public abstract class EmbeddedSJProgram<StateLabel extends Enum<?>> {
             // the logging stuff
             String signalString = "\"signals\":[";
             for (Signal s : signals) {
-                signalString += s.toJSONString();
+            	
+            	// ############################################################### //
+            	// FIXME: Entries in JSON-Arrays must be comma separated! 
+                // signalString += s.toJSONString();
+            // }
+            // signalString += "]";
+            	signalString += s.toJSONString() + ",";
             }
-            signalString += "]";
+            signalString = signalString.substring(0, signalString.length()-1) + "]";
+            // ############################################################### //
+            
             logger.log(SIGNALS, signalString);
 
             // if the string with the labels ends with ',' then ...

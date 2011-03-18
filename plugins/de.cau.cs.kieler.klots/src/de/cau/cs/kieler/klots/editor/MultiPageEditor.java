@@ -270,6 +270,7 @@ public class MultiPageEditor extends MultiPageEditorPart implements IResourceCha
 	
 	
 	static void updateExecutionTraceViewer() {
+//		System.out.println(">>> updateExecutionTraceViewer()");
 		Display.getDefault().syncExec(new Runnable() {
 			public void run() {
 				executionTraceViewer.setText(inputData.toString());

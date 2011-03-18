@@ -73,22 +73,48 @@ public class NXTCommunicator {
 	}
 	
 	
+//	public StringBuffer receiveMessage() {
+//		StringBuffer buf = new StringBuffer();
+////		System.out.println("Message received:");
+//		String line = this.receiveMessageLine();
+//		while( !line.equals("EOT") ) {
+//			buf.append(line + "\n");
+//			line = this.receiveMessageLine();
+//		}
+//		return buf;
+//	}
+//	
+//	
+//	@SuppressWarnings("deprecation")
+//	public String receiveMessageLine() {
+//		try {
+//			return dis.readLine();   // FIXME: Find a way to use BufferedReader.readLine() instead!
+//		} catch (IOException ioe) {
+//			System.out.println(">>> IO Exception reading message bytes:");
+//			System.out.println(ioe.getMessage());
+//			return ioe.getMessage();
+//		}
+//	}
+	
 	public StringBuffer receiveMessage() {
 		StringBuffer buf = new StringBuffer();
-//		System.out.println("Message received:");
 		String line = this.receiveMessageLine();
 		while( !line.equals("EOT") ) {
-			buf.append(line + "\n");
+			buf.append("{" + line + "},\n");
 			line = this.receiveMessageLine();
 		}
-		return buf;
+		return buf.replace(buf.length()-2, buf.length(), "]").insert(0, "[");
 	}
 	
 	
 	@SuppressWarnings("deprecation")
 	public String receiveMessageLine() {
 		try {
-			return dis.readLine();   // FIXME: Find a way to use BufferedReader.readLine() instead!
+			String line = dis.readLine();   // FIXME: Find a way to use BufferedReader.readLine() instead!
+			if( line.startsWith("SIGNALS") || line.startsWith("INSTRUCTION") ) {
+				line = line.substring(line.indexOf('"'));
+			}
+			return line;
 		} catch (IOException ioe) {
 			System.out.println(">>> IO Exception reading message bytes:");
 			System.out.println(ioe.getMessage());
