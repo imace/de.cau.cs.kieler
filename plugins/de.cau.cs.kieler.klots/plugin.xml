@@ -4,17 +4,9 @@
    <extension
          point="de.cau.cs.kieler.sim.kiem.json.datacomponent">
       <content
-            class="de.cau.cs.kieler.klots.DataComponentObserver"
-            id="de.cau.cs.kieler.klots.DataComponentObserver"
-            name="NXT Output Observer">
-      </content>
-   </extension>
-   <extension
-         point="de.cau.cs.kieler.sim.kiem.json.datacomponent">
-      <content
-            class="de.cau.cs.kieler.klots.DataComponentProducer"
-            id="de.cau.cs.kieler.klots.DataComponentProducer"
-            name="NXT Signal Input Producer">
+            class="de.cau.cs.kieler.klots.DataDistributor"
+            id="de.cau.cs.kieler.klots.DataDistributor"
+            name="NXT Data Distributor">
       </content>
    </extension>
    <extension
@@ -23,7 +15,7 @@
             class="de.cau.cs.kieler.klots.editor.MultiPageEditor"
             contributorClass="de.cau.cs.kieler.klots.editor.MultiPageEditorContributor"
             extensions="js"
-            icon="icons/editor5.gif"
+            icon="icons/editor4.gif"
             id="de.cau.cs.kieler.klots.editor.MultiPageEditor"
             name="Embedded SJ Editor">
       </editor>

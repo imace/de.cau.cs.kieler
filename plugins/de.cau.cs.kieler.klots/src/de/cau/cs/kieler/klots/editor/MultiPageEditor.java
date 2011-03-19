@@ -260,7 +260,7 @@ public class MultiPageEditor extends MultiPageEditorPart implements IResourceCha
 		int i = editorText.indexOf("public void tick()");
 		int j = editorText.lastIndexOf('}');
 		
-		sjCoreViewer.setText( "    " + editorText.substring(i, j - 1) );
+		sjCoreViewer.setText( "    " + editorText.substring(i, j - 1) );   // FIXME: Exception is thrown if file with no tick() is opened.
 		Device dev = Display.getCurrent();
 		sjCoreViewer.setFont(new Font(dev, "FONT_10_BOLD", 10, SWT.BOLD) );
 		sjCoreViewer.setForeground(new Color(dev, 85, 26, 139));

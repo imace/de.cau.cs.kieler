@@ -29,7 +29,7 @@ public class MultiPageEditorContributor extends MultiPageEditorActionBarContribu
 	private Action compileAndLink;
 	private Action downloadToNXT;
 	
-	PathLibrary pathLibrary = PathLibrary.getInstance();
+//	PathLibrary pathLibrary = PathLibrary.getInstance();
 	
 	/**
 	 * Creates a multi-page contributor.
@@ -96,33 +96,52 @@ public class MultiPageEditorContributor extends MultiPageEditorActionBarContribu
 		// ------------------ compile and link ----------------------
 		compileAndLink = new Action() {
 			public void run() {
-				String filePath = "";
+//				String filePath = "";
+				String projectName = "";
+				String projectPath = "";
 				IEditorPart  editorPart = KlotsPlugin.getDefault().getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
 				if(editorPart != null) {
 					MultiPageEditor e = (MultiPageEditor) editorPart;
 					IFileEditorInput input = (IFileEditorInput)e.getJavaEditor().getEditorInput();
 				    IFile file = input.getFile();
 				    IProject activeProject = file.getProject();
-				    filePath = pathLibrary.getProjectPath( activeProject .getName() );
+//				    filePath = pathLibrary.getProjectPath( activeProject.getName() );
+				    projectName = activeProject.getName();
+				    projectPath = activeProject.getLocation().toOSString();
+				    projectPath = projectPath.substring(0, projectPath.lastIndexOf(projectName));
+				    projectName = "." + Path.SEPARATOR + projectName;
 				} else {
 					System.out.println("###>>> COMPILE PATH ERROR: No active editor!");
 				}
-				System.out.println("###>>> COMPILE AND LINK FILE PATH: " + filePath);
+//				System.out.println("###>>> COMPILE AND LINK FILE PATH: " + filePath);
 				try {
 					Runtime rt = Runtime.getRuntime() ;
+					
 //					Process compile = rt.exec("E:\\iMesh\\PROGRAMME\\saves\\embedded_lejos_new\\compile_src_new.bat") ;
 //					String compileCommand = "nxjc E:\\iMesh\\PROGRAMME\\saves\\embedded_lejos_new\\src\\sj\\*.java E:\\iMesh\\PROGRAMME\\saves\\embedded_lejos_new\\src\\sj\\examples\\*.java E:\\iMesh\\PROGRAMME\\saves\\embedded_lejos_new\\src\\sj\\exceptions\\*.java E:\\iMesh\\PROGRAMME\\saves\\embedded_lejos_new\\src\\sj\\util\\*.java";
-					String compileCommand = "nxjc " +
-					filePath + Path.SEPARATOR + "sj" + Path.SEPARATOR + "*.java " +
-					filePath + Path.SEPARATOR + "sj" + Path.SEPARATOR + "examples" + Path.SEPARATOR + "*.java " +
-					filePath + Path.SEPARATOR + "sj" + Path.SEPARATOR + "exceptions" + Path.SEPARATOR + "*.java " +
-					filePath + Path.SEPARATOR + "sj" + Path.SEPARATOR + "util" + Path.SEPARATOR + "*.java";
+					
+//					String compileCommand = "nxjc " +
+//					filePath + Path.SEPARATOR + "sj" + Path.SEPARATOR + "*.java " +
+//					filePath + Path.SEPARATOR + "sj" + Path.SEPARATOR + "examples" + Path.SEPARATOR + "*.java " +
+//					filePath + Path.SEPARATOR + "sj" + Path.SEPARATOR + "exceptions" + Path.SEPARATOR + "*.java " +
+//					filePath + Path.SEPARATOR + "sj" + Path.SEPARATOR + "util" + Path.SEPARATOR + "*.java";
+					String compileCommand = "\"cd " + projectPath + 
+					" & nxjc -cp \"" + projectName + Path.SEPARATOR + "embeddedSJ.jar\" " +
+					projectName + Path.SEPARATOR + "examples" + Path.SEPARATOR + "*.java\"";
+					System.out.println("###--->>> COMPILE COMMAND STRING: " + compileCommand);
 					Process compile = rt.exec("cmd /C " + compileCommand);
 					compile.waitFor();
+					
 //					Process link = rt.exec("E:\\iMesh\\PROGRAMME\\saves\\embedded_lejos_new\\bin\\link_bin_new3.bat");
 //					String linkCommand = "\"cd E:\\iMesh\\PROGRAMME\\saves\\embedded_lejos_new\\src & nxjlink -o eABRO2.nxj -cp \".\" .\\sj\\examples\\EmbeddedABROMain2\"";
-					String linkCommand = "\"cd " + filePath + Path.SEPARATOR +
-					" & nxjlink -o eABRO2.nxj -cp \".\" ." + Path.SEPARATOR + "sj" + Path.SEPARATOR + "examples" + Path.SEPARATOR + "EmbeddedABROMain2\"";
+					
+//					String linkCommand = "\"cd " + filePath + Path.SEPARATOR +
+//					" & nxjlink -o eABRO2.nxj -cp \".\" ." + Path.SEPARATOR + "sj" + Path.SEPARATOR + "examples" + Path.SEPARATOR + "EmbeddedABROMain2\"";
+					String linkCommand = "\"cd " + projectPath + 
+					" & nxjlink -cp \"" + projectName + Path.SEPARATOR + "embeddedSJ.jar;" + projectName + "\" " +
+					"." + Path.SEPARATOR + "examples" + Path.SEPARATOR + "EmbeddedABROMain2 " +
+					"-o " + projectName + Path.SEPARATOR + "eABRO2.nxj\"";
+					System.out.println("###--->>> LINK COMMAND STRING: " + linkCommand);
 					Process link = rt.exec("cmd /C " + linkCommand);
 					System.out.println("------> OK <-------");
 					link.waitFor();
@@ -141,23 +160,34 @@ public class MultiPageEditorContributor extends MultiPageEditorActionBarContribu
 		// --------------------- download to NXT ----------------------
 		downloadToNXT = new Action() {
 			public void run() {
-				String filePath = "";
+//				String filePath = "";
+				String projectName = "";
+				String projectPath = "";
 				IEditorPart  editorPart = KlotsPlugin.getDefault().getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
 				if(editorPart != null) {
 					MultiPageEditor e = (MultiPageEditor) editorPart;
 					IFileEditorInput input = (IFileEditorInput)e.getJavaEditor().getEditorInput();
 				    IFile file = input.getFile();
 				    IProject activeProject = file.getProject();
-				    filePath = pathLibrary.getProjectPath( activeProject .getName() );
+//				    filePath = pathLibrary.getProjectPath( activeProject .getName() );
+				    projectName = activeProject.getName();
+				    projectPath = activeProject.getLocation().toOSString();
+				    projectPath = projectPath.substring(0, projectPath.lastIndexOf(projectName));
+				    projectName = "." + Path.SEPARATOR + projectName;
 				} else {
 					System.out.println("###>>> DOWNLOAD TO NXT PATH ERROR: No active editor!");
 				}
-				System.out.println("###>>> DOWNLOAD TO NXT FILE PATH: " + filePath);
+//				System.out.println("###>>> DOWNLOAD TO NXT FILE PATH: " + filePath);
 				try {
 					Runtime rt = Runtime.getRuntime() ;
+					
 //					Process upload = rt.exec("E:\\iMesh\\PROGRAMME\\saves\\embedded_lejos_new\\bin\\upload_bin_new3.bat");
 //					String uploadCommand = "\"cd E:\\iMesh\\PROGRAMME\\saves\\embedded_lejos_new\\src & nxjupload -b -r eABRO2.nxj\"";
-					String uploadCommand = "\"cd " + filePath + " & nxjupload -b -r eABRO2.nxj\"";
+					
+//					String uploadCommand = "\"cd " + filePath + " & nxjupload -b -r eABRO2.nxj\"";
+					String uploadCommand = "\"cd " + projectPath +
+					" & nxjupload -b -r " + projectName + Path.SEPARATOR + "eABRO2.nxj\"";
+					System.out.println("###--->>> DOWNLOAD COMMAND STRING: " + uploadCommand);
 					Process upload = rt.exec("cmd /C " + uploadCommand);
 					upload.waitFor();
 					MessageDialog.openInformation(null, "Embedded SJ", "Embedded SJ program downloaded successfully to NXT!");
@@ -180,6 +210,7 @@ public class MultiPageEditorContributor extends MultiPageEditorActionBarContribu
 		menu.add(compileAndLink);
 		menu.add(downloadToNXT);
 	}
+	
 	public void contributeToToolBar(IToolBarManager manager) {
 		manager.add(new Separator());
 		manager.add(compileAndLink);
