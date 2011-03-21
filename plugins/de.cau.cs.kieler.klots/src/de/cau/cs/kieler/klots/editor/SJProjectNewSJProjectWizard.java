@@ -1,7 +1,10 @@
 package de.cau.cs.kieler.klots.editor;
 
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URI;
 
@@ -146,6 +149,7 @@ public class SJProjectNewSJProjectWizard extends Wizard implements INewWizard,
 	void createProject(IProjectDescription description, IProject proj, IProgressMonitor monitor)
 			throws CoreException, OperationCanceledException {
 		try {
+			String projectName = description.getName();
 			monitor.beginTask("", 2000);
 			proj.create(description, new SubProgressMonitor(monitor, 1000));
 			if( monitor.isCanceled() ) {
@@ -243,8 +247,6 @@ public class SJProjectNewSJProjectWizard extends Wizard implements INewWizard,
 //			resStream = this.getClass().getResourceAsStream(sjPath + "examples" + Path.SEPARATOR + "EmbeddedABROMain2.java");
 //			addFileToProject(container, new Path(dest + "examples" + Path.SEPARATOR + "EmbeddedABROMain2.java"), resStream, monitor);
 //			resStream.close();
-//			
-//			// ##############################################################
 //
 //			// GET NEW PROJECT PATH
 //			IFile file = container.getFile(new Path("./SJProjectNewSJProjectWizard.java"));
@@ -255,26 +257,75 @@ public class SJProjectNewSJProjectWizard extends Wizard implements INewWizard,
 //			System.out.println("###>>> FILE PATH SET TO: " + pathLibrary.getProjectPath(projectName));
 			
 			// ##############################################################			
+//			String templatesPath = ".." + Path.SEPARATOR + ".." + Path.SEPARATOR +
+//			".." + Path.SEPARATOR + ".." + Path.SEPARATOR +
+//			".." + Path.SEPARATOR + ".." + Path.SEPARATOR +
+//			"sj_templates" + Path.SEPARATOR + "";
+//			String examplesDestination = "examples" + Path.SEPARATOR + "";
+//			
+//			final IFolder examplesFolder = container.getFolder(new Path("examples"));
+//			examplesFolder.create(true, true, monitor);
+//			InputStream resourceStream = this.getClass().getResourceAsStream(templatesPath + "embeddedSJ.jar");
+//			System.out.println("$$$$$$$$$$ EMBEDDED SJ PATH: " + this.getClass().getResource(templatesPath + "embeddedSJ.jar").getPath());
+//			addFileToProject(container, new Path("embeddedSJ.jar"), resourceStream, monitor);
+//			resourceStream = this.getClass().getResourceAsStream(templatesPath + "EmbeddedABRO.java");
+//			addFileToProject(container, new Path(examplesDestination + "EmbeddedABRO.java"), resourceStream, monitor);
+//			resourceStream = this.getClass().getResourceAsStream(templatesPath + "EmbeddedABROMain.java");
+//			addFileToProject(container, new Path(examplesDestination + "EmbeddedABROMain.java"), resourceStream, monitor);
+//			resourceStream = this.getClass().getResourceAsStream(templatesPath + "EmbeddedABROMain2.java");
+//			addFileToProject(container, new Path(examplesDestination + "EmbeddedABROMain2.java"), resourceStream, monitor);
+//			resourceStream.close();
+			
 			String templatesPath = ".." + Path.SEPARATOR + ".." + Path.SEPARATOR +
 			".." + Path.SEPARATOR + ".." + Path.SEPARATOR +
 			".." + Path.SEPARATOR + ".." + Path.SEPARATOR +
 			"sj_templates" + Path.SEPARATOR + "";
-			String examplesDestination = "examples" + Path.SEPARATOR + "";
+			String examplesPath = "src" + Path.SEPARATOR + "examples";
 			
-			final IFolder examplesFolder = container.getFolder(new Path("examples"));
+			// FIXME: see if you can use IResource.copy() to copy all template files!
+			// add src and bin folders, also add examples package to src
+			final IFolder srcFolder = container.getFolder(new Path("src"));
+			srcFolder.create(true, true, monitor);
+			final IFolder binFolder = container.getFolder(new Path("bin"));
+			binFolder.create(true, true, monitor);
+			final IFolder examplesFolder = container.getFolder(new Path(examplesPath));
 			examplesFolder.create(true, true, monitor);
+			
 			InputStream resourceStream = this.getClass().getResourceAsStream(templatesPath + "embeddedSJ.jar");
 			System.out.println("$$$$$$$$$$ EMBEDDED SJ PATH: " + this.getClass().getResource(templatesPath + "embeddedSJ.jar").getPath());
 			addFileToProject(container, new Path("embeddedSJ.jar"), resourceStream, monitor);
 			resourceStream = this.getClass().getResourceAsStream(templatesPath + "EmbeddedABRO.java");
-			addFileToProject(container, new Path(examplesDestination + "EmbeddedABRO.java"), resourceStream, monitor);
-			resourceStream = this.getClass().getResourceAsStream(templatesPath + "EmbeddedABROMain.java");
-			addFileToProject(container, new Path(examplesDestination + "EmbeddedABROMain.java"), resourceStream, monitor);
+			addFileToProject(container, new Path(examplesPath + Path.SEPARATOR + "EmbeddedABRO.java"), resourceStream, monitor);
+//			resourceStream = this.getClass().getResourceAsStream(templatesPath + "EmbeddedABROMain.java");
+//			addFileToProject(container, new Path(examplesPath + Path.SEPARATOR + "EmbeddedABROMain.java"), resourceStream, monitor);
 			resourceStream = this.getClass().getResourceAsStream(templatesPath + "EmbeddedABROMain2.java");
-			addFileToProject(container, new Path(examplesDestination + "EmbeddedABROMain2.java"), resourceStream, monitor);
-			resourceStream.close();
+			addFileToProject(container, new Path(examplesPath + Path.SEPARATOR + "EmbeddedABROMain.java"), resourceStream, monitor);
 			
+			// add the .classpath file
+			resourceStream = this.getClass().getResourceAsStream(templatesPath + ".classpath.resource");
+			addFileToProject(container, new Path(".classpath"), resourceStream, monitor);
+			
+			resourceStream = this.getClass().getResourceAsStream(templatesPath + ".project.resource");
+			
+			// put the name of the new project in the .project file
+			BufferedReader projectFile = new BufferedReader(new InputStreamReader(resourceStream));
+			String projectFileContent = "";
+			String projectFileLine = "";
+			while( (projectFileLine = projectFile.readLine()) != null ) {
+				if( projectFileLine.equals("<name></name>") ) {
+					projectFileLine = "<name>" + projectName + "</name>";
+				}
+				projectFileContent += projectFileLine + "\n";
+			}
+			projectFile.close();
+			resourceStream = new ByteArrayInputStream( projectFileContent.getBytes() );
+			
+			// add the adjusted .project file
+			addFileToProject(container, new Path(".project"), resourceStream, monitor);
+			
+			resourceStream.close();		
 			// ##############################################################
+			
 		} catch(IOException ioe) {
 			IStatus status = new Status(IStatus.ERROR, "NewFileWizard", IStatus.OK,
 					ioe.getLocalizedMessage(), null);

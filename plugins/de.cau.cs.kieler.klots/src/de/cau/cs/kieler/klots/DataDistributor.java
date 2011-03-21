@@ -2,6 +2,11 @@ package de.cau.cs.kieler.klots;
 
 import java.util.Iterator;
 
+import org.eclipse.ui.console.ConsolePlugin;
+import org.eclipse.ui.console.IConsole;
+import org.eclipse.ui.console.IConsoleManager;
+import org.eclipse.ui.console.MessageConsole;
+import org.eclipse.ui.console.MessageConsoleStream;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -17,6 +22,7 @@ import de.cau.cs.kieler.klots.editor.InputDataPool;;
 public class DataDistributor extends JSONObjectDataComponent implements
 		IJSONObjectDataComponent {
 	
+	private static final String KLOTSCONSOLENAME = "Klots Console";
 	NXTCommunicator comm;
 	InputDataPool dataPool;
 	
@@ -65,7 +71,7 @@ public class DataDistributor extends JSONObjectDataComponent implements
 		        }
 			}
 		} catch (JSONException e) {
-            e.printStackTrace();
+			printConsole(e.getStackTrace().toString());
         }
 		comm.sendMessage("STEP\n" + msg);
 		
@@ -90,7 +96,7 @@ public class DataDistributor extends JSONObjectDataComponent implements
 			}
 			return returnObj;
 		} catch (JSONException e) {
-            e.printStackTrace();
+			printConsole(e.getStackTrace().toString());
         }	
 		return null;
 	}
@@ -105,9 +111,55 @@ public class DataDistributor extends JSONObjectDataComponent implements
             returnObj.accumulate("r", JSONSignalValues.newValue(false));
             returnObj.accumulate("o", JSONSignalValues.newValue(false));
         } catch (JSONException e) {
-            e.printStackTrace();
+        	printConsole(e.getStackTrace().toString());
         }
         return returnObj;
+    }
+	
+	
+	
+    // ----------------------------------------------------------------------
+	// ----------------------------- KLOTS CONSOLE --------------------------
+    // ----------------------------------------------------------------------
+
+    /**
+     * Clears the klots console.
+     */
+    protected void clearConsole() {
+        printConsole(null);
+    }
+
+    /**
+     * Prints to the klots console.
+     * 
+     * @param text
+     *            the text
+     */
+    protected void printConsole(String text) {
+        MessageConsole maudeConsole = null;
+        boolean found = false;
+        ConsolePlugin plugin = ConsolePlugin.getDefault();
+        IConsoleManager conMan = plugin.getConsoleManager();
+        IConsole[] existing = conMan.getConsoles();
+        for (int i = 0; i < existing.length; i++)
+            if (DataDistributor.KLOTSCONSOLENAME.equals(existing[i].getName())) {
+                maudeConsole = (MessageConsole) existing[i];
+                found = true;
+                break;
+            }
+        if (!found) {
+            // if no console found, so create a new one
+            maudeConsole = new MessageConsole(DataDistributor.KLOTSCONSOLENAME, null);
+            conMan.addConsoles(new IConsole[] { maudeConsole });
+        }
+
+        // now print to the klots console or clear it
+        if (text != null) {
+            MessageConsoleStream out = maudeConsole.newMessageStream();
+            out.println(text);
+        } else {
+            maudeConsole.clearConsole();
+        }
     }
 	
 }

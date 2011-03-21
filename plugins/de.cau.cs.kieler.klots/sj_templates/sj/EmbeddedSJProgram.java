@@ -710,19 +710,34 @@ public abstract class EmbeddedSJProgram<StateLabel extends Enum<?>> {
         if (curThread == null) {
             throw new ThreadException("There is no thread running.");
         } else if (!curThread.getDescendants().isEmpty()) {
+        	
+        	// ########################################################### //
+        	// FIXME: Save the old label of the current thread. Needed for the logger!
+        	String oldLabel = curThread.getLabel().name();
+        	// ########################################################### //
 
             // NiceToHave: more Comments here
             curThread.setLabel(label);
 
             threadsCurTick.add(curThread);
 
+            // ########################################################### //
+            // if (logger != null) {
+            //     logger.log(
+            //             INSTRUCTION,
+            //             "\"forke\":" + "{\"label\":\"" + curThread.getLabel().name() + "\","
+            //                     + "\"prio\":" + curThread.getPriority() + ",\"param\":[\""
+            //                     + label.name() + "\"]}");
+            // }
             if (logger != null) {
                 logger.log(
                         INSTRUCTION,
-                        "\"forke\":" + "{\"label\":\"" + curThread.getLabel().name() + "\","
+                        "\"forke\":" + "{\"label\":\"" + oldLabel + "\","
                                 + "\"prio\":" + curThread.getPriority() + ",\"param\":[\""
                                 + label.name() + "\"]}");
             }
+            // ########################################################### //
+            
             curThread = null;
         } else {
             throw new ThreadException("You can not use forke without a fork before.");
