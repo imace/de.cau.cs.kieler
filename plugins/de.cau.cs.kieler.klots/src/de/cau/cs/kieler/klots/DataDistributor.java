@@ -31,7 +31,17 @@ public class DataDistributor extends JSONObjectDataComponent implements
 	public void initialize() throws KiemInitializationException {
 		dataPool = InputDataPool.getInstance();
 		comm = NXTCommunicator.getInstance();
-		dataPool.setBuffer(comm.receiveMessage());		
+//		dataPool.setBuffer(comm.receiveMessage());
+//		dataPool.setActionFlag(dataPool.START_ACTION);
+		
+		String s = comm.receiveMessage().toString();
+		if( s.equals("[{SYNCHRONIZED}]") ) {
+			printConsole(s);
+			dataPool.setActionFlag(dataPool.START_ACTION);
+		} else {
+			printConsole("ERROR while trying to synchronize with the NXT: " + s);
+		}
+		
 	}
 
 	
@@ -39,6 +49,7 @@ public class DataDistributor extends JSONObjectDataComponent implements
 	public void wrapup() throws KiemInitializationException {
 		comm.sendMessage("STOP");
 		comm.closeTransmission();
+		dataPool.setActionFlag(dataPool.STOP_ACTION);
 	}
 
 	

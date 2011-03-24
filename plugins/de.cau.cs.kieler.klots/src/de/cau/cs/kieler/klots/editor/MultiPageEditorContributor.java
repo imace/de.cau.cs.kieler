@@ -145,8 +145,8 @@ public class MultiPageEditorContributor extends MultiPageEditorActionBarContribu
 				}
 			}
 		};
-		compileAndLink.setText("Compile and link");
-		compileAndLink.setToolTipText("Compile and link embedded SJ program");
+		compileAndLink.setText("Build program");
+		compileAndLink.setToolTipText("Build the embedded SJ program");
 		compileAndLink.setImageDescriptor(PlatformUI.getWorkbench().getSharedImages().
 				getImageDescriptor(IDE.SharedImages.IMG_OPEN_MARKER));
 
@@ -195,7 +195,7 @@ public class MultiPageEditorContributor extends MultiPageEditorActionBarContribu
 	
 	
 	public void contributeToMenu(IMenuManager manager) {
-		IMenuManager menu = new MenuManager("Embedded &JS &Menu");
+		IMenuManager menu = new MenuManager("Embedded &SJ &Menu");
 		manager.prependToGroup(IWorkbenchActionConstants.MB_ADDITIONS, menu);
 		menu.add(compileAndLink);
 		menu.add(downloadToNXT);

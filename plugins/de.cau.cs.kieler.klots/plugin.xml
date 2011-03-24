@@ -27,7 +27,7 @@
             class="de.cau.cs.kieler.klots.editor.SJProjectNewFileWizard"
             icon="icons/editor5.gif"
             id="de.cau.cs.kieler.klots.editor.SJEditorNewFileWizard"
-            name="Embedded JS File">
+            name="Embedded SJ File">
       </wizard>
       <category
             id="de.cau.cs.kieler.klots.editor"
@@ -38,8 +38,29 @@
             class="de.cau.cs.kieler.klots.editor.SJProjectNewSJProjectWizard"
             icon="icons/editor5.gif"
             id="de.cau.cs.kieler.klots.editor.SJEditorNewSJProjectWizard"
-            name="Embedded JS Project"
+            name="Embedded SJ Project"
             project="true">
       </wizard>
    </extension>
+   
+   
+   <!-- ############################ MARKERS ############################## -->
+   
+   <extension
+      	point="org.eclipse.core.resources.markers"
+      	id="instructionMarker"
+      	name="SJ Instruction Marker">
+      	<!-- <super type="org.eclipse.core.resources.textmarker"/> -->
+      	<super type="org.eclipse.core.resources.taskmarker"/>
+      	<persistent value="false"/>
+      	<attribute name="instructionName"/>
+  </extension>
+  <extension point="org.eclipse.ui.ide.markerImageProviders">
+	<imageprovider
+		markertype="de.cau.cs.kieler.klots.editor.instructionMarker"
+		icon="icons/editor4.gif"
+		id="de.cau.cs.kieler.klots.editor.instructionMarkerProvider">
+	</imageprovider>
+  </extension>
+     
 </plugin>

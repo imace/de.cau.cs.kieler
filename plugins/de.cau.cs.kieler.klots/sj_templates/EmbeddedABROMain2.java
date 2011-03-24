@@ -1,7 +1,7 @@
 package examples;
 
 import lejos.nxt.LCD;
-import lejos.nxt.Button;
+//import lejos.nxt.Button;
 import lejos.nxt.comm.BTConnection;
 import lejos.nxt.comm.Bluetooth;
 
@@ -13,7 +13,7 @@ import sj.Signal;
 import sj.exceptions.SignalNotDeclaredException;
 import sj.util.LinkedList;
 
-public class EmbeddedABROMain2 {
+public class EmbeddedABROMain {
 	public static Signal string2Signal(String str, EmbeddedABRO abro) throws SignalNotDeclaredException {
 		if (str.equalsIgnoreCase("a")) {
 			return abro.a;
@@ -35,11 +35,52 @@ public class EmbeddedABROMain2 {
 		EmbeddedABRO program = new EmbeddedABRO();
 		program.setLogger(logger);
 		System.out.println("     ");
-		
 		System.out.println("ABRO is running");
 		System.out.println("     ");
 		String in = "";
+		logger.log(SJLogger.LogMsgTyp.TICK_INFO, "SYNCHRONIZED\nEOT");
+		
 		while (!program.isTerminated()) {
+			System.out.println("DO NEXT STEP");
+			String comm = logger.receiveCommandMessage().toString();
+			System.out.println(comm);
+			if( comm.substring(0, 4).equals("STEP") ) {
+				System.out.println("NEXT STEP OK");
+				if( comm.indexOf('A') > 3 || comm.indexOf('a') > 3 ) {
+					System.out.println("GETTING SIGNAL A");
+					in += "A";
+				}
+				if( comm.indexOf('B') > 3 || comm.indexOf('b') > 3 ) {
+					System.out.println("GETTING SIGNAL B");
+					in += "B";
+				}
+				if( comm.indexOf('R') > 3 || comm.indexOf('r') > 3 ) {
+					System.out.println("GETTING SIGNAL R");
+					in += "R";
+				}
+			} else if( comm.equals("STOP") ) {
+				btc.close();
+				LCD.clearDisplay();
+				System.out.println("                ");
+				System.out.println("                ");
+				System.out.println("----------------");
+				System.out.println("EXITING PROGRAM!");
+				System.out.println("----------------");
+				System.out.println("                ");
+				System.out.println("                ");
+				System.out.println("                ");
+				try {
+		            java.lang.Thread.sleep(1000);
+				} catch( Exception e) {;}
+				System.exit(0);
+			} else {
+				System.out.println("COMMAND ERROR");
+				try {
+		            java.lang.Thread.sleep(2000);
+				} catch( Exception e) {;}
+			}
+			
+			// ########################################################### //
 			LCD.refresh();
 			char[] signals = in.toCharArray();
 			LinkedList<Signal> signalList = new LinkedList<Signal>();
@@ -67,52 +108,11 @@ public class EmbeddedABROMain2 {
 			for (Signal s : sig2) {
 				System.out.println(s.toString());
 			}
-			
 			// ########################################################### //
+			
 			in = "";
 			logger.log(SJLogger.LogMsgTyp.TICK_INFO, "EOT");
-			System.out.println("DO NEXT STEP");
-			String comm = logger.receiveCommandMessage().toString();
-			System.out.println(comm);
-			if( comm.substring(0, 4).equals("STEP") ) {
-				System.out.println("NEXT STEP OK");
-				if( comm.indexOf('A') > 3 || comm.indexOf('a') > 3 ) {
-					System.out.println("GETTING SIGNAL A");
-					in += "A";
-				}
-				if( comm.indexOf('B') > 3 || comm.indexOf('b') > 3 ) {
-					System.out.println("GETTING SIGNAL B");
-					in += "B";
-				}
-				if( comm.indexOf('R') > 3 || comm.indexOf('r') > 3 ) {
-					System.out.println("GETTING SIGNAL R");
-					in += "R";
-				}
-				try {
-					java.lang.Thread.sleep(3000);
-				} catch( Exception e) {;}
-			} else if( comm.equals("STOP") ) {
-				btc.close();
-				LCD.clearDisplay();
-				System.out.println("                ");
-				System.out.println("                ");
-				System.out.println("----------------");
-				System.out.println("EXITING PROGRAM!");
-				System.out.println("----------------");
-				System.out.println("                ");
-				System.out.println("                ");
-				System.out.println("                ");
-				try {
-		            java.lang.Thread.sleep(1000);
-				} catch( Exception e) {;}
-				System.exit(0);
-			} else {
-				System.out.println("COMMAND ERROR");
-				try {
-		            java.lang.Thread.sleep(2000);
-				} catch( Exception e) {;}
-			}
-			// ########################################################### //
+			
 		}
 	}
 }

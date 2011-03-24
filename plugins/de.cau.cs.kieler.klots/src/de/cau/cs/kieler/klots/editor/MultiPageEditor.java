@@ -4,18 +4,22 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 
 import org.eclipse.jdt.internal.ui.javaeditor.CompilationUnitEditor;
 import org.eclipse.jdt.internal.ui.javaeditor.JavaEditor;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceChangeEvent;
 import org.eclipse.core.resources.IResourceChangeListener;
+import org.eclipse.core.resources.ResourceAttributes;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 
+import org.eclipse.jface.action.IStatusLineManager;
 import org.eclipse.jface.dialogs.ErrorDialog;
 
 import org.eclipse.swt.SWT;
@@ -27,14 +31,19 @@ import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Device;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
+import org.eclipse.swt.graphics.Point;
+import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.FontDialog;
+import org.eclipse.swt.widgets.Listener;
 
+import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IEditorSite;
@@ -43,6 +52,8 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.part.MultiPageEditorPart;
+import org.eclipse.ui.texteditor.StatusLineContributionItem;
+import org.eclipse.ui.views.markers.MarkerViewUtil;
 import org.eclipse.ui.ide.IDE;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -138,6 +149,9 @@ public class MultiPageEditor extends MultiPageEditorPart implements IResourceCha
 	private static StyledText executionTraceViewer;
 	private static StringBuffer inputData = new StringBuffer();
 	
+	private StatusLineContributionItem uiStatusLineItem;
+	
+	
 	/**
 	 * Creates a multi-page editor example.
 	 */
@@ -230,7 +244,23 @@ public class MultiPageEditor extends MultiPageEditorPart implements IResourceCha
 //		createPage1();
 		createSJViewerPage();
 		createExecutionTraceViewerPage();
+		
+		// -------------------- set up the status line ----------------------  
+		IActionBars aBars = editor.getEditorSite().getActionBars();
+		IStatusLineManager man = aBars.getStatusLineManager();
+//		org.eclipse.jface.action.StatusLineContributionItem fStatusLineItem = new org.eclipse.jface.action.StatusLineContributionItem("fStatusLineItem", 50);
+//		man.add(fStatusLineItem);
+//		aBars.updateActionBars();
+//		fStatusLineItem.setVisible(true);
+//		fStatusLineItem.setText("INSTRUCTION INFO TO BE DISPAYED");
+		uiStatusLineItem = new StatusLineContributionItem("uiStatusLineItem", true, 100);
+		man.add(uiStatusLineItem);
+		aBars.updateActionBars();
+		uiStatusLineItem.setToolTipText("DO WE NEED A TOOL TIP TEXT?");
+		uiStatusLineItem.setErrorText("INSTRUCTION INFO TO BE DISPAYED");
+		// ------------------------------------------------------------------
 	}
+	
 	/**
 	 * The <code>MultiPageEditorPart</code> implementation of this 
 	 * <code>IWorkbenchPart</code> method disposes all nested editors.
@@ -348,7 +378,7 @@ public class MultiPageEditor extends MultiPageEditorPart implements IResourceCha
 	// XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 	// XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 	
-	static void updateSJCoreViewer() {
+	static void updateJavaEditorAndSJCoreViewer() {
 		Display.getDefault().syncExec(new Runnable() {
 			public void run() {
 //				executionTraceViewer.setText(inputData.toString());
@@ -390,6 +420,7 @@ public class MultiPageEditor extends MultiPageEditorPart implements IResourceCha
 				oldInstructionsEndOffsets.clear();
 				// ----------------------------------------------------------
 				
+				// ----------------- highlight new labels -------------------
 				try {
 					JSONArray array = new JSONArray(sjCoreData);
 					JSONObject instruction = new JSONObject();
@@ -407,10 +438,10 @@ public class MultiPageEditor extends MultiPageEditorPart implements IResourceCha
 				} catch(JSONException e) {
 					e.printStackTrace();
 				}
+				// ----------------------------------------------------------
 				
-				
-			}
-		});
+			} //end run()
+		}); // end syncExec()
 	}
 	
 	
@@ -506,19 +537,72 @@ public class MultiPageEditor extends MultiPageEditorPart implements IResourceCha
 	
 	
 	private void bindToDataPool() {
-		buffer.addPropertyChangeListener(new PropertyChangeListener() {
+		buffer.addPropertyChangeListener(buffer.DATA_BUFFER, new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent e) {
-				
-				// ---------------------------------------------------------
-				sjCoreData = ((StringBuffer) e.getNewValue()).toString(); //
-				// ---------------------------------------------------------
-				
+				sjCoreData = ((StringBuffer) e.getNewValue()).toString();
 				inputData = inputData.append("\n").append( (StringBuffer) e.getNewValue() );
 				MultiPageEditor.updateExecutionTraceViewer();
-				
-				// -------------------------------------
-				MultiPageEditor.updateSJCoreViewer(); //
-				// -------------------------------------
+				// -----------------------------------------------
+				MultiPageEditor.updateJavaEditorAndSJCoreViewer();
+				// -----------------------------------------------
+			}
+		});
+		buffer.addPropertyChangeListener(buffer.ACTION_FLAG, new PropertyChangeListener() {
+			public void propertyChange(PropertyChangeEvent e) {
+				if( (Integer) e.getNewValue() == buffer.START_ACTION ) {
+					Display.getDefault().syncExec(new Runnable() {
+						public void run() {
+							
+							// get the tick content, which is to be displayed
+							//getSJContent();
+							
+							// set the java editor read only
+							editor.getViewer().getTextWidget().setEditable(false);
+							
+							// ------------ set tool tip TESTER -------------
+							//editor.getViewer().getTextWidget().setToolTipText("INSTRUCTION INFO TOOL TIP TEXT");
+							final StyledText t = editor.getViewer().getTextWidget();
+							String s = t.getText();
+							int i = s.indexOf("public void tick()");
+							Point p = t.getLocationAtOffset(i) ;
+							final Rectangle r = new Rectangle( p.x, p.y, 200, t.getLineHeight() );
+							Listener mouseListener = new Listener () {
+								public void handleEvent (Event event) {
+									switch (event.type) {
+										case SWT.MouseEnter:
+										case SWT.MouseMove:
+											if (r.contains (event.x, event.y)) {
+												String text = "ToolTip >tick()<";
+												if (!(text.equals (t.getToolTipText ()))) {
+													t.setToolTipText ("ToolTip >tick()<");
+												}
+												return;
+											}
+										t.setToolTipText(null);
+										break;
+									}
+								}
+							};
+							t.addListener (SWT.MouseMove, mouseListener);
+							t.addListener (SWT.MouseEnter, mouseListener);
+							// ----------------------------------------------
+							
+							// ------------- set marker TESTER --------------
+							IFile file = ((IFileEditorInput) editor.getEditorInput()).getFile();
+							IMarker marker = createInstructionMarker(file, "INSTRUCTION INFO\nTO BE DISPLAYED", 66);
+							//MarkerViewUtil.showMarker(page, marker, showView);
+							// ----------------------------------------------
+						}
+					});
+				} else if( (Integer) e.getNewValue() == buffer.STOP_ACTION ) {
+					Display.getDefault().syncExec(new Runnable() {
+						public void run() {
+							editor.getViewer().getTextWidget().setEditable(true);
+							// set tool tip
+							editor.getViewer().getTextWidget().setToolTipText("");
+						}
+					});
+				}
 			}
 		});
 	}
@@ -556,6 +640,23 @@ public class MultiPageEditor extends MultiPageEditorPart implements IResourceCha
 			System.out.println("++++++++++++++++++++++++++++++++++++++++\n");
 			labelList.add( new LabelInfo(labelName, i+6, labelEndIndex) );
 			// --------------------------------------------------------------
+		}
+	}
+	
+	
+	private IMarker createInstructionMarker(IResource res, String msg, int line) {
+		try {
+			IMarker marker = res.createMarker("de.cau.cs.kieler.klots.editor.instructionMarker");
+			marker.setAttribute("instructionName", "z.B. fork");
+			marker.setAttribute(IMarker.LINE_NUMBER, line);
+			marker.setAttribute(IMarker.MESSAGE, msg);
+			//marker.setAttribute(IMarker.PRIORITY, IMarker.PRIORITY_HIGH);
+			//marker.setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_ERROR);
+			return marker;
+		} catch (CoreException e) {
+			// You need to handle the cases where attribute value is rejected
+			e.printStackTrace();
+			return null;
 		}
 	}
 	
