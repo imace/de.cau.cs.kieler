@@ -298,8 +298,12 @@ public class SJProjectNewSJProjectWizard extends Wizard implements INewWizard,
 			addFileToProject(container, new Path(examplesPath + Path.SEPARATOR + "EmbeddedABRO.java"), resourceStream, monitor);
 //			resourceStream = this.getClass().getResourceAsStream(templatesPath + "EmbeddedABROMain.java");
 //			addFileToProject(container, new Path(examplesPath + Path.SEPARATOR + "EmbeddedABROMain.java"), resourceStream, monitor);
-			resourceStream = this.getClass().getResourceAsStream(templatesPath + "EmbeddedABROMain2.java");
+			resourceStream = this.getClass().getResourceAsStream(templatesPath + "EmbeddedABROMain.java");
 			addFileToProject(container, new Path(examplesPath + Path.SEPARATOR + "EmbeddedABROMain.java"), resourceStream, monitor);
+			
+			// add the .execution file
+			resourceStream = this.getClass().getResourceAsStream(templatesPath + "EmbeddedABRO.execution");
+			addFileToProject(container, new Path("embeddedSJ.execution"), resourceStream, monitor);
 			
 			// add the .classpath file
 			resourceStream = this.getClass().getResourceAsStream(templatesPath + ".classpath.resource");

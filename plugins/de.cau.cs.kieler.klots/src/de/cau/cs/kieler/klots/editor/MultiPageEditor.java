@@ -256,9 +256,12 @@ public class MultiPageEditor extends MultiPageEditorPart implements IResourceCha
 		uiStatusLineItem = new StatusLineContributionItem("uiStatusLineItem", true, 100);
 		man.add(uiStatusLineItem);
 		aBars.updateActionBars();
-		uiStatusLineItem.setToolTipText("DO WE NEED A TOOL TIP TEXT?");
-		uiStatusLineItem.setErrorText("INSTRUCTION INFO TO BE DISPAYED");
+		// Commented out for Oberseminar purposes!!!
+		//uiStatusLineItem.setToolTipText("DO WE NEED A TOOL TIP TEXT?");
+		//uiStatusLineItem.setErrorText("INSTRUCTION INFO TO BE DISPAYED");
 		// ------------------------------------------------------------------
+		
+		getSJContent();   // moved to this location from this.pageChange(int pageNr)
 	}
 	
 	/**
@@ -315,9 +318,9 @@ public class MultiPageEditor extends MultiPageEditorPart implements IResourceCha
 	 */
 	protected void pageChange(int newPageIndex) {
 		super.pageChange(newPageIndex);
-		if (newPageIndex == 1) {
-			getSJContent();
-		}
+//		if (newPageIndex == 1) {
+//			getSJContent();   // moved to this.createPages()
+//		}
 	}
 	
 	
@@ -413,8 +416,13 @@ public class MultiPageEditor extends MultiPageEditorPart implements IResourceCha
 				for(int i = 0; i < oldInstructionsStartOffsets.size(); i++) {
 					oldStart = (int) oldInstructionsStartOffsets.get(i);
 					oldEnd = (int) oldInstructionsEndOffsets.get(i);
-					sjCoreViewer.setStyleRange(new StyleRange(oldStart, oldEnd-oldStart+1, new Color(dev, 255, 140, 0), null));
-					editor.getViewer().setTextColor(new Color(dev, 255, 140, 0), oldStart+tickMethodOffset-4, oldEnd-oldStart, true);
+//					sjCoreViewer.setStyleRange(new StyleRange(oldStart, oldEnd-oldStart+1, new Color(dev, 255, 140, 0), null));
+//					editor.getViewer().setTextColor(new Color(dev, 255, 140, 0), oldStart+tickMethodOffset-4, oldEnd-oldStart, true);
+
+					// Paint old labels BLACK! For Oberseminar purposes! 
+					sjCoreViewer.setStyleRange(new StyleRange(oldStart, oldEnd-oldStart+1, new Color(dev, 0, 0, 0), null));
+					editor.getViewer().setTextColor(new Color(dev, 0, 0, 0), oldStart+tickMethodOffset-4, oldEnd-oldStart, true);
+					
 				}
 				oldInstructionsStartOffsets.clear();
 				oldInstructionsEndOffsets.clear();
