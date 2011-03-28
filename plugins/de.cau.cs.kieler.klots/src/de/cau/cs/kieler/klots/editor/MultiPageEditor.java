@@ -14,7 +14,6 @@ import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceChangeEvent;
 import org.eclipse.core.resources.IResourceChangeListener;
-import org.eclipse.core.resources.ResourceAttributes;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -25,22 +24,15 @@ import org.eclipse.jface.dialogs.ErrorDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyleRange;
 import org.eclipse.swt.custom.StyledText;
-import org.eclipse.swt.events.SelectionAdapter;
-import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Device;
 import org.eclipse.swt.graphics.Font;
-import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.FillLayout;
-import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
-import org.eclipse.swt.widgets.FontDialog;
 import org.eclipse.swt.widgets.Listener;
 
 import org.eclipse.ui.IActionBars;
@@ -53,7 +45,6 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.part.MultiPageEditorPart;
 import org.eclipse.ui.texteditor.StatusLineContributionItem;
-import org.eclipse.ui.views.markers.MarkerViewUtil;
 import org.eclipse.ui.ide.IDE;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -139,8 +130,6 @@ public class MultiPageEditor extends MultiPageEditorPart implements IResourceCha
 	private static CompilationUnitEditor editor;
 	private static int tickMethodOffset = 0;
 
-	/** The font chosen in page 1. */
-	private Font font;
 
 	/** The text widget used in page 2. */
 	private static StyledText sjCoreViewer;
@@ -181,34 +170,7 @@ public class MultiPageEditor extends MultiPageEditorPart implements IResourceCha
 		return editor;
 	}
 	
-	
-//	/**
-//	 * Creates page 1 of the multi-page editor,
-//	 * which allows you to change the font used in page 2.
-//	 */
-//	void createPage1() {
-//
-//		Composite composite = new Composite(getContainer(), SWT.NONE);
-//		GridLayout layout = new GridLayout();
-//		composite.setLayout(layout);
-//		layout.numColumns = 2;
-//
-//		Button fontButton = new Button(composite, SWT.NONE);
-//		GridData gd = new GridData(GridData.BEGINNING);
-//		gd.horizontalSpan = 2;
-//		fontButton.setLayoutData(gd);
-//		fontButton.setText("Change Font...");
-//		
-//		fontButton.addSelectionListener(new SelectionAdapter() {
-//			public void widgetSelected(SelectionEvent event) {
-//				setFont();
-//			}
-//		});
-//
-//		int index = addPage(composite);
-//		setPageText(index, "Properties");
-//	}
-	
+		
 	
 	/**
 	 * Creates page 2 of the multi-page editor,
@@ -241,27 +203,22 @@ public class MultiPageEditor extends MultiPageEditorPart implements IResourceCha
 	 */
 	protected void createPages() {
 		createJavaEditorPage();
-//		createPage1();
 		createSJViewerPage();
 		createExecutionTraceViewerPage();
 		
 		// -------------------- set up the status line ----------------------  
 		IActionBars aBars = editor.getEditorSite().getActionBars();
 		IStatusLineManager man = aBars.getStatusLineManager();
-//		org.eclipse.jface.action.StatusLineContributionItem fStatusLineItem = new org.eclipse.jface.action.StatusLineContributionItem("fStatusLineItem", 50);
-//		man.add(fStatusLineItem);
-//		aBars.updateActionBars();
-//		fStatusLineItem.setVisible(true);
-//		fStatusLineItem.setText("INSTRUCTION INFO TO BE DISPAYED");
 		uiStatusLineItem = new StatusLineContributionItem("uiStatusLineItem", true, 100);
 		man.add(uiStatusLineItem);
 		aBars.updateActionBars();
-		// Commented out for Oberseminar purposes!!!
-		//uiStatusLineItem.setToolTipText("DO WE NEED A TOOL TIP TEXT?");
-		//uiStatusLineItem.setErrorText("INSTRUCTION INFO TO BE DISPAYED");
+		uiStatusLineItem.setToolTipText("DO WE NEED A TOOL TIP TEXT?");
+		uiStatusLineItem.setErrorText("INSTRUCTION INFO TO BE DISPAYED");
 		// ------------------------------------------------------------------
 		
-		getSJContent();   // moved to this location from this.pageChange(int pageNr)
+		// --------------
+		getSJContent();
+		// --------------
 	}
 	
 	/**
@@ -318,9 +275,6 @@ public class MultiPageEditor extends MultiPageEditorPart implements IResourceCha
 	 */
 	protected void pageChange(int newPageIndex) {
 		super.pageChange(newPageIndex);
-//		if (newPageIndex == 1) {
-//			getSJContent();   // moved to this.createPages()
-//		}
 	}
 	
 	
@@ -342,20 +296,7 @@ public class MultiPageEditor extends MultiPageEditorPart implements IResourceCha
 			});
 		}
 	}
-//	/**
-//	 * Sets the font related data to be applied to the text in page 2.
-//	 */
-//	void setFont() {
-//		FontDialog fontDialog = new FontDialog(getSite().getShell());
-//		fontDialog.setFontList(sjCoreViewer.getFont().getFontData());
-//		FontData fontData = fontDialog.open();
-//		if (fontData != null) {
-//			if (font != null)
-//				font.dispose();
-//			font = new Font(sjCoreViewer.getDisplay(), fontData);
-//			sjCoreViewer.setFont(font);
-//		}
-//	}
+	
 	
 	
 	// ################################################################### //
@@ -408,9 +349,6 @@ public class MultiPageEditor extends MultiPageEditorPart implements IResourceCha
 				// ----------------------------------------------------------
 				
 				// ----------------- highlight old labels -------------------
-//				Device dev = sjCoreViewer.getDisplay();
-//				int oldStart = 0;
-//				int oldEnd = 0;
 				oldStart = 0;
 				oldEnd = 0;
 				for(int i = 0; i < oldInstructionsStartOffsets.size(); i++) {
@@ -560,15 +498,10 @@ public class MultiPageEditor extends MultiPageEditorPart implements IResourceCha
 				if( (Integer) e.getNewValue() == buffer.START_ACTION ) {
 					Display.getDefault().syncExec(new Runnable() {
 						public void run() {
-							
-							// get the tick content, which is to be displayed
-							//getSJContent();
-							
 							// set the java editor read only
 							editor.getViewer().getTextWidget().setEditable(false);
 							
 							// ------------ set tool tip TESTER -------------
-							//editor.getViewer().getTextWidget().setToolTipText("INSTRUCTION INFO TOOL TIP TEXT");
 							final StyledText t = editor.getViewer().getTextWidget();
 							String s = t.getText();
 							int i = s.indexOf("public void tick()");

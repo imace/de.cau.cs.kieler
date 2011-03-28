@@ -20,6 +20,25 @@
             name="Embedded SJ Editor">
       </editor>
    </extension>
+  <extension
+        point="de.cau.cs.kieler.sim.kiem.json.datacomponent">
+     <content
+           class="de.cau.cs.kieler.klots.NXTDataDistributor"
+           id="de.cau.cs.kieler.klots.NXTDataDistributor"
+           name="NEW NXT Data Distributor">
+     </content>
+  </extension>
+  <extension
+        point="org.eclipse.ui.editors">
+     <editor
+           class="de.cau.cs.kieler.klots.editor.SJEditor"
+           contributorClass="de.cau.cs.kieler.klots.editor.SJEditorContributor"
+           extensions="java"
+           icon="icons/editor6.gif"
+           id="de.cau.cs.kieler.klots.editor.SJEditor"
+           name="NEW SJ Editor">
+     </editor>
+  </extension>
    <extension
          point="org.eclipse.ui.newWizards">
       <wizard
