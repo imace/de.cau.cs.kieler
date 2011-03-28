@@ -19,14 +19,14 @@ import de.cau.cs.kieler.sim.kiem.JSONSignalValues;
 import de.cau.cs.kieler.sim.kiem.KiemExecutionException;
 import de.cau.cs.kieler.sim.kiem.KiemInitializationException;
 
-import de.cau.cs.kieler.klots.editor.SJEditor;
+import de.cau.cs.kieler.klots.editor.SJEditorWithKiVi;
 
-public class NXTDataDistributor extends JSONObjectDataComponent implements
+public class NXTDataDistributorWithKiVi extends JSONObjectDataComponent implements
 		IJSONObjectDataComponent {
 	
 	private static final String KLOTSCONSOLENAME = "Klots Console";
 	NXTCommunicator comm;
-	SJEditor editor;
+	SJEditorWithKiVi editor;
 	
 
 	public void initialize() throws KiemInitializationException {
@@ -36,7 +36,7 @@ public class NXTDataDistributor extends JSONObjectDataComponent implements
 			public void run() {
 				IEditorPart e = KlotsPlugin.getDefault().getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
 				if(e != null) {
-					editor = (SJEditor) e;
+					editor = (SJEditorWithKiVi) e;
 				} else {
 					printConsole("INITIALIZATION ERROR: Could not find an active SJ editor!");
 				}
@@ -184,14 +184,14 @@ public class NXTDataDistributor extends JSONObjectDataComponent implements
         IConsoleManager conMan = plugin.getConsoleManager();
         IConsole[] existing = conMan.getConsoles();
         for (int i = 0; i < existing.length; i++)
-            if (NXTDataDistributor.KLOTSCONSOLENAME.equals(existing[i].getName())) {
+            if (NXTDataDistributorWithKiVi.KLOTSCONSOLENAME.equals(existing[i].getName())) {
                 maudeConsole = (MessageConsole) existing[i];
                 found = true;
                 break;
             }
         if (!found) {
             // if no console found, so create a new one
-            maudeConsole = new MessageConsole(NXTDataDistributor.KLOTSCONSOLENAME, null);
+            maudeConsole = new MessageConsole(NXTDataDistributorWithKiVi.KLOTSCONSOLENAME, null);
             conMan.addConsoles(new IConsole[] { maudeConsole });
         }
 

@@ -81,5 +81,24 @@
 		id="de.cau.cs.kieler.klots.editor.instructionMarkerProvider">
 	</imageprovider>
   </extension>
+  <extension
+        point="org.eclipse.ui.editors">
+     <editor
+           class="de.cau.cs.kieler.klots.editor.SJEditorWithKiVi"
+           contributorClass="de.cau.cs.kieler.klots.editor.SJEditorWithKiViContributor"
+           extensions="java"
+           icon="icons/editor3.gif"
+           id="de.cau.cs.kieler.klots.editor.SJEditorWithKiVi"
+           name="NEW SJ Editor With KiVi">
+     </editor>
+  </extension>
+  <extension
+        point="de.cau.cs.kieler.sim.kiem.json.datacomponent">
+     <content
+           class="de.cau.cs.kieler.klots.NXTDataDistributorWithKiVi"
+           id="de.cau.cs.kieler.klots.NXTDataDistributorWithKiVi"
+           name="NEW NXT Data Distributor With KiVi">
+     </content>
+  </extension>
      
 </plugin>
