@@ -1,42 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
-   <extension
-         point="de.cau.cs.kieler.sim.kiem.json.datacomponent">
-      <content
-            class="de.cau.cs.kieler.klots.DataDistributor"
-            id="de.cau.cs.kieler.klots.DataDistributor"
-            name="NXT Data Distributor">
-      </content>
-   </extension>
-   <extension
-         point="org.eclipse.ui.editors">
-      <editor
-            class="de.cau.cs.kieler.klots.editor.MultiPageEditor"
-            contributorClass="de.cau.cs.kieler.klots.editor.MultiPageEditorContributor"
-            extensions="js"
-            icon="icons/editor4.gif"
-            id="de.cau.cs.kieler.klots.editor.MultiPageEditor"
-            name="Embedded SJ Editor">
-      </editor>
-   </extension>
-  <extension
-        point="de.cau.cs.kieler.sim.kiem.json.datacomponent">
-     <content
-           class="de.cau.cs.kieler.klots.NXTDataDistributor"
-           id="de.cau.cs.kieler.klots.NXTDataDistributor"
-           name="NEW NXT Data Distributor">
-     </content>
-  </extension>
   <extension
         point="org.eclipse.ui.editors">
      <editor
-           class="de.cau.cs.kieler.klots.editor.SJEditor"
-           contributorClass="de.cau.cs.kieler.klots.editor.SJEditorContributor"
+           class="de.cau.cs.kieler.klots.editor.SJEditorWithKiVi"
+           contributorClass="de.cau.cs.kieler.klots.editor.SJEditorWithKiViContributor"
            extensions="java"
-           icon="icons/editor6.gif"
-           id="de.cau.cs.kieler.klots.editor.SJEditor"
-           name="NEW SJ Editor">
+           icon="icons/editor4.gif"
+           id="de.cau.cs.kieler.klots.editor.SJEditorWithKiVi"
+           name="SJ Editor">
      </editor>
   </extension>
    <extension
@@ -82,22 +55,19 @@
 	</imageprovider>
   </extension>
   <extension
-        point="org.eclipse.ui.editors">
-     <editor
-           class="de.cau.cs.kieler.klots.editor.SJEditorWithKiVi"
-           contributorClass="de.cau.cs.kieler.klots.editor.SJEditorWithKiViContributor"
-           extensions="java"
-           icon="icons/editor3.gif"
-           id="de.cau.cs.kieler.klots.editor.SJEditorWithKiVi"
-           name="NEW SJ Editor With KiVi">
-     </editor>
-  </extension>
-  <extension
         point="de.cau.cs.kieler.sim.kiem.json.datacomponent">
      <content
            class="de.cau.cs.kieler.klots.NXTDataDistributorWithKiVi"
            id="de.cau.cs.kieler.klots.NXTDataDistributorWithKiVi"
-           name="NEW NXT Data Distributor With KiVi">
+           name="NXT Communicator">
+     </content>
+  </extension>
+  <extension
+        point="de.cau.cs.kieler.sim.kiem.json.datacomponent">
+     <content
+           class="de.cau.cs.kieler.klots.NXTDataObserverWithKiVi"
+           id="de.cau.cs.kieler.klots.NXTDataObserverWithKiVi"
+           name="NXT Data Observer">
      </content>
   </extension>
      

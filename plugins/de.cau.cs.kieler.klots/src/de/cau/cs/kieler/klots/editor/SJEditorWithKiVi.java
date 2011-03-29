@@ -1,7 +1,5 @@
 package de.cau.cs.kieler.klots.editor;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -9,13 +7,10 @@ import java.util.List;
 import org.eclipse.jdt.internal.ui.javaeditor.CompilationUnitEditor;
 import org.eclipse.jdt.internal.ui.javaeditor.JavaEditor;
 
-import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
-import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceChangeEvent;
 import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 
 import org.eclipse.jface.action.IStatusLineManager;
@@ -25,14 +20,9 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Device;
-import org.eclipse.swt.graphics.Point;
-import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Event;
-import org.eclipse.swt.widgets.Listener;
-
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
@@ -59,6 +49,11 @@ import org.json.JSONObject;
  */
 @SuppressWarnings("restriction")
 public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceChangeListener {
+	
+	
+	// ======================================================================
+	// >>>>>>>>>>              LABEL INFO INNER CLASS              <<<<<<<<<<
+	// ======================================================================
 	
 	class LabelInfo {
 		String labelName;
@@ -95,47 +90,63 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 	} //end inner class LabelInfo
 	
 	
-	private static List<HighlightSJInstructionEffect> kiviList = new ArrayList<HighlightSJInstructionEffect>();
 	
-	private static List<LabelInfo> labelList = new ArrayList<LabelInfo>();
-	private static List<Integer> oldInstructionsStartOffsets = new ArrayList<Integer>();
-	private static List<Integer> oldInstructionsEndOffsets = new ArrayList<Integer>();
-	private static List<Integer> oldOldInstructionsStartOffsets = new ArrayList<Integer>();
-	private static List<Integer> oldOldInstructionsEndOffsets = new ArrayList<Integer>();
+	
+	// ======================================================================
+	// >>>>>>>>>>                FIELDS & VARIABLES                <<<<<<<<<<
+	// ======================================================================
+	
+	// highlight colors
+//	private final Color FOREGROUND_HIGHLIGHT_COLOR;
+//	private final Color BACKGROUND_HIGHLIGHT_COLOR;
+	
+	// SJ instructions
 	private final static String[][] sjInstructionsMap = {
-			// normal instructions
-			{"abort", "abort"},
-			{"awaitDone", "awaitDoneCB"},
-			{"fork", "fork"},
-			{"forke", "forkEB"},
-			{"goto", "gotoB"},
-			{"halt", "haltCB"},
-			{"joinDone", "joinDoneCB"},
-			{"pause", "pauseB"},
-			{"prio", "prioB"},
-			{"suspend", "suspend"},
-			{"term", "termB"},
-			{"trans", "transB"},
-			// signal instructions
-			{"present", "isPresent"},
-			{"emit", "emit"},
-			{"sustain", "sustainCB"},
-			{"pre", "pre"}};
+		// normal instructions
+		{"abort", "abort"},
+		{"awaitDone", "awaitDoneCB"},
+		{"fork", "fork"},
+		{"forke", "forkEB"},
+		{"goto", "gotoB"},
+		{"halt", "haltCB"},
+		{"joinDone", "joinDoneCB"},
+		{"pause", "pauseB"},
+		{"prio", "prioB"},
+		{"suspend", "suspend"},
+		{"term", "termB"},
+		{"trans", "transB"},
+		// signal instructions
+		{"present", "isPresent"},
+		{"emit", "emit"},
+		{"sustain", "sustainCB"},
+		{"pre", "pre"}};
 	private final static int sjInstructionsMapSize = 16;
-	
 
-	InputDataPool buffer = InputDataPool.getInstance();
-		
+	// KiVi effects list
+	private int microStepNumber = -1;
+	private static List<HighlightSJInstructionEffect> kiviList = new ArrayList<HighlightSJInstructionEffect>();
+	// label list
+	private static List<LabelInfo> labelList = new ArrayList<LabelInfo>();
+
 	// Java editor
-	private static CompilationUnitEditor editor; 
-
-	protected static String sjCoreData = "";
-	
+	private static CompilationUnitEditor editor;
+	// SJ instructions highlight update data
+	protected static String sjInstructionsUpdateData = "";
+	// execution trace viewer
 	private static StyledText executionTraceViewer;
-	private static StringBuffer inputData = new StringBuffer();
+	// execution trace viewer data to be displayed
+	private static StringBuffer executionTraceUpdateData = new StringBuffer();
 	
+	
+	// status line SJ display
 	private StatusLineContributionItem uiStatusLineItem;
 	
+	
+	
+	
+	// ======================================================================
+	// >>>>>>>>>>                   CONSTRUCTORS                   <<<<<<<<<<
+	// ======================================================================
 	
 	/**
 	 * Creates a multi-page editor example.
@@ -143,13 +154,20 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 	public SJEditorWithKiVi() {
 		super();
 		ResourcesPlugin.getWorkspace().addResourceChangeListener(this);
-		
-		// --------------------------------------------
-		// TESTING INTEGRATION IN  KIEM DATA COMPONENT
-		//bindToDataPool();
-		// --------------------------------------------
-		
 	}
+	
+	
+	
+	
+	// ######################################################################
+	// ######################     METHODS SECTION     #######################
+	// ######################################################################
+	
+	
+	// ======================================================================
+	// >>>>>>>>>>     STANDARD IMPLEMENTETION METHODS & SETUP      <<<<<<<<<<
+	// ======================================================================
+	
 	/**
 	 * Creates page 0 of the multi-page editor,
 	 * which contains a java editor.
@@ -183,6 +201,7 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 		setPageText(index, "Execution Trace");
 	}
 	
+	
 	/**
 	 * Creates the pages of the multi-page editor.
 	 */
@@ -205,6 +224,7 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 		// --------------
 	}
 	
+	
 	/**
 	 * The <code>MultiPageEditorPart</code> implementation of this 
 	 * <code>IWorkbenchPart</code> method disposes all nested editors.
@@ -214,12 +234,14 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 		ResourcesPlugin.getWorkspace().removeResourceChangeListener(this);
 		super.dispose();
 	}
+	
 	/**
 	 * Saves the multi-page editor's document.
 	 */
 	public void doSave(IProgressMonitor monitor) {
 		getEditor(0).doSave(monitor);
 	}
+	
 	/**
 	 * Saves the multi-page editor's document as another file.
 	 * Also updates the text for page 0's tab, and updates this multi-page editor's input
@@ -231,6 +253,7 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 		setPageText(0, editor.getTitle());
 		setInput(editor.getEditorInput());
 	}
+	
 	/* (non-Javadoc)
 	 * Method declared on IEditorPart
 	 */
@@ -238,6 +261,7 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 		setActivePage(0);
 		IDE.gotoMarker(getEditor(0), marker);
 	}
+	
 	/**
 	 * The <code>MultiPageEditorExample</code> implementation of this method
 	 * checks that the input is an instance of <code>IFileEditorInput</code>.
@@ -248,19 +272,20 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 			throw new PartInitException("Invalid Input: Must be IFileEditorInput");
 		super.init(site, editorInput);
 	}
+	
 	/* (non-Javadoc)
 	 * Method declared on IEditorPart.
 	 */
 	public boolean isSaveAsAllowed() {
 		return true;
 	}
+	
 	/**
 	 * Calculates the contents of page 2 when the it is activated.
 	 */
 	protected void pageChange(int newPageIndex) {
 		super.pageChange(newPageIndex);
 	}
-	
 	
 	/**
 	 * Closes all project files on project close.
@@ -284,60 +309,24 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 	
 	
 	
-	
-	// XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	// XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	// XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+	// ======================================================================
+	// >>>>>>>>>>            MACRO STEP UPDATE METHODS             <<<<<<<<<<
+	// ======================================================================
 	
 	static void updateJavaEditor() {
 		Display.getDefault().syncExec(new Runnable() {
 			public void run() {
-//				// ------------- UNDO-highlight old old labels --------------
-//				Device dev = editor.getViewer().getTextWidget().getDisplay();
-//				int oldStart = 0;
-//				int oldEnd = 0;
-//				for(int i = 0; i < oldOldInstructionsStartOffsets.size(); i++) {
-//					oldStart = (int) oldOldInstructionsStartOffsets.get(i);
-//					oldEnd = (int) oldOldInstructionsEndOffsets.get(i);
-//					editor.getViewer().setTextColor(new Color(dev, 0, 0, 0), oldStart, oldEnd-oldStart, true);
-//				}
-//				// XXX: There is no method clone() for ArrayList<Integer> ???
-//				//oldOldInstructionsStartOffsets = (ArrayList<Integer>) oldInstructionsStartOffsets.clone();
-//				//oldOldInstructionsEndOffsets = (ArrayList<Integer>) oldInstructionsEndOffsets.clone();
-//				oldOldInstructionsStartOffsets.clear();
-//				oldOldInstructionsEndOffsets.clear();
-//				for(int i = 0; i < oldInstructionsStartOffsets.size(); i++) {
-//					oldOldInstructionsStartOffsets.add(oldInstructionsStartOffsets.get(i));
-//					oldOldInstructionsEndOffsets.add(oldInstructionsEndOffsets.get(i));
-//				}
-//				// ----------------------------------------------------------
 				
-//				// ----------------- highlight old labels -------------------
-//				oldStart = 0;
-//				oldEnd = 0;
-//				for(int i = 0; i < oldInstructionsStartOffsets.size(); i++) {
-//					oldStart = (int) oldInstructionsStartOffsets.get(i);
-//					oldEnd = (int) oldInstructionsEndOffsets.get(i);
-//					// Paint old labels BLACK! For Oberseminar purposes!
-////					editor.getViewer().setTextColor(new Color(dev, 255, 140, 0), oldStart, oldEnd-oldStart, true);
-//					editor.getViewer().setTextColor(new Color(dev, 0, 0, 0), oldStart, oldEnd-oldStart, true);
-//					
-//				}
-//				oldInstructionsStartOffsets.clear();
-//				oldInstructionsEndOffsets.clear();
-//				// ----------------------------------------------------------
-				
-				// -----------------------------------------------------------
-				// KIVI EFFECT TEST
+				// ------------ undo highlight old instructions ------------- 
 				for(HighlightSJInstructionEffect e : kiviList) {
 					e.undo();
 				}
 				kiviList.clear();
-				// -----------------------------------------------------------
+				// ----------------------------------------------------------
 				
 				// ----------------- highlight new labels -------------------
 				try {
-					JSONArray array = new JSONArray(sjCoreData);
+					JSONArray array = new JSONArray(sjInstructionsUpdateData);
 					JSONObject instruction = new JSONObject();
 					JSONObject instructionData = new JSONObject();
 					String key = "";
@@ -346,10 +335,13 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 						Iterator<?> iter = instruction.keys();
 						key = (String) iter.next();
 						instructionData = instruction.getJSONObject(key);
-						key = getProperSJInstruktionName(key); 
+						key = getProperSJInstruktionName(key);
+						
+						// -------------------------------------------
 						highlightInstruction(key, instructionData, j);
-					}
-					
+						// -------------------------------------------
+						
+					}				
 				} catch(JSONException e) {
 					e.printStackTrace();
 				}
@@ -360,6 +352,7 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 	}
 	
 	
+	
 	private static String getProperSJInstruktionName(String instr) {
 		for(int i = 0; i < sjInstructionsMapSize; i++) {
 			if( instr.equals(sjInstructionsMap[i][0]) ) {
@@ -368,6 +361,7 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 		}
 		return "INSTRUCTION MAPPING ERROR";
 	}
+	
 	
 	
 	protected static void highlightInstruction(String instrName, JSONObject instrData, int chronology) 
@@ -426,17 +420,10 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 		System.out.println("§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§\n");
 		try {
 			
-			// -------------------------------------------------------------------------------------------------------------------
-			// KIVI EFFECT TEST
-			//editor.getViewer().setTextColor(new Color(dev, 255, 0, 0), instrStartOffset, instrEndOffset-instrStartOffset, true);
+			// ---------- highlight instruction using KiVi effect ----------- 
 			HighlightSJInstructionEffect e = new HighlightSJInstructionEffect(instrStartOffset, instrEndOffset-instrStartOffset, new Color(dev, 255, 0, 0), null, new Color(dev, 0, 0, 0), null, editor);
 			kiviList.add(e);
 			e.execute();
-			// -------------------------------------------------------------------------------------------------------------------
-			
-			// -------------- fill the old instructions lists ---------------
-			oldInstructionsStartOffsets.add( new Integer(instrStartOffset) );
-			oldInstructionsEndOffsets.add( new Integer(instrEndOffset) );
 			// --------------------------------------------------------------
 			
 		} catch(Exception e) {
@@ -445,109 +432,26 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 		
 	}
 	
-	// XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	// XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	// XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	
-	
-	
 	
 	
 	static void updateExecutionTraceViewer() {
 		Display.getDefault().syncExec(new Runnable() {
 			public void run() {
-				executionTraceViewer.setText(inputData.toString());
-			}
-		});
-	}
-	
-	
-	private void bindToDataPool() {
-		buffer.addPropertyChangeListener(buffer.DATA_BUFFER, new PropertyChangeListener() {
-			public void propertyChange(PropertyChangeEvent e) {
-				sjCoreData = ((StringBuffer) e.getNewValue()).toString();
-				inputData = inputData.append("\n").append( (StringBuffer) e.getNewValue() );
-				// -----------------------------------------------
-				SJEditorWithKiVi.updateExecutionTraceViewer();
-				SJEditorWithKiVi.updateJavaEditor();
-				// -----------------------------------------------
-			}
-		});
-		buffer.addPropertyChangeListener(buffer.ACTION_FLAG, new PropertyChangeListener() {
-			public void propertyChange(PropertyChangeEvent e) {
-				if( (Integer) e.getNewValue() == buffer.START_ACTION ) {
-					Display.getDefault().syncExec(new Runnable() {
-						public void run() {
-							// set the java editor read only
-							editor.getViewer().getTextWidget().setEditable(false);
-							
-							// ------------ set tool tip TESTER -------------
-							final StyledText t = editor.getViewer().getTextWidget();
-							String s = t.getText();
-							int i = s.indexOf("public void tick()");
-							Point p = t.getLocationAtOffset(i) ;
-							final Rectangle r = new Rectangle( p.x, p.y, 200, t.getLineHeight() );
-							Listener mouseListener = new Listener () {
-								public void handleEvent (Event event) {
-									switch (event.type) {
-										case SWT.MouseEnter:
-										case SWT.MouseMove:
-											if (r.contains (event.x, event.y)) {
-												String text = "ToolTip >tick()<";
-												if (!(text.equals (t.getToolTipText ()))) {
-													t.setToolTipText ("ToolTip >tick()<");
-												}
-												return;
-											}
-										t.setToolTipText(null);
-										break;
-									}
-								}
-							};
-							t.addListener (SWT.MouseMove, mouseListener);
-							t.addListener (SWT.MouseEnter, mouseListener);
-							// ----------------------------------------------
-							
-							// ------------- set marker TESTER --------------
-							IFile file = ((IFileEditorInput) editor.getEditorInput()).getFile();
-							IMarker marker = createInstructionMarker(file, "INSTRUCTION INFO\nTO BE DISPLAYED", 66);
-							//MarkerViewUtil.showMarker(page, marker, showView);
-							// ----------------------------------------------
-						}
-					});
-				} else if( (Integer) e.getNewValue() == buffer.STOP_ACTION ) {
-					Display.getDefault().syncExec(new Runnable() {
-						public void run() {
-							editor.getViewer().getTextWidget().setEditable(true);
-							// set tool tip
-							editor.getViewer().getTextWidget().setToolTipText("");
-						}
-					});
-				}
+				executionTraceViewer.setText(executionTraceUpdateData.toString());
 			}
 		});
 	}
 	
 	
 	
-	private IMarker createInstructionMarker(IResource res, String msg, int line) {
-		try {
-			IMarker marker = res.createMarker("de.cau.cs.kieler.klots.editor.instructionMarker");
-			marker.setAttribute("instructionName", "z.B. fork");
-			marker.setAttribute(IMarker.LINE_NUMBER, line);
-			marker.setAttribute(IMarker.MESSAGE, msg);
-			//marker.setAttribute(IMarker.PRIORITY, IMarker.PRIORITY_HIGH);
-			//marker.setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_ERROR);
-			return marker;
-		} catch (CoreException e) {
-			// You need to handle the cases where attribute value is rejected
-			e.printStackTrace();
-			return null;
-		}
-	}
 	
+	
+	// ======================================================================
+	// >>>>>>>>>>          INITIALIZATION UTILITY METHODS          <<<<<<<<<<
+	// ======================================================================
 	
 	private void fillLabelList() {
+		// TODO: CHECK IF LABEL LIST HAS ELEMENTS AT ALL AT THIS TIME
 		// reset labelList
 		labelList.clear();
 		
@@ -588,29 +492,22 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 	
 	
 	
-	// ######################################################################
-	// ######################################################################
-	// ######################################################################
+	// ======================================================================
+	// >>>>>>>>>>     INTERACTIONS WITH THE KIEM DATA OBSERVER     <<<<<<<<<<
+	// ======================================================================
 	
-	public void update(StringBuffer data) {
-//		sjCoreData = data.toString();
-//		inputData = inputData.append("\n").append(data);
-//		// -----------------------------------------------
-//		SJEditor.updateExecutionTraceViewer();
-//		SJEditor.updateJavaEditor();
-//		// -----------------------------------------------
-		update(data.toString());
+	public void update(StringBuffer data, boolean historyData) {
+		update(data.toString(), historyData);
 	}
 	
 	
-	public void update(String data) {
-		sjCoreData = data;
-		System.out.println("+++++++++>>>>>>>>>>> update(): NEW TICK DATA RECEIVED: ");
-		System.out.println(data);
-		System.out.println("<<<<<<<<<+++++++++++");
-		inputData = inputData.append("\n").append(data);
+	public void update(String data, boolean historyData) {
+		sjInstructionsUpdateData = data;
+		executionTraceUpdateData = executionTraceUpdateData.append("\n\n").append(data);
 		// -----------------------------------------------
-		SJEditorWithKiVi.updateExecutionTraceViewer();
+		if( !historyData ) {
+			SJEditorWithKiVi.updateExecutionTraceViewer();
+		}
 		SJEditorWithKiVi.updateJavaEditor();
 		// -----------------------------------------------
 	}
@@ -623,5 +520,154 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 			}
 		});
 	}
+	
+	
+	
+	
+	
+	// ======================================================================
+	// >>>>>>>>>>    INTERACTIONS WITH THE EDITOR'S CONTRIBUTOR    <<<<<<<<<<
+	// ======================================================================
+	
+	public void doMicroStepForwards() {
+		if( microStepNumber >= kiviList.size()-1 ) {
+			return;
+		}
+		if( microStepNumber == -1 ) {
+			doClearAllMicroSteps();
+		} else {
+			kiviList.get(microStepNumber).undo();
+		}
+		microStepNumber++;
+		kiviList.get(microStepNumber).execute();
+	}
+	
+	
+	public void doMicroStepBackwards() {
+		if( microStepNumber > 0 ) {
+			kiviList.get(microStepNumber).undo();
+			microStepNumber--;
+			kiviList.get(microStepNumber).execute();
+		}
+	}
+	
+	
+	public void doAllForwardMicroSteps() {
+		for( HighlightSJInstructionEffect e : kiviList ) {
+			e.execute();
+		}
+		microStepNumber = kiviList.size()-1;
+	}
+	
+	
+	public void doAllBackwardMicroSteps() {
+		microStepNumber = -1;
+		doMicroStepForwards();
+	}
+	
+	
+	public void doClearAllMicroSteps() {
+		for(HighlightSJInstructionEffect e : kiviList) {
+			e.undo();
+		}
+	}
+	
+	
+	public void doResetMicroSteps() {
+		microStepNumber = -1;
+	}
+	
+	
+	
+	
+	
+	// XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+	// XXXXXXXXXX                HISTORICAL METHODS                XXXXXXXXXX
+	// XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+	
+//	private void bindToDataPool() {
+//		buffer.addPropertyChangeListener(buffer.DATA_BUFFER, new PropertyChangeListener() {
+//			public void propertyChange(PropertyChangeEvent e) {
+//				sjCoreData = ((StringBuffer) e.getNewValue()).toString();
+//				inputData = inputData.append("\n").append( (StringBuffer) e.getNewValue() );
+//				// -----------------------------------------------
+//				SJEditorWithKiVi.updateExecutionTraceViewer();
+//				SJEditorWithKiVi.updateJavaEditor();
+//				// -----------------------------------------------
+//			}
+//		});
+//		buffer.addPropertyChangeListener(buffer.ACTION_FLAG, new PropertyChangeListener() {
+//			public void propertyChange(PropertyChangeEvent e) {
+//				if( (Integer) e.getNewValue() == buffer.START_ACTION ) {
+//					Display.getDefault().syncExec(new Runnable() {
+//						public void run() {
+//							// set the java editor read only
+//							editor.getViewer().getTextWidget().setEditable(false);
+//							
+//							// ------------ set tool tip TESTER -------------
+//							final StyledText t = editor.getViewer().getTextWidget();
+//							String s = t.getText();
+//							int i = s.indexOf("public void tick()");
+//							Point p = t.getLocationAtOffset(i) ;
+//							final Rectangle r = new Rectangle( p.x, p.y, 200, t.getLineHeight() );
+//							Listener mouseListener = new Listener () {
+//								public void handleEvent (Event event) {
+//									switch (event.type) {
+//										case SWT.MouseEnter:
+//										case SWT.MouseMove:
+//											if (r.contains (event.x, event.y)) {
+//												String text = "ToolTip >tick()<";
+//												if (!(text.equals (t.getToolTipText ()))) {
+//													t.setToolTipText ("ToolTip >tick()<");
+//												}
+//												return;
+//											}
+//										t.setToolTipText(null);
+//										break;
+//									}
+//								}
+//							};
+//							t.addListener (SWT.MouseMove, mouseListener);
+//							t.addListener (SWT.MouseEnter, mouseListener);
+//							// ----------------------------------------------
+//							
+//							// ------------- set marker TESTER --------------
+//							IFile file = ((IFileEditorInput) editor.getEditorInput()).getFile();
+//							IMarker marker = createInstructionMarker(file, "INSTRUCTION INFO\nTO BE DISPLAYED", 66);
+//							//MarkerViewUtil.showMarker(page, marker, showView);
+//							// ----------------------------------------------
+//						}
+//					});
+//				} else if( (Integer) e.getNewValue() == buffer.STOP_ACTION ) {
+//					Display.getDefault().syncExec(new Runnable() {
+//						public void run() {
+//							editor.getViewer().getTextWidget().setEditable(true);
+//							// set tool tip
+//							editor.getViewer().getTextWidget().setToolTipText("");
+//						}
+//					});
+//				}
+//			}
+//		});
+//	}
+//	
+//	
+//	
+//	private IMarker createInstructionMarker(IResource res, String msg, int line) {
+//		try {
+//			IMarker marker = res.createMarker("de.cau.cs.kieler.klots.editor.instructionMarker");
+//			marker.setAttribute("instructionName", "z.B. fork");
+//			marker.setAttribute(IMarker.LINE_NUMBER, line);
+//			marker.setAttribute(IMarker.MESSAGE, msg);
+//			//marker.setAttribute(IMarker.PRIORITY, IMarker.PRIORITY_HIGH);
+//			//marker.setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_ERROR);
+//			return marker;
+//		} catch (CoreException e) {
+//			// You need to handle the cases where attribute value is rejected
+//			e.printStackTrace();
+//			return null;
+//		}
+//	}
+	
 	
 }

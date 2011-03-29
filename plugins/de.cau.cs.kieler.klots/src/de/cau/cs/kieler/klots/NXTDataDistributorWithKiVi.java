@@ -2,8 +2,6 @@ package de.cau.cs.kieler.klots;
 
 import java.util.Iterator;
 
-import org.eclipse.ui.IEditorPart;
-import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.console.ConsolePlugin;
 import org.eclipse.ui.console.IConsole;
 import org.eclipse.ui.console.IConsoleManager;
@@ -19,34 +17,44 @@ import de.cau.cs.kieler.sim.kiem.JSONSignalValues;
 import de.cau.cs.kieler.sim.kiem.KiemExecutionException;
 import de.cau.cs.kieler.sim.kiem.KiemInitializationException;
 
-import de.cau.cs.kieler.klots.editor.SJEditorWithKiVi;
-
 public class NXTDataDistributorWithKiVi extends JSONObjectDataComponent implements
 		IJSONObjectDataComponent {
 	
 	private static final String KLOTSCONSOLENAME = "Klots Console";
 	NXTCommunicator comm;
-	SJEditorWithKiVi editor;
+	
+	// XXX: MOVED TO NXT DATA OBSERVER!
+	// --------------------------------
+	//SJEditorWithKiVi editor;
+	// --------------------------------
 	
 
 	public void initialize() throws KiemInitializationException {
 		comm = NXTCommunicator.getInstance();
 		
-		PlatformUI.getWorkbench().getDisplay().syncExec(new Runnable() {
-			public void run() {
-				IEditorPart e = KlotsPlugin.getDefault().getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
-				if(e != null) {
-					editor = (SJEditorWithKiVi) e;
-				} else {
-					printConsole("INITIALIZATION ERROR: Could not find an active SJ editor!");
-				}
-			}
-		});
+		// XXX: MOVED TO NXT DATA OBSERVER!
+		// ------------------------------------------------------------------
+//		PlatformUI.getWorkbench().getDisplay().syncExec(new Runnable() {
+//			public void run() {
+//				IEditorPart e = KlotsPlugin.getDefault().getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
+//				if(e != null) {
+//					editor = (SJEditorWithKiVi) e;
+//				} else {
+//					printConsole("INITIALIZATION ERROR: Could not find an active SJ editor!");
+//				}
+//			}
+//		});
+		// ------------------------------------------------------------------
 		
 		String s = comm.receiveMessage().toString();
 		if( s.equals("[{SYNCHRONIZED}]") ) {
 			printConsole(s);
-			editor.useAsExecutionViewer(true);
+			
+			// XXX: MOVED TO NXT DATA OBSERVER!
+			// ---------------------------------
+			//editor.useAsExecutionViewer(true);
+			// ---------------------------------
+			
 		} else {
 			printConsole("ERROR while trying to synchronize with the NXT: " + s);
 		}
@@ -57,7 +65,12 @@ public class NXTDataDistributorWithKiVi extends JSONObjectDataComponent implemen
 	public void wrapup() throws KiemInitializationException {
 		comm.sendMessage("STOP");
 		comm.closeTransmission();
-		editor.useAsExecutionViewer(false);
+		
+		// XXX: MOVED TO NXT DATA OBSERVER!
+		// ----------------------------------
+		//editor.useAsExecutionViewer(false);
+		// ----------------------------------
+		
 	}
 
 	
@@ -69,27 +82,9 @@ public class NXTDataDistributorWithKiVi extends JSONObjectDataComponent implemen
 	public boolean isObserver() {
 		return true;
 	}
-	
-	
-	@Override
-    public boolean isHistoryObserver() {
-        return true;
-    }
 
 	
 	public JSONObject step(JSONObject jSONObject) throws KiemExecutionException {
-		
-		if( this.isHistoryStep() ) {
-			printConsole("HISTORY!");
-			printConsole( ">>> jSONObject: >>> " + jSONObject.toString() );
-			try {
-				editor.update(jSONObject.getJSONArray("executionTrace").toString());
-			} catch (JSONException e) {
-				printConsole("HISTORY STEP ERROR: " + e.getMessage());
-			}
-			return null;
-		}
-		
 		
 		// --------------------------- producer -----------------------------
 		String msg = "";
@@ -112,17 +107,19 @@ public class NXTDataDistributorWithKiVi extends JSONObjectDataComponent implemen
 		
 		// --------------------------- observer -----------------------------
 		StringBuffer buffer = comm.receiveMessage();
-		editor.update(buffer);
+		
+		// XXX: MOVED TO NXT DATA OBSERVER!
+		// --------------------------------
+		//editor.update(buffer);
+		//editor.doResetMicroSteps();
+		// --------------------------------
+		
 		try {
-//			printConsole( ">>> buffer.toString(): >>> " + buffer.toString() );
-			
 			JSONArray received = new JSONArray(buffer.toString());
-//			printConsole( ">>> received: >>> " + received.toString() );
 			JSONObject returnObj = new JSONObject();
 			String s = buffer.toString();
 			s = s.substring(1, s.length()-1);
-			returnObj.put( "executionTrace", received);
-//			printConsole( ">>> returnObj.accumulate(buffer): >>> " + returnObj.toString() );
+			returnObj.put("executionTrace", received);
 			
 			JSONObject signals = received.getJSONObject(received.length()-2);
 			if( signals.has("signals") ) {

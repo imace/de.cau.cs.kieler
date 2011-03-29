@@ -29,6 +29,11 @@ public class SJEditorWithKiViContributor extends MultiPageEditorActionBarContrib
 	private Action compileAndLink;
 	private Action downloadToNXT;
 	
+	private Action microStepForwards;
+	private Action microStepBackwards;
+	private Action microStepForwardsAll;
+	private Action microStepBackwardsAll;
+	
 	
 	/**
 	 * Creates a multi-page contributor.
@@ -37,6 +42,7 @@ public class SJEditorWithKiViContributor extends MultiPageEditorActionBarContrib
 		super();
 		createActions();
 	}
+	
 	/**
 	 * Returns the action registed with the given text editor.
 	 * @return IAction or null if editor is null.
@@ -44,10 +50,11 @@ public class SJEditorWithKiViContributor extends MultiPageEditorActionBarContrib
 	protected IAction getAction(ITextEditor editor, String actionID) {
 		return (editor == null ? null : editor.getAction(actionID));
 	}
+	
+	
 	/* (non-JavaDoc)
 	 * Method declared in AbstractMultiPageEditorActionBarContributor.
 	 */
-
 	public void setActivePage(IEditorPart part) {
 		if (activeEditorPart == part)
 			return;
@@ -113,7 +120,6 @@ public class SJEditorWithKiViContributor extends MultiPageEditorActionBarContrib
 				} else {
 					System.out.println("###>>> COMPILE PATH ERROR: No active editor!");
 				}
-//				System.out.println("###>>> COMPILE AND LINK FILE PATH: " + filePath);
 				try {
 					Runtime rt = Runtime.getRuntime() ;
 					// compile
@@ -150,6 +156,7 @@ public class SJEditorWithKiViContributor extends MultiPageEditorActionBarContrib
 		compileAndLink.setImageDescriptor(PlatformUI.getWorkbench().getSharedImages().
 				getImageDescriptor(IDE.SharedImages.IMG_OPEN_MARKER));
 
+		
 		// --------------------- download to NXT ----------------------
 		downloadToNXT = new Action() {
 			public void run() {
@@ -171,14 +178,13 @@ public class SJEditorWithKiViContributor extends MultiPageEditorActionBarContrib
 				} else {
 					System.out.println("###>>> DOWNLOAD TO NXT PATH ERROR: No active editor!");
 				}
-//				System.out.println("###>>> DOWNLOAD TO NXT FILE PATH: " + filePath);
 				try {
 					Runtime rt = Runtime.getRuntime() ;
 					// download to NXT
-					String uploadCommand = "\"cd " + projectPath +
+					String downloadToNXTCommand = "\"cd " + projectPath +
 					" & nxjupload -b -r " + projectName + Path.SEPARATOR + "bin" + Path.SEPARATOR + fileName + ".nxj\"";
-					System.out.println("###--->>> DOWNLOAD COMMAND STRING: " + uploadCommand);
-					Process upload = rt.exec("cmd /C " + uploadCommand);
+					System.out.println("###--->>> DOWNLOAD COMMAND STRING: " + downloadToNXTCommand);
+					Process upload = rt.exec("cmd /C " + downloadToNXTCommand);
 					upload.waitFor();
 					MessageDialog.openInformation(null, "Embedded SJ", "Embedded SJ program downloaded successfully to NXT!");
 				} catch(Exception e) {
@@ -190,8 +196,76 @@ public class SJEditorWithKiViContributor extends MultiPageEditorActionBarContrib
 		downloadToNXT.setToolTipText("Download embeded SJ erogram to NXT");
 		downloadToNXT.setImageDescriptor(PlatformUI.getWorkbench().getSharedImages().
 				getImageDescriptor(IDE.SharedImages.IMG_OBJS_TASK_TSK));
+		// ------------------------------------------------------------------
+		
+		
+		// ----------------------- micro step forward -----------------------
+		microStepForwards = new Action() {
+			public void run() {
+				IEditorPart  editorPart = KlotsPlugin.getDefault().getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
+				if(editorPart != null) {
+					SJEditorWithKiVi e = (SJEditorWithKiVi) editorPart;
+					e.doMicroStepForwards();
+				} else {
+					System.out.println("###>>> MICRO STEP FORWARDS ERROR: No active editor!");
+				}
+			}
+		};
+		microStepForwards.setText("Microstep Forwards");
+		microStepForwards.setToolTipText("Take a microstep forwards");
+		microStepForwards.setImageDescriptor( KlotsPlugin.imageDescriptorFromPlugin(KlotsPlugin.PLUGIN_ID, "icons/microStepIcon.png") );
+		
+		// ----------------------- micro step backward ----------------------
+		microStepBackwards = new Action() {
+			public void run() {
+				IEditorPart  editorPart = KlotsPlugin.getDefault().getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
+				if(editorPart != null) {
+					SJEditorWithKiVi e = (SJEditorWithKiVi) editorPart;
+					e.doMicroStepBackwards();
+				} else {
+					System.out.println("###>>> MICRO STEP BACKWARDS ERROR: No active editor!");
+				}
+			}
+		};
+		microStepBackwards.setText("Microstep Backwards");
+		microStepBackwards.setToolTipText("Take a microstep backwards");
+		microStepBackwards.setImageDescriptor( KlotsPlugin.imageDescriptorFromPlugin(KlotsPlugin.PLUGIN_ID, "icons/microStepBackIcon.png") );
+		
+		
+		// --------------------- all forward micro steps --------------------
+		microStepForwardsAll = new Action() {
+			public void run() {
+				IEditorPart  editorPart = KlotsPlugin.getDefault().getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
+				if(editorPart != null) {
+					SJEditorWithKiVi e = (SJEditorWithKiVi) editorPart;
+					e.doAllForwardMicroSteps();
+				} else {
+					System.out.println("###>>> ALL MICRO STEPS FORWARDS ERROR: No active editor!");
+				}
+			}
+		};
+		microStepForwardsAll.setText("All Forward Microsteps");
+		microStepForwardsAll.setToolTipText("Do all forward microsteps");
+		microStepForwardsAll.setImageDescriptor( KlotsPlugin.imageDescriptorFromPlugin(KlotsPlugin.PLUGIN_ID, "icons/macroStepIcon.png") );
+		
+		// --------------------- all backward micro steps -------------------
+		microStepBackwardsAll = new Action() {
+			public void run() {
+				IEditorPart  editorPart = KlotsPlugin.getDefault().getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
+				if(editorPart != null) {
+					SJEditorWithKiVi e = (SJEditorWithKiVi) editorPart;
+					e.doAllBackwardMicroSteps();
+				} else {
+					System.out.println("###>>> ALL MICRO STEPS BACKWARDS ERROR: No active editor!");
+				}
+			}
+		};
+		microStepBackwardsAll.setText("All Backward Microsteps");
+		microStepBackwardsAll.setToolTipText("Do all backward microsteps");
+		microStepBackwardsAll.setImageDescriptor( KlotsPlugin.imageDescriptorFromPlugin(KlotsPlugin.PLUGIN_ID, "icons/macroStepBackIcon.png") );
 		// ------------------------------------------------------------
 	}
+	
 	
 	
 	public void contributeToMenu(IMenuManager manager) {
@@ -205,6 +279,11 @@ public class SJEditorWithKiViContributor extends MultiPageEditorActionBarContrib
 		manager.add(new Separator());
 		manager.add(compileAndLink);
 		manager.add(downloadToNXT);
+		manager.add(new Separator());
+		manager.add(microStepBackwardsAll);
+		manager.add(microStepBackwards);
+		manager.add(microStepForwards);
+		manager.add(microStepForwardsAll);
 	}
 	
 }
