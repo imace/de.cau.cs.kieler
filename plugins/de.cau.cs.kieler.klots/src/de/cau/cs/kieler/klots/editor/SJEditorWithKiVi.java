@@ -97,8 +97,10 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 	// ======================================================================
 	
 	// highlight colors
-//	private final Color FOREGROUND_HIGHLIGHT_COLOR;
-//	private final Color BACKGROUND_HIGHLIGHT_COLOR;
+	private final static Color FOREGROUND_HIGHLIGHT_COLOR = new Color(Display.getDefault(), 255, 0, 0);
+	private final static Color BACKGROUND_HIGHLIGHT_COLOR = new Color(Display.getDefault(), 255, 250, 240);
+	private final static Color FOREGROUND_STANDARD_COLOR = new Color(Display.getDefault(), 0, 0, 0);
+	private final static Color BACKGROUND_STANDARD_COLOR = new Color(Display.getDefault(), 255, 255, 255);
 	
 	// SJ instructions
 	private final static String[][] sjInstructionsMap = {
@@ -421,7 +423,8 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 		try {
 			
 			// ---------- highlight instruction using KiVi effect ----------- 
-			HighlightSJInstructionEffect e = new HighlightSJInstructionEffect(instrStartOffset, instrEndOffset-instrStartOffset, new Color(dev, 255, 0, 0), null, new Color(dev, 0, 0, 0), null, editor);
+			//HighlightSJInstructionEffect e = new HighlightSJInstructionEffect(instrStartOffset, instrEndOffset-instrStartOffset, FOREGROUND_HIGHLIGHT_COLOR, BACKGROUND_HIGHLIGHT_COLOR, FOREGROUND_STANDARD_COLOR, BACKGROUND_STANDARD_COLOR, editor);
+			HighlightSJInstructionEffect e = new HighlightSJInstructionEffect(instrStartOffset, instrEndOffset-instrStartOffset, FOREGROUND_HIGHLIGHT_COLOR, null, FOREGROUND_STANDARD_COLOR, null, editor);
 			kiviList.add(e);
 			e.execute();
 			// --------------------------------------------------------------

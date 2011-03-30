@@ -2,6 +2,22 @@
 <?eclipse version="3.4"?>
 <plugin>
   <extension
+        point="de.cau.cs.kieler.sim.kiem.json.datacomponent">
+     <content
+           class="de.cau.cs.kieler.klots.NXTDataDistributorWithKiVi"
+           id="de.cau.cs.kieler.klots.NXTDataDistributorWithKiVi"
+           name="NXT Communicator">
+     </content>
+  </extension>
+  <extension
+        point="de.cau.cs.kieler.sim.kiem.json.datacomponent">
+     <content
+           class="de.cau.cs.kieler.klots.NXTDataObserverWithKiVi"
+           id="de.cau.cs.kieler.klots.NXTDataObserverWithKiVi"
+           name="NXT Data Observer">
+     </content>
+  </extension>
+  <extension
         point="org.eclipse.ui.editors">
      <editor
            class="de.cau.cs.kieler.klots.editor.SJEditorWithKiVi"
@@ -55,19 +71,21 @@
 	</imageprovider>
   </extension>
   <extension
-        point="de.cau.cs.kieler.sim.kiem.json.datacomponent">
-     <content
-           class="de.cau.cs.kieler.klots.NXTDataDistributorWithKiVi"
-           id="de.cau.cs.kieler.klots.NXTDataDistributorWithKiVi"
-           name="NXT Communicator">
-     </content>
+        point="org.eclipse.ui.views">
+     <view
+           category="de.cau.cs.kieler"
+           class="de.cau.cs.kieler.klots.views.SJInstructionsView"
+           icon="icons/sjInstructionsViewIcon.png"
+           id="de.cau.cs.kieler.klots.view.SJInstructionsView"
+           name="SJ Instructions View">
+     </view>
   </extension>
   <extension
         point="de.cau.cs.kieler.sim.kiem.json.datacomponent">
      <content
-           class="de.cau.cs.kieler.klots.NXTDataObserverWithKiVi"
-           id="de.cau.cs.kieler.klots.NXTDataObserverWithKiVi"
-           name="NXT Data Observer">
+           class="de.cau.cs.kieler.klots.SJInstructionsViewDataObserver"
+           id="de.cau.cs.kieler.klots.view.SJInstructionsViewDataObserver"
+           name="SJ Instructions View Observer">
      </content>
   </extension>
      
