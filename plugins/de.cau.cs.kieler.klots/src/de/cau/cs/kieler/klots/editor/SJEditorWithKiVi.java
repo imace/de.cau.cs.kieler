@@ -8,18 +8,18 @@ import org.eclipse.jdt.internal.ui.javaeditor.CompilationUnitEditor;
 import org.eclipse.jdt.internal.ui.javaeditor.JavaEditor;
 
 import org.eclipse.core.resources.IMarker;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceChangeEvent;
 import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 
 import org.eclipse.jface.action.IStatusLineManager;
 import org.eclipse.jface.dialogs.ErrorDialog;
-
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.graphics.Color;
-import org.eclipse.swt.graphics.Device;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
@@ -37,6 +37,7 @@ import org.eclipse.ui.ide.IDE;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 
 /**
  * An example showing how to create a multi-page editor.
@@ -96,11 +97,28 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 	// >>>>>>>>>>                FIELDS & VARIABLES                <<<<<<<<<<
 	// ======================================================================
 	
-	// highlight colors
-	private final static Color FOREGROUND_HIGHLIGHT_COLOR = new Color(Display.getDefault(), 255, 0, 0);
-	private final static Color BACKGROUND_HIGHLIGHT_COLOR = new Color(Display.getDefault(), 255, 250, 240);
+	// HIGHLIGHT COLORS
+	// black
 	private final static Color FOREGROUND_STANDARD_COLOR = new Color(Display.getDefault(), 0, 0, 0);
+	// white
 	private final static Color BACKGROUND_STANDARD_COLOR = new Color(Display.getDefault(), 255, 255, 255);
+	// medium spring green
+	private final static Color EXTRA_FOREGROUND_HIGHLIGHT_COLOR = new Color(Display.getDefault(), 0, 250, 154);
+	// khaki
+	private final static Color EXTRA_BACKGROUND_HIGHLIGHT_COLOR = new Color(Display.getDefault(), 240, 230, 140);
+	
+	// dark orange
+	private final static Color ALREADY_DONE_MICROSTEP_FOREGROUND_COLOR = new Color(Display.getDefault(), 255, 140, 0);
+	// alice blue
+	private final static Color ALREADY_DONE_MICROSTEP_BACKGROUND_COLOR = new Color(Display.getDefault(), 240, 248, 255);
+	// red
+	private final static Color ACTIVE_MICROSTEP_FOREGROUND_COLOR = new Color(Display.getDefault(), 255, 0, 0);
+	// alice blue
+	private final static Color ACTIVE_MICROSTEP_BACKGROUND_COLOR = new Color(Display.getDefault(), 240, 248, 255);
+	// medium spring green
+	private final static Color YET_TO_BE_DONE_MICROSTEP_FOREGROUND_COLOR = new Color(Display.getDefault(), 0, 250, 154);
+	// alice blue
+	private final static Color YET_TO_BE_DONE_MICROSTEP_BACKGROUND_COLOR = new Color(Display.getDefault(), 240, 248, 255);
 	
 	// SJ instructions
 	private final static String[][] sjInstructionsMap = {
@@ -124,8 +142,8 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 		{"pre", "pre"}};
 	private final static int sjInstructionsMapSize = 16;
 
-	// KiVi effects list
-	private int microStepNumber = -1;
+	// KiVi effects lists
+	private static int microStepNumber = -1;
 	private static List<HighlightSJInstructionEffect> kiviList = new ArrayList<HighlightSJInstructionEffect>();
 	// label list
 	private static List<LabelInfo> labelList = new ArrayList<LabelInfo>();
@@ -224,6 +242,7 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 		// --------------
 		fillLabelList();
 		// --------------
+	
 	}
 	
 	
@@ -308,7 +327,7 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 		}
 	}
 	
-	
+		
 	
 	
 	// ======================================================================
@@ -319,7 +338,7 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 		Display.getDefault().syncExec(new Runnable() {
 			public void run() {
 				
-				// ------------ undo highlight old instructions ------------- 
+				// ------------ undo highlight old instructions -------------
 				for(HighlightSJInstructionEffect e : kiviList) {
 					e.undo();
 				}
@@ -343,7 +362,21 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 						highlightInstruction(key, instructionData, j);
 						// -------------------------------------------
 						
-					}				
+					}
+					
+					// set all instructions 'already done'
+					for(int i = 0; i < kiviList.size()-1; i++) {
+						kiviList.get(i).setColor(ALREADY_DONE_MICROSTEP_FOREGROUND_COLOR);
+//						kiviList.get(i).setBackgroundColor(ALREADY_DONE_MICROSTEP_BACKGROUND_COLOR);
+						kiviList.get(i).execute();
+					}
+					// set last instruction 'active'
+					kiviList.get(kiviList.size()-1).setColor(ACTIVE_MICROSTEP_FOREGROUND_COLOR);
+//					kiviList.get(kiviList.size()-1).setBackgroundColor(ACTIVE_MICROSTEP_BACKGROUND_COLOR);
+					kiviList.get(kiviList.size()-1).execute();
+					// adjust microstep counter 
+					microStepNumber = kiviList.size()-1;
+					
 				} catch(JSONException e) {
 					e.printStackTrace();
 				}
@@ -368,7 +401,7 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 	
 	protected static void highlightInstruction(String instrName, JSONObject instrData, int chronology) 
 	throws JSONException {
-		Device dev = editor.getViewer().getTextWidget().getDisplay();
+		//Device dev = editor.getViewer().getTextWidget().getDisplay();
 		
 		// -----------------------------------------------------------------------------------
 		// editor.getViewer().getTextWidget().getText() DOES NOT FACTOR IN THE HIDDEN TEXT!!!!
@@ -424,9 +457,10 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 			
 			// ---------- highlight instruction using KiVi effect ----------- 
 			//HighlightSJInstructionEffect e = new HighlightSJInstructionEffect(instrStartOffset, instrEndOffset-instrStartOffset, FOREGROUND_HIGHLIGHT_COLOR, BACKGROUND_HIGHLIGHT_COLOR, FOREGROUND_STANDARD_COLOR, BACKGROUND_STANDARD_COLOR, editor);
-			HighlightSJInstructionEffect e = new HighlightSJInstructionEffect(instrStartOffset, instrEndOffset-instrStartOffset, FOREGROUND_HIGHLIGHT_COLOR, null, FOREGROUND_STANDARD_COLOR, null, editor);
+			//HighlightSJInstructionEffect e = new HighlightSJInstructionEffect(instrStartOffset, instrEndOffset-instrStartOffset, FOREGROUND_HIGHLIGHT_COLOR, null, FOREGROUND_STANDARD_COLOR, null, editor);
+			HighlightSJInstructionEffect e = new HighlightSJInstructionEffect(instrStartOffset, instrEndOffset-instrStartOffset, YET_TO_BE_DONE_MICROSTEP_FOREGROUND_COLOR, null, FOREGROUND_STANDARD_COLOR, null, editor);
 			kiviList.add(e);
-			e.execute();
+			//e.execute();
 			// --------------------------------------------------------------
 			
 		} catch(Exception e) {
@@ -454,6 +488,7 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 	// ======================================================================
 	
 	private void fillLabelList() {
+		// FIXME: Initialization method is needed in case the editor's content is edited and execution is started again	
 		// TODO: CHECK IF LABEL LIST HAS ELEMENTS AT ALL AT THIS TIME
 		// reset labelList
 		labelList.clear();
@@ -537,33 +572,59 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 			return;
 		}
 		if( microStepNumber == -1 ) {
-			doClearAllMicroSteps();
+			// set all instructions 'yet to be done'
+			for(int i = 1; i < kiviList.size(); i++) {
+				kiviList.get(i).setColor(YET_TO_BE_DONE_MICROSTEP_FOREGROUND_COLOR);
+//				kiviList.get(i).setBackgroundColor(YET_TO_BE_DONE_MICROSTEP_BACKGROUND_COLOR);
+				kiviList.get(i).execute();
+			}
 		} else {
-			kiviList.get(microStepNumber).undo();
+			// set old current instruction 'already done'
+			kiviList.get(microStepNumber).setColor(ALREADY_DONE_MICROSTEP_FOREGROUND_COLOR);
+//			kiviList.get(microStepNumber).setBackgroundColor(ALREADY_DONE_MICROSTEP_BACKGROUND_COLOR);
+			kiviList.get(microStepNumber).execute();
 		}
+		// set new current instruction 'active'
 		microStepNumber++;
+		kiviList.get(microStepNumber).setColor(ACTIVE_MICROSTEP_FOREGROUND_COLOR);
+//		kiviList.get(microStepNumber).setBackgroundColor(ACTIVE_MICROSTEP_BACKGROUND_COLOR);
 		kiviList.get(microStepNumber).execute();
 	}
 	
 	
 	public void doMicroStepBackwards() {
 		if( microStepNumber > 0 ) {
-			kiviList.get(microStepNumber).undo();
+			// set old current instruction 'yet to be done'
+			kiviList.get(microStepNumber).setColor(YET_TO_BE_DONE_MICROSTEP_FOREGROUND_COLOR);
+//			kiviList.get(microStepNumber).setBackgroundColor(YET_TO_BE_DONE_MICROSTEP_BACKGROUND_COLOR);
+			kiviList.get(microStepNumber).execute();
+			// set new current instruction 'active'
 			microStepNumber--;
+			kiviList.get(microStepNumber).setColor(ACTIVE_MICROSTEP_FOREGROUND_COLOR);
+//			kiviList.get(microStepNumber).setBackgroundColor(ACTIVE_MICROSTEP_BACKGROUND_COLOR);
 			kiviList.get(microStepNumber).execute();
 		}
 	}
 	
 	
 	public void doAllForwardMicroSteps() {
-		for( HighlightSJInstructionEffect e : kiviList ) {
-			e.execute();
+		// set all instructions 'already done'
+		for(int i = 0; i < kiviList.size()-1; i++) {
+			kiviList.get(i).setColor(ALREADY_DONE_MICROSTEP_FOREGROUND_COLOR);
+//			kiviList.get(i).setBackgroundColor(ALREADY_DONE_MICROSTEP_BACKGROUND_COLOR);
+			kiviList.get(i).execute();
 		}
+		// set last instruction 'active'
+		kiviList.get(kiviList.size()-1).setColor(ACTIVE_MICROSTEP_FOREGROUND_COLOR);
+//		kiviList.get(kiviList.size()-1).setBackgroundColor(ACTIVE_MICROSTEP_BACKGROUND_COLOR);
+		kiviList.get(kiviList.size()-1).execute();
+		// adjust microstep counter 
 		microStepNumber = kiviList.size()-1;
 	}
 	
 	
 	public void doAllBackwardMicroSteps() {
+		//doClearAllMicroSteps();
 		microStepNumber = -1;
 		doMicroStepForwards();
 	}
@@ -579,6 +640,62 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 	public void doResetMicroSteps() {
 		microStepNumber = -1;
 	}
+	
+	
+	
+	
+	
+	// ======================================================================
+	// >>>>>>>>>>    INTERACTIONS WITH THE SJ INSTRUCTIONS VIEW    <<<<<<<<<<
+	// ======================================================================
+	
+	public void doSpecificSingleMicroStep(int[] indexArray) {
+		// highlight 'already done' instructions
+		for(int i = 0; i < indexArray[0]; i++) {
+			kiviList.get(i).setColor(ALREADY_DONE_MICROSTEP_FOREGROUND_COLOR);
+//			kiviList.get(i).setBackgroundColor(ALREADY_DONE_MICROSTEP_BACKGROUND_COLOR);
+			kiviList.get(i).execute();
+		}
+		// highlight 'yet to be done' instructions
+		for(int i = indexArray[0]+1; i < kiviList.size(); i++) {
+			kiviList.get(i).setColor(YET_TO_BE_DONE_MICROSTEP_FOREGROUND_COLOR);
+//			kiviList.get(i).setBackgroundColor(YET_TO_BE_DONE_MICROSTEP_BACKGROUND_COLOR);
+			kiviList.get(i).execute();
+		}
+		// highlight 'active' instructions
+		for(int i = 0; i < indexArray.length; i++) {
+			kiviList.get(indexArray[i]).setColor(ACTIVE_MICROSTEP_FOREGROUND_COLOR);
+//			kiviList.get(indexArray[i]).setBackgroundColor(ACTIVE_MICROSTEP_BACKGROUND_COLOR);
+			kiviList.get(indexArray[i]).execute();
+		}
+	}
+	
+	
+	
+	
+//	public void doSpecificSingleMicroStep(int[] indexArray) {
+//		undoHighlightsFromSJInstructionsView();
+//		for( int i : indexArray ) {
+//			HighlightSJInstructionEffect e = kiviList.get(i).clone();
+//			e.setColor(EXTRA_FOREGROUND_HIGHLIGHT_COLOR);
+//			kiviListFromSJInstructionsView.add(e);
+//		}
+//		executeHighlightsFromSJInstructionsView();
+//	}
+//	
+//	
+//	private static void undoHighlightsFromSJInstructionsView() {
+//		for( HighlightSJInstructionEffect e : kiviListFromSJInstructionsView ) {
+//			e.undo();
+//		}
+//		kiviListFromSJInstructionsView.clear();
+//	}
+//	
+//	private void executeHighlightsFromSJInstructionsView() {
+//		for( HighlightSJInstructionEffect e : kiviListFromSJInstructionsView ) {
+//			e.execute();
+//		}
+//	}
 	
 	
 	
@@ -656,21 +773,29 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 //	
 //	
 //	
-//	private IMarker createInstructionMarker(IResource res, String msg, int line) {
-//		try {
-//			IMarker marker = res.createMarker("de.cau.cs.kieler.klots.editor.instructionMarker");
-//			marker.setAttribute("instructionName", "z.B. fork");
-//			marker.setAttribute(IMarker.LINE_NUMBER, line);
-//			marker.setAttribute(IMarker.MESSAGE, msg);
-//			//marker.setAttribute(IMarker.PRIORITY, IMarker.PRIORITY_HIGH);
-//			//marker.setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_ERROR);
-//			return marker;
-//		} catch (CoreException e) {
-//			// You need to handle the cases where attribute value is rejected
-//			e.printStackTrace();
-//			return null;
-//		}
-//	}
+	private IMarker createInstructionMarker(IResource res, String msg, String instrName, String instrLabel, int line, int charStart, int charEnd) {
+		try {
+			IMarker marker = res.createMarker("de.cau.cs.kieler.klots.editor.instructionMarker");
+			marker.setAttribute("instructionName", instrName);
+			marker.setAttribute("instructionLabel", instrLabel);
+			marker.setAttribute(IMarker.LINE_NUMBER, line);
+			marker.setAttribute(IMarker.CHAR_START, charStart);
+			marker.setAttribute(IMarker.CHAR_END, charEnd);
+			marker.setAttribute(IMarker.MESSAGE, msg);
+			//marker.setAttribute(IMarker.PRIORITY, IMarker.PRIORITY_HIGH);
+			//marker.setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_ERROR);
+			return marker;
+		} catch (CoreException e) {
+			// You need to handle the cases where attribute value is rejected
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	
+	private void setupInstructionMarkers() {
+		
+	}
 	
 	
 }

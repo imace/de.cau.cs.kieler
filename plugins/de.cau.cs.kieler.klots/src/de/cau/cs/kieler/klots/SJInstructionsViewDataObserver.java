@@ -1,22 +1,6 @@
-/*
- * KIELER - Kiel Integrated Environment for Layout Eclipse RichClient
- *
- * http://www.informatik.uni-kiel.de/rtsys/kieler/
- * 
- * Copyright 2009 by
- * + Christian-Albrechts-University of Kiel
- *   + Department of Computer Science
- *     + Real-Time and Embedded Systems Group
- * 
- * This code is provided under the terms of the Eclipse Public License (EPL).
- * See the file epl-v10.html for the license text.
- */
-
 package de.cau.cs.kieler.klots;
 
 import java.util.Iterator;
-import java.util.List;
-
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IViewPart;
 import org.eclipse.ui.IWorkbenchWindow;
@@ -29,20 +13,8 @@ import org.json.JSONObject;
 import de.cau.cs.kieler.klots.views.SJInstructionsData;
 import de.cau.cs.kieler.klots.views.SJInstructionsDataList;
 
-/**
- * The class DataObserver implements the observer DataComponent which should be scheduled behind any
- * producer DataComponents. It updates the table's ViewPart according to the variables and signals
- * it gets in its {@link #step(String)} method from the execution manager.
- * 
- * @author Christian Motika - cmot AT informatik.uni-kiel.de
- */
-public class SJInstructionsViewDataObserver extends JSONObjectDataComponent implements IJSONObjectDataComponent {
 
-    /**
-     * A temporary list that is used to remember updated values to set all not updated signals to
-     * absent within history steps.
-     */
-    private List<SJInstructionsData> sjInstructionsDataTmp;
+public class SJInstructionsViewDataObserver extends JSONObjectDataComponent implements IJSONObjectDataComponent {
 
     /** The id of the view for KIEM. */
     private static final String SJ_INSTRUCTIONS_VIEW_ID = "de.cau.cs.kieler.klots.view.SJInstructionsView";
@@ -68,6 +40,7 @@ public class SJInstructionsViewDataObserver extends JSONObjectDataComponent impl
      */
     public JSONObject step(JSONObject jSONObject) {
         SJInstructionsDataList instrList = SJInstructionsDataList.getInstance();
+        instrList.clear();
         
         try {
 			JSONArray jArray = jSONObject.getJSONArray("executionTrace");
@@ -83,6 +56,11 @@ public class SJInstructionsViewDataObserver extends JSONObjectDataComponent impl
 				for(Iterator<?> iter = instr.keys(); iter.hasNext(); ) {
 					jSONKey = (String) iter.next();
 				}
+				
+				if( jSONKey.equals("present") ) {   // FIXME: find a way to deal with 'present' hidden in 'awaitDone'
+					continue;
+				}
+				
 				instrData.setInstructionsName(jSONKey);
 				instrInside = instr.getJSONObject(jSONKey);
 				instrData.setLabel(instrInside.getString("label"));
@@ -106,6 +84,7 @@ public class SJInstructionsViewDataObserver extends JSONObjectDataComponent impl
 			e.printStackTrace();
 		}
 
+		// TODO: DEAL WITH HISTORY STEPS!
 //                if (this.isHistoryStep()) {
 //                    // set all NOT updated entries to absent per default
 //                    int tableSize = TableDataList.getInstance().size();

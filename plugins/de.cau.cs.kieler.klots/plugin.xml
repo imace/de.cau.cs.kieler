@@ -62,6 +62,7 @@
       	<super type="org.eclipse.core.resources.taskmarker"/>
       	<persistent value="false"/>
       	<attribute name="instructionName"/>
+      	<attribute name="instructionLabel"/>
   </extension>
   <extension point="org.eclipse.ui.ide.markerImageProviders">
 	<imageprovider

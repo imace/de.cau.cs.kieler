@@ -103,7 +103,6 @@ public class SJInstructionsDataLabelProvider implements ITableLabelProvider {
         return null;
     }
 
-    // -------------------------------------------------------------------------
 
     /**
      * {@inheritDoc}
@@ -142,7 +141,6 @@ public class SJInstructionsDataLabelProvider implements ITableLabelProvider {
         }
     }
 
-    // -------------------------------------------------------------------------
 
     /**
      * {@inheritDoc}
@@ -151,7 +149,6 @@ public class SJInstructionsDataLabelProvider implements ITableLabelProvider {
         // noop
     }
 
-    // -------------------------------------------------------------------------
 
     /**
      * {@inheritDoc}
@@ -160,7 +157,6 @@ public class SJInstructionsDataLabelProvider implements ITableLabelProvider {
         // noop
     }
 
-    // -------------------------------------------------------------------------
 
     /**
      * {@inheritDoc}
@@ -169,7 +165,6 @@ public class SJInstructionsDataLabelProvider implements ITableLabelProvider {
         return false;
     }
 
-    // -------------------------------------------------------------------------
 
     /**
      * {@inheritDoc}

@@ -6,6 +6,8 @@ import org.eclipse.swt.widgets.Table;
 
 
 public class SJInstructionsViewer extends TreeViewer {
+	
+	public static final String ID = "de.cau.cs.kieler.klots.view.SJInstructionsViewer";
 
     // -------------------------------------------------------------------------
 

@@ -58,6 +58,12 @@ public class SJInstructionsDataList {
         Display.getDefault().asyncExec(new Runnable() {
             public void run() {
                 viewer.refresh();
+                
+                // --------------------------------------------------------
+                int i = viewer.getTree().getItemCount();
+				viewer.getTree().setSelection(viewer.getTree().getItem(i-1));
+                // --------------------------------------------------------
+                
             }
         });
     }
@@ -85,6 +91,11 @@ public class SJInstructionsDataList {
      */
     public SJInstructionsData get(final int index) {
         return sjInstructionsDataList.get(index);
+    }
+    
+    
+    public void clear() {
+        sjInstructionsDataList.clear();
     }
 
 

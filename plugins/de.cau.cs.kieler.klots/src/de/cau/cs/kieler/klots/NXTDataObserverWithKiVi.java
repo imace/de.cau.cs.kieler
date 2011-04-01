@@ -37,19 +37,13 @@ public class NXTDataObserverWithKiVi extends JSONObjectDataComponent implements
 			}
 		});
 		
-		// XXX: MOVED FROM NXT DATA DISTRIBUTOR!
-		// -------------------------------------
 		editor.useAsExecutionViewer(true);
-		// ---------------------------------
 		
 	}
 
 	
 	public void wrapup() throws KiemInitializationException {
-		// XXX: MOVED FROM NXT DATA DISTRIBUTOR!
-		// -------------------------------------
 		editor.useAsExecutionViewer(false);
-		// -------------------------------------
 	}
 
 	
@@ -82,16 +76,11 @@ public class NXTDataObserverWithKiVi extends JSONObjectDataComponent implements
 			}
 			return null;
 		} else {
-			
-			// XXX: MOVED FROM NXT DATA DISTRIBUTOR!
-			// -------------------------------------
 			try {
 				editor.update(jSONObject.getJSONArray("executionTrace").toString(), false);
 			} catch (JSONException e) {
 				printConsole("STEP ERROR: " + e.getMessage());
 			}
-			editor.doResetMicroSteps();
-			// -------------------------------------
 		}
 		
 		return null;

@@ -3,6 +3,8 @@ package de.cau.cs.kieler.klots;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
+import de.cau.cs.kieler.klots.views.SJInstructionsView;
+
 public class KlotsPlugin extends AbstractUIPlugin {
 
     /** The Constant PLUGIN_ID. */
@@ -52,4 +54,8 @@ public class KlotsPlugin extends AbstractUIPlugin {
         return plugin;
     }
 
+    
+    public static SJInstructionsView getSJInstructionsView() {
+    	return de.cau.cs.kieler.klots.views.SJInstructionsView.getInstance();
+    }
 }

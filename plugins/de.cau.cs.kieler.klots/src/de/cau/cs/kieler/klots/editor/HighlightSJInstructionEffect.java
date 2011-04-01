@@ -69,5 +69,23 @@ public class HighlightSJInstructionEffect extends AbstractEffect {
         return false;
     }
 
+    
+    @Override
+    public HighlightSJInstructionEffect clone() {
+    	return new HighlightSJInstructionEffect(startOffset, textLength, color, backgroundColor, color, backgroundColor, editor);
+    }
 
+
+
+	void setColor(Color color) {
+		this.color = color;
+	}
+
+
+
+	void setBackgroundColor(Color backgroundColor) {
+		this.backgroundColor = backgroundColor;
+	}
+
+    
 }

@@ -23,38 +23,13 @@ public class NXTDataDistributorWithKiVi extends JSONObjectDataComponent implemen
 	private static final String KLOTSCONSOLENAME = "Klots Console";
 	NXTCommunicator comm;
 	
-	// XXX: MOVED TO NXT DATA OBSERVER!
-	// --------------------------------
-	//SJEditorWithKiVi editor;
-	// --------------------------------
-	
 
 	public void initialize() throws KiemInitializationException {
 		comm = NXTCommunicator.getInstance();
 		
-		// XXX: MOVED TO NXT DATA OBSERVER!
-		// ------------------------------------------------------------------
-//		PlatformUI.getWorkbench().getDisplay().syncExec(new Runnable() {
-//			public void run() {
-//				IEditorPart e = KlotsPlugin.getDefault().getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
-//				if(e != null) {
-//					editor = (SJEditorWithKiVi) e;
-//				} else {
-//					printConsole("INITIALIZATION ERROR: Could not find an active SJ editor!");
-//				}
-//			}
-//		});
-		// ------------------------------------------------------------------
-		
 		String s = comm.receiveMessage().toString();
 		if( s.equals("[{SYNCHRONIZED}]") ) {
 			printConsole(s);
-			
-			// XXX: MOVED TO NXT DATA OBSERVER!
-			// ---------------------------------
-			//editor.useAsExecutionViewer(true);
-			// ---------------------------------
-			
 		} else {
 			printConsole("ERROR while trying to synchronize with the NXT: " + s);
 		}
@@ -65,12 +40,6 @@ public class NXTDataDistributorWithKiVi extends JSONObjectDataComponent implemen
 	public void wrapup() throws KiemInitializationException {
 		comm.sendMessage("STOP");
 		comm.closeTransmission();
-		
-		// XXX: MOVED TO NXT DATA OBSERVER!
-		// ----------------------------------
-		//editor.useAsExecutionViewer(false);
-		// ----------------------------------
-		
 	}
 
 	
@@ -107,13 +76,6 @@ public class NXTDataDistributorWithKiVi extends JSONObjectDataComponent implemen
 		
 		// --------------------------- observer -----------------------------
 		StringBuffer buffer = comm.receiveMessage();
-		
-		// XXX: MOVED TO NXT DATA OBSERVER!
-		// --------------------------------
-		//editor.update(buffer);
-		//editor.doResetMicroSteps();
-		// --------------------------------
-		
 		try {
 			JSONArray received = new JSONArray(buffer.toString());
 			JSONObject returnObj = new JSONObject();
