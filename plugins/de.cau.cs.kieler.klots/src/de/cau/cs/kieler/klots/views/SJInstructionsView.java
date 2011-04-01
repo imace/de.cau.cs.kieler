@@ -1,6 +1,5 @@
 package de.cau.cs.kieler.klots.views;
 
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -14,8 +13,6 @@ import org.eclipse.jface.viewers.TreeViewerColumn;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
-import org.eclipse.swt.events.KeyEvent;
-import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.SWT;
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.IEditorPart;
@@ -123,8 +120,8 @@ public class SJInstructionsView extends ViewPart {
         viewer.setContentProvider(new SJInstructionsDataContentProvider());
         viewer.setLabelProvider(new SJInstructionsDataLabelProvider());
 
-        viewer.getControl().addKeyListener(new KeyListener() {
-            public void keyPressed(final KeyEvent e) {
+//        viewer.getControl().addKeyListener(new KeyListener() {
+//            public void keyPressed(final KeyEvent e) {
 //                // if user pressed delete
 //                if (e.keyCode == KEYBOARD_DELETE) {
 //                    getActionDelete().run();
@@ -133,11 +130,11 @@ public class SJInstructionsView extends ViewPart {
 //                if (e.keyCode == KEYBOARD_SPACE) {
 //                    getActionSignaltoggle().run();
 //                }
-            }
-
-            public void keyReleased(final KeyEvent e) {
-            }
-        });
+//            }
+//
+//            public void keyReleased(final KeyEvent e) {
+//            }
+//        });
         
             
         viewer.addPostSelectionChangedListener(new ISelectionChangedListener() {
@@ -150,14 +147,39 @@ public class SJInstructionsView extends ViewPart {
         		if( event.getSelection() instanceof IStructuredSelection ) {
         			IStructuredSelection selection = (IStructuredSelection)event.getSelection();
         			List<SJInstructionsData> list = new LinkedList<SJInstructionsData>();
-        			for(Iterator<?> iterator = selection.iterator(); iterator.hasNext(); ) {
-        				list.add( (SJInstructionsData) iterator.next() );
-        			}
+        			
+        			// XXX: process only the first element of the selection
+        			SJInstructionsData data = (SJInstructionsData) selection.getFirstElement();
+        			list.add(data);
+//        			for(Iterator<?> iterator = selection.iterator(); iterator.hasNext(); ) {
+//        				list.add( (SJInstructionsData) iterator.next() );
+//        			}
+        			
         			highlightSelectedSJInstructions(list);
-        		}
-     	    }
-        });
-        
+        			
+        			// forbid multiple selections AND enable/disable microstep actions
+        			int i = data.getParentSJInstructionsDataList().indexOf(data);
+        			viewer.getTree().setSelection(viewer.getTree().getItem(i));
+        			if( i == 0 ) {
+    					microStepForwards.setEnabled(true);
+    					microStepForwardsAll.setEnabled(true);
+    					microStepBackwards.setEnabled(false);
+    					microStepBackwardsAll.setEnabled(false);
+    				} else if( i == viewer.getTree().getItemCount()-1 ) {
+    					microStepForwards.setEnabled(false);
+    					microStepForwardsAll.setEnabled(false);
+    					microStepBackwards.setEnabled(true);
+    					microStepBackwardsAll.setEnabled(true);
+    				} else {
+    					microStepForwards.setEnabled(true);
+    					microStepForwardsAll.setEnabled(true);
+    					microStepBackwards.setEnabled(true);
+    					microStepBackwardsAll.setEnabled(true);
+    				}
+        			
+        		} // end if
+     	    } // end selectionChanged()
+        }); // end new ISelectionChangedListener() {}
     }
 
     
@@ -227,45 +249,7 @@ public class SJInstructionsView extends ViewPart {
     }
 
     
-    // -------------------------------------------------------------------------
-
-    /**
-     * Hook context menu that allows editing of entries.
-     */
-//    private void hookContextMenu() {
-//        MenuManager menuMgr = new MenuManager("#PopupMenu");
-//        menuMgr.setRemoveAllWhenShown(true);
-//        menuMgr.addMenuListener(new IMenuListener() {
-//            public void menuAboutToShow(final IMenuManager manager) {
-//                buildContextMenu(manager);
-//            }
-//        });
-//        Menu menu = menuMgr.createContextMenu(viewer.getControl());
-//        viewer.getControl().setMenu(menu);
-//        getSite().registerContextMenu(menuMgr, viewer);
-//    }
-
-    // -------------------------------------------------------------------------
-
-    /**
-     * Builds the context menu of the tree table viewer.
-     * 
-     * @param manager
-     *            the manager
-     */
-//    private void buildContextMenu(final IMenuManager manager) {
-//        manager.add(getActionSignal());
-//        manager.add(getActionSignaltoggle());
-//        manager.add(getActionPermanent());
-//        manager.add(new Separator());
-//        manager.add(getActionAdd());
-//        manager.add(getActionDelete());
-//        // Other plug-ins can contribute there actions here
-//        manager.add(new Separator(IWorkbenchActionConstants.MB_ADDITIONS));
-//    }
-
-    // -------------------------------------------------------------------------
-
+    
     /**
      * Contribute to the tool bar of this ViewPart.
      */
@@ -278,8 +262,14 @@ public class SJInstructionsView extends ViewPart {
 		toolBarManager.add(kiemRun);
 		toolBarManager.add(kiemPause);
 		toolBarManager.add(kiemStop);
-        toolBarManager.add(new Separator());
-        toolBarManager.add(new Separator());
+//        toolBarManager.add(new Separator());
+        
+        final Action blank = new Action(){};
+        blank.setDisabledImageDescriptor( KlotsPlugin.imageDescriptorFromPlugin(KlotsPlugin.PLUGIN_ID, "icons/blankIcon.png") );
+        blank.setEnabled(false);
+        toolBarManager.add(blank);
+        
+//        toolBarManager.add(new Separator());
 		toolBarManager.add(microStepBackwardsAll);
 		toolBarManager.add(microStepBackwards);
 		toolBarManager.add(microStepForwards);
@@ -304,6 +294,13 @@ public class SJInstructionsView extends ViewPart {
 					System.out.println("+++++>>>> MICRO STEP BACK: selection index = " + i + ", new selection index = " + (i+1));
 					if( i+1 < viewer.getTree().getItemCount() ) {
 						viewer.getTree().setSelection(viewer.getTree().getItem(i+1));
+						if( !microStepBackwards.isEnabled() ) {
+							microStepBackwards.setEnabled(true);
+							microStepBackwardsAll.setEnabled(true);
+						}
+					} else {
+						microStepForwards.setEnabled(false);
+						microStepForwardsAll.setEnabled(false);
 					}
 				} else {
 					System.out.println("###>>> MICRO STEP FORWARDS ERROR: No active editor!");
@@ -313,6 +310,7 @@ public class SJInstructionsView extends ViewPart {
 		microStepForwards.setText("Microstep Forwards");
 		microStepForwards.setToolTipText("Take a microstep forwards");
 		microStepForwards.setImageDescriptor( KlotsPlugin.imageDescriptorFromPlugin(KlotsPlugin.PLUGIN_ID, "icons/microStepIcon.png") );
+		microStepForwards.setDisabledImageDescriptor( KlotsPlugin.imageDescriptorFromPlugin(KlotsPlugin.PLUGIN_ID, "icons/microStepIconDisabled.png") );
 		
 		// ----------------------- micro step backward ----------------------
 		microStepBackwards = new Action() {
@@ -328,6 +326,13 @@ public class SJInstructionsView extends ViewPart {
 					System.out.println("+++++>>>> MICRO STEP BACK: selection index = " + i + ", new selection index = " + (i-1));
 					if( i-1 >= 0 ) {
 						viewer.getTree().setSelection(viewer.getTree().getItem(i-1));
+						if( !microStepForwards.isEnabled() ) {
+							microStepForwards.setEnabled(true);
+							microStepForwardsAll.setEnabled(true);
+						}
+					} else {
+						microStepBackwards.setEnabled(false);
+						microStepBackwardsAll.setEnabled(false);
 					}
 				} else {
 					System.out.println("###>>> MICRO STEP BACKWARDS ERROR: No active editor!");
@@ -337,6 +342,7 @@ public class SJInstructionsView extends ViewPart {
 		microStepBackwards.setText("Microstep Backwards");
 		microStepBackwards.setToolTipText("Take a microstep backwards");
 		microStepBackwards.setImageDescriptor( KlotsPlugin.imageDescriptorFromPlugin(KlotsPlugin.PLUGIN_ID, "icons/microStepBackIcon.png") );
+		microStepBackwards.setDisabledImageDescriptor( KlotsPlugin.imageDescriptorFromPlugin(KlotsPlugin.PLUGIN_ID, "icons/microStepBackIconDisabled.png") );
 		
 		
 		// --------------------- all forward micro steps --------------------
@@ -350,6 +356,10 @@ public class SJInstructionsView extends ViewPart {
 					// do all forward steps in the SJ instructions view
 					int i = viewer.getTree().getItemCount();
 					viewer.getTree().setSelection(viewer.getTree().getItem(i-1));
+					microStepBackwards.setEnabled(true);
+					microStepBackwardsAll.setEnabled(true);
+					microStepForwards.setEnabled(false);
+					microStepForwardsAll.setEnabled(false);
 				} else {
 					System.out.println("###>>> ALL MICRO STEPS FORWARDS ERROR: No active editor!");
 				}
@@ -358,6 +368,7 @@ public class SJInstructionsView extends ViewPart {
 		microStepForwardsAll.setText("All Forward Microsteps");
 		microStepForwardsAll.setToolTipText("Do all forward microsteps");
 		microStepForwardsAll.setImageDescriptor( KlotsPlugin.imageDescriptorFromPlugin(KlotsPlugin.PLUGIN_ID, "icons/macroStepIcon.png") );
+		microStepForwardsAll.setDisabledImageDescriptor( KlotsPlugin.imageDescriptorFromPlugin(KlotsPlugin.PLUGIN_ID, "icons/macroStepIconDisabled.png") );
 		
 		// --------------------- all backward micro steps -------------------
 		microStepBackwardsAll = new Action() {
@@ -369,6 +380,10 @@ public class SJInstructionsView extends ViewPart {
 					e.doAllBackwardMicroSteps();
 					// roll back all steps in the SJ instructions view
 					viewer.getTree().setSelection(viewer.getTree().getItem(0));
+					microStepForwards.setEnabled(true);
+					microStepForwardsAll.setEnabled(true);
+					microStepBackwards.setEnabled(false);
+					microStepBackwardsAll.setEnabled(false);
 				} else {
 					System.out.println("###>>> ALL MICRO STEPS BACKWARDS ERROR: No active editor!");
 				}
@@ -377,6 +392,7 @@ public class SJInstructionsView extends ViewPart {
 		microStepBackwardsAll.setText("All Backward Microsteps");
 		microStepBackwardsAll.setToolTipText("Do all backward microsteps");
 		microStepBackwardsAll.setImageDescriptor( KlotsPlugin.imageDescriptorFromPlugin(KlotsPlugin.PLUGIN_ID, "icons/macroStepBackIcon.png") );
+		microStepBackwardsAll.setDisabledImageDescriptor( KlotsPlugin.imageDescriptorFromPlugin(KlotsPlugin.PLUGIN_ID, "icons/macroStepBackIconDisabled.png") );
 		// ------------------------------------------------------------------
 		
 		
@@ -386,66 +402,189 @@ public class SJInstructionsView extends ViewPart {
 				Execution e = KiemPlugin.getDefault().getExecution();
 				if( e == null ) {
 					// FIXME: initExecution() does not return??!!
-					KiemPlugin.getDefault().initExecution();
+					KiemPlugin.getDefault().initExecution();			
+					// enable/disable the KIEM actions
+					kiemStepBackwards.setEnabled(true);
+					kiemStop.setEnabled(true);
+				} else {
+					KiemPlugin.getDefault().getExecution().stepExecutionSync();
+					
+					// enable/disable the microstep actions
+					microStepForwards.setEnabled(false);
+					microStepForwardsAll.setEnabled(false);
+					microStepBackwards.setEnabled(true);
+					microStepBackwardsAll.setEnabled(true);
 				}
-				KiemPlugin.getDefault().getExecution().stepExecutionSync();
 			}
 		};
 		kiemStepForwards.setText("KIEM Macrostep Forwards");
 		kiemStepForwards.setToolTipText("Take a macrostep forwards");
 		kiemStepForwards.setImageDescriptor( KlotsPlugin.imageDescriptorFromPlugin(KlotsPlugin.PLUGIN_ID, "icons/KIEMstepIcon.png") );
+		kiemStepForwards.setDisabledImageDescriptor( KlotsPlugin.imageDescriptorFromPlugin(KlotsPlugin.PLUGIN_ID, "icons/KIEMstepIconDisabled.png") );
 
 		// ----------------------- KIEM step backwards ----------------------
 		kiemStepBackwards = new Action() {
 			public void run() {
 				KiemPlugin.getDefault().getExecution().stepBackExecutionSync();
+				
+				// enable/disable the microstep actions
+				microStepForwards.setEnabled(false);
+				microStepForwardsAll.setEnabled(false);
+				microStepBackwards.setEnabled(true);
+				microStepBackwardsAll.setEnabled(true);
 			}
 		};
 		kiemStepBackwards.setText("KIEM Macrostep Backwards");
 		kiemStepBackwards.setToolTipText("Take a macrostep backwards");
 		kiemStepBackwards.setImageDescriptor( KlotsPlugin.imageDescriptorFromPlugin(KlotsPlugin.PLUGIN_ID, "icons/KIEMstepBackIcon.png") );
+		kiemStepBackwards.setDisabledImageDescriptor( KlotsPlugin.imageDescriptorFromPlugin(KlotsPlugin.PLUGIN_ID, "icons/KIEMstepBackIconDisabled.png") );
 
 		// ---------------------------- KIEM run ----------------------------
 		kiemRun = new Action() {
 			public void run() {
 				KiemPlugin.getDefault().getExecution().runExecutionSync();
+				
+				// enable/disable the KIEM actions
+				kiemStepForwards.setEnabled(false);
+				kiemStepBackwards.setEnabled(false);
+				kiemRun.setEnabled(false);
+				kiemPause.setEnabled(true);
+				kiemStop.setEnabled(true);
+				
+				// enable/disable the microstep actions
+				microStepForwards.setEnabled(false);
+				microStepForwardsAll.setEnabled(false);
+				microStepBackwards.setEnabled(false);
+				microStepBackwardsAll.setEnabled(false);
 			}
 		};
 		kiemRun.setText("KIEM Run");
 		kiemRun.setToolTipText("Run execution");
 		kiemRun.setImageDescriptor( KlotsPlugin.imageDescriptorFromPlugin(KlotsPlugin.PLUGIN_ID, "icons/KIEMrunIcon.png") );
+		kiemRun.setDisabledImageDescriptor( KlotsPlugin.imageDescriptorFromPlugin(KlotsPlugin.PLUGIN_ID, "icons/KIEMrunIconDisabled.png") );
 
 		// --------------------------- KIEM pause ---------------------------
 		kiemPause = new Action() {
 			public void run() {
 				KiemPlugin.getDefault().getExecution().pauseExecutionSync();
+				
+				// enable/disable the KIEM actions
+				kiemStepForwards.setEnabled(true);
+				kiemStepBackwards.setEnabled(true);
+				kiemRun.setEnabled(true);
+				kiemPause.setEnabled(false);
+				
+				// enable/disable the microstep actions
+				microStepForwards.setEnabled(false);
+				microStepForwardsAll.setEnabled(false);
+				microStepBackwards.setEnabled(true);
+				microStepBackwardsAll.setEnabled(true);
 			}
 		};
 		kiemPause.setText("KIEM Pause");
 		kiemPause.setToolTipText("Pause execution");
 		kiemPause.setImageDescriptor( KlotsPlugin.imageDescriptorFromPlugin(KlotsPlugin.PLUGIN_ID, "icons/KIEMpauseIcon.png") );
+		kiemPause.setDisabledImageDescriptor( KlotsPlugin.imageDescriptorFromPlugin(KlotsPlugin.PLUGIN_ID, "icons/KIEMpauseIconDisabled.png") );
 
 		// ---------------------------- KIEM stop ---------------------------
 		kiemStop = new Action() {
 			public void run() {
 				KiemPlugin.getDefault().getExecution().stopExecutionSync();
+				
+				// enable/disable the KIEM actions
+				kiemStepForwards.setEnabled(true);
+				kiemStepBackwards.setEnabled(false);
+				kiemRun.setEnabled(true);
+				kiemPause.setEnabled(false);
+				kiemStop.setEnabled(false);
+				
+				// enable/disable the microstep actions
+				microStepForwards.setEnabled(false);
+				microStepForwardsAll.setEnabled(false);
+				microStepBackwards.setEnabled(false);
+				microStepBackwardsAll.setEnabled(false);
 			}
 		};
 		kiemStop.setText("KIEM Stop");
 		kiemStop.setToolTipText("Stop execution");
 		kiemStop.setImageDescriptor( KlotsPlugin.imageDescriptorFromPlugin(KlotsPlugin.PLUGIN_ID, "icons/KIEMstopIcon.png") );
+		kiemStop.setDisabledImageDescriptor( KlotsPlugin.imageDescriptorFromPlugin(KlotsPlugin.PLUGIN_ID, "icons/KIEMstopIconDisabled.png") );
+		// ------------------------------------------------------------------
 		
+		
+		// ------------------ set initial enabled/disabled ------------------
+		kiemStepForwards.setEnabled(true);
+		kiemStepBackwards.setEnabled(false);
+		kiemRun.setEnabled(true);
+		kiemPause.setEnabled(false);
+		kiemStop.setEnabled(false);
+		
+		microStepForwards.setEnabled(false);
+		microStepForwardsAll.setEnabled(false);
+		microStepBackwards.setEnabled(false);
+		microStepBackwardsAll.setEnabled(false);
 		// ------------------------------------------------------------------
 		
 	}
     
     
-    
     // -------------------------------------------------------------------------
 
+    
     /**
-     * Hook double click and selection changed effect actions.
+     * Pass the focus request to the viewer's control.
      */
+    public void setFocus() {
+        viewer.getControl().setFocus();
+    }
+    
+    
+
+    
+    // -------------------------------------------------------------------------
+    // -------------------------------------------------------------------------
+    // -------------------------------------------------------------------------
+
+//    /**
+//     * Hook context menu that allows editing of entries.
+//     */
+//    private void hookContextMenu() {
+//        MenuManager menuMgr = new MenuManager("#PopupMenu");
+//        menuMgr.setRemoveAllWhenShown(true);
+//        menuMgr.addMenuListener(new IMenuListener() {
+//            public void menuAboutToShow(final IMenuManager manager) {
+//                buildContextMenu(manager);
+//            }
+//        });
+//        Menu menu = menuMgr.createContextMenu(viewer.getControl());
+//        viewer.getControl().setMenu(menu);
+//        getSite().registerContextMenu(menuMgr, viewer);
+//    }
+
+    // -------------------------------------------------------------------------
+
+//    /**
+//     * Builds the context menu of the tree table viewer.
+//     * 
+//     * @param manager
+//     *            the manager
+//     */
+//    private void buildContextMenu(final IMenuManager manager) {
+//        manager.add(getActionSignal());
+//        manager.add(getActionSignaltoggle());
+//        manager.add(getActionPermanent());
+//        manager.add(new Separator());
+//        manager.add(getActionAdd());
+//        manager.add(getActionDelete());
+//        // Other plug-ins can contribute there actions here
+//        manager.add(new Separator(IWorkbenchActionConstants.MB_ADDITIONS));
+//    }
+
+    // -------------------------------------------------------------------------
+
+//    /**
+//     * Hook double click and selection changed effect actions.
+//     */
 //    private void hookSideEffectActions() {
 //        viewer.addDoubleClickListener(new IDoubleClickListener() {
 //            public void doubleClick(final DoubleClickEvent event) {
@@ -466,15 +605,5 @@ public class SJInstructionsView extends ViewPart {
 //        });
 //    }
 
-
-    // -------------------------------------------------------------------------
-
-    
-    /**
-     * Pass the focus request to the viewer's control.
-     */
-    public void setFocus() {
-        viewer.getControl().setFocus();
-    }
 
 }

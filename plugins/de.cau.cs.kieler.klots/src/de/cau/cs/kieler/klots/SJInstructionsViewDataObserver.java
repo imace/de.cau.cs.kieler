@@ -18,6 +18,7 @@ public class SJInstructionsViewDataObserver extends JSONObjectDataComponent impl
 
     /** The id of the view for KIEM. */
     private static final String SJ_INSTRUCTIONS_VIEW_ID = "de.cau.cs.kieler.klots.view.SJInstructionsView";
+    private static final String SIGNAL_TABLE_VIEW_ID = "de.cau.cs.kieler.sim.table.view";
 
     /**
      * The Constant EYE_CATCH_DELAY. Let the user eye-catch the table entries and delay the update
@@ -131,7 +132,9 @@ public class SJInstructionsViewDataObserver extends JSONObjectDataComponent impl
                 try {
                     IWorkbenchWindow window = KlotsPlugin.getDefault().getWorkbench()
                             .getActiveWorkbenchWindow();
-                    IViewPart vP = window.getActivePage().showView(SJ_INSTRUCTIONS_VIEW_ID);
+                    IViewPart vP = window.getActivePage().showView(SIGNAL_TABLE_VIEW_ID);
+                    vP.setFocus();
+                    vP = window.getActivePage().showView(SJ_INSTRUCTIONS_VIEW_ID);
                     vP.setFocus();
                     // set done flag
                     broughtToFront = true;
@@ -161,7 +164,7 @@ public class SJInstructionsViewDataObserver extends JSONObjectDataComponent impl
         bringToFront();
         
         // update the view
-        SJInstructionsDataList.getInstance().updateViewAsync();
+        //SJInstructionsDataList.getInstance().updateViewAsync();
     }
 
 
@@ -194,6 +197,9 @@ public class SJInstructionsViewDataObserver extends JSONObjectDataComponent impl
      * {@inheritDoc}
      */
     public void wrapup() {
+    	SJInstructionsDataList instrList = SJInstructionsDataList.getInstance();
+        instrList.clear();
+        instrList.updateViewAsync();
     }
 
 }

@@ -23,7 +23,7 @@
            class="de.cau.cs.kieler.klots.editor.SJEditorWithKiVi"
            contributorClass="de.cau.cs.kieler.klots.editor.SJEditorWithKiViContributor"
            extensions="java"
-           icon="icons/editor4.gif"
+           icon="icons/editor7.gif"
            id="de.cau.cs.kieler.klots.editor.SJEditorWithKiVi"
            name="SJ Editor">
      </editor>
@@ -33,7 +33,7 @@
       <wizard
             category="cau.cs.kieler.klots.editor"
             class="de.cau.cs.kieler.klots.editor.SJProjectNewFileWizard"
-            icon="icons/editor5.gif"
+            icon="icons/editor7.gif"
             id="de.cau.cs.kieler.klots.editor.SJEditorNewFileWizard"
             name="Embedded SJ File">
       </wizard>
@@ -44,7 +44,7 @@
       <wizard
             category="cau.cs.kieler.klots.editor"
             class="de.cau.cs.kieler.klots.editor.SJProjectNewSJProjectWizard"
-            icon="icons/editor5.gif"
+            icon="icons/editor7.gif"
             id="de.cau.cs.kieler.klots.editor.SJEditorNewSJProjectWizard"
             name="Embedded SJ Project"
             project="true">

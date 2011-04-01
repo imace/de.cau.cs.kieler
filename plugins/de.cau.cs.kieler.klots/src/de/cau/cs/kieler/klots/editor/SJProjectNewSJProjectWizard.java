@@ -73,9 +73,9 @@ public class SJProjectNewSJProjectWizard extends Wizard implements INewWizard,
 		 * don't necessarily define our own.
 		 */
 		wizardPage = new WizardNewProjectCreationPage(
-				"NewExampleComSiteProject");
-		wizardPage.setDescription("Enter a progect name.");
-		wizardPage.setTitle("Create an Embedded SJ Project");
+				"NewEmbeddedSJProject");
+		wizardPage.setDescription("Enter a project name.");
+		wizardPage.setTitle("Create a new Embedded SJ Project");
 		addPage(wizardPage);
 	}
 

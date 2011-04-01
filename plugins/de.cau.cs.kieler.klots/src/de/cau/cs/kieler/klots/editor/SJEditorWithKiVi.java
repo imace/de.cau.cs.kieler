@@ -8,11 +8,9 @@ import org.eclipse.jdt.internal.ui.javaeditor.CompilationUnitEditor;
 import org.eclipse.jdt.internal.ui.javaeditor.JavaEditor;
 
 import org.eclipse.core.resources.IMarker;
-import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceChangeEvent;
 import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 
 import org.eclipse.jface.action.IStatusLineManager;
@@ -51,6 +49,7 @@ import org.json.JSONObject;
 @SuppressWarnings("restriction")
 public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceChangeListener {
 	
+    public static final String ID = "de.cau.cs.kieler.klots.editor.SJEditor";
 	
 	// ======================================================================
 	// >>>>>>>>>>              LABEL INFO INNER CLASS              <<<<<<<<<<
@@ -488,6 +487,7 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 	// ======================================================================
 	
 	private void fillLabelList() {
+		// FIXME: Find a way to deal with 'case' inside of a comment!
 		// FIXME: Initialization method is needed in case the editor's content is edited and execution is started again	
 		// TODO: CHECK IF LABEL LIST HAS ELEMENTS AT ALL AT THIS TIME
 		// reset labelList
@@ -773,29 +773,23 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 //	
 //	
 //	
-	private IMarker createInstructionMarker(IResource res, String msg, String instrName, String instrLabel, int line, int charStart, int charEnd) {
-		try {
-			IMarker marker = res.createMarker("de.cau.cs.kieler.klots.editor.instructionMarker");
-			marker.setAttribute("instructionName", instrName);
-			marker.setAttribute("instructionLabel", instrLabel);
-			marker.setAttribute(IMarker.LINE_NUMBER, line);
-			marker.setAttribute(IMarker.CHAR_START, charStart);
-			marker.setAttribute(IMarker.CHAR_END, charEnd);
-			marker.setAttribute(IMarker.MESSAGE, msg);
-			//marker.setAttribute(IMarker.PRIORITY, IMarker.PRIORITY_HIGH);
-			//marker.setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_ERROR);
-			return marker;
-		} catch (CoreException e) {
-			// You need to handle the cases where attribute value is rejected
-			e.printStackTrace();
-			return null;
-		}
-	}
-	
-	
-	private void setupInstructionMarkers() {
-		
-	}
-	
+//	private IMarker createInstructionMarker(IResource res, String msg, String instrName, String instrLabel, int line, int charStart, int charEnd) {
+//		try {
+//			IMarker marker = res.createMarker("de.cau.cs.kieler.klots.editor.instructionMarker");
+//			marker.setAttribute("instructionName", instrName);
+//			marker.setAttribute("instructionLabel", instrLabel);
+//			marker.setAttribute(IMarker.LINE_NUMBER, line);
+//			marker.setAttribute(IMarker.CHAR_START, charStart);
+//			marker.setAttribute(IMarker.CHAR_END, charEnd);
+//			marker.setAttribute(IMarker.MESSAGE, msg);
+//			//marker.setAttribute(IMarker.PRIORITY, IMarker.PRIORITY_HIGH);
+//			//marker.setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_ERROR);
+//			return marker;
+//		} catch (CoreException e) {
+//			// You need to handle the cases where attribute value is rejected
+//			e.printStackTrace();
+//			return null;
+//		}
+//	}
 	
 }

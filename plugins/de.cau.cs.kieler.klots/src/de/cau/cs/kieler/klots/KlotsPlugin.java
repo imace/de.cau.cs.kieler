@@ -58,4 +58,10 @@ public class KlotsPlugin extends AbstractUIPlugin {
     public static SJInstructionsView getSJInstructionsView() {
     	return de.cau.cs.kieler.klots.views.SJInstructionsView.getInstance();
     }
+    
+    
+    public static String getSJEditorID() {
+    	return de.cau.cs.kieler.klots.editor.SJEditorWithKiVi.ID;
+    }
+    
 }

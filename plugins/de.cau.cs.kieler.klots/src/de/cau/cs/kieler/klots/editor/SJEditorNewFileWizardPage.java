@@ -26,7 +26,7 @@ import org.eclipse.ui.dialogs.ContainerSelectionDialog;
  * OR with the extension that matches the expected one (mpe).
  */
 
-// FIXME: Adjust class to match "SJ Editor New File" requirements.
+
 public class SJEditorNewFileWizardPage extends WizardPage {
 	private Text containerText;
 
@@ -40,9 +40,9 @@ public class SJEditorNewFileWizardPage extends WizardPage {
 	 * @param pageName
 	 */
 	public SJEditorNewFileWizardPage(ISelection selection) {
-		super("wizardPage");
-		setTitle("Z> Embedded SJ File <Z");
-		setDescription("This wizard creates a new file with *.mpe extension that can be opened by a multi-page editor.");
+		super("NewSJFileWizardPage");
+		setTitle("Create a new Embedded SJ file");
+		setDescription("Creates a new Embedded SJ file");
 		this.selection = selection;
 	}
 
@@ -56,7 +56,7 @@ public class SJEditorNewFileWizardPage extends WizardPage {
 		layout.numColumns = 3;
 		layout.verticalSpacing = 9;
 		Label label = new Label(container, SWT.NULL);
-		label.setText("&Container:");
+		label.setText("&Project:");
 
 		containerText = new Text(container, SWT.BORDER | SWT.SINGLE);
 		GridData gd = new GridData(GridData.FILL_HORIZONTAL);
@@ -110,7 +110,7 @@ public class SJEditorNewFileWizardPage extends WizardPage {
 				containerText.setText(container.getFullPath().toString());
 			}
 		}
-		fileText.setText("new_file.mpe");
+		fileText.setText("New_SJ_File.java");
 	}
 
 	/**
@@ -121,7 +121,7 @@ public class SJEditorNewFileWizardPage extends WizardPage {
 	private void handleBrowse() {
 		ContainerSelectionDialog dialog = new ContainerSelectionDialog(
 				getShell(), ResourcesPlugin.getWorkspace().getRoot(), false,
-				"Select new file container");
+				"Select a parent SJ project");
 		if (dialog.open() == ContainerSelectionDialog.OK) {
 			Object[] result = dialog.getResult();
 			if (result.length == 1) {
@@ -140,12 +140,12 @@ public class SJEditorNewFileWizardPage extends WizardPage {
 		String fileName = getFileName();
 
 		if (getContainerName().length() == 0) {
-			updateStatus("File container must be specified");
+			updateStatus("Parent SJ project must be specified");
 			return;
 		}
 		if (container == null
 				|| (container.getType() & (IResource.PROJECT | IResource.FOLDER)) == 0) {
-			updateStatus("File container must exist");
+			updateStatus("Parent SJ project must exist");
 			return;
 		}
 		if (!container.isAccessible()) {
@@ -163,8 +163,8 @@ public class SJEditorNewFileWizardPage extends WizardPage {
 		int dotLoc = fileName.lastIndexOf('.');
 		if (dotLoc != -1) {
 			String ext = fileName.substring(dotLoc + 1);
-			if (ext.equalsIgnoreCase("mpe") == false) {
-				updateStatus("File extension must be \"mpe\"");
+			if (ext.equalsIgnoreCase("java") == false) {
+				updateStatus("File extension must be \"java\"");
 				return;
 			}
 		}

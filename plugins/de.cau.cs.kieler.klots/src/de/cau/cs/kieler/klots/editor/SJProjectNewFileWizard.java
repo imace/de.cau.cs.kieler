@@ -15,6 +15,8 @@ import java.io.*;
 import org.eclipse.ui.*;
 import org.eclipse.ui.ide.IDE;
 
+import de.cau.cs.kieler.klots.KlotsPlugin;
+
 /**
  * This is a sample new wizard. Its role is to create a new file 
  * resource in the provided container. If the container resource
@@ -94,12 +96,12 @@ public class SJProjectNewFileWizard extends Wizard implements INewWizard {
 		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
 		IResource resource = root.findMember(new Path(containerName));
 		if (!resource.exists() || !(resource instanceof IContainer)) {
-			throwCoreException("Container \"" + containerName + "\" does not exist.");
+			throwCoreException("SJ project \"" + containerName + "\" does not exist.");
 		}
 		IContainer container = (IContainer) resource;
 		final IFile file = container.getFile(new Path(fileName));
 		try {
-			InputStream stream = openContentStream();
+			InputStream stream = openContentStream(fileName);
 			if (file.exists()) {
 				file.setContents(stream, true, true, monitor);
 			} else {
@@ -115,7 +117,8 @@ public class SJProjectNewFileWizard extends Wizard implements INewWizard {
 				IWorkbenchPage page =
 					PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
 				try {
-					IDE.openEditor(page, file, true);
+					IDE.openEditor(page, file, KlotsPlugin.getSJEditorID(), true);
+					//IDE.openEditor(page, file, true);
 				} catch (PartInitException e) {
 				}
 			}
@@ -127,9 +130,9 @@ public class SJProjectNewFileWizard extends Wizard implements INewWizard {
 	 * We will initialize file contents with a sample text.
 	 */
 
-	protected static InputStream openContentStream() {
+	protected static InputStream openContentStream(String fileName) {
 		String contents =
-			"This is the initial file contents for *.mpe file that should be word-sorted in the Preview page of the multi-page editor";
+			"/* Embedded SJ class " + fileName + " */\n";
 		return new ByteArrayInputStream(contents.getBytes());
 	}
 
