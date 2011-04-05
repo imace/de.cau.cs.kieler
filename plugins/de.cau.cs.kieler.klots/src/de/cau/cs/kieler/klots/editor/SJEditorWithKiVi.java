@@ -37,15 +37,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 
-/**
- * An example showing how to create a multi-page editor.
- * This example has 3 pages:
- * <ul>
- * <li>page 0 contains a nested text editor.
- * <li>page 1 allows you to change the font used in page 2
- * <li>page 2 shows the words in page 0 in sorted order
- * </ul>
- */
 @SuppressWarnings("restriction")
 public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceChangeListener {
 	
@@ -68,6 +59,13 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 			this.cursorIndex = startIndex;
 		}
 		
+		LabelInfo(String name, int startIndex) {
+			this.labelName = name;
+			this.labelStartIndex = startIndex;
+			this.labelEndIndex = -1;
+			this.cursorIndex = startIndex;
+		}
+		
 		int getCursorIndex() {
 			return cursorIndex;
 		}
@@ -86,6 +84,10 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 		
 		int getLabelEndIndex() {
 			return labelEndIndex;
+		}
+		
+		void setLabelEndIndex(int labelEndIndex) {
+			this.labelEndIndex = labelEndIndex;
 		}
 	} //end inner class LabelInfo
 	
@@ -146,6 +148,7 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 	private static List<HighlightSJInstructionEffect> kiviList = new ArrayList<HighlightSJInstructionEffect>();
 	// label list
 	private static List<LabelInfo> labelList = new ArrayList<LabelInfo>();
+	private String[] labels;
 
 	// Java editor
 	private static CompilationUnitEditor editor;
@@ -238,8 +241,10 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 		uiStatusLineItem.setErrorText("INSTRUCTION INFO TO BE DISPAYED");
 		// ------------------------------------------------------------------
 		
+		
+		// NOW DONE BY parseLabels()
 		// --------------
-		fillLabelList();
+		//fillLabelList();
 		// --------------
 	
 	}
@@ -486,48 +491,143 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 	// >>>>>>>>>>          INITIALIZATION UTILITY METHODS          <<<<<<<<<<
 	// ======================================================================
 	
-	private void fillLabelList() {
-		// FIXME: Find a way to deal with 'case' inside of a comment!
-		// FIXME: Initialization method is needed in case the editor's content is edited and execution is started again	
-		// TODO: CHECK IF LABEL LIST HAS ELEMENTS AT ALL AT THIS TIME
-		// reset labelList
-		labelList.clear();
-		
+	public void setLabelNames(String[] labels) {
+		System.out.print("======>>>>>>>> RECEIVED LABELS: [");
+		for( String l : labels ) {
+			System.out.print(l + ", ");
+		}
+		System.out.println("]");
+		this.labels = labels;
+		parseLabels();
+	}
+	
+	
+	
+	private void parseLabels() {
+		// FIXME: Initialization method is needed in case the editor's content is edited and execution is started again
+		labelList.clear();	
 		// -----------------------------------------------------------------------------------
 		// editor.getViewer().getTextWidget().getText() DOES NOT FACTOR IN THE HIDDEN TEXT!!!!
 		//String text = editor.getViewer().getTextWidget().getText();
 		String text = editor.getDocumentProvider().getDocument(editor.getEditorInput()).get();
 		// -----------------------------------------------------------------------------------
 		int size = text.length();
+		String label = "";
+		int labelColon = 0;
 		
-		for(int i = text.indexOf(" case "), j = text.indexOf(":", i);
-		(0 < i && i < size);
-		i = text.indexOf(" case ", i+1), j = text.indexOf(":", i)) {
-			System.out.println("################>>>>>>>>>>>> i = " + i + ", j = " + j);
-			
-			// ----------------------- fill labelList -----------------------
-			int end = text.indexOf(" case ", i+1);
-			System.out.println("===> i = " + i + ", end = " + end);
-			if( end < 0 ) {
-				end = text.lastIndexOf(';') + 1;
+		for(int labelStart = text.indexOf("case "); (0 < labelStart && labelStart < size); labelStart = text.indexOf("case ", labelStart+1)) {
+			if( (text.charAt(labelStart-1) != ' ') && (text.charAt(labelStart-1) != ';') && (text.charAt(labelStart-1) != '{') && (text.charAt(labelStart-1) != '/') ) {
+				System.out.println("################>>>>>>>>>>>> case is part of a word! -> continue! [char before case = " + text.charAt(labelStart-1) + "]");
+				continue;
 			}
-			String labelText = text.substring(i, end);
-			String labelName = text.substring( i+6, text.indexOf(':', i+6) );
-			int labelEndIndex = labelText.lastIndexOf(';') + i;
-			System.out.println("\n++++++++++++++++++++++++++++++++++++++++");
-			System.out.println("ADDING LABEL: >" + labelName + "<");
-			System.out.println("start index = " + (i+6));
-			System.out.println("end index = " + labelEndIndex);
-			System.out.println("label text = \n" + labelText);
-			System.out.println("++++++++++++++++++++++++++++++++++++++++\n");
-			labelList.add( new LabelInfo(labelName, i+6, labelEndIndex) );
-			// --------------------------------------------------------------
+			if( checkIfCommentOrString(labelStart, labelStart+4, text) ) {
+				System.out.println("################>>>>>>>>>>>> case is inside of a comment! -> continue!");
+				continue;
+			}
+			labelColon = text.indexOf(":", labelStart);
+			System.out.println("################>>>>>>>>>>>> labelStart = " + labelStart + ", labelColon = " + labelColon + ", labelText = " + text.substring(labelStart, labelColon) + "<<<");
+			if( labelColon == -1 ) {
+				System.out.println("################>>>>>>>>>>>> labelColon = -1, -> END!");
+				break;
+			}
 			
+			label = checkForLabelAt(labelStart, labelColon, text);
+			if( !label.equals("") ) {
+				if( labelList.isEmpty() ) {
+					labelList.add( new LabelInfo(label, labelStart+5) );
+				} else {
+					labelList.get(labelList.size()-1).setLabelEndIndex(labelStart);
+					labelList.add( new LabelInfo(label, labelStart+5) );
+				}
+			} else {
+				System.out.println("################>>>>>>>>>>>> BAD LABEL at: >" + text.substring(labelStart, labelColon) + "<, -> continue!");
+				continue;
+			}
 		}
+		labelList.get(labelList.size()-1).setLabelEndIndex( text.lastIndexOf(";") );
+		
+		for(LabelInfo l : labelList) {
+			System.out.println("\n++++++++++++++++++++++++++++++++++++++++");
+			System.out.println("ADDING LABEL: >" + l.getLabelName() + "<");
+			System.out.println("start index = " + l.getLabelStartIndex());
+			System.out.println("end index = " + l.getLabelEndIndex());
+			System.out.println("label text = \n" + text.substring(l.getLabelStartIndex(), l.getLabelEndIndex()));
+			System.out.println("++++++++++++++++++++++++++++++++++++++++\n");
+		}
+		
 	}
 	
 	
 	
+	private String checkForLabelAt(int labelStart, int labelColon, String text) {
+		String label = text.substring(labelStart+4, labelColon);
+		label = label.trim();
+		System.out.println("################>>>>>>>>>>>> label = " + label + "<<<");
+		boolean labelFound = false;
+		for(String s : this.labels) {
+			if( s.equals(label) ) {
+				labelFound = true;
+				break;
+			}
+		}
+		if( !labelFound ) {
+			System.err.println("SJ EDITOR INITIALIZATION ERROR: At label >" + label + "<: No such label found!");
+			return "";
+		}
+		return label;
+	}
+	
+	
+	
+	private boolean checkIfCommentOrString(int startIndex, int endIndex, String text) {
+		int commentStart = -1;
+		int commentEnd = -1;
+		
+		// rule out multi line comments
+		System.out.println("################>>>>>>>>>>>> RULE OUT MULTI LINE COMMENTS!");
+		commentStart = text.lastIndexOf("/*", startIndex);
+		System.out.println("################>>>>>>>>>>>> CommentStart = " + commentStart);
+		if( commentStart > -1 ) {
+			commentEnd = text.indexOf("*/", commentStart);
+			System.out.println("################>>>>>>>>>>>> CommentEnd = " + commentEnd);
+			if( commentEnd > -1 && commentEnd > endIndex ) {
+				System.out.println("################>>>>>>>>>>>> In Comment!!!");
+				return true;
+			}
+		}
+		
+		// rule out single line comments
+		System.out.println("################>>>>>>>>>>>> RULE OUT SINGLE LINE COMMENTS");
+		commentStart = text.lastIndexOf("//", startIndex);
+		System.out.println("################>>>>>>>>>>>> CommentStart = " + commentStart);
+		if( commentStart > -1 ) {
+			commentEnd = text.indexOf("\n", commentStart);
+			System.out.println("################>>>>>>>>>>>> CommentEnd = " + commentEnd);
+			if( commentEnd > endIndex ) {
+				System.out.println("################>>>>>>>>>>>> In Comment!!!");
+				return true;
+			}
+		}
+		
+		// rule out strings
+		System.out.println("################>>>>>>>>>>>> RULE OUT STRINGS");
+		commentEnd = text.lastIndexOf(";", startIndex);
+		commentStart = text.lastIndexOf('\"', startIndex);
+		System.out.println("################>>>>>>>>>>>> StringStart = " + commentStart);
+		if( commentStart > -1 && commentStart > commentEnd ) {
+			commentEnd = text.indexOf('\"', commentStart+1);
+			System.out.println("################>>>>>>>>>>>> StringEnd = " + commentEnd);
+			if( commentEnd > -1 && commentEnd > endIndex ) {
+				System.out.println("################>>>>>>>>>>>> In String!!!");
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	
+
 	
 	
 	// ======================================================================
@@ -564,7 +664,7 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 	
 	
 	// ======================================================================
-	// >>>>>>>>>>    INTERACTIONS WITH THE EDITOR'S CONTRIBUTOR    <<<<<<<<<<
+	// >>>>>>>>>>    INTERACTIONS WITH THE SJ INSTRUCTIONS VIEW    <<<<<<<<<<
 	// ======================================================================
 	
 	public void doMicroStepForwards() {
@@ -592,6 +692,7 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 	}
 	
 	
+	
 	public void doMicroStepBackwards() {
 		if( microStepNumber > 0 ) {
 			// set old current instruction 'yet to be done'
@@ -605,6 +706,7 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 			kiviList.get(microStepNumber).execute();
 		}
 	}
+	
 	
 	
 	public void doAllForwardMicroSteps() {
@@ -623,11 +725,13 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 	}
 	
 	
+	
 	public void doAllBackwardMicroSteps() {
 		//doClearAllMicroSteps();
 		microStepNumber = -1;
 		doMicroStepForwards();
 	}
+	
 	
 	
 	public void doClearAllMicroSteps() {
@@ -637,17 +741,12 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 	}
 	
 	
+	
 	public void doResetMicroSteps() {
 		microStepNumber = -1;
 	}
 	
 	
-	
-	
-	
-	// ======================================================================
-	// >>>>>>>>>>    INTERACTIONS WITH THE SJ INSTRUCTIONS VIEW    <<<<<<<<<<
-	// ======================================================================
 	
 	public void doSpecificSingleMicroStep(int[] indexArray) {
 		// highlight 'already done' instructions
@@ -669,33 +768,6 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 			kiviList.get(indexArray[i]).execute();
 		}
 	}
-	
-	
-	
-	
-//	public void doSpecificSingleMicroStep(int[] indexArray) {
-//		undoHighlightsFromSJInstructionsView();
-//		for( int i : indexArray ) {
-//			HighlightSJInstructionEffect e = kiviList.get(i).clone();
-//			e.setColor(EXTRA_FOREGROUND_HIGHLIGHT_COLOR);
-//			kiviListFromSJInstructionsView.add(e);
-//		}
-//		executeHighlightsFromSJInstructionsView();
-//	}
-//	
-//	
-//	private static void undoHighlightsFromSJInstructionsView() {
-//		for( HighlightSJInstructionEffect e : kiviListFromSJInstructionsView ) {
-//			e.undo();
-//		}
-//		kiviListFromSJInstructionsView.clear();
-//	}
-//	
-//	private void executeHighlightsFromSJInstructionsView() {
-//		for( HighlightSJInstructionEffect e : kiviListFromSJInstructionsView ) {
-//			e.execute();
-//		}
-//	}
 	
 	
 	
@@ -770,9 +842,9 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 //			}
 //		});
 //	}
-//	
-//	
-//	
+	
+	
+	
 //	private IMarker createInstructionMarker(IResource res, String msg, String instrName, String instrLabel, int line, int charStart, int charEnd) {
 //		try {
 //			IMarker marker = res.createMarker("de.cau.cs.kieler.klots.editor.instructionMarker");
@@ -792,4 +864,45 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 //		}
 //	}
 	
+	
+	
+//	private void fillLabelList() {
+//		// FIXME: Find a way to deal with 'case' inside of a comment!
+//		// FIXME: Initialization method is needed in case the editor's content is edited and execution is started again
+//		labelList.clear();
+//		
+//		// -----------------------------------------------------------------------------------
+//		// editor.getViewer().getTextWidget().getText() DOES NOT FACTOR IN THE HIDDEN TEXT!!!!
+//		//String text = editor.getViewer().getTextWidget().getText();
+//		String text = editor.getDocumentProvider().getDocument(editor.getEditorInput()).get();
+//		// -----------------------------------------------------------------------------------
+//		int size = text.length();
+//		
+//		for(int i = text.indexOf(" case "), j = text.indexOf(":", i);
+//		(0 < i && i < size);
+//		i = text.indexOf(" case ", i+1), j = text.indexOf(":", i)) {
+//			System.out.println("################>>>>>>>>>>>> i = " + i + ", j = " + j);
+//			
+//			// ----------------------- fill labelList -----------------------
+//			int end = text.indexOf(" case ", i+1);
+//			System.out.println("===> i = " + i + ", end = " + end);
+//			if( end < 0 ) {
+//				end = text.lastIndexOf(';') + 1;
+//			}
+//			String labelText = text.substring(i, end);
+//			String labelName = text.substring( i+6, text.indexOf(':', i+6) );
+//			int labelEndIndex = labelText.lastIndexOf(';') + i;
+//			System.out.println("\n++++++++++++++++++++++++++++++++++++++++");
+//			System.out.println("ADDING LABEL: >" + labelName + "<");
+//			System.out.println("start index = " + (i+6));
+//			System.out.println("end index = " + labelEndIndex);
+//			System.out.println("label text = \n" + labelText);
+//			System.out.println("++++++++++++++++++++++++++++++++++++++++\n");
+//			labelList.add( new LabelInfo(labelName, i+6, labelEndIndex) );
+//			// --------------------------------------------------------------
+//			
+//		}
+//	}
+	
+		
 }

@@ -4,20 +4,25 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.eclipse.jface.action.Action;
+import org.eclipse.jface.action.ContributionItem;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.TreeViewerColumn;
+import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.ToolBar;
+import org.eclipse.swt.widgets.ToolItem;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.swt.SWT;
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.part.ViewPart;
-
 import de.cau.cs.kieler.klots.KlotsPlugin;
 import de.cau.cs.kieler.klots.editor.SJEditorWithKiVi;
 import de.cau.cs.kieler.sim.kiem.KiemPlugin;
@@ -254,21 +259,40 @@ public class SJInstructionsView extends ViewPart {
      * Contribute to the tool bar of this ViewPart.
      */
     private void contributeToActionBars() {
-        IActionBars bars = getViewSite().getActionBars();
+    	
+    	class TextContributionItem extends ContributionItem {
+    		private String s;
+    		public TextContributionItem(String text) {
+    			super( text );
+    			s = text;
+    		}
+    		public final void fill( ToolBar parent, int index ) {
+    			Label text = new Label( parent, SWT.RIGHT );
+		        text.setText(s);
+		        text.setFont(new Font(Display.getDefault(), "Verdana", 7, SWT.BOLD));
+		        ToolItem ti = new ToolItem( parent, SWT.SEPARATOR, index );
+		        ti.setControl(text);
+		        ti.setWidth(120);
+		    }
+    	}
+    	
+    	IActionBars bars = getViewSite().getActionBars();
         IToolBarManager toolBarManager = bars.getToolBarManager();
-        toolBarManager.add(new Separator());
+    	
+    	TextContributionItem text1 = new TextContributionItem("MACROSTEP \nACTIONS    ");		
+		toolBarManager.add(text1);
+    	
+//        toolBarManager.add(new Separator());
 		toolBarManager.add(kiemStepBackwards);
 		toolBarManager.add(kiemStepForwards);
 		toolBarManager.add(kiemRun);
 		toolBarManager.add(kiemPause);
 		toolBarManager.add(kiemStop);
-//        toolBarManager.add(new Separator());
-        
-        final Action blank = new Action(){};
-        blank.setDisabledImageDescriptor( KlotsPlugin.imageDescriptorFromPlugin(KlotsPlugin.PLUGIN_ID, "icons/blankIcon.png") );
-        blank.setEnabled(false);
-        toolBarManager.add(blank);
-        
+        toolBarManager.add(new Separator());
+			
+		TextContributionItem text2 = new TextContributionItem("MICROSTEP \nACTIONS   ");		
+		toolBarManager.add(text2);
+		
 //        toolBarManager.add(new Separator());
 		toolBarManager.add(microStepBackwardsAll);
 		toolBarManager.add(microStepBackwards);

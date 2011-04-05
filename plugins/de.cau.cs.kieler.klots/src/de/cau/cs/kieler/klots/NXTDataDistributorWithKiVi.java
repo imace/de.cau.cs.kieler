@@ -2,6 +2,8 @@ package de.cau.cs.kieler.klots;
 
 import java.util.Iterator;
 
+import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.console.ConsolePlugin;
 import org.eclipse.ui.console.IConsole;
 import org.eclipse.ui.console.IConsoleManager;
@@ -11,6 +13,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import de.cau.cs.kieler.klots.editor.SJEditorWithKiVi;
 import de.cau.cs.kieler.sim.kiem.IJSONObjectDataComponent;
 import de.cau.cs.kieler.sim.kiem.JSONObjectDataComponent;
 import de.cau.cs.kieler.sim.kiem.JSONSignalValues;
@@ -23,16 +26,36 @@ public class NXTDataDistributorWithKiVi extends JSONObjectDataComponent implemen
 	private static final String KLOTSCONSOLENAME = "Klots Console";
 	NXTCommunicator comm;
 	
+	SJEditorWithKiVi editor;
+	
 
 	public void initialize() throws KiemInitializationException {
 		comm = NXTCommunicator.getInstance();
 		
 		String s = comm.receiveMessage().toString();
-		if( s.equals("[{SYNCHRONIZED}]") ) {
+		if( s.startsWith("[{SYNCHRONIZED}") ) {
 			printConsole(s);
 		} else {
 			printConsole("ERROR while trying to synchronize with the NXT: " + s);
 		}
+		
+		// ------------------------------------------------------------------
+		// TODO: try to move it somehow to the DaataObserver!
+		PlatformUI.getWorkbench().getDisplay().syncExec(new Runnable() {
+			public void run() {
+				IEditorPart e = KlotsPlugin.getDefault().getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
+				if(e != null) {
+					editor = (SJEditorWithKiVi) e;
+				} else {
+					printConsole("INITIALIZATION ERROR: Could not find an active SJ editor!");
+				}
+			}
+		});
+		String[] labels = s.split(";");
+		labels[0] = labels[0].substring(labels[0].lastIndexOf("{")+1);
+		labels[labels.length-1] = labels[labels.length-1].substring( 0, labels[labels.length-1].length()-2 );
+		editor.setLabelNames(labels);
+		// ------------------------------------------------------------------
 		
 	}
 

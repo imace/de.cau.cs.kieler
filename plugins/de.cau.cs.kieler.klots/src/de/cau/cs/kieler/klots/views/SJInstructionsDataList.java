@@ -61,6 +61,7 @@ public class SJInstructionsDataList {
                 
                 // --------------------------------------------------------
                 int i = viewer.getTree().getItemCount();
+                // FIXME: IndexOutOfBoundsException on STARTUP?
 				viewer.getTree().setSelection(viewer.getTree().getItem(i-1));
                 // --------------------------------------------------------
                 

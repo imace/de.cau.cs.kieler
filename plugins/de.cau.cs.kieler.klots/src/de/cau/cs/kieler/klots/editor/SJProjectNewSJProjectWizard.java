@@ -34,17 +34,9 @@ import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.ui.dialogs.WizardNewProjectCreationPage;
 import org.eclipse.ui.wizards.newresource.BasicNewProjectResourceWizard;
 
-/**
- * Creates a new project containing folders and files for use with an
- * Example.com enterprise web site.
- * 
- * @author Nathan A. Good &lt;mail@nathanagood.com&gt;
- * 
- */
+
 public class SJProjectNewSJProjectWizard extends Wizard implements INewWizard,
 		IExecutableExtension {
-
-//	PathLibrary pathLibrary = PathLibrary.getInstance();
 	
 	/*
 	 * Use the WizardNewProjectCreationPage, which is provided by the Eclipse
@@ -163,119 +155,6 @@ public class SJProjectNewSJProjectWizard extends Wizard implements INewWizard,
 			 */
 			IContainer container = (IContainer) proj;
 			
-			// ##############################################################
-			
-//			String sjPath = ".." + Path.SEPARATOR + ".." + Path.SEPARATOR +
-//			".." + Path.SEPARATOR + ".." + Path.SEPARATOR +
-//			".." + Path.SEPARATOR + ".." + Path.SEPARATOR +
-//			"sj_templates" + Path.SEPARATOR + "sj" + Path.SEPARATOR + "";
-//			String dest = "sj" + Path.SEPARATOR + "";
-//			
-//			final IFolder sjFolder = container.getFolder(new Path("sj"));
-//			sjFolder.create(true, true, monitor);
-//			InputStream resStream = this.getClass().getResourceAsStream(sjPath + "CombinationFunction.java");
-//			System.out.println("$$$$$$$$$$ RESOURCE PATH: " + this.getClass().getResource(sjPath + "CombinationFunction.java").getPath());
-//			addFileToProject(container, new Path(dest + "CombinationFunction.java"), resStream, monitor); 
-//			resStream = this.getClass().getResourceAsStream(sjPath + "CombinationFunction.java");
-//			addFileToProject(container, new Path(dest + "CombinationFunction.java"), resStream, monitor);
-//			resStream = this.getClass().getResourceAsStream(sjPath + "CombinationFunction$1.java");
-//			addFileToProject(container, new Path(dest + "CombinationFunction$1.java"), resStream, monitor);			
-//			resStream = this.getClass().getResourceAsStream(sjPath + "CombinationFunction$2.java");
-//			addFileToProject(container, new Path(dest + "CombinationFunction$2.java"), resStream, monitor);
-//			resStream = this.getClass().getResourceAsStream(sjPath + "CombinationFunction$3.java");
-//			addFileToProject(container, new Path(dest + "CombinationFunction$3.java"), resStream, monitor);
-//			resStream = this.getClass().getResourceAsStream(sjPath + "CombinationFunction$4.java");
-//			addFileToProject(container, new Path(dest + "CombinationFunction$4.java"), resStream, monitor);
-//			resStream = this.getClass().getResourceAsStream(sjPath + "EmbeddedPCLogger.java");
-//			addFileToProject(container, new Path(dest + "EmbeddedPCLogger.java"), resStream, monitor);
-//			resStream = this.getClass().getResourceAsStream(sjPath + "EmbeddedSJProgram.java");
-//			addFileToProject(container, new Path(dest + "EmbeddedSJProgram.java"), resStream, monitor);
-//			resStream = this.getClass().getResourceAsStream(sjPath + "Signal.java");
-//			addFileToProject(container, new Path(dest + "Signal.java"), resStream, monitor);
-//			resStream = this.getClass().getResourceAsStream(sjPath + "SignalConverter.java");
-//			addFileToProject(container, new Path(dest + "SignalConverter.java"), resStream, monitor);
-//			resStream = this.getClass().getResourceAsStream(sjPath + "SimpleLogger.java");
-//			addFileToProject(container, new Path(dest + "SimpleLogger.java"), resStream, monitor);
-//			resStream = this.getClass().getResourceAsStream(sjPath + "SJLogger.java");
-//			addFileToProject(container, new Path(dest + "SJLogger.java"), resStream, monitor);
-//			resStream = this.getClass().getResourceAsStream(sjPath + "SJLogger$LogMsgTyp.java");
-//			addFileToProject(container, new Path(dest + "SJLogger$LogMsgTyp.java"), resStream, monitor);
-//			resStream = this.getClass().getResourceAsStream(sjPath + "SJThread.java");
-//			addFileToProject(container, new Path(dest + "SJThread.java"), resStream, monitor);
-//			resStream = this.getClass().getResourceAsStream(sjPath + "ValuedSignal.java");
-//			addFileToProject(container, new Path(dest + "ValuedSignal.java"), resStream, monitor);
-//			final IFolder sjExceptionsFolder = container.getFolder(new Path("sj" + Path.SEPARATOR + "exceptions"));
-//			sjExceptionsFolder.create(true, true, monitor);
-//			resStream = this.getClass().getResourceAsStream(sjPath + "exceptions" + Path.SEPARATOR + "CausalityException.java");
-//			addFileToProject(container, new Path(dest + "exceptions" + Path.SEPARATOR + "CausalityException.java"), resStream, monitor);
-//			resStream = this.getClass().getResourceAsStream(sjPath + "exceptions" + Path.SEPARATOR + "CurTickAlreadyDoneException.java");
-//			addFileToProject(container, new Path(dest + "exceptions" + Path.SEPARATOR + "CurTickAlreadyDoneException.java"), resStream, monitor);
-//			resStream = this.getClass().getResourceAsStream(sjPath + "exceptions" + Path.SEPARATOR + "CurTickNotDoneException.java");
-//			addFileToProject(container, new Path(dest + "exceptions" + Path.SEPARATOR + "CurTickNotDoneException.java"), resStream, monitor);
-//			resStream = this.getClass().getResourceAsStream(sjPath + "exceptions" + Path.SEPARATOR + "NoPreSignalException.java");
-//			addFileToProject(container, new Path(dest + "exceptions" + Path.SEPARATOR + "NoPreSignalException.java"), resStream, monitor);
-//			resStream = this.getClass().getResourceAsStream(sjPath + "exceptions" + Path.SEPARATOR + "PriorityException.java");
-//			addFileToProject(container, new Path(dest + "exceptions" + Path.SEPARATOR + "PriorityException.java"), resStream, monitor);
-//			resStream = this.getClass().getResourceAsStream(sjPath + "exceptions" + Path.SEPARATOR + "ProgramAlreadyTerminatedException.java");
-//			addFileToProject(container, new Path(dest + "exceptions" + Path.SEPARATOR + "ProgramAlreadyTerminatedException.java"), resStream, monitor);
-//			resStream = this.getClass().getResourceAsStream(sjPath + "exceptions" + Path.SEPARATOR + "SignalAlreadyDeclaredException.java");
-//			addFileToProject(container, new Path(dest + "exceptions" + Path.SEPARATOR + "SignalAlreadyDeclaredException.java"), resStream, monitor);
-//			resStream = this.getClass().getResourceAsStream(sjPath + "exceptions" + Path.SEPARATOR + "SignalNotDeclaredException.java");
-//			addFileToProject(container, new Path(dest + "exceptions" + Path.SEPARATOR + "SignalNotDeclaredException.java"), resStream, monitor);
-//			resStream = this.getClass().getResourceAsStream(sjPath + "exceptions" + Path.SEPARATOR + "ThreadException.java");
-//			addFileToProject(container, new Path(dest + "exceptions" + Path.SEPARATOR + "ThreadException.java"), resStream, monitor);
-//			final IFolder sjUtilFolder = container.getFolder(new Path("sj" + Path.SEPARATOR + "util"));
-//			sjUtilFolder.create(true, true, monitor);
-//			resStream = this.getClass().getResourceAsStream(sjPath + "util" + Path.SEPARATOR + "AbstractCollection.java");
-//			addFileToProject(container, new Path(dest + "util" + Path.SEPARATOR + "AbstractCollection.java"), resStream, monitor);
-//			resStream = this.getClass().getResourceAsStream(sjPath + "util" + Path.SEPARATOR + "AbstractCollection$1.java");
-//			addFileToProject(container, new Path(dest + "util" + Path.SEPARATOR + "AbstractCollection$1.java"), resStream, monitor);
-//			resStream = this.getClass().getResourceAsStream(sjPath + "util" + Path.SEPARATOR + "AbstractCollection$Iter.java");
-//			addFileToProject(container, new Path(dest + "util" + Path.SEPARATOR + "AbstractCollection$Iter.java"), resStream, monitor);
-//			resStream = this.getClass().getResourceAsStream(sjPath + "util" + Path.SEPARATOR + "ContainerWithLink.java");
-//			addFileToProject(container, new Path(dest + "util" + Path.SEPARATOR + "ContainerWithLink.java"), resStream, monitor);
-//			resStream = this.getClass().getResourceAsStream(sjPath + "util" + Path.SEPARATOR + "LinkedList.java");
-//			addFileToProject(container, new Path(dest + "util" + Path.SEPARATOR + "LinkedList.java"), resStream, monitor);
-//			resStream = this.getClass().getResourceAsStream(sjPath + "util" + Path.SEPARATOR + "PriorityQueue.java");
-//			addFileToProject(container, new Path(dest + "util" + Path.SEPARATOR + "PriorityQueue.java"), resStream, monitor);
-//			final IFolder sjExamplesFolder = container.getFolder(new Path("sj" + Path.SEPARATOR + "examples"));
-//			sjExamplesFolder.create(true, true, monitor);
-//			resStream = this.getClass().getResourceAsStream(sjPath + "examples" + Path.SEPARATOR + "EmbeddedABRO.java");
-//			addFileToProject(container, new Path(dest + "examples" + Path.SEPARATOR + "EmbeddedABRO.java"), resStream, monitor);
-//			resStream = this.getClass().getResourceAsStream(sjPath + "examples" + Path.SEPARATOR + "EmbeddedABROMain.java");
-//			addFileToProject(container, new Path(dest + "examples" + Path.SEPARATOR + "EmbeddedABROMain.java"), resStream, monitor);
-//			resStream = this.getClass().getResourceAsStream(sjPath + "examples" + Path.SEPARATOR + "EmbeddedABROMain2.java");
-//			addFileToProject(container, new Path(dest + "examples" + Path.SEPARATOR + "EmbeddedABROMain2.java"), resStream, monitor);
-//			resStream.close();
-//
-//			// GET NEW PROJECT PATH
-//			IFile file = container.getFile(new Path("./SJProjectNewSJProjectWizard.java"));
-//			String projectPath = file.getLocationURI().getPath();
-//			projectPath = projectPath.substring(0, projectPath.lastIndexOf('/'));
-//			String projectName = projectPath.substring( projectPath.lastIndexOf('/')+1, projectPath.length() );
-//			pathLibrary.addToLibrary(projectName, new Path(projectPath).toOSString() );
-//			System.out.println("###>>> FILE PATH SET TO: " + pathLibrary.getProjectPath(projectName));
-			
-			// ##############################################################			
-//			String templatesPath = ".." + Path.SEPARATOR + ".." + Path.SEPARATOR +
-//			".." + Path.SEPARATOR + ".." + Path.SEPARATOR +
-//			".." + Path.SEPARATOR + ".." + Path.SEPARATOR +
-//			"sj_templates" + Path.SEPARATOR + "";
-//			String examplesDestination = "examples" + Path.SEPARATOR + "";
-//			
-//			final IFolder examplesFolder = container.getFolder(new Path("examples"));
-//			examplesFolder.create(true, true, monitor);
-//			InputStream resourceStream = this.getClass().getResourceAsStream(templatesPath + "embeddedSJ.jar");
-//			System.out.println("$$$$$$$$$$ EMBEDDED SJ PATH: " + this.getClass().getResource(templatesPath + "embeddedSJ.jar").getPath());
-//			addFileToProject(container, new Path("embeddedSJ.jar"), resourceStream, monitor);
-//			resourceStream = this.getClass().getResourceAsStream(templatesPath + "EmbeddedABRO.java");
-//			addFileToProject(container, new Path(examplesDestination + "EmbeddedABRO.java"), resourceStream, monitor);
-//			resourceStream = this.getClass().getResourceAsStream(templatesPath + "EmbeddedABROMain.java");
-//			addFileToProject(container, new Path(examplesDestination + "EmbeddedABROMain.java"), resourceStream, monitor);
-//			resourceStream = this.getClass().getResourceAsStream(templatesPath + "EmbeddedABROMain2.java");
-//			addFileToProject(container, new Path(examplesDestination + "EmbeddedABROMain2.java"), resourceStream, monitor);
-//			resourceStream.close();
-			
 			String templatesPath = ".." + Path.SEPARATOR + ".." + Path.SEPARATOR +
 			".." + Path.SEPARATOR + ".." + Path.SEPARATOR +
 			".." + Path.SEPARATOR + ".." + Path.SEPARATOR +
@@ -296,8 +175,6 @@ public class SJProjectNewSJProjectWizard extends Wizard implements INewWizard,
 			addFileToProject(container, new Path("embeddedSJ.jar"), resourceStream, monitor);
 			resourceStream = this.getClass().getResourceAsStream(templatesPath + "EmbeddedABRO.java");
 			addFileToProject(container, new Path(examplesPath + Path.SEPARATOR + "EmbeddedABRO.java"), resourceStream, monitor);
-//			resourceStream = this.getClass().getResourceAsStream(templatesPath + "EmbeddedABROMain.java");
-//			addFileToProject(container, new Path(examplesPath + Path.SEPARATOR + "EmbeddedABROMain.java"), resourceStream, monitor);
 			resourceStream = this.getClass().getResourceAsStream(templatesPath + "EmbeddedABROMain.java");
 			addFileToProject(container, new Path(examplesPath + Path.SEPARATOR + "EmbeddedABROMain.java"), resourceStream, monitor);
 			
@@ -328,7 +205,6 @@ public class SJProjectNewSJProjectWizard extends Wizard implements INewWizard,
 			addFileToProject(container, new Path(".project"), resourceStream, monitor);
 			
 			resourceStream.close();		
-			// ##############################################################
 			
 		} catch(IOException ioe) {
 			IStatus status = new Status(IStatus.ERROR, "NewFileWizard", IStatus.OK,
