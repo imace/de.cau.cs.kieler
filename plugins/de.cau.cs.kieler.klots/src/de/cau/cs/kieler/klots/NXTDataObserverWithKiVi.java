@@ -38,12 +38,14 @@ public class NXTDataObserverWithKiVi extends JSONObjectDataComponent implements
 		});
 		
 		editor.useAsExecutionViewer(true);
+		editor.initSJContent();
 		
 	}
 
 	
 	public void wrapup() throws KiemInitializationException {
 		editor.useAsExecutionViewer(false);
+		editor.rollbackSJContent();
 	}
 
 	

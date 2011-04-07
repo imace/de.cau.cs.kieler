@@ -26,7 +26,10 @@ public class NXTDataDistributorWithKiVi extends JSONObjectDataComponent implemen
 	private static final String KLOTSCONSOLENAME = "Klots Console";
 	NXTCommunicator comm;
 	
+	// ---------------------
+	// XXX: TO BE REMOVED!
 	SJEditorWithKiVi editor;
+	// ---------------------
 	
 
 	public void initialize() throws KiemInitializationException {
@@ -40,7 +43,8 @@ public class NXTDataDistributorWithKiVi extends JSONObjectDataComponent implemen
 		}
 		
 		// ------------------------------------------------------------------
-		// TODO: try to move it somehow to the DaataObserver!
+		// XXX: FIXED, TO BE REMOVED!
+		// try to move it somehow to the DataObserver!
 		PlatformUI.getWorkbench().getDisplay().syncExec(new Runnable() {
 			public void run() {
 				IEditorPart e = KlotsPlugin.getDefault().getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
@@ -54,7 +58,7 @@ public class NXTDataDistributorWithKiVi extends JSONObjectDataComponent implemen
 		String[] labels = s.split(";");
 		labels[0] = labels[0].substring(labels[0].lastIndexOf("{")+1);
 		labels[labels.length-1] = labels[labels.length-1].substring( 0, labels[labels.length-1].length()-2 );
-		editor.setLabelNames(labels);
+		//editor.setLabelNames(labels);
 		// ------------------------------------------------------------------
 		
 	}

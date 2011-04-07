@@ -63,6 +63,8 @@
       	<persistent value="false"/>
       	<attribute name="instructionName"/>
       	<attribute name="instructionLabel"/>
+      	<attribute name="instructionStart"/>
+      	<attribute name="instructionEnd"/>
   </extension>
   <extension point="org.eclipse.ui.ide.markerImageProviders">
 	<imageprovider

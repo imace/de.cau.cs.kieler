@@ -161,7 +161,7 @@ public class SJInstructionsViewDataObserver extends JSONObjectDataComponent impl
      */
     public void initialize() {
         // bring SJ instructions view to front
-        bringToFront();
+    	bringToFront();
         
         // update the view
         //SJInstructionsDataList.getInstance().updateViewAsync();
