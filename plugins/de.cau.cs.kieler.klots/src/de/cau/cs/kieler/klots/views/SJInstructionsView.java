@@ -171,17 +171,65 @@ public class SJInstructionsView extends ViewPart {
         			// if this is not a step do nothing
         			if( i == microStepCounter ) {
         				return;
+        				
         			// if this is a one step forward do a single step forward
         			} else if( i == microStepCounter+1 ) {
-        				// set the selection to the previously item because 'microStepForwards' increments the selection
-        				viewer.getTree().setSelection(viewer.getTree().getItem(i-1));
-        				microStepForwards.run();
+        				IEditorPart  editorPart = KlotsPlugin.getDefault().getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
+        				if(editorPart != null) {
+        					// do a forward step in the editor
+        					SJEditorWithKiVi e = (SJEditorWithKiVi) editorPart;
+        					e.doMicroStepForwards();
+        					// print data
+        					System.out.println("+++++>>>> LISTENER MICRO STEP FORWARD: selection index = " + (i-1) + ", new selection index = " + i + ", tree items count = " + viewer.getTree().getItemCount());
+        					System.out.println("+++++>>>> LISTENER MICRO STEP FORWARD: increment the selection");
+        					// increment the step counter AND enable/disable the microstep buttons
+        					microStepCounter++;
+        					if( !microStepBackwards.isEnabled() ) {
+        						microStepBackwards.setEnabled(true);
+        						microStepBackwardsAll.setEnabled(true);
+        					}
+        					// disable the 'forward' buttons if the new selected item is the last one in the list
+        					if( i >= viewer.getTree().getItemCount()-1 ) {
+        						microStepForwards.setEnabled(false);
+        						microStepForwardsAll.setEnabled(false);
+        					}
+        				} else {
+        					System.out.println("###>>> LISTENER MICRO STEP FORWARDS ERROR: No active editor!");
+        				}
+        				// OLD IMPLEMENTATION: TO BE REMOVED
+//        				// set the selection to the previously item because 'microStepForwards' increments the selection
+//        				viewer.getTree().setSelection(viewer.getTree().getItem(i-1));
+//        				microStepForwards.run();
         				return;
+        				
         			// if this is a one step backward do a single step backward
         			} else if( i == microStepCounter-1 ) {
-        				// set the selection to the next item because 'microStepBackwards' decrements the selection
-        				viewer.getTree().setSelection(viewer.getTree().getItem(i+1));
-        				microStepBackwards.run();
+        				IEditorPart  editorPart = KlotsPlugin.getDefault().getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
+        				if(editorPart != null) {	
+        					// do a backward step in the editor
+        					SJEditorWithKiVi e = (SJEditorWithKiVi) editorPart;
+        					e.doMicroStepBackwards();
+        					// print data
+        					System.out.println("+++++>>>> LISTENER MICRO STEP BACK: selection index = " + (i+1) + ", new selection index = " + i);
+        					System.out.println("+++++>>>> LISTENER MICRO STEP BACK: decrement the selection");
+        					// decrement the step counter AND enable/disable the microstep buttons
+        					microStepCounter--;
+        					if( !microStepForwards.isEnabled() ) {
+        						microStepForwards.setEnabled(true);
+        						microStepForwardsAll.setEnabled(true);
+        					}
+        					// disable the 'backward' buttons if the new selected item is the first one in the list
+        					if( i <= 0 ) {
+        						microStepBackwards.setEnabled(false);
+        						microStepBackwardsAll.setEnabled(false);
+        					}
+        				} else {
+        					System.out.println("###>>> LISTENER MICRO STEP BACKWARDS ERROR: No active editor!");
+        				}
+        				// OLD IMPLEMENTATION: TO BE REMOVED
+//        				// set the selection to the next item because 'microStepBackwards' decrements the selection
+//        				viewer.getTree().setSelection(viewer.getTree().getItem(i+1));
+//        				microStepBackwards.run();
         				return;
         			}
         			
@@ -189,7 +237,7 @@ public class SJInstructionsView extends ViewPart {
         			highlightSelectedSJInstructions(list);
         			viewer.getTree().setSelection(viewer.getTree().getItem(i));
         			microStepCounter = i;
-        			
+        			// enable/disable the microstep buttons
         			if( i == 0 ) {
     					microStepForwards.setEnabled(true);
     					microStepForwardsAll.setEnabled(true);

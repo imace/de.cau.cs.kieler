@@ -8,6 +8,11 @@ import lejos.pc.comm.NXTConnector;
 
 public class NXTCommunicator {
 	
+	public final String SIGNALS_TAG = "SIGNALS";
+	public final String INSTRUCTION_TAG = "INSTRUCTION";
+	public final String TICK_INFO_TAG = "TICK_INFO";
+	public final String PROGRAM_INFO_TAG = "PROGRAM_INFO";
+	
 	static NXTConnector conn;
 	static DataOutputStream dos;
 	static DataInputStream dis;
@@ -64,7 +69,10 @@ public class NXTCommunicator {
 		StringBuffer buf = new StringBuffer();
 		String line = this.receiveMessageLine();
 		while( !line.equals("EOT") ) {
-			buf.append("{" + line + "},\n");
+			// do not process empty lines
+			if( !line.equals("") ) {
+				buf.append("{" + line + "},\n");
+			}
 			line = this.receiveMessageLine();
 		}
 		return buf.replace(buf.length()-2, buf.length(), "]").insert(0, "[");
@@ -75,8 +83,14 @@ public class NXTCommunicator {
 	public String receiveMessageLine() {
 		try {
 			String line = dis.readLine();   // FIXME: Find a way to use BufferedReader.readLine() instead!
-			if( line.startsWith("SIGNALS") || line.startsWith("INSTRUCTION") ) {
+			System.out.println(";;;;=======;;;; RECEIVED MESSAGE LINE = >" + line + "<");
+			if( line.startsWith(SIGNALS_TAG) || line.startsWith(INSTRUCTION_TAG) ) {
 				line = line.substring(line.indexOf('"'));
+			// if line is 'addedSignals:...' or 'removedSignals:...' do not process it
+			// the newly added resp. removed signals are processed via the SIGNALS tag
+			} else if(line.startsWith(PROGRAM_INFO_TAG)) {
+				System.out.println(";;;;=======;;;; LINE CONTAINS THE PROGRAM_INFO TAG => DO NOT PROCESS IT");
+				line = "";
 			}
 			return line;
 		} catch (IOException ioe) {

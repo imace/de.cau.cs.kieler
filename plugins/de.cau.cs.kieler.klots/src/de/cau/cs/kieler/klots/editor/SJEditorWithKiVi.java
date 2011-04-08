@@ -438,7 +438,7 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 		
 		// parse label declarations
 		offset = text.indexOf('{', offset) + 1;
-		String labelsText = text.substring( offset, text.indexOf('}', offset)-1 );
+		String labelsText = text.substring( offset, text.indexOf('}', offset) );
 		System.out.println("HHHHHHHHHHHHHH>>>>>>>>>>>> labels text = >" + labelsText + "<");
 		String[] rawLabels = labelsText.split(",");
 		for(int i = 0; i < rawLabels.length; i++) {
@@ -460,18 +460,36 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 	
 	
 	
-	private void parseSignals() {
+	private void parseSignals(boolean first, int tickMethodOffset, int startOffset) {
 		System.out.println("HHHHHHHHHHHHHHHHHHHHH>>> PARSE SIGNALS <<<HHHHHHHHHHHHHHHHHHHHH");
 		String text = editor.getDocumentProvider().getDocument(editor.getEditorInput()).get();
-		int tickOffset = computeTickMethodStartOffset();
+		int tickOffset = tickMethodOffset;
+		int offset = startOffset;
+		if( first ) {
+			tickOffset = computeTickMethodStartOffset();
+			offset = 0;
+		}
 		
 		// find signal declaration part
-		int offset = text.indexOf(SIGNAL_DECLARATION_NAME);
+		offset = text.indexOf(SIGNAL_DECLARATION_NAME, offset);
+		System.out.println("HHHHHHHHHHHHHH>>>>>>>>>>>> offset = " + offset + ", tickOffset = " + tickOffset);
+		if( offset < 0 || offset > tickOffset ) {
+			if( first ) {
+				System.err.println("EDITOR INITIALIZATION ERROR: No signal declaration part found!");
+			} else {
+				System.out.println("HHHHHHHHHHHHHH>>>>>>>>>>>> ALL SIGNAL DECLARATION PARTS PROCESSED!");
+			}
+			return;
+		}
 		System.out.println("HHHHHHHHHHHHHH>>>>>>>>>>>> offset = " + offset + ", length = " + SIGNAL_DECLARATION_NAME.length() + ", text = >" + text.substring(offset, offset+SIGNAL_DECLARATION_NAME.length()) + "<");
 		while( isComment(offset, offset + SIGNAL_DECLARATION_NAME.length(), text) || isString(offset, offset + SIGNAL_DECLARATION_NAME.length(), text) ) {
 			offset = text.indexOf(SIGNAL_DECLARATION_NAME, offset+1);
 			if( offset < 0 || offset > tickOffset ) {
-				System.err.println("EDITOR INITIALIZATION ERROR: No signal declaration part found!");
+				if( first ) {
+					System.err.println("EDITOR INITIALIZATION ERROR: No signal declaration part found!");
+				} else {
+					System.out.println("HHHHHHHHHHHHHH>>>>>>>>>>>> ALL SIGNAL DECLARATION PARTS PROCESSED!");
+				}
 				return;
 			}
 			System.out.println("HHHHHHHHHHHHHH>>>>>>>>>>>> offset = " + offset + ", length = " + SIGNAL_DECLARATION_NAME.length() + ", text = >" + text.substring(offset, offset+SIGNAL_DECLARATION_NAME.length()) + "<");
@@ -495,7 +513,21 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 		for( String s : rawSignals ) {
 			System.out.println("HHHHHHHHHHHHHH>>>>>>>>>>>> 'raw' signal after processing = >" + s + "<");
 		}
-		this.signals = rawSignals;
+		if( first ) {
+			this.signals = rawSignals;
+		} else {
+			String[] combinedSignals = new String[signals.length + rawSignals.length];
+			for(int i = 0; i < signals.length; i++) {
+				combinedSignals[i] = signals[i];
+			}
+			for(int i = 0; i < rawSignals.length; i++) {
+				combinedSignals[i+signals.length] = rawSignals[i];
+			}
+			this.signals = combinedSignals;
+		}
+		
+		// call same method recursively till all signal declaration parts (if more than one at all) are processed
+		parseSignals(false, tickOffset, offset);
 	}
 	
 	
@@ -922,7 +954,7 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 	
 	public String[] getSignals() {
 		if( signals == null ) {
-			parseSignals();
+			parseSignals(true, 0, 0);
 		}
 		return signals;
 	}

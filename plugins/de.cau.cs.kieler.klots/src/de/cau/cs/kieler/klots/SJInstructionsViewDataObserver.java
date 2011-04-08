@@ -81,7 +81,7 @@ public class SJInstructionsViewDataObserver extends JSONObjectDataComponent impl
 			}
 		} catch (JSONException e) {
 //			printConsole("STEP ERROR: " + e.getMessage());
-			System.out.println("INSTRUCTIONS VIEW OBSERVER STEP ERROR: ");
+			System.out.println("INSTRUCTIONS VIEW OBSERVER STEP ERROR: JSON Object is:\n" + jSONObject.toString());
 			e.printStackTrace();
 		}
 

@@ -93,6 +93,7 @@ public class NXTDataDistributorWithKiVi extends JSONObjectDataComponent implemen
 		
 		// --------------------------- observer -----------------------------
 		StringBuffer buffer = comm.receiveMessage();
+		System.out.println("====;;;;;;;==== RECEIVED MESSAGE BUFFER = >" + buffer.toString() + "<");
 		try {
 			JSONArray received = new JSONArray(buffer.toString());
 			JSONObject returnObj = new JSONObject();
