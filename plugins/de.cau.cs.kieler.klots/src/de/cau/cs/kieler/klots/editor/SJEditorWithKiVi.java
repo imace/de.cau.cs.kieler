@@ -194,6 +194,10 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 	private static List<LabelInfo> labelList = new ArrayList<LabelInfo>();
 	private String[] labels;
 	private final String LABEL_ENUM_NAME = "enum StateLabel";
+	// signals
+	private String[] signals;
+	private final String SIGNAL_DECLARATION_NAME = "addSignals(";
+	private final String TICK_METHOD_NAME = "public void tick()";
 
 	// Java editor
 	private static CompilationUnitEditor editor;
@@ -285,12 +289,6 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 		uiStatusLineItem.setToolTipText("DO WE NEED A TOOL TIP TEXT?");
 		uiStatusLineItem.setErrorText("INSTRUCTION INFO TO BE DISPAYED");
 		// ------------------------------------------------------------------
-		
-		
-		// NOW DONE BY parseLabels()
-		// --------------
-		//fillLabelList();
-		// --------------
 	
 	}
 	
@@ -388,6 +386,7 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 		kiviList.clear();
 		labelList.clear();
 		labels = null;
+		signals = null;
 		microStepNumber = -1;
 		sjInstructionsUpdateData = "";
 		executionTraceUpdateData = new StringBuffer();
@@ -406,14 +405,12 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 	
 	public void initSJContent() {
 		
-		// -------------
+		// -------------------
 		computeLabels();
-		// -------------
-
-		// -----------
+		// -------------------
+		//parseSignals();
+		// -------------------
 		parseLabels();
-		// -----------
-		
 		// -------------------
 		parseSJInstructions();
 		// -------------------
@@ -424,6 +421,7 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 	
 	
 	private void computeLabels() {
+		System.out.println("HHHHHHHHHHHHHHHHHHHHH>>> COMPUTE LABELS <<<HHHHHHHHHHHHHHHHHHHHH");
 		String text = editor.getDocumentProvider().getDocument(editor.getEditorInput()).get();
 		
 		// find label declaration part
@@ -462,7 +460,72 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 	
 	
 	
+	private void parseSignals() {
+		System.out.println("HHHHHHHHHHHHHHHHHHHHH>>> PARSE SIGNALS <<<HHHHHHHHHHHHHHHHHHHHH");
+		String text = editor.getDocumentProvider().getDocument(editor.getEditorInput()).get();
+		int tickOffset = computeTickMethodStartOffset();
+		
+		// find signal declaration part
+		int offset = text.indexOf(SIGNAL_DECLARATION_NAME);
+		System.out.println("HHHHHHHHHHHHHH>>>>>>>>>>>> offset = " + offset + ", length = " + SIGNAL_DECLARATION_NAME.length() + ", text = >" + text.substring(offset, offset+SIGNAL_DECLARATION_NAME.length()) + "<");
+		while( isComment(offset, offset + SIGNAL_DECLARATION_NAME.length(), text) || isString(offset, offset + SIGNAL_DECLARATION_NAME.length(), text) ) {
+			offset = text.indexOf(SIGNAL_DECLARATION_NAME, offset+1);
+			if( offset < 0 || offset > tickOffset ) {
+				System.err.println("EDITOR INITIALIZATION ERROR: No signal declaration part found!");
+				return;
+			}
+			System.out.println("HHHHHHHHHHHHHH>>>>>>>>>>>> offset = " + offset + ", length = " + SIGNAL_DECLARATION_NAME.length() + ", text = >" + text.substring(offset, offset+SIGNAL_DECLARATION_NAME.length()) + "<");
+		}
+		
+		// parse label declarations
+		offset = text.indexOf('(', offset) + 1;
+		String signalsText = text.substring( offset, text.indexOf(')', offset) );
+		System.out.println("HHHHHHHHHHHHHH>>>>>>>>>>>> signals text = >" + signalsText + "<");
+		String[] rawSignals = signalsText.split(",");
+		for(int i = 0; i < rawSignals.length; i++) {
+			System.out.println("HHHHHHHHHHHHHH>>>>>>>>>>>> process signal = >" + rawSignals[i] + "<");
+			rawSignals[i] = rawSignals[i].trim();
+			// remove multi line comments
+			rawSignals[i] = rawSignals[i].replaceAll("(/\\x2A{1}).*(\\x2A/{1})", " ");
+			// remove single line comments
+			rawSignals[i] = rawSignals[i].replaceAll("//.*", " ");
+			rawSignals[i] = rawSignals[i].trim();
+			System.out.println("HHHHHHHHHHHHHH>>>>>>>>>>>> signal after processing = >" + rawSignals[i] + "<");
+		}
+		for( String s : rawSignals ) {
+			System.out.println("HHHHHHHHHHHHHH>>>>>>>>>>>> 'raw' signal after processing = >" + s + "<");
+		}
+		this.signals = rawSignals;
+	}
+	
+	
+	
+	
+	private int computeTickMethodStartOffset() {
+		System.out.println("HHHHHHHHHHHHHHHHHHHHH>>> COMPUTE TICK METHOD OFFSET <<<HHHHHHHHHHHHHHHHHHHHH");
+		String text = editor.getDocumentProvider().getDocument(editor.getEditorInput()).get();
+		
+		// find tick method start offset
+		int offset = text.indexOf(TICK_METHOD_NAME);
+		System.out.println("HHHHHHHHHHHHHH>>>>>>>>>>>> offset = " + offset + ", length = " + TICK_METHOD_NAME.length() + ", text = >" + text.substring(offset, offset+TICK_METHOD_NAME.length()) + "<");
+		while( isComment(offset, offset + TICK_METHOD_NAME.length(), text) || isString(offset, offset + TICK_METHOD_NAME.length(), text) ) {
+			offset = text.indexOf(TICK_METHOD_NAME, offset+1);
+			if( offset < 0 || offset > text.length() ) {
+				System.err.println("EDITOR INITIALIZATION ERROR: No tick() method found!");
+				return -1;
+			}
+			System.out.println("HHHHHHHHHHHHHH>>>>>>>>>>>> offset = " + offset + ", length = " + TICK_METHOD_NAME.length() + ", text = >" + text.substring(offset, offset+TICK_METHOD_NAME.length()) + "<");
+		}
+		
+		System.out.println("HHHHHHHHHHHHHH>>>>>>>>>>>> found tick() method at offset = " + offset);
+		return offset;
+	}
+	
+	
+	
+	
 	private void parseLabels() {
+		System.out.println("HHHHHHHHHHHHHHHHHHHHH>>> PARSE LABELS <<<HHHHHHHHHHHHHHHHHHHHH");
 		labelList.clear();
 		String text = editor.getDocumentProvider().getDocument(editor.getEditorInput()).get();
 		int size = text.length();
@@ -515,6 +578,7 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 	
 	
 	private void parseSJInstructions() {
+		System.out.println("HHHHHHHHHHHHHHHHHHHHH>>> PARSE SJ INSTRUCTIONS <<<HHHHHHHHHHHHHHHHHHHHH");
 		String text = editor.getDocumentProvider().getDocument(editor.getEditorInput()).get();
 		String instrName = "";
 		for(LabelInfo label : labelList) {
@@ -852,6 +916,15 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 				editor.getViewer().getTextWidget().setEditable(!b);
 			}
 		});
+	}
+	
+	
+	
+	public String[] getSignals() {
+		if( signals == null ) {
+			parseSignals();
+		}
+		return signals;
 	}
 	
 	

@@ -12,6 +12,7 @@ import org.json.JSONObject;
 
 import de.cau.cs.kieler.sim.kiem.IJSONObjectDataComponent;
 import de.cau.cs.kieler.sim.kiem.JSONObjectDataComponent;
+import de.cau.cs.kieler.sim.kiem.JSONSignalValues;
 import de.cau.cs.kieler.sim.kiem.KiemExecutionException;
 import de.cau.cs.kieler.sim.kiem.KiemInitializationException;
 
@@ -39,6 +40,37 @@ public class NXTDataObserverWithKiVi extends JSONObjectDataComponent implements
 		
 		editor.useAsExecutionViewer(true);
 		editor.initSJContent();
+		
+	}
+	
+	
+	@Override
+	public JSONObject provideInitialVariables() {
+		
+		if( editor == null ) {
+			PlatformUI.getWorkbench().getDisplay().syncExec(new Runnable() {
+				public void run() {
+					IEditorPart e = KlotsPlugin.getDefault().getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
+					if(e != null) {
+						editor = (SJEditorWithKiVi) e;
+					} else {
+						printConsole("INITIALIZATION ERROR: Could not find an active SJ editor!");
+					}
+				}
+			});
+		}
+		
+		String[] signals = editor.getSignals();
+		JSONObject returnObj = new JSONObject();
+		try {
+	      	for(String s : signals) {
+	      		System.out.println(":::::::>>>>> providing initial signal >" + s + "<");
+	      		returnObj.accumulate(s, JSONSignalValues.newValue(false));
+	      	}
+		} catch (JSONException e) {
+	      	printConsole(e.getStackTrace().toString());
+		}
+		return returnObj;
 		
 	}
 

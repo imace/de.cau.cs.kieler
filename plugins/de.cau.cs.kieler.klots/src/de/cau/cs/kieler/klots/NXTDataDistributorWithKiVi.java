@@ -23,6 +23,11 @@ public class NXTDataDistributorWithKiVi extends JSONObjectDataComponent implemen
 	private static final String KLOTSCONSOLENAME = "Klots Console";
 	NXTCommunicator comm;
 	
+	// ------------------------------------
+	// XXX: use parseSignals() in SJEditor
+	//private String[] signals;
+	// ------------------------------------
+	
 	
 
 	public void initialize() throws KiemInitializationException {
@@ -31,6 +36,17 @@ public class NXTDataDistributorWithKiVi extends JSONObjectDataComponent implemen
 		String s = comm.receiveMessage().toString();
 		if( s.startsWith("[{SYNCHRONIZED}") ) {
 			printConsole(s);
+			
+			// -------------------------------------------------------
+			// XXX: use parseSignals() in SJEditor
+			// remove leading '[{SYNCHRONIZED},\n{'
+//			s = s.replaceAll("(?s-:.*\\x7B)", "");
+//			// remove ending '}]'
+//			s = s.replace("}]", "");
+//			System.out.println(":::::::>>>>> signals = >" + s + "<");
+//			signals = s.split(";");
+			// -------------------------------------------------------
+			
 		} else {
 			printConsole("ERROR while trying to synchronize with the NXT: " + s);
 		}
@@ -104,19 +120,25 @@ public class NXTDataDistributorWithKiVi extends JSONObjectDataComponent implemen
 	}
 	
 	
-	@Override
-    public JSONObject provideInitialVariables() {
-        JSONObject returnObj = new JSONObject();
-        try {
-            returnObj.accumulate("a", JSONSignalValues.newValue(false));
-            returnObj.accumulate("b", JSONSignalValues.newValue(false));
-            returnObj.accumulate("r", JSONSignalValues.newValue(false));
-            returnObj.accumulate("o", JSONSignalValues.newValue(false));
-        } catch (JSONException e) {
-        	printConsole(e.getStackTrace().toString());
-        }
-        return returnObj;
-    }
+	// ----------------------------------------------------------------------
+	// XXX: use parseSignals() in SJEditor
+//	@Override
+//    public JSONObject provideInitialVariables() {
+//		
+//        JSONObject returnObj = new JSONObject();
+//        try {
+//        	
+//        	for(String s : signals) {
+//        		System.out.println(":::::::>>>>> providing initial signal >" + s + "<");
+//        		returnObj.accumulate(s, JSONSignalValues.newValue(false));
+//        	}
+//        	
+//        } catch (JSONException e) {
+//        	printConsole(e.getStackTrace().toString());
+//        }
+//        return returnObj;
+//    }
+	// ----------------------------------------------------------------------
 	
 	
 	

@@ -18,6 +18,14 @@
      </content>
   </extension>
   <extension
+        point="de.cau.cs.kieler.sim.kiem.json.datacomponent">
+     <content
+           class="de.cau.cs.kieler.klots.SJInstructionsViewDataObserver"
+           id="de.cau.cs.kieler.klots.view.SJInstructionsViewDataObserver"
+           name="SJ Instructions View Observer">
+     </content>
+  </extension>
+  <extension
         point="org.eclipse.ui.editors">
      <editor
            class="de.cau.cs.kieler.klots.editor.SJEditorWithKiVi"
@@ -27,6 +35,16 @@
            id="de.cau.cs.kieler.klots.editor.SJEditorWithKiVi"
            name="SJ Editor">
      </editor>
+  </extension>
+  <extension
+        point="org.eclipse.ui.views">
+     <view
+           category="de.cau.cs.kieler"
+           class="de.cau.cs.kieler.klots.views.SJInstructionsView"
+           icon="icons/sjInstructionsViewIcon.png"
+           id="de.cau.cs.kieler.klots.view.SJInstructionsView"
+           name="SJ Instructions View">
+     </view>
   </extension>
    <extension
          point="org.eclipse.ui.newWizards">
@@ -72,24 +90,6 @@
 		icon="icons/editor4.gif"
 		id="de.cau.cs.kieler.klots.editor.instructionMarkerProvider">
 	</imageprovider>
-  </extension>
-  <extension
-        point="org.eclipse.ui.views">
-     <view
-           category="de.cau.cs.kieler"
-           class="de.cau.cs.kieler.klots.views.SJInstructionsView"
-           icon="icons/sjInstructionsViewIcon.png"
-           id="de.cau.cs.kieler.klots.view.SJInstructionsView"
-           name="SJ Instructions View">
-     </view>
-  </extension>
-  <extension
-        point="de.cau.cs.kieler.sim.kiem.json.datacomponent">
-     <content
-           class="de.cau.cs.kieler.klots.SJInstructionsViewDataObserver"
-           id="de.cau.cs.kieler.klots.view.SJInstructionsViewDataObserver"
-           name="SJ Instructions View Observer">
-     </content>
   </extension>
      
 </plugin>
