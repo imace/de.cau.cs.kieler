@@ -13,6 +13,9 @@ import sj.Signal;
 import sj.exceptions.SignalNotDeclaredException;
 import sj.util.LinkedList;
 
+import examples.EmbeddedABRO.StateLabel;
+
+
 public class EmbeddedABROMain {
 	
 	public static Signal string2Signal(String str, EmbeddedABRO abro) throws SignalNotDeclaredException {
@@ -62,7 +65,17 @@ public class EmbeddedABROMain {
 		System.out.println("     ");
 		String in = "";
 		String comm = "";
-		logger.log(SJLogger.LogMsgTyp.TICK_INFO, "SYNCHRONIZED\nEOT");
+		
+		
+//		logger.log(SJLogger.LogMsgTyp.TICK_INFO, "SYNCHRONIZED\nEOT");
+
+		// NEW! Send all labels to PC!
+		String s = "";
+		for( StateLabel l : StateLabel.values() ) {
+			s += l.name() + ";";
+		}
+		s = s.substring(0, s.length()-1);
+		logger.log(SJLogger.LogMsgTyp.TICK_INFO, "SYNCHRONIZED\n" + s + "\nEOT");
 		// ------------------------------------------------------------------
 		
 		while (!program.isTerminated()) {

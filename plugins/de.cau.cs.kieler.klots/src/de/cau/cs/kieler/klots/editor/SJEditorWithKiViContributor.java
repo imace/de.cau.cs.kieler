@@ -280,26 +280,14 @@ public class SJEditorWithKiViContributor extends MultiPageEditorActionBarContrib
 		manager.add(compileAndLink);
 		manager.add(downloadToNXT);
 		manager.add(new Separator());
-		manager.add(microStepBackwardsAll);
-		manager.add(microStepBackwards);
-		manager.add(microStepForwards);
-		manager.add(microStepForwardsAll);
 		
-//		PlatformUI.getWorkbench().getDisplay().syncExec(new Runnable() {
-//			public void run() {
-//				IEditorPart e = KlotsPlugin.getDefault().getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
-//				if(e != null) {
-//					IActionBars bars = ((SJEditorWithKiVi) e).getEditorSite().getActionBars();
-//					IToolBarManager toolBarManager = bars.getToolBarManager();
-//					toolBarManager.add(microStepBackwardsAll);
-//					toolBarManager.add(microStepBackwards);
-//					toolBarManager.add(microStepForwards);
-//					toolBarManager.add(microStepForwardsAll);
-//				} else {
-//					System.out.println("EDITOR ACTION BAR INITIALIZATION ERROR: Could not find an active SJ editor!");
-//				}
-//			}
-//		});
+		// ---------------------------------------------------------
+		// XXX: Step actions are handled by the SJ instructions view
+		//manager.add(microStepBackwardsAll);
+		//manager.add(microStepBackwards);
+		//manager.add(microStepForwards);
+		//manager.add(microStepForwardsAll);
+		// ---------------------------------------------------------
 		
 	}
 	

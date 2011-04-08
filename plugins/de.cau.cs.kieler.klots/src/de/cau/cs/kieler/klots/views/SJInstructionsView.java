@@ -61,6 +61,8 @@ public class SJInstructionsView extends ViewPart {
     /** The tree viewer. */
     private SJInstructionsViewer viewer;
     
+    private int microStepCounter = 0;
+    
     
     // microstep actions
     private Action microStepForwards;
@@ -91,6 +93,7 @@ public class SJInstructionsView extends ViewPart {
         viewer.refresh();
         return;
     }
+    
 
 
     // -------------------------------------------------------------------------
@@ -153,18 +156,40 @@ public class SJInstructionsView extends ViewPart {
         			IStructuredSelection selection = (IStructuredSelection)event.getSelection();
         			List<SJInstructionsData> list = new LinkedList<SJInstructionsData>();
         			
-        			// XXX: process only the first element of the selection
+        			// ------------------------------------------------------
+        			// XXX: in this KLOTS release, process only the first element of the selection
         			SJInstructionsData data = (SJInstructionsData) selection.getFirstElement();
         			list.add(data);
+        			System.out.println(">>> new selected item = " + data.getInstructionsName());
 //        			for(Iterator<?> iterator = selection.iterator(); iterator.hasNext(); ) {
 //        				list.add( (SJInstructionsData) iterator.next() );
 //        			}
         			
-        			highlightSelectedSJInstructions(list);
-        			
         			// forbid multiple selections AND enable/disable microstep actions
         			int i = data.getParentSJInstructionsDataList().indexOf(data);
+        			
+        			// if this is not a step do nothing
+        			if( i == microStepCounter ) {
+        				return;
+        			// if this is a one step forward do a single step forward
+        			} else if( i == microStepCounter+1 ) {
+        				// set the selection to the previously item because 'microStepForwards' increments the selection
+        				viewer.getTree().setSelection(viewer.getTree().getItem(i-1));
+        				microStepForwards.run();
+        				return;
+        			// if this is a one step backward do a single step backward
+        			} else if( i == microStepCounter-1 ) {
+        				// set the selection to the next item because 'microStepBackwards' decrements the selection
+        				viewer.getTree().setSelection(viewer.getTree().getItem(i+1));
+        				microStepBackwards.run();
+        				return;
+        			}
+        			
+        			// if this is a 'jump' step process it as such
+        			highlightSelectedSJInstructions(list);
         			viewer.getTree().setSelection(viewer.getTree().getItem(i));
+        			microStepCounter = i;
+        			
         			if( i == 0 ) {
     					microStepForwards.setEnabled(true);
     					microStepForwardsAll.setEnabled(true);
@@ -181,8 +206,11 @@ public class SJInstructionsView extends ViewPart {
     					microStepBackwards.setEnabled(true);
     					microStepBackwardsAll.setEnabled(true);
     				}
+        			// ------------------------------------------------------
         			
-        		} // end if
+        		} else {
+        			System.out.println("XXXXXXXXXX>>> BAD ERROR: SELECTION IS NOT A 'STRUCTURED SELECTION'");
+        		}
      	    } // end selectionChanged()
         }); // end new ISelectionChangedListener() {}
     }
@@ -197,7 +225,8 @@ public class SJInstructionsView extends ViewPart {
 		IEditorPart  editorPart = KlotsPlugin.getDefault().getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
 		if(editorPart != null) {
 			SJEditorWithKiVi e = (SJEditorWithKiVi) editorPart;
-			// TODO: OPTIMIZE!!! e.g. add an index variable to the SJInstructionsData class
+			// TODO: OPTIMIZE in the next release if multiple selections are wished!!!
+			// e.g. add an index variable to the SJInstructionsData class
 			SJInstructionsData[] sjInstructionsDataListArray = list.get(0).getParentSJInstructionsDataList().getArray();
 			int[] indexArray = new int[list.size()];
 			int i = 0;
@@ -309,23 +338,29 @@ public class SJInstructionsView extends ViewPart {
 			public void run() {
 				IEditorPart  editorPart = KlotsPlugin.getDefault().getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
 				if(editorPart != null) {
+					
 					// do a forward step in the editor
 					SJEditorWithKiVi e = (SJEditorWithKiVi) editorPart;
 					e.doMicroStepForwards();
+					
 					// do a forward step in the SJ instructions view
 					TreeItem[] selections = viewer.getTree().getSelection();
 					int i = viewer.getTree().indexOf(selections[selections.length-1]);
-					System.out.println("+++++>>>> MICRO STEP BACK: selection index = " + i + ", new selection index = " + (i+1));
-					if( i+1 < viewer.getTree().getItemCount() ) {
-						viewer.getTree().setSelection(viewer.getTree().getItem(i+1));
-						if( !microStepBackwards.isEnabled() ) {
-							microStepBackwards.setEnabled(true);
-							microStepBackwardsAll.setEnabled(true);
-						}
-					} else {
+					System.out.println("+++++>>>> MICRO STEP FORWARD: selection index = " + i + ", new selection index = " + (i+1) + ", tree items count = " + viewer.getTree().getItemCount());
+					System.out.println("+++++>>>> MICRO STEP FORWARD: increment the selection");
+					// set the new selection
+					viewer.getTree().setSelection(viewer.getTree().getItem(i+1));
+					microStepCounter++;
+					if( !microStepBackwards.isEnabled() ) {
+						microStepBackwards.setEnabled(true);
+						microStepBackwardsAll.setEnabled(true);
+					}
+					// disable the 'forward' buttons if the new selected item is the last one in the list
+					if( i+1 >= viewer.getTree().getItemCount()-1 ) {
 						microStepForwards.setEnabled(false);
 						microStepForwardsAll.setEnabled(false);
 					}
+					
 				} else {
 					System.out.println("###>>> MICRO STEP FORWARDS ERROR: No active editor!");
 				}
@@ -341,23 +376,29 @@ public class SJInstructionsView extends ViewPart {
 			public void run() {
 				IEditorPart  editorPart = KlotsPlugin.getDefault().getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
 				if(editorPart != null) {
+					
 					// do a backward step in the editor
 					SJEditorWithKiVi e = (SJEditorWithKiVi) editorPart;
 					e.doMicroStepBackwards();
+					
 					// do a backward step in the SJ instructions view
 					TreeItem[] selections = viewer.getTree().getSelection();
 					int i = viewer.getTree().indexOf(selections[0]);
 					System.out.println("+++++>>>> MICRO STEP BACK: selection index = " + i + ", new selection index = " + (i-1));
-					if( i-1 >= 0 ) {
-						viewer.getTree().setSelection(viewer.getTree().getItem(i-1));
-						if( !microStepForwards.isEnabled() ) {
-							microStepForwards.setEnabled(true);
-							microStepForwardsAll.setEnabled(true);
-						}
-					} else {
+					System.out.println("+++++>>>> MICRO STEP BACK: decrement the selection");
+					// set the new selection
+					viewer.getTree().setSelection(viewer.getTree().getItem(i-1));
+					microStepCounter--;
+					if( !microStepForwards.isEnabled() ) {
+						microStepForwards.setEnabled(true);
+						microStepForwardsAll.setEnabled(true);
+					}
+					// disable the 'backward' buttons if the new selected item is the first one in the list
+					if( i-1 <= 0 ) {
 						microStepBackwards.setEnabled(false);
 						microStepBackwardsAll.setEnabled(false);
 					}
+					
 				} else {
 					System.out.println("###>>> MICRO STEP BACKWARDS ERROR: No active editor!");
 				}
@@ -380,6 +421,7 @@ public class SJInstructionsView extends ViewPart {
 					// do all forward steps in the SJ instructions view
 					int i = viewer.getTree().getItemCount();
 					viewer.getTree().setSelection(viewer.getTree().getItem(i-1));
+					microStepCounter = i-1;
 					microStepBackwards.setEnabled(true);
 					microStepBackwardsAll.setEnabled(true);
 					microStepForwards.setEnabled(false);
@@ -404,6 +446,7 @@ public class SJInstructionsView extends ViewPart {
 					e.doAllBackwardMicroSteps();
 					// roll back all steps in the SJ instructions view
 					viewer.getTree().setSelection(viewer.getTree().getItem(0));
+					microStepCounter = 0;
 					microStepForwards.setEnabled(true);
 					microStepForwardsAll.setEnabled(true);
 					microStepBackwards.setEnabled(false);
@@ -439,6 +482,8 @@ public class SJInstructionsView extends ViewPart {
 					microStepBackwards.setEnabled(true);
 					microStepBackwardsAll.setEnabled(true);
 				}
+
+				microStepCounter = viewer.getTree().getItemCount()-1;
 			}
 		};
 		kiemStepForwards.setText("KIEM Macrostep Forwards");
@@ -456,6 +501,8 @@ public class SJInstructionsView extends ViewPart {
 				microStepForwardsAll.setEnabled(false);
 				microStepBackwards.setEnabled(true);
 				microStepBackwardsAll.setEnabled(true);
+				
+				microStepCounter = viewer.getTree().getItemCount()-1;
 			}
 		};
 		kiemStepBackwards.setText("KIEM Macrostep Backwards");

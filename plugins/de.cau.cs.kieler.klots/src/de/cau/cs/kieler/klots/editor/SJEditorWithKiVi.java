@@ -154,16 +154,16 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 	
 	// dark orange
 	private final static Color ALREADY_DONE_MICROSTEP_FOREGROUND_COLOR = new Color(Display.getDefault(), 255, 140, 0);
-	// light cyan
-	private final static Color ALREADY_DONE_MICROSTEP_BACKGROUND_COLOR = new Color(Display.getDefault(), 224, 255, 255);
+	// eclipse standard selected line background color
+	private final static Color ALREADY_DONE_MICROSTEP_BACKGROUND_COLOR = new Color(Display.getDefault(), 232, 242, 254);
 	// red
 	private final static Color ACTIVE_MICROSTEP_FOREGROUND_COLOR = new Color(Display.getDefault(), 255, 0, 0);
-	// light cyan
-	private final static Color ACTIVE_MICROSTEP_BACKGROUND_COLOR = new Color(Display.getDefault(), 224, 255, 255);
-	// medium spring green
-	private final static Color YET_TO_BE_DONE_MICROSTEP_FOREGROUND_COLOR = new Color(Display.getDefault(), 0, 250, 154);
-	// light cyan
-	private final static Color YET_TO_BE_DONE_MICROSTEP_BACKGROUND_COLOR = new Color(Display.getDefault(), 224, 255, 255);
+	// eclipse standard selected line background color
+	private final static Color ACTIVE_MICROSTEP_BACKGROUND_COLOR = new Color(Display.getDefault(), 232, 242, 254);
+	// dark green
+	private final static Color YET_TO_BE_DONE_MICROSTEP_FOREGROUND_COLOR = new Color(Display.getDefault(), 0, 100, 0);
+	// misty rose
+	private final static Color YET_TO_BE_DONE_MICROSTEP_BACKGROUND_COLOR = new Color(Display.getDefault(), 255, 228, 225);
 	
 	// SJ instructions
 	private final static String[][] sjInstructionsMap = {
@@ -378,149 +378,10 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 	
 		
 	
+
 	
 	// ======================================================================
-	// >>>>>>>>>>            MACRO STEP UPDATE METHODS             <<<<<<<<<<
-	// ======================================================================
-	
-	static void updateJavaEditor() {
-		Display.getDefault().syncExec(new Runnable() {
-			public void run() {
-				
-				// ------------ undo highlight old instructions -------------
-				for(HighlightSJMarkerEffect e : kiviList) {
-					e.undo();
-				}
-				kiviList.clear();
-				// ----------------------------------------------------------
-				
-				// ----------------- highlight new labels -------------------
-				try {
-					JSONArray array = new JSONArray(sjInstructionsUpdateData);
-					JSONObject instruction = new JSONObject();
-					JSONObject instructionData = new JSONObject();
-					String key = "";
-					for(int i = 2, j = 1; i < array.length()-2; i++, j++) {
-						instruction = array.getJSONObject(i);
-						Iterator<?> iter = instruction.keys();
-						key = (String) iter.next();
-						instructionData = instruction.getJSONObject(key);
-						key = getProperSJInstruktionName(key);
-						
-						// ---------------------------------------------------
-						createHighlightEffect(key, instructionData, j);
-						// ---------------------------------------------------
-						
-					}
-					
-					// set all instructions 'already done'
-					for(int i = 0; i < kiviList.size()-1; i++) {
-						kiviList.get(i).setColor(ALREADY_DONE_MICROSTEP_FOREGROUND_COLOR);
-						kiviList.get(i).setBackgroundColor(ALREADY_DONE_MICROSTEP_BACKGROUND_COLOR);
-						kiviList.get(i).execute();
-					}
-					// set last instruction 'active'
-					kiviList.get(kiviList.size()-1).setColor(ACTIVE_MICROSTEP_FOREGROUND_COLOR);
-					kiviList.get(kiviList.size()-1).setBackgroundColor(ACTIVE_MICROSTEP_BACKGROUND_COLOR);
-					kiviList.get(kiviList.size()-1).execute();
-					// adjust microstep counter 
-					microStepNumber = kiviList.size()-1;
-					
-				} catch(JSONException e) {
-					e.printStackTrace();
-				}
-				// ----------------------------------------------------------
-				
-			} //end run()
-		}); // end syncExec()
-	}
-	
-	
-	
-	private static String getProperSJInstruktionName(String instr) {
-		for(int i = 0; i < sjInstructionsMapSize; i++) {
-			if( instr.equals(sjInstructionsMap[i][0]) ) {
-				return sjInstructionsMap[i][1];
-			}
-		}
-		return "INSTRUCTION MAPPING ERROR";
-	}
-		
-	
-	
-	
-	protected static void createHighlightEffect(String instrName, JSONObject instrData, int chronology) throws JSONException {
-		LabelInfo label = null;
-		System.out.print("$$$$$$>>> LABELS IN LIST: [");
-		for(LabelInfo info : labelList) {
-			System.out.print(info.getLabelName() + ", ");
-			if( info.getLabelName().equals(instrData.getString("label")) ) {
-				label = info;
-				break;
-			}
-		}
-		System.out.println("]");
-		
-		if( label == null ) {
-			System.err.println("=> Instruction >" + instrName + "< not found at label >" + instrData.getString("label") + "<! No such label!");
-		}
-		IMarker marker = null;
-		List<IMarker> list = label.getSJInstructions();
-		
-		// search for the instruction from current position to the end of the label range
-		for(int i = label.getSJInstructionCursor(); i < list.size(); i++) {
-			if( (list.get(i).getAttribute(ATTRIBUTE_INSTRUCTION_NAME, "NO NAME")).equals(instrName) ) {
-				marker = list.get(i);
-				label.setSJInstructionCursor(i+1);
-				break;
-			}
-		}
-		
-		// if instruction not found till end of label range goto label start and search from there
-		if( marker == null ) {
-			for(int i = 0; i < label.getSJInstructionCursor(); i++) {
-				if( (list.get(i).getAttribute(ATTRIBUTE_INSTRUCTION_NAME, "NO NAME")).equals(instrName) ) {
-					marker = list.get(i);
-					label.setSJInstructionCursor(i+1);
-					break;
-				}
-			}
-		}
-		
-		// if instruction not found at all -> ERROR!
-		if( marker == null ) {
-			if( instrName.equals("isPresent") ) {
-				System.out.println("=> skipping instruction >present<"); 
-				System.out.println("§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§\n");
-			} else {
-				System.err.println("=> Instruction >" + instrName + "< not found at label >" + label.getLabelName() + "<! No such instruction!");
-			}
-			return;
-		}
-		
-		// create highlight effect
-		HighlightSJMarkerEffect e = new HighlightSJMarkerEffect(marker, YET_TO_BE_DONE_MICROSTEP_FOREGROUND_COLOR, YET_TO_BE_DONE_MICROSTEP_BACKGROUND_COLOR, FOREGROUND_STANDARD_COLOR, BACKGROUND_STANDARD_COLOR, editor);
-		kiviList.add(e);
-	}
-	
-	
-	
-	
-	static void updateExecutionTraceViewer() {
-		Display.getDefault().syncExec(new Runnable() {
-			public void run() {
-				executionTraceViewer.setText(executionTraceUpdateData.toString());
-				executionTraceViewer.setSelection(executionTraceViewer.getCharCount()-1);
-			}
-		});
-	}
-	
-	
-	
-	
-	
-	// ======================================================================
-	// >>>>>>>>>>          INITIALIZATION UTILITY METHODS          <<<<<<<<<<
+	// >>>>>>>>>>        SJ INITIALIZATION UTILITY METHODS         <<<<<<<<<<
 	// ======================================================================
 	
 	public void rollbackSJContent() {
@@ -823,6 +684,146 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 	
 	
 	// ======================================================================
+	// >>>>>>>>>>            MACRO STEP UPDATE METHODS             <<<<<<<<<<
+	// ======================================================================
+	
+	static void updateJavaEditor() {
+		Display.getDefault().syncExec(new Runnable() {
+			public void run() {
+				
+				// ------------ undo highlight old instructions -------------
+				for(HighlightSJMarkerEffect e : kiviList) {
+					e.undo();
+				}
+				kiviList.clear();
+				// ----------------------------------------------------------
+				
+				// ----------------- highlight new labels -------------------
+				try {
+					JSONArray array = new JSONArray(sjInstructionsUpdateData);
+					JSONObject instruction = new JSONObject();
+					JSONObject instructionData = new JSONObject();
+					String key = "";
+					for(int i = 2, j = 1; i < array.length()-2; i++, j++) {
+						instruction = array.getJSONObject(i);
+						Iterator<?> iter = instruction.keys();
+						key = (String) iter.next();
+						instructionData = instruction.getJSONObject(key);
+						key = getProperSJInstruktionName(key);
+						
+						// ---------------------------------------------------
+						createHighlightEffect(key, instructionData, j);
+						// ---------------------------------------------------
+						
+					}
+					
+					// set all instructions 'already done'
+					for(int i = 0; i < kiviList.size()-1; i++) {
+						kiviList.get(i).setColor(ALREADY_DONE_MICROSTEP_FOREGROUND_COLOR);
+						kiviList.get(i).setBackgroundColor(ALREADY_DONE_MICROSTEP_BACKGROUND_COLOR);
+						kiviList.get(i).execute();
+					}
+					// set last instruction 'active'
+					kiviList.get(kiviList.size()-1).setColor(ACTIVE_MICROSTEP_FOREGROUND_COLOR);
+					kiviList.get(kiviList.size()-1).setBackgroundColor(ACTIVE_MICROSTEP_BACKGROUND_COLOR);
+					kiviList.get(kiviList.size()-1).execute();
+					// adjust microstep counter 
+					microStepNumber = kiviList.size()-1;
+					
+				} catch(JSONException e) {
+					e.printStackTrace();
+				}
+				// ----------------------------------------------------------
+				
+			} //end run()
+		}); // end syncExec()
+	}
+	
+	
+	
+	private static String getProperSJInstruktionName(String instr) {
+		for(int i = 0; i < sjInstructionsMapSize; i++) {
+			if( instr.equals(sjInstructionsMap[i][0]) ) {
+				return sjInstructionsMap[i][1];
+			}
+		}
+		return "INSTRUCTION MAPPING ERROR";
+	}
+		
+	
+	
+	
+	protected static void createHighlightEffect(String instrName, JSONObject instrData, int chronology) throws JSONException {
+		LabelInfo label = null;
+		System.out.print("$$$$$$>>> LABELS IN LIST: [");
+		for(LabelInfo info : labelList) {
+			System.out.print(info.getLabelName() + ", ");
+			if( info.getLabelName().equals(instrData.getString("label")) ) {
+				label = info;
+				break;
+			}
+		}
+		System.out.println("]");
+		
+		if( label == null ) {
+			System.err.println("=> Instruction >" + instrName + "< not found at label >" + instrData.getString("label") + "<! No such label!");
+		}
+		IMarker marker = null;
+		List<IMarker> list = label.getSJInstructions();
+		
+		// search for the instruction from current position to the end of the label range
+		for(int i = label.getSJInstructionCursor(); i < list.size(); i++) {
+			if( (list.get(i).getAttribute(ATTRIBUTE_INSTRUCTION_NAME, "NO NAME")).equals(instrName) ) {
+				marker = list.get(i);
+				label.setSJInstructionCursor(i+1);
+				break;
+			}
+		}
+		
+		// if instruction not found till end of label range goto label start and search from there
+		if( marker == null ) {
+			for(int i = 0; i < label.getSJInstructionCursor(); i++) {
+				if( (list.get(i).getAttribute(ATTRIBUTE_INSTRUCTION_NAME, "NO NAME")).equals(instrName) ) {
+					marker = list.get(i);
+					label.setSJInstructionCursor(i+1);
+					break;
+				}
+			}
+		}
+		
+		// if instruction not found at all -> ERROR!
+		if( marker == null ) {
+			if( instrName.equals("isPresent") ) {
+				System.out.println("=> skipping instruction >present<"); 
+				System.out.println("§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§\n");
+			} else {
+				System.err.println("=> Instruction >" + instrName + "< not found at label >" + label.getLabelName() + "<! No such instruction!");
+			}
+			return;
+		}
+		
+		// create highlight effect
+		HighlightSJMarkerEffect e = new HighlightSJMarkerEffect(marker, YET_TO_BE_DONE_MICROSTEP_FOREGROUND_COLOR, YET_TO_BE_DONE_MICROSTEP_BACKGROUND_COLOR, FOREGROUND_STANDARD_COLOR, BACKGROUND_STANDARD_COLOR, editor);
+		kiviList.add(e);
+	}
+	
+	
+	
+	
+	static void updateExecutionTraceViewer() {
+		Display.getDefault().syncExec(new Runnable() {
+			public void run() {
+				executionTraceViewer.setText(executionTraceUpdateData.toString());
+				executionTraceViewer.setSelection(executionTraceViewer.getCharCount()-1);
+			}
+		});
+	}
+	
+	
+	
+	
+		
+	// ======================================================================
 	// >>>>>>>>>>     INTERACTIONS WITH THE KIEM DATA OBSERVER     <<<<<<<<<<
 	// ======================================================================
 	
@@ -862,6 +863,7 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 	// ======================================================================
 	
 	public void doMicroStepForwards() {
+		System.out.println(">>> editor.doMicroStepForwards() >>> microStepNumber = " + microStepNumber);
 		if( microStepNumber >= kiviList.size()-1 ) {
 			return;
 		}
@@ -960,6 +962,8 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 			kiviList.get(indexArray[i]).setBackgroundColor(ACTIVE_MICROSTEP_BACKGROUND_COLOR);
 			kiviList.get(indexArray[i]).execute();
 		}
+		// adjust microStepNumber
+		microStepNumber = indexArray[0];
 	}
 	
 	
@@ -1060,8 +1064,8 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 	
 	
 //	private void fillLabelList() {
-//		// FIXME: Find a way to deal with 'case' inside of a comment!
-//		// FIXME: Initialization method is needed in case the editor's content is edited and execution is started again
+//		// fixme: Find a way to deal with 'case' inside of a comment!
+//		// fixme: Initialization method is needed in case the editor's content is edited and execution is started again
 //		labelList.clear();
 //		
 //		// -----------------------------------------------------------------------------------

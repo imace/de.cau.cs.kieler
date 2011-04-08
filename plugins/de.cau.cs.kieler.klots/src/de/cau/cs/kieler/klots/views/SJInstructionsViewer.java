@@ -12,7 +12,7 @@ public class SJInstructionsViewer extends TreeViewer {
     // -------------------------------------------------------------------------
 
     /**
-     * Instantiates a new DataTableViewer.
+     * Instantiates a new SJInstructionsViewer.
      * 
      * @param parent
      *            the composite parent
@@ -26,7 +26,7 @@ public class SJInstructionsViewer extends TreeViewer {
     // -------------------------------------------------------------------------
 
     /**
-     * Instantiates a new DataTableViewer.
+     * Instantiates a new SJInstructionsViewer.
      * 
      * @param parent
      *            the composite parent
@@ -38,7 +38,7 @@ public class SJInstructionsViewer extends TreeViewer {
     // -------------------------------------------------------------------------
 
     /**
-     * Instantiates a new DataTableViewer.
+     * Instantiates a new SJInstructionsViewer.
      * 
      * @param table
      *            the table

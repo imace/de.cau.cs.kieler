@@ -58,13 +58,12 @@ public class SJInstructionsDataList {
         Display.getDefault().asyncExec(new Runnable() {
             public void run() {
                 viewer.refresh();
-                
-                // --------------------------------------------------------
+                // select the last microstep in the SJ instructions view
                 int i = viewer.getTree().getItemCount();
-                // FIXME: IndexOutOfBoundsException on STARTUP?
-				viewer.getTree().setSelection(viewer.getTree().getItem(i-1));
-                // --------------------------------------------------------
-                
+                // on STARTUP and END there are no microsteps
+                if( i > 0 ) {
+                	viewer.getTree().setSelection(viewer.getTree().getItem(i-1));
+                }
             }
         });
     }
