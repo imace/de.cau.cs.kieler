@@ -766,7 +766,7 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 			marker.setAttribute(IMarker.CHAR_END, instrEnd);
 			marker.setAttribute(IMarker.MESSAGE, msg);
 			//marker.setAttribute(IMarker.PRIORITY, IMarker.PRIORITY_HIGH);
-			//marker.setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_ERROR);
+			//marker.setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_INFO);
 			return marker;
 		} catch (CoreException e) {
 			// You need to handle the cases where attribute value is rejected

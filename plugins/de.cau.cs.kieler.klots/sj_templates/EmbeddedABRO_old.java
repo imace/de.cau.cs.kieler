@@ -13,10 +13,7 @@
  */
 package examples;
 
-import java.io.IOException;
-
 import sj.EmbeddedSJProgram;
-import sj.EmbeddedSJProgramStarter;
 import sj.Signal;
 import examples.EmbeddedABRO.StateLabel;
 import static examples.EmbeddedABRO.StateLabel.*;
@@ -28,7 +25,7 @@ import static examples.EmbeddedABRO.StateLabel.*;
  * For informations about SC see the <a href="http://www.informatik.uni-kiel.de/rtsys/sc"
  * target="_parent">SC homepage</a>.
  * 
- * @author mhei, ybe
+ * @author mhei
  * @see ABRO
  * 
  */
@@ -37,7 +34,9 @@ public class EmbeddedABRO extends EmbeddedSJProgram<StateLabel> {
     /**
      * The labels used for the different parts of the program.
      */
-    enum StateLabel { ABO, AB, WaitA, WaitB, ABMain, ABOMain }
+    enum StateLabel {
+        ABO, AB, WaitA, WaitB, ABMain, ABOMain
+    }
 
     /**
      * The signals used by the Program.
@@ -63,15 +62,6 @@ public class EmbeddedABRO extends EmbeddedSJProgram<StateLabel> {
         o = new Signal("o");
         addSignals(a, b, r, o);
     }
-    
-    
-    public static void main(String[] args) {
-    	try {
-    		EmbeddedSJProgramStarter.start( new EmbeddedABRO(), "ABRO" );
-    	} catch (IOException e) {
-    	}
-    }
-    
 
     @Override
     public void tick() {
@@ -81,7 +71,7 @@ public class EmbeddedABRO extends EmbeddedSJProgram<StateLabel> {
                 fork(AB, 1);
                 forkEB(ABOMain);
                 break;
-                
+
             case AB:
                 fork(WaitA, 2);
                 fork(WaitB, 3);

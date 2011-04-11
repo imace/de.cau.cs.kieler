@@ -80,12 +80,13 @@ public class NXTDataDistributorWithKiVi extends JSONObjectDataComponent implemen
 				jSONKey = (String) iter.next();
 				if( JSONSignalValues.isPresent(jSONObject.get(jSONKey)) ) {
 					if( JSONSignalValues.isSignalValue(jSONObject.get(jSONKey)) ) {
-						msg += jSONKey + "," + JSONSignalValues.getSignalValue(jSONObject.get(jSONKey)) + "\n";
+						msg += jSONKey + "," + JSONSignalValues.getSignalValue(jSONObject.get(jSONKey)) + ";";
 					} else {
-						msg += jSONKey + "\n";
+						msg += jSONKey + ";";
 					}
 		        }
 			}
+			msg = msg.substring(0, msg.length()-1);
 		} catch (JSONException e) {
 			printConsole("PRODUCER ERROR: " + e.getMessage());
         }

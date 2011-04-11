@@ -61,7 +61,7 @@ public class SJInstructionsView extends ViewPart {
     /** The tree viewer. */
     private SJInstructionsViewer viewer;
     
-    private int microStepCounter = 0;
+    private int microStepCounter = -1;
     
     
     // microstep actions
@@ -156,6 +156,11 @@ public class SJInstructionsView extends ViewPart {
         			IStructuredSelection selection = (IStructuredSelection)event.getSelection();
         			List<SJInstructionsData> list = new LinkedList<SJInstructionsData>();
         			
+        			// set microstep counter to point at the last instruction on every new macrostep
+        			if( microStepCounter == -1 ) {
+        				microStepCounter = viewer.getTree().getItemCount()-1;
+        			}
+        			
         			// ------------------------------------------------------
         			// XXX: in this KLOTS release, process only the first element of the selection
         			SJInstructionsData data = (SJInstructionsData) selection.getFirstElement();
@@ -226,10 +231,6 @@ public class SJInstructionsView extends ViewPart {
         				} else {
         					System.out.println("###>>> LISTENER MICRO STEP BACKWARDS ERROR: No active editor!");
         				}
-        				// OLD IMPLEMENTATION: TO BE REMOVED
-//        				// set the selection to the next item because 'microStepBackwards' decrements the selection
-//        				viewer.getTree().setSelection(viewer.getTree().getItem(i+1));
-//        				microStepBackwards.run();
         				return;
         			}
         			
@@ -273,7 +274,7 @@ public class SJInstructionsView extends ViewPart {
 		IEditorPart  editorPart = KlotsPlugin.getDefault().getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
 		if(editorPart != null) {
 			SJEditorWithKiVi e = (SJEditorWithKiVi) editorPart;
-			// TODO: OPTIMIZE in the next release if multiple selections are wished!!!
+			// XXX: OPTIMIZE in the next release if multiple selections are wished!!!
 			// e.g. add an index variable to the SJInstructionsData class
 			SJInstructionsData[] sjInstructionsDataListArray = list.get(0).getParentSJInstructionsDataList().getArray();
 			int[] indexArray = new int[list.size()];
@@ -425,6 +426,11 @@ public class SJInstructionsView extends ViewPart {
 				IEditorPart  editorPart = KlotsPlugin.getDefault().getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
 				if(editorPart != null) {
 					
+					// set microstep counter to point at the last instruction on every new macrostep
+        			if( microStepCounter == -1 ) {
+        				microStepCounter = viewer.getTree().getItemCount()-1;
+        			}
+					
 					// do a backward step in the editor
 					SJEditorWithKiVi e = (SJEditorWithKiVi) editorPart;
 					e.doMicroStepBackwards();
@@ -531,7 +537,8 @@ public class SJInstructionsView extends ViewPart {
 					microStepBackwardsAll.setEnabled(true);
 				}
 
-				microStepCounter = viewer.getTree().getItemCount()-1;
+				// reset microstep counter on every macrostep
+				microStepCounter = -1;
 			}
 		};
 		kiemStepForwards.setText("KIEM Macrostep Forwards");
@@ -550,7 +557,8 @@ public class SJInstructionsView extends ViewPart {
 				microStepBackwards.setEnabled(true);
 				microStepBackwardsAll.setEnabled(true);
 				
-				microStepCounter = viewer.getTree().getItemCount()-1;
+				// reset microstep counter on every macrostep
+				microStepCounter = -1;
 			}
 		};
 		kiemStepBackwards.setText("KIEM Macrostep Backwards");
@@ -575,6 +583,9 @@ public class SJInstructionsView extends ViewPart {
 				microStepForwardsAll.setEnabled(false);
 				microStepBackwards.setEnabled(false);
 				microStepBackwardsAll.setEnabled(false);
+				
+				// reset microstep counter on starting macrostep
+				microStepCounter = -1;
 			}
 		};
 		kiemRun.setText("KIEM Run");

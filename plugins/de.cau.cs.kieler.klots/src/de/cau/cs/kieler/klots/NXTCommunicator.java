@@ -53,6 +53,7 @@ public class NXTCommunicator {
 	
 	
 	public int sendMessage(String msg) {
+		System.out.println("[+][+][+][+][+][+][+][+][+] SENDING MESSAGE TO NXT: >" + msg + "<");
 		try {
 			dos.writeBytes(msg + "\nEOT\n");
 			dos.flush();

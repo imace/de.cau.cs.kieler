@@ -11,9 +11,7 @@ import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.IWorkbenchActionConstants;
-import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.ActionFactory;
-import org.eclipse.ui.ide.IDE;
 import org.eclipse.ui.ide.IDEActionFactory;
 import org.eclipse.ui.part.MultiPageEditorActionBarContributor;
 import org.eclipse.ui.texteditor.ITextEditor;
@@ -135,10 +133,22 @@ public class SJEditorWithKiViContributor extends MultiPageEditorActionBarContrib
 //					" & nxjlink -cp \"" + projectName + Path.SEPARATOR + "embeddedSJ.jar;" + projectName + "\" " +
 //					"." + Path.SEPARATOR + "examples" + Path.SEPARATOR + "EmbeddedABROMain2 " +
 //					"-o " + projectName + Path.SEPARATOR + "eABRO2.nxj\"";
+					
+					
+					// ------------------------------------------------------
+					// XXX: TESTING SOMETHING NEW!
+//					String linkCommand = "\"cd " + projectPath + 
+//					" & nxjlink -cp \"" + projectName + Path.SEPARATOR + "embeddedSJ.jar;" + projectName + Path.SEPARATOR + "bin\" " +
+//					"." + Path.SEPARATOR + "examples" + Path.SEPARATOR + fileName + "Main " +
+//					"-o " + projectName + Path.SEPARATOR + "bin" + Path.SEPARATOR + fileName + ".nxj\"";
+					
 					String linkCommand = "\"cd " + projectPath + 
-					" & nxjlink -cp \"" + projectName + Path.SEPARATOR + "embeddedSJ.jar;" + projectName + Path.SEPARATOR + "bin\" " +
-					"." + Path.SEPARATOR + "examples" + Path.SEPARATOR + fileName + "Main " +
-					"-o " + projectName + Path.SEPARATOR + "bin" + Path.SEPARATOR + fileName + ".nxj\"";
+					" & nxjlink -v -cp \"" + projectName + Path.SEPARATOR + "embeddedSJ.jar;" + projectName + Path.SEPARATOR + "bin\" " +
+					"." + Path.SEPARATOR + "examples" + Path.SEPARATOR + fileName + " " +
+					"-o " + projectName + Path.SEPARATOR + "bin" + Path.SEPARATOR + fileName + ".nxj > " + projectName + Path.SEPARATOR + "build.log\"";
+					// ------------------------------------------------------
+					
+					
 					System.out.println("###--->>> LINK COMMAND STRING: " + linkCommand);
 					Process link = rt.exec("cmd /C " + linkCommand);
 					link.waitFor();
@@ -153,8 +163,8 @@ public class SJEditorWithKiViContributor extends MultiPageEditorActionBarContrib
 		};
 		compileAndLink.setText("Build program");
 		compileAndLink.setToolTipText("Build the embedded SJ program");
-		compileAndLink.setImageDescriptor(PlatformUI.getWorkbench().getSharedImages().
-				getImageDescriptor(IDE.SharedImages.IMG_OPEN_MARKER));
+		compileAndLink.setImageDescriptor( KlotsPlugin.imageDescriptorFromPlugin(KlotsPlugin.PLUGIN_ID, "icons/linkIcon.png") );
+//		compileAndLink.setDisabledImageDescriptor( KlotsPlugin.imageDescriptorFromPlugin(KlotsPlugin.PLUGIN_ID, "icons/KIEMstepIconDisabled.png") );
 
 		
 		// --------------------- download to NXT ----------------------
@@ -194,8 +204,8 @@ public class SJEditorWithKiViContributor extends MultiPageEditorActionBarContrib
 		};
 		downloadToNXT.setText("Download to NXT");
 		downloadToNXT.setToolTipText("Download embeded SJ erogram to NXT");
-		downloadToNXT.setImageDescriptor(PlatformUI.getWorkbench().getSharedImages().
-				getImageDescriptor(IDE.SharedImages.IMG_OBJS_TASK_TSK));
+		downloadToNXT.setImageDescriptor( KlotsPlugin.imageDescriptorFromPlugin(KlotsPlugin.PLUGIN_ID, "icons/downloadIcon.png") );
+//		downloadToNXT.setDisabledImageDescriptor( KlotsPlugin.imageDescriptorFromPlugin(KlotsPlugin.PLUGIN_ID, "icons/KIEMstepIconDisabled.png") );
 		// ------------------------------------------------------------------
 		
 		
@@ -268,12 +278,15 @@ public class SJEditorWithKiViContributor extends MultiPageEditorActionBarContrib
 	
 	
 	
-	public void contributeToMenu(IMenuManager manager) {
-		IMenuManager menu = new MenuManager("Embedded &SJ &Menu");
-		manager.prependToGroup(IWorkbenchActionConstants.MB_ADDITIONS, menu);
-		menu.add(compileAndLink);
-		menu.add(downloadToNXT);
-	}
+	// ----------------------------------------------------------------------
+	// XXX: No menu contribution, for now buttons on the toolbar suffice
+	//public void contributeToMenu(IMenuManager manager) {
+		//IMenuManager menu = new MenuManager("Embedded &SJ &Menu");
+		//manager.prependToGroup(IWorkbenchActionConstants.MB_ADDITIONS, menu);
+		//menu.add(compileAndLink);
+		//menu.add(downloadToNXT);
+	//}
+	// ----------------------------------------------------------------------
 	
 	public void contributeToToolBar(IToolBarManager manager) {
 		manager.add(new Separator());
