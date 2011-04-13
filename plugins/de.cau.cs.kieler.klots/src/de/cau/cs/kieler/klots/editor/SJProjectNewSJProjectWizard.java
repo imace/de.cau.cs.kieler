@@ -173,6 +173,13 @@ public class SJProjectNewSJProjectWizard extends Wizard implements INewWizard,
 			InputStream resourceStream = this.getClass().getResourceAsStream(templatesPath + "embeddedSJ.jar");
 			System.out.println("$$$$$$$$$$ EMBEDDED SJ PATH: " + this.getClass().getResource(templatesPath + "embeddedSJ.jar").getPath());
 			addFileToProject(container, new Path("embeddedSJ.jar"), resourceStream, monitor);
+			
+			// --------------------------------------------------------------
+			// XXX: NEW!
+			resourceStream = this.getClass().getResourceAsStream(templatesPath + Path.SEPARATOR + "lejos" + Path.SEPARATOR + "classes.jar");
+			addFileToProject(container, new Path("classes.jar"), resourceStream, monitor);
+			// --------------------------------------------------------------
+			
 			resourceStream = this.getClass().getResourceAsStream(templatesPath + "EmbeddedABRO.java");
 			addFileToProject(container, new Path(examplesPath + Path.SEPARATOR + "EmbeddedABRO.java"), resourceStream, monitor);
 			

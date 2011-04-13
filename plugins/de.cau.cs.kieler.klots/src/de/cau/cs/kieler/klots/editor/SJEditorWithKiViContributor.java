@@ -1,8 +1,14 @@
 package de.cau.cs.kieler.klots.editor;
 
+import java.io.IOException;
+import java.net.URL;
+
 import de.cau.cs.kieler.klots.KlotsPlugin;
 
+import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.jface.action.*;
@@ -10,12 +16,13 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IFileEditorInput;
-import org.eclipse.ui.IWorkbenchActionConstants;
 import org.eclipse.ui.actions.ActionFactory;
 import org.eclipse.ui.ide.IDEActionFactory;
 import org.eclipse.ui.part.MultiPageEditorActionBarContributor;
 import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.ui.texteditor.ITextEditorActionConstants;
+import org.osgi.framework.Bundle;
+
 
 /**
  * Manages the installation/deinstallation of global actions for multi-page editors.
@@ -103,6 +110,13 @@ public class SJEditorWithKiViContributor extends MultiPageEditorActionBarContrib
 				String projectName = "";
 				String projectPath = "";
 				String fileName = "";
+				
+				String pluginPath = "";
+				String lejosPath = "";
+			    String bcelPath = "";
+			    String bluecovePath = "";
+			    String commons_cliPath = "";
+				
 				IEditorPart  editorPart = KlotsPlugin.getDefault().getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
 				if(editorPart != null) {
 					SJEditorWithKiVi e = (SJEditorWithKiVi) editorPart;
@@ -114,7 +128,29 @@ public class SJEditorWithKiViContributor extends MultiPageEditorActionBarContrib
 				    projectName = activeProject.getName();
 				    projectPath = activeProject.getLocation().toOSString();
 				    projectPath = projectPath.substring(0, projectPath.lastIndexOf(projectName));
-				    projectName = "." + Path.SEPARATOR + projectName;
+				    
+				    //projectName = "." + Path.SEPARATOR + projectName;
+				    
+				    // ------------------------------------------------------
+				    // XXX: NEW!!!
+				    Bundle bundle = Platform.getBundle(KlotsPlugin.PLUGIN_ID);
+				    Path path = new Path("icons/editor.gif");
+				    URL fileURL = FileLocator.find(bundle, path, null);
+				    try {
+						pluginPath = FileLocator.toFileURL(fileURL).toString();
+						pluginPath = pluginPath.replace("de.cau.cs.kieler.klots/icons/editor.gif", "");
+						pluginPath = pluginPath.replaceFirst("file:/", "");
+						System.out.println("????????? PATH: >" + pluginPath + "<");
+					} catch (IOException ioe) {
+						ioe.printStackTrace();
+					}
+				    
+				    lejosPath = pluginPath + "org.lejos";
+				    bcelPath = pluginPath + "org.lejos.3rdparty.bcel";
+				    bluecovePath = pluginPath + "org.lejos.3rdparty.bluecove";
+				    commons_cliPath = pluginPath + "org.lejos.3rdparty.commons-cli";
+				    // ------------------------------------------------------
+				    
 				} else {
 					System.out.println("###>>> COMPILE PATH ERROR: No active editor!");
 				}
@@ -142,15 +178,29 @@ public class SJEditorWithKiViContributor extends MultiPageEditorActionBarContrib
 //					"." + Path.SEPARATOR + "examples" + Path.SEPARATOR + fileName + "Main " +
 //					"-o " + projectName + Path.SEPARATOR + "bin" + Path.SEPARATOR + fileName + ".nxj\"";
 					
-					String linkCommand = "\"cd " + projectPath + 
-					" & nxjlink -v -cp \"" + projectName + Path.SEPARATOR + "embeddedSJ.jar;" + projectName + Path.SEPARATOR + "bin\" " +
+					// XXX: LAST WORKING!
+//					String linkCommand = "\"cd " + projectPath + 
+//					" & nxjlink -v -cp \"" + projectName + Path.SEPARATOR + "embeddedSJ.jar;" + projectName + Path.SEPARATOR + "bin\" " +
+//					"." + Path.SEPARATOR + "examples" + Path.SEPARATOR + fileName + " " +
+//					"-o " + projectName + Path.SEPARATOR + "bin" + Path.SEPARATOR + fileName + ".nxj > " + projectName + Path.SEPARATOR + "build.log\"";
+					
+				    // XXX: STANDALONE VERSION WORKING ONLY WITH CMD AND BASH
+					String linkCommand = "java -Dnxj.home=\"" + lejosPath +
+					"\" -DCOMMAND_NAME=\"nxjlink\" -Djava.library.path=\"" +
+					lejosPath + Path.SEPARATOR + "bin" + "\" -classpath \"" +
+					bluecovePath + ";" + bcelPath + ";" + commons_cliPath + ";" + lejosPath +
+					"\" js.tinyvm.TinyVM --bootclasspath \"" + lejosPath +
+					"\" --writeorder \"LE\" --classpath \".\" " +
+					"-v -cp \"" + projectPath + projectName + Path.SEPARATOR + "embeddedSJ.jar;" + projectPath + projectName + Path.SEPARATOR + "bin\" " +
 					"." + Path.SEPARATOR + "examples" + Path.SEPARATOR + fileName + " " +
-					"-o " + projectName + Path.SEPARATOR + "bin" + Path.SEPARATOR + fileName + ".nxj > " + projectName + Path.SEPARATOR + "build.log\"";
+					"-o " + projectPath + projectName + Path.SEPARATOR + "bin" + Path.SEPARATOR + fileName + ".nxj > " + projectPath + projectName + Path.SEPARATOR + "build.log";
 					// ------------------------------------------------------
 					
-					
 					System.out.println("###--->>> LINK COMMAND STRING: " + linkCommand);
-					Process link = rt.exec("cmd /C " + linkCommand);
+					
+//					Process link = rt.exec("cmd /C " + linkCommand);
+					Process link = rt.exec(linkCommand);
+					
 					link.waitFor();
 					System.out.println("------> OK <-------");
 					link.destroy();
@@ -173,6 +223,13 @@ public class SJEditorWithKiViContributor extends MultiPageEditorActionBarContrib
 				String projectName = "";
 				String projectPath = "";
 				String fileName = "";
+				
+				String pluginPath = "";
+				String lejosPath = "";
+			    String bcelPath = "";
+			    String bluecovePath = "";
+			    String commons_cliPath = "";
+				
 				IEditorPart  editorPart = KlotsPlugin.getDefault().getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
 				if(editorPart != null) {
 					SJEditorWithKiVi e = (SJEditorWithKiVi) editorPart;
@@ -184,17 +241,50 @@ public class SJEditorWithKiViContributor extends MultiPageEditorActionBarContrib
 				    projectName = activeProject.getName();
 				    projectPath = activeProject.getLocation().toOSString();
 				    projectPath = projectPath.substring(0, projectPath.lastIndexOf(projectName));
-				    projectName = "." + Path.SEPARATOR + projectName;
+				    
+				    
+//				    projectName = "." + Path.SEPARATOR + projectName;
+				    
+				    // ------------------------------------------------------
+				    // XXX: NEW!!!
+				    Bundle bundle = Platform.getBundle(KlotsPlugin.PLUGIN_ID);
+				    Path path = new Path("icons/editor.gif");
+				    URL fileURL = FileLocator.find(bundle, path, null);
+				    try {
+						pluginPath = FileLocator.toFileURL(fileURL).toString();
+						pluginPath = pluginPath.replace("de.cau.cs.kieler.klots/icons/editor.gif", "");
+						pluginPath = pluginPath.replaceFirst("file:/", "");
+						System.out.println("????????? PATH: >" + pluginPath + "<");
+					} catch (IOException ioe) {
+						ioe.printStackTrace();
+					}
+				    
+				    lejosPath = pluginPath + "org.lejos";
+				    bcelPath = pluginPath + "org.lejos.3rdparty.bcel";
+				    bluecovePath = pluginPath + "org.lejos.3rdparty.bluecove";
+				    commons_cliPath = pluginPath + "org.lejos.3rdparty.commons-cli";
+				    
 				} else {
 					System.out.println("###>>> DOWNLOAD TO NXT PATH ERROR: No active editor!");
 				}
 				try {
 					Runtime rt = Runtime.getRuntime() ;
 					// download to NXT
-					String downloadToNXTCommand = "\"cd " + projectPath +
-					" & nxjupload -b -r " + projectName + Path.SEPARATOR + "bin" + Path.SEPARATOR + fileName + ".nxj\"";
+//					String downloadToNXTCommand = "\"cd " + projectPath +
+//					" & nxjupload -b -r " + projectName + Path.SEPARATOR + "bin" + Path.SEPARATOR + fileName + ".nxj\"";
+					
+					// XXX: STANDALONE VERSION WORKING ONLY WITH CMD AND BASH
+					String downloadToNXTCommand = "java -Dnxj.home=\"" + lejosPath +
+					"\" -DCOMMAND_NAME=\"nxjupload\" -Djava.library.path=\"" +
+					lejosPath + Path.SEPARATOR + "bin" + "\" -classpath \"" +
+					bcelPath + ";" + bluecovePath + ";" + commons_cliPath + ";" +
+					lejosPath + "\" lejos.pc.tools.NXJUpload " +
+					"-b -r " + projectPath + projectName + Path.SEPARATOR + "bin" + Path.SEPARATOR + fileName + ".nxj";
+					// ------------------------------------------------------
+					
 					System.out.println("###--->>> DOWNLOAD COMMAND STRING: " + downloadToNXTCommand);
-					Process upload = rt.exec("cmd /C " + downloadToNXTCommand);
+//					Process upload = rt.exec("cmd /C " + downloadToNXTCommand);
+					Process upload = rt.exec(downloadToNXTCommand);
 					upload.waitFor();
 					MessageDialog.openInformation(null, "Embedded SJ", "Embedded SJ program downloaded successfully to NXT!");
 				} catch(Exception e) {
