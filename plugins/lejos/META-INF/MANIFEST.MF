@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Lejosplugins
 Bundle-SymbolicName: lejos
-Bundle-Version: 1.0.0
+Bundle-Version: 1.0.0.qualifier
 Bundle-ClassPath: .
 Export-Package: com.ibm.oti.connection.btgoep,
  com.ibm.oti.connection.btl2cap,
