@@ -1,12 +1,14 @@
 package de.cau.cs.kieler.klots.editor;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URL;
 
 import de.cau.cs.kieler.klots.KlotsPlugin;
 
 import org.eclipse.core.runtime.FileLocator;
-import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.resources.IFile;
@@ -132,7 +134,7 @@ public class SJEditorWithKiViContributor extends MultiPageEditorActionBarContrib
 				    //projectName = "." + Path.SEPARATOR + projectName;
 				    
 				    // ------------------------------------------------------
-				    // XXX: NEW!!!
+				    // XXX: LAST CHANGES
 				    Bundle bundle = Platform.getBundle(KlotsPlugin.PLUGIN_ID);
 				    Path path = new Path("icons/editor.gif");
 				    URL fileURL = FileLocator.find(bundle, path, null);
@@ -185,6 +187,18 @@ public class SJEditorWithKiViContributor extends MultiPageEditorActionBarContrib
 //					"-o " + projectName + Path.SEPARATOR + "bin" + Path.SEPARATOR + fileName + ".nxj > " + projectName + Path.SEPARATOR + "build.log\"";
 					
 				    // XXX: STANDALONE VERSION WORKING ONLY WITH CMD AND BASH
+//					String linkCommand = "java -Dnxj.home=\"" + lejosPath +
+//					"\" -DCOMMAND_NAME=\"nxjlink\" -Djava.library.path=\"" +
+//					lejosPath + Path.SEPARATOR + "bin" + "\" -classpath \"" +
+//					bluecovePath + ";" + bcelPath + ";" + commons_cliPath + ";" + lejosPath +
+//					"\" js.tinyvm.TinyVM --bootclasspath \"" + lejosPath +
+//					"\" --writeorder \"LE\" --classpath \".\" " +
+//					"-v -cp \"" + projectPath + projectName + Path.SEPARATOR + "embeddedSJ.jar;" + projectPath + projectName + Path.SEPARATOR + "bin\" " +
+//					"." + Path.SEPARATOR + "examples" + Path.SEPARATOR + fileName + " " +
+//					"-o " + projectPath + projectName + Path.SEPARATOR + "bin" + Path.SEPARATOR + fileName + ".nxj > " + projectPath + projectName + Path.SEPARATOR + "build.log";
+					
+					// ------------------------------------------------------
+				    // XXX: FINAL STANDALONE WORKING!
 					String linkCommand = "java -Dnxj.home=\"" + lejosPath +
 					"\" -DCOMMAND_NAME=\"nxjlink\" -Djava.library.path=\"" +
 					lejosPath + Path.SEPARATOR + "bin" + "\" -classpath \"" +
@@ -193,7 +207,7 @@ public class SJEditorWithKiViContributor extends MultiPageEditorActionBarContrib
 					"\" --writeorder \"LE\" --classpath \".\" " +
 					"-v -cp \"" + projectPath + projectName + Path.SEPARATOR + "embeddedSJ.jar;" + projectPath + projectName + Path.SEPARATOR + "bin\" " +
 					"." + Path.SEPARATOR + "examples" + Path.SEPARATOR + fileName + " " +
-					"-o " + projectPath + projectName + Path.SEPARATOR + "bin" + Path.SEPARATOR + fileName + ".nxj > " + projectPath + projectName + Path.SEPARATOR + "build.log";
+					"-o " + projectPath + projectName + Path.SEPARATOR + "bin" + Path.SEPARATOR + fileName + ".nxj";
 					// ------------------------------------------------------
 					
 					System.out.println("###--->>> LINK COMMAND STRING: " + linkCommand);
@@ -201,10 +215,18 @@ public class SJEditorWithKiViContributor extends MultiPageEditorActionBarContrib
 //					Process link = rt.exec("cmd /C " + linkCommand);
 					Process link = rt.exec(linkCommand);
 					
+					InputStream is = link.getInputStream();
+					InputStreamReader isr = new InputStreamReader(is);
+					BufferedReader br = new BufferedReader(isr);
+					String line;
+					while ((line = br.readLine()) != null) {
+						System.out.println(line);
+					}
+					
+				       
 					link.waitFor();
 					System.out.println("------> OK <-------");
 					link.destroy();
-//					compile.destroy();
 					MessageDialog.openInformation(null, "Embedded SJ", "Embedded SJ program compiled and linked successfully!");
 				} catch(Exception e) {
 					e.printStackTrace();
