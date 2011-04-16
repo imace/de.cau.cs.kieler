@@ -147,10 +147,14 @@ public class SJEditorWithKiViContributor extends MultiPageEditorActionBarContrib
 						ioe.printStackTrace();
 					}
 				    
-				    lejosPath = pluginPath + "org.lejos";
-				    bcelPath = pluginPath + "org.lejos.3rdparty.bcel";
-				    bluecovePath = pluginPath + "org.lejos.3rdparty.bluecove";
-				    commons_cliPath = pluginPath + "org.lejos.3rdparty.commons-cli";
+//				    lejosPath = pluginPath + "org.lejos";
+//				    bcelPath = pluginPath + "org.lejos.3rdparty.bcel";
+//				    bluecovePath = pluginPath + "org.lejos.3rdparty.bluecove";
+//				    commons_cliPath = pluginPath + "org.lejos.3rdparty.commons-cli";
+					lejosPath = pluginPath + "org.lejos.nxt";
+				    bcelPath = pluginPath + "org.lejos.pc.all";
+				    bluecovePath = pluginPath + "org.lejos.pc.all";
+				    commons_cliPath = pluginPath + "org.lejos.pc.all";
 				    // ------------------------------------------------------
 				    
 				} else {
@@ -281,10 +285,16 @@ public class SJEditorWithKiViContributor extends MultiPageEditorActionBarContrib
 						ioe.printStackTrace();
 					}
 				    
-				    lejosPath = pluginPath + "org.lejos";
-				    bcelPath = pluginPath + "org.lejos.3rdparty.bcel";
-				    bluecovePath = pluginPath + "org.lejos.3rdparty.bluecove";
-				    commons_cliPath = pluginPath + "org.lejos.3rdparty.commons-cli";
+					
+//				    lejosPath = pluginPath + "org.lejos";
+//				    bcelPath = pluginPath + "org.lejos.3rdparty.bcel";
+//				    bluecovePath = pluginPath + "org.lejos.3rdparty.bluecove";
+//				    commons_cliPath = pluginPath + "org.lejos.3rdparty.commons-cli";
+					lejosPath = pluginPath + "org.lejos.nxt";
+				    bcelPath = pluginPath + "org.lejos.pc.all";
+				    bluecovePath = pluginPath + "org.lejos.pc.all";
+				    commons_cliPath = pluginPath + "org.lejos.pc.all";
+					
 				    
 				} else {
 					System.out.println("###>>> DOWNLOAD TO NXT PATH ERROR: No active editor!");
