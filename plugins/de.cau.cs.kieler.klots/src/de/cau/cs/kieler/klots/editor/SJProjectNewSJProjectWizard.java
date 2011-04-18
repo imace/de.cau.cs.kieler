@@ -37,6 +37,11 @@ import org.eclipse.ui.wizards.newresource.BasicNewProjectResourceWizard;
 
 public class SJProjectNewSJProjectWizard extends Wizard implements INewWizard,
 		IExecutableExtension {
+
+	// the OS specific file separator char, e.g. '/' or '\'
+	private final String OS_FILE_SEPARATOR = System.getProperty("file.separator");
+	// the OS specific path separator char, e.g. ':' or ';'
+	private final String OS_PATH_SEPARATOR = System.getProperty("path.separator");
 	
 	/*
 	 * Use the WizardNewProjectCreationPage, which is provided by the Eclipse
@@ -155,11 +160,12 @@ public class SJProjectNewSJProjectWizard extends Wizard implements INewWizard,
 			 */
 			IContainer container = (IContainer) proj;
 			
-			String templatesPath = ".." + Path.SEPARATOR + ".." + Path.SEPARATOR +
-			".." + Path.SEPARATOR + ".." + Path.SEPARATOR +
-			".." + Path.SEPARATOR + ".." + Path.SEPARATOR +
-			"sj_templates" + Path.SEPARATOR + "";
-			String examplesPath = "src" + Path.SEPARATOR + "examples";
+			String templatesPath = ".." + OS_FILE_SEPARATOR + ".." + OS_FILE_SEPARATOR +
+			".." + OS_FILE_SEPARATOR + ".." + OS_FILE_SEPARATOR + ".." + OS_FILE_SEPARATOR +
+			".." + OS_FILE_SEPARATOR + ".." + OS_FILE_SEPARATOR +
+			"sj_templates" + OS_FILE_SEPARATOR + "";
+			String examplesPath = "src" + OS_FILE_SEPARATOR + "examples";
+			System.out.println("???????????>>>>>>>>>>> templates path = >" + templatesPath + "<");
 			
 			// FIXME: see if you can use IResource.copy() to copy all template files!
 			// add src and bin folders, also add examples package to src
@@ -169,6 +175,8 @@ public class SJProjectNewSJProjectWizard extends Wizard implements INewWizard,
 			binFolder.create(true, true, monitor);
 			final IFolder examplesFolder = container.getFolder(new Path(examplesPath));
 			examplesFolder.create(true, true, monitor);
+			
+			System.out.println("???????????>>>>>>>>>>>> src folder full path = >" + srcFolder.getLocation() + "<");
 			
 			InputStream resourceStream = this.getClass().getResourceAsStream(templatesPath + "embeddedSJ.jar");
 			System.out.println("$$$$$$$$$$ EMBEDDED SJ PATH: " + this.getClass().getResource(templatesPath + "embeddedSJ.jar").getPath());

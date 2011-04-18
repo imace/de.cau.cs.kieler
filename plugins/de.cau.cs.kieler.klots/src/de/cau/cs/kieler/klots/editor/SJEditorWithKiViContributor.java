@@ -32,6 +32,12 @@ import org.osgi.framework.Bundle;
  * Multi-page contributor replaces the contributors for the individual editors in the multi-page editor.
  */
 public class SJEditorWithKiViContributor extends MultiPageEditorActionBarContributor {
+	
+	// the OS specific file separator char, e.g. '/' or '\'
+	private final String OS_FILE_SEPARATOR = System.getProperty("file.separator");
+	// the OS specific path separator char, e.g. ':' or ';'
+	private final String OS_PATH_SEPARATOR = System.getProperty("path.separator");
+	
 	private IEditorPart activeEditorPart;
 	private Action compileAndLink;
 	private Action downloadToNXT;
@@ -117,6 +123,7 @@ public class SJEditorWithKiViContributor extends MultiPageEditorActionBarContrib
 				String lejosPath = "";
 			    String bcelPath = "";
 			    String bluecovePath = "";
+			    String bluecove_gplPath = "";
 			    String commons_cliPath = "";
 				
 				IEditorPart  editorPart = KlotsPlugin.getDefault().getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
@@ -141,8 +148,14 @@ public class SJEditorWithKiViContributor extends MultiPageEditorActionBarContrib
 				    try {
 						pluginPath = FileLocator.toFileURL(fileURL).toString();
 						pluginPath = pluginPath.replace("de.cau.cs.kieler.klots/icons/editor.gif", "");
-						pluginPath = pluginPath.replaceFirst("file:/", "");
-						System.out.println("????????? PATH: >" + pluginPath + "<");
+						System.out.println("????????? FULL PATH: >" + pluginPath + "<");
+						// if Windows system
+						if( pluginPath.contains(":\\") ) {
+							pluginPath = pluginPath.replaceFirst("file:/", "");
+						} else {
+							pluginPath = pluginPath.replaceFirst("file:", "");
+						}
+						System.out.println("????????? TRIMMED PATH: >" + pluginPath + "<");
 					} catch (IOException ioe) {
 						ioe.printStackTrace();
 					}
@@ -150,10 +163,12 @@ public class SJEditorWithKiViContributor extends MultiPageEditorActionBarContrib
 //				    lejosPath = pluginPath + "org.lejos";
 //				    bcelPath = pluginPath + "org.lejos.3rdparty.bcel";
 //				    bluecovePath = pluginPath + "org.lejos.3rdparty.bluecove";
+//					bluecove_gplPath = pluginPath + "org.lejos.3rdparty.bluecove-gpl";
 //				    commons_cliPath = pluginPath + "org.lejos.3rdparty.commons-cli";
 					lejosPath = pluginPath + "org.lejos.nxt";
 				    bcelPath = pluginPath + "org.lejos.pc.all";
 				    bluecovePath = pluginPath + "org.lejos.pc.all";
+				    bluecove_gplPath = pluginPath + "org.lejos.pc.all";
 				    commons_cliPath = pluginPath + "org.lejos.pc.all";
 				    // ------------------------------------------------------
 				    
@@ -202,16 +217,30 @@ public class SJEditorWithKiViContributor extends MultiPageEditorActionBarContrib
 //					"-o " + projectPath + projectName + Path.SEPARATOR + "bin" + Path.SEPARATOR + fileName + ".nxj > " + projectPath + projectName + Path.SEPARATOR + "build.log";
 					
 					// ------------------------------------------------------
-				    // XXX: FINAL STANDALONE WORKING!
+				    // XXX: FINAL STANDALONE WORKING ON WINDOWS!
+//					String linkCommand = "java -Dnxj.home=\"" + lejosPath +
+//					"\" -DCOMMAND_NAME=\"nxjlink\" -Djava.library.path=\"" +
+//					lejosPath + Path.SEPARATOR + "bin" + "\" -classpath \"" +
+//					bluecovePath + ";" + bcelPath + ";" + commons_cliPath + ";" + lejosPath +
+//					"\" js.tinyvm.TinyVM --bootclasspath \"" + lejosPath +
+//					"\" --writeorder \"LE\" --classpath \".\" " +
+//					"-v -cp \"" + projectPath + projectName + Path.SEPARATOR + "embeddedSJ.jar;" + projectPath + projectName + Path.SEPARATOR + "bin\" " +
+//					"." + Path.SEPARATOR + "examples" + Path.SEPARATOR + fileName + " " +
+//					"-o " + projectPath + projectName + Path.SEPARATOR + "bin" + Path.SEPARATOR + fileName + ".nxj";
+					
+					
+					// XXX: LINUX INTEGRATION TEST
 					String linkCommand = "java -Dnxj.home=\"" + lejosPath +
 					"\" -DCOMMAND_NAME=\"nxjlink\" -Djava.library.path=\"" +
-					lejosPath + Path.SEPARATOR + "bin" + "\" -classpath \"" +
-					bluecovePath + ";" + bcelPath + ";" + commons_cliPath + ";" + lejosPath +
+					lejosPath + OS_FILE_SEPARATOR + "bin" +
+					"\" -classpath \"" + bluecovePath + OS_PATH_SEPARATOR + bluecove_gplPath + OS_PATH_SEPARATOR +
+					bcelPath + OS_PATH_SEPARATOR + commons_cliPath + OS_PATH_SEPARATOR + lejosPath +
 					"\" js.tinyvm.TinyVM --bootclasspath \"" + lejosPath +
 					"\" --writeorder \"LE\" --classpath \".\" " +
-					"-v -cp \"" + projectPath + projectName + Path.SEPARATOR + "embeddedSJ.jar;" + projectPath + projectName + Path.SEPARATOR + "bin\" " +
-					"." + Path.SEPARATOR + "examples" + Path.SEPARATOR + fileName + " " +
-					"-o " + projectPath + projectName + Path.SEPARATOR + "bin" + Path.SEPARATOR + fileName + ".nxj";
+					"-v -cp \"" + projectPath + projectName + OS_FILE_SEPARATOR + "embeddedSJ.jar" + OS_PATH_SEPARATOR +
+					projectPath + projectName + OS_FILE_SEPARATOR + "bin\" " +
+					"." + OS_FILE_SEPARATOR + "examples" + OS_FILE_SEPARATOR + fileName + " " +
+					"-o " + projectPath + projectName + OS_FILE_SEPARATOR + "bin" + OS_FILE_SEPARATOR + fileName + ".nxj";
 					// ------------------------------------------------------
 					
 					System.out.println("###--->>> LINK COMMAND STRING: " + linkCommand);
@@ -254,6 +283,7 @@ public class SJEditorWithKiViContributor extends MultiPageEditorActionBarContrib
 				String lejosPath = "";
 			    String bcelPath = "";
 			    String bluecovePath = "";
+			    String bluecove_gplPath = "";
 			    String commons_cliPath = "";
 				
 				IEditorPart  editorPart = KlotsPlugin.getDefault().getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
@@ -279,8 +309,14 @@ public class SJEditorWithKiViContributor extends MultiPageEditorActionBarContrib
 				    try {
 						pluginPath = FileLocator.toFileURL(fileURL).toString();
 						pluginPath = pluginPath.replace("de.cau.cs.kieler.klots/icons/editor.gif", "");
-						pluginPath = pluginPath.replaceFirst("file:/", "");
-						System.out.println("????????? PATH: >" + pluginPath + "<");
+						System.out.println("????????? FULL PATH: >" + pluginPath + "<");
+						// if Windows system
+						if( pluginPath.contains(":\\") ) {
+							pluginPath = pluginPath.replaceFirst("file:/", "");
+						} else {
+							pluginPath = pluginPath.replaceFirst("file:", "");
+						}
+						System.out.println("????????? TRIMMED PATH: >" + pluginPath + "<");
 					} catch (IOException ioe) {
 						ioe.printStackTrace();
 					}
@@ -289,10 +325,12 @@ public class SJEditorWithKiViContributor extends MultiPageEditorActionBarContrib
 //				    lejosPath = pluginPath + "org.lejos";
 //				    bcelPath = pluginPath + "org.lejos.3rdparty.bcel";
 //				    bluecovePath = pluginPath + "org.lejos.3rdparty.bluecove";
+//				    bluecove_gplPath = pluginPath + "org.lejos.3rdparty.bluecove-gpl";
 //				    commons_cliPath = pluginPath + "org.lejos.3rdparty.commons-cli";
 					lejosPath = pluginPath + "org.lejos.nxt";
 				    bcelPath = pluginPath + "org.lejos.pc.all";
 				    bluecovePath = pluginPath + "org.lejos.pc.all";
+				    bluecove_gplPath = pluginPath + "org.lejos.pc.all";
 				    commons_cliPath = pluginPath + "org.lejos.pc.all";
 					
 				    
@@ -306,12 +344,22 @@ public class SJEditorWithKiViContributor extends MultiPageEditorActionBarContrib
 //					" & nxjupload -b -r " + projectName + Path.SEPARATOR + "bin" + Path.SEPARATOR + fileName + ".nxj\"";
 					
 					// XXX: STANDALONE VERSION WORKING ONLY WITH CMD AND BASH
+//					String downloadToNXTCommand = "java -Dnxj.home=\"" + lejosPath +
+//					"\" -DCOMMAND_NAME=\"nxjupload\" -Djava.library.path=\"" +
+//					lejosPath + Path.SEPARATOR + "bin" + "\" -classpath \"" +
+//					bcelPath + ";" + bluecovePath + ";" + commons_cliPath + ";" +
+//					lejosPath + "\" lejos.pc.tools.NXJUpload " +
+//					"-b -r " + projectPath + projectName + Path.SEPARATOR + "bin" + Path.SEPARATOR + fileName + ".nxj";
+					
+					// XXX: LINUX INTEGRATION TEST
 					String downloadToNXTCommand = "java -Dnxj.home=\"" + lejosPath +
 					"\" -DCOMMAND_NAME=\"nxjupload\" -Djava.library.path=\"" +
-					lejosPath + Path.SEPARATOR + "bin" + "\" -classpath \"" +
-					bcelPath + ";" + bluecovePath + ";" + commons_cliPath + ";" +
-					lejosPath + "\" lejos.pc.tools.NXJUpload " +
-					"-b -r " + projectPath + projectName + Path.SEPARATOR + "bin" + Path.SEPARATOR + fileName + ".nxj";
+					lejosPath + OS_FILE_SEPARATOR + "bin" + "\" -classpath \"" + bcelPath + OS_PATH_SEPARATOR +
+					bluecovePath + OS_PATH_SEPARATOR + bluecove_gplPath + OS_PATH_SEPARATOR +
+					commons_cliPath + OS_PATH_SEPARATOR + lejosPath +
+					"\" lejos.pc.tools.NXJUpload " +
+					"-b -r " + projectPath + projectName + OS_FILE_SEPARATOR + "bin" + OS_FILE_SEPARATOR + fileName + ".nxj";
+					
 					// ------------------------------------------------------
 					
 					System.out.println("###--->>> DOWNLOAD COMMAND STRING: " + downloadToNXTCommand);
