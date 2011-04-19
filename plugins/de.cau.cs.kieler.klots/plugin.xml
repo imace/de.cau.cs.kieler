@@ -67,6 +67,13 @@
             name="Embedded SJ Project"
             project="true">
       </wizard>
+      <wizard
+            category="cau.cs.kieler.klots.editor"
+            class="de.cau.cs.kieler.klots.editor.NewPOJFileWizard"
+            icon="icons/editor7.gif"
+            id="de.cau.cs.kieler.klots.editor.NewPOJFileWizard"
+            name="Plane Old Java Embedded File">
+      </wizard>
    </extension>
    
    

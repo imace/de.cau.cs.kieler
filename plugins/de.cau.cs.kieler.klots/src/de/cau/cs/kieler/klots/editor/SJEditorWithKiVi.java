@@ -147,10 +147,6 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 	private final static Color FOREGROUND_STANDARD_COLOR = new Color(Display.getDefault(), 0, 0, 0);
 	// white
 	private final static Color BACKGROUND_STANDARD_COLOR = new Color(Display.getDefault(), 255, 255, 255);
-	// medium spring green
-	private final static Color EXTRA_FOREGROUND_HIGHLIGHT_COLOR = new Color(Display.getDefault(), 0, 250, 154);
-	// khaki
-	private final static Color EXTRA_BACKGROUND_HIGHLIGHT_COLOR = new Color(Display.getDefault(), 240, 230, 140);
 	
 	// dark orange
 	private final static Color ALREADY_DONE_MICROSTEP_FOREGROUND_COLOR = new Color(Display.getDefault(), 255, 140, 0);
@@ -426,6 +422,10 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 		
 		// find label declaration part
 		int offset = text.indexOf(LABEL_ENUM_NAME);
+		if( offset < 0 || offset > text.length() ) {
+			System.err.println("EDITOR INITIALIZATION ERROR: No label declaration part found!");
+			return;
+		}
 		System.out.println("HHHHHHHHHHHHHH>>>>>>>>>>>> offset = " + offset + ", length = " + LABEL_ENUM_NAME.length() + ", text = >" + text.substring(offset, offset+LABEL_ENUM_NAME.length()) + "<");
 		while( isComment(offset, offset + LABEL_ENUM_NAME.length(), text) || isString(offset, offset + LABEL_ENUM_NAME.length(), text) ) {
 			offset = text.indexOf(LABEL_ENUM_NAME, offset+1);
@@ -539,6 +539,10 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 		
 		// find tick method start offset
 		int offset = text.indexOf(TICK_METHOD_NAME);
+		if( offset < 0 || offset > text.length() ) {
+			System.err.println("EDITOR INITIALIZATION ERROR: No tick() method found!");
+			return -1;
+		}
 		System.out.println("HHHHHHHHHHHHHH>>>>>>>>>>>> offset = " + offset + ", length = " + TICK_METHOD_NAME.length() + ", text = >" + text.substring(offset, offset+TICK_METHOD_NAME.length()) + "<");
 		while( isComment(offset, offset + TICK_METHOD_NAME.length(), text) || isString(offset, offset + TICK_METHOD_NAME.length(), text) ) {
 			offset = text.indexOf(TICK_METHOD_NAME, offset+1);
@@ -592,6 +596,10 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 				System.out.println("################>>>>>>>>>>>> BAD LABEL at: >" + text.substring(labelStart, labelColon) + "<, -> continue!");
 				continue;
 			}
+		}
+		if( labelList.isEmpty() ) {
+			System.err.println("EDITOR INITIALIZATION ERROR: No labels found!");
+			return;
 		}
 		labelList.get(labelList.size()-1).setLabelEndIndex( text.lastIndexOf(";") );
 		

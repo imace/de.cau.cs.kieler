@@ -62,13 +62,15 @@ public class NXTDataObserverWithKiVi extends JSONObjectDataComponent implements
 		
 		String[] signals = editor.getSignals();
 		JSONObject returnObj = new JSONObject();
-		try {
-	      	for(String s : signals) {
-	      		System.out.println(":::::::>>>>> providing initial signal >" + s + "<");
-	      		returnObj.accumulate(s, JSONSignalValues.newValue(false));
-	      	}
-		} catch (JSONException e) {
-	      	printConsole(e.getStackTrace().toString());
+		if( signals != null ) {
+			try {
+		      	for(String s : signals) {
+		      		System.out.println(":::::::>>>>> providing initial signal >" + s + "<");
+		      		returnObj.accumulate(s, JSONSignalValues.newValue(false));
+		      	}
+			} catch (JSONException e) {
+		      	printConsole(e.getStackTrace().toString());
+			}
 		}
 		return returnObj;
 		

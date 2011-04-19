@@ -23,33 +23,28 @@ public class NXTDataDistributorWithKiVi extends JSONObjectDataComponent implemen
 	private static final String KLOTSCONSOLENAME = "Klots Console";
 	NXTCommunicator comm;
 	
-	// ------------------------------------
-	// XXX: use parseSignals() in SJEditor
-	//private String[] signals;
-	// ------------------------------------
-	
-	
 
 	public void initialize() throws KiemInitializationException {
 		comm = NXTCommunicator.getInstance();
 		
-		String s = comm.receiveMessage().toString();
-		if( s.startsWith("[{SYNCHRONIZED}") ) {
-			printConsole(s);
-			
-			// -------------------------------------------------------
-			// XXX: use parseSignals() in SJEditor
-			// remove leading '[{SYNCHRONIZED},\n{'
-//			s = s.replaceAll("(?s-:.*\\x7B)", "");
-//			// remove ending '}]'
-//			s = s.replace("}]", "");
-//			System.out.println(":::::::>>>>> signals = >" + s + "<");
-//			signals = s.split(";");
-			// -------------------------------------------------------
-			
-		} else {
-			printConsole("ERROR while trying to synchronize with the NXT: " + s);
+//		String s = comm.receiveMessage().toString();
+//		if( s.startsWith("[{SYNCHRONIZED}") ) {
+//			printConsole(s);
+//		} else {
+//			printConsole("ERROR while trying to synchronize with the NXT: " + s);
+//		}
+		
+		
+		// XXX: POJI TEST
+		String line = comm.receiveMessageLine();
+		if( !line.startsWith("SYNCHRONIZED") && !line.startsWith(comm.PRINT_TAG) ) {
+			printConsole("ERROR while trying to synchronize with the NXT: " + line);
 		}
+		while( !line.equals("EOT") ) {
+			printConsole(line);
+			line = comm.receiveMessageLine();
+		}
+		
 		
 	}
 
@@ -86,7 +81,9 @@ public class NXTDataDistributorWithKiVi extends JSONObjectDataComponent implemen
 					}
 		        }
 			}
-			msg = msg.substring(0, msg.length()-1);
+			if( msg.length() > 0 ) {
+				msg = msg.substring(0, msg.length()-1);
+			}
 		} catch (JSONException e) {
 			printConsole("PRODUCER ERROR: " + e.getMessage());
         }
@@ -95,6 +92,21 @@ public class NXTDataDistributorWithKiVi extends JSONObjectDataComponent implemen
 		// --------------------------- observer -----------------------------
 		StringBuffer buffer = comm.receiveMessage();
 		System.out.println("====;;;;;;;==== RECEIVED MESSAGE BUFFER = >" + buffer.toString() + "<");
+		
+		// remote console print processing
+		int start = 0;
+		int end = 0;
+		while( start >= 0 ) {
+			start = buffer.indexOf("{" + comm.PRINT_TAG, end);
+			if( start >= 0 ) {
+				end = buffer.indexOf("},", start);
+				printConsole( "REMOTE PRINT: " + buffer.substring(1+start+comm.PRINT_TAG.length(), end) );
+				buffer.replace(start, end+2, "");
+				System.out.println("====;;;;;;;==== MESSAGE BUFFER AFTER PRINT = >" + buffer.toString() + "<");
+				end = start;
+			}
+		}
+		
 		try {
 			JSONArray received = new JSONArray(buffer.toString());
 			JSONObject returnObj = new JSONObject();
@@ -121,26 +133,6 @@ public class NXTDataDistributorWithKiVi extends JSONObjectDataComponent implemen
 		return null;
 	}
 	
-	
-	// ----------------------------------------------------------------------
-	// XXX: use parseSignals() in SJEditor
-//	@Override
-//    public JSONObject provideInitialVariables() {
-//		
-//        JSONObject returnObj = new JSONObject();
-//        try {
-//        	
-//        	for(String s : signals) {
-//        		System.out.println(":::::::>>>>> providing initial signal >" + s + "<");
-//        		returnObj.accumulate(s, JSONSignalValues.newValue(false));
-//        	}
-//        	
-//        } catch (JSONException e) {
-//        	printConsole(e.getStackTrace().toString());
-//        }
-//        return returnObj;
-//    }
-	// ----------------------------------------------------------------------
 	
 	
 	

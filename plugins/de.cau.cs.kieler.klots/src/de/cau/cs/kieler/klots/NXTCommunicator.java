@@ -13,6 +13,11 @@ public class NXTCommunicator {
 	public final String TICK_INFO_TAG = "TICK_INFO";
 	public final String PROGRAM_INFO_TAG = "PROGRAM_INFO";
 	
+	private final String PRINT_START_COMMAND_KEY = "PRINT_START:";
+	private final String PRINT_END_COMMAND_KEY = ":PRINT_END";
+	public final String PRINT_TAG = "PRINT:";
+	private static boolean consolePrint;
+	
 	static NXTConnector conn;
 	static DataOutputStream dos;
 	static DataInputStream dis;
@@ -49,6 +54,7 @@ public class NXTCommunicator {
 		dos = conn.getDataOut();
 		dis = conn.getDataIn();
 		connected = true;
+		consolePrint = false;
 	}
 	
 	
@@ -85,6 +91,19 @@ public class NXTCommunicator {
 		try {
 			String line = dis.readLine();   // FIXME: Find a way to use BufferedReader.readLine() instead!
 			System.out.println(";;;;=======;;;; RECEIVED MESSAGE LINE = >" + line + "<");
+			
+			// ----------------------------------------------------------
+			//XXX: REMOTE CONSOLE SUPPORT
+			if( consolePrint ) {
+				line = PRINT_TAG + line;
+				if( line.endsWith(PRINT_END_COMMAND_KEY) ) {
+					line = line.substring( 0, line.lastIndexOf(PRINT_END_COMMAND_KEY) );
+					consolePrint = false;
+				}
+				return line;
+			}
+			// ----------------------------------------------------------
+			
 			if( line.startsWith(SIGNALS_TAG) || line.startsWith(INSTRUCTION_TAG) ) {
 				line = line.substring(line.indexOf('"'));
 			// if line is 'addedSignals:...' or 'removedSignals:...' do not process it
@@ -93,6 +112,19 @@ public class NXTCommunicator {
 				System.out.println(";;;;=======;;;; LINE CONTAINS THE PROGRAM_INFO TAG => DO NOT PROCESS IT");
 				line = "";
 			}
+			
+			// ----------------------------------------------------------
+			//XXX: REMOTE CONSOLE SUPPORT
+			else if( line.startsWith(PRINT_START_COMMAND_KEY) ) {
+				line = PRINT_TAG + line.substring( PRINT_START_COMMAND_KEY.length() );
+				consolePrint = true;
+				if( line.endsWith(PRINT_END_COMMAND_KEY) ) {
+					line = line.substring( 0, line.lastIndexOf(PRINT_END_COMMAND_KEY) );
+					consolePrint = false;
+				}
+			}
+			// ----------------------------------------------------------
+			
 			return line;
 		} catch (IOException ioe) {
 			System.out.println(">>> IO Exception reading message bytes:");
