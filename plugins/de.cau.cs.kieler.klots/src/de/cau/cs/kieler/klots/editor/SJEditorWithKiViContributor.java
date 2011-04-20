@@ -231,15 +231,28 @@ public class SJEditorWithKiViContributor extends MultiPageEditorActionBarContrib
 					
 					
 					// XXX: LINUX INTEGRATION TEST
+//					String linkCommand = "java -Dnxj.home=\"" + lejosPath +
+//					"\" -DCOMMAND_NAME=\"nxjlink\" -Djava.library.path=\"" +
+//					lejosPath + OS_FILE_SEPARATOR + "bin" +
+//					"\" -classpath \"" + bluecovePath + OS_PATH_SEPARATOR + bluecove_gplPath + OS_PATH_SEPARATOR +
+//					bcelPath + OS_PATH_SEPARATOR + commons_cliPath + OS_PATH_SEPARATOR + lejosPath +
+//					"\" js.tinyvm.TinyVM --bootclasspath \"" + lejosPath +
+//					"\" --writeorder \"LE\" --classpath \".\" " +
+//					"-v -cp \"" + projectPath + projectName + OS_FILE_SEPARATOR + "embeddedSJ.jar" + OS_PATH_SEPARATOR +
+//					projectPath + projectName + OS_FILE_SEPARATOR + "bin\" " +
+//					"." + OS_FILE_SEPARATOR + "examples" + OS_FILE_SEPARATOR + fileName + " " +
+//					"-o " + projectPath + projectName + OS_FILE_SEPARATOR + "bin" + OS_FILE_SEPARATOR + fileName + ".nxj";
+					
+					// XXX: WORKING LINUX VERSION!
 					String linkCommand = "java -Dnxj.home=\"" + lejosPath +
 					"\" -DCOMMAND_NAME=\"nxjlink\" -Djava.library.path=\"" +
 					lejosPath + OS_FILE_SEPARATOR + "bin" +
 					"\" -classpath \"" + bluecovePath + OS_PATH_SEPARATOR + bluecove_gplPath + OS_PATH_SEPARATOR +
-					bcelPath + OS_PATH_SEPARATOR + commons_cliPath + OS_PATH_SEPARATOR + lejosPath +
-					"\" js.tinyvm.TinyVM --bootclasspath \"" + lejosPath +
-					"\" --writeorder \"LE\" --classpath \".\" " +
-					"-v -cp \"" + projectPath + projectName + OS_FILE_SEPARATOR + "embeddedSJ.jar" + OS_PATH_SEPARATOR +
-					projectPath + projectName + OS_FILE_SEPARATOR + "bin\" " +
+					bcelPath + OS_PATH_SEPARATOR + commons_cliPath + OS_PATH_SEPARATOR + lejosPath + OS_PATH_SEPARATOR + 
+					".\" js.tinyvm.TinyVM --bootclasspath " + lejosPath +
+					" --writeorder LE --classpath \".\" " +
+					"-v -cp " + projectPath + projectName + OS_FILE_SEPARATOR + "embeddedSJ.jar" + OS_PATH_SEPARATOR +
+					projectPath + projectName + OS_FILE_SEPARATOR + "bin " +
 					"." + OS_FILE_SEPARATOR + "examples" + OS_FILE_SEPARATOR + fileName + " " +
 					"-o " + projectPath + projectName + OS_FILE_SEPARATOR + "bin" + OS_FILE_SEPARATOR + fileName + ".nxj";
 					// ------------------------------------------------------
@@ -249,6 +262,7 @@ public class SJEditorWithKiViContributor extends MultiPageEditorActionBarContrib
 //					Process link = rt.exec("cmd /C " + linkCommand);
 					Process link = rt.exec(linkCommand);
 					
+					System.out.println("###--->>> OUTPUT STREAM:");
 					InputStream is = link.getInputStream();
 					InputStreamReader isr = new InputStreamReader(is);
 					BufferedReader br = new BufferedReader(isr);
@@ -256,8 +270,14 @@ public class SJEditorWithKiViContributor extends MultiPageEditorActionBarContrib
 					while ((line = br.readLine()) != null) {
 						System.out.println(line);
 					}
-					
-				       
+					System.out.println("###--->>> ERROR STREAM:");
+					is = link.getErrorStream();
+					isr = new InputStreamReader(is);
+					br = new BufferedReader(isr);
+					while ((line = br.readLine()) != null) {
+						System.out.println(line);
+					}
+					   
 					link.waitFor();
 					System.out.println("------> OK <-------");
 					link.destroy();
@@ -353,20 +373,46 @@ public class SJEditorWithKiViContributor extends MultiPageEditorActionBarContrib
 //					"-b -r " + projectPath + projectName + Path.SEPARATOR + "bin" + Path.SEPARATOR + fileName + ".nxj";
 					
 					// XXX: LINUX INTEGRATION TEST
+//					String downloadToNXTCommand = "java -Dnxj.home=\"" + lejosPath +
+//					"\" -DCOMMAND_NAME=\"nxjupload\" -Djava.library.path=\"" +
+//					lejosPath + OS_FILE_SEPARATOR + "bin" + "\" -classpath \"" + bcelPath + OS_PATH_SEPARATOR +
+//					bluecovePath + OS_PATH_SEPARATOR + bluecove_gplPath + OS_PATH_SEPARATOR +
+//					commons_cliPath + OS_PATH_SEPARATOR + lejosPath +
+//					"\" lejos.pc.tools.NXJUpload " +
+//					"-b -r " + projectPath + projectName + OS_FILE_SEPARATOR + "bin" + OS_FILE_SEPARATOR + fileName + ".nxj";
+					
+					// XXX: LINUX INTEGRATION TEST
 					String downloadToNXTCommand = "java -Dnxj.home=\"" + lejosPath +
 					"\" -DCOMMAND_NAME=\"nxjupload\" -Djava.library.path=\"" +
 					lejosPath + OS_FILE_SEPARATOR + "bin" + "\" -classpath \"" + bcelPath + OS_PATH_SEPARATOR +
 					bluecovePath + OS_PATH_SEPARATOR + bluecove_gplPath + OS_PATH_SEPARATOR +
-					commons_cliPath + OS_PATH_SEPARATOR + lejosPath +
-					"\" lejos.pc.tools.NXJUpload " +
+					commons_cliPath + OS_PATH_SEPARATOR + lejosPath + OS_PATH_SEPARATOR +
+					".\" lejos.pc.tools.NXJUpload " +
 					"-b -r " + projectPath + projectName + OS_FILE_SEPARATOR + "bin" + OS_FILE_SEPARATOR + fileName + ".nxj";
-					
 					// ------------------------------------------------------
 					
 					System.out.println("###--->>> DOWNLOAD COMMAND STRING: " + downloadToNXTCommand);
 //					Process upload = rt.exec("cmd /C " + downloadToNXTCommand);
 					Process upload = rt.exec(downloadToNXTCommand);
+					
+					System.out.println("###--->>> OUTPUT STREAM:");
+					InputStream is = upload.getInputStream();
+					InputStreamReader isr = new InputStreamReader(is);
+					BufferedReader br = new BufferedReader(isr);
+					String line;
+					while ((line = br.readLine()) != null) {
+						System.out.println(line);
+					}
+					System.out.println("###--->>> ERROR STREAM:");
+					is = upload.getErrorStream();
+					isr = new InputStreamReader(is);
+					br = new BufferedReader(isr);
+					while ((line = br.readLine()) != null) {
+						System.out.println(line);
+					}
+					
 					upload.waitFor();
+					System.out.println("------> OK <-------");
 					MessageDialog.openInformation(null, "Embedded SJ", "Embedded SJ program downloaded successfully to NXT!");
 				} catch(Exception e) {
 					e.printStackTrace();
