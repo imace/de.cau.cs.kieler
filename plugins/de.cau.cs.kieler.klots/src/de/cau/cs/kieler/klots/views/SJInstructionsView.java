@@ -36,24 +36,38 @@ public class SJInstructionsView extends ViewPart {
 
     /** The Constant COLUMN_0_WIDTH. */
     private static final int COLUMN_0_WIDTH = 0;
+    private static final String COLUMN_0_TEXT = "";
+    private static final String COLUMN_0_TOOLTIP = "";
 
     /** The Constant COLUMN_1_WIDTH. */
     private static final int COLUMN_1_WIDTH = 100;
+    private static final String COLUMN_1_TEXT = "Name";
+    private static final String COLUMN_1_TOOLTIP = "Instruction's name";
 
     /** The Constant COLUMN_2_WIDTH. */
     private static final int COLUMN_2_WIDTH = 100;
+    private static final String COLUMN_2_TEXT = "Label";
+    private static final String COLUMN_2_TOOLTIP = "Instruction's label";
 
     /** The Constant COLUMN_3_WIDTH. */
     private static final int COLUMN_3_WIDTH = 40;
+    private static final String COLUMN_3_TEXT = "Prio";
+    private static final String COLUMN_3_TOOLTIP = "Instruction's priority";
     
     /** The Constant COLUMN_4_WIDTH. */
     private static final int COLUMN_4_WIDTH = 150;
+    private static final String COLUMN_4_TEXT = "Param";
+    private static final String COLUMN_4_TOOLTIP = "Instruction's parameter(s)";
     
     /** The Constant COLUMN_5_WIDTH. */
     private static final int COLUMN_5_WIDTH = 50;
+    private static final String COLUMN_5_TEXT = "RetVal";
+    private static final String COLUMN_5_TOOLTIP = "Instruction's return value";
     
     /** The Constant COLUMN_6_WIDTH. */
     private static final int COLUMN_6_WIDTH = 50;
+    private static final String COLUMN_6_TEXT = "InitExec";
+    private static final String COLUMN_6_TOOLTIP = "Initial execution";
 
     /** This data table view instance. */
     private static SJInstructionsView sjInstructionsView;
@@ -310,14 +324,14 @@ public class SJInstructionsView extends ViewPart {
      *            the DataTableViewer
      */
     private void createColumns(final SJInstructionsViewer viewerParam) {
-        String[] titles = { "", "Name", "Label", "Prio", "Param", "RetVal", "InitExec" };
-        String[] toolTip = { "", "Instruction's name", "Instruction's label", "Instruction's priority", "Instruction's parameter(s)", "Instruction's return value", "Initial execution" };
-        int[] bounds = { COLUMN_0_WIDTH, COLUMN_1_WIDTH, COLUMN_2_WIDTH, COLUMN_3_WIDTH, COLUMN_4_WIDTH, COLUMN_5_WIDTH, COLUMN_6_WIDTH };
-
+    	int[] bounds = { COLUMN_0_WIDTH, COLUMN_1_WIDTH, COLUMN_2_WIDTH, COLUMN_3_WIDTH, COLUMN_4_WIDTH, COLUMN_5_WIDTH, COLUMN_6_WIDTH };
+        String[] titles = { COLUMN_0_TEXT, COLUMN_1_TEXT, COLUMN_2_TEXT, COLUMN_3_TEXT, COLUMN_4_TEXT, COLUMN_5_TEXT, COLUMN_6_TEXT };
+        String[] toolTip = { COLUMN_0_TOOLTIP, COLUMN_1_TOOLTIP, COLUMN_2_TOOLTIP, COLUMN_3_TOOLTIP, COLUMN_4_TOOLTIP, COLUMN_5_TOOLTIP, COLUMN_6_TOOLTIP };
+        
         for (int i = 0; i < titles.length; i++) {
             TreeViewerColumn column = new TreeViewerColumn(viewerParam, SWT.NONE);
-            column.getColumn().setText(titles[i]);
             column.getColumn().setWidth(bounds[i]);
+            column.getColumn().setText(titles[i]);
             column.getColumn().setToolTipText(toolTip[i]);
             column.getColumn().setResizable(true);
             column.getColumn().setMoveable(true);
@@ -360,7 +374,6 @@ public class SJInstructionsView extends ViewPart {
     	TextContributionItem text1 = new TextContributionItem("MACROSTEP \nACTIONS    ");		
 		toolBarManager.add(text1);
     	
-//        toolBarManager.add(new Separator());
 		toolBarManager.add(kiemStepBackwards);
 		toolBarManager.add(kiemStepForwards);
 		toolBarManager.add(kiemRun);
@@ -371,7 +384,6 @@ public class SJInstructionsView extends ViewPart {
 		TextContributionItem text2 = new TextContributionItem("MICROSTEP \nACTIONS   ");		
 		toolBarManager.add(text2);
 		
-//        toolBarManager.add(new Separator());
 		toolBarManager.add(microStepBackwardsAll);
 		toolBarManager.add(microStepBackwards);
 		toolBarManager.add(microStepForwards);

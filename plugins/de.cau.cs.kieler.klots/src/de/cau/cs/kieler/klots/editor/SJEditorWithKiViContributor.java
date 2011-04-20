@@ -463,15 +463,6 @@ public class SJEditorWithKiViContributor extends MultiPageEditorActionBarContrib
 		manager.add(compileAndLink);
 		manager.add(downloadToNXT);
 		manager.add(new Separator());
-		
-		// ---------------------------------------------------------
-		// XXX: Step actions are handled by the SJ instructions view
-		//manager.add(microStepBackwardsAll);
-		//manager.add(microStepBackwards);
-		//manager.add(microStepForwards);
-		//manager.add(microStepForwardsAll);
-		// ---------------------------------------------------------
-		
 	}
 	
 }

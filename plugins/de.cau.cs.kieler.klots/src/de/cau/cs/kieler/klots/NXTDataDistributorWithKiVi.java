@@ -26,16 +26,7 @@ public class NXTDataDistributorWithKiVi extends JSONObjectDataComponent implemen
 
 	public void initialize() throws KiemInitializationException {
 		comm = NXTCommunicator.getInstance();
-		
-//		String s = comm.receiveMessage().toString();
-//		if( s.startsWith("[{SYNCHRONIZED}") ) {
-//			printConsole(s);
-//		} else {
-//			printConsole("ERROR while trying to synchronize with the NXT: " + s);
-//		}
-		
-		
-		// XXX: POJI TEST
+		// use NXTCommunicator.receiveMessageLine() to ensure plane old java remote print support
 		String line = comm.receiveMessageLine();
 		if( !line.startsWith("SYNCHRONIZED") && !line.startsWith(comm.PRINT_TAG) ) {
 			printConsole("ERROR while trying to synchronize with the NXT: " + line);
@@ -44,8 +35,6 @@ public class NXTDataDistributorWithKiVi extends JSONObjectDataComponent implemen
 			printConsole(line);
 			line = comm.receiveMessageLine();
 		}
-		
-		
 	}
 
 	

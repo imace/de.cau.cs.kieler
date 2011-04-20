@@ -19,7 +19,6 @@ package de.cau.cs.kieler.klots.views;
  * the data table. If it is a signal, then it can be present or absent. An entry always contains of
  * a key and a value String expression.
  * 
- * @author Christian Motika - cmot AT informatik.uni-kiel.de
  */
 public class SJInstructionsData {
 

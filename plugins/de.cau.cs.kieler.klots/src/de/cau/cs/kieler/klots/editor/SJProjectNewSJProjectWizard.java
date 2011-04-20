@@ -191,10 +191,6 @@ public class SJProjectNewSJProjectWizard extends Wizard implements INewWizard,
 			resourceStream = this.getClass().getResourceAsStream(templatesPath + "EmbeddedABRO.java");
 			addFileToProject(container, new Path(examplesPath + Path.SEPARATOR + "EmbeddedABRO.java"), resourceStream, monitor);
 			
-			// EmbeddedABROMain is now generic EmbeddedSJProgramStarter inside embeddedSJ.jar
-//			resourceStream = this.getClass().getResourceAsStream(templatesPath + "EmbeddedABROMain.java");
-//			addFileToProject(container, new Path(examplesPath + Path.SEPARATOR + "EmbeddedABROMain.java"), resourceStream, monitor);
-			
 			// add the .execution file
 			resourceStream = this.getClass().getResourceAsStream(templatesPath + "embeddedSJ.execution");
 			addFileToProject(container, new Path("embeddedSJ.execution"), resourceStream, monitor);
@@ -224,7 +220,7 @@ public class SJProjectNewSJProjectWizard extends Wizard implements INewWizard,
 			resourceStream.close();		
 			
 		} catch(IOException ioe) {
-			IStatus status = new Status(IStatus.ERROR, "NewFileWizard", IStatus.OK,
+			IStatus status = new Status(IStatus.ERROR, "NewSJProjectWizard", IStatus.OK,
 					ioe.getLocalizedMessage(), null);
 			System.out.println(ioe.getStackTrace());
 			throw new CoreException(status);

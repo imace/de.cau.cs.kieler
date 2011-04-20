@@ -85,24 +85,6 @@ public class SJInstructionsViewDataObserver extends JSONObjectDataComponent impl
 			e.printStackTrace();
 		}
 
-		// TODO: DEAL WITH HISTORY STEPS!
-//                if (this.isHistoryStep()) {
-//                    // set all NOT updated entries to absent per default
-//                    int tableSize = TableDataList.getInstance().size();
-//                    for (int c = 0; c < tableSize; c++) {
-//                        TableData tableData = TableDataList.getInstance().get(c);
-//                        if (tableData.isPresent() && (!tableData.isModified())) {
-//                            if (!sjInstructionsDataTmp.contains(tableData)) {
-//                                tableData.setPresent(false);
-//                            }
-//                        }
-//                        if (tableData.isModified()) {
-//                            tableData.setModified(false);
-//                        }
-//                    }
-//                }
-
-
         // update view
 		instrList.updateViewAsync();
 

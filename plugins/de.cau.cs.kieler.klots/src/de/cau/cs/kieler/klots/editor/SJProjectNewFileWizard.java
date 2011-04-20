@@ -23,7 +23,7 @@ import de.cau.cs.kieler.klots.KlotsPlugin;
  * (a folder or a project) is selected in the workspace 
  * when the wizard is opened, it will accept it as the target
  * container. The wizard creates one file with the extension
- * "mpe". If a sample multi-page editor (also available
+ * "java". If a sample multi-page editor (also available
  * as a template) is registered for the same extension, it will
  * be able to open it.
  */
@@ -138,7 +138,7 @@ public class SJProjectNewFileWizard extends Wizard implements INewWizard {
 
 	private void throwCoreException(String message) throws CoreException {
 		IStatus status =
-			new Status(IStatus.ERROR, "editortest", IStatus.OK, message, null);
+			new Status(IStatus.ERROR, "NewSJFileWizard", IStatus.OK, message, null);
 		throw new CoreException(status);
 	}
 
