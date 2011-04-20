@@ -19,6 +19,7 @@ public interface KlotsConstants {
 	public final static String STOP_COMMAND_KEY = "STOP";
 	public final static String END_OF_MESSAGE_COMMAND_KEY = "EOT";
 	public final static String END_OF_TRANSMISSION_COMMAND_KEY = "END_OF_TRANSMISSION";
+	public final static String MESSAGE_LINE_DELIMITER = "\n";
 	
 	public final static String JSON_EXECUTION_TRACE_TAG = "executionTrace";
 	public final static String JSON_SIGNALS_TAG = "signals";

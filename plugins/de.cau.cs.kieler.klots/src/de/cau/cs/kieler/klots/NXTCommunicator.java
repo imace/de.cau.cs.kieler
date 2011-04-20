@@ -55,7 +55,11 @@ public class NXTCommunicator {
 	public int sendMessage(String msg) {
 		System.out.println("[+][+][+][+][+][+][+][+][+] SENDING MESSAGE TO NXT: >" + msg + "<");
 		try {
-			dos.writeBytes(msg + "\n" + KlotsConstants.END_OF_MESSAGE_COMMAND_KEY + "\n");
+			dos.writeBytes(
+					msg +
+					KlotsConstants.MESSAGE_LINE_DELIMITER +
+					KlotsConstants.END_OF_MESSAGE_COMMAND_KEY +
+					KlotsConstants.MESSAGE_LINE_DELIMITER);
 			dos.flush();
 			return 0;
 		} catch (IOException ioe) {
@@ -122,8 +126,11 @@ public class NXTCommunicator {
 		}
 	}
 	
-	public void closeTransmission() {
+	public void closeTransmission(boolean notifyCommunicationPartner) {
 		try {
+			if( notifyCommunicationPartner ) {
+				sendMessage(KlotsConstants.END_OF_TRANSMISSION_COMMAND_KEY);
+			}
 			dis.close();
 			dos.close();
 			conn.close();

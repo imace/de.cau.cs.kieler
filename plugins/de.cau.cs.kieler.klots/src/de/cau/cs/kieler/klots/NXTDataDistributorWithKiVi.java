@@ -35,6 +35,10 @@ public class NXTDataDistributorWithKiVi extends JSONObjectDataComponent implemen
 		}
 		while( !line.equals(KlotsConstants.END_OF_MESSAGE_COMMAND_KEY) ) {
 			printConsole(line);
+			if( line.equals(KlotsConstants.END_OF_TRANSMISSION_COMMAND_KEY) ) {
+				comm.closeTransmission(false);
+				return;
+			}
 			line = comm.receiveMessageLine();
 		}
 	}
@@ -42,7 +46,7 @@ public class NXTDataDistributorWithKiVi extends JSONObjectDataComponent implemen
 	
 	public void wrapup() throws KiemInitializationException {
 		comm.sendMessage(KlotsConstants.STOP_COMMAND_KEY);
-		comm.closeTransmission();
+		comm.closeTransmission(true);
 	}
 
 	
@@ -78,7 +82,7 @@ public class NXTDataDistributorWithKiVi extends JSONObjectDataComponent implemen
 		} catch (JSONException e) {
 			printConsole("PRODUCER ERROR: " + e.getMessage());
         }
-		comm.sendMessage(KlotsConstants.STEP_COMMAND_KEY + "\n" + msg);
+		comm.sendMessage(KlotsConstants.STEP_COMMAND_KEY + KlotsConstants.MESSAGE_LINE_DELIMITER + msg);
 		
 		// --------------------------- observer -----------------------------
 		StringBuffer buffer = comm.receiveMessage();
