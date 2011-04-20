@@ -17,6 +17,8 @@ import de.cau.cs.kieler.sim.kiem.JSONSignalValues;
 import de.cau.cs.kieler.sim.kiem.KiemExecutionException;
 import de.cau.cs.kieler.sim.kiem.KiemInitializationException;
 
+import de.cau.cs.kieler.klots.KlotsConstants;
+
 public class NXTDataDistributorWithKiVi extends JSONObjectDataComponent implements
 		IJSONObjectDataComponent {
 	
@@ -28,10 +30,10 @@ public class NXTDataDistributorWithKiVi extends JSONObjectDataComponent implemen
 		comm = NXTCommunicator.getInstance();
 		// use NXTCommunicator.receiveMessageLine() to ensure plane old java remote print support
 		String line = comm.receiveMessageLine();
-		if( !line.startsWith("SYNCHRONIZED") && !line.startsWith(comm.PRINT_TAG) ) {
+		if( !line.startsWith(KlotsConstants.SYNCHRONIZED_COMMAND_KEY) && !line.startsWith(KlotsConstants.PRINT_TAG) ) {
 			printConsole("ERROR while trying to synchronize with the NXT: " + line);
 		}
-		while( !line.equals("EOT") ) {
+		while( !line.equals(KlotsConstants.END_OF_MESSAGE_COMMAND_KEY) ) {
 			printConsole(line);
 			line = comm.receiveMessageLine();
 		}
@@ -39,7 +41,7 @@ public class NXTDataDistributorWithKiVi extends JSONObjectDataComponent implemen
 
 	
 	public void wrapup() throws KiemInitializationException {
-		comm.sendMessage("STOP");
+		comm.sendMessage(KlotsConstants.STOP_COMMAND_KEY);
 		comm.closeTransmission();
 	}
 
@@ -64,9 +66,9 @@ public class NXTDataDistributorWithKiVi extends JSONObjectDataComponent implemen
 				jSONKey = (String) iter.next();
 				if( JSONSignalValues.isPresent(jSONObject.get(jSONKey)) ) {
 					if( JSONSignalValues.isSignalValue(jSONObject.get(jSONKey)) ) {
-						msg += jSONKey + "," + JSONSignalValues.getSignalValue(jSONObject.get(jSONKey)) + ";";
+						msg += jSONKey + KlotsConstants.COMMA_STRING + JSONSignalValues.getSignalValue(jSONObject.get(jSONKey)) + KlotsConstants.SEMICOLON_STRING;
 					} else {
-						msg += jSONKey + ";";
+						msg += jSONKey + KlotsConstants.SEMICOLON_STRING;
 					}
 		        }
 			}
@@ -76,7 +78,7 @@ public class NXTDataDistributorWithKiVi extends JSONObjectDataComponent implemen
 		} catch (JSONException e) {
 			printConsole("PRODUCER ERROR: " + e.getMessage());
         }
-		comm.sendMessage("STEP\n" + msg);
+		comm.sendMessage(KlotsConstants.STEP_COMMAND_KEY + "\n" + msg);
 		
 		// --------------------------- observer -----------------------------
 		StringBuffer buffer = comm.receiveMessage();
@@ -86,10 +88,10 @@ public class NXTDataDistributorWithKiVi extends JSONObjectDataComponent implemen
 		int start = 0;
 		int end = 0;
 		while( start >= 0 ) {
-			start = buffer.indexOf("{" + comm.PRINT_TAG, end);
+			start = buffer.indexOf("{" + KlotsConstants.PRINT_TAG, end);
 			if( start >= 0 ) {
 				end = buffer.indexOf("},", start);
-				printConsole( "REMOTE PRINT: " + buffer.substring(1+start+comm.PRINT_TAG.length(), end) );
+				printConsole( "REMOTE PRINT: " + buffer.substring(1+start+KlotsConstants.PRINT_TAG.length(), end) );
 				buffer.replace(start, end+2, "");
 				System.out.println("====;;;;;;;==== MESSAGE BUFFER AFTER PRINT = >" + buffer.toString() + "<");
 				end = start;
@@ -101,13 +103,13 @@ public class NXTDataDistributorWithKiVi extends JSONObjectDataComponent implemen
 			JSONObject returnObj = new JSONObject();
 			String s = buffer.toString();
 			s = s.substring(1, s.length()-1);
-			returnObj.put("executionTrace", received);
+			returnObj.put(KlotsConstants.JSON_EXECUTION_TRACE_TAG, received);
 			
 			JSONObject signals = received.getJSONObject(received.length()-2);
-			if( signals.has("signals") ) {
+			if( signals.has(KlotsConstants.JSON_SIGNALS_TAG) ) {
 				JSONObject tmp = new JSONObject();
 				String key;
-				JSONArray sig = signals.getJSONArray("signals");
+				JSONArray sig = signals.getJSONArray(KlotsConstants.JSON_SIGNALS_TAG);
 				for(int i = 0; i < sig.length(); i++) {
 					tmp = sig.getJSONObject(i);
 					Iterator<?> iter = tmp.keys();

@@ -19,7 +19,6 @@ import org.eclipse.jface.dialogs.ErrorDialog;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
-import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
@@ -38,6 +37,8 @@ import org.eclipse.ui.ide.IGotoMarker;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import de.cau.cs.kieler.klots.KlotsConstants;
 
 
 @SuppressWarnings("restriction")
@@ -100,9 +101,9 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 		}
 		
 		void addSJInstruction(IMarker sjInstructionMarker) {
-			int instrStart = sjInstructionMarker.getAttribute(ATTRIBUTE_INSTRUCTION_START, 0);
+			int instrStart = sjInstructionMarker.getAttribute(KlotsConstants.SJ_INSTRUCTION_MARKER_ATTRIBUTE_INSTRUCTION_START, 0);
 			for(int i = 0; i < this.sjInstructions.size(); i++) {
-				if( instrStart < this.sjInstructions.get(i).getAttribute(ATTRIBUTE_INSTRUCTION_START, 0) ) {
+				if( instrStart < this.sjInstructions.get(i).getAttribute(KlotsConstants.SJ_INSTRUCTION_MARKER_ATTRIBUTE_INSTRUCTION_START, 0) ) {
 					this.sjInstructions.add(i, sjInstructionMarker);
 					return;
 				}
@@ -134,54 +135,6 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 	// ======================================================================
 	// >>>>>>>>>>                FIELDS & VARIABLES                <<<<<<<<<<
 	// ======================================================================
-	
-	// SJ INSTRUCTION MARKER ID & ATTRIBUTES
-	private final String SJ_INSTRUCTION_MARKER_ID = "de.cau.cs.kieler.klots.editor.instructionMarker";
-	private final static String ATTRIBUTE_INSTRUCTION_NAME = "instructionName";
-	private final String ATTRIBUTE_INSTRUCTION_LABEL = "instructionLabel";
-	private final String ATTRIBUTE_INSTRUCTION_START = "instructionStart";
-	private final String ATTRIBUTE_INSTRUCTION_END = "instructionEnd";
-	
-	// HIGHLIGHT COLORS
-	// black
-	private final static Color FOREGROUND_STANDARD_COLOR = new Color(Display.getDefault(), 0, 0, 0);
-	// white
-	private final static Color BACKGROUND_STANDARD_COLOR = new Color(Display.getDefault(), 255, 255, 255);
-	
-	// dark orange
-	private final static Color ALREADY_DONE_MICROSTEP_FOREGROUND_COLOR = new Color(Display.getDefault(), 255, 140, 0);
-	// eclipse standard selected line background color
-	private final static Color ALREADY_DONE_MICROSTEP_BACKGROUND_COLOR = new Color(Display.getDefault(), 232, 242, 254);
-	// red
-	private final static Color ACTIVE_MICROSTEP_FOREGROUND_COLOR = new Color(Display.getDefault(), 255, 0, 0);
-	// eclipse standard selected line background color
-	private final static Color ACTIVE_MICROSTEP_BACKGROUND_COLOR = new Color(Display.getDefault(), 232, 242, 254);
-	// dark green
-	private final static Color YET_TO_BE_DONE_MICROSTEP_FOREGROUND_COLOR = new Color(Display.getDefault(), 0, 100, 0);
-	// misty rose
-	private final static Color YET_TO_BE_DONE_MICROSTEP_BACKGROUND_COLOR = new Color(Display.getDefault(), 255, 228, 225);
-	
-	// SJ instructions
-	private final static String[][] sjInstructionsMap = {
-		// normal instructions
-		{"abort", "abort"},
-		{"awaitDone", "awaitDoneCB"},
-		{"fork", "fork"},
-		{"forke", "forkEB"},
-		{"goto", "gotoB"},
-		{"halt", "haltCB"},
-		{"joinDone", "joinDoneCB"},
-		{"pause", "pauseB"},
-		{"prio", "prioB"},
-		{"suspend", "suspend"},
-		{"term", "termB"},
-		{"trans", "transB"},
-		// signal instructions
-		{"present", "isPresent"},
-		{"emit", "emit"},
-		{"sustain", "sustainCB"},
-		{"pre", "pre"}};
-	private final static int sjInstructionsMapSize = 16;
 
 	// KiVi effects lists
 	private static int microStepNumber = -1;
@@ -189,11 +142,8 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 	// label list
 	private static List<LabelInfo> labelList = new ArrayList<LabelInfo>();
 	private String[] labels;
-	private final String LABEL_ENUM_NAME = "enum StateLabel";
 	// signals
 	private String[] signals;
-	private final String SIGNAL_DECLARATION_NAME = "addSignals(";
-	private final String TICK_METHOD_NAME = "public void tick()";
 
 	// Java editor
 	private static CompilationUnitEditor editor;
@@ -203,7 +153,6 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 	private static StyledText executionTraceViewer;
 	// execution trace viewer data to be displayed
 	private static StringBuffer executionTraceUpdateData = new StringBuffer();
-	
 	
 	// status line SJ display
 	private StatusLineContributionItem uiStatusLineItem;
@@ -421,26 +370,26 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 		String text = editor.getDocumentProvider().getDocument(editor.getEditorInput()).get();
 		
 		// find label declaration part
-		int offset = text.indexOf(LABEL_ENUM_NAME);
+		int offset = text.indexOf(KlotsConstants.LABEL_ENUM_NAME);
 		if( offset < 0 || offset > text.length() ) {
 			System.err.println("EDITOR INITIALIZATION ERROR: No label declaration part found!");
 			return;
 		}
-		System.out.println("HHHHHHHHHHHHHH>>>>>>>>>>>> offset = " + offset + ", length = " + LABEL_ENUM_NAME.length() + ", text = >" + text.substring(offset, offset+LABEL_ENUM_NAME.length()) + "<");
-		while( isComment(offset, offset + LABEL_ENUM_NAME.length(), text) || isString(offset, offset + LABEL_ENUM_NAME.length(), text) ) {
-			offset = text.indexOf(LABEL_ENUM_NAME, offset+1);
+		System.out.println("HHHHHHHHHHHHHH>>>>>>>>>>>> offset = " + offset + ", length = " + KlotsConstants.LABEL_ENUM_NAME.length() + ", text = >" + text.substring(offset, offset+KlotsConstants.LABEL_ENUM_NAME.length()) + "<");
+		while( isComment(offset, offset + KlotsConstants.LABEL_ENUM_NAME.length(), text) || isString(offset, offset + KlotsConstants.LABEL_ENUM_NAME.length(), text) ) {
+			offset = text.indexOf(KlotsConstants.LABEL_ENUM_NAME, offset+1);
 			if( offset < 0 || offset > text.length() ) {
 				System.err.println("EDITOR INITIALIZATION ERROR: No label declaration part found!");
 				return;
 			}
-			System.out.println("HHHHHHHHHHHHHH>>>>>>>>>>>> offset = " + offset + ", length = " + LABEL_ENUM_NAME.length() + ", text = >" + text.substring(offset, offset+LABEL_ENUM_NAME.length()) + "<");
+			System.out.println("HHHHHHHHHHHHHH>>>>>>>>>>>> offset = " + offset + ", length = " + KlotsConstants.LABEL_ENUM_NAME.length() + ", text = >" + text.substring(offset, offset+KlotsConstants.LABEL_ENUM_NAME.length()) + "<");
 		}
 		
 		// parse label declarations
 		offset = text.indexOf('{', offset) + 1;
 		String labelsText = text.substring( offset, text.indexOf('}', offset) );
 		System.out.println("HHHHHHHHHHHHHH>>>>>>>>>>>> labels text = >" + labelsText + "<");
-		String[] rawLabels = labelsText.split(",");
+		String[] rawLabels = labelsText.split(KlotsConstants.COMMA_STRING);
 		for(int i = 0; i < rawLabels.length; i++) {
 			System.out.println("HHHHHHHHHHHHHH>>>>>>>>>>>> process label = >" + rawLabels[i] + "<");
 			rawLabels[i] = rawLabels[i].trim();
@@ -471,7 +420,7 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 		}
 		
 		// find signal declaration part
-		offset = text.indexOf(SIGNAL_DECLARATION_NAME, offset);
+		offset = text.indexOf(KlotsConstants.SIGNAL_DECLARATION_NAME, offset);
 		System.out.println("HHHHHHHHHHHHHH>>>>>>>>>>>> offset = " + offset + ", tickOffset = " + tickOffset);
 		if( offset < 0 || offset > tickOffset ) {
 			if( first ) {
@@ -481,9 +430,9 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 			}
 			return;
 		}
-		System.out.println("HHHHHHHHHHHHHH>>>>>>>>>>>> offset = " + offset + ", length = " + SIGNAL_DECLARATION_NAME.length() + ", text = >" + text.substring(offset, offset+SIGNAL_DECLARATION_NAME.length()) + "<");
-		while( isComment(offset, offset + SIGNAL_DECLARATION_NAME.length(), text) || isString(offset, offset + SIGNAL_DECLARATION_NAME.length(), text) ) {
-			offset = text.indexOf(SIGNAL_DECLARATION_NAME, offset+1);
+		System.out.println("HHHHHHHHHHHHHH>>>>>>>>>>>> offset = " + offset + ", length = " + KlotsConstants.SIGNAL_DECLARATION_NAME.length() + ", text = >" + text.substring(offset, offset+KlotsConstants.SIGNAL_DECLARATION_NAME.length()) + "<");
+		while( isComment(offset, offset + KlotsConstants.SIGNAL_DECLARATION_NAME.length(), text) || isString(offset, offset + KlotsConstants.SIGNAL_DECLARATION_NAME.length(), text) ) {
+			offset = text.indexOf(KlotsConstants.SIGNAL_DECLARATION_NAME, offset+1);
 			if( offset < 0 || offset > tickOffset ) {
 				if( first ) {
 					System.err.println("EDITOR INITIALIZATION ERROR: No signal declaration part found!");
@@ -492,14 +441,14 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 				}
 				return;
 			}
-			System.out.println("HHHHHHHHHHHHHH>>>>>>>>>>>> offset = " + offset + ", length = " + SIGNAL_DECLARATION_NAME.length() + ", text = >" + text.substring(offset, offset+SIGNAL_DECLARATION_NAME.length()) + "<");
+			System.out.println("HHHHHHHHHHHHHH>>>>>>>>>>>> offset = " + offset + ", length = " + KlotsConstants.SIGNAL_DECLARATION_NAME.length() + ", text = >" + text.substring(offset, offset+KlotsConstants.SIGNAL_DECLARATION_NAME.length()) + "<");
 		}
 		
 		// parse label declarations
-		offset = text.indexOf('(', offset) + 1;
-		String signalsText = text.substring( offset, text.indexOf(')', offset) );
+		offset = text.indexOf(KlotsConstants.SJ_INSTRUCTION_START_BRACKET_CHAR, offset) + 1;
+		String signalsText = text.substring( offset, text.indexOf(KlotsConstants.SJ_INSTRUCTION_END_BRACKET_CHAR, offset) );
 		System.out.println("HHHHHHHHHHHHHH>>>>>>>>>>>> signals text = >" + signalsText + "<");
-		String[] rawSignals = signalsText.split(",");
+		String[] rawSignals = signalsText.split(KlotsConstants.COMMA_STRING);
 		for(int i = 0; i < rawSignals.length; i++) {
 			System.out.println("HHHHHHHHHHHHHH>>>>>>>>>>>> process signal = >" + rawSignals[i] + "<");
 			rawSignals[i] = rawSignals[i].trim();
@@ -538,19 +487,19 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 		String text = editor.getDocumentProvider().getDocument(editor.getEditorInput()).get();
 		
 		// find tick method start offset
-		int offset = text.indexOf(TICK_METHOD_NAME);
+		int offset = text.indexOf(KlotsConstants.TICK_METHOD_NAME);
 		if( offset < 0 || offset > text.length() ) {
 			System.err.println("EDITOR INITIALIZATION ERROR: No tick() method found!");
 			return -1;
 		}
-		System.out.println("HHHHHHHHHHHHHH>>>>>>>>>>>> offset = " + offset + ", length = " + TICK_METHOD_NAME.length() + ", text = >" + text.substring(offset, offset+TICK_METHOD_NAME.length()) + "<");
-		while( isComment(offset, offset + TICK_METHOD_NAME.length(), text) || isString(offset, offset + TICK_METHOD_NAME.length(), text) ) {
-			offset = text.indexOf(TICK_METHOD_NAME, offset+1);
+		System.out.println("HHHHHHHHHHHHHH>>>>>>>>>>>> offset = " + offset + ", length = " + KlotsConstants.TICK_METHOD_NAME.length() + ", text = >" + text.substring(offset, offset+KlotsConstants.TICK_METHOD_NAME.length()) + "<");
+		while( isComment(offset, offset + KlotsConstants.TICK_METHOD_NAME.length(), text) || isString(offset, offset + KlotsConstants.TICK_METHOD_NAME.length(), text) ) {
+			offset = text.indexOf(KlotsConstants.TICK_METHOD_NAME, offset+1);
 			if( offset < 0 || offset > text.length() ) {
 				System.err.println("EDITOR INITIALIZATION ERROR: No tick() method found!");
 				return -1;
 			}
-			System.out.println("HHHHHHHHHHHHHH>>>>>>>>>>>> offset = " + offset + ", length = " + TICK_METHOD_NAME.length() + ", text = >" + text.substring(offset, offset+TICK_METHOD_NAME.length()) + "<");
+			System.out.println("HHHHHHHHHHHHHH>>>>>>>>>>>> offset = " + offset + ", length = " + KlotsConstants.TICK_METHOD_NAME.length() + ", text = >" + text.substring(offset, offset+KlotsConstants.TICK_METHOD_NAME.length()) + "<");
 		}
 		
 		System.out.println("HHHHHHHHHHHHHH>>>>>>>>>>>> found tick() method at offset = " + offset);
@@ -568,8 +517,8 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 		String label = "";
 		int labelColon = 0;
 		
-		for(int labelStart = text.indexOf("case "); (0 < labelStart && labelStart < size); labelStart = text.indexOf("case ", labelStart+1)) {
-			if( (text.charAt(labelStart-1) != ' ') && (text.charAt(labelStart-1) != ';') && (text.charAt(labelStart-1) != '{') && (text.charAt(labelStart-1) != '/') ) {
+		for(int labelStart = text.indexOf(KlotsConstants.LABEL_CASE_NAME); (0 < labelStart && labelStart < size); labelStart = text.indexOf(KlotsConstants.LABEL_CASE_NAME, labelStart+1)) {
+			if( (text.charAt(labelStart-1) != KlotsConstants.SPACE_CHAR) && (text.charAt(labelStart-1) != KlotsConstants.SEMICOLON_CHAR) && (text.charAt(labelStart-1) != '{') && (text.charAt(labelStart-1) != '/') ) {
 				System.out.println("################>>>>>>>>>>>> case is part of a word! -> continue! [char before case = " + text.charAt(labelStart-1) + "]");
 				continue;
 			}
@@ -577,7 +526,7 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 				System.out.println("################>>>>>>>>>>>> case is inside of a comment! -> continue!");
 				continue;
 			}
-			labelColon = text.indexOf(":", labelStart);
+			labelColon = text.indexOf(KlotsConstants.COLON_STRING, labelStart);
 			System.out.println("################>>>>>>>>>>>> labelStart = " + labelStart + ", labelColon = " + labelColon + ", labelText = " + text.substring(labelStart, labelColon) + "<<<");
 			if( labelColon == -1 ) {
 				System.out.println("################>>>>>>>>>>>> labelColon = -1, -> END!");
@@ -585,7 +534,7 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 			}
 			
 			label = checkForLabelAt(labelStart, labelColon, text);
-			if( !label.equals("") ) {
+			if( !label.equals(KlotsConstants.EMPTY_STRING) ) {
 				if( labelList.isEmpty() ) {
 					labelList.add( new LabelInfo(label, labelStart+5) );
 				} else {
@@ -601,7 +550,7 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 			System.err.println("EDITOR INITIALIZATION ERROR: No labels found!");
 			return;
 		}
-		labelList.get(labelList.size()-1).setLabelEndIndex( text.lastIndexOf(";") );
+		labelList.get(labelList.size()-1).setLabelEndIndex( text.lastIndexOf(KlotsConstants.SEMICOLON_STRING) );
 		
 		for(LabelInfo l : labelList) {
 			System.out.println("\n++++++++++++++++++++++++++++++++++++++++");
@@ -622,8 +571,8 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 		String text = editor.getDocumentProvider().getDocument(editor.getEditorInput()).get();
 		String instrName = "";
 		for(LabelInfo label : labelList) {
-			for(int i = 0; i < sjInstructionsMapSize; i++) {
-				instrName = sjInstructionsMap[i][1];
+			for(int i = 0; i < KlotsConstants.sjInstructionsMapSize; i++) {
+				instrName = KlotsConstants.sjInstructionsMap[i][1];
 				label.setCursorIndex( label.getLabelStartIndex() );
 				
 				// ----------------------------------------------------------------------
@@ -636,8 +585,8 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 			
 			System.out.println("OOOOOOOOOOOOOOOOOOOO INSTRUCTIONS AT LABEL >" + label.getLabelName() + "< OOOOOOOOOOOOOOOOOOOO");
 			for( IMarker m : label.getSJInstructions() ) {
-				System.out.print("instruction: >" + m.getAttribute(ATTRIBUTE_INSTRUCTION_NAME, "NO NAME") + "<");
-				System.out.println(", text: >" + text.substring(m.getAttribute(ATTRIBUTE_INSTRUCTION_START, 0), m.getAttribute("instructionEnd", 10)) + "<");
+				System.out.print("instruction: >" + m.getAttribute(KlotsConstants.SJ_INSTRUCTION_MARKER_ATTRIBUTE_INSTRUCTION_NAME, "NO NAME") + "<");
+				System.out.println(", text: >" + text.substring(m.getAttribute(KlotsConstants.SJ_INSTRUCTION_MARKER_ATTRIBUTE_INSTRUCTION_START, 0), m.getAttribute(KlotsConstants.SJ_INSTRUCTION_MARKER_ATTRIBUTE_INSTRUCTION_END, 10)) + "<");
 			}
 			System.out.println();
 		}
@@ -659,7 +608,7 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 		}
 		if( !labelFound ) {
 			System.err.println("SJ EDITOR INITIALIZATION ERROR: At label >" + label + "<: No such label found!");
-			return "";
+			return KlotsConstants.EMPTY_STRING;
 		}
 		return label;
 	}
@@ -674,10 +623,10 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 		
 		// rule out multi line comments
 		System.out.println(">>> RULE OUT MULTI LINE COMMENTS");
-		commentStart = text.lastIndexOf("/*", startIndex);
+		commentStart = text.lastIndexOf(KlotsConstants.MULTI_LINE_COMMENT_START, startIndex);
 		System.out.println(">>> CommentStart = " + commentStart);
 		if( commentStart > -1 ) {
-			commentEnd = text.indexOf("*/", commentStart);
+			commentEnd = text.indexOf(KlotsConstants.MULTI_LINE_COMMENT_END, commentStart);
 			System.out.println(">>> CommentEnd = " + commentEnd);
 			if( commentEnd > -1 && commentEnd > endIndex ) {
 				System.out.println(">>> In Comment!!!");
@@ -687,10 +636,10 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 		
 		// rule out single line comments
 		System.out.println(">>> RULE OUT SINGLE LINE COMMENTS");
-		commentStart = text.lastIndexOf("//", startIndex);
+		commentStart = text.lastIndexOf(KlotsConstants.SINGLE_LINE_COMMENT_START, startIndex);
 		System.out.println(">>> CommentStart = " + commentStart);
 		if( commentStart > -1 ) {
-			commentEnd = text.indexOf("\n", commentStart);
+			commentEnd = text.indexOf(KlotsConstants.SINGLE_LINE_COMMENT_END, commentStart);
 			System.out.println(">>> CommentEnd = " + commentEnd);
 			if( commentEnd > endIndex ) {
 				System.out.println(">>> In Comment!!!");
@@ -707,20 +656,20 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 	private boolean isString(int startIndex, int endIndex, String text) {
 		System.out.println("####>>>>>>>>>>>> CHECK IF STRING! <<<<<<<<<<<<<<####");
 		System.out.println(">>> RULE OUT STRINGS");
-		int commentEnd = text.lastIndexOf(";", startIndex);
-		int commentStart = text.lastIndexOf('\"', startIndex);
-		System.out.println(">>> StringStart = " + commentStart);
-		if( commentStart > -1 && commentStart > commentEnd ) {
+		int stringEnd = text.lastIndexOf(KlotsConstants.SEMICOLON_STRING, startIndex);
+		int stringStart = text.lastIndexOf(KlotsConstants.STRING_START_CHAR, startIndex);
+		System.out.println(">>> StringStart = " + stringStart);
+		if( stringStart > -1 && stringStart > stringEnd ) {
 
 			// if supposed start of the string is inside of a comment, return 'is no string'
-			if( isComment(commentStart, commentStart+1, text) ) {
+			if( isComment(stringStart, stringStart+1, text) ) {
 				System.out.println(">>> Supposed string is inside of a comment!");
 				return false;
 			}
 			
-			commentEnd = text.indexOf('\"', commentStart+1);
-			System.out.println(">>> StringEnd = " + commentEnd);
-			if( commentEnd > -1 && commentEnd > endIndex ) {
+			stringEnd = text.indexOf(KlotsConstants.STRING_END_CHAR, stringStart+1);
+			System.out.println(">>> StringEnd = " + stringEnd);
+			if( stringEnd > -1 && stringEnd > endIndex ) {
 				System.out.println(">>> In String!!!");
 				return true;
 			}
@@ -733,11 +682,11 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 	
 	private boolean findSJInstructionAndAddMarkerToLabel(String text, LabelInfo label, String instrName) {
 		System.out.println("XXXXXXXXXX label = >" + label.getLabelName() + "<, instruction name = >" + instrName + "<");
-		int offset = text.indexOf( instrName + "(", label.getCursorIndex() );
+		int offset = text.indexOf( instrName + KlotsConstants.SJ_INSTRUCTION_START_BRACKET_STRING, label.getCursorIndex() );
 		if( offset < 0 || offset > label.getLabelEndIndex() ) {
 			return false;
 		}
-		int end = text.indexOf(')', offset)+1;
+		int end = text.indexOf(KlotsConstants.SJ_INSTRUCTION_END_BRACKET_CHAR, offset)+1;
 		if( end < 0 || end > label.getLabelEndIndex() ) {
 			return false;
 		}
@@ -764,11 +713,11 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 	
 	private IMarker createSJInstructionMarker(String msg, String instrName, String instrLabel, int line, int instrStart, int instrEnd) {
 		try {
-			IMarker marker = (((IFileEditorInput) editor.getEditorInput()).getFile()).createMarker(SJ_INSTRUCTION_MARKER_ID);
-			marker.setAttribute(ATTRIBUTE_INSTRUCTION_NAME, instrName);
-			marker.setAttribute(ATTRIBUTE_INSTRUCTION_LABEL, instrLabel);
-			marker.setAttribute(ATTRIBUTE_INSTRUCTION_START, instrStart);
-			marker.setAttribute(ATTRIBUTE_INSTRUCTION_END, instrEnd);
+			IMarker marker = (((IFileEditorInput) editor.getEditorInput()).getFile()).createMarker(KlotsConstants.SJ_INSTRUCTION_MARKER_ID);
+			marker.setAttribute(KlotsConstants.SJ_INSTRUCTION_MARKER_ATTRIBUTE_INSTRUCTION_NAME, instrName);
+			marker.setAttribute(KlotsConstants.SJ_INSTRUCTION_MARKER_ATTRIBUTE_INSTRUCTION_LABEL, instrLabel);
+			marker.setAttribute(KlotsConstants.SJ_INSTRUCTION_MARKER_ATTRIBUTE_INSTRUCTION_START, instrStart);
+			marker.setAttribute(KlotsConstants.SJ_INSTRUCTION_MARKER_ATTRIBUTE_INSTRUCTION_END, instrEnd);
 			marker.setAttribute(IMarker.LINE_NUMBER, line);
 			marker.setAttribute(IMarker.CHAR_START, instrStart);
 			marker.setAttribute(IMarker.CHAR_END, instrEnd);
@@ -823,13 +772,13 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 					
 					// set all instructions 'already done'
 					for(int i = 0; i < kiviList.size()-1; i++) {
-						kiviList.get(i).setColor(ALREADY_DONE_MICROSTEP_FOREGROUND_COLOR);
-						kiviList.get(i).setBackgroundColor(ALREADY_DONE_MICROSTEP_BACKGROUND_COLOR);
+						kiviList.get(i).setColor(KlotsConstants.ALREADY_DONE_MICROSTEP_FOREGROUND_COLOR);
+						kiviList.get(i).setBackgroundColor(KlotsConstants.ALREADY_DONE_MICROSTEP_BACKGROUND_COLOR);
 						kiviList.get(i).execute();
 					}
 					// set last instruction 'active'
-					kiviList.get(kiviList.size()-1).setColor(ACTIVE_MICROSTEP_FOREGROUND_COLOR);
-					kiviList.get(kiviList.size()-1).setBackgroundColor(ACTIVE_MICROSTEP_BACKGROUND_COLOR);
+					kiviList.get(kiviList.size()-1).setColor(KlotsConstants.ACTIVE_MICROSTEP_FOREGROUND_COLOR);
+					kiviList.get(kiviList.size()-1).setBackgroundColor(KlotsConstants.ACTIVE_MICROSTEP_BACKGROUND_COLOR);
 					kiviList.get(kiviList.size()-1).execute();
 					// adjust microstep counter 
 					microStepNumber = kiviList.size()-1;
@@ -846,9 +795,9 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 	
 	
 	private static String getProperSJInstruktionName(String instr) {
-		for(int i = 0; i < sjInstructionsMapSize; i++) {
-			if( instr.equals(sjInstructionsMap[i][0]) ) {
-				return sjInstructionsMap[i][1];
+		for(int i = 0; i < KlotsConstants.sjInstructionsMapSize; i++) {
+			if( instr.equals(KlotsConstants.sjInstructionsMap[i][0]) ) {
+				return KlotsConstants.sjInstructionsMap[i][1];
 			}
 		}
 		return "INSTRUCTION MAPPING ERROR";
@@ -862,7 +811,7 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 		System.out.print("$$$$$$>>> LABELS IN LIST: [");
 		for(LabelInfo info : labelList) {
 			System.out.print(info.getLabelName() + ", ");
-			if( info.getLabelName().equals(instrData.getString("label")) ) {
+			if( info.getLabelName().equals(instrData.getString(KlotsConstants.JSON_LABEL_TAG)) ) {
 				label = info;
 				break;
 			}
@@ -870,14 +819,14 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 		System.out.println("]");
 		
 		if( label == null ) {
-			System.err.println("=> Instruction >" + instrName + "< not found at label >" + instrData.getString("label") + "<! No such label!");
+			System.err.println("=> Instruction >" + instrName + "< not found at label >" + instrData.getString(KlotsConstants.JSON_LABEL_TAG) + "<! No such label!");
 		}
 		IMarker marker = null;
 		List<IMarker> list = label.getSJInstructions();
 		
 		// search for the instruction from current position to the end of the label range
 		for(int i = label.getSJInstructionCursor(); i < list.size(); i++) {
-			if( (list.get(i).getAttribute(ATTRIBUTE_INSTRUCTION_NAME, "NO NAME")).equals(instrName) ) {
+			if( (list.get(i).getAttribute(KlotsConstants.SJ_INSTRUCTION_MARKER_ATTRIBUTE_INSTRUCTION_NAME, "NO NAME")).equals(instrName) ) {
 				marker = list.get(i);
 				label.setSJInstructionCursor(i+1);
 				break;
@@ -887,7 +836,7 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 		// if instruction not found till end of label range goto label start and search from there
 		if( marker == null ) {
 			for(int i = 0; i < label.getSJInstructionCursor(); i++) {
-				if( (list.get(i).getAttribute(ATTRIBUTE_INSTRUCTION_NAME, "NO NAME")).equals(instrName) ) {
+				if( (list.get(i).getAttribute(KlotsConstants.SJ_INSTRUCTION_MARKER_ATTRIBUTE_INSTRUCTION_NAME, "NO NAME")).equals(instrName) ) {
 					marker = list.get(i);
 					label.setSJInstructionCursor(i+1);
 					break;
@@ -907,7 +856,7 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 		}
 		
 		// create highlight effect
-		HighlightSJMarkerEffect e = new HighlightSJMarkerEffect(marker, YET_TO_BE_DONE_MICROSTEP_FOREGROUND_COLOR, YET_TO_BE_DONE_MICROSTEP_BACKGROUND_COLOR, FOREGROUND_STANDARD_COLOR, BACKGROUND_STANDARD_COLOR, editor);
+		HighlightSJMarkerEffect e = new HighlightSJMarkerEffect(marker, KlotsConstants.YET_TO_BE_DONE_MICROSTEP_FOREGROUND_COLOR, KlotsConstants.YET_TO_BE_DONE_MICROSTEP_BACKGROUND_COLOR, KlotsConstants.FOREGROUND_STANDARD_COLOR, KlotsConstants.BACKGROUND_STANDARD_COLOR, editor);
 		kiviList.add(e);
 	}
 	
@@ -983,20 +932,20 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 		if( microStepNumber == -1 ) {
 			// set all instructions 'yet to be done'
 			for(int i = 1; i < kiviList.size(); i++) {
-				kiviList.get(i).setColor(YET_TO_BE_DONE_MICROSTEP_FOREGROUND_COLOR);
-				kiviList.get(i).setBackgroundColor(YET_TO_BE_DONE_MICROSTEP_BACKGROUND_COLOR);
+				kiviList.get(i).setColor(KlotsConstants.YET_TO_BE_DONE_MICROSTEP_FOREGROUND_COLOR);
+				kiviList.get(i).setBackgroundColor(KlotsConstants.YET_TO_BE_DONE_MICROSTEP_BACKGROUND_COLOR);
 				kiviList.get(i).execute();
 			}
 		} else {
 			// set old current instruction 'already done'
-			kiviList.get(microStepNumber).setColor(ALREADY_DONE_MICROSTEP_FOREGROUND_COLOR);
-			kiviList.get(microStepNumber).setBackgroundColor(ALREADY_DONE_MICROSTEP_BACKGROUND_COLOR);
+			kiviList.get(microStepNumber).setColor(KlotsConstants.ALREADY_DONE_MICROSTEP_FOREGROUND_COLOR);
+			kiviList.get(microStepNumber).setBackgroundColor(KlotsConstants.ALREADY_DONE_MICROSTEP_BACKGROUND_COLOR);
 			kiviList.get(microStepNumber).execute();
 		}
 		// set new current instruction 'active'
 		microStepNumber++;
-		kiviList.get(microStepNumber).setColor(ACTIVE_MICROSTEP_FOREGROUND_COLOR);
-		kiviList.get(microStepNumber).setBackgroundColor(ACTIVE_MICROSTEP_BACKGROUND_COLOR);
+		kiviList.get(microStepNumber).setColor(KlotsConstants.ACTIVE_MICROSTEP_FOREGROUND_COLOR);
+		kiviList.get(microStepNumber).setBackgroundColor(KlotsConstants.ACTIVE_MICROSTEP_BACKGROUND_COLOR);
 		kiviList.get(microStepNumber).execute();
 	}
 	
@@ -1005,13 +954,13 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 	public void doMicroStepBackwards() {
 		if( microStepNumber > 0 ) {
 			// set old current instruction 'yet to be done'
-			kiviList.get(microStepNumber).setColor(YET_TO_BE_DONE_MICROSTEP_FOREGROUND_COLOR);
-			kiviList.get(microStepNumber).setBackgroundColor(YET_TO_BE_DONE_MICROSTEP_BACKGROUND_COLOR);
+			kiviList.get(microStepNumber).setColor(KlotsConstants.YET_TO_BE_DONE_MICROSTEP_FOREGROUND_COLOR);
+			kiviList.get(microStepNumber).setBackgroundColor(KlotsConstants.YET_TO_BE_DONE_MICROSTEP_BACKGROUND_COLOR);
 			kiviList.get(microStepNumber).execute();
 			// set new current instruction 'active'
 			microStepNumber--;
-			kiviList.get(microStepNumber).setColor(ACTIVE_MICROSTEP_FOREGROUND_COLOR);
-			kiviList.get(microStepNumber).setBackgroundColor(ACTIVE_MICROSTEP_BACKGROUND_COLOR);
+			kiviList.get(microStepNumber).setColor(KlotsConstants.ACTIVE_MICROSTEP_FOREGROUND_COLOR);
+			kiviList.get(microStepNumber).setBackgroundColor(KlotsConstants.ACTIVE_MICROSTEP_BACKGROUND_COLOR);
 			kiviList.get(microStepNumber).execute();
 		}
 	}
@@ -1021,13 +970,13 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 	public void doAllForwardMicroSteps() {
 		// set all instructions 'already done'
 		for(int i = 0; i < kiviList.size()-1; i++) {
-			kiviList.get(i).setColor(ALREADY_DONE_MICROSTEP_FOREGROUND_COLOR);
-			kiviList.get(i).setBackgroundColor(ALREADY_DONE_MICROSTEP_BACKGROUND_COLOR);
+			kiviList.get(i).setColor(KlotsConstants.ALREADY_DONE_MICROSTEP_FOREGROUND_COLOR);
+			kiviList.get(i).setBackgroundColor(KlotsConstants.ALREADY_DONE_MICROSTEP_BACKGROUND_COLOR);
 			kiviList.get(i).execute();
 		}
 		// set last instruction 'active'
-		kiviList.get(kiviList.size()-1).setColor(ACTIVE_MICROSTEP_FOREGROUND_COLOR);
-		kiviList.get(kiviList.size()-1).setBackgroundColor(ACTIVE_MICROSTEP_BACKGROUND_COLOR);
+		kiviList.get(kiviList.size()-1).setColor(KlotsConstants.ACTIVE_MICROSTEP_FOREGROUND_COLOR);
+		kiviList.get(kiviList.size()-1).setBackgroundColor(KlotsConstants.ACTIVE_MICROSTEP_BACKGROUND_COLOR);
 		kiviList.get(kiviList.size()-1).execute();
 		// adjust microstep counter 
 		microStepNumber = kiviList.size()-1;
@@ -1059,20 +1008,20 @@ public class SJEditorWithKiVi extends MultiPageEditorPart implements IResourceCh
 	public void doSpecificSingleMicroStep(int[] indexArray) {
 		// highlight 'already done' instructions
 		for(int i = 0; i < indexArray[0]; i++) {
-			kiviList.get(i).setColor(ALREADY_DONE_MICROSTEP_FOREGROUND_COLOR);
-			kiviList.get(i).setBackgroundColor(ALREADY_DONE_MICROSTEP_BACKGROUND_COLOR);
+			kiviList.get(i).setColor(KlotsConstants.ALREADY_DONE_MICROSTEP_FOREGROUND_COLOR);
+			kiviList.get(i).setBackgroundColor(KlotsConstants.ALREADY_DONE_MICROSTEP_BACKGROUND_COLOR);
 			kiviList.get(i).execute();
 		}
 		// highlight 'yet to be done' instructions
 		for(int i = indexArray[0]+1; i < kiviList.size(); i++) {
-			kiviList.get(i).setColor(YET_TO_BE_DONE_MICROSTEP_FOREGROUND_COLOR);
-			kiviList.get(i).setBackgroundColor(YET_TO_BE_DONE_MICROSTEP_BACKGROUND_COLOR);
+			kiviList.get(i).setColor(KlotsConstants.YET_TO_BE_DONE_MICROSTEP_FOREGROUND_COLOR);
+			kiviList.get(i).setBackgroundColor(KlotsConstants.YET_TO_BE_DONE_MICROSTEP_BACKGROUND_COLOR);
 			kiviList.get(i).execute();
 		}
 		// highlight 'active' instructions
 		for(int i = 0; i < indexArray.length; i++) {
-			kiviList.get(indexArray[i]).setColor(ACTIVE_MICROSTEP_FOREGROUND_COLOR);
-			kiviList.get(indexArray[i]).setBackgroundColor(ACTIVE_MICROSTEP_BACKGROUND_COLOR);
+			kiviList.get(indexArray[i]).setColor(KlotsConstants.ACTIVE_MICROSTEP_FOREGROUND_COLOR);
+			kiviList.get(indexArray[i]).setBackgroundColor(KlotsConstants.ACTIVE_MICROSTEP_BACKGROUND_COLOR);
 			kiviList.get(indexArray[i]).execute();
 		}
 		// adjust microStepNumber

@@ -105,7 +105,7 @@ public class NXTDataObserverWithKiVi extends JSONObjectDataComponent implements
 			printConsole("HISTORY!");
 			printConsole( ">>> jSONObject: >>> " + jSONObject.toString() );
 			try {
-				editor.update(jSONObject.getJSONArray("executionTrace").toString(), true);
+				editor.update(jSONObject.getJSONArray(KlotsConstants.JSON_EXECUTION_TRACE_TAG).toString(), true);
 				editor.doResetMicroSteps();
 			} catch (JSONException e) {
 				printConsole("HISTORY STEP ERROR: " + e.getMessage());
@@ -113,7 +113,7 @@ public class NXTDataObserverWithKiVi extends JSONObjectDataComponent implements
 			return null;
 		} else {
 			try {
-				editor.update(jSONObject.getJSONArray("executionTrace").toString(), false);
+				editor.update(jSONObject.getJSONArray(KlotsConstants.JSON_EXECUTION_TRACE_TAG).toString(), false);
 			} catch (JSONException e) {
 				printConsole("STEP ERROR: " + e.getMessage());
 			}

@@ -44,7 +44,7 @@ public class SJInstructionsViewDataObserver extends JSONObjectDataComponent impl
         instrList.clear();
         
         try {
-			JSONArray jArray = jSONObject.getJSONArray("executionTrace");
+			JSONArray jArray = jSONObject.getJSONArray(KlotsConstants.JSON_EXECUTION_TRACE_TAG);
 			System.out.println("####>>>> jArray, length=" + jArray.length() + " : " + jArray.toString());
 			JSONObject instr = new JSONObject();
 			JSONObject instrInside = new JSONObject();
@@ -64,16 +64,16 @@ public class SJInstructionsViewDataObserver extends JSONObjectDataComponent impl
 				
 				instrData.setInstructionsName(jSONKey);
 				instrInside = instr.getJSONObject(jSONKey);
-				instrData.setLabel(instrInside.getString("label"));
-				instrData.setPrio(instrInside.getInt("prio"));
-				if( instrInside.has("retval") ) {
-					instrData.setRetval(instrInside.getBoolean("retval"));
+				instrData.setLabel(instrInside.getString(KlotsConstants.JSON_LABEL_TAG));
+				instrData.setPrio(instrInside.getInt(KlotsConstants.JSON_PRIORITY_TAG));
+				if( instrInside.has(KlotsConstants.JSON_RETURN_VALUE_TAG) ) {
+					instrData.setRetval(instrInside.getBoolean(KlotsConstants.JSON_RETURN_VALUE_TAG));
 				}
-				if( instrInside.has("initialExcecution") ) {
-					instrData.setInitialExecution(instrInside.getBoolean("initialExcecution"));
+				if( instrInside.has(KlotsConstants.JSON_INITIAL_EXECUTION_TAG) ) {
+					instrData.setInitialExecution(instrInside.getBoolean(KlotsConstants.JSON_INITIAL_EXECUTION_TAG));
 				}
-				if( instrInside.has("param") ) {
-					instrParams = instrInside.getJSONArray("param");
+				if( instrInside.has(KlotsConstants.JSON_PARAMETER_TAG) ) {
+					instrParams = instrInside.getJSONArray(KlotsConstants.JSON_PARAMETER_TAG);
 					instrData.setParam(instrParams.toString());
 				}
 				System.out.println("####>>>> INSTRUCTION DATA: " + instrData.toString());

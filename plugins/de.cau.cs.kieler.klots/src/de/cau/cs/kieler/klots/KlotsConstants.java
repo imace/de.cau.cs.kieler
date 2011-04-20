@@ -14,10 +14,11 @@ public interface KlotsConstants {
 	public final static String PRINT_END_COMMAND_KEY = ":PRINT_END";
 	public final static String PRINT_TAG = "PRINT:";
 	
-	public final static String END_OF_MESSAGE_COMMAND_KEY = "EOT";
 	public final static String SYNCHRONIZED_COMMAND_KEY = "SYNCHRONIZED";
 	public final static String STEP_COMMAND_KEY = "STEP";
 	public final static String STOP_COMMAND_KEY = "STOP";
+	public final static String END_OF_MESSAGE_COMMAND_KEY = "EOT";
+	public final static String END_OF_TRANSMISSION_COMMAND_KEY = "END_OF_TRANSMISSION";
 	
 	public final static String JSON_EXECUTION_TRACE_TAG = "executionTrace";
 	public final static String JSON_SIGNALS_TAG = "signals";
@@ -25,17 +26,17 @@ public interface KlotsConstants {
 	public final static String JSON_PRIORITY_TAG = "prio";
 	public final static String JSON_PARAMETER_TAG = "param";
 	public final static String JSON_RETURN_VALUE_TAG = "retval";
-	public final static String JSON_INITIAL_EXECUTION_TAG = "initialExecution";
+	public final static String JSON_INITIAL_EXECUTION_TAG = "initialExcecution";
 	
 	public final static String SJ_FILE_NAME_EXTENSION = "java";
 	
 	
 	// SJ INSTRUCTION MARKER ID & ATTRIBUTES
-	public final String SJ_INSTRUCTION_MARKER_ID = "de.cau.cs.kieler.klots.editor.instructionMarker";
-	public final static String ATTRIBUTE_INSTRUCTION_NAME = "instructionName";
-	public final String ATTRIBUTE_INSTRUCTION_LABEL = "instructionLabel";
-	public final String ATTRIBUTE_INSTRUCTION_START = "instructionStart";
-	public final String ATTRIBUTE_INSTRUCTION_END = "instructionEnd";
+	public final static String SJ_INSTRUCTION_MARKER_ID = "de.cau.cs.kieler.klots.editor.instructionMarker";
+	public final static String SJ_INSTRUCTION_MARKER_ATTRIBUTE_INSTRUCTION_NAME = "instructionName";
+	public final static String SJ_INSTRUCTION_MARKER_ATTRIBUTE_INSTRUCTION_LABEL = "instructionLabel";
+	public final static String SJ_INSTRUCTION_MARKER_ATTRIBUTE_INSTRUCTION_START = "instructionStart";
+	public final static String SJ_INSTRUCTION_MARKER_ATTRIBUTE_INSTRUCTION_END = "instructionEnd";
 	
 	// HIGHLIGHT COLORS
 	// black
@@ -77,28 +78,34 @@ public interface KlotsConstants {
 		{"sustain", "sustainCB"},
 		{"pre", "pre"}};
 	public final static int sjInstructionsMapSize = 16;
-	public final String LABEL_ENUM_NAME = "enum StateLabel";
-	public final String LABEL_CASE_NAME = "case ";
-	public final String SIGNAL_DECLARATION_NAME = "addSignals(";
-	public final String TICK_METHOD_NAME = "public void tick()";
+	public final static String LABEL_ENUM_NAME = "enum StateLabel";
+	public final static String LABEL_CASE_NAME = "case ";
+	public final static String SIGNAL_DECLARATION_NAME = "addSignals(";
+	public final static String TICK_METHOD_NAME = "public void tick()";
 	
-	public final String EMPTY_STRING = "";
-	public final char SPACE_CHAR = ' ';
-	public final String SPACE_STRING = " ";
-	public final char COLON_CHAR = ':';
-	public final String COLON_STRING = ":";
-	public final char SEMICOLON_CHAR = ';';
-	public final String SEMICOLON_STRING = ";";
-	public final char SJ_INSTRUCTION_START_BRACKET_CHAR = '(';
-	public final String SJ_INSTRUCTION_START_BRACKET_STRING = "(";
-	public final char SJ_INSTRUCTION_END_BRACKET_CHAR = ')';
-	public final String SJ_INSTRUCTION_END_BRACKET_STRING = ")";
-	public final String MULTI_LINE_COMMENT_START = "/*";
-	public final String MULTI_LINE_COMMENT_END = "*/";
-	public final String SINGLE_LINE_COMMENT_START = "//";
-	public final String SINGLE_LINE_COMMENT_END = "\n";
-	public final String STRING_START = "\"";
-	public final String STRING_END = "\"";
+	public final static String EMPTY_STRING = "";
+	public final static char SPACE_CHAR = ' ';
+	public final static String SPACE_STRING = " ";
+	public final static char COLON_CHAR = ':';
+	public final static String COLON_STRING = ":";
+	public final static char SEMICOLON_CHAR = ';';
+	public final static String SEMICOLON_STRING = ";";
+	public final static char COMMA_CHAR = ',';
+	public final static String COMMA_STRING = ",";
+	public final static char QUOTE_SIGN_CHAR = '"';
+	public final static String QUOTE_SIGN_STRING = "\"";
+	public final static char SJ_INSTRUCTION_START_BRACKET_CHAR = '(';
+	public final static String SJ_INSTRUCTION_START_BRACKET_STRING = "(";
+	public final static char SJ_INSTRUCTION_END_BRACKET_CHAR = ')';
+	public final static String SJ_INSTRUCTION_END_BRACKET_STRING = ")";
+	public final static String MULTI_LINE_COMMENT_START = "/*";
+	public final static String MULTI_LINE_COMMENT_END = "*/";
+	public final static String SINGLE_LINE_COMMENT_START = "//";
+	public final static String SINGLE_LINE_COMMENT_END = "\n";
+	public final static char STRING_START_CHAR = '\"';
+	public final static String STRING_START_STRING = "\"";
+	public final static char STRING_END_CHAR = '\"';
+	public final static String STRING_END_STRING = "\"";
 	
 	
 }

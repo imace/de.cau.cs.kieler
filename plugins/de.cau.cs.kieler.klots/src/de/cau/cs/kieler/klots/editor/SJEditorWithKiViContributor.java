@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 
+import de.cau.cs.kieler.klots.KlotsConstants;
 import de.cau.cs.kieler.klots.KlotsPlugin;
 
 import org.eclipse.core.runtime.FileLocator;
@@ -132,7 +133,7 @@ public class SJEditorWithKiViContributor extends MultiPageEditorActionBarContrib
 					IFileEditorInput input = (IFileEditorInput)e.getJavaEditor().getEditorInput();
 				    IFile file = input.getFile();
 				    fileName = file.getName();
-				    fileName = fileName.substring(0, fileName.lastIndexOf(".java"));
+				    fileName = fileName.substring(0, fileName.lastIndexOf("." + KlotsConstants.SJ_FILE_NAME_EXTENSION));
 				    IProject activeProject = file.getProject();
 				    projectName = activeProject.getName();
 				    projectPath = activeProject.getLocation().toOSString();
@@ -292,7 +293,7 @@ public class SJEditorWithKiViContributor extends MultiPageEditorActionBarContrib
 					IFileEditorInput input = (IFileEditorInput)e.getJavaEditor().getEditorInput();
 				    IFile file = input.getFile();
 				    fileName = file.getName();
-				    fileName = fileName.substring(0, fileName.lastIndexOf(".java"));
+				    fileName = fileName.substring(0, fileName.lastIndexOf("." + KlotsConstants.SJ_FILE_NAME_EXTENSION));
 				    IProject activeProject = file.getProject();
 				    projectName = activeProject.getName();
 				    projectPath = activeProject.getLocation().toOSString();
