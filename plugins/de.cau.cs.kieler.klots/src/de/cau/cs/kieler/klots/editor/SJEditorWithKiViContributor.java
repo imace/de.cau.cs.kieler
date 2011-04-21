@@ -1,21 +1,19 @@
 package de.cau.cs.kieler.klots.editor;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.URL;
-
+import js.tinyvm.TinyVM;
+import js.common.CLIToolProgressMonitor;
+import lejos.pc.tools.NXJUpload;
 import de.cau.cs.kieler.klots.KlotsConstants;
 import de.cau.cs.kieler.klots.KlotsPlugin;
 
-import org.eclipse.core.runtime.FileLocator;
-import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.jface.action.*;
-import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.dialogs.ErrorDialog;
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IFileEditorInput;
@@ -119,13 +117,7 @@ public class SJEditorWithKiViContributor extends MultiPageEditorActionBarContrib
 				String projectName = "";
 				String projectPath = "";
 				String fileName = "";
-				
-				String pluginPath = "";
-				String lejosPath = "";
-			    String bcelPath = "";
-			    String bluecovePath = "";
-			    String bluecove_gplPath = "";
-			    String commons_cliPath = "";
+				MultiStatus info;
 				
 				IEditorPart  editorPart = KlotsPlugin.getDefault().getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
 				if(editorPart != null) {
@@ -139,152 +131,38 @@ public class SJEditorWithKiViContributor extends MultiPageEditorActionBarContrib
 				    projectPath = activeProject.getLocation().toOSString();
 				    projectPath = projectPath.substring(0, projectPath.lastIndexOf(projectName));
 				    
-				    //projectName = "." + Path.SEPARATOR + projectName;
-				    
-				    // ------------------------------------------------------
-				    // XXX: LAST CHANGES
-				    Bundle bundle = Platform.getBundle(KlotsPlugin.PLUGIN_ID);
-				    Path path = new Path("icons/editor.gif");
-				    URL fileURL = FileLocator.find(bundle, path, null);
-				    try {
-						pluginPath = FileLocator.toFileURL(fileURL).toString();
-						pluginPath = pluginPath.replace("de.cau.cs.kieler.klots/icons/editor.gif", "");
-						System.out.println("????????? FULL PATH: >" + pluginPath + "<");
-						// if Windows system
-						if( pluginPath.contains(":\\") ) {
-							pluginPath = pluginPath.replaceFirst("file:/", "");
-						} else {
-							pluginPath = pluginPath.replaceFirst("file:", "");
-						}
-						System.out.println("????????? TRIMMED PATH: >" + pluginPath + "<");
-					} catch (IOException ioe) {
-						ioe.printStackTrace();
+				    Bundle lejosBundle = Platform.getBundle("org.lejos.nxt");
+					String lejosPath = lejosBundle.getLocation();
+					lejosPath = lejosPath.replaceFirst(".*file:", "");
+				    System.out.println("%%%%%%%%%%%%%%%%%%>>> org.lejos.nxt LOCATION = >" + lejosPath + "<");
+					
+					String[] args = {"--bootclasspath", lejosPath,
+							"--writeorder", "LE",
+							"--classpath", "\".\"",
+							"-v",
+							"-cp", projectPath + projectName + OS_FILE_SEPARATOR + "embeddedSJ.jar" + OS_PATH_SEPARATOR +
+							projectPath + projectName + OS_FILE_SEPARATOR + "bin",
+							"." + OS_FILE_SEPARATOR + "examples" + OS_FILE_SEPARATOR + fileName,
+							"-o", projectPath + projectName + OS_FILE_SEPARATOR + "bin" + OS_FILE_SEPARATOR + fileName + ".nxj"};
+					TinyVM link = new TinyVM();
+					link.addProgressMonitor(new CLIToolProgressMonitor());
+					try {
+						link.start(args);
+						info = new MultiStatus(KlotsPlugin.PLUGIN_ID, 0, "Embedded SJ program " + fileName + " built successfully!", null);
+						info.add(new Status(IStatus.INFO, KlotsPlugin.PLUGIN_ID, 0, ">OK<", null));
+					} catch (Exception le) {
+						le.printStackTrace();
+						info = new MultiStatus(KlotsPlugin.PLUGIN_ID, 1, "Error while trying to build Embedded SJ program " + fileName + "!", null);
+						info.add(new Status(IStatus.ERROR, KlotsPlugin.PLUGIN_ID, 1, le.getMessage(), null));
 					}
-				    
-//				    lejosPath = pluginPath + "org.lejos";
-//				    bcelPath = pluginPath + "org.lejos.3rdparty.bcel";
-//				    bluecovePath = pluginPath + "org.lejos.3rdparty.bluecove";
-//					bluecove_gplPath = pluginPath + "org.lejos.3rdparty.bluecove-gpl";
-//				    commons_cliPath = pluginPath + "org.lejos.3rdparty.commons-cli";
-					lejosPath = pluginPath + "org.lejos.nxt";
-				    bcelPath = pluginPath + "org.lejos.pc.all";
-				    bluecovePath = pluginPath + "org.lejos.pc.all";
-				    bluecove_gplPath = pluginPath + "org.lejos.pc.all";
-				    commons_cliPath = pluginPath + "org.lejos.pc.all";
-				    // ------------------------------------------------------
 				    
 				} else {
 					System.out.println("###>>> COMPILE PATH ERROR: No active editor!");
+					info = new MultiStatus(KlotsPlugin.PLUGIN_ID, 1, "Error while trying to build Embedded SJ program " + fileName + "!", null);
+					info.add(new Status(IStatus.ERROR, KlotsPlugin.PLUGIN_ID, 1, "No active SJ editor!", null));
 				}
-				try {
-					Runtime rt = Runtime.getRuntime() ;
-					// compile
-//					String compileCommand = "\"cd " + projectPath + 
-//					" & nxjc -cp \"" + projectName + Path.SEPARATOR + "embeddedSJ.jar\" " +
-//					projectName + Path.SEPARATOR + "examples" + Path.SEPARATOR + "*.java\"";
-//					System.out.println("###--->>> COMPILE COMMAND STRING: " + compileCommand);
-//					Process compile = rt.exec("cmd /C " + compileCommand);
-//					compile.waitFor();
-					
-					// link
-//					String linkCommand = "\"cd " + projectPath + 
-//					" & nxjlink -cp \"" + projectName + Path.SEPARATOR + "embeddedSJ.jar;" + projectName + "\" " +
-//					"." + Path.SEPARATOR + "examples" + Path.SEPARATOR + "EmbeddedABROMain2 " +
-//					"-o " + projectName + Path.SEPARATOR + "eABRO2.nxj\"";
-					
-					
-					// ------------------------------------------------------
-					// XXX: TESTING SOMETHING NEW!
-//					String linkCommand = "\"cd " + projectPath + 
-//					" & nxjlink -cp \"" + projectName + Path.SEPARATOR + "embeddedSJ.jar;" + projectName + Path.SEPARATOR + "bin\" " +
-//					"." + Path.SEPARATOR + "examples" + Path.SEPARATOR + fileName + "Main " +
-//					"-o " + projectName + Path.SEPARATOR + "bin" + Path.SEPARATOR + fileName + ".nxj\"";
-					
-					// XXX: LAST WORKING!
-//					String linkCommand = "\"cd " + projectPath + 
-//					" & nxjlink -v -cp \"" + projectName + Path.SEPARATOR + "embeddedSJ.jar;" + projectName + Path.SEPARATOR + "bin\" " +
-//					"." + Path.SEPARATOR + "examples" + Path.SEPARATOR + fileName + " " +
-//					"-o " + projectName + Path.SEPARATOR + "bin" + Path.SEPARATOR + fileName + ".nxj > " + projectName + Path.SEPARATOR + "build.log\"";
-					
-				    // XXX: STANDALONE VERSION WORKING ONLY WITH CMD AND BASH
-//					String linkCommand = "java -Dnxj.home=\"" + lejosPath +
-//					"\" -DCOMMAND_NAME=\"nxjlink\" -Djava.library.path=\"" +
-//					lejosPath + Path.SEPARATOR + "bin" + "\" -classpath \"" +
-//					bluecovePath + ";" + bcelPath + ";" + commons_cliPath + ";" + lejosPath +
-//					"\" js.tinyvm.TinyVM --bootclasspath \"" + lejosPath +
-//					"\" --writeorder \"LE\" --classpath \".\" " +
-//					"-v -cp \"" + projectPath + projectName + Path.SEPARATOR + "embeddedSJ.jar;" + projectPath + projectName + Path.SEPARATOR + "bin\" " +
-//					"." + Path.SEPARATOR + "examples" + Path.SEPARATOR + fileName + " " +
-//					"-o " + projectPath + projectName + Path.SEPARATOR + "bin" + Path.SEPARATOR + fileName + ".nxj > " + projectPath + projectName + Path.SEPARATOR + "build.log";
-					
-					// ------------------------------------------------------
-				    // XXX: FINAL STANDALONE WORKING ON WINDOWS!
-//					String linkCommand = "java -Dnxj.home=\"" + lejosPath +
-//					"\" -DCOMMAND_NAME=\"nxjlink\" -Djava.library.path=\"" +
-//					lejosPath + Path.SEPARATOR + "bin" + "\" -classpath \"" +
-//					bluecovePath + ";" + bcelPath + ";" + commons_cliPath + ";" + lejosPath +
-//					"\" js.tinyvm.TinyVM --bootclasspath \"" + lejosPath +
-//					"\" --writeorder \"LE\" --classpath \".\" " +
-//					"-v -cp \"" + projectPath + projectName + Path.SEPARATOR + "embeddedSJ.jar;" + projectPath + projectName + Path.SEPARATOR + "bin\" " +
-//					"." + Path.SEPARATOR + "examples" + Path.SEPARATOR + fileName + " " +
-//					"-o " + projectPath + projectName + Path.SEPARATOR + "bin" + Path.SEPARATOR + fileName + ".nxj";
-					
-					
-					// XXX: LINUX INTEGRATION TEST
-//					String linkCommand = "java -Dnxj.home=\"" + lejosPath +
-//					"\" -DCOMMAND_NAME=\"nxjlink\" -Djava.library.path=\"" +
-//					lejosPath + OS_FILE_SEPARATOR + "bin" +
-//					"\" -classpath \"" + bluecovePath + OS_PATH_SEPARATOR + bluecove_gplPath + OS_PATH_SEPARATOR +
-//					bcelPath + OS_PATH_SEPARATOR + commons_cliPath + OS_PATH_SEPARATOR + lejosPath +
-//					"\" js.tinyvm.TinyVM --bootclasspath \"" + lejosPath +
-//					"\" --writeorder \"LE\" --classpath \".\" " +
-//					"-v -cp \"" + projectPath + projectName + OS_FILE_SEPARATOR + "embeddedSJ.jar" + OS_PATH_SEPARATOR +
-//					projectPath + projectName + OS_FILE_SEPARATOR + "bin\" " +
-//					"." + OS_FILE_SEPARATOR + "examples" + OS_FILE_SEPARATOR + fileName + " " +
-//					"-o " + projectPath + projectName + OS_FILE_SEPARATOR + "bin" + OS_FILE_SEPARATOR + fileName + ".nxj";
-					
-					// XXX: WORKING LINUX VERSION!
-					String linkCommand = "java -Dnxj.home=\"" + lejosPath +
-					"\" -DCOMMAND_NAME=\"nxjlink\" -Djava.library.path=\"" +
-					lejosPath + OS_FILE_SEPARATOR + "bin" +
-					"\" -classpath \"" + bluecovePath + OS_PATH_SEPARATOR + bluecove_gplPath + OS_PATH_SEPARATOR +
-					bcelPath + OS_PATH_SEPARATOR + commons_cliPath + OS_PATH_SEPARATOR + lejosPath + OS_PATH_SEPARATOR + 
-					".\" js.tinyvm.TinyVM --bootclasspath " + lejosPath +
-					" --writeorder LE --classpath \".\" " +
-					"-v -cp " + projectPath + projectName + OS_FILE_SEPARATOR + "embeddedSJ.jar" + OS_PATH_SEPARATOR +
-					projectPath + projectName + OS_FILE_SEPARATOR + "bin " +
-					"." + OS_FILE_SEPARATOR + "examples" + OS_FILE_SEPARATOR + fileName + " " +
-					"-o " + projectPath + projectName + OS_FILE_SEPARATOR + "bin" + OS_FILE_SEPARATOR + fileName + ".nxj";
-					// ------------------------------------------------------
-					
-					System.out.println("###--->>> LINK COMMAND STRING: " + linkCommand);
-					
-//					Process link = rt.exec("cmd /C " + linkCommand);
-					Process link = rt.exec(linkCommand);
-					
-					System.out.println("###--->>> OUTPUT STREAM:");
-					InputStream is = link.getInputStream();
-					InputStreamReader isr = new InputStreamReader(is);
-					BufferedReader br = new BufferedReader(isr);
-					String line;
-					while ((line = br.readLine()) != null) {
-						System.out.println(line);
-					}
-					System.out.println("###--->>> ERROR STREAM:");
-					is = link.getErrorStream();
-					isr = new InputStreamReader(is);
-					br = new BufferedReader(isr);
-					while ((line = br.readLine()) != null) {
-						System.out.println(line);
-					}
-					   
-					link.waitFor();
-					System.out.println("------> OK <-------");
-					link.destroy();
-					MessageDialog.openInformation(null, "Embedded SJ", "Embedded SJ program compiled and linked successfully!");
-				} catch(Exception e) {
-					e.printStackTrace();
-				}
+				
+				ErrorDialog.openError(null, "KLOTS", null, info);
 			}
 		};
 		compileAndLink.setText("Build program");
@@ -299,13 +177,7 @@ public class SJEditorWithKiViContributor extends MultiPageEditorActionBarContrib
 				String projectName = "";
 				String projectPath = "";
 				String fileName = "";
-				
-				String pluginPath = "";
-				String lejosPath = "";
-			    String bcelPath = "";
-			    String bluecovePath = "";
-			    String bluecove_gplPath = "";
-			    String commons_cliPath = "";
+				MultiStatus info;
 				
 				IEditorPart  editorPart = KlotsPlugin.getDefault().getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
 				if(editorPart != null) {
@@ -319,104 +191,25 @@ public class SJEditorWithKiViContributor extends MultiPageEditorActionBarContrib
 				    projectPath = activeProject.getLocation().toOSString();
 				    projectPath = projectPath.substring(0, projectPath.lastIndexOf(projectName));
 				    
-				    
-//				    projectName = "." + Path.SEPARATOR + projectName;
-				    
-				    // ------------------------------------------------------
-				    // XXX: NEW!!!
-				    Bundle bundle = Platform.getBundle(KlotsPlugin.PLUGIN_ID);
-				    Path path = new Path("icons/editor.gif");
-				    URL fileURL = FileLocator.find(bundle, path, null);
-				    try {
-						pluginPath = FileLocator.toFileURL(fileURL).toString();
-						pluginPath = pluginPath.replace("de.cau.cs.kieler.klots/icons/editor.gif", "");
-						System.out.println("????????? FULL PATH: >" + pluginPath + "<");
-						// if Windows system
-						if( pluginPath.contains(":\\") ) {
-							pluginPath = pluginPath.replaceFirst("file:/", "");
-						} else {
-							pluginPath = pluginPath.replaceFirst("file:", "");
-						}
-						System.out.println("????????? TRIMMED PATH: >" + pluginPath + "<");
-					} catch (IOException ioe) {
-						ioe.printStackTrace();
+				    String[] args = {"-b", projectPath + projectName + OS_FILE_SEPARATOR + "bin" + OS_FILE_SEPARATOR + fileName + ".nxj"};
+					NXJUpload up = new NXJUpload();
+					try {
+						up.run(args);
+						info = new MultiStatus(KlotsPlugin.PLUGIN_ID, 0, "Embedded SJ program " + fileName + " downloaded successfully!", null);
+						info.add(new Status(IStatus.INFO, KlotsPlugin.PLUGIN_ID, 0, ">OK<", null));
+					} catch (Exception le) {
+						le.printStackTrace();
+						info = new MultiStatus(KlotsPlugin.PLUGIN_ID, 1, "Error while trying to download Embedded SJ program " + fileName + "!", null);
+						info.add(new Status(IStatus.ERROR, KlotsPlugin.PLUGIN_ID, 1, le.getMessage(), null));
 					}
-				    
-					
-//				    lejosPath = pluginPath + "org.lejos";
-//				    bcelPath = pluginPath + "org.lejos.3rdparty.bcel";
-//				    bluecovePath = pluginPath + "org.lejos.3rdparty.bluecove";
-//				    bluecove_gplPath = pluginPath + "org.lejos.3rdparty.bluecove-gpl";
-//				    commons_cliPath = pluginPath + "org.lejos.3rdparty.commons-cli";
-					lejosPath = pluginPath + "org.lejos.nxt";
-				    bcelPath = pluginPath + "org.lejos.pc.all";
-				    bluecovePath = pluginPath + "org.lejos.pc.all";
-				    bluecove_gplPath = pluginPath + "org.lejos.pc.all";
-				    commons_cliPath = pluginPath + "org.lejos.pc.all";
-					
 				    
 				} else {
 					System.out.println("###>>> DOWNLOAD TO NXT PATH ERROR: No active editor!");
+					info = new MultiStatus(KlotsPlugin.PLUGIN_ID, 1, "Error while trying to download Embedded SJ program " + fileName + "!", null);
+					info.add(new Status(IStatus.ERROR, KlotsPlugin.PLUGIN_ID, 1, "No active SJ editor!", null));
 				}
-				try {
-					Runtime rt = Runtime.getRuntime() ;
-					// download to NXT
-//					String downloadToNXTCommand = "\"cd " + projectPath +
-//					" & nxjupload -b -r " + projectName + Path.SEPARATOR + "bin" + Path.SEPARATOR + fileName + ".nxj\"";
-					
-					// XXX: STANDALONE VERSION WORKING ONLY WITH CMD AND BASH
-//					String downloadToNXTCommand = "java -Dnxj.home=\"" + lejosPath +
-//					"\" -DCOMMAND_NAME=\"nxjupload\" -Djava.library.path=\"" +
-//					lejosPath + Path.SEPARATOR + "bin" + "\" -classpath \"" +
-//					bcelPath + ";" + bluecovePath + ";" + commons_cliPath + ";" +
-//					lejosPath + "\" lejos.pc.tools.NXJUpload " +
-//					"-b -r " + projectPath + projectName + Path.SEPARATOR + "bin" + Path.SEPARATOR + fileName + ".nxj";
-					
-					// XXX: LINUX INTEGRATION TEST
-//					String downloadToNXTCommand = "java -Dnxj.home=\"" + lejosPath +
-//					"\" -DCOMMAND_NAME=\"nxjupload\" -Djava.library.path=\"" +
-//					lejosPath + OS_FILE_SEPARATOR + "bin" + "\" -classpath \"" + bcelPath + OS_PATH_SEPARATOR +
-//					bluecovePath + OS_PATH_SEPARATOR + bluecove_gplPath + OS_PATH_SEPARATOR +
-//					commons_cliPath + OS_PATH_SEPARATOR + lejosPath +
-//					"\" lejos.pc.tools.NXJUpload " +
-//					"-b -r " + projectPath + projectName + OS_FILE_SEPARATOR + "bin" + OS_FILE_SEPARATOR + fileName + ".nxj";
-					
-					// XXX: LINUX INTEGRATION TEST
-					String downloadToNXTCommand = "java -Dnxj.home=\"" + lejosPath +
-					"\" -DCOMMAND_NAME=\"nxjupload\" -Djava.library.path=\"" +
-					lejosPath + OS_FILE_SEPARATOR + "bin" + "\" -classpath \"" + bcelPath + OS_PATH_SEPARATOR +
-					bluecovePath + OS_PATH_SEPARATOR + bluecove_gplPath + OS_PATH_SEPARATOR +
-					commons_cliPath + OS_PATH_SEPARATOR + lejosPath + OS_PATH_SEPARATOR +
-					".\" lejos.pc.tools.NXJUpload " +
-					"-b -r " + projectPath + projectName + OS_FILE_SEPARATOR + "bin" + OS_FILE_SEPARATOR + fileName + ".nxj";
-					// ------------------------------------------------------
-					
-					System.out.println("###--->>> DOWNLOAD COMMAND STRING: " + downloadToNXTCommand);
-//					Process upload = rt.exec("cmd /C " + downloadToNXTCommand);
-					Process upload = rt.exec(downloadToNXTCommand);
-					
-					System.out.println("###--->>> OUTPUT STREAM:");
-					InputStream is = upload.getInputStream();
-					InputStreamReader isr = new InputStreamReader(is);
-					BufferedReader br = new BufferedReader(isr);
-					String line;
-					while ((line = br.readLine()) != null) {
-						System.out.println(line);
-					}
-					System.out.println("###--->>> ERROR STREAM:");
-					is = upload.getErrorStream();
-					isr = new InputStreamReader(is);
-					br = new BufferedReader(isr);
-					while ((line = br.readLine()) != null) {
-						System.out.println(line);
-					}
-					
-					upload.waitFor();
-					System.out.println("------> OK <-------");
-					MessageDialog.openInformation(null, "Embedded SJ", "Embedded SJ program downloaded successfully to NXT!");
-				} catch(Exception e) {
-					e.printStackTrace();
-				}
+				
+				ErrorDialog.openError(null, "KLOTS", null, info);
 			}
 		};
 		downloadToNXT.setText("Download to NXT");
