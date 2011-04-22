@@ -78,6 +78,15 @@
    
    
    <!-- ############################ MARKERS ############################## -->
+  <extension
+        point="org.eclipse.ui.perspectives">
+     <perspective
+           class="de.cau.cs.kieler.klots.KlotsPerspective"
+           icon="icons/KLOTS3.png"
+           id="de.cau.cs.kieler.klots.KlotsPerspective"
+           name="KLOTS">
+     </perspective>
+  </extension>
    
    <extension
       	point="org.eclipse.core.resources.markers"

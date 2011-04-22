@@ -29,6 +29,9 @@ import de.cau.cs.kieler.klots.KlotsPlugin;
  */
 
 public class SJProjectNewFileWizard extends Wizard implements INewWizard {
+	
+	public final static String ID = "de.cau.cs.kieler.klots.editor.SJEditorNewFileWizard"; 
+	
 	private SJEditorNewFileWizardPage page;
 	private ISelection selection;
 

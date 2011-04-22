@@ -166,7 +166,7 @@ public class SJEditorWithKiViContributor extends MultiPageEditorActionBarContrib
 			}
 		};
 		compileAndLink.setText("Build program");
-		compileAndLink.setToolTipText("Build the embedded SJ program");
+		compileAndLink.setToolTipText("Build Embedded SJ program");
 		compileAndLink.setImageDescriptor( KlotsPlugin.imageDescriptorFromPlugin(KlotsPlugin.PLUGIN_ID, "icons/linkIcon.png") );
 //		compileAndLink.setDisabledImageDescriptor( KlotsPlugin.imageDescriptorFromPlugin(KlotsPlugin.PLUGIN_ID, "icons/KIEMstepIconDisabled.png") );
 
@@ -213,7 +213,7 @@ public class SJEditorWithKiViContributor extends MultiPageEditorActionBarContrib
 			}
 		};
 		downloadToNXT.setText("Download to NXT");
-		downloadToNXT.setToolTipText("Download embeded SJ erogram to NXT");
+		downloadToNXT.setToolTipText("Download Embeded SJ program to NXT");
 		downloadToNXT.setImageDescriptor( KlotsPlugin.imageDescriptorFromPlugin(KlotsPlugin.PLUGIN_ID, "icons/downloadIcon.png") );
 //		downloadToNXT.setDisabledImageDescriptor( KlotsPlugin.imageDescriptorFromPlugin(KlotsPlugin.PLUGIN_ID, "icons/KIEMstepIconDisabled.png") );
 		// ------------------------------------------------------------------

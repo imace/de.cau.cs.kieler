@@ -38,6 +38,8 @@ import org.eclipse.ui.wizards.newresource.BasicNewProjectResourceWizard;
 public class SJProjectNewSJProjectWizard extends Wizard implements INewWizard,
 		IExecutableExtension {
 
+	public final static String ID = "de.cau.cs.kieler.klots.editor.SJEditorNewSJProjectWizard";
+	
 	// the OS specific file separator char, e.g. '/' or '\'
 	private final String OS_FILE_SEPARATOR = System.getProperty("file.separator");
 	// the OS specific path separator char, e.g. ':' or ';'
