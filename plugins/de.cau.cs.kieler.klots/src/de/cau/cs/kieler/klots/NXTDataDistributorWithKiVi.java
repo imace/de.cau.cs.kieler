@@ -2,11 +2,6 @@ package de.cau.cs.kieler.klots;
 
 import java.util.Iterator;
 
-import org.eclipse.ui.console.ConsolePlugin;
-import org.eclipse.ui.console.IConsole;
-import org.eclipse.ui.console.IConsoleManager;
-import org.eclipse.ui.console.MessageConsole;
-import org.eclipse.ui.console.MessageConsoleStream;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,23 +17,24 @@ import de.cau.cs.kieler.klots.KlotsConstants;
 public class NXTDataDistributorWithKiVi extends JSONObjectDataComponent implements
 		IJSONObjectDataComponent {
 	
-	private static final String KLOTSCONSOLENAME = "Klots Console";
+	private static KlotsConsole console = KlotsConsole.getInstance();
 	NXTCommunicator comm;
 	
 
 	public void initialize() throws KiemInitializationException {
+		console.clear();
 		comm = NXTCommunicator.getInstance();
 		// use NXTCommunicator.receiveMessageLine() to ensure plane old java remote print support
 		String line = comm.receiveMessageLine();
 		if( !line.startsWith(KlotsConstants.SYNCHRONIZED_COMMAND_KEY) && !line.startsWith(KlotsConstants.PRINT_TAG) ) {
-			printlnConsole("ERROR while trying to synchronize with the NXT: " + line);
+			console.println("ERROR while trying to synchronize with the NXT: " + line);
 		}
 		while( !line.equals(KlotsConstants.END_OF_MESSAGE_COMMAND_KEY) ) {
 			if( line.equals(KlotsConstants.END_OF_TRANSMISSION_COMMAND_KEY) ) {
 				comm.closeTransmission(false);
 				return;
 			}
-			printlnConsole( line.replaceFirst(KlotsConstants.PRINT_TAG, "") );
+			console.println( line.replaceFirst(KlotsConstants.PRINT_TAG, "") );
 			line = comm.receiveMessageLine();
 		}
 	}
@@ -80,7 +76,7 @@ public class NXTDataDistributorWithKiVi extends JSONObjectDataComponent implemen
 				msg = msg.substring(0, msg.length()-1);
 			}
 		} catch (JSONException e) {
-			printlnConsole("PRODUCER ERROR: " + e.getMessage());
+			console.println("PRODUCER ERROR: " + e.getMessage());
         }
 		comm.sendMessage(KlotsConstants.STEP_COMMAND_KEY + KlotsConstants.MESSAGE_LINE_DELIMITER + msg);
 		
@@ -95,7 +91,7 @@ public class NXTDataDistributorWithKiVi extends JSONObjectDataComponent implemen
 			start = buffer.indexOf("{" + KlotsConstants.PRINT_TAG, end);
 			if( start >= 0 ) {
 				end = buffer.indexOf("},", start);
-				printlnConsole( "REMOTE PRINT: " + buffer.substring(1+start+KlotsConstants.PRINT_TAG.length(), end) );
+				console.println( "REMOTE PRINT: " + buffer.substring(1+start+KlotsConstants.PRINT_TAG.length(), end) );
 				buffer.replace(start, end+2, "");
 				System.out.println("====;;;;;;;==== MESSAGE BUFFER AFTER PRINT = >" + buffer.toString() + "<");
 				end = start;
@@ -123,61 +119,9 @@ public class NXTDataDistributorWithKiVi extends JSONObjectDataComponent implemen
 			}
 			return returnObj;
 		} catch (JSONException e) {
-			printConsole("OBSERVER ERROR: " + e.getMessage());
+			console.println("OBSERVER ERROR: " + e.getMessage());
         }	
 		return null;
 	}
-	
-	
-	
-	
-    // ----------------------------------------------------------------------
-	// ----------------------------- KLOTS CONSOLE --------------------------
-    // ----------------------------------------------------------------------
-
-    /**
-     * Clears the klots console.
-     */
-    protected void clearConsole() {
-        printConsole(null);
-    }
-
-    
-    protected void printlnConsole(String text) {
-    	printConsole(text + "\n");
-    }
-    
-    /**
-     * Prints to the klots console.
-     * 
-     * @param text
-     *            the text
-     */
-    protected void printConsole(String text) {
-        MessageConsole maudeConsole = null;
-        boolean found = false;
-        ConsolePlugin plugin = ConsolePlugin.getDefault();
-        IConsoleManager conMan = plugin.getConsoleManager();
-        IConsole[] existing = conMan.getConsoles();
-        for (int i = 0; i < existing.length; i++)
-            if (NXTDataDistributorWithKiVi.KLOTSCONSOLENAME.equals(existing[i].getName())) {
-                maudeConsole = (MessageConsole) existing[i];
-                found = true;
-                break;
-            }
-        if (!found) {
-            // if no console found, so create a new one
-            maudeConsole = new MessageConsole(NXTDataDistributorWithKiVi.KLOTSCONSOLENAME, null);
-            conMan.addConsoles(new IConsole[] { maudeConsole });
-        }
-
-        // now print to the klots console or clear it
-        if (text != null) {
-            MessageConsoleStream out = maudeConsole.newMessageStream();
-            out.print(text);
-        } else {
-            maudeConsole.clearConsole();
-        }
-    }
 	
 }
