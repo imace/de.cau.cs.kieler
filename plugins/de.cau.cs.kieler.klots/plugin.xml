@@ -28,12 +28,13 @@
   <extension
         point="org.eclipse.ui.editors">
      <editor
-           class="de.cau.cs.kieler.klots.editor.SJEditorWithKiVi"
-           contributorClass="de.cau.cs.kieler.klots.editor.SJEditorWithKiViContributor"
+           class="de.cau.cs.kieler.klots.editor.SJEditor"
+           contributorClass="de.cau.cs.kieler.klots.editor.SJEditorContributor"
+           default="false"
            extensions="java"
            icon="icons/editor7.gif"
-           id="de.cau.cs.kieler.klots.editor.SJEditorWithKiVi"
-           name="SJ Editor">
+           id="de.cau.cs.kieler.klots.editor.SJEditor"
+           name="NEW SJ Editor">
      </editor>
   </extension>
   <extension

@@ -16,13 +16,13 @@ import de.cau.cs.kieler.sim.kiem.JSONSignalValues;
 import de.cau.cs.kieler.sim.kiem.KiemExecutionException;
 import de.cau.cs.kieler.sim.kiem.KiemInitializationException;
 
-import de.cau.cs.kieler.klots.editor.SJEditorWithKiVi;
+import de.cau.cs.kieler.klots.editor.SJEditor;
 
 public class NXTDataObserverWithKiVi extends JSONObjectDataComponent implements
 		IJSONObjectDataComponent {
 	
 	private static final String KLOTSCONSOLENAME = "Klots Console";
-	SJEditorWithKiVi editor;
+	SJEditor editor;
 	
 
 	public void initialize() throws KiemInitializationException {
@@ -31,7 +31,7 @@ public class NXTDataObserverWithKiVi extends JSONObjectDataComponent implements
 			public void run() {
 				IEditorPart e = KlotsPlugin.getDefault().getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
 				if(e != null) {
-					editor = (SJEditorWithKiVi) e;
+					editor = (SJEditor) e;
 				} else {
 					printConsole("INITIALIZATION ERROR: Could not find an active SJ editor!");
 				}
@@ -52,7 +52,7 @@ public class NXTDataObserverWithKiVi extends JSONObjectDataComponent implements
 				public void run() {
 					IEditorPart e = KlotsPlugin.getDefault().getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
 					if(e != null) {
-						editor = (SJEditorWithKiVi) e;
+						editor = (SJEditor) e;
 					} else {
 						printConsole("INITIALIZATION ERROR: Could not find an active SJ editor!");
 					}
@@ -102,9 +102,9 @@ public class NXTDataObserverWithKiVi extends JSONObjectDataComponent implements
 	public JSONObject step(JSONObject jSONObject) throws KiemExecutionException {
 		
 		if( this.isHistoryStep() ) {
-			printConsole("HISTORY!");
-			printConsole( ">>> jSONObject: >>> " + jSONObject.toString() );
 			try {
+				printConsole("HISTORY!");
+				printConsole( jSONObject.getJSONArray(KlotsConstants.JSON_EXECUTION_TRACE_TAG).toString(1) );
 				editor.update(jSONObject.getJSONArray(KlotsConstants.JSON_EXECUTION_TRACE_TAG).toString(), true);
 				editor.doResetMicroSteps();
 			} catch (JSONException e) {
@@ -113,6 +113,8 @@ public class NXTDataObserverWithKiVi extends JSONObjectDataComponent implements
 			return null;
 		} else {
 			try {
+				printConsole("STEP DONE!");
+				printConsole( jSONObject.getJSONArray(KlotsConstants.JSON_EXECUTION_TRACE_TAG).toString(1) );
 				editor.update(jSONObject.getJSONArray(KlotsConstants.JSON_EXECUTION_TRACE_TAG).toString(), false);
 			} catch (JSONException e) {
 				printConsole("STEP ERROR: " + e.getMessage());
