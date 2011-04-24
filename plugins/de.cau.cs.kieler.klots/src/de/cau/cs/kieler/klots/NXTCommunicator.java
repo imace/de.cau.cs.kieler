@@ -4,7 +4,10 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
+import lejos.pc.comm.NXTCommFactory;
 import lejos.pc.comm.NXTConnector;
+import lejos.pc.comm.NXTInfo;
+import lejos.pc.comm.NXTComm;
 
 import de.cau.cs.kieler.klots.KlotsConstants;
 
@@ -49,6 +52,26 @@ public class NXTCommunicator {
 		dis = conn.getDataIn();
 		connected = true;
 		consolePrint = false;
+	}
+	
+	
+	public NXTInfo getNXTInfo() {
+		return conn.getNXTInfo();
+	}
+	
+	
+	public NXTConnector getNXTConnector() {
+		return conn;
+	}
+	
+	
+	public NXTInfo[] searchForNXTs() {
+		return conn.search(null, null, NXTCommFactory.BLUETOOTH|NXTCommFactory.USB);
+	}
+	
+	
+	public NXTComm getNXTComm() {
+		return conn.getNXTComm();
 	}
 	
 	

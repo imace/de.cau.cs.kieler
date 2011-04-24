@@ -3,8 +3,12 @@ package de.cau.cs.kieler.klots.editor;
 import js.tinyvm.TinyVM;
 import js.common.CLIToolProgressMonitor;
 import lejos.pc.tools.NXJUpload;
+import lejos.pc.comm.NXTComm;
+import lejos.nxt.remote.NXTCommand;
+
 import de.cau.cs.kieler.klots.KlotsConstants;
 import de.cau.cs.kieler.klots.KlotsPlugin;
+import de.cau.cs.kieler.klots.NXTCommunicator;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.MultiStatus;
@@ -40,6 +44,7 @@ public class SJEditorContributor extends EditorActionBarContributor {
 	private IEditorPart activeEditorPart;
 	private Action compileAndLink;
 	private Action downloadToNXT;
+	private Action runProgram;
 	
 	
 	/**
@@ -106,7 +111,7 @@ public class SJEditorContributor extends EditorActionBarContributor {
 	
 	
 	private void createActions() {
-		// ------------------ compile and link ----------------------
+		// ---------------------- compile and link --------------------------
 		compileAndLink = new Action() {
 			public void run() {
 				String projectName = "";
@@ -166,7 +171,7 @@ public class SJEditorContributor extends EditorActionBarContributor {
 //		compileAndLink.setDisabledImageDescriptor( KlotsPlugin.imageDescriptorFromPlugin(KlotsPlugin.PLUGIN_ID, "icons/KIEMstepIconDisabled.png") );
 
 		
-		// --------------------- download to NXT ----------------------
+		// ------------------------ download to NXT -------------------------
 		downloadToNXT = new Action() {
 			public void run() {
 				String projectName = "";
@@ -211,6 +216,50 @@ public class SJEditorContributor extends EditorActionBarContributor {
 		downloadToNXT.setToolTipText("Download Embeded SJ program to NXT");
 		downloadToNXT.setImageDescriptor( KlotsPlugin.imageDescriptorFromPlugin(KlotsPlugin.PLUGIN_ID, "icons/downloadIcon.png") );
 //		downloadToNXT.setDisabledImageDescriptor( KlotsPlugin.imageDescriptorFromPlugin(KlotsPlugin.PLUGIN_ID, "icons/KIEMstepIconDisabled.png") );
+		
+		
+		// -------------------------- run program ---------------------------
+		runProgram = new Action() {
+			public void run() {
+				String fileName = "";
+				MultiStatus info;
+				
+				IEditorPart  editorPart = KlotsPlugin.getDefault().getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
+				if(editorPart != null) {
+					SJEditor e = (SJEditor) editorPart;
+					IFileEditorInput input = (IFileEditorInput)e.getEditorInput();
+				    IFile file = input.getFile();
+				    fileName = file.getName();
+				    fileName = fileName.substring(0, fileName.lastIndexOf("." + KlotsConstants.SJ_FILE_NAME_EXTENSION));
+				    fileName += ".nxj";
+				    
+					NXTCommand nxtCommand = NXTCommand.getSingleton();
+					try {
+						NXTComm nxtComm = NXTCommunicator.getInstance().getNXTComm();
+						nxtCommand.setNXTComm(nxtComm);
+						nxtCommand.startProgram(fileName);
+						// must close low level transmission in order to be able to start a high level transmission
+						NXTCommunicator.getInstance().closeTransmission(false);
+					} catch (Exception le) {
+						le.printStackTrace();
+						info = new MultiStatus(KlotsPlugin.PLUGIN_ID, 1, "Error while trying to start Embedded SJ program " + fileName + "!", null);
+						info.add(new Status(IStatus.ERROR, KlotsPlugin.PLUGIN_ID, 1, le.getMessage(), null));
+						ErrorDialog.openError(null, "KLOTS", null, info);
+					}
+				    
+				} else {
+					System.out.println("###>>> RUN PROGRAM ON NXT PATH ERROR: No active editor!");
+					info = new MultiStatus(KlotsPlugin.PLUGIN_ID, 1, "Error while trying to start Embedded SJ program " + fileName + "!", null);
+					info.add(new Status(IStatus.ERROR, KlotsPlugin.PLUGIN_ID, 1, "No active SJ editor!", null));
+					ErrorDialog.openError(null, "KLOTS", null, info);
+				}
+				
+			}
+		};
+		runProgram.setText("Run program on NXT");
+		runProgram.setToolTipText("Run Embeded SJ program on NXT");
+		runProgram.setImageDescriptor( KlotsPlugin.imageDescriptorFromPlugin(KlotsPlugin.PLUGIN_ID, "icons/runProgramIcon.png") );
+//		runProgram.setDisabledImageDescriptor( KlotsPlugin.imageDescriptorFromPlugin(KlotsPlugin.PLUGIN_ID, "icons/runProgramIconDisabled.png") );
 		// ------------------------------------------------------------------
 		
 	}
@@ -232,6 +281,7 @@ public class SJEditorContributor extends EditorActionBarContributor {
 		manager.add(new Separator());
 		manager.add(compileAndLink);
 		manager.add(downloadToNXT);
+		manager.add(runProgram);
 		manager.add(new Separator());
 	}
 	
