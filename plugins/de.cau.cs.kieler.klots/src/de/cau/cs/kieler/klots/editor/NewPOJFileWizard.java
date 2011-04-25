@@ -12,9 +12,9 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.core.resources.*;
 import org.eclipse.core.runtime.CoreException;
 import java.io.*;
+
 import org.eclipse.ui.*;
 import org.eclipse.ui.ide.IDE;
-
 import de.cau.cs.kieler.klots.KlotsPlugin;
 
 /**
@@ -31,6 +31,9 @@ import de.cau.cs.kieler.klots.KlotsPlugin;
 public class NewPOJFileWizard extends Wizard implements INewWizard {
 	
 	public final static String ID = "de.cau.cs.kieler.klots.editor.NewPOJFileWizard";
+	
+	// the OS specific file separator char, e.g. '/' or '\'
+	private final static String OS_FILE_SEPARATOR = System.getProperty("file.separator");
 	
 	private NewPOJFileWizardPage page;
 	private ISelection selection;
@@ -104,7 +107,7 @@ public class NewPOJFileWizard extends Wizard implements INewWizard {
 		IContainer container = (IContainer) resource;
 		final IFile file = container.getFile(new Path(fileName));
 		try {
-			InputStream stream = openContentStream(fileName);
+			InputStream stream = openContentStream(containerName, fileName);
 			if (file.exists()) {
 				file.setContents(stream, true, true, monitor);
 			} else {
@@ -133,10 +136,35 @@ public class NewPOJFileWizard extends Wizard implements INewWizard {
 	 * We will initialize file contents with a sample text.
 	 */
 
-	protected static InputStream openContentStream(String fileName) {
-		String contents =
-			"/* Plane old java embedded class " + fileName + " */\n";
-		return new ByteArrayInputStream(contents.getBytes());
+	protected static InputStream openContentStream(String projectName, String fileName) {
+		try {
+			String templatesPath = ".." + OS_FILE_SEPARATOR + ".." + OS_FILE_SEPARATOR +
+			".." + OS_FILE_SEPARATOR + ".." + OS_FILE_SEPARATOR + ".." + OS_FILE_SEPARATOR +
+			".." + OS_FILE_SEPARATOR + ".." + OS_FILE_SEPARATOR +
+			"sj_templates" + OS_FILE_SEPARATOR + "";
+			InputStream resourceStream = NewPOJFileWizard.class.getResourceAsStream(templatesPath + "POJTemplate.java");
+			// adjust package and class tags
+			BufferedReader projectFile = new BufferedReader(new InputStreamReader(resourceStream));
+			String projectFileContent = "";
+			String projectFileLine = "";
+			while( (projectFileLine = projectFile.readLine()) != null ) {
+				if( projectFileLine.contains("<CLASS>") ) {
+					projectFileLine = projectFileLine.replace( "<CLASS>", fileName.replace(".java", "") );
+				}
+				if( projectFileLine.contains("<PACKAGE>") ) {
+					String packageName = projectName.replaceFirst(".*/src/", "");
+					packageName = packageName.replace('/', '.');
+					projectFileLine = projectFileLine.replace( "<PACKAGE>", packageName );
+				}
+				projectFileContent += projectFileLine + "\n";
+			}
+			projectFile.close();
+			resourceStream = new ByteArrayInputStream( projectFileContent.getBytes() );
+			return resourceStream;
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	private void throwCoreException(String message) throws CoreException {

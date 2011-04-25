@@ -4,6 +4,8 @@ import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.jdt.core.IPackageFragment;
+import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.WizardPage;
@@ -103,6 +105,15 @@ public class SJEditorNewFileWizardPage extends WizardPage {
 			if (ssel.size() > 1)
 				return;
 			Object obj = ssel.getFirstElement();
+			
+			if( obj instanceof IPackageFragment ) {
+				try {
+					obj = ((IPackageFragment)obj).getCorrespondingResource();
+				} catch (JavaModelException e) {
+					e.printStackTrace();
+				}
+			}
+			
 			if (obj instanceof IResource) {
 				IContainer container;
 				if (obj instanceof IContainer)

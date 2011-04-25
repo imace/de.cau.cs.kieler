@@ -42,8 +42,6 @@ public class SJProjectNewSJProjectWizard extends Wizard implements INewWizard,
 	
 	// the OS specific file separator char, e.g. '/' or '\'
 	private final String OS_FILE_SEPARATOR = System.getProperty("file.separator");
-	// the OS specific path separator char, e.g. ':' or ';'
-	private final String OS_PATH_SEPARATOR = System.getProperty("path.separator");
 	
 	/*
 	 * Use the WizardNewProjectCreationPage, which is provided by the Eclipse
@@ -180,16 +178,16 @@ public class SJProjectNewSJProjectWizard extends Wizard implements INewWizard,
 			
 			System.out.println("???????????>>>>>>>>>>>> src folder full path = >" + srcFolder.getLocation() + "<");
 			
+			// add embeddedSJ.jar
 			InputStream resourceStream = this.getClass().getResourceAsStream(templatesPath + "embeddedSJ.jar");
 			System.out.println("$$$$$$$$$$ EMBEDDED SJ PATH: " + this.getClass().getResource(templatesPath + "embeddedSJ.jar").getPath());
 			addFileToProject(container, new Path("embeddedSJ.jar"), resourceStream, monitor);
 			
-			// --------------------------------------------------------------
-			// XXX: NEW!
+			// add lejos' classes.jar
 			resourceStream = this.getClass().getResourceAsStream(templatesPath + Path.SEPARATOR + "lejos" + Path.SEPARATOR + "classes.jar");
 			addFileToProject(container, new Path("classes.jar"), resourceStream, monitor);
-			// --------------------------------------------------------------
 			
+			// add example file EmbeddedABRO.java
 			resourceStream = this.getClass().getResourceAsStream(templatesPath + "EmbeddedABRO.java");
 			addFileToProject(container, new Path(examplesPath + Path.SEPARATOR + "EmbeddedABRO.java"), resourceStream, monitor);
 			
@@ -201,8 +199,8 @@ public class SJProjectNewSJProjectWizard extends Wizard implements INewWizard,
 			resourceStream = this.getClass().getResourceAsStream(templatesPath + ".classpath.resource");
 			addFileToProject(container, new Path(".classpath"), resourceStream, monitor);
 			
+			// add the .project file
 			resourceStream = this.getClass().getResourceAsStream(templatesPath + ".project.resource");
-			
 			// put the name of the new project in the .project file
 			BufferedReader projectFile = new BufferedReader(new InputStreamReader(resourceStream));
 			String projectFileContent = "";
@@ -215,7 +213,6 @@ public class SJProjectNewSJProjectWizard extends Wizard implements INewWizard,
 			}
 			projectFile.close();
 			resourceStream = new ByteArrayInputStream( projectFileContent.getBytes() );
-			
 			// add the adjusted .project file
 			addFileToProject(container, new Path(".project"), resourceStream, monitor);
 			
