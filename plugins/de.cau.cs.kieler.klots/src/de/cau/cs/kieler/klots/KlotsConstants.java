@@ -14,12 +14,14 @@ public interface KlotsConstants {
 	public final static String PRINT_END_COMMAND_KEY = ":PRINT_END";
 	public final static String PRINT_TAG = "PRINT:";
 	
+	public final static String STANDALONE_PROGRAM_MODE_COMMAND_KEY = "STANDALONE";
 	public final static String SYNCHRONIZED_COMMAND_KEY = "SYNCHRONIZED";
 	public final static String STEP_COMMAND_KEY = "STEP";
 	public final static String STOP_COMMAND_KEY = "STOP";
 	public final static String END_OF_MESSAGE_COMMAND_KEY = "EOT";
 	public final static String END_OF_TRANSMISSION_COMMAND_KEY = "END_OF_TRANSMISSION";
 	public final static String MESSAGE_LINE_DELIMITER = "\n";
+	public final static String MESSAGE_NEW_LINE = "NEW_LINE";
 	
 	public final static String JSON_EXECUTION_TRACE_TAG = "executionTrace";
 	public final static String JSON_SIGNALS_TAG = "signals";

@@ -11,7 +11,6 @@ import de.cau.cs.kieler.sim.kiem.JSONObjectDataComponent;
 import de.cau.cs.kieler.sim.kiem.JSONSignalValues;
 import de.cau.cs.kieler.sim.kiem.KiemExecutionException;
 import de.cau.cs.kieler.sim.kiem.KiemInitializationException;
-
 import de.cau.cs.kieler.klots.KlotsConstants;
 
 public class NXTDataDistributorWithKiVi extends JSONObjectDataComponent implements
@@ -24,18 +23,11 @@ public class NXTDataDistributorWithKiVi extends JSONObjectDataComponent implemen
 	public void initialize() throws KiemInitializationException {
 		console.clear();
 		comm = NXTCommunicator.getInstance();
-		// use NXTCommunicator.receiveMessageLine() to ensure plane old java remote print support
-		String line = comm.receiveMessageLine();
-		if( !line.startsWith(KlotsConstants.SYNCHRONIZED_COMMAND_KEY) && !line.startsWith(KlotsConstants.PRINT_TAG) ) {
-			console.println("ERROR while trying to synchronize with the NXT: " + line);
-		}
-		while( !line.equals(KlotsConstants.END_OF_MESSAGE_COMMAND_KEY) ) {
-			if( line.equals(KlotsConstants.END_OF_TRANSMISSION_COMMAND_KEY) ) {
-				comm.closeTransmission(false);
-				return;
-			}
-			console.println( line.replaceFirst(KlotsConstants.PRINT_TAG, "") );
-			line = comm.receiveMessageLine();
+		String msg = comm.receiveMessage().toString();
+		if( msg.startsWith("[{" + KlotsConstants.SYNCHRONIZED_COMMAND_KEY) ) {
+			console.println(msg);
+		} else {
+			console.println("ERROR while trying to synchronize with the NXT: " + msg);
 		}
 	}
 
