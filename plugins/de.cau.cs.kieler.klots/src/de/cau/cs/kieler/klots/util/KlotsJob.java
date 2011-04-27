@@ -24,7 +24,6 @@ import org.eclipse.ui.progress.IProgressConstants;
 import org.osgi.framework.Bundle;
 
 import de.cau.cs.kieler.klots.KlotsPlugin;
-import de.cau.cs.kieler.klots.NXTCommunicator;
 import de.cau.cs.kieler.klots.editor.SJEditor;
 
 public class KlotsJob extends Job {

@@ -1,4 +1,4 @@
-package de.cau.cs.kieler.klots; 
+package de.cau.cs.kieler.klots.util; 
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -9,7 +9,6 @@ import lejos.pc.comm.NXTConnector;
 import lejos.pc.comm.NXTInfo;
 import lejos.pc.comm.NXTComm;
 
-import de.cau.cs.kieler.klots.util.KlotsConstants;
 
 public class NXTCommunicator {
 	
