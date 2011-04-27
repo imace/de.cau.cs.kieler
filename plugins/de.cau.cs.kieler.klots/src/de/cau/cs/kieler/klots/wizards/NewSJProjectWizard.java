@@ -35,7 +35,7 @@ import org.eclipse.ui.dialogs.WizardNewProjectCreationPage;
 import org.eclipse.ui.wizards.newresource.BasicNewProjectResourceWizard;
 
 
-public class SJProjectNewSJProjectWizard extends Wizard implements INewWizard,
+public class NewSJProjectWizard extends Wizard implements INewWizard,
 		IExecutableExtension {
 
 	public final static String ID = "de.cau.cs.kieler.klots.editor.SJEditorNewSJProjectWizard";
@@ -60,7 +60,7 @@ public class SJProjectNewSJProjectWizard extends Wizard implements INewWizard,
 	/**
 	 * Constructor
 	 */
-	public SJProjectNewSJProjectWizard() {
+	public NewSJProjectWizard() {
 		super();
 	}
 

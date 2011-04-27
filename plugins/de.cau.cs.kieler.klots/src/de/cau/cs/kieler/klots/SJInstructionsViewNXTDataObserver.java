@@ -16,7 +16,7 @@ import de.cau.cs.kieler.klots.views.SJInstructionsData;
 import de.cau.cs.kieler.klots.views.SJInstructionsDataList;
 
 
-public class SJInstructionsViewDataObserver extends JSONObjectDataComponent implements IJSONObjectDataComponent {
+public class SJInstructionsViewNXTDataObserver extends JSONObjectDataComponent implements IJSONObjectDataComponent {
 
     /** The id of the view for KIEM. */
     private static final String SJ_INSTRUCTIONS_VIEW_ID = "de.cau.cs.kieler.klots.view.SJInstructionsView";
@@ -33,7 +33,7 @@ public class SJInstructionsViewDataObserver extends JSONObjectDataComponent impl
     /**
      * Instantiates a new observer DataComponent.
      */
-    public SJInstructionsViewDataObserver() {
+    public SJInstructionsViewNXTDataObserver() {
     }
 
     // -------------------------------------------------------------------------

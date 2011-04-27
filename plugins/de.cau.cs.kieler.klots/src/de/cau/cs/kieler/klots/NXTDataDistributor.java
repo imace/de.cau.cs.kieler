@@ -15,7 +15,7 @@ import de.cau.cs.kieler.klots.util.KlotsConsole;
 import de.cau.cs.kieler.klots.util.KlotsConstants;
 import de.cau.cs.kieler.klots.util.NXTCommunicator;
 
-public class NXTDataDistributorWithKiVi extends JSONObjectDataComponent implements
+public class NXTDataDistributor extends JSONObjectDataComponent implements
 		IJSONObjectDataComponent {
 	
 	private static KlotsConsole console = KlotsConsole.getInstance();

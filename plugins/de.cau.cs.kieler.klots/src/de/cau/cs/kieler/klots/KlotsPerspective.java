@@ -6,8 +6,8 @@ import org.eclipse.ui.IPerspectiveFactory;
 import org.eclipse.ui.PlatformUI;
 
 import de.cau.cs.kieler.klots.wizards.NewPOJFileWizard;
-import de.cau.cs.kieler.klots.wizards.SJProjectNewFileWizard;
-import de.cau.cs.kieler.klots.wizards.SJProjectNewSJProjectWizard;
+import de.cau.cs.kieler.klots.wizards.NewSJFileWizard;
+import de.cau.cs.kieler.klots.wizards.NewSJProjectWizard;
 
 public class KlotsPerspective implements IPerspectiveFactory {
 	
@@ -15,8 +15,8 @@ public class KlotsPerspective implements IPerspectiveFactory {
 	private static final String VIEW_KIEM = "de.cau.cs.kieler.sim.kiem.view"; //$NON-NLS-1$
     private static final String VIEW_KIEM_TABLE = "de.cau.cs.kieler.sim.table.view"; //$NON-NLS-1$
     
-    private static final String WIZ_KLOTS = SJProjectNewSJProjectWizard.ID;
-    private static final String WIZ_KLOTS_SJ_FILE = SJProjectNewFileWizard.ID;
+    private static final String WIZ_KLOTS = NewSJProjectWizard.ID;
+    private static final String WIZ_KLOTS_SJ_FILE = NewSJFileWizard.ID;
     private static final String WIZ_KLOTS_POJ_FILE = NewPOJFileWizard.ID;
     private static final String WIZ_FILE = "org.eclipse.ui.wizards.new.file"; //$NON-NLS-1$
     private static final String WIZ_PROJECT = "org.eclipse.ui.wizards.new.project"; //$NON-NLS-1$

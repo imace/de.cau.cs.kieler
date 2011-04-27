@@ -15,7 +15,7 @@ import de.cau.cs.kieler.klots.editor.SJEditor;
 import de.cau.cs.kieler.klots.util.KlotsConsole;
 import de.cau.cs.kieler.klots.util.KlotsConstants;
 
-public class NXTDataObserverWithKiVi extends JSONObjectDataComponent implements
+public class SJEditorNXTDataObserver extends JSONObjectDataComponent implements
 		IJSONObjectDataComponent {
 	
 	private static KlotsConsole console = KlotsConsole.getInstance();

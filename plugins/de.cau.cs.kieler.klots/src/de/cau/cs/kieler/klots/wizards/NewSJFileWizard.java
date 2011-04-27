@@ -29,20 +29,20 @@ import de.cau.cs.kieler.klots.KlotsPlugin;
  * be able to open it.
  */
 
-public class SJProjectNewFileWizard extends Wizard implements INewWizard {
+public class NewSJFileWizard extends Wizard implements INewWizard {
 	
 	public final static String ID = "de.cau.cs.kieler.klots.editor.SJEditorNewFileWizard"; 
 	
 	// the OS specific file separator char, e.g. '/' or '\'
 	private final static String OS_FILE_SEPARATOR = System.getProperty("file.separator");
 	
-	private SJEditorNewFileWizardPage page;
+	private NewSJFileWizardPage page;
 	private ISelection selection;
 
 	/**
 	 * Constructor for SampleNewWizard.
 	 */
-	public SJProjectNewFileWizard() {
+	public NewSJFileWizard() {
 		super();
 		setNeedsProgressMonitor(true);
 	}
@@ -52,7 +52,7 @@ public class SJProjectNewFileWizard extends Wizard implements INewWizard {
 	 */
 
 	public void addPages() {
-		page = new SJEditorNewFileWizardPage(selection);
+		page = new NewSJFileWizardPage(selection);
 		addPage(page);
 	}
 

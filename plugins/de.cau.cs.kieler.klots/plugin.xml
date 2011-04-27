@@ -4,25 +4,25 @@
   <extension
         point="de.cau.cs.kieler.sim.kiem.json.datacomponent">
      <content
-           class="de.cau.cs.kieler.klots.NXTDataDistributorWithKiVi"
+           class="de.cau.cs.kieler.klots.NXTDataDistributor"
            id="de.cau.cs.kieler.klots.NXTDataDistributorWithKiVi"
-           name="NXT Communicator">
+           name="NXT Data Distributor">
      </content>
   </extension>
   <extension
         point="de.cau.cs.kieler.sim.kiem.json.datacomponent">
      <content
-           class="de.cau.cs.kieler.klots.NXTDataObserverWithKiVi"
+           class="de.cau.cs.kieler.klots.SJEditorNXTDataObserver"
            id="de.cau.cs.kieler.klots.NXTDataObserverWithKiVi"
-           name="NXT Data Observer">
+           name="SJEditor NXT Data Observer">
      </content>
   </extension>
   <extension
         point="de.cau.cs.kieler.sim.kiem.json.datacomponent">
      <content
-           class="de.cau.cs.kieler.klots.SJInstructionsViewDataObserver"
+           class="de.cau.cs.kieler.klots.SJInstructionsViewNXTDataObserver"
            id="de.cau.cs.kieler.klots.view.SJInstructionsViewDataObserver"
-           name="SJ Instructions View Observer">
+           name="SJ Instructions View NXT Data Observer">
      </content>
   </extension>
   <extension
@@ -51,7 +51,7 @@
          point="org.eclipse.ui.newWizards">
       <wizard
             category="cau.cs.kieler.klots.editor"
-            class="de.cau.cs.kieler.klots.wizards.SJProjectNewFileWizard"
+            class="de.cau.cs.kieler.klots.wizards.NewSJFileWizard"
             icon="icons/editor7.gif"
             id="de.cau.cs.kieler.klots.editor.SJEditorNewFileWizard"
             name="Embedded SJ File">
@@ -62,7 +62,7 @@
       </category>
       <wizard
             category="cau.cs.kieler.klots.editor"
-            class="de.cau.cs.kieler.klots.wizards.SJProjectNewSJProjectWizard"
+            class="de.cau.cs.kieler.klots.wizards.NewSJProjectWizard"
             icon="icons/editor7.gif"
             id="de.cau.cs.kieler.klots.editor.SJEditorNewSJProjectWizard"
             name="Embedded SJ Project"
@@ -71,7 +71,7 @@
       <wizard
             category="cau.cs.kieler.klots.editor"
             class="de.cau.cs.kieler.klots.wizards.NewPOJFileWizard"
-            icon="icons/editor7.gif"
+            icon="icons/KLOTS5.png"
             id="de.cau.cs.kieler.klots.editor.NewPOJFileWizard"
             name="Plain Old Java Embedded File">
       </wizard>

@@ -31,7 +31,7 @@ import de.cau.cs.kieler.klots.util.KlotsConstants;
  */
 
 
-public class SJEditorNewFileWizardPage extends WizardPage {
+public class NewSJFileWizardPage extends WizardPage {
 	private Text containerText;
 
 	private Text fileText;
@@ -43,7 +43,7 @@ public class SJEditorNewFileWizardPage extends WizardPage {
 	 * 
 	 * @param pageName
 	 */
-	public SJEditorNewFileWizardPage(ISelection selection) {
+	public NewSJFileWizardPage(ISelection selection) {
 		super("NewSJFileWizardPage");
 		setTitle("Create a new Embedded SJ file");
 		setDescription("Creates a new Embedded SJ file");
