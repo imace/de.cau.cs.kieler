@@ -51,7 +51,7 @@
          point="org.eclipse.ui.newWizards">
       <wizard
             category="cau.cs.kieler.klots.editor"
-            class="de.cau.cs.kieler.klots.editor.SJProjectNewFileWizard"
+            class="de.cau.cs.kieler.klots.wizards.SJProjectNewFileWizard"
             icon="icons/editor7.gif"
             id="de.cau.cs.kieler.klots.editor.SJEditorNewFileWizard"
             name="Embedded SJ File">
@@ -62,7 +62,7 @@
       </category>
       <wizard
             category="cau.cs.kieler.klots.editor"
-            class="de.cau.cs.kieler.klots.editor.SJProjectNewSJProjectWizard"
+            class="de.cau.cs.kieler.klots.wizards.SJProjectNewSJProjectWizard"
             icon="icons/editor7.gif"
             id="de.cau.cs.kieler.klots.editor.SJEditorNewSJProjectWizard"
             name="Embedded SJ Project"
@@ -70,7 +70,7 @@
       </wizard>
       <wizard
             category="cau.cs.kieler.klots.editor"
-            class="de.cau.cs.kieler.klots.editor.NewPOJFileWizard"
+            class="de.cau.cs.kieler.klots.wizards.NewPOJFileWizard"
             icon="icons/editor7.gif"
             id="de.cau.cs.kieler.klots.editor.NewPOJFileWizard"
             name="Plain Old Java Embedded File">

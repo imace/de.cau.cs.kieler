@@ -5,9 +5,9 @@ import org.eclipse.ui.IPageLayout;
 import org.eclipse.ui.IPerspectiveFactory;
 import org.eclipse.ui.PlatformUI;
 
-import de.cau.cs.kieler.klots.editor.NewPOJFileWizard;
-import de.cau.cs.kieler.klots.editor.SJProjectNewFileWizard;
-import de.cau.cs.kieler.klots.editor.SJProjectNewSJProjectWizard;
+import de.cau.cs.kieler.klots.wizards.NewPOJFileWizard;
+import de.cau.cs.kieler.klots.wizards.SJProjectNewFileWizard;
+import de.cau.cs.kieler.klots.wizards.SJProjectNewSJProjectWizard;
 
 public class KlotsPerspective implements IPerspectiveFactory {
 	

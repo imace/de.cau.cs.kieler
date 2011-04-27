@@ -1,4 +1,4 @@
-package de.cau.cs.kieler.klots.editor;
+package de.cau.cs.kieler.klots.wizards;
 
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
