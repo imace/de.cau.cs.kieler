@@ -5,36 +5,36 @@
         point="de.cau.cs.kieler.sim.kiem.json.datacomponent">
      <content
            class="de.cau.cs.kieler.klots.kiemdatacomponents.NXTDataDistributor"
-           id="de.cau.cs.kieler.klots.NXTDataDistributorWithKiVi"
+           id="de.cau.cs.kieler.klots.NXTDataDistributor"
            name="NXT Data Distributor">
      </content>
   </extension>
   <extension
         point="de.cau.cs.kieler.sim.kiem.json.datacomponent">
      <content
-           class="de.cau.cs.kieler.klots.kiemdatacomponents.SJEditorNXTDataObserver"
-           id="de.cau.cs.kieler.klots.NXTDataObserverWithKiVi"
-           name="SJEditor NXT Data Observer">
+           class="de.cau.cs.kieler.klots.kiemdatacomponents.KlotsEditorNXTDataObserver"
+           id="de.cau.cs.kieler.klots.KlotsEditorNXTDataObserver"
+           name="KLOTS Editor NXT Data Observer">
      </content>
   </extension>
   <extension
         point="de.cau.cs.kieler.sim.kiem.json.datacomponent">
      <content
            class="de.cau.cs.kieler.klots.kiemdatacomponents.SJInstructionsViewNXTDataObserver"
-           id="de.cau.cs.kieler.klots.view.SJInstructionsViewDataObserver"
+           id="de.cau.cs.kieler.klots.view.SJInstructionsViewNXTDataObserver"
            name="SJ Instructions View NXT Data Observer">
      </content>
   </extension>
   <extension
         point="org.eclipse.ui.editors">
      <editor
-           class="de.cau.cs.kieler.klots.editor.SJEditor"
-           contributorClass="de.cau.cs.kieler.klots.editor.SJEditorContributor"
+           class="de.cau.cs.kieler.klots.editor.KlotsEditor"
+           contributorClass="de.cau.cs.kieler.klots.editor.KlotsEditorContributor"
            default="false"
            extensions="java"
-           icon="icons/editor7.gif"
-           id="de.cau.cs.kieler.klots.editor.SJEditor"
-           name="SJ Editor">
+           icon="icons/KLOTS3.png"
+           id="de.cau.cs.kieler.klots.editor.KlotsEditor"
+           name="KLOTS Editor">
      </editor>
   </extension>
   <extension
@@ -53,18 +53,18 @@
             category="cau.cs.kieler.klots.editor"
             class="de.cau.cs.kieler.klots.wizards.NewSJFileWizard"
             icon="icons/editor7.gif"
-            id="de.cau.cs.kieler.klots.editor.SJEditorNewFileWizard"
+            id="de.cau.cs.kieler.klots.editor.NewSJFileWizard"
             name="Embedded SJ File">
       </wizard>
       <category
             id="de.cau.cs.kieler.klots.editor"
-            name="SJ Wizards">
+            name="KLOTS Wizards">
       </category>
       <wizard
             category="cau.cs.kieler.klots.editor"
             class="de.cau.cs.kieler.klots.wizards.NewSJProjectWizard"
             icon="icons/editor7.gif"
-            id="de.cau.cs.kieler.klots.editor.SJEditorNewSJProjectWizard"
+            id="de.cau.cs.kieler.klots.editor.NewSJProjectWizard"
             name="Embedded SJ Project"
             project="true">
       </wizard>

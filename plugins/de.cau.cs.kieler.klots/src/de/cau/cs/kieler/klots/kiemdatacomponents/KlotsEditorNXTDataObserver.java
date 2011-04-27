@@ -12,15 +12,15 @@ import de.cau.cs.kieler.sim.kiem.KiemExecutionException;
 import de.cau.cs.kieler.sim.kiem.KiemInitializationException;
 
 import de.cau.cs.kieler.klots.KlotsPlugin;
-import de.cau.cs.kieler.klots.editor.SJEditor;
+import de.cau.cs.kieler.klots.editor.KlotsEditor;
 import de.cau.cs.kieler.klots.util.KlotsConsole;
 import de.cau.cs.kieler.klots.util.KlotsConstants;
 
-public class SJEditorNXTDataObserver extends JSONObjectDataComponent implements
+public class KlotsEditorNXTDataObserver extends JSONObjectDataComponent implements
 		IJSONObjectDataComponent {
 	
 	private static KlotsConsole console = KlotsConsole.getInstance();
-	SJEditor editor;
+	KlotsEditor editor;
 	
 
 	public void initialize() throws KiemInitializationException {
@@ -29,7 +29,7 @@ public class SJEditorNXTDataObserver extends JSONObjectDataComponent implements
 			public void run() {
 				IEditorPart e = KlotsPlugin.getDefault().getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
 				if(e != null) {
-					editor = (SJEditor) e;
+					editor = (KlotsEditor) e;
 				} else {
 					console.println("INITIALIZATION ERROR: Could not find an active SJ editor!");
 				}
@@ -50,7 +50,7 @@ public class SJEditorNXTDataObserver extends JSONObjectDataComponent implements
 				public void run() {
 					IEditorPart e = KlotsPlugin.getDefault().getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
 					if(e != null) {
-						editor = (SJEditor) e;
+						editor = (KlotsEditor) e;
 					} else {
 						console.println("INITIALIZATION ERROR: Could not find an active SJ editor!");
 					}

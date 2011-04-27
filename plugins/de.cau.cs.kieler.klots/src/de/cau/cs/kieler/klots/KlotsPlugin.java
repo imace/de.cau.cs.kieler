@@ -61,7 +61,7 @@ public class KlotsPlugin extends AbstractUIPlugin {
     
     
     public static String getSJEditorID() {
-    	return de.cau.cs.kieler.klots.editor.SJEditor.ID;
+    	return de.cau.cs.kieler.klots.editor.KlotsEditor.ID;
     }
     
 }

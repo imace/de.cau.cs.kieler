@@ -33,7 +33,7 @@ import de.cau.cs.kieler.klots.util.KlotsConstants;
 
 
 @SuppressWarnings("restriction")
-public class SJEditor extends CompilationUnitEditor implements IResourceChangeListener, IGotoMarker {
+public class KlotsEditor extends CompilationUnitEditor implements IResourceChangeListener, IGotoMarker {
 	
     public static final String ID = "de.cau.cs.kieler.klots.editor.SJEditor";
 	
@@ -152,7 +152,7 @@ public class SJEditor extends CompilationUnitEditor implements IResourceChangeLi
 	/**
 	 * Creates a multi-page editor example.
 	 */
-	public SJEditor() {
+	public KlotsEditor() {
 		super();
 		ResourcesPlugin.getWorkspace().addResourceChangeListener(this);
 		
@@ -183,7 +183,7 @@ public class SJEditor extends CompilationUnitEditor implements IResourceChangeLi
 	public static JavaEditor getEditor() {
 		IEditorPart  editorPart = KlotsPlugin.getDefault().getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
 		if(editorPart != null) {
-			SJEditor e = (SJEditor) editorPart;
+			KlotsEditor e = (KlotsEditor) editorPart;
 			return e;
 		}
 		return null;

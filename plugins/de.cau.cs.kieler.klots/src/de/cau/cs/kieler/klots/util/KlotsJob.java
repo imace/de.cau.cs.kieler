@@ -24,7 +24,7 @@ import org.eclipse.ui.progress.IProgressConstants;
 import org.osgi.framework.Bundle;
 
 import de.cau.cs.kieler.klots.KlotsPlugin;
-import de.cau.cs.kieler.klots.editor.SJEditor;
+import de.cau.cs.kieler.klots.editor.KlotsEditor;
 
 public class KlotsJob extends Job {
 	
@@ -51,7 +51,7 @@ public class KlotsJob extends Job {
 		super(job);
 		
 		if(editorPart != null) {
-			SJEditor e = (SJEditor) editorPart;
+			KlotsEditor e = (KlotsEditor) editorPart;
 			IFileEditorInput input = (IFileEditorInput)e.getEditorInput();
 		    IFile file = input.getFile();
 		    fileName = file.getName();

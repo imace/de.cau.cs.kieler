@@ -21,7 +21,7 @@ import de.cau.cs.kieler.klots.util.KlotsJob;
  * Responsible for the redirection of global actions to the active editor.
  * Multi-page contributor replaces the contributors for the individual editors in the multi-page editor.
  */
-public class SJEditorContributor extends EditorActionBarContributor {
+public class KlotsEditorContributor extends EditorActionBarContributor {
 	
 	private IEditorPart activeEditorPart;
 	private Action compileAndLink;
@@ -32,7 +32,7 @@ public class SJEditorContributor extends EditorActionBarContributor {
 	/**
 	 * Creates a multi-page contributor.
 	 */
-	public SJEditorContributor() {
+	public KlotsEditorContributor() {
 		super();
 		createActions();
 	}
@@ -209,7 +209,7 @@ public class SJEditorContributor extends EditorActionBarContributor {
 			}
 		};
 		downloadToNXT.setText("Download to NXT");
-		downloadToNXT.setToolTipText("Download Embeded SJ program to NXT");
+		downloadToNXT.setToolTipText("Download Embedded SJ program to NXT");
 		downloadToNXT.setImageDescriptor( KlotsPlugin.imageDescriptorFromPlugin(KlotsPlugin.PLUGIN_ID, "icons/downloadIcon.png") );
 //		downloadToNXT.setDisabledImageDescriptor( KlotsPlugin.imageDescriptorFromPlugin(KlotsPlugin.PLUGIN_ID, "icons/KIEMstepIconDisabled.png") );
 		
@@ -265,7 +265,7 @@ public class SJEditorContributor extends EditorActionBarContributor {
 			}
 		};
 		runProgram.setText("Run program on NXT");
-		runProgram.setToolTipText("Run Embeded SJ program on NXT");
+		runProgram.setToolTipText("Run program on NXT");
 		runProgram.setImageDescriptor( KlotsPlugin.imageDescriptorFromPlugin(KlotsPlugin.PLUGIN_ID, "icons/runProgramIcon.png") );
 //		runProgram.setDisabledImageDescriptor( KlotsPlugin.imageDescriptorFromPlugin(KlotsPlugin.PLUGIN_ID, "icons/runProgramIconDisabled.png") );
 		// ------------------------------------------------------------------

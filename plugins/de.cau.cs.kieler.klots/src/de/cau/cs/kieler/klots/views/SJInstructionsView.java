@@ -24,7 +24,7 @@ import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.part.ViewPart;
 import de.cau.cs.kieler.klots.KlotsPlugin;
-import de.cau.cs.kieler.klots.editor.SJEditor;
+import de.cau.cs.kieler.klots.editor.KlotsEditor;
 import de.cau.cs.kieler.sim.kiem.KiemPlugin;
 import de.cau.cs.kieler.sim.kiem.execution.Execution;
 
@@ -196,7 +196,7 @@ public class SJInstructionsView extends ViewPart {
         				IEditorPart  editorPart = KlotsPlugin.getDefault().getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
         				if(editorPart != null) {
         					// do a forward step in the editor
-        					SJEditor e = (SJEditor) editorPart;
+        					KlotsEditor e = (KlotsEditor) editorPart;
         					e.doMicroStepForwards();
         					// print data
         					System.out.println("+++++>>>> LISTENER MICRO STEP FORWARD: selection index = " + (i-1) + ", new selection index = " + i + ", tree items count = " + viewer.getTree().getItemCount());
@@ -226,7 +226,7 @@ public class SJInstructionsView extends ViewPart {
         				IEditorPart  editorPart = KlotsPlugin.getDefault().getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
         				if(editorPart != null) {	
         					// do a backward step in the editor
-        					SJEditor e = (SJEditor) editorPart;
+        					KlotsEditor e = (KlotsEditor) editorPart;
         					e.doMicroStepBackwards();
         					// print data
         					System.out.println("+++++>>>> LISTENER MICRO STEP BACK: selection index = " + (i+1) + ", new selection index = " + i);
@@ -287,7 +287,7 @@ public class SJInstructionsView extends ViewPart {
 		}
 		IEditorPart  editorPart = KlotsPlugin.getDefault().getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
 		if(editorPart != null) {
-			SJEditor e = (SJEditor) editorPart;
+			KlotsEditor e = (KlotsEditor) editorPart;
 			// XXX: OPTIMIZE in the next release if multiple selections are wished!!!
 			// e.g. add an index variable to the SJInstructionsData class
 			SJInstructionsData[] sjInstructionsDataListArray = list.get(0).getParentSJInstructionsDataList().getArray();
@@ -401,7 +401,7 @@ public class SJInstructionsView extends ViewPart {
 				if(editorPart != null) {
 					
 					// do a forward step in the editor
-					SJEditor e = (SJEditor) editorPart;
+					KlotsEditor e = (KlotsEditor) editorPart;
 					e.doMicroStepForwards();
 					
 					// do a forward step in the SJ instructions view
@@ -444,7 +444,7 @@ public class SJInstructionsView extends ViewPart {
         			}
 					
 					// do a backward step in the editor
-					SJEditor e = (SJEditor) editorPart;
+					KlotsEditor e = (KlotsEditor) editorPart;
 					e.doMicroStepBackwards();
 					
 					// do a backward step in the SJ instructions view
@@ -482,7 +482,7 @@ public class SJInstructionsView extends ViewPart {
 				IEditorPart  editorPart = KlotsPlugin.getDefault().getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
 				if(editorPart != null) {
 					// do all forward steps in the editor
-					SJEditor e = (SJEditor) editorPart;
+					KlotsEditor e = (KlotsEditor) editorPart;
 					e.doAllForwardMicroSteps();
 					// do all forward steps in the SJ instructions view
 					int i = viewer.getTree().getItemCount();
@@ -508,7 +508,7 @@ public class SJInstructionsView extends ViewPart {
 				IEditorPart  editorPart = KlotsPlugin.getDefault().getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
 				if(editorPart != null) {
 					// roll back all steps in the editor
-					SJEditor e = (SJEditor) editorPart;
+					KlotsEditor e = (KlotsEditor) editorPart;
 					e.doAllBackwardMicroSteps();
 					// roll back all steps in the SJ instructions view
 					viewer.getTree().setSelection(viewer.getTree().getItem(0));
