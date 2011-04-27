@@ -1,4 +1,4 @@
-package de.cau.cs.kieler.klots;
+package de.cau.cs.kieler.klots.kiemdatacomponents;
 
 import java.util.Iterator;
 import org.eclipse.swt.widgets.Display;
@@ -11,6 +11,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import de.cau.cs.kieler.klots.KlotsPlugin;
 import de.cau.cs.kieler.klots.util.KlotsConstants;
 import de.cau.cs.kieler.klots.views.SJInstructionsData;
 import de.cau.cs.kieler.klots.views.SJInstructionsDataList;

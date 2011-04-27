@@ -4,7 +4,7 @@
   <extension
         point="de.cau.cs.kieler.sim.kiem.json.datacomponent">
      <content
-           class="de.cau.cs.kieler.klots.NXTDataDistributor"
+           class="de.cau.cs.kieler.klots.kiemdatacomponents.NXTDataDistributor"
            id="de.cau.cs.kieler.klots.NXTDataDistributorWithKiVi"
            name="NXT Data Distributor">
      </content>
@@ -12,7 +12,7 @@
   <extension
         point="de.cau.cs.kieler.sim.kiem.json.datacomponent">
      <content
-           class="de.cau.cs.kieler.klots.SJEditorNXTDataObserver"
+           class="de.cau.cs.kieler.klots.kiemdatacomponents.SJEditorNXTDataObserver"
            id="de.cau.cs.kieler.klots.NXTDataObserverWithKiVi"
            name="SJEditor NXT Data Observer">
      </content>
@@ -20,7 +20,7 @@
   <extension
         point="de.cau.cs.kieler.sim.kiem.json.datacomponent">
      <content
-           class="de.cau.cs.kieler.klots.SJInstructionsViewNXTDataObserver"
+           class="de.cau.cs.kieler.klots.kiemdatacomponents.SJInstructionsViewNXTDataObserver"
            id="de.cau.cs.kieler.klots.view.SJInstructionsViewDataObserver"
            name="SJ Instructions View NXT Data Observer">
      </content>

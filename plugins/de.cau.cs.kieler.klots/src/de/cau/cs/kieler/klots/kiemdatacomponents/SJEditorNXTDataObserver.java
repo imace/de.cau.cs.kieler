@@ -1,4 +1,4 @@
-package de.cau.cs.kieler.klots;
+package de.cau.cs.kieler.klots.kiemdatacomponents;
 
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PlatformUI;
@@ -11,6 +11,7 @@ import de.cau.cs.kieler.sim.kiem.JSONSignalValues;
 import de.cau.cs.kieler.sim.kiem.KiemExecutionException;
 import de.cau.cs.kieler.sim.kiem.KiemInitializationException;
 
+import de.cau.cs.kieler.klots.KlotsPlugin;
 import de.cau.cs.kieler.klots.editor.SJEditor;
 import de.cau.cs.kieler.klots.util.KlotsConsole;
 import de.cau.cs.kieler.klots.util.KlotsConstants;

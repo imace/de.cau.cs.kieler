@@ -1,4 +1,4 @@
-package de.cau.cs.kieler.klots;
+package de.cau.cs.kieler.klots.kiemdatacomponents;
 
 import java.util.Iterator;
 
