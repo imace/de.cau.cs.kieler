@@ -123,7 +123,7 @@ public class SJEditorNewFileWizardPage extends WizardPage {
 				containerText.setText(container.getFullPath().toString());
 			}
 		}
-		fileText.setText("New_SJ_File.java");
+		fileText.setText("NewSJFile.java");
 	}
 
 	/**

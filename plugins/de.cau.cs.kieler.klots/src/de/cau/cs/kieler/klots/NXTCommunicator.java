@@ -19,6 +19,7 @@ public class NXTCommunicator {
 	static DataOutputStream dos;
 	static DataInputStream dis;
 	private static boolean connected;
+	private static NXTInfo nxtInfo;
 	
 	/** The instance of the distributor. */
     private static final NXTCommunicator INSTANCE = new NXTCommunicator();
@@ -40,14 +41,21 @@ public class NXTCommunicator {
 	private static void connectToNXT() {
 		// Connect to any NXT over Bluetooth
 		conn = new NXTConnector();
-		System.out.println("Searching for NXTs... ");
-		boolean connOK = conn.connectTo("btspp://");
+		boolean connOK = false;
+		if( nxtInfo == null ) {
+			System.out.println("Searching for NXTs... ");
+			connOK = conn.connectTo("btspp://", NXTComm.LCP);
+		} else {
+			System.out.println("Connecting to NXT >" + nxtInfo.name + "< ...");
+			connOK = conn.connectTo(nxtInfo, NXTComm.LCP);
+		}
 		if (!connOK) {
 			System.out.println();
 			System.err.println("Failed to connect to any NXT!");
 			return;
 		}
 		System.out.println("Connected to NXT >" + conn.getNXTInfo().name + "<!");
+		nxtInfo = conn.getNXTInfo();
 		dos = conn.getDataOut();
 		dis = conn.getDataIn();
 		connected = true;

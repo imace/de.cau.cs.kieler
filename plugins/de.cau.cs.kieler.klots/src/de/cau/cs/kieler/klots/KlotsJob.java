@@ -158,6 +158,8 @@ public class KlotsJob extends Job {
 				RemotePrintReceiver printer = new RemotePrintReceiver(NXTCommunicator.getInstance());
 				printer.start();
 			}
+			info = new MultiStatus(KlotsPlugin.PLUGIN_ID, 0, fileName + " finished successfully!", null);
+			info.add(new Status(IStatus.INFO, KlotsPlugin.PLUGIN_ID, 0, ">OK<", null));
 		} catch (Exception le) {
 			le.printStackTrace();
 			info = new MultiStatus(KlotsPlugin.PLUGIN_ID, 1, "Error while trying to start Embedded SJ program " + fileName + "!", null);

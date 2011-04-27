@@ -45,8 +45,8 @@ public class NewPOJFileWizardPage extends WizardPage {
 	 */
 	public NewPOJFileWizardPage(ISelection selection) {
 		super("NewPOJFileWizzardPage");
-		setTitle("Create a new plane old java embedded file");
-		setDescription("Creates a new plane old java embedded SJ file");
+		setTitle("Create a new plain old java embedded file");
+		setDescription("Creates a new plain old java embedded SJ file");
 		this.selection = selection;
 	}
 
@@ -124,7 +124,7 @@ public class NewPOJFileWizardPage extends WizardPage {
 				containerText.setText(container.getFullPath().toString());
 			}
 		}
-		fileText.setText("New_POJ_File.java");
+		fileText.setText("NewPlainJavaLeJOSFile.java");
 	}
 
 	/**
