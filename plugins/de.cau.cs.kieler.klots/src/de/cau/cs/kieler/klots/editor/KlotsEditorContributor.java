@@ -96,62 +96,10 @@ public class KlotsEditorContributor extends EditorActionBarContributor {
 		// ---------------------- compile and link --------------------------
 		compileAndLink = new Action() {
 			public void run() {
-			
 				KlotsJob job = new KlotsJob( KlotsJob.LINK_JOB,
 						KlotsPlugin.getDefault().getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor() );
 				job.setUser(true);
 				job.schedule();
-				
-//				String projectName = "";
-//				String projectPath = "";
-//				String fileName = "";
-//				MultiStatus info;
-//				
-//				IEditorPart  editorPart = KlotsPlugin.getDefault().getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
-//				if(editorPart != null) {
-//					SJEditor e = (SJEditor) editorPart;
-//					IFileEditorInput input = (IFileEditorInput)e.getEditorInput();
-//				    IFile file = input.getFile();
-//				    fileName = file.getName();
-//				    fileName = fileName.substring(0, fileName.lastIndexOf("." + KlotsConstants.SJ_FILE_NAME_EXTENSION));
-//				    IProject activeProject = file.getProject();
-//				    projectName = activeProject.getName();
-//				    projectPath = activeProject.getLocation().toOSString();
-//				    projectPath = projectPath.substring(0, projectPath.lastIndexOf(projectName));
-//				    
-//				    Bundle lejosBundle = Platform.getBundle("org.lejos.nxt");
-//					String lejosPath = lejosBundle.getLocation();
-//					lejosPath = lejosPath.replaceFirst(".*file:", "");
-//				    System.out.println("%%%%%%%%%%%%%%%%%%>>> org.lejos.nxt LOCATION = >" + lejosPath + "<");
-//					
-//					final String[] args = {"--bootclasspath", lejosPath,
-//							"--writeorder", "LE",
-//							"--classpath", "\".\"",
-//							"-v",
-//							"-cp", projectPath + projectName + OS_FILE_SEPARATOR + "embeddedSJ.jar" + OS_PATH_SEPARATOR +
-//							projectPath + projectName + OS_FILE_SEPARATOR + "bin",
-//							"." + OS_FILE_SEPARATOR + "examples" + OS_FILE_SEPARATOR + fileName,
-//							"-o", projectPath + projectName + OS_FILE_SEPARATOR + "bin" + OS_FILE_SEPARATOR + fileName + ".nxj"};
-//					final TinyVM link = new TinyVM();
-//					link.addProgressMonitor(new CLIToolProgressMonitor());
-//					try {
-//						link.start(args);
-//						info = new MultiStatus(KlotsPlugin.PLUGIN_ID, 0, "Embedded SJ program " + fileName + " built successfully!", null);
-//						info.add(new Status(IStatus.INFO, KlotsPlugin.PLUGIN_ID, 0, ">OK<", null));
-//					} catch (Exception le) {
-//						le.printStackTrace();
-//						info = new MultiStatus(KlotsPlugin.PLUGIN_ID, 1, "Error while trying to build Embedded SJ program " + fileName + "!", null);
-//						info.add(new Status(IStatus.ERROR, KlotsPlugin.PLUGIN_ID, 1, le.getMessage(), null));
-//					}
-//				    
-//				} else {
-//					System.out.println("###>>> COMPILE PATH ERROR: No active editor!");
-//					info = new MultiStatus(KlotsPlugin.PLUGIN_ID, 1, "Error while trying to build Embedded SJ program " + fileName + "!", null);
-//					info.add(new Status(IStatus.ERROR, KlotsPlugin.PLUGIN_ID, 1, "No active SJ editor!", null));
-//				}
-//				
-//				ErrorDialog.openError(null, "KLOTS", null, info);
-				
 			}
 		};
 		compileAndLink.setText("Build program");
@@ -163,49 +111,10 @@ public class KlotsEditorContributor extends EditorActionBarContributor {
 		// ------------------------ download to NXT -------------------------
 		downloadToNXT = new Action() {
 			public void run() {
-				
 				KlotsJob job = new KlotsJob( KlotsJob.DOWNLOAD_JOB,
 						KlotsPlugin.getDefault().getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor() );
 				job.setUser(true);
-				job.schedule();
-				
-//				String projectName = "";
-//				String projectPath = "";
-//				String fileName = "";
-//				MultiStatus info;
-//				
-//				IEditorPart  editorPart = KlotsPlugin.getDefault().getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
-//				if(editorPart != null) {
-//					SJEditor e = (SJEditor) editorPart;
-//					IFileEditorInput input = (IFileEditorInput)e.getEditorInput();
-//				    IFile file = input.getFile();
-//				    fileName = file.getName();
-//				    fileName = fileName.substring(0, fileName.lastIndexOf("." + KlotsConstants.SJ_FILE_NAME_EXTENSION));
-//				    IProject activeProject = file.getProject();
-//				    projectName = activeProject.getName();
-//				    projectPath = activeProject.getLocation().toOSString();
-//				    projectPath = projectPath.substring(0, projectPath.lastIndexOf(projectName));
-//				    
-//				    String[] args = {"-b", projectPath + projectName + OS_FILE_SEPARATOR + "bin" + OS_FILE_SEPARATOR + fileName + ".nxj"};
-//					NXJUpload up = new NXJUpload();
-//					try {
-//						up.run(args);
-//						info = new MultiStatus(KlotsPlugin.PLUGIN_ID, 0, "Embedded SJ program " + fileName + " downloaded successfully!", null);
-//						info.add(new Status(IStatus.INFO, KlotsPlugin.PLUGIN_ID, 0, ">OK<", null));
-//					} catch (Exception le) {
-//						le.printStackTrace();
-//						info = new MultiStatus(KlotsPlugin.PLUGIN_ID, 1, "Error while trying to download Embedded SJ program " + fileName + "!", null);
-//						info.add(new Status(IStatus.ERROR, KlotsPlugin.PLUGIN_ID, 1, le.getMessage(), null));
-//					}
-//				    
-//				} else {
-//					System.out.println("###>>> DOWNLOAD TO NXT PATH ERROR: No active editor!");
-//					info = new MultiStatus(KlotsPlugin.PLUGIN_ID, 1, "Error while trying to download Embedded SJ program " + fileName + "!", null);
-//					info.add(new Status(IStatus.ERROR, KlotsPlugin.PLUGIN_ID, 1, "No active SJ editor!", null));
-//				}
-//				
-//				ErrorDialog.openError(null, "KLOTS", null, info);
-				
+				job.schedule();				
 			}
 		};
 		downloadToNXT.setText("Download to NXT");
@@ -217,51 +126,10 @@ public class KlotsEditorContributor extends EditorActionBarContributor {
 		// -------------------------- run program ---------------------------
 		runProgram = new Action() {
 			public void run() {
-				
 				KlotsJob job = new KlotsJob( KlotsJob.RUN_JOB,
 						KlotsPlugin.getDefault().getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor() );
 				job.setUser(true);
-				job.schedule();
-				
-//				String fileName = "";
-//				MultiStatus info;
-//				
-//				IEditorPart  editorPart = KlotsPlugin.getDefault().getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
-//				if(editorPart != null) {
-//					SJEditor e = (SJEditor) editorPart;
-//					IFileEditorInput input = (IFileEditorInput)e.getEditorInput();
-//				    IFile file = input.getFile();
-//				    fileName = file.getName();
-//				    fileName = fileName.substring(0, fileName.lastIndexOf("." + KlotsConstants.SJ_FILE_NAME_EXTENSION));
-//				    fileName += ".nxj";
-//				    
-//					NXTCommand nxtCommand = NXTCommand.getSingleton();
-//					try {
-//						NXTComm nxtComm = NXTCommunicator.getInstance().getNXTComm();
-//						nxtCommand.setNXTComm(nxtComm);
-//						nxtCommand.startProgram(fileName);
-//						// must close low level transmission in order to be able to start a high level transmission
-//						NXTCommunicator.getInstance().closeTransmission(false);
-//						String msg = NXTCommunicator.getInstance().receiveMessage().toString();
-//						if( msg.startsWith("[{" + KlotsConstants.STANDALONE_PROGRAM_MODE_COMMAND_KEY) ) {
-//							NXTCommunicator.getInstance().sendMessage(KlotsConstants.STANDALONE_PROGRAM_MODE_COMMAND_KEY);
-//							RemotePrintReceiver printer = new RemotePrintReceiver(NXTCommunicator.getInstance());
-//							printer.start();
-//						}
-//					} catch (Exception le) {
-//						le.printStackTrace();
-//						info = new MultiStatus(KlotsPlugin.PLUGIN_ID, 1, "Error while trying to start Embedded SJ program " + fileName + "!", null);
-//						info.add(new Status(IStatus.ERROR, KlotsPlugin.PLUGIN_ID, 1, le.getMessage(), null));
-//						ErrorDialog.openError(null, "KLOTS", null, info);
-//					}
-//				    
-//				} else {
-//					System.out.println("###>>> RUN PROGRAM ON NXT PATH ERROR: No active editor!");
-//					info = new MultiStatus(KlotsPlugin.PLUGIN_ID, 1, "Error while trying to start Embedded SJ program " + fileName + "!", null);
-//					info.add(new Status(IStatus.ERROR, KlotsPlugin.PLUGIN_ID, 1, "No active SJ editor!", null));
-//					ErrorDialog.openError(null, "KLOTS", null, info);
-//				}
-				
+				job.schedule();			
 			}
 		};
 		runProgram.setText("Run program on NXT");

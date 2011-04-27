@@ -123,7 +123,7 @@ public class NewPOJFileWizard extends Wizard implements INewWizard {
 				IWorkbenchPage page =
 					PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
 				try {
-					IDE.openEditor(page, file, KlotsPlugin.getSJEditorID(), true);
+					IDE.openEditor(page, file, KlotsPlugin.getKlotsEditorID(), true);
 					//IDE.openEditor(page, file, true);
 				} catch (PartInitException e) {
 				}

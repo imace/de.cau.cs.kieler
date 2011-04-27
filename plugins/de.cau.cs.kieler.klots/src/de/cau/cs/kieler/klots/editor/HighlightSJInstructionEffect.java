@@ -1,3 +1,16 @@
+/*
+ * KIELER - Kiel Integrated Environment for Layout Eclipse Rich Client
+ *
+ * http://www.informatik.uni-kiel.de/rtsys/kieler/
+ * 
+ * Copyright 2011 by
+ * + Christian-Albrechts-University of Kiel
+ *   + Department of Computer Science
+ *     + Real-Time and Embedded Systems Group
+ * 
+ * This code is provided under the terms of the Eclipse Public License (EPL).
+ * See the file epl-v10.html for the license text.
+ */
 package de.cau.cs.kieler.klots.editor;
 
 import org.eclipse.jdt.internal.ui.javaeditor.CompilationUnitEditor;
@@ -22,7 +35,10 @@ public class HighlightSJInstructionEffect extends AbstractEffect {
 
 
     
-    public HighlightSJInstructionEffect(int startOffset, int textLength, Color color, Color backgroundColor, Color originalColor, Color originalBackgroundColor, CompilationUnitEditor editor) {
+    public HighlightSJInstructionEffect(final int startOffset, final int textLength,
+    		final Color color, final Color backgroundColor,
+    		final Color originalColor, final Color originalBackgroundColor,
+    		final CompilationUnitEditor editor) {
     	this.startOffset = startOffset;
     	this.textLength = textLength;
     	this.color = color;
@@ -36,13 +52,16 @@ public class HighlightSJInstructionEffect extends AbstractEffect {
 
 	public void execute() {
 		try {
-			if( backgroundColor != null ) {
-				editor.getViewer().getTextWidget().setStyleRange( new StyleRange(startOffset, textLength, originalColor, backgroundColor) );
+			if (backgroundColor != null) {
+				editor.getViewer().getTextWidget().setStyleRange(
+						new StyleRange(startOffset, textLength,
+								originalColor, backgroundColor)
+						);
 			}
-			if( color != null ) {
+			if (color != null) {
 				editor.getViewer().setTextColor(color, startOffset, textLength, true);
 			}
-		} catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
     }
@@ -51,13 +70,16 @@ public class HighlightSJInstructionEffect extends AbstractEffect {
     @Override
     public void undo() {
     	try {
-			if( originalBackgroundColor != null ) {
-				editor.getViewer().getTextWidget().setStyleRange( new StyleRange(startOffset, textLength, originalColor, originalBackgroundColor) );
+			if (originalBackgroundColor != null) {
+				editor.getViewer().getTextWidget().setStyleRange(
+						new StyleRange(startOffset, textLength,
+								originalColor, originalBackgroundColor)
+						);
 			}
-			if( originalColor != null ) {
+			if (originalColor != null) {
 				editor.getViewer().setTextColor(originalColor, startOffset, textLength, true);
 			}
-		} catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
     }
@@ -72,18 +94,19 @@ public class HighlightSJInstructionEffect extends AbstractEffect {
     
     @Override
     public HighlightSJInstructionEffect clone() {
-    	return new HighlightSJInstructionEffect(startOffset, textLength, color, backgroundColor, color, backgroundColor, editor);
+    	return new HighlightSJInstructionEffect(startOffset, textLength,
+    			color, backgroundColor, color, backgroundColor, editor);
     }
 
 
 
-	void setColor(Color color) {
+	void setColor(final Color color) {
 		this.color = color;
 	}
 
 
 
-	void setBackgroundColor(Color backgroundColor) {
+	void setBackgroundColor(final Color backgroundColor) {
 		this.backgroundColor = backgroundColor;
 	}
 
