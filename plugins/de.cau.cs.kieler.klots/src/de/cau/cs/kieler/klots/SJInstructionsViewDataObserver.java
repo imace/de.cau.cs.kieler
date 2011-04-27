@@ -10,6 +10,8 @@ import de.cau.cs.kieler.sim.kiem.JSONObjectDataComponent;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import de.cau.cs.kieler.klots.util.KlotsConstants;
 import de.cau.cs.kieler.klots.views.SJInstructionsData;
 import de.cau.cs.kieler.klots.views.SJInstructionsDataList;
 

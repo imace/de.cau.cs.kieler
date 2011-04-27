@@ -3,8 +3,8 @@ package de.cau.cs.kieler.klots.editor;
 import js.tinyvm.TinyVM;
 import js.common.CLIToolProgressMonitor;
 import lejos.pc.tools.NXJUpload;
-import de.cau.cs.kieler.klots.KlotsConstants;
 import de.cau.cs.kieler.klots.KlotsPlugin;
+import de.cau.cs.kieler.klots.util.KlotsConstants;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.MultiStatus;

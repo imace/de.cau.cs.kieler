@@ -1,4 +1,4 @@
-package de.cau.cs.kieler.klots;
+package de.cau.cs.kieler.klots.util;
 
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.widgets.Display;

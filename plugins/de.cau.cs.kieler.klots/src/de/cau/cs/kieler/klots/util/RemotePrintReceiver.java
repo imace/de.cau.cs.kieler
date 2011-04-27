@@ -1,8 +1,11 @@
-package de.cau.cs.kieler.klots;
+package de.cau.cs.kieler.klots.util;
 
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IViewPart;
 import org.eclipse.ui.IWorkbenchWindow;
+
+import de.cau.cs.kieler.klots.KlotsPlugin;
+import de.cau.cs.kieler.klots.NXTCommunicator;
 
 public class RemotePrintReceiver /*extends Thread*/ {
 

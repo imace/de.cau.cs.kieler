@@ -1,4 +1,4 @@
-package de.cau.cs.kieler.klots;
+package de.cau.cs.kieler.klots.util;
 
 import org.eclipse.ui.console.ConsolePlugin;
 import org.eclipse.ui.console.IConsole;

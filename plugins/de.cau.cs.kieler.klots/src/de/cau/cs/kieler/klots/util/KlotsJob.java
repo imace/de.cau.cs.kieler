@@ -1,4 +1,4 @@
-package de.cau.cs.kieler.klots;
+package de.cau.cs.kieler.klots.util;
 
 import js.common.CLIToolProgressMonitor;
 import js.tinyvm.TinyVM;
@@ -23,6 +23,8 @@ import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.progress.IProgressConstants;
 import org.osgi.framework.Bundle;
 
+import de.cau.cs.kieler.klots.KlotsPlugin;
+import de.cau.cs.kieler.klots.NXTCommunicator;
 import de.cau.cs.kieler.klots.editor.SJEditor;
 
 public class KlotsJob extends Job {

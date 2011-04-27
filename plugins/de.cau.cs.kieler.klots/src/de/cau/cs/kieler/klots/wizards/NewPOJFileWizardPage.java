@@ -22,7 +22,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.dialogs.ContainerSelectionDialog;
 
-import de.cau.cs.kieler.klots.KlotsConstants;
+import de.cau.cs.kieler.klots.util.KlotsConstants;
 
 /**
  * The "New" wizard page allows setting the container for the new file as well

@@ -12,8 +12,8 @@ import org.eclipse.ui.part.EditorActionBarContributor;
 import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.ui.texteditor.ITextEditorActionConstants;
 
-import de.cau.cs.kieler.klots.KlotsJob;
 import de.cau.cs.kieler.klots.KlotsPlugin;
+import de.cau.cs.kieler.klots.util.KlotsJob;
 
 
 /**

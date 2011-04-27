@@ -9,7 +9,7 @@ import lejos.pc.comm.NXTConnector;
 import lejos.pc.comm.NXTInfo;
 import lejos.pc.comm.NXTComm;
 
-import de.cau.cs.kieler.klots.KlotsConstants;
+import de.cau.cs.kieler.klots.util.KlotsConstants;
 
 public class NXTCommunicator {
 	

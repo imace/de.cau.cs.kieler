@@ -38,7 +38,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import de.cau.cs.kieler.klots.KlotsConstants;
+import de.cau.cs.kieler.klots.util.KlotsConstants;
 
 
 @SuppressWarnings("restriction")

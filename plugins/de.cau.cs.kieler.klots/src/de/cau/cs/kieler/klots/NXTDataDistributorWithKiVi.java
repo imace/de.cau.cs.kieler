@@ -11,7 +11,8 @@ import de.cau.cs.kieler.sim.kiem.JSONObjectDataComponent;
 import de.cau.cs.kieler.sim.kiem.JSONSignalValues;
 import de.cau.cs.kieler.sim.kiem.KiemExecutionException;
 import de.cau.cs.kieler.sim.kiem.KiemInitializationException;
-import de.cau.cs.kieler.klots.KlotsConstants;
+import de.cau.cs.kieler.klots.util.KlotsConsole;
+import de.cau.cs.kieler.klots.util.KlotsConstants;
 
 public class NXTDataDistributorWithKiVi extends JSONObjectDataComponent implements
 		IJSONObjectDataComponent {
