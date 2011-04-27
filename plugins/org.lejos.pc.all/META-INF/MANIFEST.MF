@@ -62,5 +62,5 @@ Export-Package: com.ibm.oti.connection.btgoep,
  org.apache.bcel.verifier.statics,
  org.apache.bcel.verifier.structurals,
  org.apache.commons.cli
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Require-Bundle: org.lejos.nxt;bundle-version="1.0.0"

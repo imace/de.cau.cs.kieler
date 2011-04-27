@@ -162,7 +162,7 @@ public class KlotsJob extends Job {
 			le.printStackTrace();
 			info = new MultiStatus(KlotsPlugin.PLUGIN_ID, 1, "Error while trying to start Embedded SJ program " + fileName + "!", null);
 			info.add(new Status(IStatus.ERROR, KlotsPlugin.PLUGIN_ID, 1, le.getMessage(), null));
-			ErrorDialog.openError(null, "KLOTS", null, info);
+			//ErrorDialog.openError(null, "KLOTS", null, info);
 		}
 	}
 	

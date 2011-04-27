@@ -22,5 +22,5 @@ Export-Package: com.ibm.oti.connection.btgoep,
  javax.bluetooth,
  javax.microedition.io,
  javax.obex
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Require-Bundle: org.lejos.3rdparty.bluecove-gpl;bundle-version="1.0.0"

@@ -16,7 +16,7 @@ Export-Package: lejos.geom,
  lejos.robotics.navigation,
  lejos.robotics.proposal,
  lejos.util
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Require-Bundle: org.lejos.3rdparty.bcel;bundle-version="1.0.0",
  org.lejos.3rdparty.commons-cli;bundle-version="1.0.0",
  org.lejos.3rdparty.bluecove;bundle-version="1.0.0",
