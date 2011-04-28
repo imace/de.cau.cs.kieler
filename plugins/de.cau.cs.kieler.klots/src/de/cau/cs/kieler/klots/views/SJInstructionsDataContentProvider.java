@@ -1,9 +1,9 @@
 /*
- * KIELER - Kiel Integrated Environment for Layout Eclipse RichClient
+ * KIELER - Kiel Integrated Environment for Layout Eclipse Rich Client
  *
  * http://www.informatik.uni-kiel.de/rtsys/kieler/
  * 
- * Copyright 2009 by
+ * Copyright 2011 by
  * + Christian-Albrechts-University of Kiel
  *   + Department of Computer Science
  *     + Real-Time and Embedded Systems Group
@@ -11,7 +11,6 @@
  * This code is provided under the terms of the Eclipse Public License (EPL).
  * See the file epl-v10.html for the license text.
  */
-
 package de.cau.cs.kieler.klots.views;
 
 import org.eclipse.jface.viewers.ITreeContentProvider;
@@ -20,10 +19,9 @@ import org.eclipse.jface.viewers.Viewer;
 /**
  * The Class TableDataContentProvider.
  * 
+ * @author root
  */
 public class SJInstructionsDataContentProvider implements ITreeContentProvider {
-
-    // -------------------------------------------------------------------------
 
     /**
      * {@inheritDoc}
@@ -32,7 +30,7 @@ public class SJInstructionsDataContentProvider implements ITreeContentProvider {
         return ((SJInstructionsDataList) inputElement).getArray();
     }
 
-    // -------------------------------------------------------------------------
+
 
     /**
      * {@inheritDoc}
@@ -40,7 +38,7 @@ public class SJInstructionsDataContentProvider implements ITreeContentProvider {
     public void dispose() {
     }
 
-    // -------------------------------------------------------------------------
+
 
     /**
      * {@inheritDoc}
@@ -48,7 +46,7 @@ public class SJInstructionsDataContentProvider implements ITreeContentProvider {
     public void inputChanged(final Viewer viewer, final Object oldInput, final Object newInput) {
     }
 
-    // -------------------------------------------------------------------------
+
 
     /**
      * {@inheritDoc}
@@ -57,7 +55,7 @@ public class SJInstructionsDataContentProvider implements ITreeContentProvider {
         return null;
     }
 
-    // -------------------------------------------------------------------------
+
 
     /**
      * {@inheritDoc}
@@ -66,7 +64,7 @@ public class SJInstructionsDataContentProvider implements ITreeContentProvider {
         return null;
     }
 
-    // -------------------------------------------------------------------------
+
 
     /**
      * {@inheritDoc}

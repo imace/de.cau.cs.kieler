@@ -1,3 +1,16 @@
+/*
+ * KIELER - Kiel Integrated Environment for Layout Eclipse Rich Client
+ *
+ * http://www.informatik.uni-kiel.de/rtsys/kieler/
+ * 
+ * Copyright 2011 by
+ * + Christian-Albrechts-University of Kiel
+ *   + Department of Computer Science
+ *     + Real-Time and Embedded Systems Group
+ * 
+ * This code is provided under the terms of the Eclipse Public License (EPL).
+ * See the file epl-v10.html for the license text.
+ */
 package de.cau.cs.kieler.klots.wizards;
 
 import java.io.BufferedReader;
@@ -35,240 +48,242 @@ import org.eclipse.ui.dialogs.WizardNewProjectCreationPage;
 import org.eclipse.ui.wizards.newresource.BasicNewProjectResourceWizard;
 
 
-public class NewSJProjectWizard extends Wizard implements INewWizard,
-		IExecutableExtension {
+/**
+ * @author root
+ *
+ */
+public class NewSJProjectWizard extends Wizard implements INewWizard, IExecutableExtension {
 
-	public final static String ID = "de.cau.cs.kieler.klots.editor.SJEditorNewSJProjectWizard";
-	
-	// the OS specific file separator char, e.g. '/' or '\'
-	private final String OS_FILE_SEPARATOR = System.getProperty("file.separator");
-	
-	/*
-	 * Use the WizardNewProjectCreationPage, which is provided by the Eclipse
-	 * framework.
-	 */
-	private WizardNewProjectCreationPage wizardPage;
+    /**
+     * 
+     */
+    public static final String ID = "de.cau.cs.kieler.klots.editor.SJEditorNewSJProjectWizard";
 
-	private IConfigurationElement config;
+    // the OS specific file separator char, e.g. '/' or '\'
+    private final String OS_FILE_SEPARATOR = System.getProperty("file.separator");
 
-	private IWorkbench workbench;
+    /*
+     * Use the WizardNewProjectCreationPage, which is provided by the Eclipse
+     * framework.
+     */
+    private WizardNewProjectCreationPage wizardPage;
+    private IConfigurationElement config;
+    private IWorkbench workbench;
+    private IStructuredSelection selection;
+    private IProject project;
 
-	private IStructuredSelection selection;
+    
+    /**
+     * Constructor.
+     */
+    public NewSJProjectWizard() {
+        super();
+    }
 
-	private IProject project;
+    
+    
+    /**
+     * {@inheritDoc}
+     */
+    public void addPages() {
+        /*
+         * Unlike the custom new wizard, we just add the pre-defined one and
+         * don't necessarily define our own.
+         */
+        wizardPage = new WizardNewProjectCreationPage(
+        "NewEmbeddedSJProject");
+        wizardPage.setDescription("Enter a project name.");
+        wizardPage.setTitle("Create a new Embedded SJ Project");
+        addPage(wizardPage);
+    }
 
-	/**
-	 * Constructor
-	 */
-	public NewSJProjectWizard() {
-		super();
-	}
+    
+    
+    @Override
+    public boolean performFinish() {
+        if (project != null) {
+            return true;
+        }
+        final IProject projectHandle = wizardPage.getProjectHandle();
+        URI projectURI = (!wizardPage.useDefaults()) ? wizardPage.getLocationURI() : null;
+        IWorkspace workspace = ResourcesPlugin.getWorkspace();
+        final IProjectDescription desc = workspace.newProjectDescription(projectHandle.getName());
+        desc.setLocationURI(projectURI);
+        
+        /*
+         * Just like the NewFileWizard, but this time with an operation object
+         * that modifies workspaces.
+         */
+        WorkspaceModifyOperation op = new WorkspaceModifyOperation() {
+            protected void execute(final IProgressMonitor monitor) throws CoreException {
+                createProject(desc, projectHandle, monitor);
+                }
+            };
+            
+            /*
+             * This isn't as robust as the code in the BasicNewProjectResourceWizard
+             * class. Consider beefing this up to improve error handling.
+             */
+            try {
+                getContainer().run(true, true, op);
+            } catch (InterruptedException e) {
+                return false;
+            } catch (InvocationTargetException e) {
+                Throwable realException = e.getTargetException();
+                MessageDialog.openError(getShell(), "Error", realException.getMessage());
+                return false;
+            }
+            
+            project = projectHandle;
+            if (project == null) {
+                return false;
+            }
+            BasicNewProjectResourceWizard.updatePerspective(config);
+            BasicNewProjectResourceWizard.selectAndReveal(project, workbench.getActiveWorkbenchWindow());
+            
+            return true;
+    }
 
-	public void addPages() {
-		/*
-		 * Unlike the custom new wizard, we just add the pre-defined one and
-		 * don't necessarily define our own.
-		 */
-		wizardPage = new WizardNewProjectCreationPage(
-				"NewEmbeddedSJProject");
-		wizardPage.setDescription("Enter a project name.");
-		wizardPage.setTitle("Create a new Embedded SJ Project");
-		addPage(wizardPage);
-	}
+    
+    
+    /**
+     * This creates the project in the workspace.
+     * 
+     * @param description
+     * @param projectHandle
+     * @param monitor
+     * @throws CoreException
+     * @throws OperationCanceledException
+     */
+    void createProject(final IProjectDescription description, final IProject proj,
+            final IProgressMonitor monitor) throws CoreException, OperationCanceledException {
+        try {
+            String projectName = description.getName();
+            monitor.beginTask("", 2000);
+            proj.create(description, new SubProgressMonitor(monitor, 1000));
+            if (monitor.isCanceled()) {
+                throw new OperationCanceledException();
+            }
+            proj.open(IResource.BACKGROUND_REFRESH, new SubProgressMonitor(monitor, 1000));
 
-	@Override
-	public boolean performFinish() {
+            /*
+             * Okay, now we have the project and we can do more things with it
+             * before updating the perspective.
+             */
+            IContainer container = (IContainer) proj;
+            String templatesPath = ".." + OS_FILE_SEPARATOR + ".." + OS_FILE_SEPARATOR
+            + ".." + OS_FILE_SEPARATOR + ".." + OS_FILE_SEPARATOR + ".." + OS_FILE_SEPARATOR
+            + ".." + OS_FILE_SEPARATOR + ".." + OS_FILE_SEPARATOR
+            + "sj_templates" + OS_FILE_SEPARATOR + "";
+            String examplesPath = "src" + OS_FILE_SEPARATOR + "examples";
+            System.out.println("???????????>>>>>>>>>>> templates path = >" + templatesPath + "<");
 
-		if (project != null) {
-			return true;
-		}
+            // FIXME: see if you can use IResource.copy() to copy all template files!
+            // add src and bin folders, also add examples package to src
+            final IFolder srcFolder = container.getFolder(new Path("src"));
+            srcFolder.create(true, true, monitor);
+            final IFolder binFolder = container.getFolder(new Path("bin"));
+            binFolder.create(true, true, monitor);
+            final IFolder examplesFolder = container.getFolder(new Path(examplesPath));
+            examplesFolder.create(true, true, monitor);
 
-		final IProject projectHandle = wizardPage.getProjectHandle();
+            System.out.println(
+                    "???????????>>>>>>>>>>>> src folder full path = >" + srcFolder.getLocation() + "<");
 
-		URI projectURI = (!wizardPage.useDefaults()) ? wizardPage
-				.getLocationURI() : null;
+            // add embeddedSJ.jar
+            InputStream resourceStream =
+                this.getClass().getResourceAsStream(templatesPath + "embeddedSJ.jar");
+            System.out.println("$$$$$$$$$$ EMBEDDED SJ PATH: "
+                    + this.getClass().getResource(templatesPath + "embeddedSJ.jar").getPath());
+            addFileToProject(container, new Path("embeddedSJ.jar"), resourceStream, monitor);
 
-		IWorkspace workspace = ResourcesPlugin.getWorkspace();
+            // add lejos' classes.jar
+            resourceStream =
+                this.getClass().getResourceAsStream(templatesPath + Path.SEPARATOR + "lejos"
+                        + Path.SEPARATOR + "classes.jar");
+            addFileToProject(container, new Path("classes.jar"), resourceStream, monitor);
 
-		final IProjectDescription desc = workspace
-				.newProjectDescription(projectHandle.getName());
+            // add example file EmbeddedABRO.java
+            resourceStream = this.getClass().getResourceAsStream(templatesPath + "EmbeddedABRO.java");
+            addFileToProject(container, new Path(examplesPath + Path.SEPARATOR + "EmbeddedABRO.java"),
+                    resourceStream, monitor);
 
-		desc.setLocationURI(projectURI);
+            // add the .execution file
+            resourceStream = this.getClass().getResourceAsStream(templatesPath + "embeddedSJ.execution");
+            addFileToProject(container, new Path("embeddedSJ.execution"), resourceStream, monitor);
 
-		/*
-		 * Just like the NewFileWizard, but this time with an operation object
-		 * that modifies workspaces.
-		 */
-		WorkspaceModifyOperation op = new WorkspaceModifyOperation() {
-			protected void execute(IProgressMonitor monitor)
-					throws CoreException {
-				createProject(desc, projectHandle, monitor);
-			}
-		};
+            // add the .classpath file
+            resourceStream = this.getClass().getResourceAsStream(templatesPath + "classpath.template");
+            addFileToProject(container, new Path(".classpath"), resourceStream, monitor);
 
-		/*
-		 * This isn't as robust as the code in the BasicNewProjectResourceWizard
-		 * class. Consider beefing this up to improve error handling.
-		 */
-		try {
-			getContainer().run(true, true, op);
-		} catch (InterruptedException e) {
-			return false;
-		} catch (InvocationTargetException e) {
-			Throwable realException = e.getTargetException();
-			MessageDialog.openError(getShell(), "Error", realException
-					.getMessage());
-			return false;
-		}
+            // add the .project file
+            resourceStream = this.getClass().getResourceAsStream(templatesPath + "project.template");
+            // put the name of the new project in the .project file
+            BufferedReader projectFile = new BufferedReader(new InputStreamReader(resourceStream));
+            String projectFileContent = "";
+            String projectFileLine = "";
+            while ((projectFileLine = projectFile.readLine()) != null) {
+                if (projectFileLine.equals("<name></name>")) {
+                    projectFileLine = "<name>" + projectName + "</name>";
+                }
+                projectFileContent += projectFileLine + "\n";
+            }
+            projectFile.close();
+            resourceStream = new ByteArrayInputStream(projectFileContent.getBytes());
+            // add the adjusted .project file
+            addFileToProject(container, new Path(".project"), resourceStream, monitor);
 
-		project = projectHandle;
+            resourceStream.close();
 
-		if (project == null) {
-			return false;
-		}
+        } catch (IOException ioe) {
+            IStatus status = new Status(IStatus.ERROR, "NewSJProjectWizard", IStatus.OK,
+                    ioe.getLocalizedMessage(), null);
+            System.out.println(ioe.getStackTrace());
+            throw new CoreException(status);
+        } finally {
+            monitor.done();
+        }
+    }
 
-		BasicNewProjectResourceWizard.updatePerspective(config);
-		BasicNewProjectResourceWizard.selectAndReveal(project, workbench
-				.getActiveWorkbenchWindow());
 
-		return true;
-	}
+    
+    /**
+     * {@inheritDoc}
+     */
+    public void init(final IWorkbench wb, final IStructuredSelection sel) {
+        this.selection = sel;
+        this.workbench = wb;
+    }
 
-	/**
-	 * This creates the project in the workspace.
-	 * 
-	 * @param description
-	 * @param projectHandle
-	 * @param monitor
-	 * @throws CoreException
-	 * @throws OperationCanceledException
-	 */
-	void createProject(IProjectDescription description, IProject proj, IProgressMonitor monitor)
-			throws CoreException, OperationCanceledException {
-		try {
-			String projectName = description.getName();
-			monitor.beginTask("", 2000);
-			proj.create(description, new SubProgressMonitor(monitor, 1000));
-			if( monitor.isCanceled() ) {
-				throw new OperationCanceledException();
-			}
-			proj.open(IResource.BACKGROUND_REFRESH, new SubProgressMonitor(monitor, 1000));
 
-			/*
-			 * Okay, now we have the project and we can do more things with it
-			 * before updating the perspective.
-			 */
-			IContainer container = (IContainer) proj;
-			
-			String templatesPath = ".." + OS_FILE_SEPARATOR + ".." + OS_FILE_SEPARATOR +
-			".." + OS_FILE_SEPARATOR + ".." + OS_FILE_SEPARATOR + ".." + OS_FILE_SEPARATOR +
-			".." + OS_FILE_SEPARATOR + ".." + OS_FILE_SEPARATOR +
-			"sj_templates" + OS_FILE_SEPARATOR + "";
-			String examplesPath = "src" + OS_FILE_SEPARATOR + "examples";
-			System.out.println("???????????>>>>>>>>>>> templates path = >" + templatesPath + "<");
-			
-			// FIXME: see if you can use IResource.copy() to copy all template files!
-			// add src and bin folders, also add examples package to src
-			final IFolder srcFolder = container.getFolder(new Path("src"));
-			srcFolder.create(true, true, monitor);
-			final IFolder binFolder = container.getFolder(new Path("bin"));
-			binFolder.create(true, true, monitor);
-			final IFolder examplesFolder = container.getFolder(new Path(examplesPath));
-			examplesFolder.create(true, true, monitor);
-			
-			System.out.println("???????????>>>>>>>>>>>> src folder full path = >" + srcFolder.getLocation() + "<");
-			
-			// add embeddedSJ.jar
-			InputStream resourceStream = this.getClass().getResourceAsStream(templatesPath + "embeddedSJ.jar");
-			System.out.println("$$$$$$$$$$ EMBEDDED SJ PATH: " + this.getClass().getResource(templatesPath + "embeddedSJ.jar").getPath());
-			addFileToProject(container, new Path("embeddedSJ.jar"), resourceStream, monitor);
-			
-			// add lejos' classes.jar
-			resourceStream = this.getClass().getResourceAsStream(templatesPath + Path.SEPARATOR + "lejos" + Path.SEPARATOR + "classes.jar");
-			addFileToProject(container, new Path("classes.jar"), resourceStream, monitor);
-			
-			// add example file EmbeddedABRO.java
-			resourceStream = this.getClass().getResourceAsStream(templatesPath + "EmbeddedABRO.java");
-			addFileToProject(container, new Path(examplesPath + Path.SEPARATOR + "EmbeddedABRO.java"), resourceStream, monitor);
-			
-			// add the .execution file
-			resourceStream = this.getClass().getResourceAsStream(templatesPath + "embeddedSJ.execution");
-			addFileToProject(container, new Path("embeddedSJ.execution"), resourceStream, monitor);
-			
-			// add the .classpath file
-			resourceStream = this.getClass().getResourceAsStream(templatesPath + ".classpath.resource");
-			addFileToProject(container, new Path(".classpath"), resourceStream, monitor);
-			
-			// add the .project file
-			resourceStream = this.getClass().getResourceAsStream(templatesPath + ".project.resource");
-			// put the name of the new project in the .project file
-			BufferedReader projectFile = new BufferedReader(new InputStreamReader(resourceStream));
-			String projectFileContent = "";
-			String projectFileLine = "";
-			while( (projectFileLine = projectFile.readLine()) != null ) {
-				if( projectFileLine.equals("<name></name>") ) {
-					projectFileLine = "<name>" + projectName + "</name>";
-				}
-				projectFileContent += projectFileLine + "\n";
-			}
-			projectFile.close();
-			resourceStream = new ByteArrayInputStream( projectFileContent.getBytes() );
-			// add the adjusted .project file
-			addFileToProject(container, new Path(".project"), resourceStream, monitor);
-			
-			resourceStream.close();		
-			
-		} catch(IOException ioe) {
-			IStatus status = new Status(IStatus.ERROR, "NewSJProjectWizard", IStatus.OK,
-					ioe.getLocalizedMessage(), null);
-			System.out.println(ioe.getStackTrace());
-			throw new CoreException(status);
-		} finally {
-			monitor.done();
-		}
-	}
+    
+    /**
+     * {@inheritDoc}
+     */
+    public void setInitializationData(final IConfigurationElement conf,
+            final String propertyName, final Object data) throws CoreException {
+        this.config = conf;
+    }
 
-	
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.ui.IWorkbenchWizard#init(org.eclipse.ui.IWorkbench,
-	 *      org.eclipse.jface.viewers.IStructuredSelection)
-	 */
-	public void init(IWorkbench workbench, IStructuredSelection selection) {
-		this.selection = selection;
-		this.workbench = workbench;
-	}
 
-	
-	/**
-	 * Sets the initialization data for the wizard.
-	 */
-	public void setInitializationData(IConfigurationElement config,
-			String propertyName, Object data) throws CoreException {
-		this.config = config;
-	}
-
-	
-	/**
-	 * Adds a new file to the project.
-	 * 
-	 * @param container
-	 * @param path
-	 * @param contentStream
-	 * @param monitor
-	 * @throws CoreException
-	 */
-	private void addFileToProject(IContainer container, Path path,
-			InputStream contentStream, IProgressMonitor monitor)
-			throws CoreException {
-		final IFile file = container.getFile(path);
-
-		if( file.exists() ) {
-			file.setContents(contentStream, true, true, monitor);
-		} else {
-			file.create(contentStream, true, monitor);
-		}
-	}
+    
+    /**
+     * Adds a new file to the project.
+     * 
+     * @param container 
+     * @param path 
+     * @param contentStream 
+     * @param monitor 
+     * @throws CoreException 
+     */
+    private void addFileToProject(final IContainer container, final Path path,
+            final InputStream contentStream, final IProgressMonitor monitor) throws CoreException {
+        final IFile file = container.getFile(path);
+        if (file.exists()) {
+            file.setContents(contentStream, true, true, monitor);
+        } else {
+            file.create(contentStream, true, monitor);
+        }
+    }
 
 }

@@ -42,16 +42,16 @@ public class <CLASS> extends EmbeddedSJProgram<StateLabel> {
      * Starts the program.
      */
     public static void main(String[] args) {
-    	
-    	/* UNCOMMENT NEXT LINE TO ENABLE REMOTE CONSOLE PRINT */
-    	// EmbeddedRemoteConsole console = new EmbeddedRemoteConsole();
-    	try {
-    		EmbeddedSJProgramStarter.start(
-    				new <CLASS>(),
-    				/* INSERT PROGRAM'S NAME HERE, E.G. "MY_SJ_PROGRAM" */,
-    				/* INSERT console IF REMOTE PRINT IS ENABLED, OR null OTHERWISE */ );
-    	} catch (IOException e) {
-    	}
+        
+        /* UNCOMMENT NEXT LINE TO ENABLE REMOTE CONSOLE PRINT */
+        // EmbeddedRemoteConsole console = new EmbeddedRemoteConsole();
+        try {
+            EmbeddedSJProgramStarter.start(
+                    new <CLASS>(),
+                    /* INSERT PROGRAM'S NAME HERE, E.G. "MY_SJ_PROGRAM" */,
+                    /* INSERT console IF REMOTE PRINT IS ENABLED, OR null OTHERWISE */ );
+        } catch (IOException e) {
+        }
     }
     
 
@@ -73,18 +73,18 @@ public class <CLASS> extends EmbeddedSJProgram<StateLabel> {
             /* Your code should have the following structure: */
             /*
             case L1:
-            	SJ instruction;
-            	...
-            	SJ instruction;
-            	break;
-            	
+                SJ instruction;
+                ...
+                SJ instruction;
+                break;
+                
             ...
-            	
+                
             case Ln:
-            	SJ instruction;
-            	...
-            	SJ instruction;
-            	break;
+                SJ instruction;
+                ...
+                SJ instruction;
+                break;
             */
             
             

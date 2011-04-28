@@ -1,3 +1,16 @@
+/*
+ * KIELER - Kiel Integrated Environment for Layout Eclipse Rich Client
+ *
+ * http://www.informatik.uni-kiel.de/rtsys/kieler/
+ * 
+ * Copyright 2011 by
+ * + Christian-Albrechts-University of Kiel
+ *   + Department of Computer Science
+ *     + Real-Time and Embedded Systems Group
+ * 
+ * This code is provided under the terms of the Eclipse Public License (EPL).
+ * See the file epl-v10.html for the license text.
+ */
 package de.cau.cs.kieler.klots.wizards;
 
 import org.eclipse.core.resources.IContainer;
@@ -28,172 +41,193 @@ import de.cau.cs.kieler.klots.util.KlotsConstants;
  * The "New" wizard page allows setting the container for the new file as well
  * as the file name. The page will only accept file name without the extension
  * OR with the extension that matches the expected one (java).
+ * 
+ * @author root
  */
-
-
 public class NewSJFileWizardPage extends WizardPage {
-	private Text containerText;
+    
+    private Text containerText;
+    private Text fileText;
+    private ISelection selection;
 
-	private Text fileText;
+    
+    
+    /**
+     * Constructor for SampleNewWizardPage.
+     * 
+     * @param selection 
+     */
+    public NewSJFileWizardPage(final ISelection selection) {
+        super("NewSJFileWizardPage");
+        setTitle("Create a new Embedded SJ file");
+        setDescription("Creates a new Embedded SJ file");
+        this.selection = selection;
+    }
 
-	private ISelection selection;
+    
+    
+    /**
+     * {@inheritDoc}
+     */
+    public void createControl(final Composite parent) {
+        Composite container = new Composite(parent, SWT.NULL);
+        GridLayout layout = new GridLayout();
+        container.setLayout(layout);
+        layout.numColumns = 3;
+        layout.verticalSpacing = 9;
+        Label label = new Label(container, SWT.NULL);
+        label.setText("&Project:");
 
-	/**
-	 * Constructor for SampleNewWizardPage.
-	 * 
-	 * @param pageName
-	 */
-	public NewSJFileWizardPage(ISelection selection) {
-		super("NewSJFileWizardPage");
-		setTitle("Create a new Embedded SJ file");
-		setDescription("Creates a new Embedded SJ file");
-		this.selection = selection;
-	}
+        containerText = new Text(container, SWT.BORDER | SWT.SINGLE);
+        GridData gd = new GridData(GridData.FILL_HORIZONTAL);
+        containerText.setLayoutData(gd);
+        containerText.addModifyListener(new ModifyListener() {
+            public void modifyText(final ModifyEvent e) {
+                dialogChanged();
+            }
+        });
 
-	/**
-	 * @see IDialogPage#createControl(Composite)
-	 */
-	public void createControl(Composite parent) {
-		Composite container = new Composite(parent, SWT.NULL);
-		GridLayout layout = new GridLayout();
-		container.setLayout(layout);
-		layout.numColumns = 3;
-		layout.verticalSpacing = 9;
-		Label label = new Label(container, SWT.NULL);
-		label.setText("&Project:");
+        Button button = new Button(container, SWT.PUSH);
+        button.setText("Browse...");
+        button.addSelectionListener(new SelectionAdapter() {
+            public void widgetSelected(final SelectionEvent e) {
+                handleBrowse();
+            }
+        });
+        label = new Label(container, SWT.NULL);
+        label.setText("&File name:");
 
-		containerText = new Text(container, SWT.BORDER | SWT.SINGLE);
-		GridData gd = new GridData(GridData.FILL_HORIZONTAL);
-		containerText.setLayoutData(gd);
-		containerText.addModifyListener(new ModifyListener() {
-			public void modifyText(ModifyEvent e) {
-				dialogChanged();
-			}
-		});
+        fileText = new Text(container, SWT.BORDER | SWT.SINGLE);
+        gd = new GridData(GridData.FILL_HORIZONTAL);
+        fileText.setLayoutData(gd);
+        fileText.addModifyListener(new ModifyListener() {
+            public void modifyText(final ModifyEvent e) {
+                dialogChanged();
+            }
+        });
+        initialize();
+        dialogChanged();
+        setControl(container);
+    }
 
-		Button button = new Button(container, SWT.PUSH);
-		button.setText("Browse...");
-		button.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				handleBrowse();
-			}
-		});
-		label = new Label(container, SWT.NULL);
-		label.setText("&File name:");
+    
+    
+    /**
+     * Tests if the current workbench selection is a suitable container to use.
+     */
+    private void initialize() {
+        if (selection != null && !selection.isEmpty() && selection instanceof IStructuredSelection) {
+            IStructuredSelection ssel = (IStructuredSelection) selection;
+            if (ssel.size() > 1) {
+                return;
+            }
+            Object obj = ssel.getFirstElement();
 
-		fileText = new Text(container, SWT.BORDER | SWT.SINGLE);
-		gd = new GridData(GridData.FILL_HORIZONTAL);
-		fileText.setLayoutData(gd);
-		fileText.addModifyListener(new ModifyListener() {
-			public void modifyText(ModifyEvent e) {
-				dialogChanged();
-			}
-		});
-		initialize();
-		dialogChanged();
-		setControl(container);
-	}
+            if (obj instanceof IPackageFragment) {
+                try {
+                    obj = ((IPackageFragment) obj).getCorrespondingResource();
+                } catch (JavaModelException e) {
+                    e.printStackTrace();
+                }
+            }
 
-	/**
-	 * Tests if the current workbench selection is a suitable container to use.
-	 */
+            if (obj instanceof IResource) {
+                IContainer container;
+                if (obj instanceof IContainer) {
+                    container = (IContainer) obj;
+                } else {
+                    container = ((IResource) obj).getParent();
+                }
+                containerText.setText(container.getFullPath().toString());
+            }
+        }
+        fileText.setText("NewSJFile.java");
+    }
 
-	private void initialize() {
-		if (selection != null && selection.isEmpty() == false
-				&& selection instanceof IStructuredSelection) {
-			IStructuredSelection ssel = (IStructuredSelection) selection;
-			if (ssel.size() > 1)
-				return;
-			Object obj = ssel.getFirstElement();
-			
-			if( obj instanceof IPackageFragment ) {
-				try {
-					obj = ((IPackageFragment)obj).getCorrespondingResource();
-				} catch (JavaModelException e) {
-					e.printStackTrace();
-				}
-			}
-			
-			if (obj instanceof IResource) {
-				IContainer container;
-				if (obj instanceof IContainer)
-					container = (IContainer) obj;
-				else
-					container = ((IResource) obj).getParent();
-				containerText.setText(container.getFullPath().toString());
-			}
-		}
-		fileText.setText("NewSJFile.java");
-	}
+    
+    
+    /**
+     * Uses the standard container selection dialog to choose the new value for
+     * the container field.
+     */
+    private void handleBrowse() {
+        ContainerSelectionDialog dialog = new ContainerSelectionDialog(
+                getShell(),
+                ResourcesPlugin.getWorkspace().getRoot(),
+                false,
+                "Select a parent SJ project");
+        if (dialog.open() == ContainerSelectionDialog.OK) {
+            Object[] result = dialog.getResult();
+            if (result.length == 1) {
+                containerText.setText(((Path) result[0]).toString());
+            }
+        }
+    }
 
-	/**
-	 * Uses the standard container selection dialog to choose the new value for
-	 * the container field.
-	 */
+    
+    
+    /**
+     * Ensures that both text fields are set.
+     */
+    private void dialogChanged() {
+        IResource container =
+            ResourcesPlugin.getWorkspace().getRoot().findMember(new Path(getContainerName()));
+        String fileName = getFileName();
 
-	private void handleBrowse() {
-		ContainerSelectionDialog dialog = new ContainerSelectionDialog(
-				getShell(), ResourcesPlugin.getWorkspace().getRoot(), false,
-				"Select a parent SJ project");
-		if (dialog.open() == ContainerSelectionDialog.OK) {
-			Object[] result = dialog.getResult();
-			if (result.length == 1) {
-				containerText.setText(((Path) result[0]).toString());
-			}
-		}
-	}
+        if (getContainerName().length() == 0) {
+            updateStatus("Parent SJ project must be specified");
+            return;
+        }
+        if (container == null || (container.getType() & (IResource.PROJECT | IResource.FOLDER)) == 0) {
+            updateStatus("Parent SJ project must exist");
+            return;
+        }
+        if (!container.isAccessible()) {
+            updateStatus("Project must be writable");
+            return;
+        }
+        if (fileName.length() == 0) {
+            updateStatus("File name must be specified");
+            return;
+        }
+        if (fileName.replace('\\', '/').indexOf('/', 1) > 0) {
+            updateStatus("File name must be valid");
+            return;
+        }
+        int dotLoc = fileName.lastIndexOf('.');
+        if (dotLoc != -1) {
+            String ext = fileName.substring(dotLoc + 1);
+            if (!ext.equalsIgnoreCase(KlotsConstants.SJ_FILE_NAME_EXTENSION)) {
+                updateStatus("File extension must be \"" + KlotsConstants.SJ_FILE_NAME_EXTENSION + "\"");
+                return;
+            }
+        }
+        updateStatus(null);
+    }
 
-	/**
-	 * Ensures that both text fields are set.
-	 */
+    
+    
+    private void updateStatus(final String message) {
+        setErrorMessage(message);
+        setPageComplete(message == null);
+    }
 
-	private void dialogChanged() {
-		IResource container = ResourcesPlugin.getWorkspace().getRoot()
-				.findMember(new Path(getContainerName()));
-		String fileName = getFileName();
+    
+    
+    /**
+     * @return String 
+     */
+    public String getContainerName() {
+        return containerText.getText();
+    }
 
-		if (getContainerName().length() == 0) {
-			updateStatus("Parent SJ project must be specified");
-			return;
-		}
-		if (container == null
-				|| (container.getType() & (IResource.PROJECT | IResource.FOLDER)) == 0) {
-			updateStatus("Parent SJ project must exist");
-			return;
-		}
-		if (!container.isAccessible()) {
-			updateStatus("Project must be writable");
-			return;
-		}
-		if (fileName.length() == 0) {
-			updateStatus("File name must be specified");
-			return;
-		}
-		if (fileName.replace('\\', '/').indexOf('/', 1) > 0) {
-			updateStatus("File name must be valid");
-			return;
-		}
-		int dotLoc = fileName.lastIndexOf('.');
-		if (dotLoc != -1) {
-			String ext = fileName.substring(dotLoc + 1);
-			if (ext.equalsIgnoreCase(KlotsConstants.SJ_FILE_NAME_EXTENSION) == false) {
-				updateStatus("File extension must be \"" + KlotsConstants.SJ_FILE_NAME_EXTENSION + "\"");
-				return;
-			}
-		}
-		updateStatus(null);
-	}
-
-	private void updateStatus(String message) {
-		setErrorMessage(message);
-		setPageComplete(message == null);
-	}
-
-	public String getContainerName() {
-		return containerText.getText();
-	}
-
-	public String getFileName() {
-		return fileText.getText();
-	}
+    
+    
+    /**
+     * @return String 
+     */
+    public String getFileName() {
+        return fileText.getText();
+    }
+    
 }

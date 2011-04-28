@@ -23,55 +23,68 @@ import de.cau.cs.kieler.klots.views.SJInstructionsView;
  * @author ybe
  */
 public class KlotsPlugin extends AbstractUIPlugin {
-	/** The Constant PLUGIN_ID. */
-	public static final String PLUGIN_ID = "de.cau.cs.kieler.klots";
-	
-	/** The plugin. */
-	private static KlotsPlugin plugin;
+    
+    /** The Constant PLUGIN_ID. */
+    public static final String PLUGIN_ID = "de.cau.cs.kieler.klots";
 
-	/**
-	 * The constructor of the ABRO plug-in.
-	 */
-	public KlotsPlugin() {
-	}
+    /** The plugin. */
+    private static KlotsPlugin plugin;
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public void start(final BundleContext context) throws Exception {
-		super.start(context);
-		plugin = this;
-	}
+    
+    
+    /**
+     * The constructor of the ABRO plug-in.
+     */
+    public KlotsPlugin() {
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public void stop(final BundleContext context) throws Exception {
-		plugin = null;
-		super.stop(context);
-	}
+    
+    
+    /**
+     * {@inheritDoc}
+     */
+    public void start(final BundleContext context) throws Exception {
+        super.start(context);
+        plugin = this;
+    }
 
-	/**
-	 * Returns the shared instance of this plug-in.
-	 * 
-	 * @return the shared instance
-	 */
-	public static KlotsPlugin getDefault() {
-		return plugin;
-	}
+    
+    
+    /**
+     * {@inheritDoc}
+     */
+    public void stop(final BundleContext context) throws Exception {
+        plugin = null;
+        super.stop(context);
+    }
 
-	/**
-	 * @return SJInstructionsView the SJ instructions view instance.
-	 */
-	public static SJInstructionsView getSJInstructionsView() {
-		return de.cau.cs.kieler.klots.views.SJInstructionsView.getInstance();
-	}
+    
+    
+    /**
+     * Returns the shared instance of this plug-in.
+     * 
+     * @return the shared instance
+     */
+    public static KlotsPlugin getDefault() {
+        return plugin;
+    }
 
-	/**
-	 * @return String the KLOTS editor ID.
-	 */
-	public static String getKlotsEditorID() {
-		return de.cau.cs.kieler.klots.editor.KlotsEditor.ID;
-	}
+    
+    
+    /**
+     * @return SJInstructionsView the SJ instructions view instance.
+     */
+    public static SJInstructionsView getSJInstructionsView() {
+        return de.cau.cs.kieler.klots.views.SJInstructionsView.getInstance();
+    }
+
+    
+    
+    /**
+     * @return String the KLOTS editor ID.
+     */
+    public static String getKlotsEditorID() {
+        return de.cau.cs.kieler.klots.editor.KlotsEditor.ID;
+    }
 
 }

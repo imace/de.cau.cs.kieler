@@ -22,116 +22,139 @@ import org.eclipse.swt.graphics.TextStyle;
 import org.eclipse.ui.ide.IGotoMarker;
 import de.cau.cs.kieler.core.kivi.AbstractEffect;
 
+/**
+ * @author root
+ *
+ */
 @SuppressWarnings("restriction")
 public class HighlightSJMarkerEffect extends AbstractEffect {
 
-	private JavaEditor editor;
+    private JavaEditor editor;
 
-	private IMarker marker;
-	private IGotoMarker gotoMarker;
+    private IMarker marker;
+    private IGotoMarker gotoMarker;
 
-	private Color originalColor;
-	private Color originalBackgroundColor;
+    private Color originalColor;
+    private Color originalBackgroundColor;
 
-	private Color color;
-	private Color backgroundColor;
+    private Color color;
+    private Color backgroundColor;
 
-	private TextStyle newTextStyle;
-	private TextStyle oldTextStyle;
+    private TextStyle newTextStyle;
+    private TextStyle oldTextStyle;
 
-	
-	public HighlightSJMarkerEffect(final IMarker marker, final Color color,
-			final Color backgroundColor, final Color originalColor,
-			final Color originalBackgroundColor, final JavaEditor editor) {
-		this.marker = marker;
-		this.gotoMarker = (IGotoMarker) editor.getAdapter(IGotoMarker.class);
-		this.color = color;
-		this.backgroundColor = backgroundColor;
-		this.originalColor = originalColor;
-		this.originalBackgroundColor = originalBackgroundColor;
-		this.editor = editor;
-		this.newTextStyle = null;
-		this.oldTextStyle = null;
-	}
+    
 
-	public HighlightSJMarkerEffect(final IMarker marker,
-			final TextStyle newTextStyle, final TextStyle oldTextStyle,
-			final JavaEditor editor) {
-		this.marker = marker;
-		this.gotoMarker = (IGotoMarker) editor.getAdapter(IGotoMarker.class);
-		this.newTextStyle = newTextStyle;
-		this.oldTextStyle = oldTextStyle;
-		this.editor = editor;
-	}
+    /**
+     * @param marker 
+     * @param color 
+     * @param backgroundColor 
+     * @param originalColor 
+     * @param originalBackgroundColor 
+     * @param editor 
+     */
+    public HighlightSJMarkerEffect(final IMarker marker, final Color color, final Color backgroundColor,
+            final Color originalColor, final Color originalBackgroundColor, final JavaEditor editor) {
+        this.marker = marker;
+        this.gotoMarker = (IGotoMarker) editor.getAdapter(IGotoMarker.class);
+        this.color = color;
+        this.backgroundColor = backgroundColor;
+        this.originalColor = originalColor;
+        this.originalBackgroundColor = originalBackgroundColor;
+        this.editor = editor;
+        this.newTextStyle = null;
+        this.oldTextStyle = null;
+    }
 
-	public void execute() {
-		// try {
-		// gotoMarker(marker);
-		if (gotoMarker != null) {
-			gotoMarker.gotoMarker(marker);
-		}
-		Point p = editor.getViewer().getTextWidget().getSelectionRange();
-		StyleRange range;
-		if (newTextStyle != null) {
-			range = new StyleRange(newTextStyle);
-			range.start = p.x;
-			range.length = p.y;
-		} else {
-			range = new StyleRange(p.x, p.y, color, backgroundColor);
-		}
-		editor.getViewer().getTextWidget().setStyleRange(range);
-		editor.getViewer().getTextWidget().setSelectionRange(p.x, 0);
-		// } catch(Exception e) {
-		// e.printStackTrace();
-		// }
-	}
+    
+    
+    /**
+     * @param marker 
+     * @param newTextStyle 
+     * @param oldTextStyle 
+     * @param editor 
+     */
+    public HighlightSJMarkerEffect(final IMarker marker,
+            final TextStyle newTextStyle, final TextStyle oldTextStyle,
+            final JavaEditor editor) {
+        this.marker = marker;
+        this.gotoMarker = (IGotoMarker) editor.getAdapter(IGotoMarker.class);
+        this.newTextStyle = newTextStyle;
+        this.oldTextStyle = oldTextStyle;
+        this.editor = editor;
+    }
 
-	@Override
-	public void undo() {
-		// try {
-		// gotoMarker(marker);
-		if (gotoMarker != null) {
-			gotoMarker.gotoMarker(marker);
-		}
-		Point p = editor.getViewer().getTextWidget().getSelectionRange();
-		StyleRange range;
-		if (oldTextStyle != null) {
-			range = new StyleRange(oldTextStyle);
-			range.start = p.x;
-			range.length = p.y;
-		} else {
-			range = new StyleRange(p.x, p.y, originalColor,
-					originalBackgroundColor);
-		}
-		editor.getViewer().getTextWidget().setStyleRange(range);
-		editor.getViewer().getTextWidget().setSelectionRange(p.x, 0);
-		// } catch(Exception e) {
-		// e.printStackTrace();
-		// }
-	}
+    
+    
+    /**
+     * {@inheritDoc}
+     */
+    public void execute() {
+        if (gotoMarker != null) {
+            gotoMarker.gotoMarker(marker);
+        }
+        Point p = editor.getViewer().getTextWidget().getSelectionRange();
+        StyleRange range;
+        if (newTextStyle != null) {
+            range = new StyleRange(newTextStyle);
+            range.start = p.x;
+            range.length = p.y;
+        } else {
+            range = new StyleRange(p.x, p.y, color, backgroundColor);
+        }
+        editor.getViewer().getTextWidget().setStyleRange(range);
+        editor.getViewer().getTextWidget().setSelectionRange(p.x, 0);
+    }
 
-	@Override
-	public boolean isMergeable() {
-		return false;
-	}
+    
+    
+    @Override
+    public void undo() {
+        if (gotoMarker != null) {
+            gotoMarker.gotoMarker(marker);
+        }
+        Point p = editor.getViewer().getTextWidget().getSelectionRange();
+        StyleRange range;
+        if (oldTextStyle != null) {
+            range = new StyleRange(oldTextStyle);
+            range.start = p.x;
+            range.length = p.y;
+        } else {
+            range = new StyleRange(p.x, p.y, originalColor, originalBackgroundColor);
+        }
+        editor.getViewer().getTextWidget().setStyleRange(range);
+        editor.getViewer().getTextWidget().setSelectionRange(p.x, 0);
+    }
 
-	@Override
-	public HighlightSJMarkerEffect clone() {
-		if (newTextStyle != null && oldTextStyle != null) {
-			return new HighlightSJMarkerEffect(marker, newTextStyle,
-					oldTextStyle, editor);
-		} else {
-			return new HighlightSJMarkerEffect(marker, color, backgroundColor,
-					color, backgroundColor, editor);
-		}
-	}
+    
+    
+    @Override
+    public boolean isMergeable() {
+        return false;
+    }
 
-	void setColor(final Color color) {
-		this.color = color;
-	}
+    
+    
+    @Override
+    public HighlightSJMarkerEffect clone() {
+        if (newTextStyle != null && oldTextStyle != null) {
+            return new HighlightSJMarkerEffect(marker, newTextStyle, oldTextStyle, editor);
+        } else {
+            return new HighlightSJMarkerEffect(marker, color, backgroundColor, color, backgroundColor,
+                    editor);
+        }
+    }
 
-	void setBackgroundColor(final Color backgroundColor) {
-		this.backgroundColor = backgroundColor;
-	}
+    
+    
+    void setColor(final Color color) {
+        this.color = color;
+    }
+
+    
+    
+    void setBackgroundColor(final Color backgroundColor) {
+        this.backgroundColor = backgroundColor;
+    }
 
 }

@@ -19,11 +19,15 @@ import org.eclipse.swt.graphics.Color;
 import de.cau.cs.kieler.core.kivi.AbstractEffect;
 
 
+/**
+ * @author root
+ *
+ */
 @SuppressWarnings("restriction")
 public class HighlightSJInstructionEffect extends AbstractEffect {
 
     private CompilationUnitEditor editor;
-    
+
     private int startOffset;
     private int textLength;
 
@@ -34,81 +38,91 @@ public class HighlightSJInstructionEffect extends AbstractEffect {
     private Color backgroundColor;
 
 
-    
+
+    /**
+     * @param startOffset 
+     * @param textLength 
+     * @param color 
+     * @param backgroundColor 
+     * @param originalColor 
+     * @param originalBackgroundColor 
+     * @param editor 
+     */
     public HighlightSJInstructionEffect(final int startOffset, final int textLength,
-    		final Color color, final Color backgroundColor,
-    		final Color originalColor, final Color originalBackgroundColor,
-    		final CompilationUnitEditor editor) {
-    	this.startOffset = startOffset;
-    	this.textLength = textLength;
-    	this.color = color;
-    	this.backgroundColor = backgroundColor;
-    	this.originalColor = originalColor;
-    	this.originalBackgroundColor = originalBackgroundColor;
-    	this.editor = editor;
+            final Color color, final Color backgroundColor,
+            final Color originalColor, final Color originalBackgroundColor,
+            final CompilationUnitEditor editor) {
+        this.startOffset = startOffset;
+        this.textLength = textLength;
+        this.color = color;
+        this.backgroundColor = backgroundColor;
+        this.originalColor = originalColor;
+        this.originalBackgroundColor = originalBackgroundColor;
+        this.editor = editor;
     }
-    
 
 
-	public void execute() {
-		try {
-			if (backgroundColor != null) {
-				editor.getViewer().getTextWidget().setStyleRange(
-						new StyleRange(startOffset, textLength,
-								originalColor, backgroundColor)
-						);
-			}
-			if (color != null) {
-				editor.getViewer().setTextColor(color, startOffset, textLength, true);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+
+    /**
+     * {@inheritDoc}
+     */
+    public void execute() {
+        try {
+            if (backgroundColor != null) {
+                editor.getViewer().getTextWidget().setStyleRange(
+                        new StyleRange(startOffset, textLength, originalColor, backgroundColor));
+            }
+            if (color != null) {
+                editor.getViewer().setTextColor(color, startOffset, textLength, true);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
+
 
     
     @Override
     public void undo() {
-    	try {
-			if (originalBackgroundColor != null) {
-				editor.getViewer().getTextWidget().setStyleRange(
-						new StyleRange(startOffset, textLength,
-								originalColor, originalBackgroundColor)
-						);
-			}
-			if (originalColor != null) {
-				editor.getViewer().setTextColor(originalColor, startOffset, textLength, true);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+        try {
+            if (originalBackgroundColor != null) {
+                editor.getViewer().getTextWidget().setStyleRange(
+                        new StyleRange(startOffset, textLength, originalColor, originalBackgroundColor));
+            }
+            if (originalColor != null) {
+                editor.getViewer().setTextColor(originalColor, startOffset, textLength, true);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    
+
 
     @Override
     public boolean isMergeable() {
         return false;
     }
 
+
     
     @Override
     public HighlightSJInstructionEffect clone() {
-    	return new HighlightSJInstructionEffect(startOffset, textLength,
-    			color, backgroundColor, color, backgroundColor, editor);
+        return new HighlightSJInstructionEffect(startOffset, textLength, color, backgroundColor,
+                color, backgroundColor, editor);
     }
 
 
 
-	void setColor(final Color color) {
-		this.color = color;
-	}
+    void setColor(final Color color) {
+        this.color = color;
+    }
 
 
 
-	void setBackgroundColor(final Color backgroundColor) {
-		this.backgroundColor = backgroundColor;
-	}
+    void setBackgroundColor(final Color backgroundColor) {
+        this.backgroundColor = backgroundColor;
+    }
 
-    
+
 }
