@@ -174,7 +174,7 @@ public class NXTCommunicator {
     @SuppressWarnings("deprecation")
     public String receiveMessageLine() {
         try {
-            String line = dis.readLine();   // FIXME: Find a way to use BufferedReader.readLine() instead!
+            String line = dis.readLine();   //FIXME: Find a way to use BufferedReader.readLine() instead!
             System.out.println(";;;;=======;;;; RECEIVED MESSAGE LINE = >" + line + "<");
 
             // if in 'remote console print' mode

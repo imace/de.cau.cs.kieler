@@ -13,6 +13,8 @@
  */
 package de.cau.cs.kieler.klots.sj.embedded;
 
+import lejos.nxt.Button;
+
 
 /**
  * @author root
@@ -21,7 +23,6 @@ package de.cau.cs.kieler.klots.sj.embedded;
 public class EmbeddedRemoteConsole {
 
     private EmbeddedPCCommunicator comm = null;
-    private boolean standaloneMode = false;
 
     
     
@@ -60,15 +61,22 @@ public class EmbeddedRemoteConsole {
      * 
      */
     public void open() {
-        comm = EmbeddedPCCommunicator.getInstance();
-        comm.sendMessage(EmbeddedConstants.STANDALONE_PROGRAM_MODE_COMMAND_KEY
-                + EmbeddedConstants.MESSAGE_LINE_DELIMITER
-                + EmbeddedConstants.END_OF_MESSAGE_COMMAND_KEY
-                + EmbeddedConstants.MESSAGE_LINE_DELIMITER);
-        standaloneMode = true;
-        String reply = comm.receiveMessage().toString();
-        if (reply.indexOf(EmbeddedConstants.STANDALONE_PROGRAM_MODE_COMMAND_KEY) < 0) {
-            close();
+        System.out.println("     ");
+        System.out.print("ESTABLISH PC\nCONNECTION?");
+        int buttonPressed = Button.waitForPress();
+        if (buttonPressed == Button.ID_ESCAPE) {
+            System.out.println("  NO");
+        } else if (buttonPressed == Button.ID_ENTER) {
+            System.out.println("  YES");
+            System.out.println("     ");
+            System.out.println("Waiting for PC  connection...");
+            comm = EmbeddedPCCommunicator.getInstance();
+            if (comm.receiveMessage().toString()
+                    .indexOf(EmbeddedConstants.EMBEDDED_JAVA_PROGRAM_MODE_COMMAND_KEY) > 0) {
+                System.out.println("Connected!");
+            } else {
+                System.out.println("Connection ERROR");
+            }
         }
     }
 
@@ -87,10 +95,6 @@ public class EmbeddedRemoteConsole {
      * 
      */
     public void close() {
-        if (standaloneMode) {
-            comm.sendMessage(EmbeddedConstants.END_OF_MESSAGE_COMMAND_KEY
-                    + EmbeddedConstants.MESSAGE_LINE_DELIMITER);
-        }
         if (comm != null) {
             comm.destroy();
         }

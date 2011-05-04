@@ -17,6 +17,8 @@ import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.action.Separator;
+import org.eclipse.jface.util.IPropertyChangeListener;
+import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.actions.ActionFactory;
@@ -26,6 +28,7 @@ import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.ui.texteditor.ITextEditorActionConstants;
 
 import de.cau.cs.kieler.klots.KlotsPlugin;
+import de.cau.cs.kieler.klots.util.KlotsConsole;
 import de.cau.cs.kieler.klots.util.KlotsJob;
 
 
@@ -43,6 +46,7 @@ public class KlotsEditorContributor extends EditorActionBarContributor {
     private Action compileAndLink;
     private Action downloadToNXT;
     private Action runProgram;
+    private Action klotsConsoleToggleButton;
 
 
 
@@ -150,6 +154,9 @@ public class KlotsEditorContributor extends EditorActionBarContributor {
         // -------------------------- run program ---------------------------
         runProgram = new Action() {
             public void run() {
+//                klotsConsoleToggleButton.setEnabled(true);
+//                klotsConsoleToggleButton.setChecked(true);
+//                KlotsConsole.getInstance().setEnabled(true);
                 KlotsJob job = new KlotsJob(KlotsJob.RUN_JOB,
                         KlotsPlugin.getDefault().getWorkbench().getActiveWorkbenchWindow()
                         .getActivePage().getActiveEditor());
@@ -165,6 +172,45 @@ public class KlotsEditorContributor extends EditorActionBarContributor {
 //        runProgram.setDisabledImageDescriptor(
 //                KlotsPlugin.imageDescriptorFromPlugin(KlotsPlugin.PLUGIN_ID,
 //                        "icons/runProgramIconDisabled.png"));
+        
+        
+        // ------------------ KLOTS console toggle button -------------------
+        klotsConsoleToggleButton = new Action("KLOTS console", IAction.AS_CHECK_BOX) {
+            public void run() {
+                if (klotsConsoleToggleButton.isChecked()) {
+                    klotsConsoleToggleButton.setText("Hide console");
+                    klotsConsoleToggleButton.setToolTipText("Hide console");
+                } else {
+                    klotsConsoleToggleButton.setText("Show console");
+                    klotsConsoleToggleButton.setToolTipText("Show console");
+                }
+            }
+        };
+        klotsConsoleToggleButton.addPropertyChangeListener(new IPropertyChangeListener() {
+            @Override
+            public void propertyChange(final PropertyChangeEvent event) {
+                if (event.getProperty().equals("checked")) {
+                    if (event.getNewValue().toString().equals("true")) {
+                        KlotsConsole.getInstance().setEnabled(true);
+                    } else {
+                        KlotsConsole.getInstance().setEnabled(false);
+                    }
+                }
+            }
+            
+        });
+//        KlotsConsole.getInstance().setEnabled(true);
+//        klotsConsoleToggleButton.setText("Hide console");
+//        klotsConsoleToggleButton.setToolTipText("Hide console");
+//        klotsConsoleToggleButton.setEnabled(true);
+        
+//        klotsConsoleToggleButton.setEnabled(false);
+        
+        klotsConsoleToggleButton.setImageDescriptor(KlotsPlugin.imageDescriptorFromPlugin(
+                        KlotsPlugin.PLUGIN_ID, "icons/KLOTSConsoleIcon.png"));
+//        klotsConsoleToggleButton.setDisabledImageDescriptor(
+//                KlotsPlugin.imageDescriptorFromPlugin(KlotsPlugin.PLUGIN_ID,
+//                        "icons/KLOTSConsoleIconDisabled.png"));
         // ------------------------------------------------------------------
 
     }
@@ -191,6 +237,7 @@ public class KlotsEditorContributor extends EditorActionBarContributor {
         manager.add(compileAndLink);
         manager.add(downloadToNXT);
         manager.add(runProgram);
+        manager.add(klotsConsoleToggleButton);
         manager.add(new Separator());
     }
 

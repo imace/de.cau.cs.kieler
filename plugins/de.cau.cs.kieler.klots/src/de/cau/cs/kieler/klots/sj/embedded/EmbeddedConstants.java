@@ -27,7 +27,8 @@ public interface EmbeddedConstants {
     public static final String PRINT_START_COMMAND_KEY = "PRINT_START:";
     public static final String PRINT_END_COMMAND_KEY = ":PRINT_END";
 
-    public static final String STANDALONE_PROGRAM_MODE_COMMAND_KEY = "STANDALONE";
+    public static final String EMBEDDED_JAVA_PROGRAM_MODE_COMMAND_KEY = "EMBEDDED_JAVA";
+    public static final String EMBEDDED_SJ_PROGRAM_MODE_COMMAND_KEY = "EMBEDDED_SJ";
     public static final String SYNCHRONIZED_COMMAND_KEY = "SYNCHRONIZED";
     public static final String STEP_COMMAND_KEY = "STEP";
     public static final String STOP_COMMAND_KEY = "STOP";

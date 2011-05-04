@@ -163,6 +163,10 @@ public class KlotsEditor extends CompilationUnitEditor implements IResourceChang
     private String[] labels;
     // signals
     private String[] signals;
+    // SJ content flag
+    private boolean hasSJContent;
+    // editor initialized flag
+    private boolean initialized = false;
 
     // SJ instructions highlight update data
     private static String sjInstructionsUpdateData = "";
@@ -304,7 +308,24 @@ public class KlotsEditor extends CompilationUnitEditor implements IResourceChang
             });
         }
     }
-
+    
+    
+    
+    /**
+     * @return boolean 
+     */
+    public boolean hasSJContent() {
+        return hasSJContent;
+    }
+    
+    
+    
+    /**
+     * @return boolean 
+     */
+    public boolean isInitialized() {
+        return initialized;
+    }
     
     
     
@@ -322,6 +343,8 @@ public class KlotsEditor extends CompilationUnitEditor implements IResourceChang
         labelList.clear();
         labels = null;
         signals = null;
+        hasSJContent = false;
+        initialized = false;
         microStepNumber = -1;
         sjInstructionsUpdateData = "";
         IEditorInput input = getEditorInput();
@@ -336,17 +359,15 @@ public class KlotsEditor extends CompilationUnitEditor implements IResourceChang
      * 
      */
     public void initSJContent() {
-
+        hasSJContent = true;
+        
         // -------------------
         computeLabels();
-        // -------------------
-        // parseSignals();
-        // -------------------
         parseLabels();
-        // -------------------
         parseSJInstructions();
         // -------------------
 
+        initialized = true;
     }
 
     
@@ -359,6 +380,7 @@ public class KlotsEditor extends CompilationUnitEditor implements IResourceChang
         int offset = text.indexOf(KlotsConstants.LABEL_ENUM_NAME);
         if (offset < 0 || offset > text.length()) {
             System.err.println("EDITOR INITIALIZATION ERROR: No label declaration part found!");
+            hasSJContent = false;
             return;
         }
         System.out.println("HHHHHHHHHHHHHH>>>>>>>>>>>> offset = " + offset + ", length = "
@@ -420,6 +442,7 @@ public class KlotsEditor extends CompilationUnitEditor implements IResourceChang
         if (offset < 0 || offset > tickOffset) {
             if (first) {
                 System.err.println("EDITOR INITIALIZATION ERROR: No signal declaration part found!");
+                hasSJContent = false;
             } else {
                 System.out.println("HHHHHHHHHHHHHH>>>>>>>>>>>> ALL SIGNAL DECLARATION PARTS PROCESSED!");
             }
@@ -437,6 +460,7 @@ public class KlotsEditor extends CompilationUnitEditor implements IResourceChang
             if (offset < 0 || offset > tickOffset) {
                 if (first) {
                     System.err.println("EDITOR INITIALIZATION ERROR: No signal declaration part found!");
+                    hasSJContent = false;
                 } else {
                     System.out.println(
                             "HHHHHHHHHHHHHH>>>>>>>>>>>> ALL SIGNAL DECLARATION PARTS PROCESSED!");
@@ -498,6 +522,7 @@ public class KlotsEditor extends CompilationUnitEditor implements IResourceChang
         int offset = text.indexOf(KlotsConstants.TICK_METHOD_NAME);
         if (offset < 0 || offset > text.length()) {
             System.err.println("EDITOR INITIALIZATION ERROR: No tick() method found!");
+            hasSJContent = false;
             return -1;
         }
         System.out.println("HHHHHHHHHHHHHH>>>>>>>>>>>> offset = " + offset + ", length = "
@@ -510,6 +535,7 @@ public class KlotsEditor extends CompilationUnitEditor implements IResourceChang
             offset = text.indexOf(KlotsConstants.TICK_METHOD_NAME, offset + 1);
             if (offset < 0 || offset > text.length()) {
                 System.err.println("EDITOR INITIALIZATION ERROR: No tick() method found!");
+                hasSJContent = false;
                 return -1;
             }
             System.out.println("HHHHHHHHHHHHHH>>>>>>>>>>>> offset = " + offset + ", length = "
@@ -547,8 +573,8 @@ public class KlotsEditor extends CompilationUnitEditor implements IResourceChang
                 continue;
             }
             if (
-                 isComment(labelStart, labelStart + 4, text)
-                 || isString(labelStart, labelStart + 4, text)
+                 isComment(labelStart, labelStart + KlotsConstants.LABEL_CASE_NAME.length() - 1, text)
+                 || isString(labelStart, labelStart + KlotsConstants.LABEL_CASE_NAME.length() - 1, text)
                 ) {
                 System.out.println("################>>>>>>>>>>>> case is inside of a comment! "
                         + "-> continue!");
@@ -566,10 +592,12 @@ public class KlotsEditor extends CompilationUnitEditor implements IResourceChang
             label = checkForLabelAt(labelStart, labelColon, text);
             if (!label.equals(KlotsConstants.EMPTY_STRING)) {
                 if (labelList.isEmpty()) {
-                    labelList.add(new LabelInfo(label, labelStart + 5));
+                    labelList.add(new LabelInfo(label,
+                            labelStart + KlotsConstants.LABEL_CASE_NAME.length()));
                 } else {
                     labelList.get(labelList.size() - 1).setLabelEndIndex(labelStart);
-                    labelList.add(new LabelInfo(label, labelStart + 5));
+                    labelList.add(new LabelInfo(label,
+                            labelStart + KlotsConstants.LABEL_CASE_NAME.length()));
                 }
             } else {
                 System.out.println("################>>>>>>>>>>>> BAD LABEL at: >"
@@ -579,6 +607,7 @@ public class KlotsEditor extends CompilationUnitEditor implements IResourceChang
         }
         if (labelList.isEmpty()) {
             System.err.println("EDITOR INITIALIZATION ERROR: No labels found!");
+            hasSJContent = false;
             return;
         }
         labelList.get(labelList.size() - 1).setLabelEndIndex(
@@ -626,7 +655,7 @@ public class KlotsEditor extends CompilationUnitEditor implements IResourceChang
                 System.out.println(", text: >" + text.substring(m.getAttribute(
                         KlotsConstants.SJ_INSTRUCTION_MARKER_ATTRIBUTE_INSTRUCTION_START, 0),
                         m.getAttribute(
-                                KlotsConstants.SJ_INSTRUCTION_MARKER_ATTRIBUTE_INSTRUCTION_END, 10))
+                                KlotsConstants.SJ_INSTRUCTION_MARKER_ATTRIBUTE_INSTRUCTION_END, 1))
                                 + "<");
             }
             System.out.println();
@@ -636,7 +665,8 @@ public class KlotsEditor extends CompilationUnitEditor implements IResourceChang
     
     
     private String checkForLabelAt(final int labelStart, final int labelColon, final String text) {
-        String label = text.substring(labelStart + 4, labelColon);
+        String label = text.substring(labelStart + KlotsConstants.LABEL_CASE_NAME.length() - 1,
+                labelColon);
         label = label.trim();
         System.out.println("################>>>>>>>>>>>> label = " + label + "<<<");
         boolean labelFound = false;

@@ -17,27 +17,23 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.eclipse.jface.action.Action;
-import org.eclipse.jface.action.ContributionItem;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.TreeViewerColumn;
-import org.eclipse.swt.graphics.Font;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.ToolBar;
-import org.eclipse.swt.widgets.ToolItem;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
-import org.eclipse.swt.SWT;
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.part.ViewPart;
+
 import de.cau.cs.kieler.klots.KlotsPlugin;
 import de.cau.cs.kieler.klots.editor.KlotsEditor;
+import de.cau.cs.kieler.klots.util.ToolbarTextContributionItem;
 import de.cau.cs.kieler.sim.kiem.KiemPlugin;
 import de.cau.cs.kieler.sim.kiem.execution.Execution;
 
@@ -395,33 +391,11 @@ public class SJInstructionsView extends ViewPart {
      * Contribute to the tool bar of this ViewPart.
      */
     private void contributeToActionBars() {
-
-        /**
-         * @author root
-         *
-         */
-        class TextContributionItem extends ContributionItem {
-            private String s;
-            public TextContributionItem(final String text) {
-                super(text);
-                s = text;
-            }
-            public final void fill(final ToolBar parent, final int index) {
-                Label text = new Label(parent, SWT.RIGHT);
-                text.setText(s);
-                text.setFont(new Font(Display.getDefault(), "Verdana", 7, SWT.BOLD));
-                ToolItem ti = new ToolItem(parent, SWT.SEPARATOR, index);
-                ti.setControl(text);
-                ti.setWidth(120);
-            }
-        }
-
         IActionBars bars = getViewSite().getActionBars();
         IToolBarManager toolBarManager = bars.getToolBarManager();
 
-        TextContributionItem text1 = new TextContributionItem("MACROSTEP \nACTIONS    ");
+        ToolbarTextContributionItem text1 = new ToolbarTextContributionItem("MACROSTEP \nACTIONS    ");
         toolBarManager.add(text1);
-
         toolBarManager.add(kiemStepBackwards);
         toolBarManager.add(kiemStepForwards);
         toolBarManager.add(kiemRun);
@@ -429,9 +403,8 @@ public class SJInstructionsView extends ViewPart {
         toolBarManager.add(kiemStop);
         toolBarManager.add(new Separator());
 
-        TextContributionItem text2 = new TextContributionItem("MICROSTEP \nACTIONS   ");
+        ToolbarTextContributionItem text2 = new ToolbarTextContributionItem("MICROSTEP \nACTIONS   ");
         toolBarManager.add(text2);
-
         toolBarManager.add(microStepBackwardsAll);
         toolBarManager.add(microStepBackwards);
         toolBarManager.add(microStepForwards);

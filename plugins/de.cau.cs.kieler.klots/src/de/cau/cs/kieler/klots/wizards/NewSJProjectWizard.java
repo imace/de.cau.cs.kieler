@@ -60,7 +60,9 @@ public class NewSJProjectWizard extends Wizard implements INewWizard, IExecutabl
     public static final String ID = "de.cau.cs.kieler.klots.editor.SJEditorNewSJProjectWizard";
 
     // the OS specific file separator char, e.g. '/' or '\'
-    private final String OS_FILE_SEPARATOR = System.getProperty("file.separator");
+    private static final String OS_FILE_SEPARATOR = System.getProperty("file.separator");
+    
+    private static final int CREATE_PROJECT_TASK_TOTAL_TIME = 2000;
 
     /*
      * Use the WizardNewProjectCreationPage, which is provided by the Eclipse
@@ -156,15 +158,17 @@ public class NewSJProjectWizard extends Wizard implements INewWizard, IExecutabl
      * @throws OperationCanceledException
      */
     void createProject(final IProjectDescription description, final IProject proj,
-            final IProgressMonitor monitor) throws CoreException, OperationCanceledException {
+            final IProgressMonitor monitor) throws CoreException {
         try {
             String projectName = description.getName();
-            monitor.beginTask("", 2000);
-            proj.create(description, new SubProgressMonitor(monitor, 1000));
+            monitor.beginTask("", CREATE_PROJECT_TASK_TOTAL_TIME);
+            proj.create(description,
+                    new SubProgressMonitor(monitor, CREATE_PROJECT_TASK_TOTAL_TIME / 2));
             if (monitor.isCanceled()) {
                 throw new OperationCanceledException();
             }
-            proj.open(IResource.BACKGROUND_REFRESH, new SubProgressMonitor(monitor, 1000));
+            proj.open(IResource.BACKGROUND_REFRESH,
+                    new SubProgressMonitor(monitor, CREATE_PROJECT_TASK_TOTAL_TIME / 2));
 
             /*
              * Okay, now we have the project and we can do more things with it

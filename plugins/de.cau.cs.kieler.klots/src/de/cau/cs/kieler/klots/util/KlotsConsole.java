@@ -13,11 +13,16 @@
  */
 package de.cau.cs.kieler.klots.util;
 
+import org.eclipse.ui.IViewReference;
+import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.console.ConsolePlugin;
 import org.eclipse.ui.console.IConsole;
 import org.eclipse.ui.console.IConsoleManager;
 import org.eclipse.ui.console.MessageConsole;
 import org.eclipse.ui.console.MessageConsoleStream;
+
+import de.cau.cs.kieler.klots.KlotsPlugin;
 
 
 /**
@@ -62,6 +67,36 @@ public class KlotsConsole {
      */
     public static KlotsConsole getInstance() {
         return INSTANCE;
+    }
+    
+    
+    
+    /**
+     * @param enabled 
+     */
+    public void setEnabled(final boolean enabled) {
+        if (enabled) {
+            try {
+                KlotsPlugin.getDefault().getWorkbench().getActiveWorkbenchWindow()
+                .getActivePage().showView("org.eclipse.ui.console.ConsoleView");
+            } catch (PartInitException e) {
+                e.printStackTrace();
+            }
+        } else {
+            if (
+                 PlatformUI.getWorkbench().getViewRegistry().find("org.eclipse.ui.console.ConsoleView")
+                 != null
+                ) {
+                IViewReference[] refs = KlotsPlugin.getDefault().getWorkbench()
+                .getActiveWorkbenchWindow().getActivePage().getViewReferences();
+                for (IViewReference reference : refs) {
+                    if (reference.getId().equals("org.eclipse.ui.console.ConsoleView")) {
+                        KlotsPlugin.getDefault().getWorkbench().getActiveWorkbenchWindow()
+                        .getActivePage().hideView(reference);
+                    }
+                }
+            }
+        }
     }
 
 

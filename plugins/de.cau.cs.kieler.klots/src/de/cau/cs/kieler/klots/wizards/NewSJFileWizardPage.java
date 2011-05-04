@@ -46,6 +46,9 @@ import de.cau.cs.kieler.klots.util.KlotsConstants;
  */
 public class NewSJFileWizardPage extends WizardPage {
     
+    private static final int LAYOUT_NR_CELL_COLUMNS = 3;
+    private static final int LAYOUT_VERTICAL_SPACING = 9;
+    
     private Text containerText;
     private Text fileText;
     private ISelection selection;
@@ -73,8 +76,8 @@ public class NewSJFileWizardPage extends WizardPage {
         Composite container = new Composite(parent, SWT.NULL);
         GridLayout layout = new GridLayout();
         container.setLayout(layout);
-        layout.numColumns = 3;
-        layout.verticalSpacing = 9;
+        layout.numColumns = LAYOUT_NR_CELL_COLUMNS;
+        layout.verticalSpacing = LAYOUT_VERTICAL_SPACING;
         Label label = new Label(container, SWT.NULL);
         label.setText("&Project:");
 

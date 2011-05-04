@@ -70,13 +70,21 @@ public class SJInstructionsDataLabelProvider implements ITableLabelProvider {
             }
         case COLUMN_5: // RETVAL_COLUMN
             if (sjInstructionsData.hasRetval()) {
-                return new Boolean(sjInstructionsData.getRetval()).toString();
+                if (sjInstructionsData.getRetval()) {
+                    return "true";
+                } else {
+                    return "false";
+                }
             } else {
                 return "-";
             }
         case COLUMN_6: // INIT_EXEC_COLUMN
             if (sjInstructionsData.hasInitialExecution()) {
-                return new Boolean(sjInstructionsData.getInitialExecution()).toString();
+                if (sjInstructionsData.getInitialExecution()) {
+                    return "true";
+                } else {
+                    return "false";
+                }
             } else {
                 return "-";
             }

@@ -30,6 +30,7 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.dialogs.ErrorDialog;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IFileEditorInput;
@@ -73,6 +74,7 @@ public class KlotsJob extends Job {
     private String projectPath = "No project path";
     private String fileName = "No file nale";
     private String lejosPath = "No leJOS path";
+    private KlotsEditor editor;
     private MultiStatus info;
 
 
@@ -85,8 +87,8 @@ public class KlotsJob extends Job {
         super(job);
 
         if (editorPart != null) {
-            KlotsEditor e = (KlotsEditor) editorPart;
-            IFileEditorInput input = (IFileEditorInput) e.getEditorInput();
+            editor = (KlotsEditor) editorPart;
+            IFileEditorInput input = (IFileEditorInput) editor.getEditorInput();
             IFile file = input.getFile();
             fileName = file.getName();
             fileName = fileName.substring(
@@ -216,21 +218,20 @@ public class KlotsJob extends Job {
             nxtCommand.startProgram(fileName + ".nxj");
             // must close low level transmission in order to be able to start a high level transmission
             NXTCommunicator.getInstance().closeTransmission(false);
-            String msg = NXTCommunicator.getInstance().receiveMessage().toString();
-            if (msg.startsWith("[{" + KlotsConstants.STANDALONE_PROGRAM_MODE_COMMAND_KEY)) {
-                NXTCommunicator.getInstance().sendMessage(
-                        KlotsConstants.STANDALONE_PROGRAM_MODE_COMMAND_KEY);
-                RemotePrintReceiver printer = new RemotePrintReceiver(NXTCommunicator.getInstance());
-                printer.start();
+            if (editor instanceof KlotsEditor) {
+                editor.initSJContent();
+                if (!editor.hasSJContent()) {
+                    showConnectDialog();
+                }
             }
-            info = new MultiStatus(KlotsPlugin.PLUGIN_ID, 0, fileName + " finished successfully!", null);
+            info = new MultiStatus(KlotsPlugin.PLUGIN_ID, 0, fileName + " is running!", null);
             info.add(new Status(IStatus.INFO, KlotsPlugin.PLUGIN_ID, 0, ">OK<", null));
+            
         } catch (Exception le) {
             le.printStackTrace();
             info = new MultiStatus(KlotsPlugin.PLUGIN_ID, 1,
                     "Error while trying to start Embedded SJ program " + fileName + "!", null);
             info.add(new Status(IStatus.ERROR, KlotsPlugin.PLUGIN_ID, 1, le.getMessage(), null));
-            //ErrorDialog.openError(null, "KLOTS", null, info);
         }
     }
 
@@ -260,6 +261,33 @@ public class KlotsJob extends Job {
         return new Action() {
             public void run() {
                 ErrorDialog.openError(null, "KLOTS", null, info);
+            }
+        };
+    }
+    
+    
+    
+    private void showConnectDialog() {
+        Display.getDefault().asyncExec(new Runnable() {
+            public void run() {
+                getConnectAction().run();
+            }
+        });
+    }
+    
+    
+    
+    private Action getConnectAction() {
+        return new Action() {
+            public void run() {
+                boolean connect = MessageDialog.openQuestion(editor.getEditorSite().getShell(),
+                        "KLOTS", "Connect to NXT?");
+                if (connect) {
+                    NXTCommunicator.getInstance()
+                    .sendMessage(KlotsConstants.EMBEDDED_JAVA_PROGRAM_MODE_COMMAND_KEY);
+                    RemotePrintReceiver printer = RemotePrintReceiver.getInstance();
+                    printer.start();
+                }
             }
         };
     }

@@ -13,31 +13,36 @@
  */
 package de.cau.cs.kieler.klots.util;
 
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.ui.IViewPart;
-import org.eclipse.ui.IWorkbenchWindow;
-
-import de.cau.cs.kieler.klots.KlotsPlugin;
-
 
 /**
  * @author root
  *
  */
-public class RemotePrintReceiver /*extends Thread*/ {
+public class RemotePrintReceiver extends Thread {
 
     private static KlotsConsole console = KlotsConsole.getInstance();
+    private static RemotePrintReceiver printerInstance = new RemotePrintReceiver();
     private NXTCommunicator comm;
-
-    private boolean broughtToFront = false;
 
     
     
     /**
-     * @param comm 
+     * 
      */
-    public RemotePrintReceiver(final NXTCommunicator comm) {
-        this.comm = comm;
+    public RemotePrintReceiver() {
+        this.comm = NXTCommunicator.getInstance();
+    }
+    
+    
+    
+    /**
+     * @return RemotePrintReceiver 
+     */
+    public static RemotePrintReceiver getInstance() {
+        if (printerInstance == null) {
+            printerInstance = new RemotePrintReceiver();
+        }
+        return printerInstance;
     }
 
 
@@ -45,8 +50,8 @@ public class RemotePrintReceiver /*extends Thread*/ {
     /**
      * 
      */
-    public void start() { //run() {
-        bringToFront();
+    @Override
+    public void run() {
         String line = comm.receiveMessageLine();
         while (!line.equals(KlotsConstants.END_OF_TRANSMISSION_COMMAND_KEY)) {
             if (line.endsWith(KlotsConstants.MESSAGE_NEW_LINE)) {
@@ -60,6 +65,7 @@ public class RemotePrintReceiver /*extends Thread*/ {
             line = comm.receiveMessageLine();
         }
         comm.closeTransmission(false);
+        printerInstance = null;
     }
 
 
@@ -67,39 +73,10 @@ public class RemotePrintReceiver /*extends Thread*/ {
     /**
      * 
      */
+    @Override
     public void destroy() {
         comm.closeTransmission(false);
-    }
-
-
-
-    /**
-     * This method brings the Table view to the front.
-     */
-    public void bringToFront() {
-        broughtToFront = false;
-        Display.getDefault().syncExec(new Runnable() {
-            public void run() {
-                // bring view to the front (lazy loading)
-                try {
-                    IWorkbenchWindow window = KlotsPlugin.getDefault().getWorkbench()
-                    .getActiveWorkbenchWindow();
-                    IViewPart vP = window.getActivePage().showView("org.eclipse.ui.console.ConsoleView");
-                    vP.setFocus();
-                    // set done flag
-                    broughtToFront = true;
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        while (!broughtToFront) {
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+        printerInstance = null;
     }
 
 }

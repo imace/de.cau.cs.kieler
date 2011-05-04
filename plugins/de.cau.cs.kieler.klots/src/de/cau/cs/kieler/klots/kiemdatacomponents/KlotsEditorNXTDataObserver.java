@@ -59,7 +59,9 @@ public class KlotsEditorNXTDataObserver extends JSONObjectDataComponent
         });
 
         editor.useAsExecutionViewer(true);
-        editor.initSJContent();
+        if (!editor.isInitialized()) {
+            editor.initSJContent();
+        }
 
     }
 

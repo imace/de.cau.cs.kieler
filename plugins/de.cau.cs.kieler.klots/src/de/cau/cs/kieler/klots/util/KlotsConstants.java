@@ -24,6 +24,9 @@ import org.eclipse.swt.widgets.Display;
 public interface KlotsConstants {
     
     // CHECKSTYLEOFF LineLength
+    
+    public static final String KLOTS_SHORT_NAME = "KLOTS";
+    public static final String KLOTS_FULL_NAME = "KIELER LEGO On-line Testing System";
 
     public static final String SIGNALS_TAG = "SIGNALS";
     public static final String INSTRUCTION_TAG = "INSTRUCTION";
@@ -34,7 +37,8 @@ public interface KlotsConstants {
     public static final String PRINT_END_COMMAND_KEY = ":PRINT_END";
     public static final String PRINT_TAG = "PRINT:";
 
-    public static final String STANDALONE_PROGRAM_MODE_COMMAND_KEY = "STANDALONE";
+    public static final String EMBEDDED_JAVA_PROGRAM_MODE_COMMAND_KEY = "EMBEDDED_JAVA";
+    public static final String EMBEDDED_SJ_PROGRAM_MODE_COMMAND_KEY = "EMBEDDED_SJ";
     public static final String SYNCHRONIZED_COMMAND_KEY = "SYNCHRONIZED";
     public static final String STEP_COMMAND_KEY = "STEP";
     public static final String STOP_COMMAND_KEY = "STOP";
